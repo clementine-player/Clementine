@@ -73,6 +73,11 @@ public:
     Op_NumericDate,
     // For relative dates
     Op_RelativeDate,
+
+    // For everything except for text
+    Op_NotEquals,
+    // For numeric dates (e.g. not in the last X days)
+    Op_NumericDateNot,
   };
 
   enum Type {

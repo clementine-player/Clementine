@@ -170,9 +170,9 @@ void SearchTermWidget::OpChanged(int index) {
   if ((ui_->value_stack->currentWidget() == ui_->page_date) || (ui_->value_stack->currentWidget() == ui_->page_date_numeric) ||
       (ui_->value_stack->currentWidget() == ui_->page_date_relative)) {
       QWidget* page = NULL;
-      if (index == 3) {
+      if (index == 4 || index == 5) {
         page = ui_->page_date_numeric;
-      } else if (index == 4) {
+      } else if (index == 6) {
         page = ui_->page_date_relative;
       } else {
         page = ui_->page_date;

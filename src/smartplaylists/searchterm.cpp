@@ -42,7 +42,8 @@ QString SearchTerm::ToSql() const {
 
   QString second_value;
 
-  bool special_date_query = (operator_ == SearchTerm::Op_NumericDate || operator_ == SearchTerm::Op_RelativeDate);
+  bool special_date_query = (operator_ == SearchTerm::Op_NumericDate || operator_ == SearchTerm::Op_NumericDateNot ||
+                             operator_ == SearchTerm::Op_RelativeDate);
 
   // Floating point problems...
   // Theoretically 0.0 == 0 stars, 0.1 == 0.5 star, 0.2 == 1 star etc.
@@ -111,10 +112,14 @@ QString SearchTerm::ToSql() const {
         return col + " < '" + value + "'";
     case Op_NumericDate:
       return col + " > " + "DATETIME('now', '-" + value + " " + date +"', 'localtime')";
+    case Op_NumericDateNot:
+      return col + " < " + "DATETIME('now', '-" + value + " " + date +"', 'localtime')";
     case Op_RelativeDate:
       // Consider the time range before the first date but after the second one
       return "(" + col + " < " + "DATETIME('now', '-" + value + " " + date +"', 'localtime') AND " +
              col + " > " + "DATETIME('now', '-" + second_value + " " + date +"', 'localtime'))";
+    case Op_NotEquals:
+      return col + " <> " + value + "";
   }
 
   return QString();
@@ -182,22 +187,24 @@ OperatorList SearchTerm::OperatorsForType(Type type) {
       return OperatorList() << Op_Contains << Op_NotContains << Op_Equals
                             << Op_StartsWith << Op_EndsWith;
     case Type_Date:
-      return OperatorList() << Op_Equals << Op_GreaterThan << Op_LessThan
-                            << Op_NumericDate << Op_RelativeDate;
+      return OperatorList() << Op_Equals << Op_NotEquals << Op_GreaterThan << Op_LessThan
+                            << Op_NumericDate << Op_NumericDateNot << Op_RelativeDate;
     default:
-      return OperatorList() << Op_Equals << Op_GreaterThan << Op_LessThan;
+      return OperatorList() << Op_Equals << Op_NotEquals << Op_GreaterThan << Op_LessThan;
   }
 }
 
 QString SearchTerm::OperatorText(Type type, Operator op) {
   if (type == Type_Date) {
     switch (op) {
-      case Op_GreaterThan:  return QObject::tr("after");
-      case Op_LessThan:     return QObject::tr("before");
-      case Op_Equals:       return QObject::tr("on");
-      case Op_NumericDate:  return QObject::tr("in the last");
-      case Op_RelativeDate: return QObject::tr("between");
-      default:              return QString();
+      case Op_GreaterThan:    return QObject::tr("after");
+      case Op_LessThan:       return QObject::tr("before");
+      case Op_Equals:         return QObject::tr("on");
+      case Op_NotEquals:      return QObject::tr("not on");
+      case Op_NumericDate:    return QObject::tr("in the last");
+      case Op_NumericDateNot: return QObject::tr("not in the last");
+      case Op_RelativeDate:   return QObject::tr("between");
+      default:                return QString();
     }
   }
 
@@ -209,6 +216,7 @@ QString SearchTerm::OperatorText(Type type, Operator op) {
     case Op_GreaterThan: return QObject::tr("greater than");
     case Op_LessThan:    return QObject::tr("less than");
     case Op_Equals:      return QObject::tr("equals");
+    case Op_NotEquals:   return QObject::tr("not equals");
     default:             return QString();
   }
 
