@@ -498,6 +498,7 @@ set(UI
   radio/magnatuneconfig.ui
   radio/magnatunedownloaddialog.ui
   radio/radioviewcontainer.ui
+  radio/spotifyconfig.ui
 
   remote/remoteconfig.ui
 
@@ -893,6 +894,19 @@ list(APPEND OTHER_SOURCES
   devices/wmdmlister.h
   devices/wmdmloader.h
   devices/wmdmloader.cpp
+  radio/spotifyblobdownloader.cpp
+  radio/spotifyblobdownloader.h
+  radio/spotifyconfig.cpp
+  radio/spotifyconfig.h
+  ${CMAKE_CURRENT_BINARY_DIR}/ui_spotifyconfig.h
+  radio/spotifysearchplaylisttype.cpp
+  radio/spotifysearchplaylisttype.h
+  radio/spotifyserver.cpp
+  radio/spotifyserver.h
+  radio/spotifyservice.cpp
+  radio/spotifyservice.h
+  radio/spotifyurlhandler.cpp
+  radio/spotifyurlhandler.h
   remote/remote.cpp
   remote/remote.h
   remote/remoteconfig.cpp
