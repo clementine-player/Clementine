@@ -27,9 +27,9 @@ if(WIN32 AND NOT CMAKE_BUILD_TYPE STREQUAL "Debug" AND NOT ENABLE_WIN32_CONSOLE)
 endif(WIN32 AND NOT CMAKE_BUILD_TYPE STREQUAL "Debug" AND NOT ENABLE_WIN32_CONSOLE)
 
 add_executable(clementine-spotifyblob
+  ${win32_build_flag}
   ${SOURCES}
   ${MOC}
-  ${win32_build_flag}
 )
 
 target_link_libraries(clementine-spotifyblob
