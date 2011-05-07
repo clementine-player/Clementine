@@ -39,15 +39,12 @@ target_link_libraries(clementine-spotifyblob
   clementine-spotifyblob-messages
 )
 
-if(APPLE)
-  install(TARGETS clementine-spotifyblob
-          RUNTIME DESTINATION ${CMAKE_BINARY_DIR}/clementine.app/Contents/MacOS/
-  )
-else(APPLE)
+if(NOT APPLE)
+  # macdeploy.py takes care of this on mac
   install(TARGETS clementine-spotifyblob
           RUNTIME DESTINATION bin
   )
-endif(APPLE)
+endif(NOT APPLE)
 
 if(LINUX)
   # Versioned name of the blob
