@@ -25,32 +25,8 @@ FRAMEWORK_SEARCH_PATH=[
     os.path.join(os.environ['HOME'], 'Library/Frameworks')
 ]
 
-LIBRARY_SEARCH_PATH=['/usr/local/lib', '/sw/lib']
+LIBRARY_SEARCH_PATH=['/target/lib']
 
-XINE_PLUGINS = [
-    'xineplug_ao_out_coreaudio.so',
-    'xineplug_decode_a52.so',
-    'xineplug_decode_dts.so',
-    'xineplug_decode_faad.so',
-    'xineplug_decode_mad.so',
-    'xineplug_decode_mpc.so',
-    'xineplug_decode_vorbis.so',
-    'xineplug_dmx_audio.so',
-    'xineplug_dmx_ogg.so',
-    'xineplug_flac.so',
-    'xineplug_inp_cdda.so',
-    'xineplug_inp_file.so',
-    'xineplug_inp_http.so',
-    'xineplug_inp_net.so',
-    'xineplug_inp_rtp.so',
-    'xineplug_inp_rtsp.so',
-    'xineplug_post_audio_filters.so',
-]
-XINEPLUGIN_SEARCH_PATH=[
-    '/usr/local/lib/xine/plugins',
-    '/usr/lib/xine/plugins',
-    '/sw/lib/xine/plugins',
-]
 
 GSTREAMER_PLUGINS=[
     # Core plugins
@@ -103,10 +79,8 @@ GSTREAMER_PLUGINS=[
 ]
 
 GSTREAMER_SEARCH_PATH=[
-    '/usr/local/lib/gstreamer-0.10',
-    '/usr/local/lib/gstreamer-0.10/gstreamer-0.10',
-    '/sw/lib/gstreamer-0.10',
-    '/sw/lib/gstreamer-0.10/gstreamer-0.10',
+    '/target/lib/gstreamer-0.10',
+    '/target/libexec/gstreamer-0.10',
 ]
 
 QT_PLUGINS = [
@@ -135,23 +109,7 @@ SCRIPT_PLUGINS = [
     'PyQt4/QtNetwork.so',
 ]
 SCRIPT_PLUGINS_SEARCH_PATH = [
-    '/Library/Python/2.6/site-packages',
-]
-
-TUNEPIMP_PLUGINS = [
-    'flac.tpp',
-    'mp3.tpp',
-    'mp4.tpp',
-    'mpc.tpp',
-    'speex.tpp',
-    'tta.tpp',
-    'vorbis.tpp',
-    'wav.tpp',
-    'wma.tpp',
-    'wv.tpp',
-]
-TUNEPIMP_PLUGINS_SEARCH_PATH = [
-    '/usr/local/lib/tunepimp/plugins',
+    '/target/lib/python2.6/site-packages',
 ]
 
 
@@ -182,9 +140,6 @@ class CouldNotFindGstreamerPluginError(Error):
 class CouldNotFindScriptPluginError(Error):
   pass
 
-
-class CouldNotFindTunepimpPluginError(Error):
-  pass
 
 
 if len(sys.argv) < 2:
@@ -333,6 +288,12 @@ def CopyFramework(path):
   commands.append(args)
   args = ['ditto', '--arch=i386', path, full_path]
   commands.append(args)
+
+  menu_nib = os.path.join(os.path.split(path)[0], 'Resources', 'qt_menu.nib')
+  if os.path.exists(menu_nib):
+    args = ['cp', '-r', menu_nib, resources_dir]
+    commands.append(args)
+
   return os.path.join(full_path, parts[-1])
 
 def FixId(path, library_name):
@@ -409,13 +370,6 @@ def FindScriptPlugin(name):
   raise CouldNotFindScriptPluginError(name)
 
 
-def FindTunepimpPlugin(name):
-  for path in TUNEPIMP_PLUGINS_SEARCH_PATH:
-    if os.path.exists(path):
-      if os.path.exists(os.path.join(path, name)):
-        return os.path.join(path, name)
-  raise CouldNotFindTunepimpPluginError(name)
-
 
 FixBinary(binary)
 
@@ -435,11 +389,8 @@ for plugin in QT_PLUGINS:
 try:
   for plugin in SCRIPT_PLUGINS:
     FixPlugin(FindScriptPlugin(plugin), os.path.dirname(plugin))
-
-  for plugin in TUNEPIMP_PLUGINS:
-    FixPlugin(FindTunepimpPlugin(plugin), 'tunepimp')
 except:
-  print 'Failed to find script or tunepimp plugins'
+  print 'Failed to find script plugins'
 
 if len(sys.argv) <= 2:
   print 'Would run %d commands:' % len(commands)
