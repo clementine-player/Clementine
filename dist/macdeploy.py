@@ -25,7 +25,7 @@ FRAMEWORK_SEARCH_PATH=[
     os.path.join(os.environ['HOME'], 'Library/Frameworks')
 ]
 
-LIBRARY_SEARCH_PATH=['/target/lib']
+LIBRARY_SEARCH_PATH=['/target/lib', '/usr/local/lib', '/sw/lib']
 
 
 GSTREAMER_PLUGINS=[
@@ -81,6 +81,8 @@ GSTREAMER_PLUGINS=[
 GSTREAMER_SEARCH_PATH=[
     '/target/lib/gstreamer-0.10',
     '/target/libexec/gstreamer-0.10',
+    '/sw/lib/gstreamer-0.10',
+    '/usr/local/lib/gstreamer-0.10',
 ]
 
 QT_PLUGINS = [
