@@ -21,6 +21,7 @@
 #include "spotifyservice.h"
 #include "radiomodel.h"
 #include "ui_spotifyconfig.h"
+#include "ui/iconloader.h"
 
 #include <QMessageBox>
 #include <QNetworkReply>
