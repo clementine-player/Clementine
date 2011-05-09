@@ -28,8 +28,8 @@
 #include <QSettings>
 
 // Use Qt specific icons, since freedesktop doesn't seem to have suitable icons.
-const char* kSubscribedIcon = ":/trolltech/styles/commonstyle/images/standardbutton-apply-16.png";
-const char* kNotSubscribedIcon = ":/trolltech/styles/commonstyle/images/standardbutton-no-16.png";
+const char* kSubscribedIcon = "task-complete";
+const char* kNotSubscribedIcon = "dialog-warning";
 const char* kWaitingIcon = ":spinner.gif";
 
 LastFMConfig::LastFMConfig(QWidget *parent)
@@ -50,6 +50,7 @@ LastFMConfig::LastFMConfig(QWidget *parent)
   connect(service_, SIGNAL(AuthenticationComplete(bool)), SLOT(AuthenticationComplete(bool)));
   connect(service_, SIGNAL(UpdatedSubscriberStatus(bool)), SLOT(UpdatedSubscriberStatus(bool)));
   connect(ui_->sign_out, SIGNAL(clicked()), SLOT(SignOut()));
+  connect(ui_->login, SIGNAL(clicked()), SLOT(Validate()));
 
   ui_->username->setMinimumWidth(QFontMetrics(QFont()).width("WWWWWWWWWWWW"));
   resize(sizeHint());
@@ -78,14 +79,15 @@ void LastFMConfig::AuthenticationComplete(bool success) {
   waiting_for_auth_ = false;
 
   if (success) {
-    //clear password just to be sure
+    // Clear password just to be sure
     ui_->password->clear();
+    // Save settings
+    Save();
     RefreshControls(true);
   } else {
     QMessageBox::warning(this, tr("Authentication failed"), tr("Your Last.fm credentials were incorrect"));
   }
 
-  emit ValidationComplete(success);
   service_->UpdateSubscriberStatus();
 }
 
@@ -105,7 +107,7 @@ void LastFMConfig::Load() {
 
 void LastFMConfig::UpdatedSubscriberStatus(bool is_subscriber) {
   const char* icon_path = is_subscriber ? kSubscribedIcon : kNotSubscribedIcon;
-  ui_->icon->setPixmap(QIcon(icon_path).pixmap(16));
+  ui_->icon->setPixmap(IconLoader::Load(icon_path).pixmap(16));
   loading_icon_->stop();
 
   if (is_subscriber) {
@@ -150,7 +152,7 @@ void LastFMConfig::RefreshControls(bool authenticated) {
   if (authenticated) {
     ui_->status->setText(QString(tr("You're logged in as <b>%1</b>")).arg(lastfm::ws::Username));
   } else {
-    ui_->icon->setPixmap(IconLoader::Load("dialog-question").pixmap(16));
+    ui_->icon->setPixmap(IconLoader::Load("task-reject").pixmap(16));
     ui_->status->setText(tr("Please fill in the blanks to login into Last.fm"));
 
     ui_->subscriber_warning->setText(

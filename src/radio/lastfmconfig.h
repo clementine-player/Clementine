@@ -35,7 +35,6 @@ class LastFMConfig : public QWidget {
  public slots:
   void Validate();
   void Load();
-  void Save();
 
  signals:
   void ValidationComplete(bool success);
@@ -53,6 +52,7 @@ class LastFMConfig : public QWidget {
   bool waiting_for_auth_;
 
   void RefreshControls(bool authenticated);
+  void Save();
 };
 
 #endif // LASTFMCONFIG_H

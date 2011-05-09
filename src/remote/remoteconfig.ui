@@ -6,23 +6,67 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>507</width>
-    <height>437</height>
+    <width>505</width>
+    <height>435</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="QLabel" name="label">
-     <property name="text">
-      <string>Clementine can be controlled remotely by an Android phone.  To enable this feature log in with the same Google account that is configured on your phone.</string>
+    <widget class="QFrame" name="frame">
+     <property name="frameShape">
+      <enum>QFrame::NoFrame</enum>
      </property>
-     <property name="wordWrap">
-      <bool>true</bool>
+     <property name="frameShadow">
+      <enum>QFrame::Plain</enum>
      </property>
+     <property name="lineWidth">
+      <number>0</number>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_3">
+      <item>
+       <widget class="QLabel" name="status">
+        <property name="text">
+         <string>Clementine can be controlled remotely by an Android phone.  To enable this feature log in with the same Google account that is configured on your phone.</string>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="icon">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="sign_out">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>Sign out</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </widget>
    </item>
    <item>
-    <widget class="QGroupBox" name="groupBox">
+    <widget class="QGroupBox" name="login_details">
      <property name="title">
       <string>Account details</string>
      </property>
@@ -47,12 +91,12 @@
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="sign_out">
+         <widget class="QPushButton" name="login">
           <property name="enabled">
            <bool>false</bool>
           </property>
           <property name="text">
-           <string>Sign out</string>
+           <string>Login</string>
           </property>
          </widget>
         </item>
@@ -158,7 +202,7 @@
  <tabstops>
   <tabstop>username</tabstop>
   <tabstop>password</tabstop>
-  <tabstop>sign_out</tabstop>
+  <tabstop>login</tabstop>
  </tabstops>
  <resources/>
  <connections/>

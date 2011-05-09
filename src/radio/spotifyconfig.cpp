@@ -37,12 +37,14 @@ SpotifyConfig::SpotifyConfig(QWidget *parent)
 {
   ui_->setupUi(this);
   ui_->busy->hide();
+  ui_->warn_icon->setPixmap(IconLoader::Load("dialog-warning").pixmap(16));
 
   QFont bold_font(font());
   bold_font.setBold(true);
   ui_->blob_status->setFont(bold_font);
 
   connect(ui_->download_blob, SIGNAL(clicked()), SLOT(DownloadBlob()));
+  connect(ui_->login, SIGNAL(clicked()), SLOT(Validate()));
 
   connect(service_, SIGNAL(LoginFinished(bool)), SLOT(LoginFinished(bool)));
   connect(service_, SIGNAL(BlobStateChanged()), SLOT(BlobStateChanged()));
@@ -85,6 +87,9 @@ bool SpotifyConfig::NeedsValidation() const {
 }
 
 void SpotifyConfig::Validate() {
+  if (!NeedsValidation())
+    return;
+
   ui_->busy->show();
   service_->Login(ui_->username->text(), ui_->password->text());
 }
@@ -114,5 +119,8 @@ void SpotifyConfig::Save() {
 void SpotifyConfig::LoginFinished(bool success) {
   validated_ = success;
   ui_->busy->hide();
-  emit ValidationComplete(success);
+  ui_->login->setEnabled(!success);
+
+  // Save the settings
+  Save();
 }

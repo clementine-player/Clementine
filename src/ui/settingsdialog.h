@@ -104,7 +104,6 @@ class SettingsDialog : public QDialog {
  private slots:
   void CurrentTextChanged(const QString& text);
   void NotificationTypeChanged();
-  void ValidationComplete(bool success);
 
   void PrettyOpacityChanged(int value);
   void PrettyColorPresetChanged(int index);

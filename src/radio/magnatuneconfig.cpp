@@ -45,6 +45,7 @@ MagnatuneConfig::MagnatuneConfig(QWidget *parent)
           SLOT(CredentialsChanged()));
   connect(ui_->password, SIGNAL(textEdited(const QString&)),
           SLOT(CredentialsChanged()));
+  connect(ui_->login, SIGNAL(clicked()), SLOT(Validate()));
 }
 
 MagnatuneConfig::~MagnatuneConfig() {
@@ -59,6 +60,8 @@ const char* kMagnatuneDownloadValidateUrl = "http://download.magnatune.com/";
 const char* kMagnatuneStreamingValidateUrl = "http://streaming.magnatune.com/";
 
 void MagnatuneConfig::Validate() {
+  if (!credentials_changed_)
+    return;
   ui_->busy->show();
 
   MagnatuneService::MembershipType type =
@@ -98,8 +101,10 @@ void MagnatuneConfig::ValidationFinished() {
   if (!success) {
     QMessageBox::warning(
         this, tr("Authentication failed"), tr("Your Magnatune credentials were incorrect"));
+  } else {
+    Save();
   }
-  emit ValidationComplete(success);
+  ui_->login->setEnabled(!success);
 }
 
 void MagnatuneConfig::AuthenticationRequired(

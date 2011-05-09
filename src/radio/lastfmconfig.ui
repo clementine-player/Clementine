@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>773</width>
-    <height>555</height>
+    <width>769</width>
+    <height>551</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -91,6 +91,13 @@
        <layout class="QHBoxLayout" name="horizontalLayout_2">
         <item>
          <widget class="QLineEdit" name="username"/>
+        </item>
+        <item>
+         <widget class="QPushButton" name="login">
+          <property name="text">
+           <string>Login</string>
+          </property>
+         </widget>
         </item>
        </layout>
       </item>
@@ -236,8 +243,11 @@
  <tabstops>
   <tabstop>username</tabstop>
   <tabstop>password</tabstop>
+  <tabstop>login</tabstop>
+  <tabstop>sign_out</tabstop>
   <tabstop>scrobble</tabstop>
   <tabstop>love_ban_</tabstop>
+  <tabstop>scrobble_button</tabstop>
  </tabstops>
  <resources/>
  <connections/>

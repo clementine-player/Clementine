@@ -35,7 +35,6 @@ public:
   ~SpotifyConfig();
 
   bool NeedsValidation() const;
-  void Validate();
 
 signals:
   void ValidationComplete(bool success);
@@ -43,6 +42,7 @@ signals:
 public slots:
   void Load();
   void Save();
+  void Validate();
 
   void BlobStateChanged();
   void DownloadBlob();

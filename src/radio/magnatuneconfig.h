@@ -33,11 +33,11 @@ public:
   ~MagnatuneConfig();
 
   bool NeedsValidation() const;
-  void Validate();
 
 public slots:
   void Load();
   void Save();
+  void Validate();
 
 signals:
   void ValidationComplete(bool);

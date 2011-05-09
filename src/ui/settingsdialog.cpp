@@ -118,8 +118,6 @@ SettingsDialog::SettingsDialog(BackgroundStreams* streams, QWidget* parent)
   lastfm_page->setLayout(lastfm_layout);
 
   ui_->stacked_widget->insertWidget(Page_Lastfm, lastfm_page);
-
-  connect(lastfm_config_, SIGNAL(ValidationComplete(bool)), SLOT(ValidationComplete(bool)));
 #endif
 
 #ifdef HAVE_SPOTIFY
@@ -134,7 +132,6 @@ SettingsDialog::SettingsDialog(BackgroundStreams* streams, QWidget* parent)
   spotify_page->setLayout(spotify_layout);
 
   ui_->stacked_widget->insertWidget(Page_Spotify, spotify_page);
-  connect(spotify_config_, SIGNAL(ValidationComplete(bool)), SLOT(ValidationComplete(bool)));
 #endif
 
 #ifdef HAVE_REMOTE
@@ -150,11 +147,8 @@ SettingsDialog::SettingsDialog(BackgroundStreams* streams, QWidget* parent)
   remote_page->setLayout(remote_layout);
 
   ui_->stacked_widget->insertWidget(Page_Remote, remote_page);
-
-  connect(remote_config_, SIGNAL(ValidationComplete(bool)), SLOT(ValidationComplete(bool)));
 #endif
 
-  connect(ui_->magnatune, SIGNAL(ValidationComplete(bool)), SLOT(ValidationComplete(bool)));
 
   // Icons
   ui_->list->item(Page_Playback)->setIcon(IconLoader::Load("media-playback-start"));
@@ -303,52 +297,7 @@ void SettingsDialog::SetGlobalShortcutManager(GlobalShortcuts *manager) {
   ui_->global_shortcuts->SetManager(manager);
 }
 
-void SettingsDialog::ValidationComplete(bool success) {
-  ui_->buttonBox->setEnabled(true);
-
-  if (success)
-    accept();
-}
-
 void SettingsDialog::accept() {
-#ifdef HAVE_LIBLASTFM
-  if (lastfm_config_->NeedsValidation()) {
-    lastfm_config_->Validate();
-    ui_->buttonBox->setEnabled(false);
-    return;
-  } else {
-    lastfm_config_->Save();
-  }
-#endif
-
-#ifdef HAVE_REMOTE
-  if (remote_config_->NeedsValidation()) {
-    remote_config_->Validate();
-    ui_->buttonBox->setEnabled(false);
-    return;
-  } else {
-    remote_config_->Save();
-  }
-#endif
-
-#ifdef HAVE_SPOTIFY
-  if (spotify_config_->NeedsValidation()) {
-    spotify_config_->Validate();
-    ui_->buttonBox->setEnabled(false);
-    return;
-  } else {
-    spotify_config_->Save();
-  }
-#endif
-
-  if (ui_->magnatune->NeedsValidation()) {
-    ui_->magnatune->Validate();
-    ui_->buttonBox->setEnabled(false);
-    return;
-  } else {
-    ui_->magnatune->Save();
-  }
-
   QSettings s;
 
   // Behaviour

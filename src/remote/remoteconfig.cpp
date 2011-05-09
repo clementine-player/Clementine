@@ -36,10 +36,13 @@ RemoteConfig::RemoteConfig(QWidget *parent)
 {
   ui_->setupUi(this);
   ui_->busy->hide();
+  ui_->icon->setIcon(IconLoader::Load("task-reject"));
 
   // Icons
   ui_->sign_out->setIcon(IconLoader::Load("list-remove"));
+  ui_->sign_out->hide();
 
+  connect(ui_->login, SIGNAL(clicked()), SLOT(Validate()));
   connect(ui_->sign_out, SIGNAL(clicked()), SLOT(SignOut()));
 
   ui_->username->setMinimumWidth(QFontMetrics(QFont()).width("WWWWWWWWWWWW"));
@@ -117,9 +120,15 @@ void RemoteConfig::AuthenticationComplete(const QString& token) {
     s.setValue("password", ui_->password->text());
     s.setValue("token", token);
     ui_->password->clear();
-  }
 
-  emit ValidationComplete(success);
+    //Save the other settings
+    Save();
+
+    ui_->login_details->hide();
+    ui_->icon->setIcon(IconLoader::Load("task-complete"));
+    ui_->status->setText(QString(tr("You're logged in as <b>%1</b>")).arg(ui_->username->text()));
+    ui_->sign_out->show();
+  }
 }
 
 void RemoteConfig::Load() {
@@ -141,7 +150,10 @@ void RemoteConfig::Save() {
 void RemoteConfig::SignOut() {
   ui_->username->clear();
   ui_->password->clear();
-  ui_->sign_out->setEnabled(false);
+  ui_->sign_out->hide();
+  ui_->icon->setIcon(IconLoader::Load("task-reject"));
+  ui_->status->setText(QString(tr("Clementine can be controlled remotely by an Android phone.  To enable this feature log in with the same Google account that is configured on your phone.")));
+  ui_->login_details->show();
 
   QSettings s;
   s.beginGroup(kSettingsGroup);

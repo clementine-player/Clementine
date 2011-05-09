@@ -344,14 +344,17 @@ void LastFMService::UpdateSubscriberStatusFinished() {
     qLog(Info) << lastfm::ws::Username << "Subscriber status:" << is_subscriber;
     emit UpdatedSubscriberStatus(is_subscriber);
   } catch (lastfm::ws::ParseError e) {
-    // The connection to the server is unavailable
-    connection_problems_ = true;
     qLog(Error) << "Last.fm parse error: " << e.enumValue();
-    emit UpdatedSubscriberStatus(false);
+    if (e.enumValue() == lastfm::ws::MalformedResponse) {
+      // The connection to the server is unavailable
+      connection_problems_ = true;
+      emit UpdatedSubscriberStatus(false);
+    } else {
+      // Errors not related to connection
+      connection_problems_ = false;
+    }
   } catch (std::runtime_error& e) {
-    connection_problems_ = true;
     qLog(Error) << e.what();
-    emit UpdatedSubscriberStatus(false);
   }
 }
 
