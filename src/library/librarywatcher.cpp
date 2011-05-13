@@ -250,7 +250,7 @@ void LibraryWatcher::ScanSubdirectory(
   // First we "quickly" get a list of the files in the directory that we
   // think might be music.  While we're here, we also look for new subdirectories
   // and possible album artwork.
-  QDirIterator it(path, QDir::Dirs | QDir::Files | QDir::NoDotAndDotDot | QDir::Hidden);
+  QDirIterator it(path, QDir::Dirs | QDir::Files | QDir::NoDotAndDotDot);
   while (it.hasNext()) {
     if (stop_requested_) return;
 
