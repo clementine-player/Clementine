@@ -25,8 +25,8 @@
 namespace smart_playlists {
 
 const int Generator::kDefaultLimit = 20;
-const int Generator::kDynamicHistory = 5;
-const int Generator::kDynamicFuture = 15;
+const int Generator::kDefaultDynamicHistory = 5;
+const int Generator::kDefaultDynamicFuture = 15;
 
 Generator::Generator()
   : QObject(NULL),

@@ -68,8 +68,6 @@ PlaylistItemList QueryGenerator::GenerateMore(int count) {
   search_copy.id_not_in_ = previous_ids_;
   if (count) {
     search_copy.limit_ = count;
-  } else if (dynamic_) {
-    search_copy.limit_ = kDynamicFuture;
   }
 
   if (search_copy.sort_type_ != Search::Sort_Random) {
@@ -84,7 +82,7 @@ PlaylistItemList QueryGenerator::GenerateMore(int count) {
                                backend_->songs_table(), song));
     previous_ids_ << song.id();
 
-    if (previous_ids_.count() > kDynamicFuture + kDynamicHistory)
+    if (previous_ids_.count() > GetDynamicFuture() + GetDynamicHistory())
       previous_ids_.removeFirst();
   }
   return items;

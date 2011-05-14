@@ -40,6 +40,7 @@ public:
   void set_dynamic(bool dynamic) { dynamic_ = dynamic; }
 
   Search search() const { return search_; }
+  int GetDynamicFuture () { return search_.limit_; }
 
 private:
   Search search_;

@@ -575,7 +575,7 @@ void Playlist::set_current_row(int i) {
     using smart_playlists::Generator;
 
     // Add more dynamic playlist items
-    const int count = current_item_index_.row() + Generator::kDynamicFuture - items_.count();
+    const int count = current_item_index_.row() + dynamic_playlist_->GetDynamicFuture() - items_.count();
     if (count > 0) {
       GeneratorInserter* inserter = new GeneratorInserter(task_manager_, library_, this);
       connect(inserter, SIGNAL(Error(QString)), SIGNAL(LoadTracksError(QString)));
@@ -585,7 +585,7 @@ void Playlist::set_current_row(int i) {
     }
 
     // Remove the first item
-    if (current_item_index_.row() > Generator::kDynamicHistory) {
+    if (current_item_index_.row() > dynamic_playlist_->GetDynamicHistory()) {
       RemoveItemsWithoutUndo(0, 1);
     }
   }

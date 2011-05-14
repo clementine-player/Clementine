@@ -34,8 +34,8 @@ public:
   Generator();
 
   static const int kDefaultLimit;
-  static const int kDynamicHistory;
-  static const int kDynamicFuture;
+  static const int kDefaultDynamicHistory;
+  static const int kDefaultDynamicFuture;
 
   // Creates a new Generator of the given type
   static boost::shared_ptr<Generator> Create(const QString& type);
@@ -61,13 +61,15 @@ public:
 
   // If the generator can be used as a dynamic playlist then GenerateMore
   // should return the next tracks in the sequence.  The subclass should
-  // remember the last kDynamicHistory + kDynamicFuture tracks and ensure that
+  // remember the last GetDynamicHistory() + GetDynamicFuture() tracks and ensure that
   // the tracks returned from this method are not in that set.
   virtual bool is_dynamic() const { return false; }
   virtual void set_dynamic(bool dynamic) {}
   // Called from non-UI thread.
   virtual PlaylistItemList GenerateMore(int count) { return PlaylistItemList(); }
 
+  virtual int GetDynamicHistory () { return kDefaultDynamicHistory; }
+  virtual int GetDynamicFuture () { return kDefaultDynamicFuture; }
 signals:
   void Error(const QString& message);
 
