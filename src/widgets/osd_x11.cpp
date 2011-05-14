@@ -37,7 +37,26 @@ QDBusArgument& operator<< (QDBusArgument& arg, const QImage& image) {
     return arg;
   }
   QImage scaled = image.scaledToHeight(100, Qt::SmoothTransformation);
-  QImage i = scaled.convertToFormat(QImage::Format_ARGB32).rgbSwapped();
+
+  scaled = scaled.convertToFormat(QImage::Format_ARGB32);
+#if Q_BYTE_ORDER == Q_LITTLE_ENDIAN
+  // ABGR -> ARGB
+  QImage i = scaled.rgbSwapped();
+#else
+  // ABGR -> GBAR
+  QImage i(scaled.size(), scaled.format());
+  for (int y = 0; y < i.height(); ++y) {
+    QRgb* p = (QRgb*) scaled.scanLine(y);
+    QRgb* q = (QRgb*) i.scanLine(y);
+    QRgb* end = p + scaled.width();
+    while (p < end) {
+      *q = qRgba(qGreen(*p), qBlue(*p), qAlpha(*p), qRed(*p));
+      p++;
+      q++;
+    }
+  }
+#endif
+
   arg.beginStructure();
   arg << i.width();
   arg << i.height();
