@@ -85,6 +85,7 @@ class LibraryQuery {
 
   void AddCompilationRequirement(bool compilation);
   void SetLimit(int limit) { limit_ = limit; }
+  void SetIncludeUnavailable(bool include_unavailable) { include_unavailable_ = include_unavailable; }
 
   QSqlQuery Exec(QSqlDatabase db, const QString& songs_table, const QString& fts_table);
   bool Next();
@@ -95,6 +96,7 @@ class LibraryQuery {
  private:
   QString GetInnerQuery();
 
+  bool include_unavailable_;
   bool join_with_fts_;
   QString column_spec_;
   QString order_by_;

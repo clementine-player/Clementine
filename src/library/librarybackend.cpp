@@ -175,7 +175,7 @@ void LibraryBackend::UpdateTotalSongCount() {
   QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
 
-  QSqlQuery q(QString("SELECT COUNT(*) FROM %1").arg(songs_table_), db);
+  QSqlQuery q(QString("SELECT COUNT(*) FROM %1 WHERE unavailable = 0").arg(songs_table_), db);
   q.exec();
   if (db_->CheckErrors(q)) return;
   if (!q.next()) return;
@@ -408,7 +408,7 @@ void LibraryBackend::DeleteSongs(const SongList &songs) {
   QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
 
-  QSqlQuery remove(QString("DELETE FROM %1 WHERE ROWID = :id")
+  QSqlQuery remove(QString("UPDATE %1 SET unavailable = 1 WHERE ROWID = :id")
                    .arg(songs_table_), db);
   QSqlQuery remove_fts(QString("DELETE FROM %1 WHERE ROWID = :id")
                        .arg(fts_table_), db);
@@ -527,7 +527,7 @@ SongList LibraryBackend::GetSongsByForeignId(
 
   QSqlQuery q(QString("SELECT %2.ROWID, " + Song::kColumnSpec + ", %2.%3"
                       " FROM %2, %1"
-                      " WHERE %2.%3 IN (%4) AND %1.ROWID = %2.ROWID")
+                      " WHERE %2.%3 IN (%4) AND %1.ROWID = %2.ROWID AND unavailable = 0")
               .arg(songs_table_, table, column, in), db);
   q.exec();
   if (db_->CheckErrors(q)) return SongList();
@@ -639,7 +639,8 @@ void LibraryBackend::UpdateCompilations() {
   // Look for albums that have songs by more than one artist in the same
   // directory
 
-  QSqlQuery q("SELECT artist, album, filename, sampler FROM songs ORDER BY album", db);
+  QSqlQuery q(QString("SELECT artist, album, filename, sampler "
+    "FROM %1 WHERE unavailable = 0 ORDER BY album").arg(songs_table_), db);
   q.exec();
   if (db_->CheckErrors(q)) return;
 
@@ -670,9 +671,9 @@ void LibraryBackend::UpdateCompilations() {
   QSqlQuery update(QString("UPDATE %1"
                            " SET sampler = :sampler,"
                            "     effective_compilation = ((compilation OR :sampler OR forced_compilation_on) AND NOT forced_compilation_off) + 0"
-                           " WHERE album = :album").arg(songs_table_), db);
+                           " WHERE album = :album AND unavailable = 0").arg(songs_table_), db);
   QSqlQuery find_songs(QString("SELECT ROWID, " + Song::kColumnSpec + " FROM %1"
-                               " WHERE album = :album AND sampler = :sampler")
+                               " WHERE album = :album AND sampler = :sampler AND unavailable = 0")
                        .arg(songs_table_), db);
 
   SongList deleted_songs;
@@ -828,7 +829,7 @@ void LibraryBackend::UpdateManualAlbumArt(const QString &artist,
 
   // Update the songs
   QString sql(QString("UPDATE %1 SET art_manual = :art"
-                      " WHERE album = :album").arg(songs_table_));
+                      " WHERE album = :album AND unavailable = 0").arg(songs_table_));
   if (!artist.isNull())
     sql += " AND artist = :artist";
 
@@ -882,7 +883,7 @@ void LibraryBackend::ForceCompilation(const QString& artist, const QString& albu
   QString sql(QString("UPDATE %1 SET forced_compilation_on = :forced_compilation_on,"
                       "              forced_compilation_off = :forced_compilation_off,"
                       "              effective_compilation = ((compilation OR sampler OR :forced_compilation_on) AND NOT :forced_compilation_off) + 0"
-                      " WHERE album = :album").arg(songs_table_));
+                      " WHERE album = :album AND unavailable = 0").arg(songs_table_));
   if (!artist.isEmpty())
     sql += " AND artist = :artist";
 

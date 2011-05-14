@@ -95,7 +95,7 @@ const QStringList Song::kColumns = QStringList()
     << "art_manual" << "filetype" << "playcount" << "lastplayed" << "rating"
     << "forced_compilation_on" << "forced_compilation_off"
     << "effective_compilation" << "skipcount" << "score" << "beginning" << "length"
-    << "cue_path";
+    << "cue_path" << "unavailable";
 
 const QString Song::kColumnSpec = Song::kColumns.join(", ");
 const QString Song::kBindSpec = Prepend(":", Song::kColumns).join(", ");
@@ -173,7 +173,8 @@ Song::Private::Private()
     filesize_(-1),
     filetype_(Type_Unknown),
     init_from_file_(false),
-    suspicious_tags_(false)
+    suspicious_tags_(false),
+    unavailable_(false)
 {
 }
 
@@ -555,6 +556,7 @@ void Song::InitFromQuery(const SqlRow& q, int col) {
   set_length_nanosec(tolonglong(col + 33));
 
   d->cue_path_ = tostr(col + 34);
+  d->unavailable_ = q.value(col + 35).toBool();
 
   #undef tostr
   #undef toint
@@ -1036,6 +1038,7 @@ void Song::BindToQuery(QSqlQuery *query) const {
   query->bindValue(":length", intval(length_nanosec()));
 
   query->bindValue(":cue_path", d->cue_path_);
+  query->bindValue(":unavailable", d->unavailable_ ? 1 : 0);
 
   #undef intval
   #undef notnullintval

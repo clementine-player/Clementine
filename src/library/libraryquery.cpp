@@ -30,7 +30,8 @@ QueryOptions::QueryOptions()
 
 
 LibraryQuery::LibraryQuery(const QueryOptions& options)
-  : join_with_fts_(false),
+  : include_unavailable_(false),
+    join_with_fts_(false),
     limit_(-1)
 {
   if (!options.filter().isEmpty()) {
@@ -127,8 +128,13 @@ QSqlQuery LibraryQuery::Exec(QSqlDatabase db, const QString& songs_table,
           .arg(column_spec_, songs_table, GetInnerQuery());
   }
 
-  if (!where_clauses_.isEmpty())
-    sql += " WHERE " + where_clauses_.join(" AND ");
+  QStringList where_clauses(where_clauses_);
+  if (!include_unavailable_) {
+    where_clauses << "unavailable = 0";
+  }
+
+  if (!where_clauses.isEmpty())
+    sql += " WHERE " + where_clauses.join(" AND ");
 
   if (!order_by_.isEmpty())
     sql += " ORDER BY " + order_by_;

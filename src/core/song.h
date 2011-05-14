@@ -163,6 +163,7 @@ class Song {
 
   // Simple accessors
   bool is_valid() const { return d->valid_; }
+  bool is_unavailable() const { return d->unavailable_; }
   int id() const { return d->id_; }
 
   const QString& title() const { return d->title_; }
@@ -273,6 +274,7 @@ class Song {
   void set_lastplayed(int v) { d->lastplayed_ = v; }
   void set_score(int v) { d->score_ = qBound(0, v, 100); }
   void set_cue_path(const QString& v) { d->cue_path_ = v; }
+  void set_unavailable(bool v) { d->unavailable_ = v; }
 
   // Setters that should only be used by tests
   void set_url(const QUrl& v) { d->url_ = v; }
@@ -360,6 +362,10 @@ class Song {
     bool init_from_file_;
     // Whether our encoding guesser thinks these tags might be incorrectly encoded.
     bool suspicious_tags_;
+    
+    // Whether the song does not exist on the file system anymore, but is still
+    // stored in the database so as to remember the user's metadata.
+    bool unavailable_;
   };
 
   void ParseOggTag(const TagLib::Ogg::FieldListMap& map, const QTextCodec* codec, QString* disc, QString* compilation);

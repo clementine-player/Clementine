@@ -363,7 +363,7 @@ void LibraryWatcher::ScanSubdirectory(
 
   // Look for deleted songs
   foreach (const Song& song, songs_in_db) {
-    if (!files_on_disk.contains(song.url().toLocalFile())) {
+    if (!song.is_unavailable() && !files_on_disk.contains(song.url().toLocalFile())) {
       qLog(Debug) << "Song deleted from disk:" << song.url().toLocalFile();
       t->deleted_songs << song;
     }
@@ -510,7 +510,13 @@ void LibraryWatcher::PreserveUserSetData(const QString& file, const QString& ima
   out->set_score(matching_song.score());
   out->set_art_manual(matching_song.art_manual());
 
-  if (!matching_song.IsMetadataEqual(*out)) {
+  // The song was deleted from the database (e.g. due to an unmounted 
+  // filesystem), but has been restored.
+  if (matching_song.is_unavailable()) {
+    qLog(Debug) << file << " unavailable song restored";
+    
+    t->new_songs << *out;
+  } else if (!matching_song.IsMetadataEqual(*out)) {
     qLog(Debug) << file << "metadata changed";
 
     // Update the song in the DB
