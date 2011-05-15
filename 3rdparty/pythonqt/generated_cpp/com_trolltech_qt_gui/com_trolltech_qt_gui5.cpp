@@ -415,8 +415,10 @@ QMatrix4x4  PythonQtWrapper_QMatrix4x4::transposed(QMatrix4x4* theWrappedObject)
 
 QString PythonQtWrapper_QMatrix4x4::py_toString(QMatrix4x4* obj) {
   QString result;
+#ifdef QT_DEBUG
   QDebug d(&result);
   d << *obj;
+#endif
   return result;
 }
 
@@ -9467,8 +9469,10 @@ QPainterPath  PythonQtWrapper_QPainterPath::united(QPainterPath* theWrappedObjec
 
 QString PythonQtWrapper_QPainterPath::py_toString(QPainterPath* obj) {
   QString result;
+#ifdef QT_DEBUG
   QDebug d(&result);
   d << *obj;
+#endif
   return result;
 }
 
@@ -12792,8 +12796,10 @@ QPointF  PythonQtWrapper_QPolygonF::value(QPolygonF* theWrappedObject, int  i, c
 
 QString PythonQtWrapper_QPolygonF::py_toString(QPolygonF* obj) {
   QString result;
+#ifdef QT_DEBUG
   QDebug d(&result);
   d << *obj;
+#endif
   return result;
 }
 

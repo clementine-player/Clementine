@@ -4228,8 +4228,10 @@ QString  PythonQtWrapper_QDir::static_QDir_toNativeSeparators(const QString&  pa
 
 QString PythonQtWrapper_QDir::py_toString(QDir* obj) {
   QString result;
+#ifdef QT_DEBUG
   QDebug d(&result);
   d << *obj;
+#endif
   return result;
 }
 
@@ -4364,8 +4366,10 @@ qreal  PythonQtWrapper_QEasingCurve::valueForProgress(QEasingCurve* theWrappedOb
 
 QString PythonQtWrapper_QEasingCurve::py_toString(QEasingCurve* obj) {
   QString result;
+#ifdef QT_DEBUG
   QDebug d(&result);
   d << *obj;
+#endif
   return result;
 }
 
@@ -4412,8 +4416,10 @@ QEvent::Type  PythonQtWrapper_QEvent::type(QEvent* theWrappedObject) const
 
 QString PythonQtWrapper_QEvent::py_toString(QEvent* obj) {
   QString result;
+#ifdef QT_DEBUG
   QDebug d(&result);
   d << obj;
+#endif
   return result;
 }
 
@@ -7433,8 +7439,10 @@ QModelIndex  PythonQtWrapper_QModelIndex::sibling(QModelIndex* theWrappedObject,
 
 QString PythonQtWrapper_QModelIndex::py_toString(QModelIndex* obj) {
   QString result;
+#ifdef QT_DEBUG
   QDebug d(&result);
   d << *obj;
+#endif
   return result;
 }
 

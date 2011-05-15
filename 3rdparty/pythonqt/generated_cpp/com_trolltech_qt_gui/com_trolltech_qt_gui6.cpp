@@ -6690,8 +6690,10 @@ qreal  PythonQtWrapper_QQuaternion::z(QQuaternion* theWrappedObject) const
 
 QString PythonQtWrapper_QQuaternion::py_toString(QQuaternion* obj) {
   QString result;
+#ifdef QT_DEBUG
   QDebug d(&result);
   d << *obj;
+#endif
   return result;
 }
 

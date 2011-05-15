@@ -3770,8 +3770,10 @@ QByteArray  PythonQtWrapper_QNetworkCookie::value(QNetworkCookie* theWrappedObje
 
 QString PythonQtWrapper_QNetworkCookie::py_toString(QNetworkCookie* obj) {
   QString result;
+#ifdef QT_DEBUG
   QDebug d(&result);
   d << *obj;
+#endif
   return result;
 }
 
@@ -4418,8 +4420,10 @@ QString  PythonQtWrapper_QNetworkInterface::name(QNetworkInterface* theWrappedOb
 
 QString PythonQtWrapper_QNetworkInterface::py_toString(QNetworkInterface* obj) {
   QString result;
+#ifdef QT_DEBUG
   QDebug d(&result);
   d << *obj;
+#endif
   return result;
 }
 

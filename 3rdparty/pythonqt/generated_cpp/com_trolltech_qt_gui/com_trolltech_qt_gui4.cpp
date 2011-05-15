@@ -4354,8 +4354,10 @@ int  PythonQtWrapper_QItemSelectionRange::width(QItemSelectionRange* theWrappedO
 
 QString PythonQtWrapper_QItemSelectionRange::py_toString(QItemSelectionRange* obj) {
   QString result;
+#ifdef QT_DEBUG
   QDebug d(&result);
   d << *obj;
+#endif
   return result;
 }
 
@@ -13872,8 +13874,10 @@ int  PythonQtWrapper_QMargins::top(QMargins* theWrappedObject) const
 
 QString PythonQtWrapper_QMargins::py_toString(QMargins* obj) {
   QString result;
+#ifdef QT_DEBUG
   QDebug d(&result);
   d << *obj;
+#endif
   return result;
 }
 

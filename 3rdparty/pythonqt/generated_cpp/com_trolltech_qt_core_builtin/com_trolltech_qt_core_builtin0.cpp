@@ -1250,8 +1250,10 @@ int  PythonQtWrapper_QLine::y2(QLine* theWrappedObject) const
 
 QString PythonQtWrapper_QLine::py_toString(QLine* obj) {
   QString result;
+#ifdef QT_DEBUG
   QDebug d(&result);
   d << *obj;
+#endif
   return result;
 }
 
@@ -1450,8 +1452,10 @@ qreal  PythonQtWrapper_QLineF::y2(QLineF* theWrappedObject) const
 
 QString PythonQtWrapper_QLineF::py_toString(QLineF* obj) {
   QString result;
+#ifdef QT_DEBUG
   QDebug d(&result);
   d << *obj;
+#endif
   return result;
 }
 
@@ -1870,8 +1874,10 @@ int  PythonQtWrapper_QPoint::y(QPoint* theWrappedObject) const
 
 QString PythonQtWrapper_QPoint::py_toString(QPoint* obj) {
   QString result;
+#ifdef QT_DEBUG
   QDebug d(&result);
   d << *obj;
+#endif
   return result;
 }
 
@@ -1996,8 +2002,10 @@ qreal  PythonQtWrapper_QPointF::y(QPointF* theWrappedObject) const
 
 QString PythonQtWrapper_QPointF::py_toString(QPointF* obj) {
   QString result;
+#ifdef QT_DEBUG
   QDebug d(&result);
   d << *obj;
+#endif
   return result;
 }
 
@@ -2321,8 +2329,10 @@ int  PythonQtWrapper_QRect::y(QRect* theWrappedObject) const
 
 QString PythonQtWrapper_QRect::py_toString(QRect* obj) {
   QString result;
+#ifdef QT_DEBUG
   QDebug d(&result);
   d << *obj;
+#endif
   return result;
 }
 
@@ -2665,8 +2675,10 @@ qreal  PythonQtWrapper_QRectF::y(QRectF* theWrappedObject) const
 
 QString PythonQtWrapper_QRectF::py_toString(QRectF* obj) {
   QString result;
+#ifdef QT_DEBUG
   QDebug d(&result);
   d << *obj;
+#endif
   return result;
 }
 
@@ -2936,8 +2948,10 @@ int  PythonQtWrapper_QSize::width(QSize* theWrappedObject) const
 
 QString PythonQtWrapper_QSize::py_toString(QSize* obj) {
   QString result;
+#ifdef QT_DEBUG
   QDebug d(&result);
   d << *obj;
+#endif
   return result;
 }
 
@@ -3077,8 +3091,10 @@ qreal  PythonQtWrapper_QSizeF::width(QSizeF* theWrappedObject) const
 
 QString PythonQtWrapper_QSizeF::py_toString(QSizeF* obj) {
   QString result;
+#ifdef QT_DEBUG
   QDebug d(&result);
   d << *obj;
+#endif
   return result;
 }
 

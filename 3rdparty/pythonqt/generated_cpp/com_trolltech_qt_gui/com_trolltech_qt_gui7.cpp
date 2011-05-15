@@ -5000,8 +5000,10 @@ void PythonQtWrapper_QStyleOption::initFrom(QStyleOption* theWrappedObject, cons
 
 QString PythonQtWrapper_QStyleOption::py_toString(QStyleOption* obj) {
   QString result;
+#ifdef QT_DEBUG
   QDebug d(&result);
   d << *obj;
+#endif
   return result;
 }
 

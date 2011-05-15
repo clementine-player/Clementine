@@ -16,9 +16,7 @@
 */
 
 #include <Python.h>
-#include <sip.h>
 
-#include "sipAPIclementine.h"
 #include "core/utilities.h"
 #include "playlist/songplaylistitem.h"
 #include "scripting/script.h"
@@ -61,7 +59,7 @@ public:
 };
 
 
-class PythonTest : public ::testing::Test {
+class DISABLED_PythonTest : public ::testing::Test {
  protected:
   void SetUp() {
     manager_ = new ScriptManager;
@@ -78,11 +76,11 @@ class PythonTest : public ::testing::Test {
 };
 
 
-TEST_F(PythonTest, HasPythonEngine) {
+TEST_F(DISABLED_PythonTest, HasPythonEngine) {
   ASSERT_TRUE(engine_);
 }
 
-TEST_F(PythonTest, InitFromDirectory) {
+TEST_F(DISABLED_PythonTest, InitFromDirectory) {
   TemporaryScript script("pass");
 
   ScriptInfo info;
@@ -94,7 +92,7 @@ TEST_F(PythonTest, InitFromDirectory) {
   EXPECT_EQ(NULL, info.loaded());
 }
 
-TEST_F(PythonTest, StdioIsRedirected) {
+TEST_F(DISABLED_PythonTest, StdioIsRedirected) {
   TemporaryScript script(
         "import sys\n"
         "print 'text on stdout'\n"
@@ -109,7 +107,7 @@ TEST_F(PythonTest, StdioIsRedirected) {
   ASSERT_TRUE(log.contains("text on stderr"));
 }
 
-TEST_F(PythonTest, CleanupModuleDict) {
+TEST_F(DISABLED_PythonTest, CleanupModuleDict) {
   TemporaryScript script(
         "class Foo:\n"
         "  def __init__(self):\n"
@@ -127,7 +125,7 @@ TEST_F(PythonTest, CleanupModuleDict) {
   ASSERT_TRUE(manager_->log_lines_plain().last().endsWith("destructor"));
 }
 
-TEST_F(PythonTest, ModuleConstants) {
+TEST_F(DISABLED_PythonTest, ModuleConstants) {
   TemporaryScript script(
         "print __builtins__\n"
         "print __file__\n"
@@ -149,39 +147,4 @@ TEST_F(PythonTest, ModuleConstants) {
   EXPECT_TRUE(log.at(n-3).endsWith("None"));                                  // __package__
   EXPECT_TRUE(log.at(n-2).endsWith("['" + script.directory_ + "']"));         // __path__
   EXPECT_TRUE(log.at(n-1).contains("<clementine.ScriptInterface object at")); // script
-}
-
-TEST_F(PythonTest, SharedPointers) {
-  engine_->EnsureInitialised();
-
-  TemporaryScript script(
-        "import clementine\n"
-        "print clementine.item.Metadata().title()\n"
-        "a = clementine.item\n"
-        "print a.Metadata().title()\n"
-        "clementine.item = None\n"
-        "print a.Metadata().title()\n"
-        "a = None\n"
-  );
-  ScriptInfo info;
-  info.InitFromDirectory(manager_, script.directory_);
-
-  Song song;
-  song.set_title("title");
-
-  PlaylistItemPtr ptr(new SongPlaylistItem(song));
-  EXPECT_EQ(1, ptr.use_count());
-
-  engine_->AddObject(&ptr, sipType_PlaylistItemPtr, "item");
-  EXPECT_EQ(2, ptr.use_count());
-
-  engine_->CreateScript(info);
-  EXPECT_EQ(1, ptr.use_count());
-
-  const QStringList log = manager_->log_lines_plain();
-  const int n = log.count();
-  ASSERT_GE(n, 3);
-  EXPECT_TRUE(log.at(n-3).endsWith("title"));
-  EXPECT_TRUE(log.at(n-2).endsWith("title"));
-  EXPECT_TRUE(log.at(n-1).endsWith("title"));
 }

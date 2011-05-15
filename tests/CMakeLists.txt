@@ -136,5 +136,7 @@ endif(LINUX AND HAVE_DBUS)
 
 if(HAVE_SCRIPTING_PYTHON)
   include_directories(${PYTHON_INCLUDE_DIRS})
+  include_directories(${CMAKE_SOURCE_DIR}/3rdparty/pythonqt/generated_cpp)
+  include_directories(${CMAKE_SOURCE_DIR}/3rdparty/pythonqt/src)
   add_test_file(python_test.cpp true)
 endif (HAVE_SCRIPTING_PYTHON)

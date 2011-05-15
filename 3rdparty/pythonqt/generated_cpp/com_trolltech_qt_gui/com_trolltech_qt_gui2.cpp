@@ -9427,8 +9427,10 @@ qreal  PythonQtWrapper_QGraphicsItem::zValue(QGraphicsItem* theWrappedObject) co
 
 QString PythonQtWrapper_QGraphicsItem::py_toString(QGraphicsItem* obj) {
   QString result;
+#ifdef QT_DEBUG
   QDebug d(&result);
   d << obj;
+#endif
   return result;
 }
 
@@ -12894,8 +12896,10 @@ return new PythonQtShell_QGraphicsObject(parent); }
 
 QString PythonQtWrapper_QGraphicsObject::py_toString(QGraphicsObject* obj) {
   QString result;
+#ifdef QT_DEBUG
   QDebug d(&result);
   d << obj;
+#endif
   return result;
 }
 

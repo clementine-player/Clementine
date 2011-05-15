@@ -302,8 +302,10 @@ QTransform  PythonQtWrapper_QBrush::transform(QBrush* theWrappedObject) const
 
 QString PythonQtWrapper_QBrush::py_toString(QBrush* obj) {
   QString result;
+#ifdef QT_DEBUG
   QDebug d(&result);
   d << *obj;
+#endif
   return result;
 }
 
@@ -750,8 +752,10 @@ qreal  PythonQtWrapper_QColor::yellowF(QColor* theWrappedObject) const
 
 QString PythonQtWrapper_QColor::py_toString(QColor* obj) {
   QString result;
+#ifdef QT_DEBUG
   QDebug d(&result);
   d << *obj;
+#endif
   return result;
 }
 
@@ -2082,8 +2086,10 @@ QMatrix*  PythonQtWrapper_QMatrix::translate(QMatrix* theWrappedObject, qreal  d
 
 QString PythonQtWrapper_QMatrix::py_toString(QMatrix* obj) {
   QString result;
+#ifdef QT_DEBUG
   QDebug d(&result);
   d << *obj;
+#endif
   return result;
 }
 
@@ -2477,8 +2483,10 @@ qreal  PythonQtWrapper_QPen::widthF(QPen* theWrappedObject) const
 
 QString PythonQtWrapper_QPen::py_toString(QPen* obj) {
   QString result;
+#ifdef QT_DEBUG
   QDebug d(&result);
   d << *obj;
+#endif
   return result;
 }
 
@@ -3096,8 +3104,10 @@ QPoint  PythonQtWrapper_QPolygon::value(QPolygon* theWrappedObject, int  i, cons
 
 QString PythonQtWrapper_QPolygon::py_toString(QPolygon* obj) {
   QString result;
+#ifdef QT_DEBUG
   QDebug d(&result);
   d << *obj;
+#endif
   return result;
 }
 
@@ -3279,8 +3289,10 @@ QRegion  PythonQtWrapper_QRegion::xored(QRegion* theWrappedObject, const QRegion
 
 QString PythonQtWrapper_QRegion::py_toString(QRegion* obj) {
   QString result;
+#ifdef QT_DEBUG
   QDebug d(&result);
   d << *obj;
+#endif
   return result;
 }
 

@@ -88,8 +88,10 @@ bool  PythonQtWrapper_QSslKey::isNull(QSslKey* theWrappedObject) const
 
 QString PythonQtWrapper_QSslKey::py_toString(QSslKey* obj) {
   QString result;
+#ifdef QT_DEBUG
   QDebug d(&result);
   d << *obj;
+#endif
   return result;
 }
 

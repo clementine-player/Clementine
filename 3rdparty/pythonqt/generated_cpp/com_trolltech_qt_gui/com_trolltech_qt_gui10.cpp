@@ -692,8 +692,10 @@ QTransform::TransformationType  PythonQtWrapper_QTransform::type(QTransform* the
 
 QString PythonQtWrapper_QTransform::py_toString(QTransform* obj) {
   QString result;
+#ifdef QT_DEBUG
   QDebug d(&result);
   d << *obj;
+#endif
   return result;
 }
 
@@ -7875,8 +7877,10 @@ qreal  PythonQtWrapper_QVector2D::y(QVector2D* theWrappedObject) const
 
 QString PythonQtWrapper_QVector2D::py_toString(QVector2D* obj) {
   QString result;
+#ifdef QT_DEBUG
   QDebug d(&result);
   d << *obj;
+#endif
   return result;
 }
 
@@ -8092,8 +8096,10 @@ qreal  PythonQtWrapper_QVector3D::z(QVector3D* theWrappedObject) const
 
 QString PythonQtWrapper_QVector3D::py_toString(QVector3D* obj) {
   QString result;
+#ifdef QT_DEBUG
   QDebug d(&result);
   d << *obj;
+#endif
   return result;
 }
 
@@ -8303,8 +8309,10 @@ qreal  PythonQtWrapper_QVector4D::z(QVector4D* theWrappedObject) const
 
 QString PythonQtWrapper_QVector4D::py_toString(QVector4D* obj) {
   QString result;
+#ifdef QT_DEBUG
   QDebug d(&result);
   d << *obj;
+#endif
   return result;
 }
 

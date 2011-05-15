@@ -20,3 +20,7 @@ add_library(clementine-pythonqt-bindings
   ${SOURCES}
   ${MOC}
 )
+
+target_link_libraries(clementine-pythonqt-bindings
+  clementine_lib
+)
