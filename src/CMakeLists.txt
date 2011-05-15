@@ -507,6 +507,7 @@ set(UI
 
   scripting/installscriptdialog.ui
   scripting/scriptdialog.ui
+  scripting/python/pythonconsole.ui
 
   smartplaylists/querysearchpage.ui
   smartplaylists/querysortpage.ui
@@ -818,11 +819,13 @@ endif(APPLE)
 
 if(HAVE_SCRIPTING_PYTHON)
   list(APPEND SOURCES
+    scripting/python/pythonconsole.cpp
     scripting/python/pythonengine.cpp
     scripting/python/pythonscript.cpp
   )
 
   list(APPEND HEADERS
+    scripting/python/pythonconsole.h
     scripting/python/pythonengine.h
   )
 endif(HAVE_SCRIPTING_PYTHON)
@@ -898,6 +901,13 @@ list(APPEND OTHER_SOURCES
   remote/remoteconfig.cpp
   remote/remoteconfig.h
   ${CMAKE_CURRENT_BINARY_DIR}/ui_remoteconfig.h
+  scripting/python/pythonconsole.cpp
+  scripting/python/pythonconsole.h
+  scripting/python/pythonengine.cpp
+  scripting/python/pythonengine.h
+  scripting/python/pythonscript.cpp
+  scripting/python/pythonscript.h
+  ${CMAKE_CURRENT_BINARY_DIR}/ui_pythonconsole.h
   ui/macsystemtrayicon.h
   ui/macsystemtrayicon.mm
   ui/wiimotedevshortcutsconfig.cpp

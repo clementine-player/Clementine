@@ -15,29 +15,41 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef PYTHONSCRIPT_H
-#define PYTHONSCRIPT_H
+#ifndef PYTHONCONSOLE_H
+#define PYTHONCONSOLE_H
 
-#include "scripting/script.h"
+#include <QWidget>
+
+
+class QSortFilterProxyModel;
+
+class PythonQtScriptingConsole;
 
 class PythonEngine;
-class ScriptInfo;
+class Ui_PythonConsole;
 
-class PythonScript : public Script {
+class PythonConsole : public QWidget {
+  Q_OBJECT
+
 public:
-  PythonScript(PythonEngine* engine, const ScriptInfo& info);
+  PythonConsole(QWidget* parent = 0);
+  ~PythonConsole();
 
-  const QString& module_name() const { return module_name_; }
-  PythonQtObjectPtr module() const { return module_; }
+  void SetEngine(PythonEngine* engine);
 
-  bool Init();
-  bool Unload();
+protected:
+  void showEvent(QShowEvent* e);
+
+private slots:
+  void ModuleChanged(int row);
 
 private:
+  Ui_PythonConsole* ui_;
+  QSortFilterProxyModel* proxy_model_;
+
   PythonEngine* engine_;
 
-  QString module_name_;
-  PythonQtObjectPtr module_;
+  PythonQtScriptingConsole* widget_;
 };
 
-#endif // PYTHONSCRIPT_H
+#endif // PYTHONCONSOLE_H

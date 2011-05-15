@@ -24,6 +24,9 @@
 
 #include "gtest/gtest_prod.h"
 
+class QStandardItemModel;
+
+
 class PythonEngine : public LanguageEngine {
   Q_OBJECT
 
@@ -40,6 +43,7 @@ public:
 
   ScriptInfo::Language language() const { return ScriptInfo::Language_Python; }
   QString name() const { return "python"; }
+  QStandardItemModel* modules_model() const { return modules_model_; }
 
   bool EnsureInitialised();
 
@@ -51,6 +55,10 @@ private slots:
   void PythonStdErr(const QString& str);
 
 private:
+  void AddModuleToModel(const QString& name, PythonQtObjectPtr ptr);
+  void RemoveModuleFromModel(const QString& name);
+
+private:
   static PythonEngine* sInstance;
   bool initialised_;
 
@@ -58,6 +66,7 @@ private:
   PythonQtObjectPtr scripts_module_;
 
   QMap<QString, Script*> loaded_scripts_;
+  QStandardItemModel* modules_model_;
 };
 
 #endif // PYTHONENGINE_H

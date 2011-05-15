@@ -16,6 +16,12 @@
 */
 
 #include "config.h"
+
+#ifdef HAVE_SCRIPTING_PYTHON
+#  include "scripting/python/pythonengine.h"
+#  include "scripting/python/pythonconsole.h"
+#endif
+
 #include "installscriptdialog.h"
 #include "scriptarchive.h"
 #include "scriptdialog.h"
@@ -155,6 +161,14 @@ void ScriptDialog::SetManager(ScriptManager* manager) {
   foreach (const QString& html, manager->log_lines()) {
     LogLineAdded(html);
   }
+
+#ifdef HAVE_SCRIPTING_PYTHON
+  // Add the python console
+  PythonConsole* console = new PythonConsole(this);
+  console->SetEngine(qobject_cast<PythonEngine*>(
+      manager_->EngineForLanguage(ScriptInfo::Language_Python)));
+  ui_->tab_widget->addTab(console, tr("Python console"));
+#endif
 }
 
 void ScriptDialog::CurrentChanged(const QModelIndex& index) {

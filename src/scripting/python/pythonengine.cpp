@@ -44,7 +44,8 @@ PythonEngine* PythonEngine::sInstance = NULL;
 
 PythonEngine::PythonEngine(ScriptManager* manager)
   : LanguageEngine(manager),
-    initialised_(false)
+    initialised_(false),
+    modules_model_(new QStandardItemModel(this))
 {
   Q_ASSERT(sInstance == NULL);
   sInstance = this;
@@ -56,6 +57,8 @@ PythonEngine::PythonEngine(ScriptManager* manager)
 
 PythonEngine::~PythonEngine() {
   sInstance = NULL;
+
+  modules_model_->clear();
 
   scripts_module_ = PythonQtObjectPtr();
   clementine_module_ = PythonQtObjectPtr();
@@ -105,6 +108,10 @@ bool PythonEngine::EnsureInitialised() {
   qLog(Debug) << "Creating scripts module";
   scripts_module_ = python_qt->createModuleFromScript(kScriptModulePrefix);
 
+  // The modules model contains all the modules
+  modules_model_->clear();
+  AddModuleToModel("__main__", python_qt->getMainModule());
+
   qLog(Debug) << "Python initialisation complete";
   initialised_ = true;
   return true;
@@ -116,9 +123,10 @@ Script* PythonEngine::CreateScript(const ScriptInfo& info) {
     return NULL;
   }
 
-  Script* ret = new PythonScript(this, info);
+  PythonScript* ret = new PythonScript(this, info);
   loaded_scripts_[ret->info().id()] = ret; // Used by RegisterNativeObject during startup
   if (ret->Init()) {
+    AddModuleToModel(ret->module_name(), ret->module());
     return ret;
   }
 
@@ -127,6 +135,9 @@ Script* PythonEngine::CreateScript(const ScriptInfo& info) {
 }
 
 void PythonEngine::DestroyScript(Script* script) {
+  PythonScript* python_script = static_cast<PythonScript*>(script);
+  RemoveModuleFromModel(python_script->module_name());
+
   script->Unload();
   loaded_scripts_.remove(script->info().id());
   delete script;
@@ -138,4 +149,16 @@ void PythonEngine::PythonStdOut(const QString& str) {
 
 void PythonEngine::PythonStdErr(const QString& str) {
   manager()->AddLogLine("Python", str, true);
+}
+
+void PythonEngine::AddModuleToModel(const QString& name, PythonQtObjectPtr ptr) {
+  QStandardItem* item = new QStandardItem(name);
+  item->setData(QVariant::fromValue(ptr));
+  modules_model_->appendRow(item);
+}
+
+void PythonEngine::RemoveModuleFromModel(const QString& name) {
+  foreach (QStandardItem* item, modules_model_->findItems(name)) {
+    modules_model_->removeRow(item->row());
+  }
 }
