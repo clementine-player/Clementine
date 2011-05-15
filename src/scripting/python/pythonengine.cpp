@@ -19,6 +19,7 @@
 #include <com_trolltech_qt_core/com_trolltech_qt_core_init.h>
 #include <com_trolltech_qt_gui/com_trolltech_qt_gui_init.h>
 #include <com_trolltech_qt_network/com_trolltech_qt_network_init.h>
+#include <com_trolltech_qt_uitools/com_trolltech_qt_uitools_init.h>
 
 #include "pythonengine.h"
 #include "pythonscript.h"
@@ -78,7 +79,7 @@ bool PythonEngine::EnsureInitialised() {
   PythonQt_init_QtCore(0);
   PythonQt_init_QtGui(0);
   PythonQt_init_QtNetwork(0);
-  PythonQt_init_Clementine(0);
+  PythonQt_init_QtUiTools(0);
 
   PythonQt* python_qt = PythonQt::self();
   python_qt->installDefaultImporter();
@@ -88,6 +89,7 @@ bool PythonEngine::EnsureInitialised() {
 
   // Create a clementine module
   clementine_module_ = python_qt->createModuleFromScript(kClementineModuleName);
+  PythonQt_init_Clementine(clementine_module_);
 
   // Add classes
   python_qt->registerClass(&AutoExpandingTreeView::staticMetaObject, kClementineModuleName);

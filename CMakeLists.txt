@@ -13,7 +13,7 @@ if (UNIX AND NOT APPLE)
   set(LINUX 1)
 endif (UNIX AND NOT APPLE)
 
-find_package(Qt4 4.5.0 REQUIRED QtCore QtGui QtOpenGL QtSql QtNetwork QtXml)
+find_package(Qt4 4.5.0 REQUIRED QtCore QtGui QtOpenGL QtSql QtNetwork QtXml QtUiTools)
 if (LINUX)
   option(ENABLE_DBUS "Enable D-Bus, MPRIS and native notifications. Required for DeviceKit and Wii remote support" ON)
   if(ENABLE_DBUS)
