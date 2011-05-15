@@ -1,0 +1,17 @@
+<typesystem package="clementine">
+  <load-typesystem name="typesystem_core.xml" generate="no" />
+  <load-typesystem name="typesystem_gui.xml" generate="no" />
+  <load-typesystem name="typesystem_network.xml" generate="no" />
+
+  <enum-type name="RadioModel::PlayBehaviour" />
+  <enum-type name="RadioModel::Role" />
+  <enum-type name="RadioModel::Type" />
+  <enum-type name="RadioService::AddMode" />
+  <enum-type name="UrlHandler::LoadResult::Type" />
+
+  <value-type name="UrlHandler::LoadResult" />
+
+  <object-type name="RadioModel" />
+  <object-type name="RadioService" />
+  <object-type name="UrlHandler" />
+</typesystem>

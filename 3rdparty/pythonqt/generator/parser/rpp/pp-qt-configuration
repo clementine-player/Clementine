@@ -1,0 +1,24 @@
+#define __cplusplus 1
+
+#define __STDC__
+
+// Qt
+#define QOBJECTDEFS_H
+
+// not yet supported
+#define Q_SLOTS slots
+#define Q_SIGNALS signals
+#define Q_FLAGS(a)
+#define Q_PRIVATE_SLOT(a, b)
+#define Q_DECLARE_INTERFACE(a,b)
+#define Q_INTERFACES(a)
+#define Q_GADGET
+#define Q_OVERRIDE(a)
+#define Q_OS_OS2
+#define Q_NO_USING_KEYWORD
+
+// There are symbols in Qt that exist in Debug but
+// not in release
+#define QT_NO_DEBUG
+
+#define QT_JAMBI_RUN

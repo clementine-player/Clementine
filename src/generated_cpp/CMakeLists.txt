@@ -1,0 +1,22 @@
+include_directories(
+  ${CMAKE_SOURCE_DIR}/src/core
+  ${CMAKE_SOURCE_DIR}/src/radio
+  ${CMAKE_CURRENT_SOURCE_DIR}/clementine
+  ${PYTHON_INCLUDE_DIRS}
+)
+
+set(SOURCES
+  clementine/clementine0.cpp
+  clementine/clementine_init.cpp
+)
+
+set(HEADERS
+  clementine/clementine0.h
+)
+
+qt4_wrap_cpp(MOC ${HEADERS})
+
+add_library(clementine-pythonqt-bindings
+  ${SOURCES}
+  ${MOC}
+)

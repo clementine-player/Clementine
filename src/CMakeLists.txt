@@ -828,6 +828,17 @@ if(HAVE_SCRIPTING_PYTHON)
     scripting/python/pythonconsole.h
     scripting/python/pythonengine.h
   )
+
+  add_pythonqt_bindings(
+    NAME clementine
+    HEADERS
+      core/urlhandler.h
+      radio/radiomodel.h
+      radio/radioservice.h
+    TYPESYSTEM scripting/python/typesystem_clementine.xml
+  )
+
+  add_subdirectory(generated_cpp)
 endif(HAVE_SCRIPTING_PYTHON)
 
 if(HAVE_REMOTE)
@@ -1009,7 +1020,10 @@ if(HAVE_LIBINDICATE)
 endif(HAVE_LIBINDICATE)
 
 if(HAVE_SCRIPTING_PYTHON)
-  target_link_libraries(clementine_lib pythonqt)
+  target_link_libraries(clementine_lib
+    pythonqt
+    clementine-pythonqt-bindings
+  )
 endif(HAVE_SCRIPTING_PYTHON)
 
 if(HAVE_REMOTE)

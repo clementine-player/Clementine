@@ -42,6 +42,9 @@ const char* PythonEngine::kScriptModulePrefix = "clementinescripts";
 PythonEngine* PythonEngine::sInstance = NULL;
 
 
+void PythonQt_init_Clementine(PyObject* module);
+
+
 PythonEngine::PythonEngine(ScriptManager* manager)
   : LanguageEngine(manager),
     initialised_(false),
@@ -75,6 +78,7 @@ bool PythonEngine::EnsureInitialised() {
   PythonQt_init_QtCore(0);
   PythonQt_init_QtGui(0);
   PythonQt_init_QtNetwork(0);
+  PythonQt_init_Clementine(0);
 
   PythonQt* python_qt = PythonQt::self();
   python_qt->installDefaultImporter();
