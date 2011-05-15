@@ -12,7 +12,11 @@
   <value-type name="UrlHandler::LoadResult" />
 
   <object-type name="NetworkAccessManager" />
-  <object-type name="NetworkTimeouts" />
+  <object-type name="NetworkTimeouts">
+    <modify-function signature="timerEvent(QTimerEvent*)">
+      <remove/>
+    </modify-function>
+  </object-type>
   <object-type name="RadioModel" />
   <object-type name="RadioService" />
   <object-type name="ThreadSafeNetworkDiskCache" />

@@ -258,7 +258,7 @@ if (_wrapper) {
 }
   return NetworkTimeouts::eventFilter(arg__1, arg__2);
 }
-void PythonQtShell_NetworkTimeouts::timerEvent(QTimerEvent*  e)
+void PythonQtShell_NetworkTimeouts::timerEvent(QTimerEvent*  arg__1)
 {
 if (_wrapper) {
   PyObject* obj = PyObject_GetAttrString((PyObject*)_wrapper, "timerEvent");
@@ -266,14 +266,14 @@ if (_wrapper) {
   if (obj && !PythonQtSlotFunction_Check(obj)) {
     static const char* argumentList[] ={"" , "QTimerEvent*"};
     static const PythonQtMethodInfo* methodInfo = PythonQtMethodInfo::getCachedMethodInfoFromArgumentList(2, argumentList);
-    void* args[2] = {NULL, (void*)&e};
+    void* args[2] = {NULL, (void*)&arg__1};
     PyObject* result = PythonQtSignalTarget::call(obj, methodInfo, args, true);
     if (result) { Py_DECREF(result); } 
     Py_DECREF(obj);
     return;
   }
 }
-  NetworkTimeouts::timerEvent(e);
+  NetworkTimeouts::timerEvent(arg__1);
 }
 NetworkTimeouts* PythonQtWrapper_NetworkTimeouts::new_NetworkTimeouts(int  timeout_msec, QObject*  parent)
 { 
@@ -287,11 +287,6 @@ void PythonQtWrapper_NetworkTimeouts::AddReply(NetworkTimeouts* theWrappedObject
 void PythonQtWrapper_NetworkTimeouts::SetTimeout(NetworkTimeouts* theWrappedObject, int  msec)
 {
   ( theWrappedObject->SetTimeout(msec));
-}
-
-void PythonQtWrapper_NetworkTimeouts::timerEvent(NetworkTimeouts* theWrappedObject, QTimerEvent*  e)
-{
-  ( ((PythonQtPublicPromoter_NetworkTimeouts*)theWrappedObject)->promoted_timerEvent(e));
 }
 
 

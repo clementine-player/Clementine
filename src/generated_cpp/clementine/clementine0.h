@@ -65,14 +65,9 @@ virtual void childEvent(QChildEvent*  arg__1);
 virtual void customEvent(QEvent*  arg__1);
 virtual bool  event(QEvent*  arg__1);
 virtual bool  eventFilter(QObject*  arg__1, QEvent*  arg__2);
-virtual void timerEvent(QTimerEvent*  e);
+virtual void timerEvent(QTimerEvent*  arg__1);
 
   PythonQtInstanceWrapper* _wrapper; 
-};
-
-class PythonQtPublicPromoter_NetworkTimeouts : public NetworkTimeouts
-{ public:
-inline void promoted_timerEvent(QTimerEvent*  e) { NetworkTimeouts::timerEvent(e); }
 };
 
 class PythonQtWrapper_NetworkTimeouts : public QObject
@@ -83,7 +78,6 @@ NetworkTimeouts* new_NetworkTimeouts(int  timeout_msec, QObject*  parent = 0);
 void delete_NetworkTimeouts(NetworkTimeouts* obj) { delete obj; } 
    void AddReply(NetworkTimeouts* theWrappedObject, QNetworkReply*  reply);
    void SetTimeout(NetworkTimeouts* theWrappedObject, int  msec);
-   void timerEvent(NetworkTimeouts* theWrappedObject, QTimerEvent*  e);
 };
 
 
