@@ -1,0 +1,119 @@
+diff --git a/3rdparty/pythonqt/src/PythonQtImporter.cpp b/3rdparty/pythonqt/src/PythonQtImporter.cpp
+index 2046ff9..81e26fd 100644
+--- a/3rdparty/pythonqt/src/PythonQtImporter.cpp
++++ b/3rdparty/pythonqt/src/PythonQtImporter.cpp
+@@ -445,90 +445,41 @@ PythonQtImport::getLong(unsigned char *buf)
+   return x;
+ }
+ 
+-FILE *
+-open_exclusive(const QString& filename)
+-{
+-#if defined(O_EXCL)&&defined(O_CREAT)&&defined(O_WRONLY)&&defined(O_TRUNC)
+-  /* Use O_EXCL to avoid a race condition when another process tries to
+-     write the same file.  When that happens, our open() call fails,
+-     which is just fine (since it's only a cache).
+-     XXX If the file exists and is writable but the directory is not
+-     writable, the file will never be written.  Oh well.
+-  */
+-  QFile::remove(filename);
+-
+-  int fd;
+-  int flags = O_EXCL|O_CREAT|O_WRONLY|O_TRUNC;
+-#ifdef O_BINARY
+-    flags |= O_BINARY;   /* necessary for Windows */
+-#endif
+-#ifdef WIN32
+-  fd = _wopen(filename.ucs2(), flags, 0666);
+-#else
+-  fd = open(filename.local8Bit(), flags, 0666);
+-#endif
+-  if (fd < 0)
+-    return NULL;
+-  return fdopen(fd, "wb");
+-#else
+-  /* Best we can do -- on Windows this can't happen anyway */
+-  return fopen(filename.toLocal8Bit().constData(), "wb");
+-#endif
+-}
+-
+-
+ void PythonQtImport::writeCompiledModule(PyCodeObject *co, const QString& filename, long mtime)
+ {
+-  FILE *fp;
+   // we do not want to write Qt resources to disk, do we?
+   if (filename.startsWith(":")) {
+     return;
+   }
+-  fp = open_exclusive(filename);
+-  if (fp == NULL) {
+-    if (Py_VerboseFlag)
+-      PySys_WriteStderr(
+-      "# can't create %s\n", filename.toLatin1().constData());
+-    return;
+-  }
+-#if PY_VERSION_HEX < 0x02040000
+-  PyMarshal_WriteLongToFile(PyImport_GetMagicNumber(), fp);
+-#else
+-  PyMarshal_WriteLongToFile(PyImport_GetMagicNumber(), fp, Py_MARSHAL_VERSION);
+-#endif
+-  /* First write a 0 for mtime */
+-#if PY_VERSION_HEX < 0x02040000
+-  PyMarshal_WriteLongToFile(0L, fp);
+-#else
+-  PyMarshal_WriteLongToFile(0L, fp, Py_MARSHAL_VERSION);
+-#endif
++
+ #if PY_VERSION_HEX < 0x02040000
+-  PyMarshal_WriteObjectToFile((PyObject *)co, fp);
++  PyObject* data = PyMarshal_WriteObjectToString((PyObject*) co);
+ #else
+-  PyMarshal_WriteObjectToFile((PyObject *)co, fp, Py_MARSHAL_VERSION);
++  PyObject* data = PyMarshal_WriteObjectToString((PyObject*) co, Py_MARSHAL_VERSION);
+ #endif
+-  if (ferror(fp)) {
+-    if (Py_VerboseFlag)
+-      PySys_WriteStderr("# can't write %s\n", filename.toLatin1().constData());
+-    /* Don't keep partial file */
+-    fclose(fp);
+-    QFile::remove(filename);
++
++  if (!data) {
+     return;
+   }
+-  /* Now write the true mtime */
+-  fseek(fp, 4L, 0);
+-#if PY_VERSION_HEX < 0x02040000
+-  PyMarshal_WriteLongToFile(mtime, fp);
+-#else
+-  PyMarshal_WriteLongToFile(mtime, fp, Py_MARSHAL_VERSION);
+-#endif
+-  fflush(fp);
+-  fclose(fp);
+-  if (Py_VerboseFlag)
+-    PySys_WriteStderr("# wrote %s\n", filename.toLatin1().constData());
+-//#ifdef macintosh
+-//  PyMac_setfiletype(cpathname, 'Pyth', 'PYC ');
+-//#endif
++
++  QFile file(filename);
++  if (!file.open(QIODevice::WriteOnly)) {
++    Py_DECREF(data);
++    return;
++  }
++
++  char* buffer = NULL;
++  Py_ssize_t length = 0;
++  PyString_AsStringAndSize(data, &buffer, &length);
++
++  const quint32 magic_number = PyImport_GetMagicNumber();
++  const quint32 mtime_32 = mtime;
++
++  file.write(reinterpret_cast<const char*>(&magic_number), sizeof(magic_number));
++  file.write(reinterpret_cast<const char*>(&mtime_32), sizeof(mtime_32));
++  file.write(buffer, length);
++
++  Py_DECREF(data);
+ }
+ 
+ /* Given the contents of a .py[co] file in a buffer, unmarshal the data

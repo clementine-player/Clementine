@@ -18,13 +18,11 @@
 #ifndef PYTHONENGINE_H
 #define PYTHONENGINE_H
 
+#include <PythonQt.h>
+
 #include "scripting/languageengine.h"
 
 #include "gtest/gtest_prod.h"
-
-struct _object; // PyObject
-struct _sipAPIDef;
-struct _sipTypeDef;
 
 class PythonEngine : public LanguageEngine {
   Q_OBJECT
@@ -37,7 +35,8 @@ public:
 
   static PythonEngine* instance() { return sInstance; }
 
-  static const char* kModulePrefix;
+  static const char* kClementineModuleName;
+  static const char* kScriptModulePrefix;
 
   ScriptInfo::Language language() const { return ScriptInfo::Language_Python; }
   QString name() const { return "python"; }
@@ -47,31 +46,16 @@ public:
   Script* CreateScript(const ScriptInfo& info);
   void DestroyScript(Script* script);
 
-  const _sipAPIDef* sip_api() const { return sip_api_; }
-
-  void AddLogLine(const QString& message, bool error = false);
-  void RegisterNativeObject(QObject* object);
-
-private:
-  static const _sipAPIDef* GetSIPApi();
-  void AddObject(void* object, const _sipTypeDef* type, const char* name) const;
-
-  // Looks for a loaded script whose ID either exactly matches id, or matches
-  // some string at the start of id followed by a dot.  For example,
-  // FindScriptMatchingId("foo") and FindScriptMatchingId("foo.bar") would both
-  // match a Script with an ID of foo, but FindScriptMatchingId("foobar")
-  // would not.
-  Script* FindScriptMatchingId(const QString& id) const;
-
 private slots:
-  void NativeObjectDestroyed(QObject* object);
+  void PythonStdOut(const QString& str);
+  void PythonStdErr(const QString& str);
 
 private:
   static PythonEngine* sInstance;
-
   bool initialised_;
-  _object* clementine_module_;
-  const _sipAPIDef* sip_api_;
+
+  PythonQtObjectPtr clementine_module_;
+  PythonQtObjectPtr scripts_module_;
 
   QMap<QString, Script*> loaded_scripts_;
 };

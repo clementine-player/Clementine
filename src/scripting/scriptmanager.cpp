@@ -16,6 +16,11 @@
 */
 
 #include "config.h"
+
+#ifdef HAVE_SCRIPTING_PYTHON
+# include "scripting/python/pythonengine.h"
+#endif
+
 #include "languageengine.h"
 #include "script.h"
 #include "scriptinterface.h"
@@ -23,10 +28,6 @@
 #include "uiinterface.h"
 #include "core/logging.h"
 #include "core/utilities.h"
-
-#ifdef HAVE_SCRIPTING_PYTHON
-# include "scripting/python/pythonengine.h"
-#endif
 
 #ifdef Q_OS_MAC
 # include "core/mac_startup.h"

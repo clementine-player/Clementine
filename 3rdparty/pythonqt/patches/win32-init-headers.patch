@@ -1,0 +1,69 @@
+diff --git a/3rdparty/pythonqt/generated_cpp/com_trolltech_qt_core/com_trolltech_qt_core_init.cpp b/3rdparty/pythonqt/generated_cpp/com_trolltech_qt_core/com_trolltech_qt_core_init.cpp
+index b571fe1..d6b344b 100644
+--- a/3rdparty/pythonqt/generated_cpp/com_trolltech_qt_core/com_trolltech_qt_core_init.cpp
++++ b/3rdparty/pythonqt/generated_cpp/com_trolltech_qt_core/com_trolltech_qt_core_init.cpp
+@@ -1,4 +1,5 @@
+ #include <PythonQt.h>
++#include "com_trolltech_qt_core_init.h"
+ #include "com_trolltech_qt_core0.h"
+ #include "com_trolltech_qt_core1.h"
+ #include "com_trolltech_qt_core2.h"
+diff --git a/3rdparty/pythonqt/generated_cpp/com_trolltech_qt_core/com_trolltech_qt_core_init.h b/3rdparty/pythonqt/generated_cpp/com_trolltech_qt_core/com_trolltech_qt_core_init.h
+index e69de29..c6dd49c 100644
+--- a/3rdparty/pythonqt/generated_cpp/com_trolltech_qt_core/com_trolltech_qt_core_init.h
++++ b/3rdparty/pythonqt/generated_cpp/com_trolltech_qt_core/com_trolltech_qt_core_init.h
+@@ -0,0 +1,8 @@
++#ifndef COM_TROLLTECH_QT_CORE_INIT_H
++#define COM_TROLLTECH_QT_CORE_INIT_H
++
++#include "PythonQtSystem.h"
++
++PYTHONQT_EXPORT void PythonQt_init_QtCore(PyObject* module);
++
++#endif // COM_TROLLTECH_QT_CORE_INIT_H
+diff --git a/3rdparty/pythonqt/generated_cpp/com_trolltech_qt_gui/com_trolltech_qt_gui_init.cpp b/3rdparty/pythonqt/generated_cpp/com_trolltech_qt_gui/com_trolltech_qt_gui_init.cpp
+index 850b22a..f250154 100644
+--- a/3rdparty/pythonqt/generated_cpp/com_trolltech_qt_gui/com_trolltech_qt_gui_init.cpp
++++ b/3rdparty/pythonqt/generated_cpp/com_trolltech_qt_gui/com_trolltech_qt_gui_init.cpp
+@@ -1,4 +1,5 @@
+ #include <PythonQt.h>
++#include "com_trolltech_qt_gui_init.h"
+ #include "com_trolltech_qt_gui0.h"
+ #include "com_trolltech_qt_gui1.h"
+ #include "com_trolltech_qt_gui2.h"
+diff --git a/3rdparty/pythonqt/generated_cpp/com_trolltech_qt_gui/com_trolltech_qt_gui_init.h b/3rdparty/pythonqt/generated_cpp/com_trolltech_qt_gui/com_trolltech_qt_gui_init.h
+index e69de29..3610431 100644
+--- a/3rdparty/pythonqt/generated_cpp/com_trolltech_qt_gui/com_trolltech_qt_gui_init.h
++++ b/3rdparty/pythonqt/generated_cpp/com_trolltech_qt_gui/com_trolltech_qt_gui_init.h
+@@ -0,0 +1,8 @@
++#ifndef COM_TROLLTECH_QT_GUI_INIT_H
++#define COM_TROLLTECH_QT_GUI_INIT_H
++
++#include "PythonQtSystem.h"
++
++PYTHONQT_EXPORT void PythonQt_init_QtGui(PyObject* module);
++
++#endif // COM_TROLLTECH_QT_GUI_INIT_H
+diff --git a/3rdparty/pythonqt/generated_cpp/com_trolltech_qt_network/com_trolltech_qt_network_init.cpp b/3rdparty/pythonqt/generated_cpp/com_trolltech_qt_network/com_trolltech_qt_network_init.cpp
+index fb39509..292b192 100644
+--- a/3rdparty/pythonqt/generated_cpp/com_trolltech_qt_network/com_trolltech_qt_network_init.cpp
++++ b/3rdparty/pythonqt/generated_cpp/com_trolltech_qt_network/com_trolltech_qt_network_init.cpp
+@@ -1,4 +1,5 @@
+ #include <PythonQt.h>
++#include "com_trolltech_qt_network_init.h"
+ #include "com_trolltech_qt_network0.h"
+ 
+ 
+diff --git a/3rdparty/pythonqt/generated_cpp/com_trolltech_qt_network/com_trolltech_qt_network_init.h b/3rdparty/pythonqt/generated_cpp/com_trolltech_qt_network/com_trolltech_qt_network_init.h
+index e69de29..a57091f 100644
+--- a/3rdparty/pythonqt/generated_cpp/com_trolltech_qt_network/com_trolltech_qt_network_init.h
++++ b/3rdparty/pythonqt/generated_cpp/com_trolltech_qt_network/com_trolltech_qt_network_init.h
+@@ -0,0 +1,8 @@
++#ifndef COM_TROLLTECH_QT_NETWORK_INIT_H
++#define COM_TROLLTECH_QT_NETWORK_INIT_H
++
++#include "PythonQtSystem.h"
++
++PYTHONQT_EXPORT void PythonQt_init_QtNetwork(PyObject* module);
++
++#endif // COM_TROLLTECH_QT_NETWORK_INIT_H

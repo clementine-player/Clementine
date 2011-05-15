@@ -16,25 +16,31 @@
 */
 
 #include <Python.h>
-#include <frameobject.h>
-#include <sip.h>
+#include <com_trolltech_qt_core/com_trolltech_qt_core_init.h>
+#include <com_trolltech_qt_gui/com_trolltech_qt_gui_init.h>
+#include <com_trolltech_qt_network/com_trolltech_qt_network_init.h>
 
 #include "pythonengine.h"
 #include "pythonscript.h"
-#include "sipAPIclementine.h"
 #include "core/logging.h"
+#include "core/player.h"
+#include "core/taskmanager.h"
 #include "covers/coverproviders.h"
 #include "library/library.h"
+#include "library/librarybackend.h"
+#include "library/libraryview.h"
+#include "playlist/playlistmanager.h"
+#include "radio/radiomodel.h"
+#include "scripting/uiinterface.h"
+#include "ui/settingsdialog.h"
 
 #include <QFile>
 #include <QtDebug>
 
-const char* PythonEngine::kModulePrefix = "clementinescripts";
+const char* PythonEngine::kClementineModuleName = "clementine";
+const char* PythonEngine::kScriptModulePrefix = "clementinescripts";
 PythonEngine* PythonEngine::sInstance = NULL;
 
-extern "C" {
-  void initclementine();
-}
 
 PythonEngine::PythonEngine(ScriptManager* manager)
   : LanguageEngine(manager),
@@ -51,111 +57,53 @@ PythonEngine::PythonEngine(ScriptManager* manager)
 PythonEngine::~PythonEngine() {
   sInstance = NULL;
 
-  if (initialised_) {
-    Py_Finalize();
-  }
-}
-
-const sipAPIDef* PythonEngine::GetSIPApi() {
-#if defined(SIP_USE_PYCAPSULE)
-  return (const sipAPIDef *)PyCapsule_Import("sip._C_API", 0);
-#else
-  PyObject *sip_module;
-  PyObject *sip_module_dict;
-  PyObject *c_api;
-
-  /* Import the SIP module. */
-  sip_module = PyImport_ImportModule("sip");
-
-  if (sip_module == NULL)
-      return NULL;
-
-  /* Get the module's dictionary. */
-  sip_module_dict = PyModule_GetDict(sip_module);
-
-  /* Get the "_C_API" attribute. */
-  c_api = PyDict_GetItemString(sip_module_dict, "_C_API");
-
-  if (c_api == NULL)
-      return NULL;
-
-  /* Sanity check that it is the right type. */
-  if (!PyCObject_Check(c_api))
-      return NULL;
-
-  /* Get the actual pointer from the object. */
-  return (const sipAPIDef *)PyCObject_AsVoidPtr(c_api);
-#endif
+  scripts_module_ = PythonQtObjectPtr();
+  clementine_module_ = PythonQtObjectPtr();
+  PythonQt::cleanup();
 }
 
 bool PythonEngine::EnsureInitialised() {
   if (initialised_)
     return true;
 
-  AddLogLine("Initialising python...", false);
+  PythonStdOut("Initialising python...");
 
-  // Add the Clementine builtin module
-  PyImport_AppendInittab(const_cast<char*>("clementine"), initclementine);
+  PythonQt::init(PythonQt::IgnoreSiteModule | PythonQt::RedirectStdOut);
+  PythonQt_init_QtCore(0);
+  PythonQt_init_QtGui(0);
+  PythonQt_init_QtNetwork(0);
 
-  // Initialise python
-  Py_SetProgramName(const_cast<char*>("clementine"));
-  PyEval_InitThreads();
-  Py_InitializeEx(0);
+  PythonQt* python_qt = PythonQt::self();
+  python_qt->installDefaultImporter();
 
-  // Get the clementine module so we can put stuff in it
-  qLog(Debug) << "Importing clementine module";
-  clementine_module_ = PyImport_ImportModule("clementine");
+  connect(python_qt, SIGNAL(pythonStdOut(QString)), SLOT(PythonStdOut(QString)));
+  connect(python_qt, SIGNAL(pythonStdErr(QString)), SLOT(PythonStdErr(QString)));
 
-  if (!clementine_module_) {
-    qLog(Debug) << "Failed to import the clementine module";
+  // Create a clementine module
+  clementine_module_ = python_qt->createModuleFromScript(kClementineModuleName);
 
-    AddLogLine("Failed to import the clementine module", true);
-    if (PyErr_Occurred()) {
-      PyErr_Print();
-    }
-    Py_Finalize();
-    return false;
+  // Add classes
+  python_qt->registerClass(&AutoExpandingTreeView::staticMetaObject, kClementineModuleName);
+
+  const ScriptManager::GlobalData& data = manager()->data();
+  if (data.valid_) {
+    // Add objects
+    clementine_module_.addObject("library",         data.library_->backend());
+    clementine_module_.addObject("library_view",    data.library_view_);
+    clementine_module_.addObject("player",          data.player_);
+    clementine_module_.addObject("playlists",       data.playlists_);
+    clementine_module_.addObject("radio_model",     data.radio_model_);
+    clementine_module_.addObject("settings_dialog", data.settings_dialog_);
+    clementine_module_.addObject("task_manager",    data.task_manager_);
+    clementine_module_.addObject("cover_providers", &CoverProviders::instance());
   }
 
-  qLog(Debug) << "Loading SIP API";
-  sip_api_ = GetSIPApi();
-
-  // Add objects to the module
-  qLog(Debug) << "Adding SIP objects to clementine module";
-  if (manager()->data().valid_) {
-    AddObject(manager()->data().library_->backend(), sipType_LibraryBackend, "library");
-    AddObject(manager()->data().library_view_, sipType_LibraryView, "library_view");
-    AddObject(manager()->data().player_, sipType_PlayerInterface, "player");
-    AddObject(manager()->data().playlists_, sipType_PlaylistManagerInterface, "playlists");
-    AddObject(manager()->data().radio_model_, sipType_RadioModel, "radio_model");
-    AddObject(manager()->data().settings_dialog_, sipType_SettingsDialog, "settings_dialog");
-    AddObject(manager()->data().task_manager_, sipType_TaskManager, "task_manager");
-    AddObject(&CoverProviders::instance(), sipType_CoverProviders, "cover_providers");
-  }
-
-  AddObject(manager()->ui(), sipType_UIInterface, "ui");
-  AddObject(this, sipType_PythonEngine, "pythonengine");
+  clementine_module_.addObject("ui",           manager()->ui());
+  clementine_module_.addObject("pythonengine", this);
 
   // Create a module for scripts
   qLog(Debug) << "Creating scripts module";
-  PyImport_AddModule(kModulePrefix);
-
-  // Run the startup script - this redirects sys.stdout and sys.stderr to our
-  // log handler.
-  QFile python_startup(":pythonstartup.py");
-  python_startup.open(QIODevice::ReadOnly);
-  QByteArray python_startup_script = python_startup.readAll();
-
-  qLog(Debug) << "Running python startup script";
-  if (PyRun_SimpleString(python_startup_script.constData()) != 0) {
-    AddLogLine("Could not execute startup code", true);
-    PyErr_Print();
-    Py_Finalize();
-    return false;
-  }
-
-  qLog(Debug) << "Releasing GIL";
-  PyEval_ReleaseLock();
+  scripts_module_ = python_qt->createModuleFromScript(kScriptModulePrefix);
 
   qLog(Debug) << "Python initialisation complete";
   initialised_ = true;
@@ -184,69 +132,10 @@ void PythonEngine::DestroyScript(Script* script) {
   delete script;
 }
 
-void PythonEngine::AddObject(void* object, const _sipTypeDef* type,
-                             const char * name) const {
-  PyObject* python_object = sip_api_->api_convert_from_type(object, type, NULL);
-  PyModule_AddObject(clementine_module_, name, python_object);
+void PythonEngine::PythonStdOut(const QString& str) {
+  manager()->AddLogLine("Python", str, false);
 }
 
-void PythonEngine::AddLogLine(const QString& message, bool error) {
-  manager()->AddLogLine("Python", message, error);
-}
-
-Script* PythonEngine::FindScriptMatchingId(const QString& id) const {
-  foreach (const QString& script_id, loaded_scripts_.keys()) {
-    if (script_id == id || id.startsWith(script_id + ".")) {
-      return loaded_scripts_[script_id];
-    }
-  }
-  return NULL;
-}
-
-void PythonEngine::RegisterNativeObject(QObject* object) {
-  // This function is called from Python, we need to figure out which script
-  // called it, so we look at the __package__ variable in the bottom stack
-  // frame.
-
-  PyFrameObject* frame = PyEval_GetFrame();
-  if (!frame) {
-    qLog(Warning) << "unable to get stack frame";
-    return;
-  }
-  while (frame->f_back) {
-    frame = frame->f_back;
-  }
-
-  PyObject* __package__ = PyMapping_GetItemString(
-      frame->f_globals, const_cast<char*>("__package__"));
-  if (!__package__) {
-    qLog(Warning) << "unable to get __package__";
-    return;
-  }
-
-  QString package = PyString_AsString(__package__);
-  Py_DECREF(__package__);
-  package.remove(QString(kModulePrefix) + ".");
-
-  Script* script = FindScriptMatchingId(package);
-  if (!script) {
-    qLog(Warning) << "unable to find script for package" << package;
-    return;
-  }
-
-  // Finally got the script - tell it about this object so it will get destroyed
-  // when the script is unloaded.
-  script->AddNativeObject(object);
-
-  // Save the script as a property on the object so we can remove it later
-  object->setProperty("owning_python_script", QVariant::fromValue(script));
-  connect(object, SIGNAL(destroyed(QObject*)), SLOT(NativeObjectDestroyed(QObject*)));
-}
-
-void PythonEngine::NativeObjectDestroyed(QObject* object) {
-  Script* script = object->property("owning_python_script").value<Script*>();
-  if (!script || !loaded_scripts_.values().contains(script))
-    return;
-
-  script->RemoveNativeObject(object);
+void PythonEngine::PythonStdErr(const QString& str) {
+  manager()->AddLogLine("Python", str, true);
 }

@@ -37,6 +37,9 @@ endif(HAVE_LIBLASTFM)
 
 if(HAVE_SCRIPTING_PYTHON)
   include_directories(${PYTHON_INCLUDE_DIRS})
+  include_directories(${CMAKE_SOURCE_DIR}/3rdparty/pythonqt/generated_cpp)
+  include_directories(${CMAKE_SOURCE_DIR}/3rdparty/pythonqt/src)
+  add_definitions(-DPYTHONQT_STATIC_LIBRARY)
 endif(HAVE_SCRIPTING_PYTHON)
 
 if(HAVE_BREAKPAD)
@@ -822,23 +825,6 @@ if(HAVE_SCRIPTING_PYTHON)
   list(APPEND HEADERS
     scripting/python/pythonengine.h
   )
-
-  add_sip_binding(SOURCES
-    scripting/python/clementine.sip
-    ${CMAKE_CURRENT_BINARY_DIR}/sipclementineLibraryBackendAlbum.cpp
-    ${CMAKE_CURRENT_BINARY_DIR}/sipclementinePlaylistItemOptions.cpp
-    ${CMAKE_CURRENT_BINARY_DIR}/sipclementinePlaylistItemPtr.cpp
-    ${CMAKE_CURRENT_BINARY_DIR}/sipclementineTaskManagerTask.cpp
-    ${CMAKE_CURRENT_BINARY_DIR}/sipclementineUrlHandlerLoadResult.cpp
-    ${CMAKE_CURRENT_BINARY_DIR}/sipclementineQList0100CoverSearchResult.cpp
-    ${CMAKE_CURRENT_BINARY_DIR}/sipclementineQList0100Directory.cpp
-    ${CMAKE_CURRENT_BINARY_DIR}/sipclementineQList0100LibraryBackendAlbum.cpp
-    ${CMAKE_CURRENT_BINARY_DIR}/sipclementineQList0100PlaylistItemPtr.cpp
-    ${CMAKE_CURRENT_BINARY_DIR}/sipclementineQList0100Song.cpp
-    ${CMAKE_CURRENT_BINARY_DIR}/sipclementineQList0100Subdirectory.cpp
-    ${CMAKE_CURRENT_BINARY_DIR}/sipclementineQList0100TaskManagerTask.cpp
-    ${CMAKE_CURRENT_BINARY_DIR}/sipclementineQList0101Playlist.cpp
-  )
 endif(HAVE_SCRIPTING_PYTHON)
 
 if(HAVE_REMOTE)
@@ -1013,7 +999,7 @@ if(HAVE_LIBINDICATE)
 endif(HAVE_LIBINDICATE)
 
 if(HAVE_SCRIPTING_PYTHON)
-  target_link_libraries(clementine_lib ${PYTHON_LIBRARIES})
+  target_link_libraries(clementine_lib pythonqt)
 endif(HAVE_SCRIPTING_PYTHON)
 
 if(HAVE_REMOTE)
@@ -1126,14 +1112,6 @@ if (APPLE)
 
   install(DIRECTORY "${QT_QTGUI_LIBRARY_RELEASE}/Versions/Current/Resources/"
     DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/Resources")
-
-  if (HAVE_SCRIPTING_PYTHON)
-    install(DIRECTORY "/Library/Python/2.6/site-packages/PyQt4/uic"
-      DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/PlugIns/PyQt4")
-    install(FILES "/Library/Python/2.6/site-packages/PyQt4/__init__.py"
-      DESTINATION "${CMAKE_BINARY_DIR}/clementine.app/Contents/PlugIns/PyQt4")
-  endif (HAVE_SCRIPTING_PYTHON)
-
 
   if (HAVE_SPARKLE)
     install(DIRECTORY "${SPARKLE}/Versions/Current/Resources"

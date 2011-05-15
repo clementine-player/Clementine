@@ -1,0 +1,26 @@
+diff --git a/3rdparty/pythonqt/CMakeLists.txt b/3rdparty/pythonqt/CMakeLists.txt
+index 97849da..9c048f4 100644
+--- a/3rdparty/pythonqt/CMakeLists.txt
++++ b/3rdparty/pythonqt/CMakeLists.txt
+@@ -69,6 +69,8 @@ set(HEADERS
+ 
+ qt4_wrap_cpp(MOC ${HEADERS})
+ 
++add_definitions(-DPYTHONQT_STATIC_LIBRARY)
++
+ add_library(pythonqt STATIC
+   ${SOURCES}
+   ${MOC}
+diff --git a/3rdparty/pythonqt/src/PythonQtSystem.h b/3rdparty/pythonqt/src/PythonQtSystem.h
+index d7131bb..95364c3 100644
+--- a/3rdparty/pythonqt/src/PythonQtSystem.h
++++ b/3rdparty/pythonqt/src/PythonQtSystem.h
+@@ -42,7 +42,7 @@
+ */
+ //----------------------------------------------------------------------------------
+ 
+-#ifdef WIN32
++#if defined(WIN32) && !defined(PYTHONQT_STATIC_LIBRARY)
+ #ifdef PYTHONQT_EXPORTS
+ #define PYTHONQT_EXPORT __declspec(dllexport)
+ #else

@@ -23,8 +23,6 @@
 class PythonEngine;
 class ScriptInfo;
 
-struct _object; // PyObject
-
 class PythonScript : public Script {
 public:
   PythonScript(PythonEngine* engine, const ScriptInfo& info);
@@ -36,6 +34,8 @@ private:
   PythonEngine* engine_;
 
   QString module_name_;
+
+  PythonQtObjectPtr module_;
 };
 
 #endif // PYTHONSCRIPT_H
