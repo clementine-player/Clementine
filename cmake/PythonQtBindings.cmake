@@ -2,19 +2,14 @@ add_custom_target(pythonqt-bindings)
 
 macro(add_pythonqt_bindings)
   parse_arguments(ADD_PYTHONQT_BINDINGS
-    "NAME;HEADERS;TYPESYSTEM"
+    "NAME;HEADER;TYPESYSTEM"
     ""
     ${ARGN}
   )
 
-  set(allheaders_filename ${CMAKE_CURRENT_BINARY_DIR}/pythonqt_headers.h)
+  set(allheaders_filename ${CMAKE_CURRENT_SOURCE_DIR}/${ADD_PYTHONQT_BINDINGS_HEADER})
   set(typesystem_filename ${CMAKE_CURRENT_SOURCE_DIR}/${ADD_PYTHONQT_BINDINGS_TYPESYSTEM})
   set(target_name "pythonqt-bindings-${ADD_PYTHONQT_BINDINGS_NAME}")
-
-  file(WRITE ${allheaders_filename} "")
-  foreach(_header ${ADD_PYTHONQT_BINDINGS_HEADERS})
-    file(APPEND ${allheaders_filename} "#include \"${_header}\"\n")
-  endforeach(_header)
 
   add_custom_target(${target_name}
     pythonqt-generator

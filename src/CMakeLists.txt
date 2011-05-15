@@ -830,10 +830,7 @@ if(HAVE_SCRIPTING_PYTHON)
 
   add_pythonqt_bindings(
     NAME clementine
-    HEADERS
-      core/urlhandler.h
-      radio/radiomodel.h
-      radio/radioservice.h
+    HEADER scripting/python/bindings_includes.h
     TYPESYSTEM scripting/python/typesystem_clementine.xml
   )
 

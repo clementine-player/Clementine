@@ -1,11 +1,15 @@
 #include <PythonQt.h>
 #include <QObject>
 #include <QVariant>
+#include <network.h>
 #include <qabstractitemmodel.h>
+#include <qabstractnetworkcache.h>
 #include <qbytearray.h>
 #include <qcoreevent.h>
 #include <qdatastream.h>
+#include <qiodevice.h>
 #include <qlist.h>
+#include <qnetworkrequest.h>
 #include <qobject.h>
 #include <qpoint.h>
 #include <qsize.h>
@@ -16,6 +20,73 @@
 #include <radiomodel.h>
 #include <radioservice.h>
 #include <urlhandler.h>
+
+
+
+class PythonQtShell_NetworkAccessManager : public NetworkAccessManager
+{
+public:
+    PythonQtShell_NetworkAccessManager(QObject*  parent = 0):NetworkAccessManager(parent),_wrapper(NULL) {};
+
+virtual void childEvent(QChildEvent*  arg__1);
+virtual QNetworkReply*  createRequest(QNetworkAccessManager::Operation  op, const QNetworkRequest&  request, QIODevice*  outgoingData);
+virtual void customEvent(QEvent*  arg__1);
+virtual bool  event(QEvent*  arg__1);
+virtual bool  eventFilter(QObject*  arg__1, QEvent*  arg__2);
+virtual void timerEvent(QTimerEvent*  arg__1);
+
+  PythonQtInstanceWrapper* _wrapper; 
+};
+
+class PythonQtPublicPromoter_NetworkAccessManager : public NetworkAccessManager
+{ public:
+inline QNetworkReply*  promoted_createRequest(QNetworkAccessManager::Operation  op, const QNetworkRequest&  request, QIODevice*  outgoingData) { return NetworkAccessManager::createRequest(op, request, outgoingData); }
+};
+
+class PythonQtWrapper_NetworkAccessManager : public QObject
+{ Q_OBJECT
+public:
+public slots:
+NetworkAccessManager* new_NetworkAccessManager(QObject*  parent = 0);
+void delete_NetworkAccessManager(NetworkAccessManager* obj) { delete obj; } 
+   QNetworkReply*  createRequest(NetworkAccessManager* theWrappedObject, QNetworkAccessManager::Operation  op, const QNetworkRequest&  request, QIODevice*  outgoingData);
+};
+
+
+
+
+
+class PythonQtShell_NetworkTimeouts : public NetworkTimeouts
+{
+public:
+    PythonQtShell_NetworkTimeouts(int  timeout_msec, QObject*  parent = 0):NetworkTimeouts(timeout_msec, parent),_wrapper(NULL) {};
+
+virtual void childEvent(QChildEvent*  arg__1);
+virtual void customEvent(QEvent*  arg__1);
+virtual bool  event(QEvent*  arg__1);
+virtual bool  eventFilter(QObject*  arg__1, QEvent*  arg__2);
+virtual void timerEvent(QTimerEvent*  e);
+
+  PythonQtInstanceWrapper* _wrapper; 
+};
+
+class PythonQtPublicPromoter_NetworkTimeouts : public NetworkTimeouts
+{ public:
+inline void promoted_timerEvent(QTimerEvent*  e) { NetworkTimeouts::timerEvent(e); }
+};
+
+class PythonQtWrapper_NetworkTimeouts : public QObject
+{ Q_OBJECT
+public:
+public slots:
+NetworkTimeouts* new_NetworkTimeouts(int  timeout_msec, QObject*  parent = 0);
+void delete_NetworkTimeouts(NetworkTimeouts* obj) { delete obj; } 
+   void AddReply(NetworkTimeouts* theWrappedObject, QNetworkReply*  reply);
+   void SetTimeout(NetworkTimeouts* theWrappedObject, int  msec);
+   void timerEvent(NetworkTimeouts* theWrappedObject, QTimerEvent*  e);
+};
+
+
 
 
 
@@ -103,6 +174,60 @@ void delete_RadioService(RadioService* obj) { delete obj; }
    void ShowContextMenu(RadioService* theWrappedObject, const QModelIndex&  index, const QPoint&  global_pos);
    RadioModel*  model(RadioService* theWrappedObject) const;
    QString  name(RadioService* theWrappedObject) const;
+};
+
+
+
+
+
+class PythonQtShell_ThreadSafeNetworkDiskCache : public ThreadSafeNetworkDiskCache
+{
+public:
+    PythonQtShell_ThreadSafeNetworkDiskCache(QObject*  parent):ThreadSafeNetworkDiskCache(parent),_wrapper(NULL) {};
+
+virtual qint64  cacheSize() const;
+virtual void childEvent(QChildEvent*  arg__1);
+virtual void clear();
+virtual void customEvent(QEvent*  arg__1);
+virtual QIODevice*  data(const QUrl&  url);
+virtual bool  event(QEvent*  arg__1);
+virtual bool  eventFilter(QObject*  arg__1, QEvent*  arg__2);
+virtual void insert(QIODevice*  device);
+virtual QNetworkCacheMetaData  metaData(const QUrl&  url);
+virtual QIODevice*  prepare(const QNetworkCacheMetaData&  metaData);
+virtual bool  remove(const QUrl&  url);
+virtual void timerEvent(QTimerEvent*  arg__1);
+virtual void updateMetaData(const QNetworkCacheMetaData&  metaData);
+
+  PythonQtInstanceWrapper* _wrapper; 
+};
+
+class PythonQtPublicPromoter_ThreadSafeNetworkDiskCache : public ThreadSafeNetworkDiskCache
+{ public:
+inline qint64  promoted_cacheSize() const { return ThreadSafeNetworkDiskCache::cacheSize(); }
+inline void promoted_clear() { ThreadSafeNetworkDiskCache::clear(); }
+inline QIODevice*  promoted_data(const QUrl&  url) { return ThreadSafeNetworkDiskCache::data(url); }
+inline void promoted_insert(QIODevice*  device) { ThreadSafeNetworkDiskCache::insert(device); }
+inline QNetworkCacheMetaData  promoted_metaData(const QUrl&  url) { return ThreadSafeNetworkDiskCache::metaData(url); }
+inline QIODevice*  promoted_prepare(const QNetworkCacheMetaData&  metaData) { return ThreadSafeNetworkDiskCache::prepare(metaData); }
+inline bool  promoted_remove(const QUrl&  url) { return ThreadSafeNetworkDiskCache::remove(url); }
+inline void promoted_updateMetaData(const QNetworkCacheMetaData&  metaData) { ThreadSafeNetworkDiskCache::updateMetaData(metaData); }
+};
+
+class PythonQtWrapper_ThreadSafeNetworkDiskCache : public QObject
+{ Q_OBJECT
+public:
+public slots:
+ThreadSafeNetworkDiskCache* new_ThreadSafeNetworkDiskCache(QObject*  parent);
+void delete_ThreadSafeNetworkDiskCache(ThreadSafeNetworkDiskCache* obj) { delete obj; } 
+   qint64  cacheSize(ThreadSafeNetworkDiskCache* theWrappedObject) const;
+   void clear(ThreadSafeNetworkDiskCache* theWrappedObject);
+   QIODevice*  data(ThreadSafeNetworkDiskCache* theWrappedObject, const QUrl&  url);
+   void insert(ThreadSafeNetworkDiskCache* theWrappedObject, QIODevice*  device);
+   QNetworkCacheMetaData  metaData(ThreadSafeNetworkDiskCache* theWrappedObject, const QUrl&  url);
+   QIODevice*  prepare(ThreadSafeNetworkDiskCache* theWrappedObject, const QNetworkCacheMetaData&  metaData);
+   bool  remove(ThreadSafeNetworkDiskCache* theWrappedObject, const QUrl&  url);
+   void updateMetaData(ThreadSafeNetworkDiskCache* theWrappedObject, const QNetworkCacheMetaData&  metaData);
 };
 
 
