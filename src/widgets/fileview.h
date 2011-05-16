@@ -59,6 +59,7 @@ class FileView : public QWidget {
  private slots:
   void FileUp();
   void FileHome();
+  void ToggleFilter();
   void ChangeFilePath(const QString& new_path);
   void ItemActivated(const QModelIndex& index);
   void ItemDoubleClick(const QModelIndex& index);
@@ -102,6 +103,8 @@ class FileView : public QWidget {
   boost::shared_ptr<MusicStorage> storage_;
 
   QString lazy_set_path_;
+
+  QStringList filter_list_;
 };
 
 #endif // FILEVIEW_H
