@@ -30,6 +30,7 @@ class CommandlineOptions {
   CommandlineOptions(int argc = 0, char** argv = NULL);
 
   static const char* kHelpText;
+  static const char* kVersionText;
 
   // Don't change the values or order, these get serialised and sent to
   // possibly a different version of Clementine
@@ -85,12 +86,14 @@ class CommandlineOptions {
     Quiet,
     Verbose,
     LogLevels,
+    Version
   };
 
   QString tr(const char* source_text);
   void RemoveArg(const QString& starts_with, int count);
 
  private:
+
   int argc_;
   char** argv_;
 

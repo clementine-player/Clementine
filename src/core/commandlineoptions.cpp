@@ -18,13 +18,16 @@
 #include "config.h"
 #include "commandlineoptions.h"
 #include "logging.h"
+#include "version.h"
 
 #include <cstdlib>
 #include <getopt.h>
 #include <iostream>
 
 #include <QBuffer>
+#include <QCoreApplication>
 #include <QFileInfo>
+
 
 const char* CommandlineOptions::kHelpText =
     "%1: clementine [%2] [%3]\n"
@@ -52,8 +55,11 @@ const char* CommandlineOptions::kHelpText =
     "  -g, --language <lang>     %22\n"
     "      --quiet               %23\n"
     "      --verbose             %24\n"
-    "      --log-levels <levels> %25\n";
+    "      --log-levels <levels> %25\n"
+    "      --version             %26\n";
 
+const char* CommandlineOptions::kVersionText =
+    "Clementine %1";
 
 CommandlineOptions::CommandlineOptions(int argc, char** argv)
   : argc_(argc),
@@ -116,6 +122,7 @@ bool CommandlineOptions::Parse() {
     {"quiet",       no_argument,       0, Quiet},
     {"verbose",     no_argument,       0, Verbose},
     {"log-levels",  required_argument, 0, LogLevels},
+    {"version",     no_argument,       0, Version},
 
     {"stun-test",   required_argument, 0, 'z'},
 
@@ -155,7 +162,8 @@ bool CommandlineOptions::Parse() {
             tr("Change the language"),
             tr("Equivalent to --log-levels *:1"),
             tr("Equivalent to --log-levels *:3"),
-            tr("Comma separated list of class:level, level is 0-3"));
+            tr("Comma separated list of class:level, level is 0-3"),
+            tr("Print out version information"));
 
         std::cout << translated_help_text.toLocal8Bit().constData();
         return false;
@@ -176,7 +184,11 @@ bool CommandlineOptions::Parse() {
       case Quiet:      log_levels_ = "1";             break;
       case Verbose:    log_levels_ = "3";             break;
       case LogLevels:  log_levels_ = QString(optarg); break;
-
+      case Version: {
+        QString version_text = QString(kVersionText).arg(CLEMENTINE_VERSION_DISPLAY);
+        std::cout << version_text.toLocal8Bit().constData() << std::endl;
+        std::exit(0);
+      }
       case 'v':
         set_volume_ = QString(optarg).toInt(&ok);
         if (!ok) set_volume_ = -1;
