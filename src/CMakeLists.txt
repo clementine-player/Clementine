@@ -1158,7 +1158,7 @@ if (APPLE)
     POST_BUILD
     COMMAND
     ${CMAKE_CURRENT_SOURCE_DIR}/../dist/macdeploy.py ${PROJECT_BINARY_DIR}/clementine.app -f
-    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/..
+    WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
   )
 
   add_custom_command(OUTPUT ${PROJECT_BINARY_DIR}/clementine.breakpad
