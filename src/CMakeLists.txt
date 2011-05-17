@@ -1118,6 +1118,11 @@ target_link_libraries(clementine
   clementine_lib
 )
 
+# macdeploy.py relies on the blob being built first.
+if(HAVE_SPOTIFY_BLOB)
+  add_dependencies(clementine clementine-spotifyblob)
+endif(HAVE_SPOTIFY_BLOB)
+
 set_target_properties(clementine PROPERTIES
   MACOSX_BUNDLE_INFO_PLIST "../dist/Info.plist"
 )
