@@ -115,9 +115,9 @@ class PythonQtWrapper_CoverProviders : public QObject
 public:
 public slots:
 void delete_CoverProviders(CoverProviders* obj) { delete obj; } 
-   void AddCoverProviderFactory(CoverProviders* theWrappedObject, CoverProviderFactory*  factory);
+   void AddProviderFactory(CoverProviders* theWrappedObject, CoverProviderFactory*  factory);
    bool  HasAnyProviderFactories(CoverProviders* theWrappedObject);
-   const QList<CoverProvider* >  List(CoverProviders* theWrappedObject, AlbumCoverFetcherSearch*  parent);
+   QList<CoverProvider* >  List(CoverProviders* theWrappedObject, AlbumCoverFetcherSearch*  parent);
    CoverProviders*  static_CoverProviders_instance();
 };
 

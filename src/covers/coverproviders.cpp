@@ -35,17 +35,17 @@ CoverProviders::CoverProviders()
 #endif
 }
 
-void CoverProviders::AddCoverProviderFactory(CoverProviderFactory* factory) {
+void CoverProviders::AddProviderFactory(CoverProviderFactory* factory) {
   {
     QMutexLocker locker(&mutex_);
     Q_UNUSED(locker);
 
     cover_provider_factories_.append(factory);
-    connect(factory, SIGNAL(destroyed()), SLOT(RemoveCoverProviderFactory()));
+    connect(factory, SIGNAL(destroyed()), SLOT(RemoveProviderFactory()));
   }
 }
 
-void CoverProviders::RemoveCoverProviderFactory() {
+void CoverProviders::RemoveProviderFactory() {
   // qobject_cast doesn't work here with factories created by python
   CoverProviderFactory* factory = static_cast<CoverProviderFactory*>(sender());
 
@@ -59,7 +59,7 @@ void CoverProviders::RemoveCoverProviderFactory() {
   }
 }
 
-const QList<CoverProvider*> CoverProviders::List(AlbumCoverFetcherSearch* parent) {
+QList<CoverProvider*> CoverProviders::List(AlbumCoverFetcherSearch* parent) {
   {
     QMutexLocker locker(&mutex_);
     Q_UNUSED(locker);

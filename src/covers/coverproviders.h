@@ -40,7 +40,7 @@ public:
   }
 
   // Let's a cover provider factory to register itself in the repository.
-  void AddCoverProviderFactory(CoverProviderFactory* factory);
+  void AddProviderFactory(CoverProviderFactory* factory);
 
   // Creates a list of cover providers, one for every registered factory. Providers that get created will
   // be children of the given AlbumCoverFetcherSearch's instance.
@@ -51,7 +51,7 @@ public:
   ~CoverProviders() {}
 
 private slots:
-  void RemoveCoverProviderFactory();
+  void RemoveProviderFactory();
 
 private:
   CoverProviders();

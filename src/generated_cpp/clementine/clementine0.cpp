@@ -457,9 +457,9 @@ return new PythonQtShell_CoverProviderFactory(parent); }
 
 
 
-void PythonQtWrapper_CoverProviders::AddCoverProviderFactory(CoverProviders* theWrappedObject, CoverProviderFactory*  factory)
+void PythonQtWrapper_CoverProviders::AddProviderFactory(CoverProviders* theWrappedObject, CoverProviderFactory*  factory)
 {
-  ( theWrappedObject->AddCoverProviderFactory(factory));
+  ( theWrappedObject->AddProviderFactory(factory));
 }
 
 bool  PythonQtWrapper_CoverProviders::HasAnyProviderFactories(CoverProviders* theWrappedObject)
@@ -467,7 +467,7 @@ bool  PythonQtWrapper_CoverProviders::HasAnyProviderFactories(CoverProviders* th
   return ( theWrappedObject->HasAnyProviderFactories());
 }
 
-const QList<CoverProvider* >  PythonQtWrapper_CoverProviders::List(CoverProviders* theWrappedObject, AlbumCoverFetcherSearch*  parent)
+QList<CoverProvider* >  PythonQtWrapper_CoverProviders::List(CoverProviders* theWrappedObject, AlbumCoverFetcherSearch*  parent)
 {
   return ( theWrappedObject->List(parent));
 }
