@@ -1,5 +1,6 @@
 include_directories(
   ${CMAKE_SOURCE_DIR}/src/core
+  ${CMAKE_SOURCE_DIR}/src/covers
   ${CMAKE_SOURCE_DIR}/src/radio
   ${CMAKE_CURRENT_SOURCE_DIR}/clementine
   ${PYTHON_INCLUDE_DIRS}

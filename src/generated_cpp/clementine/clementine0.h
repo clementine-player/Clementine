@@ -1,12 +1,18 @@
 #include <PythonQt.h>
 #include <QObject>
 #include <QVariant>
+#include <albumcoverfetcher.h>
+#include <albumcoverfetchersearch.h>
+#include <coverprovider.h>
+#include <coverproviderfactory.h>
+#include <coverproviders.h>
 #include <network.h>
 #include <qabstractitemmodel.h>
 #include <qabstractnetworkcache.h>
 #include <qbytearray.h>
 #include <qcoreevent.h>
 #include <qdatastream.h>
+#include <qimage.h>
 #include <qiodevice.h>
 #include <qlist.h>
 #include <qnetworkrequest.h>
@@ -20,6 +26,134 @@
 #include <radiomodel.h>
 #include <radioservice.h>
 #include <urlhandler.h>
+
+
+
+class PythonQtShell_AlbumCoverFetcherSearch : public AlbumCoverFetcherSearch
+{
+public:
+
+virtual void childEvent(QChildEvent*  arg__1);
+virtual void customEvent(QEvent*  arg__1);
+virtual bool  event(QEvent*  arg__1);
+virtual bool  eventFilter(QObject*  arg__1, QEvent*  arg__2);
+virtual void timerEvent(QTimerEvent*  arg__1);
+
+  PythonQtInstanceWrapper* _wrapper; 
+};
+
+class PythonQtWrapper_AlbumCoverFetcherSearch : public QObject
+{ Q_OBJECT
+public:
+public slots:
+void delete_AlbumCoverFetcherSearch(AlbumCoverFetcherSearch* obj) { delete obj; } 
+   void Start(AlbumCoverFetcherSearch* theWrappedObject);
+};
+
+
+
+
+
+class PythonQtShell_CoverProvider : public CoverProvider
+{
+public:
+    PythonQtShell_CoverProvider(const QString&  name, QObject*  parent = &CoverProviders::instance()):CoverProvider(name, parent),_wrapper(NULL) {};
+
+virtual CoverSearchResults  ParseReply(QNetworkReply*  reply);
+virtual QNetworkReply*  SendRequest(const QString&  query);
+virtual void childEvent(QChildEvent*  arg__1);
+virtual void customEvent(QEvent*  arg__1);
+virtual bool  event(QEvent*  arg__1);
+virtual bool  eventFilter(QObject*  arg__1, QEvent*  arg__2);
+virtual void timerEvent(QTimerEvent*  arg__1);
+
+  PythonQtInstanceWrapper* _wrapper; 
+};
+
+class PythonQtWrapper_CoverProvider : public QObject
+{ Q_OBJECT
+public:
+public slots:
+CoverProvider* new_CoverProvider(const QString&  name, QObject*  parent = &CoverProviders::instance());
+void delete_CoverProvider(CoverProvider* obj) { delete obj; } 
+   QString  name(CoverProvider* theWrappedObject) const;
+};
+
+
+
+
+
+class PythonQtShell_CoverProviderFactory : public CoverProviderFactory
+{
+public:
+    PythonQtShell_CoverProviderFactory(QObject*  parent = &CoverProviders::instance()):CoverProviderFactory(parent),_wrapper(NULL) {};
+
+virtual CoverProvider*  CreateCoverProvider(AlbumCoverFetcherSearch*  parent);
+virtual void childEvent(QChildEvent*  arg__1);
+virtual void customEvent(QEvent*  arg__1);
+virtual bool  event(QEvent*  arg__1);
+virtual bool  eventFilter(QObject*  arg__1, QEvent*  arg__2);
+virtual void timerEvent(QTimerEvent*  arg__1);
+
+  PythonQtInstanceWrapper* _wrapper; 
+};
+
+class PythonQtWrapper_CoverProviderFactory : public QObject
+{ Q_OBJECT
+public:
+public slots:
+CoverProviderFactory* new_CoverProviderFactory(QObject*  parent = &CoverProviders::instance());
+void delete_CoverProviderFactory(CoverProviderFactory* obj) { delete obj; } 
+};
+
+
+
+
+
+class PythonQtWrapper_CoverProviders : public QObject
+{ Q_OBJECT
+public:
+public slots:
+void delete_CoverProviders(CoverProviders* obj) { delete obj; } 
+   void AddCoverProviderFactory(CoverProviders* theWrappedObject, CoverProviderFactory*  factory);
+   bool  HasAnyProviderFactories(CoverProviders* theWrappedObject);
+   const QList<CoverProvider* >  List(CoverProviders* theWrappedObject, AlbumCoverFetcherSearch*  parent);
+   CoverProviders*  static_CoverProviders_instance();
+};
+
+
+
+
+
+class PythonQtWrapper_CoverSearchResults : public QObject
+{ Q_OBJECT
+public:
+public slots:
+CoverSearchResults* new_CoverSearchResults();
+CoverSearchResults* new_CoverSearchResults(const CoverSearchResults& other) {
+CoverSearchResults* a = new CoverSearchResults();
+*((CoverSearchResults*)a) = other;
+return a; }
+void delete_CoverSearchResults(CoverSearchResults* obj) { delete obj; } 
+   void clear(CoverSearchResults* theWrappedObject);
+   int  count(CoverSearchResults* theWrappedObject) const;
+   void detachShared(CoverSearchResults* theWrappedObject);
+   bool  empty(CoverSearchResults* theWrappedObject) const;
+   bool  isEmpty(CoverSearchResults* theWrappedObject) const;
+   int  length(CoverSearchResults* theWrappedObject) const;
+   void move(CoverSearchResults* theWrappedObject, int  from, int  to);
+   void pop_back(CoverSearchResults* theWrappedObject);
+   void pop_front(CoverSearchResults* theWrappedObject);
+   void removeAt(CoverSearchResults* theWrappedObject, int  i);
+   void removeFirst(CoverSearchResults* theWrappedObject);
+   void removeLast(CoverSearchResults* theWrappedObject);
+   void reserve(CoverSearchResults* theWrappedObject, int  size);
+   void setSharable(CoverSearchResults* theWrappedObject, bool  sharable);
+   int  size(CoverSearchResults* theWrappedObject) const;
+   void swap(CoverSearchResults* theWrappedObject, int  i, int  j);
+};
+
+
 
 
 

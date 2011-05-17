@@ -54,7 +54,7 @@ void AlbumCoverFetcherSearch::TerminateSearch() {
 }
 
 void AlbumCoverFetcherSearch::Start() {
-  QList<CoverProvider*> providers_list = CoverProviders::instance().List();
+  QList<CoverProvider*> providers_list = CoverProviders::instance().List(this);
   providers_left_ = providers_list.size();
 
   // end this search before it even began if there are no providers...

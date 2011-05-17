@@ -21,11 +21,13 @@
 #include <QMutex>
 #include <QObject>
 
+class AlbumCoverFetcherSearch;
 class CoverProvider;
+class CoverProviderFactory;
 
-// This is a singleton, a global repository for cover providers. Each one of those has to register
-// with CoverProviders instance by invoking "CoverProviders::instance().AddCoverProvider(this)".
-// Providers are automatically unregistered from the repository when they are deleted.
+// This is a singleton, a global repository for factories of cover providers. Each one of those has to register 
+// with CoverProviders' instance by invoking "CoverProviders::instance().AddCoverProviderFactory(this)".
+// Factories are automatically unregistered from the repository when they are deleted. 
 // The class is thread safe except for the initialization.
 class CoverProviders : public QObject {
   Q_OBJECT
@@ -37,25 +39,26 @@ public:
       return instance_;
   }
 
-  // Let's a cover provider to register itself in the repository.
-  void AddCoverProvider(CoverProvider* provider);
+  // Let's a cover provider factory to register itself in the repository.
+  void AddCoverProviderFactory(CoverProviderFactory* factory);
 
-  // Returns a list of the currently registered cover providers.
-  const QList<CoverProvider*> List();
-  // Returns true if this repository has at least one registered provider.
-  bool HasAnyProviders() { return !List().isEmpty(); }
+  // Creates a list of cover providers, one for every registered factory. Providers that get created will
+  // be children of the given AlbumCoverFetcherSearch's instance.
+  QList<CoverProvider*> List(AlbumCoverFetcherSearch* parent);
+  // Returns true if this repository has at least one registered provider factory.
+  bool HasAnyProviderFactories() { return !cover_provider_factories_.isEmpty(); }
 
   ~CoverProviders() {}
 
 private slots:
-  void RemoveCoverProvider();
+  void RemoveCoverProviderFactory();
 
 private:
   CoverProviders();
   CoverProviders(CoverProviders const&);
   void operator=(CoverProviders const&);
 
-  QList<CoverProvider*> cover_providers_;
+  QList<CoverProviderFactory*> cover_provider_factories_;
   QMutex mutex_;
 };
 

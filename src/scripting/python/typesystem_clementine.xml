@@ -9,8 +9,17 @@
   <enum-type name="RadioService::AddMode" />
   <enum-type name="UrlHandler::LoadResult::Type" />
 
+  <value-type name="CoverSearchResults" />
   <value-type name="UrlHandler::LoadResult" />
 
+  <object-type name="AlbumCoverFetcherSearch">
+    <modify-function signature="timerEvent(QTimerEvent*)">
+      <remove/>
+    </modify-function>
+  </object-type>
+  <object-type name="CoverProvider" />
+  <object-type name="CoverProviderFactory" />
+  <object-type name="CoverProviders" />
   <object-type name="NetworkAccessManager" />
   <object-type name="NetworkTimeouts">
     <modify-function signature="timerEvent(QTimerEvent*)">

@@ -379,7 +379,7 @@ void NowPlayingWidget::contextMenuEvent(QContextMenuEvent* e) {
   // initial 'enabled' values depending on the kitty mode
   album_cover_choice_controller_->cover_from_file_action()->setEnabled(!aww_);
   album_cover_choice_controller_->cover_from_url_action()->setEnabled(!aww_);
-  album_cover_choice_controller_->search_for_cover_action()->setEnabled(!aww_ && CoverProviders::instance().HasAnyProviders());
+  album_cover_choice_controller_->search_for_cover_action()->setEnabled(!aww_ && CoverProviders::instance().HasAnyProviderFactories());
   album_cover_choice_controller_->unset_cover_action()->setEnabled(!aww_);
   album_cover_choice_controller_->show_cover_action()->setEnabled(!aww_);
 

@@ -98,6 +98,7 @@ set(SOURCES
   covers/albumcoverloader.cpp
   covers/artloader.cpp
   covers/coverprovider.cpp
+  covers/coverproviderfactory.cpp
   covers/coverproviders.cpp
   covers/kittenloader.cpp
 
@@ -319,6 +320,7 @@ set(HEADERS
   covers/albumcoverloader.h
   covers/artloader.h
   covers/coverprovider.h
+  covers/coverproviderfactory.h
   covers/coverproviders.h
   covers/kittenloader.h
 
@@ -600,6 +602,7 @@ endif(ENABLE_VISUALISATIONS)
 if(HAVE_LIBLASTFM)
   list(APPEND SOURCES
     covers/lastfmcoverprovider.cpp
+    covers/lastfmcoverproviderfactory.cpp
     radio/fixlastfm.cpp
     radio/lastfmconfig.cpp
     radio/lastfmservice.cpp
@@ -612,6 +615,7 @@ if(HAVE_LIBLASTFM)
   )
   list(APPEND HEADERS
     covers/lastfmcoverprovider.h
+    covers/lastfmcoverproviderfactory.h
     radio/lastfmconfig.h
     radio/lastfmservice.h
     radio/lastfmstationdialog.h

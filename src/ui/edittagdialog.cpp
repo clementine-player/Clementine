@@ -430,7 +430,7 @@ void EditTagDialog::UpdateSummaryTab(const Song& song) {
   else
     ui_->filename->setText(song.url().toString());
 
-  album_cover_choice_controller_->search_for_cover_action()->setEnabled(CoverProviders::instance().HasAnyProviders());
+  album_cover_choice_controller_->search_for_cover_action()->setEnabled(CoverProviders::instance().HasAnyProviderFactories());
 }
 
 void EditTagDialog::UpdateStatisticsTab(const Song& song) {

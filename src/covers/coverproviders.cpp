@@ -16,54 +16,58 @@
 */
 
 #include "config.h"
-#include "coverprovider.h"
+#include "coverproviderfactory.h"
 #include "coverproviders.h"
 
 #ifdef HAVE_LIBLASTFM
-# include "lastfmcoverprovider.h"
+# include "lastfmcoverproviderfactory.h"
 #endif
 
 CoverProviders::CoverProviders()
 {
-   // registering built-in providers...
+   // registering built-in provider factories...
 
-   // every built-in provider needs an explicit parent; otherwise,
+   // every built-in provider factory needs an explicit parent; otherwise,
    // the default parent, namely CoverProviders::instance(), will 
    // cause an infinite recursion here
 #ifdef HAVE_LIBLASTFM
-   cover_providers_.append(new LastFmCoverProvider(this));
+   cover_provider_factories_.append(new LastFmCoverProviderFactory(this));
 #endif
 }
 
-void CoverProviders::AddCoverProvider(CoverProvider* provider) {
+void CoverProviders::AddCoverProviderFactory(CoverProviderFactory* factory) {
   {
     QMutexLocker locker(&mutex_);
     Q_UNUSED(locker);
 
-    cover_providers_.append(provider);
-    connect(provider, SIGNAL(destroyed()), SLOT(RemoveCoverProvider()));
+    cover_provider_factories_.append(factory);
+    connect(factory, SIGNAL(destroyed()), SLOT(RemoveCoverProviderFactory()));
   }
 }
 
-void CoverProviders::RemoveCoverProvider() {
-  // qobject_cast doesn't work here with providers created by python
-  CoverProvider* provider = static_cast<CoverProvider*>(sender());
+void CoverProviders::RemoveCoverProviderFactory() {
+  // qobject_cast doesn't work here with factories created by python
+  CoverProviderFactory* factory = static_cast<CoverProviderFactory*>(sender());
 
-  if (provider) {
+  if (factory) {
     {
       QMutexLocker locker(&mutex_);
       Q_UNUSED(locker);
 
-      cover_providers_.removeAll(provider);
+      cover_provider_factories_.removeAll(factory);
     }
   }
 }
 
-const QList<CoverProvider*> CoverProviders::List() {
+const QList<CoverProvider*> CoverProviders::List(AlbumCoverFetcherSearch* parent) {
   {
     QMutexLocker locker(&mutex_);
     Q_UNUSED(locker);
 
-    return QList<CoverProvider*>(cover_providers_);
+    QList<CoverProvider*> result;
+    foreach(CoverProviderFactory* factory, cover_provider_factories_) {
+        result.append(factory->CreateCoverProvider(parent));
+    }
+    return result;
   }
 }

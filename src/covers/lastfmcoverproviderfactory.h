@@ -15,17 +15,24 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef BINDINGS_INCLUDES_H
-#define BINDINGS_INCLUDES_H
+#ifndef LASTFMCOVERPROVIDERFACTORY_H
+#define LASTFMCOVERPROVIDERFACTORY_H
 
-#include "core/network.h"
-#include "core/urlhandler.h"
-#include "covers/albumcoverfetcher.h"
-#include "covers/albumcoverfetchersearch.h"
-#include "covers/coverprovider.h"
-#include "covers/coverproviderfactory.h"
-#include "covers/coverproviders.h"
-#include "radio/radiomodel.h"
-#include "radio/radioservice.h"
+#include "coverproviderfactory.h"
 
-#endif // BINDINGS_INCLUDES_H
+#include <QObject>
+
+class AlbumCoverFetcherSearch;
+class CoverProvider;
+
+class LastFmCoverProviderFactory : public CoverProviderFactory {
+  Q_OBJECT
+
+public:
+  LastFmCoverProviderFactory(QObject* parent);
+  ~LastFmCoverProviderFactory() {}
+
+  CoverProvider* CreateCoverProvider(AlbumCoverFetcherSearch* parent);
+};
+
+#endif // LASTFMCOVERPROVIDERFACTORY_H
