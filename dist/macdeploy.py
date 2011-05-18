@@ -21,6 +21,7 @@ import subprocess
 import sys
 
 FRAMEWORK_SEARCH_PATH=[
+    '/target',
     '/Library/Frameworks',
     os.path.join(os.environ['HOME'], 'Library/Frameworks')
 ]
