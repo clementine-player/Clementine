@@ -543,11 +543,6 @@ void PythonQtWrapper_CoverSearchResults::removeLast(CoverSearchResults* theWrapp
   ( theWrappedObject->removeLast());
 }
 
-void PythonQtWrapper_CoverSearchResults::reserve(CoverSearchResults* theWrappedObject, int  size)
-{
-  ( theWrappedObject->reserve(size));
-}
-
 void PythonQtWrapper_CoverSearchResults::setSharable(CoverSearchResults* theWrappedObject, bool  sharable)
 {
   ( theWrappedObject->setSharable(sharable));

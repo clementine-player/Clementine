@@ -147,7 +147,6 @@ void delete_CoverSearchResults(CoverSearchResults* obj) { delete obj; }
    void removeAt(CoverSearchResults* theWrappedObject, int  i);
    void removeFirst(CoverSearchResults* theWrappedObject);
    void removeLast(CoverSearchResults* theWrappedObject);
-   void reserve(CoverSearchResults* theWrappedObject, int  size);
    void setSharable(CoverSearchResults* theWrappedObject, bool  sharable);
    int  size(CoverSearchResults* theWrappedObject) const;
    void swap(CoverSearchResults* theWrappedObject, int  i, int  j);
