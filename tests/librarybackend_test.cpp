@@ -288,10 +288,10 @@ TEST_F(SingleSong, DeleteSongs) {
   EXPECT_EQ("Title", songs_deleted[0].title());
   EXPECT_EQ(1, songs_deleted[0].id());
 
-  // Check we can't retreive that song any more
+  // Check the song is marked as deleted.
   Song song = backend_->GetSongById(1);
-  EXPECT_FALSE(song.is_valid());
-  EXPECT_EQ(-1, song.id());
+  EXPECT_TRUE(song.is_valid());
+  EXPECT_TRUE(song.is_unavailable());
 
   // And the artist or album shouldn't show up either
   QStringList artists = backend_->GetAllArtists();
