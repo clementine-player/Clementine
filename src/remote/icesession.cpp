@@ -18,7 +18,7 @@ ICESession::ICESession(QObject* parent)
 }
 
 
-bool ICESession::Init() {
+bool ICESession::Init(Direction direction) {
   // Create instance.
   pj_ice_strans_cb ice_cb;
   pj_bzero(&ice_cb, sizeof(ice_cb));
@@ -41,7 +41,9 @@ bool ICESession::Init() {
   }
 
   // TODO
-  pj_ice_sess_role role = PJ_ICE_SESS_ROLE_CONTROLLING;
+  pj_ice_sess_role role = direction == DirectionControlling
+      ? PJ_ICE_SESS_ROLE_CONTROLLING
+      : PJ_ICE_SESS_ROLE_CONTROLLED;
 
   status = pj_ice_strans_init_ice(ice_instance_, role, NULL, NULL);
 
@@ -161,7 +163,8 @@ void ICESession::OnReceiveData(pj_ice_strans* ice_st,
                                pj_size_t size,
                                const pj_sockaddr_t* src_addr,
                                unsigned src_addr_len) {
-  qDebug() << "Received data";
+  QByteArray data((const char*)pkt, size);
+  qDebug() << "Received data" << data;
 }
 
 void ICESession::OnICEComplete(pj_ice_strans* ice_st,
@@ -174,9 +177,14 @@ void ICESession::OnICEComplete(pj_ice_strans* ice_st,
       op_name = "initialisation";
       me->InitialisationComplete(status);
       break;
-    case PJ_ICE_STRANS_OP_NEGOTIATION:
+    case PJ_ICE_STRANS_OP_NEGOTIATION: {
       op_name = "negotation";
+      const char* data = "Hello, World!";
+      pj_sockaddr addr;
+      pj_getdefaultipinterface(pj_AF_INET(), &addr);
+      pj_ice_strans_sendto(ice_st, me->component_id_, data, strlen(data), &addr, sizeof(addr));
       break;
+    }
     default:
       op_name = "unknown";
   }
@@ -240,7 +248,13 @@ int ICESession::WorkerThread(void*) {
   return 0;
 }
 
+void ICESession::PJLog(int level, const char* data, int len) {
+  //qLog(Debug) << QByteArray(data, len);
+}
+
 void ICESession::StaticInit() {
+  //pj_log_set_log_func(&PJLog);
+
   pj_init();
   pjlib_util_init();
   pjnath_init();
@@ -265,17 +279,15 @@ void ICESession::StaticInit() {
 }
 
 QDebug operator<< (QDebug dbg, const xrme::SIPInfo& session) {
-  dbg.nospace() << "fragment:" << session.user_fragment << "\n";
-  dbg.nospace() << "password:" << session.password << "\n";
+  dbg.nospace() << session.user_fragment.toAscii().constData() << ":"
+                << session.password.toAscii().constData() << ":";
 
-  foreach (const xrme::SIPInfo::Candidate& c, session.candidates) {
-    dbg.space() << "Candidate:" << "\n";
-    dbg.space() << c.address.toString() << ":" << c.port << "\n";
-    dbg.space() << "type:" << c.type << "\n";
-    dbg.space() << "component:"  << c.component << "\n";
-    dbg.space() << "priority:" << c.priority << "\n";
-    dbg.space() << "foundation:" << c.foundation << "\n";
-  }
-
+  const xrme::SIPInfo::Candidate& c = session.candidates[0];
+  dbg.nospace() << c.address.toString().toAscii().constData() << ":"
+                << c.port << ":"
+                << c.type.toAscii().constData() << ":"
+                << c.component << ":"
+                << c.priority << ":"
+                << c.foundation.toAscii().constData();
   return dbg.space();
 }

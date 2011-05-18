@@ -211,7 +211,7 @@ int main(int argc, char *argv[]) {
   qRegisterMetaType<GstEnginePipeline*>("GstEnginePipeline*");
 
 #ifdef HAVE_REMOTE
-  qRegisterMetaType<xrme::SIPInfo>("SIPInfo");
+  qRegisterMetaType<xrme::SIPInfo>("xrme::SIPInfo");
 #endif
 
 #ifdef HAVE_LIBLASTFM
@@ -255,50 +255,39 @@ int main(int argc, char *argv[]) {
 
     ICESession::StaticInit();
     ICESession ice;
-    ice.Init();
+    ice.Init(options.stun_test() == CommandlineOptions::StunTestOffer
+             ? ICESession::DirectionControlling
+             : ICESession::DirectionControlled);
 
     QEventLoop loop;
     QObject::connect(&ice,
-        SIGNAL(CandidatesAvailable(const SessionInfo&)),
+        SIGNAL(CandidatesAvailable(const xrme::SIPInfo&)),
         &loop, SLOT(quit()));
     loop.exec();
 
     const xrme::SIPInfo& candidates = ice.candidates();
     qDebug() << candidates;
 
-    QFile file;
-    file.open(stdin, QIODevice::ReadOnly);
-    QTextStream in(&file);
+    QString sip_info;
+    {
+      QFile file;
+      file.open(stdin, QIODevice::ReadOnly);
+      QTextStream in(&file);
+      in >> sip_info;
+    }
+    QStringList sip_components = sip_info.split(':');
 
     xrme::SIPInfo remote_session;
-    qDebug() << "fragment";
-    in >> remote_session.user_fragment;
-    qDebug() << "password";
-    in >> remote_session.password;
+    remote_session.user_fragment = sip_components[0];
+    remote_session.password = sip_components[1];
 
     xrme::SIPInfo::Candidate cand;
-    QString address;
-    qDebug() << "address";
-    in >> address;
-    cand.address = address;
-    qDebug() << "port";
-    in >> cand.port;
-    QString type;
-    qDebug() << "type";
-    in >> type;
-    if (type == "host") {
-      cand.type = PJ_ICE_CAND_TYPE_HOST;
-    } else if (type == "srflx") {
-      cand.type = PJ_ICE_CAND_TYPE_SRFLX;
-    } else if (type == "prflx") {
-      cand.type = PJ_ICE_CAND_TYPE_PRFLX;
-    }
-    qDebug() << "component";
-    in >> cand.component;
-    qDebug() << "priority";
-    in >> cand.priority;
-    qDebug() << "foundation";
-    in >> cand.foundation;
+    cand.address = sip_components[2];
+    cand.port = sip_components[3].toUShort();
+    cand.type = sip_components[4];
+    cand.component = sip_components[5].toInt();
+    cand.priority = sip_components[6].toInt();
+    cand.foundation = sip_components[7];
 
     remote_session.candidates << cand;
 

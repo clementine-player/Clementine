@@ -122,7 +122,6 @@ void Remote::Previous() {
 
 xrme::State Remote::state() const {
   const Playlist* active = player_->playlists()->active();
-  const Engine::State state = player_->GetState();
   const PlaylistItemPtr current_item = player_->GetCurrentItem();
 
   xrme::State ret;
@@ -130,7 +129,7 @@ xrme::State Remote::state() const {
   ret.can_go_previous = active->previous_row() != -1;
   ret.can_seek = current_item && !current_item->Metadata().is_stream();
 
-  switch (state) {
+  switch (player_->GetState()) {
     case Engine::Playing: ret.playback_state = xrme::State::PlaybackState_Playing; break;
     case Engine::Paused:  ret.playback_state = xrme::State::PlaybackState_Paused;  break;
     case Engine::Idle:

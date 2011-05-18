@@ -1,6 +1,7 @@
 #ifndef ICESESSION_H
 #define ICESESSION_H
 
+#include <pj/addr_resolv.h>
 #include <pjlib.h>
 #include <pjlib-util.h>
 #include <pjnath.h>
@@ -15,10 +16,15 @@
 class ICESession : public QObject {
   Q_OBJECT
  public:
+  enum Direction {
+    DirectionControlling = 0,
+    DirectionControlled,
+  };
+
   explicit ICESession(QObject* parent = 0);
 
   static void StaticInit();
-  bool Init();
+  bool Init(Direction direction);
 
   const xrme::SIPInfo& candidates() const { return candidates_; }
 
@@ -35,6 +41,7 @@ class ICESession : public QObject {
 
   void InitialisationComplete(pj_status_t status);
 
+  static void PJLog(int level, const char* data, int len);
 
   static int HandleEvents(unsigned max_msec, unsigned* p_count);
   static int WorkerThread(void*);
