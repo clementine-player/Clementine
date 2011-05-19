@@ -2,8 +2,8 @@ import clementine
 
 from servicebase import DigitallyImportedServiceBase
 
-from PyQt4.QtCore    import QSettings, QString, QUrl
-from PyQt4.QtNetwork import QNetworkCookie, QNetworkCookieJar, QNetworkRequest
+from PythonQt.QtCore    import QSettings, QUrl
+from PythonQt.QtNetwork import QNetworkCookie, QNetworkCookieJar, QNetworkRequest
 
 import re
 
@@ -30,8 +30,8 @@ class SkyFmService(DigitallyImportedServiceBase):
     {"premium": True,  "url": "http://listen.sky.fm/premium_wma/%s.asx?hash=%s"},
   ]
 
-  def __init__(self, model):
-    DigitallyImportedServiceBase.__init__(self, model)
+  def __init__(self, model, settings_dialog_callback):
+    DigitallyImportedServiceBase.Init(self, model, settings_dialog_callback)
 
     self.last_key = None
 
@@ -48,7 +48,7 @@ class SkyFmService(DigitallyImportedServiceBase):
       QUrl.toPercentEncoding(self.password))
 
     reply = self.network.post(request, postdata)
-    reply.finished.connect(self.LoadHashKeyFinished)
+    reply.connect("finished()", self.LoadHashKeyFinished)
 
     self.last_key = key
 
@@ -58,7 +58,7 @@ class SkyFmService(DigitallyImportedServiceBase):
     reply.deleteLater()
 
     # Parse the hashKey out of the reply
-    data = QString.fromUtf8(reply.readAll())
+    data = reply.readAll()
     match = self.HASHKEY_RE.search(data)
 
     if match:
@@ -82,5 +82,5 @@ class SkyFmService(DigitallyImportedServiceBase):
 
     # Start fetching the playlist.  Can't use a SongLoader to do this because
     # we have to use the cookies we set in ReloadSettings()
-    reply = self.network.get(QNetworkRequest(QUrl(playlist_url)))
-    reply.finished.connect(self.LoadPlaylistFinished)
+    self.load_station_reply = self.network.get(QNetworkRequest(QUrl(playlist_url)))
+    self.load_station_reply.connect("finished()", self.LoadPlaylistFinished)

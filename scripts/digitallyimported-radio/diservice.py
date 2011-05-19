@@ -2,8 +2,8 @@ import clementine
 
 from servicebase import DigitallyImportedServiceBase
 
-from PyQt4.QtCore    import QSettings, QUrl
-from PyQt4.QtNetwork import QNetworkCookie, QNetworkCookieJar, QNetworkRequest
+from PythonQt.QtCore    import QSettings, QUrl
+from PythonQt.QtNetwork import QNetworkCookie, QNetworkCookieJar, QNetworkRequest
 
 class DigitallyImportedService(DigitallyImportedServiceBase):
   HOMEPAGE_URL = QUrl("http://www.di.fm/")
@@ -26,8 +26,8 @@ class DigitallyImportedService(DigitallyImportedServiceBase):
     {"premium": True,  "url": "http://www.di.fm/listen/%s/128k.asx"},
   ]
 
-  def __init__(self, model):
-    DigitallyImportedServiceBase.__init__(self, model)
+  def __init__(self, model, settings_dialog_callback):
+    DigitallyImportedServiceBase.Init(self, model, settings_dialog_callback)
 
   def ReloadSettings(self):
     DigitallyImportedServiceBase.ReloadSettings(self)
@@ -48,5 +48,5 @@ class DigitallyImportedService(DigitallyImportedServiceBase):
 
     # Start fetching the playlist.  Can't use a SongLoader to do this because
     # we have to use the cookies we set in ReloadSettings()
-    reply = self.network.get(QNetworkRequest(QUrl(playlist_url)))
-    reply.finished.connect(self.LoadPlaylistFinished)
+    self.load_station_reply = self.network.get(QNetworkRequest(QUrl(playlist_url)))
+    self.load_station_reply.connect("finished()", self.LoadPlaylistFinished)

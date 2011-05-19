@@ -1,10 +1,10 @@
 import clementine
 
-from PyQt4.QtCore    import QSettings, QUrl
-from PyQt4.QtGui     import QAction, QDesktopServices, QIcon, QMenu, \
-                            QStandardItem
-from PyQt4.QtNetwork import QNetworkRequest
-import PyQt4.QtCore
+import PythonQt
+from PythonQt.QtCore    import QSettings, QUrl
+from PythonQt.QtGui     import QAction, QDesktopServices, QIcon, QMenu, \
+                               QStandardItem
+from PythonQt.QtNetwork import QNetworkRequest
 
 import json
 import operator
@@ -23,7 +23,7 @@ class DigitallyImportedUrlHandler(clementine.UrlHandler):
     return self.url_scheme
 
   def StartLoading(self, original_url):
-    result = clementine.UrlHandler.LoadResult()
+    result = clementine.UrlHandler_LoadResult()
 
     if self.task_id is not None:
       return result
@@ -41,7 +41,7 @@ class DigitallyImportedUrlHandler(clementine.UrlHandler):
     # Tell the user what's happening
     self.task_id = clementine.task_manager.StartTask(self.tr("Loading stream"))
 
-    result.type_ = clementine.UrlHandler.LoadResult.WillLoadAsynchronously
+    result.type_ = clementine.UrlHandler_LoadResult.WillLoadAsynchronously
     result.original_url_ = original_url
     return result
 
@@ -64,11 +64,11 @@ class DigitallyImportedUrlHandler(clementine.UrlHandler):
       self.service.StreamError.emit("Error loading playlist '%s'" % reply.url().toString())
       return
 
-    result = clementine.UrlHandler.LoadResult()
+    result = clementine.UrlHandler_LoadResult()
     result.original_url_ = self.last_original_url
 
     # Take the first track in the playlist
-    result.type_ = clementine.UrlHandler.LoadResult.TrackAvailable
+    result.type_ = clementine.UrlHandler_LoadResult.TrackAvailable
     result.media_url_ = songs[0].url()
 
     self.AsyncLoadComplete.emit(result)
@@ -87,10 +87,10 @@ class DigitallyImportedServiceBase(clementine.RadioService):
 
   SETTINGS_GROUP = "digitally_imported"
 
-  SettingsDialogRequested = PyQt4.QtCore.pyqtSignal()
-
-  def __init__(self, model):
+  def Init(self, model, settings_dialog_callback):
     clementine.RadioService.__init__(self, self.SERVICE_NAME, model)
+
+    self.settings_dialog_callback = settings_dialog_callback
 
     self.url_handler = DigitallyImportedUrlHandler(self.URL_SCHEME, self)
     clementine.player.RegisterUrlHandler(self.url_handler)
@@ -106,6 +106,9 @@ class DigitallyImportedServiceBase(clementine.RadioService):
     self.menu = None
     self.root = None
     self.task_id = None
+    self.refresh_streams_reply = None
+    self.load_station_reply = None
+    self.items = []
 
     self.ReloadSettings()
 
@@ -113,9 +116,9 @@ class DigitallyImportedServiceBase(clementine.RadioService):
     settings = QSettings()
     settings.beginGroup(self.SETTINGS_GROUP)
 
-    self.audio_type = int(settings.value("audio_type", 0).toPyObject())
-    self.username = unicode(settings.value("username", "").toPyObject().toUtf8())
-    self.password = unicode(settings.value("password", "").toPyObject().toUtf8())
+    self.audio_type = int(settings.value("audio_type", 0))
+    self.username = unicode(settings.value("username", ""))
+    self.password = unicode(settings.value("password", ""))
 
   def CreateRootItem(self):
     self.root = QStandardItem(QIcon(os.path.join(self.path, self.ICON_FILENAME)),
@@ -142,7 +145,7 @@ class DigitallyImportedServiceBase(clementine.RadioService):
       self.menu.addSeparator()
 
       self.menu.addAction(clementine.IconLoader.Load("configure"),
-        self.tr("Configure..."), self.SettingsDialogRequested.emit)
+        self.tr("Configure..."), self.settings_dialog_callback())
 
     self.context_index = index
     self.menu.popup(global_pos)
@@ -158,15 +161,17 @@ class DigitallyImportedServiceBase(clementine.RadioService):
       return
 
     # Request the list of stations
-    reply = self.network.get(QNetworkRequest(self.STREAM_LIST_URL))
-    reply.finished.connect(self.RefreshStreamsFinished)
+    self.refresh_streams_reply = self.network.get(QNetworkRequest(self.STREAM_LIST_URL))
+    self.refresh_streams_reply.connect("finished()", self.RefreshStreamsFinished)
 
     # Give the user some indication that we're doing something
     self.task_id = clementine.task_manager.StartTask(self.tr("Getting streams"))
 
   def RefreshStreamsFinished(self):
-    # Get the QNetworkReply that called this slot
-    reply = self.sender()
+    if self.refresh_streams_reply is None:
+      return
+
+    reply = self.refresh_streams_reply
     reply.deleteLater()
 
     if self.task_id is None:
@@ -189,16 +194,20 @@ class DigitallyImportedServiceBase(clementine.RadioService):
       self.root.removeRows(0, self.root.rowCount())
 
     for stream in streams:
+      print stream
       song = clementine.Song()
       song.set_title(stream["name"])
       song.set_artist(self.SERVICE_DESCRIPTION)
       song.set_url(QUrl("%s://%s" % (self.URL_SCHEME, stream["key"])))
 
       item = QStandardItem(QIcon(":last.fm/icon_radio.png"), stream["name"])
-      item.setData(stream["description"], PyQt4.QtCore.Qt.ToolTipRole)
+      item.setData(stream["description"], PythonQt.QtCore.Qt.ToolTipRole)
       item.setData(clementine.RadioModel.PlayBehaviour_SingleItem, clementine.RadioModel.Role_PlayBehaviour)
       item.setData(song, clementine.RadioModel.Role_SongMetadata)
       self.root.appendRow(item)
+
+      # Keep references to the items otherwise Python will delete them
+      self.items.append(item)
 
   def playlistitem_options(self):
     return clementine.PlaylistItem.Options(clementine.PlaylistItem.PauseDisabled)
@@ -207,4 +216,4 @@ class DigitallyImportedServiceBase(clementine.RadioService):
     raise NotImplementedError()
 
   def LoadPlaylistFinished(self):
-    self.url_handler.LoadPlaylistFinished(self.sender())
+    self.url_handler.LoadPlaylistFinished(self.load_station_reply)
