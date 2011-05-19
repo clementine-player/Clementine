@@ -14,7 +14,7 @@ pj_pool_t* ICESession::sPool;
 pj_thread_t* ICESession::sThread;
 
 ICESession::ICESession(QObject* parent)
-    : QObject(parent) {
+    : QIODevice(parent) {
 }
 
 
@@ -160,6 +160,22 @@ void ICESession::StartNegotiation(const xrme::SIPInfo& session) {
   }
 }
 
+qint64 ICESession::readData(char* data, qint64 max_size) {
+  QByteArray ret = receive_buffer_.left(max_size);
+  receive_buffer_ = receive_buffer_.mid(ret.size());
+  memcpy(data, ret.constData(), ret.size());
+  return ret.size();
+}
+
+qint64 ICESession::writeData(const char* data, qint64 max_size) {
+  // This address should never actually be used.
+  pj_sockaddr addr;
+  pj_getdefaultipinterface(pj_AF_INET(), &addr);
+
+  pj_status_t ret = pj_ice_strans_sendto(
+      ice_instance_, component_id_, data, max_size, &addr, sizeof(addr));
+  return ret == PJ_SUCCESS ? max_size : -1;
+}
 
 void ICESession::OnReceiveData(pj_ice_strans* ice_st,
                                unsigned comp_id,
@@ -167,8 +183,11 @@ void ICESession::OnReceiveData(pj_ice_strans* ice_st,
                                pj_size_t size,
                                const pj_sockaddr_t* src_addr,
                                unsigned src_addr_len) {
+  ICESession* me = reinterpret_cast<ICESession*>(pj_ice_strans_get_user_data(ice_st));
   QByteArray data((const char*)pkt, size);
   qDebug() << "Received data" << data;
+
+  me->receive_buffer_.append(data);
 }
 
 void ICESession::OnICEComplete(pj_ice_strans* ice_st,

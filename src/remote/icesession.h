@@ -8,12 +8,13 @@
 
 #include <QHostAddress>
 #include <QList>
+#include <QIODevice>
 #include <QtDebug>
 
 #include <xrme/connection.h>
 
 
-class ICESession : public QObject {
+class ICESession : public QIODevice {
   Q_OBJECT
  public:
   enum Direction {
@@ -30,6 +31,10 @@ class ICESession : public QObject {
 
   void StartNegotiation(const xrme::SIPInfo& session);
 
+ protected:
+  virtual qint64 readData(char* data, qint64 max_size);
+  virtual qint64 writeData(const char* data, qint64 max_size);
+
  signals:
   void CandidatesAvailable(const xrme::SIPInfo& candidates);
 
@@ -38,6 +43,8 @@ class ICESession : public QObject {
   int component_id_;
 
   xrme::SIPInfo candidates_;
+
+  QByteArray receive_buffer_;
 
   void InitialisationComplete(pj_status_t status);
 
