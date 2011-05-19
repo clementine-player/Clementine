@@ -36,7 +36,7 @@ DeviceKitLister::DeviceKitLister()
 }
 
 DeviceKitLister::~DeviceKitLister() {
-  qDebug() << __PRETTY_FUNCTION__;
+  qLog(Debug) << __PRETTY_FUNCTION__;
 }
 
 QString DeviceKitLister::DeviceData::unique_id() const {
