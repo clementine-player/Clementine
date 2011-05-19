@@ -32,7 +32,9 @@ class Database;
 namespace smart_playlists { class Search; }
 
 class LibraryBackendInterface : public QObject {
- public:
+  Q_OBJECT
+
+public:
   LibraryBackendInterface(QObject* parent = 0) : QObject(parent) {}
   virtual ~LibraryBackendInterface() {}
 

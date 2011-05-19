@@ -15,24 +15,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef BINDINGS_INCLUDES_H
-#define BINDINGS_INCLUDES_H
+#include "objectdecorators.h"
 
-#include "core/player.h"
-#include "core/network.h"
-#include "core/song.h"
-#include "core/taskmanager.h"
-#include "core/urlhandler.h"
-#include "covers/albumcoverfetcher.h"
-#include "covers/albumcoverfetchersearch.h"
-#include "covers/coverprovider.h"
-#include "covers/coverproviderfactory.h"
-#include "covers/coverproviders.h"
-#include "engines/enginebase.h"
-#include "library/librarybackend.h"
-#include "library/libraryquery.h"
-#include "playlistparsers/playlistparser.h"
-#include "radio/radiomodel.h"
-#include "radio/radioservice.h"
-
-#endif // BINDINGS_INCLUDES_H
+void ObjectDecorators::deleteLater(QObject* self) {
+  self->deleteLater();
+}

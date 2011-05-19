@@ -3,13 +3,25 @@
   <load-typesystem name="typesystem_gui.xml" generate="no" />
   <load-typesystem name="typesystem_network.xml" generate="no" />
 
+  <enum-type name="Engine::State" />
+  <enum-type name="QueryOptions::QueryMode" />
   <enum-type name="RadioModel::PlayBehaviour" />
   <enum-type name="RadioModel::Role" />
   <enum-type name="RadioModel::Type" />
   <enum-type name="RadioService::AddMode" />
+  <enum-type name="Song::FileType" />
   <enum-type name="UrlHandler::LoadResult::Type" />
 
+
   <value-type name="CoverSearchResults" />
+  <value-type name="Directory" />
+  <value-type name="LibraryBackendInterface::Album" />
+  <value-type name="QueryOptions" />
+  <value-type name="Song">
+    <modify-function signature="BackgroundSave()const" remove="all" />
+  </value-type>
+  <value-type name="Subdirectory" />
+  <value-type name="TaskManager::Task" />
   <value-type name="UrlHandler::LoadResult" />
 
   <object-type name="AlbumCoverFetcherSearch">
@@ -20,14 +32,21 @@
   <object-type name="CoverProvider" />
   <object-type name="CoverProviderFactory" />
   <object-type name="CoverProviders" />
+  <object-type name="Engine::Base" />
+  <object-type name="LibraryBackend" />
+  <object-type name="LibraryBackendInterface" />
+  <object-type name="LibraryQuery">
+    <modify-function signature="operator const QSqlQuery&amp;()const" remove="all" />
+  </object-type>
   <object-type name="NetworkAccessManager" />
   <object-type name="NetworkTimeouts">
-    <modify-function signature="timerEvent(QTimerEvent*)">
-      <remove/>
-    </modify-function>
+    <modify-function signature="timerEvent(QTimerEvent*)" remove="all" />
   </object-type>
+  <object-type name="Player" />
+  <object-type name="PlaylistParser" />
   <object-type name="RadioModel" />
   <object-type name="RadioService" />
+  <object-type name="TaskManager" />
   <object-type name="ThreadSafeNetworkDiskCache" />
   <object-type name="UrlHandler" />
 </typesystem>

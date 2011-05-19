@@ -38,15 +38,35 @@ bool PythonScript::Init() {
   engine_->manager()->AddLogLine("Python",
       "Loading script file \"" + info().script_file() + "\"", false);
 
-  // Load the script
-  module_ = PythonQt::self()->createModuleFromFile(module_name_, info().script_file());
-  if (!module_) {
-    engine_->manager()->AddLogLine("Python", "Failed to create module for script", true);
-    return false;
-  }
+  PythonQt* python_qt = PythonQt::self();
+
+  // Create a module for the script
+  module_ = python_qt->createModuleFromScript(module_name_);
+
+  // Set __path__ - don't use PythonQtObjectPtr::addVariable because it sets
+  // it as a tuple instead of a list.
+  PyObject* __path__ = PyList_New(1);
+  PyList_SetItem(__path__, 0, PyString_FromString(info().path().toLocal8Bit().constData()));
+  PyModule_AddObject(module_, "__path__", __path__);
 
   // Set script object
   module_.addObject("script", interface());
+
+  // Eval the script
+  PythonQtObjectPtr code = python_qt->parseFile(info().script_file());
+  if (code) {
+    PyObject* dict = PyModule_GetDict(module_);
+    PyObject* r = PyEval_EvalCode((PyCodeObject*)code.object(), dict, dict);
+    if (r) {
+      Py_DECREF(r);
+    }
+  }
+
+  if (PyErr_Occurred()) {
+    PythonQt::self()->handleError();
+    engine_->manager()->AddLogLine("Python", "Failed to create module for script", true);
+    return false;
+  }
 
   return true;
 }

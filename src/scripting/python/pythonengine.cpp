@@ -21,6 +21,7 @@
 #include <com_trolltech_qt_network/com_trolltech_qt_network_init.h>
 #include <com_trolltech_qt_uitools/com_trolltech_qt_uitools_init.h>
 
+#include "objectdecorators.h"
 #include "pythonengine.h"
 #include "pythonscript.h"
 #include "core/logging.h"
@@ -83,6 +84,7 @@ bool PythonEngine::EnsureInitialised() {
 
   PythonQt* python_qt = PythonQt::self();
   python_qt->installDefaultImporter();
+  python_qt->addDecorators(new ObjectDecorators);
 
   connect(python_qt, SIGNAL(pythonStdOut(QString)), SLOT(PythonStdOut(QString)));
   connect(python_qt, SIGNAL(pythonStdErr(QString)), SLOT(PythonStdErr(QString)));

@@ -194,6 +194,7 @@ int main(int argc, char *argv[]) {
   qRegisterMetaType<SubdirectoryList>("SubdirectoryList");
   qRegisterMetaType<Song>("Song");
   qRegisterMetaType<SongList>("SongList");
+  qRegisterMetaType<QList<Song> >("QList<Song>");
   qRegisterMetaType<PlaylistItemList>("PlaylistItemList");
   qRegisterMetaType<Engine::State>("Engine::State");
   qRegisterMetaType<Engine::SimpleMetaBundle>("Engine::SimpleMetaBundle");

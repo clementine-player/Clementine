@@ -822,12 +822,14 @@ endif(APPLE)
 
 if(HAVE_SCRIPTING_PYTHON)
   list(APPEND SOURCES
+    scripting/python/objectdecorators.cpp
     scripting/python/pythonconsole.cpp
     scripting/python/pythonengine.cpp
     scripting/python/pythonscript.cpp
   )
 
   list(APPEND HEADERS
+    scripting/python/objectdecorators.h
     scripting/python/pythonconsole.h
     scripting/python/pythonengine.h
   )
