@@ -847,12 +847,14 @@ if(HAVE_REMOTE)
     remote/portforwarder.h
     remote/remote.h
     remote/remoteconfig.h
+    remote/streampipeline.h
   )
   list(APPEND SOURCES
     remote/icesession.cpp
     remote/portforwarder.h
     remote/remote.cpp
     remote/remoteconfig.cpp
+    remote/streampipeline.cpp
   )
 endif(HAVE_REMOTE)
 
@@ -973,6 +975,7 @@ target_link_libraries(clementine_lib
   ${QT_LIBRARIES}
   ${GSTREAMER_BASE_LIBRARIES}
   ${GSTREAMER_LIBRARIES}
+  ${GSTREAMER_APP_LIBRARIES}
   ${QTSINGLEAPPLICATION_LIBRARIES}
   ${QTSINGLECOREAPPLICATION_LIBRARIES}
   ${QTIOCOMPRESSOR_LIBRARIES}

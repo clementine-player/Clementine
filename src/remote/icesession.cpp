@@ -188,6 +188,7 @@ void ICESession::OnReceiveData(pj_ice_strans* ice_st,
   qDebug() << "Received data" << data;
 
   me->receive_buffer_.append(data);
+  emit me->readyRead();
 }
 
 void ICESession::OnICEComplete(pj_ice_strans* ice_st,
@@ -206,6 +207,7 @@ void ICESession::OnICEComplete(pj_ice_strans* ice_st,
       pj_sockaddr addr;
       pj_getdefaultipinterface(pj_AF_INET(), &addr);
       pj_ice_strans_sendto(ice_st, me->component_id_, data, strlen(data), &addr, sizeof(addr));
+      emit me->Connected();
       break;
     }
     default:

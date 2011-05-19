@@ -136,7 +136,7 @@ bool GstEngine::Init() {
     SetEnv("GST_REGISTRY", registry_filename);
   }
 
-  initialising_ = QtConcurrent::run(this, &GstEngine::InitialiseGstreamer);
+  initialising_ = QtConcurrent::run(&GstEngine::InitialiseGstreamer);
 
   return true;
 }

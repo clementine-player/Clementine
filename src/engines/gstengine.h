@@ -67,6 +67,7 @@ class GstEngine : public Engine::Base, public BufferConsumer {
 
   bool Init();
   void EnsureInitialised() { initialising_.waitForFinished(); }
+  static void InitialiseGstreamer();
 
   int AddBackgroundStream(const QUrl& url);
   void StopBackgroundStream(int id);
@@ -130,7 +131,6 @@ class GstEngine : public Engine::Base, public BufferConsumer {
 
   static void SetEnv(const char* key, const QString& value);
   PluginDetailsList GetPluginList(const QString& classname) const;
-  void InitialiseGstreamer();
 
   void StartFadeout();
 
@@ -196,4 +196,3 @@ class GstEngine : public Engine::Base, public BufferConsumer {
 
 
 #endif /*AMAROK_GSTENGINE_H*/
-

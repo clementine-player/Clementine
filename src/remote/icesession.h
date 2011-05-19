@@ -37,6 +37,7 @@ class ICESession : public QIODevice {
 
  signals:
   void CandidatesAvailable(const xrme::SIPInfo& candidates);
+  void Connected();
 
  private:
   pj_ice_strans* ice_instance_;
