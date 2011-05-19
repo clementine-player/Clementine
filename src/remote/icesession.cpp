@@ -79,9 +79,9 @@ pj_ice_cand_type CandidateStringToType(const QString& type) {
 }
 
 void ICESession::InitialisationComplete(pj_status_t status) {
-  int candidates = pj_ice_strans_get_cands_count(ice_instance_, component_id_);
+  unsigned int candidates = pj_ice_strans_get_cands_count(ice_instance_, component_id_);
   pj_ice_sess_cand cand[candidates];
-  pj_ice_strans_get_def_cand(ice_instance_, component_id_, &cand[0]);
+  pj_ice_strans_enum_cands(ice_instance_, component_id_, &candidates, &cand[0]);
 
   pj_str_t ufrag;
   pj_str_t pwd;
@@ -91,6 +91,10 @@ void ICESession::InitialisationComplete(pj_status_t status) {
   candidates_.password = QString::fromAscii(pwd.ptr, pwd.slen);
 
   for (int i = 0; i < candidates; ++i) {
+    if (!pj_sockaddr_has_addr(&cand[i].addr)) {
+      continue;
+    }
+
     int port = pj_sockaddr_get_port(&cand[i].addr);
     char ipaddr[PJ_INET6_ADDRSTRLEN];
     pj_sockaddr_print(&cand[i].addr, ipaddr, sizeof(ipaddr), 0);
