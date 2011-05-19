@@ -1,0 +1,52 @@
+diff --git a/3rdparty/pythonqt/src/PythonQtConversion.cpp b/3rdparty/pythonqt/src/PythonQtConversion.cpp
+index 0fbe291..7ea97c4 100644
+--- a/3rdparty/pythonqt/src/PythonQtConversion.cpp
++++ b/3rdparty/pythonqt/src/PythonQtConversion.cpp
+@@ -519,8 +519,13 @@ void* PythonQtConv::ConvertPythonToQt(const PythonQtMethodInfo::ParameterInfo& i
+        {
+          QByteArray bytes = PyObjGetBytes(obj, strict, ok);
+          if (ok) {
+-           PythonQtValueStorage_ADD_VALUE_IF_NEEDED(alreadyAllocatedCPPObject,global_variantStorage, QVariant, QVariant(bytes), ptr);
+-           ptr = (void*)((QVariant*)ptr)->constData();
++           if (alreadyAllocatedCPPObject) {
++             ptr = alreadyAllocatedCPPObject;
++             *reinterpret_cast<QByteArray*>(alreadyAllocatedCPPObject) = bytes;
++           } else {
++             PythonQtValueStorage_ADD_VALUE_IF_NEEDED(alreadyAllocatedCPPObject,global_variantStorage, QVariant, QVariant(bytes), ptr);
++             ptr = (void*)((QVariant*)ptr)->constData();
++           }
+          }
+        }
+        break;
+@@ -528,8 +533,13 @@ void* PythonQtConv::ConvertPythonToQt(const PythonQtMethodInfo::ParameterInfo& i
+        {
+          QString str = PyObjGetString(obj, strict, ok);
+          if (ok) {
+-           PythonQtValueStorage_ADD_VALUE_IF_NEEDED(alreadyAllocatedCPPObject,global_variantStorage, QVariant, QVariant(str), ptr);
+-           ptr = (void*)((QVariant*)ptr)->constData();
++           if (alreadyAllocatedCPPObject) {
++             ptr = alreadyAllocatedCPPObject;
++             *reinterpret_cast<QString*>(alreadyAllocatedCPPObject) = str;
++           } else {
++             PythonQtValueStorage_ADD_VALUE_IF_NEEDED(alreadyAllocatedCPPObject,global_variantStorage, QVariant, QVariant(str), ptr);
++             ptr = (void*)((QVariant*)ptr)->constData();
++           }
+          }
+        }
+        break;
+@@ -537,8 +547,13 @@ void* PythonQtConv::ConvertPythonToQt(const PythonQtMethodInfo::ParameterInfo& i
+        {
+          QStringList l = PyObjToStringList(obj, strict, ok);
+          if (ok) {
+-           PythonQtValueStorage_ADD_VALUE_IF_NEEDED(alreadyAllocatedCPPObject,global_variantStorage, QVariant, QVariant(l), ptr);
+-           ptr = (void*)((QVariant*)ptr)->constData();
++           if (alreadyAllocatedCPPObject) {
++             ptr = alreadyAllocatedCPPObject;
++             *reinterpret_cast<QStringList*>(alreadyAllocatedCPPObject) = l;
++           } else {
++             PythonQtValueStorage_ADD_VALUE_IF_NEEDED(alreadyAllocatedCPPObject,global_variantStorage, QVariant, QVariant(l), ptr);
++             ptr = (void*)((QVariant*)ptr)->constData();
++           }
+          }
+        }
+        break;

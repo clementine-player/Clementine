@@ -275,7 +275,9 @@ PyObject *PythonQtClassWrapper__init__(PythonQtClassWrapper *type, PyObject *arg
     if (PyObject_TypeCheck(self, (PyTypeObject*)type->classInfo()->pythonQtClassWrapper())) {
       PyObject* newargs = PyTuple_New(argc-1);
       for (int i = 0;i<argc-1; i++) {
-        PyTuple_SET_ITEM(newargs, i,PyTuple_GET_ITEM(args, i+1));
+        PyObject* item = PyTuple_GET_ITEM(args, i+1);
+        Py_INCREF(item);
+        PyTuple_SET_ITEM(newargs, i, item);
       }
       PythonQtInstanceWrapper* wrapper = (PythonQtInstanceWrapper*)self;
       int result = PythonQtInstanceWrapper_init(wrapper, newargs, NULL);
