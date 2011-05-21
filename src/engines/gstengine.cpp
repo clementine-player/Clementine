@@ -766,9 +766,9 @@ void GstEngine::RemoveBufferConsumer(BufferConsumer *consumer) {
 
 int GstEngine::AddBackgroundStream(shared_ptr<GstEnginePipeline> pipeline) {
   // We don't want to get metadata messages or end notifications.
-  disconnect(pipeline.get(), SIGNAL(MetadataFound(Engine::SimpleMetaBundle)), this, 0);
-  disconnect(pipeline.get(), SIGNAL(EndOfStreamReached(bool)), this, 0);
-  connect(pipeline.get(), SIGNAL(EndOfStreamReached(bool)), SLOT(BackgroundStreamFinished()));
+  disconnect(pipeline.get(), SIGNAL(MetadataFound(int,Engine::SimpleMetaBundle)), this, 0);
+  disconnect(pipeline.get(), SIGNAL(EndOfStreamReached(int,bool)), this, 0);
+  connect(pipeline.get(), SIGNAL(EndOfStreamReached(int,bool)), SLOT(BackgroundStreamFinished()));
 
   const int stream_id = next_background_stream_id_++;
   background_streams_[stream_id] = pipeline;
