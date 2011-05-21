@@ -16,6 +16,7 @@
 */
 
 #include <Python.h>
+#include <PythonQtConversion.h>
 #include <com_trolltech_qt_core/com_trolltech_qt_core_init.h>
 #include <com_trolltech_qt_gui/com_trolltech_qt_gui_init.h>
 #include <com_trolltech_qt_network/com_trolltech_qt_network_init.h>
@@ -25,6 +26,7 @@
 #include "pythonengine.h"
 #include "pythonscript.h"
 #include "core/logging.h"
+#include "core/song.h"
 #include "core/player.h"
 #include "core/taskmanager.h"
 #include "covers/coverproviders.h"
@@ -85,6 +87,20 @@ bool PythonEngine::EnsureInitialised() {
   PythonQt* python_qt = PythonQt::self();
   python_qt->installDefaultImporter();
   python_qt->addDecorators(new ObjectDecorators);
+
+  PythonQtConv::registerMetaTypeToPythonConverter(qMetaTypeId<SongList>(),
+      PythonQtConvertListOfValueTypeToPythonList<SongList, Song>);
+  PythonQtConv::registerMetaTypeToPythonConverter(QMetaType::type("QList<Song>"),
+      PythonQtConvertListOfValueTypeToPythonList<SongList, Song>);
+  PythonQtConv::registerMetaTypeToPythonConverter(qMetaTypeId<DirectoryList>(),
+      PythonQtConvertListOfValueTypeToPythonList<DirectoryList, Directory>);
+
+  PythonQtConv::registerPythonToMetaTypeConverter(qMetaTypeId<SongList>(),
+      PythonQtConvertPythonListToListOfValueType<SongList, Song>);
+  PythonQtConv::registerPythonToMetaTypeConverter(QMetaType::type("QList<Song>"),
+      PythonQtConvertPythonListToListOfValueType<SongList, Song>);
+  PythonQtConv::registerPythonToMetaTypeConverter(qMetaTypeId<DirectoryList>(),
+      PythonQtConvertPythonListToListOfValueType<DirectoryList, Directory>);
 
   connect(python_qt, SIGNAL(pythonStdOut(QString)), SLOT(PythonStdOut(QString)));
   connect(python_qt, SIGNAL(pythonStdErr(QString)), SLOT(PythonStdErr(QString)));
