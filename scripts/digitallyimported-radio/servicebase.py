@@ -29,7 +29,7 @@ class DigitallyImportedUrlHandler(clementine.UrlHandler):
       return result
     if self.service.PLAYLISTS[self.service.audio_type]["premium"] and \
        (len(self.service.username) == 0 or len(self.service.password) == 0):
-      self.service.StreamError.emit(self.tr("You have selected a Premium-only audio type but do not have any account details entered"))
+      self.service.StreamError(self.tr("You have selected a Premium-only audio type but do not have any account details entered"))
       return result
 
     key = original_url.host()
@@ -61,7 +61,7 @@ class DigitallyImportedUrlHandler(clementine.UrlHandler):
 
     # Failed to get the playlist?
     if len(songs) == 0:
-      self.service.StreamError.emit("Error loading playlist '%s'" % reply.url().toString())
+      self.service.StreamError("Error loading playlist '%s'" % reply.url().toString())
       return
 
     result = clementine.UrlHandler_LoadResult()
@@ -71,7 +71,7 @@ class DigitallyImportedUrlHandler(clementine.UrlHandler):
     result.type_ = clementine.UrlHandler_LoadResult.TrackAvailable
     result.media_url_ = songs[0].url()
 
-    self.AsyncLoadComplete.emit(result)
+    self.AsyncLoadComplete(result)
 
 
 class DigitallyImportedServiceBase(clementine.RadioService):

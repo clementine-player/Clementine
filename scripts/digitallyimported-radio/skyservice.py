@@ -66,7 +66,7 @@ class SkyFmService(DigitallyImportedServiceBase):
     else:
       clementine.task_manager.SetTaskFinished(self.task_id)
       self.task_id = None
-      self.StreamError.emit(self.tr("Invalid SKY.fm username or password"))
+      self.StreamError(self.tr("Invalid SKY.fm username or password"))
       return
 
     # Now we can load the playlist
