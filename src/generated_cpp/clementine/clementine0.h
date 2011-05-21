@@ -67,7 +67,7 @@ class PythonQtShell_CoverProvider : public CoverProvider
 public:
     PythonQtShell_CoverProvider(const QString&  name, QObject*  parent = &CoverProviders::instance()):CoverProvider(name, parent),_wrapper(NULL) {};
 
-virtual CoverSearchResults  ParseReply(QNetworkReply*  reply);
+virtual QList<CoverSearchResult >  ParseReply(QNetworkReply*  reply);
 virtual QNetworkReply*  SendRequest(const QString&  query);
 virtual void childEvent(QChildEvent*  arg__1);
 virtual void customEvent(QEvent*  arg__1);
@@ -133,31 +133,29 @@ void delete_CoverProviders(CoverProviders* obj) { delete obj; }
 
 
 
-class PythonQtWrapper_CoverSearchResults : public QObject
+class PythonQtShell_CoverSearchResult : public CoverSearchResult
+{
+public:
+    PythonQtShell_CoverSearchResult():CoverSearchResult(),_wrapper(NULL) {};
+
+
+  PythonQtInstanceWrapper* _wrapper; 
+};
+
+class PythonQtWrapper_CoverSearchResult : public QObject
 { Q_OBJECT
 public:
 public slots:
-CoverSearchResults* new_CoverSearchResults();
-CoverSearchResults* new_CoverSearchResults(const CoverSearchResults& other) {
-CoverSearchResults* a = new CoverSearchResults();
-*((CoverSearchResults*)a) = other;
+CoverSearchResult* new_CoverSearchResult();
+CoverSearchResult* new_CoverSearchResult(const CoverSearchResult& other) {
+PythonQtShell_CoverSearchResult* a = new PythonQtShell_CoverSearchResult();
+*((CoverSearchResult*)a) = other;
 return a; }
-void delete_CoverSearchResults(CoverSearchResults* obj) { delete obj; } 
-   void clear(CoverSearchResults* theWrappedObject);
-   int  count(CoverSearchResults* theWrappedObject) const;
-   void detachShared(CoverSearchResults* theWrappedObject);
-   bool  empty(CoverSearchResults* theWrappedObject) const;
-   bool  isEmpty(CoverSearchResults* theWrappedObject) const;
-   int  length(CoverSearchResults* theWrappedObject) const;
-   void move(CoverSearchResults* theWrappedObject, int  from, int  to);
-   void pop_back(CoverSearchResults* theWrappedObject);
-   void pop_front(CoverSearchResults* theWrappedObject);
-   void removeAt(CoverSearchResults* theWrappedObject, int  i);
-   void removeFirst(CoverSearchResults* theWrappedObject);
-   void removeLast(CoverSearchResults* theWrappedObject);
-   void setSharable(CoverSearchResults* theWrappedObject, bool  sharable);
-   int  size(CoverSearchResults* theWrappedObject) const;
-   void swap(CoverSearchResults* theWrappedObject, int  i, int  j);
+void delete_CoverSearchResult(CoverSearchResult* obj) { delete obj; } 
+void py_set_description(CoverSearchResult* theWrappedObject, QString  description){ theWrappedObject->description = description; }
+QString  py_get_description(CoverSearchResult* theWrappedObject){ return theWrappedObject->description; }
+void py_set_image_url(CoverSearchResult* theWrappedObject, QString  image_url){ theWrappedObject->image_url = image_url; }
+QString  py_get_image_url(CoverSearchResult* theWrappedObject){ return theWrappedObject->image_url; }
 };
 
 

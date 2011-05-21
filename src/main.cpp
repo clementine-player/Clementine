@@ -37,6 +37,7 @@
 #include "core/song.h"
 #include "core/taskmanager.h"
 #include "core/utilities.h"
+#include "covers/albumcoverfetcher.h"
 #include "covers/artloader.h"
 #include "covers/coverproviders.h"
 #include "engines/enginebase.h"
@@ -188,6 +189,8 @@ int main(int argc, char *argv[]) {
   g_type_init();
   g_set_application_name(QCoreApplication::applicationName().toLocal8Bit());
 
+  qRegisterMetaType<CoverSearchResult>("CoverSearchResult");
+  qRegisterMetaType<CoverSearchResults>("CoverSearchResults");
   qRegisterMetaType<Directory>("Directory");
   qRegisterMetaType<DirectoryList>("DirectoryList");
   qRegisterMetaType<Subdirectory>("Subdirectory");

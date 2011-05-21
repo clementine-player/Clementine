@@ -148,15 +148,15 @@ void PythonQtWrapper_AlbumCoverFetcherSearch::Start(AlbumCoverFetcherSearch* the
 
 
 
-CoverSearchResults  PythonQtShell_CoverProvider::ParseReply(QNetworkReply*  reply)
+QList<CoverSearchResult >  PythonQtShell_CoverProvider::ParseReply(QNetworkReply*  reply)
 {
 if (_wrapper) {
   PyObject* obj = PyObject_GetAttrString((PyObject*)_wrapper, "ParseReply");
   PyErr_Clear();
   if (obj && !PythonQtSlotFunction_Check(obj)) {
-    static const char* argumentList[] ={"CoverSearchResults" , "QNetworkReply*"};
+    static const char* argumentList[] ={"QList<CoverSearchResult >" , "QNetworkReply*"};
     static const PythonQtMethodInfo* methodInfo = PythonQtMethodInfo::getCachedMethodInfoFromArgumentList(2, argumentList);
-      CoverSearchResults returnValue;
+      QList<CoverSearchResult > returnValue;
     void* args[2] = {NULL, (void*)&reply};
     PyObject* result = PythonQtSignalTarget::call(obj, methodInfo, args, true);
     if (result) {
@@ -165,7 +165,7 @@ if (_wrapper) {
         if (args[0]==NULL) {
           PythonQt::priv()->handleVirtualOverloadReturnError("ParseReply", methodInfo, result);
         } else {
-          returnValue = *((CoverSearchResults*)args[0]);
+          returnValue = *((QList<CoverSearchResult >*)args[0]);
         }
       }
     }
@@ -174,7 +174,7 @@ if (_wrapper) {
     return returnValue;
   }
 }
-  return CoverSearchResults();
+  return QList<CoverSearchResult >();
 }
 QNetworkReply*  PythonQtShell_CoverProvider::SendRequest(const QString&  query)
 {
@@ -485,84 +485,9 @@ CoverProviders*  PythonQtWrapper_CoverProviders::static_CoverProviders_instance(
 
 
 
-CoverSearchResults* PythonQtWrapper_CoverSearchResults::new_CoverSearchResults()
+CoverSearchResult* PythonQtWrapper_CoverSearchResult::new_CoverSearchResult()
 { 
-return new CoverSearchResults(); }
-
-void PythonQtWrapper_CoverSearchResults::clear(CoverSearchResults* theWrappedObject)
-{
-  ( theWrappedObject->clear());
-}
-
-int  PythonQtWrapper_CoverSearchResults::count(CoverSearchResults* theWrappedObject) const
-{
-  return ( theWrappedObject->count());
-}
-
-void PythonQtWrapper_CoverSearchResults::detachShared(CoverSearchResults* theWrappedObject)
-{
-  ( theWrappedObject->detachShared());
-}
-
-bool  PythonQtWrapper_CoverSearchResults::empty(CoverSearchResults* theWrappedObject) const
-{
-  return ( theWrappedObject->empty());
-}
-
-bool  PythonQtWrapper_CoverSearchResults::isEmpty(CoverSearchResults* theWrappedObject) const
-{
-  return ( theWrappedObject->isEmpty());
-}
-
-int  PythonQtWrapper_CoverSearchResults::length(CoverSearchResults* theWrappedObject) const
-{
-  return ( theWrappedObject->length());
-}
-
-void PythonQtWrapper_CoverSearchResults::move(CoverSearchResults* theWrappedObject, int  from, int  to)
-{
-  ( theWrappedObject->move(from, to));
-}
-
-void PythonQtWrapper_CoverSearchResults::pop_back(CoverSearchResults* theWrappedObject)
-{
-  ( theWrappedObject->pop_back());
-}
-
-void PythonQtWrapper_CoverSearchResults::pop_front(CoverSearchResults* theWrappedObject)
-{
-  ( theWrappedObject->pop_front());
-}
-
-void PythonQtWrapper_CoverSearchResults::removeAt(CoverSearchResults* theWrappedObject, int  i)
-{
-  ( theWrappedObject->removeAt(i));
-}
-
-void PythonQtWrapper_CoverSearchResults::removeFirst(CoverSearchResults* theWrappedObject)
-{
-  ( theWrappedObject->removeFirst());
-}
-
-void PythonQtWrapper_CoverSearchResults::removeLast(CoverSearchResults* theWrappedObject)
-{
-  ( theWrappedObject->removeLast());
-}
-
-void PythonQtWrapper_CoverSearchResults::setSharable(CoverSearchResults* theWrappedObject, bool  sharable)
-{
-  ( theWrappedObject->setSharable(sharable));
-}
-
-int  PythonQtWrapper_CoverSearchResults::size(CoverSearchResults* theWrappedObject) const
-{
-  return ( theWrappedObject->size());
-}
-
-void PythonQtWrapper_CoverSearchResults::swap(CoverSearchResults* theWrappedObject, int  i, int  j)
-{
-  ( theWrappedObject->swap(i, j));
-}
+return new PythonQtShell_CoverSearchResult(); }
 
 
 

@@ -21,6 +21,7 @@
 #include <QHash>
 #include <QImage>
 #include <QList>
+#include <QMetaType>
 #include <QNetworkAccessManager>
 #include <QObject>
 #include <QQueue>
@@ -53,10 +54,12 @@ struct CoverSearchResult {
   // an URL of a cover image described by this CoverSearchResult
   QString image_url;
 };
+Q_DECLARE_METATYPE(CoverSearchResult);
 
 // This is a complete result of a single search request (a list of results, each
 // describing one image, actually).
 typedef QList<CoverSearchResult> CoverSearchResults;
+Q_DECLARE_METATYPE(CoverSearchResults);
 
 // This class searches for album covers for a given query or artist/album and
 // returns URLs. It's NOT thread-safe.

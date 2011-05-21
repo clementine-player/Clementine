@@ -29,6 +29,7 @@
 #include "core/song.h"
 #include "core/player.h"
 #include "core/taskmanager.h"
+#include "covers/albumcoverfetcher.h"
 #include "covers/coverproviders.h"
 #include "library/library.h"
 #include "library/librarybackend.h"
@@ -94,6 +95,8 @@ bool PythonEngine::EnsureInitialised() {
       PythonQtConvertListOfValueTypeToPythonList<SongList, Song>);
   PythonQtConv::registerMetaTypeToPythonConverter(qMetaTypeId<DirectoryList>(),
       PythonQtConvertListOfValueTypeToPythonList<DirectoryList, Directory>);
+  PythonQtConv::registerMetaTypeToPythonConverter(qMetaTypeId<CoverSearchResults>(),
+      PythonQtConvertListOfValueTypeToPythonList<CoverSearchResults, CoverSearchResult>);
 
   PythonQtConv::registerPythonToMetaTypeConverter(qMetaTypeId<SongList>(),
       PythonQtConvertPythonListToListOfValueType<SongList, Song>);
@@ -101,6 +104,8 @@ bool PythonEngine::EnsureInitialised() {
       PythonQtConvertPythonListToListOfValueType<SongList, Song>);
   PythonQtConv::registerPythonToMetaTypeConverter(qMetaTypeId<DirectoryList>(),
       PythonQtConvertPythonListToListOfValueType<DirectoryList, Directory>);
+  PythonQtConv::registerPythonToMetaTypeConverter(qMetaTypeId<CoverSearchResults>(),
+      PythonQtConvertPythonListToListOfValueType<CoverSearchResults, CoverSearchResult>);
 
   connect(python_qt, SIGNAL(pythonStdOut(QString)), SLOT(PythonStdOut(QString)));
   connect(python_qt, SIGNAL(pythonStdErr(QString)), SLOT(PythonStdErr(QString)));
