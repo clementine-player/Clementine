@@ -20,7 +20,6 @@
 #include <com_trolltech_qt_core/com_trolltech_qt_core_init.h>
 #include <com_trolltech_qt_gui/com_trolltech_qt_gui_init.h>
 #include <com_trolltech_qt_network/com_trolltech_qt_network_init.h>
-#include <com_trolltech_qt_uitools/com_trolltech_qt_uitools_init.h>
 
 #include "objectdecorators.h"
 #include "pythonengine.h"
@@ -83,11 +82,11 @@ bool PythonEngine::EnsureInitialised() {
   PythonQt_init_QtCore(0);
   PythonQt_init_QtGui(0);
   PythonQt_init_QtNetwork(0);
-  PythonQt_init_QtUiTools(0);
 
   PythonQt* python_qt = PythonQt::self();
   python_qt->installDefaultImporter();
   python_qt->addDecorators(new ObjectDecorators);
+  python_qt->addSysPath(":/pythonlibs/");
 
   PythonQtConv::registerMetaTypeToPythonConverter(qMetaTypeId<SongList>(),
       PythonQtConvertListOfValueTypeToPythonList<SongList, Song>);

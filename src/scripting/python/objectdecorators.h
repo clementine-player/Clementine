@@ -25,6 +25,7 @@ class ObjectDecorators : public QObject {
 
 public slots:
   void deleteLater(QObject* self);
+  bool inherits(QObject* self, const char* class_name);
 };
 
 #endif // OBJECTDECORATORS_H

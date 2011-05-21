@@ -20,3 +20,7 @@
 void ObjectDecorators::deleteLater(QObject* self) {
   self->deleteLater();
 }
+
+bool ObjectDecorators::inherits(QObject* self, const char* class_name) {
+  return self->inherits(class_name);
+}

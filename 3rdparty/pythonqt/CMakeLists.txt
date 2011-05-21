@@ -25,8 +25,6 @@ set(SOURCES
   generated_cpp/com_trolltech_qt_network/com_trolltech_qt_network0.cpp
   generated_cpp/com_trolltech_qt_network/com_trolltech_qt_network1.cpp
   generated_cpp/com_trolltech_qt_network/com_trolltech_qt_network_init.cpp
-  generated_cpp/com_trolltech_qt_uitools/com_trolltech_qt_uitools0.cpp
-  generated_cpp/com_trolltech_qt_uitools/com_trolltech_qt_uitools_init.cpp
   src/gui/PythonQtScriptingConsole.cpp
   src/PythonQtClassInfo.cpp
   src/PythonQtClassWrapper.cpp
@@ -63,7 +61,6 @@ set(HEADERS
   generated_cpp/com_trolltech_qt_gui/com_trolltech_qt_gui9.h
   generated_cpp/com_trolltech_qt_network/com_trolltech_qt_network0.h
   generated_cpp/com_trolltech_qt_network/com_trolltech_qt_network1.h
-  generated_cpp/com_trolltech_qt_uitools/com_trolltech_qt_uitools0.h
   src/gui/PythonQtScriptingConsole.h
   src/PythonQt.h
   src/PythonQtSignalReceiver.h
