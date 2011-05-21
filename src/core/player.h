@@ -159,7 +159,7 @@ public slots:
   void InvalidSongRequested(const QUrl&);
 
   void UrlHandlerDestroyed(QObject* object);
-  void HandleLoadResult(const UrlHandler::LoadResult& result);
+  void HandleLoadResult(const UrlHandler_LoadResult& result);
 
  private:
   PlaylistManagerInterface* playlists_;

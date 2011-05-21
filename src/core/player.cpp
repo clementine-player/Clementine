@@ -81,9 +81,9 @@ void Player::ReloadSettings() {
   engine_->ReloadSettings();
 }
 
-void Player::HandleLoadResult(const UrlHandler::LoadResult& result) {
+void Player::HandleLoadResult(const UrlHandler_LoadResult& result) {
   switch (result.type_) {
-  case UrlHandler::LoadResult::NoMoreTracks:
+  case UrlHandler_LoadResult::NoMoreTracks:
     qLog(Debug) << "URL handler for" << result.original_url_
                 << "said no more tracks";
 
@@ -91,7 +91,7 @@ void Player::HandleLoadResult(const UrlHandler::LoadResult& result) {
     NextItem(Engine::Auto);
     break;
 
-  case UrlHandler::LoadResult::TrackAvailable: {
+  case UrlHandler_LoadResult::TrackAvailable: {
     // Might've been an async load, so check we're still on the same item
     int current_index = playlists_->active()->current_row();
     if (current_index == -1)
@@ -114,7 +114,7 @@ void Player::HandleLoadResult(const UrlHandler::LoadResult& result) {
     break;
   }
 
-  case UrlHandler::LoadResult::WillLoadAsynchronously:
+  case UrlHandler_LoadResult::WillLoadAsynchronously:
     qLog(Debug) << "URL handler for" << result.original_url_
                 << "is loading asynchronously";
 
@@ -450,16 +450,16 @@ void Player::TrackAboutToEnd() {
 
   // Get the actual track URL rather than the stream URL.
   if (url_handlers_.contains(url.scheme())) {
-    UrlHandler::LoadResult result = url_handlers_[url.scheme()]->LoadNext(url);
+    UrlHandler_LoadResult result = url_handlers_[url.scheme()]->LoadNext(url);
     switch (result.type_) {
-    case UrlHandler::LoadResult::NoMoreTracks:
+    case UrlHandler_LoadResult::NoMoreTracks:
       return;
 
-    case UrlHandler::LoadResult::WillLoadAsynchronously:
+    case UrlHandler_LoadResult::WillLoadAsynchronously:
       loading_async_ = url;
       return;
 
-    case UrlHandler::LoadResult::TrackAvailable:
+    case UrlHandler_LoadResult::TrackAvailable:
       url = result.media_url_;
       break;
     }
@@ -493,8 +493,8 @@ void Player::RegisterUrlHandler(UrlHandler* handler) {
   qLog(Info) << "Registered URL handler for" << scheme;
   url_handlers_.insert(scheme, handler);
   connect(handler, SIGNAL(destroyed(QObject*)), SLOT(UrlHandlerDestroyed(QObject*)));
-  connect(handler, SIGNAL(AsyncLoadComplete(UrlHandler::LoadResult)),
-          SLOT(HandleLoadResult(UrlHandler::LoadResult)));
+  connect(handler, SIGNAL(AsyncLoadComplete(UrlHandler_LoadResult)),
+          SLOT(HandleLoadResult(UrlHandler_LoadResult)));
 }
 
 void Player::UnregisterUrlHandler(UrlHandler* handler) {
@@ -508,8 +508,8 @@ void Player::UnregisterUrlHandler(UrlHandler* handler) {
   qLog(Info) << "Unregistered URL handler for" << scheme;
   url_handlers_.remove(scheme);
   disconnect(handler, SIGNAL(destroyed(QObject*)), this, SLOT(UrlHandlerDestroyed(QObject*)));
-  disconnect(handler, SIGNAL(AsyncLoadComplete(UrlHandler::LoadResult)),
-             this, SLOT(HandleLoadResult(UrlHandler::LoadResult)));
+  disconnect(handler, SIGNAL(AsyncLoadComplete(UrlHandler_LoadResult)),
+             this, SLOT(HandleLoadResult(UrlHandler_LoadResult)));
 }
 
 void Player::UrlHandlerDestroyed(QObject* object) {

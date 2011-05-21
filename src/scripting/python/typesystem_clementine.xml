@@ -10,7 +10,7 @@
   <enum-type name="RadioModel::Type" />
   <enum-type name="RadioService::AddMode" />
   <enum-type name="Song::FileType" />
-  <enum-type name="UrlHandler::LoadResult::Type" />
+  <enum-type name="UrlHandler_LoadResult::Type" />
 
 
   <value-type name="CoverSearchResults" />
@@ -21,8 +21,8 @@
     <modify-function signature="BackgroundSave()const" remove="all" />
   </value-type>
   <value-type name="Subdirectory" />
-  <value-type name="TaskManager::Task" />
-  <value-type name="UrlHandler::LoadResult" />
+  <value-type name="TaskManager_Task" />
+  <value-type name="UrlHandler_LoadResult" />
 
   <object-type name="AlbumCoverFetcherSearch">
     <modify-function signature="timerEvent(QTimerEvent*)">

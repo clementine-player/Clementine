@@ -21,6 +21,37 @@
 #include <QObject>
 #include <QUrl>
 
+// Returned by StartLoading() and LoadNext(), indicates what the player
+// should do when it wants to load a URL.
+struct UrlHandler_LoadResult {
+  enum Type {
+    // There wasn't a track available, and the player should move on to the
+    // next playlist item.
+    NoMoreTracks,
+
+    // There might be another track available but the handler needs to do some
+    // work (eg. fetching a remote playlist) to find out.  AsyncLoadComplete
+    // will be emitted later with the same original_url.
+    WillLoadAsynchronously,
+
+    // There was a track available.  Its url is in media_url.
+    TrackAvailable,
+  };
+
+  UrlHandler_LoadResult(const QUrl& original_url = QUrl(),
+                        Type type = NoMoreTracks,
+                        const QUrl& media_url = QUrl());
+
+  // The url that the playlist item has in Url().
+  // Might be something unplayable like lastfm://...
+  QUrl original_url_;
+
+  Type type_;
+
+  // The actual url to something that gstreamer can play.
+  QUrl media_url_;
+};
+
 class UrlHandler : public QObject {
   Q_OBJECT
 
@@ -30,47 +61,20 @@ public:
   // The URL scheme that this handler handles.
   virtual QString scheme() const = 0;
 
-  // Returned by StartLoading() and LoadNext(), indicates what the player
-  // should do when it wants to load a URL.
-  struct LoadResult {
-    enum Type {
-      // There wasn't a track available, and the player should move on to the
-      // next playlist item.
-      NoMoreTracks,
-
-      // There might be another track available but the handler needs to do some
-      // work (eg. fetching a remote playlist) to find out.  AsyncLoadComplete
-      // will be emitted later with the same original_url.
-      WillLoadAsynchronously,
-
-      // There was a track available.  Its url is in media_url.
-      TrackAvailable,
-    };
-
-    LoadResult(const QUrl& original_url = QUrl(),
-               Type type = NoMoreTracks,
-               const QUrl& media_url = QUrl());
-
-    // The url that the playlist item has in Url().
-    // Might be something unplayable like lastfm://...
-    QUrl original_url_;
-
-    Type type_;
-
-    // The actual url to something that gstreamer can play.
-    QUrl media_url_;
-  };
-
   // Called by the Player when a song starts loading - gives the handler
   // a chance to do something clever to get a playable track.
-  virtual LoadResult StartLoading(const QUrl& url) { return LoadResult(url); }
+  virtual UrlHandler_LoadResult StartLoading(const QUrl& url) {
+    return UrlHandler_LoadResult(url);
+  }
 
   // Called by the player when a song finishes - gives the handler a chance to
   // get another track to play.
-  virtual LoadResult LoadNext(const QUrl& url) { return LoadResult(url); }
+  virtual UrlHandler_LoadResult LoadNext(const QUrl& url) {
+    return UrlHandler_LoadResult(url);
+  }
 
 signals:
-  void AsyncLoadComplete(const UrlHandler::LoadResult& result);
+  void AsyncLoadComplete(const UrlHandler_LoadResult& result);
 };
 
 #endif // URLHANDLER_H

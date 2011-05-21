@@ -3651,7 +3651,7 @@ TaskManager* PythonQtWrapper_TaskManager::new_TaskManager(QObject*  parent)
 { 
 return new PythonQtShell_TaskManager(parent); }
 
-QList<TaskManager::Task >  PythonQtWrapper_TaskManager::GetTasks(TaskManager* theWrappedObject)
+QList<TaskManager_Task >  PythonQtWrapper_TaskManager::GetTasks(TaskManager* theWrappedObject)
 {
   return ( theWrappedObject->GetTasks());
 }
@@ -3678,7 +3678,7 @@ int  PythonQtWrapper_TaskManager::StartTask(TaskManager* theWrappedObject, const
 
 
 
-TaskManager::Task* PythonQtWrapper_TaskManager_Task::new_TaskManager_Task()
+TaskManager_Task* PythonQtWrapper_TaskManager_Task::new_TaskManager_Task()
 { 
 return new PythonQtShell_TaskManager_Task(); }
 
@@ -4028,15 +4028,15 @@ void PythonQtWrapper_ThreadSafeNetworkDiskCache::updateMetaData(ThreadSafeNetwor
 
 
 
-UrlHandler::LoadResult  PythonQtShell_UrlHandler::LoadNext(const QUrl&  url)
+UrlHandler_LoadResult  PythonQtShell_UrlHandler::LoadNext(const QUrl&  url)
 {
 if (_wrapper) {
   PyObject* obj = PyObject_GetAttrString((PyObject*)_wrapper, "LoadNext");
   PyErr_Clear();
   if (obj && !PythonQtSlotFunction_Check(obj)) {
-    static const char* argumentList[] ={"UrlHandler::LoadResult" , "const QUrl&"};
+    static const char* argumentList[] ={"UrlHandler_LoadResult" , "const QUrl&"};
     static const PythonQtMethodInfo* methodInfo = PythonQtMethodInfo::getCachedMethodInfoFromArgumentList(2, argumentList);
-      UrlHandler::LoadResult returnValue;
+      UrlHandler_LoadResult returnValue;
     void* args[2] = {NULL, (void*)&url};
     PyObject* result = PythonQtSignalTarget::call(obj, methodInfo, args, true);
     if (result) {
@@ -4045,7 +4045,7 @@ if (_wrapper) {
         if (args[0]==NULL) {
           PythonQt::priv()->handleVirtualOverloadReturnError("LoadNext", methodInfo, result);
         } else {
-          returnValue = *((UrlHandler::LoadResult*)args[0]);
+          returnValue = *((UrlHandler_LoadResult*)args[0]);
         }
       }
     }
@@ -4056,15 +4056,15 @@ if (_wrapper) {
 }
   return UrlHandler::LoadNext(url);
 }
-UrlHandler::LoadResult  PythonQtShell_UrlHandler::StartLoading(const QUrl&  url)
+UrlHandler_LoadResult  PythonQtShell_UrlHandler::StartLoading(const QUrl&  url)
 {
 if (_wrapper) {
   PyObject* obj = PyObject_GetAttrString((PyObject*)_wrapper, "StartLoading");
   PyErr_Clear();
   if (obj && !PythonQtSlotFunction_Check(obj)) {
-    static const char* argumentList[] ={"UrlHandler::LoadResult" , "const QUrl&"};
+    static const char* argumentList[] ={"UrlHandler_LoadResult" , "const QUrl&"};
     static const PythonQtMethodInfo* methodInfo = PythonQtMethodInfo::getCachedMethodInfoFromArgumentList(2, argumentList);
-      UrlHandler::LoadResult returnValue;
+      UrlHandler_LoadResult returnValue;
     void* args[2] = {NULL, (void*)&url};
     PyObject* result = PythonQtSignalTarget::call(obj, methodInfo, args, true);
     if (result) {
@@ -4073,7 +4073,7 @@ if (_wrapper) {
         if (args[0]==NULL) {
           PythonQt::priv()->handleVirtualOverloadReturnError("StartLoading", methodInfo, result);
         } else {
-          returnValue = *((UrlHandler::LoadResult*)args[0]);
+          returnValue = *((UrlHandler_LoadResult*)args[0]);
         }
       }
     }
@@ -4223,19 +4223,19 @@ UrlHandler* PythonQtWrapper_UrlHandler::new_UrlHandler(QObject*  parent)
 { 
 return new PythonQtShell_UrlHandler(parent); }
 
-UrlHandler::LoadResult  PythonQtWrapper_UrlHandler::LoadNext(UrlHandler* theWrappedObject, const QUrl&  url)
+UrlHandler_LoadResult  PythonQtWrapper_UrlHandler::LoadNext(UrlHandler* theWrappedObject, const QUrl&  url)
 {
   return ( ((PythonQtPublicPromoter_UrlHandler*)theWrappedObject)->promoted_LoadNext(url));
 }
 
-UrlHandler::LoadResult  PythonQtWrapper_UrlHandler::StartLoading(UrlHandler* theWrappedObject, const QUrl&  url)
+UrlHandler_LoadResult  PythonQtWrapper_UrlHandler::StartLoading(UrlHandler* theWrappedObject, const QUrl&  url)
 {
   return ( ((PythonQtPublicPromoter_UrlHandler*)theWrappedObject)->promoted_StartLoading(url));
 }
 
 
 
-UrlHandler::LoadResult* PythonQtWrapper_UrlHandler_LoadResult::new_UrlHandler_LoadResult(const QUrl&  original_url, UrlHandler::LoadResult::Type  type, const QUrl&  media_url)
+UrlHandler_LoadResult* PythonQtWrapper_UrlHandler_LoadResult::new_UrlHandler_LoadResult(const QUrl&  original_url, UrlHandler_LoadResult::Type  type, const QUrl&  media_url)
 { 
 return new PythonQtShell_UrlHandler_LoadResult(original_url, type, media_url); }
 

@@ -23,9 +23,9 @@ PythonQt::priv()->registerClass(&RadioService::staticMetaObject, "Clementine", P
 PythonQt::priv()->registerCPPClass("Song", "", "Clementine", PythonQtCreateObject<PythonQtWrapper_Song>, PythonQtSetInstanceWrapperOnShell<PythonQtShell_Song>, module, PythonQt::Type_RichCompare);
 PythonQt::priv()->registerCPPClass("Subdirectory", "", "Clementine", PythonQtCreateObject<PythonQtWrapper_Subdirectory>, PythonQtSetInstanceWrapperOnShell<PythonQtShell_Subdirectory>, module, 0);
 PythonQt::priv()->registerClass(&TaskManager::staticMetaObject, "Clementine", PythonQtCreateObject<PythonQtWrapper_TaskManager>, PythonQtSetInstanceWrapperOnShell<PythonQtShell_TaskManager>, module, 0);
-PythonQt::priv()->registerCPPClass("TaskManager::Task", "", "Clementine", PythonQtCreateObject<PythonQtWrapper_TaskManager_Task>, PythonQtSetInstanceWrapperOnShell<PythonQtShell_TaskManager_Task>, module, 0);
+PythonQt::priv()->registerCPPClass("TaskManager_Task", "", "Clementine", PythonQtCreateObject<PythonQtWrapper_TaskManager_Task>, PythonQtSetInstanceWrapperOnShell<PythonQtShell_TaskManager_Task>, module, 0);
 PythonQt::priv()->registerClass(&ThreadSafeNetworkDiskCache::staticMetaObject, "Clementine", PythonQtCreateObject<PythonQtWrapper_ThreadSafeNetworkDiskCache>, PythonQtSetInstanceWrapperOnShell<PythonQtShell_ThreadSafeNetworkDiskCache>, module, 0);
 PythonQt::priv()->registerClass(&UrlHandler::staticMetaObject, "Clementine", PythonQtCreateObject<PythonQtWrapper_UrlHandler>, PythonQtSetInstanceWrapperOnShell<PythonQtShell_UrlHandler>, module, 0);
-PythonQt::priv()->registerCPPClass("UrlHandler::LoadResult", "", "Clementine", PythonQtCreateObject<PythonQtWrapper_UrlHandler_LoadResult>, PythonQtSetInstanceWrapperOnShell<PythonQtShell_UrlHandler_LoadResult>, module, 0);
+PythonQt::priv()->registerCPPClass("UrlHandler_LoadResult", "", "Clementine", PythonQtCreateObject<PythonQtWrapper_UrlHandler_LoadResult>, PythonQtSetInstanceWrapperOnShell<PythonQtShell_UrlHandler_LoadResult>, module, 0);
 
 }

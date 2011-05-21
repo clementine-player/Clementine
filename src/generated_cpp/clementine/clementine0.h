@@ -813,7 +813,7 @@ public:
 public slots:
 TaskManager* new_TaskManager(QObject*  parent = 0);
 void delete_TaskManager(TaskManager* obj) { delete obj; } 
-   QList<TaskManager::Task >  GetTasks(TaskManager* theWrappedObject);
+   QList<TaskManager_Task >  GetTasks(TaskManager* theWrappedObject);
    void SetTaskBlocksLibraryScans(TaskManager* theWrappedObject, int  id);
    void SetTaskFinished(TaskManager* theWrappedObject, int  id);
    void SetTaskProgress(TaskManager* theWrappedObject, int  id, int  progress, int  max = 0);
@@ -824,10 +824,10 @@ void delete_TaskManager(TaskManager* obj) { delete obj; }
 
 
 
-class PythonQtShell_TaskManager_Task : public TaskManager::Task
+class PythonQtShell_TaskManager_Task : public TaskManager_Task
 {
 public:
-    PythonQtShell_TaskManager_Task():TaskManager::Task(),_wrapper(NULL) {};
+    PythonQtShell_TaskManager_Task():TaskManager_Task(),_wrapper(NULL) {};
 
 
   PythonQtInstanceWrapper* _wrapper; 
@@ -837,22 +837,22 @@ class PythonQtWrapper_TaskManager_Task : public QObject
 { Q_OBJECT
 public:
 public slots:
-TaskManager::Task* new_TaskManager_Task();
-TaskManager::Task* new_TaskManager_Task(const TaskManager::Task& other) {
+TaskManager_Task* new_TaskManager_Task();
+TaskManager_Task* new_TaskManager_Task(const TaskManager_Task& other) {
 PythonQtShell_TaskManager_Task* a = new PythonQtShell_TaskManager_Task();
-*((TaskManager::Task*)a) = other;
+*((TaskManager_Task*)a) = other;
 return a; }
-void delete_TaskManager_Task(TaskManager::Task* obj) { delete obj; } 
-void py_set_progress_max(TaskManager::Task* theWrappedObject, int  progress_max){ theWrappedObject->progress_max = progress_max; }
-int  py_get_progress_max(TaskManager::Task* theWrappedObject){ return theWrappedObject->progress_max; }
-void py_set_progress(TaskManager::Task* theWrappedObject, int  progress){ theWrappedObject->progress = progress; }
-int  py_get_progress(TaskManager::Task* theWrappedObject){ return theWrappedObject->progress; }
-void py_set_id(TaskManager::Task* theWrappedObject, int  id){ theWrappedObject->id = id; }
-int  py_get_id(TaskManager::Task* theWrappedObject){ return theWrappedObject->id; }
-void py_set_name(TaskManager::Task* theWrappedObject, QString  name){ theWrappedObject->name = name; }
-QString  py_get_name(TaskManager::Task* theWrappedObject){ return theWrappedObject->name; }
-void py_set_blocks_library_scans(TaskManager::Task* theWrappedObject, bool  blocks_library_scans){ theWrappedObject->blocks_library_scans = blocks_library_scans; }
-bool  py_get_blocks_library_scans(TaskManager::Task* theWrappedObject){ return theWrappedObject->blocks_library_scans; }
+void delete_TaskManager_Task(TaskManager_Task* obj) { delete obj; } 
+void py_set_progress_max(TaskManager_Task* theWrappedObject, int  progress_max){ theWrappedObject->progress_max = progress_max; }
+int  py_get_progress_max(TaskManager_Task* theWrappedObject){ return theWrappedObject->progress_max; }
+void py_set_progress(TaskManager_Task* theWrappedObject, int  progress){ theWrappedObject->progress = progress; }
+int  py_get_progress(TaskManager_Task* theWrappedObject){ return theWrappedObject->progress; }
+void py_set_id(TaskManager_Task* theWrappedObject, int  id){ theWrappedObject->id = id; }
+int  py_get_id(TaskManager_Task* theWrappedObject){ return theWrappedObject->id; }
+void py_set_name(TaskManager_Task* theWrappedObject, QString  name){ theWrappedObject->name = name; }
+QString  py_get_name(TaskManager_Task* theWrappedObject){ return theWrappedObject->name; }
+void py_set_blocks_library_scans(TaskManager_Task* theWrappedObject, bool  blocks_library_scans){ theWrappedObject->blocks_library_scans = blocks_library_scans; }
+bool  py_get_blocks_library_scans(TaskManager_Task* theWrappedObject){ return theWrappedObject->blocks_library_scans; }
 };
 
 
@@ -918,8 +918,8 @@ class PythonQtShell_UrlHandler : public UrlHandler
 public:
     PythonQtShell_UrlHandler(QObject*  parent = 0):UrlHandler(parent),_wrapper(NULL) {};
 
-virtual UrlHandler::LoadResult  LoadNext(const QUrl&  url);
-virtual UrlHandler::LoadResult  StartLoading(const QUrl&  url);
+virtual UrlHandler_LoadResult  LoadNext(const QUrl&  url);
+virtual UrlHandler_LoadResult  StartLoading(const QUrl&  url);
 virtual void childEvent(QChildEvent*  arg__1);
 virtual void customEvent(QEvent*  arg__1);
 virtual bool  event(QEvent*  arg__1);
@@ -932,8 +932,8 @@ virtual void timerEvent(QTimerEvent*  arg__1);
 
 class PythonQtPublicPromoter_UrlHandler : public UrlHandler
 { public:
-inline UrlHandler::LoadResult  promoted_LoadNext(const QUrl&  url) { return UrlHandler::LoadNext(url); }
-inline UrlHandler::LoadResult  promoted_StartLoading(const QUrl&  url) { return UrlHandler::StartLoading(url); }
+inline UrlHandler_LoadResult  promoted_LoadNext(const QUrl&  url) { return UrlHandler::LoadNext(url); }
+inline UrlHandler_LoadResult  promoted_StartLoading(const QUrl&  url) { return UrlHandler::StartLoading(url); }
 };
 
 class PythonQtWrapper_UrlHandler : public QObject
@@ -942,18 +942,18 @@ public:
 public slots:
 UrlHandler* new_UrlHandler(QObject*  parent = 0);
 void delete_UrlHandler(UrlHandler* obj) { delete obj; } 
-   UrlHandler::LoadResult  LoadNext(UrlHandler* theWrappedObject, const QUrl&  url);
-   UrlHandler::LoadResult  StartLoading(UrlHandler* theWrappedObject, const QUrl&  url);
+   UrlHandler_LoadResult  LoadNext(UrlHandler* theWrappedObject, const QUrl&  url);
+   UrlHandler_LoadResult  StartLoading(UrlHandler* theWrappedObject, const QUrl&  url);
 };
 
 
 
 
 
-class PythonQtShell_UrlHandler_LoadResult : public UrlHandler::LoadResult
+class PythonQtShell_UrlHandler_LoadResult : public UrlHandler_LoadResult
 {
 public:
-    PythonQtShell_UrlHandler_LoadResult(const QUrl&  original_url = QUrl(), UrlHandler::LoadResult::Type  type = UrlHandler::LoadResult::NoMoreTracks, const QUrl&  media_url = QUrl()):UrlHandler::LoadResult(original_url, type, media_url),_wrapper(NULL) {};
+    PythonQtShell_UrlHandler_LoadResult(const QUrl&  original_url = QUrl(), UrlHandler_LoadResult::Type  type = UrlHandler_LoadResult::NoMoreTracks, const QUrl&  media_url = QUrl()):UrlHandler_LoadResult(original_url, type, media_url),_wrapper(NULL) {};
 
 
   PythonQtInstanceWrapper* _wrapper; 
@@ -964,16 +964,16 @@ class PythonQtWrapper_UrlHandler_LoadResult : public QObject
 public:
 Q_ENUMS(Type )
 enum Type{
-  NoMoreTracks = UrlHandler::LoadResult::NoMoreTracks,   WillLoadAsynchronously = UrlHandler::LoadResult::WillLoadAsynchronously,   TrackAvailable = UrlHandler::LoadResult::TrackAvailable};
+  NoMoreTracks = UrlHandler_LoadResult::NoMoreTracks,   WillLoadAsynchronously = UrlHandler_LoadResult::WillLoadAsynchronously,   TrackAvailable = UrlHandler_LoadResult::TrackAvailable};
 public slots:
-UrlHandler::LoadResult* new_UrlHandler_LoadResult(const QUrl&  original_url = QUrl(), UrlHandler::LoadResult::Type  type = UrlHandler::LoadResult::NoMoreTracks, const QUrl&  media_url = QUrl());
-void delete_UrlHandler_LoadResult(UrlHandler::LoadResult* obj) { delete obj; } 
-void py_set_original_url_(UrlHandler::LoadResult* theWrappedObject, QUrl  original_url_){ theWrappedObject->original_url_ = original_url_; }
-QUrl  py_get_original_url_(UrlHandler::LoadResult* theWrappedObject){ return theWrappedObject->original_url_; }
-void py_set_media_url_(UrlHandler::LoadResult* theWrappedObject, QUrl  media_url_){ theWrappedObject->media_url_ = media_url_; }
-QUrl  py_get_media_url_(UrlHandler::LoadResult* theWrappedObject){ return theWrappedObject->media_url_; }
-void py_set_type_(UrlHandler::LoadResult* theWrappedObject, UrlHandler::LoadResult::Type  type_){ theWrappedObject->type_ = type_; }
-UrlHandler::LoadResult::Type  py_get_type_(UrlHandler::LoadResult* theWrappedObject){ return theWrappedObject->type_; }
+UrlHandler_LoadResult* new_UrlHandler_LoadResult(const QUrl&  original_url = QUrl(), UrlHandler_LoadResult::Type  type = UrlHandler_LoadResult::NoMoreTracks, const QUrl&  media_url = QUrl());
+void delete_UrlHandler_LoadResult(UrlHandler_LoadResult* obj) { delete obj; } 
+void py_set_original_url_(UrlHandler_LoadResult* theWrappedObject, QUrl  original_url_){ theWrappedObject->original_url_ = original_url_; }
+QUrl  py_get_original_url_(UrlHandler_LoadResult* theWrappedObject){ return theWrappedObject->original_url_; }
+void py_set_media_url_(UrlHandler_LoadResult* theWrappedObject, QUrl  media_url_){ theWrappedObject->media_url_ = media_url_; }
+QUrl  py_get_media_url_(UrlHandler_LoadResult* theWrappedObject){ return theWrappedObject->media_url_; }
+void py_set_type_(UrlHandler_LoadResult* theWrappedObject, UrlHandler_LoadResult::Type  type_){ theWrappedObject->type_ = type_; }
+UrlHandler_LoadResult::Type  py_get_type_(UrlHandler_LoadResult* theWrappedObject){ return theWrappedObject->type_; }
 };
 
 

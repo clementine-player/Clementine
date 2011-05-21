@@ -30,8 +30,8 @@ public:
   LastFMUrlHandler(LastFMService* service, QObject* parent);
 
   QString scheme() const { return "lastfm"; }
-  LoadResult StartLoading(const QUrl& url);
-  LoadResult LoadNext(const QUrl& url);
+  UrlHandler_LoadResult StartLoading(const QUrl& url);
+  UrlHandler_LoadResult LoadNext(const QUrl& url);
 
   void TunerTrackAvailable();
   void TunerError();

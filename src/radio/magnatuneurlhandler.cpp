@@ -23,6 +23,7 @@ MagnatuneUrlHandler::MagnatuneUrlHandler(MagnatuneService* service, QObject* par
     service_(service) {
 }
 
-UrlHandler::LoadResult MagnatuneUrlHandler::StartLoading(const QUrl& url) {
-  return LoadResult(url, LoadResult::TrackAvailable, service_->ModifyUrl(url));
+UrlHandler_LoadResult MagnatuneUrlHandler::StartLoading(const QUrl& url) {
+  return UrlHandler_LoadResult(url, UrlHandler_LoadResult::TrackAvailable,
+                               service_->ModifyUrl(url));
 }
