@@ -49,6 +49,9 @@ bool PythonScript::Init() {
   PyList_SetItem(__path__, 0, PyString_FromString(info().path().toLocal8Bit().constData()));
   PyModule_AddObject(module_, "__path__", __path__);
 
+  // Set __file__
+  module_.addVariable("__file__", info().script_file());
+
   // Set script object
   module_.addObject("script", interface());
 
@@ -72,7 +75,33 @@ bool PythonScript::Init() {
 }
 
 bool PythonScript::Unload() {
-  module_ = PythonQtObjectPtr();
+  // Remove this module and all its children from sys.modules.  That should be
+  // the only place that references it, so this will clean up the modules'
+  // dict and all globals.
+  PyInterpreterState *interp = PyThreadState_GET()->interp;
+  PyObject* modules = interp->modules;
 
+  QStringList keys_to_delete;
+
+  Py_ssize_t pos = 0;
+  PyObject* key;
+  PyObject* value;
+  while (PyDict_Next(modules, &pos, &key, &value)) {
+    const char* name = PyString_AS_STRING(key);
+    if (PyString_Check(key) && PyModule_Check(value)) {
+      if (QString(name).startsWith(module_name_)) {
+        keys_to_delete << name;
+      }
+    }
+  }
+
+  foreach (const QString& key, keys_to_delete) {
+    // Workaround Python issue 10068 (only affects 2.7.0)
+    _PyModule_Clear(PyDict_GetItemString(modules, key.toAscii().constData()));
+
+    PyDict_DelItemString(modules, key.toAscii().constData());
+  }
+
+  module_ = PythonQtObjectPtr();
   return true;
 }

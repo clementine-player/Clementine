@@ -26,6 +26,7 @@
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"
 
+#include "testobjectdecorators.h"
 #include "test_utils.h"
 
 #include <QSettings>
@@ -59,32 +60,38 @@ public:
 };
 
 
-class DISABLED_PythonTest : public ::testing::Test {
+class PythonTest : public ::testing::Test {
  protected:
-  void SetUp() {
-    manager_ = new ScriptManager;
-    engine_ = qobject_cast<PythonEngine*>(
-          manager_->EngineForLanguage(ScriptInfo::Language_Python));
+  static void SetUpTestCase() {
+    sManager = new ScriptManager;
+    sEngine = qobject_cast<PythonEngine*>(
+          sManager->EngineForLanguage(ScriptInfo::Language_Python));
+
+    sEngine->EnsureInitialised();
+    PythonQt::self()->addDecorators(new TestObjectDecorators());
   }
 
-  void TearDown() {
-    delete manager_;
+  static void TearDownTestCase() {
+    delete sManager;
   }
 
-  ScriptManager* manager_;
-  PythonEngine* engine_;
+  static ScriptManager* sManager;
+  static PythonEngine* sEngine;
 };
 
+ScriptManager* PythonTest::sManager = NULL;
+PythonEngine* PythonTest::sEngine = NULL;
 
-TEST_F(DISABLED_PythonTest, HasPythonEngine) {
-  ASSERT_TRUE(engine_);
+
+TEST_F(PythonTest, HasPythonEngine) {
+  ASSERT_TRUE(sEngine);
 }
 
-TEST_F(DISABLED_PythonTest, InitFromDirectory) {
+TEST_F(PythonTest, InitFromDirectory) {
   TemporaryScript script("pass");
 
   ScriptInfo info;
-  info.InitFromDirectory(manager_, script.directory_);
+  info.InitFromDirectory(sManager, script.directory_);
 
   EXPECT_TRUE(info.is_valid());
   EXPECT_EQ(script.directory_, info.path());
@@ -92,22 +99,22 @@ TEST_F(DISABLED_PythonTest, InitFromDirectory) {
   EXPECT_EQ(NULL, info.loaded());
 }
 
-TEST_F(DISABLED_PythonTest, StdioIsRedirected) {
+TEST_F(PythonTest, StdioIsRedirected) {
   TemporaryScript script(
         "import sys\n"
         "print 'text on stdout'\n"
         "print >>sys.stderr, 'text on stderr'\n");
   ScriptInfo info;
-  info.InitFromDirectory(manager_, script.directory_);
+  info.InitFromDirectory(sManager, script.directory_);
 
-  engine_->CreateScript(info);
+  sEngine->CreateScript(info);
 
-  QString log = manager_->log_lines_plain().join("\n");
+  QString log = sManager->log_lines_plain().join("\n");
   ASSERT_TRUE(log.contains("text on stdout"));
   ASSERT_TRUE(log.contains("text on stderr"));
 }
 
-TEST_F(DISABLED_PythonTest, CleanupModuleDict) {
+TEST_F(PythonTest, CleanupModuleDict) {
   TemporaryScript script(
         "class Foo:\n"
         "  def __init__(self):\n"
@@ -116,35 +123,89 @@ TEST_F(DISABLED_PythonTest, CleanupModuleDict) {
         "    print 'destructor'\n"
         "f = Foo()\n");
   ScriptInfo info;
-  info.InitFromDirectory(manager_, script.directory_);
+  info.InitFromDirectory(sManager, script.directory_);
 
-  Script* s = engine_->CreateScript(info);
-  ASSERT_TRUE(manager_->log_lines_plain().last().endsWith("constructor"));
+  Script* s = sEngine->CreateScript(info);
+  ASSERT_TRUE(sManager->log_lines_plain().last().endsWith("constructor"));
 
-  engine_->DestroyScript(s);
-  ASSERT_TRUE(manager_->log_lines_plain().last().endsWith("destructor"));
+  sEngine->DestroyScript(s);
+  ASSERT_TRUE(sManager->log_lines_plain().last().endsWith("destructor"));
 }
 
-TEST_F(DISABLED_PythonTest, ModuleConstants) {
+TEST_F(PythonTest, ModuleConstants) {
   TemporaryScript script(
-        "print __builtins__\n"
+        "print type(__builtins__)\n"
         "print __file__\n"
         "print __name__\n"
         "print __package__\n"
         "print __path__\n"
         "print script\n");
   ScriptInfo info;
-  info.InitFromDirectory(manager_, script.directory_);
+  info.InitFromDirectory(sManager, script.directory_);
 
-  engine_->CreateScript(info);
+  sEngine->CreateScript(info);
 
-  const QStringList log = manager_->log_lines_plain();
+  const QStringList log = sManager->log_lines_plain();
   const int n = log.count();
   ASSERT_GE(n, 6);
-  EXPECT_TRUE(log.at(n-6).endsWith("<module '__builtin__' (built-in)>"));     // __builtins__
-  EXPECT_TRUE(log.at(n-5).endsWith(script.directory_ + "/script.py"));        // __file__
-  EXPECT_TRUE(log.at(n-4).endsWith("clementinescripts." + info.id()));        // __name__
-  EXPECT_TRUE(log.at(n-3).endsWith("None"));                                  // __package__
-  EXPECT_TRUE(log.at(n-2).endsWith("['" + script.directory_ + "']"));         // __path__
-  EXPECT_TRUE(log.at(n-1).contains("<clementine.ScriptInterface object at")); // script
+  EXPECT_TRUE(log.at(n-6).endsWith("<type 'dict'>"));                  // __builtins__
+  EXPECT_TRUE(log.at(n-5).endsWith(script.directory_ + "/script.py")); // __file__
+  EXPECT_TRUE(log.at(n-4).endsWith("clementinescripts." + info.id())); // __name__
+  EXPECT_TRUE(log.at(n-3).endsWith("None"));                           // __package__
+  EXPECT_TRUE(log.at(n-2).endsWith("['" + script.directory_ + "']"));  // __path__
+  EXPECT_TRUE(log.at(n-1).contains("ScriptInterface (QObject "));      // script
+}
+
+TEST_F(PythonTest, PythonQtAttrSetWrappedCPP) {
+  // Tests 3rdparty/pythonqt/patches/call-slot-returnvalue.patch
+
+  TemporaryScript script(
+        "import PythonQt.QtGui\n"
+        "PythonQt.QtGui.QStyleOption().version = 123\n"
+        "PythonQt.QtGui.QStyleOption().version = 123\n"
+        "PythonQt.QtGui.QStyleOption().version = 123\n");
+  ScriptInfo info;
+  info.InitFromDirectory(sManager, script.directory_);
+
+  EXPECT_TRUE(sEngine->CreateScript(info));
+}
+
+TEST_F(PythonTest, PythonQtArgumentReferenceCount) {
+  // Tests 3rdparty/pythonqt/patches/argument-reference-count.patch
+
+  TemporaryScript script(
+        "from PythonQt.QtCore import QFile, QObject\n"
+
+        "class Foo(QFile):\n"
+        "  def Init(self, parent):\n"
+        "    QFile.__init__(self, parent)\n"
+
+        "parent = QObject()\n"
+        "Foo().Init(parent)\n"
+        "assert parent\n");
+  ScriptInfo info;
+  info.InitFromDirectory(sManager, script.directory_);
+
+  EXPECT_TRUE(sEngine->CreateScript(info));
+}
+
+TEST_F(PythonTest, PythonQtConversionStack) {
+  // Tests 3rdparty/pythonqt/patches/conversion-stack.patch
+  // This crash is triggered when a C++ thing calls a virtual method on a
+  // python wrapper and that wrapper returns a QString, QByteArray or
+  // QStringList.  In this instance, initStyleOption() calls text() in Foo.
+
+  TemporaryScript script(
+        "from PythonQt.QtGui import QProgressBar, QStyleOptionProgressBar\n"
+
+        "class Foo(QProgressBar):\n"
+        "  def text(self):\n"
+        "    return 'something'\n"
+
+        "for _ in xrange(1000):\n"
+        "  Foo().initStyleOption(QStyleOptionProgressBar())\n");
+  ScriptInfo info;
+  info.InitFromDirectory(sManager, script.directory_);
+
+  EXPECT_TRUE(sEngine->CreateScript(info));
 }

@@ -48,14 +48,16 @@ endif(NOT USE_SYSTEM_GMOCK)
 add_definitions(-DGTEST_USE_OWN_TR1_TUPLE=1)
 
 set(TESTUTILS-SOURCES
-    test_utils.cpp
-    mock_networkaccessmanager.cpp
-    mock_taglib.cpp
-    mock_playlistitem.cpp
+  mock_networkaccessmanager.cpp
+  mock_taglib.cpp
+  mock_playlistitem.cpp
+  test_utils.cpp
+  testobjectdecorators.cpp
 )
 
 set(TESTUTILS-MOC-HEADERS
-    mock_networkaccessmanager.h
+  mock_networkaccessmanager.h
+  testobjectdecorators.h
 )
 
 qt4_wrap_cpp(TESTUTILS-SOURCES-MOC ${TESTUTILS-MOC-HEADERS})

@@ -191,7 +191,7 @@ void PythonEngine::AddStringToBuffer(const QString& str,
 
     logging::CreateLogger(logging::Level_Info, buffer_name, -1) <<
         message.toUtf8().constData();
-    manager()->AddLogLine(buffer_name, str, error);
+    manager()->AddLogLine(buffer_name, message, error);
   }
 }
 
