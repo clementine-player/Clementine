@@ -191,6 +191,7 @@ int main(int argc, char *argv[]) {
 
   qRegisterMetaType<CoverSearchResult>("CoverSearchResult");
   qRegisterMetaType<CoverSearchResults>("CoverSearchResults");
+  qRegisterMetaType<QList<CoverSearchResult> >("QList<CoverSearchResult>");
   qRegisterMetaType<Directory>("Directory");
   qRegisterMetaType<DirectoryList>("DirectoryList");
   qRegisterMetaType<Subdirectory>("Subdirectory");

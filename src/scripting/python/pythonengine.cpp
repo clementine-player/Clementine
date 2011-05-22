@@ -72,6 +72,20 @@ PythonEngine::~PythonEngine() {
   PythonQt::cleanup();
 }
 
+template <typename T>
+static void RegisterListConverter(const char* other_class_name) {
+  typedef QList<T> L;
+  PythonQtConv::registerMetaTypeToPythonConverter(qMetaTypeId<L>(),
+      PythonQtConvertListOfValueTypeToPythonList<L, T>);
+  PythonQtConv::registerMetaTypeToPythonConverter(QMetaType::type(other_class_name),
+      PythonQtConvertListOfValueTypeToPythonList<L, T>);
+
+  PythonQtConv::registerPythonToMetaTypeConverter(qMetaTypeId<L>(),
+      PythonQtConvertPythonListToListOfValueType<L, T>);
+  PythonQtConv::registerPythonToMetaTypeConverter(QMetaType::type(other_class_name),
+      PythonQtConvertPythonListToListOfValueType<L, T>);
+}
+
 bool PythonEngine::EnsureInitialised() {
   if (initialised_)
     return true;
@@ -92,23 +106,9 @@ bool PythonEngine::EnsureInitialised() {
   python_qt->addDecorators(new ObjectDecorators);
 
   // Register converters for list types
-  PythonQtConv::registerMetaTypeToPythonConverter(qMetaTypeId<SongList>(),
-      PythonQtConvertListOfValueTypeToPythonList<SongList, Song>);
-  PythonQtConv::registerMetaTypeToPythonConverter(QMetaType::type("QList<Song>"),
-      PythonQtConvertListOfValueTypeToPythonList<SongList, Song>);
-  PythonQtConv::registerMetaTypeToPythonConverter(qMetaTypeId<DirectoryList>(),
-      PythonQtConvertListOfValueTypeToPythonList<DirectoryList, Directory>);
-  PythonQtConv::registerMetaTypeToPythonConverter(qMetaTypeId<CoverSearchResults>(),
-      PythonQtConvertListOfValueTypeToPythonList<CoverSearchResults, CoverSearchResult>);
-
-  PythonQtConv::registerPythonToMetaTypeConverter(qMetaTypeId<SongList>(),
-      PythonQtConvertPythonListToListOfValueType<SongList, Song>);
-  PythonQtConv::registerPythonToMetaTypeConverter(QMetaType::type("QList<Song>"),
-      PythonQtConvertPythonListToListOfValueType<SongList, Song>);
-  PythonQtConv::registerPythonToMetaTypeConverter(qMetaTypeId<DirectoryList>(),
-      PythonQtConvertPythonListToListOfValueType<DirectoryList, Directory>);
-  PythonQtConv::registerPythonToMetaTypeConverter(qMetaTypeId<CoverSearchResults>(),
-      PythonQtConvertPythonListToListOfValueType<CoverSearchResults, CoverSearchResult>);
+  RegisterListConverter<Song>("QList<Song>");
+  RegisterListConverter<Directory>("QList<Directory>");
+  RegisterListConverter<CoverSearchResult>("QList<CoverSearchResult>");
 
   // Connect stdout, stderr
   connect(python_qt, SIGNAL(pythonStdOut(QString)), SLOT(PythonStdOut(QString)));
