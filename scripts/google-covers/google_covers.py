@@ -1,15 +1,34 @@
 import clementine
 
-from PyQt4.QtCore    import QString, QUrl
-from PyQt4.QtNetwork import QNetworkRequest
+from PythonQt.QtCore    import QUrl
+from PythonQt.QtNetwork import QNetworkRequest
 
-from simplejson import loads
+import json
 import urllib
 
-class GoogleImagesCoversScript(clementine.CoverProvider):
+
+class GoogleImagesCoversScript():
 
   def __init__(self):
-    clementine.CoverProvider.__init__(self, "Google Images")
+    # create and register our factory
+    self.factory = GoogleImagesCoverProviderFactory()
+
+
+class GoogleImagesCoverProviderFactory(clementine.CoverProviderFactory):
+
+  def __init__(self):
+    clementine.CoverProviderFactory.__init__(self)
+    # register in the repository of factories
+    clementine.cover_providers.AddProviderFactory(self)
+
+  def CreateCoverProvider(self, parent):
+    return GoogleImagesCoverProvider(parent)
+
+
+class GoogleImagesCoverProvider(clementine.CoverProvider):
+
+  def __init__(self, parent):
+    clementine.CoverProvider.__init__(self, "Google Images", parent)
 
     self.api_url = 'https://ajax.googleapis.com/ajax/services/search/images?{0}'
     self.api_args = {
@@ -22,10 +41,9 @@ class GoogleImagesCoversScript(clementine.CoverProvider):
     self.network = clementine.NetworkAccessManager(self)    
     self.queries = {}
 
-    # register in the repository of cover providers
-    clementine.cover_providers.AddCoverProvider(self)
-
   def SendRequest(self, query):
+    print 'sending request'
+
     url = self.GetQueryURL(query)
 
     reply = self.network.get(QNetworkRequest(url))
@@ -34,7 +52,9 @@ class GoogleImagesCoversScript(clementine.CoverProvider):
     return reply
 
   def ParseReply(self, reply):
-    results = loads(str(reply.readAll()))
+    print 'parsing reply'
+
+    results = json.loads(str(reply.readAll()))
 
     parsed = []
 
@@ -44,8 +64,9 @@ class GoogleImagesCoversScript(clementine.CoverProvider):
     query = self.queries.pop(reply)
     for result in results['responseData']['results']:
       current = clementine.CoverSearchResult()
+
       current.description = query
-      current.image_url = QString(result['url'])
+      current.image_url = result['url']
 
       parsed.append(current)
 

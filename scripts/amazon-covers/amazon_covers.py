@@ -1,7 +1,7 @@
 import clementine
 
-from PyQt4.QtCore    import QString, QUrl
-from PyQt4.QtNetwork import QNetworkRequest
+from PythonQt.QtCore    import QUrl, QString
+from PythonQt.QtNetwork import QNetworkRequest
 from xml.etree.ElementTree import fromstring
 
 import urllib
@@ -11,7 +11,25 @@ import base64
 import hmac
 
 
-class AmazonCoversScript(clementine.CoverProvider):
+class AmazonCoversScript():
+
+  def __init__(self):
+    # create and register our factory
+    self.factory = AmazonCoverProviderFactory()
+
+
+class AmazonCoverProviderFactory(clementine.CoverProviderFactory):
+
+  def __init__(self):
+    clementine.CoverProviderFactory.__init__(self)
+    # register in the repository of factories
+    clementine.cover_providers.AddProviderFactory(self)
+
+  def CreateCoverProvider(self, parent):
+    return AmazonCoverProvider(parent)
+
+
+class AmazonCoverProvider(clementine.CoverProvider):
   """
   Most of the Amazon API related code here comes from a plugin (which I wrote) for
   an open source application called Cardapio.
