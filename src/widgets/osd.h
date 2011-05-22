@@ -85,6 +85,8 @@ class OSD : public QObject {
   void WiiremoteCriticalBattery(int id, int live);
 #endif
 
+  void ShowPreview(const Behaviour type, const QString& line1, const QString& line2, const Song& song);
+
  private:
   struct WaitingForAlbumArt {
     QString summary;
@@ -103,6 +105,7 @@ class OSD : public QObject {
                          const QString& message,
                          const QString& icon = QString(),
                          const QImage& image = QImage());
+  QString ReplaceVariable(const QString& variable, const Song& song);
 
  private slots:
   void CallFinished(QDBusPendingCallWatcher* watcher);
@@ -118,6 +121,10 @@ class OSD : public QObject {
   bool show_on_volume_change_;
   bool show_art_;
   bool show_on_play_mode_change_;
+  bool use_custom_text_;
+  QString custom_text1_;
+  QString custom_text2_;
+  bool preview_mode_;
 
   bool force_show_next_;
   bool ignore_next_stopped_;

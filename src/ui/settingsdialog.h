@@ -23,6 +23,7 @@
 #include <QUrl>
 
 #include "config.h"
+#include "widgets/osd.h"
 
 class QBoxLayout;
 class QCheckBox;
@@ -104,6 +105,11 @@ class SettingsDialog : public QDialog {
  private slots:
   void CurrentTextChanged(const QString& text);
   void NotificationTypeChanged();
+  void NotificationCustomTextChanged(bool enabled);
+  void PrepareNotificationPreview();
+  void InsertVariableFirstLine(QAction* action);
+  void InsertVariableSecondLine(QAction* action);
+  void ShowMenuTooltip(QAction* action);
 
   void PrettyOpacityChanged(int value);
   void PrettyColorPresetChanged(int index);
@@ -146,8 +152,9 @@ class SettingsDialog : public QDialog {
 
   BackgroundStreams* streams_;
 
-#ifdef HAVE_WIIMOTEDEV
  signals:
+  void NotificationPreview(OSD::Behaviour,QString,QString);
+#ifdef HAVE_WIIMOTEDEV
   void SetWiimotedevInterfaceActived(bool);
 #endif
 };

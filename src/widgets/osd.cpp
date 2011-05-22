@@ -38,6 +38,10 @@ OSD::OSD(SystemTrayIcon* tray_icon, QObject* parent)
     show_on_volume_change_(false),
     show_art_(true),
     show_on_play_mode_change_(true),
+    use_custom_text_(false),
+    custom_text1_(QString()),
+    custom_text2_(QString()),
+    preview_mode_(false),
     force_show_next_(false),
     ignore_next_stopped_(false),
     pretty_popup_(new OSDPretty(OSDPretty::Mode_Popup)),
@@ -70,6 +74,9 @@ void OSD::ReloadSettings() {
   show_on_volume_change_ = s.value("ShowOnVolumeChange", false).toBool();
   show_art_ = s.value("ShowArt", true).toBool();
   show_on_play_mode_change_ = s.value("ShowOnPlayModeChange", true).toBool();
+  use_custom_text_ = s.value(("CustomTextEnabled"), false).toBool();
+  custom_text1_ = s.value("CustomText1").toString();
+  custom_text2_ = s.value("CustomText2").toString();
 
   if (!SupportsNativeNotifications() && behaviour_ == Native)
     behaviour_ = Pretty;
@@ -83,17 +90,43 @@ void OSD::ReloadSettings() {
 void OSD::SongChanged(const Song &song) {
   // no cover art yet
   tray_icon_->SetNowPlaying(song, NULL);
-  QString summary(song.PrettyTitle());
-  if (!song.artist().isEmpty())
-    summary = QString("%1 - %2").arg(song.artist(), summary);
 
   QStringList message_parts;
-  if (!song.album().isEmpty())
-    message_parts << song.album();
-  if (song.disc() > 0)
-    message_parts << tr("disc %1").arg(song.disc());
-  if (song.track() > 0)
-    message_parts << tr("track %1").arg(song.track());
+  QString summary;
+  if (!use_custom_text_) {
+    summary = song.PrettyTitle();
+    if (!song.artist().isEmpty())
+      summary = QString("%1 - %2").arg(song.artist(), summary);
+    if (!song.album().isEmpty())
+      message_parts << song.album();
+    if (song.disc() > 0)
+      message_parts << tr("disc %1").arg(song.disc());
+    if (song.track() > 0)
+      message_parts << tr("track %1").arg(song.track());
+  } else {
+    QRegExp variable_replacer("[%][a-z]+[%]");
+    summary = custom_text1_;
+    QString message(custom_text2_);
+
+    // Replace the first line
+    int pos = 0;
+    variable_replacer.indexIn(custom_text1_);
+    while ((pos = variable_replacer.indexIn(custom_text1_, pos)) != -1) {
+      QStringList captured = variable_replacer.capturedTexts();
+      summary.replace(captured[0], ReplaceVariable(captured[0], song));
+      pos += variable_replacer.matchedLength();
+    }
+
+    // Replace the second line
+    pos = 0;
+    variable_replacer.indexIn(custom_text2_);
+    while ((pos = variable_replacer.indexIn(custom_text2_, pos)) != -1) {
+      QStringList captured = variable_replacer.capturedTexts();
+      message.replace(captured[0], ReplaceVariable(captured[0], song));
+      pos += variable_replacer.matchedLength();
+    }
+    message_parts << message;
+  }
 
   WaitingForAlbumArt waiting;
   waiting.icon = "notification-audio-play";
@@ -121,6 +154,12 @@ void OSD::AlbumArtLoaded(quint64 id, const QImage& image) {
 
 void OSD::AlbumArtLoaded(const WaitingForAlbumArt info, const QImage& image) {
   ShowMessage(info.summary, info.message, info.icon, image);
+
+  // Reload the saved settings if they were changed for preview
+  if (preview_mode_) {
+    ReloadSettings();
+    preview_mode_ = false;
+  }
 }
 
 void OSD::Paused() {
@@ -257,4 +296,48 @@ void OSD::RepeatModeChanged(PlaylistSequence::RepeatMode mode) {
     }
     ShowMessage(QCoreApplication::applicationName(), current_mode);
   }
+}
+
+QString OSD::ReplaceVariable(const QString& variable, const Song& song) {
+  QString return_value;
+  if (variable == "%artist%") {
+    return song.artist();
+  } else if (variable == "%album%") {
+    return song.album();
+  } else if (variable == "%title%") {
+    return song.PrettyTitle();
+  } else if (variable == "%albumartist%") {
+    return song.albumartist();
+  } else if (variable == "%year%") {
+    return song.PrettyYear();
+  } else if (variable == "%composer%") {
+    return song.composer();
+  } else if (variable == "%length%") {
+    return song.PrettyLength();
+  } else if (variable == "%disc%") {
+    return return_value.setNum(song.disc());
+  } else if (variable == "%track%") {
+    return return_value.setNum(song.track());
+  } else if (variable == "%genre%") {
+    return song.genre();
+  } else if (variable == "%playcount%") {
+    return return_value.setNum(song.playcount());
+  } else if (variable == "%skipcount%") {
+    return return_value.setNum(song.skipcount());
+  }
+
+  //if the variable is not recognized, just return it
+  return variable;
+}
+
+void OSD::ShowPreview(const Behaviour type, const QString& line1, const QString& line2, const Song& song) {
+  behaviour_ = type;
+  custom_text1_ = line1;
+  custom_text2_ = line2;
+  if (!use_custom_text_)
+    use_custom_text_ = true;
+  SongChanged(song);
+
+  // We want to reload the settings, but we can't do this here because the cover art loading is asynch
+  preview_mode_ = true;
 }

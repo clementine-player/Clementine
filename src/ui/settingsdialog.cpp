@@ -26,7 +26,6 @@
 #include "playlist/playlistview.h"
 #include "songinfo/songinfofetcher.h"
 #include "songinfo/songinfotextview.h"
-#include "widgets/osd.h"
 #include "widgets/osdpretty.h"
 
 #include "ui_settingsdialog.h"
@@ -52,7 +51,9 @@
 #include <QColorDialog>
 #include <QDir>
 #include <QFontDialog>
+#include <QMenu>
 #include <QSettings>
+#include <QToolTip>
 
 #include <QtDebug>
 
@@ -253,6 +254,27 @@ SettingsDialog::SettingsDialog(BackgroundStreams* streams, QWidget* parent)
   ui_->notifications_bg_preset->setItemData(0, QColor(OSDPretty::kPresetBlue), Qt::DecorationRole);
   ui_->notifications_bg_preset->setItemData(1, QColor(OSDPretty::kPresetOrange), Qt::DecorationRole);
 
+  // Create and populate the helper menus
+  QMenu* menu = new QMenu(this);
+  menu->addAction(ui_->action_artist);
+  menu->addAction(ui_->action_album);
+  menu->addAction(ui_->action_title);
+  menu->addAction(ui_->action_albumartist);
+  menu->addAction(ui_->action_year);
+  menu->addAction(ui_->action_composer);
+  menu->addAction(ui_->action_length);
+  menu->addAction(ui_->action_disc);
+  menu->addAction(ui_->action_track);
+  menu->addAction(ui_->action_genre);
+  menu->addAction(ui_->action_playcount);
+  menu->addAction(ui_->action_skipcount);
+  ui_->notifications_exp_chooser1->setMenu(menu);
+  ui_->notifications_exp_chooser2->setMenu(menu);
+  ui_->notifications_exp_chooser1->setPopupMode(QToolButton::InstantPopup);
+  ui_->notifications_exp_chooser2->setPopupMode(QToolButton::InstantPopup);
+  // We need this because by default menus don't show tooltips
+  connect(menu, SIGNAL(hovered(QAction*)), SLOT(ShowMenuTooltip(QAction*)));
+
   connect(ui_->notifications_none, SIGNAL(toggled(bool)), SLOT(NotificationTypeChanged()));
   connect(ui_->notifications_native, SIGNAL(toggled(bool)), SLOT(NotificationTypeChanged()));
   connect(ui_->notifications_tray, SIGNAL(toggled(bool)), SLOT(NotificationTypeChanged()));
@@ -260,6 +282,8 @@ SettingsDialog::SettingsDialog(BackgroundStreams* streams, QWidget* parent)
   connect(ui_->notifications_opacity, SIGNAL(valueChanged(int)), SLOT(PrettyOpacityChanged(int)));
   connect(ui_->notifications_bg_preset, SIGNAL(activated(int)), SLOT(PrettyColorPresetChanged(int)));
   connect(ui_->notifications_fg_choose, SIGNAL(clicked()), SLOT(ChooseFgColor()));
+  connect(ui_->notifications_exp_chooser1, SIGNAL(triggered(QAction*)), SLOT(InsertVariableFirstLine(QAction*)));
+  connect(ui_->notifications_exp_chooser2, SIGNAL(triggered(QAction*)), SLOT(InsertVariableSecondLine(QAction*)));
 
   if (!OSD::SupportsNativeNotifications())
     ui_->notifications_native->setEnabled(false);
@@ -268,6 +292,13 @@ SettingsDialog::SettingsDialog(BackgroundStreams* streams, QWidget* parent)
 
   connect(ui_->stacked_widget, SIGNAL(currentChanged(int)), SLOT(UpdatePopupVisible()));
   connect(ui_->notifications_pretty, SIGNAL(toggled(bool)), SLOT(UpdatePopupVisible()));
+
+  connect(ui_->notifications_custom_text_enabled, SIGNAL(toggled(bool)), SLOT(NotificationCustomTextChanged(bool)));
+  connect(ui_->notifications_preview, SIGNAL(clicked()), SLOT(PrepareNotificationPreview()));
+
+  // Icons
+  ui_->notifications_exp_chooser1->setIcon(IconLoader::Load("list-add"));
+  ui_->notifications_exp_chooser2->setIcon(IconLoader::Load("list-add"));
 
   // Make sure the list is big enough to show all the items
   ui_->list->setMinimumWidth(ui_->list->sizeHintForColumn(0));
@@ -390,6 +421,9 @@ void SettingsDialog::accept() {
   s.setValue("ShowOnVolumeChange", ui_->notifications_volume->isChecked());
   s.setValue("ShowOnPlayModeChange", ui_->notifications_play_mode->isChecked());
   s.setValue("ShowArt", ui_->notifications_art->isChecked());
+  s.setValue("CustomTextEnabled", ui_->notifications_custom_text_enabled->isChecked());
+  s.setValue("CustomText1", ui_->notifications_custom_text1->text());
+  s.setValue("CustomText2", ui_->notifications_custom_text2->text());
   s.endGroup();
 
   s.beginGroup(OSDPretty::kSettingsGroup);
@@ -574,6 +608,9 @@ void SettingsDialog::showEvent(QShowEvent*) {
   ui_->notifications_volume->setChecked(s.value("ShowOnVolumeChange", false).toBool());
   ui_->notifications_play_mode->setChecked(s.value("ShowOnPlayModeChange", true).toBool());
   ui_->notifications_art->setChecked(s.value("ShowArt", true).toBool());
+  ui_->notifications_custom_text_enabled->setChecked(s.value("CustomTextEnabled", false).toBool());
+  ui_->notifications_custom_text1->setText(s.value("CustomText1").toString());
+  ui_->notifications_custom_text2->setText(s.value("CustomText2").toString());
   s.endGroup();
 
   // Pretty OSD
@@ -641,6 +678,7 @@ void SettingsDialog::NotificationTypeChanged() {
 
   ui_->notifications_general->setEnabled(enabled);
   ui_->notifications_pretty_group->setEnabled(pretty);
+  ui_->notifications_custom_text_group->setEnabled(enabled);
 }
 
 void SettingsDialog::PrettyOpacityChanged(int value) {
@@ -733,4 +771,40 @@ void SettingsDialog::SongInfoFontSizeChanged(double value) {
   font.setPointSizeF(value);
 
   ui_->song_info_font_preview->setFont(font);
+}
+
+void SettingsDialog::NotificationCustomTextChanged(bool enabled) {
+  ui_->notifications_custom_text1->setEnabled(enabled);
+  ui_->notifications_custom_text2->setEnabled(enabled);
+  ui_->notifications_exp_chooser1->setEnabled(enabled);
+  ui_->notifications_exp_chooser2->setEnabled(enabled);
+  ui_->notifications_preview->setEnabled(enabled);
+}
+
+void SettingsDialog::PrepareNotificationPreview() {
+  OSD::Behaviour notificationType = OSD::Disabled;
+  if (ui_->notifications_native->isChecked()) {
+    notificationType = OSD::Native;
+  } else if (ui_->notifications_pretty->isChecked()) {
+    notificationType = OSD::Pretty;
+  } else if (ui_->notifications_tray->isChecked()) {
+    notificationType = OSD::TrayPopup;
+  }
+
+  // If user changes timeout or other options, that won't be reflected in the preview
+  emit NotificationPreview(notificationType, ui_->notifications_custom_text1->text(), ui_->notifications_custom_text2->text());
+}
+
+void SettingsDialog::InsertVariableFirstLine(QAction* action) {
+  // We use action name, therefore those shouldn't be translatable
+  ui_->notifications_custom_text1->insert(action->text());
+}
+
+void SettingsDialog::InsertVariableSecondLine(QAction* action) {
+  // We use action name, therefore those shouldn't be translatable
+  ui_->notifications_custom_text2->insert(action->text());
+}
+
+void SettingsDialog::ShowMenuTooltip(QAction *action) {
+  QToolTip::showText(QCursor::pos(), action->toolTip());
 }

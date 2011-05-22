@@ -1896,6 +1896,10 @@ void MainWindow::EnsureSettingsDialogCreated() {
 #ifdef HAVE_WIIMOTEDEV
   connect(settings_dialog_.get(), SIGNAL(SetWiimotedevInterfaceActived(bool)), wiimotedev_shortcuts_.get(), SLOT(SetWiimotedevInterfaceActived(bool)));
 #endif
+
+  // Allows custom notification preview
+  connect(settings_dialog_.get(), SIGNAL(NotificationPreview(OSD::Behaviour,QString,QString)),
+          SLOT(HandleNotificationPreview(OSD::Behaviour,QString,QString)));
 }
 
 void MainWindow::OpenSettingsDialog() {
@@ -2203,3 +2207,22 @@ void MainWindow::ScrobblerStatus(int value) {
   }
 }
 #endif
+
+void MainWindow::HandleNotificationPreview(OSD::Behaviour type, QString line1, QString line2) {
+  if (!playlists_->current()->GetAllSongs().isEmpty()) {
+    // Show a preview notification for the first song in the current playlist
+    osd_->ShowPreview(type, line1, line2, playlists_->current()->GetAllSongs().first());
+  } else {
+    qLog(Debug) << "The current playlist is empty, showing a fake song";
+    // Create a fake song
+    Song fake;
+    fake.Init("Title", "Artist", "Album", 123);
+    fake.set_genre("Classical");
+    fake.set_composer("Anonymous");
+    fake.set_track(1);
+    fake.set_disc(1);
+    fake.set_year(2011);
+
+    osd_->ShowPreview(type, line1, line2, fake);
+  }
+}

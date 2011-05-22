@@ -244,6 +244,8 @@ class MainWindow : public QMainWindow, public PlatformInterface {
 
   void Exit();
 
+  void HandleNotificationPreview(OSD::Behaviour type, QString line1, QString line2);
+
  private:
   void ConnectInfoView(SongInfoBase* view);
 
