@@ -1144,17 +1144,14 @@ bool PythonQtPrivate::addParentClass(const char* typeName, const char* parentTyp
 
 void PythonQtPrivate::registerCPPClass(const char* typeName, const char* parentTypeName, const char* package, PythonQtQObjectCreatorFunctionCB* wrapperCreator,  PythonQtShellSetInstanceWrapperCB* shell, PyObject* module, int typeSlots)
 {
-  QByteArray typeNameCopy(typeName);
-  typeNameCopy.replace("::", "_");
-
-  PythonQtClassInfo* info = lookupClassInfoAndCreateIfNotPresent(typeNameCopy);
+  PythonQtClassInfo* info = lookupClassInfoAndCreateIfNotPresent(typeName);
   if (!info->pythonQtClassWrapper()) {
     info->setTypeSlots(typeSlots);
-    info->setupCPPObject(typeNameCopy);
+    info->setupCPPObject(typeName);
     createPythonQtClassWrapper(info, package, module);
   }
   if (parentTypeName && strcmp(parentTypeName,"")!=0) {
-    addParentClass(typeNameCopy, parentTypeName, 0);
+    addParentClass(typeName, parentTypeName, 0);
   }
   if (wrapperCreator) {
     info->setDecoratorProvider(wrapperCreator);
