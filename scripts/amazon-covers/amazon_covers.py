@@ -1,25 +1,26 @@
 import clementine
 
-from PythonQt.QtCore    import QUrl, QString
+from PythonQt.QtCore    import QUrl
 from PythonQt.QtNetwork import QNetworkRequest
-from xml.etree.ElementTree import fromstring
 
-import urllib
-import time
-import hashlib
 import base64
+import hashlib
 import hmac
+import logging
+import time
+import urllib
+import xml.etree.ElementTree
+
+LOGGER = logging.getLogger("amazon_covers")
 
 
 class AmazonCoversScript():
-
   def __init__(self):
     # create and register our factory
     self.factory = AmazonCoverProviderFactory()
 
 
 class AmazonCoverProviderFactory(clementine.CoverProviderFactory):
-
   def __init__(self):
     clementine.CoverProviderFactory.__init__(self)
     # register in the repository of factories
@@ -35,13 +36,12 @@ class AmazonCoverProvider(clementine.CoverProvider):
   an open source application called Cardapio.
   """
 
-  def __init__(self):
-    clementine.CoverProvider.__init__(self, "Amazon")
+  API_URL = 'http://ecs.amazonaws.com/onca/xml?{0}'
+  AWS_ACCESS_KEY = 'AKIAJ4QO3GQTSM3A43BQ'
+  AWS_SECRET_ACCESS_KEY = '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'
 
-    self.api_url = 'http://ecs.amazonaws.com/onca/xml?{0}'
-
-    self.aws_access_key = 'AKIAJ4QO3GQTSM3A43BQ'
-    self.aws_secret_access_key = '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'
+  def __init__(self, parent):
+    clementine.CoverProvider.__init__(self, "Amazon", parent)
 
     # basic API's arguments (search in all categories)
     self.api_base_args = {
@@ -50,15 +50,14 @@ class AmazonCoverProvider(clementine.CoverProvider):
       'Operation'     : 'ItemSearch',
       'SearchIndex'   : 'All',
       'ResponseGroup' : 'Images',
-      'AWSAccessKeyId': self.aws_access_key
+      'AWSAccessKeyId': self.AWS_ACCESS_KEY
     }
-    self.network = clementine.NetworkAccessManager(self)    
-
-    # register in the repository of cover providers
-    clementine.cover_providers.AddCoverProvider(self)
+    self.network = clementine.NetworkAccessManager(self)
 
   def SendRequest(self, query):
-    url = QUrl.fromEncoded(self.api_url.format(self.PrepareAmazonRESTUrl(query)))
+    url = QUrl.fromEncoded(self.API_URL.format(self.PrepareAmazonRESTUrl(query)))
+    LOGGER.info("Sending request to '%s'", url)
+
     return self.network.get(QNetworkRequest(url))
 
   def ParseReply(self, reply):
@@ -72,7 +71,7 @@ class AmazonCoverProvider(clementine.CoverProvider):
       if len(xml_body) == 0:
         return parsed
 
-      root = fromstring(xml_body)
+      root = xml.etree.ElementTree.fromstring(xml_body)
 
       # strip the namespaces from all of the parsed items
       for el in root.getiterator():
@@ -81,7 +80,7 @@ class AmazonCoverProvider(clementine.CoverProvider):
           el.tag = el.tag[(ns_pos + 1):]
 
     except Exception as ex:
-      print 'error while preparing reply for parsing', ex
+      LOGGER.exception(ex)
       return parsed
 
     # decode the result
@@ -92,28 +91,29 @@ class AmazonCoverProvider(clementine.CoverProvider):
       total_results = root.find('Items/TotalResults')
 
       # if we have a valid response with any results...
-      if (not is_valid is None) and is_valid != 'False' and (not total_results is None) and total_results != '0':
+      if is_valid is not None and is_valid != 'False' and \
+         total_results is not None and total_results != '0':
         query = root.find('Items/Request/ItemSearchRequest/Keywords').text
 
         # remember them all
-        for i, item in enumerate(root.findall('Items/Item')):
+        for item in root.findall('Items/Item'):
           final_url = None
           current_url = item.find('LargeImage/URL')
 
-          if current_url == None:
+          if current_url is None:
             current_url = item.find('MediumImage/URL')
 
-          if current_url == None:
+          if current_url is None:
             continue
 
           current = clementine.CoverSearchResult()
-          current.description = QString(query)
-          current.image_url = QString(current_url.text)
+          current.description = str(query)
+          current.image_url = str(current_url.text)
 
           parsed.append(current)
 
     except KeyError as ex:
-      print 'incorrect response structure', ex
+      LOGGER.exception(ex)
 
     return parsed
 
@@ -129,10 +129,8 @@ class AmazonCoverProvider(clementine.CoverProvider):
     copy_args['Timestamp'] = time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime())
 
     # turn the argument map into a list of encoded request parameter strings
-    query_list = map(
-      lambda (k, v): (k + "=" + urllib.quote(v)),
-      copy_args.items()
-    )
+    query_list = ["%s=%s" % (k, urllib.quote(v))
+                  for k, v in copy_args.items()]
 
     # sort the list (by parameter name)
     query_list.sort()
@@ -147,7 +145,7 @@ class AmazonCoverProvider(clementine.CoverProvider):
 {1}""".format('ecs.amazonaws.com', query_string)
 
     # create HMAC for the string (using SHA-256 and our secret API key)
-    hm = hmac.new(key = self.aws_secret_access_key,
+    hm = hmac.new(key = self.AWS_SECRET_ACCESS_KEY,
                   msg = string_to_sign,
                   digestmod = hashlib.sha256)
     # final step... convert the HMAC to base64, then encode it
@@ -156,4 +154,4 @@ class AmazonCoverProvider(clementine.CoverProvider):
     return query_string + '&Signature=' + signature
 
 
-script = AmazonCoversScript()
+amazon_script = AmazonCoversScript()

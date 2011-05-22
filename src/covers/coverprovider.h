@@ -40,7 +40,7 @@ public:
 
   // Given a search request from Clementine, provider has to create and invoke
   // a NetworkRequest. It then has to return a corresponding NetworkReply,
-  // without connecting to it's finished() signal!
+  // without connecting to its finished() signal!
   // Responsibilities of provider:
   // - maps the given query to a NetworkRequest that a service this provider
   //   uses will understand
