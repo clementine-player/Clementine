@@ -172,6 +172,7 @@ Section "Clementine" Clementine
   ; Python library
   File "python27.dll"
   File "Python27.zip"
+  File "libpythonqt.dll"
 
   ; Check the OS.  If Vista or newer, use Default Programs
   nsisos::osversion
@@ -1030,6 +1031,7 @@ Section "Uninstall"
 
   Delete "$INSTDIR\python27.dll"
   Delete "$INSTDIR\Python27.zip"
+  Delete "$INSTDIR\libpythonqt.dll"
 
   Delete "$INSTDIR\DLLs\_bsddb.pyd"
   Delete "$INSTDIR\DLLs\_ctypes.pyd"
