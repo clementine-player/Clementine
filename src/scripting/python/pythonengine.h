@@ -50,6 +50,10 @@ public:
   Script* CreateScript(const ScriptInfo& info);
   void DestroyScript(Script* script);
 
+public slots:
+  void HandleLogRecord(int level, const QString& logger_name, int lineno,
+                       const QString& message);
+
 private slots:
   void PythonStdOut(const QString& str);
   void PythonStdErr(const QString& str);
@@ -57,6 +61,9 @@ private slots:
 private:
   void AddModuleToModel(const QString& name, PythonQtObjectPtr ptr);
   void RemoveModuleFromModel(const QString& name);
+
+  void AddStringToBuffer(const QString& str, const QString& buffer_name,
+                         QString* buffer, bool error);
 
 private:
   static PythonEngine* sInstance;
@@ -67,6 +74,9 @@ private:
 
   QMap<QString, Script*> loaded_scripts_;
   QStandardItemModel* modules_model_;
+
+  QString stdout_buffer_;
+  QString stderr_buffer_;
 };
 
 #endif // PYTHONENGINE_H

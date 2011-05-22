@@ -315,8 +315,6 @@ void ScriptManager::AddLogLine(const QString& who, const QString& message, bool 
     log_lines_ << html;
     log_lines_plain_ << plain;
     emit LogLineAdded(html);
-
-    qLog(Info) << plain.toLocal8Bit().constData();
   }
 }
 

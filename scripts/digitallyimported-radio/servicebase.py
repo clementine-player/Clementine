@@ -7,8 +7,12 @@ from PythonQt.QtGui     import QAction, QDesktopServices, QIcon, QMenu, \
 from PythonQt.QtNetwork import QNetworkRequest
 
 import json
+import logging
 import operator
 import os.path
+
+LOGGER = logging.getLogger("di.servicebase")
+
 
 class DigitallyImportedUrlHandler(clementine.UrlHandler):
   def __init__(self, url_scheme, service):
@@ -33,6 +37,7 @@ class DigitallyImportedUrlHandler(clementine.UrlHandler):
       return result
 
     key = original_url.host()
+    LOGGER.info("Loading station %s", key)
     self.service.LoadStation(key)
 
     # Save the original URL so we can emit it in the finished signal later
@@ -58,6 +63,8 @@ class DigitallyImportedUrlHandler(clementine.UrlHandler):
     # Try to parse the playlist
     parser = clementine.PlaylistParser(clementine.library)
     songs = parser.LoadFromDevice(reply)
+
+    LOGGER.info("Loading station finished, got %d songs", len(songs))
 
     # Failed to get the playlist?
     if len(songs) == 0:
@@ -160,6 +167,8 @@ class DigitallyImportedServiceBase(clementine.RadioService):
     if self.task_id is not None:
       return
 
+    LOGGER.info("Getting stream list from '%s'", self.STREAM_LIST_URL)
+
     # Request the list of stations
     self.refresh_streams_reply = self.network.get(QNetworkRequest(self.STREAM_LIST_URL))
     self.refresh_streams_reply.connect("finished()", self.RefreshStreamsFinished)
@@ -188,13 +197,14 @@ class DigitallyImportedServiceBase(clementine.RadioService):
     # Sort by name
     streams = sorted(streams, key=operator.itemgetter("name"))
 
+    LOGGER.info("Loaded %d streams", len(streams))
+
     # Now we have the list of streams, so clear any existing items in the list
     # and insert the new ones
     if self.root.hasChildren():
       self.root.removeRows(0, self.root.rowCount())
 
     for stream in streams:
-      print stream
       song = clementine.Song()
       song.set_title(stream["name"])
       song.set_artist(self.SERVICE_DESCRIPTION)

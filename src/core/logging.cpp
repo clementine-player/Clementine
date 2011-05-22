@@ -123,16 +123,7 @@ void SetLevels(const QString& levels) {
   }
 }
 
-QDebug CreateLogger(Level level, const char* pretty_function, int line) {
-  // Map the level to a string
-  const char* level_name = NULL;
-  switch (level) {
-    case Level_Debug:   level_name = " DEBUG "; break;
-    case Level_Info:    level_name = " INFO  "; break;
-    case Level_Warning: level_name = " WARN  "; break;
-    case Level_Error:   level_name = " ERROR "; break;
-  }
-
+QString ParsePrettyFunction(const char * pretty_function) {
   // Get the class name out of the function name.
   QString class_name = pretty_function;
   const int paren = class_name.indexOf('(');
@@ -148,6 +139,19 @@ QDebug CreateLogger(Level level, const char* pretty_function, int line) {
   const int space = class_name.lastIndexOf(' ');
   if (space != -1) {
     class_name = class_name.mid(space+1);
+  }
+
+  return class_name;
+}
+
+QDebug CreateLogger(Level level, const QString& class_name, int line) {
+  // Map the level to a string
+  const char* level_name = NULL;
+  switch (level) {
+    case Level_Debug:   level_name = " DEBUG "; break;
+    case Level_Info:    level_name = " INFO  "; break;
+    case Level_Warning: level_name = " WARN  "; break;
+    case Level_Error:   level_name = " ERROR "; break;
   }
 
   // Check the settings to see if we're meant to show or hide this message.

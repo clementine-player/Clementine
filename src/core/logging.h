@@ -28,7 +28,8 @@
 #  define qLog(level) while (false) QNoDebug()
 #else
 #  define qLog(level) \
-     logging::CreateLogger(logging::Level_##level, __PRETTY_FUNCTION__, __LINE__)
+     logging::CreateLogger(logging::Level_##level, \
+         logging::ParsePrettyFunction(__PRETTY_FUNCTION__), __LINE__)
 #endif
 
 namespace logging {
@@ -48,7 +49,8 @@ namespace logging {
   void Init();
   void SetLevels(const QString& levels);
 
-  QDebug CreateLogger(Level level, const char* pretty_function, int line);
+  QString ParsePrettyFunction(const char* pretty_function);
+  QDebug CreateLogger(Level level, const QString& class_name, int line);
 
   void GLog(const char* domain, int level, const char* message, void* user_data);
 

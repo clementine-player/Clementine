@@ -76,18 +76,22 @@ bool PythonEngine::EnsureInitialised() {
   if (initialised_)
     return true;
 
-  PythonStdOut("Initialising python...");
-
   PythonQt::init(PythonQt::IgnoreSiteModule | PythonQt::RedirectStdOut);
+  PythonQt* python_qt = PythonQt::self();
+
+  // Add the Qt bindings
   PythonQt_init_QtCore(0);
   PythonQt_init_QtGui(0);
   PythonQt_init_QtNetwork(0);
 
-  PythonQt* python_qt = PythonQt::self();
+  // Set the importer to allow imports from Qt resource paths
   python_qt->installDefaultImporter();
-  python_qt->addDecorators(new ObjectDecorators);
   python_qt->addSysPath(":/pythonlibs/");
 
+  // Add some extra decorators on QObjects
+  python_qt->addDecorators(new ObjectDecorators);
+
+  // Register converters for list types
   PythonQtConv::registerMetaTypeToPythonConverter(qMetaTypeId<SongList>(),
       PythonQtConvertListOfValueTypeToPythonList<SongList, Song>);
   PythonQtConv::registerMetaTypeToPythonConverter(QMetaType::type("QList<Song>"),
@@ -106,6 +110,7 @@ bool PythonEngine::EnsureInitialised() {
   PythonQtConv::registerPythonToMetaTypeConverter(qMetaTypeId<CoverSearchResults>(),
       PythonQtConvertPythonListToListOfValueType<CoverSearchResults, CoverSearchResult>);
 
+  // Connect stdout, stderr
   connect(python_qt, SIGNAL(pythonStdOut(QString)), SLOT(PythonStdOut(QString)));
   connect(python_qt, SIGNAL(pythonStdErr(QString)), SLOT(PythonStdErr(QString)));
 
@@ -132,15 +137,17 @@ bool PythonEngine::EnsureInitialised() {
   clementine_module_.addObject("ui",           manager()->ui());
   clementine_module_.addObject("pythonengine", this);
 
+  // Set up logging integration
+  PythonQtObjectPtr logging_module = python_qt->importModule("clementinelogging");
+  logging_module.call("setup_logging");
+
   // Create a module for scripts
-  qLog(Debug) << "Creating scripts module";
   scripts_module_ = python_qt->createModuleFromScript(kScriptModulePrefix);
 
   // The modules model contains all the modules
   modules_model_->clear();
   AddModuleToModel("__main__", python_qt->getMainModule());
 
-  qLog(Debug) << "Python initialisation complete";
   initialised_ = true;
   return true;
 }
@@ -171,12 +178,42 @@ void PythonEngine::DestroyScript(Script* script) {
   delete script;
 }
 
+void PythonEngine::AddStringToBuffer(const QString& str,
+                                     const QString& buffer_name,
+                                     QString* buffer, bool error) {
+  buffer->append(str);
+
+  int index = buffer->indexOf('\n');
+  while (index != -1) {
+    const QString message = buffer->left(index);
+    buffer->remove(0, index + 1);
+    index = buffer->indexOf('\n');
+
+    logging::CreateLogger(logging::Level_Info, buffer_name, -1) <<
+        message.toUtf8().constData();
+    manager()->AddLogLine(buffer_name, str, error);
+  }
+}
+
 void PythonEngine::PythonStdOut(const QString& str) {
-  manager()->AddLogLine("Python", str, false);
+  AddStringToBuffer(str, "sys.stdout", &stdout_buffer_, false);
 }
 
 void PythonEngine::PythonStdErr(const QString& str) {
-  manager()->AddLogLine("Python", str, true);
+  AddStringToBuffer(str, "sys.stderr", &stdout_buffer_, true);
+}
+
+void PythonEngine::HandleLogRecord(int level, const QString& logger_name,
+                                   int lineno, const QString& message) {
+  logging::Level        level_name = logging::Level_Debug;
+  if      (level >= 40) level_name = logging::Level_Error;
+  else if (level >= 30) level_name = logging::Level_Warning;
+  else if (level >= 20) level_name = logging::Level_Info;
+
+  logging::CreateLogger(level_name, logger_name, lineno) <<
+      message.toUtf8().constData();
+  manager()->AddLogLine(QString("%1:%2").arg(logger_name).arg(lineno),
+                        message, level >= 30);
 }
 
 void PythonEngine::AddModuleToModel(const QString& name, PythonQtObjectPtr ptr) {
