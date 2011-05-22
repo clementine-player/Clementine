@@ -159,6 +159,7 @@ bool PythonQtCallSlot(PythonQtClassInfo* classInfo, QObject* objectToCall, PyObj
       QString e = QString("Called ") + info->fullSignature() + ", return type '" + returnValueParam.name + "' is ignored because it is unknown to PythonQt. Probably you should register it using qRegisterMetaType() or add a default constructor decorator to the class.";
       PyErr_SetString(PyExc_ValueError, e.toLatin1().data());
       result = NULL;
+      ok = false;
     }
   }
   recursiveEntry--;
@@ -170,7 +171,7 @@ bool PythonQtCallSlot(PythonQtClassInfo* classInfo, QObject* objectToCall, PyObj
   
   *pythonReturnValue = result;
   // NOTE: it is important to only return here, otherwise the stack will not be popped!!!
-  return result || (directReturnValuePointer && *directReturnValuePointer);
+  return ok;
 }
 
 //-----------------------------------------------------------------------------------
