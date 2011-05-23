@@ -268,6 +268,8 @@ SettingsDialog::SettingsDialog(BackgroundStreams* streams, QWidget* parent)
   menu->addAction(ui_->action_genre);
   menu->addAction(ui_->action_playcount);
   menu->addAction(ui_->action_skipcount);
+  menu->addSeparator();
+  menu->addAction(ui_->action_newline);
   ui_->notifications_exp_chooser1->setMenu(menu);
   ui_->notifications_exp_chooser2->setMenu(menu);
   ui_->notifications_exp_chooser1->setPopupMode(QToolButton::InstantPopup);

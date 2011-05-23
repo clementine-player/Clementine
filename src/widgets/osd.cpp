@@ -16,6 +16,7 @@
 */
 
 #include "config.h"
+#include "core/logging.h"
 #include "osd.h"
 #include "osdpretty.h"
 #include "ui/systemtrayicon.h"
@@ -324,6 +325,23 @@ QString OSD::ReplaceVariable(const QString& variable, const Song& song) {
     return return_value.setNum(song.playcount());
   } else if (variable == "%skipcount%") {
     return return_value.setNum(song.skipcount());
+  } else if (variable == "%newline%") {
+    // We need different strings depending on notification type
+    switch (behaviour_) {
+      case Pretty:
+        return "<br/>";
+      case Native:
+#ifdef Q_OS_DARWIN
+        return "\n";
+#endif
+#ifdef Q_OS_LINUX
+        return "<br/>";
+#endif
+      // Other OS don't support native notifications
+      default:
+        qLog(Debug) << "New line not supported by this notification type";
+        return "";
+    }
   }
 
   //if the variable is not recognized, just return it

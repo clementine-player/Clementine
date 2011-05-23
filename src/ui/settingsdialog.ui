@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>748</width>
+    <width>746</width>
     <height>642</height>
    </rect>
   </property>
@@ -901,7 +901,7 @@
             <item>
              <widget class="QFrame" name="frame">
               <property name="frameShape">
-               <enum>QFrame::StyledPanel</enum>
+               <enum>QFrame::NoFrame</enum>
               </property>
               <property name="frameShadow">
                <enum>QFrame::Plain</enum>
@@ -936,14 +936,14 @@
                <item row="0" column="0">
                 <widget class="QLabel" name="label_19">
                  <property name="text">
-                  <string>First line:</string>
+                  <string>Summary</string>
                  </property>
                 </widget>
                </item>
                <item row="1" column="0">
                 <widget class="QLabel" name="label_20">
                  <property name="text">
-                  <string>Second line:</string>
+                  <string>Body</string>
                  </property>
                 </widget>
                </item>
@@ -1458,6 +1458,14 @@
    </property>
    <property name="toolTip">
     <string>Add song skip count</string>
+   </property>
+  </action>
+  <action name="action_newline">
+   <property name="text">
+    <string notr="true">%newline%</string>
+   </property>
+   <property name="toolTip">
+    <string>Add a new line if supported by the notification type</string>
    </property>
   </action>
  </widget>
