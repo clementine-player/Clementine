@@ -232,7 +232,7 @@ void LibraryFilterWidget::keyReleaseEvent(QKeyEvent* e) {
       break;
 
     case Qt::Key_Escape:
-      ui_->filter->LineEditInterface::clear();
+      filter_->clear();
       e->accept();
       break;
   }
