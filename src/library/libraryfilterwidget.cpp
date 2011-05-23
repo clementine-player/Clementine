@@ -113,10 +113,12 @@ LibraryFilterWidget::LibraryFilterWidget(QWidget *parent)
   ui_->options->setMenu(library_menu_);
 
 #ifdef Q_OS_DARWIN
+  QString hint = ui_->filter->hint();
   delete ui_->filter;
   MacLineEdit* lineedit = new MacLineEdit(this);
   ui_->horizontalLayout->insertWidget(1, lineedit);
   filter_ = lineedit;
+  filter_->set_hint(hint);
 #else
   filter_ = ui_->filter;
 #endif
