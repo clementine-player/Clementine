@@ -25,6 +25,7 @@
 #include "spotifymessages.pb.h"
 #include "core/logging.h"
 
+#include <QCoreApplication>
 #include <QDir>
 #include <QHostAddress>
 #include <QTcpSocket>
@@ -80,6 +81,8 @@ SpotifyClient::SpotifyClient(QObject* parent)
 
   connect(handler_, SIGNAL(MessageArrived(protobuf::SpotifyMessage)),
           SLOT(HandleMessage(protobuf::SpotifyMessage)));
+  connect(protocol_socket_, SIGNAL(disconnected()),
+          QCoreApplication::instance(), SLOT(quit()));
 }
 
 SpotifyClient::~SpotifyClient() {
