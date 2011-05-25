@@ -25,13 +25,16 @@
 #include <QMessageBox>
 #include <QProcess>
 #include <QSettings>
+#include <QVariant>
+
+Q_DECLARE_METATYPE(QStandardItem*);
 
 const char* SpotifyService::kServiceName = "Spotify";
 const char* SpotifyService::kSettingsGroup = "Spotify";
 const char* SpotifyService::kBlobDownloadUrl = "http://spotify.clementine-player.org/";
 const int SpotifyService::kSearchDelayMsec = 400;
 
-SpotifyService::SpotifyService(RadioModel* parent)
+SpotifyService::SpotifyService(TaskManager* task_manager, RadioModel* parent)
     : RadioService(kServiceName, parent),
       server_(NULL),
       url_handler_(new SpotifyUrlHandler(this, this)),
@@ -43,7 +46,8 @@ SpotifyService::SpotifyService(RadioModel* parent)
       login_task_id_(0),
       pending_search_playlist_(NULL),
       context_menu_(NULL),
-      search_delay_(new QTimer(this)) {
+      search_delay_(new QTimer(this)),
+      task_manager_(task_manager) {
   // Build the search path for the binary blob.
   // Look for one distributed alongside clementine first, then check in the
   // user's home directory for any that have been downloaded.
@@ -176,6 +180,8 @@ void SpotifyService::EnsureServerCreated(const QString& username,
           SLOT(SearchResults(protobuf::SearchResponse)));
   connect(server_, SIGNAL(ImageLoaded(QString,QImage)),
           SLOT(ImageLoaded(QString,QImage)));
+  connect(server_, SIGNAL(SyncPlaylistProgress(protobuf::SyncPlaylistProgress)),
+          SLOT(SyncPlaylistProgress(protobuf::SyncPlaylistProgress)));
 
   server_->Init();
 
@@ -416,6 +422,39 @@ void SpotifyService::EnsureMenuCreated() {
   context_menu_->addAction(IconLoader::Load("edit-find"), tr("Search Spotify (opens a new tab)..."), this, SLOT(OpenSearchTab()));
   context_menu_->addSeparator();
   context_menu_->addAction(IconLoader::Load("configure"), tr("Configure Spotify..."), this, SLOT(ShowConfig()));
+
+  playlist_context_menu_ = new QMenu;
+  playlist_sync_action_ = playlist_context_menu_->addAction(
+      IconLoader::Load("view-refresh"),
+      tr("Make playlist available offline"),
+      this,
+      SLOT(SyncPlaylist()));
+}
+
+void SpotifyService::SyncPlaylist() {
+  QStandardItem* item = playlist_sync_action_->data().value<QStandardItem*>();
+  Q_ASSERT(item);
+
+  Type type = static_cast<Type>(item->data(RadioModel::Role_Type).toInt());
+  switch (type) {
+    case Type_UserPlaylist: {
+      int index = item->data(Role_UserPlaylistIndex).toInt();
+      server_->SyncUserPlaylist(index);
+      playlist_sync_ids_[index] =
+          task_manager_->StartTask(tr("Syncing Spotify playlist"));
+      break;
+    }
+    case Type_InboxPlaylist:
+      server_->SyncInbox();
+      inbox_sync_id_ = task_manager_->StartTask(tr("Syncing Spotify inbox"));
+      break;
+    case Type_StarredPlaylist:
+      server_->SyncStarred();
+      starred_sync_id_ = task_manager_->StartTask(tr("Syncing Spotify starred tracks"));
+      break;
+    default:
+      break;
+  }
 }
 
 void SpotifyService::Search(const QString& text, Playlist* playlist, bool now) {
@@ -472,6 +511,18 @@ SpotifyServer* SpotifyService::server() const {
 
 void SpotifyService::ShowContextMenu(const QModelIndex& index, const QPoint& global_pos) {
   EnsureMenuCreated();
+  QStandardItem* item = model()->itemFromIndex(index);
+  if (item) {
+    Type type = static_cast<Type>(item->data(RadioModel::Role_Type).toInt());
+    if (type == Type_InboxPlaylist ||
+        type == Type_StarredPlaylist ||
+        type == Type_UserPlaylist) {
+      playlist_sync_action_->setData(qVariantFromValue(item));
+      playlist_context_menu_->popup(global_pos);
+      return;
+    }
+  }
+
   context_menu_->popup(global_pos);
 }
 
@@ -505,7 +556,41 @@ void SpotifyService::ImageLoaded(const QString& id, const QImage& image) {
   emit ImageLoaded(QUrl("spotify://image/" + id), image);
 }
 
+void SpotifyService::SyncPlaylistProgress(
+    const protobuf::SyncPlaylistProgress& progress) {
+  qLog(Debug) << "Sync progress:" << progress.sync_progress();
+  int task_id = -1;
+  switch (progress.request().type()) {
+    case protobuf::Inbox:
+      task_id = inbox_sync_id_;
+      break;
+    case protobuf::Starred:
+      task_id = starred_sync_id_;
+      break;
+    case protobuf::UserPlaylist: {
+      QMap<int, int>::const_iterator it = playlist_sync_ids_.find(
+          progress.request().user_playlist_index());
+      if (it != playlist_sync_ids_.end()) {
+        task_id = it.value();
+      }
+      break;
+    }
+    default:
+      break;
+  }
+  if (task_id == -1) {
+    qLog(Warning) << "Received sync progress for unknown playlist";
+    return;
+  }
+  task_manager_->SetTaskProgress(task_id, progress.sync_progress(), 100);
+  if (progress.sync_progress() == 100) {
+    task_manager_->SetTaskFinished(task_id);
+    if (progress.request().type() == protobuf::UserPlaylist) {
+      playlist_sync_ids_.remove(task_id);
+    }
+  }
+}
+
 void SpotifyService::ShowConfig() {
   emit OpenSettingsAtPage(SettingsDialog::Page_Spotify);
 }
-

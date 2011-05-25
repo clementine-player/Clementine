@@ -66,6 +66,7 @@ private:
     const void* frames, int num_frames);
   static void SP_CALLCONV EndOfTrackCallback(sp_session* session);
   static void SP_CALLCONV StreamingErrorCallback(sp_session* session, sp_error error);
+  static void SP_CALLCONV OfflineStatusUpdatedCallback(sp_session* session);
 
   // Spotify playlist container callbacks.
   static void SP_CALLCONV PlaylistAddedCallback(
@@ -94,18 +95,22 @@ private:
   void Login(const QString& username, const QString& password);
   void Search(const protobuf::SearchRequest& req);
   void LoadPlaylist(const protobuf::LoadPlaylistRequest& req);
+  void SyncPlaylist(const protobuf::SyncPlaylistRequest& req);
   void StartPlayback(const protobuf::PlaybackRequest& req);
   void LoadImage(const QString& id_b64);
 
   void SendPlaylistList();
 
   void ConvertTrack(sp_track* track, protobuf::Track* pb);
+  // Gets the appropriate sp_playlist* but does not load it.
+  sp_playlist* GetPlaylist(protobuf::PlaylistType type, int user_index);
 
 private:
   struct PendingLoadPlaylist {
     protobuf::LoadPlaylistRequest request_;
     sp_playlist* playlist_;
     QList<sp_track*> tracks_;
+    bool offline_sync;
   };
 
   struct PendingPlaybackRequest {
@@ -127,6 +132,8 @@ private:
 
   void TryPlaybackAgain(const PendingPlaybackRequest& req);
   void TryImageAgain(sp_image* image);
+  int GetDownloadProgress(sp_playlist* playlist);
+  void SendDownloadProgress(protobuf::PlaylistType type, int index, int download_progress);
 
   QByteArray api_key_;
 

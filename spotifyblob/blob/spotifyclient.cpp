@@ -55,6 +55,7 @@ SpotifyClient::SpotifyClient(QObject* parent)
   spotify_callbacks_.music_delivery = &MusicDeliveryCallback;
   spotify_callbacks_.end_of_track = &EndOfTrackCallback;
   spotify_callbacks_.streaming_error = &StreamingErrorCallback;
+  spotify_callbacks_.offline_status_updated = &OfflineStatusUpdatedCallback;
 
   playlistcontainer_callbacks_.container_loaded = &PlaylistContainerLoadedCallback;
   playlistcontainer_callbacks_.playlist_added = &PlaylistAddedCallback;
@@ -191,6 +192,8 @@ void SpotifyClient::HandleMessage(const protobuf::SpotifyMessage& message) {
     Search(message.search_request());
   } else if (message.has_image_request()) {
     LoadImage(QStringFromStdString(message.image_request().id()));
+  } else if (message.has_sync_playlist_request()) {
+    SyncPlaylist(message.sync_playlist_request());
   }
 }
 
@@ -283,39 +286,53 @@ void SpotifyClient::SendPlaylistList() {
     protobuf::Playlists::Playlist* msg = response->add_playlist();
     msg->set_index(i);
     msg->set_name(sp_playlist_name(playlist));
+
+    sp_playlist_offline_status offline_status =
+        sp_playlist_get_offline_status(session_, playlist);
+    const bool is_offline = offline_status == SP_PLAYLIST_OFFLINE_STATUS_YES;
+    msg->set_is_offline(is_offline);
+    if (offline_status == SP_PLAYLIST_OFFLINE_STATUS_DOWNLOADING) {
+      msg->set_download_progress(
+          sp_playlist_get_offline_download_completed(session_, playlist));
+    } else if (offline_status == SP_PLAYLIST_OFFLINE_STATUS_WAITING) {
+      msg->set_download_progress(0);
+    }
   }
 
   handler_->SendMessage(message);
 }
 
-void SpotifyClient::LoadPlaylist(const protobuf::LoadPlaylistRequest& req) {
-  PendingLoadPlaylist pending_load;
-  pending_load.request_ = req;
-  pending_load.playlist_ = NULL;
-
-  switch (req.type()) {
-    case protobuf::LoadPlaylistRequest_Type_Inbox:
-      pending_load.playlist_ = sp_session_inbox_create(session_);
+sp_playlist* SpotifyClient::GetPlaylist(protobuf::PlaylistType type, int user_index) {
+  sp_playlist* playlist = NULL;
+  switch (type) {
+    case protobuf::Inbox:
+      playlist = sp_session_inbox_create(session_);
       break;
 
-    case protobuf::LoadPlaylistRequest_Type_Starred:
-      pending_load.playlist_ = sp_session_starred_create(session_);
+    case protobuf::Starred:
+      playlist = sp_session_starred_create(session_);
       break;
 
-    case protobuf::LoadPlaylistRequest_Type_UserPlaylist: {
-      const int index = req.user_playlist_index();
+    case protobuf::UserPlaylist: {
       sp_playlistcontainer* pc = sp_session_playlistcontainer(session_);
 
-      if (pc && index <= sp_playlistcontainer_num_playlists(pc)) {
-        if (sp_playlistcontainer_playlist_type(pc, index) == SP_PLAYLIST_TYPE_PLAYLIST) {
-          pending_load.playlist_ = sp_playlistcontainer_playlist(pc, index);
-          sp_playlist_add_ref(pending_load.playlist_);
+      if (pc && user_index <= sp_playlistcontainer_num_playlists(pc)) {
+        if (sp_playlistcontainer_playlist_type(pc, user_index) == SP_PLAYLIST_TYPE_PLAYLIST) {
+          playlist = sp_playlistcontainer_playlist(pc, user_index);
+          sp_playlist_add_ref(playlist);
         }
       }
 
       break;
     }
   }
+  return playlist;
+}
+
+void SpotifyClient::LoadPlaylist(const protobuf::LoadPlaylistRequest& req) {
+  PendingLoadPlaylist pending_load;
+  pending_load.request_ = req;
+  pending_load.playlist_ = GetPlaylist(req.type(), req.user_playlist_index());
 
   // A null playlist might mean the user wasn't logged in, or an invalid
   // playlist index was requested, so we'd better return an error straight away.
@@ -333,6 +350,13 @@ void SpotifyClient::LoadPlaylist(const protobuf::LoadPlaylistRequest& req) {
   pending_load_playlists_ << pending_load;
 
   PlaylistStateChangedForLoadPlaylist(pending_load.playlist_, this);
+}
+
+void SpotifyClient::SyncPlaylist(const protobuf::SyncPlaylistRequest& req) {
+  sp_playlist* playlist = GetPlaylist(req.request().type(), req.request().user_playlist_index());
+
+  // The playlist should already be loaded.
+  sp_playlist_set_offline_mode(session_, playlist, req.offline_sync());
 }
 
 void SpotifyClient::PlaylistStateChangedForLoadPlaylist(sp_playlist* pl, void* userdata) {
@@ -518,6 +542,76 @@ void SpotifyClient::StreamingErrorCallback(sp_session* session, sp_error error) 
 
   // Send the error
   me->SendPlaybackError(QString::fromUtf8(sp_error_message(error)));
+}
+
+void SpotifyClient::OfflineStatusUpdatedCallback(sp_session* session) {
+  SpotifyClient* me = reinterpret_cast<SpotifyClient*>(sp_session_userdata(session));
+  sp_playlistcontainer* container = sp_session_playlistcontainer(session);
+  if (!container) {
+    qLog(Warning) << "sp_session_playlistcontainer returned NULL";
+    return;
+  }
+
+  const int count = sp_playlistcontainer_num_playlists(container);
+
+  for (int i=0 ; i<count ; ++i) {
+    const sp_playlist_type type = sp_playlistcontainer_playlist_type(container, i);
+    sp_playlist* playlist = sp_playlistcontainer_playlist(container, i);
+
+    if (type != SP_PLAYLIST_TYPE_PLAYLIST) {
+      // Just ignore folders for now
+      continue;
+    }
+
+    int download_progress = me->GetDownloadProgress(playlist);
+    if (download_progress != -1) {
+      me->SendDownloadProgress(protobuf::UserPlaylist, i, download_progress);
+    }
+  }
+
+  sp_playlist* inbox = sp_session_inbox_create(session);
+  int download_progress = me->GetDownloadProgress(inbox);
+  sp_playlist_release(inbox);
+
+  if (download_progress != -1) {
+    me->SendDownloadProgress(protobuf::Inbox, -1, download_progress);
+  }
+
+  sp_playlist* starred = sp_session_starred_create(session);
+  download_progress = me->GetDownloadProgress(starred);
+  sp_playlist_release(starred);
+
+  if (download_progress != -1) {
+    me->SendDownloadProgress(protobuf::Starred, -1, download_progress);
+  }
+}
+
+void SpotifyClient::SendDownloadProgress(
+    protobuf::PlaylistType type, int index, int download_progress) {
+  protobuf::SpotifyMessage message;
+  protobuf::SyncPlaylistProgress* progress = message.mutable_sync_playlist_progress();
+  progress->mutable_request()->set_type(type);
+  if (index != -1) {
+    progress->mutable_request()->set_user_playlist_index(index);
+  }
+  progress->set_sync_progress(download_progress);
+  handler_->SendMessage(message);
+}
+
+int SpotifyClient::GetDownloadProgress(sp_playlist* playlist) {
+  sp_playlist_offline_status status =
+    sp_playlist_get_offline_status(session_, playlist);
+  switch (status) {
+    case SP_PLAYLIST_OFFLINE_STATUS_NO:
+      return -1;
+    case SP_PLAYLIST_OFFLINE_STATUS_YES:
+      return 100;
+    case SP_PLAYLIST_OFFLINE_STATUS_DOWNLOADING:
+      return sp_playlist_get_offline_download_completed(session_, playlist);
+    case SP_PLAYLIST_OFFLINE_STATUS_WAITING:
+      return 0;
+  }
+  return -1;
 }
 
 void SpotifyClient::StartPlayback(const protobuf::PlaybackRequest& req) {

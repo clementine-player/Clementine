@@ -58,7 +58,7 @@ RadioModel::RadioModel(BackgroundThread<Database>* db_thread,
   AddService(new LastFMService(this));
 #endif
 #ifdef HAVE_SPOTIFY
-  AddService(new SpotifyService(this));
+  AddService(new SpotifyService(task_manager, this));
 #endif
   AddService(new SomaFMService(this));
   AddService(new MagnatuneService(this));

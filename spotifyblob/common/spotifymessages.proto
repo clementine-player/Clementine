@@ -38,6 +38,9 @@ message Playlists {
   message Playlist {
     required int32 index = 1;
     required string name = 2;
+    required bool is_offline = 3;
+    // Offline sync progress between 0-100.
+    optional int32 download_progress = 4;
   }
 
   repeated Playlist playlist = 1;
@@ -57,20 +60,30 @@ message Track {
   required string album_art_id = 11;
 }
 
-message LoadPlaylistRequest {
-  enum Type {
-    Starred = 1;
-    Inbox = 2;
-    UserPlaylist = 3;
-  }
+enum PlaylistType {
+  Starred = 1;
+  Inbox = 2;
+  UserPlaylist = 3;
+}
 
-  required Type type = 1;
+message LoadPlaylistRequest {
+  required PlaylistType type = 1;
   optional int32 user_playlist_index = 2;
 }
 
 message LoadPlaylistResponse {
   required LoadPlaylistRequest request = 1;
   repeated Track track = 2;
+}
+
+message SyncPlaylistRequest {
+  required LoadPlaylistRequest request = 1;
+  required bool offline_sync = 2;
+}
+
+message SyncPlaylistProgress {
+  required LoadPlaylistRequest request = 1;
+  required int32 sync_progress = 2;
 }
 
 message PlaybackRequest {
@@ -116,4 +129,6 @@ message SpotifyMessage {
   optional SearchResponse search_response = 9;
   optional ImageRequest image_request = 10;
   optional ImageResponse image_response = 11;
+  optional SyncPlaylistRequest sync_playlist_request = 12;
+  optional SyncPlaylistProgress sync_playlist_progress = 13;
 }

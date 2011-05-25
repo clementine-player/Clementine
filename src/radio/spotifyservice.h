@@ -20,7 +20,7 @@ class SpotifyService : public RadioService {
   Q_OBJECT
 
 public:
-  SpotifyService(RadioModel* parent);
+  SpotifyService(TaskManager* task_manager, RadioModel* parent);
   ~SpotifyService();
 
   enum Type {
@@ -83,11 +83,13 @@ private slots:
   void UserPlaylistLoaded(const protobuf::LoadPlaylistResponse& response);
   void SearchResults(const protobuf::SearchResponse& response);
   void ImageLoaded(const QString& id, const QImage& image);
+  void SyncPlaylistProgress(const protobuf::SyncPlaylistProgress& progress);
 
   void OpenSearchTab();
   void DoSearch();
 
   void ShowConfig();
+  void SyncPlaylist();
   void BlobDownloadFinished();
 
 private:
@@ -110,9 +112,16 @@ private:
   Playlist* pending_search_playlist_;
 
   QMenu* context_menu_;
+  QMenu* playlist_context_menu_;
+  QAction* playlist_sync_action_;
   QModelIndex context_item_;
 
   QTimer* search_delay_;
+
+  TaskManager* task_manager_;
+  int inbox_sync_id_;
+  int starred_sync_id_;
+  QMap<int, int> playlist_sync_ids_;
 };
 
 #endif

@@ -38,8 +38,11 @@ public:
   void Login(const QString& username, const QString& password);
 
   void LoadStarred();
+  void SyncStarred();
   void LoadInbox();
+  void SyncInbox();
   void LoadUserPlaylist(int index);
+  void SyncUserPlaylist(int index);
   void StartPlayback(const QString& uri, quint16 port);
   void Search(const QString& text, int limit);
   void LoadImage(const QString& id);
@@ -56,13 +59,15 @@ signals:
   void PlaybackError(const QString& message);
   void SearchResults(const protobuf::SearchResponse& response);
   void ImageLoaded(const QString& id, const QImage& image);
+  void SyncPlaylistProgress(const protobuf::SyncPlaylistProgress& progress);
 
 private slots:
   void NewConnection();
   void HandleMessage(const protobuf::SpotifyMessage& message);
 
 private:
-  void LoadPlaylist(protobuf::LoadPlaylistRequest_Type type, int index = -1);
+  void LoadPlaylist(protobuf::PlaylistType type, int index = -1);
+  void SyncPlaylist(protobuf::PlaylistType type, int index, bool offline);
   void SendMessage(const protobuf::SpotifyMessage& message);
 
   QTcpServer* server_;

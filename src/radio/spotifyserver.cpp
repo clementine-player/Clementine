@@ -105,15 +105,15 @@ void SpotifyServer::HandleMessage(const protobuf::SpotifyMessage& message) {
     const protobuf::LoadPlaylistResponse& response = message.load_playlist_response();
 
     switch (response.request().type()) {
-      case protobuf::LoadPlaylistRequest_Type_Inbox:
+      case protobuf::Inbox:
         emit InboxLoaded(response);
         break;
 
-      case protobuf::LoadPlaylistRequest_Type_Starred:
+      case protobuf::Starred:
         emit StarredLoaded(response);
         break;
 
-      case protobuf::LoadPlaylistRequest_Type_UserPlaylist:
+      case protobuf::UserPlaylist:
         emit UserPlaylistLoaded(response);
         break;
     }
@@ -131,10 +131,12 @@ void SpotifyServer::HandleMessage(const protobuf::SpotifyMessage& message) {
     } else {
       emit ImageLoaded(id, QImage());
     }
+  } else if (message.has_sync_playlist_progress()) {
+    emit SyncPlaylistProgress(message.sync_playlist_progress());
   }
 }
 
-void SpotifyServer::LoadPlaylist(protobuf::LoadPlaylistRequest_Type type, int index) {
+void SpotifyServer::LoadPlaylist(protobuf::PlaylistType type, int index) {
   protobuf::SpotifyMessage message;
   protobuf::LoadPlaylistRequest* req = message.mutable_load_playlist_request();
 
@@ -146,16 +148,43 @@ void SpotifyServer::LoadPlaylist(protobuf::LoadPlaylistRequest_Type type, int in
   SendMessage(message);
 }
 
+void SpotifyServer::SyncPlaylist(
+    protobuf::PlaylistType type, int index, bool offline) {
+  protobuf::SpotifyMessage message;
+  protobuf::SyncPlaylistRequest* req = message.mutable_sync_playlist_request();
+  req->mutable_request()->set_type(type);
+  if (index != -1) {
+    req->mutable_request()->set_user_playlist_index(index);
+  }
+  req->set_offline_sync(offline);
+
+  SendMessage(message);
+}
+
+void SpotifyServer::SyncInbox() {
+  SyncPlaylist(protobuf::Inbox, -1, true);
+}
+
+void SpotifyServer::SyncStarred() {
+  SyncPlaylist(protobuf::Starred, -1, true);
+}
+
+void SpotifyServer::SyncUserPlaylist(int index) {
+  Q_ASSERT(index >= 0);
+  SyncPlaylist(protobuf::UserPlaylist, index, true);
+}
+
 void SpotifyServer::LoadInbox() {
-  LoadPlaylist(protobuf::LoadPlaylistRequest_Type_Inbox);
+  LoadPlaylist(protobuf::Inbox);
 }
 
 void SpotifyServer::LoadStarred() {
-  LoadPlaylist(protobuf::LoadPlaylistRequest_Type_Starred);
+  LoadPlaylist(protobuf::Starred);
 }
 
 void SpotifyServer::LoadUserPlaylist(int index) {
-  LoadPlaylist(protobuf::LoadPlaylistRequest_Type_UserPlaylist, index);
+  Q_ASSERT(index >= 0);
+  LoadPlaylist(protobuf::UserPlaylist, index);
 }
 
 void SpotifyServer::StartPlayback(const QString& uri, quint16 port) {
