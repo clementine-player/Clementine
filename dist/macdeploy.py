@@ -105,16 +105,6 @@ QT_PLUGINS_SEARCH_PATH=[
     '/Developer/Applications/Qt/plugins',
 ]
 
-SCRIPT_PLUGINS = [
-    'sip.so',
-    'PyQt4/QtCore.so',
-    'PyQt4/QtGui.so',
-    'PyQt4/QtNetwork.so',
-]
-SCRIPT_PLUGINS_SEARCH_PATH = [
-    '/target/lib/python2.6/site-packages',
-]
-
 
 class Error(Exception):
   pass
@@ -365,15 +355,6 @@ def FindGstreamerPlugin(name):
   raise CouldNotFindGstreamerPluginError(name)
 
 
-def FindScriptPlugin(name):
-  for path in SCRIPT_PLUGINS_SEARCH_PATH:
-    if os.path.exists(path):
-      if os.path.exists(os.path.join(path, name)):
-        return os.path.join(path, name)
-  raise CouldNotFindScriptPluginError(name)
-
-
-
 FixBinary(binary)
 
 for plugin in GSTREAMER_PLUGINS:
@@ -384,16 +365,10 @@ FixPlugin(FindGstreamerPlugin('gst-plugin-scanner'), '.')
 try:
   FixPlugin('clementine-spotifyblob', '.')
 except:
-  'Failed to find spotify blob'
+  print 'Failed to find spotify blob'
 
 for plugin in QT_PLUGINS:
   FixPlugin(FindQtPlugin(plugin), os.path.dirname(plugin))
-
-try:
-  for plugin in SCRIPT_PLUGINS:
-    FixPlugin(FindScriptPlugin(plugin), os.path.dirname(plugin))
-except:
-  print 'Failed to find script plugins'
 
 if len(sys.argv) <= 2:
   print 'Would run %d commands:' % len(commands)
