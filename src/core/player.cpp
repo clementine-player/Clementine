@@ -381,16 +381,7 @@ void Player::Mute() {
 }
 
 void Player::Pause() {
-  switch (GetState()) {
-    case Engine::Playing:
-      engine_->Pause();
-      break;
-    case Engine::Paused:
-      engine_->Unpause();
-      break;
-    default:
-      return;
-  }
+  engine_->Pause();
 }
 
 void Player::Play() {

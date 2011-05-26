@@ -142,7 +142,7 @@ void Mpris1Root::Quit() {
 }
 
 void Mpris1Player::Pause() {
-  player_->Pause();
+  player_->PlayPause();
 }
 
 void Mpris1Player::Stop() {
