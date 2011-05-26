@@ -615,6 +615,10 @@ void SettingsDialog::showEvent(QShowEvent*) {
   ui_->notifications_custom_text2->setText(s.value("CustomText2").toString());
   s.endGroup();
 
+#ifdef Q_OS_DARWIN
+  ui_->notifications_options->setEnabled(ui_->notifications_pretty->isChecked());
+#endif
+
   // Pretty OSD
   pretty_popup_->ReloadSettings();
   ui_->notifications_opacity->setValue(pretty_popup_->background_opacity() * 100);
@@ -681,6 +685,10 @@ void SettingsDialog::NotificationTypeChanged() {
   ui_->notifications_general->setEnabled(enabled);
   ui_->notifications_pretty_group->setEnabled(pretty);
   ui_->notifications_custom_text_group->setEnabled(enabled);
+
+#ifdef Q_OS_DARWIN
+  ui_->notifications_options->setEnabled(ui_->notifications_pretty->isChecked());
+#endif
 }
 
 void SettingsDialog::PrettyOpacityChanged(int value) {
