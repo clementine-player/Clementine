@@ -436,6 +436,11 @@ void PlaylistView::keyPressEvent(QKeyEvent* event) {
   } else if (event->matches(QKeySequence::Delete)) {
     RemoveSelected();
     event->accept();
+#ifdef Q_OS_DARWIN
+  } else if (event->key() == Qt::Key_Backspace) {
+    RemoveSelected();
+    event->accept();
+#endif
   } else if (event->key() == Qt::Key_Enter ||
              event->key() == Qt::Key_Return) {
     if (currentIndex().isValid())
