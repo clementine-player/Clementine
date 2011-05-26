@@ -97,9 +97,9 @@ void LastfmTrackInfoProvider::GetPlayCounts(int id, const lastfm::XmlQuery& q) {
   }
 
   if (playcount)
-    widget->AddItem(IconLoader::Load("media-playback-start"), tr("%1 total plays").arg(playcount));
+    widget->AddItem(IconLoader::Load("media-playback-start"), tr("%L1 total plays").arg(playcount));
   if (listeners)
-    widget->AddItem(QIcon(":/last.fm/my_neighbours.png"), tr("%1 other listeners").arg(listeners));
+    widget->AddItem(QIcon(":/last.fm/my_neighbours.png"), tr("%L1 other listeners").arg(listeners));
 
   emit InfoReady(id, data);
 }
