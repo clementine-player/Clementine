@@ -132,7 +132,7 @@ TEST_F(Mpris1Test, LowersVolume) {
 }
 
 TEST_F(Mpris1Test, Pauses) {
-  EXPECT_CALL(player_, Pause());
+  EXPECT_CALL(player_, PlayPause());
   mpris_->player()->Pause();
 }
 
