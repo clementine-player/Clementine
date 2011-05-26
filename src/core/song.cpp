@@ -32,6 +32,7 @@
 #include <id3v1genres.h>
 #include <id3v2tag.h>
 #include <mp4file.h>
+#include <mp4tag.h>
 #include <mpcfile.h>
 #include <mpegfile.h>
 #include <oggfile.h>
@@ -368,6 +369,18 @@ void Song::InitFromFile(const QString& filename, int directory_id) {
       ParseOggTag(file->xiphComment()->fieldListMap(), NULL, &disc, &compilation);
     }
     d->comment_ = Decode(tag->comment());
+  } else if (TagLib::MP4::File* file = dynamic_cast<TagLib::MP4::File*>(fileref->file())) {
+    if (file->tag()) {
+      TagLib::MP4::Tag* mp4_tag = file->tag();
+      const TagLib::MP4::ItemListMap& items = mp4_tag->itemListMap();
+      TagLib::MP4::ItemListMap::ConstIterator it = items.find("aART");
+      if (it != items.end()) {
+        TagLib::StringList album_artists = it->second.toStringList();
+        if (!album_artists.isEmpty()) {
+          d->albumartist_ = Decode(album_artists.front());
+        }
+      }
+    }
   } else if (tag) {
     d->comment_ = Decode(tag->comment());
   }
@@ -452,8 +465,11 @@ void Song::ParseOggTag(const TagLib::Ogg::FieldListMap& map, const QTextCodec* c
   if (!map["COMPOSER"].isEmpty())
     d->composer_ = Decode(map["COMPOSER"].front(), codec);
 
-  if (!map["ALBUMARTIST"].isEmpty())
+  if (!map["ALBUMARTIST"].isEmpty()) {
     d->albumartist_ = Decode(map["ALBUMARTIST"].front(), codec);
+  } else if (!map["ALBUM ARTIST"].isEmpty()) {
+    d->albumartist_ = Decode(map["ALBUM ARTIST"].front(), codec);
+  }
 
   if (!map["BPM"].isEmpty() )
     d->bpm_ = TStringToQString( map["BPM"].front() ).trimmed().toFloat();
