@@ -4,18 +4,19 @@ from PythonQt.QtCore    import QUrl
 from PythonQt.QtNetwork import QNetworkRequest
 
 import json
+import logging
 import urllib
+
+LOGGER = logging.getLogger("google_images")
 
 
 class GoogleImagesCoversScript():
-
   def __init__(self):
     # create and register our factory
     self.factory = GoogleImagesCoverProviderFactory()
 
 
 class GoogleImagesCoverProviderFactory(clementine.CoverProviderFactory):
-
   def __init__(self):
     clementine.CoverProviderFactory.__init__(self)
     # register in the repository of factories
@@ -26,11 +27,11 @@ class GoogleImagesCoverProviderFactory(clementine.CoverProviderFactory):
 
 
 class GoogleImagesCoverProvider(clementine.CoverProvider):
+  API_URL = 'https://ajax.googleapis.com/ajax/services/search/images?{0}'
 
   def __init__(self, parent):
     clementine.CoverProvider.__init__(self, "Google Images", parent)
 
-    self.api_url = 'https://ajax.googleapis.com/ajax/services/search/images?{0}'
     self.api_args = {
       'v'     : '1.0',
       # at most five results
@@ -38,13 +39,12 @@ class GoogleImagesCoverProvider(clementine.CoverProvider):
       # only larger sizes
       'imgsz' : 'large|xlarge'
     }
-    self.network = clementine.NetworkAccessManager(self)    
+    self.network = clementine.NetworkAccessManager(self)
     self.queries = {}
 
   def SendRequest(self, query):
-    print 'sending request'
-
     url = self.GetQueryURL(query)
+    LOGGER.info("Sending request to '%s'", url)
 
     reply = self.network.get(QNetworkRequest(url))
     self.queries[reply] = query
@@ -52,16 +52,16 @@ class GoogleImagesCoverProvider(clementine.CoverProvider):
     return reply
 
   def ParseReply(self, reply):
-    print 'parsing reply'
-
     results = json.loads(str(reply.readAll()))
 
     parsed = []
 
-    if 'Error' in results:
+    if "responseStatus" not in results or results["responseStatus"] != 200:
+      LOGGER.warning("Error parsing reply: %s", results["responseDetails"])
       return parsed
 
-    query = self.queries.pop(reply)
+    query = self.queries[reply]
+    LOGGER.info("Parsing reply for query '%s'", query)
     for result in results['responseData']['results']:
       current = clementine.CoverSearchResult()
 
@@ -76,7 +76,7 @@ class GoogleImagesCoverProvider(clementine.CoverProvider):
     current_args = self.api_args.copy()
     current_args['q'] = query
 
-    return QUrl(self.api_url.format(urllib.urlencode(current_args)))
+    return QUrl(self.API_URL.format(urllib.urlencode(current_args)))
 
 
 script = GoogleImagesCoversScript()
