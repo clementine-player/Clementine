@@ -135,8 +135,19 @@ void ShellImplGenerator::write(QTextStream &s, const AbstractMetaClass *meta_cla
 
       if (hasReturnValue) {
         s << "      ";
-        writeTypeInfo(s, fun->type(), typeOptions);
-        s << " returnValue;" << endl;
+        AbstractMetaType* type = fun->type();
+        writeTypeInfo(s, type, typeOptions);
+        s << " returnValue";
+
+        if ((type->isArray() && typeOptions & ArrayAsPointer) ||
+            (type->indirections()) ||
+            (type->isReference() && typeOptions & ConvertReferenceToPtr) ||
+            type->isEnum() || type->isPrimitive() || type->isTargetLangEnum() ||
+            type->isIntegerEnum()) {
+          s << " = 0";
+        }
+
+        s << ";" << endl;
         // TODO: POD init to default is missing...
       }
       s << "    void* args[" << QString::number(args.size()+1) << "] = {NULL";
