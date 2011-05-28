@@ -96,11 +96,11 @@ void AlbumCoverFetcher::StartRequests() {
 }
 
 void AlbumCoverFetcher::SingleSearchFinished(quint64 request_id, CoverSearchResults results) {
-  delete active_requests_.take(request_id);
+  active_requests_.take(request_id)->deleteLater();
   emit SearchFinished(request_id, results);
 }
 
 void AlbumCoverFetcher::SingleCoverFetched(quint64 request_id, const QImage& image) {
-  delete active_requests_.take(request_id);
+  active_requests_.take(request_id)->deleteLater();
   emit AlbumCoverFetched(request_id, image);
 }
