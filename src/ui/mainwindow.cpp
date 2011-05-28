@@ -712,6 +712,9 @@ MainWindow::MainWindow(
 
   ReloadSettings();
 
+  // Reload pretty OSD to avoid issues with fonts
+  osd_->ReloadPrettyOSDSettings();
+
 #ifndef Q_OS_DARWIN
   StartupBehaviour behaviour =
       StartupBehaviour(settings_.value("startupbehaviour", Startup_Remember).toInt());

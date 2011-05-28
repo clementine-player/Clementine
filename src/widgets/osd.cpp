@@ -84,13 +84,21 @@ void OSD::ReloadSettings() {
   if (!SupportsTrayPopups() && behaviour_ == TrayPopup)
     behaviour_ = Disabled;
 
+  ReloadPrettyOSDSettings();
+}
+
+// Reload just Pretty OSD settings, not everything
+void OSD::ReloadPrettyOSDSettings() {
   pretty_popup_->set_popup_duration(timeout_msec_);
   pretty_popup_->ReloadSettings();
 }
 
 void OSD::SongChanged(const Song &song) {
-  // no cover art yet
-  tray_icon_->SetNowPlaying(song, NULL);
+  // Don't change tray icon details if it's a preview
+  if (!preview_mode_) {
+    // no cover art yet
+    tray_icon_->SetNowPlaying(song, NULL);
+  }
 
   QStringList message_parts;
   QString summary;
@@ -145,7 +153,9 @@ void OSD::SongChanged(const Song &song) {
 }
 
 void OSD::CoverArtPathReady(const Song& song, const QString& image_path) {
-  tray_icon_->SetNowPlaying(song, image_path);
+  // Don't change tray icon details if it's a preview
+  if (!preview_mode_)
+    tray_icon_->SetNowPlaying(song, image_path);
 }
 
 void OSD::AlbumArtLoaded(quint64 id, const QImage& image) {
@@ -354,8 +364,8 @@ void OSD::ShowPreview(const Behaviour type, const QString& line1, const QString&
   custom_text2_ = line2;
   if (!use_custom_text_)
     use_custom_text_ = true;
-  SongChanged(song);
 
   // We want to reload the settings, but we can't do this here because the cover art loading is asynch
   preview_mode_ = true;
+  SongChanged(song);
 }

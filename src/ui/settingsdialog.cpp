@@ -284,6 +284,7 @@ SettingsDialog::SettingsDialog(BackgroundStreams* streams, QWidget* parent)
   connect(ui_->notifications_opacity, SIGNAL(valueChanged(int)), SLOT(PrettyOpacityChanged(int)));
   connect(ui_->notifications_bg_preset, SIGNAL(activated(int)), SLOT(PrettyColorPresetChanged(int)));
   connect(ui_->notifications_fg_choose, SIGNAL(clicked()), SLOT(ChooseFgColor()));
+  connect(ui_->notifications_font_choose, SIGNAL(clicked()), SLOT(ChooseFont()));
   connect(ui_->notifications_exp_chooser1, SIGNAL(triggered(QAction*)), SLOT(InsertVariableFirstLine(QAction*)));
   connect(ui_->notifications_exp_chooser2, SIGNAL(triggered(QAction*)), SLOT(InsertVariableSecondLine(QAction*)));
 
@@ -434,6 +435,7 @@ void SettingsDialog::accept() {
   s.setValue("background_opacity", pretty_popup_->background_opacity());
   s.setValue("popup_display", pretty_popup_->popup_display());
   s.setValue("popup_pos", pretty_popup_->popup_pos());
+  s.setValue("font", pretty_popup_->font().toString());
   s.endGroup();
 
   // Network proxy
@@ -737,6 +739,13 @@ void SettingsDialog::ChooseFgColor() {
     return;
 
   pretty_popup_->set_foreground_color(color.rgb());
+}
+
+void SettingsDialog::ChooseFont() {
+  bool ok;
+  QFont font = QFontDialog::getFont(&ok, pretty_popup_->font(), this);
+  if (ok)
+    pretty_popup_->set_font(font);
 }
 
 void SettingsDialog::ShowTrayIconToggled(bool on) {

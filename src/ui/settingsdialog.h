@@ -115,6 +115,7 @@ class SettingsDialog : public QDialog {
   void PrettyColorPresetChanged(int index);
   void ChooseBgColor();
   void ChooseFgColor();
+  void ChooseFont();
 
   void UpdatePopupVisible();
   void ShowTrayIconToggled(bool on);

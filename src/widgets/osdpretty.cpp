@@ -59,6 +59,7 @@ OSDPretty::OSDPretty(Mode mode, QWidget *parent)
     background_color_(kPresetBlue),
     background_opacity_(0.85),
     popup_display_(0),
+    font_(QFont()),
     timeout_(new QTimer(this)),
     fading_enabled_(false),
     fader_(new QTimeLine(300, this))
@@ -115,7 +116,7 @@ OSDPretty::OSDPretty(Mode mode, QWidget *parent)
   int margin = l->margin() + kDropShadowSize;
   l->setMargin(margin);
 
-  Load();
+  // Don't load settings here, they will be reloaded anyway on creation
 }
 
 OSDPretty::~OSDPretty() {
@@ -138,7 +139,9 @@ void OSDPretty::Load() {
   background_opacity_ = s.value("background_opacity", 0.85).toDouble();
   popup_display_ = s.value("popup_display", -1).toInt();
   popup_pos_ = s.value("popup_pos", QPoint(0, 0)).toPoint();
+  font_.fromString(s.value("font", "Verdana,9,-1,5,50,0,0,0,0,0").toString());
 
+  set_font(font());
   set_foreground_color(foreground_color());
 }
 
@@ -243,8 +246,11 @@ void OSDPretty::showEvent(QShowEvent* e) {
     fader_->setDirection(QTimeLine::Forward);
     fader_->start(); // Timeout will be started in FaderFinished
   }
-  else if (mode_ == Mode_Popup)
+  else if (mode_ == Mode_Popup) {
     timeout_->start();
+    // Ensures it is above when showing the preview
+    raise();
+  }
 }
 
 void OSDPretty::setVisible(bool visible) {
@@ -400,4 +406,17 @@ void OSDPretty::mouseReleaseEvent(QMouseEvent *) {
     popup_display_ = current_display();
     popup_pos_ = current_pos();
   }
+}
+
+void OSDPretty::set_font(QFont font) {
+  font_ = font;
+
+  // Update the UI
+  ui_->summary->setFont(font);
+  ui_->message->setFont(font);
+  // Now adjust OSD size so everything fits
+  ui_->verticalLayout->activate();
+  resize(sizeHint());
+  // Update the position after font change
+  Reposition();
 }

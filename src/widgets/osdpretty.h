@@ -63,12 +63,14 @@ class OSDPretty : public QWidget {
   void set_foreground_color(QRgb color);
   void set_background_color(QRgb color);
   void set_background_opacity(qreal opacity);
+  void set_font(QFont font);
 
   QRgb foreground_color() const { return foreground_color_.rgb(); }
   QRgb background_color() const { return background_color_.rgb(); }
   qreal background_opacity() const { return background_opacity_; }
   int popup_display() const { return popup_display_; }
   QPoint popup_pos() const { return popup_pos_; }
+  QFont font() const { return font_; }
 
   // When the user has been moving the popup, use these to get its current
   // position and screen.  Note that these return invalid values if the popup
@@ -112,6 +114,7 @@ class OSDPretty : public QWidget {
   float background_opacity_;
   int popup_display_; // -1 for default
   QPoint popup_pos_;
+  QFont font_;
 
   // Cached pixmaps
   QPixmap shadow_edge_[4];

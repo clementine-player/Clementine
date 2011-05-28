@@ -63,6 +63,8 @@ class OSD : public QObject {
   static bool SupportsNativeNotifications();
   static bool SupportsTrayPopups();
 
+  void ReloadPrettyOSDSettings();
+
  public slots:
   void ReloadSettings();
 
