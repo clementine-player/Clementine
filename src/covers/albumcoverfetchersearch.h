@@ -21,13 +21,11 @@
 #include "albumcoverfetcher.h"
 
 #include <QMap>
-#include <QMutex>
 #include <QObject>
 
 class CoverProvider;
 class QNetworkAccessManager;
 class QNetworkReply;
-class QTimerEvent;
 
 // This class encapsulates a single search for covers initiated by an AlbumCoverFetcher.
 // The search engages all of the known cover providers. AlbumCoverFetcherSearch signals
@@ -54,12 +52,10 @@ signals:
   // It's the end of search and we've fetched a cover.
   void AlbumCoverFetched(quint64, const QImage& cover);
 
-protected:
-  void timerEvent(QTimerEvent* event);
-
 private slots:
   void ProviderSearchFinished();
   void ProviderCoverFetchFinished();
+  void Timeout();
 
 private:
   // Timeouts this search.
@@ -70,15 +66,9 @@ private:
   // Complete results (from all of the available providers).
   CoverSearchResults results_;
 
-  // We initialize this in the Start() method.
-  // When this reaches 0, the search is over and appropriate signal
-  // is emitted.
-  int providers_left_;
-  QMap<QNetworkReply*, CoverProvider*> providers_;
+  QMap<QNetworkReply*, CoverProvider*> pending_requests_;
 
   QNetworkAccessManager* network_;
-
-  QMutex search_mutex_;
 };
 
 #endif  // ALBUMCOVERFETCHERSEARCH_H

@@ -23,6 +23,7 @@
 
 #include <QMutexLocker>
 #include <QNetworkReply>
+#include <QTimer>
 #include <QtDebug>
 
 const int AlbumCoverFetcherSearch::kSearchTimeout = 10000;
@@ -36,15 +37,19 @@ AlbumCoverFetcherSearch::AlbumCoverFetcherSearch(const CoverSearchRequest& reque
 {
   // we will terminate the search after kSearchTimeout miliseconds if we are not
   // able to find all of the results before that point in time
-  startTimer(kSearchTimeout);
+  QTimer::singleShot(kSearchTimeout, this, SLOT(Timeout()));
 }
 
-void AlbumCoverFetcherSearch::timerEvent(QTimerEvent* event) {
-  Q_UNUSED(event);
+void AlbumCoverFetcherSearch::Timeout() {
   TerminateSearch();
 }
 
 void AlbumCoverFetcherSearch::TerminateSearch() {
+  foreach (QNetworkReply* reply, pending_requests_.keys()) {
+    disconnect(reply, SIGNAL(finished()), this, SLOT(ProviderSearchFinished()));
+    reply->abort();
+  }
+
   if(request_.search) {
     // send everything we've managed to find
     emit SearchFinished(request_.id, results_);
@@ -54,50 +59,43 @@ void AlbumCoverFetcherSearch::TerminateSearch() {
 }
 
 void AlbumCoverFetcherSearch::Start() {
-  QList<CoverProvider*> providers_list = CoverProviders::instance().List(this);
-  providers_left_ = providers_list.size();
-
   // end this search before it even began if there are no providers...
-  if(!providers_left_) {
-    TerminateSearch();
-  } else {
-    foreach(CoverProvider* provider, providers_list) {
-      QNetworkReply* reply = provider->SendRequest(request_.query);
+  foreach(CoverProvider* provider, CoverProviders::instance().List(this)) {
+    QNetworkReply* reply = provider->SendRequest(request_.query);
 
+    if (reply) {
       connect(reply, SIGNAL(finished()), SLOT(ProviderSearchFinished()));
-      providers_.insert(reply, provider);
+      pending_requests_.insert(reply, provider);
     }
+  }
+
+  if(pending_requests_.isEmpty()) {
+    TerminateSearch();
   }
 }
 
 void AlbumCoverFetcherSearch::ProviderSearchFinished() {
-  {
-    QMutexLocker locker(&search_mutex_);
-    Q_UNUSED(locker);
+  // Note: we don't delete the reply here.  It's parented to the provider's
+  // network access manager which is deleted when it is deleted.
+  QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
 
-    providers_left_--;
+  CoverProvider* provider = pending_requests_.take(reply);
 
-    QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
-    reply->deleteLater();
+  if(reply->error() == QNetworkReply::NoError) {
+    CoverSearchResults partial_results = provider->ParseReply(reply);
+    // add results from the current provider to our pool
+    results_.append(partial_results);
+  } else {
+    QString contents(reply->readAll());
+    qLog(Debug) << "CoverProvider's request error - summary:";
+    qLog(Debug) << reply->errorString();
+    qLog(Debug) << "CoverProvider's request error - contents:";
+    qLog(Debug) << contents;
+  }
 
-    if(reply->error() == QNetworkReply::NoError) {
-      CoverProvider* provider = providers_.take(reply);
-
-      CoverSearchResults partial_results = provider->ParseReply(reply);
-      // add results from the current provider to our pool
-      results_.append(partial_results);
-    } else {
-      QString contents(reply->readAll());
-      qLog(Debug) << "CoverProvider's request error - summary:";
-      qLog(Debug) << reply->errorString();
-      qLog(Debug) << "CoverProvider's request error - contents:";
-      qLog(Debug) << contents;
-    }
-
-    // do we have more providers left?
-    if(providers_left_) {
-      return;
-    }
+  // do we have more providers left?
+  if(!pending_requests_.isEmpty()) {
+    return;
   }
 
   // if we only wanted to do the search then we're done
