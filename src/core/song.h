@@ -381,6 +381,6 @@ class Song {
 Q_DECLARE_METATYPE(Song);
 
 typedef QList<Song> SongList;
-Q_DECLARE_METATYPE(SongList);
+Q_DECLARE_METATYPE(QList<Song>);
 
 #endif // SONG_H

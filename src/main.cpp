@@ -190,18 +190,18 @@ int main(int argc, char *argv[]) {
   g_set_application_name(QCoreApplication::applicationName().toLocal8Bit());
 
   qRegisterMetaType<CoverSearchResult>("CoverSearchResult");
-  qRegisterMetaType<CoverSearchResults>("CoverSearchResults");
   qRegisterMetaType<QList<CoverSearchResult> >("QList<CoverSearchResult>");
+  qRegisterMetaType<CoverSearchResults>("CoverSearchResults");
   qRegisterMetaType<Directory>("Directory");
   qRegisterMetaType<DirectoryList>("DirectoryList");
   qRegisterMetaType<Subdirectory>("Subdirectory");
   qRegisterMetaType<SubdirectoryList>("SubdirectoryList");
   qRegisterMetaType<Song>("Song");
-  qRegisterMetaType<SongList>("SongList");
   qRegisterMetaType<QList<Song> >("QList<Song>");
+  qRegisterMetaType<SongList>("SongList");
   qRegisterMetaType<PlaylistItemPtr>("PlaylistItemPtr");
-  qRegisterMetaType<PlaylistItemList>("PlaylistItemList");
   qRegisterMetaType<QList<PlaylistItemPtr> >("QList<PlaylistItemPtr>");
+  qRegisterMetaType<PlaylistItemList>("PlaylistItemList");
   qRegisterMetaType<Engine::State>("Engine::State");
   qRegisterMetaType<Engine::SimpleMetaBundle>("Engine::SimpleMetaBundle");
   qRegisterMetaType<Equalizer::Params>("Equalizer::Params");

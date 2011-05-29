@@ -107,7 +107,7 @@ typedef boost::shared_ptr<PlaylistItem> PlaylistItemPtr;
 typedef QList<PlaylistItemPtr> PlaylistItemList;
 
 Q_DECLARE_METATYPE(PlaylistItemPtr)
-Q_DECLARE_METATYPE(PlaylistItemList)
+Q_DECLARE_METATYPE(QList<PlaylistItemPtr>)
 Q_DECLARE_OPERATORS_FOR_FLAGS(PlaylistItem::Options)
 
 #endif // PLAYLISTITEM_H
