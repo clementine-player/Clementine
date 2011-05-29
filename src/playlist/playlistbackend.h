@@ -57,7 +57,7 @@ class PlaylistBackend : public QObject {
   static const int kSongTableJoins;
 
   PlaylistList GetAllPlaylists();
-  Playlist GetPlaylist(int id);
+  PlaylistBackend::Playlist GetPlaylist(int id);
   PlaylistItemFuture GetPlaylistItems(int playlist);
 
   void SetPlaylistOrder(const QList<int>& ids);

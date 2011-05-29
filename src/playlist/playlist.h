@@ -376,7 +376,7 @@ class Playlist : public QAbstractListModel {
   QString special_type_;
 };
 
-QDataStream& operator <<(QDataStream&, const Playlist*);
-QDataStream& operator >>(QDataStream&, Playlist*&);
+//QDataStream& operator <<(QDataStream&, const Playlist*);
+//QDataStream& operator >>(QDataStream&, Playlist*&);
 
 #endif // PLAYLIST_H

@@ -11,20 +11,39 @@
 #include <libraryquery.h>
 #include <network.h>
 #include <player.h>
+#include <playlist.h>
+#include <playlistbackend.h>
+#include <playlistcontainer.h>
+#include <playlistitem.h>
+#include <playlistmanager.h>
 #include <playlistparser.h>
+#include <playlistsequence.h>
 #include <qabstractitemmodel.h>
 #include <qabstractnetworkcache.h>
 #include <qbytearray.h>
 #include <qcoreevent.h>
+#include <qcursor.h>
 #include <qdatastream.h>
 #include <qdir.h>
+#include <qfont.h>
+#include <qicon.h>
 #include <qimage.h>
 #include <qiodevice.h>
+#include <qitemselectionmodel.h>
+#include <qkeysequence.h>
 #include <qlist.h>
+#include <qlocale.h>
+#include <qmargins.h>
 #include <qnetworkrequest.h>
 #include <qobject.h>
+#include <qpaintdevice.h>
+#include <qpalette.h>
+#include <qpixmap.h>
 #include <qpoint.h>
+#include <qrect.h>
+#include <qregion.h>
 #include <qsize.h>
+#include <qsizepolicy.h>
 #include <qstandarditemmodel.h>
 #include <qstringlist.h>
 #include <qurl.h>
@@ -32,6 +51,7 @@
 #include <radiomodel.h>
 #include <radioservice.h>
 #include <song.h>
+#include <specialplaylisttype.h>
 #include <taskmanager.h>
 #include <urlhandler.h>
 
@@ -465,17 +485,605 @@ void delete_NetworkTimeouts(NetworkTimeouts* obj) { delete obj; }
 
 
 
+class PythonQtShell_Player : public Player
+{
+public:
+    PythonQtShell_Player(PlaylistManagerInterface*  playlists, QObject*  parent = 0):Player(playlists, parent),_wrapper(NULL) {};
+
+virtual void CurrentMetadataChanged(const Song&  metadata);
+virtual PlaylistItemPtr  GetCurrentItem() const;
+virtual PlaylistItemPtr  GetItemAt(int  pos) const;
+virtual Engine::State  GetState() const;
+virtual int  GetVolume() const;
+virtual void Mute();
+virtual void Next();
+virtual void Pause();
+virtual void Play();
+virtual void PlayAt(int  i, Engine::TrackChangeFlags  change, bool  reshuffle);
+virtual void PlayPause();
+virtual void Previous();
+virtual void RegisterUrlHandler(UrlHandler*  handler);
+virtual void ReloadSettings();
+virtual void SeekBackward();
+virtual void SeekForward();
+virtual void SeekTo(int  seconds);
+virtual void SetVolume(int  value);
+virtual void ShowOSD();
+virtual void Stop();
+virtual void UnregisterUrlHandler(UrlHandler*  handler);
+virtual void VolumeDown();
+virtual void VolumeUp();
+virtual void childEvent(QChildEvent*  arg__1);
+virtual void customEvent(QEvent*  arg__1);
+virtual Engine::Base*  engine() const;
+virtual bool  event(QEvent*  arg__1);
+virtual bool  eventFilter(QObject*  arg__1, QEvent*  arg__2);
+virtual PlaylistManagerInterface*  playlists() const;
+virtual void timerEvent(QTimerEvent*  arg__1);
+
+  PythonQtInstanceWrapper* _wrapper; 
+};
+
+class PythonQtPublicPromoter_Player : public Player
+{ public:
+inline void promoted_CurrentMetadataChanged(const Song&  metadata) { Player::CurrentMetadataChanged(metadata); }
+inline PlaylistItemPtr  promoted_GetCurrentItem() const { return Player::GetCurrentItem(); }
+inline PlaylistItemPtr  promoted_GetItemAt(int  pos) const { return Player::GetItemAt(pos); }
+inline Engine::State  promoted_GetState() const { return Player::GetState(); }
+inline int  promoted_GetVolume() const { return Player::GetVolume(); }
+inline void promoted_Mute() { Player::Mute(); }
+inline void promoted_Next() { Player::Next(); }
+inline void promoted_Pause() { Player::Pause(); }
+inline void promoted_Play() { Player::Play(); }
+inline void promoted_PlayAt(int  i, Engine::TrackChangeFlags  change, bool  reshuffle) { Player::PlayAt(i, change, reshuffle); }
+inline void promoted_PlayPause() { Player::PlayPause(); }
+inline void promoted_Previous() { Player::Previous(); }
+inline void promoted_RegisterUrlHandler(UrlHandler*  handler) { Player::RegisterUrlHandler(handler); }
+inline void promoted_ReloadSettings() { Player::ReloadSettings(); }
+inline void promoted_SeekBackward() { Player::SeekBackward(); }
+inline void promoted_SeekForward() { Player::SeekForward(); }
+inline void promoted_SeekTo(int  seconds) { Player::SeekTo(seconds); }
+inline void promoted_SetVolume(int  value) { Player::SetVolume(value); }
+inline void promoted_ShowOSD() { Player::ShowOSD(); }
+inline void promoted_Stop() { Player::Stop(); }
+inline void promoted_UnregisterUrlHandler(UrlHandler*  handler) { Player::UnregisterUrlHandler(handler); }
+inline void promoted_VolumeDown() { Player::VolumeDown(); }
+inline void promoted_VolumeUp() { Player::VolumeUp(); }
+inline Engine::Base*  promoted_engine() const { return Player::engine(); }
+inline PlaylistManagerInterface*  promoted_playlists() const { return Player::playlists(); }
+};
+
 class PythonQtWrapper_Player : public QObject
 { Q_OBJECT
 public:
 public slots:
+Player* new_Player(PlaylistManagerInterface*  playlists, QObject*  parent = 0);
 void delete_Player(Player* obj) { delete obj; } 
+   PlaylistItemPtr  GetCurrentItem(Player* theWrappedObject) const;
+   PlaylistItemPtr  GetItemAt(Player* theWrappedObject, int  pos) const;
    Engine::State  GetState(Player* theWrappedObject) const;
    int  GetVolume(Player* theWrappedObject) const;
    void Init(Player* theWrappedObject);
    void RegisterUrlHandler(Player* theWrappedObject, UrlHandler*  handler);
    void UnregisterUrlHandler(Player* theWrappedObject, UrlHandler*  handler);
    Engine::Base*  engine(Player* theWrappedObject) const;
+   PlaylistManagerInterface*  playlists(Player* theWrappedObject) const;
+};
+
+
+
+
+
+class PythonQtShell_PlayerInterface : public PlayerInterface
+{
+public:
+    PythonQtShell_PlayerInterface(QObject*  parent = 0):PlayerInterface(parent),_wrapper(NULL) {};
+
+virtual void CurrentMetadataChanged(const Song&  metadata);
+virtual PlaylistItemPtr  GetCurrentItem() const;
+virtual PlaylistItemPtr  GetItemAt(int  pos) const;
+virtual Engine::State  GetState() const;
+virtual int  GetVolume() const;
+virtual void Mute();
+virtual void Next();
+virtual void Pause();
+virtual void Play();
+virtual void PlayAt(int  i, Engine::TrackChangeFlags  change, bool  reshuffle);
+virtual void PlayPause();
+virtual void Previous();
+virtual void RegisterUrlHandler(UrlHandler*  handler);
+virtual void ReloadSettings();
+virtual void SeekBackward();
+virtual void SeekForward();
+virtual void SeekTo(int  seconds);
+virtual void SetVolume(int  value);
+virtual void ShowOSD();
+virtual void Stop();
+virtual void UnregisterUrlHandler(UrlHandler*  handler);
+virtual void VolumeDown();
+virtual void VolumeUp();
+virtual void childEvent(QChildEvent*  arg__1);
+virtual void customEvent(QEvent*  arg__1);
+virtual Engine::Base*  engine() const;
+virtual bool  event(QEvent*  arg__1);
+virtual bool  eventFilter(QObject*  arg__1, QEvent*  arg__2);
+virtual PlaylistManagerInterface*  playlists() const;
+virtual void timerEvent(QTimerEvent*  arg__1);
+
+  PythonQtInstanceWrapper* _wrapper; 
+};
+
+class PythonQtWrapper_PlayerInterface : public QObject
+{ Q_OBJECT
+public:
+public slots:
+PlayerInterface* new_PlayerInterface(QObject*  parent = 0);
+void delete_PlayerInterface(PlayerInterface* obj) { delete obj; } 
+};
+
+
+
+
+
+class PythonQtShell_Playlist : public Playlist
+{
+public:
+    PythonQtShell_Playlist(PlaylistBackend*  backend, TaskManager*  task_manager, LibraryBackend*  library, int  id, const QString&  special_type = QString(), QObject*  parent = 0):Playlist(backend, task_manager, library, id, special_type, parent),_wrapper(NULL) {};
+
+virtual QModelIndex  buddy(const QModelIndex&  index) const;
+virtual bool  canFetchMore(const QModelIndex&  parent) const;
+virtual void childEvent(QChildEvent*  arg__1);
+virtual int  columnCount(const QModelIndex&  arg__1 = QModelIndex()) const;
+virtual void customEvent(QEvent*  arg__1);
+virtual QVariant  data(const QModelIndex&  index, int  role = Qt::DisplayRole) const;
+virtual bool  dropMimeData(const QMimeData*  data, Qt::DropAction  action, int  row, int  column, const QModelIndex&  parent);
+virtual bool  event(QEvent*  arg__1);
+virtual bool  eventFilter(QObject*  arg__1, QEvent*  arg__2);
+virtual void fetchMore(const QModelIndex&  parent);
+virtual Qt::ItemFlags  flags(const QModelIndex&  index) const;
+virtual QVariant  headerData(int  section, Qt::Orientation  orientation, int  role = Qt::DisplayRole) const;
+virtual QModelIndex  index(int  row, int  column, const QModelIndex&  parent) const;
+virtual bool  insertColumns(int  column, int  count, const QModelIndex&  parent);
+virtual bool  insertRows(int  row, int  count, const QModelIndex&  parent);
+virtual QMap<int , QVariant >  itemData(const QModelIndex&  index) const;
+virtual QList<QModelIndex >  match(const QModelIndex&  start, int  role, const QVariant&  value, int  hits, Qt::MatchFlags  flags) const;
+virtual QMimeData*  mimeData(const QList<QModelIndex >&  indexes) const;
+virtual QStringList  mimeTypes() const;
+virtual bool  removeColumns(int  column, int  count, const QModelIndex&  parent);
+virtual bool  removeRows(int  row, int  count, const QModelIndex&  parent = QModelIndex());
+virtual void revert();
+virtual int  rowCount(const QModelIndex&  arg__1 = QModelIndex()) const;
+virtual bool  setData(const QModelIndex&  index, const QVariant&  value, int  role);
+virtual bool  setHeaderData(int  section, Qt::Orientation  orientation, const QVariant&  value, int  role);
+virtual bool  setItemData(const QModelIndex&  index, const QMap<int , QVariant >&  roles);
+virtual void sort(int  column, Qt::SortOrder  order);
+virtual QSize  span(const QModelIndex&  index) const;
+virtual bool  submit();
+virtual Qt::DropActions  supportedDropActions() const;
+virtual void timerEvent(QTimerEvent*  arg__1);
+
+  PythonQtInstanceWrapper* _wrapper; 
+};
+
+class PythonQtPublicPromoter_Playlist : public Playlist
+{ public:
+inline int  promoted_columnCount(const QModelIndex&  arg__1 = QModelIndex()) const { return Playlist::columnCount(arg__1); }
+inline QVariant  promoted_data(const QModelIndex&  index, int  role = Qt::DisplayRole) const { return Playlist::data(index, role); }
+inline bool  promoted_dropMimeData(const QMimeData*  data, Qt::DropAction  action, int  row, int  column, const QModelIndex&  parent) { return Playlist::dropMimeData(data, action, row, column, parent); }
+inline Qt::ItemFlags  promoted_flags(const QModelIndex&  index) const { return Playlist::flags(index); }
+inline QVariant  promoted_headerData(int  section, Qt::Orientation  orientation, int  role = Qt::DisplayRole) const { return Playlist::headerData(section, orientation, role); }
+inline QMimeData*  promoted_mimeData(const QList<QModelIndex >&  indexes) const { return Playlist::mimeData(indexes); }
+inline QStringList  promoted_mimeTypes() const { return Playlist::mimeTypes(); }
+inline bool  promoted_removeRows(int  row, int  count, const QModelIndex&  parent = QModelIndex()) { return Playlist::removeRows(row, count, parent); }
+inline int  promoted_rowCount(const QModelIndex&  arg__1 = QModelIndex()) const { return Playlist::rowCount(arg__1); }
+inline bool  promoted_setData(const QModelIndex&  index, const QVariant&  value, int  role) { return Playlist::setData(index, value, role); }
+inline void promoted_sort(int  column, Qt::SortOrder  order) { Playlist::sort(column, order); }
+inline Qt::DropActions  promoted_supportedDropActions() const { return Playlist::supportedDropActions(); }
+};
+
+class PythonQtWrapper_Playlist : public QObject
+{ Q_OBJECT
+public:
+Q_ENUMS(Column Role LastFMStatus )
+enum Column{
+  Column_Title = Playlist::Column_Title,   Column_Artist = Playlist::Column_Artist,   Column_Album = Playlist::Column_Album,   Column_AlbumArtist = Playlist::Column_AlbumArtist,   Column_Composer = Playlist::Column_Composer,   Column_Length = Playlist::Column_Length,   Column_Track = Playlist::Column_Track,   Column_Disc = Playlist::Column_Disc,   Column_Year = Playlist::Column_Year,   Column_Genre = Playlist::Column_Genre,   Column_BPM = Playlist::Column_BPM,   Column_Bitrate = Playlist::Column_Bitrate,   Column_Samplerate = Playlist::Column_Samplerate,   Column_Filename = Playlist::Column_Filename,   Column_BaseFilename = Playlist::Column_BaseFilename,   Column_Filesize = Playlist::Column_Filesize,   Column_Filetype = Playlist::Column_Filetype,   Column_DateCreated = Playlist::Column_DateCreated,   Column_DateModified = Playlist::Column_DateModified,   Column_Rating = Playlist::Column_Rating,   Column_PlayCount = Playlist::Column_PlayCount,   Column_SkipCount = Playlist::Column_SkipCount,   Column_LastPlayed = Playlist::Column_LastPlayed,   Column_Score = Playlist::Column_Score,   Column_Comment = Playlist::Column_Comment,   ColumnCount = Playlist::ColumnCount};
+enum Role{
+  Role_IsCurrent = Playlist::Role_IsCurrent,   Role_IsPaused = Playlist::Role_IsPaused,   Role_StopAfter = Playlist::Role_StopAfter,   Role_QueuePosition = Playlist::Role_QueuePosition,   Role_CanSetRating = Playlist::Role_CanSetRating};
+enum LastFMStatus{
+  LastFM_New = Playlist::LastFM_New,   LastFM_Scrobbled = Playlist::LastFM_Scrobbled,   LastFM_Seeked = Playlist::LastFM_Seeked,   LastFM_Error = Playlist::LastFM_Error,   LastFM_Invalid = Playlist::LastFM_Invalid,   LastFM_Queued = Playlist::LastFM_Queued};
+public slots:
+Playlist* new_Playlist(PlaylistBackend*  backend, TaskManager*  task_manager, LibraryBackend*  library, int  id, const QString&  special_type = QString(), QObject*  parent = 0);
+void delete_Playlist(Playlist* obj) { delete obj; } 
+   void AddSongInsertVetoListener(Playlist* theWrappedObject, SongInsertVetoListener*  listener);
+   bool  ApplyValidityOnCurrentSong(Playlist* theWrappedObject, const QUrl&  url, bool  valid);
+   bool  static_Playlist_CompareItems(int  column, Qt::SortOrder  order, PlaylistItemPtr  a, PlaylistItemPtr  b);
+   QList<PlaylistItemPtr >  GetAllItems(Playlist* theWrappedObject) const;
+   QList<Song >  GetAllSongs(Playlist* theWrappedObject) const;
+   quint64  GetTotalLength(Playlist* theWrappedObject) const;
+   void InsertItems(Playlist* theWrappedObject, const QList<PlaylistItemPtr >&  items, int  pos = -1, bool  play_now = false, bool  enqueue = false);
+   void InsertLibraryItems(Playlist* theWrappedObject, const QList<Song >&  items, int  pos = -1, bool  play_now = false, bool  enqueue = false);
+   void InsertSmartPlaylist(Playlist* theWrappedObject, smart_playlists::GeneratorPtr  gen, int  pos = -1, bool  play_now = false, bool  enqueue = false);
+   void InsertSongs(Playlist* theWrappedObject, const QList<Song >&  items, int  pos = -1, bool  play_now = false, bool  enqueue = false);
+   void InsertSongsOrLibraryItems(Playlist* theWrappedObject, const QList<Song >&  items, int  pos = -1, bool  play_now = false, bool  enqueue = false);
+   void InsertUrls(Playlist* theWrappedObject, const QList<QUrl >&  urls, int  pos = -1, bool  play_now = false, bool  enqueue = false);
+   void InvalidateDeletedSongs(Playlist* theWrappedObject);
+   void RateSong(Playlist* theWrappedObject, const QModelIndex&  index, double  rating);
+   void ReloadItems(Playlist* theWrappedObject, const QList<int >&  rows);
+   void RemoveDeletedSongs(Playlist* theWrappedObject);
+   void RemoveItemsWithoutUndo(Playlist* theWrappedObject, const QList<int >&  indices);
+   void RemoveSongInsertVetoListener(Playlist* theWrappedObject, SongInsertVetoListener*  listener);
+   void Restore(Playlist* theWrappedObject);
+   void Save(Playlist* theWrappedObject) const;
+   void StopAfter(Playlist* theWrappedObject, int  row);
+   void UpdateItems(Playlist* theWrappedObject, const QList<Song >&  songs);
+   int  columnCount(Playlist* theWrappedObject, const QModelIndex&  arg__1 = QModelIndex()) const;
+   QMap<int , Qt::Alignment >  column_alignments(Playlist* theWrappedObject) const;
+   bool  static_Playlist_column_is_editable(Playlist::Column  column);
+   QString  static_Playlist_column_name(Playlist::Column  column);
+   const QModelIndex  current_index(Playlist* theWrappedObject) const;
+   PlaylistItemPtr  current_item(Playlist* theWrappedObject) const;
+   Song  current_item_metadata(Playlist* theWrappedObject) const;
+   int  current_row(Playlist* theWrappedObject) const;
+   QVariant  data(Playlist* theWrappedObject, const QModelIndex&  index, int  role = Qt::DisplayRole) const;
+   bool  dropMimeData(Playlist* theWrappedObject, const QMimeData*  data, Qt::DropAction  action, int  row, int  column, const QModelIndex&  parent);
+   Qt::ItemFlags  flags(Playlist* theWrappedObject, const QModelIndex&  index) const;
+   Playlist::LastFMStatus  get_lastfm_status(Playlist* theWrappedObject) const;
+   const bool  has_item_at(Playlist* theWrappedObject, int  index) const;
+   bool  have_incremented_playcount(Playlist* theWrappedObject) const;
+   QVariant  headerData(Playlist* theWrappedObject, int  section, Qt::Orientation  orientation, int  role = Qt::DisplayRole) const;
+   int  id(Playlist* theWrappedObject) const;
+   bool  is_dynamic(Playlist* theWrappedObject) const;
+   const PlaylistItemPtr*  item_at(Playlist* theWrappedObject, int  index) const;
+   int  last_played_row(Playlist* theWrappedObject) const;
+   QList<PlaylistItemPtr >  library_items_by_id(Playlist* theWrappedObject, int  id) const;
+   QMimeData*  mimeData(Playlist* theWrappedObject, const QList<QModelIndex >&  indexes) const;
+   QStringList  mimeTypes(Playlist* theWrappedObject) const;
+   int  next_row(Playlist* theWrappedObject) const;
+   int  previous_row(Playlist* theWrappedObject) const;
+   QSortFilterProxyModel*  proxy(Playlist* theWrappedObject) const;
+   bool  removeRows(Playlist* theWrappedObject, int  row, int  count, const QModelIndex&  parent = QModelIndex());
+   int  rowCount(Playlist* theWrappedObject, const QModelIndex&  arg__1 = QModelIndex()) const;
+   qint64  scrobble_point_nanosec(Playlist* theWrappedObject) const;
+   PlaylistSequence*  sequence(Playlist* theWrappedObject) const;
+   bool  setData(Playlist* theWrappedObject, const QModelIndex&  index, const QVariant&  value, int  role);
+   void set_column_align_center(Playlist* theWrappedObject, int  column);
+   void set_column_align_left(Playlist* theWrappedObject, int  column);
+   void set_column_align_right(Playlist* theWrappedObject, int  column);
+   void set_column_alignments(Playlist* theWrappedObject, const QMap<int , Qt::Alignment >&  column_alignments);
+   bool  static_Playlist_set_column_value(Song&  song, Playlist::Column  column, const QVariant&  value);
+   void set_have_incremented_playcount(Playlist* theWrappedObject);
+   void set_lastfm_status(Playlist* theWrappedObject, Playlist::LastFMStatus  status);
+   void set_sequence(Playlist* theWrappedObject, PlaylistSequence*  v);
+   void set_special_type(Playlist* theWrappedObject, const QString&  v);
+   void sort(Playlist* theWrappedObject, int  column, Qt::SortOrder  order);
+   QString  special_type(Playlist* theWrappedObject) const;
+   bool  stop_after_current(Playlist* theWrappedObject) const;
+   Qt::DropActions  supportedDropActions(Playlist* theWrappedObject) const;
+   QUndoStack*  undo_stack(Playlist* theWrappedObject) const;
+};
+
+
+
+
+
+class PythonQtShell_PlaylistBackend : public PlaylistBackend
+{
+public:
+    PythonQtShell_PlaylistBackend(QObject*  parent = 0):PlaylistBackend(parent),_wrapper(NULL) {};
+
+virtual void childEvent(QChildEvent*  arg__1);
+virtual void customEvent(QEvent*  arg__1);
+virtual bool  event(QEvent*  arg__1);
+virtual bool  eventFilter(QObject*  arg__1, QEvent*  arg__2);
+virtual void timerEvent(QTimerEvent*  arg__1);
+
+  PythonQtInstanceWrapper* _wrapper; 
+};
+
+class PythonQtWrapper_PlaylistBackend : public QObject
+{ Q_OBJECT
+public:
+public slots:
+PlaylistBackend* new_PlaylistBackend(QObject*  parent = 0);
+void delete_PlaylistBackend(PlaylistBackend* obj) { delete obj; } 
+   int  CreatePlaylist(PlaylistBackend* theWrappedObject, const QString&  name, const QString&  special_type);
+   void RemovePlaylist(PlaylistBackend* theWrappedObject, int  id);
+   void RenamePlaylist(PlaylistBackend* theWrappedObject, int  id, const QString&  new_name);
+   void SavePlaylistAsync(PlaylistBackend* theWrappedObject, int  playlist, const QList<PlaylistItemPtr >&  items, int  last_played, smart_playlists::GeneratorPtr  dynamic);
+   void SetLibrary(PlaylistBackend* theWrappedObject, LibraryBackend*  library);
+   void SetPlaylistOrder(PlaylistBackend* theWrappedObject, const QList<int >&  ids);
+};
+
+
+
+
+
+class PythonQtShell_PlaylistContainer : public PlaylistContainer
+{
+public:
+    PythonQtShell_PlaylistContainer(QWidget*  parent = 0):PlaylistContainer(parent),_wrapper(NULL) {};
+
+virtual void actionEvent(QActionEvent*  arg__1);
+virtual void changeEvent(QEvent*  arg__1);
+virtual void childEvent(QChildEvent*  arg__1);
+virtual void closeEvent(QCloseEvent*  arg__1);
+virtual void contextMenuEvent(QContextMenuEvent*  arg__1);
+virtual void customEvent(QEvent*  arg__1);
+virtual int  devType() const;
+virtual void dragEnterEvent(QDragEnterEvent*  arg__1);
+virtual void dragLeaveEvent(QDragLeaveEvent*  arg__1);
+virtual void dragMoveEvent(QDragMoveEvent*  arg__1);
+virtual void dropEvent(QDropEvent*  arg__1);
+virtual void enterEvent(QEvent*  arg__1);
+virtual bool  event(QEvent*  arg__1);
+virtual bool  eventFilter(QObject*  arg__1, QEvent*  arg__2);
+virtual void focusInEvent(QFocusEvent*  arg__1);
+virtual bool  focusNextPrevChild(bool  next);
+virtual void focusOutEvent(QFocusEvent*  arg__1);
+virtual int  heightForWidth(int  arg__1) const;
+virtual void hideEvent(QHideEvent*  arg__1);
+virtual void inputMethodEvent(QInputMethodEvent*  arg__1);
+virtual QVariant  inputMethodQuery(Qt::InputMethodQuery  arg__1) const;
+virtual void keyPressEvent(QKeyEvent*  arg__1);
+virtual void keyReleaseEvent(QKeyEvent*  arg__1);
+virtual void languageChange();
+virtual void leaveEvent(QEvent*  arg__1);
+virtual int  metric(QPaintDevice::PaintDeviceMetric  arg__1) const;
+virtual QSize  minimumSizeHint() const;
+virtual void mouseDoubleClickEvent(QMouseEvent*  arg__1);
+virtual void mouseMoveEvent(QMouseEvent*  arg__1);
+virtual void mousePressEvent(QMouseEvent*  arg__1);
+virtual void mouseReleaseEvent(QMouseEvent*  arg__1);
+virtual void moveEvent(QMoveEvent*  arg__1);
+virtual QPaintEngine*  paintEngine() const;
+virtual void paintEvent(QPaintEvent*  arg__1);
+virtual void resizeEvent(QResizeEvent*  arg__1);
+virtual void showEvent(QShowEvent*  arg__1);
+virtual QSize  sizeHint() const;
+virtual void tabletEvent(QTabletEvent*  arg__1);
+virtual void timerEvent(QTimerEvent*  arg__1);
+virtual void wheelEvent(QWheelEvent*  arg__1);
+
+  PythonQtInstanceWrapper* _wrapper; 
+};
+
+class PythonQtPublicPromoter_PlaylistContainer : public PlaylistContainer
+{ public:
+inline void promoted_resizeEvent(QResizeEvent*  arg__1) { PlaylistContainer::resizeEvent(arg__1); }
+};
+
+class PythonQtWrapper_PlaylistContainer : public QObject
+{ Q_OBJECT
+public:
+public slots:
+PlaylistContainer* new_PlaylistContainer(QWidget*  parent = 0);
+void delete_PlaylistContainer(PlaylistContainer* obj) { delete obj; } 
+   void SetActions(PlaylistContainer* theWrappedObject, QAction*  new_playlist, QAction*  save_playlist, QAction*  load_playlist, QAction*  next_playlist, QAction*  previous_playlist);
+   void SetManager(PlaylistContainer* theWrappedObject, PlaylistManager*  manager);
+   void resizeEvent(PlaylistContainer* theWrappedObject, QResizeEvent*  arg__1);
+};
+
+
+
+
+
+class PythonQtShell_PlaylistItemPtr : public PlaylistItemPtr
+{
+public:
+    PythonQtShell_PlaylistItemPtr():PlaylistItemPtr(),_wrapper(NULL) {};
+
+
+  PythonQtInstanceWrapper* _wrapper; 
+};
+
+class PythonQtWrapper_PlaylistItemPtr : public QObject
+{ Q_OBJECT
+public:
+public slots:
+PlaylistItemPtr* new_PlaylistItemPtr();
+void delete_PlaylistItemPtr(PlaylistItemPtr* obj) { delete obj; } 
+};
+
+
+
+
+
+class PythonQtShell_PlaylistManager : public PlaylistManager
+{
+public:
+    PythonQtShell_PlaylistManager(TaskManager*  task_manager, QObject*  parent = 0):PlaylistManager(task_manager, parent),_wrapper(NULL) {};
+
+virtual void ChangePlaylistOrder(const QList<int >&  ids);
+virtual void ClearCurrent();
+virtual QList<Playlist* >  GetAllPlaylists() const;
+virtual SpecialPlaylistType*  GetPlaylistType(const QString&  type) const;
+virtual void InvalidateDeletedSongs();
+virtual void Load(const QString&  filename);
+virtual void New(const QString&  name, const QList<Song >&  songs = SongList(), const QString&  special_type = QString());
+virtual void PlaySmartPlaylist(smart_playlists::GeneratorPtr  generator, bool  as_new, bool  clear);
+virtual void RateCurrentSong(double  rating);
+virtual void RateCurrentSong(int  rating);
+virtual void RegisterSpecialPlaylistType(SpecialPlaylistType*  type);
+virtual void Remove(int  id);
+virtual void RemoveDeletedSongs();
+virtual void Rename(int  id, const QString&  new_name);
+virtual void Save(int  id, const QString&  filename);
+virtual void SelectionChanged(const QItemSelection&  selection);
+virtual void SetActivePaused();
+virtual void SetActivePlaying();
+virtual void SetActivePlaylist(int  id);
+virtual void SetActiveStopped();
+virtual void SetActiveStreamMetadata(const QUrl&  url, const Song&  song);
+virtual void SetActiveToCurrent();
+virtual void SetCurrentPlaylist(int  id);
+virtual void ShuffleCurrent();
+virtual void SongChangeRequestProcessed(const QUrl&  url, bool  valid);
+virtual void UnregisterSpecialPlaylistType(SpecialPlaylistType*  type);
+virtual Playlist*  active() const;
+virtual int  active_id() const;
+virtual QItemSelection  active_selection() const;
+virtual void childEvent(QChildEvent*  arg__1);
+virtual Playlist*  current() const;
+virtual int  current_id() const;
+virtual QItemSelection  current_selection() const;
+virtual void customEvent(QEvent*  arg__1);
+virtual bool  event(QEvent*  arg__1);
+virtual bool  eventFilter(QObject*  arg__1, QEvent*  arg__2);
+virtual LibraryBackend*  library_backend() const;
+virtual QString  name(int  index) const;
+virtual PlaylistParser*  parser() const;
+virtual Playlist*  playlist(int  id) const;
+virtual PlaylistBackend*  playlist_backend() const;
+virtual PlaylistContainer*  playlist_container() const;
+virtual QItemSelection  selection(int  id) const;
+virtual PlaylistSequence*  sequence() const;
+virtual TaskManager*  task_manager() const;
+virtual void timerEvent(QTimerEvent*  arg__1);
+
+  PythonQtInstanceWrapper* _wrapper; 
+};
+
+class PythonQtPublicPromoter_PlaylistManager : public PlaylistManager
+{ public:
+inline void promoted_ChangePlaylistOrder(const QList<int >&  ids) { PlaylistManager::ChangePlaylistOrder(ids); }
+inline void promoted_ClearCurrent() { PlaylistManager::ClearCurrent(); }
+inline QList<Playlist* >  promoted_GetAllPlaylists() const { return PlaylistManager::GetAllPlaylists(); }
+inline SpecialPlaylistType*  promoted_GetPlaylistType(const QString&  type) const { return PlaylistManager::GetPlaylistType(type); }
+inline void promoted_InvalidateDeletedSongs() { PlaylistManager::InvalidateDeletedSongs(); }
+inline void promoted_Load(const QString&  filename) { PlaylistManager::Load(filename); }
+inline void promoted_New(const QString&  name, const QList<Song >&  songs = SongList(), const QString&  special_type = QString()) { PlaylistManager::New(name, songs, special_type); }
+inline void promoted_PlaySmartPlaylist(smart_playlists::GeneratorPtr  generator, bool  as_new, bool  clear) { PlaylistManager::PlaySmartPlaylist(generator, as_new, clear); }
+inline void promoted_RateCurrentSong(double  rating) { PlaylistManager::RateCurrentSong(rating); }
+inline void promoted_RateCurrentSong(int  rating) { PlaylistManager::RateCurrentSong(rating); }
+inline void promoted_RegisterSpecialPlaylistType(SpecialPlaylistType*  type) { PlaylistManager::RegisterSpecialPlaylistType(type); }
+inline void promoted_Remove(int  id) { PlaylistManager::Remove(id); }
+inline void promoted_RemoveDeletedSongs() { PlaylistManager::RemoveDeletedSongs(); }
+inline void promoted_Rename(int  id, const QString&  new_name) { PlaylistManager::Rename(id, new_name); }
+inline void promoted_Save(int  id, const QString&  filename) { PlaylistManager::Save(id, filename); }
+inline void promoted_SelectionChanged(const QItemSelection&  selection) { PlaylistManager::SelectionChanged(selection); }
+inline void promoted_SetActivePaused() { PlaylistManager::SetActivePaused(); }
+inline void promoted_SetActivePlaying() { PlaylistManager::SetActivePlaying(); }
+inline void promoted_SetActivePlaylist(int  id) { PlaylistManager::SetActivePlaylist(id); }
+inline void promoted_SetActiveStopped() { PlaylistManager::SetActiveStopped(); }
+inline void promoted_SetActiveStreamMetadata(const QUrl&  url, const Song&  song) { PlaylistManager::SetActiveStreamMetadata(url, song); }
+inline void promoted_SetActiveToCurrent() { PlaylistManager::SetActiveToCurrent(); }
+inline void promoted_SetCurrentPlaylist(int  id) { PlaylistManager::SetCurrentPlaylist(id); }
+inline void promoted_ShuffleCurrent() { PlaylistManager::ShuffleCurrent(); }
+inline void promoted_SongChangeRequestProcessed(const QUrl&  url, bool  valid) { PlaylistManager::SongChangeRequestProcessed(url, valid); }
+inline void promoted_UnregisterSpecialPlaylistType(SpecialPlaylistType*  type) { PlaylistManager::UnregisterSpecialPlaylistType(type); }
+inline Playlist*  promoted_active() const { return PlaylistManager::active(); }
+inline int  promoted_active_id() const { return PlaylistManager::active_id(); }
+inline QItemSelection  promoted_active_selection() const { return PlaylistManager::active_selection(); }
+inline Playlist*  promoted_current() const { return PlaylistManager::current(); }
+inline int  promoted_current_id() const { return PlaylistManager::current_id(); }
+inline QItemSelection  promoted_current_selection() const { return PlaylistManager::current_selection(); }
+inline LibraryBackend*  promoted_library_backend() const { return PlaylistManager::library_backend(); }
+inline QString  promoted_name(int  index) const { return PlaylistManager::name(index); }
+inline PlaylistParser*  promoted_parser() const { return PlaylistManager::parser(); }
+inline Playlist*  promoted_playlist(int  id) const { return PlaylistManager::playlist(id); }
+inline PlaylistBackend*  promoted_playlist_backend() const { return PlaylistManager::playlist_backend(); }
+inline PlaylistContainer*  promoted_playlist_container() const { return PlaylistManager::playlist_container(); }
+inline QItemSelection  promoted_selection(int  id) const { return PlaylistManager::selection(id); }
+inline PlaylistSequence*  promoted_sequence() const { return PlaylistManager::sequence(); }
+inline TaskManager*  promoted_task_manager() const { return PlaylistManager::task_manager(); }
+};
+
+class PythonQtWrapper_PlaylistManager : public QObject
+{ Q_OBJECT
+public:
+public slots:
+PlaylistManager* new_PlaylistManager(TaskManager*  task_manager, QObject*  parent = 0);
+void delete_PlaylistManager(PlaylistManager* obj) { delete obj; } 
+   QList<Playlist* >  GetAllPlaylists(PlaylistManager* theWrappedObject) const;
+   QString  static_PlaylistManager_GetNameForNewPlaylist(const QList<Song >&  songs);
+   SpecialPlaylistType*  GetPlaylistType(PlaylistManager* theWrappedObject, const QString&  type) const;
+   void Init(PlaylistManager* theWrappedObject, LibraryBackend*  library_backend, PlaylistBackend*  playlist_backend, PlaylistSequence*  sequence, PlaylistContainer*  playlist_container);
+   void InvalidateDeletedSongs(PlaylistManager* theWrappedObject);
+   void RegisterSpecialPlaylistType(PlaylistManager* theWrappedObject, SpecialPlaylistType*  type);
+   void RemoveDeletedSongs(PlaylistManager* theWrappedObject);
+   void UnregisterSpecialPlaylistType(PlaylistManager* theWrappedObject, SpecialPlaylistType*  type);
+   Playlist*  active(PlaylistManager* theWrappedObject) const;
+   int  active_id(PlaylistManager* theWrappedObject) const;
+   QItemSelection  active_selection(PlaylistManager* theWrappedObject) const;
+   Playlist*  current(PlaylistManager* theWrappedObject) const;
+   int  current_id(PlaylistManager* theWrappedObject) const;
+   QItemSelection  current_selection(PlaylistManager* theWrappedObject) const;
+   LibraryBackend*  library_backend(PlaylistManager* theWrappedObject) const;
+   QString  name(PlaylistManager* theWrappedObject, int  index) const;
+   PlaylistParser*  parser(PlaylistManager* theWrappedObject) const;
+   Playlist*  playlist(PlaylistManager* theWrappedObject, int  id) const;
+   PlaylistBackend*  playlist_backend(PlaylistManager* theWrappedObject) const;
+   PlaylistContainer*  playlist_container(PlaylistManager* theWrappedObject) const;
+   QItemSelection  selection(PlaylistManager* theWrappedObject, int  id) const;
+   PlaylistSequence*  sequence(PlaylistManager* theWrappedObject) const;
+   TaskManager*  task_manager(PlaylistManager* theWrappedObject) const;
+};
+
+
+
+
+
+class PythonQtShell_PlaylistManagerInterface : public PlaylistManagerInterface
+{
+public:
+    PythonQtShell_PlaylistManagerInterface(QObject*  parent):PlaylistManagerInterface(parent),_wrapper(NULL) {};
+
+virtual void ChangePlaylistOrder(const QList<int >&  ids);
+virtual void ClearCurrent();
+virtual QList<Playlist* >  GetAllPlaylists() const;
+virtual SpecialPlaylistType*  GetPlaylistType(const QString&  type) const;
+virtual void InvalidateDeletedSongs();
+virtual void Load(const QString&  filename);
+virtual void New(const QString&  name, const QList<Song >&  songs = SongList(), const QString&  special_type = QString());
+virtual void PlaySmartPlaylist(smart_playlists::GeneratorPtr  generator, bool  as_new, bool  clear);
+virtual void RateCurrentSong(double  rating);
+virtual void RateCurrentSong(int  rating);
+virtual void RegisterSpecialPlaylistType(SpecialPlaylistType*  type);
+virtual void Remove(int  id);
+virtual void RemoveDeletedSongs();
+virtual void Rename(int  id, const QString&  new_name);
+virtual void Save(int  id, const QString&  filename);
+virtual void SelectionChanged(const QItemSelection&  selection);
+virtual void SetActivePaused();
+virtual void SetActivePlaying();
+virtual void SetActivePlaylist(int  id);
+virtual void SetActiveStopped();
+virtual void SetActiveStreamMetadata(const QUrl&  url, const Song&  song);
+virtual void SetActiveToCurrent();
+virtual void SetCurrentPlaylist(int  id);
+virtual void ShuffleCurrent();
+virtual void SongChangeRequestProcessed(const QUrl&  url, bool  valid);
+virtual void UnregisterSpecialPlaylistType(SpecialPlaylistType*  type);
+virtual Playlist*  active() const;
+virtual int  active_id() const;
+virtual QItemSelection  active_selection() const;
+virtual void childEvent(QChildEvent*  arg__1);
+virtual Playlist*  current() const;
+virtual int  current_id() const;
+virtual QItemSelection  current_selection() const;
+virtual void customEvent(QEvent*  arg__1);
+virtual bool  event(QEvent*  arg__1);
+virtual bool  eventFilter(QObject*  arg__1, QEvent*  arg__2);
+virtual LibraryBackend*  library_backend() const;
+virtual QString  name(int  index) const;
+virtual PlaylistParser*  parser() const;
+virtual Playlist*  playlist(int  id) const;
+virtual PlaylistBackend*  playlist_backend() const;
+virtual PlaylistContainer*  playlist_container() const;
+virtual QItemSelection  selection(int  id) const;
+virtual PlaylistSequence*  sequence() const;
+virtual TaskManager*  task_manager() const;
+virtual void timerEvent(QTimerEvent*  arg__1);
+
+  PythonQtInstanceWrapper* _wrapper; 
+};
+
+class PythonQtWrapper_PlaylistManagerInterface : public QObject
+{ Q_OBJECT
+public:
+public slots:
+PlaylistManagerInterface* new_PlaylistManagerInterface(QObject*  parent);
+void delete_PlaylistManagerInterface(PlaylistManagerInterface* obj) { delete obj; } 
 };
 
 
@@ -509,6 +1117,26 @@ void delete_PlaylistParser(PlaylistParser* obj) { delete obj; }
    QString  default_filter(PlaylistParser* theWrappedObject) const;
    QStringList  file_extensions(PlaylistParser* theWrappedObject) const;
    QString  filters(PlaylistParser* theWrappedObject) const;
+};
+
+
+
+
+
+class PythonQtWrapper_PlaylistSequence : public QObject
+{ Q_OBJECT
+public:
+Q_ENUMS(ShuffleMode RepeatMode )
+enum ShuffleMode{
+  Shuffle_Off = PlaylistSequence::Shuffle_Off,   Shuffle_All = PlaylistSequence::Shuffle_All,   Shuffle_Album = PlaylistSequence::Shuffle_Album};
+enum RepeatMode{
+  Repeat_Off = PlaylistSequence::Repeat_Off,   Repeat_Track = PlaylistSequence::Repeat_Track,   Repeat_Album = PlaylistSequence::Repeat_Album,   Repeat_Playlist = PlaylistSequence::Repeat_Playlist};
+public slots:
+void delete_PlaylistSequence(PlaylistSequence* obj) { delete obj; } 
+   QMenu*  repeat_menu(PlaylistSequence* theWrappedObject) const;
+   PlaylistSequence::RepeatMode  repeat_mode(PlaylistSequence* theWrappedObject) const;
+   QMenu*  shuffle_menu(PlaylistSequence* theWrappedObject) const;
+   PlaylistSequence::ShuffleMode  shuffle_mode(PlaylistSequence* theWrappedObject) const;
 };
 
 
@@ -574,6 +1202,7 @@ void delete_RadioModel(RadioModel* obj) { delete obj; }
    bool  hasChildren(RadioModel* theWrappedObject, const QModelIndex&  parent) const;
    QMimeData*  mimeData(RadioModel* theWrappedObject, const QList<QModelIndex >&  indexes) const;
    QStringList  mimeTypes(RadioModel* theWrappedObject) const;
+   PlayerInterface*  player(RadioModel* theWrappedObject) const;
    int  rowCount(RadioModel* theWrappedObject, const QModelIndex&  parent) const;
    TaskManager*  task_manager(RadioModel* theWrappedObject) const;
 };
@@ -760,6 +1389,77 @@ void delete_Song(Song* obj) { delete obj; }
 
 
 
+class PythonQtShell_SongInsertVetoListener : public SongInsertVetoListener
+{
+public:
+    PythonQtShell_SongInsertVetoListener():SongInsertVetoListener(),_wrapper(NULL) {};
+
+virtual QList<Song >  AboutToInsertSongs(const QList<Song >&  old_songs, const QList<Song >&  new_songs);
+virtual void childEvent(QChildEvent*  arg__1);
+virtual void customEvent(QEvent*  arg__1);
+virtual bool  event(QEvent*  arg__1);
+virtual bool  eventFilter(QObject*  arg__1, QEvent*  arg__2);
+virtual void timerEvent(QTimerEvent*  arg__1);
+
+  PythonQtInstanceWrapper* _wrapper; 
+};
+
+class PythonQtWrapper_SongInsertVetoListener : public QObject
+{ Q_OBJECT
+public:
+public slots:
+SongInsertVetoListener* new_SongInsertVetoListener();
+void delete_SongInsertVetoListener(SongInsertVetoListener* obj) { delete obj; } 
+};
+
+
+
+
+
+class PythonQtShell_SpecialPlaylistType : public SpecialPlaylistType
+{
+public:
+    PythonQtShell_SpecialPlaylistType():SpecialPlaylistType(),_wrapper(NULL) {};
+
+virtual void DidYouMeanClicked(const QString&  text, Playlist*  playlist);
+virtual void Search(const QString&  text, Playlist*  playlist);
+virtual QString  empty_playlist_text(Playlist*  playlist) const;
+virtual bool  has_special_search_behaviour(Playlist*  playlist) const;
+virtual QIcon  icon(Playlist*  playlist) const;
+virtual QString  name() const;
+virtual QString  search_hint_text(Playlist*  playlist) const;
+
+  PythonQtInstanceWrapper* _wrapper; 
+};
+
+class PythonQtPublicPromoter_SpecialPlaylistType : public SpecialPlaylistType
+{ public:
+inline void promoted_DidYouMeanClicked(const QString&  text, Playlist*  playlist) { SpecialPlaylistType::DidYouMeanClicked(text, playlist); }
+inline void promoted_Search(const QString&  text, Playlist*  playlist) { SpecialPlaylistType::Search(text, playlist); }
+inline QString  promoted_empty_playlist_text(Playlist*  playlist) const { return SpecialPlaylistType::empty_playlist_text(playlist); }
+inline bool  promoted_has_special_search_behaviour(Playlist*  playlist) const { return SpecialPlaylistType::has_special_search_behaviour(playlist); }
+inline QIcon  promoted_icon(Playlist*  playlist) const { return SpecialPlaylistType::icon(playlist); }
+inline QString  promoted_search_hint_text(Playlist*  playlist) const { return SpecialPlaylistType::search_hint_text(playlist); }
+};
+
+class PythonQtWrapper_SpecialPlaylistType : public QObject
+{ Q_OBJECT
+public:
+public slots:
+SpecialPlaylistType* new_SpecialPlaylistType();
+void delete_SpecialPlaylistType(SpecialPlaylistType* obj) { delete obj; } 
+   void DidYouMeanClicked(SpecialPlaylistType* theWrappedObject, const QString&  text, Playlist*  playlist);
+   void Search(SpecialPlaylistType* theWrappedObject, const QString&  text, Playlist*  playlist);
+   QString  empty_playlist_text(SpecialPlaylistType* theWrappedObject, Playlist*  playlist) const;
+   bool  has_special_search_behaviour(SpecialPlaylistType* theWrappedObject, Playlist*  playlist) const;
+   QIcon  icon(SpecialPlaylistType* theWrappedObject, Playlist*  playlist) const;
+   QString  search_hint_text(SpecialPlaylistType* theWrappedObject, Playlist*  playlist) const;
+};
+
+
+
+
+
 class PythonQtShell_Subdirectory : public Subdirectory
 {
 public:
@@ -816,162 +1516,6 @@ void delete_TaskManager(TaskManager* obj) { delete obj; }
    void SetTaskFinished(TaskManager* theWrappedObject, int  id);
    void SetTaskProgress(TaskManager* theWrappedObject, int  id, int  progress, int  max = 0);
    int  StartTask(TaskManager* theWrappedObject, const QString&  name);
-};
-
-
-
-
-
-class PythonQtShell_TaskManager_Task : public TaskManager_Task
-{
-public:
-    PythonQtShell_TaskManager_Task():TaskManager_Task(),_wrapper(NULL) {};
-
-
-  PythonQtInstanceWrapper* _wrapper; 
-};
-
-class PythonQtWrapper_TaskManager_Task : public QObject
-{ Q_OBJECT
-public:
-public slots:
-TaskManager_Task* new_TaskManager_Task();
-TaskManager_Task* new_TaskManager_Task(const TaskManager_Task& other) {
-PythonQtShell_TaskManager_Task* a = new PythonQtShell_TaskManager_Task();
-*((TaskManager_Task*)a) = other;
-return a; }
-void delete_TaskManager_Task(TaskManager_Task* obj) { delete obj; } 
-void py_set_progress_max(TaskManager_Task* theWrappedObject, int  progress_max){ theWrappedObject->progress_max = progress_max; }
-int  py_get_progress_max(TaskManager_Task* theWrappedObject){ return theWrappedObject->progress_max; }
-void py_set_progress(TaskManager_Task* theWrappedObject, int  progress){ theWrappedObject->progress = progress; }
-int  py_get_progress(TaskManager_Task* theWrappedObject){ return theWrappedObject->progress; }
-void py_set_id(TaskManager_Task* theWrappedObject, int  id){ theWrappedObject->id = id; }
-int  py_get_id(TaskManager_Task* theWrappedObject){ return theWrappedObject->id; }
-void py_set_name(TaskManager_Task* theWrappedObject, QString  name){ theWrappedObject->name = name; }
-QString  py_get_name(TaskManager_Task* theWrappedObject){ return theWrappedObject->name; }
-void py_set_blocks_library_scans(TaskManager_Task* theWrappedObject, bool  blocks_library_scans){ theWrappedObject->blocks_library_scans = blocks_library_scans; }
-bool  py_get_blocks_library_scans(TaskManager_Task* theWrappedObject){ return theWrappedObject->blocks_library_scans; }
-};
-
-
-
-
-
-class PythonQtShell_ThreadSafeNetworkDiskCache : public ThreadSafeNetworkDiskCache
-{
-public:
-    PythonQtShell_ThreadSafeNetworkDiskCache(QObject*  parent):ThreadSafeNetworkDiskCache(parent),_wrapper(NULL) {};
-
-virtual qint64  cacheSize() const;
-virtual void childEvent(QChildEvent*  arg__1);
-virtual void clear();
-virtual void customEvent(QEvent*  arg__1);
-virtual QIODevice*  data(const QUrl&  url);
-virtual bool  event(QEvent*  arg__1);
-virtual bool  eventFilter(QObject*  arg__1, QEvent*  arg__2);
-virtual void insert(QIODevice*  device);
-virtual QNetworkCacheMetaData  metaData(const QUrl&  url);
-virtual QIODevice*  prepare(const QNetworkCacheMetaData&  metaData);
-virtual bool  remove(const QUrl&  url);
-virtual void timerEvent(QTimerEvent*  arg__1);
-virtual void updateMetaData(const QNetworkCacheMetaData&  metaData);
-
-  PythonQtInstanceWrapper* _wrapper; 
-};
-
-class PythonQtPublicPromoter_ThreadSafeNetworkDiskCache : public ThreadSafeNetworkDiskCache
-{ public:
-inline qint64  promoted_cacheSize() const { return ThreadSafeNetworkDiskCache::cacheSize(); }
-inline void promoted_clear() { ThreadSafeNetworkDiskCache::clear(); }
-inline QIODevice*  promoted_data(const QUrl&  url) { return ThreadSafeNetworkDiskCache::data(url); }
-inline void promoted_insert(QIODevice*  device) { ThreadSafeNetworkDiskCache::insert(device); }
-inline QNetworkCacheMetaData  promoted_metaData(const QUrl&  url) { return ThreadSafeNetworkDiskCache::metaData(url); }
-inline QIODevice*  promoted_prepare(const QNetworkCacheMetaData&  metaData) { return ThreadSafeNetworkDiskCache::prepare(metaData); }
-inline bool  promoted_remove(const QUrl&  url) { return ThreadSafeNetworkDiskCache::remove(url); }
-inline void promoted_updateMetaData(const QNetworkCacheMetaData&  metaData) { ThreadSafeNetworkDiskCache::updateMetaData(metaData); }
-};
-
-class PythonQtWrapper_ThreadSafeNetworkDiskCache : public QObject
-{ Q_OBJECT
-public:
-public slots:
-ThreadSafeNetworkDiskCache* new_ThreadSafeNetworkDiskCache(QObject*  parent);
-void delete_ThreadSafeNetworkDiskCache(ThreadSafeNetworkDiskCache* obj) { delete obj; } 
-   qint64  cacheSize(ThreadSafeNetworkDiskCache* theWrappedObject) const;
-   void clear(ThreadSafeNetworkDiskCache* theWrappedObject);
-   QIODevice*  data(ThreadSafeNetworkDiskCache* theWrappedObject, const QUrl&  url);
-   void insert(ThreadSafeNetworkDiskCache* theWrappedObject, QIODevice*  device);
-   QNetworkCacheMetaData  metaData(ThreadSafeNetworkDiskCache* theWrappedObject, const QUrl&  url);
-   QIODevice*  prepare(ThreadSafeNetworkDiskCache* theWrappedObject, const QNetworkCacheMetaData&  metaData);
-   bool  remove(ThreadSafeNetworkDiskCache* theWrappedObject, const QUrl&  url);
-   void updateMetaData(ThreadSafeNetworkDiskCache* theWrappedObject, const QNetworkCacheMetaData&  metaData);
-};
-
-
-
-
-
-class PythonQtShell_UrlHandler : public UrlHandler
-{
-public:
-    PythonQtShell_UrlHandler(QObject*  parent = 0):UrlHandler(parent),_wrapper(NULL) {};
-
-virtual UrlHandler_LoadResult  LoadNext(const QUrl&  url);
-virtual UrlHandler_LoadResult  StartLoading(const QUrl&  url);
-virtual void childEvent(QChildEvent*  arg__1);
-virtual void customEvent(QEvent*  arg__1);
-virtual bool  event(QEvent*  arg__1);
-virtual bool  eventFilter(QObject*  arg__1, QEvent*  arg__2);
-virtual QString  scheme() const;
-virtual void timerEvent(QTimerEvent*  arg__1);
-
-  PythonQtInstanceWrapper* _wrapper; 
-};
-
-class PythonQtPublicPromoter_UrlHandler : public UrlHandler
-{ public:
-inline UrlHandler_LoadResult  promoted_LoadNext(const QUrl&  url) { return UrlHandler::LoadNext(url); }
-inline UrlHandler_LoadResult  promoted_StartLoading(const QUrl&  url) { return UrlHandler::StartLoading(url); }
-};
-
-class PythonQtWrapper_UrlHandler : public QObject
-{ Q_OBJECT
-public:
-public slots:
-UrlHandler* new_UrlHandler(QObject*  parent = 0);
-void delete_UrlHandler(UrlHandler* obj) { delete obj; } 
-   UrlHandler_LoadResult  LoadNext(UrlHandler* theWrappedObject, const QUrl&  url);
-   UrlHandler_LoadResult  StartLoading(UrlHandler* theWrappedObject, const QUrl&  url);
-};
-
-
-
-
-
-class PythonQtShell_UrlHandler_LoadResult : public UrlHandler_LoadResult
-{
-public:
-    PythonQtShell_UrlHandler_LoadResult(const QUrl&  original_url = QUrl(), UrlHandler_LoadResult::Type  type = UrlHandler_LoadResult::NoMoreTracks, const QUrl&  media_url = QUrl()):UrlHandler_LoadResult(original_url, type, media_url),_wrapper(NULL) {};
-
-
-  PythonQtInstanceWrapper* _wrapper; 
-};
-
-class PythonQtWrapper_UrlHandler_LoadResult : public QObject
-{ Q_OBJECT
-public:
-Q_ENUMS(Type )
-enum Type{
-  NoMoreTracks = UrlHandler_LoadResult::NoMoreTracks,   WillLoadAsynchronously = UrlHandler_LoadResult::WillLoadAsynchronously,   TrackAvailable = UrlHandler_LoadResult::TrackAvailable};
-public slots:
-UrlHandler_LoadResult* new_UrlHandler_LoadResult(const QUrl&  original_url = QUrl(), UrlHandler_LoadResult::Type  type = UrlHandler_LoadResult::NoMoreTracks, const QUrl&  media_url = QUrl());
-void delete_UrlHandler_LoadResult(UrlHandler_LoadResult* obj) { delete obj; } 
-void py_set_original_url_(UrlHandler_LoadResult* theWrappedObject, QUrl  original_url_){ theWrappedObject->original_url_ = original_url_; }
-QUrl  py_get_original_url_(UrlHandler_LoadResult* theWrappedObject){ return theWrappedObject->original_url_; }
-void py_set_media_url_(UrlHandler_LoadResult* theWrappedObject, QUrl  media_url_){ theWrappedObject->media_url_ = media_url_; }
-QUrl  py_get_media_url_(UrlHandler_LoadResult* theWrappedObject){ return theWrappedObject->media_url_; }
-void py_set_type_(UrlHandler_LoadResult* theWrappedObject, UrlHandler_LoadResult::Type  type_){ theWrappedObject->type_ = type_; }
-UrlHandler_LoadResult::Type  py_get_type_(UrlHandler_LoadResult* theWrappedObject){ return theWrappedObject->type_; }
 };
 
 

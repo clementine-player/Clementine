@@ -19,13 +19,43 @@
 #define OBJECTDECORATORS_H
 
 #include <QObject>
+#include <QSqlQuery>
+#include <QUrl>
+
+#include "core/song.h"
+#include "playlist/playlistitem.h"
 
 class ObjectDecorators : public QObject {
   Q_OBJECT
 
 public slots:
+  // QObject
   void deleteLater(QObject* self);
   bool inherits(QObject* self, const char* class_name);
+
+  // PlaylistItemPtr
+  QString type(PlaylistItemPtr* self) const;
+  PlaylistItem::Options options(PlaylistItemPtr* self) const;
+  bool InitFromQuery(PlaylistItemPtr* self, const SqlRow& query);
+  void BindToQuery(PlaylistItemPtr* self, QSqlQuery* query) const;
+  void Reload(PlaylistItemPtr* self);
+  void BackgroundReload(PlaylistItemPtr* self);
+  Song Metadata(PlaylistItemPtr* self) const;
+  QUrl Url(PlaylistItemPtr* self) const;
+  void SetTemporaryMetadata(PlaylistItemPtr* self, const Song& metadata);
+  void ClearTemporaryMetadata(PlaylistItemPtr* self);
+  bool HasTemporaryMetadata(PlaylistItemPtr* self) const;
+  void SetBackgroundColor(PlaylistItemPtr* self, short priority, const QColor& color);
+  bool HasBackgroundColor(PlaylistItemPtr* self, short priority) const;
+  void RemoveBackgroundColor(PlaylistItemPtr* self, short priority);
+  QColor GetCurrentBackgroundColor(PlaylistItemPtr* self) const;
+  bool HasCurrentBackgroundColor(PlaylistItemPtr* self) const;
+  void SetForegroundColor(PlaylistItemPtr* self, short priority, const QColor& color);
+  bool HasForegroundColor(PlaylistItemPtr* self, short priority) const;
+  void RemoveForegroundColor(PlaylistItemPtr* self, short priority);
+  QColor GetCurrentForegroundColor(PlaylistItemPtr* self) const;
+  bool HasCurrentForegroundColor(PlaylistItemPtr* self) const;
+  bool IsLocalLibraryItem(PlaylistItemPtr* self) const;
 };
 
 #endif // OBJECTDECORATORS_H

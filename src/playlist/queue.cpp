@@ -272,7 +272,7 @@ bool Queue::dropMimeData(const QMimeData* data, Qt::DropAction action, int row, 
     Playlist* playlist = NULL;
     QList<int> source_rows;
     QDataStream stream(data->data(Playlist::kRowsMimetype));
-    stream >> playlist;
+    stream.readRawData(reinterpret_cast<char*>(&playlist), sizeof(playlist));
     stream >> source_rows;
 
     QModelIndexList source_indexes;

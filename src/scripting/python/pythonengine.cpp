@@ -33,6 +33,7 @@
 #include "library/library.h"
 #include "library/librarybackend.h"
 #include "library/libraryview.h"
+#include "playlist/playlistitem.h"
 #include "playlist/playlistmanager.h"
 #include "radio/radiomodel.h"
 #include "scripting/uiinterface.h"
@@ -109,6 +110,7 @@ bool PythonEngine::EnsureInitialised() {
   RegisterListConverter<Song>("QList<Song>");
   RegisterListConverter<Directory>("QList<Directory>");
   RegisterListConverter<CoverSearchResult>("QList<CoverSearchResult>");
+  RegisterListConverter<PlaylistItemPtr>("QList<PlaylistItemPtr>");
 
   // Connect stdout, stderr
   connect(python_qt, SIGNAL(pythonStdOut(QString)), SLOT(PythonStdOut(QString)));

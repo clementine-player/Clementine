@@ -34,6 +34,7 @@ public:
   // Called from C++
   void RegisterActionLocation(const QString& id, QMenu* menu, QAction* before);
 
+public slots:
   // Called from scripts
   void AddAction(const QString& id, QAction* action);
 

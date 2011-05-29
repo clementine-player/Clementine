@@ -1,47 +1,37 @@
-from PyQt4.Qt import QAction
-from PyQt4.QtCore import QObject
-from PyQt4.QtCore import Qt
-from PyQt4.QtCore import SIGNAL
-
-from PyQt4.QtGui import QColor
+from PythonQt.QtCore import QObject
+from PythonQt.QtGui  import QAction, QColor
 
 import clementine
 
 
 class RainbowizerScript(QObject):
-
-  priority = 1
-  colors = [ QColor("#ec1e24"),
-             QColor("#f45a2c"),
-             QColor("#fcf204"),
-             QColor("#3cb64c"),
-             QColor("#04aeec"),
-             QColor("#242264"),
-             QColor("#94268c") ];
+  PRIORITY = 1
 
   def __init__(self):
     QObject.__init__(self)
 
+    # Generate colors
+    self.colors = []
+    for hue in xrange(0, 255, 30):
+      self.colors.append(QColor.fromHsv(hue, 255, 255, 96))
+
     self.action = QAction("rainbowize_playlist", self)
     self.action.setText("Rainbowize!")
     self.action.setCheckable(True)
-    self.connect(self.action, SIGNAL("changed()"), self.rainbowize)
+    self.action.connect("changed()", self.rainbowize)
 
     clementine.ui.AddAction('playlist_menu', self.action)
 
   def rainbowize(self):
     for playlist in clementine.playlists.GetAllPlaylists():
       if self.action.isChecked():
-        i = 0
-
-        for item in playlist.GetAllItems():
-          i = (i + 1) % len(self.colors)
-          item.SetBackgroundColor(self.priority, self.colors[i])
+        for i, item in enumerate(playlist.GetAllItems()):
+          item.SetBackgroundColor(self.PRIORITY, self.colors[i % len(self.colors)])
 
       else:
         # undo all rainbow colors
         for item in playlist.GetAllItems():
-          item.RemoveBackgroundColor(self.priority)
+          item.RemoveBackgroundColor(self.PRIORITY)
 
 
 script = RainbowizerScript()

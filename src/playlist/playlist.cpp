@@ -659,7 +659,7 @@ bool Playlist::dropMimeData(const QMimeData* data, Qt::DropAction action, int ro
     Playlist* source_playlist = NULL;
 
     QDataStream stream(data->data(kRowsMimetype));
-    stream >> source_playlist;
+    stream.readRawData(reinterpret_cast<char*>(&source_playlist), sizeof(source_playlist));
     stream >> source_rows;
     qStableSort(source_rows); // Make sure we take them in order
 
@@ -1002,7 +1002,9 @@ QMimeData* Playlist::mimeData(const QModelIndexList& indexes) const {
   QBuffer buf;
   buf.open(QIODevice::WriteOnly);
   QDataStream stream(&buf);
-  stream << this;
+
+  const Playlist* self = this;
+  stream.writeRawData(reinterpret_cast<char*>(&self), sizeof(self));
   stream << rows;
   buf.close();
 
@@ -1631,16 +1633,6 @@ void Playlist::QueueLayoutChanged() {
     const QModelIndex& index = queue_->mapToSource(queue_->index(i, Column_Title));
     emit dataChanged(index, index);
   }
-}
-
-QDataStream& operator <<(QDataStream& s, const Playlist* p) {
-  s.writeRawData(reinterpret_cast<char*>(&p), sizeof(p));
-  return s;
-}
-
-QDataStream& operator >>(QDataStream& s, Playlist*& p) {
-  s.readRawData(reinterpret_cast<char*>(&p), sizeof(p));
-  return s;
 }
 
 void Playlist::ItemChanged(PlaylistItemPtr item) {

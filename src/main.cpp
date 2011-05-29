@@ -199,7 +199,9 @@ int main(int argc, char *argv[]) {
   qRegisterMetaType<Song>("Song");
   qRegisterMetaType<SongList>("SongList");
   qRegisterMetaType<QList<Song> >("QList<Song>");
+  qRegisterMetaType<PlaylistItemPtr>("PlaylistItemPtr");
   qRegisterMetaType<PlaylistItemList>("PlaylistItemList");
+  qRegisterMetaType<QList<PlaylistItemPtr> >("QList<PlaylistItemPtr>");
   qRegisterMetaType<Engine::State>("Engine::State");
   qRegisterMetaType<Engine::SimpleMetaBundle>("Engine::SimpleMetaBundle");
   qRegisterMetaType<Equalizer::Params>("Equalizer::Params");

@@ -31,8 +31,15 @@
 #include "engines/enginebase.h"
 #include "library/librarybackend.h"
 #include "library/libraryquery.h"
+#include "playlist/playlist.h"
+#include "playlist/playlistbackend.h"
+#include "playlist/playlistcontainer.h"
+#include "playlist/playlistmanager.h"
+#include "playlist/playlistsequence.h"
+#include "playlist/specialplaylisttype.h"
 #include "playlistparsers/playlistparser.h"
 #include "radio/radiomodel.h"
 #include "radio/radioservice.h"
+#include "smartplaylists/generator.h"
 
 #endif // BINDINGS_INCLUDES_H

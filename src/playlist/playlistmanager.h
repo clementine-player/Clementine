@@ -59,9 +59,9 @@ public:
   // Removes all deleted songs from all playlists.
   virtual void RemoveDeletedSongs() = 0;
 
-  virtual const QItemSelection& selection(int id) const = 0;
-  virtual const QItemSelection& current_selection() const = 0;
-  virtual const QItemSelection& active_selection() const = 0;
+  virtual QItemSelection selection(int id) const = 0;
+  virtual QItemSelection current_selection() const = 0;
+  virtual QItemSelection active_selection() const = 0;
 
   virtual QString name(int index) const = 0;
 
@@ -154,9 +154,9 @@ public:
   // songs.
   static QString GetNameForNewPlaylist(const SongList& songs);
 
-  const QItemSelection& selection(int id) const;
-  const QItemSelection& current_selection() const { return selection(current_id()); }
-  const QItemSelection& active_selection() const { return selection(active_id()); }
+  QItemSelection selection(int id) const;
+  QItemSelection current_selection() const { return selection(current_id()); }
+  QItemSelection active_selection() const { return selection(active_id()); }
 
   QString name(int index) const { return playlists_[index].name; }
 

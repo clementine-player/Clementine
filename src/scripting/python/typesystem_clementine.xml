@@ -4,6 +4,12 @@
   <load-typesystem name="typesystem_network.xml" generate="no" />
 
   <enum-type name="Engine::State" />
+  <enum-type name="Engine::TrackChangeType" flags="Engine::TrackChangeFlags" />
+  <enum-type name="Playlist::Column" />
+  <enum-type name="Playlist::LastFMStatus" />
+  <enum-type name="Playlist::Role" />
+  <enum-type name="PlaylistSequence::ShuffleMode" />
+  <enum-type name="PlaylistSequence::RepeatMode" />
   <enum-type name="QueryOptions::QueryMode" />
   <enum-type name="RadioModel::PlayBehaviour" />
   <enum-type name="RadioModel::Role" />
@@ -15,6 +21,7 @@
   <value-type name="CoverSearchResult" />
   <value-type name="Directory" />
   <value-type name="LibraryBackendInterface::Album" />
+  <value-type name="PlaylistItemPtr" />
   <value-type name="QueryOptions" />
   <value-type name="Song">
     <modify-function signature="BackgroundSave()const" remove="all" />
@@ -42,9 +49,23 @@
     <modify-function signature="timerEvent(QTimerEvent*)" remove="all" />
   </object-type>
   <object-type name="Player" />
+  <object-type name="PlayerInterface" />
+  <object-type name="Playlist" />
+  <object-type name="PlaylistBackend">
+    <modify-function signature="GetPlaylistItems(int)" remove="all" />
+  </object-type>
+  <object-type name="PlaylistContainer">
+    <modify-function signature="eventFilter(QObject*,QEvent*)" remove="all" />
+  </object-type>
+  <object-type name="PlaylistManager" />
+  <object-type name="PlaylistManagerInterface" />
   <object-type name="PlaylistParser" />
+  <object-type name="PlaylistSequence" />
   <object-type name="RadioModel" />
   <object-type name="RadioService" />
+  <object-type name="smart_playlists::GeneratorPtr" />
+  <object-type name="SongInsertVetoListener" />
+  <object-type name="SpecialPlaylistType" />
   <object-type name="TaskManager" />
   <object-type name="ThreadSafeNetworkDiskCache" />
   <object-type name="UrlHandler" />

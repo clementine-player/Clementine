@@ -142,9 +142,11 @@ void ShellImplGenerator::write(QTextStream &s, const AbstractMetaClass *meta_cla
         if ((type->isArray() && typeOptions & ArrayAsPointer) ||
             (type->indirections()) ||
             (type->isReference() && typeOptions & ConvertReferenceToPtr) ||
-            type->isEnum() || type->isPrimitive() || type->isTargetLangEnum() ||
-            type->isIntegerEnum()) {
+            type->isPrimitive()) {
           s << " = 0";
+        } else if (type->isEnum() || type->isTargetLangEnum() ||
+                   type->isIntegerEnum()) {
+          s << " = " << type->cppSignature() << "(0)";
         }
 
         s << ";" << endl;

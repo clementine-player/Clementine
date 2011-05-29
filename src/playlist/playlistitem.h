@@ -19,11 +19,11 @@
 #define PLAYLISTITEM_H
 
 #include <QMap>
+#include <QMetaType>
 #include <QStandardItem>
 #include <QUrl>
 
 #include <boost/enable_shared_from_this.hpp>
-#include <boost/shared_ptr.hpp>
 
 #include "core/song.h"
 
@@ -82,7 +82,7 @@ class PlaylistItem : public boost::enable_shared_from_this<PlaylistItem> {
   // Convenience function to find out whether this item is from the local
   // library, as opposed to a device, a file on disk, or a stream.
   // Remember that even if this returns true, the library item might be
-  // invalid so you might want to check that it's id is not equal to -1
+  // invalid so you might want to check that its id is not equal to -1
   // before actually using it.
   virtual bool IsLocalLibraryItem() const { return false; }
 
@@ -106,6 +106,8 @@ class PlaylistItem : public boost::enable_shared_from_this<PlaylistItem> {
 typedef boost::shared_ptr<PlaylistItem> PlaylistItemPtr;
 typedef QList<PlaylistItemPtr> PlaylistItemList;
 
-Q_DECLARE_OPERATORS_FOR_FLAGS(PlaylistItem::Options);
+Q_DECLARE_METATYPE(PlaylistItemPtr)
+Q_DECLARE_METATYPE(PlaylistItemList)
+Q_DECLARE_OPERATORS_FOR_FLAGS(PlaylistItem::Options)
 
 #endif // PLAYLISTITEM_H
