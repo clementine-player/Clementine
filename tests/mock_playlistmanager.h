@@ -35,9 +35,9 @@ public:
   MOCK_METHOD0(InvalidateDeletedSongs, void());
   MOCK_METHOD0(RemoveDeletedSongs, void());
 
-  MOCK_CONST_METHOD1(selection, const QItemSelection&(int));
-  MOCK_CONST_METHOD0(current_selection, const QItemSelection&());
-  MOCK_CONST_METHOD0(active_selection, const QItemSelection&());
+  MOCK_CONST_METHOD1(selection, QItemSelection(int));
+  MOCK_CONST_METHOD0(current_selection, QItemSelection());
+  MOCK_CONST_METHOD0(active_selection, QItemSelection());
 
   MOCK_CONST_METHOD1(name, QString(int));
   MOCK_CONST_METHOD0(task_manager, TaskManager*());
