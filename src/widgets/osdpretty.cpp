@@ -117,6 +117,14 @@ OSDPretty::OSDPretty(Mode mode, QWidget *parent)
   int margin = l->margin() + kDropShadowSize;
   l->setMargin(margin);
 
+  // Get current screen resolution
+  QRect screenResolution = QApplication::desktop()->screenGeometry();
+  // Leave 200 px for icon
+  ui_->summary->setMaximumWidth(screenResolution.width()-200);
+  ui_->message->setMaximumWidth(screenResolution.width()-200);
+  // Set maximum size for the OSD, a little margin here too
+  setMaximumSize(screenResolution.width()-100,screenResolution.height()-100);
+
   // Don't load settings here, they will be reloaded anyway on creation
 }
 
