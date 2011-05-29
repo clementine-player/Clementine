@@ -60,6 +60,7 @@ OSDPretty::OSDPretty(Mode mode, QWidget *parent)
     background_opacity_(0.85),
     popup_display_(0),
     font_(QFont()),
+    disable_duration_(false),
     timeout_(new QTimer(this)),
     fading_enabled_(false),
     fader_(new QTimeLine(300, this))
@@ -140,6 +141,7 @@ void OSDPretty::Load() {
   popup_display_ = s.value("popup_display", -1).toInt();
   popup_pos_ = s.value("popup_pos", QPoint(0, 0)).toPoint();
   font_.fromString(s.value("font", "Verdana,9,-1,5,50,0,0,0,0,0").toString());
+  disable_duration_ = s.value("disable_duration", false).toBool();
 
   set_font(font());
   set_foreground_color(foreground_color());
@@ -231,7 +233,7 @@ void OSDPretty::SetMessage(const QString& summary, const QString& message,
   if (isVisible())
     Reposition();
 
-  if (isVisible() && mode_ == Mode_Popup)
+  if (isVisible() && mode_ == Mode_Popup && !disable_duration())
     timeout_->start(); // Restart the timer
 }
 
@@ -247,7 +249,8 @@ void OSDPretty::showEvent(QShowEvent* e) {
     fader_->start(); // Timeout will be started in FaderFinished
   }
   else if (mode_ == Mode_Popup) {
-    timeout_->start();
+    if (!disable_duration())
+      timeout_->start();
     // Ensures it is above when showing the preview
     raise();
   }
@@ -265,7 +268,7 @@ void OSDPretty::setVisible(bool visible) {
 void OSDPretty::FaderFinished() {
   if (fader_->direction() == QTimeLine::Backward)
     hide();
-  else if (mode_ == Mode_Popup)
+  else if (mode_ == Mode_Popup && !disable_duration())
     timeout_->start();
 }
 

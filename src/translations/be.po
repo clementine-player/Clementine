@@ -11,10 +11,10 @@ msgstr ""
 "PO-Revision-Date: 2010-12-05 20:18+0000\n"
 "Last-Translator: David Sansome <me@davidsansome.com>\n"
 "Language-Team: Belarusian <be@li.org>\n"
+"Language: be\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: be\n"
 "X-Launchpad-Export-Date: 2011-04-10 05:05+0000\n"
 "X-Generator: Launchpad (build 12735)\n"
 
@@ -46,10 +46,6 @@ msgid "%1 days ago"
 msgstr "%1 дзён таму"
 
 #, qt-format
-msgid "%1 other listeners"
-msgstr "%1 іншых слухачоў"
-
-#, qt-format
 msgid "%1 playlists (%2)"
 msgstr "%1 плэйліст (%2)"
 
@@ -74,10 +70,6 @@ msgid "%1 songs found (showing %2)"
 msgstr "%1 кампазіцый знойдзена (паказана %2)"
 
 #, qt-format
-msgid "%1 total plays"
-msgstr "%1 разоў прайграваў"
-
-#, qt-format
 msgid "%1 tracks"
 msgstr "%1 кампазіцый"
 
@@ -85,15 +77,23 @@ msgstr "%1 кампазіцый"
 msgid "%1: Wiimotedev module"
 msgstr "%1: модуль Wiimotedev"
 
-#, c-format
+#, qt-format
+msgid "%L1 other listeners"
+msgstr ""
+
+#, qt-format
+msgid "%L1 total plays"
+msgstr ""
+
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n з памылкай"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n завершана"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n засталося"
 
@@ -572,6 +572,9 @@ msgstr "Выбраць аўтаматычна"
 msgid "Choose color..."
 msgstr "Выбраць колер..."
 
+msgid "Choose font..."
+msgstr ""
+
 msgid "Choose from the list"
 msgstr "Выбар са спісу"
 
@@ -941,6 +944,9 @@ msgid "Directory"
 msgstr "Каталёг"
 
 msgid "Disable"
+msgstr ""
+
+msgid "Disable duration"
 msgstr ""
 
 msgid "Disabled"
@@ -2684,7 +2690,7 @@ msgstr ""
 msgid "Techno"
 msgstr ""
 
-msgid "Text color"
+msgid "Text options"
 msgstr ""
 
 msgid "Thanks to"
@@ -3119,7 +3125,7 @@ msgstr ""
 msgid "Zero"
 msgstr ""
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr ""
 
@@ -3208,7 +3214,7 @@ msgstr ""
 msgid "press enter"
 msgstr ""
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr ""
 
@@ -3227,6 +3233,12 @@ msgstr ""
 #, qt-format
 msgid "track %1"
 msgstr ""
+
+#~ msgid "%1 other listeners"
+#~ msgstr "%1 іншых слухачоў"
+
+#~ msgid "%1 total plays"
+#~ msgstr "%1 разоў прайграваў"
 
 #~ msgid "Delete files..."
 #~ msgstr "Выдаліць файлы..."

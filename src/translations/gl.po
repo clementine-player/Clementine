@@ -11,10 +11,10 @@ msgstr ""
 "PO-Revision-Date: 2011-04-03 07:12+0000\n"
 "Last-Translator: Miguel Anxo Bouzada <mbouzada@gmail.com>\n"
 "Language-Team: Galician <gl@li.org>\n"
+"Language: gl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: gl\n"
 "X-Launchpad-Export-Date: 2011-04-10 05:06+0000\n"
 "X-Generator: Launchpad (build 12735)\n"
 
@@ -46,10 +46,6 @@ msgid "%1 days ago"
 msgstr ""
 
 #, qt-format
-msgid "%1 other listeners"
-msgstr ""
-
-#, qt-format
 msgid "%1 playlists (%2)"
 msgstr "%1 listas de reproducción (%2)"
 
@@ -74,10 +70,6 @@ msgid "%1 songs found (showing %2)"
 msgstr "%1 canción encontrada (mostrando %2)"
 
 #, qt-format
-msgid "%1 total plays"
-msgstr "%1 repoducción totais"
-
-#, qt-format
 msgid "%1 tracks"
 msgstr "%1 canción"
 
@@ -85,15 +77,23 @@ msgstr "%1 canción"
 msgid "%1: Wiimotedev module"
 msgstr "%1: Módulo Wiimotedev"
 
-#, c-format
+#, qt-format
+msgid "%L1 other listeners"
+msgstr ""
+
+#, qt-format
+msgid "%L1 total plays"
+msgstr ""
+
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n fallou"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n completado(s)"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n restante"
 
@@ -164,8 +164,8 @@ msgid ""
 "<p>If you surround sections of text that contain a token with curly-braces, "
 "that section will be hidden if the token is empty.</p>"
 msgstr ""
-"<p>As fichas de substitución comezan con %, por exemplo: %artist %album %"
-"title </p>\n"
+"<p>As fichas de substitución comezan con %, por exemplo: %artist %album "
+"%title </p>\n"
 "<p>Se rodea seccións de texto que conteñen unha ficha de substitución, esa "
 "sección non se amosará se a ficha de substitución estará baleira.</p>"
 
@@ -573,6 +573,9 @@ msgstr "Elexir automáticamente"
 msgid "Choose color..."
 msgstr "Elexir cor..."
 
+msgid "Choose font..."
+msgstr ""
+
 msgid "Choose from the list"
 msgstr "Elixir da lista"
 
@@ -935,6 +938,9 @@ msgid "Directory"
 msgstr ""
 
 msgid "Disable"
+msgstr ""
+
+msgid "Disable duration"
 msgstr ""
 
 msgid "Disabled"
@@ -2679,7 +2685,7 @@ msgstr ""
 msgid "Techno"
 msgstr "Techno"
 
-msgid "Text color"
+msgid "Text options"
 msgstr ""
 
 msgid "Thanks to"
@@ -3114,7 +3120,7 @@ msgstr ""
 msgid "Zero"
 msgstr ""
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr ""
 
@@ -3203,7 +3209,7 @@ msgstr "Opzóns"
 msgid "press enter"
 msgstr ""
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr ""
 
@@ -3222,6 +3228,9 @@ msgstr ""
 #, qt-format
 msgid "track %1"
 msgstr "faixa %1"
+
+#~ msgid "%1 total plays"
+#~ msgstr "%1 repoducción totais"
 
 #~ msgid "Hide %1"
 #~ msgstr "Esconder %1"

@@ -11,10 +11,10 @@ msgstr ""
 "PO-Revision-Date: 2011-04-11 20:16+0000\n"
 "Last-Translator: Daniela Barcan <Unknown>\n"
 "Language-Team: Romanian <ro@li.org>\n"
+"Language: ro\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: ro\n"
 "X-Launchpad-Export-Date: 2011-04-12 05:12+0000\n"
 "X-Generator: Launchpad (build 12735)\n"
 
@@ -46,10 +46,6 @@ msgid "%1 days ago"
 msgstr "%1 zile în urmă"
 
 #, qt-format
-msgid "%1 other listeners"
-msgstr "%1 alți ascultători"
-
-#, qt-format
 msgid "%1 playlists (%2)"
 msgstr "%1 liste de redare (%2)"
 
@@ -74,10 +70,6 @@ msgid "%1 songs found (showing %2)"
 msgstr "%1 melodii găsite (se afișează %2)"
 
 #, qt-format
-msgid "%1 total plays"
-msgstr "%1 redări totale"
-
-#, qt-format
 msgid "%1 tracks"
 msgstr "%1 piste"
 
@@ -85,15 +77,23 @@ msgstr "%1 piste"
 msgid "%1: Wiimotedev module"
 msgstr "%1: modul Wiimotedev"
 
-#, c-format
+#, qt-format
+msgid "%L1 other listeners"
+msgstr ""
+
+#, qt-format
+msgid "%L1 total plays"
+msgstr ""
+
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n eșuat"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n finalizat"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n rămas"
 
@@ -578,6 +578,9 @@ msgstr "Alege automat"
 msgid "Choose color..."
 msgstr "Alege culoarea..."
 
+msgid "Choose font..."
+msgstr ""
+
 msgid "Choose from the list"
 msgstr "Alegeți din listă"
 
@@ -953,6 +956,9 @@ msgstr "Dosar"
 
 msgid "Disable"
 msgstr "Dezactivează"
+
+msgid "Disable duration"
+msgstr ""
 
 msgid "Disabled"
 msgstr "Dezactivat"
@@ -2706,8 +2712,8 @@ msgstr ""
 msgid "Techno"
 msgstr "Techno"
 
-msgid "Text color"
-msgstr "Culoare text"
+msgid "Text options"
+msgstr ""
 
 msgid "Thanks to"
 msgstr "Mulțumiri"
@@ -3141,7 +3147,7 @@ msgstr ""
 msgid "Zero"
 msgstr "Zero"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr ""
 
@@ -3230,7 +3236,7 @@ msgstr "opțiuni"
 msgid "press enter"
 msgstr ""
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "elimină %n piese"
 
@@ -3249,6 +3255,15 @@ msgstr ""
 #, qt-format
 msgid "track %1"
 msgstr "pistă %1"
+
+#~ msgid "%1 other listeners"
+#~ msgstr "%1 alți ascultători"
+
+#~ msgid "%1 total plays"
+#~ msgstr "%1 redări totale"
+
+#~ msgid "Text color"
+#~ msgstr "Culoare text"
 
 #~ msgid "..."
 #~ msgstr "..."

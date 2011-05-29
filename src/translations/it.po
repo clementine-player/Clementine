@@ -12,10 +12,10 @@ msgstr ""
 "PO-Revision-Date: 2011-04-09 09:37+0000\n"
 "Last-Translator: Vincenzo Reale <smart2128@baslug.org>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
+"Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: it\n"
 "X-Launchpad-Export-Date: 2011-04-10 05:06+0000\n"
 "X-Generator: Launchpad (build 12735)\n"
 
@@ -47,10 +47,6 @@ msgid "%1 days ago"
 msgstr "%1 giorni fa"
 
 #, qt-format
-msgid "%1 other listeners"
-msgstr "%1 altri ascoltatori"
-
-#, qt-format
 msgid "%1 playlists (%2)"
 msgstr "%1 scalette (%2)"
 
@@ -75,10 +71,6 @@ msgid "%1 songs found (showing %2)"
 msgstr "%1 brani trovati (mostrati %2)"
 
 #, qt-format
-msgid "%1 total plays"
-msgstr "%1 riproduzioni complete"
-
-#, qt-format
 msgid "%1 tracks"
 msgstr "%1 tracce"
 
@@ -86,15 +78,23 @@ msgstr "%1 tracce"
 msgid "%1: Wiimotedev module"
 msgstr "%1: modulo Wiimotedev"
 
-#, c-format
+#, qt-format
+msgid "%L1 other listeners"
+msgstr ""
+
+#, qt-format
+msgid "%L1 total plays"
+msgstr ""
+
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n non riusciti"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n completati"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n rimanenti"
 
@@ -584,6 +584,9 @@ msgstr "Scegli automaticamente"
 msgid "Choose color..."
 msgstr "Scegli colore..."
 
+msgid "Choose font..."
+msgstr ""
+
 msgid "Choose from the list"
 msgstr "Scegli dall'elenco"
 
@@ -957,6 +960,9 @@ msgstr "Cartella"
 
 msgid "Disable"
 msgstr "Disabilita"
+
+msgid "Disable duration"
+msgstr ""
 
 msgid "Disabled"
 msgstr "Disabilitata"
@@ -2720,8 +2726,8 @@ msgstr ""
 msgid "Techno"
 msgstr "Techno"
 
-msgid "Text color"
-msgstr "Colore del testo"
+msgid "Text options"
+msgstr ""
 
 msgid "Thanks to"
 msgstr "Grazie a"
@@ -3200,7 +3206,7 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "Zero"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "aggiungi %n brani"
 
@@ -3289,7 +3295,7 @@ msgstr "opzioni"
 msgid "press enter"
 msgstr ""
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "rimuovi %n brani"
 
@@ -3308,6 +3314,15 @@ msgstr "ferma"
 #, qt-format
 msgid "track %1"
 msgstr "traccia %1"
+
+#~ msgid "%1 other listeners"
+#~ msgstr "%1 altri ascoltatori"
+
+#~ msgid "%1 total plays"
+#~ msgstr "%1 riproduzioni complete"
+
+#~ msgid "Text color"
+#~ msgstr "Colore del testo"
 
 #~ msgid "..."
 #~ msgstr "..."

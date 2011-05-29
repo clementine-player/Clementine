@@ -11,10 +11,10 @@ msgstr ""
 "PO-Revision-Date: 2011-03-19 23:15+0000\n"
 "Last-Translator: Pau Capó <Unknown>\n"
 "Language-Team: Catalan <ca@li.org>\n"
+"Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: ca\n"
 "X-Launchpad-Export-Date: 2011-04-10 05:05+0000\n"
 "X-Generator: Launchpad (build 12735)\n"
 
@@ -46,10 +46,6 @@ msgid "%1 days ago"
 msgstr ""
 
 #, qt-format
-msgid "%1 other listeners"
-msgstr ""
-
-#, qt-format
 msgid "%1 playlists (%2)"
 msgstr "%1 llistes de reproducció (%2)"
 
@@ -74,10 +70,6 @@ msgid "%1 songs found (showing %2)"
 msgstr ""
 
 #, qt-format
-msgid "%1 total plays"
-msgstr "%1 reproduccions"
-
-#, qt-format
 msgid "%1 tracks"
 msgstr "%1 temes"
 
@@ -85,15 +77,23 @@ msgstr "%1 temes"
 msgid "%1: Wiimotedev module"
 msgstr "%1 mòdul Wiimotedev"
 
-#, c-format
+#, qt-format
+msgid "%L1 other listeners"
+msgstr ""
+
+#, qt-format
+msgid "%L1 total plays"
+msgstr ""
+
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n han fallat"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n han acabat"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n restants"
 
@@ -164,8 +164,8 @@ msgid ""
 "<p>If you surround sections of text that contain a token with curly-braces, "
 "that section will be hidden if the token is empty.</p>"
 msgstr ""
-"<p>Les fitxes de reemplaçament comencen amb %, per exemple: %artist %album %"
-"title </p>\n"
+"<p>Les fitxes de reemplaçament comencen amb %, per exemple: %artist %album "
+"%title </p>\n"
 "\n"
 "<p>Si demarqueu entre claus una secció de text que contingui una fitxa de "
 "remplaçament, aquesta secció no es mostrarà si la fitxa de remplaçament es "
@@ -582,6 +582,9 @@ msgstr "Tria automàticament"
 msgid "Choose color..."
 msgstr "Tria el color..."
 
+msgid "Choose font..."
+msgstr ""
+
 msgid "Choose from the list"
 msgstr "Tria de la llista"
 
@@ -954,6 +957,9 @@ msgid "Directory"
 msgstr "Directori"
 
 msgid "Disable"
+msgstr ""
+
+msgid "Disable duration"
 msgstr ""
 
 msgid "Disabled"
@@ -2707,8 +2713,8 @@ msgstr ""
 msgid "Techno"
 msgstr "Techno"
 
-msgid "Text color"
-msgstr "Color del text"
+msgid "Text options"
+msgstr ""
 
 msgid "Thanks to"
 msgstr "Gràcies a"
@@ -3158,7 +3164,7 @@ msgstr ""
 msgid "Zero"
 msgstr "Zero"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "afegeix %n cançons"
 
@@ -3247,7 +3253,7 @@ msgstr "opcions"
 msgid "press enter"
 msgstr ""
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "elimina %n cançons"
 
@@ -3266,6 +3272,12 @@ msgstr "atura"
 #, qt-format
 msgid "track %1"
 msgstr "peça %1"
+
+#~ msgid "%1 total plays"
+#~ msgstr "%1 reproduccions"
+
+#~ msgid "Text color"
+#~ msgstr "Color del text"
 
 #~ msgid "ASF"
 #~ msgstr "ASF"

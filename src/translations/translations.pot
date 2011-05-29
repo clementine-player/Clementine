@@ -36,10 +36,6 @@ msgid "%1 days ago"
 msgstr ""
 
 #, qt-format
-msgid "%1 other listeners"
-msgstr ""
-
-#, qt-format
 msgid "%1 playlists (%2)"
 msgstr ""
 
@@ -64,10 +60,6 @@ msgid "%1 songs found (showing %2)"
 msgstr ""
 
 #, qt-format
-msgid "%1 total plays"
-msgstr ""
-
-#, qt-format
 msgid "%1 tracks"
 msgstr ""
 
@@ -75,15 +67,23 @@ msgstr ""
 msgid "%1: Wiimotedev module"
 msgstr ""
 
-#, c-format
+#, qt-format
+msgid "%L1 other listeners"
+msgstr ""
+
+#, qt-format
+msgid "%L1 total plays"
+msgstr ""
+
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr ""
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr ""
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr ""
 
@@ -559,6 +559,9 @@ msgstr ""
 msgid "Choose color..."
 msgstr ""
 
+msgid "Choose font..."
+msgstr ""
+
 msgid "Choose from the list"
 msgstr ""
 
@@ -917,6 +920,9 @@ msgid "Directory"
 msgstr ""
 
 msgid "Disable"
+msgstr ""
+
+msgid "Disable duration"
 msgstr ""
 
 msgid "Disabled"
@@ -2660,7 +2666,7 @@ msgstr ""
 msgid "Techno"
 msgstr ""
 
-msgid "Text color"
+msgid "Text options"
 msgstr ""
 
 msgid "Thanks to"
@@ -3095,7 +3101,7 @@ msgstr ""
 msgid "Zero"
 msgstr ""
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr ""
 
@@ -3184,7 +3190,7 @@ msgstr ""
 msgid "press enter"
 msgstr ""
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr ""
 

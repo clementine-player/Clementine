@@ -287,6 +287,7 @@ SettingsDialog::SettingsDialog(BackgroundStreams* streams, QWidget* parent)
   connect(ui_->notifications_font_choose, SIGNAL(clicked()), SLOT(ChooseFont()));
   connect(ui_->notifications_exp_chooser1, SIGNAL(triggered(QAction*)), SLOT(InsertVariableFirstLine(QAction*)));
   connect(ui_->notifications_exp_chooser2, SIGNAL(triggered(QAction*)), SLOT(InsertVariableSecondLine(QAction*)));
+  connect(ui_->notifications_disable_duration, SIGNAL(toggled(bool)), ui_->notifications_duration, SLOT(setDisabled(bool)));
 
   if (!OSD::SupportsNativeNotifications())
     ui_->notifications_native->setEnabled(false);
@@ -436,6 +437,7 @@ void SettingsDialog::accept() {
   s.setValue("popup_display", pretty_popup_->popup_display());
   s.setValue("popup_pos", pretty_popup_->popup_pos());
   s.setValue("font", pretty_popup_->font().toString());
+  s.setValue("disable_duration", ui_->notifications_disable_duration->isChecked());
   s.endGroup();
 
   // Network proxy
@@ -633,6 +635,7 @@ void SettingsDialog::showEvent(QShowEvent*) {
   else
     ui_->notifications_bg_preset->setCurrentIndex(2);
   ui_->notifications_bg_preset->setItemData(2, QColor(color), Qt::DecorationRole);
+  ui_->notifications_disable_duration->setChecked(pretty_popup_->disable_duration());
   UpdatePopupVisible();
 
   ui_->library_config->Load();
@@ -689,8 +692,10 @@ void SettingsDialog::NotificationTypeChanged() {
   ui_->notifications_custom_text_group->setEnabled(enabled);
 
 #ifdef Q_OS_DARWIN
-  ui_->notifications_options->setEnabled(ui_->notifications_pretty->isChecked());
+  ui_->notifications_options->setEnabled(pretty);
 #endif
+  ui_->notifications_duration->setEnabled(!pretty || (pretty && !ui_->notifications_disable_duration->isChecked()));
+  ui_->notifications_disable_duration->setEnabled(pretty);
 }
 
 void SettingsDialog::PrettyOpacityChanged(int value) {
@@ -798,6 +803,8 @@ void SettingsDialog::NotificationCustomTextChanged(bool enabled) {
   ui_->notifications_exp_chooser1->setEnabled(enabled);
   ui_->notifications_exp_chooser2->setEnabled(enabled);
   ui_->notifications_preview->setEnabled(enabled);
+  ui_->label_19->setEnabled(enabled);
+  ui_->label_20->setEnabled(enabled);
 }
 
 void SettingsDialog::PrepareNotificationPreview() {

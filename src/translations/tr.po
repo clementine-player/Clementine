@@ -11,10 +11,10 @@ msgstr ""
 "PO-Revision-Date: 2011-04-10 12:51+0000\n"
 "Last-Translator: Hamit Selahattin Naiboğlu <Unknown>\n"
 "Language-Team: Turkish <tr@li.org>\n"
+"Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: tr\n"
 "X-Launchpad-Export-Date: 2011-04-11 05:09+0000\n"
 "X-Generator: Launchpad (build 12735)\n"
 
@@ -46,10 +46,6 @@ msgid "%1 days ago"
 msgstr "%1 gün önce"
 
 #, qt-format
-msgid "%1 other listeners"
-msgstr "%1 başka dinleyici"
-
-#, qt-format
 msgid "%1 playlists (%2)"
 msgstr "%1 çalma listesi (%2)"
 
@@ -74,10 +70,6 @@ msgid "%1 songs found (showing %2)"
 msgstr "%1 şarkı bulundu (%2 tanesi gösteriliyor)"
 
 #, qt-format
-msgid "%1 total plays"
-msgstr "%1 toplam çalınan"
-
-#, qt-format
 msgid "%1 tracks"
 msgstr "%1 parça"
 
@@ -85,15 +77,23 @@ msgstr "%1 parça"
 msgid "%1: Wiimotedev module"
 msgstr "%1: Wiimotedev modülü"
 
-#, c-format
+#, qt-format
+msgid "%L1 other listeners"
+msgstr ""
+
+#, qt-format
+msgid "%L1 total plays"
+msgstr ""
+
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n başarısız"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n tamamlandı"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n kalan"
 
@@ -576,6 +576,9 @@ msgstr "Otomatik seç"
 msgid "Choose color..."
 msgstr "Rengi seç..."
 
+msgid "Choose font..."
+msgstr ""
+
 msgid "Choose from the list"
 msgstr "Listeden seç"
 
@@ -948,6 +951,9 @@ msgstr "Dizin"
 
 msgid "Disable"
 msgstr "Pasifleştir"
+
+msgid "Disable duration"
+msgstr ""
 
 msgid "Disabled"
 msgstr "Devre Dışı"
@@ -2704,8 +2710,8 @@ msgstr ""
 msgid "Techno"
 msgstr "Tekno"
 
-msgid "Text color"
-msgstr "Metin rengi"
+msgid "Text options"
+msgstr ""
 
 msgid "Thanks to"
 msgstr "Teşekkürler"
@@ -3167,7 +3173,7 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "Sıfır"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "%n şarkıyı ekle"
 
@@ -3256,7 +3262,7 @@ msgstr "seçenekler"
 msgid "press enter"
 msgstr ""
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "%n şarkıyı kaldır"
 
@@ -3275,6 +3281,15 @@ msgstr "durdur"
 #, qt-format
 msgid "track %1"
 msgstr "parça %1"
+
+#~ msgid "%1 other listeners"
+#~ msgstr "%1 başka dinleyici"
+
+#~ msgid "%1 total plays"
+#~ msgstr "%1 toplam çalınan"
+
+#~ msgid "Text color"
+#~ msgstr "Metin rengi"
 
 #~ msgid ""
 #~ "In dynamic mode new tracks will be chosen and added to the playlist every "

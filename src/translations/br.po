@@ -11,10 +11,10 @@ msgstr ""
 "PO-Revision-Date: 2011-03-27 07:33+0000\n"
 "Last-Translator: Gwenn M <Unknown>\n"
 "Language-Team: Breton <br@li.org>\n"
+"Language: br\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: br\n"
 "X-Launchpad-Export-Date: 2011-04-10 05:05+0000\n"
 "X-Generator: Launchpad (build 12735)\n"
 
@@ -46,10 +46,6 @@ msgid "%1 days ago"
 msgstr "%1 devezh 'zo"
 
 #, qt-format
-msgid "%1 other listeners"
-msgstr "%1 selaouer all"
-
-#, qt-format
 msgid "%1 playlists (%2)"
 msgstr "%1 rollioù c'hoari (%2)"
 
@@ -74,10 +70,6 @@ msgid "%1 songs found (showing %2)"
 msgstr "%1 ton kavet (%2 diskouezet)"
 
 #, qt-format
-msgid "%1 total plays"
-msgstr "Bet lennet %1 gwech"
-
-#, qt-format
 msgid "%1 tracks"
 msgstr "%1 roudenn"
 
@@ -85,15 +77,23 @@ msgstr "%1 roudenn"
 msgid "%1: Wiimotedev module"
 msgstr "%1 : enlugellad wiimotedev"
 
-#, c-format
+#, qt-format
+msgid "%L1 other listeners"
+msgstr ""
+
+#, qt-format
+msgid "%L1 total plays"
+msgstr ""
+
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n c'hwitet"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n echuet"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n a chom"
 
@@ -576,6 +576,9 @@ msgstr "Choaz ez aotomatikel"
 msgid "Choose color..."
 msgstr "Choaz ul liv..."
 
+msgid "Choose font..."
+msgstr ""
+
 msgid "Choose from the list"
 msgstr "Choaz el listenn"
 
@@ -947,6 +950,9 @@ msgstr "Doser"
 
 msgid "Disable"
 msgstr "Deweredekaat"
+
+msgid "Disable duration"
+msgstr ""
 
 msgid "Disabled"
 msgstr "Diwederakaet"
@@ -2701,7 +2707,7 @@ msgstr ""
 msgid "Techno"
 msgstr ""
 
-msgid "Text color"
+msgid "Text options"
 msgstr ""
 
 msgid "Thanks to"
@@ -3139,7 +3145,7 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "Zero"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "ouzhpennañ %n ton"
 
@@ -3228,7 +3234,7 @@ msgstr "dibarzhioù"
 msgid "press enter"
 msgstr ""
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "diverkañ %n ton"
 
@@ -3247,6 +3253,12 @@ msgstr "paouez"
 #, qt-format
 msgid "track %1"
 msgstr "roadenn %1"
+
+#~ msgid "%1 other listeners"
+#~ msgstr "%1 selaouer all"
+
+#~ msgid "%1 total plays"
+#~ msgstr "Bet lennet %1 gwech"
 
 #~ msgid "Add as new playlist..."
 #~ msgstr "Oushpennañ evel ur playlist nevez..."

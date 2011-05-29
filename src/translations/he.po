@@ -11,10 +11,10 @@ msgstr ""
 "PO-Revision-Date: 2011-02-15 15:55+0000\n"
 "Last-Translator: Ofir Klinger <klinger.ofir@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
+"Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: he\n"
 "X-Launchpad-Export-Date: 2011-04-10 05:06+0000\n"
 "X-Generator: Launchpad (build 12735)\n"
 
@@ -46,10 +46,6 @@ msgid "%1 days ago"
 msgstr "לפני %1 ימים"
 
 #, qt-format
-msgid "%1 other listeners"
-msgstr "%1 מאזינים אחרים"
-
-#, qt-format
 msgid "%1 playlists (%2)"
 msgstr "%1 רשימות־השמעה (%2)"
 
@@ -74,10 +70,6 @@ msgid "%1 songs found (showing %2)"
 msgstr "נמצאו %1 שירים (מוצגים %2)"
 
 #, qt-format
-msgid "%1 total plays"
-msgstr "בסך הכול %1 השמעות"
-
-#, qt-format
 msgid "%1 tracks"
 msgstr "%1 רצועות"
 
@@ -85,15 +77,23 @@ msgstr "%1 רצועות"
 msgid "%1: Wiimotedev module"
 msgstr "%1: המודול Wiimotedev"
 
-#, c-format
+#, qt-format
+msgid "%L1 other listeners"
+msgstr ""
+
+#, qt-format
+msgid "%L1 total plays"
+msgstr ""
+
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n נכשל"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n הסתיים"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n נותר"
 
@@ -575,6 +575,9 @@ msgstr "בחירה אוטומטית"
 msgid "Choose color..."
 msgstr "בחירת צבע..."
 
+msgid "Choose font..."
+msgstr ""
+
 msgid "Choose from the list"
 msgstr "בחירה מהרשימה"
 
@@ -943,6 +946,9 @@ msgstr "תיקייה"
 
 msgid "Disable"
 msgstr "נטרול"
+
+msgid "Disable duration"
+msgstr ""
 
 msgid "Disabled"
 msgstr "מנוטרל"
@@ -2688,8 +2694,8 @@ msgstr ""
 msgid "Techno"
 msgstr "טכנו"
 
-msgid "Text color"
-msgstr "צבע טקסט"
+msgid "Text options"
+msgstr ""
 
 msgid "Thanks to"
 msgstr "תודתנו נתונה לבאים"
@@ -3140,7 +3146,7 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "אפס"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "הוסף %n שירים"
 
@@ -3229,7 +3235,7 @@ msgstr "אפשרויות"
 msgid "press enter"
 msgstr ""
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "הסרת %n שירים"
 
@@ -3248,6 +3254,15 @@ msgstr "הפסקה"
 #, qt-format
 msgid "track %1"
 msgstr "רצועה %1"
+
+#~ msgid "%1 other listeners"
+#~ msgstr "%1 מאזינים אחרים"
+
+#~ msgid "%1 total plays"
+#~ msgstr "בסך הכול %1 השמעות"
+
+#~ msgid "Text color"
+#~ msgstr "צבע טקסט"
 
 #~ msgid ""
 #~ "In dynamic mode new tracks will be chosen and added to the playlist every "

@@ -11,10 +11,10 @@ msgstr ""
 "PO-Revision-Date: 2011-02-15 15:49+0000\n"
 "Last-Translator: David Sansome <me@davidsansome.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
 "X-Launchpad-Export-Date: 2011-04-10 05:06+0000\n"
 "X-Generator: Launchpad (build 12735)\n"
 
@@ -46,10 +46,6 @@ msgid "%1 days ago"
 msgstr "%1 日前"
 
 #, qt-format
-msgid "%1 other listeners"
-msgstr "%1 人が聴取中"
-
-#, qt-format
 msgid "%1 playlists (%2)"
 msgstr "%1 個のプレイリスト (%2)"
 
@@ -74,10 +70,6 @@ msgid "%1 songs found (showing %2)"
 msgstr "%1 曲見つかりました (%2 曲を表示中)"
 
 #, qt-format
-msgid "%1 total plays"
-msgstr "計 %1 回再生"
-
-#, qt-format
 msgid "%1 tracks"
 msgstr "%1 個のトラック"
 
@@ -85,15 +77,23 @@ msgstr "%1 個のトラック"
 msgid "%1: Wiimotedev module"
 msgstr "%1: Wiimotedev モジュール"
 
-#, c-format
+#, qt-format
+msgid "%L1 other listeners"
+msgstr ""
+
+#, qt-format
+msgid "%L1 total plays"
+msgstr ""
+
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n 曲失敗しました"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n が完了しました"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n 曲残っています"
 
@@ -575,6 +575,9 @@ msgstr "自動的に選択する"
 msgid "Choose color..."
 msgstr "色の選択..."
 
+msgid "Choose font..."
+msgstr ""
+
 msgid "Choose from the list"
 msgstr "一覧から選択する"
 
@@ -945,6 +948,9 @@ msgstr "ディレクトリ"
 
 msgid "Disable"
 msgstr "無効にする"
+
+msgid "Disable duration"
+msgstr ""
 
 msgid "Disabled"
 msgstr "無効"
@@ -2696,8 +2702,8 @@ msgstr ""
 msgid "Techno"
 msgstr "Techno"
 
-msgid "Text color"
-msgstr "テキストの色"
+msgid "Text options"
+msgstr ""
 
 msgid "Thanks to"
 msgstr "謝辞"
@@ -3153,7 +3159,7 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "Zero"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "%n 曲追加"
 
@@ -3242,7 +3248,7 @@ msgstr "オプション"
 msgid "press enter"
 msgstr ""
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "%n 曲削除"
 
@@ -3261,6 +3267,15 @@ msgstr "停止"
 #, qt-format
 msgid "track %1"
 msgstr "トラック %1"
+
+#~ msgid "%1 other listeners"
+#~ msgstr "%1 人が聴取中"
+
+#~ msgid "%1 total plays"
+#~ msgstr "計 %1 回再生"
+
+#~ msgid "Text color"
+#~ msgstr "テキストの色"
 
 #~ msgid ""
 #~ "In dynamic mode new tracks will be chosen and added to the playlist every "

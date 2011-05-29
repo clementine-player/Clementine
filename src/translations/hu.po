@@ -11,10 +11,10 @@ msgstr ""
 "PO-Revision-Date: 2011-04-09 12:21+0000\n"
 "Last-Translator: ntomka <Unknown>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
+"Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: hu\n"
 "X-Launchpad-Export-Date: 2011-04-10 05:06+0000\n"
 "X-Generator: Launchpad (build 12735)\n"
 
@@ -46,10 +46,6 @@ msgid "%1 days ago"
 msgstr "%1 nappal ezelőtt"
 
 #, qt-format
-msgid "%1 other listeners"
-msgstr "%1 hallgató"
-
-#, qt-format
 msgid "%1 playlists (%2)"
 msgstr "%1 lejátszási lista (%2)"
 
@@ -74,10 +70,6 @@ msgid "%1 songs found (showing %2)"
 msgstr "%1 szám megtalálva (mutatva %2)"
 
 #, qt-format
-msgid "%1 total plays"
-msgstr "Lejátszva %1 alkalommal"
-
-#, qt-format
 msgid "%1 tracks"
 msgstr "%1 szám"
 
@@ -85,15 +77,23 @@ msgstr "%1 szám"
 msgid "%1: Wiimotedev module"
 msgstr "%1: Wiimotedev modul"
 
-#, c-format
+#, qt-format
+msgid "%L1 other listeners"
+msgstr ""
+
+#, qt-format
+msgid "%L1 total plays"
+msgstr ""
+
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n meghiúsult"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n befejezve"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n hátralévő"
 
@@ -577,6 +577,9 @@ msgstr "Automatikus választás"
 msgid "Choose color..."
 msgstr "Szín választása..."
 
+msgid "Choose font..."
+msgstr ""
+
 msgid "Choose from the list"
 msgstr "Választás a listáról"
 
@@ -953,6 +956,9 @@ msgstr "Mappa"
 
 msgid "Disable"
 msgstr "Letiltás"
+
+msgid "Disable duration"
+msgstr ""
 
 msgid "Disabled"
 msgstr "Tiltva"
@@ -2711,8 +2717,8 @@ msgstr ""
 msgid "Techno"
 msgstr "Techno"
 
-msgid "Text color"
-msgstr "Szövegszín"
+msgid "Text options"
+msgstr ""
 
 msgid "Thanks to"
 msgstr "Köszönet"
@@ -3182,7 +3188,7 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "Nulla"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "%n szám felvétele"
 
@@ -3271,7 +3277,7 @@ msgstr "beállítások"
 msgid "press enter"
 msgstr ""
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "%n szám eltávolítása"
 
@@ -3290,6 +3296,15 @@ msgstr "leállítás"
 #, qt-format
 msgid "track %1"
 msgstr "%1. szám"
+
+#~ msgid "%1 other listeners"
+#~ msgstr "%1 hallgató"
+
+#~ msgid "%1 total plays"
+#~ msgstr "Lejátszva %1 alkalommal"
+
+#~ msgid "Text color"
+#~ msgstr "Szövegszín"
 
 #~ msgid ""
 #~ "In dynamic mode new tracks will be chosen and added to the playlist every "

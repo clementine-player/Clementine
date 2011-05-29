@@ -11,10 +11,10 @@ msgstr ""
 "PO-Revision-Date: 2011-04-06 11:49+0000\n"
 "Last-Translator: Fitoschido <fitoschido@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
 "X-Launchpad-Export-Date: 2011-04-10 05:08+0000\n"
 "X-Generator: Launchpad (build 12735)\n"
 "X-Language: es_ES\n"
@@ -47,10 +47,6 @@ msgid "%1 days ago"
 msgstr "hace %1 días"
 
 #, qt-format
-msgid "%1 other listeners"
-msgstr "otros %1 oyentes"
-
-#, qt-format
 msgid "%1 playlists (%2)"
 msgstr "%1 listas de reproducción (%2)"
 
@@ -75,10 +71,6 @@ msgid "%1 songs found (showing %2)"
 msgstr "%1 canciones encontradas (mostrando %2)"
 
 #, qt-format
-msgid "%1 total plays"
-msgstr "%1 reproducciones"
-
-#, qt-format
 msgid "%1 tracks"
 msgstr "%1 pistas"
 
@@ -86,15 +78,23 @@ msgstr "%1 pistas"
 msgid "%1: Wiimotedev module"
 msgstr "%1: Módulo Wiimotedev"
 
-#, c-format
+#, qt-format
+msgid "%L1 other listeners"
+msgstr ""
+
+#, qt-format
+msgid "%L1 total plays"
+msgstr ""
+
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n falló"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n completado(s)"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n pendiente(s)"
 
@@ -586,6 +586,9 @@ msgstr "Elegir automáticamente"
 msgid "Choose color..."
 msgstr "Elegir color..."
 
+msgid "Choose font..."
+msgstr ""
+
 msgid "Choose from the list"
 msgstr "Elegir de la lista"
 
@@ -752,8 +755,8 @@ msgid ""
 "Could not create the GStreamer element \"%1\" - make sure you have all the "
 "required GStreamer plugins installed"
 msgstr ""
-"No se pudo crear el elemento «%1» de GStreamer. Asegúrese de tener instalados "
-"todos los complementos necesarios de GStreamer."
+"No se pudo crear el elemento «%1» de GStreamer. Asegúrese de tener "
+"instalados todos los complementos necesarios de GStreamer."
 
 #, qt-format
 msgid ""
@@ -962,6 +965,9 @@ msgstr "Directorio"
 
 msgid "Disable"
 msgstr "Desactivar"
+
+msgid "Disable duration"
+msgstr ""
 
 msgid "Disabled"
 msgstr "Desactivado"
@@ -2725,8 +2731,8 @@ msgstr ""
 msgid "Techno"
 msgstr "Tecno"
 
-msgid "Text color"
-msgstr "Color del texto"
+msgid "Text options"
+msgstr ""
 
 msgid "Thanks to"
 msgstr "Gracias a"
@@ -3200,7 +3206,7 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "Cero"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "añadir %n pistas"
 
@@ -3289,7 +3295,7 @@ msgstr "opciones"
 msgid "press enter"
 msgstr ""
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "remover %n pistas"
 
@@ -3308,6 +3314,15 @@ msgstr "detener"
 #, qt-format
 msgid "track %1"
 msgstr "Pista %1"
+
+#~ msgid "%1 other listeners"
+#~ msgstr "otros %1 oyentes"
+
+#~ msgid "%1 total plays"
+#~ msgstr "%1 reproducciones"
+
+#~ msgid "Text color"
+#~ msgstr "Color del texto"
 
 #~ msgid "..."
 #~ msgstr "..."

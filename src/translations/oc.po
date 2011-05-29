@@ -11,10 +11,10 @@ msgstr ""
 "PO-Revision-Date: 2011-02-15 16:28+0000\n"
 "Last-Translator: Cédric VALMARY (Tot en òc) <cvalmary@yahoo.fr>\n"
 "Language-Team: Occitan (post 1500) <oc@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
 "X-Launchpad-Export-Date: 2011-04-10 05:07+0000\n"
 "X-Generator: Launchpad (build 12735)\n"
 
@@ -46,10 +46,6 @@ msgid "%1 days ago"
 msgstr ""
 
 #, qt-format
-msgid "%1 other listeners"
-msgstr ""
-
-#, qt-format
 msgid "%1 playlists (%2)"
 msgstr ""
 
@@ -74,10 +70,6 @@ msgid "%1 songs found (showing %2)"
 msgstr ""
 
 #, qt-format
-msgid "%1 total plays"
-msgstr ""
-
-#, qt-format
 msgid "%1 tracks"
 msgstr ""
 
@@ -85,15 +77,23 @@ msgstr ""
 msgid "%1: Wiimotedev module"
 msgstr ""
 
-#, c-format
+#, qt-format
+msgid "%L1 other listeners"
+msgstr ""
+
+#, qt-format
+msgid "%L1 total plays"
+msgstr ""
+
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr ""
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr ""
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr ""
 
@@ -569,6 +569,9 @@ msgstr "Causir automaticament"
 msgid "Choose color..."
 msgstr ""
 
+msgid "Choose font..."
+msgstr ""
+
 msgid "Choose from the list"
 msgstr ""
 
@@ -927,6 +930,9 @@ msgid "Directory"
 msgstr "Dorsièr"
 
 msgid "Disable"
+msgstr ""
+
+msgid "Disable duration"
 msgstr ""
 
 msgid "Disabled"
@@ -2670,8 +2676,8 @@ msgstr ""
 msgid "Techno"
 msgstr "Techno"
 
-msgid "Text color"
-msgstr "Color del tèxte"
+msgid "Text options"
+msgstr ""
 
 msgid "Thanks to"
 msgstr "Mercés a"
@@ -3105,7 +3111,7 @@ msgstr ""
 msgid "Zero"
 msgstr "Zèro"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr ""
 
@@ -3194,7 +3200,7 @@ msgstr "opcions"
 msgid "press enter"
 msgstr ""
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr ""
 
@@ -3213,6 +3219,9 @@ msgstr ""
 #, qt-format
 msgid "track %1"
 msgstr "pista %1"
+
+#~ msgid "Text color"
+#~ msgstr "Color del tèxte"
 
 #~ msgid "..."
 #~ msgstr "..."

@@ -11,10 +11,10 @@ msgstr ""
 "PO-Revision-Date: 2011-04-02 20:14+0000\n"
 "Last-Translator: Nedim Skenderovic <Unknown>\n"
 "Language-Team: Bosnian <bs@li.org>\n"
+"Language: bs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: bs\n"
 "X-Launchpad-Export-Date: 2011-04-10 05:05+0000\n"
 "X-Generator: Launchpad (build 12735)\n"
 
@@ -46,10 +46,6 @@ msgid "%1 days ago"
 msgstr "prije %1 dana"
 
 #, qt-format
-msgid "%1 other listeners"
-msgstr "%1 drugih slušatelja"
-
-#, qt-format
 msgid "%1 playlists (%2)"
 msgstr ""
 
@@ -74,10 +70,6 @@ msgid "%1 songs found (showing %2)"
 msgstr "%1 pjesama pronađeno (prikazano %2)"
 
 #, qt-format
-msgid "%1 total plays"
-msgstr ""
-
-#, qt-format
 msgid "%1 tracks"
 msgstr ""
 
@@ -85,15 +77,23 @@ msgstr ""
 msgid "%1: Wiimotedev module"
 msgstr "%1 Wiimotedev modul"
 
-#, c-format
+#, qt-format
+msgid "%L1 other listeners"
+msgstr ""
+
+#, qt-format
+msgid "%L1 total plays"
+msgstr ""
+
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr ""
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n završeno"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n ostalo"
 
@@ -572,6 +572,9 @@ msgstr "Izaberi automatski"
 msgid "Choose color..."
 msgstr "Izaberi boju..."
 
+msgid "Choose font..."
+msgstr ""
+
 msgid "Choose from the list"
 msgstr "Izaberi iz liste"
 
@@ -945,6 +948,9 @@ msgstr "Fascikla"
 
 msgid "Disable"
 msgstr "Onemogući"
+
+msgid "Disable duration"
+msgstr ""
 
 msgid "Disabled"
 msgstr "Onemogućeno"
@@ -2687,7 +2693,7 @@ msgstr ""
 msgid "Techno"
 msgstr ""
 
-msgid "Text color"
+msgid "Text options"
 msgstr ""
 
 msgid "Thanks to"
@@ -3122,7 +3128,7 @@ msgstr ""
 msgid "Zero"
 msgstr ""
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr ""
 
@@ -3211,7 +3217,7 @@ msgstr ""
 msgid "press enter"
 msgstr ""
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr ""
 
@@ -3230,3 +3236,6 @@ msgstr ""
 #, qt-format
 msgid "track %1"
 msgstr ""
+
+#~ msgid "%1 other listeners"
+#~ msgstr "%1 drugih slušatelja"

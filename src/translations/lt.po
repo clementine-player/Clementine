@@ -11,10 +11,10 @@ msgstr ""
 "PO-Revision-Date: 2011-04-05 14:22+0000\n"
 "Last-Translator: Liudas Ališauskas <liudas.alisauskas@gmail.com>\n"
 "Language-Team: Lithuanian <liudas@akmc.lt>\n"
+"Language: lt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: lt\n"
 "X-Launchpad-Export-Date: 2011-04-10 05:07+0000\n"
 "X-Generator: Launchpad (build 12735)\n"
 "X-Poedit-Country: LITHUANIA\n"
@@ -49,10 +49,6 @@ msgid "%1 days ago"
 msgstr "prieš %1 dienų"
 
 #, qt-format
-msgid "%1 other listeners"
-msgstr "%1 kiti klausytojai"
-
-#, qt-format
 msgid "%1 playlists (%2)"
 msgstr "%1 grojaraščiai (%2)"
 
@@ -77,10 +73,6 @@ msgid "%1 songs found (showing %2)"
 msgstr "%1 dainų rasta (rodoma %2)"
 
 #, qt-format
-msgid "%1 total plays"
-msgstr "%1 viso grojimų"
-
-#, qt-format
 msgid "%1 tracks"
 msgstr "%1 takeliai"
 
@@ -88,15 +80,23 @@ msgstr "%1 takeliai"
 msgid "%1: Wiimotedev module"
 msgstr "%1: Wii pulto modulis"
 
-#, c-format
+#, qt-format
+msgid "%L1 other listeners"
+msgstr ""
+
+#, qt-format
+msgid "%L1 total plays"
+msgstr ""
+
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n nepavyko"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n baigta"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n pervardinama"
 
@@ -579,6 +579,9 @@ msgstr "Automatiškai pasirinkti"
 msgid "Choose color..."
 msgstr "Pasirinkti spalvą..."
 
+msgid "Choose font..."
+msgstr ""
+
 msgid "Choose from the list"
 msgstr "Pasirinkti iš sąrašo"
 
@@ -952,6 +955,9 @@ msgstr "Aplankas"
 
 msgid "Disable"
 msgstr "Išjungti"
+
+msgid "Disable duration"
+msgstr ""
 
 msgid "Disabled"
 msgstr "Išjungtas"
@@ -2706,8 +2712,8 @@ msgstr ""
 msgid "Techno"
 msgstr "Techno"
 
-msgid "Text color"
-msgstr "Teksto spalva"
+msgid "Text options"
+msgstr ""
 
 msgid "Thanks to"
 msgstr "Dėkojame"
@@ -3170,7 +3176,7 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "Nulis"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "pridėti %n dainų"
 
@@ -3259,7 +3265,7 @@ msgstr "parinktys"
 msgid "press enter"
 msgstr ""
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "pašalinti %n dainas"
 
@@ -3278,6 +3284,15 @@ msgstr "stabdyti"
 #, qt-format
 msgid "track %1"
 msgstr "takelis %1"
+
+#~ msgid "%1 other listeners"
+#~ msgstr "%1 kiti klausytojai"
+
+#~ msgid "%1 total plays"
+#~ msgstr "%1 viso grojimų"
+
+#~ msgid "Text color"
+#~ msgstr "Teksto spalva"
 
 #~ msgid ""
 #~ "In dynamic mode new tracks will be chosen and added to the playlist every "

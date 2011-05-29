@@ -11,10 +11,10 @@ msgstr ""
 "PO-Revision-Date: 2011-04-10 01:28+0000\n"
 "Last-Translator: Sergiy Gavrylov <sergiovana@bigmir.net>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
+"Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: uk\n"
 "X-Launchpad-Export-Date: 2011-04-11 05:09+0000\n"
 "X-Generator: Launchpad (build 12735)\n"
 
@@ -46,10 +46,6 @@ msgid "%1 days ago"
 msgstr "%1 день тому"
 
 #, qt-format
-msgid "%1 other listeners"
-msgstr "%1 інших слухачів"
-
-#, qt-format
 msgid "%1 playlists (%2)"
 msgstr "%1 списків відтворення (%2)"
 
@@ -74,10 +70,6 @@ msgid "%1 songs found (showing %2)"
 msgstr "Знайдено %1 пісень (показано %2)"
 
 #, qt-format
-msgid "%1 total plays"
-msgstr "%1 відтворень в цілому"
-
-#, qt-format
 msgid "%1 tracks"
 msgstr "%1 доріжок"
 
@@ -85,15 +77,23 @@ msgstr "%1 доріжок"
 msgid "%1: Wiimotedev module"
 msgstr "%1: Модуль Wiimotedev"
 
-#, c-format
+#, qt-format
+msgid "%L1 other listeners"
+msgstr ""
+
+#, qt-format
+msgid "%L1 total plays"
+msgstr ""
+
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n з помилкою"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n завершено"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n залишилось"
 
@@ -578,6 +578,9 @@ msgstr "Вибрати автоматично"
 msgid "Choose color..."
 msgstr "Вибрати колір..."
 
+msgid "Choose font..."
+msgstr ""
+
 msgid "Choose from the list"
 msgstr "Вибрати зі списку"
 
@@ -951,6 +954,9 @@ msgstr "Тека"
 
 msgid "Disable"
 msgstr "Вимкнути"
+
+msgid "Disable duration"
+msgstr ""
 
 msgid "Disabled"
 msgstr "Вимкнено"
@@ -2702,8 +2708,8 @@ msgstr ""
 msgid "Techno"
 msgstr "Техно"
 
-msgid "Text color"
-msgstr "Колір тексту"
+msgid "Text options"
+msgstr ""
 
 msgid "Thanks to"
 msgstr "Подяки"
@@ -3167,7 +3173,7 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "Zero"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "додати %n композицій"
 
@@ -3256,7 +3262,7 @@ msgstr "параметри"
 msgid "press enter"
 msgstr ""
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "вилучити %n композицій"
 
@@ -3275,6 +3281,15 @@ msgstr "зупинити"
 #, qt-format
 msgid "track %1"
 msgstr "доріжка %1"
+
+#~ msgid "%1 other listeners"
+#~ msgstr "%1 інших слухачів"
+
+#~ msgid "%1 total plays"
+#~ msgstr "%1 відтворень в цілому"
+
+#~ msgid "Text color"
+#~ msgstr "Колір тексту"
 
 #~ msgid ""
 #~ "In dynamic mode new tracks will be chosen and added to the playlist every "

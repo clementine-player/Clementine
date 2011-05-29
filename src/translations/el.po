@@ -11,10 +11,10 @@ msgstr ""
 "PO-Revision-Date: 2011-04-08 17:06+0000\n"
 "Last-Translator: firewalker <Unknown>\n"
 "Language-Team: <en@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
 "X-Launchpad-Export-Date: 2011-04-10 05:06+0000\n"
 "X-Generator: Launchpad (build 12735)\n"
 "X-Language: el_GR\n"
@@ -48,10 +48,6 @@ msgid "%1 days ago"
 msgstr "Πριν %1 ημέρες"
 
 #, qt-format
-msgid "%1 other listeners"
-msgstr "%1 άλλοι ακροατές"
-
-#, qt-format
 msgid "%1 playlists (%2)"
 msgstr "%1 λίστες αναπαραγωγής (%2)"
 
@@ -76,10 +72,6 @@ msgid "%1 songs found (showing %2)"
 msgstr "βρέθηκαν %1 τραγούδια (εμφάνιση %2)"
 
 #, qt-format
-msgid "%1 total plays"
-msgstr "%1 συνολικές αναπαραγωγές"
-
-#, qt-format
 msgid "%1 tracks"
 msgstr "%1 κομμάτια"
 
@@ -87,15 +79,23 @@ msgstr "%1 κομμάτια"
 msgid "%1: Wiimotedev module"
 msgstr "%1: Άρθρωμα Wiimotedev"
 
-#, c-format
+#, qt-format
+msgid "%L1 other listeners"
+msgstr ""
+
+#, qt-format
+msgid "%L1 total plays"
+msgstr ""
+
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n απέτυχε"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n ολοκληρώθηκε"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n απομένει"
 
@@ -585,6 +585,9 @@ msgstr "Αυτόματη επιλογή"
 msgid "Choose color..."
 msgstr "Επέλεξε χρώμα..."
 
+msgid "Choose font..."
+msgstr ""
+
 msgid "Choose from the list"
 msgstr "Επιλογή από τη λίστα"
 
@@ -964,6 +967,9 @@ msgstr "Κατάλογος"
 
 msgid "Disable"
 msgstr "Απενεργοποίηση"
+
+msgid "Disable duration"
+msgstr ""
 
 msgid "Disabled"
 msgstr "Απενεργοποιημένο"
@@ -2726,8 +2732,8 @@ msgstr ""
 msgid "Techno"
 msgstr "Techno"
 
-msgid "Text color"
-msgstr "Χρώμα κειμένου"
+msgid "Text options"
+msgstr ""
 
 msgid "Thanks to"
 msgstr "Ευχαριστίες σε"
@@ -3208,7 +3214,7 @@ msgstr "Ω-Α"
 msgid "Zero"
 msgstr "Zero"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "προσθήκη %n τραγουδιών"
 
@@ -3297,7 +3303,7 @@ msgstr "επιλογές"
 msgid "press enter"
 msgstr ""
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "αφαίρεση %n τραγουδιών"
 
@@ -3316,6 +3322,15 @@ msgstr "διακοπή"
 #, qt-format
 msgid "track %1"
 msgstr "κομμάτι %1"
+
+#~ msgid "%1 other listeners"
+#~ msgstr "%1 άλλοι ακροατές"
+
+#~ msgid "%1 total plays"
+#~ msgstr "%1 συνολικές αναπαραγωγές"
+
+#~ msgid "Text color"
+#~ msgstr "Χρώμα κειμένου"
 
 #~ msgid "..."
 #~ msgstr "..."

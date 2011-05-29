@@ -11,10 +11,10 @@ msgstr ""
 "PO-Revision-Date: 2011-04-09 15:52+0000\n"
 "Last-Translator: gogo <trebelnik2@gmail.com>\n"
 "Language-Team: Croatian <hr@li.org>\n"
+"Language: hr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: hr\n"
 "X-Launchpad-Export-Date: 2011-04-10 05:07+0000\n"
 "X-Generator: Launchpad (build 12735)\n"
 "X-Poedit-Country: CROATIA\n"
@@ -48,10 +48,6 @@ msgid "%1 days ago"
 msgstr "%1 dana prije"
 
 #, qt-format
-msgid "%1 other listeners"
-msgstr "%1 drugih slušatelja"
-
-#, qt-format
 msgid "%1 playlists (%2)"
 msgstr "%1 popisi izvođenja (%2)"
 
@@ -76,10 +72,6 @@ msgid "%1 songs found (showing %2)"
 msgstr "%1 pronađenih pjesma (prikazuje %2)"
 
 #, qt-format
-msgid "%1 total plays"
-msgstr "%1 Ukupno se izvodi"
-
-#, qt-format
 msgid "%1 tracks"
 msgstr "%1 pjesme"
 
@@ -87,15 +79,23 @@ msgstr "%1 pjesme"
 msgid "%1: Wiimotedev module"
 msgstr "%1: Wiimotedev module"
 
-#, c-format
+#, qt-format
+msgid "%L1 other listeners"
+msgstr ""
+
+#, qt-format
+msgid "%L1 total plays"
+msgstr ""
+
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n nije uspjelo"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n završeno"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n preostalo"
 
@@ -579,6 +579,9 @@ msgstr "Automatski odabir"
 msgid "Choose color..."
 msgstr "Odaberite boju..."
 
+msgid "Choose font..."
+msgstr ""
+
 msgid "Choose from the list"
 msgstr "Odaberite sa liste"
 
@@ -955,6 +958,9 @@ msgstr "Mapa"
 
 msgid "Disable"
 msgstr "Onemogući"
+
+msgid "Disable duration"
+msgstr ""
 
 msgid "Disabled"
 msgstr "Onemogući"
@@ -2706,8 +2712,8 @@ msgstr ""
 msgid "Techno"
 msgstr "Techno"
 
-msgid "Text color"
-msgstr "Boja teksta"
+msgid "Text options"
+msgstr ""
 
 msgid "Thanks to"
 msgstr "Zahvaljujemo"
@@ -3176,7 +3182,7 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "Nula"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "dodajte %n pjesama"
 
@@ -3265,7 +3271,7 @@ msgstr "opcije"
 msgid "press enter"
 msgstr ""
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "premjesti %n pjesama"
 
@@ -3284,6 +3290,15 @@ msgstr "zaustavi"
 #, qt-format
 msgid "track %1"
 msgstr "pjesma %1"
+
+#~ msgid "%1 other listeners"
+#~ msgstr "%1 drugih slušatelja"
+
+#~ msgid "%1 total plays"
+#~ msgstr "%1 Ukupno se izvodi"
+
+#~ msgid "Text color"
+#~ msgstr "Boja teksta"
 
 #~ msgid ""
 #~ "In dynamic mode new tracks will be chosen and added to the playlist every "

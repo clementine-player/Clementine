@@ -11,10 +11,10 @@ msgstr ""
 "PO-Revision-Date: 2011-04-10 01:16+0000\n"
 "Last-Translator: Sérgio Marques <Unknown>\n"
 "Language-Team: \n"
+"Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: pt\n"
 "X-Launchpad-Export-Date: 2011-04-11 05:09+0000\n"
 "X-Generator: Launchpad (build 12735)\n"
 "X-Poedit-Country: PORTUGAL\n"
@@ -48,10 +48,6 @@ msgid "%1 days ago"
 msgstr "%1 dias atrás"
 
 #, qt-format
-msgid "%1 other listeners"
-msgstr "%1 outros ouvintes"
-
-#, qt-format
 msgid "%1 playlists (%2)"
 msgstr "Listas de reprodução %1 (%2)"
 
@@ -76,10 +72,6 @@ msgid "%1 songs found (showing %2)"
 msgstr "%1 músicas encontradas (mostrando %2)"
 
 #, qt-format
-msgid "%1 total plays"
-msgstr "%1 reproduções"
-
-#, qt-format
 msgid "%1 tracks"
 msgstr "%1 músicas"
 
@@ -87,15 +79,23 @@ msgstr "%1 músicas"
 msgid "%1: Wiimotedev module"
 msgstr "%1: Módulo Wiimotedev"
 
-#, c-format
+#, qt-format
+msgid "%L1 other listeners"
+msgstr ""
+
+#, qt-format
+msgid "%L1 total plays"
+msgstr ""
+
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n falha(s)"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n concluída(s)"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n por converter"
 
@@ -580,6 +580,9 @@ msgstr "Escolher automaticamente"
 msgid "Choose color..."
 msgstr "Escolha a cor.."
 
+msgid "Choose font..."
+msgstr ""
+
 msgid "Choose from the list"
 msgstr "Escolher da lista"
 
@@ -956,6 +959,9 @@ msgstr "Diretório"
 
 msgid "Disable"
 msgstr "Desativar"
+
+msgid "Disable duration"
+msgstr ""
 
 msgid "Disabled"
 msgstr "Inativo"
@@ -2715,8 +2721,8 @@ msgstr ""
 msgid "Techno"
 msgstr "Techno"
 
-msgid "Text color"
-msgstr "Cor do texto"
+msgid "Text options"
+msgstr ""
 
 msgid "Thanks to"
 msgstr "Obrigado a"
@@ -3192,7 +3198,7 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "Zero"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "adicionar %n músicas"
 
@@ -3281,7 +3287,7 @@ msgstr "opções"
 msgid "press enter"
 msgstr ""
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "remover %n músicas"
 
@@ -3300,6 +3306,15 @@ msgstr "parar"
 #, qt-format
 msgid "track %1"
 msgstr "música %1"
+
+#~ msgid "%1 other listeners"
+#~ msgstr "%1 outros ouvintes"
+
+#~ msgid "%1 total plays"
+#~ msgstr "%1 reproduções"
+
+#~ msgid "Text color"
+#~ msgstr "Cor do texto"
 
 #~ msgid "..."
 #~ msgstr "..."

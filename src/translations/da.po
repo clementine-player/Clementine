@@ -12,10 +12,10 @@ msgstr ""
 "PO-Revision-Date: 2011-04-02 22:14+0000\n"
 "Last-Translator: Jens E. Jensen <Unknown>\n"
 "Language-Team: Danish <kde-i18n-doc@kde.org>\n"
+"Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: da\n"
 "X-Launchpad-Export-Date: 2011-04-10 05:05+0000\n"
 "X-Generator: Launchpad (build 12735)\n"
 
@@ -47,10 +47,6 @@ msgid "%1 days ago"
 msgstr ""
 
 #, qt-format
-msgid "%1 other listeners"
-msgstr "for %1 dage siden"
-
-#, qt-format
 msgid "%1 playlists (%2)"
 msgstr ""
 
@@ -75,10 +71,6 @@ msgid "%1 songs found (showing %2)"
 msgstr "%1 sange fundet (viser %2)"
 
 #, qt-format
-msgid "%1 total plays"
-msgstr "%1 afspilninger i alt"
-
-#, qt-format
 msgid "%1 tracks"
 msgstr "%1 numre"
 
@@ -86,15 +78,23 @@ msgstr "%1 numre"
 msgid "%1: Wiimotedev module"
 msgstr "%1: Wiimotedev modul"
 
-#, c-format
+#, qt-format
+msgid "%L1 other listeners"
+msgstr ""
+
+#, qt-format
+msgid "%L1 total plays"
+msgstr ""
+
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n fejlede"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n færdige"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr ""
 
@@ -570,6 +570,9 @@ msgstr "Vælg automatisk"
 msgid "Choose color..."
 msgstr "Vælg farve..."
 
+msgid "Choose font..."
+msgstr ""
+
 msgid "Choose from the list"
 msgstr "Vælg fra listen"
 
@@ -928,6 +931,9 @@ msgid "Directory"
 msgstr ""
 
 msgid "Disable"
+msgstr ""
+
+msgid "Disable duration"
 msgstr ""
 
 msgid "Disabled"
@@ -2675,8 +2681,8 @@ msgstr ""
 msgid "Techno"
 msgstr "Techno"
 
-msgid "Text color"
-msgstr "Tekstfarve"
+msgid "Text options"
+msgstr ""
 
 msgid "Thanks to"
 msgstr "Tak til"
@@ -3110,7 +3116,7 @@ msgstr ""
 msgid "Zero"
 msgstr "Nul"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "tilføj %n sange"
 
@@ -3199,7 +3205,7 @@ msgstr "indstillinger"
 msgid "press enter"
 msgstr ""
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "fjern %n sange"
 
@@ -3218,6 +3224,15 @@ msgstr ""
 #, qt-format
 msgid "track %1"
 msgstr "spor %1"
+
+#~ msgid "%1 other listeners"
+#~ msgstr "for %1 dage siden"
+
+#~ msgid "%1 total plays"
+#~ msgstr "%1 afspilninger i alt"
+
+#~ msgid "Text color"
+#~ msgstr "Tekstfarve"
 
 #~ msgid "..."
 #~ msgstr "..."

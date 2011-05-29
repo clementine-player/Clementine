@@ -11,10 +11,10 @@ msgstr ""
 "PO-Revision-Date: 2011-04-12 21:14+0000\n"
 "Last-Translator: Cugel <Unknown>\n"
 "Language-Team: Dutch <nl@li.org>\n"
+"Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: nl\n"
 "X-Launchpad-Export-Date: 2011-04-13 05:02+0000\n"
 "X-Generator: Launchpad (build 12735)\n"
 
@@ -46,10 +46,6 @@ msgid "%1 days ago"
 msgstr "%1 1 dag geleden"
 
 #, qt-format
-msgid "%1 other listeners"
-msgstr "%1 andere luisteraars"
-
-#, qt-format
 msgid "%1 playlists (%2)"
 msgstr "%1 afspeellijsten (%2)"
 
@@ -74,10 +70,6 @@ msgid "%1 songs found (showing %2)"
 msgstr "%1 liedjes gevonden (weergegeven %2)"
 
 #, qt-format
-msgid "%1 total plays"
-msgstr "%1 keer afgespeeld"
-
-#, qt-format
 msgid "%1 tracks"
 msgstr "%1 nummers"
 
@@ -85,15 +77,23 @@ msgstr "%1 nummers"
 msgid "%1: Wiimotedev module"
 msgstr "%1: Wiimotedev module"
 
-#, c-format
+#, qt-format
+msgid "%L1 other listeners"
+msgstr ""
+
+#, qt-format
+msgid "%L1 total plays"
+msgstr ""
+
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n mislukt"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n voltooid"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n te gaan"
 
@@ -581,6 +581,9 @@ msgstr "Automatisch kiezen"
 msgid "Choose color..."
 msgstr "Kleur kiezen..."
 
+msgid "Choose font..."
+msgstr ""
+
 msgid "Choose from the list"
 msgstr "Kies uit de lijst"
 
@@ -956,6 +959,9 @@ msgstr "Map"
 
 msgid "Disable"
 msgstr "Deactiveren"
+
+msgid "Disable duration"
+msgstr ""
 
 msgid "Disabled"
 msgstr "Uitgeschakeld"
@@ -2718,8 +2724,8 @@ msgstr ""
 msgid "Techno"
 msgstr "Techno"
 
-msgid "Text color"
-msgstr "Tekstkleur"
+msgid "Text options"
+msgstr ""
 
 msgid "Thanks to"
 msgstr "Met dank aan"
@@ -3195,7 +3201,7 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "Nul"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "%n nummers toevoegen"
 
@@ -3284,7 +3290,7 @@ msgstr "opties"
 msgid "press enter"
 msgstr ""
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "%n nummers verwijderen"
 
@@ -3303,6 +3309,15 @@ msgstr "stoppen"
 #, qt-format
 msgid "track %1"
 msgstr "track %1"
+
+#~ msgid "%1 other listeners"
+#~ msgstr "%1 andere luisteraars"
+
+#~ msgid "%1 total plays"
+#~ msgstr "%1 keer afgespeeld"
+
+#~ msgid "Text color"
+#~ msgstr "Tekstkleur"
 
 #~ msgid "ASF"
 #~ msgstr "ASF"

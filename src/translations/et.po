@@ -11,10 +11,10 @@ msgstr ""
 "PO-Revision-Date: 2011-03-02 09:32+0000\n"
 "Last-Translator: lyyser <Unknown>\n"
 "Language-Team: Estonian <et@li.org>\n"
+"Language: et\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: et\n"
 "X-Launchpad-Export-Date: 2011-04-10 05:05+0000\n"
 "X-Generator: Launchpad (build 12735)\n"
 
@@ -46,10 +46,6 @@ msgid "%1 days ago"
 msgstr "%1 päeva tagasi"
 
 #, qt-format
-msgid "%1 other listeners"
-msgstr "%1 kuulajat"
-
-#, qt-format
 msgid "%1 playlists (%2)"
 msgstr ""
 
@@ -74,10 +70,6 @@ msgid "%1 songs found (showing %2)"
 msgstr ""
 
 #, qt-format
-msgid "%1 total plays"
-msgstr ""
-
-#, qt-format
 msgid "%1 tracks"
 msgstr "%1 pala"
 
@@ -85,15 +77,23 @@ msgstr "%1 pala"
 msgid "%1: Wiimotedev module"
 msgstr "%1: moodul Wiimotedev"
 
-#, c-format
+#, qt-format
+msgid "%L1 other listeners"
+msgstr ""
+
+#, qt-format
+msgid "%L1 total plays"
+msgstr ""
+
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n ebaõnnestus"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n lõpetatud"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "jäänud %n"
 
@@ -569,6 +569,9 @@ msgstr "Vali automaatselt"
 msgid "Choose color..."
 msgstr "Vali värv..."
 
+msgid "Choose font..."
+msgstr ""
+
 msgid "Choose from the list"
 msgstr "Vali nimekirjast"
 
@@ -928,6 +931,9 @@ msgstr "Kataloog"
 
 msgid "Disable"
 msgstr "Keela"
+
+msgid "Disable duration"
+msgstr ""
 
 msgid "Disabled"
 msgstr "Keelatud"
@@ -2671,8 +2677,8 @@ msgstr ""
 msgid "Techno"
 msgstr "Tehno"
 
-msgid "Text color"
-msgstr "Teksti värvus"
+msgid "Text options"
+msgstr ""
 
 msgid "Thanks to"
 msgstr "Tänud"
@@ -3106,7 +3112,7 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "Null"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "lisa %n laulu"
 
@@ -3195,7 +3201,7 @@ msgstr "valikud"
 msgid "press enter"
 msgstr ""
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr ""
 
@@ -3214,6 +3220,12 @@ msgstr "peata"
 #, qt-format
 msgid "track %1"
 msgstr ""
+
+#~ msgid "%1 other listeners"
+#~ msgstr "%1 kuulajat"
+
+#~ msgid "Text color"
+#~ msgstr "Teksti värvus"
 
 #~ msgid "Enter a name for the new playlist"
 #~ msgstr "Sisesta uuele esitusnimekirjale nimi"

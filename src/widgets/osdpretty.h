@@ -71,6 +71,7 @@ class OSDPretty : public QWidget {
   int popup_display() const { return popup_display_; }
   QPoint popup_pos() const { return popup_pos_; }
   QFont font() const { return font_; }
+  bool disable_duration() const { return disable_duration_; }
 
   // When the user has been moving the popup, use these to get its current
   // position and screen.  Note that these return invalid values if the popup
@@ -115,6 +116,8 @@ class OSDPretty : public QWidget {
   int popup_display_; // -1 for default
   QPoint popup_pos_;
   QFont font_;
+  // The OSD is kept always on top until you click (no timer)
+  bool disable_duration_;
 
   // Cached pixmaps
   QPixmap shadow_edge_[4];
