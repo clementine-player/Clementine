@@ -78,6 +78,9 @@ void ScriptInfo::InitFromFile(const ScriptManager* manager,
   d->url_ = s.value("url").toString();
   d->script_file_ = QFileInfo(QDir(path), s.value("script_file").toString()).absoluteFilePath();
   d->icon_filename_ = QFileInfo(QDir(path), s.value("icon").toString()).absoluteFilePath();
+
+  // Replace special characters in the ID
+  d->id_.replace(QRegExp("[^a-zA-Z0-9_]"), "_");
 }
 
 bool ScriptInfo::operator ==(const ScriptInfo& other) const {
