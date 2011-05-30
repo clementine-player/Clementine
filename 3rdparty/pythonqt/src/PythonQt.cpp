@@ -200,12 +200,9 @@ PythonQtPrivate::~PythonQtPrivate() {
   delete _defaultImporter;
   _defaultImporter = NULL;
 
-  {
-    QHashIterator<QByteArray, PythonQtClassInfo *> i(_knownClassInfos);
-    while (i.hasNext()) {
-      delete i.next().value();
-    }
-  }
+  qDeleteAll(_knownClassInfos.values());
+  qDeleteAll(_signalReceivers.values());
+
   PythonQtConv::global_valueStorage.clear();
   PythonQtConv::global_ptrStorage.clear();
   PythonQtConv::global_variantStorage.clear();
