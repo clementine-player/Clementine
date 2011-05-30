@@ -15,7 +15,7 @@ class Plugin:
     clementine.radio_model.AddService(self.sky_service)
 
     # Register for when the user clicks the Settings button
-    script.connect("SettingsDialogRequested()", self.ShowSettings)
+    __script__.connect("SettingsDialogRequested()", self.ShowSettings)
 
   def ShowSettings(self):
     if not self.settings_dialog:

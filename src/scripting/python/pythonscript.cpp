@@ -53,7 +53,7 @@ bool PythonScript::Init() {
   module_.addVariable("__file__", info().script_file());
 
   // Set script object
-  module_.addObject("script", interface());
+  module_.addObject("__script__", interface());
 
   // Eval the script
   PythonQtObjectPtr code = python_qt->parseFile(info().script_file());

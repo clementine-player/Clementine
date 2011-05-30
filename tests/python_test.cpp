@@ -139,7 +139,7 @@ TEST_F(PythonTest, ModuleConstants) {
         "print __name__\n"
         "print __package__\n"
         "print __path__\n"
-        "print script\n");
+        "print __script__\n");
   ScriptInfo info;
   info.InitFromDirectory(sManager, script.directory_);
 
@@ -153,7 +153,7 @@ TEST_F(PythonTest, ModuleConstants) {
   EXPECT_TRUE(log.at(n-4).endsWith("clementinescripts." + info.id())); // __name__
   EXPECT_TRUE(log.at(n-3).endsWith("None"));                           // __package__
   EXPECT_TRUE(log.at(n-2).endsWith("['" + script.directory_ + "']"));  // __path__
-  EXPECT_TRUE(log.at(n-1).contains("ScriptInterface (QObject "));      // script
+  EXPECT_TRUE(log.at(n-1).contains("ScriptInterface (QObject "));      // __script__
 }
 
 TEST_F(PythonTest, PythonQtAttrSetWrappedCPP) {
