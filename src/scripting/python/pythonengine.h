@@ -50,6 +50,9 @@ public:
   Script* CreateScript(const ScriptInfo& info);
   void DestroyScript(Script* script);
 
+  static QString CurrentScriptName();
+  Script* CurrentScript() const;
+
 public slots:
   void HandleLogRecord(int level, const QString& logger_name, int lineno,
                        const QString& message);
@@ -57,6 +60,8 @@ public slots:
 private slots:
   void PythonStdOut(const QString& str);
   void PythonStdErr(const QString& str);
+  void SignalConnectedToPython(PythonQtSignalReceiver* receiver, int signal_id,
+                               PyObject* callable);
 
 private:
   void AddModuleToModel(const QString& name, PythonQtObjectPtr ptr);

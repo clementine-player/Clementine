@@ -16,6 +16,7 @@
 */
 
 #include <Python.h>
+#include <PythonQtSignalReceiver.h>
 
 #include "pythonengine.h"
 #include "pythonscript.h"
@@ -75,6 +76,14 @@ bool PythonScript::Init() {
 }
 
 bool PythonScript::Unload() {
+  // Disconnect any signal connections that this script made while it was
+  // running.  This is important because those connections will hold references
+  // to bound methods in the script's classes, so the classes won't get deleted.
+  foreach (const SignalConnection& conn, signal_connections_) {
+    qLog(Debug) << "Disconnecting signal" << conn.signal_id_;
+    conn.receiver_->removeSignalHandler(conn.signal_id_, conn.callable_);
+  }
+
   // Remove this module and all its children from sys.modules.  That should be
   // the only place that references it, so this will clean up the modules'
   // dict and all globals.
@@ -103,5 +112,14 @@ bool PythonScript::Unload() {
   }
 
   module_ = PythonQtObjectPtr();
+
+  PyGC_Collect();
+
   return true;
+}
+
+void PythonScript::RegisterSignalConnection(PythonQtSignalReceiver* receiver,
+                                            int signal_id, PyObject* callable) {
+  qLog(Debug) << "Signal" << signal_id << "registered to an object in" << info().id();
+  signal_connections_ << SignalConnection(receiver, signal_id, callable);
 }

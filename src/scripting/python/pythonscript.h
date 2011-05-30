@@ -33,11 +33,25 @@ public:
   bool Init();
   bool Unload();
 
+  void RegisterSignalConnection(PythonQtSignalReceiver* receiver,
+                                int signal_id, PyObject* callable);
+
 private:
   PythonEngine* engine_;
 
   QString module_name_;
   PythonQtObjectPtr module_;
+
+  struct SignalConnection {
+    SignalConnection(PythonQtSignalReceiver* receiver,
+                     int signal_id, PyObject* callable)
+      : receiver_(receiver), signal_id_(signal_id), callable_(callable) {}
+
+    PythonQtSignalReceiver* receiver_;
+    int signal_id_;
+    PyObject* callable_;
+  };
+  QList<SignalConnection> signal_connections_;
 };
 
 #endif // PYTHONSCRIPT_H

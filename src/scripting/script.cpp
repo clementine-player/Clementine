@@ -27,13 +27,3 @@ Script::Script(LanguageEngine* language, const ScriptInfo& info)
 
 Script::~Script() {
 }
-
-void Script::AddNativeObject(QObject* object) {
-  if(!native_objects_.contains(object)) {
-    native_objects_ << object;
-  }
-}
-
-void Script::RemoveNativeObject(QObject* object) {
-  native_objects_.removeAll(object);
-}

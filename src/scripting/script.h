@@ -40,16 +40,8 @@ public:
   const ScriptInfo& info() const { return info_; }
   ScriptInterface* interface() const { return interface_.get(); }
 
-  // The script can "own" QObjects like QActions that must be deleted (and
-  // removed from the UI, etc.) when the script is unloaded.
-  void AddNativeObject(QObject* object);
-  void RemoveNativeObject(QObject* object);
-
   virtual bool Init() = 0;
   virtual bool Unload() = 0;
-
-protected:
-  QList<QObject*> native_objects_;
 
 private:
   Q_DISABLE_COPY(Script);

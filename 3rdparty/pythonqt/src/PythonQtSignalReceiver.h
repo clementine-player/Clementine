@@ -119,6 +119,7 @@ public:
 
   //! remove a signal handler
   bool removeSignalHandler(const char* signal, PyObject* callable);
+  bool removeSignalHandler(int sigId, PyObject* callable);
 
   //! remove all signal handlers
   void removeSignalHandlers();

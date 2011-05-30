@@ -16,6 +16,8 @@
 */
 
 #include <Python.h>
+#include <frameobject.h>
+
 #include <PythonQtConversion.h>
 #include <com_trolltech_qt_core/com_trolltech_qt_core_init.h>
 #include <com_trolltech_qt_gui/com_trolltech_qt_gui_init.h>
@@ -115,6 +117,9 @@ bool PythonEngine::EnsureInitialised() {
   // Connect stdout, stderr
   connect(python_qt, SIGNAL(pythonStdOut(QString)), SLOT(PythonStdOut(QString)));
   connect(python_qt, SIGNAL(pythonStdErr(QString)), SLOT(PythonStdErr(QString)));
+
+  connect(python_qt, SIGNAL(signalConnectedToPython(PythonQtSignalReceiver*,int,PyObject*)),
+          SLOT(SignalConnectedToPython(PythonQtSignalReceiver*,int,PyObject*)));
 
   // Create a clementine module
   clementine_module_ = python_qt->createModuleFromScript(kClementineModuleName);
@@ -227,5 +232,45 @@ void PythonEngine::AddModuleToModel(const QString& name, PythonQtObjectPtr ptr) 
 void PythonEngine::RemoveModuleFromModel(const QString& name) {
   foreach (QStandardItem* item, modules_model_->findItems(name)) {
     modules_model_->removeRow(item->row());
+  }
+}
+
+QString PythonEngine::CurrentScriptName() {
+  // Walk up the Python stack and find the name of the script that's nearest
+  // the top of the stack.
+  const QString prefix = QString(kScriptModulePrefix) + ".";
+
+  PyFrameObject* frame = PyEval_GetFrame();
+  while (frame) {
+    if (PyDict_Check(frame->f_globals)) {
+      PyObject* __name__ = PyDict_GetItemString(frame->f_globals, "__name__");
+      if (__name__ && PyString_Check(__name__)) {
+        const QString name(PyString_AsString(__name__));
+        if (name.startsWith(prefix)) {
+          int n = name.indexOf('.', prefix.length());
+          if (n != -1) {
+            n -= prefix.length();
+          }
+          return name.mid(prefix.length(), n);
+        }
+      }
+    }
+    frame = frame->f_back;
+  }
+  return QString();
+}
+
+Script* PythonEngine::CurrentScript() const {
+  const QString name(CurrentScriptName());
+  if (loaded_scripts_.contains(name))
+    return loaded_scripts_[name];
+  return NULL;
+}
+
+void PythonEngine::SignalConnectedToPython(PythonQtSignalReceiver* receiver,
+                                           int signal_id, PyObject* callable) {
+  PythonScript* script = static_cast<PythonScript*>(CurrentScript());
+  if (script) {
+    script->RegisterSignalConnection(receiver, signal_id, callable);
   }
 }

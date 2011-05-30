@@ -132,6 +132,25 @@ TEST_F(PythonTest, CleanupModuleDict) {
   ASSERT_TRUE(sManager->log_lines_plain().last().endsWith("destructor"));
 }
 
+TEST_F(PythonTest, CleanupSignalConnections) {
+  TemporaryScript script(
+        "from PythonQt.QtCore import QCoreApplication\n"
+        "class Foo:\n"
+        "  def __init__(self):\n"
+        "    QCoreApplication.instance().connect('aboutToQuit()', self.aslot)\n"
+        "  def __del__(self):\n"
+        "    print 'destructor'\n"
+        "  def aslot(self):\n"
+        "    pass\n"
+        "f = Foo()\n");
+  ScriptInfo info;
+  info.InitFromDirectory(sManager, script.directory_);
+
+  sEngine->DestroyScript(sEngine->CreateScript(info));
+
+  ASSERT_TRUE(sManager->log_lines_plain().last().endsWith("destructor"));
+}
+
 TEST_F(PythonTest, ModuleConstants) {
   TemporaryScript script(
         "print type(__builtins__)\n"

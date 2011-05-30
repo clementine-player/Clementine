@@ -453,6 +453,10 @@ signals:
   //! emitted when help() is called on a PythonQt object and \c ExternalHelp is enabled
   void pythonHelpRequest(const QByteArray& cppClassName);
 
+  //! emitted when a signal is connected to a Python object
+  void signalConnectedToPython(PythonQtSignalReceiver* receiver, int signal_id,
+                               PyObject* callable);
+
 private:
   void initPythonQtModule(bool redirectStdOut, const QByteArray& pythonQtModuleName);
 
@@ -472,6 +476,7 @@ private:
 
   PythonQtPrivate* _p;
 
+  friend class PythonQtSignalReceiver;
 };
 
 //! internal PythonQt details

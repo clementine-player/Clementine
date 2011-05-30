@@ -170,22 +170,26 @@ bool PythonQtSignalReceiver::addSignalHandler(const char* signal, PyObject* call
 
     _slotCount++;
     flag = true;
+
+    PythonQt::self()->signalConnectedToPython(this, sigId, callable);
   }
   return flag;
 }
 
 bool PythonQtSignalReceiver::removeSignalHandler(const char* signal, PyObject* callable)
 {
+  return removeSignalHandler(getSignalIndex(signal), callable);
+}
+
+bool PythonQtSignalReceiver::removeSignalHandler(int sigId, PyObject* callable)
+{
   bool found = false;
-  int sigId = getSignalIndex(signal);
-  if (sigId>=0) {
-    QMutableListIterator<PythonQtSignalTarget> i(_targets);
-    while (i.hasNext()) {
-      if (i.next().isSame(sigId, callable)) {
-        i.remove();
-        found = true;
-        break;
-      }
+  QMutableListIterator<PythonQtSignalTarget> i(_targets);
+  while (i.hasNext()) {
+    if (i.next().isSame(sigId, callable)) {
+      i.remove();
+      found = true;
+      break;
     }
   }
   return found;
