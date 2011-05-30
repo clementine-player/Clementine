@@ -10,15 +10,17 @@ import json
 import logging
 import operator
 import os.path
+import weakref
 
 LOGGER = logging.getLogger("di.servicebase")
 
 
 class DigitallyImportedUrlHandler(clementine.UrlHandler):
   def __init__(self, url_scheme, service):
-    clementine.UrlHandler.__init__(self, service)
+    clementine.UrlHandler.__init__(self, None)
+    # Avoid circular references
+    self.service_weakref = weakref.ref(service)
     self.url_scheme = url_scheme
-    self.service = service
 
     self.last_original_url = None
     self.task_id = None
@@ -27,18 +29,22 @@ class DigitallyImportedUrlHandler(clementine.UrlHandler):
     return self.url_scheme
 
   def StartLoading(self, original_url):
+    if self.service_weakref() is None:
+      return
+    service = self.service_weakref()
+
     result = clementine.UrlHandler_LoadResult()
 
     if self.task_id is not None:
       return result
-    if self.service.PLAYLISTS[self.service.audio_type]["premium"] and \
-       (len(self.service.username) == 0 or len(self.service.password) == 0):
-      self.service.StreamError(self.tr("You have selected a Premium-only audio type but do not have any account details entered"))
+    if service.PLAYLISTS[service.audio_type]["premium"] and \
+       (len(service.username) == 0 or len(service.password) == 0):
+      service.StreamError(self.tr("You have selected a Premium-only audio type but do not have any account details entered"))
       return result
 
     key = original_url.host()
     LOGGER.info("Loading station %s", key)
-    self.service.LoadStation(key)
+    service.LoadStation(key)
 
     # Save the original URL so we can emit it in the finished signal later
     self.last_original_url = original_url
@@ -51,10 +57,11 @@ class DigitallyImportedUrlHandler(clementine.UrlHandler):
     return result
 
   def LoadPlaylistFinished(self, reply):
-    reply.deleteLater()
-
     if self.task_id is None:
       return
+    if self.service_weakref() is None:
+      return
+    service = self.service_weakref()
 
     # Stop the spinner in the status bar
     clementine.task_manager.SetTaskFinished(self.task_id)
@@ -68,7 +75,7 @@ class DigitallyImportedUrlHandler(clementine.UrlHandler):
 
     # Failed to get the playlist?
     if len(songs) == 0:
-      self.service.StreamError("Error loading playlist '%s'" % reply.url().toString())
+      service.StreamError("Error loading playlist '%s'" % reply.url().toString())
       return
 
     result = clementine.UrlHandler_LoadResult()
@@ -97,12 +104,14 @@ class DigitallyImportedServiceBase(clementine.RadioService):
   def Init(self, model, settings_dialog_callback):
     clementine.RadioService.__init__(self, self.SERVICE_NAME, model)
 
-    self.settings_dialog_callback = settings_dialog_callback
+    # We must hold a weak reference to the callback or else it makes a circular
+    # reference between the services and Plugin from main.py.
+    self.settings_dialog_callback = weakref.ref(settings_dialog_callback)
 
     self.url_handler = DigitallyImportedUrlHandler(self.URL_SCHEME, self)
     clementine.player.RegisterUrlHandler(self.url_handler)
 
-    self.network = clementine.NetworkAccessManager(self)
+    self.network = clementine.NetworkAccessManager(None)
     self.path = os.path.dirname(__file__)
 
     self.audio_type = 0
@@ -179,10 +188,6 @@ class DigitallyImportedServiceBase(clementine.RadioService):
   def RefreshStreamsFinished(self):
     if self.refresh_streams_reply is None:
       return
-
-    reply = self.refresh_streams_reply
-    reply.deleteLater()
-
     if self.task_id is None:
       return
 
@@ -191,7 +196,7 @@ class DigitallyImportedServiceBase(clementine.RadioService):
     self.task_id = None
 
     # Read the data and parse the json object inside
-    json_data = reply.readAll().data()
+    json_data = self.refresh_streams_reply.readAll().data()
     streams = json.loads(json_data)
 
     # Sort by name
