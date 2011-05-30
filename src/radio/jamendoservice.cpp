@@ -67,7 +67,7 @@ const int JamendoService::kBatchSize = 10000;
 const int JamendoService::kApproxDatabaseSize = 300000;
 
 JamendoService::JamendoService(RadioModel* parent)
-    : RadioService(kServiceName, parent),
+    : RadioService(kServiceName, parent, parent),
       network_(new NetworkAccessManager(this)),
       context_menu_(NULL),
       library_backend_(NULL),

@@ -66,7 +66,7 @@ const char* LastFMService::kTitleTag    = QT_TR_NOOP("Last.fm Tag Radio: %1");
 const char* LastFMService::kTitleCustom = QT_TR_NOOP("Last.fm Custom Radio: %1");
 
 LastFMService::LastFMService(RadioModel* parent)
-  : RadioService(kServiceName, parent),
+  : RadioService(kServiceName, parent, parent),
     url_handler_(new LastFMUrlHandler(this, this)),
     scrobbler_(NULL),
     already_scrobbled_(false),

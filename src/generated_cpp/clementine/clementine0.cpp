@@ -8704,9 +8704,9 @@ if (_wrapper) {
 }
   RadioService::timerEvent(arg__1);
 }
-RadioService* PythonQtWrapper_RadioService::new_RadioService(const QString&  name, RadioModel*  model)
+RadioService* PythonQtWrapper_RadioService::new_RadioService(const QString&  name, RadioModel*  model, QObject*  parent)
 { 
-return new PythonQtShell_RadioService(name, model); }
+return new PythonQtShell_RadioService(name, model, parent); }
 
 QWidget*  PythonQtWrapper_RadioService::HeaderWidget(RadioService* theWrappedObject) const
 {

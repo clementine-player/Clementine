@@ -62,7 +62,7 @@ const char* MagnatuneService::kPartnerId = "clementine";
 const char* MagnatuneService::kDownloadUrl = "http://download.magnatune.com/buy/membership_free_dl_xml";
 
 MagnatuneService::MagnatuneService(RadioModel* parent)
-  : RadioService(kServiceName, parent),
+  : RadioService(kServiceName, parent, parent),
     url_handler_(new MagnatuneUrlHandler(this, this)),
     context_menu_(NULL),
     root_(NULL),

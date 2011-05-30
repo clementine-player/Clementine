@@ -37,7 +37,7 @@ const char* SomaFMService::kChannelListUrl = "http://somafm.com/channels.xml";
 const char* SomaFMService::kHomepage = "http://somafm.com";
 
 SomaFMService::SomaFMService(RadioModel* parent)
-  : RadioService(kServiceName, parent),
+  : RadioService(kServiceName, parent, parent),
     url_handler_(new SomaFMUrlHandler(this, this)),
     root_(NULL),
     context_menu_(NULL),

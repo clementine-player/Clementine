@@ -17,14 +17,15 @@
 
 #include "radioservice.h"
 #include "radiomodel.h"
+#include "core/logging.h"
 #include "core/mergedproxymodel.h"
 #include "core/mimedata.h"
 #include "ui/iconloader.h"
 
 #include <QMenu>
 
-RadioService::RadioService(const QString& name, RadioModel* model)
-  : QObject(model),
+RadioService::RadioService(const QString& name, RadioModel* model, QObject* parent)
+  : QObject(parent),
     model_(model),
     name_(name),
     append_to_playlist_(NULL),

@@ -28,7 +28,7 @@ const char* SavedRadio::kServiceName = "SavedRadio";
 const char* SavedRadio::kSettingsGroup = "SavedRadio";
 
 SavedRadio::SavedRadio(RadioModel* parent)
-  : RadioService(kServiceName, parent),
+  : RadioService(kServiceName, parent, parent),
     context_menu_(NULL),
     root_(NULL)
 {

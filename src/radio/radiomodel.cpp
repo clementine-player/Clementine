@@ -94,8 +94,8 @@ void RadioModel::RemoveService(RadioService* service) {
 
   // Find and remove the root item that this service created
   for (int i=0 ; i<invisibleRootItem()->rowCount() ; ++i) {
-    if (invisibleRootItem()->child(i)->data(Role_Service).value<RadioService*>()
-        == service) {
+    QStandardItem* item = invisibleRootItem()->child(i);
+    if (!item || item->data(Role_Service).value<RadioService*>() == service) {
       invisibleRootItem()->removeRow(i);
       break;
     }

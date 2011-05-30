@@ -44,7 +44,7 @@ const char* IcecastService::kDirectoryUrl = "http://data.clementine-player.org/i
 const char* IcecastService::kHomepage = "http://dir.xiph.org/";
 
 IcecastService::IcecastService(RadioModel* parent)
-    : RadioService(kServiceName, parent),
+    : RadioService(kServiceName, parent, parent),
       network_(new NetworkAccessManager(this)),
       context_menu_(NULL),
       backend_(NULL),

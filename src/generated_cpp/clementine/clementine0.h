@@ -881,6 +881,10 @@ class PythonQtWrapper_PlaylistItemPtr : public QObject
 public:
 public slots:
 PlaylistItemPtr* new_PlaylistItemPtr();
+PlaylistItemPtr* new_PlaylistItemPtr(const PlaylistItemPtr& other) {
+PythonQtShell_PlaylistItemPtr* a = new PythonQtShell_PlaylistItemPtr();
+*((PlaylistItemPtr*)a) = other;
+return a; }
 void delete_PlaylistItemPtr(PlaylistItemPtr* obj) { delete obj; } 
 };
 
@@ -1214,7 +1218,7 @@ void delete_RadioModel(RadioModel* obj) { delete obj; }
 class PythonQtShell_RadioService : public RadioService
 {
 public:
-    PythonQtShell_RadioService(const QString&  name, RadioModel*  model):RadioService(name, model),_wrapper(NULL) {};
+    PythonQtShell_RadioService(const QString&  name, RadioModel*  model, QObject*  parent = NULL):RadioService(name, model, parent),_wrapper(NULL) {};
 
 virtual QStandardItem*  CreateRootItem();
 virtual QModelIndex  GetCurrentIndex();
@@ -1246,7 +1250,7 @@ class PythonQtWrapper_RadioService : public QObject
 { Q_OBJECT
 public:
 public slots:
-RadioService* new_RadioService(const QString&  name, RadioModel*  model);
+RadioService* new_RadioService(const QString&  name, RadioModel*  model, QObject*  parent = NULL);
 void delete_RadioService(RadioService* obj) { delete obj; } 
    QWidget*  HeaderWidget(RadioService* theWrappedObject) const;
    QString  Icon(RadioService* theWrappedObject);

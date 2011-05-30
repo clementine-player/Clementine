@@ -35,7 +35,7 @@ const char* SpotifyService::kBlobDownloadUrl = "http://spotify.clementine-player
 const int SpotifyService::kSearchDelayMsec = 400;
 
 SpotifyService::SpotifyService(TaskManager* task_manager, RadioModel* parent)
-    : RadioService(kServiceName, parent),
+    : RadioService(kServiceName, parent, parent),
       server_(NULL),
       url_handler_(new SpotifyUrlHandler(this, this)),
       blob_process_(NULL),
