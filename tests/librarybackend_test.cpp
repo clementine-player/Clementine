@@ -157,7 +157,7 @@ class SingleSong : public LibraryBackendTest {
     EXPECT_EQ(0, deleted_spy.count());
     ASSERT_EQ(1, added_spy.count());
 
-    SongList list = added_spy[0][0].value<SongList>();
+    SongList list = *(reinterpret_cast<SongList*>(added_spy[0][0].data()));
     ASSERT_EQ(1, list.count());
     EXPECT_EQ(song_.title(), list[0].title());
     EXPECT_EQ(song_.artist(), list[0].artist());
@@ -261,8 +261,8 @@ TEST_F(SingleSong, UpdateSong) {
   ASSERT_EQ(1, added_spy.size());
   ASSERT_EQ(1, deleted_spy.size());
 
-  SongList songs_added = added_spy[0][0].value<SongList>();
-  SongList songs_deleted = deleted_spy[0][0].value<SongList>();
+  SongList songs_added = *(reinterpret_cast<SongList*>(added_spy[0][0].data()));
+  SongList songs_deleted = *(reinterpret_cast<SongList*>(deleted_spy[0][0].data()));
   ASSERT_EQ(1, songs_added.size());
   ASSERT_EQ(1, songs_deleted.size());
   EXPECT_EQ("Title", songs_deleted[0].title());
@@ -283,7 +283,7 @@ TEST_F(SingleSong, DeleteSongs) {
 
   ASSERT_EQ(1, deleted_spy.size());
 
-  SongList songs_deleted = deleted_spy[0][0].value<SongList>();
+  SongList songs_deleted = *(reinterpret_cast<SongList*>(deleted_spy[0][0].data()));
   ASSERT_EQ(1, songs_deleted.size());
   EXPECT_EQ("Title", songs_deleted[0].title());
   EXPECT_EQ(1, songs_deleted[0].id());
