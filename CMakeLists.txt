@@ -109,6 +109,10 @@ if (APPLE)
     set (SPOTIFY_LIBRARIES ${SPOTIFY})
   endif (SPOTIFY)
 
+  add_subdirectory(3rdparty/SPMediaKeyTap)
+  set(SPMEDIAKEYTAP_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/SPMediaKeyTap)
+  set(SPMEDIAKEYTAP_LIBRARIES SPMediaKeyTap)  
+
   # Uses Darwin kernel version.
   # 9.8.0  -> 10.5/Leopard
   # 10.4.0 -> 10.6/Snow Leopard

@@ -15,10 +15,11 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#import <IOKit/hidsystem/ev_keymap.h>
-#import <AppKit/NSEvent.h>
-
 #import <AppKit/NSApplication.h>
+#import <AppKit/NSEvent.h>
+#import <AppKit/NSGraphics.h>
+#import <AppKit/NSNibDeclarations.h>
+#import <AppKit/NSViewController.h>
 
 #import <Foundation/NSAutoreleasePool.h>
 #import <Foundation/NSBundle.h>
@@ -28,9 +29,13 @@
 #import <Foundation/NSThread.h>
 #import <Foundation/NSTimer.h>
 #import <Foundation/NSURL.h>
-#import <AppKit/NSNibDeclarations.h>
+
+#import <IOKit/hidsystem/ev_keymap.h>
 
 #import <Kernel/AvailabilityMacros.h>
+
+#import <QuartzCore/CALayer.h>
+
 
 #include "config.h"
 #include "globalshortcuts.h"
@@ -56,8 +61,11 @@
 // See: http://www.rogueamoeba.com/utm/2007/09/29/apple-keyboard-media-key-event-handling/
 
 @interface MacApplication :NSApplication {
-  MacGlobalShortcutBackend* shortcut_handler_;
   PlatformInterface* application_handler_;
+  AppDelegate* delegate_;
+  // shortcut_handler_ only used to temporarily save it
+  // AppDelegate does all the heavy-shortcut-lifting
+  MacGlobalShortcutBackend* shortcut_handler_;
 }
 
 - (MacGlobalShortcutBackend*) shortcut_handler;
@@ -66,7 +74,6 @@
 - (PlatformInterface*) application_handler;
 - (void) SetApplicationHandler: (PlatformInterface*)handler;
 
-- (void) mediaKeyEvent: (int)key state: (BOOL)state repeat: (BOOL)repeat;
 @end
 
 #ifdef HAVE_BREAKPAD
@@ -92,6 +99,7 @@ static BreakpadRef InitBreakpad() {
 - (id) init {
   if ((self = [super init])) {
     application_handler_ = nil;
+    shortcut_handler_ = nil;
     dock_menu_ = nil;
   }
   return self;
@@ -104,6 +112,10 @@ static BreakpadRef InitBreakpad() {
   breakpad_ = InitBreakpad();
 #endif
 
+  // Register defaults for the whitelist of apps that want to use media keys
+  [[NSUserDefaults standardUserDefaults] registerDefaults:[NSDictionary dictionaryWithObjectsAndKeys:
+     [SPMediaKeyTap defaultMediaKeyUserBundleIdentifiers], kMediaKeyUsingBundleIdentifiersDefaultsKey,
+      nil]];
   return self;
 }
 
@@ -122,6 +134,22 @@ static BreakpadRef InitBreakpad() {
   return dock_menu_;
 }
 
+- (void) setShortcutHandler: (MacGlobalShortcutBackend*)backend {
+  shortcut_handler_ = backend;
+}
+
+- (MacGlobalShortcutBackend*) shortcut_handler { 
+  return shortcut_handler_;
+}
+
+- (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
+  key_tap_ = [[SPMediaKeyTap alloc] initWithDelegate:self];
+  if([SPMediaKeyTap usesGlobalMediaKeyTap])
+    [key_tap_ startWatchingMediaKeys];
+  else
+    qLog(Warning)<<"Media key monitoring disabled";
+
+}
 - (BOOL) application: (NSApplication*)app openFile:(NSString*)filename {
   qDebug() << "Wants to open:" << [filename UTF8String];
 
@@ -130,6 +158,23 @@ static BreakpadRef InitBreakpad() {
   }
 
   return NO;
+}
+
+- (void) mediaKeyTap: (SPMediaKeyTap*)keyTap receivedMediaKeyEvent:(NSEvent*)event {
+  NSAssert([event type] == NSSystemDefined && [event subtype] == SPSystemDefinedEventMediaKeys, @"Unexpected NSEvent in mediaKeyTap:receivedMediaKeyEvent:");
+
+  int key_code = (([event data1] & 0xFFFF0000) >> 16);
+  int key_flags = ([event data1] & 0x0000FFFF);
+  BOOL key_is_pressed = (((key_flags & 0xFF00) >> 8)) == 0xA;
+  // not used. keep just in case
+  //  int key_repeat = (key_flags & 0x1);
+
+  if (!shortcut_handler_) {
+    return;
+  }
+  if (key_is_pressed) {
+    shortcut_handler_->MacMediaKeyPressed(key_code);
+  }
 }
 
 - (NSApplicationTerminateReply) applicationShouldTerminate:(NSApplication*) sender {
@@ -150,11 +195,14 @@ static BreakpadRef InitBreakpad() {
 }
 
 - (MacGlobalShortcutBackend*) shortcut_handler {
+  // should be the same as delegate_'s shortcut handler
   return shortcut_handler_;
 }
 
 - (void) SetShortcutHandler: (MacGlobalShortcutBackend*)handler {
   shortcut_handler_ = handler;
+  if(delegate_)
+    [delegate_ setShortcutHandler:handler];
 }
 
 - (PlatformInterface*) application_handler {
@@ -162,30 +210,22 @@ static BreakpadRef InitBreakpad() {
 }
 
 - (void) SetApplicationHandler: (PlatformInterface*)handler {
-  AppDelegate* delegate = [[AppDelegate alloc] initWithHandler:handler];
-  [self setDelegate:delegate];
+  delegate_ = [[AppDelegate alloc] initWithHandler:handler];
+  // App-shortcut-handler set before delegate is set.
+  // this makes sure the delegate's shortcut_handler is set
+  [delegate_ setShortcutHandler:shortcut_handler_];
+  [self setDelegate:delegate_];
 }
 
 -(void) sendEvent: (NSEvent*)event {
-  if ([event type] == NSSystemDefined && [event subtype] == 8) {
-    int keycode = (([event data1] & 0xFFFF0000) >> 16);
-    int keyflags = ([event data1] & 0x0000FFFF);
-    int keystate = (((keyflags & 0xFF00) >> 8)) == 0xA;
-    int keyrepeat = (keyflags & 0x1);
-
-    [self mediaKeyEvent: keycode state: keystate repeat: keyrepeat];
+  // If event tap is not installed, handle events that reach the app instead
+  BOOL shouldHandleMediaKeyEventLocally = ![SPMediaKeyTap usesGlobalMediaKeyTap];
+  
+  if(shouldHandleMediaKeyEventLocally && [event type] == NSSystemDefined && [event subtype] == SPSystemDefinedEventMediaKeys) {
+    [(id)[self delegate] mediaKeyTap: nil receivedMediaKeyEvent: event];
   }
 
   [super sendEvent: event];
-}
-
--(void) mediaKeyEvent: (int)key state: (BOOL)state repeat: (BOOL)repeat {
-  if (!shortcut_handler_) {
-    return;
-  }
-  if (state == 0) {
-    shortcut_handler_->MacMediaKeyPressed(key);
-  }
 }
 
 @end

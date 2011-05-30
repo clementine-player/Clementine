@@ -1065,6 +1065,7 @@ if (APPLE)
     /System/Library/Frameworks/Foundation.framework
     /System/Library/Frameworks/IOKit.framework
   )
+  target_link_libraries(clementine_lib ${SPMEDIAKEYTAP_LIBRARIES})
   if (HAVE_SPARKLE)
     include_directories(${SPARKLE}/Headers)
     target_link_libraries(clementine_lib ${SPARKLE})
