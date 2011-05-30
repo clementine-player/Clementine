@@ -122,6 +122,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QSslSocket::canReadLine();
 }
@@ -150,6 +151,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QSslSocket::bytesToWrite();
 }
@@ -178,6 +180,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QSslSocket::readData(data, maxlen);
 }
@@ -206,6 +209,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QSslSocket::writeData(data, len);
 }
@@ -234,6 +238,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QSslSocket::bytesAvailable();
 }
@@ -262,6 +267,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QSslSocket::waitForBytesWritten(msecs);
 }
@@ -290,6 +296,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QSslSocket::atEnd();
 }
@@ -307,6 +314,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QSslSocket::close();
 }
@@ -335,6 +343,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QSslSocket::waitForReadyRead(msecs);
 }
@@ -363,6 +372,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QSslSocket::readLineData(data, maxlen);
 }
@@ -391,6 +401,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QSslSocket::isSequential();
 }
@@ -419,6 +430,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QSslSocket::size();
 }
@@ -447,6 +459,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QSslSocket::pos();
 }
@@ -475,6 +488,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QSslSocket::reset();
 }
@@ -503,6 +517,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QSslSocket::open(mode);
 }
@@ -531,6 +546,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QSslSocket::seek(pos);
 }
@@ -548,6 +564,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QSslSocket::childEvent(arg__1);
 }
@@ -565,6 +582,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QSslSocket::timerEvent(arg__1);
 }
@@ -582,6 +600,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QSslSocket::customEvent(arg__1);
 }
@@ -610,6 +629,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QSslSocket::event(arg__1);
 }
@@ -638,6 +658,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QSslSocket::eventFilter(arg__1, arg__2);
 }

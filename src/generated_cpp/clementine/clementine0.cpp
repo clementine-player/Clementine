@@ -70,6 +70,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   AlbumCoverFetcherSearch::childEvent(arg__1);
 }
@@ -87,6 +88,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   AlbumCoverFetcherSearch::customEvent(arg__1);
 }
@@ -115,6 +117,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return AlbumCoverFetcherSearch::event(arg__1);
 }
@@ -143,6 +146,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return AlbumCoverFetcherSearch::eventFilter(arg__1, arg__2);
 }
@@ -160,6 +164,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   AlbumCoverFetcherSearch::timerEvent(arg__1);
 }
@@ -195,6 +200,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QList<CoverSearchResult >();
 }
@@ -223,6 +229,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return 0;
 }
@@ -240,6 +247,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   CoverProvider::childEvent(arg__1);
 }
@@ -257,6 +265,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   CoverProvider::customEvent(arg__1);
 }
@@ -285,6 +294,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return CoverProvider::event(arg__1);
 }
@@ -313,6 +323,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return CoverProvider::eventFilter(arg__1, arg__2);
 }
@@ -330,6 +341,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   CoverProvider::timerEvent(arg__1);
 }
@@ -369,6 +381,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return 0;
 }
@@ -386,6 +399,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   CoverProviderFactory::childEvent(arg__1);
 }
@@ -403,6 +417,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   CoverProviderFactory::customEvent(arg__1);
 }
@@ -431,6 +446,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return CoverProviderFactory::event(arg__1);
 }
@@ -459,6 +475,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return CoverProviderFactory::eventFilter(arg__1, arg__2);
 }
@@ -476,6 +493,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   CoverProviderFactory::timerEvent(arg__1);
 }
@@ -533,6 +551,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   LibraryBackend::AddDirectory(path);
 }
@@ -550,6 +569,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   LibraryBackend::ChangeDirPath(id, old_path, new_path);
 }
@@ -578,6 +598,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return LibraryBackend::ExecQuery(q);
 }
@@ -606,6 +627,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return LibraryBackend::FindSongsInDirectory(id);
 }
@@ -634,6 +656,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return LibraryBackend::GetAlbumArt(artist, album);
 }
@@ -662,6 +685,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return LibraryBackend::GetAlbumsByArtist(artist, opt);
 }
@@ -690,6 +714,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return LibraryBackend::GetAllAlbums(opt);
 }
@@ -718,6 +743,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return LibraryBackend::GetAllArtists(opt);
 }
@@ -746,6 +772,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return LibraryBackend::GetAllArtistsWithAlbums(opt);
 }
@@ -774,6 +801,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return LibraryBackend::GetAllDirectories();
 }
@@ -802,6 +830,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return LibraryBackend::GetCompilationAlbums(opt);
 }
@@ -830,6 +859,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return LibraryBackend::GetCompilationSongs(album, opt);
 }
@@ -858,6 +888,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return LibraryBackend::GetSongById(id);
 }
@@ -886,6 +917,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return LibraryBackend::GetSongByUrl(url, beginning);
 }
@@ -914,6 +946,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return LibraryBackend::GetSongs(artist, album, opt);
 }
@@ -942,6 +975,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return LibraryBackend::GetSongsByUrl(url);
 }
@@ -970,6 +1004,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return LibraryBackend::HasCompilations(opt);
 }
@@ -987,6 +1022,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   LibraryBackend::LoadDirectoriesAsync();
 }
@@ -1004,6 +1040,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   LibraryBackend::RemoveDirectory(dir);
 }
@@ -1032,6 +1069,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return LibraryBackend::SubdirsInDirectory(id);
 }
@@ -1049,6 +1087,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   LibraryBackend::UpdateManualAlbumArtAsync(artist, album, art);
 }
@@ -1066,6 +1105,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   LibraryBackend::UpdateTotalSongCountAsync();
 }
@@ -1083,6 +1123,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   LibraryBackend::childEvent(arg__1);
 }
@@ -1100,6 +1141,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   LibraryBackend::customEvent(arg__1);
 }
@@ -1128,6 +1170,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return LibraryBackend::event(arg__1);
 }
@@ -1156,6 +1199,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return LibraryBackend::eventFilter(arg__1, arg__2);
 }
@@ -1173,6 +1217,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   LibraryBackend::timerEvent(arg__1);
 }
@@ -1366,6 +1411,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   
 }
@@ -1383,6 +1429,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   
 }
@@ -1411,6 +1458,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return bool();
 }
@@ -1439,6 +1487,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QList<Song >();
 }
@@ -1467,6 +1516,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return LibraryBackendInterface::Album();
 }
@@ -1495,6 +1545,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QList<LibraryBackendInterface::Album >();
 }
@@ -1523,6 +1574,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QList<LibraryBackendInterface::Album >();
 }
@@ -1551,6 +1603,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QStringList();
 }
@@ -1579,6 +1632,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QStringList();
 }
@@ -1607,6 +1661,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QList<Directory >();
 }
@@ -1635,6 +1690,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QList<LibraryBackendInterface::Album >();
 }
@@ -1663,6 +1719,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QList<Song >();
 }
@@ -1691,6 +1748,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return Song();
 }
@@ -1719,6 +1777,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return Song();
 }
@@ -1747,6 +1806,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QList<Song >();
 }
@@ -1775,6 +1835,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QList<Song >();
 }
@@ -1803,6 +1864,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return bool();
 }
@@ -1820,6 +1882,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   
 }
@@ -1837,6 +1900,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   
 }
@@ -1865,6 +1929,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QList<Subdirectory >();
 }
@@ -1882,6 +1947,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   
 }
@@ -1899,6 +1965,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   
 }
@@ -1916,6 +1983,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   LibraryBackendInterface::childEvent(arg__1);
 }
@@ -1933,6 +2001,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   LibraryBackendInterface::customEvent(arg__1);
 }
@@ -1961,6 +2030,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return LibraryBackendInterface::event(arg__1);
 }
@@ -1989,6 +2059,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return LibraryBackendInterface::eventFilter(arg__1, arg__2);
 }
@@ -2006,6 +2077,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   LibraryBackendInterface::timerEvent(arg__1);
 }
@@ -2085,6 +2157,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   NetworkAccessManager::childEvent(arg__1);
 }
@@ -2113,6 +2186,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return NetworkAccessManager::createRequest(op, request, outgoingData);
 }
@@ -2130,6 +2204,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   NetworkAccessManager::customEvent(arg__1);
 }
@@ -2158,6 +2233,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return NetworkAccessManager::event(arg__1);
 }
@@ -2186,6 +2262,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return NetworkAccessManager::eventFilter(arg__1, arg__2);
 }
@@ -2203,6 +2280,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   NetworkAccessManager::timerEvent(arg__1);
 }
@@ -2231,6 +2309,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   NetworkTimeouts::childEvent(arg__1);
 }
@@ -2248,6 +2327,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   NetworkTimeouts::customEvent(arg__1);
 }
@@ -2276,6 +2356,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return NetworkTimeouts::event(arg__1);
 }
@@ -2304,6 +2385,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return NetworkTimeouts::eventFilter(arg__1, arg__2);
 }
@@ -2321,6 +2403,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   NetworkTimeouts::timerEvent(arg__1);
 }
@@ -2354,6 +2437,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   Player::CurrentMetadataChanged(metadata);
 }
@@ -2382,6 +2466,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return Player::GetCurrentItem();
 }
@@ -2410,6 +2495,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return Player::GetItemAt(pos);
 }
@@ -2438,6 +2524,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return Player::GetState();
 }
@@ -2466,6 +2553,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return Player::GetVolume();
 }
@@ -2483,6 +2571,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   Player::Mute();
 }
@@ -2500,6 +2589,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   Player::Next();
 }
@@ -2517,6 +2607,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   Player::Pause();
 }
@@ -2534,6 +2625,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   Player::Play();
 }
@@ -2551,6 +2643,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   Player::PlayAt(i, change, reshuffle);
 }
@@ -2568,6 +2661,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   Player::PlayPause();
 }
@@ -2585,6 +2679,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   Player::Previous();
 }
@@ -2602,6 +2697,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   Player::RegisterUrlHandler(handler);
 }
@@ -2619,6 +2715,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   Player::ReloadSettings();
 }
@@ -2636,6 +2733,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   Player::SeekBackward();
 }
@@ -2653,6 +2751,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   Player::SeekForward();
 }
@@ -2670,6 +2769,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   Player::SeekTo(seconds);
 }
@@ -2687,6 +2787,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   Player::SetVolume(value);
 }
@@ -2704,6 +2805,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   Player::ShowOSD();
 }
@@ -2721,6 +2823,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   Player::Stop();
 }
@@ -2738,6 +2841,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   Player::UnregisterUrlHandler(handler);
 }
@@ -2755,6 +2859,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   Player::VolumeDown();
 }
@@ -2772,6 +2877,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   Player::VolumeUp();
 }
@@ -2789,6 +2895,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   Player::childEvent(arg__1);
 }
@@ -2806,6 +2913,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   Player::customEvent(arg__1);
 }
@@ -2834,6 +2942,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return Player::engine();
 }
@@ -2862,6 +2971,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return Player::event(arg__1);
 }
@@ -2890,6 +3000,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return Player::eventFilter(arg__1, arg__2);
 }
@@ -2918,6 +3029,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return Player::playlists();
 }
@@ -2935,6 +3047,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   Player::timerEvent(arg__1);
 }
@@ -3003,6 +3116,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   
 }
@@ -3031,6 +3145,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return PlaylistItemPtr();
 }
@@ -3059,6 +3174,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return PlaylistItemPtr();
 }
@@ -3087,6 +3203,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return Engine::State();
 }
@@ -3115,6 +3232,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return int();
 }
@@ -3132,6 +3250,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   
 }
@@ -3149,6 +3268,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   
 }
@@ -3166,6 +3286,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   
 }
@@ -3183,6 +3304,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   
 }
@@ -3200,6 +3322,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   
 }
@@ -3217,6 +3340,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   
 }
@@ -3234,6 +3358,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   
 }
@@ -3251,6 +3376,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   
 }
@@ -3268,6 +3394,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   
 }
@@ -3285,6 +3412,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   
 }
@@ -3302,6 +3430,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   
 }
@@ -3319,6 +3448,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   
 }
@@ -3336,6 +3466,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   
 }
@@ -3353,6 +3484,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   
 }
@@ -3370,6 +3502,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   
 }
@@ -3387,6 +3520,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   
 }
@@ -3404,6 +3538,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   
 }
@@ -3421,6 +3556,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   
 }
@@ -3438,6 +3574,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   PlayerInterface::childEvent(arg__1);
 }
@@ -3455,6 +3592,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   PlayerInterface::customEvent(arg__1);
 }
@@ -3483,6 +3621,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return 0;
 }
@@ -3511,6 +3650,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return PlayerInterface::event(arg__1);
 }
@@ -3539,6 +3679,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return PlayerInterface::eventFilter(arg__1, arg__2);
 }
@@ -3567,6 +3708,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return 0;
 }
@@ -3584,6 +3726,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   PlayerInterface::timerEvent(arg__1);
 }
@@ -3618,6 +3761,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return Playlist::buddy(index);
 }
@@ -3646,6 +3790,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return Playlist::canFetchMore(parent);
 }
@@ -3663,6 +3808,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   Playlist::childEvent(arg__1);
 }
@@ -3691,6 +3837,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return Playlist::columnCount(arg__1);
 }
@@ -3708,6 +3855,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   Playlist::customEvent(arg__1);
 }
@@ -3736,6 +3884,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return Playlist::data(index, role);
 }
@@ -3764,6 +3913,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return Playlist::dropMimeData(data, action, row, column, parent);
 }
@@ -3792,6 +3942,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return Playlist::event(arg__1);
 }
@@ -3820,6 +3971,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return Playlist::eventFilter(arg__1, arg__2);
 }
@@ -3837,6 +3989,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   Playlist::fetchMore(parent);
 }
@@ -3865,6 +4018,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return Playlist::flags(index);
 }
@@ -3893,6 +4047,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return Playlist::headerData(section, orientation, role);
 }
@@ -3921,6 +4076,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return Playlist::index(row, column, parent);
 }
@@ -3949,6 +4105,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return Playlist::insertColumns(column, count, parent);
 }
@@ -3977,6 +4134,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return Playlist::insertRows(row, count, parent);
 }
@@ -4005,6 +4163,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return Playlist::itemData(index);
 }
@@ -4033,6 +4192,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return Playlist::match(start, role, value, hits, flags);
 }
@@ -4061,6 +4221,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return Playlist::mimeData(indexes);
 }
@@ -4089,6 +4250,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return Playlist::mimeTypes();
 }
@@ -4117,6 +4279,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return Playlist::removeColumns(column, count, parent);
 }
@@ -4145,6 +4308,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return Playlist::removeRows(row, count, parent);
 }
@@ -4162,6 +4326,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   Playlist::revert();
 }
@@ -4190,6 +4355,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return Playlist::rowCount(arg__1);
 }
@@ -4218,6 +4384,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return Playlist::setData(index, value, role);
 }
@@ -4246,6 +4413,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return Playlist::setHeaderData(section, orientation, value, role);
 }
@@ -4274,6 +4442,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return Playlist::setItemData(index, roles);
 }
@@ -4291,6 +4460,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   Playlist::sort(column, order);
 }
@@ -4319,6 +4489,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return Playlist::span(index);
 }
@@ -4347,6 +4518,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return Playlist::submit();
 }
@@ -4375,6 +4547,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return Playlist::supportedDropActions();
 }
@@ -4392,6 +4565,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   Playlist::timerEvent(arg__1);
 }
@@ -4745,6 +4919,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   PlaylistBackend::childEvent(arg__1);
 }
@@ -4762,6 +4937,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   PlaylistBackend::customEvent(arg__1);
 }
@@ -4790,6 +4966,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return PlaylistBackend::event(arg__1);
 }
@@ -4818,6 +4995,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return PlaylistBackend::eventFilter(arg__1, arg__2);
 }
@@ -4835,6 +5013,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   PlaylistBackend::timerEvent(arg__1);
 }
@@ -4888,6 +5067,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   PlaylistContainer::actionEvent(arg__1);
 }
@@ -4905,6 +5085,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   PlaylistContainer::changeEvent(arg__1);
 }
@@ -4922,6 +5103,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   PlaylistContainer::childEvent(arg__1);
 }
@@ -4939,6 +5121,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   PlaylistContainer::closeEvent(arg__1);
 }
@@ -4956,6 +5139,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   PlaylistContainer::contextMenuEvent(arg__1);
 }
@@ -4973,6 +5157,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   PlaylistContainer::customEvent(arg__1);
 }
@@ -5001,6 +5186,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return PlaylistContainer::devType();
 }
@@ -5018,6 +5204,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   PlaylistContainer::dragEnterEvent(arg__1);
 }
@@ -5035,6 +5222,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   PlaylistContainer::dragLeaveEvent(arg__1);
 }
@@ -5052,6 +5240,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   PlaylistContainer::dragMoveEvent(arg__1);
 }
@@ -5069,6 +5258,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   PlaylistContainer::dropEvent(arg__1);
 }
@@ -5086,6 +5276,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   PlaylistContainer::enterEvent(arg__1);
 }
@@ -5114,6 +5305,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return PlaylistContainer::event(arg__1);
 }
@@ -5142,6 +5334,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return PlaylistContainer::eventFilter(arg__1, arg__2);
 }
@@ -5159,6 +5352,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   PlaylistContainer::focusInEvent(arg__1);
 }
@@ -5187,6 +5381,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return PlaylistContainer::focusNextPrevChild(next);
 }
@@ -5204,6 +5399,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   PlaylistContainer::focusOutEvent(arg__1);
 }
@@ -5232,6 +5428,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return PlaylistContainer::heightForWidth(arg__1);
 }
@@ -5249,6 +5446,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   PlaylistContainer::hideEvent(arg__1);
 }
@@ -5266,6 +5464,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   PlaylistContainer::inputMethodEvent(arg__1);
 }
@@ -5294,6 +5493,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return PlaylistContainer::inputMethodQuery(arg__1);
 }
@@ -5311,6 +5511,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   PlaylistContainer::keyPressEvent(arg__1);
 }
@@ -5328,6 +5529,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   PlaylistContainer::keyReleaseEvent(arg__1);
 }
@@ -5345,6 +5547,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   PlaylistContainer::languageChange();
 }
@@ -5362,6 +5565,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   PlaylistContainer::leaveEvent(arg__1);
 }
@@ -5390,6 +5594,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return PlaylistContainer::metric(arg__1);
 }
@@ -5418,6 +5623,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return PlaylistContainer::minimumSizeHint();
 }
@@ -5435,6 +5641,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   PlaylistContainer::mouseDoubleClickEvent(arg__1);
 }
@@ -5452,6 +5659,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   PlaylistContainer::mouseMoveEvent(arg__1);
 }
@@ -5469,6 +5677,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   PlaylistContainer::mousePressEvent(arg__1);
 }
@@ -5486,6 +5695,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   PlaylistContainer::mouseReleaseEvent(arg__1);
 }
@@ -5503,6 +5713,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   PlaylistContainer::moveEvent(arg__1);
 }
@@ -5531,6 +5742,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return PlaylistContainer::paintEngine();
 }
@@ -5548,6 +5760,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   PlaylistContainer::paintEvent(arg__1);
 }
@@ -5565,6 +5778,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   PlaylistContainer::resizeEvent(arg__1);
 }
@@ -5582,6 +5796,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   PlaylistContainer::showEvent(arg__1);
 }
@@ -5610,6 +5825,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return PlaylistContainer::sizeHint();
 }
@@ -5627,6 +5843,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   PlaylistContainer::tabletEvent(arg__1);
 }
@@ -5644,6 +5861,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   PlaylistContainer::timerEvent(arg__1);
 }
@@ -5661,6 +5879,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   PlaylistContainer::wheelEvent(arg__1);
 }
@@ -5705,6 +5924,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   PlaylistManager::ChangePlaylistOrder(ids);
 }
@@ -5722,6 +5942,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   PlaylistManager::ClearCurrent();
 }
@@ -5750,6 +5971,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return PlaylistManager::GetAllPlaylists();
 }
@@ -5778,6 +6000,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return PlaylistManager::GetPlaylistType(type);
 }
@@ -5795,6 +6018,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   PlaylistManager::InvalidateDeletedSongs();
 }
@@ -5812,6 +6036,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   PlaylistManager::Load(filename);
 }
@@ -5829,6 +6054,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   PlaylistManager::New(name, songs, special_type);
 }
@@ -5846,6 +6072,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   PlaylistManager::PlaySmartPlaylist(generator, as_new, clear);
 }
@@ -5863,6 +6090,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   PlaylistManager::RateCurrentSong(rating);
 }
@@ -5880,6 +6108,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   PlaylistManager::RateCurrentSong(rating);
 }
@@ -5897,6 +6126,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   PlaylistManager::RegisterSpecialPlaylistType(type);
 }
@@ -5914,6 +6144,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   PlaylistManager::Remove(id);
 }
@@ -5931,6 +6162,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   PlaylistManager::RemoveDeletedSongs();
 }
@@ -5948,6 +6180,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   PlaylistManager::Rename(id, new_name);
 }
@@ -5965,6 +6198,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   PlaylistManager::Save(id, filename);
 }
@@ -5982,6 +6216,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   PlaylistManager::SelectionChanged(selection);
 }
@@ -5999,6 +6234,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   PlaylistManager::SetActivePaused();
 }
@@ -6016,6 +6252,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   PlaylistManager::SetActivePlaying();
 }
@@ -6033,6 +6270,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   PlaylistManager::SetActivePlaylist(id);
 }
@@ -6050,6 +6288,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   PlaylistManager::SetActiveStopped();
 }
@@ -6067,6 +6306,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   PlaylistManager::SetActiveStreamMetadata(url, song);
 }
@@ -6084,6 +6324,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   PlaylistManager::SetActiveToCurrent();
 }
@@ -6101,6 +6342,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   PlaylistManager::SetCurrentPlaylist(id);
 }
@@ -6118,6 +6360,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   PlaylistManager::ShuffleCurrent();
 }
@@ -6135,6 +6378,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   PlaylistManager::SongChangeRequestProcessed(url, valid);
 }
@@ -6152,6 +6396,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   PlaylistManager::UnregisterSpecialPlaylistType(type);
 }
@@ -6180,6 +6425,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return PlaylistManager::active();
 }
@@ -6208,6 +6454,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return PlaylistManager::active_id();
 }
@@ -6236,6 +6483,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return PlaylistManager::active_selection();
 }
@@ -6253,6 +6501,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   PlaylistManager::childEvent(arg__1);
 }
@@ -6281,6 +6530,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return PlaylistManager::current();
 }
@@ -6309,6 +6559,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return PlaylistManager::current_id();
 }
@@ -6337,6 +6588,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return PlaylistManager::current_selection();
 }
@@ -6354,6 +6606,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   PlaylistManager::customEvent(arg__1);
 }
@@ -6382,6 +6635,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return PlaylistManager::event(arg__1);
 }
@@ -6410,6 +6664,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return PlaylistManager::eventFilter(arg__1, arg__2);
 }
@@ -6438,6 +6693,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return PlaylistManager::library_backend();
 }
@@ -6466,6 +6722,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return PlaylistManager::name(index);
 }
@@ -6494,6 +6751,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return PlaylistManager::parser();
 }
@@ -6522,6 +6780,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return PlaylistManager::playlist(id);
 }
@@ -6550,6 +6809,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return PlaylistManager::playlist_backend();
 }
@@ -6578,6 +6838,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return PlaylistManager::playlist_container();
 }
@@ -6606,6 +6867,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return PlaylistManager::selection(id);
 }
@@ -6634,6 +6896,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return PlaylistManager::sequence();
 }
@@ -6662,6 +6925,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return PlaylistManager::task_manager();
 }
@@ -6679,6 +6943,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   PlaylistManager::timerEvent(arg__1);
 }
@@ -6817,6 +7082,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   
 }
@@ -6834,6 +7100,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   
 }
@@ -6862,6 +7129,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QList<Playlist* >();
 }
@@ -6890,6 +7158,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return 0;
 }
@@ -6907,6 +7176,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   
 }
@@ -6924,6 +7194,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   
 }
@@ -6941,6 +7212,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   
 }
@@ -6958,6 +7230,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   
 }
@@ -6975,6 +7248,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   
 }
@@ -6992,6 +7266,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   
 }
@@ -7009,6 +7284,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   
 }
@@ -7026,6 +7302,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   
 }
@@ -7043,6 +7320,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   
 }
@@ -7060,6 +7338,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   
 }
@@ -7077,6 +7356,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   
 }
@@ -7094,6 +7374,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   
 }
@@ -7111,6 +7392,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   
 }
@@ -7128,6 +7410,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   
 }
@@ -7145,6 +7428,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   
 }
@@ -7162,6 +7446,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   
 }
@@ -7179,6 +7464,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   
 }
@@ -7196,6 +7482,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   
 }
@@ -7213,6 +7500,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   
 }
@@ -7230,6 +7518,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   
 }
@@ -7247,6 +7536,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   
 }
@@ -7264,6 +7554,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   
 }
@@ -7292,6 +7583,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return 0;
 }
@@ -7320,6 +7612,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return int();
 }
@@ -7348,6 +7641,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QItemSelection();
 }
@@ -7365,6 +7659,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   PlaylistManagerInterface::childEvent(arg__1);
 }
@@ -7393,6 +7688,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return 0;
 }
@@ -7421,6 +7717,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return int();
 }
@@ -7449,6 +7746,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QItemSelection();
 }
@@ -7466,6 +7764,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   PlaylistManagerInterface::customEvent(arg__1);
 }
@@ -7494,6 +7793,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return PlaylistManagerInterface::event(arg__1);
 }
@@ -7522,6 +7822,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return PlaylistManagerInterface::eventFilter(arg__1, arg__2);
 }
@@ -7550,6 +7851,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return 0;
 }
@@ -7578,6 +7880,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QString();
 }
@@ -7606,6 +7909,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return 0;
 }
@@ -7634,6 +7938,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return 0;
 }
@@ -7662,6 +7967,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return 0;
 }
@@ -7690,6 +7996,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return 0;
 }
@@ -7718,6 +8025,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QItemSelection();
 }
@@ -7746,6 +8054,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return 0;
 }
@@ -7774,6 +8083,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return 0;
 }
@@ -7791,6 +8101,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   PlaylistManagerInterface::timerEvent(arg__1);
 }
@@ -7814,6 +8125,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   PlaylistParser::childEvent(arg__1);
 }
@@ -7831,6 +8143,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   PlaylistParser::customEvent(arg__1);
 }
@@ -7859,6 +8172,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return PlaylistParser::event(arg__1);
 }
@@ -7887,6 +8201,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return PlaylistParser::eventFilter(arg__1, arg__2);
 }
@@ -7904,6 +8219,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   PlaylistParser::timerEvent(arg__1);
 }
@@ -8113,6 +8429,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return 0;
 }
@@ -8141,6 +8458,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QModelIndex();
 }
@@ -8169,6 +8487,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return RadioService::HeaderWidget();
 }
@@ -8197,6 +8516,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return RadioService::Icon();
 }
@@ -8214,6 +8534,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   RadioService::ItemDoubleClicked(item);
 }
@@ -8231,6 +8552,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   
 }
@@ -8248,6 +8570,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   RadioService::ReloadSettings();
 }
@@ -8265,6 +8588,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   RadioService::ShowContextMenu(index, global_pos);
 }
@@ -8282,6 +8606,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   RadioService::childEvent(arg__1);
 }
@@ -8299,6 +8624,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   RadioService::customEvent(arg__1);
 }
@@ -8327,6 +8653,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return RadioService::event(arg__1);
 }
@@ -8355,6 +8682,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return RadioService::eventFilter(arg__1, arg__2);
 }
@@ -8372,6 +8700,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   RadioService::timerEvent(arg__1);
 }
@@ -8961,6 +9290,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QList<Song >();
 }
@@ -8978,6 +9308,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   SongInsertVetoListener::childEvent(arg__1);
 }
@@ -8995,6 +9326,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   SongInsertVetoListener::customEvent(arg__1);
 }
@@ -9023,6 +9355,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return SongInsertVetoListener::event(arg__1);
 }
@@ -9051,6 +9384,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return SongInsertVetoListener::eventFilter(arg__1, arg__2);
 }
@@ -9068,6 +9402,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   SongInsertVetoListener::timerEvent(arg__1);
 }
@@ -9091,6 +9426,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   SpecialPlaylistType::DidYouMeanClicked(text, playlist);
 }
@@ -9108,6 +9444,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   SpecialPlaylistType::Search(text, playlist);
 }
@@ -9136,6 +9473,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return SpecialPlaylistType::empty_playlist_text(playlist);
 }
@@ -9164,6 +9502,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return SpecialPlaylistType::has_special_search_behaviour(playlist);
 }
@@ -9192,6 +9531,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return SpecialPlaylistType::icon(playlist);
 }
@@ -9220,6 +9560,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QString();
 }
@@ -9248,6 +9589,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return SpecialPlaylistType::search_hint_text(playlist);
 }
@@ -9307,6 +9649,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   TaskManager::childEvent(arg__1);
 }
@@ -9324,6 +9667,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   TaskManager::customEvent(arg__1);
 }
@@ -9352,6 +9696,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return TaskManager::event(arg__1);
 }
@@ -9380,6 +9725,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return TaskManager::eventFilter(arg__1, arg__2);
 }
@@ -9397,6 +9743,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   TaskManager::timerEvent(arg__1);
 }

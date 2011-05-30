@@ -46,6 +46,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QTranslator::childEvent(arg__1);
 }
@@ -63,6 +64,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QTranslator::customEvent(arg__1);
 }
@@ -91,6 +93,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QTranslator::event(arg__1);
 }
@@ -119,6 +122,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QTranslator::eventFilter(arg__1, arg__2);
 }
@@ -147,6 +151,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QTranslator::isEmpty();
 }
@@ -164,6 +169,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QTranslator::timerEvent(arg__1);
 }
@@ -192,6 +198,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QTranslator::translate(context, sourceText, disambiguation);
 }
@@ -305,6 +312,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QVariantAnimation::childEvent(arg__1);
 }
@@ -322,6 +330,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QVariantAnimation::customEvent(arg__1);
 }
@@ -350,6 +359,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QVariantAnimation::duration();
 }
@@ -378,6 +388,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QVariantAnimation::event(event);
 }
@@ -406,6 +417,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QVariantAnimation::eventFilter(arg__1, arg__2);
 }
@@ -434,6 +446,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QVariantAnimation::interpolated(from, to, progress);
 }
@@ -451,6 +464,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QVariantAnimation::timerEvent(arg__1);
 }
@@ -468,6 +482,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QVariantAnimation::updateCurrentTime(arg__1);
 }
@@ -485,6 +500,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   
 }
@@ -502,6 +518,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QVariantAnimation::updateDirection(direction);
 }
@@ -519,6 +536,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QVariantAnimation::updateState(newState, oldState);
 }
@@ -664,6 +682,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QXmlStreamEntityResolver::resolveEntity(publicId, systemId);
 }
@@ -692,6 +711,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QXmlStreamEntityResolver::resolveUndeclaredEntity(name);
 }

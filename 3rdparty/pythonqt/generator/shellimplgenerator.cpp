@@ -181,6 +181,7 @@ void ShellImplGenerator::write(QTextStream &s, const AbstractMetaClass *meta_cla
         s << "    return;" << endl;
       }
       s << "  }" << endl;
+      s << "  Py_XDECREF(obj);" << endl;
       s << "}" << endl;
 
       s << "  ";

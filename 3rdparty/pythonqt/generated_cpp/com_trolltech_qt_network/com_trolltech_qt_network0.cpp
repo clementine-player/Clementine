@@ -61,6 +61,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return qint64();
 }
@@ -78,6 +79,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QAbstractNetworkCache::childEvent(arg__1);
 }
@@ -95,6 +97,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   
 }
@@ -112,6 +115,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QAbstractNetworkCache::customEvent(arg__1);
 }
@@ -140,6 +144,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return 0;
 }
@@ -168,6 +173,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QAbstractNetworkCache::event(arg__1);
 }
@@ -196,6 +202,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QAbstractNetworkCache::eventFilter(arg__1, arg__2);
 }
@@ -213,6 +220,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   
 }
@@ -241,6 +249,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QNetworkCacheMetaData();
 }
@@ -269,6 +278,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return 0;
 }
@@ -297,6 +307,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return bool();
 }
@@ -314,6 +325,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QAbstractNetworkCache::timerEvent(arg__1);
 }
@@ -331,6 +343,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   
 }
@@ -361,6 +374,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QAbstractSocket::atEnd();
 }
@@ -389,6 +403,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QAbstractSocket::bytesAvailable();
 }
@@ -417,6 +432,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QAbstractSocket::bytesToWrite();
 }
@@ -445,6 +461,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QAbstractSocket::canReadLine();
 }
@@ -462,6 +479,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QAbstractSocket::childEvent(arg__1);
 }
@@ -479,6 +497,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QAbstractSocket::close();
 }
@@ -496,6 +515,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QAbstractSocket::customEvent(arg__1);
 }
@@ -524,6 +544,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QAbstractSocket::event(arg__1);
 }
@@ -552,6 +573,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QAbstractSocket::eventFilter(arg__1, arg__2);
 }
@@ -580,6 +602,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QAbstractSocket::isSequential();
 }
@@ -608,6 +631,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QAbstractSocket::open(mode);
 }
@@ -636,6 +660,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QAbstractSocket::pos();
 }
@@ -664,6 +689,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QAbstractSocket::readData(data, maxlen);
 }
@@ -692,6 +718,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QAbstractSocket::readLineData(data, maxlen);
 }
@@ -720,6 +747,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QAbstractSocket::reset();
 }
@@ -748,6 +776,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QAbstractSocket::seek(pos);
 }
@@ -776,6 +805,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QAbstractSocket::size();
 }
@@ -793,6 +823,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QAbstractSocket::timerEvent(arg__1);
 }
@@ -821,6 +852,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QAbstractSocket::waitForBytesWritten(msecs);
 }
@@ -849,6 +881,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QAbstractSocket::waitForReadyRead(msecs);
 }
@@ -877,6 +910,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QAbstractSocket::writeData(data, len);
 }
@@ -1115,6 +1149,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QFtp::childEvent(arg__1);
 }
@@ -1132,6 +1167,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QFtp::customEvent(arg__1);
 }
@@ -1160,6 +1196,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QFtp::event(arg__1);
 }
@@ -1188,6 +1225,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QFtp::eventFilter(arg__1, arg__2);
 }
@@ -1205,6 +1243,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QFtp::timerEvent(arg__1);
 }
@@ -1570,6 +1609,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QHttp::childEvent(arg__1);
 }
@@ -1587,6 +1627,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QHttp::customEvent(arg__1);
 }
@@ -1615,6 +1656,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QHttp::event(arg__1);
 }
@@ -1643,6 +1685,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QHttp::eventFilter(arg__1, arg__2);
 }
@@ -1660,6 +1703,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QHttp::timerEvent(arg__1);
 }
@@ -1832,6 +1876,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return int();
 }
@@ -1860,6 +1905,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return int();
 }
@@ -1888,6 +1934,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QHttpHeader::parseLine(line, number);
 }
@@ -1916,6 +1963,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QHttpHeader::toString();
 }
@@ -2050,6 +2098,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QHttpRequestHeader::majorVersion();
 }
@@ -2078,6 +2127,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QHttpRequestHeader::minorVersion();
 }
@@ -2106,6 +2156,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QHttpRequestHeader::parseLine(line, number);
 }
@@ -2134,6 +2185,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QHttpRequestHeader::toString();
 }
@@ -2216,6 +2268,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QHttpResponseHeader::majorVersion();
 }
@@ -2244,6 +2297,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QHttpResponseHeader::minorVersion();
 }
@@ -2272,6 +2326,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QHttpResponseHeader::parseLine(line, number);
 }
@@ -2300,6 +2355,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QHttpResponseHeader::toString();
 }
@@ -2377,6 +2433,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QLocalServer::childEvent(arg__1);
 }
@@ -2394,6 +2451,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QLocalServer::customEvent(arg__1);
 }
@@ -2422,6 +2480,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QLocalServer::event(arg__1);
 }
@@ -2450,6 +2509,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QLocalServer::eventFilter(arg__1, arg__2);
 }
@@ -2478,6 +2538,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QLocalServer::hasPendingConnections();
 }
@@ -2495,6 +2556,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QLocalServer::incomingConnection(socketDescriptor);
 }
@@ -2523,6 +2585,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QLocalServer::nextPendingConnection();
 }
@@ -2540,6 +2603,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QLocalServer::timerEvent(arg__1);
 }
@@ -2644,6 +2708,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QLocalSocket::atEnd();
 }
@@ -2672,6 +2737,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QLocalSocket::bytesAvailable();
 }
@@ -2700,6 +2766,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QLocalSocket::bytesToWrite();
 }
@@ -2728,6 +2795,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QLocalSocket::canReadLine();
 }
@@ -2745,6 +2813,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QLocalSocket::childEvent(arg__1);
 }
@@ -2762,6 +2831,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QLocalSocket::close();
 }
@@ -2779,6 +2849,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QLocalSocket::customEvent(arg__1);
 }
@@ -2807,6 +2878,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QLocalSocket::event(arg__1);
 }
@@ -2835,6 +2907,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QLocalSocket::eventFilter(arg__1, arg__2);
 }
@@ -2863,6 +2936,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QLocalSocket::isSequential();
 }
@@ -2891,6 +2965,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QLocalSocket::open(mode);
 }
@@ -2919,6 +2994,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QLocalSocket::pos();
 }
@@ -2947,6 +3023,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QLocalSocket::readData(arg__1, arg__2);
 }
@@ -2975,6 +3052,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QLocalSocket::readLineData(data, maxlen);
 }
@@ -3003,6 +3081,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QLocalSocket::reset();
 }
@@ -3031,6 +3110,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QLocalSocket::seek(pos);
 }
@@ -3059,6 +3139,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QLocalSocket::size();
 }
@@ -3076,6 +3157,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QLocalSocket::timerEvent(arg__1);
 }
@@ -3104,6 +3186,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QLocalSocket::waitForBytesWritten(msecs);
 }
@@ -3132,6 +3215,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QLocalSocket::waitForReadyRead(msecs);
 }
@@ -3160,6 +3244,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QLocalSocket::writeData(arg__1, arg__2);
 }
@@ -3303,6 +3388,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QNetworkAccessManager::childEvent(arg__1);
 }
@@ -3331,6 +3417,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QNetworkAccessManager::createRequest(op, request, outgoingData);
 }
@@ -3348,6 +3435,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QNetworkAccessManager::customEvent(arg__1);
 }
@@ -3376,6 +3464,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QNetworkAccessManager::event(arg__1);
 }
@@ -3404,6 +3493,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QNetworkAccessManager::eventFilter(arg__1, arg__2);
 }
@@ -3421,6 +3511,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QNetworkAccessManager::timerEvent(arg__1);
 }
@@ -3793,6 +3884,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QNetworkCookieJar::childEvent(arg__1);
 }
@@ -3821,6 +3913,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QNetworkCookieJar::cookiesForUrl(url);
 }
@@ -3838,6 +3931,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QNetworkCookieJar::customEvent(arg__1);
 }
@@ -3866,6 +3960,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QNetworkCookieJar::event(arg__1);
 }
@@ -3894,6 +3989,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QNetworkCookieJar::eventFilter(arg__1, arg__2);
 }
@@ -3922,6 +4018,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QNetworkCookieJar::setCookiesFromUrl(cookieList, url);
 }
@@ -3939,6 +4036,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QNetworkCookieJar::timerEvent(arg__1);
 }
@@ -3983,6 +4081,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QNetworkDiskCache::cacheSize();
 }
@@ -4000,6 +4099,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QNetworkDiskCache::childEvent(arg__1);
 }
@@ -4017,6 +4117,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QNetworkDiskCache::clear();
 }
@@ -4034,6 +4135,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QNetworkDiskCache::customEvent(arg__1);
 }
@@ -4062,6 +4164,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QNetworkDiskCache::data(url);
 }
@@ -4090,6 +4193,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QNetworkDiskCache::event(arg__1);
 }
@@ -4118,6 +4222,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QNetworkDiskCache::eventFilter(arg__1, arg__2);
 }
@@ -4146,6 +4251,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QNetworkDiskCache::expire();
 }
@@ -4163,6 +4269,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QNetworkDiskCache::insert(device);
 }
@@ -4191,6 +4298,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QNetworkDiskCache::metaData(url);
 }
@@ -4219,6 +4327,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QNetworkDiskCache::prepare(metaData);
 }
@@ -4247,6 +4356,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QNetworkDiskCache::remove(url);
 }
@@ -4264,6 +4374,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QNetworkDiskCache::timerEvent(arg__1);
 }
@@ -4281,6 +4392,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QNetworkDiskCache::updateMetaData(metaData);
 }
@@ -4558,6 +4670,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QList<QNetworkProxy >();
 }
@@ -4693,6 +4806,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   
 }
@@ -4721,6 +4835,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QNetworkReply::atEnd();
 }
@@ -4749,6 +4864,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QNetworkReply::bytesAvailable();
 }
@@ -4777,6 +4893,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QNetworkReply::bytesToWrite();
 }
@@ -4805,6 +4922,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QNetworkReply::canReadLine();
 }
@@ -4822,6 +4940,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QNetworkReply::childEvent(arg__1);
 }
@@ -4839,6 +4958,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QNetworkReply::close();
 }
@@ -4856,6 +4976,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QNetworkReply::customEvent(arg__1);
 }
@@ -4884,6 +5005,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QNetworkReply::event(arg__1);
 }
@@ -4912,6 +5034,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QNetworkReply::eventFilter(arg__1, arg__2);
 }
@@ -4929,6 +5052,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QNetworkReply::ignoreSslErrors();
 }
@@ -4957,6 +5081,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QNetworkReply::isSequential();
 }
@@ -4985,6 +5110,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QNetworkReply::open(mode);
 }
@@ -5013,6 +5139,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QNetworkReply::pos();
 }
@@ -5041,6 +5168,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return qint64();
 }
@@ -5069,6 +5197,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QNetworkReply::readLineData(data, maxlen);
 }
@@ -5097,6 +5226,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QNetworkReply::reset();
 }
@@ -5125,6 +5255,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QNetworkReply::seek(pos);
 }
@@ -5142,6 +5273,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QNetworkReply::setReadBufferSize(size);
 }
@@ -5170,6 +5302,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QNetworkReply::size();
 }
@@ -5187,6 +5320,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QNetworkReply::timerEvent(arg__1);
 }
@@ -5215,6 +5349,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QNetworkReply::waitForBytesWritten(msecs);
 }
@@ -5243,6 +5378,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QNetworkReply::waitForReadyRead(msecs);
 }
@@ -5271,6 +5407,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QNetworkReply::writeData(data, len);
 }
@@ -5457,6 +5594,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QTcpServer::childEvent(arg__1);
 }
@@ -5474,6 +5612,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QTcpServer::customEvent(arg__1);
 }
@@ -5502,6 +5641,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QTcpServer::event(arg__1);
 }
@@ -5530,6 +5670,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QTcpServer::eventFilter(arg__1, arg__2);
 }
@@ -5558,6 +5699,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QTcpServer::hasPendingConnections();
 }
@@ -5575,6 +5717,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QTcpServer::incomingConnection(handle);
 }
@@ -5603,6 +5746,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QTcpServer::nextPendingConnection();
 }
@@ -5620,6 +5764,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QTcpServer::timerEvent(arg__1);
 }
@@ -5739,6 +5884,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QTcpSocket::atEnd();
 }
@@ -5767,6 +5913,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QTcpSocket::bytesAvailable();
 }
@@ -5795,6 +5942,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QTcpSocket::bytesToWrite();
 }
@@ -5823,6 +5971,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QTcpSocket::canReadLine();
 }
@@ -5840,6 +5989,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QTcpSocket::childEvent(arg__1);
 }
@@ -5857,6 +6007,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QTcpSocket::close();
 }
@@ -5874,6 +6025,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QTcpSocket::customEvent(arg__1);
 }
@@ -5902,6 +6054,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QTcpSocket::event(arg__1);
 }
@@ -5930,6 +6083,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QTcpSocket::eventFilter(arg__1, arg__2);
 }
@@ -5958,6 +6112,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QTcpSocket::isSequential();
 }
@@ -5986,6 +6141,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QTcpSocket::open(mode);
 }
@@ -6014,6 +6170,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QTcpSocket::pos();
 }
@@ -6042,6 +6199,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QTcpSocket::readData(data, maxlen);
 }
@@ -6070,6 +6228,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QTcpSocket::readLineData(data, maxlen);
 }
@@ -6098,6 +6257,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QTcpSocket::reset();
 }
@@ -6126,6 +6286,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QTcpSocket::seek(pos);
 }
@@ -6154,6 +6315,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QTcpSocket::size();
 }
@@ -6171,6 +6333,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QTcpSocket::timerEvent(arg__1);
 }
@@ -6199,6 +6362,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QTcpSocket::waitForBytesWritten(msecs);
 }
@@ -6227,6 +6391,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QTcpSocket::waitForReadyRead(msecs);
 }
@@ -6255,6 +6420,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QTcpSocket::writeData(data, len);
 }
@@ -6289,6 +6455,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QUdpSocket::atEnd();
 }
@@ -6317,6 +6484,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QUdpSocket::bytesAvailable();
 }
@@ -6345,6 +6513,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QUdpSocket::bytesToWrite();
 }
@@ -6373,6 +6542,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QUdpSocket::canReadLine();
 }
@@ -6390,6 +6560,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QUdpSocket::childEvent(arg__1);
 }
@@ -6407,6 +6578,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QUdpSocket::close();
 }
@@ -6424,6 +6596,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QUdpSocket::customEvent(arg__1);
 }
@@ -6452,6 +6625,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QUdpSocket::event(arg__1);
 }
@@ -6480,6 +6654,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QUdpSocket::eventFilter(arg__1, arg__2);
 }
@@ -6508,6 +6683,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QUdpSocket::isSequential();
 }
@@ -6536,6 +6712,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QUdpSocket::open(mode);
 }
@@ -6564,6 +6741,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QUdpSocket::pos();
 }
@@ -6592,6 +6770,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QUdpSocket::readData(data, maxlen);
 }
@@ -6620,6 +6799,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QUdpSocket::readLineData(data, maxlen);
 }
@@ -6648,6 +6828,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QUdpSocket::reset();
 }
@@ -6676,6 +6857,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QUdpSocket::seek(pos);
 }
@@ -6704,6 +6886,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QUdpSocket::size();
 }
@@ -6721,6 +6904,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QUdpSocket::timerEvent(arg__1);
 }
@@ -6749,6 +6933,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QUdpSocket::waitForBytesWritten(msecs);
 }
@@ -6777,6 +6962,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QUdpSocket::waitForReadyRead(msecs);
 }
@@ -6805,6 +6991,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QUdpSocket::writeData(data, len);
 }
@@ -6868,6 +7055,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QUrlInfo::setDir(b);
 }
@@ -6885,6 +7073,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QUrlInfo::setFile(b);
 }
@@ -6902,6 +7091,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QUrlInfo::setGroup(s);
 }
@@ -6919,6 +7109,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QUrlInfo::setLastModified(dt);
 }
@@ -6936,6 +7127,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QUrlInfo::setName(name);
 }
@@ -6953,6 +7145,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QUrlInfo::setOwner(s);
 }
@@ -6970,6 +7163,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QUrlInfo::setPermissions(p);
 }
@@ -6987,6 +7181,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QUrlInfo::setReadable(b);
 }
@@ -7004,6 +7199,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QUrlInfo::setSize(size);
 }
@@ -7021,6 +7217,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QUrlInfo::setSymLink(b);
 }
@@ -7038,6 +7235,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QUrlInfo::setWritable(b);
 }

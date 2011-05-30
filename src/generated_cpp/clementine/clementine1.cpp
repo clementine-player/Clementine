@@ -43,6 +43,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return ThreadSafeNetworkDiskCache::cacheSize();
 }
@@ -60,6 +61,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   ThreadSafeNetworkDiskCache::childEvent(arg__1);
 }
@@ -77,6 +79,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   ThreadSafeNetworkDiskCache::clear();
 }
@@ -94,6 +97,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   ThreadSafeNetworkDiskCache::customEvent(arg__1);
 }
@@ -122,6 +126,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return ThreadSafeNetworkDiskCache::data(url);
 }
@@ -150,6 +155,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return ThreadSafeNetworkDiskCache::event(arg__1);
 }
@@ -178,6 +184,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return ThreadSafeNetworkDiskCache::eventFilter(arg__1, arg__2);
 }
@@ -195,6 +202,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   ThreadSafeNetworkDiskCache::insert(device);
 }
@@ -223,6 +231,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return ThreadSafeNetworkDiskCache::metaData(url);
 }
@@ -251,6 +260,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return ThreadSafeNetworkDiskCache::prepare(metaData);
 }
@@ -279,6 +289,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return ThreadSafeNetworkDiskCache::remove(url);
 }
@@ -296,6 +307,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   ThreadSafeNetworkDiskCache::timerEvent(arg__1);
 }
@@ -313,6 +325,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   ThreadSafeNetworkDiskCache::updateMetaData(metaData);
 }
@@ -387,6 +400,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return UrlHandler::LoadNext(url);
 }
@@ -415,6 +429,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return UrlHandler::StartLoading(url);
 }
@@ -432,6 +447,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   UrlHandler::childEvent(arg__1);
 }
@@ -449,6 +465,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   UrlHandler::customEvent(arg__1);
 }
@@ -477,6 +494,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return UrlHandler::event(arg__1);
 }
@@ -505,6 +523,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return UrlHandler::eventFilter(arg__1, arg__2);
 }
@@ -533,6 +552,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QString();
 }
@@ -550,6 +570,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   UrlHandler::timerEvent(arg__1);
 }

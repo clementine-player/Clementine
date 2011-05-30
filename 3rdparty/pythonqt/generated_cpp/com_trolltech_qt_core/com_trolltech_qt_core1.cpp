@@ -86,6 +86,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QObject::childEvent(arg__1);
 }
@@ -103,6 +104,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QObject::customEvent(arg__1);
 }
@@ -131,6 +133,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QObject::event(arg__1);
 }
@@ -159,6 +162,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QObject::eventFilter(arg__1, arg__2);
 }
@@ -176,6 +180,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QObject::timerEvent(arg__1);
 }
@@ -319,6 +324,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QParallelAnimationGroup::childEvent(arg__1);
 }
@@ -336,6 +342,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QParallelAnimationGroup::customEvent(arg__1);
 }
@@ -364,6 +371,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QParallelAnimationGroup::duration();
 }
@@ -392,6 +400,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QParallelAnimationGroup::event(event);
 }
@@ -420,6 +429,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QParallelAnimationGroup::eventFilter(arg__1, arg__2);
 }
@@ -437,6 +447,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QParallelAnimationGroup::timerEvent(arg__1);
 }
@@ -454,6 +465,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QParallelAnimationGroup::updateCurrentTime(currentTime);
 }
@@ -471,6 +483,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QParallelAnimationGroup::updateDirection(direction);
 }
@@ -488,6 +501,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QParallelAnimationGroup::updateState(newState, oldState);
 }
@@ -536,6 +550,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QPauseAnimation::childEvent(arg__1);
 }
@@ -553,6 +568,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QPauseAnimation::customEvent(arg__1);
 }
@@ -581,6 +597,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QPauseAnimation::duration();
 }
@@ -609,6 +626,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QPauseAnimation::event(e);
 }
@@ -637,6 +655,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QPauseAnimation::eventFilter(arg__1, arg__2);
 }
@@ -654,6 +673,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QPauseAnimation::timerEvent(arg__1);
 }
@@ -671,6 +691,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QPauseAnimation::updateCurrentTime(arg__1);
 }
@@ -688,6 +709,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QPauseAnimation::updateDirection(direction);
 }
@@ -705,6 +727,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QPauseAnimation::updateState(newState, oldState);
 }
@@ -763,6 +786,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QProcess::atEnd();
 }
@@ -791,6 +815,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QProcess::bytesAvailable();
 }
@@ -819,6 +844,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QProcess::bytesToWrite();
 }
@@ -847,6 +873,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QProcess::canReadLine();
 }
@@ -864,6 +891,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QProcess::childEvent(arg__1);
 }
@@ -881,6 +909,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QProcess::close();
 }
@@ -898,6 +927,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QProcess::customEvent(arg__1);
 }
@@ -926,6 +956,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QProcess::event(arg__1);
 }
@@ -954,6 +985,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QProcess::eventFilter(arg__1, arg__2);
 }
@@ -982,6 +1014,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QProcess::isSequential();
 }
@@ -1010,6 +1043,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QProcess::open(mode);
 }
@@ -1038,6 +1072,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QProcess::pos();
 }
@@ -1066,6 +1101,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QProcess::readData(data, maxlen);
 }
@@ -1094,6 +1130,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QProcess::readLineData(data, maxlen);
 }
@@ -1122,6 +1159,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QProcess::reset();
 }
@@ -1150,6 +1188,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QProcess::seek(pos);
 }
@@ -1167,6 +1206,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QProcess::setupChildProcess();
 }
@@ -1195,6 +1235,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QProcess::size();
 }
@@ -1212,6 +1253,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QProcess::timerEvent(arg__1);
 }
@@ -1240,6 +1282,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QProcess::waitForBytesWritten(msecs);
 }
@@ -1268,6 +1311,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QProcess::waitForReadyRead(msecs);
 }
@@ -1296,6 +1340,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QProcess::writeData(data, len);
 }
@@ -1599,6 +1644,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QPropertyAnimation::childEvent(arg__1);
 }
@@ -1616,6 +1662,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QPropertyAnimation::customEvent(arg__1);
 }
@@ -1644,6 +1691,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QPropertyAnimation::duration();
 }
@@ -1672,6 +1720,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QPropertyAnimation::event(event);
 }
@@ -1700,6 +1749,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QPropertyAnimation::eventFilter(arg__1, arg__2);
 }
@@ -1728,6 +1778,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QPropertyAnimation::interpolated(from, to, progress);
 }
@@ -1745,6 +1796,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QPropertyAnimation::timerEvent(arg__1);
 }
@@ -1762,6 +1814,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QPropertyAnimation::updateCurrentTime(arg__1);
 }
@@ -1779,6 +1832,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QPropertyAnimation::updateCurrentValue(value);
 }
@@ -1796,6 +1850,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QPropertyAnimation::updateDirection(direction);
 }
@@ -1813,6 +1868,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QPropertyAnimation::updateState(newState, oldState);
 }
@@ -1920,6 +1976,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   
 }
@@ -1984,6 +2041,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QSequentialAnimationGroup::childEvent(arg__1);
 }
@@ -2001,6 +2059,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QSequentialAnimationGroup::customEvent(arg__1);
 }
@@ -2029,6 +2088,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QSequentialAnimationGroup::duration();
 }
@@ -2057,6 +2117,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QSequentialAnimationGroup::event(event);
 }
@@ -2085,6 +2146,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QSequentialAnimationGroup::eventFilter(arg__1, arg__2);
 }
@@ -2102,6 +2164,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QSequentialAnimationGroup::timerEvent(arg__1);
 }
@@ -2119,6 +2182,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QSequentialAnimationGroup::updateCurrentTime(arg__1);
 }
@@ -2136,6 +2200,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QSequentialAnimationGroup::updateDirection(direction);
 }
@@ -2153,6 +2218,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QSequentialAnimationGroup::updateState(newState, oldState);
 }
@@ -2216,6 +2282,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QSettings::childEvent(arg__1);
 }
@@ -2233,6 +2300,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QSettings::customEvent(arg__1);
 }
@@ -2261,6 +2329,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QSettings::event(event);
 }
@@ -2289,6 +2358,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QSettings::eventFilter(arg__1, arg__2);
 }
@@ -2306,6 +2376,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QSettings::timerEvent(arg__1);
 }
@@ -2505,6 +2576,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QSignalMapper::childEvent(arg__1);
 }
@@ -2522,6 +2594,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QSignalMapper::customEvent(arg__1);
 }
@@ -2550,6 +2623,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QSignalMapper::event(arg__1);
 }
@@ -2578,6 +2652,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QSignalMapper::eventFilter(arg__1, arg__2);
 }
@@ -2595,6 +2670,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QSignalMapper::timerEvent(arg__1);
 }
@@ -2653,6 +2729,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QSignalTransition::childEvent(arg__1);
 }
@@ -2670,6 +2747,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QSignalTransition::customEvent(arg__1);
 }
@@ -2698,6 +2776,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QSignalTransition::event(e);
 }
@@ -2726,6 +2805,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QSignalTransition::eventFilter(arg__1, arg__2);
 }
@@ -2754,6 +2834,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QSignalTransition::eventTest(event);
 }
@@ -2771,6 +2852,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QSignalTransition::onTransition(event);
 }
@@ -2788,6 +2870,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QSignalTransition::timerEvent(arg__1);
 }
@@ -2850,6 +2933,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QSocketNotifier::childEvent(arg__1);
 }
@@ -2867,6 +2951,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QSocketNotifier::customEvent(arg__1);
 }
@@ -2895,6 +2980,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QSocketNotifier::event(arg__1);
 }
@@ -2923,6 +3009,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QSocketNotifier::eventFilter(arg__1, arg__2);
 }
@@ -2940,6 +3027,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QSocketNotifier::timerEvent(arg__1);
 }
@@ -2983,6 +3071,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QState::childEvent(arg__1);
 }
@@ -3000,6 +3089,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QState::customEvent(arg__1);
 }
@@ -3028,6 +3118,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QState::event(e);
 }
@@ -3056,6 +3147,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QState::eventFilter(arg__1, arg__2);
 }
@@ -3073,6 +3165,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QState::onEntry(event);
 }
@@ -3090,6 +3183,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QState::onExit(event);
 }
@@ -3107,6 +3201,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QState::timerEvent(arg__1);
 }
@@ -3204,6 +3299,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QStateMachine::beginMicrostep(event);
 }
@@ -3221,6 +3317,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QStateMachine::beginSelectTransitions(event);
 }
@@ -3238,6 +3335,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QStateMachine::childEvent(arg__1);
 }
@@ -3255,6 +3353,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QStateMachine::customEvent(arg__1);
 }
@@ -3272,6 +3371,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QStateMachine::endMicrostep(event);
 }
@@ -3289,6 +3389,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QStateMachine::endSelectTransitions(event);
 }
@@ -3317,6 +3418,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QStateMachine::event(e);
 }
@@ -3345,6 +3447,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QStateMachine::eventFilter(watched, event);
 }
@@ -3362,6 +3465,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QStateMachine::onEntry(event);
 }
@@ -3379,6 +3483,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QStateMachine::onExit(event);
 }
@@ -3396,6 +3501,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QStateMachine::timerEvent(arg__1);
 }
@@ -3667,6 +3773,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QTemporaryFile::atEnd();
 }
@@ -3695,6 +3802,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QTemporaryFile::bytesAvailable();
 }
@@ -3723,6 +3831,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QTemporaryFile::bytesToWrite();
 }
@@ -3751,6 +3860,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QTemporaryFile::canReadLine();
 }
@@ -3768,6 +3878,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QTemporaryFile::childEvent(arg__1);
 }
@@ -3785,6 +3896,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QTemporaryFile::close();
 }
@@ -3802,6 +3914,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QTemporaryFile::customEvent(arg__1);
 }
@@ -3830,6 +3943,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QTemporaryFile::event(arg__1);
 }
@@ -3858,6 +3972,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QTemporaryFile::eventFilter(arg__1, arg__2);
 }
@@ -3886,6 +4001,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QTemporaryFile::fileEngine();
 }
@@ -3914,6 +4030,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QTemporaryFile::isSequential();
 }
@@ -3942,6 +4059,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QTemporaryFile::open(flags);
 }
@@ -3970,6 +4088,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QTemporaryFile::pos();
 }
@@ -3998,6 +4117,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QTemporaryFile::readData(data, maxlen);
 }
@@ -4026,6 +4146,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QTemporaryFile::readLineData(data, maxlen);
 }
@@ -4054,6 +4175,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QTemporaryFile::reset();
 }
@@ -4082,6 +4204,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QTemporaryFile::seek(offset);
 }
@@ -4110,6 +4233,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QTemporaryFile::size();
 }
@@ -4127,6 +4251,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QTemporaryFile::timerEvent(arg__1);
 }
@@ -4155,6 +4280,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QTemporaryFile::waitForBytesWritten(msecs);
 }
@@ -4183,6 +4309,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QTemporaryFile::waitForReadyRead(msecs);
 }
@@ -4211,6 +4338,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QTemporaryFile::writeData(data, len);
 }
@@ -4376,6 +4504,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QTextCodec::aliases();
 }
@@ -4404,6 +4533,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QByteArray();
 }
@@ -4432,6 +4562,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QString();
 }
@@ -4460,6 +4591,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return int();
 }
@@ -4488,6 +4620,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QByteArray();
 }
@@ -4908,6 +5041,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QThreadPool::childEvent(arg__1);
 }
@@ -4925,6 +5059,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QThreadPool::customEvent(arg__1);
 }
@@ -4953,6 +5088,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QThreadPool::event(arg__1);
 }
@@ -4981,6 +5117,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QThreadPool::eventFilter(arg__1, arg__2);
 }
@@ -4998,6 +5135,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QThreadPool::timerEvent(arg__1);
 }
@@ -5076,6 +5214,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QTimeLine::childEvent(arg__1);
 }
@@ -5093,6 +5232,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QTimeLine::customEvent(arg__1);
 }
@@ -5121,6 +5261,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QTimeLine::event(arg__1);
 }
@@ -5149,6 +5290,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QTimeLine::eventFilter(arg__1, arg__2);
 }
@@ -5166,6 +5308,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QTimeLine::timerEvent(event);
 }
@@ -5194,6 +5337,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QTimeLine::valueForTime(msec);
 }
@@ -5337,6 +5481,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QTimer::childEvent(arg__1);
 }
@@ -5354,6 +5499,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QTimer::customEvent(arg__1);
 }
@@ -5382,6 +5528,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QTimer::event(arg__1);
 }
@@ -5410,6 +5557,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return returnValue;
   }
+  Py_XDECREF(obj);
 }
   return QTimer::eventFilter(arg__1, arg__2);
 }
@@ -5427,6 +5575,7 @@ if (_wrapper) {
     Py_DECREF(obj);
     return;
   }
+  Py_XDECREF(obj);
 }
   QTimer::timerEvent(arg__1);
 }
