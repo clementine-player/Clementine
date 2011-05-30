@@ -1039,6 +1039,14 @@ QStandardItem* PythonQtWrapper_QStandardItem::new_QStandardItem(int  rows, int  
 { 
 return new PythonQtShell_QStandardItem(rows, columns); }
 
+void PythonQtWrapper_QStandardItem::delete_QStandardItem(QStandardItem* obj) {
+  if (obj && obj->parent()) {
+    obj->parent()->removeRow(obj->row());
+  } else if (obj) {
+    delete obj;
+  }
+}
+
 QString  PythonQtWrapper_QStandardItem::accessibleDescription(QStandardItem* theWrappedObject) const
 {
   return ( theWrappedObject->accessibleDescription());

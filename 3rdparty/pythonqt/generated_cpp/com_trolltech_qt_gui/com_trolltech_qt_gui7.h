@@ -161,7 +161,7 @@ QStandardItem* new_QStandardItem();
 QStandardItem* new_QStandardItem(const QIcon&  icon, const QString&  text);
 QStandardItem* new_QStandardItem(const QString&  text);
 QStandardItem* new_QStandardItem(int  rows, int  columns = 1);
-void delete_QStandardItem(QStandardItem* obj) { delete obj; } 
+void delete_QStandardItem(QStandardItem* obj);
    QString  accessibleDescription(QStandardItem* theWrappedObject) const;
    QString  accessibleText(QStandardItem* theWrappedObject) const;
    void appendColumn(QStandardItem* theWrappedObject, const QList<QStandardItem* >&  items);
