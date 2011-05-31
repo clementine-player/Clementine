@@ -186,7 +186,6 @@ set(SOURCES
   radio/somafmurlhandler.cpp
 
   resolvers/libraryresolver.cpp
-  resolvers/spotifyresolver.cpp
 
   scripting/installscriptdialog.cpp
   scripting/languageengine.cpp
@@ -404,7 +403,6 @@ set(HEADERS
 
   resolvers/libraryresolver.h
   resolvers/resolver.h
-  resolvers/spotifyresolver.h
 
   scripting/installscriptdialog.h
   scripting/languageengine.h
@@ -649,12 +647,14 @@ if(HAVE_SPOTIFY)
     radio/spotifyservice.cpp
     radio/spotifysearchplaylisttype.cpp
     radio/spotifyurlhandler.cpp
+    resolvers/spotifyresolver.cpp
   )
   list(APPEND HEADERS
     radio/spotifyblobdownloader.h
     radio/spotifyconfig.h
     radio/spotifyserver.h
     radio/spotifyservice.h
+    resolvers/spotifyresolver.h
   )
   list(APPEND UI
     radio/spotifyconfig.ui)
