@@ -81,7 +81,7 @@ add_library(pythonqt ${TYPE}
   ${SOURCES}
   ${MOC}
 )
-set_target_properties(pythonqt PROPERTIES COMPILE_FLAGS "-Wno-write-strings -Wno-format-nonliteral -Wno-format-security -Wno-builtin-macro-redefined")
+set_target_properties(pythonqt PROPERTIES COMPILE_FLAGS "-Wno-write-strings -Wno-format-nonliteral -Wno-format-security")
 
 target_link_libraries(pythonqt
   ${PYTHON_LIBRARIES}
