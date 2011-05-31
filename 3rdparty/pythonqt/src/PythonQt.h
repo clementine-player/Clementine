@@ -42,8 +42,8 @@
 */
 //----------------------------------------------------------------------------------
 
-#include "PythonQtSystem.h"
 #include "PythonQtInstanceWrapper.h"
+#include "PythonQtSystem.h"
 #include "PythonQtClassWrapper.h"
 #include "PythonQtSlot.h"
 #include "PythonQtObjectPtr.h"

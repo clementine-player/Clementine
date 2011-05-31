@@ -39,8 +39,8 @@
 */
 //----------------------------------------------------------------------------------
 
-#include "PythonQtMethodInfo.h"
 #include "PythonQtClassInfo.h"
+#include "PythonQtMethodInfo.h"
 #include <iostream>
 
 QHash<QByteArray, PythonQtMethodInfo*> PythonQtMethodInfo::_cachedSignatures;
@@ -350,4 +350,3 @@ QByteArray PythonQtSlotInfo::slotName()
   sig = sig.left(idx);
   return sig;
 }
-
