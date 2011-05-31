@@ -13,7 +13,7 @@
 using boost::scoped_ptr;
 
 LibraryResolver::LibraryResolver(LibraryBackendInterface* backend, QObject* parent)
-    : QObject(parent),
+    : Resolver(parent),
       backend_(backend) {
 }
 

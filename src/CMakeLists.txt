@@ -186,6 +186,7 @@ set(SOURCES
   radio/somafmurlhandler.cpp
 
   resolvers/libraryresolver.cpp
+  resolvers/spotifyresolver.cpp
 
   scripting/installscriptdialog.cpp
   scripting/languageengine.cpp
@@ -402,6 +403,8 @@ set(HEADERS
   radio/somafmurlhandler.h
 
   resolvers/libraryresolver.h
+  resolvers/resolver.h
+  resolvers/spotifyresolver.h
 
   scripting/installscriptdialog.h
   scripting/languageengine.h

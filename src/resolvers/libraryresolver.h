@@ -2,16 +2,15 @@
 #define LIBRARYRESOLVER_H
 
 #include <QMap>
-#include <QObject>
 
-#include "core/song.h"
+#include "resolver.h"
 
 class QNetworkReply;
 
 class LibraryBackendInterface;
 class LibraryQuery;
 
-class LibraryResolver : public QObject {
+class LibraryResolver : public Resolver {
   Q_OBJECT
  public:
   LibraryResolver(LibraryBackendInterface* backend, QObject* parent = 0);
