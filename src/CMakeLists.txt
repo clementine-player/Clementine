@@ -185,6 +185,8 @@ set(SOURCES
   radio/somafmservice.cpp
   radio/somafmurlhandler.cpp
 
+  resolvers/libraryresolver.cpp
+
   scripting/installscriptdialog.cpp
   scripting/languageengine.cpp
   scripting/script.cpp
@@ -221,6 +223,8 @@ set(SOURCES
   songinfo/songplaystats.cpp
   songinfo/ultimatelyricsprovider.cpp
   songinfo/ultimatelyricsreader.cpp
+
+  suggesters/lastfmsuggester.cpp
 
   transcoder/transcodedialog.cpp
   transcoder/transcoder.cpp
@@ -397,6 +401,8 @@ set(HEADERS
   radio/somafmservice.h
   radio/somafmurlhandler.h
 
+  resolvers/libraryresolver.h
+
   scripting/installscriptdialog.h
   scripting/languageengine.h
   scripting/scriptdialog.h
@@ -427,6 +433,8 @@ set(HEADERS
   songinfo/songplaystats.h
   songinfo/ultimatelyricsprovider.h
   songinfo/ultimatelyricsreader.h
+
+  suggesters/lastfmsuggester.h
 
   transcoder/transcodedialog.h
   transcoder/transcoder.h
