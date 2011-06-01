@@ -17,7 +17,7 @@ class LibraryResolver : public Resolver {
   int ResolveSong(const Song& song);
 
  signals:
-  void ResolveFinished(int id, SongList songs);
+  void ResolveFinished(int id, const SongList& songs);
 
  private slots:
   void QueryFinished();

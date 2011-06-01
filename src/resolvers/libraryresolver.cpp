@@ -14,7 +14,8 @@ using boost::scoped_ptr;
 
 LibraryResolver::LibraryResolver(LibraryBackendInterface* backend, QObject* parent)
     : Resolver(parent),
-      backend_(backend) {
+      backend_(backend),
+      next_id_(0) {
 }
 
 int LibraryResolver::ResolveSong(const Song& song) {
