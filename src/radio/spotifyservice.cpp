@@ -380,7 +380,7 @@ void SpotifyService::FillPlaylist(QStandardItem* item, const protobuf::LoadPlayl
   }
 }
 
-void SpotifyService::SongFromProtobuf(const protobuf::Track& track, Song* song) const {
+void SpotifyService::SongFromProtobuf(const protobuf::Track& track, Song* song) {
   song->set_rating(track.starred() ? 1.0 : 0.0);
   song->set_title(QStringFromStdString(track.title()));
   song->set_album(QStringFromStdString(track.album()));

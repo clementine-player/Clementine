@@ -55,6 +55,8 @@ public:
   bool IsBlobInstalled() const;
   void InstallBlob();
 
+  static void SongFromProtobuf(const protobuf::Track& track, Song* song);
+
 signals:
   void BlobStateChanged();
   void LoginFinished(bool success);
@@ -68,7 +70,6 @@ private:
                            const QString& password = QString());
   void StartBlobProcess();
   void FillPlaylist(QStandardItem* item, const protobuf::LoadPlaylistResponse& response);
-  void SongFromProtobuf(const protobuf::Track& track, Song* song) const;
   void EnsureMenuCreated();
 
   QStandardItem* PlaylistBySpotifyIndex(int index) const;

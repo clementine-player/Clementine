@@ -3,14 +3,15 @@
 #include "core/logging.h"
 #include "core/timeconstants.h"
 #include "radio/spotifyserver.h"
+#include "radio/spotifyservice.h"
 #include "spotifyblob/common/spotifymessages.pb.h"
 
 SpotifyResolver::SpotifyResolver(SpotifyServer* spotify, QObject* parent)
     : Resolver(parent),
       spotify_(spotify),
       next_id_(0) {
-  connect(spotify_, SIGNAL(SearchResults(const protobuf::SearchResponse&)),
-          SLOT(SearchFinished(const protobuf::SearchResponse&)));
+  connect(spotify_, SIGNAL(SearchResults(protobuf::SearchResponse)),
+          SLOT(SearchFinished(protobuf::SearchResponse)));
 }
 
 int SpotifyResolver::ResolveSong(const Song& song) {
@@ -43,17 +44,7 @@ void SpotifyResolver::SearchFinished(const protobuf::SearchResponse& response) {
   for (int i = 0; i < response.result_size(); ++i) {
     const protobuf::Track& track = response.result(i);
     Song song;
-    song.set_title(QString::fromUtf8(track.title().c_str()));
-    if (track.artist_size() > 0) {
-      song.set_artist(QString::fromUtf8(track.artist(0).c_str()));
-    }
-    song.set_album(QString::fromUtf8(track.album().c_str()));
-    song.set_length_nanosec(track.duration_msec() * kNsecPerMsec);
-    song.set_disc(track.disc());
-    song.set_track(track.track());
-    song.set_year(track.year());
-    song.set_url(QUrl(QString::fromUtf8(track.uri().c_str())));
-    song.set_valid(true);
+    SpotifyService::SongFromProtobuf(track, &song);
     songs << song;
   }
   qLog(Debug) << "Resolved from spotify:" << songs.length();
