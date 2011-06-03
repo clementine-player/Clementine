@@ -338,8 +338,6 @@ QString OSD::ReplaceVariable(const QString& variable, const Song& song) {
   } else if (variable == "%newline%") {
     // We need different strings depending on notification type
     switch (behaviour_) {
-      case Pretty:
-        return "<br/>";
       case Native:
 #ifdef Q_OS_DARWIN
         return "\n";
@@ -347,10 +345,15 @@ QString OSD::ReplaceVariable(const QString& variable, const Song& song) {
 #ifdef Q_OS_LINUX
         return "<br/>";
 #endif
-      // Other OS don't support native notifications
-      default:
+#ifdef Q_OS_WIN32
+        // Other OS don't support native notifications
         qLog(Debug) << "New line not supported by this notification type";
         return "";
+#endif
+      case Pretty:
+      default:
+        // When notifications are disabled, we force the PrettyOSD
+        return "<br/>";
     }
   }
 
