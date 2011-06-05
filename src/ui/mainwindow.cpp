@@ -1679,9 +1679,11 @@ void MainWindow::CommandlineOptionsReceived(const CommandlineOptions &options) {
 }
 
 void MainWindow::ForceShowOSD(const Song &song, const bool toggle) {
-  if (toggle)
+  if (toggle) {
     osd_->SetPrettyOSDToggleMode(toggle);
-  osd_->ForceShowNextNotification();
+  } else {
+    osd_->ForceShowNextNotification();
+  }
   osd_->SongChanged(song);
 }
 

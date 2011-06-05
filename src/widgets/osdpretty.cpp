@@ -256,6 +256,8 @@ void OSDPretty::ShowMessage(const QString& summary, const QString& message,
         timeout_->start(); // Restart the timer
     }
   } else {
+    if (toggle_mode())
+      set_toggle_mode(false);
     // The OSD is not visible, show it
     show();
   }

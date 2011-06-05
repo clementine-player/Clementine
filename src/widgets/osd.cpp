@@ -350,9 +350,12 @@ QString OSD::ReplaceVariable(const QString& variable, const Song& song) {
 #endif
 #ifdef Q_OS_WIN32
         // Other OS don't support native notifications
-        qLog(Debug) << "New line not supported by this notification type";
+        qLog(Debug) << "New line not supported by this notification type under Windows";
         return "";
 #endif
+      case TrayPopup:
+        qLog(Debug) << "New line not supported by this notification type";
+        return "";
       case Pretty:
       default:
         // When notifications are disabled, we force the PrettyOSD
