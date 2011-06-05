@@ -99,7 +99,8 @@ signals:
   // the URL of the song and a flag saying whether it was able to play the song.
   void SongChangeRequestProcessed(const QUrl& url, bool valid);
 
-  void ForceShowOSD(Song);
+  // The toggle parameter is true when user requests to toggle visibility for Pretty OSD
+  void ForceShowOSD(Song, bool toogle);
 };
 
 class Player : public PlayerInterface {
@@ -143,6 +144,7 @@ public slots:
   void Stop();
   void Play();
   void ShowOSD();
+  void TogglePrettyOSD();
 
  private slots:
   void EngineStateChanged(Engine::State);

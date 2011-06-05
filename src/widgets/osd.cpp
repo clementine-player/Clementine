@@ -216,7 +216,10 @@ void OSD::ShowMessage(const QString& summary,
                       const QString& message,
                       const QString& icon,
                       const QImage& image) {
-  switch (behaviour_) {
+  if (pretty_popup_->toggle_mode()) {
+    pretty_popup_->ShowMessage(summary, message, image);
+  } else {
+    switch (behaviour_) {
     case Native:
       if (image.isNull()) {
         ShowMessageNative(summary, message, icon, QImage());
@@ -237,12 +240,12 @@ void OSD::ShowMessage(const QString& summary,
       force_show_next_ = false;
       // fallthrough
     case Pretty:
-      pretty_popup_->SetMessage(summary, message, image);
-      pretty_popup_->show();
+      pretty_popup_->ShowMessage(summary, message, image);
       break;
 
     default:
       break;
+    }
   }
 }
 
@@ -371,4 +374,8 @@ void OSD::ShowPreview(const Behaviour type, const QString& line1, const QString&
   // We want to reload the settings, but we can't do this here because the cover art loading is asynch
   preview_mode_ = true;
   SongChanged(song);
+}
+
+void OSD::SetPrettyOSDToggleMode(bool toggle) {
+  pretty_popup_->set_toggle_mode(toggle);
 }

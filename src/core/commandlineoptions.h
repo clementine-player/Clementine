@@ -65,6 +65,7 @@ class CommandlineOptions {
   int seek_by() const { return seek_by_; }
   int play_track_at() const { return play_track_at_; }
   bool show_osd() const { return show_osd_; }
+  bool toggle_pretty_osd() const { return toggle_pretty_osd_; }
   QList<QUrl> urls() const { return urls_; }
   QString language() const { return language_; }
   QString log_levels() const { return log_levels_; }
@@ -107,6 +108,7 @@ class CommandlineOptions {
   int seek_by_;
   int play_track_at_;
   bool show_osd_;
+  bool toggle_pretty_osd_;
   QString language_;
   StunTestDirection stun_test_;
   QString log_levels_;

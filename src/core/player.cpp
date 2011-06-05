@@ -400,7 +400,12 @@ void Player::Play() {
 
 void Player::ShowOSD() {
   if (current_item_)
-    emit ForceShowOSD(current_item_->Metadata());
+    emit ForceShowOSD(current_item_->Metadata(), false);
+}
+
+void Player::TogglePrettyOSD() {
+  if (current_item_)
+    emit ForceShowOSD(current_item_->Metadata(), true);
 }
 
 void Player::TrackAboutToEnd() {

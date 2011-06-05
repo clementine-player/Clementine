@@ -104,7 +104,7 @@ SettingsDialog::SettingsDialog(BackgroundStreams* streams, QWidget* parent)
     streams_(streams)
 {
   ui_->setupUi(this);
-  pretty_popup_->SetMessage(tr("OSD Preview"), tr("Drag to reposition"),
+  pretty_popup_->ShowMessage(tr("OSD Preview"), tr("Drag to reposition"),
                             QImage(":nocover.png"));
 
 #ifdef HAVE_LIBLASTFM

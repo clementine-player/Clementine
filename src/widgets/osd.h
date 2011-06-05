@@ -65,6 +65,8 @@ class OSD : public QObject {
 
   void ReloadPrettyOSDSettings();
 
+  void SetPrettyOSDToggleMode(bool toggle);
+
  public slots:
   void ReloadSettings();
 

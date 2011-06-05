@@ -56,6 +56,7 @@ GlobalShortcuts::GlobalShortcuts(QObject *parent)
   AddShortcut("seek_backward", tr("Seek backward"), SIGNAL(SeekBackward()));
   AddShortcut("show_hide", tr("Show/Hide"), SIGNAL(ShowHide()));
   AddShortcut("show_osd", tr("Show OSD"), SIGNAL(ShowOSD()));
+  AddShortcut("toggle_pretty_osd", tr("Toggle Pretty OSD"), SIGNAL(TogglePrettyOSD())); // Toggling possible only for pretty OSD
   AddShortcut("shuffle_mode", tr("Change shuffle mode"), SIGNAL(CycleShuffleMode()));
   AddShortcut("repeat_mode", tr("Change repeat mode"), SIGNAL(CycleRepeatMode()));
   AddShortcut("toggle_last_fm_scrobbling", tr("Enable/disable Last.fm scrobbling"), SIGNAL(ToggleScrobbling()));

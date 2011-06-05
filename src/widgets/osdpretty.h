@@ -49,7 +49,7 @@ class OSDPretty : public QWidget {
 
   static bool IsTransparencyAvailable();
 
-  void SetMessage(const QString& summary,
+  void ShowMessage(const QString& summary,
                   const QString& message,
                   const QImage& image);
 
@@ -81,6 +81,9 @@ class OSDPretty : public QWidget {
 
   // QWidget
   void setVisible(bool visible);
+
+  bool toggle_mode() const { return toggle_mode_; }
+  void set_toggle_mode(bool toggle_mode) { toggle_mode_ = toggle_mode; }
 
  public slots:
   void ReloadSettings();
@@ -134,6 +137,9 @@ class OSDPretty : public QWidget {
   // For fading
   bool fading_enabled_;
   QTimeLine* fader_;
+
+  // Toggling requested, we have to show or hide the OSD
+  bool toggle_mode_;
 };
 
 #endif // OSDPRETTY_H

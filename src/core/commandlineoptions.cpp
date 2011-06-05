@@ -52,11 +52,12 @@ const char* CommandlineOptions::kHelpText =
     "\n"
     "%20:\n"
     "  -o, --show-osd            %21\n"
-    "  -g, --language <lang>     %22\n"
-    "      --quiet               %23\n"
-    "      --verbose             %24\n"
-    "      --log-levels <levels> %25\n"
-    "      --version             %26\n";
+    "  -y, --toggle-pretty-osd   %22\n"
+    "  -g, --language <lang>     %23\n"
+    "      --quiet               %24\n"
+    "      --verbose             %25\n"
+    "      --log-levels <levels> %26\n"
+    "      --version             %27\n";
 
 const char* CommandlineOptions::kVersionText =
     "Clementine %1";
@@ -72,6 +73,7 @@ CommandlineOptions::CommandlineOptions(int argc, char** argv)
     seek_by_(0),
     play_track_at_(-1),
     show_osd_(false),
+    toggle_pretty_osd_(false),
     stun_test_(StunTestNone),
     log_levels_(logging::kDefaultLogLevels)
 {
@@ -109,20 +111,21 @@ bool CommandlineOptions::Parse() {
     {"next",        no_argument,       0, 'f'},
     {"volume",      required_argument, 0, 'v'},
     {"volume-up",   no_argument,       0, VolumeUp},
+
     {"volume-down", no_argument,       0, VolumeDown},
     {"seek-to",     required_argument, 0, SeekTo},
     {"seek-by",     required_argument, 0, SeekBy},
 
-    {"append",      no_argument,       0, 'a'},
-    {"load",        no_argument,       0, 'l'},
-    {"play-track",  required_argument, 0, 'k'},
-
-    {"show-osd",    no_argument,       0, 'o'},
-    {"language",    required_argument, 0, 'g'},
-    {"quiet",       no_argument,       0, Quiet},
-    {"verbose",     no_argument,       0, Verbose},
-    {"log-levels",  required_argument, 0, LogLevels},
-    {"version",     no_argument,       0, Version},
+    {"append",            no_argument,       0, 'a'},
+    {"load",              no_argument,       0, 'l'},
+    {"play-track",        required_argument, 0, 'k'},
+    {"show-osd",          no_argument,       0, 'o'},
+    {"toggle-pretty-osd", no_argument,       0, 'y'},
+    {"language",          required_argument, 0, 'g'},
+    {"quiet",             no_argument,       0, Quiet},
+    {"verbose",           no_argument,       0, Verbose},
+    {"log-levels",        required_argument, 0, LogLevels},
+    {"version",           no_argument,       0, Version},
 
     {"stun-test",   required_argument, 0, 'z'},
 
@@ -132,7 +135,7 @@ bool CommandlineOptions::Parse() {
   // Parse the arguments
   bool ok = false;
   forever {
-    int c = getopt_long(argc_, argv_, "hptusrfv:alk:og:", kOptions, NULL);
+    int c = getopt_long(argc_, argv_, "hptusrfv:alk:oyg:", kOptions, NULL);
 
     // End of the options
     if (c == -1)
@@ -159,6 +162,7 @@ bool CommandlineOptions::Parse() {
             tr("Play the <n>th track in the playlist"),
             tr("Other options"),
             tr("Display the on-screen-display"),
+            tr("Toggle visibility for the pretty on-screen-display"),
             tr("Change the language"),
             tr("Equivalent to --log-levels *:1"),
             tr("Equivalent to --log-levels *:3"),
@@ -169,21 +173,22 @@ bool CommandlineOptions::Parse() {
         return false;
       }
 
-      case 'p': player_action_   = Player_Play;       break;
-      case 't': player_action_   = Player_PlayPause;  break;
-      case 'u': player_action_   = Player_Pause;      break;
-      case 's': player_action_   = Player_Stop;       break;
-      case 'r': player_action_   = Player_Previous;   break;
-      case 'f': player_action_   = Player_Next;       break;
-      case 'a': url_list_action_ = UrlList_Append;    break;
-      case 'l': url_list_action_ = UrlList_Load;      break;
-      case 'o': show_osd_        = true;              break;
-      case 'g': language_        = QString(optarg);   break;
-      case VolumeUp:   volume_modifier_ = +4;         break;
-      case VolumeDown: volume_modifier_ = -4;         break;
-      case Quiet:      log_levels_ = "1";             break;
-      case Verbose:    log_levels_ = "3";             break;
-      case LogLevels:  log_levels_ = QString(optarg); break;
+      case 'p': player_action_     = Player_Play;       break;
+      case 't': player_action_     = Player_PlayPause;  break;
+      case 'u': player_action_     = Player_Pause;      break;
+      case 's': player_action_     = Player_Stop;       break;
+      case 'r': player_action_     = Player_Previous;   break;
+      case 'f': player_action_     = Player_Next;       break;
+      case 'a': url_list_action_   = UrlList_Append;    break;
+      case 'l': url_list_action_   = UrlList_Load;      break;
+      case 'o': show_osd_          = true;              break;
+      case 'y': toggle_pretty_osd_ = true;              break;
+      case 'g': language_          = QString(optarg);   break;
+      case VolumeUp:   volume_modifier_ = +4;           break;
+      case VolumeDown: volume_modifier_ = -4;           break;
+      case Quiet:      log_levels_ = "1";               break;
+      case Verbose:    log_levels_ = "3";               break;
+      case LogLevels:  log_levels_ = QString(optarg);   break;
       case Version: {
         QString version_text = QString(kVersionText).arg(CLEMENTINE_VERSION_DISPLAY);
         std::cout << version_text.toLocal8Bit().constData() << std::endl;
@@ -242,6 +247,7 @@ bool CommandlineOptions::is_empty() const {
          seek_by_ == 0 &&
          play_track_at_ == -1 &&
          show_osd_ == false &&
+         toggle_pretty_osd_ == false &&
          urls_.isEmpty();
 }
 
@@ -279,7 +285,8 @@ QDataStream& operator<<(QDataStream& s, const CommandlineOptions& a) {
     << a.play_track_at_
     << a.show_osd_
     << a.urls_
-    << a.log_levels_;
+    << a.log_levels_
+    << a.toggle_pretty_osd_;
 
   return s;
 }
@@ -296,7 +303,8 @@ QDataStream& operator>>(QDataStream& s, CommandlineOptions& a) {
     >> a.play_track_at_
     >> a.show_osd_
     >> a.urls_
-    >> a.log_levels_;
+    >> a.log_levels_
+    >> a.toggle_pretty_osd_;
   a.player_action_ = CommandlineOptions::PlayerAction(player_action);
   a.url_list_action_ = CommandlineOptions::UrlListAction(url_list_action);
 

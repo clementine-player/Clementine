@@ -422,7 +422,7 @@ MainWindow::MainWindow(
   connect(player_, SIGNAL(PlaylistFinished()), osd_, SLOT(PlaylistFinished()));
   connect(player_, SIGNAL(VolumeChanged(int)), osd_, SLOT(VolumeChanged(int)));
   connect(player_, SIGNAL(VolumeChanged(int)), ui_->volume, SLOT(setValue(int)));
-  connect(player_, SIGNAL(ForceShowOSD(Song)), SLOT(ForceShowOSD(Song)));
+  connect(player_, SIGNAL(ForceShowOSD(Song, bool)), SLOT(ForceShowOSD(Song, bool)));
   connect(playlists_, SIGNAL(CurrentSongChanged(Song)), SLOT(SongChanged(Song)));
   connect(playlists_, SIGNAL(CurrentSongChanged(Song)), osd_, SLOT(SongChanged(Song)));
   connect(playlists_, SIGNAL(CurrentSongChanged(Song)), player_, SLOT(CurrentMetadataChanged(Song)));
@@ -610,6 +610,7 @@ MainWindow::MainWindow(
   connect(global_shortcuts_, SIGNAL(SeekBackward()), player_, SLOT(SeekBackward()));
   connect(global_shortcuts_, SIGNAL(ShowHide()), SLOT(ToggleShowHide()));
   connect(global_shortcuts_, SIGNAL(ShowOSD()), player_, SLOT(ShowOSD()));
+  connect(global_shortcuts_, SIGNAL(TogglePrettyOSD()), player_, SLOT(TogglePrettyOSD()));
 #ifdef HAVE_LIBLASTFM
   connect(global_shortcuts_, SIGNAL(ToggleScrobbling()), radio_model->RadioModel::Service<LastFMService>(), SLOT(ToggleScrobbling()));
 #endif
@@ -1672,9 +1673,14 @@ void MainWindow::CommandlineOptionsReceived(const CommandlineOptions &options) {
 
   if (options.show_osd())
     player_->ShowOSD();
+
+  if (options.toggle_pretty_osd())
+    player_->TogglePrettyOSD();
 }
 
-void MainWindow::ForceShowOSD(const Song &song) {
+void MainWindow::ForceShowOSD(const Song &song, const bool toggle) {
+  if (toggle)
+    osd_->SetPrettyOSDToggleMode(toggle);
   osd_->ForceShowNextNotification();
   osd_->SongChanged(song);
 }
@@ -1998,7 +2004,7 @@ void MainWindow::ShowVisualisations() {
     visualisation_->SetActions(ui_->action_previous_track, ui_->action_play_pause,
                                ui_->action_stop, ui_->action_next_track);
     connect(player_, SIGNAL(Stopped()), visualisation_.get(), SLOT(Stopped()));
-    connect(player_, SIGNAL(ForceShowOSD(Song)), visualisation_.get(), SLOT(SongMetadataChanged(Song)));
+    connect(player_, SIGNAL(ForceShowOSD(Song, bool)), visualisation_.get(), SLOT(SongMetadataChanged(Song)));
     connect(playlists_, SIGNAL(CurrentSongChanged(Song)), visualisation_.get(), SLOT(SongMetadataChanged(Song)));
 
     visualisation_->SetEngine(qobject_cast<GstEngine*>(player_->engine()));

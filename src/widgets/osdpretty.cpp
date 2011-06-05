@@ -63,7 +63,8 @@ OSDPretty::OSDPretty(Mode mode, QWidget *parent)
     disable_duration_(false),
     timeout_(new QTimer(this)),
     fading_enabled_(false),
-    fader_(new QTimeLine(300, this))
+    fader_(new QTimeLine(300, this)),
+    toggle_mode_(false)
 {
   Qt::WindowFlags flags = Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint |
                           Qt::X11BypassWindowManagerHint;
@@ -222,7 +223,8 @@ void OSDPretty::paintEvent(QPaintEvent *) {
   p.drawRoundedRect(box, kBorderRadius, kBorderRadius);
 }
 
-void OSDPretty::SetMessage(const QString& summary, const QString& message,
+// Set the desidered message and then show the OSD
+void OSDPretty::ShowMessage(const QString& summary, const QString& message,
                            const QImage& image) {
 
   if (!image.isNull()) {
@@ -241,8 +243,22 @@ void OSDPretty::SetMessage(const QString& summary, const QString& message,
   if (isVisible())
     Reposition();
 
-  if (isVisible() && mode_ == Mode_Popup && !disable_duration())
-    timeout_->start(); // Restart the timer
+  if (isVisible() && mode_ == Mode_Popup) {
+    // The OSD is already visible, toggle or restart the timer
+    if (toggle_mode()) {
+      set_toggle_mode(false);
+      // If timeout is disabled, timer hadn't been started
+      if (!disable_duration())
+        timeout_->stop();
+      hide();
+    } else {
+      if (!disable_duration())
+        timeout_->start(); // Restart the timer
+    }
+  } else {
+    // The OSD is not visible, show it
+    show();
+  }
 }
 
 void OSDPretty::showEvent(QShowEvent* e) {

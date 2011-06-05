@@ -68,6 +68,7 @@ signals:
   void SeekBackward();
   void ShowHide();
   void ShowOSD();
+  void TogglePrettyOSD();
   void RateCurrentSong(int);
   void CycleShuffleMode();
   void CycleRepeatMode();
