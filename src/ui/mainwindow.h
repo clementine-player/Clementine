@@ -136,7 +136,7 @@ class MainWindow : public QMainWindow, public PlatformInterface {
 
  private slots:
   void FilePathChanged(const QString& path);
-
+  
   void MediaStopped();
   void MediaPaused();
   void MediaPlaying();
@@ -203,6 +203,7 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   void ShowLibraryConfig();
   void ReloadSettings();
   void ReloadAllSettings();
+  void RefreshStyleSheet();
   void SetHiddenInTray() { SetHiddenInTray(true); }
 
   void AddFile();

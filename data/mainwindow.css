@@ -8,12 +8,16 @@ darwin QMenu {
 
 #playlist {
   background-color: %palette-base;
+  alternate-background-color: %palette-alternate-base;
+
+}
+
+#playlist[background_enabled = "true"] {
   background-image: url(:logo.png);
   background-attachment: fixed;
   background-position: bottom right;
   background-repeat: none;
   background-clip: content;
-  alternate-background-color: %palette-alternate-base;
 }
 
 QToolButton {

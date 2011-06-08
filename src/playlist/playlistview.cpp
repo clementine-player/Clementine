@@ -840,6 +840,7 @@ void PlaylistView::ReloadSettings() {
   QSettings s;
   s.beginGroup(Playlist::kSettingsGroup);
   glow_enabled_ = s.value("glow_effect", true).toBool();
+  background_enabled_ = s.value("bg_enabled", true).toBool();
   header_->SetStretchEnabled(s.value("stretch", true).toBool());
 
   if (currently_glowing_ && glow_enabled_ && isVisible())
@@ -847,6 +848,8 @@ void PlaylistView::ReloadSettings() {
   if (!glow_enabled_)
     StopGlowing();
 
+  setProperty("background_enabled", background_enabled_);
+  
   if (setting_initial_header_layout_) {
     header_->SetColumnWidth(Playlist::Column_Length, 0.06);
     header_->SetColumnWidth(Playlist::Column_Track, 0.05);
@@ -866,6 +869,8 @@ void PlaylistView::SaveSettings() {
   s.setValue("glow_effect", glow_enabled_);
   s.setValue("stretch", header_->is_stretch_enabled());
   s.setValue("column_alignments", QVariant::fromValue(playlist_->column_alignments()));
+  s.setValue("bg_enabled", background_enabled_);
+
 }
 
 void PlaylistView::StretchChanged(bool stretch) {

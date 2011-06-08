@@ -55,7 +55,10 @@ private:
 
 class PlaylistView : public QTreeView {
   Q_OBJECT
-
+  Q_PROPERTY(bool background_enabled 
+             READ background_enabled 
+             WRITE set_background_enabled 
+             NOTIFY BackgroundPropertyChanged)
  public:
   PlaylistView(QWidget* parent = 0);
 
@@ -68,6 +71,7 @@ class PlaylistView : public QTreeView {
   void SetReadOnlySettings(bool read_only) { read_only_settings_ = read_only; }
 
   Playlist* playlist() const { return playlist_; }
+  bool      background_enabled() const { return background_enabled_; }
 
   // QTreeView
   void drawTree(QPainter* painter, const QRegion& region) const;
@@ -90,6 +94,7 @@ class PlaylistView : public QTreeView {
   void RightClicked(const QPoint& global_pos, const QModelIndex& index);
   void SeekTrack(int gap);
   void FocusOnFilterSignal(QKeyEvent *event);
+  void BackgroundPropertyChanged();
 
  protected:
   void contextMenuEvent(QContextMenuEvent* e);
@@ -129,6 +134,8 @@ class PlaylistView : public QTreeView {
   void UpdateCachedCurrentRowPixmap(QStyleOptionViewItemV4 option,
                                     const QModelIndex& index);
 
+  inline void set_background_enabled(bool bg) { background_enabled_ = bg; emit BackgroundPropertyChanged(); }
+
  private:
   static const int kGlowIntensitySteps;
   static const int kAutoscrollGraceTimeout;
@@ -140,12 +147,14 @@ class PlaylistView : public QTreeView {
   QModelIndex PrevEditableIndex(const QModelIndex& current);
 
   void RepositionDynamicControls();
-
+  
   PlaylistProxyStyle* style_;
   Playlist* playlist_;
   PlaylistHeader* header_;
   bool setting_initial_header_layout_;
   bool read_only_settings_;
+
+  bool background_enabled_;
 
   bool glow_enabled_;
   bool currently_glowing_;

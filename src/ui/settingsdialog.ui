@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>742</width>
-    <height>638</height>
+    <width>827</width>
+    <height>768</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -125,7 +125,7 @@
      <item>
       <widget class="QStackedWidget" name="stacked_widget">
        <property name="currentIndex">
-        <number>4</number>
+        <number>1</number>
        </property>
        <widget class="QWidget" name="playback_page">
         <layout class="QVBoxLayout" name="verticalLayout_10">
@@ -425,6 +425,41 @@
           </widget>
          </item>
          <item>
+          <widget class="QCheckBox" name="b_enable_background_img_">
+           <property name="text">
+            <string>Enable playlist background image</string>
+           </property>
+           <property name="checked">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QGroupBox" name="groupBox_3">
+           <property name="title">
+            <string>Language</string>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_13">
+            <item>
+             <widget class="QComboBox" name="language">
+              <item>
+               <property name="text">
+                <string>Use the system default</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_10">
+              <property name="text">
+               <string>You will need to restart Clementine if you change the language.</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
           <widget class="QGroupBox" name="startup_group_">
            <property name="title">
             <string>When Clementine starts</string>
@@ -475,6 +510,37 @@
               <property name="text">
                <string>Grey out non existent songs in my playlists</string>
               </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <widget class="QGroupBox" name="groupBox_8">
+           <property name="title">
+            <string>Using the menu to add a song will...</string>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_18">
+            <item>
+             <widget class="QComboBox" name="menu_playmode">
+              <property name="currentIndex">
+               <number>0</number>
+              </property>
+              <item>
+               <property name="text">
+                <string>Never start playing</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Play if there is nothing already playing</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Always start playing</string>
+               </property>
+              </item>
              </widget>
             </item>
            </layout>
@@ -533,62 +599,6 @@
                 <string>Always start playing</string>
                </property>
               </item>
-             </widget>
-            </item>
-           </layout>
-          </widget>
-         </item>
-         <item>
-          <widget class="QGroupBox" name="groupBox_8">
-           <property name="title">
-            <string>Using the menu to add a song will...</string>
-           </property>
-           <layout class="QVBoxLayout" name="verticalLayout_18">
-            <item>
-             <widget class="QComboBox" name="menu_playmode">
-              <property name="currentIndex">
-               <number>0</number>
-              </property>
-              <item>
-               <property name="text">
-                <string>Never start playing</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>Play if there is nothing already playing</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>Always start playing</string>
-               </property>
-              </item>
-             </widget>
-            </item>
-           </layout>
-          </widget>
-         </item>
-         <item>
-          <widget class="QGroupBox" name="groupBox_3">
-           <property name="title">
-            <string>Language</string>
-           </property>
-           <layout class="QVBoxLayout" name="verticalLayout_13">
-            <item>
-             <widget class="QComboBox" name="language">
-              <item>
-               <property name="text">
-                <string>Use the system default</string>
-               </property>
-              </item>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="label_10">
-              <property name="text">
-               <string>You will need to restart Clementine if you change the language.</string>
-              </property>
              </widget>
             </item>
            </layout>

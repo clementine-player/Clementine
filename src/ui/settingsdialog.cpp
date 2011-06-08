@@ -366,6 +366,7 @@ void SettingsDialog::accept() {
   s.beginGroup(Playlist::kSettingsGroup);
   s.setValue("glow_effect", ui_->current_glow->isChecked());
   s.setValue("greyoutdeleted", ui_->b_grey_out_deleted_->isChecked());
+  s.setValue("bg_enabled", ui_->b_enable_background_img_->isChecked());
   s.endGroup();
 
   s.beginGroup(Engine::Base::kSettingsGroup);
@@ -556,6 +557,7 @@ void SettingsDialog::showEvent(QShowEvent*) {
   s.beginGroup(Playlist::kSettingsGroup);
   ui_->current_glow->setChecked(s.value("glow_effect", true).toBool());
   ui_->b_grey_out_deleted_->setChecked(s.value("greyoutdeleted", false).toBool());
+  ui_->b_enable_background_img_->setChecked(s.value("bg_enabled", true).toBool());
   s.endGroup();
 
   s.beginGroup(Engine::Base::kSettingsGroup);

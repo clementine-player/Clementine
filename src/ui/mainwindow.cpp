@@ -436,6 +436,7 @@ MainWindow::MainWindow(
   connect(ui_->playlist->view(), SIGNAL(PlayPause()), player_, SLOT(PlayPause()));
   connect(ui_->playlist->view(), SIGNAL(RightClicked(QPoint,QModelIndex)), SLOT(PlaylistRightClick(QPoint,QModelIndex)));
   connect(ui_->playlist->view(), SIGNAL(SeekTrack(int)), ui_->track_slider, SLOT(Seek(int)));
+  connect(ui_->playlist->view(), SIGNAL(BackgroundPropertyChanged()), SLOT(RefreshStyleSheet()));
 
   connect(ui_->track_slider, SIGNAL(ValueChanged(int)), player_, SLOT(SeekTo(int)));
 
@@ -716,6 +717,9 @@ MainWindow::MainWindow(
   // Reload pretty OSD to avoid issues with fonts
   osd_->ReloadPrettyOSDSettings();
 
+  // Reload playlist settings, for BG and glowing
+  ui_->playlist->view()->ReloadSettings();
+
 #ifndef Q_OS_DARWIN
   StartupBehaviour behaviour =
       StartupBehaviour(settings_.value("startupbehaviour", Startup_Remember).toInt());
@@ -798,6 +802,7 @@ void MainWindow::ReloadSettings() {
       s.value("doubleclick_playmode", PlayBehaviour_IfStopped).toInt());
   menu_playmode_ = PlayBehaviour(
       s.value("menu_playmode", PlayBehaviour_IfStopped).toInt());
+
 }
 
 void MainWindow::ReloadAllSettings() {
@@ -820,6 +825,9 @@ void MainWindow::ReloadAllSettings() {
 #endif
 }
 
+void MainWindow::RefreshStyleSheet() {
+  setStyleSheet(styleSheet());  
+}
 void MainWindow::MediaStopped() {
   setWindowTitle(QCoreApplication::applicationName());
 
