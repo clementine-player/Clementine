@@ -99,7 +99,7 @@ private:
 //! base class for signal receivers
 /*!
 */
-class PythonQtSignalReceiverBase : public QObject {
+class PYTHONQT_EXPORT PythonQtSignalReceiverBase : public QObject {
   Q_OBJECT
 public:
   PythonQtSignalReceiverBase(QObject* obj):QObject(obj) {};
@@ -108,7 +108,7 @@ public:
 //! receives all signals for one QObject
 /*! we derive from our base but do not declare the QObject macro because we want to reimplement qt_metacall only.
 */
-class PythonQtSignalReceiver : public PythonQtSignalReceiverBase {
+class PYTHONQT_EXPORT PythonQtSignalReceiver : public PythonQtSignalReceiverBase {
 
 public:
   PythonQtSignalReceiver(QObject* obj);
