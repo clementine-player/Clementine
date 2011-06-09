@@ -39,6 +39,7 @@ public:
 
   void Load(Playlist* destination, int row, bool play_now, bool enqueue,
             const QList<QUrl>& urls);
+  void LoadAudioCD(Playlist* destination, int row, bool play_now, bool enqueue);
 
 signals:
   void Error(const QString& message);
@@ -46,6 +47,7 @@ signals:
 private slots:
   void PendingLoadFinished(bool success);
   void DestinationDestroyed();
+  void AudioCDTagsLoaded(bool success);
 
 private:
   void PartiallyFinished();

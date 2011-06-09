@@ -52,6 +52,8 @@ QUrl SongPlaylistItem::Url() const {
 }
 
 void SongPlaylistItem::Reload() {
+  if (song_.url().scheme() != "file")
+    return;
   QString old_filename = song_.url().toLocalFile();
   int old_directory_id = song_.directory_id();
 

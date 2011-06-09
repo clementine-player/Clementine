@@ -62,6 +62,7 @@ using smart_playlists::GeneratorPtr;
 
 using boost::shared_ptr;
 
+const char* Playlist::kCddaMimeType = "x-content/audio-cdda";
 const char* Playlist::kRowsMimetype = "application/x-clementine-playlist-rows";
 const char* Playlist::kPlayNowMimetype = "application/x-clementine-play-now";
 
@@ -687,6 +688,10 @@ bool Playlist::dropMimeData(const QMimeData* data, Qt::DropAction action, int ro
         }
       }
     }
+  } else if (data->hasFormat(kCddaMimeType)) {
+    SongLoaderInserter* inserter = new SongLoaderInserter(task_manager_, library_);
+    connect(inserter, SIGNAL(Error(QString)), SIGNAL(LoadTracksError(QString)));
+    inserter->LoadAudioCD(this, row, play_now, enqueue_now);
   } else if (data->hasUrls()) {
     // URL list dragged from the file list or some other app
     InsertUrls(data->urls(), row, play_now, enqueue_now);
@@ -984,6 +989,7 @@ void Playlist::UpdateItems(const SongList& songs) {
       }
     }
   }
+  Save();
 }
 
 QMimeData* Playlist::mimeData(const QModelIndexList& indexes) const {
@@ -1717,6 +1723,7 @@ bool Playlist::ApplyValidityOnCurrentSong(const QUrl& url, bool valid) {
 
     // if validity has changed, reload the item
     if(!current_song.is_stream() &&
+        !current_song.is_cdda() &&
         current_song.url() == url &&
         current_song.is_valid() != QFile::exists(current_song.url().toLocalFile())) {
       ReloadItems(QList<int>() << current_row());

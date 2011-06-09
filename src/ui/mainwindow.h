@@ -210,6 +210,7 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   void AddFolder();
   void AddStream();
   void AddStreamAccepted();
+  void AddCDTracks();
 
   void CommandlineOptionsReceived(const QByteArray& serialized_options);
 

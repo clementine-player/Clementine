@@ -423,6 +423,7 @@
      <string>Music</string>
     </property>
     <addaction name="action_open_media"/>
+    <addaction name="action_open_cd" />
     <addaction name="separator"/>
     <addaction name="action_previous_track"/>
     <addaction name="action_play_pause"/>
@@ -657,6 +658,11 @@
    <property name="text">
     <string>Open media...</string>
    </property>
+  </action>
+  <action name="action_open_cd">
+    <property name="text">
+      <string>Open CD...</string>
+    </property>
   </action>
   <action name="action_cover_manager">
    <property name="text">

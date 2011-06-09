@@ -16,6 +16,7 @@
 */
 
 #include "musicbrainzclient.h"
+#include "core/logging.h"
 #include "core/network.h"
 
 #include <QCoreApplication>
@@ -23,7 +24,8 @@
 #include <QXmlStreamReader>
 #include <QtDebug>
 
-const char* MusicBrainzClient::kUrl = "http://musicbrainz.org/ws/1/track/";
+const char* MusicBrainzClient::kTrackUrl = "http://musicbrainz.org/ws/1/track/";
+const char* MusicBrainzClient::kDiscUrl = "http://musicbrainz.org/ws/1/release/";
 const int MusicBrainzClient::kDefaultTimeout = 5000; // msec
 
 MusicBrainzClient::MusicBrainzClient(QObject* parent)
@@ -40,13 +42,31 @@ void MusicBrainzClient::Start(int id, const QString& puid) {
   parameters << Param("type", "xml")
              << Param("puid", puid);
 
-  QUrl url(kUrl);
+  QUrl url(kTrackUrl);
   url.setQueryItems(parameters);
   QNetworkRequest req(url);
 
   QNetworkReply* reply = network_->get(req);
   connect(reply, SIGNAL(finished()), SLOT(RequestFinished()));
   requests_[reply] = id;
+
+  timeouts_->AddReply(reply);
+}
+
+void MusicBrainzClient::StartDiscIdRequest(const QString& discid) {
+  typedef QPair<QString, QString> Param;
+
+  QList<Param> parameters;
+  parameters << Param("type", "xml")
+             << Param("discid", discid);
+
+  QUrl url(kDiscUrl);
+  url.setQueryItems(parameters);
+  QNetworkRequest req(url);
+
+  QNetworkReply* reply = network_->get(req);
+  connect(reply, SIGNAL(finished()), SLOT(DiscIdRequestFinished()));
+  //requests_[reply] = id;
 
   timeouts_->AddReply(reply);
 }
@@ -61,6 +81,53 @@ void MusicBrainzClient::CancelAll() {
   qDeleteAll(requests_.keys());
   requests_.clear();
 }
+
+void MusicBrainzClient::DiscIdRequestFinished() {
+  QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
+  if (!reply)
+    return;
+    reply->deleteLater();
+
+  ResultList ret;
+  QString artist;
+  QString album;
+  
+  if (reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt() != 200) {
+    emit Finished(artist, album, ret);
+    return;
+  }
+
+  // Parse xml result:
+  // -get title
+  // -get artist
+  // -get all the tracks' tags
+  QXmlStreamReader reader(reply);
+  while (!reader.atEnd()) {
+    QXmlStreamReader::TokenType type = reader.readNext();
+    if (type == QXmlStreamReader::StartElement) {
+      QStringRef name = reader.name();
+      if (name == "title") {
+        album = reader.readElementText();
+      } else if (name == "artist") {
+        ParseArtist(&reader, &artist);
+      } else if (name == "track-list") {
+        break;
+      }
+    }
+  }
+
+  while (!reader.atEnd()) {
+    if (reader.readNext() == QXmlStreamReader::StartElement && reader.name() == "track") {
+      Result track = ParseTrack(&reader);
+      if (!track.title_.isEmpty()) {
+        ret << track;
+      }
+    }
+  }
+
+  emit Finished(artist, album, ret);
+}
+
 
 void MusicBrainzClient::RequestFinished() {
   QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());

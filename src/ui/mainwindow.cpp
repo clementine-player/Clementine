@@ -135,6 +135,8 @@
 
 #include <cmath>
 
+#include <gst/cdda/gstcddabasesrc.h>
+
 using boost::shared_ptr;
 using boost::scoped_ptr;
 
@@ -288,6 +290,7 @@ MainWindow::MainWindow(
   ui_->action_jump->setIcon(IconLoader::Load("go-jump"));
   ui_->action_next_track->setIcon(IconLoader::Load("media-skip-forward"));
   ui_->action_open_media->setIcon(IconLoader::Load("document-open"));
+  ui_->action_open_cd->setIcon(IconLoader::Load("media-optical"));
   ui_->action_play_pause->setIcon(IconLoader::Load("media-playback-start"));
   ui_->action_previous_track->setIcon(IconLoader::Load("media-skip-backward"));
   ui_->action_quit->setIcon(IconLoader::Load("application-exit"));
@@ -336,6 +339,7 @@ MainWindow::MainWindow(
   connect(ui_->action_about_qt, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
   connect(ui_->action_shuffle, SIGNAL(triggered()), playlists_, SLOT(ShuffleCurrent()));
   connect(ui_->action_open_media, SIGNAL(triggered()), SLOT(AddFile()));
+  connect(ui_->action_open_cd, SIGNAL(triggered()), SLOT(AddCDTracks()));
   connect(ui_->action_add_file, SIGNAL(triggered()), SLOT(AddFile()));
   connect(ui_->action_add_folder, SIGNAL(triggered()), SLOT(AddFolder()));
   connect(ui_->action_add_stream, SIGNAL(triggered()), SLOT(AddStream()));
@@ -1598,6 +1602,15 @@ void MainWindow::AddStream() {
 void MainWindow::AddStreamAccepted() {
   MimeData* data = new MimeData;
   data->setUrls(QList<QUrl>() << add_stream_dialog_->url());
+  AddToPlaylist(data);
+}
+
+void MainWindow::AddCDTracks() {
+  MimeData* data = new MimeData;
+  // We are putting empty data, but we specify cdda mimetype to indicate that
+  // we want to load audio cd tracks
+  data->open_in_new_playlist_ = true;
+  data->setData(Playlist::kCddaMimeType, QByteArray());
   AddToPlaylist(data);
 }
 

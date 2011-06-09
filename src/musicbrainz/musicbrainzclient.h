@@ -53,6 +53,7 @@ public:
   // Starts a request and returns immediately.  Finished() will be emitted
   // later with the same ID.
   void Start(int id, const QString& puid);
+  void StartDiscIdRequest(const QString& puid);
 
   // Cancels the request with the given ID.  Finished() will never be emitted
   // for that ID.  Does nothing if there is no request with the given ID.
@@ -63,10 +64,15 @@ public:
   void CancelAll();
 
 signals:
+  // Finished signal emitted when fechting songs tags
   void Finished(int id, const MusicBrainzClient::ResultList& result);
+  // Finished signal emitted when fechting album's songs tags using DiscId
+  void Finished(const QString& artist, const QString album,
+                const MusicBrainzClient::ResultList& result);
 
 private slots:
   void RequestFinished();
+  void DiscIdRequestFinished();
 
 private:
   static Result ParseTrack(QXmlStreamReader* reader);
@@ -74,7 +80,8 @@ private:
   static void ParseAlbum(QXmlStreamReader* reader, QString* album, int* track);
 
 private:
-  static const char* kUrl;
+  static const char* kTrackUrl;
+  static const char* kDiscUrl;
   static const int kDefaultTimeout;
 
   QNetworkAccessManager* network_;

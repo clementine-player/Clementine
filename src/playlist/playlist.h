@@ -128,6 +128,7 @@ class Playlist : public QAbstractListModel {
     LastFM_Queued,    // Track added to the queue for scrobbling
   };
 
+  static const char* kCddaMimeType;
   static const char* kRowsMimetype;
   static const char* kPlayNowMimetype;
 

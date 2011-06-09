@@ -22,6 +22,7 @@
 #include <QUrl>
 
 #include "song.h"
+#include "musicbrainz/musicbrainzclient.h"
 
 #include <boost/shared_ptr.hpp>
 
@@ -62,6 +63,7 @@ public:
   // playlist and replace the partially-loaded items by the new ones, fully
   // loaded.
   void EffectiveSongsLoad();
+  Result LoadAudioCD();
 
 signals:
   void LoadFinished(bool success);
@@ -69,6 +71,8 @@ signals:
 private slots:
   void Timeout();
   void StopTypefind();
+  void AudioCDTagsLoaded(const QString& artist, const QString& album,
+                         MusicBrainzClient::ResultList);
 
 private:
   enum State {

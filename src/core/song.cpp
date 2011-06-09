@@ -131,6 +131,7 @@ QString Song::TextForFiletype(FileType type) {
     case Song::Type_Aiff:      return QObject::tr("AIFF");
     case Song::Type_Wav:       return QObject::tr("Wav");
     case Song::Type_TrueAudio: return QObject::tr("TrueAudio");
+    case Song::Type_Cdda:      return QObject::tr("CDDA");
 
     case Song::Type_Stream:    return QObject::tr("Stream");
 

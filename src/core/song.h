@@ -110,6 +110,7 @@ class Song {
     Type_Aiff = 9,
     Type_Wav = 10,
     Type_TrueAudio = 11,
+    Type_Cdda = 12,
 
     Type_Stream = 99,
   };
@@ -206,6 +207,7 @@ class Song {
   int filesize() const { return d->filesize_; }
   FileType filetype() const { return d->filetype_; }
   bool is_stream() const { return d->filetype_ == Type_Stream; }
+  bool is_cdda() const { return d->filetype_ == Type_Cdda; }
 
   const QString& art_automatic() const { return d->art_automatic_; }
   const QString& art_manual() const { return d->art_manual_; }
