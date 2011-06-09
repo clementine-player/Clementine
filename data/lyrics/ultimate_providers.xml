@@ -205,16 +205,16 @@
       <item begin="&lt;div style=&quot;float:left&quot;" end="&gt;"/>
     </exclude>
   </provider>
-  <provider name="vagalume.uol.com.br" title="{title} de {artist} no VAGALUME" charset="iso-8859-1" url="http://vagalume.uol.com.br/{artist}/{title}.html">
+  <provider name="vagalume.com.br" title="{title} de {artist} no VAGALUME" charset="iso-8859-1" url="http://vagalume.com.br/{artist}/{title}.html">
     <urlFormat replace=" _@,;&amp;\/'&quot;." with="-"/>
     <extract>
-      <item tag="&lt;div class=&quot;tab_original&quot;&gt;"/>
+      <item tag="&lt;span class=&quot;editable_area&quot;&gt;"/>
     </extract>
   </provider>
-  <provider name="vagalume.uol.com.br (Portuguese translations)" title="{title} de {artist} no VAGALUME" charset="iso-8859-1" url="http://vagalume.uol.com.br/{artist}/{title}-traducao.html">
+  <provider name="vagalume.com.br (Portuguese translations)" title="{title} de {artist} no VAGALUME" charset="iso-8859-1" url="http://vagalume.com.br/{artist}/{title}-traducao.html">
     <urlFormat replace=" _@,;&amp;\/'&quot;." with="-"/>
     <extract>
-      <item tag="&lt;div class=&quot;tab_tra_pt&quot;&gt;"/>
+      <item tag="&lt;div class=&quot;tab_traducao sideBySide lyricArea tab_tra_pt&quot;&gt;"/>
     </extract>
   </provider>
 </lyricproviders>

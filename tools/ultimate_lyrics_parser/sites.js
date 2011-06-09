@@ -350,24 +350,24 @@ const siteDescriptors = {
 			{rep: "_", punct: " _@,;&\\/'\"." },
 		]
 	},
-	"vagalume.uol.com.br": {
+	"vagalume.com.br": {
 		title: "{title} de {artist} no VAGALUME",
 		charset: "iso-8859-1",
-		extract: '<div class="tab_original">',
+		extract: '<span class="editable_area">',
 //		exclude: [['<div style="float:left"','>']],
 
-		url: "http://vagalume.uol.com.br/{artist}/{title}.html",
+		url: "http://vagalume.com.br/{artist}/{title}.html",
 		urlFormat : [
 			{rep: "-", punct: " _@,;&\\/'\"." },
 		]
 	},
-	"vagalume.uol.com.br (Portuguese translations)": {
+	"vagalume.com.br (Portuguese translations)": {
 		title: "{title} de {artist} no VAGALUME",
 		charset: "iso-8859-1",
-		extract: '<div class="tab_tra_pt">',
+		extract: '<div class="tab_traducao sideBySide lyricArea tab_tra_pt">',
 //		exclude: [['<div style="float:left"','>']],
 
-		url: "http://vagalume.uol.com.br/{artist}/{title}-traducao.html",
+		url: "http://vagalume.com.br/{artist}/{title}-traducao.html",
 		urlFormat : [
 			{rep: "-", punct: " _@,;&\\/'\"." },
 		]

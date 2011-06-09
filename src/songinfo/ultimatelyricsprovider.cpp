@@ -56,6 +56,7 @@ void UltimateLyricsProvider::FetchInfo(int id, const Song& metadata) {
   DoUrlReplace("{a}",      FirstChar(metadata.artist()), &url_text);
 
   QUrl url(url_text);
+  qLog(Debug) << "Fetching lyrics from" << url;
 
   // Fetch the URL, follow redirects
   redirect_count_ = 0;
@@ -106,6 +107,7 @@ void UltimateLyricsProvider::LyricsFetched() {
   // Check for invalid indicators
   foreach (const QString& indicator, invalid_indicators_) {
     if (original_content.contains(indicator)) {
+      qLog(Debug) << "Found invalid indicator" << indicator;
       emit Finished(id);
       return;
     }
@@ -115,6 +117,8 @@ void UltimateLyricsProvider::LyricsFetched() {
   foreach (const Rule& rule, extract_rules_) {
     QString content = original_content;
     ApplyExtractRule(rule, &content);
+
+    qLog(Debug) << "Extract rule" << rule << "matched" << content.length();
 
     if (!content.isEmpty())
       lyrics = content;
