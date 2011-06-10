@@ -117,7 +117,7 @@ SongLoader::Result SongLoader::LoadAudioCD() {
   // Get number of tracks
   GstFormat fmt = gst_format_get_by_nick ("track");
   GstFormat out_fmt = fmt;
-  qint64 num_tracks;
+  gint64 num_tracks;
   if (!gst_element_query_duration (cdda, &out_fmt, &num_tracks) || out_fmt != fmt) {
     qLog(Error) << "Error while querying cdda GstElement";
   }
