@@ -126,7 +126,8 @@ SongLoader::Result SongLoader::LoadAudioCD() {
     // Init song
     Song song;
     quint64 duration;
-    if (gst_tag_list_get_uint64 (GST_CDDA_BASE_SRC(cdda)->tracks[track_number-1].tags, GST_TAG_DURATION, &duration)) {
+    // quint64 == ulonglong and guint64 == ulong, therefore we must cast
+    if (gst_tag_list_get_uint64 (GST_CDDA_BASE_SRC(cdda)->tracks[track_number-1].tags, GST_TAG_DURATION, (guint64*) &duration)) {
       song.set_length_nanosec(duration);
     }
     song.set_valid(true);
