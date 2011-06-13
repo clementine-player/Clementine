@@ -165,14 +165,14 @@ static BreakpadRef InitBreakpad() {
 
   int key_code = (([event data1] & 0xFFFF0000) >> 16);
   int key_flags = ([event data1] & 0x0000FFFF);
-  BOOL key_is_pressed = (((key_flags & 0xFF00) >> 8)) == 0xA;
+  BOOL key_is_released = (((key_flags & 0xFF00) >> 8)) == 0xB;
   // not used. keep just in case
   //  int key_repeat = (key_flags & 0x1);
 
   if (!shortcut_handler_) {
     return;
   }
-  if (key_is_pressed) {
+  if (key_is_released) {
     shortcut_handler_->MacMediaKeyPressed(key_code);
   }
 }
