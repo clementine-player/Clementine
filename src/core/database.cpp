@@ -29,6 +29,7 @@
 #include <QSqlQuery>
 #include <QtDebug>
 #include <QThread>
+#include <QUrl>
 #include <QVariant>
 
 const char* Database::kDatabaseFilename = "clementine.db";
@@ -506,10 +507,42 @@ void Database::UpdateDatabaseSchema(int version, QSqlDatabase &db) {
     filename = ":/schema/schema.sql";
   else
     filename = QString(":/schema/schema-%1.sql").arg(version);
-
+  
   ScopedTransaction t(&db);
+  
+  if (version == 31) {
+    // This version used to do a bad job of converting filenames in the songs
+    // table to file:// URLs.  Now we do it properly here instead.
+    
+    UrlEncodeFilenameColumn("songs", db);
+    UrlEncodeFilenameColumn("playlist_items", db);
+  }
+  
   ExecFromFile(filename, db, version - 1);
   t.Commit();
+}
+
+void Database::UrlEncodeFilenameColumn(const QString& table, QSqlDatabase& db) {
+  QSqlQuery select(QString("SELECT ROWID, filename FROM %1").arg(table), db);
+  QSqlQuery update(QString("UPDATE %1 SET filename=:filename WHERE ROWID=:id").arg(table), db);
+  
+  select.exec();
+  if (CheckErrors(select)) return;
+  while (select.next()) {
+    const int rowid = select.value(0).toInt();
+    const QString filename = select.value(1).toString();
+    
+    if (filename.isEmpty() || filename.contains("://")) {
+      continue;
+    }
+    
+    const QUrl url = QUrl::fromLocalFile(filename);
+    
+    update.bindValue(":filename", url.toEncoded());
+    update.bindValue(":id", rowid);
+    update.exec();
+    CheckErrors(update);
+  }
 }
 
 void Database::ExecFromFile(const QString &filename, QSqlDatabase &db,
