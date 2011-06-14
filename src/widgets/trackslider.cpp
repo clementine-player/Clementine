@@ -120,7 +120,8 @@ void TrackSlider::SetCanSeek(bool can_seek) {
 }
 
 void TrackSlider::Seek(int gap) {
-  ui_->slider->setValue(ui_->slider->value()+gap);
+  if (ui_->slider->isEnabled())
+    ui_->slider->setValue(ui_->slider->value()+gap);
 }
 
 void TrackSlider::ValueMaybeChanged(int value) {
