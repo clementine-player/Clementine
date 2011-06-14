@@ -170,7 +170,9 @@ void LibraryModel::SongsDiscovered(const SongList& songs) {
           case GroupBy_YearAlbum:
             key = PrettyYearAlbum(qMax(0, song.year()), song.album()); break;
           case GroupBy_FileType:    key = song.filetype(); break;
-          case GroupBy_None: Q_ASSERT(0); break;
+          case GroupBy_None:
+            qLog(Error) << "GroupBy_None";
+            break;
         }
 
         // Does it exist already?
@@ -258,7 +260,7 @@ QString LibraryModel::DividerKey(GroupBy type, LibraryItem* item) const {
   case GroupBy_None:
     return QString();
   }
-  Q_ASSERT(0);
+  qLog(Error) << "Unknown GroupBy type" << type << "for item" << item->display_text;
   return QString();
 }
 
@@ -290,7 +292,7 @@ QString LibraryModel::DividerDisplayText(GroupBy type, const QString& key) const
     // fallthrough
     ;
   }
-  Q_ASSERT(0);
+  qLog(Error) << "Unknown GroupBy type" << type << "for divider key" << key;
   return QString();
 }
 
@@ -728,7 +730,7 @@ void LibraryModel::FilterQuery(GroupBy type, LibraryItem* item, LibraryQuery* q)
     q->AddWhere("filetype", item->metadata.filetype());
     break;
   case GroupBy_None:
-    Q_ASSERT(0);
+    qLog(Error) << "Unknown GroupBy type" << type << "used in filter";
     break;
   }
 }
@@ -1075,7 +1077,7 @@ const LibraryModel::GroupBy& LibraryModel::Grouping::operator [](int i) const {
     case 1: return second;
     case 2: return third;
   }
-  Q_ASSERT(0);
+  qLog(Error) << "LibraryModel::Grouping[] index out of range" << i;
   return first;
 }
 
@@ -1085,7 +1087,7 @@ LibraryModel::GroupBy& LibraryModel::Grouping::operator [](int i) {
     case 1: return second;
     case 2: return third;
   }
-  Q_ASSERT(0);
+  qLog(Error) << "LibraryModel::Grouping[] index out of range" << i;
   return first;
 }
 
