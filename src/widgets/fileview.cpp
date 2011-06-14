@@ -29,6 +29,10 @@
 #include <QMessageBox>
 #include <QScrollBar>
 
+const char* FileView::kFileFilter = "*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma \
+                                    *.mp4 *.spx *.wav *.m3u *.m3u8 *.pls *.xspf \
+                                    *.asx *.asxini *.cue";
+
 FileView::FileView(QWidget* parent)
     : QWidget(parent),
       ui_(new Ui_FileView),
@@ -44,16 +48,12 @@ FileView::FileView(QWidget* parent)
   ui_->forward->setIcon(IconLoader::Load("go-next"));
   ui_->home->setIcon(IconLoader::Load("go-home"));
   ui_->up->setIcon(IconLoader::Load("go-up"));
-  QIcon toggle_icon(IconLoader::Load("audio-x-disabled"));
-  toggle_icon.addPixmap(IconLoader::Load("audio-x-generic").pixmap(22), QIcon::Normal, QIcon::On);
-  ui_->toggle_filter->setIcon(toggle_icon);
 
   connect(ui_->back, SIGNAL(clicked()), undo_stack_, SLOT(undo()));
   connect(ui_->forward, SIGNAL(clicked()), undo_stack_, SLOT(redo()));
   connect(ui_->home, SIGNAL(clicked()), SLOT(FileHome()));
   connect(ui_->up, SIGNAL(clicked()), SLOT(FileUp()));
   connect(ui_->path, SIGNAL(textChanged(QString)), SLOT(ChangeFilePath(QString)));
-  connect(ui_->toggle_filter, SIGNAL(clicked()), SLOT(ToggleFilter()));
 
   connect(undo_stack_, SIGNAL(canUndoChanged(bool)), ui_->back, SLOT(setEnabled(bool)));
   connect(undo_stack_, SIGNAL(canRedoChanged(bool)), ui_->forward, SLOT(setEnabled(bool)));
@@ -66,11 +66,8 @@ FileView::FileView(QWidget* parent)
   connect(ui_->list, SIGNAL(CopyToDevice(QList<QUrl>)), SIGNAL(CopyToDevice(QList<QUrl>)));
   connect(ui_->list, SIGNAL(Delete(QStringList)), SLOT(Delete(QStringList)));
 
-  QString filter(MainWindow::kMusicFilterSpec);
-  // filter list strings are formatted as such: 'text (filters separated by spaces)'
-  filter.replace(QRegExp(".*[(]"), "");
-  filter.replace(QRegExp("[)].*"), "");
-  filter_list_ = filter.split(" ");
+  QString filter(FileView::kFileFilter);
+  filter_list_ << filter.split(" ");
 }
 
 FileView::~FileView() {
@@ -108,14 +105,6 @@ void FileView::FileUp() {
 
 void FileView::FileHome() {
   ChangeFilePath(QDir::homePath());
-}
-
-void FileView::ToggleFilter() {
-  if(ui_->toggle_filter->isChecked()) {
-    model_->setNameFilters(filter_list_);
-  } else {
-    model_->setNameFilters(QStringList("*"));
-  }
 }
 
 void FileView::ChangeFilePath(const QString& new_path_native) {
@@ -220,7 +209,7 @@ void FileView::showEvent(QShowEvent* e) {
 
   model_ = new QFileSystemModel(this);
   
-  model_->setNameFilters(QStringList("*"));
+  model_->setNameFilters(filter_list_);
   // if an item fails the filter, hide it
   model_->setNameFilterDisables(false);
 

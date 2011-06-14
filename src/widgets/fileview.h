@@ -42,6 +42,8 @@ class FileView : public QWidget {
   FileView(QWidget* parent = 0);
   ~FileView();
 
+  static const char* kFileFilter;
+
   void SetPath(const QString& path);
   void SetTaskManager(TaskManager* task_manager);
 
@@ -59,7 +61,6 @@ class FileView : public QWidget {
  private slots:
   void FileUp();
   void FileHome();
-  void ToggleFilter();
   void ChangeFilePath(const QString& new_path);
   void ItemActivated(const QModelIndex& index);
   void ItemDoubleClick(const QModelIndex& index);
