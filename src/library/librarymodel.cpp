@@ -22,6 +22,7 @@
 #include "libraryview.h"
 #include "sqlrow.h"
 #include "core/database.h"
+#include "core/logging.h"
 #include "core/taskmanager.h"
 #include "covers/albumcoverloader.h"
 #include "playlist/songmimedata.h"
