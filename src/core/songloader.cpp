@@ -106,28 +106,34 @@ SongLoader::Result SongLoader::LoadAudioCD() {
   GstElement *cdda = gst_element_make_from_uri (GST_URI_SRC, "cdda://", NULL);
   if (cdda == NULL) {
     qLog(Error) << "Error while creating CDDA GstElement";
+    return Error;
   }
 
   // Change the element's state to ready and paused, to be able to query it
   if (gst_element_set_state(cdda, GST_STATE_READY) == GST_STATE_CHANGE_FAILURE
-    || gst_element_set_state(cdda, GST_STATE_PAUSED) == GST_STATE_CHANGE_FAILURE) {
+      || gst_element_set_state(cdda, GST_STATE_PAUSED) == GST_STATE_CHANGE_FAILURE) {
     qLog(Error) << "Error while changing CDDA GstElement's state";
+    gst_object_unref(GST_OBJECT(cdda));
+    return Error;
   }
 
   // Get number of tracks
   GstFormat fmt = gst_format_get_by_nick ("track");
   GstFormat out_fmt = fmt;
-  gint64 num_tracks;
+  gint64 num_tracks = 0;
   if (!gst_element_query_duration (cdda, &out_fmt, &num_tracks) || out_fmt != fmt) {
     qLog(Error) << "Error while querying cdda GstElement";
+    gst_object_unref(GST_OBJECT(cdda));
+    return Error;
   }
 
-  for (int track_number=1; track_number<=num_tracks; track_number++) {
+  for (int track_number = 1; track_number <= num_tracks; track_number++) {
     // Init song
     Song song;
-    guint64 duration;
+    guint64 duration = 0;
     // quint64 == ulonglong and guint64 == ulong, therefore we must cast
-    if (gst_tag_list_get_uint64 (GST_CDDA_BASE_SRC(cdda)->tracks[track_number-1].tags, GST_TAG_DURATION, &duration)) {
+    if (gst_tag_list_get_uint64 (GST_CDDA_BASE_SRC(cdda)->tracks[track_number-1].tags,
+                                 GST_TAG_DURATION, &duration)) {
       song.set_length_nanosec((quint64)duration);
     }
     song.set_valid(true);
@@ -151,21 +157,29 @@ SongLoader::Result SongLoader::LoadAudioCD() {
   gst_message_parse_tag (msg, &tags);
   char *string_mb = NULL;
   if (gst_tag_list_get_string (tags, GST_TAG_CDDA_MUSICBRAINZ_DISCID, &string_mb)) {
-  }
-  QString musicbrainz_discid(string_mb);
-  qLog(Info) << "MusicBrainz discid: " << musicbrainz_discid;
+    QString musicbrainz_discid(string_mb);
+    qLog(Info) << "MusicBrainz discid: " << musicbrainz_discid;
 
-  MusicBrainzClient *musicbrainz_client = new MusicBrainzClient(this);
-  connect(musicbrainz_client,
-          SIGNAL(Finished(const QString&, const QString&, MusicBrainzClient::ResultList)),
-          SLOT(AudioCDTagsLoaded(const QString&, const QString&, MusicBrainzClient::ResultList)));
-  musicbrainz_client->StartDiscIdRequest(musicbrainz_discid);
+    MusicBrainzClient *musicbrainz_client = new MusicBrainzClient(this);
+    connect(musicbrainz_client,
+            SIGNAL(Finished(const QString&, const QString&, MusicBrainzClient::ResultList)),
+            SLOT(AudioCDTagsLoaded(const QString&, const QString&, MusicBrainzClient::ResultList)));
+    musicbrainz_client->StartDiscIdRequest(musicbrainz_discid);
+    g_free(string_mb);
+  }
+  
+  // Clean all the Gstreamer objects we have used: we don't need them anymore
+  gst_object_unref(GST_OBJECT(cdda));
+  gst_element_set_state (pipe, GST_STATE_NULL);
+  gst_object_unref(GST_OBJECT(pipe));
+  gst_object_unref(GST_OBJECT(msg));
+  gst_object_unref(GST_OBJECT(tags));
 
  return Success;
 }
 
 void SongLoader::AudioCDTagsLoaded(const QString& artist, const QString& album,
-                                   MusicBrainzClient::ResultList results) {
+                                   const MusicBrainzClient::ResultList& results) {
   // Remove previously added songs metadata, because there are not needed
   // and that we are going to fill it with new (more complete) ones
   songs_.clear();
@@ -177,7 +191,7 @@ void SongLoader::AudioCDTagsLoaded(const QString& artist, const QString& album,
     song.set_title(ret.title_);
     song.set_length_nanosec(ret.duration_msec_ * kNsecPerMsec);
     song.set_track(track_number);
-    // We need to set url: that's how playlist whill know what item to update
+    // We need to set url: that's how playlist will find the correct item to update
     song.set_url(QUrl(QString("cdda://%1").arg(track_number++)));
     songs_ << song;
   }

@@ -72,7 +72,7 @@ private slots:
   void Timeout();
   void StopTypefind();
   void AudioCDTagsLoaded(const QString& artist, const QString& album,
-                         MusicBrainzClient::ResultList);
+                         const MusicBrainzClient::ResultList& results);
 
 private:
   enum State {

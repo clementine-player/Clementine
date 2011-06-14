@@ -86,7 +86,7 @@ void MusicBrainzClient::DiscIdRequestFinished() {
   QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
   if (!reply)
     return;
-    reply->deleteLater();
+  reply->deleteLater();
 
   ResultList ret;
   QString artist;

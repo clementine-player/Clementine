@@ -114,6 +114,7 @@ void SongLoaderInserter::AudioCDTagsLoaded(bool success) {
     destination_->UpdateItems(loader->songs());
   else
     qLog(Error) << "Error while getting audio CD metadata from MusicBrainz";
+  deleteLater();
 }
 
 void SongLoaderInserter::PendingLoadFinished(bool success) {
