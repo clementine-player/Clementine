@@ -556,7 +556,7 @@ void LibraryModel::LazyPopulate(LibraryItem* parent, bool signal) {
 
   // Walk up through the item's parents adding filters as necessary
   LibraryItem* p = parent;
-  while (p != root_) {
+  while (p && p->type == LibraryItem::Type_Container) {
     FilterQuery(group_by_[p->container_level], p, &q);
     p = p->parent;
   }
@@ -1094,6 +1094,7 @@ void LibraryModel::CreateSmartPlaylists() {
   smart_playlist_node_->container_level = 0;
   smart_playlist_node_->sort_text = "\0";
   smart_playlist_node_->key = tr("Smart playlists");
+  smart_playlist_node_->lazy_loaded = true;
 
   QSettings s;
   s.beginGroup(kSmartPlaylistsSettingsGroup);
