@@ -103,16 +103,17 @@ SongLoader::Result SongLoader::LoadLocalPartial(const QString& filename) {
 
 SongLoader::Result SongLoader::LoadAudioCD() {
   // Create gstreamer cdda element
-  GstElement *cdda = gst_element_make_from_uri (GST_URI_SRC, "cdda://", NULL);
+  GstElement* cdda = gst_element_make_from_uri (GST_URI_SRC, "cdda://", NULL);
   if (cdda == NULL) {
     qLog(Error) << "Error while creating CDDA GstElement";
     return Error;
   }
 
   // Change the element's state to ready and paused, to be able to query it
-  if (gst_element_set_state(cdda, GST_STATE_READY) == GST_STATE_CHANGE_FAILURE
-      || gst_element_set_state(cdda, GST_STATE_PAUSED) == GST_STATE_CHANGE_FAILURE) {
+  if (gst_element_set_state(cdda, GST_STATE_READY) == GST_STATE_CHANGE_FAILURE ||
+      gst_element_set_state(cdda, GST_STATE_PAUSED) == GST_STATE_CHANGE_FAILURE) {
     qLog(Error) << "Error while changing CDDA GstElement's state";
+    gst_element_set_state(cdda, GST_STATE_NULL);
     gst_object_unref(GST_OBJECT(cdda));
     return Error;
   }
