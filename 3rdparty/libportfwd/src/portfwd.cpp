@@ -62,10 +62,9 @@ Portfwd::init(unsigned int timeout)
        }
        // get lan IP:
        char lanaddr[16];
-       int i;
-       i = UPNP_GetValidIGD(devlist, urls, data, (char*)&lanaddr, 16);
+       UPNP_GetValidIGD(devlist, urls, data, (char*)&lanaddr, 16);
        m_lanip = std::string(lanaddr);
-       
+
        freeUPNPDevlist(devlist);
        get_status();
        return true;

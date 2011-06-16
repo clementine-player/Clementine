@@ -63,6 +63,7 @@ QString CandidateTypeToString(pj_ice_cand_type type) {
     case PJ_ICE_CAND_TYPE_RELAYED:
       return "relayed";
   }
+  return "unknown";
 }
 
 pj_ice_cand_type CandidateStringToType(const QString& type) {
