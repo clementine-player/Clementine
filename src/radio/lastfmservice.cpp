@@ -696,14 +696,17 @@ void LastFMService::AddArtistOrTag(const QString& name,
     return;
 
   QString content = station_dialog_->content();
-  QString url_content;
-  if (name == "custom")
-    url_content = content.toUtf8().toBase64();
-  else
-    url_content = content;
+  QString url;
+  if (name == "custom" && content.startsWith("lastfm://")) {
+    url = content;
+  } else if (name == "custom") {
+    url = url_pattern.arg(QString(content.toUtf8().toBase64()));
+  } else {
+    url = url_pattern.arg(content);
+  }
 
   Song song;
-  song.set_url(QUrl(url_pattern.arg(url_content)));
+  song.set_url(QUrl((url)));
   song.set_title(title_pattern.arg(content));
 
   QStandardItem* item = new QStandardItem(QIcon(icon), content);
@@ -741,14 +744,17 @@ void LastFMService::RestoreList(const QString& name,
   for (int i=0 ; i<count ; ++i) {
     settings.setArrayIndex(i);
     QString content = settings.value("key").toString();
-    QString url_content;
-    if (name == "custom")
-      url_content = content.toUtf8().toBase64();
-    else
-      url_content = content;
+    QString url;
+    if (name == "custom" && content.startsWith("lastfm://")) {
+      url = content;
+    } else if (name == "custom") {
+      url = url_pattern.arg(QString(content.toUtf8().toBase64()));
+    } else {
+      url = url_pattern.arg(content);
+    }
 
     Song song;
-    song.set_url(QUrl(url_pattern.arg(url_content)));
+    song.set_url(QUrl(url));
     song.set_title(title_pattern.arg(content));
 
     QStandardItem* item = new QStandardItem(icon, content);
