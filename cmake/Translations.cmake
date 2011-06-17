@@ -38,7 +38,7 @@ macro(add_po outfiles po_prefix)
 
   foreach (_lang ${ADD_PO_LANGUAGES})
     set(_po_filename "${_lang}.po")
-    set(_po_stubpath "${CMAKE_CURRENT_BINARY_DIR}/${ADD_PO_DIRECTORY}/${_po_filename}")
+    set(_po_stubpath "${CMAKE_CURRENT_BINARY_DIR}/${ADD_PO_DIRECTORY}/${_po_filename}.target")
     set(_po_filepath "${CMAKE_CURRENT_SOURCE_DIR}/${ADD_PO_DIRECTORY}/${_po_filename}")
     set(_qm_filename "clementine_${_lang}.qm")
     set(_qm_filepath "${CMAKE_CURRENT_BINARY_DIR}/${ADD_PO_DIRECTORY}/${_qm_filename}")
