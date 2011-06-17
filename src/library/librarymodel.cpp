@@ -795,7 +795,7 @@ LibraryItem* LibraryModel::ItemFromQuery(GroupBy type,
     break;
 
   case GroupBy_None:
-    item->metadata.InitFromQuery(row);
+    item->metadata.InitFromQuery(row, true);
     item->key = item->metadata.title();
     item->display_text = item->metadata.TitleWithCompilationArtist();
     item->sort_text = SortTextForSong(item->metadata);

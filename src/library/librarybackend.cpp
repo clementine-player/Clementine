@@ -244,7 +244,7 @@ SongList LibraryBackend::FindSongsInDirectory(int id) {
   SongList ret;
   while (q.next()) {
     Song song;
-    song.InitFromQuery(q);
+    song.InitFromQuery(q, true);
     ret << song;
   }
   return ret;
@@ -487,7 +487,7 @@ SongList LibraryBackend::GetSongs(const QString& artist, const QString& album, c
   SongList ret;
   while (query.Next()) {
     Song song;
-    song.InitFromQuery(query);
+    song.InitFromQuery(query, true);
     ret << song;
   }
   return ret;
@@ -539,7 +539,7 @@ SongList LibraryBackend::GetSongsByForeignId(
     if (index == -1)
       continue;
 
-    ret[index].InitFromQuery(q);
+    ret[index].InitFromQuery(q, true);
   }
   return ret.toList();
 }
@@ -562,7 +562,7 @@ SongList LibraryBackend::GetSongsById(const QStringList& ids, QSqlDatabase& db) 
   SongList ret;
   while (q.next()) {
     Song song;
-    song.InitFromQuery(q);
+    song.InitFromQuery(q, true);
     ret << song;
   }
   return ret;
@@ -576,7 +576,7 @@ Song LibraryBackend::GetSongByUrl(const QUrl& url, qint64 beginning) {
 
   Song song;
   if (ExecQuery(&query) && query.Next()) {
-    song.InitFromQuery(query);
+    song.InitFromQuery(query, true);
   }
   return song;
 }
@@ -590,7 +590,7 @@ SongList LibraryBackend::GetSongsByUrl(const QUrl& url) {
   if (ExecQuery(&query)) {
     while(query.Next()) {
       Song song;
-      song.InitFromQuery(query);
+      song.InitFromQuery(query, true);
 
       songlist << song;
     }
@@ -626,7 +626,7 @@ SongList LibraryBackend::GetCompilationSongs(const QString& album, const QueryOp
   SongList ret;
   while (query.Next()) {
     Song song;
-    song.InitFromQuery(query);
+    song.InitFromQuery(query, true);
     ret << song;
   }
   return ret;
@@ -716,7 +716,7 @@ void LibraryBackend::UpdateCompilations(QSqlQuery& find_songs, QSqlQuery& update
   find_songs.exec();
   while (find_songs.next()) {
     Song song;
-    song.InitFromQuery(find_songs);
+    song.InitFromQuery(find_songs, true);
     deleted_songs << song;
     song.set_sampler(true);
     added_songs << song;
@@ -822,7 +822,7 @@ void LibraryBackend::UpdateManualAlbumArt(const QString &artist,
   SongList deleted_songs;
   while (query.Next()) {
     Song song;
-    song.InitFromQuery(query);
+    song.InitFromQuery(query, true);
     deleted_songs << song;
   }
 
@@ -849,7 +849,7 @@ void LibraryBackend::UpdateManualAlbumArt(const QString &artist,
   SongList added_songs;
   while (query.Next()) {
     Song song;
-    song.InitFromQuery(query);
+    song.InitFromQuery(query, true);
     added_songs << song;
   }
 
@@ -875,7 +875,7 @@ void LibraryBackend::ForceCompilation(const QString& artist, const QString& albu
   SongList deleted_songs;
   while (query.Next()) {
     Song song;
-    song.InitFromQuery(query);
+    song.InitFromQuery(query, true);
     deleted_songs << song;
   }
 
@@ -903,7 +903,7 @@ void LibraryBackend::ForceCompilation(const QString& artist, const QString& albu
   SongList added_songs;
   while (query.Next()) {
     Song song;
-    song.InitFromQuery(query);
+    song.InitFromQuery(query, true);
     added_songs << song;
   }
 
@@ -934,7 +934,7 @@ SongList LibraryBackend::FindSongs(const smart_playlists::Search& search) {
   // Read the results
   while (query.next()) {
     Song song;
-    song.InitFromQuery(query);
+    song.InitFromQuery(query, true);
     ret << song;
   }
   return ret;

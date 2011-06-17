@@ -54,7 +54,7 @@ void LibraryResolver::QueryFinished() {
   if (watcher->result() && query->Next()) {
     do {
       Song song;
-      song.InitFromQuery(*query);
+      song.InitFromQuery(*query, true);
       songs << song;
     } while (query->Next());
   }

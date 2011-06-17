@@ -514,10 +514,9 @@ void Song::GuessFileType(TagLib::FileRef* fileref) {
     d->filetype_ = Type_TrueAudio;
 }
 
-void Song::InitFromQuery(const SqlRow& q, int col) {
+void Song::InitFromQuery(const SqlRow& q, bool reliable_metadata, int col) {
   d->valid_ = true;
-
-  d->init_from_file_ = true;
+  d->init_from_file_ = reliable_metadata;
 
   #define tostr(n)      (q.value(n).isNull() ? QString::null : q.value(n).toString())
   #define tobytearray(n)(q.value(n).isNull() ? QByteArray()  : q.value(n).toByteArray())

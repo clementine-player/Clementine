@@ -47,7 +47,7 @@ bool RadioPlaylistItem::InitFromQuery(const SqlRow& query) {
 
   service_name_ = query.value(row + 1).toString();
 
-  metadata_.InitFromQuery(query, (Song::kColumns.count() + 1) * 3);
+  metadata_.InitFromQuery(query, false, (Song::kColumns.count() + 1) * 3);
   InitMetadata();
 
   return true;

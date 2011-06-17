@@ -36,7 +36,7 @@ SongPlaylistItem::SongPlaylistItem(const Song& song)
 }
 
 bool SongPlaylistItem::InitFromQuery(const SqlRow& query) {
-  song_.InitFromQuery(query, (Song::kColumns.count() + 1) * 3);
+  song_.InitFromQuery(query, false, (Song::kColumns.count() + 1) * 3);
 
   if (type() == "Stream") {
     song_.set_filetype(Song::Type_Stream);

@@ -41,7 +41,7 @@ void LibraryPlaylistItem::Reload() {
 
 bool LibraryPlaylistItem::InitFromQuery(const SqlRow& query) {
   // Rows from the songs tables come first
-  song_.InitFromQuery(query);
+  song_.InitFromQuery(query, true);
 
   return song_.is_valid();
 }

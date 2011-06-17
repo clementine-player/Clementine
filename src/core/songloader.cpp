@@ -260,7 +260,7 @@ SongLoader::Result SongLoader::LoadLocal(const QString& filename, bool block,
     // we may have many results when the file has many sections
     do {
       Song song;
-      song.InitFromQuery(query);
+      song.InitFromQuery(query, true);
 
       song_list << song;
     } while(query.Next());
@@ -304,7 +304,7 @@ void SongLoader::EffectiveSongsLoad() {
     if (library_->ExecQuery(&query) && query.Next()) {
       // we may have many results when the file has many sections
       do {
-        song.InitFromQuery(query);
+        song.InitFromQuery(query, true);
       } while(query.Next());
     } else {
       // it's a normal media file

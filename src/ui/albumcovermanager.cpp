@@ -641,7 +641,7 @@ SongList AlbumCoverManager::GetSongsInAlbum(const QModelIndex& index) const {
 
   while (q.Next()) {
     Song song;
-    song.InitFromQuery(q);
+    song.InitFromQuery(q, true);
     ret << song;
   }
   return ret;
