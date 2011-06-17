@@ -1094,6 +1094,8 @@ QString Song::PrettyTitle() const {
 
   if (title.isEmpty())
     title = d->basefilename_;
+  if (title.isEmpty())
+    title = d->url_.toString();
 
   return title;
 }
