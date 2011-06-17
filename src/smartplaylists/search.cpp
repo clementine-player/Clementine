@@ -72,6 +72,11 @@ QString Search::ToSql(const QString& songs_table) const {
     where_clauses << "(ROWID NOT IN (" + numbers + "))";
   }
 
+  // We never want to include songs that have been deleted, but are still kept
+  // in the database in case the directory containing them has just been
+  // unmounted.
+  where_clauses << "unavailable = 0";
+
   if (!where_clauses.isEmpty()) {
     sql += " WHERE " + where_clauses.join(" AND ");
   }
