@@ -18,8 +18,6 @@
 #include "ubuntuunityhack.h"
 #include "core/logging.h"
 
-#include <QDBusConnection>
-#include <QDBusConnectionInterface>
 #include <QProcess>
 
 const char* UbuntuUnityHack::kGSettingsFileName     = "gsettings";
