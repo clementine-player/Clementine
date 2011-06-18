@@ -146,11 +146,20 @@ void AnalyzerContainer::ChangeAnalyzer(int id) {
   current_analyzer_->set_engine(engine_);
   // Even if it is not supposed to happen, I don't want to get a dbz error
   current_framerate_ = current_framerate_ == 0 ? kMediumFramerate : current_framerate_;
-  current_analyzer_->changeTimeout(1000 / current_framerate_);
 
   layout()->addWidget(current_analyzer_);
 
   Save();
+  // I can't figure out why, but BlockAnalyzer doesn't appreciate to be
+  // initialized with very high framerate: if we try to, all framerates are
+  // unusually slow
+  // TODO: this is just a work around, it would be nicer to find where this bug
+  // came from and to correct it in a better way
+  if (dynamic_cast<BlockAnalyzer*>(current_analyzer_) && current_framerate_ == kVeryHighFramerate) {
+    current_framerate_ = kHighFramerate;
+  }
+
+  ChangeFramerate(current_framerate_);
 }
 
 void AnalyzerContainer::ChangeFramerate(int new_framerate) {
@@ -165,6 +174,7 @@ void AnalyzerContainer::ChangeFramerate(int new_framerate) {
 void AnalyzerContainer::Load() {
   QSettings s;
   s.beginGroup(kSettingsGroup);
+  current_framerate_ = s.value(kSettingsFramerate, kMediumFramerate).toInt();
 
   // Analyzer
   QString type = s.value("type", "BlockAnalyzer").toString();
@@ -182,7 +192,6 @@ void AnalyzerContainer::Load() {
   }
 
   // Framerate
-  current_framerate_ = s.value(kSettingsFramerate, kMediumFramerate).toInt();
   for (int i=0 ; i<framerate_list_.count() ; ++i) {
     if(current_framerate_ == framerate_list_[i]) {
       ChangeFramerate(current_framerate_);
