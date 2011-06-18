@@ -90,6 +90,7 @@ set(SOURCES
   core/songloader.cpp
   core/stylesheetloader.cpp
   core/taskmanager.cpp
+  core/ubuntuunityhack.cpp
   core/urlhandler.cpp
   core/utilities.cpp
 
@@ -317,6 +318,7 @@ set(HEADERS
   core/player.h
   core/songloader.h
   core/taskmanager.h
+  core/ubuntuunityhack.h
   core/urlhandler.h
 
   covers/albumcoverfetcher.h

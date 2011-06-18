@@ -36,6 +36,7 @@
 #include "core/potranslator.h"
 #include "core/song.h"
 #include "core/taskmanager.h"
+#include "core/ubuntuunityhack.h"
 #include "core/utilities.h"
 #include "covers/albumcoverfetcher.h"
 #include "covers/artloader.h"
@@ -376,6 +377,11 @@ int main(int argc, char *argv[]) {
   // Initialize the repository of cover providers to avoid race conditions
   // later
   CoverProviders::instance();
+
+  // In 11.04 Ubuntu decided that the system tray should be reserved for certain
+  // whitelisted applications.  Clementine will override this setting and insert
+  // itself into the list of whitelisted apps.
+  UbuntuUnityHack hack;
 
   // Create the tray icon and OSD
   scoped_ptr<SystemTrayIcon> tray_icon(SystemTrayIcon::CreateSystemTrayIcon());
