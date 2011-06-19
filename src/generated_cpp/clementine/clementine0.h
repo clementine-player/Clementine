@@ -1280,7 +1280,7 @@ class PythonQtWrapper_Song : public QObject
 public:
 Q_ENUMS(FileType )
 enum FileType{
-  Type_Unknown = Song::Type_Unknown,   Type_Asf = Song::Type_Asf,   Type_Flac = Song::Type_Flac,   Type_Mp4 = Song::Type_Mp4,   Type_Mpc = Song::Type_Mpc,   Type_Mpeg = Song::Type_Mpeg,   Type_OggFlac = Song::Type_OggFlac,   Type_OggSpeex = Song::Type_OggSpeex,   Type_OggVorbis = Song::Type_OggVorbis,   Type_Aiff = Song::Type_Aiff,   Type_Wav = Song::Type_Wav,   Type_TrueAudio = Song::Type_TrueAudio,   Type_Stream = Song::Type_Stream};
+  Type_Unknown = Song::Type_Unknown,   Type_Asf = Song::Type_Asf,   Type_Flac = Song::Type_Flac,   Type_Mp4 = Song::Type_Mp4,   Type_Mpc = Song::Type_Mpc,   Type_Mpeg = Song::Type_Mpeg,   Type_OggFlac = Song::Type_OggFlac,   Type_OggSpeex = Song::Type_OggSpeex,   Type_OggVorbis = Song::Type_OggVorbis,   Type_Aiff = Song::Type_Aiff,   Type_Wav = Song::Type_Wav,   Type_TrueAudio = Song::Type_TrueAudio,   Type_Cdda = Song::Type_Cdda,   Type_Stream = Song::Type_Stream};
 public slots:
 Song* new_Song();
 Song* new_Song(const Song&  other);
@@ -1328,6 +1328,7 @@ void delete_Song(Song* obj) { delete obj; }
    bool  has_manually_unset_cover(Song* theWrappedObject) const;
    int  id(Song* theWrappedObject) const;
    const QImage*  image(Song* theWrappedObject) const;
+   bool  is_cdda(Song* theWrappedObject) const;
    bool  is_compilation(Song* theWrappedObject) const;
    bool  is_stream(Song* theWrappedObject) const;
    bool  is_unavailable(Song* theWrappedObject) const;

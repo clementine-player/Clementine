@@ -8968,6 +8968,11 @@ const QImage*  PythonQtWrapper_Song::image(Song* theWrappedObject) const
   return &( theWrappedObject->image());
 }
 
+bool  PythonQtWrapper_Song::is_cdda(Song* theWrappedObject) const
+{
+  return ( theWrappedObject->is_cdda());
+}
+
 bool  PythonQtWrapper_Song::is_compilation(Song* theWrappedObject) const
 {
   return ( theWrappedObject->is_compilation());
