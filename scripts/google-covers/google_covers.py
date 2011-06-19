@@ -10,26 +10,10 @@ import urllib
 LOGGER = logging.getLogger("google_images")
 
 
-class GoogleImagesCoversScript():
-  def __init__(self):
-    # create and register our factory
-    self.factory = GoogleImagesCoverProviderFactory()
-
-
-class GoogleImagesCoverProviderFactory(clementine.CoverProviderFactory):
-  def __init__(self):
-    clementine.CoverProviderFactory.__init__(self)
-    # register in the repository of factories
-    clementine.cover_providers.AddProviderFactory(self)
-
-  def CreateCoverProvider(self, parent):
-    return GoogleImagesCoverProvider(parent)
-
-
 class GoogleImagesCoverProvider(clementine.CoverProvider):
   API_URL = 'https://ajax.googleapis.com/ajax/services/search/images?{0}'
 
-  def __init__(self, parent):
+  def __init__(self, parent=None):
     clementine.CoverProvider.__init__(self, "Google Images", parent)
 
     self.api_args = {
@@ -39,19 +23,23 @@ class GoogleImagesCoverProvider(clementine.CoverProvider):
       # only larger sizes
       'imgsz' : 'large|xlarge'
     }
-    self.network = clementine.NetworkAccessManager(self)
-    self.queries = {}
+    self.network = clementine.NetworkAccessManager()
 
-  def SendRequest(self, query):
+  def StartSearch(self, query, id):
     url = self.GetQueryURL(query)
-    LOGGER.info("Sending request to '%s'", url)
+    LOGGER.info("Id %d - sending request to '%s'" % (id, url))
 
     reply = self.network.get(QNetworkRequest(url))
-    self.queries[reply] = query
 
-    return reply
+    def QueryFinished():
+      LOGGER.debug("Id %d - finished" % id)
 
-  def ParseReply(self, reply):
+      self.SearchFinished(id, self.ParseReply(query, reply))
+
+    reply.connect("finished()", QueryFinished)
+    return True
+
+  def ParseReply(self, query, reply):
     results = json.loads(str(reply.readAll()))
 
     parsed = []
@@ -60,7 +48,6 @@ class GoogleImagesCoverProvider(clementine.CoverProvider):
       LOGGER.warning("Error parsing reply: %s", results["responseDetails"])
       return parsed
 
-    query = self.queries[reply]
     LOGGER.info("Parsing reply for query '%s'", query)
     for result in results['responseData']['results']:
       current = clementine.CoverSearchResult()
@@ -79,4 +66,5 @@ class GoogleImagesCoverProvider(clementine.CoverProvider):
     return QUrl(self.API_URL.format(urllib.urlencode(current_args)))
 
 
-script = GoogleImagesCoversScript()
+provider = GoogleImagesCoverProvider()
+clementine.cover_providers.AddProvider(provider)

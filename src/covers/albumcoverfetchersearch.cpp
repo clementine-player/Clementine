@@ -45,9 +45,8 @@ void AlbumCoverFetcherSearch::Timeout() {
 }
 
 void AlbumCoverFetcherSearch::TerminateSearch() {
-  foreach (QNetworkReply* reply, pending_requests_.keys()) {
-    disconnect(reply, SIGNAL(finished()), this, SLOT(ProviderSearchFinished()));
-    reply->abort();
+  foreach (int id, pending_requests_.keys()) {
+    pending_requests_.take(id)->CancelSearch(id);
   }
 
   if(request_.search) {
@@ -59,13 +58,17 @@ void AlbumCoverFetcherSearch::TerminateSearch() {
 }
 
 void AlbumCoverFetcherSearch::Start() {
-  // end this search before it even began if there are no providers...
-  foreach(CoverProvider* provider, CoverProviders::instance().List(this)) {
-    QNetworkReply* reply = provider->SendRequest(request_.query);
+  CoverProviders* providers = &CoverProviders::instance();
 
-    if (reply) {
-      connect(reply, SIGNAL(finished()), SLOT(ProviderSearchFinished()));
-      pending_requests_.insert(reply, provider);
+  // end this search before it even began if there are no providers...
+  foreach(CoverProvider* provider, providers->List()) {
+    connect(provider, SIGNAL(SearchFinished(int,QList<CoverSearchResult>)),
+            SLOT(ProviderSearchFinished(int,QList<CoverSearchResult>)));
+    const int id = providers->NextId();
+    const bool success = provider->StartSearch(request_.query, id);
+
+    if (success) {
+      pending_requests_[id] = provider;
     }
   }
 
@@ -74,32 +77,23 @@ void AlbumCoverFetcherSearch::Start() {
   }
 }
 
-void AlbumCoverFetcherSearch::ProviderSearchFinished() {
-  // Note: we don't delete the reply here.  It's parented to the provider's
-  // network access manager which is deleted when it is deleted.
-  QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
+void AlbumCoverFetcherSearch::ProviderSearchFinished(
+    int id, const QList<CoverSearchResult>& results) {
+  if (!pending_requests_.contains(id))
+    return;
 
-  CoverProvider* provider = pending_requests_.take(reply);
+  CoverProvider* provider = pending_requests_.take(id);
 
-  if(reply->error() == QNetworkReply::NoError) {
-    CoverSearchResults partial_results = provider->ParseReply(reply);
-
-    // Add categories to the results if the provider didn't specify them
-    for (int i=0 ; i<partial_results.count() ; ++i) {
-      if (partial_results[i].category.isEmpty()) {
-        partial_results[i].category = provider->name();
-      }
+  CoverSearchResults results_copy(results);
+  // Add categories to the results if the provider didn't specify them
+  for (int i=0 ; i<results_copy.count() ; ++i) {
+    if (results_copy[i].category.isEmpty()) {
+      results_copy[i].category = provider->name();
     }
-
-    // add results from the current provider to our pool
-    results_.append(partial_results);
-  } else {
-    QString contents(reply->readAll());
-    qLog(Debug) << "CoverProvider's request error - summary:";
-    qLog(Debug) << reply->errorString();
-    qLog(Debug) << "CoverProvider's request error - contents:";
-    qLog(Debug) << contents;
   }
+
+  // Add results from the current provider to our pool
+  results_.append(results_copy);
 
   // do we have more providers left?
   if(!pending_requests_.isEmpty()) {

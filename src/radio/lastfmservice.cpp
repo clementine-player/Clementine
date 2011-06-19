@@ -24,6 +24,8 @@
 #include "core/player.h"
 #include "core/song.h"
 #include "core/taskmanager.h"
+#include "covers/coverproviders.h"
+#include "covers/lastfmcoverprovider.h"
 #include "ui/iconloader.h"
 #include "ui/settingsdialog.h"
 
@@ -105,6 +107,7 @@ LastFMService::LastFMService(RadioModel* parent)
   add_custom_action_->setEnabled(false);
 
   model()->player()->RegisterUrlHandler(url_handler_);
+  CoverProviders::instance().AddProvider(new LastFmCoverProvider(this));
 }
 
 LastFMService::~LastFMService() {

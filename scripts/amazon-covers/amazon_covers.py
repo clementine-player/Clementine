@@ -14,22 +14,6 @@ import xml.etree.ElementTree
 LOGGER = logging.getLogger("amazon_covers")
 
 
-class AmazonCoversScript():
-  def __init__(self):
-    # create and register our factory
-    self.factory = AmazonCoverProviderFactory()
-
-
-class AmazonCoverProviderFactory(clementine.CoverProviderFactory):
-  def __init__(self):
-    clementine.CoverProviderFactory.__init__(self)
-    # register in the repository of factories
-    clementine.cover_providers.AddProviderFactory(self)
-
-  def CreateCoverProvider(self, parent):
-    return AmazonCoverProvider(parent)
-
-
 class AmazonCoverProvider(clementine.CoverProvider):
   """
   Most of the Amazon API related code here comes from a plugin (which I wrote) for
@@ -40,7 +24,7 @@ class AmazonCoverProvider(clementine.CoverProvider):
   AWS_ACCESS_KEY = 'AKIAJ4QO3GQTSM3A43BQ'
   AWS_SECRET_ACCESS_KEY = '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'
 
-  def __init__(self, parent):
+  def __init__(self, parent=None):
     clementine.CoverProvider.__init__(self, "Amazon", parent)
 
     # basic API's arguments (search in all categories)
@@ -52,13 +36,22 @@ class AmazonCoverProvider(clementine.CoverProvider):
       'ResponseGroup' : 'Images',
       'AWSAccessKeyId': self.AWS_ACCESS_KEY
     }
-    self.network = clementine.NetworkAccessManager(self)
 
-  def SendRequest(self, query):
+    self.network = clementine.NetworkAccessManager()
+
+  def StartSearch(self, query, id):
     url = QUrl.fromEncoded(self.API_URL.format(self.PrepareAmazonRESTUrl(query)))
-    LOGGER.info("Sending request to '%s'", url)
+    LOGGER.debug("ID %d: Sending request to '%s'" % (id, url))
 
-    return self.network.get(QNetworkRequest(url))
+    reply = self.network.get(QNetworkRequest(url))
+
+    def QueryFinished():
+      LOGGER.debug("ID %d: Finished" % id)
+
+      self.SearchFinished(id, self.ParseReply(reply))
+
+    reply.connect("finished()", QueryFinished)
+    return True
 
   def ParseReply(self, reply):
     parsed = []
@@ -154,4 +147,5 @@ class AmazonCoverProvider(clementine.CoverProvider):
     return query_string + '&Signature=' + signature
 
 
-amazon_script = AmazonCoversScript()
+provider = AmazonCoverProvider()
+clementine.cover_providers.AddProvider(provider)

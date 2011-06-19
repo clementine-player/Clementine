@@ -23,11 +23,11 @@
 
 class AlbumCoverFetcherSearch;
 class CoverProvider;
-class CoverProviderFactory;
 
-// This is a singleton, a global repository for factories of cover providers. Each one of those has to register 
-// with CoverProviders' instance by invoking "CoverProviders::instance().AddCoverProviderFactory(this)".
-// Factories are automatically unregistered from the repository when they are deleted. 
+// This is a singleton, a global repository for cover providers.
+// Each one of those has to register with CoverProviders' instance by invoking
+// "CoverProviders::instance().AddCoverProvider(this)". Providers are
+// automatically unregistered from the repository when they are deleted.
 // The class is thread safe except for the initialization.
 class CoverProviders : public QObject {
   Q_OBJECT
@@ -35,31 +35,33 @@ class CoverProviders : public QObject {
 public:
   // This performs lazy initialization of the CoverProviders which is not thread-safe!
   static CoverProviders& instance() {
-      static CoverProviders instance_;
-      return instance_;
+    static CoverProviders instance_;
+    return instance_;
   }
 
-  // Let's a cover provider factory to register itself in the repository.
-  void AddProviderFactory(CoverProviderFactory* factory);
+  // Lets a cover provider to register itself in the repository.
+  void AddProvider(CoverProvider* provider);
+  void RemoveProvider(CoverProvider* provider);
 
-  // Creates a list of cover providers, one for every registered factory. Providers that get created will
-  // be children of the given AlbumCoverFetcherSearch's instance.
-  QList<CoverProvider*> List(AlbumCoverFetcherSearch* parent);
-  // Returns true if this repository has at least one registered provider factory.
-  bool HasAnyProviderFactories() { return !cover_provider_factories_.isEmpty(); }
+  // Returns a list of cover providers
+  QList<CoverProvider*> List() const { return cover_providers_; }
+  // Returns true if this repository has at least one registered provider.
+  bool HasAnyProviders() const { return !cover_providers_.isEmpty(); }
 
-  ~CoverProviders() {}
+  int NextId();
 
 private slots:
-  void RemoveProviderFactory();
+  void ProviderDestroyed();
 
 private:
   CoverProviders();
-  CoverProviders(CoverProviders const&);
-  void operator=(CoverProviders const&);
+  ~CoverProviders() {}
+  Q_DISABLE_COPY(CoverProviders);
 
-  QList<CoverProviderFactory*> cover_provider_factories_;
+  QList<CoverProvider*> cover_providers_;
   QMutex mutex_;
+
+  QAtomicInt next_id_;
 };
 
 #endif // COVERPROVIDERS_H

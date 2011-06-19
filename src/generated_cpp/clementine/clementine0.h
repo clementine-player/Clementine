@@ -4,7 +4,6 @@
 #include <albumcoverfetcher.h>
 #include <albumcoverfetchersearch.h>
 #include <coverprovider.h>
-#include <coverproviderfactory.h>
 #include <coverproviders.h>
 #include <directory.h>
 #include <librarybackend.h>
@@ -57,19 +56,6 @@
 
 
 
-class PythonQtShell_AlbumCoverFetcherSearch : public AlbumCoverFetcherSearch
-{
-public:
-
-virtual void childEvent(QChildEvent*  arg__1);
-virtual void customEvent(QEvent*  arg__1);
-virtual bool  event(QEvent*  arg__1);
-virtual bool  eventFilter(QObject*  arg__1, QEvent*  arg__2);
-virtual void timerEvent(QTimerEvent*  arg__1);
-
-  PythonQtInstanceWrapper* _wrapper; 
-};
-
 class PythonQtWrapper_AlbumCoverFetcherSearch : public QObject
 { Q_OBJECT
 public:
@@ -85,10 +71,10 @@ void delete_AlbumCoverFetcherSearch(AlbumCoverFetcherSearch* obj) { delete obj; 
 class PythonQtShell_CoverProvider : public CoverProvider
 {
 public:
-    PythonQtShell_CoverProvider(const QString&  name, QObject*  parent = &CoverProviders::instance()):CoverProvider(name, parent),_wrapper(NULL) {};
+    PythonQtShell_CoverProvider(const QString&  name, QObject*  parent):CoverProvider(name, parent),_wrapper(NULL) {};
 
-virtual QList<CoverSearchResult >  ParseReply(QNetworkReply*  reply);
-virtual QNetworkReply*  SendRequest(const QString&  query);
+virtual void CancelSearch(int  id);
+virtual bool  StartSearch(const QString&  query, int  id);
 virtual void childEvent(QChildEvent*  arg__1);
 virtual void customEvent(QEvent*  arg__1);
 virtual bool  event(QEvent*  arg__1);
@@ -96,42 +82,21 @@ virtual bool  eventFilter(QObject*  arg__1, QEvent*  arg__2);
 virtual void timerEvent(QTimerEvent*  arg__1);
 
   PythonQtInstanceWrapper* _wrapper; 
+};
+
+class PythonQtPublicPromoter_CoverProvider : public CoverProvider
+{ public:
+inline void promoted_CancelSearch(int  id) { CoverProvider::CancelSearch(id); }
 };
 
 class PythonQtWrapper_CoverProvider : public QObject
 { Q_OBJECT
 public:
 public slots:
-CoverProvider* new_CoverProvider(const QString&  name, QObject*  parent = &CoverProviders::instance());
+CoverProvider* new_CoverProvider(const QString&  name, QObject*  parent);
 void delete_CoverProvider(CoverProvider* obj) { delete obj; } 
+   void CancelSearch(CoverProvider* theWrappedObject, int  id);
    QString  name(CoverProvider* theWrappedObject) const;
-};
-
-
-
-
-
-class PythonQtShell_CoverProviderFactory : public CoverProviderFactory
-{
-public:
-    PythonQtShell_CoverProviderFactory(QObject*  parent = &CoverProviders::instance()):CoverProviderFactory(parent),_wrapper(NULL) {};
-
-virtual CoverProvider*  CreateCoverProvider(AlbumCoverFetcherSearch*  parent);
-virtual void childEvent(QChildEvent*  arg__1);
-virtual void customEvent(QEvent*  arg__1);
-virtual bool  event(QEvent*  arg__1);
-virtual bool  eventFilter(QObject*  arg__1, QEvent*  arg__2);
-virtual void timerEvent(QTimerEvent*  arg__1);
-
-  PythonQtInstanceWrapper* _wrapper; 
-};
-
-class PythonQtWrapper_CoverProviderFactory : public QObject
-{ Q_OBJECT
-public:
-public slots:
-CoverProviderFactory* new_CoverProviderFactory(QObject*  parent = &CoverProviders::instance());
-void delete_CoverProviderFactory(CoverProviderFactory* obj) { delete obj; } 
 };
 
 
@@ -142,10 +107,11 @@ class PythonQtWrapper_CoverProviders : public QObject
 { Q_OBJECT
 public:
 public slots:
-void delete_CoverProviders(CoverProviders* obj) { delete obj; } 
-   void AddProviderFactory(CoverProviders* theWrappedObject, CoverProviderFactory*  factory);
-   bool  HasAnyProviderFactories(CoverProviders* theWrappedObject);
-   QList<CoverProvider* >  List(CoverProviders* theWrappedObject, AlbumCoverFetcherSearch*  parent);
+   void AddProvider(CoverProviders* theWrappedObject, CoverProvider*  provider);
+   bool  HasAnyProviders(CoverProviders* theWrappedObject) const;
+   QList<CoverProvider* >  List(CoverProviders* theWrappedObject) const;
+   int  NextId(CoverProviders* theWrappedObject);
+   void RemoveProvider(CoverProviders* theWrappedObject, CoverProvider*  provider);
    CoverProviders*  static_CoverProviders_instance();
 };
 
@@ -1523,6 +1489,41 @@ void delete_TaskManager(TaskManager* obj) { delete obj; }
    void SetTaskFinished(TaskManager* theWrappedObject, int  id);
    void SetTaskProgress(TaskManager* theWrappedObject, int  id, int  progress, int  max = 0);
    int  StartTask(TaskManager* theWrappedObject, const QString&  name);
+};
+
+
+
+
+
+class PythonQtShell_TaskManager_Task : public TaskManager_Task
+{
+public:
+    PythonQtShell_TaskManager_Task():TaskManager_Task(),_wrapper(NULL) {};
+
+
+  PythonQtInstanceWrapper* _wrapper; 
+};
+
+class PythonQtWrapper_TaskManager_Task : public QObject
+{ Q_OBJECT
+public:
+public slots:
+TaskManager_Task* new_TaskManager_Task();
+TaskManager_Task* new_TaskManager_Task(const TaskManager_Task& other) {
+PythonQtShell_TaskManager_Task* a = new PythonQtShell_TaskManager_Task();
+*((TaskManager_Task*)a) = other;
+return a; }
+void delete_TaskManager_Task(TaskManager_Task* obj) { delete obj; } 
+void py_set_progress_max(TaskManager_Task* theWrappedObject, int  progress_max){ theWrappedObject->progress_max = progress_max; }
+int  py_get_progress_max(TaskManager_Task* theWrappedObject){ return theWrappedObject->progress_max; }
+void py_set_progress(TaskManager_Task* theWrappedObject, int  progress){ theWrappedObject->progress = progress; }
+int  py_get_progress(TaskManager_Task* theWrappedObject){ return theWrappedObject->progress; }
+void py_set_id(TaskManager_Task* theWrappedObject, int  id){ theWrappedObject->id = id; }
+int  py_get_id(TaskManager_Task* theWrappedObject){ return theWrappedObject->id; }
+void py_set_name(TaskManager_Task* theWrappedObject, QString  name){ theWrappedObject->name = name; }
+QString  py_get_name(TaskManager_Task* theWrappedObject){ return theWrappedObject->name; }
+void py_set_blocks_library_scans(TaskManager_Task* theWrappedObject, bool  blocks_library_scans){ theWrappedObject->blocks_library_scans = blocks_library_scans; }
+bool  py_get_blocks_library_scans(TaskManager_Task* theWrappedObject){ return theWrappedObject->blocks_library_scans; }
 };
 
 

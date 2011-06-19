@@ -30,22 +30,34 @@ LastFmCoverProvider::LastFmCoverProvider(QObject* parent)
 {
 }
 
-QNetworkReply* LastFmCoverProvider::SendRequest(const QString& query) {
+bool LastFmCoverProvider::StartSearch(const QString& query, int id) {
   QMap<QString, QString> params;
   params["method"] = "album.search";
   params["album"] = query;
 
-  return lastfm::ws::post(params);
+  QNetworkReply* reply = lastfm::ws::post(params);
+  connect(reply, SIGNAL(finished()), SLOT(QueryFinished()));
+  pending_queries_[reply] = id;
+
+  return true;
 }
 
-CoverSearchResults LastFmCoverProvider::ParseReply(QNetworkReply* reply) {
+void LastFmCoverProvider::QueryFinished() {
+  QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
+  if (!reply || !pending_queries_.contains(reply))
+    return;
+
+  int id = pending_queries_.take(reply);
+  reply->deleteLater();
+
   CoverSearchResults results;
 
   try {
     lastfm::XmlQuery query(lastfm::ws::parse(reply));
 #ifdef Q_OS_WIN32
-    if (lastfm::ws::last_parse_error != lastfm::ws::NoError)
-      return results;
+    if (lastfm::ws::last_parse_error != lastfm::ws::NoError) {
+      throw std::runtime_error();
+    }
 #endif
 
     // parse the list of search results
@@ -57,10 +69,9 @@ CoverSearchResults LastFmCoverProvider::ParseReply(QNetworkReply* reply) {
       result.image_url = element["image size=extralarge"].text();
       results << result;
     }
-
-    return results;
-
   } catch(std::runtime_error&) {
-    return results;
+    // Drop through and emit an empty list of results.
   }
+
+  emit SearchFinished(id, results);
 }

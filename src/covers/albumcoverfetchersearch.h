@@ -27,10 +27,10 @@ class CoverProvider;
 class QNetworkAccessManager;
 class QNetworkReply;
 
-// This class encapsulates a single search for covers initiated by an AlbumCoverFetcher.
-// The search engages all of the known cover providers. AlbumCoverFetcherSearch signals
-// search results to an interested AlbumCoverFetcher when all of the providers have done
-// their part.
+// This class encapsulates a single search for covers initiated by an
+// AlbumCoverFetcher. The search engages all of the known cover providers.
+// AlbumCoverFetcherSearch signals search results to an interested
+// AlbumCoverFetcher when all of the providers have done their part.
 class AlbumCoverFetcherSearch : public QObject {
   Q_OBJECT
 
@@ -38,9 +38,8 @@ class AlbumCoverFetcherSearch : public QObject {
   // A timeout (in miliseconds) for every search.
   static const int kSearchTimeout;
 
-  AlbumCoverFetcherSearch(const CoverSearchRequest& request, QNetworkAccessManager* network,
-                          QObject* parent);
-  virtual ~AlbumCoverFetcherSearch() {}
+  AlbumCoverFetcherSearch(const CoverSearchRequest& request,
+                          QNetworkAccessManager* network, QObject* parent);
 
   // Starts the search. This is the moment when we count cover providers available
   // in the application.
@@ -53,7 +52,7 @@ signals:
   void AlbumCoverFetched(quint64, const QImage& cover);
 
 private slots:
-  void ProviderSearchFinished();
+  void ProviderSearchFinished(int id, const QList<CoverSearchResult>& results);
   void ProviderCoverFetchFinished();
   void Timeout();
 
@@ -66,7 +65,7 @@ private:
   // Complete results (from all of the available providers).
   CoverSearchResults results_;
 
-  QMap<QNetworkReply*, CoverProvider*> pending_requests_;
+  QMap<int, CoverProvider*> pending_requests_;
 
   QNetworkAccessManager* network_;
 };

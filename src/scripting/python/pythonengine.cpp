@@ -78,15 +78,23 @@ PythonEngine::~PythonEngine() {
 template <typename T>
 static void RegisterListConverter(const char* other_class_name) {
   typedef QList<T> L;
-  PythonQtConv::registerMetaTypeToPythonConverter(qMetaTypeId<L>(),
-      PythonQtConvertListOfValueTypeToPythonList<L, T>);
-  PythonQtConv::registerMetaTypeToPythonConverter(QMetaType::type(other_class_name),
-      PythonQtConvertListOfValueTypeToPythonList<L, T>);
+  const int primary_id = qMetaTypeId<L>();
+  const int secondary_id = QMetaType::type(other_class_name);
 
-  PythonQtConv::registerPythonToMetaTypeConverter(qMetaTypeId<L>(),
-      PythonQtConvertPythonListToListOfValueType<L, T>);
-  PythonQtConv::registerPythonToMetaTypeConverter(QMetaType::type(other_class_name),
-      PythonQtConvertPythonListToListOfValueType<L, T>);
+  PythonQtConvertMetaTypeToPythonCB* metatype_to_python =
+      PythonQtConvertListOfValueTypeToPythonList<L, T>;
+  PythonQtConvertPythonToMetaTypeCB* python_to_metatype =
+      PythonQtConvertPythonListToListOfValueType<L, T>;
+
+  qLog(Debug) << "Registering list converters for" <<
+                 primary_id << QMetaType::typeName(primary_id) << "," <<
+                 secondary_id << other_class_name;
+
+  PythonQtConv::registerMetaTypeToPythonConverter(primary_id, metatype_to_python);
+  PythonQtConv::registerMetaTypeToPythonConverter(secondary_id, metatype_to_python);
+
+  PythonQtConv::registerPythonToMetaTypeConverter(primary_id, python_to_metatype);
+  PythonQtConv::registerPythonToMetaTypeConverter(secondary_id, python_to_metatype);
 }
 
 bool PythonEngine::EnsureInitialised() {

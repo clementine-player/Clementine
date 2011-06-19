@@ -32,25 +32,20 @@ class CoverProvider : public QObject {
   Q_OBJECT
 
 public:
-  CoverProvider(const QString& name, QObject* parent = &CoverProviders::instance());
-  virtual ~CoverProvider() {}
+  CoverProvider(const QString& name, QObject* parent);
 
   // A name (very short description) of this provider, like "last.fm".
   QString name() const { return name_; }
 
-  // Given a search request from Clementine, provider has to create and invoke
-  // a NetworkRequest. It then has to return a corresponding NetworkReply,
-  // without connecting to its finished() signal!
-  // Responsibilities of provider:
-  // - maps the given query to a NetworkRequest that a service this provider
-  //   uses will understand
-  // - makes the prepared request and returns the resulting reply
-  virtual QNetworkReply* SendRequest(const QString& query) = 0;
+  // Starts searching for covers matching the given query text.  Returns true
+  // if the query has been started, or false if an error occurred.  The provider
+  // should remember the ID and emit it along with the result when it finishes.
+  virtual bool StartSearch(const QString& query, int id) = 0;
 
-  // Provider parses a reply which is now filled with data obtained from a service
-  // this provider communicates with. The result is a QList of CoverSearchResult
-  // objects.
-  virtual CoverSearchResults ParseReply(QNetworkReply* reply) = 0;
+  virtual void CancelSearch(int id) {}
+
+signals:
+  void SearchFinished(int id, const QList<CoverSearchResult>& results);
 
 private:
   QString name_;

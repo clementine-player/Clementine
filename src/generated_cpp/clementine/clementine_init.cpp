@@ -4,9 +4,8 @@
 
 
 void PythonQt_init_Clementine(PyObject* module) {
-PythonQt::priv()->registerClass(&AlbumCoverFetcherSearch::staticMetaObject, "Clementine", PythonQtCreateObject<PythonQtWrapper_AlbumCoverFetcherSearch>, PythonQtSetInstanceWrapperOnShell<PythonQtShell_AlbumCoverFetcherSearch>, module, 0);
+PythonQt::priv()->registerClass(&AlbumCoverFetcherSearch::staticMetaObject, "Clementine", PythonQtCreateObject<PythonQtWrapper_AlbumCoverFetcherSearch>, NULL, module, 0);
 PythonQt::priv()->registerClass(&CoverProvider::staticMetaObject, "Clementine", PythonQtCreateObject<PythonQtWrapper_CoverProvider>, PythonQtSetInstanceWrapperOnShell<PythonQtShell_CoverProvider>, module, 0);
-PythonQt::priv()->registerClass(&CoverProviderFactory::staticMetaObject, "Clementine", PythonQtCreateObject<PythonQtWrapper_CoverProviderFactory>, PythonQtSetInstanceWrapperOnShell<PythonQtShell_CoverProviderFactory>, module, 0);
 PythonQt::priv()->registerClass(&CoverProviders::staticMetaObject, "Clementine", PythonQtCreateObject<PythonQtWrapper_CoverProviders>, NULL, module, 0);
 PythonQt::priv()->registerCPPClass("CoverSearchResult", "", "Clementine", PythonQtCreateObject<PythonQtWrapper_CoverSearchResult>, PythonQtSetInstanceWrapperOnShell<PythonQtShell_CoverSearchResult>, module, 0);
 PythonQt::priv()->registerCPPClass("Directory", "", "Clementine", PythonQtCreateObject<PythonQtWrapper_Directory>, PythonQtSetInstanceWrapperOnShell<PythonQtShell_Directory>, module, 0);

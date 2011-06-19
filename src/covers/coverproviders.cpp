@@ -16,58 +16,42 @@
 */
 
 #include "config.h"
-#include "coverproviderfactory.h"
+#include "coverprovider.h"
 #include "coverproviders.h"
-
-#ifdef HAVE_LIBLASTFM
-# include "lastfmcoverproviderfactory.h"
-#endif
+#include "core/logging.h"
 
 CoverProviders::CoverProviders()
-{
-   // registering built-in provider factories...
-
-   // every built-in provider factory needs an explicit parent; otherwise,
-   // the default parent, namely CoverProviders::instance(), will 
-   // cause an infinite recursion here
-#ifdef HAVE_LIBLASTFM
-   cover_provider_factories_.append(new LastFmCoverProviderFactory(this));
-#endif
+  : QObject(NULL) {
 }
 
-void CoverProviders::AddProviderFactory(CoverProviderFactory* factory) {
+void CoverProviders::AddProvider(CoverProvider* provider) {
   {
     QMutexLocker locker(&mutex_);
-    Q_UNUSED(locker);
-
-    cover_provider_factories_.append(factory);
-    connect(factory, SIGNAL(destroyed()), SLOT(RemoveProviderFactory()));
+    cover_providers_.append(provider);
   }
+
+  qLog(Debug) << "Registered cover provider" << provider->name();
+
+  connect(provider, SIGNAL(destroyed()), SLOT(ProviderDestroyed()));
 }
 
-void CoverProviders::RemoveProviderFactory() {
-  // qobject_cast doesn't work here with factories created by python
-  CoverProviderFactory* factory = static_cast<CoverProviderFactory*>(sender());
+void CoverProviders::RemoveProvider(CoverProvider* provider) {
+  if (!provider)
+    return;
 
-  if (factory) {
-    {
-      QMutexLocker locker(&mutex_);
-      Q_UNUSED(locker);
+  qLog(Debug) << "Unregistered cover provider" << provider->name();
 
-      cover_provider_factories_.removeAll(factory);
-    }
-  }
-}
-
-QList<CoverProvider*> CoverProviders::List(AlbumCoverFetcherSearch* parent) {
   {
     QMutexLocker locker(&mutex_);
-    Q_UNUSED(locker);
-
-    QList<CoverProvider*> result;
-    foreach(CoverProviderFactory* factory, cover_provider_factories_) {
-        result.append(factory->CreateCoverProvider(parent));
-    }
-    return result;
+    cover_providers_.removeAll(provider);
   }
+}
+
+void CoverProviders::ProviderDestroyed() {
+  CoverProvider* provider = static_cast<CoverProvider*>(sender());
+  RemoveProvider(provider);
+}
+
+int CoverProviders::NextId() {
+  return next_id_.fetchAndAddRelaxed(1);
 }

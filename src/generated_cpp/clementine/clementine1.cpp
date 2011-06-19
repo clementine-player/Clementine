@@ -12,12 +12,6 @@
 #include <qurl.h>
 #include <urlhandler.h>
 
-TaskManager_Task* PythonQtWrapper_TaskManager_Task::new_TaskManager_Task()
-{ 
-return new PythonQtShell_TaskManager_Task(); }
-
-
-
 qint64  PythonQtShell_ThreadSafeNetworkDiskCache::cacheSize() const
 {
 if (_wrapper) {

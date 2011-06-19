@@ -21,6 +21,7 @@
 #include "albumcoverfetcher.h"
 #include "coverprovider.h"
 
+#include <QMap>
 #include <QObject>
 
 class QNetworkReply;
@@ -28,12 +29,17 @@ class QNetworkReply;
 // A built-in cover provider which fetches covers from last.fm.
 class LastFmCoverProvider : public CoverProvider {
   Q_OBJECT
+
 public:
   LastFmCoverProvider(QObject* parent);
-  virtual ~LastFmCoverProvider() {}
 
-  QNetworkReply* SendRequest(const QString& query);
-  CoverSearchResults ParseReply(QNetworkReply* reply);
+  bool StartSearch(const QString& query, int id);
+
+private slots:
+  void QueryFinished();
+
+private:
+  QMap<QNetworkReply*, int> pending_queries_;
 };
 
 #endif // LASTFMCOVERPROVIDER_H

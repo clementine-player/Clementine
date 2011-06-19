@@ -4,9 +4,7 @@
 #include <PythonQtSignalReceiver.h>
 #include <QVariant>
 #include <albumcoverfetcher.h>
-#include <albumcoverfetchersearch.h>
 #include <coverprovider.h>
-#include <coverproviderfactory.h>
 #include <coverproviders.h>
 #include <directory.h>
 #include <librarybackend.h>
@@ -56,118 +54,6 @@
 #include <taskmanager.h>
 #include <urlhandler.h>
 
-void PythonQtShell_AlbumCoverFetcherSearch::childEvent(QChildEvent*  arg__1)
-{
-if (_wrapper) {
-  PyObject* obj = PyObject_GetAttrString((PyObject*)_wrapper, "childEvent");
-  PyErr_Clear();
-  if (obj && !PythonQtSlotFunction_Check(obj)) {
-    static const char* argumentList[] ={"" , "QChildEvent*"};
-    static const PythonQtMethodInfo* methodInfo = PythonQtMethodInfo::getCachedMethodInfoFromArgumentList(2, argumentList);
-    void* args[2] = {NULL, (void*)&arg__1};
-    PyObject* result = PythonQtSignalTarget::call(obj, methodInfo, args, true);
-    if (result) { Py_DECREF(result); } 
-    Py_DECREF(obj);
-    return;
-  }
-  Py_XDECREF(obj);
-}
-  AlbumCoverFetcherSearch::childEvent(arg__1);
-}
-void PythonQtShell_AlbumCoverFetcherSearch::customEvent(QEvent*  arg__1)
-{
-if (_wrapper) {
-  PyObject* obj = PyObject_GetAttrString((PyObject*)_wrapper, "customEvent");
-  PyErr_Clear();
-  if (obj && !PythonQtSlotFunction_Check(obj)) {
-    static const char* argumentList[] ={"" , "QEvent*"};
-    static const PythonQtMethodInfo* methodInfo = PythonQtMethodInfo::getCachedMethodInfoFromArgumentList(2, argumentList);
-    void* args[2] = {NULL, (void*)&arg__1};
-    PyObject* result = PythonQtSignalTarget::call(obj, methodInfo, args, true);
-    if (result) { Py_DECREF(result); } 
-    Py_DECREF(obj);
-    return;
-  }
-  Py_XDECREF(obj);
-}
-  AlbumCoverFetcherSearch::customEvent(arg__1);
-}
-bool  PythonQtShell_AlbumCoverFetcherSearch::event(QEvent*  arg__1)
-{
-if (_wrapper) {
-  PyObject* obj = PyObject_GetAttrString((PyObject*)_wrapper, "event");
-  PyErr_Clear();
-  if (obj && !PythonQtSlotFunction_Check(obj)) {
-    static const char* argumentList[] ={"bool" , "QEvent*"};
-    static const PythonQtMethodInfo* methodInfo = PythonQtMethodInfo::getCachedMethodInfoFromArgumentList(2, argumentList);
-      bool returnValue = 0;
-    void* args[2] = {NULL, (void*)&arg__1};
-    PyObject* result = PythonQtSignalTarget::call(obj, methodInfo, args, true);
-    if (result) {
-      args[0] = PythonQtConv::ConvertPythonToQt(methodInfo->parameters().at(0), result, false, NULL, &returnValue);
-      if (args[0]!=&returnValue) {
-        if (args[0]==NULL) {
-          PythonQt::priv()->handleVirtualOverloadReturnError("event", methodInfo, result);
-        } else {
-          returnValue = *((bool*)args[0]);
-        }
-      }
-    }
-    if (result) { Py_DECREF(result); } 
-    Py_DECREF(obj);
-    return returnValue;
-  }
-  Py_XDECREF(obj);
-}
-  return AlbumCoverFetcherSearch::event(arg__1);
-}
-bool  PythonQtShell_AlbumCoverFetcherSearch::eventFilter(QObject*  arg__1, QEvent*  arg__2)
-{
-if (_wrapper) {
-  PyObject* obj = PyObject_GetAttrString((PyObject*)_wrapper, "eventFilter");
-  PyErr_Clear();
-  if (obj && !PythonQtSlotFunction_Check(obj)) {
-    static const char* argumentList[] ={"bool" , "QObject*" , "QEvent*"};
-    static const PythonQtMethodInfo* methodInfo = PythonQtMethodInfo::getCachedMethodInfoFromArgumentList(3, argumentList);
-      bool returnValue = 0;
-    void* args[3] = {NULL, (void*)&arg__1, (void*)&arg__2};
-    PyObject* result = PythonQtSignalTarget::call(obj, methodInfo, args, true);
-    if (result) {
-      args[0] = PythonQtConv::ConvertPythonToQt(methodInfo->parameters().at(0), result, false, NULL, &returnValue);
-      if (args[0]!=&returnValue) {
-        if (args[0]==NULL) {
-          PythonQt::priv()->handleVirtualOverloadReturnError("eventFilter", methodInfo, result);
-        } else {
-          returnValue = *((bool*)args[0]);
-        }
-      }
-    }
-    if (result) { Py_DECREF(result); } 
-    Py_DECREF(obj);
-    return returnValue;
-  }
-  Py_XDECREF(obj);
-}
-  return AlbumCoverFetcherSearch::eventFilter(arg__1, arg__2);
-}
-void PythonQtShell_AlbumCoverFetcherSearch::timerEvent(QTimerEvent*  arg__1)
-{
-if (_wrapper) {
-  PyObject* obj = PyObject_GetAttrString((PyObject*)_wrapper, "timerEvent");
-  PyErr_Clear();
-  if (obj && !PythonQtSlotFunction_Check(obj)) {
-    static const char* argumentList[] ={"" , "QTimerEvent*"};
-    static const PythonQtMethodInfo* methodInfo = PythonQtMethodInfo::getCachedMethodInfoFromArgumentList(2, argumentList);
-    void* args[2] = {NULL, (void*)&arg__1};
-    PyObject* result = PythonQtSignalTarget::call(obj, methodInfo, args, true);
-    if (result) { Py_DECREF(result); } 
-    Py_DECREF(obj);
-    return;
-  }
-  Py_XDECREF(obj);
-}
-  AlbumCoverFetcherSearch::timerEvent(arg__1);
-}
 void PythonQtWrapper_AlbumCoverFetcherSearch::Start(AlbumCoverFetcherSearch* theWrappedObject)
 {
   ( theWrappedObject->Start());
@@ -175,24 +61,42 @@ void PythonQtWrapper_AlbumCoverFetcherSearch::Start(AlbumCoverFetcherSearch* the
 
 
 
-QList<CoverSearchResult >  PythonQtShell_CoverProvider::ParseReply(QNetworkReply*  reply)
+void PythonQtShell_CoverProvider::CancelSearch(int  id)
 {
 if (_wrapper) {
-  PyObject* obj = PyObject_GetAttrString((PyObject*)_wrapper, "ParseReply");
+  PyObject* obj = PyObject_GetAttrString((PyObject*)_wrapper, "CancelSearch");
   PyErr_Clear();
   if (obj && !PythonQtSlotFunction_Check(obj)) {
-    static const char* argumentList[] ={"QList<CoverSearchResult >" , "QNetworkReply*"};
+    static const char* argumentList[] ={"" , "int"};
     static const PythonQtMethodInfo* methodInfo = PythonQtMethodInfo::getCachedMethodInfoFromArgumentList(2, argumentList);
-      QList<CoverSearchResult > returnValue;
-    void* args[2] = {NULL, (void*)&reply};
+    void* args[2] = {NULL, (void*)&id};
+    PyObject* result = PythonQtSignalTarget::call(obj, methodInfo, args, true);
+    if (result) { Py_DECREF(result); } 
+    Py_DECREF(obj);
+    return;
+  }
+  Py_XDECREF(obj);
+}
+  CoverProvider::CancelSearch(id);
+}
+bool  PythonQtShell_CoverProvider::StartSearch(const QString&  query, int  id)
+{
+if (_wrapper) {
+  PyObject* obj = PyObject_GetAttrString((PyObject*)_wrapper, "StartSearch");
+  PyErr_Clear();
+  if (obj && !PythonQtSlotFunction_Check(obj)) {
+    static const char* argumentList[] ={"bool" , "const QString&" , "int"};
+    static const PythonQtMethodInfo* methodInfo = PythonQtMethodInfo::getCachedMethodInfoFromArgumentList(3, argumentList);
+      bool returnValue = 0;
+    void* args[3] = {NULL, (void*)&query, (void*)&id};
     PyObject* result = PythonQtSignalTarget::call(obj, methodInfo, args, true);
     if (result) {
       args[0] = PythonQtConv::ConvertPythonToQt(methodInfo->parameters().at(0), result, false, NULL, &returnValue);
       if (args[0]!=&returnValue) {
         if (args[0]==NULL) {
-          PythonQt::priv()->handleVirtualOverloadReturnError("ParseReply", methodInfo, result);
+          PythonQt::priv()->handleVirtualOverloadReturnError("StartSearch", methodInfo, result);
         } else {
-          returnValue = *((QList<CoverSearchResult >*)args[0]);
+          returnValue = *((bool*)args[0]);
         }
       }
     }
@@ -202,36 +106,7 @@ if (_wrapper) {
   }
   Py_XDECREF(obj);
 }
-  return QList<CoverSearchResult >();
-}
-QNetworkReply*  PythonQtShell_CoverProvider::SendRequest(const QString&  query)
-{
-if (_wrapper) {
-  PyObject* obj = PyObject_GetAttrString((PyObject*)_wrapper, "SendRequest");
-  PyErr_Clear();
-  if (obj && !PythonQtSlotFunction_Check(obj)) {
-    static const char* argumentList[] ={"QNetworkReply*" , "const QString&"};
-    static const PythonQtMethodInfo* methodInfo = PythonQtMethodInfo::getCachedMethodInfoFromArgumentList(2, argumentList);
-      QNetworkReply* returnValue = 0;
-    void* args[2] = {NULL, (void*)&query};
-    PyObject* result = PythonQtSignalTarget::call(obj, methodInfo, args, true);
-    if (result) {
-      args[0] = PythonQtConv::ConvertPythonToQt(methodInfo->parameters().at(0), result, false, NULL, &returnValue);
-      if (args[0]!=&returnValue) {
-        if (args[0]==NULL) {
-          PythonQt::priv()->handleVirtualOverloadReturnError("SendRequest", methodInfo, result);
-        } else {
-          returnValue = *((QNetworkReply**)args[0]);
-        }
-      }
-    }
-    if (result) { Py_DECREF(result); } 
-    Py_DECREF(obj);
-    return returnValue;
-  }
-  Py_XDECREF(obj);
-}
-  return 0;
+  return bool();
 }
 void PythonQtShell_CoverProvider::childEvent(QChildEvent*  arg__1)
 {
@@ -349,6 +224,11 @@ CoverProvider* PythonQtWrapper_CoverProvider::new_CoverProvider(const QString&  
 { 
 return new PythonQtShell_CoverProvider(name, parent); }
 
+void PythonQtWrapper_CoverProvider::CancelSearch(CoverProvider* theWrappedObject, int  id)
+{
+  ( ((PythonQtPublicPromoter_CoverProvider*)theWrappedObject)->promoted_CancelSearch(id));
+}
+
 QString  PythonQtWrapper_CoverProvider::name(CoverProvider* theWrappedObject) const
 {
   return ( theWrappedObject->name());
@@ -356,166 +236,29 @@ QString  PythonQtWrapper_CoverProvider::name(CoverProvider* theWrappedObject) co
 
 
 
-CoverProvider*  PythonQtShell_CoverProviderFactory::CreateCoverProvider(AlbumCoverFetcherSearch*  parent)
+void PythonQtWrapper_CoverProviders::AddProvider(CoverProviders* theWrappedObject, CoverProvider*  provider)
 {
-if (_wrapper) {
-  PyObject* obj = PyObject_GetAttrString((PyObject*)_wrapper, "CreateCoverProvider");
-  PyErr_Clear();
-  if (obj && !PythonQtSlotFunction_Check(obj)) {
-    static const char* argumentList[] ={"CoverProvider*" , "AlbumCoverFetcherSearch*"};
-    static const PythonQtMethodInfo* methodInfo = PythonQtMethodInfo::getCachedMethodInfoFromArgumentList(2, argumentList);
-      CoverProvider* returnValue = 0;
-    void* args[2] = {NULL, (void*)&parent};
-    PyObject* result = PythonQtSignalTarget::call(obj, methodInfo, args, true);
-    if (result) {
-      args[0] = PythonQtConv::ConvertPythonToQt(methodInfo->parameters().at(0), result, false, NULL, &returnValue);
-      if (args[0]!=&returnValue) {
-        if (args[0]==NULL) {
-          PythonQt::priv()->handleVirtualOverloadReturnError("CreateCoverProvider", methodInfo, result);
-        } else {
-          returnValue = *((CoverProvider**)args[0]);
-        }
-      }
-    }
-    if (result) { Py_DECREF(result); } 
-    Py_DECREF(obj);
-    return returnValue;
-  }
-  Py_XDECREF(obj);
-}
-  return 0;
-}
-void PythonQtShell_CoverProviderFactory::childEvent(QChildEvent*  arg__1)
-{
-if (_wrapper) {
-  PyObject* obj = PyObject_GetAttrString((PyObject*)_wrapper, "childEvent");
-  PyErr_Clear();
-  if (obj && !PythonQtSlotFunction_Check(obj)) {
-    static const char* argumentList[] ={"" , "QChildEvent*"};
-    static const PythonQtMethodInfo* methodInfo = PythonQtMethodInfo::getCachedMethodInfoFromArgumentList(2, argumentList);
-    void* args[2] = {NULL, (void*)&arg__1};
-    PyObject* result = PythonQtSignalTarget::call(obj, methodInfo, args, true);
-    if (result) { Py_DECREF(result); } 
-    Py_DECREF(obj);
-    return;
-  }
-  Py_XDECREF(obj);
-}
-  CoverProviderFactory::childEvent(arg__1);
-}
-void PythonQtShell_CoverProviderFactory::customEvent(QEvent*  arg__1)
-{
-if (_wrapper) {
-  PyObject* obj = PyObject_GetAttrString((PyObject*)_wrapper, "customEvent");
-  PyErr_Clear();
-  if (obj && !PythonQtSlotFunction_Check(obj)) {
-    static const char* argumentList[] ={"" , "QEvent*"};
-    static const PythonQtMethodInfo* methodInfo = PythonQtMethodInfo::getCachedMethodInfoFromArgumentList(2, argumentList);
-    void* args[2] = {NULL, (void*)&arg__1};
-    PyObject* result = PythonQtSignalTarget::call(obj, methodInfo, args, true);
-    if (result) { Py_DECREF(result); } 
-    Py_DECREF(obj);
-    return;
-  }
-  Py_XDECREF(obj);
-}
-  CoverProviderFactory::customEvent(arg__1);
-}
-bool  PythonQtShell_CoverProviderFactory::event(QEvent*  arg__1)
-{
-if (_wrapper) {
-  PyObject* obj = PyObject_GetAttrString((PyObject*)_wrapper, "event");
-  PyErr_Clear();
-  if (obj && !PythonQtSlotFunction_Check(obj)) {
-    static const char* argumentList[] ={"bool" , "QEvent*"};
-    static const PythonQtMethodInfo* methodInfo = PythonQtMethodInfo::getCachedMethodInfoFromArgumentList(2, argumentList);
-      bool returnValue = 0;
-    void* args[2] = {NULL, (void*)&arg__1};
-    PyObject* result = PythonQtSignalTarget::call(obj, methodInfo, args, true);
-    if (result) {
-      args[0] = PythonQtConv::ConvertPythonToQt(methodInfo->parameters().at(0), result, false, NULL, &returnValue);
-      if (args[0]!=&returnValue) {
-        if (args[0]==NULL) {
-          PythonQt::priv()->handleVirtualOverloadReturnError("event", methodInfo, result);
-        } else {
-          returnValue = *((bool*)args[0]);
-        }
-      }
-    }
-    if (result) { Py_DECREF(result); } 
-    Py_DECREF(obj);
-    return returnValue;
-  }
-  Py_XDECREF(obj);
-}
-  return CoverProviderFactory::event(arg__1);
-}
-bool  PythonQtShell_CoverProviderFactory::eventFilter(QObject*  arg__1, QEvent*  arg__2)
-{
-if (_wrapper) {
-  PyObject* obj = PyObject_GetAttrString((PyObject*)_wrapper, "eventFilter");
-  PyErr_Clear();
-  if (obj && !PythonQtSlotFunction_Check(obj)) {
-    static const char* argumentList[] ={"bool" , "QObject*" , "QEvent*"};
-    static const PythonQtMethodInfo* methodInfo = PythonQtMethodInfo::getCachedMethodInfoFromArgumentList(3, argumentList);
-      bool returnValue = 0;
-    void* args[3] = {NULL, (void*)&arg__1, (void*)&arg__2};
-    PyObject* result = PythonQtSignalTarget::call(obj, methodInfo, args, true);
-    if (result) {
-      args[0] = PythonQtConv::ConvertPythonToQt(methodInfo->parameters().at(0), result, false, NULL, &returnValue);
-      if (args[0]!=&returnValue) {
-        if (args[0]==NULL) {
-          PythonQt::priv()->handleVirtualOverloadReturnError("eventFilter", methodInfo, result);
-        } else {
-          returnValue = *((bool*)args[0]);
-        }
-      }
-    }
-    if (result) { Py_DECREF(result); } 
-    Py_DECREF(obj);
-    return returnValue;
-  }
-  Py_XDECREF(obj);
-}
-  return CoverProviderFactory::eventFilter(arg__1, arg__2);
-}
-void PythonQtShell_CoverProviderFactory::timerEvent(QTimerEvent*  arg__1)
-{
-if (_wrapper) {
-  PyObject* obj = PyObject_GetAttrString((PyObject*)_wrapper, "timerEvent");
-  PyErr_Clear();
-  if (obj && !PythonQtSlotFunction_Check(obj)) {
-    static const char* argumentList[] ={"" , "QTimerEvent*"};
-    static const PythonQtMethodInfo* methodInfo = PythonQtMethodInfo::getCachedMethodInfoFromArgumentList(2, argumentList);
-    void* args[2] = {NULL, (void*)&arg__1};
-    PyObject* result = PythonQtSignalTarget::call(obj, methodInfo, args, true);
-    if (result) { Py_DECREF(result); } 
-    Py_DECREF(obj);
-    return;
-  }
-  Py_XDECREF(obj);
-}
-  CoverProviderFactory::timerEvent(arg__1);
-}
-CoverProviderFactory* PythonQtWrapper_CoverProviderFactory::new_CoverProviderFactory(QObject*  parent)
-{ 
-return new PythonQtShell_CoverProviderFactory(parent); }
-
-
-
-void PythonQtWrapper_CoverProviders::AddProviderFactory(CoverProviders* theWrappedObject, CoverProviderFactory*  factory)
-{
-  ( theWrappedObject->AddProviderFactory(factory));
+  ( theWrappedObject->AddProvider(provider));
 }
 
-bool  PythonQtWrapper_CoverProviders::HasAnyProviderFactories(CoverProviders* theWrappedObject)
+bool  PythonQtWrapper_CoverProviders::HasAnyProviders(CoverProviders* theWrappedObject) const
 {
-  return ( theWrappedObject->HasAnyProviderFactories());
+  return ( theWrappedObject->HasAnyProviders());
 }
 
-QList<CoverProvider* >  PythonQtWrapper_CoverProviders::List(CoverProviders* theWrappedObject, AlbumCoverFetcherSearch*  parent)
+QList<CoverProvider* >  PythonQtWrapper_CoverProviders::List(CoverProviders* theWrappedObject) const
 {
-  return ( theWrappedObject->List(parent));
+  return ( theWrappedObject->List());
+}
+
+int  PythonQtWrapper_CoverProviders::NextId(CoverProviders* theWrappedObject)
+{
+  return ( theWrappedObject->NextId());
+}
+
+void PythonQtWrapper_CoverProviders::RemoveProvider(CoverProviders* theWrappedObject, CoverProvider*  provider)
+{
+  ( theWrappedObject->RemoveProvider(provider));
 }
 
 CoverProviders*  PythonQtWrapper_CoverProviders::static_CoverProviders_instance()
@@ -9780,5 +9523,11 @@ int  PythonQtWrapper_TaskManager::StartTask(TaskManager* theWrappedObject, const
 {
   return ( theWrappedObject->StartTask(name));
 }
+
+
+
+TaskManager_Task* PythonQtWrapper_TaskManager_Task::new_TaskManager_Task()
+{ 
+return new PythonQtShell_TaskManager_Task(); }
 
 
