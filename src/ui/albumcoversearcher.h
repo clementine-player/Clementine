@@ -20,6 +20,7 @@
 
 #include "core/backgroundthread.h"
 #include "covers/albumcoverfetcher.h"
+#include "widgets/kcategorydrawer.h"
 
 #include <QDialog>
 #include <QIcon>
@@ -29,8 +30,26 @@
 class AlbumCoverLoader;
 class Ui_AlbumCoverSearcher;
 
-class QListWidgetItem;
 class QModelIndex;
+class QStandardItem;
+class QStandardItemModel;
+
+class AlbumCoverCategoryDrawer : public KCategoryDrawerV3 {
+public:
+  AlbumCoverCategoryDrawer(KCategorizedView* view);
+
+  int categoryHeight(const QModelIndex& index, const QStyleOption& option) const;
+  void drawCategory(const QModelIndex& index, int sortRole,
+                    const QStyleOption& option, QPainter* painter) const;
+
+private:
+  static const int kBarThickness;
+  static const int kBarMarginTop;
+  static const int kBarMarginBottom;
+
+  int total_height_;
+};
+
 
 // This is a dialog that lets the user search for album covers
 class AlbumCoverSearcher : public QDialog {
@@ -43,6 +62,7 @@ public:
   enum Role {
     Role_ImageURL = Qt::UserRole + 1,
     Role_ImageRequestId,
+    Role_ImageFetchFinished,
   };
 
   void Init(AlbumCoverFetcher* fetcher);
@@ -62,12 +82,14 @@ private slots:
 private:
   Ui_AlbumCoverSearcher* ui_;
 
+  QStandardItemModel* model_;
+
   QIcon no_cover_icon_;
   BackgroundThread<AlbumCoverLoader>* loader_;
   AlbumCoverFetcher* fetcher_;
 
   quint64 id_;
-  QMap<quint64, QListWidgetItem*> cover_loading_tasks_;
+  QMap<quint64, QStandardItem*> cover_loading_tasks_;
 };
 
 #endif // ALBUMCOVERSEARCHER_H

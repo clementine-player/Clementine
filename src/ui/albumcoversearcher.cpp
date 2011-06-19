@@ -17,15 +17,69 @@
 
 #include "albumcoversearcher.h"
 #include "ui_albumcoversearcher.h"
+#include "core/logging.h"
 #include "covers/albumcoverfetcher.h"
 #include "covers/albumcoverloader.h"
+#include "widgets/kcategorizedsortfilterproxymodel.h"
 
 #include <QKeyEvent>
 #include <QListWidgetItem>
+#include <QPainter>
+#include <QStandardItemModel>
+
+
+const int AlbumCoverCategoryDrawer::kBarThickness = 2;
+const int AlbumCoverCategoryDrawer::kBarMarginTop = 3;
+const int AlbumCoverCategoryDrawer::kBarMarginBottom = 10;
+
+
+AlbumCoverCategoryDrawer::AlbumCoverCategoryDrawer(KCategorizedView* view)
+    : KCategoryDrawerV3(view),
+      total_height_(view->fontMetrics().height() +
+        kBarMarginTop + kBarThickness + kBarMarginBottom) {
+  setLeftMargin(kBarMarginBottom);
+}
+
+int AlbumCoverCategoryDrawer::categoryHeight(const QModelIndex&,
+                                             const QStyleOption&) const {
+  return total_height_;
+}
+
+void AlbumCoverCategoryDrawer::drawCategory(const QModelIndex& index, int,
+                                            const QStyleOption& option,
+                                            QPainter* painter) const {
+  painter->save();
+
+  // Bold font
+  QFont font(view()->font());
+  font.setBold(true);
+  QFontMetrics metrics(font);
+
+  // Draw text
+  const QString category = tr("Covers from %1").arg(
+      index.data(KCategorizedSortFilterProxyModel::CategoryDisplayRole).toString());
+  painter->setFont(font);
+  painter->drawText(option.rect, category);
+
+  // Draw a line underneath
+  const QPoint start(option.rect.left(),
+                     option.rect.top() + metrics.height() + kBarMarginTop);
+  const QPoint end(option.rect.right(), start.y());
+
+  painter->setRenderHint(QPainter::Antialiasing, true);
+  painter->setPen(QPen(option.palette.color(QPalette::Disabled, QPalette::Text),
+                       kBarThickness, Qt::SolidLine, Qt::RoundCap));
+  painter->setOpacity(0.5);
+  painter->drawLine(start, end);
+
+  painter->restore();
+}
+
 
 AlbumCoverSearcher::AlbumCoverSearcher(const QIcon& no_cover_icon, QWidget* parent)
   : QDialog(parent),
     ui_(new Ui_AlbumCoverSearcher),
+    model_(new QStandardItemModel(this)),
     no_cover_icon_(no_cover_icon),
     loader_(new BackgroundThreadImplementation<AlbumCoverLoader, AlbumCoverLoader>(this)),
     fetcher_(NULL),
@@ -33,6 +87,12 @@ AlbumCoverSearcher::AlbumCoverSearcher(const QIcon& no_cover_icon, QWidget* pare
 {
   ui_->setupUi(this);
   ui_->busy->hide();
+
+  KCategorizedSortFilterProxyModel* proxy = new KCategorizedSortFilterProxyModel(this);
+  proxy->setCategorizedModel(true);
+  proxy->setSourceModel(model_);
+  ui_->covers->setModel(proxy);
+  ui_->covers->setCategoryDrawer(new AlbumCoverCategoryDrawer(ui_->covers));
 
   loader_->Start(true);
   loader_->Worker()->SetDefaultOutputImage(QImage(":nocover.png"));
@@ -65,10 +125,12 @@ QImage AlbumCoverSearcher::Exec(const QString &query) {
 
   if (exec() == QDialog::Rejected)
     return QImage();
-  if (!ui_->covers->currentItem())
+
+  QModelIndex selected = ui_->covers->currentIndex();
+  if (!selected.isValid() || !selected.data(Role_ImageFetchFinished).toBool())
     return QImage();
 
-  QIcon icon = ui_->covers->currentItem()->icon();
+  QIcon icon = selected.data(Qt::DecorationRole).value<QIcon>();
   if (icon.cacheKey() == no_cover_icon_.cacheKey())
     return QImage();
 
@@ -81,7 +143,7 @@ void AlbumCoverSearcher::Search() {
   ui_->query->setEnabled(false);
   ui_->covers->setEnabled(false);
 
-  ui_->covers->clear();
+  model_->clear();
   cover_loading_tasks_.clear();
 
   id_ = fetcher_->SearchForCovers(ui_->query->text());
@@ -102,12 +164,17 @@ void AlbumCoverSearcher::SearchFinished(quint64 id, const CoverSearchResults& re
 
     quint64 id = loader_->Worker()->LoadImageAsync(result.image_url, QString());
 
-    QListWidgetItem* item = new QListWidgetItem(ui_->covers);
+    QStandardItem* item = new QStandardItem;
     item->setIcon(no_cover_icon_);
     item->setText(result.description);
-    item->setData(Role_ImageURL, result.image_url);
-    item->setData(Role_ImageRequestId, id);
-    item->setData(Qt::TextAlignmentRole, QVariant(Qt::AlignTop | Qt::AlignHCenter));
+    item->setData(result.image_url, Role_ImageURL);
+    item->setData(id, Role_ImageRequestId);
+    item->setData(false, Role_ImageFetchFinished);
+    item->setData(QVariant(Qt::AlignTop | Qt::AlignHCenter), Qt::TextAlignmentRole);
+    item->setData(result.category, KCategorizedSortFilterProxyModel::CategoryDisplayRole);
+    item->setData(result.category, KCategorizedSortFilterProxyModel::CategorySortRole);
+
+    model_->appendRow(item);
 
     cover_loading_tasks_[id] = item;
   }
@@ -126,7 +193,8 @@ void AlbumCoverSearcher::ImageLoaded(quint64 id, const QImage& image) {
   icon.addPixmap(QPixmap::fromImage(image.scaled(ui_->covers->iconSize(),
       Qt::KeepAspectRatio, Qt::SmoothTransformation)));
 
-  QListWidgetItem* item = cover_loading_tasks_.take(id);
+  QStandardItem* item = cover_loading_tasks_.take(id);
+  item->setData(true, Role_ImageFetchFinished);
   item->setIcon(icon);
   item->setToolTip(item->text() + " (" + QString::number(image.width()) + "x" +
                                          QString::number(image.height()) + ")");

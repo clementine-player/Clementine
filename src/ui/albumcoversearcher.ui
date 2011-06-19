@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>556</width>
-    <height>354</height>
+    <width>829</width>
+    <height>518</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -36,7 +36,7 @@
     </layout>
    </item>
    <item>
-    <widget class="QListWidget" name="covers">
+    <widget class="KCategorizedView" name="covers">
      <property name="verticalScrollBarPolicy">
       <enum>Qt::ScrollBarAlwaysOff</enum>
      </property>
@@ -91,6 +91,11 @@
    <class>BusyIndicator</class>
    <extends>QLabel</extends>
    <header>widgets/busyindicator.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KCategorizedView</class>
+   <extends>QListView</extends>
+   <header>widgets/kcategorizedview.h</header>
   </customwidget>
  </customwidgets>
  <tabstops>

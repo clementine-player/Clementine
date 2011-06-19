@@ -83,6 +83,14 @@ void AlbumCoverFetcherSearch::ProviderSearchFinished() {
 
   if(reply->error() == QNetworkReply::NoError) {
     CoverSearchResults partial_results = provider->ParseReply(reply);
+
+    // Add categories to the results if the provider didn't specify them
+    for (int i=0 ; i<partial_results.count() ; ++i) {
+      if (partial_results[i].category.isEmpty()) {
+        partial_results[i].category = provider->name();
+      }
+    }
+
     // add results from the current provider to our pool
     results_.append(partial_results);
   } else {

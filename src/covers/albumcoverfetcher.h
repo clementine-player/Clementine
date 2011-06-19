@@ -49,8 +49,13 @@ struct CoverSearchRequest {
 // It contains an URL that leads to a found cover plus it's description (usually
 // the "artist - album" string).
 struct CoverSearchResult {
+  // used for grouping in the user interface.  defaults to the name of the
+  // provider that this result came from.
+  QString category;
+
   // description of this result (we suggest using the "artist - album" format)
   QString description;
+
   // an URL of a cover image described by this CoverSearchResult
   QString image_url;
 };

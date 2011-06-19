@@ -48,7 +48,7 @@ class AlbumCoverFetcherSearch : public QObject {
 
 signals:
   // It's the end of search (when there was no fetch-me-a-cover request).
-  void SearchFinished(quint64, CoverSearchResults results);
+  void SearchFinished(quint64, const CoverSearchResults& results);
   // It's the end of search and we've fetched a cover.
   void AlbumCoverFetched(quint64, const QImage& cover);
 
