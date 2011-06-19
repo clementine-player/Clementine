@@ -8,6 +8,8 @@
 
 #include "engines/engine_fwd.h"
 
+class QAction;
+
 class BackgroundStreams : public QObject {
   Q_OBJECT
  public:
@@ -22,23 +24,29 @@ class BackgroundStreams : public QObject {
   void EnableStream(const QString& name, bool enable);
   void SetStreamVolume(const QString& name, int volume);
 
-  int GetStreamVolume(const QString& name);
-  bool IsPlaying(const QString& name);
+  int GetStreamVolume(const QString& name) const;
+  bool IsPlaying(const QString& name) const;
 
- public slots:
-  void MakeItRain(bool enable);
-  void AllGloryToTheHypnotoad(bool enable);
+  void AddAction(const QString& name, QAction* action);
 
  signals:
   void StreamStarted(const QString& name);
   void StreamStopped(const QString& name);
 
+ private slots:
+  void StreamActionToggled(bool checked);
+  void StreamActionDestroyed();
+
  private:
   struct Stream {
+    Stream() : volume(0), id(0), action(NULL) {}
+
     QString name;
     QUrl url;
     int volume;
     int id;
+
+    QAction* action;
   };
 
   void AddStream(

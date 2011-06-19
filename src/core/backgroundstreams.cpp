@@ -1,8 +1,10 @@
 #include "backgroundstreams.h"
 
+#include <QAction>
 #include <QSettings>
 #include <QtDebug>
 
+#include "core/logging.h"
 #include "engines/enginebase.h"
 
 const char* BackgroundStreams::kSettingsGroup = "BackgroundStreams";
@@ -74,6 +76,11 @@ void BackgroundStreams::AddStream(const QString& name,
 }
 
 void BackgroundStreams::EnableStream(const QString& name, bool enable) {
+  if (!streams_.contains(name)) {
+    qLog(Warning) << "Tried to toggle a stream" << name << "which didn't exist";
+    return;
+  }
+
   Stream* stream = streams_[name];
   if (enable == (stream->id != -1)) {
     return;
@@ -97,32 +104,70 @@ void BackgroundStreams::PlayStream(Stream* stream) {
   stream->id = engine_->AddBackgroundStream(stream->url);
   engine_->SetBackgroundStreamVolume(stream->id, stream->volume);
   emit StreamStarted(stream->name);
+
+  if (stream->action) {
+    stream->action->setChecked(true);
+  }
 }
 
 void BackgroundStreams::StopStream(Stream* stream) {
   engine_->StopBackgroundStream(stream->id);
   stream->id = -1;
   emit StreamStopped(stream->name);
+
+  if (stream->action) {
+    stream->action->setChecked(false);
+  }
 }
 
-int BackgroundStreams::GetStreamVolume(const QString& name) {
+int BackgroundStreams::GetStreamVolume(const QString& name) const {
   return streams_[name]->volume;
 }
 
-bool BackgroundStreams::IsPlaying(const QString& name) {
+bool BackgroundStreams::IsPlaying(const QString& name) const {
   return streams_[name]->id != -1;
 }
 
-void BackgroundStreams::MakeItRain(bool enable) {
-  if (!streams_.contains("Rain")) {
-    AddStream("Rain", QUrl(kRainUrl));
+void BackgroundStreams::AddAction(const QString& name, QAction* action) {
+  if (!streams_.contains(name)) {
+    qLog(Error) << "Tried to add action for stream" << name << "which doesn't exist";
+    return;
   }
-  EnableStream("Rain", enable);
+
+  Stream* stream = streams_[name];
+  if (stream->action) {
+    qLog(Error) << "Tried to add multiple actions for stream" << name;
+    return;
+  }
+
+  stream->action = action;
+  action->setChecked(IsPlaying(name));
+  connect(action, SIGNAL(toggled(bool)), SLOT(StreamActionToggled(bool)));
+  connect(action, SIGNAL(destroyed()), SLOT(StreamActionDestroyed()));
 }
 
-void BackgroundStreams::AllGloryToTheHypnotoad(bool enable) {
-  if (!streams_.contains("Hypnotoad")) {
-    AddStream("Hypnotoad", QUrl(kHypnotoadUrl));
+void BackgroundStreams::StreamActionDestroyed() {
+  QAction* action = static_cast<QAction*>(sender());
+  if (!action) {
+    return;
   }
-  EnableStream("Hypnotoad", enable);
+
+  foreach (Stream* stream, streams_.values()) {
+    if (stream->action == action) {
+      stream->action = NULL;
+    }
+  }
+}
+
+void BackgroundStreams::StreamActionToggled(bool checked) {
+  QAction* action = static_cast<QAction*>(sender());
+  if (!action) {
+    return;
+  }
+
+  foreach (Stream* stream, streams_.values()) {
+    if (stream->action == action) {
+      EnableStream(stream->name, checked);
+    }
+  }
 }

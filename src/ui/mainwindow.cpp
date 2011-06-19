@@ -349,11 +349,10 @@ MainWindow::MainWindow(
   connect(ui_->action_jump, SIGNAL(triggered()), ui_->playlist->view(), SLOT(JumpToCurrentlyPlayingTrack()));
   connect(ui_->action_update_library, SIGNAL(triggered()), library_, SLOT(IncrementalScan()));
   connect(ui_->action_full_library_scan, SIGNAL(triggered()), library_, SLOT(FullScan()));
-  connect(ui_->action_rain, SIGNAL(toggled(bool)),
-          background_streams_, SLOT(MakeItRain(bool)));
-  connect(ui_->action_hypnotoad, SIGNAL(toggled(bool)),
-          background_streams_, SLOT(AllGloryToTheHypnotoad(bool)));
   connect(ui_->action_queue_manager, SIGNAL(triggered()), SLOT(ShowQueueManager()));
+
+  background_streams_->AddAction("Rain", ui_->action_rain);
+  background_streams_->AddAction("Hypnotoad", ui_->action_hypnotoad);
 
   // Playlist view actions
   ui_->action_next_playlist->setShortcuts(QList<QKeySequence>()
