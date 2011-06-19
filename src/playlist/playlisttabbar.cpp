@@ -27,6 +27,7 @@
 
 #include <QContextMenuEvent>
 #include <QMenu>
+#include <QMessageBox>
 #include <QInputDialog>
 #include <QToolTip>
 
@@ -36,11 +37,13 @@ PlaylistTabBar::PlaylistTabBar(QWidget *parent)
     menu_(new QMenu(this)),
     menu_index_(-1),
     suppress_current_changed_(false),
-    rename_editor_(new RenameTabLineEdit(this))
+    rename_editor_(new RenameTabLineEdit(this)),
+    removing_from_menu_(true)
 {
   setAcceptDrops(true);
   setElideMode(Qt::ElideRight);
   setUsesScrollButtons(true);
+  setTabsClosable(true);
 
   remove_ = menu_->addAction(IconLoader::Load("list-remove"), tr("Remove playlist"), this, SLOT(Remove()));
   rename_ = menu_->addAction(IconLoader::Load("edit-rename"), tr("Rename playlist..."), this, SLOT(Rename()));
@@ -51,8 +54,10 @@ PlaylistTabBar::PlaylistTabBar(QWidget *parent)
   connect(rename_editor_, SIGNAL(editingFinished()), SLOT(RenameInline()));
   connect(rename_editor_, SIGNAL(EditingCanceled()), SLOT(HideEditor()));
 
-  connect(this, SIGNAL(currentChanged(int)), this, SLOT(CurrentIndexChanged(int)));
-  connect(this, SIGNAL(tabMoved(int,int)), this, SLOT(TabMoved()));
+  connect(this, SIGNAL(currentChanged(int)), SLOT(CurrentIndexChanged(int)));
+  connect(this, SIGNAL(tabMoved(int,int)), SLOT(TabMoved()));
+  // We can't just emit Remove signal, we need to extract the playlist id first
+  connect(this, SIGNAL(tabCloseRequested(int)), SLOT(RemoveFromTabIndex(int)));
 }
 
 void PlaylistTabBar::SetActions(
@@ -84,10 +89,11 @@ void PlaylistTabBar::contextMenuEvent(QContextMenuEvent* e) {
 
 void PlaylistTabBar::mouseReleaseEvent(QMouseEvent* e) {
   if (e->button() == Qt::MidButton) {
-    int index = tabAt(e->pos());
-    if (index != -1) {
-      emit Remove(tabData(index).toInt());
-    }
+    // Update menu index
+    menu_index_ = tabAt(e->pos());
+    // So we don't ask for confirmation
+    removing_from_menu_ = false;
+    Remove();
   }
 
   QTabBar::mouseReleaseEvent(e);
@@ -148,7 +154,23 @@ void PlaylistTabBar::Remove() {
   if (menu_index_ == -1)
     return;
 
+  // Ask for confirmation only when we arrive here by clicking in the menu
+  if (removing_from_menu_ && QMessageBox::question(this, tr("Remove playlist"),
+                            tr("This playlist will be removed; the action can't be undone. "
+                               "Are you sure you want to continue?"),
+                            QMessageBox::Yes, QMessageBox::Cancel) != QMessageBox::Yes)
+    return;
+
+  removing_from_menu_ = true;
   emit Remove(tabData(menu_index_).toInt());
+}
+
+void PlaylistTabBar::RemoveFromTabIndex(int index) {
+  // Update the global index
+  menu_index_ = index;
+  // So we don't ask for confirmation
+  removing_from_menu_ = false;
+  Remove();
 }
 
 void PlaylistTabBar::Save() {

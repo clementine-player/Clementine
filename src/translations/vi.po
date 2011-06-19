@@ -11,10 +11,10 @@ msgstr ""
 "PO-Revision-Date: 2011-04-09 14:39+0000\n"
 "Last-Translator: Lê Trường An <xinemdungkhoc1@gmail.com>\n"
 "Language-Team: Vietnamese <vi@li.org>\n"
+"Language: vi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: vi\n"
 "X-Launchpad-Export-Date: 2011-04-10 05:08+0000\n"
 "X-Generator: Launchpad (build 12735)\n"
 
@@ -85,15 +85,15 @@ msgstr ""
 msgid "%L1 total plays"
 msgstr ""
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n thất bại"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n kết thúc"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "còn lại %n"
 
@@ -2843,6 +2843,11 @@ msgstr ""
 "Đây là lần đầu tiên bạn kết nối thiết bị này. Clementine sẽ bắt đầu quét "
 "thiết bị để tìm các tập tin nhạc - có thể mất một ít thời gian."
 
+msgid ""
+"This playlist will be removed; the action can't be undone. Are you sure you "
+"want to continue?"
+msgstr ""
+
 msgid "This stream is for paid subscribers only"
 msgstr "Đoạn nhạc này chỉ dành cho người trả phí"
 
@@ -3201,7 +3206,7 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "Zero"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "và %n bài hát"
 
@@ -3290,7 +3295,7 @@ msgstr "options"
 msgid "press enter"
 msgstr ""
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "xóa %n bài hát"
 

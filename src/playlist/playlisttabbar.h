@@ -77,6 +77,7 @@ private slots:
   void RenameInline();
   void HideEditor();
   void Remove();
+  void RemoveFromTabIndex(int index);
   void TabMoved();
   void Save();
 
@@ -95,8 +96,11 @@ private:
 
   bool suppress_current_changed_;
 
-  //editor for inline renaming
+  // Editor for inline renaming
   RenameTabLineEdit* rename_editor_;
+
+  // We want to ask confirmation only after a menu click
+  bool removing_from_menu_;
 };
 
 #endif // PLAYLISTTABBAR_H

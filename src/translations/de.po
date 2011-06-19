@@ -12,10 +12,10 @@ msgstr ""
 "PO-Revision-Date: 2011-04-11 21:24+0000\n"
 "Last-Translator: Alexander Minges <Unknown>\n"
 "Language-Team: German <de@li.org>\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: de\n"
 "X-Launchpad-Export-Date: 2011-04-12 05:12+0000\n"
 "X-Generator: Launchpad (build 12735)\n"
 
@@ -86,15 +86,15 @@ msgstr ""
 msgid "%L1 total plays"
 msgstr ""
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n fehlgeschlagen"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n konvertiert"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n verbleibend"
 
@@ -2857,6 +2857,11 @@ msgstr ""
 "Dieses Gerät wurde zum ersten Mal verbunden. Clementine wird es nun nach "
 "Musikdateien durchsuchen - dies kann einige Zeit dauern."
 
+msgid ""
+"This playlist will be removed; the action can't be undone. Are you sure you "
+"want to continue?"
+msgstr ""
+
 msgid "This stream is for paid subscribers only"
 msgstr "Dieser Stream ist nur für zahlende Kunden verfügbar"
 
@@ -3218,7 +3223,7 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "Null"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "%n Stücke hinzufügen"
 
@@ -3307,7 +3312,7 @@ msgstr "Einstellungen"
 msgid "press enter"
 msgstr ""
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "%n Stücke entfernen"
 

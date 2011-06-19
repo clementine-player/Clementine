@@ -11,10 +11,10 @@ msgstr ""
 "PO-Revision-Date: 2011-03-08 11:50+0000\n"
 "Last-Translator: Lele Long <schemacs@gmail.com>\n"
 "Language-Team: Chinese (simplified) <i18n-zh@googlegroups.com>\n"
+"Language: zh\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: zh\n"
 "X-Launchpad-Export-Date: 2011-04-10 05:08+0000\n"
 "X-Generator: Launchpad (build 12735)\n"
 
@@ -85,15 +85,15 @@ msgstr ""
 msgid "%L1 total plays"
 msgstr ""
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n 失败"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n 完成"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n 剩余"
 
@@ -2793,6 +2793,11 @@ msgid ""
 "scan the device to find music files - this may take some time."
 msgstr ""
 
+msgid ""
+"This playlist will be removed; the action can't be undone. Are you sure you "
+"want to continue?"
+msgstr ""
+
 msgid "This stream is for paid subscribers only"
 msgstr ""
 
@@ -3131,7 +3136,7 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "00"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "添加 %n 首曲目"
 
@@ -3220,7 +3225,7 @@ msgstr "选项"
 msgid "press enter"
 msgstr ""
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "移除 %n 歌"
 

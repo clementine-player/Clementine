@@ -11,10 +11,10 @@ msgstr ""
 "PO-Revision-Date: 2011-04-09 11:31+0000\n"
 "Last-Translator: DAG Software <Unknown>\n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
 "X-Launchpad-Export-Date: 2011-04-10 05:07+0000\n"
 "X-Generator: Launchpad (build 12735)\n"
 "X-Language: sk_SK\n"
@@ -86,15 +86,15 @@ msgstr ""
 msgid "%L1 total plays"
 msgstr ""
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n zlyhalo"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n dokončených"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n zostávajúcich"
 
@@ -2841,6 +2841,11 @@ msgstr ""
 "Prvý krát ste pripojili toto zariadenie. Clementine teraz prehľadá "
 "zariadenie aby našlo hudobné súbory - môže to zabrať nejaký čas."
 
+msgid ""
+"This playlist will be removed; the action can't be undone. Are you sure you "
+"want to continue?"
+msgstr ""
+
 msgid "This stream is for paid subscribers only"
 msgstr "Tento stream je len pre platiacich odoberateľov"
 
@@ -3197,7 +3202,7 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "Vynulovať"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "pridať %n piesní"
 
@@ -3286,7 +3291,7 @@ msgstr "možnosti"
 msgid "press enter"
 msgstr ""
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "odstrániť %n piesní"
 
