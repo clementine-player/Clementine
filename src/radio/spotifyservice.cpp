@@ -568,9 +568,9 @@ void SpotifyService::SyncPlaylistProgress(
       task_id = starred_sync_id_;
       break;
     case protobuf::UserPlaylist: {
-      QMap<int, int>::const_iterator it = playlist_sync_ids_.find(
+      QMap<int, int>::const_iterator it = playlist_sync_ids_.constFind(
           progress.request().user_playlist_index());
-      if (it != playlist_sync_ids_.end()) {
+      if (it != playlist_sync_ids_.constEnd()) {
         task_id = it.value();
       }
       break;

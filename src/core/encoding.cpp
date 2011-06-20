@@ -134,7 +134,8 @@ QTextCodec* UniversalEncodingHandler::Guess(const TagLib::FileRef& fileref) {
     return NULL;
   }
 
-  QHash<QTextCodec*, int>::const_iterator max = std::max_element(usages.begin(), usages.end());
+  QHash<QTextCodec*, int>::const_iterator max =
+      std::max_element(usages.constBegin(), usages.constEnd());
   return max.key();
 }
 
@@ -174,8 +175,9 @@ QTextCodec* UniversalEncodingHandler::Guess(const Engine::SimpleMetaBundle& bund
   ++usages[Guess(bundle, &Engine::SimpleMetaBundle::genre)];
 
   usages.remove(NULL);  // Remove votes for ASCII.
-  QHash<QTextCodec*, int>::const_iterator max = std::max_element(usages.begin(), usages.end());
-  if (max != usages.end()) {
+  QHash<QTextCodec*, int>::const_iterator max =
+      std::max_element(usages.constBegin(), usages.constEnd());
+  if (max != usages.constEnd()) {
     return max.key();
   }
   return NULL;
