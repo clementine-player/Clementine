@@ -56,7 +56,7 @@ void LastFmCoverProvider::QueryFinished() {
     lastfm::XmlQuery query(lastfm::ws::parse(reply));
 #ifdef Q_OS_WIN32
     if (lastfm::ws::last_parse_error != lastfm::ws::NoError) {
-      throw std::runtime_error();
+      throw std::runtime_error("");
     }
 #endif
 
