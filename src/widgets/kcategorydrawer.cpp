@@ -24,8 +24,8 @@
 #include <QStyleOption>
 #include <QApplication>
 
-#include <kcategorizedview.h>
-#include <kcategorizedsortfilterproxymodel.h>
+#include "kcategorizedview.h"
+#include "kcategorizedsortfilterproxymodel.h"
 
 #define HORIZONTAL_HINT 3
 
