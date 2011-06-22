@@ -90,7 +90,6 @@ set(SOURCES
   core/songloader.cpp
   core/stylesheetloader.cpp
   core/taskmanager.cpp
-  core/ubuntuunityhack.cpp
   core/urlhandler.cpp
   core/utilities.cpp
 
@@ -320,7 +319,6 @@ set(HEADERS
   core/player.h
   core/songloader.h
   core/taskmanager.h
-  core/ubuntuunityhack.h
   core/urlhandler.h
 
   covers/albumcoverfetcher.h
@@ -874,6 +872,12 @@ if(HAVE_REMOTE)
   )
 endif(HAVE_REMOTE)
 
+if(LINUX)
+  # Hack to add Clementine to the Unity system tray whitelist
+  list(APPEND SOURCES core/ubuntuunityhack.cpp)
+  list(APPEND HEADERS core/ubuntuunityhack.h)
+endif(LINUX)
+
 # OS-specific sources that should be searched for translatable strings even
 # if they're not compiled
 list(APPEND OTHER_SOURCES
@@ -886,6 +890,8 @@ list(APPEND OTHER_SOURCES
   core/mpris1.h
   core/mpris2.cpp
   core/mpris2.h
+  core/ubuntuunityhack.cpp
+  core/ubuntuunityhack.h
   devices/afcdevice.cpp
   devices/afcdevice.h
   devices/afcfile.cpp

@@ -379,10 +379,12 @@ int main(int argc, char *argv[]) {
   // later
   CoverProviders::instance();
 
+#ifdef Q_OS_LINUX
   // In 11.04 Ubuntu decided that the system tray should be reserved for certain
   // whitelisted applications.  Clementine will override this setting and insert
   // itself into the list of whitelisted apps.
   UbuntuUnityHack hack;
+#endif // Q_OS_LINUX
 
   // Create the tray icon and OSD
   scoped_ptr<SystemTrayIcon> tray_icon(SystemTrayIcon::CreateSystemTrayIcon());
