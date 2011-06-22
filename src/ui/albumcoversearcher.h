@@ -67,7 +67,7 @@ public:
 
   void Init(AlbumCoverFetcher* fetcher);
 
-  QImage Exec(const QString& query);
+  QImage Exec(const QString& artist, const QString& album);
 
 protected:
   void keyPressEvent(QKeyEvent *);

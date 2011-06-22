@@ -40,7 +40,7 @@ public:
   // Starts searching for covers matching the given query text.  Returns true
   // if the query has been started, or false if an error occurred.  The provider
   // should remember the ID and emit it along with the result when it finishes.
-  virtual bool StartSearch(const QString& query, int id) = 0;
+  virtual bool StartSearch(const QString& artist, const QString& album, int id) = 0;
 
   virtual void CancelSearch(int id) {}
 

@@ -74,7 +74,7 @@ public:
     PythonQtShell_CoverProvider(const QString&  name, QObject*  parent):CoverProvider(name, parent),_wrapper(NULL) {};
 
 virtual void CancelSearch(int  id);
-virtual bool  StartSearch(const QString&  query, int  id);
+virtual bool  StartSearch(const QString&  artist, const QString&  album, int  id);
 virtual void childEvent(QChildEvent*  arg__1);
 virtual void customEvent(QEvent*  arg__1);
 virtual bool  event(QEvent*  arg__1);

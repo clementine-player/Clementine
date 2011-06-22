@@ -115,11 +115,12 @@ void AlbumCoverSearcher::Init(AlbumCoverFetcher* fetcher) {
   connect(fetcher_, SIGNAL(SearchFinished(quint64,CoverSearchResults)), SLOT(SearchFinished(quint64,CoverSearchResults)));
 }
 
-QImage AlbumCoverSearcher::Exec(const QString &query) {
-  ui_->query->setText(query);
-  ui_->query->setFocus();
+QImage AlbumCoverSearcher::Exec(const QString& artist, const QString& album) {
+  ui_->artist->setText(artist);
+  ui_->album->setText(album);
+  ui_->artist->setFocus();
 
-  if(!query.isEmpty()) {
+  if(!artist.isEmpty() || !album.isEmpty()) {
     Search();
   }
 
@@ -140,13 +141,14 @@ QImage AlbumCoverSearcher::Exec(const QString &query) {
 void AlbumCoverSearcher::Search() {
   ui_->busy->show();
   ui_->search->setEnabled(false);
-  ui_->query->setEnabled(false);
+  ui_->artist->setEnabled(false);
+  ui_->album->setEnabled(false);
   ui_->covers->setEnabled(false);
 
   model_->clear();
   cover_loading_tasks_.clear();
 
-  id_ = fetcher_->SearchForCovers(ui_->query->text());
+  id_ = fetcher_->SearchForCovers(ui_->artist->text(), ui_->album->text());
 }
 
 void AlbumCoverSearcher::SearchFinished(quint64 id, const CoverSearchResults& results) {
@@ -154,7 +156,8 @@ void AlbumCoverSearcher::SearchFinished(quint64 id, const CoverSearchResults& re
     return;
 
   ui_->search->setEnabled(true);
-  ui_->query->setEnabled(true);
+  ui_->artist->setEnabled(true);
+  ui_->album->setEnabled(true);
   ui_->covers->setEnabled(true);
   id_ = 0;
 

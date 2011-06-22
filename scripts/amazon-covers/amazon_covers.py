@@ -39,8 +39,9 @@ class AmazonCoverProvider(clementine.CoverProvider):
 
     self.network = clementine.NetworkAccessManager()
 
-  def StartSearch(self, query, id):
-    url = QUrl.fromEncoded(self.API_URL.format(self.PrepareAmazonRESTUrl(query)))
+  def StartSearch(self, artist, album, id):
+    query = self.PrepareAmazonRESTUrl(artist + " " + album)
+    url = QUrl.fromEncoded(self.API_URL.format(query))
     LOGGER.debug("ID %d: Sending request to '%s'" % (id, url))
 
     reply = self.network.get(QNetworkRequest(url))

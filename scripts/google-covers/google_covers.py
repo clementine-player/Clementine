@@ -25,8 +25,8 @@ class GoogleImagesCoverProvider(clementine.CoverProvider):
     }
     self.network = clementine.NetworkAccessManager()
 
-  def StartSearch(self, query, id):
-    url = self.GetQueryURL(query)
+  def StartSearch(self, artist, album, id):
+    url = self.GetQueryURL(artist + " " + album)
     LOGGER.info("Id %d - sending request to '%s'" % (id, url))
 
     reply = self.network.get(QNetworkRequest(url))
@@ -34,12 +34,12 @@ class GoogleImagesCoverProvider(clementine.CoverProvider):
     def QueryFinished():
       LOGGER.debug("Id %d - finished" % id)
 
-      self.SearchFinished(id, self.ParseReply(query, reply))
+      self.SearchFinished(id, self.ParseReply(artist, album, reply))
 
     reply.connect("finished()", QueryFinished)
     return True
 
-  def ParseReply(self, query, reply):
+  def ParseReply(self, artist, album, reply):
     results = json.loads(str(reply.readAll()))
 
     parsed = []
@@ -48,7 +48,9 @@ class GoogleImagesCoverProvider(clementine.CoverProvider):
       LOGGER.warning("Error parsing reply: %s", results["responseDetails"])
       return parsed
 
-    LOGGER.info("Parsing reply for query '%s'", query)
+    query = "%s - %s" % (artist, album)
+
+    LOGGER.info("Parsing reply for query '%s'" % query)
     for result in results['responseData']['results']:
       current = clementine.CoverSearchResult()
 

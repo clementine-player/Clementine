@@ -38,8 +38,11 @@ class AlbumCoverFetcherSearch;
 struct CoverSearchRequest {
   // an unique (for one AlbumCoverFetcher) request identifier
   quint64 id;
+
   // a search query
-  QString query;
+  QString artist;
+  QString album;
+
   // is this only a search request or should we also fetch the first
   // cover that's found?
   bool search;
@@ -77,7 +80,7 @@ class AlbumCoverFetcher : public QObject {
 
   static const int kMaxConcurrentRequests;
 
-  quint64 SearchForCovers(const QString& query);
+  quint64 SearchForCovers(const QString& artist, const QString& album);
   quint64 FetchAlbumCover(const QString& artist, const QString& album);
 
   void Clear();

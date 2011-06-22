@@ -158,12 +158,7 @@ QString AlbumCoverChoiceController::LoadCoverFromURL(Song* song) {
 
 QString AlbumCoverChoiceController::SearchForCover(Song* song) {
   // Get something sensible to stick in the search box
-  QString query = song->artist();
-  if (!query.isEmpty())
-    query += " ";
-  query += song->album();
-
-  QImage image = cover_searcher_->Exec(query);
+  QImage image = cover_searcher_->Exec(song->artist(), song->album());
 
   if(!image.isNull()) {
     QString cover = SaveCoverInCache(song->artist(), song->album(), image);

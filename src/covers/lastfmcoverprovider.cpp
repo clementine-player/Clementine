@@ -30,10 +30,10 @@ LastFmCoverProvider::LastFmCoverProvider(QObject* parent)
 {
 }
 
-bool LastFmCoverProvider::StartSearch(const QString& query, int id) {
+bool LastFmCoverProvider::StartSearch(const QString& artist, const QString& album, int id) {
   QMap<QString, QString> params;
   params["method"] = "album.search";
-  params["album"] = query;
+  params["album"] = album + " " + artist;
 
   QNetworkReply* reply = lastfm::ws::post(params);
   connect(reply, SIGNAL(finished()), SLOT(QueryFinished()));

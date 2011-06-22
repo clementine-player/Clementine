@@ -33,7 +33,7 @@ class LastFmCoverProvider : public CoverProvider {
 public:
   LastFmCoverProvider(QObject* parent);
 
-  bool StartSearch(const QString& query, int id);
+  bool StartSearch(const QString& artist, const QString& album, int id);
 
 private slots:
   void QueryFinished();

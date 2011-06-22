@@ -17,9 +17,22 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="LineEdit" name="query">
+      <widget class="LineEdit" name="artist">
+       <property name="toolTip">
+        <string>Artist</string>
+       </property>
        <property name="hint" stdset="0">
-        <string>Enter search terms here</string>
+        <string>Artist</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="LineEdit" name="album">
+       <property name="toolTip">
+        <string>Album</string>
+       </property>
+       <property name="hint" stdset="0">
+        <string>Album</string>
        </property>
       </widget>
      </item>
@@ -99,7 +112,8 @@
   </customwidget>
  </customwidgets>
  <tabstops>
-  <tabstop>query</tabstop>
+  <tabstop>artist</tabstop>
+  <tabstop>album</tabstop>
   <tabstop>search</tabstop>
   <tabstop>covers</tabstop>
   <tabstop>buttonBox</tabstop>
@@ -139,7 +153,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>query</sender>
+   <sender>artist</sender>
    <signal>returnPressed()</signal>
    <receiver>search</receiver>
    <slot>click()</slot>

@@ -79,16 +79,16 @@ if (_wrapper) {
 }
   CoverProvider::CancelSearch(id);
 }
-bool  PythonQtShell_CoverProvider::StartSearch(const QString&  query, int  id)
+bool  PythonQtShell_CoverProvider::StartSearch(const QString&  artist, const QString&  album, int  id)
 {
 if (_wrapper) {
   PyObject* obj = PyObject_GetAttrString((PyObject*)_wrapper, "StartSearch");
   PyErr_Clear();
   if (obj && !PythonQtSlotFunction_Check(obj)) {
-    static const char* argumentList[] ={"bool" , "const QString&" , "int"};
-    static const PythonQtMethodInfo* methodInfo = PythonQtMethodInfo::getCachedMethodInfoFromArgumentList(3, argumentList);
+    static const char* argumentList[] ={"bool" , "const QString&" , "const QString&" , "int"};
+    static const PythonQtMethodInfo* methodInfo = PythonQtMethodInfo::getCachedMethodInfoFromArgumentList(4, argumentList);
       bool returnValue = 0;
-    void* args[3] = {NULL, (void*)&query, (void*)&id};
+    void* args[4] = {NULL, (void*)&artist, (void*)&album, (void*)&id};
     PyObject* result = PythonQtSignalTarget::call(obj, methodInfo, args, true);
     if (result) {
       args[0] = PythonQtConv::ConvertPythonToQt(methodInfo->parameters().at(0), result, false, NULL, &returnValue);

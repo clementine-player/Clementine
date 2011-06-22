@@ -60,18 +60,19 @@ void AlbumCoverFetcherSearch::TerminateSearch() {
 void AlbumCoverFetcherSearch::Start() {
   CoverProviders* providers = &CoverProviders::instance();
 
-  // end this search before it even began if there are no providers...
   foreach(CoverProvider* provider, providers->List()) {
     connect(provider, SIGNAL(SearchFinished(int,QList<CoverSearchResult>)),
             SLOT(ProviderSearchFinished(int,QList<CoverSearchResult>)));
     const int id = providers->NextId();
-    const bool success = provider->StartSearch(request_.query, id);
+    const bool success = provider->StartSearch(
+          request_.artist, request_.album, id);
 
     if (success) {
       pending_requests_[id] = provider;
     }
   }
 
+  // end this search before it even began if there are no providers...
   if(pending_requests_.isEmpty()) {
     TerminateSearch();
   }

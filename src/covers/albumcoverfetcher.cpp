@@ -33,10 +33,11 @@ AlbumCoverFetcher::AlbumCoverFetcher(QObject* parent, QNetworkAccessManager* net
   connect(request_starter_, SIGNAL(timeout()), SLOT(StartRequests()));
 }
 
-quint64 AlbumCoverFetcher::FetchAlbumCover(
-    const QString& artist_name, const QString& album_name) {
+quint64 AlbumCoverFetcher::FetchAlbumCover(const QString& artist,
+                                           const QString& album) {
   CoverSearchRequest request;
-  request.query = artist_name + " " + album_name;
+  request.artist = artist;
+  request.album = album;
   request.search = false;
   request.id = next_id_ ++;
 
@@ -44,9 +45,11 @@ quint64 AlbumCoverFetcher::FetchAlbumCover(
   return request.id;
 }
 
-quint64 AlbumCoverFetcher::SearchForCovers(const QString &query) {
+quint64 AlbumCoverFetcher::SearchForCovers(const QString& artist,
+                                           const QString& album) {
   CoverSearchRequest request;
-  request.query = query;
+  request.artist = artist;
+  request.album = album;
   request.search = true;
   request.id = next_id_ ++;
 
@@ -81,8 +84,8 @@ void AlbumCoverFetcher::StartRequests() {
 
     // search objects are this fetcher's children so worst case scenario - they get 
     // deleted with it
-    AlbumCoverFetcherSearch* search = new AlbumCoverFetcherSearch(request, network_,
-                                                                  this);
+    AlbumCoverFetcherSearch* search = new AlbumCoverFetcherSearch(
+          request, network_, this);
     active_requests_.insert(request.id, search);
 
     connect(search, SIGNAL(SearchFinished(quint64, CoverSearchResults)),
