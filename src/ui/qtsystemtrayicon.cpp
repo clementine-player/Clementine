@@ -35,6 +35,7 @@ QtSystemTrayIcon::QtSystemTrayIcon(QObject* parent)
     action_play_pause_(NULL),
     action_stop_(NULL),
     action_stop_after_this_track_(NULL),
+    action_mute_(NULL),
     action_love_(NULL),
     action_ban_(NULL)
 {
@@ -111,7 +112,9 @@ void QtSystemTrayIcon::SetupMenu(
   menu_->addAction(next->icon(), next->text(), next, SLOT(trigger()));
 
   menu_->addSeparator();
-  menu_->addAction(mute->icon(), mute->text(), mute, SLOT(trigger()));
+  action_mute_ = menu_->addAction(mute->icon(), mute->text(), mute, SLOT(trigger()));
+  action_mute_->setCheckable(true);
+  action_mute_->setChecked(mute->isChecked());
 
   menu_->addSeparator();
 #ifdef HAVE_LIBLASTFM
@@ -215,6 +218,10 @@ void QtSystemTrayIcon::LastFMButtonBanStateChanged(bool value) {
 #endif
 }
 
+void QtSystemTrayIcon::MuteButtonStateChanged(bool value) {
+  if (action_mute_)
+    action_mute_->setChecked(value);
+}
 
 bool QtSystemTrayIcon::IsVisible() const {
   return tray_->isVisible();

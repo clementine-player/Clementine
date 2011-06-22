@@ -50,6 +50,7 @@ protected:
   void LastFMButtonVisibilityChanged(bool value);
   void LastFMButtonLoveStateChanged(bool value);
   void LastFMButtonBanStateChanged(bool value);
+  void MuteButtonStateChanged(bool value);
 
   // QObject
   bool eventFilter(QObject *, QEvent *);
@@ -63,6 +64,7 @@ private:
   QAction* action_play_pause_;
   QAction* action_stop_;
   QAction* action_stop_after_this_track_;
+  QAction* action_mute_;
   QAction* action_love_;
   QAction* action_ban_;
 

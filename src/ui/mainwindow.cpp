@@ -899,6 +899,7 @@ void MainWindow::MediaPlaying() {
 
 void MainWindow::VolumeChanged(int volume) {
   ui_->action_mute->setChecked(!volume);
+  tray_icon_->MuteButtonStateChanged(!volume);
 }
 
 void MainWindow::SongChanged(const Song& song) {
