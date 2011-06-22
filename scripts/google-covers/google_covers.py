@@ -65,7 +65,7 @@ class GoogleImagesCoverProvider(clementine.CoverProvider):
     current_args = self.api_args.copy()
     current_args['q'] = query
 
-    return QUrl(self.API_URL.format(urllib.urlencode(current_args)))
+    return QUrl.fromEncoded(self.API_URL.format(urllib.urlencode(current_args)))
 
 
 provider = GoogleImagesCoverProvider()
