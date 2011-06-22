@@ -491,7 +491,6 @@ void KCategorizedView::Private::topToBottomVisualRect(const QModelIndex &index, 
                 QModelIndex prevIndex = proxyModel->index(index.row() - 1, q->modelColumn(), q->rootIndex());
                 QRect prevRect = q->visualRect(prevIndex);
                 prevRect = mapFromViewport(prevRect);
-                const QSize currSize = q->sizeHintForIndex(index);
                 item.topLeft.rx() = blockPos.x() + categoryDrawer->leftMargin() + q->spacing();
                 item.topLeft.ry() = (prevRect.bottomRight().y() + 1) + q->spacing() - blockPos.y();
             } else {
