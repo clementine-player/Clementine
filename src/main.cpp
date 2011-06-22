@@ -124,6 +124,7 @@ void LoadTranslation(const QString& prefix, const QString& path,
     QCoreApplication::installTranslator(t);
   else
     delete t;
+  QTextCodec::setCodecForTr(QTextCodec::codecForLocale());
 }
 
 #ifdef HAVE_REMOTE

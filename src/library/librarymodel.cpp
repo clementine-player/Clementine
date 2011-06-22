@@ -1137,7 +1137,7 @@ void LibraryModel::CreateSmartPlaylists() {
 void LibraryModel::ItemFromSmartPlaylist(const QSettings& s, bool notify) const {
   LibraryItem* item = new LibraryItem(LibraryItem::Type_SmartPlaylist,
                                       notify ? NULL : smart_playlist_node_);
-  item->display_text = trUtf8(qPrintable(s.value("name").toString()));
+  item->display_text = tr(qPrintable(s.value("name").toString()));
   item->sort_text = item->display_text;
   item->key = s.value("type").toString();
   item->smart_playlist_data = s.value("data").toByteArray();
