@@ -62,6 +62,7 @@
 #include <QNetworkProxyFactory>
 #include <QSqlDatabase>
 #include <QSqlQuery>
+#include <QTextCodec>
 #include <QTranslator>
 #include <QtDebug>
 
