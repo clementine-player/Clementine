@@ -18,6 +18,7 @@
 #ifndef COVERPROVIDERS_H
 #define COVERPROVIDERS_H
 
+#include <QMap>
 #include <QMutex>
 #include <QObject>
 
@@ -44,7 +45,7 @@ public:
   void RemoveProvider(CoverProvider* provider);
 
   // Returns a list of cover providers
-  QList<CoverProvider*> List() const { return cover_providers_; }
+  QList<CoverProvider*> List() const { return cover_providers_.keys(); }
   // Returns true if this repository has at least one registered provider.
   bool HasAnyProviders() const { return !cover_providers_.isEmpty(); }
 
@@ -58,7 +59,7 @@ private:
   ~CoverProviders() {}
   Q_DISABLE_COPY(CoverProviders);
 
-  QList<CoverProvider*> cover_providers_;
+  QMap<CoverProvider*, QString> cover_providers_;
   QMutex mutex_;
 
   QAtomicInt next_id_;

@@ -27,7 +27,7 @@ CoverProviders::CoverProviders()
 void CoverProviders::AddProvider(CoverProvider* provider) {
   {
     QMutexLocker locker(&mutex_);
-    cover_providers_.append(provider);
+    cover_providers_.insert(provider, provider->name());
   }
 
   qLog(Debug) << "Registered cover provider" << provider->name();
@@ -39,11 +39,20 @@ void CoverProviders::RemoveProvider(CoverProvider* provider) {
   if (!provider)
     return;
 
-  qLog(Debug) << "Unregistered cover provider" << provider->name();
+  // It's not safe to dereference provider at this pointbecause it might have
+  // already been destroyed.
+
+  QString name;
 
   {
     QMutexLocker locker(&mutex_);
-    cover_providers_.removeAll(provider);
+    name = cover_providers_.take(provider);
+  }
+
+  if (name.isNull()) {
+    qLog(Debug) << "Tried to remove a cover provider that was not registered";
+  } else {
+    qLog(Debug) << "Unregistered cover provider" << name;
   }
 }
 
