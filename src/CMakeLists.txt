@@ -59,6 +59,7 @@ set(SOURCES
   analyzers/baranalyzer.cpp
   analyzers/blockanalyzer.cpp
   analyzers/boomanalyzer.cpp
+  analyzers/nyancatanalyzer.cpp
   analyzers/sonogram.cpp
   analyzers/turbine.cpp
 
@@ -301,6 +302,7 @@ set(HEADERS
   analyzers/baranalyzer.h
   analyzers/blockanalyzer.h
   analyzers/boomanalyzer.h
+  analyzers/nyancatanalyzer.h
   analyzers/sonogram.h
   analyzers/turbine.h
 

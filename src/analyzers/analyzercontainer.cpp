@@ -19,6 +19,7 @@
 #include "baranalyzer.h"
 #include "blockanalyzer.h"
 #include "boomanalyzer.h"
+#include "nyancatanalyzer.h"
 #include "sonogram.h"
 #include "turbine.h"
 #include "core/logging.h"
@@ -72,6 +73,8 @@ AnalyzerContainer::AnalyzerContainer(QWidget *parent)
   AddAnalyzerType<BoomAnalyzer>();
   AddAnalyzerType<Sonogram>();
   AddAnalyzerType<TurbineAnalyzer>();
+  AddAnalyzerType<NyanCatAnalyzer>();
+
   connect(mapper_, SIGNAL(mapped(int)), SLOT(ChangeAnalyzer(int)));
   disable_action_ =
       context_menu_->addAction(tr("No analyzer"), this, SLOT(DisableAnalyzer()));
