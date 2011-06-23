@@ -89,7 +89,7 @@ void NyanCatAnalyzer::analyze(QPainter& p, const Analyzer::Scope& s) {
   const float top_of_cat = float(height())/2 - float(kCatHeight)/2;
   for (int band=0 ; band<kRainbowBands ; ++band) {
     // Calculate the Y position of this band.
-    const float y = float(kCatHeight) / (kRainbowBands + 2) * (band + 0.5) + top_of_cat;
+    const float y = float(kCatHeight) / (kRainbowBands + 1) * (band + 0.5) + top_of_cat;
     // pow constants computed so that 
     // | band_scale(0) | ~= .5 and | band_scale(5) | ~= 32
     const float band_scale = -std::cos(M_PI*band/(kRainbowBands-1))*.5*std::pow(2.3, band);
