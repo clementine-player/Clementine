@@ -56,6 +56,8 @@ private:
 private:
   QPixmap cat_;
 
+  float band_scale_[kRainbowBands];
+
   int timer_id_;
   int frame_;
 

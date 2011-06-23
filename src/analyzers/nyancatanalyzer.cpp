@@ -38,6 +38,10 @@ NyanCatAnalyzer::NyanCatAnalyzer(QWidget* parent)
 
   for (int i=0 ; i<kRainbowBands ; ++i) {
     colors_[i] = QPen(QColor::fromHsv(i * 255 / kRainbowBands, 255, 255), kCatHeight/kRainbowBands);
+
+    // pow constants computed so that
+    // | band_scale(0) | ~= .5 and | band_scale(5) | ~= 32
+    band_scale_[i] = -std::cos(M_PI * i / (kRainbowBands-1)) * 0.5 * std::pow(2.3, i);
   }
 }
 
@@ -64,9 +68,6 @@ void NyanCatAnalyzer::analyze(QPainter& p, const Analyzer::Scope& s, bool new_fr
 
       // Move the history of each band across by 1 frame.
       memmove(band_start, band_start + 1, (kHistorySize - 1) * sizeof(float));
-
-      // And set the new frame to 0.
-      band_start[kHistorySize-1] = 0;
     }
 
     // Now accumulate the scope data into each band.  Should maybe use a series
@@ -75,10 +76,12 @@ void NyanCatAnalyzer::analyze(QPainter& p, const Analyzer::Scope& s, bool new_fr
     const int samples_per_band = scope_size / kRainbowBands;
     int sample = 0;
     for (int band=0 ; band<kRainbowBands ; ++band) {
-      float* accumulator = &history_[(band+1) * kHistorySize - 1];
+      float accumulator = 0.0;
       for (int i=0 ; i<samples_per_band ; ++i) {
-        *accumulator += s[sample++];
+        accumulator += s[sample++];
       }
+
+      history_[(band+1) * kHistorySize - 1] = accumulator * band_scale_[band];
     }
   }
 
@@ -92,12 +95,10 @@ void NyanCatAnalyzer::analyze(QPainter& p, const Analyzer::Scope& s, bool new_fr
   for (int band=0 ; band<kRainbowBands ; ++band) {
     // Calculate the Y position of this band.
     const float y = float(kCatHeight) / (kRainbowBands + 1) * (band + 0.5) + top_of_cat;
-    // pow constants computed so that 
-    // | band_scale(0) | ~= .5 and | band_scale(5) | ~= 32
-    const float band_scale = -std::cos(M_PI*band/(kRainbowBands-1))*.5*std::pow(2.3, band);
+
     // Add each point in the line.
     for (int x=0 ; x<kHistorySize; ++x) {
-      *dest = QPointF(px_per_frame * x, y  +  *source * kPixelScale * band_scale);
+      *dest = QPointF(px_per_frame * x, y  + *source * kPixelScale);
       ++ dest;
       ++ source;
     }
