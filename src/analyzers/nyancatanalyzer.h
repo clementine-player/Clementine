@@ -72,6 +72,17 @@ private:
   // A cache of the last frame's rainbow, so it can be used in the next frame.
   QPixmap buffer_;
 
+  // Geometry information that's updated on resize:
+  // The width of the widget minus the space for the cat
+  int available_rainbow_width_;
+
+  // X spacing between each point in the polyline.
+  int px_per_frame_;
+
+  // Amount the buffer_ is shifted to the left (off the edge of the widget) to
+  // make the rainbow extend from 0 to available_rainbow_width_.
+  int x_offset_;
+
   QBrush background_brush_;
 };
 
