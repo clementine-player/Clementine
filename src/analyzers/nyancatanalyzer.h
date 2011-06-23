@@ -60,6 +60,7 @@ private:
   int frame_;
 
   float history_[kHistorySize * kRainbowBands];
+  float mean_history_[kHistorySize * kRainbowBands];
   QPen colors_[kRainbowBands];
 
   QBrush background_brush_;

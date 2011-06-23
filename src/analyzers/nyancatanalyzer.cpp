@@ -35,6 +35,7 @@ NyanCatAnalyzer::NyanCatAnalyzer(QWidget* parent)
     background_brush_(QColor(0x0f, 0x43, 0x73))
 {
   memset(history_, 0, sizeof(history_));
+  memset(mean_history_, 0, sizeof(mean_history_));
 
   for (int i=0 ; i<kRainbowBands ; ++i) {
     colors_[i] = QPen(QColor::fromHsv(i * 255 / kRainbowBands, 255, 255), 4.5);
@@ -67,6 +68,10 @@ void NyanCatAnalyzer::analyze(QPainter& p, const Analyzer::Scope& s) {
     // And set the new frame to 0.
     band_start[kHistorySize-1] = 0;
   }
+  
+  // adjust mean history
+  memmove(mean_history_, mean_history_ + 1, (kHistorySize - 1) * sizeof(float));
+  mean_history_[kHistorySize-1] = 0;
 
   // Now accumulate the scope data into each band.  Should maybe use a series
   // of band pass filters for this, so bands can leak into neighbouring bands,
@@ -78,7 +83,11 @@ void NyanCatAnalyzer::analyze(QPainter& p, const Analyzer::Scope& s) {
     for (int i=0 ; i<samples_per_band ; ++i) {
       *accumulator += s[sample++];
     }
+    const float band_scale = std::pow(2.0, band);
+    *accumulator *= band_scale;
+    mean_history_[kHistorySize-1] += *accumulator;
   }
+  mean_history_[kHistorySize-1] /= kRainbowBands;
 
   // Create polylines for the rainbows.
   const float px_per_frame = float(width() - kCatWidth + kRainbowOverlap) / kHistorySize;
@@ -90,11 +99,10 @@ void NyanCatAnalyzer::analyze(QPainter& p, const Analyzer::Scope& s) {
   for (int band=0 ; band<kRainbowBands ; ++band) {
     // Calculate the Y position of this band.
     const float y = float(kCatHeight) / (kRainbowBands + 2) * (band + 0.5) + top_of_cat;
-    const float band_scale = std::pow(2.0, band);
-
     // Add each point in the line.
     for (int x=0 ; x<kHistorySize; ++x) {
-      *dest = QPointF(px_per_frame * x, y + *source * kPixelScale * band_scale);
+      *dest = QPointF(px_per_frame * x, y  + (*source - mean_history_[x]) * kPixelScale);
+      //      qLog(Debug) << y+ *source *kPixelScale << mean;
       ++ dest;
       ++ source;
     }
