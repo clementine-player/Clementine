@@ -45,7 +45,7 @@ private:
 
   static const int kHistorySize = 128;
   static const int kRainbowBands = 6;
-  static const float kPixelScale = 0.03;
+  static const float kPixelScale;
 
   static const int kFrameIntervalMs = 150;
 

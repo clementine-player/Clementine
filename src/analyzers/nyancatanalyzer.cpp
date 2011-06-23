@@ -23,6 +23,7 @@
 #include <QTimerEvent>
 
 const char* NyanCatAnalyzer::kName = "Nyan nyan nyan";
+const float NyanCatAnalyzer::kPixelScale = 0.03f;
 
 
 NyanCatAnalyzer::NyanCatAnalyzer(QWidget* parent)
