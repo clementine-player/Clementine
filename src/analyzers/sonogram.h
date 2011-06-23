@@ -30,7 +30,7 @@ public:
     static const char* kName;
 
 protected:
-    void analyze(QPainter& p, const Scope&);
+    void analyze(QPainter& p, const Scope&, bool new_frame);
     void transform(Scope&);
     void demo(QPainter& p);
     void resizeEvent(QResizeEvent*);

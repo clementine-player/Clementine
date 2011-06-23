@@ -21,7 +21,7 @@ public:
 
     virtual void init();
     virtual void transform( Scope &s );
-    virtual void analyze( QPainter& p, const Scope& );
+    virtual void analyze( QPainter& p, const Scope&, bool new_frame);
 
 public slots:
     void changeK_barHeight( int );

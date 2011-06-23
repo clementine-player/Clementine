@@ -79,7 +79,7 @@ BoomAnalyzer::transform( Scope &s )
 }
 
 void
-BoomAnalyzer::analyze( QPainter& p, const Scope& scope )
+BoomAnalyzer::analyze( QPainter& p, const Scope& scope, bool new_frame)
 {
     float h;
     const uint MAX_HEIGHT = height() - 1;

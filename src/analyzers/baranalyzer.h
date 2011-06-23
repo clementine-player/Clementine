@@ -18,7 +18,7 @@ class BarAnalyzer : public Analyzer::Base
         Q_INVOKABLE BarAnalyzer( QWidget* );
 
         void init();
-        virtual void analyze( QPainter& p, const Scope& );
+        virtual void analyze( QPainter& p, const Scope&, bool new_frame);
         //virtual void transform( Scope& );
 
         /**

@@ -48,6 +48,7 @@ Analyzer::Base::Base( QWidget *parent, uint scopeSize )
         , m_fht( new FHT(scopeSize) )
         , m_engine(NULL)
         , m_lastScope(512)
+        , new_frame_(false)
 {
 }
 
@@ -100,19 +101,21 @@ void Analyzer::Base::paintEvent(QPaintEvent * e)
         }
 
         transform( m_lastScope );
-        analyze( p, m_lastScope );
+        analyze( p, m_lastScope, new_frame_ );
 
         //scope.resize( m_fht->size() );
 
         break;
     }
     case Engine::Paused:
-        analyze(p, m_lastScope);
+        analyze(p, m_lastScope, new_frame_);
         break;
 
     default:
         demo(p);
     }
+
+    new_frame_ = false;
 }
 
 int Analyzer::Base::resizeExponent( int exp )
@@ -165,9 +168,9 @@ void Analyzer::Base::demo(QPainter& p) //virtual
         for( uint i = 0; i < s.size(); ++i )
             s[i] = dt * (sin( M_PI + (i * M_PI) / s.size() ) + 1.0);
 
-        analyze( p, s );
+        analyze( p, s, new_frame_ );
     }
-    else analyze( p, Scope( 32, 0 ) );
+    else analyze( p, Scope( 32, 0 ), new_frame_ );
 
     ++t;
 }
@@ -222,5 +225,6 @@ void Analyzer::Base::timerEvent(QTimerEvent* e) {
   if (e->timerId() != m_timer.timerId())
     return;
 
+  new_frame_ = true;
   update();
 }

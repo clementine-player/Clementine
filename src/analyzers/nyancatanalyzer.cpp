@@ -53,30 +53,32 @@ void NyanCatAnalyzer::timerEvent(QTimerEvent* e) {
   }
 }
 
-void NyanCatAnalyzer::analyze(QPainter& p, const Analyzer::Scope& s) {
+void NyanCatAnalyzer::analyze(QPainter& p, const Analyzer::Scope& s, bool new_frame) {
   // Discard the second half of the transform
   const int scope_size = s.size() / 2;
 
-  // Transform the music into rainbows!
-  for (int band=0 ; band<kRainbowBands ; ++band) {
-    float* band_start = history_ + band * kHistorySize;
+  if (new_frame) {
+    // Transform the music into rainbows!
+    for (int band=0 ; band<kRainbowBands ; ++band) {
+      float* band_start = history_ + band * kHistorySize;
 
-    // Move the history of each band across by 1 frame.
-    memmove(band_start, band_start + 1, (kHistorySize - 1) * sizeof(float));
+      // Move the history of each band across by 1 frame.
+      memmove(band_start, band_start + 1, (kHistorySize - 1) * sizeof(float));
 
-    // And set the new frame to 0.
-    band_start[kHistorySize-1] = 0;
-  }
+      // And set the new frame to 0.
+      band_start[kHistorySize-1] = 0;
+    }
 
-  // Now accumulate the scope data into each band.  Should maybe use a series
-  // of band pass filters for this, so bands can leak into neighbouring bands,
-  // but for now it's a series of separate square filters.
-  const int samples_per_band = scope_size / kRainbowBands;
-  int sample = 0;
-  for (int band=0 ; band<kRainbowBands ; ++band) {
-    float* accumulator = &history_[(band+1) * kHistorySize - 1];
-    for (int i=0 ; i<samples_per_band ; ++i) {
-      *accumulator += s[sample++];
+    // Now accumulate the scope data into each band.  Should maybe use a series
+    // of band pass filters for this, so bands can leak into neighbouring bands,
+    // but for now it's a series of separate square filters.
+    const int samples_per_band = scope_size / kRainbowBands;
+    int sample = 0;
+    for (int band=0 ; band<kRainbowBands ; ++band) {
+      float* accumulator = &history_[(band+1) * kHistorySize - 1];
+      for (int i=0 ; i<samples_per_band ; ++i) {
+        *accumulator += s[sample++];
+      }
     }
   }
 

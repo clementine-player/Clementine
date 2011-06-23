@@ -14,7 +14,7 @@
 
 const char* TurbineAnalyzer::kName = QT_TRANSLATE_NOOP("AnalyzerContainer", "Turbine");
 
-void TurbineAnalyzer::analyze( QPainter& p, const Scope &scope )
+void TurbineAnalyzer::analyze( QPainter& p, const Scope &scope, bool new_frame)
 {
     float h;
     const uint hd2 = height() / 2;

@@ -42,7 +42,7 @@ void Sonogram::resizeEvent(QResizeEvent *e)
 }
 
 
-void Sonogram::analyze(QPainter& p, const Scope &s)
+void Sonogram::analyze(QPainter& p, const Scope &s, bool new_frame)
 {
     int x = width() - 1;
     QColor c;
@@ -85,6 +85,6 @@ void Sonogram::transform(Scope &scope)
 
 void Sonogram::demo(QPainter& p)
 {
-    analyze(p, Scope(m_fht->size(), 0));
+    analyze(p, Scope(m_fht->size(), 0), new_frame_);
 }
 

@@ -35,7 +35,7 @@ public:
 
 protected:
     virtual void transform( Scope& );
-    virtual void analyze( QPainter& p, const Scope& );
+    virtual void analyze( QPainter& p, const Scope&, bool new_frame);
     virtual void resizeEvent( QResizeEvent* );
     virtual void paletteChange( const QPalette& );
 

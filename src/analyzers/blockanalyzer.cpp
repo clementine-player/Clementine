@@ -117,7 +117,7 @@ BlockAnalyzer::transform( Analyzer::Scope &s ) //pure virtual
 }
 
 void
-BlockAnalyzer::analyze( QPainter& p, const Analyzer::Scope &s )
+BlockAnalyzer::analyze( QPainter& p, const Analyzer::Scope &s, bool new_frame)
 {
    // y = 2 3 2 1 0 2
    //     . . . . # .

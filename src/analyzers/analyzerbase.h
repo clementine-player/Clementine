@@ -67,7 +67,7 @@ protected:
     int  resizeForBands( int );
     virtual void init() {}
     virtual void transform( Scope& );
-    virtual void analyze( QPainter& p, const Scope& ) = 0;
+    virtual void analyze( QPainter& p, const Scope&, bool new_frame) = 0;
     virtual void paused(QPainter& p);
     virtual void demo(QPainter& p);
 
@@ -77,6 +77,8 @@ protected:
     FHT    *m_fht;
     EngineBase* m_engine;
     Scope m_lastScope;
+
+    bool new_frame_;
 };
 
 

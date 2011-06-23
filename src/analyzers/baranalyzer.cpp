@@ -94,7 +94,7 @@ void BarAnalyzer::init()
 }
 
 
-void BarAnalyzer::analyze( QPainter& p, const Scope &s )
+void BarAnalyzer::analyze( QPainter& p, const Scope &s, bool new_frame)
 {
     //Analyzer::interpolate( s, m_bands );
 

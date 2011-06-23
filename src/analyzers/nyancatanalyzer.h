@@ -33,8 +33,8 @@ public:
   void timerEvent(QTimerEvent* e);
 
 protected:
-  void transform( Scope& );
-  void analyze( QPainter& p, const Analyzer::Scope& );
+  void transform(Scope&);
+  void analyze(QPainter& p, const Analyzer::Scope&, bool new_frame);
 
 private:
   static const int kCatHeight = 21;
