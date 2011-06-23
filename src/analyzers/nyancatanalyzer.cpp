@@ -86,7 +86,7 @@ void NyanCatAnalyzer::analyze(QPainter& p, const Analyzer::Scope& s) {
   for (int band=0 ; band<kRainbowBands ; ++band) {
     // Calculate the Y position of this band.
     const float y = float(height()) / (kRainbowBands + 2) * (band + 0.5);
-    const float band_scale = std::pow(2, band);
+    const float band_scale = std::pow(2.0, band);
 
     // Add each point in the line.
     for (int x=0 ; x<kHistorySize ; ++x) {
