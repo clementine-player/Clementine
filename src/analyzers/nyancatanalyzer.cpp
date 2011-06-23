@@ -112,9 +112,6 @@ void NyanCatAnalyzer::analyze(QPainter& p, const Analyzer::Scope& s, bool new_fr
     }
   }
 
-  QTime t;
-  t.start();
-
   // Do we have to draw the whole rainbow into the buffer?
   if (buffer_.isNull()) {
     buffer_ = QPixmap(size());
@@ -145,8 +142,6 @@ void NyanCatAnalyzer::analyze(QPainter& p, const Analyzer::Scope& s, bool new_fr
 
   // Draw the buffer on to the widget
   p.drawPixmap(0, 0, buffer_);
-
-  qLog(Debug) << t.elapsed();
 
   // Draw nyan cat (he's been waiting for this for 50 lines).
   // Nyan nyan nyan nyan.
