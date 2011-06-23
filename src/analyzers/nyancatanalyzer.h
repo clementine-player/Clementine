@@ -30,11 +30,12 @@ public:
 
   static const char* kName;
 
-  void timerEvent(QTimerEvent* e);
-
 protected:
   void transform(Scope&);
   void analyze(QPainter& p, const Analyzer::Scope&, bool new_frame);
+
+  void timerEvent(QTimerEvent* e);
+  void resizeEvent(QResizeEvent* e);
 
 private:
   static const int kCatHeight = 21;
@@ -54,15 +55,22 @@ private:
   }
 
 private:
+  // "constants" that get initialised in the constructor
+  float band_scale_[kRainbowBands];
+  QPen colors_[kRainbowBands];
+
+  // Nyan cat!
   QPixmap cat_;
 
-  float band_scale_[kRainbowBands];
-
+  // For the nyan cat animation
   int timer_id_;
   int frame_;
 
+  // The y positions of each point on the rainbow.
   float history_[kHistorySize * kRainbowBands];
-  QPen colors_[kRainbowBands];
+
+  // A cache of the last frame's rainbow, so it can be used in the next frame.
+  QPixmap buffer_;
 
   QBrush background_brush_;
 };

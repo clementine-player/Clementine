@@ -37,7 +37,9 @@ NyanCatAnalyzer::NyanCatAnalyzer(QWidget* parent)
   memset(history_, 0, sizeof(history_));
 
   for (int i=0 ; i<kRainbowBands ; ++i) {
-    colors_[i] = QPen(QColor::fromHsv(i * 255 / kRainbowBands, 255, 255), kCatHeight/kRainbowBands);
+    colors_[i] = QPen(QColor::fromHsv(i * 255 / kRainbowBands, 255, 255),
+                      kCatHeight/kRainbowBands,
+                      Qt::SolidLine, Qt::FlatCap);
 
     // pow constants computed so that
     // | band_scale(0) | ~= .5 and | band_scale(5) | ~= 32
@@ -55,6 +57,12 @@ void NyanCatAnalyzer::timerEvent(QTimerEvent* e) {
   } else {
     Analyzer::Base::timerEvent(e);
   }
+}
+
+void NyanCatAnalyzer::resizeEvent(QResizeEvent* e) {
+  // Invalidate the buffer so it's recreated from scratch in the next paint
+  // event.
+  buffer_ = QPixmap();
 }
 
 void NyanCatAnalyzer::analyze(QPainter& p, const Analyzer::Scope& s, bool new_frame) {
@@ -86,7 +94,7 @@ void NyanCatAnalyzer::analyze(QPainter& p, const Analyzer::Scope& s, bool new_fr
   }
 
   // Create polylines for the rainbows.
-  const float px_per_frame = float(width() - kCatWidth + kRainbowOverlap) / kHistorySize;
+  const int px_per_frame = float(width() - kCatWidth + kRainbowOverlap) / kHistorySize;
   QPointF polyline[kRainbowBands * kHistorySize];
   QPointF* dest = polyline;
   float* source = history_;
@@ -104,19 +112,45 @@ void NyanCatAnalyzer::analyze(QPainter& p, const Analyzer::Scope& s, bool new_fr
     }
   }
 
-  p.fillRect(rect(), background_brush_);
+  QTime t;
+  t.start();
 
-  // Draw the rainbows
-  p.setRenderHint(QPainter::Antialiasing);
-  for (int band=kRainbowBands-1 ; band>=0 ; --band) {
-    p.setPen(colors_[band]);
-    p.drawPolyline(&polyline[band*kHistorySize], kHistorySize);
+  // Do we have to draw the whole rainbow into the buffer?
+  if (buffer_.isNull()) {
+    buffer_ = QPixmap(size());
+    buffer_.fill(background_brush_.color());
+
+    QPainter buffer_painter(&buffer_);
+    buffer_painter.setRenderHint(QPainter::Antialiasing);
+    for (int band=kRainbowBands-1 ; band>=0 ; --band) {
+      buffer_painter.setPen(colors_[band]);
+      buffer_painter.drawPolyline(&polyline[band*kHistorySize], kHistorySize);
+    }
+  } else {
+    // We can just shuffle the buffer along a bit and draw the new frame's data.
+    QPainter buffer_painter(&buffer_);
+    buffer_painter.setRenderHint(QPainter::Antialiasing);
+
+    buffer_painter.drawPixmap(0, 0, buffer_,
+                              px_per_frame, 0,
+                              buffer_.width() - px_per_frame, -1);
+    buffer_painter.fillRect(buffer_.width() - px_per_frame, 0, px_per_frame, height(),
+                            background_brush_);
+
+    for (int band=kRainbowBands-1 ; band>=0 ; --band) {
+      buffer_painter.setPen(colors_[band]);
+      buffer_painter.drawPolyline(&polyline[(band+1)*kHistorySize - 2], 2);
+    }
   }
+
+  // Draw the buffer on to the widget
+  p.drawPixmap(0, 0, buffer_);
+
+  qLog(Debug) << t.elapsed();
 
   // Draw nyan cat (he's been waiting for this for 50 lines).
   // Nyan nyan nyan nyan.
   QRect cat_dest(width() - kCatWidth, (height() - kCatHeight) / 2,
                  kCatWidth, kCatHeight);
   p.drawPixmap(cat_dest, cat_, CatSourceRect());
-
 }
