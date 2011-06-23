@@ -43,9 +43,9 @@ private:
   static const int kCatFrameCount = 5;
   static const int kRainbowOverlap = 13;
 
-  static const int kHistorySize = 256;
+  static const int kHistorySize = 128;
   static const int kRainbowBands = 6;
-  static const float kPixelScale = 0.01;
+  static const float kPixelScale = 0.03;
 
   static const int kFrameIntervalMs = 150;
 

@@ -18,7 +18,7 @@
 #include "nyancatanalyzer.h"
 #include "core/logging.h"
 
-#include <algorithm>
+#include <cmath>
 
 #include <QTimerEvent>
 
@@ -73,7 +73,7 @@ void NyanCatAnalyzer::analyze(QPainter& p, const Analyzer::Scope& s) {
   for (int band=0 ; band<kRainbowBands ; ++band) {
     float* accumulator = &history_[(band+1) * kHistorySize - 1];
     for (int i=0 ; i<samples_per_band ; ++i) {
-      *accumulator += qAbs(s[sample++]);
+      *accumulator += s[sample++];
     }
   }
 
@@ -85,11 +85,12 @@ void NyanCatAnalyzer::analyze(QPainter& p, const Analyzer::Scope& s) {
 
   for (int band=0 ; band<kRainbowBands ; ++band) {
     // Calculate the Y position of this band.
-    float y = float(height()) / (kRainbowBands) * (band + 0.5);
+    const float y = float(height()) / (kRainbowBands + 2) * (band + 0.5);
+    const float band_scale = std::pow(2, band);
 
     // Add each point in the line.
     for (int x=0 ; x<kHistorySize ; ++x) {
-      *dest = QPointF(px_per_frame * x, y + *source * kPixelScale * (band+1));
+      *dest = QPointF(px_per_frame * x, y + *source * kPixelScale * band_scale);
       ++ dest;
       ++ source;
     }
