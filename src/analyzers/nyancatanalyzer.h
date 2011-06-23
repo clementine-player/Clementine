@@ -22,7 +22,6 @@
 
 #include <QDateTime>
 
-
 class NyanCatAnalyzer : public Analyzer::Base {
   Q_OBJECT
 
@@ -62,6 +61,8 @@ private:
 
   float history_[kHistorySize * kRainbowBands];
   QPen colors_[kRainbowBands];
+
+  QBrush background_brush_;
 };
 
 #endif // NYANCATANALYZER_H

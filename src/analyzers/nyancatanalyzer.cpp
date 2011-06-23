@@ -21,6 +21,7 @@
 #include <cmath>
 
 #include <QTimerEvent>
+#include <QBrush>
 
 const char* NyanCatAnalyzer::kName = "Nyan nyan nyan";
 const float NyanCatAnalyzer::kPixelScale = 0.03f;
@@ -30,7 +31,8 @@ NyanCatAnalyzer::NyanCatAnalyzer(QWidget* parent)
   : Analyzer::Base(parent, 9),
     cat_(":/nyancat.png"),
     timer_id_(startTimer(kFrameIntervalMs)),
-    frame_(0)
+    frame_(0),
+    background_brush_(QColor(0x0f, 0x43, 0x73))
 {
   memset(history_, 0, sizeof(history_));
 
@@ -79,23 +81,26 @@ void NyanCatAnalyzer::analyze(QPainter& p, const Analyzer::Scope& s) {
   }
 
   // Create polylines for the rainbows.
-  const float px_per_frame = float(width()) / kHistorySize;
+  const float px_per_frame = float(width() - kCatWidth + kRainbowOverlap) / kHistorySize;
   QPointF polyline[kRainbowBands * kHistorySize];
   QPointF* dest = polyline;
   float* source = history_;
 
+  const float top_of_cat = float(height())/2 - float(kCatHeight)/2;
   for (int band=0 ; band<kRainbowBands ; ++band) {
     // Calculate the Y position of this band.
-    const float y = float(height()) / (kRainbowBands + 2) * (band + 0.5);
+    const float y = float(kCatHeight) / (kRainbowBands + 2) * (band + 0.5) + top_of_cat;
     const float band_scale = std::pow(2.0, band);
 
     // Add each point in the line.
-    for (int x=0 ; x<kHistorySize ; ++x) {
+    for (int x=0 ; x<kHistorySize; ++x) {
       *dest = QPointF(px_per_frame * x, y + *source * kPixelScale * band_scale);
       ++ dest;
       ++ source;
     }
   }
+
+  p.fillRect(rect(), background_brush_);
 
   // Draw the rainbows
   p.setRenderHint(QPainter::Antialiasing);
@@ -109,4 +114,5 @@ void NyanCatAnalyzer::analyze(QPainter& p, const Analyzer::Scope& s) {
   QRect cat_dest(width() - kCatWidth, (height() - kCatHeight) / 2,
                  kCatWidth, kCatHeight);
   p.drawPixmap(cat_dest, cat_, CatSourceRect());
+
 }
