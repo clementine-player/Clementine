@@ -20,7 +20,6 @@
 
 #include "core/backgroundthread.h"
 #include "covers/albumcoverfetcher.h"
-#include "widgets/kcategorydrawer.h"
 
 #include <QDialog>
 #include <QIcon>
@@ -33,22 +32,6 @@ class Ui_AlbumCoverSearcher;
 class QModelIndex;
 class QStandardItem;
 class QStandardItemModel;
-
-class AlbumCoverCategoryDrawer : public KCategoryDrawerV3 {
-public:
-  AlbumCoverCategoryDrawer(KCategorizedView* view);
-
-  int categoryHeight(const QModelIndex& index, const QStyleOption& option) const;
-  void drawCategory(const QModelIndex& index, int sortRole,
-                    const QStyleOption& option, QPainter* painter) const;
-
-private:
-  static const int kBarThickness;
-  static const int kBarMarginTop;
-  static const int kBarMarginBottom;
-
-  int total_height_;
-};
 
 
 // This is a dialog that lets the user search for album covers

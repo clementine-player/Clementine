@@ -20,60 +20,12 @@
 #include "core/logging.h"
 #include "covers/albumcoverfetcher.h"
 #include "covers/albumcoverloader.h"
-#include "widgets/kcategorizedsortfilterproxymodel.h"
+#include "widgets/groupediconview.h"
 
 #include <QKeyEvent>
 #include <QListWidgetItem>
 #include <QPainter>
 #include <QStandardItemModel>
-
-
-const int AlbumCoverCategoryDrawer::kBarThickness = 2;
-const int AlbumCoverCategoryDrawer::kBarMarginTop = 3;
-const int AlbumCoverCategoryDrawer::kBarMarginBottom = 10;
-
-
-AlbumCoverCategoryDrawer::AlbumCoverCategoryDrawer(KCategorizedView* view)
-    : KCategoryDrawerV3(view),
-      total_height_(view->fontMetrics().height() +
-        kBarMarginTop + kBarThickness + kBarMarginBottom) {
-  setLeftMargin(kBarMarginBottom);
-}
-
-int AlbumCoverCategoryDrawer::categoryHeight(const QModelIndex&,
-                                             const QStyleOption&) const {
-  return total_height_;
-}
-
-void AlbumCoverCategoryDrawer::drawCategory(const QModelIndex& index, int,
-                                            const QStyleOption& option,
-                                            QPainter* painter) const {
-  painter->save();
-
-  // Bold font
-  QFont font(view()->font());
-  font.setBold(true);
-  QFontMetrics metrics(font);
-
-  // Draw text
-  const QString category = tr("Covers from %1").arg(
-      index.data(KCategorizedSortFilterProxyModel::CategoryDisplayRole).toString());
-  painter->setFont(font);
-  painter->drawText(option.rect, category);
-
-  // Draw a line underneath
-  const QPoint start(option.rect.left(),
-                     option.rect.top() + metrics.height() + kBarMarginTop);
-  const QPoint end(option.rect.right(), start.y());
-
-  painter->setRenderHint(QPainter::Antialiasing, true);
-  painter->setPen(QPen(option.palette.color(QPalette::Disabled, QPalette::Text),
-                       kBarThickness, Qt::SolidLine, Qt::RoundCap));
-  painter->setOpacity(0.5);
-  painter->drawLine(start, end);
-
-  painter->restore();
-}
 
 
 AlbumCoverSearcher::AlbumCoverSearcher(const QIcon& no_cover_icon, QWidget* parent)
@@ -88,11 +40,8 @@ AlbumCoverSearcher::AlbumCoverSearcher(const QIcon& no_cover_icon, QWidget* pare
   ui_->setupUi(this);
   ui_->busy->hide();
 
-  KCategorizedSortFilterProxyModel* proxy = new KCategorizedSortFilterProxyModel(this);
-  proxy->setCategorizedModel(true);
-  proxy->setSourceModel(model_);
-  ui_->covers->setModel(proxy);
-  ui_->covers->setCategoryDrawer(new AlbumCoverCategoryDrawer(ui_->covers));
+  ui_->covers->set_header_text(tr("Covers from %1"));
+  ui_->covers->setModel(model_);
 
   loader_->Start(true);
   loader_->Worker()->SetDefaultOutputImage(QImage(":nocover.png"));
@@ -174,8 +123,7 @@ void AlbumCoverSearcher::SearchFinished(quint64 id, const CoverSearchResults& re
     item->setData(id, Role_ImageRequestId);
     item->setData(false, Role_ImageFetchFinished);
     item->setData(QVariant(Qt::AlignTop | Qt::AlignHCenter), Qt::TextAlignmentRole);
-    item->setData(result.category, KCategorizedSortFilterProxyModel::CategoryDisplayRole);
-    item->setData(result.category, KCategorizedSortFilterProxyModel::CategorySortRole);
+    item->setData(result.category, GroupedIconView::Role_Group);
 
     model_->appendRow(item);
 
@@ -192,9 +140,21 @@ void AlbumCoverSearcher::ImageLoaded(quint64 id, const QImage& image) {
 
   QIcon icon(QPixmap::fromImage(image));
 
-  // Add an icon that's the right size for the view
-  icon.addPixmap(QPixmap::fromImage(image.scaled(ui_->covers->iconSize(),
-      Qt::KeepAspectRatio, Qt::SmoothTransformation)));
+  // Create a pixmap that's padded and exactly the right size for the icon.
+  QImage scaled_image(image.scaled(ui_->covers->iconSize(),
+                                   Qt::KeepAspectRatio,
+                                   Qt::SmoothTransformation));
+
+  QImage padded_image(ui_->covers->iconSize(), QImage::Format_ARGB32_Premultiplied);
+  padded_image.fill(0);
+
+  QPainter p(&padded_image);
+  p.drawImage((padded_image.width() - scaled_image.width()) / 2,
+              (padded_image.height() - scaled_image.height()) / 2,
+              scaled_image);
+  p.end();
+
+  icon.addPixmap(QPixmap::fromImage(padded_image));
 
   QStandardItem* item = cover_loading_tasks_.take(id);
   item->setData(true, Role_ImageFetchFinished);

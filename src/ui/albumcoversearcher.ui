@@ -49,8 +49,11 @@
     </layout>
    </item>
    <item>
-    <widget class="KCategorizedView" name="covers">
+    <widget class="GroupedIconView" name="covers">
      <property name="verticalScrollBarPolicy">
+      <enum>Qt::ScrollBarAsNeeded</enum>
+     </property>
+     <property name="horizontalScrollBarPolicy">
       <enum>Qt::ScrollBarAlwaysOff</enum>
      </property>
      <property name="iconSize">
@@ -59,26 +62,8 @@
        <height>120</height>
       </size>
      </property>
-     <property name="movement">
-      <enum>QListView::Free</enum>
-     </property>
-     <property name="flow">
-      <enum>QListView::LeftToRight</enum>
-     </property>
-     <property name="resizeMode">
-      <enum>QListView::Adjust</enum>
-     </property>
      <property name="spacing">
       <number>2</number>
-     </property>
-     <property name="viewMode">
-      <enum>QListView::IconMode</enum>
-     </property>
-     <property name="uniformItemSizes">
-      <bool>true</bool>
-     </property>
-     <property name="wordWrap">
-      <bool>true</bool>
      </property>
     </widget>
    </item>
@@ -106,9 +91,9 @@
    <header>widgets/busyindicator.h</header>
   </customwidget>
   <customwidget>
-   <class>KCategorizedView</class>
+   <class>GroupedIconView</class>
    <extends>QListView</extends>
-   <header>widgets/kcategorizedview.h</header>
+   <header>widgets/groupediconview.h</header>
   </customwidget>
  </customwidgets>
  <tabstops>

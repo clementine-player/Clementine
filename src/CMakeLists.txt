@@ -271,9 +271,7 @@ set(SOURCES
   widgets/fileviewlist.cpp
   widgets/freespacebar.cpp
   widgets/fullscreenhypnotoad.cpp
-  widgets/kcategorizedsortfilterproxymodel.cpp
-  widgets/kcategorizedview.cpp
-  widgets/kcategorydrawer.cpp
+  widgets/groupediconview.cpp
   widgets/lineedit.cpp
   widgets/linetextedit.cpp
   widgets/multiloadingindicator.cpp
@@ -476,8 +474,7 @@ set(HEADERS
   widgets/fileview.h
   widgets/fileviewlist.h
   widgets/freespacebar.h
-  widgets/kcategorizedview.h
-  widgets/kcategorydrawer.h
+  widgets/groupediconview.h
   widgets/lineedit.h
   widgets/linetextedit.h
   widgets/multiloadingindicator.h
