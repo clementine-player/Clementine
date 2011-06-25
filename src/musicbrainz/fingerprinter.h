@@ -18,6 +18,7 @@
 #ifndef FINGERPRINTER_H
 #define FINGERPRINTER_H
 
+#include <glib.h>
 #include <gst/gst.h>
 
 #include <QString>
@@ -58,7 +59,7 @@ private:
 private:
   QString filename_;
   QString fingerprint_;
-  QEventLoop* event_loop_;
+  GMainLoop* event_loop_;
 
   GstElement* convert_element_;
 };

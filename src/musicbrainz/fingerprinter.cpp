@@ -24,13 +24,12 @@
 
 Fingerprinter::Fingerprinter(const QString& filename)
   : filename_(filename),
-    event_loop_(new QEventLoop),
+    event_loop_(NULL),
     convert_element_(NULL)
 {
 }
 
 Fingerprinter::~Fingerprinter() {
-  delete event_loop_;
 }
 
 bool Fingerprinter::GstreamerHasOfa() {
@@ -60,6 +59,10 @@ GstElement* Fingerprinter::CreateElement(const QString &factory_name,
 }
 
 QString Fingerprinter::CreateFingerprint() {
+  GMainContext* context = g_main_context_new();
+  g_main_context_push_thread_default(context);
+  event_loop_ = g_main_loop_new(context, FALSE);
+
   GstElement* pipeline = gst_pipeline_new("pipeline");
   GstElement* src      = CreateElement("filesrc", pipeline);
   GstElement* decode   = CreateElement("decodebin2", pipeline);
@@ -88,7 +91,9 @@ QString Fingerprinter::CreateFingerprint() {
   // Start playing
   gst_element_set_state(pipeline, GST_STATE_PLAYING);
 
-  event_loop_->exec();
+  g_main_loop_run(event_loop_);
+  g_main_loop_unref(event_loop_);
+  g_main_context_unref(context);
 
   // Cleanup
   gst_bus_set_sync_handler(gst_pipeline_get_bus(GST_PIPELINE(pipeline)), NULL, NULL);
@@ -130,7 +135,7 @@ gboolean Fingerprinter::BusCallback(GstBus*, GstMessage* msg, gpointer data) {
   switch (GST_MESSAGE_TYPE(msg)) {
     case GST_MESSAGE_ERROR:
       instance->ReportError(msg);
-      instance->event_loop_->exit();
+      g_main_loop_quit(instance->event_loop_);
       break;
 
     case GST_MESSAGE_TAG:
@@ -148,12 +153,12 @@ GstBusSyncReply Fingerprinter::BusCallbackSync(GstBus*, GstMessage* msg, gpointe
 
   switch (GST_MESSAGE_TYPE(msg)) {
     case GST_MESSAGE_EOS:
-      instance->event_loop_->exit();
+      g_main_loop_quit(instance->event_loop_);
       break;
 
     case GST_MESSAGE_ERROR:
       instance->ReportError(msg);
-      instance->event_loop_->exit();
+      g_main_loop_quit(instance->event_loop_);
       break;
 
     case GST_MESSAGE_TAG:
