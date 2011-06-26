@@ -192,7 +192,7 @@ void AlbumCoverManager::Init() {
 }
 
 void AlbumCoverManager::CoverLoaderInitialised() {
-  cover_loader_->Worker()->SetDefaultOutputImage(QImage(":nocover.png"));
+  cover_loader_->Worker()->SetDefaultOutputImage(QImage());
   connect(cover_loader_->Worker().get(), SIGNAL(ImageLoaded(quint64,QImage)),
           SLOT(CoverImageLoaded(quint64,QImage)));
 }

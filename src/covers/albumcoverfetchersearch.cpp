@@ -20,28 +20,31 @@
 #include "coverprovider.h"
 #include "coverproviders.h"
 #include "core/logging.h"
+#include "core/network.h"
 
 #include <QMutexLocker>
 #include <QNetworkReply>
 #include <QTimer>
 #include <QtDebug>
 
-const int AlbumCoverFetcherSearch::kSearchTimeout = 10000;
+#include <cmath>
+
+const int AlbumCoverFetcherSearch::kSearchTimeoutMs = 10000;
+const int AlbumCoverFetcherSearch::kImageLoadTimeoutMs = 2500;
+const int AlbumCoverFetcherSearch::kTargetSize = 500;
+const float AlbumCoverFetcherSearch::kGoodScore = 1.85;
 
 AlbumCoverFetcherSearch::AlbumCoverFetcherSearch(const CoverSearchRequest& request,
                                                  QNetworkAccessManager* network,
                                                  QObject* parent)
   : QObject(parent),
     request_(request),
+    image_load_timeout_(new NetworkTimeouts(kImageLoadTimeoutMs, this)),
     network_(network)
 {
-  // we will terminate the search after kSearchTimeout miliseconds if we are not
+  // we will terminate the search after kSearchTimeoutMs miliseconds if we are not
   // able to find all of the results before that point in time
-  QTimer::singleShot(kSearchTimeout, this, SLOT(Timeout()));
-}
-
-void AlbumCoverFetcherSearch::Timeout() {
-  TerminateSearch();
+  QTimer::singleShot(kSearchTimeoutMs, this, SLOT(TerminateSearch()));
 }
 
 void AlbumCoverFetcherSearch::TerminateSearch() {
@@ -49,12 +52,7 @@ void AlbumCoverFetcherSearch::TerminateSearch() {
     pending_requests_.take(id)->CancelSearch(id);
   }
 
-  if(request_.search) {
-    // send everything we've managed to find
-    emit SearchFinished(request_.id, results_);
-  } else {
-    emit AlbumCoverFetched(request_.id, QImage());
-  }
+  AllProvidersFinished();
 }
 
 void AlbumCoverFetcherSearch::Start() {
@@ -76,6 +74,11 @@ void AlbumCoverFetcherSearch::Start() {
   if(pending_requests_.isEmpty()) {
     TerminateSearch();
   }
+}
+
+static bool CompareCategories(const CoverSearchResult& a,
+                              const CoverSearchResult& b) {
+  return a.category < b.category;
 }
 
 void AlbumCoverFetcherSearch::ProviderSearchFinished(
@@ -101,6 +104,10 @@ void AlbumCoverFetcherSearch::ProviderSearchFinished(
     return;
   }
 
+  AllProvidersFinished();
+}
+
+void AlbumCoverFetcherSearch::AllProvidersFinished() {
   // if we only wanted to do the search then we're done
   if (request_.search) {
     emit SearchFinished(request_.id, results_);
@@ -113,23 +120,99 @@ void AlbumCoverFetcherSearch::ProviderSearchFinished(
     return;
   }
 
-  // now we need to fetch the first result's image
-  QNetworkReply* image_reply = network_->get(QNetworkRequest(results_[0].image_url));
-  connect(image_reply, SIGNAL(finished()), SLOT(ProviderCoverFetchFinished()));
+  // Now we have to load some images and figure out which one is the best.
+  // We'll sort the list of results by category, then load the first few images
+  // from each category and use some heuristics to score them.  If no images
+  // are good enough we'll keep loading more images until we find one that is
+  // or we run out of results.
+  qStableSort(results_.begin(), results_.end(), CompareCategories);
+  FetchMoreImages();
+}
+
+void AlbumCoverFetcherSearch::FetchMoreImages() {
+  // Try the first one in each category.
+  QString last_category;
+  for (int i=0 ; i<results_.count() ; ++i) {
+    if (results_[i].category == last_category) {
+      continue;
+    }
+
+    CoverSearchResult result = results_.takeAt(i--);
+    last_category = result.category;
+
+    qLog(Debug) << "Loading" << result.image_url << "from" << result.category;
+
+    QNetworkReply* image_reply = network_->get(QNetworkRequest(result.image_url));
+    connect(image_reply, SIGNAL(finished()), SLOT(ProviderCoverFetchFinished()));
+    pending_image_loads_ << image_reply;
+    image_load_timeout_->AddReply(image_reply);
+  }
+
+  if (pending_image_loads_.isEmpty()) {
+    // There were no more results?  Time to give up.
+    SendBestImage();
+  }
 }
 
 void AlbumCoverFetcherSearch::ProviderCoverFetchFinished() {
   QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
   reply->deleteLater();
+  pending_image_loads_.removeAll(reply);
 
   if (reply->error() != QNetworkReply::NoError) {
-    // TODO: retry request.
-    emit AlbumCoverFetched(request_.id, QImage());
-
+    qLog(Info) << "Error requesting" << reply->url() << reply->errorString();
   } else {
     QImage image;
-    image.loadFromData(reply->readAll());
+    if (!image.loadFromData(reply->readAll())) {
+      qLog(Info) << "Error decoding image data from" << reply->url();
+    } else {
+      const float score = ScoreImage(image);
+      candidate_images_.insertMulti(score, image);
 
-    emit AlbumCoverFetched(request_.id, image);
+      qLog(Debug) << reply->url() << "scored" << score;
+    }
   }
+
+  if (pending_image_loads_.isEmpty()) {
+    // We've fetched everything we wanted to fetch for now, check if we have an
+    // image that's good enough.
+    float best_score = 0.0;
+
+    if (!candidate_images_.isEmpty()) {
+      best_score = candidate_images_.keys().last();
+    }
+
+    qLog(Debug) << "Best image so far has a score of" << best_score;
+    if (best_score >= kGoodScore) {
+      SendBestImage();
+    } else {
+      FetchMoreImages();
+    }
+  }
+}
+
+float AlbumCoverFetcherSearch::ScoreImage(const QImage& image) const {
+  // Invalid images score nothing
+  if (image.isNull()) {
+    return 0.0;
+  }
+
+  // A 500x500px image scores 1.0, bigger scores higher
+  const float size_score = std::sqrt(float(image.width() * image.height())) / kTargetSize;
+
+  // A 1:1 image scores 1.0, anything else scores less
+  const float aspect_score = 1.0 - float(image.height() - image.width()) /
+                                   std::max(image.height(), image.width());
+
+  return size_score + aspect_score;
+}
+
+void AlbumCoverFetcherSearch::SendBestImage() {
+  QImage image;
+
+  if (!candidate_images_.isEmpty()) {
+    image = candidate_images_.values().back();
+  }
+
+  emit AlbumCoverFetched(request_.id, image);
 }

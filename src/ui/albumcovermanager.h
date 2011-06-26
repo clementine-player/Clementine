@@ -158,6 +158,7 @@ class AlbumCoverManager : public QMainWindow {
   QIcon artist_icon_;
   QIcon all_artists_icon_;
   QIcon no_cover_icon_;
+  QImage no_cover_image_;
 
   QMenu* context_menu_;
   QList<QListWidgetItem*> context_menu_items_;

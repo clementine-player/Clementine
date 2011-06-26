@@ -24,6 +24,7 @@
 #include <QObject>
 
 class CoverProvider;
+class NetworkTimeouts;
 class QNetworkAccessManager;
 class QNetworkReply;
 
@@ -35,9 +36,6 @@ class AlbumCoverFetcherSearch : public QObject {
   Q_OBJECT
 
  public:
-  // A timeout (in miliseconds) for every search.
-  static const int kSearchTimeout;
-
   AlbumCoverFetcherSearch(const CoverSearchRequest& request,
                           QNetworkAccessManager* network, QObject* parent);
 
@@ -54,18 +52,33 @@ signals:
 private slots:
   void ProviderSearchFinished(int id, const QList<CoverSearchResult>& results);
   void ProviderCoverFetchFinished();
-  void Timeout();
+  void TerminateSearch();
 
 private:
-  // Timeouts this search.
-  void TerminateSearch();
+  void AllProvidersFinished();
+
+  void FetchMoreImages();
+  float ScoreImage(const QImage& image) const;
+  void SendBestImage();
+
+private:
+  static const int kSearchTimeoutMs;
+  static const int kImageLoadTimeoutMs;
+  static const int kTargetSize;
+  static const float kGoodScore;
 
   // Search request encapsulated by this AlbumCoverFetcherSearch.
   CoverSearchRequest request_;
+
   // Complete results (from all of the available providers).
   CoverSearchResults results_;
 
   QMap<int, CoverProvider*> pending_requests_;
+  QList<QNetworkReply*> pending_image_loads_;
+  NetworkTimeouts* image_load_timeout_;
+
+  // QMap happens to be sorted by key (score)
+  QMap<float, QImage> candidate_images_;
 
   QNetworkAccessManager* network_;
 };
