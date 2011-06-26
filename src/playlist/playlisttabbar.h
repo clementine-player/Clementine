@@ -99,8 +99,8 @@ private:
   // Editor for inline renaming
   RenameTabLineEdit* rename_editor_;
 
-  // We want to ask confirmation only after a menu click
-  bool removing_from_menu_;
+  // We want to ask for confirmation only in certain cases
+  bool removing_with_confirm_;
 };
 
 #endif // PLAYLISTTABBAR_H

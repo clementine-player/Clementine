@@ -38,7 +38,7 @@ PlaylistTabBar::PlaylistTabBar(QWidget *parent)
     menu_index_(-1),
     suppress_current_changed_(false),
     rename_editor_(new RenameTabLineEdit(this)),
-    removing_from_menu_(true)
+    removing_with_confirm_(true)
 {
   setAcceptDrops(true);
   setElideMode(Qt::ElideRight);
@@ -92,7 +92,7 @@ void PlaylistTabBar::mouseReleaseEvent(QMouseEvent* e) {
     // Update menu index
     menu_index_ = tabAt(e->pos());
     // So we don't ask for confirmation
-    removing_from_menu_ = false;
+    removing_with_confirm_ = false;
     Remove();
   }
 
@@ -154,22 +154,22 @@ void PlaylistTabBar::Remove() {
   if (menu_index_ == -1)
     return;
 
-  // Ask for confirmation only when we arrive here by clicking in the menu
-  if (removing_from_menu_ && QMessageBox::question(this, tr("Remove playlist"),
+  // Ask for confirmation if not middle clicking the tab
+  if (removing_with_confirm_ && QMessageBox::question(this, tr("Remove playlist"),
                             tr("This playlist will be removed; the action can't be undone. "
                                "Are you sure you want to continue?"),
                             QMessageBox::Yes, QMessageBox::Cancel) != QMessageBox::Yes)
     return;
 
-  removing_from_menu_ = true;
+  removing_with_confirm_ = true;
   emit Remove(tabData(menu_index_).toInt());
 }
 
 void PlaylistTabBar::RemoveFromTabIndex(int index) {
   // Update the global index
   menu_index_ = index;
-  // So we don't ask for confirmation
-  removing_from_menu_ = false;
+  // Ask for confirmation
+  removing_with_confirm_ = true;
   Remove();
 }
 
