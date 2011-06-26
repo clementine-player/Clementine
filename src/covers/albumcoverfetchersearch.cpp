@@ -40,7 +40,8 @@ AlbumCoverFetcherSearch::AlbumCoverFetcherSearch(const CoverSearchRequest& reque
   : QObject(parent),
     request_(request),
     image_load_timeout_(new NetworkTimeouts(kImageLoadTimeoutMs, this)),
-    network_(network)
+    network_(network),
+    cancel_requested_(false)
 {
   // we will terminate the search after kSearchTimeoutMs miliseconds if we are not
   // able to find all of the results before that point in time
@@ -108,6 +109,10 @@ void AlbumCoverFetcherSearch::ProviderSearchFinished(
 }
 
 void AlbumCoverFetcherSearch::AllProvidersFinished() {
+  if (cancel_requested_) {
+    return;
+  }
+
   // if we only wanted to do the search then we're done
   if (request_.search) {
     emit SearchFinished(request_.id, results_);
@@ -158,6 +163,10 @@ void AlbumCoverFetcherSearch::ProviderCoverFetchFinished() {
   QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
   reply->deleteLater();
   pending_image_loads_.removeAll(reply);
+
+  if (cancel_requested_) {
+    return;
+  }
 
   if (reply->error() != QNetworkReply::NoError) {
     qLog(Info) << "Error requesting" << reply->url() << reply->errorString();
@@ -215,4 +224,17 @@ void AlbumCoverFetcherSearch::SendBestImage() {
   }
 
   emit AlbumCoverFetched(request_.id, image);
+}
+
+void AlbumCoverFetcherSearch::Cancel() {
+  cancel_requested_ = true;
+
+  if (!pending_requests_.isEmpty()) {
+    TerminateSearch();
+  } else if (!pending_image_loads_.isEmpty()) {
+    foreach (QNetworkReply* reply, pending_image_loads_) {
+      reply->abort();
+    }
+    pending_image_loads_.clear();
+  }
 }
