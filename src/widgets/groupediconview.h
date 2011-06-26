@@ -69,6 +69,7 @@ protected:
   void resizeEvent(QResizeEvent* e);
 
   // QAbstractItemView
+  void dataChanged(const QModelIndex& topLeft, const QModelIndex& bottomRight);
   QModelIndex indexAt(const QPoint& p) const;
   void rowsInserted(const QModelIndex& parent, int start, int end);
   void setSelection(const QRect& rect, QItemSelectionModel::SelectionFlags command);

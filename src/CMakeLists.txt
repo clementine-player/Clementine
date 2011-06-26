@@ -270,6 +270,7 @@ set(SOURCES
   widgets/fancytabwidget.cpp
   widgets/fileview.cpp
   widgets/fileviewlist.cpp
+  widgets/forcescrollperpixel.cpp
   widgets/freespacebar.cpp
   widgets/fullscreenhypnotoad.cpp
   widgets/groupediconview.cpp

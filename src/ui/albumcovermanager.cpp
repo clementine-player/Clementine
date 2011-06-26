@@ -25,6 +25,7 @@
 #include "library/libraryquery.h"
 #include "library/sqlrow.h"
 #include "playlist/songmimedata.h"
+#include "widgets/forcescrollperpixel.h"
 #include "widgets/maclineedit.h"
 #include "ui/albumcoverchoicecontroller.h"
 
@@ -39,7 +40,6 @@
 #include <QMessageBox>
 #include <QPainter>
 #include <QProgressBar>
-#include <QScrollBar>
 #include <QSettings>
 #include <QShortcut>
 #include <QTimer>
@@ -49,7 +49,6 @@ const char* AlbumCoverManager::kSettingsGroup = "CoverManager";
 AlbumCoverManager::AlbumCoverManager(LibraryBackend* backend, QWidget* parent,
                                      QNetworkAccessManager* network)
   : QMainWindow(parent),
-    constructed_(false),
     ui_(new Ui_CoverManager),
     album_cover_choice_controller_(new AlbumCoverChoiceController(this)),
     backend_(backend),
@@ -188,7 +187,8 @@ void AlbumCoverManager::Init() {
   cover_loader_->Start(true);
   CoverLoaderInitialised();
   cover_searcher_->Init(cover_fetcher_);
-  constructed_ = true;
+
+  new ForceScrollPerPixel(ui_->albums, this);
 }
 
 void AlbumCoverManager::CoverLoaderInitialised() {
@@ -421,20 +421,6 @@ void AlbumCoverManager::UpdateStatusText() {
     got_covers_ = 0;
     missing_covers_ = 0;
   }
-}
-
-bool AlbumCoverManager::event(QEvent* e) {
-  if (constructed_) {
-    // I think KDE styles override these, and ScrollPerItem is really confusing
-    // when you have huge items.
-    // We seem to have to reset them to sensible values each time the contents
-    // of ui_->albums changes.
-    ui_->albums->setVerticalScrollMode(QListWidget::ScrollPerPixel);
-    ui_->albums->verticalScrollBar()->setSingleStep(20);
-  }
-
-  QMainWindow::event(e);
-  return false;
 }
 
 bool AlbumCoverManager::eventFilter(QObject *obj, QEvent *event) {

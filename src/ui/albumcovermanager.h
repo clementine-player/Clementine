@@ -68,7 +68,6 @@ class AlbumCoverManager : public QMainWindow {
  protected:
   void showEvent(QShowEvent *);
   void closeEvent(QCloseEvent *);
-  bool event(QEvent *);
 
   // For the album view context menu events
   bool eventFilter(QObject *obj, QEvent *event);
@@ -139,8 +138,6 @@ class AlbumCoverManager : public QMainWindow {
   void SaveAndSetCover(QListWidgetItem* item, const QImage& image);
 
  private:
-  bool constructed_;
-
   Ui_CoverManager* ui_;
 
   AlbumCoverChoiceController* album_cover_choice_controller_;

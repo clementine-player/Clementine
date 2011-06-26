@@ -20,6 +20,7 @@
 #include "core/logging.h"
 #include "covers/albumcoverfetcher.h"
 #include "covers/albumcoverloader.h"
+#include "widgets/forcescrollperpixel.h"
 #include "widgets/groupediconview.h"
 
 #include <QKeyEvent>
@@ -52,6 +53,8 @@ AlbumCoverSearcher::AlbumCoverSearcher(const QIcon& no_cover_icon, QWidget* pare
 
   connect(ui_->search, SIGNAL(clicked()), SLOT(Search()));
   connect(ui_->covers, SIGNAL(doubleClicked(QModelIndex)), SLOT(CoverDoubleClicked(QModelIndex)));
+
+  new ForceScrollPerPixel(ui_->covers, this);
 }
 
 AlbumCoverSearcher::~AlbumCoverSearcher() {

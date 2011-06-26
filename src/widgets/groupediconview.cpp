@@ -98,6 +98,11 @@ void GroupedIconView::rowsInserted(const QModelIndex& parent, int start, int end
   LayoutItems();
 }
 
+void GroupedIconView::dataChanged(const QModelIndex& topLeft, const QModelIndex& bottomRight) {
+  QListView::dataChanged(topLeft, bottomRight);
+  LayoutItems();
+}
+
 void GroupedIconView::LayoutItems() {
   if (!model())
     return;
