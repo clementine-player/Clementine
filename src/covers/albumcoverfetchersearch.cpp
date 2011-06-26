@@ -68,6 +68,7 @@ void AlbumCoverFetcherSearch::Start() {
 
     if (success) {
       pending_requests_[id] = provider;
+      statistics_.network_requests_made_ ++;
     }
   }
 
@@ -77,9 +78,9 @@ void AlbumCoverFetcherSearch::Start() {
   }
 }
 
-static bool CompareCategories(const CoverSearchResult& a,
-                              const CoverSearchResult& b) {
-  return a.category < b.category;
+static bool CompareProviders(const CoverSearchResult& a,
+                             const CoverSearchResult& b) {
+  return a.provider < b.provider;
 }
 
 void AlbumCoverFetcherSearch::ProviderSearchFinished(
@@ -90,15 +91,14 @@ void AlbumCoverFetcherSearch::ProviderSearchFinished(
   CoverProvider* provider = pending_requests_.take(id);
 
   CoverSearchResults results_copy(results);
-  // Add categories to the results if the provider didn't specify them
+  // Set categories on the results
   for (int i=0 ; i<results_copy.count() ; ++i) {
-    if (results_copy[i].category.isEmpty()) {
-      results_copy[i].category = provider->name();
-    }
+    results_copy[i].provider = provider->name();
   }
 
   // Add results from the current provider to our pool
   results_.append(results_copy);
+  statistics_.total_images_by_provider_[provider->name()] ++;
 
   // do we have more providers left?
   if(!pending_requests_.isEmpty()) {
@@ -121,6 +121,7 @@ void AlbumCoverFetcherSearch::AllProvidersFinished() {
 
   // no results?
   if (results_.isEmpty()) {
+    statistics_.missing_images_ ++;
     emit AlbumCoverFetched(request_.id, QImage());
     return;
   }
@@ -130,27 +131,29 @@ void AlbumCoverFetcherSearch::AllProvidersFinished() {
   // from each category and use some heuristics to score them.  If no images
   // are good enough we'll keep loading more images until we find one that is
   // or we run out of results.
-  qStableSort(results_.begin(), results_.end(), CompareCategories);
+  qStableSort(results_.begin(), results_.end(), CompareProviders);
   FetchMoreImages();
 }
 
 void AlbumCoverFetcherSearch::FetchMoreImages() {
   // Try the first one in each category.
-  QString last_category;
+  QString last_provider;
   for (int i=0 ; i<results_.count() ; ++i) {
-    if (results_[i].category == last_category) {
+    if (results_[i].provider == last_provider) {
       continue;
     }
 
     CoverSearchResult result = results_.takeAt(i--);
-    last_category = result.category;
+    last_provider = result.provider;
 
-    qLog(Debug) << "Loading" << result.image_url << "from" << result.category;
+    qLog(Debug) << "Loading" << result.image_url << "from" << result.provider;
 
     QNetworkReply* image_reply = network_->get(QNetworkRequest(result.image_url));
     connect(image_reply, SIGNAL(finished()), SLOT(ProviderCoverFetchFinished()));
-    pending_image_loads_ << image_reply;
+    pending_image_loads_[image_reply] = result.provider;
     image_load_timeout_->AddReply(image_reply);
+
+    statistics_.network_requests_made_ ++;
   }
 
   if (pending_image_loads_.isEmpty()) {
@@ -162,7 +165,9 @@ void AlbumCoverFetcherSearch::FetchMoreImages() {
 void AlbumCoverFetcherSearch::ProviderCoverFetchFinished() {
   QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
   reply->deleteLater();
-  pending_image_loads_.removeAll(reply);
+  const QString provider = pending_image_loads_.take(reply);
+
+  statistics_.bytes_transferred_ += reply->bytesAvailable();
 
   if (cancel_requested_) {
     return;
@@ -176,7 +181,7 @@ void AlbumCoverFetcherSearch::ProviderCoverFetchFinished() {
       qLog(Info) << "Error decoding image data from" << reply->url();
     } else {
       const float score = ScoreImage(image);
-      candidate_images_.insertMulti(score, image);
+      candidate_images_.insertMulti(score, CandidateImage(provider, image));
 
       qLog(Debug) << reply->url() << "scored" << score;
     }
@@ -220,7 +225,15 @@ void AlbumCoverFetcherSearch::SendBestImage() {
   QImage image;
 
   if (!candidate_images_.isEmpty()) {
-    image = candidate_images_.values().back();
+    const CandidateImage best_image = candidate_images_.values().back();
+    image = best_image.second;
+
+    statistics_.chosen_images_by_provider_[best_image.first] ++;
+    statistics_.chosen_images_ ++;
+    statistics_.chosen_width_ += image.width();
+    statistics_.chosen_height_ += image.height();
+  } else {
+    statistics_.missing_images_ ++;
   }
 
   emit AlbumCoverFetched(request_.id, image);
@@ -232,7 +245,7 @@ void AlbumCoverFetcherSearch::Cancel() {
   if (!pending_requests_.isEmpty()) {
     TerminateSearch();
   } else if (!pending_image_loads_.isEmpty()) {
-    foreach (QNetworkReply* reply, pending_image_loads_) {
+    foreach (QNetworkReply* reply, pending_image_loads_.keys()) {
       reply->abort();
     }
     pending_image_loads_.clear();

@@ -19,8 +19,10 @@
 #include "albumcoversearcher.h"
 #include "iconloader.h"
 #include "ui_albumcovermanager.h"
+#include "core/utilities.h"
 #include "covers/albumcoverfetcher.h"
 #include "covers/coverproviders.h"
+#include "covers/coversearchstatisticsdialog.h"
 #include "library/librarybackend.h"
 #include "library/libraryquery.h"
 #include "library/sqlrow.h"
@@ -59,9 +61,7 @@ AlbumCoverManager::AlbumCoverManager(LibraryBackend* backend, QWidget* parent,
     all_artists_icon_(IconLoader::Load("x-clementine-album")),
     context_menu_(new QMenu(this)),
     progress_bar_(new QProgressBar(this)),
-    jobs_(0),
-    got_covers_(0),
-    missing_covers_(0)
+    jobs_(0)
 {
   ui_->setupUi(this);
   ui_->albums->set_cover_manager(this);
@@ -155,8 +155,8 @@ void AlbumCoverManager::Init() {
   connect(filter_group, SIGNAL(triggered(QAction*)), SLOT(UpdateFilter()));
   connect(ui_->view, SIGNAL(clicked()), ui_->view, SLOT(showMenu()));
   connect(ui_->fetch, SIGNAL(clicked()), SLOT(FetchAlbumCovers()));
-  connect(cover_fetcher_, SIGNAL(AlbumCoverFetched(quint64,QImage)),
-          SLOT(AlbumCoverFetched(quint64,QImage)));
+  connect(cover_fetcher_, SIGNAL(AlbumCoverFetched(quint64,QImage,CoverSearchStatistics)),
+          SLOT(AlbumCoverFetched(quint64,QImage,CoverSearchStatistics)));
   connect(ui_->action_fetch, SIGNAL(triggered()), SLOT(FetchSingleCover()));
   connect(ui_->albums, SIGNAL(doubleClicked(QModelIndex)), SLOT(AlbumDoubleClicked(QModelIndex)));
   connect(ui_->action_add_to_playlist, SIGNAL(triggered()), SLOT(AddSelectedToPlaylist()));
@@ -384,19 +384,17 @@ void AlbumCoverManager::FetchAlbumCovers() {
 
   progress_bar_->setMaximum(jobs_);
   progress_bar_->show();
+  fetch_statistics_ = CoverSearchStatistics();
   UpdateStatusText();
 }
 
-void AlbumCoverManager::AlbumCoverFetched(quint64 id, const QImage &image) {
+void AlbumCoverManager::AlbumCoverFetched(quint64 id, const QImage& image,
+                                          const CoverSearchStatistics& statistics) {
   if (!cover_fetching_tasks_.contains(id))
     return;
 
   QListWidgetItem* item = cover_fetching_tasks_.take(id);
-  if (image.isNull()) {
-    missing_covers_ ++;
-  } else {
-    got_covers_ ++;
-
+  if (!image.isNull()) {
     SaveAndSetCover(item, image);
   }
 
@@ -404,22 +402,34 @@ void AlbumCoverManager::AlbumCoverFetched(quint64 id, const QImage &image) {
     ResetFetchCoversButton();
   }
 
+  fetch_statistics_ += statistics;
   UpdateStatusText();
 }
 
 void AlbumCoverManager::UpdateStatusText() {
   QString message = tr("Got %1 covers out of %2 (%3 failed)")
-                    .arg(got_covers_).arg(jobs_).arg(missing_covers_);
+                    .arg(fetch_statistics_.chosen_images_)
+                    .arg(jobs_)
+                    .arg(fetch_statistics_.missing_images_);
+
+  if (fetch_statistics_.bytes_transferred_) {
+    message += ", " + tr("%1 transferred")
+                      .arg(Utilities::PrettySize(fetch_statistics_.bytes_transferred_));
+  }
+
   statusBar()->showMessage(message);
-  progress_bar_->setValue(got_covers_ + missing_covers_);
+  progress_bar_->setValue(fetch_statistics_.chosen_images_ +
+                          fetch_statistics_.missing_images_);
 
   if (cover_fetching_tasks_.isEmpty()) {
     QTimer::singleShot(2000, statusBar(), SLOT(clearMessage()));
     progress_bar_->hide();
 
+    CoverSearchStatisticsDialog* dialog = new CoverSearchStatisticsDialog(this);
+    dialog->setAttribute(Qt::WA_DeleteOnClose);
+    dialog->Show(fetch_statistics_);
+
     jobs_ = 0;
-    got_covers_ = 0;
-    missing_covers_ = 0;
   }
 }
 

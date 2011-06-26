@@ -18,6 +18,8 @@
 #ifndef ALBUMCOVERFETCHER_H
 #define ALBUMCOVERFETCHER_H
 
+#include "coversearchstatistics.h"
+
 #include <QHash>
 #include <QImage>
 #include <QList>
@@ -52,9 +54,9 @@ struct CoverSearchRequest {
 // It contains an URL that leads to a found cover plus it's description (usually
 // the "artist - album" string).
 struct CoverSearchResult {
-  // used for grouping in the user interface.  defaults to the name of the
-  // provider that this result came from.
-  QString category;
+  // used for grouping in the user interface.  This is set automatically - don't
+  // set it manually in your cover provider.
+  QString provider;
 
   // description of this result (we suggest using the "artist - album" format)
   QString description;
@@ -64,10 +66,12 @@ struct CoverSearchResult {
 };
 Q_DECLARE_METATYPE(CoverSearchResult);
 
+
 // This is a complete result of a single search request (a list of results, each
 // describing one image, actually).
 typedef QList<CoverSearchResult> CoverSearchResults;
 Q_DECLARE_METATYPE(QList<CoverSearchResult>);
+
 
 // This class searches for album covers for a given query or artist/album and
 // returns URLs. It's NOT thread-safe.
@@ -86,8 +90,10 @@ class AlbumCoverFetcher : public QObject {
   void Clear();
 
  signals:
-  void AlbumCoverFetched(quint64, const QImage& cover);
-  void SearchFinished(quint64, const CoverSearchResults& results);
+  void AlbumCoverFetched(quint64, const QImage& cover,
+                         const CoverSearchStatistics& statistics);
+  void SearchFinished(quint64, const CoverSearchResults& results,
+                      const CoverSearchStatistics& statistics);
 
  private slots:
   void SingleSearchFinished(quint64, CoverSearchResults results);

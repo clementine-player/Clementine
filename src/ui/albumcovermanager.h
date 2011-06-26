@@ -27,6 +27,7 @@
 #include "core/backgroundthread.h"
 #include "core/song.h"
 #include "covers/albumcoverloader.h"
+#include "covers/coversearchstatistics.h"
 
 class AlbumCoverChoiceController;
 class AlbumCoverFetcher;
@@ -78,7 +79,8 @@ class AlbumCoverManager : public QMainWindow {
   void CoverImageLoaded(quint64 id, const QImage& image);
   void UpdateFilter();
   void FetchAlbumCovers();
-  void AlbumCoverFetched(quint64 id, const QImage& image);
+  void AlbumCoverFetched(quint64 id, const QImage& image,
+                         const CoverSearchStatistics& statistics);
 
   // On the context menu
   void FetchSingleCover();
@@ -152,6 +154,7 @@ class AlbumCoverManager : public QMainWindow {
 
   AlbumCoverFetcher* cover_fetcher_;
   QMap<quint64, QListWidgetItem*> cover_fetching_tasks_;
+  CoverSearchStatistics fetch_statistics_;
 
   AlbumCoverSearcher* cover_searcher_;
 
@@ -165,8 +168,6 @@ class AlbumCoverManager : public QMainWindow {
 
   QProgressBar* progress_bar_;
   int jobs_;
-  int got_covers_;
-  int missing_covers_;
 
   LineEditInterface* filter_;
 

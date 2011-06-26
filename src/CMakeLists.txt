@@ -100,6 +100,8 @@ set(SOURCES
   covers/artloader.cpp
   covers/coverprovider.cpp
   covers/coverproviders.cpp
+  covers/coversearchstatistics.cpp
+  covers/coversearchstatisticsdialog.cpp
   covers/kittenloader.cpp
 
   devices/connecteddevice.cpp
@@ -329,6 +331,7 @@ set(HEADERS
   covers/artloader.h
   covers/coverprovider.h
   covers/coverproviders.h
+  covers/coversearchstatisticsdialog.h
   covers/kittenloader.h
 
   devices/connecteddevice.h
@@ -499,6 +502,8 @@ set(HEADERS
 )
 
 set(UI
+  covers/coversearchstatisticsdialog.ui
+
   devices/deviceproperties.ui
 
   library/groupbydialog.ui

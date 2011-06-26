@@ -64,7 +64,8 @@ AlbumCoverSearcher::~AlbumCoverSearcher() {
 void AlbumCoverSearcher::Init(AlbumCoverFetcher* fetcher) {
   fetcher_ = fetcher;
 
-  connect(fetcher_, SIGNAL(SearchFinished(quint64,CoverSearchResults)), SLOT(SearchFinished(quint64,CoverSearchResults)));
+  connect(fetcher_, SIGNAL(SearchFinished(quint64,CoverSearchResults,CoverSearchStatistics)),
+          SLOT(SearchFinished(quint64,CoverSearchResults)));
 }
 
 QImage AlbumCoverSearcher::Exec(const QString& artist, const QString& album) {
@@ -126,7 +127,7 @@ void AlbumCoverSearcher::SearchFinished(quint64 id, const CoverSearchResults& re
     item->setData(id, Role_ImageRequestId);
     item->setData(false, Role_ImageFetchFinished);
     item->setData(QVariant(Qt::AlignTop | Qt::AlignHCenter), Qt::TextAlignmentRole);
-    item->setData(result.category, GroupedIconView::Role_Group);
+    item->setData(result.provider, GroupedIconView::Role_Group);
 
     model_->appendRow(item);
 

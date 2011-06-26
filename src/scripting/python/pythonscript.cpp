@@ -80,7 +80,6 @@ bool PythonScript::Unload() {
   // running.  This is important because those connections will hold references
   // to bound methods in the script's classes, so the classes won't get deleted.
   foreach (const SignalConnection& conn, signal_connections_) {
-    qLog(Debug) << "Disconnecting signal" << conn.signal_id_;
     conn.receiver_->removeSignalHandler(conn.signal_id_, conn.callable_);
   }
 
@@ -120,6 +119,5 @@ bool PythonScript::Unload() {
 
 void PythonScript::RegisterSignalConnection(PythonQtSignalReceiver* receiver,
                                             int signal_id, PyObject* callable) {
-  qLog(Debug) << "Signal" << signal_id << "registered to an object in" << info().id();
   signal_connections_ << SignalConnection(receiver, signal_id, callable);
 }

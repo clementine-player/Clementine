@@ -45,9 +45,12 @@ class AlbumCoverFetcherSearch : public QObject {
   // is the caller's responsibility to delete the AlbumCoverFetcherSearch.
   void Cancel();
 
+  CoverSearchStatistics statistics() const { return statistics_; }
+
 signals:
   // It's the end of search (when there was no fetch-me-a-cover request).
   void SearchFinished(quint64, const CoverSearchResults& results);
+
   // It's the end of search and we've fetched a cover.
   void AlbumCoverFetched(quint64, const QImage& cover);
 
@@ -69,6 +72,8 @@ private:
   static const int kTargetSize;
   static const float kGoodScore;
 
+  CoverSearchStatistics statistics_;
+
   // Search request encapsulated by this AlbumCoverFetcherSearch.
   CoverSearchRequest request_;
 
@@ -76,11 +81,12 @@ private:
   CoverSearchResults results_;
 
   QMap<int, CoverProvider*> pending_requests_;
-  QList<QNetworkReply*> pending_image_loads_;
+  QMap<QNetworkReply*, QString> pending_image_loads_;
   NetworkTimeouts* image_load_timeout_;
 
-  // QMap happens to be sorted by key (score)
-  QMap<float, QImage> candidate_images_;
+  // QMap is sorted by key (score).  Values are (provider_name, image)
+  typedef QPair<QString, QImage> CandidateImage;
+  QMap<float, CandidateImage> candidate_images_;
 
   QNetworkAccessManager* network_;
 

@@ -23,6 +23,7 @@
 
 const int AlbumCoverFetcher::kMaxConcurrentRequests = 5;
 
+
 AlbumCoverFetcher::AlbumCoverFetcher(QObject* parent, QNetworkAccessManager* network)
     : QObject(parent),
       network_(network ? network : new NetworkAccessManager(this)),
@@ -100,16 +101,17 @@ void AlbumCoverFetcher::StartRequests() {
                     SLOT(SingleCoverFetched(quint64, const QImage&)));
 
     search->Start();
-
   }
 }
 
 void AlbumCoverFetcher::SingleSearchFinished(quint64 request_id, CoverSearchResults results) {
-  active_requests_.take(request_id)->deleteLater();
-  emit SearchFinished(request_id, results);
+  AlbumCoverFetcherSearch* search = active_requests_.take(request_id);
+  search->deleteLater();
+  emit SearchFinished(request_id, results, search->statistics());
 }
 
 void AlbumCoverFetcher::SingleCoverFetched(quint64 request_id, const QImage& image) {
-  active_requests_.take(request_id)->deleteLater();
-  emit AlbumCoverFetched(request_id, image);
+  AlbumCoverFetcherSearch* search = active_requests_.take(request_id);
+  search->deleteLater();
+  emit AlbumCoverFetched(request_id, image, search->statistics());
 }

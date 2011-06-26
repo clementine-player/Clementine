@@ -54,6 +54,11 @@
 #include <taskmanager.h>
 #include <urlhandler.h>
 
+void PythonQtWrapper_AlbumCoverFetcherSearch::Cancel(AlbumCoverFetcherSearch* theWrappedObject)
+{
+  ( theWrappedObject->Cancel());
+}
+
 void PythonQtWrapper_AlbumCoverFetcherSearch::Start(AlbumCoverFetcherSearch* theWrappedObject)
 {
   ( theWrappedObject->Start());
