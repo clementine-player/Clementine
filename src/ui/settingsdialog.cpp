@@ -472,6 +472,14 @@ void SettingsDialog::accept() {
 
   streams_->SaveStreams();
 
+  // Save settings different from login data
+#ifdef HAVE_LIBLASTFM
+  lastfm_config_->Save();
+#endif
+#ifdef HAVE_REMOTE
+  remote_config_->Save();
+#endif
+
   QDialog::accept();
 
   NetworkProxyFactory::Instance()->ReloadSettings();
