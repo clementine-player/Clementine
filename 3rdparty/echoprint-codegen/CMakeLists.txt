@@ -14,5 +14,12 @@ include_directories(${Boost_INCLUDE_DIRS})
 add_library(echoprint STATIC ${ECHOPRINT-SOURCES})
 
 set_target_properties(echoprint PROPERTIES
-    COMPILE_DEFINITIONS "BOOST_UBLAS_NDEBUG;NDEBUG"
-    COMPILE_FLAGS "-O3 -fPIC")
+    COMPILE_DEFINITIONS "BOOST_UBLAS_NDEBUG;NDEBUG")
+
+if(NOT WIN32)
+  set_target_properties(echoprint PROPERTIES
+      COMPILE_FLAGS "-O3 -fPIC")
+else(NOT WIN32)
+  set_target_properties(echoprint PROPERTIES
+      COMPILE_FLAGS "-O3")
+endif(NOT WIN32)
