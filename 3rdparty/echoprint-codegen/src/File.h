@@ -7,9 +7,14 @@
 #ifndef FILE_H
 #define FILE_H
 #include <string.h>
-#ifdef _WIN32
+#if defined(_WIN32) && !defined(__MINGW32__)
 #include "win_unistd.h"
 #endif
+
+#ifdef __MINGW32__
+#include <io.h>  // For F_OK
+#endif
+
 /*
 This makes file writing a bit easier (makes sure we don't forget to fclose, basically). Use it like this:
 
@@ -31,7 +36,7 @@ public:
     static bool ends_with(const char* filename, const char* ending) {
         int nFilename = strlen(filename);
         int nEnding = strlen(ending);
-        
+
         bool same = false;
         if (nEnding <= nFilename) {
             const char* file_end = filename + strlen(filename) - strlen(ending);
