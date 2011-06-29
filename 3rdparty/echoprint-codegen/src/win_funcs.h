@@ -7,15 +7,15 @@
 
 #define ROUND_FUNC(type,suff) inline type round##suff(type x) \
 {                                                             \
-	if (x >= 0.0##suff){                                      \
-		type y = floor##suff(x);                              \
-		if (x - y >= 0.5##suff)                               \
-			y += 1.0##suff;                                   \
-		return y;                                             \
+    if (x >= 0.0##suff){                                      \
+        type y = floor##suff(x);                              \
+        if (x - y >= 0.5##suff)                               \
+            y += 1.0##suff;                                   \
+        return y;                                             \
     }else{                                                    \
-		type y = ceil##suff(x);                               \
-		if (y - x >= 0.5##suff)                               \
-			y -= 1.0##suff;                                   \
+        type y = ceil##suff(x);                               \
+        if (y - x >= 0.5##suff)                               \
+            y -= 1.0##suff;                                   \
       return y;                                               \
     }                                                         \
 }

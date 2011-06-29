@@ -13,7 +13,7 @@ Metadata::Metadata(const string& file) : _Filename(file), _Artist(""), _Album(""
     if (file != "stdin") {
         // TODO: Consider removing the path from the filename -- not sure if we can do this in a platform-independent way.
         TagLib::FileRef f(_Filename.c_str());
-        
+
         TagLib::Tag* tag = f.isNull() ? NULL : f.tag();
         if (tag != NULL) {
             _Artist = tag->artist().toCString();
@@ -21,7 +21,7 @@ Metadata::Metadata(const string& file) : _Filename(file), _Artist(""), _Album(""
             _Title = tag->title().toCString();
             _Genre = tag->genre().toCString();
         }
-        
+
         TagLib::AudioProperties* properties = f.isNull() ? NULL : f.audioProperties();
         if (properties != NULL) {
             _Bitrate = properties->bitrate();

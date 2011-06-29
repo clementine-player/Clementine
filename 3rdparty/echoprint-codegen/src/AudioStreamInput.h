@@ -20,20 +20,20 @@
 class AudioStreamInput {
 public:
     AudioStreamInput();
-    virtual ~AudioStreamInput(); 
+    virtual ~AudioStreamInput();
     virtual bool ProcessFile(const char* filename, int offset_s=0, int seconds=0);
     virtual std::string GetName() = 0;
     bool ProcessRawFile(const char* rawFilename);
     bool ProcessStandardInput(void);
     bool ProcessFilePointer(FILE* pFile);
     int getNumSamples() const {return _NumberSamples;}
-    const float* getSamples() {return _pSamples;} 
+    const float* getSamples() {return _pSamples;}
     double getDuration() { return (double)getNumSamples() / Params::AudioStreamInput::SamplingRate; }
     virtual bool IsSupported(const char* pFileName); //Everything ffmpeg can do, by default
     int GetOffset() const { return _Offset_s;}
     int GetSeconds() const { return _Seconds;}
 protected:
-    
+
     virtual std::string GetCommandLine(const char* filename) = 0;
     static bool ends_with(const char *s, const char *ends_with);
     float* _pSamples;
@@ -44,19 +44,19 @@ protected:
 };
 
 class StdinStreamInput : public AudioStreamInput {
-public:   
+public:
     std::string GetName(){return "stdin";};
 protected:
     bool IsSupported(const char* pFileName){ return (std::string("stdin") == pFileName);};
-    bool ProcessFile(const char* filename, int offset_s=0, int seconds=0){ return ProcessStandardInput();}
+    bool ProcessFile(const char* filename){ return ProcessStandardInput();}
     virtual std::string GetCommandLine(const char* filename){return "";} // hack
 };
 
 class FfmpegStreamInput : public AudioStreamInput {
-public:   
+public:
     std::string GetName(){return "ffmpeg";};
 protected:
-    std::string GetCommandLine(const char* filename) { 
+    std::string GetCommandLine(const char* filename) {
         // TODO: Windows
         char message[4096] = {0};
         if (_Offset_s == 0 and _Seconds == 0)
@@ -65,8 +65,7 @@ protected:
         else
             snprintf(message, NELEM(message), "ffmpeg -i \"%s\"  -ac %d -ar %d -f s16le -t %d -ss %d - 2>/dev/null",
                     filename, Params::AudioStreamInput::Channels, (uint) Params::AudioStreamInput::SamplingRate, _Seconds, _Offset_s);
-        
-        printf("%s\n", message);
+
         return std::string(message);
     }
 };
@@ -76,12 +75,12 @@ namespace FFMPEG {
 };
 
 class Mpg123StreamInput : public AudioStreamInput {
-public:   
+public:
     std::string GetName(){return "mpg123";};
 protected:
     #define FRAMES_PER_SECOND 38.2813f
     bool IsSupported(const char* pFileName){ return File::ends_with(pFileName, ".mp3");};
-    std::string GetCommandLine(const char* filename) { 
+    std::string GetCommandLine(const char* filename) {
         char message[4096] = {0};
         if (_Offset_s == 0 and _Seconds == 0)
             snprintf(message, NELEM(message), "mpg123 --quiet --singlemix --stdout --rate %d \"%s\"",
@@ -94,3 +93,5 @@ protected:
 };
 
 #endif
+
+

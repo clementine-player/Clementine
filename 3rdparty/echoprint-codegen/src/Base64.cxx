@@ -1,4 +1,4 @@
-/* 
+/*
    base64.cpp and base64.h
 
    Copyright (C) 2004-2008 René Nyffenegger
@@ -28,12 +28,12 @@
 #include "Base64.h"
 #include <iostream>
 
-static const std::string base64_chars = 
+static const std::string base64_chars =
              "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
              "abcdefghijklmnopqrstuvwxyz"
              "0123456789+/";
 
-static const std::string base64_chars_url = 
+static const std::string base64_chars_url =
               "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
               "abcdefghijklmnopqrstuvwxyz"
               "0123456789-_";
@@ -67,7 +67,7 @@ std::string base64_encode(unsigned char const* bytes_to_encode, unsigned int in_
         if (url)
             ret += base64_chars_url[char_array_4[i]];
         else
-            ret += base64_chars[char_array_4[i]];            
+            ret += base64_chars[char_array_4[i]];
       }
       i = 0;
     }
@@ -87,7 +87,7 @@ std::string base64_encode(unsigned char const* bytes_to_encode, unsigned int in_
       if (url)
           ret += base64_chars_url[char_array_4[j]];
       else
-          ret += base64_chars[char_array_4[j]];      
+          ret += base64_chars[char_array_4[j]];
     }
     while((i++ < 3))
         ret += '=';
@@ -138,3 +138,4 @@ std::string base64_decode(std::string const& encoded_string) {
 
   return ret;
 }
+

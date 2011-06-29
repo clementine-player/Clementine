@@ -20,18 +20,30 @@
 #include <string>
 #define MAX_FILES 200000
 
-#ifdef _WIN32
-#include <pthread.h>
-#endif
+using namespace std;
+
+// The response from the codegen. Contains all the fields necessary
+// to create a json string.
+typedef struct {
+    char *error;
+    char *filename;
+    int start_offset;
+    int duration;
+    int tag;
+    double t1;
+    double t2;
+    int numSamples;
+    Codegen* codegen;
+} codegen_response_t;
 
 // Struct to pass to the worker threads
 typedef struct {
-	char *filename;
+    char *filename;
     int start_offset;
     int duration;
-    int done ;
     int tag;
-	char *output;
+    int done;
+    codegen_response_t *response;
 } thread_parm_t;
 
 // Thank you http://stackoverflow.com/questions/150355/programmatically-find-the-number-of-cores-on-a-machine
@@ -68,8 +80,6 @@ int getNumCores() {
 #endif
 }
 
-using namespace std;
-
 // deal with quotes etc in json
 std::string escape(const string& value) {
     std::string s(value);
@@ -79,7 +89,7 @@ std::string escape(const string& value) {
         char c = s[i];
         if (c <= 31)
             continue;
-        
+
         switch (c) {
             case '"' : out += "\\\""; break;
             case '\\': out += "\\\\"; break;
@@ -94,78 +104,63 @@ std::string escape(const string& value) {
                 // TODO: do something with unicode?
         }
     }
-    
+
     return out;
 }
 
-char* json_string_for_file(char* filename, int start_offset, int duration, int tag) {
-    // Given a filename, do all the work to get a JSON string output. 
+codegen_response_t *codegen_file(char* filename, int start_offset, int duration, int tag) {
+    // Given a filename, perform a codegen on it and get the response
     // This is called by a thread
     double t1 = now();
-    
+    codegen_response_t *response = (codegen_response_t *)malloc(sizeof(codegen_response_t));
+    response->error = NULL;
+
     auto_ptr<FfmpegStreamInput> pAudio(new FfmpegStreamInput());
     pAudio->ProcessFile(filename, start_offset, duration);
-    
+
     if (pAudio.get() == NULL) { // Unable to decode!
         char* output = (char*) malloc(16384);
-        sprintf(output,"{\"error\":\"could not create decoder\", \"tag\":%d, \"metadata\":{\"filename\":\"%s\"}}", 
-            tag, 
+        sprintf(output,"{\"error\":\"could not create decoder\", \"tag\":%d, \"metadata\":{\"filename\":\"%s\"}}",
+            tag,
             escape(filename).c_str());
-        return output;
+        response->error = output;
+        return response;
     }
-    
+
     int numSamples = pAudio->getNumSamples();
-    
+
     if (numSamples < 1) {
         char* output = (char*) malloc(16384);
-        sprintf(output,"{\"error\":\"could not decode\", \"tag\":%d, \"metadata\":{\"filename\":\"%s\"}}", 
-            tag, 
+        sprintf(output,"{\"error\":\"could not decode\", \"tag\":%d, \"metadata\":{\"filename\":\"%s\"}}",
+            tag,
             escape(filename).c_str());
-        return output;
+        response->error = output;
+        return response;
     }
     t1 = now() - t1;
 
     double t2 = now();
-    auto_ptr<Codegen> pCodegen(new Codegen(pAudio->getSamples(), numSamples, start_offset));    
+    Codegen *pCodegen = new Codegen(pAudio->getSamples(), numSamples, start_offset);
     t2 = now() - t2;
-
-    // Get the ID3 tag information.
-    auto_ptr<Metadata> pMetadata(new Metadata(filename));
-
-    // preamble + codelen
-    char* output = (char*) malloc(sizeof(char)*(16384 + strlen(pCodegen->getCodeString().c_str()) ));
     
-    sprintf(output,"{\"metadata\":{\"artist\":\"%s\", \"release\":\"%s\", \"title\":\"%s\", \"genre\":\"%s\", \"bitrate\":%d,"
-                    "\"sample_rate\":%d, \"duration\":%d, \"filename\":\"%s\", \"samples_decoded\":%d, \"given_duration\":%d,"
-                    " \"start_offset\":%d, \"version\":%2.2f, \"codegen_time\":%2.6f, \"decode_time\":%2.6f}, \"code_count\":%d,"
-                    " \"code\":\"%s\", \"tag\":%d}",
-        escape(pMetadata->Artist()).c_str(), 
-        escape(pMetadata->Album()).c_str(), 
-        escape(pMetadata->Title()).c_str(), 
-        escape(pMetadata->Genre()).c_str(),
-        pMetadata->Bitrate(),
-        pMetadata->SampleRate(),
-        pMetadata->Seconds(),
-        escape(filename).c_str(),
-        numSamples,
-        duration,
-        start_offset,
-        pCodegen->getVersion(),
-        t2,
-        t1,
-        pCodegen->getNumCodes(),
-        pCodegen->getCodeString().c_str(),
-        tag
-    );
-    return output;
+    response->t1 = t1;
+    response->t2 = t2;
+    response->numSamples = numSamples;
+    response->codegen = pCodegen;
+    response->start_offset = start_offset;
+    response->duration = duration;
+    response->tag = tag;
+    response->filename = filename;
+    
+    return response;
 }
 
 
-void *threaded_json_string_for_file(void *parm) {
+void *threaded_codegen_file(void *parm) {
     // pthread stub to invoke json_string_for_file
     thread_parm_t *p = (thread_parm_t *)parm;
-    char * output = json_string_for_file(p->filename, p->start_offset, p->duration, p->tag);
-    p->output = output;
+    codegen_response_t *response = codegen_file(p->filename, p->start_offset, p->duration, p->tag);
+    p->response = response;
     // mark when we're done so the controlling thread can move on.
     p->done = 1;
     return NULL;
@@ -179,13 +174,49 @@ void print_json_to_screen(char* output, int count, int done) {
                 else printf("%s,\n", output);
 }
 
+char *make_json_string(codegen_response_t* response) {
+    
+    if (response->error != NULL) {
+        return response->error;
+    }
+    
+    // Get the ID3 tag information.
+    auto_ptr<Metadata> pMetadata(new Metadata(response->filename));
+
+    // preamble + codelen
+    char* output = (char*) malloc(sizeof(char)*(16384 + strlen(response->codegen->getCodeString().c_str()) ));
+
+    sprintf(output,"{\"metadata\":{\"artist\":\"%s\", \"release\":\"%s\", \"title\":\"%s\", \"genre\":\"%s\", \"bitrate\":%d,"
+                    "\"sample_rate\":%d, \"duration\":%d, \"filename\":\"%s\", \"samples_decoded\":%d, \"given_duration\":%d,"
+                    " \"start_offset\":%d, \"version\":%2.2f, \"codegen_time\":%2.6f, \"decode_time\":%2.6f}, \"code_count\":%d,"
+                    " \"code\":\"%s\", \"tag\":%d}",
+        escape(pMetadata->Artist()).c_str(),
+        escape(pMetadata->Album()).c_str(),
+        escape(pMetadata->Title()).c_str(),
+        escape(pMetadata->Genre()).c_str(),
+        pMetadata->Bitrate(),
+        pMetadata->SampleRate(),
+        pMetadata->Seconds(),
+        escape(response->filename).c_str(),
+        response->numSamples,
+        response->duration,
+        response->start_offset,
+        response->codegen->getVersion(),
+        response->t2,
+        response->t1,
+        response->codegen->getNumCodes(),
+        response->codegen->getCodeString().c_str(),
+        response->tag
+    );
+    return output;
+}
 
 int main(int argc, char** argv) {
     if (argc < 2) {
         fprintf(stderr, "Usage: %s [ filename | -s ] [seconds_start] [seconds_duration] [< file_list (if -s is set)]\n", argv[0]);
         exit(-1);
     }
-    
+
     try {
         string files[MAX_FILES];
         char *filename = argv[1];
@@ -209,23 +240,24 @@ int main(int argc, char** argv) {
                 }
             }
         } else files[count++] = filename;
-        
+
         if(count == 0) throw std::runtime_error("No files given.\n");
 
 
 #ifdef _WIN32
-//#ifdef __APPLE__
         fprintf(stderr, "no thread mode\n");
         // Threading doesn't work in windows yet.
         for(int i=0;i<count;i++) {
-            char* output = json_string_for_file((char*)files[i].c_str(), start_offset, duration, i);
+            codegen_response_t* response = codegen_file((char*)files[i].c_str(), start_offset, duration, i);
+            char *output = make_json_string(response);
             print_json_to_screen(output, count, i);
             free(output);
         }
         return 1;
-#endif
 
-        // FIgure out how many threads to use based on # of cores
+#else
+
+        // Figure out how many threads to use based on # of cores
         int num_threads = getNumCores();
         if (num_threads > 8) num_threads = 8;
         if (num_threads < 2) num_threads = 2;
@@ -239,7 +271,7 @@ int main(int argc, char** argv) {
         // Kick off the first N threads
         int still_left = count-1-already;
         for(int i=0;i<num_threads;i++) {
-    	    parm[i] = (thread_parm_t *)malloc(sizeof(thread_parm_t));
+            parm[i] = (thread_parm_t *)malloc(sizeof(thread_parm_t));
             parm[i]->filename = (char*)files[still_left].c_str();
             parm[i]->start_offset = start_offset;
             parm[i]->tag = still_left;
@@ -249,10 +281,10 @@ int main(int argc, char** argv) {
             pthread_attr_init(&attr[i]);
             pthread_attr_setdetachstate(&attr[i], PTHREAD_CREATE_DETACHED);
             // Kick off the thread
-            if (pthread_create(&t[i], &attr[i], threaded_json_string_for_file, (void*)parm[i]))
+            if (pthread_create(&t[i], &attr[i], threaded_codegen_file, (void*)parm[i]))
                 throw std::runtime_error("Problem creating thread\n");
         }
-        
+
         int done = 0;
         // Now wait for the threads to come back, and also kick off new ones
         while(done<count) {
@@ -261,20 +293,22 @@ int main(int argc, char** argv) {
                 if (parm[i]->done) {
                     parm[i]->done = 0;
                     done++;
-                    print_json_to_screen(parm[i]->output, count, done);
-                    free(parm[i]->output);
+                    codegen_response_t *response = (codegen_response_t*)parm[i]->response;
+                    char *json = make_json_string(response);
+                    print_json_to_screen(json, count, done);
+                    free(parm[i]->response);
                     // More to do? Start a new one on this just finished thread
                     if(still_left >= 0) {
                         parm[i]->tag = still_left;
                         parm[i]->filename = (char*)files[still_left].c_str();
                         still_left--;
-                        int err= pthread_create(&t[i], &attr[i], threaded_json_string_for_file, (void*)parm[i]);
-                        if(err) 
+                        int err= pthread_create(&t[i], &attr[i], threaded_codegen_file, (void*)parm[i]);
+                        if(err)
                             throw std::runtime_error("Problem creating thread\n");
-                        
+
                     }
                 }
-            }       
+            }
         }
 
         // Clean up threads
@@ -285,6 +319,8 @@ int main(int argc, char** argv) {
         free(parm);
         free(attr);
         return 0;
+
+#endif // _WIN32
     }
     catch(std::runtime_error& ex) {
         fprintf(stderr, "%s\n", ex.what());

@@ -7,14 +7,9 @@
 #ifndef FILE_H
 #define FILE_H
 #include <string.h>
-#if defined(_WIN32) && !defined(__MINGW32__)
+#ifdef _WIN32
 #include "win_unistd.h"
 #endif
-
-#ifdef __MINGW32__
-#include <io.h>  // For F_OK
-#endif
-
 /*
 This makes file writing a bit easier (makes sure we don't forget to fclose, basically). Use it like this:
 

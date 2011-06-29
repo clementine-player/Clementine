@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9AAF51A713B2557800099790 /* Whitening.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 9AAF51A513B2557800099790 /* Whitening.cxx */; };
+		9AAF51A813B2557800099790 /* Whitening.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AAF51A613B2557800099790 /* Whitening.h */; };
 		9AE5AA19139FB2620009FCD8 /* SubbandAnalysis.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AE5AA17139FB2620009FCD8 /* SubbandAnalysis.h */; };
 		9AE5AA1A139FB2620009FCD8 /* SubbandAnalysis.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 9AE5AA18139FB2620009FCD8 /* SubbandAnalysis.cxx */; };
 		C8D4AD20137EE85F00CD506D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8D4AD1F137EE85F00CD506D /* Foundation.framework */; };
@@ -30,6 +32,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9AAF51A513B2557800099790 /* Whitening.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Whitening.cxx; path = ../Whitening.cxx; sourceTree = SOURCE_ROOT; };
+		9AAF51A613B2557800099790 /* Whitening.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Whitening.h; path = ../Whitening.h; sourceTree = SOURCE_ROOT; };
 		9AE5AA17139FB2620009FCD8 /* SubbandAnalysis.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SubbandAnalysis.h; path = ../SubbandAnalysis.h; sourceTree = SOURCE_ROOT; };
 		9AE5AA18139FB2620009FCD8 /* SubbandAnalysis.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SubbandAnalysis.cxx; path = ../SubbandAnalysis.cxx; sourceTree = SOURCE_ROOT; };
 		C8D4AD1C137EE85F00CD506D /* libechoprint-codegen-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libechoprint-codegen-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -98,6 +102,8 @@
 		C8D4AD21137EE85F00CD506D /* echoprint-codegen-ios */ = {
 			isa = PBXGroup;
 			children = (
+				9AAF51A513B2557800099790 /* Whitening.cxx */,
+				9AAF51A613B2557800099790 /* Whitening.h */,
 				9AE5AA17139FB2620009FCD8 /* SubbandAnalysis.h */,
 				9AE5AA18139FB2620009FCD8 /* SubbandAnalysis.cxx */,
 				C8D4AD29137EF41100CD506D /* AudioBufferInput.cxx */,
@@ -109,7 +115,6 @@
 				C8D4AD2F137EF41100CD506D /* Codegen.cxx */,
 				C8D4AD30137EF41100CD506D /* Codegen.h */,
 				C8D4AD31137EF41100CD506D /* Common.h */,
-				C8D4AD3A137EF41100CD506D /* fft */,
 				C8D4AD40137EF41100CD506D /* File.h */,
 				C8D4AD42137EF41100CD506D /* Fingerprint.cxx */,
 				C8D4AD43137EF41100CD506D /* Fingerprint.h */,
@@ -131,14 +136,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		C8D4AD3A137EF41100CD506D /* fft */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = fft;
-			path = ../../fft;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -158,6 +155,7 @@
 				C8D4AD6D137EF41100CD506D /* win_funcs.h in Headers */,
 				C8D4AD6E137EF41100CD506D /* win_unistd.h in Headers */,
 				9AE5AA19139FB2620009FCD8 /* SubbandAnalysis.h in Headers */,
+				9AAF51A813B2557800099790 /* Whitening.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -215,6 +213,7 @@
 				C8D4AD62137EF41100CD506D /* Fingerprint.cxx in Sources */,
 				C8D4AD64137EF41100CD506D /* MatrixUtility.cxx in Sources */,
 				9AE5AA1A139FB2620009FCD8 /* SubbandAnalysis.cxx in Sources */,
+				9AAF51A713B2557800099790 /* Whitening.cxx in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

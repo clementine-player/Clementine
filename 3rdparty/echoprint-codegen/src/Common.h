@@ -11,17 +11,17 @@
 
 #include <assert.h>
 #ifndef _WIN32
-	#include <sys/time.h>
+    #include <sys/time.h>
 #else
 #include "win_funcs.h"
 #include <sys/types.h>
 /* for STL*/
-	#ifdef max
-		#undef max
-	#endif
-	#ifdef min
-		#undef min
-	#endif
+    #ifdef max
+        #undef max
+    #endif
+    #ifdef min
+        #undef min
+    #endif
 #include <malloc.h>
 #endif
 #include <float.h>
@@ -43,13 +43,13 @@ static inline double now (void) {
     return now;
 }
 
-typedef unsigned int uint; 
+typedef unsigned int uint;
 #define NELEM(array) (sizeof(array) / sizeof(array[0]))
 
 #ifndef _WIN32
-#define EN_ARRAY(type,var,size) type var[size] 
+#define EN_ARRAY(type,var,size) type var[size]
 #else
-#define EN_ARRAY(type,var,size) type* var = (type*) _alloca((size)*sizeof(type)) 
+#define EN_ARRAY(type,var,size) type* var = (type*) _alloca((size)*sizeof(type))
 #endif
 
 #endif

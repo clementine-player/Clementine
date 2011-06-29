@@ -7,21 +7,33 @@
 #include <sstream>
 #include <iostream>
 #include <iomanip>
+#include <memory>
 #include "Codegen.h"
 #include "AudioBufferInput.h"
 #include "Fingerprint.h"
 #include "Whitening.h"
+#include "SubbandAnalysis.h"
+#include "Fingerprint.h"
+#include "Common.h"
 
 #include "Base64.h"
 #include <zlib.h>
 
+#define VERSION 4.11
+
+using namespace std;
+
+float Codegen::getVersion() {
+  return VERSION;
+}
+
 Codegen::Codegen(const float* pcm, uint numSamples, int start_offset) {
     if (Params::AudioStreamInput::MaxSamples < (uint)numSamples)
         throw std::runtime_error("File was too big\n");
-    
+
     Whitening *pWhitening = new Whitening(pcm, numSamples);
     pWhitening->Compute();
-    
+
     AudioBufferInput *pAudio = new AudioBufferInput();
     pAudio->SetBuffer(pWhitening->getWhitenedSamples(), pWhitening->getNumSamples());
 
@@ -30,7 +42,7 @@ Codegen::Codegen(const float* pcm, uint numSamples, int start_offset) {
 
     Fingerprint *pFingerprint = new Fingerprint(pSubbandAnalysis, start_offset);
     pFingerprint->Compute();
-    
+
     _CodeString = createCodeString(pFingerprint->getCodes());
     _NumCodes = pFingerprint->getCodes().size();
 
@@ -48,7 +60,7 @@ string Codegen::createCodeString(vector<FPCode> vCodes) {
     codestream << std::setfill('0') << std::hex;
     for (uint i = 0; i < vCodes.size(); i++)
         codestream << std::setw(5) << vCodes[i].frame;
-    
+
     for (uint i = 0; i < vCodes.size(); i++) {
         int hash = vCodes[i].code;
         codestream << std::setw(5) << hash;

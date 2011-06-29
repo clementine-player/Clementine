@@ -10,14 +10,24 @@ There are two modes of operation of the Echoprint codegen:
  
 2. the codegen binary runs standalone, accepts filenames as inputs and runs in a multithreaded worker mode.
 
-## Requirements for libcodegen
+## Requirements
+
+### For libcodegen
 
 * Boost >= 1.35
+* zlib
 
-## Additional requirements for the codegen binary
+### Additional requirements for the codegen binary
 
 * [TagLib](http://developer.kde.org/~wheeler/taglib.html "TagLib")
 * ffmpeg - this is called via shell and is not linked into codegen
+
+On Ubuntu or Debian you can install these dependencies with:
+
+    sudo apt-get install ffmpeg libboost1.42-dev libtag1-dev zlib1g-dev
+On OS-X with homebrew you can use:
+
+    brew install ffmpeg boost taglib
 
 ## Notes about libcodegen:
 
