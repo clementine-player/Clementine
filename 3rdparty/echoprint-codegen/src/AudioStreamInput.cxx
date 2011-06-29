@@ -10,14 +10,20 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#ifndef _WIN32
-#include <unistd.h>
-#define POPEN_MODE "r"
-#else
-#include "win_unistd.h"
+
+#ifdef _WIN32
 #include <winsock.h>
 #define POPEN_MODE "rb"
+#else
+#define POPEN_MODE "r"
 #endif
+
+#if defined(_WIN32) && !defined(__MINGW32__)
+#include "win_unistd.h"
+#else
+#include <unistd.h>
+#endif
+
 #include <string.h>
 
 #include "AudioStreamInput.h"
@@ -128,5 +134,3 @@ bool AudioStreamInput::ProcessFilePointer(FILE* pFile) {
         perror("ProcessFilePointer error");
     return success;
 }
-
-
