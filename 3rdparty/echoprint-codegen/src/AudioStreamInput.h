@@ -12,7 +12,7 @@
 #include <string>
 #include <math.h>
 #include "File.h"
-#ifdef _WIN32
+#if defined(_WIN32) && !defined(__MINGW32__)
 #define and &&
 #define snprintf _snprintf
 #endif
@@ -94,5 +94,3 @@ protected:
 };
 
 #endif
-
-
