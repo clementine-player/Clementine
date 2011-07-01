@@ -1298,7 +1298,7 @@ bool Playlist::removeRows(QList<int>& rows) {
     // we're splitting the input list into sequences of consecutive
     // numbers
     part.append(rows.takeFirst());
-    while(rows.first() == part.last() - 1) {
+    while(!rows.isEmpty() && rows.first() == part.last() - 1) {
       part.append(rows.takeFirst());
     }
 

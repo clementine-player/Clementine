@@ -1,8 +1,7 @@
 import clementine
 
-from PyQt4.QtCore import QObject
-from PyQt4.QtCore import SIGNAL
-from PyQt4.QtGui import QAction
+from PythonQt.QtCore import QObject
+from PythonQt.QtGui import QAction
 
 
 class InvalidateDeleted(QObject):
@@ -17,11 +16,11 @@ class InvalidateDeleted(QObject):
 
     self.invalidate = QAction("invalidate_deleted", self)
     self.invalidate.setText("Grey out deleted songs")
-    self.connect(self.invalidate, SIGNAL("activated()"), self.grey_out_activated)
+    self.invalidate.connect("activated()", self.grey_out_activated)
 
     self.delete = QAction("remove_deleted", self)
     self.delete.setText("Remove deleted songs")
-    self.connect(self.delete, SIGNAL("activated()"), self.delete_activated)
+    self.delete.connect("activated()", self.delete_activated)
 
     clementine.ui.AddAction('playlist_menu', self.invalidate)
     clementine.ui.AddAction('playlist_menu', self.delete)
@@ -31,6 +30,6 @@ class InvalidateDeleted(QObject):
 
   def delete_activated(self):
     clementine.playlists.RemoveDeletedSongs()
-		
+
 
 script = InvalidateDeleted()
