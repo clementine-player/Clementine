@@ -1255,6 +1255,11 @@ bool Song::operator==(const Song& other) const {
          beginning_nanosec() == other.beginning_nanosec();
 }
 
+uint qHash(const Song& song) {
+  // Should compare the same fields as operator==
+  return qHash(song.url().toString()) ^ qHash(song.beginning_nanosec());
+}
+
 QImage Song::LoadEmbeddedArt(const QString& filename) {
   QImage ret;
   if (filename.isEmpty())

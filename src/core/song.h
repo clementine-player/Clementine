@@ -385,4 +385,6 @@ Q_DECLARE_METATYPE(Song);
 typedef QList<Song> SongList;
 Q_DECLARE_METATYPE(QList<Song>);
 
+uint qHash(const Song& song);
+
 #endif // SONG_H

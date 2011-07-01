@@ -833,10 +833,16 @@ void Playlist::InsertItems(const PlaylistItemList& itemsIn, int pos, bool play_n
     songs << item->Metadata();
   }
 
-  QList<Song> vetoed;
+  const int song_count = songs.length();
+  QSet<Song> vetoed;
   foreach(SongInsertVetoListener* listener, veto_listeners_) {
     foreach(const Song& song, listener->AboutToInsertSongs(GetAllSongs(), songs)) {
-      vetoed.append(song);
+      // avoid veto-ing a song multiple times
+      vetoed.insert(song);
+    }
+    if (vetoed.count() == song_count) {
+      // all songs were vetoed and there's nothing more to do (there's no need for an undo step)
+      return;
     }
   }
 
@@ -847,7 +853,7 @@ void Playlist::InsertItems(const PlaylistItemList& itemsIn, int pos, bool play_n
       const Song& current = item->Metadata();
 
       if(vetoed.contains(current)) {
-        vetoed.removeOne(current);
+        vetoed.remove(current);
         it.remove();
       }
     }
