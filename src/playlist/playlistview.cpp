@@ -477,6 +477,10 @@ void PlaylistView::RemoveSelected() {
   int rows_removed = 0;
   QItemSelection selection(selectionModel()->selection());
 
+  if (selection.isEmpty()) {
+    return;
+  }
+
   // Sort the selection so we remove the items at the *bottom* first, ensuring
   // we don't have to mess around with changing row numbers
   qSort(selection.begin(), selection.end(), CompareSelectionRanges);
