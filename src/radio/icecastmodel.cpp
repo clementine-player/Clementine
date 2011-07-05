@@ -189,7 +189,8 @@ Qt::ItemFlags IcecastModel::flags(const QModelIndex& index) const {
   case IcecastItem::Type_Root:
   case IcecastItem::Type_Divider:
   default:
-    return Qt::ItemIsEnabled;
+    return Qt::ItemIsSelectable |
+           Qt::ItemIsEnabled;
   }
 }
 
