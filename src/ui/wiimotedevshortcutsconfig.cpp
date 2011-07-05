@@ -106,7 +106,7 @@ WiimotedevShortcutsConfig::WiimotedevShortcutsConfig(QWidget* parent)
   text_actions_.insert(WiimotedevShortcuts::PlayerTogglePause, tr("Play/Pause"));
   text_actions_.insert(WiimotedevShortcuts::PlayerSeekBackward, tr("Seek backward"));
   text_actions_.insert(WiimotedevShortcuts::PlayerSeekForward, tr("Seek forward"));
-  text_actions_.insert(WiimotedevShortcuts::PlayerSeekForward, tr("Stop after"));
+  text_actions_.insert(WiimotedevShortcuts::PlayerStopAfter, tr("Stop after"));
   text_actions_.insert(WiimotedevShortcuts::PlayerShowOSD, tr("Show OSD"));
 
 
