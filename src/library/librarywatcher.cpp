@@ -316,7 +316,8 @@ void LibraryWatcher::ScanSubdirectory(
 
       // watch out for cue songs which have their mtime equal to qMax(media_file_mtime, cue_sheet_mtime)
       bool changed = (matching_song.mtime() != qMax(file_info.lastModified().toTime_t(), song_cue_mtime))
-                     || cue_deleted || cue_added;
+                     || cue_deleted || cue_added
+                     || matching_song.is_unavailable();
 
       // Also want to look to see whether the album art has changed
       QString image = ImageForSong(file, album_art);

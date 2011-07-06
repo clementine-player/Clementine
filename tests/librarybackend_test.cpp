@@ -288,6 +288,36 @@ TEST_F(SingleSong, DeleteSongs) {
   EXPECT_EQ("Title", songs_deleted[0].title());
   EXPECT_EQ(1, songs_deleted[0].id());
 
+  // Check we can't retreive that song any more
+  Song song = backend_->GetSongById(1);
+  EXPECT_FALSE(song.is_valid());
+  EXPECT_EQ(-1, song.id());
+
+  // And the artist or album shouldn't show up either
+  QStringList artists = backend_->GetAllArtists();
+  EXPECT_EQ(0, artists.size());
+
+  LibraryBackend::AlbumList albums = backend_->GetAllAlbums();
+  EXPECT_EQ(0, albums.size());
+}
+
+TEST_F(SingleSong, MarkSongsUnavailable) {
+  AddDummySong();  if (HasFatalFailure()) return;
+
+  Song new_song(song_);
+  new_song.set_id(1);
+
+  QSignalSpy deleted_spy(backend_.get(), SIGNAL(SongsDeleted(SongList)));
+
+  backend_->MarkSongsUnavailable(SongList() << new_song);
+
+  ASSERT_EQ(1, deleted_spy.size());
+
+  SongList songs_deleted = *(reinterpret_cast<SongList*>(deleted_spy[0][0].data()));
+  ASSERT_EQ(1, songs_deleted.size());
+  EXPECT_EQ("Title", songs_deleted[0].title());
+  EXPECT_EQ(1, songs_deleted[0].id());
+
   // Check the song is marked as deleted.
   Song song = backend_->GetSongById(1);
   EXPECT_TRUE(song.is_valid());

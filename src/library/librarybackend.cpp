@@ -408,7 +408,7 @@ void LibraryBackend::DeleteSongs(const SongList &songs) {
   QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
 
-  QSqlQuery remove(QString("UPDATE %1 SET unavailable = 1 WHERE ROWID = :id")
+  QSqlQuery remove(QString("DELETE FROM %1 WHERE ROWID = :id")
                    .arg(songs_table_), db);
   QSqlQuery remove_fts(QString("DELETE FROM %1 WHERE ROWID = :id")
                        .arg(fts_table_), db);
@@ -427,6 +427,25 @@ void LibraryBackend::DeleteSongs(const SongList &songs) {
 
   emit SongsDeleted(songs);
 
+  UpdateTotalSongCountAsync();
+}
+
+void LibraryBackend::MarkSongsUnavailable(const SongList &songs) {
+  QMutexLocker l(db_->Mutex());
+  QSqlDatabase db(db_->Connect());
+
+  QSqlQuery remove(QString("UPDATE %1 SET unavailable = 1 WHERE ROWID = :id")
+                   .arg(songs_table_), db);
+
+  ScopedTransaction transaction(&db);
+  foreach (const Song& song, songs) {
+    remove.bindValue(":id", song.id());
+    remove.exec();
+    db_->CheckErrors(remove);
+  }
+  transaction.Commit();
+
+  emit SongsDeleted(songs);
   UpdateTotalSongCountAsync();
 }
 
