@@ -1108,6 +1108,20 @@ QString Playlist::column_name(Column column) {
   return "";
 }
 
+QString Playlist::abbreviated_column_name(Column column) {
+  const QString& column_name = Playlist::column_name(column);
+  switch (column) {
+    case Column_Disc:
+    case Column_PlayCount:
+    case Column_SkipCount:
+    case Column_Track:
+      return QString("%1#").arg(column_name[0]);
+    default: 
+      return column_name;
+  }
+  return "";
+}
+
 void Playlist::sort(int column, Qt::SortOrder order) {
   if (ignore_sorting_)
     return;

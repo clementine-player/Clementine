@@ -147,6 +147,8 @@ class Playlist : public QAbstractListModel {
                            PlaylistItemPtr a, PlaylistItemPtr b);
 
   static QString column_name(Column column);
+  static QString abbreviated_column_name(Column column);
+
   static bool column_is_editable(Playlist::Column column);
   static bool set_column_value(Song& song, Column column, const QVariant& value);
 
