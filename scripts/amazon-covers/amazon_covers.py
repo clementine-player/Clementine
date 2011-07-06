@@ -77,6 +77,7 @@ class AmazonCoverProvider(clementine.CoverProvider):
       LOGGER.exception(ex)
       return parsed
 
+    used_urls = set()
     # decode the result
     try:
       items = []
@@ -97,9 +98,10 @@ class AmazonCoverProvider(clementine.CoverProvider):
           if current_url is None:
             current_url = item.find('MediumImage/URL')
 
-          if current_url is None:
+          if current_url is None or current_url.text in used_urls:
             continue
 
+          used_urls.add(current_url.text)
           current = clementine.CoverSearchResult()
           current.description = str(query)
           current.image_url = str(current_url.text)
