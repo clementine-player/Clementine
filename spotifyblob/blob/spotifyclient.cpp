@@ -23,6 +23,7 @@
 #include "spotifykey.h"
 #include "spotifymessagehandler.h"
 #include "spotifymessages.pb.h"
+#include "spotify_utilities.h"
 #include "core/logging.h"
 
 #include <QCoreApplication>
@@ -67,8 +68,11 @@ SpotifyClient::SpotifyClient(QObject* parent)
 
   load_playlist_callbacks_.playlist_state_changed = &PlaylistStateChangedForLoadPlaylist;
 
+  QString cache = utilities::GetCacheDirectory();
+  qLog(Debug) << "Using:" << cache << "for Spotify cache";
+
   spotify_config_.api_version = SPOTIFY_API_VERSION;  // From libspotify/api.h
-  spotify_config_.cache_location = strdup(QDir::tempPath().toLocal8Bit().constData());
+  spotify_config_.cache_location = strdup(cache.toLocal8Bit().constData());
   spotify_config_.settings_location = strdup(QDir::tempPath().toLocal8Bit().constData());
   spotify_config_.application_key = api_key_.constData();
   spotify_config_.application_key_size = api_key_.size();

@@ -12,6 +12,7 @@ set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR})
 set(SOURCES
   main.cpp
   spotifyclient.cpp
+  spotify_utilities.cpp
 
   ${CMAKE_SOURCE_DIR}/src/core/logging.cpp
 )
