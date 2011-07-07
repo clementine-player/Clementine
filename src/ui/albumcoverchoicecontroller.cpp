@@ -16,6 +16,7 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "core/logging.h"
 #include "covers/albumcoverfetcher.h"
 #include "covers/albumcoverloader.h"
 #include "library/librarybackend.h"
@@ -234,6 +235,9 @@ bool AlbumCoverChoiceController::CanAcceptDrag(const QDragEnterEvent* e) {
     if (IsKnownImageExtension(suffix))
       return true;
   }
+  if (e->mimeData()->hasImage()) {
+    return true;
+  }
   return false;
 }
 
@@ -245,6 +249,15 @@ QString AlbumCoverChoiceController::SaveCover(Song* song, const QDropEvent* e) {
     if (IsKnownImageExtension(suffix)) {
       SaveCover(song, filename);
       return filename;
+    }
+  }
+
+  if (e->mimeData()->hasImage()) {
+    QImage image = qvariant_cast<QImage>(e->mimeData()->imageData());
+    if (!image.isNull()) {
+      QString cover_path = SaveCoverInCache(song->artist(), song->album(), image);
+      SaveCover(song, cover_path);
+      return cover_path;
     }
   }
 
