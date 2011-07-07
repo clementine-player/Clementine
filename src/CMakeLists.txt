@@ -227,8 +227,6 @@ set(SOURCES
   songinfo/ultimatelyricsprovider.cpp
   songinfo/ultimatelyricsreader.cpp
 
-  suggesters/lastfmsuggester.cpp
-
   transcoder/transcodedialog.cpp
   transcoder/transcoder.cpp
   transcoder/transcoderoptionsaac.cpp
@@ -441,8 +439,6 @@ set(HEADERS
   songinfo/ultimatelyricsprovider.h
   songinfo/ultimatelyricsreader.h
 
-  suggesters/lastfmsuggester.h
-
   transcoder/transcodedialog.h
   transcoder/transcoder.h
   transcoder/transcoderoptionsdialog.h
@@ -629,6 +625,7 @@ if(HAVE_LIBLASTFM)
     songinfo/echonesttags.cpp
     songinfo/lastfmtrackinfoprovider.cpp
     songinfo/tagwidget.cpp
+    suggesters/lastfmsuggester.cpp
   )
   list(APPEND HEADERS
     covers/lastfmcoverprovider.h
@@ -639,6 +636,7 @@ if(HAVE_LIBLASTFM)
     songinfo/echonesttags.h
     songinfo/lastfmtrackinfoprovider.h
     songinfo/tagwidget.h
+    suggesters/lastfmsuggester.h
   )
   list(APPEND UI
     radio/lastfmconfig.ui
