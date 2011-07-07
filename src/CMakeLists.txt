@@ -947,6 +947,8 @@ list(APPEND OTHER_SOURCES
   scripting/python/pythonscript.cpp
   scripting/python/pythonscript.h
   ${CMAKE_CURRENT_BINARY_DIR}/ui_pythonconsole.h
+  suggesters/lastfmsuggester.cpp
+  suggesters/lastfmsuggester.h
   ui/macsystemtrayicon.h
   ui/macsystemtrayicon.mm
   ui/wiimotedevshortcutsconfig.cpp
