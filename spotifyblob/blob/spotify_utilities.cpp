@@ -7,6 +7,7 @@
 
 namespace utilities {
 
+#ifndef Q_OS_DARWIN  // See spotify_utilities.mm for Mac implementation.
 QString GetUserCacheDirectory() {
 #ifndef Q_OS_WINDOWS
   const char* xdg_cache_dir = getenv("XDG_CACHE_HOME");
@@ -15,14 +16,15 @@ QString GetUserCacheDirectory() {
   }
   return QString::fromLocal8Bit(xdg_cache_dir);
 
-#else
+#else  // Q_OS_WINDOWS
   const char* cache_dir = getenv("APPDATA");
   if (!cache_dir) {
     return QDir::homePath() + "/.config/";
   }
   return QDir::fromNativeSeparators(QString::fromLocal8Bit(cache_dir));
-#endif
+#endif  // Q_OS_WINDOWS
 }
+#endif  // Q_OS_DARWIN
 
 QString GetCacheDirectory() {
   QString user_cache = GetUserCacheDirectory();

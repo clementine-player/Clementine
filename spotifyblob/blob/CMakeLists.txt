@@ -21,6 +21,10 @@ set(HEADERS
   spotifyclient.h
 )
 
+if(APPLE)
+  list(APPEND SOURCES spotify_utilities.mm)
+endif(APPLE)
+
 qt4_wrap_cpp(MOC ${HEADERS})
 
 if(WIN32 AND NOT CMAKE_BUILD_TYPE STREQUAL "Debug" AND NOT ENABLE_WIN32_CONSOLE)
@@ -39,6 +43,12 @@ target_link_libraries(clementine-spotifyblob
   ${QT_QTNETWORK_LIBRARY}
   clementine-spotifyblob-messages
 )
+
+if(APPLE)
+  target_link_libraries(clementine-spotifyblob
+    /System/Library/Frameworks/Foundation.framework
+  )
+endif(APPLE)
 
 if(NOT APPLE)
   # macdeploy.py takes care of this on mac
