@@ -676,6 +676,8 @@ MainWindow::MainWindow(
   scripts_->ui()->RegisterActionLocation("help_menu", ui_->menu_help, NULL);
   scripts_->ui()->RegisterActionLocation("playlist_menu", ui_->menu_playlist, NULL);
 
+  scripts_->ui()->RegisterActionLocation("song_menu", playlist_menu_, NULL);
+
   // Load theme
   StyleSheetLoader* css_loader = new StyleSheetLoader(this);
   css_loader->SetStyleSheet(this, ":mainwindow.css");

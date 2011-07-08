@@ -42,7 +42,11 @@
 #include "ui/settingsdialog.h"
 
 #include <QFile>
+#include <QModelIndex>
 #include <QtDebug>
+
+Q_DECLARE_METATYPE(QModelIndex)
+Q_DECLARE_METATYPE(QList<QModelIndex>)
 
 const char* PythonEngine::kClementineModuleName = "clementine";
 const char* PythonEngine::kScriptModulePrefix = "clementinescripts";
@@ -121,6 +125,7 @@ bool PythonEngine::EnsureInitialised() {
   RegisterListConverter<Directory>("QList<Directory>");
   RegisterListConverter<CoverSearchResult>("QList<CoverSearchResult>");
   RegisterListConverter<PlaylistItemPtr>("QList<PlaylistItemPtr>");
+  RegisterListConverter<QModelIndex>("QList<QModelIndex>");
 
   // Connect stdout, stderr
   connect(python_qt, SIGNAL(pythonStdOut(QString)), SLOT(PythonStdOut(QString)));
