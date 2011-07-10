@@ -42,6 +42,7 @@ protected:
 
 private slots:
   void ModuleChanged(int row);
+  void ClearConsole();
 
 private:
   Ui_PythonConsole* ui_;

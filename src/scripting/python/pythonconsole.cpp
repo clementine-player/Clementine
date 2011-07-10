@@ -35,6 +35,7 @@ PythonConsole::PythonConsole(QWidget *parent)
 {
   ui_->setupUi(this);
   connect(ui_->modules, SIGNAL(currentIndexChanged(int)), SLOT(ModuleChanged(int)));
+  connect(ui_->clearConsoleButton, SIGNAL(clicked()),SLOT(ClearConsole()));
 }
 
 PythonConsole::~PythonConsole() {
@@ -66,4 +67,8 @@ void PythonConsole::ModuleChanged(int row) {
   widget_ = new PythonQtScriptingConsole(this, ptr);
 
   layout()->addWidget(widget_);
+}
+
+void PythonConsole::ClearConsole() {
+   widget_->clear();
 }
