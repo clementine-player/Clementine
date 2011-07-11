@@ -17,7 +17,8 @@ msgstr ""
 "Language: uk\n"
 "X-Launchpad-Export-Date: 2011-04-11 05:09+0000\n"
 "X-Generator: Launchpad (build 12735)\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
+"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Language: uk_UA\n"
 "X-Source-Language: en_US\n"
 
@@ -77,10 +78,6 @@ msgstr "Знайдено %1 пісень (показано %2)"
 msgid "%1 tracks"
 msgstr "%1 доріжок"
 
-#, qt-format
-msgid "%1 transferred"
-msgstr ""
-
 #, fuzzy, qt-format
 msgid "%1 transferred"
 msgstr "%1 передано"
@@ -89,11 +86,11 @@ msgstr "%1 передано"
 msgid "%1: Wiimotedev module"
 msgstr "%1: Модуль Wiimotedev"
 
-#, fuzzy
+#, fuzzy, qt-format
 msgid "%L1 other listeners"
 msgstr "%L1 інших слухачів"
 
-#, fuzzy
+#, fuzzy, qt-format
 msgid "%L1 total plays"
 msgstr "%L1 прослуховувань загалом"
 
@@ -516,9 +513,6 @@ msgstr "Середня щільність"
 msgid "Average image size"
 msgstr "Середній розмір зображення"
 
-msgid "Average image size"
-msgstr ""
-
 msgid "BPM"
 msgstr "Бітів за хвилину"
 
@@ -643,6 +637,9 @@ msgstr "Класична"
 
 msgid "Clear"
 msgstr "Очистити"
+
+msgid "Clear Console"
+msgstr ""
 
 msgid "Clear playlist"
 msgstr "Очистити список відтворення"
@@ -841,10 +838,6 @@ msgstr "Обкладинку не встановлено"
 #, qt-format
 msgid "Cover art set from %1"
 msgstr "Обкладинку встановлено з %1"
-
-#, qt-format
-msgid "Covers from %1"
-msgstr ""
 
 #, qt-format
 msgid "Covers from %1"
@@ -1274,9 +1267,6 @@ msgstr "Знайти обкладинки, яких бракує"
 
 msgid "Fetch automatically"
 msgstr "Шукати автоматично"
-
-msgid "Fetch completed"
-msgstr ""
 
 #, fuzzy
 msgid "Fetch completed"
@@ -3004,12 +2994,6 @@ msgstr "Загалом передано байт"
 msgid "Total network requests made"
 msgstr "Загалом мережевих запитів виконано"
 
-msgid "Total bytes transferred"
-msgstr ""
-
-msgid "Total network requests made"
-msgstr ""
-
 msgid "Track"
 msgstr "Доріжка"
 
@@ -3269,18 +3253,17 @@ msgid "You can listen to background streams at the same time as other music."
 msgstr "Ви можете слухати фонові потоки під час програвання музики."
 
 msgid ""
-"You can scrobble tracks for free, but only <span style=\" "
-"font-weight:600;\">paid subscribers</span> can stream Last.fm radio from "
-"Clementine."
+"You can scrobble tracks for free, but only <span style=\" font-weight:600;"
+"\">paid subscribers</span> can stream Last.fm radio from Clementine."
 msgstr ""
-"Ви можете вільно скробблити доріжки, але лише <span style=\" "
-"font-weight:600;\">платні передплатники</span> можуть слухати потокове радіо "
-"Last.fm з Clementine."
+"Ви можете вільно скробблити доріжки, але лише <span style=\" font-weight:600;"
+"\">платні передплатники</span> можуть слухати потокове радіо Last.fm з "
+"Clementine."
 
 msgid ""
-"You can use your Wii Remote as a remote control for Clementine.  <a "
-"href=\"http://www.clementine-player.org/wiimote\">See the page on the "
-"Clementine wiki</a> for more information.\n"
+"You can use your Wii Remote as a remote control for Clementine.  <a href="
+"\"http://www.clementine-player.org/wiimote\">See the page on the Clementine "
+"wiki</a> for more information.\n"
 msgstr ""
 "Можете використовувати Wii Remote для віддаленого керування Clementine.  <a "
 "href=\"http://www.clementine-player.org/wiimote\">Детальніше, на сторінці "
@@ -3290,13 +3273,13 @@ msgid "You love this track"
 msgstr "Вам подобається ця композиція"
 
 msgid ""
-"You need to launch System Preferences and turn on \"<span style=\" "
-"font-style:italic;\">Enable access for assistive devices</span>\" to use "
-"global shortcuts in Clementine."
+"You need to launch System Preferences and turn on \"<span style=\" font-"
+"style:italic;\">Enable access for assistive devices</span>\" to use global "
+"shortcuts in Clementine."
 msgstr ""
 "Потрібно запустити «Системні налаштування» та увімкнути параметр \"<span "
-"style=\" font-style:italic;\">Увімкнути доступ для допоміжних "
-"пристроїв</span>\", щоб використовувати глобальні скорочення в Clementine."
+"style=\" font-style:italic;\">Увімкнути доступ для допоміжних пристроїв</"
+"span>\", щоб використовувати глобальні скорочення в Clementine."
 
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Потрібно перезапустити Clementine, щоб змінити мову."
@@ -3328,8 +3311,8 @@ msgid ""
 "package."
 msgstr ""
 "Вашій інсталляції gstreamer бракує додатку «ofa». Він необхіден для "
-"автоматичного витягування міток. Спробуйте встановити пакет "
-"«gstreamer-plugins-bad»."
+"автоматичного витягування міток. Спробуйте встановити пакет «gstreamer-"
+"plugins-bad»."
 
 msgid "Your library is empty!"
 msgstr "Ваша фонотека порожня!"
@@ -3458,11 +3441,9 @@ msgstr "зупинити"
 msgid "track %1"
 msgstr "доріжка %1"
 
-#, qt-format
 #~ msgid "%1 other listeners"
 #~ msgstr "%1 інших слухачів"
 
-#, qt-format
 #~ msgid "%1 total plays"
 #~ msgstr "%1 відтворень в цілому"
 
@@ -3479,7 +3460,6 @@ msgstr "доріжка %1"
 #~ "режиму ігноруватиме будь-які обмеження на розмір списку відтворення, що "
 #~ "ви встановили."
 
-#, qt-format
 #~ msgid "Unknown audio engine \"%1\". Choices are:"
 #~ msgstr "Невідомий аудіо рушій \"%1\". Варіанти:"
 
@@ -3501,7 +3481,6 @@ msgstr "доріжка %1"
 #~ msgid "MP4"
 #~ msgstr "MP4"
 
-#, qt-format
 #~ msgid "Hide %1"
 #~ msgstr "Приховати %1"
 
@@ -3514,18 +3493,15 @@ msgstr "доріжка %1"
 #~ msgid "My Loved Tracks"
 #~ msgstr "Мої улюблені композиції"
 
-#, qt-format
 #~ msgid "Last.fm Recommended Radio - %1"
 #~ msgstr "Рекомендоване радіо Last.fm - %1"
 
-#, qt-format
 #~ msgid "Last.fm Loved Tracks - %1"
 #~ msgstr "Улюблені композиції Last.fm - %1"
 
 #~ msgid "Radio service couldn't be loaded :-("
 #~ msgstr "Не вдалось завантажити радіо службу :-("
 
-#, qt-format
 #~ msgid "Couldn't load the last.fm radio station: %1"
 #~ msgstr "Не вдалось завантажити last.fm радіостанцію: %1"
 
@@ -3542,13 +3518,12 @@ msgstr "доріжка %1"
 #~ msgid "[click to edit]"
 #~ msgstr "[клацніть, щоб змінити]"
 
-#, qt-format
 #~ msgid "Editing %n tracks"
 #~ msgstr "Редагування %n доріжок"
 
 #~ msgid ""
-#~ "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm "
-#~ "*.tiff)"
+#~ "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm *."
+#~ "tiff)"
 #~ msgstr ""
 #~ "Зображення (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm "
 #~ "*.tiff)"
@@ -3631,7 +3606,6 @@ msgstr "доріжка %1"
 #~ msgid "available"
 #~ msgstr "доступно"
 
-#, qt-format
 #~ msgid "%1 of %2"
 #~ msgstr "%1 з %2"
 
@@ -3668,31 +3642,24 @@ msgstr "доріжка %1"
 #~ msgid "Use Wii remote"
 #~ msgstr "Використовувати Wii remote"
 
-#, qt-format
 #~ msgid "Wiiremote %1: disconnected"
 #~ msgstr "Wiiremote %1: роз’єднано"
 
-#, qt-format
 #~ msgid "Wiiremote %1: low battery (%2%)"
 #~ msgstr "Wiiremote %1: низький заряд акумулятора (%2%)"
 
-#, qt-format
 #~ msgid "Wiiremote %1: critical battery (%2%) "
 #~ msgstr "Wiiremote %1: критичний заряд акумулятора (%2%) "
 
-#, qt-format
 #~ msgid "Wiiremote %1: disactived"
 #~ msgstr "Wiiremote %1: деактивовано"
 
-#, qt-format
 #~ msgid "Wiiremote %1: actived"
 #~ msgstr "Wiiremote %1: активовано"
 
-#, qt-format
 #~ msgid "Wiiremote %1: connected"
 #~ msgstr "Wiiremote %1: з’єднано"
 
-#, qt-format
 #~ msgid "Searching %1..."
 #~ msgstr "Пошук %1..."
 
