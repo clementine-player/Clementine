@@ -31,6 +31,7 @@
 #include "engines/enginebase.h"
 #include "library/librarybackend.h"
 #include "library/libraryquery.h"
+#include "library/libraryview.h"
 #include "playlist/playlist.h"
 #include "playlist/playlistbackend.h"
 #include "playlist/playlistcontainer.h"

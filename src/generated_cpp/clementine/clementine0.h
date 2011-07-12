@@ -8,6 +8,7 @@
 #include <directory.h>
 #include <librarybackend.h>
 #include <libraryquery.h>
+#include <libraryview.h>
 #include <network.h>
 #include <player.h>
 #include <playlist.h>
@@ -19,20 +20,24 @@
 #include <playlistsequence.h>
 #include <qabstractitemmodel.h>
 #include <qabstractnetworkcache.h>
+#include <qaction.h>
 #include <qbytearray.h>
 #include <qcoreevent.h>
 #include <qcursor.h>
 #include <qdatastream.h>
 #include <qdir.h>
+#include <qevent.h>
 #include <qfont.h>
 #include <qicon.h>
 #include <qimage.h>
 #include <qiodevice.h>
 #include <qitemselectionmodel.h>
 #include <qkeysequence.h>
+#include <qlayout.h>
 #include <qlist.h>
 #include <qlocale.h>
 #include <qmargins.h>
+#include <qmimedata.h>
 #include <qnetworkrequest.h>
 #include <qobject.h>
 #include <qpaintdevice.h>
@@ -45,6 +50,7 @@
 #include <qsizepolicy.h>
 #include <qstandarditemmodel.h>
 #include <qstringlist.h>
+#include <qstyle.h>
 #include <qurl.h>
 #include <qwidget.h>
 #include <radiomodel.h>
@@ -393,6 +399,31 @@ void delete_LibraryQuery(LibraryQuery* obj) { delete obj; }
 
 
 
+class PythonQtShell_LibraryView : public LibraryView
+{
+public:
+    PythonQtShell_LibraryView(QWidget*  parent = 0):LibraryView(parent),_wrapper(NULL) {};
+
+
+  PythonQtInstanceWrapper* _wrapper; 
+};
+
+class PythonQtWrapper_LibraryView : public QObject
+{ Q_OBJECT
+public:
+public slots:
+LibraryView* new_LibraryView(QWidget*  parent = 0);
+void delete_LibraryView(LibraryView* obj) { delete obj; } 
+   QList<Song >  GetSelectedSongs(LibraryView* theWrappedObject) const;
+   void SetTaskManager(LibraryView* theWrappedObject, TaskManager*  task_manager);
+   void keyboardSearch(LibraryView* theWrappedObject, const QString&  search);
+   void scrollTo(LibraryView* theWrappedObject, const QModelIndex&  index, QAbstractItemView::ScrollHint  hint = QAbstractItemView::EnsureVisible);
+};
+
+
+
+
+
 class PythonQtShell_NetworkAccessManager : public NetworkAccessManager
 {
 public:
@@ -685,6 +716,7 @@ void delete_Playlist(Playlist* obj) { delete obj; }
    void Save(Playlist* theWrappedObject) const;
    void StopAfter(Playlist* theWrappedObject, int  row);
    void UpdateItems(Playlist* theWrappedObject, const QList<Song >&  songs);
+   QString  static_Playlist_abbreviated_column_name(Playlist::Column  column);
    int  columnCount(Playlist* theWrappedObject, const QModelIndex&  arg__1 = QModelIndex()) const;
    QMap<int , Qt::Alignment >  column_alignments(Playlist* theWrappedObject) const;
    bool  static_Playlist_column_is_editable(Playlist::Column  column);
@@ -1187,7 +1219,7 @@ void delete_RadioModel(RadioModel* obj) { delete obj; }
 class PythonQtShell_RadioService : public RadioService
 {
 public:
-    PythonQtShell_RadioService(const QString&  name, RadioModel*  model, QObject*  parent = NULL):RadioService(name, model, parent),_wrapper(NULL) {};
+    PythonQtShell_RadioService(const QString&  name, RadioModel*  model, QObject*  parent = 0):RadioService(name, model, parent),_wrapper(NULL) {};
 
 virtual QStandardItem*  CreateRootItem();
 virtual QModelIndex  GetCurrentIndex();
@@ -1219,7 +1251,7 @@ class PythonQtWrapper_RadioService : public QObject
 { Q_OBJECT
 public:
 public slots:
-RadioService* new_RadioService(const QString&  name, RadioModel*  model, QObject*  parent = NULL);
+RadioService* new_RadioService(const QString&  name, RadioModel*  model, QObject*  parent = 0);
 void delete_RadioService(RadioService* obj) { delete obj; } 
    QWidget*  HeaderWidget(RadioService* theWrappedObject) const;
    QString  Icon(RadioService* theWrappedObject);
@@ -1254,7 +1286,7 @@ public slots:
 Song* new_Song();
 Song* new_Song(const Song&  other);
 void delete_Song(Song* obj) { delete obj; } 
-   QString  static_Song_Decode(const QString&  tag, const QTextCodec*  codec = NULL);
+   QString  static_Song_Decode(const QString&  tag, const QTextCodec*  codec = 0);
    bool  HasProperMediaFile(Song* theWrappedObject) const;
    void Init(Song* theWrappedObject, const QString&  title, const QString&  artist, const QString&  album, qint64  beginning, qint64  end);
    void Init(Song* theWrappedObject, const QString&  title, const QString&  artist, const QString&  album, qint64  length_nanosec);
@@ -1490,41 +1522,6 @@ void delete_TaskManager(TaskManager* obj) { delete obj; }
    void SetTaskFinished(TaskManager* theWrappedObject, int  id);
    void SetTaskProgress(TaskManager* theWrappedObject, int  id, int  progress, int  max = 0);
    int  StartTask(TaskManager* theWrappedObject, const QString&  name);
-};
-
-
-
-
-
-class PythonQtShell_TaskManager_Task : public TaskManager_Task
-{
-public:
-    PythonQtShell_TaskManager_Task():TaskManager_Task(),_wrapper(NULL) {};
-
-
-  PythonQtInstanceWrapper* _wrapper; 
-};
-
-class PythonQtWrapper_TaskManager_Task : public QObject
-{ Q_OBJECT
-public:
-public slots:
-TaskManager_Task* new_TaskManager_Task();
-TaskManager_Task* new_TaskManager_Task(const TaskManager_Task& other) {
-PythonQtShell_TaskManager_Task* a = new PythonQtShell_TaskManager_Task();
-*((TaskManager_Task*)a) = other;
-return a; }
-void delete_TaskManager_Task(TaskManager_Task* obj) { delete obj; } 
-void py_set_progress_max(TaskManager_Task* theWrappedObject, int  progress_max){ theWrappedObject->progress_max = progress_max; }
-int  py_get_progress_max(TaskManager_Task* theWrappedObject){ return theWrappedObject->progress_max; }
-void py_set_progress(TaskManager_Task* theWrappedObject, int  progress){ theWrappedObject->progress = progress; }
-int  py_get_progress(TaskManager_Task* theWrappedObject){ return theWrappedObject->progress; }
-void py_set_id(TaskManager_Task* theWrappedObject, int  id){ theWrappedObject->id = id; }
-int  py_get_id(TaskManager_Task* theWrappedObject){ return theWrappedObject->id; }
-void py_set_name(TaskManager_Task* theWrappedObject, QString  name){ theWrappedObject->name = name; }
-QString  py_get_name(TaskManager_Task* theWrappedObject){ return theWrappedObject->name; }
-void py_set_blocks_library_scans(TaskManager_Task* theWrappedObject, bool  blocks_library_scans){ theWrappedObject->blocks_library_scans = blocks_library_scans; }
-bool  py_get_blocks_library_scans(TaskManager_Task* theWrappedObject){ return theWrappedObject->blocks_library_scans; }
 };
 
 

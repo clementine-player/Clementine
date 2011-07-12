@@ -19,20 +19,24 @@
 #include <playlistsequence.h>
 #include <qabstractitemmodel.h>
 #include <qabstractnetworkcache.h>
+#include <qaction.h>
 #include <qbytearray.h>
 #include <qcoreevent.h>
 #include <qcursor.h>
 #include <qdatastream.h>
 #include <qdir.h>
+#include <qevent.h>
 #include <qfont.h>
 #include <qicon.h>
 #include <qimage.h>
 #include <qiodevice.h>
 #include <qitemselectionmodel.h>
 #include <qkeysequence.h>
+#include <qlayout.h>
 #include <qlist.h>
 #include <qlocale.h>
 #include <qmargins.h>
+#include <qmimedata.h>
 #include <qnetworkrequest.h>
 #include <qobject.h>
 #include <qpaintdevice.h>
@@ -45,6 +49,7 @@
 #include <qsizepolicy.h>
 #include <qstandarditemmodel.h>
 #include <qstringlist.h>
+#include <qstyle.h>
 #include <qurl.h>
 #include <qwidget.h>
 #include <radiomodel.h>
@@ -1887,6 +1892,32 @@ void PythonQtWrapper_LibraryQuery::SetOrderBy(LibraryQuery* theWrappedObject, co
 QVariant  PythonQtWrapper_LibraryQuery::Value(LibraryQuery* theWrappedObject, int  column) const
 {
   return ( theWrappedObject->Value(column));
+}
+
+
+
+LibraryView* PythonQtWrapper_LibraryView::new_LibraryView(QWidget*  parent)
+{ 
+return new PythonQtShell_LibraryView(parent); }
+
+QList<Song >  PythonQtWrapper_LibraryView::GetSelectedSongs(LibraryView* theWrappedObject) const
+{
+  return ( theWrappedObject->GetSelectedSongs());
+}
+
+void PythonQtWrapper_LibraryView::SetTaskManager(LibraryView* theWrappedObject, TaskManager*  task_manager)
+{
+  ( theWrappedObject->SetTaskManager(task_manager));
+}
+
+void PythonQtWrapper_LibraryView::keyboardSearch(LibraryView* theWrappedObject, const QString&  search)
+{
+  ( theWrappedObject->keyboardSearch(search));
+}
+
+void PythonQtWrapper_LibraryView::scrollTo(LibraryView* theWrappedObject, const QModelIndex&  index, QAbstractItemView::ScrollHint  hint)
+{
+  ( theWrappedObject->scrollTo(index, hint));
 }
 
 
@@ -4429,6 +4460,11 @@ void PythonQtWrapper_Playlist::StopAfter(Playlist* theWrappedObject, int  row)
 void PythonQtWrapper_Playlist::UpdateItems(Playlist* theWrappedObject, const QList<Song >&  songs)
 {
   ( theWrappedObject->UpdateItems(songs));
+}
+
+QString  PythonQtWrapper_Playlist::static_Playlist_abbreviated_column_name(Playlist::Column  column)
+{
+  return (Playlist::abbreviated_column_name(column));
 }
 
 int  PythonQtWrapper_Playlist::columnCount(Playlist* theWrappedObject, const QModelIndex&  arg__1) const
@@ -9528,11 +9564,5 @@ int  PythonQtWrapper_TaskManager::StartTask(TaskManager* theWrappedObject, const
 {
   return ( theWrappedObject->StartTask(name));
 }
-
-
-
-TaskManager_Task* PythonQtWrapper_TaskManager_Task::new_TaskManager_Task()
-{ 
-return new PythonQtShell_TaskManager_Task(); }
 
 

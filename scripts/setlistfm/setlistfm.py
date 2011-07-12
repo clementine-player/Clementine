@@ -3,17 +3,16 @@ import sys
 
 from traceback import print_exc
 
-from PyQt4.QtCore import QObject
-from PyQt4.QtCore import QString
-from PyQt4.QtCore import QUrl
-from PyQt4.QtCore import QVariant
-from PyQt4.QtCore import SIGNAL
-from PyQt4.QtGui import QAction
-from PyQt4.QtNetwork import QNetworkRequest
+from PythonQt.Qt import QObject
+from PythonQt.Qt import QUrl
+from PythonQt.QtGui import QAction
+from PythonQt.QtNetwork import QNetworkRequest
 
 import clementine
+import logging
 import urllib
 
+LOGGER = logging.getLogger("setlistfm")
 
 class SetlistFmScript(QObject):
 
@@ -29,7 +28,7 @@ class SetlistFmScript(QObject):
 
     self.action = QAction("fill_with_setlist", self)
     self.action.setText("Load latest setlist")
-    self.connect(self.action, SIGNAL("activated()"), self.load_setlist_activated)
+    self.action.connect("activated()", self.load_setlist_activated)
 
     clementine.ui.AddAction('library_context_menu', self.action)
 
@@ -37,11 +36,11 @@ class SetlistFmScript(QObject):
     # wait for the last call to finish
     if self.task_id is not None:
       return
-    
+
     # find the first artist
     artist = ""
     for song in clementine.library_view.GetSelectedSongs():
-      if len(song.artist()) > 0:
+      if len(str(song.artist())) > 0:
         artist = str(song.artist())
         break
 
@@ -56,10 +55,9 @@ class SetlistFmScript(QObject):
     reply = self.network.get(QNetworkRequest(self.get_setlist_fm_url(artist)))
     self.artist_map[reply] = artist
 
-    reply.finished.connect(self.load_setlist_activated_finalize)
+    reply.connect("finished()", lambda: self.load_setlist_activated_finalize(reply))
 
-  def load_setlist_activated_finalize(self):
-    reply = self.sender()
+  def load_setlist_activated_finalize(self, reply):
     reply.deleteLater()
 
     if self.task_id is None:
@@ -70,10 +68,11 @@ class SetlistFmScript(QObject):
     self.task_id = None
 
     artist = self.artist_map.pop(reply)
-      
+
     # get the titles of songs from the latest setlist available
     # on setlist.fm for the artist
-    titles = self.parse_setlist_fm_reply(reply.readAll().data())
+    data = reply.readAll().data()
+    titles = self.parse_setlist_fm_reply(data)
 
     if len(titles) == 0:
       return
@@ -94,11 +93,10 @@ class SetlistFmScript(QObject):
     if clementine.library.ExecQuery(query):
       while query.Next():
         # be super cautious and throw out the faulty ones
-        to_int = query.Value(0).toInt()
-        to_str = query.Value(1).toString()
-        
-        if to_int[1]:
-          title_map[str(to_str).upper()] = to_int[0]
+        id = query.Value(0)
+        title = query.Value(1)
+
+        title_map[str(title).upper()] = id
 
     if len(title_map) > 0:
       # get complete song objects for ids
@@ -147,23 +145,23 @@ class SetlistFmScript(QObject):
             for set in final_sets:
               # this may or may not be an array - make sure it always is!
               final_songs = set['song'] if len(set['song']) > 1 else [set['song']]
-              
+
               for song in final_songs:
                 result.append(song['@name'])
-              
+
           if len(result) > 0:
             return result
 
       return []
-    
+
     except:
-      print "Unexpected error:", sys.exc_info()[0]
-      print_exc()
-      
-      return (None, [])
+      LOGGER.debug('No setlists found')
+      return []
 
   def get_setlist_fm_url(self, artist):
-    return QUrl('http://api.setlist.fm/rest/0.1/search/setlists.json?artistName=' + urllib.quote(artist))
-		
+    url = QUrl('http://api.setlist.fm/rest/0.1/search/setlists.json')
+    url.addQueryItem('artistName', artist)
+    return url
+
 
 script = SetlistFmScript()

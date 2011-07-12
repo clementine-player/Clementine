@@ -44,6 +44,7 @@
   <object-type name="LibraryQuery">
     <modify-function signature="operator const QSqlQuery&amp;()const" remove="all" />
   </object-type>
+  <object-type name="LibraryView" />
   <object-type name="NetworkAccessManager" />
   <object-type name="NetworkTimeouts">
     <modify-function signature="timerEvent(QTimerEvent*)" remove="all" />

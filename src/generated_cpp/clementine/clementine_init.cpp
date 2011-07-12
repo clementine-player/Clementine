@@ -13,6 +13,7 @@ PythonQt::priv()->registerClass(&LibraryBackend::staticMetaObject, "Clementine",
 PythonQt::priv()->registerClass(&LibraryBackendInterface::staticMetaObject, "Clementine", PythonQtCreateObject<PythonQtWrapper_LibraryBackendInterface>, PythonQtSetInstanceWrapperOnShell<PythonQtShell_LibraryBackendInterface>, module, 0);
 PythonQt::priv()->registerCPPClass("LibraryBackendInterface::Album", "", "Clementine", PythonQtCreateObject<PythonQtWrapper_LibraryBackendInterface_Album>, PythonQtSetInstanceWrapperOnShell<PythonQtShell_LibraryBackendInterface_Album>, module, 0);
 PythonQt::priv()->registerCPPClass("LibraryQuery", "", "Clementine", PythonQtCreateObject<PythonQtWrapper_LibraryQuery>, NULL, module, 0);
+PythonQt::priv()->registerClass(&LibraryView::staticMetaObject, "Clementine", PythonQtCreateObject<PythonQtWrapper_LibraryView>, PythonQtSetInstanceWrapperOnShell<PythonQtShell_LibraryView>, module, 0);
 PythonQt::priv()->registerClass(&NetworkAccessManager::staticMetaObject, "Clementine", PythonQtCreateObject<PythonQtWrapper_NetworkAccessManager>, PythonQtSetInstanceWrapperOnShell<PythonQtShell_NetworkAccessManager>, module, 0);
 PythonQt::priv()->registerClass(&NetworkTimeouts::staticMetaObject, "Clementine", PythonQtCreateObject<PythonQtWrapper_NetworkTimeouts>, PythonQtSetInstanceWrapperOnShell<PythonQtShell_NetworkTimeouts>, module, 0);
 PythonQt::priv()->registerClass(&Player::staticMetaObject, "Clementine", PythonQtCreateObject<PythonQtWrapper_Player>, PythonQtSetInstanceWrapperOnShell<PythonQtShell_Player>, module, 0);

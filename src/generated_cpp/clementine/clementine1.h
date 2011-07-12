@@ -9,7 +9,43 @@
 #include <qlist.h>
 #include <qobject.h>
 #include <qurl.h>
+#include <taskmanager.h>
 #include <urlhandler.h>
+
+
+
+class PythonQtShell_TaskManager_Task : public TaskManager_Task
+{
+public:
+    PythonQtShell_TaskManager_Task():TaskManager_Task(),_wrapper(NULL) {};
+
+
+  PythonQtInstanceWrapper* _wrapper; 
+};
+
+class PythonQtWrapper_TaskManager_Task : public QObject
+{ Q_OBJECT
+public:
+public slots:
+TaskManager_Task* new_TaskManager_Task();
+TaskManager_Task* new_TaskManager_Task(const TaskManager_Task& other) {
+PythonQtShell_TaskManager_Task* a = new PythonQtShell_TaskManager_Task();
+*((TaskManager_Task*)a) = other;
+return a; }
+void delete_TaskManager_Task(TaskManager_Task* obj) { delete obj; } 
+void py_set_progress_max(TaskManager_Task* theWrappedObject, int  progress_max){ theWrappedObject->progress_max = progress_max; }
+int  py_get_progress_max(TaskManager_Task* theWrappedObject){ return theWrappedObject->progress_max; }
+void py_set_progress(TaskManager_Task* theWrappedObject, int  progress){ theWrappedObject->progress = progress; }
+int  py_get_progress(TaskManager_Task* theWrappedObject){ return theWrappedObject->progress; }
+void py_set_id(TaskManager_Task* theWrappedObject, int  id){ theWrappedObject->id = id; }
+int  py_get_id(TaskManager_Task* theWrappedObject){ return theWrappedObject->id; }
+void py_set_name(TaskManager_Task* theWrappedObject, QString  name){ theWrappedObject->name = name; }
+QString  py_get_name(TaskManager_Task* theWrappedObject){ return theWrappedObject->name; }
+void py_set_blocks_library_scans(TaskManager_Task* theWrappedObject, bool  blocks_library_scans){ theWrappedObject->blocks_library_scans = blocks_library_scans; }
+bool  py_get_blocks_library_scans(TaskManager_Task* theWrappedObject){ return theWrappedObject->blocks_library_scans; }
+};
+
+
 
 
 
