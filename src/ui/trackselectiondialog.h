@@ -23,7 +23,9 @@
 #include "config.h"
 
 #include "core/song.h"
-#include "ui_trackselectiondialog.h"
+
+class Ui_TrackSelectionDialog;
+class QTreeWidget;
 
 class TrackSelectionDialog : public QDialog {
   Q_OBJECT

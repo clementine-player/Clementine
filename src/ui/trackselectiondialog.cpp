@@ -17,11 +17,13 @@
 
 #include "iconloader.h"
 #include "trackselectiondialog.h"
+#include "ui_trackselectiondialog.h"
 
 #include <QFileInfo>
 #include <QFutureWatcher>
 #include <QPushButton>
 #include <QShortcut>
+#include <QTreeWidget>
 #include <QtConcurrentRun>
 #include <QtDebug>
 
