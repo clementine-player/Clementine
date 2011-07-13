@@ -19,7 +19,6 @@
 #include <playlistsequence.h>
 #include <qabstractitemmodel.h>
 #include <qabstractnetworkcache.h>
-#include <qaction.h>
 #include <qbytearray.h>
 #include <qcoreevent.h>
 #include <qcursor.h>
@@ -32,7 +31,6 @@
 #include <qiodevice.h>
 #include <qitemselectionmodel.h>
 #include <qkeysequence.h>
-#include <qlayout.h>
 #include <qlist.h>
 #include <qlocale.h>
 #include <qmargins.h>
@@ -5759,6 +5757,35 @@ if (_wrapper) {
 }
   return PlaylistManager::GetAllPlaylists();
 }
+QString  PythonQtShell_PlaylistManager::GetPlaylistName(int  index) const
+{
+if (_wrapper) {
+  PyObject* obj = PyObject_GetAttrString((PyObject*)_wrapper, "GetPlaylistName");
+  PyErr_Clear();
+  if (obj && !PythonQtSlotFunction_Check(obj)) {
+    static const char* argumentList[] ={"QString" , "int"};
+    static const PythonQtMethodInfo* methodInfo = PythonQtMethodInfo::getCachedMethodInfoFromArgumentList(2, argumentList);
+      QString returnValue;
+    void* args[2] = {NULL, (void*)&index};
+    PyObject* result = PythonQtSignalTarget::call(obj, methodInfo, args, true);
+    if (result) {
+      args[0] = PythonQtConv::ConvertPythonToQt(methodInfo->parameters().at(0), result, false, NULL, &returnValue);
+      if (args[0]!=&returnValue) {
+        if (args[0]==NULL) {
+          PythonQt::priv()->handleVirtualOverloadReturnError("GetPlaylistName", methodInfo, result);
+        } else {
+          returnValue = *((QString*)args[0]);
+        }
+      }
+    }
+    if (result) { Py_DECREF(result); } 
+    Py_DECREF(obj);
+    return returnValue;
+  }
+  Py_XDECREF(obj);
+}
+  return PlaylistManager::GetPlaylistName(index);
+}
 SpecialPlaylistType*  PythonQtShell_PlaylistManager::GetPlaylistType(const QString&  type) const
 {
 if (_wrapper) {
@@ -6481,35 +6508,6 @@ if (_wrapper) {
 }
   return PlaylistManager::library_backend();
 }
-QString  PythonQtShell_PlaylistManager::name(int  index) const
-{
-if (_wrapper) {
-  PyObject* obj = PyObject_GetAttrString((PyObject*)_wrapper, "name");
-  PyErr_Clear();
-  if (obj && !PythonQtSlotFunction_Check(obj)) {
-    static const char* argumentList[] ={"QString" , "int"};
-    static const PythonQtMethodInfo* methodInfo = PythonQtMethodInfo::getCachedMethodInfoFromArgumentList(2, argumentList);
-      QString returnValue;
-    void* args[2] = {NULL, (void*)&index};
-    PyObject* result = PythonQtSignalTarget::call(obj, methodInfo, args, true);
-    if (result) {
-      args[0] = PythonQtConv::ConvertPythonToQt(methodInfo->parameters().at(0), result, false, NULL, &returnValue);
-      if (args[0]!=&returnValue) {
-        if (args[0]==NULL) {
-          PythonQt::priv()->handleVirtualOverloadReturnError("name", methodInfo, result);
-        } else {
-          returnValue = *((QString*)args[0]);
-        }
-      }
-    }
-    if (result) { Py_DECREF(result); } 
-    Py_DECREF(obj);
-    return returnValue;
-  }
-  Py_XDECREF(obj);
-}
-  return PlaylistManager::name(index);
-}
 PlaylistParser*  PythonQtShell_PlaylistManager::parser() const
 {
 if (_wrapper) {
@@ -6745,6 +6743,11 @@ QString  PythonQtWrapper_PlaylistManager::static_PlaylistManager_GetNameForNewPl
   return (PlaylistManager::GetNameForNewPlaylist(songs));
 }
 
+QString  PythonQtWrapper_PlaylistManager::GetPlaylistName(PlaylistManager* theWrappedObject, int  index) const
+{
+  return ( ((PythonQtPublicPromoter_PlaylistManager*)theWrappedObject)->promoted_GetPlaylistName(index));
+}
+
 SpecialPlaylistType*  PythonQtWrapper_PlaylistManager::GetPlaylistType(PlaylistManager* theWrappedObject, const QString&  type) const
 {
   return ( ((PythonQtPublicPromoter_PlaylistManager*)theWrappedObject)->promoted_GetPlaylistType(type));
@@ -6808,11 +6811,6 @@ QItemSelection  PythonQtWrapper_PlaylistManager::current_selection(PlaylistManag
 LibraryBackend*  PythonQtWrapper_PlaylistManager::library_backend(PlaylistManager* theWrappedObject) const
 {
   return ( ((PythonQtPublicPromoter_PlaylistManager*)theWrappedObject)->promoted_library_backend());
-}
-
-QString  PythonQtWrapper_PlaylistManager::name(PlaylistManager* theWrappedObject, int  index) const
-{
-  return ( ((PythonQtPublicPromoter_PlaylistManager*)theWrappedObject)->promoted_name(index));
 }
 
 PlaylistParser*  PythonQtWrapper_PlaylistManager::parser(PlaylistManager* theWrappedObject) const
@@ -6916,6 +6914,35 @@ if (_wrapper) {
   Py_XDECREF(obj);
 }
   return QList<Playlist* >();
+}
+QString  PythonQtShell_PlaylistManagerInterface::GetPlaylistName(int  index) const
+{
+if (_wrapper) {
+  PyObject* obj = PyObject_GetAttrString((PyObject*)_wrapper, "GetPlaylistName");
+  PyErr_Clear();
+  if (obj && !PythonQtSlotFunction_Check(obj)) {
+    static const char* argumentList[] ={"QString" , "int"};
+    static const PythonQtMethodInfo* methodInfo = PythonQtMethodInfo::getCachedMethodInfoFromArgumentList(2, argumentList);
+      QString returnValue;
+    void* args[2] = {NULL, (void*)&index};
+    PyObject* result = PythonQtSignalTarget::call(obj, methodInfo, args, true);
+    if (result) {
+      args[0] = PythonQtConv::ConvertPythonToQt(methodInfo->parameters().at(0), result, false, NULL, &returnValue);
+      if (args[0]!=&returnValue) {
+        if (args[0]==NULL) {
+          PythonQt::priv()->handleVirtualOverloadReturnError("GetPlaylistName", methodInfo, result);
+        } else {
+          returnValue = *((QString*)args[0]);
+        }
+      }
+    }
+    if (result) { Py_DECREF(result); } 
+    Py_DECREF(obj);
+    return returnValue;
+  }
+  Py_XDECREF(obj);
+}
+  return QString();
 }
 SpecialPlaylistType*  PythonQtShell_PlaylistManagerInterface::GetPlaylistType(const QString&  type) const
 {
@@ -7638,35 +7665,6 @@ if (_wrapper) {
   Py_XDECREF(obj);
 }
   return 0;
-}
-QString  PythonQtShell_PlaylistManagerInterface::name(int  index) const
-{
-if (_wrapper) {
-  PyObject* obj = PyObject_GetAttrString((PyObject*)_wrapper, "name");
-  PyErr_Clear();
-  if (obj && !PythonQtSlotFunction_Check(obj)) {
-    static const char* argumentList[] ={"QString" , "int"};
-    static const PythonQtMethodInfo* methodInfo = PythonQtMethodInfo::getCachedMethodInfoFromArgumentList(2, argumentList);
-      QString returnValue;
-    void* args[2] = {NULL, (void*)&index};
-    PyObject* result = PythonQtSignalTarget::call(obj, methodInfo, args, true);
-    if (result) {
-      args[0] = PythonQtConv::ConvertPythonToQt(methodInfo->parameters().at(0), result, false, NULL, &returnValue);
-      if (args[0]!=&returnValue) {
-        if (args[0]==NULL) {
-          PythonQt::priv()->handleVirtualOverloadReturnError("name", methodInfo, result);
-        } else {
-          returnValue = *((QString*)args[0]);
-        }
-      }
-    }
-    if (result) { Py_DECREF(result); } 
-    Py_DECREF(obj);
-    return returnValue;
-  }
-  Py_XDECREF(obj);
-}
-  return QString();
 }
 PlaylistParser*  PythonQtShell_PlaylistManagerInterface::parser() const
 {

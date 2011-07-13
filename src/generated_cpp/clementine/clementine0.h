@@ -20,7 +20,6 @@
 #include <playlistsequence.h>
 #include <qabstractitemmodel.h>
 #include <qabstractnetworkcache.h>
-#include <qaction.h>
 #include <qbytearray.h>
 #include <qcoreevent.h>
 #include <qcursor.h>
@@ -33,7 +32,6 @@
 #include <qiodevice.h>
 #include <qitemselectionmodel.h>
 #include <qkeysequence.h>
-#include <qlayout.h>
 #include <qlist.h>
 #include <qlocale.h>
 #include <qmargins.h>
@@ -901,6 +899,7 @@ public:
 virtual void ChangePlaylistOrder(const QList<int >&  ids);
 virtual void ClearCurrent();
 virtual QList<Playlist* >  GetAllPlaylists() const;
+virtual QString  GetPlaylistName(int  index) const;
 virtual SpecialPlaylistType*  GetPlaylistType(const QString&  type) const;
 virtual void InvalidateDeletedSongs();
 virtual void Load(const QString&  filename);
@@ -935,7 +934,6 @@ virtual void customEvent(QEvent*  arg__1);
 virtual bool  event(QEvent*  arg__1);
 virtual bool  eventFilter(QObject*  arg__1, QEvent*  arg__2);
 virtual LibraryBackend*  library_backend() const;
-virtual QString  name(int  index) const;
 virtual PlaylistParser*  parser() const;
 virtual Playlist*  playlist(int  id) const;
 virtual PlaylistBackend*  playlist_backend() const;
@@ -953,6 +951,7 @@ class PythonQtPublicPromoter_PlaylistManager : public PlaylistManager
 inline void promoted_ChangePlaylistOrder(const QList<int >&  ids) { PlaylistManager::ChangePlaylistOrder(ids); }
 inline void promoted_ClearCurrent() { PlaylistManager::ClearCurrent(); }
 inline QList<Playlist* >  promoted_GetAllPlaylists() const { return PlaylistManager::GetAllPlaylists(); }
+inline QString  promoted_GetPlaylistName(int  index) const { return PlaylistManager::GetPlaylistName(index); }
 inline SpecialPlaylistType*  promoted_GetPlaylistType(const QString&  type) const { return PlaylistManager::GetPlaylistType(type); }
 inline void promoted_InvalidateDeletedSongs() { PlaylistManager::InvalidateDeletedSongs(); }
 inline void promoted_Load(const QString&  filename) { PlaylistManager::Load(filename); }
@@ -983,7 +982,6 @@ inline Playlist*  promoted_current() const { return PlaylistManager::current(); 
 inline int  promoted_current_id() const { return PlaylistManager::current_id(); }
 inline QItemSelection  promoted_current_selection() const { return PlaylistManager::current_selection(); }
 inline LibraryBackend*  promoted_library_backend() const { return PlaylistManager::library_backend(); }
-inline QString  promoted_name(int  index) const { return PlaylistManager::name(index); }
 inline PlaylistParser*  promoted_parser() const { return PlaylistManager::parser(); }
 inline Playlist*  promoted_playlist(int  id) const { return PlaylistManager::playlist(id); }
 inline PlaylistBackend*  promoted_playlist_backend() const { return PlaylistManager::playlist_backend(); }
@@ -1001,6 +999,7 @@ PlaylistManager* new_PlaylistManager(TaskManager*  task_manager, QObject*  paren
 void delete_PlaylistManager(PlaylistManager* obj) { delete obj; } 
    QList<Playlist* >  GetAllPlaylists(PlaylistManager* theWrappedObject) const;
    QString  static_PlaylistManager_GetNameForNewPlaylist(const QList<Song >&  songs);
+   QString  GetPlaylistName(PlaylistManager* theWrappedObject, int  index) const;
    SpecialPlaylistType*  GetPlaylistType(PlaylistManager* theWrappedObject, const QString&  type) const;
    void Init(PlaylistManager* theWrappedObject, LibraryBackend*  library_backend, PlaylistBackend*  playlist_backend, PlaylistSequence*  sequence, PlaylistContainer*  playlist_container);
    void InvalidateDeletedSongs(PlaylistManager* theWrappedObject);
@@ -1014,7 +1013,6 @@ void delete_PlaylistManager(PlaylistManager* obj) { delete obj; }
    int  current_id(PlaylistManager* theWrappedObject) const;
    QItemSelection  current_selection(PlaylistManager* theWrappedObject) const;
    LibraryBackend*  library_backend(PlaylistManager* theWrappedObject) const;
-   QString  name(PlaylistManager* theWrappedObject, int  index) const;
    PlaylistParser*  parser(PlaylistManager* theWrappedObject) const;
    Playlist*  playlist(PlaylistManager* theWrappedObject, int  id) const;
    PlaylistBackend*  playlist_backend(PlaylistManager* theWrappedObject) const;
@@ -1036,6 +1034,7 @@ public:
 virtual void ChangePlaylistOrder(const QList<int >&  ids);
 virtual void ClearCurrent();
 virtual QList<Playlist* >  GetAllPlaylists() const;
+virtual QString  GetPlaylistName(int  index) const;
 virtual SpecialPlaylistType*  GetPlaylistType(const QString&  type) const;
 virtual void InvalidateDeletedSongs();
 virtual void Load(const QString&  filename);
@@ -1070,7 +1069,6 @@ virtual void customEvent(QEvent*  arg__1);
 virtual bool  event(QEvent*  arg__1);
 virtual bool  eventFilter(QObject*  arg__1, QEvent*  arg__2);
 virtual LibraryBackend*  library_backend() const;
-virtual QString  name(int  index) const;
 virtual PlaylistParser*  parser() const;
 virtual Playlist*  playlist(int  id) const;
 virtual PlaylistBackend*  playlist_backend() const;
@@ -1219,7 +1217,7 @@ void delete_RadioModel(RadioModel* obj) { delete obj; }
 class PythonQtShell_RadioService : public RadioService
 {
 public:
-    PythonQtShell_RadioService(const QString&  name, RadioModel*  model, QObject*  parent = 0):RadioService(name, model, parent),_wrapper(NULL) {};
+    PythonQtShell_RadioService(const QString&  name, RadioModel*  model, QObject*  parent = NULL):RadioService(name, model, parent),_wrapper(NULL) {};
 
 virtual QStandardItem*  CreateRootItem();
 virtual QModelIndex  GetCurrentIndex();
@@ -1251,7 +1249,7 @@ class PythonQtWrapper_RadioService : public QObject
 { Q_OBJECT
 public:
 public slots:
-RadioService* new_RadioService(const QString&  name, RadioModel*  model, QObject*  parent = 0);
+RadioService* new_RadioService(const QString&  name, RadioModel*  model, QObject*  parent = NULL);
 void delete_RadioService(RadioService* obj) { delete obj; } 
    QWidget*  HeaderWidget(RadioService* theWrappedObject) const;
    QString  Icon(RadioService* theWrappedObject);
@@ -1286,7 +1284,7 @@ public slots:
 Song* new_Song();
 Song* new_Song(const Song&  other);
 void delete_Song(Song* obj) { delete obj; } 
-   QString  static_Song_Decode(const QString&  tag, const QTextCodec*  codec = 0);
+   QString  static_Song_Decode(const QString&  tag, const QTextCodec*  codec = NULL);
    bool  HasProperMediaFile(Song* theWrappedObject) const;
    void Init(Song* theWrappedObject, const QString&  title, const QString&  artist, const QString&  album, qint64  beginning, qint64  end);
    void Init(Song* theWrappedObject, const QString&  title, const QString&  artist, const QString&  album, qint64  length_nanosec);

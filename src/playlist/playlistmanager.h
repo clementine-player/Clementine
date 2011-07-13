@@ -63,7 +63,7 @@ public:
   virtual QItemSelection current_selection() const = 0;
   virtual QItemSelection active_selection() const = 0;
 
-  virtual QString name(int index) const = 0;
+  virtual QString GetPlaylistName(int index) const = 0;
 
   virtual TaskManager* task_manager() const = 0;
   virtual LibraryBackend* library_backend() const = 0;
@@ -158,7 +158,7 @@ public:
   QItemSelection current_selection() const { return selection(current_id()); }
   QItemSelection active_selection() const { return selection(active_id()); }
 
-  QString name(int index) const { return playlists_[index].name; }
+  QString GetPlaylistName(int index) const { return playlists_[index].name; }
 
   void Init(LibraryBackend* library_backend, PlaylistBackend* playlist_backend,
             PlaylistSequence* sequence, PlaylistContainer* playlist_container);
