@@ -39,7 +39,7 @@ public:
   MOCK_CONST_METHOD0(current_selection, QItemSelection());
   MOCK_CONST_METHOD0(active_selection, QItemSelection());
 
-  MOCK_CONST_METHOD1(name, QString(int));
+  MOCK_CONST_METHOD1(GetPlaylistNaame, QString(int));
   MOCK_CONST_METHOD0(task_manager, TaskManager*());
   MOCK_CONST_METHOD0(library_backend, LibraryBackend*());
   MOCK_CONST_METHOD0(playlist_backend, PlaylistBackend*());
