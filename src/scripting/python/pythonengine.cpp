@@ -32,12 +32,12 @@
 #include "core/taskmanager.h"
 #include "covers/albumcoverfetcher.h"
 #include "covers/coverproviders.h"
+#include "internet/internetmodel.h"
 #include "library/library.h"
 #include "library/librarybackend.h"
 #include "library/libraryview.h"
 #include "playlist/playlistitem.h"
 #include "playlist/playlistmanager.h"
-#include "radio/radiomodel.h"
 #include "scripting/uiinterface.h"
 #include "ui/settingsdialog.h"
 
@@ -148,7 +148,7 @@ bool PythonEngine::EnsureInitialised() {
     clementine_module_.addObject("library_view",    data.library_view_);
     clementine_module_.addObject("player",          data.player_);
     clementine_module_.addObject("playlists",       data.playlists_);
-    clementine_module_.addObject("radio_model",     data.radio_model_);
+    clementine_module_.addObject("internet_model",  data.internet_model_);
     clementine_module_.addObject("settings_dialog", data.settings_dialog_);
     clementine_module_.addObject("task_manager",    data.task_manager_);
     clementine_module_.addObject("cover_providers", &CoverProviders::instance());

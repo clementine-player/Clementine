@@ -15,34 +15,27 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "generator.h"
-#include "querygenerator.h"
-#include "core/logging.h"
-#include "internet/jamendodynamicplaylist.h"
+#include "magnatuneplaylistitem.h"
+#include "internetmodel.h"
 
-#include <QSettings>
-
-namespace smart_playlists {
-
-const int Generator::kDefaultLimit = 20;
-const int Generator::kDefaultDynamicHistory = 5;
-const int Generator::kDefaultDynamicFuture = 15;
-
-Generator::Generator()
-  : QObject(NULL),
-    backend_(NULL)
+MagnatunePlaylistItem::MagnatunePlaylistItem(const QString& type)
+  : LibraryPlaylistItem(type)
 {
 }
 
-GeneratorPtr Generator::Create(const QString& type) {
-  if (type == "Query")
-    return GeneratorPtr(new QueryGenerator);
-  else if (type == "Jamendo")
-    return GeneratorPtr(new JamendoDynamicPlaylist);
-
-  qLog(Warning) << "Invalid playlist generator type:" << type;
-  return GeneratorPtr();
+MagnatunePlaylistItem::MagnatunePlaylistItem(const Song& song)
+  : LibraryPlaylistItem("Magnatune")
+{
+  song_ = song;
 }
 
-} // namespace
+bool MagnatunePlaylistItem::InitFromQuery(const SqlRow& query) {
+  // Rows from the songs tables come first
+  song_.InitFromQuery(query, true, Song::kColumns.count() + 1);
 
+  return song_.is_valid();
+}
+
+QUrl MagnatunePlaylistItem::Url() const {
+  return song_.url();
+}

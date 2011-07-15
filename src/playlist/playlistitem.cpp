@@ -19,13 +19,14 @@
 #include "songplaylistitem.h"
 #include "core/logging.h"
 #include "core/song.h"
+#include "internet/jamendoplaylistitem.h"
+#include "internet/jamendoservice.h"
+#include "internet/magnatuneplaylistitem.h"
+#include "internet/magnatuneservice.h"
+#include "internet/internetplaylistitem.h"
 #include "library/library.h"
 #include "library/libraryplaylistitem.h"
-#include "radio/jamendoplaylistitem.h"
-#include "radio/jamendoservice.h"
-#include "radio/magnatuneplaylistitem.h"
-#include "radio/magnatuneservice.h"
-#include "radio/radioplaylistitem.h"
+
 
 #include <QtConcurrentRun>
 #include <QtDebug>
@@ -40,8 +41,8 @@ PlaylistItem* PlaylistItem::NewFromType(const QString& type) {
     return new JamendoPlaylistItem(type);
   if (type == "Stream" || type == "File")
     return new SongPlaylistItem(type);
-  if (type == "Radio")
-    return new RadioPlaylistItem(type);
+  if (type == "Internet")
+    return new InternetPlaylistItem(type);
 
   qLog(Warning) << "Invalid PlaylistItem type:" << type;
   return NULL;
@@ -62,7 +63,7 @@ PlaylistItem* PlaylistItem::NewFromSongsTable(const QString& table, const Song& 
 void PlaylistItem::BindToQuery(QSqlQuery* query) const {
   query->bindValue(":type", type());
   query->bindValue(":library_id", DatabaseValue(Column_LibraryId));
-  query->bindValue(":radio_service", DatabaseValue(Column_RadioService));
+  query->bindValue(":radio_service", DatabaseValue(Column_InternetService));
 
   DatabaseSongMetadata().BindToQuery(query);
 }

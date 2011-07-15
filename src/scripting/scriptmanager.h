@@ -30,7 +30,7 @@ class Library;
 class LibraryView;
 class PlayerInterface;
 class PlaylistManager;
-class RadioModel;
+class InternetModel;
 class Script;
 class SettingsDialog;
 class TaskManager;
@@ -61,7 +61,7 @@ public:
     GlobalData(Library* library, LibraryView* library_view,
                PlayerInterface* player, PlaylistManager* playlists,
                TaskManager* task_manager, SettingsDialog* settings_dialog,
-               RadioModel* radio_model)
+               InternetModel* internet_model)
       : valid_(true),
         library_(library),
         library_view_(library_view),
@@ -69,7 +69,7 @@ public:
         playlists_(playlists),
         task_manager_(task_manager),
         settings_dialog_(settings_dialog),
-        radio_model_(radio_model)
+        internet_model_(internet_model)
     {}
 
     bool valid_;
@@ -79,7 +79,7 @@ public:
     PlaylistManager* playlists_;
     TaskManager* task_manager_;
     SettingsDialog* settings_dialog_;
-    RadioModel* radio_model_;
+    InternetModel* internet_model_;
   };
 
   static const char* kSettingsGroup;

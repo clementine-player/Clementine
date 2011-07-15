@@ -88,7 +88,7 @@ class DigitallyImportedUrlHandler(clementine.UrlHandler):
     self.AsyncLoadComplete(result)
 
 
-class DigitallyImportedServiceBase(clementine.RadioService):
+class DigitallyImportedServiceBase(clementine.InternetService):
   # Set these in subclasses
   HOMEPAGE_URL = None
   HOMEPAGE_NAME = None
@@ -102,7 +102,7 @@ class DigitallyImportedServiceBase(clementine.RadioService):
   SETTINGS_GROUP = "digitally_imported"
 
   def Init(self, model, settings_dialog_callback):
-    clementine.RadioService.__init__(self, self.SERVICE_NAME, model)
+    clementine.InternetService.__init__(self, self.SERVICE_NAME, model)
 
     # We must hold a weak reference to the callback or else it makes a circular
     # reference between the services and Plugin from main.py.
@@ -139,7 +139,7 @@ class DigitallyImportedServiceBase(clementine.RadioService):
   def CreateRootItem(self):
     self.root = QStandardItem(QIcon(os.path.join(self.path, self.ICON_FILENAME)),
                               self.SERVICE_DESCRIPTION)
-    self.root.setData(True, clementine.RadioModel.Role_CanLazyLoad)
+    self.root.setData(True, clementine.InternetModel.Role_CanLazyLoad)
     return self.root
 
   def LazyPopulate(self, parent):
@@ -217,8 +217,8 @@ class DigitallyImportedServiceBase(clementine.RadioService):
 
       item = QStandardItem(QIcon(":last.fm/icon_radio.png"), stream["name"])
       item.setData(stream["description"], PythonQt.QtCore.Qt.ToolTipRole)
-      item.setData(clementine.RadioModel.PlayBehaviour_SingleItem, clementine.RadioModel.Role_PlayBehaviour)
-      item.setData(song, clementine.RadioModel.Role_SongMetadata)
+      item.setData(clementine.InternetModel.PlayBehaviour_SingleItem, clementine.InternetModel.Role_PlayBehaviour)
+      item.setData(song, clementine.InternetModel.Role_SongMetadata)
       self.root.appendRow(item)
 
       # Keep references to the items otherwise Python will delete them

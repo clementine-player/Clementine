@@ -27,7 +27,7 @@
 #include "playlist/playlistmanager.h"
 
 #ifdef HAVE_LIBLASTFM
-#  include "radio/lastfmservice.h"
+#  include "internet/lastfmservice.h"
 #endif
 
 #include <QtDebug>
@@ -73,7 +73,7 @@ void Player::Init() {
   engine_->SetVolume(settings_.value("volume", 50).toInt());
 
 #ifdef HAVE_LIBLASTFM
-  lastfm_ = RadioModel::Service<LastFMService>();
+  lastfm_ = InternetModel::Service<LastFMService>();
 #endif
 }
 

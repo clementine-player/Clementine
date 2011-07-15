@@ -51,8 +51,8 @@
 #include <qstyle.h>
 #include <qurl.h>
 #include <qwidget.h>
-#include <radiomodel.h>
-#include <radioservice.h>
+#include <internetmodel.h>
+#include <internetservice.h>
 #include <song.h>
 #include <specialplaylisttype.h>
 #include <taskmanager.h>
@@ -1172,52 +1172,52 @@ void delete_QueryOptions(QueryOptions* obj) { delete obj; }
 
 
 
-class PythonQtPublicPromoter_RadioModel : public RadioModel
+class PythonQtPublicPromoter_InternetModel : public InternetModel
 { public:
-inline Qt::ItemFlags  promoted_flags(const QModelIndex&  index) const { return RadioModel::flags(index); }
-inline bool  promoted_hasChildren(const QModelIndex&  parent) const { return RadioModel::hasChildren(parent); }
-inline QMimeData*  promoted_mimeData(const QList<QModelIndex >&  indexes) const { return RadioModel::mimeData(indexes); }
-inline QStringList  promoted_mimeTypes() const { return RadioModel::mimeTypes(); }
-inline int  promoted_rowCount(const QModelIndex&  parent) const { return RadioModel::rowCount(parent); }
+inline Qt::ItemFlags  promoted_flags(const QModelIndex&  index) const { return InternetModel::flags(index); }
+inline bool  promoted_hasChildren(const QModelIndex&  parent) const { return InternetModel::hasChildren(parent); }
+inline QMimeData*  promoted_mimeData(const QList<QModelIndex >&  indexes) const { return InternetModel::mimeData(indexes); }
+inline QStringList  promoted_mimeTypes() const { return InternetModel::mimeTypes(); }
+inline int  promoted_rowCount(const QModelIndex&  parent) const { return InternetModel::rowCount(parent); }
 };
 
-class PythonQtWrapper_RadioModel : public QObject
+class PythonQtWrapper_InternetModel : public QObject
 { Q_OBJECT
 public:
 Q_ENUMS(PlayBehaviour Role Type )
 enum PlayBehaviour{
-  PlayBehaviour_None = RadioModel::PlayBehaviour_None,   PlayBehaviour_UseSongLoader = RadioModel::PlayBehaviour_UseSongLoader,   PlayBehaviour_SingleItem = RadioModel::PlayBehaviour_SingleItem,   PlayBehaviour_DoubleClickAction = RadioModel::PlayBehaviour_DoubleClickAction};
+  PlayBehaviour_None = InternetModel::PlayBehaviour_None,   PlayBehaviour_UseSongLoader = InternetModel::PlayBehaviour_UseSongLoader,   PlayBehaviour_SingleItem = InternetModel::PlayBehaviour_SingleItem,   PlayBehaviour_DoubleClickAction = InternetModel::PlayBehaviour_DoubleClickAction};
 enum Role{
-  Role_Type = RadioModel::Role_Type,   Role_PlayBehaviour = RadioModel::Role_PlayBehaviour,   Role_Url = RadioModel::Role_Url,   Role_SongMetadata = RadioModel::Role_SongMetadata,   Role_CanLazyLoad = RadioModel::Role_CanLazyLoad,   Role_Service = RadioModel::Role_Service,   RoleCount = RadioModel::RoleCount};
+  Role_Type = InternetModel::Role_Type,   Role_PlayBehaviour = InternetModel::Role_PlayBehaviour,   Role_Url = InternetModel::Role_Url,   Role_SongMetadata = InternetModel::Role_SongMetadata,   Role_CanLazyLoad = InternetModel::Role_CanLazyLoad,   Role_Service = InternetModel::Role_Service,   RoleCount = InternetModel::RoleCount};
 enum Type{
-  Type_Service = RadioModel::Type_Service,   TypeCount = RadioModel::TypeCount};
+  Type_Service = InternetModel::Type_Service,   TypeCount = InternetModel::TypeCount};
 public slots:
-void delete_RadioModel(RadioModel* obj) { delete obj; } 
-   void AddService(RadioModel* theWrappedObject, RadioService*  service);
-   bool  IsPlayable(RadioModel* theWrappedObject, const QModelIndex&  index) const;
-   void ReloadSettings(RadioModel* theWrappedObject);
-   void RemoveService(RadioModel* theWrappedObject, RadioService*  service);
-   RadioService*  static_RadioModel_ServiceByName(const QString&  name);
-   RadioService*  ServiceForIndex(RadioModel* theWrappedObject, const QModelIndex&  index) const;
-   RadioService*  ServiceForItem(RadioModel* theWrappedObject, const QStandardItem*  item) const;
-   void ShowContextMenu(RadioModel* theWrappedObject, const QModelIndex&  merged_model_index, const QPoint&  global_pos);
-   Qt::ItemFlags  flags(RadioModel* theWrappedObject, const QModelIndex&  index) const;
-   bool  hasChildren(RadioModel* theWrappedObject, const QModelIndex&  parent) const;
-   QMimeData*  mimeData(RadioModel* theWrappedObject, const QList<QModelIndex >&  indexes) const;
-   QStringList  mimeTypes(RadioModel* theWrappedObject) const;
-   PlayerInterface*  player(RadioModel* theWrappedObject) const;
-   int  rowCount(RadioModel* theWrappedObject, const QModelIndex&  parent) const;
-   TaskManager*  task_manager(RadioModel* theWrappedObject) const;
+void delete_InternetModel(InternetModel* obj) { delete obj; } 
+   void AddService(InternetModel* theWrappedObject, InternetService*  service);
+   bool  IsPlayable(InternetModel* theWrappedObject, const QModelIndex&  index) const;
+   void ReloadSettings(InternetModel* theWrappedObject);
+   void RemoveService(InternetModel* theWrappedObject, InternetService*  service);
+   InternetService*  static_InternetModel_ServiceByName(const QString&  name);
+   InternetService*  ServiceForIndex(InternetModel* theWrappedObject, const QModelIndex&  index) const;
+   InternetService*  ServiceForItem(InternetModel* theWrappedObject, const QStandardItem*  item) const;
+   void ShowContextMenu(InternetModel* theWrappedObject, const QModelIndex&  merged_model_index, const QPoint&  global_pos);
+   Qt::ItemFlags  flags(InternetModel* theWrappedObject, const QModelIndex&  index) const;
+   bool  hasChildren(InternetModel* theWrappedObject, const QModelIndex&  parent) const;
+   QMimeData*  mimeData(InternetModel* theWrappedObject, const QList<QModelIndex >&  indexes) const;
+   QStringList  mimeTypes(InternetModel* theWrappedObject) const;
+   PlayerInterface*  player(InternetModel* theWrappedObject) const;
+   int  rowCount(InternetModel* theWrappedObject, const QModelIndex&  parent) const;
+   TaskManager*  task_manager(InternetModel* theWrappedObject) const;
 };
 
 
 
 
 
-class PythonQtShell_RadioService : public RadioService
+class PythonQtShell_InternetService : public InternetService
 {
 public:
-    PythonQtShell_RadioService(const QString&  name, RadioModel*  model, QObject*  parent = NULL):RadioService(name, model, parent),_wrapper(NULL) {};
+    PythonQtShell_InternetService(const QString&  name, InternetModel*  model, QObject*  parent = NULL):InternetService(name, model, parent),_wrapper(NULL) {};
 
 virtual QStandardItem*  CreateRootItem();
 virtual QModelIndex  GetCurrentIndex();
@@ -1236,28 +1236,28 @@ virtual void timerEvent(QTimerEvent*  arg__1);
   PythonQtInstanceWrapper* _wrapper; 
 };
 
-class PythonQtPublicPromoter_RadioService : public RadioService
+class PythonQtPublicPromoter_InternetService : public InternetService
 { public:
-inline QWidget*  promoted_HeaderWidget() const { return RadioService::HeaderWidget(); }
-inline QString  promoted_Icon() { return RadioService::Icon(); }
-inline void promoted_ItemDoubleClicked(QStandardItem*  item) { RadioService::ItemDoubleClicked(item); }
-inline void promoted_ReloadSettings() { RadioService::ReloadSettings(); }
-inline void promoted_ShowContextMenu(const QModelIndex&  index, const QPoint&  global_pos) { RadioService::ShowContextMenu(index, global_pos); }
+inline QWidget*  promoted_HeaderWidget() const { return InternetService::HeaderWidget(); }
+inline QString  promoted_Icon() { return InternetService::Icon(); }
+inline void promoted_ItemDoubleClicked(QStandardItem*  item) { InternetService::ItemDoubleClicked(item); }
+inline void promoted_ReloadSettings() { InternetService::ReloadSettings(); }
+inline void promoted_ShowContextMenu(const QModelIndex&  index, const QPoint&  global_pos) { InternetService::ShowContextMenu(index, global_pos); }
 };
 
-class PythonQtWrapper_RadioService : public QObject
+class PythonQtWrapper_InternetService : public QObject
 { Q_OBJECT
 public:
 public slots:
-RadioService* new_RadioService(const QString&  name, RadioModel*  model, QObject*  parent = NULL);
-void delete_RadioService(RadioService* obj) { delete obj; } 
-   QWidget*  HeaderWidget(RadioService* theWrappedObject) const;
-   QString  Icon(RadioService* theWrappedObject);
-   void ItemDoubleClicked(RadioService* theWrappedObject, QStandardItem*  item);
-   void ReloadSettings(RadioService* theWrappedObject);
-   void ShowContextMenu(RadioService* theWrappedObject, const QModelIndex&  index, const QPoint&  global_pos);
-   RadioModel*  model(RadioService* theWrappedObject) const;
-   QString  name(RadioService* theWrappedObject) const;
+InternetService* new_InternetService(const QString&  name, InternetModel*  model, QObject*  parent = NULL);
+void delete_InternetService(InternetService* obj) { delete obj; } 
+   QWidget*  HeaderWidget(InternetService* theWrappedObject) const;
+   QString  Icon(InternetService* theWrappedObject);
+   void ItemDoubleClicked(InternetService* theWrappedObject, QStandardItem*  item);
+   void ReloadSettings(InternetService* theWrappedObject);
+   void ShowContextMenu(InternetService* theWrappedObject, const QModelIndex&  index, const QPoint&  global_pos);
+   InternetModel*  model(InternetService* theWrappedObject) const;
+   QString  name(InternetService* theWrappedObject) const;
 };
 
 

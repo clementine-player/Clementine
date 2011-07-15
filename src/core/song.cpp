@@ -46,7 +46,7 @@
 #include <wavfile.h>
 
 #ifdef HAVE_LIBLASTFM
-  #include "radio/fixlastfm.h"
+  #include "internet/fixlastfm.h"
   #include <lastfm/Track>
 #endif
 

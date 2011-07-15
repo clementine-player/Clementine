@@ -89,7 +89,7 @@ class PlaylistItem : public boost::enable_shared_from_this<PlaylistItem> {
  protected:
   enum DatabaseColumn {
     Column_LibraryId,
-    Column_RadioService,
+    Column_InternetService,
   };
 
   virtual QVariant DatabaseValue(DatabaseColumn) const {

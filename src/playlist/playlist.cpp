@@ -26,18 +26,18 @@
 #include "songplaylistitem.h"
 #include "core/logging.h"
 #include "core/modelfuturewatcher.h"
+#include "internet/jamendoplaylistitem.h"
+#include "internet/jamendoservice.h"
+#include "internet/magnatuneplaylistitem.h"
+#include "internet/magnatuneservice.h"
+#include "internet/internetmimedata.h"
+#include "internet/internetmodel.h"
+#include "internet/internetplaylistitem.h"
+#include "internet/savedradio.h"
 #include "library/library.h"
 #include "library/librarybackend.h"
 #include "library/librarymodel.h"
 #include "library/libraryplaylistitem.h"
-#include "radio/jamendoplaylistitem.h"
-#include "radio/jamendoservice.h"
-#include "radio/magnatuneplaylistitem.h"
-#include "radio/magnatuneservice.h"
-#include "radio/radiomimedata.h"
-#include "radio/radiomodel.h"
-#include "radio/radioplaylistitem.h"
-#include "radio/savedradio.h"
 #include "smartplaylists/generator.h"
 #include "smartplaylists/generatorinserter.h"
 #include "smartplaylists/generatormimedata.h"
@@ -643,9 +643,9 @@ bool Playlist::dropMimeData(const QMimeData* data, Qt::DropAction action, int ro
       InsertSongItems<JamendoPlaylistItem>(song_data->songs, row, play_now, enqueue_now);
     else
       InsertSongItems<SongPlaylistItem>(song_data->songs, row, play_now, enqueue_now);
-  } else if (const RadioMimeData* radio_data = qobject_cast<const RadioMimeData*>(data)) {
-    // Dragged from the Radio pane
-    InsertRadioStations(radio_data->model, radio_data->indexes,
+  } else if (const InternetMimeData* internet_data = qobject_cast<const InternetMimeData*>(data)) {
+    // Dragged from the Internet pane
+    InsertInternetItems(internet_data->model, internet_data->indexes,
                         row, play_now, enqueue_now);
   } else if (const GeneratorMimeData* generator_data = qobject_cast<const GeneratorMimeData*>(data)) {
     InsertSmartPlaylist(generator_data->generator_, row, play_now, enqueue_now);
@@ -937,22 +937,22 @@ void Playlist::InsertSongsOrLibraryItems(const SongList& songs, int pos, bool pl
   InsertItems(items, pos, play_now, enqueue);
 }
 
-void Playlist::InsertRadioStations(const RadioModel* model,
+void Playlist::InsertInternetItems(const InternetModel* model,
                                    const QModelIndexList& items,
                                    int pos, bool play_now, bool enqueue) {
   PlaylistItemList playlist_items;
   QList<QUrl> song_urls;
 
   foreach (const QModelIndex& item, items) {
-    switch (item.data(RadioModel::Role_PlayBehaviour).toInt()) {
-    case RadioModel::PlayBehaviour_SingleItem:
-      playlist_items << shared_ptr<PlaylistItem>(new RadioPlaylistItem(
+    switch (item.data(InternetModel::Role_PlayBehaviour).toInt()) {
+    case InternetModel::PlayBehaviour_SingleItem:
+      playlist_items << shared_ptr<PlaylistItem>(new InternetPlaylistItem(
           model->ServiceForIndex(item),
-          item.data(RadioModel::Role_SongMetadata).value<Song>()));
+          item.data(InternetModel::Role_SongMetadata).value<Song>()));
       break;
 
-    case RadioModel::PlayBehaviour_UseSongLoader:
-      song_urls << item.data(RadioModel::Role_Url).toUrl();
+    case InternetModel::PlayBehaviour_UseSongLoader:
+      song_urls << item.data(InternetModel::Role_Url).toUrl();
       break;
     }
   }
@@ -1241,9 +1241,9 @@ void Playlist::ItemsLoaded() {
       if (p.dynamic_backend == library_->songs_table())
         backend = library_;
       else if (p.dynamic_backend == MagnatuneService::kSongsTable)
-        backend = RadioModel::Service<MagnatuneService>()->library_backend();
+        backend = InternetModel::Service<MagnatuneService>()->library_backend();
       else if (p.dynamic_backend == JamendoService::kSongsTable)
-        backend = RadioModel::Service<JamendoService>()->library_backend();
+        backend = InternetModel::Service<JamendoService>()->library_backend();
 
       if (backend) {
         gen->set_library(backend);

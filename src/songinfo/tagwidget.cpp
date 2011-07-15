@@ -16,10 +16,10 @@
 */
 
 #include "tagwidget.h"
+#include "internet/lastfmservice.h"
+#include "internet/internetmimedata.h"
+#include "internet/internetmodel.h"
 #include "playlist/playlistitemmimedata.h"
-#include "radio/lastfmservice.h"
-#include "radio/radiomimedata.h"
-#include "radio/radiomodel.h"
 #include "smartplaylists/generator.h"
 #include "smartplaylists/generatormimedata.h"
 #include "smartplaylists/querygenerator.h"
@@ -184,7 +184,7 @@ void TagWidget::PlayFromLibrary() {
 }
 
 void TagWidget::PlayLastFm(const QString& url_pattern) {
-  LastFMService* last_fm = RadioModel::Service<LastFMService>();
+  LastFMService* last_fm = InternetModel::Service<LastFMService>();
   if (!last_fm->IsAuthenticated()) {
     last_fm->ShowConfig();
     return;

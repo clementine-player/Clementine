@@ -50,8 +50,8 @@
 #include <qstyle.h>
 #include <qurl.h>
 #include <qwidget.h>
-#include <radiomodel.h>
-#include <radioservice.h>
+#include <internetmodel.h>
+#include <internetservice.h>
 #include <song.h>
 #include <specialplaylisttype.h>
 #include <taskmanager.h>
@@ -8109,84 +8109,84 @@ void PythonQtWrapper_QueryOptions::set_query_mode(QueryOptions* theWrappedObject
 
 
 
-void PythonQtWrapper_RadioModel::AddService(RadioModel* theWrappedObject, RadioService*  service)
+void PythonQtWrapper_InternetModel::AddService(InternetModel* theWrappedObject, InternetService*  service)
 {
   ( theWrappedObject->AddService(service));
 }
 
-bool  PythonQtWrapper_RadioModel::IsPlayable(RadioModel* theWrappedObject, const QModelIndex&  index) const
+bool  PythonQtWrapper_InternetModel::IsPlayable(InternetModel* theWrappedObject, const QModelIndex&  index) const
 {
   return ( theWrappedObject->IsPlayable(index));
 }
 
-void PythonQtWrapper_RadioModel::ReloadSettings(RadioModel* theWrappedObject)
+void PythonQtWrapper_InternetModel::ReloadSettings(InternetModel* theWrappedObject)
 {
   ( theWrappedObject->ReloadSettings());
 }
 
-void PythonQtWrapper_RadioModel::RemoveService(RadioModel* theWrappedObject, RadioService*  service)
+void PythonQtWrapper_InternetModel::RemoveService(InternetModel* theWrappedObject, InternetService*  service)
 {
   ( theWrappedObject->RemoveService(service));
 }
 
-RadioService*  PythonQtWrapper_RadioModel::static_RadioModel_ServiceByName(const QString&  name)
+InternetService*  PythonQtWrapper_InternetModel::static_InternetModel_ServiceByName(const QString&  name)
 {
-  return (RadioModel::ServiceByName(name));
+  return (InternetModel::ServiceByName(name));
 }
 
-RadioService*  PythonQtWrapper_RadioModel::ServiceForIndex(RadioModel* theWrappedObject, const QModelIndex&  index) const
+InternetService*  PythonQtWrapper_InternetModel::ServiceForIndex(InternetModel* theWrappedObject, const QModelIndex&  index) const
 {
   return ( theWrappedObject->ServiceForIndex(index));
 }
 
-RadioService*  PythonQtWrapper_RadioModel::ServiceForItem(RadioModel* theWrappedObject, const QStandardItem*  item) const
+InternetService*  PythonQtWrapper_InternetModel::ServiceForItem(InternetModel* theWrappedObject, const QStandardItem*  item) const
 {
   return ( theWrappedObject->ServiceForItem(item));
 }
 
-void PythonQtWrapper_RadioModel::ShowContextMenu(RadioModel* theWrappedObject, const QModelIndex&  merged_model_index, const QPoint&  global_pos)
+void PythonQtWrapper_InternetModel::ShowContextMenu(InternetModel* theWrappedObject, const QModelIndex&  merged_model_index, const QPoint&  global_pos)
 {
   ( theWrappedObject->ShowContextMenu(merged_model_index, global_pos));
 }
 
-Qt::ItemFlags  PythonQtWrapper_RadioModel::flags(RadioModel* theWrappedObject, const QModelIndex&  index) const
+Qt::ItemFlags  PythonQtWrapper_InternetModel::flags(InternetModel* theWrappedObject, const QModelIndex&  index) const
 {
-  return ( ((PythonQtPublicPromoter_RadioModel*)theWrappedObject)->promoted_flags(index));
+  return ( ((PythonQtPublicPromoter_InternetModel*)theWrappedObject)->promoted_flags(index));
 }
 
-bool  PythonQtWrapper_RadioModel::hasChildren(RadioModel* theWrappedObject, const QModelIndex&  parent) const
+bool  PythonQtWrapper_InternetModel::hasChildren(InternetModel* theWrappedObject, const QModelIndex&  parent) const
 {
-  return ( ((PythonQtPublicPromoter_RadioModel*)theWrappedObject)->promoted_hasChildren(parent));
+  return ( ((PythonQtPublicPromoter_InternetModel*)theWrappedObject)->promoted_hasChildren(parent));
 }
 
-QMimeData*  PythonQtWrapper_RadioModel::mimeData(RadioModel* theWrappedObject, const QList<QModelIndex >&  indexes) const
+QMimeData*  PythonQtWrapper_InternetModel::mimeData(InternetModel* theWrappedObject, const QList<QModelIndex >&  indexes) const
 {
-  return ( ((PythonQtPublicPromoter_RadioModel*)theWrappedObject)->promoted_mimeData(indexes));
+  return ( ((PythonQtPublicPromoter_InternetModel*)theWrappedObject)->promoted_mimeData(indexes));
 }
 
-QStringList  PythonQtWrapper_RadioModel::mimeTypes(RadioModel* theWrappedObject) const
+QStringList  PythonQtWrapper_InternetModel::mimeTypes(InternetModel* theWrappedObject) const
 {
-  return ( ((PythonQtPublicPromoter_RadioModel*)theWrappedObject)->promoted_mimeTypes());
+  return ( ((PythonQtPublicPromoter_InternetModel*)theWrappedObject)->promoted_mimeTypes());
 }
 
-PlayerInterface*  PythonQtWrapper_RadioModel::player(RadioModel* theWrappedObject) const
+PlayerInterface*  PythonQtWrapper_InternetModel::player(InternetModel* theWrappedObject) const
 {
   return ( theWrappedObject->player());
 }
 
-int  PythonQtWrapper_RadioModel::rowCount(RadioModel* theWrappedObject, const QModelIndex&  parent) const
+int  PythonQtWrapper_InternetModel::rowCount(InternetModel* theWrappedObject, const QModelIndex&  parent) const
 {
-  return ( ((PythonQtPublicPromoter_RadioModel*)theWrappedObject)->promoted_rowCount(parent));
+  return ( ((PythonQtPublicPromoter_InternetModel*)theWrappedObject)->promoted_rowCount(parent));
 }
 
-TaskManager*  PythonQtWrapper_RadioModel::task_manager(RadioModel* theWrappedObject) const
+TaskManager*  PythonQtWrapper_InternetModel::task_manager(InternetModel* theWrappedObject) const
 {
   return ( theWrappedObject->task_manager());
 }
 
 
 
-QStandardItem*  PythonQtShell_RadioService::CreateRootItem()
+QStandardItem*  PythonQtShell_InternetService::CreateRootItem()
 {
 if (_wrapper) {
   PyObject* obj = PyObject_GetAttrString((PyObject*)_wrapper, "CreateRootItem");
@@ -8215,7 +8215,7 @@ if (_wrapper) {
 }
   return 0;
 }
-QModelIndex  PythonQtShell_RadioService::GetCurrentIndex()
+QModelIndex  PythonQtShell_InternetService::GetCurrentIndex()
 {
 if (_wrapper) {
   PyObject* obj = PyObject_GetAttrString((PyObject*)_wrapper, "GetCurrentIndex");
@@ -8244,7 +8244,7 @@ if (_wrapper) {
 }
   return QModelIndex();
 }
-QWidget*  PythonQtShell_RadioService::HeaderWidget() const
+QWidget*  PythonQtShell_InternetService::HeaderWidget() const
 {
 if (_wrapper) {
   PyObject* obj = PyObject_GetAttrString((PyObject*)_wrapper, "HeaderWidget");
@@ -8271,9 +8271,9 @@ if (_wrapper) {
   }
   Py_XDECREF(obj);
 }
-  return RadioService::HeaderWidget();
+  return InternetService::HeaderWidget();
 }
-QString  PythonQtShell_RadioService::Icon()
+QString  PythonQtShell_InternetService::Icon()
 {
 if (_wrapper) {
   PyObject* obj = PyObject_GetAttrString((PyObject*)_wrapper, "Icon");
@@ -8300,9 +8300,9 @@ if (_wrapper) {
   }
   Py_XDECREF(obj);
 }
-  return RadioService::Icon();
+  return InternetService::Icon();
 }
-void PythonQtShell_RadioService::ItemDoubleClicked(QStandardItem*  item)
+void PythonQtShell_InternetService::ItemDoubleClicked(QStandardItem*  item)
 {
 if (_wrapper) {
   PyObject* obj = PyObject_GetAttrString((PyObject*)_wrapper, "ItemDoubleClicked");
@@ -8318,9 +8318,9 @@ if (_wrapper) {
   }
   Py_XDECREF(obj);
 }
-  RadioService::ItemDoubleClicked(item);
+  InternetService::ItemDoubleClicked(item);
 }
-void PythonQtShell_RadioService::LazyPopulate(QStandardItem*  parent)
+void PythonQtShell_InternetService::LazyPopulate(QStandardItem*  parent)
 {
 if (_wrapper) {
   PyObject* obj = PyObject_GetAttrString((PyObject*)_wrapper, "LazyPopulate");
@@ -8338,7 +8338,7 @@ if (_wrapper) {
 }
   
 }
-void PythonQtShell_RadioService::ReloadSettings()
+void PythonQtShell_InternetService::ReloadSettings()
 {
 if (_wrapper) {
   PyObject* obj = PyObject_GetAttrString((PyObject*)_wrapper, "ReloadSettings");
@@ -8354,9 +8354,9 @@ if (_wrapper) {
   }
   Py_XDECREF(obj);
 }
-  RadioService::ReloadSettings();
+  InternetService::ReloadSettings();
 }
-void PythonQtShell_RadioService::ShowContextMenu(const QModelIndex&  index, const QPoint&  global_pos)
+void PythonQtShell_InternetService::ShowContextMenu(const QModelIndex&  index, const QPoint&  global_pos)
 {
 if (_wrapper) {
   PyObject* obj = PyObject_GetAttrString((PyObject*)_wrapper, "ShowContextMenu");
@@ -8372,9 +8372,9 @@ if (_wrapper) {
   }
   Py_XDECREF(obj);
 }
-  RadioService::ShowContextMenu(index, global_pos);
+  InternetService::ShowContextMenu(index, global_pos);
 }
-void PythonQtShell_RadioService::childEvent(QChildEvent*  arg__1)
+void PythonQtShell_InternetService::childEvent(QChildEvent*  arg__1)
 {
 if (_wrapper) {
   PyObject* obj = PyObject_GetAttrString((PyObject*)_wrapper, "childEvent");
@@ -8390,9 +8390,9 @@ if (_wrapper) {
   }
   Py_XDECREF(obj);
 }
-  RadioService::childEvent(arg__1);
+  InternetService::childEvent(arg__1);
 }
-void PythonQtShell_RadioService::customEvent(QEvent*  arg__1)
+void PythonQtShell_InternetService::customEvent(QEvent*  arg__1)
 {
 if (_wrapper) {
   PyObject* obj = PyObject_GetAttrString((PyObject*)_wrapper, "customEvent");
@@ -8408,9 +8408,9 @@ if (_wrapper) {
   }
   Py_XDECREF(obj);
 }
-  RadioService::customEvent(arg__1);
+  InternetService::customEvent(arg__1);
 }
-bool  PythonQtShell_RadioService::event(QEvent*  arg__1)
+bool  PythonQtShell_InternetService::event(QEvent*  arg__1)
 {
 if (_wrapper) {
   PyObject* obj = PyObject_GetAttrString((PyObject*)_wrapper, "event");
@@ -8437,9 +8437,9 @@ if (_wrapper) {
   }
   Py_XDECREF(obj);
 }
-  return RadioService::event(arg__1);
+  return InternetService::event(arg__1);
 }
-bool  PythonQtShell_RadioService::eventFilter(QObject*  arg__1, QEvent*  arg__2)
+bool  PythonQtShell_InternetService::eventFilter(QObject*  arg__1, QEvent*  arg__2)
 {
 if (_wrapper) {
   PyObject* obj = PyObject_GetAttrString((PyObject*)_wrapper, "eventFilter");
@@ -8466,9 +8466,9 @@ if (_wrapper) {
   }
   Py_XDECREF(obj);
 }
-  return RadioService::eventFilter(arg__1, arg__2);
+  return InternetService::eventFilter(arg__1, arg__2);
 }
-void PythonQtShell_RadioService::timerEvent(QTimerEvent*  arg__1)
+void PythonQtShell_InternetService::timerEvent(QTimerEvent*  arg__1)
 {
 if (_wrapper) {
   PyObject* obj = PyObject_GetAttrString((PyObject*)_wrapper, "timerEvent");
@@ -8484,43 +8484,43 @@ if (_wrapper) {
   }
   Py_XDECREF(obj);
 }
-  RadioService::timerEvent(arg__1);
+  InternetService::timerEvent(arg__1);
 }
-RadioService* PythonQtWrapper_RadioService::new_RadioService(const QString&  name, RadioModel*  model, QObject*  parent)
+InternetService* PythonQtWrapper_InternetService::new_InternetService(const QString&  name, InternetModel*  model, QObject*  parent)
 { 
-return new PythonQtShell_RadioService(name, model, parent); }
+return new PythonQtShell_InternetService(name, model, parent); }
 
-QWidget*  PythonQtWrapper_RadioService::HeaderWidget(RadioService* theWrappedObject) const
+QWidget*  PythonQtWrapper_InternetService::HeaderWidget(InternetService* theWrappedObject) const
 {
-  return ( ((PythonQtPublicPromoter_RadioService*)theWrappedObject)->promoted_HeaderWidget());
+  return ( ((PythonQtPublicPromoter_InternetService*)theWrappedObject)->promoted_HeaderWidget());
 }
 
-QString  PythonQtWrapper_RadioService::Icon(RadioService* theWrappedObject)
+QString  PythonQtWrapper_InternetService::Icon(InternetService* theWrappedObject)
 {
-  return ( ((PythonQtPublicPromoter_RadioService*)theWrappedObject)->promoted_Icon());
+  return ( ((PythonQtPublicPromoter_InternetService*)theWrappedObject)->promoted_Icon());
 }
 
-void PythonQtWrapper_RadioService::ItemDoubleClicked(RadioService* theWrappedObject, QStandardItem*  item)
+void PythonQtWrapper_InternetService::ItemDoubleClicked(InternetService* theWrappedObject, QStandardItem*  item)
 {
-  ( ((PythonQtPublicPromoter_RadioService*)theWrappedObject)->promoted_ItemDoubleClicked(item));
+  ( ((PythonQtPublicPromoter_InternetService*)theWrappedObject)->promoted_ItemDoubleClicked(item));
 }
 
-void PythonQtWrapper_RadioService::ReloadSettings(RadioService* theWrappedObject)
+void PythonQtWrapper_InternetService::ReloadSettings(InternetService* theWrappedObject)
 {
-  ( ((PythonQtPublicPromoter_RadioService*)theWrappedObject)->promoted_ReloadSettings());
+  ( ((PythonQtPublicPromoter_InternetService*)theWrappedObject)->promoted_ReloadSettings());
 }
 
-void PythonQtWrapper_RadioService::ShowContextMenu(RadioService* theWrappedObject, const QModelIndex&  index, const QPoint&  global_pos)
+void PythonQtWrapper_InternetService::ShowContextMenu(InternetService* theWrappedObject, const QModelIndex&  index, const QPoint&  global_pos)
 {
-  ( ((PythonQtPublicPromoter_RadioService*)theWrappedObject)->promoted_ShowContextMenu(index, global_pos));
+  ( ((PythonQtPublicPromoter_InternetService*)theWrappedObject)->promoted_ShowContextMenu(index, global_pos));
 }
 
-RadioModel*  PythonQtWrapper_RadioService::model(RadioService* theWrappedObject) const
+InternetModel*  PythonQtWrapper_InternetService::model(InternetService* theWrappedObject) const
 {
   return ( theWrappedObject->model());
 }
 
-QString  PythonQtWrapper_RadioService::name(RadioService* theWrappedObject) const
+QString  PythonQtWrapper_InternetService::name(InternetService* theWrappedObject) const
 {
   return ( theWrappedObject->name());
 }

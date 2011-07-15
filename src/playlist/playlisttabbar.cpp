@@ -21,7 +21,7 @@
 #include "playlistview.h"
 #include "songmimedata.h"
 #include "core/logging.h"
-#include "radio/radiomimedata.h"
+#include "internet/internetmimedata.h"
 #include "ui/iconloader.h"
 #include "widgets/renametablineedit.h"
 

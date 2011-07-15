@@ -57,9 +57,9 @@ class Player;
 class PlaylistBackend;
 class PlaylistManager;
 class QueueManager;
-class RadioItem;
-class RadioModel;
-class RadioViewContainer;
+class InternetItem;
+class InternetModel;
+class InternetViewContainer;
 class Remote;
 class ScriptDialog;
 class ScriptManager;
@@ -85,7 +85,7 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   MainWindow(BackgroundThread<Database>* database,
              TaskManager* task_manager,
              PlaylistManager* playlists,
-             RadioModel* radio_model,
+             InternetModel* internet_model,
              Player* player,
              SystemTrayIcon* tray_icon,
              OSD* osd,
@@ -270,7 +270,7 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   boost::scoped_ptr<About> about_dialog_;
 
   BackgroundThread<Database>* database_;
-  RadioModel* radio_model_;
+  InternetModel* internet_model_;
   PlaylistBackend* playlist_backend_;
   PlaylistManager* playlists_;
   Player* player_;
@@ -282,7 +282,7 @@ class MainWindow : public QMainWindow, public PlatformInterface {
 
   LibraryViewContainer* library_view_;
   FileView* file_view_;
-  RadioViewContainer* radio_view_;
+  InternetViewContainer* internet_view_;
   DeviceView* device_view_;
   SongInfoView* song_info_view_;
   ArtistInfoView* artist_info_view_;

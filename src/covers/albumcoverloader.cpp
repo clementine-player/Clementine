@@ -20,7 +20,7 @@
 #include "core/logging.h"
 #include "core/network.h"
 #include "core/utilities.h"
-#include "radio/radiomodel.h"
+#include "internet/internetmodel.h"
 
 #include <QPainter>
 #include <QDir>
@@ -29,7 +29,7 @@
 #include <QNetworkReply>
 
 #ifdef HAVE_SPOTIFY
-# include "radio/spotifyservice.h"
+# include "internet/spotifyservice.h"
 #endif
 
 
@@ -151,7 +151,7 @@ AlbumCoverLoader::TryLoadResult AlbumCoverLoader::TryLoadImage(
   } else if (filename.toLower().startsWith("spotify://image/")) {
     // HACK: we should add generic image URL handlers
     #ifdef HAVE_SPOTIFY
-      SpotifyService* spotify = RadioModel::Service<SpotifyService>();
+      SpotifyService* spotify = InternetModel::Service<SpotifyService>();
 
       if (!connected_spotify_) {
         connect(spotify, SIGNAL(ImageLoaded(QUrl,QImage)),

@@ -31,7 +31,7 @@
 #include "ui_settingsdialog.h"
 
 #ifdef HAVE_LIBLASTFM
-# include "radio/lastfmconfig.h"
+# include "internet/lastfmconfig.h"
 #endif
 
 #ifdef HAVE_WIIMOTEDEV
@@ -45,7 +45,7 @@
 #endif
 
 #ifdef HAVE_SPOTIFY
-# include "radio/spotifyconfig.h"
+# include "internet/spotifyconfig.h"
 #endif
 
 #include <QColorDialog>

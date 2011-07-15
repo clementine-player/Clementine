@@ -32,7 +32,7 @@ class LibraryBackend;
 class PlaylistBackend;
 class PlaylistFilter;
 class Queue;
-class RadioModel;
+class InternetModel;
 class TaskManager;
 
 class QSortFilterProxyModel;
@@ -298,7 +298,7 @@ class Playlist : public QAbstractListModel {
   bool FilterContainsVirtualIndex(int i) const;
   void TurnOnDynamicPlaylist(smart_playlists::GeneratorPtr gen);
 
-  void InsertRadioStations(const RadioModel* model,
+  void InsertInternetItems(const InternetModel* model,
                            const QModelIndexList& items,
                            int pos, bool play_now, bool enqueue);
 

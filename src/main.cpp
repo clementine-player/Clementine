@@ -42,10 +42,10 @@
 #include "covers/artloader.h"
 #include "covers/coverproviders.h"
 #include "engines/enginebase.h"
+#include "internet/internetmodel.h"
 #include "library/directory.h"
 #include "playlist/playlist.h"
 #include "playlist/playlistmanager.h"
-#include "radio/radiomodel.h"
 #include "smartplaylists/generator.h"
 #include "ui/equalizer.h"
 #include "ui/iconloader.h"
@@ -81,7 +81,7 @@ using boost::scoped_ptr;
 #endif
 
 #ifdef HAVE_LIBLASTFM
-  #include "radio/lastfmservice.h"
+  #include "internet/lastfmservice.h"
 #else
   class LastFMService;
 #endif
@@ -374,7 +374,7 @@ int main(int argc, char *argv[]) {
   TaskManager task_manager;
   PlaylistManager playlists(&task_manager, NULL);
   Player player(&playlists);
-  RadioModel radio_model(database.get(), &task_manager, &player, NULL);
+  InternetModel internet_model(database.get(), &task_manager, &player, NULL);
 
   // Initialize the repository of cover providers to avoid race conditions
   // later
@@ -411,7 +411,7 @@ int main(int argc, char *argv[]) {
       database.get(),
       &task_manager,
       &playlists,
-      &radio_model,
+      &internet_model,
       &player,
       tray_icon.get(),
       &osd,

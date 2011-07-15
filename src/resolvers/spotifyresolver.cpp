@@ -2,8 +2,8 @@
 
 #include "core/logging.h"
 #include "core/timeconstants.h"
-#include "radio/spotifyserver.h"
-#include "radio/spotifyservice.h"
+#include "internet/spotifyserver.h"
+#include "internet/spotifyservice.h"
 #include "spotifyblob/common/spotifymessages.pb.h"
 
 SpotifyResolver::SpotifyResolver(SpotifyServer* spotify, QObject* parent)

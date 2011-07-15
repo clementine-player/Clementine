@@ -118,6 +118,27 @@ set(SOURCES
   engines/gstenginepipeline.cpp
   engines/gstelementdeleter.cpp
 
+  internet/icecastbackend.cpp
+  internet/icecastfilterwidget.cpp
+  internet/icecastmodel.cpp
+  internet/icecastservice.cpp
+  internet/internetmodel.cpp
+  internet/internetplaylistitem.cpp
+  internet/internetservice.cpp
+  internet/internetview.cpp
+  internet/internetviewcontainer.cpp
+  internet/jamendodynamicplaylist.cpp
+  internet/jamendoplaylistitem.cpp
+  internet/jamendoservice.cpp
+  internet/magnatuneconfig.cpp
+  internet/magnatunedownloaddialog.cpp
+  internet/magnatuneplaylistitem.cpp
+  internet/magnatuneservice.cpp
+  internet/magnatuneurlhandler.cpp
+  internet/savedradio.cpp
+  internet/somafmservice.cpp
+  internet/somafmurlhandler.cpp
+
   library/groupbydialog.cpp
   library/library.cpp
   library/librarybackend.cpp
@@ -166,27 +187,6 @@ set(SOURCES
   playlistparsers/plsparser.cpp
   playlistparsers/xmlparser.cpp
   playlistparsers/xspfparser.cpp
-
-  radio/icecastbackend.cpp
-  radio/icecastfilterwidget.cpp
-  radio/icecastmodel.cpp
-  radio/icecastservice.cpp
-  radio/jamendodynamicplaylist.cpp
-  radio/jamendoplaylistitem.cpp
-  radio/jamendoservice.cpp
-  radio/magnatuneconfig.cpp
-  radio/magnatunedownloaddialog.cpp
-  radio/magnatuneplaylistitem.cpp
-  radio/magnatuneservice.cpp
-  radio/magnatuneurlhandler.cpp
-  radio/radiomodel.cpp
-  radio/radioplaylistitem.cpp
-  radio/radioservice.cpp
-  radio/radioview.cpp
-  radio/radioviewcontainer.cpp
-  radio/savedradio.cpp
-  radio/somafmservice.cpp
-  radio/somafmurlhandler.cpp
 
   resolvers/libraryresolver.cpp
 
@@ -346,6 +346,24 @@ set(HEADERS
   engines/gstenginepipeline.h
   engines/gstelementdeleter.h
 
+  internet/icecastbackend.h
+  internet/icecastfilterwidget.h
+  internet/icecastmodel.h
+  internet/icecastservice.h 
+  internet/internetmimedata.h
+  internet/internetmodel.h
+  internet/internetservice.h
+  internet/internetview.h
+  internet/internetviewcontainer.h
+  internet/jamendodynamicplaylist.h
+  internet/jamendoservice.h
+  internet/magnatuneconfig.h
+  internet/magnatunedownloaddialog.h
+  internet/magnatuneservice.h
+  internet/savedradio.h
+  internet/somafmservice.h
+  internet/somafmurlhandler.h
+
   library/groupbydialog.h
   library/library.h
   library/librarybackend.h
@@ -386,24 +404,6 @@ set(HEADERS
   playlistparsers/playlistparser.h
   playlistparsers/plsparser.h
   playlistparsers/xspfparser.h
-
-  radio/icecastbackend.h
-  radio/icecastfilterwidget.h
-  radio/icecastmodel.h
-  radio/icecastservice.h
-  radio/jamendodynamicplaylist.h
-  radio/jamendoservice.h
-  radio/magnatuneconfig.h
-  radio/magnatunedownloaddialog.h
-  radio/magnatuneservice.h
-  radio/radiomimedata.h
-  radio/radiomodel.h
-  radio/radioservice.h
-  radio/radioview.h
-  radio/radioviewcontainer.h
-  radio/savedradio.h
-  radio/somafmservice.h
-  radio/somafmurlhandler.h
 
   resolvers/libraryresolver.h
   resolvers/resolver.h
@@ -502,6 +502,12 @@ set(UI
 
   devices/deviceproperties.ui
 
+  internet/icecastfilterwidget.ui
+  internet/magnatuneconfig.ui
+  internet/magnatunedownloaddialog.ui
+  internet/internetviewcontainer.ui
+  internet/spotifyconfig.ui
+
   library/groupbydialog.ui
   library/libraryconfig.ui
   library/libraryfilterwidget.ui
@@ -511,12 +517,6 @@ set(UI
   playlist/playlistcontainer.ui
   playlist/playlistsequence.ui
   playlist/queuemanager.ui
-
-  radio/icecastfilterwidget.ui
-  radio/magnatuneconfig.ui
-  radio/magnatunedownloaddialog.ui
-  radio/radioviewcontainer.ui
-  radio/spotifyconfig.ui
 
   remote/remoteconfig.ui
 
@@ -616,11 +616,11 @@ endif(ENABLE_VISUALISATIONS)
 if(HAVE_LIBLASTFM)
   list(APPEND SOURCES
     covers/lastfmcoverprovider.cpp
-    radio/fixlastfm.cpp
-    radio/lastfmconfig.cpp
-    radio/lastfmservice.cpp
-    radio/lastfmstationdialog.cpp
-    radio/lastfmurlhandler.cpp
+    internet/fixlastfm.cpp
+    internet/lastfmconfig.cpp
+    internet/lastfmservice.cpp
+    internet/lastfmstationdialog.cpp
+    internet/lastfmurlhandler.cpp
     songinfo/echonestsimilarartists.cpp
     songinfo/echonesttags.cpp
     songinfo/lastfmtrackinfoprovider.cpp
@@ -629,9 +629,9 @@ if(HAVE_LIBLASTFM)
   )
   list(APPEND HEADERS
     covers/lastfmcoverprovider.h
-    radio/lastfmconfig.h
-    radio/lastfmservice.h
-    radio/lastfmstationdialog.h
+    internet/lastfmconfig.h
+    internet/lastfmservice.h
+    internet/lastfmstationdialog.h
     songinfo/echonestsimilarartists.h
     songinfo/echonesttags.h
     songinfo/lastfmtrackinfoprovider.h
@@ -639,30 +639,30 @@ if(HAVE_LIBLASTFM)
     suggesters/lastfmsuggester.h
   )
   list(APPEND UI
-    radio/lastfmconfig.ui
-    radio/lastfmstationdialog.ui
+    internet/lastfmconfig.ui
+    internet/lastfmstationdialog.ui
   )
 endif(HAVE_LIBLASTFM)
 
 if(HAVE_SPOTIFY)
   list(APPEND SOURCES
-    radio/spotifyblobdownloader.cpp
-    radio/spotifyconfig.cpp
-    radio/spotifyserver.cpp
-    radio/spotifyservice.cpp
-    radio/spotifysearchplaylisttype.cpp
-    radio/spotifyurlhandler.cpp
+    internet/spotifyblobdownloader.cpp
+    internet/spotifyconfig.cpp
+    internet/spotifyserver.cpp
+    internet/spotifyservice.cpp
+    internet/spotifysearchplaylisttype.cpp
+    internet/spotifyurlhandler.cpp
     resolvers/spotifyresolver.cpp
   )
   list(APPEND HEADERS
-    radio/spotifyblobdownloader.h
-    radio/spotifyconfig.h
-    radio/spotifyserver.h
-    radio/spotifyservice.h
+    internet/spotifyblobdownloader.h
+    internet/spotifyconfig.h
+    internet/spotifyserver.h
+    internet/spotifyservice.h
     resolvers/spotifyresolver.h
   )
   list(APPEND UI
-    radio/spotifyconfig.ui)
+    internet/spotifyconfig.ui)
 endif(HAVE_SPOTIFY)
 
 if(APPLE)
@@ -922,19 +922,19 @@ list(APPEND OTHER_SOURCES
   devices/wmdmlister.h
   devices/wmdmloader.h
   devices/wmdmloader.cpp
-  radio/spotifyblobdownloader.cpp
-  radio/spotifyblobdownloader.h
-  radio/spotifyconfig.cpp
-  radio/spotifyconfig.h
+  internet/spotifyblobdownloader.cpp
+  internet/spotifyblobdownloader.h
+  internet/spotifyconfig.cpp
+  internet/spotifyconfig.h
   ${CMAKE_CURRENT_BINARY_DIR}/ui_spotifyconfig.h
-  radio/spotifysearchplaylisttype.cpp
-  radio/spotifysearchplaylisttype.h
-  radio/spotifyserver.cpp
-  radio/spotifyserver.h
-  radio/spotifyservice.cpp
-  radio/spotifyservice.h
-  radio/spotifyurlhandler.cpp
-  radio/spotifyurlhandler.h
+  internet/spotifysearchplaylisttype.cpp
+  internet/spotifysearchplaylisttype.h
+  internet/spotifyserver.cpp
+  internet/spotifyserver.h
+  internet/spotifyservice.cpp
+  internet/spotifyservice.h
+  internet/spotifyurlhandler.cpp
+  internet/spotifyurlhandler.h
   remote/remote.cpp
   remote/remote.h
   remote/remoteconfig.cpp

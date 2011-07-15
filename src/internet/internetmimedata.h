@@ -15,34 +15,25 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "generator.h"
-#include "querygenerator.h"
-#include "core/logging.h"
-#include "internet/jamendodynamicplaylist.h"
+#ifndef INTERNETMIMEDATA_H
+#define INTERNETMIMEDATA_H
 
-#include <QSettings>
+#include "core/mimedata.h"
 
-namespace smart_playlists {
+#include <QMimeData>
+#include <QModelIndexList>
 
-const int Generator::kDefaultLimit = 20;
-const int Generator::kDefaultDynamicHistory = 5;
-const int Generator::kDefaultDynamicFuture = 15;
+class InternetModel;
 
-Generator::Generator()
-  : QObject(NULL),
-    backend_(NULL)
-{
-}
+class InternetMimeData : public MimeData {
+  Q_OBJECT
 
-GeneratorPtr Generator::Create(const QString& type) {
-  if (type == "Query")
-    return GeneratorPtr(new QueryGenerator);
-  else if (type == "Jamendo")
-    return GeneratorPtr(new JamendoDynamicPlaylist);
+public:
+  InternetMimeData(const InternetModel* _model)
+    : model(_model) {}
 
-  qLog(Warning) << "Invalid playlist generator type:" << type;
-  return GeneratorPtr();
-}
+  const InternetModel* model;
+  QModelIndexList indexes;
+};
 
-} // namespace
-
+#endif // INTERNETMIMEDATA_H

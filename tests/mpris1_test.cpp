@@ -21,7 +21,7 @@
 #include "playlist/playlistmanager.h"
 #include "playlist/playlistsequence.h"
 #ifdef HAVE_LIBLASTFM
-#include "radio/fixlastfm.h"
+#include "internet/fixlastfm.h"
 #include <lastfm/Track>
 #endif
 

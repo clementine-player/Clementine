@@ -17,8 +17,8 @@
 
 #include "addstreamdialog.h"
 #include "ui_addstreamdialog.h"
-#include "radio/radiomodel.h"
-#include "radio/savedradio.h"
+#include "internet/internetmodel.h"
+#include "internet/savedradio.h"
 
 #include <QSettings>
 #include <QUrl>

@@ -40,6 +40,11 @@
 #include "devices/deviceview.h"
 #include "engines/enginebase.h"
 #include "engines/gstengine.h"
+#include "internet/magnatuneservice.h"
+#include "internet/internetmodel.h"
+#include "internet/internetview.h"
+#include "internet/internetviewcontainer.h"
+#include "internet/savedradio.h"
 #include "library/groupbydialog.h"
 #include "library/library.h"
 #include "library/librarybackend.h"
@@ -58,11 +63,6 @@
 #include "playlist/queuemanager.h"
 #include "playlist/songplaylistitem.h"
 #include "playlistparsers/playlistparser.h"
-#include "radio/magnatuneservice.h"
-#include "radio/radiomodel.h"
-#include "radio/radioview.h"
-#include "radio/radioviewcontainer.h"
-#include "radio/savedradio.h"
 #include "scripting/scriptdialog.h"
 #include "scripting/scriptmanager.h"
 #include "scripting/uiinterface.h"
@@ -97,7 +97,7 @@
 #endif
 
 #ifdef HAVE_LIBLASTFM
-# include "radio/lastfmservice.h"
+# include "internet/lastfmservice.h"
 #endif
 
 #ifdef HAVE_WIIMOTEDEV
@@ -155,7 +155,7 @@ MainWindow::MainWindow(
     BackgroundThread<Database>* database,
     TaskManager* task_manager,
     PlaylistManager* playlist_manager,
-    RadioModel* radio_model,
+    InternetModel* internet_model,
     Player* player,
     SystemTrayIcon* tray_icon,
     OSD* osd,
@@ -168,7 +168,7 @@ MainWindow::MainWindow(
     osd_(osd),
     task_manager_(task_manager),
     database_(database),
-    radio_model_(radio_model),
+    internet_model_(internet_model),
     playlist_backend_(NULL),
     playlists_(playlist_manager),
     player_(player),
@@ -178,7 +178,7 @@ MainWindow::MainWindow(
     devices_(NULL),
     library_view_(new LibraryViewContainer(this)),
     file_view_(new FileView(this)),
-    radio_view_(new RadioViewContainer(this)),
+    internet_view_(new InternetViewContainer(this)),
     device_view_(new DeviceView(this)),
     song_info_view_(new SongInfoView(this)),
     artist_info_view_(new ArtistInfoView(this)),
@@ -232,7 +232,7 @@ MainWindow::MainWindow(
   // Add tabs to the fancy tab widget
   ui_->tabs->AddTab(library_view_, IconLoader::Load("folder-sound"), tr("Library"));
   ui_->tabs->AddTab(file_view_, IconLoader::Load("document-open"), tr("Files"));
-  ui_->tabs->AddTab(radio_view_, IconLoader::Load("applications-internet"), tr("Internet"));
+  ui_->tabs->AddTab(internet_view_, IconLoader::Load("applications-internet"), tr("Internet"));
   ui_->tabs->AddTab(device_view_, IconLoader::Load("multimedia-player-ipod-mini-blue"), tr("Devices"));
   ui_->tabs->AddSpacer();
   ui_->tabs->AddTab(song_info_view_, IconLoader::Load("view-media-lyrics"), tr("Song info"));
@@ -268,7 +268,7 @@ MainWindow::MainWindow(
   library_view_->view()->SetTaskManager(task_manager_);
   library_view_->view()->SetDeviceManager(devices_);
 
-  radio_view_->SetModel(radio_model_);
+  internet_view_->SetModel(internet_model_);
 
   device_view_->SetDeviceManager(devices_);
   device_view_->SetLibrary(library_->model());
@@ -323,9 +323,9 @@ MainWindow::MainWindow(
   connect(ui_->action_stop_after_this_track, SIGNAL(triggered()), SLOT(StopAfterCurrent()));
   connect(ui_->action_mute, SIGNAL(triggered()), player_, SLOT(Mute()));
 #ifdef HAVE_LIBLASTFM
-  connect(ui_->action_ban, SIGNAL(triggered()), RadioModel::Service<LastFMService>(), SLOT(Ban()));
+  connect(ui_->action_ban, SIGNAL(triggered()), InternetModel::Service<LastFMService>(), SLOT(Ban()));
   connect(ui_->action_love, SIGNAL(triggered()), SLOT(Love()));
-  connect(ui_->action_toggle_scrobbling, SIGNAL(triggered()), RadioModel::Service<LastFMService>(), SLOT(ToggleScrobbling()));
+  connect(ui_->action_toggle_scrobbling, SIGNAL(triggered()), InternetModel::Service<LastFMService>(), SLOT(ToggleScrobbling()));
 #endif
   connect(ui_->action_clear_playlist, SIGNAL(triggered()), playlists_, SLOT(ClearCurrent()));
   connect(ui_->action_remove_from_playlist, SIGNAL(triggered()), SLOT(PlaylistRemoveCurrent()));
@@ -525,23 +525,23 @@ MainWindow::MainWindow(
   connect(devices_->connected_devices_model(), SIGNAL(IsEmptyChanged(bool)),
           playlist_copy_to_device_, SLOT(setDisabled(bool)));
 
-  // Radio connections
-  connect(radio_model_, SIGNAL(StreamError(QString)), SLOT(ShowErrorDialog(QString)));
-  connect(radio_model_, SIGNAL(StreamMetadataFound(QUrl,Song)), playlists_, SLOT(SetActiveStreamMetadata(QUrl,Song)));
-  connect(radio_model_, SIGNAL(OpenSettingsAtPage(SettingsDialog::Page)), SLOT(OpenSettingsDialogAtPage(SettingsDialog::Page)));
-  connect(radio_model_, SIGNAL(AddToPlaylist(QMimeData*)), SLOT(AddToPlaylist(QMimeData*)));
+  // Internet connections
+  connect(internet_model_, SIGNAL(StreamError(QString)), SLOT(ShowErrorDialog(QString)));
+  connect(internet_model_, SIGNAL(StreamMetadataFound(QUrl,Song)), playlists_, SLOT(SetActiveStreamMetadata(QUrl,Song)));
+  connect(internet_model_, SIGNAL(OpenSettingsAtPage(SettingsDialog::Page)), SLOT(OpenSettingsDialogAtPage(SettingsDialog::Page)));
+  connect(internet_model_, SIGNAL(AddToPlaylist(QMimeData*)), SLOT(AddToPlaylist(QMimeData*)));
 #ifdef HAVE_LIBLASTFM
-  LastFMService* lastfm_service = RadioModel::Service<LastFMService>();
+  LastFMService* lastfm_service = InternetModel::Service<LastFMService>();
   connect(lastfm_service, SIGNAL(ButtonVisibilityChanged(bool)), SLOT(LastFMButtonVisibilityChanged(bool)));
   connect(lastfm_service, SIGNAL(ScrobbleButtonVisibilityChanged(bool)), SLOT(ScrobbleButtonVisibilityChanged(bool)));
   connect(lastfm_service, SIGNAL(ScrobblingEnabledChanged(bool)), SLOT(ScrobblingEnabledChanged(bool)));
   connect(lastfm_service, SIGNAL(ScrobbledRadioStream()), SLOT(ScrobbledRadioStream()));
 #endif
-  connect(radio_model_->Service<MagnatuneService>(), SIGNAL(DownloadFinished(QStringList)), osd_, SLOT(MagnatuneDownloadFinished(QStringList)));
-  connect(radio_view_->tree(), SIGNAL(AddToPlaylistSignal(QMimeData*)), SLOT(AddToPlaylist(QMimeData*)));
+  connect(internet_model_->Service<MagnatuneService>(), SIGNAL(DownloadFinished(QStringList)), osd_, SLOT(MagnatuneDownloadFinished(QStringList)));
+  connect(internet_view_->tree(), SIGNAL(AddToPlaylistSignal(QMimeData*)), SLOT(AddToPlaylist(QMimeData*)));
 
   // Connections to the saved streams service
-  connect(RadioModel::Service<SavedRadio>(), SIGNAL(ShowAddStreamDialog()), SLOT(AddStream()));
+  connect(InternetModel::Service<SavedRadio>(), SIGNAL(ShowAddStreamDialog()), SLOT(AddStream()));
 
 #ifdef Q_OS_DARWIN
   mac::SetApplicationHandler(this);
@@ -616,7 +616,7 @@ MainWindow::MainWindow(
   connect(global_shortcuts_, SIGNAL(ShowOSD()), player_, SLOT(ShowOSD()));
   connect(global_shortcuts_, SIGNAL(TogglePrettyOSD()), player_, SLOT(TogglePrettyOSD()));
 #ifdef HAVE_LIBLASTFM
-  connect(global_shortcuts_, SIGNAL(ToggleScrobbling()), radio_model->RadioModel::Service<LastFMService>(), SLOT(ToggleScrobbling()));
+  connect(global_shortcuts_, SIGNAL(ToggleScrobbling()), internet_model->InternetModel::Service<LastFMService>(), SLOT(ToggleScrobbling()));
 #endif
 
   connect(global_shortcuts_, SIGNAL(RateCurrentSong(int)), playlists_, SLOT(RateCurrentSong(int)));
@@ -693,11 +693,11 @@ MainWindow::MainWindow(
   connect(player_->playlists()->sequence(), SIGNAL(ShuffleModeChanged(PlaylistSequence::ShuffleMode)), osd_, SLOT(ShuffleModeChanged(PlaylistSequence::ShuffleMode)));
 
 #ifdef HAVE_LIBLASTFM
-  connect(RadioModel::Service<LastFMService>(), SIGNAL(ScrobblerStatus(int)), SLOT(ScrobblerStatus(int)));
+  connect(InternetModel::Service<LastFMService>(), SIGNAL(ScrobblerStatus(int)), SLOT(ScrobblerStatus(int)));
 
-  LastFMButtonVisibilityChanged(radio_model_->RadioModel::Service<LastFMService>()->AreButtonsVisible());
-  ScrobbleButtonVisibilityChanged(radio_model_->RadioModel::Service<LastFMService>()->IsScrobbleButtonVisible());
-  ScrobblingEnabledChanged(radio_model_->RadioModel::Service<LastFMService>()->IsScrobblingEnabled());
+  LastFMButtonVisibilityChanged(internet_model_->InternetModel::Service<LastFMService>()->AreButtonsVisible());
+  ScrobbleButtonVisibilityChanged(internet_model_->InternetModel::Service<LastFMService>()->IsScrobbleButtonVisible());
+  ScrobblingEnabledChanged(internet_model_->InternetModel::Service<LastFMService>()->IsScrobblingEnabled());
 #else
   LastFMButtonVisibilityChanged(false);
   ScrobbleButtonVisibilityChanged(false);
@@ -766,7 +766,7 @@ MainWindow::MainWindow(
   qLog(Debug) << "Initialising scripting";
   scripts_->Init(ScriptManager::GlobalData(
       library_, library_view_->view(), player_, playlists_,
-      task_manager_, settings_dialog_.get(), radio_model_));
+      task_manager_, settings_dialog_.get(), internet_model_));
   connect(ui_->action_script_manager, SIGNAL(triggered()), SLOT(ShowScriptDialog()));
 
   library_view_->view()->SetScriptManager(scripts_);
@@ -821,7 +821,7 @@ void MainWindow::ReloadAllSettings() {
   song_info_view_->ReloadSettings();
   player_->engine()->ReloadSettings();
   ui_->playlist->view()->ReloadSettings();
-  radio_model_->ReloadSettings();
+  internet_model_->ReloadSettings();
 #ifdef HAVE_WIIMOTEDEV
   wiimotedev_shortcuts_->ReloadSettings();
 #endif
@@ -878,7 +878,7 @@ void MainWindow::MediaPlaying() {
 
 #ifdef HAVE_LIBLASTFM
   bool is_lastfm = (player_->GetCurrentItem()->options() & PlaylistItem::LastFMControls);
-  LastFMService* lastfm = RadioModel::Service<LastFMService>();
+  LastFMService* lastfm = InternetModel::Service<LastFMService>();
   bool enable_ban = lastfm->IsScrobblingEnabled() && is_lastfm;
   bool enable_love = lastfm->IsScrobblingEnabled();
 
@@ -909,7 +909,7 @@ void MainWindow::SongChanged(const Song& song) {
 
 #ifdef HAVE_LIBLASTFM
   if (ui_->action_toggle_scrobbling->isVisible())
-    SetToggleScrobblingIcon(RadioModel::Service<LastFMService>()->IsScrobblingEnabled());
+    SetToggleScrobblingIcon(InternetModel::Service<LastFMService>()->IsScrobblingEnabled());
 #endif
 }
 
@@ -968,7 +968,7 @@ void MainWindow::ScrobbleButtonVisibilityChanged(bool value) {
       ui_->action_toggle_scrobbling->setIcon(QIcon(":/last.fm/as.png"));
     } else {
 #ifdef HAVE_LIBLASTFM
-      SetToggleScrobblingIcon(radio_model_->RadioModel::Service<LastFMService>()->IsScrobblingEnabled());
+      SetToggleScrobblingIcon(internet_model_->InternetModel::Service<LastFMService>()->IsScrobblingEnabled());
 #endif
     }
   }
@@ -1092,7 +1092,7 @@ void MainWindow::UpdateTrackPosition() {
     return;
   }
 #ifdef HAVE_LIBLASTFM
-  LastFMService* lastfm_service = RadioModel::Service<LastFMService>();
+  LastFMService* lastfm_service = InternetModel::Service<LastFMService>();
   const bool last_fm_enabled = ui_->action_toggle_scrobbling->isVisible() &&
                                lastfm_service->IsScrobblingEnabled() &&
                                lastfm_service->IsAuthenticated();
@@ -1145,7 +1145,7 @@ void MainWindow::ScrobbledRadioStream() {
 }
 
 void MainWindow::Love() {
-  RadioModel::Service<LastFMService>()->Love();
+  InternetModel::Service<LastFMService>()->Love();
   ui_->action_love->setEnabled(false);
   tray_icon_->LastFMButtonLoveStateChanged(false);
 }
@@ -1595,7 +1595,7 @@ void MainWindow::AddStream() {
     add_stream_dialog_.reset(new AddStreamDialog);
     connect(add_stream_dialog_.get(), SIGNAL(accepted()), SLOT(AddStreamAccepted()));
 
-    add_stream_dialog_->set_add_on_accept(RadioModel::Service<SavedRadio>());
+    add_stream_dialog_->set_add_on_accept(InternetModel::Service<SavedRadio>());
   }
 
   add_stream_dialog_->show();
@@ -2202,7 +2202,7 @@ void MainWindow::SetToggleScrobblingIcon(bool value) {
 
 #ifdef HAVE_LIBLASTFM
 void MainWindow::ScrobblerStatus(int value) {
-  const LastFMService* lastfm_service = RadioModel::Service<LastFMService>();
+  const LastFMService* lastfm_service = InternetModel::Service<LastFMService>();
   const bool last_fm_enabled = ui_->action_toggle_scrobbling->isVisible() &&
                                lastfm_service->IsScrobblingEnabled() &&
                                lastfm_service->IsAuthenticated();

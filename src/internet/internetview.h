@@ -15,34 +15,26 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "generator.h"
-#include "querygenerator.h"
-#include "core/logging.h"
-#include "internet/jamendodynamicplaylist.h"
+#ifndef INTERNETVIEW_H
+#define INTERNETVIEW_H
 
-#include <QSettings>
+#include "widgets/autoexpandingtreeview.h"
 
-namespace smart_playlists {
+class InternetView : public AutoExpandingTreeView {
+  Q_OBJECT
 
-const int Generator::kDefaultLimit = 20;
-const int Generator::kDefaultDynamicHistory = 5;
-const int Generator::kDefaultDynamicFuture = 15;
+ public:
+  InternetView(QWidget* parent = 0);
 
-Generator::Generator()
-  : QObject(NULL),
-    backend_(NULL)
-{
-}
+  // QWidget
+  void contextMenuEvent(QContextMenuEvent* e);
 
-GeneratorPtr Generator::Create(const QString& type) {
-  if (type == "Query")
-    return GeneratorPtr(new QueryGenerator);
-  else if (type == "Jamendo")
-    return GeneratorPtr(new JamendoDynamicPlaylist);
+  // QTreeView
+  void currentChanged(const QModelIndex &current, const QModelIndex &previous);
+  void setModel(QAbstractItemModel *model);
 
-  qLog(Warning) << "Invalid playlist generator type:" << type;
-  return GeneratorPtr();
-}
+ signals:
+  void CurrentIndexChanged(const QModelIndex& index);
+};
 
-} // namespace
-
+#endif // INTERNETVIEW_H

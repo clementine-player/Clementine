@@ -23,7 +23,7 @@
 #include "playlistparsers/parserbase.h"
 #include "playlistparsers/cueparser.h"
 #include "playlistparsers/playlistparser.h"
-#include "radio/fixlastfm.h"
+#include "internet/fixlastfm.h"
 
 #include <QBuffer>
 #include <QDirIterator>

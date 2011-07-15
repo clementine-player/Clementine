@@ -9,10 +9,10 @@ class Plugin:
     self.settings_dialog = None
 
     # Create the services and add them to the Internet tab
-    self.di_service = DigitallyImportedService(clementine.radio_model, self.ShowSettings)
-    self.sky_service = SkyFmService(clementine.radio_model, self.ShowSettings)
-    clementine.radio_model.AddService(self.di_service)
-    clementine.radio_model.AddService(self.sky_service)
+    self.di_service = DigitallyImportedService(clementine.internet_model, self.ShowSettings)
+    self.sky_service = SkyFmService(clementine.internet_model, self.ShowSettings)
+    clementine.internet_model.AddService(self.di_service)
+    clementine.internet_model.AddService(self.sky_service)
 
     # Register for when the user clicks the Settings button
     __script__.connect("SettingsDialogRequested()", self.ShowSettings)
