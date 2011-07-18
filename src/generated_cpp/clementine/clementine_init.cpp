@@ -9,6 +9,7 @@ PythonQt::priv()->registerClass(&CoverProvider::staticMetaObject, "Clementine", 
 PythonQt::priv()->registerClass(&CoverProviders::staticMetaObject, "Clementine", PythonQtCreateObject<PythonQtWrapper_CoverProviders>, NULL, module, 0);
 PythonQt::priv()->registerCPPClass("CoverSearchResult", "", "Clementine", PythonQtCreateObject<PythonQtWrapper_CoverSearchResult>, PythonQtSetInstanceWrapperOnShell<PythonQtShell_CoverSearchResult>, module, 0);
 PythonQt::priv()->registerCPPClass("Directory", "", "Clementine", PythonQtCreateObject<PythonQtWrapper_Directory>, PythonQtSetInstanceWrapperOnShell<PythonQtShell_Directory>, module, 0);
+PythonQt::priv()->registerCPPClass("IconLoader", "", "Clementine", PythonQtCreateObject<PythonQtWrapper_IconLoader>, NULL, module, 0);
 PythonQt::priv()->registerClass(&InternetModel::staticMetaObject, "Clementine", PythonQtCreateObject<PythonQtWrapper_InternetModel>, NULL, module, 0);
 PythonQt::priv()->registerClass(&InternetService::staticMetaObject, "Clementine", PythonQtCreateObject<PythonQtWrapper_InternetService>, PythonQtSetInstanceWrapperOnShell<PythonQtShell_InternetService>, module, 0);
 PythonQt::priv()->registerClass(&LibraryBackend::staticMetaObject, "Clementine", PythonQtCreateObject<PythonQtWrapper_LibraryBackend>, PythonQtSetInstanceWrapperOnShell<PythonQtShell_LibraryBackend>, module, 0);

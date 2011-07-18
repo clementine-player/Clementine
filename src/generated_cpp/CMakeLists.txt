@@ -7,6 +7,7 @@ include_directories(
   ${CMAKE_SOURCE_DIR}/src/playlist
   ${CMAKE_SOURCE_DIR}/src/playlistparsers
   ${CMAKE_SOURCE_DIR}/src/smartplaylists
+  ${CMAKE_SOURCE_DIR}/src/ui
   ${CMAKE_CURRENT_SOURCE_DIR}/clementine
   ${PYTHON_INCLUDE_DIRS}
 )

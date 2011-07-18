@@ -1,3 +1,4 @@
+#define protected public
 #include <PythonQt.h>
 #include <QObject>
 #include <QVariant>
@@ -11,6 +12,49 @@
 #include <qurl.h>
 #include <taskmanager.h>
 #include <urlhandler.h>
+#undef protected
+
+
+
+
+class PythonQtShell_TaskManager : public TaskManager
+{
+public:
+    PythonQtShell_TaskManager(QObject*  parent = 0):TaskManager(parent),_wrapper(NULL) {};
+
+virtual void childEvent(QChildEvent*  arg__1);
+virtual void customEvent(QEvent*  arg__1);
+virtual bool  event(QEvent*  arg__1);
+virtual bool  eventFilter(QObject*  arg__1, QEvent*  arg__2);
+virtual void timerEvent(QTimerEvent*  arg__1);
+
+  PythonQtInstanceWrapper* _wrapper; 
+};
+
+class PythonQtPublicPromoter_TaskManager : public TaskManager
+{ public:
+inline void promoted_PauseLibraryWatchers() { TaskManager::PauseLibraryWatchers(); }
+inline void promoted_ResumeLibraryWatchers() { TaskManager::ResumeLibraryWatchers(); }
+inline void promoted_TasksChanged() { TaskManager::TasksChanged(); }
+};
+
+class PythonQtWrapper_TaskManager : public QObject
+{ Q_OBJECT
+public:
+public slots:
+TaskManager* new_TaskManager(QObject*  parent = 0);
+void delete_TaskManager(TaskManager* obj) { delete obj; } 
+   QList<TaskManager_Task >  GetTasks(TaskManager* theWrappedObject);
+   void PauseLibraryWatchers(TaskManager* theWrappedObject);
+   void ResumeLibraryWatchers(TaskManager* theWrappedObject);
+   void SetTaskBlocksLibraryScans(TaskManager* theWrappedObject, int  id);
+   void SetTaskFinished(TaskManager* theWrappedObject, int  id);
+   void SetTaskProgress(TaskManager* theWrappedObject, int  id, int  progress, int  max = 0);
+   int  StartTask(TaskManager* theWrappedObject, const QString&  name);
+   void TasksChanged(TaskManager* theWrappedObject);
+};
+
+
 
 
 
@@ -122,6 +166,7 @@ virtual void timerEvent(QTimerEvent*  arg__1);
 
 class PythonQtPublicPromoter_UrlHandler : public UrlHandler
 { public:
+inline void promoted_AsyncLoadComplete(const UrlHandler_LoadResult&  result) { UrlHandler::AsyncLoadComplete(result); }
 inline UrlHandler_LoadResult  promoted_LoadNext(const QUrl&  url) { return UrlHandler::LoadNext(url); }
 inline UrlHandler_LoadResult  promoted_StartLoading(const QUrl&  url) { return UrlHandler::StartLoading(url); }
 };
@@ -132,6 +177,7 @@ public:
 public slots:
 UrlHandler* new_UrlHandler(QObject*  parent = 0);
 void delete_UrlHandler(UrlHandler* obj) { delete obj; } 
+   void AsyncLoadComplete(UrlHandler* theWrappedObject, const UrlHandler_LoadResult&  result);
    UrlHandler_LoadResult  LoadNext(UrlHandler* theWrappedObject, const QUrl&  url);
    UrlHandler_LoadResult  StartLoading(UrlHandler* theWrappedObject, const QUrl&  url);
 };

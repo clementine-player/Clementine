@@ -1,3 +1,4 @@
+#define protected public
 #include <PythonQt.h>
 #include <QObject>
 #include <QVariant>
@@ -6,6 +7,7 @@
 #include <coverprovider.h>
 #include <coverproviders.h>
 #include <directory.h>
+#include <iconloader.h>
 #include <internetmodel.h>
 #include <internetservice.h>
 #include <librarybackend.h>
@@ -57,15 +59,25 @@
 #include <specialplaylisttype.h>
 #include <taskmanager.h>
 #include <urlhandler.h>
+#undef protected
 
 
+
+
+class PythonQtPublicPromoter_AlbumCoverFetcherSearch : public AlbumCoverFetcherSearch
+{ public:
+inline void promoted_AlbumCoverFetched(quint64  arg__1, const QImage&  cover) { AlbumCoverFetcherSearch::AlbumCoverFetched(arg__1, cover); }
+inline void promoted_SearchFinished(quint64  arg__1, const QList<CoverSearchResult >&  results) { AlbumCoverFetcherSearch::SearchFinished(arg__1, results); }
+};
 
 class PythonQtWrapper_AlbumCoverFetcherSearch : public QObject
 { Q_OBJECT
 public:
 public slots:
 void delete_AlbumCoverFetcherSearch(AlbumCoverFetcherSearch* obj) { delete obj; } 
+   void AlbumCoverFetched(AlbumCoverFetcherSearch* theWrappedObject, quint64  arg__1, const QImage&  cover);
    void Cancel(AlbumCoverFetcherSearch* theWrappedObject);
+   void SearchFinished(AlbumCoverFetcherSearch* theWrappedObject, quint64  arg__1, const QList<CoverSearchResult >&  results);
    void Start(AlbumCoverFetcherSearch* theWrappedObject);
 };
 
@@ -92,6 +104,7 @@ virtual void timerEvent(QTimerEvent*  arg__1);
 class PythonQtPublicPromoter_CoverProvider : public CoverProvider
 { public:
 inline void promoted_CancelSearch(int  id) { CoverProvider::CancelSearch(id); }
+inline void promoted_SearchFinished(int  id, const QList<CoverSearchResult >&  results) { CoverProvider::SearchFinished(id, results); }
 };
 
 class PythonQtWrapper_CoverProvider : public QObject
@@ -101,6 +114,7 @@ public slots:
 CoverProvider* new_CoverProvider(const QString&  name, QObject*  parent);
 void delete_CoverProvider(CoverProvider* obj) { delete obj; } 
    void CancelSearch(CoverProvider* theWrappedObject, int  id);
+   void SearchFinished(CoverProvider* theWrappedObject, int  id, const QList<CoverSearchResult >&  results);
    QString  name(CoverProvider* theWrappedObject) const;
 };
 
@@ -184,8 +198,24 @@ int  py_get_id(Directory* theWrappedObject){ return theWrappedObject->id; }
 
 
 
+class PythonQtWrapper_IconLoader : public QObject
+{ Q_OBJECT
+public:
+public slots:
+void delete_IconLoader(IconLoader* obj) { delete obj; } 
+   void static_IconLoader_Init();
+   QIcon  static_IconLoader_Load(const QString&  name);
+};
+
+
+
+
+
 class PythonQtPublicPromoter_InternetModel : public InternetModel
 { public:
+inline void promoted_AddToPlaylist(QMimeData*  data) { InternetModel::AddToPlaylist(data); }
+inline void promoted_StreamError(const QString&  message) { InternetModel::StreamError(message); }
+inline void promoted_StreamMetadataFound(const QUrl&  original_url, const Song&  song) { InternetModel::StreamMetadataFound(original_url, song); }
 inline Qt::ItemFlags  promoted_flags(const QModelIndex&  index) const { return InternetModel::flags(index); }
 inline bool  promoted_hasChildren(const QModelIndex&  parent) const { return InternetModel::hasChildren(parent); }
 inline QMimeData*  promoted_mimeData(const QList<QModelIndex >&  indexes) const { return InternetModel::mimeData(indexes); }
@@ -206,6 +236,7 @@ enum Type{
 public slots:
 void delete_InternetModel(InternetModel* obj) { delete obj; } 
    void AddService(InternetModel* theWrappedObject, InternetService*  service);
+   void AddToPlaylist(InternetModel* theWrappedObject, QMimeData*  data);
    bool  IsPlayable(InternetModel* theWrappedObject, const QModelIndex&  index) const;
    void ReloadSettings(InternetModel* theWrappedObject);
    void RemoveService(InternetModel* theWrappedObject, InternetService*  service);
@@ -213,6 +244,8 @@ void delete_InternetModel(InternetModel* obj) { delete obj; }
    InternetService*  ServiceForIndex(InternetModel* theWrappedObject, const QModelIndex&  index) const;
    InternetService*  ServiceForItem(InternetModel* theWrappedObject, const QStandardItem*  item) const;
    void ShowContextMenu(InternetModel* theWrappedObject, const QModelIndex&  merged_model_index, const QPoint&  global_pos);
+   void StreamError(InternetModel* theWrappedObject, const QString&  message);
+   void StreamMetadataFound(InternetModel* theWrappedObject, const QUrl&  original_url, const Song&  song);
    Qt::ItemFlags  flags(InternetModel* theWrappedObject, const QModelIndex&  index) const;
    bool  hasChildren(InternetModel* theWrappedObject, const QModelIndex&  parent) const;
    QMimeData*  mimeData(InternetModel* theWrappedObject, const QList<QModelIndex >&  indexes) const;
@@ -250,11 +283,20 @@ virtual void timerEvent(QTimerEvent*  arg__1);
 
 class PythonQtPublicPromoter_InternetService : public InternetService
 { public:
+inline void promoted_AddItemToPlaylist(const QModelIndex&  index, InternetService::AddMode  add_mode) { InternetService::AddItemToPlaylist(index, add_mode); }
+inline void promoted_AddItemsToPlaylist(const QList<QModelIndex >&  indexes, InternetService::AddMode  add_mode) { InternetService::AddItemsToPlaylist(indexes, add_mode); }
+inline void promoted_AddToPlaylistSignal(QMimeData*  data) { InternetService::AddToPlaylistSignal(data); }
+inline QAction*  promoted_GetAppendToPlaylistAction() { return InternetService::GetAppendToPlaylistAction(); }
+inline QAction*  promoted_GetOpenInNewPlaylistAction() { return InternetService::GetOpenInNewPlaylistAction(); }
+inline QList<QAction* >  promoted_GetPlaylistActions() { return InternetService::GetPlaylistActions(); }
+inline QAction*  promoted_GetReplacePlaylistAction() { return InternetService::GetReplacePlaylistAction(); }
 inline QWidget*  promoted_HeaderWidget() const { return InternetService::HeaderWidget(); }
 inline QString  promoted_Icon() { return InternetService::Icon(); }
 inline void promoted_ItemDoubleClicked(QStandardItem*  item) { InternetService::ItemDoubleClicked(item); }
 inline void promoted_ReloadSettings() { InternetService::ReloadSettings(); }
 inline void promoted_ShowContextMenu(const QModelIndex&  index, const QPoint&  global_pos) { InternetService::ShowContextMenu(index, global_pos); }
+inline void promoted_StreamError(const QString&  message) { InternetService::StreamError(message); }
+inline void promoted_StreamMetadataFound(const QUrl&  original_url, const Song&  song) { InternetService::StreamMetadataFound(original_url, song); }
 };
 
 class PythonQtWrapper_InternetService : public QObject
@@ -263,11 +305,20 @@ public:
 public slots:
 InternetService* new_InternetService(const QString&  name, InternetModel*  model, QObject*  parent = NULL);
 void delete_InternetService(InternetService* obj) { delete obj; } 
+   void AddItemToPlaylist(InternetService* theWrappedObject, const QModelIndex&  index, InternetService::AddMode  add_mode);
+   void AddItemsToPlaylist(InternetService* theWrappedObject, const QList<QModelIndex >&  indexes, InternetService::AddMode  add_mode);
+   void AddToPlaylistSignal(InternetService* theWrappedObject, QMimeData*  data);
+   QAction*  GetAppendToPlaylistAction(InternetService* theWrappedObject);
+   QAction*  GetOpenInNewPlaylistAction(InternetService* theWrappedObject);
+   QList<QAction* >  GetPlaylistActions(InternetService* theWrappedObject);
+   QAction*  GetReplacePlaylistAction(InternetService* theWrappedObject);
    QWidget*  HeaderWidget(InternetService* theWrappedObject) const;
    QString  Icon(InternetService* theWrappedObject);
    void ItemDoubleClicked(InternetService* theWrappedObject, QStandardItem*  item);
    void ReloadSettings(InternetService* theWrappedObject);
    void ShowContextMenu(InternetService* theWrappedObject, const QModelIndex&  index, const QPoint&  global_pos);
+   void StreamError(InternetService* theWrappedObject, const QString&  message);
+   void StreamMetadataFound(InternetService* theWrappedObject, const QUrl&  original_url, const Song&  song);
    InternetModel*  model(InternetService* theWrappedObject) const;
    QString  name(InternetService* theWrappedObject) const;
 };
@@ -316,6 +367,9 @@ class PythonQtPublicPromoter_LibraryBackend : public LibraryBackend
 { public:
 inline void promoted_AddDirectory(const QString&  path) { LibraryBackend::AddDirectory(path); }
 inline void promoted_ChangeDirPath(int  id, const QString&  old_path, const QString&  new_path) { LibraryBackend::ChangeDirPath(id, old_path, new_path); }
+inline void promoted_DatabaseReset() { LibraryBackend::DatabaseReset(); }
+inline void promoted_DirectoryDeleted(const Directory&  dir) { LibraryBackend::DirectoryDeleted(dir); }
+inline void promoted_DirectoryDiscovered(const Directory&  dir, const QList<Subdirectory >&  subdirs) { LibraryBackend::DirectoryDiscovered(dir, subdirs); }
 inline bool  promoted_ExecQuery(LibraryQuery*  q) { return LibraryBackend::ExecQuery(q); }
 inline QList<Song >  promoted_FindSongsInDirectory(int  id) { return LibraryBackend::FindSongsInDirectory(id); }
 inline LibraryBackendInterface::Album  promoted_GetAlbumArt(const QString&  artist, const QString&  album) { return LibraryBackend::GetAlbumArt(artist, album); }
@@ -333,7 +387,11 @@ inline QList<Song >  promoted_GetSongsByUrl(const QUrl&  url) { return LibraryBa
 inline bool  promoted_HasCompilations(const QueryOptions&  opt = QueryOptions()) { return LibraryBackend::HasCompilations(opt); }
 inline void promoted_LoadDirectoriesAsync() { LibraryBackend::LoadDirectoriesAsync(); }
 inline void promoted_RemoveDirectory(const Directory&  dir) { LibraryBackend::RemoveDirectory(dir); }
+inline void promoted_SongsDeleted(const QList<Song >&  songs) { LibraryBackend::SongsDeleted(songs); }
+inline void promoted_SongsDiscovered(const QList<Song >&  songs) { LibraryBackend::SongsDiscovered(songs); }
+inline void promoted_SongsStatisticsChanged(const QList<Song >&  songs) { LibraryBackend::SongsStatisticsChanged(songs); }
 inline QList<Subdirectory >  promoted_SubdirsInDirectory(int  id) { return LibraryBackend::SubdirsInDirectory(id); }
+inline void promoted_TotalSongCountUpdated(int  total) { LibraryBackend::TotalSongCountUpdated(total); }
 inline void promoted_UpdateManualAlbumArtAsync(const QString&  artist, const QString&  album, const QString&  art) { LibraryBackend::UpdateManualAlbumArtAsync(artist, album, art); }
 inline void promoted_UpdateTotalSongCountAsync() { LibraryBackend::UpdateTotalSongCountAsync(); }
 };
@@ -346,7 +404,10 @@ LibraryBackend* new_LibraryBackend(QObject*  parent = 0);
 void delete_LibraryBackend(LibraryBackend* obj) { delete obj; } 
    void AddDirectory(LibraryBackend* theWrappedObject, const QString&  path);
    void ChangeDirPath(LibraryBackend* theWrappedObject, int  id, const QString&  old_path, const QString&  new_path);
+   void DatabaseReset(LibraryBackend* theWrappedObject);
    void DeleteAll(LibraryBackend* theWrappedObject);
+   void DirectoryDeleted(LibraryBackend* theWrappedObject, const Directory&  dir);
+   void DirectoryDiscovered(LibraryBackend* theWrappedObject, const Directory&  dir, const QList<Subdirectory >&  subdirs);
    bool  ExecQuery(LibraryBackend* theWrappedObject, LibraryQuery*  q);
    QList<Song >  FindSongsInDirectory(LibraryBackend* theWrappedObject, int  id);
    LibraryBackendInterface::Album  GetAlbumArt(LibraryBackend* theWrappedObject, const QString&  artist, const QString&  album);
@@ -371,7 +432,11 @@ void delete_LibraryBackend(LibraryBackend* obj) { delete obj; }
    void LoadDirectoriesAsync(LibraryBackend* theWrappedObject);
    void RemoveDirectory(LibraryBackend* theWrappedObject, const Directory&  dir);
    void ResetStatisticsAsync(LibraryBackend* theWrappedObject, int  id);
+   void SongsDeleted(LibraryBackend* theWrappedObject, const QList<Song >&  songs);
+   void SongsDiscovered(LibraryBackend* theWrappedObject, const QList<Song >&  songs);
+   void SongsStatisticsChanged(LibraryBackend* theWrappedObject, const QList<Song >&  songs);
    QList<Subdirectory >  SubdirsInDirectory(LibraryBackend* theWrappedObject, int  id);
+   void TotalSongCountUpdated(LibraryBackend* theWrappedObject, int  total);
    void UpdateManualAlbumArtAsync(LibraryBackend* theWrappedObject, const QString&  artist, const QString&  album, const QString&  art);
    void UpdateSongRatingAsync(LibraryBackend* theWrappedObject, int  id, float  rating);
    void UpdateTotalSongCountAsync(LibraryBackend* theWrappedObject);
@@ -498,6 +563,14 @@ public:
   PythonQtInstanceWrapper* _wrapper; 
 };
 
+class PythonQtPublicPromoter_LibraryView : public LibraryView
+{ public:
+inline void promoted_ShowConfigDialog() { LibraryView::ShowConfigDialog(); }
+inline void promoted_contextMenuEvent(QContextMenuEvent*  e) { LibraryView::contextMenuEvent(e); }
+inline void promoted_mouseReleaseEvent(QMouseEvent*  e) { LibraryView::mouseReleaseEvent(e); }
+inline void promoted_paintEvent(QPaintEvent*  event) { LibraryView::paintEvent(event); }
+};
+
 class PythonQtWrapper_LibraryView : public QObject
 { Q_OBJECT
 public:
@@ -506,7 +579,11 @@ LibraryView* new_LibraryView(QWidget*  parent = 0);
 void delete_LibraryView(LibraryView* obj) { delete obj; } 
    QList<Song >  GetSelectedSongs(LibraryView* theWrappedObject) const;
    void SetTaskManager(LibraryView* theWrappedObject, TaskManager*  task_manager);
+   void ShowConfigDialog(LibraryView* theWrappedObject);
+   void contextMenuEvent(LibraryView* theWrappedObject, QContextMenuEvent*  e);
    void keyboardSearch(LibraryView* theWrappedObject, const QString&  search);
+   void mouseReleaseEvent(LibraryView* theWrappedObject, QMouseEvent*  e);
+   void paintEvent(LibraryView* theWrappedObject, QPaintEvent*  event);
    void scrollTo(LibraryView* theWrappedObject, const QModelIndex&  index, QAbstractItemView::ScrollHint  hint = QAbstractItemView::EnsureVisible);
 };
 
@@ -703,12 +780,36 @@ virtual void timerEvent(QTimerEvent*  arg__1);
   PythonQtInstanceWrapper* _wrapper; 
 };
 
+class PythonQtPublicPromoter_PlayerInterface : public PlayerInterface
+{ public:
+inline void promoted_Error(const QString&  message) { PlayerInterface::Error(message); }
+inline void promoted_ForceShowOSD(Song  arg__1, bool  toogle) { PlayerInterface::ForceShowOSD(arg__1, toogle); }
+inline void promoted_Paused() { PlayerInterface::Paused(); }
+inline void promoted_Playing() { PlayerInterface::Playing(); }
+inline void promoted_PlaylistFinished() { PlayerInterface::PlaylistFinished(); }
+inline void promoted_Seeked(qlonglong  microseconds) { PlayerInterface::Seeked(microseconds); }
+inline void promoted_SongChangeRequestProcessed(const QUrl&  url, bool  valid) { PlayerInterface::SongChangeRequestProcessed(url, valid); }
+inline void promoted_Stopped() { PlayerInterface::Stopped(); }
+inline void promoted_TrackSkipped(PlaylistItemPtr  old_track) { PlayerInterface::TrackSkipped(old_track); }
+inline void promoted_VolumeChanged(int  volume) { PlayerInterface::VolumeChanged(volume); }
+};
+
 class PythonQtWrapper_PlayerInterface : public QObject
 { Q_OBJECT
 public:
 public slots:
 PlayerInterface* new_PlayerInterface(QObject*  parent = 0);
 void delete_PlayerInterface(PlayerInterface* obj) { delete obj; } 
+   void Error(PlayerInterface* theWrappedObject, const QString&  message);
+   void ForceShowOSD(PlayerInterface* theWrappedObject, Song  arg__1, bool  toogle);
+   void Paused(PlayerInterface* theWrappedObject);
+   void Playing(PlayerInterface* theWrappedObject);
+   void PlaylistFinished(PlayerInterface* theWrappedObject);
+   void Seeked(PlayerInterface* theWrappedObject, qlonglong  microseconds);
+   void SongChangeRequestProcessed(PlayerInterface* theWrappedObject, const QUrl&  url, bool  valid);
+   void Stopped(PlayerInterface* theWrappedObject);
+   void TrackSkipped(PlayerInterface* theWrappedObject, PlaylistItemPtr  old_track);
+   void VolumeChanged(PlayerInterface* theWrappedObject, int  volume);
 };
 
 
@@ -757,6 +858,13 @@ virtual void timerEvent(QTimerEvent*  arg__1);
 
 class PythonQtPublicPromoter_Playlist : public Playlist
 { public:
+inline void promoted_CurrentSongChanged(const Song&  metadata) { Playlist::CurrentSongChanged(metadata); }
+inline void promoted_DynamicModeChanged(bool  dynamic) { Playlist::DynamicModeChanged(dynamic); }
+inline void promoted_EditingFinished(const QModelIndex&  index) { Playlist::EditingFinished(index); }
+inline void promoted_LoadTracksError(const QString&  message) { Playlist::LoadTracksError(message); }
+inline void promoted_PlayRequested(const QModelIndex&  index) { Playlist::PlayRequested(index); }
+inline void promoted_PlaylistChanged() { Playlist::PlaylistChanged(); }
+inline void promoted_RestoreFinished() { Playlist::RestoreFinished(); }
 inline int  promoted_columnCount(const QModelIndex&  arg__1 = QModelIndex()) const { return Playlist::columnCount(arg__1); }
 inline QVariant  promoted_data(const QModelIndex&  index, int  role = Qt::DisplayRole) const { return Playlist::data(index, role); }
 inline bool  promoted_dropMimeData(const QMimeData*  data, Qt::DropAction  action, int  row, int  column, const QModelIndex&  parent) { return Playlist::dropMimeData(data, action, row, column, parent); }
@@ -787,6 +895,9 @@ void delete_Playlist(Playlist* obj) { delete obj; }
    void AddSongInsertVetoListener(Playlist* theWrappedObject, SongInsertVetoListener*  listener);
    bool  ApplyValidityOnCurrentSong(Playlist* theWrappedObject, const QUrl&  url, bool  valid);
    bool  static_Playlist_CompareItems(int  column, Qt::SortOrder  order, PlaylistItemPtr  a, PlaylistItemPtr  b);
+   void CurrentSongChanged(Playlist* theWrappedObject, const Song&  metadata);
+   void DynamicModeChanged(Playlist* theWrappedObject, bool  dynamic);
+   void EditingFinished(Playlist* theWrappedObject, const QModelIndex&  index);
    QList<PlaylistItemPtr >  GetAllItems(Playlist* theWrappedObject) const;
    QList<Song >  GetAllSongs(Playlist* theWrappedObject) const;
    quint64  GetTotalLength(Playlist* theWrappedObject) const;
@@ -797,12 +908,16 @@ void delete_Playlist(Playlist* obj) { delete obj; }
    void InsertSongsOrLibraryItems(Playlist* theWrappedObject, const QList<Song >&  items, int  pos = -1, bool  play_now = false, bool  enqueue = false);
    void InsertUrls(Playlist* theWrappedObject, const QList<QUrl >&  urls, int  pos = -1, bool  play_now = false, bool  enqueue = false);
    void InvalidateDeletedSongs(Playlist* theWrappedObject);
+   void LoadTracksError(Playlist* theWrappedObject, const QString&  message);
+   void PlayRequested(Playlist* theWrappedObject, const QModelIndex&  index);
+   void PlaylistChanged(Playlist* theWrappedObject);
    void RateSong(Playlist* theWrappedObject, const QModelIndex&  index, double  rating);
    void ReloadItems(Playlist* theWrappedObject, const QList<int >&  rows);
    void RemoveDeletedSongs(Playlist* theWrappedObject);
    void RemoveItemsWithoutUndo(Playlist* theWrappedObject, const QList<int >&  indices);
    void RemoveSongInsertVetoListener(Playlist* theWrappedObject, SongInsertVetoListener*  listener);
    void Restore(Playlist* theWrappedObject);
+   void RestoreFinished(Playlist* theWrappedObject);
    void Save(Playlist* theWrappedObject) const;
    void StopAfter(Playlist* theWrappedObject, int  row);
    void UpdateItems(Playlist* theWrappedObject, const QList<Song >&  songs);
@@ -940,6 +1055,11 @@ virtual void wheelEvent(QWheelEvent*  arg__1);
 
 class PythonQtPublicPromoter_PlaylistContainer : public PlaylistContainer
 { public:
+inline void promoted_Remove(int  id) { PlaylistContainer::Remove(id); }
+inline void promoted_Rename(int  id, const QString&  new_name) { PlaylistContainer::Rename(id, new_name); }
+inline void promoted_TabChanged(int  id) { PlaylistContainer::TabChanged(id); }
+inline void promoted_UndoRedoActionsChanged(QAction*  undo, QAction*  redo) { PlaylistContainer::UndoRedoActionsChanged(undo, redo); }
+inline void promoted_ViewSelectionModelChanged() { PlaylistContainer::ViewSelectionModelChanged(); }
 inline void promoted_resizeEvent(QResizeEvent*  arg__1) { PlaylistContainer::resizeEvent(arg__1); }
 };
 
@@ -949,8 +1069,13 @@ public:
 public slots:
 PlaylistContainer* new_PlaylistContainer(QWidget*  parent = 0);
 void delete_PlaylistContainer(PlaylistContainer* obj) { delete obj; } 
+   void Remove(PlaylistContainer* theWrappedObject, int  id);
+   void Rename(PlaylistContainer* theWrappedObject, int  id, const QString&  new_name);
    void SetActions(PlaylistContainer* theWrappedObject, QAction*  new_playlist, QAction*  save_playlist, QAction*  load_playlist, QAction*  next_playlist, QAction*  previous_playlist);
    void SetManager(PlaylistContainer* theWrappedObject, PlaylistManager*  manager);
+   void TabChanged(PlaylistContainer* theWrappedObject, int  id);
+   void UndoRedoActionsChanged(PlaylistContainer* theWrappedObject, QAction*  undo, QAction*  redo);
+   void ViewSelectionModelChanged(PlaylistContainer* theWrappedObject);
    void resizeEvent(PlaylistContainer* theWrappedObject, QResizeEvent*  arg__1);
 };
 
@@ -1173,12 +1298,40 @@ virtual void timerEvent(QTimerEvent*  arg__1);
   PythonQtInstanceWrapper* _wrapper; 
 };
 
+class PythonQtPublicPromoter_PlaylistManagerInterface : public PlaylistManagerInterface
+{ public:
+inline void promoted_ActiveChanged(Playlist*  new_playlist) { PlaylistManagerInterface::ActiveChanged(new_playlist); }
+inline void promoted_CurrentChanged(Playlist*  new_playlist) { PlaylistManagerInterface::CurrentChanged(new_playlist); }
+inline void promoted_CurrentSongChanged(const Song&  song) { PlaylistManagerInterface::CurrentSongChanged(song); }
+inline void promoted_EditingFinished(const QModelIndex&  index) { PlaylistManagerInterface::EditingFinished(index); }
+inline void promoted_Error(const QString&  message) { PlaylistManagerInterface::Error(message); }
+inline void promoted_PlayRequested(const QModelIndex&  index) { PlaylistManagerInterface::PlayRequested(index); }
+inline void promoted_PlaylistAdded(int  id, const QString&  name) { PlaylistManagerInterface::PlaylistAdded(id, name); }
+inline void promoted_PlaylistChanged(Playlist*  playlist) { PlaylistManagerInterface::PlaylistChanged(playlist); }
+inline void promoted_PlaylistManagerInitialized() { PlaylistManagerInterface::PlaylistManagerInitialized(); }
+inline void promoted_PlaylistRemoved(int  id) { PlaylistManagerInterface::PlaylistRemoved(id); }
+inline void promoted_PlaylistRenamed(int  id, const QString&  new_name) { PlaylistManagerInterface::PlaylistRenamed(id, new_name); }
+inline void promoted_SummaryTextChanged(const QString&  summary) { PlaylistManagerInterface::SummaryTextChanged(summary); }
+};
+
 class PythonQtWrapper_PlaylistManagerInterface : public QObject
 { Q_OBJECT
 public:
 public slots:
 PlaylistManagerInterface* new_PlaylistManagerInterface(QObject*  parent);
 void delete_PlaylistManagerInterface(PlaylistManagerInterface* obj) { delete obj; } 
+   void ActiveChanged(PlaylistManagerInterface* theWrappedObject, Playlist*  new_playlist);
+   void CurrentChanged(PlaylistManagerInterface* theWrappedObject, Playlist*  new_playlist);
+   void CurrentSongChanged(PlaylistManagerInterface* theWrappedObject, const Song&  song);
+   void EditingFinished(PlaylistManagerInterface* theWrappedObject, const QModelIndex&  index);
+   void Error(PlaylistManagerInterface* theWrappedObject, const QString&  message);
+   void PlayRequested(PlaylistManagerInterface* theWrappedObject, const QModelIndex&  index);
+   void PlaylistAdded(PlaylistManagerInterface* theWrappedObject, int  id, const QString&  name);
+   void PlaylistChanged(PlaylistManagerInterface* theWrappedObject, Playlist*  playlist);
+   void PlaylistManagerInitialized(PlaylistManagerInterface* theWrappedObject);
+   void PlaylistRemoved(PlaylistManagerInterface* theWrappedObject, int  id);
+   void PlaylistRenamed(PlaylistManagerInterface* theWrappedObject, int  id, const QString&  new_name);
+   void SummaryTextChanged(PlaylistManagerInterface* theWrappedObject, const QString&  summary);
 };
 
 
@@ -1218,6 +1371,12 @@ void delete_PlaylistParser(PlaylistParser* obj) { delete obj; }
 
 
 
+class PythonQtPublicPromoter_PlaylistSequence : public PlaylistSequence
+{ public:
+inline void promoted_RepeatModeChanged(PlaylistSequence::RepeatMode  mode) { PlaylistSequence::RepeatModeChanged(mode); }
+inline void promoted_ShuffleModeChanged(PlaylistSequence::ShuffleMode  mode) { PlaylistSequence::ShuffleModeChanged(mode); }
+};
+
 class PythonQtWrapper_PlaylistSequence : public QObject
 { Q_OBJECT
 public:
@@ -1228,6 +1387,8 @@ enum RepeatMode{
   Repeat_Off = PlaylistSequence::Repeat_Off,   Repeat_Track = PlaylistSequence::Repeat_Track,   Repeat_Album = PlaylistSequence::Repeat_Album,   Repeat_Playlist = PlaylistSequence::Repeat_Playlist};
 public slots:
 void delete_PlaylistSequence(PlaylistSequence* obj) { delete obj; } 
+   void RepeatModeChanged(PlaylistSequence* theWrappedObject, PlaylistSequence::RepeatMode  mode);
+   void ShuffleModeChanged(PlaylistSequence* theWrappedObject, PlaylistSequence::ShuffleMode  mode);
    QMenu*  repeat_menu(PlaylistSequence* theWrappedObject) const;
    PlaylistSequence::RepeatMode  repeat_mode(PlaylistSequence* theWrappedObject) const;
    QMenu*  shuffle_menu(PlaylistSequence* theWrappedObject) const;
@@ -1489,37 +1650,6 @@ void py_set_path(Subdirectory* theWrappedObject, QString  path){ theWrappedObjec
 QString  py_get_path(Subdirectory* theWrappedObject){ return theWrappedObject->path; }
 void py_set_directory_id(Subdirectory* theWrappedObject, int  directory_id){ theWrappedObject->directory_id = directory_id; }
 int  py_get_directory_id(Subdirectory* theWrappedObject){ return theWrappedObject->directory_id; }
-};
-
-
-
-
-
-class PythonQtShell_TaskManager : public TaskManager
-{
-public:
-    PythonQtShell_TaskManager(QObject*  parent = 0):TaskManager(parent),_wrapper(NULL) {};
-
-virtual void childEvent(QChildEvent*  arg__1);
-virtual void customEvent(QEvent*  arg__1);
-virtual bool  event(QEvent*  arg__1);
-virtual bool  eventFilter(QObject*  arg__1, QEvent*  arg__2);
-virtual void timerEvent(QTimerEvent*  arg__1);
-
-  PythonQtInstanceWrapper* _wrapper; 
-};
-
-class PythonQtWrapper_TaskManager : public QObject
-{ Q_OBJECT
-public:
-public slots:
-TaskManager* new_TaskManager(QObject*  parent = 0);
-void delete_TaskManager(TaskManager* obj) { delete obj; } 
-   QList<TaskManager_Task >  GetTasks(TaskManager* theWrappedObject);
-   void SetTaskBlocksLibraryScans(TaskManager* theWrappedObject, int  id);
-   void SetTaskFinished(TaskManager* theWrappedObject, int  id);
-   void SetTaskProgress(TaskManager* theWrappedObject, int  id, int  progress, int  max = 0);
-   int  StartTask(TaskManager* theWrappedObject, const QString&  name);
 };
 
 

@@ -1,4 +1,5 @@
 #include "clementine0.h"
+#define protected public
 #include <PythonQtConversion.h>
 #include <PythonQtMethodInfo.h>
 #include <PythonQtSignalReceiver.h>
@@ -56,10 +57,22 @@
 #include <specialplaylisttype.h>
 #include <taskmanager.h>
 #include <urlhandler.h>
+#undef protected
+
+
+void PythonQtWrapper_AlbumCoverFetcherSearch::AlbumCoverFetched(AlbumCoverFetcherSearch* theWrappedObject, quint64  arg__1, const QImage&  cover)
+{
+  ( ((PythonQtPublicPromoter_AlbumCoverFetcherSearch*)theWrappedObject)->promoted_AlbumCoverFetched(arg__1, cover));
+}
 
 void PythonQtWrapper_AlbumCoverFetcherSearch::Cancel(AlbumCoverFetcherSearch* theWrappedObject)
 {
   ( theWrappedObject->Cancel());
+}
+
+void PythonQtWrapper_AlbumCoverFetcherSearch::SearchFinished(AlbumCoverFetcherSearch* theWrappedObject, quint64  arg__1, const QList<CoverSearchResult >&  results)
+{
+  ( ((PythonQtPublicPromoter_AlbumCoverFetcherSearch*)theWrappedObject)->promoted_SearchFinished(arg__1, results));
 }
 
 void PythonQtWrapper_AlbumCoverFetcherSearch::Start(AlbumCoverFetcherSearch* theWrappedObject)
@@ -237,6 +250,11 @@ void PythonQtWrapper_CoverProvider::CancelSearch(CoverProvider* theWrappedObject
   ( ((PythonQtPublicPromoter_CoverProvider*)theWrappedObject)->promoted_CancelSearch(id));
 }
 
+void PythonQtWrapper_CoverProvider::SearchFinished(CoverProvider* theWrappedObject, int  id, const QList<CoverSearchResult >&  results)
+{
+  ( ((PythonQtPublicPromoter_CoverProvider*)theWrappedObject)->promoted_SearchFinished(id, results));
+}
+
 QString  PythonQtWrapper_CoverProvider::name(CoverProvider* theWrappedObject) const
 {
   return ( theWrappedObject->name());
@@ -288,9 +306,26 @@ return new PythonQtShell_Directory(); }
 
 
 
+void PythonQtWrapper_IconLoader::static_IconLoader_Init()
+{
+  (IconLoader::Init());
+}
+
+QIcon  PythonQtWrapper_IconLoader::static_IconLoader_Load(const QString&  name)
+{
+  return (IconLoader::Load(name));
+}
+
+
+
 void PythonQtWrapper_InternetModel::AddService(InternetModel* theWrappedObject, InternetService*  service)
 {
   ( theWrappedObject->AddService(service));
+}
+
+void PythonQtWrapper_InternetModel::AddToPlaylist(InternetModel* theWrappedObject, QMimeData*  data)
+{
+  ( ((PythonQtPublicPromoter_InternetModel*)theWrappedObject)->promoted_AddToPlaylist(data));
 }
 
 bool  PythonQtWrapper_InternetModel::IsPlayable(InternetModel* theWrappedObject, const QModelIndex&  index) const
@@ -326,6 +361,16 @@ InternetService*  PythonQtWrapper_InternetModel::ServiceForItem(InternetModel* t
 void PythonQtWrapper_InternetModel::ShowContextMenu(InternetModel* theWrappedObject, const QModelIndex&  merged_model_index, const QPoint&  global_pos)
 {
   ( theWrappedObject->ShowContextMenu(merged_model_index, global_pos));
+}
+
+void PythonQtWrapper_InternetModel::StreamError(InternetModel* theWrappedObject, const QString&  message)
+{
+  ( ((PythonQtPublicPromoter_InternetModel*)theWrappedObject)->promoted_StreamError(message));
+}
+
+void PythonQtWrapper_InternetModel::StreamMetadataFound(InternetModel* theWrappedObject, const QUrl&  original_url, const Song&  song)
+{
+  ( ((PythonQtPublicPromoter_InternetModel*)theWrappedObject)->promoted_StreamMetadataFound(original_url, song));
 }
 
 Qt::ItemFlags  PythonQtWrapper_InternetModel::flags(InternetModel* theWrappedObject, const QModelIndex&  index) const
@@ -669,6 +714,41 @@ InternetService* PythonQtWrapper_InternetService::new_InternetService(const QStr
 { 
 return new PythonQtShell_InternetService(name, model, parent); }
 
+void PythonQtWrapper_InternetService::AddItemToPlaylist(InternetService* theWrappedObject, const QModelIndex&  index, InternetService::AddMode  add_mode)
+{
+  ( ((PythonQtPublicPromoter_InternetService*)theWrappedObject)->promoted_AddItemToPlaylist(index, add_mode));
+}
+
+void PythonQtWrapper_InternetService::AddItemsToPlaylist(InternetService* theWrappedObject, const QList<QModelIndex >&  indexes, InternetService::AddMode  add_mode)
+{
+  ( ((PythonQtPublicPromoter_InternetService*)theWrappedObject)->promoted_AddItemsToPlaylist(indexes, add_mode));
+}
+
+void PythonQtWrapper_InternetService::AddToPlaylistSignal(InternetService* theWrappedObject, QMimeData*  data)
+{
+  ( ((PythonQtPublicPromoter_InternetService*)theWrappedObject)->promoted_AddToPlaylistSignal(data));
+}
+
+QAction*  PythonQtWrapper_InternetService::GetAppendToPlaylistAction(InternetService* theWrappedObject)
+{
+  return ( ((PythonQtPublicPromoter_InternetService*)theWrappedObject)->promoted_GetAppendToPlaylistAction());
+}
+
+QAction*  PythonQtWrapper_InternetService::GetOpenInNewPlaylistAction(InternetService* theWrappedObject)
+{
+  return ( ((PythonQtPublicPromoter_InternetService*)theWrappedObject)->promoted_GetOpenInNewPlaylistAction());
+}
+
+QList<QAction* >  PythonQtWrapper_InternetService::GetPlaylistActions(InternetService* theWrappedObject)
+{
+  return ( ((PythonQtPublicPromoter_InternetService*)theWrappedObject)->promoted_GetPlaylistActions());
+}
+
+QAction*  PythonQtWrapper_InternetService::GetReplacePlaylistAction(InternetService* theWrappedObject)
+{
+  return ( ((PythonQtPublicPromoter_InternetService*)theWrappedObject)->promoted_GetReplacePlaylistAction());
+}
+
 QWidget*  PythonQtWrapper_InternetService::HeaderWidget(InternetService* theWrappedObject) const
 {
   return ( ((PythonQtPublicPromoter_InternetService*)theWrappedObject)->promoted_HeaderWidget());
@@ -692,6 +772,16 @@ void PythonQtWrapper_InternetService::ReloadSettings(InternetService* theWrapped
 void PythonQtWrapper_InternetService::ShowContextMenu(InternetService* theWrappedObject, const QModelIndex&  index, const QPoint&  global_pos)
 {
   ( ((PythonQtPublicPromoter_InternetService*)theWrappedObject)->promoted_ShowContextMenu(index, global_pos));
+}
+
+void PythonQtWrapper_InternetService::StreamError(InternetService* theWrappedObject, const QString&  message)
+{
+  ( ((PythonQtPublicPromoter_InternetService*)theWrappedObject)->promoted_StreamError(message));
+}
+
+void PythonQtWrapper_InternetService::StreamMetadataFound(InternetService* theWrappedObject, const QUrl&  original_url, const Song&  song)
+{
+  ( ((PythonQtPublicPromoter_InternetService*)theWrappedObject)->promoted_StreamMetadataFound(original_url, song));
 }
 
 InternetModel*  PythonQtWrapper_InternetService::model(InternetService* theWrappedObject) const
@@ -1404,9 +1494,24 @@ void PythonQtWrapper_LibraryBackend::ChangeDirPath(LibraryBackend* theWrappedObj
   ( ((PythonQtPublicPromoter_LibraryBackend*)theWrappedObject)->promoted_ChangeDirPath(id, old_path, new_path));
 }
 
+void PythonQtWrapper_LibraryBackend::DatabaseReset(LibraryBackend* theWrappedObject)
+{
+  ( ((PythonQtPublicPromoter_LibraryBackend*)theWrappedObject)->promoted_DatabaseReset());
+}
+
 void PythonQtWrapper_LibraryBackend::DeleteAll(LibraryBackend* theWrappedObject)
 {
   ( theWrappedObject->DeleteAll());
+}
+
+void PythonQtWrapper_LibraryBackend::DirectoryDeleted(LibraryBackend* theWrappedObject, const Directory&  dir)
+{
+  ( ((PythonQtPublicPromoter_LibraryBackend*)theWrappedObject)->promoted_DirectoryDeleted(dir));
+}
+
+void PythonQtWrapper_LibraryBackend::DirectoryDiscovered(LibraryBackend* theWrappedObject, const Directory&  dir, const QList<Subdirectory >&  subdirs)
+{
+  ( ((PythonQtPublicPromoter_LibraryBackend*)theWrappedObject)->promoted_DirectoryDiscovered(dir, subdirs));
 }
 
 bool  PythonQtWrapper_LibraryBackend::ExecQuery(LibraryBackend* theWrappedObject, LibraryQuery*  q)
@@ -1529,9 +1634,29 @@ void PythonQtWrapper_LibraryBackend::ResetStatisticsAsync(LibraryBackend* theWra
   ( theWrappedObject->ResetStatisticsAsync(id));
 }
 
+void PythonQtWrapper_LibraryBackend::SongsDeleted(LibraryBackend* theWrappedObject, const QList<Song >&  songs)
+{
+  ( ((PythonQtPublicPromoter_LibraryBackend*)theWrappedObject)->promoted_SongsDeleted(songs));
+}
+
+void PythonQtWrapper_LibraryBackend::SongsDiscovered(LibraryBackend* theWrappedObject, const QList<Song >&  songs)
+{
+  ( ((PythonQtPublicPromoter_LibraryBackend*)theWrappedObject)->promoted_SongsDiscovered(songs));
+}
+
+void PythonQtWrapper_LibraryBackend::SongsStatisticsChanged(LibraryBackend* theWrappedObject, const QList<Song >&  songs)
+{
+  ( ((PythonQtPublicPromoter_LibraryBackend*)theWrappedObject)->promoted_SongsStatisticsChanged(songs));
+}
+
 QList<Subdirectory >  PythonQtWrapper_LibraryBackend::SubdirsInDirectory(LibraryBackend* theWrappedObject, int  id)
 {
   return ( ((PythonQtPublicPromoter_LibraryBackend*)theWrappedObject)->promoted_SubdirsInDirectory(id));
+}
+
+void PythonQtWrapper_LibraryBackend::TotalSongCountUpdated(LibraryBackend* theWrappedObject, int  total)
+{
+  ( ((PythonQtPublicPromoter_LibraryBackend*)theWrappedObject)->promoted_TotalSongCountUpdated(total));
 }
 
 void PythonQtWrapper_LibraryBackend::UpdateManualAlbumArtAsync(LibraryBackend* theWrappedObject, const QString&  artist, const QString&  album, const QString&  art)
@@ -2326,9 +2451,29 @@ void PythonQtWrapper_LibraryView::SetTaskManager(LibraryView* theWrappedObject, 
   ( theWrappedObject->SetTaskManager(task_manager));
 }
 
+void PythonQtWrapper_LibraryView::ShowConfigDialog(LibraryView* theWrappedObject)
+{
+  ( ((PythonQtPublicPromoter_LibraryView*)theWrappedObject)->promoted_ShowConfigDialog());
+}
+
+void PythonQtWrapper_LibraryView::contextMenuEvent(LibraryView* theWrappedObject, QContextMenuEvent*  e)
+{
+  ( ((PythonQtPublicPromoter_LibraryView*)theWrappedObject)->promoted_contextMenuEvent(e));
+}
+
 void PythonQtWrapper_LibraryView::keyboardSearch(LibraryView* theWrappedObject, const QString&  search)
 {
   ( theWrappedObject->keyboardSearch(search));
+}
+
+void PythonQtWrapper_LibraryView::mouseReleaseEvent(LibraryView* theWrappedObject, QMouseEvent*  e)
+{
+  ( ((PythonQtPublicPromoter_LibraryView*)theWrappedObject)->promoted_mouseReleaseEvent(e));
+}
+
+void PythonQtWrapper_LibraryView::paintEvent(LibraryView* theWrappedObject, QPaintEvent*  event)
+{
+  ( ((PythonQtPublicPromoter_LibraryView*)theWrappedObject)->promoted_paintEvent(event));
 }
 
 void PythonQtWrapper_LibraryView::scrollTo(LibraryView* theWrappedObject, const QModelIndex&  index, QAbstractItemView::ScrollHint  hint)
@@ -3929,6 +4074,56 @@ PlayerInterface* PythonQtWrapper_PlayerInterface::new_PlayerInterface(QObject*  
 { 
 return new PythonQtShell_PlayerInterface(parent); }
 
+void PythonQtWrapper_PlayerInterface::Error(PlayerInterface* theWrappedObject, const QString&  message)
+{
+  ( ((PythonQtPublicPromoter_PlayerInterface*)theWrappedObject)->promoted_Error(message));
+}
+
+void PythonQtWrapper_PlayerInterface::ForceShowOSD(PlayerInterface* theWrappedObject, Song  arg__1, bool  toogle)
+{
+  ( ((PythonQtPublicPromoter_PlayerInterface*)theWrappedObject)->promoted_ForceShowOSD(arg__1, toogle));
+}
+
+void PythonQtWrapper_PlayerInterface::Paused(PlayerInterface* theWrappedObject)
+{
+  ( ((PythonQtPublicPromoter_PlayerInterface*)theWrappedObject)->promoted_Paused());
+}
+
+void PythonQtWrapper_PlayerInterface::Playing(PlayerInterface* theWrappedObject)
+{
+  ( ((PythonQtPublicPromoter_PlayerInterface*)theWrappedObject)->promoted_Playing());
+}
+
+void PythonQtWrapper_PlayerInterface::PlaylistFinished(PlayerInterface* theWrappedObject)
+{
+  ( ((PythonQtPublicPromoter_PlayerInterface*)theWrappedObject)->promoted_PlaylistFinished());
+}
+
+void PythonQtWrapper_PlayerInterface::Seeked(PlayerInterface* theWrappedObject, qlonglong  microseconds)
+{
+  ( ((PythonQtPublicPromoter_PlayerInterface*)theWrappedObject)->promoted_Seeked(microseconds));
+}
+
+void PythonQtWrapper_PlayerInterface::SongChangeRequestProcessed(PlayerInterface* theWrappedObject, const QUrl&  url, bool  valid)
+{
+  ( ((PythonQtPublicPromoter_PlayerInterface*)theWrappedObject)->promoted_SongChangeRequestProcessed(url, valid));
+}
+
+void PythonQtWrapper_PlayerInterface::Stopped(PlayerInterface* theWrappedObject)
+{
+  ( ((PythonQtPublicPromoter_PlayerInterface*)theWrappedObject)->promoted_Stopped());
+}
+
+void PythonQtWrapper_PlayerInterface::TrackSkipped(PlayerInterface* theWrappedObject, PlaylistItemPtr  old_track)
+{
+  ( ((PythonQtPublicPromoter_PlayerInterface*)theWrappedObject)->promoted_TrackSkipped(old_track));
+}
+
+void PythonQtWrapper_PlayerInterface::VolumeChanged(PlayerInterface* theWrappedObject, int  volume)
+{
+  ( ((PythonQtPublicPromoter_PlayerInterface*)theWrappedObject)->promoted_VolumeChanged(volume));
+}
+
 
 
 QModelIndex  PythonQtShell_Playlist::buddy(const QModelIndex&  index) const
@@ -4783,6 +4978,21 @@ bool  PythonQtWrapper_Playlist::static_Playlist_CompareItems(int  column, Qt::So
   return (Playlist::CompareItems(column, order, a, b));
 }
 
+void PythonQtWrapper_Playlist::CurrentSongChanged(Playlist* theWrappedObject, const Song&  metadata)
+{
+  ( ((PythonQtPublicPromoter_Playlist*)theWrappedObject)->promoted_CurrentSongChanged(metadata));
+}
+
+void PythonQtWrapper_Playlist::DynamicModeChanged(Playlist* theWrappedObject, bool  dynamic)
+{
+  ( ((PythonQtPublicPromoter_Playlist*)theWrappedObject)->promoted_DynamicModeChanged(dynamic));
+}
+
+void PythonQtWrapper_Playlist::EditingFinished(Playlist* theWrappedObject, const QModelIndex&  index)
+{
+  ( ((PythonQtPublicPromoter_Playlist*)theWrappedObject)->promoted_EditingFinished(index));
+}
+
 QList<PlaylistItemPtr >  PythonQtWrapper_Playlist::GetAllItems(Playlist* theWrappedObject) const
 {
   return ( theWrappedObject->GetAllItems());
@@ -4833,6 +5043,21 @@ void PythonQtWrapper_Playlist::InvalidateDeletedSongs(Playlist* theWrappedObject
   ( theWrappedObject->InvalidateDeletedSongs());
 }
 
+void PythonQtWrapper_Playlist::LoadTracksError(Playlist* theWrappedObject, const QString&  message)
+{
+  ( ((PythonQtPublicPromoter_Playlist*)theWrappedObject)->promoted_LoadTracksError(message));
+}
+
+void PythonQtWrapper_Playlist::PlayRequested(Playlist* theWrappedObject, const QModelIndex&  index)
+{
+  ( ((PythonQtPublicPromoter_Playlist*)theWrappedObject)->promoted_PlayRequested(index));
+}
+
+void PythonQtWrapper_Playlist::PlaylistChanged(Playlist* theWrappedObject)
+{
+  ( ((PythonQtPublicPromoter_Playlist*)theWrappedObject)->promoted_PlaylistChanged());
+}
+
 void PythonQtWrapper_Playlist::RateSong(Playlist* theWrappedObject, const QModelIndex&  index, double  rating)
 {
   ( theWrappedObject->RateSong(index, rating));
@@ -4861,6 +5086,11 @@ void PythonQtWrapper_Playlist::RemoveSongInsertVetoListener(Playlist* theWrapped
 void PythonQtWrapper_Playlist::Restore(Playlist* theWrappedObject)
 {
   ( theWrappedObject->Restore());
+}
+
+void PythonQtWrapper_Playlist::RestoreFinished(Playlist* theWrappedObject)
+{
+  ( ((PythonQtPublicPromoter_Playlist*)theWrappedObject)->promoted_RestoreFinished());
 }
 
 void PythonQtWrapper_Playlist::Save(Playlist* theWrappedObject) const
@@ -6087,6 +6317,16 @@ PlaylistContainer* PythonQtWrapper_PlaylistContainer::new_PlaylistContainer(QWid
 { 
 return new PythonQtShell_PlaylistContainer(parent); }
 
+void PythonQtWrapper_PlaylistContainer::Remove(PlaylistContainer* theWrappedObject, int  id)
+{
+  ( ((PythonQtPublicPromoter_PlaylistContainer*)theWrappedObject)->promoted_Remove(id));
+}
+
+void PythonQtWrapper_PlaylistContainer::Rename(PlaylistContainer* theWrappedObject, int  id, const QString&  new_name)
+{
+  ( ((PythonQtPublicPromoter_PlaylistContainer*)theWrappedObject)->promoted_Rename(id, new_name));
+}
+
 void PythonQtWrapper_PlaylistContainer::SetActions(PlaylistContainer* theWrappedObject, QAction*  new_playlist, QAction*  save_playlist, QAction*  load_playlist, QAction*  next_playlist, QAction*  previous_playlist)
 {
   ( theWrappedObject->SetActions(new_playlist, save_playlist, load_playlist, next_playlist, previous_playlist));
@@ -6095,6 +6335,21 @@ void PythonQtWrapper_PlaylistContainer::SetActions(PlaylistContainer* theWrapped
 void PythonQtWrapper_PlaylistContainer::SetManager(PlaylistContainer* theWrappedObject, PlaylistManager*  manager)
 {
   ( theWrappedObject->SetManager(manager));
+}
+
+void PythonQtWrapper_PlaylistContainer::TabChanged(PlaylistContainer* theWrappedObject, int  id)
+{
+  ( ((PythonQtPublicPromoter_PlaylistContainer*)theWrappedObject)->promoted_TabChanged(id));
+}
+
+void PythonQtWrapper_PlaylistContainer::UndoRedoActionsChanged(PlaylistContainer* theWrappedObject, QAction*  undo, QAction*  redo)
+{
+  ( ((PythonQtPublicPromoter_PlaylistContainer*)theWrappedObject)->promoted_UndoRedoActionsChanged(undo, redo));
+}
+
+void PythonQtWrapper_PlaylistContainer::ViewSelectionModelChanged(PlaylistContainer* theWrappedObject)
+{
+  ( ((PythonQtPublicPromoter_PlaylistContainer*)theWrappedObject)->promoted_ViewSelectionModelChanged());
 }
 
 void PythonQtWrapper_PlaylistContainer::resizeEvent(PlaylistContainer* theWrappedObject, QResizeEvent*  arg__1)
@@ -8309,6 +8564,66 @@ PlaylistManagerInterface* PythonQtWrapper_PlaylistManagerInterface::new_Playlist
 { 
 return new PythonQtShell_PlaylistManagerInterface(parent); }
 
+void PythonQtWrapper_PlaylistManagerInterface::ActiveChanged(PlaylistManagerInterface* theWrappedObject, Playlist*  new_playlist)
+{
+  ( ((PythonQtPublicPromoter_PlaylistManagerInterface*)theWrappedObject)->promoted_ActiveChanged(new_playlist));
+}
+
+void PythonQtWrapper_PlaylistManagerInterface::CurrentChanged(PlaylistManagerInterface* theWrappedObject, Playlist*  new_playlist)
+{
+  ( ((PythonQtPublicPromoter_PlaylistManagerInterface*)theWrappedObject)->promoted_CurrentChanged(new_playlist));
+}
+
+void PythonQtWrapper_PlaylistManagerInterface::CurrentSongChanged(PlaylistManagerInterface* theWrappedObject, const Song&  song)
+{
+  ( ((PythonQtPublicPromoter_PlaylistManagerInterface*)theWrappedObject)->promoted_CurrentSongChanged(song));
+}
+
+void PythonQtWrapper_PlaylistManagerInterface::EditingFinished(PlaylistManagerInterface* theWrappedObject, const QModelIndex&  index)
+{
+  ( ((PythonQtPublicPromoter_PlaylistManagerInterface*)theWrappedObject)->promoted_EditingFinished(index));
+}
+
+void PythonQtWrapper_PlaylistManagerInterface::Error(PlaylistManagerInterface* theWrappedObject, const QString&  message)
+{
+  ( ((PythonQtPublicPromoter_PlaylistManagerInterface*)theWrappedObject)->promoted_Error(message));
+}
+
+void PythonQtWrapper_PlaylistManagerInterface::PlayRequested(PlaylistManagerInterface* theWrappedObject, const QModelIndex&  index)
+{
+  ( ((PythonQtPublicPromoter_PlaylistManagerInterface*)theWrappedObject)->promoted_PlayRequested(index));
+}
+
+void PythonQtWrapper_PlaylistManagerInterface::PlaylistAdded(PlaylistManagerInterface* theWrappedObject, int  id, const QString&  name)
+{
+  ( ((PythonQtPublicPromoter_PlaylistManagerInterface*)theWrappedObject)->promoted_PlaylistAdded(id, name));
+}
+
+void PythonQtWrapper_PlaylistManagerInterface::PlaylistChanged(PlaylistManagerInterface* theWrappedObject, Playlist*  playlist)
+{
+  ( ((PythonQtPublicPromoter_PlaylistManagerInterface*)theWrappedObject)->promoted_PlaylistChanged(playlist));
+}
+
+void PythonQtWrapper_PlaylistManagerInterface::PlaylistManagerInitialized(PlaylistManagerInterface* theWrappedObject)
+{
+  ( ((PythonQtPublicPromoter_PlaylistManagerInterface*)theWrappedObject)->promoted_PlaylistManagerInitialized());
+}
+
+void PythonQtWrapper_PlaylistManagerInterface::PlaylistRemoved(PlaylistManagerInterface* theWrappedObject, int  id)
+{
+  ( ((PythonQtPublicPromoter_PlaylistManagerInterface*)theWrappedObject)->promoted_PlaylistRemoved(id));
+}
+
+void PythonQtWrapper_PlaylistManagerInterface::PlaylistRenamed(PlaylistManagerInterface* theWrappedObject, int  id, const QString&  new_name)
+{
+  ( ((PythonQtPublicPromoter_PlaylistManagerInterface*)theWrappedObject)->promoted_PlaylistRenamed(id, new_name));
+}
+
+void PythonQtWrapper_PlaylistManagerInterface::SummaryTextChanged(PlaylistManagerInterface* theWrappedObject, const QString&  summary)
+{
+  ( ((PythonQtPublicPromoter_PlaylistManagerInterface*)theWrappedObject)->promoted_SummaryTextChanged(summary));
+}
+
 
 
 void PythonQtShell_PlaylistParser::childEvent(QChildEvent*  arg__1)
@@ -8463,6 +8778,16 @@ QString  PythonQtWrapper_PlaylistParser::filters(PlaylistParser* theWrappedObjec
 }
 
 
+
+void PythonQtWrapper_PlaylistSequence::RepeatModeChanged(PlaylistSequence* theWrappedObject, PlaylistSequence::RepeatMode  mode)
+{
+  ( ((PythonQtPublicPromoter_PlaylistSequence*)theWrappedObject)->promoted_RepeatModeChanged(mode));
+}
+
+void PythonQtWrapper_PlaylistSequence::ShuffleModeChanged(PlaylistSequence* theWrappedObject, PlaylistSequence::ShuffleMode  mode)
+{
+  ( ((PythonQtPublicPromoter_PlaylistSequence*)theWrappedObject)->promoted_ShuffleModeChanged(mode));
+}
 
 QMenu*  PythonQtWrapper_PlaylistSequence::repeat_menu(PlaylistSequence* theWrappedObject) const
 {
@@ -9419,148 +9744,5 @@ QString  PythonQtWrapper_SpecialPlaylistType::search_hint_text(SpecialPlaylistTy
 Subdirectory* PythonQtWrapper_Subdirectory::new_Subdirectory()
 { 
 return new PythonQtShell_Subdirectory(); }
-
-
-
-void PythonQtShell_TaskManager::childEvent(QChildEvent*  arg__1)
-{
-if (_wrapper) {
-  PyObject* obj = PyObject_GetAttrString((PyObject*)_wrapper, "childEvent");
-  PyErr_Clear();
-  if (obj && !PythonQtSlotFunction_Check(obj)) {
-    static const char* argumentList[] ={"" , "QChildEvent*"};
-    static const PythonQtMethodInfo* methodInfo = PythonQtMethodInfo::getCachedMethodInfoFromArgumentList(2, argumentList);
-    void* args[2] = {NULL, (void*)&arg__1};
-    PyObject* result = PythonQtSignalTarget::call(obj, methodInfo, args, true);
-    if (result) { Py_DECREF(result); } 
-    Py_DECREF(obj);
-    return;
-  }
-  Py_XDECREF(obj);
-}
-  TaskManager::childEvent(arg__1);
-}
-void PythonQtShell_TaskManager::customEvent(QEvent*  arg__1)
-{
-if (_wrapper) {
-  PyObject* obj = PyObject_GetAttrString((PyObject*)_wrapper, "customEvent");
-  PyErr_Clear();
-  if (obj && !PythonQtSlotFunction_Check(obj)) {
-    static const char* argumentList[] ={"" , "QEvent*"};
-    static const PythonQtMethodInfo* methodInfo = PythonQtMethodInfo::getCachedMethodInfoFromArgumentList(2, argumentList);
-    void* args[2] = {NULL, (void*)&arg__1};
-    PyObject* result = PythonQtSignalTarget::call(obj, methodInfo, args, true);
-    if (result) { Py_DECREF(result); } 
-    Py_DECREF(obj);
-    return;
-  }
-  Py_XDECREF(obj);
-}
-  TaskManager::customEvent(arg__1);
-}
-bool  PythonQtShell_TaskManager::event(QEvent*  arg__1)
-{
-if (_wrapper) {
-  PyObject* obj = PyObject_GetAttrString((PyObject*)_wrapper, "event");
-  PyErr_Clear();
-  if (obj && !PythonQtSlotFunction_Check(obj)) {
-    static const char* argumentList[] ={"bool" , "QEvent*"};
-    static const PythonQtMethodInfo* methodInfo = PythonQtMethodInfo::getCachedMethodInfoFromArgumentList(2, argumentList);
-      bool returnValue = 0;
-    void* args[2] = {NULL, (void*)&arg__1};
-    PyObject* result = PythonQtSignalTarget::call(obj, methodInfo, args, true);
-    if (result) {
-      args[0] = PythonQtConv::ConvertPythonToQt(methodInfo->parameters().at(0), result, false, NULL, &returnValue);
-      if (args[0]!=&returnValue) {
-        if (args[0]==NULL) {
-          PythonQt::priv()->handleVirtualOverloadReturnError("event", methodInfo, result);
-        } else {
-          returnValue = *((bool*)args[0]);
-        }
-      }
-    }
-    if (result) { Py_DECREF(result); } 
-    Py_DECREF(obj);
-    return returnValue;
-  }
-  Py_XDECREF(obj);
-}
-  return TaskManager::event(arg__1);
-}
-bool  PythonQtShell_TaskManager::eventFilter(QObject*  arg__1, QEvent*  arg__2)
-{
-if (_wrapper) {
-  PyObject* obj = PyObject_GetAttrString((PyObject*)_wrapper, "eventFilter");
-  PyErr_Clear();
-  if (obj && !PythonQtSlotFunction_Check(obj)) {
-    static const char* argumentList[] ={"bool" , "QObject*" , "QEvent*"};
-    static const PythonQtMethodInfo* methodInfo = PythonQtMethodInfo::getCachedMethodInfoFromArgumentList(3, argumentList);
-      bool returnValue = 0;
-    void* args[3] = {NULL, (void*)&arg__1, (void*)&arg__2};
-    PyObject* result = PythonQtSignalTarget::call(obj, methodInfo, args, true);
-    if (result) {
-      args[0] = PythonQtConv::ConvertPythonToQt(methodInfo->parameters().at(0), result, false, NULL, &returnValue);
-      if (args[0]!=&returnValue) {
-        if (args[0]==NULL) {
-          PythonQt::priv()->handleVirtualOverloadReturnError("eventFilter", methodInfo, result);
-        } else {
-          returnValue = *((bool*)args[0]);
-        }
-      }
-    }
-    if (result) { Py_DECREF(result); } 
-    Py_DECREF(obj);
-    return returnValue;
-  }
-  Py_XDECREF(obj);
-}
-  return TaskManager::eventFilter(arg__1, arg__2);
-}
-void PythonQtShell_TaskManager::timerEvent(QTimerEvent*  arg__1)
-{
-if (_wrapper) {
-  PyObject* obj = PyObject_GetAttrString((PyObject*)_wrapper, "timerEvent");
-  PyErr_Clear();
-  if (obj && !PythonQtSlotFunction_Check(obj)) {
-    static const char* argumentList[] ={"" , "QTimerEvent*"};
-    static const PythonQtMethodInfo* methodInfo = PythonQtMethodInfo::getCachedMethodInfoFromArgumentList(2, argumentList);
-    void* args[2] = {NULL, (void*)&arg__1};
-    PyObject* result = PythonQtSignalTarget::call(obj, methodInfo, args, true);
-    if (result) { Py_DECREF(result); } 
-    Py_DECREF(obj);
-    return;
-  }
-  Py_XDECREF(obj);
-}
-  TaskManager::timerEvent(arg__1);
-}
-TaskManager* PythonQtWrapper_TaskManager::new_TaskManager(QObject*  parent)
-{ 
-return new PythonQtShell_TaskManager(parent); }
-
-QList<TaskManager_Task >  PythonQtWrapper_TaskManager::GetTasks(TaskManager* theWrappedObject)
-{
-  return ( theWrappedObject->GetTasks());
-}
-
-void PythonQtWrapper_TaskManager::SetTaskBlocksLibraryScans(TaskManager* theWrappedObject, int  id)
-{
-  ( theWrappedObject->SetTaskBlocksLibraryScans(id));
-}
-
-void PythonQtWrapper_TaskManager::SetTaskFinished(TaskManager* theWrappedObject, int  id)
-{
-  ( theWrappedObject->SetTaskFinished(id));
-}
-
-void PythonQtWrapper_TaskManager::SetTaskProgress(TaskManager* theWrappedObject, int  id, int  progress, int  max)
-{
-  ( theWrappedObject->SetTaskProgress(id, progress, max));
-}
-
-int  PythonQtWrapper_TaskManager::StartTask(TaskManager* theWrappedObject, const QString&  name)
-{
-  return ( theWrappedObject->StartTask(name));
-}
 
 

@@ -261,7 +261,7 @@ AbstractMetaFunctionList ShellGenerator::getFunctionsToWrap(const AbstractMetaCl
     | AbstractMetaClass::NotRemovedFromTargetLang | AbstractMetaClass::ClassImplements
     );
   AbstractMetaFunctionList functions2 = meta_class->queryFunctions( 
-    AbstractMetaClass::VirtualFunctions | AbstractMetaClass::WasVisible
+    AbstractMetaClass::WasVisible
     | AbstractMetaClass::NotRemovedFromTargetLang | AbstractMetaClass::ClassImplements
     );
   QSet<AbstractMetaFunction*> set1 = QSet<AbstractMetaFunction*>::fromList(functions);

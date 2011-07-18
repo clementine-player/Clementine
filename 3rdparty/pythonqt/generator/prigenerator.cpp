@@ -83,7 +83,7 @@ static QString combineIncludes(const QString& text) {
   }
   QStringList includeList = includes.toList();
   qSort(includeList);
-  result = includeList.join("\n") + result;
+  result = "#define protected public\n" + includeList.join("\n") + "\n#undef protected\n" + result;
   return result;
 }
 

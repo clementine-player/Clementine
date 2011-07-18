@@ -42,5 +42,6 @@
 #include "internet/internetmodel.h"
 #include "internet/internetservice.h"
 #include "smartplaylists/generator.h"
+#include "ui/iconloader.h"
 
 #endif // BINDINGS_INCLUDES_H

@@ -1,4 +1,5 @@
 #include "clementine1.h"
+#define protected public
 #include <PythonQtConversion.h>
 #include <PythonQtMethodInfo.h>
 #include <PythonQtSignalReceiver.h>
@@ -10,7 +11,168 @@
 #include <qlist.h>
 #include <qobject.h>
 #include <qurl.h>
+#include <taskmanager.h>
 #include <urlhandler.h>
+#undef protected
+
+
+void PythonQtShell_TaskManager::childEvent(QChildEvent*  arg__1)
+{
+if (_wrapper) {
+  PyObject* obj = PyObject_GetAttrString((PyObject*)_wrapper, "childEvent");
+  PyErr_Clear();
+  if (obj && !PythonQtSlotFunction_Check(obj)) {
+    static const char* argumentList[] ={"" , "QChildEvent*"};
+    static const PythonQtMethodInfo* methodInfo = PythonQtMethodInfo::getCachedMethodInfoFromArgumentList(2, argumentList);
+    void* args[2] = {NULL, (void*)&arg__1};
+    PyObject* result = PythonQtSignalTarget::call(obj, methodInfo, args, true);
+    if (result) { Py_DECREF(result); } 
+    Py_DECREF(obj);
+    return;
+  }
+  Py_XDECREF(obj);
+}
+  TaskManager::childEvent(arg__1);
+}
+void PythonQtShell_TaskManager::customEvent(QEvent*  arg__1)
+{
+if (_wrapper) {
+  PyObject* obj = PyObject_GetAttrString((PyObject*)_wrapper, "customEvent");
+  PyErr_Clear();
+  if (obj && !PythonQtSlotFunction_Check(obj)) {
+    static const char* argumentList[] ={"" , "QEvent*"};
+    static const PythonQtMethodInfo* methodInfo = PythonQtMethodInfo::getCachedMethodInfoFromArgumentList(2, argumentList);
+    void* args[2] = {NULL, (void*)&arg__1};
+    PyObject* result = PythonQtSignalTarget::call(obj, methodInfo, args, true);
+    if (result) { Py_DECREF(result); } 
+    Py_DECREF(obj);
+    return;
+  }
+  Py_XDECREF(obj);
+}
+  TaskManager::customEvent(arg__1);
+}
+bool  PythonQtShell_TaskManager::event(QEvent*  arg__1)
+{
+if (_wrapper) {
+  PyObject* obj = PyObject_GetAttrString((PyObject*)_wrapper, "event");
+  PyErr_Clear();
+  if (obj && !PythonQtSlotFunction_Check(obj)) {
+    static const char* argumentList[] ={"bool" , "QEvent*"};
+    static const PythonQtMethodInfo* methodInfo = PythonQtMethodInfo::getCachedMethodInfoFromArgumentList(2, argumentList);
+      bool returnValue = 0;
+    void* args[2] = {NULL, (void*)&arg__1};
+    PyObject* result = PythonQtSignalTarget::call(obj, methodInfo, args, true);
+    if (result) {
+      args[0] = PythonQtConv::ConvertPythonToQt(methodInfo->parameters().at(0), result, false, NULL, &returnValue);
+      if (args[0]!=&returnValue) {
+        if (args[0]==NULL) {
+          PythonQt::priv()->handleVirtualOverloadReturnError("event", methodInfo, result);
+        } else {
+          returnValue = *((bool*)args[0]);
+        }
+      }
+    }
+    if (result) { Py_DECREF(result); } 
+    Py_DECREF(obj);
+    return returnValue;
+  }
+  Py_XDECREF(obj);
+}
+  return TaskManager::event(arg__1);
+}
+bool  PythonQtShell_TaskManager::eventFilter(QObject*  arg__1, QEvent*  arg__2)
+{
+if (_wrapper) {
+  PyObject* obj = PyObject_GetAttrString((PyObject*)_wrapper, "eventFilter");
+  PyErr_Clear();
+  if (obj && !PythonQtSlotFunction_Check(obj)) {
+    static const char* argumentList[] ={"bool" , "QObject*" , "QEvent*"};
+    static const PythonQtMethodInfo* methodInfo = PythonQtMethodInfo::getCachedMethodInfoFromArgumentList(3, argumentList);
+      bool returnValue = 0;
+    void* args[3] = {NULL, (void*)&arg__1, (void*)&arg__2};
+    PyObject* result = PythonQtSignalTarget::call(obj, methodInfo, args, true);
+    if (result) {
+      args[0] = PythonQtConv::ConvertPythonToQt(methodInfo->parameters().at(0), result, false, NULL, &returnValue);
+      if (args[0]!=&returnValue) {
+        if (args[0]==NULL) {
+          PythonQt::priv()->handleVirtualOverloadReturnError("eventFilter", methodInfo, result);
+        } else {
+          returnValue = *((bool*)args[0]);
+        }
+      }
+    }
+    if (result) { Py_DECREF(result); } 
+    Py_DECREF(obj);
+    return returnValue;
+  }
+  Py_XDECREF(obj);
+}
+  return TaskManager::eventFilter(arg__1, arg__2);
+}
+void PythonQtShell_TaskManager::timerEvent(QTimerEvent*  arg__1)
+{
+if (_wrapper) {
+  PyObject* obj = PyObject_GetAttrString((PyObject*)_wrapper, "timerEvent");
+  PyErr_Clear();
+  if (obj && !PythonQtSlotFunction_Check(obj)) {
+    static const char* argumentList[] ={"" , "QTimerEvent*"};
+    static const PythonQtMethodInfo* methodInfo = PythonQtMethodInfo::getCachedMethodInfoFromArgumentList(2, argumentList);
+    void* args[2] = {NULL, (void*)&arg__1};
+    PyObject* result = PythonQtSignalTarget::call(obj, methodInfo, args, true);
+    if (result) { Py_DECREF(result); } 
+    Py_DECREF(obj);
+    return;
+  }
+  Py_XDECREF(obj);
+}
+  TaskManager::timerEvent(arg__1);
+}
+TaskManager* PythonQtWrapper_TaskManager::new_TaskManager(QObject*  parent)
+{ 
+return new PythonQtShell_TaskManager(parent); }
+
+QList<TaskManager_Task >  PythonQtWrapper_TaskManager::GetTasks(TaskManager* theWrappedObject)
+{
+  return ( theWrappedObject->GetTasks());
+}
+
+void PythonQtWrapper_TaskManager::PauseLibraryWatchers(TaskManager* theWrappedObject)
+{
+  ( ((PythonQtPublicPromoter_TaskManager*)theWrappedObject)->promoted_PauseLibraryWatchers());
+}
+
+void PythonQtWrapper_TaskManager::ResumeLibraryWatchers(TaskManager* theWrappedObject)
+{
+  ( ((PythonQtPublicPromoter_TaskManager*)theWrappedObject)->promoted_ResumeLibraryWatchers());
+}
+
+void PythonQtWrapper_TaskManager::SetTaskBlocksLibraryScans(TaskManager* theWrappedObject, int  id)
+{
+  ( theWrappedObject->SetTaskBlocksLibraryScans(id));
+}
+
+void PythonQtWrapper_TaskManager::SetTaskFinished(TaskManager* theWrappedObject, int  id)
+{
+  ( theWrappedObject->SetTaskFinished(id));
+}
+
+void PythonQtWrapper_TaskManager::SetTaskProgress(TaskManager* theWrappedObject, int  id, int  progress, int  max)
+{
+  ( theWrappedObject->SetTaskProgress(id, progress, max));
+}
+
+int  PythonQtWrapper_TaskManager::StartTask(TaskManager* theWrappedObject, const QString&  name)
+{
+  return ( theWrappedObject->StartTask(name));
+}
+
+void PythonQtWrapper_TaskManager::TasksChanged(TaskManager* theWrappedObject)
+{
+  ( ((PythonQtPublicPromoter_TaskManager*)theWrappedObject)->promoted_TasksChanged());
+}
+
+
 
 TaskManager_Task* PythonQtWrapper_TaskManager_Task::new_TaskManager_Task()
 { 
@@ -577,6 +739,11 @@ if (_wrapper) {
 UrlHandler* PythonQtWrapper_UrlHandler::new_UrlHandler(QObject*  parent)
 { 
 return new PythonQtShell_UrlHandler(parent); }
+
+void PythonQtWrapper_UrlHandler::AsyncLoadComplete(UrlHandler* theWrappedObject, const UrlHandler_LoadResult&  result)
+{
+  ( ((PythonQtPublicPromoter_UrlHandler*)theWrappedObject)->promoted_AsyncLoadComplete(result));
+}
 
 UrlHandler_LoadResult  PythonQtWrapper_UrlHandler::LoadNext(UrlHandler* theWrappedObject, const QUrl&  url)
 {
