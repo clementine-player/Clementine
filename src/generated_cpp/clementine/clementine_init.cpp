@@ -9,6 +9,8 @@ PythonQt::priv()->registerClass(&CoverProvider::staticMetaObject, "Clementine", 
 PythonQt::priv()->registerClass(&CoverProviders::staticMetaObject, "Clementine", PythonQtCreateObject<PythonQtWrapper_CoverProviders>, NULL, module, 0);
 PythonQt::priv()->registerCPPClass("CoverSearchResult", "", "Clementine", PythonQtCreateObject<PythonQtWrapper_CoverSearchResult>, PythonQtSetInstanceWrapperOnShell<PythonQtShell_CoverSearchResult>, module, 0);
 PythonQt::priv()->registerCPPClass("Directory", "", "Clementine", PythonQtCreateObject<PythonQtWrapper_Directory>, PythonQtSetInstanceWrapperOnShell<PythonQtShell_Directory>, module, 0);
+PythonQt::priv()->registerClass(&InternetModel::staticMetaObject, "Clementine", PythonQtCreateObject<PythonQtWrapper_InternetModel>, NULL, module, 0);
+PythonQt::priv()->registerClass(&InternetService::staticMetaObject, "Clementine", PythonQtCreateObject<PythonQtWrapper_InternetService>, PythonQtSetInstanceWrapperOnShell<PythonQtShell_InternetService>, module, 0);
 PythonQt::priv()->registerClass(&LibraryBackend::staticMetaObject, "Clementine", PythonQtCreateObject<PythonQtWrapper_LibraryBackend>, PythonQtSetInstanceWrapperOnShell<PythonQtShell_LibraryBackend>, module, 0);
 PythonQt::priv()->registerClass(&LibraryBackendInterface::staticMetaObject, "Clementine", PythonQtCreateObject<PythonQtWrapper_LibraryBackendInterface>, PythonQtSetInstanceWrapperOnShell<PythonQtShell_LibraryBackendInterface>, module, 0);
 PythonQt::priv()->registerCPPClass("LibraryBackendInterface::Album", "", "Clementine", PythonQtCreateObject<PythonQtWrapper_LibraryBackendInterface_Album>, PythonQtSetInstanceWrapperOnShell<PythonQtShell_LibraryBackendInterface_Album>, module, 0);
@@ -27,8 +29,6 @@ PythonQt::priv()->registerClass(&PlaylistManagerInterface::staticMetaObject, "Cl
 PythonQt::priv()->registerClass(&PlaylistParser::staticMetaObject, "Clementine", PythonQtCreateObject<PythonQtWrapper_PlaylistParser>, PythonQtSetInstanceWrapperOnShell<PythonQtShell_PlaylistParser>, module, 0);
 PythonQt::priv()->registerClass(&PlaylistSequence::staticMetaObject, "Clementine", PythonQtCreateObject<PythonQtWrapper_PlaylistSequence>, NULL, module, 0);
 PythonQt::priv()->registerCPPClass("QueryOptions", "", "Clementine", PythonQtCreateObject<PythonQtWrapper_QueryOptions>, NULL, module, 0);
-PythonQt::priv()->registerClass(&InternetModel::staticMetaObject, "Clementine", PythonQtCreateObject<PythonQtWrapper_InternetModel>, NULL, module, 0);
-PythonQt::priv()->registerClass(&InternetService::staticMetaObject, "Clementine", PythonQtCreateObject<PythonQtWrapper_InternetService>, PythonQtSetInstanceWrapperOnShell<PythonQtShell_InternetService>, module, 0);
 PythonQt::priv()->registerCPPClass("Song", "", "Clementine", PythonQtCreateObject<PythonQtWrapper_Song>, PythonQtSetInstanceWrapperOnShell<PythonQtShell_Song>, module, PythonQt::Type_RichCompare);
 PythonQt::priv()->registerClass(&SongInsertVetoListener::staticMetaObject, "Clementine", PythonQtCreateObject<PythonQtWrapper_SongInsertVetoListener>, PythonQtSetInstanceWrapperOnShell<PythonQtShell_SongInsertVetoListener>, module, 0);
 PythonQt::priv()->registerCPPClass("SpecialPlaylistType", "", "Clementine", PythonQtCreateObject<PythonQtWrapper_SpecialPlaylistType>, PythonQtSetInstanceWrapperOnShell<PythonQtShell_SpecialPlaylistType>, module, 0);

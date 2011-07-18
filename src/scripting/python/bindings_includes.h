@@ -39,8 +39,8 @@
 #include "playlist/playlistsequence.h"
 #include "playlist/specialplaylisttype.h"
 #include "playlistparsers/playlistparser.h"
-#include "radio/radiomodel.h"
-#include "radio/radioservice.h"
+#include "internet/internetmodel.h"
+#include "internet/internetservice.h"
 #include "smartplaylists/generator.h"
 
 #endif // BINDINGS_INCLUDES_H

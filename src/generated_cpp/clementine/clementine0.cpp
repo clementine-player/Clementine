@@ -7,6 +7,8 @@
 #include <coverprovider.h>
 #include <coverproviders.h>
 #include <directory.h>
+#include <internetmodel.h>
+#include <internetservice.h>
 #include <librarybackend.h>
 #include <libraryquery.h>
 #include <player.h>
@@ -50,8 +52,6 @@
 #include <qstyle.h>
 #include <qurl.h>
 #include <qwidget.h>
-#include <internetmodel.h>
-#include <internetservice.h>
 #include <song.h>
 #include <specialplaylisttype.h>
 #include <taskmanager.h>
@@ -285,6 +285,424 @@ return new PythonQtShell_CoverSearchResult(); }
 Directory* PythonQtWrapper_Directory::new_Directory()
 { 
 return new PythonQtShell_Directory(); }
+
+
+
+void PythonQtWrapper_InternetModel::AddService(InternetModel* theWrappedObject, InternetService*  service)
+{
+  ( theWrappedObject->AddService(service));
+}
+
+bool  PythonQtWrapper_InternetModel::IsPlayable(InternetModel* theWrappedObject, const QModelIndex&  index) const
+{
+  return ( theWrappedObject->IsPlayable(index));
+}
+
+void PythonQtWrapper_InternetModel::ReloadSettings(InternetModel* theWrappedObject)
+{
+  ( theWrappedObject->ReloadSettings());
+}
+
+void PythonQtWrapper_InternetModel::RemoveService(InternetModel* theWrappedObject, InternetService*  service)
+{
+  ( theWrappedObject->RemoveService(service));
+}
+
+InternetService*  PythonQtWrapper_InternetModel::static_InternetModel_ServiceByName(const QString&  name)
+{
+  return (InternetModel::ServiceByName(name));
+}
+
+InternetService*  PythonQtWrapper_InternetModel::ServiceForIndex(InternetModel* theWrappedObject, const QModelIndex&  index) const
+{
+  return ( theWrappedObject->ServiceForIndex(index));
+}
+
+InternetService*  PythonQtWrapper_InternetModel::ServiceForItem(InternetModel* theWrappedObject, const QStandardItem*  item) const
+{
+  return ( theWrappedObject->ServiceForItem(item));
+}
+
+void PythonQtWrapper_InternetModel::ShowContextMenu(InternetModel* theWrappedObject, const QModelIndex&  merged_model_index, const QPoint&  global_pos)
+{
+  ( theWrappedObject->ShowContextMenu(merged_model_index, global_pos));
+}
+
+Qt::ItemFlags  PythonQtWrapper_InternetModel::flags(InternetModel* theWrappedObject, const QModelIndex&  index) const
+{
+  return ( ((PythonQtPublicPromoter_InternetModel*)theWrappedObject)->promoted_flags(index));
+}
+
+bool  PythonQtWrapper_InternetModel::hasChildren(InternetModel* theWrappedObject, const QModelIndex&  parent) const
+{
+  return ( ((PythonQtPublicPromoter_InternetModel*)theWrappedObject)->promoted_hasChildren(parent));
+}
+
+QMimeData*  PythonQtWrapper_InternetModel::mimeData(InternetModel* theWrappedObject, const QList<QModelIndex >&  indexes) const
+{
+  return ( ((PythonQtPublicPromoter_InternetModel*)theWrappedObject)->promoted_mimeData(indexes));
+}
+
+QStringList  PythonQtWrapper_InternetModel::mimeTypes(InternetModel* theWrappedObject) const
+{
+  return ( ((PythonQtPublicPromoter_InternetModel*)theWrappedObject)->promoted_mimeTypes());
+}
+
+PlayerInterface*  PythonQtWrapper_InternetModel::player(InternetModel* theWrappedObject) const
+{
+  return ( theWrappedObject->player());
+}
+
+int  PythonQtWrapper_InternetModel::rowCount(InternetModel* theWrappedObject, const QModelIndex&  parent) const
+{
+  return ( ((PythonQtPublicPromoter_InternetModel*)theWrappedObject)->promoted_rowCount(parent));
+}
+
+TaskManager*  PythonQtWrapper_InternetModel::task_manager(InternetModel* theWrappedObject) const
+{
+  return ( theWrappedObject->task_manager());
+}
+
+
+
+QStandardItem*  PythonQtShell_InternetService::CreateRootItem()
+{
+if (_wrapper) {
+  PyObject* obj = PyObject_GetAttrString((PyObject*)_wrapper, "CreateRootItem");
+  PyErr_Clear();
+  if (obj && !PythonQtSlotFunction_Check(obj)) {
+    static const char* argumentList[] ={"QStandardItem*"};
+    static const PythonQtMethodInfo* methodInfo = PythonQtMethodInfo::getCachedMethodInfoFromArgumentList(1, argumentList);
+      QStandardItem* returnValue = 0;
+    void* args[1] = {NULL};
+    PyObject* result = PythonQtSignalTarget::call(obj, methodInfo, args, true);
+    if (result) {
+      args[0] = PythonQtConv::ConvertPythonToQt(methodInfo->parameters().at(0), result, false, NULL, &returnValue);
+      if (args[0]!=&returnValue) {
+        if (args[0]==NULL) {
+          PythonQt::priv()->handleVirtualOverloadReturnError("CreateRootItem", methodInfo, result);
+        } else {
+          returnValue = *((QStandardItem**)args[0]);
+        }
+      }
+    }
+    if (result) { Py_DECREF(result); } 
+    Py_DECREF(obj);
+    return returnValue;
+  }
+  Py_XDECREF(obj);
+}
+  return 0;
+}
+QModelIndex  PythonQtShell_InternetService::GetCurrentIndex()
+{
+if (_wrapper) {
+  PyObject* obj = PyObject_GetAttrString((PyObject*)_wrapper, "GetCurrentIndex");
+  PyErr_Clear();
+  if (obj && !PythonQtSlotFunction_Check(obj)) {
+    static const char* argumentList[] ={"QModelIndex"};
+    static const PythonQtMethodInfo* methodInfo = PythonQtMethodInfo::getCachedMethodInfoFromArgumentList(1, argumentList);
+      QModelIndex returnValue;
+    void* args[1] = {NULL};
+    PyObject* result = PythonQtSignalTarget::call(obj, methodInfo, args, true);
+    if (result) {
+      args[0] = PythonQtConv::ConvertPythonToQt(methodInfo->parameters().at(0), result, false, NULL, &returnValue);
+      if (args[0]!=&returnValue) {
+        if (args[0]==NULL) {
+          PythonQt::priv()->handleVirtualOverloadReturnError("GetCurrentIndex", methodInfo, result);
+        } else {
+          returnValue = *((QModelIndex*)args[0]);
+        }
+      }
+    }
+    if (result) { Py_DECREF(result); } 
+    Py_DECREF(obj);
+    return returnValue;
+  }
+  Py_XDECREF(obj);
+}
+  return QModelIndex();
+}
+QWidget*  PythonQtShell_InternetService::HeaderWidget() const
+{
+if (_wrapper) {
+  PyObject* obj = PyObject_GetAttrString((PyObject*)_wrapper, "HeaderWidget");
+  PyErr_Clear();
+  if (obj && !PythonQtSlotFunction_Check(obj)) {
+    static const char* argumentList[] ={"QWidget*"};
+    static const PythonQtMethodInfo* methodInfo = PythonQtMethodInfo::getCachedMethodInfoFromArgumentList(1, argumentList);
+      QWidget* returnValue = 0;
+    void* args[1] = {NULL};
+    PyObject* result = PythonQtSignalTarget::call(obj, methodInfo, args, true);
+    if (result) {
+      args[0] = PythonQtConv::ConvertPythonToQt(methodInfo->parameters().at(0), result, false, NULL, &returnValue);
+      if (args[0]!=&returnValue) {
+        if (args[0]==NULL) {
+          PythonQt::priv()->handleVirtualOverloadReturnError("HeaderWidget", methodInfo, result);
+        } else {
+          returnValue = *((QWidget**)args[0]);
+        }
+      }
+    }
+    if (result) { Py_DECREF(result); } 
+    Py_DECREF(obj);
+    return returnValue;
+  }
+  Py_XDECREF(obj);
+}
+  return InternetService::HeaderWidget();
+}
+QString  PythonQtShell_InternetService::Icon()
+{
+if (_wrapper) {
+  PyObject* obj = PyObject_GetAttrString((PyObject*)_wrapper, "Icon");
+  PyErr_Clear();
+  if (obj && !PythonQtSlotFunction_Check(obj)) {
+    static const char* argumentList[] ={"QString"};
+    static const PythonQtMethodInfo* methodInfo = PythonQtMethodInfo::getCachedMethodInfoFromArgumentList(1, argumentList);
+      QString returnValue;
+    void* args[1] = {NULL};
+    PyObject* result = PythonQtSignalTarget::call(obj, methodInfo, args, true);
+    if (result) {
+      args[0] = PythonQtConv::ConvertPythonToQt(methodInfo->parameters().at(0), result, false, NULL, &returnValue);
+      if (args[0]!=&returnValue) {
+        if (args[0]==NULL) {
+          PythonQt::priv()->handleVirtualOverloadReturnError("Icon", methodInfo, result);
+        } else {
+          returnValue = *((QString*)args[0]);
+        }
+      }
+    }
+    if (result) { Py_DECREF(result); } 
+    Py_DECREF(obj);
+    return returnValue;
+  }
+  Py_XDECREF(obj);
+}
+  return InternetService::Icon();
+}
+void PythonQtShell_InternetService::ItemDoubleClicked(QStandardItem*  item)
+{
+if (_wrapper) {
+  PyObject* obj = PyObject_GetAttrString((PyObject*)_wrapper, "ItemDoubleClicked");
+  PyErr_Clear();
+  if (obj && !PythonQtSlotFunction_Check(obj)) {
+    static const char* argumentList[] ={"" , "QStandardItem*"};
+    static const PythonQtMethodInfo* methodInfo = PythonQtMethodInfo::getCachedMethodInfoFromArgumentList(2, argumentList);
+    void* args[2] = {NULL, (void*)&item};
+    PyObject* result = PythonQtSignalTarget::call(obj, methodInfo, args, true);
+    if (result) { Py_DECREF(result); } 
+    Py_DECREF(obj);
+    return;
+  }
+  Py_XDECREF(obj);
+}
+  InternetService::ItemDoubleClicked(item);
+}
+void PythonQtShell_InternetService::LazyPopulate(QStandardItem*  parent)
+{
+if (_wrapper) {
+  PyObject* obj = PyObject_GetAttrString((PyObject*)_wrapper, "LazyPopulate");
+  PyErr_Clear();
+  if (obj && !PythonQtSlotFunction_Check(obj)) {
+    static const char* argumentList[] ={"" , "QStandardItem*"};
+    static const PythonQtMethodInfo* methodInfo = PythonQtMethodInfo::getCachedMethodInfoFromArgumentList(2, argumentList);
+    void* args[2] = {NULL, (void*)&parent};
+    PyObject* result = PythonQtSignalTarget::call(obj, methodInfo, args, true);
+    if (result) { Py_DECREF(result); } 
+    Py_DECREF(obj);
+    return;
+  }
+  Py_XDECREF(obj);
+}
+  
+}
+void PythonQtShell_InternetService::ReloadSettings()
+{
+if (_wrapper) {
+  PyObject* obj = PyObject_GetAttrString((PyObject*)_wrapper, "ReloadSettings");
+  PyErr_Clear();
+  if (obj && !PythonQtSlotFunction_Check(obj)) {
+    static const char* argumentList[] ={""};
+    static const PythonQtMethodInfo* methodInfo = PythonQtMethodInfo::getCachedMethodInfoFromArgumentList(1, argumentList);
+    void* args[1] = {NULL};
+    PyObject* result = PythonQtSignalTarget::call(obj, methodInfo, args, true);
+    if (result) { Py_DECREF(result); } 
+    Py_DECREF(obj);
+    return;
+  }
+  Py_XDECREF(obj);
+}
+  InternetService::ReloadSettings();
+}
+void PythonQtShell_InternetService::ShowContextMenu(const QModelIndex&  index, const QPoint&  global_pos)
+{
+if (_wrapper) {
+  PyObject* obj = PyObject_GetAttrString((PyObject*)_wrapper, "ShowContextMenu");
+  PyErr_Clear();
+  if (obj && !PythonQtSlotFunction_Check(obj)) {
+    static const char* argumentList[] ={"" , "const QModelIndex&" , "const QPoint&"};
+    static const PythonQtMethodInfo* methodInfo = PythonQtMethodInfo::getCachedMethodInfoFromArgumentList(3, argumentList);
+    void* args[3] = {NULL, (void*)&index, (void*)&global_pos};
+    PyObject* result = PythonQtSignalTarget::call(obj, methodInfo, args, true);
+    if (result) { Py_DECREF(result); } 
+    Py_DECREF(obj);
+    return;
+  }
+  Py_XDECREF(obj);
+}
+  InternetService::ShowContextMenu(index, global_pos);
+}
+void PythonQtShell_InternetService::childEvent(QChildEvent*  arg__1)
+{
+if (_wrapper) {
+  PyObject* obj = PyObject_GetAttrString((PyObject*)_wrapper, "childEvent");
+  PyErr_Clear();
+  if (obj && !PythonQtSlotFunction_Check(obj)) {
+    static const char* argumentList[] ={"" , "QChildEvent*"};
+    static const PythonQtMethodInfo* methodInfo = PythonQtMethodInfo::getCachedMethodInfoFromArgumentList(2, argumentList);
+    void* args[2] = {NULL, (void*)&arg__1};
+    PyObject* result = PythonQtSignalTarget::call(obj, methodInfo, args, true);
+    if (result) { Py_DECREF(result); } 
+    Py_DECREF(obj);
+    return;
+  }
+  Py_XDECREF(obj);
+}
+  InternetService::childEvent(arg__1);
+}
+void PythonQtShell_InternetService::customEvent(QEvent*  arg__1)
+{
+if (_wrapper) {
+  PyObject* obj = PyObject_GetAttrString((PyObject*)_wrapper, "customEvent");
+  PyErr_Clear();
+  if (obj && !PythonQtSlotFunction_Check(obj)) {
+    static const char* argumentList[] ={"" , "QEvent*"};
+    static const PythonQtMethodInfo* methodInfo = PythonQtMethodInfo::getCachedMethodInfoFromArgumentList(2, argumentList);
+    void* args[2] = {NULL, (void*)&arg__1};
+    PyObject* result = PythonQtSignalTarget::call(obj, methodInfo, args, true);
+    if (result) { Py_DECREF(result); } 
+    Py_DECREF(obj);
+    return;
+  }
+  Py_XDECREF(obj);
+}
+  InternetService::customEvent(arg__1);
+}
+bool  PythonQtShell_InternetService::event(QEvent*  arg__1)
+{
+if (_wrapper) {
+  PyObject* obj = PyObject_GetAttrString((PyObject*)_wrapper, "event");
+  PyErr_Clear();
+  if (obj && !PythonQtSlotFunction_Check(obj)) {
+    static const char* argumentList[] ={"bool" , "QEvent*"};
+    static const PythonQtMethodInfo* methodInfo = PythonQtMethodInfo::getCachedMethodInfoFromArgumentList(2, argumentList);
+      bool returnValue = 0;
+    void* args[2] = {NULL, (void*)&arg__1};
+    PyObject* result = PythonQtSignalTarget::call(obj, methodInfo, args, true);
+    if (result) {
+      args[0] = PythonQtConv::ConvertPythonToQt(methodInfo->parameters().at(0), result, false, NULL, &returnValue);
+      if (args[0]!=&returnValue) {
+        if (args[0]==NULL) {
+          PythonQt::priv()->handleVirtualOverloadReturnError("event", methodInfo, result);
+        } else {
+          returnValue = *((bool*)args[0]);
+        }
+      }
+    }
+    if (result) { Py_DECREF(result); } 
+    Py_DECREF(obj);
+    return returnValue;
+  }
+  Py_XDECREF(obj);
+}
+  return InternetService::event(arg__1);
+}
+bool  PythonQtShell_InternetService::eventFilter(QObject*  arg__1, QEvent*  arg__2)
+{
+if (_wrapper) {
+  PyObject* obj = PyObject_GetAttrString((PyObject*)_wrapper, "eventFilter");
+  PyErr_Clear();
+  if (obj && !PythonQtSlotFunction_Check(obj)) {
+    static const char* argumentList[] ={"bool" , "QObject*" , "QEvent*"};
+    static const PythonQtMethodInfo* methodInfo = PythonQtMethodInfo::getCachedMethodInfoFromArgumentList(3, argumentList);
+      bool returnValue = 0;
+    void* args[3] = {NULL, (void*)&arg__1, (void*)&arg__2};
+    PyObject* result = PythonQtSignalTarget::call(obj, methodInfo, args, true);
+    if (result) {
+      args[0] = PythonQtConv::ConvertPythonToQt(methodInfo->parameters().at(0), result, false, NULL, &returnValue);
+      if (args[0]!=&returnValue) {
+        if (args[0]==NULL) {
+          PythonQt::priv()->handleVirtualOverloadReturnError("eventFilter", methodInfo, result);
+        } else {
+          returnValue = *((bool*)args[0]);
+        }
+      }
+    }
+    if (result) { Py_DECREF(result); } 
+    Py_DECREF(obj);
+    return returnValue;
+  }
+  Py_XDECREF(obj);
+}
+  return InternetService::eventFilter(arg__1, arg__2);
+}
+void PythonQtShell_InternetService::timerEvent(QTimerEvent*  arg__1)
+{
+if (_wrapper) {
+  PyObject* obj = PyObject_GetAttrString((PyObject*)_wrapper, "timerEvent");
+  PyErr_Clear();
+  if (obj && !PythonQtSlotFunction_Check(obj)) {
+    static const char* argumentList[] ={"" , "QTimerEvent*"};
+    static const PythonQtMethodInfo* methodInfo = PythonQtMethodInfo::getCachedMethodInfoFromArgumentList(2, argumentList);
+    void* args[2] = {NULL, (void*)&arg__1};
+    PyObject* result = PythonQtSignalTarget::call(obj, methodInfo, args, true);
+    if (result) { Py_DECREF(result); } 
+    Py_DECREF(obj);
+    return;
+  }
+  Py_XDECREF(obj);
+}
+  InternetService::timerEvent(arg__1);
+}
+InternetService* PythonQtWrapper_InternetService::new_InternetService(const QString&  name, InternetModel*  model, QObject*  parent)
+{ 
+return new PythonQtShell_InternetService(name, model, parent); }
+
+QWidget*  PythonQtWrapper_InternetService::HeaderWidget(InternetService* theWrappedObject) const
+{
+  return ( ((PythonQtPublicPromoter_InternetService*)theWrappedObject)->promoted_HeaderWidget());
+}
+
+QString  PythonQtWrapper_InternetService::Icon(InternetService* theWrappedObject)
+{
+  return ( ((PythonQtPublicPromoter_InternetService*)theWrappedObject)->promoted_Icon());
+}
+
+void PythonQtWrapper_InternetService::ItemDoubleClicked(InternetService* theWrappedObject, QStandardItem*  item)
+{
+  ( ((PythonQtPublicPromoter_InternetService*)theWrappedObject)->promoted_ItemDoubleClicked(item));
+}
+
+void PythonQtWrapper_InternetService::ReloadSettings(InternetService* theWrappedObject)
+{
+  ( ((PythonQtPublicPromoter_InternetService*)theWrappedObject)->promoted_ReloadSettings());
+}
+
+void PythonQtWrapper_InternetService::ShowContextMenu(InternetService* theWrappedObject, const QModelIndex&  index, const QPoint&  global_pos)
+{
+  ( ((PythonQtPublicPromoter_InternetService*)theWrappedObject)->promoted_ShowContextMenu(index, global_pos));
+}
+
+InternetModel*  PythonQtWrapper_InternetService::model(InternetService* theWrappedObject) const
+{
+  return ( theWrappedObject->model());
+}
+
+QString  PythonQtWrapper_InternetService::name(InternetService* theWrappedObject) const
+{
+  return ( theWrappedObject->name());
+}
 
 
 
@@ -8105,424 +8523,6 @@ void PythonQtWrapper_QueryOptions::set_max_age(QueryOptions* theWrappedObject, i
 void PythonQtWrapper_QueryOptions::set_query_mode(QueryOptions* theWrappedObject, QueryOptions::QueryMode  query_mode)
 {
   ( theWrappedObject->set_query_mode(query_mode));
-}
-
-
-
-void PythonQtWrapper_InternetModel::AddService(InternetModel* theWrappedObject, InternetService*  service)
-{
-  ( theWrappedObject->AddService(service));
-}
-
-bool  PythonQtWrapper_InternetModel::IsPlayable(InternetModel* theWrappedObject, const QModelIndex&  index) const
-{
-  return ( theWrappedObject->IsPlayable(index));
-}
-
-void PythonQtWrapper_InternetModel::ReloadSettings(InternetModel* theWrappedObject)
-{
-  ( theWrappedObject->ReloadSettings());
-}
-
-void PythonQtWrapper_InternetModel::RemoveService(InternetModel* theWrappedObject, InternetService*  service)
-{
-  ( theWrappedObject->RemoveService(service));
-}
-
-InternetService*  PythonQtWrapper_InternetModel::static_InternetModel_ServiceByName(const QString&  name)
-{
-  return (InternetModel::ServiceByName(name));
-}
-
-InternetService*  PythonQtWrapper_InternetModel::ServiceForIndex(InternetModel* theWrappedObject, const QModelIndex&  index) const
-{
-  return ( theWrappedObject->ServiceForIndex(index));
-}
-
-InternetService*  PythonQtWrapper_InternetModel::ServiceForItem(InternetModel* theWrappedObject, const QStandardItem*  item) const
-{
-  return ( theWrappedObject->ServiceForItem(item));
-}
-
-void PythonQtWrapper_InternetModel::ShowContextMenu(InternetModel* theWrappedObject, const QModelIndex&  merged_model_index, const QPoint&  global_pos)
-{
-  ( theWrappedObject->ShowContextMenu(merged_model_index, global_pos));
-}
-
-Qt::ItemFlags  PythonQtWrapper_InternetModel::flags(InternetModel* theWrappedObject, const QModelIndex&  index) const
-{
-  return ( ((PythonQtPublicPromoter_InternetModel*)theWrappedObject)->promoted_flags(index));
-}
-
-bool  PythonQtWrapper_InternetModel::hasChildren(InternetModel* theWrappedObject, const QModelIndex&  parent) const
-{
-  return ( ((PythonQtPublicPromoter_InternetModel*)theWrappedObject)->promoted_hasChildren(parent));
-}
-
-QMimeData*  PythonQtWrapper_InternetModel::mimeData(InternetModel* theWrappedObject, const QList<QModelIndex >&  indexes) const
-{
-  return ( ((PythonQtPublicPromoter_InternetModel*)theWrappedObject)->promoted_mimeData(indexes));
-}
-
-QStringList  PythonQtWrapper_InternetModel::mimeTypes(InternetModel* theWrappedObject) const
-{
-  return ( ((PythonQtPublicPromoter_InternetModel*)theWrappedObject)->promoted_mimeTypes());
-}
-
-PlayerInterface*  PythonQtWrapper_InternetModel::player(InternetModel* theWrappedObject) const
-{
-  return ( theWrappedObject->player());
-}
-
-int  PythonQtWrapper_InternetModel::rowCount(InternetModel* theWrappedObject, const QModelIndex&  parent) const
-{
-  return ( ((PythonQtPublicPromoter_InternetModel*)theWrappedObject)->promoted_rowCount(parent));
-}
-
-TaskManager*  PythonQtWrapper_InternetModel::task_manager(InternetModel* theWrappedObject) const
-{
-  return ( theWrappedObject->task_manager());
-}
-
-
-
-QStandardItem*  PythonQtShell_InternetService::CreateRootItem()
-{
-if (_wrapper) {
-  PyObject* obj = PyObject_GetAttrString((PyObject*)_wrapper, "CreateRootItem");
-  PyErr_Clear();
-  if (obj && !PythonQtSlotFunction_Check(obj)) {
-    static const char* argumentList[] ={"QStandardItem*"};
-    static const PythonQtMethodInfo* methodInfo = PythonQtMethodInfo::getCachedMethodInfoFromArgumentList(1, argumentList);
-      QStandardItem* returnValue = 0;
-    void* args[1] = {NULL};
-    PyObject* result = PythonQtSignalTarget::call(obj, methodInfo, args, true);
-    if (result) {
-      args[0] = PythonQtConv::ConvertPythonToQt(methodInfo->parameters().at(0), result, false, NULL, &returnValue);
-      if (args[0]!=&returnValue) {
-        if (args[0]==NULL) {
-          PythonQt::priv()->handleVirtualOverloadReturnError("CreateRootItem", methodInfo, result);
-        } else {
-          returnValue = *((QStandardItem**)args[0]);
-        }
-      }
-    }
-    if (result) { Py_DECREF(result); } 
-    Py_DECREF(obj);
-    return returnValue;
-  }
-  Py_XDECREF(obj);
-}
-  return 0;
-}
-QModelIndex  PythonQtShell_InternetService::GetCurrentIndex()
-{
-if (_wrapper) {
-  PyObject* obj = PyObject_GetAttrString((PyObject*)_wrapper, "GetCurrentIndex");
-  PyErr_Clear();
-  if (obj && !PythonQtSlotFunction_Check(obj)) {
-    static const char* argumentList[] ={"QModelIndex"};
-    static const PythonQtMethodInfo* methodInfo = PythonQtMethodInfo::getCachedMethodInfoFromArgumentList(1, argumentList);
-      QModelIndex returnValue;
-    void* args[1] = {NULL};
-    PyObject* result = PythonQtSignalTarget::call(obj, methodInfo, args, true);
-    if (result) {
-      args[0] = PythonQtConv::ConvertPythonToQt(methodInfo->parameters().at(0), result, false, NULL, &returnValue);
-      if (args[0]!=&returnValue) {
-        if (args[0]==NULL) {
-          PythonQt::priv()->handleVirtualOverloadReturnError("GetCurrentIndex", methodInfo, result);
-        } else {
-          returnValue = *((QModelIndex*)args[0]);
-        }
-      }
-    }
-    if (result) { Py_DECREF(result); } 
-    Py_DECREF(obj);
-    return returnValue;
-  }
-  Py_XDECREF(obj);
-}
-  return QModelIndex();
-}
-QWidget*  PythonQtShell_InternetService::HeaderWidget() const
-{
-if (_wrapper) {
-  PyObject* obj = PyObject_GetAttrString((PyObject*)_wrapper, "HeaderWidget");
-  PyErr_Clear();
-  if (obj && !PythonQtSlotFunction_Check(obj)) {
-    static const char* argumentList[] ={"QWidget*"};
-    static const PythonQtMethodInfo* methodInfo = PythonQtMethodInfo::getCachedMethodInfoFromArgumentList(1, argumentList);
-      QWidget* returnValue = 0;
-    void* args[1] = {NULL};
-    PyObject* result = PythonQtSignalTarget::call(obj, methodInfo, args, true);
-    if (result) {
-      args[0] = PythonQtConv::ConvertPythonToQt(methodInfo->parameters().at(0), result, false, NULL, &returnValue);
-      if (args[0]!=&returnValue) {
-        if (args[0]==NULL) {
-          PythonQt::priv()->handleVirtualOverloadReturnError("HeaderWidget", methodInfo, result);
-        } else {
-          returnValue = *((QWidget**)args[0]);
-        }
-      }
-    }
-    if (result) { Py_DECREF(result); } 
-    Py_DECREF(obj);
-    return returnValue;
-  }
-  Py_XDECREF(obj);
-}
-  return InternetService::HeaderWidget();
-}
-QString  PythonQtShell_InternetService::Icon()
-{
-if (_wrapper) {
-  PyObject* obj = PyObject_GetAttrString((PyObject*)_wrapper, "Icon");
-  PyErr_Clear();
-  if (obj && !PythonQtSlotFunction_Check(obj)) {
-    static const char* argumentList[] ={"QString"};
-    static const PythonQtMethodInfo* methodInfo = PythonQtMethodInfo::getCachedMethodInfoFromArgumentList(1, argumentList);
-      QString returnValue;
-    void* args[1] = {NULL};
-    PyObject* result = PythonQtSignalTarget::call(obj, methodInfo, args, true);
-    if (result) {
-      args[0] = PythonQtConv::ConvertPythonToQt(methodInfo->parameters().at(0), result, false, NULL, &returnValue);
-      if (args[0]!=&returnValue) {
-        if (args[0]==NULL) {
-          PythonQt::priv()->handleVirtualOverloadReturnError("Icon", methodInfo, result);
-        } else {
-          returnValue = *((QString*)args[0]);
-        }
-      }
-    }
-    if (result) { Py_DECREF(result); } 
-    Py_DECREF(obj);
-    return returnValue;
-  }
-  Py_XDECREF(obj);
-}
-  return InternetService::Icon();
-}
-void PythonQtShell_InternetService::ItemDoubleClicked(QStandardItem*  item)
-{
-if (_wrapper) {
-  PyObject* obj = PyObject_GetAttrString((PyObject*)_wrapper, "ItemDoubleClicked");
-  PyErr_Clear();
-  if (obj && !PythonQtSlotFunction_Check(obj)) {
-    static const char* argumentList[] ={"" , "QStandardItem*"};
-    static const PythonQtMethodInfo* methodInfo = PythonQtMethodInfo::getCachedMethodInfoFromArgumentList(2, argumentList);
-    void* args[2] = {NULL, (void*)&item};
-    PyObject* result = PythonQtSignalTarget::call(obj, methodInfo, args, true);
-    if (result) { Py_DECREF(result); } 
-    Py_DECREF(obj);
-    return;
-  }
-  Py_XDECREF(obj);
-}
-  InternetService::ItemDoubleClicked(item);
-}
-void PythonQtShell_InternetService::LazyPopulate(QStandardItem*  parent)
-{
-if (_wrapper) {
-  PyObject* obj = PyObject_GetAttrString((PyObject*)_wrapper, "LazyPopulate");
-  PyErr_Clear();
-  if (obj && !PythonQtSlotFunction_Check(obj)) {
-    static const char* argumentList[] ={"" , "QStandardItem*"};
-    static const PythonQtMethodInfo* methodInfo = PythonQtMethodInfo::getCachedMethodInfoFromArgumentList(2, argumentList);
-    void* args[2] = {NULL, (void*)&parent};
-    PyObject* result = PythonQtSignalTarget::call(obj, methodInfo, args, true);
-    if (result) { Py_DECREF(result); } 
-    Py_DECREF(obj);
-    return;
-  }
-  Py_XDECREF(obj);
-}
-  
-}
-void PythonQtShell_InternetService::ReloadSettings()
-{
-if (_wrapper) {
-  PyObject* obj = PyObject_GetAttrString((PyObject*)_wrapper, "ReloadSettings");
-  PyErr_Clear();
-  if (obj && !PythonQtSlotFunction_Check(obj)) {
-    static const char* argumentList[] ={""};
-    static const PythonQtMethodInfo* methodInfo = PythonQtMethodInfo::getCachedMethodInfoFromArgumentList(1, argumentList);
-    void* args[1] = {NULL};
-    PyObject* result = PythonQtSignalTarget::call(obj, methodInfo, args, true);
-    if (result) { Py_DECREF(result); } 
-    Py_DECREF(obj);
-    return;
-  }
-  Py_XDECREF(obj);
-}
-  InternetService::ReloadSettings();
-}
-void PythonQtShell_InternetService::ShowContextMenu(const QModelIndex&  index, const QPoint&  global_pos)
-{
-if (_wrapper) {
-  PyObject* obj = PyObject_GetAttrString((PyObject*)_wrapper, "ShowContextMenu");
-  PyErr_Clear();
-  if (obj && !PythonQtSlotFunction_Check(obj)) {
-    static const char* argumentList[] ={"" , "const QModelIndex&" , "const QPoint&"};
-    static const PythonQtMethodInfo* methodInfo = PythonQtMethodInfo::getCachedMethodInfoFromArgumentList(3, argumentList);
-    void* args[3] = {NULL, (void*)&index, (void*)&global_pos};
-    PyObject* result = PythonQtSignalTarget::call(obj, methodInfo, args, true);
-    if (result) { Py_DECREF(result); } 
-    Py_DECREF(obj);
-    return;
-  }
-  Py_XDECREF(obj);
-}
-  InternetService::ShowContextMenu(index, global_pos);
-}
-void PythonQtShell_InternetService::childEvent(QChildEvent*  arg__1)
-{
-if (_wrapper) {
-  PyObject* obj = PyObject_GetAttrString((PyObject*)_wrapper, "childEvent");
-  PyErr_Clear();
-  if (obj && !PythonQtSlotFunction_Check(obj)) {
-    static const char* argumentList[] ={"" , "QChildEvent*"};
-    static const PythonQtMethodInfo* methodInfo = PythonQtMethodInfo::getCachedMethodInfoFromArgumentList(2, argumentList);
-    void* args[2] = {NULL, (void*)&arg__1};
-    PyObject* result = PythonQtSignalTarget::call(obj, methodInfo, args, true);
-    if (result) { Py_DECREF(result); } 
-    Py_DECREF(obj);
-    return;
-  }
-  Py_XDECREF(obj);
-}
-  InternetService::childEvent(arg__1);
-}
-void PythonQtShell_InternetService::customEvent(QEvent*  arg__1)
-{
-if (_wrapper) {
-  PyObject* obj = PyObject_GetAttrString((PyObject*)_wrapper, "customEvent");
-  PyErr_Clear();
-  if (obj && !PythonQtSlotFunction_Check(obj)) {
-    static const char* argumentList[] ={"" , "QEvent*"};
-    static const PythonQtMethodInfo* methodInfo = PythonQtMethodInfo::getCachedMethodInfoFromArgumentList(2, argumentList);
-    void* args[2] = {NULL, (void*)&arg__1};
-    PyObject* result = PythonQtSignalTarget::call(obj, methodInfo, args, true);
-    if (result) { Py_DECREF(result); } 
-    Py_DECREF(obj);
-    return;
-  }
-  Py_XDECREF(obj);
-}
-  InternetService::customEvent(arg__1);
-}
-bool  PythonQtShell_InternetService::event(QEvent*  arg__1)
-{
-if (_wrapper) {
-  PyObject* obj = PyObject_GetAttrString((PyObject*)_wrapper, "event");
-  PyErr_Clear();
-  if (obj && !PythonQtSlotFunction_Check(obj)) {
-    static const char* argumentList[] ={"bool" , "QEvent*"};
-    static const PythonQtMethodInfo* methodInfo = PythonQtMethodInfo::getCachedMethodInfoFromArgumentList(2, argumentList);
-      bool returnValue = 0;
-    void* args[2] = {NULL, (void*)&arg__1};
-    PyObject* result = PythonQtSignalTarget::call(obj, methodInfo, args, true);
-    if (result) {
-      args[0] = PythonQtConv::ConvertPythonToQt(methodInfo->parameters().at(0), result, false, NULL, &returnValue);
-      if (args[0]!=&returnValue) {
-        if (args[0]==NULL) {
-          PythonQt::priv()->handleVirtualOverloadReturnError("event", methodInfo, result);
-        } else {
-          returnValue = *((bool*)args[0]);
-        }
-      }
-    }
-    if (result) { Py_DECREF(result); } 
-    Py_DECREF(obj);
-    return returnValue;
-  }
-  Py_XDECREF(obj);
-}
-  return InternetService::event(arg__1);
-}
-bool  PythonQtShell_InternetService::eventFilter(QObject*  arg__1, QEvent*  arg__2)
-{
-if (_wrapper) {
-  PyObject* obj = PyObject_GetAttrString((PyObject*)_wrapper, "eventFilter");
-  PyErr_Clear();
-  if (obj && !PythonQtSlotFunction_Check(obj)) {
-    static const char* argumentList[] ={"bool" , "QObject*" , "QEvent*"};
-    static const PythonQtMethodInfo* methodInfo = PythonQtMethodInfo::getCachedMethodInfoFromArgumentList(3, argumentList);
-      bool returnValue = 0;
-    void* args[3] = {NULL, (void*)&arg__1, (void*)&arg__2};
-    PyObject* result = PythonQtSignalTarget::call(obj, methodInfo, args, true);
-    if (result) {
-      args[0] = PythonQtConv::ConvertPythonToQt(methodInfo->parameters().at(0), result, false, NULL, &returnValue);
-      if (args[0]!=&returnValue) {
-        if (args[0]==NULL) {
-          PythonQt::priv()->handleVirtualOverloadReturnError("eventFilter", methodInfo, result);
-        } else {
-          returnValue = *((bool*)args[0]);
-        }
-      }
-    }
-    if (result) { Py_DECREF(result); } 
-    Py_DECREF(obj);
-    return returnValue;
-  }
-  Py_XDECREF(obj);
-}
-  return InternetService::eventFilter(arg__1, arg__2);
-}
-void PythonQtShell_InternetService::timerEvent(QTimerEvent*  arg__1)
-{
-if (_wrapper) {
-  PyObject* obj = PyObject_GetAttrString((PyObject*)_wrapper, "timerEvent");
-  PyErr_Clear();
-  if (obj && !PythonQtSlotFunction_Check(obj)) {
-    static const char* argumentList[] ={"" , "QTimerEvent*"};
-    static const PythonQtMethodInfo* methodInfo = PythonQtMethodInfo::getCachedMethodInfoFromArgumentList(2, argumentList);
-    void* args[2] = {NULL, (void*)&arg__1};
-    PyObject* result = PythonQtSignalTarget::call(obj, methodInfo, args, true);
-    if (result) { Py_DECREF(result); } 
-    Py_DECREF(obj);
-    return;
-  }
-  Py_XDECREF(obj);
-}
-  InternetService::timerEvent(arg__1);
-}
-InternetService* PythonQtWrapper_InternetService::new_InternetService(const QString&  name, InternetModel*  model, QObject*  parent)
-{ 
-return new PythonQtShell_InternetService(name, model, parent); }
-
-QWidget*  PythonQtWrapper_InternetService::HeaderWidget(InternetService* theWrappedObject) const
-{
-  return ( ((PythonQtPublicPromoter_InternetService*)theWrappedObject)->promoted_HeaderWidget());
-}
-
-QString  PythonQtWrapper_InternetService::Icon(InternetService* theWrappedObject)
-{
-  return ( ((PythonQtPublicPromoter_InternetService*)theWrappedObject)->promoted_Icon());
-}
-
-void PythonQtWrapper_InternetService::ItemDoubleClicked(InternetService* theWrappedObject, QStandardItem*  item)
-{
-  ( ((PythonQtPublicPromoter_InternetService*)theWrappedObject)->promoted_ItemDoubleClicked(item));
-}
-
-void PythonQtWrapper_InternetService::ReloadSettings(InternetService* theWrappedObject)
-{
-  ( ((PythonQtPublicPromoter_InternetService*)theWrappedObject)->promoted_ReloadSettings());
-}
-
-void PythonQtWrapper_InternetService::ShowContextMenu(InternetService* theWrappedObject, const QModelIndex&  index, const QPoint&  global_pos)
-{
-  ( ((PythonQtPublicPromoter_InternetService*)theWrappedObject)->promoted_ShowContextMenu(index, global_pos));
-}
-
-InternetModel*  PythonQtWrapper_InternetService::model(InternetService* theWrappedObject) const
-{
-  return ( theWrappedObject->model());
-}
-
-QString  PythonQtWrapper_InternetService::name(InternetService* theWrappedObject) const
-{
-  return ( theWrappedObject->name());
 }
 
 

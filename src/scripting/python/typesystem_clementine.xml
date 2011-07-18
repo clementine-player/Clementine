@@ -5,16 +5,16 @@
 
   <enum-type name="Engine::State" />
   <enum-type name="Engine::TrackChangeType" flags="Engine::TrackChangeFlags" />
+  <enum-type name="InternetModel::PlayBehaviour" />
+  <enum-type name="InternetModel::Role" />
+  <enum-type name="InternetModel::Type" />
+  <enum-type name="InternetService::AddMode" />
   <enum-type name="Playlist::Column" />
   <enum-type name="Playlist::LastFMStatus" />
   <enum-type name="Playlist::Role" />
   <enum-type name="PlaylistSequence::ShuffleMode" />
   <enum-type name="PlaylistSequence::RepeatMode" />
   <enum-type name="QueryOptions::QueryMode" />
-  <enum-type name="RadioModel::PlayBehaviour" />
-  <enum-type name="RadioModel::Role" />
-  <enum-type name="RadioModel::Type" />
-  <enum-type name="RadioService::AddMode" />
   <enum-type name="Song::FileType" />
   <enum-type name="UrlHandler_LoadResult::Type" />
 
@@ -39,6 +39,8 @@
   <object-type name="CoverProviderFactory" />
   <object-type name="CoverProviders" />
   <object-type name="Engine::Base" />
+  <object-type name="InternetModel" />
+  <object-type name="InternetService" />
   <object-type name="LibraryBackend" />
   <object-type name="LibraryBackendInterface" />
   <object-type name="LibraryQuery">
@@ -62,8 +64,6 @@
   <object-type name="PlaylistManagerInterface" />
   <object-type name="PlaylistParser" />
   <object-type name="PlaylistSequence" />
-  <object-type name="RadioModel" />
-  <object-type name="RadioService" />
   <object-type name="smart_playlists::GeneratorPtr" />
   <object-type name="SongInsertVetoListener" />
   <object-type name="SpecialPlaylistType" />

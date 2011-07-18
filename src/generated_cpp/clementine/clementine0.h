@@ -6,6 +6,8 @@
 #include <coverprovider.h>
 #include <coverproviders.h>
 #include <directory.h>
+#include <internetmodel.h>
+#include <internetservice.h>
 #include <librarybackend.h>
 #include <libraryquery.h>
 #include <libraryview.h>
@@ -51,8 +53,6 @@
 #include <qstyle.h>
 #include <qurl.h>
 #include <qwidget.h>
-#include <internetmodel.h>
-#include <internetservice.h>
 #include <song.h>
 #include <specialplaylisttype.h>
 #include <taskmanager.h>
@@ -178,6 +178,98 @@ void py_set_path(Directory* theWrappedObject, QString  path){ theWrappedObject->
 QString  py_get_path(Directory* theWrappedObject){ return theWrappedObject->path; }
 void py_set_id(Directory* theWrappedObject, int  id){ theWrappedObject->id = id; }
 int  py_get_id(Directory* theWrappedObject){ return theWrappedObject->id; }
+};
+
+
+
+
+
+class PythonQtPublicPromoter_InternetModel : public InternetModel
+{ public:
+inline Qt::ItemFlags  promoted_flags(const QModelIndex&  index) const { return InternetModel::flags(index); }
+inline bool  promoted_hasChildren(const QModelIndex&  parent) const { return InternetModel::hasChildren(parent); }
+inline QMimeData*  promoted_mimeData(const QList<QModelIndex >&  indexes) const { return InternetModel::mimeData(indexes); }
+inline QStringList  promoted_mimeTypes() const { return InternetModel::mimeTypes(); }
+inline int  promoted_rowCount(const QModelIndex&  parent) const { return InternetModel::rowCount(parent); }
+};
+
+class PythonQtWrapper_InternetModel : public QObject
+{ Q_OBJECT
+public:
+Q_ENUMS(PlayBehaviour Role Type )
+enum PlayBehaviour{
+  PlayBehaviour_None = InternetModel::PlayBehaviour_None,   PlayBehaviour_UseSongLoader = InternetModel::PlayBehaviour_UseSongLoader,   PlayBehaviour_SingleItem = InternetModel::PlayBehaviour_SingleItem,   PlayBehaviour_DoubleClickAction = InternetModel::PlayBehaviour_DoubleClickAction};
+enum Role{
+  Role_Type = InternetModel::Role_Type,   Role_PlayBehaviour = InternetModel::Role_PlayBehaviour,   Role_Url = InternetModel::Role_Url,   Role_SongMetadata = InternetModel::Role_SongMetadata,   Role_CanLazyLoad = InternetModel::Role_CanLazyLoad,   Role_Service = InternetModel::Role_Service,   RoleCount = InternetModel::RoleCount};
+enum Type{
+  Type_Service = InternetModel::Type_Service,   TypeCount = InternetModel::TypeCount};
+public slots:
+void delete_InternetModel(InternetModel* obj) { delete obj; } 
+   void AddService(InternetModel* theWrappedObject, InternetService*  service);
+   bool  IsPlayable(InternetModel* theWrappedObject, const QModelIndex&  index) const;
+   void ReloadSettings(InternetModel* theWrappedObject);
+   void RemoveService(InternetModel* theWrappedObject, InternetService*  service);
+   InternetService*  static_InternetModel_ServiceByName(const QString&  name);
+   InternetService*  ServiceForIndex(InternetModel* theWrappedObject, const QModelIndex&  index) const;
+   InternetService*  ServiceForItem(InternetModel* theWrappedObject, const QStandardItem*  item) const;
+   void ShowContextMenu(InternetModel* theWrappedObject, const QModelIndex&  merged_model_index, const QPoint&  global_pos);
+   Qt::ItemFlags  flags(InternetModel* theWrappedObject, const QModelIndex&  index) const;
+   bool  hasChildren(InternetModel* theWrappedObject, const QModelIndex&  parent) const;
+   QMimeData*  mimeData(InternetModel* theWrappedObject, const QList<QModelIndex >&  indexes) const;
+   QStringList  mimeTypes(InternetModel* theWrappedObject) const;
+   PlayerInterface*  player(InternetModel* theWrappedObject) const;
+   int  rowCount(InternetModel* theWrappedObject, const QModelIndex&  parent) const;
+   TaskManager*  task_manager(InternetModel* theWrappedObject) const;
+};
+
+
+
+
+
+class PythonQtShell_InternetService : public InternetService
+{
+public:
+    PythonQtShell_InternetService(const QString&  name, InternetModel*  model, QObject*  parent = NULL):InternetService(name, model, parent),_wrapper(NULL) {};
+
+virtual QStandardItem*  CreateRootItem();
+virtual QModelIndex  GetCurrentIndex();
+virtual QWidget*  HeaderWidget() const;
+virtual QString  Icon();
+virtual void ItemDoubleClicked(QStandardItem*  item);
+virtual void LazyPopulate(QStandardItem*  parent);
+virtual void ReloadSettings();
+virtual void ShowContextMenu(const QModelIndex&  index, const QPoint&  global_pos);
+virtual void childEvent(QChildEvent*  arg__1);
+virtual void customEvent(QEvent*  arg__1);
+virtual bool  event(QEvent*  arg__1);
+virtual bool  eventFilter(QObject*  arg__1, QEvent*  arg__2);
+virtual void timerEvent(QTimerEvent*  arg__1);
+
+  PythonQtInstanceWrapper* _wrapper; 
+};
+
+class PythonQtPublicPromoter_InternetService : public InternetService
+{ public:
+inline QWidget*  promoted_HeaderWidget() const { return InternetService::HeaderWidget(); }
+inline QString  promoted_Icon() { return InternetService::Icon(); }
+inline void promoted_ItemDoubleClicked(QStandardItem*  item) { InternetService::ItemDoubleClicked(item); }
+inline void promoted_ReloadSettings() { InternetService::ReloadSettings(); }
+inline void promoted_ShowContextMenu(const QModelIndex&  index, const QPoint&  global_pos) { InternetService::ShowContextMenu(index, global_pos); }
+};
+
+class PythonQtWrapper_InternetService : public QObject
+{ Q_OBJECT
+public:
+public slots:
+InternetService* new_InternetService(const QString&  name, InternetModel*  model, QObject*  parent = NULL);
+void delete_InternetService(InternetService* obj) { delete obj; } 
+   QWidget*  HeaderWidget(InternetService* theWrappedObject) const;
+   QString  Icon(InternetService* theWrappedObject);
+   void ItemDoubleClicked(InternetService* theWrappedObject, QStandardItem*  item);
+   void ReloadSettings(InternetService* theWrappedObject);
+   void ShowContextMenu(InternetService* theWrappedObject, const QModelIndex&  index, const QPoint&  global_pos);
+   InternetModel*  model(InternetService* theWrappedObject) const;
+   QString  name(InternetService* theWrappedObject) const;
 };
 
 
@@ -1166,98 +1258,6 @@ void delete_QueryOptions(QueryOptions* obj) { delete obj; }
    void set_filter(QueryOptions* theWrappedObject, const QString&  filter);
    void set_max_age(QueryOptions* theWrappedObject, int  max_age);
    void set_query_mode(QueryOptions* theWrappedObject, QueryOptions::QueryMode  query_mode);
-};
-
-
-
-
-
-class PythonQtPublicPromoter_InternetModel : public InternetModel
-{ public:
-inline Qt::ItemFlags  promoted_flags(const QModelIndex&  index) const { return InternetModel::flags(index); }
-inline bool  promoted_hasChildren(const QModelIndex&  parent) const { return InternetModel::hasChildren(parent); }
-inline QMimeData*  promoted_mimeData(const QList<QModelIndex >&  indexes) const { return InternetModel::mimeData(indexes); }
-inline QStringList  promoted_mimeTypes() const { return InternetModel::mimeTypes(); }
-inline int  promoted_rowCount(const QModelIndex&  parent) const { return InternetModel::rowCount(parent); }
-};
-
-class PythonQtWrapper_InternetModel : public QObject
-{ Q_OBJECT
-public:
-Q_ENUMS(PlayBehaviour Role Type )
-enum PlayBehaviour{
-  PlayBehaviour_None = InternetModel::PlayBehaviour_None,   PlayBehaviour_UseSongLoader = InternetModel::PlayBehaviour_UseSongLoader,   PlayBehaviour_SingleItem = InternetModel::PlayBehaviour_SingleItem,   PlayBehaviour_DoubleClickAction = InternetModel::PlayBehaviour_DoubleClickAction};
-enum Role{
-  Role_Type = InternetModel::Role_Type,   Role_PlayBehaviour = InternetModel::Role_PlayBehaviour,   Role_Url = InternetModel::Role_Url,   Role_SongMetadata = InternetModel::Role_SongMetadata,   Role_CanLazyLoad = InternetModel::Role_CanLazyLoad,   Role_Service = InternetModel::Role_Service,   RoleCount = InternetModel::RoleCount};
-enum Type{
-  Type_Service = InternetModel::Type_Service,   TypeCount = InternetModel::TypeCount};
-public slots:
-void delete_InternetModel(InternetModel* obj) { delete obj; } 
-   void AddService(InternetModel* theWrappedObject, InternetService*  service);
-   bool  IsPlayable(InternetModel* theWrappedObject, const QModelIndex&  index) const;
-   void ReloadSettings(InternetModel* theWrappedObject);
-   void RemoveService(InternetModel* theWrappedObject, InternetService*  service);
-   InternetService*  static_InternetModel_ServiceByName(const QString&  name);
-   InternetService*  ServiceForIndex(InternetModel* theWrappedObject, const QModelIndex&  index) const;
-   InternetService*  ServiceForItem(InternetModel* theWrappedObject, const QStandardItem*  item) const;
-   void ShowContextMenu(InternetModel* theWrappedObject, const QModelIndex&  merged_model_index, const QPoint&  global_pos);
-   Qt::ItemFlags  flags(InternetModel* theWrappedObject, const QModelIndex&  index) const;
-   bool  hasChildren(InternetModel* theWrappedObject, const QModelIndex&  parent) const;
-   QMimeData*  mimeData(InternetModel* theWrappedObject, const QList<QModelIndex >&  indexes) const;
-   QStringList  mimeTypes(InternetModel* theWrappedObject) const;
-   PlayerInterface*  player(InternetModel* theWrappedObject) const;
-   int  rowCount(InternetModel* theWrappedObject, const QModelIndex&  parent) const;
-   TaskManager*  task_manager(InternetModel* theWrappedObject) const;
-};
-
-
-
-
-
-class PythonQtShell_InternetService : public InternetService
-{
-public:
-    PythonQtShell_InternetService(const QString&  name, InternetModel*  model, QObject*  parent = NULL):InternetService(name, model, parent),_wrapper(NULL) {};
-
-virtual QStandardItem*  CreateRootItem();
-virtual QModelIndex  GetCurrentIndex();
-virtual QWidget*  HeaderWidget() const;
-virtual QString  Icon();
-virtual void ItemDoubleClicked(QStandardItem*  item);
-virtual void LazyPopulate(QStandardItem*  parent);
-virtual void ReloadSettings();
-virtual void ShowContextMenu(const QModelIndex&  index, const QPoint&  global_pos);
-virtual void childEvent(QChildEvent*  arg__1);
-virtual void customEvent(QEvent*  arg__1);
-virtual bool  event(QEvent*  arg__1);
-virtual bool  eventFilter(QObject*  arg__1, QEvent*  arg__2);
-virtual void timerEvent(QTimerEvent*  arg__1);
-
-  PythonQtInstanceWrapper* _wrapper; 
-};
-
-class PythonQtPublicPromoter_InternetService : public InternetService
-{ public:
-inline QWidget*  promoted_HeaderWidget() const { return InternetService::HeaderWidget(); }
-inline QString  promoted_Icon() { return InternetService::Icon(); }
-inline void promoted_ItemDoubleClicked(QStandardItem*  item) { InternetService::ItemDoubleClicked(item); }
-inline void promoted_ReloadSettings() { InternetService::ReloadSettings(); }
-inline void promoted_ShowContextMenu(const QModelIndex&  index, const QPoint&  global_pos) { InternetService::ShowContextMenu(index, global_pos); }
-};
-
-class PythonQtWrapper_InternetService : public QObject
-{ Q_OBJECT
-public:
-public slots:
-InternetService* new_InternetService(const QString&  name, InternetModel*  model, QObject*  parent = NULL);
-void delete_InternetService(InternetService* obj) { delete obj; } 
-   QWidget*  HeaderWidget(InternetService* theWrappedObject) const;
-   QString  Icon(InternetService* theWrappedObject);
-   void ItemDoubleClicked(InternetService* theWrappedObject, QStandardItem*  item);
-   void ReloadSettings(InternetService* theWrappedObject);
-   void ShowContextMenu(InternetService* theWrappedObject, const QModelIndex&  index, const QPoint&  global_pos);
-   InternetModel*  model(InternetService* theWrappedObject) const;
-   QString  name(InternetService* theWrappedObject) const;
 };
 
 
