@@ -33,7 +33,6 @@ class InternetPlaylistItem : public PlaylistItem {
   Options options() const;
 
   bool InitFromQuery(const SqlRow& query);
-  void BindToQuery(QSqlQuery *query) const;
 
   Song Metadata() const;
   QUrl Url() const;

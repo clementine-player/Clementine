@@ -41,8 +41,8 @@ PlaylistItem* PlaylistItem::NewFromType(const QString& type) {
     return new JamendoPlaylistItem(type);
   if (type == "Stream" || type == "File")
     return new SongPlaylistItem(type);
-  if (type == "Internet")
-    return new InternetPlaylistItem(type);
+  if (type == "Internet" || type == "Radio")
+    return new InternetPlaylistItem("Internet");
 
   qLog(Warning) << "Invalid PlaylistItem type:" << type;
   return NULL;
