@@ -26,7 +26,7 @@ class SettingsDialog(QDialog):
     self.username.setText(settings.value("username", ""))
     self.password.setText(settings.value("password", ""))
 
-    QDialog.showEvent(self, event)
+    #QDialog.showEvent(self, event)
 
   def accept(self):
     # Save the settings

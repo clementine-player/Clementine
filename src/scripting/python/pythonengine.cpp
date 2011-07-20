@@ -43,6 +43,7 @@
 
 #include <QFile>
 #include <QModelIndex>
+#include <QNetworkCookie>
 #include <QtDebug>
 
 Q_DECLARE_METATYPE(QModelIndex)
@@ -126,6 +127,7 @@ bool PythonEngine::EnsureInitialised() {
   RegisterListConverter<CoverSearchResult>("QList<CoverSearchResult>");
   RegisterListConverter<PlaylistItemPtr>("QList<PlaylistItemPtr>");
   RegisterListConverter<QModelIndex>("QList<QModelIndex>");
+  RegisterListConverter<QNetworkCookie>("QList<QNetworkCookie>");
 
   // Connect stdout, stderr
   connect(python_qt, SIGNAL(pythonStdOut(QString)), SLOT(PythonStdOut(QString)));

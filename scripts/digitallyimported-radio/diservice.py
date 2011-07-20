@@ -5,6 +5,11 @@ from servicebase import DigitallyImportedServiceBase
 from PythonQt.QtCore    import QSettings, QUrl
 from PythonQt.QtNetwork import QNetworkCookie, QNetworkCookieJar, QNetworkRequest
 
+import logging
+
+LOGGER = logging.getLogger("di.service")
+
+
 class DigitallyImportedService(DigitallyImportedServiceBase):
   HOMEPAGE_URL = QUrl("http://www.di.fm/")
   HOMEPAGE_NAME = "di.fm"
@@ -29,8 +34,15 @@ class DigitallyImportedService(DigitallyImportedServiceBase):
   def __init__(self, model, settings_dialog_callback):
     DigitallyImportedServiceBase.Init(self, model, settings_dialog_callback)
 
-  def ReloadSettings(self):
-    DigitallyImportedServiceBase.ReloadSettings(self)
+    self.last_username_password = None
+    self.MaybeReloadCookies()
+
+  def MaybeReloadCookies(self):
+    if self.last_username_password == (self.username, self.password):
+      return
+    self.last_username_password = (self.username, self.password)
+
+    LOGGER.debug("Setting network cookies after config change")
 
     # If a username and password were set by the user then set them in the
     # cookies we pass to www.di.fm
@@ -38,13 +50,16 @@ class DigitallyImportedService(DigitallyImportedServiceBase):
     if len(self.username) and len(self.password):
       cookie_jar = QNetworkCookieJar()
       cookie_jar.setCookiesFromUrl([
-        QNetworkCookie("_amember_ru", self.username),
-        QNetworkCookie("_amember_rp", self.password),
+        QNetworkCookie("_amember_ru", self.username.encode("utf-8")),
+        QNetworkCookie("_amember_rp", self.password.encode("utf-8")),
       ], QUrl("http://www.di.fm/"))
       self.network.setCookieJar(cookie_jar)
 
   def LoadStation(self, key):
+    self.MaybeReloadCookies()
     playlist_url = self.PLAYLISTS[self.audio_type]["url"] % key
+
+    LOGGER.info("Getting playlist URL '%s'" % playlist_url)
 
     # Start fetching the playlist.  Can't use a SongLoader to do this because
     # we have to use the cookies we set in ReloadSettings()

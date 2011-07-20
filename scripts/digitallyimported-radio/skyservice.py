@@ -34,6 +34,7 @@ class SkyFmService(DigitallyImportedServiceBase):
     DigitallyImportedServiceBase.Init(self, model, settings_dialog_callback)
 
     self.last_key = None
+    self.load_station_reply = None
 
   def LoadStation(self, key):
     # Non-premium streams can just start loading straight away
@@ -47,19 +48,19 @@ class SkyFmService(DigitallyImportedServiceBase):
       QUrl.toPercentEncoding(self.username),
       QUrl.toPercentEncoding(self.password))
 
-    reply = self.network.post(request, postdata)
-    reply.connect("finished()", self.LoadHashKeyFinished)
+    self.load_station_reply = self.network.post(request, postdata)
+    self.load_station_reply.connect("finished()", self.LoadHashKeyFinished)
 
     self.last_key = key
 
   def LoadHashKeyFinished(self):
-    # Get the QNetworkReply that called this slot
-    reply = self.sender()
-    reply.deleteLater()
+    if self.load_station_reply is None:
+      return
 
     # Parse the hashKey out of the reply
-    data = reply.readAll()
+    data = self.load_station_reply.readAll().data()
     match = self.HASHKEY_RE.search(data)
+    self.load_station_reply = None
 
     if match:
       hash_key = match.group(1)

@@ -59,6 +59,7 @@
 
 #include <QDir>
 #include <QLibraryInfo>
+#include <QNetworkCookie>
 #include <QNetworkProxyFactory>
 #include <QSqlDatabase>
 #include <QSqlQuery>
@@ -215,6 +216,8 @@ int main(int argc, char *argv[]) {
   qRegisterMetaType<smart_playlists::GeneratorPtr>("smart_playlists::GeneratorPtr");
   qRegisterMetaType<ColumnAlignmentMap>("ColumnAlignmentMap");
   qRegisterMetaTypeStreamOperators<QMap<int, int> >("ColumnAlignmentMap");
+  qRegisterMetaType<QNetworkCookie>("QNetworkCookie");
+  qRegisterMetaType<QList<QNetworkCookie> >("QList<QNetworkCookie>");
 
   qRegisterMetaType<GstBuffer*>("GstBuffer*");
   qRegisterMetaType<GstElement*>("GstElement*");
