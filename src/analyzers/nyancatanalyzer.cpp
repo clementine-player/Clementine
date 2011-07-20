@@ -23,7 +23,7 @@
 #include <QTimerEvent>
 #include <QBrush>
 
-const char* NyanCatAnalyzer::kName = "Nyan nyan nyan";
+const char* NyanCatAnalyzer::kName = "Nyanalyzer cat";
 const float NyanCatAnalyzer::kPixelScale = 0.02f;
 
 
