@@ -33,7 +33,7 @@ SomaFMUrlHandler::SomaFMUrlHandler(SomaFMService* service, QObject* parent)
 {
 }
 
-UrlHandler_LoadResult SomaFMUrlHandler::StartLoading(const QUrl& url) {
+UrlHandler::LoadResult SomaFMUrlHandler::StartLoading(const QUrl& url) {
   QUrl playlist_url = url;
   playlist_url.setScheme("http");
 
@@ -44,7 +44,7 @@ UrlHandler_LoadResult SomaFMUrlHandler::StartLoading(const QUrl& url) {
   if (!task_id_)
     task_id_ = service_->model()->task_manager()->StartTask(tr("Loading stream"));
 
-  return UrlHandler_LoadResult(url, UrlHandler_LoadResult::WillLoadAsynchronously);
+  return LoadResult(url, LoadResult::WillLoadAsynchronously);
 }
 
 void SomaFMUrlHandler::LoadPlaylistFinished() {
@@ -58,8 +58,7 @@ void SomaFMUrlHandler::LoadPlaylistFinished() {
   if (reply->error() != QNetworkReply::NoError) {
     // TODO: Error handling
     qLog(Error) << reply->errorString();
-    emit AsyncLoadComplete(UrlHandler_LoadResult(
-        original_url, UrlHandler_LoadResult::NoMoreTracks));
+    emit AsyncLoadComplete(LoadResult(original_url, LoadResult::NoMoreTracks));
     return;
   }
 
@@ -72,7 +71,6 @@ void SomaFMUrlHandler::LoadPlaylistFinished() {
   QSettings s(temp_file.fileName(), QSettings::IniFormat);
   s.beginGroup("playlist");
 
-  emit AsyncLoadComplete(UrlHandler_LoadResult(
-      original_url, UrlHandler_LoadResult::TrackAvailable,
-      s.value("File1").toString()));
+  emit AsyncLoadComplete(LoadResult(original_url, LoadResult::TrackAvailable,
+                                    s.value("File1").toString()));
 }

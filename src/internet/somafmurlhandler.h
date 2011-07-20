@@ -30,7 +30,7 @@ public:
   SomaFMUrlHandler(SomaFMService* service, QObject* parent);
 
   QString scheme() const { return "somafm"; }
-  UrlHandler_LoadResult StartLoading(const QUrl& url);
+  LoadResult StartLoading(const QUrl& url);
 
 private slots:
   void LoadPlaylistFinished();

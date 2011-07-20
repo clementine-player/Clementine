@@ -22,22 +22,22 @@
 #include <QMutex>
 #include <QObject>
 
-struct TaskManager_Task {
-  int id;
-  QString name;
-  int progress;
-  int progress_max;
-  bool blocks_library_scans;
-};
-
 class TaskManager : public QObject {
   Q_OBJECT
 
 public:
   TaskManager(QObject* parent = 0);
 
+  struct Task {
+    int id;
+    QString name;
+    int progress;
+    int progress_max;
+    bool blocks_library_scans;
+  };
+
   // Everything here is thread safe
-  QList<TaskManager_Task> GetTasks();
+  QList<Task> GetTasks();
 
   int StartTask(const QString& name);
   void SetTaskBlocksLibraryScans(int id);
@@ -52,7 +52,7 @@ signals:
 
 private:
   QMutex mutex_;
-  QMap<int, TaskManager_Task> tasks_;
+  QMap<int, Task> tasks_;
   int next_task_id_;
 };
 

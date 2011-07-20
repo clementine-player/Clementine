@@ -23,12 +23,12 @@ LastFMUrlHandler::LastFMUrlHandler(LastFMService* service, QObject* parent)
     service_(service) {
 }
 
-UrlHandler_LoadResult LastFMUrlHandler::StartLoading(const QUrl& url) {
+UrlHandler::LoadResult LastFMUrlHandler::StartLoading(const QUrl& url) {
   if (!service_->IsAuthenticated())
-    return UrlHandler_LoadResult();
+    return LoadResult();
 
   service_->Tune(url);
-  return UrlHandler_LoadResult(url, UrlHandler_LoadResult::WillLoadAsynchronously);
+  return LoadResult(url, LoadResult::WillLoadAsynchronously);
 }
 
 void LastFMUrlHandler::TunerTrackAvailable() {
@@ -36,14 +36,13 @@ void LastFMUrlHandler::TunerTrackAvailable() {
 }
 
 void LastFMUrlHandler::TunerError() {
-  emit AsyncLoadComplete(UrlHandler_LoadResult(
-      service_->last_url_, UrlHandler_LoadResult::NoMoreTracks));
+  emit AsyncLoadComplete(LoadResult(service_->last_url_, LoadResult::NoMoreTracks));
 }
 
-UrlHandler_LoadResult LastFMUrlHandler::LoadNext(const QUrl& url) {
+UrlHandler::LoadResult LastFMUrlHandler::LoadNext(const QUrl& url) {
   const QUrl media_url = service_->DeququeNextMediaUrl();
   if (media_url.isEmpty()) {
-    return UrlHandler_LoadResult();
+    return LoadResult();
   }
-  return UrlHandler_LoadResult(url, UrlHandler_LoadResult::TrackAvailable, media_url);
+  return LoadResult(url, LoadResult::TrackAvailable, media_url);
 }

@@ -686,10 +686,10 @@ void DeviceManager::DeviceTaskStarted(int id) {
 }
 
 void DeviceManager::TasksChanged() {
-  QList<TaskManager_Task> tasks = task_manager_->GetTasks();
+  QList<TaskManager::Task> tasks = task_manager_->GetTasks();
   QList<QPersistentModelIndex> finished_tasks = active_tasks_.values();
 
-  foreach (const TaskManager_Task& task, tasks) {
+  foreach (const TaskManager::Task& task, tasks) {
     if (!active_tasks_.contains(task.id))
       continue;
 

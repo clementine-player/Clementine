@@ -17,7 +17,7 @@
 
 #include "urlhandler.h"
 
-UrlHandler_LoadResult::UrlHandler_LoadResult(
+UrlHandler::LoadResult::LoadResult(
     const QUrl& original_url, Type type, const QUrl& media_url)
       : original_url_(original_url), type_(type), media_url_(media_url)
 {

@@ -28,7 +28,7 @@ public:
   SpotifyUrlHandler(SpotifyService* service, QObject* parent);
 
   QString scheme() const { return "spotify"; }
-  UrlHandler_LoadResult StartLoading(const QUrl& url);
+  LoadResult StartLoading(const QUrl& url);
 
 private:
   SpotifyService* service_;

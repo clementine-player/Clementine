@@ -27,7 +27,7 @@ SpotifyUrlHandler::SpotifyUrlHandler(SpotifyService* service, QObject* parent)
     service_(service) {
 }
 
-UrlHandler_LoadResult SpotifyUrlHandler::StartLoading(const QUrl& url) {
+UrlHandler::LoadResult SpotifyUrlHandler::StartLoading(const QUrl& url) {
   // Pick an unused local port.  There's a possible race condition here -
   // something else might grab the port before gstreamer does.
   quint16 port = 0;
@@ -40,13 +40,13 @@ UrlHandler_LoadResult SpotifyUrlHandler::StartLoading(const QUrl& url) {
 
   if (port == 0) {
     qLog(Warning) << "Couldn't pick an unused port";
-    return UrlHandler_LoadResult();
+    return LoadResult();
   }
 
   // Tell Spotify to start sending to this port
   service_->server()->StartPlayback(url.toString(), port);
 
   // Tell gstreamer to listen on this port
-  return UrlHandler_LoadResult(url, UrlHandler_LoadResult::TrackAvailable,
-                               QUrl("tcp://localhost:" + QString::number(port)));
+  return LoadResult(url, LoadResult::TrackAvailable,
+                    QUrl("tcp://localhost:" + QString::number(port)));
 }

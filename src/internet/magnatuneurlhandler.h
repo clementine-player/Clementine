@@ -28,7 +28,7 @@ public:
   MagnatuneUrlHandler(MagnatuneService* service, QObject* parent);
 
   QString scheme() const { return "magnatune"; }
-  UrlHandler_LoadResult StartLoading(const QUrl& url);
+  LoadResult StartLoading(const QUrl& url);
 
 private:
   MagnatuneService* service_;

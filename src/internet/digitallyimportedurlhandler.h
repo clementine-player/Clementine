@@ -28,7 +28,7 @@ public:
   DigitallyImportedUrlHandler(DigitallyImportedServiceBase* service);
 
   QString scheme() const;
-  UrlHandler_LoadResult StartLoading(const QUrl& url);
+  LoadResult StartLoading(const QUrl& url);
 
   void CancelTask();
   void LoadPlaylistFinished(QIODevice* device);

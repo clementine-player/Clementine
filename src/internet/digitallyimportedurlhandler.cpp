@@ -33,8 +33,8 @@ QString DigitallyImportedUrlHandler::scheme() const {
   return service_->url_scheme_;
 }
 
-UrlHandler_LoadResult DigitallyImportedUrlHandler::StartLoading(const QUrl& url) {
-  UrlHandler_LoadResult ret(url);
+UrlHandler::LoadResult DigitallyImportedUrlHandler::StartLoading(const QUrl& url) {
+  LoadResult ret(url);
   if (task_id_ != -1) {
     return ret;
   }
@@ -60,7 +60,7 @@ UrlHandler_LoadResult DigitallyImportedUrlHandler::StartLoading(const QUrl& url)
   // Tell the user what's happening
   task_id_ = service_->model()->task_manager()->StartTask(tr("Loading stream"));
 
-  ret.type_ = UrlHandler_LoadResult::WillLoadAsynchronously;
+  ret.type_ = LoadResult::WillLoadAsynchronously;
   return ret;
 }
 
@@ -84,10 +84,8 @@ void DigitallyImportedUrlHandler::LoadPlaylistFinished(QIODevice* device) {
     return;
   }
 
-  emit AsyncLoadComplete(UrlHandler_LoadResult(
-    last_original_url_,
-    UrlHandler_LoadResult::TrackAvailable,
-    songs[0].url()));
+  emit AsyncLoadComplete(LoadResult(
+    last_original_url_, LoadResult::TrackAvailable, songs[0].url()));
 }
 
 void DigitallyImportedUrlHandler::CancelTask() {
