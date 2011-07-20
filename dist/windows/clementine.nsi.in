@@ -171,11 +171,6 @@ Section "Clementine" Clementine
   File "QtXml4.dll"
   File "zlib1.dll"
 
-  ; Python library
-  File "python27.dll"
-  File "Python27.zip"
-  File "libpythonqt.dll"
-
   ; Check the OS.  If Vista or newer, use Default Programs
   nsisos::osversion
   StrCpy $R0 $0
@@ -227,30 +222,6 @@ Section "Clementine" Clementine
     ${registerExtension} "$INSTDIR\clementine.exe" ".xspf" "XSPF Audio File"
     ${registerExtension} "$INSTDIR\clementine.exe" ".asx" "Windows Media Audio/Video playlist"
   done:
-SectionEnd
-
-Section "Python extensions" DLLs
-  SetOutPath "$INSTDIR\DLLs"
-
-  File "/oname=_bsddb.pyd" "DLLs\_bsddb.pyd"
-  File "/oname=_ctypes.pyd" "DLLs\_ctypes.pyd"
-  File "/oname=_ctypes_test.pyd" "DLLs\_ctypes_test.pyd"
-  File "/oname=_elementtree.pyd" "DLLs\_elementtree.pyd"
-  File "/oname=_hashlib.pyd" "DLLs\_hashlib.pyd"
-  File "/oname=_msi.pyd" "DLLs\_msi.pyd"
-  File "/oname=_multiprocessing.pyd" "DLLs\_multiprocessing.pyd"
-  File "/oname=_socket.pyd" "DLLs\_socket.pyd"
-  File "/oname=_sqlite3.pyd" "DLLs\_sqlite3.pyd"
-  File "/oname=_ssl.pyd" "DLLs\_ssl.pyd"
-  File "/oname=_testcapi.pyd" "DLLs\_testcapi.pyd"
-  File "/oname=bz2.pyd" "DLLs\bz2.pyd"
-  File "/oname=py.ico" "DLLs\py.ico"
-  File "/oname=pyc.ico" "DLLs\pyc.ico"
-  File "/oname=pyexpat.pyd" "DLLs\pyexpat.pyd"
-  File "/oname=select.pyd" "DLLs\select.pyd"
-  File "/oname=sqlite3.dll" "DLLs\sqlite3.dll"
-  File "/oname=unicodedata.pyd" "DLLs\unicodedata.pyd"
-  File "/oname=winsound.pyd" "DLLs\winsound.pyd"
 SectionEnd
 
 Section "Qt image format plugins" imageformats
@@ -1033,30 +1004,6 @@ Section "Uninstall"
   Delete "$INSTDIR\QtSql4.dll"
   Delete "$INSTDIR\QtXml4.dll"
   Delete "$INSTDIR\zlib1.dll"
-
-  Delete "$INSTDIR\python27.dll"
-  Delete "$INSTDIR\Python27.zip"
-  Delete "$INSTDIR\libpythonqt.dll"
-
-  Delete "$INSTDIR\DLLs\_bsddb.pyd"
-  Delete "$INSTDIR\DLLs\_ctypes.pyd"
-  Delete "$INSTDIR\DLLs\_ctypes_test.pyd"
-  Delete "$INSTDIR\DLLs\_elementtree.pyd"
-  Delete "$INSTDIR\DLLs\_hashlib.pyd"
-  Delete "$INSTDIR\DLLs\_msi.pyd"
-  Delete "$INSTDIR\DLLs\_multiprocessing.pyd"
-  Delete "$INSTDIR\DLLs\_socket.pyd"
-  Delete "$INSTDIR\DLLs\_sqlite3.pyd"
-  Delete "$INSTDIR\DLLs\_ssl.pyd"
-  Delete "$INSTDIR\DLLs\_testcapi.pyd"
-  Delete "$INSTDIR\DLLs\bz2.pyd"
-  Delete "$INSTDIR\DLLs\py.ico"
-  Delete "$INSTDIR\DLLs\pyc.ico"
-  Delete "$INSTDIR\DLLs\pyexpat.pyd"
-  Delete "$INSTDIR\DLLs\select.pyd"
-  Delete "$INSTDIR\DLLs\sqlite3.dll"
-  Delete "$INSTDIR\DLLs\unicodedata.pyd"
-  Delete "$INSTDIR\DLLs\winsound.pyd"
 
   Delete "$INSTDIR\imageformats\qgif4.dll"
   Delete "$INSTDIR\imageformats\qjpeg4.dll"

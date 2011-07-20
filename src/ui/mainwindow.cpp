@@ -63,9 +63,6 @@
 #include "playlist/queuemanager.h"
 #include "playlist/songplaylistitem.h"
 #include "playlistparsers/playlistparser.h"
-#include "scripting/scriptdialog.h"
-#include "scripting/scriptmanager.h"
-#include "scripting/uiinterface.h"
 #include "smartplaylists/generator.h"
 #include "smartplaylists/generatormimedata.h"
 #include "songinfo/artistinfoview.h"
@@ -194,7 +191,6 @@ MainWindow::MainWindow(
 #ifdef HAVE_WIIMOTEDEV
     wiimotedev_shortcuts_(NULL),
 #endif
-    scripts_(new ScriptManager(this)),
     playlist_menu_(new QMenu(this)),
     playlist_add_to_another_(NULL),
     library_sort_model_(new QSortFilterProxyModel(this)),
@@ -669,15 +665,6 @@ MainWindow::MainWindow(
   connect(ui_->action_kittens, SIGNAL(toggled(bool)), ui_->now_playing, SLOT(EnableKittens(bool)));
   NowPlayingWidgetPositionChanged(ui_->now_playing->show_above_status_bar());
 
-  // Add places where scripts can make actions
-  qLog(Debug) << "Registering script action locations";
-  scripts_->ui()->RegisterActionLocation("tools_menu", ui_->menu_tools, ui_->action_full_library_scan);
-  scripts_->ui()->RegisterActionLocation("extras_menu", ui_->menu_extras, NULL);
-  scripts_->ui()->RegisterActionLocation("help_menu", ui_->menu_help, NULL);
-  scripts_->ui()->RegisterActionLocation("playlist_menu", ui_->menu_playlist, NULL);
-
-  scripts_->ui()->RegisterActionLocation("song_menu", playlist_menu_, NULL);
-
   // Load theme
   StyleSheetLoader* css_loader = new StyleSheetLoader(this);
   css_loader->SetStyleSheet(this, ":mainwindow.css");
@@ -759,19 +746,6 @@ MainWindow::MainWindow(
 // Switched position, mayby something is not ready ?
 
   wiimotedev_shortcuts_.reset(new WiimotedevShortcuts(osd_, this, player_));
-#endif
-
-  // If we support more languages this ifdef will need to be changed.
-#ifdef HAVE_SCRIPTING_PYTHON
-  qLog(Debug) << "Initialising scripting";
-  scripts_->Init(ScriptManager::GlobalData(
-      library_, library_view_->view(), player_, playlists_,
-      task_manager_, settings_dialog_.get(), internet_model_));
-  connect(ui_->action_script_manager, SIGNAL(triggered()), SLOT(ShowScriptDialog()));
-
-  library_view_->view()->SetScriptManager(scripts_);
-#else
-  ui_->action_script_manager->setVisible(false);
 #endif
 
   CheckFullRescanRevisions();
@@ -2079,14 +2053,6 @@ void MainWindow::PlaylistCurrentChanged(const QModelIndex& proxy_current) {
 void MainWindow::Raise() {
   show();
   activateWindow();
-}
-
-void MainWindow::ShowScriptDialog() {
-  if (!script_dialog_) {
-    script_dialog_.reset(new ScriptDialog);
-    script_dialog_->SetManager(scripts_);
-  }
-  script_dialog_->show();
 }
 
 #ifdef Q_OS_WIN32

@@ -26,8 +26,6 @@
 #include "core/utilities.h"
 #include "devices/devicemanager.h"
 #include "devices/devicestatefiltermodel.h"
-#include "scripting/scriptmanager.h"
-#include "scripting/uiinterface.h"
 #include "smartplaylists/wizard.h"
 #include "ui/iconloader.h"
 #include "ui/organisedialog.h"
@@ -131,7 +129,6 @@ bool LibraryItemDelegate::helpEvent(QHelpEvent *event, QAbstractItemView *view,
 
 LibraryView::LibraryView(QWidget* parent)
   : AutoExpandingTreeView(parent),
-    scripts_(NULL),
     library_(NULL),
     total_song_count_(-1),
     nomusic_(":nomusic.png"),
@@ -175,10 +172,6 @@ void LibraryView::SetLibrary(LibraryModel* library) {
 
 void LibraryView::SetDeviceManager(DeviceManager* device_manager) {
   devices_ = device_manager;
-}
-
-void LibraryView::SetScriptManager(ScriptManager* scripts) {
-  scripts_ = scripts;
 }
 
 void LibraryView::TotalSongCountUpdated(int count) {
@@ -280,10 +273,6 @@ void LibraryView::contextMenuEvent(QContextMenuEvent *e) {
     copy_to_device_->setDisabled(devices_->connected_devices_model()->rowCount() == 0);
     connect(devices_->connected_devices_model(), SIGNAL(IsEmptyChanged(bool)),
             copy_to_device_, SLOT(setDisabled(bool)));
-
-    if(scripts_) {
-      scripts_->ui()->RegisterActionLocation("library_context_menu", context_menu_, NULL);
-    }
   }
 
   context_menu_index_ = indexAt(e->pos());

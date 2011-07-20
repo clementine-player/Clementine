@@ -415,7 +415,7 @@
      <x>0</x>
      <y>0</y>
      <width>1131</width>
-     <height>25</height>
+     <height>23</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_music">
@@ -423,7 +423,7 @@
      <string>Music</string>
     </property>
     <addaction name="action_open_media"/>
-    <addaction name="action_open_cd" />
+    <addaction name="action_open_cd"/>
     <addaction name="separator"/>
     <addaction name="action_previous_track"/>
     <addaction name="action_play_pause"/>
@@ -480,7 +480,6 @@
     </property>
     <addaction name="action_cover_manager"/>
     <addaction name="action_queue_manager"/>
-    <addaction name="action_script_manager"/>
     <addaction name="action_equalizer"/>
     <addaction name="action_visualisations"/>
     <addaction name="action_transcode"/>
@@ -660,9 +659,9 @@
    </property>
   </action>
   <action name="action_open_cd">
-    <property name="text">
-      <string>Open &amp;audio CD...</string>
-    </property>
+   <property name="text">
+    <string>Open &amp;audio CD...</string>
+   </property>
   </action>
   <action name="action_cover_manager">
    <property name="text">
@@ -756,14 +755,14 @@
    </property>
   </action>
   <action name="action_next_playlist">
-    <property name="text">
-      <string>Go to next playlist tab</string>
-    </property>
+   <property name="text">
+    <string>Go to next playlist tab</string>
+   </property>
   </action>
   <action name="action_previous_playlist">
-    <property name="text">
-      <string>Go to previous playlist tab</string>
-    </property>
+   <property name="text">
+    <string>Go to previous playlist tab</string>
+   </property>
   </action>
   <action name="action_update_library">
    <property name="text">
@@ -794,11 +793,6 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+M</string>
-   </property>
-  </action>
-  <action name="action_script_manager">
-   <property name="text">
-    <string>Script Manager</string>
    </property>
   </action>
   <action name="action_full_library_scan">

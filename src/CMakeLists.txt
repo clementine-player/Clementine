@@ -35,12 +35,6 @@ if(HAVE_LIBLASTFM)
   include_directories(${LASTFM_INCLUDE_DIRS})
 endif(HAVE_LIBLASTFM)
 
-if(HAVE_SCRIPTING_PYTHON)
-  include_directories(${PYTHON_INCLUDE_DIRS})
-  include_directories(${CMAKE_SOURCE_DIR}/3rdparty/pythonqt/generated_cpp)
-  include_directories(${CMAKE_SOURCE_DIR}/3rdparty/pythonqt/src)
-endif(HAVE_SCRIPTING_PYTHON)
-
 if(HAVE_BREAKPAD)
   include_directories(../3rdparty/google-breakpad)
 endif(HAVE_BREAKPAD)
@@ -194,17 +188,6 @@ set(SOURCES
   playlistparsers/xspfparser.cpp
 
   resolvers/libraryresolver.cpp
-
-  scripting/installscriptdialog.cpp
-  scripting/languageengine.cpp
-  scripting/script.cpp
-  scripting/scriptarchive.cpp
-  scripting/scriptdialog.cpp
-  scripting/scriptdialoglist.cpp
-  scripting/scriptinfo.cpp
-  scripting/scriptinterface.cpp
-  scripting/scriptmanager.cpp
-  scripting/uiinterface.cpp
 
   smartplaylists/generator.cpp
   smartplaylists/generatorinserter.cpp
@@ -416,13 +399,6 @@ set(HEADERS
   resolvers/libraryresolver.h
   resolvers/resolver.h
 
-  scripting/installscriptdialog.h
-  scripting/languageengine.h
-  scripting/scriptdialog.h
-  scripting/scriptinterface.h
-  scripting/scriptmanager.h
-  scripting/uiinterface.h
-
   smartplaylists/generator.h
   smartplaylists/generatorinserter.h
   smartplaylists/generatormimedata.h
@@ -528,10 +504,6 @@ set(UI
   playlist/queuemanager.ui
 
   remote/remoteconfig.ui
-
-  scripting/installscriptdialog.ui
-  scripting/scriptdialog.ui
-  scripting/python/pythonconsole.ui
 
   smartplaylists/querysearchpage.ui
   smartplaylists/querysortpage.ui
@@ -845,29 +817,6 @@ if(APPLE)
   list(APPEND SOURCES core/mac_startup.mm)
 endif(APPLE)
 
-if(HAVE_SCRIPTING_PYTHON)
-  list(APPEND SOURCES
-    scripting/python/objectdecorators.cpp
-    scripting/python/pythonconsole.cpp
-    scripting/python/pythonengine.cpp
-    scripting/python/pythonscript.cpp
-  )
-
-  list(APPEND HEADERS
-    scripting/python/objectdecorators.h
-    scripting/python/pythonconsole.h
-    scripting/python/pythonengine.h
-  )
-
-  add_pythonqt_bindings(
-    NAME clementine
-    HEADER scripting/python/bindings_includes.h
-    TYPESYSTEM scripting/python/typesystem_clementine.xml
-  )
-
-  add_subdirectory(generated_cpp)
-endif(HAVE_SCRIPTING_PYTHON)
-
 if(HAVE_REMOTE)
   list(APPEND HEADERS
     remote/icesession.h
@@ -949,13 +898,6 @@ list(APPEND OTHER_SOURCES
   remote/remoteconfig.cpp
   remote/remoteconfig.h
   ${CMAKE_CURRENT_BINARY_DIR}/ui_remoteconfig.h
-  scripting/python/pythonconsole.cpp
-  scripting/python/pythonconsole.h
-  scripting/python/pythonengine.cpp
-  scripting/python/pythonengine.h
-  scripting/python/pythonscript.cpp
-  scripting/python/pythonscript.h
-  ${CMAKE_CURRENT_BINARY_DIR}/ui_pythonconsole.h
   suggesters/lastfmsuggester.cpp
   suggesters/lastfmsuggester.h
   ui/macsystemtrayicon.h
@@ -1061,13 +1003,6 @@ endif(HAVE_LIBMTP)
 if(HAVE_LIBINDICATE)
   target_link_libraries(clementine_lib ${INDICATEQT_LIBRARIES})
 endif(HAVE_LIBINDICATE)
-
-if(HAVE_SCRIPTING_PYTHON)
-  target_link_libraries(clementine_lib
-    pythonqt
-    clementine-pythonqt-bindings
-  )
-endif(HAVE_SCRIPTING_PYTHON)
 
 if(HAVE_REMOTE)
   target_link_libraries(clementine_lib ${GLOOX_LIBRARIES})

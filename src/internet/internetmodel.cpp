@@ -115,8 +115,7 @@ void InternetModel::RemoveService(InternetService* service) {
 }
 
 void InternetModel::ServiceDeleted() {
-  // qobject_cast doesn't work here with services created by python
-  InternetService* service = static_cast<InternetService*>(sender());
+  InternetService* service = qobject_cast<InternetService*>(sender());
   if (service)
     RemoveService(service);
 }

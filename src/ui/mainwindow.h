@@ -61,8 +61,6 @@ class InternetItem;
 class InternetModel;
 class InternetViewContainer;
 class Remote;
-class ScriptDialog;
-class ScriptManager;
 class Song;
 class SongInfoBase;
 class SongInfoView;
@@ -234,7 +232,6 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   void OpenSettingsDialog();
   void OpenSettingsDialogAtPage(SettingsDialog::Page page);
   void ShowSongInfoConfig();
-  void ShowScriptDialog();
 
   void SaveGeometry();
 
@@ -307,9 +304,6 @@ class MainWindow : public QMainWindow, public PlatformInterface {
 #ifdef HAVE_WIIMOTEDEV
   boost::scoped_ptr<WiimotedevShortcuts> wiimotedev_shortcuts_;
 #endif
-
-  ScriptManager* scripts_;
-  boost::scoped_ptr<ScriptDialog> script_dialog_;
 
   QAction* library_show_all_;
   QAction* library_show_duplicates_;

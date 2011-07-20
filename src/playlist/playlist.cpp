@@ -1553,8 +1553,7 @@ void Playlist::RemoveSongInsertVetoListener(SongInsertVetoListener* listener) {
 }
 
 void Playlist::SongInsertVetoListenerDestroyed() {
-  // qobject_cast returns NULL here for Python SIP listeners.
-  veto_listeners_.removeAll(static_cast<SongInsertVetoListener*>(sender()));
+  veto_listeners_.removeAll(qobject_cast<SongInsertVetoListener*>(sender()));
 }
 
 void Playlist::Shuffle() {
