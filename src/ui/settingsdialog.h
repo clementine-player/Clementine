@@ -72,6 +72,7 @@ class SettingsDialog : public QDialog {
     Page_Spotify,
 #endif
     Page_Magnatune,
+    Page_DigitallyImported,
     Page_BackgroundStreams,
     Page_Proxy,
     Page_Transcoding,

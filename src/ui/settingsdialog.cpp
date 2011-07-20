@@ -468,6 +468,7 @@ void SettingsDialog::accept() {
 
   ui_->library_config->Save();
   ui_->magnatune->Save();
+  ui_->digitally_imported->Save();
   ui_->global_shortcuts->Save();
 
   streams_->SaveStreams();
@@ -557,6 +558,9 @@ void SettingsDialog::showEvent(QShowEvent*) {
 
   // Magnatune
   ui_->magnatune->Load();
+
+  // Digitally Imported
+  ui_->digitally_imported->Load();
 
   // Global Shortcuts
   ui_->global_shortcuts->Load();

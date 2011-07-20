@@ -15,6 +15,7 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "digitallyimportedservice.h"
 #include "icecastservice.h"
 #include "jamendoservice.h"
 #include "magnatuneservice.h"
@@ -22,6 +23,7 @@
 #include "internetmodel.h"
 #include "internetservice.h"
 #include "savedradio.h"
+#include "skyfmservice.h"
 #include "somafmservice.h"
 #include "core/logging.h"
 #include "core/mergedproxymodel.h"
@@ -54,17 +56,19 @@ InternetModel::InternetModel(BackgroundThread<Database>* db_thread,
 
   merged_model_->setSourceModel(this);
 
+  AddService(new DigitallyImportedService(this));
+  AddService(new IcecastService(this));
+  AddService(new JamendoService(this));
 #ifdef HAVE_LIBLASTFM
   AddService(new LastFMService(this));
 #endif
-#ifdef HAVE_SPOTIFY
-  AddService(new SpotifyService(task_manager, this));
-#endif
-  AddService(new SomaFMService(this));
   AddService(new MagnatuneService(this));
-  AddService(new JamendoService(this));
-  AddService(new IcecastService(this));
   AddService(new SavedRadio(this));
+  AddService(new SkyFmService(this));
+  AddService(new SomaFMService(this));
+#ifdef HAVE_SPOTIFY
+  AddService(new SpotifyService(this));
+#endif
 }
 
 void InternetModel::AddService(InternetService *service) {
@@ -86,6 +90,8 @@ void InternetModel::AddService(InternetService *service) {
   connect(service, SIGNAL(OpenSettingsAtPage(SettingsDialog::Page)), SIGNAL(OpenSettingsAtPage(SettingsDialog::Page)));
   connect(service, SIGNAL(AddToPlaylistSignal(QMimeData*)), SIGNAL(AddToPlaylist(QMimeData*)));
   connect(service, SIGNAL(destroyed()), SLOT(ServiceDeleted()));
+
+  service->ReloadSettings();
 }
 
 void InternetModel::RemoveService(InternetService* service) {

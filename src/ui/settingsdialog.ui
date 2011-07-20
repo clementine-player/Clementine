@@ -95,6 +95,15 @@
      </item>
      <item>
       <property name="text">
+       <string>Digitally Imported</string>
+      </property>
+      <property name="icon">
+       <iconset resource="../../data/data.qrc">
+        <normaloff>:/providers/digitallyimported-32.png</normaloff>:/providers/digitallyimported-32.png</iconset>
+      </property>
+     </item>
+     <item>
+      <property name="text">
        <string>Background Streams</string>
       </property>
      </item>
@@ -125,7 +134,7 @@
      <item>
       <widget class="QStackedWidget" name="stacked_widget">
        <property name="currentIndex">
-        <number>1</number>
+        <number>7</number>
        </property>
        <widget class="QWidget" name="playback_page">
         <layout class="QVBoxLayout" name="verticalLayout_10">
@@ -1095,6 +1104,19 @@
          </item>
         </layout>
        </widget>
+       <widget class="QWidget" name="digitally_imported_page">
+        <layout class="QVBoxLayout" name="verticalLayout_27">
+         <property name="spacing">
+          <number>0</number>
+         </property>
+         <property name="margin">
+          <number>0</number>
+         </property>
+         <item>
+          <widget class="DigitallyImportedConfig" name="digitally_imported" native="true"/>
+         </item>
+        </layout>
+       </widget>
        <widget class="QWidget" name="streams_page">
         <layout class="QVBoxLayout" name="verticalLayout_16">
          <item>
@@ -1562,6 +1584,12 @@
    <class>TranscoderOptionsWma</class>
    <extends>QWidget</extends>
    <header>transcoder/transcoderoptionswma.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>DigitallyImportedConfig</class>
+   <extends>QWidget</extends>
+   <header>internet/digitallyimportedconfig.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

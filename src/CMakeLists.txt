@@ -118,6 +118,10 @@ set(SOURCES
   engines/gstenginepipeline.cpp
   engines/gstelementdeleter.cpp
 
+  internet/digitallyimportedconfig.cpp
+  internet/digitallyimportedservice.cpp
+  internet/digitallyimportedservicebase.cpp
+  internet/digitallyimportedurlhandler.cpp
   internet/icecastbackend.cpp
   internet/icecastfilterwidget.cpp
   internet/icecastmodel.cpp
@@ -136,6 +140,7 @@ set(SOURCES
   internet/magnatuneservice.cpp
   internet/magnatuneurlhandler.cpp
   internet/savedradio.cpp
+  internet/skyfmservice.cpp
   internet/somafmservice.cpp
   internet/somafmurlhandler.cpp
 
@@ -346,6 +351,8 @@ set(HEADERS
   engines/gstenginepipeline.h
   engines/gstelementdeleter.h
 
+  internet/digitallyimportedconfig.h
+  internet/digitallyimportedservicebase.h
   internet/icecastbackend.h
   internet/icecastfilterwidget.h
   internet/icecastmodel.h
@@ -361,6 +368,7 @@ set(HEADERS
   internet/magnatunedownloaddialog.h
   internet/magnatuneservice.h
   internet/savedradio.h
+  internet/skyfmservice.h
   internet/somafmservice.h
   internet/somafmurlhandler.h
 
@@ -502,6 +510,7 @@ set(UI
 
   devices/deviceproperties.ui
 
+  internet/digitallyimportedconfig.ui
   internet/icecastfilterwidget.ui
   internet/magnatuneconfig.ui
   internet/magnatunedownloaddialog.ui

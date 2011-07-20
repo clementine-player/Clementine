@@ -34,7 +34,7 @@ const char* SpotifyService::kSettingsGroup = "Spotify";
 const char* SpotifyService::kBlobDownloadUrl = "http://spotify.clementine-player.org/";
 const int SpotifyService::kSearchDelayMsec = 400;
 
-SpotifyService::SpotifyService(TaskManager* task_manager, InternetModel* parent)
+SpotifyService::SpotifyService(InternetModel* parent)
     : InternetService(kServiceName, parent, parent),
       server_(NULL),
       url_handler_(new SpotifyUrlHandler(this, this)),
@@ -46,8 +46,7 @@ SpotifyService::SpotifyService(TaskManager* task_manager, InternetModel* parent)
       login_task_id_(0),
       pending_search_playlist_(NULL),
       context_menu_(NULL),
-      search_delay_(new QTimer(this)),
-      task_manager_(task_manager) {
+      search_delay_(new QTimer(this)) {
   // Build the search path for the binary blob.
   // Look for one distributed alongside clementine first, then check in the
   // user's home directory for any that have been downloaded.
@@ -441,16 +440,16 @@ void SpotifyService::SyncPlaylist() {
       int index = item->data(Role_UserPlaylistIndex).toInt();
       server_->SyncUserPlaylist(index);
       playlist_sync_ids_[index] =
-          task_manager_->StartTask(tr("Syncing Spotify playlist"));
+          model()->task_manager()->StartTask(tr("Syncing Spotify playlist"));
       break;
     }
     case Type_InboxPlaylist:
       server_->SyncInbox();
-      inbox_sync_id_ = task_manager_->StartTask(tr("Syncing Spotify inbox"));
+      inbox_sync_id_ = model()->task_manager()->StartTask(tr("Syncing Spotify inbox"));
       break;
     case Type_StarredPlaylist:
       server_->SyncStarred();
-      starred_sync_id_ = task_manager_->StartTask(tr("Syncing Spotify starred tracks"));
+      starred_sync_id_ = model()->task_manager()->StartTask(tr("Syncing Spotify starred tracks"));
       break;
     default:
       break;
@@ -582,9 +581,9 @@ void SpotifyService::SyncPlaylistProgress(
     qLog(Warning) << "Received sync progress for unknown playlist";
     return;
   }
-  task_manager_->SetTaskProgress(task_id, progress.sync_progress(), 100);
+  model()->task_manager()->SetTaskProgress(task_id, progress.sync_progress(), 100);
   if (progress.sync_progress() == 100) {
-    task_manager_->SetTaskFinished(task_id);
+    model()->task_manager()->SetTaskFinished(task_id);
     if (progress.request().type() == protobuf::UserPlaylist) {
       playlist_sync_ids_.remove(task_id);
     }

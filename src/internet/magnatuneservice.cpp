@@ -76,8 +76,6 @@ MagnatuneService::MagnatuneService(InternetModel* parent)
     total_song_count_(0),
     network_(new NetworkAccessManager(this))
 {
-  ReloadSettings();
-
   // Create the library backend in the database thread
   library_backend_ = new LibraryBackend;
   library_backend_->moveToThread(parent->db_thread());

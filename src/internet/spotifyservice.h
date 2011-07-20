@@ -20,7 +20,7 @@ class SpotifyService : public InternetService {
   Q_OBJECT
 
 public:
-  SpotifyService(TaskManager* task_manager, InternetModel* parent);
+  SpotifyService(InternetModel* parent);
   ~SpotifyService();
 
   enum Type {
@@ -119,7 +119,6 @@ private:
 
   QTimer* search_delay_;
 
-  TaskManager* task_manager_;
   int inbox_sync_id_;
   int starred_sync_id_;
   QMap<int, int> playlist_sync_ids_;

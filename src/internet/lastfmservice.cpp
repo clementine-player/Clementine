@@ -84,7 +84,6 @@ LastFMService::LastFMService(InternetModel* parent)
     neighbours_list_(NULL),
     connection_problems_(false)
 {
-  ReloadSettings();
   //we emit the signal the first time to be sure the buttons are in the right state
   emit ScrobblingEnabledChanged(scrobbling_enabled_);
 
