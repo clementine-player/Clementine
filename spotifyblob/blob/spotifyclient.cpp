@@ -212,6 +212,8 @@ void SpotifyClient::Login(const QString& username, const QString& password) {
     return;
   }
 
+  sp_session_preferred_bitrate(session_, SP_BITRATE_320k);
+  sp_session_preferred_offline_bitrate(session_, SP_BITRATE_320k, false);
   sp_session_login(session_, username.toUtf8().constData(), password.toUtf8().constData());
 }
 
