@@ -1,0 +1,148 @@
+/* This file is part of Clementine.
+   Copyright 2010, David Sansome <me@davidsansome.com>
+
+   Clementine is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
+
+   Clementine is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+#include "amazoncoverprovider.h"
+#include "core/logging.h"
+#include "core/network.h"
+#include "core/utilities.h"
+
+#include <QDateTime>
+#include <QNetworkReply>
+#include <QStringList>
+#include <QXmlStreamReader>
+
+const char* AmazonCoverProvider::kAccessKey = "AKIAJ4QO3GQTSM3A43BQ";
+const char* AmazonCoverProvider::kSecretAccessKey = "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";
+const char* AmazonCoverProvider::kUrl = "http://ecs.amazonaws.com/onca/xml";
+
+AmazonCoverProvider::AmazonCoverProvider(QObject* parent)
+  : CoverProvider("Amazon", parent),
+    network_(new NetworkAccessManager(this))
+{
+}
+
+bool AmazonCoverProvider::StartSearch(const QString& artist, const QString& album, int id) {
+  typedef QPair<QString, QString> Arg;
+  typedef QList<Arg> ArgList;
+
+  typedef QPair<QByteArray, QByteArray> EncodedArg;
+  typedef QList<EncodedArg> EncodedArgList;
+
+  // Must be sorted by parameter name
+  ArgList args = ArgList()
+      << Arg("AWSAccessKeyId", kAccessKey)
+      << Arg("Keywords", artist + " " + album)
+      << Arg("Operation", "ItemSearch")
+      << Arg("ResponseGroup", "Images")
+      << Arg("SearchIndex", "All")
+      << Arg("Service", "AWSECommerceService")
+      << Arg("Timestamp", QDateTime::currentDateTime().toString("yyyy-MM-ddThh:mm:ss.zzzZ"))
+      << Arg("Version", "2009-11-01");
+
+  EncodedArgList encoded_args;
+  QStringList query_items;
+
+  // Encode the arguments
+  foreach (const Arg& arg, args) {
+    EncodedArg encoded_arg(QUrl::toPercentEncoding(arg.first),
+                           QUrl::toPercentEncoding(arg.second));
+    encoded_args << encoded_arg;
+    query_items << encoded_arg.first + "=" + encoded_arg.second;
+  }
+
+  // Sign the request
+  QUrl url(kUrl);
+
+  const QByteArray data_to_sign = QString("GET\n%1\n%2\n%3").arg(
+        url.host(), url.path(), query_items.join("&")).toAscii();
+  const QByteArray signature(Utilities::HmacSha256(kSecretAccessKey, data_to_sign));
+
+  // Add the signature to the request
+  encoded_args << EncodedArg("Signature", QUrl::toPercentEncoding(signature.toBase64()));
+  url.setEncodedQueryItems(encoded_args);
+
+  // Make the request
+  QNetworkReply* reply = network_->get(QNetworkRequest(url));
+  connect(reply, SIGNAL(finished()), SLOT(QueryFinished()));
+  pending_queries_[reply] = id;
+
+  return true;
+}
+
+void AmazonCoverProvider::QueryFinished() {
+  QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
+  if (!reply || !pending_queries_.contains(reply))
+    return;
+
+  int id = pending_queries_.take(reply);
+  reply->deleteLater();
+
+  CoverSearchResults results;
+
+  QXmlStreamReader reader(reply);
+  while (!reader.atEnd()) {
+    reader.readNext();
+    if (reader.tokenType() == QXmlStreamReader::StartElement &&
+        reader.name() == "Item") {
+      ReadItem(&reader, &results);
+    }
+  }
+
+  emit SearchFinished(id, results);
+}
+
+void AmazonCoverProvider::ReadItem(QXmlStreamReader* reader, CoverSearchResults* results) {
+  while (!reader->atEnd()) {
+    switch (reader->readNext()) {
+    case QXmlStreamReader::StartElement:
+      if (reader->name() == "LargeImage") {
+        ReadLargeImage(reader, results);
+      } else {
+        reader->skipCurrentElement();
+      }
+      break;
+
+    case QXmlStreamReader::EndElement:
+      return;
+
+    default:
+      break;
+    }
+  }
+}
+
+void AmazonCoverProvider::ReadLargeImage(QXmlStreamReader* reader, CoverSearchResults* results) {
+  while (!reader->atEnd()) {
+    switch (reader->readNext()) {
+    case QXmlStreamReader::StartElement:
+      if (reader->name() == "URL") {
+        CoverSearchResult result;
+        result.image_url = reader->readElementText();
+        results->append(result);
+      } else {
+        reader->skipCurrentElement();
+      }
+      break;
+
+    case QXmlStreamReader::EndElement:
+      return;
+
+    default:
+      break;
+    }
+  }
+}

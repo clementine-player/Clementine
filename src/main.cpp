@@ -39,6 +39,7 @@
 #include "core/ubuntuunityhack.h"
 #include "core/utilities.h"
 #include "covers/albumcoverfetcher.h"
+#include "covers/amazoncoverprovider.h"
 #include "covers/artloader.h"
 #include "covers/coverproviders.h"
 #include "engines/enginebase.h"
@@ -373,6 +374,7 @@ int main(int argc, char *argv[]) {
   // Initialize the repository of cover providers.  Last.fm registers itself
   // when its service is created.
   CoverProviders cover_providers;
+  cover_providers.AddProvider(new AmazonCoverProvider);
 
   // Create some key objects
   scoped_ptr<BackgroundThread<Database> > database(
