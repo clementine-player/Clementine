@@ -38,6 +38,7 @@ class ArtistInfoView;
 class ArtLoader;
 class BackgroundStreams;
 class CommandlineOptions;
+class CoverProviders;
 class Database;
 class DeviceManager;
 class DeviceView;
@@ -88,6 +89,7 @@ class MainWindow : public QMainWindow, public PlatformInterface {
              SystemTrayIcon* tray_icon,
              OSD* osd,
              ArtLoader* art_loader,
+             CoverProviders* cover_providers,
              QWidget *parent = 0);
   ~MainWindow();
 
@@ -267,6 +269,7 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   boost::scoped_ptr<About> about_dialog_;
 
   BackgroundThread<Database>* database_;
+  CoverProviders* cover_providers_;
   InternetModel* internet_model_;
   PlaylistBackend* playlist_backend_;
   PlaylistManager* playlists_;

@@ -24,8 +24,10 @@
 const int AlbumCoverFetcher::kMaxConcurrentRequests = 5;
 
 
-AlbumCoverFetcher::AlbumCoverFetcher(QObject* parent, QNetworkAccessManager* network)
+AlbumCoverFetcher::AlbumCoverFetcher(CoverProviders* cover_providers,
+                                     QObject* parent, QNetworkAccessManager* network)
     : QObject(parent),
+      cover_providers_(cover_providers),
       network_(network ? network : new NetworkAccessManager(this)),
       next_id_(0),
       request_starter_(new QTimer(this))
@@ -100,7 +102,7 @@ void AlbumCoverFetcher::StartRequests() {
     connect(search, SIGNAL(AlbumCoverFetched(quint64, const QImage&)),
                     SLOT(SingleCoverFetched(quint64, const QImage&)));
 
-    search->Start();
+    search->Start(cover_providers_);
   }
 }
 

@@ -34,6 +34,7 @@ class QNetworkReply;
 class QString;
 
 class AlbumCoverFetcherSearch;
+class CoverProviders;
 
 // This class represents a single search-for-cover request. It identifies
 // and describes the request. 
@@ -79,7 +80,8 @@ class AlbumCoverFetcher : public QObject {
   Q_OBJECT
 
  public:
-  AlbumCoverFetcher(QObject* parent = 0, QNetworkAccessManager* network = 0);
+  AlbumCoverFetcher(CoverProviders* cover_providers,
+                    QObject* parent = 0, QNetworkAccessManager* network = 0);
   virtual ~AlbumCoverFetcher() {}
 
   static const int kMaxConcurrentRequests;
@@ -103,6 +105,7 @@ class AlbumCoverFetcher : public QObject {
  private:
   void AddRequest(const CoverSearchRequest& req);
 
+  CoverProviders* cover_providers_;
   QNetworkAccessManager* network_;
   quint64 next_id_;
 

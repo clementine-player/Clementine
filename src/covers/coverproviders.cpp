@@ -20,19 +20,18 @@
 #include "coverproviders.h"
 #include "core/logging.h"
 
-CoverProviders::CoverProviders()
-  : QObject(NULL) {
+CoverProviders::CoverProviders(QObject* parent)
+  : QObject(parent) {
 }
 
 void CoverProviders::AddProvider(CoverProvider* provider) {
   {
     QMutexLocker locker(&mutex_);
     cover_providers_.insert(provider, provider->name());
+    connect(provider, SIGNAL(destroyed()), SLOT(ProviderDestroyed()));
   }
 
   qLog(Debug) << "Registered cover provider" << provider->name();
-
-  connect(provider, SIGNAL(destroyed()), SLOT(ProviderDestroyed()));
 }
 
 void CoverProviders::RemoveProvider(CoverProvider* provider) {

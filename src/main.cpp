@@ -370,6 +370,10 @@ int main(int argc, char *argv[]) {
   // Seed the random number generator
   srand(time(NULL));
 
+  // Initialize the repository of cover providers.  Last.fm registers itself
+  // when its service is created.
+  CoverProviders cover_providers;
+
   // Create some key objects
   scoped_ptr<BackgroundThread<Database> > database(
       new BackgroundThreadImplementation<Database, Database>(NULL));
@@ -377,11 +381,8 @@ int main(int argc, char *argv[]) {
   TaskManager task_manager;
   PlaylistManager playlists(&task_manager, NULL);
   Player player(&playlists);
-  InternetModel internet_model(database.get(), &task_manager, &player, NULL);
-
-  // Initialize the repository of cover providers to avoid race conditions
-  // later
-  CoverProviders::instance();
+  InternetModel internet_model(database.get(), &task_manager, &player,
+                               &cover_providers, NULL);
 
 #ifdef Q_OS_LINUX
   // In 11.04 Ubuntu decided that the system tray should be reserved for certain
@@ -418,7 +419,8 @@ int main(int argc, char *argv[]) {
       &player,
       tray_icon.get(),
       &osd,
-      &art_loader);
+      &art_loader,
+      &cover_providers);
 #ifdef HAVE_DBUS
   QObject::connect(&mpris, SIGNAL(RaiseMainWindow()), &w, SLOT(Raise()));
 #endif

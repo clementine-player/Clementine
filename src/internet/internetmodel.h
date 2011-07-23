@@ -24,6 +24,7 @@
 #include "ui/settingsdialog.h"
 #include "widgets/multiloadingindicator.h"
 
+class CoverProviders;
 class Database;
 class MergedProxyModel;
 class PlayerInterface;
@@ -40,7 +41,8 @@ class InternetModel : public QStandardItemModel {
 
 public:
   InternetModel(BackgroundThread<Database>* db_thread, TaskManager* task_manager,
-             PlayerInterface* player, QObject* parent = 0);
+             PlayerInterface* player, CoverProviders* cover_providers,
+                QObject* parent = 0);
 
   enum Role {
     // Services can use this role to distinguish between different types of
@@ -138,6 +140,7 @@ public:
   MergedProxyModel* merged_model() const { return merged_model_; }
   TaskManager* task_manager() const { return task_manager_; }
   PlayerInterface* player() const { return player_; }
+  CoverProviders* cover_providers() const { return cover_providers_; }
 
 signals:
   void StreamError(const QString& message);
@@ -155,6 +158,7 @@ private:
   MergedProxyModel* merged_model_;
   TaskManager* task_manager_;
   PlayerInterface* player_;
+  CoverProviders* cover_providers_;
 };
 
 #endif // INTERNETMODEL_H

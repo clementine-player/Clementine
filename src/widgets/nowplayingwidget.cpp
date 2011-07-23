@@ -55,8 +55,9 @@ const int NowPlayingWidget::kBottomOffset = 0;
 const int NowPlayingWidget::kTopBorder = 4;
 
 
-NowPlayingWidget::NowPlayingWidget(QWidget *parent)
+NowPlayingWidget::NowPlayingWidget(QWidget* parent)
   : QWidget(parent),
+    cover_providers_(NULL),
     album_cover_choice_controller_(new AlbumCoverChoiceController(this)),
     cover_loader_(new BackgroundThreadImplementation<AlbumCoverLoader, AlbumCoverLoader>(this)),
     kitten_loader_(NULL),
@@ -132,6 +133,11 @@ NowPlayingWidget::NowPlayingWidget(QWidget *parent)
 }
 
 NowPlayingWidget::~NowPlayingWidget() {
+}
+
+void NowPlayingWidget::SetCoverProviders(CoverProviders* cover_providers) {
+  cover_providers_ = cover_providers;
+  album_cover_choice_controller_->SetCoverProviders(cover_providers_);
 }
 
 void NowPlayingWidget::CreateModeAction(Mode mode, const QString &text, QActionGroup *group, QSignalMapper* mapper) {
@@ -379,7 +385,8 @@ void NowPlayingWidget::contextMenuEvent(QContextMenuEvent* e) {
   // initial 'enabled' values depending on the kitty mode
   album_cover_choice_controller_->cover_from_file_action()->setEnabled(!aww_);
   album_cover_choice_controller_->cover_from_url_action()->setEnabled(!aww_);
-  album_cover_choice_controller_->search_for_cover_action()->setEnabled(!aww_ && CoverProviders::instance().HasAnyProviders());
+  album_cover_choice_controller_->search_for_cover_action()->setEnabled(
+        !aww_ && cover_providers_->HasAnyProviders());
   album_cover_choice_controller_->unset_cover_action()->setEnabled(!aww_);
   album_cover_choice_controller_->show_cover_action()->setEnabled(!aww_);
 

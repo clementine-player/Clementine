@@ -61,6 +61,7 @@ class LibraryView : public AutoExpandingTreeView {
   // this will return all of it's songs.
   SongList GetSelectedSongs() const;
 
+  void SetCoverProviders(CoverProviders* cover_providers);
   void SetTaskManager(TaskManager* task_manager);
   void SetLibrary(LibraryModel* library);
   void SetDeviceManager(DeviceManager* device_manager);
@@ -111,6 +112,7 @@ class LibraryView : public AutoExpandingTreeView {
   void ShowInVarious(bool on);
 
  private:
+  CoverProviders* cover_providers_;
   LibraryModel* library_;
   DeviceManager* devices_;
   TaskManager* task_manager_;

@@ -24,6 +24,7 @@
 #include <QObject>
 
 class CoverProvider;
+class CoverProviders;
 class NetworkTimeouts;
 class QNetworkAccessManager;
 class QNetworkReply;
@@ -39,7 +40,7 @@ class AlbumCoverFetcherSearch : public QObject {
   AlbumCoverFetcherSearch(const CoverSearchRequest& request,
                           QNetworkAccessManager* network, QObject* parent);
 
-  void Start();
+  void Start(CoverProviders* cover_providers);
 
   // Cancels all pending requests.  No Finished signals will be emitted, and it
   // is the caller's responsibility to delete the AlbumCoverFetcherSearch.

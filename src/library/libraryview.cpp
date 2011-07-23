@@ -129,6 +129,7 @@ bool LibraryItemDelegate::helpEvent(QHelpEvent *event, QAbstractItemView *view,
 
 LibraryView::LibraryView(QWidget* parent)
   : AutoExpandingTreeView(parent),
+    cover_providers_(NULL),
     library_(NULL),
     total_song_count_(-1),
     nomusic_(":nomusic.png"),
@@ -159,6 +160,10 @@ void LibraryView::ReloadSettings() {
     library_->set_pretty_covers(s.value("pretty_covers", true).toBool());
     library_->set_show_dividers(s.value("show_dividers", true).toBool());
   }
+}
+
+void LibraryView::SetCoverProviders(CoverProviders* cover_providers) {
+  cover_providers_ = cover_providers;
 }
 
 void LibraryView::SetTaskManager(TaskManager *task_manager) {
@@ -461,7 +466,7 @@ void LibraryView::Delete() {
 
 void LibraryView::EditTracks() {
   if(!edit_tag_dialog_) {
-    edit_tag_dialog_.reset(new EditTagDialog(this));
+    edit_tag_dialog_.reset(new EditTagDialog(cover_providers_, this));
   }
   edit_tag_dialog_->SetSongs(GetSelectedSongs());
   edit_tag_dialog_->SetTagCompleter(library_->backend());

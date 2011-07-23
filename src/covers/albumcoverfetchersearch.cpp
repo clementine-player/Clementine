@@ -56,13 +56,11 @@ void AlbumCoverFetcherSearch::TerminateSearch() {
   AllProvidersFinished();
 }
 
-void AlbumCoverFetcherSearch::Start() {
-  CoverProviders* providers = &CoverProviders::instance();
-
-  foreach(CoverProvider* provider, providers->List()) {
+void AlbumCoverFetcherSearch::Start(CoverProviders* cover_providers) {
+  foreach(CoverProvider* provider, cover_providers->List()) {
     connect(provider, SIGNAL(SearchFinished(int,QList<CoverSearchResult>)),
             SLOT(ProviderSearchFinished(int,QList<CoverSearchResult>)));
-    const int id = providers->NextId();
+    const int id = cover_providers->NextId();
     const bool success = provider->StartSearch(
           request_.artist, request_.album, id);
 

@@ -106,7 +106,7 @@ LastFMService::LastFMService(InternetModel* parent)
   add_custom_action_->setEnabled(false);
 
   model()->player()->RegisterUrlHandler(url_handler_);
-  CoverProviders::instance().AddProvider(new LastFmCoverProvider(this));
+  model()->cover_providers()->AddProvider(new LastFmCoverProvider(this));
 }
 
 LastFMService::~LastFMService() {

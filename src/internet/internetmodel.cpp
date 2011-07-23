@@ -42,12 +42,13 @@ QMap<QString, InternetService*>* InternetModel::sServices = NULL;
 
 InternetModel::InternetModel(BackgroundThread<Database>* db_thread,
                        TaskManager* task_manager, PlayerInterface* player,
-                       QObject* parent)
+                       CoverProviders* cover_providers, QObject* parent)
   : QStandardItemModel(parent),
     db_thread_(db_thread),
     merged_model_(new MergedProxyModel(this)),
     task_manager_(task_manager),
-    player_(player)
+    player_(player),
+    cover_providers_(cover_providers)
 {
   if (!sServices) {
     sServices = new QMap<QString, InternetService*>;

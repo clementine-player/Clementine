@@ -25,27 +25,22 @@
 class AlbumCoverFetcherSearch;
 class CoverProvider;
 
-// This is a singleton, a global repository for cover providers.
-// Each one of those has to register with CoverProviders' instance by invoking
-// "CoverProviders::instance().AddCoverProvider(this)". Providers are
-// automatically unregistered from the repository when they are deleted.
-// The class is thread safe except for the initialization.
+// This is a repository for cover providers.
+// Providers are automatically unregistered from the repository when they are
+// deleted.  The class is thread safe.
 class CoverProviders : public QObject {
   Q_OBJECT
 
 public:
-  // This performs lazy initialization of the CoverProviders which is not thread-safe!
-  static CoverProviders& instance() {
-    static CoverProviders instance_;
-    return instance_;
-  }
+  CoverProviders(QObject* parent = NULL);
 
-  // Lets a cover provider to register itself in the repository.
+  // Lets a cover provider register itself in the repository.
   void AddProvider(CoverProvider* provider);
   void RemoveProvider(CoverProvider* provider);
 
   // Returns a list of cover providers
   QList<CoverProvider*> List() const { return cover_providers_.keys(); }
+
   // Returns true if this repository has at least one registered provider.
   bool HasAnyProviders() const { return !cover_providers_.isEmpty(); }
 
@@ -55,8 +50,6 @@ private slots:
   void ProviderDestroyed();
 
 private:
-  CoverProviders();
-  ~CoverProviders() {}
   Q_DISABLE_COPY(CoverProviders);
 
   QMap<CoverProvider*, QString> cover_providers_;

@@ -48,14 +48,17 @@
 
 const char* AlbumCoverManager::kSettingsGroup = "CoverManager";
 
-AlbumCoverManager::AlbumCoverManager(LibraryBackend* backend, QWidget* parent,
+AlbumCoverManager::AlbumCoverManager(LibraryBackend* backend,
+                                     CoverProviders* cover_providers,
+                                     QWidget* parent,
                                      QNetworkAccessManager* network)
   : QMainWindow(parent),
     ui_(new Ui_CoverManager),
+    cover_providers_(cover_providers),
     album_cover_choice_controller_(new AlbumCoverChoiceController(this)),
     backend_(backend),
     cover_loader_(new BackgroundThreadImplementation<AlbumCoverLoader, AlbumCoverLoader>(this)),
-    cover_fetcher_(new AlbumCoverFetcher(this, network)),
+    cover_fetcher_(new AlbumCoverFetcher(cover_providers_, this, network)),
     cover_searcher_(NULL),
     artist_icon_(IconLoader::Load("x-clementine-artist")),
     all_artists_icon_(IconLoader::Load("x-clementine-album")),
@@ -73,6 +76,7 @@ AlbumCoverManager::AlbumCoverManager(LibraryBackend* backend, QWidget* parent,
   ui_->action_add_to_playlist->setIcon(IconLoader::Load("media-playback-start"));
   ui_->action_load->setIcon(IconLoader::Load("media-playback-start"));
 
+  album_cover_choice_controller_->SetCoverProviders(cover_providers_);
   album_cover_choice_controller_->SetLibrary(backend_);
 
   // Get a square version of nocover.png
@@ -258,7 +262,7 @@ void AlbumCoverManager::Reset() {
 }
 
 void AlbumCoverManager::ResetFetchCoversButton() {
-  ui_->fetch->setEnabled(CoverProviders::instance().HasAnyProviders());
+  ui_->fetch->setEnabled(cover_providers_->HasAnyProviders());
 }
 
 void AlbumCoverManager::ArtistChanged(QListWidgetItem* current) {
@@ -450,7 +454,7 @@ bool AlbumCoverManager::eventFilter(QObject *obj, QEvent *event) {
     album_cover_choice_controller_->cover_from_url_action()->setEnabled(context_menu_items_.size() == 1);
     album_cover_choice_controller_->show_cover_action()->setEnabled(some_with_covers && context_menu_items_.size() == 1);
     album_cover_choice_controller_->unset_cover_action()->setEnabled(some_with_covers);
-    album_cover_choice_controller_->search_for_cover_action()->setEnabled(CoverProviders::instance().HasAnyProviders());
+    album_cover_choice_controller_->search_for_cover_action()->setEnabled(cover_providers_->HasAnyProviders());
 
     QContextMenuEvent* e = static_cast<QContextMenuEvent*>(event);
     context_menu_->popup(e->globalPos());

@@ -31,6 +31,7 @@
 
 class AlbumCoverChoiceController;
 class AlbumCoverLoader;
+class CoverProviders;
 class LibraryBackend;
 class Ui_EditTagDialog;
 
@@ -43,7 +44,7 @@ class EditTagDialog : public QDialog {
   Q_OBJECT
 
 public:
-  EditTagDialog(QWidget* parent = 0);
+  EditTagDialog(CoverProviders* cover_providers, QWidget* parent = 0);
   ~EditTagDialog();
 
   static const char* kHintText;
@@ -134,6 +135,7 @@ private:
 private:
   Ui_EditTagDialog* ui_;
 
+  CoverProviders* cover_providers_;
   AlbumCoverChoiceController* album_cover_choice_controller_;
 
   LibraryBackend* backend_;

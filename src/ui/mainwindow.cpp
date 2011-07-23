@@ -157,6 +157,7 @@ MainWindow::MainWindow(
     SystemTrayIcon* tray_icon,
     OSD* osd,
     ArtLoader* art_loader,
+    CoverProviders* cover_providers,
     QWidget* parent)
   : QMainWindow(parent),
     ui_(new Ui_MainWindow),
@@ -165,6 +166,7 @@ MainWindow::MainWindow(
     osd_(osd),
     task_manager_(task_manager),
     database_(database),
+    cover_providers_(cover_providers),
     internet_model_(internet_model),
     playlist_backend_(NULL),
     playlists_(playlist_manager),
@@ -219,6 +221,7 @@ MainWindow::MainWindow(
   // Initialise the UI
   ui_->setupUi(this);
   ui_->multi_loading_indicator->SetTaskManager(task_manager_);
+  ui_->now_playing->SetCoverProviders(cover_providers_);
   ui_->now_playing->SetLibraryBackend(library_->backend());
 
   int volume = player_->GetVolume();
@@ -1876,7 +1879,7 @@ void MainWindow::ChangeLibraryQueryMode(QAction* action) {
 
 void MainWindow::ShowCoverManager() {
   if (!cover_manager_) {
-    cover_manager_.reset(new AlbumCoverManager(library_->backend()));
+    cover_manager_.reset(new AlbumCoverManager(library_->backend(), cover_providers_));
     cover_manager_->Init();
 
     // Cover manager connections
@@ -1924,7 +1927,7 @@ void MainWindow::EnsureEditTagDialogCreated() {
   if (edit_tag_dialog_)
     return;
 
-  edit_tag_dialog_.reset(new EditTagDialog);
+  edit_tag_dialog_.reset(new EditTagDialog(cover_providers_));
   connect(edit_tag_dialog_.get(), SIGNAL(accepted()), SLOT(EditTagDialogAccepted()));
   connect(edit_tag_dialog_.get(), SIGNAL(Error(QString)), SLOT(ShowErrorDialog(QString)));
 }

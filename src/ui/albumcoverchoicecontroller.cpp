@@ -48,14 +48,13 @@ QSet<QString>* AlbumCoverChoiceController::sImageExtensions = NULL;
 
 AlbumCoverChoiceController::AlbumCoverChoiceController(QWidget* parent)
   : QWidget(parent),
+    cover_providers_(NULL),
     cover_searcher_(new AlbumCoverSearcher(QIcon(":/nocover.png"), this)),
-    cover_fetcher_(new AlbumCoverFetcher(this)),
+    cover_fetcher_(NULL),
     save_file_dialog_(NULL),
     cover_from_url_dialog_(NULL),
     library_(NULL)
 {
-  cover_searcher_->Init(cover_fetcher_);
-
   cover_from_file_ = new QAction(IconLoader::Load("document-open"), tr("Load cover from disk..."), this);
   cover_to_file_ = new QAction(IconLoader::Load("document-save"), tr("Save cover to disk..."), this);
   cover_from_url_ = new QAction(IconLoader::Load("download"), tr("Load cover from URL..."), this);
@@ -69,6 +68,12 @@ AlbumCoverChoiceController::AlbumCoverChoiceController(QWidget* parent)
 
 AlbumCoverChoiceController::~AlbumCoverChoiceController()
 {
+}
+
+void AlbumCoverChoiceController::SetCoverProviders(CoverProviders* cover_providers) {
+  cover_providers_ = cover_providers;
+  cover_fetcher_ = new AlbumCoverFetcher(cover_providers_, this);
+  cover_searcher_->Init(cover_fetcher_);
 }
 
 QList<QAction*> AlbumCoverChoiceController::GetAllActions() {

@@ -32,6 +32,7 @@
 class AlbumCoverChoiceController;
 class AlbumCoverFetcher;
 class AlbumCoverSearcher;
+class CoverProviders;
 class LibraryBackend;
 class LineEditInterface;
 class SongMimeData;
@@ -45,7 +46,9 @@ class QProgressBar;
 class AlbumCoverManager : public QMainWindow {
   Q_OBJECT
  public:
-  AlbumCoverManager(LibraryBackend* backend, QWidget *parent = 0,
+  AlbumCoverManager(LibraryBackend* backend,
+                    CoverProviders* cover_providers,
+                    QWidget *parent = 0,
                     QNetworkAccessManager* network = 0);
   ~AlbumCoverManager();
 
@@ -142,6 +145,7 @@ class AlbumCoverManager : public QMainWindow {
  private:
   Ui_CoverManager* ui_;
 
+  CoverProviders* cover_providers_;
   AlbumCoverChoiceController* album_cover_choice_controller_;
   LibraryBackend* backend_;
 

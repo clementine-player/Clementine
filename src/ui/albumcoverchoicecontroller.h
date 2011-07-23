@@ -26,6 +26,7 @@
 class AlbumCoverFetcher;
 class AlbumCoverSearcher;
 class CoverFromURLDialog;
+class CoverProviders;
 class LibraryBackend;
 class QFileDialog;
 class Song;
@@ -37,6 +38,8 @@ class AlbumCoverChoiceController : public QWidget {
  public:
   AlbumCoverChoiceController(QWidget* parent = 0);
   ~AlbumCoverChoiceController();
+
+  void SetCoverProviders(CoverProviders* cover_providers);
 
   // Getters for all QActions implemented by this controller.
 
@@ -112,6 +115,7 @@ private:
   static bool IsKnownImageExtension(const QString& suffix);
   static QSet<QString>* sImageExtensions;
 
+  CoverProviders* cover_providers_;
   AlbumCoverSearcher* cover_searcher_;
   AlbumCoverFetcher* cover_fetcher_;
 

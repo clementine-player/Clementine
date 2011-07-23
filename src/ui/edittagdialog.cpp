@@ -44,9 +44,10 @@
 
 const char* EditTagDialog::kHintText = QT_TR_NOOP("(different across multiple songs)");
 
-EditTagDialog::EditTagDialog(QWidget* parent)
+EditTagDialog::EditTagDialog(CoverProviders* cover_providers, QWidget* parent)
   : QDialog(parent),
     ui_(new Ui_EditTagDialog),
+    cover_providers_(cover_providers),
     album_cover_choice_controller_(new AlbumCoverChoiceController(this)),
     backend_(NULL),
     loading_(false),
@@ -69,6 +70,8 @@ EditTagDialog::EditTagDialog(QWidget* parent)
   connect(results_dialog_, SIGNAL(SongChosen(Song, Song)),
           SLOT(FetchTagSongChosen(Song, Song)));
   connect(results_dialog_, SIGNAL(finished(int)), tag_fetcher_, SLOT(Cancel()));
+
+  album_cover_choice_controller_->SetCoverProviders(cover_providers);
 
   ui_->setupUi(this);
   ui_->splitter->setSizes(QList<int>() << 200 << width() - 200);
@@ -430,7 +433,7 @@ void EditTagDialog::UpdateSummaryTab(const Song& song) {
   else
     ui_->filename->setText(song.url().toString());
 
-  album_cover_choice_controller_->search_for_cover_action()->setEnabled(CoverProviders::instance().HasAnyProviders());
+  album_cover_choice_controller_->search_for_cover_action()->setEnabled(cover_providers_->HasAnyProviders());
 }
 
 void EditTagDialog::UpdateStatisticsTab(const Song& song) {
