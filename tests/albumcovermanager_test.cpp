@@ -15,6 +15,7 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "covers/coverproviders.h"
 #include "ui/albumcovermanager.h"
 
 #include "gtest/gtest.h"
@@ -26,10 +27,11 @@
 class AlbumCoverManagerTest : public ::testing::Test {
  protected:
   AlbumCoverManagerTest()
-      : manager_(NULL, NULL, &mock_network_) {
+      : manager_(NULL, &cover_providers_, NULL, &mock_network_) {
   }
 
   MockNetworkAccessManager mock_network_;
+  CoverProviders cover_providers_;
   AlbumCoverManager manager_;
 };
 
