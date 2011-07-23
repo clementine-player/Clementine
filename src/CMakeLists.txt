@@ -12,6 +12,7 @@ endif(BUILD_WERROR)
 
 include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(../3rdparty/gmock/gtest/include)
+include_directories(../3rdparty/sha2)
 if(WIN32)
   include_directories(../3rdparty/qtwin)
 endif(WIN32)
@@ -91,6 +92,7 @@ set(SOURCES
   covers/albumcoverfetcher.cpp
   covers/albumcoverfetchersearch.cpp
   covers/albumcoverloader.cpp
+  covers/amazoncoverprovider.cpp
   covers/artloader.cpp
   covers/coverprovider.cpp
   covers/coverproviders.cpp
@@ -314,6 +316,7 @@ set(HEADERS
   covers/albumcoverfetcher.h
   covers/albumcoverfetchersearch.h
   covers/albumcoverloader.h
+  covers/amazoncoverprovider.h
   covers/artloader.h
   covers/coverprovider.h
   covers/coverproviders.h
@@ -948,6 +951,7 @@ add_dependencies(clementine_lib pot)
 target_link_libraries(clementine_lib
   chardet
   echoprint
+  sha2
   ${ECHONEST_LIBRARIES}
   ${GOBJECT_LIBRARIES}
   ${GLIB_LIBRARIES}

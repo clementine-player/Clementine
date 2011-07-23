@@ -47,6 +47,9 @@ namespace Utilities {
 
   void OpenInFileBrowser(const QStringList& filenames);
 
+  QByteArray HmacSha256(const QByteArray& key, const QByteArray& data);
+  QByteArray Sha256(const QByteArray& data);
+
 
   enum ConfigPath {
     Path_Root,

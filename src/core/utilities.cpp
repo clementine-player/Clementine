@@ -19,6 +19,8 @@
 #include "utilities.h"
 #include "core/logging.h"
 
+#include "sha2.h"
+
 #include <QCoreApplication>
 #include <QDateTime>
 #include <QDesktopServices>
@@ -298,6 +300,33 @@ void OpenInFileBrowser(const QStringList& filenames) {
 
     QDesktopServices::openUrl(QUrl::fromLocalFile(directory));
   }
+}
+
+QByteArray HmacSha256(const QByteArray& key, const QByteArray& data) {
+  const int kBlockSize = 64; // bytes
+  Q_ASSERT(key.length() <= kBlockSize);
+
+  QByteArray inner_padding(kBlockSize, char(0x36));
+  QByteArray outer_padding(kBlockSize, char(0x5c));
+
+  for (int i=0 ; i<key.length() ; ++i) {
+    inner_padding[i] = inner_padding[i] ^ key[i];
+    outer_padding[i] = outer_padding[i] ^ key[i];
+  }
+
+  return Sha256(outer_padding + Sha256(inner_padding + data));
+}
+
+QByteArray Sha256(const QByteArray& data) {
+  SHA256_CTX context;
+  SHA256_Init(&context);
+  SHA256_Update(&context, reinterpret_cast<const u_int8_t*>(data.constData()),
+                data.length());
+
+  QByteArray ret(SHA256_DIGEST_LENGTH, '\0');
+  SHA256_Final(reinterpret_cast<u_int8_t*>(ret.data()), &context);
+
+  return ret;
 }
 
 }  // namespace Utilities
