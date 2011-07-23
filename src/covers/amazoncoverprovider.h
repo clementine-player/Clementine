@@ -20,8 +20,9 @@
 
 #include "coverprovider.h"
 
+#include <QXmlStreamReader>
+
 class QNetworkAccessManager;
-class QXmlStreamReader;
 
 
 class AmazonCoverProvider : public CoverProvider {
