@@ -20,6 +20,7 @@
 #include "playlistdelegates.h"
 #include "playlistheader.h"
 #include "playlistview.h"
+#include "core/logging.h"
 
 #include <QCleanlooksStyle>
 #include <QPainter>
@@ -86,6 +87,7 @@ PlaylistView::PlaylistView(QWidget *parent)
     playlist_(NULL),
     header_(new PlaylistHeader(Qt::Horizontal, this)),
     setting_initial_header_layout_(false),
+    upgrading_from_qheaderview_(false),
     read_only_settings_(true),
     glow_enabled_(true),
     currently_glowing_(false),
@@ -214,27 +216,34 @@ void PlaylistView::LoadGeometry() {
   QSettings settings;
   settings.beginGroup(Playlist::kSettingsGroup);
 
-  if (!header_->restoreState(settings.value("state").toByteArray())) {
-    header_->HideSection(Playlist::Column_Disc);
-    header_->HideSection(Playlist::Column_Year);
-    header_->HideSection(Playlist::Column_Genre);
-    header_->HideSection(Playlist::Column_BPM);
-    header_->HideSection(Playlist::Column_Bitrate);
-    header_->HideSection(Playlist::Column_Samplerate);
-    header_->HideSection(Playlist::Column_Filename);
-    header_->HideSection(Playlist::Column_Filesize);
-    header_->HideSection(Playlist::Column_Filetype);
-    header_->HideSection(Playlist::Column_DateCreated);
-    header_->HideSection(Playlist::Column_DateModified);
-    header_->HideSection(Playlist::Column_AlbumArtist);
-    header_->HideSection(Playlist::Column_Composer);
-    header_->HideSection(Playlist::Column_Rating);
-    header_->HideSection(Playlist::Column_PlayCount);
-    header_->HideSection(Playlist::Column_SkipCount);
-    header_->HideSection(Playlist::Column_LastPlayed);
+  QByteArray state(settings.value("state").toByteArray());
+  if (!header_->RestoreState(state)) {
+    // Maybe we're upgrading from a version that persisted the state with
+    // QHeaderView.
+    if (!header_->restoreState(state)) {
+      header_->HideSection(Playlist::Column_Disc);
+      header_->HideSection(Playlist::Column_Year);
+      header_->HideSection(Playlist::Column_Genre);
+      header_->HideSection(Playlist::Column_BPM);
+      header_->HideSection(Playlist::Column_Bitrate);
+      header_->HideSection(Playlist::Column_Samplerate);
+      header_->HideSection(Playlist::Column_Filename);
+      header_->HideSection(Playlist::Column_Filesize);
+      header_->HideSection(Playlist::Column_Filetype);
+      header_->HideSection(Playlist::Column_DateCreated);
+      header_->HideSection(Playlist::Column_DateModified);
+      header_->HideSection(Playlist::Column_AlbumArtist);
+      header_->HideSection(Playlist::Column_Composer);
+      header_->HideSection(Playlist::Column_Rating);
+      header_->HideSection(Playlist::Column_PlayCount);
+      header_->HideSection(Playlist::Column_SkipCount);
+      header_->HideSection(Playlist::Column_LastPlayed);
 
-    header_->moveSection(header_->visualIndex(Playlist::Column_Track), 0);
-    setting_initial_header_layout_ = true;
+      header_->moveSection(header_->visualIndex(Playlist::Column_Track), 0);
+      setting_initial_header_layout_ = true;
+    } else {
+      upgrading_from_qheaderview_ = true;
+    }
   }
 
   // New columns that we add are visible by default if the user has upgraded
@@ -272,7 +281,7 @@ void PlaylistView::SaveGeometry() {
 
   QSettings settings;
   settings.beginGroup(Playlist::kSettingsGroup);
-  settings.setValue("state", header_->saveState());
+  settings.setValue("state", header_->SaveState());
   settings.setValue("state_version", kStateVersion);
 }
 
@@ -861,7 +870,11 @@ void PlaylistView::ReloadSettings() {
   s.beginGroup(Playlist::kSettingsGroup);
   glow_enabled_ = s.value("glow_effect", true).toBool();
   background_enabled_ = s.value("bg_enabled", true).toBool();
-  header_->SetStretchEnabled(s.value("stretch", true).toBool());
+
+  if (setting_initial_header_layout_ || upgrading_from_qheaderview_) {
+    header_->SetStretchEnabled(s.value("stretch", true).toBool());
+    upgrading_from_qheaderview_ = false;
+  }
 
   if (currently_glowing_ && glow_enabled_ && isVisible())
     StartGlowing();
@@ -887,7 +900,6 @@ void PlaylistView::SaveSettings() {
   QSettings s;
   s.beginGroup(Playlist::kSettingsGroup);
   s.setValue("glow_effect", glow_enabled_);
-  s.setValue("stretch", header_->is_stretch_enabled());
   s.setValue("column_alignments", QVariant::fromValue(playlist_->column_alignments()));
   s.setValue("bg_enabled", background_enabled_);
 

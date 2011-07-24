@@ -152,6 +152,7 @@ class PlaylistView : public QTreeView {
   Playlist* playlist_;
   PlaylistHeader* header_;
   bool setting_initial_header_layout_;
+  bool upgrading_from_qheaderview_;
   bool read_only_settings_;
 
   bool background_enabled_;

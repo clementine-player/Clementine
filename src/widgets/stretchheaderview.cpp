@@ -16,15 +16,16 @@
 */
 
 #include "stretchheaderview.h"
+#include "core/logging.h"
 
 #include <QDataStream>
-#include <QtDebug>
 
 #include <algorithm>
 #include <cmath>
 #include <numeric>
 
 const int StretchHeaderView::kMinimumColumnWidth = 10;
+const int StretchHeaderView::kMagicNumber = 0x502c950f;
 
 StretchHeaderView::StretchHeaderView(Qt::Orientation orientation, QWidget* parent)
   : QHeaderView(orientation, parent),
@@ -47,8 +48,9 @@ void StretchHeaderView::NormaliseWidths(const QList<int>& sections) {
   if (!stretch_enabled_)
     return;
 
-  float total_sum = std::accumulate(column_widths_.begin(), column_widths_.end(), 0.0);
-  float selected_sum = total_sum;
+  const ColumnWidthType total_sum =
+      std::accumulate(column_widths_.begin(), column_widths_.end(), 0.0);
+  ColumnWidthType selected_sum = total_sum;
 
   if (!sections.isEmpty()) {
     selected_sum = 0.0;
@@ -57,8 +59,8 @@ void StretchHeaderView::NormaliseWidths(const QList<int>& sections) {
         selected_sum += column_widths_[i];
   }
 
-  if (total_sum != 0.0 && !qFuzzyCompare(total_sum, 1.0f)) {
-    const float mult = (selected_sum + (1.0 - total_sum)) / selected_sum;
+  if (total_sum != 0.0 && !qFuzzyCompare(total_sum, 1.0)) {
+    const ColumnWidthType mult = (selected_sum + (1.0 - total_sum)) / selected_sum;
     for (int i=0 ; i<column_widths_.count() ; ++i) {
       if (sections.isEmpty() || sections.contains(i))
         column_widths_[i] *= mult;
@@ -70,10 +72,10 @@ void StretchHeaderView::UpdateWidths(const QList<int>& sections) {
   if (!stretch_enabled_)
     return;
 
-  float total_w = 0.0;
+  ColumnWidthType total_w = 0.0;
 
   for (int i=0 ; i<column_widths_.count() ; ++i) {
-    const float w = column_widths_[i];
+    const ColumnWidthType w = column_widths_[i];
     int pixels = w * width();
 
     if (pixels != 0 && total_w - int(total_w) > 0.5)
@@ -168,7 +170,7 @@ void StretchHeaderView::SectionResized(int logical, int, int new_size) {
 
   if (in_mouse_move_event_) {
     // Update this section's proportional width
-    column_widths_[logical] = float(new_size) / width();
+    column_widths_[logical] = ColumnWidthType(new_size) / width();
 
     // Find the visible sections to the right of the section that's being resized
     int visual = visualIndex(logical);
@@ -199,7 +201,7 @@ void StretchHeaderView::SetStretchEnabled(bool enabled) {
     // Initialise the list of widths from the current state of the widget
     column_widths_.resize(count());
     for (int i=0 ; i<count() ; ++i) {
-      column_widths_[i] = float(sectionSize(i)) / width();
+      column_widths_[i] = ColumnWidthType(sectionSize(i)) / width();
     }
 
     // Stretch the columns to fill the widget
@@ -210,7 +212,7 @@ void StretchHeaderView::SetStretchEnabled(bool enabled) {
   emit StretchEnabledChanged(enabled);
 }
 
-void StretchHeaderView::SetColumnWidth(int logical, float width) {
+void StretchHeaderView::SetColumnWidth(int logical, ColumnWidthType width) {
   if (!stretch_enabled_)
     return;
 
@@ -228,4 +230,69 @@ void StretchHeaderView::AssertMinimalColumnWidth(int logical) {
   if (sectionSize(logical) < kMinimumColumnWidth) {
     resizeSection(logical, kMinimumColumnWidth);
   }
+}
+
+bool StretchHeaderView::RestoreState(const QByteArray& data) {
+  QDataStream s(data);
+  s.setVersion(QDataStream::Qt_4_6);
+
+  int magic_number = 0;
+  s >> magic_number;
+
+  if (magic_number != kMagicNumber || s.atEnd()) {
+    return false;
+  }
+
+  QList<int> pixel_widths;
+  QList<int> visual_indices;
+
+  s >> stretch_enabled_;
+  s >> pixel_widths;
+  s >> visual_indices;
+  s >> column_widths_;
+
+  const int persisted_column_count =
+      qMin(qMin(visual_indices.count(), pixel_widths.count()), column_widths_.count());
+
+  // Set column visible state, visual indices and, if we're not in stretch mode,
+  // pixel widths.
+  for (int i=0 ; i<count() && i<persisted_column_count ; ++i) {
+    setSectionHidden(i, pixel_widths[i] <= kMinimumColumnWidth);
+    moveSection(visualIndex(visual_indices[i]), i);
+
+    if (!stretch_enabled_) {
+      resizeSection(i, pixel_widths[i]);
+    }
+  }
+
+  if (stretch_enabled_) {
+    // In stretch mode, we've already set the proportional column widths so apply
+    // them now.
+    UpdateWidths();
+  }
+
+  return true;
+}
+
+QByteArray StretchHeaderView::SaveState() const {
+  QByteArray ret;
+  QDataStream s(&ret, QIODevice::WriteOnly);
+
+  QList<int> pixel_widths;
+  QList<int> visual_indices;
+
+  for (int i=0 ; i<count() ; ++i) {
+    pixel_widths << sectionSize(i);
+    visual_indices << logicalIndex(i);
+  }
+
+  s.setVersion(QDataStream::Qt_4_6);
+  s << kMagicNumber;
+
+  s << stretch_enabled_;
+  s << pixel_widths;
+  s << visual_indices;
+  s << column_widths_;
+
+  return ret;
 }
