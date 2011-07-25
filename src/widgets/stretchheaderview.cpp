@@ -245,11 +245,17 @@ bool StretchHeaderView::RestoreState(const QByteArray& data) {
 
   QList<int> pixel_widths;
   QList<int> visual_indices;
+  int sort_indicator_order = Qt::AscendingOrder;
+  int sort_indicator_section = 0;
 
   s >> stretch_enabled_;
   s >> pixel_widths;
   s >> visual_indices;
   s >> column_widths_;
+  s >> sort_indicator_order;
+  s >> sort_indicator_section;
+
+  setSortIndicator(sort_indicator_section, Qt::SortOrder(sort_indicator_order));
 
   const int persisted_column_count =
       qMin(qMin(visual_indices.count(), pixel_widths.count()), column_widths_.count());
@@ -295,6 +301,8 @@ QByteArray StretchHeaderView::SaveState() const {
   s << pixel_widths;
   s << visual_indices;
   s << column_widths_;
+  s << int(sortIndicatorOrder());
+  s << sortIndicatorSection();
 
   return ret;
 }

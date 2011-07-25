@@ -111,6 +111,7 @@ PlaylistView::PlaylistView(QWidget *parent)
 
   connect(header_, SIGNAL(sectionResized(int,int,int)), SLOT(SaveGeometry()));
   connect(header_, SIGNAL(sectionMoved(int,int,int)), SLOT(SaveGeometry()));
+  connect(header_, SIGNAL(sortIndicatorChanged(int,Qt::SortOrder)), SLOT(SaveGeometry()));
   connect(header_, SIGNAL(SectionVisibilityChanged(int,bool)), SLOT(SaveGeometry()));
   connect(header_, SIGNAL(sectionResized(int,int,int)), SLOT(InvalidateCachedCurrentPixmap()));
   connect(header_, SIGNAL(sectionMoved(int,int,int)), SLOT(InvalidateCachedCurrentPixmap()));
@@ -166,7 +167,7 @@ void PlaylistView::SetItemDelegates(LibraryBackend* backend) {
   setItemDelegateForColumn(Playlist::Column_LastPlayed, new LastPlayedItemDelegate(this));
 }
 
-void PlaylistView::SetPlaylist(Playlist *playlist) {
+void PlaylistView::SetPlaylist(Playlist* playlist) {
   if (playlist_) {
     disconnect(playlist_, SIGNAL(CurrentSongChanged(Song)),
                this, SLOT(MaybeAutoscroll()));
