@@ -271,6 +271,8 @@ bool StretchHeaderView::RestoreState(const QByteArray& data) {
     UpdateWidths();
   }
 
+  emit StretchEnabledChanged(stretch_enabled_);
+
   return true;
 }
 

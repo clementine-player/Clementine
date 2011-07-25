@@ -32,8 +32,7 @@ PlaylistHeader::PlaylistHeader(Qt::Orientation orientation, QWidget* parent)
   stretch_action_ = menu_->addAction(tr("&Stretch columns to fit window"), this, SLOT(ToggleStretchEnabled()));
   menu_->addSeparator();
 
-  QMenu* align_menu = new QMenu(tr("&Align text"), this);
-  align_left_action_ = align_menu->addAction(tr("&Left"), this, SLOT(AlignCurrentLeft()));
+  QMenu* align_menu = new QMenu(tr("&Align text"), this); align_left_action_ = align_menu->addAction(tr("&Left"), this, SLOT(AlignCurrentLeft()));
   align_center_action_ = align_menu->addAction(tr("&Center"), this, SLOT(AlignCurrentCenter()));
   align_right_action_ = align_menu->addAction(tr("&Right"), this, SLOT(AlignCurrentRight()));
 

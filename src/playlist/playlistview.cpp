@@ -902,11 +902,11 @@ void PlaylistView::SaveSettings() {
   s.setValue("glow_effect", glow_enabled_);
   s.setValue("column_alignments", QVariant::fromValue(playlist_->column_alignments()));
   s.setValue("bg_enabled", background_enabled_);
-
 }
 
 void PlaylistView::StretchChanged(bool stretch) {
   setHorizontalScrollBarPolicy(stretch ? Qt::ScrollBarAlwaysOff : Qt::ScrollBarAsNeeded);
+  SaveGeometry();
 }
 
 void PlaylistView::DynamicModeChanged(bool dynamic) {
