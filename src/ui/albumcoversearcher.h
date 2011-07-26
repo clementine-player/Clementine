@@ -23,6 +23,7 @@
 
 #include <QDialog>
 #include <QIcon>
+#include <QStyledItemDelegate>
 
 #include <boost/shared_ptr.hpp>
 
@@ -32,6 +33,23 @@ class Ui_AlbumCoverSearcher;
 class QModelIndex;
 class QStandardItem;
 class QStandardItemModel;
+
+
+class SizeOverlayDelegate : public QStyledItemDelegate {
+public:
+  static const int kMargin;
+  static const int kPaddingX;
+  static const int kPaddingY;
+  static const qreal kBorder;
+  static const qreal kFontPointSize;
+  static const int kBorderAlpha;
+  static const int kBackgroundAlpha;
+
+  SizeOverlayDelegate(QObject* parent = NULL);
+
+  void paint(QPainter* painter, const QStyleOptionViewItem& option,
+             const QModelIndex& index) const;
+};
 
 
 // This is a dialog that lets the user search for album covers
@@ -46,7 +64,8 @@ public:
     Role_ImageURL = Qt::UserRole + 1,
     Role_ImageRequestId,
     Role_ImageFetchFinished,
-    Role_ImageDimensions,
+    Role_ImageDimensions, // width * height
+    Role_ImageSize,
   };
 
   void Init(AlbumCoverFetcher* fetcher);

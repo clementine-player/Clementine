@@ -329,6 +329,11 @@ QByteArray Sha256(const QByteArray& data) {
   return ret;
 }
 
+QString PrettySize(const QSize& size) {
+  return QString::number(size.width()) + "x" +
+         QString::number(size.height());
+}
+
 }  // namespace Utilities
 
 

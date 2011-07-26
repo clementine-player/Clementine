@@ -20,6 +20,7 @@
 
 #include <QColor>
 #include <QLocale>
+#include <QSize>
 #include <QString>
 
 #include <boost/scoped_array.hpp>
@@ -31,6 +32,7 @@ namespace Utilities {
   QString PrettyTimeDelta(int seconds);
   QString PrettyTimeNanosec(qint64 nanoseconds);
   QString PrettySize(quint64 bytes);
+  QString PrettySize(const QSize& size);
   QString WordyTime(quint64 seconds);
   QString WordyTimeNanosec(qint64 nanoseconds);
   QString Ago(int seconds_since_epoch, const QLocale& locale);
