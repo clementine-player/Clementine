@@ -341,16 +341,17 @@ void Player::EngineMetadataReceived(const Engine::SimpleMetaBundle& bundle) {
 
   // Maybe the metadata is from icycast and has "Artist - Title" shoved
   // together in the title field.
-  int dash_pos = bundle_copy.title.indexOf('-');
+  const int dash_pos = bundle_copy.title.indexOf('-');
   if (dash_pos != -1 && bundle_copy.artist.isEmpty()) {
-    bundle_copy.artist = bundle_copy.title.mid(dash_pos + 1).trimmed();
-    bundle_copy.title = bundle_copy.title.left(dash_pos).trimmed();
-  }
-
-  // Hack as SomaFM's and icecast's artist/title descriptions are backwards.
-  if (item->Url().host().contains("somafm.com") ||
-      item->Url().fragment() == "icecast") {
-    qSwap(bundle_copy.artist, bundle_copy.title);
+    // Split on " - " if it exists, otherwise split on "-".
+    const int space_dash_pos = bundle_copy.title.indexOf(" - ");
+    if (space_dash_pos != -1) {
+      bundle_copy.artist = bundle_copy.title.left(space_dash_pos).trimmed();
+      bundle_copy.title  = bundle_copy.title.mid(space_dash_pos + 3).trimmed();
+    } else {
+      bundle_copy.artist = bundle_copy.title.left(dash_pos).trimmed();
+      bundle_copy.title  = bundle_copy.title.mid(dash_pos + 1).trimmed();
+    }
   }
 
   Song song = item->Metadata();

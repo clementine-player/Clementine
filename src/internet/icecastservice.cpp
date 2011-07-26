@@ -260,9 +260,6 @@ IcecastBackend::Station IcecastService::ReadStation(QXmlStreamReader* reader) co
     station.genre[0] = station.genre[0].toUpper();
   }
 
-  // HACK: This hints to the player that the artist and title metadata needs swapping.
-  station.url.setFragment("icecast");
-
   return station;
 }
 
