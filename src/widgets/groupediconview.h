@@ -20,7 +20,7 @@
 
 #include <QListView>
 
-class QSortFilterProxyModel;
+class MultiSortFilterProxy;
 
 
 class GroupedIconView : public QListView {
@@ -44,6 +44,8 @@ public:
   enum Role {
     Role_Group = 1158300,
   };
+
+  void AddSortSpec(int role, Qt::SortOrder order = Qt::AscendingOrder);
 
   int header_spacing() const { return header_spacing_; }
   int header_indent() const { return header_indent_; }
@@ -95,7 +97,7 @@ private:
   // Returns the index of the item above (d=-1) or below (d=+1) the given item.
   int IndexAboveOrBelow(int index, int d) const;
 
-  QSortFilterProxyModel* proxy_model_;
+  MultiSortFilterProxy* proxy_model_;
   QVector<QRect> visual_rects_;
   QVector<Header> headers_;
 

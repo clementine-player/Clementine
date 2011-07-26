@@ -42,6 +42,7 @@ AlbumCoverSearcher::AlbumCoverSearcher(const QIcon& no_cover_icon, QWidget* pare
   ui_->busy->hide();
 
   ui_->covers->set_header_text(tr("Covers from %1"));
+  ui_->covers->AddSortSpec(Role_ImageDimensions, Qt::DescendingOrder);
   ui_->covers->setModel(model_);
 
   loader_->Start(true);
@@ -162,6 +163,7 @@ void AlbumCoverSearcher::ImageLoaded(quint64 id, const QImage& image) {
 
   QStandardItem* item = cover_loading_tasks_.take(id);
   item->setData(true, Role_ImageFetchFinished);
+  item->setData(image.width() * image.height(), Role_ImageDimensions);
   item->setIcon(icon);
   item->setToolTip(item->text() + " (" + QString::number(image.width()) + "x" +
                                          QString::number(image.height()) + ")");

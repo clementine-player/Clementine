@@ -16,6 +16,7 @@
 */
 
 #include "groupediconview.h"
+#include "core/multisortfilterproxy.h"
 
 #include <QPainter>
 #include <QPaintEvent>
@@ -29,7 +30,7 @@ const int GroupedIconView::kBarMarginTop = 3;
 
 GroupedIconView::GroupedIconView(QWidget* parent)
   : QListView(parent),
-    proxy_model_(new QSortFilterProxyModel(this)),
+    proxy_model_(new MultiSortFilterProxy(this)),
     default_header_height_(fontMetrics().height() +
       kBarMarginTop + kBarThickness),
     header_spacing_(10),
@@ -43,10 +44,14 @@ GroupedIconView::GroupedIconView(QWidget* parent)
   setWordWrap(true);
   setDragEnabled(false);
 
-  proxy_model_->setSortRole(Role_Group);
+  proxy_model_->AddSortSpec(Role_Group);
   proxy_model_->setDynamicSortFilter(true);
 
   connect(proxy_model_, SIGNAL(modelReset()), SLOT(LayoutItems()));
+}
+
+void GroupedIconView::AddSortSpec(int role, Qt::SortOrder order) {
+  proxy_model_->AddSortSpec(role, order);
 }
 
 void GroupedIconView::setModel(QAbstractItemModel* model) {

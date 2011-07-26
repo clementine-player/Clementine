@@ -46,6 +46,7 @@ public:
     Role_ImageURL = Qt::UserRole + 1,
     Role_ImageRequestId,
     Role_ImageFetchFinished,
+    Role_ImageDimensions,
   };
 
   void Init(AlbumCoverFetcher* fetcher);
