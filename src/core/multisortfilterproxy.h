@@ -13,7 +13,7 @@ protected:
   bool lessThan(const QModelIndex& left, const QModelIndex& right) const;
 
 private:
-  int compare(const QVariant& left, const QVariant& right) const;
+  int Compare(const QVariant& left, const QVariant& right) const;
 
   typedef QPair<int, Qt::SortOrder> SortSpec;
   QList<SortSpec> sorting_;
