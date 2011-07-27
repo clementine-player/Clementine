@@ -166,10 +166,18 @@ endif(WIN32)
 add_definitions(-DQT_NO_CAST_TO_ASCII -DQT_STRICT_ITERATORS)
 
 # Translations stuff
-find_program(GETTEXT_XGETTEXT_EXECUTABLE xgettext)
+find_program(GETTEXT_XGETTEXT_EXECUTABLE xgettext PATHS /target/bin)
 if(NOT GETTEXT_XGETTEXT_EXECUTABLE)
   message(FATAL_ERROR "Could not find xgettext executable")
 endif(NOT GETTEXT_XGETTEXT_EXECUTABLE)
+find_program(GETTEXT_MSGMERGE_EXECUTABLE msgmerge PATHS /target/bin)
+if(NOT GETTEXT_MSGMERGE_EXECUTABLE)
+  message(FATAL_ERROR "Could not find msgmerge executable")
+endif(NOT GETTEXT_MSGMERGE_EXECUTABLE)
+find_program(GETTEXT_MSGFMT_EXECUTABLE msgfmt PATHS /target/bin)
+if(NOT GETTEXT_MSGFMT_EXECUTABLE)
+  message(FATAL_ERROR "Could not find msgfmt executable")
+endif(NOT GETTEXT_MSGFMT_EXECUTABLE)
 
 # Optional bits
 option(ENABLE_LIBGPOD "iPod classic support" ON)
