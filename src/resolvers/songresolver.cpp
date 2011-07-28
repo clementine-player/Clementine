@@ -12,7 +12,7 @@ SongResolver::SongResolver(LibraryBackendInterface* library, QObject* parent)
       song_(NULL),
       resolvers_finished_(0),
       resolved_(false) {
-  // Register in the other they should be checked.
+  // Register in the order they should be checked.
   RegisterResolver(new LibraryResolver(library));
   RegisterResolver(new SpotifyResolver(InternetModel::Service<SpotifyService>()->server()));
 }
