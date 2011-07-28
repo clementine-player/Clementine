@@ -90,13 +90,13 @@ Song XSPFParser::ParseTrack(QXmlStreamReader* reader, const QDir& dir) const {
   }
 
 return_song:
-  Song song = LoadSong(location, 0, dir);
-
-  // Override metadata with what was in the playlist
+  Song song;
   song.set_title(title);
   song.set_artist(artist);
   song.set_album(album);
   song.set_length_nanosec(nanosec);
+  LoadSong(location, 0, dir, &song);
+
   return song;
 }
 
