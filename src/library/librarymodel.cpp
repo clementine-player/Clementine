@@ -856,6 +856,8 @@ LibraryItem* LibraryModel::ItemFromSong(GroupBy type,
   }
 
   FinishItem(type, signal, create_divider, parent, item);
+  if (s.url().scheme() == "cdda")
+    item->lazy_loaded = true;
   return item;
 }
 

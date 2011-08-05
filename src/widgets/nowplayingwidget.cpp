@@ -352,7 +352,7 @@ void NowPlayingWidget::DrawContents(QPainter *p) {
 
 void NowPlayingWidget::FadePreviousTrack(qreal value) {
   previous_track_opacity_ = value;
-  if (qFuzzyCompare(previous_track_opacity_, 0.0)) {
+  if (qFuzzyCompare(previous_track_opacity_, qreal(0.0))) {
     previous_track_ = QPixmap();
   }
 
