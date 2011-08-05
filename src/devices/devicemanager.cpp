@@ -247,7 +247,7 @@ QVariant DeviceManager::data(const QModelIndex& index, int role) const {
     case Qt::DecorationRole: {
       QPixmap pixmap = info.icon_.pixmap(kDeviceIconSize);
 
-      if (!info.BestBackend()->lister_) {
+      if (info.backends_.isEmpty() || !info.BestBackend()->lister_) {
         // Disconnected but remembered
         QPainter p(&pixmap);
         p.drawPixmap(kDeviceIconSize - kDeviceIconOverlaySize,
