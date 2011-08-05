@@ -399,10 +399,6 @@ int DeviceManager::FindDeviceByUrl(const QList<QUrl>& urls) const {
 
 void DeviceManager::PhysicalDeviceAdded(const QString &id) {
   DeviceLister* lister = qobject_cast<DeviceLister*>(sender());
-  qLog(Info) << lister->MakeDeviceUrls(id);
-  if (dynamic_cast<GioLister*>(lister)) {
-    qLog(Debug) << "It's GIO lister";
-  }
 
   qLog(Info) << "Device added:" << id;
 
