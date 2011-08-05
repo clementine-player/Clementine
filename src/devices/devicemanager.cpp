@@ -27,6 +27,9 @@
 #include "core/utilities.h"
 #include "ui/iconloader.h"
 
+#include "cddalister.h"
+#include "cddadevice.h"
+
 #ifdef Q_OS_DARWIN
 #  include "macdevicelister.h"
 #endif
@@ -183,6 +186,7 @@ DeviceManager::DeviceManager(BackgroundThread<Database>* database,
   connected_devices_model_ = new DeviceStateFilterModel(this);
   connected_devices_model_->setSourceModel(this);
 
+  AddLister(new CddaLister);
 #ifdef HAVE_DEVICEKIT
   AddLister(new DeviceKitLister);
 #endif
@@ -201,6 +205,7 @@ DeviceManager::DeviceManager(BackgroundThread<Database>* database,
   AddDeviceClass<AfcDevice>();
 #endif
 
+  AddDeviceClass<CddaDevice>();
   AddDeviceClass<FilesystemDevice>();
 
 #ifdef HAVE_LIBGPOD
@@ -241,6 +246,8 @@ QVariant DeviceManager::data(const QModelIndex& index, int role) const {
 
       if (info.size_)
         text = text + QString(" (%1)").arg(Utilities::PrettySize(info.size_));
+      if (info.device_.get())
+        info.device_->Refresh();
       return text;
     }
 
@@ -303,16 +310,19 @@ QVariant DeviceManager::data(const QModelIndex& index, int role) const {
       if (!info.device_) {
         if (info.database_id_ == -1 &&
             !info.BestBackend()->lister_->DeviceNeedsMount(info.BestBackend()->unique_id_)) {
-          boost::scoped_ptr<QMessageBox> dialog(new QMessageBox(
-              QMessageBox::Information, tr("Connect device"),
-              tr("This is the first time you have connected this device.  Clementine will now scan the device to find music files - this may take some time."),
-              QMessageBox::Cancel));
-          QPushButton* connect =
-              dialog->addButton(tr("Connect device"), QMessageBox::AcceptRole);
-          dialog->exec();
+          // Don't ask user if it is a CD device
+          if (info.device_ && !dynamic_cast<CddaDevice*>(info.device_.get())) {
+            boost::scoped_ptr<QMessageBox> dialog(new QMessageBox(
+                QMessageBox::Information, tr("Connect device"),
+                tr("This is the first time you have connected this device.  Clementine will now scan the device to find music files - this may take some time."),
+                QMessageBox::Cancel));
+            QPushButton* connect =
+                dialog->addButton(tr("Connect device"), QMessageBox::AcceptRole);
+            dialog->exec();
 
-          if (dialog->clickedButton() != connect)
-            return QVariant();
+            if (dialog->clickedButton() != connect)
+              return QVariant();
+          }
         }
 
         const_cast<DeviceManager*>(this)->Connect(index.row());
@@ -389,6 +399,10 @@ int DeviceManager::FindDeviceByUrl(const QList<QUrl>& urls) const {
 
 void DeviceManager::PhysicalDeviceAdded(const QString &id) {
   DeviceLister* lister = qobject_cast<DeviceLister*>(sender());
+  qLog(Info) << lister->MakeDeviceUrls(id);
+  if (dynamic_cast<GioLister*>(lister)) {
+    qLog(Debug) << "It's GIO lister";
+  }
 
   qLog(Info) << "Device added:" << id;
 

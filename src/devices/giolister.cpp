@@ -217,6 +217,9 @@ void GioLister::VolumeAdded(GVolume* volume) {
   info.ReadMountInfo(g_volume_get_mount(volume));
   if (!info.is_suitable())
     return;
+  if (info.volume_root_uri.startsWith("cdda"))
+    // Audio CD devices are already handled by CDDA lister
+    return;
 
   {
     QMutexLocker l(&mutex_);
@@ -249,6 +252,9 @@ void GioLister::MountAdded(GMount* mount) {
   info.ReadDriveInfo(g_mount_get_drive(mount));
   if (!info.is_suitable())
     return;
+  if (info.volume_root_uri.startsWith("cdda"))
+    // Audio CD devices are already handled by CDDA lister
+    return;
 
   QString old_id;
   {
@@ -275,8 +281,9 @@ void GioLister::MountAdded(GMount* mount) {
 
   if (!old_id.isEmpty())
     emit DeviceChanged(old_id);
-  else
+  else {
     emit DeviceAdded(info.unique_id());
+  }
 }
 
 void GioLister::MountChanged(GMount* mount) {
