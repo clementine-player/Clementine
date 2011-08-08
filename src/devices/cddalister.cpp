@@ -93,6 +93,9 @@ void CddaLister::UpdateDeviceFreeSpace(const QString&) {
 
 void CddaLister::Init() {
   char **devices = cdio_get_devices(DRIVER_DEVICE);
+  if (!devices) {
+    return;
+  }
   for (; *devices != NULL; ++devices) {
     if (strcmp("/dev/cdrom", *devices) == 0)
       continue;
