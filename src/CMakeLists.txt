@@ -101,6 +101,8 @@ set(SOURCES
   covers/coversearchstatisticsdialog.cpp
   covers/kittenloader.cpp
 
+  devices/cddalister.cpp
+  devices/cddadevice.cpp
   devices/connecteddevice.cpp
   devices/devicedatabasebackend.cpp
   devices/devicelister.cpp
@@ -325,6 +327,8 @@ set(HEADERS
   covers/coversearchstatisticsdialog.h
   covers/kittenloader.h
 
+  devices/cddalister.h
+  devices/cddadevice.h
   devices/connecteddevice.h
   devices/devicedatabasebackend.h
   devices/devicelister.h
@@ -969,6 +973,7 @@ target_link_libraries(clementine_lib
   ${QTSINGLECOREAPPLICATION_LIBRARIES}
   ${QTIOCOMPRESSOR_LIBRARIES}
   ${CMAKE_THREAD_LIBS_INIT}
+  ${CDIO_LIBRARIES}
   dl
   z
 )

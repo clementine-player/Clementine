@@ -1390,7 +1390,7 @@ void Playlist::StopAfter(int row) {
 }
 
 void Playlist::SetStreamMetadata(const QUrl& url, const Song& song) {
-  qLog(Debug) << "Seting metadata for" << url << "to" << song.artist() << song.title();
+  qLog(Debug) << "Setting metadata for" << url << "to" << song.artist() << song.title();
   if (!current_item_)
     return;
 
