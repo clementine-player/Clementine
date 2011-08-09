@@ -92,8 +92,15 @@ void CddaLister::UpdateDeviceFreeSpace(const QString&) {
 }
 
 void CddaLister::Init() {
+  cdio_init();
+#ifdef Q_OS_DARWIN
+  if (!cdio_have_driver(DRIVER_OSX)) {
+    qLog(Error) << "libcdio was compiled without support for OS X!";
+  }
+#endif
   char **devices = cdio_get_devices(DRIVER_DEVICE);
   if (!devices) {
+    qLog(Debug) << "No CD devices found";
     return;
   }
   for (; *devices != NULL; ++devices) {
