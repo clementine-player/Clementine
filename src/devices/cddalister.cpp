@@ -106,7 +106,15 @@ void CddaLister::Init() {
   for (; *devices != NULL; ++devices) {
     if (strcmp("/dev/cdrom", *devices) == 0)
       continue;
+
     QString device(*devices);
+#ifdef Q_OS_DARWIN
+    // Every track is detected as a separate device on Darwin. The raw disk looks
+    // like /dev/rdisk1
+    if (!device.contains(QRegExp("^/dev/rdisk[0-9]$"))) {
+      continue;
+    }
+#endif
     devices_list_ << device;
     emit DeviceAdded(device);
   }
