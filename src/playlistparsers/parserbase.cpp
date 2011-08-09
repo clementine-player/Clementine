@@ -19,6 +19,7 @@
 #include "library/librarybackend.h"
 #include "library/libraryquery.h"
 #include "library/sqlrow.h"
+#include "resolvers/songresolver.h"
 
 #include <QUrl>
 
@@ -31,6 +32,9 @@ ParserBase::ParserBase(LibraryBackendInterface* library, QObject *parent)
 void ParserBase::LoadSong(const QString& filename_or_url, qint64 beginning,
                           const QDir& dir, Song* song) const {
   if (filename_or_url.isEmpty()) {
+    // Try and resolve from various sources.
+    SongResolver resolver(library_);
+    resolver.ResolveSong(song);
     return;
   }
 

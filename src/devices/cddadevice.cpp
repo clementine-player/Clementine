@@ -121,7 +121,7 @@ void CddaDevice::Init() {
     musicbrainz_client->StartDiscIdRequest(musicbrainz_discid);
     g_free(string_mb);
   }
-  
+
   // Clean all the Gstreamer objects we have used: we don't need them anymore
   gst_element_set_state (pipe, GST_STATE_NULL);
   gst_object_unref(GST_OBJECT(pipe));
@@ -156,8 +156,8 @@ void CddaDevice::AudioCDTagsLoaded(const QString& artist, const QString& album,
 }
 
 void CddaDevice::Refresh() {
-  if ((cdio_ && cdda_) &&             /* already init... */
-      !cdio_get_media_changed(cdio_) /* ...and hasn't change since last time */) {
+  if ((cdio_ && cdda_) &&                /* already init... */
+      cdio_get_media_changed(cdio_) != 1 /* ...and hasn't change since last time */) {
     return;
   }
   // Check if mutex is already token (i.e. init is already taking place)

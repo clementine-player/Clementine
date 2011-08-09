@@ -22,6 +22,7 @@ int LibraryResolver::ResolveSong(const Song& song) {
   LibraryQuery* query = new LibraryQuery;
   query->AddWhere("artist", song.artist());
   query->AddWhere("title", song.title());
+  query->SetColumnSpec("%songs_table.ROWID, " + Song::kColumnSpec);
 
   QFuture<bool> future = QtConcurrent::run(
       backend_, &LibraryBackendInterface::ExecQuery, query);

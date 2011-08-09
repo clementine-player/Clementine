@@ -77,6 +77,9 @@ GSTREAMER_PLUGINS=[
 
     # Fingerprinting support
     'libgstofa.so',
+
+    # CD support
+    'libgstcdio.so',
 ]
 
 GSTREAMER_SEARCH_PATH=[
