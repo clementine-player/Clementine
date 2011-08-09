@@ -91,6 +91,8 @@ class GstEnginePipeline : public QObject {
 
   QUrl redirect_url() const { return redirect_url_; }
 
+  QString source_device() const { return source_device_; }
+
  public slots:
   void SetVolumeModifier(qreal mod);
 
@@ -114,6 +116,7 @@ class GstEnginePipeline : public QObject {
   static bool HandoffCallback(GstPad*, GstBuffer*, gpointer);
   static bool EventHandoffCallback(GstPad*, GstEvent*, gpointer);
   static void SourceDrainedCallback(GstURIDecodeBin*, gpointer);
+  static void SourceSetupCallback(GstURIDecodeBin*, GParamSpec *pspec, gpointer);
 
   void TagMessageReceived(GstMessage*);
   void ErrorMessageReceived(GstMessage*);
@@ -203,6 +206,9 @@ class GstEnginePipeline : public QObject {
   // When the gstreamer source requests a redirect we store the URL here and
   // callers can pick it up after the state change to PLAYING fails.
   QUrl redirect_url_;
+
+  // When we need to specify the device to use as source (for CD device)
+  QString source_device_;
 
   // Seeking while the pipeline is in the READY state doesn't work, so we have
   // to wait until it goes to PAUSED or PLAYING.
