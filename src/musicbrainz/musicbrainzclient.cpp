@@ -91,7 +91,7 @@ void MusicBrainzClient::DiscIdRequestFinished() {
   ResultList ret;
   QString artist;
   QString album;
-  
+
   if (reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt() != 200) {
     emit Finished(artist, album, ret);
     return;
@@ -117,11 +117,14 @@ void MusicBrainzClient::DiscIdRequestFinished() {
   }
 
   while (!reader.atEnd()) {
-    if (reader.readNext() == QXmlStreamReader::StartElement && reader.name() == "track") {
+    QXmlStreamReader::TokenType token = reader.readNext();
+    if (token == QXmlStreamReader::StartElement && reader.name() == "track") {
       Result track = ParseTrack(&reader);
       if (!track.title_.isEmpty()) {
         ret << track;
       }
+    } else if (token == QXmlStreamReader::EndElement && reader.name() == "track-list") {
+      break;
     }
   }
 
