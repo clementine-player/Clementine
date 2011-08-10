@@ -16,6 +16,7 @@
 */
 
 #include <cdio/cdio.h>
+#include <QFileInfo>
 #include <QMutex>
 #include <QThread>
 #include <QWaitCondition>
@@ -104,10 +105,10 @@ void CddaLister::Init() {
     return;
   }
   for (; *devices != NULL; ++devices) {
-    if (strcmp("/dev/cdrom", *devices) == 0)
-      continue;
-
     QString device(*devices);
+    QFileInfo device_info(device);
+    if (device_info.isSymLink())
+      continue;
 #ifdef Q_OS_DARWIN
     // Every track is detected as a separate device on Darwin. The raw disk looks
     // like /dev/rdisk1
