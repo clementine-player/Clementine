@@ -101,8 +101,6 @@ set(SOURCES
   covers/coversearchstatisticsdialog.cpp
   covers/kittenloader.cpp
 
-  devices/cddalister.cpp
-  devices/cddadevice.cpp
   devices/connecteddevice.cpp
   devices/devicedatabasebackend.cpp
   devices/devicelister.cpp
@@ -327,8 +325,6 @@ set(HEADERS
   covers/coversearchstatisticsdialog.h
   covers/kittenloader.h
 
-  devices/cddalister.h
-  devices/cddadevice.h
   devices/connecteddevice.h
   devices/devicedatabasebackend.h
   devices/devicelister.h
@@ -776,6 +772,15 @@ if(HAVE_GIO)
   list(APPEND HEADERS devices/giolister.h)
 endif(HAVE_GIO)
 
+# CDIO backend and device
+if(HAVE_AUDIOCD)
+  list(APPEND SOURCES devices/cddadevice.cpp)
+  list(APPEND SOURCES devices/cddalister.cpp)
+
+  list(APPEND HEADERS devices/cddadevice.h)
+  list(APPEND HEADERS devices/cddalister.h)
+endif(HAVE_AUDIOCD)
+
 # libimobiledevice backend and device
 if(HAVE_IMOBILEDEVICE)
   include_directories(${IMOBILEDEVICE_INCLUDE_DIRS})
@@ -870,6 +875,10 @@ list(APPEND OTHER_SOURCES
   devices/afcfile.h
   devices/afctransfer.cpp
   devices/afctransfer.h
+  devices/cddadevice.cpp
+  devices/cddadevice.h
+  devices/cddalister.cpp
+  devices/cddalister.h
   devices/devicekitlister.h
   devices/devicekitlister.cpp
   devices/gpoddevice.cpp
@@ -967,13 +976,11 @@ target_link_libraries(clementine_lib
   ${GSTREAMER_BASE_LIBRARIES}
   ${GSTREAMER_LIBRARIES}
   ${GSTREAMER_APP_LIBRARIES}
-  ${GSTREAMER_CDDA_LIBRARIES}
   ${GSTREAMER_TAG_LIBRARIES}
   ${QTSINGLEAPPLICATION_LIBRARIES}
   ${QTSINGLECOREAPPLICATION_LIBRARIES}
   ${QTIOCOMPRESSOR_LIBRARIES}
   ${CMAKE_THREAD_LIBS_INIT}
-  ${CDIO_LIBRARIES}
   dl
   z
 )
@@ -993,6 +1000,11 @@ endif(HAVE_LIBGPOD)
 if(HAVE_GIO)
   target_link_libraries(clementine_lib ${GIO_LIBRARIES})
 endif(HAVE_GIO)
+
+if(HAVE_AUDIOCD)
+  target_link_libraries(clementine_lib ${CDIO_LIBRARIES})
+  target_link_libraries(clementine_lib ${GSTREAMER_CDDA_LIBRARIES})
+endif(HAVE_AUDIOCD)
 
 if(HAVE_LIBARCHIVE)
   target_link_libraries(clementine_lib ${ARCHIVE_LIBRARIES})

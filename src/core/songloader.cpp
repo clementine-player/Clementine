@@ -15,6 +15,7 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "config.h"
 #include "songloader.h"
 #include "core/logging.h"
 #include "core/song.h"
@@ -35,7 +36,10 @@
 
 #include <boost/bind.hpp>
 
-#include <gst/cdda/gstcddabasesrc.h>
+#ifdef HAVE_AUDIOCD
+# include <gst/cdda/gstcddabasesrc.h>
+#endif
+
 
 QSet<QString> SongLoader::sRawUriSchemes;
 const int SongLoader::kDefaultTimeout = 5000;
@@ -102,6 +106,7 @@ SongLoader::Result SongLoader::LoadLocalPartial(const QString& filename) {
 }
 
 SongLoader::Result SongLoader::LoadAudioCD() {
+#ifdef HAVE_AUDIOCD
   // Create gstreamer cdda element
   GstElement* cdda = gst_element_make_from_uri (GST_URI_SRC, "cdda://", NULL);
   if (cdda == NULL) {
@@ -176,7 +181,10 @@ SongLoader::Result SongLoader::LoadAudioCD() {
   gst_object_unref(GST_OBJECT(msg));
   gst_object_unref(GST_OBJECT(tags));
 
- return Success;
+  return Success;
+#else // HAVE_AUDIOCD
+  return Error;
+#endif
 }
 
 void SongLoader::AudioCDTagsLoaded(const QString& artist, const QString& album,
