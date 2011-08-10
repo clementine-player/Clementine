@@ -77,7 +77,6 @@ QString CddaLister::MakeFriendlyName(const QString& id) {
     return QString(cd_info.psz_model);
   }
   cdio_destroy(cdio);
-  return QString();
   return QString("CD (") + id + ")";
 }
 
