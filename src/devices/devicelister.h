@@ -51,6 +51,10 @@ public:
   virtual QVariantMap DeviceHardwareInfo(const QString& id) = 0;
   virtual bool DeviceNeedsMount(const QString& id) { return false; }
 
+  // When connecting to a device for the first time, do we want an user's
+  // confirmation for scanning it? (by default yes)
+  virtual bool AskForScan() { return true; }
+
   virtual QString MakeFriendlyName(const QString& id) = 0;
   virtual QList<QUrl> MakeDeviceUrls(const QString& id) = 0;
 

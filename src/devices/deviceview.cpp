@@ -16,6 +16,7 @@
 */
 
 #include "connecteddevice.h"
+#include "devicelister.h"
 #include "devicemanager.h"
 #include "deviceproperties.h"
 #include "deviceview.h"
@@ -306,18 +307,21 @@ void DeviceView::DeviceDisconnected(int row) {
 }
 
 void DeviceView::Forget() {
-  boost::scoped_ptr<QMessageBox> dialog(new QMessageBox(
-      QMessageBox::Question, tr("Forget device"),
-      tr("Forgetting a device will remove it from this list and Clementine will have to rescan all the songs again next time you connect it."),
-      QMessageBox::Cancel, this));
-  QPushButton* forget =
-      dialog->addButton(tr("Forget device"), QMessageBox::DestructiveRole);
-  dialog->exec();
-
-  if (dialog->clickedButton() != forget)
-    return;
-
   QModelIndex device_idx = MapToDevice(menu_index_);
+  if (manager_->GetLister(device_idx.row()) &&
+      manager_->GetLister(device_idx.row())->AskForScan()) {
+    boost::scoped_ptr<QMessageBox> dialog(new QMessageBox(
+        QMessageBox::Question, tr("Forget device"),
+        tr("Forgetting a device will remove it from this list and Clementine will have to rescan all the songs again next time you connect it."),
+        QMessageBox::Cancel, this));
+    QPushButton* forget =
+        dialog->addButton(tr("Forget device"), QMessageBox::DestructiveRole);
+    dialog->exec();
+
+    if (dialog->clickedButton() != forget)
+      return;
+  }
+
   manager_->Forget(device_idx.row());
 }
 
