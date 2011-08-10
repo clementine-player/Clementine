@@ -37,8 +37,8 @@ public:
 
   void Init();
   void Refresh();
-  bool CopyToStorage(const MusicStorage::CopyJob&) { return true; }
-  bool DeleteFromStorage(const MusicStorage::DeleteJob&) { return true; }
+  bool CopyToStorage(const MusicStorage::CopyJob&) { return false; }
+  bool DeleteFromStorage(const MusicStorage::DeleteJob&) { return false; }
 
   static QStringList url_schemes() { return QStringList() << "cdda"; }
 
