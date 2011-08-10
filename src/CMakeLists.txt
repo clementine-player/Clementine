@@ -1006,10 +1006,6 @@ if(HAVE_AUDIOCD)
   target_link_libraries(clementine_lib ${GSTREAMER_CDDA_LIBRARIES})
 endif(HAVE_AUDIOCD)
 
-if(HAVE_LIBARCHIVE)
-  target_link_libraries(clementine_lib ${ARCHIVE_LIBRARIES})
-endif(HAVE_LIBARCHIVE)
-
 if(HAVE_IMOBILEDEVICE)
   target_link_libraries(clementine_lib
     ${IMOBILEDEVICE_LIBRARIES}
