@@ -153,6 +153,7 @@ bool GstEnginePipeline::ReplaceDecodeBin(const QUrl& url) {
     g_object_set(G_OBJECT(new_bin), "use-buffering", true, NULL);
     g_signal_connect(G_OBJECT(new_bin), "drained", G_CALLBACK(SourceDrainedCallback), this);
     g_signal_connect(G_OBJECT(new_bin), "pad-added", G_CALLBACK(NewPadCallback), this);
+    g_signal_connect(G_OBJECT(new_bin), "notify::source", G_CALLBACK(SourceSetupCallback), this);
     return ReplaceDecodeBin(new_bin);
   }
 }
@@ -288,12 +289,23 @@ bool GstEnginePipeline::InitFromString(const QString& pipeline) {
 
 bool GstEnginePipeline::InitFromUrl(const QUrl &url, qint64 end_nanosec) {
   pipeline_ = gst_pipeline_new("pipeline");
-
-  url_ = url;
+  
+  if (url.scheme() == "cdda") {
+    // Currently, Gstreamer can't handle input CD devices inside cdda URL. So
+    // we handle them ourselve: we extract the track number and re-create an
+    // URL with only cdda:// + the track number (which can be handled by
+    // Gstreamer). We keep the device in mind, and we will set it later using
+    // SourceSetupCallback
+    QStringList path = url.path().split('/');
+    url_ = QUrl(QString("cdda://%1").arg(path.takeLast()));
+    source_device_ = path.join("/");
+  } else {
+    url_ = url;
+  }
   end_offset_nanosec_ = end_nanosec;
 
   // Decode bin
-  if (!ReplaceDecodeBin(url)) return false;
+  if (!ReplaceDecodeBin(url_)) return false;
 
   return Init();
 }
@@ -557,6 +569,20 @@ void GstEnginePipeline::SourceDrainedCallback(GstURIDecodeBin* bin, gpointer sel
 
   if (instance->has_next_valid_url()) {
     instance->TransitionToNext();
+  }
+}
+
+void GstEnginePipeline::SourceSetupCallback(GstURIDecodeBin* bin, GParamSpec *pspec, gpointer self) {
+  GstEnginePipeline* instance = reinterpret_cast<GstEnginePipeline*>(self);
+  GstElement* element;
+  g_object_get(bin, "source", &element, NULL);
+  if (element &&
+      g_object_class_find_property(G_OBJECT_GET_CLASS(element), "device")) {
+    // Gstreamer is not able to handle device in URL (refering to Gstreamer
+    // documentation, this might be added in the future). Despite that, for now
+    // we include device inside URL: we decompose it during Init and set device
+    // here, when this callback is called.
+    g_object_set(element, "device", instance->source_device().toLocal8Bit().constData(), NULL);
   }
 }
 

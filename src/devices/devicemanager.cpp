@@ -27,8 +27,10 @@
 #include "core/utilities.h"
 #include "ui/iconloader.h"
 
-#include "cddalister.h"
-#include "cddadevice.h"
+#ifdef HAVE_AUDIOCD
+#  include "cddalister.h"
+#  include "cddadevice.h"
+#endif
 
 #ifdef Q_OS_DARWIN
 #  include "macdevicelister.h"
@@ -187,7 +189,7 @@ DeviceManager::DeviceManager(BackgroundThread<Database>* database,
   connected_devices_model_->setSourceModel(this);
 
   // CD devices are detected via the DiskArbitration framework instead on Darwin.
-#ifndef Q_OS_DARWIN
+#if defined(HAVE_AUDIOCD) && !defined(Q_OS_DARWIN)
   AddLister(new CddaLister);
 #endif
 #ifdef HAVE_DEVICEKIT
@@ -208,8 +210,11 @@ DeviceManager::DeviceManager(BackgroundThread<Database>* database,
   AddDeviceClass<AfcDevice>();
 #endif
 
-  AddDeviceClass<CddaDevice>();
   AddDeviceClass<FilesystemDevice>();
+
+#ifdef HAVE_AUDIOCD
+  AddDeviceClass<CddaDevice>();
+#endif
 
 #ifdef HAVE_LIBGPOD
   AddDeviceClass<GPodDevice>();
@@ -313,8 +318,8 @@ QVariant DeviceManager::data(const QModelIndex& index, int role) const {
       if (!info.device_) {
         if (info.database_id_ == -1 &&
             !info.BestBackend()->lister_->DeviceNeedsMount(info.BestBackend()->unique_id_)) {
-          // Don't ask user if it is a CD device
-          if (info.device_ && !dynamic_cast<CddaDevice*>(info.device_.get())) {
+
+          if (info.BestBackend()->lister_->AskForScan()) {
             boost::scoped_ptr<QMessageBox> dialog(new QMessageBox(
                 QMessageBox::Information, tr("Connect device"),
                 tr("This is the first time you have connected this device.  Clementine will now scan the device to find music files - this may take some time."),

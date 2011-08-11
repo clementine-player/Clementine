@@ -1,11 +1,15 @@
 #include "songresolver.h"
 
+#include "config.h"
 #include "core/logging.h"
 #include "core/song.h"
 #include "internet/internetmodel.h"
-#include "internet/spotifyservice.h"
 #include "libraryresolver.h"
+
+#ifdef HAVE_SPOTIFY
+#include "internet/spotifyservice.h"
 #include "spotifyresolver.h"
+#endif
 
 SongResolver::SongResolver(LibraryBackendInterface* library, QObject* parent)
     : QObject(parent),
@@ -14,7 +18,9 @@ SongResolver::SongResolver(LibraryBackendInterface* library, QObject* parent)
       resolved_(false) {
   // Register in the order they should be checked.
   RegisterResolver(new LibraryResolver(library));
+#ifdef HAVE_SPOTIFY
   RegisterResolver(new SpotifyResolver(InternetModel::Service<SpotifyService>()->server()));
+#endif
 }
 
 SongResolver::~SongResolver() {

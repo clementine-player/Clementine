@@ -37,6 +37,7 @@ public:
   quint64 DeviceCapacity(const QString& id);
   quint64 DeviceFreeSpace(const QString& id);
   QVariantMap DeviceHardwareInfo(const QString& id);
+  bool AskForScan() { return false; }
   QString MakeFriendlyName(const QString&);
   QList<QUrl> MakeDeviceUrls(const QString&);
   void UnmountDevice(const QString&);

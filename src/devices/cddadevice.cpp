@@ -47,11 +47,13 @@ void CddaDevice::Init() {
     return;
   }
   // Create gstreamer cdda element
-  cdda_ = gst_element_make_from_uri (GST_URI_SRC, "cdda://", unique_id_.toLocal8Bit().constData());
+  cdda_ = gst_element_make_from_uri (GST_URI_SRC, "cdda://", NULL);
   if (cdda_ == NULL) {
     model_->Reset();
     return;
   }
+
+  GST_CDDA_BASE_SRC(cdda_)->device = g_strdup (unique_id_.toLocal8Bit().constData());
 
   // Change the element's state to ready and paused, to be able to query it
   if (gst_element_set_state(cdda_, GST_STATE_READY) == GST_STATE_CHANGE_FAILURE ||
@@ -86,7 +88,7 @@ void CddaDevice::Init() {
     song.set_id(track_number);
     song.set_valid(true);
     song.set_filetype(Song::Type_Cdda);
-    song.set_url(QUrl(QString("cdda://%1").arg(track_number)));
+    song.set_url(QUrl(QString("cdda://%1/%2").arg(unique_id()).arg(track_number)));
     song.set_title(QString("Track %1").arg(track_number));
     song.set_track(track_number);
     songs << song;
@@ -146,7 +148,7 @@ void CddaDevice::AudioCDTagsLoaded(const QString& artist, const QString& album,
     song.set_id(track_number);
     song.set_track(track_number);
     // We need to set url: that's how playlist will find the correct item to update
-    song.set_url(QUrl(QString("cdda://%1").arg(track_number++)));
+    song.set_url(QUrl(QString("cdda://%1/%2").arg(unique_id()).arg(track_number++)));
     songs << song;
   }
   connect(this, SIGNAL(SongsDiscovered(const SongList&)), model_, SLOT(SongsDiscovered(const SongList&)));
