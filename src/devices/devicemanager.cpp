@@ -186,7 +186,10 @@ DeviceManager::DeviceManager(BackgroundThread<Database>* database,
   connected_devices_model_ = new DeviceStateFilterModel(this);
   connected_devices_model_->setSourceModel(this);
 
+  // CD devices are detected via the DiskArbitration framework instead on Darwin.
+#ifndef Q_OS_DARWIN
   AddLister(new CddaLister);
+#endif
 #ifdef HAVE_DEVICEKIT
   AddLister(new DeviceKitLister);
 #endif

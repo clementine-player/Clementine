@@ -42,7 +42,7 @@ CddaDevice::~CddaDevice(){
 
 void CddaDevice::Init() {
   QMutexLocker locker(&mutex_init_);
-  cdio_ = cdio_open (unique_id_.toLocal8Bit().constData(), DRIVER_DEVICE);
+  cdio_ = cdio_open (url_.path().toLocal8Bit().constData(), DRIVER_DEVICE);
   if (cdio_ == NULL) {
     return;
   }
