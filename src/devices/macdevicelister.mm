@@ -382,9 +382,16 @@ void MacDeviceLister::DiskRemovedCallback(DADiskRef disk, void* context) {
   MacDeviceLister* me = reinterpret_cast<MacDeviceLister*>(context);
   // We cannot access the USB tree when the disk is removed but we still get
   // the BSD disk name.
+
+  QString bsd_name = QString::fromAscii(DADiskGetBSDName(disk));
+  if (me->cd_devices_.remove(bsd_name)) {
+    emit me->DeviceRemoved(bsd_name);
+    return;
+  }
+
   for (QMap<QString, QString>::iterator it = me->current_devices_.begin();
        it != me->current_devices_.end(); ++it) {
-    if (it.value() == QString::fromLocal8Bit(DADiskGetBSDName(disk))) {
+    if (it.value() == bsd_name) {
       emit me->DeviceRemoved(it.key());
       me->current_devices_.erase(it);
       break;
@@ -711,6 +718,11 @@ QVariantList MacDeviceLister::DeviceIcons(const QString& serial) {
   if (IsMTPSerial(serial)) {
     return QVariantList();
   }
+
+  if (IsCDDevice(serial)) {
+    return QVariantList() << "media-optical";
+  }
+
   QString bsd_name = current_devices_[serial];
   DASessionRef session = DASessionCreate(kCFAllocatorDefault);
   DADiskRef disk = DADiskCreateFromBSDName(
