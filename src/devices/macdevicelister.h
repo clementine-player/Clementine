@@ -24,6 +24,7 @@ class MacDeviceLister : public DeviceLister {
   virtual quint64 DeviceCapacity(const QString& id);
   virtual quint64 DeviceFreeSpace(const QString& id);
   virtual QVariantMap DeviceHardwareInfo(const QString& id);
+  virtual bool AskForScan(const QString& serial) const;
   virtual QString MakeFriendlyName(const QString& id);
   virtual QList<QUrl> MakeDeviceUrls(const QString& id);
 

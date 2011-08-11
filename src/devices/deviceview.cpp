@@ -308,8 +308,9 @@ void DeviceView::DeviceDisconnected(int row) {
 
 void DeviceView::Forget() {
   QModelIndex device_idx = MapToDevice(menu_index_);
+  QString unique_id = manager_->data(device_idx, DeviceManager::Role_UniqueId).toString();
   if (manager_->GetLister(device_idx.row()) &&
-      manager_->GetLister(device_idx.row())->AskForScan()) {
+      manager_->GetLister(device_idx.row())->AskForScan(unique_id)) {
     boost::scoped_ptr<QMessageBox> dialog(new QMessageBox(
         QMessageBox::Question, tr("Forget device"),
         tr("Forgetting a device will remove it from this list and Clementine will have to rescan all the songs again next time you connect it."),

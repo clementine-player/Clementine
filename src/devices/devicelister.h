@@ -53,7 +53,7 @@ public:
 
   // When connecting to a device for the first time, do we want an user's
   // confirmation for scanning it? (by default yes)
-  virtual bool AskForScan() { return true; }
+  virtual bool AskForScan(const QString&) const { return true; }
 
   virtual QString MakeFriendlyName(const QString& id) = 0;
   virtual QList<QUrl> MakeDeviceUrls(const QString& id) = 0;

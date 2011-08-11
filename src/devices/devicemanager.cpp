@@ -319,7 +319,7 @@ QVariant DeviceManager::data(const QModelIndex& index, int role) const {
         if (info.database_id_ == -1 &&
             !info.BestBackend()->lister_->DeviceNeedsMount(info.BestBackend()->unique_id_)) {
 
-          if (info.BestBackend()->lister_->AskForScan()) {
+          if (info.BestBackend()->lister_->AskForScan(info.BestBackend()->unique_id_)) {
             boost::scoped_ptr<QMessageBox> dialog(new QMessageBox(
                 QMessageBox::Information, tr("Connect device"),
                 tr("This is the first time you have connected this device.  Clementine will now scan the device to find music files - this may take some time."),

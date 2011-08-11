@@ -53,7 +53,7 @@ void CddaDevice::Init() {
     return;
   }
 
-  GST_CDDA_BASE_SRC(cdda_)->device = g_strdup (unique_id_.toLocal8Bit().constData());
+  GST_CDDA_BASE_SRC(cdda_)->device = g_strdup (url_.path().toLocal8Bit().constData());
 
   // Change the element's state to ready and paused, to be able to query it
   if (gst_element_set_state(cdda_, GST_STATE_READY) == GST_STATE_CHANGE_FAILURE ||
@@ -88,7 +88,7 @@ void CddaDevice::Init() {
     song.set_id(track_number);
     song.set_valid(true);
     song.set_filetype(Song::Type_Cdda);
-    song.set_url(QUrl(QString("cdda://%1/%2").arg(unique_id()).arg(track_number)));
+    song.set_url(QUrl(QString("cdda://%1/%2").arg(url_.path()).arg(track_number)));
     song.set_title(QString("Track %1").arg(track_number));
     song.set_track(track_number);
     songs << song;
