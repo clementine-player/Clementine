@@ -48,7 +48,6 @@
 #include "library/groupbydialog.h"
 #include "library/library.h"
 #include "library/librarybackend.h"
-#include "library/libraryconfig.h"
 #include "library/librarydirectorymodel.h"
 #include "library/libraryfilterwidget.h"
 #include "library/libraryviewcontainer.h"

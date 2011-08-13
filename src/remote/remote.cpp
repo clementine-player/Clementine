@@ -16,7 +16,7 @@
 */
 
 #include "remote.h"
-#include "remoteconfig.h"
+#include "remotesettingspage.h"
 #include "core/player.h"
 #include "engines/enginebase.h"
 #include "playlist/playlist.h"
@@ -59,11 +59,11 @@ Remote::Remote(Player* player, QObject* parent)
 
 void Remote::ReloadSettings() {
   QSettings s;
-  s.beginGroup(RemoteConfig::kSettingsGroup);
+  s.beginGroup(RemoteSettingsPage::kSettingsGroup);
 
   QString username = s.value("username").toString();
   QString password = s.value("password").toString();
-  QString agent_name = s.value("agent_name", RemoteConfig::DefaultAgentName()).toString();
+  QString agent_name = s.value("agent_name", RemoteSettingsPage::DefaultAgentName()).toString();
 
   // Have the settings changed?
   if (username != connection_->username() ||

@@ -19,75 +19,56 @@
 #define SETTINGSDIALOG_H
 
 #include <QDialog>
-#include <QMap>
-#include <QUrl>
 
 #include "config.h"
 #include "widgets/osd.h"
 
-class QBoxLayout;
-class QCheckBox;
-class QSlider;
-
 class BackgroundStreams;
 class GlobalShortcuts;
 class LibraryDirectoryModel;
-class OSDPretty;
+class SettingsPage;
 class SongInfoView;
 class Ui_SettingsDialog;
-
-#ifdef HAVE_LIBLASTFM
-  class LastFMConfig;
-#endif
-#ifdef HAVE_WIIMOTEDEV
-  class WiimotedevShortcutsConfig;
-#endif
-#ifdef HAVE_REMOTE
-  class RemoteConfig;
-#endif
-#ifdef HAVE_SPOTIFY
-  class SpotifyConfig;
-#endif
 
 class GstEngine;
 
 class SettingsDialog : public QDialog {
   Q_OBJECT
 
- public:
+public:
   SettingsDialog(BackgroundStreams* streams, QWidget* parent = 0);
   ~SettingsDialog();
 
   enum Page {
-    Page_Playback = 0,
+    Page_Playback,
     Page_Behaviour,
     Page_SongInformation,
     Page_GlobalShortcuts,
     Page_Notifications,
     Page_Library,
-#ifdef HAVE_LIBLASTFM
     Page_Lastfm,
-#endif
-#ifdef HAVE_SPOTIFY
     Page_Spotify,
-#endif
     Page_Magnatune,
     Page_DigitallyImported,
     Page_BackgroundStreams,
     Page_Proxy,
     Page_Transcoding,
-#ifdef HAVE_REMOTE
     Page_Remote,
-#endif
-#ifdef HAVE_WIIMOTEDEV
     Page_Wiimotedev,
-#endif
   };
 
-  void SetLibraryDirectoryModel(LibraryDirectoryModel* model);
-  void SetGlobalShortcutManager(GlobalShortcuts* manager);
+  void SetLibraryDirectoryModel(LibraryDirectoryModel* model) { model_ = model; }
+  void SetGlobalShortcutManager(GlobalShortcuts* manager) { manager_ = manager; }
   void SetGstEngine(const GstEngine* engine) { gst_engine_ = engine; }
-  void SetSongInfoView(SongInfoView* view);
+  void SetSongInfoView(SongInfoView* view) { song_info_view_ = view; }
+
+  bool is_loading_settings() const { return loading_settings_; }
+
+  LibraryDirectoryModel* library_directory_model() const { return model_; }
+  GlobalShortcuts* global_shortcuts_manager() const { return manager_; }
+  const GstEngine* gst_engine() const { return gst_engine_; }
+  SongInfoView* song_info_view() const { return song_info_view_; }
+  BackgroundStreams* background_streams() const { return streams_; }
 
   void OpenAtPage(Page page);
 
@@ -96,69 +77,33 @@ class SettingsDialog : public QDialog {
 
   // QWidget
   void showEvent(QShowEvent* e);
-  void hideEvent(QHideEvent *);
 
- private:
-  void AddStream(const QString& name);
-  void AddStreams();
-  void LoadStreams();
+signals:
+  void NotificationPreview(OSD::Behaviour, QString, QString);
+  void SetWiimotedevInterfaceActived(bool);
 
- private slots:
+private slots:
   void CurrentTextChanged(const QString& text);
-  void NotificationTypeChanged();
-  void NotificationCustomTextChanged(bool enabled);
-  void PrepareNotificationPreview();
-  void InsertVariableFirstLine(QAction* action);
-  void InsertVariableSecondLine(QAction* action);
-  void ShowMenuTooltip(QAction* action);
 
-  void PrettyOpacityChanged(int value);
-  void PrettyColorPresetChanged(int index);
-  void ChooseBgColor();
-  void ChooseFgColor();
-  void ChooseFont();
+private:
+  struct PageData {
+    int index_;
+    SettingsPage* page_;
+  };
 
-  void UpdatePopupVisible();
-  void ShowTrayIconToggled(bool on);
-  void GstPluginChanged(int index);
-  void FadingOptionsChanged();
-  void RgPreampChanged(int value);
+  void AddPage(Page id, SettingsPage* page);
 
-  void SongInfoFontSizeChanged(double value);
-
-  // Background streams.
-  void EnableStream(bool enabled);
-  void StreamVolumeChanged(int value);
-
- private:
-#ifdef HAVE_LIBLASTFM
-  LastFMConfig* lastfm_config_;
-#endif
-#ifdef HAVE_WIIMOTEDEV
-  WiimotedevShortcutsConfig* wiimotedev_config_;
-#endif
-#ifdef HAVE_REMOTE
-  RemoteConfig* remote_config_;
-#endif
-#ifdef HAVE_SPOTIFY
-  SpotifyConfig* spotify_config_;
-#endif
+private:
+  LibraryDirectoryModel* model_;
+  GlobalShortcuts* manager_;
   const GstEngine* gst_engine_;
+  SongInfoView* song_info_view_;
+  BackgroundStreams* streams_;
 
   Ui_SettingsDialog* ui_;
   bool loading_settings_;
 
-  OSDPretty* pretty_popup_;
-
-  QMap<QString, QString> language_map_;
-
-  BackgroundStreams* streams_;
-
- signals:
-  void NotificationPreview(OSD::Behaviour,QString,QString);
-#ifdef HAVE_WIIMOTEDEV
-  void SetWiimotedevInterfaceActived(bool);
-#endif
+  QMap<Page, PageData> pages_;
 };
 
 #endif // SETTINGSDIALOG_H

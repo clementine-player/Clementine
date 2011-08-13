@@ -1,0 +1,440 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>NotificationsSettingsPage</class>
+ <widget class="QWidget" name="NotificationsSettingsPage">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>526</width>
+    <height>642</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Notifications</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QLabel" name="label_2">
+     <property name="text">
+      <string>Clementine can show a message when the track changes.</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="groupBox_4">
+     <property name="title">
+      <string>Notification type</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_7">
+      <item>
+       <widget class="QRadioButton" name="notifications_none">
+        <property name="text">
+         <string>Disabled</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="notifications_native">
+        <property name="text">
+         <string>Show a native desktop notification</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="notifications_pretty">
+        <property name="text">
+         <string>Show a pretty OSD</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="notifications_tray">
+        <property name="text">
+         <string>Show a popup from the system tray</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="notifications_general">
+     <property name="title">
+      <string>General settings</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_6">
+      <item>
+       <widget class="QWidget" name="notifications_options" native="true">
+        <layout class="QHBoxLayout" name="horizontalLayout_8">
+         <property name="margin">
+          <number>0</number>
+         </property>
+         <item>
+          <widget class="QLabel" name="label_3">
+           <property name="text">
+            <string>Popup duration</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QSpinBox" name="notifications_duration">
+           <property name="suffix">
+            <string> seconds</string>
+           </property>
+           <property name="minimum">
+            <number>1</number>
+           </property>
+           <property name="maximum">
+            <number>20</number>
+           </property>
+           <property name="value">
+            <number>5</number>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="notifications_disable_duration">
+           <property name="text">
+            <string>Disable duration</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="notifications_volume">
+        <property name="text">
+         <string>Show a notification when I change the volume</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="notifications_play_mode">
+        <property name="text">
+         <string>Show a notification when I change the repeat/shuffle mode</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="notifications_art">
+        <property name="text">
+         <string>Include album art in the notification</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="notifications_custom_text_group">
+     <property name="title">
+      <string>Custom message settings</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_26">
+      <item>
+       <widget class="QFrame" name="frame_2">
+        <property name="frameShape">
+         <enum>QFrame::NoFrame</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Plain</enum>
+        </property>
+        <property name="lineWidth">
+         <number>0</number>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_7">
+         <property name="margin">
+          <number>0</number>
+         </property>
+         <item>
+          <widget class="QCheckBox" name="notifications_custom_text_enabled">
+           <property name="text">
+            <string>Use a custom message for notifications</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="notifications_preview">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string>Preview</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QFrame" name="frame">
+        <property name="frameShape">
+         <enum>QFrame::NoFrame</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Plain</enum>
+        </property>
+        <property name="lineWidth">
+         <number>0</number>
+        </property>
+        <layout class="QGridLayout" name="gridLayout">
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
+         <item row="0" column="1">
+          <widget class="QLineEdit" name="notifications_custom_text1">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="2">
+          <widget class="QToolButton" name="notifications_exp_chooser1">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0">
+          <widget class="QLabel" name="label_19">
+           <property name="text">
+            <string>Summary</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QLabel" name="label_20">
+           <property name="text">
+            <string>Body</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QLineEdit" name="notifications_custom_text2">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="2">
+          <widget class="QToolButton" name="notifications_exp_chooser2">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="notifications_pretty_group">
+     <property name="title">
+      <string>Pretty OSD options</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_2">
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_4">
+        <property name="text">
+         <string>Background opacity</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1" colspan="2">
+       <widget class="QSlider" name="notifications_opacity">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_5">
+        <property name="text">
+         <string>Background color</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QComboBox" name="notifications_bg_preset">
+        <item>
+         <property name="text">
+          <string>Basic Blue</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Clementine Orange</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Custom...</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="label_6">
+        <property name="text">
+         <string>Text options</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QPushButton" name="notifications_fg_choose">
+        <property name="text">
+         <string>Choose color...</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="2">
+       <widget class="QPushButton" name="notifications_font_choose">
+        <property name="text">
+         <string>Choose font...</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <spacer name="verticalSpacer_3">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>32</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+  </layout>
+  <action name="action_artist">
+   <property name="text">
+    <string notr="true">%artist%</string>
+   </property>
+   <property name="toolTip">
+    <string>Add song artist tag</string>
+   </property>
+  </action>
+  <action name="action_album">
+   <property name="text">
+    <string notr="true">%album%</string>
+   </property>
+   <property name="toolTip">
+    <string>Add song album tag</string>
+   </property>
+  </action>
+  <action name="action_title">
+   <property name="text">
+    <string notr="true">%title%</string>
+   </property>
+   <property name="toolTip">
+    <string>Add song title tag</string>
+   </property>
+  </action>
+  <action name="action_albumartist">
+   <property name="text">
+    <string notr="true">%albumartist%</string>
+   </property>
+   <property name="toolTip">
+    <string>Add song albumartist tag</string>
+   </property>
+  </action>
+  <action name="action_year">
+   <property name="text">
+    <string notr="true">%year%</string>
+   </property>
+   <property name="toolTip">
+    <string>Add song year tag</string>
+   </property>
+  </action>
+  <action name="action_composer">
+   <property name="text">
+    <string notr="true">%composer%</string>
+   </property>
+   <property name="toolTip">
+    <string>Add song composer tag</string>
+   </property>
+  </action>
+  <action name="action_disc">
+   <property name="text">
+    <string notr="true">%disc%</string>
+   </property>
+   <property name="toolTip">
+    <string>Add song disc tag</string>
+   </property>
+  </action>
+  <action name="action_track">
+   <property name="text">
+    <string notr="true">%track%</string>
+   </property>
+   <property name="toolTip">
+    <string>Add song track tag</string>
+   </property>
+  </action>
+  <action name="action_genre">
+   <property name="text">
+    <string notr="true">%genre%</string>
+   </property>
+   <property name="toolTip">
+    <string>Add song genre tag</string>
+   </property>
+  </action>
+  <action name="action_length">
+   <property name="text">
+    <string notr="true">%length%</string>
+   </property>
+   <property name="toolTip">
+    <string>Add song length tag</string>
+   </property>
+  </action>
+  <action name="action_playcount">
+   <property name="text">
+    <string notr="true">%playcount%</string>
+   </property>
+   <property name="toolTip">
+    <string>Add song play count</string>
+   </property>
+  </action>
+  <action name="action_skipcount">
+   <property name="text">
+    <string notr="true">%skipcount%</string>
+   </property>
+   <property name="toolTip">
+    <string>Add song skip count</string>
+   </property>
+  </action>
+  <action name="action_newline">
+   <property name="text">
+    <string notr="true">%newline%</string>
+   </property>
+   <property name="toolTip">
+    <string>Add a new line if supported by the notification type</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

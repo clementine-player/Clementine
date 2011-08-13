@@ -115,9 +115,9 @@ set(SOURCES
   engines/gstenginepipeline.cpp
   engines/gstelementdeleter.cpp
 
-  internet/digitallyimportedconfig.cpp
   internet/digitallyimportedservice.cpp
   internet/digitallyimportedservicebase.cpp
+  internet/digitallyimportedsettingspage.cpp
   internet/digitallyimportedurlhandler.cpp
   internet/icecastbackend.cpp
   internet/icecastfilterwidget.cpp
@@ -131,9 +131,9 @@ set(SOURCES
   internet/jamendodynamicplaylist.cpp
   internet/jamendoplaylistitem.cpp
   internet/jamendoservice.cpp
-  internet/magnatuneconfig.cpp
   internet/magnatunedownloaddialog.cpp
   internet/magnatuneplaylistitem.cpp
+  internet/magnatunesettingspage.cpp
   internet/magnatuneservice.cpp
   internet/magnatuneurlhandler.cpp
   internet/savedradio.cpp
@@ -144,12 +144,12 @@ set(SOURCES
   library/groupbydialog.cpp
   library/library.cpp
   library/librarybackend.cpp
-  library/libraryconfig.cpp
   library/librarydirectorymodel.cpp
   library/libraryfilterwidget.cpp
   library/librarymodel.cpp
   library/libraryplaylistitem.cpp
   library/libraryquery.cpp
+  library/librarysettingspage.cpp
   library/libraryview.cpp
   library/libraryviewcontainer.cpp
   library/librarywatcher.cpp
@@ -209,10 +209,10 @@ set(SOURCES
   songinfo/collapsibleinfopane.cpp
   songinfo/echonestbiographies.cpp
   songinfo/echonestimages.cpp
-  songinfo/lyricsettings.cpp
   songinfo/songinfobase.cpp
   songinfo/songinfofetcher.cpp
   songinfo/songinfoprovider.cpp
+  songinfo/songinfosettingspage.cpp
   songinfo/songinfotextview.cpp
   songinfo/songinfoview.cpp
   songinfo/songplaystats.cpp
@@ -228,6 +228,7 @@ set(SOURCES
   transcoder/transcoderoptionsspeex.cpp
   transcoder/transcoderoptionsvorbis.cpp
   transcoder/transcoderoptionswma.cpp
+  transcoder/transcodersettingspage.cpp
 
   ui/about.cpp
   ui/addstreamdialog.cpp
@@ -235,19 +236,25 @@ set(SOURCES
   ui/albumcovermanager.cpp
   ui/albumcovermanagerlist.cpp
   ui/albumcoversearcher.cpp
+  ui/backgroundstreamssettingspage.cpp
+  ui/behavioursettingspage.cpp
   ui/coverfromurldialog.cpp
   ui/edittagdialog.cpp
   ui/equalizer.cpp
   ui/flowlayout.cpp
   ui/globalshortcutgrabber.cpp
-  ui/globalshortcutsconfig.cpp
+  ui/globalshortcutssettingspage.cpp
   ui/iconloader.cpp
   ui/mainwindow.cpp
+  ui/networkproxysettingspage.cpp
+  ui/notificationssettingspage.cpp
   ui/organisedialog.cpp
   ui/organiseerrordialog.cpp
+  ui/playbacksettingspage.cpp
   ui/qtsystemtrayicon.cpp
   ui/screensaver.cpp
   ui/settingsdialog.cpp
+  ui/settingspage.cpp
   ui/systemtrayicon.cpp
   ui/trackselectiondialog.cpp
   ui/windows7thumbbar.cpp
@@ -339,8 +346,8 @@ set(HEADERS
   engines/gstenginepipeline.h
   engines/gstelementdeleter.h
 
-  internet/digitallyimportedconfig.h
   internet/digitallyimportedservicebase.h
+  internet/digitallyimportedsettingspage.h
   internet/icecastbackend.h
   internet/icecastfilterwidget.h
   internet/icecastmodel.h
@@ -352,8 +359,8 @@ set(HEADERS
   internet/internetviewcontainer.h
   internet/jamendodynamicplaylist.h
   internet/jamendoservice.h
-  internet/magnatuneconfig.h
   internet/magnatunedownloaddialog.h
+  internet/magnatunesettingspage.h
   internet/magnatuneservice.h
   internet/savedradio.h
   internet/skyfmservice.h
@@ -363,10 +370,10 @@ set(HEADERS
   library/groupbydialog.h
   library/library.h
   library/librarybackend.h
-  library/libraryconfig.h
   library/librarydirectorymodel.h
   library/libraryfilterwidget.h
   library/librarymodel.h
+  library/librarysettingspage.h
   library/libraryview.h
   library/libraryviewcontainer.h
   library/librarywatcher.h
@@ -419,10 +426,10 @@ set(HEADERS
   songinfo/collapsibleinfopane.h
   songinfo/echonestbiographies.h
   songinfo/echonestimages.h
-  songinfo/lyricsettings.h
   songinfo/songinfobase.h
   songinfo/songinfofetcher.h
   songinfo/songinfoprovider.h
+  songinfo/songinfosettingspage.h
   songinfo/songinfotextview.h
   songinfo/songinfoview.h
   songinfo/songplaystats.h
@@ -433,6 +440,7 @@ set(HEADERS
   transcoder/transcoder.h
   transcoder/transcoderoptionsdialog.h
   transcoder/transcoderoptionsmp3.h
+  transcoder/transcodersettingspage.h
 
   ui/about.h
   ui/addstreamdialog.h
@@ -440,16 +448,22 @@ set(HEADERS
   ui/albumcovermanager.h
   ui/albumcovermanagerlist.h
   ui/albumcoversearcher.h
+  ui/backgroundstreamssettingspage.h
+  ui/behavioursettingspage.h
   ui/coverfromurldialog.h
   ui/edittagdialog.h
   ui/equalizer.h
   ui/globalshortcutgrabber.h
-  ui/globalshortcutsconfig.h
+  ui/globalshortcutssettingspage.h
   ui/mainwindow.h
+  ui/networkproxysettingspage.h
+  ui/notificationssettingspage.h
   ui/organisedialog.h
   ui/organiseerrordialog.h
+  ui/playbacksettingspage.h
   ui/qtsystemtrayicon.h
   ui/settingsdialog.h
+  ui/settingspage.h
   ui/systemtrayicon.h
   ui/trackselectiondialog.h
   ui/windows7thumbbar.h
@@ -492,16 +506,15 @@ set(UI
 
   devices/deviceproperties.ui
 
-  internet/digitallyimportedconfig.ui
+  internet/digitallyimportedsettingspage.ui
   internet/icecastfilterwidget.ui
-  internet/magnatuneconfig.ui
   internet/magnatunedownloaddialog.ui
+  internet/magnatunesettingspage.ui
   internet/internetviewcontainer.ui
-  internet/spotifyconfig.ui
 
   library/groupbydialog.ui
-  library/libraryconfig.ui
   library/libraryfilterwidget.ui
+  library/librarysettingspage.ui
   library/libraryviewcontainer.ui
 
   playlist/dynamicplaylistcontrols.ui
@@ -509,7 +522,7 @@ set(UI
   playlist/playlistsequence.ui
   playlist/queuemanager.ui
 
-  remote/remoteconfig.ui
+  remote/remotesettingspage.ui
 
   smartplaylists/querysearchpage.ui
   smartplaylists/querysortpage.ui
@@ -517,7 +530,7 @@ set(UI
   smartplaylists/searchtermwidget.ui
   smartplaylists/wizardfinishpage.ui
 
-  songinfo/lyricsettings.ui
+  songinfo/songinfosettingspage.ui
 
   transcoder/transcodedialog.ui
   transcoder/transcodelogdialog.ui
@@ -528,29 +541,36 @@ set(UI
   transcoder/transcoderoptionsspeex.ui
   transcoder/transcoderoptionsvorbis.ui
   transcoder/transcoderoptionswma.ui
+  transcoder/transcodersettingspage.ui
 
   ui/about.ui
   ui/addstreamdialog.ui
   ui/albumcovermanager.ui
   ui/albumcoversearcher.ui
+  ui/backgroundstreamssettingspage.ui
+  ui/behavioursettingspage.ui
   ui/coverfromurldialog.ui
   ui/edittagdialog.ui
   ui/equalizer.ui
   ui/globalshortcutgrabber.ui
-  ui/globalshortcutsconfig.ui
+  ui/globalshortcutssettingspage.ui
   ui/mainwindow.ui
+  ui/networkproxysettingspage.ui
+  ui/notificationssettingspage.ui
   ui/organisedialog.ui
   ui/organiseerrordialog.ui
+  ui/playbacksettingspage.ui
   ui/settingsdialog.ui
   ui/trackselectiondialog.ui
-  ui/wiimotedevshortcutsconfig.ui
-  ui/wiimotedevshortcutgrabber.ui
 
   widgets/equalizerslider.ui
   widgets/errordialog.ui
   widgets/fileview.ui
   widgets/osdpretty.ui
   widgets/trackslider.ui
+
+  wiimotedev/wiimotesettingspage.ui
+  wiimotedev/wiimoteshortcutgrabber.ui
 )
 
 set(RESOURCES
@@ -604,8 +624,8 @@ if(HAVE_LIBLASTFM)
   list(APPEND SOURCES
     covers/lastfmcoverprovider.cpp
     internet/fixlastfm.cpp
-    internet/lastfmconfig.cpp
     internet/lastfmservice.cpp
+    internet/lastfmsettingspage.cpp
     internet/lastfmstationdialog.cpp
     internet/lastfmurlhandler.cpp
     songinfo/echonestsimilarartists.cpp
@@ -616,8 +636,8 @@ if(HAVE_LIBLASTFM)
   )
   list(APPEND HEADERS
     covers/lastfmcoverprovider.h
-    internet/lastfmconfig.h
     internet/lastfmservice.h
+    internet/lastfmsettingspage.h
     internet/lastfmstationdialog.h
     songinfo/echonestsimilarartists.h
     songinfo/echonesttags.h
@@ -626,7 +646,7 @@ if(HAVE_LIBLASTFM)
     suggesters/lastfmsuggester.h
   )
   list(APPEND UI
-    internet/lastfmconfig.ui
+    internet/lastfmsettingspage.ui
     internet/lastfmstationdialog.ui
   )
 endif(HAVE_LIBLASTFM)
@@ -634,22 +654,22 @@ endif(HAVE_LIBLASTFM)
 if(HAVE_SPOTIFY)
   list(APPEND SOURCES
     internet/spotifyblobdownloader.cpp
-    internet/spotifyconfig.cpp
+    internet/spotifysearchplaylisttype.cpp
     internet/spotifyserver.cpp
     internet/spotifyservice.cpp
-    internet/spotifysearchplaylisttype.cpp
+    internet/spotifysettingspage.cpp
     internet/spotifyurlhandler.cpp
     resolvers/spotifyresolver.cpp
   )
   list(APPEND HEADERS
     internet/spotifyblobdownloader.h
-    internet/spotifyconfig.h
     internet/spotifyserver.h
     internet/spotifyservice.h
+    internet/spotifysettingspage.h
     resolvers/spotifyresolver.h
   )
   list(APPEND UI
-    internet/spotifyconfig.ui)
+    internet/spotifysettingspage.ui)
 endif(HAVE_SPOTIFY)
 
 if(APPLE)
@@ -735,15 +755,16 @@ if(HAVE_DBUS)
         dbus/org.wiimotedev.deviceEvents.xml
         dbus/wiimotedev)
 
-    list(APPEND SOURCES wiimotedev/shortcuts.cpp)
-    list(APPEND HEADERS wiimotedev/shortcuts.h)
-
-    list(APPEND SOURCES ui/wiimotedevshortcutgrabber.cpp)
-    list(APPEND HEADERS ui/wiimotedevshortcutgrabber.h)
-
-
-    list(APPEND SOURCES ui/wiimotedevshortcutsconfig.cpp)
-    list(APPEND HEADERS ui/wiimotedevshortcutsconfig.h)
+    list(APPEND SOURCES
+      wiimotedev/shortcuts.cpp
+      wiimotedev/wiimotesettingspage.cpp
+      wiimotedev/wiimoteshortcutgrabber.cpp
+    )
+    list(APPEND HEADERS
+      wiimotedev/shortcuts.h
+      wiimotedev/wiimotesettingspage.h
+      wiimotedev/wiimoteshortcutgrabber.h
+    )
   endif(ENABLE_WIIMOTEDEV)
 
   # DeviceKit lister source
@@ -837,14 +858,14 @@ if(HAVE_REMOTE)
     remote/icesession.h
     remote/portforwarder.h
     remote/remote.h
-    remote/remoteconfig.h
+    remote/remotesettingspage.h
     remote/streampipeline.h
   )
   list(APPEND SOURCES
     remote/icesession.cpp
     remote/portforwarder.h
     remote/remote.cpp
-    remote/remoteconfig.cpp
+    remote/remotesettingspage.cpp
     remote/streampipeline.cpp
   )
 endif(HAVE_REMOTE)
@@ -901,9 +922,9 @@ list(APPEND OTHER_SOURCES
   devices/wmdmloader.cpp
   internet/spotifyblobdownloader.cpp
   internet/spotifyblobdownloader.h
-  internet/spotifyconfig.cpp
-  internet/spotifyconfig.h
-  ${CMAKE_CURRENT_BINARY_DIR}/ui_spotifyconfig.h
+  internet/spotifysettingspage.cpp
+  internet/spotifysettingspage.h
+  ${CMAKE_CURRENT_BINARY_DIR}/ui_spotifysettingspage.h
   internet/spotifysearchplaylisttype.cpp
   internet/spotifysearchplaylisttype.h
   internet/spotifyserver.cpp
@@ -914,19 +935,19 @@ list(APPEND OTHER_SOURCES
   internet/spotifyurlhandler.h
   remote/remote.cpp
   remote/remote.h
-  remote/remoteconfig.cpp
-  remote/remoteconfig.h
-  ${CMAKE_CURRENT_BINARY_DIR}/ui_remoteconfig.h
+  remote/remotesettingspage.cpp
+  remote/remotesettingspage.h
+  ${CMAKE_CURRENT_BINARY_DIR}/ui_remotesettingspage.h
   suggesters/lastfmsuggester.cpp
   suggesters/lastfmsuggester.h
   ui/macsystemtrayicon.h
   ui/macsystemtrayicon.mm
-  ui/wiimotedevshortcutsconfig.cpp
-  ui/wiimotedevshortcutsconfig.h
-  ui/wiimotedevshortcutgrabber.cpp
-  ui/wiimotedevshortcutgrabber.h
-  ${CMAKE_CURRENT_BINARY_DIR}/ui_wiimotedevshortcutsconfig.h
-  ${CMAKE_CURRENT_BINARY_DIR}/ui_wiimotedevshortcutgrabber.h
+  wiimotedev/wiimotesettingspage.cpp
+  wiimotedev/wiimotesettingspage.h
+  wiimotedev/wiimoteshortcutgrabber.cpp
+  wiimotedev/wiimoteshortcutgrabber.h
+  ${CMAKE_CURRENT_BINARY_DIR}/ui_wiimotesettingspage.h
+  ${CMAKE_CURRENT_BINARY_DIR}/ui_wiimoteshortcutgrabber.h
   widgets/osd_mac.mm
   widgets/osd_win.cpp
   widgets/osd_x11.cpp
