@@ -26,6 +26,7 @@
 #include "mainwindow.h"
 #include "settingsdialog.h"
 #include "core/backgroundstreams.h"
+#include "core/logging.h"
 #include "core/networkproxyfactory.h"
 #include "engines/enginebase.h"
 #include "engines/gstengine.h"
@@ -56,7 +57,9 @@
 # include "internet/spotifysettingspage.h"
 #endif
 
+#include <QDesktopWidget>
 #include <QPushButton>
+#include <QScrollArea>
 
 
 SettingsDialog::SettingsDialog(BackgroundStreams* streams, QWidget* parent)
@@ -129,17 +132,26 @@ void SettingsDialog::AddPage(Page id, SettingsPage* page) {
     item->setFlags(Qt::NoItemFlags);
   }
 
+  // Create a scroll area containing the page
+  QScrollArea* area = new QScrollArea;
+  area->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+  area->setWidget(page);
+  area->setWidgetResizable(true);
+  area->setFrameShape(QFrame::NoFrame);
+
   // Add the page to the stack
-  ui_->stacked_widget->addWidget(page);
+  ui_->stacked_widget->addWidget(area);
 
   // Remember where the page is
   PageData data;
   data.index_ = ui_->list->row(item);
+  data.scroll_area_ = area;
   data.page_ = page;
   pages_[id] = data;
 }
 
 void SettingsDialog::accept() {
+  // Save settings
   foreach (const PageData& data, pages_.values()) {
     data.page_->Save();
   }
@@ -148,11 +160,18 @@ void SettingsDialog::accept() {
 }
 
 void SettingsDialog::showEvent(QShowEvent* e) {
+  // Load settings
   loading_settings_ = true;
   foreach (const PageData& data, pages_.values()) {
     data.page_->Load();
   }
   loading_settings_ = false;
+
+  // Resize the dialog if it's too big
+  const QSize available = QApplication::desktop()->availableGeometry(this).size();
+  if (available.height() < height()) {
+    resize(width(), sizeHint().height());
+  }
 
   QDialog::showEvent(e);
 }

@@ -23,6 +23,8 @@
 #include "config.h"
 #include "widgets/osd.h"
 
+class QScrollArea;
+
 class BackgroundStreams;
 class GlobalShortcuts;
 class LibraryDirectoryModel;
@@ -88,6 +90,7 @@ private slots:
 private:
   struct PageData {
     int index_;
+    QScrollArea* scroll_area_;
     SettingsPage* page_;
   };
 
