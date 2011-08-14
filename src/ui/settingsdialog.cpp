@@ -138,6 +138,7 @@ void SettingsDialog::AddPage(Page id, SettingsPage* page) {
   area->setWidget(page);
   area->setWidgetResizable(true);
   area->setFrameShape(QFrame::NoFrame);
+  area->setMinimumWidth(page->layout()->minimumSize().width());
 
   // Add the page to the stack
   ui_->stacked_widget->addWidget(area);
