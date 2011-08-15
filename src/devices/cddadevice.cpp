@@ -36,8 +36,6 @@ CddaDevice::CddaDevice(const QUrl& url, DeviceLister* lister,
 CddaDevice::~CddaDevice(){
   if (cdio_)
     cdio_destroy(cdio_);
-  if (cdda_)
-    gst_object_unref(GST_OBJECT(cdda_));
 }
 
 void CddaDevice::Init() {
@@ -124,9 +122,10 @@ void CddaDevice::Init() {
 
   // Clean all the Gstreamer objects we have used: we don't need them anymore
   gst_element_set_state (pipe, GST_STATE_NULL);
+  // This will also cause cdda_ to be unref'd.
   gst_object_unref(GST_OBJECT(pipe));
   gst_object_unref(GST_OBJECT(msg));
-  gst_object_unref(GST_OBJECT(tags));
+  gst_tag_list_free(tags);
 
 }
 
@@ -167,4 +166,3 @@ void CddaDevice::Refresh() {
   mutex_init_.unlock();
   Init();
 }
-
