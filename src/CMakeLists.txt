@@ -508,9 +508,10 @@ set(UI
 
   internet/digitallyimportedsettingspage.ui
   internet/icecastfilterwidget.ui
+  internet/internetviewcontainer.ui
   internet/magnatunedownloaddialog.ui
   internet/magnatunesettingspage.ui
-  internet/internetviewcontainer.ui
+  internet/spotifysettingspage.ui
 
   library/groupbydialog.ui
   library/libraryfilterwidget.ui
@@ -668,8 +669,6 @@ if(HAVE_SPOTIFY)
     internet/spotifysettingspage.h
     resolvers/spotifyresolver.h
   )
-  list(APPEND UI
-    internet/spotifysettingspage.ui)
 endif(HAVE_SPOTIFY)
 
 if(APPLE)
