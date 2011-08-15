@@ -15,6 +15,7 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "config.h"
 #include "macdevicelister.h"
 #include "mtpconnection.h"
 #include "core/logging.h"
@@ -338,6 +339,7 @@ void MacDeviceLister::DiskAddedCallback(DADiskRef disk, void* context) {
   NSDictionary* properties = (NSDictionary*)DADiskCopyDescription(disk);
 
   NSString* kind = [properties objectForKey:(NSString*)kDADiskDescriptionMediaKindKey];
+#ifdef HAVE_AUDIOCD
   if (kind && strcmp([kind UTF8String], kIOCDMediaClass) == 0) {
     // CD inserted.
     QString bsd_name = QString::fromAscii(DADiskGetBSDName(disk));
@@ -345,6 +347,7 @@ void MacDeviceLister::DiskAddedCallback(DADiskRef disk, void* context) {
     emit me->DeviceAdded(bsd_name);
     return;
   }
+#endif
 
   NSURL* volume_path = 
       [[properties objectForKey:(NSString*)kDADiskDescriptionVolumePathKey] copy];
@@ -648,8 +651,6 @@ QString MacDeviceLister::MakeFriendlyName(const QString& serial) {
   DADiskRef disk = DADiskCreateFromBSDName(
       kCFAllocatorDefault, session, bsd_name.toAscii().constData());
 
-  io_object_t device = DADiskCopyIOMedia(disk);
-
   if (IsCDDevice(serial)) {
     NSDictionary* properties = (NSDictionary*)DADiskCopyDescription(disk);
     NSLog(@"%@", properties);
@@ -660,6 +661,8 @@ QString MacDeviceLister::MakeFriendlyName(const QString& serial) {
     CFRelease(session);
     return QString::fromUtf8([device_name UTF8String]);
   }
+
+  io_object_t device = DADiskCopyIOMedia(disk);
 
   QString vendor = GetUSBRegistryEntryString(device, CFSTR(kUSBVendorString));
   QString product = GetUSBRegistryEntryString(device, CFSTR(kUSBProductString));
