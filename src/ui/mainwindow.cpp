@@ -265,6 +265,7 @@ MainWindow::MainWindow(
   library_view_->view()->SetLibrary(library_->model());
   library_view_->view()->SetTaskManager(task_manager_);
   library_view_->view()->SetDeviceManager(devices_);
+  library_view_->view()->SetCoverProviders(cover_providers_);
 
   internet_view_->SetModel(internet_model_);
 
