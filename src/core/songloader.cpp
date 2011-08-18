@@ -256,11 +256,11 @@ SongLoader::Result SongLoader::LoadLocal(const QString& filename, bool block,
   }
 
   // Not a playlist, so just assume it's a song
-  QFileInfo info(filename);
+  QUrl url = QUrl::fromLocalFile(filename);
 
   LibraryQuery query;
   query.SetColumnSpec("%songs_table.ROWID, " + Song::kColumnSpec);
-  query.AddWhere("filename", info.canonicalFilePath());
+  query.AddWhere("filename", url.toString());
 
   SongList song_list;
 
@@ -302,12 +302,10 @@ SongLoader::Result SongLoader::LoadLocal(const QString& filename, bool block,
 void SongLoader::EffectiveSongsLoad() {
   for (int i = 0; i < songs_.size(); i++) {
     Song& song = songs_[i];
-    QString filename = song.url().toLocalFile();
-    QFileInfo info(filename);
 
     LibraryQuery query;
     query.SetColumnSpec("%songs_table.ROWID, " + Song::kColumnSpec);
-    query.AddWhere("filename", info.canonicalFilePath());
+    query.AddWhere("filename", song.url().toString());
 
     if (library_->ExecQuery(&query) && query.Next()) {
       // we may have many results when the file has many sections
@@ -316,6 +314,7 @@ void SongLoader::EffectiveSongsLoad() {
       } while(query.Next());
     } else {
       // it's a normal media file
+      QString filename = song.url().toLocalFile();
       song.InitFromFile(filename, -1);
     }
   }
