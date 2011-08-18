@@ -213,12 +213,12 @@ void GioLister::VolumeAdded(GVolume* volume) {
 
   DeviceInfo info;
   info.ReadVolumeInfo(volume);
+  if (info.volume_root_uri.startsWith("cdda"))
+    // Audio CD devices are already handled by CDDA lister
+    return;
   info.ReadDriveInfo(g_volume_get_drive(volume));
   info.ReadMountInfo(g_volume_get_mount(volume));
   if (!info.is_suitable())
-    return;
-  if (info.volume_root_uri.startsWith("cdda"))
-    // Audio CD devices are already handled by CDDA lister
     return;
 
   {
@@ -247,13 +247,13 @@ void GioLister::MountAdded(GMount* mount) {
   g_object_ref(mount);
 
   DeviceInfo info;
-  info.ReadMountInfo(mount);
   info.ReadVolumeInfo(g_mount_get_volume(mount));
-  info.ReadDriveInfo(g_mount_get_drive(mount));
-  if (!info.is_suitable())
-    return;
   if (info.volume_root_uri.startsWith("cdda"))
     // Audio CD devices are already handled by CDDA lister
+    return;
+  info.ReadMountInfo(mount);
+  info.ReadDriveInfo(g_mount_get_drive(mount));
+  if (!info.is_suitable())
     return;
 
   QString old_id;
