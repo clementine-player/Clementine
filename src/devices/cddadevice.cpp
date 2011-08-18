@@ -40,6 +40,7 @@ CddaDevice::~CddaDevice(){
 
 void CddaDevice::Init() {
   QMutexLocker locker(&mutex_init_);
+  song_count_ = 0; // Reset soug count, in case it was already set
   cdio_ = cdio_open (url_.path().toLocal8Bit().constData(), DRIVER_DEVICE);
   if (cdio_ == NULL) {
     return;
@@ -94,7 +95,6 @@ void CddaDevice::Init() {
   song_count_ = num_tracks;
   connect(this, SIGNAL(SongsDiscovered(const SongList&)), model_, SLOT(SongsDiscovered(const SongList&)));
   emit SongsDiscovered(songs);
-  //emit SongCountUpdated(num_tracks);
 
   // Generate MusicBrainz DiscId
   gst_tag_register_musicbrainz_tags();
