@@ -213,7 +213,7 @@ void GioLister::VolumeAdded(GVolume* volume) {
 
   DeviceInfo info;
   info.ReadVolumeInfo(volume);
-#ifndef HAVE_AUDIOCD
+#ifdef HAVE_AUDIOCD
   if (info.volume_root_uri.startsWith("cdda"))
     // Audio CD devices are already handled by CDDA lister
     return;
@@ -250,7 +250,7 @@ void GioLister::MountAdded(GMount* mount) {
 
   DeviceInfo info;
   info.ReadVolumeInfo(g_mount_get_volume(mount));
-#ifndef HAVE_AUDIOCD
+#ifdef HAVE_AUDIOCD
   if (info.volume_root_uri.startsWith("cdda"))
     // Audio CD devices are already handled by CDDA lister
     return;
