@@ -231,10 +231,7 @@ class GstEnginePipeline : public QObject {
   GstElement* uridecodebin_;
   GstElement* audiobin_;
 
-  // Elements in the audiobin
-  // queue ! audioconvert ! rgvolume ! rglimiter ! audioconvert !
-  // equalizer_preamp ! equalizer ! volume ! audioresample ! audioconvert !
-  // audiosink
+  // Elements in the audiobin.  See comments in Init()'s definition.
   GstElement* queue_;
   GstElement* audioconvert_;
   GstElement* rgvolume_;

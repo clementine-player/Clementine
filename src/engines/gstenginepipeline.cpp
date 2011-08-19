@@ -183,33 +183,72 @@ bool GstEnginePipeline::Init() {
   //   uri decode bin -> audio bin
   // The uri decode bin is a gstreamer builtin that automatically picks the
   // right type of source and decoder for the URI.
+
   // The audio bin gets created here and contains:
-  //   queue -> audioconvert -> rgvolume -> rglimiter -> equalizer_preamp ->
-  //   equalizer -> volume -> audioscale -> audioconvert -> audiosink
+  //   queue ! audioconvert ! <caps32>
+  //         ! ( rgvolume ! rglimiter ! audioconvert2 ) ! tee
+  // rgvolume and rglimiter are only created when replaygain is enabled.
+
+  // After the tee the pipeline splits.  One split is converted to 16-bit int
+  // samples for the scope, the other is kept as float32 and sent to the
+  // speaker.
+  //   tee1 ! probe_queue ! probe_converter ! <caps16> ! probe_sink
+  //   tee2 ! audio_queue ! equalizer_preamp ! equalizer ! volume ! audioscale
+  //        ! convert ! audiosink
 
   // Audio bin
   audiobin_ = gst_bin_new("audiobin");
   gst_bin_add(GST_BIN(pipeline_), audiobin_);
 
+  // Create the sink
   if (!(audiosink_ = engine_->CreateElement(sink_, audiobin_)))
     return false;
 
   if (GstEngine::DoesThisSinkSupportChangingTheOutputDeviceToAUserEditableString(sink_) && !device_.isEmpty())
     g_object_set(G_OBJECT(audiosink_), "device", device_.toUtf8().constData(), NULL);
 
-  if (!(queue_ = engine_->CreateElement("queue", audiobin_))) { return false; }
-  if (!(equalizer_preamp_ = engine_->CreateElement("volume", audiobin_))) { return false; }
-  if (!(equalizer_ = engine_->CreateElement("equalizer-nbands", audiobin_))) { return false; }
-  if (!(audioconvert_ = engine_->CreateElement("audioconvert", audiobin_))) { return false; }
-  if (!(volume_ = engine_->CreateElement("volume", audiobin_))) { return false; }
-  if (!(audioscale_ = engine_->CreateElement("audioresample", audiobin_))) { return false; }
-  GstElement* scope_element = audioconvert_;
+  // Create all the other elements
+  GstElement *tee, *probe_queue, *probe_converter, *probe_sink, *audio_queue,
+             *convert;
+
+  queue_            = engine_->CreateElement("queue",            audiobin_);
+  audioconvert_     = engine_->CreateElement("audioconvert",     audiobin_);
+  tee               = engine_->CreateElement("tee",              audiobin_);
+
+  probe_queue       = engine_->CreateElement("queue",            audiobin_);
+  probe_converter   = engine_->CreateElement("audioconvert",     audiobin_);
+  probe_sink        = engine_->CreateElement("appsink",          audiobin_);
+
+  audio_queue       = engine_->CreateElement("queue",            audiobin_);
+  equalizer_preamp_ = engine_->CreateElement("volume",           audiobin_);
+  equalizer_        = engine_->CreateElement("equalizer-nbands", audiobin_);
+  volume_           = engine_->CreateElement("volume",           audiobin_);
+  audioscale_       = engine_->CreateElement("audioresample",    audiobin_);
+  convert           = engine_->CreateElement("audioconvert",     audiobin_);
+
+  if (!queue_ || !audioconvert_ || !tee || !probe_queue || !probe_converter ||
+      !probe_sink || !audio_queue || !equalizer_preamp_ || !equalizer_ ||
+      !volume_ || !audioscale_ || !convert) {
+    return false;
+  }
+
+  // Create the replaygain elements if it's enabled.  event_probe is the
+  // audioconvert element we attach the probe to, which will change depending
+  // on whether replaygain is enabled.  convert_sink is the element after the
+  // first audioconvert, which again will change.
+  GstElement* event_probe = audioconvert_;
+  GstElement* convert_sink = tee;
 
   if (rg_enabled_) {
-    if (!(rgvolume_ = engine_->CreateElement("rgvolume", audiobin_))) { return false; }
-    if (!(rglimiter_ = engine_->CreateElement("rglimiter", audiobin_))) { return false; }
-    if (!(audioconvert2_ = engine_->CreateElement("audioconvert", audiobin_))) { return false; }
-    scope_element = audioconvert2_;
+    rgvolume_      = engine_->CreateElement("rgvolume",     audiobin_);
+    rglimiter_     = engine_->CreateElement("rglimiter",    audiobin_);
+    audioconvert2_ = engine_->CreateElement("audioconvert", audiobin_);
+    event_probe = audioconvert2_;
+    convert_sink = rgvolume_;
+
+    if (!rgvolume_ || !rglimiter_ || !audioconvert2_) {
+      return false;
+    }
 
     // Set replaygain settings
     g_object_set(G_OBJECT(rgvolume_), "album-mode", rg_mode_, NULL);
@@ -217,18 +256,19 @@ bool GstEnginePipeline::Init() {
     g_object_set(G_OBJECT(rglimiter_), "enabled", int(rg_compression_), NULL);
   }
 
+  // Create a pad on the outside of the audiobin and connect it to the pad of
+  // the first element.
   GstPad* pad = gst_element_get_pad(queue_, "sink");
   gst_element_add_pad(audiobin_, gst_ghost_pad_new("sink", pad));
   gst_object_unref(pad);
 
   // Add a data probe on the src pad of the audioconvert element for our scope.
   // We do it here because we want pre-equalized and pre-volume samples
-  // so that our visualization are not affected by them
-  pad = gst_element_get_pad(scope_element, "src");
-  gst_pad_add_buffer_probe(pad, G_CALLBACK(HandoffCallback), this);
+  // so that our visualization are not be affected by them.
+  pad = gst_element_get_pad(event_probe, "src");
   gst_pad_add_event_probe(pad, G_CALLBACK(EventHandoffCallback), this);
-  gst_object_unref (pad);
-
+  gst_object_unref(pad);
+  
   // Set the equalizer bands
   g_object_set(G_OBJECT(equalizer_), "num-bands", 10, NULL);
 
@@ -251,23 +291,40 @@ bool GstEnginePipeline::Init() {
   // only affects network sources.
   g_object_set(G_OBJECT(queue_), "max-size-time", buffer_duration_nanosec_, NULL);
 
-  // Ensure we get the right type out of audioconvert for our scope
-  GstCaps* caps = gst_caps_new_simple ("audio/x-raw-int",
+  gst_element_link(queue_, audioconvert_);
+  
+  // Create the caps to put in each path in the tee.  The scope path gets 16-bit
+  // ints and the audiosink path gets float32.
+  GstCaps* caps16 = gst_caps_new_simple ("audio/x-raw-int",
       "width", G_TYPE_INT, 16,
       "signed", G_TYPE_BOOLEAN, true,
       NULL);
-  gst_element_link_filtered(scope_element, equalizer_preamp_, caps);
-  gst_caps_unref(caps);
+  GstCaps* caps32 = gst_caps_new_simple ("audio/x-raw-float",
+      "width", G_TYPE_INT, 32,
+      NULL);
 
-  // Add an extra audioconvert at the end as osxaudiosink supports only one format.
-  GstElement* convert = engine_->CreateElement("audioconvert", audiobin_);
-  if (!convert) { return false; }
+  // Link the elements with special caps
+  gst_element_link_filtered(probe_converter, probe_sink, caps16);
+  gst_element_link_filtered(audioconvert_, convert_sink, caps32);
+  gst_caps_unref(caps16);
+  gst_caps_unref(caps32);
 
-  gst_element_link(queue_, audioconvert_);
-  if (rg_enabled_)
-    gst_element_link_many(audioconvert_, rgvolume_, rglimiter_, audioconvert2_, NULL);
-  gst_element_link_many(equalizer_preamp_, equalizer_, volume_, audioscale_, convert, audiosink_, NULL);
+  // Link the outputs of tee to the queues on each path.
+  gst_pad_link(gst_element_get_request_pad(tee, "src%d"), gst_element_get_pad(probe_queue, "sink"));
+  gst_pad_link(gst_element_get_request_pad(tee, "src%d"), gst_element_get_pad(audio_queue, "sink"));
 
+  // Link replaygain elements if enabled.
+  if (rg_enabled_) {
+    gst_element_link_many(rgvolume_, rglimiter_, audioconvert2_, tee, NULL);
+  }
+
+  // Link everything else.
+  gst_element_link(probe_queue, probe_converter);
+  gst_element_link_many(audio_queue, equalizer_preamp_, equalizer_, volume_,
+                        audioscale_, convert, audiosink_, NULL);
+
+  // Add probes and handlers.
+  gst_pad_add_buffer_probe(gst_element_get_pad(probe_converter, "src"), G_CALLBACK(HandoffCallback), this);
   gst_bus_set_sync_handler(gst_pipeline_get_bus(GST_PIPELINE(pipeline_)), BusCallbackSync, this);
   bus_cb_id_ = gst_bus_add_watch(gst_pipeline_get_bus(GST_PIPELINE(pipeline_)), BusCallback, this);
   return true;
