@@ -305,7 +305,7 @@ void SongLoader::EffectiveSongsLoad() {
 
     LibraryQuery query;
     query.SetColumnSpec("%songs_table.ROWID, " + Song::kColumnSpec);
-    query.AddWhere("filename", song.url().toString());
+    query.AddWhere("filename", song.url().toEncoded());
 
     if (library_->ExecQuery(&query) && query.Next()) {
       // we may have many results when the file has many sections
