@@ -347,7 +347,7 @@ bool GstEnginePipeline::InitFromString(const QString& pipeline) {
 bool GstEnginePipeline::InitFromUrl(const QUrl &url, qint64 end_nanosec) {
   pipeline_ = gst_pipeline_new("pipeline");
   
-  if (url.scheme() == "cdda") {
+  if (url.scheme() == "cdda" && !url.path().isEmpty()) {
     // Currently, Gstreamer can't handle input CD devices inside cdda URL. So
     // we handle them ourselve: we extract the track number and re-create an
     // URL with only cdda:// + the track number (which can be handled by
@@ -634,7 +634,8 @@ void GstEnginePipeline::SourceSetupCallback(GstURIDecodeBin* bin, GParamSpec *ps
   GstElement* element;
   g_object_get(bin, "source", &element, NULL);
   if (element &&
-      g_object_class_find_property(G_OBJECT_GET_CLASS(element), "device")) {
+      g_object_class_find_property(G_OBJECT_GET_CLASS(element), "device") &&
+      !instance->source_device().isEmpty()) {
     // Gstreamer is not able to handle device in URL (refering to Gstreamer
     // documentation, this might be added in the future). Despite that, for now
     // we include device inside URL: we decompose it during Init and set device
