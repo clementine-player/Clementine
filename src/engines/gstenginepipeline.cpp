@@ -217,7 +217,7 @@ bool GstEnginePipeline::Init() {
 
   probe_queue       = engine_->CreateElement("queue",            audiobin_);
   probe_converter   = engine_->CreateElement("audioconvert",     audiobin_);
-  probe_sink        = engine_->CreateElement("appsink",          audiobin_);
+  probe_sink        = engine_->CreateElement("fakesink",         audiobin_);
 
   audio_queue       = engine_->CreateElement("queue",            audiobin_);
   equalizer_preamp_ = engine_->CreateElement("volume",           audiobin_);
@@ -268,6 +268,9 @@ bool GstEnginePipeline::Init() {
   pad = gst_element_get_pad(event_probe, "src");
   gst_pad_add_event_probe(pad, G_CALLBACK(EventHandoffCallback), this);
   gst_object_unref(pad);
+
+  // Configure the fakesink properly
+  g_object_set(G_OBJECT(probe_sink), "sync", TRUE, NULL);
   
   // Set the equalizer bands
   g_object_set(G_OBJECT(equalizer_), "num-bands", 10, NULL);
