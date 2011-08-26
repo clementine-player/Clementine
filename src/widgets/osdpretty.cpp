@@ -19,15 +19,15 @@
 #include "ui_osdpretty.h"
 
 
-#include <QColor>
-#include <QPainter>
-#include <QLayout>
 #include <QApplication>
-#include <QDesktopWidget>
-#include <QSettings>
-#include <QMouseEvent>
-#include <QTimer>
 #include <QBitmap>
+#include <QColor>
+#include <QDesktopWidget>
+#include <QLayout>
+#include <QMouseEvent>
+#include <QPainter>
+#include <QSettings>
+#include <QTimer>
 #include <QTimeLine>
 
 #include <QtDebug>
@@ -223,8 +223,7 @@ void OSDPretty::paintEvent(QPaintEvent *) {
   p.drawRoundedRect(box, kBorderRadius, kBorderRadius);
 }
 
-// Set the desidered message and then show the OSD
-void OSDPretty::ShowMessage(const QString& summary, const QString& message,
+void OSDPretty::SetMessage(const QString& summary, const QString& message,
                            const QImage& image) {
 
   if (!image.isNull()) {
@@ -242,6 +241,12 @@ void OSDPretty::ShowMessage(const QString& summary, const QString& message,
 
   if (isVisible())
     Reposition();
+}
+
+// Set the desired message and then show the OSD
+void OSDPretty::ShowMessage(const QString& summary, const QString& message,
+                            const QImage& image) {
+  SetMessage(summary, message, image);
 
   if (isVisible() && mode_ == Mode_Popup) {
     // The OSD is already visible, toggle or restart the timer

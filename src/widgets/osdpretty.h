@@ -49,9 +49,12 @@ class OSDPretty : public QWidget {
 
   static bool IsTransparencyAvailable();
 
-  void ShowMessage(const QString& summary,
+  void SetMessage(const QString& summary,
                   const QString& message,
                   const QImage& image);
+  void ShowMessage(const QString& summary,
+                   const QString& message,
+                   const QImage& image);
 
   // Controls the fader.  This is enabled by default on Windows.
   void set_fading_enabled(bool enabled) { fading_enabled_ = enabled; }
