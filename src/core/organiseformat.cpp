@@ -128,7 +128,6 @@ QString OrganiseFormat::TagValue(const QString &tag, const Song &song) const {
   if (tag == "title")            value = song.title();
   else if (tag == "album")       value = song.album();
   else if (tag == "artist")      value = song.artist();
-  else if (tag == "albumartist") value = song.albumartist();
   else if (tag == "composer")    value = song.composer();
   else if (tag == "genre")       value = song.genre();
   else if (tag == "comment")     value = song.comment();
@@ -144,6 +143,10 @@ QString OrganiseFormat::TagValue(const QString &tag, const Song &song) const {
     value = song.albumartist().trimmed();
     if (value.isEmpty())  value = song.artist().trimmed();
     if (!value.isEmpty()) value = value[0].toUpper();
+  }
+  else if (tag == "albumartist") {
+    value = song.albumartist();
+    if (value.isEmpty()) value = song.artist();
   }
 
   if (replace_the_ && (tag == "artist" || tag == "albumartist"))
