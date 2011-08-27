@@ -97,6 +97,7 @@ AlbumCoverSearcher::AlbumCoverSearcher(const QIcon& no_cover_icon, QWidget* pare
     fetcher_(NULL),
     id_(0)
 {
+  setWindowModality(Qt::WindowModal);
   ui_->setupUi(this);
   ui_->busy->hide();
 
@@ -115,6 +116,8 @@ AlbumCoverSearcher::AlbumCoverSearcher(const QIcon& no_cover_icon, QWidget* pare
   connect(ui_->covers, SIGNAL(doubleClicked(QModelIndex)), SLOT(CoverDoubleClicked(QModelIndex)));
 
   new ForceScrollPerPixel(ui_->covers, this);
+
+  ui_->buttonBox->button(QDialogButtonBox::Cancel)->setShortcut(QKeySequence::Close);
 }
 
 AlbumCoverSearcher::~AlbumCoverSearcher() {
