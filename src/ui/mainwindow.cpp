@@ -1435,6 +1435,8 @@ void MainWindow::EditTagDialogAccepted() {
 
   // This is really lame but we don't know what rows have changed
   ui_->playlist->view()->update();
+
+  playlists_->current()->Save();
 }
 
 void MainWindow::RenumberTracks() {

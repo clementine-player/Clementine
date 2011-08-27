@@ -1531,6 +1531,8 @@ void Playlist::ReloadItems(const QList<int>& rows) {
       emit dataChanged(index(row, 0), index(row, ColumnCount-1));
     }
   }
+
+  Save();
 }
 
 void Playlist::RateSong(const QModelIndex& index, double rating) {
