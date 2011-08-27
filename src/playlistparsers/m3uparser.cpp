@@ -52,7 +52,6 @@ SongList M3UParser::Load(QIODevice* device, const QString& playlist_path, const 
       if (type == EXTENDED && line.startsWith("#EXT")) {
         if (!ParseMetadata(line, &current_metadata)) {
           qLog(Warning) << "Failed to parse metadata: " << line;
-          continue;
         }
       }
     } else if (!line.isEmpty()) {
