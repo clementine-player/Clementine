@@ -34,14 +34,7 @@
       </widget>
      </item>
      <item>
-      <widget class="BusyIndicator" name="busy">
-       <property name="text">
-        <string/>
-       </property>
-       <property name="wordWrap">
-        <bool>true</bool>
-       </property>
-      </widget>
+      <widget class="BusyIndicator" name="busy"/>
      </item>
     </layout>
    </item>
@@ -80,7 +73,7 @@
  <customwidgets>
   <customwidget>
    <class>BusyIndicator</class>
-   <extends>QLabel</extends>
+   <extends>QWidget</extends>
    <header>widgets/busyindicator.h</header>
   </customwidget>
  </customwidgets>

@@ -22,19 +22,27 @@
 
 class QMovie;
 
-class BusyIndicator : public QLabel {
+class BusyIndicator : public QWidget {
   Q_OBJECT
 
  public:
-  BusyIndicator(QWidget* parent = 0);
+  explicit BusyIndicator(const QString& text, QWidget* parent = 0);
+  explicit BusyIndicator(QWidget* parent = 0);
   ~BusyIndicator();
+
+  QString text() const;
+  void set_text(const QString& text);
 
  protected:
   void showEvent(QShowEvent* event);
   void hideEvent(QHideEvent* event);
 
  private:
+  void Init(const QString& text);
+
+ private:
   QMovie* movie_;
+  QLabel* label_;
 };
 
 #endif // BUSYINDICATOR_H

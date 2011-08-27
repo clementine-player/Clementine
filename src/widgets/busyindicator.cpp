@@ -17,14 +17,36 @@
 
 #include "busyindicator.h"
 
+#include <QHBoxLayout>
 #include <QMovie>
 
+BusyIndicator::BusyIndicator(const QString& text, QWidget* parent)
+  : QWidget(parent) {
+  Init(text);
+}
+
 BusyIndicator::BusyIndicator(QWidget* parent)
-    : QLabel(parent),
-      movie_(new QMovie(":spinner.gif"))
-{
-  setMovie(movie_);
-  setMinimumSize(16, 16);
+  : QWidget(parent) {
+  Init(QString::null);
+}
+
+void BusyIndicator::Init(const QString& text) {
+  movie_ = new QMovie(":spinner.gif"),
+  label_ = new QLabel;
+
+  QLabel* icon = new QLabel;
+  icon->setMovie(movie_);
+  icon->setMinimumSize(16, 16);
+
+  label_->setWordWrap(true);
+
+  QHBoxLayout* layout = new QHBoxLayout(this);
+  layout->setContentsMargins(0, 0, 0, 0);
+  layout->addWidget(icon);
+  layout->addSpacing(6);
+  layout->addWidget(label_);
+
+  set_text(text);
 }
 
 BusyIndicator::~BusyIndicator() {
@@ -38,3 +60,10 @@ void BusyIndicator::showEvent(QShowEvent*) {
 void BusyIndicator::hideEvent(QHideEvent*) {
   movie_->stop();
 }
+
+void BusyIndicator::set_text(const QString& text) {
+  label_->setText(text);
+  if (text.isEmpty())
+    label_->hide();
+}
+

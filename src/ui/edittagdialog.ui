@@ -841,39 +841,7 @@
     </widget>
    </item>
    <item>
-    <widget class="QWidget" name="loading_container" native="true">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <layout class="QHBoxLayout" name="horizontalLayout_3">
-      <property name="margin">
-       <number>0</number>
-      </property>
-      <item>
-       <widget class="BusyIndicator" name="label_2">
-        <property name="text">
-         <string/>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="loading_label">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
+    <widget class="BusyIndicator" name="loading_label"/>
    </item>
    <item>
     <widget class="QDialogButtonBox" name="button_box">
@@ -885,6 +853,11 @@
   </layout>
  </widget>
  <customwidgets>
+  <customwidget>
+   <class>BusyIndicator</class>
+   <extends>QWidget</extends>
+   <header>widgets/busyindicator.h</header>
+  </customwidget>
   <customwidget>
    <class>LineEdit</class>
    <extends>QLineEdit</extends>
@@ -905,11 +878,6 @@
    <class>SpinBox</class>
    <extends>QSpinBox</extends>
    <header>widgets/lineedit.h</header>
-  </customwidget>
-  <customwidget>
-   <class>BusyIndicator</class>
-   <extends>QLabel</extends>
-   <header>widgets/busyindicator.h</header>
   </customwidget>
  </customwidgets>
  <resources>

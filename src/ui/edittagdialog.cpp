@@ -75,7 +75,7 @@ EditTagDialog::EditTagDialog(CoverProviders* cover_providers, QWidget* parent)
 
   ui_->setupUi(this);
   ui_->splitter->setSizes(QList<int>() << 200 << width() - 200);
-  ui_->loading_container->hide();
+  ui_->loading_label->hide();
 
   // An editable field is one that has a label as a buddy.  The label is
   // important because it gets turned bold when the field is changed.
@@ -178,12 +178,12 @@ bool EditTagDialog::SetLoading(const QString& message) {
     return false;
   loading_ = loading;
 
-  ui_->loading_container->setVisible(loading);
   ui_->button_box->setEnabled(!loading);
   ui_->tab_widget->setEnabled(!loading);
   ui_->song_list->setEnabled(!loading);
   ui_->fetch_tag->setEnabled(!loading);
-  ui_->loading_label->setText(message);
+  ui_->loading_label->setVisible(loading);
+  ui_->loading_label->set_text(message);
   return true;
 }
 

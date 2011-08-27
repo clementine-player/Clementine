@@ -149,7 +149,7 @@ void TrackSelectionDialog::UpdateStack() {
 
   if (data.pending_) {
     ui_->stack->setCurrentWidget(ui_->loading_page);
-    ui_->progress_label->setText(data.progress_string_ + "...");
+    ui_->progress->set_text(data.progress_string_ + "...");
     return;
   } else if (data.results_.isEmpty()) {
     ui_->stack->setCurrentWidget(ui_->error_page);
@@ -220,10 +220,10 @@ void TrackSelectionDialog::ResultSelected() {
 void TrackSelectionDialog::SetLoading(const QString& message) {
   const bool loading = !message.isEmpty();
 
-  ui_->loading_container->setVisible(loading);
   ui_->button_box->setEnabled(!loading);
   ui_->splitter->setEnabled(!loading);
-  ui_->loading_label->setText(message);
+  ui_->loading_label->setVisible(loading);
+  ui_->loading_label->set_text(message);
 }
 
 void TrackSelectionDialog::SaveData(const QList<Data>& data) {

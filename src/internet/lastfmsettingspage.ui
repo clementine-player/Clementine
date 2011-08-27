@@ -239,7 +239,7 @@
  <customwidgets>
   <customwidget>
    <class>BusyIndicator</class>
-   <extends>QLabel</extends>
+   <extends>QWidget</extends>
    <header>widgets/busyindicator.h</header>
   </customwidget>
  </customwidgets>
@@ -253,5 +253,38 @@
   <tabstop>scrobble_button</tabstop>
  </tabstops>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>username</sender>
+   <signal>returnPressed()</signal>
+   <receiver>login</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>332</x>
+     <y>104</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>706</x>
+     <y>103</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>password</sender>
+   <signal>returnPressed()</signal>
+   <receiver>login</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>719</x>
+     <y>137</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>725</x>
+     <y>108</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>
