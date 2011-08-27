@@ -260,7 +260,7 @@ SongLoader::Result SongLoader::LoadLocal(const QString& filename, bool block,
 
   LibraryQuery query;
   query.SetColumnSpec("%songs_table.ROWID, " + Song::kColumnSpec);
-  query.AddWhere("filename", url.toString());
+  query.AddWhere("filename", url.toEncoded());
 
   SongList song_list;
 
