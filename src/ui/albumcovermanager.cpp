@@ -19,6 +19,7 @@
 #include "albumcoversearcher.h"
 #include "iconloader.h"
 #include "ui_albumcovermanager.h"
+#include "core/logging.h"
 #include "core/utilities.h"
 #include "covers/albumcoverfetcher.h"
 #include "covers/coverproviders.h"
@@ -243,6 +244,15 @@ void AlbumCoverManager::CancelRequests() {
   ResetFetchCoversButton();
 }
 
+static bool CompareNocase(const QString& left, const QString& right) {
+  return QString::localeAwareCompare(left, right) < 0;
+}
+
+static bool CompareAlbumNameNocase(const LibraryBackend::Album& left,
+                                   const LibraryBackend::Album& right) {
+  return CompareNocase(left.album_name, right.album_name);
+}
+
 void AlbumCoverManager::Reset() {
   ResetFetchCoversButton();
 
@@ -253,7 +263,10 @@ void AlbumCoverManager::Reset() {
   new QListWidgetItem(all_artists_icon_, tr("All artists"), ui_->artists, All_Artists);
   new QListWidgetItem(artist_icon_, tr("Various artists"), ui_->artists, Various_Artists);
 
-  foreach (const QString& artist, backend_->GetAllArtistsWithAlbums()) {
+  QStringList artists(backend_->GetAllArtistsWithAlbums());
+  qStableSort(artists.begin(), artists.end(), CompareNocase);
+
+  foreach (const QString& artist, artists) {
     if (artist.isEmpty())
       continue;
 
@@ -288,6 +301,10 @@ void AlbumCoverManager::ArtistChanged(QListWidgetItem* current) {
     case All_Artists:
     default:              albums = backend_->GetAllAlbums(); break;
   }
+
+  // Sort by album name.  The list is already sorted by sqlite but it was done
+  // case sensitively.
+  qStableSort(albums.begin(), albums.end(), CompareAlbumNameNocase);
 
   foreach (const LibraryBackend::Album& info, albums) {
     // Don't show songs without an album, obviously
