@@ -1445,10 +1445,11 @@ void MainWindow::RenumberTracks() {
   qStableSort(indexes);
 
   // if first selected song has a track number set, start from that offset
-  if (indexes.size()) {
-    Song first_song=playlists_->current()->item_at(indexes[0].row())->Metadata();
-    if (int first_track = first_song.track())
-      track = first_track;
+  if (!indexes.isEmpty()) {
+    const Song first_song = playlists_->current()->item_at(indexes[0].row())->Metadata();
+
+    if (first_song.track() > 0)
+      track = first_song.track();
   }
 
   foreach (const QModelIndex& index, indexes) {
