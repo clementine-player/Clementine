@@ -27,31 +27,26 @@
 #include <QMovie>
 #include <QSettings>
 
-// Use Qt specific icons, since freedesktop doesn't seem to have suitable icons.
-const char* kSubscribedIcon = "task-complete";
-const char* kNotSubscribedIcon = "dialog-warning";
-const char* kWaitingIcon = ":spinner.gif";
-
 LastFMSettingsPage::LastFMSettingsPage(SettingsDialog* dialog)
   : SettingsPage(dialog),
     service_(static_cast<LastFMService*>(InternetModel::ServiceByName("Last.fm"))),
     ui_(new Ui_LastFMSettingsPage),
-    loading_icon_(new QMovie(kWaitingIcon, QByteArray(), this)),
     waiting_for_auth_(false)
 {
   ui_->setupUi(this);
-  ui_->busy->hide();
 
   // Icons
   setWindowIcon(QIcon(":/last.fm/as.png"));
-  ui_->sign_out->setIcon(IconLoader::Load("list-remove"));
-  ui_->warn_icon->setPixmap(IconLoader::Load("dialog-warning").pixmap(16));
-  ui_->warn_icon->setMinimumSize(16, 16);
 
   connect(service_, SIGNAL(AuthenticationComplete(bool)), SLOT(AuthenticationComplete(bool)));
   connect(service_, SIGNAL(UpdatedSubscriberStatus(bool)), SLOT(UpdatedSubscriberStatus(bool)));
-  connect(ui_->sign_out, SIGNAL(clicked()), SLOT(SignOut()));
+  connect(ui_->login_state, SIGNAL(LogoutClicked()), SLOT(Logout()));
+  connect(ui_->login_state, SIGNAL(LoginClicked()), SLOT(Login()));
   connect(ui_->login, SIGNAL(clicked()), SLOT(Login()));
+
+  ui_->login_state->AddCredentialField(ui_->username);
+  ui_->login_state->AddCredentialField(ui_->password);
+  ui_->login_state->AddCredentialGroup(ui_->groupBox);
 
   ui_->username->setMinimumWidth(QFontMetrics(QFont()).width("WWWWWWWWWWWW"));
   resize(sizeHint());
@@ -62,9 +57,9 @@ LastFMSettingsPage::~LastFMSettingsPage() {
 }
 
 void LastFMSettingsPage::Login() {
-  ui_->busy->show();
   waiting_for_auth_ = true;
 
+  ui_->login_state->SetLoggedIn(LoginStateWidget::LoginInProgress);
   service_->Authenticate(ui_->username->text(), ui_->password->text());
 }
 
@@ -72,7 +67,6 @@ void LastFMSettingsPage::AuthenticationComplete(bool success) {
   if (!waiting_for_auth_)
     return; // Wasn't us that was waiting for auth
 
-  ui_->busy->hide();
   waiting_for_auth_ = false;
 
   if (success) {
@@ -93,8 +87,6 @@ void LastFMSettingsPage::Load() {
   ui_->love_ban_->setChecked(service_->AreButtonsVisible());
   ui_->scrobble_button->setChecked(service_->IsScrobbleButtonVisible());
 
-  ui_->icon->setMovie(loading_icon_);
-  loading_icon_->start();
   if (service_->IsAuthenticated()) {
     service_->UpdateSubscriberStatus();
   }
@@ -103,21 +95,15 @@ void LastFMSettingsPage::Load() {
 }
 
 void LastFMSettingsPage::UpdatedSubscriberStatus(bool is_subscriber) {
-  const char* icon_path = is_subscriber ? kSubscribedIcon : kNotSubscribedIcon;
-  ui_->icon->setPixmap(IconLoader::Load(icon_path).pixmap(16));
-  loading_icon_->stop();
+  ui_->login_state->SetAccountTypeVisible(!is_subscriber);
 
-  if (is_subscriber) {
-    ui_->subscriber_warning->hide();
-    ui_->warn_icon->hide();
-  } else {
-    ui_->warn_icon->show();
+  if (!is_subscriber) {
     if (service_->HasConnectionProblems()) {
-      ui_->subscriber_warning->setText(
+      ui_->login_state->SetAccountTypeText(
         tr("Clementine couldn't fetch your subscription status since there are problems "
            "with your connection. Played tracks will be cached and sent later to Last.fm."));
     } else {
-      ui_->subscriber_warning->setText(
+      ui_->login_state->SetAccountTypeText(
         tr("You will not be able to play Last.fm radio stations "
            "as you are not a Last.fm subscriber."));
     }
@@ -135,7 +121,7 @@ void LastFMSettingsPage::Save() {
   service_->ReloadSettings();
 }
 
-void LastFMSettingsPage::SignOut() {
+void LastFMSettingsPage::Logout() {
   ui_->username->clear();
   ui_->password->clear();
   RefreshControls(false);
@@ -144,19 +130,15 @@ void LastFMSettingsPage::SignOut() {
 }
 
 void LastFMSettingsPage::RefreshControls(bool authenticated) {
-  ui_->groupBox->setVisible(!authenticated);
-  ui_->sign_out->setVisible(authenticated);
-  if (authenticated) {
-    ui_->status->setText(QString(tr("You're logged in as <b>%1</b>")).arg(lastfm::ws::Username));
-  } else {
-    ui_->icon->setPixmap(IconLoader::Load("task-reject").pixmap(16));
-    ui_->status->setText(tr("Please fill in the blanks to login into Last.fm"));
+  ui_->login_state->SetLoggedIn(authenticated ? LoginStateWidget::LoggedIn
+                                              : LoginStateWidget::LoggedOut,
+                                lastfm::ws::Username);
+  ui_->login_state->SetAccountTypeVisible(!authenticated);
 
-    ui_->subscriber_warning->setText(
+  if (!authenticated) {
+    ui_->login_state->SetAccountTypeText(
         tr("You can scrobble tracks for free, but only "
            "<span style=\" font-weight:600;\">paid subscribers</span> "
            "can stream Last.fm radio from Clementine."));
-    ui_->subscriber_warning->show();
-    ui_->warn_icon->show();
   }
 }

@@ -30,11 +30,14 @@ class SettingsPage : public QWidget {
 public:
   SettingsPage(SettingsDialog* dialog);
 
+  // Return false to grey out the page's item in the list.
   virtual bool IsEnabled() const { return true; }
 
+  // Load is called when the dialog is shown, Save when the user clicks OK.
   virtual void Load() = 0;
   virtual void Save() = 0;
 
+  // The dialog that this page belongs to.
   SettingsDialog* dialog() const { return dialog_; }
 
 signals:

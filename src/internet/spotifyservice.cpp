@@ -46,7 +46,8 @@ SpotifyService::SpotifyService(InternetModel* parent)
       login_task_id_(0),
       pending_search_playlist_(NULL),
       context_menu_(NULL),
-      search_delay_(new QTimer(this)) {
+      search_delay_(new QTimer(this)),
+      login_state_(LoginState_OtherError) {
   // Build the search path for the binary blob.
   // Look for one distributed alongside clementine first, then check in the
   // user's home directory for any that have been downloaded.
@@ -124,23 +125,43 @@ QModelIndex SpotifyService::GetCurrentIndex() {
 }
 
 void SpotifyService::Login(const QString& username, const QString& password) {
-  delete server_;
-  delete blob_process_;
-  server_ = NULL;
-  blob_process_ = NULL;
-
+  Logout();
   EnsureServerCreated(username, password);
 }
 
-void SpotifyService::LoginCompleted(bool success, const QString& error) {
+void SpotifyService::LoginCompleted(bool success, const QString& error,
+                                    protobuf::LoginResponse_Error error_code) {
   if (login_task_id_) {
     model()->task_manager()->SetTaskFinished(login_task_id_);
     login_task_id_ = 0;
   }
 
+  login_state_ = LoginState_LoggedIn;
+
   if (!success) {
     QMessageBox::warning(NULL, tr("Spotify login error"), error, QMessageBox::Close);
+
+    switch (error_code) {
+    case protobuf::LoginResponse_Error_BadUsernameOrPassword:
+      login_state_ = LoginState_BadCredentials;
+      break;
+
+    case protobuf::LoginResponse_Error_UserBanned:
+      login_state_ = LoginState_Banned;
+      break;
+
+    case protobuf::LoginResponse_Error_UserNeedsPremium:
+      login_state_ = LoginState_NoPremium;
+      break;
+
+    default:
+      login_state_ = LoginState_OtherError;
+    }
   }
+
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+  s.setValue("login_state", login_state_);
 
   emit LoginFinished(success);
 }
@@ -155,6 +176,13 @@ void SpotifyService::BlobProcessError(QProcess::ProcessError error) {
   }
 }
 
+void SpotifyService::ReloadSettings() {
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+
+  login_state_ = LoginState(s.value("login_state", LoginState_OtherError).toInt());
+}
+
 void SpotifyService::EnsureServerCreated(const QString& username,
                                          const QString& password) {
   if (server_ && blob_process_) {
@@ -164,7 +192,8 @@ void SpotifyService::EnsureServerCreated(const QString& username,
   delete server_;
   server_ = new SpotifyServer(this);
 
-  connect(server_, SIGNAL(LoginCompleted(bool,QString)), SLOT(LoginCompleted(bool,QString)));
+  connect(server_, SIGNAL(LoginCompleted(bool,QString,protobuf::LoginResponse_Error)),
+                   SLOT(LoginCompleted(bool,QString,protobuf::LoginResponse_Error)));
   connect(server_, SIGNAL(PlaylistsUpdated(protobuf::Playlists)),
           SLOT(PlaylistsUpdated(protobuf::Playlists)));
   connect(server_, SIGNAL(InboxLoaded(protobuf::LoadPlaylistResponse)),
@@ -592,4 +621,13 @@ void SpotifyService::SyncPlaylistProgress(
 
 void SpotifyService::ShowConfig() {
   emit OpenSettingsAtPage(SettingsDialog::Page_Spotify);
+}
+
+void SpotifyService::Logout() {
+  delete server_;
+  delete blob_process_;
+  server_ = NULL;
+  blob_process_ = NULL;
+
+  login_state_ = LoginState_OtherError;
 }

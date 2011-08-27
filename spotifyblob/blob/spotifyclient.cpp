@@ -108,12 +108,25 @@ void SpotifyClient::Init(quint16 port) {
 void SpotifyClient::LoggedInCallback(sp_session* session, sp_error error) {
   SpotifyClient* me = reinterpret_cast<SpotifyClient*>(sp_session_userdata(session));
   const bool success = error == SP_ERROR_OK;
+  protobuf::LoginResponse_Error error_code = protobuf::LoginResponse_Error_Other;
 
   if (!success) {
     qLog(Warning) << "Failed to login" << sp_error_message(error);
   }
 
-  me->SendLoginCompleted(success, sp_error_message(error));
+  switch (error) {
+  case SP_ERROR_BAD_USERNAME_OR_PASSWORD:
+    error_code = protobuf::LoginResponse_Error_BadUsernameOrPassword;
+    break;
+  case SP_ERROR_USER_BANNED:
+    error_code = protobuf::LoginResponse_Error_UserBanned;
+    break;
+  case SP_ERROR_USER_NEEDS_PREMIUM :
+    error_code = protobuf::LoginResponse_Error_UserNeedsPremium;
+    break;
+  }
+
+  me->SendLoginCompleted(success, sp_error_message(error), error_code);
 
   if (success) {
     sp_playlistcontainer_add_callbacks(
@@ -208,7 +221,7 @@ void SpotifyClient::Login(const QString& username, const QString& password) {
   sp_error error = sp_session_create(&spotify_config_, &session_);
   if (error != SP_ERROR_OK) {
     qLog(Warning) << "Failed to create session" << sp_error_message(error);
-    SendLoginCompleted(false, sp_error_message(error));
+    SendLoginCompleted(false, sp_error_message(error), protobuf::LoginResponse_Error_Other);
     return;
   }
 
@@ -217,12 +230,17 @@ void SpotifyClient::Login(const QString& username, const QString& password) {
   sp_session_login(session_, username.toUtf8().constData(), password.toUtf8().constData());
 }
 
-void SpotifyClient::SendLoginCompleted(bool success, const QString& error) {
+void SpotifyClient::SendLoginCompleted(bool success, const QString& error,
+                                       protobuf::LoginResponse_Error error_code) {
   protobuf::SpotifyMessage message;
 
   protobuf::LoginResponse* response = message.mutable_login_response();
   response->set_success(success);
   response->set_error(DataCommaSizeFromQString(error));
+
+  if (!success) {
+    response->set_error_code(error_code);
+  }
 
   handler_->SendMessage(message);
 }

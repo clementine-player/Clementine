@@ -35,10 +35,21 @@ public:
     Role_UserPlaylistIndex = InternetModel::RoleCount,
   };
 
+  // Values are persisted - don't change.
+  enum LoginState {
+    LoginState_LoggedIn = 1,
+    LoginState_Banned = 2,
+    LoginState_BadCredentials = 3,
+    LoginState_NoPremium = 4,
+    LoginState_OtherError = 5
+  };
+
   static const char* kServiceName;
   static const char* kSettingsGroup;
   static const char* kBlobDownloadUrl;
   static const int kSearchDelayMsec;
+
+  void ReloadSettings();
 
   QStandardItem* CreateRootItem();
   void LazyPopulate(QStandardItem* parent);
@@ -46,6 +57,7 @@ public:
   void ItemDoubleClicked(QStandardItem* item);
   PlaylistItem::Options playlistitem_options() const;
 
+  void Logout();
   void Login(const QString& username, const QString& password);
   void Search(const QString& text, Playlist* playlist, bool now = false);
   Q_INVOKABLE void LoadImage(const QUrl& url);
@@ -54,6 +66,9 @@ public:
 
   bool IsBlobInstalled() const;
   void InstallBlob();
+
+  // Persisted in the settings and updated on each Login().
+  LoginState login_state() const { return login_state_; }
 
   static void SongFromProtobuf(const protobuf::Track& track, Song* song);
 
@@ -77,7 +92,8 @@ private:
 
 private slots:
   void BlobProcessError(QProcess::ProcessError error);
-  void LoginCompleted(bool success, const QString& error);
+  void LoginCompleted(bool success, const QString& error,
+                      protobuf::LoginResponse_Error error_code);
   void PlaylistsUpdated(const protobuf::Playlists& response);
   void InboxLoaded(const protobuf::LoadPlaylistResponse& response);
   void StarredLoaded(const protobuf::LoadPlaylistResponse& response);
@@ -122,6 +138,8 @@ private:
   int inbox_sync_id_;
   int starred_sync_id_;
   QMap<int, int> playlist_sync_ids_;
+
+  LoginState login_state_;
 };
 
 #endif

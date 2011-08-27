@@ -30,8 +30,16 @@ message LoginRequest {
 }
 
 message LoginResponse {
+  enum Error {
+    BadUsernameOrPassword = 1;
+    UserBanned = 2;
+    UserNeedsPremium = 3;
+    Other = 4;
+  }
+
   required bool success = 1;
   required string error = 2;
+  optional Error error_code = 3 [default = Other];
 }
 
 message Playlists {

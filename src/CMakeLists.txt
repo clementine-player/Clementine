@@ -275,6 +275,7 @@ set(SOURCES
   widgets/groupediconview.cpp
   widgets/lineedit.cpp
   widgets/linetextedit.cpp
+  widgets/loginstatewidget.cpp
   widgets/multiloadingindicator.cpp
   widgets/nowplayingwidget.cpp
   widgets/osd.cpp
@@ -482,6 +483,7 @@ set(HEADERS
   widgets/groupediconview.h
   widgets/lineedit.h
   widgets/linetextedit.h
+  widgets/loginstatewidget.h
   widgets/multiloadingindicator.h
   widgets/nowplayingwidget.h
   widgets/osd.h
@@ -567,6 +569,7 @@ set(UI
   widgets/equalizerslider.ui
   widgets/errordialog.ui
   widgets/fileview.ui
+  widgets/loginstatewidget.ui
   widgets/osdpretty.ui
   widgets/trackslider.ui
 

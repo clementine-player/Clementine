@@ -41,6 +41,10 @@ public slots:
 private slots:
   void Login();
   void LoginFinished(bool success);
+  void Logout();
+
+private:
+  void UpdateLoginState();
 
 private:
   NetworkAccessManager* network_;

@@ -39,6 +39,7 @@ void BusyIndicator::Init(const QString& text) {
   icon->setMinimumSize(16, 16);
 
   label_->setWordWrap(true);
+  label_->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
 
   QHBoxLayout* layout = new QHBoxLayout(this);
   layout->setContentsMargins(0, 0, 0, 0);
@@ -63,7 +64,10 @@ void BusyIndicator::hideEvent(QHideEvent*) {
 
 void BusyIndicator::set_text(const QString& text) {
   label_->setText(text);
-  if (text.isEmpty())
-    label_->hide();
+  label_->setVisible(!text.isEmpty());
+}
+
+QString BusyIndicator::text() const {
+  return label_->text();
 }
 

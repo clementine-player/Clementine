@@ -36,7 +36,7 @@ public:
 private slots:
   void Login();
   void AuthenticationComplete(bool success);
-  void SignOut();
+  void Logout();
   void UpdatedSubscriberStatus(bool is_subscriber);
 
 private:

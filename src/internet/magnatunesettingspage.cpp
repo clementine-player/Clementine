@@ -30,23 +30,28 @@
 
 MagnatuneSettingsPage::MagnatuneSettingsPage(SettingsDialog* dialog)
   : SettingsPage(dialog),
-    credentials_changed_(false),
     network_(new NetworkAccessManager(this)),
-    ui_(new Ui_MagnatuneSettingsPage)
+    ui_(new Ui_MagnatuneSettingsPage),
+    logged_in_(false)
 {
   ui_->setupUi(this);
-  ui_->busy->hide();
   setWindowIcon(QIcon(":/providers/magnatune.png"));
 
   connect(ui_->membership, SIGNAL(currentIndexChanged(int)), SLOT(MembershipChanged(int)));
 
   connect(network_, SIGNAL(authenticationRequired(QNetworkReply*, QAuthenticator*)),
           SLOT(AuthenticationRequired(QNetworkReply*, QAuthenticator*)));
-  connect(ui_->username, SIGNAL(textEdited(const QString&)),
-          SLOT(CredentialsChanged()));
-  connect(ui_->password, SIGNAL(textEdited(const QString&)),
-          SLOT(CredentialsChanged()));
   connect(ui_->login, SIGNAL(clicked()), SLOT(Login()));
+  connect(ui_->login_state, SIGNAL(LoginClicked()), SLOT(Login()));
+  connect(ui_->login_state, SIGNAL(LogoutClicked()), SLOT(Logout()));
+
+  ui_->login_state->AddCredentialField(ui_->username);
+  ui_->login_state->AddCredentialField(ui_->password);
+  ui_->login_state->AddCredentialGroup(ui_->login_container);
+
+  ui_->login_state->SetAccountTypeText(tr(
+      "You can listen to Magnatune songs for free without an account.  "
+      "Purchasing a membership removes the messages at the end of each track."));
 }
 
 MagnatuneSettingsPage::~MagnatuneSettingsPage() {
@@ -56,11 +61,14 @@ MagnatuneSettingsPage::~MagnatuneSettingsPage() {
 const char* kMagnatuneDownloadValidateUrl = "http://download.magnatune.com/";
 const char* kMagnatuneStreamingValidateUrl = "http://streaming.magnatune.com/";
 
-void MagnatuneSettingsPage::Login() {
-  if (!credentials_changed_)
-    return;
-  ui_->busy->show();
+void MagnatuneSettingsPage::UpdateLoginState() {
+  ui_->login_state->SetLoggedIn(logged_in_ ? LoginStateWidget::LoggedIn
+                                           : LoginStateWidget::LoggedOut,
+                                ui_->username->text());
+  ui_->login_state->SetAccountTypeVisible(!logged_in_);
+}
 
+void MagnatuneSettingsPage::Login() {
   MagnatuneService::MembershipType type =
       MagnatuneService::MembershipType(ui_->membership->currentIndex());
 
@@ -81,8 +89,15 @@ void MagnatuneSettingsPage::Login() {
   req.setAttribute(QNetworkRequest::CacheLoadControlAttribute,
                    QNetworkRequest::AlwaysNetwork);
 
+  ui_->login_state->SetLoggedIn(LoginStateWidget::LoginInProgress);
+
   QNetworkReply* reply = network_->head(req);
   connect(reply, SIGNAL(finished()), SLOT(LoginFinished()));
+}
+
+void MagnatuneSettingsPage::Logout() {
+  logged_in_ = false;
+  UpdateLoginState();
 }
 
 void MagnatuneSettingsPage::LoginFinished() {
@@ -90,18 +105,17 @@ void MagnatuneSettingsPage::LoginFinished() {
   Q_ASSERT(reply);
   reply->deleteLater();
 
-  ui_->busy->hide();
-
-  const bool success =
+  logged_in_ =
       reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt() == 200;
-  credentials_changed_ = !success;
-  if (!success) {
+
+  if (!logged_in_) {
     QMessageBox::warning(
         this, tr("Authentication failed"), tr("Your Magnatune credentials were incorrect"));
   } else {
     Save();
   }
-  ui_->login->setEnabled(!success);
+
+  UpdateLoginState();
 }
 
 void MagnatuneSettingsPage::AuthenticationRequired(
@@ -119,8 +133,11 @@ void MagnatuneSettingsPage::Load() {
   ui_->username->setText(s.value("username").toString());
   ui_->password->setText(s.value("password").toString());
   ui_->format->setCurrentIndex(s.value("format", MagnatuneService::Format_Ogg).toInt());
+  logged_in_ = s.value("logged_in",
+      !ui_->username->text().isEmpty() &&
+      !ui_->password->text().isEmpty()).toBool();
 
-  credentials_changed_ = false;
+  UpdateLoginState();
 }
 
 void MagnatuneSettingsPage::Save() {
@@ -131,6 +148,7 @@ void MagnatuneSettingsPage::Save() {
   s.setValue("username", ui_->username->text());
   s.setValue("password", ui_->password->text());
   s.setValue("format", ui_->format->currentIndex());
+  s.setValue("logged_in", logged_in_);
 
   InternetModel::Service<MagnatuneService>()->ReloadSettings();
 }
@@ -140,8 +158,4 @@ void MagnatuneSettingsPage::MembershipChanged(int value) {
                  MagnatuneService::Membership_None;
   ui_->login_container->setEnabled(enabled);
   ui_->preferences_group->setEnabled(enabled);
-}
-
-void MagnatuneSettingsPage::CredentialsChanged() {
-  credentials_changed_ = true;
 }

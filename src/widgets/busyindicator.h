@@ -24,6 +24,7 @@ class QMovie;
 
 class BusyIndicator : public QWidget {
   Q_OBJECT
+  Q_PROPERTY(QString text READ text WRITE set_text)
 
  public:
   explicit BusyIndicator(const QString& text, QWidget* parent = 0);

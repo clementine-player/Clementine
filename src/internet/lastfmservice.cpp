@@ -329,6 +329,8 @@ void LastFMService::UpdateSubscriberStatusFinished() {
   Q_ASSERT(reply);
   reply->deleteLater();
 
+  bool is_subscriber = false;
+
   try {
     const lastfm::XmlQuery lfm = lastfm::ws::parse(reply);
 #ifdef Q_OS_WIN32
@@ -338,26 +340,20 @@ void LastFMService::UpdateSubscriberStatusFinished() {
 
     connection_problems_ = false;
     QString subscriber = lfm["user"]["subscriber"].text();
-    const bool is_subscriber = (subscriber.toInt() == 1);
+    is_subscriber = (subscriber.toInt() == 1);
 
     QSettings settings;
     settings.beginGroup(kSettingsGroup);
     settings.setValue("Subscriber", is_subscriber);
     qLog(Info) << lastfm::ws::Username << "Subscriber status:" << is_subscriber;
-    emit UpdatedSubscriberStatus(is_subscriber);
   } catch (lastfm::ws::ParseError e) {
     qLog(Error) << "Last.fm parse error: " << e.enumValue();
-    if (e.enumValue() == lastfm::ws::MalformedResponse) {
-      // The connection to the server is unavailable
-      connection_problems_ = true;
-      emit UpdatedSubscriberStatus(false);
-    } else {
-      // Errors not related to connection
-      connection_problems_ = false;
-    }
+    connection_problems_ = e.enumValue() == lastfm::ws::MalformedResponse;
   } catch (std::runtime_error& e) {
     qLog(Error) << e.what();
   }
+
+  emit UpdatedSubscriberStatus(is_subscriber);
 }
 
 QUrl LastFMService::FixupUrl(const QUrl& url) {

@@ -37,8 +37,6 @@ SpotifySettingsPage::SpotifySettingsPage(SettingsDialog* dialog)
     validated_(false)
 {
   ui_->setupUi(this);
-  ui_->busy->hide();
-  ui_->warn_icon->setPixmap(IconLoader::Load("dialog-warning").pixmap(16));
 
   setWindowIcon(QIcon(":/icons/svg/spotify.svg"));
 
@@ -48,9 +46,15 @@ SpotifySettingsPage::SpotifySettingsPage(SettingsDialog* dialog)
 
   connect(ui_->download_blob, SIGNAL(clicked()), SLOT(DownloadBlob()));
   connect(ui_->login, SIGNAL(clicked()), SLOT(Login()));
+  connect(ui_->login_state, SIGNAL(LogoutClicked()), SLOT(Logout()));
+  connect(ui_->login_state, SIGNAL(LoginClicked()), SLOT(Login()));
 
   connect(service_, SIGNAL(LoginFinished(bool)), SLOT(LoginFinished(bool)));
   connect(service_, SIGNAL(BlobStateChanged()), SLOT(BlobStateChanged()));
+
+  ui_->login_state->AddCredentialField(ui_->username);
+  ui_->login_state->AddCredentialField(ui_->password);
+  ui_->login_state->AddCredentialGroup(ui_->account_group);
 
   BlobStateChanged();
 }
@@ -82,15 +86,12 @@ void SpotifySettingsPage::Login() {
   }
 
   if (ui_->username->text() == original_username_ &&
-      ui_->password->text() == original_password_) {
+      ui_->password->text() == original_password_ &&
+      service_->login_state() == SpotifyService::LoginState_LoggedIn) {
     return;
   }
 
-  if (!validated_) {
-    return;
-  }
-
-  ui_->busy->show();
+  ui_->login_state->SetLoggedIn(LoginStateWidget::LoginInProgress);
   service_->Login(ui_->username->text(), ui_->password->text());
 }
 
@@ -104,6 +105,8 @@ void SpotifySettingsPage::Load() {
   ui_->username->setText(original_username_);
   ui_->password->setText(original_password_);
   validated_ = false;
+
+  UpdateLoginState();
 }
 
 void SpotifySettingsPage::Save() {
@@ -112,15 +115,41 @@ void SpotifySettingsPage::Save() {
 
   s.setValue("username", ui_->username->text());
   s.setValue("password", ui_->password->text());
-
-  InternetModel::Service<SpotifyService>()->ReloadSettings();
 }
 
 void SpotifySettingsPage::LoginFinished(bool success) {
   validated_ = success;
-  ui_->busy->hide();
-  ui_->login->setEnabled(!success);
 
-  // Save the settings
   Save();
+  UpdateLoginState();
+}
+
+void SpotifySettingsPage::UpdateLoginState() {
+  const bool logged_in =
+      service_->login_state() == SpotifyService::LoginState_LoggedIn;
+
+  ui_->login_state->SetLoggedIn(logged_in ? LoginStateWidget::LoggedIn
+                                          : LoginStateWidget::LoggedOut,
+                                ui_->username->text());
+  ui_->login_state->SetAccountTypeVisible(!logged_in);
+
+  switch (service_->login_state()) {
+  case SpotifyService::LoginState_NoPremium:
+    ui_->login_state->SetAccountTypeText(tr("You do not have a Spotify Premium account."));
+    break;
+
+  case SpotifyService::LoginState_Banned:
+  case SpotifyService::LoginState_BadCredentials:
+    ui_->login_state->SetAccountTypeText(tr("Your username or password was incorrect."));
+    break;
+
+  default:
+    ui_->login_state->SetAccountTypeText(tr("A Spotify Premium account is required."));
+    break;
+  }
+}
+
+void SpotifySettingsPage::Logout() {
+  service_->Logout();
+  UpdateLoginState();
 }

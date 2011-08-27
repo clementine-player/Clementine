@@ -28,6 +28,12 @@ DigitallyImportedSettingsPage::DigitallyImportedSettingsPage(SettingsDialog* dia
 {
   ui_->setupUi(this);
   setWindowIcon(QIcon(":/providers/digitallyimported-32.png"));
+
+  ui_->login_state->SetAccountTypeText(tr(
+      "You can listen for free without an account, but Premium members can "
+      "listen to higher quality streams without advertisements."));
+  ui_->login_state->SetAccountTypeVisible(true);
+  ui_->login_state->HideLoggedInState();
 }
 
 DigitallyImportedSettingsPage::~DigitallyImportedSettingsPage() {

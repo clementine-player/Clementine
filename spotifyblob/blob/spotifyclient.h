@@ -52,7 +52,8 @@ private slots:
   void MediaSocketDisconnected();
 
 private:
-  void SendLoginCompleted(bool success, const QString& error);
+  void SendLoginCompleted(bool success, const QString& error,
+                          protobuf::LoginResponse_Error error_code);
   void SendPlaybackError(const QString& error);
 
   // Spotify session callbacks.

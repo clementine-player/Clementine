@@ -98,7 +98,8 @@ void SpotifyServer::HandleMessage(const protobuf::SpotifyMessage& message) {
       queued_messages_.clear();
     }
 
-    emit LoginCompleted(response.success(), QStringFromStdString(response.error()));
+    emit LoginCompleted(response.success(), QStringFromStdString(response.error()),
+                        response.error_code());
   } else if (message.has_playlists_updated()) {
     emit PlaylistsUpdated(message.playlists_updated());
   } else if (message.has_load_playlist_response()) {

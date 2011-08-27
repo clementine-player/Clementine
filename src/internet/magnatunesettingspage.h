@@ -37,15 +37,19 @@ public:
 
 private slots:
   void Login();
+  void Logout();
   void MembershipChanged(int value);
   void LoginFinished();
   void AuthenticationRequired(QNetworkReply* reply, QAuthenticator* auth);
-  void CredentialsChanged();
 
 private:
-  bool credentials_changed_;
+  void UpdateLoginState();
+
+private:
   NetworkAccessManager* network_;
   Ui_MagnatuneSettingsPage* ui_;
+
+  bool logged_in_;
 };
 
 #endif // MAGNATUNESETTINGSPAGE_H
