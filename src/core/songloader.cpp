@@ -303,6 +303,11 @@ void SongLoader::EffectiveSongsLoad() {
   for (int i = 0; i < songs_.size(); i++) {
     Song& song = songs_[i];
 
+    if (song.filetype() != Song::Type_Unknown) {
+      // Maybe we loaded the metadata already, for example from a cuesheet.
+      continue;
+    }
+
     LibraryQuery query;
     query.SetColumnSpec("%songs_table.ROWID, " + Song::kColumnSpec);
     query.AddWhere("filename", song.url().toEncoded());
