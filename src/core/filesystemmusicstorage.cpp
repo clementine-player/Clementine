@@ -15,20 +15,9 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "config.h"
+#include "filesystemmusicstorage.h"
 #include "core/logging.h"
 
-#ifdef HAVE_GIO
-  // Work around compile issue with glib >= 2.25
-  #ifdef signals
-    #undef signals
-  #endif
-
-  #include <gio/gio.h>
-#endif
-
-#include "filesystemmusicstorage.h"
-#include <QByteArray>
 #include <QDir>
 #include <QFile>
 
@@ -64,16 +53,5 @@ bool FilesystemMusicStorage::CopyToStorage(const CopyJob& job) {
 }
 
 bool FilesystemMusicStorage::DeleteFromStorage(const DeleteJob& job) {
-#ifdef HAVE_GIO
-  //convert QString to char
-  QByteArray ba = job.metadata_.url().toLocalFile().toLocal8Bit();
-  const char *filepathChar = ba.data();
-  GFile *file = g_file_new_for_path (filepathChar);
-  bool success = g_file_trash(file, NULL, NULL);
-  g_object_unref(file);
-  return success;
-#else
   return QFile::remove(job.metadata_.url().toLocalFile());
-#endif
 }
-
