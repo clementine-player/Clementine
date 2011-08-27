@@ -1440,8 +1440,9 @@ void MainWindow::EditTagDialogAccepted() {
 }
 
 void MainWindow::RenumberTracks() {
-  QModelIndexList indexes=ui_->playlist->view()->selectionModel()->selection().indexes();
-  int track=1;
+  QModelIndexList indexes =
+      ui_->playlist->view()->selectionModel()->selection().indexes();
+  int track = 1;
 
   // Get the index list in order
   qStableSort(indexes);
@@ -1458,13 +1459,14 @@ void MainWindow::RenumberTracks() {
     if (index.column() != 0)
       continue;
 
-    int row = playlists_->current()->proxy()->mapToSource(index).row();
+    const QModelIndex source_index = playlists_->current()->proxy()->mapToSource(index);
+    int row = source_index.row();
     Song song = playlists_->current()->item_at(row)->Metadata();
 
     if (song.IsEditable()) {
       song.set_track(track);
       QFuture<bool> future = song.BackgroundSave();
-      ModelFutureWatcher<bool>* watcher = new ModelFutureWatcher<bool>(index, this);
+      ModelFutureWatcher<bool>* watcher = new ModelFutureWatcher<bool>(source_index, this);
       watcher->setFuture(future);
       connect(watcher, SIGNAL(finished()), SLOT(SongSaveComplete()));
     }
@@ -1490,12 +1492,13 @@ void MainWindow::SelectionSetValue() {
     if (index.column() != 0)
       continue;
 
-    int row = playlists_->current()->proxy()->mapToSource(index).row();
+    const QModelIndex source_index = playlists_->current()->proxy()->mapToSource(index);
+    int row = source_index.row();
     Song song = playlists_->current()->item_at(row)->Metadata();
 
     if (Playlist::set_column_value(song, column, column_value)) {
       QFuture<bool> future = song.BackgroundSave();
-      ModelFutureWatcher<bool>* watcher = new ModelFutureWatcher<bool>(index, this);
+      ModelFutureWatcher<bool>* watcher = new ModelFutureWatcher<bool>(source_index, this);
       watcher->setFuture(future);
       connect(watcher, SIGNAL(finished()), SLOT(SongSaveComplete()));
     }
