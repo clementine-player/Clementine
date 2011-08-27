@@ -550,9 +550,7 @@ void Playlist::set_current_row(int i) {
   }
 
   if (current_item_index_.isValid()) {
-    InformOfCurrentSongChange(current_item_index_,
-                              current_item_index_.sibling(current_item_index_.row(), ColumnCount-1),
-                              current_item_metadata());
+    InformOfCurrentSongChange();
   }
 
   // Update the virtual index
@@ -1407,9 +1405,7 @@ void Playlist::SetStreamMetadata(const QUrl& url, const Song& song) {
   current_item_->SetTemporaryMetadata(song);
   UpdateScrobblePoint();
 
-  InformOfCurrentSongChange(index(current_item_index_.row(), 0),
-                            index(current_item_index_.row(), ColumnCount-1),
-                            song);
+  InformOfCurrentSongChange();
 }
 
 void Playlist::ClearStreamMetadata() {
@@ -1528,8 +1524,12 @@ void Playlist::ReloadItems(const QList<int>& rows) {
     PlaylistItemPtr item = item_at(row);
 
     item->Reload();
-    InformOfCurrentSongChange(index(row, 0), index(row, ColumnCount-1),
-                              item->Metadata());
+
+    if (row == current_row()) {
+      InformOfCurrentSongChange();
+    } else {
+      emit dataChanged(index(row, 0), index(row, ColumnCount-1));
+    }
   }
 }
 
@@ -1688,12 +1688,14 @@ void Playlist::set_column_align_right(int column) {
   column_alignments_[column] = (Qt::AlignRight | Qt::AlignVCenter);
 }
 
-void Playlist::InformOfCurrentSongChange(const QModelIndex& top_left, const QModelIndex& bottom_right,
-                                         const Song& metadata) {
-  emit dataChanged(top_left, bottom_right);
+void Playlist::InformOfCurrentSongChange() {
+  emit dataChanged(index(current_item_index_.row(), 0),
+                   index(current_item_index_.row(), ColumnCount-1));
+
   // if the song is invalid, we won't play it - there's no point in
   // informing anybody about the change
-  if(metadata.is_valid()) {
+  const Song metadata(current_item_metadata());
+  if (metadata.is_valid()) {
     emit CurrentSongChanged(metadata);
   }
 }

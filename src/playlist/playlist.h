@@ -318,8 +318,7 @@ class Playlist : public QAbstractListModel {
   // Removes rows with given indices from this playlist.
   bool removeRows(QList<int>& rows);
 
-  void InformOfCurrentSongChange(const QModelIndex& top_left, const QModelIndex& bottom_right,
-                                 const Song& metadata);
+  void InformOfCurrentSongChange();
 
  private slots:
   void TracksAboutToBeDequeued(const QModelIndex&, int begin, int end);
