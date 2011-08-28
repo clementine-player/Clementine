@@ -115,6 +115,11 @@ set(SOURCES
   engines/gstenginepipeline.cpp
   engines/gstelementdeleter.cpp
 
+  globalsearch/globalsearch.cpp
+  globalsearch/globalsearchwidget.cpp
+  globalsearch/librarysearchprovider.cpp
+  globalsearch/searchprovider.cpp
+
   internet/digitallyimportedservice.cpp
   internet/digitallyimportedservicebase.cpp
   internet/digitallyimportedsettingspage.cpp
@@ -347,6 +352,11 @@ set(HEADERS
   engines/gstenginepipeline.h
   engines/gstelementdeleter.h
 
+  globalsearch/librarysearchprovider.h
+  globalsearch/globalsearch.h
+  globalsearch/globalsearchwidget.h
+  globalsearch/searchprovider.h
+
   internet/digitallyimportedservicebase.h
   internet/digitallyimportedsettingspage.h
   internet/icecastbackend.h
@@ -507,6 +517,8 @@ set(UI
   covers/coversearchstatisticsdialog.ui
 
   devices/deviceproperties.ui
+
+  globalsearch/globalsearchwidget.ui
 
   internet/digitallyimportedsettingspage.ui
   internet/icecastfilterwidget.ui

@@ -227,6 +227,10 @@ MainWindow::MainWindow(
   ui_->volume->setValue(volume);
   VolumeChanged(volume);
 
+  // Initialise the global search widget
+  StyleHelper::setBaseColor(palette().color(QPalette::Highlight).darker());
+  ui_->global_search->Init(library_->backend());
+
   // Add tabs to the fancy tab widget
   ui_->tabs->AddTab(library_view_, IconLoader::Load("folder-sound"), tr("Library"));
   ui_->tabs->AddTab(file_view_, IconLoader::Load("document-open"), tr("Files"));
@@ -240,7 +244,6 @@ MainWindow::MainWindow(
   ui_->tabs->AddBottomWidget(ui_->now_playing);
 
   ui_->tabs->SetBackgroundPixmap(QPixmap(":/sidebar_background.png"));
-  StyleHelper::setBaseColor(palette().color(QPalette::Highlight).darker());
 
   track_position_timer_->setInterval(1000);
   connect(track_position_timer_, SIGNAL(timeout()), SLOT(UpdateTrackPosition()));
