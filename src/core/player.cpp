@@ -410,6 +410,16 @@ void Player::TogglePrettyOSD() {
 }
 
 void Player::TrackAboutToEnd() {
+  // If the current track was from a URL handler then it might have special
+  // behaviour to queue up a subsequent track.  We don't want to preload (and
+  // scrobble) the next item in the playlist if it's just going to be stopped
+  // again immediately after.
+  if (playlists_->active()->current_item()) {
+    const QUrl url = playlists_->active()->current_item()->Url();
+    if (url_handlers_.contains(url.scheme()))
+      return;
+  }
+
   const bool has_next_row = playlists_->active()->next_row() != -1;
   PlaylistItemPtr next_item;
 
