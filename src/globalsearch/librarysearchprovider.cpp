@@ -31,7 +31,7 @@ LibrarySearchProvider::LibrarySearchProvider(LibraryBackendInterface* backend,
     backend_(backend),
     cover_loader_(new BackgroundThreadImplementation<AlbumCoverLoader, AlbumCoverLoader>(this))
 {
-  Init(name, icon, false);
+  Init(name, icon, false, true);
 
   cover_loader_->Start(true);
   cover_loader_->Worker()->SetDesiredHeight(kArtHeight);

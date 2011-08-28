@@ -70,7 +70,8 @@ public:
 
   const QString& name() const { return name_; }
   const QIcon& icon() const { return icon_; }
-  const bool wants_delayed_queries() const { return query_lag_; }
+  const bool wants_delayed_queries() const { return delay_searches_; }
+  const bool wants_serialised_art() const { return serialised_art_; }
 
   // Starts a search.  Must emit ResultsAvailable zero or more times and then
   // SearchFinished exactly once, using this ID.
@@ -102,12 +103,14 @@ protected:
   static Result::MatchQuality MatchQuality(const QStringList& tokens, const QString& string);
 
   // Subclasses must call this from their constructor
-  void Init(const QString& name, const QIcon& icon, bool query_lag);
+  void Init(const QString& name, const QIcon& icon,
+            bool delay_searches, bool serialised_art);
 
 private:
   QString name_;
   QIcon icon_;
-  bool query_lag_;
+  bool delay_searches_;
+  bool serialised_art_;
 };
 
 Q_DECLARE_METATYPE(SearchProvider::Result)

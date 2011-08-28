@@ -29,10 +29,12 @@ SearchProvider::SearchProvider(QObject* parent)
 {
 }
 
-void SearchProvider::Init(const QString& name, const QIcon& icon, bool query_lag) {
+void SearchProvider::Init(const QString& name, const QIcon& icon,
+                          bool delay_searches, bool serialised_art) {
   name_ = name;
   icon_ = icon;
-  query_lag_ = query_lag;
+  delay_searches_ = delay_searches;
+  serialised_art_ = serialised_art;
 }
 
 QStringList SearchProvider::TokenizeQuery(const QString& query) {

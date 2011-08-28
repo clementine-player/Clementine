@@ -16,6 +16,7 @@
 */
 
 #include "spotifysearchprovider.h"
+#include "core/logging.h"
 #include "internet/internetmodel.h"
 #include "internet/spotifyserver.h"
 #include "internet/spotifyservice.h"
@@ -25,7 +26,7 @@ SpotifySearchProvider::SpotifySearchProvider(QObject* parent)
     server_(NULL),
     service_(NULL)
 {
-  Init("Spotify", QIcon(":icons/svg/spotify.svg"), true);
+  Init("Spotify", QIcon(":icons/svg/spotify.svg"), true, true);
 }
 
 SpotifyServer* SpotifySearchProvider::server() {
@@ -101,6 +102,7 @@ void SpotifySearchProvider::LoadArtAsync(int id, const Result& result) {
   }
 
   QString image_id = result.metadata_.url().path();
+  qLog(Debug) << __PRETTY_FUNCTION__ << image_id;
   if (image_id.startsWith('/'))
     image_id.remove(0, 1);
 

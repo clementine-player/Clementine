@@ -63,6 +63,7 @@ private slots:
   void ProviderDestroyedSlot(QObject* object);
 
 private:
+  void TakeNextQueuedArt(SearchProvider* provider);
   QString PixmapCacheKey(const SearchProvider::Result& result) const;
 
 private:
@@ -72,9 +73,15 @@ private:
     QList<SearchProvider*> providers_;
   };
 
+  struct QueuedArt {
+    int id_;
+    SearchProvider::Result result_;
+  };
+
   QList<SearchProvider*> providers_;
 
   QMap<int, DelayedSearch> delayed_searches_;
+  QMap<SearchProvider*, QList<QueuedArt> > queued_art_;
 
   int next_id_;
   QMap<int, int> pending_search_providers_;

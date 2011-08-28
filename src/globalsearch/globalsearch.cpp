@@ -142,18 +142,47 @@ void GlobalSearch::ProviderDestroyedSlot(QObject* object) {
 
 int GlobalSearch::LoadArtAsync(const SearchProvider::Result& result) {
   const int id = next_id_ ++;
+
   pending_art_searches_[id] = result.pixmap_cache_key_;
-  result.provider_->LoadArtAsync(id, result);
+
+  if (result.provider_->wants_serialised_art()) {
+    QueuedArt request;
+    request.id_ = id;
+    request.result_ = result;
+
+    queued_art_[result.provider_].append(request);
+
+    if (queued_art_[result.provider_].count() == 1) {
+      TakeNextQueuedArt(result.provider_);
+    }
+  } else {
+    result.provider_->LoadArtAsync(id, result);
+  }
+
   return id;
 }
 
+void GlobalSearch::TakeNextQueuedArt(SearchProvider* provider) {
+  if (queued_art_[provider].isEmpty())
+    return;
+
+  const QueuedArt& data = queued_art_[provider].first();
+  provider->LoadArtAsync(data.id_, data.result_);
+}
+
 void GlobalSearch::ArtLoadedSlot(int id, const QImage& image) {
+  SearchProvider* provider = static_cast<SearchProvider*>(sender());
   const QString key = pending_art_searches_.take(id);
 
   QPixmap pixmap = QPixmap::fromImage(image);
   pixmap_cache_.insert(key, pixmap);
 
   emit ArtLoaded(id, pixmap);
+
+  if (!queued_art_[provider].isEmpty()) {
+    queued_art_[provider].removeFirst();
+    TakeNextQueuedArt(provider);
+  }
 }
 
 bool GlobalSearch::FindCachedPixmap(const SearchProvider::Result& result,
