@@ -61,7 +61,7 @@ QPixmap GlobalSearchItemDelegate::ScaleAndPad(const QImage& image) {
 QSize GlobalSearchItemDelegate::sizeHint(const QStyleOptionViewItem& option,
                                          const QModelIndex& index) const {
   QSize size = QStyledItemDelegate::sizeHint(option, index);
-  size.setHeight(kHeight + kMargin);
+  size.setHeight(kHeight + kMargin*2);
   return size;
 }
 
@@ -97,7 +97,7 @@ void GlobalSearchItemDelegate::paint(QPainter* p,
 
   // Draw the album art.  This will already be the correct size.
   const QRect rect = option.rect;
-  const QRect art_rect(rect.left() + kMargin, rect.top(), kHeight, kHeight);
+  const QRect art_rect(rect.left() + kMargin, rect.top() + kMargin, kHeight, kHeight);
 
   QPixmap art = index.data(Qt::DecorationRole).value<QPixmap>();
   if (art.isNull())
