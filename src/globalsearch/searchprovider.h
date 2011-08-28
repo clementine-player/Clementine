@@ -28,7 +28,7 @@ class SearchProvider : public QObject {
   Q_OBJECT
 
 public:
-  SearchProvider(const QString& name, const QIcon& icon, QObject* parent = 0);
+  SearchProvider(QObject* parent = 0);
 
   static const int kArtHeight;
 
@@ -70,6 +70,7 @@ public:
 
   const QString& name() const { return name_; }
   const QIcon& icon() const { return icon_; }
+  const bool wants_delayed_queries() const { return query_lag_; }
 
   // Starts a search.  Must emit ResultsAvailable zero or more times and then
   // SearchFinished exactly once, using this ID.
@@ -100,9 +101,13 @@ protected:
   static QStringList TokenizeQuery(const QString& query);
   static Result::MatchQuality MatchQuality(const QStringList& tokens, const QString& string);
 
+  // Subclasses must call this from their constructor
+  void Init(const QString& name, const QIcon& icon, bool query_lag);
+
 private:
   QString name_;
   QIcon icon_;
+  bool query_lag_;
 };
 
 Q_DECLARE_METATYPE(SearchProvider::Result)
@@ -112,8 +117,7 @@ class BlockingSearchProvider : public SearchProvider {
   Q_OBJECT
 
 public:
-  BlockingSearchProvider(const QString& name, const QIcon& icon,
-                         QObject* parent = 0);
+  BlockingSearchProvider(QObject* parent = 0);
 
   void SearchAsync(int id, const QString& query);
 

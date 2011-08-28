@@ -24,12 +24,15 @@
 const int SearchProvider::kArtHeight = 32;
 
 
-SearchProvider::SearchProvider(const QString& name, const QIcon& icon,
-                               QObject* parent)
-  : QObject(parent),
-    name_(name),
-    icon_(icon)
+SearchProvider::SearchProvider(QObject* parent)
+  : QObject(parent)
 {
+}
+
+void SearchProvider::Init(const QString& name, const QIcon& icon, bool query_lag) {
+  name_ = name;
+  icon_ = icon;
+  query_lag_ = query_lag;
 }
 
 QStringList SearchProvider::TokenizeQuery(const QString& query) {
@@ -65,8 +68,8 @@ SearchProvider::Result::MatchQuality SearchProvider::MatchQuality(
   return ret;
 }
 
-BlockingSearchProvider::BlockingSearchProvider(const QString& name, const QIcon& icon, QObject* parent)
-  : SearchProvider(name, icon, parent) {
+BlockingSearchProvider::BlockingSearchProvider(QObject* parent)
+  : SearchProvider(parent) {
 }
 
 void BlockingSearchProvider::SearchAsync(int id, const QString& query) {

@@ -141,6 +141,7 @@ void GlobalSearchWidget::TextEdited(const QString& text) {
   }
 
   clear_model_on_next_result_ = true;
+  engine_->CancelSearch(last_id_);
   last_id_ = engine_->SearchAsync(trimmed_text);
 }
 

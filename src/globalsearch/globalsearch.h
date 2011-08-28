@@ -30,10 +30,15 @@ class GlobalSearch : public QObject {
 public:
   GlobalSearch(QObject* parent = 0);
 
+  static const int kDelayedSearchTimeoutMs;
+
   void AddProvider(SearchProvider* provider);
 
   int SearchAsync(const QString& query);
   int LoadArtAsync(const SearchProvider::Result& result);
+
+  void CancelSearch(int id);
+  void CancelArt(int id);
 
   bool FindCachedPixmap(const SearchProvider::Result& result, QPixmap* pixmap) const;
 
@@ -45,6 +50,9 @@ signals:
   void ArtLoaded(int id, const QPixmap& pixmap);
 
   void ProviderDestroyed(SearchProvider* provider);
+
+protected:
+  void timerEvent(QTimerEvent* e);
 
 private slots:
   void ResultsAvailableSlot(int id, SearchProvider::ResultList results);
@@ -58,7 +66,15 @@ private:
   QString PixmapCacheKey(const SearchProvider::Result& result) const;
 
 private:
+  struct DelayedSearch {
+    int timer_id_;
+    QString query_;
+    QList<SearchProvider*> providers_;
+  };
+
   QList<SearchProvider*> providers_;
+
+  QMap<int, DelayedSearch> delayed_searches_;
 
   int next_id_;
   QMap<int, int> pending_search_providers_;

@@ -21,10 +21,11 @@
 #include "internet/spotifyservice.h"
 
 SpotifySearchProvider::SpotifySearchProvider(QObject* parent)
-  : SearchProvider("Spotify", QIcon(":icons/svg/spotify.svg"), parent),
+  : SearchProvider(parent),
     server_(NULL),
     service_(NULL)
 {
+  Init("Spotify", QIcon(":icons/svg/spotify.svg"), true);
 }
 
 SpotifyServer* SpotifySearchProvider::server() {
