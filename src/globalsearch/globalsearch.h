@@ -67,7 +67,7 @@ private:
 
 private:
   struct DelayedSearch {
-    int timer_id_;
+    int id_;
     QString query_;
     QList<SearchProvider*> providers_;
   };

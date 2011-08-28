@@ -56,10 +56,10 @@ int GlobalSearch::SearchAsync(const QString& query) {
     if (provider->wants_delayed_queries()) {
       if (timer_id == -1) {
         timer_id = startTimer(kDelayedSearchTimeoutMs);
-        delayed_searches_[id].timer_id_ = timer_id;
-        delayed_searches_[id].query_ = query;
+        delayed_searches_[timer_id].id_ = id;
+        delayed_searches_[timer_id].query_ = query;
       }
-      delayed_searches_[id].providers_ << provider;
+      delayed_searches_[timer_id].providers_ << provider;
     } else {
       provider->SearchAsync(id, query);
     }
@@ -69,22 +69,24 @@ int GlobalSearch::SearchAsync(const QString& query) {
 }
 
 void GlobalSearch::CancelSearch(int id) {
-  if (delayed_searches_.contains(id)) {
-    killTimer(delayed_searches_[id].timer_id_);
-    delayed_searches_.remove(id);
+  QMap<int, DelayedSearch>::iterator it;
+  for (it = delayed_searches_.begin() ; it != delayed_searches_.end() ; ++it) {
+    if (it.value().id_ == id) {
+      killTimer(it.key());
+      delayed_searches_.erase(it);
+      return;
+    }
   }
 }
 
 void GlobalSearch::timerEvent(QTimerEvent* e) {
-  QMap<int, DelayedSearch>::iterator it;
-  for (it = delayed_searches_.begin() ; it != delayed_searches_.end() ; ++it) {
-    if (it.value().timer_id_ == e->timerId()) {
-      foreach (SearchProvider* provider, it.value().providers_) {
-        provider->SearchAsync(it.key(), it.value().query_);
-      }
-      delayed_searches_.erase(it);
-      return;
+  QMap<int, DelayedSearch>::iterator it = delayed_searches_.find(e->timerId());
+  if (it != delayed_searches_.end()) {
+    foreach (SearchProvider* provider, it.value().providers_) {
+      provider->SearchAsync(it.value().id_, it.value().query_);
     }
+    delayed_searches_.erase(it);
+    return;
   }
 
   QObject::timerEvent(e);
