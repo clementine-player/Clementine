@@ -546,7 +546,10 @@ int SpotifyClient::MusicDeliveryCallback(
   // Write the audio data.
   me->media_socket_->write(reinterpret_cast<const char*>(frames),
                            num_frames * format->channels * 2);
+#ifdef Q_OS_DARWIN
+  // ???
   me->media_socket_->flush();
+#endif
 
   return num_frames;
 }
