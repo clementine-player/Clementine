@@ -19,6 +19,7 @@
 #define GLOBALSEARCH_H
 
 #include <QObject>
+#include <QPixmapCache>
 
 #include "searchprovider.h"
 
@@ -34,26 +35,36 @@ public:
   int SearchAsync(const QString& query);
   int LoadArtAsync(const SearchProvider::Result& result);
 
+  bool FindCachedPixmap(const SearchProvider::Result& result, QPixmap* pixmap) const;
+
 signals:
   void ResultsAvailable(int id, const SearchProvider::ResultList& results);
   void ProviderSearchFinished(int id, const SearchProvider* provider);
   void SearchFinished(int id);
 
-  void ArtLoaded(int id, const QImage& image);
+  void ArtLoaded(int id, const QPixmap& pixmap);
 
   void ProviderDestroyed(SearchProvider* provider);
 
 private slots:
-  void ResultsAvailableSlot(int id, const SearchProvider::ResultList& results);
+  void ResultsAvailableSlot(int id, SearchProvider::ResultList results);
   void SearchFinishedSlot(int id);
 
+  void ArtLoadedSlot(int id, const QImage& image);
+
   void ProviderDestroyedSlot(QObject* object);
+
+private:
+  QString PixmapCacheKey(const SearchProvider::Result& result) const;
 
 private:
   QList<SearchProvider*> providers_;
 
   int next_id_;
   QMap<int, int> pending_search_providers_;
+
+  QPixmapCache pixmap_cache_;
+  QMap<int, QString> pending_art_searches_;
 };
 
 #endif // GLOBALSEARCH_H

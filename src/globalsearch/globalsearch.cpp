@@ -19,6 +19,9 @@
 #include "globalsearch.h"
 #include "core/logging.h"
 
+#include <QStringBuilder>
+#include <QUrl>
+
 GlobalSearch::GlobalSearch(QObject* parent)
   : QObject(parent),
     next_id_(1)
@@ -30,7 +33,8 @@ void GlobalSearch::AddProvider(SearchProvider* provider) {
           SLOT(ResultsAvailableSlot(int,SearchProvider::ResultList)));
   connect(provider, SIGNAL(SearchFinished(int)),
           SLOT(SearchFinishedSlot(int)));
-  connect(provider, SIGNAL(ArtLoaded(int,QImage)), SIGNAL(ArtLoaded(int,QImage)));
+  connect(provider, SIGNAL(ArtLoaded(int,QImage)),
+          SLOT(ArtLoadedSlot(int,QImage)));
   connect(provider, SIGNAL(destroyed(QObject*)),
           SLOT(ProviderDestroyedSlot(QObject*)));
 
@@ -48,9 +52,22 @@ int GlobalSearch::SearchAsync(const QString& query) {
   return id;
 }
 
-void GlobalSearch::ResultsAvailableSlot(int id, const SearchProvider::ResultList& results) {
-  if (!results.isEmpty())
-    emit ResultsAvailable(id, results);
+QString GlobalSearch::PixmapCacheKey(const SearchProvider::Result& result) const {
+  return QString::number(qulonglong(result.provider_))
+       % "," % QString::number(int(result.type_))
+       % "," % result.metadata_.url().toString();
+}
+
+void GlobalSearch::ResultsAvailableSlot(int id, SearchProvider::ResultList results) {
+  if (results.isEmpty())
+    return;
+
+  // Load cached pixmaps into the results
+  for (SearchProvider::ResultList::iterator it = results.begin() ; it != results.end() ; ++it) {
+    it->pixmap_cache_key_ = PixmapCacheKey(*it);
+  }
+
+  emit ResultsAvailable(id, results);
 }
 
 void GlobalSearch::SearchFinishedSlot(int id) {
@@ -85,7 +102,22 @@ void GlobalSearch::ProviderDestroyedSlot(QObject* object) {
 
 int GlobalSearch::LoadArtAsync(const SearchProvider::Result& result) {
   const int id = next_id_ ++;
+  pending_art_searches_[id] = result.pixmap_cache_key_;
   result.provider_->LoadArtAsync(id, result);
   return id;
+}
+
+void GlobalSearch::ArtLoadedSlot(int id, const QImage& image) {
+  const QString key = pending_art_searches_.take(id);
+
+  QPixmap pixmap = QPixmap::fromImage(image);
+  pixmap_cache_.insert(key, pixmap);
+
+  emit ArtLoaded(id, pixmap);
+}
+
+bool GlobalSearch::FindCachedPixmap(const SearchProvider::Result& result,
+                                    QPixmap* pixmap) const {
+  return pixmap_cache_.find(result.pixmap_cache_key_, pixmap);
 }
 

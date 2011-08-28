@@ -64,7 +64,7 @@ private slots:
   void SearchFinished(int id);
   void AddResults(int id, const SearchProvider::ResultList& results);
 
-  void ArtLoaded(int id, const QImage& image);
+  void ArtLoaded(int id, const QPixmap& pixmap);
 
 private:
   void Reset();

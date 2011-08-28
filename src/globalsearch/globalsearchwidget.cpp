@@ -67,7 +67,7 @@ GlobalSearchWidget::GlobalSearchWidget(QWidget* parent)
   connect(engine_, SIGNAL(ResultsAvailable(int,SearchProvider::ResultList)),
           SLOT(AddResults(int,SearchProvider::ResultList)));
   connect(engine_, SIGNAL(SearchFinished(int)), SLOT(SearchFinished(int)));
-  connect(engine_, SIGNAL(ArtLoaded(int,QImage)), SLOT(ArtLoaded(int,QImage)));
+  connect(engine_, SIGNAL(ArtLoaded(int,QPixmap)), SLOT(ArtLoaded(int,QPixmap)));
 }
 
 GlobalSearchWidget::~GlobalSearchWidget() {
@@ -163,6 +163,11 @@ void GlobalSearchWidget::AddResults(int id, const SearchProvider::ResultList& re
   foreach (const SearchProvider::Result& result, results) {
     QStandardItem* item = new QStandardItem;
     item->setData(QVariant::fromValue(result), Role_Result);
+
+    QPixmap pixmap;
+    if (engine_->FindCachedPixmap(result, &pixmap)) {
+      item->setData(pixmap, Qt::DecorationRole);
+    }
 
     model_->appendRow(item);
   }
@@ -315,12 +320,11 @@ void GlobalSearchWidget::LazyLoadArt(const QModelIndex& proxy_index) {
   art_requests_[id] = source_index;
 }
 
-void GlobalSearchWidget::ArtLoaded(int id, const QImage& image) {
+void GlobalSearchWidget::ArtLoaded(int id, const QPixmap& pixmap) {
   if (!art_requests_.contains(id))
     return;
   QModelIndex index = art_requests_.take(id);
 
-  model_->itemFromIndex(index)->setData(
-        GlobalSearchItemDelegate::ScaleAndPad(image), Qt::DecorationRole);
+  model_->itemFromIndex(index)->setData(pixmap, Qt::DecorationRole);
 }
 

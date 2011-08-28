@@ -42,13 +42,17 @@ public:
       Type_Album
     };
 
+    // This must be set by the provder using the constructor.
     SearchProvider* provider_;
 
+    // These must be set explicitly by the provider.
     Type type_;
     Song metadata_;
 
     // How many songs in the album - valid only if type == Type_Album.
     int album_size_;
+
+    QString pixmap_cache_key_;
   };
   typedef QList<Result> ResultList;
 
