@@ -83,6 +83,8 @@ public:
   // ResultsAvailable.  Must emit TracksLoaded exactly once with this ID.
   virtual void LoadTracksAsync(int id, const Result& result) = 0;
 
+  static QImage ScaleAndPad(const QImage& image);
+
 signals:
   void ResultsAvailable(int id, const SearchProvider::ResultList& results);
   void SearchFinished(int id);

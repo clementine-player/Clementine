@@ -31,31 +31,7 @@ GlobalSearchItemDelegate::GlobalSearchItemDelegate(GlobalSearchWidget* widget)
   : QStyledItemDelegate(widget),
     widget_(widget)
 {
-  no_cover_ = ScaleAndPad(QImage(":nocover.png"));
-}
-
-QPixmap GlobalSearchItemDelegate::ScaleAndPad(const QImage& image) {
-  if (image.isNull())
-    return QPixmap();
-
-  if (image.size() == QSize(kHeight, kHeight))
-    return QPixmap::fromImage(image);
-
-  // Scale the image down
-  QImage copy;
-  copy = image.scaled(QSize(kHeight, kHeight),
-                      Qt::KeepAspectRatio, Qt::SmoothTransformation);
-
-  // Pad the image to kHeight x kHeight
-  QImage padded_image(kHeight, kHeight, QImage::Format_ARGB32);
-  padded_image.fill(0);
-
-  QPainter p(&padded_image);
-  p.drawImage((kHeight - copy.width()) / 2, (kHeight - copy.height()) / 2,
-              copy);
-  p.end();
-
-  return QPixmap::fromImage(padded_image);
+  no_cover_ = QPixmap::fromImage(QImage(":nocover.png"));
 }
 
 QSize GlobalSearchItemDelegate::sizeHint(const QStyleOptionViewItem& option,

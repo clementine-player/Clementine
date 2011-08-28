@@ -671,6 +671,7 @@ endif(HAVE_LIBLASTFM)
 
 if(HAVE_SPOTIFY)
   list(APPEND SOURCES
+    globalsearch/spotifysearchprovider.cpp
     internet/spotifyblobdownloader.cpp
     internet/spotifysearchplaylisttype.cpp
     internet/spotifyserver.cpp
@@ -680,6 +681,7 @@ if(HAVE_SPOTIFY)
     resolvers/spotifyresolver.cpp
   )
   list(APPEND HEADERS
+    globalsearch/spotifysearchprovider.h
     internet/spotifyblobdownloader.h
     internet/spotifyserver.h
     internet/spotifyservice.h

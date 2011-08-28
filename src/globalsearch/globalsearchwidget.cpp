@@ -15,6 +15,7 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "config.h"
 #include "globalsearch.h"
 #include "globalsearchitemdelegate.h"
 #include "globalsearchsortmodel.h"
@@ -24,6 +25,10 @@
 #include "core/logging.h"
 #include "core/utilities.h"
 #include "widgets/stylehelper.h"
+
+#ifdef HAVE_SPOTIFY
+# include "spotifysearchprovider.h"
+#endif
 
 #include <QListView>
 #include <QPainter>
@@ -75,8 +80,13 @@ GlobalSearchWidget::~GlobalSearchWidget() {
 }
 
 void GlobalSearchWidget::Init(LibraryBackendInterface* library) {
+  // Add providers
   engine_->AddProvider(new LibrarySearchProvider(
       library, tr("Library"), IconLoader::Load("folder-sound"), engine_));
+
+#ifdef HAVE_SPOTIFY
+  engine_->AddProvider(new SpotifySearchProvider(engine_));
+#endif
 
   // The style helper's base color doesn't get initialised until after the
   // constructor.

@@ -32,8 +32,6 @@ public:
   static const int kArtMargin;
   static const int kWordPadding;
 
-  static QPixmap ScaleAndPad(const QImage& image);
-
   QSize sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const;
   void paint(QPainter* painter, const QStyleOptionViewItem& option,
              const QModelIndex& index) const;

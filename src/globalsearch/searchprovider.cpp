@@ -18,6 +18,7 @@
 #include "searchprovider.h"
 #include "core/boundfuturewatcher.h"
 
+#include <QPainter>
 #include <QtConcurrentRun>
 
 const int SearchProvider::kArtHeight = 32;
@@ -86,4 +87,32 @@ void BlockingSearchProvider::BlockingSearchFinished() {
   const int id = watcher->data();
   emit ResultsAvailable(id, watcher->result());
   emit SearchFinished(id);
+}
+
+QImage SearchProvider::ScaleAndPad(const QImage& image) {
+  if (image.isNull())
+    return QImage();
+
+  const QSize target_size = QSize(kArtHeight, kArtHeight);
+
+  if (image.size() == target_size)
+    return image;
+
+  // Scale the image down
+  QImage copy;
+  copy = image.scaled(target_size, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+
+  // Pad the image to kHeight x kHeight
+  if (copy.size() == target_size)
+    return copy;
+
+  QImage padded_image(kArtHeight, kArtHeight, QImage::Format_ARGB32);
+  padded_image.fill(0);
+
+  QPainter p(&padded_image);
+  p.drawImage((kArtHeight - copy.width()) / 2, (kArtHeight - copy.height()) / 2,
+              copy);
+  p.end();
+
+  return padded_image;
 }
