@@ -217,6 +217,7 @@ GlobalSearchWidget::GlobalSearchWidget(QWidget* parent)
   view_->setModel(model_);
   view_->setItemDelegate(new GlobalSearchItemDelegate(this));
   view_->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+  view_->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
   connect(ui_->search, SIGNAL(textEdited(QString)), SLOT(TextEdited(QString)));
   connect(engine_, SIGNAL(ResultsAvailable(int,SearchProvider::ResultList)),
@@ -314,8 +315,10 @@ void GlobalSearchWidget::RepositionPopup() {
 
   view_->setGeometry(QRect(pos, QSize(w, h)));
 
-  if (!view_->isVisible())
+  if (!view_->isVisible()) {
     view_->show();
+    ui_->search->setFocus();
+  }
 }
 
 bool GlobalSearchWidget::eventFilter(QObject* o, QEvent* e) {
