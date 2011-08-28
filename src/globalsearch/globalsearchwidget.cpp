@@ -16,6 +16,8 @@
 */
 
 #include "globalsearch.h"
+#include "globalsearchitemdelegate.h"
+#include "globalsearchsortmodel.h"
 #include "globalsearchwidget.h"
 #include "librarysearchprovider.h"
 #include "ui_globalsearchwidget.h"
@@ -25,175 +27,12 @@
 
 #include <QListView>
 #include <QPainter>
+#include <QSortFilterProxyModel>
 #include <QStandardItemModel>
 
-const int GlobalSearchItemDelegate::kHeight = SearchProvider::kArtHeight;
-const int GlobalSearchItemDelegate::kMargin = 1;
-const int GlobalSearchItemDelegate::kArtMargin = 6;
-const int GlobalSearchItemDelegate::kWordPadding = 6;
+
 const int GlobalSearchWidget::kMinVisibleItems = 3;
 const int GlobalSearchWidget::kMaxVisibleItems = 12;
-
-
-GlobalSearchItemDelegate::GlobalSearchItemDelegate(GlobalSearchWidget* widget)
-  : QStyledItemDelegate(widget),
-    widget_(widget)
-{
-  no_cover_ = ScaleAndPad(QImage(":nocover.png"));
-}
-
-QPixmap GlobalSearchItemDelegate::ScaleAndPad(const QImage& image) {
-  if (image.isNull())
-    return QPixmap();
-
-  if (image.size() == QSize(kHeight, kHeight))
-    return QPixmap::fromImage(image);
-
-  // Scale the image down
-  QImage copy;
-  copy = image.scaled(QSize(kHeight, kHeight),
-                      Qt::KeepAspectRatio, Qt::SmoothTransformation);
-
-  // Pad the image to kHeight x kHeight
-  QImage padded_image(kHeight, kHeight, QImage::Format_ARGB32);
-  padded_image.fill(0);
-
-  QPainter p(&padded_image);
-  p.drawImage((kHeight - copy.width()) / 2, (kHeight - copy.height()) / 2,
-              copy);
-  p.end();
-
-  return QPixmap::fromImage(padded_image);
-}
-
-QSize GlobalSearchItemDelegate::sizeHint(const QStyleOptionViewItem& option,
-                                         const QModelIndex& index) const {
-  QSize size = QStyledItemDelegate::sizeHint(option, index);
-  size.setHeight(kHeight + kMargin);
-  return size;
-}
-
-void GlobalSearchItemDelegate::DrawAndShrink(QPainter* p, QRect* rect,
-                                             const QString& text) const {
-  QRect br;
-  p->drawText(*rect, Qt::TextSingleLine | Qt::AlignVCenter, text, &br);
-  rect->setLeft(br.right() + kWordPadding);
-}
-
-void GlobalSearchItemDelegate::paint(QPainter* p,
-                                     const QStyleOptionViewItem& option,
-                                     const QModelIndex& index) const {
-  const SearchProvider::Result result =
-      index.data(GlobalSearchWidget::Role_Result).value<SearchProvider::Result>();
-  const Song& m = result.metadata_;
-
-  widget_->LazyLoadArt(index);
-
-  QFont bold_font = option.font;
-  bold_font.setBold(true);
-
-  QColor pen = option.palette.color(QPalette::Text);
-  QColor light_pen = pen;
-  pen.setAlpha(200);
-  light_pen.setAlpha(128);
-
-  // Draw the background
-  const QStyleOptionViewItemV3* vopt = qstyleoption_cast<const QStyleOptionViewItemV3*>(&option);
-  const QWidget* widget = vopt->widget;
-  QStyle* style = widget->style() ? widget->style() : QApplication::style();
-  style->drawPrimitive(QStyle::PE_PanelItemViewItem, &option, p, widget);
-
-  // Draw the album art.  This will already be the correct size.
-  const QRect rect = option.rect;
-  const QRect art_rect(rect.left() + kMargin, rect.top(), kHeight, kHeight);
-
-  QPixmap art = index.data(Qt::DecorationRole).value<QPixmap>();
-  if (art.isNull())
-    art = no_cover_;
-
-  p->drawPixmap(art_rect, art);
-
-  // Position text
-  QRect text_rect(art_rect.right() + kArtMargin, art_rect.top(),
-                  rect.right() - art_rect.right() - kArtMargin, kHeight);
-  QRect text_rect_1(text_rect.adjusted(0, 0, 0, -kHeight/2));
-  QRect text_rect_2(text_rect.adjusted(0, kHeight/2, 0, 0));
-
-  // The text we draw depends on the type of result.
-  switch (result.type_) {
-  case SearchProvider::Result::Type_Track: {
-    // Line 1 is Title
-    p->setFont(bold_font);
-
-    // Title
-    p->setPen(pen);
-    DrawAndShrink(p, &text_rect_1, m.title());
-
-    // Line 2 is Artist - Album
-    p->setFont(option.font);
-
-    // Artist
-    p->setPen(pen);
-    if (!m.artist().isEmpty()) {
-      DrawAndShrink(p, &text_rect_2, m.artist());
-    } else if (!m.albumartist().isEmpty()) {
-      DrawAndShrink(p, &text_rect_2, m.albumartist());
-    }
-
-    if (!m.album().isEmpty()) {
-      // Dash
-      p->setPen(light_pen);
-      DrawAndShrink(p, &text_rect_2, " - ");
-
-      // Album
-      p->setPen(pen);
-      DrawAndShrink(p, &text_rect_2, m.album());
-    }
-
-    break;
-  }
-
-  case SearchProvider::Result::Type_Album: {
-    // Line 1 is Artist - Album
-    p->setFont(bold_font);
-
-    // Artist
-    p->setPen(pen);
-    if (!m.albumartist().isEmpty())
-      DrawAndShrink(p, &text_rect_1, m.albumartist());
-    else if (m.is_compilation())
-      DrawAndShrink(p, &text_rect_1, tr("Various Artists"));
-    else if (!m.artist().isEmpty())
-      DrawAndShrink(p, &text_rect_1, m.artist());
-    else
-      DrawAndShrink(p, &text_rect_1, tr("Unknown"));
-
-    // Dash
-    p->setPen(light_pen);
-    DrawAndShrink(p, &text_rect_1, " - ");
-
-    // Album
-    p->setPen(pen);
-    if (m.album().isEmpty())
-      DrawAndShrink(p, &text_rect_1, tr("Unknown"));
-    else
-      DrawAndShrink(p, &text_rect_1, m.album());
-
-    // Line 2 is <n> tracks
-    p->setFont(option.font);
-
-    p->setPen(pen);
-    DrawAndShrink(p, &text_rect_2, QString::number(result.album_size_));
-
-    p->setPen(light_pen);
-    DrawAndShrink(p, &text_rect_2, tr(result.album_size_ == 1 ? "track" : "tracks"));
-    break;
-  }
-
-  default:
-    break;
-  }
-}
 
 
 GlobalSearchWidget::GlobalSearchWidget(QWidget* parent)
@@ -203,18 +42,23 @@ GlobalSearchWidget::GlobalSearchWidget(QWidget* parent)
     last_id_(0),
     clear_model_on_next_result_(false),
     model_(new QStandardItemModel(this)),
+    proxy_(new GlobalSearchSortModel(this)),
     view_(new QListView),
     eat_focus_out_(false),
     background_(":allthethings.png")
 {
   ui_->setupUi(this);
 
+  proxy_->setSourceModel(model_);
+  proxy_->setDynamicSortFilter(true);
+  proxy_->sort(0);
+
   view_->setWindowFlags(Qt::Popup);
   view_->setFocusPolicy(Qt::NoFocus);
   view_->setFocusProxy(ui_->search);
   view_->installEventFilter(this);
 
-  view_->setModel(model_);
+  view_->setModel(proxy_);
   view_->setItemDelegate(new GlobalSearchItemDelegate(this));
   view_->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   view_->setEditTriggers(QAbstractItemView::NoEditTriggers);
@@ -222,6 +66,7 @@ GlobalSearchWidget::GlobalSearchWidget(QWidget* parent)
   connect(ui_->search, SIGNAL(textEdited(QString)), SLOT(TextEdited(QString)));
   connect(engine_, SIGNAL(ResultsAvailable(int,SearchProvider::ResultList)),
           SLOT(AddResults(int,SearchProvider::ResultList)));
+  connect(engine_, SIGNAL(SearchFinished(int)), SLOT(SearchFinished(int)));
   connect(engine_, SIGNAL(ArtLoaded(int,QImage)), SLOT(ArtLoaded(int,QImage)));
 }
 
@@ -277,8 +122,33 @@ void GlobalSearchWidget::paintEvent(QPaintEvent* e) {
 }
 
 void GlobalSearchWidget::TextEdited(const QString& text) {
+  const QString trimmed_text = text.trimmed();
+
+  if (trimmed_text.length() < 3) {
+    Reset();
+    RepositionPopup();
+    return;
+  }
+
   clear_model_on_next_result_ = true;
-  last_id_ = engine_->SearchAsync(text);
+  last_id_ = engine_->SearchAsync(trimmed_text);
+}
+
+void GlobalSearchWidget::Reset() {
+  model_->clear();
+  art_requests_.clear();
+}
+
+void GlobalSearchWidget::SearchFinished(int id) {
+  if (id != last_id_)
+    return;
+
+  if (clear_model_on_next_result_) {
+    Reset();
+    clear_model_on_next_result_ = true;
+  }
+
+  RepositionPopup();
 }
 
 void GlobalSearchWidget::AddResults(int id, const SearchProvider::ResultList& results) {
@@ -286,8 +156,7 @@ void GlobalSearchWidget::AddResults(int id, const SearchProvider::ResultList& re
     return;
 
   if (clear_model_on_next_result_) {
-    model_->clear();
-    art_requests_.clear();
+    Reset();
     clear_model_on_next_result_ = false;
   }
 
@@ -350,7 +219,7 @@ bool GlobalSearchWidget::eventFilter(QObject* o, QEvent* e) {
 
     case Qt::Key_Up:
       if (!cur_index.isValid()) {
-        view_->setCurrentIndex(model_->index(model_->rowCount() - 1, 0));
+        view_->setCurrentIndex(proxy_->index(proxy_->rowCount() - 1, 0));
         return true;
       } else if (cur_index.row() == 0) {
         return true;
@@ -359,9 +228,9 @@ bool GlobalSearchWidget::eventFilter(QObject* o, QEvent* e) {
 
     case Qt::Key_Down:
       if (!cur_index.isValid()) {
-        view_->setCurrentIndex(model_->index(0, 0));
+        view_->setCurrentIndex(proxy_->index(0, 0));
         return true;
-      } else if (cur_index.row() == model_->rowCount() - 1) {
+      } else if (cur_index.row() == proxy_->rowCount() - 1) {
         return true;
       }
       return false;
@@ -430,18 +299,20 @@ bool GlobalSearchWidget::eventFilter(QObject* o, QEvent* e) {
   return false;
 }
 
-void GlobalSearchWidget::LazyLoadArt(const QModelIndex& index) {
-  if (!index.isValid() || index.data(Role_LazyLoadingArt).isValid()) {
+void GlobalSearchWidget::LazyLoadArt(const QModelIndex& proxy_index) {
+  if (!proxy_index.isValid() || proxy_index.data(Role_LazyLoadingArt).isValid()) {
     return;
   }
 
-  model_->itemFromIndex(index)->setData(true, Role_LazyLoadingArt);
+  const QModelIndex source_index = proxy_->mapToSource(proxy_index);
+
+  model_->itemFromIndex(source_index)->setData(true, Role_LazyLoadingArt);
 
   const SearchProvider::Result result =
-      index.data(Role_Result).value<SearchProvider::Result>();
+      source_index.data(Role_Result).value<SearchProvider::Result>();
 
   int id = engine_->LoadArtAsync(result);
-  art_requests_[id] = index;
+  art_requests_[id] = source_index;
 }
 
 void GlobalSearchWidget::ArtLoaded(int id, const QImage& image) {

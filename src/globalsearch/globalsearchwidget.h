@@ -20,40 +20,16 @@
 
 #include "searchprovider.h"
 
-#include <QStyledItemDelegate>
 #include <QWidget>
 
 class GlobalSearch;
-class GlobalSearchWidget;
 class LibraryBackendInterface;
 class Ui_GlobalSearchWidget;
 
 class QListView;
+class QModelIndex;
+class QSortFilterProxyModel;
 class QStandardItemModel;
-
-
-class GlobalSearchItemDelegate : public QStyledItemDelegate {
-public:
-  GlobalSearchItemDelegate(GlobalSearchWidget* widget);
-
-  static const int kHeight;
-  static const int kMargin;
-  static const int kArtMargin;
-  static const int kWordPadding;
-
-  static QPixmap ScaleAndPad(const QImage& image);
-
-  QSize sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const;
-  void paint(QPainter* painter, const QStyleOptionViewItem& option,
-             const QModelIndex& index) const;
-
-private:
-  void DrawAndShrink(QPainter* p, QRect* rect, const QString& text) const;
-
-private:
-  GlobalSearchWidget* widget_;
-  QPixmap no_cover_;
-};
 
 
 class GlobalSearchWidget : public QWidget {
@@ -85,11 +61,13 @@ protected:
 
 private slots:
   void TextEdited(const QString& text);
+  void SearchFinished(int id);
   void AddResults(int id, const SearchProvider::ResultList& results);
 
   void ArtLoaded(int id, const QImage& image);
 
 private:
+  void Reset();
   void RepositionPopup();
 
 private:
@@ -102,6 +80,7 @@ private:
   QMap<int, QModelIndex> art_requests_;
 
   QStandardItemModel* model_;
+  QSortFilterProxyModel* proxy_;
   QListView* view_;
   bool eat_focus_out_;
 

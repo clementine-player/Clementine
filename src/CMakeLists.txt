@@ -116,6 +116,8 @@ set(SOURCES
   engines/gstelementdeleter.cpp
 
   globalsearch/globalsearch.cpp
+  globalsearch/globalsearchitemdelegate.cpp
+  globalsearch/globalsearchsortmodel.cpp
   globalsearch/globalsearchwidget.cpp
   globalsearch/librarysearchprovider.cpp
   globalsearch/searchprovider.cpp

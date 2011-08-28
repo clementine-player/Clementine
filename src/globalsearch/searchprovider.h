@@ -36,10 +36,10 @@ public:
     Result(SearchProvider* provider = 0)
       : provider_(provider), album_size_(0) {}
 
+    // The order of types here is the order they'll appear in the UI.
     enum Type {
-      Type_Track,
-      Type_Album,
-      Type_Stream
+      Type_Track = 0,
+      Type_Album
     };
 
     SearchProvider* provider_;
