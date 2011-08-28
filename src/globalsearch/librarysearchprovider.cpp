@@ -70,12 +70,15 @@ SearchProvider::ResultList LibrarySearchProvider::Search(int id, const QString& 
       album_key.prepend(song.artist());
     }
 
-    if (TokenMatches(tokens, song.title())) {
+    Result::MatchQuality quality = MatchQuality(tokens, song.title());
+
+    if (quality != Result::Quality_None) {
       // If the query matched in the song title then we're interested in this
       // as an individual song.
       Result result(this);
       result.type_ = Result::Type_Track;
       result.metadata_ = song;
+      result.match_quality_ = quality;
       ret << result;
     } else {
       // Otherwise we record this as being an interesting album.
@@ -92,6 +95,11 @@ SearchProvider::ResultList LibrarySearchProvider::Search(int id, const QString& 
     result.type_ = Result::Type_Album;
     result.metadata_ = albums.value(key);
     result.album_size_ = albums.count(key);
+    result.match_quality_ =
+        qMin(
+          MatchQuality(tokens, result.metadata_.albumartist()),
+          qMin(MatchQuality(tokens, result.metadata_.artist()),
+               MatchQuality(tokens, result.metadata_.album())));
     ret << result;
   }
 

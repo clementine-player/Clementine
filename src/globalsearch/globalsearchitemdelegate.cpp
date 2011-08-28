@@ -121,7 +121,7 @@ void GlobalSearchItemDelegate::paint(QPainter* p,
     p->setPen(pen);
     DrawAndShrink(p, &text_rect_1, m.title());
 
-    // Line 2 is Artist - Album
+    // Line 2 is Artist - Album - Track n
     p->setFont(option.font);
 
     // Artist
@@ -140,6 +140,15 @@ void GlobalSearchItemDelegate::paint(QPainter* p,
       // Album
       p->setPen(pen);
       DrawAndShrink(p, &text_rect_2, m.album());
+    }
+
+    if (m.track() > 0) {
+      // Dash
+      p->setPen(light_pen);
+      DrawAndShrink(p, &text_rect_2, " - ");
+
+      // Album
+      DrawAndShrink(p, &text_rect_2, tr("track %1").arg(m.track()));
     }
 
     break;

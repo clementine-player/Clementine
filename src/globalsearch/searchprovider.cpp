@@ -48,13 +48,19 @@ QStringList SearchProvider::TokenizeQuery(const QString& query) {
   return tokens;
 }
 
-int SearchProvider::TokenMatches(const QStringList& tokens, const QString& string) {
-  int ret = 0;
+SearchProvider::Result::MatchQuality SearchProvider::MatchQuality(
+    const QStringList& tokens, const QString& string) {
+  Result::MatchQuality ret = Result::Quality_None;
+
   foreach (const QString& token, tokens) {
-    if (string.contains(token, Qt::CaseInsensitive)) {
-      ret ++;
+    const int index = string.indexOf(token, 0, Qt::CaseInsensitive);
+    if (index == 0) {
+      return Result::Quality_AtStart;
+    } else if (index != -1) {
+      ret = Result::Quality_Middle;
     }
   }
+
   return ret;
 }
 

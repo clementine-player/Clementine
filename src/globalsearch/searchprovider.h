@@ -42,12 +42,24 @@ public:
       Type_Album
     };
 
+    enum MatchQuality {
+      // A token in the search string matched at the beginning of the song
+      // metadata.
+      Quality_AtStart = 0,
+
+      // A token matched somewhere else.
+      Quality_Middle,
+
+      Quality_None
+    };
+
     // This must be set by the provder using the constructor.
     SearchProvider* provider_;
 
     // These must be set explicitly by the provider.
     Type type_;
     Song metadata_;
+    MatchQuality match_quality_;
 
     // How many songs in the album - valid only if type == Type_Album.
     int album_size_;
@@ -84,7 +96,7 @@ protected:
   // useful for figuring out whether you got a result because it matched in
   // the song title or the artist/album name.
   static QStringList TokenizeQuery(const QString& query);
-  static int TokenMatches(const QStringList& tokens, const QString& string);
+  static Result::MatchQuality MatchQuality(const QStringList& tokens, const QString& string);
 
 private:
   QString name_;

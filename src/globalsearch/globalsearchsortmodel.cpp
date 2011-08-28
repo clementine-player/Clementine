@@ -31,38 +31,35 @@ bool GlobalSearchSortModel::lessThan(const QModelIndex& left, const QModelIndex&
   const SearchProvider::Result r2 = right.data(GlobalSearchWidget::Role_Result)
       .value<SearchProvider::Result>();
 
-  // Compare types first
-  if (r1.type_ < r2.type_) return true;
-  if (r1.type_ > r2.type_) return false;
-
   int ret = 0;
+
+#define CompareInt(field) \
+  if (r1.field < r2.field) return true; \
+  if (r1.field > r2.field) return false
+
+#define CompareString(field) \
+  ret = QString::localeAwareCompare(r1.metadata_.field(), r2.metadata_.field()); \
+  if (ret < 0) return true; \
+  if (ret > 0) return false
+
+
+  // Compare match quality and types first
+  CompareInt(match_quality_);
+  CompareInt(type_);
+
+  // Then compare title, artist and album
   switch (r1.type_) {
   case SearchProvider::Result::Type_Track:
-    ret = QString::localeAwareCompare(r1.metadata_.title(), r2.metadata_.title());
-    if (ret < 0) return true;
-    if (ret > 0) return false;
-
-    ret = QString::localeAwareCompare(r1.metadata_.artist(), r2.metadata_.artist());
-    if (ret < 0) return true;
-    if (ret > 0) return false;
-
-    ret = QString::localeAwareCompare(r1.metadata_.album(), r2.metadata_.album());
-    if (ret < 0) return true;
-    if (ret > 0) return false;
-
-    break;
-
+    CompareString(title);
+    // fallthrough
   case SearchProvider::Result::Type_Album:
-    ret = QString::localeAwareCompare(r1.metadata_.artist(), r2.metadata_.artist());
-    if (ret < 0) return true;
-    if (ret > 0) return false;
-
-    ret = QString::localeAwareCompare(r1.metadata_.album(), r2.metadata_.album());
-    if (ret < 0) return true;
-    if (ret > 0) return false;
-
+    CompareString(artist);
+    CompareString(album);
     break;
   }
 
   return false;
+
+#undef CompareInt
+#undef CompareString
 }
