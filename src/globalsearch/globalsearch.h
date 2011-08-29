@@ -36,6 +36,7 @@ public:
 
   int SearchAsync(const QString& query);
   int LoadArtAsync(const SearchProvider::Result& result);
+  int LoadTracksAsync(const SearchProvider::Result& result);
 
   void CancelSearch(int id);
   void CancelArt(int id);
@@ -48,6 +49,8 @@ signals:
   void SearchFinished(int id);
 
   void ArtLoaded(int id, const QPixmap& pixmap);
+
+  void TracksLoaded(int id, MimeData* mime_data);
 
   void ProviderDestroyed(SearchProvider* provider);
 

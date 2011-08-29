@@ -229,7 +229,9 @@ MainWindow::MainWindow(
 
   // Initialise the global search widget
   StyleHelper::setBaseColor(palette().color(QPalette::Highlight).darker());
+
   ui_->global_search->Init(library_->backend());
+  connect(ui_->global_search, SIGNAL(AddToPlaylist(QMimeData*)), SLOT(AddToPlaylist(QMimeData*)));
 
   // Add tabs to the fancy tab widget
   ui_->tabs->AddTab(library_view_, IconLoader::Load("folder-sound"), tr("Library"));

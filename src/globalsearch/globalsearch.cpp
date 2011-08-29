@@ -40,6 +40,8 @@ void GlobalSearch::AddProvider(SearchProvider* provider) {
           SLOT(SearchFinishedSlot(int)));
   connect(provider, SIGNAL(ArtLoaded(int,QImage)),
           SLOT(ArtLoadedSlot(int,QImage)));
+  connect(provider, SIGNAL(TracksLoaded(int,MimeData*)),
+          SIGNAL(TracksLoaded(int,MimeData*)));
   connect(provider, SIGNAL(destroyed(QObject*)),
           SLOT(ProviderDestroyedSlot(QObject*)));
 
@@ -188,5 +190,13 @@ void GlobalSearch::ArtLoadedSlot(int id, const QImage& image) {
 bool GlobalSearch::FindCachedPixmap(const SearchProvider::Result& result,
                                     QPixmap* pixmap) const {
   return pixmap_cache_.find(result.pixmap_cache_key_, pixmap);
+}
+
+int GlobalSearch::LoadTracksAsync(const SearchProvider::Result& result) {
+  const int id = next_id_ ++;
+
+  result.provider_->LoadTracksAsync(id, result);
+
+  return id;
 }
 

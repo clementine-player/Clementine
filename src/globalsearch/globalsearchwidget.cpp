@@ -24,6 +24,7 @@
 #include "ui_globalsearchwidget.h"
 #include "core/logging.h"
 #include "core/utilities.h"
+#include "playlist/songmimedata.h"
 #include "widgets/stylehelper.h"
 
 #ifdef HAVE_SPOTIFY
@@ -73,6 +74,8 @@ GlobalSearchWidget::GlobalSearchWidget(QWidget* parent)
           SLOT(AddResults(int,SearchProvider::ResultList)));
   connect(engine_, SIGNAL(SearchFinished(int)), SLOT(SearchFinished(int)));
   connect(engine_, SIGNAL(ArtLoaded(int,QPixmap)), SLOT(ArtLoaded(int,QPixmap)));
+  connect(engine_, SIGNAL(TracksLoaded(int,MimeData*)), SLOT(TracksLoaded(int,MimeData*)));
+  connect(view_, SIGNAL(doubleClicked(QModelIndex)), SLOT(AddCurrent()));
 }
 
 GlobalSearchWidget::~GlobalSearchWidget() {
@@ -276,7 +279,7 @@ bool GlobalSearchWidget::eventFilter(QObject* o, QEvent* e) {
     case Qt::Key_Enter:
     case Qt::Key_Tab:
       view_->hide();
-      // TODO: complete
+      AddCurrent();
       break;
 
     case Qt::Key_F4:
@@ -337,5 +340,26 @@ void GlobalSearchWidget::ArtLoaded(int id, const QPixmap& pixmap) {
   QModelIndex index = art_requests_.take(id);
 
   model_->itemFromIndex(index)->setData(pixmap, Qt::DecorationRole);
+}
+
+void GlobalSearchWidget::AddCurrent() {
+  QModelIndex index = view_->currentIndex();
+  if (!index.isValid())
+    index = proxy_->index(0, 0);
+
+  if (!index.isValid())
+    return;
+
+  engine_->LoadTracksAsync(index.data(Role_Result).value<SearchProvider::Result>());
+}
+
+void GlobalSearchWidget::TracksLoaded(int id, MimeData* mime_data) {
+  Q_UNUSED(id);
+
+  if (!mime_data)
+    return;
+
+  mime_data->from_doubleclick_ = true;
+  emit AddToPlaylist(mime_data);
 }
 

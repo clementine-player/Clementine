@@ -17,6 +17,7 @@
 
 #include "albumcovermanager.h"
 #include "albumcovermanagerlist.h"
+#include "library/librarybackend.h"
 #include "playlist/songmimedata.h"
 
 #include <boost/scoped_ptr.hpp>

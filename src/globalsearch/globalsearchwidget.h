@@ -27,6 +27,7 @@ class LibraryBackendInterface;
 class Ui_GlobalSearchWidget;
 
 class QListView;
+class QMimeData;
 class QModelIndex;
 class QSortFilterProxyModel;
 class QStandardItemModel;
@@ -55,6 +56,9 @@ public:
   // QWidget
   bool eventFilter(QObject* o, QEvent* e);
 
+signals:
+  void AddToPlaylist(QMimeData* data);
+
 protected:
   void resizeEvent(QResizeEvent* e);
   void paintEvent(QPaintEvent* e);
@@ -65,6 +69,10 @@ private slots:
   void AddResults(int id, const SearchProvider::ResultList& results);
 
   void ArtLoaded(int id, const QPixmap& pixmap);
+
+  void TracksLoaded(int id, MimeData* mime_data);
+
+  void AddCurrent();
 
 private:
   void Reset();

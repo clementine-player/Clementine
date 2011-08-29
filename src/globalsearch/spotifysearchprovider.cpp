@@ -134,7 +134,7 @@ void SpotifySearchProvider::ArtLoadedSlot(const QString& id, const QImage& image
 }
 
 void SpotifySearchProvider::LoadTracksAsync(int id, const Result& result) {
-  emit TracksLoaded(id, SongList());
+  emit TracksLoaded(id, NULL);
 }
 
 

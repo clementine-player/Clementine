@@ -23,7 +23,7 @@
 #include "core/mimedata.h"
 #include "core/song.h"
 
-class LibraryBackend;
+class LibraryBackendInterface;
 
 class SongMimeData : public MimeData {
   Q_OBJECT
@@ -32,7 +32,7 @@ public:
   SongMimeData()
     : backend(NULL) {}
 
-  LibraryBackend* backend;
+  LibraryBackendInterface* backend;
   SongList songs;
 };
 

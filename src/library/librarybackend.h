@@ -56,6 +56,8 @@ public:
   };
   typedef QList<Album> AlbumList;
 
+  virtual QString songs_table() const = 0;
+
   // Get a list of directories in the library.  Emits DirectoriesDiscovered.
   virtual void LoadDirectoriesAsync() = 0;
 

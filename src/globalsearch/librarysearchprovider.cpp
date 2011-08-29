@@ -21,6 +21,7 @@
 #include "library/librarybackend.h"
 #include "library/libraryquery.h"
 #include "library/sqlrow.h"
+#include "playlist/songmimedata.h"
 
 
 LibrarySearchProvider::LibrarySearchProvider(LibraryBackendInterface* backend,
@@ -122,5 +123,40 @@ void LibrarySearchProvider::AlbumArtLoaded(quint64 id, const QImage& image) {
 }
 
 void LibrarySearchProvider::LoadTracksAsync(int id, const Result& result) {
-  emit TracksLoaded(id, SongList());
+  SongList ret;
+
+  switch (result.type_) {
+  case Result::Type_Track:
+    // This is really easy - we just emit the track again.
+    ret << result.metadata_;
+    break;
+
+  case Result::Type_Album:  {
+    // Find all the songs in this album.
+    LibraryQuery query;
+    query.SetOrderBy("track");
+    query.SetColumnSpec("ROWID, " + Song::kColumnSpec);
+    query.AddCompilationRequirement(result.metadata_.is_compilation());
+    query.AddWhere("album", result.metadata_.album());
+
+    if (!result.metadata_.is_compilation())
+      query.AddWhere("artist", result.metadata_.artist());
+
+    if (!backend_->ExecQuery(&query)) {
+      break;
+    }
+
+    while (query.Next()) {
+      Song song;
+      song.InitFromQuery(query, true);
+      ret << song;
+    }
+  }
+  }
+
+  SongMimeData* mime_data = new SongMimeData;
+  mime_data->backend = backend_;
+  mime_data->songs = ret;
+
+  emit TracksLoaded(id, mime_data);
 }

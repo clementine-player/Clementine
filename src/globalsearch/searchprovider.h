@@ -24,6 +24,9 @@
 
 #include "core/song.h"
 
+class MimeData;
+
+
 class SearchProvider : public QObject {
   Q_OBJECT
 
@@ -93,7 +96,7 @@ signals:
 
   void ArtLoaded(int id, const QImage& image);
 
-  void TracksLoaded(int id, const SongList& tracks);
+  void TracksLoaded(int id, MimeData* mime_data);
 
 protected:
   // These functions treat queries in the same way as LibraryQuery.  They're
