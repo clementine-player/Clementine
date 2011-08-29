@@ -47,13 +47,13 @@ public:
   void Init(quint16 port);
 
 private slots:
-  void HandleMessage(const protobuf::SpotifyMessage& message);
+  void HandleMessage(const spotify_pb::SpotifyMessage& message);
   void ProcessEvents();
   void MediaSocketDisconnected();
 
 private:
   void SendLoginCompleted(bool success, const QString& error,
-                          protobuf::LoginResponse_Error error_code);
+                          spotify_pb::LoginResponse_Error error_code);
   void SendPlaybackError(const QString& error);
 
   // Spotify session callbacks.
@@ -94,28 +94,30 @@ private:
 
   // Request handlers.
   void Login(const QString& username, const QString& password);
-  void Search(const protobuf::SearchRequest& req);
-  void LoadPlaylist(const protobuf::LoadPlaylistRequest& req);
-  void SyncPlaylist(const protobuf::SyncPlaylistRequest& req);
-  void StartPlayback(const protobuf::PlaybackRequest& req);
+  void Search(const spotify_pb::SearchRequest& req);
+  void LoadPlaylist(const spotify_pb::LoadPlaylistRequest& req);
+  void SyncPlaylist(const spotify_pb::SyncPlaylistRequest& req);
+  void StartPlayback(const spotify_pb::PlaybackRequest& req);
   void LoadImage(const QString& id_b64);
 
   void SendPlaylistList();
 
-  void ConvertTrack(sp_track* track, protobuf::Track* pb);
+  void ConvertTrack(sp_track* track, spotify_pb::Track* pb);
+  void ConvertAlbum(sp_album* album, spotify_pb::Track* pb);
+
   // Gets the appropriate sp_playlist* but does not load it.
-  sp_playlist* GetPlaylist(protobuf::PlaylistType type, int user_index);
+  sp_playlist* GetPlaylist(spotify_pb::PlaylistType type, int user_index);
 
 private:
   struct PendingLoadPlaylist {
-    protobuf::LoadPlaylistRequest request_;
+    spotify_pb::LoadPlaylistRequest request_;
     sp_playlist* playlist_;
     QList<sp_track*> tracks_;
     bool offline_sync;
   };
 
   struct PendingPlaybackRequest {
-    protobuf::PlaybackRequest request_;
+    spotify_pb::PlaybackRequest request_;
     sp_link* link_;
     sp_track* track_;
 
@@ -134,7 +136,7 @@ private:
   void TryPlaybackAgain(const PendingPlaybackRequest& req);
   void TryImageAgain(sp_image* image);
   int GetDownloadProgress(sp_playlist* playlist);
-  void SendDownloadProgress(protobuf::PlaylistType type, int index, int download_progress);
+  void SendDownloadProgress(spotify_pb::PlaylistType type, int index, int download_progress);
 
   QByteArray api_key_;
 
@@ -155,7 +157,7 @@ private:
   QList<PendingPlaybackRequest> pending_playback_requests_;
   QList<PendingImageRequest> pending_image_requests_;
   QMap<sp_image*, int> image_callbacks_registered_;
-  QMap<sp_search*, protobuf::SearchRequest> pending_searches_;
+  QMap<sp_search*, spotify_pb::SearchRequest> pending_searches_;
 
   int media_length_msec_;
 };

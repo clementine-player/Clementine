@@ -37,7 +37,7 @@ public:
 
 private slots:
   void ServerDestroyed();
-  void SearchFinishedSlot(const protobuf::SearchResponse& response);
+  void SearchFinishedSlot(const spotify_pb::SearchResponse& response);
   void ArtLoadedSlot(const QString& id, const QImage& image);
 
 private:

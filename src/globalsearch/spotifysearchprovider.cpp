@@ -40,8 +40,8 @@ SpotifyServer* SpotifySearchProvider::server() {
     return NULL;
 
   server_ = service_->server();
-  connect(server_, SIGNAL(SearchResults(protobuf::SearchResponse)),
-          SLOT(SearchFinishedSlot(protobuf::SearchResponse)));
+  connect(server_, SIGNAL(SearchResults(spotify_pb::SearchResponse)),
+          SLOT(SearchFinishedSlot(spotify_pb::SearchResponse)));
   connect(server_, SIGNAL(ImageLoaded(QString,QImage)),
           SLOT(ArtLoadedSlot(QString,QImage)));
   connect(server_, SIGNAL(destroyed()), SLOT(ServerDestroyed()));
@@ -65,11 +65,11 @@ void SpotifySearchProvider::SearchAsync(int id, const QString& query) {
   state.tokens_ = TokenizeQuery(query);
 
   const QString query_string = state.tokens_.join(" ");
-  s->Search(query_string, 25);
+  s->Search(query_string, 5, 5);
   queries_[query_string] = state;
 }
 
-void SpotifySearchProvider::SearchFinishedSlot(const protobuf::SearchResponse& response) {
+void SpotifySearchProvider::SearchFinishedSlot(const spotify_pb::SearchResponse& response) {
   QString query_string = QString::fromUtf8(response.request().query().c_str());
   QMap<QString, PendingState>::iterator it = queries_.find(query_string);
   if (it == queries_.end())
@@ -79,14 +79,27 @@ void SpotifySearchProvider::SearchFinishedSlot(const protobuf::SearchResponse& r
   queries_.erase(it);
 
   ResultList ret;
-  for (int i = 0; i < response.result_size(); ++i) {
-    const protobuf::Track& track = response.result(i);
+  for (int i=0; i < response.result_size() ; ++i) {
+    const spotify_pb::Track& track = response.result(i);
 
     Result result(this);
     result.type_ = Result::Type_Track;
     SpotifyService::SongFromProtobuf(track, &result.metadata_);
     result.match_quality_ = MatchQuality(state.tokens_, result.metadata_.title());
 
+    ret << result;
+  }
+
+  for (int i=0 ; i<response.album_size() ; ++i) {
+    const spotify_pb::Track& track = response.album(i);
+
+    Result result(this);
+    result.type_ = Result::Type_Album;
+    SpotifyService::SongFromProtobuf(track, &result.metadata_);
+    result.match_quality_ =
+        qMin(MatchQuality(state.tokens_, result.metadata_.album()),
+             MatchQuality(state.tokens_, result.metadata_.artist()));
+    result.album_size_ = 0;
     ret << result;
   }
 

@@ -44,40 +44,40 @@ public:
   void LoadUserPlaylist(int index);
   void SyncUserPlaylist(int index);
   void StartPlayback(const QString& uri, quint16 port);
-  void Search(const QString& text, int limit);
+  void Search(const QString& text, int limit, int limit_album = 0);
   void LoadImage(const QString& id);
 
   int server_port() const;
 
 signals:
   void LoginCompleted(bool success, const QString& error,
-                      protobuf::LoginResponse_Error error_code);
-  void PlaylistsUpdated(const protobuf::Playlists& playlists);
+                      spotify_pb::LoginResponse_Error error_code);
+  void PlaylistsUpdated(const spotify_pb::Playlists& playlists);
 
-  void StarredLoaded(const protobuf::LoadPlaylistResponse& response);
-  void InboxLoaded(const protobuf::LoadPlaylistResponse& response);
-  void UserPlaylistLoaded(const protobuf::LoadPlaylistResponse& response);
+  void StarredLoaded(const spotify_pb::LoadPlaylistResponse& response);
+  void InboxLoaded(const spotify_pb::LoadPlaylistResponse& response);
+  void UserPlaylistLoaded(const spotify_pb::LoadPlaylistResponse& response);
   void PlaybackError(const QString& message);
-  void SearchResults(const protobuf::SearchResponse& response);
+  void SearchResults(const spotify_pb::SearchResponse& response);
   void ImageLoaded(const QString& id, const QImage& image);
-  void SyncPlaylistProgress(const protobuf::SyncPlaylistProgress& progress);
+  void SyncPlaylistProgress(const spotify_pb::SyncPlaylistProgress& progress);
 
 private slots:
   void NewConnection();
-  void HandleMessage(const protobuf::SpotifyMessage& message);
+  void HandleMessage(const spotify_pb::SpotifyMessage& message);
 
 private:
-  void LoadPlaylist(protobuf::PlaylistType type, int index = -1);
-  void SyncPlaylist(protobuf::PlaylistType type, int index, bool offline);
-  void SendMessage(const protobuf::SpotifyMessage& message);
+  void LoadPlaylist(spotify_pb::PlaylistType type, int index = -1);
+  void SyncPlaylist(spotify_pb::PlaylistType type, int index, bool offline);
+  void SendMessage(const spotify_pb::SpotifyMessage& message);
 
   QTcpServer* server_;
   QTcpSocket* protocol_socket_;
   SpotifyMessageHandler* handler_;
   bool logged_in_;
 
-  QList<protobuf::SpotifyMessage> queued_login_messages_;
-  QList<protobuf::SpotifyMessage> queued_messages_;
+  QList<spotify_pb::SpotifyMessage> queued_login_messages_;
+  QList<spotify_pb::SpotifyMessage> queued_messages_;
 };
 
 #endif // SPOTIFYSERVER_H

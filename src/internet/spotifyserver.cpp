@@ -50,22 +50,22 @@ void SpotifyServer::NewConnection() {
 
   protocol_socket_ = server_->nextPendingConnection();
   handler_ = new SpotifyMessageHandler(protocol_socket_, this);
-  connect(handler_, SIGNAL(MessageArrived(protobuf::SpotifyMessage)),
-          SLOT(HandleMessage(protobuf::SpotifyMessage)));
+  connect(handler_, SIGNAL(MessageArrived(spotify_pb::SpotifyMessage)),
+          SLOT(HandleMessage(spotify_pb::SpotifyMessage)));
 
   qLog(Info) << "Connection from port" << protocol_socket_->peerPort();
 
   // Send any login messages that were queued before the client connected
-  foreach (const protobuf::SpotifyMessage& message, queued_login_messages_) {
+  foreach (const spotify_pb::SpotifyMessage& message, queued_login_messages_) {
     SendMessage(message);
   }
   queued_login_messages_.clear();
 }
 
-void SpotifyServer::SendMessage(const protobuf::SpotifyMessage& message) {
+void SpotifyServer::SendMessage(const spotify_pb::SpotifyMessage& message) {
   const bool is_login_message = message.has_login_request();
 
-  QList<protobuf::SpotifyMessage>* queue =
+  QList<spotify_pb::SpotifyMessage>* queue =
       is_login_message ? &queued_login_messages_ : &queued_messages_;
 
   if (!protocol_socket_ || (!is_login_message && !logged_in_)) {
@@ -76,23 +76,23 @@ void SpotifyServer::SendMessage(const protobuf::SpotifyMessage& message) {
 }
 
 void SpotifyServer::Login(const QString& username, const QString& password) {
-  protobuf::SpotifyMessage message;
+  spotify_pb::SpotifyMessage message;
 
-  protobuf::LoginRequest* request = message.mutable_login_request();
+  spotify_pb::LoginRequest* request = message.mutable_login_request();
   request->set_username(DataCommaSizeFromQString(username));
   request->set_password(DataCommaSizeFromQString(password));
 
   SendMessage(message);
 }
 
-void SpotifyServer::HandleMessage(const protobuf::SpotifyMessage& message) {
+void SpotifyServer::HandleMessage(const spotify_pb::SpotifyMessage& message) {
   if (message.has_login_response()) {
-    const protobuf::LoginResponse& response = message.login_response();
+    const spotify_pb::LoginResponse& response = message.login_response();
     logged_in_ = response.success();
 
     if (response.success()) {
       // Send any messages that were queued before the client logged in
-      foreach (const protobuf::SpotifyMessage& message, queued_messages_) {
+      foreach (const spotify_pb::SpotifyMessage& message, queued_messages_) {
         SendMessage(message);
       }
       queued_messages_.clear();
@@ -103,18 +103,18 @@ void SpotifyServer::HandleMessage(const protobuf::SpotifyMessage& message) {
   } else if (message.has_playlists_updated()) {
     emit PlaylistsUpdated(message.playlists_updated());
   } else if (message.has_load_playlist_response()) {
-    const protobuf::LoadPlaylistResponse& response = message.load_playlist_response();
+    const spotify_pb::LoadPlaylistResponse& response = message.load_playlist_response();
 
     switch (response.request().type()) {
-      case protobuf::Inbox:
+      case spotify_pb::Inbox:
         emit InboxLoaded(response);
         break;
 
-      case protobuf::Starred:
+      case spotify_pb::Starred:
         emit StarredLoaded(response);
         break;
 
-      case protobuf::UserPlaylist:
+      case spotify_pb::UserPlaylist:
         emit UserPlaylistLoaded(response);
         break;
     }
@@ -123,7 +123,7 @@ void SpotifyServer::HandleMessage(const protobuf::SpotifyMessage& message) {
   } else if (message.has_search_response()) {
     emit SearchResults(message.search_response());
   } else if (message.has_image_response()) {
-    const protobuf::ImageResponse& response = message.image_response();
+    const spotify_pb::ImageResponse& response = message.image_response();
     const QString id = QStringFromStdString(response.id());
 
     if (response.has_data()) {
@@ -137,9 +137,9 @@ void SpotifyServer::HandleMessage(const protobuf::SpotifyMessage& message) {
   }
 }
 
-void SpotifyServer::LoadPlaylist(protobuf::PlaylistType type, int index) {
-  protobuf::SpotifyMessage message;
-  protobuf::LoadPlaylistRequest* req = message.mutable_load_playlist_request();
+void SpotifyServer::LoadPlaylist(spotify_pb::PlaylistType type, int index) {
+  spotify_pb::SpotifyMessage message;
+  spotify_pb::LoadPlaylistRequest* req = message.mutable_load_playlist_request();
 
   req->set_type(type);
   if (index != -1) {
@@ -150,9 +150,9 @@ void SpotifyServer::LoadPlaylist(protobuf::PlaylistType type, int index) {
 }
 
 void SpotifyServer::SyncPlaylist(
-    protobuf::PlaylistType type, int index, bool offline) {
-  protobuf::SpotifyMessage message;
-  protobuf::SyncPlaylistRequest* req = message.mutable_sync_playlist_request();
+    spotify_pb::PlaylistType type, int index, bool offline) {
+  spotify_pb::SpotifyMessage message;
+  spotify_pb::SyncPlaylistRequest* req = message.mutable_sync_playlist_request();
   req->mutable_request()->set_type(type);
   if (index != -1) {
     req->mutable_request()->set_user_playlist_index(index);
@@ -163,52 +163,53 @@ void SpotifyServer::SyncPlaylist(
 }
 
 void SpotifyServer::SyncInbox() {
-  SyncPlaylist(protobuf::Inbox, -1, true);
+  SyncPlaylist(spotify_pb::Inbox, -1, true);
 }
 
 void SpotifyServer::SyncStarred() {
-  SyncPlaylist(protobuf::Starred, -1, true);
+  SyncPlaylist(spotify_pb::Starred, -1, true);
 }
 
 void SpotifyServer::SyncUserPlaylist(int index) {
   Q_ASSERT(index >= 0);
-  SyncPlaylist(protobuf::UserPlaylist, index, true);
+  SyncPlaylist(spotify_pb::UserPlaylist, index, true);
 }
 
 void SpotifyServer::LoadInbox() {
-  LoadPlaylist(protobuf::Inbox);
+  LoadPlaylist(spotify_pb::Inbox);
 }
 
 void SpotifyServer::LoadStarred() {
-  LoadPlaylist(protobuf::Starred);
+  LoadPlaylist(spotify_pb::Starred);
 }
 
 void SpotifyServer::LoadUserPlaylist(int index) {
   Q_ASSERT(index >= 0);
-  LoadPlaylist(protobuf::UserPlaylist, index);
+  LoadPlaylist(spotify_pb::UserPlaylist, index);
 }
 
 void SpotifyServer::StartPlayback(const QString& uri, quint16 port) {
-  protobuf::SpotifyMessage message;
-  protobuf::PlaybackRequest* req = message.mutable_playback_request();
+  spotify_pb::SpotifyMessage message;
+  spotify_pb::PlaybackRequest* req = message.mutable_playback_request();
 
   req->set_track_uri(DataCommaSizeFromQString(uri));
   req->set_media_port(port);
   SendMessage(message);
 }
 
-void SpotifyServer::Search(const QString& text, int limit) {
-  protobuf::SpotifyMessage message;
-  protobuf::SearchRequest* req = message.mutable_search_request();
+void SpotifyServer::Search(const QString& text, int limit, int limit_album) {
+  spotify_pb::SpotifyMessage message;
+  spotify_pb::SearchRequest* req = message.mutable_search_request();
 
   req->set_query(DataCommaSizeFromQString(text));
   req->set_limit(limit);
+  req->set_limit_album(limit_album);
   SendMessage(message);
 }
 
 void SpotifyServer::LoadImage(const QString& id) {
-  protobuf::SpotifyMessage message;
-  protobuf::ImageRequest* req = message.mutable_image_request();
+  spotify_pb::SpotifyMessage message;
+  spotify_pb::ImageRequest* req = message.mutable_image_request();
 
   req->set_id(DataCommaSizeFromQString(id));
   SendMessage(message);

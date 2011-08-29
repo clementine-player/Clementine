@@ -25,7 +25,7 @@
 #include <QBuffer>
 #include <QObject>
 
-namespace protobuf {
+namespace spotify_pb {
   class SpotifyMessage;
 }
 
@@ -42,10 +42,10 @@ class SpotifyMessageHandler : public QObject {
 public:
   SpotifyMessageHandler(QIODevice* device, QObject* parent);
 
-  void SendMessage(const protobuf::SpotifyMessage& message);
+  void SendMessage(const spotify_pb::SpotifyMessage& message);
 
 signals:
-  void MessageArrived(const protobuf::SpotifyMessage& message);
+  void MessageArrived(const spotify_pb::SpotifyMessage& message);
 
 private slots:
   void DeviceReadyRead();

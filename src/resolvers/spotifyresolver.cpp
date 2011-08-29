@@ -10,8 +10,8 @@ SpotifyResolver::SpotifyResolver(SpotifyServer* spotify, QObject* parent)
     : Resolver(parent),
       spotify_(spotify),
       next_id_(0) {
-  connect(spotify_, SIGNAL(SearchResults(protobuf::SearchResponse)),
-          SLOT(SearchFinished(protobuf::SearchResponse)));
+  connect(spotify_, SIGNAL(SearchResults(spotify_pb::SearchResponse)),
+          SLOT(SearchFinished(spotify_pb::SearchResponse)));
 }
 
 int SpotifyResolver::ResolveSong(const Song& song) {
@@ -29,7 +29,7 @@ int SpotifyResolver::ResolveSong(const Song& song) {
   return id;
 }
 
-void SpotifyResolver::SearchFinished(const protobuf::SearchResponse& response) {
+void SpotifyResolver::SearchFinished(const spotify_pb::SearchResponse& response) {
   QString query_string = QString::fromUtf8(response.request().query().c_str());
   qLog(Debug) << query_string;
   QMap<QString, int>::iterator it = queries_.find(query_string);
@@ -42,7 +42,7 @@ void SpotifyResolver::SearchFinished(const protobuf::SearchResponse& response) {
 
   SongList songs;
   for (int i = 0; i < response.result_size(); ++i) {
-    const protobuf::Track& track = response.result(i);
+    const spotify_pb::Track& track = response.result(i);
     Song song;
     SpotifyService::SongFromProtobuf(track, &song);
     songs << song;

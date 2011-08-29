@@ -70,7 +70,7 @@ public:
   // Persisted in the settings and updated on each Login().
   LoginState login_state() const { return login_state_; }
 
-  static void SongFromProtobuf(const protobuf::Track& track, Song* song);
+  static void SongFromProtobuf(const spotify_pb::Track& track, Song* song);
 
 signals:
   void BlobStateChanged();
@@ -84,23 +84,23 @@ private:
   void EnsureServerCreated(const QString& username = QString(),
                            const QString& password = QString());
   void StartBlobProcess();
-  void FillPlaylist(QStandardItem* item, const protobuf::LoadPlaylistResponse& response);
+  void FillPlaylist(QStandardItem* item, const spotify_pb::LoadPlaylistResponse& response);
   void EnsureMenuCreated();
 
   QStandardItem* PlaylistBySpotifyIndex(int index) const;
-  bool DoPlaylistsDiffer(const protobuf::Playlists& response);
+  bool DoPlaylistsDiffer(const spotify_pb::Playlists& response);
 
 private slots:
   void BlobProcessError(QProcess::ProcessError error);
   void LoginCompleted(bool success, const QString& error,
-                      protobuf::LoginResponse_Error error_code);
-  void PlaylistsUpdated(const protobuf::Playlists& response);
-  void InboxLoaded(const protobuf::LoadPlaylistResponse& response);
-  void StarredLoaded(const protobuf::LoadPlaylistResponse& response);
-  void UserPlaylistLoaded(const protobuf::LoadPlaylistResponse& response);
-  void SearchResults(const protobuf::SearchResponse& response);
+                      spotify_pb::LoginResponse_Error error_code);
+  void PlaylistsUpdated(const spotify_pb::Playlists& response);
+  void InboxLoaded(const spotify_pb::LoadPlaylistResponse& response);
+  void StarredLoaded(const spotify_pb::LoadPlaylistResponse& response);
+  void UserPlaylistLoaded(const spotify_pb::LoadPlaylistResponse& response);
+  void SearchResults(const spotify_pb::SearchResponse& response);
   void ImageLoaded(const QString& id, const QImage& image);
-  void SyncPlaylistProgress(const protobuf::SyncPlaylistProgress& progress);
+  void SyncPlaylistProgress(const spotify_pb::SyncPlaylistProgress& progress);
 
   void OpenSearchTab();
   void DoSearch();

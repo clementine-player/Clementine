@@ -5,8 +5,8 @@
 
 #include "resolver.h"
 
-namespace protobuf {
-class SearchResponse;
+namespace spotify_pb {
+  class SearchResponse;
 }
 
 class SpotifyServer;
@@ -21,7 +21,7 @@ class SpotifyResolver : public Resolver {
   void ResolveFinished(int id, SongList songs);
 
  private slots:
-  void SearchFinished(const protobuf::SearchResponse& response);
+  void SearchFinished(const spotify_pb::SearchResponse& response);
 
  private:
   SpotifyServer* spotify_;

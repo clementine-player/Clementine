@@ -19,9 +19,9 @@
 // compatible.
 
 
-package protobuf;
+package spotify_pb;
 
-option optimize_for = LITE_RUNTIME;
+//option optimize_for = LITE_RUNTIME;
 
 
 message LoginRequest {
@@ -106,6 +106,7 @@ message PlaybackError {
 message SearchRequest {
   required string query = 1;
   optional int32 limit = 2 [default = 250];
+  optional int32 limit_album = 3 [default = 0];
 }
 
 message SearchResponse {
@@ -114,6 +115,8 @@ message SearchResponse {
   optional int32 total_tracks = 3;
   optional string did_you_mean = 4;
   optional string error = 5;
+
+  repeated Track album = 6;
 }
 
 message ImageRequest {

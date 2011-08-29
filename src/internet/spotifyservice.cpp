@@ -130,7 +130,7 @@ void SpotifyService::Login(const QString& username, const QString& password) {
 }
 
 void SpotifyService::LoginCompleted(bool success, const QString& error,
-                                    protobuf::LoginResponse_Error error_code) {
+                                    spotify_pb::LoginResponse_Error error_code) {
   if (login_task_id_) {
     model()->task_manager()->SetTaskFinished(login_task_id_);
     login_task_id_ = 0;
@@ -142,15 +142,15 @@ void SpotifyService::LoginCompleted(bool success, const QString& error,
     QMessageBox::warning(NULL, tr("Spotify login error"), error, QMessageBox::Close);
 
     switch (error_code) {
-    case protobuf::LoginResponse_Error_BadUsernameOrPassword:
+    case spotify_pb::LoginResponse_Error_BadUsernameOrPassword:
       login_state_ = LoginState_BadCredentials;
       break;
 
-    case protobuf::LoginResponse_Error_UserBanned:
+    case spotify_pb::LoginResponse_Error_UserBanned:
       login_state_ = LoginState_Banned;
       break;
 
-    case protobuf::LoginResponse_Error_UserNeedsPremium:
+    case spotify_pb::LoginResponse_Error_UserNeedsPremium:
       login_state_ = LoginState_NoPremium;
       break;
 
@@ -192,24 +192,24 @@ void SpotifyService::EnsureServerCreated(const QString& username,
   delete server_;
   server_ = new SpotifyServer(this);
 
-  connect(server_, SIGNAL(LoginCompleted(bool,QString,protobuf::LoginResponse_Error)),
-                   SLOT(LoginCompleted(bool,QString,protobuf::LoginResponse_Error)));
-  connect(server_, SIGNAL(PlaylistsUpdated(protobuf::Playlists)),
-          SLOT(PlaylistsUpdated(protobuf::Playlists)));
-  connect(server_, SIGNAL(InboxLoaded(protobuf::LoadPlaylistResponse)),
-          SLOT(InboxLoaded(protobuf::LoadPlaylistResponse)));
-  connect(server_, SIGNAL(StarredLoaded(protobuf::LoadPlaylistResponse)),
-          SLOT(StarredLoaded(protobuf::LoadPlaylistResponse)));
-  connect(server_, SIGNAL(UserPlaylistLoaded(protobuf::LoadPlaylistResponse)),
-          SLOT(UserPlaylistLoaded(protobuf::LoadPlaylistResponse)));
+  connect(server_, SIGNAL(LoginCompleted(bool,QString,spotify_pb::LoginResponse_Error)),
+                   SLOT(LoginCompleted(bool,QString,spotify_pb::LoginResponse_Error)));
+  connect(server_, SIGNAL(PlaylistsUpdated(spotify_pb::Playlists)),
+          SLOT(PlaylistsUpdated(spotify_pb::Playlists)));
+  connect(server_, SIGNAL(InboxLoaded(spotify_pb::LoadPlaylistResponse)),
+          SLOT(InboxLoaded(spotify_pb::LoadPlaylistResponse)));
+  connect(server_, SIGNAL(StarredLoaded(spotify_pb::LoadPlaylistResponse)),
+          SLOT(StarredLoaded(spotify_pb::LoadPlaylistResponse)));
+  connect(server_, SIGNAL(UserPlaylistLoaded(spotify_pb::LoadPlaylistResponse)),
+          SLOT(UserPlaylistLoaded(spotify_pb::LoadPlaylistResponse)));
   connect(server_, SIGNAL(PlaybackError(QString)),
           SIGNAL(StreamError(QString)));
-  connect(server_, SIGNAL(SearchResults(protobuf::SearchResponse)),
-          SLOT(SearchResults(protobuf::SearchResponse)));
+  connect(server_, SIGNAL(SearchResults(spotify_pb::SearchResponse)),
+          SLOT(SearchResults(spotify_pb::SearchResponse)));
   connect(server_, SIGNAL(ImageLoaded(QString,QImage)),
           SLOT(ImageLoaded(QString,QImage)));
-  connect(server_, SIGNAL(SyncPlaylistProgress(protobuf::SyncPlaylistProgress)),
-          SLOT(SyncPlaylistProgress(protobuf::SyncPlaylistProgress)));
+  connect(server_, SIGNAL(SyncPlaylistProgress(spotify_pb::SyncPlaylistProgress)),
+          SLOT(SyncPlaylistProgress(spotify_pb::SyncPlaylistProgress)));
 
   server_->Init();
 
@@ -292,7 +292,7 @@ void SpotifyService::BlobDownloadFinished() {
   EnsureServerCreated();
 }
 
-void SpotifyService::PlaylistsUpdated(const protobuf::Playlists& response) {
+void SpotifyService::PlaylistsUpdated(const spotify_pb::Playlists& response) {
   if (login_task_id_) {
     model()->task_manager()->SetTaskFinished(login_task_id_);
     login_task_id_ = 0;
@@ -332,7 +332,7 @@ void SpotifyService::PlaylistsUpdated(const protobuf::Playlists& response) {
   playlists_.clear();
 
   for (int i=0 ; i<response.playlist_size() ; ++i) {
-    const protobuf::Playlists::Playlist& msg = response.playlist(i);
+    const spotify_pb::Playlists::Playlist& msg = response.playlist(i);
 
     QStandardItem* item = new QStandardItem(QStringFromStdString(msg.name()));
     item->setData(Type_UserPlaylist, InternetModel::Role_Type);
@@ -344,13 +344,13 @@ void SpotifyService::PlaylistsUpdated(const protobuf::Playlists& response) {
   }
 }
 
-bool SpotifyService::DoPlaylistsDiffer(const protobuf::Playlists& response) {
+bool SpotifyService::DoPlaylistsDiffer(const spotify_pb::Playlists& response) {
   if (playlists_.count() != response.playlist_size()) {
     return true;
   }
 
   for (int i=0 ; i<response.playlist_size() ; ++i) {
-    const protobuf::Playlists::Playlist& msg = response.playlist(i);
+    const spotify_pb::Playlists::Playlist& msg = response.playlist(i);
     const QStandardItem* item = PlaylistBySpotifyIndex(msg.index());
 
     if (!item) {
@@ -365,11 +365,11 @@ bool SpotifyService::DoPlaylistsDiffer(const protobuf::Playlists& response) {
   return false;
 }
 
-void SpotifyService::InboxLoaded(const protobuf::LoadPlaylistResponse& response) {
+void SpotifyService::InboxLoaded(const spotify_pb::LoadPlaylistResponse& response) {
   FillPlaylist(inbox_, response);
 }
 
-void SpotifyService::StarredLoaded(const protobuf::LoadPlaylistResponse& response) {
+void SpotifyService::StarredLoaded(const spotify_pb::LoadPlaylistResponse& response) {
   FillPlaylist(starred_, response);
 }
 
@@ -382,7 +382,7 @@ QStandardItem* SpotifyService::PlaylistBySpotifyIndex(int index) const {
   return NULL;
 }
 
-void SpotifyService::UserPlaylistLoaded(const protobuf::LoadPlaylistResponse& response) {
+void SpotifyService::UserPlaylistLoaded(const spotify_pb::LoadPlaylistResponse& response) {
   // Find a playlist with this index
   QStandardItem* item = PlaylistBySpotifyIndex(response.request().user_playlist_index());
   if (item) {
@@ -390,7 +390,7 @@ void SpotifyService::UserPlaylistLoaded(const protobuf::LoadPlaylistResponse& re
   }
 }
 
-void SpotifyService::FillPlaylist(QStandardItem* item, const protobuf::LoadPlaylistResponse& response) {
+void SpotifyService::FillPlaylist(QStandardItem* item, const spotify_pb::LoadPlaylistResponse& response) {
   if (item->hasChildren())
     item->removeRows(0, item->rowCount());
 
@@ -408,7 +408,7 @@ void SpotifyService::FillPlaylist(QStandardItem* item, const protobuf::LoadPlayl
   }
 }
 
-void SpotifyService::SongFromProtobuf(const protobuf::Track& track, Song* song) {
+void SpotifyService::SongFromProtobuf(const spotify_pb::Track& track, Song* song) {
   song->set_rating(track.starred() ? 1.0 : 0.0);
   song->set_title(QStringFromStdString(track.title()));
   song->set_album(QStringFromStdString(track.album()));
@@ -505,7 +505,7 @@ void SpotifyService::DoSearch() {
   }
 }
 
-void SpotifyService::SearchResults(const protobuf::SearchResponse& response) {
+void SpotifyService::SearchResults(const spotify_pb::SearchResponse& response) {
   if (QStringFromStdString(response.request().query()) != pending_search_) {
     qLog(Debug) << "Old search result for"
                 << QStringFromStdString(response.request().query())
@@ -585,17 +585,17 @@ void SpotifyService::ImageLoaded(const QString& id, const QImage& image) {
 }
 
 void SpotifyService::SyncPlaylistProgress(
-    const protobuf::SyncPlaylistProgress& progress) {
+    const spotify_pb::SyncPlaylistProgress& progress) {
   qLog(Debug) << "Sync progress:" << progress.sync_progress();
   int task_id = -1;
   switch (progress.request().type()) {
-    case protobuf::Inbox:
+    case spotify_pb::Inbox:
       task_id = inbox_sync_id_;
       break;
-    case protobuf::Starred:
+    case spotify_pb::Starred:
       task_id = starred_sync_id_;
       break;
-    case protobuf::UserPlaylist: {
+    case spotify_pb::UserPlaylist: {
       QMap<int, int>::const_iterator it = playlist_sync_ids_.constFind(
           progress.request().user_playlist_index());
       if (it != playlist_sync_ids_.constEnd()) {
@@ -613,7 +613,7 @@ void SpotifyService::SyncPlaylistProgress(
   model()->task_manager()->SetTaskProgress(task_id, progress.sync_progress(), 100);
   if (progress.sync_progress() == 100) {
     model()->task_manager()->SetTaskFinished(task_id);
-    if (progress.request().type() == protobuf::UserPlaylist) {
+    if (progress.request().type() == spotify_pb::UserPlaylist) {
       playlist_sync_ids_.remove(task_id);
     }
   }

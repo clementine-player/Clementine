@@ -116,7 +116,9 @@ if(${CMAKE_BUILD_TYPE} MATCHES "Release")
 endif(${CMAKE_BUILD_TYPE} MATCHES "Release")
 
 # Use protobuf-lite if it's available
+set(USE_PROTOBUF_LITE ON CACHE BOOL "Use protobuf-lite instead of protobuf if available")
 find_library(PROTOBUF_LITE_LIBRARY protobuf-lite)
+
 if(NOT PROTOBUF_LITE_LIBRARY)
   # Lucid doesn't have a .so symlink
   find_file(PROTOBUF_LITE_LIBRARY
