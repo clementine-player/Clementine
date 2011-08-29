@@ -134,6 +134,8 @@ void SpotifyServer::HandleMessage(const spotify_pb::SpotifyMessage& message) {
     }
   } else if (message.has_sync_playlist_progress()) {
     emit SyncPlaylistProgress(message.sync_playlist_progress());
+  } else if (message.has_browse_album_response()) {
+    emit AlbumBrowseResults(message.browse_album_response());
   }
 }
 
@@ -212,5 +214,13 @@ void SpotifyServer::LoadImage(const QString& id) {
   spotify_pb::ImageRequest* req = message.mutable_image_request();
 
   req->set_id(DataCommaSizeFromQString(id));
+  SendMessage(message);
+}
+
+void SpotifyServer::AlbumBrowse(const QString& uri) {
+  spotify_pb::SpotifyMessage message;
+  spotify_pb::BrowseAlbumRequest* req = message.mutable_browse_album_request();
+
+  req->set_uri(DataCommaSizeFromQString(uri));
   SendMessage(message);
 }

@@ -20,6 +20,8 @@
 #include "internet/internetmodel.h"
 #include "internet/spotifyserver.h"
 #include "internet/spotifyservice.h"
+#include "playlist/songmimedata.h"
+#include "spotifyblob/common/spotifymessagehandler.h"
 
 SpotifySearchProvider::SpotifySearchProvider(QObject* parent)
   : SearchProvider(parent),
@@ -44,6 +46,8 @@ SpotifyServer* SpotifySearchProvider::server() {
           SLOT(SearchFinishedSlot(spotify_pb::SearchResponse)));
   connect(server_, SIGNAL(ImageLoaded(QString,QImage)),
           SLOT(ArtLoadedSlot(QString,QImage)));
+  connect(server_, SIGNAL(AlbumBrowseResults(spotify_pb::BrowseAlbumResponse)),
+          SLOT(AlbumBrowseResponse(spotify_pb::BrowseAlbumResponse)));
   connect(server_, SIGNAL(destroyed()), SLOT(ServerDestroyed()));
 
   return service_->server();
@@ -134,7 +138,48 @@ void SpotifySearchProvider::ArtLoadedSlot(const QString& id, const QImage& image
 }
 
 void SpotifySearchProvider::LoadTracksAsync(int id, const Result& result) {
-  emit TracksLoaded(id, NULL);
+  switch (result.type_) {
+  case Result::Type_Track: {
+    SongMimeData* mime_data = new SongMimeData;
+    mime_data->songs = SongList() << result.metadata_;
+    emit TracksLoaded(id, mime_data);
+    break;
+  }
+
+  case Result::Type_Album: {
+    SpotifyServer* s = server();
+    if (!s) {
+      emit TracksLoaded(id, NULL);
+      return;
+    }
+
+    QString uri = result.metadata_.url().toString();
+
+    pending_tracks_[uri] = id;
+    s->AlbumBrowse(uri);
+    break;
+  }
+  }
+}
+
+void SpotifySearchProvider::AlbumBrowseResponse(const spotify_pb::BrowseAlbumResponse& response) {
+  QString uri = QStringFromStdString(response.uri());
+  QMap<QString, int>::iterator it = pending_tracks_.find(uri);
+  if (it == pending_tracks_.end())
+    return;
+
+  const int orig_id = it.value();
+  pending_tracks_.erase(it);
+
+  SongMimeData* mime_data = new SongMimeData;
+
+  for (int i=0 ; i<response.track_size() ; ++i) {
+    Song song;
+    SpotifyService::SongFromProtobuf(response.track(i), &song);
+    mime_data->songs << song;
+  }
+
+  emit TracksLoaded(orig_id, mime_data);
 }
 
 

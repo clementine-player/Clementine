@@ -224,6 +224,8 @@ void SpotifyClient::HandleMessage(const spotify_pb::SpotifyMessage& message) {
     LoadImage(QStringFromStdString(message.image_request().id()));
   } else if (message.has_sync_playlist_request()) {
     SyncPlaylist(message.sync_playlist_request());
+  } else if (message.has_browse_album_request()) {
+    BrowseAlbum(QStringFromStdString(message.browse_album_request().uri()));
   }
 }
 
@@ -855,4 +857,46 @@ void SpotifyClient::TryImageAgain(sp_image* image) {
 void SpotifyClient::ImageLoaded(sp_image* image, void* userdata) {
   SpotifyClient* me = reinterpret_cast<SpotifyClient*>(userdata);
   me->TryImageAgain(image);
+}
+
+void SpotifyClient::BrowseAlbum(const QString& uri) {
+  // Get a link object from the URI
+  sp_link* link = sp_link_create_from_string(uri.toStdString().c_str());
+  if (!link) {
+    SendPlaybackError("Invalid Album URI");
+    return;
+  }
+
+  // Get the track from the link
+  sp_album* album = sp_link_as_album(link);
+  if (!album) {
+    SendPlaybackError("Spotify URI was not an album");
+    sp_link_release(link);
+    return;
+  }
+
+  sp_albumbrowse* browse =
+      sp_albumbrowse_create(session_, album, &AlbumBrowseComplete, this);
+  pending_album_browses_[browse] = uri;
+}
+
+void SpotifyClient::AlbumBrowseComplete(sp_albumbrowse* result, void* userdata) {
+  SpotifyClient* me = reinterpret_cast<SpotifyClient*>(userdata);
+
+  if (!me->pending_album_browses_.contains(result))
+    return;
+
+  QString uri = me->pending_album_browses_.take(result);
+
+  spotify_pb::SpotifyMessage message;
+  spotify_pb::BrowseAlbumResponse* msg = message.mutable_browse_album_response();
+
+  msg->set_uri(DataCommaSizeFromQString(uri));
+
+  const int count = sp_albumbrowse_num_tracks(result);
+  for (int i=0 ; i<count ; ++i) {
+    me->ConvertTrack(sp_albumbrowse_track(result, i), msg->add_track());
+  }
+
+  me->handler_->SendMessage(message);
 }

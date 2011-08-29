@@ -40,6 +40,8 @@ private slots:
   void SearchFinishedSlot(const spotify_pb::SearchResponse& response);
   void ArtLoadedSlot(const QString& id, const QImage& image);
 
+  void AlbumBrowseResponse(const spotify_pb::BrowseAlbumResponse& response);
+
 private:
   struct PendingState {
     int orig_id_;
@@ -54,6 +56,7 @@ private:
 
   QMap<QString, PendingState> queries_;
   QMap<QString, int> pending_art_;
+  QMap<QString, int> pending_tracks_;
 };
 
 #endif // SPOTIFYSEARCHPROVIDER_H

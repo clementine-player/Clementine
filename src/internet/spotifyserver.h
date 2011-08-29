@@ -46,6 +46,7 @@ public:
   void StartPlayback(const QString& uri, quint16 port);
   void Search(const QString& text, int limit, int limit_album = 0);
   void LoadImage(const QString& id);
+  void AlbumBrowse(const QString& uri);
 
   int server_port() const;
 
@@ -61,6 +62,7 @@ signals:
   void SearchResults(const spotify_pb::SearchResponse& response);
   void ImageLoaded(const QString& id, const QImage& image);
   void SyncPlaylistProgress(const spotify_pb::SyncPlaylistProgress& progress);
+  void AlbumBrowseResults(const spotify_pb::BrowseAlbumResponse& response);
 
 private slots:
   void NewConnection();

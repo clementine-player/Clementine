@@ -92,6 +92,9 @@ private:
   // Spotify image callbacks.
   static void SP_CALLCONV ImageLoaded(sp_image* image, void* userdata);
 
+  // Spotify album browse callbacks.
+  static void SP_CALLCONV AlbumBrowseComplete(sp_albumbrowse* result, void* userdata);
+
   // Request handlers.
   void Login(const QString& username, const QString& password);
   void Search(const spotify_pb::SearchRequest& req);
@@ -99,6 +102,7 @@ private:
   void SyncPlaylist(const spotify_pb::SyncPlaylistRequest& req);
   void StartPlayback(const spotify_pb::PlaybackRequest& req);
   void LoadImage(const QString& id_b64);
+  void BrowseAlbum(const QString& uri);
 
   void SendPlaylistList();
 
@@ -158,6 +162,7 @@ private:
   QList<PendingImageRequest> pending_image_requests_;
   QMap<sp_image*, int> image_callbacks_registered_;
   QMap<sp_search*, spotify_pb::SearchRequest> pending_searches_;
+  QMap<sp_albumbrowse*, QString> pending_album_browses_;
 
   int media_length_msec_;
 };

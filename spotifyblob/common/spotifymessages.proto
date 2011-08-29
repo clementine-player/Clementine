@@ -128,6 +128,15 @@ message ImageResponse {
   optional bytes data = 2;
 }
 
+message BrowseAlbumRequest {
+  required string uri = 1;
+}
+
+message BrowseAlbumResponse {
+  required string uri = 1;
+  repeated Track track = 2;
+}
+
 message SpotifyMessage {
   optional LoginRequest login_request = 1;
   optional LoginResponse login_response = 2;
@@ -142,4 +151,6 @@ message SpotifyMessage {
   optional ImageResponse image_response = 11;
   optional SyncPlaylistRequest sync_playlist_request = 12;
   optional SyncPlaylistProgress sync_playlist_progress = 13;
+  optional BrowseAlbumRequest browse_album_request = 14;
+  optional BrowseAlbumResponse browse_album_response = 15;
 }
