@@ -101,8 +101,7 @@ void SpotifySearchProvider::LoadArtAsync(int id, const Result& result) {
     return;
   }
 
-  QString image_id = result.metadata_.url().path();
-  qLog(Debug) << __PRETTY_FUNCTION__ << image_id;
+  QString image_id = QUrl(result.metadata_.art_automatic()).path();
   if (image_id.startsWith('/'))
     image_id.remove(0, 1);
 

@@ -803,10 +803,10 @@ void SpotifyClient::TryImageAgain(sp_image* image) {
 
   // Free stuff
   image_callbacks_registered_[image] --;
-  if (!image_callbacks_registered_[image]) {
-    sp_image_remove_load_callback(image, &ImageLoaded, this);
-    image_callbacks_registered_.remove(image);
-  }
+
+  // TODO: memory leak?
+  // sp_image_remove_load_callback(image, &ImageLoaded, this);
+  image_callbacks_registered_.remove(image);
 
   sp_image_release(image);
   pending_image_requests_.removeAt(index);
