@@ -126,6 +126,8 @@ set(SOURCES
   internet/digitallyimportedservicebase.cpp
   internet/digitallyimportedsettingspage.cpp
   internet/digitallyimportedurlhandler.cpp
+  internet/groovesharksearchplaylisttype.cpp
+  internet/groovesharkservice.cpp
   internet/icecastbackend.cpp
   internet/icecastfilterwidget.cpp
   internet/icecastmodel.cpp
@@ -361,6 +363,8 @@ set(HEADERS
 
   internet/digitallyimportedservicebase.h
   internet/digitallyimportedsettingspage.h
+  internet/groovesharksearchplaylisttype.h
+  internet/groovesharkservice.h
   internet/icecastbackend.h
   internet/icecastfilterwidget.h
   internet/icecastmodel.h
@@ -1007,6 +1011,7 @@ target_link_libraries(clementine_lib
   chardet
   echoprint
   sha2
+  qjson
   ${ECHONEST_LIBRARIES}
   ${GOBJECT_LIBRARIES}
   ${GLIB_LIBRARIES}
@@ -1068,7 +1073,6 @@ if(HAVE_REMOTE)
   link_directories(${GLOOX_LIBRARY_DIRS})
   target_link_libraries(clementine_lib xrme)
   target_link_libraries(clementine_lib portfwd)
-  target_link_libraries(clementine_lib qjson)
   target_link_libraries(clementine_lib ${PJSIP_LIBRARIES})
   link_directories(${PJSIP_LIBRARY_DIRS})
 endif(HAVE_REMOTE)
