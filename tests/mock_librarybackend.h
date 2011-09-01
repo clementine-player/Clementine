@@ -24,6 +24,8 @@
 
 class MockLibraryBackend : public LibraryBackendInterface {
  public:
+  MOCK_CONST_METHOD0(songs_table, QString());
+
   // Get a list of directories in the library.  Emits DirectoriesDiscovered.
   MOCK_METHOD0(LoadDirectoriesAsync, void());
 
