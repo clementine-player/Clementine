@@ -302,7 +302,7 @@ void OpenInFileBrowser(const QStringList& filenames) {
   }
 }
 
-QByteArray HmacSha256(const QByteArray& key, const QByteArray& data) {
+QByteArray Hmac(const QByteArray& key, const QByteArray& data, HashFunction method) {
   const int kBlockSize = 64; // bytes
   Q_ASSERT(key.length() <= kBlockSize);
 
@@ -313,8 +313,22 @@ QByteArray HmacSha256(const QByteArray& key, const QByteArray& data) {
     inner_padding[i] = inner_padding[i] ^ key[i];
     outer_padding[i] = outer_padding[i] ^ key[i];
   }
+  if (Md5_Algo == method) {
+    return QCryptographicHash::hash(outer_padding +
+                                    QCryptographicHash::hash(inner_padding + data,
+                                                             QCryptographicHash::Md5),
+                                    QCryptographicHash::Md5);
+  } else { // Sha256_Algo, currently default
+    return Sha256(outer_padding + Sha256(inner_padding + data));
+  }
+}
 
-  return Sha256(outer_padding + Sha256(inner_padding + data));
+QByteArray HmacSha256(const QByteArray& key, const QByteArray& data) {
+  return Hmac(key, data, Sha256_Algo);
+}
+
+QByteArray HmacMd5(const QByteArray& key, const QByteArray& data) {
+  return Hmac(key, data, Md5_Algo);
 }
 
 QByteArray Sha256(const QByteArray& data) {
