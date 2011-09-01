@@ -2244,11 +2244,13 @@ void MainWindow::HandleNotificationPreview(OSD::Behaviour type, QString line1, Q
 }
 
 void MainWindow::ShowGlobalSearch() {
-  GlobalSearchPopup* popup = new GlobalSearchPopup;
-  popup->Init(library_->backend(), player_);
-  StyleSheetLoader* css_loader = new StyleSheetLoader(popup);
-  css_loader->SetStyleSheet(popup, ":mainwindow.css");
-  connect(popup, SIGNAL(AddToPlaylist(QMimeData*)), SLOT(AddToPlaylist(QMimeData*)));
-  popup->show();
-  popup->setFocus();
+  if (!search_popup_) {
+    search_popup_.reset(new GlobalSearchPopup);
+    search_popup_->Init(library_->backend(), player_);
+    StyleSheetLoader* css_loader = new StyleSheetLoader(search_popup_.get());
+    css_loader->SetStyleSheet(search_popup_.get(), ":mainwindow.css");
+    connect(search_popup_.get(), SIGNAL(AddToPlaylist(QMimeData*)), SLOT(AddToPlaylist(QMimeData*)));
+  }
+  search_popup_->show();
+  search_popup_->setFocus();
 }
