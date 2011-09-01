@@ -76,7 +76,8 @@ QString About::MakeHtml() const {
   ret += QString("<br />%1</p>").arg(tr("...and all the Amarok contributors"));
   ret += QString("<p><b>%1</b>").arg(tr("And:"));
   ret += QString("<br /><a href=\"http://rainymood.com\">Rainy Mood</a>");
-  ret += QString("<br /><a href=\"http://www.smitelli.com/?page=blog&p=54\">Scott Smitelli</a></p>");
+  ret += QString("<br /><a href=\"http://www.smitelli.com/?page=blog&p=54\">Scott Smitelli</a>");
+  ret += QString("<br /><a href=\"http://hyperboleandahalf.blogspot.com\">Allie Brosh</a></p>");
 
 #ifdef HAVE_SPOTIFY
   ret += "<p>This product uses SPOTIFY(R) CORE but is not endorsed, certified "

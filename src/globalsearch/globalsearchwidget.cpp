@@ -318,6 +318,10 @@ bool GlobalSearchWidget::eventFilter(QObject* o, QEvent* e) {
   return false;
 }
 
+void GlobalSearchWidget::setFocus(Qt::FocusReason reason) {
+  ui_->search->setFocus(reason);
+}
+
 void GlobalSearchWidget::LazyLoadArt(const QModelIndex& proxy_index) {
   if (!proxy_index.isValid() || proxy_index.data(Role_LazyLoadingArt).isValid()) {
     return;
@@ -351,6 +355,7 @@ void GlobalSearchWidget::AddCurrent() {
     return;
 
   engine_->LoadTracksAsync(index.data(Role_Result).value<SearchProvider::Result>());
+  static_cast<LineEditInterface*>(ui_->search)->clear();
 }
 
 void GlobalSearchWidget::TracksLoaded(int id, MimeData* mime_data) {

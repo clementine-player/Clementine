@@ -1,6 +1,8 @@
 #ifndef MAC_STARTUP_H
 #define MAC_STARTUP_H
 
+#include <QKeySequence>
+
 class MacGlobalShortcutBackend;
 class QObject;
 

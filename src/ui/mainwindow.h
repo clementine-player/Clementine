@@ -46,6 +46,7 @@ class EditTagDialog;
 class Equalizer;
 class ErrorDialog;
 class FileView;
+class GlobalSearchPopup;
 class GlobalShortcuts;
 class GroupByDialog;
 class Library;
@@ -234,6 +235,7 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   void OpenSettingsDialog();
   void OpenSettingsDialogAtPage(SettingsDialog::Page page);
   void ShowSongInfoConfig();
+  void ShowGlobalSearch();
 
   void SaveGeometry();
 
@@ -299,6 +301,8 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   boost::scoped_ptr<TagFetcher> tag_fetcher_;
   boost::scoped_ptr<TrackSelectionDialog> track_selection_dialog_;
   PlaylistItemList autocomplete_tag_items_;
+
+  boost::scoped_ptr<GlobalSearchPopup> search_popup_;
 
 #ifdef ENABLE_VISUALISATIONS
   boost::scoped_ptr<VisualisationContainer> visualisation_;
