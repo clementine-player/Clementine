@@ -40,6 +40,7 @@
 #include "devices/deviceview.h"
 #include "engines/enginebase.h"
 #include "engines/gstengine.h"
+#include "globalsearch/globalsearchpopup.h"
 #include "internet/magnatuneservice.h"
 #include "internet/internetmodel.h"
 #include "internet/internetview.h"
@@ -619,6 +620,7 @@ MainWindow::MainWindow(
   connect(global_shortcuts_, SIGNAL(ShowHide()), SLOT(ToggleShowHide()));
   connect(global_shortcuts_, SIGNAL(ShowOSD()), player_, SLOT(ShowOSD()));
   connect(global_shortcuts_, SIGNAL(TogglePrettyOSD()), player_, SLOT(TogglePrettyOSD()));
+  connect(global_shortcuts_, SIGNAL(ShowGlobalSearch()), SLOT(ShowGlobalSearch()));
 #ifdef HAVE_LIBLASTFM
   connect(global_shortcuts_, SIGNAL(ToggleScrobbling()), internet_model->InternetModel::Service<LastFMService>(), SLOT(ToggleScrobbling()));
 #endif
@@ -2239,4 +2241,9 @@ void MainWindow::HandleNotificationPreview(OSD::Behaviour type, QString line1, Q
 
     osd_->ShowPreview(type, line1, line2, fake);
   }
+}
+
+void MainWindow::ShowGlobalSearch() {
+  GlobalSearchPopup* popup = new GlobalSearchPopup;
+  popup->show();
 }
