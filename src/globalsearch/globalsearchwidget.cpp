@@ -355,6 +355,7 @@ void GlobalSearchWidget::AddCurrent() {
     return;
 
   engine_->LoadTracksAsync(index.data(Role_Result).value<SearchProvider::Result>());
+  static_cast<LineEditInterface*>(ui_->search)->clear();
 }
 
 void GlobalSearchWidget::TracksLoaded(int id, MimeData* mime_data) {
