@@ -25,6 +25,7 @@
 #include "savedradio.h"
 #include "skyfmservice.h"
 #include "somafmservice.h"
+#include "groovesharkservice.h"
 #include "core/logging.h"
 #include "core/mergedproxymodel.h"
 
@@ -70,6 +71,7 @@ InternetModel::InternetModel(BackgroundThread<Database>* db_thread,
 #ifdef HAVE_SPOTIFY
   AddService(new SpotifyService(this));
 #endif
+  AddService(new GrooveSharkService(this));
 }
 
 void InternetModel::AddService(InternetService *service) {
