@@ -56,6 +56,20 @@ void GlobalShortcutGrabber::hideEvent(QHideEvent* e) {
   QDialog::hideEvent(e);
 }
 
+void GlobalShortcutGrabber::grabKeyboard() {
+#ifdef Q_OS_DARWIN
+  SetupMacEventHandler();
+#endif
+  QDialog::grabKeyboard();
+}
+
+void GlobalShortcutGrabber::releaseKeyboard() {
+#ifdef Q_OS_DARWIN
+  TeardownMacEventHandler();
+#endif
+  QDialog::releaseKeyboard();
+}
+
 bool GlobalShortcutGrabber::event(QEvent* e) {
   if (e->type() == QEvent::ShortcutOverride) {
     QKeyEvent* ke = static_cast<QKeyEvent*>(e);
@@ -65,13 +79,17 @@ bool GlobalShortcutGrabber::event(QEvent* e) {
     else
       ret_ = QKeySequence(ke->modifiers() | ke->key());
 
-    ui_->combo->setText("<b>" + ret_.toString(QKeySequence::NativeText) + "</b>");
+    UpdateText();
 
     if (!modifier_keys_.contains(ke->key()))
       accept();
     return true;
   }
   return QDialog::event(e);
+}
+
+void GlobalShortcutGrabber::UpdateText() {
+  ui_->combo->setText("<b>" + ret_.toString(QKeySequence::NativeText) + "</b>");
 }
 
 

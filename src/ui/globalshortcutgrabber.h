@@ -20,6 +20,8 @@
 
 #include <QDialog>
 
+class MacMonitorWrapper;
+class NSEvent;
 class Ui_GlobalShortcutGrabber;
 
 class GlobalShortcutGrabber : public QDialog {
@@ -35,12 +37,21 @@ class GlobalShortcutGrabber : public QDialog {
   bool event(QEvent *);
   void showEvent(QShowEvent *);
   void hideEvent(QHideEvent *);
+  void grabKeyboard();
+  void releaseKeyboard();
 
  private:
+  void UpdateText();
+  void SetupMacEventHandler();
+  void TeardownMacEventHandler();
+  bool HandleMacEvent(NSEvent*);
+
   Ui_GlobalShortcutGrabber* ui_;
   QKeySequence ret_;
 
   QList<int> modifier_keys_;
+
+  MacMonitorWrapper* wrapper_;
 };
 
 #endif // GLOBALSHORTCUTGRABBER_H
