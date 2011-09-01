@@ -2,6 +2,7 @@
 
 #include <QShortcut>
 
+#include "core/player.h"
 #include "ui/iconloader.h"
 
 GlobalSearchPopup::GlobalSearchPopup(QWidget* parent)
@@ -21,12 +22,17 @@ GlobalSearchPopup::GlobalSearchPopup(QWidget* parent)
   connect(shortcut, SIGNAL(activated()), SLOT(close()));
 }
 
-void GlobalSearchPopup::Init(LibraryBackendInterface* library) {
+void GlobalSearchPopup::Init(LibraryBackendInterface* library, Player* player) {
   ui_->search_widget->Init(library);
 
   // Forward AddToPlaylist signal.
   connect(ui_->search_widget, SIGNAL(AddToPlaylist(QMimeData*)),
       SIGNAL(AddToPlaylist(QMimeData*)));
+
+  connect(ui_->previous, SIGNAL(clicked(bool)), player, SLOT(Previous()));
+  connect(ui_->next, SIGNAL(clicked(bool)), player, SLOT(Next()));
+  connect(ui_->play_pause, SIGNAL(clicked(bool)), player, SLOT(PlayPause()));
+  connect(ui_->stop, SIGNAL(clicked(bool)), player, SLOT(Stop()));
 }
 
 void GlobalSearchPopup::setFocus(Qt::FocusReason reason) {

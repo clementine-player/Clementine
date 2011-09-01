@@ -8,13 +8,14 @@
 #include "ui_globalsearchpopup.h"
 
 class LibraryBackendInterface;
+class Player;
 
 class GlobalSearchPopup : public QDialog {
   Q_OBJECT
  public:
   explicit GlobalSearchPopup(QWidget* parent = 0);
 
-  void Init(LibraryBackendInterface* library);
+  void Init(LibraryBackendInterface* library, Player* player);
 
   // QWidget
   void setFocus(Qt::FocusReason reason = Qt::PopupFocusReason);
