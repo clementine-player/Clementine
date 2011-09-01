@@ -7,10 +7,17 @@
 
 #include "ui_globalsearchpopup.h"
 
+class LibraryBackendInterface;
+
 class GlobalSearchPopup : public QDialog {
   Q_OBJECT
  public:
   explicit GlobalSearchPopup(QWidget* parent = 0);
+
+  void Init(LibraryBackendInterface* library);
+
+ signals:
+  void AddToPlaylist(QMimeData*);
 
  private:
   boost::scoped_ptr<Ui_GlobalSearchPopup> ui_;

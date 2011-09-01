@@ -2245,5 +2245,9 @@ void MainWindow::HandleNotificationPreview(OSD::Behaviour type, QString line1, Q
 
 void MainWindow::ShowGlobalSearch() {
   GlobalSearchPopup* popup = new GlobalSearchPopup;
+  popup->Init(library_->backend());
+  StyleSheetLoader* css_loader = new StyleSheetLoader(popup);
+  css_loader->SetStyleSheet(popup, ":mainwindow.css");
+  connect(popup, SIGNAL(AddToPlaylist(QMimeData*)), SLOT(AddToPlaylist(QMimeData*)));
   popup->show();
 }
