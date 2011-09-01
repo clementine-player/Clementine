@@ -55,6 +55,7 @@ public:
 
   // QWidget
   bool eventFilter(QObject* o, QEvent* e);
+  void setFocus(Qt::FocusReason reason);
 
 signals:
   void AddToPlaylist(QMimeData* data);

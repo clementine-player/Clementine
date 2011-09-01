@@ -16,6 +16,9 @@ class GlobalSearchPopup : public QDialog {
 
   void Init(LibraryBackendInterface* library);
 
+  // QWidget
+  void setFocus(Qt::FocusReason reason = Qt::PopupFocusReason);
+
  signals:
   void AddToPlaylist(QMimeData*);
 

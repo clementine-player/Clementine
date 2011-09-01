@@ -318,6 +318,10 @@ bool GlobalSearchWidget::eventFilter(QObject* o, QEvent* e) {
   return false;
 }
 
+void GlobalSearchWidget::setFocus(Qt::FocusReason reason) {
+  ui_->search->setFocus(reason);
+}
+
 void GlobalSearchWidget::LazyLoadArt(const QModelIndex& proxy_index) {
   if (!proxy_index.isValid() || proxy_index.data(Role_LazyLoadingArt).isValid()) {
     return;

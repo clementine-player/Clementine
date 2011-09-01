@@ -2250,4 +2250,5 @@ void MainWindow::ShowGlobalSearch() {
   css_loader->SetStyleSheet(popup, ":mainwindow.css");
   connect(popup, SIGNAL(AddToPlaylist(QMimeData*)), SLOT(AddToPlaylist(QMimeData*)));
   popup->show();
+  popup->setFocus();
 }
