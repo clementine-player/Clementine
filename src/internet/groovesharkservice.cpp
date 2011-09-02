@@ -64,7 +64,6 @@ GrooveSharkService::GrooveSharkService(InternetModel *parent)
     search_(NULL),
     network_(new NetworkAccessManager(this)),
     context_menu_(NULL),
-    session_id_(NULL),
     api_key_(QByteArray::fromBase64(kApiSecret)) {
 
   model()->player()->playlists()->RegisterSpecialPlaylistType(new GrooveSharkSearchPlaylistType(this));
