@@ -31,6 +31,7 @@
 #include "engines/enginebase.h"
 #include "engines/gstengine.h"
 #include "internet/digitallyimportedsettingspage.h"
+#include "internet/groovesharksettingspage.h"
 #include "internet/magnatunesettingspage.h"
 #include "library/librarysettingspage.h"
 #include "playlist/playlistview.h"
@@ -83,6 +84,8 @@ SettingsDialog::SettingsDialog(BackgroundStreams* streams, QWidget* parent)
 #ifdef HAVE_LIBLASTFM
   AddPage(Page_Lastfm, new LastFMSettingsPage(this));
 #endif
+
+  AddPage(Page_GrooveShark, new GrooveSharkSettingsPage(this));
 
 #ifdef HAVE_SPOTIFY
   AddPage(Page_Spotify, new SpotifySettingsPage(this));

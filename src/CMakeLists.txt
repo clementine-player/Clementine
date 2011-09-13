@@ -129,6 +129,7 @@ set(SOURCES
   internet/digitallyimportedurlhandler.cpp
   internet/groovesharksearchplaylisttype.cpp
   internet/groovesharkservice.cpp
+  internet/groovesharksettingspage.cpp
   internet/icecastbackend.cpp
   internet/icecastfilterwidget.cpp
   internet/icecastmodel.cpp
@@ -367,6 +368,7 @@ set(HEADERS
   internet/digitallyimportedsettingspage.h
   internet/groovesharksearchplaylisttype.h
   internet/groovesharkservice.h
+  internet/groovesharksettingspage.h
   internet/icecastbackend.h
   internet/icecastfilterwidget.h
   internet/icecastmodel.h
@@ -530,6 +532,7 @@ set(UI
   globalsearch/globalsearchwidget.ui
 
   internet/digitallyimportedsettingspage.ui
+  internet/groovesharksettingspage.ui
   internet/icecastfilterwidget.ui
   internet/internetviewcontainer.ui
   internet/magnatunedownloaddialog.ui

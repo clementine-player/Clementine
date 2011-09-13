@@ -17,6 +17,7 @@
 
 
 #include <QMenu>
+#include <QMessageBox>
 #include <QNetworkReply>
 #include <QNetworkRequest>
 
@@ -51,6 +52,7 @@ const char* GrooveSharkService::kApiKey = "clementineplayer";
 const char* GrooveSharkService::kApiSecret = "MWVlNmU1N2IzNGY3MjA1ZTg1OWJkMTllNjk4YzEzZjY";
 
 const char* GrooveSharkService::kServiceName = "GrooveShark";
+const char* GrooveSharkService::kSettingsGroup = "GrooveShark";
 const char* GrooveSharkService::kUrl = "http://api.grooveshark.com/ws/3.0/";
 
 const int GrooveSharkService::kSongSearchLimit = 50;
@@ -64,9 +66,17 @@ GrooveSharkService::GrooveSharkService(InternetModel *parent)
     search_(NULL),
     network_(new NetworkAccessManager(this)),
     context_menu_(NULL),
-    api_key_(QByteArray::fromBase64(kApiSecret)) {
+    api_key_(QByteArray::fromBase64(kApiSecret)),
+    login_state_(LoginState_OtherError) {
 
   model()->player()->playlists()->RegisterSpecialPlaylistType(new GrooveSharkSearchPlaylistType(this));
+
+  // Get already existing (authenticated) session id, if any
+  QSettings s;
+  s.beginGroup(GrooveSharkService::kSettingsGroup);
+  session_id_ = s.value("sessionid").toString();
+  username_ = s.value("username").toString();
+
 }
 
 
@@ -89,6 +99,9 @@ QStandardItem* GrooveSharkService::CreateRootItem() {
 }
 
 void GrooveSharkService::LazyPopulate(QStandardItem* item) {
+  if (session_id_.isEmpty()) {
+    emit OpenSettingsAtPage(SettingsDialog::Page_GrooveShark);
+  }
   switch (item->data(InternetModel::Role_Type).toInt()) {
     case InternetModel::Type_Service: {
       EnsureConnected();
@@ -113,18 +126,6 @@ void GrooveSharkService::Search(const QString& text, Playlist* playlist, bool no
   connect(reply, SIGNAL(finished()), SLOT(SearchSongsFinished()));
 }
 
-void GrooveSharkService::ShowContextMenu(const QModelIndex& index, const QPoint& global_pos) {
-  EnsureMenuCreated();
-  context_menu_->popup(global_pos);
-}
-
-QModelIndex GrooveSharkService::GetCurrentIndex() {
-  return context_item_;
-}
-
-void GrooveSharkService::UpdateTotalSongCount(int count) {
-}
-
 void GrooveSharkService::SearchSongsFinished() {
   QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
   if (!reply)
@@ -132,14 +133,8 @@ void GrooveSharkService::SearchSongsFinished() {
 
   reply->deleteLater();
 
-  QJson::Parser parser;
-  bool ok;
-  QVariantMap result = parser.parse(reply, &ok).toMap();
-  if (!ok) {
-    qLog(Error) << "Error while parsing GrooveShark result";
-  }
-  qLog(Debug) << result;
-  QVariantList result_songs = result["result"].toMap()["songs"].toList();
+  QVariantMap result = ExtractResult(reply);
+  QVariantList result_songs = result["songs"].toList();
   SongList songs;
   for (int i=0; i<result_songs.size(); ++i) {
     QVariantMap result_song = result_songs[i].toMap();
@@ -159,6 +154,102 @@ void GrooveSharkService::SearchSongsFinished() {
   }
   pending_search_playlist_->Clear();
   pending_search_playlist_->InsertSongs(songs);
+}
+
+void GrooveSharkService::Login(const QString& username, const QString& password) {
+  // To login, we first need to create a session. Next, we will authenticate
+  // this session using the user's username and password (for now, we just keep
+  // them in mind)
+  username_ = username;
+  password_ = QCryptographicHash::hash(password.toLocal8Bit(), QCryptographicHash::Md5).toHex();
+
+  QList<Param> parameters;
+  QNetworkReply *reply;
+
+  reply = CreateRequest("startSession", parameters, false, true);
+
+  connect(reply, SIGNAL(finished()), SLOT(SessionCreated()));
+}
+
+void GrooveSharkService::SessionCreated() {
+  QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
+  if (!reply)
+    return;
+
+  reply->deleteLater();
+
+  QVariantMap result = ExtractResult(reply);
+  if (!result["success"].toBool()) {
+    qLog(Error) << "GrooveShark returned an error during session creation";
+  }
+  session_id_ = result["sessionID"].toString();
+  qLog(Debug) << "Session ID returned: " << session_id_;
+
+  AuthenticateSession();
+}
+
+void GrooveSharkService::AuthenticateSession() {
+  QList<Param> parameters;
+  QNetworkReply *reply;
+
+  parameters  << Param("login", username_)
+              << Param("password", password_);
+
+  reply = CreateRequest("authenticate", parameters, true, true);
+
+  connect(reply, SIGNAL(finished()), SLOT(Authenticated()));
+}
+
+void GrooveSharkService::Authenticated() {
+  QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
+  if (!reply)
+    return;
+
+  reply->deleteLater();
+
+  QVariantMap result = ExtractResult(reply);
+  // Check if the user has been authenticated correctly
+  if (!result["success"].toBool()) {
+    QString error;
+    if (result["UserID"].toInt() == 0) {
+      error = tr("Invalid username and/or password");
+      login_state_ = LoginState_AuthFailed;
+    } else if(!result["IsAnywhere"].toBool() || !result["IsPremium"].toBool()) {
+      error = tr("It seems user %1 doesn't have a GrooveShark Anywhere account").arg(username_);
+      login_state_ = LoginState_NoPremium;
+    }
+    QMessageBox::warning(NULL, tr("GrooveShark login error"), error, QMessageBox::Close);
+    ResetSessionId();
+    emit LoginFinished(false);
+    return;
+  }
+  login_state_ = LoginState_LoggedIn;
+  user_id_ = result["UserID"].toString();
+  emit LoginFinished(true);
+}
+
+void GrooveSharkService::Logout() {
+  ResetSessionId();
+}
+
+void GrooveSharkService::ResetSessionId() {
+  QSettings s;
+  s.beginGroup(GrooveSharkService::kSettingsGroup);
+
+  session_id_.clear();
+  s.setValue("sessionid", session_id_);
+}
+
+void GrooveSharkService::ShowContextMenu(const QModelIndex& index, const QPoint& global_pos) {
+  EnsureMenuCreated();
+  context_menu_->popup(global_pos);
+}
+
+QModelIndex GrooveSharkService::GetCurrentIndex() {
+  return context_item_;
+}
+
+void GrooveSharkService::UpdateTotalSongCount(int count) {
 }
 
 void GrooveSharkService::EnsureMenuCreated() {
@@ -186,15 +277,23 @@ void GrooveSharkService::ItemDoubleClicked(QStandardItem* item) {
   }
 }
 
-QNetworkReply *GrooveSharkService::CreateRequest(const QString& method_name, QList<Param> params,
-                                       bool need_authentication) {
+QNetworkReply* GrooveSharkService::CreateRequest(const QString& method_name, QList<Param> params,
+                                       bool need_authentication,
+                                       bool use_https) {
   QVariantMap request_params;
 
   request_params.insert("method", method_name);
 
-  QVariantMap wsKey;
-  wsKey.insert("wsKey", kApiKey);
-  request_params.insert("header", wsKey);
+  QVariantMap header;
+  header.insert("wsKey", kApiKey);
+  if (need_authentication) {
+    if (session_id_.isEmpty()) {
+      qLog(Warning) << "Session ID is empty: will not be added to query";
+    } else {
+      header.insert("sessionID", session_id_);
+    }
+  }
+  request_params.insert("header", header);
 
   QVariantMap parameters;
   foreach(const Param& param, params) {
@@ -208,9 +307,23 @@ QNetworkReply *GrooveSharkService::CreateRequest(const QString& method_name, QLi
   qLog(Debug) << post_params;
 
   QUrl url(kUrl);
+  if (use_https) {
+    url.setScheme("https");
+  }
   url.setQueryItems( QList<Param>() << Param("sig", Utilities::HmacMd5(api_key_, post_params).toHex()));
   QNetworkRequest req(url);
   QNetworkReply *reply = network_->post(req, post_params);
 
   return reply;
+}
+
+QVariantMap GrooveSharkService::ExtractResult(QNetworkReply* reply) {
+  QJson::Parser parser;
+  bool ok;
+  QVariantMap result = parser.parse(reply, &ok).toMap();
+  if (!ok) {
+    qLog(Error) << "Error while parsing GrooveShark result";
+  }
+  qLog(Debug) << result;
+  return result["result"].toMap();
 }

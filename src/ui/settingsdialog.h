@@ -49,6 +49,7 @@ public:
     Page_Notifications,
     Page_Library,
     Page_Lastfm,
+    Page_GrooveShark,
     Page_Spotify,
     Page_Magnatune,
     Page_DigitallyImported,
