@@ -57,7 +57,8 @@ const char* CommandlineOptions::kHelpText =
     "      --quiet               %24\n"
     "      --verbose             %25\n"
     "      --log-levels <levels> %26\n"
-    "      --version             %27\n";
+    "      --version             %27\n"
+    "      --search-popup        %28\n";
 
 const char* CommandlineOptions::kVersionText =
     "Clementine %1";
@@ -74,6 +75,7 @@ CommandlineOptions::CommandlineOptions(int argc, char** argv)
     play_track_at_(-1),
     show_osd_(false),
     toggle_pretty_osd_(false),
+    show_search_popup_(false),
     stun_test_(StunTestNone),
     log_levels_(logging::kDefaultLogLevels)
 {
@@ -126,6 +128,7 @@ bool CommandlineOptions::Parse() {
     {"verbose",           no_argument,       0, Verbose},
     {"log-levels",        required_argument, 0, LogLevels},
     {"version",           no_argument,       0, Version},
+    {"search-popup",      no_argument,       0, SearchPopup},
 
     {"stun-test",   required_argument, 0, 'z'},
 
@@ -189,6 +192,7 @@ bool CommandlineOptions::Parse() {
       case Quiet:      log_levels_ = "1";               break;
       case Verbose:    log_levels_ = "3";               break;
       case LogLevels:  log_levels_ = QString(optarg);   break;
+      case SearchPopup: show_search_popup_ = true;      break;
       case Version: {
         QString version_text = QString(kVersionText).arg(CLEMENTINE_VERSION_DISPLAY);
         std::cout << version_text.toLocal8Bit().constData() << std::endl;
@@ -248,6 +252,7 @@ bool CommandlineOptions::is_empty() const {
          play_track_at_ == -1 &&
          show_osd_ == false &&
          toggle_pretty_osd_ == false &&
+         show_search_popup_ == false &&
          urls_.isEmpty();
 }
 
@@ -284,6 +289,7 @@ QDataStream& operator<<(QDataStream& s, const CommandlineOptions& a) {
     << a.seek_by_
     << a.play_track_at_
     << a.show_osd_
+    << a.show_search_popup_
     << a.urls_
     << a.log_levels_
     << a.toggle_pretty_osd_;
@@ -302,6 +308,7 @@ QDataStream& operator>>(QDataStream& s, CommandlineOptions& a) {
     >> a.seek_by_
     >> a.play_track_at_
     >> a.show_osd_
+    >> a.show_search_popup_
     >> a.urls_
     >> a.log_levels_
     >> a.toggle_pretty_osd_;

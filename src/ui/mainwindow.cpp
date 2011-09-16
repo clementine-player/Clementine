@@ -1689,6 +1689,9 @@ void MainWindow::CommandlineOptionsReceived(const CommandlineOptions &options) {
 
   if (options.toggle_pretty_osd())
     player_->TogglePrettyOSD();
+
+  if (options.show_search_popup())
+    ShowGlobalSearch();
 }
 
 void MainWindow::ForceShowOSD(const Song &song, const bool toggle) {
