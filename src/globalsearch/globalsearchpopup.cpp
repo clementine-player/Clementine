@@ -19,24 +19,26 @@
 
 #include <QShortcut>
 
+#include "core/logging.h"
 #include "core/player.h"
 #include "ui/iconloader.h"
 
 GlobalSearchPopup::GlobalSearchPopup(QWidget* parent)
-    : QDialog(parent),
+    : QWidget(parent),
+      mac_psn_(NULL),
       ui_(new Ui_GlobalSearchPopup) {
-  ui_->setupUi(this);
-
-  Qt::WindowFlags flags = Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint | Qt::Popup;
+  Qt::WindowFlags flags = Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint;
   setWindowFlags(flags);
+
+  ui_->setupUi(this);
 
   ui_->previous->setIcon(IconLoader::Load("media-skip-backward"));
   ui_->next->setIcon(IconLoader::Load("media-skip-forward"));
   ui_->play_pause->setIcon(IconLoader::Load("media-playback-start"));
   ui_->stop->setIcon(IconLoader::Load("media-playback-stop"));
 
-  QShortcut* shortcut = new QShortcut(QKeySequence::Close, this);
-  connect(shortcut, SIGNAL(activated()), SLOT(close()));
+  QShortcut* shortcut = new QShortcut(QKeySequence(Qt::Key_Escape), this);
+  connect(shortcut, SIGNAL(activated()), SLOT(hide()));
 }
 
 void GlobalSearchPopup::Init(LibraryBackendInterface* library, Player* player) {
@@ -54,4 +56,19 @@ void GlobalSearchPopup::Init(LibraryBackendInterface* library, Player* player) {
 
 void GlobalSearchPopup::setFocus(Qt::FocusReason reason) {
   ui_->search_widget->setFocus(reason);
+}
+
+void GlobalSearchPopup::showEvent(QShowEvent* e) {
+#ifdef Q_OS_DARWIN
+  StorePreviousProcess();
+#endif
+  QWidget::showEvent(e);
+  raise();
+}
+
+void GlobalSearchPopup::hide() {
+#ifdef Q_OS_DARWIN
+  ActivatePreviousProcess();
+#endif
+  QWidget::hide();
 }

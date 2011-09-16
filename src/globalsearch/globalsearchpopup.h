@@ -26,8 +26,9 @@
 
 class LibraryBackendInterface;
 class Player;
+class ProcessSerialNumber;
 
-class GlobalSearchPopup : public QDialog {
+class GlobalSearchPopup : public QWidget {
   Q_OBJECT
  public:
   explicit GlobalSearchPopup(QWidget* parent = 0);
@@ -37,8 +38,21 @@ class GlobalSearchPopup : public QDialog {
   // QWidget
   void setFocus(Qt::FocusReason reason = Qt::PopupFocusReason);
 
+ protected:
+  void showEvent(QShowEvent* e);
+
+ protected slots:
+  void hide();
+
+ private:
+  void StorePreviousProcess();
+  void ActivatePreviousProcess();
+
+  ProcessSerialNumber* mac_psn_;
+
  signals:
   void AddToPlaylist(QMimeData*);
+  void Closed();
 
  private:
   boost::scoped_ptr<Ui_GlobalSearchPopup> ui_;
