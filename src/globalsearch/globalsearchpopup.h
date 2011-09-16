@@ -48,14 +48,13 @@ class GlobalSearchPopup : public QWidget {
   void StorePreviousProcess();
   void ActivatePreviousProcess();
 
-  ProcessSerialNumber* mac_psn_;
-
  signals:
   void AddToPlaylist(QMimeData*);
   void Closed();
 
  private:
   boost::scoped_ptr<Ui_GlobalSearchPopup> ui_;
+  ProcessSerialNumber* mac_psn_;
 };
 
 #endif  // GLOBALSEARCHPOPUP_H

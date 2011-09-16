@@ -25,8 +25,8 @@
 
 GlobalSearchPopup::GlobalSearchPopup(QWidget* parent)
     : QWidget(parent),
-      mac_psn_(NULL),
-      ui_(new Ui_GlobalSearchPopup) {
+      ui_(new Ui_GlobalSearchPopup),
+      mac_psn_(NULL) {
   Qt::WindowFlags flags = Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint;
   setWindowFlags(flags);
 
