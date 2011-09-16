@@ -474,7 +474,9 @@ void MacDeviceLister::USBDeviceAddedCallback(void* refcon, io_iterator_t it) {
 
       if (device.vendor_id == 0x5ac || // I think we can safely skip Apple products.
           // Blacklist ilok2 as this probe may be breaking it.
-          (device.vendor_id == 0x088e && device.product_id == 0x5036)) {
+          (device.vendor_id == 0x088e && device.product_id == 0x5036) ||
+          // Blacklist eLicenser
+          (device.vendor_id == 0x0819 && device.product_id == 0x0101)) {
         continue;
       }
 
