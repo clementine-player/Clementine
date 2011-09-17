@@ -79,6 +79,9 @@ private:
   void Reset();
   void RepositionPopup();
 
+  bool EventFilterSearchWidget(QObject* o, QEvent* e);
+  bool EventFilterPopup(QObject* o, QEvent* e);
+
 private:
   Ui_GlobalSearchWidget* ui_;
 

@@ -69,6 +69,8 @@ GlobalSearchWidget::GlobalSearchWidget(QWidget* parent)
   view_->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   view_->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
+  ui_->search->installEventFilter(this);
+
   connect(ui_->search, SIGNAL(textEdited(QString)), SLOT(TextEdited(QString)));
   connect(engine_, SIGNAL(ResultsAvailable(int,SearchProvider::ResultList)),
           SLOT(AddResults(int,SearchProvider::ResultList)));
@@ -210,15 +212,37 @@ void GlobalSearchWidget::RepositionPopup() {
 }
 
 bool GlobalSearchWidget::eventFilter(QObject* o, QEvent* e) {
-  // Most of this is borrowed from QCompleter::eventFilter
+  if (o == ui_->search)
+    return EventFilterSearchWidget(o, e);
 
-  if (eat_focus_out_ && o == ui_->search && e->type() == QEvent::FocusOut) {
-    if (view_->isVisible())
+  if (o == view_)
+    return EventFilterPopup(o, e);
+
+  return QWidget::eventFilter(o, e);
+}
+
+bool GlobalSearchWidget::EventFilterSearchWidget(QObject* o, QEvent* e) {
+  switch (e->type()) {
+  case QEvent::FocusOut:
+    if (eat_focus_out_ && view_->isVisible())
       return true;
+    break;
+
+  case QEvent::FocusIn:
+  case QEvent::MouseButtonPress:
+    if (!ui_->search->text().isEmpty())
+      RepositionPopup();
+    break;
+
+  default:
+    break;
   }
 
-  if (o != view_)
-    return QWidget::eventFilter(o, e);
+  return QWidget::eventFilter(o, e);
+}
+
+bool GlobalSearchWidget::EventFilterPopup(QObject*, QEvent* e) {
+  // Most of this is borrowed from QCompleter::eventFilter
 
   switch (e->type()) {
   case QEvent::KeyPress: {
@@ -355,7 +379,6 @@ void GlobalSearchWidget::AddCurrent() {
     return;
 
   engine_->LoadTracksAsync(index.data(Role_Result).value<SearchProvider::Result>());
-  static_cast<LineEditInterface*>(ui_->search)->clear();
 }
 
 void GlobalSearchWidget::TracksLoaded(int id, MimeData* mime_data) {
