@@ -26,9 +26,9 @@ GlobalSearchSortModel::GlobalSearchSortModel(QObject* parent)
 }
 
 bool GlobalSearchSortModel::lessThan(const QModelIndex& left, const QModelIndex& right) const {
-  const SearchProvider::Result r1 = left.data(GlobalSearchWidget::Role_Result)
+  const SearchProvider::Result r1 = left.data(GlobalSearchWidget::Role_PrimaryResult)
       .value<SearchProvider::Result>();
-  const SearchProvider::Result r2 = right.data(GlobalSearchWidget::Role_Result)
+  const SearchProvider::Result r2 = right.data(GlobalSearchWidget::Role_PrimaryResult)
       .value<SearchProvider::Result>();
 
   int ret = 0;

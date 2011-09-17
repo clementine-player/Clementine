@@ -29,9 +29,10 @@ SearchProvider::SearchProvider(QObject* parent)
 {
 }
 
-void SearchProvider::Init(const QString& name, const QIcon& icon,
+void SearchProvider::Init(const QString& name, const QString& id, const QIcon& icon,
                           bool delay_searches, bool serialised_art) {
   name_ = name;
+  id_ = id;
   icon_ = icon;
   delay_searches_ = delay_searches;
   serialised_art_ = serialised_art;

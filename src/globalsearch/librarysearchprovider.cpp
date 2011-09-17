@@ -26,13 +26,14 @@
 
 LibrarySearchProvider::LibrarySearchProvider(LibraryBackendInterface* backend,
                                              const QString& name,
+                                             const QString& id,
                                              const QIcon& icon,
                                              QObject* parent)
   : BlockingSearchProvider(parent),
     backend_(backend),
     cover_loader_(new BackgroundThreadImplementation<AlbumCoverLoader, AlbumCoverLoader>(this))
 {
-  Init(name, icon, false, true);
+  Init(name, id, icon, false, true);
 
   cover_loader_->Start(true);
   cover_loader_->Worker()->SetDesiredHeight(kArtHeight);

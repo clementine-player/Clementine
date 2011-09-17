@@ -35,12 +35,14 @@
 #include <QDesktopWidget>
 #include <QListView>
 #include <QPainter>
+#include <QSettings>
 #include <QSortFilterProxyModel>
 #include <QStandardItemModel>
 
 
 const int GlobalSearchWidget::kMinVisibleItems = 3;
 const int GlobalSearchWidget::kMaxVisibleItems = 25;
+const char* GlobalSearchWidget::kSettingsGroup = "GlobalSearch";
 
 
 GlobalSearchWidget::GlobalSearchWidget(QWidget* parent)
@@ -54,9 +56,11 @@ GlobalSearchWidget::GlobalSearchWidget(QWidget* parent)
     view_(new QListView),
     eat_focus_out_(false),
     background_(":allthethings.png"),
-    desktop_(qApp->desktop())
+    desktop_(qApp->desktop()),
+    combine_identical_results_(true)
 {
   ui_->setupUi(this);
+  ReloadSettings();
 
   // Set up the sorting proxy model
   proxy_->setSourceModel(model_);
@@ -97,7 +101,8 @@ GlobalSearchWidget::~GlobalSearchWidget() {
 void GlobalSearchWidget::Init(LibraryBackendInterface* library) {
   // Add providers
   engine_->AddProvider(new LibrarySearchProvider(
-      library, tr("Library"), IconLoader::Load("folder-sound"), engine_));
+      library, tr("Library"), "library",
+      IconLoader::Load("folder-sound"), engine_));
 
 #ifdef HAVE_SPOTIFY
   engine_->AddProvider(new SpotifySearchProvider(engine_));
@@ -189,7 +194,8 @@ void GlobalSearchWidget::AddResults(int id, const SearchProvider::ResultList& re
 
   foreach (const SearchProvider::Result& result, results) {
     QStandardItem* item = new QStandardItem;
-    item->setData(QVariant::fromValue(result), Role_Result);
+    item->setData(QVariant::fromValue(result), Role_PrimaryResult);
+    item->setData(QVariant::fromValue(SearchProvider::ResultList() << result), Role_AllResults);
 
     QPixmap pixmap;
     if (engine_->FindCachedPixmap(result, &pixmap)) {
@@ -197,6 +203,39 @@ void GlobalSearchWidget::AddResults(int id, const SearchProvider::ResultList& re
     }
 
     model_->appendRow(item);
+
+    if (combine_identical_results_) {
+      // Maybe we can combine this result with an identical result from another
+      // provider.  Only look at the results above and below this one in the
+      // sorted model.
+      QModelIndex my_proxy_index = proxy_->mapFromSource(item->index());
+      QModelIndexList candidates;
+      candidates << my_proxy_index.sibling(my_proxy_index.row() - 1, 0)
+                 << my_proxy_index.sibling(my_proxy_index.row() + 1, 0);
+
+      foreach (const QModelIndex& index, candidates) {
+        if (!index.isValid())
+          continue;
+
+        CombineAction action = CanCombineResults(my_proxy_index, index);
+
+        switch (action) {
+        case CannotCombine:
+          continue;
+
+        case LeftPreferred:
+          CombineResults(my_proxy_index, index);
+          break;
+
+        case RightPreferred:
+          CombineResults(index, my_proxy_index);
+          break;
+        }
+
+        // We've just invalidated the indexes so we have to stop.
+        break;
+      }
+    }
   }
 
   RepositionPopup();
@@ -371,7 +410,7 @@ void GlobalSearchWidget::LazyLoadArt(const QModelIndex& proxy_index) {
   model_->itemFromIndex(source_index)->setData(true, Role_LazyLoadingArt);
 
   const SearchProvider::Result result =
-      source_index.data(Role_Result).value<SearchProvider::Result>();
+      source_index.data(Role_PrimaryResult).value<SearchProvider::Result>();
 
   int id = engine_->LoadArtAsync(result);
   art_requests_[id] = source_index;
@@ -393,7 +432,7 @@ void GlobalSearchWidget::AddCurrent() {
   if (!index.isValid())
     return;
 
-  engine_->LoadTracksAsync(index.data(Role_Result).value<SearchProvider::Result>());
+  engine_->LoadTracksAsync(index.data(Role_PrimaryResult).value<SearchProvider::Result>());
 }
 
 void GlobalSearchWidget::TracksLoaded(int id, MimeData* mime_data) {
@@ -404,5 +443,61 @@ void GlobalSearchWidget::TracksLoaded(int id, MimeData* mime_data) {
 
   mime_data->from_doubleclick_ = true;
   emit AddToPlaylist(mime_data);
+}
+
+void GlobalSearchWidget::ReloadSettings() {
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+
+  combine_identical_results_ = s.value("combine_identical_results", true).toBool();
+  provider_order_ = s.value("provider_order", QStringList() << "library").toStringList();
+}
+
+GlobalSearchWidget::CombineAction GlobalSearchWidget::CanCombineResults(
+      const QModelIndex& left, const QModelIndex& right) const {
+  const SearchProvider::Result r1 = left.data(Role_PrimaryResult)
+      .value<SearchProvider::Result>();
+  const SearchProvider::Result r2 = right.data(Role_PrimaryResult)
+      .value<SearchProvider::Result>();
+
+  if (r1.match_quality_ != r2.match_quality_ || r1.type_ != r2.type_)
+    return CannotCombine;
+
+#define StringsDiffer(field) \
+  (QString::compare(r1.metadata_.field(), r2.metadata_.field(), Qt::CaseInsensitive) != 0)
+
+  switch (r1.type_) {
+  case SearchProvider::Result::Type_Track:
+    if (StringsDiffer(title))
+      return CannotCombine;
+    // fallthrough
+  case SearchProvider::Result::Type_Album:
+    if (StringsDiffer(album) || StringsDiffer(artist))
+      return CannotCombine;
+    break;
+  }
+
+#undef StringsDiffer
+
+  // They look the same - decide which provider we like best.
+  const int p1 = provider_order_.indexOf(r1.provider_->id());
+  const int p2 = provider_order_.indexOf(r2.provider_->id());
+
+  return p2 > p1 ? RightPreferred : LeftPreferred;
+}
+
+void GlobalSearchWidget::CombineResults(const QModelIndex& superior, const QModelIndex& inferior) {
+  QStandardItem* superior_item = model_->itemFromIndex(proxy_->mapToSource(superior));
+  QStandardItem* inferior_item = model_->itemFromIndex(proxy_->mapToSource(inferior));
+
+  SearchProvider::ResultList superior_results =
+      superior_item->data(Role_AllResults).value<SearchProvider::ResultList>();
+  SearchProvider::ResultList inferior_results =
+      inferior_item->data(Role_AllResults).value<SearchProvider::ResultList>();
+
+  superior_results.append(inferior_results);
+  superior_item->setData(QVariant::fromValue(superior_results), Role_AllResults);
+
+  model_->invisibleRootItem()->removeRow(inferior_item->row());
 }
 

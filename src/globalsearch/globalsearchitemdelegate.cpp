@@ -47,7 +47,9 @@ void GlobalSearchItemDelegate::paint(QPainter* p,
                                      const QStyleOptionViewItem& option,
                                      const QModelIndex& index) const {
   const SearchProvider::Result result =
-      index.data(GlobalSearchWidget::Role_Result).value<SearchProvider::Result>();
+      index.data(GlobalSearchWidget::Role_PrimaryResult).value<SearchProvider::Result>();
+  const SearchProvider::ResultList all_results =
+      index.data(GlobalSearchWidget::Role_AllResults).value<SearchProvider::ResultList>();
   const Song& m = result.metadata_;
   const bool selected = option.state & QStyle::State_Selected;
 
@@ -101,15 +103,21 @@ void GlobalSearchItemDelegate::paint(QPainter* p,
   p->setFont(big_font);
   p->drawText(count_rect, Qt::TextSingleLine | Qt::AlignCenter, count);
 
-  // Draw a provider icon on the right.
-  QRect icon_rect(rect.right() - kArtMargin - kProviderIconSize,
+  // Draw provider icons on the right.
+  const int icons_width = (kProviderIconSize + kArtMargin) * all_results.count();
+  QRect icons_rect(rect.right() - icons_width,
                   rect.top() + (rect.height() - kProviderIconSize) / 2,
-                  kProviderIconSize, kProviderIconSize);
-  p->drawPixmap(icon_rect, result.provider_->icon().pixmap(kProviderIconSize));
+                  icons_width, kProviderIconSize);
+
+  QRect icon_rect(icons_rect.topLeft(), QSize(kProviderIconSize, kProviderIconSize));
+  foreach (const SearchProvider::Result& result, all_results) {
+    p->drawPixmap(icon_rect, result.provider_->icon().pixmap(kProviderIconSize));
+    icon_rect.translate(kProviderIconSize + kArtMargin, 0);
+  }
 
   // Position text
   QRect text_rect(count_rect.right() + kArtMargin, count_rect.top(),
-                  icon_rect.left() - count_rect.right() - kArtMargin*2, kHeight);
+                  icons_rect.left() - count_rect.right() - kArtMargin*2, kHeight);
   QRect text_rect_1(text_rect.adjusted(0, 0, 0, -kHeight/2));
   QRect text_rect_2(text_rect.adjusted(0, kHeight/2, 0, 0));
 

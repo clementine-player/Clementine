@@ -30,7 +30,7 @@ class LibrarySearchProvider : public BlockingSearchProvider {
 
 public:
   LibrarySearchProvider(LibraryBackendInterface* backend, const QString& name,
-                        const QIcon& icon, QObject* parent = 0);
+                        const QString& id, const QIcon& icon, QObject* parent = 0);
 
   void LoadArtAsync(int id, const Result& result);
   void LoadTracksAsync(int id, const Result& result);

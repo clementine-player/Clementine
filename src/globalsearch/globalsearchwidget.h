@@ -43,9 +43,11 @@ public:
 
   static const int kMinVisibleItems;
   static const int kMaxVisibleItems;
+  static const char* kSettingsGroup;
 
   enum Role {
-    Role_Result = Qt::UserRole + 1,
+    Role_PrimaryResult = Qt::UserRole + 1,
+    Role_AllResults,
     Role_LazyLoadingArt
   };
 
@@ -57,6 +59,9 @@ public:
   // QWidget
   bool eventFilter(QObject* o, QEvent* e);
   void setFocus(Qt::FocusReason reason);
+
+public slots:
+  void ReloadSettings();
 
 signals:
   void AddToPlaylist(QMimeData* data);
@@ -77,8 +82,17 @@ private slots:
   void AddCurrent();
 
 private:
+  // Return values from CanCombineResults
+  enum CombineAction {
+    CannotCombine,  // The two results are different and can't be combined
+    LeftPreferred,  // The two results can be combined - the left one is better
+    RightPreferred  // The two results can be combined - the right one is better
+  };
+
   void Reset();
   void RepositionPopup();
+  CombineAction CanCombineResults(const QModelIndex& left, const QModelIndex& right) const;
+  void CombineResults(const QModelIndex& superior, const QModelIndex& inferior);
 
   bool EventFilterSearchWidget(QObject* o, QEvent* e);
   bool EventFilterPopup(QObject* o, QEvent* e);
@@ -101,6 +115,9 @@ private:
   QPixmap background_scaled_;
 
   QDesktopWidget* desktop_;
+
+  bool combine_identical_results_;
+  QStringList provider_order_;
 };
 
 #endif // GLOBALSEARCHWIDGET_H

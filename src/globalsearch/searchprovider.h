@@ -72,6 +72,7 @@ public:
   typedef QList<Result> ResultList;
 
   const QString& name() const { return name_; }
+  const QString& id() const { return id_; }
   const QIcon& icon() const { return icon_; }
   const bool wants_delayed_queries() const { return delay_searches_; }
   const bool wants_serialised_art() const { return serialised_art_; }
@@ -106,17 +107,19 @@ protected:
   static Result::MatchQuality MatchQuality(const QStringList& tokens, const QString& string);
 
   // Subclasses must call this from their constructor
-  void Init(const QString& name, const QIcon& icon,
+  void Init(const QString& name, const QString& id, const QIcon& icon,
             bool delay_searches, bool serialised_art);
 
 private:
   QString name_;
+  QString id_;
   QIcon icon_;
   bool delay_searches_;
   bool serialised_art_;
 };
 
 Q_DECLARE_METATYPE(SearchProvider::Result)
+Q_DECLARE_METATYPE(SearchProvider::ResultList)
 
 
 class BlockingSearchProvider : public SearchProvider {
