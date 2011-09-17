@@ -27,6 +27,7 @@
 const int GlobalSearchItemDelegate::kHeight = SearchProvider::kArtHeight;
 const int GlobalSearchItemDelegate::kMargin = 2;
 const int GlobalSearchItemDelegate::kArtMargin = 6;
+const int GlobalSearchItemDelegate::kProviderIconSize = 16;
 
 GlobalSearchItemDelegate::GlobalSearchItemDelegate(GlobalSearchWidget* widget)
   : QStyledItemDelegate(widget),
@@ -55,6 +56,9 @@ void GlobalSearchItemDelegate::paint(QPainter* p,
   QFont bold_font = option.font;
   bold_font.setBold(true);
 
+  QFont big_font(bold_font);
+  big_font.setPointSizeF(big_font.pointSizeF() + 2);
+
   QColor pen = option.palette.color(selected ? QPalette::HighlightedText : QPalette::Text);
   QColor light_pen = pen;
   pen.setAlpha(200);
@@ -76,9 +80,36 @@ void GlobalSearchItemDelegate::paint(QPainter* p,
 
   p->drawPixmap(art_rect, art);
 
+  // Draw a track count indicator next to the art.
+  QRect count_rect(art_rect.right() + kArtMargin, art_rect.top(),
+                   kHeight, kHeight);
+
+  QString count;
+  switch (result.type_) {
+  case SearchProvider::Result::Type_Track:
+    break;
+
+  case SearchProvider::Result::Type_Album:
+    if (result.album_size_ <= 0)
+      count = "-";
+    else
+      count = QString::number(result.album_size_);
+    break;
+  }
+
+  p->setPen(light_pen);
+  p->setFont(big_font);
+  p->drawText(count_rect, Qt::TextSingleLine | Qt::AlignCenter, count);
+
+  // Draw a provider icon on the right.
+  QRect icon_rect(rect.right() - kArtMargin - kProviderIconSize,
+                  rect.top() + (rect.height() - kProviderIconSize) / 2,
+                  kProviderIconSize, kProviderIconSize);
+  p->drawPixmap(icon_rect, result.provider_->icon().pixmap(kProviderIconSize));
+
   // Position text
-  QRect text_rect(art_rect.right() + kArtMargin, art_rect.top(),
-                  rect.right() - art_rect.right() - kArtMargin, kHeight);
+  QRect text_rect(count_rect.right() + kArtMargin, count_rect.top(),
+                  icon_rect.left() - count_rect.right() - kArtMargin*2, kHeight);
   QRect text_rect_1(text_rect.adjusted(0, 0, 0, -kHeight/2));
   QRect text_rect_2(text_rect.adjusted(0, kHeight/2, 0, 0));
 
@@ -130,11 +161,12 @@ void GlobalSearchItemDelegate::paint(QPainter* p,
     else
       line_1 += m.album();
 
-    // Line 2 is <n> tracks
-    line_2 += QString::number(result.album_size_) + " ";
-    line_2 += tr(result.album_size_ == 1 ? "track" : "tracks");
     break;
   }
+  }
+
+  if (line_2.isEmpty()) {
+    text_rect_1 = text_rect;
   }
 
   p->setFont(bold_font);
