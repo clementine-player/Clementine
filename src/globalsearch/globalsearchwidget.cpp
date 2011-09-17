@@ -19,6 +19,7 @@
 #include "globalsearch.h"
 #include "globalsearchitemdelegate.h"
 #include "globalsearchsortmodel.h"
+#include "globalsearchtooltip.h"
 #include "globalsearchwidget.h"
 #include "librarysearchprovider.h"
 #include "ui_globalsearchwidget.h"
@@ -92,6 +93,8 @@ GlobalSearchWidget::GlobalSearchWidget(QWidget* parent)
   connect(engine_, SIGNAL(ArtLoaded(int,QPixmap)), SLOT(ArtLoaded(int,QPixmap)));
   connect(engine_, SIGNAL(TracksLoaded(int,MimeData*)), SLOT(TracksLoaded(int,MimeData*)));
   connect(view_, SIGNAL(doubleClicked(QModelIndex)), SLOT(AddCurrent()));
+  connect(view_->selectionModel(), SIGNAL(currentChanged(QModelIndex,QModelIndex)),
+          SLOT(UpdateTooltip()));
 }
 
 GlobalSearchWidget::~GlobalSearchWidget() {
@@ -243,7 +246,7 @@ void GlobalSearchWidget::AddResults(int id, const SearchProvider::ResultList& re
 
 void GlobalSearchWidget::RepositionPopup() {
   if (model_->rowCount() == 0) {
-    view_->hide();
+    HidePopup();
     return;
   }
 
@@ -346,7 +349,7 @@ bool GlobalSearchWidget::EventFilterPopup(QObject*, QEvent* e) {
     if (e->isAccepted() || !view_->isVisible()) {
       // widget lost focus, hide the popup
       if (!ui_->search->hasFocus())
-        view_->hide();
+        HidePopup();
       if (e->isAccepted())
         return true;
     }
@@ -356,18 +359,18 @@ bool GlobalSearchWidget::EventFilterPopup(QObject*, QEvent* e) {
     case Qt::Key_Return:
     case Qt::Key_Enter:
     case Qt::Key_Tab:
-      view_->hide();
+      HidePopup();
       AddCurrent();
       break;
 
     case Qt::Key_F4:
       if (ke->modifiers() & Qt::AltModifier)
-        view_->hide();
+        HidePopup();
       break;
 
     case Qt::Key_Backtab:
     case Qt::Key_Escape:
-      view_->hide();
+      HidePopup();
       break;
 
     default:
@@ -379,7 +382,7 @@ bool GlobalSearchWidget::EventFilterPopup(QObject*, QEvent* e) {
 
   case QEvent::MouseButtonPress:
     if (!view_->underMouse()) {
-      view_->hide();
+      HidePopup();
       return true;
     }
     return false;
@@ -501,3 +504,32 @@ void GlobalSearchWidget::CombineResults(const QModelIndex& superior, const QMode
   model_->invisibleRootItem()->removeRow(inferior_item->row());
 }
 
+void GlobalSearchWidget::HidePopup() {
+  if (tooltip_)
+    tooltip_->hide();
+  view_->hide();
+}
+
+void GlobalSearchWidget::UpdateTooltip() {
+  if (!view_->isVisible()) {
+    if (tooltip_)
+      tooltip_->hide();
+    return;
+  }
+
+  const QModelIndex current = view_->selectionModel()->currentIndex();
+  if (!current.isValid())
+    return;
+
+  const SearchProvider::ResultList results = current.data(Role_AllResults)
+      .value<SearchProvider::ResultList>();
+
+  if (!tooltip_) {
+    tooltip_.reset(new GlobalSearchTooltip(view_));
+    tooltip_->setFont(view_->font());
+    tooltip_->setPalette(view_->palette());
+  }
+
+  tooltip_->SetResults(results);
+  tooltip_->ShowAt(view_->mapToGlobal(view_->visualRect(current).topRight()));
+}

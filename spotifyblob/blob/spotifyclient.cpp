@@ -233,9 +233,17 @@ void SpotifyClient::SendSearchResponse(sp_search* result) {
   QList<sp_albumbrowse*> browses = pending_search_album_browses_.take(result);
   foreach (sp_albumbrowse* browse, browses) {
     sp_album* album = sp_albumbrowse_album(browse);
-    spotify_pb::Track* track = response->add_album();
-    ConvertAlbum(album, track);
-    ConvertAlbumBrowse(browse, track);
+    spotify_pb::Album* msg = response->add_album();
+
+    ConvertAlbum(album, msg->mutable_metadata());
+    ConvertAlbumBrowse(browse, msg->mutable_metadata());
+
+    // Add all tracks
+    const int tracks = sp_albumbrowse_num_tracks(browse);
+    for (int i=0 ; i<tracks ; ++i) {
+      ConvertTrack(sp_albumbrowse_track(browse, i), msg->add_track());
+    }
+
     sp_albumbrowse_release(browse);
   }
 

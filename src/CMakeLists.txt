@@ -119,9 +119,11 @@ set(SOURCES
   globalsearch/globalsearchitemdelegate.cpp
   globalsearch/globalsearchpopup.cpp
   globalsearch/globalsearchsortmodel.cpp
+  globalsearch/globalsearchtooltip.cpp
   globalsearch/globalsearchwidget.cpp
   globalsearch/librarysearchprovider.cpp
   globalsearch/searchprovider.cpp
+  globalsearch/tooltipresultwidget.cpp
 
   internet/digitallyimportedservice.cpp
   internet/digitallyimportedservicebase.cpp
@@ -358,8 +360,10 @@ set(HEADERS
   globalsearch/librarysearchprovider.h
   globalsearch/globalsearch.h
   globalsearch/globalsearchpopup.h
+  globalsearch/globalsearchtooltip.h
   globalsearch/globalsearchwidget.h
   globalsearch/searchprovider.h
+  globalsearch/tooltipresultwidget.h
 
   internet/digitallyimportedservicebase.h
   internet/digitallyimportedsettingspage.h

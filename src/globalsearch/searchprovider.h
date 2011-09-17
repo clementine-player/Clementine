@@ -67,6 +67,10 @@ public:
     // How many songs in the album - valid only if type == Type_Album.
     int album_size_;
 
+    // Songs in the album - valid only if type == Type_Album.  This is only
+    // used for display in the tooltip, so it's fine not to provide it.
+    SongList album_songs_;
+
     QString pixmap_cache_key_;
   };
   typedef QList<Result> ResultList;
@@ -105,6 +109,9 @@ protected:
   // the song title or the artist/album name.
   static QStringList TokenizeQuery(const QString& query);
   static Result::MatchQuality MatchQuality(const QStringList& tokens, const QString& string);
+
+  // Sorts a list of songs by disc, then by track.
+  static void SortSongs(SongList* list);
 
   // Subclasses must call this from their constructor
   void Init(const QString& name, const QString& id, const QIcon& icon,

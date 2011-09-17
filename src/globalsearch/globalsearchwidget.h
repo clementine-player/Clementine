@@ -20,9 +20,11 @@
 
 #include "searchprovider.h"
 
+#include <QScopedPointer>
 #include <QWidget>
 
 class GlobalSearch;
+class GlobalSearchTooltip;
 class LibraryBackendInterface;
 class Ui_GlobalSearchWidget;
 
@@ -81,6 +83,9 @@ private slots:
 
   void AddCurrent();
 
+  void HidePopup();
+  void UpdateTooltip();
+
 private:
   // Return values from CanCombineResults
   enum CombineAction {
@@ -118,6 +123,8 @@ private:
 
   bool combine_identical_results_;
   QStringList provider_order_;
+
+  QScopedPointer<GlobalSearchTooltip> tooltip_;
 };
 
 #endif // GLOBALSEARCHWIDGET_H

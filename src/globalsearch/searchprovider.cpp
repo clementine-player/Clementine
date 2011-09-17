@@ -122,3 +122,18 @@ QImage SearchProvider::ScaleAndPad(const QImage& image) {
 
   return padded_image;
 }
+
+namespace {
+  bool SortSongsCompare(const Song& left, const Song& right) {
+    if (left.disc() < right.disc())
+      return true;
+    if (left.disc() > right.disc())
+      return false;
+
+    return left.track() < right.track();
+  }
+}
+
+void SearchProvider::SortSongs(SongList* list) {
+  qStableSort(list->begin(), list->end(), SortSongsCompare);
+}

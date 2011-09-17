@@ -95,15 +95,22 @@ void SpotifySearchProvider::SearchFinishedSlot(const spotify_pb::SearchResponse&
   }
 
   for (int i=0 ; i<response.album_size() ; ++i) {
-    const spotify_pb::Track& track = response.album(i);
+    const spotify_pb::Album& album = response.album(i);
 
     Result result(this);
     result.type_ = Result::Type_Album;
-    SpotifyService::SongFromProtobuf(track, &result.metadata_);
+    SpotifyService::SongFromProtobuf(album.metadata(), &result.metadata_);
     result.match_quality_ =
         qMin(MatchQuality(state.tokens_, result.metadata_.album()),
              MatchQuality(state.tokens_, result.metadata_.artist()));
-    result.album_size_ = track.track();
+    result.album_size_ = album.metadata().track();
+
+    for (int j=0; j < album.track_size() ; ++j) {
+      Song track_song;
+      SpotifyService::SongFromProtobuf(album.track(j), &track_song);
+      result.album_songs_ << track_song;
+    }
+
     ret << result;
   }
 
