@@ -32,6 +32,7 @@
 # include "spotifysearchprovider.h"
 #endif
 
+#include <QDesktopWidget>
 #include <QListView>
 #include <QPainter>
 #include <QSortFilterProxyModel>
@@ -39,7 +40,7 @@
 
 
 const int GlobalSearchWidget::kMinVisibleItems = 3;
-const int GlobalSearchWidget::kMaxVisibleItems = 12;
+const int GlobalSearchWidget::kMaxVisibleItems = 25;
 
 
 GlobalSearchWidget::GlobalSearchWidget(QWidget* parent)
@@ -52,7 +53,8 @@ GlobalSearchWidget::GlobalSearchWidget(QWidget* parent)
     proxy_(new GlobalSearchSortModel(this)),
     view_(new QListView),
     eat_focus_out_(false),
-    background_(":allthethings.png")
+    background_(":allthethings.png"),
+    desktop_(qApp->desktop())
 {
   ui_->setupUi(this);
 
@@ -210,7 +212,11 @@ void GlobalSearchWidget::RepositionPopup() {
       qBound(kMinVisibleItems, model_->rowCount(), kMaxVisibleItems));
   int w = ui_->search->width();
 
-  QPoint pos = ui_->search->mapToGlobal(ui_->search->rect().bottomLeft());
+  const QPoint pos = ui_->search->mapToGlobal(ui_->search->rect().bottomLeft());
+
+  // Shrink the popup if it would otherwise go off the screen
+  const QRect screen = desktop_->availableGeometry(ui_->search);
+  h = qMin(h, screen.bottom() - pos.y());
 
   view_->setGeometry(QRect(pos, QSize(w, h)));
 

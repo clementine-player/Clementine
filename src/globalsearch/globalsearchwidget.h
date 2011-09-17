@@ -26,6 +26,7 @@ class GlobalSearch;
 class LibraryBackendInterface;
 class Ui_GlobalSearchWidget;
 
+class QDesktopWidget;
 class QListView;
 class QMimeData;
 class QModelIndex;
@@ -98,6 +99,8 @@ private:
 
   QPixmap background_;
   QPixmap background_scaled_;
+
+  QDesktopWidget* desktop_;
 };
 
 #endif // GLOBALSEARCHWIDGET_H
