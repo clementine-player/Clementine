@@ -103,7 +103,7 @@ void SpotifySearchProvider::SearchFinishedSlot(const spotify_pb::SearchResponse&
     result.match_quality_ =
         qMin(MatchQuality(state.tokens_, result.metadata_.album()),
              MatchQuality(state.tokens_, result.metadata_.artist()));
-    result.album_size_ = 0;
+    result.album_size_ = track.track();
     ret << result;
   }
 
