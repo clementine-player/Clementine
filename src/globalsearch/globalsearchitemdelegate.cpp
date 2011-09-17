@@ -54,13 +54,14 @@ void GlobalSearchItemDelegate::paint(QPainter* p,
   const SearchProvider::Result result =
       index.data(GlobalSearchWidget::Role_Result).value<SearchProvider::Result>();
   const Song& m = result.metadata_;
+  const bool selected = option.state & QStyle::State_Selected;
 
   widget_->LazyLoadArt(index);
 
   QFont bold_font = option.font;
   bold_font.setBold(true);
 
-  QColor pen = option.palette.color(QPalette::Text);
+  QColor pen = option.palette.color(selected ? QPalette::HighlightedText : QPalette::Text);
   QColor light_pen = pen;
   pen.setAlpha(200);
   light_pen.setAlpha(128);

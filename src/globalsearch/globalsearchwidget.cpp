@@ -23,6 +23,7 @@
 #include "librarysearchprovider.h"
 #include "ui_globalsearchwidget.h"
 #include "core/logging.h"
+#include "core/stylesheetloader.h"
 #include "core/utilities.h"
 #include "playlist/songmimedata.h"
 #include "widgets/stylehelper.h"
@@ -55,10 +56,13 @@ GlobalSearchWidget::GlobalSearchWidget(QWidget* parent)
 {
   ui_->setupUi(this);
 
+  // Set up the sorting proxy model
   proxy_->setSourceModel(model_);
   proxy_->setDynamicSortFilter(true);
   proxy_->sort(0);
 
+  // Set up the popup
+  view_->setObjectName("popup");
   view_->setWindowFlags(Qt::Popup);
   view_->setFocusPolicy(Qt::NoFocus);
   view_->setFocusProxy(ui_->search);
@@ -70,6 +74,10 @@ GlobalSearchWidget::GlobalSearchWidget(QWidget* parent)
   view_->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
   ui_->search->installEventFilter(this);
+
+  // Load style sheets
+  StyleSheetLoader* style_loader = new StyleSheetLoader(this);
+  style_loader->SetStyleSheet(this, ":globalsearch.css");
 
   connect(ui_->search, SIGNAL(textEdited(QString)), SLOT(TextEdited(QString)));
   connect(engine_, SIGNAL(ResultsAvailable(int,SearchProvider::ResultList)),
@@ -96,7 +104,8 @@ void GlobalSearchWidget::Init(LibraryBackendInterface* library) {
   // The style helper's base color doesn't get initialised until after the
   // constructor.
   QPalette view_palette = view_->palette();
-  view_palette.setColor(QPalette::Text, Qt::white);
+  view_palette.setColor(QPalette::Text, Utils::StyleHelper::panelTextColor());
+  view_palette.setColor(QPalette::HighlightedText, QColor(60, 60, 60));
   view_palette.setColor(QPalette::Base, Utils::StyleHelper::shadowColor().darker(109));
 
   QFont view_font = view_->font();
