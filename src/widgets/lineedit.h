@@ -66,6 +66,9 @@ public:
   bool has_reset_button() const;
   void set_reset_button(bool visible);
 
+  qreal font_point_size() const { return font_point_size_; }
+  void set_font_point_size(qreal size) { font_point_size_ = size; }
+
 protected:
   void Paint(QPaintDevice* device);
   void Resize();
@@ -82,12 +85,14 @@ protected:
 
   int extra_right_padding_;
   bool draw_hint_;
+  qreal font_point_size_;
 };
 
 class LineEdit : public QLineEdit,
                  public ExtendedEditor {
   Q_OBJECT
   Q_PROPERTY(QString hint READ hint WRITE set_hint);
+  Q_PROPERTY(qreal font_point_size READ font_point_size WRITE set_font_point_size);
   Q_PROPERTY(bool has_clear_button READ has_clear_button WRITE set_clear_button);
   Q_PROPERTY(bool has_reset_button READ has_reset_button WRITE set_reset_button);
 

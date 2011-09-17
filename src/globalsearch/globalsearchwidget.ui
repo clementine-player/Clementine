@@ -20,8 +20,13 @@
   font-size: 7.5pt;
 }
 
+#search:disabled {
+  color: rgba(255, 255, 255, 75%);
+}
+
 #search {
   border: 1px groove rgba(128, 128, 128, 60%);
+  border-radius: 4px 4px;
   background-color: rgba(0, 0, 0, 20%)
 }
 
@@ -47,17 +52,10 @@ QToolButton:pressed {
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="QLabel" name="label">
-     <property name="text">
-      <string>Search &lt;b&gt;ALL THE THINGS&lt;/b&gt; in your library, connected devices and on the Internet.</string>
-     </property>
-     <property name="wordWrap">
-      <bool>true</bool>
-     </property>
-    </widget>
-   </item>
-   <item>
     <widget class="LineEdit" name="search">
+     <property name="hint" stdset="0">
+      <string>Global search</string>
+     </property>
     </widget>
    </item>
    <item>
