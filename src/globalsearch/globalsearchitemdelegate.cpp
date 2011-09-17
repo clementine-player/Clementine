@@ -23,9 +23,8 @@
 
 
 const int GlobalSearchItemDelegate::kHeight = SearchProvider::kArtHeight;
-const int GlobalSearchItemDelegate::kMargin = 1;
+const int GlobalSearchItemDelegate::kMargin = 2;
 const int GlobalSearchItemDelegate::kArtMargin = 6;
-const int GlobalSearchItemDelegate::kWordPadding = 6;
 
 GlobalSearchItemDelegate::GlobalSearchItemDelegate(GlobalSearchWidget* widget)
   : QStyledItemDelegate(widget),
@@ -39,13 +38,6 @@ QSize GlobalSearchItemDelegate::sizeHint(const QStyleOptionViewItem& option,
   QSize size = QStyledItemDelegate::sizeHint(option, index);
   size.setHeight(kHeight + kMargin*2);
   return size;
-}
-
-void GlobalSearchItemDelegate::DrawAndShrink(QPainter* p, QRect* rect,
-                                             const QString& text) const {
-  QRect br;
-  p->drawText(*rect, Qt::TextSingleLine | Qt::AlignVCenter, text, &br);
-  rect->setLeft(br.right() + kWordPadding);
 }
 
 void GlobalSearchItemDelegate::paint(QPainter* p,
@@ -88,44 +80,28 @@ void GlobalSearchItemDelegate::paint(QPainter* p,
   QRect text_rect_1(text_rect.adjusted(0, 0, 0, -kHeight/2));
   QRect text_rect_2(text_rect.adjusted(0, kHeight/2, 0, 0));
 
+  QString line_1;
+  QString line_2;
+
   // The text we draw depends on the type of result.
   switch (result.type_) {
   case SearchProvider::Result::Type_Track: {
-    // Line 1 is Title
-    p->setFont(bold_font);
-
     // Title
-    p->setPen(pen);
-    DrawAndShrink(p, &text_rect_1, m.title());
+    line_1 += m.title() + " ";
 
-    // Line 2 is Artist - Album - Track n
-    p->setFont(option.font);
-
-    // Artist
-    p->setPen(pen);
+    // Artist - Album - Track n
     if (!m.artist().isEmpty()) {
-      DrawAndShrink(p, &text_rect_2, m.artist());
+      line_2 += m.artist();
     } else if (!m.albumartist().isEmpty()) {
-      DrawAndShrink(p, &text_rect_2, m.albumartist());
+      line_2 += m.albumartist();
     }
 
     if (!m.album().isEmpty()) {
-      // Dash
-      p->setPen(light_pen);
-      DrawAndShrink(p, &text_rect_2, " - ");
-
-      // Album
-      p->setPen(pen);
-      DrawAndShrink(p, &text_rect_2, m.album());
+      line_2 += "  -  " + m.album();
     }
 
     if (m.track() > 0) {
-      // Dash
-      p->setPen(light_pen);
-      DrawAndShrink(p, &text_rect_2, " - ");
-
-      // Album
-      DrawAndShrink(p, &text_rect_2, tr("track %1").arg(m.track()));
+      line_2 += "  -  " + tr("track %1").arg(m.track());
     }
 
     break;
@@ -133,39 +109,37 @@ void GlobalSearchItemDelegate::paint(QPainter* p,
 
   case SearchProvider::Result::Type_Album: {
     // Line 1 is Artist - Album
-    p->setFont(bold_font);
-
     // Artist
-    p->setPen(pen);
     if (!m.albumartist().isEmpty())
-      DrawAndShrink(p, &text_rect_1, m.albumartist());
+      line_1 += m.albumartist();
     else if (m.is_compilation())
-      DrawAndShrink(p, &text_rect_1, tr("Various Artists"));
+      line_1 += tr("Various Artists");
     else if (!m.artist().isEmpty())
-      DrawAndShrink(p, &text_rect_1, m.artist());
+      line_1 += m.artist();
     else
-      DrawAndShrink(p, &text_rect_1, tr("Unknown"));
+      line_1 += tr("Unknown");
 
     // Dash
-    p->setPen(light_pen);
-    DrawAndShrink(p, &text_rect_1, " - ");
+    line_1 += "  -  ";
 
     // Album
-    p->setPen(pen);
     if (m.album().isEmpty())
-      DrawAndShrink(p, &text_rect_1, tr("Unknown"));
+      line_1 += tr("Unknown");
     else
-      DrawAndShrink(p, &text_rect_1, m.album());
+      line_1 += m.album();
 
     // Line 2 is <n> tracks
-    p->setFont(option.font);
-
-    p->setPen(pen);
-    DrawAndShrink(p, &text_rect_2, QString::number(result.album_size_));
-
-    p->setPen(light_pen);
-    DrawAndShrink(p, &text_rect_2, tr(result.album_size_ == 1 ? "track" : "tracks"));
+    line_2 += QString::number(result.album_size_) + " ";
+    line_2 += tr(result.album_size_ == 1 ? "track" : "tracks");
     break;
   }
   }
+
+  p->setFont(bold_font);
+  p->setPen(pen);
+  p->drawText(text_rect_1, Qt::TextSingleLine | Qt::AlignVCenter, line_1);
+
+  p->setFont(option.font);
+  p->setPen(light_pen);
+  p->drawText(text_rect_2, Qt::TextSingleLine | Qt::AlignVCenter, line_2);
 }
