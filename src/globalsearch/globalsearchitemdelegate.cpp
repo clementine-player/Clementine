@@ -17,6 +17,8 @@
 
 #include "globalsearchitemdelegate.h"
 #include "globalsearchwidget.h"
+#include "searchprovider.h"
+#include "core/logging.h"
 
 #include <QApplication>
 #include <QPainter>
@@ -30,7 +32,7 @@ GlobalSearchItemDelegate::GlobalSearchItemDelegate(GlobalSearchWidget* widget)
   : QStyledItemDelegate(widget),
     widget_(widget)
 {
-  no_cover_ = QPixmap::fromImage(QImage(":nocover.png"));
+  no_cover_ = QPixmap::fromImage(SearchProvider::ScaleAndPad(QImage(":nocover.png")));
 }
 
 QSize GlobalSearchItemDelegate::sizeHint(const QStyleOptionViewItem& option,
