@@ -24,6 +24,8 @@
 
 class QDesktopWidget;
 
+class TooltipActionWidget;
+
 class GlobalSearchTooltip : public QWidget {
   Q_OBJECT
 
@@ -45,7 +47,16 @@ protected:
   void paintEvent(QPaintEvent*);
 
 private:
+  void AddWidget(QWidget* widget, int* w, int* y);
+
+private:
   QDesktopWidget* desktop_;
+
+  QAction* add_;
+  QAction* add_and_play_;
+  QAction* add_and_queue_;
+  QAction* replace_;
+  TooltipActionWidget* action_widget_;
 
   SearchProvider::ResultList results_;
   qreal arrow_offset_;

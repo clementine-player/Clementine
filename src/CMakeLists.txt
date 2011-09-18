@@ -123,6 +123,7 @@ set(SOURCES
   globalsearch/globalsearchwidget.cpp
   globalsearch/librarysearchprovider.cpp
   globalsearch/searchprovider.cpp
+  globalsearch/tooltipactionwidget.cpp
   globalsearch/tooltipresultwidget.cpp
 
   internet/digitallyimportedservice.cpp
@@ -363,6 +364,7 @@ set(HEADERS
   globalsearch/globalsearchtooltip.h
   globalsearch/globalsearchwidget.h
   globalsearch/searchprovider.h
+  globalsearch/tooltipactionwidget.h
   globalsearch/tooltipresultwidget.h
 
   internet/digitallyimportedservicebase.h

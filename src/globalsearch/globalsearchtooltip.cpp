@@ -16,9 +16,11 @@
 */
 
 #include "globalsearchtooltip.h"
+#include "tooltipactionwidget.h"
 #include "tooltipresultwidget.h"
 #include "core/logging.h"
 
+#include <QAction>
 #include <QApplication>
 #include <QDesktopWidget>
 #include <QKeyEvent>
@@ -41,6 +43,16 @@ GlobalSearchTooltip::GlobalSearchTooltip(QObject* event_target)
   setFocusPolicy(Qt::NoFocus);
   setAttribute(Qt::WA_OpaquePaintEvent);
   setAttribute(Qt::WA_TranslucentBackground);
+
+  add_           = new QAction(tr("Add to playlist"), this);
+  add_and_play_  = new QAction(tr("Add and play now"), this);
+  add_and_queue_ = new QAction(tr("Queue track"), this);
+  replace_       = new QAction(tr("Replace current playlist"), this);
+
+  add_->setShortcut(QKeySequence(Qt::Key_Return));
+  add_and_play_->setShortcut(QKeySequence(Qt::CTRL | Qt::Key_Return));
+  add_and_queue_->setShortcut(QKeySequence(Qt::SHIFT | Qt::Key_Return));
+  replace_->setShortcut(QKeySequence(Qt::ALT | Qt::Key_Return));
 }
 
 void GlobalSearchTooltip::SetResults(const SearchProvider::ResultList& results) {
@@ -51,26 +63,29 @@ void GlobalSearchTooltip::SetResults(const SearchProvider::ResultList& results) 
 
   // Using a QVBoxLayout here made some weird flickering that I couldn't figure
   // out how to fix, so do layout manually.
-  int y = 9;
   int w = 0;
+  int y = 9;
 
+  // Add a widget for each result
   foreach (const SearchProvider::Result& result, results) {
-    QWidget* widget = new TooltipResultWidget(result, this);
-    widget->move(0, y);
-    widget->show();
-    widgets_ << widget;
-
-    QSize size_hint(widget->sizeHint());
-    y += size_hint.height();
-    w = qMax(w, size_hint.width());
+    AddWidget(new TooltipResultWidget(result, this), &w, &y);
   }
 
+  // Add the action widget
+  QList<QAction*> actions;
+  actions << add_ << add_and_play_ << add_and_queue_ << replace_;
+
+  action_widget_ = new TooltipActionWidget(this);
+  action_widget_->SetActions(actions);
+  AddWidget(action_widget_, &w, &y);
+
+  // Set the width of each widget
   foreach (QWidget* widget, widgets_) {
     widget->resize(w, widget->sizeHint().height());
   }
 
+  // Resize this widget
   y += 9;
-
   resize(w, y);
 
   inner_rect_ = rect().adjusted(
@@ -79,6 +94,16 @@ void GlobalSearchTooltip::SetResults(const SearchProvider::ResultList& results) 
   foreach (QWidget* widget, widgets_) {
     widget->setMask(inner_rect_);
   }
+}
+
+void GlobalSearchTooltip::AddWidget(QWidget* widget, int* w, int* y) {
+  widget->move(0, *y);
+  widget->show();
+  widgets_ << widget;
+
+  QSize size_hint(widget->sizeHint());
+  *y += size_hint.height();
+  *w = qMax(*w, size_hint.width());
 }
 
 void GlobalSearchTooltip::ShowAt(const QPoint& pointing_to) {
