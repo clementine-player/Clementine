@@ -19,19 +19,28 @@
 #include "tooltipresultwidget.h"
 #include "core/logging.h"
 
-#include <QCoreApplication>
+#include <QApplication>
+#include <QDesktopWidget>
 #include <QKeyEvent>
 #include <QLayoutItem>
 #include <QPainter>
 #include <QVBoxLayout>
 
+const qreal GlobalSearchTooltip::kBorderRadius = 8.0;
+const qreal GlobalSearchTooltip::kBorderWidth = 4.0;
+const qreal GlobalSearchTooltip::kArrowWidth = 10.0;
+const qreal GlobalSearchTooltip::kArrowHeight = 10.0;
+
+
 GlobalSearchTooltip::GlobalSearchTooltip(QObject* event_target)
   : QWidget(NULL),
+    desktop_(qApp->desktop()),
     event_target_(event_target)
 {
   setWindowFlags(Qt::Popup);
   setFocusPolicy(Qt::NoFocus);
   setAttribute(Qt::WA_OpaquePaintEvent);
+  setAttribute(Qt::WA_TranslucentBackground);
 }
 
 void GlobalSearchTooltip::SetResults(const SearchProvider::ResultList& results) {
@@ -42,7 +51,7 @@ void GlobalSearchTooltip::SetResults(const SearchProvider::ResultList& results) 
 
   // Using a QVBoxLayout here made some weird flickering that I couldn't figure
   // out how to fix, so do layout manually.
-  int y = 0;
+  int y = 9;
   int w = 0;
 
   foreach (const SearchProvider::Result& result, results) {
@@ -56,11 +65,30 @@ void GlobalSearchTooltip::SetResults(const SearchProvider::ResultList& results) 
     w = qMax(w, size_hint.width());
   }
 
+  foreach (QWidget* widget, widgets_) {
+    widget->resize(w, widget->sizeHint().height());
+  }
+
+  y += 9;
+
   resize(w, y);
+
+  inner_rect_ = rect().adjusted(
+        kArrowWidth + kBorderWidth, kBorderWidth, -kBorderWidth, -kBorderWidth);
+
+  foreach (QWidget* widget, widgets_) {
+    widget->setMask(inner_rect_);
+  }
 }
 
 void GlobalSearchTooltip::ShowAt(const QPoint& pointing_to) {
-  move(pointing_to);
+  const qreal min_arrow_offset = kBorderRadius + kArrowHeight;
+  const QRect screen = desktop_->screenGeometry(this);
+
+  arrow_offset_ = min_arrow_offset +
+                  qMax(0, pointing_to.y() + height() - screen.bottom());
+
+  move(pointing_to.x(), pointing_to.y() - arrow_offset_);
 
   if (!isVisible())
     show();
@@ -68,10 +96,10 @@ void GlobalSearchTooltip::ShowAt(const QPoint& pointing_to) {
 
 void GlobalSearchTooltip::keyPressEvent(QKeyEvent* e) {
   // Copy the event to send to the target
-  QKeyEvent e2(e->type(), e->key(), e->modifiers(), e->text(),
-               e->isAutoRepeat(), e->count());
+  QKeyEvent copy(e->type(), e->key(), e->modifiers(), e->text(),
+                 e->isAutoRepeat(), e->count());
 
-  qApp->sendEvent(event_target_, &e2);
+  qApp->sendEvent(event_target_, &copy);
 
   e->accept();
 }
@@ -79,5 +107,27 @@ void GlobalSearchTooltip::keyPressEvent(QKeyEvent* e) {
 void GlobalSearchTooltip::paintEvent(QPaintEvent*) {
   QPainter p(this);
 
-  p.fillRect(rect(), palette().base());
+  QColor color = Qt::black;
+
+  // Transparent background
+  p.fillRect(rect(), Qt::transparent);
+
+  QRect area(inner_rect_.adjusted(
+      -kBorderWidth/2, -kBorderWidth/2, kBorderWidth/2, kBorderWidth/2));
+
+  // Draw the border
+  p.setRenderHint(QPainter::Antialiasing);
+  p.setPen(QPen(color, kBorderWidth));
+  p.setBrush(palette().color(QPalette::Base));
+  p.drawRoundedRect(area, kBorderRadius, kBorderRadius);
+
+  // Draw the arrow
+  QPolygonF arrow;
+  arrow << QPointF(kArrowWidth, arrow_offset_ - kArrowHeight)
+        << QPointF(0, arrow_offset_)
+        << QPointF(kArrowWidth, arrow_offset_ + kArrowHeight);
+
+  p.setBrush(color);
+  p.setPen(color);
+  p.drawPolygon(arrow);
 }

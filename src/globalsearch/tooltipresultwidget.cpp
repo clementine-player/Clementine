@@ -20,9 +20,9 @@
 
 #include <QPainter>
 
-const int TooltipResultWidget::kBorder = 6;
+const int TooltipResultWidget::kBorder = 15;
 const int TooltipResultWidget::kSpacing = 3;
-const int TooltipResultWidget::kTrackNoSpacing = 6;
+const int TooltipResultWidget::kTrackNumSpacing = 6;
 const int TooltipResultWidget::kLineHeight = 1;
 const int TooltipResultWidget::kIconSize = 16;
 
@@ -50,8 +50,9 @@ QSize TooltipResultWidget::CalculateSizeHint() const {
   int h = 0;
 
   // Title text
-  h += kBorder + kIconSize + kBorder + kLineHeight;
-  w = qMax(w, kBorder + kIconSize + kBorder + bold_metrics_.width(TitleText()) + kBorder);
+  h += kSpacing + kIconSize + kSpacing + kLineHeight;
+  w = qMax(w, kBorder + kTrackNoWidth + kTrackNumSpacing +
+              bold_metrics_.width(TitleText()) + kBorder);
 
   switch (result_.type_) {
   case SearchProvider::Result::Type_Track:
@@ -62,15 +63,15 @@ QSize TooltipResultWidget::CalculateSizeHint() const {
       break;
 
     // Song list
-    h += kBorder + kSpacing * (result_.album_songs_.count() - 1) +
+    h += kSpacing + kSpacing * (result_.album_songs_.count() - 1) +
          kTextHeight * result_.album_songs_.count();
     foreach (const Song& song, result_.album_songs_) {
-      w = qMax(w, kTrackNoWidth + kTrackNoSpacing +
+      w = qMax(w, kBorder + kTrackNoWidth + kTrackNumSpacing +
                   fontMetrics().width(song.TitleWithCompilationArtist()) +
                   kBorder);
     }
 
-    h += kBorder + kLineHeight;
+    h += kSpacing + kLineHeight;
 
     break;
   }
@@ -84,22 +85,30 @@ QString TooltipResultWidget::TitleText() const {
 
 void TooltipResultWidget::paintEvent(QPaintEvent*) {
   QPainter p(this);
+
   p.setPen(palette().color(QPalette::Text));
 
-  int y = kBorder;
+  const qreal line_opacity = 0.4;
+  const qreal track_opacity = 0.6;
+  const qreal text_opacity = 0.9;
 
-  // Title icon
-  QRect icon_rect(kBorder, y, kIconSize, kIconSize);
-  p.drawPixmap(icon_rect, result_.provider_->icon().pixmap(kIconSize));
+  int y = kSpacing;
 
   // Title text
-  QRect text_rect(icon_rect.right() + kBorder, y,
-                  width() - kBorder*2 - icon_rect.right(), kIconSize);
+  QRect text_rect(kBorder + kTrackNoWidth + kTrackNumSpacing, y,
+                  width() - kBorder*2 - kTrackNoWidth - kTrackNumSpacing, kIconSize);
   p.setFont(bold_font_);
+  p.setOpacity(text_opacity);
   p.drawText(text_rect, Qt::AlignVCenter, TitleText());
 
+  // Title icon
+  QRect icon_rect(text_rect.left() - kTrackNumSpacing - kIconSize, y,
+                  kIconSize, kIconSize);
+  p.drawPixmap(icon_rect, result_.provider_->icon().pixmap(kIconSize));
+
   // Line
-  y += kIconSize + kBorder;
+  y += kIconSize + kSpacing;
+  p.setOpacity(line_opacity);
   p.drawLine(0, y, width(), y);
   y += kLineHeight;
 
@@ -112,34 +121,36 @@ void TooltipResultWidget::paintEvent(QPaintEvent*) {
       break;
 
     // Song list
-    y += kBorder;
+    y += kSpacing;
 
     p.setFont(font());
 
     foreach (const Song& song, result_.album_songs_) {
-      QRect number_rect(0, y, kTrackNoWidth, kTextHeight);
+      QRect number_rect(kBorder, y, kTrackNoWidth, kTextHeight);
       if (song.track() > 0) {
         // Track number
+        p.setOpacity(track_opacity);
         p.drawText(number_rect, Qt::AlignRight | Qt::AlignHCenter,
                    QString::number(song.track()));
       }
 
       // Song title
-      QRect title_rect(number_rect.right() + kTrackNoSpacing, y,
-                       width() - number_rect.right() - kTrackNoSpacing - kBorder,
+      QRect title_rect(number_rect.right() + kTrackNumSpacing, y,
+                       width() - number_rect.right() - kTrackNumSpacing - kBorder,
                        kTextHeight);
+      p.setOpacity(text_opacity);
       p.drawText(title_rect, song.TitleWithCompilationArtist());
 
       y += kTextHeight + kSpacing;
     }
 
-    y -= kSpacing;
-    y += kBorder;
-
     // Line
+    p.setOpacity(line_opacity);
     p.drawLine(0, y, width(), y);
     y += kLineHeight;
 
     break;
   }
+
+  y += kSpacing;
 }

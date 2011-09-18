@@ -30,7 +30,7 @@ public:
 
   static const int kBorder;
   static const int kSpacing;
-  static const int kTrackNoSpacing;
+  static const int kTrackNumSpacing;
   static const int kLineHeight;
   static const int kIconSize;
 

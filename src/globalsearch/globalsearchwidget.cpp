@@ -530,6 +530,11 @@ void GlobalSearchWidget::UpdateTooltip() {
     tooltip_->setPalette(view_->palette());
   }
 
+  const QRect item_rect = view_->visualRect(current);
+  const QPoint popup_pos = item_rect.topRight() +
+      QPoint(-GlobalSearchTooltip::kArrowWidth,
+             item_rect.height() / 2);
+
   tooltip_->SetResults(results);
-  tooltip_->ShowAt(view_->mapToGlobal(view_->visualRect(current).topRight()));
+  tooltip_->ShowAt(view_->mapToGlobal(popup_pos));
 }

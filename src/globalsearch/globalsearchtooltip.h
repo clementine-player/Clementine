@@ -22,7 +22,7 @@
 
 #include <QWidget>
 
-class QVBoxLayout;
+class QDesktopWidget;
 
 class GlobalSearchTooltip : public QWidget {
   Q_OBJECT
@@ -30,15 +30,26 @@ class GlobalSearchTooltip : public QWidget {
 public:
   GlobalSearchTooltip(QObject* event_target);
 
+  static const qreal kBorderRadius;
+  static const qreal kBorderWidth;
+  static const qreal kArrowWidth;
+  static const qreal kArrowHeight;
+
   void SetResults(const SearchProvider::ResultList& results);
   void ShowAt(const QPoint& pointing_to);
+
+  qreal ArrowOffset() const;
 
 protected:
   void keyPressEvent(QKeyEvent* e);
   void paintEvent(QPaintEvent*);
 
 private:
+  QDesktopWidget* desktop_;
+
   SearchProvider::ResultList results_;
+  qreal arrow_offset_;
+  QRect inner_rect_;
 
   QObject* event_target_;
 
