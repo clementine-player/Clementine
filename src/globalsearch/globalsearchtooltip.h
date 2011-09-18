@@ -30,20 +30,22 @@ class GlobalSearchTooltip : public QWidget {
   Q_OBJECT
 
 public:
-  GlobalSearchTooltip(QObject* event_target);
+  GlobalSearchTooltip(QWidget* event_target);
 
   static const qreal kBorderRadius;
   static const qreal kBorderWidth;
   static const qreal kArrowWidth;
   static const qreal kArrowHeight;
 
+  void SetActions(const QList<QAction*>& actions) { common_actions_ = actions; }
   void SetResults(const SearchProvider::ResultList& results);
   void ShowAt(const QPoint& pointing_to);
 
   qreal ArrowOffset() const;
 
+  bool event(QEvent* e);
+
 protected:
-  void keyPressEvent(QKeyEvent* e);
   void paintEvent(QPaintEvent*);
 
 private:
@@ -51,18 +53,14 @@ private:
 
 private:
   QDesktopWidget* desktop_;
-
-  QAction* add_;
-  QAction* add_and_play_;
-  QAction* add_and_queue_;
-  QAction* replace_;
   TooltipActionWidget* action_widget_;
+  QList<QAction*> common_actions_;
 
   SearchProvider::ResultList results_;
   qreal arrow_offset_;
   QRect inner_rect_;
 
-  QObject* event_target_;
+  QWidget* event_target_;
 
   QWidgetList widgets_;
 };

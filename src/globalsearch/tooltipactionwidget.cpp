@@ -19,10 +19,13 @@
 #include "core/logging.h"
 
 #include <QAction>
+#include <QMouseEvent>
 #include <QPainter>
 
 const int TooltipActionWidget::kBorder = 16;
 const int TooltipActionWidget::kSpacing = 6;
+const int TooltipActionWidget::kTopPadding = 3;
+const int TooltipActionWidget::kFadeDurationMsec = 200;
 
 TooltipActionWidget::TooltipActionWidget(QWidget* parent)
   : QWidget(parent),
@@ -30,12 +33,14 @@ TooltipActionWidget::TooltipActionWidget(QWidget* parent)
     shortcut_width_(0),
     description_width_(0)
 {
+  setMouseTracking(true);
 }
 
 void TooltipActionWidget::SetActions(QList<QAction*> actions) {
   actions_ = actions;
+  action_opacities_.clear();
 
-  int h = 3 + kTextHeight * actions.count();
+  int h = kTopPadding + kTextHeight * actions.count();
   shortcut_width_ = 0;
   description_width_ = 0;
 
@@ -45,6 +50,10 @@ void TooltipActionWidget::SetActions(QList<QAction*> actions) {
              fontMetrics().width(action->shortcut().toString(QKeySequence::NativeText)));
     description_width_ =
         qMax(description_width_, fontMetrics().width(action->text()));
+
+    QTimeLine* timeline = new QTimeLine(kFadeDurationMsec, this);
+    connect(timeline, SIGNAL(valueChanged(qreal)), SLOT(update()));
+    action_opacities_ << timeline;
   }
 
   size_hint_ = QSize(
@@ -55,18 +64,21 @@ void TooltipActionWidget::SetActions(QList<QAction*> actions) {
 }
 
 void TooltipActionWidget::paintEvent(QPaintEvent*) {
-  int y = 3;
-
-  const qreal shortcut_opacity = 0.4;
-  const qreal description_opacity = 0.7;
+  int y = kTopPadding;
 
   QPainter p(this);
   p.setPen(palette().color(QPalette::Text));
 
-  foreach (const QAction* action, actions_) {
+  for (int i=0 ; i<actions_.count() ; ++i) {
+    const QAction* action = actions_[i];
+    const QTimeLine* timeline = action_opacities_[i];
+
     const QRect shortcut_rect(kBorder, y, shortcut_width_, kTextHeight);
     const QRect description_rect(shortcut_rect.right() + kSpacing, y,
                                  description_width_, kTextHeight);
+
+    const qreal shortcut_opacity = 0.4 + 0.3 * timeline->currentValue();
+    const qreal description_opacity = 0.7 + 0.3 * timeline->currentValue();
 
     p.setOpacity(shortcut_opacity);
     p.drawText(shortcut_rect, Qt::AlignRight | Qt::AlignVCenter,
@@ -79,6 +91,40 @@ void TooltipActionWidget::paintEvent(QPaintEvent*) {
   }
 }
 
-void TooltipActionWidget::mousePressEvent(QMouseEvent* e) {
+int TooltipActionWidget::ActionAt(const QPoint& pos) const {
+  return (pos.y() - kTopPadding) / kTextHeight;
+}
 
+void TooltipActionWidget::mouseMoveEvent(QMouseEvent* e) {
+  const int action = ActionAt(e->pos());
+
+  for (int i=0 ; i<actions_.count() ; ++i) {
+    if (i == action) {
+      StartAnimation(i, QTimeLine::Forward);
+    } else {
+      StartAnimation(i, QTimeLine::Backward);
+    }
+  }
+}
+
+void TooltipActionWidget::leaveEvent(QEvent* e) {
+  for (int i=0 ; i<actions_.count() ; ++i) {
+    StartAnimation(i, QTimeLine::Backward);
+  }
+}
+
+void TooltipActionWidget::StartAnimation(int i, QTimeLine::Direction direction) {
+  QTimeLine* timeline = action_opacities_[i];
+  if (timeline->direction() != direction) {
+    timeline->setDirection(direction);
+    if (timeline->state() != QTimeLine::Running)
+      timeline->resume();
+  }
+}
+
+void TooltipActionWidget::mousePressEvent(QMouseEvent* e) {
+  const int action = ActionAt(e->pos());
+  if (action >= 0 && action < actions_.count()) {
+    actions_[action]->trigger();
+  }
 }

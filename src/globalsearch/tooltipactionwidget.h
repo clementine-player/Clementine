@@ -18,7 +18,9 @@
 #ifndef TOOLTIPACTIONWIDGET_H
 #define TOOLTIPACTIONWIDGET_H
 
+#include <QTimeLine>
 #include <QWidget>
+
 
 class TooltipActionWidget : public QWidget {
   Q_OBJECT
@@ -28,6 +30,8 @@ public:
 
   static const int kBorder;
   static const int kSpacing;
+  static const int kTopPadding;
+  static const int kFadeDurationMsec;
 
   void SetActions(QList<QAction*> actions);
 
@@ -35,12 +39,20 @@ public:
 
 protected:
   void paintEvent(QPaintEvent*);
+  void mouseMoveEvent(QMouseEvent* e);
+  void leaveEvent(QEvent* e);
   void mousePressEvent(QMouseEvent* e);
+
+private:
+  int ActionAt(const QPoint& pos) const;
+  void StartAnimation(int i, QTimeLine::Direction direction);
 
 private:
   const int kTextHeight;
 
   QList<QAction*> actions_;
+  QList<QTimeLine*> action_opacities_;
+
   QSize size_hint_;
   int shortcut_width_;
   int description_width_;

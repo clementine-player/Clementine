@@ -34,7 +34,7 @@ const qreal GlobalSearchTooltip::kArrowWidth = 10.0;
 const qreal GlobalSearchTooltip::kArrowHeight = 10.0;
 
 
-GlobalSearchTooltip::GlobalSearchTooltip(QObject* event_target)
+GlobalSearchTooltip::GlobalSearchTooltip(QWidget* event_target)
   : QWidget(NULL),
     desktop_(qApp->desktop()),
     event_target_(event_target)
@@ -43,16 +43,6 @@ GlobalSearchTooltip::GlobalSearchTooltip(QObject* event_target)
   setFocusPolicy(Qt::NoFocus);
   setAttribute(Qt::WA_OpaquePaintEvent);
   setAttribute(Qt::WA_TranslucentBackground);
-
-  add_           = new QAction(tr("Add to playlist"), this);
-  add_and_play_  = new QAction(tr("Add and play now"), this);
-  add_and_queue_ = new QAction(tr("Queue track"), this);
-  replace_       = new QAction(tr("Replace current playlist"), this);
-
-  add_->setShortcut(QKeySequence(Qt::Key_Return));
-  add_and_play_->setShortcut(QKeySequence(Qt::CTRL | Qt::Key_Return));
-  add_and_queue_->setShortcut(QKeySequence(Qt::SHIFT | Qt::Key_Return));
-  replace_->setShortcut(QKeySequence(Qt::ALT | Qt::Key_Return));
 }
 
 void GlobalSearchTooltip::SetResults(const SearchProvider::ResultList& results) {
@@ -73,7 +63,7 @@ void GlobalSearchTooltip::SetResults(const SearchProvider::ResultList& results) 
 
   // Add the action widget
   QList<QAction*> actions;
-  actions << add_ << add_and_play_ << add_and_queue_ << replace_;
+  actions.append(common_actions_);
 
   action_widget_ = new TooltipActionWidget(this);
   action_widget_->SetActions(actions);
@@ -119,14 +109,42 @@ void GlobalSearchTooltip::ShowAt(const QPoint& pointing_to) {
     show();
 }
 
-void GlobalSearchTooltip::keyPressEvent(QKeyEvent* e) {
-  // Copy the event to send to the target
-  QKeyEvent copy(e->type(), e->key(), e->modifiers(), e->text(),
-                 e->isAutoRepeat(), e->count());
+bool GlobalSearchTooltip::event(QEvent* e) {
+  switch (e->type()) {
+  case QEvent::KeyPress:
+  case QEvent::KeyRelease:
+  case QEvent::InputMethod:
+  case QEvent::Shortcut:
+  case QEvent::ShortcutOverride:
+    if (QApplication::sendEvent(event_target_, e)) {
+      return true;
+    }
+    break;
 
-  qApp->sendEvent(event_target_, &copy);
+  case QEvent::MouseButtonPress:
+  case QEvent::MouseButtonRelease:
+  case QEvent::MouseButtonDblClick:
+    if (!underMouse()) {
+      QMouseEvent* me = static_cast<QMouseEvent*>(e);
+      QMouseEvent c(me->type(), event_target_->mapFromGlobal(me->globalPos()),
+                    me->globalPos(), me->button(),
+                    me->buttons(), me->modifiers());
 
-  e->accept();
+      QWidget* child = event_target_->childAt(c.pos());
+
+      if (child)
+        child->setAttribute(Qt::WA_UnderMouse, true);
+
+      QApplication::sendEvent(child ? child : event_target_, &c);
+      return true;
+    }
+    break;
+
+  default:
+    break;
+  }
+
+  return QWidget::event(e);
 }
 
 void GlobalSearchTooltip::paintEvent(QPaintEvent*) {

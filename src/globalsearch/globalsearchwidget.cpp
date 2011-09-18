@@ -82,6 +82,24 @@ GlobalSearchWidget::GlobalSearchWidget(QWidget* parent)
 
   ui_->search->installEventFilter(this);
 
+  // Actions
+  add_           = new QAction(tr("Add to playlist"), this);
+  add_and_play_  = new QAction(tr("Add and play now"), this);
+  add_and_queue_ = new QAction(tr("Queue track"), this);
+  replace_       = new QAction(tr("Replace current playlist"), this);
+
+  add_->setShortcut(QKeySequence(Qt::Key_Return));
+  add_and_play_->setShortcut(QKeySequence(Qt::CTRL | Qt::Key_Return));
+  add_and_queue_->setShortcut(QKeySequence(Qt::SHIFT | Qt::Key_Return));
+  replace_->setShortcut(QKeySequence(Qt::ALT | Qt::Key_Return));
+
+  connect(add_,           SIGNAL(triggered()), SLOT(AddCurrent()));
+  connect(add_and_play_,  SIGNAL(triggered()), SLOT(AddAndPlayCurrent()));
+  connect(add_and_queue_, SIGNAL(triggered()), SLOT(AddAndQueueCurrent()));
+  connect(replace_,       SIGNAL(triggered()), SLOT(ReplaceCurrent()));
+
+  actions_ << add_ << add_and_play_ << add_and_queue_ << replace_;
+
   // Load style sheets
   StyleSheetLoader* style_loader = new StyleSheetLoader(this);
   style_loader->SetStyleSheet(this, ":globalsearch.css");
@@ -89,10 +107,13 @@ GlobalSearchWidget::GlobalSearchWidget(QWidget* parent)
   connect(ui_->search, SIGNAL(textEdited(QString)), SLOT(TextEdited(QString)));
   connect(engine_, SIGNAL(ResultsAvailable(int,SearchProvider::ResultList)),
           SLOT(AddResults(int,SearchProvider::ResultList)));
-  connect(engine_, SIGNAL(SearchFinished(int)), SLOT(SearchFinished(int)));
-  connect(engine_, SIGNAL(ArtLoaded(int,QPixmap)), SLOT(ArtLoaded(int,QPixmap)));
-  connect(engine_, SIGNAL(TracksLoaded(int,MimeData*)), SLOT(TracksLoaded(int,MimeData*)));
-  connect(view_, SIGNAL(doubleClicked(QModelIndex)), SLOT(AddCurrent()));
+  connect(engine_, SIGNAL(SearchFinished(int)), SLOT(SearchFinished(int)),
+          Qt::QueuedConnection);
+  connect(engine_, SIGNAL(ArtLoaded(int,QPixmap)), SLOT(ArtLoaded(int,QPixmap)),
+          Qt::QueuedConnection);
+  connect(engine_, SIGNAL(TracksLoaded(int,MimeData*)), SLOT(TracksLoaded(int,MimeData*)),
+          Qt::QueuedConnection);
+  connect(view_, SIGNAL(doubleClicked(QModelIndex)), SLOT(ResultDoubleClicked()));
   connect(view_->selectionModel(), SIGNAL(currentChanged(QModelIndex,QModelIndex)),
           SLOT(UpdateTooltip()));
 }
@@ -358,9 +379,15 @@ bool GlobalSearchWidget::EventFilterPopup(QObject*, QEvent* e) {
     switch (key) {
     case Qt::Key_Return:
     case Qt::Key_Enter:
-    case Qt::Key_Tab:
-      HidePopup();
-      AddCurrent();
+      // Handle the QActions here - they don't activate when the tooltip is showing
+      if (ke->modifiers() & Qt::AltModifier)
+        replace_->trigger();
+      else if (ke->modifiers() & Qt::ControlModifier)
+        add_and_play_->trigger();
+      else if (ke->modifiers() & Qt::ShiftModifier)
+        add_and_queue_->trigger();
+      else
+        add_->trigger();
       break;
 
     case Qt::Key_F4:
@@ -427,7 +454,27 @@ void GlobalSearchWidget::ArtLoaded(int id, const QPixmap& pixmap) {
   model_->itemFromIndex(index)->setData(pixmap, Qt::DecorationRole);
 }
 
+void GlobalSearchWidget::ResultDoubleClicked() {
+  LoadTracks(NULL);
+}
+
 void GlobalSearchWidget::AddCurrent() {
+  LoadTracks(add_);
+}
+
+void GlobalSearchWidget::AddAndPlayCurrent() {
+  LoadTracks(add_and_play_);
+}
+
+void GlobalSearchWidget::AddAndQueueCurrent() {
+  LoadTracks(add_and_queue_);
+}
+
+void GlobalSearchWidget::ReplaceCurrent() {
+  LoadTracks(replace_);
+}
+
+void GlobalSearchWidget::LoadTracks(QAction* trigger) {
   QModelIndex index = view_->currentIndex();
   if (!index.isValid())
     index = proxy_->index(0, 0);
@@ -435,16 +482,31 @@ void GlobalSearchWidget::AddCurrent() {
   if (!index.isValid())
     return;
 
-  engine_->LoadTracksAsync(index.data(Role_PrimaryResult).value<SearchProvider::Result>());
+  int id = engine_->LoadTracksAsync(
+        index.data(Role_PrimaryResult).value<SearchProvider::Result>());
+  track_requests_[id] = trigger;
 }
 
 void GlobalSearchWidget::TracksLoaded(int id, MimeData* mime_data) {
-  Q_UNUSED(id);
+  if (!track_requests_.contains(id))
+    return;
+
+  QAction* trigger = track_requests_.take(id);
 
   if (!mime_data)
     return;
 
-  mime_data->from_doubleclick_ = true;
+  if (trigger == NULL) {
+    mime_data->from_doubleclick_ = true;
+  } else if (trigger == add_) {
+  } else if (trigger == add_and_play_) {
+    mime_data->play_now_ = true;
+  } else if (trigger == add_and_queue_) {
+    mime_data->enqueue_now_ = true;
+  } else if (trigger == replace_) {
+    mime_data->clear_first_= true;
+  }
+
   emit AddToPlaylist(mime_data);
 }
 
@@ -528,6 +590,7 @@ void GlobalSearchWidget::UpdateTooltip() {
     tooltip_.reset(new GlobalSearchTooltip(view_));
     tooltip_->setFont(view_->font());
     tooltip_->setPalette(view_->palette());
+    tooltip_->SetActions(actions_);
   }
 
   const QRect item_rect = view_->visualRect(current);

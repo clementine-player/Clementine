@@ -81,7 +81,11 @@ private slots:
 
   void TracksLoaded(int id, MimeData* mime_data);
 
+  void ResultDoubleClicked();
   void AddCurrent();
+  void AddAndPlayCurrent();
+  void AddAndQueueCurrent();
+  void ReplaceCurrent();
 
   void HidePopup();
   void UpdateTooltip();
@@ -102,6 +106,8 @@ private:
   bool EventFilterSearchWidget(QObject* o, QEvent* e);
   bool EventFilterPopup(QObject* o, QEvent* e);
 
+  void LoadTracks(QAction* trigger);
+
 private:
   Ui_GlobalSearchWidget* ui_;
 
@@ -110,6 +116,7 @@ private:
   bool clear_model_on_next_result_;
 
   QMap<int, QModelIndex> art_requests_;
+  QMap<int, QAction*> track_requests_;
 
   QStandardItemModel* model_;
   QSortFilterProxyModel* proxy_;
@@ -125,6 +132,12 @@ private:
   QStringList provider_order_;
 
   QScopedPointer<GlobalSearchTooltip> tooltip_;
+
+  QAction* add_;
+  QAction* add_and_play_;
+  QAction* add_and_queue_;
+  QAction* replace_;
+  QList<QAction*> actions_;
 };
 
 #endif // GLOBALSEARCHWIDGET_H
