@@ -20,9 +20,9 @@
 
 #include "searchprovider.h"
 
-#include <QWidget>
+#include <QAbstractButton>
 
-class TooltipResultWidget : public QWidget {
+class TooltipResultWidget : public QAbstractButton {
   Q_OBJECT
 
 public:

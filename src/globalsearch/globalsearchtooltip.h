@@ -22,6 +22,7 @@
 
 #include <QWidget>
 
+class QAbstractButton;
 class QDesktopWidget;
 
 class TooltipActionWidget;
@@ -46,8 +47,14 @@ public:
 
   bool event(QEvent* e);
 
+signals:
+  void ActiveResultChanged(int new_index);
+
 protected:
   void paintEvent(QPaintEvent*);
+
+private slots:
+  void SwitchProvider();
 
 private:
   void AddWidget(QWidget* widget, int* w, int* y);
@@ -57,6 +64,8 @@ private:
   TooltipActionWidget* action_widget_;
   QList<QAction*> common_actions_;
 
+  QAction* switch_action_;
+
   SearchProvider::ResultList results_;
   qreal arrow_offset_;
   QRect inner_rect_;
@@ -64,6 +73,7 @@ private:
   QWidget* event_target_;
 
   QWidgetList widgets_;
+  QList<QAbstractButton*> result_buttons_;
 };
 
 #endif // GLOBALSEARCHTOOLTIP_H

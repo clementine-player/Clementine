@@ -44,6 +44,10 @@ GlobalSearchTooltip::GlobalSearchTooltip(QWidget* event_target)
   setFocusPolicy(Qt::NoFocus);
   setAttribute(Qt::WA_OpaquePaintEvent);
   setAttribute(Qt::WA_TranslucentBackground);
+
+  switch_action_ = new QAction(tr("Switch provider"), this);
+  switch_action_->setShortcut(QKeySequence(Qt::Key_Tab));
+  connect(switch_action_, SIGNAL(triggered()), SLOT(SwitchProvider()));
 }
 
 void GlobalSearchTooltip::SetResults(const SearchProvider::ResultList& results) {
@@ -51,6 +55,7 @@ void GlobalSearchTooltip::SetResults(const SearchProvider::ResultList& results) 
 
   qDeleteAll(widgets_);
   widgets_.clear();
+  result_buttons_.clear();
 
   // Using a QVBoxLayout here made some weird flickering that I couldn't figure
   // out how to fix, so do layout manually.
@@ -59,11 +64,21 @@ void GlobalSearchTooltip::SetResults(const SearchProvider::ResultList& results) 
 
   // Add a widget for each result
   foreach (const SearchProvider::Result& result, results) {
-    AddWidget(new TooltipResultWidget(result, this), &w, &y);
+    TooltipResultWidget* widget = new TooltipResultWidget(result, this);
+    if (widgets_.isEmpty()) {
+      // If this is the first widget then mark it as selected
+      widget->setChecked(true);
+    }
+
+    AddWidget(widget, &w, &y);
+    result_buttons_ << widget;
   }
 
   // Add the action widget
   QList<QAction*> actions;
+  if (results_.count() > 1) {
+    actions.append(switch_action_);
+  }
   actions.append(common_actions_);
 
   action_widget_ = new TooltipActionWidget(this);
@@ -113,7 +128,16 @@ void GlobalSearchTooltip::ShowAt(const QPoint& pointing_to) {
 
 bool GlobalSearchTooltip::event(QEvent* e) {
   switch (e->type()) {
-  case QEvent::KeyPress:
+  case QEvent::KeyPress: {
+    QKeyEvent* ke = static_cast<QKeyEvent*>(e);
+    if (ke->key() == Qt::Key_Tab && ke->modifiers() == Qt::NoModifier) {
+      SwitchProvider();
+      e->accept();
+      return true;
+    }
+
+    // fallthrough
+  }
   case QEvent::KeyRelease:
   case QEvent::InputMethod:
   case QEvent::Shortcut:
@@ -199,3 +223,25 @@ void GlobalSearchTooltip::paintEvent(QPaintEvent*) {
   p.setPen(inner_color);
   p.drawPolygon(arrow);
 }
+
+void GlobalSearchTooltip::SwitchProvider() {
+  // Find which one was checked before.
+  int old_index = -1;
+  for (int i=0 ; i<result_buttons_.count() ; ++i) {
+    if (result_buttons_[i]->isChecked()) {
+      old_index = i;
+      break;
+    }
+  }
+
+  if (old_index == -1)
+    return;
+
+  // Check the new one.  The auto exclusive group will take care of unchecking
+  // the old one.
+  const int new_index = (old_index + 1) % result_buttons_.count();
+  result_buttons_[new_index]->setChecked(true);
+
+  emit ActiveResultChanged(new_index);
+}
+

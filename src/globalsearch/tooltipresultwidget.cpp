@@ -28,7 +28,7 @@ const int TooltipResultWidget::kIconSize = 16;
 
 TooltipResultWidget::TooltipResultWidget(const SearchProvider::Result& result,
                                          QWidget* parent)
-  : QWidget(parent),
+  : QAbstractButton(parent),
     result_(result),
     kTextHeight(fontMetrics().height()),
     kTrackNoWidth(fontMetrics().width("0000")),
@@ -39,6 +39,9 @@ TooltipResultWidget::TooltipResultWidget(const SearchProvider::Result& result,
   bold_metrics_ = QFontMetrics(bold_font_);
 
   size_hint_ = CalculateSizeHint();
+
+  setCheckable(true);
+  setAutoExclusive(true);
 }
 
 QSize TooltipResultWidget::sizeHint() const {
@@ -86,11 +89,11 @@ QString TooltipResultWidget::TitleText() const {
 void TooltipResultWidget::paintEvent(QPaintEvent*) {
   QPainter p(this);
 
-  p.setPen(palette().color(QPalette::Text));
+  const QColor text_color = palette().color(QPalette::Text);
 
-  const qreal line_opacity = 0.4;
-  const qreal track_opacity = 0.6;
-  const qreal text_opacity = 0.9;
+  const qreal line_opacity  = 0.1 + (isChecked() ? 0.2 : 0.0);
+  const qreal track_opacity = 0.1 + (isChecked() ? 0.5 : 0.0);
+  const qreal text_opacity  = 0.4 + (isChecked() ? 0.5 : 0.0);
 
   int y = kSpacing;
 
@@ -98,6 +101,7 @@ void TooltipResultWidget::paintEvent(QPaintEvent*) {
   QRect text_rect(kBorder + kTrackNoWidth + kTrackNumSpacing, y,
                   width() - kBorder*2 - kTrackNoWidth - kTrackNumSpacing, kIconSize);
   p.setFont(bold_font_);
+  p.setPen(text_color);
   p.setOpacity(text_opacity);
   p.drawText(text_rect, Qt::AlignVCenter, TitleText());
 
@@ -109,6 +113,7 @@ void TooltipResultWidget::paintEvent(QPaintEvent*) {
   // Line
   y += kIconSize + kSpacing;
   p.setOpacity(line_opacity);
+  p.setPen(text_color);
   p.drawLine(0, y, width(), y);
   y += kLineHeight;
 
