@@ -43,12 +43,10 @@ public:
   void SetResults(const SearchProvider::ResultList& results);
   void ShowAt(const QPoint& pointing_to);
 
+  int ActiveResultIndex() const { return active_result_; }
   qreal ArrowOffset() const;
 
   bool event(QEvent* e);
-
-signals:
-  void ActiveResultChanged(int new_index);
 
 protected:
   void paintEvent(QPaintEvent*);
@@ -74,6 +72,7 @@ private:
 
   QWidgetList widgets_;
   QList<QAbstractButton*> result_buttons_;
+  int active_result_;
 };
 
 #endif // GLOBALSEARCHTOOLTIP_H

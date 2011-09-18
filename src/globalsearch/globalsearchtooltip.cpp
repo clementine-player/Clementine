@@ -38,7 +38,8 @@ const qreal GlobalSearchTooltip::kArrowHeight = 10.0;
 GlobalSearchTooltip::GlobalSearchTooltip(QWidget* event_target)
   : QWidget(NULL),
     desktop_(qApp->desktop()),
-    event_target_(event_target)
+    event_target_(event_target),
+    active_result_(0)
 {
   setWindowFlags(Qt::Popup);
   setFocusPolicy(Qt::NoFocus);
@@ -56,6 +57,8 @@ void GlobalSearchTooltip::SetResults(const SearchProvider::ResultList& results) 
   qDeleteAll(widgets_);
   widgets_.clear();
   result_buttons_.clear();
+
+  active_result_ = 0;
 
   // Using a QVBoxLayout here made some weird flickering that I couldn't figure
   // out how to fix, so do layout manually.
@@ -239,9 +242,7 @@ void GlobalSearchTooltip::SwitchProvider() {
 
   // Check the new one.  The auto exclusive group will take care of unchecking
   // the old one.
-  const int new_index = (old_index + 1) % result_buttons_.count();
-  result_buttons_[new_index]->setChecked(true);
-
-  emit ActiveResultChanged(new_index);
+  active_result_ = (old_index + 1) % result_buttons_.count();
+  result_buttons_[active_result_]->setChecked(true);
 }
 

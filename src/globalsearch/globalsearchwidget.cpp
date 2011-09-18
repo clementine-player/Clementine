@@ -482,8 +482,18 @@ void GlobalSearchWidget::LoadTracks(QAction* trigger) {
   if (!index.isValid())
     return;
 
-  int id = engine_->LoadTracksAsync(
-        index.data(Role_PrimaryResult).value<SearchProvider::Result>());
+  int result_index = 0;
+  if (tooltip_ && tooltip_->isVisible()) {
+    result_index = tooltip_->ActiveResultIndex();
+  }
+
+  const SearchProvider::ResultList results =
+      index.data(Role_AllResults).value<SearchProvider::ResultList>();
+
+  if (result_index < 0 || result_index >= results.count())
+    return;
+
+  int id = engine_->LoadTracksAsync(results[result_index]);
   track_requests_[id] = trigger;
 }
 
