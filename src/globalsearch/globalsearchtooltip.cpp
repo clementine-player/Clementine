@@ -29,7 +29,8 @@
 #include <QVBoxLayout>
 
 const qreal GlobalSearchTooltip::kBorderRadius = 8.0;
-const qreal GlobalSearchTooltip::kBorderWidth = 4.0;
+const qreal GlobalSearchTooltip::kTotalBorderWidth = 4.0;
+const qreal GlobalSearchTooltip::kOuterBorderWidth = 1.0;
 const qreal GlobalSearchTooltip::kArrowWidth = 10.0;
 const qreal GlobalSearchTooltip::kArrowHeight = 10.0;
 
@@ -79,7 +80,8 @@ void GlobalSearchTooltip::SetResults(const SearchProvider::ResultList& results) 
   resize(w, y);
 
   inner_rect_ = rect().adjusted(
-        kArrowWidth + kBorderWidth, kBorderWidth, -kBorderWidth, -kBorderWidth);
+        kArrowWidth + kTotalBorderWidth, kTotalBorderWidth,
+        -kTotalBorderWidth, -kTotalBorderWidth);
 
   foreach (QWidget* widget, widgets_) {
     widget->setMask(inner_rect_);
@@ -150,27 +152,50 @@ bool GlobalSearchTooltip::event(QEvent* e) {
 void GlobalSearchTooltip::paintEvent(QPaintEvent*) {
   QPainter p(this);
 
-  QColor color = Qt::black;
+  const QColor outer_color = Qt::black;
+  const QColor inner_color = palette().color(QPalette::Highlight);
+  const QColor center_color = palette().color(QPalette::Base);
 
   // Transparent background
   p.fillRect(rect(), Qt::transparent);
 
   QRect area(inner_rect_.adjusted(
-      -kBorderWidth/2, -kBorderWidth/2, kBorderWidth/2, kBorderWidth/2));
+      -kTotalBorderWidth/2, -kTotalBorderWidth/2,
+      kTotalBorderWidth/2, kTotalBorderWidth/2));
 
   // Draw the border
   p.setRenderHint(QPainter::Antialiasing);
-  p.setPen(QPen(color, kBorderWidth));
-  p.setBrush(palette().color(QPalette::Base));
+  p.setPen(QPen(outer_color, kTotalBorderWidth));
   p.drawRoundedRect(area, kBorderRadius, kBorderRadius);
 
   // Draw the arrow
   QPolygonF arrow;
-  arrow << QPointF(kArrowWidth, arrow_offset_ - kArrowHeight)
+  arrow << QPointF(kArrowWidth + 2, arrow_offset_ - kArrowHeight)
         << QPointF(0, arrow_offset_)
-        << QPointF(kArrowWidth, arrow_offset_ + kArrowHeight);
+        << QPointF(kArrowWidth + 2, arrow_offset_ + kArrowHeight);
 
-  p.setBrush(color);
-  p.setPen(color);
+  p.setBrush(outer_color);
+  p.setPen(outer_color);
+  p.drawPolygon(arrow);
+
+  // Now draw the inner shapes on top
+  const qreal inner_border_width = kTotalBorderWidth - kOuterBorderWidth;
+
+  QRect inner_area(inner_rect_.adjusted(
+      -inner_border_width/2, -inner_border_width/2,
+      inner_border_width/2, inner_border_width/2));
+
+  // Inner border
+  p.setBrush(center_color);
+  p.setPen(QPen(inner_color, inner_border_width));
+  p.drawRoundedRect(inner_area, kBorderRadius, kBorderRadius);
+
+  // Inner arrow
+  arrow[0].setY(arrow[0].y() + kOuterBorderWidth);
+  arrow[1].setX(arrow[1].x() + kOuterBorderWidth + 1);
+  arrow[2].setY(arrow[2].y() - kOuterBorderWidth);
+
+  p.setBrush(inner_color);
+  p.setPen(inner_color);
   p.drawPolygon(arrow);
 }

@@ -33,7 +33,8 @@ public:
   GlobalSearchTooltip(QWidget* event_target);
 
   static const qreal kBorderRadius;
-  static const qreal kBorderWidth;
+  static const qreal kTotalBorderWidth;
+  static const qreal kOuterBorderWidth;
   static const qreal kArrowWidth;
   static const qreal kArrowHeight;
 
