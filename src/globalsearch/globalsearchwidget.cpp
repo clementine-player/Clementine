@@ -498,13 +498,15 @@ void GlobalSearchWidget::TracksLoaded(int id, MimeData* mime_data) {
 
   if (trigger == NULL) {
     mime_data->from_doubleclick_ = true;
-  } else if (trigger == add_) {
-  } else if (trigger == add_and_play_) {
-    mime_data->play_now_ = true;
-  } else if (trigger == add_and_queue_) {
-    mime_data->enqueue_now_ = true;
-  } else if (trigger == replace_) {
-    mime_data->clear_first_= true;
+  } else {
+    if (trigger == add_and_play_) {
+      mime_data->override_user_settings_ = true;
+      mime_data->play_now_ = true;
+    } else if (trigger == add_and_queue_) {
+      mime_data->enqueue_now_ = true;
+    } else if (trigger == replace_) {
+      mime_data->clear_first_= true;
+    }
   }
 
   emit AddToPlaylist(mime_data);

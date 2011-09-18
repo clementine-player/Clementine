@@ -1180,7 +1180,9 @@ void MainWindow::AddToPlaylist(QMimeData* data) {
 
   if (MimeData* mime_data = qobject_cast<MimeData*>(data)) {
     // Should we replace the flags with the user's preference?
-    if (mime_data->from_doubleclick_) {
+    if (mime_data->override_user_settings_) {
+      // Do nothing
+    } else if (mime_data->from_doubleclick_) {
       ApplyAddBehaviour(doubleclick_addmode_, mime_data);
       ApplyPlayBehaviour(doubleclick_playmode_, mime_data);
     } else {
