@@ -130,6 +130,7 @@ set(SOURCES
   internet/groovesharksearchplaylisttype.cpp
   internet/groovesharkservice.cpp
   internet/groovesharksettingspage.cpp
+  internet/groovesharkurlhandler.cpp
   internet/icecastbackend.cpp
   internet/icecastfilterwidget.cpp
   internet/icecastmodel.cpp
@@ -369,6 +370,7 @@ set(HEADERS
   internet/groovesharksearchplaylisttype.h
   internet/groovesharkservice.h
   internet/groovesharksettingspage.h
+  internet/groovesharkurlhandler.h
   internet/icecastbackend.h
   internet/icecastfilterwidget.h
   internet/icecastmodel.h

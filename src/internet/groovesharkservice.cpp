@@ -20,6 +20,7 @@
 #include <QMessageBox>
 #include <QNetworkReply>
 #include <QNetworkRequest>
+#include <QTimer>
 
 #include <qjson/parser.h>
 #include <qjson/serializer.h>
@@ -28,6 +29,7 @@
 
 #include "internetmodel.h"
 #include "groovesharksearchplaylisttype.h"
+#include "groovesharkurlhandler.h"
 
 #include "core/database.h"
 #include "core/logging.h"
@@ -57,10 +59,11 @@ const char* GrooveSharkService::kUrl = "http://api.grooveshark.com/ws/3.0/";
 
 const int GrooveSharkService::kSongSearchLimit = 50;
 
-typedef QPair<QString, QString> Param;
+typedef QPair<QString, QVariant> Param;
 
 GrooveSharkService::GrooveSharkService(InternetModel *parent)
   : InternetService(kServiceName, parent, parent),
+    url_handler_(new GrooveSharkUrlHandler(this, this)),
     pending_search_playlist_(NULL),
     root_(NULL),
     search_(NULL),
@@ -69,6 +72,7 @@ GrooveSharkService::GrooveSharkService(InternetModel *parent)
     api_key_(QByteArray::fromBase64(kApiSecret)),
     login_state_(LoginState_OtherError) {
 
+  model()->player()->RegisterUrlHandler(url_handler_);
   model()->player()->playlists()->RegisterSpecialPlaylistType(new GrooveSharkSearchPlaylistType(this));
 
   // Get already existing (authenticated) session id, if any
@@ -154,6 +158,57 @@ void GrooveSharkService::SearchSongsFinished() {
   }
   pending_search_playlist_->Clear();
   pending_search_playlist_->InsertSongs(songs);
+}
+
+void GrooveSharkService::InitCountry() {
+  if (!country_.isEmpty())
+    return;
+  // Get country info
+  QNetworkReply *reply_country;
+
+  reply_country = CreateRequest("getCountry", QList<Param>(), true);
+  // Wait for the reply
+  {
+    QEventLoop event_loop;
+    QTimer timeout_timer;
+    connect(&timeout_timer, SIGNAL(timeout()), &event_loop, SLOT(quit()));
+    connect(reply_country, SIGNAL(finished()), &event_loop, SLOT(quit()));
+    timeout_timer.start(3000);
+    event_loop.exec();
+    if (!timeout_timer.isActive()) {
+      qLog(Error) << "GrooveShark request timeout";
+      return;
+    }
+    timeout_timer.stop();
+  }
+  country_ = ExtractResult(reply_country);
+}
+
+QUrl GrooveSharkService::GetStreamingUrlFromSongId(const QString& song_id) {
+  QList<Param> parameters;
+  QNetworkReply *reply;
+
+  InitCountry();
+  parameters  << Param("songID", song_id)
+              << Param("country", country_);
+  reply = CreateRequest("getSubscriberStreamKey", parameters, true);
+  // Wait for the reply
+  {
+    QEventLoop event_loop;
+    QTimer timeout_timer;
+    connect(&timeout_timer, SIGNAL(timeout()), &event_loop, SLOT(quit()));
+    connect(reply, SIGNAL(finished()), &event_loop, SLOT(quit()));
+    timeout_timer.start(3000);
+    event_loop.exec();
+    if (!timeout_timer.isActive()) {
+      qLog(Error) << "GrooveShark request timeout";
+      return QUrl();
+    }
+    timeout_timer.stop();
+  }
+  QVariantMap result = ExtractResult(reply);
+
+  return QUrl(result["url"].toString());
 }
 
 void GrooveSharkService::Login(const QString& username, const QString& password) {
@@ -310,7 +365,7 @@ QNetworkReply* GrooveSharkService::CreateRequest(const QString& method_name, QLi
   if (use_https) {
     url.setScheme("https");
   }
-  url.setQueryItems( QList<Param>() << Param("sig", Utilities::HmacMd5(api_key_, post_params).toHex()));
+  url.setQueryItems( QList<QPair<QString, QString> >() << QPair<QString, QString>("sig", Utilities::HmacMd5(api_key_, post_params).toHex()));
   QNetworkRequest req(url);
   QNetworkReply *reply = network_->post(req, post_params);
 

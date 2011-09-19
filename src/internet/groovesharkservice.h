@@ -21,6 +21,7 @@
 #include "internetmodel.h"
 #include "internetservice.h"
 
+class GrooveSharkUrlHandler;
 class NetworkAccessManager;
 class Playlist;
 class QMenu;
@@ -53,12 +54,13 @@ class GrooveSharkService : public InternetService {
   void ShowContextMenu(const QModelIndex& index, const QPoint& global_pos);
 
   void Search(const QString& text, Playlist* playlist, bool now = false);
+  // User should be logged in to be able to generate streaming urls
+  QUrl GetStreamingUrlFromSongId(const QString& song_id);
   void Login(const QString& username, const QString& password);
   void Logout();
   bool IsLoggedIn() { return !session_id_.isEmpty(); }
   // Persisted in the settings and updated on each Login().
   LoginState login_state() const { return login_state_; }
-
   const QString& session_id() { return session_id_; }
 
 
@@ -90,19 +92,20 @@ class GrooveSharkService : public InternetService {
 
   void OpenSearchTab();
   void AuthenticateSession();
+  void InitCountry();
 
   // Create a request for the given method, with the given params.
   // If need_authentication is true, add session_id to params.
   // Returns the reply object created
-  QNetworkReply* CreateRequest(const QString& method_name, const QList<QPair<QString, QString> > params,
+  QNetworkReply* CreateRequest(const QString& method_name, const QList<QPair<QString, QVariant> > params,
                      bool need_authentication = false,
                      bool use_https = false);
-  // Convenient function for extracting result from reply, checking resulst's
-  // validity, and deleting reply object
+  // Convenient function for extracting result from reply
   QVariantMap ExtractResult(QNetworkReply* reply);
   void ResetSessionId();
 
 
+  GrooveSharkUrlHandler* url_handler_;
   Playlist* pending_search_playlist_;
 
   QStandardItem* root_;
@@ -117,6 +120,7 @@ class GrooveSharkService : public InternetService {
   QString password_; // In fact, password's md5 hash
   QString user_id_;
   QString session_id_;
+  QMap<QString, QVariant> country_;
   QByteArray api_key_;
 
   LoginState login_state_;
