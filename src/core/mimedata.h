@@ -26,12 +26,16 @@ class MimeData : public QMimeData {
 public:
   MimeData(bool clear = false, bool play_now = false,
            bool enqueue = false, bool open_in_new_playlist = false)
-    : clear_first_(clear),
+    : override_user_settings_(false),
+      clear_first_(clear),
       play_now_(play_now),
       enqueue_now_(enqueue),
       open_in_new_playlist_(open_in_new_playlist),
       name_for_new_playlist_(QString()),
       from_doubleclick_(false) {}
+
+  // If this is set then MainWindow will not touch any of the other flags.
+  bool override_user_settings_;
 
   // If this is set then the playlist will be cleared before these songs
   // are inserted.
@@ -39,7 +43,7 @@ public:
 
   // If this is set then the first item that is inserted will start playing
   // immediately.  Note: this is always overridden with the user's preference
-  // if the MimeData goes via MainWindow.
+  // if the MimeData goes via MainWindow, unless you set override_user_settings_.
   bool play_now_;
 
   // If this is set then the items are added to the queue after being inserted.

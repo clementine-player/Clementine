@@ -11,10 +11,10 @@ msgstr ""
 "PO-Revision-Date: 2011-02-15 16:35+0000\n"
 "Last-Translator: David Sansome <me@davidsansome.com>\n"
 "Language-Team: Chinese (Traditional) <zh_TW@li.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
 "X-Launchpad-Export-Date: 2011-04-10 05:08+0000\n"
 "X-Generator: Launchpad (build 12735)\n"
 
@@ -74,6 +74,10 @@ msgid "%1 tracks"
 msgstr "%1 歌曲"
 
 #, qt-format
+msgid "%1 transferred"
+msgstr ""
+
+#, qt-format
 msgid "%1: Wiimotedev module"
 msgstr ""
 
@@ -85,15 +89,15 @@ msgstr ""
 msgid "%L1 total plays"
 msgstr ""
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n failed"
 msgstr "%n 失敗的"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n finished"
 msgstr "%n 完成的"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n remaining"
 msgstr "%n 剩餘的"
 
@@ -137,6 +141,9 @@ msgstr "工具"
 msgid "(different across multiple songs)"
 msgstr ""
 
+msgid "..."
+msgstr ""
+
 msgid "...and all the Amarok contributors"
 msgstr "...和所有的 Amarok的貢獻者"
 
@@ -158,6 +165,9 @@ msgstr "128k MP3"
 msgid "50 random tracks"
 msgstr "50 隨機歌曲"
 
+msgid "<a href=\"http://www.di.fm/premium/\">Upgrade to Premium now</a>"
+msgstr ""
+
 msgid ""
 "<p>Tokens start with %, for example: %artist %album %title </p>\n"
 "\n"
@@ -168,6 +178,9 @@ msgstr ""
 "\n"
 "<p>若您將一段文字的前後用大括號括起來，那段文字將在token是空白的情況下被隱"
 "藏。"
+
+msgid "A GrooveShark Anywhere account is required."
+msgstr ""
 
 msgid "A Spotify Premium account is required."
 msgstr ""
@@ -185,6 +198,15 @@ msgid "A-Z"
 msgstr ""
 
 msgid "AAC"
+msgstr ""
+
+msgid "AAC 128k (Premium only)"
+msgstr ""
+
+msgid "AAC 32k"
+msgstr ""
+
+msgid "AAC 64k (Premium only)"
 msgstr ""
 
 msgid "AIFF"
@@ -205,6 +227,9 @@ msgstr "關於 Qt..."
 
 msgid "Account details"
 msgstr "帳號詳情"
+
+msgid "Account details (Premium)"
+msgstr ""
 
 msgid "Action"
 msgstr "功能"
@@ -428,9 +453,6 @@ msgstr "使用壓縮，以防止截波失真"
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr ""
 
-msgid "Are you sure you want to install the following scripts?"
-msgstr ""
-
 msgid "Are you sure you want to reset this song's statistics?"
 msgstr ""
 
@@ -451,6 +473,9 @@ msgstr ""
 
 msgid "Audio format"
 msgstr "音頻格式"
+
+msgid "Audio type"
+msgstr ""
 
 msgid "Authenticating..."
 msgstr "驗證中..."
@@ -474,6 +499,9 @@ msgid "Available"
 msgstr ""
 
 msgid "Average bitrate"
+msgstr ""
+
+msgid "Average image size"
 msgstr ""
 
 msgid "BPM"
@@ -639,9 +667,6 @@ msgstr ""
 msgid "Clementine image viewer"
 msgstr ""
 
-msgid "Clementine scripts"
-msgstr ""
-
 msgid "Clementine was unable to find results for this file"
 msgstr ""
 
@@ -699,6 +724,9 @@ msgstr ""
 msgid "Configure library..."
 msgstr ""
 
+msgid "Configure..."
+msgstr ""
+
 msgid "Connect Wii Remotes using active/deactive action"
 msgstr "連結 Wii 遙控器可以使用作用 /取消作用功能"
 
@@ -709,9 +737,6 @@ msgid "Connecting to Spotify"
 msgstr ""
 
 msgid "Constant bitrate"
-msgstr ""
-
-msgid "Context:"
 msgstr ""
 
 msgid "Convert all music"
@@ -772,6 +797,10 @@ msgstr ""
 
 #, qt-format
 msgid "Cover art set from %1"
+msgstr ""
+
+#, qt-format
+msgid "Covers from %1"
 msgstr ""
 
 msgid "Cross-fade when changing tracks automatically"
@@ -909,9 +938,6 @@ msgstr "目的地"
 msgid "Details..."
 msgstr "詳情..."
 
-msgid "Developer mode"
-msgstr ""
-
 msgid "Device"
 msgstr ""
 
@@ -927,7 +953,19 @@ msgstr ""
 msgid "Devices"
 msgstr "裝置"
 
+msgid "Dialog"
+msgstr ""
+
 msgid "Did you mean"
+msgstr ""
+
+msgid "Digitally Imported"
+msgstr ""
+
+msgid "Digitally Imported password"
+msgstr ""
+
+msgid "Digitally Imported username"
 msgstr ""
 
 msgid "Direct internet connection"
@@ -935,9 +973,6 @@ msgstr ""
 
 msgid "Directory"
 msgstr "目錄"
-
-msgid "Disable"
-msgstr ""
 
 msgid "Disable duration"
 msgstr ""
@@ -1048,9 +1083,6 @@ msgstr ""
 msgid "Edit..."
 msgstr "編輯..."
 
-msgid "Enable"
-msgstr ""
-
 msgid "Enable Wii Remote support"
 msgstr "啟用 Wii 遙控器的支持"
 
@@ -1118,14 +1150,11 @@ msgstr ""
 msgid "Error downloading Spotify plugin"
 msgstr ""
 
-msgid "Error installing script"
-msgstr ""
-
 #, qt-format
 msgid "Error loading %1"
 msgstr ""
 
-msgid "Error opening script archive"
+msgid "Error loading di.fm playlist"
 msgstr ""
 
 #, qt-format
@@ -1185,6 +1214,9 @@ msgstr "取得未有的封面"
 
 msgid "Fetch automatically"
 msgstr "自動取得"
+
+msgid "Fetch completed"
+msgstr ""
 
 msgid "Fetching cover error"
 msgstr ""
@@ -1290,17 +1322,14 @@ msgstr "一般設定"
 msgid "Genre"
 msgstr "風格"
 
-msgid "Get new scripts"
+msgid "Getting channels"
 msgstr ""
 
-msgid "Getting channels"
+msgid "Getting streams"
 msgstr ""
 
 msgid "Give it a name:"
 msgstr "給它一個名字："
-
-msgid "Global Shortcuts"
-msgstr "全域快速鍵"
 
 msgid "Go to next playlist tab"
 msgstr ""
@@ -1319,6 +1348,12 @@ msgid "Got %1 covers out of %2 (%3 failed)"
 msgstr "獲得 %1 涵蓋了 %2 ( %3 失敗 )"
 
 msgid "Grey out non existent songs in my playlists"
+msgstr ""
+
+msgid "GrooveShark"
+msgstr ""
+
+msgid "GrooveShark login error"
 msgstr ""
 
 msgid "Group Library by..."
@@ -1418,6 +1453,9 @@ msgstr "包括專輯封面的通知"
 msgid "Include all songs"
 msgstr ""
 
+msgid "Include:"
+msgstr ""
+
 msgid "Increase the volume by 4%"
 msgstr "增加音量4％"
 
@@ -1430,15 +1468,6 @@ msgstr ""
 msgid "Insert..."
 msgstr "插入..."
 
-msgid "Install from file..."
-msgstr ""
-
-msgid "Install script file"
-msgstr ""
-
-msgid "Install scripts"
-msgstr ""
-
 msgid "Installed"
 msgstr ""
 
@@ -1447,6 +1476,12 @@ msgstr "網際網路"
 
 msgid "Invalid API key"
 msgstr "無效的 API key"
+
+msgid "Invalid SKY.fm username or password"
+msgstr ""
+
+msgid "Invalid di.fm username or password"
+msgstr ""
 
 msgid "Invalid format"
 msgstr "無效的格式"
@@ -1464,6 +1499,13 @@ msgid "Invalid service"
 msgstr "無效的服務"
 
 msgid "Invalid session key"
+msgstr ""
+
+msgid "Invalid username and/or password"
+msgstr ""
+
+#, qt-format
+msgid "It seems user %1 doesn't have a GrooveShark Anywhere account"
 msgstr ""
 
 msgid "Jamendo Most Listened Tracks"
@@ -1678,6 +1720,12 @@ msgstr ""
 msgid "MP3"
 msgstr "MP3"
 
+msgid "MP3 256k (Premium only)"
+msgstr ""
+
+msgid "MP3 96k"
+msgstr ""
+
 msgid "MP4 AAC"
 msgstr ""
 
@@ -1799,9 +1847,6 @@ msgstr "我的廣播站"
 msgid "My Recommendations"
 msgstr "我推薦的電台"
 
-msgid "My scripts"
-msgstr ""
-
 msgid "Name"
 msgstr "名稱"
 
@@ -1918,6 +1963,10 @@ msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
 
 msgid "Only show the first"
+msgstr ""
+
+#, qt-format
+msgid "Open %1 in browser"
 msgstr ""
 
 msgid "Open &audio CD..."
@@ -2073,9 +2122,6 @@ msgstr "播放清單搜尋"
 msgid "Playlist type"
 msgstr ""
 
-msgid "Please fill in the blanks to login into Last.fm"
-msgstr ""
-
 msgid "Plugin status:"
 msgstr ""
 
@@ -2146,9 +2192,6 @@ msgstr ""
 msgid "Put songs in a random order"
 msgstr ""
 
-msgid "Python console"
-msgstr ""
-
 msgid "Quality"
 msgstr "品質"
 
@@ -2206,11 +2249,11 @@ msgstr "刷新頻道"
 msgid "Refresh station list"
 msgstr ""
 
+msgid "Refresh streams"
+msgstr ""
+
 msgid "Reggae"
 msgstr "雷鬼"
-
-msgid "Reload"
-msgstr ""
 
 msgid "Remember Wii remote swing"
 msgstr ""
@@ -2335,14 +2378,22 @@ msgstr ""
 msgid "Score"
 msgstr ""
 
-msgid "Script Manager"
-msgstr ""
-
 msgid "Scrobble tracks that I listen to"
 msgstr ""
 
 msgid "Search"
 msgstr "搜尋"
+
+msgid ""
+"Search <b>ALL THE THINGS</b> in your library, connected devices and on the "
+"Internet."
+msgstr ""
+
+msgid "Search GrooveShark"
+msgstr ""
+
+msgid "Search GrooveShark (opens a new tab)"
+msgstr ""
 
 msgid "Search Icecast stations"
 msgstr ""
@@ -2423,9 +2474,6 @@ msgstr "為所有選擇的歌曲設定音量..."
 msgid "Settings"
 msgstr ""
 
-msgid "Settings..."
-msgstr ""
-
 msgid "Shortcut"
 msgstr "快速鍵"
 
@@ -2439,6 +2487,9 @@ msgstr "%1 的快速鍵已經存在"
 
 msgid "Show"
 msgstr "顯示"
+
+msgid "Show Global Search Popup"
+msgstr ""
 
 msgid "Show OSD"
 msgstr "顯示 OSD"
@@ -2521,6 +2572,9 @@ msgstr "隨機排列播放清單"
 msgid "Sign out"
 msgstr "登出"
 
+msgid "Signing in..."
+msgstr ""
+
 msgid "Similar artists"
 msgstr ""
 
@@ -2553,9 +2607,6 @@ msgstr "輕柔的音樂"
 
 msgid "Soft Rock"
 msgstr "比較輕柔的搖滾樂"
-
-msgid "Some files failed to install.  The script may not work correctly."
-msgstr ""
 
 msgid "Song Information"
 msgstr ""
@@ -2610,6 +2661,9 @@ msgstr "開始播放目前播放清單"
 
 msgid "Start transcoding"
 msgstr "開始轉碼"
+
+msgid "Start typing in the search box above to find music on GrooveShark."
+msgstr ""
 
 msgid "Start typing in the search box above to find music on Spotify."
 msgstr ""
@@ -2703,10 +2757,6 @@ msgid "The \"%1\" command could not be started."
 msgstr ""
 
 #, qt-format
-msgid "The '%1' script was modified, you might have to reload it"
-msgstr ""
-
-#, qt-format
 msgid "The directory %1 is not valid"
 msgstr ""
 
@@ -2787,9 +2837,6 @@ msgstr ""
 msgid "This is an iPod, but you compiled Clementine without libgpod support."
 msgstr ""
 
-msgid "This is not a valid Clementine script file."
-msgstr ""
-
 msgid ""
 "This is the first time you have connected this device.  Clementine will now "
 "scan the device to find music files - this may take some time."
@@ -2832,6 +2879,12 @@ msgid "Toggle scrobbling"
 msgstr ""
 
 msgid "Toggle visibility for the pretty on-screen-display"
+msgstr ""
+
+msgid "Total bytes transferred"
+msgstr ""
+
+msgid "Total network requests made"
 msgstr ""
 
 msgid "Track"
@@ -2993,11 +3046,6 @@ msgstr "WAV"
 msgid "WMA"
 msgstr ""
 
-msgid ""
-"Warning: scripts have full access to your computer and your music.  Only "
-"install scripts that you trust."
-msgstr ""
-
 msgid "Wav"
 msgstr ""
 
@@ -3043,6 +3091,18 @@ msgstr ""
 msgid "Wii Remote %1: low battery (%2%)"
 msgstr ""
 
+msgid "Wiimotedev"
+msgstr ""
+
+msgid "Windows Media 128k (Premium only)"
+msgstr ""
+
+msgid "Windows Media 40k"
+msgstr ""
+
+msgid "Windows Media 64k (Premium only)"
+msgstr ""
+
 msgid "Windows Media audio"
 msgstr ""
 
@@ -3064,8 +3124,23 @@ msgstr ""
 msgid "You are about to download the following albums"
 msgstr "你將要下載以下專輯"
 
+msgid "You are not signed in."
+msgstr ""
+
+#, qt-format
+msgid "You are signed in as %1."
+msgstr ""
+
+msgid "You are signed in."
+msgstr ""
+
 msgid "You can change the way the songs in the library are organised."
 msgstr "你可以改變的歌曲庫中的組織形式."
+
+msgid ""
+"You can listen for free without an account, but Premium members can listen "
+"to higher quality streams without advertisements."
+msgstr ""
 
 msgid ""
 "You can listen to Magnatune songs for free without an account.  Purchasing a "
@@ -3086,6 +3161,20 @@ msgid ""
 "You can use your Wii Remote as a remote control for Clementine.  <a href="
 "\"http://www.clementine-player.org/wiimote\">See the page on the Clementine "
 "wiki</a> for more information.\n"
+msgstr ""
+
+msgid "You do not have a GrooveShark Anywhere account."
+msgstr ""
+
+msgid "You do not have a Spotify Premium account."
+msgstr ""
+
+msgid ""
+"You have selected a Premium-only audio type but do not have any account "
+"details entered"
+msgstr ""
+
+msgid "You have selected an invalid audio type setting"
 msgstr ""
 
 msgid "You love this track"
@@ -3134,13 +3223,16 @@ msgstr "你的電台"
 msgid "Your scrobbles: %1"
 msgstr ""
 
+msgid "Your username or password was incorrect."
+msgstr ""
+
 msgid "Z-A"
 msgstr ""
 
 msgid "Zero"
 msgstr ""
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "add %n songs"
 msgstr "加入 %n 歌"
 
@@ -3229,7 +3321,7 @@ msgstr "選項"
 msgid "press enter"
 msgstr ""
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "remove %n songs"
 msgstr "移除 %n 歌"
 
@@ -3245,9 +3337,15 @@ msgstr ""
 msgid "stop"
 msgstr ""
 
+msgid "track"
+msgstr ""
+
 #, qt-format
 msgid "track %1"
 msgstr "歌曲 %1"
+
+#~ msgid "Global Shortcuts"
+#~ msgstr "全域快速鍵"
 
 #~ msgid "Text color"
 #~ msgstr "文字顏色"

@@ -13,51 +13,12 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <property name="styleSheet">
-   <string notr="true">* {
-  color: white;
-  font-weight: bold;
-  font-size: 7.5pt;
-}
-
-#search {
-  border: 1px groove rgba(128, 128, 128, 60%);
-  background-color: rgba(0, 0, 0, 20%)
-}
-
-QToolButton {
-  font-weight: normal;
-  font-weight: bold;
-  color: rgba(255, 255, 255, 50%);
-}
-
-QToolButton:hover {
-  background-color: black;
-  border: 2px solid rgba(255, 255, 255, 20%);
-  border-radius: 3px;
-}
-
-QToolButton:pressed {
-  border: 2px solid rgba(255, 255, 255, 20%);
-  background-color: rgba(255, 255, 255, 10%);
-}
-
-
-</string>
-  </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="QLabel" name="label">
-     <property name="text">
-      <string>Search &lt;b&gt;ALL THE THINGS&lt;/b&gt; in your library, connected devices and on the Internet.</string>
-     </property>
-     <property name="wordWrap">
-      <bool>true</bool>
-     </property>
-    </widget>
-   </item>
-   <item>
     <widget class="LineEdit" name="search">
+     <property name="hint" stdset="0">
+      <string>Global search</string>
+     </property>
     </widget>
    </item>
    <item>

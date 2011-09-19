@@ -67,11 +67,16 @@ public:
     // How many songs in the album - valid only if type == Type_Album.
     int album_size_;
 
+    // Songs in the album - valid only if type == Type_Album.  This is only
+    // used for display in the tooltip, so it's fine not to provide it.
+    SongList album_songs_;
+
     QString pixmap_cache_key_;
   };
   typedef QList<Result> ResultList;
 
   const QString& name() const { return name_; }
+  const QString& id() const { return id_; }
   const QIcon& icon() const { return icon_; }
   const bool wants_delayed_queries() const { return delay_searches_; }
   const bool wants_serialised_art() const { return serialised_art_; }
@@ -105,18 +110,23 @@ protected:
   static QStringList TokenizeQuery(const QString& query);
   static Result::MatchQuality MatchQuality(const QStringList& tokens, const QString& string);
 
+  // Sorts a list of songs by disc, then by track.
+  static void SortSongs(SongList* list);
+
   // Subclasses must call this from their constructor
-  void Init(const QString& name, const QIcon& icon,
+  void Init(const QString& name, const QString& id, const QIcon& icon,
             bool delay_searches, bool serialised_art);
 
 private:
   QString name_;
+  QString id_;
   QIcon icon_;
   bool delay_searches_;
   bool serialised_art_;
 };
 
 Q_DECLARE_METATYPE(SearchProvider::Result)
+Q_DECLARE_METATYPE(SearchProvider::ResultList)
 
 
 class BlockingSearchProvider : public SearchProvider {

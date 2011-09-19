@@ -119,9 +119,12 @@ set(SOURCES
   globalsearch/globalsearchitemdelegate.cpp
   globalsearch/globalsearchpopup.cpp
   globalsearch/globalsearchsortmodel.cpp
+  globalsearch/globalsearchtooltip.cpp
   globalsearch/globalsearchwidget.cpp
   globalsearch/librarysearchprovider.cpp
   globalsearch/searchprovider.cpp
+  globalsearch/tooltipactionwidget.cpp
+  globalsearch/tooltipresultwidget.cpp
 
   internet/digitallyimportedservice.cpp
   internet/digitallyimportedservicebase.cpp
@@ -362,8 +365,11 @@ set(HEADERS
   globalsearch/librarysearchprovider.h
   globalsearch/globalsearch.h
   globalsearch/globalsearchpopup.h
+  globalsearch/globalsearchtooltip.h
   globalsearch/globalsearchwidget.h
   globalsearch/searchprovider.h
+  globalsearch/tooltipactionwidget.h
+  globalsearch/tooltipresultwidget.h
 
   internet/digitallyimportedservicebase.h
   internet/digitallyimportedsettingspage.h
@@ -710,6 +716,7 @@ if(APPLE)
   list(APPEND HEADERS widgets/maclineedit.h)
   list(APPEND SOURCES core/macglobalshortcutbackend.mm)
   list(APPEND SOURCES devices/macdevicelister.mm)
+  list(APPEND SOURCES globalsearch/globalsearchpopup.mm)
   list(APPEND SOURCES ui/globalshortcutgrabber.mm)
   list(APPEND SOURCES ui/macscreensaver.cpp)
   list(APPEND SOURCES ui/macsystemtrayicon.mm)

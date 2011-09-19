@@ -26,13 +26,14 @@
 
 LibrarySearchProvider::LibrarySearchProvider(LibraryBackendInterface* backend,
                                              const QString& name,
+                                             const QString& id,
                                              const QIcon& icon,
                                              QObject* parent)
   : BlockingSearchProvider(parent),
     backend_(backend),
     cover_loader_(new BackgroundThreadImplementation<AlbumCoverLoader, AlbumCoverLoader>(this))
 {
-  Init(name, icon, false, true);
+  Init(name, id, icon, false, true);
 
   cover_loader_->Start(true);
   cover_loader_->Worker()->SetDesiredHeight(kArtHeight);
@@ -103,6 +104,10 @@ SearchProvider::ResultList LibrarySearchProvider::Search(int id, const QString& 
           MatchQuality(tokens, result.metadata_.albumartist()),
           qMin(MatchQuality(tokens, result.metadata_.artist()),
                MatchQuality(tokens, result.metadata_.album())));
+
+    result.album_songs_ = albums.values(key);
+    SortSongs(&result.album_songs_);
+
     ret << result;
   }
 
@@ -134,7 +139,6 @@ void LibrarySearchProvider::LoadTracksAsync(int id, const Result& result) {
   case Result::Type_Album:  {
     // Find all the songs in this album.
     LibraryQuery query;
-    query.SetOrderBy("track");
     query.SetColumnSpec("ROWID, " + Song::kColumnSpec);
     query.AddCompilationRequirement(result.metadata_.is_compilation());
     query.AddWhere("album", result.metadata_.album());
@@ -153,6 +157,8 @@ void LibrarySearchProvider::LoadTracksAsync(int id, const Result& result) {
     }
   }
   }
+
+  SortSongs(&ret);
 
   SongMimeData* mime_data = new SongMimeData;
   mime_data->backend = backend_;

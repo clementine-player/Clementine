@@ -1180,7 +1180,9 @@ void MainWindow::AddToPlaylist(QMimeData* data) {
 
   if (MimeData* mime_data = qobject_cast<MimeData*>(data)) {
     // Should we replace the flags with the user's preference?
-    if (mime_data->from_doubleclick_) {
+    if (mime_data->override_user_settings_) {
+      // Do nothing
+    } else if (mime_data->from_doubleclick_) {
       ApplyAddBehaviour(doubleclick_addmode_, mime_data);
       ApplyPlayBehaviour(doubleclick_playmode_, mime_data);
     } else {
@@ -1689,6 +1691,9 @@ void MainWindow::CommandlineOptionsReceived(const CommandlineOptions &options) {
 
   if (options.toggle_pretty_osd())
     player_->TogglePrettyOSD();
+
+  if (options.show_search_popup())
+    ShowGlobalSearch();
 }
 
 void MainWindow::ForceShowOSD(const Song &song, const bool toggle) {
@@ -2252,5 +2257,4 @@ void MainWindow::ShowGlobalSearch() {
     connect(search_popup_.get(), SIGNAL(AddToPlaylist(QMimeData*)), SLOT(AddToPlaylist(QMimeData*)));
   }
   search_popup_->show();
-  search_popup_->setFocus();
 }

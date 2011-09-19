@@ -20,12 +20,15 @@
 
 #include "searchprovider.h"
 
+#include <QScopedPointer>
 #include <QWidget>
 
 class GlobalSearch;
+class GlobalSearchTooltip;
 class LibraryBackendInterface;
 class Ui_GlobalSearchWidget;
 
+class QDesktopWidget;
 class QListView;
 class QMimeData;
 class QModelIndex;
@@ -42,9 +45,11 @@ public:
 
   static const int kMinVisibleItems;
   static const int kMaxVisibleItems;
+  static const char* kSettingsGroup;
 
   enum Role {
-    Role_Result = Qt::UserRole + 1,
+    Role_PrimaryResult = Qt::UserRole + 1,
+    Role_AllResults,
     Role_LazyLoadingArt
   };
 
@@ -55,7 +60,9 @@ public:
 
   // QWidget
   bool eventFilter(QObject* o, QEvent* e);
-  void setFocus(Qt::FocusReason reason);
+
+public slots:
+  void ReloadSettings();
 
 signals:
   void AddToPlaylist(QMimeData* data);
@@ -73,11 +80,32 @@ private slots:
 
   void TracksLoaded(int id, MimeData* mime_data);
 
+  void ResultDoubleClicked();
   void AddCurrent();
+  void AddAndPlayCurrent();
+  void AddAndQueueCurrent();
+  void ReplaceCurrent();
+
+  void HidePopup();
+  void UpdateTooltip();
 
 private:
+  // Return values from CanCombineResults
+  enum CombineAction {
+    CannotCombine,  // The two results are different and can't be combined
+    LeftPreferred,  // The two results can be combined - the left one is better
+    RightPreferred  // The two results can be combined - the right one is better
+  };
+
   void Reset();
   void RepositionPopup();
+  CombineAction CanCombineResults(const QModelIndex& left, const QModelIndex& right) const;
+  void CombineResults(const QModelIndex& superior, const QModelIndex& inferior);
+
+  bool EventFilterSearchWidget(QObject* o, QEvent* e);
+  bool EventFilterPopup(QObject* o, QEvent* e);
+
+  void LoadTracks(QAction* trigger);
 
 private:
   Ui_GlobalSearchWidget* ui_;
@@ -87,6 +115,7 @@ private:
   bool clear_model_on_next_result_;
 
   QMap<int, QModelIndex> art_requests_;
+  QMap<int, QAction*> track_requests_;
 
   QStandardItemModel* model_;
   QSortFilterProxyModel* proxy_;
@@ -95,6 +124,19 @@ private:
 
   QPixmap background_;
   QPixmap background_scaled_;
+
+  QDesktopWidget* desktop_;
+
+  bool combine_identical_results_;
+  QStringList provider_order_;
+
+  QScopedPointer<GlobalSearchTooltip> tooltip_;
+
+  QAction* add_;
+  QAction* add_and_play_;
+  QAction* add_and_queue_;
+  QAction* replace_;
+  QList<QAction*> actions_;
 };
 
 #endif // GLOBALSEARCHWIDGET_H

@@ -29,9 +29,10 @@ SearchProvider::SearchProvider(QObject* parent)
 {
 }
 
-void SearchProvider::Init(const QString& name, const QIcon& icon,
+void SearchProvider::Init(const QString& name, const QString& id, const QIcon& icon,
                           bool delay_searches, bool serialised_art) {
   name_ = name;
+  id_ = id;
   icon_ = icon;
   delay_searches_ = delay_searches;
   serialised_art_ = serialised_art;
@@ -120,4 +121,19 @@ QImage SearchProvider::ScaleAndPad(const QImage& image) {
   p.end();
 
   return padded_image;
+}
+
+namespace {
+  bool SortSongsCompare(const Song& left, const Song& right) {
+    if (left.disc() < right.disc())
+      return true;
+    if (left.disc() > right.disc())
+      return false;
+
+    return left.track() < right.track();
+  }
+}
+
+void SearchProvider::SortSongs(SongList* list) {
+  qStableSort(list->begin(), list->end(), SortSongsCompare);
 }

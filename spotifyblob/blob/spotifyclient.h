@@ -55,6 +55,7 @@ private:
   void SendLoginCompleted(bool success, const QString& error,
                           spotify_pb::LoginResponse_Error error_code);
   void SendPlaybackError(const QString& error);
+  void SendSearchResponse(sp_search* result);
 
   // Spotify session callbacks.
   static void SP_CALLCONV LoggedInCallback(sp_session* session, sp_error error);
@@ -93,6 +94,7 @@ private:
   static void SP_CALLCONV ImageLoaded(sp_image* image, void* userdata);
 
   // Spotify album browse callbacks.
+  static void SP_CALLCONV SearchAlbumBrowseComplete(sp_albumbrowse* result, void* userdata);
   static void SP_CALLCONV AlbumBrowseComplete(sp_albumbrowse* result, void* userdata);
 
   // Request handlers.
@@ -108,6 +110,7 @@ private:
 
   void ConvertTrack(sp_track* track, spotify_pb::Track* pb);
   void ConvertAlbum(sp_album* album, spotify_pb::Track* pb);
+  void ConvertAlbumBrowse(sp_albumbrowse* browse, spotify_pb::Track* pb);
 
   // Gets the appropriate sp_playlist* but does not load it.
   sp_playlist* GetPlaylist(spotify_pb::PlaylistType type, int user_index);
@@ -163,6 +166,9 @@ private:
   QMap<sp_image*, int> image_callbacks_registered_;
   QMap<sp_search*, spotify_pb::SearchRequest> pending_searches_;
   QMap<sp_albumbrowse*, QString> pending_album_browses_;
+
+  QMap<sp_search*, QList<sp_albumbrowse*> > pending_search_album_browses_;
+  QMap<sp_albumbrowse*, sp_search*> pending_search_album_browse_responses_;
 
   int media_length_msec_;
 };

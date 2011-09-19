@@ -68,6 +68,11 @@ message Track {
   required string album_art_id = 11;
 }
 
+message Album {
+  required Track metadata = 1;
+  repeated Track track = 2;
+}
+
 enum PlaylistType {
   Starred = 1;
   Inbox = 2;
@@ -116,7 +121,9 @@ message SearchResponse {
   optional string did_you_mean = 4;
   optional string error = 5;
 
-  repeated Track album = 6;
+  // field 6 is deprecated
+
+  repeated Album album = 7;
 }
 
 message ImageRequest {

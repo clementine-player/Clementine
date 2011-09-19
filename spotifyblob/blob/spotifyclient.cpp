@@ -169,8 +169,42 @@ void SpotifyClient::SearchCompleteCallback(sp_search* result, void* userdata) {
     return;
   }
 
+  // If there were any album results then we need to resolve those before
+  // we can send our response.
+  const int count = sp_search_num_albums(result);
+  if (count != 0) {
+    for (int i=0 ; i<count ; ++i) {
+      sp_album* album = sp_search_album(result, i);
+      sp_albumbrowse* browse =
+          sp_albumbrowse_create(me->session_, album, &SearchAlbumBrowseComplete, me);
+
+      me->pending_search_album_browse_responses_[browse] = result;
+    }
+    return;
+  }
+
+  me->SendSearchResponse(result);
+}
+
+void SpotifyClient::SearchAlbumBrowseComplete(sp_albumbrowse* result, void* userdata) {
+  SpotifyClient* me = reinterpret_cast<SpotifyClient*>(userdata);
+
+  if (!me->pending_search_album_browse_responses_.contains(result)) {
+    qLog(Warning) << "SearchAlbumBrowseComplete called with unknown result";
+    return;
+  }
+
+  sp_search* search = me->pending_search_album_browse_responses_.take(result);
+  me->pending_search_album_browses_[search].append(result);
+
+  if (me->pending_search_album_browses_[search].count() >= sp_search_num_albums(search)) {
+    me->SendSearchResponse(search);
+  }
+}
+
+void SpotifyClient::SendSearchResponse(sp_search* result) {
   // Take the request out of the queue
-  spotify_pb::SearchRequest req = me->pending_searches_.take(result);
+  spotify_pb::SearchRequest req = pending_searches_.take(result);
 
   // Prepare the response
   spotify_pb::SpotifyMessage message;
@@ -183,7 +217,7 @@ void SpotifyClient::SearchCompleteCallback(sp_search* result, void* userdata) {
   if (error != SP_ERROR_OK) {
     response->set_error(sp_error_message(error));
 
-    me->handler_->SendMessage(message);
+    handler_->SendMessage(message);
     sp_search_release(result);
     return;
   }
@@ -192,21 +226,32 @@ void SpotifyClient::SearchCompleteCallback(sp_search* result, void* userdata) {
   int count = sp_search_num_tracks(result);
   for (int i=0 ; i<count ; ++i) {
     sp_track* track = sp_search_track(result, i);
-    me->ConvertTrack(track, response->add_result());
+    ConvertTrack(track, response->add_result());
   }
 
-  // Get the albums from the search
-  count = sp_search_num_albums(result);
-  for (int i=0 ; i<count ; ++i) {
-    sp_album* album = sp_search_album(result, i);
-    me->ConvertAlbum(album, response->add_album());
+  // Get the albums from the search.  All these should be resolved by now.
+  QList<sp_albumbrowse*> browses = pending_search_album_browses_.take(result);
+  foreach (sp_albumbrowse* browse, browses) {
+    sp_album* album = sp_albumbrowse_album(browse);
+    spotify_pb::Album* msg = response->add_album();
+
+    ConvertAlbum(album, msg->mutable_metadata());
+    ConvertAlbumBrowse(browse, msg->mutable_metadata());
+
+    // Add all tracks
+    const int tracks = sp_albumbrowse_num_tracks(browse);
+    for (int i=0 ; i<tracks ; ++i) {
+      ConvertTrack(sp_albumbrowse_track(browse, i), msg->add_track());
+    }
+
+    sp_albumbrowse_release(browse);
   }
 
   // Add other data to the response
   response->set_total_tracks(sp_search_total_tracks(result));
   response->set_did_you_mean(sp_search_did_you_mean(result));
 
-  me->handler_->SendMessage(message);
+  handler_->SendMessage(message);
   sp_search_release(result);
 }
 
@@ -532,6 +577,10 @@ void SpotifyClient::ConvertAlbum(sp_album* album, spotify_pb::Track* pb) {
   sp_link_release(link);
 
   pb->set_uri(uri);
+}
+
+void SpotifyClient::ConvertAlbumBrowse(sp_albumbrowse* browse, spotify_pb::Track* pb) {
+  pb->set_track(sp_albumbrowse_num_tracks(browse));
 }
 
 void SpotifyClient::MetadataUpdatedCallback(sp_session* session) {
@@ -872,7 +921,7 @@ void SpotifyClient::BrowseAlbum(const QString& uri) {
     return;
   }
 
-  // Get the track from the link
+  // Get the album from the link
   sp_album* album = sp_link_as_album(link);
   if (!album) {
     SendPlaybackError("Spotify URI was not an album");
@@ -904,4 +953,5 @@ void SpotifyClient::AlbumBrowseComplete(sp_albumbrowse* result, void* userdata) 
   }
 
   me->handler_->SendMessage(message);
+  sp_albumbrowse_release(result);
 }

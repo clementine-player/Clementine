@@ -15,37 +15,44 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef LIBRARYSEARCHPROVIDER_H
-#define LIBRARYSEARCHPROVIDER_H
+#ifndef TOOLTIPRESULTWIDGET_H
+#define TOOLTIPRESULTWIDGET_H
 
 #include "searchprovider.h"
-#include "core/backgroundthread.h"
 
-class AlbumCoverLoader;
-class LibraryBackendInterface;
+#include <QAbstractButton>
 
-
-class LibrarySearchProvider : public BlockingSearchProvider {
+class TooltipResultWidget : public QAbstractButton {
   Q_OBJECT
 
 public:
-  LibrarySearchProvider(LibraryBackendInterface* backend, const QString& name,
-                        const QString& id, const QIcon& icon, QObject* parent = 0);
+  TooltipResultWidget(const SearchProvider::Result& result, QWidget* parent = 0);
 
-  void LoadArtAsync(int id, const Result& result);
-  void LoadTracksAsync(int id, const Result& result);
+  static const int kBorder;
+  static const int kSpacing;
+  static const int kTrackNumSpacing;
+  static const int kLineHeight;
+  static const int kIconSize;
+
+  QSize sizeHint() const;
+
+  QString TitleText() const;
 
 protected:
-  ResultList Search(int id, const QString& query);
-
-private slots:
-  void AlbumArtLoaded(quint64 id, const QImage& image);
+  void paintEvent(QPaintEvent*);
 
 private:
-  LibraryBackendInterface* backend_;
+  QSize CalculateSizeHint() const;
 
-  BackgroundThread<AlbumCoverLoader>* cover_loader_;
-  QMap<quint64, int> cover_loader_tasks_;
+private:
+  SearchProvider::Result result_;
+  const int kTextHeight;
+  const int kTrackNoWidth;
+
+  QSize size_hint_;
+
+  QFont bold_font_;
+  QFontMetrics bold_metrics_;
 };
 
-#endif // LIBRARYSEARCHPROVIDER_H
+#endif // TOOLTIPRESULTWIDGET_H

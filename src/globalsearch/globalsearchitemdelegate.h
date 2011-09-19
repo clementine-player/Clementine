@@ -30,14 +30,11 @@ public:
   static const int kHeight;
   static const int kMargin;
   static const int kArtMargin;
-  static const int kWordPadding;
+  static const int kProviderIconSize;
 
   QSize sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const;
   void paint(QPainter* painter, const QStyleOptionViewItem& option,
              const QModelIndex& index) const;
-
-private:
-  void DrawAndShrink(QPainter* p, QRect* rect, const QString& text) const;
 
 private:
   GlobalSearchWidget* widget_;

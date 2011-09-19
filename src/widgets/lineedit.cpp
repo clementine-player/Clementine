@@ -31,7 +31,8 @@ ExtendedEditor::ExtendedEditor(QWidget* widget, int extra_right_padding,
     clear_button_(new QToolButton(widget)),
     reset_button_(new QToolButton(widget)),
     extra_right_padding_(extra_right_padding),
-    draw_hint_(draw_hint)
+    draw_hint_(draw_hint),
+    font_point_size_(widget->font().pointSizeF() - 1)
 {
   clear_button_->setIcon(IconLoader::Load("edit-clear-locationbar-ltr"));
   clear_button_->setIconSize(QSize(16, 16));
@@ -102,7 +103,8 @@ void ExtendedEditor::Paint(QPaintDevice* device) {
 
       QFont font;
       font.setItalic(true);
-      font.setPointSize(font.pointSize()-1);
+      font.setBold(false);
+      font.setPointSizeF(font_point_size_);
 
       QFontMetrics m(font);
       const int kBorder = (device->height() - m.height()) / 2;

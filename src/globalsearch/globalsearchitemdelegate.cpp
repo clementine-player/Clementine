@@ -17,21 +17,23 @@
 
 #include "globalsearchitemdelegate.h"
 #include "globalsearchwidget.h"
+#include "searchprovider.h"
+#include "core/logging.h"
 
 #include <QApplication>
 #include <QPainter>
 
 
 const int GlobalSearchItemDelegate::kHeight = SearchProvider::kArtHeight;
-const int GlobalSearchItemDelegate::kMargin = 1;
+const int GlobalSearchItemDelegate::kMargin = 2;
 const int GlobalSearchItemDelegate::kArtMargin = 6;
-const int GlobalSearchItemDelegate::kWordPadding = 6;
+const int GlobalSearchItemDelegate::kProviderIconSize = 16;
 
 GlobalSearchItemDelegate::GlobalSearchItemDelegate(GlobalSearchWidget* widget)
   : QStyledItemDelegate(widget),
     widget_(widget)
 {
-  no_cover_ = QPixmap::fromImage(QImage(":nocover.png"));
+  no_cover_ = QPixmap::fromImage(SearchProvider::ScaleAndPad(QImage(":nocover.png")));
 }
 
 QSize GlobalSearchItemDelegate::sizeHint(const QStyleOptionViewItem& option,
@@ -41,26 +43,25 @@ QSize GlobalSearchItemDelegate::sizeHint(const QStyleOptionViewItem& option,
   return size;
 }
 
-void GlobalSearchItemDelegate::DrawAndShrink(QPainter* p, QRect* rect,
-                                             const QString& text) const {
-  QRect br;
-  p->drawText(*rect, Qt::TextSingleLine | Qt::AlignVCenter, text, &br);
-  rect->setLeft(br.right() + kWordPadding);
-}
-
 void GlobalSearchItemDelegate::paint(QPainter* p,
                                      const QStyleOptionViewItem& option,
                                      const QModelIndex& index) const {
   const SearchProvider::Result result =
-      index.data(GlobalSearchWidget::Role_Result).value<SearchProvider::Result>();
+      index.data(GlobalSearchWidget::Role_PrimaryResult).value<SearchProvider::Result>();
+  const SearchProvider::ResultList all_results =
+      index.data(GlobalSearchWidget::Role_AllResults).value<SearchProvider::ResultList>();
   const Song& m = result.metadata_;
+  const bool selected = option.state & QStyle::State_Selected;
 
   widget_->LazyLoadArt(index);
 
   QFont bold_font = option.font;
   bold_font.setBold(true);
 
-  QColor pen = option.palette.color(QPalette::Text);
+  QFont big_font(bold_font);
+  big_font.setPointSizeF(big_font.pointSizeF() + 2);
+
+  QColor pen = option.palette.color(selected ? QPalette::HighlightedText : QPalette::Text);
   QColor light_pen = pen;
   pen.setAlpha(200);
   light_pen.setAlpha(128);
@@ -81,50 +82,67 @@ void GlobalSearchItemDelegate::paint(QPainter* p,
 
   p->drawPixmap(art_rect, art);
 
+  // Draw a track count indicator next to the art.
+  QRect count_rect(art_rect.right() + kArtMargin, art_rect.top(),
+                   kHeight, kHeight);
+
+  QString count;
+  switch (result.type_) {
+  case SearchProvider::Result::Type_Track:
+    break;
+
+  case SearchProvider::Result::Type_Album:
+    if (result.album_size_ <= 0)
+      count = "-";
+    else
+      count = QString::number(result.album_size_);
+    break;
+  }
+
+  p->setPen(light_pen);
+  p->setFont(big_font);
+  p->drawText(count_rect, Qt::TextSingleLine | Qt::AlignCenter, count);
+
+  // Draw provider icons on the right.
+  const int icons_width = (kProviderIconSize + kArtMargin) * all_results.count();
+  QRect icons_rect(rect.right() - icons_width,
+                  rect.top() + (rect.height() - kProviderIconSize) / 2,
+                  icons_width, kProviderIconSize);
+
+  QRect icon_rect(icons_rect.topLeft(), QSize(kProviderIconSize, kProviderIconSize));
+  foreach (const SearchProvider::Result& result, all_results) {
+    p->drawPixmap(icon_rect, result.provider_->icon().pixmap(kProviderIconSize));
+    icon_rect.translate(kProviderIconSize + kArtMargin, 0);
+  }
+
   // Position text
-  QRect text_rect(art_rect.right() + kArtMargin, art_rect.top(),
-                  rect.right() - art_rect.right() - kArtMargin, kHeight);
+  QRect text_rect(count_rect.right() + kArtMargin, count_rect.top(),
+                  icons_rect.left() - count_rect.right() - kArtMargin*2, kHeight);
   QRect text_rect_1(text_rect.adjusted(0, 0, 0, -kHeight/2));
   QRect text_rect_2(text_rect.adjusted(0, kHeight/2, 0, 0));
+
+  QString line_1;
+  QString line_2;
 
   // The text we draw depends on the type of result.
   switch (result.type_) {
   case SearchProvider::Result::Type_Track: {
-    // Line 1 is Title
-    p->setFont(bold_font);
-
     // Title
-    p->setPen(pen);
-    DrawAndShrink(p, &text_rect_1, m.title());
+    line_1 += m.title() + " ";
 
-    // Line 2 is Artist - Album - Track n
-    p->setFont(option.font);
-
-    // Artist
-    p->setPen(pen);
+    // Artist - Album - Track n
     if (!m.artist().isEmpty()) {
-      DrawAndShrink(p, &text_rect_2, m.artist());
+      line_2 += m.artist();
     } else if (!m.albumartist().isEmpty()) {
-      DrawAndShrink(p, &text_rect_2, m.albumartist());
+      line_2 += m.albumartist();
     }
 
     if (!m.album().isEmpty()) {
-      // Dash
-      p->setPen(light_pen);
-      DrawAndShrink(p, &text_rect_2, " - ");
-
-      // Album
-      p->setPen(pen);
-      DrawAndShrink(p, &text_rect_2, m.album());
+      line_2 += "  -  " + m.album();
     }
 
     if (m.track() > 0) {
-      // Dash
-      p->setPen(light_pen);
-      DrawAndShrink(p, &text_rect_2, " - ");
-
-      // Album
-      DrawAndShrink(p, &text_rect_2, tr("track %1").arg(m.track()));
+      line_2 += "  -  " + tr("track %1").arg(m.track());
     }
 
     break;
@@ -132,39 +150,38 @@ void GlobalSearchItemDelegate::paint(QPainter* p,
 
   case SearchProvider::Result::Type_Album: {
     // Line 1 is Artist - Album
-    p->setFont(bold_font);
-
     // Artist
-    p->setPen(pen);
     if (!m.albumartist().isEmpty())
-      DrawAndShrink(p, &text_rect_1, m.albumartist());
+      line_1 += m.albumartist();
     else if (m.is_compilation())
-      DrawAndShrink(p, &text_rect_1, tr("Various Artists"));
+      line_1 += tr("Various Artists");
     else if (!m.artist().isEmpty())
-      DrawAndShrink(p, &text_rect_1, m.artist());
+      line_1 += m.artist();
     else
-      DrawAndShrink(p, &text_rect_1, tr("Unknown"));
+      line_1 += tr("Unknown");
 
     // Dash
-    p->setPen(light_pen);
-    DrawAndShrink(p, &text_rect_1, " - ");
+    line_1 += "  -  ";
 
     // Album
-    p->setPen(pen);
     if (m.album().isEmpty())
-      DrawAndShrink(p, &text_rect_1, tr("Unknown"));
+      line_1 += tr("Unknown");
     else
-      DrawAndShrink(p, &text_rect_1, m.album());
+      line_1 += m.album();
 
-    // Line 2 is <n> tracks
-    p->setFont(option.font);
-
-    p->setPen(pen);
-    DrawAndShrink(p, &text_rect_2, QString::number(result.album_size_));
-
-    p->setPen(light_pen);
-    DrawAndShrink(p, &text_rect_2, tr(result.album_size_ == 1 ? "track" : "tracks"));
     break;
   }
   }
+
+  if (line_2.isEmpty()) {
+    text_rect_1 = text_rect;
+  }
+
+  p->setFont(bold_font);
+  p->setPen(pen);
+  p->drawText(text_rect_1, Qt::TextSingleLine | Qt::AlignVCenter, line_1);
+
+  p->setFont(option.font);
+  p->setPen(light_pen);
+  p->drawText(text_rect_2, Qt::TextSingleLine | Qt::AlignVCenter, line_2);
 }
