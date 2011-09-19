@@ -34,7 +34,7 @@ namespace {
 class PlaylistTest : public ::testing::Test {
  protected:
   PlaylistTest()
-    : playlist_(NULL, NULL, NULL, NULL),
+    : playlist_(NULL, NULL, NULL, 1),
       sequence_(NULL, new DummySettingsProvider)
   {
   }
@@ -501,4 +501,3 @@ TEST_F(PlaylistTest, LibraryIdMapMulti) {
 
 
 } // namespace
-
