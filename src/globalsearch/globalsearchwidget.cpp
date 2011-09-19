@@ -26,6 +26,7 @@
 #include "core/logging.h"
 #include "core/stylesheetloader.h"
 #include "core/utilities.h"
+#include "playlist/playlistview.h"
 #include "playlist/songmimedata.h"
 #include "widgets/stylehelper.h"
 
@@ -131,6 +132,8 @@ void GlobalSearchWidget::Init(LibraryBackendInterface* library) {
 #ifdef HAVE_SPOTIFY
   engine_->AddProvider(new SpotifySearchProvider(engine_));
 #endif
+
+  view_->setStyle(new PlaylistProxyStyle(style()));
 
   // The style helper's base color doesn't get initialised until after the
   // constructor.
