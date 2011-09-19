@@ -60,7 +60,6 @@ public:
 
   // QWidget
   bool eventFilter(QObject* o, QEvent* e);
-  void setFocus(Qt::FocusReason reason);
 
 public slots:
   void ReloadSettings();

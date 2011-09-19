@@ -2257,5 +2257,4 @@ void MainWindow::ShowGlobalSearch() {
     connect(search_popup_.get(), SIGNAL(AddToPlaylist(QMimeData*)), SLOT(AddToPlaylist(QMimeData*)));
   }
   search_popup_->show();
-  search_popup_->setFocus();
 }
