@@ -645,6 +645,17 @@ void GstEnginePipeline::SourceSetupCallback(GstURIDecodeBin* bin, GParamSpec *ps
     // here, when this callback is called.
     g_object_set(element, "device", instance->source_device().toLocal8Bit().constData(), NULL);
   }
+  if (element &&
+      g_object_class_find_property(G_OBJECT_GET_CLASS(element), "extra-headers") &&
+      instance->url().host().contains("grooveshark")) {
+    // GrooveShark streaming servers will answer with a 400 error 'Bad request'
+    // if we don't specify 'Range' field in HTTP header.
+    // Maybe it could be usefull in some other cases, but for now, I prefer to
+    // keep this grooveshark specific.
+    GstStructure* headers;
+    headers = gst_structure_new("extra-headers", "Range", G_TYPE_STRING, "bytes=0-", NULL);
+    g_object_set(element, "extra-headers", headers, NULL);
+  }
 }
 
 void GstEnginePipeline::TransitionToNext() {
