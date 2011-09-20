@@ -83,7 +83,9 @@ class GrooveSharkService : public InternetService {
  private slots:
   void UpdateTotalSongCount(int count);
 
+  void ShowConfig();
   void SessionCreated();
+  void OpenSearchTab();
   void DoSearch();
   void SearchSongsFinished();
   void Authenticated();
@@ -92,7 +94,6 @@ class GrooveSharkService : public InternetService {
   void EnsureMenuCreated();
   void EnsureConnected();
 
-  void OpenSearchTab();
   void AuthenticateSession();
   void InitCountry();
 

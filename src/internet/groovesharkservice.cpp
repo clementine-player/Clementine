@@ -111,7 +111,7 @@ QStandardItem* GrooveSharkService::CreateRootItem() {
 
 void GrooveSharkService::LazyPopulate(QStandardItem* item) {
   if (session_id_.isEmpty()) {
-    emit OpenSettingsAtPage(SettingsDialog::Page_GrooveShark);
+    ShowConfig();
   }
   switch (item->data(InternetModel::Role_Type).toInt()) {
     case InternetModel::Type_Service: {
@@ -121,6 +121,10 @@ void GrooveSharkService::LazyPopulate(QStandardItem* item) {
     default:
       break;
   }
+}
+
+void GrooveSharkService::ShowConfig() {
+  emit OpenSettingsAtPage(SettingsDialog::Page_GrooveShark);
 }
 
 void GrooveSharkService::Search(const QString& text, Playlist* playlist, bool now) {
@@ -327,6 +331,10 @@ void GrooveSharkService::EnsureMenuCreated() {
   if(!context_menu_) {
     context_menu_ = new QMenu;
     context_menu_->addActions(GetPlaylistActions());
+    context_menu_->addSeparator();
+    context_menu_->addAction(IconLoader::Load("edit-find"), tr("Search GrooveShark (opens a new tab)") + "...", this, SLOT(OpenSearchTab()));
+    context_menu_->addSeparator();
+    context_menu_->addAction(IconLoader::Load("configure"), tr("Configure GrooveShark..."), this, SLOT(ShowConfig()));
   }
 }
 
