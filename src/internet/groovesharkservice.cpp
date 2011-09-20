@@ -57,6 +57,7 @@ const char* GrooveSharkService::kServiceName = "GrooveShark";
 const char* GrooveSharkService::kSettingsGroup = "GrooveShark";
 const char* GrooveSharkService::kUrl = "http://api.grooveshark.com/ws/3.0/";
 
+const int GrooveSharkService::kSearchDelayMsec = 400;
 const int GrooveSharkService::kSongSearchLimit = 50;
 
 typedef QPair<QString, QVariant> Param;
@@ -69,11 +70,17 @@ GrooveSharkService::GrooveSharkService(InternetModel *parent)
     search_(NULL),
     network_(new NetworkAccessManager(this)),
     context_menu_(NULL),
+    search_delay_(new QTimer(this)),
+    last_search_reply_(NULL),
     api_key_(QByteArray::fromBase64(kApiSecret)),
     login_state_(LoginState_OtherError) {
 
   model()->player()->RegisterUrlHandler(url_handler_);
   model()->player()->playlists()->RegisterSpecialPlaylistType(new GrooveSharkSearchPlaylistType(this));
+
+  search_delay_->setInterval(kSearchDelayMsec);
+  search_delay_->setSingleShot(true);
+  connect(search_delay_, SIGNAL(timeout()), SLOT(DoSearch()));
 
   // Get already existing (authenticated) session id, if any
   QSettings s;
@@ -117,22 +124,31 @@ void GrooveSharkService::LazyPopulate(QStandardItem* item) {
 }
 
 void GrooveSharkService::Search(const QString& text, Playlist* playlist, bool now) {
-  QList<Param> parameters;
-  QNetworkReply *reply;
-
+  pending_search_ = text;
   pending_search_playlist_ = playlist;
 
-  parameters  << Param("query", text)
+  if (now) {
+    search_delay_->stop();
+    DoSearch();
+  } else {
+    search_delay_->start();
+  }
+}
+
+void GrooveSharkService::DoSearch() {
+  QList<Param> parameters;
+
+  parameters  << Param("query", pending_search_)
               << Param("country", "")
               << Param("limit", QString("%1").arg(kSongSearchLimit))
               << Param("offset", "");
-  reply = CreateRequest("getSongSearchResults", parameters, false);
-  connect(reply, SIGNAL(finished()), SLOT(SearchSongsFinished()));
+  last_search_reply_ = CreateRequest("getSongSearchResults", parameters, false);
+  connect(last_search_reply_, SIGNAL(finished()), SLOT(SearchSongsFinished()));
 }
 
 void GrooveSharkService::SearchSongsFinished() {
   QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
-  if (!reply)
+  if (!reply || reply != last_search_reply_)
     return;
 
   reply->deleteLater();

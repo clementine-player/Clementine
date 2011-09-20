@@ -69,6 +69,7 @@ class GrooveSharkService : public InternetService {
   static const char* kUrl;
 
   static const int kSongSearchLimit;
+  static const int kSearchDelayMsec;
 
   static const char* kApiKey;
   static const char* kApiSecret;
@@ -83,6 +84,7 @@ class GrooveSharkService : public InternetService {
   void UpdateTotalSongCount(int count);
 
   void SessionCreated();
+  void DoSearch();
   void SearchSongsFinished();
   void Authenticated();
 
@@ -106,6 +108,7 @@ class GrooveSharkService : public InternetService {
 
 
   GrooveSharkUrlHandler* url_handler_;
+  QString pending_search_;
   Playlist* pending_search_playlist_;
 
   QStandardItem* root_;
@@ -115,6 +118,9 @@ class GrooveSharkService : public InternetService {
 
   QMenu* context_menu_;
   QModelIndex context_item_;
+
+  QTimer* search_delay_;
+  QNetworkReply* last_search_reply_;
 
   QString username_;
   QString password_; // In fact, password's md5 hash
