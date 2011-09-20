@@ -655,6 +655,7 @@ void GstEnginePipeline::SourceSetupCallback(GstURIDecodeBin* bin, GParamSpec *ps
     GstStructure* headers;
     headers = gst_structure_new("extra-headers", "Range", G_TYPE_STRING, "bytes=0-", NULL);
     g_object_set(element, "extra-headers", headers, NULL);
+    gst_structure_free(headers);
   }
 }
 
