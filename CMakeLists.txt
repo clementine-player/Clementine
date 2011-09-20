@@ -49,6 +49,7 @@ find_package(PkgConfig REQUIRED)
 find_package(Protobuf)
 
 pkg_check_modules(TAGLIB REQUIRED taglib>=1.6)
+pkg_check_modules(QJSON REQUIRED QJson)
 pkg_check_modules(GSTREAMER gstreamer-0.10)
 pkg_check_modules(GSTREAMER_BASE gstreamer-base-0.10)
 pkg_check_modules(GSTREAMER_APP gstreamer-app-0.10)
@@ -130,6 +131,7 @@ endif(NOT PROTOBUF_LITE_LIBRARY)
 # Set up definitions and paths
 add_definitions(${QT_DEFINITIONS})
 link_directories(${TAGLIB_LIBRARY_DIRS})
+link_directories(${QJSON_LIBRARY_DIRS})
 link_directories(${GSTREAMER_LIBRARY_DIRS})
 
 # Don't try to use webkit if their include directories couldn't be found.
@@ -140,6 +142,7 @@ endif (NOT QT_QTWEBKIT_INCLUDE_DIR)
 include(${QT_USE_FILE})
 include_directories(${Boost_INCLUDE_DIRS})
 include_directories(${TAGLIB_INCLUDE_DIRS})
+include_directories(${QJSON_INCLUDE_DIRS})
 include_directories(${GSTREAMER_INCLUDE_DIRS})
 include_directories(${GLIB_INCLUDE_DIRS})
 include_directories(${GLIBCONFIG_INCLUDE_DIRS})

@@ -1027,11 +1027,11 @@ target_link_libraries(clementine_lib
   chardet
   echoprint
   sha2
-  qjson
   ${ECHONEST_LIBRARIES}
   ${GOBJECT_LIBRARIES}
   ${GLIB_LIBRARIES}
   ${TAGLIB_LIBRARIES}
+  ${QJSON_LIBRARIES}
   ${QT_LIBRARIES}
   ${GSTREAMER_BASE_LIBRARIES}
   ${GSTREAMER_LIBRARIES}
