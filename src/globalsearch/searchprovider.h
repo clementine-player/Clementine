@@ -56,7 +56,7 @@ public:
       Quality_None
     };
 
-    // This must be set by the provder using the constructor.
+    // This must be set by the provider using the constructor.
     SearchProvider* provider_;
 
     // These must be set explicitly by the provider.
