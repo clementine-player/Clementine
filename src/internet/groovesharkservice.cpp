@@ -48,7 +48,7 @@
 #include "groovesharkservice.h"
 
 // The GrooveShark terms of service require that application keys are not
-// accessible to third parties. Therefore this application key is ofuscated to
+// accessible to third parties. Therefore this application key is obfuscated to
 // prevent third parties from viewing it.
 const char* GrooveSharkService::kApiKey = "clementineplayer";
 const char* GrooveSharkService::kApiSecret = "MWVlNmU1N2IzNGY3MjA1ZTg1OWJkMTllNjk4YzEzZjY";
