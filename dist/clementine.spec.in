@@ -14,8 +14,9 @@ BuildRequires:  qt4-devel boost-devel gcc-c++ glew-devel libgpod-devel
 BuildRequires:  cmake gstreamer-devel gstreamer-plugins-base-devel
 BuildRequires:  libimobiledevice-devel libplist-devel usbmuxd-devel
 BuildRequires:  libmtp-devel protobuf-devel protobuf-compiler libcdio-devel
+BuildRequires:  qjson-devel
 
-Requires:       libgpod protobuf-lite libcdio
+Requires:       libgpod protobuf-lite libcdio qjson
 
 # GStreamer codec dependencies
 Requires:       gstreamer-plugins-ugly
