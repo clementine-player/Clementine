@@ -92,6 +92,7 @@ class GrooveSharkService : public InternetService {
 
  private:
   void EnsureMenuCreated();
+  void EnsureItemsCreated();
   void EnsureConnected();
 
   void AuthenticateSession();

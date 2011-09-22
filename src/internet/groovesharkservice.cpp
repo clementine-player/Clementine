@@ -97,22 +97,10 @@ GrooveSharkService::~GrooveSharkService() {
 QStandardItem* GrooveSharkService::CreateRootItem() {
   root_ = new QStandardItem(QIcon(":providers/grooveshark.png"), kServiceName);
   root_->setData(true, InternetModel::Role_CanLazyLoad);
-  if (!search_) {
-    search_ = new QStandardItem(IconLoader::Load("edit-find"),
-                                tr("Search GrooveShark (opens a new tab)"));
-    search_->setData(Type_SearchResults, InternetModel::Role_Type);
-    search_->setData(InternetModel::PlayBehaviour_DoubleClickAction,
-                             InternetModel::Role_PlayBehaviour);
-    root_->appendRow(search_);
-  }
-
   return root_;
 }
 
 void GrooveSharkService::LazyPopulate(QStandardItem* item) {
-  if (session_id_.isEmpty()) {
-    ShowConfig();
-  }
   switch (item->data(InternetModel::Role_Type).toInt()) {
     case InternetModel::Type_Service: {
       EnsureConnected();
@@ -301,6 +289,7 @@ void GrooveSharkService::Authenticated() {
   login_state_ = LoginState_LoggedIn;
   user_id_ = result["UserID"].toString();
   emit LoginFinished(true);
+  EnsureItemsCreated();
 }
 
 void GrooveSharkService::Logout() {
@@ -338,11 +327,24 @@ void GrooveSharkService::EnsureMenuCreated() {
   }
 }
 
-void GrooveSharkService::EnsureConnected() {
-  if (!session_id_.isEmpty()) {
-    return;
+void GrooveSharkService::EnsureItemsCreated() {
+  if (!session_id_.isEmpty() /* only if user is authenticated */ &&
+      !search_) {
+    search_ = new QStandardItem(IconLoader::Load("edit-find"),
+                                tr("Search GrooveShark (opens a new tab)"));
+    search_->setData(Type_SearchResults, InternetModel::Role_Type);
+    search_->setData(InternetModel::PlayBehaviour_DoubleClickAction,
+                             InternetModel::Role_PlayBehaviour);
+    root_->appendRow(search_);
   }
-  // TODO
+}
+
+void GrooveSharkService::EnsureConnected() {
+  if (session_id_.isEmpty()) {
+    ShowConfig();
+  } else {
+    EnsureItemsCreated();
+  }
 }
 
 void GrooveSharkService::OpenSearchTab() {
