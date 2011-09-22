@@ -385,6 +385,9 @@ QMimeData* MergedProxyModel::mimeData(const QModelIndexList &indexes) const {
 
   // Only ask the first index's model
   const QAbstractItemModel* model = mapToSource(indexes[0]).model();
+  if (!model) {
+    return 0;
+  }
 
   // Only ask about the indexes that are actually in that model
   QModelIndexList indexes_in_model;
