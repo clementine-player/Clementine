@@ -35,7 +35,9 @@ class GrooveSharkService : public InternetService {
   ~GrooveSharkService();
 
   enum Type {
-    Type_SearchResults = InternetModel::TypeCount
+    Type_SearchResults = InternetModel::TypeCount,
+    Type_UserPlaylist,
+    Type_Track
   };
 
   // Values are persisted - don't change.
@@ -59,6 +61,8 @@ class GrooveSharkService : public InternetService {
   void Login(const QString& username, const QString& password);
   void Logout();
   bool IsLoggedIn() { return !session_id_.isEmpty(); }
+  void RetrieveUserPlaylists();
+
   // Persisted in the settings and updated on each Login().
   LoginState login_state() const { return login_state_; }
   const QString& session_id() { return session_id_; }
@@ -80,6 +84,15 @@ class GrooveSharkService : public InternetService {
  protected:
   QModelIndex GetCurrentIndex();
 
+  struct PlaylistInfo {
+    PlaylistInfo() {}
+    PlaylistInfo(int id, QString name)
+      : id_(id), name_(name) {}
+
+    int id_;
+    QString name_;
+  };
+
  private slots:
   void UpdateTotalSongCount(int count);
 
@@ -89,6 +102,8 @@ class GrooveSharkService : public InternetService {
   void DoSearch();
   void SearchSongsFinished();
   void Authenticated();
+  void UserPlaylistsRetrieved();
+  void PlaylistSongsRetrieved();
 
  private:
   void EnsureMenuCreated();
@@ -106,12 +121,17 @@ class GrooveSharkService : public InternetService {
                      bool use_https = false);
   // Convenient function for extracting result from reply
   QVariantMap ExtractResult(QNetworkReply* reply);
+  // Convenient function for extracting songs from grooveshark result
+  SongList ExtractSongs(const QVariantMap& result);
   void ResetSessionId();
 
 
   GrooveSharkUrlHandler* url_handler_;
+
   QString pending_search_;
   Playlist* pending_search_playlist_;
+
+  QMap<QNetworkReply*, PlaylistInfo> pending_retrieve_playlists_;
 
   QStandardItem* root_;
   QStandardItem* search_;

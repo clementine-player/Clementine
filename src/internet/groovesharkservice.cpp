@@ -146,24 +146,7 @@ void GrooveSharkService::SearchSongsFinished() {
   reply->deleteLater();
 
   QVariantMap result = ExtractResult(reply);
-  QVariantList result_songs = result["songs"].toList();
-  SongList songs;
-  for (int i=0; i<result_songs.size(); ++i) {
-    QVariantMap result_song = result_songs[i].toMap();
-    Song song;
-    int song_id = result_song["SongID"].toInt();
-    QString song_name = result_song["SongName"].toString();
-    QString artist_name = result_song["ArtistName"].toString();
-    QString album_name = result_song["AlbumName"].toString();
-    song.Init(song_name, artist_name, album_name, 0);
-    song.set_id(song_id);
-    // Special kind of URL: because we need to request a stream key for each
-    // play, we generate fake URL for now, and we will create a real streaming
-    // URL when user will actually play the song.
-    // TODO: Implement an UrlHandler
-    song.set_url(QString("grooveshark://%1").arg(song_id));
-    songs << song;
-  }
+  SongList songs = ExtractSongs(result);
   pending_search_playlist_->Clear();
   pending_search_playlist_->InsertSongs(songs);
 }
@@ -336,6 +319,7 @@ void GrooveSharkService::EnsureItemsCreated() {
     search_->setData(InternetModel::PlayBehaviour_DoubleClickAction,
                              InternetModel::Role_PlayBehaviour);
     root_->appendRow(search_);
+    RetrieveUserPlaylists();
   }
 }
 
@@ -345,6 +329,70 @@ void GrooveSharkService::EnsureConnected() {
   } else {
     EnsureItemsCreated();
   }
+}
+
+void GrooveSharkService::RetrieveUserPlaylists() {
+  QNetworkReply *reply;
+  
+  reply = CreateRequest("getUserPlaylists", QList<Param>(), true);
+
+  connect(reply, SIGNAL(finished()), SLOT(UserPlaylistsRetrieved()));
+}
+
+void GrooveSharkService::UserPlaylistsRetrieved() {
+  QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
+  if (!reply)
+    return;
+
+  reply->deleteLater();
+
+  QVariantMap result = ExtractResult(reply);
+  QVariantList playlists = result["playlists"].toList();
+  QVariantList::iterator it;
+  for (it = playlists.begin(); it != playlists.end(); ++it) {
+    // Get playlist info
+    QVariantMap playlist = (*it).toMap();
+    int playlist_id = playlist["PlaylistID"].toInt();
+    QString playlist_name = playlist["PlaylistName"].toString();
+
+    // Request playlist's songs
+    QNetworkReply *reply;
+    QList<Param> parameters;
+    parameters << Param("playlistID", playlist_id);
+    reply = CreateRequest("getPlaylistSongs", parameters, true); 
+    connect(reply, SIGNAL(finished()), SLOT(PlaylistSongsRetrieved()));
+    
+    // Keep in mind correspondance between reply object and playlist
+    pending_retrieve_playlists_.insert(reply, PlaylistInfo(playlist_id, playlist_name));
+  }
+}
+
+void GrooveSharkService::PlaylistSongsRetrieved() {
+  QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
+  if (!reply)
+    return;
+
+  reply->deleteLater();
+
+  // Find corresponding playlist info
+  PlaylistInfo playlist_info = pending_retrieve_playlists_.take(reply);
+  // Create playlist item
+  QStandardItem* item = new QStandardItem(playlist_info.name_);
+  item->setData(Type_UserPlaylist, InternetModel::Role_Type);
+  item->setData(true, InternetModel::Role_CanLazyLoad);
+
+  QVariantMap result = ExtractResult(reply);
+  SongList songs = ExtractSongs(result);
+  foreach (const Song& song, songs) {
+    QStandardItem* child = new QStandardItem(song.PrettyTitleWithArtist());
+    child->setData(Type_Track, InternetModel::Role_Type);
+    child->setData(QVariant::fromValue(song), InternetModel::Role_SongMetadata);
+    child->setData(InternetModel::PlayBehaviour_SingleItem, InternetModel::Role_PlayBehaviour);
+    child->setData(song.url(), InternetModel::Role_Url);
+
+    item->appendRow(child);
+  }
+  root_->appendRow(item);
 }
 
 void GrooveSharkService::OpenSearchTab() {
@@ -407,4 +455,25 @@ QVariantMap GrooveSharkService::ExtractResult(QNetworkReply* reply) {
   }
   qLog(Debug) << result;
   return result["result"].toMap();
+}
+
+SongList GrooveSharkService::ExtractSongs(const QVariantMap& result) {
+  QVariantList result_songs = result["songs"].toList();
+  SongList songs;
+  for (int i=0; i<result_songs.size(); ++i) {
+    QVariantMap result_song = result_songs[i].toMap();
+    Song song;
+    int song_id = result_song["SongID"].toInt();
+    QString song_name = result_song["SongName"].toString();
+    QString artist_name = result_song["ArtistName"].toString();
+    QString album_name = result_song["AlbumName"].toString();
+    song.Init(song_name, artist_name, album_name, 0);
+    song.set_id(song_id);
+    // Special kind of URL: because we need to request a stream key for each
+    // play, we generate a fake URL for now, and we will create a real streaming
+    // URL when user will actually play the song (through url handler)
+    song.set_url(QString("grooveshark://%1").arg(song_id));
+    songs << song;
+  }
+  return songs;
 }
