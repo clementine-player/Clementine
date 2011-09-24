@@ -30,6 +30,8 @@
 #include <QSettings>
 
 const char* DigitallyImportedServiceBase::kSettingsGroup = "digitally_imported";
+const int DigitallyImportedServiceBase::kStreamsCacheDurationSecs =
+    60 * 60 * 24 * 14; // 2 weeks
 
 
 DigitallyImportedServiceBase::DigitallyImportedServiceBase(
@@ -72,6 +74,15 @@ void DigitallyImportedServiceBase::LazyPopulate(QStandardItem* parent) {
 }
 
 void DigitallyImportedServiceBase::RefreshStreams() {
+  if (IsStreamListStale()) {
+    ForceRefreshStreams();
+    return;
+  }
+
+  PopulateStreams();
+}
+
+void DigitallyImportedServiceBase::ForceRefreshStreams() {
   if (task_id_ != -1) {
     return;
   }
@@ -105,7 +116,7 @@ void DigitallyImportedServiceBase::RefreshStreamsFinished() {
                    "\"name\":\"([^\"]+)\","
                    "\"description\":\"([^\"]+)\"");
 
-  QList<Stream> streams;
+  saved_streams_.clear();
 
   int pos = 0;
   while (pos >= 0) {
@@ -120,14 +131,22 @@ void DigitallyImportedServiceBase::RefreshStreamsFinished() {
     stream.key_         = re.cap(2).replace("\\/", "/");
     stream.name_        = re.cap(3).replace("\\/", "/");
     stream.description_ = re.cap(4).replace("\\/", "/");
-    streams << stream;
+    saved_streams_ << stream;
   }
 
   // Sort by name
-  qSort(streams);
+  qSort(saved_streams_);
+
+  SaveStreams(saved_streams_);
+  PopulateStreams();
+}
+
+void DigitallyImportedServiceBase::PopulateStreams() {
+  if (root_->hasChildren())
+    root_->removeRows(0, root_->rowCount());
 
   // Add each stream to the model
-  foreach (const Stream& stream, streams) {
+  foreach (const Stream& stream, saved_streams_) {
     Song song;
     song.set_title(stream.name_);
     song.set_artist(service_description_);
@@ -153,6 +172,8 @@ void DigitallyImportedServiceBase::ReloadSettings() {
   audio_type_ = s.value("audio_type", 0).toInt();
   username_ = s.value("username").toString();
   password_ = s.value("password").toString();
+  last_refreshed_streams_ = s.value("last_refreshed_" + url_scheme_).toDateTime();
+  saved_streams_ = LoadStreams();
 }
 
 void DigitallyImportedServiceBase::ShowContextMenu(
@@ -165,7 +186,7 @@ void DigitallyImportedServiceBase::ShowContextMenu(
                              this, SLOT(Homepage()));
     context_menu_->addAction(IconLoader::Load("view-refresh"),
                              tr("Refresh streams"),
-                             this, SLOT(RefreshStreams()));
+                             this, SLOT(ForceRefreshStreams()));
     context_menu_->addSeparator();
     context_menu_->addAction(IconLoader::Load("configure"),
                              tr("Configure..."),
@@ -218,4 +239,59 @@ void DigitallyImportedServiceBase::LoadPlaylistFinished() {
 
 void DigitallyImportedServiceBase::ShowSettingsDialog() {
   emit OpenSettingsAtPage(SettingsDialog::Page_DigitallyImported);
+}
+
+DigitallyImportedServiceBase::StreamList DigitallyImportedServiceBase::LoadStreams() const {
+  StreamList ret;
+
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+
+  int count = s.beginReadArray(url_scheme_);
+  for (int i=0 ; i<count ; ++i) {
+    s.setArrayIndex(i);
+
+    Stream stream;
+    stream.id_ = s.value("id").toInt();
+    stream.key_ = s.value("key").toString();
+    stream.name_ = s.value("name").toString();
+    stream.description_ = s.value("description").toString();
+    ret << stream;
+  }
+  s.endArray();
+
+  return ret;
+}
+
+void DigitallyImportedServiceBase::SaveStreams(const StreamList& streams) {
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+
+  s.beginWriteArray(url_scheme_, streams.count());
+  for (int i=0 ; i<streams.count() ; ++i) {
+    const Stream& stream = streams[i];
+    s.setArrayIndex(i);
+    s.setValue("id", stream.id_);
+    s.setValue("key", stream.key_);
+    s.setValue("name", stream.name_);
+    s.setValue("description", stream.description_);
+  }
+  s.endArray();
+
+  last_refreshed_streams_ = QDateTime::currentDateTime();
+  s.setValue("last_refreshed_" + url_scheme_, last_refreshed_streams_);
+}
+
+bool DigitallyImportedServiceBase::IsStreamListStale() const {
+  return last_refreshed_streams_.isNull() ||
+         last_refreshed_streams_.secsTo(QDateTime::currentDateTime()) >
+            kStreamsCacheDurationSecs;
+}
+
+DigitallyImportedServiceBase::StreamList DigitallyImportedServiceBase::Streams() {
+  if (IsStreamListStale()) {
+    metaObject()->invokeMethod(this, "ForceRefreshStreams", Qt::QueuedConnection);
+  }
+
+  return saved_streams_;
 }

@@ -38,6 +38,7 @@ public:
   ~DigitallyImportedServiceBase();
 
   static const char* kSettingsGroup;
+  static const int kStreamsCacheDurationSecs;
 
   QStandardItem* CreateRootItem();
   void LazyPopulate(QStandardItem* parent);
@@ -48,6 +49,20 @@ public:
   bool is_valid_stream_selected() const;
   bool is_premium_stream_selected() const;
   bool is_premium_account() const;
+
+  // Public for the global search provider.
+  struct Stream {
+    int id_;
+    QString key_;
+    QString name_;
+    QString description_;
+
+    bool operator <(const Stream& other) const { return name_ < other.name_; }
+  };
+  typedef QList<Stream> StreamList;
+
+  bool IsStreamListStale() const;
+  StreamList Streams();
 
 protected:
   struct Playlist {
@@ -69,6 +84,7 @@ protected slots:
 
 private slots:
   void Homepage();
+  void ForceRefreshStreams();
   void RefreshStreams();
   void RefreshStreamsFinished();
   void ShowSettingsDialog();
@@ -86,14 +102,9 @@ protected:
   QList<Playlist> playlists_;
 
 private:
-  struct Stream {
-    int id_;
-    QString key_;
-    QString name_;
-    QString description_;
-
-    bool operator <(const Stream& other) const { return name_ < other.name_; }
-  };
+  void PopulateStreams();
+  StreamList LoadStreams() const;
+  void SaveStreams(const StreamList& streams);
 
 private:
   // Set by subclasses through the constructor
@@ -108,6 +119,9 @@ private:
 
   QMenu* context_menu_;
   QStandardItem* context_item_;
+
+  QList<Stream> saved_streams_;
+  QDateTime last_refreshed_streams_;
 };
 
 #endif // DIGITALLYIMPORTEDSERVICEBASE_H
