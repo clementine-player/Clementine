@@ -42,6 +42,8 @@ private slots:
 private:
   LastFMService* service_;
 
+  QStringList safe_words_;
+
   QImage icon_;
 
   struct Item {

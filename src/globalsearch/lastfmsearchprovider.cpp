@@ -29,6 +29,8 @@ LastFMSearchProvider::LastFMSearchProvider(LastFMService* service, QObject* pare
   Init("Last.fm", "lastfm", QIcon(":last.fm/as.png"), false, true);
   icon_ = ScaleAndPad(QImage(":last.fm/as.png"));
 
+  safe_words_ << "lastfm" << "last.fm";
+
   connect(service, SIGNAL(SavedItemsChanged()), SLOT(RecreateItems()));
   RecreateItems();
 }
@@ -46,19 +48,33 @@ SearchProvider::ResultList LastFMSearchProvider::Search(int id, const QString& q
     foreach (const QString& token, tokens) {
       if (item.keyword_.startsWith(token, Qt::CaseInsensitive)) {
         result.match_quality_ = Result::Quality_AtStart;
-        result.metadata_ = item.metadata_;
-        break; // Next item
+        continue;
       }
 
-      Result::MatchQuality quality = MatchQuality(tokens, item.metadata_.title());
-      if (quality == Result::Quality_None)
-        continue;
+      int index = item.metadata_.title().indexOf(token, 0, Qt::CaseInsensitive);
+      if (index == -1) {
+        bool matched_safe_word = false;
+        foreach (const QString& safe_word, safe_words_) {
+          if (safe_word.startsWith(token, Qt::CaseInsensitive)) {
+            matched_safe_word = true;
+            break;
+          }
+        }
 
-      result.match_quality_ = qMin(quality, result.match_quality_);
-      result.metadata_ = item.metadata_;
+        if (matched_safe_word)
+          continue;
+        result.match_quality_ = Result::Quality_None;
+        break;
+      }
+
+      result.match_quality_ = qMin(result.match_quality_, Result::Quality_Middle);
     }
 
+    if (result.match_quality_ == Result::Quality_Middle) {
+      result.match_quality_ = MatchQuality(tokens, result.metadata_.title());
+    }
     if (result.match_quality_ != Result::Quality_None) {
+      result.metadata_ = item.metadata_;
       ret << result;
     }
 
