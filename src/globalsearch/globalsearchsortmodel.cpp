@@ -50,6 +50,7 @@ bool GlobalSearchSortModel::lessThan(const QModelIndex& left, const QModelIndex&
   // Then compare title, artist and album
   switch (r1.type_) {
   case SearchProvider::Result::Type_Track:
+  case SearchProvider::Result::Type_Stream:
     CompareString(title);
     // fallthrough
   case SearchProvider::Result::Type_Album:

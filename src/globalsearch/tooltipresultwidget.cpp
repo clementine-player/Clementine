@@ -59,6 +59,7 @@ QSize TooltipResultWidget::CalculateSizeHint() const {
 
   switch (result_.type_) {
   case SearchProvider::Result::Type_Track:
+  case SearchProvider::Result::Type_Stream:
     break;
 
   case SearchProvider::Result::Type_Album:
@@ -119,6 +120,7 @@ void TooltipResultWidget::paintEvent(QPaintEvent*) {
 
   switch (result_.type_) {
   case SearchProvider::Result::Type_Track:
+  case SearchProvider::Result::Type_Stream:
     break;
 
   case SearchProvider::Result::Type_Album:

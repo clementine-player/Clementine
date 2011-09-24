@@ -659,6 +659,7 @@ endif(ENABLE_VISUALISATIONS)
 if(HAVE_LIBLASTFM)
   list(APPEND SOURCES
     covers/lastfmcoverprovider.cpp
+    globalsearch/lastfmsearchprovider.cpp
     internet/fixlastfm.cpp
     internet/lastfmservice.cpp
     internet/lastfmsettingspage.cpp
@@ -672,6 +673,7 @@ if(HAVE_LIBLASTFM)
   )
   list(APPEND HEADERS
     covers/lastfmcoverprovider.h
+    globalsearch/lastfmsearchprovider.h
     internet/lastfmservice.h
     internet/lastfmsettingspage.h
     internet/lastfmstationdialog.h

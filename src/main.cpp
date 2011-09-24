@@ -220,6 +220,7 @@ int main(int argc, char *argv[]) {
   qRegisterMetaTypeStreamOperators<QMap<int, int> >("ColumnAlignmentMap");
   qRegisterMetaType<QNetworkCookie>("QNetworkCookie");
   qRegisterMetaType<QList<QNetworkCookie> >("QList<QNetworkCookie>");
+  qRegisterMetaType<SearchProvider::ResultList>("SearchProvider::ResultList");
 
   qRegisterMetaType<GstBuffer*>("GstBuffer*");
   qRegisterMetaType<GstElement*>("GstElement*");

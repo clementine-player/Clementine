@@ -136,7 +136,7 @@ void LibrarySearchProvider::LoadTracksAsync(int id, const Result& result) {
     ret << result.metadata_;
     break;
 
-  case Result::Type_Album:  {
+  case Result::Type_Album: {
     // Find all the songs in this album.
     LibraryQuery query;
     query.SetColumnSpec("ROWID, " + Song::kColumnSpec);
@@ -156,6 +156,9 @@ void LibrarySearchProvider::LoadTracksAsync(int id, const Result& result) {
       ret << song;
     }
   }
+
+  default:
+    break;
   }
 
   SortSongs(&ret);

@@ -42,6 +42,7 @@ public:
     // The order of types here is the order they'll appear in the UI.
     enum Type {
       Type_Track = 0,
+      Type_Stream,
       Type_Album
     };
 
@@ -113,7 +114,7 @@ protected:
   // Sorts a list of songs by disc, then by track.
   static void SortSongs(SongList* list);
 
-  // Subclasses must call this from their constructor
+  // Subclasses must call this from their constructors.
   void Init(const QString& name, const QString& id, const QIcon& icon,
             bool delay_searches, bool serialised_art);
 

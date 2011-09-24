@@ -20,6 +20,8 @@
 #include "lastfmurlhandler.h"
 #include "internetmodel.h"
 #include "internetplaylistitem.h"
+#include "globalsearch/globalsearch.h"
+#include "globalsearch/lastfmsearchprovider.h"
 #include "core/logging.h"
 #include "core/player.h"
 #include "core/song.h"
@@ -79,6 +81,7 @@ LastFMService::LastFMService(InternetModel* parent)
     initial_tune_(false),
     tune_task_id_(0),
     scrobbling_enabled_(false),
+    root_item_(NULL),
     artist_list_(NULL),
     tag_list_(NULL),
     custom_list_(NULL),
@@ -111,6 +114,8 @@ LastFMService::LastFMService(InternetModel* parent)
 
   model()->player()->RegisterUrlHandler(url_handler_);
   model()->cover_providers()->AddProvider(new LastFmCoverProvider(this));
+
+  model()->global_search()->AddProvider(new LastFMSearchProvider(this, this));
 }
 
 LastFMService::~LastFMService() {
@@ -126,8 +131,8 @@ void LastFMService::ReloadSettings() {
   buttons_visible_ = settings.value("ShowLoveBanButtons", true).toBool();
   scrobble_button_visible_ = settings.value("ShowScrobbleButton", true).toBool();
 
-  friend_names_ = settings.value("FriendNames").toStringList();
   last_refreshed_friends_ = settings.value("LastRefreshedFriends").toDateTime();
+  friend_names_ = settings.value("FriendNames").toStringList();
 
   //avoid emitting signal if it's not changed
   if(scrobbling_enabled_old != scrobbling_enabled_)
@@ -151,9 +156,9 @@ bool LastFMService::IsSubscriber() const {
 }
 
 QStandardItem* LastFMService::CreateRootItem() {
-  QStandardItem* item = new QStandardItem(QIcon(":last.fm/as.png"), kServiceName);
-  item->setData(true, InternetModel::Role_CanLazyLoad);
-  return item;
+  root_item_ = new QStandardItem(QIcon(":last.fm/as.png"), kServiceName);
+  root_item_->setData(true, InternetModel::Role_CanLazyLoad);
+  return root_item_;
 }
 
 void LastFMService::LazyPopulate(QStandardItem* parent) {
@@ -281,6 +286,7 @@ void LastFMService::SignOut() {
 
   QSettings settings;
   settings.beginGroup(kSettingsGroup);
+
   settings.setValue("Username", QString());
   settings.setValue("Session", QString());
   settings.setValue("FriendNames", friend_names_);
@@ -589,13 +595,55 @@ bool LastFMService::IsFriendsListStale() const {
             kFriendsCacheDurationSecs;
 }
 
+QStringList LastFMService::FriendNames() {
+  // Update the list for next time, in the main thread.
+  if (IsFriendsListStale())
+    metaObject()->invokeMethod(this, "RefreshFriends", Qt::QueuedConnection);
+
+  QSettings s;
+  s.beginGroup(LastFMService::kSettingsGroup);
+  return s.value("FriendNames").toStringList();
+}
+
+static QStringList SavedArtistOrTagRadioNames(const QString& name) {
+  QStringList ret;
+
+  QSettings s;
+  s.beginGroup(LastFMService::kSettingsGroup);
+  int count = s.beginReadArray(name);
+  for (int i=0 ; i<count ; ++i) {
+    ret << s.value("key").toString();
+  }
+  s.endArray();
+
+  return ret;
+}
+
+QStringList LastFMService::SavedArtistRadioNames() const {
+  return SavedArtistOrTagRadioNames("artists");
+}
+
+QStringList LastFMService::SavedTagRadioNames() const {
+  return SavedArtistOrTagRadioNames("tags");
+}
+
+void LastFMService::RefreshFriends() {
+  RefreshFriends(false);
+}
+
 void LastFMService::ForceRefreshFriends() {
   RefreshFriends(true);
 }
 
 void LastFMService::RefreshFriends(bool force) {
-  if (!friends_list_ || !IsAuthenticated())
+  if (!IsAuthenticated()) {
     return;
+  }
+
+  if (!friends_list_) {
+    root_item_->setData(false, InternetModel::Role_CanLazyLoad);
+    LazyPopulate(root_item_);
+  }
 
   if (!force && !IsFriendsListStale()) {
     PopulateFriendsList();
@@ -635,6 +683,7 @@ void LastFMService::RefreshFriendsFinished() {
   }
 
   last_refreshed_friends_ = QDateTime::currentDateTime();
+
   friend_names_ = QStringList();
   foreach (const lastfm::User& f, friends) {
     friend_names_ << f.name();
@@ -646,6 +695,8 @@ void LastFMService::RefreshFriendsFinished() {
   s.setValue("LastRefreshedFriends", last_refreshed_friends_);
 
   PopulateFriendsList();
+
+  emit SavedItemsChanged();
 }
 
 void LastFMService::PopulateFriendsList() {
@@ -756,6 +807,8 @@ void LastFMService::AddArtistOrTag(const QString& name,
   emit AddItemToPlaylist(item->index(), AddMode_Append);
 
   SaveList(name, list);
+
+  emit SavedItemsChanged();
 }
 
 void LastFMService::SaveList(const QString& name, QStandardItem* list) const {
@@ -774,35 +827,30 @@ void LastFMService::RestoreList(const QString& name,
                                 const QString& url_pattern,
                                 const QString& title_pattern,
                                 const QIcon& icon, QStandardItem* parent) {
-  QSettings settings;
-  settings.beginGroup(kSettingsGroup);
-
   if (parent->hasChildren())
     parent->removeRows(0, parent->rowCount());
 
-  int count = settings.beginReadArray(name);
-  for (int i=0 ; i<count ; ++i) {
-    settings.setArrayIndex(i);
-    QString content = settings.value("key").toString();
+  const QStringList keys = SavedArtistOrTagRadioNames(name);
+
+  foreach (const QString& key, keys) {
     QString url;
-    if (name == "custom" && content.startsWith("lastfm://")) {
-      url = content;
+    if (name == "custom" && key.startsWith("lastfm://")) {
+      url = key;
     } else if (name == "custom") {
-      url = url_pattern.arg(QString(content.toUtf8().toBase64()));
+      url = url_pattern.arg(QString(key.toUtf8().toBase64()));
     } else {
-      url = url_pattern.arg(content);
+      url = url_pattern.arg(key);
     }
 
     Song song;
     song.set_url(QUrl(url));
-    song.set_title(title_pattern.arg(content));
+    song.set_title(title_pattern.arg(key));
 
-    QStandardItem* item = new QStandardItem(icon, content);
+    QStandardItem* item = new QStandardItem(icon, key);
     item->setData(QVariant::fromValue(song), InternetModel::Role_SongMetadata);
     item->setData(InternetModel::PlayBehaviour_SingleItem, InternetModel::Role_PlayBehaviour);
     parent->appendRow(item);
   }
-  settings.endArray();
 }
 
 void LastFMService::Remove() {

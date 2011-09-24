@@ -166,6 +166,9 @@ void SpotifySearchProvider::LoadTracksAsync(int id, const Result& result) {
     s->AlbumBrowse(uri);
     break;
   }
+
+  default:
+    break;
   }
 }
 

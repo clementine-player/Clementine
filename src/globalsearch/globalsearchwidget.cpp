@@ -112,8 +112,12 @@ GlobalSearchWidget::~GlobalSearchWidget() {
 
 void GlobalSearchWidget::Init(GlobalSearch* engine) {
   engine_ = engine;
+
+  // These have to be queued connections because they may get emitted before
+  // our call to Search() (or whatever) returns and we add the ID to the map.
   connect(engine_, SIGNAL(ResultsAvailable(int,SearchProvider::ResultList)),
-          SLOT(AddResults(int,SearchProvider::ResultList)));
+          SLOT(AddResults(int,SearchProvider::ResultList)),
+          Qt::QueuedConnection);
   connect(engine_, SIGNAL(SearchFinished(int)), SLOT(SearchFinished(int)),
           Qt::QueuedConnection);
   connect(engine_, SIGNAL(ArtLoaded(int,QPixmap)), SLOT(ArtLoaded(int,QPixmap)),
@@ -553,6 +557,10 @@ GlobalSearchWidget::CombineAction GlobalSearchWidget::CanCombineResults(
     // fallthrough
   case SearchProvider::Result::Type_Album:
     if (StringsDiffer(album) || StringsDiffer(artist))
+      return CannotCombine;
+    break;
+  case SearchProvider::Result::Type_Stream:
+    if (StringsDiffer(url().toString))
       return CannotCombine;
     break;
   }

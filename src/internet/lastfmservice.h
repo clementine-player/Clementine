@@ -113,6 +113,11 @@ class LastFMService : public InternetService {
 
   bool IsFriendsListStale() const;
 
+  // Thread safe
+  QStringList FriendNames();
+  QStringList SavedArtistRadioNames() const;
+  QStringList SavedTagRadioNames() const;
+
  public slots:
   void NowPlaying(const Song& song);
   void Scrobble();
@@ -130,6 +135,8 @@ class LastFMService : public InternetService {
   void UpdatedSubscriberStatus(bool is_subscriber);
   void ScrobbledRadioStream();
 
+  void SavedItemsChanged();
+
  protected:
   QModelIndex GetCurrentIndex();
 
@@ -146,6 +153,7 @@ class LastFMService : public InternetService {
   void AddTagRadio();
   void AddCustomRadio();
   void ForceRefreshFriends();
+  void RefreshFriends();
   void Remove();
 
   // Radio tuner.
@@ -208,6 +216,7 @@ class LastFMService : public InternetService {
   bool buttons_visible_;
   bool scrobble_button_visible_;
 
+  QStandardItem* root_item_;
   QStandardItem* artist_list_;
   QStandardItem* tag_list_;
   QStandardItem* custom_list_;
