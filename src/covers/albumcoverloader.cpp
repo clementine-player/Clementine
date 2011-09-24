@@ -176,8 +176,6 @@ AlbumCoverLoader::TryLoadResult AlbumCoverLoader::TryLoadImage(
 }
 
 void AlbumCoverLoader::SpotifyImageLoaded(const QUrl& url, const QImage& image) {
-  qLog(Debug) << "Got image from spotify:" << url;
-
   if (!remote_spotify_tasks_.contains(url))
     return;
 
