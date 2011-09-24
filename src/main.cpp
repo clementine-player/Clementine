@@ -43,6 +43,7 @@
 #include "covers/artloader.h"
 #include "covers/coverproviders.h"
 #include "engines/enginebase.h"
+#include "globalsearch/globalsearch.h"
 #include "internet/internetmodel.h"
 #include "library/directory.h"
 #include "playlist/playlist.h"
@@ -383,8 +384,9 @@ int main(int argc, char *argv[]) {
   TaskManager task_manager;
   PlaylistManager playlists(&task_manager, NULL);
   Player player(&playlists);
+  GlobalSearch global_search;
   InternetModel internet_model(database.get(), &task_manager, &player,
-                               &cover_providers, NULL);
+                               &cover_providers, &global_search, NULL);
 
 #ifdef Q_OS_LINUX
   // In 11.04 Ubuntu decided that the system tray should be reserved for certain
@@ -422,7 +424,8 @@ int main(int argc, char *argv[]) {
       tray_icon.get(),
       &osd,
       &art_loader,
-      &cover_providers);
+      &cover_providers,
+      &global_search);
 #ifdef HAVE_DBUS
   QObject::connect(&mpris, SIGNAL(RaiseMainWindow()), &w, SLOT(Raise()));
 #endif

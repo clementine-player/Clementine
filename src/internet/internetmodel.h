@@ -26,6 +26,7 @@
 
 class CoverProviders;
 class Database;
+class GlobalSearch;
 class MergedProxyModel;
 class PlayerInterface;
 class InternetService;
@@ -42,7 +43,7 @@ class InternetModel : public QStandardItemModel {
 public:
   InternetModel(BackgroundThread<Database>* db_thread, TaskManager* task_manager,
              PlayerInterface* player, CoverProviders* cover_providers,
-                QObject* parent = 0);
+             GlobalSearch* global_search, QObject* parent = 0);
 
   enum Role {
     // Services can use this role to distinguish between different types of
@@ -141,6 +142,7 @@ public:
   TaskManager* task_manager() const { return task_manager_; }
   PlayerInterface* player() const { return player_; }
   CoverProviders* cover_providers() const { return cover_providers_; }
+  GlobalSearch* global_search() const { return global_search_; }
 
 signals:
   void StreamError(const QString& message);
@@ -159,6 +161,7 @@ private:
   TaskManager* task_manager_;
   PlayerInterface* player_;
   CoverProviders* cover_providers_;
+  GlobalSearch* global_search_;
 };
 
 #endif // INTERNETMODEL_H

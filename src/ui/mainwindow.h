@@ -46,6 +46,7 @@ class EditTagDialog;
 class Equalizer;
 class ErrorDialog;
 class FileView;
+class GlobalSearch;
 class GlobalSearchPopup;
 class GlobalShortcuts;
 class GroupByDialog;
@@ -91,6 +92,7 @@ class MainWindow : public QMainWindow, public PlatformInterface {
              OSD* osd,
              ArtLoader* art_loader,
              CoverProviders* cover_providers,
+             GlobalSearch* global_search,
              QWidget *parent = 0);
   ~MainWindow();
 
@@ -278,6 +280,7 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   Player* player_;
   Library* library_;
   GlobalShortcuts* global_shortcuts_;
+  GlobalSearch* global_search_;
   Remote* remote_;
 
   DeviceManager* devices_;

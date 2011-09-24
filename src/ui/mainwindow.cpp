@@ -40,7 +40,9 @@
 #include "devices/deviceview.h"
 #include "engines/enginebase.h"
 #include "engines/gstengine.h"
+#include "globalsearch/globalsearch.h"
 #include "globalsearch/globalsearchpopup.h"
+#include "globalsearch/librarysearchprovider.h"
 #include "internet/magnatuneservice.h"
 #include "internet/internetmodel.h"
 #include "internet/internetview.h"
@@ -158,6 +160,7 @@ MainWindow::MainWindow(
     OSD* osd,
     ArtLoader* art_loader,
     CoverProviders* cover_providers,
+    GlobalSearch* global_search,
     QWidget* parent)
   : QMainWindow(parent),
     ui_(new Ui_MainWindow),
@@ -173,6 +176,7 @@ MainWindow::MainWindow(
     player_(player),
     library_(NULL),
     global_shortcuts_(new GlobalShortcuts(this)),
+    global_search_(global_search),
     remote_(NULL),
     devices_(NULL),
     library_view_(new LibraryViewContainer(this)),
@@ -231,7 +235,12 @@ MainWindow::MainWindow(
   // Initialise the global search widget
   StyleHelper::setBaseColor(palette().color(QPalette::Highlight).darker());
 
-  ui_->global_search->Init(library_->backend());
+  // Add global search providers
+  global_search->AddProvider(new LibrarySearchProvider(
+      library_->backend(), tr("Library"), "library",
+      IconLoader::Load("folder-sound"), global_search));
+
+  ui_->global_search->Init(global_search);
   connect(ui_->global_search, SIGNAL(AddToPlaylist(QMimeData*)), SLOT(AddToPlaylist(QMimeData*)));
 
   // Add tabs to the fancy tab widget
@@ -2251,7 +2260,7 @@ void MainWindow::HandleNotificationPreview(OSD::Behaviour type, QString line1, Q
 void MainWindow::ShowGlobalSearch() {
   if (!search_popup_) {
     search_popup_.reset(new GlobalSearchPopup);
-    search_popup_->Init(library_->backend(), player_);
+    search_popup_->Init(global_search_, player_);
     StyleSheetLoader* css_loader = new StyleSheetLoader(search_popup_.get());
     css_loader->SetStyleSheet(search_popup_.get(), ":mainwindow.css");
     connect(search_popup_.get(), SIGNAL(AddToPlaylist(QMimeData*)), SLOT(AddToPlaylist(QMimeData*)));

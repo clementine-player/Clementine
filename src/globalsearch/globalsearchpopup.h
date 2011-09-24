@@ -33,7 +33,7 @@ class GlobalSearchPopup : public QWidget {
  public:
   explicit GlobalSearchPopup(QWidget* parent = 0);
 
-  void Init(LibraryBackendInterface* library, Player* player);
+  void Init(GlobalSearch* engine, Player* player);
 
   // QWidget
   void setFocus(Qt::FocusReason reason = Qt::PopupFocusReason);

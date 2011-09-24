@@ -21,7 +21,6 @@
 #include "globalsearchsortmodel.h"
 #include "globalsearchtooltip.h"
 #include "globalsearchwidget.h"
-#include "librarysearchprovider.h"
 #include "ui_globalsearchwidget.h"
 #include "core/logging.h"
 #include "core/stylesheetloader.h"
@@ -29,10 +28,6 @@
 #include "playlist/playlistview.h"
 #include "playlist/songmimedata.h"
 #include "widgets/stylehelper.h"
-
-#ifdef HAVE_SPOTIFY
-# include "spotifysearchprovider.h"
-#endif
 
 #include <QDesktopWidget>
 #include <QListView>
@@ -50,7 +45,7 @@ const char* GlobalSearchWidget::kSettingsGroup = "GlobalSearch";
 GlobalSearchWidget::GlobalSearchWidget(QWidget* parent)
   : QWidget(parent),
     ui_(new Ui_GlobalSearchWidget),
-    engine_(new GlobalSearch(this)),
+    engine_(NULL),
     last_id_(0),
     clear_model_on_next_result_(false),
     model_(new QStandardItemModel(this)),
@@ -106,14 +101,6 @@ GlobalSearchWidget::GlobalSearchWidget(QWidget* parent)
   style_loader->SetStyleSheet(this, ":globalsearch.css");
 
   connect(ui_->search, SIGNAL(textEdited(QString)), SLOT(TextEdited(QString)));
-  connect(engine_, SIGNAL(ResultsAvailable(int,SearchProvider::ResultList)),
-          SLOT(AddResults(int,SearchProvider::ResultList)));
-  connect(engine_, SIGNAL(SearchFinished(int)), SLOT(SearchFinished(int)),
-          Qt::QueuedConnection);
-  connect(engine_, SIGNAL(ArtLoaded(int,QPixmap)), SLOT(ArtLoaded(int,QPixmap)),
-          Qt::QueuedConnection);
-  connect(engine_, SIGNAL(TracksLoaded(int,MimeData*)), SLOT(TracksLoaded(int,MimeData*)),
-          Qt::QueuedConnection);
   connect(view_, SIGNAL(doubleClicked(QModelIndex)), SLOT(ResultDoubleClicked()));
   connect(view_->selectionModel(), SIGNAL(currentChanged(QModelIndex,QModelIndex)),
           SLOT(UpdateTooltip()));
@@ -123,15 +110,16 @@ GlobalSearchWidget::~GlobalSearchWidget() {
   delete ui_;
 }
 
-void GlobalSearchWidget::Init(LibraryBackendInterface* library) {
-  // Add providers
-  engine_->AddProvider(new LibrarySearchProvider(
-      library, tr("Library"), "library",
-      IconLoader::Load("folder-sound"), engine_));
-
-#ifdef HAVE_SPOTIFY
-  engine_->AddProvider(new SpotifySearchProvider(engine_));
-#endif
+void GlobalSearchWidget::Init(GlobalSearch* engine) {
+  engine_ = engine;
+  connect(engine_, SIGNAL(ResultsAvailable(int,SearchProvider::ResultList)),
+          SLOT(AddResults(int,SearchProvider::ResultList)));
+  connect(engine_, SIGNAL(SearchFinished(int)), SLOT(SearchFinished(int)),
+          Qt::QueuedConnection);
+  connect(engine_, SIGNAL(ArtLoaded(int,QPixmap)), SLOT(ArtLoaded(int,QPixmap)),
+          Qt::QueuedConnection);
+  connect(engine_, SIGNAL(TracksLoaded(int,MimeData*)), SLOT(TracksLoaded(int,MimeData*)),
+          Qt::QueuedConnection);
 
   view_->setStyle(new PlaylistProxyStyle(style()));
 

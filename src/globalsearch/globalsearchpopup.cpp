@@ -41,8 +41,8 @@ GlobalSearchPopup::GlobalSearchPopup(QWidget* parent)
   connect(shortcut, SIGNAL(activated()), SLOT(hide()));
 }
 
-void GlobalSearchPopup::Init(LibraryBackendInterface* library, Player* player) {
-  ui_->search_widget->Init(library);
+void GlobalSearchPopup::Init(GlobalSearch* engine, Player* player) {
+  ui_->search_widget->Init(engine);
 
   // Forward AddToPlaylist signal.
   connect(ui_->search_widget, SIGNAL(AddToPlaylist(QMimeData*)),

@@ -40,7 +40,7 @@ class GlobalSearchWidget : public QWidget {
   Q_OBJECT
 
 public:
-  GlobalSearchWidget(QWidget *parent = 0);
+  GlobalSearchWidget(QWidget* parent = 0);
   ~GlobalSearchWidget();
 
   static const int kMinVisibleItems;
@@ -53,7 +53,7 @@ public:
     Role_LazyLoadingArt
   };
 
-  void Init(LibraryBackendInterface* library);
+  void Init(GlobalSearch* engine_);
 
   // Called by the delegate
   void LazyLoadArt(const QModelIndex& index);

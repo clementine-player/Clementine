@@ -10,6 +10,8 @@
 #include "core/player.h"
 #include "core/taskmanager.h"
 #include "core/utilities.h"
+#include "globalsearch/globalsearch.h"
+#include "globalsearch/spotifysearchprovider.h"
 #include "playlist/playlist.h"
 #include "playlist/playlistcontainer.h"
 #include "playlist/playlistmanager.h"
@@ -69,6 +71,8 @@ SpotifyService::SpotifyService(InternetModel* parent)
   model()->player()->RegisterUrlHandler(url_handler_);
   model()->player()->playlists()->RegisterSpecialPlaylistType(
         new SpotifySearchPlaylistType(this));
+
+  model()->global_search()->AddProvider(new SpotifySearchProvider(this));
 
   search_delay_->setInterval(kSearchDelayMsec);
   search_delay_->setSingleShot(true);
