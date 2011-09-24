@@ -36,6 +36,7 @@ uint qHash(const lastfm::Track& track);
 #include "core/song.h"
 #include "playlist/playlistitem.h"
 
+#include <QDateTime>
 #include <QMap>
 #include <QMenu>
 #include <QQueue>
@@ -68,6 +69,8 @@ class LastFMService : public InternetService {
   static const char* kTitleArtist;
   static const char* kTitleTag;
   static const char* kTitleCustom;
+
+  static const int kFriendsCacheDurationSecs;
 
   enum ItemType {
     Type_Root = InternetModel::TypeCount,
@@ -108,6 +111,8 @@ class LastFMService : public InternetService {
 
   PlaylistItemPtr PlaylistItemForUrl(const QUrl& url);
 
+  bool IsFriendsListStale() const;
+
  public slots:
   void NowPlaying(const Song& song);
   void Scrobble();
@@ -140,6 +145,7 @@ class LastFMService : public InternetService {
   void AddArtistRadio();
   void AddTagRadio();
   void AddCustomRadio();
+  void ForceRefreshFriends();
   void Remove();
 
   // Radio tuner.
@@ -155,7 +161,7 @@ class LastFMService : public InternetService {
   QString ErrorString(lastfm::ws::Error error) const;
   bool InitScrobbler();
   lastfm::Track TrackFromSong(const Song& song) const;
-  void RefreshFriends();
+  void RefreshFriends(bool force);
   void RefreshNeighbours();
   void AddArtistOrTag(const QString& name,
                       LastFMStationDialog::Type dialog_type,
@@ -170,6 +176,8 @@ class LastFMService : public InternetService {
 
   static QUrl FixupUrl(const QUrl& url);
   void Tune(const QUrl& station);
+
+  void PopulateFriendsList();
 
   void AddSelectedToPlaylist(bool clear_first);
 
@@ -189,6 +197,7 @@ class LastFMService : public InternetService {
   QAction* add_artist_action_;
   QAction* add_tag_action_;
   QAction* add_custom_action_;
+  QAction* refresh_friends_action_;
   QStandardItem* context_item_;
 
   QUrl last_url_;
@@ -206,6 +215,9 @@ class LastFMService : public InternetService {
   QStandardItem* neighbours_list_;
 
   QHash<lastfm::Track, QString> art_urls_;
+
+  QStringList friend_names_;
+  QDateTime last_refreshed_friends_;
 
   // Useful to inform the user that we can't scrobble right now
   bool connection_problems_;

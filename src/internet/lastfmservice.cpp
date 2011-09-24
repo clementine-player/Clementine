@@ -67,6 +67,8 @@ const char* LastFMService::kTitleArtist = QT_TR_NOOP("Last.fm Similar Artists to
 const char* LastFMService::kTitleTag    = QT_TR_NOOP("Last.fm Tag Radio: %1");
 const char* LastFMService::kTitleCustom = QT_TR_NOOP("Last.fm Custom Radio: %1");
 
+const int LastFMService::kFriendsCacheDurationSecs = 60 * 60 * 24; // 1 day
+
 LastFMService::LastFMService(InternetModel* parent)
   : InternetService(kServiceName, parent, parent),
     url_handler_(new LastFMUrlHandler(this, this)),
@@ -97,6 +99,8 @@ LastFMService::LastFMService(InternetModel* parent)
       QIcon(":last.fm/icon_tag.png"), tr("Play tag radio..."), this, SLOT(AddTagRadio()));
   add_custom_action_ = context_menu_->addAction(
       QIcon(":last.fm/icon_radio.png"), tr("Play custom radio..."), this, SLOT(AddCustomRadio()));
+  refresh_friends_action_ = context_menu_->addAction(
+      IconLoader::Load("view-refresh"), tr("Refresh friends list"), this, SLOT(ForceRefreshFriends()));
   context_menu_->addAction(
       IconLoader::Load("configure"), tr("Configure Last.fm..."), this, SLOT(ShowConfig()));
 
@@ -121,6 +125,9 @@ void LastFMService::ReloadSettings() {
   scrobbling_enabled_ = settings.value("ScrobblingEnabled", true).toBool();
   buttons_visible_ = settings.value("ShowLoveBanButtons", true).toBool();
   scrobble_button_visible_ = settings.value("ShowScrobbleButton", true).toBool();
+
+  friend_names_ = settings.value("FriendNames").toStringList();
+  last_refreshed_friends_ = settings.value("LastRefreshedFriends").toDateTime();
 
   //avoid emitting signal if it's not changed
   if(scrobbling_enabled_old != scrobbling_enabled_)
@@ -210,7 +217,7 @@ void LastFMService::LazyPopulate(QStandardItem* parent) {
       break;
 
     case Type_Friends:
-      RefreshFriends();
+      RefreshFriends(false);
       break;
 
     case Type_Neighbours:
@@ -269,10 +276,15 @@ void LastFMService::SignOut() {
   lastfm::ws::Username.clear();
   lastfm::ws::SessionKey.clear();
 
+  friend_names_ = QStringList();
+  last_refreshed_friends_ = QDateTime();
+
   QSettings settings;
   settings.beginGroup(kSettingsGroup);
   settings.setValue("Username", QString());
   settings.setValue("Session", QString());
+  settings.setValue("FriendNames", friend_names_);
+  settings.setValue("LastRefreshedFriends", last_refreshed_friends_);
 }
 
 void LastFMService::AuthenticateReplyFinished() {
@@ -571,12 +583,24 @@ void LastFMService::ShowContextMenu(const QModelIndex& index, const QPoint &glob
   context_menu_->popup(global_pos);
 }
 
-void LastFMService::RefreshFriends() {
+bool LastFMService::IsFriendsListStale() const {
+  return last_refreshed_friends_.isNull() ||
+         last_refreshed_friends_.secsTo(QDateTime::currentDateTime()) >
+            kFriendsCacheDurationSecs;
+}
+
+void LastFMService::ForceRefreshFriends() {
+  RefreshFriends(true);
+}
+
+void LastFMService::RefreshFriends(bool force) {
   if (!friends_list_ || !IsAuthenticated())
     return;
 
-  if (friends_list_->hasChildren())
-    friends_list_->removeRows(0, friends_list_->rowCount());
+  if (!force && !IsFriendsListStale()) {
+    PopulateFriendsList();
+    return;
+  }
 
   lastfm::AuthenticatedUser user;
   QNetworkReply* reply = user.getFriends();
@@ -586,9 +610,6 @@ void LastFMService::RefreshFriends() {
 void LastFMService::RefreshNeighbours() {
   if (!neighbours_list_ || !IsAuthenticated())
     return;
-
-  if (neighbours_list_->hasChildren())
-    neighbours_list_->removeRows(0, neighbours_list_->rowCount());
 
   lastfm::AuthenticatedUser user;
   QNetworkReply* reply = user.getNeighbours();
@@ -613,12 +634,30 @@ void LastFMService::RefreshFriendsFinished() {
     return;
   }
 
+  last_refreshed_friends_ = QDateTime::currentDateTime();
+  friend_names_ = QStringList();
   foreach (const lastfm::User& f, friends) {
-    Song song;
-    song.set_url(QUrl("lastfm://user/" + f.name() + "/library"));
-    song.set_title(tr("Last.fm Library - %1").arg(f.name()));
+    friend_names_ << f.name();
+  }
 
-    QStandardItem* item = new QStandardItem(QIcon(":last.fm/icon_user.png"), f.name());
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+  s.setValue("FriendNames", friend_names_);
+  s.setValue("LastRefreshedFriends", last_refreshed_friends_);
+
+  PopulateFriendsList();
+}
+
+void LastFMService::PopulateFriendsList() {
+  if (friends_list_->hasChildren())
+    friends_list_->removeRows(0, friends_list_->rowCount());
+
+  foreach (const QString& name, friend_names_) {
+    Song song;
+    song.set_url(QUrl("lastfm://user/" + name + "/library"));
+    song.set_title(tr("Last.fm Library - %1").arg(name));
+
+    QStandardItem* item = new QStandardItem(QIcon(":last.fm/icon_user.png"), name);
     item->setData(QVariant::fromValue(song), InternetModel::Role_SongMetadata);
     item->setData(true, InternetModel::Role_CanLazyLoad);
     item->setData(Type_OtherUser, InternetModel::Role_Type);
@@ -644,6 +683,9 @@ void LastFMService::RefreshNeighboursFinished() {
     qLog(Error) << e.what();
     return;
   }
+
+  if (neighbours_list_->hasChildren())
+    neighbours_list_->removeRows(0, neighbours_list_->rowCount());
 
   foreach (const lastfm::User& n, neighbours) {
     Song song;
