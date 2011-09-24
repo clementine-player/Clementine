@@ -37,6 +37,7 @@ protected:
     Item() {}
     Item(const QString& title, const QUrl& url,
          const QString& keyword = QString());
+    Item(const Song& song, const QString& keyword = QString());
 
     QString keyword_;
     Song metadata_;

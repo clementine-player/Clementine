@@ -33,7 +33,7 @@ public:
   DigitallyImportedServiceBase(
       const QString& name, const QString& description, const QUrl& homepage_url,
       const QString& homepage_name, const QUrl& stream_list_url,
-      const QString& url_scheme, const QIcon& icon,
+      const QString& url_scheme, const QString& icon_path,
       InternetModel* model, QObject* parent = NULL);
   ~DigitallyImportedServiceBase();
 
@@ -50,6 +50,14 @@ public:
   bool is_premium_stream_selected() const;
   bool is_premium_account() const;
 
+  const QUrl& homepage_url() const { return homepage_url_; }
+  const QString& homepage_name() const { return homepage_name_; }
+  const QUrl& stream_list_url() const { return stream_list_url_; }
+  const QString& icon_path() const { return icon_path_; }
+  const QIcon& icon() const { return icon_; }
+  const QString& service_description() const { return service_description_; }
+  const QString& url_scheme() const { return url_scheme_; }
+
   // Public for the global search provider.
   struct Stream {
     int id_;
@@ -63,6 +71,9 @@ public:
 
   bool IsStreamListStale() const;
   StreamList Streams();
+
+signals:
+  void StreamsChanged();
 
 protected:
   struct Playlist {
@@ -111,6 +122,7 @@ private:
   QUrl homepage_url_;
   QString homepage_name_;
   QUrl stream_list_url_;
+  QString icon_path_;
   QIcon icon_;
   QString service_description_;
   QString url_scheme_;

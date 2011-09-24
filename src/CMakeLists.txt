@@ -115,6 +115,7 @@ set(SOURCES
   engines/gstenginepipeline.cpp
   engines/gstelementdeleter.cpp
 
+  globalsearch/digitallyimportedsearchprovider.cpp
   globalsearch/globalsearch.cpp
   globalsearch/globalsearchitemdelegate.cpp
   globalsearch/globalsearchpopup.cpp
@@ -363,6 +364,7 @@ set(HEADERS
   engines/gstenginepipeline.h
   engines/gstelementdeleter.h
 
+  globalsearch/digitallyimportedsearchprovider.h
   globalsearch/librarysearchprovider.h
   globalsearch/globalsearch.h
   globalsearch/globalsearchpopup.h

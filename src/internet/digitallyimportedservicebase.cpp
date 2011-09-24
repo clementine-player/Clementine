@@ -22,6 +22,8 @@
 #include "core/network.h"
 #include "core/player.h"
 #include "core/taskmanager.h"
+#include "globalsearch/digitallyimportedsearchprovider.h"
+#include "globalsearch/globalsearch.h"
 #include "ui/iconloader.h"
 
 #include <QDesktopServices>
@@ -37,7 +39,7 @@ const int DigitallyImportedServiceBase::kStreamsCacheDurationSecs =
 DigitallyImportedServiceBase::DigitallyImportedServiceBase(
   const QString& name, const QString& description, const QUrl& homepage_url,
   const QString& homepage_name, const QUrl& stream_list_url,
-  const QString& url_scheme, const QIcon& icon,
+  const QString& url_scheme, const QString& icon_path,
   InternetModel* model, QObject* parent)
   : InternetService(name, model, parent),
     network_(new NetworkAccessManager(this)),
@@ -47,7 +49,8 @@ DigitallyImportedServiceBase::DigitallyImportedServiceBase(
     homepage_url_(homepage_url),
     homepage_name_(homepage_name),
     stream_list_url_(stream_list_url),
-    icon_(icon),
+    icon_path_(icon_path),
+    icon_(icon_path),
     service_description_(description),
     url_scheme_(url_scheme),
     root_(NULL),
@@ -55,6 +58,8 @@ DigitallyImportedServiceBase::DigitallyImportedServiceBase(
     context_item_(NULL)
 {
   model->player()->RegisterUrlHandler(url_handler_);
+
+  model->global_search()->AddProvider(new DigitallyImportedSearchProvider(this, this));
 }
 
 DigitallyImportedServiceBase::~DigitallyImportedServiceBase() {
@@ -139,6 +144,8 @@ void DigitallyImportedServiceBase::RefreshStreamsFinished() {
 
   SaveStreams(saved_streams_);
   PopulateStreams();
+
+  emit StreamsChanged();
 }
 
 void DigitallyImportedServiceBase::PopulateStreams() {

@@ -26,7 +26,7 @@ DigitallyImportedService::DigitallyImportedService(InternetModel* model, QObject
   : DigitallyImportedServiceBase(
       "DigitallyImported", "Digitally Imported", QUrl("http://www.di.fm"),
       "di.fm", QUrl("http://listen.di.fm"), "digitallyimported",
-      QIcon(":/providers/digitallyimported.png"), model, parent)
+      ":/providers/digitallyimported.png", model, parent)
 {
   playlists_ = QList<Playlist>()
     << Playlist(false, "http://listen.di.fm/public3/%1.pls")

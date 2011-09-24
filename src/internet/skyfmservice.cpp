@@ -26,7 +26,7 @@
 SkyFmService::SkyFmService(InternetModel* model, QObject* parent)
   : DigitallyImportedServiceBase(
       "SKY.fm", "SKY.fm", QUrl("http://www.sky.fm"), "sky.fm",
-      QUrl("http://listen.sky.fm"), "skyfm", QIcon(":/providers/skyfm.png"),
+      QUrl("http://listen.sky.fm"), "skyfm", ":/providers/skyfm.png",
       model, parent)
 {
   playlists_ = QList<Playlist>()

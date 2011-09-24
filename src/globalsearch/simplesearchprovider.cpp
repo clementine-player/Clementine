@@ -16,6 +16,7 @@
 */
 
 #include "simplesearchprovider.h"
+#include "core/logging.h"
 #include "playlist/songmimedata.h"
 
 
@@ -26,6 +27,12 @@ SimpleSearchProvider::Item::Item(const QString& title, const QUrl& url, const QS
 {
   metadata_.set_title(title);
   metadata_.set_url(url);
+}
+
+SimpleSearchProvider::Item::Item(const Song& song, const QString& keyword)
+  : keyword_(keyword),
+    metadata_(song)
+{
 }
 
 
@@ -72,7 +79,7 @@ SearchProvider::ResultList SimpleSearchProvider::Search(int id, const QString& q
     }
 
     if (result.match_quality_ == Result::Quality_Middle) {
-      result.match_quality_ = MatchQuality(tokens, result.metadata_.title());
+      result.match_quality_ = MatchQuality(tokens, item.metadata_.title());
     }
     if (result.match_quality_ != Result::Quality_None) {
       result.metadata_ = item.metadata_;
