@@ -18,41 +18,24 @@
 #ifndef LASTFMSEARCHPROVIDER_H
 #define LASTFMSEARCHPROVIDER_H
 
-#include "searchprovider.h"
+#include "simplesearchprovider.h"
 
 class LastFMService;
 
-class LastFMSearchProvider : public BlockingSearchProvider {
+class LastFMSearchProvider : public SimpleSearchProvider {
   Q_OBJECT
 
 public:
   LastFMSearchProvider(LastFMService* service, QObject* parent);
 
-  static const int kResultLimit;
-
   void LoadArtAsync(int id, const Result& result);
-  void LoadTracksAsync(int id, const Result& result);
-
-protected:
-  ResultList Search(int id, const QString& query);
 
 private slots:
   void RecreateItems();
 
 private:
   LastFMService* service_;
-
-  QStringList safe_words_;
-
   QImage icon_;
-
-  struct Item {
-    QString keyword_;
-    Song metadata_;
-  };
-
-  QMutex items_mutex_;
-  QList<Item> items_;
 };
 
 #endif // LASTFMSEARCHPROVIDER_H

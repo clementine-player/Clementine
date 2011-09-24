@@ -123,6 +123,7 @@ set(SOURCES
   globalsearch/globalsearchwidget.cpp
   globalsearch/librarysearchprovider.cpp
   globalsearch/searchprovider.cpp
+  globalsearch/simplesearchprovider.cpp
   globalsearch/tooltipactionwidget.cpp
   globalsearch/tooltipresultwidget.cpp
 

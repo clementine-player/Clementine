@@ -137,8 +137,6 @@ public:
   BlockingSearchProvider(QObject* parent = 0);
 
   void SearchAsync(int id, const QString& query);
-
-protected:
   virtual ResultList Search(int id, const QString& query) = 0;
 
 private slots:

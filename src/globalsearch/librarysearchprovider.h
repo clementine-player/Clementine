@@ -32,11 +32,9 @@ public:
   LibrarySearchProvider(LibraryBackendInterface* backend, const QString& name,
                         const QString& id, const QIcon& icon, QObject* parent = 0);
 
+  ResultList Search(int id, const QString& query);
   void LoadArtAsync(int id, const Result& result);
   void LoadTracksAsync(int id, const Result& result);
-
-protected:
-  ResultList Search(int id, const QString& query);
 
 private slots:
   void AlbumArtLoaded(quint64 id, const QImage& image);
