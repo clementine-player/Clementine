@@ -43,6 +43,7 @@ public:
   ~SpotifyClient();
 
   static const int kSpotifyImageIDSize;
+  static const int kWaveHeaderSize;
 
   void Init(quint16 port);
 
@@ -103,6 +104,7 @@ private:
   void LoadPlaylist(const spotify_pb::LoadPlaylistRequest& req);
   void SyncPlaylist(const spotify_pb::SyncPlaylistRequest& req);
   void StartPlayback(const spotify_pb::PlaybackRequest& req);
+  void Seek(qint64 offset_bytes);
   void LoadImage(const QString& id_b64);
   void BrowseAlbum(const QString& uri);
 
@@ -171,6 +173,7 @@ private:
   QMap<sp_albumbrowse*, sp_search*> pending_search_album_browse_responses_;
 
   int media_length_msec_;
+  int byte_rate_;
 };
 
 #endif // SPOTIFYCLIENT_H

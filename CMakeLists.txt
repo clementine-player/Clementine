@@ -365,7 +365,7 @@ if(WITH_DEBIAN)
 endif(WITH_DEBIAN)
 
 if(IMOBILEDEVICE_FOUND AND PLIST_FOUND)
-  add_subdirectory(gstafcsrc)
+  add_subdirectory(gst/afcsrc)
 endif(IMOBILEDEVICE_FOUND AND PLIST_FOUND)
 
 if(HAVE_BREAKPAD)
@@ -373,6 +373,7 @@ if(HAVE_BREAKPAD)
 endif(HAVE_BREAKPAD)
 
 if(HAVE_SPOTIFY)
+  add_subdirectory(gst/spotifytcpsrc)
   add_subdirectory(spotifyblob/common)
 endif(HAVE_SPOTIFY)
 

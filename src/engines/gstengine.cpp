@@ -28,7 +28,11 @@
 #include "core/utilities.h"
 
 #ifdef HAVE_IMOBILEDEVICE
-# include "gstafcsrc/gstafcsrc.h"
+# include "gst/afcsrc/gstafcsrc.h"
+#endif
+
+#ifdef HAVE_SPOTIFY
+# include "gst/spotifytcpsrc/gstspotifytcpsrc.h"
 #endif
 
 #include <math.h>
@@ -146,6 +150,10 @@ void GstEngine::InitialiseGstreamer() {
 
 #ifdef HAVE_IMOBILEDEVICE
   afcsrc_register_static();
+#endif
+
+#ifdef HAVE_SPOTIFY
+  spotifytcpsrc_register_static();
 #endif
 }
 

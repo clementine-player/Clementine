@@ -64,7 +64,6 @@ GstEnginePipeline::GstEnginePipeline(GstEngine* engine)
     volume_modifier_(1.0),
     fader_(NULL),
     pipeline_(NULL),
-    tcpsrc_(NULL),
     uridecodebin_(NULL),
     audiobin_(NULL),
     queue_(NULL),
@@ -102,60 +101,35 @@ void GstEnginePipeline::set_buffer_duration_nanosec(qint64 buffer_duration_nanos
   buffer_duration_nanosec_ = buffer_duration_nanosec;
 }
 
-bool GstEnginePipeline::ReplaceDecodeBin(GstElement* new_bin,
-                                         GstElement* new_tcpsrc) {
+bool GstEnginePipeline::ReplaceDecodeBin(GstElement* new_bin) {
   if (!new_bin) return false;
 
   // Destroy the old elements if they are set
   // Note that the caller to this function MUST schedule the old uridecodebin_
-  // or tcpsrc_ for deletion in the main thread.
+  // for deletion in the main thread.
   if (uridecodebin_) {
     gst_bin_remove(GST_BIN(pipeline_), uridecodebin_);
   }
-  if (tcpsrc_) {
-    gst_bin_remove(GST_BIN(pipeline_), tcpsrc_);
-  }
 
   uridecodebin_ = new_bin;
-  tcpsrc_ = new_tcpsrc;
   segment_start_ = 0;
   segment_start_received_ = false;
   pipeline_is_connected_ = false;
   gst_bin_add(GST_BIN(pipeline_), uridecodebin_);
 
-  if (new_tcpsrc) {
-    gst_bin_add(GST_BIN(pipeline_), tcpsrc_);
-    gst_element_link(tcpsrc_, uridecodebin_);
-  }
-
   return true;
 }
 
 bool GstEnginePipeline::ReplaceDecodeBin(const QUrl& url) {
-  if (url.scheme() == "tcp") {
-    qLog(Info) << "Listening on TCP port" << url.port();
-
-    // Hackity hack
-    GstElement* src = engine_->CreateElement("tcpserversrc");
-    g_object_set(G_OBJECT(src), "host", url.host().toUtf8().constData(), NULL);
-    g_object_set(G_OBJECT(src), "port", url.port(), NULL);
-
-    GstElement* decodebin = engine_->CreateElement("decodebin2");
-    g_signal_connect(G_OBJECT(decodebin), "drained", G_CALLBACK(SourceDrainedCallback), this);
-    g_signal_connect(G_OBJECT(decodebin), "pad-added", G_CALLBACK(NewPadCallback), this);
-
-    return ReplaceDecodeBin(decodebin, src);
-  } else {
-    GstElement* new_bin = engine_->CreateElement("uridecodebin");
-    g_object_set(G_OBJECT(new_bin), "uri", url.toEncoded().constData(), NULL);
-    g_object_set(G_OBJECT(new_bin), "buffer-duration", buffer_duration_nanosec_, NULL);
-    g_object_set(G_OBJECT(new_bin), "download", true, NULL);
-    g_object_set(G_OBJECT(new_bin), "use-buffering", true, NULL);
-    g_signal_connect(G_OBJECT(new_bin), "drained", G_CALLBACK(SourceDrainedCallback), this);
-    g_signal_connect(G_OBJECT(new_bin), "pad-added", G_CALLBACK(NewPadCallback), this);
-    g_signal_connect(G_OBJECT(new_bin), "notify::source", G_CALLBACK(SourceSetupCallback), this);
-    return ReplaceDecodeBin(new_bin);
-  }
+  GstElement* new_bin = engine_->CreateElement("uridecodebin");
+  g_object_set(G_OBJECT(new_bin), "uri", url.toEncoded().constData(), NULL);
+  g_object_set(G_OBJECT(new_bin), "buffer-duration", buffer_duration_nanosec_, NULL);
+  g_object_set(G_OBJECT(new_bin), "download", true, NULL);
+  g_object_set(G_OBJECT(new_bin), "use-buffering", true, NULL);
+  g_signal_connect(G_OBJECT(new_bin), "drained", G_CALLBACK(SourceDrainedCallback), this);
+  g_signal_connect(G_OBJECT(new_bin), "pad-added", G_CALLBACK(NewPadCallback), this);
+  g_signal_connect(G_OBJECT(new_bin), "notify::source", G_CALLBACK(SourceSetupCallback), this);
+  return ReplaceDecodeBin(new_bin);
 }
 
 GstElement* GstEnginePipeline::CreateDecodeBinFromString(const char* pipeline) {
@@ -661,7 +635,6 @@ void GstEnginePipeline::SourceSetupCallback(GstURIDecodeBin* bin, GParamSpec *ps
 
 void GstEnginePipeline::TransitionToNext() {
   GstElement* old_decode_bin = uridecodebin_;
-  GstElement* old_tcpsrc = tcpsrc_;
 
   ignore_tags_ = true;
 
@@ -682,10 +655,6 @@ void GstEnginePipeline::TransitionToNext() {
   // This has to happen *after* the gst_element_set_state on the new bin to
   // fix an occasional race condition deadlock.
   sElementDeleter->DeleteElementLater(old_decode_bin);
-
-  if (old_tcpsrc) {
-    sElementDeleter->DeleteElementLater(old_tcpsrc);
-  }
 
   ignore_tags_ = false;
 }

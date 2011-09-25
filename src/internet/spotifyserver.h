@@ -50,6 +50,9 @@ public:
 
   int server_port() const;
 
+public slots:
+  void Seek(qint64 offset_bytes);
+
 signals:
   void LoginCompleted(bool success, const QString& error,
                       spotify_pb::LoginResponse_Error error_code);

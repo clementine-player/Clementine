@@ -12,7 +12,6 @@
 
 class Playlist;
 class SpotifyServer;
-class SpotifyUrlHandler;
 
 class QMenu;
 
@@ -81,8 +80,6 @@ protected:
   virtual QModelIndex GetCurrentIndex();
 
 private:
-  void EnsureServerCreated(const QString& username = QString(),
-                           const QString& password = QString());
   void StartBlobProcess();
   void FillPlaylist(QStandardItem* item, const spotify_pb::LoadPlaylistResponse& response);
   void EnsureMenuCreated();
@@ -91,6 +88,8 @@ private:
   bool DoPlaylistsDiffer(const spotify_pb::Playlists& response);
 
 private slots:
+  void EnsureServerCreated(const QString& username = QString(),
+                           const QString& password = QString());
   void BlobProcessError(QProcess::ProcessError error);
   void LoginCompleted(bool success, const QString& error,
                       spotify_pb::LoginResponse_Error error_code);
@@ -111,7 +110,6 @@ private slots:
 
 private:
   SpotifyServer* server_;
-  SpotifyUrlHandler* url_handler_;
 
   QString system_blob_path_;
   QString local_blob_version_;

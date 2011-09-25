@@ -700,7 +700,6 @@ if(HAVE_SPOTIFY)
     internet/spotifyserver.cpp
     internet/spotifyservice.cpp
     internet/spotifysettingspage.cpp
-    internet/spotifyurlhandler.cpp
     resolvers/spotifyresolver.cpp
   )
   list(APPEND HEADERS
@@ -974,8 +973,6 @@ list(APPEND OTHER_SOURCES
   internet/spotifyserver.h
   internet/spotifyservice.cpp
   internet/spotifyservice.h
-  internet/spotifyurlhandler.cpp
-  internet/spotifyurlhandler.h
   remote/remote.cpp
   remote/remote.h
   remote/remotesettingspage.cpp
@@ -1110,7 +1107,10 @@ if(HAVE_BREAKPAD)
 endif(HAVE_BREAKPAD)
 
 if(HAVE_SPOTIFY)
-  target_link_libraries(clementine_lib clementine-spotifyblob-messages)
+  target_link_libraries(clementine_lib
+    clementine-spotifyblob-messages
+    gstspotifytcpsrc
+  )
 endif(HAVE_SPOTIFY)
 
 if (APPLE)

@@ -144,6 +144,10 @@ message BrowseAlbumResponse {
   repeated Track track = 2;
 }
 
+message SeekRequest {
+  optional int64 offset_bytes = 1;
+}
+
 message SpotifyMessage {
   optional LoginRequest login_request = 1;
   optional LoginResponse login_response = 2;
@@ -160,4 +164,5 @@ message SpotifyMessage {
   optional SyncPlaylistProgress sync_playlist_progress = 13;
   optional BrowseAlbumRequest browse_album_request = 14;
   optional BrowseAlbumResponse browse_album_response = 15;
+  optional SeekRequest seek_request = 16;
 }

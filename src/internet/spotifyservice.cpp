@@ -4,7 +4,6 @@
 #include "spotifyserver.h"
 #include "spotifyservice.h"
 #include "spotifysearchplaylisttype.h"
-#include "spotifyurlhandler.h"
 #include "core/database.h"
 #include "core/logging.h"
 #include "core/player.h"
@@ -39,7 +38,6 @@ const int SpotifyService::kSearchDelayMsec = 400;
 SpotifyService::SpotifyService(InternetModel* parent)
     : InternetService(kServiceName, parent, parent),
       server_(NULL),
-      url_handler_(new SpotifyUrlHandler(this, this)),
       blob_process_(NULL),
       root_(NULL),
       search_(NULL),
@@ -68,7 +66,6 @@ SpotifyService::SpotifyService(InternetModel* parent)
   qLog(Debug) << "Spotify system blob path:" << system_blob_path_;
   qLog(Debug) << "Spotify local blob path:" << local_blob_path_;
 
-  model()->player()->RegisterUrlHandler(url_handler_);
   model()->player()->playlists()->RegisterSpecialPlaylistType(
         new SpotifySearchPlaylistType(this));
 
@@ -537,7 +534,15 @@ void SpotifyService::SearchResults(const spotify_pb::SearchResponse& response) {
 }
 
 SpotifyServer* SpotifyService::server() const {
-  const_cast<SpotifyService*>(this)->EnsureServerCreated();
+  SpotifyService* nonconst_this = const_cast<SpotifyService*>(this);
+
+  if (QThread::currentThread() != thread()) {
+    metaObject()->invokeMethod(nonconst_this, "EnsureServerCreated",
+                               Qt::BlockingQueuedConnection);
+  } else {
+    nonconst_this->EnsureServerCreated();
+  }
+
   return server_;
 }
 

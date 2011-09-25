@@ -33,6 +33,7 @@
 #include <QTimer>
 
 const int SpotifyClient::kSpotifyImageIDSize = 20;
+const int SpotifyClient::kWaveHeaderSize = 44;
 
 
 SpotifyClient::SpotifyClient(QObject* parent)
@@ -43,7 +44,8 @@ SpotifyClient::SpotifyClient(QObject* parent)
     handler_(new SpotifyMessageHandler(protocol_socket_, this)),
     session_(NULL),
     events_timer_(new QTimer(this)),
-    media_length_msec_(-1) {
+    media_length_msec_(-1),
+    byte_rate_(0) {
   memset(&spotify_callbacks_, 0, sizeof(spotify_callbacks_));
   memset(&spotify_config_, 0, sizeof(spotify_config_));
   memset(&playlistcontainer_callbacks_, 0, sizeof(playlistcontainer_callbacks_));
@@ -263,6 +265,8 @@ void SpotifyClient::HandleMessage(const spotify_pb::SpotifyMessage& message) {
     LoadPlaylist(message.load_playlist_request());
   } else if (message.has_playback_request()) {
     StartPlayback(message.playback_request());
+  } else if (message.has_seek_request()) {
+    Seek(message.seek_request().offset_bytes());
   } else if (message.has_search_request()) {
     Search(message.search_request());
   } else if (message.has_image_request()) {
@@ -603,6 +607,10 @@ int SpotifyClient::MusicDeliveryCallback(
     return 0;
   }
 
+  if (num_frames == 0) {
+    return 0;
+  }
+
   // Write the WAVE header if it hasn't been written yet.
   if (me->media_length_msec_ != -1) {
     qLog(Debug) << "Sending WAVE header";
@@ -637,17 +645,24 @@ int SpotifyClient::MusicDeliveryCallback(
     s << quint32(data_size);
 
     me->media_length_msec_ = -1;
+    me->byte_rate_ = byte_rate;
+  }
+
+  if (me->media_socket_->bytesToWrite() >= 8192) {
+    return 0;
   }
 
   // Write the audio data.
-  me->media_socket_->write(reinterpret_cast<const char*>(frames),
-                           num_frames * format->channels * 2);
+  qint64 bytes_written = me->media_socket_->write(
+        reinterpret_cast<const char*>(frames),
+        num_frames * format->channels * 2);
+
 #ifdef Q_OS_DARWIN
   // ???
   me->media_socket_->flush();
 #endif
 
-  return num_frames;
+  return bytes_written / (format->channels * 2);
 }
 
 void SpotifyClient::EndOfTrackCallback(sp_session* session) {
@@ -767,6 +782,14 @@ void SpotifyClient::StartPlayback(const spotify_pb::PlaybackRequest& req) {
   TryPlaybackAgain(pending_playback);
 }
 
+void SpotifyClient::Seek(qint64 offset_bytes) {
+  if (byte_rate_) {
+    const int msec = ((offset_bytes - kWaveHeaderSize) * 1000) / byte_rate_;
+    qLog(Debug) << "Seeking to time" << msec << "ms";
+    sp_session_player_seek(session_, msec);
+  }
+}
+
 void SpotifyClient::TryPlaybackAgain(const PendingPlaybackRequest& req) {
   // If the track was not loaded then we have to come back later
   if (!sp_track_is_loaded(req.track_)) {
@@ -790,6 +813,7 @@ void SpotifyClient::TryPlaybackAgain(const PendingPlaybackRequest& req) {
   QTcpSocket* old_media_socket = media_socket_;
   media_socket_ = new QTcpSocket(this);
   media_socket_->connectToHost(QHostAddress::LocalHost, req.request_.media_port());
+  media_socket_->setSocketOption(QAbstractSocket::LowDelayOption, true);
   connect(media_socket_, SIGNAL(disconnected()), SLOT(MediaSocketDisconnected()));
 
   if (old_media_socket) {

@@ -199,6 +199,14 @@ void SpotifyServer::StartPlayback(const QString& uri, quint16 port) {
   SendMessage(message);
 }
 
+void SpotifyServer::Seek(qint64 offset_bytes) {
+  spotify_pb::SpotifyMessage message;
+  spotify_pb::SeekRequest* req = message.mutable_seek_request();
+
+  req->set_offset_bytes(offset_bytes);
+  SendMessage(message);
+}
+
 void SpotifyServer::Search(const QString& text, int limit, int limit_album) {
   spotify_pb::SpotifyMessage message;
   spotify_pb::SearchRequest* req = message.mutable_search_request();

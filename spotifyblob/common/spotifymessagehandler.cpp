@@ -23,9 +23,10 @@
 #include "spotifymessagehandler.h"
 #include "core/logging.h"
 
+#include <QAbstractSocket>
 #include <QBuffer>
 
-SpotifyMessageHandler::SpotifyMessageHandler(QIODevice* device, QObject* parent)
+SpotifyMessageHandler::SpotifyMessageHandler(QAbstractSocket* device, QObject* parent)
   : QObject(parent),
     device_(device),
     reading_protobuf_(false),
@@ -70,9 +71,20 @@ void SpotifyMessageHandler::DeviceReadyRead() {
 }
 
 void SpotifyMessageHandler::SendMessage(const spotify_pb::SpotifyMessage& message) {
-  std::string data(message.SerializeAsString());
+  std::string data = message.SerializeAsString();
+  WriteMessage(QByteArray(data.data(), data.size()));
+}
 
+void SpotifyMessageHandler::SendMessageAsync(const spotify_pb::SpotifyMessage& message) {
+  std::string data = message.SerializeAsString();
+  metaObject()->invokeMethod(this, "WriteMessage", Qt::QueuedConnection,
+                             Q_ARG(QByteArray, QByteArray(data.data(), data.size())));
+}
+
+void SpotifyMessageHandler::WriteMessage(const QByteArray& data) {
   QDataStream s(device_);
   s << quint32(data.length());
   s.writeRawData(data.data(), data.length());
+
+  device_->flush();
 }
