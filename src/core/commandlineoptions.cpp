@@ -53,12 +53,12 @@ const char* CommandlineOptions::kHelpText =
     "%20:\n"
     "  -o, --show-osd            %21\n"
     "  -y, --toggle-pretty-osd   %22\n"
-    "  -g, --language <lang>     %23\n"
-    "      --quiet               %24\n"
-    "      --verbose             %25\n"
-    "      --log-levels <levels> %26\n"
-    "      --version             %27\n"
-    "      --search-popup        %28\n";
+    "      --search-popup        %23\n"
+    "  -g, --language <lang>     %24\n"
+    "      --quiet               %25\n"
+    "      --verbose             %26\n"
+    "      --log-levels <levels> %27\n"
+    "      --version             %28\n";
 
 const char* CommandlineOptions::kVersionText =
     "Clementine %1";
@@ -123,12 +123,12 @@ bool CommandlineOptions::Parse() {
     {"play-track",        required_argument, 0, 'k'},
     {"show-osd",          no_argument,       0, 'o'},
     {"toggle-pretty-osd", no_argument,       0, 'y'},
+    {"search-popup",      no_argument,       0, SearchPopup},
     {"language",          required_argument, 0, 'g'},
     {"quiet",             no_argument,       0, Quiet},
     {"verbose",           no_argument,       0, Verbose},
     {"log-levels",        required_argument, 0, LogLevels},
     {"version",           no_argument,       0, Version},
-    {"search-popup",      no_argument,       0, SearchPopup},
 
     {"stun-test",   required_argument, 0, 'z'},
 
@@ -166,10 +166,11 @@ bool CommandlineOptions::Parse() {
             tr("Other options"),
             tr("Display the on-screen-display"),
             tr("Toggle visibility for the pretty on-screen-display"),
+            tr("Display the global search popup"),
             tr("Change the language"),
             tr("Equivalent to --log-levels *:1"),
             tr("Equivalent to --log-levels *:3"),
-            tr("Comma separated list of class:level, level is 0-3"),
+            tr("Comma separated list of class:level, level is 0-3")).arg(
             tr("Print out version information"));
 
         std::cout << translated_help_text.toLocal8Bit().constData();
