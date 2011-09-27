@@ -53,8 +53,8 @@
 #include <QtConcurrentRun>
 #include <QtDebug>
 
-#include <boost/bind.hpp>
 #include <algorithm>
+#include <boost/bind.hpp>
 
 using smart_playlists::Generator;
 using smart_playlists::GeneratorInserter;

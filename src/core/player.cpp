@@ -129,11 +129,8 @@ void Player::Next() {
 }
 
 void Player::NextInternal(Engine::TrackChangeFlags change) {
-  if (playlists_->active()->stop_after_current()) {
-    playlists_->active()->StopAfter(-1);
-    Stop();
+  if (HandleStopAfter())
     return;
-  }
 
   if (playlists_->active()->current_item()) {
     const QUrl url = playlists_->active()->current_item()->Url();
@@ -164,12 +161,26 @@ void Player::NextItem(Engine::TrackChangeFlags change) {
   PlayAt(i, change, false);
 }
 
-void Player::TrackEnded() {
+bool Player::HandleStopAfter() {
   if (playlists_->active()->stop_after_current()) {
     playlists_->active()->StopAfter(-1);
+
+    // Find what the next track would've been, and mark that one as current
+    // so it plays next time the user presses Play.
+    const int next_row = playlists_->active()->next_row();
+    if (next_row != -1) {
+      playlists_->active()->set_current_row(next_row);
+    }
+
     Stop();
-    return;
+    return true;
   }
+  return false;
+}
+
+void Player::TrackEnded() {
+  if (HandleStopAfter())
+    return;
 
   if (current_item_ && current_item_->IsLocalLibraryItem() &&
       current_item_->Metadata().id() != -1 &&

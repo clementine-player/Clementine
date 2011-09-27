@@ -164,6 +164,10 @@ public slots:
   void HandleLoadResult(const UrlHandler::LoadResult& result);
 
  private:
+  // Returns true if we were supposed to stop after this track.
+  bool HandleStopAfter();
+
+ private:
   PlaylistManagerInterface* playlists_;
   LastFMService* lastfm_;
   QSettings settings_;
