@@ -98,6 +98,7 @@ class PlaylistView : public QTreeView {
   void BackgroundPropertyChanged();
 
  protected:
+  // QWidget
   void contextMenuEvent(QContextMenuEvent* e);
   void hideEvent(QHideEvent* event);
   void showEvent(QShowEvent* event);
@@ -105,7 +106,6 @@ class PlaylistView : public QTreeView {
   void mouseMoveEvent(QMouseEvent* event);
   void mousePressEvent(QMouseEvent* event);
   void leaveEvent(QEvent*);
-  void scrollContentsBy(int dx, int dy);
   void paintEvent(QPaintEvent *event);
   void dragMoveEvent(QDragMoveEvent *event);
   void dragEnterEvent(QDragEnterEvent *event);
@@ -113,6 +113,12 @@ class PlaylistView : public QTreeView {
   void dropEvent(QDropEvent *event);
   void resizeEvent(QResizeEvent* event);
   bool eventFilter(QObject* object, QEvent* event);
+
+  // QAbstractScrollArea
+  void scrollContentsBy(int dx, int dy);
+
+  // QAbstractItemView
+  void rowsInserted(const QModelIndex& parent, int start, int end);
 
  private slots:
   void LoadGeometry();

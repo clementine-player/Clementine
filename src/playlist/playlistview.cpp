@@ -940,3 +940,15 @@ bool PlaylistView::eventFilter(QObject* object, QEvent* event) {
   }
   return QObject::eventFilter(object, event);
 }
+
+void PlaylistView::rowsInserted(const QModelIndex& parent, int start, int end) {
+  const bool at_end = end == model()->rowCount(parent) - 1;
+
+  QTreeView::rowsInserted(parent, start, end);
+
+  if (at_end) {
+    // If the rows were inserted at the end of the playlist then let's scroll
+    // the view so the user can see.
+    scrollTo(model()->index(start, 0, parent), QAbstractItemView::PositionAtTop);
+  }
+}
