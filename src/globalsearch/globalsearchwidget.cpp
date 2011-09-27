@@ -79,22 +79,26 @@ GlobalSearchWidget::GlobalSearchWidget(QWidget* parent)
   ui_->search->installEventFilter(this);
 
   // Actions
-  add_           = new QAction(tr("Add to playlist"), this);
-  add_and_play_  = new QAction(tr("Add and play now"), this);
-  add_and_queue_ = new QAction(tr("Queue track"), this);
-  replace_       = new QAction(tr("Replace current playlist"), this);
+  add_              = new QAction(tr("Add to playlist"), this);
+  add_and_play_     = new QAction(tr("Add and play now"), this);
+  add_and_queue_    = new QAction(tr("Queue track"), this);
+  replace_          = new QAction(tr("Replace current playlist"), this);
+  replace_and_play_ = new QAction(tr("Replace and play now"), this);
 
   add_->setShortcut(QKeySequence(Qt::Key_Return));
   add_and_play_->setShortcut(QKeySequence(Qt::CTRL | Qt::Key_Return));
   add_and_queue_->setShortcut(QKeySequence(Qt::SHIFT | Qt::Key_Return));
   replace_->setShortcut(QKeySequence(Qt::ALT | Qt::Key_Return));
+  replace_and_play_->setShortcut(QKeySequence(Qt::ALT | Qt::CTRL | Qt::Key_Return));
 
-  connect(add_,           SIGNAL(triggered()), SLOT(AddCurrent()));
-  connect(add_and_play_,  SIGNAL(triggered()), SLOT(AddAndPlayCurrent()));
-  connect(add_and_queue_, SIGNAL(triggered()), SLOT(AddAndQueueCurrent()));
-  connect(replace_,       SIGNAL(triggered()), SLOT(ReplaceCurrent()));
+  connect(add_,              SIGNAL(triggered()), SLOT(AddCurrent()));
+  connect(add_and_play_,     SIGNAL(triggered()), SLOT(AddAndPlayCurrent()));
+  connect(add_and_queue_,    SIGNAL(triggered()), SLOT(AddAndQueueCurrent()));
+  connect(replace_,          SIGNAL(triggered()), SLOT(ReplaceCurrent()));
+  connect(replace_and_play_, SIGNAL(triggered()), SLOT(ReplaceAndPlayCurrent()));
 
-  actions_ << add_ << add_and_play_ << add_and_queue_ << replace_;
+  actions_ << add_ << add_and_play_ << add_and_queue_ << replace_
+           << replace_and_play_;
 
   // Load style sheets
   StyleSheetLoader* style_loader = new StyleSheetLoader(this);
@@ -391,7 +395,9 @@ bool GlobalSearchWidget::EventFilterPopup(QObject*, QEvent* e) {
     case Qt::Key_Return:
     case Qt::Key_Enter:
       // Handle the QActions here - they don't activate when the tooltip is showing
-      if (ke->modifiers() & Qt::AltModifier)
+      if (ke->modifiers() & Qt::AltModifier && ke->modifiers() & Qt::ControlModifier)
+        replace_and_play_->trigger();
+      else if (ke->modifiers() & Qt::AltModifier)
         replace_->trigger();
       else if (ke->modifiers() & Qt::ControlModifier)
         add_and_play_->trigger();
@@ -481,6 +487,10 @@ void GlobalSearchWidget::ReplaceCurrent() {
   LoadTracks(replace_);
 }
 
+void GlobalSearchWidget::ReplaceAndPlayCurrent() {
+  LoadTracks(replace_and_play_);
+}
+
 void GlobalSearchWidget::LoadTracks(QAction* trigger) {
   QModelIndex index = view_->currentIndex();
   if (!index.isValid())
@@ -523,6 +533,10 @@ void GlobalSearchWidget::TracksLoaded(int id, MimeData* mime_data) {
       mime_data->enqueue_now_ = true;
     } else if (trigger == replace_) {
       mime_data->clear_first_= true;
+    } else if (trigger == replace_and_play_) {
+      mime_data->clear_first_ = true;
+      mime_data->override_user_settings_ = true;
+      mime_data->play_now_ = true;
     }
   }
 

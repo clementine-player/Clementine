@@ -85,6 +85,7 @@ private slots:
   void AddAndPlayCurrent();
   void AddAndQueueCurrent();
   void ReplaceCurrent();
+  void ReplaceAndPlayCurrent();
 
   void HidePopup();
   void UpdateTooltip();
@@ -136,6 +137,7 @@ private:
   QAction* add_and_play_;
   QAction* add_and_queue_;
   QAction* replace_;
+  QAction* replace_and_play_;
   QList<QAction*> actions_;
 };
 
