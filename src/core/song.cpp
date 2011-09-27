@@ -74,6 +74,13 @@ using boost::scoped_ptr;
 #include "library/sqlrow.h"
 #include "widgets/trackslider.h"
 
+
+// Taglib added support for FLAC pictures in 1.7.0
+#if (TAGLIB_MAJOR_VERSION > 1) || (TAGLIB_MAJOR_VERSION == 1 && TAGLIB_MINOR_VERSION >= 7)
+# define TAGLIB_HAS_FLAC_PICTURELIST
+#endif
+
+
 static QStringList Prepend(const QString& text, const QStringList& list) {
   QStringList ret(list);
   for (int i=0 ; i<ret.count() ; ++i)
@@ -368,6 +375,11 @@ void Song::InitFromFile(const QString& filename, int directory_id) {
   } else if (TagLib::FLAC::File* file = dynamic_cast<TagLib::FLAC::File*>(fileref->file())) {
     if ( file->xiphComment() ) {
       ParseOggTag(file->xiphComment()->fieldListMap(), NULL, &disc, &compilation);
+#ifdef TAGLIB_HAS_FLAC_PICTURELIST
+      if (!file->pictureList().isEmpty()) {
+        set_embedded_cover();
+      }
+#endif
     }
     d->comment_ = Decode(tag->comment());
   } else if (TagLib::MP4::File* file = dynamic_cast<TagLib::MP4::File*>(fileref->file())) {
@@ -1290,7 +1302,7 @@ QImage Song::LoadEmbeddedArt(const QString& filename) {
     return ret;
   }
 
-  // Ogg vorbis/flac/speex
+  // Ogg vorbis/speex
   TagLib::Ogg::XiphComment* xiph_comment =
       dynamic_cast<TagLib::Ogg::XiphComment*>(ref.file()->tag());
 
@@ -1307,8 +1319,29 @@ QImage Song::LoadEmbeddedArt(const QString& filename) {
 
     if (!ret.loadFromData(image_data))
       ret.loadFromData(image_data_b64); //maybe it's not b64 after all
-  }
 
+    return ret;
+  }
+  
+#ifdef TAGLIB_HAS_FLAC_PICTURELIST
+  // Flac
+  TagLib::FLAC::File* flac_file = dynamic_cast<TagLib::FLAC::File*>(ref.file());
+  if (flac_file && flac_file->xiphComment()) {
+    TagLib::List<TagLib::FLAC::Picture*> pics = flac_file->pictureList();
+    if (!pics.isEmpty()) {
+      // Use the first picture in the file - this could be made cleverer and
+      // pick the front cover if it's present.
+
+      std::list<TagLib::FLAC::Picture*>::iterator it = pics.begin();
+      TagLib::FLAC::Picture* picture = *it;
+
+      QByteArray image_data(picture->data().data(), picture->data().size());
+      ret.loadFromData(image_data);
+      return ret;
+    }
+  }
+#endif
+    
   return ret;
 }
 
