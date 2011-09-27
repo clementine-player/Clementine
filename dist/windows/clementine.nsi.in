@@ -168,6 +168,7 @@ Section "Clementine" Clementine
   File "QtNetwork4.dll"
   File "QtOpenGL4.dll"
   File "QtSql4.dll"
+  File "QtSvg4.dll"
   File "QtXml4.dll"
   File "zlib1.dll"
 
@@ -1001,6 +1002,7 @@ Section "Uninstall"
   Delete "$INSTDIR\QtNetwork4.dll"
   Delete "$INSTDIR\QtOpenGL4.dll"
   Delete "$INSTDIR\QtSql4.dll"
+  Delete "$INSTDIR\QtSvg4.dll"
   Delete "$INSTDIR\QtXml4.dll"
   Delete "$INSTDIR\zlib1.dll"
 
