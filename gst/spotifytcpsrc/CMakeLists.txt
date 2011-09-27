@@ -26,6 +26,7 @@ add_library(gstspotifytcpsrc STATIC
 )
 
 target_link_libraries(gstspotifytcpsrc
+  clementine_lib
   ${GOBJECT_LIBRARIES}
   ${GLIB_LIBRARIES}
   ${GSTREAMER_LIBRARIES}
