@@ -275,6 +275,11 @@ static GstFlowReturn gst_spotifytcp_src_create(GstPushSrc* src, GstBuffer** buff
       qLog(Warning) << "Unlock while reading data";
       return GST_FLOW_WRONG_STATE;
     }
+
+    if (self->socket_->state() != QAbstractSocket::ConnectedState) {
+      qLog(Info) << "Media socket disconnected2";
+      return GST_FLOW_UNEXPECTED;
+    }
   }
 
   qint64 length = self->socket_->bytesAvailable();
@@ -291,6 +296,7 @@ static GstFlowReturn gst_spotifytcp_src_create(GstPushSrc* src, GstBuffer** buff
     gst_buffer_unref(buf);
     return GST_FLOW_UNEXPECTED;
   }
+  GST_BUFFER_SIZE(buf) = bytes_read;
 
   *buffer = buf;
   return GST_FLOW_OK;
