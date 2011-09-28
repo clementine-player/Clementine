@@ -71,6 +71,7 @@ class GrooveSharkService : public InternetService {
   static const char* kServiceName;
   static const char* kSettingsGroup;
   static const char* kUrl;
+  static const char* kUrlCover;
 
   static const int kSongSearchLimit;
   static const int kSearchDelayMsec;

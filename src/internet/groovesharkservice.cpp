@@ -56,6 +56,7 @@ const char* GrooveSharkService::kApiSecret = "MWVlNmU1N2IzNGY3MjA1ZTg1OWJkMTllNj
 const char* GrooveSharkService::kServiceName = "GrooveShark";
 const char* GrooveSharkService::kSettingsGroup = "GrooveShark";
 const char* GrooveSharkService::kUrl = "http://api.grooveshark.com/ws/3.0/";
+const char* GrooveSharkService::kUrlCover = "http://beta.grooveshark.com/static/amazonart/s";
 
 const int GrooveSharkService::kSearchDelayMsec = 400;
 const int GrooveSharkService::kSongSearchLimit = 50;
@@ -467,8 +468,10 @@ SongList GrooveSharkService::ExtractSongs(const QVariantMap& result) {
     QString song_name = result_song["SongName"].toString();
     QString artist_name = result_song["ArtistName"].toString();
     QString album_name = result_song["AlbumName"].toString();
+    QString cover = result_song["CoverArtFilename"].toString();
     song.Init(song_name, artist_name, album_name, 0);
     song.set_id(song_id);
+    song.set_art_automatic(QString(kUrlCover) + cover);
     // Special kind of URL: because we need to request a stream key for each
     // play, we generate a fake URL for now, and we will create a real streaming
     // URL when user will actually play the song (through url handler)
