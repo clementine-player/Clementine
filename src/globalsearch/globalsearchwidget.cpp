@@ -48,6 +48,7 @@ GlobalSearchWidget::GlobalSearchWidget(QWidget* parent)
     engine_(NULL),
     last_id_(0),
     clear_model_on_next_result_(false),
+    order_arrived_counter_(0),
     model_(new QStandardItemModel(this)),
     proxy_(new GlobalSearchSortModel(this)),
     view_(new QListView),
@@ -192,6 +193,7 @@ void GlobalSearchWidget::TextEdited(const QString& text) {
 void GlobalSearchWidget::Reset() {
   model_->clear();
   art_requests_.clear();
+  order_arrived_counter_ = 0;
 }
 
 void GlobalSearchWidget::SearchFinished(int id) {
@@ -200,7 +202,7 @@ void GlobalSearchWidget::SearchFinished(int id) {
 
   if (clear_model_on_next_result_) {
     Reset();
-    clear_model_on_next_result_ = true;
+    clear_model_on_next_result_ = false;
   }
 
   RepositionPopup();
@@ -219,6 +221,7 @@ void GlobalSearchWidget::AddResults(int id, const SearchProvider::ResultList& re
     QStandardItem* item = new QStandardItem;
     item->setData(QVariant::fromValue(result), Role_PrimaryResult);
     item->setData(QVariant::fromValue(SearchProvider::ResultList() << result), Role_AllResults);
+    item->setData(order_arrived_counter_, Role_OrderArrived);
 
     QPixmap pixmap;
     if (engine_->FindCachedPixmap(result, &pixmap)) {
@@ -229,12 +232,16 @@ void GlobalSearchWidget::AddResults(int id, const SearchProvider::ResultList& re
 
     if (combine_identical_results_) {
       // Maybe we can combine this result with an identical result from another
-      // provider.  Only look at the results above and below this one in the
-      // sorted model.
+      // provider.  We can use the sorted model to narrow the scope of the
+      // search a bit - look at the result after the current one, then all the
+      // results before.
       QModelIndex my_proxy_index = proxy_->mapFromSource(item->index());
       QModelIndexList candidates;
-      candidates << my_proxy_index.sibling(my_proxy_index.row() - 1, 0)
-                 << my_proxy_index.sibling(my_proxy_index.row() + 1, 0);
+      candidates << my_proxy_index.sibling(my_proxy_index.row() + 1, 0);
+
+      for (int i=my_proxy_index.row()-1 ; i>=0 ; --i) {
+        candidates << my_proxy_index.sibling(i, 0);
+      }
 
       foreach (const QModelIndex& index, candidates) {
         if (!index.isValid())
@@ -260,6 +267,8 @@ void GlobalSearchWidget::AddResults(int id, const SearchProvider::ResultList& re
       }
     }
   }
+
+  order_arrived_counter_ ++;
 
   RepositionPopup();
 }

@@ -50,7 +50,8 @@ public:
   enum Role {
     Role_PrimaryResult = Qt::UserRole + 1,
     Role_AllResults,
-    Role_LazyLoadingArt
+    Role_LazyLoadingArt,
+    Role_OrderArrived
   };
 
   void Init(GlobalSearch* engine_);
@@ -114,6 +115,7 @@ private:
   GlobalSearch* engine_;
   int last_id_;
   bool clear_model_on_next_result_;
+  int order_arrived_counter_;
 
   QMap<int, QModelIndex> art_requests_;
   QMap<int, QAction*> track_requests_;

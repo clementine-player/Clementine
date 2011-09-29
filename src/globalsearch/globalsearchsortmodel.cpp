@@ -31,23 +31,30 @@ bool GlobalSearchSortModel::lessThan(const QModelIndex& left, const QModelIndex&
   const SearchProvider::Result r2 = right.data(GlobalSearchWidget::Role_PrimaryResult)
       .value<SearchProvider::Result>();
 
-  int ret = 0;
+  // Order results that arrived first first, so that the results don't jump
+  // around while the user is trying to navigate through them.
+  const int order_left  = left.data(GlobalSearchWidget::Role_OrderArrived).toInt();
+  const int order_right = right.data(GlobalSearchWidget::Role_OrderArrived).toInt();
+
+  if (order_left < order_right) return true;
+  if (order_left > order_right) return false;
 
 #define CompareInt(field) \
   if (r1.field < r2.field) return true; \
   if (r1.field > r2.field) return false
+
+  int ret = 0;
 
 #define CompareString(field) \
   ret = QString::localeAwareCompare(r1.metadata_.field(), r2.metadata_.field()); \
   if (ret < 0) return true; \
   if (ret > 0) return false
 
-
-  // Compare match quality and types first
+  // If they arrived at the same time then sort by quality and type.
   CompareInt(match_quality_);
   CompareInt(type_);
 
-  // Then compare title, artist and album
+  // Failing that, compare title, artist and album
   switch (r1.type_) {
   case SearchProvider::Result::Type_Track:
   case SearchProvider::Result::Type_Stream:
