@@ -35,10 +35,12 @@
 #include <QSettings>
 #include <QSortFilterProxyModel>
 #include <QStandardItemModel>
+#include <QTimer>
 
 
 const int GlobalSearchWidget::kMinVisibleItems = 3;
 const int GlobalSearchWidget::kMaxVisibleItems = 25;
+const int GlobalSearchWidget::kSwapModelsTimeoutMsec = 250;
 const char* GlobalSearchWidget::kSettingsGroup = "GlobalSearch";
 
 
@@ -47,12 +49,16 @@ GlobalSearchWidget::GlobalSearchWidget(QWidget* parent)
     ui_(new Ui_GlobalSearchWidget),
     engine_(NULL),
     last_id_(0),
-    clear_model_on_next_result_(false),
     order_arrived_counter_(0),
-    model_(new QStandardItemModel(this)),
-    proxy_(new GlobalSearchSortModel(this)),
+    front_model_(new QStandardItemModel(this)),
+    back_model_(new QStandardItemModel(this)),
+    current_model_(front_model_),
+    front_proxy_(new GlobalSearchSortModel(this)),
+    back_proxy_(new GlobalSearchSortModel(this)),
+    current_proxy_(front_proxy_),
     view_(new QListView),
     eat_focus_out_(false),
+    swap_models_timer_(new QTimer(this)),
     background_(":allthethings.png"),
     desktop_(qApp->desktop()),
     combine_identical_results_(true)
@@ -61,9 +67,13 @@ GlobalSearchWidget::GlobalSearchWidget(QWidget* parent)
   ReloadSettings();
 
   // Set up the sorting proxy model
-  proxy_->setSourceModel(model_);
-  proxy_->setDynamicSortFilter(true);
-  proxy_->sort(0);
+  front_proxy_->setSourceModel(front_model_);
+  front_proxy_->setDynamicSortFilter(true);
+  front_proxy_->sort(0);
+
+  back_proxy_->setSourceModel(back_model_);
+  back_proxy_->setDynamicSortFilter(true);
+  back_proxy_->sort(0);
 
   // Set up the popup
   view_->setObjectName("popup");
@@ -72,7 +82,7 @@ GlobalSearchWidget::GlobalSearchWidget(QWidget* parent)
   view_->setFocusProxy(ui_->search);
   view_->installEventFilter(this);
 
-  view_->setModel(proxy_);
+  view_->setModel(front_proxy_);
   view_->setItemDelegate(new GlobalSearchItemDelegate(this));
   view_->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   view_->setEditTriggers(QAbstractItemView::NoEditTriggers);
@@ -105,10 +115,14 @@ GlobalSearchWidget::GlobalSearchWidget(QWidget* parent)
   StyleSheetLoader* style_loader = new StyleSheetLoader(this);
   style_loader->SetStyleSheet(this, ":globalsearch.css");
 
+  swap_models_timer_->setSingleShot(true);
+  swap_models_timer_->setInterval(kSwapModelsTimeoutMsec);
+
   connect(ui_->search, SIGNAL(textEdited(QString)), SLOT(TextEdited(QString)));
   connect(view_, SIGNAL(doubleClicked(QModelIndex)), SLOT(ResultDoubleClicked()));
   connect(view_->selectionModel(), SIGNAL(currentChanged(QModelIndex,QModelIndex)),
           SLOT(UpdateTooltip()));
+  connect(swap_models_timer_, SIGNAL(timeout()), SLOT(SwapModels()));
 }
 
 GlobalSearchWidget::~GlobalSearchWidget() {
@@ -122,8 +136,6 @@ void GlobalSearchWidget::Init(GlobalSearch* engine) {
   // our call to Search() (or whatever) returns and we add the ID to the map.
   connect(engine_, SIGNAL(ResultsAvailable(int,SearchProvider::ResultList)),
           SLOT(AddResults(int,SearchProvider::ResultList)),
-          Qt::QueuedConnection);
-  connect(engine_, SIGNAL(SearchFinished(int)), SLOT(SearchFinished(int)),
           Qt::QueuedConnection);
   connect(engine_, SIGNAL(ArtLoaded(int,QPixmap)), SLOT(ArtLoaded(int,QPixmap)),
           Qt::QueuedConnection);
@@ -180,42 +192,35 @@ void GlobalSearchWidget::TextEdited(const QString& text) {
   const QString trimmed_text = text.trimmed();
 
   if (trimmed_text.length() < 3) {
-    Reset();
     RepositionPopup();
     return;
   }
 
-  clear_model_on_next_result_ = true;
+  // Add results to the back model, switch models after some delay.
+  back_model_->clear();
+  current_model_ = back_model_;
+  current_proxy_ = back_proxy_;
+  order_arrived_counter_ = 0;
+  swap_models_timer_->start();
+
+  // Cancel the last search (if any) and start the new one.
   engine_->CancelSearch(last_id_);
   last_id_ = engine_->SearchAsync(trimmed_text);
 }
 
-void GlobalSearchWidget::Reset() {
-  model_->clear();
+void GlobalSearchWidget::SwapModels() {
   art_requests_.clear();
-  order_arrived_counter_ = 0;
-}
 
-void GlobalSearchWidget::SearchFinished(int id) {
-  if (id != last_id_)
-    return;
+  qSwap(front_model_, back_model_);
+  qSwap(front_proxy_, back_proxy_);
 
-  if (clear_model_on_next_result_) {
-    Reset();
-    clear_model_on_next_result_ = false;
-  }
-
+  view_->setModel(front_proxy_);
   RepositionPopup();
 }
 
 void GlobalSearchWidget::AddResults(int id, const SearchProvider::ResultList& results) {
   if (id != last_id_)
     return;
-
-  if (clear_model_on_next_result_) {
-    Reset();
-    clear_model_on_next_result_ = false;
-  }
 
   foreach (const SearchProvider::Result& result, results) {
     QStandardItem* item = new QStandardItem;
@@ -228,14 +233,14 @@ void GlobalSearchWidget::AddResults(int id, const SearchProvider::ResultList& re
       item->setData(pixmap, Qt::DecorationRole);
     }
 
-    model_->appendRow(item);
+    current_model_->appendRow(item);
 
     if (combine_identical_results_) {
       // Maybe we can combine this result with an identical result from another
       // provider.  We can use the sorted model to narrow the scope of the
       // search a bit - look at the result after the current one, then all the
       // results before.
-      QModelIndex my_proxy_index = proxy_->mapFromSource(item->index());
+      QModelIndex my_proxy_index = current_proxy_->mapFromSource(item->index());
       QModelIndexList candidates;
       candidates << my_proxy_index.sibling(my_proxy_index.row() + 1, 0);
 
@@ -274,13 +279,13 @@ void GlobalSearchWidget::AddResults(int id, const SearchProvider::ResultList& re
 }
 
 void GlobalSearchWidget::RepositionPopup() {
-  if (model_->rowCount() == 0) {
+  if (front_model_->rowCount() == 0) {
     HidePopup();
     return;
   }
 
   int h = view_->sizeHintForRow(0) * float(0.5 +
-      qBound(kMinVisibleItems, model_->rowCount(), kMaxVisibleItems));
+      qBound(kMinVisibleItems, front_model_->rowCount(), kMaxVisibleItems));
   int w = ui_->search->width();
 
   const QPoint pos = ui_->search->mapToGlobal(ui_->search->rect().bottomLeft());
@@ -364,7 +369,7 @@ bool GlobalSearchWidget::EventFilterPopup(QObject*, QEvent* e) {
 
     case Qt::Key_Up:
       if (!cur_index.isValid()) {
-        view_->setCurrentIndex(proxy_->index(proxy_->rowCount() - 1, 0));
+        view_->setCurrentIndex(front_proxy_->index(front_proxy_->rowCount() - 1, 0));
         return true;
       } else if (cur_index.row() == 0) {
         return true;
@@ -373,9 +378,9 @@ bool GlobalSearchWidget::EventFilterPopup(QObject*, QEvent* e) {
 
     case Qt::Key_Down:
       if (!cur_index.isValid()) {
-        view_->setCurrentIndex(proxy_->index(0, 0));
+        view_->setCurrentIndex(front_proxy_->index(0, 0));
         return true;
-      } else if (cur_index.row() == proxy_->rowCount() - 1) {
+      } else if (cur_index.row() == front_proxy_->rowCount() - 1) {
         return true;
       }
       return false;
@@ -456,10 +461,12 @@ void GlobalSearchWidget::LazyLoadArt(const QModelIndex& proxy_index) {
   if (!proxy_index.isValid() || proxy_index.data(Role_LazyLoadingArt).isValid()) {
     return;
   }
+  if (proxy_index.model() != front_proxy_) {
+    return;
+  }
 
-  const QModelIndex source_index = proxy_->mapToSource(proxy_index);
-
-  model_->itemFromIndex(source_index)->setData(true, Role_LazyLoadingArt);
+  const QModelIndex source_index = front_proxy_->mapToSource(proxy_index);
+  front_model_->itemFromIndex(source_index)->setData(true, Role_LazyLoadingArt);
 
   const SearchProvider::Result result =
       source_index.data(Role_PrimaryResult).value<SearchProvider::Result>();
@@ -473,7 +480,7 @@ void GlobalSearchWidget::ArtLoaded(int id, const QPixmap& pixmap) {
     return;
   QModelIndex index = art_requests_.take(id);
 
-  model_->itemFromIndex(index)->setData(pixmap, Qt::DecorationRole);
+  front_model_->itemFromIndex(index)->setData(pixmap, Qt::DecorationRole);
 }
 
 void GlobalSearchWidget::ResultDoubleClicked() {
@@ -503,7 +510,7 @@ void GlobalSearchWidget::ReplaceAndPlayCurrent() {
 void GlobalSearchWidget::LoadTracks(QAction* trigger) {
   QModelIndex index = view_->currentIndex();
   if (!index.isValid())
-    index = proxy_->index(0, 0);
+    index = front_proxy_->index(0, 0);
 
   if (!index.isValid())
     return;
@@ -598,8 +605,8 @@ GlobalSearchWidget::CombineAction GlobalSearchWidget::CanCombineResults(
 }
 
 void GlobalSearchWidget::CombineResults(const QModelIndex& superior, const QModelIndex& inferior) {
-  QStandardItem* superior_item = model_->itemFromIndex(proxy_->mapToSource(superior));
-  QStandardItem* inferior_item = model_->itemFromIndex(proxy_->mapToSource(inferior));
+  QStandardItem* superior_item = current_model_->itemFromIndex(current_proxy_->mapToSource(superior));
+  QStandardItem* inferior_item = current_model_->itemFromIndex(current_proxy_->mapToSource(inferior));
 
   SearchProvider::ResultList superior_results =
       superior_item->data(Role_AllResults).value<SearchProvider::ResultList>();
@@ -609,7 +616,7 @@ void GlobalSearchWidget::CombineResults(const QModelIndex& superior, const QMode
   superior_results.append(inferior_results);
   superior_item->setData(QVariant::fromValue(superior_results), Role_AllResults);
 
-  model_->invisibleRootItem()->removeRow(inferior_item->row());
+  current_model_->invisibleRootItem()->removeRow(inferior_item->row());
 }
 
 void GlobalSearchWidget::HidePopup() {

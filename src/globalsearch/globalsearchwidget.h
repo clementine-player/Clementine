@@ -45,6 +45,7 @@ public:
 
   static const int kMinVisibleItems;
   static const int kMaxVisibleItems;
+  static const int kSwapModelsTimeoutMsec;
   static const char* kSettingsGroup;
 
   enum Role {
@@ -74,7 +75,6 @@ protected:
 
 private slots:
   void TextEdited(const QString& text);
-  void SearchFinished(int id);
   void AddResults(int id, const SearchProvider::ResultList& results);
 
   void ArtLoaded(int id, const QPixmap& pixmap);
@@ -91,6 +91,8 @@ private slots:
   void HidePopup();
   void UpdateTooltip();
 
+  void SwapModels();
+
 private:
   // Return values from CanCombineResults
   enum CombineAction {
@@ -99,7 +101,6 @@ private:
     RightPreferred  // The two results can be combined - the right one is better
   };
 
-  void Reset();
   void RepositionPopup();
   CombineAction CanCombineResults(const QModelIndex& left, const QModelIndex& right) const;
   void CombineResults(const QModelIndex& superior, const QModelIndex& inferior);
@@ -114,16 +115,27 @@ private:
 
   GlobalSearch* engine_;
   int last_id_;
-  bool clear_model_on_next_result_;
   int order_arrived_counter_;
 
   QMap<int, QModelIndex> art_requests_;
   QMap<int, QAction*> track_requests_;
 
-  QStandardItemModel* model_;
-  QSortFilterProxyModel* proxy_;
+  // Like graphics APIs have a front buffer and a back buffer, there's a front
+  // model and a back model - the front model is the one that's shown in the
+  // UI and the back model is the one that lies in wait.  current_model_ will
+  // point to either the front or the back model.
+  QStandardItemModel* front_model_;
+  QStandardItemModel* back_model_;
+  QStandardItemModel* current_model_;
+
+  QSortFilterProxyModel* front_proxy_;
+  QSortFilterProxyModel* back_proxy_;
+  QSortFilterProxyModel* current_proxy_;
+
   QListView* view_;
   bool eat_focus_out_;
+
+  QTimer* swap_models_timer_;
 
   QPixmap background_;
   QPixmap background_scaled_;
