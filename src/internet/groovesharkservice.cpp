@@ -56,7 +56,7 @@ const char* GrooveSharkService::kApiSecret = "MWVlNmU1N2IzNGY3MjA1ZTg1OWJkMTllNj
 const char* GrooveSharkService::kServiceName = "GrooveShark";
 const char* GrooveSharkService::kSettingsGroup = "GrooveShark";
 const char* GrooveSharkService::kUrl = "http://api.grooveshark.com/ws/3.0/";
-const char* GrooveSharkService::kUrlCover = "http://beta.grooveshark.com/static/amazonart/s";
+const char* GrooveSharkService::kUrlCover = "http://beta.grooveshark.com/static/amazonart/m";
 
 const int GrooveSharkService::kSearchDelayMsec = 400;
 const int GrooveSharkService::kSongSearchLimit = 50;
