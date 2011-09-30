@@ -24,11 +24,11 @@
 #include "internet/groovesharkservice.h"
 #include "playlist/songmimedata.h"
 
-GroovesharkSearchProvider::GroovesharkSearchProvider(QObject* parent)
+GrooveSharkSearchProvider::GrooveSharkSearchProvider(QObject* parent)
     : service_(NULL) {
 }
 
-void GroovesharkSearchProvider::Init(GrooveSharkService* service) {
+void GrooveSharkSearchProvider::Init(GrooveSharkService* service) {
   service_ = service;
   SearchProvider::Init("GrooveShark", "grooveshark",
                        QIcon(":providers/grooveshark.png"), true, false);
@@ -46,12 +46,12 @@ void GroovesharkSearchProvider::Init(GrooveSharkService* service) {
           SLOT(AlbumArtLoaded(quint64, QImage)));
 }
 
-void GroovesharkSearchProvider::SearchAsync(int id, const QString& query) {
+void GrooveSharkSearchProvider::SearchAsync(int id, const QString& query) {
   const int service_id = service_->SimpleSearch(query);
   pending_searches_[service_id] = id;
 }
 
-void GroovesharkSearchProvider::SearchDone(int id, SongList songs) {
+void GrooveSharkSearchProvider::SearchDone(int id, SongList songs) {
   // Map back to the original id.
   const int global_search_id = pending_searches_.take(id);
 
@@ -69,12 +69,12 @@ void GroovesharkSearchProvider::SearchDone(int id, SongList songs) {
   emit SearchFinished(global_search_id);
 }
 
-void GroovesharkSearchProvider::LoadArtAsync(int id, const Result& result) {
+void GrooveSharkSearchProvider::LoadArtAsync(int id, const Result& result) {
   quint64 loader_id = cover_loader_->Worker()->LoadImageAsync(result.metadata_);
   cover_loader_tasks_[loader_id] = id;
 }
 
-void GroovesharkSearchProvider::AlbumArtLoaded(quint64 id, const QImage& image) {
+void GrooveSharkSearchProvider::AlbumArtLoaded(quint64 id, const QImage& image) {
   if (!cover_loader_tasks_.contains(id)) {
     return;
   }
@@ -82,7 +82,7 @@ void GroovesharkSearchProvider::AlbumArtLoaded(quint64 id, const QImage& image) 
   emit ArtLoaded(original_id, image);
 }
 
-void GroovesharkSearchProvider::LoadTracksAsync(int id, const Result& result) {
+void GrooveSharkSearchProvider::LoadTracksAsync(int id, const Result& result) {
   SongList ret;
 
   switch (result.type_) {
@@ -91,7 +91,7 @@ void GroovesharkSearchProvider::LoadTracksAsync(int id, const Result& result) {
       break;
 
     default:
-      // TODO: Implement albums in Grooveshark global search.
+      // TODO: Implement albums in GrooveShark global search.
       Q_ASSERT(0);
   }
 

@@ -24,11 +24,11 @@
 class AlbumCoverLoader;
 class GrooveSharkService;
 
-class GroovesharkSearchProvider : public SearchProvider {
+class GrooveSharkSearchProvider : public SearchProvider {
   Q_OBJECT
 
  public:
-  explicit GroovesharkSearchProvider(QObject* parent = 0);
+  explicit GrooveSharkSearchProvider(QObject* parent = 0);
   void Init(GrooveSharkService* service);
 
   // SearchProvider
