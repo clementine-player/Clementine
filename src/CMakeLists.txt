@@ -122,6 +122,7 @@ set(SOURCES
   globalsearch/globalsearchsortmodel.cpp
   globalsearch/globalsearchtooltip.cpp
   globalsearch/globalsearchwidget.cpp
+  globalsearch/groovesharksearchprovider.cpp
   globalsearch/librarysearchprovider.cpp
   globalsearch/searchprovider.cpp
   globalsearch/simplesearchprovider.cpp
@@ -370,6 +371,7 @@ set(HEADERS
   globalsearch/globalsearchpopup.h
   globalsearch/globalsearchtooltip.h
   globalsearch/globalsearchwidget.h
+  globalsearch/groovesharksearchprovider.h
   globalsearch/searchprovider.h
   globalsearch/tooltipactionwidget.h
   globalsearch/tooltipresultwidget.h

@@ -15,6 +15,7 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "groovesharkservice.h"
 
 #include <QMenu>
 #include <QMessageBox>
@@ -40,12 +41,12 @@
 #include "core/song.h"
 #include "core/taskmanager.h"
 #include "core/utilities.h"
+#include "globalsearch/globalsearch.h"
+#include "globalsearch/groovesharksearchprovider.h"
 #include "playlist/playlist.h"
 #include "playlist/playlistcontainer.h"
 #include "playlist/playlistmanager.h"
 #include "ui/iconloader.h"
-
-#include "groovesharkservice.h"
 
 // The GrooveShark terms of service require that application keys are not
 // accessible to third parties. Therefore this application key is obfuscated to
@@ -67,6 +68,7 @@ GrooveSharkService::GrooveSharkService(InternetModel *parent)
   : InternetService(kServiceName, parent, parent),
     url_handler_(new GrooveSharkUrlHandler(this, this)),
     pending_search_playlist_(NULL),
+    next_pending_search_id_(0),
     root_(NULL),
     search_(NULL),
     network_(new NetworkAccessManager(this)),
@@ -89,6 +91,9 @@ GrooveSharkService::GrooveSharkService(InternetModel *parent)
   session_id_ = s.value("sessionid").toString();
   username_ = s.value("username").toString();
 
+  GroovesharkSearchProvider* search_provider = new GroovesharkSearchProvider(this);
+  search_provider->Init(this);
+  model()->global_search()->AddProvider(search_provider);
 }
 
 
@@ -126,6 +131,33 @@ void GrooveSharkService::Search(const QString& text, Playlist* playlist, bool no
   } else {
     search_delay_->start();
   }
+}
+
+int GrooveSharkService::SimpleSearch(const QString& query) {
+  QList<Param> parameters;
+  parameters << Param("query", query)
+             << Param("country", "")
+             << Param("limit", QString::number(kSongSearchLimit))
+             << Param("offset", "");
+
+  QNetworkReply* reply = CreateRequest("getSongSearchResults", parameters, false);
+  connect(reply, SIGNAL(finished()), SLOT(SimpleSearchFinished()));
+
+  int id = next_pending_search_id_++;
+  pending_searches_[reply] = id;
+
+  return id;
+}
+
+void GrooveSharkService::SimpleSearchFinished() {
+  QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
+  Q_ASSERT(reply);
+  reply->deleteLater();
+
+  const int id = pending_searches_.take(reply);
+  QVariantMap result = ExtractResult(reply);
+  SongList songs = ExtractSongs(result);
+  emit SimpleSearchResults(id, songs);
 }
 
 void GrooveSharkService::DoSearch() {
