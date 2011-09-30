@@ -32,13 +32,9 @@ void GroovesharkSearchProvider::Init(GrooveSharkService* service) {
 void GroovesharkSearchProvider::SearchAsync(int id, const QString& query) {
   const int service_id = service_->SimpleSearch(query);
   pending_searches_[service_id] = id;
-
-  qLog(Debug) << "Searching grooveshark for:" << query;
 }
 
 void GroovesharkSearchProvider::SearchDone(int id, SongList songs) {
-  qLog(Debug) << Q_FUNC_INFO;
-
   // Map back to the original id.
   const int global_search_id = pending_searches_.take(id);
 
@@ -51,8 +47,6 @@ void GroovesharkSearchProvider::SearchDone(int id, SongList songs) {
 
     ret << result;
   }
-
-  qLog(Debug) << "Found:" << ret.size() << "songs from grooveshark";
 
   emit ResultsAvailable(global_search_id, ret);
   emit SearchFinished(global_search_id);
