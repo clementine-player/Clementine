@@ -365,7 +365,6 @@ set(HEADERS
   engines/gstenginepipeline.h
   engines/gstelementdeleter.h
 
-  globalsearch/digitallyimportedsearchprovider.h
   globalsearch/librarysearchprovider.h
   globalsearch/globalsearch.h
   globalsearch/globalsearchpopup.h
@@ -373,6 +372,7 @@ set(HEADERS
   globalsearch/globalsearchwidget.h
   globalsearch/groovesharksearchprovider.h
   globalsearch/searchprovider.h
+  globalsearch/simplesearchprovider.h
   globalsearch/tooltipactionwidget.h
   globalsearch/tooltipresultwidget.h
 
@@ -678,7 +678,6 @@ if(HAVE_LIBLASTFM)
   )
   list(APPEND HEADERS
     covers/lastfmcoverprovider.h
-    globalsearch/lastfmsearchprovider.h
     internet/lastfmservice.h
     internet/lastfmsettingspage.h
     internet/lastfmstationdialog.h

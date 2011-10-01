@@ -38,12 +38,29 @@ SimpleSearchProvider::Item::Item(const Song& song, const QString& keyword)
 
 SimpleSearchProvider::SimpleSearchProvider(QObject* parent)
   : BlockingSearchProvider(parent),
-    result_limit_(kDefaultResultLimit)
+    result_limit_(kDefaultResultLimit),
+    items_dirty_(true),
+    has_searched_before_(false)
 {
+}
+
+void SimpleSearchProvider::MaybeRecreateItems() {
+  if (has_searched_before_) {
+    RecreateItems();
+  } else {
+    items_dirty_ = true;
+  }
 }
 
 SearchProvider::ResultList SimpleSearchProvider::Search(int id, const QString& query) {
   Q_UNUSED(id)
+
+  if (items_dirty_) {
+    RecreateItems();
+    items_dirty_ = false;
+  }
+
+  has_searched_before_ = true;
 
   ResultList ret;
   const QStringList tokens = TokenizeQuery(query);

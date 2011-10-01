@@ -23,15 +23,13 @@
 class DigitallyImportedServiceBase;
 
 class DigitallyImportedSearchProvider : public SimpleSearchProvider {
-  Q_OBJECT
-
 public:
   DigitallyImportedSearchProvider(DigitallyImportedServiceBase* service,
                                   QObject* parent);
 
   void LoadArtAsync(int id, const Result& result);
 
-private slots:
+protected:
   void RecreateItems();
 
 private:

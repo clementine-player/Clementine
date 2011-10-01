@@ -30,8 +30,7 @@ DigitallyImportedSearchProvider::DigitallyImportedSearchProvider(
   set_safe_words(QStringList() << "sky.fm" << "skyfm" << "di.fm" << "difm"
                                << "digitallyimported");
 
-  connect(service_, SIGNAL(StreamsChanged()), SLOT(RecreateItems()));
-  RecreateItems();
+  connect(service_, SIGNAL(StreamsChanged()), SLOT(MaybeRecreateItems()));
 }
 
 void DigitallyImportedSearchProvider::LoadArtAsync(int id, const Result& result) {

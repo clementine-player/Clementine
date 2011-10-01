@@ -21,6 +21,8 @@
 #include "searchprovider.h"
 
 class SimpleSearchProvider : public BlockingSearchProvider {
+  Q_OBJECT
+
 public:
   SimpleSearchProvider(QObject* parent);
 
@@ -31,6 +33,12 @@ public:
 
   // SearchProvider
   void LoadTracksAsync(int id, const Result& result);
+
+protected slots:
+  // Calls RecreateItems now if the user has done a global search with this
+  // provider at least once before.  Otherwise will schedule RecreateItems the
+  // next time the user does a search.
+  void MaybeRecreateItems();
 
 protected:
   struct Item {
@@ -51,12 +59,19 @@ protected:
 
   void SetItems(const ItemList& items);
 
+  // Subclasses should fetch the list of items they want to show in results and
+  // call SetItems with the new list.
+  virtual void RecreateItems() = 0;
+
 private:
   int result_limit_;
   QStringList safe_words_;
 
   QMutex items_mutex_;
   ItemList items_;
+
+  bool items_dirty_;
+  bool has_searched_before_;
 };
 
 #endif // SIMPLESEARCHPROVIDER_H
