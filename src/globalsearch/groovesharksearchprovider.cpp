@@ -51,7 +51,7 @@ void GrooveSharkSearchProvider::SearchAsync(int id, const QString& query) {
   pending_searches_[service_id] = id;
 }
 
-void GrooveSharkSearchProvider::SearchDone(int id, SongList songs) {
+void GrooveSharkSearchProvider::SearchDone(int id, const SongList& songs) {
   // Map back to the original id.
   const int global_search_id = pending_searches_.take(id);
 

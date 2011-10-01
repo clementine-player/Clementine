@@ -37,7 +37,7 @@ class GrooveSharkSearchProvider : public SearchProvider {
   void LoadTracksAsync(int id, const Result& result);
 
  private slots:
-  void SearchDone(int id, SongList songs);
+  void SearchDone(int id, const SongList& songs);
   void AlbumArtLoaded(quint64 id, const QImage& image);
 
  private:
