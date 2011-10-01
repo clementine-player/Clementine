@@ -342,6 +342,24 @@ int main(int argc, char *argv[]) {
   QCoreApplication::setAttribute(Qt::AA_DontShowIconsInMenus, true);
 #endif
 
+  // Set the permissions on the config file on Unix - it can contain passwords
+  // for internet services so it's important that other users can't read it.
+  // On Windows these are stored in the registry instead.
+#ifdef Q_OS_UNIX
+  {
+    QSettings s;
+
+    // Create the file if it doesn't exist already
+    if (!QFile::exists(s.fileName())) {
+      QFile file(s.fileName());
+      file.open(QIODevice::WriteOnly);
+    }
+
+    // Set -rw-------
+    QFile::setPermissions(s.fileName(), QFile::ReadOwner | QFile::WriteOwner);
+  }
+#endif
+
   // Resources
   Q_INIT_RESOURCE(data);
   Q_INIT_RESOURCE(translations);
