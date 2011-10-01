@@ -133,7 +133,7 @@ private:
   QSortFilterProxyModel* current_proxy_;
 
   QListView* view_;
-  bool eat_focus_out_;
+  bool consume_focus_out_;
 
   QTimer* swap_models_timer_;
 

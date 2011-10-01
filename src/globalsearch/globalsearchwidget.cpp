@@ -57,7 +57,7 @@ GlobalSearchWidget::GlobalSearchWidget(QWidget* parent)
     back_proxy_(new GlobalSearchSortModel(this)),
     current_proxy_(front_proxy_),
     view_(new QListView),
-    eat_focus_out_(false),
+    consume_focus_out_(false),
     swap_models_timer_(new QTimer(this)),
     background_(":allthethings.png"),
     desktop_(qApp->desktop()),
@@ -315,7 +315,7 @@ bool GlobalSearchWidget::eventFilter(QObject* o, QEvent* e) {
 bool GlobalSearchWidget::EventFilterSearchWidget(QObject* o, QEvent* e) {
   switch (e->type()) {
   case QEvent::FocusOut:
-    if (eat_focus_out_ && view_->isVisible())
+    if (consume_focus_out_ && view_->isVisible())
       return true;
     break;
 
@@ -392,9 +392,9 @@ bool GlobalSearchWidget::EventFilterPopup(QObject*, QEvent* e) {
 
     // Send the event to the widget. If the widget accepted the event, do nothing
     // If the widget did not accept the event, provide a default implementation
-    eat_focus_out_ = false;
+    consume_focus_out_ = false;
     (static_cast<QObject *>(ui_->search))->event(ke);
-    eat_focus_out_ = true;
+    consume_focus_out_ = true;
 
     if (e->isAccepted() || !view_->isVisible()) {
       // widget lost focus, hide the popup
