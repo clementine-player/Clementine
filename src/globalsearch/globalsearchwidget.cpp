@@ -227,6 +227,8 @@ void GlobalSearchWidget::SwapModels() {
   qSwap(front_proxy_, back_proxy_);
 
   view_->setModel(front_proxy_);
+  connect(view_->selectionModel(), SIGNAL(currentChanged(QModelIndex,QModelIndex)),
+          SLOT(UpdateTooltip()));
   RepositionPopup();
 }
 
