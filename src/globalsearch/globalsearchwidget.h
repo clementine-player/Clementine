@@ -34,6 +34,7 @@ class QMimeData;
 class QModelIndex;
 class QSortFilterProxyModel;
 class QStandardItemModel;
+class QToolButton;
 
 
 class GlobalSearchWidget : public QWidget {
@@ -46,7 +47,6 @@ public:
   static const int kMinVisibleItems;
   static const int kMaxVisibleItems;
   static const int kSwapModelsTimeoutMsec;
-  static const char* kSettingsGroup;
 
   enum Role {
     Role_PrimaryResult = Qt::UserRole + 1,
@@ -93,6 +93,10 @@ private slots:
 
   void SwapModels();
 
+  void ProviderAdded(const SearchProvider* provider);
+  void ProviderRemoved(const SearchProvider* provider);
+  void ProviderButtonToggled(bool on);
+
 private:
   // Return values from CanCombineResults
   enum CombineAction {
@@ -107,6 +111,7 @@ private:
 
   bool EventFilterSearchWidget(QObject* o, QEvent* e);
   bool EventFilterPopup(QObject* o, QEvent* e);
+  bool EventFilterProviderButton(QToolButton* button, QEvent* e);
 
   void LoadTracks(QAction* trigger);
 
@@ -153,6 +158,8 @@ private:
   QAction* replace_;
   QAction* replace_and_play_;
   QList<QAction*> actions_;
+
+  QMap<const SearchProvider*, QToolButton*> provider_buttons_;
 };
 
 #endif // GLOBALSEARCHWIDGET_H
