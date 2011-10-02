@@ -1,5 +1,5 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2011, David Sansome <me@davidsansome.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -57,11 +57,15 @@ class GrooveSharkService : public InternetService {
 
   void Search(const QString& text, Playlist* playlist, bool now = false);
   // User should be logged in to be able to generate streaming urls
-  QUrl GetStreamingUrlFromSongId(const QString& song_id);
+  QUrl GetStreamingUrlFromSongId(const QString& song_id,
+                                 QString* server_id, QString* stream_key,
+                                 qint64* length_nanosec);
   void Login(const QString& username, const QString& password);
   void Logout();
   bool IsLoggedIn() { return !session_id_.isEmpty(); }
   void RetrieveUserPlaylists();
+  void MarkStreamKeyOver30Secs(const QString& stream_key, const QString& server_id);
+  void MarkSongComplete(const QString& song_id, const QString& stream_key, const QString& server_id);
 
   // Persisted in the settings and updated on each Login().
   LoginState login_state() const { return login_state_; }
@@ -105,6 +109,8 @@ class GrooveSharkService : public InternetService {
   void Authenticated();
   void UserPlaylistsRetrieved();
   void PlaylistSongsRetrieved();
+  void StreamMarked();
+  void SongMarkedAsComplete();
 
  private:
   void EnsureMenuCreated();

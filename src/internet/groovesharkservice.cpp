@@ -1,5 +1,5 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2011, David Sansome <me@davidsansome.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -156,9 +156,8 @@ void GrooveSharkService::InitCountry() {
   if (!country_.isEmpty())
     return;
   // Get country info
-  QNetworkReply *reply_country;
+  QNetworkReply *reply_country = CreateRequest("getCountry", QList<Param>(), true);
 
-  reply_country = CreateRequest("getCountry", QList<Param>(), true);
   // Wait for the reply
   {
     QEventLoop event_loop;
@@ -176,14 +175,14 @@ void GrooveSharkService::InitCountry() {
   country_ = ExtractResult(reply_country);
 }
 
-QUrl GrooveSharkService::GetStreamingUrlFromSongId(const QString& song_id) {
+QUrl GrooveSharkService::GetStreamingUrlFromSongId(const QString& song_id,
+    QString* server_id, QString* stream_key, qint64* length_nanosec) {
   QList<Param> parameters;
-  QNetworkReply *reply;
 
   InitCountry();
   parameters  << Param("songID", song_id)
               << Param("country", country_);
-  reply = CreateRequest("getSubscriberStreamKey", parameters, true);
+  QNetworkReply* reply = CreateRequest("getSubscriberStreamKey", parameters, true);
   // Wait for the reply
   {
     QEventLoop event_loop;
@@ -199,6 +198,11 @@ QUrl GrooveSharkService::GetStreamingUrlFromSongId(const QString& song_id) {
     timeout_timer.stop();
   }
   QVariantMap result = ExtractResult(reply);
+  server_id->clear();
+  server_id->append(result["StreamServerID"].toString());
+  stream_key->clear();
+  stream_key->append(result["StreamKey"].toString());
+  *length_nanosec = result["uSecs"].toLongLong() * 1000;
 
   return QUrl(result["url"].toString());
 }
@@ -211,9 +215,7 @@ void GrooveSharkService::Login(const QString& username, const QString& password)
   password_ = QCryptographicHash::hash(password.toLocal8Bit(), QCryptographicHash::Md5).toHex();
 
   QList<Param> parameters;
-  QNetworkReply *reply;
-
-  reply = CreateRequest("startSession", parameters, false, true);
+  QNetworkReply *reply = CreateRequest("startSession", parameters, false, true);
 
   connect(reply, SIGNAL(finished()), SLOT(SessionCreated()));
 }
@@ -237,13 +239,10 @@ void GrooveSharkService::SessionCreated() {
 
 void GrooveSharkService::AuthenticateSession() {
   QList<Param> parameters;
-  QNetworkReply *reply;
-
   parameters  << Param("login", username_)
               << Param("password", password_);
 
-  reply = CreateRequest("authenticate", parameters, true, true);
-
+  QNetworkReply *reply = CreateRequest("authenticate", parameters, true, true);
   connect(reply, SIGNAL(finished()), SLOT(Authenticated()));
 }
 
@@ -333,9 +332,7 @@ void GrooveSharkService::EnsureConnected() {
 }
 
 void GrooveSharkService::RetrieveUserPlaylists() {
-  QNetworkReply *reply;
-  
-  reply = CreateRequest("getUserPlaylists", QList<Param>(), true);
+  QNetworkReply* reply = CreateRequest("getUserPlaylists", QList<Param>(), true);
 
   connect(reply, SIGNAL(finished()), SLOT(UserPlaylistsRetrieved()));
 }
@@ -396,6 +393,53 @@ void GrooveSharkService::PlaylistSongsRetrieved() {
   root_->appendRow(item);
 }
 
+
+void GrooveSharkService::MarkStreamKeyOver30Secs(const QString& stream_key,
+                                                 const QString& server_id) {
+  QList<Param> parameters;
+  parameters  << Param("streamKey", stream_key)
+              << Param("streamServerID", server_id);
+
+  QNetworkReply* reply = CreateRequest("markStreamKeyOver30Secs", parameters, true, false);
+  connect(reply, SIGNAL(finished()), SLOT(StreamMarked()));
+}
+
+void GrooveSharkService::StreamMarked() {
+  QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
+  if (!reply)
+    return;
+
+  reply->deleteLater();
+  QVariantMap result = ExtractResult(reply);
+  if (!result["success"].toBool()) {
+    qLog(Warning) << "GrooveShark markStreamKeyOver30Secs failed";
+  }
+}
+
+void GrooveSharkService::MarkSongComplete(const QString& song_id,
+                                          const QString& stream_key,
+                                          const QString& server_id) {
+  QList<Param> parameters;
+  parameters  << Param("songID", song_id)
+              << Param("streamKey", stream_key)
+              << Param("streamServerID", server_id);
+
+  QNetworkReply* reply = CreateRequest("markSongComplete", parameters, true, false);
+  connect(reply, SIGNAL(finished()), SLOT(SongMarkedAsComplete()));
+}
+
+void GrooveSharkService::SongMarkedAsComplete() {
+  QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
+  if (!reply)
+    return;
+
+  reply->deleteLater();
+  QVariantMap result = ExtractResult(reply);
+  if (!result["success"].toBool()) {
+    qLog(Warning) << "GrooveShark markSongComplete failed";
+  }
+}
+
 void GrooveSharkService::OpenSearchTab() {
   model()->player()->playlists()->New(tr("Search GrooveShark"), SongList(),
                                       GrooveSharkSearchPlaylistType::kName);
@@ -411,7 +455,6 @@ QNetworkReply* GrooveSharkService::CreateRequest(const QString& method_name, QLi
                                        bool need_authentication,
                                        bool use_https) {
   QVariantMap request_params;
-
   request_params.insert("method", method_name);
 
   QVariantMap header;
@@ -470,7 +513,6 @@ SongList GrooveSharkService::ExtractSongs(const QVariantMap& result) {
     QString album_name = result_song["AlbumName"].toString();
     QString cover = result_song["CoverArtFilename"].toString();
     song.Init(song_name, artist_name, album_name, 0);
-    song.set_id(song_id);
     song.set_art_automatic(QString(kUrlCover) + cover);
     // Special kind of URL: because we need to request a stream key for each
     // play, we generate a fake URL for now, and we will create a real streaming

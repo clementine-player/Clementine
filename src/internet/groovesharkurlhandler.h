@@ -1,5 +1,5 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2011, David Sansome <me@davidsansome.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -21,19 +21,27 @@
 #include "core/urlhandler.h"
 
 class GrooveSharkService;
+class QTimer;
 
 class GrooveSharkUrlHandler : public UrlHandler {
+  Q_OBJECT
 public:
   GrooveSharkUrlHandler(GrooveSharkService* service, QObject* parent);
 
   QString scheme() const { return "grooveshark"; }
   LoadResult StartLoading(const QUrl& url);
+  void TrackAboutToEnd();
+  void TrackSkipped();
+
+private slots:
+  void MarkStreamKeyOver30Secs();
 
 private:
   GrooveSharkService* service_;
+  QTimer* timer_mark_stream_key_;
   QString last_song_id_;
   QString last_server_id_;
-  QString last_stream_key;
+  QString last_stream_key_;
 };
 
 #endif // GROOVESHARKURLHANDLER_H

@@ -104,6 +104,14 @@ void Player::HandleLoadResult(const UrlHandler::LoadResult& result) {
     qLog(Debug) << "URL handler for" << result.original_url_
                 << "returned" << result.media_url_;
 
+    // If there was no length info in song's metadata, use the one provided by
+    // URL handler, if there is one
+    if (item->Metadata().length_nanosec() <= 0 && result.length_nanosec_ != -1) {
+      Song song = item->Metadata();
+      song.set_length_nanosec(result.length_nanosec_);
+      item->SetTemporaryMetadata(song);
+      playlists_->active()->UpdateItems(SongList() << song);
+    }
     engine_->Play(result.media_url_, stream_change_type_,
                   item->Metadata().has_cue(),
                   item->Metadata().beginning_nanosec(),
@@ -276,6 +284,10 @@ int Player::GetVolume() const {
 void Player::PlayAt(int index, Engine::TrackChangeFlags change, bool reshuffle) {
   if (change == Engine::Manual && engine_->position_nanosec() != engine_->length_nanosec()) {
     emit TrackSkipped(current_item_);
+    const QUrl& url = current_item_->Url();
+    if (url_handlers_.contains(url.scheme())) {
+      url_handlers_[url.scheme()]->TrackSkipped();
+    }
   }
 
   if (current_item_ && current_item_->Metadata().IsOnSameAlbum(
@@ -427,8 +439,10 @@ void Player::TrackAboutToEnd() {
   // again immediately after.
   if (playlists_->active()->current_item()) {
     const QUrl url = playlists_->active()->current_item()->Url();
-    if (url_handlers_.contains(url.scheme()))
+    if (url_handlers_.contains(url.scheme())) {
+      url_handlers_[url.scheme()]->TrackAboutToEnd();
       return;
+    }
   }
 
   const bool has_next_row = playlists_->active()->next_row() != -1;

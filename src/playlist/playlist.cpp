@@ -969,9 +969,10 @@ void Playlist::UpdateItems(const SongList& songs) {
     // Update current items list
     for (int i=0; i<items_.size(); i++) {
       PlaylistItemPtr item = items_[i];
-
       if (item->Metadata().url() == song.url() &&
-          item->Metadata().filetype() == Song::Type_Unknown) {
+          (item->Metadata().filetype() == Song::Type_Unknown ||
+            // Stream may change and may need to be updated too
+            item->Metadata().filetype() == Song::Type_Stream)) {
         PlaylistItemPtr new_item;
         if (song.id() == -1) {
           new_item = PlaylistItemPtr(new SongPlaylistItem(song));
