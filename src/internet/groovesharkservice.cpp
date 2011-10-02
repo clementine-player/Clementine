@@ -103,6 +103,8 @@ GrooveSharkService::~GrooveSharkService() {
 QStandardItem* GrooveSharkService::CreateRootItem() {
   root_ = new QStandardItem(QIcon(":providers/grooveshark.png"), kServiceName);
   root_->setData(true, InternetModel::Role_CanLazyLoad);
+  root_->setData(InternetModel::PlayBehaviour_DoubleClickAction,
+                           InternetModel::Role_PlayBehaviour);
   return root_;
 }
 
@@ -309,6 +311,10 @@ void GrooveSharkService::Authenticated() {
 
 void GrooveSharkService::Logout() {
   ResetSessionId();
+  root_->removeRows(0, root_->rowCount());
+  // search item was root's child, and has been deleted: we should update this
+  // now invalid pointer
+  search_ = NULL;
 }
 
 void GrooveSharkService::ResetSessionId() {
@@ -425,7 +431,6 @@ void GrooveSharkService::PlaylistSongsRetrieved() {
   root_->appendRow(item);
 }
 
-
 void GrooveSharkService::MarkStreamKeyOver30Secs(const QString& stream_key,
                                                  const QString& server_id) {
   QList<Param> parameters;
@@ -480,6 +485,9 @@ void GrooveSharkService::OpenSearchTab() {
 void GrooveSharkService::ItemDoubleClicked(QStandardItem* item) {
   if (item == search_) {
     OpenSearchTab();
+  }
+  if (item == root_) {
+    EnsureConnected();
   }
 }
 
