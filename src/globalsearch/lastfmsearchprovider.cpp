@@ -28,8 +28,7 @@ LastFMSearchProvider::LastFMSearchProvider(LastFMService* service, QObject* pare
 
   set_safe_words(QStringList() << "lastfm" << "last.fm");
 
-  connect(service, SIGNAL(SavedItemsChanged()), SLOT(RecreateItems()));
-  RecreateItems();
+  connect(service, SIGNAL(SavedItemsChanged()), SLOT(MaybeRecreateItems()));
 }
 
 void LastFMSearchProvider::LoadArtAsync(int id, const Result& result) {

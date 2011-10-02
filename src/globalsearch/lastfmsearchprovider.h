@@ -23,14 +23,12 @@
 class LastFMService;
 
 class LastFMSearchProvider : public SimpleSearchProvider {
-  Q_OBJECT
-
 public:
   LastFMSearchProvider(LastFMService* service, QObject* parent);
 
   void LoadArtAsync(int id, const Result& result);
 
-private slots:
+protected:
   void RecreateItems();
 
 private:

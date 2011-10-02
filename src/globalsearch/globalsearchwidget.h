@@ -34,6 +34,7 @@ class QMimeData;
 class QModelIndex;
 class QSortFilterProxyModel;
 class QStandardItemModel;
+class QToolButton;
 
 
 class GlobalSearchWidget : public QWidget {
@@ -45,12 +46,13 @@ public:
 
   static const int kMinVisibleItems;
   static const int kMaxVisibleItems;
-  static const char* kSettingsGroup;
+  static const int kSwapModelsTimeoutMsec;
 
   enum Role {
     Role_PrimaryResult = Qt::UserRole + 1,
     Role_AllResults,
-    Role_LazyLoadingArt
+    Role_LazyLoadingArt,
+    Role_OrderArrived
   };
 
   void Init(GlobalSearch* engine_);
@@ -73,7 +75,6 @@ protected:
 
 private slots:
   void TextEdited(const QString& text);
-  void SearchFinished(int id);
   void AddResults(int id, const SearchProvider::ResultList& results);
 
   void ArtLoaded(int id, const QPixmap& pixmap);
@@ -90,6 +91,12 @@ private slots:
   void HidePopup();
   void UpdateTooltip();
 
+  void SwapModels();
+
+  void ProviderAdded(const SearchProvider* provider);
+  void ProviderRemoved(const SearchProvider* provider);
+  void ProviderButtonToggled(bool on);
+
 private:
   // Return values from CanCombineResults
   enum CombineAction {
@@ -98,13 +105,13 @@ private:
     RightPreferred  // The two results can be combined - the right one is better
   };
 
-  void Reset();
   void RepositionPopup();
   CombineAction CanCombineResults(const QModelIndex& left, const QModelIndex& right) const;
   void CombineResults(const QModelIndex& superior, const QModelIndex& inferior);
 
   bool EventFilterSearchWidget(QObject* o, QEvent* e);
   bool EventFilterPopup(QObject* o, QEvent* e);
+  bool EventFilterProviderButton(QToolButton* button, QEvent* e);
 
   void LoadTracks(QAction* trigger);
 
@@ -113,15 +120,27 @@ private:
 
   GlobalSearch* engine_;
   int last_id_;
-  bool clear_model_on_next_result_;
+  int order_arrived_counter_;
 
   QMap<int, QModelIndex> art_requests_;
   QMap<int, QAction*> track_requests_;
 
-  QStandardItemModel* model_;
-  QSortFilterProxyModel* proxy_;
+  // Like graphics APIs have a front buffer and a back buffer, there's a front
+  // model and a back model - the front model is the one that's shown in the
+  // UI and the back model is the one that lies in wait.  current_model_ will
+  // point to either the front or the back model.
+  QStandardItemModel* front_model_;
+  QStandardItemModel* back_model_;
+  QStandardItemModel* current_model_;
+
+  QSortFilterProxyModel* front_proxy_;
+  QSortFilterProxyModel* back_proxy_;
+  QSortFilterProxyModel* current_proxy_;
+
   QListView* view_;
-  bool eat_focus_out_;
+  bool consume_focus_out_;
+
+  QTimer* swap_models_timer_;
 
   QPixmap background_;
   QPixmap background_scaled_;
@@ -139,6 +158,8 @@ private:
   QAction* replace_;
   QAction* replace_and_play_;
   QList<QAction*> actions_;
+
+  QMap<const SearchProvider*, QToolButton*> provider_buttons_;
 };
 
 #endif // GLOBALSEARCHWIDGET_H

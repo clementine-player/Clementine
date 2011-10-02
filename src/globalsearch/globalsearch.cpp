@@ -19,10 +19,12 @@
 #include "globalsearch.h"
 #include "core/logging.h"
 
+#include <QSettings>
 #include <QStringBuilder>
 #include <QUrl>
 
 const int GlobalSearch::kDelayedSearchTimeoutMs = 200;
+const char* GlobalSearch::kSettingsGroup = "GlobalSearch";
 
 
 GlobalSearch::GlobalSearch(QObject* parent)
@@ -45,7 +47,11 @@ void GlobalSearch::AddProvider(SearchProvider* provider) {
   connect(provider, SIGNAL(destroyed(QObject*)),
           SLOT(ProviderDestroyedSlot(QObject*)));
 
-  providers_ << provider;
+  ProviderData data;
+  data.enabled_ = !disabled_provider_ids_.contains(provider->id());
+  providers_[provider] = data;
+
+  emit ProviderAdded(provider);
 }
 
 int GlobalSearch::SearchAsync(const QString& query) {
@@ -54,7 +60,10 @@ int GlobalSearch::SearchAsync(const QString& query) {
   int timer_id = -1;
 
   pending_search_providers_[id] = providers_.count();
-  foreach (SearchProvider* provider, providers_) {
+  foreach (SearchProvider* provider, providers_.keys()) {
+    if (!providers_[provider].enabled_)
+      continue;
+
     if (provider->wants_delayed_queries()) {
       if (timer_id == -1) {
         timer_id = startTimer(kDelayedSearchTimeoutMs);
@@ -131,8 +140,8 @@ void GlobalSearch::ProviderDestroyedSlot(QObject* object) {
   if (!providers_.contains(provider))
     return;
 
-  providers_.removeAll(provider);
-  emit ProviderDestroyed(provider);
+  providers_.remove(provider);
+  emit ProviderRemoved(provider);
 
   // We have to abort any pending searches since we can't tell whether they
   // were on this provider.
@@ -142,19 +151,31 @@ void GlobalSearch::ProviderDestroyedSlot(QObject* object) {
   pending_search_providers_.clear();
 }
 
+QList<SearchProvider*> GlobalSearch::providers() const {
+  return providers_.keys();
+}
+
 int GlobalSearch::LoadArtAsync(const SearchProvider::Result& result) {
   const int id = next_id_ ++;
 
   pending_art_searches_[id] = result.pixmap_cache_key_;
+
+  if (!providers_.contains(result.provider_) ||
+      !providers_[result.provider_].enabled_) {
+    emit ArtLoaded(id, QPixmap());
+    return id;
+  }
 
   if (result.provider_->wants_serialised_art()) {
     QueuedArt request;
     request.id_ = id;
     request.result_ = result;
 
-    queued_art_[result.provider_].append(request);
+    QList<QueuedArt>* queued_art = &providers_[result.provider_].queued_art_;
 
-    if (queued_art_[result.provider_].count() == 1) {
+    queued_art->append(request);
+
+    if (queued_art->count() == 1) {
       TakeNextQueuedArt(result.provider_);
     }
   } else {
@@ -165,10 +186,11 @@ int GlobalSearch::LoadArtAsync(const SearchProvider::Result& result) {
 }
 
 void GlobalSearch::TakeNextQueuedArt(SearchProvider* provider) {
-  if (queued_art_[provider].isEmpty())
+  if (!providers_.contains(provider) ||
+      providers_[provider].queued_art_.isEmpty())
     return;
 
-  const QueuedArt& data = queued_art_[provider].first();
+  const QueuedArt& data =  providers_[provider].queued_art_.first();
   provider->LoadArtAsync(data.id_, data.result_);
 }
 
@@ -181,8 +203,9 @@ void GlobalSearch::ArtLoadedSlot(int id, const QImage& image) {
 
   emit ArtLoaded(id, pixmap);
 
-  if (!queued_art_[provider].isEmpty()) {
-    queued_art_[provider].removeFirst();
+  if (providers_.contains(provider) &&
+      !providers_[provider].queued_art_.isEmpty()) {
+     providers_[provider].queued_art_.removeFirst();
     TakeNextQueuedArt(provider);
   }
 }
@@ -200,3 +223,33 @@ int GlobalSearch::LoadTracksAsync(const SearchProvider::Result& result) {
   return id;
 }
 
+void GlobalSearch::SetProviderEnabled(const SearchProvider* const_provider,
+                                      bool enabled) {
+  SearchProvider* provider = const_cast<SearchProvider*>(const_provider);
+  if (!providers_.contains(provider))
+    return;
+
+  if (providers_[provider].enabled_ != enabled) {
+    providers_[provider].enabled_ = enabled;
+    emit ProviderToggled(provider, enabled);
+  }
+}
+
+bool GlobalSearch::is_provider_enabled(const SearchProvider* const_provider) const {
+  SearchProvider* provider = const_cast<SearchProvider*>(const_provider);
+
+  if (!providers_.contains(provider))
+    return false;
+  return providers_[provider].enabled_;
+}
+
+void GlobalSearch::ReloadSettings() {
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+
+  disabled_provider_ids_ = s.value("disabled_providers").toStringList();
+
+  foreach (SearchProvider* provider, providers_.keys()) {
+    SetProviderEnabled(provider, !disabled_provider_ids_.contains(provider->id()));
+  }
+}

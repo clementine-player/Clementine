@@ -16,6 +16,7 @@
 */
 
 #include "widgetfadehelper.h"
+#include "ui/qt_blurimage.h"
 
 #include <QResizeEvent>
 #include <QPainter>
@@ -24,9 +25,6 @@
 
 const int WidgetFadeHelper::kLoadingPadding = 9;
 const int WidgetFadeHelper::kLoadingBorderRadius = 10;
-
-// Exported by QtGui
-void qt_blurImage(QPainter *p, QImage &blurImage, qreal radius, bool quality, bool alphaOnly, int transposed = 0);
 
 WidgetFadeHelper::WidgetFadeHelper(QWidget* parent, int msec)
   : QWidget(parent),

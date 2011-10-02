@@ -1,5 +1,5 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2011, David Sansome <me@davidsansome.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,26 +15,11 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef DIGITALLYIMPORTEDSEARCHPROVIDER_H
-#define DIGITALLYIMPORTEDSEARCHPROVIDER_H
+#ifndef QT_BLURIMAGE_H
+#define QT_BLURIMAGE_H
 
-#include "simplesearchprovider.h"
+// Exported by QtGui
+void qt_blurImage(QPainter* p, QImage& blurImage, qreal radius, bool quality,
+                  bool alphaOnly, int transposed = 0);
 
-class DigitallyImportedServiceBase;
-
-class DigitallyImportedSearchProvider : public SimpleSearchProvider {
-public:
-  DigitallyImportedSearchProvider(DigitallyImportedServiceBase* service,
-                                  QObject* parent);
-
-  void LoadArtAsync(int id, const Result& result);
-
-protected:
-  void RecreateItems();
-
-private:
-  DigitallyImportedServiceBase* service_;
-  QImage icon_;
-};
-
-#endif // DIGITALLYIMPORTEDSEARCHPROVIDER_H
+#endif // QT_BLURIMAGE_H

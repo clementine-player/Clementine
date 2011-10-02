@@ -9,24 +9,24 @@
 }
 
 #search {
-  border: 1px groove rgba(128, 128, 128, 60%);
+  border: 1px groove rgb(100, 100, 100);
   border-radius: 4px 4px;
-  background-color: rgba(0, 0, 0, 20%)
+  background-color: rgba(0, 0, 0, 20%);
 }
 
 QToolButton {
   font-weight: normal;
   font-weight: bold;
   color: rgba(255, 255, 255, 50%);
-}
-
-QToolButton:hover {
-  background-color: black;
-  border: 2px solid rgba(255, 255, 255, 20%);
   border-radius: 3px;
 }
 
+QToolButton:hover {
+  background-color: rgb(64, 64, 64);
+  border: 1px solid rgba(255, 255, 255, 20%);
+}
+
 QToolButton:pressed {
-  border: 2px solid rgba(255, 255, 255, 20%);
-  background-color: rgba(255, 255, 255, 10%);
+  background-color: rgb(64, 64, 64);
+  border: 1px solid rgba(255, 255, 255, 50%);
 }

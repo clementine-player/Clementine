@@ -71,6 +71,8 @@ class GrooveSharkService : public InternetService {
   LoginState login_state() const { return login_state_; }
   const QString& session_id() { return session_id_; }
 
+  int SimpleSearch(const QString& query);
+
 
   static const char* kServiceName;
   static const char* kSettingsGroup;
@@ -85,6 +87,7 @@ class GrooveSharkService : public InternetService {
 
  signals:
   void LoginFinished(bool success);
+  void SimpleSearchResults(int id, SongList songs);
 
  protected:
   QModelIndex GetCurrentIndex();
@@ -106,11 +109,13 @@ class GrooveSharkService : public InternetService {
   void OpenSearchTab();
   void DoSearch();
   void SearchSongsFinished();
+  void SimpleSearchFinished();
   void Authenticated();
   void UserPlaylistsRetrieved();
   void PlaylistSongsRetrieved();
   void StreamMarked();
   void SongMarkedAsComplete();
+
 
  private:
   void EnsureMenuCreated();
@@ -137,6 +142,9 @@ class GrooveSharkService : public InternetService {
 
   QString pending_search_;
   Playlist* pending_search_playlist_;
+
+  int next_pending_search_id_;
+  QMap<QNetworkReply*, int> pending_searches_;
 
   QMap<QNetworkReply*, PlaylistInfo> pending_retrieve_playlists_;
 

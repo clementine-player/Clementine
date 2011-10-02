@@ -33,13 +33,12 @@
 #include <QtGui/QColor>
 #include <QtGui/QStyle>
 
+#include "ui/qt_blurimage.h"
+
 QT_BEGIN_NAMESPACE
 class QPalette;
 class QPainter;
 class QRect;
-// Note, this is exported but in a private header as qtopengl depends on it.
-// We should consider adding this as a public helper function.
-void qt_blurImage(QPainter *p, QImage &blurImage, qreal radius, bool quality, bool alphaOnly, int transposed = 0);
 QT_END_NAMESPACE
 
 // Helper class holding all custom color values

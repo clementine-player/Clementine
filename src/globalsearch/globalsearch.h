@@ -31,8 +31,10 @@ public:
   GlobalSearch(QObject* parent = 0);
 
   static const int kDelayedSearchTimeoutMs;
+  static const char* kSettingsGroup;
 
   void AddProvider(SearchProvider* provider);
+  void SetProviderEnabled(const SearchProvider* provider, bool enabled);
 
   int SearchAsync(const QString& query);
   int LoadArtAsync(const SearchProvider::Result& result);
@@ -43,6 +45,12 @@ public:
 
   bool FindCachedPixmap(const SearchProvider::Result& result, QPixmap* pixmap) const;
 
+  QList<SearchProvider*> providers() const;
+  bool is_provider_enabled(const SearchProvider* provider) const;
+
+public slots:
+  void ReloadSettings();
+
 signals:
   void ResultsAvailable(int id, const SearchProvider::ResultList& results);
   void ProviderSearchFinished(int id, const SearchProvider* provider);
@@ -52,7 +60,9 @@ signals:
 
   void TracksLoaded(int id, MimeData* mime_data);
 
-  void ProviderDestroyed(SearchProvider* provider);
+  void ProviderAdded(const SearchProvider* provider);
+  void ProviderRemoved(const SearchProvider* provider);
+  void ProviderToggled(const SearchProvider* provider, bool enabled);
 
 protected:
   void timerEvent(QTimerEvent* e);
@@ -81,16 +91,22 @@ private:
     SearchProvider::Result result_;
   };
 
-  QList<SearchProvider*> providers_;
+  struct ProviderData {
+    QList<QueuedArt> queued_art_;
+    bool enabled_;
+  };
+
+  QMap<SearchProvider*, ProviderData> providers_;
 
   QMap<int, DelayedSearch> delayed_searches_;
-  QMap<SearchProvider*, QList<QueuedArt> > queued_art_;
 
   int next_id_;
   QMap<int, int> pending_search_providers_;
 
   QPixmapCache pixmap_cache_;
   QMap<int, QString> pending_art_searches_;
+
+  QStringList disabled_provider_ids_;
 };
 
 #endif // GLOBALSEARCH_H
