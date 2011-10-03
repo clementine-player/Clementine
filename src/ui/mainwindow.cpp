@@ -240,6 +240,13 @@ MainWindow::MainWindow(
       library_->backend(), tr("Library"), "library",
       IconLoader::Load("folder-sound"), global_search));
 
+  global_search->AddProvider(new LibrarySearchProvider(
+      internet_model_->Service<MagnatuneService>()->library_backend(),
+      tr("Magnatune"),
+      "magnatune",
+      QIcon(":/providers/magnatune.png"),
+      global_search));
+
   ui_->global_search->Init(global_search);
   connect(ui_->global_search, SIGNAL(AddToPlaylist(QMimeData*)), SLOT(AddToPlaylist(QMimeData*)));
 
