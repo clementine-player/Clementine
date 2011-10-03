@@ -43,6 +43,7 @@
 #include "globalsearch/globalsearch.h"
 #include "globalsearch/globalsearchpopup.h"
 #include "globalsearch/librarysearchprovider.h"
+#include "internet/jamendoservice.h"
 #include "internet/magnatuneservice.h"
 #include "internet/internetmodel.h"
 #include "internet/internetview.h"
@@ -235,6 +236,7 @@ MainWindow::MainWindow(
   // Initialise the global search widget
   StyleHelper::setBaseColor(palette().color(QPalette::Highlight).darker());
 
+  global_search->ReloadSettings();
   // Add global search providers
   global_search->AddProvider(new LibrarySearchProvider(
       library_->backend(), tr("Library"), "library",
@@ -245,6 +247,13 @@ MainWindow::MainWindow(
       tr("Magnatune"),
       "magnatune",
       QIcon(":/providers/magnatune.png"),
+      global_search));
+
+  global_search->AddProvider(new LibrarySearchProvider(
+      internet_model_->Service<JamendoService>()->library_backend(),
+      tr("Jamendo"),
+      "jamendo",
+      QIcon(":/providers/jamendo.png"),
       global_search));
 
   ui_->global_search->Init(global_search);

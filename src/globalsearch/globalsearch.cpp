@@ -247,7 +247,7 @@ void GlobalSearch::ReloadSettings() {
   QSettings s;
   s.beginGroup(kSettingsGroup);
 
-  disabled_provider_ids_ = s.value("disabled_providers").toStringList();
+  disabled_provider_ids_ = s.value("disabled_providers", QStringList() << "jamendo").toStringList();
 
   foreach (SearchProvider* provider, providers_.keys()) {
     SetProviderEnabled(provider, !disabled_provider_ids_.contains(provider->id()));
