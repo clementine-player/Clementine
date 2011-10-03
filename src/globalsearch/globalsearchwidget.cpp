@@ -324,7 +324,7 @@ bool GlobalSearchWidget::eventFilter(QObject* o, QEvent* e) {
     return EventFilterPopup(o, e);
 
   QToolButton* button = qobject_cast<QToolButton*>(o);
-  if (button && provider_buttons_.values().contains(button))
+  if (button && provider_buttons_.right.count(button))
     return EventFilterProviderButton(button, e);
 
   return QWidget::eventFilter(o, e);
@@ -696,7 +696,7 @@ void GlobalSearchWidget::UpdateTooltip() {
 }
 
 void GlobalSearchWidget::ProviderAdded(const SearchProvider* provider) {
-  if (provider_buttons_.contains(provider)) {
+  if (provider_buttons_.left.count(provider)) {
     qLog(Error) << "Tried to add the same provider twice:"
                 << provider->name() << provider->id();
     return;
@@ -729,18 +729,42 @@ void GlobalSearchWidget::ProviderAdded(const SearchProvider* provider) {
   button->setIcon(icon);
 
   connect(button, SIGNAL(toggled(bool)), SLOT(ProviderButtonToggled(bool)));
-  ui_->provider_layout->insertWidget(0, button);
-  provider_buttons_[provider] = button;
+
+  // Find the appropriate insertion point.
+  bool inserted = false;
+  for (int i = 0; i < ui_->provider_layout->count(); ++i) {
+    const QToolButton* item_button = static_cast<QToolButton*>(
+        ui_->provider_layout->itemAt(i)->widget());
+
+    if (!item_button) {
+      continue;
+    }
+    const QString& name = provider_buttons_.right.find(item_button)->second->name();
+    if (provider->name() < name) {
+      ui_->provider_layout->insertWidget(i, button);
+      inserted = true;
+      break;
+    }
+  }
+
+  if (!inserted) {
+    // Insert it at the end but before the spacer.
+    ui_->provider_layout->insertWidget(ui_->provider_layout->count() - 1, button);
+  }
+
+  provider_buttons_.insert(ProviderButton(provider, button));
 }
 
 void GlobalSearchWidget::ProviderRemoved(const SearchProvider* provider) {
-  if (!provider_buttons_.contains(provider)) {
+  if (!provider_buttons_.left.count(provider)) {
     qLog(Error) << "Tried to remove a provider that hadn't been added yet:"
                 << provider->name() << provider->id();
     return;
   }
 
-  delete provider_buttons_.take(provider);
+  ProviderButtonMap::left_const_iterator it = provider_buttons_.left.find(provider);
+  delete it->second;
+  provider_buttons_.left.erase(provider);
 }
 
 void GlobalSearchWidget::ProviderButtonToggled(bool on) {
@@ -748,7 +772,7 @@ void GlobalSearchWidget::ProviderButtonToggled(bool on) {
   if (!button)
     return;
 
-  const SearchProvider* provider = provider_buttons_.key(button);
+  const SearchProvider* provider = provider_buttons_.right.find(button)->second;
   if (!provider)
     return;
 

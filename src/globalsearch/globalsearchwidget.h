@@ -23,6 +23,8 @@
 #include <QScopedPointer>
 #include <QWidget>
 
+#include <boost/bimap.hpp>
+
 class GlobalSearch;
 class GlobalSearchTooltip;
 class LibraryBackendInterface;
@@ -159,7 +161,9 @@ private:
   QAction* replace_and_play_;
   QList<QAction*> actions_;
 
-  QMap<const SearchProvider*, QToolButton*> provider_buttons_;
+  typedef boost::bimap<const SearchProvider*, const QToolButton*> ProviderButtonMap;
+  typedef ProviderButtonMap::value_type ProviderButton;
+  ProviderButtonMap provider_buttons_;
 };
 
 #endif // GLOBALSEARCHWIDGET_H
