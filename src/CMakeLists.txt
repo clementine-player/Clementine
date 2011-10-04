@@ -60,6 +60,7 @@ set(SOURCES
 
   core/backgroundstreams.cpp
   core/backgroundthread.cpp
+  core/closure.cpp
   core/commandlineoptions.cpp
   core/crashreporting.cpp
   core/database.cpp
@@ -326,6 +327,7 @@ set(HEADERS
 
   core/backgroundstreams.h
   core/backgroundthread.h
+  core/closure.h
   core/crashreporting.h
   core/database.h
   core/deletefiles.h

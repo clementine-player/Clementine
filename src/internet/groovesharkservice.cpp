@@ -32,6 +32,7 @@
 #include "groovesharksearchplaylisttype.h"
 #include "groovesharkurlhandler.h"
 
+#include "core/closure.h"
 #include "core/database.h"
 #include "core/logging.h"
 #include "core/mergedproxymodel.h"
@@ -160,6 +161,28 @@ void GrooveSharkService::SimpleSearchFinished() {
   QVariantMap result = ExtractResult(reply);
   SongList songs = ExtractSongs(result);
   emit SimpleSearchResults(id, songs);
+}
+
+int GrooveSharkService::SearchAlbums(const QString& query) {
+  QList<Param> parameters;
+  parameters << Param("query", query)
+             << Param("country", "")
+             << Param("limit", QString::number(kSongSearchLimit));
+
+  QNetworkReply* reply = CreateRequest("getAlbumSearchResults", parameters, false);
+
+  int id = next_pending_search_id_++;
+
+  new Closure(reply, SIGNAL(finished()),
+              this, SLOT(SearchAlbumsFinished(QNetworkReply*,int)),
+              C_ARG(QNetworkReply*, reply),
+              C_ARG(int, id));
+
+  return id;
+}
+
+void GrooveSharkService::SearchAlbumsFinished(QNetworkReply* reply, int id) {
+  qLog(Debug) << reply << id;
 }
 
 void GrooveSharkService::DoSearch() {

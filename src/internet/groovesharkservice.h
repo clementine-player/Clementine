@@ -72,7 +72,7 @@ class GrooveSharkService : public InternetService {
   const QString& session_id() { return session_id_; }
 
   int SimpleSearch(const QString& query);
-
+  int SearchAlbums(const QString& query);
 
   static const char* kServiceName;
   static const char* kSettingsGroup;
@@ -110,6 +110,7 @@ class GrooveSharkService : public InternetService {
   void DoSearch();
   void SearchSongsFinished();
   void SimpleSearchFinished();
+  void SearchAlbumsFinished(QNetworkReply* reply, int id);
   void Authenticated();
   void UserPlaylistsRetrieved();
   void PlaylistSongsRetrieved();

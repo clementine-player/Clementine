@@ -49,6 +49,8 @@ void GrooveSharkSearchProvider::Init(GrooveSharkService* service) {
 void GrooveSharkSearchProvider::SearchAsync(int id, const QString& query) {
   const int service_id = service_->SimpleSearch(query);
   pending_searches_[service_id] = id;
+
+  service_->SearchAlbums(query);
 }
 
 void GrooveSharkSearchProvider::SearchDone(int id, const SongList& songs) {
