@@ -26,6 +26,7 @@ Closure::Closure(QObject* sender,
                  const ClosureArgumentWrapper* val0,
                  const ClosureArgumentWrapper* val1)
     : QObject(receiver),
+      callback_(NULL),
       val0_(val0),
       val1_(val1) {
   const QMetaObject* meta_receiver = receiver->metaObject();
@@ -38,11 +39,23 @@ Closure::Closure(QObject* sender,
   connect(sender, SIGNAL(destroyed()), SLOT(Cleanup()));
 }
 
+Closure::Closure(QObject* sender,
+                 const char* signal,
+                 std::tr1::function<void()> callback)
+    : callback_(callback) {
+  connect(sender, signal, SLOT(Invoked()));
+  connect(sender, SIGNAL(destroyed()), SLOT(Cleanup()));
+}
+
 void Closure::Invoked() {
-  slot_.invoke(
-      parent(),
-      val0_ ? val0_->arg() : QGenericArgument(),
-      val1_ ? val1_->arg() : QGenericArgument());
+  if (callback_) {
+    callback_();
+  } else {
+    slot_.invoke(
+        parent(),
+        val0_ ? val0_->arg() : QGenericArgument(),
+        val1_ ? val1_->arg() : QGenericArgument());
+  }
   deleteLater();
 }
 

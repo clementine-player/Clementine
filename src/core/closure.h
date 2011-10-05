@@ -18,6 +18,8 @@
 #ifndef CLOSURE_H
 #define CLOSURE_H
 
+#include <tr1/functional>
+
 #include <QMetaMethod>
 #include <QObject>
 
@@ -54,12 +56,16 @@ class Closure : public QObject {
           const ClosureArgumentWrapper* val0 = 0,
           const ClosureArgumentWrapper* val1 = 0);
 
+  Closure(QObject* sender, const char* signal,
+          std::tr1::function<void()> callback);
+
  private slots:
   void Invoked();
   void Cleanup();
 
  private:
   QMetaMethod slot_;
+  std::tr1::function<void()> callback_;
 
   boost::scoped_ptr<const ClosureArgumentWrapper> val0_;
   boost::scoped_ptr<const ClosureArgumentWrapper> val1_;
