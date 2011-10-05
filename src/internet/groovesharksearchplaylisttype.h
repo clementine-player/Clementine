@@ -20,11 +20,11 @@
 
 #include "playlist/specialplaylisttype.h"
 
-class GrooveSharkService;
+class GroovesharkService;
 
-class GrooveSharkSearchPlaylistType : public SpecialPlaylistType {
+class GroovesharkSearchPlaylistType : public SpecialPlaylistType {
 public:
-  GrooveSharkSearchPlaylistType(GrooveSharkService* service);
+  GroovesharkSearchPlaylistType(GroovesharkService* service);
 
   static const char* kName;
   virtual QString name() const { return kName; }
@@ -37,7 +37,7 @@ public:
   virtual void Search(const QString& text, Playlist* playlist);
 
 private:
-  GrooveSharkService* service_;
+  GroovesharkService* service_;
 };
 
 #endif // GROOVESHARKSEARCHPLAYLISTTYPE_H

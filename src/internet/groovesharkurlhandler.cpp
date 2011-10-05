@@ -23,15 +23,15 @@
 #include "core/logging.h"
 
 
-GrooveSharkUrlHandler::GrooveSharkUrlHandler(GrooveSharkService* service, QObject* parent)
+GroovesharkUrlHandler::GroovesharkUrlHandler(GroovesharkService* service, QObject* parent)
   : UrlHandler(parent),
     service_(service),
     timer_mark_stream_key_(new QTimer(this)) {
-  // We have to warn GrooveShark when user has listened for more than 30
-  // seconds of a song, and when it ends. I guess this is used by GrooveShark
+  // We have to warn Grooveshark when user has listened for more than 30
+  // seconds of a song, and when it ends. I guess this is used by Grooveshark
   // for statistics and user history.
   // To do this, we have TrackAboutToEnd method, and timer_mark_stream_key_ timer.
-  // It is not perfect, as we may call GrooveShark MarkStreamKeyOver30Secs even
+  // It is not perfect, as we may call Grooveshark MarkStreamKeyOver30Secs even
   // if user hasn't actually listen to 30 seconds (e.g. stream set to pause
   // state) but this is not a big deal and it should be accurate enough anyway.
   timer_mark_stream_key_->setInterval(30000);
@@ -39,20 +39,20 @@ GrooveSharkUrlHandler::GrooveSharkUrlHandler(GrooveSharkService* service, QObjec
   connect(timer_mark_stream_key_, SIGNAL(timeout()), SLOT(MarkStreamKeyOver30Secs()));
 }
 
-UrlHandler::LoadResult GrooveSharkUrlHandler::StartLoading(const QUrl& url) {
+UrlHandler::LoadResult GroovesharkUrlHandler::StartLoading(const QUrl& url) {
   qint64 length_nanosec;
   last_song_id_ = url.toString().remove("grooveshark://");
 
   QUrl streaming_url = service_->GetStreamingUrlFromSongId(last_song_id_,
       &last_server_id_, &last_stream_key_, &length_nanosec);
-  qLog(Debug) << "GrooveShark Streaming URL: " << streaming_url;
+  qLog(Debug) << "Grooveshark Streaming URL: " << streaming_url;
 
   timer_mark_stream_key_->start();
 
   return LoadResult(url, LoadResult::TrackAvailable, streaming_url, length_nanosec);
 }
 
-void GrooveSharkUrlHandler::TrackAboutToEnd() {
+void GroovesharkUrlHandler::TrackAboutToEnd() {
   if (timer_mark_stream_key_->isActive()) {
     timer_mark_stream_key_->stop();
     return;
@@ -60,10 +60,10 @@ void GrooveSharkUrlHandler::TrackAboutToEnd() {
   service_->MarkSongComplete(last_song_id_, last_stream_key_, last_server_id_);
 }
 
-void GrooveSharkUrlHandler::TrackSkipped() {
+void GroovesharkUrlHandler::TrackSkipped() {
   timer_mark_stream_key_->stop();
 }
 
-void GrooveSharkUrlHandler::MarkStreamKeyOver30Secs() {
+void GroovesharkUrlHandler::MarkStreamKeyOver30Secs() {
   service_->MarkStreamKeyOver30Secs(last_stream_key_, last_server_id_);
 }

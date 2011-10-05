@@ -20,13 +20,13 @@
 
 #include "core/urlhandler.h"
 
-class GrooveSharkService;
+class GroovesharkService;
 class QTimer;
 
-class GrooveSharkUrlHandler : public UrlHandler {
+class GroovesharkUrlHandler : public UrlHandler {
   Q_OBJECT
 public:
-  GrooveSharkUrlHandler(GrooveSharkService* service, QObject* parent);
+  GroovesharkUrlHandler(GroovesharkService* service, QObject* parent);
 
   QString scheme() const { return "grooveshark"; }
   LoadResult StartLoading(const QUrl& url);
@@ -37,7 +37,7 @@ private slots:
   void MarkStreamKeyOver30Secs();
 
 private:
-  GrooveSharkService* service_;
+  GroovesharkService* service_;
   QTimer* timer_mark_stream_key_;
   QString last_song_id_;
   QString last_server_id_;

@@ -73,7 +73,7 @@ InternetModel::InternetModel(BackgroundThread<Database>* db_thread,
 #ifdef HAVE_SPOTIFY
   AddService(new SpotifyService(this));
 #endif
-  AddService(new GrooveSharkService(this));
+  AddService(new GroovesharkService(this));
 }
 
 void InternetModel::AddService(InternetService *service) {

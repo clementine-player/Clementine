@@ -22,14 +22,14 @@
 #include "core/backgroundthread.h"
 
 class AlbumCoverLoader;
-class GrooveSharkService;
+class GroovesharkService;
 
-class GrooveSharkSearchProvider : public SearchProvider {
+class GroovesharkSearchProvider : public SearchProvider {
   Q_OBJECT
 
  public:
-  explicit GrooveSharkSearchProvider(QObject* parent = 0);
-  void Init(GrooveSharkService* service);
+  explicit GroovesharkSearchProvider(QObject* parent = 0);
+  void Init(GroovesharkService* service);
 
   // SearchProvider
   void SearchAsync(int id, const QString& query);
@@ -45,7 +45,7 @@ class GrooveSharkSearchProvider : public SearchProvider {
  private:
   void FetchAlbum(int id, const Result& result);
 
-  GrooveSharkService* service_;
+  GroovesharkService* service_;
   QMap<int, int> pending_searches_;
 
   BackgroundThread<AlbumCoverLoader>* cover_loader_;

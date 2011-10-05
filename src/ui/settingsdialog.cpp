@@ -85,7 +85,7 @@ SettingsDialog::SettingsDialog(BackgroundStreams* streams, QWidget* parent)
   AddPage(Page_Lastfm, new LastFMSettingsPage(this));
 #endif
 
-  AddPage(Page_GrooveShark, new GrooveSharkSettingsPage(this));
+  AddPage(Page_Grooveshark, new GroovesharkSettingsPage(this));
 
 #ifdef HAVE_SPOTIFY
   AddPage(Page_Spotify, new SpotifySettingsPage(this));

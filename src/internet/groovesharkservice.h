@@ -21,18 +21,18 @@
 #include "internetmodel.h"
 #include "internetservice.h"
 
-class GrooveSharkUrlHandler;
+class GroovesharkUrlHandler;
 class NetworkAccessManager;
 class Playlist;
 class QMenu;
 class QSortFilterProxyModel;
 class QNetworkRequest;
 
-class GrooveSharkService : public InternetService {
+class GroovesharkService : public InternetService {
   Q_OBJECT
  public:
-  GrooveSharkService(InternetModel *parent);
-  ~GrooveSharkService();
+  GroovesharkService(InternetModel *parent);
+  ~GroovesharkService();
 
   enum Type {
     Type_SearchResults = InternetModel::TypeCount,
@@ -144,7 +144,7 @@ class GrooveSharkService : public InternetService {
   void ResetSessionId();
 
 
-  GrooveSharkUrlHandler* url_handler_;
+  GroovesharkUrlHandler* url_handler_;
 
   QString pending_search_;
   Playlist* pending_search_playlist_;

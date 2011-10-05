@@ -24,13 +24,13 @@
 #include "internet/groovesharkservice.h"
 #include "playlist/songmimedata.h"
 
-GrooveSharkSearchProvider::GrooveSharkSearchProvider(QObject* parent)
+GroovesharkSearchProvider::GroovesharkSearchProvider(QObject* parent)
     : service_(NULL) {
 }
 
-void GrooveSharkSearchProvider::Init(GrooveSharkService* service) {
+void GroovesharkSearchProvider::Init(GroovesharkService* service) {
   service_ = service;
-  SearchProvider::Init("GrooveShark", "grooveshark",
+  SearchProvider::Init("Grooveshark", "grooveshark",
                        QIcon(":providers/grooveshark.png"), true, false);
   connect(service_, SIGNAL(SimpleSearchResults(int, SongList)),
           SLOT(SearchDone(int, SongList)));
@@ -50,7 +50,7 @@ void GrooveSharkSearchProvider::Init(GrooveSharkService* service) {
           SLOT(AlbumArtLoaded(quint64, QImage)));
 }
 
-void GrooveSharkSearchProvider::SearchAsync(int id, const QString& query) {
+void GroovesharkSearchProvider::SearchAsync(int id, const QString& query) {
   const int service_id = service_->SimpleSearch(query);
   pending_searches_[service_id] = id;
 
@@ -58,7 +58,7 @@ void GrooveSharkSearchProvider::SearchAsync(int id, const QString& query) {
   pending_searches_[album_id] = id;
 }
 
-void GrooveSharkSearchProvider::SearchDone(int id, const SongList& songs) {
+void GroovesharkSearchProvider::SearchDone(int id, const SongList& songs) {
   // Map back to the original id.
   const int global_search_id = pending_searches_.take(id);
 
@@ -76,7 +76,7 @@ void GrooveSharkSearchProvider::SearchDone(int id, const SongList& songs) {
   // TODO: emit SearchFinished() when the album search is complete too.
 }
 
-void GrooveSharkSearchProvider::AlbumSearchResult(int id, const SongList& songs) {
+void GroovesharkSearchProvider::AlbumSearchResult(int id, const SongList& songs) {
   const int global_search_id = pending_searches_.take(id);
 
   ResultList ret;
@@ -93,12 +93,12 @@ void GrooveSharkSearchProvider::AlbumSearchResult(int id, const SongList& songs)
 }
 
 
-void GrooveSharkSearchProvider::LoadArtAsync(int id, const Result& result) {
+void GroovesharkSearchProvider::LoadArtAsync(int id, const Result& result) {
   quint64 loader_id = cover_loader_->Worker()->LoadImageAsync(result.metadata_);
   cover_loader_tasks_[loader_id] = id;
 }
 
-void GrooveSharkSearchProvider::AlbumArtLoaded(quint64 id, const QImage& image) {
+void GroovesharkSearchProvider::AlbumArtLoaded(quint64 id, const QImage& image) {
   if (!cover_loader_tasks_.contains(id)) {
     return;
   }
@@ -106,7 +106,7 @@ void GrooveSharkSearchProvider::AlbumArtLoaded(quint64 id, const QImage& image) 
   emit ArtLoaded(original_id, image);
 }
 
-void GrooveSharkSearchProvider::LoadTracksAsync(int id, const Result& result) {
+void GroovesharkSearchProvider::LoadTracksAsync(int id, const Result& result) {
   SongList ret;
 
   switch (result.type_) {
@@ -131,11 +131,11 @@ void GrooveSharkSearchProvider::LoadTracksAsync(int id, const Result& result) {
 
 }
 
-void GrooveSharkSearchProvider::FetchAlbum(int id, const Result& result) {
+void GroovesharkSearchProvider::FetchAlbum(int id, const Result& result) {
   service_->FetchSongsForAlbum(id, result.metadata_.url());
 }
 
-void GrooveSharkSearchProvider::AlbumSongsLoaded(int id, const SongList& songs) {
+void GroovesharkSearchProvider::AlbumSongsLoaded(int id, const SongList& songs) {
   SongMimeData* mime_data = new SongMimeData;
   mime_data->songs = songs;
   SortSongs(&mime_data->songs);

@@ -21,15 +21,15 @@
 #include "ui/settingspage.h"
 
 class NetworkAccessManager;
-class Ui_GrooveSharkSettingsPage;
-class GrooveSharkService;
+class Ui_GroovesharkSettingsPage;
+class GroovesharkService;
 
-class GrooveSharkSettingsPage : public SettingsPage {
+class GroovesharkSettingsPage : public SettingsPage {
   Q_OBJECT
 
 public:
-  GrooveSharkSettingsPage(SettingsDialog* dialog);
-  ~GrooveSharkSettingsPage();
+  GroovesharkSettingsPage(SettingsDialog* dialog);
+  ~GroovesharkSettingsPage();
 
   void Load();
   void Save();
@@ -44,8 +44,8 @@ private:
 
 private:
   NetworkAccessManager* network_;
-  Ui_GrooveSharkSettingsPage* ui_;
-  GrooveSharkService* service_;
+  Ui_GroovesharkSettingsPage* ui_;
+  GroovesharkService* service_;
 
   bool validated_;
   QString original_username_;

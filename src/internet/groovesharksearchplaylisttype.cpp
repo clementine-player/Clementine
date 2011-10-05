@@ -18,29 +18,29 @@
 #include "groovesharksearchplaylisttype.h"
 #include "groovesharkservice.h"
 
-const char* GrooveSharkSearchPlaylistType::kName = "grooveshark-search";
+const char* GroovesharkSearchPlaylistType::kName = "grooveshark-search";
 
-GrooveSharkSearchPlaylistType::GrooveSharkSearchPlaylistType(GrooveSharkService* service)
+GroovesharkSearchPlaylistType::GroovesharkSearchPlaylistType(GroovesharkService* service)
   : service_(service) {
 }
 
-QIcon GrooveSharkSearchPlaylistType::icon(Playlist* playlist) const {
+QIcon GroovesharkSearchPlaylistType::icon(Playlist* playlist) const {
   return QIcon(":providers/grooveshark.png");
 }
 
-QString GrooveSharkSearchPlaylistType::search_hint_text(Playlist* playlist) const {
-  return QObject::tr("Search GrooveShark");
+QString GroovesharkSearchPlaylistType::search_hint_text(Playlist* playlist) const {
+  return QObject::tr("Search Grooveshark");
 }
 
-QString GrooveSharkSearchPlaylistType::empty_playlist_text(Playlist* playlist) const {
-  return QObject::tr("Start typing in the search box above to find music on GrooveShark.");
+QString GroovesharkSearchPlaylistType::empty_playlist_text(Playlist* playlist) const {
+  return QObject::tr("Start typing in the search box above to find music on Grooveshark.");
 }
 
-bool GrooveSharkSearchPlaylistType::has_special_search_behaviour(Playlist* playlist) const {
+bool GroovesharkSearchPlaylistType::has_special_search_behaviour(Playlist* playlist) const {
   return true;
 }
 
-void GrooveSharkSearchPlaylistType::Search(const QString& text, Playlist* playlist) {
+void GroovesharkSearchPlaylistType::Search(const QString& text, Playlist* playlist) {
   service_->Search(text, playlist);
 }
 

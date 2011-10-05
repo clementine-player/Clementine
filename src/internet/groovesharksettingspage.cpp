@@ -29,11 +29,11 @@
 #include <QSettings>
 #include <QtDebug>
 
-GrooveSharkSettingsPage::GrooveSharkSettingsPage(SettingsDialog* dialog)
+GroovesharkSettingsPage::GroovesharkSettingsPage(SettingsDialog* dialog)
   : SettingsPage(dialog),
     network_(new NetworkAccessManager(this)),
-    ui_(new Ui_GrooveSharkSettingsPage),
-    service_(InternetModel::Service<GrooveSharkService>()),
+    ui_(new Ui_GroovesharkSettingsPage),
+    service_(InternetModel::Service<GroovesharkService>()),
     validated_(false)
 {
   ui_->setupUi(this);
@@ -52,11 +52,11 @@ GrooveSharkSettingsPage::GrooveSharkSettingsPage(SettingsDialog* dialog)
 
 }
 
-GrooveSharkSettingsPage::~GrooveSharkSettingsPage() {
+GroovesharkSettingsPage::~GroovesharkSettingsPage() {
   delete ui_;
 }
 
-void GrooveSharkSettingsPage::Login() {
+void GroovesharkSettingsPage::Login() {
   if (service_->IsLoggedIn()) {
     return;
   }
@@ -65,9 +65,9 @@ void GrooveSharkSettingsPage::Login() {
   service_->Login(ui_->username->text(), ui_->password->text());
 }
 
-void GrooveSharkSettingsPage::Load() {
+void GroovesharkSettingsPage::Load() {
   QSettings s;
-  s.beginGroup(GrooveSharkService::kSettingsGroup);
+  s.beginGroup(GroovesharkService::kSettingsGroup);
 
   original_username_ = s.value("username").toString();
 
@@ -77,22 +77,22 @@ void GrooveSharkSettingsPage::Load() {
   UpdateLoginState();
 }
 
-void GrooveSharkSettingsPage::Save() {
+void GroovesharkSettingsPage::Save() {
   QSettings s;
-  s.beginGroup(GrooveSharkService::kSettingsGroup);
+  s.beginGroup(GroovesharkService::kSettingsGroup);
 
   s.setValue("username", ui_->username->text());
   s.setValue("sessionid", service_->session_id());
 }
 
-void GrooveSharkSettingsPage::LoginFinished(bool success) {
+void GroovesharkSettingsPage::LoginFinished(bool success) {
   validated_ = success;
 
   Save();
   UpdateLoginState();
 }
 
-void GrooveSharkSettingsPage::UpdateLoginState() {
+void GroovesharkSettingsPage::UpdateLoginState() {
   const bool logged_in = service_->IsLoggedIn();
 
   ui_->login_state->SetLoggedIn(logged_in ? LoginStateWidget::LoggedIn
@@ -101,22 +101,22 @@ void GrooveSharkSettingsPage::UpdateLoginState() {
   ui_->login_state->SetAccountTypeVisible(!logged_in);
 
   switch (service_->login_state()) {
-  case GrooveSharkService::LoginState_NoPremium:
-    ui_->login_state->SetAccountTypeText(tr("You do not have a GrooveShark Anywhere account."));
+  case GroovesharkService::LoginState_NoPremium:
+    ui_->login_state->SetAccountTypeText(tr("You do not have a Grooveshark Anywhere account."));
     break;
 
-  case GrooveSharkService::LoginState_AuthFailed:
+  case GroovesharkService::LoginState_AuthFailed:
     ui_->login_state->SetAccountTypeText(tr("Your username or password was incorrect."));
     break;
 
   default:
-    ui_->login_state->SetAccountTypeText(tr("A GrooveShark Anywhere account is required."));
+    ui_->login_state->SetAccountTypeText(tr("A Grooveshark Anywhere account is required."));
     break;
   }
-  //ui_->login_state->SetAccountTypeText(tr("A GrooveShark Anywhere account is required."));
+  //ui_->login_state->SetAccountTypeText(tr("A Grooveshark Anywhere account is required."));
 }
 
-void GrooveSharkSettingsPage::Logout() {
+void GroovesharkSettingsPage::Logout() {
   service_->Logout();
   UpdateLoginState();
 }
