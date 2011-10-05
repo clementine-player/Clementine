@@ -365,15 +365,15 @@ void GrooveSharkService::Authenticated() {
 
   QVariantMap result = ExtractResult(reply);
   // Check if the user has been authenticated correctly
-  if (!result["success"].toBool()) {
-    QString error;
-    if (result["UserID"].toInt() == 0) {
-      error = tr("Invalid username and/or password");
-      login_state_ = LoginState_AuthFailed;
-    } else if(!result["IsAnywhere"].toBool() || !result["IsPremium"].toBool()) {
-      error = tr("It seems user %1 doesn't have a GrooveShark Anywhere account").arg(username_);
-      login_state_ = LoginState_NoPremium;
-    }
+  QString error;
+  if (!result["success"].toBool() || result["UserID"].toInt() == 0) {
+    error = tr("Invalid username and/or password");
+    login_state_ = LoginState_AuthFailed;
+  } else if(!result["IsAnywhere"].toBool() || !result["IsPremium"].toBool()) {
+    error = tr("User %1 doesn't have a GrooveShark Anywhere account").arg(username_);
+    login_state_ = LoginState_NoPremium;
+  }
+  if (!error.isEmpty()) {
     QMessageBox::warning(NULL, tr("GrooveShark login error"), error, QMessageBox::Close);
     ResetSessionId();
     emit LoginFinished(false);
