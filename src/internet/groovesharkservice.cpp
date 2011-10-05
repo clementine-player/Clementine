@@ -171,7 +171,7 @@ int GrooveSharkService::SearchAlbums(const QString& query) {
 
   QNetworkReply* reply = CreateRequest("getAlbumSearchResults", parameters, false);
 
-  int id = next_pending_search_id_++;
+  const int id = next_pending_search_id_++;
 
   new Closure(reply, SIGNAL(finished()),
               this, SLOT(SearchAlbumsFinished(QNetworkReply*,int)),
@@ -182,7 +182,19 @@ int GrooveSharkService::SearchAlbums(const QString& query) {
 }
 
 void GrooveSharkService::SearchAlbumsFinished(QNetworkReply* reply, int id) {
-  qLog(Debug) << reply << id;
+  reply->deleteLater();
+
+  QVariantMap result = ExtractResult(reply);
+  QVariantList albums = result["albums"].toList();
+  foreach (const QVariant& v, albums) {
+    QVariantMap album = v.toMap();
+    //quint64 album_id = album["AlbumID"].toULongLong();
+    QString album_name = album["AlbumName"].toString();
+    QString artist_name = album["ArtistName"].toString();
+    //QString cover_art = album["CoverArtFilename"].toString();
+
+    qLog(Debug) << "Found:" << album_name << artist_name;
+  }
 }
 
 void GrooveSharkService::DoSearch() {
