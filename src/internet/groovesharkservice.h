@@ -73,6 +73,8 @@ class GrooveSharkService : public InternetService {
 
   int SimpleSearch(const QString& query);
   int SearchAlbums(const QString& query);
+  void FetchSongsForAlbum(int id, const QUrl& url);
+  void FetchSongsForAlbum(int id, quint64 album_id);
 
   static const char* kServiceName;
   static const char* kSettingsGroup;
@@ -88,6 +90,8 @@ class GrooveSharkService : public InternetService {
  signals:
   void LoginFinished(bool success);
   void SimpleSearchResults(int id, SongList songs);
+  void AlbumSearchResult(int id, SongList songs);
+  void AlbumSongsLoaded(int id, SongList songs);
 
  protected:
   QModelIndex GetCurrentIndex();
@@ -111,6 +115,7 @@ class GrooveSharkService : public InternetService {
   void SearchSongsFinished();
   void SimpleSearchFinished();
   void SearchAlbumsFinished(QNetworkReply* reply, int id);
+  void GetAlbumSongsFinished(QNetworkReply* reply, int id);
   void Authenticated();
   void UserPlaylistsRetrieved();
   void PlaylistSongsRetrieved();

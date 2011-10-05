@@ -34,6 +34,10 @@ void GrooveSharkSearchProvider::Init(GrooveSharkService* service) {
                        QIcon(":providers/grooveshark.png"), true, false);
   connect(service_, SIGNAL(SimpleSearchResults(int, SongList)),
           SLOT(SearchDone(int, SongList)));
+  connect(service_, SIGNAL(AlbumSearchResult(int, SongList)),
+          SLOT(AlbumSearchResult(int, SongList)));
+  connect(service_, SIGNAL(AlbumSongsLoaded(int, SongList)),
+          SLOT(AlbumSongsLoaded(int, SongList)));
 
   cover_loader_ = new BackgroundThreadImplementation<AlbumCoverLoader, AlbumCoverLoader>(this);
   cover_loader_->Start(true);
@@ -50,7 +54,8 @@ void GrooveSharkSearchProvider::SearchAsync(int id, const QString& query) {
   const int service_id = service_->SimpleSearch(query);
   pending_searches_[service_id] = id;
 
-  service_->SearchAlbums(query);
+  const int album_id = service_->SearchAlbums(query);
+  pending_searches_[album_id] = id;
 }
 
 void GrooveSharkSearchProvider::SearchDone(int id, const SongList& songs) {
@@ -68,8 +73,25 @@ void GrooveSharkSearchProvider::SearchDone(int id, const SongList& songs) {
   }
 
   emit ResultsAvailable(global_search_id, ret);
-  emit SearchFinished(global_search_id);
+  // TODO: emit SearchFinished() when the album search is complete too.
 }
+
+void GrooveSharkSearchProvider::AlbumSearchResult(int id, const SongList& songs) {
+  const int global_search_id = pending_searches_.take(id);
+
+  ResultList ret;
+  foreach (const Song& s, songs) {
+    Result result(this);
+    result.type_ = Result::Type_Album;
+    result.match_quality_ = Result::Quality_AtStart;
+    result.metadata_ = s;
+
+    ret << result;
+  }
+
+  emit ResultsAvailable(global_search_id, ret);
+}
+
 
 void GrooveSharkSearchProvider::LoadArtAsync(int id, const Result& result) {
   quint64 loader_id = cover_loader_->Worker()->LoadImageAsync(result.metadata_);
@@ -88,19 +110,35 @@ void GrooveSharkSearchProvider::LoadTracksAsync(int id, const Result& result) {
   SongList ret;
 
   switch (result.type_) {
-    case Result::Type_Track:
+    case Result::Type_Track: {
       ret << result.metadata_;
+      SortSongs(&ret);
+
+      SongMimeData* mime_data = new SongMimeData;
+      mime_data->songs = ret;
+
+      emit TracksLoaded(id, mime_data);
+      break;
+    }
+
+    case Result::Type_Album:
+      FetchAlbum(id, result);
       break;
 
     default:
-      // TODO: Implement albums in GrooveShark global search.
       Q_ASSERT(0);
   }
 
-  SortSongs(&ret);
+}
 
+void GrooveSharkSearchProvider::FetchAlbum(int id, const Result& result) {
+  service_->FetchSongsForAlbum(id, result.metadata_.url());
+}
+
+void GrooveSharkSearchProvider::AlbumSongsLoaded(int id, const SongList& songs) {
   SongMimeData* mime_data = new SongMimeData;
-  mime_data->songs = ret;
+  mime_data->songs = songs;
+  SortSongs(&mime_data->songs);
 
   emit TracksLoaded(id, mime_data);
 }
