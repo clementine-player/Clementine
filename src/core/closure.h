@@ -64,6 +64,8 @@ class Closure : public QObject {
   void Cleanup();
 
  private:
+  void Connect(QObject* sender, const char* signal);
+
   QMetaMethod slot_;
   std::tr1::function<void()> callback_;
 

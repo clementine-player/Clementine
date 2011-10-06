@@ -32,19 +32,25 @@ Closure::Closure(QObject* sender,
   const QMetaObject* meta_receiver = receiver->metaObject();
 
   QByteArray normalised_slot = QMetaObject::normalizedSignature(slot + 1);
-  slot_ = meta_receiver->method(
-      meta_receiver->indexOfSlot(normalised_slot.constData()));
+  const int index = meta_receiver->indexOfSlot(normalised_slot.constData());
+  Q_ASSERT(index != -1);
+  slot_ = meta_receiver->method(index);
 
-  connect(sender, signal, SLOT(Invoked()));
-  connect(sender, SIGNAL(destroyed()), SLOT(Cleanup()));
+  Connect(sender, signal);
 }
 
 Closure::Closure(QObject* sender,
                  const char* signal,
                  std::tr1::function<void()> callback)
     : callback_(callback) {
-  connect(sender, signal, SLOT(Invoked()));
-  connect(sender, SIGNAL(destroyed()), SLOT(Cleanup()));
+  Connect(sender, signal);
+}
+
+void Closure::Connect(QObject* sender, const char* signal) {
+  bool success = connect(sender, signal, SLOT(Invoked()));
+  Q_ASSERT(success);
+  success = connect(sender, SIGNAL(destroyed()), SLOT(Cleanup()));
+  Q_ASSERT(success);
 }
 
 void Closure::Invoked() {
