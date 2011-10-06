@@ -51,6 +51,7 @@ void Closure::Connect(QObject* sender, const char* signal) {
   Q_ASSERT(success);
   success = connect(sender, SIGNAL(destroyed()), SLOT(Cleanup()));
   Q_ASSERT(success);
+  Q_UNUSED(success);
 }
 
 void Closure::Invoked() {
