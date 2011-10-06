@@ -73,4 +73,35 @@ class Closure : public QObject {
 
 #define C_ARG(type, data) new ClosureArgument<type>(data)
 
+Closure* NewClosure(
+    QObject* sender,
+    const char* signal,
+    QObject* receiver,
+    const char* slot);
+
+template <typename T>
+Closure* NewClosure(
+    QObject* sender,
+    const char* signal,
+    QObject* receiver,
+    const char* slot,
+    const T& val0) {
+  return new Closure(
+      sender, signal, receiver, slot,
+      C_ARG(T, val0));
+}
+
+template <typename T0, typename T1>
+Closure* NewClosure(
+    QObject* sender,
+    const char* signal,
+    QObject* receiver,
+    const char* slot,
+    const T0& val0,
+    const T1& val1) {
+  return new Closure(
+      sender, signal, receiver, slot,
+      C_ARG(T0, val0), C_ARG(T1, val1));
+}
+
 #endif  // CLOSURE_H

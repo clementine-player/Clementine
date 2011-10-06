@@ -173,10 +173,9 @@ int GroovesharkService::SearchAlbums(const QString& query) {
 
   const int id = next_pending_search_id_++;
 
-  new Closure(reply, SIGNAL(finished()),
-              this, SLOT(SearchAlbumsFinished(QNetworkReply*,int)),
-              C_ARG(QNetworkReply*, reply),
-              C_ARG(int, id));
+  NewClosure(reply, SIGNAL(finished()),
+             this, SLOT(SearchAlbumsFinished(QNetworkReply*,int)),
+             reply, id);
 
   return id;
 }
@@ -222,10 +221,9 @@ void GroovesharkService::FetchSongsForAlbum(int id, quint64 album_id) {
              << Param("country", "");
 
   QNetworkReply* reply = CreateRequest("getAlbumSongs", parameters, false);
-  new Closure(reply, SIGNAL(finished()),
-              this, SLOT(GetAlbumSongsFinished(QNetworkReply*,int)),
-              C_ARG(QNetworkReply*, reply),
-              C_ARG(int, id));
+  NewClosure(reply, SIGNAL(finished()),
+             this, SLOT(GetAlbumSongsFinished(QNetworkReply*,int)),
+             reply, id);
 }
 
 void GroovesharkService::GetAlbumSongsFinished(

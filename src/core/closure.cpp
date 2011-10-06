@@ -63,3 +63,9 @@ void Closure::Cleanup() {
   disconnect();
   deleteLater();
 }
+
+Closure* NewClosure(
+    QObject* sender, const char* signal,
+    QObject* receiver, const char* slot) {
+  return new Closure(sender, signal, receiver, slot);
+}
