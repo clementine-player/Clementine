@@ -23,6 +23,7 @@
 #include <QMetaMethod>
 #include <QObject>
 
+#include <boost/noncopyable.hpp>
 #include <boost/scoped_ptr.hpp>
 
 #include "core/logging.h"
@@ -47,7 +48,7 @@ class ClosureArgument : public ClosureArgumentWrapper {
   T data_;
 };
 
-class Closure : public QObject {
+class Closure : public QObject, boost::noncopyable {
   Q_OBJECT
 
  public:
