@@ -28,6 +28,7 @@ InternetView::InternetView(QWidget *parent)
   setItemDelegate(new LibraryItemDelegate(this));
   SetExpandOnReset(false);
   setAttribute(Qt::WA_MacShowFocusRect, false);
+  setSelectionMode(QAbstractItemView::ExtendedSelection);
 }
 
 void InternetView::contextMenuEvent(QContextMenuEvent* e) {
