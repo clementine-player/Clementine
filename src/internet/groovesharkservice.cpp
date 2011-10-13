@@ -402,6 +402,7 @@ void GroovesharkService::ResetSessionId() {
 void GroovesharkService::ShowContextMenu(const QModelIndex& index, const QPoint& global_pos) {
   EnsureMenuCreated();
   context_menu_->popup(global_pos);
+  context_item_ = index;
 }
 
 QModelIndex GroovesharkService::GetCurrentIndex() {
@@ -423,8 +424,7 @@ void GroovesharkService::EnsureMenuCreated() {
 }
 
 void GroovesharkService::EnsureItemsCreated() {
-  if (!session_id_.isEmpty() /* only if user is authenticated */ &&
-      !search_) {
+  if (IsLoggedIn() && !search_) {
     search_ = new QStandardItem(IconLoader::Load("edit-find"),
                                 tr("Search Grooveshark (opens a new tab)"));
     search_->setData(Type_SearchResults, InternetModel::Role_Type);
@@ -490,6 +490,7 @@ void GroovesharkService::PlaylistSongsRetrieved() {
   QStandardItem* item = new QStandardItem(playlist_info.name_);
   item->setData(Type_UserPlaylist, InternetModel::Role_Type);
   item->setData(true, InternetModel::Role_CanLazyLoad);
+  item->setData(InternetModel::PlayBehaviour_SingleItem, InternetModel::Role_PlayBehaviour);
 
   QVariantMap result = ExtractResult(reply);
   SongList songs = ExtractSongs(result);

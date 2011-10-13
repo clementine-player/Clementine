@@ -199,6 +199,7 @@ QMimeData* InternetModel::mimeData(const QModelIndexList& indexes) const {
   }
 
   QList<QUrl> urls;
+  QModelIndexList new_indexes;
 
   QModelIndex last_valid_index;
   foreach (const QModelIndex& index, indexes) {
@@ -206,7 +207,21 @@ QMimeData* InternetModel::mimeData(const QModelIndexList& indexes) const {
       continue;
 
     last_valid_index = index;
-    urls << index.data(Role_Url).toUrl();
+    QUrl url = index.data(Role_Url).toUrl();
+    if (url.isEmpty()) {
+      // If this particular item has nothing, check if its children have something
+      int row = 0;
+      int column = 0;
+      QModelIndex child = index.child(row, column);
+      while (child.isValid()) {
+        new_indexes << child;
+        urls << child.data(Role_Url).toUrl();
+        child = index.child(++row, column);
+      }
+    } else {
+      new_indexes = indexes;
+      urls << url;
+    }
   }
 
   if (urls.isEmpty())
@@ -214,7 +229,7 @@ QMimeData* InternetModel::mimeData(const QModelIndexList& indexes) const {
 
   InternetMimeData* data = new InternetMimeData(this);
   data->setUrls(urls);
-  data->indexes = indexes;
+  data->indexes = new_indexes;
   data->name_for_new_playlist_ = InternetModel::ServiceForIndex(last_valid_index)->name();
 
   return data;
