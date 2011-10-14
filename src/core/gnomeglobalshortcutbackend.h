@@ -22,6 +22,8 @@
 
 class OrgGnomeSettingsDaemonMediaKeysInterface;
 
+class QDBusPendingCallWatcher;
+
 class GnomeGlobalShortcutBackend : public GlobalShortcutBackend {
   Q_OBJECT
 
@@ -38,10 +40,13 @@ protected:
   void DoUnregister();
 
 private slots:
+  void RegisterFinished(QDBusPendingCallWatcher* watcher);
+
   void GnomeMediaKeyPressed(const QString& application, const QString& key);
 
 private:
   OrgGnomeSettingsDaemonMediaKeysInterface* interface_;
+  bool is_connected_;
 };
 
 #endif // GNOMEGLOBALSHORTCUTBACKEND_H

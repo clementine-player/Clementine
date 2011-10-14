@@ -17,6 +17,7 @@
 
 #include "gnomeglobalshortcutbackend.h"
 #include "globalshortcuts.h"
+#include "core/closure.h"
 #include "core/logging.h"
 
 #ifdef QT_DBUS_LIB
@@ -24,6 +25,8 @@
 #endif
 
 #include <QAction>
+#include <QCoreApplication>
+#include <QDateTime>
 #include <QtDebug>
 
 #ifdef QT_DBUS_LIB
@@ -36,9 +39,11 @@ const char* GnomeGlobalShortcutBackend::kGsdInterface = "org.gnome.SettingsDaemo
 
 GnomeGlobalShortcutBackend::GnomeGlobalShortcutBackend(GlobalShortcuts* parent)
   : GlobalShortcutBackend(parent),
-    interface_(NULL)
+    interface_(NULL),
+    is_connected_(false)
 {
 }
+
 
 bool GnomeGlobalShortcutBackend::DoRegister() {
 #ifdef QT_DBUS_LIB
@@ -54,10 +59,14 @@ bool GnomeGlobalShortcutBackend::DoRegister() {
         kGsdService, kGsdPath, QDBusConnection::sessionBus(), this);
   }
 
-  connect(interface_, SIGNAL(MediaPlayerKeyPressed(QString,QString)),
-          this, SLOT(GnomeMediaKeyPressed(QString,QString)));
+  QDBusPendingReply<> reply =
+      interface_->GrabMediaPlayerKeys(QCoreApplication::applicationName(),
+                                      QDateTime::currentDateTime().toTime_t());
 
-  qLog(Debug) << "registered";
+  QDBusPendingCallWatcher* watcher = new QDBusPendingCallWatcher(reply, this);
+  NewClosure(watcher, SIGNAL(finished(QDBusPendingCallWatcher*)),
+             this, SLOT(RegisterFinished(QDBusPendingCallWatcher*)),
+             watcher);
 
   return true;
 #else // QT_DBUS_LIB
@@ -66,15 +75,35 @@ bool GnomeGlobalShortcutBackend::DoRegister() {
 #endif
 }
 
+void GnomeGlobalShortcutBackend::RegisterFinished(QDBusPendingCallWatcher* watcher) {
+  QDBusMessage reply = watcher->reply();
+  watcher->deleteLater();
+
+  if (reply.type() == QDBusMessage::ErrorMessage) {
+    qLog(Warning) << "Failed to grab media keys"
+                  << reply.errorName() <<reply.errorMessage();
+    return;
+  }
+
+  connect(interface_, SIGNAL(MediaPlayerKeyPressed(QString,QString)),
+          this, SLOT(GnomeMediaKeyPressed(QString,QString)));
+  is_connected_ = true;
+
+  qLog(Debug) << "registered";
+}
+
 void GnomeGlobalShortcutBackend::DoUnregister() {
   qLog(Debug) << "unregister";
 #ifdef QT_DBUS_LIB
   // Check if the GSD service is available
   if (!QDBusConnection::sessionBus().interface()->isServiceRegistered(kGsdService))
     return;
-  if (!interface_)
+  if (!interface_ || !is_connected_)
     return;
 
+  is_connected_ = false;
+
+  interface_->ReleaseMediaPlayerKeys(QCoreApplication::applicationName());
   disconnect(interface_, SIGNAL(MediaPlayerKeyPressed(QString,QString)),
              this, SLOT(GnomeMediaKeyPressed(QString,QString)));
 #endif
