@@ -19,6 +19,7 @@
 #include "tooltipactionwidget.h"
 #include "tooltipresultwidget.h"
 #include "core/logging.h"
+#include "core/utilities.h"
 
 #include <QAction>
 #include <QApplication>
@@ -154,17 +155,11 @@ bool GlobalSearchTooltip::event(QEvent* e) {
   case QEvent::MouseButtonRelease:
   case QEvent::MouseButtonDblClick:
     if (!underMouse()) {
-      QMouseEvent* me = static_cast<QMouseEvent*>(e);
-      QMouseEvent c(me->type(), event_target_->mapFromGlobal(me->globalPos()),
-                    me->globalPos(), me->button(),
-                    me->buttons(), me->modifiers());
+      const QMouseEvent* me = static_cast<QMouseEvent*>(e);
+      QWidget* child = event_target_->childAt(
+            event_target_->mapFromGlobal(me->globalPos()));
 
-      QWidget* child = event_target_->childAt(c.pos());
-
-      if (child)
-        child->setAttribute(Qt::WA_UnderMouse, true);
-
-      QApplication::sendEvent(child ? child : event_target_, &c);
+      Utilities::ForwardMouseEvent(me, child ? child : event_target_);
       return true;
     }
     break;

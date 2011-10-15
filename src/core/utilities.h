@@ -27,6 +27,7 @@
 #include <boost/scoped_array.hpp>
 
 class QIODevice;
+class QMouseEvent;
 
 namespace Utilities {
   QString PrettyTime(int seconds);
@@ -58,6 +59,14 @@ namespace Utilities {
   QByteArray HmacMd5(const QByteArray& key, const QByteArray& data);
   QByteArray HmacSha256(const QByteArray& key, const QByteArray& data);
   QByteArray Sha256(const QByteArray& data);
+
+
+  // Forwards a mouse event to a different widget, remapping the event's widget
+  // coordinates relative to those of the target widget.
+  void ForwardMouseEvent(const QMouseEvent* e, QWidget* target);
+
+  // Checks if the mouse event was inside the widget's rectangle.
+  bool IsMouseEventInWidget(const QMouseEvent* e, const QWidget* widget);
 
 
   enum ConfigPath {

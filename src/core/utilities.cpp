@@ -21,14 +21,16 @@
 
 #include "sha2.h"
 
-#include <QCoreApplication>
+#include <QApplication>
 #include <QDateTime>
 #include <QDesktopServices>
 #include <QDir>
 #include <QIODevice>
+#include <QMouseEvent>
 #include <QStringList>
 #include <QTemporaryFile>
 #include <QUrl>
+#include <QWidget>
 #include <QtDebug>
 #include <QtGlobal>
 
@@ -346,6 +348,18 @@ QByteArray Sha256(const QByteArray& data) {
 QString PrettySize(const QSize& size) {
   return QString::number(size.width()) + "x" +
          QString::number(size.height());
+}
+
+void ForwardMouseEvent(const QMouseEvent* e, QWidget* target) {
+  QMouseEvent c(e->type(), target->mapFromGlobal(e->globalPos()),
+                e->globalPos(), e->button(), e->buttons(), e->modifiers());
+
+  target->setAttribute(Qt::WA_UnderMouse, true);
+  QApplication::sendEvent(target, &c);
+}
+
+bool IsMouseEventInWidget(const QMouseEvent* e, const QWidget* widget) {
+  return widget->rect().contains(widget->mapFromGlobal(e->globalPos()));
 }
 
 }  // namespace Utilities

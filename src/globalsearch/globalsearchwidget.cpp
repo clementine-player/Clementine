@@ -354,11 +354,6 @@ bool GlobalSearchWidget::EventFilterSearchWidget(QObject* o, QEvent* e) {
     break;
   }
 
-  case QEvent::MouseButtonPress:
-    if (!ui_->search->text().isEmpty())
-      RepositionPopup();
-    break;
-
   default:
     break;
   }
