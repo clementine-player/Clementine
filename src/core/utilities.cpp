@@ -354,7 +354,6 @@ void ForwardMouseEvent(const QMouseEvent* e, QWidget* target) {
   QMouseEvent c(e->type(), target->mapFromGlobal(e->globalPos()),
                 e->globalPos(), e->button(), e->buttons(), e->modifiers());
 
-  target->setAttribute(Qt::WA_UnderMouse, true);
   QApplication::sendEvent(target, &c);
 }
 

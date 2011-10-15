@@ -159,6 +159,9 @@ bool GlobalSearchTooltip::event(QEvent* e) {
       QWidget* child = event_target_->childAt(
             event_target_->mapFromGlobal(me->globalPos()));
 
+      if (child)
+        child->setAttribute(Qt::WA_UnderMouse, true);
+
       Utilities::ForwardMouseEvent(me, child ? child : event_target_);
       return true;
     }
