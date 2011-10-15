@@ -207,9 +207,8 @@ QMimeData* InternetModel::mimeData(const QModelIndexList& indexes) const {
       continue;
 
     last_valid_index = index;
-    QUrl url = index.data(Role_Url).toUrl();
-    if (url.isEmpty()) {
-      // If this particular item has nothing, check if its children have something
+    if (index.data(Role_Type).toInt() == Type_UserPlaylist) {
+      // Get children
       int row = 0;
       int column = 0;
       QModelIndex child = index.child(row, column);
@@ -220,7 +219,7 @@ QMimeData* InternetModel::mimeData(const QModelIndexList& indexes) const {
       }
     } else {
       new_indexes = indexes;
-      urls << url;
+      urls << index.data(Role_Url).toUrl();
     }
   }
 

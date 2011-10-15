@@ -36,7 +36,6 @@ class GroovesharkService : public InternetService {
 
   enum Type {
     Type_SearchResults = InternetModel::TypeCount,
-    Type_UserPlaylist,
     Type_Track
   };
 

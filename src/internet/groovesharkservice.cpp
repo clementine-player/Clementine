@@ -488,7 +488,7 @@ void GroovesharkService::PlaylistSongsRetrieved() {
   PlaylistInfo playlist_info = pending_retrieve_playlists_.take(reply);
   // Create playlist item
   QStandardItem* item = new QStandardItem(playlist_info.name_);
-  item->setData(Type_UserPlaylist, InternetModel::Role_Type);
+  item->setData(InternetModel::Type_UserPlaylist, InternetModel::Role_Type);
   item->setData(true, InternetModel::Role_CanLazyLoad);
   item->setData(InternetModel::PlayBehaviour_SingleItem, InternetModel::Role_PlayBehaviour);
 
