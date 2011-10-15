@@ -7,7 +7,7 @@ configure-stamp:
 	cd bin && cmake .. \
 	  -DCMAKE_INSTALL_PREFIX=$(CURDIR)/debian/clementine/usr \
 	  -DBUNDLE_PROJECTM_PRESETS=OFF \
-	  -DFORCE_SVN_REVISION=@SVN_REVISION@
+	  -DFORCE_GIT_REVISION=@GIT_REVISION@
 	touch configure-stamp
 
 build: build-stamp
