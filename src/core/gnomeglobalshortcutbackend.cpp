@@ -76,6 +76,7 @@ bool GnomeGlobalShortcutBackend::DoRegister() {
 }
 
 void GnomeGlobalShortcutBackend::RegisterFinished(QDBusPendingCallWatcher* watcher) {
+#ifdef QT_DBUS_LIB
   QDBusMessage reply = watcher->reply();
   watcher->deleteLater();
 
@@ -90,6 +91,7 @@ void GnomeGlobalShortcutBackend::RegisterFinished(QDBusPendingCallWatcher* watch
   is_connected_ = true;
 
   qLog(Debug) << "registered";
+#endif // QT_DBUS_LIB
 }
 
 void GnomeGlobalShortcutBackend::DoUnregister() {
