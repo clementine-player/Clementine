@@ -43,6 +43,7 @@ class GroovesharkSearchProvider : public SearchProvider {
   void AlbumSongsLoaded(int id, const SongList& songs);
 
  private:
+  void MaybeSearchFinished(int id);
   void FetchAlbum(int id, const Result& result);
 
   GroovesharkService* service_;

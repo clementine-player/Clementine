@@ -73,7 +73,7 @@ void GroovesharkSearchProvider::SearchDone(int id, const SongList& songs) {
   }
 
   emit ResultsAvailable(global_search_id, ret);
-  // TODO: emit SearchFinished() when the album search is complete too.
+  MaybeSearchFinished(global_search_id);
 }
 
 void GroovesharkSearchProvider::AlbumSearchResult(int id, const SongList& songs) {
@@ -90,6 +90,14 @@ void GroovesharkSearchProvider::AlbumSearchResult(int id, const SongList& songs)
   }
 
   emit ResultsAvailable(global_search_id, ret);
+  MaybeSearchFinished(global_search_id);
+}
+
+void GroovesharkSearchProvider::MaybeSearchFinished(int id) {
+  qLog(Debug) << id << pending_searches_.keys(id);
+  if (pending_searches_.keys(id).isEmpty()) {
+    emit SearchFinished(id);
+  }
 }
 
 
