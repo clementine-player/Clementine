@@ -18,6 +18,7 @@
 #include "fmpsparser.h"
 #include "song.h"
 #include "core/logging.h"
+#include "core/mpris_common.h"
 
 #include <algorithm>
 
@@ -1356,4 +1357,30 @@ bool Song::IsOnSameAlbum(const Song& other) const {
     return true;
 
   return album() == other.album() && artist() == other.artist();
+}
+
+void Song::ToXesam(QVariantMap* map) const {
+  using mpris::AddMetadata;
+  using mpris::AddMetadataAsList;
+  using mpris::AsMPRISDateTimeType;
+
+  AddMetadata("xesam:url", url().toString(), map);
+  AddMetadata("xesam:title", PrettyTitle(), map);
+  AddMetadataAsList("xesam:artist", artist(), map);
+  AddMetadata("xesam:album", album(), map);
+  AddMetadataAsList("xesam:albumArtist", albumartist(), map);
+  AddMetadata("mpris:length", length_nanosec() / kNsecPerUsec, map);
+  AddMetadata("xesam:trackNumber", track(), map);
+  AddMetadataAsList("xesam:genre", genre(), map);
+  AddMetadata("xesam:discNumber", disc(), map);
+  AddMetadataAsList("xesam:comment", comment(), map);
+  AddMetadata("xesam:contentCreated", AsMPRISDateTimeType(ctime()), map);
+  AddMetadata("xesam:lastUsed", AsMPRISDateTimeType(lastplayed()), map);
+  AddMetadata("xesam:audioBPM", bpm(), map);
+  AddMetadataAsList("xesam:composer", composer(), map);
+  AddMetadata("xesam:useCount", playcount(), map);
+  AddMetadata("xesam:autoRating", score(), map);
+  if (rating() != -1.0) {
+    AddMetadata("xesam:userRating", rating(), map);
+  }
 }

@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 2.6)
 
+add_definitions(-DQT_STATICPLUGIN)
+
 # Source files
 set(SQLITE-SOURCES
     qsql_sqlite.cpp

@@ -58,11 +58,11 @@ QSize TooltipResultWidget::CalculateSizeHint() const {
               bold_metrics_.width(TitleText()) + kBorder);
 
   switch (result_.type_) {
-  case SearchProvider::Result::Type_Track:
-  case SearchProvider::Result::Type_Stream:
+  case globalsearch::Type_Track:
+  case globalsearch::Type_Stream:
     break;
 
-  case SearchProvider::Result::Type_Album:
+  case globalsearch::Type_Album:
     if (result_.album_songs_.isEmpty())
       break;
 
@@ -119,11 +119,11 @@ void TooltipResultWidget::paintEvent(QPaintEvent*) {
   y += kLineHeight;
 
   switch (result_.type_) {
-  case SearchProvider::Result::Type_Track:
-  case SearchProvider::Result::Type_Stream:
+  case globalsearch::Type_Track:
+  case globalsearch::Type_Stream:
     break;
 
-  case SearchProvider::Result::Type_Album:
+  case globalsearch::Type_Album:
     if (result_.album_songs_.isEmpty())
       break;
 

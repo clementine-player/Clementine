@@ -616,15 +616,15 @@ GlobalSearchWidget::CombineAction GlobalSearchWidget::CanCombineResults(
   (QString::compare(r1.metadata_.field(), r2.metadata_.field(), Qt::CaseInsensitive) != 0)
 
   switch (r1.type_) {
-  case SearchProvider::Result::Type_Track:
+  case globalsearch::Type_Track:
     if (StringsDiffer(title))
       return CannotCombine;
     // fallthrough
-  case SearchProvider::Result::Type_Album:
+  case globalsearch::Type_Album:
     if (StringsDiffer(album) || StringsDiffer(artist))
       return CannotCombine;
     break;
-  case SearchProvider::Result::Type_Stream:
+  case globalsearch::Type_Stream:
     if (StringsDiffer(url().toString))
       return CannotCombine;
     break;

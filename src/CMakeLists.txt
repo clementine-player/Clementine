@@ -116,6 +116,7 @@ set(SOURCES
   engines/gstenginepipeline.cpp
   engines/gstelementdeleter.cpp
 
+  globalsearch/common.cpp
   globalsearch/digitallyimportedsearchprovider.cpp
   globalsearch/globalsearch.cpp
   globalsearch/globalsearchitemdelegate.cpp
@@ -779,7 +780,6 @@ if(HAVE_DBUS)
       dbus/org.gnome.SettingsDaemon.MediaKeys.xml
       dbus/gnomesettingsdaemon)
 
-
   # DeviceKit DBUS interfaces
   if(HAVE_DEVICEKIT)
     qt4_add_dbus_interface(SOURCES
@@ -789,6 +789,16 @@ if(HAVE_DBUS)
         dbus/org.freedesktop.UDisks.Device.xml
         dbus/udisksdevice)
   endif(HAVE_DEVICEKIT)
+
+  # Global search interface
+  qt4_add_dbus_adaptor(SOURCES
+      dbus/org.clementineplayer.GlobalSearch.xml
+      globalsearch/globalsearchservice.h GlobalSearchService
+      globalsearch/globalsearchadaptor)
+
+  # Global search source
+  list(APPEND SOURCES globalsearch/globalsearchservice.cpp)
+  list(APPEND HEADERS globalsearch/globalsearchservice.h)
 
   # MPRIS source
   list(APPEND SOURCES core/mpris.cpp core/mpris1.cpp core/mpris2.cpp)

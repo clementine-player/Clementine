@@ -88,7 +88,7 @@ void SpotifySearchProvider::SearchFinishedSlot(const spotify_pb::SearchResponse&
     const spotify_pb::Track& track = response.result(i);
 
     Result result(this);
-    result.type_ = Result::Type_Track;
+    result.type_ = globalsearch::Type_Track;
     SpotifyService::SongFromProtobuf(track, &result.metadata_);
     result.match_quality_ = MatchQuality(state.tokens_, result.metadata_.title());
 
@@ -99,7 +99,7 @@ void SpotifySearchProvider::SearchFinishedSlot(const spotify_pb::SearchResponse&
     const spotify_pb::Album& album = response.album(i);
 
     Result result(this);
-    result.type_ = Result::Type_Album;
+    result.type_ = globalsearch::Type_Album;
     SpotifyService::SongFromProtobuf(album.metadata(), &result.metadata_);
     result.match_quality_ =
         qMin(MatchQuality(state.tokens_, result.metadata_.album()),
@@ -147,14 +147,14 @@ void SpotifySearchProvider::ArtLoadedSlot(const QString& id, const QImage& image
 
 void SpotifySearchProvider::LoadTracksAsync(int id, const Result& result) {
   switch (result.type_) {
-  case Result::Type_Track: {
+  case globalsearch::Type_Track: {
     SongMimeData* mime_data = new SongMimeData;
     mime_data->songs = SongList() << result.metadata_;
     emit TracksLoaded(id, mime_data);
     break;
   }
 
-  case Result::Type_Album: {
+  case globalsearch::Type_Album: {
     SpotifyServer* s = server();
     if (!s) {
       emit TracksLoaded(id, NULL);

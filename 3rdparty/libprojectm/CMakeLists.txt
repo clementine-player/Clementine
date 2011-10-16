@@ -5,6 +5,7 @@ SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "The projectM core library.")
 include(CheckCXXCompilerFlag)
 
 cmake_policy(SET CMP0005 OLD)
+cmake_policy(SET CMP0017 OLD)
 
 
 set(USE_DEVIL OFF)

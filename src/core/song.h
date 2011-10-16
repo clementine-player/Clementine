@@ -27,6 +27,7 @@
 #include <QSqlQuery>
 #include <QString>
 #include <QUrl>
+#include <QVariantMap>
 
 #include <xiphcomment.h>
 
@@ -62,6 +63,7 @@ namespace TagLib {
     class Tag;
   }
 }
+
 
 class FileRefFactory {
  public:
@@ -161,6 +163,7 @@ class Song {
 #ifdef HAVE_LIBLASTFM
   void ToLastFM(lastfm::Track* track) const;
 #endif
+  void ToXesam(QVariantMap* map) const;
 
   // Simple accessors
   bool is_valid() const { return d->valid_; }

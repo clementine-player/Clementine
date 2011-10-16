@@ -55,16 +55,16 @@ QStringList SearchProvider::TokenizeQuery(const QString& query) {
   return tokens;
 }
 
-SearchProvider::Result::MatchQuality SearchProvider::MatchQuality(
+globalsearch::MatchQuality SearchProvider::MatchQuality(
     const QStringList& tokens, const QString& string) {
-  Result::MatchQuality ret = Result::Quality_None;
+  globalsearch::MatchQuality ret = globalsearch::Quality_None;
 
   foreach (const QString& token, tokens) {
     const int index = string.indexOf(token, 0, Qt::CaseInsensitive);
     if (index == 0) {
-      return Result::Quality_AtStart;
+      return globalsearch::Quality_AtStart;
     } else if (index != -1) {
-      ret = Result::Quality_Middle;
+      ret = globalsearch::Quality_Middle;
     }
   }
 

@@ -41,6 +41,10 @@ inline void AddMetadata(const QString& key, const QDateTime& metadata, QVariantM
   if (metadata.isValid())    (*map)[key] = metadata;
 }
 
+inline QString AsMPRISDateTimeType(uint time) {
+  return time != -1 ? QDateTime::fromTime_t(time).toString(Qt::ISODate) : "";
+}
+
 } // namespace mpris
 
 #endif // MPRIS_COMMON_H

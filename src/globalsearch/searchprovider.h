@@ -23,6 +23,7 @@
 #include <QObject>
 
 #include "core/song.h"
+#include "globalsearch/common.h"
 
 class MimeData;
 
@@ -39,31 +40,13 @@ public:
     Result(SearchProvider* provider = 0)
       : provider_(provider), album_size_(0) {}
 
-    // The order of types here is the order they'll appear in the UI.
-    enum Type {
-      Type_Track = 0,
-      Type_Stream,
-      Type_Album
-    };
-
-    enum MatchQuality {
-      // A token in the search string matched at the beginning of the song
-      // metadata.
-      Quality_AtStart = 0,
-
-      // A token matched somewhere else.
-      Quality_Middle,
-
-      Quality_None
-    };
-
     // This must be set by the provider using the constructor.
     SearchProvider* provider_;
 
     // These must be set explicitly by the provider.
-    Type type_;
+    globalsearch::Type type_;
+    globalsearch::MatchQuality match_quality_;
     Song metadata_;
-    MatchQuality match_quality_;
 
     // How many songs in the album - valid only if type == Type_Album.
     int album_size_;
@@ -132,7 +115,7 @@ protected:
   // useful for figuring out whether you got a result because it matched in
   // the song title or the artist/album name.
   static QStringList TokenizeQuery(const QString& query);
-  static Result::MatchQuality MatchQuality(const QStringList& tokens, const QString& string);
+  static globalsearch::MatchQuality MatchQuality(const QStringList& tokens, const QString& string);
 
   // Sorts a list of songs by disc, then by track.
   static void SortSongs(SongList* list);

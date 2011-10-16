@@ -74,13 +74,13 @@ SearchProvider::ResultList LibrarySearchProvider::Search(int id, const QString& 
       album_key.prepend(song.artist());
     }
 
-    Result::MatchQuality quality = MatchQuality(tokens, song.title());
+    globalsearch::MatchQuality quality = MatchQuality(tokens, song.title());
 
-    if (quality != Result::Quality_None) {
+    if (quality != globalsearch::Quality_None) {
       // If the query matched in the song title then we're interested in this
       // as an individual song.
       Result result(this);
-      result.type_ = Result::Type_Track;
+      result.type_ = globalsearch::Type_Track;
       result.metadata_ = song;
       result.match_quality_ = quality;
       ret << result;
@@ -96,7 +96,7 @@ SearchProvider::ResultList LibrarySearchProvider::Search(int id, const QString& 
   // song title.
   foreach (const QString& key, albums_with_non_track_matches) {
     Result result(this);
-    result.type_ = Result::Type_Album;
+    result.type_ = globalsearch::Type_Album;
     result.metadata_ = albums.value(key);
     result.album_size_ = albums.count(key);
     result.match_quality_ =
@@ -131,12 +131,12 @@ void LibrarySearchProvider::LoadTracksAsync(int id, const Result& result) {
   SongList ret;
 
   switch (result.type_) {
-  case Result::Type_Track:
+  case globalsearch::Type_Track:
     // This is really easy - we just emit the track again.
     ret << result.metadata_;
     break;
 
-  case Result::Type_Album: {
+  case globalsearch::Type_Album: {
     // Find all the songs in this album.
     LibraryQuery query;
     query.SetColumnSpec("ROWID, " + Song::kColumnSpec);
