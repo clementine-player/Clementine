@@ -31,7 +31,9 @@ GroovesharkSearchProvider::GroovesharkSearchProvider(QObject* parent)
 void GroovesharkSearchProvider::Init(GroovesharkService* service) {
   service_ = service;
   SearchProvider::Init("Grooveshark", "grooveshark",
-                       QIcon(":providers/grooveshark.png"), true, false);
+                       QIcon(":providers/grooveshark.png"),
+                       WantsDelayedQueries | ArtIsProbablyRemote);
+
   connect(service_, SIGNAL(SimpleSearchResults(int, SongList)),
           SLOT(SearchDone(int, SongList)));
   connect(service_, SIGNAL(AlbumSearchResult(int, SongList)),
