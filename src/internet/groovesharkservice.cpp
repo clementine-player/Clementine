@@ -94,7 +94,7 @@ GroovesharkService::GroovesharkService(InternetModel *parent)
 
   GroovesharkSearchProvider* search_provider = new GroovesharkSearchProvider(this);
   search_provider->Init(this);
-  model()->global_search()->AddProvider(search_provider);
+  model()->global_search()->AddProvider(search_provider, false);
 }
 
 
