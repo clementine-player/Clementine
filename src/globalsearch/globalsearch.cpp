@@ -33,7 +33,7 @@ GlobalSearch::GlobalSearch(QObject* parent)
 {
 }
 
-void GlobalSearch::AddProvider(SearchProvider* provider) {
+void GlobalSearch::AddProvider(SearchProvider* provider, bool enable_by_default) {
   Q_ASSERT(!provider->name().isEmpty());
 
   connect(provider, SIGNAL(ResultsAvailable(int,SearchProvider::ResultList)),
@@ -48,7 +48,8 @@ void GlobalSearch::AddProvider(SearchProvider* provider) {
           SLOT(ProviderDestroyedSlot(QObject*)));
 
   ProviderData data;
-  data.enabled_ = !disabled_provider_ids_.contains(provider->id());
+  data.enabled_ = providers_state_preference_.contains(provider->id()) ?
+      providers_state_preference_[provider->id()] : enable_by_default;
   providers_[provider] = data;
 
   emit ProviderAdded(provider);
@@ -240,9 +241,9 @@ bool GlobalSearch::SetProviderEnabled(const SearchProvider* const_provider,
     } else {
       providers_[provider].enabled_ = enabled;
       emit ProviderToggled(provider, enabled);
+      SaveProvidersSettings();
       return true;
     }
-    // TODO: save providers
   }
   return true;
 }
@@ -259,9 +260,19 @@ void GlobalSearch::ReloadSettings() {
   QSettings s;
   s.beginGroup(kSettingsGroup);
 
-  disabled_provider_ids_ = s.value("disabled_providers", QStringList() << "jamendo").toStringList();
-
   foreach (SearchProvider* provider, providers_.keys()) {
-    SetProviderEnabled(provider, !disabled_provider_ids_.contains(provider->id()));
+    QVariant value = s.value(provider->id());
+    if (value.isValid()) {
+      providers_state_preference_.insert(provider->id(), value.toBool());
+      providers_[provider].enabled_ = value.toBool() && provider->IsLoggedIn(); 
+    }
+  }
+}
+
+void GlobalSearch::SaveProvidersSettings() {
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+  foreach (SearchProvider* provider, providers_.keys()) {
+    s.setValue(provider->id(), providers_[provider].enabled_);
   }
 }

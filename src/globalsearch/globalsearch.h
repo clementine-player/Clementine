@@ -33,7 +33,7 @@ public:
   static const int kDelayedSearchTimeoutMs;
   static const char* kSettingsGroup;
 
-  void AddProvider(SearchProvider* provider);
+  void AddProvider(SearchProvider* provider, bool enable_by_default = true);
   // Try to change provider state. Returns false if we can't (e.g. we can't
   // enable a provider because it requires the user to be logged-in)
   bool SetProviderEnabled(const SearchProvider* provider, bool enabled);
@@ -81,6 +81,8 @@ private:
   void TakeNextQueuedArt(SearchProvider* provider);
   QString PixmapCacheKey(const SearchProvider::Result& result) const;
 
+  void SaveProvidersSettings();
+
 private:
   struct DelayedSearch {
     int id_;
@@ -108,7 +110,7 @@ private:
   QPixmapCache pixmap_cache_;
   QMap<int, QString> pending_art_searches_;
 
-  QStringList disabled_provider_ids_;
+  QMap<QString, bool> providers_state_preference_;
 };
 
 #endif // GLOBALSEARCH_H

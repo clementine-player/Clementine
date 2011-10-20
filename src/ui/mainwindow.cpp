@@ -236,7 +236,6 @@ MainWindow::MainWindow(
   // Initialise the global search widget
   StyleHelper::setBaseColor(palette().color(QPalette::Highlight).darker());
 
-  global_search->ReloadSettings();
   // Add global search providers
   global_search->AddProvider(new LibrarySearchProvider(
       library_->backend(), tr("Library"), "library",
@@ -254,7 +253,9 @@ MainWindow::MainWindow(
       tr("Jamendo"),
       "jamendo",
       QIcon(":/providers/jamendo.png"),
-      global_search));
+      global_search),
+    false /* disabled Jamendo by default */);
+  global_search->ReloadSettings();
 
   ui_->global_search->Init(global_search);
   connect(ui_->global_search, SIGNAL(AddToPlaylist(QMimeData*)), SLOT(AddToPlaylist(QMimeData*)));
