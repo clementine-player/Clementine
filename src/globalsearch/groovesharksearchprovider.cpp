@@ -31,7 +31,9 @@ GroovesharkSearchProvider::GroovesharkSearchProvider(QObject* parent)
 void GroovesharkSearchProvider::Init(GroovesharkService* service) {
   service_ = service;
   SearchProvider::Init("Grooveshark", "grooveshark",
-                       QIcon(":providers/grooveshark.png"), true, false);
+                       QIcon(":providers/grooveshark.png"),
+                       WantsDelayedQueries | ArtIsProbablyRemote);
+
   connect(service_, SIGNAL(SimpleSearchResults(int, SongList)),
           SLOT(SearchDone(int, SongList)));
   connect(service_, SIGNAL(AlbumSearchResult(int, SongList)),
@@ -65,15 +67,15 @@ void GroovesharkSearchProvider::SearchDone(int id, const SongList& songs) {
   ResultList ret;
   foreach (const Song& song, songs) {
     Result result(this);
-    result.type_ = Result::Type_Track;
+    result.type_ = globalsearch::Type_Track;
     result.metadata_ = song;
-    result.match_quality_ = Result::Quality_AtStart;
+    result.match_quality_ = globalsearch::Quality_AtStart;
 
     ret << result;
   }
 
   emit ResultsAvailable(global_search_id, ret);
-  // TODO: emit SearchFinished() when the album search is complete too.
+  MaybeSearchFinished(global_search_id);
 }
 
 void GroovesharkSearchProvider::AlbumSearchResult(int id, const SongList& songs) {
@@ -82,14 +84,22 @@ void GroovesharkSearchProvider::AlbumSearchResult(int id, const SongList& songs)
   ResultList ret;
   foreach (const Song& s, songs) {
     Result result(this);
-    result.type_ = Result::Type_Album;
-    result.match_quality_ = Result::Quality_AtStart;
+    result.type_ = globalsearch::Type_Album;
+    result.match_quality_ = globalsearch::Quality_AtStart;
     result.metadata_ = s;
 
     ret << result;
   }
 
   emit ResultsAvailable(global_search_id, ret);
+  MaybeSearchFinished(global_search_id);
+}
+
+void GroovesharkSearchProvider::MaybeSearchFinished(int id) {
+  qLog(Debug) << id << pending_searches_.keys(id);
+  if (pending_searches_.keys(id).isEmpty()) {
+    emit SearchFinished(id);
+  }
 }
 
 
@@ -110,7 +120,7 @@ void GroovesharkSearchProvider::LoadTracksAsync(int id, const Result& result) {
   SongList ret;
 
   switch (result.type_) {
-    case Result::Type_Track: {
+    case globalsearch::Type_Track: {
       ret << result.metadata_;
       SortSongs(&ret);
 
@@ -121,7 +131,7 @@ void GroovesharkSearchProvider::LoadTracksAsync(int id, const Result& result) {
       break;
     }
 
-    case Result::Type_Album:
+    case globalsearch::Type_Album:
       FetchAlbum(id, result);
       break;
 

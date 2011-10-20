@@ -175,10 +175,6 @@ private:
   Mpris1* mpris1_;
 };
 
-inline QString AsMPRISDateTimeType(uint time) {
-  return time != -1 ? QDateTime::fromTime_t(time).toString(Qt::ISODate) : "";
-}
-
 } // namespace mpris
 
 #endif

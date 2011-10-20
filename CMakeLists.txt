@@ -279,7 +279,6 @@ endif(ENABLE_REMOTE AND HAVE_GNUTLS AND HAVE_PJSIP)
 set(HAVE_STATIC_SQLITE ${STATIC_SQLITE})
 if(STATIC_SQLITE)
   message(STATUS "Building static qsqlite plugin")
-  add_definitions(-DQT_STATICPLUGIN)
   add_subdirectory(3rdparty/qsqlite)
   include_directories("3rdparty/qsqlite")
 endif(STATIC_SQLITE)
@@ -380,6 +379,13 @@ endif(HAVE_SPOTIFY)
 if(HAVE_SPOTIFY_BLOB)
   add_subdirectory(spotifyblob/blob)
 endif(HAVE_SPOTIFY_BLOB)
+
+# This goes after everything else because KDE fucks everything else up with its
+# cmake includes.
+find_package(KDE4 4.3.60)
+if(KDE4_PLASMA_LIBS)
+  add_subdirectory(plasmarunner)
+endif(KDE4_PLASMA_LIBS)
 
 # Uninstall support
 configure_file(

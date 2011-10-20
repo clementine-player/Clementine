@@ -23,6 +23,7 @@
 #include <QObject>
 
 #include "core/song.h"
+#include "globalsearch/common.h"
 
 class MimeData;
 
@@ -39,31 +40,13 @@ public:
     Result(SearchProvider* provider = 0)
       : provider_(provider), album_size_(0) {}
 
-    // The order of types here is the order they'll appear in the UI.
-    enum Type {
-      Type_Track = 0,
-      Type_Stream,
-      Type_Album
-    };
-
-    enum MatchQuality {
-      // A token in the search string matched at the beginning of the song
-      // metadata.
-      Quality_AtStart = 0,
-
-      // A token matched somewhere else.
-      Quality_Middle,
-
-      Quality_None
-    };
-
     // This must be set by the provider using the constructor.
     SearchProvider* provider_;
 
     // These must be set explicitly by the provider.
-    Type type_;
+    globalsearch::Type type_;
+    globalsearch::MatchQuality match_quality_;
     Song metadata_;
-    MatchQuality match_quality_;
 
     // How many songs in the album - valid only if type == Type_Album.
     int album_size_;
@@ -76,11 +59,34 @@ public:
   };
   typedef QList<Result> ResultList;
 
+  enum Hint {
+    NoHints = 0x00,
+
+    // Indicates that queries to this provider mean making requests to a third
+    // party.  To be polite, queries should be buffered by a few milliseconds
+    // instead of executing them each time the user types a character.
+    WantsDelayedQueries = 0x01,
+
+    // Indicates that this provider wants to be given art queries one after the
+    // other (serially), instead of all at once (in parallel).
+    WantsSerialisedArtQueries = 0x02,
+
+    // Indicates that album cover art is probably going to be loaded remotely.
+    // If a third-party application is making art requests over dbus and has
+    // to get all the art it can before showing results to the user, it might
+    // not load art from this provider.
+    ArtIsProbablyRemote = 0x04
+  };
+  Q_DECLARE_FLAGS(Hints, Hint)
+
   const QString& name() const { return name_; }
   const QString& id() const { return id_; }
   const QIcon& icon() const { return icon_; }
-  const bool wants_delayed_queries() const { return delay_searches_; }
-  const bool wants_serialised_art() const { return serialised_art_; }
+
+  Hints hints() const { return hints_; }
+  bool wants_delayed_queries() const { return hints() & WantsDelayedQueries; }
+  bool wants_serialised_art() const { return hints() & WantsSerialisedArtQueries; }
+  bool art_is_probably_remote() const { return hints() & ArtIsProbablyRemote; }
 
   // Starts a search.  Must emit ResultsAvailable zero or more times and then
   // SearchFinished exactly once, using this ID.
@@ -114,25 +120,25 @@ protected:
   // useful for figuring out whether you got a result because it matched in
   // the song title or the artist/album name.
   static QStringList TokenizeQuery(const QString& query);
-  static Result::MatchQuality MatchQuality(const QStringList& tokens, const QString& string);
+  static globalsearch::MatchQuality MatchQuality(const QStringList& tokens, const QString& string);
 
   // Sorts a list of songs by disc, then by track.
   static void SortSongs(SongList* list);
 
   // Subclasses must call this from their constructors.
   void Init(const QString& name, const QString& id, const QIcon& icon,
-            bool delay_searches, bool serialised_art);
+            Hints hints = NoHints);
 
 private:
   QString name_;
   QString id_;
   QIcon icon_;
-  bool delay_searches_;
-  bool serialised_art_;
+  Hints hints_;
 };
 
 Q_DECLARE_METATYPE(SearchProvider::Result)
 Q_DECLARE_METATYPE(SearchProvider::ResultList)
+Q_DECLARE_OPERATORS_FOR_FLAGS(SearchProvider::Hints)
 
 
 class BlockingSearchProvider : public SearchProvider {

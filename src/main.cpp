@@ -93,6 +93,7 @@ using boost::scoped_ptr;
   #include "core/mpris.h"
   #include "core/mpris2.h"
   #include "dbus/metatypes.h"
+  #include "globalsearch/globalsearchservice.h"
   #include <QDBusArgument>
   #include <QDBusConnection>
   #include <QImage>
@@ -220,6 +221,7 @@ int main(int argc, char *argv[]) {
   qRegisterMetaTypeStreamOperators<QMap<int, int> >("ColumnAlignmentMap");
   qRegisterMetaType<QNetworkCookie>("QNetworkCookie");
   qRegisterMetaType<QList<QNetworkCookie> >("QList<QNetworkCookie>");
+  qRegisterMetaType<SearchProvider::Result>("SearchProvider::Result");
   qRegisterMetaType<SearchProvider::ResultList>("SearchProvider::ResultList");
 
   qRegisterMetaType<GstBuffer*>("GstBuffer*");
@@ -438,6 +440,8 @@ int main(int argc, char *argv[]) {
   QObject::connect(&playlists, SIGNAL(CurrentSongChanged(Song)), &art_loader, SLOT(LoadArt(Song)));
   QObject::connect(&art_loader, SIGNAL(ThumbnailLoaded(Song, QString, QImage)),
                    &osd, SLOT(CoverArtPathReady(Song, QString)));
+
+  GlobalSearchService global_search_service(&global_search);
 #endif
 
   // Window

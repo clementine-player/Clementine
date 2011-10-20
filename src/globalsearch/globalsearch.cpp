@@ -59,10 +59,12 @@ int GlobalSearch::SearchAsync(const QString& query) {
 
   int timer_id = -1;
 
-  pending_search_providers_[id] = providers_.count();
+  pending_search_providers_[id] = 0;
   foreach (SearchProvider* provider, providers_.keys()) {
     if (!providers_[provider].enabled_)
       continue;
+
+    pending_search_providers_[id] ++;
 
     if (provider->wants_delayed_queries()) {
       if (timer_id == -1) {

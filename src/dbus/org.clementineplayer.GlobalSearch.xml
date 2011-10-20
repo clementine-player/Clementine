@@ -1,0 +1,32 @@
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN"
+"http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+
+<node>
+  <interface name='org.clementineplayer.GlobalSearch'>
+    <method name='StartSearch'>
+      <arg type='i' name='id' direction='out' />
+      <arg type='s' name='query' direction='in' />
+      <arg type='b' name='prefetch_art' direction='in' />
+    </method>
+
+    <method name='CancelSearch'>
+      <arg type='i' name='id' direction='in' />
+    </method>
+
+    <signal name='ResultsAvailable'>
+      <arg type='i' name='id' />
+      <arg type='a(ibsiiissssbi)' name='results' />
+      <annotation name="com.trolltech.QtDBus.QtTypeName.In1" value="GlobalSearchServiceResultList" />
+    </signal>
+
+    <signal name='SearchFinished'>
+      <arg type='i' name='id' />
+    </signal>
+
+    <signal name='ArtLoaded'>
+      <arg type='i' name='result_id' />
+      <arg type='ay' name='image_data' />
+      <annotation name="com.trolltech.QtDBus.QtTypeName.Out1" value="QByteArray" />
+    </signal>
+	</interface>
+</node>

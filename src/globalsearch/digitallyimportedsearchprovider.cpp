@@ -24,7 +24,7 @@ DigitallyImportedSearchProvider::DigitallyImportedSearchProvider(
     : SimpleSearchProvider(parent),
       service_(service)
 {
-  Init(service_->name(), service->url_scheme(), service_->icon(), false, false);
+  Init(service_->name(), service->url_scheme(), service_->icon());
   icon_ = ScaleAndPad(QImage(service_->icon_path()));
 
   set_safe_words(QStringList() << "sky.fm" << "skyfm" << "di.fm" << "difm"

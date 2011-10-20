@@ -88,14 +88,14 @@ void GlobalSearchItemDelegate::paint(QPainter* p,
 
   QString count;
   switch (result.type_) {
-  case SearchProvider::Result::Type_Track:
+  case globalsearch::Type_Track:
     break;
 
-  case SearchProvider::Result::Type_Stream:
+  case globalsearch::Type_Stream:
     count = QString::fromUtf8("∞");
     break;
 
-  case SearchProvider::Result::Type_Album:
+  case globalsearch::Type_Album:
     if (result.album_size_ <= 0)
       count = "-";
     else
@@ -130,8 +130,8 @@ void GlobalSearchItemDelegate::paint(QPainter* p,
 
   // The text we draw depends on the type of result.
   switch (result.type_) {
-  case SearchProvider::Result::Type_Track:
-  case SearchProvider::Result::Type_Stream: {
+  case globalsearch::Type_Track:
+  case globalsearch::Type_Stream: {
     // Title
     line_1 += m.title() + " ";
 
@@ -153,7 +153,7 @@ void GlobalSearchItemDelegate::paint(QPainter* p,
     break;
   }
 
-  case SearchProvider::Result::Type_Album: {
+  case globalsearch::Type_Album: {
     // Line 1 is Artist - Album
     // Artist
     if (!m.albumartist().isEmpty())

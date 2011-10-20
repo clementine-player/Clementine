@@ -25,17 +25,17 @@ const int SearchProvider::kArtHeight = 32;
 
 
 SearchProvider::SearchProvider(QObject* parent)
-  : QObject(parent)
+  : QObject(parent),
+    hints_(0)
 {
 }
 
-void SearchProvider::Init(const QString& name, const QString& id, const QIcon& icon,
-                          bool delay_searches, bool serialised_art) {
+void SearchProvider::Init(const QString& name, const QString& id,
+                          const QIcon& icon, Hints hints) {
   name_ = name;
   id_ = id;
   icon_ = icon;
-  delay_searches_ = delay_searches;
-  serialised_art_ = serialised_art;
+  hints_ = hints;
 }
 
 QStringList SearchProvider::TokenizeQuery(const QString& query) {
@@ -55,16 +55,16 @@ QStringList SearchProvider::TokenizeQuery(const QString& query) {
   return tokens;
 }
 
-SearchProvider::Result::MatchQuality SearchProvider::MatchQuality(
+globalsearch::MatchQuality SearchProvider::MatchQuality(
     const QStringList& tokens, const QString& string) {
-  Result::MatchQuality ret = Result::Quality_None;
+  globalsearch::MatchQuality ret = globalsearch::Quality_None;
 
   foreach (const QString& token, tokens) {
     const int index = string.indexOf(token, 0, Qt::CaseInsensitive);
     if (index == 0) {
-      return Result::Quality_AtStart;
+      return globalsearch::Quality_AtStart;
     } else if (index != -1) {
-      ret = Result::Quality_Middle;
+      ret = globalsearch::Quality_Middle;
     }
   }
 

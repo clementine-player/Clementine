@@ -56,11 +56,11 @@ bool GlobalSearchSortModel::lessThan(const QModelIndex& left, const QModelIndex&
 
   // Failing that, compare title, artist and album
   switch (r1.type_) {
-  case SearchProvider::Result::Type_Track:
-  case SearchProvider::Result::Type_Stream:
+  case globalsearch::Type_Track:
+  case globalsearch::Type_Stream:
     CompareString(title);
     // fallthrough
-  case SearchProvider::Result::Type_Album:
+  case globalsearch::Type_Album:
     CompareString(artist);
     CompareString(album);
     break;

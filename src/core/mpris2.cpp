@@ -305,25 +305,11 @@ void Mpris2::CurrentSongChanged(const Song& song) {
 // ... and we add the cover information later, when it's available.
 void Mpris2::ArtLoaded(const Song& song, const QString& art_uri) {
   last_metadata_ = QVariantMap();
+  song.ToXesam(&last_metadata_);
 
   using mpris::AddMetadata;
   AddMetadata("mpris:trackid", current_track_id(), &last_metadata_);
-  AddMetadata("xesam:url", song.url().toString(), &last_metadata_);
-  AddMetadata("xesam:title", song.PrettyTitle(), &last_metadata_);
-  AddMetadataAsList("xesam:artist", song.artist(), &last_metadata_);
-  AddMetadata("xesam:album", song.album(), &last_metadata_);
-  AddMetadataAsList("xesam:albumArtist", song.albumartist(), &last_metadata_);
-  AddMetadata("mpris:length", song.length_nanosec() / kNsecPerUsec, &last_metadata_);
-  AddMetadata("xesam:trackNumber", song.track(), &last_metadata_);
-  AddMetadataAsList("xesam:genre", song.genre(), &last_metadata_);
-  AddMetadata("xesam:discNumber", song.disc(), &last_metadata_);
-  AddMetadataAsList("xesam:comment", song.comment(), &last_metadata_);
-  AddMetadata("xesam:contentCreated", AsMPRISDateTimeType(song.ctime()), &last_metadata_);
-  AddMetadata("xesam:lastUsed", AsMPRISDateTimeType(song.lastplayed()), &last_metadata_);
-  AddMetadata("xesam:audioBPM", song.bpm(), &last_metadata_);
-  AddMetadataAsList("xesam:composer", song.composer(), &last_metadata_);
-  AddMetadata("xesam:useCount", song.playcount(), &last_metadata_);
-  AddMetadata("xesam:autoRating", song.score(), &last_metadata_);
+
   if (song.rating() != -1.0) {
     AddMetadata("rating", song.rating() * 5, &last_metadata_);
   }
