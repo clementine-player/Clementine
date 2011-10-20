@@ -94,6 +94,11 @@ public:
   // ResultsAvailable.  Must emit TracksLoaded exactly once with this ID.
   virtual void LoadTracksAsync(int id, const Result& result) = 0;
 
+  // If provider needs user login to search and play songs, this method should
+  // be reimplemented
+  virtual bool IsLoggedIn() { return true; }
+  virtual void ShowConfig() { }
+
   static QImage ScaleAndPad(const QImage& image);
 
 signals:

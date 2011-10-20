@@ -771,5 +771,8 @@ void GlobalSearchWidget::ProviderButtonToggled(bool on) {
   if (!provider)
     return;
 
-  engine_->SetProviderEnabled(provider, on);
+  if (!engine_->SetProviderEnabled(provider, on)) {
+    // If we were not able to change provider state, toggle back provider button
+    button->toggle();
+  }
 }

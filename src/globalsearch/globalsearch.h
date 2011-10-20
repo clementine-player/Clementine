@@ -34,7 +34,9 @@ public:
   static const char* kSettingsGroup;
 
   void AddProvider(SearchProvider* provider);
-  void SetProviderEnabled(const SearchProvider* provider, bool enabled);
+  // Try to change provider state. Returns false if we can't (e.g. we can't
+  // enable a provider because it requires the user to be logged-in)
+  bool SetProviderEnabled(const SearchProvider* provider, bool enabled);
 
   int SearchAsync(const QString& query);
   int LoadArtAsync(const SearchProvider::Result& result);

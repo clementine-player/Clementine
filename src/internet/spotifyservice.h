@@ -68,6 +68,7 @@ public:
 
   // Persisted in the settings and updated on each Login().
   LoginState login_state() const { return login_state_; }
+  bool IsLoggedIn() const { return login_state_ == LoginState_LoggedIn; }
 
   static void SongFromProtobuf(const spotify_pb::Track& track, Song* song);
 
@@ -75,6 +76,9 @@ signals:
   void BlobStateChanged();
   void LoginFinished(bool success);
   void ImageLoaded(const QUrl& url, const QImage& image);
+
+public slots:
+  void ShowConfig();
 
 protected:
   virtual QModelIndex GetCurrentIndex();
@@ -104,7 +108,6 @@ private slots:
   void OpenSearchTab();
   void DoSearch();
 
-  void ShowConfig();
   void SyncPlaylist();
   void BlobDownloadFinished();
 

@@ -61,7 +61,7 @@ class GroovesharkService : public InternetService {
                                  qint64* length_nanosec);
   void Login(const QString& username, const QString& password);
   void Logout();
-  bool IsLoggedIn() { return !session_id_.isEmpty(); }
+  bool IsLoggedIn() const { return !session_id_.isEmpty(); }
   void RetrieveUserPlaylists();
   void MarkStreamKeyOver30Secs(const QString& stream_key, const QString& server_id);
   void MarkSongComplete(const QString& song_id, const QString& stream_key, const QString& server_id);
@@ -92,6 +92,9 @@ class GroovesharkService : public InternetService {
   void AlbumSearchResult(int id, SongList songs);
   void AlbumSongsLoaded(int id, SongList songs);
 
+ public slots:
+  void ShowConfig();
+
  protected:
   QModelIndex GetCurrentIndex();
 
@@ -107,7 +110,6 @@ class GroovesharkService : public InternetService {
  private slots:
   void UpdateTotalSongCount(int count);
 
-  void ShowConfig();
   void SessionCreated();
   void OpenSearchTab();
   void DoSearch();

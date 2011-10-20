@@ -56,6 +56,14 @@ public:
 
   virtual QString Icon() { return QString(); }
 
+  // Services which need user login will need to reimplement this method
+  virtual bool IsLoggedIn() const { return true; }
+
+public slots:
+  // Show configuration panel for services which have one
+  virtual void ShowConfig() { }
+  
+
 signals:
   void StreamError(const QString& message);
   void StreamMetadataFound(const QUrl& original_url, const Song& song);

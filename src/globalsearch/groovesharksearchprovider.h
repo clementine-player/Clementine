@@ -35,6 +35,8 @@ class GroovesharkSearchProvider : public SearchProvider {
   void SearchAsync(int id, const QString& query);
   void LoadArtAsync(int id, const Result& result);
   void LoadTracksAsync(int id, const Result& result);
+  bool IsLoggedIn();
+  void ShowConfig();
 
  private slots:
   void SearchDone(int id, const SongList& songs);

@@ -192,4 +192,15 @@ void SpotifySearchProvider::AlbumBrowseResponse(const spotify_pb::BrowseAlbumRes
   emit TracksLoaded(orig_id, mime_data);
 }
 
+bool SpotifySearchProvider::IsLoggedIn() {
+  if (server()) {
+    return service_->IsLoggedIn();
+  }
+  return false;
+}
 
+void SpotifySearchProvider::ShowConfig() {
+  if (service_) {
+    return service_->ShowConfig();
+  }
+}

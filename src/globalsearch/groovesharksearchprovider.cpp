@@ -131,6 +131,14 @@ void GroovesharkSearchProvider::LoadTracksAsync(int id, const Result& result) {
 
 }
 
+bool GroovesharkSearchProvider::IsLoggedIn() {
+  return (service_ && service_->IsLoggedIn());
+}
+
+void GroovesharkSearchProvider::ShowConfig() {
+  service_->ShowConfig();
+}
+
 void GroovesharkSearchProvider::FetchAlbum(int id, const Result& result) {
   service_->FetchSongsForAlbum(id, result.metadata_.url());
 }

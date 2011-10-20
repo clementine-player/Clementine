@@ -223,16 +223,26 @@ int GlobalSearch::LoadTracksAsync(const SearchProvider::Result& result) {
   return id;
 }
 
-void GlobalSearch::SetProviderEnabled(const SearchProvider* const_provider,
+bool GlobalSearch::SetProviderEnabled(const SearchProvider* const_provider,
                                       bool enabled) {
   SearchProvider* provider = const_cast<SearchProvider*>(const_provider);
   if (!providers_.contains(provider))
-    return;
+    return true;
 
   if (providers_[provider].enabled_ != enabled) {
-    providers_[provider].enabled_ = enabled;
-    emit ProviderToggled(provider, enabled);
+    // If we try to enable this provider but it is not logged in, don't change
+    // state, and show configuration menu, if any
+    if (enabled && !provider->IsLoggedIn()) {
+      provider->ShowConfig();
+      return false;
+    } else {
+      providers_[provider].enabled_ = enabled;
+      emit ProviderToggled(provider, enabled);
+      return true;
+    }
+    // TODO: save providers
   }
+  return true;
 }
 
 bool GlobalSearch::is_provider_enabled(const SearchProvider* const_provider) const {
