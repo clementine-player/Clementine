@@ -70,32 +70,32 @@ void GlobalSearchService::ResultsAvailableSlot(int id, const SearchProvider::Res
   foreach (const SearchProvider::Result& result, results) {
     const int result_id = next_result_id_ ++;
 
-    RecentResult& recent = recent_results_[result_id];
-    recent.result_.art_on_the_way_ = false;
+    RecentResult* recent = &recent_results_[result_id];
+    recent->result_.art_on_the_way_ = false;
 
     // Prefetch art if it was requested
     if (pending.prefetch_art_ && !result.provider_->art_is_probably_remote()) {
       const int art_id = engine_->LoadArtAsync(result);
       prefetching_art_[art_id] = result_id;
-      recent.result_.art_on_the_way_ = true;
+      recent->result_.art_on_the_way_ = true;
     }
 
     // Build the result to send back
-    recent.result_.result_id_ = result_id;
-    recent.result_.provider_name_ = result.provider_->name();
-    recent.result_.type_ = result.type_;
-    recent.result_.match_quality_ = result.match_quality_;
+    recent->result_.result_id_ = result_id;
+    recent->result_.provider_name_ = result.provider_->name();
+    recent->result_.type_ = result.type_;
+    recent->result_.match_quality_ = result.match_quality_;
 
-    recent.result_.album_size_ = result.album_size_;
+    recent->result_.album_size_ = result.album_size_;
 
-    recent.result_.title_ = result.metadata_.title();
-    recent.result_.artist_ = result.metadata_.artist();
-    recent.result_.album_ = result.metadata_.album();
-    recent.result_.album_artist_ = result.metadata_.albumartist();
-    recent.result_.is_compilation_ = result.metadata_.is_compilation();
-    recent.result_.track_ = result.metadata_.track();
+    recent->result_.title_ = result.metadata_.title();
+    recent->result_.artist_ = result.metadata_.artist();
+    recent->result_.album_ = result.metadata_.album();
+    recent->result_.album_artist_ = result.metadata_.albumartist();
+    recent->result_.is_compilation_ = result.metadata_.is_compilation();
+    recent->result_.track_ = result.metadata_.track();
 
-    ret << recent.result_;
+    ret << recent->result_;
   }
 
   emit ResultsAvailable(id, ret);

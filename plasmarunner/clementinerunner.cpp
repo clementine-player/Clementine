@@ -18,6 +18,7 @@
 #include "clementinerunner.h"
 #include "globalsearchinterface.h"
 
+#include <QApplication>
 #include <QDBusConnection>
 #include <QMutexLocker>
 #include <QtDebug>
@@ -77,11 +78,12 @@ void ClementineRunner::match(Plasma::RunnerContext& context) {
 
   int id = 0;
   PendingQuery query;
-  query.results_mutex_.lock();
 
   // Start the search
   {
-    QMutexLocker l(&pending_mutex_);
+    QMutexLocker l(&query.results_mutex_);
+    QMutexLocker l2(&pending_mutex_);
+
     QDBusPendingReply<int> reply = interface_->StartSearch(context.query(), true);
     reply.waitForFinished();
 
@@ -93,8 +95,6 @@ void ClementineRunner::match(Plasma::RunnerContext& context) {
 
     pending_queries_[id] = &query;
   }
-
-  query.results_mutex_.unlock();
 
   // Wait for results to arrive
   forever {
@@ -131,25 +131,26 @@ void ClementineRunner::match(Plasma::RunnerContext& context) {
 
 void ClementineRunner::FillMatch(const GlobalSearchServiceResult& result,
                                  Plasma::QueryMatch* match) const {
-  QString line[2];
+  QString text;
+  QString subtext;
 
   switch (result.type_) {
   case globalsearch::Type_Track:
   case globalsearch::Type_Stream: {
-    line[0] = result.title_;
+    text = result.title_;
 
     if (!result.artist_.isEmpty()) {
-      line[1] += result.artist_;
+      subtext += result.artist_;
     } else if (!result.album_artist_.isEmpty()) {
-      line[1] += result.album_artist_;
+      subtext += result.album_artist_;
     }
 
     if (!result.album_.isEmpty()) {
-      line[1] += "  -  " + result.album_;
+      subtext += "  -  " + result.album_;
     }
 
     if (result.track_ > 0) {
-      line[1] += "  -  " + tr("track %1").arg(result.track_);
+      subtext += "  -  " + tr("track %1").arg(result.track_);
     }
 
     break;
@@ -157,33 +158,33 @@ void ClementineRunner::FillMatch(const GlobalSearchServiceResult& result,
 
   case globalsearch::Type_Album: {
     if (!result.album_artist_.isEmpty())
-      line[0] += result.album_artist_;
+      text += result.album_artist_;
     else if (result.is_compilation_)
-      line[0] += tr("Various Artists");
+      text += tr("Various Artists");
     else if (!result.artist_.isEmpty())
-      line[0] += result.artist_;
+      text += result.artist_;
     else
-      line[0] += tr("Unknown");
+      text += tr("Unknown");
 
     // Dash
-    line[0] += "  -  ";
+    text += "  -  ";
 
     // Album
     if (result.album_.isEmpty())
-      line[0] += tr("Unknown");
+      text += tr("Unknown");
     else
-      line[0] += result.album_;
+      text += result.album_;
 
     if (result.album_size_ > 1)
-      line[1] = tr("Album with %1 tracks").arg(result.album_size_);
+      subtext = tr("Album with %1 tracks").arg(result.album_size_);
 
     break;
   }
   }
 
   match->setType(Plasma::QueryMatch::CompletionMatch);
-  match->setText(line[0]);
-  match->setSubtext(line[1]);
+  match->setText(text);
+  match->setSubtext(subtext);
   match->setRelevance(ResultRelevance(result));
 
   if (!result.image_.isNull()) {
@@ -219,6 +220,8 @@ qreal ClementineRunner::ResultRelevance(const GlobalSearchServiceResult& result)
 }
 
 void ClementineRunner::ResultsAvailable(int id, GlobalSearchServiceResultList results) {
+  Q_ASSERT(QThread::currentThread() == qApp->thread());
+
   // Lock the mutex and add the results to the list.
   QMutexLocker l(&pending_mutex_);
   PendingMap::iterator it = pending_queries_.find(id);
@@ -242,6 +245,8 @@ void ClementineRunner::ResultsAvailable(int id, GlobalSearchServiceResultList re
 }
 
 void ClementineRunner::SearchFinished(int id) {
+  Q_ASSERT(QThread::currentThread() == qApp->thread());
+
   QMutexLocker l(&pending_mutex_);
   PendingMap::iterator it = pending_queries_.find(id);
   if (it == pending_queries_.end())
@@ -257,6 +262,8 @@ void ClementineRunner::SearchFinished(int id) {
 }
 
 void ClementineRunner::ArtLoaded(int result_id, const QByteArray& image_data) {
+  Q_ASSERT(QThread::currentThread() == qApp->thread());
+
   QMutexLocker l(&pending_mutex_);
 
   // Find a query that has a result with this ID waiting for art
@@ -280,7 +287,7 @@ void ClementineRunner::ArtLoaded(int result_id, const QByteArray& image_data) {
       }
     }
 
-    // Add the art to this result and remote it from the waiting list
+    // Add the art to this result and remove it from the waiting list
     QMutexLocker result_l(&query->results_mutex_);
     query->results_ << *it;
     query->results_waiting_for_art_.erase(it);
