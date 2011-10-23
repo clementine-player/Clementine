@@ -462,5 +462,30 @@ int main(int argc, char *argv[]) {
   QObject::connect(&a, SIGNAL(messageReceived(QByteArray)), &w, SLOT(CommandlineOptionsReceived(QByteArray)));
   w.CommandlineOptionsReceived(options);
 
-  return a.exec();
+  int ret = a.exec();
+
+#ifdef Q_OS_LINUX
+  // The nvidia driver would cause Clementine (or any application that used
+  // opengl) to use 100% cpu on shutdown.  See:
+  //   http://code.google.com/p/clementine-player/issues/detail?id=2088
+  //   https://bugs.gentoo.org/show_bug.cgi?id=375615
+  // Work around this problem by exiting immediately (and not running the buggy
+  // nvidia atexit shutdown handler) if we're using one of the affected versions
+  // of the nvidia driver.
+
+  QFile self_maps("/proc/self/maps");
+  if (self_maps.open(QIODevice::ReadOnly)) {
+    QByteArray data = self_maps.readAll();
+    if (data.contains("libnvidia-tls.so.285.03") ||
+        data.contains("libnvidia-tls.so.280.13") ||
+        data.contains("libnvidia-tls.so.275.28") ||
+        data.contains("libnvidia-tls.so.275.19")) {
+      qLog(Warning) << "Exiting immediately to work around NVIDIA driver bug";
+      _exit(ret);
+    }
+    self_maps.close();
+  }
+#endif
+
+  return ret;
 }
