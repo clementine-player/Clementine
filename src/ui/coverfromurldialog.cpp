@@ -20,6 +20,8 @@
 #include "core/network.h"
 #include "covers/albumcoverloader.h"
 
+#include <QApplication>
+#include <QClipboard>
 #include <QImage>
 #include <QMessageBox>
 #include <QNetworkReply>
@@ -42,6 +44,9 @@ QImage CoverFromURLDialog::Exec() {
   // reset state
   ui_->url->setText("");;
   last_image_ = QImage();
+
+  QClipboard* clipboard = QApplication::clipboard();
+  ui_->url->setText(clipboard->text());
 
   exec();
   return last_image_;
