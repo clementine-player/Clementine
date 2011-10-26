@@ -283,11 +283,10 @@ QString GetConfigPath(ConfigPath config) {
   }
 }
 
-void OpenInFileBrowser(const QStringList& filenames) {
+void OpenInFileBrowser(const QList<QUrl>& urls) {
   QSet<QString> dirs;
 
-  foreach (const QString& filename, filenames) {
-    QUrl url(filename);
+  foreach (const QUrl& url, urls) {
     if (url.scheme() != "file") {
       continue;
     }

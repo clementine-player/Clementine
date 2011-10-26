@@ -1862,15 +1862,15 @@ void MainWindow::PlaylistDelete() {
 }
 
 void MainWindow::PlaylistOpenInBrowser() {
-  QStringList filenames;
+  QList<QUrl> urls;
   QModelIndexList proxy_indexes = ui_->playlist->view()->selectionModel()->selectedRows();
 
   foreach (const QModelIndex& proxy_index, proxy_indexes) {
     const QModelIndex index = playlists_->current()->proxy()->mapToSource(proxy_index);
-    filenames << index.sibling(index.row(), Playlist::Column_Filename).data().toString();
+    urls << index.sibling(index.row(), Playlist::Column_Filename).data().toString();
   }
 
-  Utilities::OpenInFileBrowser(filenames);
+  Utilities::OpenInFileBrowser(urls);
 }
 
 void MainWindow::DeleteFinished(const SongList& songs_with_errors) {

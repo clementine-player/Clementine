@@ -542,10 +542,10 @@ void LibraryView::EditSmartPlaylistFinished() {
 }
 
 void LibraryView::ShowInBrowser() {
-  QStringList filenames;
+  QList<QUrl> urls;
   foreach (const Song& song, GetSelectedSongs()) {
-    filenames << song.url().toLocalFile();
+    urls << song.url();
   }
 
-  Utilities::OpenInFileBrowser(filenames);
+  Utilities::OpenInFileBrowser(urls);
 }

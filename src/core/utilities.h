@@ -23,6 +23,7 @@
 #include <QCryptographicHash>
 #include <QSize>
 #include <QString>
+#include <QUrl>
 
 #include <boost/scoped_array.hpp>
 
@@ -49,7 +50,7 @@ namespace Utilities {
   bool CopyRecursive(const QString& source, const QString& destination);
   bool Copy(QIODevice* source, QIODevice* destination);
 
-  void OpenInFileBrowser(const QStringList& filenames);
+  void OpenInFileBrowser(const QList<QUrl>& filenames);
 
   enum HashFunction {
     Md5_Algo,
