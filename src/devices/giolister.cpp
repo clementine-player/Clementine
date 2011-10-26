@@ -501,8 +501,13 @@ void GioLister::UnmountDevice(const QString &id) {
         (GAsyncReadyCallback) MountEjectFinished,
         NULL);
   } else if (g_mount_can_unmount(info.mount)) {
-    g_mount_unmount(info.mount, G_MOUNT_UNMOUNT_NONE, NULL,
-                    (GAsyncReadyCallback) MountUnmountFinished, NULL);
+    g_mount_unmount_with_operation(
+        info.mount,
+        G_MOUNT_UNMOUNT_NONE,
+        NULL,
+        NULL,
+        (GAsyncReadyCallback) MountUnmountFinished,
+        NULL);
   }
 }
 
