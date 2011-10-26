@@ -70,7 +70,7 @@
 #include <QtDebug>
 
 #include <glib-object.h>
-#include <glib/gutils.h>
+#include <glib.h>
 #include <gst/gst.h>
 
 #include <boost/scoped_ptr.hpp>
