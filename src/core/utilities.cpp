@@ -287,14 +287,16 @@ void OpenInFileBrowser(const QStringList& filenames) {
   QSet<QString> dirs;
 
   foreach (const QString& filename, filenames) {
-    // Ignore things that look like URLs
-    if (filename.contains("://"))
+    QUrl url(filename);
+    if (url.scheme() != "file") {
+      continue;
+    }
+    QString path = url.toLocalFile();
+
+    if (!QFile::exists(path))
       continue;
 
-    if (!QFile::exists(filename))
-      continue;
-
-    const QString directory = QFileInfo(filename).dir().path();
+    const QString directory = QFileInfo(path).dir().path();
 
     if (dirs.contains(directory))
       continue;
