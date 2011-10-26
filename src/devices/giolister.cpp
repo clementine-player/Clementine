@@ -480,16 +480,26 @@ void GioLister::UnmountDevice(const QString &id) {
 
   if (info.volume) {
     if (g_volume_can_eject(info.volume)) {
-      g_volume_eject(info.volume, G_MOUNT_UNMOUNT_NONE, NULL,
-                     (GAsyncReadyCallback) VolumeEjectFinished, NULL);
+      g_volume_eject_with_operation(
+          info.volume,
+          G_MOUNT_UNMOUNT_NONE,
+          NULL,
+          NULL,
+          (GAsyncReadyCallback) VolumeEjectFinished,
+          NULL);
       g_object_unref(info.volume);
       return;
     }
   }
 
   if (g_mount_can_eject(info.mount)) {
-    g_mount_eject(info.mount, G_MOUNT_UNMOUNT_NONE, NULL,
-                  (GAsyncReadyCallback) MountEjectFinished, NULL);
+    g_mount_eject_with_operation(
+        info.mount,
+        G_MOUNT_UNMOUNT_NONE,
+        NULL,
+        NULL,
+        (GAsyncReadyCallback) MountEjectFinished,
+        NULL);
   } else if (g_mount_can_unmount(info.mount)) {
     g_mount_unmount(info.mount, G_MOUNT_UNMOUNT_NONE, NULL,
                     (GAsyncReadyCallback) MountUnmountFinished, NULL);
@@ -554,5 +564,3 @@ void GioLister::DoMountDevice(const QString& id, int request_id) {
                  VolumeMountFinished, NULL);
   emit DeviceMounted(id, request_id, true);
 }
-
-
