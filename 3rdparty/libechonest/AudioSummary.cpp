@@ -17,8 +17,10 @@
 #include "AudioSummary.h"
 
 #include "AudioSummary_p.h"
-#include <QNetworkReply>
 #include "Config.h"
+#include "Parsing_p.h"
+
+#include <QNetworkReply>
 
 Echonest::AudioSummary::AudioSummary()
     : d( new AudioSummaryData )
@@ -97,14 +99,14 @@ void Echonest::AudioSummary::setBeats(const Echonest::BeatList& beats)
     d->beats = beats;
 }
 
-Echonest::Analysis::AnalysisStatus Echonest::AudioSummary::detailedStatus() const
+QString Echonest::AudioSummary::detailedStatus() const
 {
-    return Echonest::statusToEnum( d->detailed_status );
+    return d->detailed_status;
 }
 
-void Echonest::AudioSummary::setDetailedStatus(Echonest::Analysis::AnalysisStatus status)
+void Echonest::AudioSummary::setDetailedStatus( const QString& status )
 {
-    d->detailed_status = Echonest::statusToString( status );
+    d->detailed_status = status;
 }
 
 qreal Echonest::AudioSummary::duration() const
@@ -183,9 +185,11 @@ void Echonest::AudioSummary::setNumSamples(qint64 num)
     d->num_samples = num;
 }
 
-void Echonest::AudioSummary::parseFullAnalysis(QNetworkReply* reply)
+void Echonest::AudioSummary::parseFullAnalysis( QNetworkReply* reply ) throw( Echonest::ParseError )
 {
-    
+    Echonest::Parser::checkForErrors( reply );
+    Echonest::Parser::parseDetailedAudioSummary( reply, *this );
+    reply->deleteLater();
 }
 
 QString Echonest::AudioSummary::sampleMD5() const
@@ -303,7 +307,7 @@ int Echonest::AudioSummary::mode() const
     return d->mode;
 }
 
-void Echonest::AudioSummary::setAnalysisUrl(const QString& analysisUrl)
+void Echonest::AudioSummary::setAnalysisUrl(const QUrl& analysisUrl)
 {
     d->analysis_url = analysisUrl;
 }
@@ -312,3 +316,24 @@ void Echonest::AudioSummary::setMode(int mode)
 {
     d->mode = mode;
 }
+
+qreal Echonest::AudioSummary::danceability() const
+{
+    return d->danceability;
+}
+
+void Echonest::AudioSummary::setDanceability(qreal dance)
+{
+    d->danceability = dance;
+}
+
+qreal Echonest::AudioSummary::energy() const
+{
+    return d->energy;
+}
+
+void Echonest::AudioSummary::setEnergy(qreal energy)
+{
+    d->energy = energy;
+}
+

@@ -48,3 +48,83 @@ QString Echonest::statusToString(Echonest::Analysis::AnalysisStatus status)
     return QString();
 }
 
+QByteArray Echonest::catalogTypeToLiteral(Echonest::CatalogTypes::Type type)
+{
+    switch( type )
+    {
+        case Echonest::CatalogTypes::Artist:
+            return "artist";
+        case Echonest::CatalogTypes::Song:
+            return "song";
+        default:
+            return "";
+    }
+}
+
+Echonest::CatalogTypes::Type Echonest::literalToCatalogType( const QByteArray& type )
+{
+    if( type == "artist" )
+        return Echonest::CatalogTypes::Artist;
+    else if( type == "song" )
+        return Echonest::CatalogTypes::Song;
+    else
+        return Echonest::CatalogTypes::Artist;
+}
+
+
+QByteArray Echonest::catalogStatusToLiteral(Echonest::CatalogTypes::TicketStatus status)
+{
+    return statusToString( static_cast<Echonest::Analysis::AnalysisStatus>( status ) ).toLatin1();
+}
+
+Echonest::CatalogTypes::TicketStatus Echonest::literalToCatalogStatus(const QByteArray& type)
+{
+    return static_cast<Echonest::CatalogTypes::TicketStatus>( statusToEnum( QLatin1String( type ) ) );
+}
+
+/**
+ *             Delete,
+ U pda*te,
+ Play,
+ Skip */
+
+QByteArray Echonest::catalogUpdateActionToLiteral(Echonest::CatalogTypes::Action action)
+{
+    switch( action )
+    {
+        case Echonest::CatalogTypes::Delete:
+            return "delete";
+        case Echonest::CatalogTypes::Play:
+            return "play";
+        case Echonest::CatalogTypes::Update:
+            return "update";
+        case Echonest::CatalogTypes::Skip:
+            return "skip";
+        default:
+            return "";
+    }
+}
+
+Echonest::CatalogTypes::Action Echonest::literalToCatalogUpdateAction(const QByteArray& type)
+{
+    if( type == "delete" )
+        return Echonest::CatalogTypes::Delete;
+    else if( type == "play" )
+        return Echonest::CatalogTypes::Play;
+    else if( type == "update" )
+        return Echonest::CatalogTypes::Update;
+    else if( type == "skip" )
+        return Echonest::CatalogTypes::Skip;
+    
+    return Echonest::CatalogTypes::Update;
+}
+
+QDebug Echonest::operator<<(QDebug d, const Echonest::ForeignId& id)
+{
+    return d.maybeSpace() << QString::fromLatin1( "Foreign Id(%1, %2)" ).arg( id.catalog ).arg( id.foreign_id );
+}
+
+QDebug Echonest::operator<<(QDebug d, const Echonest::ArtistLocation& loc)
+{
+    return d.maybeSpace() << QString::fromLatin1( "Artist Location(%1, %2, %3)" ).arg( loc.location ).arg( loc.latitude ).arg( loc.longitude );
+}

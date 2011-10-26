@@ -14,15 +14,46 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.                           *
  ****************************************************************************************/
 
-#ifndef ECHONEST_EXPORT_H
-#define ECHONEST_EXPORT_H
+#include "CatalogArtist.h"
+#include "CatalogItem_p.h"
 
-#ifdef _WIN32
-  #define ECHONEST_EXPORT __declspec(dllexport)
-#elif __GNUC__ >= 4
-  #define ECHONEST_EXPORT __attribute__ ((visibility("default")))
-#else
-  #define ECHONEST_EXPORT
-#endif
+Echonest::CatalogArtist::CatalogArtist()
+{
 
-#endif
+}
+
+Echonest::CatalogArtist::CatalogArtist(const QString& name)
+    : Artist( name )
+{
+
+}
+
+Echonest::CatalogArtist::CatalogArtist(const QByteArray& id, const QString& name)
+    : Artist(id, name)
+{
+
+}
+
+Echonest::CatalogArtist::CatalogArtist(const Echonest::CatalogArtist& other)
+    : Artist( other )
+    , CatalogItem( other )
+{
+
+}
+
+Echonest::CatalogArtist::~CatalogArtist()
+{
+
+}
+
+Echonest::CatalogArtist& Echonest::CatalogArtist::operator=(const Echonest::CatalogArtist& other)
+{
+    Artist::operator=( other );
+    CatalogItem::operator=( other );
+    return *this;
+}
+
+Echonest::CatalogTypes::Type Echonest::CatalogArtist::type() const
+{
+    return Echonest::CatalogTypes::Artist;
+}

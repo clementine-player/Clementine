@@ -37,6 +37,30 @@ public:
     {
         id = other.id;
         name = other.name;
+        
+        audio = other.audio;
+        biographies = other.biographies;
+        blogs = other.blogs;
+        
+        familiarity = other.familiarity;
+        hotttnesss = other.hotttnesss;
+        
+        images = other.images;
+        news = other.news;
+        reviews = other.reviews;
+        songs = other.songs;
+        similar = other.similar;
+        terms = other.terms;
+        videos = other.videos;
+        
+        lastfm_url = other.lastfm_url;
+        aolmusic_url = other.aolmusic_url;
+        myspace_url = other.myspace_url;
+        amazon_url = other.amazon_url;
+        itunes_url = other.itunes_url;
+        mb_url = other.mb_url;
+        
+        foreign_ids = other.foreign_ids;
     }
     
     // The following exist in all valid Artist objects
@@ -65,7 +89,9 @@ public:
     QUrl amazon_url;
     QUrl itunes_url;
     QUrl mb_url;
+    
+    Echonest::ForeignIds foreign_ids;
 };
 
 #endif
- 
+

@@ -14,15 +14,80 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.                           *
  ****************************************************************************************/
 
-#ifndef ECHONEST_EXPORT_H
-#define ECHONEST_EXPORT_H
+#include "CatalogItem.h"
+#include "CatalogItem_p.h"
 
-#ifdef _WIN32
-  #define ECHONEST_EXPORT __declspec(dllexport)
-#elif __GNUC__ >= 4
-  #define ECHONEST_EXPORT __attribute__ ((visibility("default")))
-#else
-  #define ECHONEST_EXPORT
-#endif
+// just an interface.
 
-#endif
+Echonest::CatalogItem::CatalogItem()
+    : dd( new CatalogItemData )
+{
+
+}
+
+Echonest::CatalogItem::CatalogItem(const Echonest::CatalogItem& other)
+    : dd( other.dd )
+{
+}
+
+Echonest::CatalogItem::~CatalogItem()
+{
+
+}
+
+Echonest::CatalogItem& Echonest::CatalogItem::operator=(const Echonest::CatalogItem& other)
+{
+    dd = other.dd;
+    return *this;
+}
+
+
+QDateTime Echonest::CatalogItem::dateAdded() const
+{
+    return dd->date_added;
+}
+
+void Echonest::CatalogItem::setDateAdded(const QDateTime& dt)
+{
+    dd->date_added = dt;
+}
+
+QByteArray Echonest::CatalogItem::foreignId() const
+{
+    return dd->foreign_id;
+}
+
+void Echonest::CatalogItem::setForeignId(const QByteArray& id)
+{
+    dd->foreign_id = id;
+}
+
+Echonest::CatalogUpdateEntry Echonest::CatalogItem::request() const
+{
+    return dd->request;
+}
+
+void Echonest::CatalogItem::setRequest(const Echonest::CatalogUpdateEntry& request)
+{
+    dd->request = request;
+}
+
+int Echonest::CatalogItem::rating() const
+{
+    return dd->rating;
+}
+
+void Echonest::CatalogItem::setRating(int rating)
+{
+    dd->rating = rating;
+}
+
+int Echonest::CatalogItem::playCount() const
+{
+    return dd->play_count;
+}
+
+void Echonest::CatalogItem::setPlayCount(int count)
+{
+    dd->play_count = count;
+}

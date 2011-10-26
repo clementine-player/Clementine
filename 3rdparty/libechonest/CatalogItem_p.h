@@ -14,15 +14,38 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.                           *
  ****************************************************************************************/
 
-#ifndef ECHONEST_EXPORT_H
-#define ECHONEST_EXPORT_H
+#ifndef ECHONEST_CATALOG_ITEM_P_H
+#define ECHONEST_CATALOG_ITEM_P_H
 
-#ifdef _WIN32
-  #define ECHONEST_EXPORT __declspec(dllexport)
-#elif __GNUC__ >= 4
-  #define ECHONEST_EXPORT __attribute__ ((visibility("default")))
-#else
-  #define ECHONEST_EXPORT
-#endif
+#include "Song_p.h"
+
+#include <QSharedData>
+#include <QString>
+#include <QVector>
+#include <QDateTime>
+#include "CatalogUpdateEntry.h"
+
+
+class CatalogItemData : public QSharedData
+{
+public:
+    CatalogItemData() {}
+    
+    CatalogItemData(const CatalogItemData& other)
+    {
+        foreign_id = other.foreign_id;
+        request = other.request;
+        date_added = other.date_added;
+        rating = other.rating;
+        play_count = other.play_count;
+    }
+    ~CatalogItemData() {}
+    
+    Echonest::CatalogUpdateEntry request;
+    QByteArray foreign_id;
+    QDateTime date_added;
+    int rating;
+    int play_count;
+};
 
 #endif

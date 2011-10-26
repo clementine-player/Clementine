@@ -19,27 +19,41 @@
 #include "ArtistTypes.h"
 #include "Parsing_p.h"
 
+#include <QtNetwork/QNetworkRequest>
+#include <QtNetwork/QNetworkReply>
+
 Echonest::Artist::Artist()
     : d( new ArtistData )
 {
+    init();
 }
 
 Echonest::Artist::Artist( const QByteArray& id, const QString& name )
     : d( new ArtistData )
 {
+    init();
     d->id = id;
     d->name = name;
 }
 
-Echonest::Artist::Artist(const QString& name)
+Echonest::Artist::Artist( const QString& name )
     : d( new ArtistData )
 {
+    init();
     setName( name );
 }
 
+Echonest::Artist::Artist( const QByteArray& id )
+: d( new ArtistData )
+{
+    init();
+    setId( id );
+}
 Echonest::Artist::Artist(const Echonest::Artist& other)
     : d( other.d )
-{}
+{
+    init();
+}
 
 Echonest::Artist& Echonest::Artist::operator=(const Echonest::Artist& artist)
 {
@@ -52,6 +66,10 @@ Echonest::Artist::~Artist()
 
 }
 
+void Echonest::Artist::init()
+{
+    qRegisterMetaType<Echonest::Artist>("Echonest::Artist");
+}
 
 QByteArray Echonest::Artist::id() const
 {
@@ -246,6 +264,15 @@ Echonest::VideoList Echonest::Artist::videos() const
     return d->videos;
 }
 
+Echonest::ForeignIds Echonest::Artist::foreignIds() const
+{
+    return d->foreign_ids;
+}
+
+void Echonest::Artist::setForeignIds(const Echonest::ForeignIds& ids)
+{
+    d->foreign_ids = ids;
+}
 
 QNetworkReply* Echonest::Artist::fetchAudio(int numResults, int offset) const
 {
@@ -258,7 +285,7 @@ QNetworkReply* Echonest::Artist::fetchBiographies(const QString& license, int nu
     QUrl url = setupQuery( "biographies", numResults, offset );
     if( !license.isEmpty() )
         url.addQueryItem( QLatin1String( "license" ), license );
-    
+
     return Echonest::Config::instance()->nam()->get( QNetworkRequest( url ) );
 }
 
@@ -267,14 +294,14 @@ QNetworkReply* Echonest::Artist::fetchBlogs( bool highRelevanceOnly, int numResu
     QUrl url = setupQuery( "blogs", numResults, offset );
     if( highRelevanceOnly ) // false is default
         url.addEncodedQueryItem( "high_relevance", "true" );
-    
+
     return Echonest::Config::instance()->nam()->get( QNetworkRequest( url ) );
 }
 
 QNetworkReply* Echonest::Artist::fetchFamiliarity() const
 {
     QUrl url = setupQuery( "familiarity", 0, -1 );
-    
+
     return Echonest::Config::instance()->nam()->get( QNetworkRequest( url ) );
 }
 
@@ -283,7 +310,7 @@ QNetworkReply* Echonest::Artist::fetchHotttnesss(const QString& type) const
     QUrl url = setupQuery( "hotttnesss", 0, -1 );
     if( type != QLatin1String( "normal" ) )
         url.addQueryItem( QLatin1String( "type" ), type );
-    
+
     return Echonest::Config::instance()->nam()->get( QNetworkRequest( url ) );
 }
 
@@ -292,15 +319,15 @@ QNetworkReply* Echonest::Artist::fetchImages( const QString& license, int numRes
     QUrl url = setupQuery( "images", numResults, offset );
     if( !license.isEmpty() )
         url.addQueryItem( QLatin1String( "license" ), license );
-    
+
     return Echonest::Config::instance()->nam()->get( QNetworkRequest( url ) );
 }
 
-QNetworkReply* Echonest::Artist::fetchProfile(Echonest::Artist::ArtistInformation information) const
+QNetworkReply* Echonest::Artist::fetchProfile(Echonest::ArtistInformation information) const
 {
     QUrl url = setupQuery( "profile", 0, -1 );
     addQueryInformation( url, information );
-    
+
     return Echonest::Config::instance()->nam()->get( QNetworkRequest( url ) );
 }
 
@@ -309,41 +336,38 @@ QNetworkReply* Echonest::Artist::fetchNews( bool highRelevanceOnly, int numResul
     QUrl url = setupQuery( "news", numResults, offset );
     if( highRelevanceOnly ) // false is default
     url.addEncodedQueryItem( "high_relevance", "true" );
-    
+
     return Echonest::Config::instance()->nam()->get( QNetworkRequest( url ) );
 }
 
 QNetworkReply* Echonest::Artist::fetchReviews(int numResults, int offset) const
 {
     QUrl url = setupQuery( "reviews", numResults, offset );
-    
+
     return Echonest::Config::instance()->nam()->get( QNetworkRequest( url ) );
 }
 
-QNetworkReply* Echonest::Artist::fetchSimilar(const Echonest::Artist::SearchParams& params, Echonest::Artist::ArtistInformation information, int numResults, int offset )
+QNetworkReply* Echonest::Artist::fetchSimilar(const Echonest::Artist::SearchParams& params, Echonest::ArtistInformation information, int numResults, int offset )
 {
     QUrl url = Echonest::baseGetQuery( "artist", "similar" );
     addQueryInformation( url, information );
-    
+
     if( numResults > 0 )
         url.addEncodedQueryItem( "results", QByteArray::number( numResults ) );
-    if( offset >= 0 ) 
+    if( offset >= 0 )
         url.addEncodedQueryItem( "start", QByteArray::number( offset ) );
-        
+
     Echonest::Artist::SearchParams::const_iterator iter = params.constBegin();
     for( ; iter < params.constEnd(); ++iter )
         url.addQueryItem( QLatin1String( searchParamToString( iter->first ) ), iter->second.toString().replace( QLatin1Char( ' ' ), QLatin1Char( '+' ) ) );
-    
+
     return Echonest::Config::instance()->nam()->get( QNetworkRequest( url ) );
 }
 
-QNetworkReply* Echonest::Artist::fetchSongs( Echonest::Artist::ArtistInformation idspace, bool limitToIdSpace, int numResults, int offset  ) const
+QNetworkReply* Echonest::Artist::fetchSongs( int numResults, int offset  ) const
 {
     QUrl url = setupQuery( "songs", numResults, offset );
-    addQueryInformation( url, idspace );
-    if( limitToIdSpace )
-        url.addEncodedQueryItem( "limit", "true" );
-    
+
     return Echonest::Config::instance()->nam()->get( QNetworkRequest( url ) );
 }
 
@@ -354,7 +378,7 @@ QNetworkReply* Echonest::Artist::fetchTerms( Echonest::Artist::TermSorting sorti
         url.addEncodedQueryItem( "sort", "weight" );
     else if( sorting == Echonest::Artist::Frequency )
         url.addEncodedQueryItem( "sort", "frequency" );
-    
+
     return Echonest::Config::instance()->nam()->get( QNetworkRequest( url ) );
 }
 
@@ -369,35 +393,35 @@ QNetworkReply* Echonest::Artist::fetchUrls() const
 QNetworkReply* Echonest::Artist::fetchVideo(int numResults, int offset) const
 {
     QUrl url = setupQuery( "video", numResults, offset );
-    
+
     return Echonest::Config::instance()->nam()->get( QNetworkRequest( url ) );
 }
 
-QNetworkReply* Echonest::Artist::search(const Echonest::Artist::SearchParams& params, Echonest::Artist::ArtistInformation information, bool limit)
+QNetworkReply* Echonest::Artist::search(const Echonest::Artist::SearchParams& params, Echonest::ArtistInformation information, bool limit)
 {
     QUrl url = Echonest::baseGetQuery( "artist", "search" );
-    
+
     Echonest::Artist::SearchParams::const_iterator iter = params.constBegin();
     for( ; iter < params.constEnd(); ++iter )
         url.addQueryItem( QLatin1String( searchParamToString( iter->first ) ), iter->second.toString().replace( QLatin1Char( ' ' ), QLatin1Char( '+' ) ) );
     url.addEncodedQueryItem( "limit", limit ? "true" : "false" );
     addQueryInformation( url, information );
-    
+
     return Echonest::Config::instance()->nam()->get( QNetworkRequest( url ) );
 }
 
-QNetworkReply* Echonest::Artist::topHottt(Echonest::Artist::ArtistInformation information, int numResults, int offset, bool limit)
+QNetworkReply* Echonest::Artist::topHottt(Echonest::ArtistInformation information, int numResults, int offset, bool limit)
 {
     QUrl url = Echonest::baseGetQuery( "artist", "top_hottt" );
     addQueryInformation( url, information );
-    
+
     if( numResults > 0 )
         url.addEncodedQueryItem( "results", QByteArray::number( numResults ) );
-    if( offset >= 0 ) 
+    if( offset >= 0 )
         url.addEncodedQueryItem( "start", QByteArray::number( offset ) );
-    
+
     url.addEncodedQueryItem( "limit", limit ? "true" : "false" );
-    
+
     return Echonest::Config::instance()->nam()->get( QNetworkRequest( url ) );
 }
 
@@ -405,33 +429,56 @@ QNetworkReply* Echonest::Artist::topTerms(int numResults)
 {
     QUrl url = Echonest::baseGetQuery( "artist", "top_terms" );
     url.addEncodedQueryItem( "results", QByteArray::number( numResults ) );
-    
+
     return Echonest::Config::instance()->nam()->get( QNetworkRequest( url ) );
 }
+
+QNetworkReply* Echonest::Artist::listTerms( const QString& type )
+{
+    QUrl url = Echonest::baseGetQuery( "artist", "list_terms" );
+    url.addQueryItem( QLatin1String( "type" ), type );
+
+    return Echonest::Config::instance()->nam()->get( QNetworkRequest( url ) );
+}
+
+
+QNetworkReply* Echonest::Artist::suggest( const QString& name, int results )
+{
+    QUrl url = Echonest::baseGetQuery( "artist", "suggest" );
+    QString realname = name;
+    url.addQueryItem( QLatin1String( "name" ), realname.replace( QLatin1Char( ' ' ), QLatin1Char( '+' ) ) );
+    url.addEncodedQueryItem( "results", QByteArray::number( results ) );
+
+    return Echonest::Config::instance()->nam()->get( QNetworkRequest( url ) );
+}
+
 
 int Echonest::Artist::parseProfile( QNetworkReply* reply ) throw( Echonest::ParseError )
 {
     Echonest::Parser::checkForErrors( reply );
-    
+
     QXmlStreamReader xml( reply->readAll() );
-    
+
     Echonest::Parser::readStatus( xml );
-    
+
     int numResults = Echonest::Parser::parseArtistInfoOrProfile( xml, *this );
-    
+
+    reply->deleteLater();
     return numResults;
 }
 
 Echonest::Artists Echonest::Artist::parseSearch( QNetworkReply* reply ) throw( Echonest::ParseError )
 {
     Echonest::Parser::checkForErrors( reply );
-    
-    QXmlStreamReader xml( reply->readAll() );
-    
+
+    QByteArray data = reply->readAll();
+    QXmlStreamReader xml( data );
+
     Echonest::Parser::readStatus( xml );
-    
+
     Echonest::Artists artists = Echonest::Parser::parseArtists( xml );
-    
+
+    reply->deleteLater();
     return artists;
 }
 
@@ -448,21 +495,49 @@ Echonest::Artists Echonest::Artist::parseTopHottt( QNetworkReply* reply ) throw(
 Echonest::TermList Echonest::Artist::parseTopTerms( QNetworkReply* reply ) throw( Echonest::ParseError )
 {
     Echonest::Parser::checkForErrors( reply );
-    
+
     QXmlStreamReader xml( reply->readAll() );
-    
+
     Echonest::Parser::readStatus( xml );
-    
-    Echonest::TermList terms = Echonest::Parser::parseTermList( xml );
-    
+
+    Echonest::TermList terms = Echonest::Parser::parseTopTermList( xml );
+
+    reply->deleteLater();
     return terms;
 }
 
+Echonest::Artists Echonest::Artist::parseSuggest( QNetworkReply* reply ) throw( Echonest::ParseError )
+{
+    Echonest::Parser::checkForErrors( reply );
+
+    QXmlStreamReader xml( reply->readAll() );
+
+    Echonest::Parser::readStatus( xml );
+
+    Echonest::Artists artists = Echonest::Parser::parseArtistSuggestList( xml );
+
+    reply->deleteLater();
+    return artists;
+}
+
+QVector< QString > Echonest::Artist::parseTermList( QNetworkReply* reply ) throw( Echonest::ParseError )
+{
+    Echonest::Parser::checkForErrors( reply );
+
+    QXmlStreamReader xml( reply->readAll() );
+
+    Echonest::Parser::readStatus( xml );
+
+    QVector< QString > terms = Echonest::Parser::parseTermList( xml );
+
+    reply->deleteLater();
+    return terms;
+}
 
 QUrl Echonest::Artist::setupQuery( const QByteArray& methodName, int numResults, int start ) const
 {
     QUrl url = Echonest::baseGetQuery( "artist", methodName );
-    if( !d->id.isEmpty() ) 
+    if( !d->id.isEmpty() )
         url.addEncodedQueryItem( "id", d->id );
     else if( !d->name.isEmpty() ) {
         QString name = d->name;
@@ -474,9 +549,9 @@ QUrl Echonest::Artist::setupQuery( const QByteArray& methodName, int numResults,
     }
     if( numResults > 0 )
         url.addEncodedQueryItem( "results", QByteArray::number( numResults ) );
-    if( start >= 0 ) 
+    if( start >= 0 )
         url.addEncodedQueryItem( "start", QByteArray::number( start ) );
-    
+
     return url;
 }
 
@@ -506,41 +581,42 @@ QByteArray Echonest::Artist::searchParamToString(Echonest::Artist::SearchParam p
             return "reverse";
         case Sort:
             return "sort";
+        case Mood:
+            return "mood";
         default:
             return "";
     }
 }
 
-void Echonest::Artist::addQueryInformation(QUrl& url, Echonest::Artist::ArtistInformation parts)
+void Echonest::Artist::addQueryInformation(QUrl& url, Echonest::ArtistInformation information)
 {
-    if( parts.testFlag( Echonest::Artist::Audio ) )
+    if( information.flags().testFlag( Echonest::ArtistInformation::Audio ) )
         url.addEncodedQueryItem( "bucket", "audio" );
-    if( parts.testFlag( Echonest::Artist::Biographies ) )
+    if( information.flags().testFlag( Echonest::ArtistInformation::Biographies ) )
         url.addEncodedQueryItem( "bucket", "biographies" );
-    if( parts.testFlag( Echonest::Artist::Blogs ) )
+    if( information.flags().testFlag( Echonest::ArtistInformation::Blogs ) )
         url.addEncodedQueryItem( "bucket", "blogs" );
-    if( parts.testFlag( Echonest::Artist::Familiarity ) )
+    if( information.flags().testFlag( Echonest::ArtistInformation::Familiarity ) )
         url.addEncodedQueryItem( "bucket", "familiarity" );
-    if( parts.testFlag( Echonest::Artist::Hotttnesss ) )
+    if( information.flags().testFlag( Echonest::ArtistInformation::Hotttnesss ) )
         url.addEncodedQueryItem( "bucket", "hotttnesss" );
-    if( parts.testFlag( Echonest::Artist::Images ) )
+    if( information.flags().testFlag( Echonest::ArtistInformation::Images ) )
         url.addEncodedQueryItem( "bucket", "images" );
-    if( parts.testFlag( Echonest::Artist::News ) )
+    if( information.flags().testFlag( Echonest::ArtistInformation::News ) )
         url.addEncodedQueryItem( "bucket", "news" );
-    if( parts.testFlag( Echonest::Artist::Reviews ) )
+    if( information.flags().testFlag( Echonest::ArtistInformation::Reviews ) )
         url.addEncodedQueryItem( "bucket", "reviews" );
-    if( parts.testFlag( Echonest::Artist::Terms ) )
+    if( information.flags().testFlag( Echonest::ArtistInformation::Terms ) )
         url.addEncodedQueryItem( "bucket", "terms" );
-    if( parts.testFlag( Echonest::Artist::Urls ) )
+    if( information.flags().testFlag( Echonest::ArtistInformation::Urls ) )
         url.addEncodedQueryItem( "bucket", "urls" );
-    if( parts.testFlag( Echonest::Artist::Videos ) )
+    if( information.flags().testFlag( Echonest::ArtistInformation::Videos ) )
         url.addEncodedQueryItem( "bucket", "video" );
-    if( parts.testFlag( Echonest::Artist::MusicBrainzEntries ) )
-        url.addEncodedQueryItem( "bucket", "id:musicbrainz" );
-    if( parts.testFlag( Echonest::Artist::SevenDigitalEntries ) )
-        url.addEncodedQueryItem( "bucket", "id:7digital" );
-    if( parts.testFlag( Echonest::Artist::PlaymeEntries ) )
-        url.addEncodedQueryItem( "bucket", "id:playme" );
+
+    if( !information.idSpaces().isEmpty() ) {
+        foreach( const QString& idSpace, information.idSpaces() )
+            url.addEncodedQueryItem( "bucket", "id:" + idSpace.toUtf8() );
+    }
 }
 
 

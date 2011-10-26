@@ -1,5 +1,6 @@
 /****************************************************************************************
  * Copyright (c) 2010 Leo Franchi <lfranchi@kde.org>                                    *
+ * Copyright (c) 2011 Jeff Mitchell <mitchell@kde.org>                                  *
  *                                                                                      *
  * This program is free software; you can redistribute it and/or modify it under        *
  * the terms of the GNU General Public License as published by the Free Software        *
@@ -17,7 +18,9 @@
 #include "Config.h"
 
 #include <QNetworkAccessManager>
+#include <QThread>
 #include <QDebug>
+#include <QMutex>
 
 Echonest::Config* Echonest::Config::s_instance = 0;
 
@@ -44,6 +47,13 @@ Echonest::ParseError::ParseError(Echonest::ErrorType error): exception()
     type = error;
 }
 
+Echonest::ParseError::ParseError(Echonest::ErrorType error, const QString& text): exception()
+{
+    type =  error;
+    extraText = text;
+}
+
+
 Echonest::ParseError::~ParseError() throw()
 {}
 
@@ -59,6 +69,11 @@ void Echonest::ParseError::setNetworkError( QNetworkReply::NetworkError error ) 
 
 const char* Echonest::ParseError::what() const throw()
 {
+
+    // If we have specific error text, return that first
+    if( !extraText.isEmpty() )
+        return extraText.toLatin1().constData();
+
     switch( type )
     {
         case UnknownError:
@@ -97,17 +112,26 @@ QNetworkReply::NetworkError Echonest::ParseError::networkError() const throw()
 
 class Echonest::ConfigPrivate {
 public:
-    ConfigPrivate() : nam( new QNetworkAccessManager )
+    ConfigPrivate()
     {
+        threadNamHash[ QThread::currentThread() ] = new QNetworkAccessManager();
     }
-    
+
     ~ConfigPrivate()
     {
-        delete nam;
-        nam = 0;
+        QThread *currThread = QThread::currentThread();
+        if( threadNamHash.contains( currThread ) )
+        {
+            if ( ourNamSet.contains( currThread ) )
+                delete threadNamHash[ currThread ];
+            threadNamHash.remove( currThread );
+            ourNamSet.remove( currThread );
+        }
     }
-    
-    QNetworkAccessManager* nam;
+
+    QMutex accessMutex;
+    QHash< QThread*, QNetworkAccessManager* > threadNamHash;
+    QSet< QThread* > ourNamSet;
     QByteArray apikey;
 };
 
@@ -137,16 +161,36 @@ void Echonest::Config::setNetworkAccessManager(QNetworkAccessManager* nam)
 {
     if( !nam )
         return;
-    
-    if( d->nam ) {
-        delete d->nam;
-    }
-    d->nam = nam;
+
+    QMutexLocker l( &d->accessMutex );
+    QThread* currThread = QThread::currentThread();
+    QNetworkAccessManager* oldNam = 0;
+    if( d->threadNamHash.contains( currThread ) && d->ourNamSet.contains( currThread ) )
+        oldNam = d->threadNamHash[ currThread ];
+
+    if( oldNam == nam )
+        return;
+
+    d->threadNamHash[ currThread ] = nam;
+    d->ourNamSet.remove( currThread );
+
+    if( oldNam )
+        delete oldNam;
 }
 
 QNetworkAccessManager* Echonest::Config::nam() const
 {
-    return d->nam;
+    QMutexLocker l( &d->accessMutex );
+    QThread* currThread = QThread::currentThread();
+    if( !d->threadNamHash.contains( currThread ) )
+    {
+        QNetworkAccessManager *newNam = new QNetworkAccessManager();
+        d->threadNamHash[ currThread ] = newNam;
+        d->ourNamSet.insert( currThread );
+        return newNam;
+    }
+
+    return d->threadNamHash[ currThread ];
 }
 
 Echonest::Config* Echonest::Config::instance() {

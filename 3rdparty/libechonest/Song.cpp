@@ -26,6 +26,8 @@
 #include <QtNetwork/QNetworkReply>
 #include "Parsing_p.h"
 #include <qxmlstream.h>
+#include <qjson/serializer.h>
+#include <qjson/parser.h>
 
 Echonest::Song::Song()
     : d( new SongData )
@@ -40,6 +42,12 @@ Echonest::Song::Song(const QByteArray& id, const QString& title, const QByteArra
     d->artistName = artistName;
 }
 
+Echonest::Song::Song(const QByteArray& id)
+:d( new SongData )
+{
+    d->id = id;
+}
+
 Echonest::Song::Song(const Echonest::Song& other)
     : d( other.d )
 {
@@ -49,7 +57,7 @@ Echonest::Song::Song(const Echonest::Song& other)
 
 Echonest::Song::~Song()
 {
-    
+
 }
 
 Echonest::Song& Echonest::Song::operator=(const Echonest::Song& song)
@@ -101,6 +109,17 @@ void Echonest::Song::setArtistName(const QString& artistName)
     d->artistName = artistName;
 }
 
+QString Echonest::Song::release() const
+{
+    return d->release;
+}
+
+void Echonest::Song::setRelease(const QString& release)
+{
+    d->release = release;
+}
+
+
 QVector< Echonest::Track > Echonest::Song::tracks() const
 {
     return d->tracks;
@@ -151,45 +170,113 @@ void Echonest::Song::setArtistFamiliarity(qreal artistFamiliarity)
     d->artistFamiliarity = artistFamiliarity;
 }
 
-QString Echonest::Song::artistLocation() const
+Echonest::ArtistLocation Echonest::Song::artistLocation() const
 {
     return d->artistLocation;
 }
 
-void Echonest::Song::setArtistLocation(const QString& artistLocation)
+void Echonest::Song::setArtistLocation(const Echonest::ArtistLocation& artistLocation)
 {
     d->artistLocation = artistLocation;
 }
 
-QNetworkReply* Echonest::Song::fetchInformation( Echonest::Song::SongInformation parts ) const
+QNetworkReply* Echonest::Song::fetchInformation( Echonest::SongInformation information ) const
 {
     QUrl url = Echonest::baseGetQuery( "song", "profile" );
     url.addEncodedQueryItem( "id", d->id );
-    addQueryInformation( url, parts );
-    
+    addQueryInformation( url, information );
+
     qDebug() << "Creating fetchInformation URL" << url;
     return Echonest::Config::instance()->nam()->get( QNetworkRequest( url ) );
 }
 
-QNetworkReply* Echonest::Song::search( const Echonest::Song::SearchParams& params, Echonest::Song::SongInformation parts )
+QNetworkReply* Echonest::Song::search( const Echonest::Song::SearchParams& params, Echonest::SongInformation information )
 {
     QUrl url = Echonest::baseGetQuery( "song", "search" );
-    addQueryInformation( url, parts );
-    
+    addQueryInformation( url, information );
+
     SearchParams::const_iterator iter = params.constBegin();
     for( ; iter < params.constEnd(); ++iter )
-        url.addQueryItem( QLatin1String( searchParamToString( iter->first ) ), iter->second.toString() );
-    
+        url.addQueryItem( QLatin1String( searchParamToString( iter->first ) ), iter->second.toString().replace( QLatin1Char( ' ' ), QLatin1Char( '+' ) ) );
+
     qDebug() << "Creating search URL" << url;
     return Echonest::Config::instance()->nam()->get( QNetworkRequest( url ) );
 }
 
+QNetworkReply* Echonest::Song::identify( const Echonest::Song::IdentifyParams& params, const Echonest::SongInformation& information )
+{
+    QVariantMap query;
+    QVariantMap metadata;
+    IdentifyParams::const_iterator iter = params.constBegin();
+    for( ; iter < params.constEnd(); ++iter ) {
+        if( iter->first == Code )
+            query[ QLatin1String( identifyParamToString( iter->first ) ) ] = iter->second;
+        else
+            metadata[ QLatin1String( identifyParamToString( iter->first ) ) ] =  iter->second.toString();
+    }
+    metadata[ QLatin1String( "version" ) ] = QLatin1String( "4.12" );
+    query[ QLatin1String( "metadata" ) ] = metadata;
+    QJson::Serializer s;
+    QByteArray data = s.serialize( query );
+
+    QUrl url = Echonest::baseGetQuery( "song", "identify" );
+    addQueryInformation( url, information );
+
+    qDebug() << "Creating identify URL" << url;
+    QNetworkRequest request( url );
+
+    request.setHeader( QNetworkRequest::ContentTypeHeader, QLatin1String( "application/octet-stream" ) );
+    //     qDebug() << "Uploading local file to" << url;
+    return Echonest::Config::instance()->nam()->post( request, data );
+}
+
+Echonest::SongList Echonest::Song::parseIdentify( QNetworkReply* reply ) throw( ParseError )
+{
+    Echonest::Parser::checkForErrors( reply );
+
+    QByteArray data = reply->readAll();
+    QJson::Parser p;
+    QVariantMap res = p.parse( data ).toMap();
+//     qDebug() << "Got data from identify call:" << data << res;
+
+
+    qDebug() << res[ QLatin1String( "response" ) ].toMap()[ QLatin1String( "songs" ) ].toList();
+    if( !res.contains( QLatin1String( "response" ) ) || !res[ QLatin1String( "response" ) ].toMap().contains( QLatin1String( "songs" ) ) ) {
+        qDebug() << "No response or songs elemnt in json...";
+        throw ParseError( UnknownParseError, QLatin1String( "Invalid json response" ) );
+    }
+
+    SongList songs;
+    QVariantList songsV = res[ QLatin1String( "response" ) ].toMap()[ QLatin1String( "songs" ) ].toList();
+
+    foreach( const QVariant& s, songsV ) {
+        QVariantMap sM = s.toMap();
+        Echonest::Song song;
+
+        if( sM.contains( QLatin1String( "title" ) ) )
+            song.setTitle( sM[ QLatin1String( "title" ) ].toString() );
+        if( sM.contains( QLatin1String( "artist_id" ) ) )
+            song.setArtistId( sM[ QLatin1String( "artist_id" ) ].toByteArray() );
+        if( sM.contains( QLatin1String( "artist_name" ) ) )
+            song.setArtistName( sM[ QLatin1String( "artist_name" ) ].toString() );
+        if( sM.contains( QLatin1String( "id" ) ) )
+            song.setId( sM[ QLatin1String( "id" ) ].toByteArray() );
+
+        songs.append( song );
+    }
+
+    reply->deleteLater();
+    return songs;
+}
+
+
+
 void Echonest::Song::parseInformation( QNetworkReply* reply ) throw( ParseError )
 {
     Echonest::Parser::checkForErrors( reply );
-    
+
     QXmlStreamReader xml( reply->readAll() );
-    
+
     Echonest::Parser::readStatus( xml );
     // we'll just take the new data. it is given as a list even though it can only have 1 song as we specify the song id
     QVector< Echonest::Song > songs = Echonest::Parser::parseSongList( xml );
@@ -204,22 +291,24 @@ void Echonest::Song::parseInformation( QNetworkReply* reply ) throw( ParseError 
         setArtistHotttnesss( newSong.artistHotttnesss() );
     if( newSong.artistFamiliarity() >= 0 )
         setArtistFamiliarity( newSong.artistFamiliarity() );
-    if( !newSong.artistLocation().isEmpty() )
+    if( !newSong.artistLocation().location.isEmpty() )
         setArtistLocation( newSong.artistLocation() );
-    
+    reply->deleteLater();
+
 }
 
 QVector< Echonest::Song > Echonest::Song::parseSearch( QNetworkReply* reply ) throw( ParseError )
 {
     Echonest::Parser::checkForErrors( reply );
-    
+
     QXmlStreamReader xml( reply->readAll() );
-    
+
     Echonest::Parser::readStatus( xml );
     QVector<Echonest::Song> songs = Echonest::Parser::parseSongList( xml );
 
+    reply->deleteLater();
     return songs;
-    
+
 }
 
 QByteArray Echonest::Song::searchParamToString( Echonest::Song::SearchParam param )
@@ -236,6 +325,8 @@ QByteArray Echonest::Song::searchParamToString( Echonest::Song::SearchParam para
             return "description";
         case Echonest::Song::ArtistId:
             return "artist_id";
+        case Echonest::Song::Start:
+            return "start";
         case Echonest::Song::Results:
             return "results";
         case Echonest::Song::MaxTempo:
@@ -270,6 +361,10 @@ QByteArray Echonest::Song::searchParamToString( Echonest::Song::SearchParam para
             return "max_longitude";
         case Echonest::Song::MinLongitude:
             return "min_longitude";
+        case Echonest::Song::MinEnergy:
+            return "min_energy";
+        case Echonest::Song::MaxEnergy:
+            return "max_energy";
         case Echonest::Song::Mode:
             return "mode";
         case Echonest::Song::Key:
@@ -280,20 +375,46 @@ QByteArray Echonest::Song::searchParamToString( Echonest::Song::SearchParam para
     return QByteArray();
 }
 
-void Echonest::Song::addQueryInformation(QUrl& url, Echonest::Song::SongInformation parts)
+
+QByteArray Echonest::Song::identifyParamToString( Echonest::Song::IdentifyParam param )
 {
-    if( parts.testFlag( Echonest::Song::AudioSummaryInformation ) )
+    switch( param )
+    {
+        case Echonest::Song::Code:
+            return "code";
+        case Echonest::Song::IdentifyArtist:
+            return "artist";
+        case Echonest::Song::IdentifyDuration:
+            return "duration";
+        case Echonest::Song::IdentifyGenre:
+            return "genre";
+        case Echonest::Song::IdentifyRelease:
+            return "release";
+        case Echonest::Song::IdentifyTitle:
+            return "title";
+    }
+    return QByteArray();
+}
+
+void Echonest::Song::addQueryInformation(QUrl& url, Echonest::SongInformation information)
+{
+    if( information.flags().testFlag( Echonest::SongInformation::AudioSummaryInformation ) )
         url.addEncodedQueryItem( "bucket", "audio_summary" );
-    if( parts.testFlag( Echonest::Song::Tracks ) )
+    if( information.flags().testFlag( Echonest::SongInformation::Tracks ) )
         url.addEncodedQueryItem( "bucket", "tracks" );
-    if( parts.testFlag( Echonest::Song::Hotttnesss ) )
+    if( information.flags().testFlag( Echonest::SongInformation::Hotttnesss ) )
         url.addEncodedQueryItem( "bucket", "song_hotttnesss" );
-    if( parts.testFlag( Echonest::Song::ArtistHotttnesss ) )
+    if( information.flags().testFlag( Echonest::SongInformation::ArtistHotttnesss ) )
         url.addEncodedQueryItem( "bucket", "artist_hotttnesss" );
-    if( parts.testFlag( Echonest::Song::ArtistFamiliarity ) )
+    if( information.flags().testFlag( Echonest::SongInformation::ArtistFamiliarity ) )
         url.addEncodedQueryItem( "bucket", "artist_familiarity" );
-    if( parts.testFlag( Echonest::Song::ArtistLocation ) )
+    if( information.flags().testFlag( Echonest::SongInformation::ArtistLocation ) )
         url.addEncodedQueryItem( "bucket", "artist_location" );
+
+    if( !information.idSpaces().isEmpty() ) {
+        foreach( const QString& idSpace, information.idSpaces() )
+            url.addEncodedQueryItem( "bucket", "id:" + idSpace.toUtf8() );
+    }
 }
 
 

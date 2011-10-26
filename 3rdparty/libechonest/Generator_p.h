@@ -13,16 +13,28 @@
  * You should have received a copy of the GNU General Public License along with         *
  * this program.  If not, see <http://www.gnu.org/licenses/>.                           *
  ****************************************************************************************/
+#ifndef LIBECHONEST_GENERATOR_H
+#define LIBECHONEST_GENERATOR_H
+#include <QByteArray>
+#include "CatalogUpdateEntry.h"
+#include <QVariant>
 
-#ifndef ECHONEST_EXPORT_H
-#define ECHONEST_EXPORT_H
+namespace Echonest {
+    
+namespace Generator {
 
-#ifdef _WIN32
-  #define ECHONEST_EXPORT __declspec(dllexport)
-#elif __GNUC__ >= 4
-  #define ECHONEST_EXPORT __attribute__ ((visibility("default")))
-#else
-  #define ECHONEST_EXPORT
-#endif
+/**
+* Miscellaneous functions for generating JSON to send to The Echo Nest
+*/
 
+QByteArray catalogEntriesToJson( const CatalogUpdateEntries& items );
+QByteArray catalogEntryToJson( const CatalogUpdateEntry& item );
+
+
+QVariantList catalogEntriesToVariant( const CatalogUpdateEntries& items );
+QVariant catalogEntryToVariant( const CatalogUpdateEntry& item );
+
+};
+
+};
 #endif

@@ -13,16 +13,37 @@
  * You should have received a copy of the GNU General Public License along with         *
  * this program.  If not, see <http://www.gnu.org/licenses/>.                           *
  ****************************************************************************************/
+#ifndef ECHONEST_CATALOG_SONG_H
+#define ECHONEST_CATALOG_SONG_H
 
-#ifndef ECHONEST_EXPORT_H
-#define ECHONEST_EXPORT_H
+#include "echonest_export.h"
+#include "Song.h"
+#include "CatalogItem.h"
 
-#ifdef _WIN32
-  #define ECHONEST_EXPORT __declspec(dllexport)
-#elif __GNUC__ >= 4
-  #define ECHONEST_EXPORT __attribute__ ((visibility("default")))
-#else
-  #define ECHONEST_EXPORT
-#endif
+class CatalogSongData;
+namespace Echonest {
+/**
+* A song that includes some additional information returned when getting a song from a catalog listing.
+*/
+class ECHONEST_EXPORT CatalogSong : public Song, public CatalogItem
+{
+public:
+    CatalogSong();
+    CatalogSong(const QByteArray& id, const QString& title, const QByteArray& artistId, const QString& artistName);
+    CatalogSong(const Echonest::CatalogSong& other);
+    virtual ~CatalogSong();
+    CatalogSong& operator=( const CatalogSong& other );
+    
+    /**
+     * The type of this item: Song.
+     */
+    virtual CatalogTypes::Type type() const;
+    
+};
 
+typedef QVector< CatalogSong > CatalogSongs;
+};
+
+
+Q_DECLARE_METATYPE( Echonest::CatalogSong )
 #endif

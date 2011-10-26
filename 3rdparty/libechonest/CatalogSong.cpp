@@ -14,15 +14,41 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.                           *
  ****************************************************************************************/
 
-#ifndef ECHONEST_EXPORT_H
-#define ECHONEST_EXPORT_H
+#include "CatalogSong.h"
+#include "CatalogItem_p.h"
 
-#ifdef _WIN32
-  #define ECHONEST_EXPORT __declspec(dllexport)
-#elif __GNUC__ >= 4
-  #define ECHONEST_EXPORT __attribute__ ((visibility("default")))
-#else
-  #define ECHONEST_EXPORT
-#endif
+Echonest::CatalogSong::CatalogSong()
+{
 
-#endif
+}
+
+Echonest::CatalogSong::CatalogSong(const QByteArray& id, const QString& title, const QByteArray& artistId, const QString& artistName)
+    : Song(id, title, artistId, artistName)
+{
+
+}
+
+Echonest::CatalogSong::CatalogSong(const Echonest::CatalogSong& other)
+    : Song(other)
+    , CatalogItem( other )
+{
+
+}
+
+Echonest::CatalogSong& Echonest::CatalogSong::operator=(const Echonest::CatalogSong& other)
+{
+    Song::operator=( other );
+    CatalogItem::operator=( other );
+    return *this;
+}
+
+Echonest::CatalogSong::~CatalogSong()
+{
+}
+
+Echonest::CatalogTypes::Type Echonest::CatalogSong::type() const
+{
+    return Echonest::CatalogTypes::Song;
+}
+
+

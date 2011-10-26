@@ -13,16 +13,38 @@
  * You should have received a copy of the GNU General Public License along with         *
  * this program.  If not, see <http://www.gnu.org/licenses/>.                           *
  ****************************************************************************************/
+#ifndef ECHONEST_CATALOG_ARTIST_H
+#define ECHONEST_CATALOG_ARTIST_H
 
-#ifndef ECHONEST_EXPORT_H
-#define ECHONEST_EXPORT_H
+#include "echonest_export.h"
+#include "Artist.h"
+#include "CatalogItem.h"
 
-#ifdef _WIN32
-  #define ECHONEST_EXPORT __declspec(dllexport)
-#elif __GNUC__ >= 4
-  #define ECHONEST_EXPORT __attribute__ ((visibility("default")))
-#else
-  #define ECHONEST_EXPORT
-#endif
+class CatalogArtistData;
+namespace Echonest {
+    
+/**
+ * An artist that includes some additional information returned when getting an artist from a catalog listing.
+ */
+class ECHONEST_EXPORT CatalogArtist : public Artist, public CatalogItem
+{
+public:
+    CatalogArtist();
+    explicit CatalogArtist(const QString& name);
+    CatalogArtist(const QByteArray& id, const QString& name);
+    CatalogArtist(const Echonest::CatalogArtist& other);
+    virtual ~CatalogArtist();
+    CatalogArtist& operator=( const CatalogArtist& other );
+    
+    /**
+     * The type of this catalog item: Artist.
+     */
+    virtual CatalogTypes::Type type() const;
+};
 
+typedef QVector< CatalogArtist > CatalogArtists;
+
+};
+
+Q_DECLARE_METATYPE( Echonest::CatalogArtist )
 #endif

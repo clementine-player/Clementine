@@ -1,28 +1,5 @@
 
-add_definitions(-DQT_NO_CAST_FROM_ASCII -DQT_NO_CAST_TO_ASCII)
-
-set(ECHONEST_LIB_MAJOR_VERSION "0")
-set(ECHONEST_LIB_MINOR_VERSION "1")
-set(ECHONEST_LIB_PATCH_VERSION "0")
-set(ECHONEST_LIB_VERSION "${ECHONEST_LIB_MAJOR_VERSION}.${ECHONEST_LIB_MINOR_VERSION}.${ECHONEST_LIB_PATCH_VERSION}" )
-
-
-set( ECHONEST_LIB_VERSION_STRING "${ECHONEST_LIB_MAJOR_VERSION}.${ECHONEST_LIB_MINOR_VERSION}.${ECHONEST_LIB_PATCH_VERSION}")
-
-if(CMAKE_COMPILER_IS_GNUCXX)
-    add_definitions( -Wall -Wundef -Wcast-align -Wchar-subscripts -Wpointer-arith
-       -Wwrite-strings -Wpacked -Wformat-security -Wmissing-format-attribute
-       -Wold-style-cast -Woverloaded-virtual -Wnon-virtual-dtor -Werror )
-    if (NOT WIN32 AND NOT APPLE)
-        add_definitions( -fvisibility=hidden )
-    endif()
-# to be added:
-#       -Wshadow
-# FIXME we might want this one back in, but Qt 4.4.3 spits gazillions of warnings with it on Linux-64:
-#       -Wconversion
-endif(CMAKE_COMPILER_IS_GNUCXX)
-
-include_directories( ${CMAKE_CURRENT_SOURCE_DIR} )
+include_directories( ${QJSON_INCLUDE_DIRS} ${CMAKE_CURRENT_SOURCE_DIR} )
 
 set( LIBECHONEST_SRC
         Track.cpp
@@ -34,9 +11,17 @@ set( LIBECHONEST_SRC
         AudioSummary.cpp
         Util.cpp
         ArtistTypes.cpp
+        Generator.cpp
+        Catalog.cpp
+        CatalogUpdateEntry.cpp
+        CatalogSong.cpp
+        CatalogArtist.cpp
+        CatalogItem.cpp
+        TypeInformation.cpp
 )
 
 set( LIBECHONEST_H
+        echonest_export.h
         Track.h
         Song.h
         Artist.h
@@ -44,17 +29,35 @@ set( LIBECHONEST_H
         Config.h
         AudioSummary.h
         ArtistTypes.h
+        Util.h
+        Catalog.h
+        CatalogUpdateEntry.h
+        CatalogSong.h
+        CatalogArtist.h
+        CatalogItem.h
+        TypeInformation.h
 )
 
 QT4_WRAP_CPP( ${LIBECHONEST_H} )
 
-add_library( echonest STATIC ${LIBECHONEST_SRC} )
-target_link_libraries( echonest ${QT_QTCORE_LIBRARY} ${QT_QTNETWORK_LIBRARY}  )
-set_target_properties( echonest PROPERTIES VERSION ${ECHONEST_LIB_VERSION} SOVERSION ${ECHONEST_LIB_VERSION} )
+if (CMAKE_COMPILER_IS_GNUCXX)
+    add_definitions( -Werror )
+endif (CMAKE_COMPILER_IS_GNUCXX)
 
-# Clementine: "install" the headers into the binary directory
+SET( OS_SPECIFIC_LINK_LIBRARIES "" )
+IF( APPLE OR MINGW )
+  SET( OS_SPECIFIC_LINK_LIBRARIES ${QJSON_LIBRARIES} )
+ELSE( APPLE OR MINGW )
+  SET( OS_SPECIFIC_LINK_LIBRARIES ${QJSON_LDFLAGS} )
+ENDIF( APPLE OR MINGW )
+
+
+add_library( echonest SHARED ${LIBECHONEST_SRC} )
+target_link_libraries( echonest ${OS_SPECIFIC_LINK_LIBRARIES} ${QT_QTCORE_LIBRARY} ${QT_QTNETWORK_LIBRARY}  )
+set_target_properties( echonest PROPERTIES VERSION ${ECHONEST_LIB_VERSION} SOVERSION ${ECHONEST_LIB_VERSION_SONAME} )
+
 foreach(file ${LIBECHONEST_H} echonest_export.h Util.h)
   configure_file(${CMAKE_CURRENT_SOURCE_DIR}/${file}
-                 ${CMAKE_CURRENT_BINARY_DIR}/echonest/${file}
-                 COPYONLY)
+    ${CMAKE_CURRENT_BINARY_DIR}/echonest/${file}
+    COPYONLY)
 endforeach(file ${LIBECHONEST_H})

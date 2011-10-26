@@ -24,6 +24,7 @@
 #include <QDebug>
 #include "Util.h"
 #include "Util.h"
+#include "Config.h"
 
 class QNetworkReply;
 class QNetworkReply;
@@ -85,6 +86,21 @@ namespace Echonest{
         void setLoudness( qreal loudness );
         
         /**
+         * The danceability of this track, from 0 to 1.
+         */
+        qreal danceability() const;
+        void setDanceability( qreal dance );
+        
+        /**
+         * The energy of this song, from 0 to 1.
+         */
+        qreal energy() const;
+        void setEnergy( qreal energy );
+        
+        /// The following require additional fetching to read ///
+                         /** TODO: implement **/
+        
+        /**
          * If you wish to use any of the more detailed track analysis data,
          *  use this method to begin the fetch. One the returned QNetworkReply*
          *  has emitted the finished() signal, call parseFullAnalysis.
@@ -96,7 +112,7 @@ namespace Echonest{
          *  information such as mode, fadein/fadeout, confidence metrics, 
          *  and the division of the song into bars, beats, sections, and segments.
          */
-        void parseFullAnalysis( QNetworkReply* reply );
+        void parseFullAnalysis( QNetworkReply* reply ) throw( ParseError );
         
         /// The following methods *ALL REQUIRE THAT parseFullAnalysis be called first*
         
@@ -115,8 +131,8 @@ namespace Echonest{
         /**
          * Detailed status information about the analysis
          */
-        Analysis::AnalysisStatus detailedStatus() const;
-        void setDetailedStatus( Analysis::AnalysisStatus status );
+        QString detailedStatus() const;
+        void setDetailedStatus( const QString& status );
         
         /**
          * The status code of the analysis
@@ -214,7 +230,7 @@ namespace Echonest{
         SegmentList segments() const;
         void setSegments( const SegmentList& segments );
         
-        void setAnalysisUrl( const QString& analysisUrl );
+        void setAnalysisUrl( const QUrl& analysisUrl );
         
     private:        
         QSharedDataPointer<AudioSummaryData> d;

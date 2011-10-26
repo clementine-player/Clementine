@@ -34,7 +34,8 @@ class TrackData;
 
 namespace Echonest 
 {
-  
+    
+class Song;
 /**
  * Upload-based Echo Nest Track API. If you want to search The Echo Nest for songs, use the Song API. 
  *  If you want to upload your own files and retrieve the acoustic information about them, use this Track
@@ -50,6 +51,7 @@ class ECHONEST_EXPORT Track
 public:
  
   Track();
+  explicit Track( const QByteArray& id );
   Track( const Track& other );
   Track& operator=( const Track& track );
   ~Track();
@@ -107,7 +109,42 @@ public:
    */
   int bitrate() const;  
   void setBitrate( int );
-    
+  
+  /**
+   * If this track is fetched from a tracks bucket of a song search, the following information
+   *  will be populated for some id spaces.
+   */
+  
+  /**
+   * The catalog this track is from, if not a native Echo Nest track
+   */
+  QString catalog() const;
+  void setCatalog( const QString& catalog );
+  
+  /**
+   * The foreign id of this track, that is in the \c catalog catalog.
+   */
+  QByteArray foreignId() const;
+  void setForeignId( const QByteArray& id );
+  
+  /**
+   * The release image associated with this track
+   */
+  QUrl releaseImage() const;
+  void setReleaseImage( const QUrl& imgUrl );
+  
+  /**
+   * The preview url for this track, if it exists
+   */
+  QUrl previewUrl() const;
+  void setPreviewUrl( const QUrl& preview );
+  
+  /**
+   * The Echo Nest song associated with this track, if it exists
+   */
+  Song song() const;
+  void setSong( const Song& song );
+  
   /**
    * The analysis status
    */
@@ -121,6 +158,12 @@ public:
    * 
    *  Information about how to interpret the results of the audio summary can be found here:
    *    http://developer.echonest.com/docs/v4/_static/AnalyzeDocumentation_2.2.pdf
+   * 
+   * NOTE: This will return a copy of the AudioSummary object, which 
+   *       is implicitly shared. If you make modifications to the returned
+   *       summary, for example by calling parseFullAnalysis(), it will detach
+   *       and you will have to call setAudioSummary() to save the changes back
+   *       to this Song object.
    */
   AudioSummary audioSummary() const;
   void setAudioSummary( const AudioSummary& summary );
@@ -177,6 +220,7 @@ private:
     QSharedDataPointer<TrackData> d;
 };
 
+typedef QVector<Track> Tracks;
 ECHONEST_EXPORT QDebug operator<<(QDebug d, const Echonest::Track& track);
 
 
