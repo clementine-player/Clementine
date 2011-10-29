@@ -1,22 +1,19 @@
-# Vietnamese translation for clementine
-# Copyright (c) 2011 Rosetta Contributors and Canonical Ltd 2011
-# This file is distributed under the same license as the clementine package.
+# Clementine.
+# Copyright (C) 2010 David Sansome
+# This file is distributed under the same license as the Clementine package.
+# 
+# Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011.
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: clementine\n"
-"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-04-09 10:24+0000\n"
-"PO-Revision-Date: 2011-04-09 14:39+0000\n"
-"Last-Translator: Lê Trường An <xinemdungkhoc1@gmail.com>\n"
-"Language-Team: Vietnamese <vi@li.org>\n"
-"MIME-Version: 1.0\n"
+"Project-Id-Version: Clementine Music Player\n"
+"Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
+"PO-Revision-Date: 2011-10-28 17:18+0000\n"
+"Last-Translator: arnaudbienner <arnaud.bienner@gmail.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: vi\n"
-"X-Launchpad-Export-Date: 2011-04-10 05:08+0000\n"
-"X-Generator: Launchpad (build 12735)\n"
+"Plural-Forms: nplurals=1; plural=0\n"
 
 msgid " kbps"
 msgstr ""
@@ -89,15 +86,15 @@ msgstr ""
 msgid "%L1 total plays"
 msgstr ""
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n thất bại"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n kết thúc"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "còn lại %n"
 
@@ -171,13 +168,11 @@ msgstr ""
 msgid ""
 "<p>Tokens start with %, for example: %artist %album %title </p>\n"
 "\n"
-"<p>If you surround sections of text that contain a token with curly-braces, "
-"that section will be hidden if the token is empty.</p>"
+"<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
 msgstr ""
 "<p>Các dấu bắt đầu là %, ví dụ: %artist %album %title </p>\n"
 "\n"
-"<p>Nếu bạn quét chọn đoạn văn bản chứa dấu ngoặc nhọn, đoạn đó sẽ bị ẩn đi "
-"nếu dấu bắt đầu rỗng.<p>"
+"<p>Nếu bạn quét chọn đoạn văn bản chứa dấu ngoặc nhọn, đoạn đó sẽ bị ẩn đi nếu dấu bắt đầu rỗng.<p>"
 
 msgid "A Grooveshark Anywhere account is required."
 msgstr ""
@@ -194,9 +189,11 @@ msgstr ""
 "thay đổi. Có nhiều loại danh sách nhạc thông minh khác nhau và chúng cung "
 "cấp cho bạn thật nhiều cách để lựa chọn các bài hát."
 
-msgid "A song will be included in the playlist if it matches these conditions."
+msgid ""
+"A song will be included in the playlist if it matches these conditions."
 msgstr ""
-"Một bài hát sẽ được đưa vào danh sách nếu như nó đáp ứng những điều kiện sau."
+"Một bài hát sẽ được đưa vào danh sách nếu như nó đáp ứng những điều kiện "
+"sau."
 
 msgid "A-Z"
 msgstr "A-Z"
@@ -657,10 +654,11 @@ msgstr ""
 
 msgid ""
 "Clementine can be controlled remotely by an Android phone.  To enable this "
-"feature log in with the same Google account that is configured on your phone."
+"feature log in with the same Google account that is configured on your "
+"phone."
 msgstr ""
-"Clementine có thể được điều khiển từ xa bằng điện thoại Android. Để bật tính "
-"năng này bạn phải đăng nhập bằng tài khoản Google được thiết lập trên điện "
+"Clementine có thể được điều khiển từ xa bằng điện thoại Android. Để bật tính"
+" năng này bạn phải đăng nhập bằng tài khoản Google được thiết lập trên điện "
 "thoại của bạn."
 
 msgid "Clementine can show a message when the track changes."
@@ -670,12 +668,13 @@ msgid ""
 "Clementine could not load any projectM visualisations.  Check that you have "
 "installed Clementine properly."
 msgstr ""
-"Clementine không thể nạp hiệu ứng hình ảnh ảo projectM. XIn chắc rằng bạn đã "
-"cài đặt Clementine đúng cách."
+"Clementine không thể nạp hiệu ứng hình ảnh ảo projectM. XIn chắc rằng bạn đã"
+" cài đặt Clementine đúng cách."
 
 msgid ""
 "Clementine couldn't fetch your subscription status since there are problems "
-"with your connection. Played tracks will be cached and sent later to Last.fm."
+"with your connection. Played tracks will be cached and sent later to "
+"Last.fm."
 msgstr ""
 
 msgid "Clementine image viewer"
@@ -784,16 +783,16 @@ msgid ""
 "Couldn't find a muxer for %1, check you have the correct GStreamer plugins "
 "installed"
 msgstr ""
-"Không tìm thấy thiết bị ghép kênh cho %1, hãy chắn chắn là bạn đã cài đặt đủ "
-"các phần bổ sung của GStreamer"
+"Không tìm thấy thiết bị ghép kênh cho %1, hãy chắn chắn là bạn đã cài đặt đủ"
+" các phần bổ sung của GStreamer"
 
 #, qt-format
 msgid ""
 "Couldn't find an encoder for %1, check you have the correct GStreamer "
 "plugins installed"
 msgstr ""
-"Không tim thấy bộ mã hóa cho %1, hãy chắc chắn là bạn đã cài đặt đủ các phần "
-"bổ sung của GStreamer"
+"Không tim thấy bộ mã hóa cho %1, hãy chắc chắn là bạn đã cài đặt đủ các phần"
+" bổ sung của GStreamer"
 
 msgid "Couldn't load the last.fm radio station"
 msgstr "Không thể nạp kênh ra-đi-ô last.fm"
@@ -1197,8 +1196,8 @@ msgstr "Chưa bao giờ được phát"
 
 msgid "Except between tracks on the same album or in the same CUE sheet"
 msgstr ""
-"Ngoại trừ giữa các track trong album tương tự hoặc trong danh sách CUE tương "
-"tự"
+"Ngoại trừ giữa các track trong album tương tự hoặc trong danh sách CUE tương"
+" tự"
 
 msgid "Extras"
 msgstr "Hiệu ứng"
@@ -1457,8 +1456,8 @@ msgid "Identifying song"
 msgstr "Đang nhận diện bài hát"
 
 msgid ""
-"If you continue, this device will work slowly and songs copied to it may not "
-"work."
+"If you continue, this device will work slowly and songs copied to it may not"
+" work."
 msgstr ""
 "Nếu bạn tiếp tục, thiết bị này sẽ hoạt động chậm lại và các bài hát đã được "
 "sao chép có thể sẽ không phát được."
@@ -1467,8 +1466,8 @@ msgid ""
 "If you use the remote on more than one computer, this name will help you "
 "choose which one to connect to on your phone."
 msgstr ""
-"Nếu bạn điều khiển nhiều hơn một máy tính, tên này sẽ giúp bạn chọn máy tính "
-"cần kết nối với điện thoại của bạn."
+"Nếu bạn điều khiển nhiều hơn một máy tính, tên này sẽ giúp bạn chọn máy tính"
+" cần kết nối với điện thoại của bạn."
 
 msgid "Ignore \"The\" in artist names"
 msgstr "Lượt bỏ \"The\" trong phần tên nghệ sĩ"
@@ -1941,8 +1940,8 @@ msgstr ""
 msgid ""
 "No matches found.  Clear the search box to show the whole playlist again."
 msgstr ""
-"Không có kết quả nào trùng khớp. Hãy xóa nội dung trong hộp tìm kiếm để hiện "
-"danh sách nhạc trở lại."
+"Không có kết quả nào trùng khớp. Hãy xóa nội dung trong hộp tìm kiếm để hiện"
+" danh sách nhạc trở lại."
 
 msgid "No short blocks"
 msgstr ""
@@ -2825,8 +2824,8 @@ msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
 msgstr ""
-"Phiên bản Clementine bạn vừa cập nhật yêu cầu quét thư viện vì các tính năng "
-"mới được liệt kê bên dưới:"
+"Phiên bản Clementine bạn vừa cập nhật yêu cầu quét thư viện vì các tính năng"
+" mới được liệt kê bên dưới:"
 
 msgid "There was a problem fetching the metadata from Magnatune"
 msgstr "Có vấn đề khi lấy siêu dữ liệu từ Magnatune"
@@ -2867,16 +2866,15 @@ msgid ""
 "This action will create a database which could be as big as 150 MB.\n"
 "Do you want to continue anyway?"
 msgstr ""
-"Thao tác này sẽ tạo một cơ sở dữ liệu và dung lượng của nó có thể đạt "
-"150MB.\n"
+"Thao tác này sẽ tạo một cơ sở dữ liệu và dung lượng của nó có thể đạt 150MB.\n"
 "Bạn có muốn tiếp tục không?"
 
 msgid "This album is not available in the requested format"
 msgstr "Album này không có sẵn trong định dạng yêu cầu"
 
 msgid ""
-"This device must be connected and opened before Clementine can see what file "
-"formats it supports."
+"This device must be connected and opened before Clementine can see what file"
+" formats it supports."
 msgstr ""
 "Thiết bị này phải được kết nối và mở trước để Clementine có thể nhận biết "
 "được các định dạng mà nó hỗ trợ."
@@ -3124,14 +3122,11 @@ msgid "When Clementine starts"
 msgstr "Khi Clementine khởi động"
 
 msgid ""
-"When looking for album art Clementine will first look for picture files that "
-"contain one of these words.\n"
+"When looking for album art Clementine will first look for picture files that contain one of these words.\n"
 "If there are no matches then it will use the largest image in the directory."
 msgstr ""
-"Khi tìm kiếm ảnh bìa album Clementine sẽ tìm các tập tin ảnh chứa một trong "
-"các từ này trước.\n"
-"Nếu không có kết quả nào trùng khớp sẽ sử dụng bức ảnh lớn nhất trong thư "
-"mục."
+"Khi tìm kiếm ảnh bìa album Clementine sẽ tìm các tập tin ảnh chứa một trong các từ này trước.\n"
+"Nếu không có kết quả nào trùng khớp sẽ sử dụng bức ảnh lớn nhất trong thư mục."
 
 msgid "WiFi MAC Address"
 msgstr "Địa chỉ MAC của Wifi"
@@ -3215,31 +3210,33 @@ msgid ""
 msgstr ""
 
 msgid ""
-"You can listen to Magnatune songs for free without an account.  Purchasing a "
-"membership removes the messages at the end of each track."
+"You can listen to Magnatune songs for free without an account.  Purchasing a"
+" membership removes the messages at the end of each track."
 msgstr ""
-"Bạn được nghe các bài hát từ Magnatune miễn phí và không cần tài khoản. Việc "
-"trả phí thành viên có thể loại bỏ các tin nhắn ở cuối mỗi bài hát."
+"Bạn được nghe các bài hát từ Magnatune miễn phí và không cần tài khoản. Việc"
+" trả phí thành viên có thể loại bỏ các tin nhắn ở cuối mỗi bài hát."
 
 msgid "You can listen to background streams at the same time as other music."
-msgstr "Bạn có thể nghe âm thanh nền một cách riêng lẻ hay được lồng vào nhạc."
+msgstr ""
+"Bạn có thể nghe âm thanh nền một cách riêng lẻ hay được lồng vào nhạc."
 
 msgid ""
-"You can scrobble tracks for free, but only <span style=\" font-weight:600;"
-"\">paid subscribers</span> can stream Last.fm radio from Clementine."
+"You can scrobble tracks for free, but only <span style=\" font-"
+"weight:600;\">paid subscribers</span> can stream Last.fm radio from "
+"Clementine."
 msgstr ""
-"Bạn có thể gửi thông tin các track một cách miễn phí nhưng chỉ  <span style="
-"\" font-weight:600;\">những khách hàng đã thanh toán phí</span> mới có thể "
-"lấy dữ liệu của kênh ra-đi-ô Last.fm từ Clementine."
+"Bạn có thể gửi thông tin các track một cách miễn phí nhưng chỉ  <span "
+"style=\" font-weight:600;\">những khách hàng đã thanh toán phí</span> mới có"
+" thể lấy dữ liệu của kênh ra-đi-ô Last.fm từ Clementine."
 
 msgid ""
-"You can use your Wii Remote as a remote control for Clementine.  <a href="
-"\"http://www.clementine-player.org/wiimote\">See the page on the Clementine "
-"wiki</a> for more information.\n"
+"You can use your Wii Remote as a remote control for Clementine.  <a "
+"href=\"http://www.clementine-player.org/wiimote\">See the page on the "
+"Clementine wiki</a> for more information.\n"
 msgstr ""
-"Bạn có thể điều khiển Clementine từ xa với Wii Remote.  <a href=\"http://www."
-"clementine-player.org/wiimote\">Xem bài viết trên Clementine wiki<a> để biết "
-"thêm chi tiết.\n"
+"Bạn có thể điều khiển Clementine từ xa với Wii Remote.  <a href=\"http://www"
+".clementine-player.org/wiimote\">Xem bài viết trên Clementine wiki<a> để "
+"biết thêm chi tiết.\n"
 
 msgid "You do not have a Grooveshark Anywhere account."
 msgstr ""
@@ -3271,8 +3268,8 @@ msgid "You will need to restart Clementine if you change the language."
 msgstr "Bạn cần khởi động lại Clementine nếu bạn thay đổi ngôn ngữ."
 
 msgid ""
-"You will not be able to play Last.fm radio stations as you are not a Last.fm "
-"subscriber."
+"You will not be able to play Last.fm radio stations as you are not a Last.fm"
+" subscriber."
 msgstr ""
 
 #, qt-format
@@ -3315,7 +3312,7 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "Zero"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "và %n bài hát"
 
@@ -3404,7 +3401,7 @@ msgstr "options"
 msgid "press enter"
 msgstr ""
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "xóa %n bài hát"
 
@@ -3424,135 +3421,4 @@ msgstr "stop"
 msgid "track %1"
 msgstr "track %1"
 
-#~ msgid "Are you sure you want to install the following scripts?"
-#~ msgstr "Bạn có chắc sẽ cài đặt các lệnh kịch bản sau đây?"
 
-#~ msgid "Clementine scripts"
-#~ msgstr "Lệnh kịch bản Clementine"
-
-#~ msgid "Developer mode"
-#~ msgstr "Chế độ cho người phát triển"
-
-#~ msgid "Disable"
-#~ msgstr "Vô hiệu hoá"
-
-#~ msgid "Enable"
-#~ msgstr "Bật"
-
-#~ msgid "Error installing script"
-#~ msgstr "Lỗi cài đặt lệnh kịch bản"
-
-#~ msgid "Error opening script archive"
-#~ msgstr "Lỗi khi mở lưu trữ lệnh kịch bản"
-
-#~ msgid "Get new scripts"
-#~ msgstr "Lấy các lệnh kịch bản mới"
-
-#~ msgid "Global Shortcuts"
-#~ msgstr "Phím tắt chung"
-
-#~ msgid "Install from file..."
-#~ msgstr "Cài đặt từ tập tin..."
-
-#~ msgid "Install script file"
-#~ msgstr "Cài tập tin kịch bản"
-
-#~ msgid "Install scripts"
-#~ msgstr "Cài các tập lệnh kịch bản"
-
-#~ msgid "My scripts"
-#~ msgstr "Các tập lệnh kịch bản của tôi"
-
-#~ msgid "Please fill in the blanks to login into Last.fm"
-#~ msgstr "Vui lòng điền vào chỗ trống để đăng nhập vào Last.fm"
-
-#~ msgid "Reload"
-#~ msgstr "Nạp lại"
-
-#~ msgid "Script Manager"
-#~ msgstr "Trình quản lý tập lệnh"
-
-#~ msgid "Settings..."
-#~ msgstr "Thiết lập..."
-
-#~ msgid "Some files failed to install.  The script may not work correctly."
-#~ msgstr ""
-#~ "Cài đặt thất bại một số tập tin. Có thể lệnh kịch bản đã làm việc không "
-#~ "đúng."
-
-#~ msgid "The '%1' script was modified, you might have to reload it"
-#~ msgstr "Lệnh kịch bản '%1' đã được chỉnh sửa, hãy nạp lại nó"
-
-#~ msgid "This is not a valid Clementine script file."
-#~ msgstr "Đây không phải là một tập tin lệnh kịch bản Clementine hợp lệ."
-
-#~ msgid ""
-#~ "Warning: scripts have full access to your computer and your music.  Only "
-#~ "install scripts that you trust."
-#~ msgstr ""
-#~ "Cảnh báo: các lệnh kịch bản được toàn quyền truy cập vào máy tính và nhạc "
-#~ "của bạn. Chỉ cài đặt khi bạn tin tưởng."
-
-#~ msgid "%1 other listeners"
-#~ msgstr "%1 người nghe khác"
-
-#~ msgid "%1 total plays"
-#~ msgstr "%1 tổng số phát"
-
-#~ msgid "Text color"
-#~ msgstr "Màu văn bản"
-
-#~ msgid ""
-#~ "In dynamic mode new tracks will be chosen and added to the playlist every "
-#~ "time a song finishes.  Enabling dynamic mode will ignore any size limit "
-#~ "you set on the playlist."
-#~ msgstr ""
-#~ "Trong chế độ năng động, các track sẽ được chọn và thêm vào danh sách mỗi "
-#~ "lần nó được phát xong. Bật chế độ năng động cũng sẽ bỏ qua giới hạn sức "
-#~ "chứa mà bạn đã thiết lập cho danh sách."
-
-#~ msgid "Enter a name for the new playlist"
-#~ msgstr "Nhập tên cho danh sách mới"
-
-#~ msgid "Generating audio fingerprint and fetching results..."
-#~ msgstr "Tạo dấu hiệu cho âm thanh và lấy kết quả..."
-
-#~ msgid "Help"
-#~ msgstr "Trợ giúp"
-
-#~ msgid "Enqueue to playlist"
-#~ msgstr "Xếp vào danh sách bài hát"
-
-#~ msgid ""
-#~ "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm *."
-#~ "tiff)"
-#~ msgstr ""
-#~ "Ảnh (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm *.tiff)"
-
-#~ msgid "Images (*.jpg)"
-#~ msgstr "Ảnh (*.jpg)"
-
-#~ msgid "Save Album Cover"
-#~ msgstr "Lưu bìa album"
-
-#~ msgid "Results fetched"
-#~ msgstr "Kết quả nhận được"
-
-#~ msgid "Update Library"
-#~ msgstr "Cập nhật Thư viện"
-
-#~ msgid "Low"
-#~ msgstr "Thấp"
-
-#~ msgid "Normal"
-#~ msgstr "Bình thường"
-
-#~ msgid ""
-#~ "The version of Clementine you've just updated to requires a full library "
-#~ "rescan because of the new features listed below:<ul>"
-#~ msgstr ""
-#~ "Phiên bản Clementine bạn vừa cập nhật yêu cầu quét thư viện vì các tính "
-#~ "năng mới được liệt kê bên dưới:<ul>"
-
-#~ msgid "Identifying song..."
-#~ msgstr "Đang xác định bài hát..."

@@ -1,23 +1,20 @@
-# German translation for clementine
-# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
-# This file is distributed under the same license as the clementine package.
-#
+# Clementine.
+# Copyright (C) 2010 David Sansome
+# This file is distributed under the same license as the Clementine package.
+# 
+# Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
 # Martin Herkt <luck3r@phicode.de>, 2010.
 msgid ""
 msgstr ""
-"Project-Id-Version: clementine\n"
-"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-04-09 10:24+0000\n"
-"PO-Revision-Date: 2011-04-11 21:24+0000\n"
-"Last-Translator: Alexander Minges <Unknown>\n"
-"Language-Team: German <de@li.org>\n"
-"MIME-Version: 1.0\n"
+"Project-Id-Version: Clementine Music Player\n"
+"Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
+"PO-Revision-Date: 2011-10-28 17:18+0000\n"
+"Last-Translator: arnaudbienner <arnaud.bienner@gmail.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: de\n"
-"X-Launchpad-Export-Date: 2011-04-12 05:12+0000\n"
-"X-Generator: Launchpad (build 12735)\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
 msgid " kbps"
 msgstr ""
@@ -90,15 +87,15 @@ msgstr ""
 msgid "%L1 total plays"
 msgstr ""
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n fehlgeschlagen"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n konvertiert"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n verbleibend"
 
@@ -172,13 +169,11 @@ msgstr ""
 msgid ""
 "<p>Tokens start with %, for example: %artist %album %title </p>\n"
 "\n"
-"<p>If you surround sections of text that contain a token with curly-braces, "
-"that section will be hidden if the token is empty.</p>"
+"<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
 msgstr ""
 "<p>Schlüsselwörter beginnen mit %, zum Beispiel: %artist %album %title </p>\n"
 "\n"
-"<p>Steht ein Textbereich in geschweiften Klammern, wird dieser nicht "
-"angezeigt, falls das Schlüsselwort leer ist.</p>"
+"<p>Steht ein Textbereich in geschweiften Klammern, wird dieser nicht angezeigt, falls das Schlüsselwort leer ist.</p>"
 
 msgid "A Grooveshark Anywhere account is required."
 msgstr ""
@@ -196,7 +191,8 @@ msgstr ""
 "Wiedergabelisten, die unterschiedliche Möglichkeiten bieten, eine Auswahl "
 "von Songs zu treffen."
 
-msgid "A song will be included in the playlist if it matches these conditions."
+msgid ""
+"A song will be included in the playlist if it matches these conditions."
 msgstr ""
 "Ein Titel wird in die Wiedergabeliste aufgenommen, wenn er die folgenden "
 "Bedingungen erfüllt."
@@ -633,8 +629,8 @@ msgstr "Cover selbst auswählen"
 msgid ""
 "Choose the websites you want Clementine to use when searching for lyrics."
 msgstr ""
-"Internetseite auswählen, welche Clementine verwenden soll um nach Liedtexten "
-"zu suchen"
+"Internetseite auswählen, welche Clementine verwenden soll um nach Liedtexten"
+" zu suchen"
 
 msgid "Classical"
 msgstr "Klassisch"
@@ -661,12 +657,13 @@ msgid ""
 "Clementine can automatically convert the music you copy to this device into "
 "a format that it can play."
 msgstr ""
-"Clementine kann die Musik, die Sie auf dieses Gerät kopieren, automatisch in "
-"ein Format konvertieren, welches das Gerät abspielen kann."
+"Clementine kann die Musik, die Sie auf dieses Gerät kopieren, automatisch in"
+" ein Format konvertieren, welches das Gerät abspielen kann."
 
 msgid ""
 "Clementine can be controlled remotely by an Android phone.  To enable this "
-"feature log in with the same Google account that is configured on your phone."
+"feature log in with the same Google account that is configured on your "
+"phone."
 msgstr ""
 "Clementine kann von Android aus ferngesteuert werden. Um diese Funktion zu "
 "aktivieren mit dem auf dem Telefon eingerichteten Google-Account anmelden."
@@ -678,12 +675,13 @@ msgid ""
 "Clementine could not load any projectM visualisations.  Check that you have "
 "installed Clementine properly."
 msgstr ""
-"Clementine konnte keine projectM-Visualisierungen laden. Überprüfen Sie Ihre "
-"Installation."
+"Clementine konnte keine projectM-Visualisierungen laden. Überprüfen Sie Ihre"
+" Installation."
 
 msgid ""
 "Clementine couldn't fetch your subscription status since there are problems "
-"with your connection. Played tracks will be cached and sent later to Last.fm."
+"with your connection. Played tracks will be cached and sent later to "
+"Last.fm."
 msgstr ""
 
 msgid "Clementine image viewer"
@@ -1324,8 +1322,8 @@ msgid ""
 "Forgetting a device will remove it from this list and Clementine will have "
 "to rescan all the songs again next time you connect it."
 msgstr ""
-"Das Vergessen eines Geräts wird es aus dieser Liste entfernen und Clementine "
-"wird beim nächsten Verbinden alle Stücke erneut erfassen müssen."
+"Das Vergessen eines Geräts wird es aus dieser Liste entfernen und Clementine"
+" wird beim nächsten Verbinden alle Stücke erneut erfassen müssen."
 
 msgid "Form"
 msgstr "Formular"
@@ -1464,8 +1462,8 @@ msgid "Identifying song"
 msgstr "Lied erkennen"
 
 msgid ""
-"If you continue, this device will work slowly and songs copied to it may not "
-"work."
+"If you continue, this device will work slowly and songs copied to it may not"
+" work."
 msgstr ""
 "Wenn Sie fortfahren, wird das Gerät langsam arbeiten und kopierte Titel "
 "könnten nicht abspielbar sein."
@@ -2833,8 +2831,8 @@ msgid ""
 "rescan because of the new features listed below:"
 msgstr ""
 "Die Clementine Version, auf die Sie gerade aktualisiert haben, erfordert "
-"eine komplette Aktualisierung Ihrer Musiksammlung, damit die folgenden neuen "
-"Funktionen genutzt werden können:"
+"eine komplette Aktualisierung Ihrer Musiksammlung, damit die folgenden neuen"
+" Funktionen genutzt werden können:"
 
 msgid "There was a problem fetching the metadata from Magnatune"
 msgstr "Beim Holen der Metadaten von Magnatune ist ein Fehler aufgetreten"
@@ -2850,8 +2848,8 @@ msgid ""
 "There were problems deleting some songs.  The following files could not be "
 "deleted:"
 msgstr ""
-"Beim Löschen einiger Titel ist ein Fehler aufgetreten. Die folgenden Dateien "
-"konnten nicht gelöscht werden:"
+"Beim Löschen einiger Titel ist ein Fehler aufgetreten. Die folgenden Dateien"
+" konnten nicht gelöscht werden:"
 
 msgid ""
 "These files will be deleted from disk, are you sure you want to continue?"
@@ -2887,8 +2885,8 @@ msgid "This album is not available in the requested format"
 msgstr "Das Album ist im gewünschten Format nicht verfügbar"
 
 msgid ""
-"This device must be connected and opened before Clementine can see what file "
-"formats it supports."
+"This device must be connected and opened before Clementine can see what file"
+" formats it supports."
 msgstr ""
 "Dieses Gerät muss verbunden und geöffnet sein, bevor Clementine feststellen "
 "kann, welche Dateiformate es unterstützt."
@@ -3136,14 +3134,11 @@ msgid "When Clementine starts"
 msgstr "Bei Programmstart"
 
 msgid ""
-"When looking for album art Clementine will first look for picture files that "
-"contain one of these words.\n"
+"When looking for album art Clementine will first look for picture files that contain one of these words.\n"
 "If there are no matches then it will use the largest image in the directory."
 msgstr ""
-"Auf der Suche nach Cover-Bildern wird Clementine zuerst nach Bilddateien "
-"suchen, die eines dieser Wörter enthalten.\n"
-"Falls es keine Treffer gibt, wird das größte Bild aus dem Verzeichnis "
-"ausgewählt."
+"Auf der Suche nach Cover-Bildern wird Clementine zuerst nach Bilddateien suchen, die eines dieser Wörter enthalten.\n"
+"Falls es keine Treffer gibt, wird das größte Bild aus dem Verzeichnis ausgewählt."
 
 msgid "WiFi MAC Address"
 msgstr "W-LAN MAC Adresse"
@@ -3227,8 +3222,8 @@ msgid ""
 msgstr ""
 
 msgid ""
-"You can listen to Magnatune songs for free without an account.  Purchasing a "
-"membership removes the messages at the end of each track."
+"You can listen to Magnatune songs for free without an account.  Purchasing a"
+" membership removes the messages at the end of each track."
 msgstr ""
 "Sie können ohne Benutzerkonto Musik von Magnatune hören. Um die Hinweise am "
 "Ende der einzelnen Stücke zu entfernen, müssen Sie eine Mitgliedschaft "
@@ -3239,20 +3234,21 @@ msgstr ""
 "Sie können zur gleichen Zeit Hintergrundstreams und andere Musik hören."
 
 msgid ""
-"You can scrobble tracks for free, but only <span style=\" font-weight:600;"
-"\">paid subscribers</span> can stream Last.fm radio from Clementine."
+"You can scrobble tracks for free, but only <span style=\" font-"
+"weight:600;\">paid subscribers</span> can stream Last.fm radio from "
+"Clementine."
 msgstr ""
 "Sie können Musik kostenlos \"scrobbeln\", aber nur <span style=\"font-"
 "weight:600;\">zahlende Last.fm-Kunden</span> können Last.fm-Radio mit "
 "Clementine hören."
 
 msgid ""
-"You can use your Wii Remote as a remote control for Clementine.  <a href="
-"\"http://www.clementine-player.org/wiimote\">See the page on the Clementine "
-"wiki</a> for more information.\n"
+"You can use your Wii Remote as a remote control for Clementine.  <a "
+"href=\"http://www.clementine-player.org/wiimote\">See the page on the "
+"Clementine wiki</a> for more information.\n"
 msgstr ""
-"Sie können Ihre Wii-Fernbedienung als Fernbedienung für Clementine benutzen. "
-"Mehr Informationen dazu gibt es auf der <a href=\"http://www.clementine-"
+"Sie können Ihre Wii-Fernbedienung als Fernbedienung für Clementine benutzen."
+" Mehr Informationen dazu gibt es auf der <a href=\"http://www.clementine-"
 "player.org/wiimote\">entsprechenden Seite im Clementine Wiki.</a>\n"
 
 msgid "You do not have a Grooveshark Anywhere account."
@@ -3278,15 +3274,15 @@ msgid ""
 "shortcuts in Clementine."
 msgstr ""
 "Öffnen Sie die Systemeinstellungen und aktivieren Sie \"<span style=\" font-"
-"style:italic;\">Zugriff für Hilfsgeräte aktivieren</span>\" in \"Bedienhilfen"
-"\" um Clementines Tastenkürzel zu benutzen."
+"style:italic;\">Zugriff für Hilfsgeräte aktivieren</span>\" in "
+"\"Bedienhilfen\" um Clementines Tastenkürzel zu benutzen."
 
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Sie müssen Clementine nach dem Ändern der Sprache neustarten."
 
 msgid ""
-"You will not be able to play Last.fm radio stations as you are not a Last.fm "
-"subscriber."
+"You will not be able to play Last.fm radio stations as you are not a Last.fm"
+" subscriber."
 msgstr ""
 
 #, qt-format
@@ -3330,7 +3326,7 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "Null"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "%n Stücke hinzufügen"
 
@@ -3419,7 +3415,7 @@ msgstr "Einstellungen"
 msgid "press enter"
 msgstr ""
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "%n Stücke entfernen"
 
@@ -3439,415 +3435,4 @@ msgstr "Anhalten"
 msgid "track %1"
 msgstr "Stück %1"
 
-#~ msgid "Are you sure you want to install the following scripts?"
-#~ msgstr "Sind Sie sicher, die folgenden Skripte installieren zu wollen?"
 
-#~ msgid "Clementine scripts"
-#~ msgstr "Clementine Skripte"
-
-#~ msgid "Developer mode"
-#~ msgstr "Entwicklermodus"
-
-#~ msgid "Disable"
-#~ msgstr "Deaktivieren"
-
-#~ msgid "Enable"
-#~ msgstr "Aktivieren"
-
-#~ msgid "Error installing script"
-#~ msgstr "Fehler beim Installieren vom Skript"
-
-#~ msgid "Error opening script archive"
-#~ msgstr "Fehler beim Öffnen des Skript-Archivs"
-
-#~ msgid "Get new scripts"
-#~ msgstr "Neue Skripte holen"
-
-#~ msgid "Global Shortcuts"
-#~ msgstr "Globale Tastenkürzel"
-
-#~ msgid "Install from file..."
-#~ msgstr "Aus Datei installieren ..."
-
-#~ msgid "Install script file"
-#~ msgstr "Skript-Datei installieren"
-
-#~ msgid "Install scripts"
-#~ msgstr "Skripte installieren"
-
-#~ msgid "My scripts"
-#~ msgstr "Meine Skripte"
-
-#~ msgid "Please fill in the blanks to login into Last.fm"
-#~ msgstr ""
-#~ "Bitte füllen Sie die leeren Felder aus, um sich bei Last.fm anzumelden."
-
-#~ msgid "Reload"
-#~ msgstr "Neu Laden"
-
-#~ msgid "Script Manager"
-#~ msgstr "Skript-Verwaltung"
-
-#~ msgid "Settings..."
-#~ msgstr "Einstellungen..."
-
-#~ msgid "Some files failed to install.  The script may not work correctly."
-#~ msgstr ""
-#~ "Einige Dateien konnten nicht installiert werden. Das Skript funktioniert "
-#~ "eventuell nicht korrekt."
-
-#~ msgid "The '%1' script was modified, you might have to reload it"
-#~ msgstr "Das Skript »%1« wurde geändert, Sie werden es neu laden müssen"
-
-#~ msgid "This is not a valid Clementine script file."
-#~ msgstr "Das ist keine gültige Skript-Datei für Clementine."
-
-#~ msgid ""
-#~ "Warning: scripts have full access to your computer and your music.  Only "
-#~ "install scripts that you trust."
-#~ msgstr ""
-#~ "Hinweis: Die Skripte haben vollen Zugang zu Ihrem Computer und Ihrer "
-#~ "Musik. Installieren Sie nur vertrauenswürdige Skripte."
-
-#~ msgid "%1 other listeners"
-#~ msgstr "%1 andere Zuhörer"
-
-#~ msgid "%1 total plays"
-#~ msgstr "%1 mal abgespielt"
-
-#~ msgid "Text color"
-#~ msgstr "Textfarbe"
-
-#~ msgid ""
-#~ "In dynamic mode new tracks will be chosen and added to the playlist every "
-#~ "time a song finishes.  Enabling dynamic mode will ignore any size limit "
-#~ "you set on the playlist."
-#~ msgstr ""
-#~ "Im dynamischen Modus werden jedes mal neue Stücke zur Wiedergabeliste "
-#~ "hinzugefügt sobald ein Lied endet. Dieser Modus ignoriert die "
-#~ "Größenbeschränkung der Wiedergabeliste."
-
-#~ msgid "Similar Artists to %1"
-#~ msgstr "Ähnliche Interpreten wie %1"
-
-#~ msgid "%1's Library"
-#~ msgstr "%1s Musiksammlung"
-
-#~ msgid "Not enough neighbours"
-#~ msgstr "Nicht genügend Nachbarn"
-
-#~ msgid "[click to edit]"
-#~ msgstr "[zum Bearbeiten klicken]"
-
-#~ msgid "Editing %n tracks"
-#~ msgstr "%n Stücke bearbeiten"
-
-#~ msgid "Loading audio engine"
-#~ msgstr "Audio Engine wird geladen"
-
-#~ msgid "ASF"
-#~ msgstr "ASF"
-
-#~ msgid ""
-#~ "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm *."
-#~ "tiff)"
-#~ msgstr ""
-#~ "Bilder (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm *."
-#~ "tiff)"
-
-#~ msgid "Ogg FLAC"
-#~ msgstr "Ogg FLAC"
-
-#~ msgid "Configure Clementine..."
-#~ msgstr "Clementine einrichten..."
-
-#~ msgid "Add media..."
-#~ msgstr "Medien hinzufügen..."
-
-#~ msgid "Radio"
-#~ msgstr "Radio"
-
-#~ msgid "Help"
-#~ msgstr "Hilfe"
-
-#~ msgid "Options"
-#~ msgstr "Einstellungen"
-
-#~ msgid "Enter your Last.fm details below:"
-#~ msgstr "Geben Sie hier Ihre Last.fm Daten ein:"
-
-#~ msgid "Behaviour"
-#~ msgstr "Verhalten"
-
-#~ msgid "No fadeout"
-#~ msgstr "Nicht ausblenden"
-
-#~ msgid "Fadeout duration"
-#~ msgstr "Dauer"
-
-#~ msgid "Fadeout"
-#~ msgstr "Ausblenden"
-
-#~ msgid "Hide %1"
-#~ msgstr "%1 ausblenden"
-
-#~ msgid "Hide..."
-#~ msgstr "Verstecken..."
-
-#~ msgid "Show section"
-#~ msgstr "Spalten"
-
-#~ msgid "My Loved Tracks"
-#~ msgstr "Meine \"geliebten\" Stücke"
-
-#~ msgid "My Neighbourhood"
-#~ msgstr "Meine Nachbarschaft"
-
-#~ msgid "Neighbours"
-#~ msgstr "Nachbarn"
-
-#~ msgid "%1's Neighbour Radio"
-#~ msgstr "Nachbar-Radio von %1"
-
-#~ msgid "%1's Recommended Radio"
-#~ msgstr "Empfohlenes Radio von %1"
-
-#~ msgid "%1's Neighborhood"
-#~ msgstr "Nachbarschaft von %1"
-
-#~ msgid "Tag Radio: %1"
-#~ msgstr "Tag-Radio: %1"
-
-#~ msgid "Choose manual cover..."
-#~ msgstr "Cover selbst auswählen..."
-
-#~ msgid "Version"
-#~ msgstr "Version"
-
-#~ msgid "%1's Radio Station"
-#~ msgstr "Radiostationen von %1"
-
-#~ msgid "%1's Loved Tracks"
-#~ msgstr "\"geliebte\" Stücke von %1"
-
-#~ msgid "Save this stream in the Radio tab"
-#~ msgstr "Stream zu \"Meine Internetradios\" hinzufügen"
-
-#~ msgid ""
-#~ "Note that you must be a <span style=\" font-weight:600;\">paid "
-#~ "subscriber</span> to listen to Last.fm radio from within Clementine."
-#~ msgstr ""
-#~ "Sie müssen zahlender Last.fm Kunde sein um Last.fm über Clementine hören "
-#~ "zu können"
-
-#~ msgid "Select engine"
-#~ msgstr "Engine:"
-
-#~ msgid "Unknown audio engine \"%1\". Choices are:"
-#~ msgstr "Ubekannte Engine \"%1\". Wahlmöglichkeiten:"
-
-#~ msgid "Last.fm Loved Tracks - %1"
-#~ msgstr "Geliebte Last.fm Stücke - %1"
-
-#~ msgid "Couldn't load the last.fm radio station: %1"
-#~ msgstr "Konnte Last.fm Station nicht laden: %1"
-
-#~ msgid "Double-clicking a song clears the playlist first"
-#~ msgstr "Stück doppelklicken um Wiedergabeliste zu ersetzen"
-
-#~ msgid "Music (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma)"
-#~ msgstr "Musik (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma)"
-
-#~ msgid "Playlists (*.m3u *.xspf *.xml)"
-#~ msgstr "Wiedergabelisten (*.m3u *.xspf *.xml)"
-
-#~ msgid "Configure global shortcuts..."
-#~ msgstr "Tastenkürzel einrichten..."
-
-#~ msgid "Visualisations"
-#~ msgstr "Visualisierung"
-
-#~ msgid "Clementine Visualisation"
-#~ msgstr "Clementine Visualisierung"
-
-#~ msgid "Select visualisations..."
-#~ msgstr "Visualisierung auswählen..."
-
-#~ msgid "Close visualisation"
-#~ msgstr "Visualisierung schließen"
-
-#~ msgid "Visualisations Settings"
-#~ msgstr "Einstellungen"
-
-#~ msgid "Visualisation mode"
-#~ msgstr "Art der Visualisierung"
-
-#~ msgid "Random visualisation"
-#~ msgstr "Zufällige Visualisierung"
-
-#~ msgid "Select visualisations"
-#~ msgstr "Visualisierung auswählen"
-
-#~ msgid "Delete originals"
-#~ msgstr "Originale löschen"
-
-#~ msgid "Delete files..."
-#~ msgstr "Dateien löschen..."
-
-#~ msgid "Overwrite files"
-#~ msgstr "Dateien überschreiben"
-
-#~ msgid "File naming scheme"
-#~ msgstr "Dateinamensschema"
-
-#~ msgid "Last.fm Recommended Radio - %1"
-#~ msgstr "Empfohlenes Last.fm Radio - %1"
-
-#~ msgid "MP4"
-#~ msgstr "MP4"
-
-#~ msgid "Connected"
-#~ msgstr "Verbunden"
-
-#~ msgid "Capacity"
-#~ msgstr "Kapazität"
-
-#~ msgid "Disconnect device"
-#~ msgstr "Gerät trennen"
-
-#~ msgid "Queue this track"
-#~ msgstr "Track einreihen"
-
-#~ msgid "available"
-#~ msgstr "verfügbar"
-
-#~ msgid "Connect Wii remotes to Clementine using active/deactive action"
-#~ msgstr ""
-#~ "Wii remote mit Hilfe der Aktion \"Aktivieren/Deaktivieren\" verbinden"
-
-#~ msgid "Enable Wii remote support in Clementine"
-#~ msgstr "Wii remote Unterstützung in Clementine aktivieren"
-
-#~ msgid "Use notifications to report Wii remote status"
-#~ msgstr "Benachrichtigungen für den Status der Wii remote anzeigen"
-
-#~ msgid "Use Wii remote"
-#~ msgstr "Wii remote benutzen"
-
-#~ msgid "Stretch columns to fit window"
-#~ msgstr "Spalten an Fenstergröße anpassen"
-
-#~ msgid "Enable shortcuts only when application is focused"
-#~ msgstr "Kürzel nur"
-
-#~ msgid "Enter a name for the new playlist"
-#~ msgstr "Name der neuen Wiedergabeliste"
-
-#~ msgid "Radio service couldn't be loaded :-("
-#~ msgstr "Radiodienst konnte nicht geladen werden :-("
-
-#~ msgid "Update Library"
-#~ msgstr "Sammlung aktualisieren"
-
-#~ msgid "Wiiremote %1: connected"
-#~ msgstr "Wii-Fernbedienung %1: verbunden"
-
-#~ msgid "Wiiremote %1: disactived"
-#~ msgstr "Wii-Fernbedienung %1: deaktiviert"
-
-#~ msgid "Wiiremote %1: actived"
-#~ msgstr "Wii-Fernbedienung %1: aktiviert"
-
-#~ msgid "Wiiremote %1: critical battery (%2%) "
-#~ msgstr "Wii-Fernbedienung %1: Batterien sehr schwach (%2%) "
-
-#~ msgid "Wiiremote %1: disconnected"
-#~ msgstr "Wii-Fernbedienung %1: getrennt"
-
-#~ msgid "Wiiremote %1: low battery (%2%)"
-#~ msgstr "Wii-Fernbedienung %1: Batterien schwach (%2%)"
-
-#~ msgid "Always"
-#~ msgstr "Immer"
-
-#~ msgid "Searching..."
-#~ msgstr "Suchen …"
-
-#~ msgid "Searching %1..."
-#~ msgstr "Suche %1..."
-
-#~ msgid "Download lyrics from the Internet"
-#~ msgstr "Liedtexte aus dem Internet laden"
-
-#~ msgid "Only when playing a song"
-#~ msgstr "Nur wenn ein Lied gespielt wird"
-
-#~ msgid "No lyrics could be found"
-#~ msgstr "Es konnten keine Liedtexte gefunden werden"
-
-#~ msgid "Show the song information sidebar"
-#~ msgstr "Informationsleiste anzeigen"
-
-#~ msgid "Problem loading image"
-#~ msgstr "Fehler beim Laden des Bildes"
-
-#~ msgid "Buffer Duration (ms)"
-#~ msgstr "Pufferlänge (ms)"
-
-#~ msgid "Add as new playlist..."
-#~ msgstr "Als neue Wiedergabeliste hinzufügen..."
-
-#~ msgid "Dynamic playlists"
-#~ msgstr "Dynamische Wiedergabelisten"
-
-#~ msgid ""
-#~ "Let Last.fm suggest songs from your library that are similar to one you "
-#~ "specify."
-#~ msgstr ""
-#~ "Last.fm zu den von Ihnen angegebenen ähnliche Stücke vorschlagen lassen."
-
-#~ msgid "Last.fm similar artists"
-#~ msgstr "Last.fm ähnliche Interpreten"
-
-#~ msgid "Don't use search terms (include all songs)"
-#~ msgstr "Keine Suchbegriffe verwenden (alle Titel einbeziehen)"
-
-#~ msgid "New"
-#~ msgstr "Neu"
-
-#~ msgid "New folder..."
-#~ msgstr "Neuer Ordner..."
-
-#~ msgid "Playlists"
-#~ msgstr "Wiedergabelisten"
-
-#~ msgid "Enqueue to playlist"
-#~ msgstr "In die Warteschlange einreihen"
-
-#~ msgid "Script console"
-#~ msgstr "Skript-Konsole"
-
-#~ msgid "Complete automatically"
-#~ msgstr "Automatisch vervollständigen"
-
-#~ msgid "Generating audio fingerprint and fetching results..."
-#~ msgstr "Audio-Fingerabdruck wird erzeugt und Ergebnisse geholt …"
-
-#~ msgid "Results fetched"
-#~ msgstr "Ergebnisse geholt"
-
-#~ msgid "Show duplicates only"
-#~ msgstr "Nur Duplikate anzeigen"
-
-#~ msgid "Images (*.jpg)"
-#~ msgstr "Bilder (*.jpg)"
-
-#~ msgid "Save Album Cover"
-#~ msgstr "Album-Cover speichern"
-
-#~ msgid ""
-#~ "The version of Clementine you've just updated to requires a full library "
-#~ "rescan because of the new features listed below:<ul>"
-#~ msgstr ""
-#~ "Clementine wurde aktualisiert. Aufgrund der folgenden neuen Funktionen "
-#~ "muss die Musiksammlung neu eingelesen werden:"

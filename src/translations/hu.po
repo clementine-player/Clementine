@@ -1,22 +1,19 @@
-# Hungarian translation for clementine
-# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
-# This file is distributed under the same license as the clementine package.
+# Clementine.
+# Copyright (C) 2010 David Sansome
+# This file is distributed under the same license as the Clementine package.
+# 
+# Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: clementine\n"
-"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-04-09 10:24+0000\n"
-"PO-Revision-Date: 2011-04-09 12:21+0000\n"
-"Last-Translator: ntomka <Unknown>\n"
-"Language-Team: Hungarian <hu@li.org>\n"
-"MIME-Version: 1.0\n"
+"Project-Id-Version: Clementine Music Player\n"
+"Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
+"PO-Revision-Date: 2011-10-28 17:18+0000\n"
+"Last-Translator: arnaudbienner <arnaud.bienner@gmail.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: hu\n"
-"X-Launchpad-Export-Date: 2011-04-10 05:06+0000\n"
-"X-Generator: Launchpad (build 12735)\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
 msgid " kbps"
 msgstr ""
@@ -89,15 +86,15 @@ msgstr ""
 msgid "%L1 total plays"
 msgstr ""
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n meghiúsult"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n befejezve"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n hátralévő"
 
@@ -171,14 +168,11 @@ msgstr ""
 msgid ""
 "<p>Tokens start with %, for example: %artist %album %title </p>\n"
 "\n"
-"<p>If you surround sections of text that contain a token with curly-braces, "
-"that section will be hidden if the token is empty.</p>"
+"<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
 msgstr ""
-"<p>A száminformációk behelyettesítéséhez a címkék % jellel kezdődnek és a "
-"megfelelő angol szavak alkotják, pl.: %artist %album %title</p>\n"
+"<p>A száminformációk behelyettesítéséhez a címkék % jellel kezdődnek és a megfelelő angol szavak alkotják, pl.: %artist %album %title</p>\n"
 "\n"
-"<p>Ha egy szövegrészt kapcsos zárójelekkel fog közre, akkor az rejtve marad, "
-"ha a benne lévő címke helyére nem helyettesíthető semmi.</p>"
+"<p>Ha egy szövegrészt kapcsos zárójelekkel fog közre, akkor az rejtve marad, ha a benne lévő címke helyére nem helyettesíthető semmi.</p>"
 
 msgid "A Grooveshark Anywhere account is required."
 msgstr ""
@@ -192,11 +186,13 @@ msgid ""
 "selecting songs."
 msgstr ""
 "Az intelligens lejátszási listák dinamikusan jönnek létre a zenetáradból. "
-"Többféle ilyen lista létezik, melyek különféle módon nyújtanak lehetőséget a "
-"számok rendezésére."
+"Többféle ilyen lista létezik, melyek különféle módon nyújtanak lehetőséget a"
+" számok rendezésére."
 
-msgid "A song will be included in the playlist if it matches these conditions."
-msgstr "Egy szám fel lesz véve a listára, ha kielégíti az alábbi feltételeket."
+msgid ""
+"A song will be included in the playlist if it matches these conditions."
+msgstr ""
+"Egy szám fel lesz véve a listára, ha kielégíti az alábbi feltételeket."
 
 msgid "A-Z"
 msgstr "A-Z"
@@ -461,7 +457,8 @@ msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "Biztos benne, hogy törli a \"%1\" beállítást?"
 
 msgid "Are you sure you want to reset this song's statistics?"
-msgstr "Biztos vagy benne, hogy visszaállítod ennek a számnak a statisztikáit?"
+msgstr ""
+"Biztos vagy benne, hogy visszaállítod ennek a számnak a statisztikáit?"
 
 msgid "Artist"
 msgstr "Előadó"
@@ -660,7 +657,8 @@ msgstr ""
 
 msgid ""
 "Clementine can be controlled remotely by an Android phone.  To enable this "
-"feature log in with the same Google account that is configured on your phone."
+"feature log in with the same Google account that is configured on your "
+"phone."
 msgstr ""
 "A Clementine irányítható távolról egy Androidos telefon segítségével. Ehhez "
 "a funkcióhoz be kell jelentkezned abba a Google fiókba, amelyet a "
@@ -673,12 +671,13 @@ msgid ""
 "Clementine could not load any projectM visualisations.  Check that you have "
 "installed Clementine properly."
 msgstr ""
-"A Clementine egy projectM megjelenítést sem tud betölteni. Ellenőrizze, hogy "
-"megfelelően telepítette a Clementinet."
+"A Clementine egy projectM megjelenítést sem tud betölteni. Ellenőrizze, hogy"
+" megfelelően telepítette a Clementinet."
 
 msgid ""
 "Clementine couldn't fetch your subscription status since there are problems "
-"with your connection. Played tracks will be cached and sent later to Last.fm."
+"with your connection. Played tracks will be cached and sent later to "
+"Last.fm."
 msgstr ""
 
 msgid "Clementine image viewer"
@@ -749,7 +748,8 @@ msgstr ""
 
 msgid "Connect Wii Remotes using active/deactive action"
 msgstr ""
-"Wii távvezérlő csatlakoztatása az aktiválás/deaktiválás esemény használatával"
+"Wii távvezérlő csatlakoztatása az aktiválás/deaktiválás esemény "
+"használatával"
 
 msgid "Connect device"
 msgstr "Eszköz csatlakoztatása"
@@ -1426,7 +1426,8 @@ msgid "Hardware information"
 msgstr "Hardverjellemzők"
 
 msgid "Hardware information is only available while the device is connected."
-msgstr "A hardverjellemzők csak csatlakoztatott eszköz esetén tekinthetők meg."
+msgstr ""
+"A hardverjellemzők csak csatlakoztatott eszköz esetén tekinthetők meg."
 
 msgid "High"
 msgstr "Magas"
@@ -1460,8 +1461,8 @@ msgid "Identifying song"
 msgstr "Zeneszám azonosítása"
 
 msgid ""
-"If you continue, this device will work slowly and songs copied to it may not "
-"work."
+"If you continue, this device will work slowly and songs copied to it may not"
+" work."
 msgstr ""
 "Ha folytatja, az eszköz lassan fog működni és a rá másolt számok "
 "használhatatlanok lehetnek."
@@ -1470,8 +1471,8 @@ msgid ""
 "If you use the remote on more than one computer, this name will help you "
 "choose which one to connect to on your phone."
 msgstr ""
-"Ha több gépen használod a távvezérlő funkciót, akkor ez a név segít neked az "
-"irányítandó gép azonosításában."
+"Ha több gépen használod a távvezérlő funkciót, akkor ez a név segít neked az"
+" irányítandó gép azonosításában."
 
 msgid "Ignore \"The\" in artist names"
 msgstr "A \"The\" mellőzése előadó nevekben"
@@ -1653,8 +1654,7 @@ msgid "Least favourite tracks"
 msgstr "Legkevésbé kedvelt számok"
 
 msgid "Leave blank for the default.  Examples: \"/dev/dsp\", \"front\", etc."
-msgstr ""
-"Hagyja üresen az alapértelmezéshez. Példák: \"/dev/dsp\", \"front\", stb."
+msgstr "Hagyja üresen az alapértelmezéshez. Példák: \"/dev/dsp\", \"front\", stb."
 
 msgid "Length"
 msgstr "Időtartam"
@@ -2840,8 +2840,8 @@ msgid ""
 "There were problems copying some songs.  The following files could not be "
 "copied:"
 msgstr ""
-"Néhány szám másolása közben hiba lépett fel. Az alábbi fájlokat nem sikerült "
-"másolni:"
+"Néhány szám másolása közben hiba lépett fel. Az alábbi fájlokat nem sikerült"
+" másolni:"
 
 msgid ""
 "There were problems deleting some songs.  The following files could not be "
@@ -2883,8 +2883,8 @@ msgid "This album is not available in the requested format"
 msgstr "Ez az album nem elérhető a kért formátumban"
 
 msgid ""
-"This device must be connected and opened before Clementine can see what file "
-"formats it supports."
+"This device must be connected and opened before Clementine can see what file"
+" formats it supports."
 msgstr ""
 "A Clementine csak az eszköz csatlakoztatása és megnyitása után képes "
 "megállapítani, hogy az milyen fájl formátumokat kezel."
@@ -3130,12 +3130,10 @@ msgid "When Clementine starts"
 msgstr "Amikor a Clementine elindul"
 
 msgid ""
-"When looking for album art Clementine will first look for picture files that "
-"contain one of these words.\n"
+"When looking for album art Clementine will first look for picture files that contain one of these words.\n"
 "If there are no matches then it will use the largest image in the directory."
 msgstr ""
-"Amikor a Clementine albumborítót keres, először azokat a fájlokat ellenőrzi, "
-"melyek neve tartalmazza az alábbi szavakat.\n"
+"Amikor a Clementine albumborítót keres, először azokat a fájlokat ellenőrzi, melyek neve tartalmazza az alábbi szavakat.\n"
 "Ha nincs egyezés, akkor a legnagyobb képet veszi a könyvtárból."
 
 msgid "WiFi MAC Address"
@@ -3220,8 +3218,8 @@ msgid ""
 msgstr ""
 
 msgid ""
-"You can listen to Magnatune songs for free without an account.  Purchasing a "
-"membership removes the messages at the end of each track."
+"You can listen to Magnatune songs for free without an account.  Purchasing a"
+" membership removes the messages at the end of each track."
 msgstr ""
 "Hallgathat Magnatune számokat ingyen, előfizetés nélkül. Előfizetés "
 "vásárlása esetén a számvégi üzenetek eltávolításra kerülnek."
@@ -3230,17 +3228,18 @@ msgid "You can listen to background streams at the same time as other music."
 msgstr "Háttér adatfolyamatokat hallgathatsz egy időben más számokkal is."
 
 msgid ""
-"You can scrobble tracks for free, but only <span style=\" font-weight:600;"
-"\">paid subscribers</span> can stream Last.fm radio from Clementine."
+"You can scrobble tracks for free, but only <span style=\" font-"
+"weight:600;\">paid subscribers</span> can stream Last.fm radio from "
+"Clementine."
 msgstr ""
 "Scrobble funkcióval ingyenesen figyeltetheted a számokat, de csak <span "
-"style=\" font-weight:600;\">előfizetők</span> hallgathatnak Last.fm rádiót a "
-"Clementineből."
+"style=\" font-weight:600;\">előfizetők</span> hallgathatnak Last.fm rádiót a"
+" Clementineből."
 
 msgid ""
-"You can use your Wii Remote as a remote control for Clementine.  <a href="
-"\"http://www.clementine-player.org/wiimote\">See the page on the Clementine "
-"wiki</a> for more information.\n"
+"You can use your Wii Remote as a remote control for Clementine.  <a "
+"href=\"http://www.clementine-player.org/wiimote\">See the page on the "
+"Clementine wiki</a> for more information.\n"
 msgstr ""
 "A Clementine távvezérléshez használhat Wii távvezérlőt is.  Részletekért <a "
 "href=\"http://www.clementine-player.org/wiimote\">tekintse meg a Clementine "
@@ -3268,16 +3267,16 @@ msgid ""
 "style:italic;\">Enable access for assistive devices</span>\" to use global "
 "shortcuts in Clementine."
 msgstr ""
-"A Rendszerbeállításokban engedélyeznie kell a \"<span style=\" font-style:"
-"italic;\">Hozzáférés engedélyezése kisegítő eszközökhöz</span>\" opciót a "
-"globális billentyűparancsok használatához."
+"A Rendszerbeállításokban engedélyeznie kell a \"<span style=\" font-"
+"style:italic;\">Hozzáférés engedélyezése kisegítő eszközökhöz</span>\" "
+"opciót a globális billentyűparancsok használatához."
 
 msgid "You will need to restart Clementine if you change the language."
 msgstr "A nyelv megváltoztatásához újra kell indítania a Clementinet."
 
 msgid ""
-"You will not be able to play Last.fm radio stations as you are not a Last.fm "
-"subscriber."
+"You will not be able to play Last.fm radio stations as you are not a Last.fm"
+" subscriber."
 msgstr ""
 
 #, qt-format
@@ -3321,7 +3320,7 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "Nulla"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "%n szám felvétele"
 
@@ -3410,7 +3409,7 @@ msgstr "beállítások"
 msgid "press enter"
 msgstr ""
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "%n szám eltávolítása"
 
@@ -3430,318 +3429,4 @@ msgstr "leállítás"
 msgid "track %1"
 msgstr "%1. szám"
 
-#~ msgid "Are you sure you want to install the following scripts?"
-#~ msgstr "Biztos telepíted az alábbi parancsfájlokat?"
 
-#~ msgid "Clementine scripts"
-#~ msgstr "Clementine parancsfájlok"
-
-#~ msgid "Developer mode"
-#~ msgstr "Fejlesztői mód"
-
-#~ msgid "Disable"
-#~ msgstr "Letiltás"
-
-#~ msgid "Enable"
-#~ msgstr "Engedélyezés"
-
-#~ msgid "Error installing script"
-#~ msgstr "Hiba történt a parancsfájl telepítése közben"
-
-#~ msgid "Error opening script archive"
-#~ msgstr "Hiba történt a parancsfájl archívum megnyitása közben"
-
-#~ msgid "Get new scripts"
-#~ msgstr "Új parancsfájlok beszerzése"
-
-#~ msgid "Global Shortcuts"
-#~ msgstr "Globális billentyűparancsok"
-
-#~ msgid "Install from file..."
-#~ msgstr "Telepítés fájlból"
-
-#~ msgid "Install script file"
-#~ msgstr "Parancsfájl telepítése"
-
-#~ msgid "Install scripts"
-#~ msgstr "Parancsfájlok telepítése"
-
-#~ msgid "My scripts"
-#~ msgstr "Saját parancsfájljaim"
-
-#~ msgid "Please fill in the blanks to login into Last.fm"
-#~ msgstr "A Last.fm-re való bejelentkezéshez töltsd ki az üres helyeket"
-
-#~ msgid "Reload"
-#~ msgstr "Újratölt"
-
-#~ msgid "Script Manager"
-#~ msgstr "Parancsfájlkezelő"
-
-#~ msgid "Settings..."
-#~ msgstr "Beállítások..."
-
-#~ msgid "Some files failed to install.  The script may not work correctly."
-#~ msgstr "Néhány fájl telepítése meghiúsult. A parancsfájl hibásan működhet."
-
-#~ msgid "The '%1' script was modified, you might have to reload it"
-#~ msgstr "A '%1' parancsfájl módosult, újratöltése javasolt"
-
-#~ msgid "This is not a valid Clementine script file."
-#~ msgstr "Ez nem érvényes Clementine parancsfájl."
-
-#~ msgid ""
-#~ "Warning: scripts have full access to your computer and your music.  Only "
-#~ "install scripts that you trust."
-#~ msgstr ""
-#~ "Figyelmeztetés: a parancsfájloknak teljes hozzáférése van a "
-#~ "számítógépedhez és a zenéidhez. Csak olyan parancsfájlokat telepíts, "
-#~ "amikben megbízol."
-
-#~ msgid "%1 other listeners"
-#~ msgstr "%1 hallgató"
-
-#~ msgid "%1 total plays"
-#~ msgstr "Lejátszva %1 alkalommal"
-
-#~ msgid "Text color"
-#~ msgstr "Szövegszín"
-
-#~ msgid ""
-#~ "In dynamic mode new tracks will be chosen and added to the playlist every "
-#~ "time a song finishes.  Enabling dynamic mode will ignore any size limit "
-#~ "you set on the playlist."
-#~ msgstr ""
-#~ "Dinamikus módban a számok akkor kerülnek kiválasztásra és hozzáadásra a "
-#~ "lejátszási listához amikor az aktuálisan játszott szám befejeződik. A "
-#~ "dinamikus mód nem veszi figyelembe az általad beállított lejátszási lista "
-#~ "korlátokat."
-
-#~ msgid "ASF"
-#~ msgstr "ASF"
-
-#~ msgid "Delete files..."
-#~ msgstr "Fájlok törlése..."
-
-#~ msgid "Double-clicking a song clears the playlist first"
-#~ msgstr "Dupla kattintás egy számon előbb törli a lejátszási listát"
-
-#~ msgid "Enter a name for the new playlist"
-#~ msgstr "Adjon nevet az új lejátszási listának"
-
-#~ msgid "Editing %n tracks"
-#~ msgstr "%n szám szerkesztése"
-
-#~ msgid "Hide %1"
-#~ msgstr "%1 elrejtése"
-
-#~ msgid "Help"
-#~ msgstr "Súgó"
-
-#~ msgid "Hide..."
-#~ msgstr "Elrejtés..."
-
-#~ msgid ""
-#~ "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm *."
-#~ "tiff)"
-#~ msgstr ""
-#~ "Képek (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm *."
-#~ "tiff)"
-
-#~ msgid "Last.fm Recommended Radio - %1"
-#~ msgstr "Last.fm Ajánlott Rádió - %1"
-
-#~ msgid "Last.fm Loved Tracks - %1"
-#~ msgstr "Last.fm Népszerű Számok - %1"
-
-#~ msgid "MP4"
-#~ msgstr "MP4"
-
-#~ msgid "My Loved Tracks"
-#~ msgstr "A kedvenc számaim"
-
-#~ msgid "Couldn't load the last.fm radio station: %1"
-#~ msgstr "A %1 rádióadó betöltése sikertelen"
-
-#~ msgid "Ogg FLAC"
-#~ msgstr "Ogg FLAC"
-
-#~ msgid "Radio service couldn't be loaded :-("
-#~ msgstr "Nem lehet betölteni a rádió szolgáltatást :-("
-
-#~ msgid "Select engine"
-#~ msgstr "Meghajtó kiválasztása"
-
-#~ msgid "Unknown audio engine \"%1\". Choices are:"
-#~ msgstr "Ismeretlen audio motor: %1. A lehetőségek:"
-
-#~ msgid "Update Library"
-#~ msgstr "Zenetár frissítése"
-
-#~ msgid "[click to edit]"
-#~ msgstr "[kattintson a szerkesztéshez]"
-
-#~ msgid "Use notifications to report Wii remote status"
-#~ msgstr ""
-#~ "Értesítések használata a Wii távvezérlő eszköz állapotának jelentéséhez"
-
-#~ msgid "Enable Wii remote support in Clementine"
-#~ msgstr "Wii távvezérlő támogatás engedélyezése"
-
-#~ msgid "Use Wii remote id"
-#~ msgstr "Wii távvezérlő azonosító használata"
-
-#~ msgid "Enable shortcuts only when application is focused"
-#~ msgstr "Billentyűparancsok engedélyezése csak ha az alkalmazás aktív"
-
-#~ msgid "Edit action"
-#~ msgstr "Esemény szerkesztése"
-
-#~ msgid "Connect Wii remotes to Clementine using active/deactive action"
-#~ msgstr ""
-#~ "Wii távvezérlő eszköz csatlakoztatása az aktív/deaktív esemény "
-#~ "használatával"
-
-#~ msgid "Stretch columns to fit window"
-#~ msgstr "Oszlopszélességek igazítása az ablakhoz"
-
-#~ msgid "Wiiremote %1: critical battery (%2%) "
-#~ msgstr "Wiiremote %1: kritikus teleptöltés (%2%) "
-
-#~ msgid "Wiiremote %1: actived"
-#~ msgstr "Wiiremote %1: aktiválva"
-
-#~ msgid "Wiiremote %1: connected"
-#~ msgstr "Wiiremote %1: csatlakoztatva"
-
-#~ msgid "Use Wii remote"
-#~ msgstr "Wii távvezérlő használata"
-
-#~ msgid "Wiiremote %1: disconnected"
-#~ msgstr "Wiiremote %1: leválasztva"
-
-#~ msgid "Wiiremote %1: low battery (%2%)"
-#~ msgstr "Wiiremote %1: alacsony teleptöltés (%2%)"
-
-#~ msgid "Wiiremote %1: disactived"
-#~ msgstr "Wiiremote %1: deaktiválva"
-
-#~ msgid "Searching..."
-#~ msgstr "Keresés…"
-
-#~ msgid "Always"
-#~ msgstr "Mindig"
-
-#~ msgid "Download lyrics from the Internet"
-#~ msgstr "Dalszövegek letöltése az Internetről"
-
-#~ msgid "Searching %1..."
-#~ msgstr "%1 keresése..."
-
-#~ msgid "Show the song information sidebar"
-#~ msgstr "Száminformációs panel mutatása"
-
-#~ msgid "Only when playing a song"
-#~ msgstr "Csak lejátszáskor"
-
-#~ msgid "No lyrics could be found"
-#~ msgstr "Nem található dalszöveg"
-
-#~ msgid "Problem loading image"
-#~ msgstr "Probléma történt a kép betöltése közben"
-
-#~ msgid "Buffer Duration (ms)"
-#~ msgstr "Előreolvasás hossza (ms)"
-
-#~ msgid "Dynamic playlists"
-#~ msgstr "Dinamikus lejátszási listák"
-
-#~ msgid "Add as new playlist..."
-#~ msgstr "Hozzáadás új lejátszási listaként..."
-
-#~ msgid "New folder..."
-#~ msgstr "Új könyvtár..."
-
-#~ msgid "New"
-#~ msgstr "Új"
-
-#~ msgid ""
-#~ "A song will be included in the playlist if it matches all of these "
-#~ "conditions."
-#~ msgstr ""
-#~ "Egy szám csak akkor kerül bele a lejátszási listába, ha minden alábbi "
-#~ "feltétel teljesül rá."
-
-#~ msgid "Length (longest first)"
-#~ msgstr "Hossz (leghoszabb először)"
-
-#~ msgid "Length (shortest first)"
-#~ msgstr "Hossz (rövidebb először)"
-
-#~ msgid "Artist A-Z"
-#~ msgstr "Előadó A-Z"
-
-#~ msgid "Last.fm similar artists"
-#~ msgstr "Last.fm hasonló előadók"
-
-#~ msgid "Year (oldest first)"
-#~ msgstr "Év (régebbi elől)"
-
-#~ msgid "Year (newest first)"
-#~ msgstr "Év (újabb elől)"
-
-#~ msgid ""
-#~ "Let Last.fm suggest songs from your library that are similar to one you "
-#~ "specify."
-#~ msgstr ""
-#~ "Last.fm ajánlások használata számok kiválasztásához a zenetáradból a "
-#~ "feltételeidnek megfelelően."
-
-#~ msgid "Playlists"
-#~ msgstr "Listák"
-
-#~ msgid "Don't use search terms (include all songs)"
-#~ msgstr "Ne használjon keresési feltételeket (minden számot felvesz)"
-
-#~ msgid "Statistics"
-#~ msgstr "Statisztikák"
-
-#~ msgid "Enqueue to playlist"
-#~ msgstr "Sorba állítás a lejátszási listán"
-
-#~ msgid "Script console"
-#~ msgstr "Parancsfájl konzol"
-
-#~ msgid "Complete automatically"
-#~ msgstr "Automatikusan kiegészít"
-
-#~ msgid "Generating audio fingerprint and fetching results..."
-#~ msgstr "Audio ujjlenyomat generálása és eredmények lekérdezése..."
-
-#~ msgid "Results fetched"
-#~ msgstr "Találatok beolvasva"
-
-#~ msgid "Show duplicates only"
-#~ msgstr "Csak az ismétlődéseket mutassa"
-
-#~ msgid "Save Album Cover"
-#~ msgstr "Album borító mentése"
-
-#~ msgid "Images (*.jpg)"
-#~ msgstr "Képek (*.jpg)"
-
-#~ msgid ""
-#~ "The version of Clementine you've just updated to requires a full library "
-#~ "rescan because of the new features listed below:<ul>"
-#~ msgstr ""
-#~ "A Clementine most frissült verziójának szüksége van a teljes zenetár "
-#~ "újraolvasására az alább sorolt új funkciók használatához:<ul>"
-
-#~ msgid "Normal"
-#~ msgstr "Normál"
-
-#~ msgid "Low"
-#~ msgstr "Alacsony"
-
-#~ msgid "Identifying song..."
-#~ msgstr "Zeneszám beazonosítása..."

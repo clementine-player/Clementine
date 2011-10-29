@@ -1,23 +1,18 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# Clementine.
+# Copyright (C) 2010 David Sansome
+# This file is distributed under the same license as the Clementine package.
+# 
+# Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-04-09 10:24+0000\n"
-"PO-Revision-Date: 2011-04-06 11:49+0000\n"
-"Last-Translator: Fitoschido <fitoschido@gmail.com>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"MIME-Version: 1.0\n"
+"Project-Id-Version: Clementine Music Player\n"
+"Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
+"PO-Revision-Date: 2011-10-28 17:18+0000\n"
+"Last-Translator: arnaudbienner <arnaud.bienner@gmail.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
-"X-Launchpad-Export-Date: 2011-04-10 05:08+0000\n"
-"X-Generator: Launchpad (build 12735)\n"
-"X-Language: es_ES\n"
+"Language: es\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
 msgid " kbps"
 msgstr ""
@@ -90,15 +85,15 @@ msgstr ""
 msgid "%L1 total plays"
 msgstr ""
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n falló"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n completado(s)"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n pendiente(s)"
 
@@ -172,15 +167,11 @@ msgstr ""
 msgid ""
 "<p>Tokens start with %, for example: %artist %album %title </p>\n"
 "\n"
-"<p>If you surround sections of text that contain a token with curly-braces, "
-"that section will be hidden if the token is empty.</p>"
+"<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
 msgstr ""
-"<p>Las fichas de remplazo empiezan con %, por ejemplo: %artist %album %title "
-"</p>\n"
+"<p>Las fichas de remplazo empiezan con %, por ejemplo: %artist %album %title </p>\n"
 "\n"
-"<p>Si demarcas entre llaves una sección de texto que contenga una ficha de "
-"remplazo, esa sección no se mostrará si la ficha de remplazo se encuentra "
-"vacía.</p>"
+"<p>Si demarcas entre llaves una sección de texto que contenga una ficha de remplazo, esa sección no se mostrará si la ficha de remplazo se encuentra vacía.</p>"
 
 msgid "A Grooveshark Anywhere account is required."
 msgstr ""
@@ -193,12 +184,13 @@ msgid ""
 "There are different types of smart playlist that offer different ways of "
 "selecting songs."
 msgstr ""
-"Una lista de reproducción inteligente es una lista dinámica de canciones que "
-"se encuentran en tu colección. Existen diferentes tipos de listas de "
+"Una lista de reproducción inteligente es una lista dinámica de canciones que"
+" se encuentran en tu colección. Existen diferentes tipos de listas de "
 "reproducción inteligentes que ofrecen distintas formas de seleccionar "
 "canciones."
 
-msgid "A song will be included in the playlist if it matches these conditions."
+msgid ""
+"A song will be included in the playlist if it matches these conditions."
 msgstr ""
 "Una canción será incluida en la lista de reproducción si coincide con estas "
 "condiciones."
@@ -669,7 +661,8 @@ msgstr ""
 
 msgid ""
 "Clementine can be controlled remotely by an Android phone.  To enable this "
-"feature log in with the same Google account that is configured on your phone."
+"feature log in with the same Google account that is configured on your "
+"phone."
 msgstr ""
 "Clementine puede controlarse de manera remota mediante un teléfono Android. "
 "Para habilitar esta funcionalidad, inicie sesión con la misma cuenta de "
@@ -687,7 +680,8 @@ msgstr ""
 
 msgid ""
 "Clementine couldn't fetch your subscription status since there are problems "
-"with your connection. Played tracks will be cached and sent later to Last.fm."
+"with your connection. Played tracks will be cached and sent later to "
+"Last.fm."
 msgstr ""
 
 msgid "Clementine image viewer"
@@ -789,8 +783,8 @@ msgid ""
 "Could not create the GStreamer element \"%1\" - make sure you have all the "
 "required GStreamer plugins installed"
 msgstr ""
-"No se pudo crear el elemento «%1» de GStreamer. Asegúrese de tener instalados "
-"todos los complementos necesarios de GStreamer."
+"No se pudo crear el elemento «%1» de GStreamer. Asegúrese de tener "
+"instalados todos los complementos necesarios de GStreamer."
 
 #, qt-format
 msgid ""
@@ -1155,8 +1149,8 @@ msgstr "Ingrese un nuevo nombre para esta lista de reproducción"
 msgid ""
 "Enter an <b>artist</b> or <b>tag</b> to start listening to Last.fm radio."
 msgstr ""
-"Ingrese un <b>artista</b> o  <b>etiqueta</b> para escuchar la radio de Last."
-"fm."
+"Ingrese un <b>artista</b> o  <b>etiqueta</b> para escuchar la radio de "
+"Last.fm."
 
 msgid "Enter search terms here"
 msgstr "Introduzca aquí los términos de búsqueda"
@@ -1471,8 +1465,8 @@ msgid "Identifying song"
 msgstr "Identificando canción"
 
 msgid ""
-"If you continue, this device will work slowly and songs copied to it may not "
-"work."
+"If you continue, this device will work slowly and songs copied to it may not"
+" work."
 msgstr ""
 "Si continúa, este dispositivo trabajará con lentitud y las canciones que se "
 "copien a él podrán no funcionar."
@@ -2896,8 +2890,8 @@ msgid "This album is not available in the requested format"
 msgstr "Este álbum no se encuentra disponible en el formato solicitado"
 
 msgid ""
-"This device must be connected and opened before Clementine can see what file "
-"formats it supports."
+"This device must be connected and opened before Clementine can see what file"
+" formats it supports."
 msgstr ""
 "Este dispositivo ha de conectarse y abrirse antes de que Clementine pueda "
 "ver qué formatos de archivo soporta."
@@ -3142,14 +3136,11 @@ msgid "When Clementine starts"
 msgstr "Cuando Clementine inicia"
 
 msgid ""
-"When looking for album art Clementine will first look for picture files that "
-"contain one of these words.\n"
+"When looking for album art Clementine will first look for picture files that contain one of these words.\n"
 "If there are no matches then it will use the largest image in the directory."
 msgstr ""
-"En la búsqueda de portadas de álbum Clementine primero buscará imágenes que "
-"contienen una de estas palabras.\n"
-"Si no hay resultados, entonces se usará la imagen más grande en el "
-"directorio."
+"En la búsqueda de portadas de álbum Clementine primero buscará imágenes que contienen una de estas palabras.\n"
+"Si no hay resultados, entonces se usará la imagen más grande en el directorio."
 
 msgid "WiFi MAC Address"
 msgstr "Dirección MAC del WiFi"
@@ -3235,32 +3226,33 @@ msgid ""
 msgstr ""
 
 msgid ""
-"You can listen to Magnatune songs for free without an account.  Purchasing a "
-"membership removes the messages at the end of each track."
+"You can listen to Magnatune songs for free without an account.  Purchasing a"
+" membership removes the messages at the end of each track."
 msgstr ""
-"Puede escuchar canciones de Magnatune gratis sin la necesidad de una cuenta. "
-"Comprar una cuenta elimina el mensaje al final de cada canción."
+"Puede escuchar canciones de Magnatune gratis sin la necesidad de una cuenta."
+" Comprar una cuenta elimina el mensaje al final de cada canción."
 
 msgid "You can listen to background streams at the same time as other music."
 msgstr ""
 "Puede escuchar transmisiones de fondo al mismo tiempo que a otra música."
 
 msgid ""
-"You can scrobble tracks for free, but only <span style=\" font-weight:600;"
-"\">paid subscribers</span> can stream Last.fm radio from Clementine."
+"You can scrobble tracks for free, but only <span style=\" font-"
+"weight:600;\">paid subscribers</span> can stream Last.fm radio from "
+"Clementine."
 msgstr ""
 "Puede enviar de forma gratuita la información de las canciones escuchadas, "
 "pero solo <span style=\" font-weight:600;\">los suscriptores de pago</span> "
 "pueden escuchar la radio de Last.fm desde Clementine."
 
 msgid ""
-"You can use your Wii Remote as a remote control for Clementine.  <a href="
-"\"http://www.clementine-player.org/wiimote\">See the page on the Clementine "
-"wiki</a> for more information.\n"
+"You can use your Wii Remote as a remote control for Clementine.  <a "
+"href=\"http://www.clementine-player.org/wiimote\">See the page on the "
+"Clementine wiki</a> for more information.\n"
 msgstr ""
-"Puedes usar tu Wiimote como un mando a distancia para Clementine. <a href="
-"\"http://www.clementine-player.org/wiimote\">Visita la página en el wiki de "
-"Clementine</a> para más información.\n"
+"Puedes usar tu Wiimote como un mando a distancia para Clementine. <a "
+"href=\"http://www.clementine-player.org/wiimote\">Visita la página en el "
+"wiki de Clementine</a> para más información.\n"
 
 msgid "You do not have a Grooveshark Anywhere account."
 msgstr ""
@@ -3292,8 +3284,8 @@ msgid "You will need to restart Clementine if you change the language."
 msgstr "Necesitaras reiniciar Clementine si cambias el idioma."
 
 msgid ""
-"You will not be able to play Last.fm radio stations as you are not a Last.fm "
-"subscriber."
+"You will not be able to play Last.fm radio stations as you are not a Last.fm"
+" subscriber."
 msgstr ""
 
 #, qt-format
@@ -3314,9 +3306,9 @@ msgid ""
 "for automatic tag fetching.  Try installing the 'gstreamer-plugins-bad' "
 "package."
 msgstr ""
-"Falta el complemento «ofa» en su instalación de gstreamer. Esto es requerido "
-"para obtener automáticamente las etiquetas. Intente a reinstalar el paquete "
-"«gstreamer-plugins-bad»."
+"Falta el complemento «ofa» en su instalación de gstreamer. Esto es requerido"
+" para obtener automáticamente las etiquetas. Intente a reinstalar el paquete"
+" «gstreamer-plugins-bad»."
 
 msgid "Your library is empty!"
 msgstr "Su colección está vacía."
@@ -3337,7 +3329,7 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "Cero"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "añadir %n pistas"
 
@@ -3426,7 +3418,7 @@ msgstr "opciones"
 msgid "press enter"
 msgstr ""
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "remover %n pistas"
 
@@ -3446,587 +3438,4 @@ msgstr "detener"
 msgid "track %1"
 msgstr "Pista %1"
 
-#~ msgid "Are you sure you want to install the following scripts?"
-#~ msgstr "¿Desea instalar el siguiente script?"
 
-#~ msgid "Clementine scripts"
-#~ msgstr "Scripts de Clementine"
-
-#~ msgid "Developer mode"
-#~ msgstr "Modo de desarrollo"
-
-#~ msgid "Disable"
-#~ msgstr "Desactivar"
-
-#~ msgid "Enable"
-#~ msgstr "Activar"
-
-#~ msgid "Error installing script"
-#~ msgstr "Error al instalar script"
-
-#~ msgid "Error opening script archive"
-#~ msgstr "Error al abrir archivo de script"
-
-#~ msgid "Get new scripts"
-#~ msgstr "Obtener nuevos scripts"
-
-#~ msgid "Global Shortcuts"
-#~ msgstr "Accesos rápidos globales"
-
-#~ msgid "Install from file..."
-#~ msgstr "Instalar desde archivo..."
-
-#~ msgid "Install script file"
-#~ msgstr "Instalar archivo de script"
-
-#~ msgid "Install scripts"
-#~ msgstr "Instalar scripts"
-
-#~ msgid "My scripts"
-#~ msgstr "Mis scripts"
-
-#~ msgid "Reload"
-#~ msgstr "Cargar de nuevo"
-
-#~ msgid "Script Manager"
-#~ msgstr "Gestor de scripts"
-
-#~ msgid "Settings..."
-#~ msgstr "Configuración..."
-
-#~ msgid "Some files failed to install.  The script may not work correctly."
-#~ msgstr ""
-#~ "Algunos archivos no se pudieron instalar. Puede que el script no funcione "
-#~ "correctamente."
-
-#~ msgid "The '%1' script was modified, you might have to reload it"
-#~ msgstr "El script «%1» fue modificado, quizá tenga que cargarlo de nuevo"
-
-#~ msgid "This is not a valid Clementine script file."
-#~ msgstr "Este no es un archivo de script de Clementine válido."
-
-#~ msgid ""
-#~ "Warning: scripts have full access to your computer and your music.  Only "
-#~ "install scripts that you trust."
-#~ msgstr ""
-#~ "Advertencia: los scripts tienen acceso completo a su ordenador y su "
-#~ "música. Instale sólamente scripts confiables."
-
-#~ msgid "%1 other listeners"
-#~ msgstr "otros %1 oyentes"
-
-#~ msgid "%1 total plays"
-#~ msgstr "%1 reproducciones"
-
-#~ msgid "Text color"
-#~ msgstr "Color del texto"
-
-#~ msgid ""
-#~ "In dynamic mode new tracks will be chosen and added to the playlist every "
-#~ "time a song finishes.  Enabling dynamic mode will ignore any size limit "
-#~ "you set on the playlist."
-#~ msgstr ""
-#~ "En el modo dinámico se elegirán nuevas canciones y se añadirán a la lista "
-#~ "de reproducción cada vez que finalice una canción. Este modo ignora "
-#~ "cualquier límite de tamaño que haya configurado en la lista de "
-#~ "reproducción."
-
-#~ msgid "&Show tray icon"
-#~ msgstr "&Mostrar icono de la bandeja"
-
-#~ msgid "&Hide tray icon"
-#~ msgstr "&Ocultar icono de la bandeja"
-
-#~ msgid "Hide..."
-#~ msgstr "Ocultar..."
-
-#~ msgid "Show section"
-#~ msgstr "Mostrar columna"
-
-#~ msgid "Hide %1"
-#~ msgstr "Ocultar %1"
-
-#~ msgid "My Loved Tracks"
-#~ msgstr "Mis Pistas Favoritas"
-
-#~ msgid "Neighbours"
-#~ msgstr "Vecinos"
-
-#~ msgid "%1's Radio Station"
-#~ msgstr "Estaciones de radio de %1"
-
-#~ msgid "%1's Loved Tracks"
-#~ msgstr "Pistas favoritas de %1"
-
-#~ msgid "%1's Neighborhood"
-#~ msgstr "Vecinos de %1"
-
-#~ msgid "%1's Recommended Radio"
-#~ msgstr "Radio recomendada de %1"
-
-#~ msgid "%1's Neighbour Radio"
-#~ msgstr "Radio de los vecinos de %1"
-
-#~ msgid "%1's Library"
-#~ msgstr "Colección de %1"
-
-#~ msgid "Similar Artists to %1"
-#~ msgstr "Artistas similares a %1"
-
-#~ msgid "Not enough neighbours"
-#~ msgstr "No hay suficientes vecinos"
-
-#~ msgid "Radio service couldn't be loaded :-("
-#~ msgstr "Servicio de radio no pudo ser cargado :-("
-
-#~ msgid "[click to edit]"
-#~ msgstr "[click para editar]"
-
-#~ msgid "Loading audio engine"
-#~ msgstr "Cargando motor de sonido"
-
-#~ msgid "Configure Clementine..."
-#~ msgstr "Configurar Clementine..."
-
-#~ msgid "Add media..."
-#~ msgstr "Añadir medio..."
-
-#~ msgid "Radio"
-#~ msgstr "Radio"
-
-#~ msgid "Help"
-#~ msgstr "Ayuda"
-
-#~ msgid "Options"
-#~ msgstr "Opciones"
-
-#~ msgid "Enter your Last.fm details below:"
-#~ msgstr "Ingrese su información de Last.fm debajo:"
-
-#~ msgid "Fadeout"
-#~ msgstr "Fundido"
-
-#~ msgid "No fadeout"
-#~ msgstr "Sin fundido"
-
-#~ msgid "Fadeout duration"
-#~ msgstr "Duración del fundido"
-
-#~ msgid "Version"
-#~ msgstr "Versión"
-
-#~ msgid ""
-#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
-#~ "REC-html40/strict.dtd\">\n"
-#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
-#~ "css\">\n"
-#~ "p, li { white-space: pre-wrap; }\n"
-#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
-#~ "font-weight:400; font-style:normal;\">\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><a href=\"http://code."
-#~ "google.com/p/clementine-player/\"><span style=\" text-decoration: "
-#~ "underline; color:#0057ae;\">http://code.google.com/p/clementine-player/</"
-#~ "span></a></p>\n"
-#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
-#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
-#~ "\"></p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
-#~ "weight:600;\">Authors:</span></p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">David Sansome &lt;<a "
-#~ "href=\"mailto:me@davidsansome.com\"><span style=\" text-decoration: "
-#~ "underline; color:#0057ae;\">me@davidsansome.com</span></a>&gt;</p>\n"
-#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
-#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
-#~ "\"></p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
-#~ "weight:600;\">Thanks to:</span></p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Mark Kretschmann &lt;<a "
-#~ "href=\"mailto:markey@web.de\"><span style=\" text-decoration: underline; "
-#~ "color:#0057ae;\">markey@web.de</span></a>&gt;</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Max Howell &lt;<a href="
-#~ "\"mailto:max.howell@methylblue.com\"><span style=\" text-decoration: "
-#~ "underline; color:#0057ae;\">max.howell@methylblue.com</span></a>&gt;</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">... and all the Amarok "
-#~ "contributors</p></body></html>"
-#~ msgstr ""
-#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
-#~ "REC-html40/strict.dtd\">\n"
-#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
-#~ "css\">\n"
-#~ "p, li { white-space: pre-wrap; }\n"
-#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
-#~ "font-weight:400; font-style:normal;\">\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><a href=\"http://code."
-#~ "google.com/p/clementine-player/\"><span style=\" text-decoration: "
-#~ "underline; color:#0057ae;\">http://code.google.com/p/clementine-player/</"
-#~ "span></a></p>\n"
-#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
-#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
-#~ "\"></p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
-#~ "weight:600;\">Autores:</span></p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">David Sansome &lt;<a "
-#~ "href=\"mailto:me@davidsansome.com\"><span style=\" text-decoration: "
-#~ "underline; color:#0057ae;\">me@davidsansome.com</span></a>&gt;</p>\n"
-#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
-#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
-#~ "\"></p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
-#~ "weight:600;\">Gracias a:</span></p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Mark Kretschmann &lt;<a "
-#~ "href=\"mailto:markey@web.de\"><span style=\" text-decoration: underline; "
-#~ "color:#0057ae;\">markey@web.de</span></a>&gt;</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Max Howell &lt;<a href="
-#~ "\"mailto:max.howell@methylblue.com\"><span style=\" text-decoration: "
-#~ "underline; color:#0057ae;\">max.howell@methylblue.com</span></a>&gt;</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">... y a todos los que "
-#~ "contribuyeron con Amarok</p></body></html>"
-
-#~ msgid "Save this stream in the Radio tab"
-#~ msgstr "Guardar este flujo en la seccion de Radios"
-
-#~ msgid "Choose manual cover..."
-#~ msgstr "Establecer carátula personalizada..."
-
-#~ msgid "Last,fm"
-#~ msgstr "Last.fm"
-
-#~ msgid "Configure &Global Shortcuts..."
-#~ msgstr "Configurar los accesos rápidos &globales..."
-
-#~ msgid "Don't show notifications"
-#~ msgstr "No mostrar notificaciones"
-
-#~ msgid "Stop Playing After Current Track"
-#~ msgstr "Detener reproducción al finalizar la pista"
-
-#~ msgid "Next Track"
-#~ msgstr "Pista siguiente"
-
-#~ msgid "Previous Track"
-#~ msgstr "Pista anterior"
-
-#~ msgid "Increase Volume"
-#~ msgstr "Aumentar Volúmen"
-
-#~ msgid "Decrease Volume"
-#~ msgstr "Disminuir Volumen"
-
-#~ msgid "Mute Volume"
-#~ msgstr "Silencio"
-
-#~ msgid "Seek Forwards"
-#~ msgstr "Buscar hacia delante"
-
-#~ msgid "Seek Backwards"
-#~ msgstr "Buscar hacia atrás"
-
-#~ msgid "Alternate"
-#~ msgstr "Alternativo"
-
-#~ msgid "&Defaults"
-#~ msgstr "&Por defecto"
-
-#~ msgid "Shortcut for Selected Action"
-#~ msgstr "Acceso rápido para la acción seleccionada"
-
-#~ msgid "Non&e"
-#~ msgstr "&Ninguno"
-
-#~ msgid "Default key:"
-#~ msgstr "Acceso por defecto:"
-
-#~ msgid "Warning"
-#~ msgstr "Cuidado"
-
-#~ msgid ""
-#~ "You are about to reset to global shortcuts default values. Are you sure "
-#~ "you want to continue?"
-#~ msgstr ""
-#~ "Estas por reinicar las teclas rapidas a sus valores por defecto. Estás "
-#~ "seguro que deseas continuar?"
-
-#~ msgid "Default: %1"
-#~ msgstr "Por defecto: %1"
-
-#~ msgid "Default: None"
-#~ msgstr "Por defecto: Ninguna"
-
-#~ msgid "ASF"
-#~ msgstr "ASF"
-
-#~ msgid "Editing %n tracks"
-#~ msgstr "Editando %n pistas"
-
-#~ msgid "Ogg FLAC"
-#~ msgstr "Ogg FLAC"
-
-#~ msgid "MP4"
-#~ msgstr "MP4"
-
-#~ msgid "There is already a preset with that name"
-#~ msgstr "Ya existe una predefinición con ese nombre"
-
-#~ msgid "New preset"
-#~ msgstr "Nueva predefinición"
-
-#~ msgid "Behaviour"
-#~ msgstr "Comportamiento"
-
-#~ msgid "My Neighbourhood"
-#~ msgstr "Mi Vecindario"
-
-#~ msgid ""
-#~ "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm *."
-#~ "tiff)"
-#~ msgstr ""
-#~ "Imágenes (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm *."
-#~ "tiff)"
-
-#~ msgid "Tag Radio: %1"
-#~ msgstr "Radio de la Etiqueta: %1"
-
-#~ msgid ""
-#~ "Note that you must be a <span style=\" font-weight:600;\">paid "
-#~ "subscriber</span> to listen to Last.fm radio from within Clementine."
-#~ msgstr ""
-#~ "Recuerda que tienes que ser un <span style=\" font-weight:600;"
-#~ "\">Suscriptor de Paga</span> para poder escuchar la radio de Last.fm "
-#~ "desde Clementine."
-
-#~ msgid "Seek the currently playing track"
-#~ msgstr "Busca en la pista actualmente reproduciendose"
-
-#~ msgid "Last.fm Recommended Radio - %1"
-#~ msgstr "La Radio en Last.fm Recomendada para %1"
-
-#~ msgid "Last.fm Loved Tracks - %1"
-#~ msgstr "Pistas Favoritas en Last.fm de %1"
-
-#~ msgid "Unknown audio engine \"%1\". Choices are:"
-#~ msgstr "Motor de audio \"%1\" desconocido. Las opciones son:"
-
-#~ msgid "Select engine"
-#~ msgstr "Seleccione motor de audio"
-
-#~ msgid "Music (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma)"
-#~ msgstr "Música (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma)"
-
-#~ msgid "Playlists (*.m3u *.xspf *.xml)"
-#~ msgstr "Listas de reproducción  (*.m3u *.xspf *.xml)"
-
-#~ msgid "Couldn't load the last.fm radio station: %1"
-#~ msgstr "No se pudo cargar la estación de radio de last.fm: %1"
-
-#~ msgid "Configure global shortcuts..."
-#~ msgstr "Configurar combinaciones de teclas globales"
-
-#~ msgid "Enter a name for the new playlist"
-#~ msgstr "Ingrese un nombre para la nueva lista de reproducción"
-
-#~ msgid "Update Library"
-#~ msgstr "Actualizar Colección"
-
-#~ msgid "Visualisations"
-#~ msgstr "Visualizaciones"
-
-#~ msgid "Clementine Visualisation"
-#~ msgstr "Visualización Clementine"
-
-#~ msgid "Visualisation mode"
-#~ msgstr "Modo de Visualización"
-
-#~ msgid "Random visualisation"
-#~ msgstr "Visualización aleatoria"
-
-#~ msgid "Select visualisations"
-#~ msgstr "Seleccionar visualizaciones"
-
-#~ msgid "Select visualisations..."
-#~ msgstr "Seleccionar visualizaciones..."
-
-#~ msgid "Close visualisation"
-#~ msgstr "Cerrar visualizaciones"
-
-#~ msgid "Visualisations Settings"
-#~ msgstr "Configuración de Visualizaciones"
-
-#~ msgid "Delay between visualisations"
-#~ msgstr "Retraso entre visualizaciones"
-
-#~ msgid "Delete originals"
-#~ msgstr "Eliminar originales"
-
-#~ msgid "Delete files..."
-#~ msgstr "Eliminar archivos..."
-
-#~ msgid "File naming scheme"
-#~ msgstr "Esquema de renombrado del archivo"
-
-#~ msgid "Overwrite files"
-#~ msgstr "Sobreescribir archivos"
-
-#~ msgid "Connected"
-#~ msgstr "Conectado"
-
-#~ msgid "Capacity"
-#~ msgstr "Capacidad"
-
-#~ msgid "Disconnect device"
-#~ msgstr "Desconectar el dispositivo"
-
-#~ msgid "available"
-#~ msgstr "disponible"
-
-#~ msgid "%1 of %2"
-#~ msgstr "%1 de %2"
-
-#~ msgid "Available space"
-#~ msgstr "Espacio disponible"
-
-#~ msgid "Enable shortcuts only when application is focused"
-#~ msgstr "Habilitar los atajos sólo cuando la aplicación esté en primer plano"
-
-#~ msgid "Stretch columns to fit window"
-#~ msgstr "Ajustar columnas a la ventana"
-
-#~ msgid "Use Wii remote"
-#~ msgstr "Usar mando a distancia de Wii"
-
-#~ msgid "Wiiremote %1: disconnected"
-#~ msgstr "Wiiremote %1: desconectado"
-
-#~ msgid "Wiiremote %1: low battery (%2%)"
-#~ msgstr "Wiiremote %1: batería baja (%2%)"
-
-#~ msgid "Wiiremote %1: disactived"
-#~ msgstr "Wiiremote %1: desactivado"
-
-#~ msgid "Enable Wii remote support in Clementine"
-#~ msgstr "Habilitar el uso de Wii remote en Clementine."
-
-#~ msgid "Wiiremote %1: critical battery (%2%) "
-#~ msgstr "Wiiremote %1: batería crítica (%2%) "
-
-#~ msgid "Wiiremote %1: actived"
-#~ msgstr "Wiiremote %1: activado"
-
-#~ msgid "Wiiremote %1: connected"
-#~ msgstr "Wiiremote %1: conectado"
-
-#~ msgid "Use notifications to report Wii remote status"
-#~ msgstr "Usar notificaciones para informar del estado del Wii remote"
-
-#~ msgid "Searching %1..."
-#~ msgstr "Buscando %1..."
-
-#~ msgid "Searching..."
-#~ msgstr "Buscando..."
-
-#~ msgid "Show the song information sidebar"
-#~ msgstr "Mostrar la barra lateral de información de la canción"
-
-#~ msgid "Download lyrics from the Internet"
-#~ msgstr "Descargar letras de internet"
-
-#~ msgid "Always"
-#~ msgstr "Siempre"
-
-#~ msgid "Only when playing a song"
-#~ msgstr "Sólo cuendo se esté reproduciendo una canción"
-
-#~ msgid "No lyrics could be found"
-#~ msgstr "No se encontraron letras"
-
-#~ msgid "Buffer Duration (ms)"
-#~ msgstr "Duración del Buffer (ms)"
-
-#~ msgid "Artist A-Z"
-#~ msgstr "Artista A-Z"
-
-#~ msgid "Dynamic playlists"
-#~ msgstr "Lista de reproducción dinámica"
-
-#~ msgid "Last.fm similar artists"
-#~ msgstr "Last.fm artistas similares"
-
-#~ msgid "New"
-#~ msgstr "Nuevo"
-
-#~ msgid "New folder..."
-#~ msgstr "Nueva carpeta"
-
-#~ msgid "Playlists"
-#~ msgstr "Listas de reproducción"
-
-#~ msgid "Add as new playlist..."
-#~ msgstr "Agregar como una nueva lista de reproducción"
-
-#~ msgid "Don't use search terms (include all songs)"
-#~ msgstr "No utilizar términos de búsqueda (incluye todas las canciones)"
-
-#~ msgid ""
-#~ "Let Last.fm suggest songs from your library that are similar to one you "
-#~ "specify."
-#~ msgstr ""
-#~ "Permitir que Last.fm sugiera canciones de su biblioteca que son similares "
-#~ "a la elegida."
-
-#~ msgid "Change album cover"
-#~ msgstr "Cambiar la caratula del álbum"
-
-#~ msgid "Statistics"
-#~ msgstr "Estadísticas"
-
-#~ msgid ""
-#~ "When looking for album art Clementine will first look for picture files "
-#~ "that contain one of these words.  If there are no matches then it will "
-#~ "use the largest image in the directory."
-#~ msgstr ""
-#~ "Cuando busque carátulas para los álbums, Clementine primero buscará "
-#~ "archivos de imágenes que contengan una de estas palabras. Si no hay "
-#~ "conincidencias, entonces se usará la imagen más grande en el directorio."
-
-#~ msgid "Enqueue to playlist"
-#~ msgstr "Poner en cola a lista de reproducción"
-
-#~ msgid "Double-clicking a song clears the playlist first"
-#~ msgstr ""
-#~ "Hacer doble clic sobre una canción primero limpia la lista de reproducción"
-
-#~ msgid "Script console"
-#~ msgstr "Consola de scripts"
-
-#~ msgid "Complete automatically"
-#~ msgstr "Completar automáticamente"
-
-#~ msgid "Generating audio fingerprint and fetching results..."
-#~ msgstr "Generando huella de audio y obteniendo resultados..."
-
-#~ msgid "Results fetched"
-#~ msgstr "Resultados recogidos"
-
-#~ msgid ""
-#~ "The version of Clementine you've just updated to requires a full library "
-#~ "rescan because of the new features listed below:<ul>"
-#~ msgstr ""
-#~ "La versión de Clementina a la que se acaba de actualizar requiere un re-"
-#~ "escaneo completo de la biblioteca debido a las nuevas características "
-#~ "listadas a continuación:<ul>"
-
-#~ msgid "Except between tracks on the same album"
-#~ msgstr "Excepto entre pistas del mismo álbum"

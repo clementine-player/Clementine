@@ -1,24 +1,21 @@
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-#
-# Pavel Fric <fripohled@blogspot.com>, 2010, 2004.
+# Clementine.
+# Copyright (C) 2010 David Sansome
+# This file is distributed under the same license as the Clementine package.
+# 
+# Translators:
 # Pavel Fric <fripohled.blogspot.com>, 2010.
+# Pavel Fric <fripohled@blogspot.com>, 2004, 2010.
 # Pavel Fric <pavelfric@seznam.cz>, 2011.
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-04-09 10:24+0000\n"
-"PO-Revision-Date: 2011-04-11 10:58+0000\n"
-"Last-Translator: fri <pavelfric@seznam.cz>\n"
-"Language-Team: Czech <kde-i18n-doc@kde.org>\n"
-"MIME-Version: 1.0\n"
+"Project-Id-Version: Clementine Music Player\n"
+"Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
+"PO-Revision-Date: 2011-10-28 17:18+0000\n"
+"Last-Translator: arnaudbienner <arnaud.bienner@gmail.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: cs\n"
-"X-Launchpad-Export-Date: 2011-04-12 05:12+0000\n"
-"X-Generator: Launchpad (build 12735)\n"
-"X-Language: cs_CZ\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2\n"
 
 msgid " kbps"
 msgstr ""
@@ -91,15 +88,15 @@ msgstr ""
 msgid "%L1 total plays"
 msgstr ""
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "nepodařilo se %n"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "dokončeno %n"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "zůstávají %n"
 
@@ -173,13 +170,11 @@ msgstr ""
 msgid ""
 "<p>Tokens start with %, for example: %artist %album %title </p>\n"
 "\n"
-"<p>If you surround sections of text that contain a token with curly-braces, "
-"that section will be hidden if the token is empty.</p>"
+"<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
 msgstr ""
 "<p>Symboly začínají %, například: %artist %album %title </p>\n"
 "\n"
-"<p>Pokud obklopíte části textu obsahující symbol složenými závorkami, tato "
-"část bude skryta, je-li symbol prázdný.</p>"
+"<p>Pokud obklopíte části textu obsahující symbol složenými závorkami, tato část bude skryta, je-li symbol prázdný.</p>"
 
 msgid "A Grooveshark Anywhere account is required."
 msgstr ""
@@ -196,7 +191,8 @@ msgstr ""
 "knihovny. Jsou tůzné druhy chytrých seznamů skladeb, jež nabízejí rozdílné "
 "způsoby výběru písniček."
 
-msgid "A song will be included in the playlist if it matches these conditions."
+msgid ""
+"A song will be included in the playlist if it matches these conditions."
 msgstr ""
 "Písnička bude zařazena do seznamu skladeb, pokud bude odpovídat těmto "
 "podmínkám."
@@ -660,7 +656,8 @@ msgstr ""
 
 msgid ""
 "Clementine can be controlled remotely by an Android phone.  To enable this "
-"feature log in with the same Google account that is configured on your phone."
+"feature log in with the same Google account that is configured on your "
+"phone."
 msgstr ""
 "Clementine je možné ovládat dálkově telefonem s operačním systémem Android. "
 "Pro povolení této vlastnosti se přihlaste se stejným účtem Google, který je "
@@ -678,7 +675,8 @@ msgstr ""
 
 msgid ""
 "Clementine couldn't fetch your subscription status since there are problems "
-"with your connection. Played tracks will be cached and sent later to Last.fm."
+"with your connection. Played tracks will be cached and sent later to "
+"Last.fm."
 msgstr ""
 
 msgid "Clementine image viewer"
@@ -1145,8 +1143,8 @@ msgstr "Zadejte název pro tento seznam skladeb"
 msgid ""
 "Enter an <b>artist</b> or <b>tag</b> to start listening to Last.fm radio."
 msgstr ""
-"Zadejte <b>umělce</b> nebo <b>značku</b> pro spuštění poslouchání rádia Last."
-"fm."
+"Zadejte <b>umělce</b> nebo <b>značku</b> pro spuštění poslouchání rádia "
+"Last.fm."
 
 msgid "Enter search terms here"
 msgstr "Zde zadejte hledané výrazy"
@@ -1457,8 +1455,8 @@ msgid "Identifying song"
 msgstr "Určuje se písnička"
 
 msgid ""
-"If you continue, this device will work slowly and songs copied to it may not "
-"work."
+"If you continue, this device will work slowly and songs copied to it may not"
+" work."
 msgstr ""
 "Budete-li pokračovat, toto zařízení bude pracovat pomalu a písničky na ně "
 "kopírované nemusí fungovat."
@@ -1474,7 +1472,8 @@ msgid "Ignore \"The\" in artist names"
 msgstr "Nevšímat si 'The' ve jménech umělců"
 
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
-msgstr "Obrázky (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
+msgstr ""
+"Obrázky (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
 
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgstr "Obrázky (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
@@ -1942,8 +1941,8 @@ msgstr ""
 msgid ""
 "No matches found.  Clear the search box to show the whole playlist again."
 msgstr ""
-"Nebyly nalezeny žádné shody. Vyčistit hledací pole, aby se znovu ukázal celý "
-"seznam skladeb."
+"Nebyly nalezeny žádné shody. Vyčistit hledací pole, aby se znovu ukázal celý"
+" seznam skladeb."
 
 msgid "No short blocks"
 msgstr ""
@@ -2855,7 +2854,8 @@ msgid ""
 msgstr "Tyto soubory budou smazány ze zařízení. Opravdu chcete pokračovat?"
 
 msgid "These folders will be scanned for music to make up your library"
-msgstr "Clementine bude novou hudbu pro vaší knihovnu hledat v těchto složkách"
+msgstr ""
+"Clementine bude novou hudbu pro vaší knihovnu hledat v těchto složkách"
 
 msgid ""
 "These settings are used in the \"Transcode Music\" dialog, and when "
@@ -2876,8 +2876,8 @@ msgid "This album is not available in the requested format"
 msgstr "Album není v požadovaném formátu dostupné"
 
 msgid ""
-"This device must be connected and opened before Clementine can see what file "
-"formats it supports."
+"This device must be connected and opened before Clementine can see what file"
+" formats it supports."
 msgstr ""
 "Pro zjištění podporovaných formátů souborů je zařízení nejdřív nutno "
 "připojit a otevřít."
@@ -2895,7 +2895,8 @@ msgstr ""
 
 msgid "This is an iPod, but you compiled Clementine without libgpod support."
 msgstr ""
-"Toto je zařízení iPod, ale Clementine byla sestavena bez podpory pro libgpod."
+"Toto je zařízení iPod, ale Clementine byla sestavena bez podpory pro "
+"libgpod."
 
 msgid ""
 "This is the first time you have connected this device.  Clementine will now "
@@ -3122,14 +3123,11 @@ msgid "When Clementine starts"
 msgstr "Při spuštění Clementine"
 
 msgid ""
-"When looking for album art Clementine will first look for picture files that "
-"contain one of these words.\n"
+"When looking for album art Clementine will first look for picture files that contain one of these words.\n"
 "If there are no matches then it will use the largest image in the directory."
 msgstr ""
-"Při hledání obalu alba se Clementine nejprve podívá po obrázkových "
-"souborech, jež obsahují jedno z těchto slov.\n"
-"Pokud nenajde žádné, které by se shodovaly, potom použije největší obrázek v "
-"adresáři."
+"Při hledání obalu alba se Clementine nejprve podívá po obrázkových souborech, jež obsahují jedno z těchto slov.\n"
+"Pokud nenajde žádné, které by se shodovaly, potom použije největší obrázek v adresáři."
 
 msgid "WiFi MAC Address"
 msgstr "Adresa MAC WiFi"
@@ -3213,8 +3211,8 @@ msgid ""
 msgstr ""
 
 msgid ""
-"You can listen to Magnatune songs for free without an account.  Purchasing a "
-"membership removes the messages at the end of each track."
+"You can listen to Magnatune songs for free without an account.  Purchasing a"
+" membership removes the messages at the end of each track."
 msgstr ""
 "Poslouchat hudbu z Magnatune lze zdarma bez uživatelského účtu. Odstranění "
 "zprávy na koncích skladeb je možné zakoupením členství."
@@ -3223,17 +3221,18 @@ msgid "You can listen to background streams at the same time as other music."
 msgstr "Proudy na pozadí můžete poslouchat ve stejnou dobu jako jinou hudbu."
 
 msgid ""
-"You can scrobble tracks for free, but only <span style=\" font-weight:600;"
-"\">paid subscribers</span> can stream Last.fm radio from Clementine."
+"You can scrobble tracks for free, but only <span style=\" font-"
+"weight:600;\">paid subscribers</span> can stream Last.fm radio from "
+"Clementine."
 msgstr ""
 "Statistické funkce Last.fm je možné používat zdarma. Poslouchání rádia je "
-"však přístupné pouze <span style=\" font-weight:600;\">platícím uživatelům</"
-"span>."
+"však přístupné pouze <span style=\" font-weight:600;\">platícím "
+"uživatelům</span>."
 
 msgid ""
-"You can use your Wii Remote as a remote control for Clementine.  <a href="
-"\"http://www.clementine-player.org/wiimote\">See the page on the Clementine "
-"wiki</a> for more information.\n"
+"You can use your Wii Remote as a remote control for Clementine.  <a "
+"href=\"http://www.clementine-player.org/wiimote\">See the page on the "
+"Clementine wiki</a> for more information.\n"
 msgstr ""
 "Clementime lze ovládat dálkovým ovladačem od Wii. Pro více informací "
 "navštivte <a href=\"http://www.clementine-player.org/wiimote\">Clementine "
@@ -3262,15 +3261,15 @@ msgid ""
 "shortcuts in Clementine."
 msgstr ""
 "Aby bylo možné v Clementine používat globální klávesové zkratky je nutné "
-"otevřít nastavení systému a zapnout \"<span style=\" font-style:italic;"
-"\">Povolit přístup pro podpůrná zařízení</span>\"."
+"otevřít nastavení systému a zapnout \"<span style=\" font-"
+"style:italic;\">Povolit přístup pro podpůrná zařízení</span>\"."
 
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Pokud změníte jazyk, budete muset Clementine spustit znovu."
 
 msgid ""
-"You will not be able to play Last.fm radio stations as you are not a Last.fm "
-"subscriber."
+"You will not be able to play Last.fm radio stations as you are not a Last.fm"
+" subscriber."
 msgstr ""
 
 #, qt-format
@@ -3314,7 +3313,7 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "Vynulovat"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "přidat %n písniček"
 
@@ -3403,7 +3402,7 @@ msgstr "Volby"
 msgid "press enter"
 msgstr ""
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "odstranit %n písniček"
 
@@ -3423,427 +3422,4 @@ msgstr "Zastavit"
 msgid "track %1"
 msgstr "Skladba %1"
 
-#~ msgid "Are you sure you want to install the following scripts?"
-#~ msgstr "Opravdu si přejete nainstalovat následující skripty?"
 
-#~ msgid "Clementine scripts"
-#~ msgstr "Skripty Clementine"
-
-#~ msgid "Developer mode"
-#~ msgstr "Vývojářský režim"
-
-#~ msgid "Disable"
-#~ msgstr "Zakázat"
-
-#~ msgid "Enable"
-#~ msgstr "Povolit"
-
-#~ msgid "Error installing script"
-#~ msgstr "Chyba při instalaci skriptu"
-
-#~ msgid "Error opening script archive"
-#~ msgstr "Chyba při otevírání archivu se skriptem"
-
-#~ msgid "Get new scripts"
-#~ msgstr "Získat nové skripty"
-
-#~ msgid "Global Shortcuts"
-#~ msgstr "Zkratky"
-
-#~ msgid "Install from file..."
-#~ msgstr "Instalovat ze souboru..."
-
-#~ msgid "Install script file"
-#~ msgstr "Nainstalovat soubor se skriptem"
-
-#~ msgid "Install scripts"
-#~ msgstr "Instalovat skripty"
-
-#~ msgid "My scripts"
-#~ msgstr "Moje skripty"
-
-#~ msgid "Please fill in the blanks to login into Last.fm"
-#~ msgstr "Vyplňte, prosím, prázdné místo pro přihlášení se k Last.fm"
-
-#~ msgid "Reload"
-#~ msgstr "Nahrát znovu"
-
-#~ msgid "Script Manager"
-#~ msgstr "Správce skriptů"
-
-#~ msgid "Settings..."
-#~ msgstr "Nastavení..."
-
-#~ msgid "Some files failed to install.  The script may not work correctly."
-#~ msgstr ""
-#~ "Některé soubory se nepodařilo nainstalovat. Skript nemusí pracovat "
-#~ "správně."
-
-#~ msgid "The '%1' script was modified, you might have to reload it"
-#~ msgstr "Skript '%1' byl upraven, možná jej bude třeba nahrát znovu"
-
-#~ msgid "This is not a valid Clementine script file."
-#~ msgstr "Toto není platný soubor se skriptem Clementine."
-
-#~ msgid ""
-#~ "Warning: scripts have full access to your computer and your music.  Only "
-#~ "install scripts that you trust."
-#~ msgstr ""
-#~ "Varování: skripty mají plný přístup k vašemu počítači a k vaší hudbě. "
-#~ "Instalujte jen ty skripty, jimž důvěřujete."
-
-#~ msgid "%1 other listeners"
-#~ msgstr "%1 jiných posluchačů"
-
-#~ msgid "%1 total plays"
-#~ msgstr "%1 přehrání celkem"
-
-#~ msgid "Text color"
-#~ msgstr "Barva textu"
-
-#~ msgid ""
-#~ "In dynamic mode new tracks will be chosen and added to the playlist every "
-#~ "time a song finishes.  Enabling dynamic mode will ignore any size limit "
-#~ "you set on the playlist."
-#~ msgstr ""
-#~ "V dynamickém režimu budou nové skladby vybrány a přidány do seznamu "
-#~ "skladeb pokaždé, když písnička skončí. Při povolení dynamického režimu se "
-#~ "budou přehlížet všechna omezení velikosti, která byla nastavena pro "
-#~ "seznam skladeb."
-
-#~ msgid "&Show tray icon"
-#~ msgstr "Zobrazit ikonu v &systémovém panelu"
-
-#~ msgid "&Hide tray icon"
-#~ msgstr "S&krýt ikonu v systémovém panelu"
-
-#~ msgid "Hide..."
-#~ msgstr "Skrýt..."
-
-#~ msgid "Show section"
-#~ msgstr "Zobrazit skeci"
-
-#~ msgid "Hide %1"
-#~ msgstr "Skrýt %1"
-
-#~ msgid "My Neighbourhood"
-#~ msgstr "Mé sousedství"
-
-#~ msgid "Neighbours"
-#~ msgstr "Sousedi"
-
-#~ msgid "%1's Radio Station"
-#~ msgstr "Rádiová stanice uživatele %1"
-
-#~ msgid "%1's Loved Tracks"
-#~ msgstr "Oblíbené skladby uživatele %1"
-
-#~ msgid "%1's Neighborhood"
-#~ msgstr "Sousedství uživatele %1"
-
-#~ msgid "%1's Recommended Radio"
-#~ msgstr "Doporučené rádio uživatele %1"
-
-#~ msgid "%1's Neighbour Radio"
-#~ msgstr "Sousedovo rádio uživatele %1"
-
-#~ msgid "%1's Library"
-#~ msgstr "Knihovna uživatele %1"
-
-#~ msgid "Similar Artists to %1"
-#~ msgstr "Umělci podobní %1"
-
-#~ msgid "Tag Radio: %1"
-#~ msgstr "Rádio značky: %1"
-
-#~ msgid "Not enough neighbours"
-#~ msgstr "Nedostatek sousedů"
-
-#~ msgid "Loading audio engine"
-#~ msgstr "Načítá se podpora audia"
-
-#~ msgid "ASF"
-#~ msgstr "ASF"
-
-#~ msgid "MP4"
-#~ msgstr "MP4"
-
-#~ msgid "Ogg FLAC"
-#~ msgstr "Ogg FLAC"
-
-#~ msgid "Configure Clementine..."
-#~ msgstr "Nastavit Clementine..."
-
-#~ msgid "Add media..."
-#~ msgstr "Přidat média..."
-
-#~ msgid "Radio"
-#~ msgstr "Rádio"
-
-#~ msgid "Help"
-#~ msgstr "Nápověda"
-
-#~ msgid "Enter your Last.fm details below:"
-#~ msgstr "Níže zadejte přihlašovací údaje pro Last.fm:"
-
-#~ msgid ""
-#~ "Note that you must be a <span style=\" font-weight:600;\">paid "
-#~ "subscriber</span> to listen to Last.fm radio from within Clementine."
-#~ msgstr ""
-#~ "Pamatujte, že musíte být <span style=\" font-weight:600;\">platící "
-#~ "uživatel</span> abyste v Clementine mohli poslouchat rádio Last.fm."
-
-#~ msgid "Fadeout"
-#~ msgstr "Zeslabování"
-
-#~ msgid "No fadeout"
-#~ msgstr "Žádné zeslabování"
-
-#~ msgid "Fadeout duration"
-#~ msgstr "Délka zeslabování"
-
-#~ msgid "Version"
-#~ msgstr "Verze"
-
-#~ msgid ""
-#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
-#~ "REC-html40/strict.dtd\">\n"
-#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
-#~ "css\">\n"
-#~ "p, li { white-space: pre-wrap; }\n"
-#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
-#~ "font-weight:400; font-style:normal;\">\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><a href=\"http://code."
-#~ "google.com/p/clementine-player/\"><span style=\" text-decoration: "
-#~ "underline; color:#0057ae;\">http://code.google.com/p/clementine-player/</"
-#~ "span></a></p>\n"
-#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
-#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
-#~ "\"></p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
-#~ "weight:600;\">Authors:</span></p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">David Sansome &lt;<a "
-#~ "href=\"mailto:me@davidsansome.com\"><span style=\" text-decoration: "
-#~ "underline; color:#0057ae;\">me@davidsansome.com</span></a>&gt;</p>\n"
-#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
-#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
-#~ "\"></p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
-#~ "weight:600;\">Thanks to:</span></p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Mark Kretschmann &lt;<a "
-#~ "href=\"mailto:markey@web.de\"><span style=\" text-decoration: underline; "
-#~ "color:#0057ae;\">markey@web.de</span></a>&gt;</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Max Howell &lt;<a href="
-#~ "\"mailto:max.howell@methylblue.com\"><span style=\" text-decoration: "
-#~ "underline; color:#0057ae;\">max.howell@methylblue.com</span></a>&gt;</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">... and all the Amarok "
-#~ "contributors</p></body></html>"
-#~ msgstr ""
-#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
-#~ "REC-html40/strict.dtd\">\n"
-#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
-#~ "css\">\n"
-#~ "p, li { white-space: pre-wrap; }\n"
-#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
-#~ "font-weight:400; font-style:normal;\">\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><a href=\"http://code."
-#~ "google.com/p/clementine-player/\"><span style=\" text-decoration: "
-#~ "underline; color:#0057ae;\">http://code.google.com/p/clementine-player/</"
-#~ "span></a></p>\n"
-#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
-#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
-#~ "\"></p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
-#~ "weight:600;\">Autoři:</span></p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">David Sansome &lt;<a "
-#~ "href=\"mailto:me@davidsansome.com\"><span style=\" text-decoration: "
-#~ "underline; color:#0057ae;\">me@davidsansome.com</span></a>&gt;</p>\n"
-#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
-#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
-#~ "\"></p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
-#~ "weight:600;\">Poděkování:</span></p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Mark Kretschmann &lt;<a "
-#~ "href=\"mailto:markey@web.de\"><span style=\" text-decoration: underline; "
-#~ "color:#0057ae;\">markey@web.de</span></a>&gt;</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Max Howell &lt;<a href="
-#~ "\"mailto:max.howell@methylblue.com\"><span style=\" text-decoration: "
-#~ "underline; color:#0057ae;\">max.howell@methylblue.com</span></a>&gt;</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">... a všem "
-#~ "přispěvatelům Amaroku</p></body></html>"
-
-#~ msgid "Save this stream in the Radio tab"
-#~ msgstr "Uložit tento proud v kartě Rádií"
-
-#~ msgid "Choose manual cover..."
-#~ msgstr "Vybrat obal ručně..."
-
-#~ msgid "Don't show notifications"
-#~ msgstr "Nezobrazovat upozornění"
-
-#~ msgid "Options"
-#~ msgstr "Možnosti"
-
-#~ msgid ""
-#~ "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm *."
-#~ "tiff)"
-#~ msgstr ""
-#~ "Obrázky (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm *."
-#~ "tiff)"
-
-#~ msgid "Copy to"
-#~ msgstr "Kopírovat do"
-
-#~ msgid "Capacity"
-#~ msgstr "Kapacita"
-
-#~ msgid "Connected"
-#~ msgstr "Připojeno"
-
-#~ msgid "available"
-#~ msgstr "dostupné"
-
-#~ msgid "%1 of %2"
-#~ msgstr "%1 z %2"
-
-#~ msgid "Always"
-#~ msgstr "Vždy"
-
-#~ msgid "Searching..."
-#~ msgstr "Hledá se..."
-
-#~ msgid "New"
-#~ msgstr "Nové"
-
-#~ msgid "Playlists"
-#~ msgstr "Seznamy skladeb"
-
-#~ msgid "Add as new playlist..."
-#~ msgstr "Přidat nový seznam skladeb..."
-
-#~ msgid "Buffer Duration (ms)"
-#~ msgstr "Trvání vyrovnávací paměti (ms)"
-
-#~ msgid "Delete files..."
-#~ msgstr "Smazat soubory..."
-
-#~ msgid "Don't use search terms (include all songs)"
-#~ msgstr "Nepoužívat hledané pojmy (zahrnout všechny písničky)"
-
-#~ msgid "Double-clicking a song clears the playlist first"
-#~ msgstr "Dvojité klepnutí na písničku nejprve vymaže seznam se skladbami"
-
-#~ msgid "Dynamic playlists"
-#~ msgstr "Dynamické seznamy skladeb"
-
-#~ msgid "Editing %n tracks"
-#~ msgstr "Úprava %n skladeb"
-
-#~ msgid "Enter a name for the new playlist"
-#~ msgstr "Zadejte název pro nový seznam skladeb"
-
-#~ msgid "Last.fm Loved Tracks - %1"
-#~ msgstr "Zbožňované skladby Last.fm - %1"
-
-#~ msgid "Last.fm Recommended Radio - %1"
-#~ msgstr "Doporučované rádio Last.fm - %1"
-
-#~ msgid "Last.fm similar artists"
-#~ msgstr "Podobní umělci na Last.fm"
-
-#~ msgid ""
-#~ "Let Last.fm suggest songs from your library that are similar to one you "
-#~ "specify."
-#~ msgstr ""
-#~ "Nechte Last.fm navrhnout písničky z vaší knihovny, které jsou podobné té, "
-#~ "kterou udáte."
-
-#~ msgid "My Loved Tracks"
-#~ msgstr "Moje zbožňované skladby"
-
-#~ msgid "New folder..."
-#~ msgstr "Nová složka..."
-
-#~ msgid "Radio service couldn't be loaded :-("
-#~ msgstr "Rozhlasovou službu se nepodařilo nahrát :-("
-
-#~ msgid "Select engine"
-#~ msgstr "Vybrat stroj"
-
-#~ msgid "Stretch columns to fit window"
-#~ msgstr "Roztáhnout sloupce tak, aby se vešly do okna"
-
-#~ msgid "Unknown audio engine \"%1\". Choices are:"
-#~ msgstr "Neznámý zvukový stroj \"%1\". Možnostmi na výběr jsou:"
-
-#~ msgid "Update Library"
-#~ msgstr "Obnovit hudební knihovnu"
-
-#~ msgid "[click to edit]"
-#~ msgstr "[pro úpravy klepněte]"
-
-#~ msgid "Enqueue to playlist"
-#~ msgstr "Zařadit do seznamu skladeb"
-
-#~ msgid ""
-#~ "When looking for album art Clementine will first look for picture files "
-#~ "that contain one of these words.  If there are no matches then it will "
-#~ "use the largest image in the directory."
-#~ msgstr ""
-#~ "Když bude Clementine hledat obal alba, nejprve bude hledat obrázkové "
-#~ "soubory obsahující jedno z těchto slov. Pokud nenalezne žádnou shodu, "
-#~ "použije největší obrázek v adresáři."
-
-#~ msgid "Script console"
-#~ msgstr "Skriptovací konzole"
-
-#~ msgid "Complete automatically"
-#~ msgstr "Dokončit automaticky"
-
-#~ msgid "Results fetched"
-#~ msgstr "Výsledky staženy"
-
-#~ msgid "Save Album Cover"
-#~ msgstr "Uložit obal alba"
-
-#~ msgid "Images (*.jpg)"
-#~ msgstr "Obrázky (*.jpg)"
-
-#~ msgid "Generating audio fingerprint and fetching results..."
-#~ msgstr "Probíhá identifikace stopy a stahování výsledků..."
-
-#~ msgid "Show duplicates only"
-#~ msgstr "Ukázat pouze dvakrát uvedené skladby"
-
-#~ msgid ""
-#~ "The version of Clementine you've just updated to requires a full library "
-#~ "rescan because of the new features listed below:<ul>"
-#~ msgstr ""
-#~ "Verze Clementine, na již jste právě povýšil, vyžaduje kvůli novým "
-#~ "vlastnostem uvedeným níže úplné znovuprohledání knihovny:<ul>"
-
-#~ msgid "Normal"
-#~ msgstr "Normální"
-
-#~ msgid "Low"
-#~ msgstr "Nízká"
-
-#~ msgid "Identifying song..."
-#~ msgstr "Rozpoznává se písnička..."
-
-#~ msgid "Except between tracks on the same album"
-#~ msgstr "Kromě meziskladeb na tom samém albu"

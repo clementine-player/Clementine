@@ -1,22 +1,19 @@
-# Catalan translation for clementine
-# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
-# This file is distributed under the same license as the clementine package.
+# Clementine.
+# Copyright (C) 2010 David Sansome
+# This file is distributed under the same license as the Clementine package.
+# 
+# Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: clementine\n"
-"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-04-09 10:24+0000\n"
-"PO-Revision-Date: 2011-03-19 23:15+0000\n"
-"Last-Translator: Pau Capó <Unknown>\n"
-"Language-Team: Catalan <ca@li.org>\n"
-"MIME-Version: 1.0\n"
+"Project-Id-Version: Clementine Music Player\n"
+"Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
+"PO-Revision-Date: 2011-10-28 17:18+0000\n"
+"Last-Translator: arnaudbienner <arnaud.bienner@gmail.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: ca\n"
-"X-Launchpad-Export-Date: 2011-04-10 05:05+0000\n"
-"X-Generator: Launchpad (build 12735)\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
 msgid " kbps"
 msgstr ""
@@ -89,15 +86,15 @@ msgstr ""
 msgid "%L1 total plays"
 msgstr ""
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n han fallat"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n han acabat"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n restants"
 
@@ -171,15 +168,11 @@ msgstr ""
 msgid ""
 "<p>Tokens start with %, for example: %artist %album %title </p>\n"
 "\n"
-"<p>If you surround sections of text that contain a token with curly-braces, "
-"that section will be hidden if the token is empty.</p>"
+"<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
 msgstr ""
-"<p>Les fitxes de reemplaçament comencen amb %, per exemple: %artist %album %"
-"title </p>\n"
+"<p>Les fitxes de reemplaçament comencen amb %, per exemple: %artist %album %title </p>\n"
 "\n"
-"<p>Si demarqueu entre claus una secció de text que contingui una fitxa de "
-"remplaçament, aquesta secció no es mostrarà si la fitxa de remplaçament es "
-"troba buida.</p>"
+"<p>Si demarqueu entre claus una secció de text que contingui una fitxa de remplaçament, aquesta secció no es mostrarà si la fitxa de remplaçament es troba buida.</p>"
 
 msgid "A Grooveshark Anywhere account is required."
 msgstr ""
@@ -192,12 +185,13 @@ msgid ""
 "There are different types of smart playlist that offer different ways of "
 "selecting songs."
 msgstr ""
-"Una llista de reproducció intel·ligent és una llista dinàmica de cançons que "
-"es troben a la seva biblioteca. Existeixen diferents tipus de llistes de "
+"Una llista de reproducció intel·ligent és una llista dinàmica de cançons que"
+" es troben a la seva biblioteca. Existeixen diferents tipus de llistes de "
 "reproducció intel·ligent que ofereixen diferents formes de seleccionar "
 "cançons."
 
-msgid "A song will be included in the playlist if it matches these conditions."
+msgid ""
+"A song will be included in the playlist if it matches these conditions."
 msgstr ""
 
 msgid "A-Z"
@@ -665,7 +659,8 @@ msgstr ""
 
 msgid ""
 "Clementine can be controlled remotely by an Android phone.  To enable this "
-"feature log in with the same Google account that is configured on your phone."
+"feature log in with the same Google account that is configured on your "
+"phone."
 msgstr ""
 
 msgid "Clementine can show a message when the track changes."
@@ -680,7 +675,8 @@ msgstr ""
 
 msgid ""
 "Clementine couldn't fetch your subscription status since there are problems "
-"with your connection. Played tracks will be cached and sent later to Last.fm."
+"with your connection. Played tracks will be cached and sent later to "
+"Last.fm."
 msgstr ""
 
 msgid "Clementine image viewer"
@@ -782,8 +778,8 @@ msgid ""
 "Could not create the GStreamer element \"%1\" - make sure you have all the "
 "required GStreamer plugins installed"
 msgstr ""
-"No es va poder crear l'element \"%1\" de GStreamer. Assegura't de tenir tots "
-"els plugins requerits de GStramer instal·lats"
+"No es va poder crear l'element \"%1\" de GStreamer. Assegura't de tenir tots"
+" els plugins requerits de GStramer instal·lats"
 
 #, qt-format
 msgid ""
@@ -1462,8 +1458,8 @@ msgid "Identifying song"
 msgstr ""
 
 msgid ""
-"If you continue, this device will work slowly and songs copied to it may not "
-"work."
+"If you continue, this device will work slowly and songs copied to it may not"
+" work."
 msgstr ""
 
 msgid ""
@@ -1652,8 +1648,8 @@ msgstr ""
 
 msgid "Leave blank for the default.  Examples: \"/dev/dsp\", \"front\", etc."
 msgstr ""
-"Deixar-ho en blanc per assignar el valor per defecte. Exemples : \"/dev/dsp"
-"\", \"front\", etc."
+"Deixar-ho en blanc per assignar el valor per defecte. Exemples : "
+"\"/dev/dsp\", \"front\", etc."
 
 msgid "Length"
 msgstr "Durada"
@@ -2834,15 +2830,15 @@ msgid ""
 "There were problems copying some songs.  The following files could not be "
 "copied:"
 msgstr ""
-"Hi ha hagut problemes copiant algunes cançons. Els següents fitxers no s'han "
-"pogut copiar:"
+"Hi ha hagut problemes copiant algunes cançons. Els següents fitxers no s'han"
+" pogut copiar:"
 
 msgid ""
 "There were problems deleting some songs.  The following files could not be "
 "deleted:"
 msgstr ""
-"Hi ha hagut problemes borrant algunes cançons. Els següents fitxers no s'han "
-"pogut borrar:"
+"Hi ha hagut problemes borrant algunes cançons. Els següents fitxers no s'han"
+" pogut borrar:"
 
 msgid ""
 "These files will be deleted from disk, are you sure you want to continue?"
@@ -2876,8 +2872,8 @@ msgid "This album is not available in the requested format"
 msgstr "Aquest àlbum no està disponible en el format demanat"
 
 msgid ""
-"This device must be connected and opened before Clementine can see what file "
-"formats it supports."
+"This device must be connected and opened before Clementine can see what file"
+" formats it supports."
 msgstr ""
 
 msgid "This device supports the following file formats:"
@@ -3119,8 +3115,7 @@ msgid "When Clementine starts"
 msgstr "Quan s'inicia Clementine"
 
 msgid ""
-"When looking for album art Clementine will first look for picture files that "
-"contain one of these words.\n"
+"When looking for album art Clementine will first look for picture files that contain one of these words.\n"
 "If there are no matches then it will use the largest image in the directory."
 msgstr ""
 
@@ -3207,8 +3202,8 @@ msgid ""
 msgstr ""
 
 msgid ""
-"You can listen to Magnatune songs for free without an account.  Purchasing a "
-"membership removes the messages at the end of each track."
+"You can listen to Magnatune songs for free without an account.  Purchasing a"
+" membership removes the messages at the end of each track."
 msgstr ""
 "Pots sentir cançons de Magnatune gratuïtament sense compte. Comprant una "
 "afiliació s'eliminaran els missatges al final de cada pista."
@@ -3217,14 +3212,15 @@ msgid "You can listen to background streams at the same time as other music."
 msgstr ""
 
 msgid ""
-"You can scrobble tracks for free, but only <span style=\" font-weight:600;"
-"\">paid subscribers</span> can stream Last.fm radio from Clementine."
+"You can scrobble tracks for free, but only <span style=\" font-"
+"weight:600;\">paid subscribers</span> can stream Last.fm radio from "
+"Clementine."
 msgstr ""
 
 msgid ""
-"You can use your Wii Remote as a remote control for Clementine.  <a href="
-"\"http://www.clementine-player.org/wiimote\">See the page on the Clementine "
-"wiki</a> for more information.\n"
+"You can use your Wii Remote as a remote control for Clementine.  <a "
+"href=\"http://www.clementine-player.org/wiimote\">See the page on the "
+"Clementine wiki</a> for more information.\n"
 msgstr ""
 
 msgid "You do not have a Grooveshark Anywhere account."
@@ -3257,8 +3253,8 @@ msgid "You will need to restart Clementine if you change the language."
 msgstr "Si canvies la llengua, tindràs que re-iniciar Clementine"
 
 msgid ""
-"You will not be able to play Last.fm radio stations as you are not a Last.fm "
-"subscriber."
+"You will not be able to play Last.fm radio stations as you are not a Last.fm"
+" subscriber."
 msgstr ""
 
 #, qt-format
@@ -3299,7 +3295,7 @@ msgstr ""
 msgid "Zero"
 msgstr "Zero"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "afegeix %n cançons"
 
@@ -3388,7 +3384,7 @@ msgstr "opcions"
 msgid "press enter"
 msgstr ""
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "elimina %n cançons"
 
@@ -3408,84 +3404,4 @@ msgstr "atura"
 msgid "track %1"
 msgstr "peça %1"
 
-#~ msgid "Global Shortcuts"
-#~ msgstr "Dreceres globals"
 
-#~ msgid "%1 total plays"
-#~ msgstr "%1 reproduccions"
-
-#~ msgid "Text color"
-#~ msgstr "Color del text"
-
-#~ msgid "ASF"
-#~ msgstr "ASF"
-
-#~ msgid "Couldn't load the last.fm radio station: %1"
-#~ msgstr "No es va poder carregar l'estació de ràdio de last.fm: %1"
-
-#~ msgid "Delete files..."
-#~ msgstr "Esborra els fitxers..."
-
-#~ msgid "Double-clicking a song clears the playlist first"
-#~ msgstr "Fer doble click sobre una canço netejara la llista de reproducció"
-
-#~ msgid "Editing %n tracks"
-#~ msgstr "Editant %n pistes"
-
-#~ msgid "Enter a name for the new playlist"
-#~ msgstr "Introduïu un nom per la nova llista de reproducció"
-
-#~ msgid "Hide %1"
-#~ msgstr "Amaga %1"
-
-#~ msgid "Help"
-#~ msgstr "Ajuda"
-
-#~ msgid "Hide..."
-#~ msgstr "Amaga..."
-
-#~ msgid ""
-#~ "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm *."
-#~ "tiff)"
-#~ msgstr ""
-#~ "Imatges (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm *."
-#~ "tiff)"
-
-#~ msgid "Last.fm Recommended Radio - %1"
-#~ msgstr "Radio recomanada de Last.fm - %1"
-
-#~ msgid "Last.fm Loved Tracks - %1"
-#~ msgstr "Cançons favorites a Last.fm - %1"
-
-#~ msgid "MP4"
-#~ msgstr "MP4"
-
-#~ msgid "My Loved Tracks"
-#~ msgstr "Les meves peces preferides"
-
-#~ msgid "Ogg FLAC"
-#~ msgstr "Ogg FLAC"
-
-#~ msgid "Radio service couldn't be loaded :-("
-#~ msgstr "El server de radio no s'ha pogut carregar :-("
-
-#~ msgid "[click to edit]"
-#~ msgstr "[clickar per editar]"
-
-#~ msgid "Select engine"
-#~ msgstr "Seleccionar motor"
-
-#~ msgid "Unknown audio engine \"%1\". Choices are:"
-#~ msgstr "Motor d'àudio \"%1\" desconegut. Les opcions són:"
-
-#~ msgid "Update Library"
-#~ msgstr "Actualitza llibreria"
-
-#~ msgid "Add as new playlist..."
-#~ msgstr "Afegir com una nova llista de reproducció"
-
-#~ msgid "Buffer Duration (ms)"
-#~ msgstr "Duració del Buffer (ms)"
-
-#~ msgid "Dynamic playlists"
-#~ msgstr "Llista de reproducció dinàmica"

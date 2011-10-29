@@ -1,22 +1,19 @@
-# Breton translation for clementine
-# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
-# This file is distributed under the same license as the clementine package.
-#
+# Clementine.
+# Copyright (C) 2010 David Sansome
+# This file is distributed under the same license as the Clementine package.
+# 
+# Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010, 2011.
 msgid ""
 msgstr ""
-"Project-Id-Version: clementine\n"
-"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-04-09 10:24+0000\n"
-"PO-Revision-Date: 2011-03-27 07:33+0000\n"
-"Last-Translator: Gwenn M <Unknown>\n"
-"Language-Team: Breton <br@li.org>\n"
-"MIME-Version: 1.0\n"
+"Project-Id-Version: Clementine Music Player\n"
+"Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
+"PO-Revision-Date: 2011-10-28 17:18+0000\n"
+"Last-Translator: arnaudbienner <arnaud.bienner@gmail.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: br\n"
-"X-Launchpad-Export-Date: 2011-04-10 05:05+0000\n"
-"X-Generator: Launchpad (build 12735)\n"
+"Plural-Forms: nplurals=2; plural=(n > 1)\n"
 
 msgid " kbps"
 msgstr ""
@@ -89,15 +86,15 @@ msgstr ""
 msgid "%L1 total plays"
 msgstr ""
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n c'hwitet"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n echuet"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n a chom"
 
@@ -171,12 +168,10 @@ msgstr ""
 msgid ""
 "<p>Tokens start with %, for example: %artist %album %title </p>\n"
 "\n"
-"<p>If you surround sections of text that contain a token with curly-braces, "
-"that section will be hidden if the token is empty.</p>"
+"<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
 msgstr ""
 "<p>Ar maeziennoù a grog gant %. Da skouer : %artist %album %title </p>\n"
-"<p>Ma lakait briataennoù tro-dro d'ul lodenn testenn gant ur maezienn, ne vo "
-"ket diskouezhet ma n'eo ket resisaet endalc'had ar maezienn."
+"<p>Ma lakait briataennoù tro-dro d'ul lodenn testenn gant ur maezienn, ne vo ket diskouezhet ma n'eo ket resisaet endalc'had ar maezienn."
 
 msgid "A Grooveshark Anywhere account is required."
 msgstr ""
@@ -193,7 +188,8 @@ msgstr ""
 "levraoueg. Bez ez eus doareoù listennoù speredek disheñvel, a ro an tu da "
 "ziuzañ an tonioù gant doareoù disheñvel."
 
-msgid "A song will be included in the playlist if it matches these conditions."
+msgid ""
+"A song will be included in the playlist if it matches these conditions."
 msgstr "Un ton a vo lakaet er roll c'hoari ma glot gant an amplegadoù-mañ :"
 
 msgid "A-Z"
@@ -460,7 +456,8 @@ msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "Ha sur oc'h da gaout c'hoant skarzhan an talvoud raktermenet « %1 »"
 
 msgid "Are you sure you want to reset this song's statistics?"
-msgstr "Ha sur oc'h da gaout c'hoant da adderaouekaat statistikoù an ton-mañ ?"
+msgstr ""
+"Ha sur oc'h da gaout c'hoant da adderaouekaat statistikoù an ton-mañ ?"
 
 msgid "Artist"
 msgstr "Arzour"
@@ -618,8 +615,8 @@ msgstr "Choaz el listenn"
 
 msgid "Choose how the playlist is sorted and how many songs it will contain."
 msgstr ""
-"Choazit penaos emañ rummet ar roll c'hoari hag an niver a donioù a zo e-"
-"barzh."
+"Choazit penaos emañ rummet ar roll c'hoari hag an niver a donioù a zo "
+"e-barzh."
 
 msgid "Choose manual cover"
 msgstr "Choaz ur golo"
@@ -658,7 +655,8 @@ msgstr ""
 
 msgid ""
 "Clementine can be controlled remotely by an Android phone.  To enable this "
-"feature log in with the same Google account that is configured on your phone."
+"feature log in with the same Google account that is configured on your "
+"phone."
 msgstr ""
 
 msgid "Clementine can show a message when the track changes."
@@ -673,7 +671,8 @@ msgstr ""
 
 msgid ""
 "Clementine couldn't fetch your subscription status since there are problems "
-"with your connection. Played tracks will be cached and sent later to Last.fm."
+"with your connection. Played tracks will be cached and sent later to "
+"Last.fm."
 msgstr ""
 
 msgid "Clementine image viewer"
@@ -1454,8 +1453,8 @@ msgid "Identifying song"
 msgstr ""
 
 msgid ""
-"If you continue, this device will work slowly and songs copied to it may not "
-"work."
+"If you continue, this device will work slowly and songs copied to it may not"
+" work."
 msgstr ""
 "Ma gendalc'hit, an drobarzhell a vo gorek hag an tonioù kopiet a c'hello "
 "chom hep mont en-dro."
@@ -2865,8 +2864,8 @@ msgid "This album is not available in the requested format"
 msgstr "N'ez eus ket eus an albom er stumm goulennet"
 
 msgid ""
-"This device must be connected and opened before Clementine can see what file "
-"formats it supports."
+"This device must be connected and opened before Clementine can see what file"
+" formats it supports."
 msgstr ""
 
 msgid "This device supports the following file formats:"
@@ -3105,8 +3104,7 @@ msgid "When Clementine starts"
 msgstr ""
 
 msgid ""
-"When looking for album art Clementine will first look for picture files that "
-"contain one of these words.\n"
+"When looking for album art Clementine will first look for picture files that contain one of these words.\n"
 "If there are no matches then it will use the largest image in the directory."
 msgstr ""
 
@@ -3192,8 +3190,8 @@ msgid ""
 msgstr ""
 
 msgid ""
-"You can listen to Magnatune songs for free without an account.  Purchasing a "
-"membership removes the messages at the end of each track."
+"You can listen to Magnatune songs for free without an account.  Purchasing a"
+" membership removes the messages at the end of each track."
 msgstr ""
 
 msgid "You can listen to background streams at the same time as other music."
@@ -3201,14 +3199,15 @@ msgstr ""
 "Tu zo deoc'h selaou ouzh sonioù drekleur d'ar memes koulz ha selaou sonerezh"
 
 msgid ""
-"You can scrobble tracks for free, but only <span style=\" font-weight:600;"
-"\">paid subscribers</span> can stream Last.fm radio from Clementine."
+"You can scrobble tracks for free, but only <span style=\" font-"
+"weight:600;\">paid subscribers</span> can stream Last.fm radio from "
+"Clementine."
 msgstr ""
 
 msgid ""
-"You can use your Wii Remote as a remote control for Clementine.  <a href="
-"\"http://www.clementine-player.org/wiimote\">See the page on the Clementine "
-"wiki</a> for more information.\n"
+"You can use your Wii Remote as a remote control for Clementine.  <a "
+"href=\"http://www.clementine-player.org/wiimote\">See the page on the "
+"Clementine wiki</a> for more information.\n"
 msgstr ""
 
 msgid "You do not have a Grooveshark Anywhere account."
@@ -3238,8 +3237,8 @@ msgid "You will need to restart Clementine if you change the language."
 msgstr ""
 
 msgid ""
-"You will not be able to play Last.fm radio stations as you are not a Last.fm "
-"subscriber."
+"You will not be able to play Last.fm radio stations as you are not a Last.fm"
+" subscriber."
 msgstr ""
 
 #, qt-format
@@ -3280,7 +3279,7 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "Zero"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "ouzhpennañ %n ton"
 
@@ -3369,7 +3368,7 @@ msgstr "dibarzhioù"
 msgid "press enter"
 msgstr ""
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "diverkañ %n ton"
 
@@ -3389,50 +3388,4 @@ msgstr "paouez"
 msgid "track %1"
 msgstr "roadenn %1"
 
-#~ msgid "Are you sure you want to install the following scripts?"
-#~ msgstr "Ha sur oc'h da gaout c'hoant da staliañ ar skript(où)-mañ ?"
 
-#~ msgid "Clementine scripts"
-#~ msgstr "Skriptoù Clementine"
-
-#~ msgid "Developer mode"
-#~ msgstr "Stumm diorroer"
-
-#~ msgid "Disable"
-#~ msgstr "Deweredekaat"
-
-#~ msgid "Enable"
-#~ msgstr "Enaouiñ"
-
-#~ msgid "Error installing script"
-#~ msgstr "Ur gudenn a zo savet e-kerzh staliadur ar skript"
-
-#~ msgid "Error opening script archive"
-#~ msgstr "Ur gudenn a zo savet e-pad digoradur diell ar skript"
-
-#~ msgid "Get new scripts"
-#~ msgstr "Kaout skriptoù nevez"
-
-#~ msgid "My scripts"
-#~ msgstr "Ma skriptoù"
-
-#~ msgid "%1 other listeners"
-#~ msgstr "%1 selaouer all"
-
-#~ msgid "%1 total plays"
-#~ msgstr "Bet lennet %1 gwech"
-
-#~ msgid "Add as new playlist..."
-#~ msgstr "Oushpennañ evel ur playlist nevez..."
-
-#~ msgid "Enqueue to playlist"
-#~ msgstr "Ouzhpennan d'al listenn lenn"
-
-#~ msgid "Generating audio fingerprint and fetching results..."
-#~ msgstr "Krouadur ar roud son hag enklask an disoc'hoù"
-
-#~ msgid "Enter a name for the new playlist"
-#~ msgstr "Reiñ un anv d’ar roll c'hoari nevez"
-
-#~ msgid "Identifying song..."
-#~ msgstr "Anavezout an ton..."

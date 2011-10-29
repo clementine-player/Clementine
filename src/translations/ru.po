@@ -1,21 +1,19 @@
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-#
+# Clementine.
+# Copyright (C) 2010 David Sansome
+# This file is distributed under the same license as the Clementine package.
+# 
+# Translators:
 # Павел Малеев <rolland39@gmail.com>, 2010.
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-04-09 10:24+0000\n"
-"PO-Revision-Date: 2011-04-12 12:34+0000\n"
-"Last-Translator: Chubakur <Unknown>\n"
-"Language-Team: Russian <kde-russian@lists.kde.ru>\n"
-"MIME-Version: 1.0\n"
+"Project-Id-Version: Clementine Music Player\n"
+"Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
+"PO-Revision-Date: 2011-10-28 17:18+0000\n"
+"Last-Translator: arnaudbienner <arnaud.bienner@gmail.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: ru\n"
-"X-Launchpad-Export-Date: 2011-04-13 05:02+0000\n"
-"X-Generator: Launchpad (build 12735)\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
 
 msgid " kbps"
 msgstr ""
@@ -88,15 +86,15 @@ msgstr ""
 msgid "%L1 total plays"
 msgstr ""
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n с ошибкой"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n завершено"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n осталось"
 
@@ -170,13 +168,11 @@ msgstr ""
 msgid ""
 "<p>Tokens start with %, for example: %artist %album %title </p>\n"
 "\n"
-"<p>If you surround sections of text that contain a token with curly-braces, "
-"that section will be hidden if the token is empty.</p>"
+"<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
 msgstr ""
 "<p>Поля начинаются со знака %, например: %artist %album %title </p>\n"
 "\n"
-"<p>Если Вы окружили часть текста фигурными скобками, то эта часть текста не "
-"будет видна, если значения полей будут пустыми</p>"
+"<p>Если Вы окружили часть текста фигурными скобками, то эта часть текста не будет видна, если значения полей будут пустыми</p>"
 
 msgid "A Grooveshark Anywhere account is required."
 msgstr ""
@@ -193,7 +189,8 @@ msgstr ""
 "Существуют различные типы умных плейлистов, предлагающих различные способы "
 "выбора композиций."
 
-msgid "A song will be included in the playlist if it matches these conditions."
+msgid ""
+"A song will be included in the playlist if it matches these conditions."
 msgstr ""
 "Композиция будет добавлена в плей-лист, если соответствует этим условиям."
 
@@ -658,7 +655,8 @@ msgstr ""
 
 msgid ""
 "Clementine can be controlled remotely by an Android phone.  To enable this "
-"feature log in with the same Google account that is configured on your phone."
+"feature log in with the same Google account that is configured on your "
+"phone."
 msgstr ""
 "Clementine может удаленно управляться телефоном с ОС Android. Для "
 "активирования этой функции зайдите под тем же аккаунтом Google , что и на "
@@ -676,7 +674,8 @@ msgstr ""
 
 msgid ""
 "Clementine couldn't fetch your subscription status since there are problems "
-"with your connection. Played tracks will be cached and sent later to Last.fm."
+"with your connection. Played tracks will be cached and sent later to "
+"Last.fm."
 msgstr ""
 
 msgid "Clementine image viewer"
@@ -1143,7 +1142,8 @@ msgstr "Введите новое имя для этого списка восп
 
 msgid ""
 "Enter an <b>artist</b> or <b>tag</b> to start listening to Last.fm radio."
-msgstr "Укажите <b>исполнителя</b> или <b>тег</b> чтобы слушать радио Last.fm."
+msgstr ""
+"Укажите <b>исполнителя</b> или <b>тег</b> чтобы слушать радио Last.fm."
 
 msgid "Enter search terms here"
 msgstr "Поиск..."
@@ -1456,8 +1456,8 @@ msgid "Identifying song"
 msgstr "Определение песни"
 
 msgid ""
-"If you continue, this device will work slowly and songs copied to it may not "
-"work."
+"If you continue, this device will work slowly and songs copied to it may not"
+" work."
 msgstr ""
 "Если продолжать, то устройство будет работать медленно и копирование "
 "композиций на него может не работать."
@@ -1650,8 +1650,7 @@ msgid "Least favourite tracks"
 msgstr "Наименее любимые треки"
 
 msgid "Leave blank for the default.  Examples: \"/dev/dsp\", \"front\", etc."
-msgstr ""
-"Оставьте пустым для умолчания. Например: \"/dev/dsp\", \"front\", и т.д."
+msgstr "Оставьте пустым для умолчания. Например: \"/dev/dsp\", \"front\", и т.д."
 
 msgid "Length"
 msgstr "Длительность"
@@ -2876,8 +2875,8 @@ msgid "This album is not available in the requested format"
 msgstr "Этот альбом не доступен в требуемом формате"
 
 msgid ""
-"This device must be connected and opened before Clementine can see what file "
-"formats it supports."
+"This device must be connected and opened before Clementine can see what file"
+" formats it supports."
 msgstr ""
 "Устройство должно быть подключено и открыто перед тем, как Clementine "
 "определит, какой формат оно поддерживает."
@@ -3124,14 +3123,11 @@ msgid "When Clementine starts"
 msgstr "При запуске Clementine"
 
 msgid ""
-"When looking for album art Clementine will first look for picture files that "
-"contain one of these words.\n"
+"When looking for album art Clementine will first look for picture files that contain one of these words.\n"
 "If there are no matches then it will use the largest image in the directory."
 msgstr ""
-"При поиске обложек альбомов Clementine будет сначала искать файлы "
-"изображений, которые содержат одно из этих слов.\n"
-"При отсутствии совпадений, она будет использовать наибольшее изображение в "
-"каталоге."
+"При поиске обложек альбомов Clementine будет сначала искать файлы изображений, которые содержат одно из этих слов.\n"
+"При отсутствии совпадений, она будет использовать наибольшее изображение в каталоге."
 
 msgid "WiFi MAC Address"
 msgstr "MAC адрес WiFi"
@@ -3215,8 +3211,8 @@ msgid ""
 msgstr ""
 
 msgid ""
-"You can listen to Magnatune songs for free without an account.  Purchasing a "
-"membership removes the messages at the end of each track."
+"You can listen to Magnatune songs for free without an account.  Purchasing a"
+" membership removes the messages at the end of each track."
 msgstr ""
 "Вы можете слушать песни с Magnatune свободно без регистрации. Регистрация "
 "убирает сообщения в конце каждой композиции."
@@ -3225,17 +3221,18 @@ msgid "You can listen to background streams at the same time as other music."
 msgstr "Вы можете слушать фоновые звуки одновременно с другой музыкой"
 
 msgid ""
-"You can scrobble tracks for free, but only <span style=\" font-weight:600;"
-"\">paid subscribers</span> can stream Last.fm radio from Clementine."
+"You can scrobble tracks for free, but only <span style=\" font-"
+"weight:600;\">paid subscribers</span> can stream Last.fm radio from "
+"Clementine."
 msgstr ""
 "Вы можете скробблить композиции свободно, но только <span style=\" font-"
 "weight:600;\">платные подписчики</span> могут слушать радио Last.fm из "
 "Clementine."
 
 msgid ""
-"You can use your Wii Remote as a remote control for Clementine.  <a href="
-"\"http://www.clementine-player.org/wiimote\">See the page on the Clementine "
-"wiki</a> for more information.\n"
+"You can use your Wii Remote as a remote control for Clementine.  <a "
+"href=\"http://www.clementine-player.org/wiimote\">See the page on the "
+"Clementine wiki</a> for more information.\n"
 msgstr ""
 "Вы можете использовать пульт Wii для дистанционного управления Clementine. "
 "<a href=\"http://www.clementine-player.org/wiimote\">Смотри раздел на wiki-"
@@ -3271,8 +3268,8 @@ msgid "You will need to restart Clementine if you change the language."
 msgstr "После смены языка потребуется перезапуск"
 
 msgid ""
-"You will not be able to play Last.fm radio stations as you are not a Last.fm "
-"subscriber."
+"You will not be able to play Last.fm radio stations as you are not a Last.fm"
+" subscriber."
 msgstr ""
 
 #, qt-format
@@ -3313,7 +3310,7 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "По-умолчанию"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "добавить %n композиций"
 
@@ -3402,7 +3399,7 @@ msgstr "настройки"
 msgid "press enter"
 msgstr ""
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "удалить %n композиций"
 
@@ -3422,489 +3419,4 @@ msgstr "Остановить"
 msgid "track %1"
 msgstr "композиция %1"
 
-#~ msgid "Are you sure you want to install the following scripts?"
-#~ msgstr "Вы уверены, что хотите установить следующие сценарии?"
 
-#~ msgid "Clementine scripts"
-#~ msgstr "Сценарии Clementine"
-
-#~ msgid "Developer mode"
-#~ msgstr "Режим разработчика"
-
-#~ msgid "Disable"
-#~ msgstr "Отключить"
-
-#~ msgid "Enable"
-#~ msgstr "Включить"
-
-#~ msgid "Error installing script"
-#~ msgstr "Ошибка установки сценария"
-
-#~ msgid "Error opening script archive"
-#~ msgstr "Ошибка открытия архива сценария"
-
-#~ msgid "Get new scripts"
-#~ msgstr "Получить новые скрипты"
-
-#~ msgid "Global Shortcuts"
-#~ msgstr "Глобальные комбинации клавиш"
-
-#~ msgid "Install from file..."
-#~ msgstr "Установить из файла..."
-
-#~ msgid "Install script file"
-#~ msgstr "Установить файл сценария"
-
-#~ msgid "Install scripts"
-#~ msgstr "Установка сценариев"
-
-#~ msgid "My scripts"
-#~ msgstr "Мои скрипты"
-
-#~ msgid "Please fill in the blanks to login into Last.fm"
-#~ msgstr "Заполните, пожалуйста, поля для входа на Last.fm"
-
-#~ msgid "Reload"
-#~ msgstr "Перезагрузить"
-
-#~ msgid "Script Manager"
-#~ msgstr "Менеджер скриптов"
-
-#~ msgid "Settings..."
-#~ msgstr "Настройки..."
-
-#~ msgid "Some files failed to install.  The script may not work correctly."
-#~ msgstr ""
-#~ "Некоторые файлы не удалось восстановить. Сценарий может работать "
-#~ "некорректно."
-
-#~ msgid "The '%1' script was modified, you might have to reload it"
-#~ msgstr "Сценарий '%1' был изменён, нужно его перезапустить"
-
-#~ msgid "This is not a valid Clementine script file."
-#~ msgstr "Это некорректный файл сценария Clementine."
-
-#~ msgid ""
-#~ "Warning: scripts have full access to your computer and your music.  Only "
-#~ "install scripts that you trust."
-#~ msgstr ""
-#~ "Внимание: сценарии будут иметь полный доступ к Вашему компьютеру и Вашей "
-#~ "музыке. Устанавливайте лишь проверенные сценарии."
-
-#~ msgid "%1 other listeners"
-#~ msgstr "%1 других слушателей"
-
-#~ msgid "%1 total plays"
-#~ msgstr "%1 раз проигрывалось"
-
-#~ msgid "Text color"
-#~ msgstr "Цвет текста"
-
-#~ msgid ""
-#~ "In dynamic mode new tracks will be chosen and added to the playlist every "
-#~ "time a song finishes.  Enabling dynamic mode will ignore any size limit "
-#~ "you set on the playlist."
-#~ msgstr ""
-#~ "В динамическом режиме новые треки будут выбраны и добавлены в плейлист "
-#~ "каждый раз, когда песня заканчивается. Включение динамического режима "
-#~ "будет игнорировать любые лимиты, установленные на плейлист."
-
-#~ msgid "Hide..."
-#~ msgstr "Скрыть..."
-
-#~ msgid "Show section"
-#~ msgstr "Показать секцию"
-
-#~ msgid "Hide %1"
-#~ msgstr "Скрыть %1"
-
-#~ msgid "Radio service couldn't be loaded :-("
-#~ msgstr "Сервис радио не запустился =("
-
-#~ msgid "[click to edit]"
-#~ msgstr "[щелкните, чтобы изменить]"
-
-#~ msgid "Loading audio engine"
-#~ msgstr "Загрузка движка аудио"
-
-#~ msgid "Configure Clementine..."
-#~ msgstr "Настроить Clementine..."
-
-#~ msgid "Add media..."
-#~ msgstr "Добавить..."
-
-#~ msgid "Radio"
-#~ msgstr "Радио"
-
-#~ msgid "Help"
-#~ msgstr "Помощь"
-
-#~ msgid "Enter your Last.fm details below:"
-#~ msgstr "Введите ваши данные Last.fm:"
-
-#~ msgid ""
-#~ "Note that you must be a <span style=\" font-weight:600;\">paid "
-#~ "subscriber</span> to listen to Last.fm radio from within Clementine."
-#~ msgstr ""
-#~ "Обратите внимание, что вы должны быть <span style=\"font-weight:600;"
-#~ "\">платным подписчиком</span> ,чтобы слушать радио Last.fm из Clementine."
-
-#~ msgid "Fadeout"
-#~ msgstr "Затихание"
-
-#~ msgid "No fadeout"
-#~ msgstr "Отключить"
-
-#~ msgid "Fadeout duration"
-#~ msgstr "Длительность затихания"
-
-#~ msgid "Version"
-#~ msgstr "Версия"
-
-#~ msgid ""
-#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
-#~ "REC-html40/strict.dtd\">\n"
-#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
-#~ "css\">\n"
-#~ "p, li { white-space: pre-wrap; }\n"
-#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
-#~ "font-weight:400; font-style:normal;\">\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><a href=\"http://code."
-#~ "google.com/p/clementine-player/\"><span style=\" text-decoration: "
-#~ "underline; color:#0057ae;\">http://code.google.com/p/clementine-player/</"
-#~ "span></a></p>\n"
-#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
-#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
-#~ "\"></p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
-#~ "weight:600;\">Authors:</span></p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">David Sansome &lt;<a "
-#~ "href=\"mailto:me@davidsansome.com\"><span style=\" text-decoration: "
-#~ "underline; color:#0057ae;\">me@davidsansome.com</span></a>&gt;</p>\n"
-#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
-#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
-#~ "\"></p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
-#~ "weight:600;\">Thanks to:</span></p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Mark Kretschmann &lt;<a "
-#~ "href=\"mailto:markey@web.de\"><span style=\" text-decoration: underline; "
-#~ "color:#0057ae;\">markey@web.de</span></a>&gt;</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Max Howell &lt;<a href="
-#~ "\"mailto:max.howell@methylblue.com\"><span style=\" text-decoration: "
-#~ "underline; color:#0057ae;\">max.howell@methylblue.com</span></a>&gt;</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">... and all the Amarok "
-#~ "contributors</p></body></html>"
-#~ msgstr ""
-#~ "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/"
-#~ "REC-html40/strict.dtd\">\n"
-#~ "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/"
-#~ "css\">\n"
-#~ "p, li { white-space: pre-wrap; }\n"
-#~ "</style></head><body style=\" font-family:'Sans Serif'; font-size:9pt; "
-#~ "font-weight:400; font-style:normal;\">\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><a href=\"http://code."
-#~ "google.com/p/clementine-player/\"><span style=\" text-decoration: "
-#~ "underline; color:#0057ae;\">http://code.google.com/p/clementine-player/</"
-#~ "span></a></p>\n"
-#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
-#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
-#~ "\"></p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
-#~ "weight:600;\">Авторы:</span></p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">David Sansome &lt;<a "
-#~ "href=\"mailto:me@davidsansome.com\"><span style=\" text-decoration: "
-#~ "underline; color:#0057ae;\">me@davidsansome.com</span></a>&gt;</p>\n"
-#~ "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; "
-#~ "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"
-#~ "\"></p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-"
-#~ "weight:600;\">Выражаем благодарность:</span></p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Mark Kretschmann &lt;<a "
-#~ "href=\"mailto:markey@web.de\"><span style=\" text-decoration: underline; "
-#~ "color:#0057ae;\">markey@web.de</span></a>&gt;</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">Max Howell &lt;<a href="
-#~ "\"mailto:max.howell@methylblue.com\"><span style=\" text-decoration: "
-#~ "underline; color:#0057ae;\">max.howell@methylblue.com</span></a>&gt;</p>\n"
-#~ "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-"
-#~ "right:0px; -qt-block-indent:0; text-indent:0px;\">... и всем создателям "
-#~ "Amarok</p></body></html>"
-
-#~ msgid "Save this stream in the Radio tab"
-#~ msgstr "Сохранить поток на вкладке Радио"
-
-#~ msgid "Don't show notifications"
-#~ msgstr "Не показывать"
-
-#~ msgid "My Loved Tracks"
-#~ msgstr "Мои любимые композиции"
-
-#~ msgid "My Neighbourhood"
-#~ msgstr "Мои соседи"
-
-#~ msgid "Neighbours"
-#~ msgstr "Соседи"
-
-#~ msgid "%1's Radio Station"
-#~ msgstr "Радиостанция %1"
-
-#~ msgid "%1's Loved Tracks"
-#~ msgstr "Любимые композиции %1"
-
-#~ msgid "%1's Neighborhood"
-#~ msgstr "Соседи %1"
-
-#~ msgid "%1's Recommended Radio"
-#~ msgstr "Рекомендуемое радио %1"
-
-#~ msgid "%1's Neighbour Radio"
-#~ msgstr "Радио соседа %1"
-
-#~ msgid "%1's Library"
-#~ msgstr "Коллекция %1"
-
-#~ msgid "Similar Artists to %1"
-#~ msgstr "Похожие исполнители %1"
-
-#~ msgid "Tag Radio: %1"
-#~ msgstr "Радио тега: %1"
-
-#~ msgid "Not enough neighbours"
-#~ msgstr "Не достаточно соседей"
-
-#~ msgid "Editing %n tracks"
-#~ msgstr "Редактирую %n треков"
-
-#~ msgid ""
-#~ "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm *."
-#~ "tiff)"
-#~ msgstr ""
-#~ "Изображения  (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *."
-#~ "xbm *.tiff)"
-
-#~ msgid "ASF"
-#~ msgstr "ASF"
-
-#~ msgid "MP4"
-#~ msgstr "MP4"
-
-#~ msgid "Ogg FLAC"
-#~ msgstr "Ogg FLAC"
-
-#~ msgid "Options"
-#~ msgstr "Настройки"
-
-#~ msgid "Behaviour"
-#~ msgstr "Поведение"
-
-#~ msgid "Choose manual cover..."
-#~ msgstr "Укажите обложку вручную..."
-
-#~ msgid "Last.fm Recommended Radio - %1"
-#~ msgstr "Рекомендуемое радио Last.fm - %1"
-
-#~ msgid "Last.fm Loved Tracks - %1"
-#~ msgstr "Любимые треки Last.fm - %1"
-
-#~ msgid "Unknown audio engine \"%1\". Choices are:"
-#~ msgstr "Неизвестный аудио движок \"%1\". Варианты:"
-
-#~ msgid "Select engine"
-#~ msgstr "Укажите движок"
-
-#~ msgid "Music (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma)"
-#~ msgstr "Композиции (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma)"
-
-#~ msgid "Playlists (*.m3u *.xspf *.xml)"
-#~ msgstr "Плейлисты (*.m3u *.xspf *.xml)"
-
-#~ msgid "Couldn't load the last.fm radio station: %1"
-#~ msgstr "Невозможно загрузить радиостанцию last.fm: %1"
-
-#~ msgid "Double-clicking a song clears the playlist first"
-#~ msgstr "Двойной щелчок мышью на композиции стирает список воспроизведения"
-
-#~ msgid "Enter a name for the new playlist"
-#~ msgstr "Введите имя для списка воспроизведения"
-
-#~ msgid "Configure global shortcuts..."
-#~ msgstr "Настройка глобальных горячих клавиш..."
-
-#~ msgid "Update Library"
-#~ msgstr "Обновить коллекцию"
-
-#~ msgid "Visualisations"
-#~ msgstr "Визуализация"
-
-#~ msgid "Clementine Visualisation"
-#~ msgstr "Визуализация Clementine"
-
-#~ msgid "Close visualisation"
-#~ msgstr "Закрыть визуализацию"
-
-#~ msgid "Visualisations Settings"
-#~ msgstr "Настройки визуализации"
-
-#~ msgid "Visualisation mode"
-#~ msgstr "Режим визуализации"
-
-#~ msgid "Random visualisation"
-#~ msgstr "Случайная визуализация"
-
-#~ msgid "Select visualisations..."
-#~ msgstr "Выбор визуализации..."
-
-#~ msgid "Delay between visualisations"
-#~ msgstr "Пауза между визуализациями"
-
-#~ msgid "Select visualisations"
-#~ msgstr "Выбор визуализации"
-
-#~ msgid "File naming scheme"
-#~ msgstr "Схема имени файла"
-
-#~ msgid "Delete originals"
-#~ msgstr "Удалить оригиналы"
-
-#~ msgid "Delete files..."
-#~ msgstr "Удалить файлы..."
-
-#~ msgid "Overwrite files"
-#~ msgstr "Перезаписать файлы"
-
-#~ msgid "Connected"
-#~ msgstr "Подключено"
-
-#~ msgid "Disconnect device"
-#~ msgstr "Отсоединение устройства"
-
-#~ msgid "Capacity"
-#~ msgstr "Объём"
-
-#~ msgid "available"
-#~ msgstr "доступно"
-
-#~ msgid "Enable shortcuts only when application is focused"
-#~ msgstr "Показывать ярлыки только когда приложение в фокусе"
-
-#~ msgid "Edit action"
-#~ msgstr "Изменить действие"
-
-#~ msgid "Stretch columns to fit window"
-#~ msgstr "Выровнять поля по размеру окна"
-
-#~ msgid "Wiiremote %1: disconnected"
-#~ msgstr "Пульт Wii %1: отключен"
-
-#~ msgid "Wiiremote %1: low battery (%2%)"
-#~ msgstr "Пульт Wii %1: батарея разряжена (%2%)"
-
-#~ msgid "Wiiremote %1: actived"
-#~ msgstr "Пульт Wii %1: активирован"
-
-#~ msgid "Wiiremote %1: critical battery (%2%) "
-#~ msgstr "Пульт Wii %1: критический уровень батареи (%2%) "
-
-#~ msgid "Wiiremote %1: connected"
-#~ msgstr "Пульт Wii %1: подключен"
-
-#~ msgid "Wiiremote %1: disactived"
-#~ msgstr "Пульт Wii %1: деактивирован"
-
-#~ msgid "Searching %1..."
-#~ msgstr "Поиск %1..."
-
-#~ msgid "Searching..."
-#~ msgstr "Поиск..."
-
-#~ msgid "Download lyrics from the Internet"
-#~ msgstr "Скачать тексты песен из Интернета"
-
-#~ msgid "Always"
-#~ msgstr "Всегда"
-
-#~ msgid "Only when playing a song"
-#~ msgstr "Только когда проигрывается композиция"
-
-#~ msgid "No lyrics could be found"
-#~ msgstr "Не найдены тексты песен"
-
-#~ msgid "Show the song information sidebar"
-#~ msgstr "Показывать информационную боковую панель"
-
-#~ msgid "Buffer Duration (ms)"
-#~ msgstr "Размер буферизации (в мс)"
-
-#~ msgid "Add as new playlist..."
-#~ msgstr "Добавить как новый плейлист…"
-
-#~ msgid "Last.fm similar artists"
-#~ msgstr "Похожие исполнители на Last.fm"
-
-#~ msgid "New"
-#~ msgstr "Новые"
-
-#~ msgid "New folder..."
-#~ msgstr "Новая папка..."
-
-#~ msgid "Playlists"
-#~ msgstr "Плейлисты"
-
-#~ msgid "Year (oldest first)"
-#~ msgstr "Год (по возрастанию)"
-
-#~ msgid "Year (newest first)"
-#~ msgstr "Год (по убыванию)"
-
-#~ msgid "Dynamic playlists"
-#~ msgstr "Динамические плейлисты"
-
-#~ msgid "Length (longest first)"
-#~ msgstr "Продолжительность (по убыванию)"
-
-#~ msgid "Length (shortest first)"
-#~ msgstr "Продолжительность (во возрастанию)"
-
-#~ msgid "Artist A-Z"
-#~ msgstr "Исполнитель А-Я"
-
-#~ msgid ""
-#~ "A song will be included in the playlist if it matches all of these "
-#~ "conditions."
-#~ msgstr ""
-#~ "Песня будет включена в плейлист, если она соответствует всем этим "
-#~ "условиям."
-
-#~ msgid ""
-#~ "Let Last.fm suggest songs from your library that are similar to one you "
-#~ "specify."
-#~ msgstr ""
-#~ "Разрешить Last.fm предлагать композиции из вашей библиотеке, похожие на "
-#~ "указанную вами"
-
-#~ msgid "Don't use search terms (include all songs)"
-#~ msgstr "Не использовать правила поиска (включить все композиции)"
-
-#~ msgid "Enqueue to playlist"
-#~ msgstr "Поставить в список воспроизведения"
-
-#~ msgid "Script console"
-#~ msgstr "Консоль скриптов"
-
-#~ msgid "Generating audio fingerprint and fetching results..."
-#~ msgstr "Генерация отпечатка аудиофайла и поиск результатов..."
-
-#~ msgid "Results fetched"
-#~ msgstr "Получены результаты"

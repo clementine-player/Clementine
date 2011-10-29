@@ -1,22 +1,19 @@
-# Bulgarian translation for clementine
-# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
-# This file is distributed under the same license as the clementine package.
+# Clementine.
+# Copyright (C) 2010 David Sansome
+# This file is distributed under the same license as the Clementine package.
+# 
+# Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: clementine\n"
-"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-04-09 10:24+0000\n"
-"PO-Revision-Date: 2011-04-10 10:39+0000\n"
-"Last-Translator: George Karavasilev <kokoto_java@yahoo.com>\n"
-"Language-Team: Bulgarian <bg@li.org>\n"
-"MIME-Version: 1.0\n"
+"Project-Id-Version: Clementine Music Player\n"
+"Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
+"PO-Revision-Date: 2011-10-28 17:18+0000\n"
+"Last-Translator: arnaudbienner <arnaud.bienner@gmail.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: bg\n"
-"X-Launchpad-Export-Date: 2011-04-11 05:09+0000\n"
-"X-Generator: Launchpad (build 12735)\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
 msgid " kbps"
 msgstr ""
@@ -89,15 +86,15 @@ msgstr ""
 msgid "%L1 total plays"
 msgstr ""
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n неуспешно"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n завършено"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n оставащо"
 
@@ -171,13 +168,11 @@ msgstr ""
 msgid ""
 "<p>Tokens start with %, for example: %artist %album %title </p>\n"
 "\n"
-"<p>If you surround sections of text that contain a token with curly-braces, "
-"that section will be hidden if the token is empty.</p>"
+"<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
 msgstr ""
 "<p>Белезите започват с %, например: %изпълнител %албум %песен</p>\n"
 "\n"
-"<p>Ако обградите част от текст, която съдържа белег с къдрави скоби, тази "
-"част ще бъде скрита, ако белегът е празен.</p>"
+"<p>Ако обградите част от текст, която съдържа белег с къдрави скоби, тази част ще бъде скрита, ако белегът е празен.</p>"
 
 msgid "A Grooveshark Anywhere account is required."
 msgstr ""
@@ -191,10 +186,11 @@ msgid ""
 "selecting songs."
 msgstr ""
 "Умен плейлист е динамичен лист от песни идващи от вашата библиотека.Има "
-"различни типове умен плейлист,които предлагат различни начини за избиране на "
-"песни."
+"различни типове умен плейлист,които предлагат различни начини за избиране на"
+" песни."
 
-msgid "A song will be included in the playlist if it matches these conditions."
+msgid ""
+"A song will be included in the playlist if it matches these conditions."
 msgstr "Песен ще бъде включена в плейлиста ако отговаря на тези критерии."
 
 msgid "A-Z"
@@ -658,11 +654,12 @@ msgstr ""
 
 msgid ""
 "Clementine can be controlled remotely by an Android phone.  To enable this "
-"feature log in with the same Google account that is configured on your phone."
+"feature log in with the same Google account that is configured on your "
+"phone."
 msgstr ""
 "Клементин може да бъде контролиран дистанционно посредством телефон с "
-"Android. За да разрешите тази функция влезте с Google акаунта, с който вашия "
-"телефон е конфигуриран."
+"Android. За да разрешите тази функция влезте с Google акаунта, с който вашия"
+" телефон е конфигуриран."
 
 msgid "Clementine can show a message when the track changes."
 msgstr "Клементин може да известява когато се сменя песен"
@@ -676,7 +673,8 @@ msgstr ""
 
 msgid ""
 "Clementine couldn't fetch your subscription status since there are problems "
-"with your connection. Played tracks will be cached and sent later to Last.fm."
+"with your connection. Played tracks will be cached and sent later to "
+"Last.fm."
 msgstr ""
 
 msgid "Clementine image viewer"
@@ -1144,8 +1142,8 @@ msgstr "Въведете ново име за тази плейлиста"
 msgid ""
 "Enter an <b>artist</b> or <b>tag</b> to start listening to Last.fm radio."
 msgstr ""
-"Въведете <b>изпълнител</b> или <b>етикет</b> за да започнете да слушате Last."
-"fm радио"
+"Въведете <b>изпълнител</b> или <b>етикет</b> за да започнете да слушате "
+"Last.fm радио"
 
 msgid "Enter search terms here"
 msgstr "Въведете критерий за търсене"
@@ -1457,8 +1455,8 @@ msgid "Identifying song"
 msgstr "Идентифициране на песента"
 
 msgid ""
-"If you continue, this device will work slowly and songs copied to it may not "
-"work."
+"If you continue, this device will work slowly and songs copied to it may not"
+" work."
 msgstr ""
 "Ако продължите това устройство ще работи бавно и песните копирани в него "
 "може да не работят."
@@ -1653,8 +1651,8 @@ msgstr "Най-малко любими песни"
 
 msgid "Leave blank for the default.  Examples: \"/dev/dsp\", \"front\", etc."
 msgstr ""
-"Оставете празно за данни по подразбиране. Примери: \"/dev/dsp\", \"front\" и "
-"т.н."
+"Оставете празно за данни по подразбиране. Примери: \"/dev/dsp\", \"front\" и"
+" т.н."
 
 msgid "Length"
 msgstr "Дължина"
@@ -2187,7 +2185,8 @@ msgid "Preferences..."
 msgstr "Настройки..."
 
 msgid "Preferred album art filenames (comma separated)"
-msgstr "Предпочитани файлови разширения за обложките, разделени със запетайки."
+msgstr ""
+"Предпочитани файлови разширения за обложките, разделени със запетайки."
 
 msgid "Preferred audio format"
 msgstr "Предпочитан аудио формат"
@@ -2851,7 +2850,8 @@ msgstr ""
 msgid ""
 "These files will be deleted from disk, are you sure you want to continue?"
 msgstr ""
-"Тези файлове ще бъда изтрите от диска,сигурни ли сте,че искате да продължите?"
+"Тези файлове ще бъда изтрите от диска,сигурни ли сте,че искате да "
+"продължите?"
 
 msgid ""
 "These files will be deleted from the device, are you sure you want to "
@@ -2876,19 +2876,18 @@ msgid ""
 "This action will create a database which could be as big as 150 MB.\n"
 "Do you want to continue anyway?"
 msgstr ""
-"Това действие ще създаде база от данни с размер, който може да достигне 150 "
-"MB.\n"
+"Това действие ще създаде база от данни с размер, който може да достигне 150 MB.\n"
 "Сигурни ли сте че искате да продължите?"
 
 msgid "This album is not available in the requested format"
 msgstr "Този албум не е наличен в избраният формат"
 
 msgid ""
-"This device must be connected and opened before Clementine can see what file "
-"formats it supports."
+"This device must be connected and opened before Clementine can see what file"
+" formats it supports."
 msgstr ""
-"Това устройство трябва да бъде свързано и отоворено преди Клементин да маоже "
-"да види какви файлови формати подържа."
+"Това устройство трябва да бъде свързано и отоворено преди Клементин да маоже"
+" да види какви файлови формати подържа."
 
 msgid "This device supports the following file formats:"
 msgstr "Това устройство подържа следните формати:"
@@ -3131,14 +3130,11 @@ msgid "When Clementine starts"
 msgstr "Когато Клементин се стартира"
 
 msgid ""
-"When looking for album art Clementine will first look for picture files that "
-"contain one of these words.\n"
+"When looking for album art Clementine will first look for picture files that contain one of these words.\n"
 "If there are no matches then it will use the largest image in the directory."
 msgstr ""
-"Когато Клементин търси обложки първо ще потърси за картинки съдържащи една "
-"от тези думи.\n"
-"Ако няма свъпадения тогава ще използва най-големите изображения в "
-"директорията,"
+"Когато Клементин търси обложки първо ще потърси за картинки съдържащи една от тези думи.\n"
+"Ако няма свъпадения тогава ще използва най-големите изображения в директорията,"
 
 msgid "WiFi MAC Address"
 msgstr "MAC Адрес на WiFi"
@@ -3223,8 +3219,8 @@ msgid ""
 msgstr ""
 
 msgid ""
-"You can listen to Magnatune songs for free without an account.  Purchasing a "
-"membership removes the messages at the end of each track."
+"You can listen to Magnatune songs for free without an account.  Purchasing a"
+" membership removes the messages at the end of each track."
 msgstr ""
 "Можете да слушате песни от magnatune безплатно, без регистрация.Купуването "
 "на членство маха съобщенията в края на всяка песен."
@@ -3234,19 +3230,21 @@ msgstr ""
 "Можете да слушате фонови потоци по същото време, когато слушате и музика."
 
 msgid ""
-"You can scrobble tracks for free, but only <span style=\" font-weight:600;"
-"\">paid subscribers</span> can stream Last.fm radio from Clementine."
+"You can scrobble tracks for free, but only <span style=\" font-"
+"weight:600;\">paid subscribers</span> can stream Last.fm radio from "
+"Clementine."
 msgstr ""
-"Можете да слушате песни безплатно, но само  <span style=\" font-weight:600;"
-"\">хора с платени акаунти</span> могат да слушат Last.fm радио от Клементин."
+"Можете да слушате песни безплатно, но само  <span style=\" font-"
+"weight:600;\">хора с платени акаунти</span> могат да слушат Last.fm радио от"
+" Клементин."
 
 msgid ""
-"You can use your Wii Remote as a remote control for Clementine.  <a href="
-"\"http://www.clementine-player.org/wiimote\">See the page on the Clementine "
-"wiki</a> for more information.\n"
+"You can use your Wii Remote as a remote control for Clementine.  <a "
+"href=\"http://www.clementine-player.org/wiimote\">See the page on the "
+"Clementine wiki</a> for more information.\n"
 msgstr ""
-"Можете да изпозвате Wii Remote като дистанционно за Клементин.<a href="
-"\"http://www.clementine-player.org/wiimote\">Вижте Wiki страницата на "
+"Можете да изпозвате Wii Remote като дистанционно за Клементин.<a "
+"href=\"http://www.clementine-player.org/wiimote\">Вижте Wiki страницата на "
 "Клементин</a> за повече информация.\n"
 
 msgid "You do not have a Grooveshark Anywhere account."
@@ -3271,16 +3269,16 @@ msgid ""
 "style:italic;\">Enable access for assistive devices</span>\" to use global "
 "shortcuts in Clementine."
 msgstr ""
-"Трябва да влезете в Системните Настройки и да включите \"<span style=\" font-"
-"style:italic;\">Разрешаване на достъп на асистиращи устройства</span>\" за "
-"да изпозлвате глобалните клавишни комбинации в Клементин."
+"Трябва да влезете в Системните Настройки и да включите \"<span style=\" "
+"font-style:italic;\">Разрешаване на достъп на асистиращи устройства</span>\""
+" за да изпозлвате глобалните клавишни комбинации в Клементин."
 
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Трябва да рестартирате Клементин, ако смените езика."
 
 msgid ""
-"You will not be able to play Last.fm radio stations as you are not a Last.fm "
-"subscriber."
+"You will not be able to play Last.fm radio stations as you are not a Last.fm"
+" subscriber."
 msgstr ""
 
 #, qt-format
@@ -3324,7 +3322,7 @@ msgstr "Я-А"
 msgid "Zero"
 msgstr "Нула"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "добавете %n песни"
 
@@ -3413,7 +3411,7 @@ msgstr "опции"
 msgid "press enter"
 msgstr ""
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "премахване на %n песни"
 
@@ -3433,178 +3431,4 @@ msgstr "Стоп"
 msgid "track %1"
 msgstr "песен %1"
 
-#~ msgid "Are you sure you want to install the following scripts?"
-#~ msgstr "Наистина ли ще инсталираш следните скриптове?"
 
-#~ msgid "Clementine scripts"
-#~ msgstr "Clementine скриптове"
-
-#~ msgid "Developer mode"
-#~ msgstr "Режим за разработчици"
-
-#~ msgid "Disable"
-#~ msgstr "Забрани"
-
-#~ msgid "Enable"
-#~ msgstr "Разреши"
-
-#~ msgid "Error installing script"
-#~ msgstr "Грешка при инсталиране на скрипта"
-
-#~ msgid "Error opening script archive"
-#~ msgstr "Грешка при отваряне на скрипта"
-
-#~ msgid "Get new scripts"
-#~ msgstr "Вземи нови скриптове"
-
-#~ msgid "Global Shortcuts"
-#~ msgstr "Глобални клавишни комбинации"
-
-#~ msgid "Install from file..."
-#~ msgstr "Инсталирай от файл..."
-
-#~ msgid "Install script file"
-#~ msgstr "Инсталирай скриптов файл"
-
-#~ msgid "Install scripts"
-#~ msgstr "Инсталирай скриптове"
-
-#~ msgid "My scripts"
-#~ msgstr "Моите скриптове"
-
-#~ msgid "Reload"
-#~ msgstr "Презареди"
-
-#~ msgid "Script Manager"
-#~ msgstr "Скрипт Менаджер"
-
-#~ msgid "Settings..."
-#~ msgstr "Настройки..."
-
-#~ msgid "Some files failed to install.  The script may not work correctly."
-#~ msgstr ""
-#~ "Някои файлове не бяха инсталирани. Скриптът може да не функционира "
-#~ "правилно."
-
-#~ msgid "The '%1' script was modified, you might have to reload it"
-#~ msgstr "'%1' скрипт беше променен, затова трябва да го презаредиш"
-
-#~ msgid "This is not a valid Clementine script file."
-#~ msgstr "Това не е валиден Clementine скриптов файл."
-
-#~ msgid ""
-#~ "Warning: scripts have full access to your computer and your music.  Only "
-#~ "install scripts that you trust."
-#~ msgstr ""
-#~ "Внимание:скриптовете имат пълен достъп до твоя компютър и музика. "
-#~ "Инсталирай единствено скриптове на които имаш доверие."
-
-#~ msgid "%1 other listeners"
-#~ msgstr "%1 други слушатели"
-
-#~ msgid "%1 total plays"
-#~ msgstr "%1 общо пускания"
-
-#~ msgid "Text color"
-#~ msgstr "Цвят на текста"
-
-#~ msgid ""
-#~ "In dynamic mode new tracks will be chosen and added to the playlist every "
-#~ "time a song finishes.  Enabling dynamic mode will ignore any size limit "
-#~ "you set on the playlist."
-#~ msgstr ""
-#~ "В динамичен режим новите парчета ще бъдат избирани и добавяни в плейлиста "
-#~ "всеки път, когата песен приключи.Разрешаването на динамичния режим ще "
-#~ "игнорира всякакъв лимит за размер, който сте слагали на плейлиста."
-
-#~ msgid "Couldn't load the last.fm radio station: %1"
-#~ msgstr "Не може да бъде заредена last.fm радио станция: %1"
-
-#~ msgid "Delete files..."
-#~ msgstr "Изтриване на файлове..."
-
-#~ msgid "Double-clicking a song clears the playlist first"
-#~ msgstr "Двойно щракване върху песен първо изчиства плейлистата"
-
-#~ msgid "Editing %n tracks"
-#~ msgstr "Редактиране на %n песни"
-
-#~ msgid "Hide..."
-#~ msgstr "Скриване..."
-
-#~ msgid ""
-#~ "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm *."
-#~ "tiff)"
-#~ msgstr ""
-#~ "Изображения (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm "
-#~ "*.tiff)"
-
-#~ msgid "Last.fm Loved Tracks - %1"
-#~ msgstr "Last.fm Любими Песни - %1"
-
-#~ msgid "Last.fm Recommended Radio - %1"
-#~ msgstr "Last.fm Препоръчано Радио - %1"
-
-#~ msgid "MP4"
-#~ msgstr "MP4"
-
-#~ msgid "My Loved Tracks"
-#~ msgstr "Моите Любими Песни"
-
-#~ msgid "Hide %1"
-#~ msgstr "Скриване на %1"
-
-#~ msgid "Help"
-#~ msgstr "Помощ"
-
-#~ msgid "Change album cover"
-#~ msgstr "Смени обложката на албума"
-
-#~ msgid "Enter a name for the new playlist"
-#~ msgstr "Въведи име на новият плейлист"
-
-#~ msgid "Radio service couldn't be loaded :-("
-#~ msgstr "Радио услугата не може да бъде заредена"
-
-#~ msgid "Select engine"
-#~ msgstr "Избери двигател"
-
-#~ msgid "Statistics"
-#~ msgstr "Статистики"
-
-#~ msgid "Stretch columns to fit window"
-#~ msgstr "Разшири колоните да паснат на прозореца"
-
-#~ msgid "Unknown audio engine \"%1\". Choices are:"
-#~ msgstr "Неизвестен аудио двигател \"%1\" Изборите са:"
-
-#~ msgid "Update Library"
-#~ msgstr "Обнови библиотеката"
-
-#~ msgid "Enqueue to playlist"
-#~ msgstr "Включи в плейлиста"
-
-#~ msgid "Results fetched"
-#~ msgstr "Резултатите получени"
-
-#~ msgid "Generating audio fingerprint and fetching results..."
-#~ msgstr "Генериране на звуков отпечатък и получаване на резултатите..."
-
-#~ msgid "Show duplicates only"
-#~ msgstr "Покажи само дубликатите"
-
-#~ msgid "Save Album Cover"
-#~ msgstr "Запази обложката на албума"
-
-#~ msgid "Images (*.jpg)"
-#~ msgstr "Изображения (*.jpg)"
-
-#~ msgid ""
-#~ "The version of Clementine you've just updated to requires a full library "
-#~ "rescan because of the new features listed below:<ul>"
-#~ msgstr ""
-#~ "Версията на Clementine, която току що обновихте изисква пълно повторно "
-#~ "сканиране на библиотеката, заради следните нови функции:<ul>"
-
-#~ msgid "Identifying song..."
-#~ msgstr "Идентифициране на песента..."

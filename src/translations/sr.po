@@ -1,22 +1,19 @@
-# Serbian translation for clementine
-# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
-# This file is distributed under the same license as the clementine package.
+# Clementine.
+# Copyright (C) 2010 David Sansome
+# This file is distributed under the same license as the Clementine package.
+# 
+# Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: clementine\n"
-"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-04-09 10:24+0000\n"
-"PO-Revision-Date: 2011-04-02 20:19+0000\n"
-"Last-Translator: Punky <pyntux@gmail.com>\n"
-"Language-Team: Serbian <sr@li.org>\n"
-"MIME-Version: 1.0\n"
+"Project-Id-Version: Clementine Music Player\n"
+"Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
+"PO-Revision-Date: 2011-10-28 17:18+0000\n"
+"Last-Translator: arnaudbienner <arnaud.bienner@gmail.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: sr\n"
-"X-Launchpad-Export-Date: 2011-04-10 05:07+0000\n"
-"X-Generator: Launchpad (build 12735)\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
 
 msgid " kbps"
 msgstr ""
@@ -89,15 +86,15 @@ msgstr ""
 msgid "%L1 total plays"
 msgstr ""
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n неуспешно"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n завршено"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n преостало"
 
@@ -171,8 +168,7 @@ msgstr ""
 msgid ""
 "<p>Tokens start with %, for example: %artist %album %title </p>\n"
 "\n"
-"<p>If you surround sections of text that contain a token with curly-braces, "
-"that section will be hidden if the token is empty.</p>"
+"<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
 msgstr ""
 
 msgid "A Grooveshark Anywhere account is required."
@@ -187,7 +183,8 @@ msgid ""
 "selecting songs."
 msgstr ""
 
-msgid "A song will be included in the playlist if it matches these conditions."
+msgid ""
+"A song will be included in the playlist if it matches these conditions."
 msgstr ""
 
 msgid "A-Z"
@@ -647,7 +644,8 @@ msgstr ""
 
 msgid ""
 "Clementine can be controlled remotely by an Android phone.  To enable this "
-"feature log in with the same Google account that is configured on your phone."
+"feature log in with the same Google account that is configured on your "
+"phone."
 msgstr ""
 
 msgid "Clementine can show a message when the track changes."
@@ -662,7 +660,8 @@ msgstr ""
 
 msgid ""
 "Clementine couldn't fetch your subscription status since there are problems "
-"with your connection. Played tracks will be cached and sent later to Last.fm."
+"with your connection. Played tracks will be cached and sent later to "
+"Last.fm."
 msgstr ""
 
 msgid "Clementine image viewer"
@@ -763,8 +762,8 @@ msgid ""
 "Could not create the GStreamer element \"%1\" - make sure you have all the "
 "required GStreamer plugins installed"
 msgstr ""
-"Не могу да направим Гстример елемент \"%1\" - проверите да ли су инсталирани "
-"сви Гстример прикључци"
+"Не могу да направим Гстример елемент \"%1\" - проверите да ли су инсталирани"
+" сви Гстример прикључци"
 
 #, qt-format
 msgid ""
@@ -1125,7 +1124,8 @@ msgstr "Унеси нови назив листе нумера"
 msgid ""
 "Enter an <b>artist</b> or <b>tag</b> to start listening to Last.fm radio."
 msgstr ""
-"Унесите <b>извођача</b> or <b>ознаку</b> да почнете са слушањем ЛастФМ радиа."
+"Унесите <b>извођача</b> or <b>ознаку</b> да почнете са слушањем ЛастФМ "
+"радиа."
 
 msgid "Enter search terms here"
 msgstr "Унесите израз за претрагу"
@@ -1434,8 +1434,8 @@ msgid "Identifying song"
 msgstr ""
 
 msgid ""
-"If you continue, this device will work slowly and songs copied to it may not "
-"work."
+"If you continue, this device will work slowly and songs copied to it may not"
+" work."
 msgstr ""
 
 msgid ""
@@ -1624,8 +1624,7 @@ msgid "Least favourite tracks"
 msgstr ""
 
 msgid "Leave blank for the default.  Examples: \"/dev/dsp\", \"front\", etc."
-msgstr ""
-"Оставите празно за подразмевано.  Примери: \"/dev/dsp\", \"front\", итд.."
+msgstr "Оставите празно за подразмевано.  Примери: \"/dev/dsp\", \"front\", итд.."
 
 msgid "Length"
 msgstr "Трајање"
@@ -2840,8 +2839,8 @@ msgid "This album is not available in the requested format"
 msgstr ""
 
 msgid ""
-"This device must be connected and opened before Clementine can see what file "
-"formats it supports."
+"This device must be connected and opened before Clementine can see what file"
+" formats it supports."
 msgstr ""
 
 msgid "This device supports the following file formats:"
@@ -3080,8 +3079,7 @@ msgid "When Clementine starts"
 msgstr ""
 
 msgid ""
-"When looking for album art Clementine will first look for picture files that "
-"contain one of these words.\n"
+"When looking for album art Clementine will first look for picture files that contain one of these words.\n"
 "If there are no matches then it will use the largest image in the directory."
 msgstr ""
 
@@ -3167,8 +3165,8 @@ msgid ""
 msgstr ""
 
 msgid ""
-"You can listen to Magnatune songs for free without an account.  Purchasing a "
-"membership removes the messages at the end of each track."
+"You can listen to Magnatune songs for free without an account.  Purchasing a"
+" membership removes the messages at the end of each track."
 msgstr ""
 "Можете бесплатно слушати песеме на Магнатјуну без регистровања налога. "
 "Куповином чланства ослободићете се порука на крају сваке нумере."
@@ -3177,14 +3175,15 @@ msgid "You can listen to background streams at the same time as other music."
 msgstr ""
 
 msgid ""
-"You can scrobble tracks for free, but only <span style=\" font-weight:600;"
-"\">paid subscribers</span> can stream Last.fm radio from Clementine."
+"You can scrobble tracks for free, but only <span style=\" font-"
+"weight:600;\">paid subscribers</span> can stream Last.fm radio from "
+"Clementine."
 msgstr ""
 
 msgid ""
-"You can use your Wii Remote as a remote control for Clementine.  <a href="
-"\"http://www.clementine-player.org/wiimote\">See the page on the Clementine "
-"wiki</a> for more information.\n"
+"You can use your Wii Remote as a remote control for Clementine.  <a "
+"href=\"http://www.clementine-player.org/wiimote\">See the page on the "
+"Clementine wiki</a> for more information.\n"
 msgstr ""
 
 msgid "You do not have a Grooveshark Anywhere account."
@@ -3214,8 +3213,8 @@ msgid "You will need to restart Clementine if you change the language."
 msgstr ""
 
 msgid ""
-"You will not be able to play Last.fm radio stations as you are not a Last.fm "
-"subscriber."
+"You will not be able to play Last.fm radio stations as you are not a Last.fm"
+" subscriber."
 msgstr ""
 
 #, qt-format
@@ -3256,7 +3255,7 @@ msgstr ""
 msgid "Zero"
 msgstr "Нулто"
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "додај %n песама"
 
@@ -3345,7 +3344,7 @@ msgstr "Опције"
 msgid "press enter"
 msgstr ""
 
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "remove %n песама"
 
@@ -3365,81 +3364,4 @@ msgstr "Заустави"
 msgid "track %1"
 msgstr "нумера %1"
 
-#~ msgid "Global Shortcuts"
-#~ msgstr "Глобалне пречице"
 
-#~ msgid "Text color"
-#~ msgstr "Боја текста"
-
-#~ msgid "ASF"
-#~ msgstr "АСФ"
-
-#~ msgid "Connected"
-#~ msgstr "Повезан"
-
-#~ msgid "Delete files..."
-#~ msgstr "Обриши фајлове...."
-
-#~ msgid "Enter a name for the new playlist"
-#~ msgstr "Упишите име нове листе нумера"
-
-#~ msgid "Disconnect device"
-#~ msgstr "Прекини везу са уређајем"
-
-#~ msgid "Hide %1"
-#~ msgstr "Сакриј %1"
-
-#~ msgid "Hide..."
-#~ msgstr "Сакриј..."
-
-#~ msgid "MP4"
-#~ msgstr "MП4"
-
-#~ msgid "My Loved Tracks"
-#~ msgstr "Моје вољене нумере"
-
-#~ msgid "Options"
-#~ msgstr "Опције"
-
-#~ msgid "Ogg FLAC"
-#~ msgstr "Огг ФЛАЦ"
-
-#~ msgid "Delete originals"
-#~ msgstr "Обриши оригинале"
-
-#~ msgid "Capacity"
-#~ msgstr "Капацитет"
-
-#~ msgid "File naming scheme"
-#~ msgstr "Шема именовања фајлова"
-
-#~ msgid "Help"
-#~ msgstr "Помоћ"
-
-#~ msgid "Couldn't load the last.fm radio station: %1"
-#~ msgstr "Неспело учитавање радио станице %1 са ЛастФМ"
-
-#~ msgid ""
-#~ "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm *."
-#~ "tiff)"
-#~ msgstr ""
-#~ "IСлике (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm *."
-#~ "tiff)"
-
-#~ msgid "Double-clicking a song clears the playlist first"
-#~ msgstr "Двоструки клик на песму претходно ће очистити листу нумера"
-
-#~ msgid "Last.fm Recommended Radio - %1"
-#~ msgstr "Препоручни ЛастФМ радио -%1"
-
-#~ msgid "Select engine"
-#~ msgstr "Одабери мотор"
-
-#~ msgid "Update Library"
-#~ msgstr "Ажурирај библиотеку"
-
-#~ msgid "Last.fm Loved Tracks - %1"
-#~ msgstr "ЛастФМ вољене нумере - %1"
-
-#~ msgid "Editing %n tracks"
-#~ msgstr "Уређивање %n нумера"
