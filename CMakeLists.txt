@@ -7,6 +7,7 @@ include(cmake/Version.cmake)
 include(cmake/Deb.cmake)
 include(cmake/Rpm.cmake)
 include(cmake/SpotifyVersion.cmake)
+include(cmake/OptionalSource.cmake)
 
 if (UNIX AND NOT APPLE)
   set(LINUX 1)

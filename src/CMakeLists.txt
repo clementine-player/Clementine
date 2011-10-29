@@ -641,31 +641,27 @@ endif (LINGUAS STREQUAL "All")
 option(USE_INSTALL_PREFIX "Look for data in CMAKE_INSTALL_PREFIX" ON)
 
 # Visualisations
-if(ENABLE_VISUALISATIONS)
-
-  list(APPEND SOURCES
+optional_source(ENABLE_VISUALISATIONS
+  SOURCES
     visualisations/projectmpresetmodel.cpp
     visualisations/projectmvisualisation.cpp
     visualisations/visualisationcontainer.cpp
     visualisations/visualisationoverlay.cpp
     visualisations/visualisationselector.cpp
-  )
-  list(APPEND HEADERS
+  HEADERS
     visualisations/projectmpresetmodel.h
     visualisations/projectmvisualisation.h
     visualisations/visualisationcontainer.h
     visualisations/visualisationoverlay.h
     visualisations/visualisationselector.h
-  )
-  list(APPEND UI
+  UI
     visualisations/visualisationoverlay.ui
     visualisations/visualisationselector.ui
-  )
-endif(ENABLE_VISUALISATIONS)
+)
 
 # Lastfm
-if(HAVE_LIBLASTFM)
-  list(APPEND SOURCES
+optional_source(HAVE_LIBLASTFM
+  SOURCES
     covers/lastfmcoverprovider.cpp
     globalsearch/lastfmsearchprovider.cpp
     internet/fixlastfm.cpp
@@ -678,8 +674,7 @@ if(HAVE_LIBLASTFM)
     songinfo/lastfmtrackinfoprovider.cpp
     songinfo/tagwidget.cpp
     suggesters/lastfmsuggester.cpp
-  )
-  list(APPEND HEADERS
+  HEADERS
     covers/lastfmcoverprovider.h
     internet/lastfmservice.h
     internet/lastfmsettingspage.h
@@ -689,15 +684,14 @@ if(HAVE_LIBLASTFM)
     songinfo/lastfmtrackinfoprovider.h
     songinfo/tagwidget.h
     suggesters/lastfmsuggester.h
-  )
-  list(APPEND UI
+  UI
     internet/lastfmsettingspage.ui
     internet/lastfmstationdialog.ui
-  )
-endif(HAVE_LIBLASTFM)
+)
 
-if(HAVE_SPOTIFY)
-  list(APPEND SOURCES
+# Spotify
+optional_source(HAVE_SPOTIFY
+  SOURCES
     globalsearch/spotifysearchprovider.cpp
     internet/spotifyblobdownloader.cpp
     internet/spotifysearchplaylisttype.cpp
@@ -705,39 +699,43 @@ if(HAVE_SPOTIFY)
     internet/spotifyservice.cpp
     internet/spotifysettingspage.cpp
     resolvers/spotifyresolver.cpp
-  )
-  list(APPEND HEADERS
+  HEADERS
     globalsearch/spotifysearchprovider.h
     internet/spotifyblobdownloader.h
     internet/spotifyserver.h
     internet/spotifyservice.h
     internet/spotifysettingspage.h
     resolvers/spotifyresolver.h
-  )
-endif(HAVE_SPOTIFY)
+)
 
-if(APPLE)
-  list(APPEND HEADERS core/macglobalshortcutbackend.h)
-  list(APPEND HEADERS devices/macdevicelister.h)
-  list(APPEND HEADERS ui/macscreensaver.h)
-  list(APPEND HEADERS ui/macsystemtrayicon.h)
-  list(APPEND HEADERS widgets/maclineedit.h)
-  list(APPEND SOURCES core/macglobalshortcutbackend.mm)
-  list(APPEND SOURCES devices/macdevicelister.mm)
-  list(APPEND SOURCES globalsearch/globalsearchpopup.mm)
-  list(APPEND SOURCES ui/globalshortcutgrabber.mm)
-  list(APPEND SOURCES ui/macscreensaver.cpp)
-  list(APPEND SOURCES ui/macsystemtrayicon.mm)
-  list(APPEND SOURCES widgets/maclineedit.mm)
-  list(APPEND SOURCES widgets/osd_mac.mm)
-  include_directories(${GROWL}/Headers)
-else(APPLE)
-  if(WIN32)
-    list(APPEND SOURCES widgets/osd_win.cpp)
-  else(WIN32)
-    list(APPEND SOURCES widgets/osd_x11.cpp)
-  endif(WIN32)
-endif(APPLE)
+# Platform specific - OS X
+optional_source(APPLE
+  INCLUDE_DIRECTORIES
+    ${GROWL}/Headers
+    ${CMAKE_CURRENT_SOURCE_DIR}/../3rdparty/google-breakpad/client/mac/build/Release/Breakpad.framework
+  SOURCES
+    core/macglobalshortcutbackend.mm
+    core/mac_startup.mm
+    devices/macdevicelister.mm
+    globalsearch/globalsearchpopup.mm
+    ui/globalshortcutgrabber.mm
+    ui/macscreensaver.cpp
+    ui/macsystemtrayicon.mm
+    widgets/maclineedit.mm
+    widgets/osd_mac.mm
+  HEADERS
+    core/macglobalshortcutbackend.h
+    devices/macdevicelister.h
+    ui/macscreensaver.h
+    ui/macsystemtrayicon.h
+    widgets/maclineedit.h
+)
+
+# Platform specific - Windows
+optional_source(WIN32 SOURCES widgets/osd_win.cpp)
+
+# Platform specific - X11
+optional_source(LINUX SOURCES widgets/osd_x11.cpp)
 
 # DBUS and MPRIS - Linux specific
 if(HAVE_DBUS)
@@ -796,214 +794,136 @@ if(HAVE_DBUS)
       globalsearch/globalsearchservice.h GlobalSearchService
       globalsearch/globalsearchadaptor)
 
-  # Global search source
-  list(APPEND SOURCES globalsearch/globalsearchservice.cpp)
-  list(APPEND HEADERS globalsearch/globalsearchservice.h)
-
-  # MPRIS source
-  list(APPEND SOURCES core/mpris.cpp core/mpris1.cpp core/mpris2.cpp)
-  list(APPEND HEADERS core/mpris.h   core/mpris1.h   core/mpris2.h)
-
   # Wiimotedev interface classes
   if(ENABLE_WIIMOTEDEV)
     qt4_add_dbus_interface(SOURCES
         dbus/org.wiimotedev.deviceEvents.xml
         dbus/wiimotedev)
-
-    list(APPEND SOURCES
-      wiimotedev/shortcuts.cpp
-      wiimotedev/wiimotesettingspage.cpp
-      wiimotedev/wiimoteshortcutgrabber.cpp
-    )
-    list(APPEND HEADERS
-      wiimotedev/shortcuts.h
-      wiimotedev/wiimotesettingspage.h
-      wiimotedev/wiimoteshortcutgrabber.h
-    )
   endif(ENABLE_WIIMOTEDEV)
-
-  # DeviceKit lister source
-  if(HAVE_DEVICEKIT)
-    list(APPEND SOURCES devices/devicekitlister.cpp)
-    list(APPEND HEADERS devices/devicekitlister.h)
-  endif(HAVE_DEVICEKIT)
-
-  # Gnome Screensaver DBus interface
-  list(APPEND SOURCES ui/dbusscreensaver.cpp)
 endif(HAVE_DBUS)
 
-# Libgpod device backend
-if(HAVE_LIBGPOD)
-  include_directories(${LIBGPOD_INCLUDE_DIRS})
+optional_source(HAVE_DBUS
+  SOURCES
+    core/mpris.cpp
+    core/mpris1.cpp
+    core/mpris2.cpp
+    globalsearch/globalsearchservice.cpp
+    ui/dbusscreensaver.cpp
+  HEADERS
+    core/mpris.h
+    core/mpris1.h
+    core/mpris2.h
+    globalsearch/globalsearchservice.h
+)
 
-  list(APPEND SOURCES devices/gpoddevice.cpp devices/gpodloader.cpp)
-  list(APPEND HEADERS devices/gpoddevice.h devices/gpodloader.h)
-endif(HAVE_LIBGPOD)
+optional_source(HAVE_WIIMOTEDEV
+  SOURCES
+    wiimotedev/shortcuts.cpp
+    wiimotedev/wiimotesettingspage.cpp
+    wiimotedev/wiimoteshortcutgrabber.cpp
+  HEADERS
+    wiimotedev/shortcuts.h
+    wiimotedev/wiimotesettingspage.h
+    wiimotedev/wiimoteshortcutgrabber.h
+)
+
+optional_source(HAVE_DEVICEKIT
+  SOURCES devices/devicekitlister.cpp
+  HEADERS devices/devicekitlister.h
+)
+
+# Libgpod device backend
+optional_source(HAVE_LIBGPOD
+  INCLUDE_DIRECTORIES ${LIBGPOD_INCLUDE_DIRS}
+  SOURCES
+    devices/gpoddevice.cpp
+    devices/gpodloader.cpp
+  HEADERS
+    devices/gpoddevice.h
+    devices/gpodloader.h
+)
 
 # GIO device backend
-if(HAVE_GIO)
-  include_directories(${GIO_INCLUDE_DIRS})
-
-  list(APPEND SOURCES devices/giolister.cpp)
-  list(APPEND HEADERS devices/giolister.h)
-endif(HAVE_GIO)
+optional_source(HAVE_GIO
+  INCLUDE_DIRECTORIES ${GIO_INCLUDE_DIRS}
+  SOURCES devices/giolister.cpp
+  HEADERS devices/giolister.h
+)
 
 # CDIO backend and device
-if(HAVE_AUDIOCD)
-  list(APPEND SOURCES devices/cddadevice.cpp)
-  list(APPEND SOURCES devices/cddalister.cpp)
-
-  list(APPEND HEADERS devices/cddadevice.h)
-  list(APPEND HEADERS devices/cddalister.h)
-endif(HAVE_AUDIOCD)
+optional_source(HAVE_AUDIOCD
+  SOURCES
+    devices/cddadevice.cpp
+    devices/cddalister.cpp
+  HEADERS
+    devices/cddadevice.h
+    devices/cddalister.h
+)
 
 # libimobiledevice backend and device
-if(HAVE_IMOBILEDEVICE)
-  include_directories(${IMOBILEDEVICE_INCLUDE_DIRS})
-  include_directories(${PLIST_INCLUDE_DIRS})
-  include_directories(${PLISTPP_INCLUDE_DIRS})
-
-  list(APPEND SOURCES devices/afcdevice.cpp)
-  list(APPEND SOURCES devices/afcfile.cpp)
-  list(APPEND SOURCES devices/afctransfer.cpp)
-  list(APPEND SOURCES devices/ilister.cpp)
-  list(APPEND SOURCES devices/imobiledeviceconnection.cpp)
-
-  list(APPEND HEADERS devices/afcdevice.h)
-  list(APPEND HEADERS devices/afcfile.h)
-  list(APPEND HEADERS devices/afctransfer.h)
-  list(APPEND HEADERS devices/ilister.h)
-endif(HAVE_IMOBILEDEVICE)
+optional_source(HAVE_IMOBILEDEVICE
+  INCLUDE_DIRECTORIES
+    ${IMOBILEDEVICE_INCLUDE_DIRS}
+    ${PLIST_INCLUDE_DIRS}
+    ${PLISTPP_INCLUDE_DIRS}
+  SOURCES
+    devices/afcdevice.cpp
+    devices/afcfile.cpp
+    devices/afctransfer.cpp
+    devices/ilister.cpp
+    devices/imobiledeviceconnection.cpp
+  HEADERS
+    devices/afcdevice.h
+    devices/afcfile.h
+    devices/afctransfer.h
+    devices/ilister.h
+)
 
 # mtp device
-if(HAVE_LIBMTP)
-  include_directories(${LIBMTP_INCLUDE_DIRS})
-
-  list(APPEND SOURCES devices/mtpconnection.cpp)
-  list(APPEND SOURCES devices/mtpdevice.cpp)
-  list(APPEND SOURCES devices/mtploader.cpp)
-
-  list(APPEND SOURCES devices/mtpconnection.h)
-  list(APPEND HEADERS devices/mtpdevice.h)
-  list(APPEND HEADERS devices/mtploader.h)
-endif(HAVE_LIBMTP)
+optional_source(HAVE_LIBMTP
+  INCLUDE_DIRECTORIES ${LIBMTP_INCLUDE_DIRS}
+  SOURCES
+    devices/mtpconnection.cpp
+    devices/mtpdevice.cpp
+    devices/mtploader.cpp
+  HEADERS
+    devices/mtpdevice.h
+    devices/mtploader.h
+)
 
 # Windows media lister
-IF(WIN32)
-  list(APPEND SOURCES devices/wmdmdevice.cpp)
-  list(APPEND SOURCES devices/wmdmlister.cpp)
-  list(APPEND SOURCES devices/wmdmloader.cpp)
-  list(APPEND SOURCES devices/wmdmprogress.cpp)
-  list(APPEND SOURCES devices/wmdmthread.cpp)
+optional_source(WIN32
+  SOURCES
+    devices/wmdmdevice.cpp
+    devices/wmdmlister.cpp
+    devices/wmdmloader.cpp
+    devices/wmdmprogress.cpp
+    devices/wmdmthread.cpp
+  HEADERS
+    devices/wmdmdevice.h
+    devices/wmdmlister.h
+    devices/wmdmloader.h
+)
 
-  list(APPEND HEADERS devices/wmdmdevice.h)
-  list(APPEND HEADERS devices/wmdmlister.h)
-  list(APPEND HEADERS devices/wmdmloader.h)
-ENDIF(WIN32)
-
-# Mac specific startup stuff
-if(APPLE)
-  include_directories(
-    ${CMAKE_CURRENT_SOURCE_DIR}/../3rdparty/google-breakpad/client/mac/build/Release/Breakpad.framework)
-  list(APPEND SOURCES core/mac_startup.mm)
-endif(APPLE)
-
-if(HAVE_REMOTE)
-  list(APPEND HEADERS
+optional_source(HAVE_REMOTE
+  SOURCES
+    remote/icesession.cpp
+    remote/portforwarder.cpp
+    remote/remote.cpp
+    remote/remotesettingspage.cpp
+    remote/streampipeline.cpp
+  HEADERS
     remote/icesession.h
     remote/portforwarder.h
     remote/remote.h
     remote/remotesettingspage.h
     remote/streampipeline.h
-  )
-  list(APPEND SOURCES
-    remote/icesession.cpp
-    remote/portforwarder.h
-    remote/remote.cpp
-    remote/remotesettingspage.cpp
-    remote/streampipeline.cpp
-  )
-endif(HAVE_REMOTE)
+)
 
-if(LINUX)
-  # Hack to add Clementine to the Unity system tray whitelist
-  list(APPEND SOURCES core/ubuntuunityhack.cpp)
-  list(APPEND HEADERS core/ubuntuunityhack.h)
-endif(LINUX)
-
-# OS-specific sources that should be searched for translatable strings even
-# if they're not compiled
-list(APPEND OTHER_SOURCES
-  core/macglobalshortcutbackend.h
-  core/macglobalshortcutbackend.mm
-  core/modelfuturewatcher.h
-  core/mpris.cpp
-  core/mpris.h
-  core/mpris1.cpp
-  core/mpris1.h
-  core/mpris2.cpp
-  core/mpris2.h
-  core/ubuntuunityhack.cpp
-  core/ubuntuunityhack.h
-  devices/afcdevice.cpp
-  devices/afcdevice.h
-  devices/afcfile.cpp
-  devices/afcfile.h
-  devices/afctransfer.cpp
-  devices/afctransfer.h
-  devices/cddadevice.cpp
-  devices/cddadevice.h
-  devices/cddalister.cpp
-  devices/cddalister.h
-  devices/devicekitlister.h
-  devices/devicekitlister.cpp
-  devices/gpoddevice.cpp
-  devices/gpoddevice.h
-  devices/gpodloader.cpp
-  devices/gpodloader.h
-  devices/ilister.cpp
-  devices/ilister.h
-  devices/imobiledeviceconnection.cpp
-  devices/imobiledeviceconnection.h
-  devices/mtpconnection.cpp
-  devices/mtpconnection.h
-  devices/mtpdevice.cpp
-  devices/mtpdevice.h
-  devices/mtploader.cpp
-  devices/mtploader.h
-  devices/wmdmlister.cpp
-  devices/wmdmlister.h
-  devices/wmdmloader.h
-  devices/wmdmloader.cpp
-  internet/spotifyblobdownloader.cpp
-  internet/spotifyblobdownloader.h
-  internet/spotifysettingspage.cpp
-  internet/spotifysettingspage.h
-  ${CMAKE_CURRENT_BINARY_DIR}/ui_spotifysettingspage.h
-  internet/spotifysearchplaylisttype.cpp
-  internet/spotifysearchplaylisttype.h
-  internet/spotifyserver.cpp
-  internet/spotifyserver.h
-  internet/spotifyservice.cpp
-  internet/spotifyservice.h
-  remote/remote.cpp
-  remote/remote.h
-  remote/remotesettingspage.cpp
-  remote/remotesettingspage.h
-  ${CMAKE_CURRENT_BINARY_DIR}/ui_remotesettingspage.h
-  suggesters/lastfmsuggester.cpp
-  suggesters/lastfmsuggester.h
-  ui/macsystemtrayicon.h
-  ui/macsystemtrayicon.mm
-  wiimotedev/wiimotesettingspage.cpp
-  wiimotedev/wiimotesettingspage.h
-  wiimotedev/wiimoteshortcutgrabber.cpp
-  wiimotedev/wiimoteshortcutgrabber.h
-  ${CMAKE_CURRENT_BINARY_DIR}/ui_wiimotesettingspage.h
-  ${CMAKE_CURRENT_BINARY_DIR}/ui_wiimoteshortcutgrabber.h
-  widgets/osd_mac.mm
-  widgets/osd_win.cpp
-  widgets/osd_x11.cpp
+# Hack to add Clementine to the Unity system tray whitelist
+optional_source(LINUX
+  SOURCES core/ubuntuunityhack.cpp
+  HEADERS core/ubuntuunityhack.h
 )
 
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/config.h.in
@@ -1016,13 +936,12 @@ qt4_wrap_cpp(MOC ${HEADERS})
 qt4_wrap_ui(UIC ${UI})
 qt4_add_resources(QRC ${RESOURCES})
 
-add_pot(
+add_pot(POT
   ${CMAKE_CURRENT_SOURCE_DIR}/translations/header
   ${CMAKE_CURRENT_SOURCE_DIR}/translations/translations.pot
   ${SOURCES} ${MOC} ${UIC} ${OTHER_SOURCES}
 )
 add_po(PO clementine_
-  POT ${CMAKE_CURRENT_SOURCE_DIR}/translations/translations.pot
   LANGUAGES ${LANGUAGES}
   DIRECTORY translations
 )
@@ -1032,6 +951,7 @@ add_library(clementine_lib STATIC
   ${MOC}
   ${UIC}
   ${QRC}
+  ${POT}
   ${PO}
 )
 

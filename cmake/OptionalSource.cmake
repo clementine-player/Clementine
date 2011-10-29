@@ -1,0 +1,18 @@
+macro(optional_source TOGGLE)
+  parse_arguments(OPTIONAL_SOURCE
+    "SOURCES;HEADERS;UI;INCLUDE_DIRECTORIES"
+    ""
+    ${ARGN}
+  )
+
+  if(${TOGGLE})
+    list(APPEND SOURCES ${OPTIONAL_SOURCE_SOURCES})
+    list(APPEND HEADERS ${OPTIONAL_SOURCE_HEADERS})
+    list(APPEND UI ${OPTIONAL_SOURCE_UI})
+    include_directories(${OPTIONAL_SOURCE_INCLUDE_DIRECTORIES})
+  else(${TOGGLE})
+    list(APPEND OTHER_SOURCES ${OPTIONAL_SOURCE_SOURCES})
+    list(APPEND OTHER_SOURCES ${OPTIONAL_SOURCE_HEADERS})
+    qt4_wrap_ui(OTHER_SOURCES ${OPTIONAL_SOURCE_UI})
+  endif(${TOGGLE})
+endmacro(optional_source)
