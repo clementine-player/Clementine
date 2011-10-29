@@ -63,6 +63,7 @@ class GroovesharkService : public InternetService {
   void Logout();
   bool IsLoggedIn() const { return !session_id_.isEmpty(); }
   void RetrieveUserPlaylists();
+  void RetrieveUserFavorites();
   void MarkStreamKeyOver30Secs(const QString& stream_key, const QString& server_id);
   void MarkSongComplete(const QString& song_id, const QString& stream_key, const QString& server_id);
 
@@ -119,6 +120,7 @@ class GroovesharkService : public InternetService {
   void GetAlbumSongsFinished(QNetworkReply* reply, int id);
   void Authenticated();
   void UserPlaylistsRetrieved();
+  void UserFavoritesRetrieved();
   void PlaylistSongsRetrieved();
   void StreamMarked();
   void SongMarkedAsComplete();

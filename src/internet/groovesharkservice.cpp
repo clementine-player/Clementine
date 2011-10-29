@@ -431,6 +431,7 @@ void GroovesharkService::EnsureItemsCreated() {
     search_->setData(InternetModel::PlayBehaviour_DoubleClickAction,
                              InternetModel::Role_PlayBehaviour);
     root_->appendRow(search_);
+    RetrieveUserFavorites();
     RetrieveUserPlaylists();
   }
 }
@@ -488,6 +489,39 @@ void GroovesharkService::PlaylistSongsRetrieved() {
   PlaylistInfo playlist_info = pending_retrieve_playlists_.take(reply);
   // Create playlist item
   QStandardItem* item = new QStandardItem(playlist_info.name_);
+  item->setData(InternetModel::Type_UserPlaylist, InternetModel::Role_Type);
+  item->setData(true, InternetModel::Role_CanLazyLoad);
+  item->setData(InternetModel::PlayBehaviour_SingleItem, InternetModel::Role_PlayBehaviour);
+
+  QVariantMap result = ExtractResult(reply);
+  SongList songs = ExtractSongs(result);
+  foreach (const Song& song, songs) {
+    QStandardItem* child = new QStandardItem(song.PrettyTitleWithArtist());
+    child->setData(Type_Track, InternetModel::Role_Type);
+    child->setData(QVariant::fromValue(song), InternetModel::Role_SongMetadata);
+    child->setData(InternetModel::PlayBehaviour_SingleItem, InternetModel::Role_PlayBehaviour);
+    child->setData(song.url(), InternetModel::Role_Url);
+
+    item->appendRow(child);
+  }
+  root_->appendRow(item);
+}
+
+void GroovesharkService::RetrieveUserFavorites() {
+  QNetworkReply* reply = CreateRequest("getUserFavoriteSongs", QList<Param>(), true);
+
+  connect(reply, SIGNAL(finished()), SLOT(UserFavoritesRetrieved()));
+}
+
+void GroovesharkService::UserFavoritesRetrieved() {
+  QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
+  if (!reply)
+    return;
+
+  reply->deleteLater();
+
+  // Create item
+  QStandardItem* item = new QStandardItem(QIcon(":/star-on.png"), tr("Favorites"));
   item->setData(InternetModel::Type_UserPlaylist, InternetModel::Role_Type);
   item->setData(true, InternetModel::Role_CanLazyLoad);
   item->setData(InternetModel::PlayBehaviour_SingleItem, InternetModel::Role_PlayBehaviour);
