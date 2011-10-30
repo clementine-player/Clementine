@@ -66,26 +66,32 @@ int GroupedIconView::header_height() const {
   return default_header_height_;
 }
 
-void GroupedIconView::DrawHeader(const QModelIndex& index,
-                                 const QRect& rect, QPainter* painter) {
+void GroupedIconView::DrawHeader(QPainter* painter, const QRect& rect,
+                                 const QFont& font, const QPalette& palette,
+                                 const QString& text) {
   painter->save();
 
   // Bold font
-  QFont bold_font(font());
+  QFont bold_font(font);
   bold_font.setBold(true);
   QFontMetrics metrics(bold_font);
 
+  QRect text_rect(rect);
+  text_rect.setHeight(metrics.height());
+  text_rect.moveTop(rect.top() + (rect.height() - text_rect.height() -
+                                 kBarThickness - kBarMarginTop) / 2);
+  text_rect.setLeft(text_rect.left() + 3);
+
   // Draw text
-  const QString category = header_text_.arg(index.data(Role_Group).toString());
   painter->setFont(bold_font);
-  painter->drawText(rect, category);
+  painter->drawText(text_rect, text);
 
   // Draw a line underneath
-  const QPoint start(rect.left(), rect.top() + metrics.height());
+  const QPoint start(rect.left(), text_rect.bottom() + kBarMarginTop);
   const QPoint end(rect.right(), start.y());
 
   painter->setRenderHint(QPainter::Antialiasing, true);
-  painter->setPen(QPen(palette().color(QPalette::Disabled, QPalette::Text),
+  painter->setPen(QPen(palette.color(QPalette::Disabled, QPalette::Text),
                        kBarThickness, Qt::SolidLine, Qt::RoundCap));
   painter->setOpacity(0.5);
   painter->drawLine(start, end);
@@ -273,9 +279,11 @@ void GroupedIconView::paintEvent(QPaintEvent* e) {
     }
 
     // Draw the header
-    DrawHeader(model()->index(header.first_row, 0),
+    DrawHeader(&painter,
                header_rect.translated(-horizontalOffset(), -verticalOffset()),
-               &painter);
+               font(),
+               palette(),
+               model()->index(header.first_row, 0).data(Role_Group).toString());
   }
 }
 

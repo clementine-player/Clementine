@@ -61,10 +61,12 @@ public:
   QModelIndex moveCursor(CursorAction action, Qt::KeyboardModifiers modifiers);
   void setModel(QAbstractItemModel* model);
 
+  static void DrawHeader(QPainter* painter, const QRect& rect,
+                         const QFont& font, const QPalette& palette,
+                         const QString& text);
+
 protected:
   virtual int header_height() const;
-  virtual void DrawHeader(const QModelIndex& first_child, const QRect& rect,
-                          QPainter* painter);
 
   // QWidget
   void paintEvent(QPaintEvent* e);

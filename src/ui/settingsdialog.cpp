@@ -37,7 +37,7 @@
 #include "playlist/playlistview.h"
 #include "songinfo/songinfosettingspage.h"
 #include "transcoder/transcodersettingspage.h"
-
+#include "widgets/groupediconview.h"
 #include "widgets/osdpretty.h"
 
 #include "ui_settingsdialog.h"
@@ -59,8 +59,39 @@
 #endif
 
 #include <QDesktopWidget>
+#include <QPainter>
 #include <QPushButton>
 #include <QScrollArea>
+
+
+SettingsItemDelegate::SettingsItemDelegate(QObject* parent)
+  : QStyledItemDelegate(parent)
+{
+}
+
+QSize SettingsItemDelegate::sizeHint(const QStyleOptionViewItem& option,
+                                     const QModelIndex& index) const {
+  const bool is_separator = index.data(SettingsDialog::Role_IsSeparator).toBool();
+  QSize ret = QStyledItemDelegate::sizeHint(option, index);
+
+  if (is_separator) {
+    ret.setHeight(ret.height() * 2);
+  }
+
+  return ret;
+}
+
+void SettingsItemDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option,
+                                 const QModelIndex& index) const {
+  const bool is_separator = index.data(SettingsDialog::Role_IsSeparator).toBool();
+
+  if (is_separator) {
+    GroupedIconView::DrawHeader(painter, option.rect, option.font,
+                                option.palette, index.data().toString());
+  } else {
+    QStyledItemDelegate::paint(painter, option, index);
+  }
+}
 
 
 SettingsDialog::SettingsDialog(BackgroundStreams* streams, QWidget* parent)
@@ -73,44 +104,54 @@ SettingsDialog::SettingsDialog(BackgroundStreams* streams, QWidget* parent)
     loading_settings_(false)
 {
   ui_->setupUi(this);
+  ui_->list->setItemDelegate(new SettingsItemDelegate(this));
 
-  AddPage(Page_Playback, new PlaybackSettingsPage(this));
-  AddPage(Page_Behaviour, new BehaviourSettingsPage(this));
-  AddPage(Page_SongInformation, new SongInfoSettingsPage(this));
-  AddPage(Page_GlobalShortcuts, new GlobalShortcutsSettingsPage(this));
-  AddPage(Page_Notifications, new NotificationsSettingsPage(this));
-  AddPage(Page_Library, new LibrarySettingsPage(this));
+  QTreeWidgetItem* general = AddCategory(tr("General"));
 
-#ifdef HAVE_LIBLASTFM
-  AddPage(Page_Lastfm, new LastFMSettingsPage(this));
-#endif
-
-  AddPage(Page_Grooveshark, new GroovesharkSettingsPage(this));
-
-#ifdef HAVE_SPOTIFY
-  AddPage(Page_Spotify, new SpotifySettingsPage(this));
-#endif
-
-  AddPage(Page_Magnatune, new MagnatuneSettingsPage(this));
-  AddPage(Page_DigitallyImported, new DigitallyImportedSettingsPage(this));
-  AddPage(Page_BackgroundStreams, new BackgroundStreamsSettingsPage(this));
-  AddPage(Page_Proxy, new NetworkProxySettingsPage(this));
-  AddPage(Page_Transcoding, new TranscoderSettingsPage(this));
+  AddPage(Page_Playback, new PlaybackSettingsPage(this), general);
+  AddPage(Page_Behaviour, new BehaviourSettingsPage(this), general);
+  AddPage(Page_Library, new LibrarySettingsPage(this), general);
+  AddPage(Page_Proxy, new NetworkProxySettingsPage(this), general);
+  AddPage(Page_Transcoding, new TranscoderSettingsPage(this), general);
 
 #ifdef HAVE_REMOTE
-  AddPage(Page_Remote, new RemoteSettingsPage(this));
+  AddPage(Page_Remote, new RemoteSettingsPage(this), general);
 #endif
 
 #ifdef HAVE_WIIMOTEDEV
-  AddPage(Page_Wiimotedev, new WiimoteSettingsPage(this));
+  AddPage(Page_Wiimotedev, new WiimoteSettingsPage(this), general);
 #endif
 
+  // User interface
+  QTreeWidgetItem* interface = AddCategory(tr("User interface"));
+  AddPage(Page_GlobalShortcuts, new GlobalShortcutsSettingsPage(this), interface);
+  AddPage(Page_SongInformation, new SongInfoSettingsPage(this), interface);
+  AddPage(Page_Notifications, new NotificationsSettingsPage(this), interface);
+
+  // Internet providers
+  QTreeWidgetItem* providers = AddCategory(tr("Internet providers"));
+
+#ifdef HAVE_LIBLASTFM
+  AddPage(Page_Lastfm, new LastFMSettingsPage(this), providers);
+#endif
+
+  AddPage(Page_Grooveshark, new GroovesharkSettingsPage(this), providers);
+
+#ifdef HAVE_SPOTIFY
+  AddPage(Page_Spotify, new SpotifySettingsPage(this), providers);
+#endif
+
+  AddPage(Page_Magnatune, new MagnatuneSettingsPage(this), providers);
+  AddPage(Page_DigitallyImported, new DigitallyImportedSettingsPage(this), providers);
+  AddPage(Page_BackgroundStreams, new BackgroundStreamsSettingsPage(this), providers);
+
   // List box
-  connect(ui_->list, SIGNAL(currentTextChanged(QString)), SLOT(CurrentTextChanged(QString)));
-  ui_->list->setCurrentRow(Page_Playback);
+  connect(ui_->list, SIGNAL(currentItemChanged(QTreeWidgetItem*,QTreeWidgetItem*)),
+          SLOT(CurrentItemChanged(QTreeWidgetItem*)));
+  ui_->list->setCurrentItem(pages_[Page_Playback].item_);
 
   // Make sure the list is big enough to show all the items
-  ui_->list->setMinimumWidth(ui_->list->sizeHintForColumn(0));
+  ui_->list->setMinimumWidth(static_cast<QAbstractItemView*>(ui_->list)->sizeHintForColumn(0));
 
   ui_->buttonBox->button(QDialogButtonBox::Cancel)->setShortcut(QKeySequence::Close);
 }
@@ -119,7 +160,22 @@ SettingsDialog::~SettingsDialog() {
   delete ui_;
 }
 
-void SettingsDialog::AddPage(Page id, SettingsPage* page) {
+QTreeWidgetItem* SettingsDialog::AddCategory(const QString& name) {
+  QTreeWidgetItem* item = new QTreeWidgetItem;
+  item->setText(0, name);
+  item->setData(0, Role_IsSeparator, true);
+  item->setFlags(Qt::ItemIsEnabled);
+
+  ui_->list->invisibleRootItem()->addChild(item);
+  item->setExpanded(true);
+
+  return item;
+}
+
+void SettingsDialog::AddPage(Page id, SettingsPage* page, QTreeWidgetItem* parent) {
+  if (!parent)
+    parent = ui_->list->invisibleRootItem();
+
   // Connect page's signals to the settings dialog's signals
   connect(page, SIGNAL(NotificationPreview(OSD::Behaviour,QString,QString)),
                 SIGNAL(NotificationPreview(OSD::Behaviour,QString,QString)));
@@ -127,13 +183,16 @@ void SettingsDialog::AddPage(Page id, SettingsPage* page) {
                 SIGNAL(SetWiimotedevInterfaceActived(bool)));
 
   // Create the list item
-  QListWidgetItem* item = new QListWidgetItem(page->windowIcon(),
-                                              page->windowTitle());
-  ui_->list->addItem(item);
+  QTreeWidgetItem* item = new QTreeWidgetItem;
+  item->setText(0, page->windowTitle());
+  item->setIcon(0, page->windowIcon());
+  item->setData(0, Role_IsSeparator, false);
 
   if (!page->IsEnabled()) {
     item->setFlags(Qt::NoItemFlags);
   }
+
+  parent->addChild(item);
 
   // Create a scroll area containing the page
   QScrollArea* area = new QScrollArea;
@@ -148,7 +207,7 @@ void SettingsDialog::AddPage(Page id, SettingsPage* page) {
 
   // Remember where the page is
   PageData data;
-  data.index_ = ui_->list->row(item);
+  data.item_ = item;
   data.scroll_area_ = area;
   data.page_ = page;
   pages_[id] = data;
@@ -185,10 +244,23 @@ void SettingsDialog::OpenAtPage(Page page) {
     return;
   }
 
-  ui_->list->setCurrentRow(pages_[page].index_);
+  ui_->list->setCurrentItem(pages_[page].item_);
   show();
 }
 
-void SettingsDialog::CurrentTextChanged(const QString& text) {
-  ui_->title->setText("<b>" + text + "</b>");
+void SettingsDialog::CurrentItemChanged(QTreeWidgetItem* item) {
+  if (! (item->flags() & Qt::ItemIsSelectable)) {
+    return;
+  }
+
+  // Set the title
+  ui_->title->setText("<b>" + item->text(0) + "</b>");
+
+  // Display the right page
+  foreach (const PageData& data, pages_.values()) {
+    if (data.item_ == item) {
+      ui_->stacked_widget->setCurrentWidget(data.scroll_area_);
+      break;
+    }
+  }
 }

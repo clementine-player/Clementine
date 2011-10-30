@@ -19,12 +19,15 @@
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout_2">
    <item>
-    <widget class="QListWidget" name="list">
+    <widget class="QTreeWidget" name="list">
      <property name="maximumSize">
       <size>
        <width>220</width>
        <height>16777215</height>
       </size>
+     </property>
+     <property name="horizontalScrollBarPolicy">
+      <enum>Qt::ScrollBarAlwaysOff</enum>
      </property>
      <property name="iconSize">
       <size>
@@ -32,24 +35,23 @@
        <height>32</height>
       </size>
      </property>
-     <property name="movement">
-      <enum>QListView::Static</enum>
+     <property name="rootIsDecorated">
+      <bool>false</bool>
      </property>
-     <property name="spacing">
-      <number>2</number>
+     <property name="itemsExpandable">
+      <bool>false</bool>
      </property>
-     <property name="viewMode">
-      <enum>QListView::ListMode</enum>
+     <property name="expandsOnDoubleClick">
+      <bool>false</bool>
      </property>
-     <property name="uniformItemSizes">
-      <bool>true</bool>
-     </property>
-     <property name="wordWrap">
-      <bool>true</bool>
-     </property>
-     <property name="selectionRectVisible">
-      <bool>true</bool>
-     </property>
+     <attribute name="headerVisible">
+      <bool>false</bool>
+     </attribute>
+     <column>
+      <property name="text">
+       <string notr="true">1</string>
+      </property>
+     </column>
     </widget>
    </item>
    <item>
@@ -97,22 +99,6 @@
   <include location="../../data/data.qrc"/>
  </resources>
  <connections>
-  <connection>
-   <sender>list</sender>
-   <signal>currentRowChanged(int)</signal>
-   <receiver>stacked_widget</receiver>
-   <slot>setCurrentIndex(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>82</x>
-     <y>72</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>307</x>
-     <y>96</y>
-    </hint>
-   </hints>
-  </connection>
   <connection>
    <sender>buttonBox</sender>
    <signal>accepted()</signal>
