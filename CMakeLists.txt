@@ -191,6 +191,7 @@ option(ENABLE_REMOTE "Enable support for using remote controls with Clementine" 
 option(ENABLE_BREAKPAD "Enable crash reporting" OFF)
 option(ENABLE_SPOTIFY_BLOB "Build the spotify non-GPL binary" ON)
 option(ENABLE_SPOTIFY "Enable spotify support" ON)
+option(ENABLE_PLASMARUNNER "Enable plasma krunner global search" OFF)
 
 if(WIN32)
   option(ENABLE_WIN32_CONSOLE "Show the windows console even outside Debug mode" OFF)
@@ -384,9 +385,13 @@ endif(HAVE_SPOTIFY_BLOB)
 # This goes after everything else because KDE fucks everything else up with its
 # cmake includes.
 find_package(KDE4 4.3.60)
-if(KDE4_PLASMA_LIBS)
+if(KDE4_PLASMA_LIBS AND ENABLE_PLASMARUNNER)
+  set(HAVE_PLASMARUNNER ON)
+endif(KDE4_PLASMA_LIBS AND ENABLE_PLASMARUNNER)
+
+if(HAVE_PLASMARUNNER)
   add_subdirectory(plasmarunner)
-endif(KDE4_PLASMA_LIBS)
+endif(HAVE_PLASMARUNNER)
 
 # Uninstall support
 configure_file(
@@ -412,7 +417,7 @@ summary_add("Spotify support: core code" HAVE_SPOTIFY)
 summary_add("Spotify support: non-GPL binary helper" HAVE_SPOTIFY_BLOB)
 summary_add("Visualisations" ENABLE_VISUALISATIONS)
 summary_add("Wiimote support" HAVE_WIIMOTEDEV)
-summary_add("(KDE) Plasma global search" KDE4_PLASMA_LIBS)
+summary_add("(KDE) Plasma global search" HAVE_PLASMARUNNER)
 summary_add("(Mac OS X) Sparkle integration" HAVE_SPARKLE)
 summary_add("(unstable) Remote control support" HAVE_REMOTE)
 summary_show()
