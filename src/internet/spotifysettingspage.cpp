@@ -152,4 +152,6 @@ void SpotifySettingsPage::UpdateLoginState() {
 void SpotifySettingsPage::Logout() {
   service_->Logout();
   UpdateLoginState();
+
+  ui_->username->clear();
 }

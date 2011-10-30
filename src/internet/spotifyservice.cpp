@@ -639,4 +639,8 @@ void SpotifyService::Logout() {
   blob_process_ = NULL;
 
   login_state_ = LoginState_OtherError;
+
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+  s.setValue("login_state", login_state_);
 }
