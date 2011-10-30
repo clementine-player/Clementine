@@ -159,7 +159,7 @@ void GlobalSearchItemDelegate::paint(QPainter* p,
     if (!m.albumartist().isEmpty())
       line_1 += m.albumartist();
     else if (m.is_compilation())
-      line_1 += tr("Various Artists");
+      line_1 += tr("Various artists");
     else if (!m.artist().isEmpty())
       line_1 += m.artist();
     else

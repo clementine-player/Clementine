@@ -108,7 +108,7 @@ TEST_F(LibraryModelTest, CompilationAlbums) {
   ASSERT_EQ(1, model_->rowCount(QModelIndex()));
 
   QModelIndex va_index = model_->index(0, 0, QModelIndex());
-  EXPECT_EQ("Various Artists", va_index.data().toString());
+  EXPECT_EQ("Various artists", va_index.data().toString());
   EXPECT_TRUE(model_->hasChildren(va_index));
   ASSERT_EQ(model_->rowCount(va_index), 1);
 

@@ -218,7 +218,7 @@ LibraryItem* LibraryModel::CreateCompilationArtistNode(bool signal, LibraryItem*
 
   compilation_artist_node_ =
       new LibraryItem(LibraryItem::Type_Container, parent);
-  compilation_artist_node_->key = tr("Various Artists");
+  compilation_artist_node_->key = tr("Various artists");
   compilation_artist_node_->sort_text = " various";
   compilation_artist_node_->container_level = parent->container_level + 1;
 
