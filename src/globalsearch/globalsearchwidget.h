@@ -98,6 +98,7 @@ private slots:
   void ProviderAdded(const SearchProvider* provider);
   void ProviderRemoved(const SearchProvider* provider);
   void ProviderButtonToggled(bool on);
+  void ProviderToggled(const SearchProvider* provider, bool on);
 
 private:
   // Return values from CanCombineResults
@@ -161,7 +162,7 @@ private:
   QAction* replace_and_play_;
   QList<QAction*> actions_;
 
-  typedef boost::bimap<const SearchProvider*, const QToolButton*> ProviderButtonMap;
+  typedef boost::bimap<const SearchProvider*, QToolButton*> ProviderButtonMap;
   typedef ProviderButtonMap::value_type ProviderButton;
   ProviderButtonMap provider_buttons_;
 };

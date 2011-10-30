@@ -115,7 +115,27 @@ void GlobalSearchSettingsPage::AddProviderItem(GlobalSearch* engine,
 }
 
 void GlobalSearchSettingsPage::Save() {
+  QSettings s;
+  s.beginGroup(GlobalSearch::kSettingsGroup);
 
+  QStringList provider_order;
+
+  for (int i=0 ; i<ui_->sources->invisibleRootItem()->childCount() ; ++i) {
+    const QTreeWidgetItem* item = ui_->sources->invisibleRootItem()->child(i);
+    const SearchProvider* provider = item->data(0, Qt::UserRole).value<SearchProvider*>();
+
+    provider_order << provider->id();
+
+    s.setValue("enabled_" + provider->id(),
+        item->data(0, Qt::CheckStateRole).toInt() == Qt::Checked);
+  }
+
+  s.setValue("provider_order", provider_order);
+  s.setValue("show_globalsearch", ui_->show_globalsearch->isChecked());
+  s.setValue("hide_others", ui_->hide_others->isChecked() && ui_->show_globalsearch->isChecked());
+  s.setValue("combine_identical_results", ui_->combine->isChecked());
+  s.setValue("tooltip", ui_->tooltip->isChecked());
+  s.setValue("tooltip_help", ui_->tooltip_help->isChecked());
 }
 
 void GlobalSearchSettingsPage::MoveUp() {

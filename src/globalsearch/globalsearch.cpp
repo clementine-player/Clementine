@@ -261,10 +261,18 @@ void GlobalSearch::ReloadSettings() {
   s.beginGroup(kSettingsGroup);
 
   foreach (SearchProvider* provider, providers_.keys()) {
-    QVariant value = s.value(provider->id());
-    if (value.isValid()) {
-      providers_state_preference_.insert(provider->id(), value.toBool());
-      providers_[provider].enabled_ = value.toBool() && provider->IsLoggedIn(); 
+    QVariant value = s.value("enabled_" + provider->id());
+    if (!value.isValid())
+      continue;
+
+    providers_state_preference_.insert(provider->id(), value.toBool());
+
+    const bool old_state = providers_[provider].enabled_;
+    const bool new_state = value.toBool() && provider->IsLoggedIn();
+
+    if (old_state != new_state) {
+      providers_[provider].enabled_ = new_state;
+      emit ProviderToggled(provider, new_state);
     }
   }
 }
@@ -273,6 +281,6 @@ void GlobalSearch::SaveProvidersSettings() {
   QSettings s;
   s.beginGroup(kSettingsGroup);
   foreach (SearchProvider* provider, providers_.keys()) {
-    s.setValue(provider->id(), providers_[provider].enabled_);
+    s.setValue("enabled_" + provider->id(), providers_[provider].enabled_);
   }
 }

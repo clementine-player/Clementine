@@ -148,6 +148,8 @@ void GlobalSearchWidget::Init(GlobalSearch* engine) {
           SLOT(ProviderAdded(const SearchProvider*)));
   connect(engine_, SIGNAL(ProviderRemoved(const SearchProvider*)),
           SLOT(ProviderRemoved(const SearchProvider*)));
+  connect(engine_, SIGNAL(ProviderToggled(const SearchProvider*,bool)),
+          SLOT(ProviderToggled(const SearchProvider*,bool)));
 
   // Take all the ProviderAdded signals we missed.
   foreach (const SearchProvider* provider, engine_->providers()) {
@@ -728,7 +730,7 @@ void GlobalSearchWidget::ProviderAdded(const SearchProvider* provider) {
   // Find the appropriate insertion point.
   bool inserted = false;
   for (int i = 0; i < ui_->provider_layout->count(); ++i) {
-    const QToolButton* item_button = static_cast<QToolButton*>(
+    QToolButton* item_button = static_cast<QToolButton*>(
         ui_->provider_layout->itemAt(i)->widget());
 
     if (!item_button) {
@@ -775,4 +777,12 @@ void GlobalSearchWidget::ProviderButtonToggled(bool on) {
     // If we were not able to change provider state, toggle back provider button
     button->toggle();
   }
+}
+
+void GlobalSearchWidget::ProviderToggled(const SearchProvider* provider, bool on) {
+  QToolButton* button = provider_buttons_.left.find(provider)->second;
+  if (!button)
+    return;
+
+  button->setChecked(on);
 }
