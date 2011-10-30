@@ -532,7 +532,7 @@ void GroovesharkService::UserFavoritesRetrieved() {
   reply->deleteLater();
 
   // Create item
-  QStandardItem* item = new QStandardItem(QIcon(":/star-on.png"), tr("Favorites"));
+  QStandardItem* item = new QStandardItem(QIcon(":/last.fm/love.png"), tr("Favorites"));
   item->setData(InternetModel::Type_UserPlaylist, InternetModel::Role_Type);
   item->setData(true, InternetModel::Role_CanLazyLoad);
   item->setData(InternetModel::PlayBehaviour_SingleItem, InternetModel::Role_PlayBehaviour);
