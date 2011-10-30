@@ -44,7 +44,7 @@ GlobalSearchTooltip::GlobalSearchTooltip(QWidget* event_target)
 {
   setWindowFlags(Qt::Popup);
   setFocusPolicy(Qt::NoFocus);
-  setAttribute(Qt::WA_OpaquePaintEvent);
+  setAttribute(Qt::WA_NoSystemBackground);
   setAttribute(Qt::WA_TranslucentBackground);
 
   switch_action_ = new QAction(tr("Switch provider"), this);
