@@ -1940,10 +1940,9 @@ void MainWindow::EnsureSettingsDialogCreated() {
 
   settings_dialog_.reset(new SettingsDialog(background_streams_));
   settings_dialog_->SetLibraryDirectoryModel(library_->model()->directory_model());
-
   settings_dialog_->SetGstEngine(qobject_cast<GstEngine*>(player_->engine()));
-
   settings_dialog_->SetGlobalShortcutManager(global_shortcuts_);
+  settings_dialog_->SetGlobalSearch(global_search_);
   settings_dialog_->SetSongInfoView(song_info_view_);
 
   // Settings

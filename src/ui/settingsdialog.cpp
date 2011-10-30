@@ -30,6 +30,7 @@
 #include "core/networkproxyfactory.h"
 #include "engines/enginebase.h"
 #include "engines/gstengine.h"
+#include "globalsearch/globalsearchsettingspage.h"
 #include "internet/digitallyimportedsettingspage.h"
 #include "internet/groovesharksettingspage.h"
 #include "internet/magnatunesettingspage.h"
@@ -100,6 +101,7 @@ SettingsDialog::SettingsDialog(BackgroundStreams* streams, QWidget* parent)
     gst_engine_(NULL),
     song_info_view_(NULL),
     streams_(streams),
+    global_search_(NULL),
     ui_(new Ui_SettingsDialog),
     loading_settings_(false)
 {
@@ -125,6 +127,7 @@ SettingsDialog::SettingsDialog(BackgroundStreams* streams, QWidget* parent)
   // User interface
   QTreeWidgetItem* interface = AddCategory(tr("User interface"));
   AddPage(Page_GlobalShortcuts, new GlobalShortcutsSettingsPage(this), interface);
+  AddPage(Page_GlobalSearch, new GlobalSearchSettingsPage(this), interface);
   AddPage(Page_SongInformation, new SongInfoSettingsPage(this), interface);
   AddPage(Page_Notifications, new NotificationsSettingsPage(this), interface);
 

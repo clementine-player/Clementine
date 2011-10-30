@@ -121,6 +121,7 @@ set(SOURCES
   globalsearch/globalsearch.cpp
   globalsearch/globalsearchitemdelegate.cpp
   globalsearch/globalsearchpopup.cpp
+  globalsearch/globalsearchsettingspage.cpp
   globalsearch/globalsearchsortmodel.cpp
   globalsearch/globalsearchtooltip.cpp
   globalsearch/globalsearchwidget.cpp
@@ -371,6 +372,7 @@ set(HEADERS
   globalsearch/librarysearchprovider.h
   globalsearch/globalsearch.h
   globalsearch/globalsearchpopup.h
+  globalsearch/globalsearchsettingspage.h
   globalsearch/globalsearchtooltip.h
   globalsearch/globalsearchwidget.h
   globalsearch/groovesharksearchprovider.h
@@ -545,6 +547,7 @@ set(UI
   devices/deviceproperties.ui
 
   globalsearch/globalsearchpopup.ui
+  globalsearch/globalsearchsettingspage.ui
   globalsearch/globalsearchwidget.ui
 
   internet/digitallyimportedsettingspage.ui

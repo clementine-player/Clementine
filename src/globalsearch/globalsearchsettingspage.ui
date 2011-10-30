@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>GlobalSearchSettingsPage</class>
+ <widget class="QWidget" name="GlobalSearchSettingsPage">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>654</width>
+    <height>506</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Global Search</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_4">
+   <item>
+    <widget class="QCheckBox" name="show_globalsearch">
+     <property name="text">
+      <string>Show the Global Search box above the sidebar</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QCheckBox" name="hide_others">
+     <property name="text">
+      <string>Hide all other search boxes</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="sources_group">
+     <property name="title">
+      <string>Sources</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_3">
+      <item>
+       <widget class="QCheckBox" name="combine">
+        <property name="text">
+         <string>Combine identical results from different sources</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>Enable sources below to include them in Global Search results.  When identical results are available from more than one source, ones at the top will take priority.</string>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <item>
+         <widget class="QTreeWidget" name="sources">
+          <property name="horizontalScrollBarPolicy">
+           <enum>Qt::ScrollBarAlwaysOff</enum>
+          </property>
+          <property name="rootIsDecorated">
+           <bool>false</bool>
+          </property>
+          <property name="columnCount">
+           <number>2</number>
+          </property>
+          <attribute name="headerVisible">
+           <bool>false</bool>
+          </attribute>
+          <attribute name="headerStretchLastSection">
+           <bool>false</bool>
+          </attribute>
+          <column>
+           <property name="text">
+            <string notr="true">1</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string notr="true">2</string>
+           </property>
+          </column>
+         </widget>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_2">
+          <item>
+           <widget class="QPushButton" name="up">
+            <property name="text">
+             <string>Move up</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="down">
+            <property name="text">
+             <string>Move down</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="configure">
+            <property name="text">
+             <string>Configure...</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="verticalSpacer">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="results_group">
+     <property name="title">
+      <string>Results</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <widget class="QCheckBox" name="tooltip">
+        <property name="text">
+         <string>Show a tooltip with more information about each result</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="tooltip_help">
+        <property name="text">
+         <string>Include keyboard shortcut help in the tooltip</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>show_globalsearch</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>hide_others</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>86</x>
+     <y>23</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>88</x>
+     <y>53</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>show_globalsearch</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>sources_group</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>171</x>
+     <y>25</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>165</x>
+     <y>77</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>show_globalsearch</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>results_group</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>201</x>
+     <y>18</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>240</x>
+     <y>416</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>tooltip</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>tooltip_help</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>121</x>
+     <y>447</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>123</x>
+     <y>469</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

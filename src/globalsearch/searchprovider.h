@@ -103,6 +103,7 @@ public:
   // If provider needs user login to search and play songs, this method should
   // be reimplemented
   virtual bool IsLoggedIn() { return true; }
+  virtual bool CanShowConfig() const { return false; }
   virtual void ShowConfig() { }
 
   static QImage ScaleAndPad(const QImage& image);
@@ -153,5 +154,7 @@ public:
 private slots:
   void BlockingSearchFinished();
 };
+
+Q_DECLARE_METATYPE(SearchProvider*)
 
 #endif // SEARCHPROVIDER_H

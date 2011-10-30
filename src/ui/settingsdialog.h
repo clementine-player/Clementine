@@ -28,6 +28,7 @@ class QScrollArea;
 class QTreeWidgetItem;
 
 class BackgroundStreams;
+class GlobalSearch;
 class GlobalShortcuts;
 class LibraryDirectoryModel;
 class SettingsPage;
@@ -59,6 +60,7 @@ public:
     Page_Behaviour,
     Page_SongInformation,
     Page_GlobalShortcuts,
+    Page_GlobalSearch,
     Page_Notifications,
     Page_Library,
     Page_Lastfm,
@@ -81,6 +83,7 @@ public:
   void SetGlobalShortcutManager(GlobalShortcuts* manager) { manager_ = manager; }
   void SetGstEngine(const GstEngine* engine) { gst_engine_ = engine; }
   void SetSongInfoView(SongInfoView* view) { song_info_view_ = view; }
+  void SetGlobalSearch(GlobalSearch* global_search) { global_search_ = global_search; }
 
   bool is_loading_settings() const { return loading_settings_; }
 
@@ -89,6 +92,7 @@ public:
   const GstEngine* gst_engine() const { return gst_engine_; }
   SongInfoView* song_info_view() const { return song_info_view_; }
   BackgroundStreams* background_streams() const { return streams_; }
+  GlobalSearch* global_search() const { return global_search_; }
 
   void OpenAtPage(Page page);
 
@@ -121,6 +125,7 @@ private:
   const GstEngine* gst_engine_;
   SongInfoView* song_info_view_;
   BackgroundStreams* streams_;
+  GlobalSearch* global_search_;
 
   Ui_SettingsDialog* ui_;
   bool loading_settings_;
