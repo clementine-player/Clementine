@@ -19,7 +19,7 @@ macro(add_pot outfiles header pot)
         --output=${CMAKE_CURRENT_BINARY_DIR}/pot.temp
         ${ARGN}
     COMMAND cat ${header} ${CMAKE_CURRENT_BINARY_DIR}/pot.temp > ${pot}
-    DEPENDS ${ARGN}
+    DEPENDS ${ARGN} ${header}
   )
 
   list(APPEND ${outfiles} ${pot})
