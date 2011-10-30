@@ -39,6 +39,10 @@ class GroovesharkService : public InternetService {
     Type_Track
   };
 
+  enum Role {
+    Role_UserPlaylistId = InternetModel::RoleCount,
+  };
+
   // Values are persisted - don't change.
   enum LoginState {
     LoginState_LoggedIn = 1,
@@ -52,6 +56,7 @@ class GroovesharkService : public InternetService {
   void LazyPopulate(QStandardItem *parent);
 
   void ItemDoubleClicked(QStandardItem* item);
+  void DropMimeData(const QMimeData* data, const QModelIndex& index);
   void ShowContextMenu(const QModelIndex& index, const QPoint& global_pos);
 
   void Search(const QString& text, Playlist* playlist, bool now = false);
@@ -64,6 +69,9 @@ class GroovesharkService : public InternetService {
   bool IsLoggedIn() const { return !session_id_.isEmpty(); }
   void RetrieveUserPlaylists();
   void RetrieveUserFavorites();
+  void SetPlaylistSongs(int playlist_id, const QList<int>& songs_ids);
+  // Refresh playlist_id playlist , or create it if it doesn't exist
+  void RefreshPlaylist(int playlist_id, const QString& playlist_name);
   void MarkStreamKeyOver30Secs(const QString& stream_key, const QString& server_id);
   void MarkSongComplete(const QString& song_id, const QString& stream_key, const QString& server_id);
 
@@ -102,10 +110,12 @@ class GroovesharkService : public InternetService {
   struct PlaylistInfo {
     PlaylistInfo() {}
     PlaylistInfo(int id, QString name)
-      : id_(id), name_(name) {}
+      : id_(id), name_(name), item_(NULL) {}
 
     int id_;
     QString name_;
+    QStandardItem* item_;
+    QList<int> songs_ids_;
   };
 
  private slots:
@@ -122,6 +132,7 @@ class GroovesharkService : public InternetService {
   void UserPlaylistsRetrieved();
   void UserFavoritesRetrieved();
   void PlaylistSongsRetrieved();
+  void PlaylistSongsSet(QNetworkReply* reply, int playlist_id);
   void StreamMarked();
   void SongMarkedAsComplete();
 
@@ -144,6 +155,10 @@ class GroovesharkService : public InternetService {
   QVariantMap ExtractResult(QNetworkReply* reply);
   // Convenient function for extracting songs from grooveshark result
   SongList ExtractSongs(const QVariantMap& result);
+  // Convenient function for extracting Grooveshark songs ids from result
+  QList<int> ExtractSongsIds(const QVariantMap& result);
+  // Convenient function for extracting Grooveshark songs ids from a list of URLs
+  QList<int> ExtractSongsIds(const QList<QUrl> urls);
   void ResetSessionId();
 
 
@@ -156,6 +171,8 @@ class GroovesharkService : public InternetService {
   QMap<QNetworkReply*, int> pending_searches_;
 
   QMap<QNetworkReply*, PlaylistInfo> pending_retrieve_playlists_;
+
+  QMap<int, PlaylistInfo> playlists_;
 
   QStandardItem* root_;
   QStandardItem* search_;

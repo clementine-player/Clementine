@@ -47,6 +47,8 @@ public:
 
   virtual void ShowContextMenu(const QModelIndex& index, const QPoint& global_pos) {}
   virtual void ItemDoubleClicked(QStandardItem* item) {}
+  // Give the service a chance to do a custom action when data is dropped on it
+  virtual void DropMimeData(const QMimeData* data, const QModelIndex& index) {}
 
   virtual PlaylistItem::Options playlistitem_options() const { return PlaylistItem::Default; }
 

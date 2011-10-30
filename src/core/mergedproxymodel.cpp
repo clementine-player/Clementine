@@ -401,6 +401,13 @@ QMimeData* MergedProxyModel::mimeData(const QModelIndexList &indexes) const {
 
   return model->mimeData(indexes_in_model);
 }
+bool MergedProxyModel::dropMimeData(const QMimeData* data, Qt::DropAction action, int row, int column, const QModelIndex& parent) {
+  if (!parent.isValid()) {
+    return false;
+  }
+
+  return sourceModel()->dropMimeData(data, action, row, column, parent);
+}
 
 QModelIndex MergedProxyModel::FindSourceParent(const QModelIndex& proxy_index) const {
   if (!proxy_index.isValid())

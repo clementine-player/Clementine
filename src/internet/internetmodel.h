@@ -75,6 +75,10 @@ public:
     // themselves.
     Role_Service,
 
+    // Setting this to true means that the item can be changed by user action
+    // (e.g. changing remote playlists)
+    Role_CanBeModified,
+
     RoleCount
   };
 
@@ -131,6 +135,7 @@ public:
   Qt::ItemFlags flags(const QModelIndex& index) const;
   QStringList mimeTypes() const;
   QMimeData* mimeData(const QModelIndexList& indexes) const;
+  bool dropMimeData(const QMimeData* data, Qt::DropAction action, int row, int column, const QModelIndex& parent);
   bool hasChildren(const QModelIndex& parent) const;
   int rowCount(const QModelIndex& parent) const;
 

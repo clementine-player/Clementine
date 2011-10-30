@@ -148,13 +148,13 @@ InternetService* InternetModel::ServiceForIndex(const QModelIndex& index) const 
 }
 
 Qt::ItemFlags InternetModel::flags(const QModelIndex& index) const {
-  if (IsPlayable(index))
-    return Qt::ItemIsSelectable |
-           Qt::ItemIsEnabled |
-           Qt::ItemIsDragEnabled;
-
-  return Qt::ItemIsSelectable |
-         Qt::ItemIsEnabled;
+  Qt::ItemFlags flags = Qt::ItemIsSelectable |
+                        Qt::ItemIsEnabled |
+                        Qt::ItemIsDropEnabled;
+  if (IsPlayable(index)) {
+    flags |= Qt::ItemIsDragEnabled;
+  }
+  return flags;
 }
 
 bool InternetModel::hasChildren(const QModelIndex& parent) const {
@@ -232,6 +232,17 @@ QMimeData* InternetModel::mimeData(const QModelIndexList& indexes) const {
   data->name_for_new_playlist_ = InternetModel::ServiceForIndex(last_valid_index)->name();
 
   return data;
+}
+
+bool InternetModel::dropMimeData(const QMimeData* data, Qt::DropAction action, int row, int column, const QModelIndex& parent) {
+  if (action == Qt::IgnoreAction) {
+    return false;
+  }
+  if (parent.data(Role_CanBeModified).toBool()) {
+    InternetModel::ServiceForIndex(parent)->DropMimeData(data, parent);
+  }
+
+  return true;
 }
 
 void InternetModel::ShowContextMenu(const QModelIndex& merged_model_index,

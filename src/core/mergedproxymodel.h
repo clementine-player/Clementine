@@ -63,6 +63,7 @@ class MergedProxyModel : public QAbstractProxyModel {
   bool setData(const QModelIndex &index, const QVariant &value, int role);
   QStringList mimeTypes() const;
   QMimeData* mimeData(const QModelIndexList &indexes) const;
+  bool dropMimeData(const QMimeData* data, Qt::DropAction action, int row, int column, const QModelIndex& parent);
   bool canFetchMore(const QModelIndex &parent) const;
   void fetchMore(const QModelIndex& parent);
 
