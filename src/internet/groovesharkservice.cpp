@@ -63,6 +63,7 @@ const char* GroovesharkService::kUrlCover = "http://beta.grooveshark.com/static/
 
 const int GroovesharkService::kSearchDelayMsec = 400;
 const int GroovesharkService::kSongSearchLimit = 50;
+const int GroovesharkService::kSongSimpleSearchLimit = 10;
 
 typedef QPair<QString, QVariant> Param;
 
@@ -141,7 +142,7 @@ int GroovesharkService::SimpleSearch(const QString& query) {
   QList<Param> parameters;
   parameters << Param("query", query)
              << Param("country", "")
-             << Param("limit", QString::number(kSongSearchLimit))
+             << Param("limit", QString::number(kSongSimpleSearchLimit))
              << Param("offset", "");
 
   QNetworkReply* reply = CreateRequest("getSongSearchResults", parameters, false);

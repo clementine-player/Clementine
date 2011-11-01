@@ -54,22 +54,26 @@ void GroovesharkSearchProvider::Init(GroovesharkService* service) {
 
 void GroovesharkSearchProvider::SearchAsync(int id, const QString& query) {
   const int service_id = service_->SimpleSearch(query);
-  pending_searches_[service_id] = id;
+  pending_searches_[service_id] = PendingState(id, TokenizeQuery(query));;
 
   const int album_id = service_->SearchAlbums(query);
-  pending_searches_[album_id] = id;
+  pending_searches_[album_id] = PendingState(id, TokenizeQuery(query));
 }
 
 void GroovesharkSearchProvider::SearchDone(int id, const SongList& songs) {
   // Map back to the original id.
-  const int global_search_id = pending_searches_.take(id);
+  const PendingState state = pending_searches_.take(id);
+  const int global_search_id = state.orig_id_;
+
+  SongList songs_copy(songs);
+  SortSongs(&songs_copy);
 
   ResultList ret;
-  foreach (const Song& song, songs) {
+  foreach (const Song& song, songs_copy) {
     Result result(this);
     result.type_ = globalsearch::Type_Track;
     result.metadata_ = song;
-    result.match_quality_ = globalsearch::Quality_AtStart;
+    result.match_quality_ = MatchQuality(state.tokens_, song.title());
 
     ret << result;
   }
@@ -79,14 +83,18 @@ void GroovesharkSearchProvider::SearchDone(int id, const SongList& songs) {
 }
 
 void GroovesharkSearchProvider::AlbumSearchResult(int id, const SongList& songs) {
-  const int global_search_id = pending_searches_.take(id);
+  // Map back to the original id.
+  const PendingState state = pending_searches_.take(id);
+  const int global_search_id = state.orig_id_;
 
   ResultList ret;
   foreach (const Song& s, songs) {
     Result result(this);
     result.type_ = globalsearch::Type_Album;
-    result.match_quality_ = globalsearch::Quality_AtStart;
     result.metadata_ = s;
+    result.match_quality_ =
+        qMin(MatchQuality(state.tokens_, s.album()),
+             MatchQuality(state.tokens_, s.artist()));
 
     ret << result;
   }
@@ -96,8 +104,7 @@ void GroovesharkSearchProvider::AlbumSearchResult(int id, const SongList& songs)
 }
 
 void GroovesharkSearchProvider::MaybeSearchFinished(int id) {
-  qLog(Debug) << id << pending_searches_.keys(id);
-  if (pending_searches_.keys(id).isEmpty()) {
+  if (pending_searches_.keys(PendingState(id, QStringList())).isEmpty()) {
     emit SearchFinished(id);
   }
 }

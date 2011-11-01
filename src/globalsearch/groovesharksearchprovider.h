@@ -50,7 +50,7 @@ class GroovesharkSearchProvider : public SearchProvider {
   void FetchAlbum(int id, const Result& result);
 
   GroovesharkService* service_;
-  QMap<int, int> pending_searches_;
+  QMap<int, PendingState> pending_searches_;
 
   BackgroundThread<AlbumCoverLoader>* cover_loader_;
   QMap<quint64, int> cover_loader_tasks_;

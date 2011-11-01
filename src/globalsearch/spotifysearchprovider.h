@@ -47,11 +47,6 @@ private slots:
   void AlbumBrowseResponse(const spotify_pb::BrowseAlbumResponse& response);
 
 private:
-  struct PendingState {
-    int orig_id_;
-    QStringList tokens_;
-  };
-
   SpotifyServer* server();
 
 private:

@@ -86,14 +86,6 @@ class GroovesharkService : public InternetService {
 
   static const char* kServiceName;
   static const char* kSettingsGroup;
-  static const char* kUrl;
-  static const char* kUrlCover;
-
-  static const int kSongSearchLimit;
-  static const int kSearchDelayMsec;
-
-  static const char* kApiKey;
-  static const char* kApiSecret;
 
  signals:
   void LoginFinished(bool success);
@@ -193,6 +185,16 @@ class GroovesharkService : public InternetService {
   QByteArray api_key_;
 
   LoginState login_state_;
+
+  static const char* kUrl;
+  static const char* kUrlCover;
+
+  static const int kSongSearchLimit;
+  static const int kSongSimpleSearchLimit;
+  static const int kSearchDelayMsec;
+
+  static const char* kApiKey;
+  static const char* kApiSecret;
 };
 
 

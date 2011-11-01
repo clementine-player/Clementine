@@ -130,6 +130,25 @@ protected:
   void Init(const QString& name, const QString& id, const QIcon& icon,
             Hints hints = NoHints);
 
+  struct PendingState {
+    PendingState() : orig_id_(-1) {}
+    PendingState(int orig_id, QStringList tokens)
+        : orig_id_(orig_id),
+          tokens_(tokens) {
+    }
+    int orig_id_;
+    QStringList tokens_;
+
+    bool operator<(const PendingState& b) const {
+      return orig_id_ < b.orig_id_;
+    }
+
+    bool operator==(const PendingState& b) const {
+      return orig_id_ == b.orig_id_;
+    }
+  };
+
+
 private:
   QString name_;
   QString id_;
