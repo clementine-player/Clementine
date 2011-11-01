@@ -109,7 +109,7 @@ void SpotifyService::LazyPopulate(QStandardItem* item) {
       server_->LoadStarred();
       break;
 
-    case Type_UserPlaylist:
+    case InternetModel::Type_UserPlaylist:
       EnsureServerCreated();
       server_->LoadUserPlaylist(item->data(Role_UserPlaylistIndex).toInt());
       break;
@@ -336,12 +336,16 @@ void SpotifyService::PlaylistsUpdated(const spotify_pb::Playlists& response) {
     const spotify_pb::Playlists::Playlist& msg = response.playlist(i);
 
     QStandardItem* item = new QStandardItem(QStringFromStdString(msg.name()));
-    item->setData(Type_UserPlaylist, InternetModel::Role_Type);
+    item->setData(InternetModel::Type_UserPlaylist, InternetModel::Role_Type);
     item->setData(true, InternetModel::Role_CanLazyLoad);
     item->setData(msg.index(), Role_UserPlaylistIndex);
+    item->setData(InternetModel::PlayBehaviour_SingleItem, InternetModel::Role_PlayBehaviour);
 
     root_->appendRow(item);
     playlists_ << item;
+
+    // Preload the playlist items so that drag & drop works immediately.
+    LazyPopulate(item);
   }
 }
 
@@ -392,6 +396,7 @@ void SpotifyService::UserPlaylistLoaded(const spotify_pb::LoadPlaylistResponse& 
 }
 
 void SpotifyService::FillPlaylist(QStandardItem* item, const spotify_pb::LoadPlaylistResponse& response) {
+  qLog(Debug) << "Filling playlist:" << item->text();
   if (item->hasChildren())
     item->removeRows(0, item->rowCount());
 
@@ -464,9 +469,8 @@ void SpotifyService::SyncPlaylist() {
   QStandardItem* item = playlist_sync_action_->data().value<QStandardItem*>();
   Q_ASSERT(item);
 
-  Type type = static_cast<Type>(item->data(InternetModel::Role_Type).toInt());
-  switch (type) {
-    case Type_UserPlaylist: {
+  switch (item->data(InternetModel::Role_Type).toInt()) {
+    case InternetModel::Type_UserPlaylist: {
       int index = item->data(Role_UserPlaylistIndex).toInt();
       server_->SyncUserPlaylist(index);
       playlist_sync_ids_[index] =
@@ -550,10 +554,10 @@ void SpotifyService::ShowContextMenu(const QModelIndex& index, const QPoint& glo
   EnsureMenuCreated();
   QStandardItem* item = model()->itemFromIndex(index);
   if (item) {
-    Type type = static_cast<Type>(item->data(InternetModel::Role_Type).toInt());
+    int type = item->data(InternetModel::Role_Type).toInt();
     if (type == Type_InboxPlaylist ||
         type == Type_StarredPlaylist ||
-        type == Type_UserPlaylist) {
+        type == InternetModel::Type_UserPlaylist) {
       playlist_sync_action_->setData(qVariantFromValue(item));
       playlist_context_menu_->popup(global_pos);
       return;

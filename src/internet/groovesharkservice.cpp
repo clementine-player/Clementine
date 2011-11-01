@@ -665,7 +665,7 @@ void GroovesharkService::RefreshPlaylist(int playlist_id, const QString& playlis
   parameters << Param("playlistID", playlist_id);
   QNetworkReply* reply = CreateRequest("getPlaylistSongs", parameters, true); 
   connect(reply, SIGNAL(finished()), SLOT(PlaylistSongsRetrieved()));
-  
+
   // Keep in mind correspondance between reply object and playlist
   pending_retrieve_playlists_.insert(reply, PlaylistInfo(playlist_id, playlist_name));
 }

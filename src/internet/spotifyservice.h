@@ -26,7 +26,6 @@ public:
     Type_SearchResults = InternetModel::TypeCount,
     Type_StarredPlaylist,
     Type_InboxPlaylist,
-    Type_UserPlaylist,
     Type_Track,
   };
 
