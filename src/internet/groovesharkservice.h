@@ -36,7 +36,8 @@ class GroovesharkService : public InternetService {
 
   enum Type {
     Type_SearchResults = InternetModel::TypeCount,
-    Type_Track
+    Type_Track,
+    Type_UserFavorites
   };
 
   enum Role {
@@ -72,6 +73,7 @@ class GroovesharkService : public InternetService {
   void SetPlaylistSongs(int playlist_id, const QList<int>& songs_ids);
   // Refresh playlist_id playlist , or create it if it doesn't exist
   void RefreshPlaylist(int playlist_id, const QString& playlist_name);
+  void AddUserFavoriteSong(int song_id);
   void MarkStreamKeyOver30Secs(const QString& stream_key, const QString& server_id);
   void MarkSongComplete(const QString& song_id, const QString& stream_key, const QString& server_id);
 
@@ -125,6 +127,7 @@ class GroovesharkService : public InternetService {
   void UserFavoritesRetrieved();
   void PlaylistSongsRetrieved();
   void PlaylistSongsSet(QNetworkReply* reply, int playlist_id);
+  void UserFavoriteSongAdded(QNetworkReply* reply);
   void StreamMarked();
   void SongMarkedAsComplete();
 
@@ -168,6 +171,7 @@ class GroovesharkService : public InternetService {
 
   QStandardItem* root_;
   QStandardItem* search_;
+  QStandardItem* favorites_;
 
   NetworkAccessManager* network_;
 

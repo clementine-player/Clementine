@@ -74,6 +74,7 @@ GroovesharkService::GroovesharkService(InternetModel *parent)
     next_pending_search_id_(0),
     root_(NULL),
     search_(NULL),
+    favorites_(NULL),
     network_(new NetworkAccessManager(this)),
     context_menu_(NULL),
     search_delay_(new QTimer(this)),
@@ -388,9 +389,11 @@ void GroovesharkService::Authenticated() {
 void GroovesharkService::Logout() {
   ResetSessionId();
   root_->removeRows(0, root_->rowCount());
-  // search item was root's child, and has been deleted: we should update this
-  // now invalid pointer
+  // 'search' and 'favorites' items were root's children, and have been deleted:
+  // we should update these now invalid pointers
   search_ = NULL;
+  favorites_ = NULL;
+  playlists_.clear();
 }
 
 void GroovesharkService::ResetSessionId() {
@@ -532,11 +535,15 @@ void GroovesharkService::UserFavoritesRetrieved() {
 
   reply->deleteLater();
 
-  // Create item
-  QStandardItem* item = new QStandardItem(QIcon(":/last.fm/love.png"), tr("Favorites"));
-  item->setData(InternetModel::Type_UserPlaylist, InternetModel::Role_Type);
-  item->setData(true, InternetModel::Role_CanLazyLoad);
-  item->setData(InternetModel::PlayBehaviour_SingleItem, InternetModel::Role_PlayBehaviour);
+  if (favorites_) {
+    favorites_->removeRows(0, favorites_->rowCount());
+  } else {
+    favorites_ = new QStandardItem(QIcon(":/last.fm/love.png"), tr("Favorites"));
+    favorites_->setData(Type_UserFavorites, InternetModel::Role_Type);
+    favorites_->setData(true, InternetModel::Role_CanLazyLoad);
+    favorites_->setData(true, InternetModel::Role_CanBeModified);
+    favorites_->setData(InternetModel::PlayBehaviour_SingleItem, InternetModel::Role_PlayBehaviour);
+  }
 
   QVariantMap result = ExtractResult(reply);
   SongList songs = ExtractSongs(result);
@@ -546,10 +553,11 @@ void GroovesharkService::UserFavoritesRetrieved() {
     child->setData(QVariant::fromValue(song), InternetModel::Role_SongMetadata);
     child->setData(InternetModel::PlayBehaviour_SingleItem, InternetModel::Role_PlayBehaviour);
     child->setData(song.url(), InternetModel::Role_Url);
+    child->setData(true, InternetModel::Role_CanBeModified);
 
-    item->appendRow(child);
+    favorites_->appendRow(child);
   }
-  root_->appendRow(item);
+  root_->appendRow(favorites_);
 }
 
 void GroovesharkService::MarkStreamKeyOver30Secs(const QString& stream_key,
@@ -616,18 +624,37 @@ void GroovesharkService::DropMimeData(const QMimeData* data, const QModelIndex& 
   if (!data) {
     return;
   }
-  // Get the playlist
-  int playlist_id = index.data(Role_UserPlaylistId).toInt();
-  if (!playlists_.contains(playlist_id)) {
+
+  // Get Grooveshark songs' ids, if any.
+  QList<int> data_songs_ids = ExtractSongsIds(data->urls());
+  if (data_songs_ids.isEmpty()) {
+    // There is none: probably means user didn't dropped Grooveshark songs
     return;
   }
-  // Get the current playlist's songs
-  PlaylistInfo playlist = playlists_[playlist_id];
-  QList<int> songs_ids = playlist.songs_ids_;
-  // Get Grooveshark songs' ids we want to add to the playlist and append them
-  songs_ids << ExtractSongsIds(data->urls());
 
-  SetPlaylistSongs(playlist_id, songs_ids);
+  int type = index.data(InternetModel::Role_Type).toInt();
+  int parent_type = index.parent().data(InternetModel::Role_Type).toInt();
+
+  // If dropped on Favorites list
+  if (type == Type_UserFavorites || parent_type == Type_UserFavorites) {
+    foreach (int song_id, data_songs_ids) {
+      AddUserFavoriteSong(song_id);
+    }
+  // If dropped on a playlist
+  } else if (type == InternetModel::Type_UserPlaylist ||
+             parent_type == InternetModel::Type_UserPlaylist) {
+    // Get the playlist
+    int playlist_id = index.data(Role_UserPlaylistId).toInt();
+    if (!playlists_.contains(playlist_id)) {
+      return;
+    }
+    // Get the current playlist's songs
+    PlaylistInfo playlist = playlists_[playlist_id];
+    QList<int> songs_ids = playlist.songs_ids_;
+    songs_ids << data_songs_ids;
+
+    SetPlaylistSongs(playlist_id, songs_ids);
+  }
 }
 
 void GroovesharkService::SetPlaylistSongs(int playlist_id, const QList<int>& songs_ids) {
@@ -669,6 +696,27 @@ void GroovesharkService::RefreshPlaylist(int playlist_id, const QString& playlis
 
   // Keep in mind correspondance between reply object and playlist
   pending_retrieve_playlists_.insert(reply, PlaylistInfo(playlist_id, playlist_name));
+}
+
+void GroovesharkService::AddUserFavoriteSong(int song_id) {
+  QList<Param> parameters;
+  parameters << Param("songID", song_id);
+  QNetworkReply* reply = CreateRequest("addUserFavoriteSong", parameters, true);
+  NewClosure(reply, SIGNAL(finished()),
+             this, SLOT(UserFavoriteSongAdded(QNetworkReply*)),
+             reply);
+}
+
+void GroovesharkService::UserFavoriteSongAdded(QNetworkReply* reply) {
+  reply->deleteLater();
+
+  QVariantMap result = ExtractResult(reply);
+  if (!result["success"].toBool()) {
+    qLog(Warning) << "Grooveshark addUserFavoriteSong failed";
+    return;
+  }
+  // Refresh user's favorites list
+  RetrieveUserFavorites();
 }
 
 QNetworkReply* GroovesharkService::CreateRequest(const QString& method_name, QList<Param> params,
