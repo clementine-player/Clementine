@@ -1,24 +1,18 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# Clementine.
+# Copyright (C) 2010 David Sansome
+# This file is distributed under the same license as the Clementine package.
+# 
+# Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/"
-"list\n"
-"POT-Creation-Date: 2011-06-26 20:31+0000\n"
-"PO-Revision-Date: 2011-10-25 13:36+0000\n"
-"Last-Translator: DAG Software <Unknown>\n"
-"Language-Team: \n"
-"Language: \n"
-"MIME-Version: 1.0\n"
+"Project-Id-Version: Clementine Music Player\n"
+"Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
+"PO-Revision-Date: 2011-11-01 04:40+0000\n"
+"Last-Translator: clementinebuildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-10-26 05:21+0000\n"
-"X-Generator: Launchpad (build 14189)\n"
-"X-Language: sk_SK\n"
+"Language: sk\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2\n"
 
 msgid " kbps"
 msgstr " kb/s"
@@ -91,15 +85,15 @@ msgstr "%L1 ďalších poslucháčov"
 msgid "%L1 total plays"
 msgstr "%L1 spolu prehraní"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n failed"
 msgstr "%n zlyhalo"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n finished"
 msgstr "%n dokončených"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n remaining"
 msgstr "%n zostávajúcich"
 
@@ -111,6 +105,9 @@ msgstr "Na &stred"
 
 msgid "&Custom"
 msgstr "&Vlastná"
+
+msgid "&Extras"
+msgstr "Bonusy"
 
 msgid "&Help"
 msgstr "&Nápoveda"
@@ -125,14 +122,26 @@ msgstr "&Skryť..."
 msgid "&Left"
 msgstr "&Vľavo"
 
+msgid "&Music"
+msgstr "Hudba"
+
 msgid "&None"
 msgstr "&Nijaká"
+
+msgid "&Playlist"
+msgstr "Playlist"
 
 msgid "&Quit"
 msgstr "&Zavrieť"
 
+msgid "&Repeat mode"
+msgstr "Režim opakovania"
+
 msgid "&Right"
 msgstr "Vp&ravo"
+
+msgid "&Shuffle mode"
+msgstr "Režim zamiešavania"
 
 msgid "&Stretch columns to fit window"
 msgstr "Roztiahnuť &stĺpce na prispôsobenie oknu"
@@ -173,13 +182,11 @@ msgstr ""
 msgid ""
 "<p>Tokens start with %, for example: %artist %album %title </p>\n"
 "\n"
-"<p>If you surround sections of text that contain a token with curly-braces, "
-"that section will be hidden if the token is empty.</p>"
+"<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
 msgstr ""
 "<p>Štítky začínajte s %, napríklad: %artist %album %title </p>\n"
 "\n"
-"<p>Ak naplníte sekciu znakmi ktoré obsahujú štítok so zloženými zátvorkami, "
-"táto sekcia bude skrytá, ak je štítok prázdny.</p>"
+"<p>Ak naplníte sekciu znakmi ktoré obsahujú štítok so zloženými zátvorkami, táto sekcia bude skrytá, ak je štítok prázdny.</p>"
 
 msgid "A Grooveshark Anywhere account is required."
 msgstr ""
@@ -196,7 +203,8 @@ msgstr ""
 "rôzne typy inteligentných playlistov ktoré ponúkajú rúzne cesty výberu "
 "piesní."
 
-msgid "A song will be included in the playlist if it matches these conditions."
+msgid ""
+"A song will be included in the playlist if it matches these conditions."
 msgstr "Pieseň bude zahrnutá do playlistu ak spĺňa tieto podmienky."
 
 msgid "A-Z"
@@ -655,12 +663,13 @@ msgid ""
 "Clementine can automatically convert the music you copy to this device into "
 "a format that it can play."
 msgstr ""
-"Clementine môže automaticky konvertovať hudbu, ktorú ste skopírovali na toto "
-"zariadenie do formátu, ktorý môže prehrať."
+"Clementine môže automaticky konvertovať hudbu, ktorú ste skopírovali na toto"
+" zariadenie do formátu, ktorý môže prehrať."
 
 msgid ""
 "Clementine can be controlled remotely by an Android phone.  To enable this "
-"feature log in with the same Google account that is configured on your phone."
+"feature log in with the same Google account that is configured on your "
+"phone."
 msgstr ""
 "Clementine môže byť diaľkovo ovládaný telefónom s Androidom. Na povolenie "
 "tejto funkcie sa prihláste s rovnakým Google účtom, aký je nastavený na "
@@ -678,10 +687,11 @@ msgstr ""
 
 msgid ""
 "Clementine couldn't fetch your subscription status since there are problems "
-"with your connection. Played tracks will be cached and sent later to Last.fm."
+"with your connection. Played tracks will be cached and sent later to "
+"Last.fm."
 msgstr ""
-"Clementine sa nepodarilo stiahnuť váš predplatiteľský stav kvôli problémom s "
-"vašim pripojením. Prehrávané skladby sa uložia do vyrovnávacej pamäte a na "
+"Clementine sa nepodarilo stiahnuť váš predplatiteľský stav kvôli problémom s"
+" vašim pripojením. Prehrávané skladby sa uložia do vyrovnávacej pamäte a na "
 "Last.fm sa pošlú neskôr."
 
 msgid "Clementine image viewer"
@@ -713,6 +723,9 @@ msgstr "Club"
 
 msgid "Color"
 msgstr "Farba"
+
+msgid "Combine identical results from different sources"
+msgstr ""
 
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Čiarkou oddelený zoznam class:level, level je 0-3"
@@ -1127,6 +1140,12 @@ msgstr "Povoliť obrázok na pozadí playlistu"
 msgid "Enable shortcuts only when Clementine is focused"
 msgstr "Povoliť skratky len keď je Clementine zameraný"
 
+msgid ""
+"Enable sources below to include them in Global Search results.  When "
+"identical results are available from more than one source, ones at the top "
+"will take priority."
+msgstr ""
+
 msgid "Enable/disable Last.fm scrobbling"
 msgstr "Povoliť/zakázať Last.fm skroblovanie"
 
@@ -1148,8 +1167,8 @@ msgstr "Zadajte nový názov pre tento playlist"
 msgid ""
 "Enter an <b>artist</b> or <b>tag</b> to start listening to Last.fm radio."
 msgstr ""
-"Vložte meno <b>interpréta</b> alebo <b>tag</b> aby ste začali počúvať Last."
-"fm rádio."
+"Vložte meno <b>interpréta</b> alebo <b>tag</b> aby ste začali počúvať "
+"Last.fm rádio."
 
 msgid "Enter search terms here"
 msgstr "Sem napíšte výrazy na hľadanie"
@@ -1204,9 +1223,6 @@ msgstr "Vždy hrané"
 msgid "Except between tracks on the same album or in the same CUE sheet"
 msgstr "Nezoslabovať medzi skladbami z rovnakého albumu"
 
-msgid "&Extras"
-msgstr "Bonusy"
-
 msgid "F1"
 msgstr "F1"
 
@@ -1239,6 +1255,9 @@ msgstr "Trvanie zoslabovania"
 
 msgid "Fast"
 msgstr "Rýchla"
+
+msgid "Favorites"
+msgstr ""
 
 msgid "Favourite tracks"
 msgstr "Obľúbené skladby"
@@ -1292,7 +1311,8 @@ msgid "Filesystem type"
 msgstr "Typ súborového systému"
 
 msgid "Find songs in your library that match the criteria you specify."
-msgstr "Nájsť piesne vo vašej zbierke ktoré spĺňajú kritériá ktoré ste zadali."
+msgstr ""
+"Nájsť piesne vo vašej zbierke ktoré spĺňajú kritériá ktoré ste zadali."
 
 msgid "Fingerprinting song"
 msgstr "Robí sa odtlačok piesne"
@@ -1352,6 +1372,9 @@ msgstr "Plné výšky"
 msgid "GStreamer audio engine"
 msgstr "GStreamer audio engine"
 
+msgid "General"
+msgstr ""
+
 msgid "General settings"
 msgstr "Všeobecné nastavenia"
 
@@ -1366,6 +1389,9 @@ msgstr ""
 
 msgid "Give it a name:"
 msgstr "Pomenujte:"
+
+msgid "Global Search"
+msgstr ""
 
 msgid "Global search"
 msgstr ""
@@ -1428,6 +1454,9 @@ msgstr "Hardwarové informácie"
 msgid "Hardware information is only available while the device is connected."
 msgstr "Hardwarové informácie sú dostupné len keď je zariadenie pripojené."
 
+msgid "Hide all other search boxes"
+msgstr ""
+
 msgid "High"
 msgstr "Vysoké"
 
@@ -1460,8 +1489,8 @@ msgid "Identifying song"
 msgstr "Identifikuje sa pieseň"
 
 msgid ""
-"If you continue, this device will work slowly and songs copied to it may not "
-"work."
+"If you continue, this device will work slowly and songs copied to it may not"
+" work."
 msgstr ""
 "Ak budete pokračovať, toto zariadenie bude pracovať pomaly a skopírované "
 "piesne možno nebudú fungovať."
@@ -1477,7 +1506,8 @@ msgid "Ignore \"The\" in artist names"
 msgstr "Ignorovať „The“ v menách interprétov"
 
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
-msgstr "Obrázky (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
+msgstr ""
+"Obrázky (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
 
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgstr "Obrázky (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
@@ -1498,6 +1528,9 @@ msgstr "Zahrnúť obal do upozornenia"
 msgid "Include all songs"
 msgstr "Zahrnúť všetky piesne."
 
+msgid "Include keyboard shortcut help in the tooltip"
+msgstr ""
+
 msgid "Increase the volume by 4%"
 msgstr "Zvýšiť hlasitosť o 4%"
 
@@ -1515,6 +1548,9 @@ msgstr "Nainštalované"
 
 msgid "Internet"
 msgstr "Internet"
+
+msgid "Internet providers"
+msgstr ""
 
 msgid "Invalid API key"
 msgstr "Neplatný API kľúč"
@@ -1655,8 +1691,7 @@ msgid "Least favourite tracks"
 msgstr "Najmenej obľúbené skladby"
 
 msgid "Leave blank for the default.  Examples: \"/dev/dsp\", \"front\", etc."
-msgstr ""
-"Nechajte prázdne, ak chcete pôvodné. Príklady: \"/dev/dsp\", \"front\", atď."
+msgstr "Nechajte prázdne, ak chcete pôvodné. Príklady: \"/dev/dsp\", \"front\", atď."
 
 msgid "Length"
 msgstr "Dĺžka"
@@ -1853,9 +1888,6 @@ msgstr "Presunúť do zbierky..."
 msgid "Move up"
 msgstr "Posunúť vyššie"
 
-msgid "&Music"
-msgstr "Hudba"
-
 msgid "Music (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma *.mp4 *.spx *.wav)"
 msgstr "Hudba (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma *.mp4 *.spx *.wav)"
 
@@ -1946,7 +1978,8 @@ msgstr "Žiadne dlhé bloky"
 msgid ""
 "No matches found.  Clear the search box to show the whole playlist again."
 msgstr ""
-"Nenájdené. Vymažte políčko hľadania pre opätovné zobrazenie celého playlistu."
+"Nenájdené. Vymažte políčko hľadania pre opätovné zobrazenie celého "
+"playlistu."
 
 msgid "No short blocks"
 msgstr "Žiadne krátke bloky"
@@ -1980,6 +2013,9 @@ msgstr "Nedostatok susedov"
 
 msgid "Not installed"
 msgstr "Nenainštalované"
+
+msgid "Not logged in"
+msgstr ""
 
 msgid "Not mounted - double click to mount"
 msgstr "Nepripojené - pripojíte dvojklikom"
@@ -2021,6 +2057,9 @@ msgstr "Otvoriť zariadenie"
 msgid "Open dir.xiph.org in browser"
 msgstr "Otvoriť dir.xiph.org v prehliadači"
 
+msgid "Open file..."
+msgstr ""
+
 msgid "Open in new playlist"
 msgstr "ju otvorí v novom playliste"
 
@@ -2029,9 +2068,6 @@ msgstr "Otvoriť jamendo.com v prehliadači"
 
 msgid "Open magnatune.com in browser"
 msgstr "Otvoriť magnatune.com v prehliadači"
-
-msgid "Open media..."
-msgstr "Otvoriť médium..."
 
 msgid "Open somafm.com in browser"
 msgstr "Otvoriť somafm.com v prehliadači"
@@ -2150,7 +2186,7 @@ msgstr "Meno prehrávača"
 msgid "Player options"
 msgstr "Možnosti prehrávača"
 
-msgid "&Playlist"
+msgid "Playlist"
 msgstr "Playlist"
 
 msgid "Playlist finished"
@@ -2340,9 +2376,6 @@ msgstr "Opakovať"
 msgid "Repeat album"
 msgstr "Opakovať album"
 
-msgid "&Repeat mode"
-msgstr "Režim opakovania"
-
 msgid "Repeat playlist"
 msgstr "Opakovať playlist"
 
@@ -2378,6 +2411,9 @@ msgstr "Vynulovať počet prehraní"
 
 msgid "Restrict to ASCII characters"
 msgstr "Obmedziť na ASCII písmená"
+
+msgid "Results"
+msgstr ""
 
 msgid "Rock"
 msgstr "Rock"
@@ -2556,6 +2592,9 @@ msgstr "Zobrazovať upozornenia z tray lišty"
 msgid "Show a pretty OSD"
 msgstr "Zobrazovať krásne OSD"
 
+msgid "Show a tooltip with more information about each result"
+msgstr ""
+
 msgid "Show above status bar"
 msgstr "Zobraziť nad stavovou lištou"
 
@@ -2593,6 +2632,9 @@ msgstr ""
 msgid "Show the \"love\" and \"ban\" buttons"
 msgstr "Zobrazovať tlačítka \"obľúbené\" a \"zakázané\""
 
+msgid "Show the Global Search box above the sidebar"
+msgstr ""
+
 msgid "Show the scrobble button in the main window"
 msgstr "Zobraziť tlačidlo skroblovania v hlavnom okne"
 
@@ -2610,9 +2652,6 @@ msgstr "Zamiešať všetko"
 
 msgid "Shuffle by album"
 msgstr "Zamiešať vrámci albumov"
-
-msgid "&Shuffle mode"
-msgstr "Režim zamiešavania"
 
 msgid "Shuffle playlist"
 msgstr "Zamiešať playlist"
@@ -2682,6 +2721,9 @@ msgstr "Zoradiť piesne podľa"
 
 msgid "Sorting"
 msgstr "Triedenie"
+
+msgid "Sources"
+msgstr ""
 
 msgid "Speex"
 msgstr "Speex"
@@ -2886,8 +2928,8 @@ msgid "This album is not available in the requested format"
 msgstr "Tento album nieje dostupný v požadovanom formáte"
 
 msgid ""
-"This device must be connected and opened before Clementine can see what file "
-"formats it supports."
+"This device must be connected and opened before Clementine can see what file"
+" formats it supports."
 msgstr ""
 "Toto zariadenie musí byť najprv pripojené a otvorené, až potom môže "
 "Clementine vidieť ktoré formáty súborov podporuje."
@@ -2919,8 +2961,8 @@ msgid ""
 "This playlist will be removed; the action can't be undone. Are you sure you "
 "want to continue?"
 msgstr ""
-"Tento playlist bude odstránený; táto akcia sa nedá vrátiť späť. Ste si istý, "
-"že chcete pokračovať?"
+"Tento playlist bude odstránený; táto akcia sa nedá vrátiť späť. Ste si istý,"
+" že chcete pokračovať?"
 
 msgid "This stream is for paid subscribers only"
 msgstr "Tento stream je len pre platiacich odoberateľov"
@@ -3072,6 +3114,9 @@ msgstr "Použitých"
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr ""
 
+msgid "User interface"
+msgstr ""
+
 msgid "Username"
 msgstr "Meno používateľa"
 
@@ -3083,9 +3128,6 @@ msgstr "VBR MP3"
 
 msgid "Variable bit rate"
 msgstr "Premenlivý dátový tok"
-
-msgid "Various Artists"
-msgstr "Rôzni interpréti"
 
 msgid "Various artists"
 msgstr "Rôzni interpréti"
@@ -3135,12 +3177,10 @@ msgid "When Clementine starts"
 msgstr "Pri zapnutí Clementine"
 
 msgid ""
-"When looking for album art Clementine will first look for picture files that "
-"contain one of these words.\n"
+"When looking for album art Clementine will first look for picture files that contain one of these words.\n"
 "If there are no matches then it will use the largest image in the directory."
 msgstr ""
-"Keď sa hľadá obal albumu, Clementine sa najprv pozrie po súbore, ktorého "
-"názov obsahuje jedno z týchto slov.\n"
+"Keď sa hľadá obal albumu, Clementine sa najprv pozrie po súbore, ktorého názov obsahuje jedno z týchto slov.\n"
 "Ak sa ani jeden nezhoduje, použije sa najväčší obrázok v priečinku."
 
 msgid "WiFi MAC Address"
@@ -3225,8 +3265,8 @@ msgid ""
 msgstr ""
 
 msgid ""
-"You can listen to Magnatune songs for free without an account.  Purchasing a "
-"membership removes the messages at the end of each track."
+"You can listen to Magnatune songs for free without an account.  Purchasing a"
+" membership removes the messages at the end of each track."
 msgstr ""
 "Môžete zadarmo počúvať Magnatune piesne bez účtu. Zakúpenie členstva "
 "odstráni správy na konci každej skladby."
@@ -3235,16 +3275,18 @@ msgid "You can listen to background streams at the same time as other music."
 msgstr "Môžete počúvať streamy na pozadí v rovnakom čase ako inú hudbu."
 
 msgid ""
-"You can scrobble tracks for free, but only <span style=\" font-weight:600;"
-"\">paid subscribers</span> can stream Last.fm radio from Clementine."
+"You can scrobble tracks for free, but only <span style=\" font-"
+"weight:600;\">paid subscribers</span> can stream Last.fm radio from "
+"Clementine."
 msgstr ""
-"Môžete skroblovať skladby zadarmo, ale len <span style=\" font-weight:600;"
-"\">platiaci odoberatelia</span> môžu streamovať Last.fm rádio z Clementine."
+"Môžete skroblovať skladby zadarmo, ale len <span style=\" font-"
+"weight:600;\">platiaci odoberatelia</span> môžu streamovať Last.fm rádio z "
+"Clementine."
 
 msgid ""
-"You can use your Wii Remote as a remote control for Clementine.  <a href="
-"\"http://www.clementine-player.org/wiimote\">See the page on the Clementine "
-"wiki</a> for more information.\n"
+"You can use your Wii Remote as a remote control for Clementine.  <a "
+"href=\"http://www.clementine-player.org/wiimote\">See the page on the "
+"Clementine wiki</a> for more information.\n"
 msgstr ""
 "Môžete použiť vaše Wii diaľkové ako diaľkový ovládač pre Clementine.  <a "
 "href=\"http://www.clementine-player.org/wiimote\">Pozrite si stránku na "
@@ -3280,10 +3322,11 @@ msgid "You will need to restart Clementine if you change the language."
 msgstr "Musíte reštartovať Clementine ak chcete zmeniť jazyk."
 
 msgid ""
-"You will not be able to play Last.fm radio stations as you are not a Last.fm "
-"subscriber."
+"You will not be able to play Last.fm radio stations as you are not a Last.fm"
+" subscriber."
 msgstr ""
-"Nebudete môcť prehrávať Last.fm rádio stanice ak nieste Last.fm predplatiteľ."
+"Nebudete môcť prehrávať Last.fm rádio stanice ak nieste Last.fm "
+"predplatiteľ."
 
 #, qt-format
 msgid "You're logged in as <b>%1</b>"
@@ -3326,7 +3369,7 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "Vynulovať"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "add %n songs"
 msgstr "pridať %n piesní"
 
@@ -3415,7 +3458,7 @@ msgstr "možnosti"
 msgid "press enter"
 msgstr "stlačte Enter"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "remove %n songs"
 msgstr "odstrániť %n piesní"
 
@@ -3435,80 +3478,4 @@ msgstr "posledná"
 msgid "track %1"
 msgstr "skladba %1"
 
-#~ msgid "Are you sure you want to install the following scripts?"
-#~ msgstr "Ste si istý, že chcete nainštalovať nasledujúce skripty?"
 
-#~ msgid "Clementine scripts"
-#~ msgstr "Clementine skripty"
-
-#~ msgid "Context:"
-#~ msgstr "Kontext:"
-
-#~ msgid "Developer mode"
-#~ msgstr "Vývojársky režim"
-
-#~ msgid "Disable"
-#~ msgstr "Zakázať"
-
-#~ msgid "Enable"
-#~ msgstr "Povoliť"
-
-#~ msgid "Enter an URL to download a cover from the Internet:"
-#~ msgstr "Zadajte URL adresu na stiahnutie obalu z internetu:"
-
-#~ msgid "Error installing script"
-#~ msgstr "Chyba pri inštalácii skriptu"
-
-#~ msgid "Error opening script archive"
-#~ msgstr "Chyba pri otváraní archívu skriptu"
-
-#~ msgid "Get new scripts"
-#~ msgstr "Získať nové skripty"
-
-#~ msgid "Global Shortcuts"
-#~ msgstr "Globálne skratky"
-
-#~ msgid "Install from file..."
-#~ msgstr "Inštalovať zo súboru..."
-
-#~ msgid "Install script file"
-#~ msgstr "Inštalovať súbor skriptu"
-
-#~ msgid "Install scripts"
-#~ msgstr "Inštalovať skripty"
-
-#~ msgid "My scripts"
-#~ msgstr "Moje skripty"
-
-#~ msgid "Please fill in the blanks to login into Last.fm"
-#~ msgstr "Prosím vyplňte políčka pre prihlásenie na Last.fm"
-
-#~ msgid "Python console"
-#~ msgstr "Konzola Python"
-
-#~ msgid "Reload"
-#~ msgstr "Znovu načítať"
-
-#~ msgid "Script Manager"
-#~ msgstr "Správca skriptov"
-
-#~ msgid "Settings..."
-#~ msgstr "Nastavenia..."
-
-#~ msgid "Some files failed to install.  The script may not work correctly."
-#~ msgstr ""
-#~ "Zlyhala inštalácia niektorých súborov. Skript možno nebude pracovať "
-#~ "správne."
-
-#~ msgid "The '%1' script was modified, you might have to reload it"
-#~ msgstr "Skript '%1' bol upravený, možno ho treba znovu načítať"
-
-#~ msgid "This is not a valid Clementine script file."
-#~ msgstr "Toto nieje platný súbor Clementine skriptu."
-
-#~ msgid ""
-#~ "Warning: scripts have full access to your computer and your music.  Only "
-#~ "install scripts that you trust."
-#~ msgstr ""
-#~ "Varovanie: skripty majú plný prístup k vášmu počítaču a vašej hudbe. "
-#~ "Inštalujte iba skripty, ktorím dôverujete."

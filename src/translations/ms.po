@@ -1,23 +1,19 @@
-# Malay translation for clementine
-# Copyright (c) 2011 Rosetta Contributors and Canonical Ltd 2011
-# This file is distributed under the same license as the clementine package.
+# Clementine.
+# Copyright (C) 2010 David Sansome
+# This file is distributed under the same license as the Clementine package.
+# 
+# Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011.
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: clementine\n"
-"Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/"
-"list\n"
-"POT-Creation-Date: 2011-06-26 20:31+0000\n"
-"PO-Revision-Date: 2011-09-13 12:40+0000\n"
-"Last-Translator: CL TAN <Unknown>\n"
-"Language-Team: Malay <ms@li.org>\n"
-"Language: ms\n"
-"MIME-Version: 1.0\n"
+"Project-Id-Version: Clementine Music Player\n"
+"Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
+"PO-Revision-Date: 2011-11-01 04:40+0000\n"
+"Last-Translator: clementinebuildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-09-14 04:57+0000\n"
-"X-Generator: Launchpad (build 13921)\n"
+"Language: ms\n"
+"Plural-Forms: nplurals=1; plural=0\n"
 
 msgid " kbps"
 msgstr " kbps"
@@ -90,15 +86,15 @@ msgstr ""
 msgid "%L1 total plays"
 msgstr ""
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n failed"
 msgstr ""
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n finished"
 msgstr "%n telah selesai"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n remaining"
 msgstr ""
 
@@ -110,6 +106,9 @@ msgstr "&Tengah"
 
 msgid "&Custom"
 msgstr ""
+
+msgid "&Extras"
+msgstr "Ekstra"
 
 msgid "&Help"
 msgstr "&Bantuan"
@@ -124,14 +123,26 @@ msgstr "&Sembunyikan..."
 msgid "&Left"
 msgstr "&Kiri"
 
+msgid "&Music"
+msgstr "Muzik"
+
 msgid "&None"
 msgstr "&Tiada"
+
+msgid "&Playlist"
+msgstr "Senarai main"
 
 msgid "&Quit"
 msgstr "&Keluar"
 
+msgid "&Repeat mode"
+msgstr "Mod ulang"
+
 msgid "&Right"
 msgstr "&Kanan"
+
+msgid "&Shuffle mode"
+msgstr "Mod kocok"
 
 msgid "&Stretch columns to fit window"
 msgstr "&Regangkan kolum-kolum untuk dimuat mengikut tetingkap"
@@ -172,8 +183,7 @@ msgstr ""
 msgid ""
 "<p>Tokens start with %, for example: %artist %album %title </p>\n"
 "\n"
-"<p>If you surround sections of text that contain a token with curly-braces, "
-"that section will be hidden if the token is empty.</p>"
+"<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
 msgstr ""
 
 msgid "A Grooveshark Anywhere account is required."
@@ -191,7 +201,8 @@ msgstr ""
 "Terdapat pelbagai jenis senarai main pintar yang menawarkan cara yang "
 "berbeza dalam memilih lagu-lagu."
 
-msgid "A song will be included in the playlist if it matches these conditions."
+msgid ""
+"A song will be included in the playlist if it matches these conditions."
 msgstr ""
 "Sesuatu lagu akan disertakan ke dalam senarai main sekiranya ia berpadanan "
 "dengan keadaan-keadaan ini."
@@ -659,7 +670,8 @@ msgstr ""
 
 msgid ""
 "Clementine can be controlled remotely by an Android phone.  To enable this "
-"feature log in with the same Google account that is configured on your phone."
+"feature log in with the same Google account that is configured on your "
+"phone."
 msgstr ""
 "Clementine boleh dikawal secara jauh menggunakan telefon Android. Untuk "
 "membolehkan ciri ini log masuk dengan akaun Google yang same seperti yang "
@@ -675,7 +687,8 @@ msgstr ""
 
 msgid ""
 "Clementine couldn't fetch your subscription status since there are problems "
-"with your connection. Played tracks will be cached and sent later to Last.fm."
+"with your connection. Played tracks will be cached and sent later to "
+"Last.fm."
 msgstr ""
 
 msgid "Clementine image viewer"
@@ -707,6 +720,9 @@ msgstr "Kelab"
 
 msgid "Color"
 msgstr "Warna"
+
+msgid "Combine identical results from different sources"
+msgstr ""
 
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr ""
@@ -1115,6 +1131,12 @@ msgstr ""
 msgid "Enable shortcuts only when Clementine is focused"
 msgstr "Bolehkan pintasan hanya apabila Clementine difokus"
 
+msgid ""
+"Enable sources below to include them in Global Search results.  When "
+"identical results are available from more than one source, ones at the top "
+"will take priority."
+msgstr ""
+
 msgid "Enable/disable Last.fm scrobbling"
 msgstr ""
 
@@ -1192,9 +1214,6 @@ msgstr ""
 "Kecuali di antara trek-trek dalam album yang sama atau dalam lembaran CUE "
 "yang sama"
 
-msgid "&Extras"
-msgstr "Ekstra"
-
 msgid "F1"
 msgstr "F1"
 
@@ -1227,6 +1246,9 @@ msgstr ""
 
 msgid "Fast"
 msgstr "Laju"
+
+msgid "Favorites"
+msgstr ""
 
 msgid "Favourite tracks"
 msgstr "Trek-trek kegemaran"
@@ -1343,6 +1365,9 @@ msgstr "Treble Penuh"
 msgid "GStreamer audio engine"
 msgstr "Enjin audio GStreamer"
 
+msgid "General"
+msgstr ""
+
 msgid "General settings"
 msgstr ""
 
@@ -1357,6 +1382,9 @@ msgstr ""
 
 msgid "Give it a name:"
 msgstr "Berikan ia nama"
+
+msgid "Global Search"
+msgstr ""
 
 msgid "Global search"
 msgstr ""
@@ -1419,6 +1447,9 @@ msgstr "Informasi perkakasan"
 msgid "Hardware information is only available while the device is connected."
 msgstr "Informasi perkakasan hanya tersedia ketika peranti disambungkan."
 
+msgid "Hide all other search boxes"
+msgstr ""
+
 msgid "High"
 msgstr "Tinggi"
 
@@ -1451,18 +1482,18 @@ msgid "Identifying song"
 msgstr "Mengenalpasti lagu"
 
 msgid ""
-"If you continue, this device will work slowly and songs copied to it may not "
-"work."
+"If you continue, this device will work slowly and songs copied to it may not"
+" work."
 msgstr ""
-"Jika anda teruskan, peranti ini akan berfungsi dengan perlahan dan lagu-lagu "
-"yang disalin ke dalamnya mungkin tidak akan dapat dimainkan."
+"Jika anda teruskan, peranti ini akan berfungsi dengan perlahan dan lagu-lagu"
+" yang disalin ke dalamnya mungkin tidak akan dapat dimainkan."
 
 msgid ""
 "If you use the remote on more than one computer, this name will help you "
 "choose which one to connect to on your phone."
 msgstr ""
-"Jika anda menggunakan alat kawalan terbabit di lebih daripada satu komputer, "
-"nama ini akan membantu dalam memilih yang mana satu untuk disambung di "
+"Jika anda menggunakan alat kawalan terbabit di lebih daripada satu komputer,"
+" nama ini akan membantu dalam memilih yang mana satu untuk disambung di "
 "telefon anda."
 
 msgid "Ignore \"The\" in artist names"
@@ -1491,6 +1522,9 @@ msgstr "Sertakan hasil seni album dalam pemberitahuan"
 msgid "Include all songs"
 msgstr "Sertakan semua lagu"
 
+msgid "Include keyboard shortcut help in the tooltip"
+msgstr ""
+
 msgid "Increase the volume by 4%"
 msgstr "Naikkan kadar bunyi sebanyak 4%"
 
@@ -1508,6 +1542,9 @@ msgstr "Terpasang"
 
 msgid "Internet"
 msgstr "Internet"
+
+msgid "Internet providers"
+msgstr ""
 
 msgid "Invalid API key"
 msgstr "Kunci API tidak sah"
@@ -1845,9 +1882,6 @@ msgstr "Alih ke pustaka..."
 msgid "Move up"
 msgstr "Alih ke atas"
 
-msgid "&Music"
-msgstr "Muzik"
-
 msgid "Music (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma *.mp4 *.spx *.wav)"
 msgstr "Muzik (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma *.mp4 *.spx *.wav)"
 
@@ -1938,8 +1972,8 @@ msgstr ""
 msgid ""
 "No matches found.  Clear the search box to show the whole playlist again."
 msgstr ""
-"Tiada padanan ditemui. Kosongkan kotak carian untuk paparkan seluruh senarai "
-"main semula."
+"Tiada padanan ditemui. Kosongkan kotak carian untuk paparkan seluruh senarai"
+" main semula."
 
 msgid "No short blocks"
 msgstr ""
@@ -1973,6 +2007,9 @@ msgstr ""
 
 msgid "Not installed"
 msgstr "Tidak dipasang"
+
+msgid "Not logged in"
+msgstr ""
 
 msgid "Not mounted - double click to mount"
 msgstr ""
@@ -2014,6 +2051,9 @@ msgstr "Buka peranti"
 msgid "Open dir.xiph.org in browser"
 msgstr "Buka dir.xiph.org dalam pelayar"
 
+msgid "Open file..."
+msgstr ""
+
 msgid "Open in new playlist"
 msgstr "Buka dalam senarai main baru"
 
@@ -2022,9 +2062,6 @@ msgstr "Buka Jamendo.com dalam pelayar"
 
 msgid "Open magnatune.com in browser"
 msgstr "Buka magnatune.com dalam pelayar"
-
-msgid "Open media..."
-msgstr "Buka media..."
 
 msgid "Open somafm.com in browser"
 msgstr "Buka somafm.com dalam pelayar"
@@ -2143,7 +2180,7 @@ msgstr "Nama pemain"
 msgid "Player options"
 msgstr "Opsyen-opsyen pemain"
 
-msgid "&Playlist"
+msgid "Playlist"
 msgstr "Senarai main"
 
 msgid "Playlist finished"
@@ -2333,9 +2370,6 @@ msgstr "Ulang"
 msgid "Repeat album"
 msgstr "Ulangkan album"
 
-msgid "&Repeat mode"
-msgstr "Mod ulang"
-
 msgid "Repeat playlist"
 msgstr "Ulangkan senarai main"
 
@@ -2370,6 +2404,9 @@ msgid "Reset play counts"
 msgstr ""
 
 msgid "Restrict to ASCII characters"
+msgstr ""
+
+msgid "Results"
 msgstr ""
 
 msgid "Rock"
@@ -2549,6 +2586,9 @@ msgstr "Tunjukkan popup dari dulang sistem"
 msgid "Show a pretty OSD"
 msgstr "Tunjukkan OSD yang menarik"
 
+msgid "Show a tooltip with more information about each result"
+msgstr ""
+
 msgid "Show above status bar"
 msgstr "Tunjukkan di atas bar status"
 
@@ -2586,6 +2626,9 @@ msgstr ""
 msgid "Show the \"love\" and \"ban\" buttons"
 msgstr "Tunjukkan bebutang \"love\" dan \"ban\""
 
+msgid "Show the Global Search box above the sidebar"
+msgstr ""
+
 msgid "Show the scrobble button in the main window"
 msgstr ""
 
@@ -2603,9 +2646,6 @@ msgstr "Kocokkan semua"
 
 msgid "Shuffle by album"
 msgstr "Kocokkan mengikut album"
-
-msgid "&Shuffle mode"
-msgstr "Mod kocok"
 
 msgid "Shuffle playlist"
 msgstr "Kocokkan senarai main"
@@ -2674,6 +2714,9 @@ msgid "Sort songs by"
 msgstr ""
 
 msgid "Sorting"
+msgstr ""
+
+msgid "Sources"
 msgstr ""
 
 msgid "Speex"
@@ -2858,8 +2901,8 @@ msgid ""
 "These settings are used in the \"Transcode Music\" dialog, and when "
 "converting music before copying it to a device."
 msgstr ""
-"Tetapan-tetapan ini akan digunakan dalam dialog \"Transkod Muzik\", dan bila "
-"menukar muzik sebelum disalin ke sesuatu peranti."
+"Tetapan-tetapan ini akan digunakan dalam dialog \"Transkod Muzik\", dan bila"
+" menukar muzik sebelum disalin ke sesuatu peranti."
 
 msgid "Third level"
 msgstr ""
@@ -2875,11 +2918,11 @@ msgid "This album is not available in the requested format"
 msgstr ""
 
 msgid ""
-"This device must be connected and opened before Clementine can see what file "
-"formats it supports."
+"This device must be connected and opened before Clementine can see what file"
+" formats it supports."
 msgstr ""
-"Peranti ini mesti disambung dan dibuka sebelum Clementine boleh lihat format-"
-"format fail yang ianya sokong."
+"Peranti ini mesti disambung dan dibuka sebelum Clementine boleh lihat "
+"format-format fail yang ianya sokong."
 
 msgid "This device supports the following file formats:"
 msgstr "Peranti ini menyokong format-format fail berikut:"
@@ -2895,7 +2938,8 @@ msgstr ""
 
 msgid "This is an iPod, but you compiled Clementine without libgpod support."
 msgstr ""
-"Ini ialah iPod, tapi anda telah mengkompil Clementine tanpa sokongan libgpod."
+"Ini ialah iPod, tapi anda telah mengkompil Clementine tanpa sokongan "
+"libgpod."
 
 msgid ""
 "This is the first time you have connected this device.  Clementine will now "
@@ -3060,6 +3104,9 @@ msgstr ""
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr ""
 
+msgid "User interface"
+msgstr ""
+
 msgid "Username"
 msgstr "Nama pengguna"
 
@@ -3071,9 +3118,6 @@ msgstr "MP3 VBR"
 
 msgid "Variable bit rate"
 msgstr ""
-
-msgid "Various Artists"
-msgstr "Pelbagai Artis"
 
 msgid "Various artists"
 msgstr "Pelbagai artis"
@@ -3123,13 +3167,10 @@ msgid "When Clementine starts"
 msgstr "Apabila Clementine bermula"
 
 msgid ""
-"When looking for album art Clementine will first look for picture files that "
-"contain one of these words.\n"
+"When looking for album art Clementine will first look for picture files that contain one of these words.\n"
 "If there are no matches then it will use the largest image in the directory."
 msgstr ""
-"Apabila mencari hasil seni album Clementine akan terlebih dahulu mencari "
-"fail-fail gambar yang mengandungi salah satu dari perkataan-perkataan "
-"ini.  \n"
+"Apabila mencari hasil seni album Clementine akan terlebih dahulu mencari fail-fail gambar yang mengandungi salah satu dari perkataan-perkataan ini.  \n"
 "Sekiranya tiada padanan ia akan menggunakan imej terbesar dalam direktori."
 
 msgid "WiFi MAC Address"
@@ -3214,8 +3255,8 @@ msgid ""
 msgstr ""
 
 msgid ""
-"You can listen to Magnatune songs for free without an account.  Purchasing a "
-"membership removes the messages at the end of each track."
+"You can listen to Magnatune songs for free without an account.  Purchasing a"
+" membership removes the messages at the end of each track."
 msgstr ""
 "Anda boleh mendengar lagu-lagu Magnatune secara percuma tanpa akaun. "
 "Pembelian keahlian akan membuang mesej-mesej di akhir setiap trek."
@@ -3224,14 +3265,15 @@ msgid "You can listen to background streams at the same time as other music."
 msgstr ""
 
 msgid ""
-"You can scrobble tracks for free, but only <span style=\" font-weight:600;"
-"\">paid subscribers</span> can stream Last.fm radio from Clementine."
+"You can scrobble tracks for free, but only <span style=\" font-"
+"weight:600;\">paid subscribers</span> can stream Last.fm radio from "
+"Clementine."
 msgstr ""
 
 msgid ""
-"You can use your Wii Remote as a remote control for Clementine.  <a href="
-"\"http://www.clementine-player.org/wiimote\">See the page on the Clementine "
-"wiki</a> for more information.\n"
+"You can use your Wii Remote as a remote control for Clementine.  <a "
+"href=\"http://www.clementine-player.org/wiimote\">See the page on the "
+"Clementine wiki</a> for more information.\n"
 msgstr ""
 
 msgid "You do not have a Grooveshark Anywhere account."
@@ -3261,8 +3303,8 @@ msgid "You will need to restart Clementine if you change the language."
 msgstr "Anda perlu mulakan semula Clementine jika anda ubah bahasa."
 
 msgid ""
-"You will not be able to play Last.fm radio stations as you are not a Last.fm "
-"subscriber."
+"You will not be able to play Last.fm radio stations as you are not a Last.fm"
+" subscriber."
 msgstr ""
 
 #, qt-format
@@ -3303,7 +3345,7 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "Sifar"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "add %n songs"
 msgstr "tambah %n lagu"
 
@@ -3392,7 +3434,7 @@ msgstr "opsyen-opsyen"
 msgid "press enter"
 msgstr ""
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "remove %n songs"
 msgstr "buangkan %n lagu"
 
@@ -3412,69 +3454,4 @@ msgstr "henti"
 msgid "track %1"
 msgstr "trek %1"
 
-#~ msgid "Are you sure you want to install the following scripts?"
-#~ msgstr "Adakah anda pasti untuk memasang skrip-skrip berikut?"
 
-#~ msgid "Clementine scripts"
-#~ msgstr "Skrip-skrip Clementine"
-
-#~ msgid "Context:"
-#~ msgstr "Konteks"
-
-#~ msgid "Developer mode"
-#~ msgstr "Mod pembangun"
-
-#~ msgid "Disable"
-#~ msgstr "Lumpuhkan"
-
-#~ msgid "Enable"
-#~ msgstr "Bolehkan"
-
-#~ msgid "Enter an URL to download a cover from the Internet:"
-#~ msgstr "Masukkan URL unutk memuatturun kulit muka dari internet:"
-
-#~ msgid "Error installing script"
-#~ msgstr "Ralat memasang skrip"
-
-#~ msgid "Error opening script archive"
-#~ msgstr "Ralat membuka arkib skrip"
-
-#~ msgid "Get new scripts"
-#~ msgstr "Dapatkan skrip-skrip baru"
-
-#~ msgid "Global Shortcuts"
-#~ msgstr "Pintasan Global"
-
-#~ msgid "Install from file..."
-#~ msgstr "Pasang dari skrip..."
-
-#~ msgid "Install script file"
-#~ msgstr "Pasangkan fail skrip"
-
-#~ msgid "Install scripts"
-#~ msgstr "Pasangkan skrip-skrip"
-
-#~ msgid "My scripts"
-#~ msgstr "Skrip-skrip saya"
-
-#~ msgid "Please fill in the blanks to login into Last.fm"
-#~ msgstr "Sila isi tempat-tempat kosong untuk log masuk ke Last.fm"
-
-#~ msgid "Python console"
-#~ msgstr "Konsol python"
-
-#~ msgid "Script Manager"
-#~ msgstr "Pengurus Skrip"
-
-#~ msgid "Settings..."
-#~ msgstr "Tetapan-tetapan..."
-
-#~ msgid "This is not a valid Clementine script file."
-#~ msgstr "Ini bukan fail skrip Clementine yang sah."
-
-#~ msgid ""
-#~ "Warning: scripts have full access to your computer and your music.  Only "
-#~ "install scripts that you trust."
-#~ msgstr ""
-#~ "Amaran: skrip mempunyai akses penuh ke atas komputer dan muzik anda. "
-#~ "Hanya pasang skrip yang anda percaya."

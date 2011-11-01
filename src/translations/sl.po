@@ -1,23 +1,19 @@
-# Slovenian translation for clementine
-# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
-# This file is distributed under the same license as the clementine package.
+# Clementine.
+# Copyright (C) 2010 David Sansome
+# This file is distributed under the same license as the Clementine package.
+# 
+# Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: clementine\n"
-"Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/"
-"list\n"
-"POT-Creation-Date: 2011-06-26 20:31+0000\n"
-"PO-Revision-Date: 2011-06-30 14:02+0000\n"
-"Last-Translator: R33D3M33R <Unknown>\n"
-"Language-Team: Slovenian <sl@li.org>\n"
-"Language: sl\n"
-"MIME-Version: 1.0\n"
+"Project-Id-Version: Clementine Music Player\n"
+"Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
+"PO-Revision-Date: 2011-11-01 04:40+0000\n"
+"Last-Translator: clementinebuildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-07-01 05:04+0000\n"
-"X-Generator: Launchpad (build 13168)\n"
+"Language: sl\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3)\n"
 
 msgid " kbps"
 msgstr " kb/s"
@@ -90,15 +86,15 @@ msgstr "%L1 drugih poslušalcev"
 msgid "%L1 total plays"
 msgstr "skupno %L1 predvajanj"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n failed"
 msgstr "%n spodletelih"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n finished"
 msgstr "%n končanih"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n remaining"
 msgstr "%n preostaja"
 
@@ -110,6 +106,9 @@ msgstr "&Sredinsko"
 
 msgid "&Custom"
 msgstr "Po &meri"
+
+msgid "&Extras"
+msgstr "Dodatki"
 
 msgid "&Help"
 msgstr "Pomoč"
@@ -124,14 +123,26 @@ msgstr "Skrij ..."
 msgid "&Left"
 msgstr "&Levo"
 
+msgid "&Music"
+msgstr "Glasba"
+
 msgid "&None"
 msgstr "&Brez"
+
+msgid "&Playlist"
+msgstr "Seznam predvajanja"
 
 msgid "&Quit"
 msgstr "&Končaj"
 
+msgid "&Repeat mode"
+msgstr "Način ponavljanja"
+
 msgid "&Right"
 msgstr "&Desno"
+
+msgid "&Shuffle mode"
+msgstr "Premešano predvajanje"
 
 msgid "&Stretch columns to fit window"
 msgstr "Raztegni stolpce, da se prilegajo oknu"
@@ -172,13 +183,11 @@ msgstr ""
 msgid ""
 "<p>Tokens start with %, for example: %artist %album %title </p>\n"
 "\n"
-"<p>If you surround sections of text that contain a token with curly-braces, "
-"that section will be hidden if the token is empty.</p>"
+"<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
 msgstr ""
 "<p>Žetoni se pričnejo z %, na primer: %artist %album %title </p>\n"
 "\n"
-"<p>V primeru da odseke besedila, ki vsebujejo žetone, obdate z zavitimi "
-"oklepaji, bodo odseki skriti, če je žeton prazen.</p>"
+"<p>V primeru da odseke besedila, ki vsebujejo žetone, obdate z zavitimi oklepaji, bodo odseki skriti, če je žeton prazen.</p>"
 
 msgid "A Grooveshark Anywhere account is required."
 msgstr ""
@@ -191,11 +200,12 @@ msgid ""
 "There are different types of smart playlist that offer different ways of "
 "selecting songs."
 msgstr ""
-"Pametni seznam predvajanja je dinamični seznam skladb, ki se nahajajo v vaši "
-"knjižnici. Obstajajo različne vrste pametnih seznamov predvajanja, ki "
+"Pametni seznam predvajanja je dinamični seznam skladb, ki se nahajajo v vaši"
+" knjižnici. Obstajajo različne vrste pametnih seznamov predvajanja, ki "
 "ponujajo različne načine izbire skladb."
 
-msgid "A song will be included in the playlist if it matches these conditions."
+msgid ""
+"A song will be included in the playlist if it matches these conditions."
 msgstr "Skladba bo vključena v seznam predvajanja, če se ujema s temi pogoji."
 
 msgid "A-Z"
@@ -424,10 +434,12 @@ msgstr ""
 "želite prejeti in namestiti zdaj?"
 
 msgid "An error occurred copying the iTunes database from the device"
-msgstr "Pri kopiranju podatkovne zbirke iTunes iz naprave, je prišlo do napake"
+msgstr ""
+"Pri kopiranju podatkovne zbirke iTunes iz naprave, je prišlo do napake"
 
 msgid "An error occurred copying the iTunes database onto the device"
-msgstr "Pri kopiranju podatkovne zbirke iTunes na napravo, je prišlo do napake"
+msgstr ""
+"Pri kopiranju podatkovne zbirke iTunes na napravo, je prišlo do napake"
 
 msgid "An error occurred loading the iTunes database"
 msgstr "Pri nalaganju podatkovne zbirke iTunes, je prišlo do napake"
@@ -662,11 +674,12 @@ msgstr ""
 
 msgid ""
 "Clementine can be controlled remotely by an Android phone.  To enable this "
-"feature log in with the same Google account that is configured on your phone."
+"feature log in with the same Google account that is configured on your "
+"phone."
 msgstr ""
 "Clementine lahko oddaljeno nadzirate preko telefona z Androidom. Da "
-"omogočite to zmožnost, se prijavite v enak račun Google kot je nastavljen na "
-"vašem telefonu."
+"omogočite to zmožnost, se prijavite v enak račun Google kot je nastavljen na"
+" vašem telefonu."
 
 msgid "Clementine can show a message when the track changes."
 msgstr "Clementine lahko pokaže sporočilo ob spremembi skladbe."
@@ -675,15 +688,17 @@ msgid ""
 "Clementine could not load any projectM visualisations.  Check that you have "
 "installed Clementine properly."
 msgstr ""
-"Clementine ni mogel naložiti predočenj projectM. Preverite, če je Clementine "
-"pravilno nameščen."
+"Clementine ni mogel naložiti predočenj projectM. Preverite, če je Clementine"
+" pravilno nameščen."
 
 msgid ""
 "Clementine couldn't fetch your subscription status since there are problems "
-"with your connection. Played tracks will be cached and sent later to Last.fm."
+"with your connection. Played tracks will be cached and sent later to "
+"Last.fm."
 msgstr ""
 "Clementine ni mogel pridobiti vašega stanja naročnine, ker so težave z vašo "
-"povezavo. Predvajane skladbe bodo predpomnjene in na Last.fm poslane kasneje."
+"povezavo. Predvajane skladbe bodo predpomnjene in na Last.fm poslane "
+"kasneje."
 
 msgid "Clementine image viewer"
 msgstr "Pregledovalnik datotek Clementine"
@@ -714,6 +729,9 @@ msgstr "Klubska"
 
 msgid "Color"
 msgstr "Barva"
+
+msgid "Combine identical results from different sources"
+msgstr ""
 
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Z vejicami ločen seznam razred:raven, raven je 0-3"
@@ -1128,8 +1146,15 @@ msgstr "Omogoči sliko ozadja za seznam predvajanja"
 msgid "Enable shortcuts only when Clementine is focused"
 msgstr "Omogoči bližnjice le, ko je Clementine v žarišču"
 
+msgid ""
+"Enable sources below to include them in Global Search results.  When "
+"identical results are available from more than one source, ones at the top "
+"will take priority."
+msgstr ""
+
 msgid "Enable/disable Last.fm scrobbling"
-msgstr "Omogoči/onemogoči pošiljanje podatkov o predvajanih skladbah v Last.fm"
+msgstr ""
+"Omogoči/onemogoči pošiljanje podatkov o predvajanih skladbah v Last.fm"
 
 msgid "Encoding complexity"
 msgstr "Zapletenost kodiranja"
@@ -1149,8 +1174,8 @@ msgstr "Vnesite novo ime za ta seznam predvajanja"
 msgid ""
 "Enter an <b>artist</b> or <b>tag</b> to start listening to Last.fm radio."
 msgstr ""
-"Vnesite <b>izvajalca</b> ali <b>oznako</b> za začetek poslušanja radia Last."
-"fm."
+"Vnesite <b>izvajalca</b> ali <b>oznako</b> za začetek poslušanja radia "
+"Last.fm."
 
 msgid "Enter search terms here"
 msgstr "Sem vnesite iskalne pogoje"
@@ -1205,9 +1230,6 @@ msgstr "Sploh predvajano"
 msgid "Except between tracks on the same album or in the same CUE sheet"
 msgstr "Razen med skladbami na istem albumu ali v isti predlogi CUE"
 
-msgid "&Extras"
-msgstr "Dodatki"
-
 msgid "F1"
 msgstr "F1"
 
@@ -1240,6 +1262,9 @@ msgstr "Trajanje pojemanja"
 
 msgid "Fast"
 msgstr "Hitro"
+
+msgid "Favorites"
+msgstr ""
 
 msgid "Favourite tracks"
 msgstr "Priljubljene skladbe"
@@ -1353,6 +1378,9 @@ msgstr "Polni visoki toni"
 msgid "GStreamer audio engine"
 msgstr "GStreamerjev zvočni pogon"
 
+msgid "General"
+msgstr ""
+
 msgid "General settings"
 msgstr "Splošne nastavitve"
 
@@ -1367,6 +1395,9 @@ msgstr ""
 
 msgid "Give it a name:"
 msgstr "Vnesite ime:"
+
+msgid "Global Search"
+msgstr ""
 
 msgid "Global search"
 msgstr ""
@@ -1430,6 +1461,9 @@ msgstr "Podatki o strojni opremi"
 msgid "Hardware information is only available while the device is connected."
 msgstr "Podatki o strojni opremi so na voljo le, ko je naprava priključena"
 
+msgid "Hide all other search boxes"
+msgstr ""
+
 msgid "High"
 msgstr "Visoka"
 
@@ -1462,8 +1496,8 @@ msgid "Identifying song"
 msgstr "Prepoznavanje skladbe"
 
 msgid ""
-"If you continue, this device will work slowly and songs copied to it may not "
-"work."
+"If you continue, this device will work slowly and songs copied to it may not"
+" work."
 msgstr ""
 "Če boste nadaljevali, bo naprava delovala počasi in skladbe, ki ste jih "
 "kopirali, morda ne bodo delovale."
@@ -1500,6 +1534,9 @@ msgstr "Vključi ovitek albuma v obvestilo"
 msgid "Include all songs"
 msgstr "Vključi vse skladbe"
 
+msgid "Include keyboard shortcut help in the tooltip"
+msgstr ""
+
 msgid "Increase the volume by 4%"
 msgstr "Povečaj glasnost za 4%"
 
@@ -1517,6 +1554,9 @@ msgstr "Nameščeno"
 
 msgid "Internet"
 msgstr "Medmrežje"
+
+msgid "Internet providers"
+msgstr ""
 
 msgid "Invalid API key"
 msgstr "Neveljaven ključ API"
@@ -1854,9 +1894,6 @@ msgstr "Premakni v knjižnico ..."
 msgid "Move up"
 msgstr "Premakni navzgor"
 
-msgid "&Music"
-msgstr "Glasba"
-
 msgid "Music (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma *.mp4 *.spx *.wav)"
 msgstr "Glasba (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma *.mp4 *.spx *.wav)"
 
@@ -1983,6 +2020,9 @@ msgstr "Ni dovolj sosedov"
 msgid "Not installed"
 msgstr "Ni nameščeno"
 
+msgid "Not logged in"
+msgstr ""
+
 msgid "Not mounted - double click to mount"
 msgstr "Ni priklopljeno - dvokliknite za priklop"
 
@@ -2023,6 +2063,9 @@ msgstr "Odpri napravo"
 msgid "Open dir.xiph.org in browser"
 msgstr "Odpri dir.xiph.org v brskalniku"
 
+msgid "Open file..."
+msgstr ""
+
 msgid "Open in new playlist"
 msgstr "Odpri v novem seznamu predvajanja"
 
@@ -2031,9 +2074,6 @@ msgstr "Odpri jamendo.com v brskalniku"
 
 msgid "Open magnatune.com in browser"
 msgstr "Odpri magnatune.com v brskalniku"
-
-msgid "Open media..."
-msgstr "Odpri medij ..."
 
 msgid "Open somafm.com in browser"
 msgstr "Odpri somafm.com v brskalniku"
@@ -2152,7 +2192,7 @@ msgstr "Ime predvajalnika"
 msgid "Player options"
 msgstr "Možnosti predvajalnika"
 
-msgid "&Playlist"
+msgid "Playlist"
 msgstr "Seznam predvajanja"
 
 msgid "Playlist finished"
@@ -2342,9 +2382,6 @@ msgstr "Ponavljanje"
 msgid "Repeat album"
 msgstr "Ponavljaj album"
 
-msgid "&Repeat mode"
-msgstr "Način ponavljanja"
-
 msgid "Repeat playlist"
 msgstr "Ponovi seznam predvajanja"
 
@@ -2380,6 +2417,9 @@ msgstr "Ponastavi število predvajanj"
 
 msgid "Restrict to ASCII characters"
 msgstr "Omeji na znake ASCII"
+
+msgid "Results"
+msgstr ""
 
 msgid "Rock"
 msgstr "Rock"
@@ -2559,6 +2599,9 @@ msgstr "Pokaži pojavno okno iz sistemske vrstice"
 msgid "Show a pretty OSD"
 msgstr "Pokaži lep zaslonski prikaz"
 
+msgid "Show a tooltip with more information about each result"
+msgstr ""
+
 msgid "Show above status bar"
 msgstr "Pokaži nad vrstico stanja"
 
@@ -2596,6 +2639,9 @@ msgstr ""
 msgid "Show the \"love\" and \"ban\" buttons"
 msgstr "Pokaži gumbe \"Priljubljena\" in \"Blokiraj\""
 
+msgid "Show the Global Search box above the sidebar"
+msgstr ""
+
 msgid "Show the scrobble button in the main window"
 msgstr "Kaži gumb za pošiljanje podatkov o predvajanih skladbah"
 
@@ -2613,9 +2659,6 @@ msgstr "Premešaj vse"
 
 msgid "Shuffle by album"
 msgstr "Premešaj po albumu"
-
-msgid "&Shuffle mode"
-msgstr "Premešano predvajanje"
 
 msgid "Shuffle playlist"
 msgstr "Premešaj seznam predvajanja"
@@ -2685,6 +2728,9 @@ msgstr "Razvrsti skladbe po"
 
 msgid "Sorting"
 msgstr "Razvrščanje"
+
+msgid "Sources"
+msgstr ""
 
 msgid "Speex"
 msgstr "Speex"
@@ -2842,8 +2888,8 @@ msgid ""
 "There were problems copying some songs.  The following files could not be "
 "copied:"
 msgstr ""
-"Pri kopiranju nekaterih skladb so nastopile težave. Sledečih datotek ni bilo "
-"mogoče skopirati:"
+"Pri kopiranju nekaterih skladb so nastopile težave. Sledečih datotek ni bilo"
+" mogoče skopirati:"
 
 msgid ""
 "There were problems deleting some songs.  The following files could not be "
@@ -2882,16 +2928,15 @@ msgid ""
 "This action will create a database which could be as big as 150 MB.\n"
 "Do you want to continue anyway?"
 msgstr ""
-"To dejanje bo ustvarilo podatkovno zbirko, ki je lahko velika tudi do 150 "
-"MB.\n"
+"To dejanje bo ustvarilo podatkovno zbirko, ki je lahko velika tudi do 150 MB.\n"
 "Želite vseeno nadaljevati?"
 
 msgid "This album is not available in the requested format"
 msgstr "Ta album ni na voljo v zahtevani obliki"
 
 msgid ""
-"This device must be connected and opened before Clementine can see what file "
-"formats it supports."
+"This device must be connected and opened before Clementine can see what file"
+" formats it supports."
 msgstr ""
 "Ta naprava mora biti povezana in odprta, preden lahko Clementine ugotovi "
 "katere vrste podpira"
@@ -2913,15 +2958,15 @@ msgid ""
 "This is the first time you have connected this device.  Clementine will now "
 "scan the device to find music files - this may take some time."
 msgstr ""
-"Tokrat ste prvič priklopili to napravo. Clementine bo sedaj preiskal napravo "
-"za glasbenimi datotekami - to lahko traja nekaj časa."
+"Tokrat ste prvič priklopili to napravo. Clementine bo sedaj preiskal napravo"
+" za glasbenimi datotekami - to lahko traja nekaj časa."
 
 msgid ""
 "This playlist will be removed; the action can't be undone. Are you sure you "
 "want to continue?"
 msgstr ""
-"Seznam predvajanja bo odstranjen; tega dejanja ne morete preklicati. Ali ste "
-"prepričani, da želite nadaljevati?"
+"Seznam predvajanja bo odstranjen; tega dejanja ne morete preklicati. Ali ste"
+" prepričani, da želite nadaljevati?"
 
 msgid "This stream is for paid subscribers only"
 msgstr "Ta pretok je le za plačane naročnike"
@@ -3073,6 +3118,9 @@ msgstr "Uporabljeno"
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr ""
 
+msgid "User interface"
+msgstr ""
+
 msgid "Username"
 msgstr "Uporabniško ime"
 
@@ -3084,9 +3132,6 @@ msgstr "VBR MP3"
 
 msgid "Variable bit rate"
 msgstr "Spremenljiva bitna hitrost"
-
-msgid "Various Artists"
-msgstr "Različni izvajalci"
 
 msgid "Various artists"
 msgstr "Različni izvajalci"
@@ -3136,12 +3181,10 @@ msgid "When Clementine starts"
 msgstr "Ko se Clementine zažene"
 
 msgid ""
-"When looking for album art Clementine will first look for picture files that "
-"contain one of these words.\n"
+"When looking for album art Clementine will first look for picture files that contain one of these words.\n"
 "If there are no matches then it will use the largest image in the directory."
 msgstr ""
-"Med iskanjem ovitkov albumov bo Clementine najprej poiskal datoteke s "
-"slikami, ki vsebujejo te besede. \n"
+"Med iskanjem ovitkov albumov bo Clementine najprej poiskal datoteke s slikami, ki vsebujejo te besede. \n"
 "Če ne bo ujemanj, bo uporabil največjo sliko v mapi"
 
 msgid "WiFi MAC Address"
@@ -3226,31 +3269,32 @@ msgid ""
 msgstr ""
 
 msgid ""
-"You can listen to Magnatune songs for free without an account.  Purchasing a "
-"membership removes the messages at the end of each track."
+"You can listen to Magnatune songs for free without an account.  Purchasing a"
+" membership removes the messages at the end of each track."
 msgstr ""
-"Skladbe iz Magnatune lahko poslušate brezplačno tudi brez računa. Če plačate "
-"članstvo, bodo sporočila na koncu skladb odstranjena."
+"Skladbe iz Magnatune lahko poslušate brezplačno tudi brez računa. Če plačate"
+" članstvo, bodo sporočila na koncu skladb odstranjena."
 
 msgid "You can listen to background streams at the same time as other music."
 msgstr "Sočasno lahko poslušate pretoke v ozadju in drugo glasbo."
 
 msgid ""
-"You can scrobble tracks for free, but only <span style=\" font-weight:600;"
-"\">paid subscribers</span> can stream Last.fm radio from Clementine."
+"You can scrobble tracks for free, but only <span style=\" font-"
+"weight:600;\">paid subscribers</span> can stream Last.fm radio from "
+"Clementine."
 msgstr ""
-"Brezplačno lahko uporabljate pošiljanje seznamov predvajanih skladb, toda le "
-"<span style=\\\" font-weight:600;\\\">plačniki</span> lahko poslušajo radio "
-"Last.fm v Clementine."
+"Brezplačno lahko uporabljate pošiljanje seznamov predvajanih skladb, toda le"
+" <span style=\\\" font-weight:600;\\\">plačniki</span> lahko poslušajo radio"
+" Last.fm v Clementine."
 
 msgid ""
-"You can use your Wii Remote as a remote control for Clementine.  <a href="
-"\"http://www.clementine-player.org/wiimote\">See the page on the Clementine "
-"wiki</a> for more information.\n"
+"You can use your Wii Remote as a remote control for Clementine.  <a "
+"href=\"http://www.clementine-player.org/wiimote\">See the page on the "
+"Clementine wiki</a> for more information.\n"
 msgstr ""
-"Wii Remote lahko uporabite kot daljinski upravljalnik v Clementine. Obiščite "
-"<a href=\"http://www.clementine-player.org/wiimote\">Clementine wiki</a> za "
-"več podrobnosti.\n"
+"Wii Remote lahko uporabite kot daljinski upravljalnik v Clementine. Obiščite"
+" <a href=\"http://www.clementine-player.org/wiimote\">Clementine wiki</a> za"
+" več podrobnosti.\n"
 
 msgid "You do not have a Grooveshark Anywhere account."
 msgstr ""
@@ -3274,16 +3318,16 @@ msgid ""
 "style:italic;\">Enable access for assistive devices</span>\" to use global "
 "shortcuts in Clementine."
 msgstr ""
-"V sistemskih nastavitvah morate vklopiti \\\"<span style=\\\" font-style:"
-"italic;\\\">Omogoči dostop za pomožne naprave</span>\\\", da boste lahko "
-"uporabili splošne bližnjice v Clementine."
+"V sistemskih nastavitvah morate vklopiti \\\"<span style=\\\" font-"
+"style:italic;\\\">Omogoči dostop za pomožne naprave</span>\\\", da boste "
+"lahko uporabili splošne bližnjice v Clementine."
 
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Za spremembo jezika morate ponovno zagnati Clementine"
 
 msgid ""
-"You will not be able to play Last.fm radio stations as you are not a Last.fm "
-"subscriber."
+"You will not be able to play Last.fm radio stations as you are not a Last.fm"
+" subscriber."
 msgstr ""
 "Ne boste mogli predvajati radio postaj Last.fm, če niste njihov naročnik."
 
@@ -3328,7 +3372,7 @@ msgstr "Ž-A"
 msgid "Zero"
 msgstr "Brez"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "add %n songs"
 msgstr "dodaj %n skladb"
 
@@ -3417,7 +3461,7 @@ msgstr "možnosti"
 msgid "press enter"
 msgstr "pritisnite enter"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "remove %n songs"
 msgstr "odstrani %n skladb"
 
@@ -3437,335 +3481,4 @@ msgstr "zaustavi"
 msgid "track %1"
 msgstr "skladba %1"
 
-#~ msgid "Are you sure you want to install the following scripts?"
-#~ msgstr "Ste prepričani, da želite namestiti sledeče skripte?"
 
-#~ msgid "Clementine scripts"
-#~ msgstr "Clementine skripte"
-
-#~ msgid "Context:"
-#~ msgstr "Vsebina:"
-
-#~ msgid "Developer mode"
-#~ msgstr "Način za razvijalce"
-
-#~ msgid "Disable"
-#~ msgstr "Onemogoči"
-
-#~ msgid "Enable"
-#~ msgstr "Omogoči"
-
-#~ msgid "Enter an URL to download a cover from the Internet:"
-#~ msgstr "Vnesite spletni naslov, da pridobite ovitek s medmrežja:"
-
-#~ msgid "Error installing script"
-#~ msgstr "Napaka med nameščanjem skripte"
-
-#~ msgid "Error opening script archive"
-#~ msgstr "Napaka med odpiranjem arhiva skript"
-
-#~ msgid "Get new scripts"
-#~ msgstr "Dobi nove skripte"
-
-#~ msgid "Global Shortcuts"
-#~ msgstr "Splošne bližnjice"
-
-#~ msgid "Install from file..."
-#~ msgstr "Namesti iz datoteke ..."
-
-#~ msgid "Install script file"
-#~ msgstr "Namesti datoteko s skripto"
-
-#~ msgid "Install scripts"
-#~ msgstr "Namesti skripte"
-
-#~ msgid "My scripts"
-#~ msgstr "Moje skripte"
-
-#~ msgid "Please fill in the blanks to login into Last.fm"
-#~ msgstr "Zapolnite praznine, da se boste lahko prijavili v Last.fm"
-
-#~ msgid "Python console"
-#~ msgstr "Konzola Python"
-
-#~ msgid "Reload"
-#~ msgstr "Ponovno naloži"
-
-#~ msgid "Script Manager"
-#~ msgstr "Upravljalnik skriptov"
-
-#~ msgid "Settings..."
-#~ msgstr "Nastavitve ..."
-
-#~ msgid "Some files failed to install.  The script may not work correctly."
-#~ msgstr ""
-#~ "Nekaterih datotek ni bilo mogoče namestiti. Skripta morda ne bo delovala "
-#~ "pravilno."
-
-#~ msgid "The '%1' script was modified, you might have to reload it"
-#~ msgstr ""
-#~ "Skripta '%1' je bila spremenjena. Morda jo boste morali ponovno naložiti."
-
-#~ msgid "This is not a valid Clementine script file."
-#~ msgstr "To ni veljavna Clementine datoteka s skripto."
-
-#~ msgid ""
-#~ "Warning: scripts have full access to your computer and your music.  Only "
-#~ "install scripts that you trust."
-#~ msgstr ""
-#~ "Opozorilo: skripte imajo poln dostop do vašega računalnika in vaše "
-#~ "glasbe. Namestite le skripte, ki jim zaupate."
-
-#~ msgid "ASF"
-#~ msgstr "ASF"
-
-#~ msgid "Editing %n tracks"
-#~ msgstr "Urejanje %n skladb"
-
-#~ msgid "Hide %1"
-#~ msgstr "Skrij %1"
-
-#~ msgid "Help"
-#~ msgstr "Pomoč"
-
-#~ msgid ""
-#~ "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm *."
-#~ "tiff)"
-#~ msgstr ""
-#~ "Slike (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm *."
-#~ "tiff)"
-
-#~ msgid "Last.fm Loved Tracks - %1"
-#~ msgstr "Last.fm priljubljene skladbe - %1"
-
-#~ msgid "MP4"
-#~ msgstr "MP4"
-
-#~ msgid "My Loved Tracks"
-#~ msgstr "Moje priljubljene skladbe"
-
-#~ msgid "Ogg FLAC"
-#~ msgstr "Ogg FLAC"
-
-#~ msgid "Select engine"
-#~ msgstr "Izberi pogon"
-
-#~ msgid "Text color"
-#~ msgstr "Barva besedila"
-
-#~ msgid "Tools"
-#~ msgstr "Orodja"
-
-#~ msgid "Unknown audio engine \"%1\". Choices are:"
-#~ msgstr "Neznan glasbeni pogon \"%1\". Na voljo so:"
-
-#~ msgid "Update Library"
-#~ msgstr "Posodobi knjižnico"
-
-#~ msgid "[click to edit]"
-#~ msgstr "[kliknite za urejanje]"
-
-#~ msgid "available"
-#~ msgstr "na voljo"
-
-#~ msgid "Capacity"
-#~ msgstr "Kapaciteta"
-
-#~ msgid "Last.fm Recommended Radio - %1"
-#~ msgstr "Last.fm radio iz priporočil - %1"
-
-#~ msgid "%1 of %2"
-#~ msgstr "%1 od %2"
-
-#~ msgid "Available space"
-#~ msgstr "Prostor na voljo"
-
-#~ msgid "Couldn't load the last.fm radio station: %1"
-#~ msgstr "Last.fm postaje ni bilo mogoče naložiti: %1"
-
-#~ msgid "Delete files..."
-#~ msgstr "Izbriši datoteke ..."
-
-#~ msgid "Double-clicking a song clears the playlist first"
-#~ msgstr "Dvoklik na skladbo počisti predvajalni seznam"
-
-#~ msgid "Enter a name for the new playlist"
-#~ msgstr "Vnesite ime za nov seznam predvajanja"
-
-#~ msgid "Hide..."
-#~ msgstr "Skrij ..."
-
-#~ msgid "Radio service couldn't be loaded :-("
-#~ msgstr "Radio storitve ni bilo mogoče zagnati :-("
-
-#~ msgid "Edit action"
-#~ msgstr "Uredi dejanje"
-
-#~ msgid "Enable shortcuts only when application is focused"
-#~ msgstr "Omogoči bližnjice le, ko je okno programa v žarišču"
-
-#~ msgid "Use Wii remote id"
-#~ msgstr "Uporabi Wii remote id"
-
-#~ msgid "Enable Wii remote support in Clementine"
-#~ msgstr "Omogoči podporo Wii remote v Clementine"
-
-#~ msgid "Use notifications to report Wii remote status"
-#~ msgstr "Uporabi obvestila za obveščanje o stanju Wii remote"
-
-#~ msgid "Connect Wii remotes to Clementine using active/deactive action"
-#~ msgstr "Poveži Wii remotes v Clementine z uporabo dejanja aktivno/neaktivno"
-
-#~ msgid "Use Wii remote"
-#~ msgstr "Uporabi Wii remote"
-
-#~ msgid "Stretch columns to fit window"
-#~ msgstr "Raztegni stolpce, da se prilegajo oknu"
-
-#~ msgid "Wiiremote %1: disconnected"
-#~ msgstr "Wiiremote %1: odklopljena"
-
-#~ msgid "Wiiremote %1: low battery (%2%)"
-#~ msgstr "Wiiremote %1: šibka baterija (%2%)"
-
-#~ msgid "Wiiremote %1: critical battery (%2%) "
-#~ msgstr "Wiiremote %1: baterija je zelo šibka (%2%) "
-
-#~ msgid "Wiiremote %1: disactived"
-#~ msgstr "Wiiremote %1: onemogočena"
-
-#~ msgid "Wiiremote %1: actived"
-#~ msgstr "Wiiremote %1: omogočen"
-
-#~ msgid "Wiiremote %1: connected"
-#~ msgstr "Wiiremote %1: povezan"
-
-#~ msgid "Searching %1..."
-#~ msgstr "Iskanje %1 ..."
-
-#~ msgid "Searching..."
-#~ msgstr "Iskanje ..."
-
-#~ msgid "Show the song information sidebar"
-#~ msgstr "Pokaži stransko vrstico s podrobnostmi o skladbi"
-
-#~ msgid "Download lyrics from the Internet"
-#~ msgstr "Prenesi besedila z medmrežja"
-
-#~ msgid "Always"
-#~ msgstr "Vedno"
-
-#~ msgid "Only when playing a song"
-#~ msgstr "Le med predvajanjem skladbe"
-
-#~ msgid "No lyrics could be found"
-#~ msgstr "Besedil ni bilo mogoče najti"
-
-#~ msgid "%1 total plays"
-#~ msgstr "vseh predvajanj: %1"
-
-#~ msgid "%1 other listeners"
-#~ msgstr "%1 drugih poslušalcev"
-
-#~ msgid ""
-#~ "A song will be included in the playlist if it matches all of these "
-#~ "conditions."
-#~ msgstr ""
-#~ "Skladba bo vključena v seznam predvajanja, če se ujema z vsemi temi "
-#~ "pogoji."
-
-#~ msgid "Add as new playlist..."
-#~ msgstr "Kot nov seznam predvajanja ..."
-
-#~ msgid "Artist A-Z"
-#~ msgstr "Izvajalec A-Z"
-
-#~ msgid "Dynamic playlists"
-#~ msgstr "Dinamični seznami predvajanja"
-
-#~ msgid "Buffer Duration (ms)"
-#~ msgstr "Trajanje medpomnilnika (ms)"
-
-#~ msgid "Last.fm similar artists"
-#~ msgstr "Last.fm podobni izvajalci"
-
-#~ msgid "New"
-#~ msgstr "Novo"
-
-#~ msgid "Length (longest first)"
-#~ msgstr "Dolžina (daljši najprej)"
-
-#~ msgid "Length (shortest first)"
-#~ msgstr "Dolžina (krajši najprej)"
-
-#~ msgid ""
-#~ "Let Last.fm suggest songs from your library that are similar to one you "
-#~ "specify."
-#~ msgstr ""
-#~ "Dovoli, da Last.fm predlaga skladbe iz vaše knjižnice, ki so podobne "
-#~ "tisti, ki ste jo določili."
-
-#~ msgid "New folder..."
-#~ msgstr "Nova mapa ..."
-
-#~ msgid "Playlists"
-#~ msgstr "Seznami predvajanja"
-
-#~ msgid "Year (oldest first)"
-#~ msgstr "Leto (najstarejše najprej)"
-
-#~ msgid "Year (newest first)"
-#~ msgstr "Leto (najnovejše najprej)"
-
-#~ msgid "Don't use search terms (include all songs)"
-#~ msgstr "Ne uporabi pogojev iskanja (vključi vse skladbe)"
-
-#~ msgid ""
-#~ "In dynamic mode new tracks will be chosen and added to the playlist every "
-#~ "time a song finishes.  Enabling dynamic mode will ignore any size limit "
-#~ "you set on the playlist."
-#~ msgstr ""
-#~ "V dinamičnem načinu bodo nove skladbe izbrane in dodane seznamu "
-#~ "predvajanja, vsakič ko se konča skladba. Če omogočite dinamični način, "
-#~ "bodo prezrte vse omejitve velikosti, ki jih nastavite na seznamu "
-#~ "predvajanja."
-
-#~ msgid "Change album cover"
-#~ msgstr "Spremeni ovitek albuma"
-
-#~ msgid "Statistics"
-#~ msgstr "Statistika"
-
-#~ msgid "Script console"
-#~ msgstr "Konzola skriptov"
-
-#~ msgid "Enqueue to playlist"
-#~ msgstr "Dodaj v vrsto v seznam predvajanja"
-
-#~ msgid "Complete automatically"
-#~ msgstr "Samodejno dopolni"
-
-#~ msgid "Generating audio fingerprint and fetching results..."
-#~ msgstr "Ustvarjanje prstnega odtisa zvoka in pridobivanje rezultatov ..."
-
-#~ msgid "Results fetched"
-#~ msgstr "Rezulrati pridobljeni"
-
-#~ msgid "Show duplicates only"
-#~ msgstr "Kaži le podvojene"
-
-#~ msgid "Save Album Cover"
-#~ msgstr "Shrani ovitek albuma"
-
-#~ msgid "Images (*.jpg)"
-#~ msgstr "slike (*.jpg)"
-
-#~ msgid ""
-#~ "The version of Clementine you've just updated to requires a full library "
-#~ "rescan because of the new features listed below:<ul>"
-#~ msgstr ""
-#~ "Različica Clementine, ki ste jo posodobili, zahteva polno ponovno "
-#~ "pregledovanje knjižnice, zaradi spodaj navedenih novih zmožnosti:<ul>"
-
-#~ msgid "Open CD..."
-#~ msgstr "Odpri CD ..."

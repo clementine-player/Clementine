@@ -1,23 +1,20 @@
-# Turkish translation for clementine
-# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
-# This file is distributed under the same license as the clementine package.
+# Clementine.
+# Copyright (C) 2010 David Sansome
+# This file is distributed under the same license as the Clementine package.
+# 
+# Translators:
+#   <arnaud.bienner@gmail.com>, 2011.
 # H. İbrahim Güngör <ibrahim@pardus.org.tr>, 2010.
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: clementine\n"
-"Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/"
-"list\n"
-"POT-Creation-Date: 2011-06-26 20:31+0000\n"
-"PO-Revision-Date: 2011-10-10 16:15+0000\n"
-"Last-Translator: Kaan Y. <Unknown>\n"
-"Language-Team: Turkish <tr@li.org>\n"
-"Language: tr\n"
-"MIME-Version: 1.0\n"
+"Project-Id-Version: Clementine Music Player\n"
+"Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
+"PO-Revision-Date: 2011-11-01 04:40+0000\n"
+"Last-Translator: clementinebuildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-10-11 05:42+0000\n"
-"X-Generator: Launchpad (build 14123)\n"
+"Language: tr\n"
+"Plural-Forms: nplurals=1; plural=0\n"
 
 msgid " kbps"
 msgstr " kbps"
@@ -90,15 +87,15 @@ msgstr "%L1 başka dinleyici"
 msgid "%L1 total plays"
 msgstr "%L1 toplam çalma"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n failed"
 msgstr "%n başarısız"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n finished"
 msgstr "%n tamamlandı"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n remaining"
 msgstr "%n kaldı"
 
@@ -110,6 +107,9 @@ msgstr "&Merkez"
 
 msgid "&Custom"
 msgstr "&Özel"
+
+msgid "&Extras"
+msgstr "Ekler"
 
 msgid "&Help"
 msgstr "&Yardım"
@@ -124,14 +124,26 @@ msgstr "&Gizle..."
 msgid "&Left"
 msgstr "&Sol"
 
+msgid "&Music"
+msgstr "Müzik"
+
 msgid "&None"
 msgstr "&Hiçbiri"
+
+msgid "&Playlist"
+msgstr "Çalma Listesi"
 
 msgid "&Quit"
 msgstr "&Çık"
 
+msgid "&Repeat mode"
+msgstr "Tekrar kipi"
+
 msgid "&Right"
 msgstr "&Sağ"
+
+msgid "&Shuffle mode"
+msgstr "Rastgele kipi"
 
 msgid "&Stretch columns to fit window"
 msgstr "&Sütunları pencereye sığacak şekilde ayarla"
@@ -167,19 +179,16 @@ msgid "50 random tracks"
 msgstr "50 rasgele parça"
 
 msgid "<a href=\"http://www.di.fm/premium/\">Upgrade to Premium now</a>"
-msgstr ""
-"<a href=\"http://www.di.fm/premium/\">Şimdi Premium üyeliğine geçin</a>"
+msgstr "<a href=\"http://www.di.fm/premium/\">Şimdi Premium üyeliğine geçin</a>"
 
 msgid ""
 "<p>Tokens start with %, for example: %artist %album %title </p>\n"
 "\n"
-"<p>If you surround sections of text that contain a token with curly-braces, "
-"that section will be hidden if the token is empty.</p>"
+"<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
 msgstr ""
 "<p>% ile başlayan özellikler, örneğin: %artist %album %title </p>\n"
 "\n"
-"<p>İşaret içeren metnin bölümlerini süslü parantez ile sarmalarsanız, işaret "
-"boşsa o bölüm görünmeyecektir.</p>"
+"<p>İşaret içeren metnin bölümlerini süslü parantez ile sarmalarsanız, işaret boşsa o bölüm görünmeyecektir.</p>"
 
 msgid "A Grooveshark Anywhere account is required."
 msgstr "Grooveshark Anywhere hesabı gereklidir."
@@ -196,7 +205,8 @@ msgstr ""
 "listesidir. Şarkı seçmenin farklı yollarını sunan farklı akıllı şarkı "
 "listesi türleri vardır."
 
-msgid "A song will be included in the playlist if it matches these conditions."
+msgid ""
+"A song will be included in the playlist if it matches these conditions."
 msgstr "Bir şarkı, eğer bu koşullara uyarsa çalma listesine eklenecektir."
 
 msgid "A-Z"
@@ -403,7 +413,7 @@ msgid "All tracks"
 msgstr "Tüm parçalar"
 
 msgid "Allow mid/side encoding"
-msgstr ""
+msgstr "Mid/side kodlamaya izin ver"
 
 msgid "Alongside the originals"
 msgstr "Orijinallerin yanına"
@@ -421,8 +431,8 @@ msgid ""
 "An additional plugin is required to use Spotify in Clementine.  Would you "
 "like to download and install it now?"
 msgstr ""
-"Spotify'ın Clementine'de kullanılması için harici bir eklenti "
-"gerekmektedir.  Şimdi indirmek ve kurulumunu yapmak ister misiniz?"
+"Spotify'ın Clementine'de kullanılması için harici bir eklenti gerekmektedir."
+"  Şimdi indirmek ve kurulumunu yapmak ister misiniz?"
 
 msgid "An error occurred copying the iTunes database from the device"
 msgstr "Aygıttan iTunes veritabanı kopyalanırken hata oluştu"
@@ -561,7 +571,7 @@ msgid "Bluetooth MAC Address"
 msgstr "Bluetooth MAC Adresi"
 
 msgid "Body"
-msgstr ""
+msgstr "Gövde"
 
 msgid "Boom analyzer"
 msgstr "Boom çözümleyici"
@@ -660,11 +670,12 @@ msgstr ""
 
 msgid ""
 "Clementine can be controlled remotely by an Android phone.  To enable this "
-"feature log in with the same Google account that is configured on your phone."
+"feature log in with the same Google account that is configured on your "
+"phone."
 msgstr ""
 "Clementine Android telefon tarafından uzaktan kontrol edilebilir. Bu "
-"özelliği etkinleştirmek için telefonunuzda yapılandırılan Google hesabınızla "
-"oturum açın."
+"özelliği etkinleştirmek için telefonunuzda yapılandırılan Google hesabınızla"
+" oturum açın."
 
 msgid "Clementine can show a message when the track changes."
 msgstr "Parça değiştiğinde Clementine bir ileti gösterebilir."
@@ -678,7 +689,8 @@ msgstr ""
 
 msgid ""
 "Clementine couldn't fetch your subscription status since there are problems "
-"with your connection. Played tracks will be cached and sent later to Last.fm."
+"with your connection. Played tracks will be cached and sent later to "
+"Last.fm."
 msgstr ""
 "Clementine bağlantı sorunlarından dolayı abone bilgilerinize ulaşamadı. "
 "Çalınan şarkılar ön belleğe kaydedilecek ve daha sonra Last.fm'e "
@@ -714,8 +726,11 @@ msgstr "Kulüp"
 msgid "Color"
 msgstr "Renk"
 
-msgid "Comma separated list of class:level, level is 0-3"
+msgid "Combine identical results from different sources"
 msgstr ""
+
+msgid "Comma separated list of class:level, level is 0-3"
+msgstr "Virgülle ayrılmış sınıf:seviye listesi, sınıf 0-3 arasında olabilir "
 
 msgid "Comment"
 msgstr "Yorum"
@@ -790,8 +805,8 @@ msgid ""
 "Couldn't find a muxer for %1, check you have the correct GStreamer plugins "
 "installed"
 msgstr ""
-"%1 için ayrıştırıcı bulunamadı, gerekli GStreamer eklentilerinin kurulu olup "
-"olmadığını kontrol edin"
+"%1 için ayrıştırıcı bulunamadı, gerekli GStreamer eklentilerinin kurulu olup"
+" olmadığını kontrol edin"
 
 #, qt-format
 msgid ""
@@ -830,7 +845,7 @@ msgstr "Kapak resmi %1 adresinden ayarlandı"
 
 #, qt-format
 msgid "Covers from %1"
-msgstr ""
+msgstr "%1 adresindeki kapak resimleri"
 
 msgid "Cross-fade when changing tracks automatically"
 msgstr "Parça değiştirirken otomatik olarak çapraz geçiş yap"
@@ -1004,7 +1019,7 @@ msgid "Directory"
 msgstr "Dizin"
 
 msgid "Disable duration"
-msgstr ""
+msgstr "Süreyi devre dışı bırak"
 
 msgid "Disabled"
 msgstr "Devre Dışı"
@@ -1127,6 +1142,12 @@ msgstr "Çalma listesi arkaplan görüntüsünü etkinleştir"
 msgid "Enable shortcuts only when Clementine is focused"
 msgstr "Kısayolları sadece Clementine odaktayken etkinleştir"
 
+msgid ""
+"Enable sources below to include them in Global Search results.  When "
+"identical results are available from more than one source, ones at the top "
+"will take priority."
+msgstr ""
+
 msgid "Enable/disable Last.fm scrobbling"
 msgstr "Last.fm skroplamayı aç/kapa"
 
@@ -1164,10 +1185,10 @@ msgid "Equalizer"
 msgstr "Ekolayzır"
 
 msgid "Equivalent to --log-levels *:1"
-msgstr ""
+msgstr "--log-levels *:1'e eşdeğer"
 
 msgid "Equivalent to --log-levels *:3"
-msgstr ""
+msgstr "--log-levels *:3'e eşdeğer"
 
 msgid "Error"
 msgstr "Hata"
@@ -1204,9 +1225,6 @@ msgstr "Önceden çalınmış"
 msgid "Except between tracks on the same album or in the same CUE sheet"
 msgstr "Aynı albümde veya aynı CUE dosyasında bulunan parçalar hariç"
 
-msgid "&Extras"
-msgstr "Ekler"
-
 msgid "F1"
 msgstr "F1"
 
@@ -1239,6 +1257,9 @@ msgstr "Yumuşak geçiş süresi"
 
 msgid "Fast"
 msgstr "Hızlı"
+
+msgid "Favorites"
+msgstr ""
 
 msgid "Favourite tracks"
 msgstr "Favori parçalar"
@@ -1335,7 +1356,7 @@ msgid "Framerate"
 msgstr "Kare oranı"
 
 msgid "Frames per buffer"
-msgstr ""
+msgstr "Tambon başına kare"
 
 msgid "Friends"
 msgstr "Arkadaşlar"
@@ -1352,6 +1373,9 @@ msgstr "Yüksek tiz"
 msgid "GStreamer audio engine"
 msgstr "GStreamer ses motoru"
 
+msgid "General"
+msgstr ""
+
 msgid "General settings"
 msgstr "Genel ayarlar"
 
@@ -1366,6 +1390,9 @@ msgstr "Akışlar alınıyor"
 
 msgid "Give it a name:"
 msgstr "Bir isim verin:"
+
+msgid "Global Search"
+msgstr ""
 
 msgid "Global search"
 msgstr ""
@@ -1428,6 +1455,9 @@ msgstr "Donanım bilgisi"
 msgid "Hardware information is only available while the device is connected."
 msgstr "Donanım bilgisine sadece aygıt bağlıyken erişilebilir."
 
+msgid "Hide all other search boxes"
+msgstr ""
+
 msgid "High"
 msgstr "Yüksek"
 
@@ -1460,8 +1490,8 @@ msgid "Identifying song"
 msgstr "Şarkı teşhis ediliyor"
 
 msgid ""
-"If you continue, this device will work slowly and songs copied to it may not "
-"work."
+"If you continue, this device will work slowly and songs copied to it may not"
+" work."
 msgstr ""
 "Devam ederseniz, aygıt yavaş çalışacak ve kopyaladığınız şarkılar düzgün "
 "çalışmayacak."
@@ -1499,6 +1529,9 @@ msgstr "Bildirimde albüm resimlendirmesini göster"
 msgid "Include all songs"
 msgstr "Tüm şarkıları içer"
 
+msgid "Include keyboard shortcut help in the tooltip"
+msgstr ""
+
 msgid "Increase the volume by 4%"
 msgstr "Ses seviyesini 4% arttır"
 
@@ -1516,6 +1549,9 @@ msgstr "Kuruldu"
 
 msgid "Internet"
 msgstr "Internet"
+
+msgid "Internet providers"
+msgstr ""
 
 msgid "Invalid API key"
 msgstr "Geçersiz API anahtarı"
@@ -1657,8 +1693,8 @@ msgstr "Az beğenilen parçalar"
 
 msgid "Leave blank for the default.  Examples: \"/dev/dsp\", \"front\", etc."
 msgstr ""
-"Öntanımlıların kullanılması için boş bırakın. Örnekler: \"/dev/dsp\", \"front"
-"\" vs."
+"Öntanımlıların kullanılması için boş bırakın. Örnekler: \"/dev/dsp\", "
+"\"front\" vs."
 
 msgid "Length"
 msgstr "Süre"
@@ -1736,7 +1772,7 @@ msgid "Login"
 msgstr "Oturum aç"
 
 msgid "Long term prediction profile (LTP)"
-msgstr ""
+msgstr "Long term prediction profile (LTP)"
 
 msgid "Love"
 msgstr "Beğen"
@@ -1752,7 +1788,7 @@ msgid "Low (256x256)"
 msgstr "Düşük (256x256)"
 
 msgid "Low complexity profile (LC)"
-msgstr ""
+msgstr "Düşük karmaşıklık profili (LC)"
 
 msgid "Lyrics"
 msgstr "Şarkı sözleri"
@@ -1789,7 +1825,7 @@ msgid "Main profile (MAIN)"
 msgstr "Ana profil (MAIN)"
 
 msgid "Make playlist available offline"
-msgstr ""
+msgstr "Çalma listesini çevrim dışındayken kullanılabilir yap"
 
 msgid "Malformed response"
 msgstr "Bozuk yanıt"
@@ -1854,9 +1890,6 @@ msgstr "Kütüphaneye taşı..."
 
 msgid "Move up"
 msgstr "Yukarı taşı"
-
-msgid "&Music"
-msgstr "Müzik"
 
 msgid "Music (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma *.mp4 *.spx *.wav)"
 msgstr "Müzik (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma *.mp4 *.spx *.wav)"
@@ -1943,7 +1976,7 @@ msgid "No analyzer"
 msgstr "Çözümleyici yok"
 
 msgid "No long blocks"
-msgstr ""
+msgstr "Uzun blok yok"
 
 msgid ""
 "No matches found.  Clear the search box to show the whole playlist again."
@@ -1952,7 +1985,7 @@ msgstr ""
 "temizleyin."
 
 msgid "No short blocks"
-msgstr ""
+msgstr "Kısa blok yok"
 
 msgid "None"
 msgstr "Hiçbiri"
@@ -1961,7 +1994,7 @@ msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Seçili şarkıların hiçbiri aygıta yüklemeye uygun değil"
 
 msgid "Normal block type"
-msgstr ""
+msgstr "Normal blok tipi"
 
 msgid "Not available while using a dynamic playlist"
 msgstr "Dinamik şarkı listesi kullanırken geçerli değil"
@@ -1983,6 +2016,9 @@ msgstr "Yeterli komşu yok"
 
 msgid "Not installed"
 msgstr "Kurulu değil"
+
+msgid "Not logged in"
+msgstr ""
 
 msgid "Not mounted - double click to mount"
 msgstr "Bağlı değil - bağlamak için çift tıklayın"
@@ -2024,6 +2060,9 @@ msgstr "Aygıtı aç"
 msgid "Open dir.xiph.org in browser"
 msgstr "dir.xiph.org sayfasını tarayıcıda aç"
 
+msgid "Open file..."
+msgstr ""
+
 msgid "Open in new playlist"
 msgstr "Yeni çalma listesinde aç"
 
@@ -2032,9 +2071,6 @@ msgstr "İnternet tarayıcıda jamendo.com'u aç"
 
 msgid "Open magnatune.com in browser"
 msgstr "magnatune.com'u tarayıcıda aç"
-
-msgid "Open media..."
-msgstr "Ortam aç..."
 
 msgid "Open somafm.com in browser"
 msgstr "somafm.com'u tarayıcıda aç"
@@ -2153,7 +2189,7 @@ msgstr "Oynatıcı adı"
 msgid "Player options"
 msgstr "Oynatıcı seçenekleri"
 
-msgid "&Playlist"
+msgid "Playlist"
 msgstr "Çalma Listesi"
 
 msgid "Playlist finished"
@@ -2224,7 +2260,7 @@ msgid "Previous track"
 msgstr "Önceki parça"
 
 msgid "Print out version information"
-msgstr ""
+msgstr "Sürüm bilgisini bastır"
 
 msgid "Profile"
 msgstr "Profil"
@@ -2343,9 +2379,6 @@ msgstr "Tekrarla"
 msgid "Repeat album"
 msgstr "Albümü tekrarla"
 
-msgid "&Repeat mode"
-msgstr "Tekrar kipi"
-
 msgid "Repeat playlist"
 msgstr "Çalma listesini tekrarla"
 
@@ -2381,6 +2414,9 @@ msgstr "Çalma sayısını sıfırla"
 
 msgid "Restrict to ASCII characters"
 msgstr "ASCII karakterler olarak kısıtla"
+
+msgid "Results"
+msgstr ""
 
 msgid "Rock"
 msgstr "Rock"
@@ -2425,7 +2461,7 @@ msgid "Saving tracks"
 msgstr "Parçalar kaydediliyor"
 
 msgid "Scalable sampling rate profile (SSR)"
-msgstr ""
+msgstr "Ölçeklenebilir örnekleme oranı profili (SSR)"
 
 msgid "Score"
 msgstr "Puan"
@@ -2559,6 +2595,9 @@ msgstr "Sistem tepsisinden bir açılır pencere göster"
 msgid "Show a pretty OSD"
 msgstr "Şirin bir OSD göster"
 
+msgid "Show a tooltip with more information about each result"
+msgstr ""
+
 msgid "Show above status bar"
 msgstr "Durum çubuğunun üzerinde göster"
 
@@ -2596,6 +2635,9 @@ msgstr ""
 msgid "Show the \"love\" and \"ban\" buttons"
 msgstr "\"Beğen\" ve \"Yasakla\" tuşlarını göster"
 
+msgid "Show the Global Search box above the sidebar"
+msgstr ""
+
 msgid "Show the scrobble button in the main window"
 msgstr "Ana pencerede skroplama düğmesini göster"
 
@@ -2613,9 +2655,6 @@ msgstr "Hepsini karıştır"
 
 msgid "Shuffle by album"
 msgstr "Albüme göre karıştır"
-
-msgid "&Shuffle mode"
-msgstr "Rastgele kipi"
 
 msgid "Shuffle playlist"
 msgstr "Çalma listesini karıştır"
@@ -2685,6 +2724,9 @@ msgstr "Şarkıları şuna göre diz"
 
 msgid "Sorting"
 msgstr "Dizim"
+
+msgid "Sources"
+msgstr ""
 
 msgid "Speex"
 msgstr "Speex"
@@ -2863,6 +2905,8 @@ msgid ""
 "These settings are used in the \"Transcode Music\" dialog, and when "
 "converting music before copying it to a device."
 msgstr ""
+"Bu seçenekler \"Müzik Dönüştür\" penceresinde ve aygıta müzik kopyalamadan "
+"önce dönüştürme işleminde kullanılır."
 
 msgid "Third level"
 msgstr "Üçüncü seviye"
@@ -2878,8 +2922,8 @@ msgid "This album is not available in the requested format"
 msgstr "Bu albüm istenilen biçimde mevcut değil"
 
 msgid ""
-"This device must be connected and opened before Clementine can see what file "
-"formats it supports."
+"This device must be connected and opened before Clementine can see what file"
+" formats it supports."
 msgstr ""
 "Bu aygıt Clementine başlamadan önce bağlanmalı ve açılmalıdır aksi takdirde "
 "hangi dosya biçimleri desteklendiği algılanamaz."
@@ -2931,7 +2975,7 @@ msgid "Today"
 msgstr "Bugün"
 
 msgid "Toggle Pretty OSD"
-msgstr ""
+msgstr "Şirin OSD'yi Aç/Kapa"
 
 msgid "Toggle fullscreen"
 msgstr "Tam ekran göster/gizle"
@@ -2943,7 +2987,7 @@ msgid "Toggle scrobbling"
 msgstr "Skroplamayı aç/kapa"
 
 msgid "Toggle visibility for the pretty on-screen-display"
-msgstr ""
+msgstr "Şirin OSD görünürlüğünü aç/kapa"
 
 msgid "Total bytes transferred"
 msgstr "Aktarılan toplam bayt"
@@ -3046,7 +3090,7 @@ msgid "Use notifications to report Wii Remote status"
 msgstr "Wii kumanda durumunu raporlamak için bildirimleri kullan"
 
 msgid "Use temporal noise shaping"
-msgstr ""
+msgstr "Temporal noise shaping kullan"
 
 msgid "Use the system default"
 msgstr "Sistem öntanımlıyı kullan"
@@ -3061,6 +3105,9 @@ msgstr "Kullanılan"
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr ""
 
+msgid "User interface"
+msgstr ""
+
 msgid "Username"
 msgstr "Kullanıcı Adı"
 
@@ -3072,9 +3119,6 @@ msgstr "VBR MP3"
 
 msgid "Variable bit rate"
 msgstr "Değişken bit oranı"
-
-msgid "Various Artists"
-msgstr "Çeşitli Sanatçılar"
 
 msgid "Various artists"
 msgstr "Çeşitli sanatçılar"
@@ -3096,7 +3140,7 @@ msgid "Visualizations Settings"
 msgstr "Görüntüleme Ayarları"
 
 msgid "Voice activity detection"
-msgstr ""
+msgstr "Ses aktivitesi algılama"
 
 #, qt-format
 msgid "Volume %1%"
@@ -3124,14 +3168,11 @@ msgid "When Clementine starts"
 msgstr "Clementine başladığında"
 
 msgid ""
-"When looking for album art Clementine will first look for picture files that "
-"contain one of these words.\n"
+"When looking for album art Clementine will first look for picture files that contain one of these words.\n"
 "If there are no matches then it will use the largest image in the directory."
 msgstr ""
-"Clementine albüm kapağı ararken ilk önce dosya adında şu kelimelerden birini "
-"içeren resim dosyasına bakacak.\n"
-"Eğer eşleşen bir dosya bulamazsa, bulunduğu dizindeki en büyük resmi "
-"kullanacak."
+"Clementine albüm kapağı ararken ilk önce dosya adında şu kelimelerden birini içeren resim dosyasına bakacak.\n"
+"Eğer eşleşen bir dosya bulamazsa, bulunduğu dizindeki en büyük resmi kullanacak."
 
 msgid "WiFi MAC Address"
 msgstr "WiFi MAC Adresi"
@@ -3217,31 +3258,31 @@ msgstr ""
 "ve daha yüksek kalitedeki akışları dinleyebilir."
 
 msgid ""
-"You can listen to Magnatune songs for free without an account.  Purchasing a "
-"membership removes the messages at the end of each track."
+"You can listen to Magnatune songs for free without an account.  Purchasing a"
+" membership removes the messages at the end of each track."
 msgstr ""
-"Bir hesabınız olmadan ücretsiz olarak Magnatude'dan şarkı "
-"dinleyebilirsiniz.  Üyelik alırsanız her şarkının sonunda görünen bu mesajı "
-"kaldırabilirsiniz."
+"Bir hesabınız olmadan ücretsiz olarak Magnatude'dan şarkı dinleyebilirsiniz."
+"  Üyelik alırsanız her şarkının sonunda görünen bu mesajı kaldırabilirsiniz."
 
 msgid "You can listen to background streams at the same time as other music."
 msgstr "Arkaplan akışlarını diğer müzikler gibi aynı anda dinleyebilirsiniz."
 
 msgid ""
-"You can scrobble tracks for free, but only <span style=\" font-weight:600;"
-"\">paid subscribers</span> can stream Last.fm radio from Clementine."
+"You can scrobble tracks for free, but only <span style=\" font-"
+"weight:600;\">paid subscribers</span> can stream Last.fm radio from "
+"Clementine."
 msgstr ""
 "Parçaları ücretsiz olarak skroplayabilirsiniz, fakat sadece <span style=\" "
 "font-weight:600;\">ücretli aboneler</span> Last.fm radyosunu dinleyebilir."
 
 msgid ""
-"You can use your Wii Remote as a remote control for Clementine.  <a href="
-"\"http://www.clementine-player.org/wiimote\">See the page on the Clementine "
-"wiki</a> for more information.\n"
+"You can use your Wii Remote as a remote control for Clementine.  <a "
+"href=\"http://www.clementine-player.org/wiimote\">See the page on the "
+"Clementine wiki</a> for more information.\n"
 msgstr ""
-"Wii kumandanızı kullanarak Clementine'ı uzaktan kumanda edebilirsiniz.  Daha "
-"fazla bilgi için <a href=\"http://www.clementine-player.org/wiimote"
-"\">Clementine wikideki ilgili sayfayı</a> ziyaret edin.\n"
+"Wii kumandanızı kullanarak Clementine'ı uzaktan kumanda edebilirsiniz.  Daha"
+" fazla bilgi için <a href=\"http://www.clementine-"
+"player.org/wiimote\">Clementine wikideki ilgili sayfayı</a> ziyaret edin.\n"
 
 msgid "You do not have a Grooveshark Anywhere account."
 msgstr ""
@@ -3252,7 +3293,8 @@ msgstr "Spotify Premium hesabınız yok."
 msgid ""
 "You have selected a Premium-only audio type but do not have any account "
 "details entered"
-msgstr "Sadece-Premium ses tipi seçtiniz fakat hesap detaylarınızı girmediniz."
+msgstr ""
+"Sadece-Premium ses tipi seçtiniz fakat hesap detaylarınızı girmediniz."
 
 msgid "You have selected an invalid audio type setting"
 msgstr "Geçersiz ses tipi ayarı seçtiniz"
@@ -3273,8 +3315,8 @@ msgid "You will need to restart Clementine if you change the language."
 msgstr "Dili değiştirdiyseniz programı yeniden başlatmanız gerekmektedir."
 
 msgid ""
-"You will not be able to play Last.fm radio stations as you are not a Last.fm "
-"subscriber."
+"You will not be able to play Last.fm radio stations as you are not a Last.fm"
+" subscriber."
 msgstr ""
 "Last.fm abonesi olmadığınız için Last.fm kanallarını dinleyemeyeceksiniz."
 
@@ -3319,7 +3361,7 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "Sıfır"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "add %n songs"
 msgstr "%n şarkıyı ekle"
 
@@ -3408,7 +3450,7 @@ msgstr "seçenekler"
 msgid "press enter"
 msgstr "enter'a basın"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "remove %n songs"
 msgstr "%n şarkıyı kaldır"
 
@@ -3428,79 +3470,4 @@ msgstr "durdur"
 msgid "track %1"
 msgstr "parça %1"
 
-#~ msgid "Are you sure you want to install the following scripts?"
-#~ msgstr "Aşağıdaki betikleri yüklemek istediğinize emin misiniz?"
 
-#~ msgid "Clementine scripts"
-#~ msgstr "Clementine betikleri"
-
-#~ msgid "Context:"
-#~ msgstr "İçerik:"
-
-#~ msgid "Developer mode"
-#~ msgstr "Geliştirici kipi"
-
-#~ msgid "Disable"
-#~ msgstr "Pasifleştir"
-
-#~ msgid "Enable"
-#~ msgstr "Etkinleştir"
-
-#~ msgid "Enter an URL to download a cover from the Internet:"
-#~ msgstr "Kapağı internetten indirmek için bir URL girin:"
-
-#~ msgid "Error installing script"
-#~ msgstr "Betik indirirken bir hata oluştu"
-
-#~ msgid "Error opening script archive"
-#~ msgstr "Betik açılırken bir hata oluştu"
-
-#~ msgid "Get new scripts"
-#~ msgstr "Yeni betik indir"
-
-#~ msgid "Global Shortcuts"
-#~ msgstr "Genel Kısayollar"
-
-#~ msgid "Install from file..."
-#~ msgstr "Dosyadan yükle..."
-
-#~ msgid "Install script file"
-#~ msgstr "Betik dosyası yükle"
-
-#~ msgid "Install scripts"
-#~ msgstr "Betik yükle"
-
-#~ msgid "My scripts"
-#~ msgstr "Betiklerim"
-
-#~ msgid "Please fill in the blanks to login into Last.fm"
-#~ msgstr "Last.fm'e giriş yapmak için lütfen boşlukları doldurun"
-
-#~ msgid "Python console"
-#~ msgstr "Python konsolu"
-
-#~ msgid "Reload"
-#~ msgstr "Yeniden yükle"
-
-#~ msgid "Script Manager"
-#~ msgstr "Betik Yöneticisi"
-
-#~ msgid "Settings..."
-#~ msgstr "Ayarlar..."
-
-#~ msgid "Some files failed to install.  The script may not work correctly."
-#~ msgstr ""
-#~ "Bazı dosyaları yüklemede başarısız olundu. Betik düzgün çalışmayabilir."
-
-#~ msgid "The '%1' script was modified, you might have to reload it"
-#~ msgstr "'%1' betiği değiştirilmiş, yeniden yüklemeniz gerekebilir."
-
-#~ msgid "This is not a valid Clementine script file."
-#~ msgstr "Bu geçerli bir Clementine betik dosyası değil."
-
-#~ msgid ""
-#~ "Warning: scripts have full access to your computer and your music.  Only "
-#~ "install scripts that you trust."
-#~ msgstr ""
-#~ "Uyarı: betikler bilgisayarınızın ve müziklerinizin üzerinde tüm yetkiye "
-#~ "sahiptir. Sadece güvendiğiniz betikleri yükleyin."

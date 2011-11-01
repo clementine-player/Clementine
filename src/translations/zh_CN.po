@@ -1,23 +1,19 @@
-# Chinese (Simplified) translation for clementine
-# Copyright (c) 2011 Free Software Foundation, Inc.
-# This file is distributed under the same license as the clementine package.
+# Clementine.
+# Copyright (C) 2010 David Sansome
+# This file is distributed under the same license as the Clementine package.
+# 
+# Translators:
 # Aron Xu <aronxu@gnome.org>, 2011.
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: clementine trunk\n"
-"Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/"
-"list\n"
-"POT-Creation-Date: 2011-06-26 20:31+0000\n"
-"PO-Revision-Date: 2011-07-16 03:58+0000\n"
-"Last-Translator: hudi <Unknown>\n"
-"Language-Team: Chinese (simplified) <i18n-zh@googlegroups.com>\n"
-"Language: zh\n"
-"MIME-Version: 1.0\n"
+"Project-Id-Version: Clementine Music Player\n"
+"Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
+"PO-Revision-Date: 2011-11-01 04:40+0000\n"
+"Last-Translator: clementinebuildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-07-17 04:43+0000\n"
-"X-Generator: Launchpad (build 13405)\n"
+"Language: zh_CN\n"
+"Plural-Forms: nplurals=1; plural=0\n"
 
 msgid " kbps"
 msgstr " kbps"
@@ -90,15 +86,15 @@ msgstr "%L1 位收听者"
 msgid "%L1 total plays"
 msgstr ""
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n failed"
 msgstr "%n 失败"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n finished"
 msgstr "%n 完成"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n remaining"
 msgstr "%n 剩余"
 
@@ -110,6 +106,9 @@ msgstr "居中(&C)"
 
 msgid "&Custom"
 msgstr "自定义(&C)"
+
+msgid "&Extras"
+msgstr "附件"
 
 msgid "&Help"
 msgstr "帮助"
@@ -124,14 +123,26 @@ msgstr "隐藏(&H)..."
 msgid "&Left"
 msgstr "左(&L)"
 
+msgid "&Music"
+msgstr "音乐"
+
 msgid "&None"
 msgstr "无(&N)"
+
+msgid "&Playlist"
+msgstr "播放列表"
 
 msgid "&Quit"
 msgstr "退出(&Q)"
 
+msgid "&Repeat mode"
+msgstr "循环模式"
+
 msgid "&Right"
 msgstr "右(&R)"
+
+msgid "&Shuffle mode"
+msgstr ""
 
 msgid "&Stretch columns to fit window"
 msgstr "拉伸栏以适应窗口(&S)"
@@ -172,8 +183,7 @@ msgstr ""
 msgid ""
 "<p>Tokens start with %, for example: %artist %album %title </p>\n"
 "\n"
-"<p>If you surround sections of text that contain a token with curly-braces, "
-"that section will be hidden if the token is empty.</p>"
+"<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
 msgstr ""
 
 msgid "A Grooveshark Anywhere account is required."
@@ -186,11 +196,10 @@ msgid ""
 "A smart playlist is a dynamic list of songs that come from your library.  "
 "There are different types of smart playlist that offer different ways of "
 "selecting songs."
-msgstr ""
-"智能播放列表是产生于您的媒体库的动态列表。不同的智能播放列表提供帮您选歌的不"
-"同方式。"
+msgstr "智能播放列表是产生于您的媒体库的动态列表。不同的智能播放列表提供帮您选歌的不同方式。"
 
-msgid "A song will be included in the playlist if it matches these conditions."
+msgid ""
+"A song will be included in the playlist if it matches these conditions."
 msgstr "一首歌如果满足这些条件就会被加入此播放列表。"
 
 msgid "A-Z"
@@ -650,10 +659,9 @@ msgstr "Clementine 可自动将要复制到设备的文件转换为它可以播�
 
 msgid ""
 "Clementine can be controlled remotely by an Android phone.  To enable this "
-"feature log in with the same Google account that is configured on your phone."
-msgstr ""
-"Clementine 可通过 Andriod 手机远程控制。要启用此特性，请使用和手机上相同的 "
-"Google 帐户登录。"
+"feature log in with the same Google account that is configured on your "
+"phone."
+msgstr "Clementine 可通过 Andriod 手机远程控制。要启用此特性，请使用和手机上相同的 Google 帐户登录。"
 
 msgid "Clementine can show a message when the track changes."
 msgstr "Clementine 可在音轨发生变化时显示一条消息。"
@@ -665,7 +673,8 @@ msgstr "Clementine无法加载projectM可视化效果.请确定您已正确安�
 
 msgid ""
 "Clementine couldn't fetch your subscription status since there are problems "
-"with your connection. Played tracks will be cached and sent later to Last.fm."
+"with your connection. Played tracks will be cached and sent later to "
+"Last.fm."
 msgstr ""
 
 msgid "Clementine image viewer"
@@ -697,6 +706,9 @@ msgstr "俱乐部"
 
 msgid "Color"
 msgstr "颜色"
+
+msgid "Combine identical results from different sources"
+msgstr ""
 
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr ""
@@ -1105,6 +1117,12 @@ msgstr "播放列表显示背景图片"
 msgid "Enable shortcuts only when Clementine is focused"
 msgstr "仅当 Clementine 在焦点时启用快捷键"
 
+msgid ""
+"Enable sources below to include them in Global Search results.  When "
+"identical results are available from more than one source, ones at the top "
+"will take priority."
+msgstr ""
+
 msgid "Enable/disable Last.fm scrobbling"
 msgstr ""
 
@@ -1180,9 +1198,6 @@ msgstr "曾经播放"
 msgid "Except between tracks on the same album or in the same CUE sheet"
 msgstr "同一专辑歌曲或者同一CUE sheet不淡出"
 
-msgid "&Extras"
-msgstr "附件"
-
 msgid "F1"
 msgstr "F1"
 
@@ -1215,6 +1230,9 @@ msgstr "淡出时长"
 
 msgid "Fast"
 msgstr "快速"
+
+msgid "Favorites"
+msgstr ""
 
 msgid "Favourite tracks"
 msgstr "最喜爱的音轨"
@@ -1297,9 +1315,7 @@ msgstr "忘记设备"
 msgid ""
 "Forgetting a device will remove it from this list and Clementine will have "
 "to rescan all the songs again next time you connect it."
-msgstr ""
-"忘记设备将从列表删除该设备.如果下次您再次插入该设备,Clementine将重新扫描所有"
-"歌曲."
+msgstr "忘记设备将从列表删除该设备.如果下次您再次插入该设备,Clementine将重新扫描所有歌曲."
 
 msgid "Form"
 msgstr "表格"
@@ -1328,6 +1344,9 @@ msgstr "高音"
 msgid "GStreamer audio engine"
 msgstr "GStreamer 音频引擎"
 
+msgid "General"
+msgstr ""
+
 msgid "General settings"
 msgstr "常规设置"
 
@@ -1342,6 +1361,9 @@ msgstr ""
 
 msgid "Give it a name:"
 msgstr "给它起个名字"
+
+msgid "Global Search"
+msgstr ""
 
 msgid "Global search"
 msgstr ""
@@ -1404,6 +1426,9 @@ msgstr "硬件信息"
 msgid "Hardware information is only available while the device is connected."
 msgstr "硬件信息仅在设备连接上后可用。"
 
+msgid "Hide all other search boxes"
+msgstr ""
+
 msgid "High"
 msgstr "高"
 
@@ -1436,8 +1461,8 @@ msgid "Identifying song"
 msgstr "识别曲目"
 
 msgid ""
-"If you continue, this device will work slowly and songs copied to it may not "
-"work."
+"If you continue, this device will work slowly and songs copied to it may not"
+" work."
 msgstr "如果您选择继续,设备运行将会变慢并且复制歌曲工作可能无法正常进行."
 
 msgid ""
@@ -1457,9 +1482,7 @@ msgstr "图像 (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgid ""
 "In dynamic mode new tracks will be chosen and added to the playlist every "
 "time a song finishes."
-msgstr ""
-"在动态模式中, 每次歌曲播放完之后会被选择并添加新歌曲到播放列表.使用动态模式将"
-"忽略您的播放列表大小设定值."
+msgstr "在动态模式中, 每次歌曲播放完之后会被选择并添加新歌曲到播放列表.使用动态模式将忽略您的播放列表大小设定值."
 
 msgid "Inbox"
 msgstr "收件夹"
@@ -1469,6 +1492,9 @@ msgstr "在提示中中加入专辑封面"
 
 msgid "Include all songs"
 msgstr "包含所有的歌曲"
+
+msgid "Include keyboard shortcut help in the tooltip"
+msgstr ""
 
 msgid "Increase the volume by 4%"
 msgstr "以 4% 为单位增大音量"
@@ -1487,6 +1513,9 @@ msgstr ""
 
 msgid "Internet"
 msgstr "互联网"
+
+msgid "Internet providers"
+msgstr ""
 
 msgid "Invalid API key"
 msgstr "无效的 API 密钥"
@@ -1824,9 +1853,6 @@ msgstr "移动至音乐库..."
 msgid "Move up"
 msgstr "上移"
 
-msgid "&Music"
-msgstr "音乐"
-
 msgid "Music (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma *.mp4 *.spx *.wav)"
 msgstr "音乐文件(*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma *.mp4 *.spx *.wav)"
 
@@ -1951,6 +1977,9 @@ msgstr "邻居不足"
 msgid "Not installed"
 msgstr ""
 
+msgid "Not logged in"
+msgstr ""
+
 msgid "Not mounted - double click to mount"
 msgstr "尚未挂载 - 双击进行挂载"
 
@@ -1991,6 +2020,9 @@ msgstr "打开设备"
 msgid "Open dir.xiph.org in browser"
 msgstr "在浏览器中打开 dir.xiph.org"
 
+msgid "Open file..."
+msgstr ""
+
 msgid "Open in new playlist"
 msgstr "在新播放列表中打开"
 
@@ -1999,9 +2031,6 @@ msgstr "在浏览器中打开 jamendo.com"
 
 msgid "Open magnatune.com in browser"
 msgstr "在浏览器中打开 magnatune.com"
-
-msgid "Open media..."
-msgstr "打开媒体..."
 
 msgid "Open somafm.com in browser"
 msgstr "在浏览器中打开 somafm.com"
@@ -2120,7 +2149,7 @@ msgstr ""
 msgid "Player options"
 msgstr "播放器选项"
 
-msgid "&Playlist"
+msgid "Playlist"
 msgstr "播放列表"
 
 msgid "Playlist finished"
@@ -2310,9 +2339,6 @@ msgstr "循环"
 msgid "Repeat album"
 msgstr "专辑循环"
 
-msgid "&Repeat mode"
-msgstr "循环模式"
-
 msgid "Repeat playlist"
 msgstr "播放列表循环"
 
@@ -2348,6 +2374,9 @@ msgstr "重置播放计数"
 
 msgid "Restrict to ASCII characters"
 msgstr "仅使用 ASCII 字符"
+
+msgid "Results"
+msgstr ""
 
 msgid "Rock"
 msgstr "摇滚"
@@ -2526,6 +2555,9 @@ msgstr "系统托盘气泡通知"
 msgid "Show a pretty OSD"
 msgstr "显示漂亮的 OSD"
 
+msgid "Show a tooltip with more information about each result"
+msgstr ""
+
 msgid "Show above status bar"
 msgstr "在状态栏之上显示"
 
@@ -2563,6 +2595,9 @@ msgstr ""
 msgid "Show the \"love\" and \"ban\" buttons"
 msgstr "显示“标记喜爱”和“禁止”按钮"
 
+msgid "Show the Global Search box above the sidebar"
+msgstr ""
+
 msgid "Show the scrobble button in the main window"
 msgstr "在主窗体中显示提交按钮"
 
@@ -2579,9 +2614,6 @@ msgid "Shuffle all"
 msgstr ""
 
 msgid "Shuffle by album"
-msgstr ""
-
-msgid "&Shuffle mode"
 msgstr ""
 
 msgid "Shuffle playlist"
@@ -2652,6 +2684,9 @@ msgstr "排序曲目"
 
 msgid "Sorting"
 msgstr "正在排序"
+
+msgid "Sources"
+msgstr ""
 
 msgid "Speex"
 msgstr ""
@@ -2841,8 +2876,8 @@ msgid "This album is not available in the requested format"
 msgstr ""
 
 msgid ""
-"This device must be connected and opened before Clementine can see what file "
-"formats it supports."
+"This device must be connected and opened before Clementine can see what file"
+" formats it supports."
 msgstr ""
 
 msgid "This device supports the following file formats:"
@@ -2861,8 +2896,7 @@ msgstr "这是IPOD设备,但Clementine编译时未包含libgpod支持."
 msgid ""
 "This is the first time you have connected this device.  Clementine will now "
 "scan the device to find music files - this may take some time."
-msgstr ""
-"这是您第一次连接该设备.Clementine将扫描设备上的音乐文件-这需要花费一些时间."
+msgstr "这是您第一次连接该设备.Clementine将扫描设备上的音乐文件-这需要花费一些时间."
 
 msgid ""
 "This playlist will be removed; the action can't be undone. Are you sure you "
@@ -3019,6 +3053,9 @@ msgstr "已使用"
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr ""
 
+msgid "User interface"
+msgstr ""
+
 msgid "Username"
 msgstr "用户名"
 
@@ -3030,9 +3067,6 @@ msgstr "VBR MP3"
 
 msgid "Variable bit rate"
 msgstr ""
-
-msgid "Various Artists"
-msgstr "群星"
 
 msgid "Various artists"
 msgstr "群星"
@@ -3082,8 +3116,7 @@ msgid "When Clementine starts"
 msgstr "Clementine 启动时"
 
 msgid ""
-"When looking for album art Clementine will first look for picture files that "
-"contain one of these words.\n"
+"When looking for album art Clementine will first look for picture files that contain one of these words.\n"
 "If there are no matches then it will use the largest image in the directory."
 msgstr ""
 "当查找专辑封面时,Clementine将首先查找包含这些关键词的图片.\n"
@@ -3171,24 +3204,25 @@ msgid ""
 msgstr ""
 
 msgid ""
-"You can listen to Magnatune songs for free without an account.  Purchasing a "
-"membership removes the messages at the end of each track."
+"You can listen to Magnatune songs for free without an account.  Purchasing a"
+" membership removes the messages at the end of each track."
 msgstr ""
 
 msgid "You can listen to background streams at the same time as other music."
 msgstr "在聆听音乐的同时,您也可以同时后台收听其它流媒体."
 
 msgid ""
-"You can scrobble tracks for free, but only <span style=\" font-weight:600;"
-"\">paid subscribers</span> can stream Last.fm radio from Clementine."
+"You can scrobble tracks for free, but only <span style=\" font-"
+"weight:600;\">paid subscribers</span> can stream Last.fm radio from "
+"Clementine."
 msgstr ""
 "您可以免费提交收听的音乐,但是只有 <span style=\" font-\r\n"
 "weight:600;\">付费用户</span>才可以使用Clementine收听Last.fm提供的流媒体."
 
 msgid ""
-"You can use your Wii Remote as a remote control for Clementine.  <a href="
-"\"http://www.clementine-player.org/wiimote\">See the page on the Clementine "
-"wiki</a> for more information.\n"
+"You can use your Wii Remote as a remote control for Clementine.  <a "
+"href=\"http://www.clementine-player.org/wiimote\">See the page on the "
+"Clementine wiki</a> for more information.\n"
 msgstr ""
 
 msgid "You do not have a Grooveshark Anywhere account."
@@ -3218,8 +3252,8 @@ msgid "You will need to restart Clementine if you change the language."
 msgstr "如果更改语言，您需要重启 Clementine 使设置生效。"
 
 msgid ""
-"You will not be able to play Last.fm radio stations as you are not a Last.fm "
-"subscriber."
+"You will not be able to play Last.fm radio stations as you are not a Last.fm"
+" subscriber."
 msgstr ""
 
 #, qt-format
@@ -3240,8 +3274,7 @@ msgid ""
 "for automatic tag fetching.  Try installing the 'gstreamer-plugins-bad' "
 "package."
 msgstr ""
-"您计算机上的gstreamer缺少ofa插件.自动获取标签需要该插件,您可以安装 "
-"'gstreamer-plugins-bad'以解决该问题."
+"您计算机上的gstreamer缺少ofa插件.自动获取标签需要该插件,您可以安装 'gstreamer-plugins-bad'以解决该问题."
 
 msgid "Your library is empty!"
 msgstr "您的音乐库是空的！"
@@ -3262,7 +3295,7 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "00"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "add %n songs"
 msgstr "添加 %n 首曲目"
 
@@ -3351,7 +3384,7 @@ msgstr "选项"
 msgid "press enter"
 msgstr ""
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "remove %n songs"
 msgstr "移除 %n 歌"
 
@@ -3371,135 +3404,4 @@ msgstr "停止"
 msgid "track %1"
 msgstr "音轨 %1"
 
-#~ msgid "Are you sure you want to install the following scripts?"
-#~ msgstr "你确定要安装下列脚本?"
 
-#~ msgid "Clementine scripts"
-#~ msgstr "Clementine 脚本"
-
-#~ msgid "Context:"
-#~ msgstr "上下文："
-
-#~ msgid "Developer mode"
-#~ msgstr "开发者模式"
-
-#~ msgid "Disable"
-#~ msgstr "禁用"
-
-#~ msgid "Enable"
-#~ msgstr "启用"
-
-#~ msgid "Enter an URL to download a cover from the Internet:"
-#~ msgstr "输入 URL 以便从网络下载封面："
-
-#~ msgid "Error installing script"
-#~ msgstr "安装脚本出错"
-
-#~ msgid "Error opening script archive"
-#~ msgstr "打开脚本存档出错"
-
-#~ msgid "Get new scripts"
-#~ msgstr "获取新的脚本"
-
-#~ msgid "Global Shortcuts"
-#~ msgstr "全局快捷键"
-
-#~ msgid "Install from file..."
-#~ msgstr "从文件安装..."
-
-#~ msgid "Install script file"
-#~ msgstr "安装脚本文件"
-
-#~ msgid "Install scripts"
-#~ msgstr "安装脚本"
-
-#~ msgid "My scripts"
-#~ msgstr "我的脚本"
-
-#~ msgid "Please fill in the blanks to login into Last.fm"
-#~ msgstr "输入相关信息已以登录Last.fm"
-
-#~ msgid "Python console"
-#~ msgstr "Python控制台"
-
-#~ msgid "Reload"
-#~ msgstr "重新载入"
-
-#~ msgid "Script Manager"
-#~ msgstr "脚本管理器"
-
-#~ msgid "Settings..."
-#~ msgstr "设置..."
-
-#~ msgid "Some files failed to install.  The script may not work correctly."
-#~ msgstr "一些文件无法安装.该脚本可能无法正常工作."
-
-#~ msgid "The '%1' script was modified, you might have to reload it"
-#~ msgstr "脚本\"%1\"已修改,您需要重新加载"
-
-#~ msgid "This is not a valid Clementine script file."
-#~ msgstr "这不是一个合法的Clementine脚本文件"
-
-#~ msgid "Select engine"
-#~ msgstr "选择引擎"
-
-#~ msgid "Options"
-#~ msgstr "选项"
-
-#~ msgid "Enter a name for the new playlist"
-#~ msgstr "输入新播放列表的名称"
-
-#~ msgid "Hide %1"
-#~ msgstr "隐藏 %1"
-
-#~ msgid "Hide..."
-#~ msgstr "隐藏..."
-
-#~ msgid "Couldn't load the last.fm radio station: %1"
-#~ msgstr "无法加载 last.fm 电台: %1"
-
-#~ msgid "Delete files..."
-#~ msgstr "删除文件..."
-
-#~ msgid "Editing %n tracks"
-#~ msgstr "编辑 %n 歌曲"
-
-#~ msgid "My Loved Tracks"
-#~ msgstr "我喜欢的音乐"
-
-#~ msgid "Help"
-#~ msgstr "帮助"
-
-#~ msgid "No lyrics could be found"
-#~ msgstr "无法找到歌词"
-
-#~ msgid "%1 other listeners"
-#~ msgstr "%1 位其他听众"
-
-#~ msgid "%1 total plays"
-#~ msgstr "总计播放 %1 次"
-
-#~ msgid "Complete automatically"
-#~ msgstr "自动完成"
-
-#~ msgid ""
-#~ "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm *."
-#~ "tiff)"
-#~ msgstr ""
-#~ "图像文件(*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm *."
-#~ "tiff)"
-
-#~ msgid "Text color"
-#~ msgstr "文本颜色"
-
-#~ msgid "Tools"
-#~ msgstr "工具"
-
-#~ msgid "Update Library"
-#~ msgstr "更新音乐库"
-
-#~ msgid "Enqueue to playlist"
-#~ msgstr "添加到播放列表"
-
-#~ msgid "Double-clicking a song clears the playlist first"
-#~ msgstr "双击歌曲首先清空播放列表"

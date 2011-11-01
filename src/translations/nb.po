@@ -1,23 +1,19 @@
-# Norwegian Bokmal translation for clementine
-# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
-# This file is distributed under the same license as the clementine package.
+# Clementine.
+# Copyright (C) 2010 David Sansome
+# This file is distributed under the same license as the Clementine package.
+# 
+# Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: clementine\n"
-"Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/"
-"list\n"
-"POT-Creation-Date: 2011-06-26 20:31+0000\n"
-"PO-Revision-Date: 2011-06-10 17:55+0000\n"
-"Last-Translator: Jørund Pedersen <Unknown>\n"
-"Language-Team: Norwegian Bokmal <nb@li.org>\n"
-"Language: nb\n"
-"MIME-Version: 1.0\n"
+"Project-Id-Version: Clementine Music Player\n"
+"Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
+"PO-Revision-Date: 2011-11-01 04:40+0000\n"
+"Last-Translator: clementinebuildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-06-27 04:55+0000\n"
-"X-Generator: Launchpad (build 13168)\n"
+"Language: nb\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
 msgid " kbps"
 msgstr ""
@@ -90,15 +86,15 @@ msgstr ""
 msgid "%L1 total plays"
 msgstr ""
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n failed"
 msgstr ""
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n finished"
 msgstr "%n ferdige"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n remaining"
 msgstr "%n gjenstående"
 
@@ -109,6 +105,9 @@ msgid "&Center"
 msgstr ""
 
 msgid "&Custom"
+msgstr ""
+
+msgid "&Extras"
 msgstr ""
 
 msgid "&Help"
@@ -124,14 +123,26 @@ msgstr "Skjul..."
 msgid "&Left"
 msgstr ""
 
+msgid "&Music"
+msgstr "Musikk"
+
 msgid "&None"
 msgstr ""
+
+msgid "&Playlist"
+msgstr "Spilleliste"
 
 msgid "&Quit"
 msgstr "&Avslutt"
 
+msgid "&Repeat mode"
+msgstr "Repeteringsmodus"
+
 msgid "&Right"
 msgstr ""
+
+msgid "&Shuffle mode"
+msgstr "Stokkemodus"
 
 msgid "&Stretch columns to fit window"
 msgstr ""
@@ -172,8 +183,7 @@ msgstr ""
 msgid ""
 "<p>Tokens start with %, for example: %artist %album %title </p>\n"
 "\n"
-"<p>If you surround sections of text that contain a token with curly-braces, "
-"that section will be hidden if the token is empty.</p>"
+"<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
 msgstr ""
 
 msgid "A Grooveshark Anywhere account is required."
@@ -191,7 +201,8 @@ msgstr ""
 "bibliotek. Det er forskjellige typer av smart spillelister som tilbyr "
 "forskjellige måter å velge sanger."
 
-msgid "A song will be included in the playlist if it matches these conditions."
+msgid ""
+"A song will be included in the playlist if it matches these conditions."
 msgstr ""
 
 msgid "A-Z"
@@ -657,10 +668,11 @@ msgstr ""
 
 msgid ""
 "Clementine can be controlled remotely by an Android phone.  To enable this "
-"feature log in with the same Google account that is configured on your phone."
+"feature log in with the same Google account that is configured on your "
+"phone."
 msgstr ""
-"Du kan benytte en Android telefon til å fjernstyre Clementine. For å benytte "
-"denne funksjonen logger du inn med Google kontoen din som er tilknyttet "
+"Du kan benytte en Android telefon til å fjernstyre Clementine. For å benytte"
+" denne funksjonen logger du inn med Google kontoen din som er tilknyttet "
 "telefonen."
 
 msgid "Clementine can show a message when the track changes."
@@ -670,12 +682,13 @@ msgid ""
 "Clementine could not load any projectM visualisations.  Check that you have "
 "installed Clementine properly."
 msgstr ""
-"Clementine klarte ikke å laste projectM visualiseringer. Sjekk at Clementine "
-"er korrekt installert."
+"Clementine klarte ikke å laste projectM visualiseringer. Sjekk at Clementine"
+" er korrekt installert."
 
 msgid ""
 "Clementine couldn't fetch your subscription status since there are problems "
-"with your connection. Played tracks will be cached and sent later to Last.fm."
+"with your connection. Played tracks will be cached and sent later to "
+"Last.fm."
 msgstr ""
 
 msgid "Clementine image viewer"
@@ -707,6 +720,9 @@ msgstr "Klubbmusikk"
 
 msgid "Color"
 msgstr "Farge"
+
+msgid "Combine identical results from different sources"
+msgstr ""
 
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Komma-separert liste av klasse:level, level er 0-3"
@@ -1119,6 +1135,12 @@ msgstr ""
 msgid "Enable shortcuts only when Clementine is focused"
 msgstr ""
 
+msgid ""
+"Enable sources below to include them in Global Search results.  When "
+"identical results are available from more than one source, ones at the top "
+"will take priority."
+msgstr ""
+
 msgid "Enable/disable Last.fm scrobbling"
 msgstr ""
 
@@ -1195,9 +1217,6 @@ msgstr ""
 msgid "Except between tracks on the same album or in the same CUE sheet"
 msgstr ""
 
-msgid "&Extras"
-msgstr ""
-
 msgid "F1"
 msgstr "F1"
 
@@ -1229,6 +1248,9 @@ msgid "Fading duration"
 msgstr ""
 
 msgid "Fast"
+msgstr ""
+
+msgid "Favorites"
 msgstr ""
 
 msgid "Favourite tracks"
@@ -1341,6 +1363,9 @@ msgstr "Full lys lyd"
 msgid "GStreamer audio engine"
 msgstr "GStreamer lydmotor"
 
+msgid "General"
+msgstr ""
+
 msgid "General settings"
 msgstr "Generelle innstillinger"
 
@@ -1354,6 +1379,9 @@ msgid "Getting streams"
 msgstr ""
 
 msgid "Give it a name:"
+msgstr ""
+
+msgid "Global Search"
 msgstr ""
 
 msgid "Global search"
@@ -1417,6 +1445,9 @@ msgstr ""
 msgid "Hardware information is only available while the device is connected."
 msgstr ""
 
+msgid "Hide all other search boxes"
+msgstr ""
+
 msgid "High"
 msgstr ""
 
@@ -1449,8 +1480,8 @@ msgid "Identifying song"
 msgstr ""
 
 msgid ""
-"If you continue, this device will work slowly and songs copied to it may not "
-"work."
+"If you continue, this device will work slowly and songs copied to it may not"
+" work."
 msgstr ""
 
 msgid ""
@@ -1481,6 +1512,9 @@ msgstr "Inkludér cover i meldingen"
 msgid "Include all songs"
 msgstr ""
 
+msgid "Include keyboard shortcut help in the tooltip"
+msgstr ""
+
 msgid "Increase the volume by 4%"
 msgstr ""
 
@@ -1498,6 +1532,9 @@ msgstr ""
 
 msgid "Internet"
 msgstr "Internett"
+
+msgid "Internet providers"
+msgstr ""
 
 msgid "Invalid API key"
 msgstr "Ugyldig API-nøkkel"
@@ -1835,9 +1872,6 @@ msgstr "Flytt til bibliotek..."
 msgid "Move up"
 msgstr "Flytt opp"
 
-msgid "&Music"
-msgstr "Musikk"
-
 msgid "Music (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma *.mp4 *.spx *.wav)"
 msgstr "Musikk (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma *.mp4 *.spx *.wav)"
 
@@ -1962,6 +1996,9 @@ msgstr ""
 msgid "Not installed"
 msgstr ""
 
+msgid "Not logged in"
+msgstr ""
+
 msgid "Not mounted - double click to mount"
 msgstr ""
 
@@ -2002,6 +2039,9 @@ msgstr ""
 msgid "Open dir.xiph.org in browser"
 msgstr ""
 
+msgid "Open file..."
+msgstr ""
+
 msgid "Open in new playlist"
 msgstr ""
 
@@ -2010,9 +2050,6 @@ msgstr ""
 
 msgid "Open magnatune.com in browser"
 msgstr ""
-
-msgid "Open media..."
-msgstr "Åpne media"
 
 msgid "Open somafm.com in browser"
 msgstr "Hent somafm.com i en nettleser"
@@ -2131,7 +2168,7 @@ msgstr ""
 msgid "Player options"
 msgstr ""
 
-msgid "&Playlist"
+msgid "Playlist"
 msgstr "Spilleliste"
 
 msgid "Playlist finished"
@@ -2321,9 +2358,6 @@ msgstr "Repetér"
 msgid "Repeat album"
 msgstr "Repetér album"
 
-msgid "&Repeat mode"
-msgstr "Repeteringsmodus"
-
 msgid "Repeat playlist"
 msgstr "Gjenta spilleliste"
 
@@ -2358,6 +2392,9 @@ msgid "Reset play counts"
 msgstr ""
 
 msgid "Restrict to ASCII characters"
+msgstr ""
+
+msgid "Results"
 msgstr ""
 
 msgid "Rock"
@@ -2537,6 +2574,9 @@ msgstr "Popp opp informasjon fra systemskuffa"
 msgid "Show a pretty OSD"
 msgstr "Vis en Clementine-spesifikk skrivebordsmelding"
 
+msgid "Show a tooltip with more information about each result"
+msgstr ""
+
 msgid "Show above status bar"
 msgstr ""
 
@@ -2574,6 +2614,9 @@ msgstr ""
 msgid "Show the \"love\" and \"ban\" buttons"
 msgstr "Vis \"Elsk\" og \"Bannlys\" knappene"
 
+msgid "Show the Global Search box above the sidebar"
+msgstr ""
+
 msgid "Show the scrobble button in the main window"
 msgstr ""
 
@@ -2591,9 +2634,6 @@ msgstr "Stokk alle"
 
 msgid "Shuffle by album"
 msgstr "Stokk album for album"
-
-msgid "&Shuffle mode"
-msgstr "Stokkemodus"
 
 msgid "Shuffle playlist"
 msgstr "Bland spilleliste"
@@ -2662,6 +2702,9 @@ msgid "Sort songs by"
 msgstr ""
 
 msgid "Sorting"
+msgstr ""
+
+msgid "Sources"
 msgstr ""
 
 msgid "Speex"
@@ -2853,8 +2896,8 @@ msgid "This album is not available in the requested format"
 msgstr ""
 
 msgid ""
-"This device must be connected and opened before Clementine can see what file "
-"formats it supports."
+"This device must be connected and opened before Clementine can see what file"
+" formats it supports."
 msgstr ""
 
 msgid "This device supports the following file formats:"
@@ -3030,6 +3073,9 @@ msgstr ""
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr ""
 
+msgid "User interface"
+msgstr ""
+
 msgid "Username"
 msgstr "Brukernavn"
 
@@ -3041,9 +3087,6 @@ msgstr ""
 
 msgid "Variable bit rate"
 msgstr ""
-
-msgid "Various Artists"
-msgstr "Diverse artister"
 
 msgid "Various artists"
 msgstr "Diverse artister"
@@ -3093,8 +3136,7 @@ msgid "When Clementine starts"
 msgstr "Når Clementine starter"
 
 msgid ""
-"When looking for album art Clementine will first look for picture files that "
-"contain one of these words.\n"
+"When looking for album art Clementine will first look for picture files that contain one of these words.\n"
 "If there are no matches then it will use the largest image in the directory."
 msgstr ""
 
@@ -3180,22 +3222,23 @@ msgid ""
 msgstr ""
 
 msgid ""
-"You can listen to Magnatune songs for free without an account.  Purchasing a "
-"membership removes the messages at the end of each track."
+"You can listen to Magnatune songs for free without an account.  Purchasing a"
+" membership removes the messages at the end of each track."
 msgstr ""
 
 msgid "You can listen to background streams at the same time as other music."
 msgstr ""
 
 msgid ""
-"You can scrobble tracks for free, but only <span style=\" font-weight:600;"
-"\">paid subscribers</span> can stream Last.fm radio from Clementine."
+"You can scrobble tracks for free, but only <span style=\" font-"
+"weight:600;\">paid subscribers</span> can stream Last.fm radio from "
+"Clementine."
 msgstr ""
 
 msgid ""
-"You can use your Wii Remote as a remote control for Clementine.  <a href="
-"\"http://www.clementine-player.org/wiimote\">See the page on the Clementine "
-"wiki</a> for more information.\n"
+"You can use your Wii Remote as a remote control for Clementine.  <a "
+"href=\"http://www.clementine-player.org/wiimote\">See the page on the "
+"Clementine wiki</a> for more information.\n"
 msgstr ""
 
 msgid "You do not have a Grooveshark Anywhere account."
@@ -3225,8 +3268,8 @@ msgid "You will need to restart Clementine if you change the language."
 msgstr ""
 
 msgid ""
-"You will not be able to play Last.fm radio stations as you are not a Last.fm "
-"subscriber."
+"You will not be able to play Last.fm radio stations as you are not a Last.fm"
+" subscriber."
 msgstr ""
 
 #, qt-format
@@ -3267,7 +3310,7 @@ msgstr ""
 msgid "Zero"
 msgstr "Null"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "add %n songs"
 msgstr ""
 
@@ -3356,7 +3399,7 @@ msgstr "innstillinger"
 msgid "press enter"
 msgstr ""
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "remove %n songs"
 msgstr ""
 
@@ -3376,155 +3419,4 @@ msgstr "stopp"
 msgid "track %1"
 msgstr "spor %1"
 
-#~ msgid "Are you sure you want to install the following scripts?"
-#~ msgstr "Er du sikker på at du ønsker å installere følgende script?"
 
-#~ msgid "Hide %1"
-#~ msgstr "Skjul %1"
-
-#~ msgid "Hide..."
-#~ msgstr "Skjul..."
-
-#~ msgid "My Neighbourhood"
-#~ msgstr "Mitt nabolag"
-
-#~ msgid "Neighbours"
-#~ msgstr "Naboer"
-
-#~ msgid "%1's Recommended Radio"
-#~ msgstr "Radio som %1 anbefaler"
-
-#~ msgid "My Loved Tracks"
-#~ msgstr "Spor jeg elsker"
-
-#~ msgid "%1's Radio Station"
-#~ msgstr "%1s radiostasjon"
-
-#~ msgid "%1's Neighbour Radio"
-#~ msgstr "%1s nabolagsradio"
-
-#~ msgid "%1's Loved Tracks"
-#~ msgstr "%1s elskede spor"
-
-#~ msgid "Show section"
-#~ msgstr "Vis del"
-
-#~ msgid "%1's Neighborhood"
-#~ msgstr "%1s nabolag"
-
-#~ msgid "Similar Artists to %1"
-#~ msgstr "Lignende artister til %1"
-
-#~ msgid "%1's Library"
-#~ msgstr "%1s bibliotek"
-
-#~ msgid "Tag Radio: %1"
-#~ msgstr "Merkelappradio: %1"
-
-#~ msgid "Not enough neighbours"
-#~ msgstr "Ikke nok naboer"
-
-#~ msgid "Editing %n tracks"
-#~ msgstr "Endrer %n spor"
-
-#~ msgid ""
-#~ "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm *."
-#~ "tiff)"
-#~ msgstr ""
-#~ "Bildefiler (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm "
-#~ "*.tiff)"
-
-#~ msgid "ASF"
-#~ msgstr "ASF"
-
-#~ msgid "Ogg FLAC"
-#~ msgstr "Ogg FLAC"
-
-#~ msgid "MP4"
-#~ msgstr "MP4"
-
-#~ msgid "Configure Clementine..."
-#~ msgstr "Konfigurér Clementine..."
-
-#~ msgid "Add media..."
-#~ msgstr "Legg til media..."
-
-#~ msgid "Radio"
-#~ msgstr "Radio"
-
-#~ msgid "Tools"
-#~ msgstr "Verktøy"
-
-#~ msgid "Help"
-#~ msgstr "Hjelp"
-
-#~ msgid "Options"
-#~ msgstr "Instillinger"
-
-#~ msgid "Behaviour"
-#~ msgstr "Oppførsel"
-
-#~ msgid "Fadeout"
-#~ msgstr "Fadeut"
-
-#~ msgid "No fadeout"
-#~ msgstr "Ingen utfading"
-
-#~ msgid "Text color"
-#~ msgstr "Tekstfarge"
-
-#~ msgid "Choose manual cover..."
-#~ msgstr "Velg omslag manuelt..."
-
-#~ msgid "Version"
-#~ msgstr "Versjon"
-
-#~ msgid "Save this stream in the Radio tab"
-#~ msgstr "Lagre denne strømmen"
-
-#~ msgid "Radio service couldn't be loaded :-("
-#~ msgstr "Kunne ikke laste inn radiotjeneste :-("
-
-#~ msgid "[click to edit]"
-#~ msgstr "[klikk for å endre]"
-
-#~ msgid "Loading audio engine"
-#~ msgstr "Laster lydmotor"
-
-#~ msgid "Enter your Last.fm details below:"
-#~ msgstr "Fyll inn din Last.fm brukerinformasjon under:"
-
-#~ msgid "There is already a preset with that name"
-#~ msgstr "Det er allerede en innstilling med dette navnet"
-
-#~ msgid "New preset"
-#~ msgstr "Ny innstilling"
-
-#~ msgid ""
-#~ "Note that you must be a <span style=\" font-weight:600;\">paid "
-#~ "subscriber</span> to listen to Last.fm radio from within Clementine."
-#~ msgstr ""
-#~ "Vennligst anmerk at du må være en <span style=\" font-weight:600;"
-#~ "\">betalt abonnent</span> for å lytte til Last.fm radio i Clementine."
-
-#~ msgid "Fadeout duration"
-#~ msgstr "Hvor lenge utfasingen skal vare"
-
-#~ msgid "Delete files..."
-#~ msgstr "Slett filer …"
-
-#~ msgid "%1 other listeners"
-#~ msgstr "%1 andre lyttere"
-
-#~ msgid ""
-#~ "A song will be included in the playlist if it matches all of these "
-#~ "conditions."
-#~ msgstr ""
-#~ "En sang vil bli inkludert i spillelisten hvis den passer alle disse "
-#~ "kondisjonene."
-
-#~ msgid "Add as new playlist..."
-#~ msgstr "Legg til som ny spilleliste..."
-
-#~ msgid "Artist A-Z"
-#~ msgstr "Artist A-Z"

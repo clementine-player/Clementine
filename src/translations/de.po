@@ -1,24 +1,20 @@
-# German translation for clementine
-# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
-# This file is distributed under the same license as the clementine package.
-#
+# Clementine.
+# Copyright (C) 2010 David Sansome
+# This file is distributed under the same license as the Clementine package.
+# 
+# Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
 # Martin Herkt <luck3r@phicode.de>, 2010.
 msgid ""
 msgstr ""
-"Project-Id-Version: clementine\n"
-"Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/"
-"list\n"
-"POT-Creation-Date: 2011-06-26 20:31+0000\n"
-"PO-Revision-Date: 2011-08-17 19:09+0000\n"
-"Last-Translator: Max Ludwig <Unknown>\n"
-"Language-Team: German <de@li.org>\n"
-"Language: de\n"
-"MIME-Version: 1.0\n"
+"Project-Id-Version: Clementine Music Player\n"
+"Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
+"PO-Revision-Date: 2011-11-01 04:40+0000\n"
+"Last-Translator: clementinebuildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-08-18 04:48+0000\n"
-"X-Generator: Launchpad (build 13697)\n"
+"Language: de\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
 msgid " kbps"
 msgstr " kbps"
@@ -91,15 +87,15 @@ msgstr "%L1 andere Zuhörer"
 msgid "%L1 total plays"
 msgstr "Insgesamt %L1 mal abgespielt"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n failed"
 msgstr "%n fehlgeschlagen"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n finished"
 msgstr "%n abgeschlossen"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n remaining"
 msgstr "%n verbleibend"
 
@@ -111,6 +107,9 @@ msgstr "&Zentriert"
 
 msgid "&Custom"
 msgstr "&Benutzerdefiniert"
+
+msgid "&Extras"
+msgstr "Extras"
 
 msgid "&Help"
 msgstr "Hilfe"
@@ -125,14 +124,26 @@ msgstr "Verstecken..."
 msgid "&Left"
 msgstr "&Links"
 
+msgid "&Music"
+msgstr "Musik"
+
 msgid "&None"
 msgstr "&Keine"
+
+msgid "&Playlist"
+msgstr "Wiedergabeliste"
 
 msgid "&Quit"
 msgstr "&Beenden"
 
+msgid "&Repeat mode"
+msgstr "Endlosschleife"
+
 msgid "&Right"
 msgstr "&Rechts"
+
+msgid "&Shuffle mode"
+msgstr "Zufallsmodus"
 
 msgid "&Stretch columns to fit window"
 msgstr "Spalten an Fenstergröße anpassen"
@@ -173,13 +184,11 @@ msgstr ""
 msgid ""
 "<p>Tokens start with %, for example: %artist %album %title </p>\n"
 "\n"
-"<p>If you surround sections of text that contain a token with curly-braces, "
-"that section will be hidden if the token is empty.</p>"
+"<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
 msgstr ""
 "<p>Schlüsselwörter beginnen mit %, zum Beispiel: %artist %album %title </p>\n"
 "\n"
-"<p>Steht ein Textbereich in geschweiften Klammern, wird dieser nicht "
-"angezeigt, falls das Schlüsselwort leer ist.</p>"
+"<p>Steht ein Textbereich in geschweiften Klammern, wird dieser nicht angezeigt, falls das Schlüsselwort leer ist.</p>"
 
 msgid "A Grooveshark Anywhere account is required."
 msgstr ""
@@ -197,7 +206,8 @@ msgstr ""
 "Wiedergabelisten, die unterschiedliche Möglichkeiten bieten, eine Auswahl "
 "von Songs zu treffen."
 
-msgid "A song will be included in the playlist if it matches these conditions."
+msgid ""
+"A song will be included in the playlist if it matches these conditions."
 msgstr ""
 "Ein Titel wird in die Wiedergabeliste aufgenommen, wenn er die folgenden "
 "Bedingungen erfüllt."
@@ -249,7 +259,8 @@ msgid "Add Stream"
 msgstr "Stream hinzufügen"
 
 msgid "Add a new line if supported by the notification type"
-msgstr "Zeilenumbruch einfügen (falls vom Benachrichtigungssystem unterstützt)"
+msgstr ""
+"Zeilenumbruch einfügen (falls vom Benachrichtigungssystem unterstützt)"
 
 msgid "Add action"
 msgstr "Aktion hinzufügen"
@@ -636,8 +647,8 @@ msgstr "Cover selbst auswählen"
 msgid ""
 "Choose the websites you want Clementine to use when searching for lyrics."
 msgstr ""
-"Internetseite auswählen, welche Clementine verwenden soll um nach Liedtexten "
-"zu suchen"
+"Internetseite auswählen, welche Clementine verwenden soll um nach Liedtexten"
+" zu suchen"
 
 msgid "Classical"
 msgstr "Klassisch"
@@ -664,12 +675,13 @@ msgid ""
 "Clementine can automatically convert the music you copy to this device into "
 "a format that it can play."
 msgstr ""
-"Clementine kann die Musik, die Sie auf dieses Gerät kopieren, automatisch in "
-"ein Format konvertieren, welches das Gerät abspielen kann."
+"Clementine kann die Musik, die Sie auf dieses Gerät kopieren, automatisch in"
+" ein Format konvertieren, welches das Gerät abspielen kann."
 
 msgid ""
 "Clementine can be controlled remotely by an Android phone.  To enable this "
-"feature log in with the same Google account that is configured on your phone."
+"feature log in with the same Google account that is configured on your "
+"phone."
 msgstr ""
 "Clementine kann von Android aus ferngesteuert werden. Um diese Funktion zu "
 "aktivieren mit dem auf dem Telefon eingerichteten Google-Account anmelden."
@@ -681,12 +693,13 @@ msgid ""
 "Clementine could not load any projectM visualisations.  Check that you have "
 "installed Clementine properly."
 msgstr ""
-"Clementine konnte keine projectM-Visualisierungen laden. Überprüfen Sie Ihre "
-"Installation."
+"Clementine konnte keine projectM-Visualisierungen laden. Überprüfen Sie Ihre"
+" Installation."
 
 msgid ""
 "Clementine couldn't fetch your subscription status since there are problems "
-"with your connection. Played tracks will be cached and sent later to Last.fm."
+"with your connection. Played tracks will be cached and sent later to "
+"Last.fm."
 msgstr ""
 "Clementine konnte Ihre Abo-Status nicht erhalten aufgrund von Problemen mit "
 "Ihrer Verbindung."
@@ -720,6 +733,9 @@ msgstr "Club"
 
 msgid "Color"
 msgstr "Farbe"
+
+msgid "Combine identical results from different sources"
+msgstr ""
 
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Komma getrennte Liste mit \"class:level\" (level zwischen 0-3)"
@@ -1134,6 +1150,12 @@ msgstr "Hintergrundbild für die Wiedergabeliste aktivieren"
 msgid "Enable shortcuts only when Clementine is focused"
 msgstr "Tastenkürzel nur aktivieren, wenn Clementine fokussiert ist"
 
+msgid ""
+"Enable sources below to include them in Global Search results.  When "
+"identical results are available from more than one source, ones at the top "
+"will take priority."
+msgstr ""
+
 msgid "Enable/disable Last.fm scrobbling"
 msgstr "Last.fm Scrobbling aktivieren/deaktivieren"
 
@@ -1211,9 +1233,6 @@ msgstr "Irgendwann gespielt"
 msgid "Except between tracks on the same album or in the same CUE sheet"
 msgstr "Außer für Stücke des gleichen Albums oder des gleichen Cuesheets."
 
-msgid "&Extras"
-msgstr "Extras"
-
 msgid "F1"
 msgstr "F1"
 
@@ -1246,6 +1265,9 @@ msgstr "Dauer"
 
 msgid "Fast"
 msgstr "Schnell"
+
+msgid "Favorites"
+msgstr ""
 
 msgid "Favourite tracks"
 msgstr "Lieblingsstücke"
@@ -1331,8 +1353,8 @@ msgid ""
 "Forgetting a device will remove it from this list and Clementine will have "
 "to rescan all the songs again next time you connect it."
 msgstr ""
-"Das Vergessen eines Geräts wird es aus dieser Liste entfernen und Clementine "
-"wird beim nächsten Verbinden alle Stücke erneut erfassen müssen."
+"Das Vergessen eines Geräts wird es aus dieser Liste entfernen und Clementine"
+" wird beim nächsten Verbinden alle Stücke erneut erfassen müssen."
 
 msgid "Form"
 msgstr "Formular"
@@ -1361,6 +1383,9 @@ msgstr "Maximale Höhen"
 msgid "GStreamer audio engine"
 msgstr "GStreamer Audio Engine"
 
+msgid "General"
+msgstr ""
+
 msgid "General settings"
 msgstr "Allgemeine Einstellungen"
 
@@ -1375,6 +1400,9 @@ msgstr ""
 
 msgid "Give it a name:"
 msgstr "Namen angeben:"
+
+msgid "Global Search"
+msgstr ""
 
 msgid "Global search"
 msgstr ""
@@ -1439,6 +1467,9 @@ msgstr ""
 "Die Hardwareinformationen sind nur verfügbar, solange das Gerät "
 "angeschlossen ist."
 
+msgid "Hide all other search boxes"
+msgstr ""
+
 msgid "High"
 msgstr "Hoch"
 
@@ -1471,8 +1502,8 @@ msgid "Identifying song"
 msgstr "Lied erkennen"
 
 msgid ""
-"If you continue, this device will work slowly and songs copied to it may not "
-"work."
+"If you continue, this device will work slowly and songs copied to it may not"
+" work."
 msgstr ""
 "Wenn Sie fortfahren, wird das Gerät langsam arbeiten und kopierte Titel "
 "könnten nicht abspielbar sein."
@@ -1481,8 +1512,8 @@ msgid ""
 "If you use the remote on more than one computer, this name will help you "
 "choose which one to connect to on your phone."
 msgstr ""
-"Wenn sie die Fernbedienung mit mehr als einem Computer verwenden, kann ihnen "
-"dieser Name bei der Auswahl der Verbindung auf ihrem Telefon helfen."
+"Wenn sie die Fernbedienung mit mehr als einem Computer verwenden, kann ihnen"
+" dieser Name bei der Auswahl der Verbindung auf ihrem Telefon helfen."
 
 msgid "Ignore \"The\" in artist names"
 msgstr "Ignoriere \"The\" in Künstlernamen"
@@ -1509,6 +1540,9 @@ msgstr "Cover in der Benachrichtigung anzeigen"
 msgid "Include all songs"
 msgstr "Alle Stück einbeziehen"
 
+msgid "Include keyboard shortcut help in the tooltip"
+msgstr ""
+
 msgid "Increase the volume by 4%"
 msgstr "Lautstärke um 4% erhöhen"
 
@@ -1526,6 +1560,9 @@ msgstr "Installiert"
 
 msgid "Internet"
 msgstr "Internet"
+
+msgid "Internet providers"
+msgstr ""
 
 msgid "Invalid API key"
 msgstr "Ungültiger API-Schlüssel"
@@ -1865,9 +1902,6 @@ msgstr "Zur Musiksammlung verschieben..."
 msgid "Move up"
 msgstr "Nach oben"
 
-msgid "&Music"
-msgstr "Musik"
-
 msgid "Music (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma *.mp4 *.spx *.wav)"
 msgstr "Musik (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma *.mp4 *.spx *.wav)"
 
@@ -1994,6 +2028,9 @@ msgstr "Nicht genug Nachbarn"
 msgid "Not installed"
 msgstr "Nicht installiert"
 
+msgid "Not logged in"
+msgstr ""
+
 msgid "Not mounted - double click to mount"
 msgstr "Nicht eingehängt - Doppelklicken zum Einhängen"
 
@@ -2034,6 +2071,9 @@ msgstr "Gerät öffnen"
 msgid "Open dir.xiph.org in browser"
 msgstr "Öffne dir.xiph.org im Browser"
 
+msgid "Open file..."
+msgstr ""
+
 msgid "Open in new playlist"
 msgstr "In neuer Wiedergabeliste öffnen"
 
@@ -2042,9 +2082,6 @@ msgstr "Öffne jamendo.com in einem Browser"
 
 msgid "Open magnatune.com in browser"
 msgstr "magnatune.com im Browser öffnen"
-
-msgid "Open media..."
-msgstr "Öffnen..."
 
 msgid "Open somafm.com in browser"
 msgstr "somafm.com im Browser öffnen"
@@ -2164,7 +2201,7 @@ msgstr "Spielername"
 msgid "Player options"
 msgstr "Player Einstellungen"
 
-msgid "&Playlist"
+msgid "Playlist"
 msgstr "Wiedergabeliste"
 
 msgid "Playlist finished"
@@ -2354,9 +2391,6 @@ msgstr "Wiederholen"
 msgid "Repeat album"
 msgstr "Album wiederholen"
 
-msgid "&Repeat mode"
-msgstr "Endlosschleife"
-
 msgid "Repeat playlist"
 msgstr "Wiedergabeliste wiederholen"
 
@@ -2392,6 +2426,9 @@ msgstr "Wiedergabezähler zurücksetzen"
 
 msgid "Restrict to ASCII characters"
 msgstr "Nur ASCII-Zeichen benutzen"
+
+msgid "Results"
+msgstr ""
 
 msgid "Rock"
 msgstr "Rock"
@@ -2572,6 +2609,9 @@ msgstr "Blase aus dem Benachrichtigungsfeld"
 msgid "Show a pretty OSD"
 msgstr "Clementine-OSD benutzen"
 
+msgid "Show a tooltip with more information about each result"
+msgstr ""
+
 msgid "Show above status bar"
 msgstr "Über der Statusleiste zeigen"
 
@@ -2609,6 +2649,9 @@ msgstr ""
 msgid "Show the \"love\" and \"ban\" buttons"
 msgstr "\"Lieben\" und \"Bannen\" Knöpfe anzeigen"
 
+msgid "Show the Global Search box above the sidebar"
+msgstr ""
+
 msgid "Show the scrobble button in the main window"
 msgstr "Zeige das Scrobble-Zeichen im Hauptfenster"
 
@@ -2626,9 +2669,6 @@ msgstr "Zufällig"
 
 msgid "Shuffle by album"
 msgstr "Zufällig im Album"
-
-msgid "&Shuffle mode"
-msgstr "Zufallsmodus"
 
 msgid "Shuffle playlist"
 msgstr "Wiedergabeliste mischen"
@@ -2698,6 +2738,9 @@ msgstr "Titel sortieren nach"
 
 msgid "Sorting"
 msgstr "Sortierung"
+
+msgid "Sources"
+msgstr ""
 
 msgid "Speex"
 msgstr "Speex"
@@ -2846,8 +2889,8 @@ msgid ""
 "rescan because of the new features listed below:"
 msgstr ""
 "Die Clementine Version, auf die Sie gerade aktualisiert haben, erfordert "
-"eine komplette Aktualisierung Ihrer Musiksammlung, damit die folgenden neuen "
-"Funktionen genutzt werden können:"
+"eine komplette Aktualisierung Ihrer Musiksammlung, damit die folgenden neuen"
+" Funktionen genutzt werden können:"
 
 msgid "There was a problem fetching the metadata from Magnatune"
 msgstr "Beim Holen der Metadaten von Magnatune ist ein Fehler aufgetreten"
@@ -2863,8 +2906,8 @@ msgid ""
 "There were problems deleting some songs.  The following files could not be "
 "deleted:"
 msgstr ""
-"Beim Löschen einiger Titel ist ein Fehler aufgetreten. Die folgenden Dateien "
-"konnten nicht gelöscht werden:"
+"Beim Löschen einiger Titel ist ein Fehler aufgetreten. Die folgenden Dateien"
+" konnten nicht gelöscht werden:"
 
 msgid ""
 "These files will be deleted from disk, are you sure you want to continue?"
@@ -2885,8 +2928,8 @@ msgid ""
 "These settings are used in the \"Transcode Music\" dialog, and when "
 "converting music before copying it to a device."
 msgstr ""
-"Diese Einstellungen werden im \"Musik konvertieren\" Fenster, und wenn Musik "
-"vor dem Kopieren auf ein Gerät konvertiert wird, verwendet."
+"Diese Einstellungen werden im \"Musik konvertieren\" Fenster, und wenn Musik"
+" vor dem Kopieren auf ein Gerät konvertiert wird, verwendet."
 
 msgid "Third level"
 msgstr "Dritte Stufe"
@@ -2902,8 +2945,8 @@ msgid "This album is not available in the requested format"
 msgstr "Das Album ist im gewünschten Format nicht verfügbar"
 
 msgid ""
-"This device must be connected and opened before Clementine can see what file "
-"formats it supports."
+"This device must be connected and opened before Clementine can see what file"
+" formats it supports."
 msgstr ""
 "Dieses Gerät muss verbunden und geöffnet sein, bevor Clementine feststellen "
 "kann, welche Dateiformate es unterstützt."
@@ -3090,6 +3133,9 @@ msgstr "Belegt"
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr ""
 
+msgid "User interface"
+msgstr ""
+
 msgid "Username"
 msgstr "Benutzername"
 
@@ -3101,9 +3147,6 @@ msgstr "VBR MP3"
 
 msgid "Variable bit rate"
 msgstr "Variable Bitrate"
-
-msgid "Various Artists"
-msgstr "Verschiedene Interpreten"
 
 msgid "Various artists"
 msgstr "Verschiedene Interpreten"
@@ -3153,14 +3196,11 @@ msgid "When Clementine starts"
 msgstr "Bei Programmstart"
 
 msgid ""
-"When looking for album art Clementine will first look for picture files that "
-"contain one of these words.\n"
+"When looking for album art Clementine will first look for picture files that contain one of these words.\n"
 "If there are no matches then it will use the largest image in the directory."
 msgstr ""
-"Auf der Suche nach Cover-Bildern wird Clementine zuerst nach Bilddateien "
-"suchen, die eines dieser Wörter enthalten.\n"
-"Falls es keine Treffer gibt, wird das größte Bild aus dem Verzeichnis "
-"ausgewählt."
+"Auf der Suche nach Cover-Bildern wird Clementine zuerst nach Bilddateien suchen, die eines dieser Wörter enthalten.\n"
+"Falls es keine Treffer gibt, wird das größte Bild aus dem Verzeichnis ausgewählt."
 
 msgid "WiFi MAC Address"
 msgstr "W-LAN MAC Adresse"
@@ -3244,8 +3284,8 @@ msgid ""
 msgstr ""
 
 msgid ""
-"You can listen to Magnatune songs for free without an account.  Purchasing a "
-"membership removes the messages at the end of each track."
+"You can listen to Magnatune songs for free without an account.  Purchasing a"
+" membership removes the messages at the end of each track."
 msgstr ""
 "Sie können ohne Benutzerkonto Musik von Magnatune hören. Um die Hinweise am "
 "Ende der einzelnen Stücke zu entfernen, müssen Sie eine Mitgliedschaft "
@@ -3256,20 +3296,21 @@ msgstr ""
 "Sie können zur gleichen Zeit Hintergrundstreams und andere Musik hören."
 
 msgid ""
-"You can scrobble tracks for free, but only <span style=\" font-weight:600;"
-"\">paid subscribers</span> can stream Last.fm radio from Clementine."
+"You can scrobble tracks for free, but only <span style=\" font-"
+"weight:600;\">paid subscribers</span> can stream Last.fm radio from "
+"Clementine."
 msgstr ""
 "Sie können Musik kostenlos \"scrobbeln\", aber nur <span style=\"font-"
 "weight:600;\">zahlende Last.fm-Kunden</span> können Last.fm-Radio mit "
 "Clementine hören."
 
 msgid ""
-"You can use your Wii Remote as a remote control for Clementine.  <a href="
-"\"http://www.clementine-player.org/wiimote\">See the page on the Clementine "
-"wiki</a> for more information.\n"
+"You can use your Wii Remote as a remote control for Clementine.  <a "
+"href=\"http://www.clementine-player.org/wiimote\">See the page on the "
+"Clementine wiki</a> for more information.\n"
 msgstr ""
-"Sie können Ihre Wii-Fernbedienung als Fernbedienung für Clementine benutzen. "
-"Mehr Informationen dazu gibt es auf der <a href=\"http://www.clementine-"
+"Sie können Ihre Wii-Fernbedienung als Fernbedienung für Clementine benutzen."
+" Mehr Informationen dazu gibt es auf der <a href=\"http://www.clementine-"
 "player.org/wiimote\">entsprechenden Seite im Clementine Wiki.</a>\n"
 
 msgid "You do not have a Grooveshark Anywhere account."
@@ -3295,18 +3336,18 @@ msgid ""
 "shortcuts in Clementine."
 msgstr ""
 "Öffnen Sie die Systemeinstellungen und aktivieren Sie \"<span style=\" font-"
-"style:italic;\">Zugriff für Hilfsgeräte aktivieren</span>\" in \"Bedienhilfen"
-"\" um Clementines Tastenkürzel zu benutzen."
+"style:italic;\">Zugriff für Hilfsgeräte aktivieren</span>\" in "
+"\"Bedienhilfen\" um Clementines Tastenkürzel zu benutzen."
 
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Sie müssen Clementine nach dem Ändern der Sprache neustarten."
 
 msgid ""
-"You will not be able to play Last.fm radio stations as you are not a Last.fm "
-"subscriber."
+"You will not be able to play Last.fm radio stations as you are not a Last.fm"
+" subscriber."
 msgstr ""
-"Sie werden kein Last.fm-Radio abspielen können, da sie kein Last.fm-Abonnent "
-"sind."
+"Sie werden kein Last.fm-Radio abspielen können, da sie kein Last.fm-Abonnent"
+" sind."
 
 #, qt-format
 msgid "You're logged in as <b>%1</b>"
@@ -3349,7 +3390,7 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "Null"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "add %n songs"
 msgstr "%n Stücke hinzufügen"
 
@@ -3438,7 +3479,7 @@ msgstr "Einstellungen"
 msgid "press enter"
 msgstr "Drücken Sie die Eingabetaste"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "remove %n songs"
 msgstr "%n Stücke entfernen"
 
@@ -3458,81 +3499,4 @@ msgstr "Anhalten"
 msgid "track %1"
 msgstr "Stück %1"
 
-#~ msgid "Are you sure you want to install the following scripts?"
-#~ msgstr "Sind Sie sicher, die folgenden Skripte installieren zu wollen?"
 
-#~ msgid "Clementine scripts"
-#~ msgstr "Clementine Skripte"
-
-#~ msgid "Context:"
-#~ msgstr "Kontext:"
-
-#~ msgid "Developer mode"
-#~ msgstr "Entwicklermodus"
-
-#~ msgid "Disable"
-#~ msgstr "Deaktivieren"
-
-#~ msgid "Enable"
-#~ msgstr "Aktivieren"
-
-#~ msgid "Enter an URL to download a cover from the Internet:"
-#~ msgstr "URL eingeben um Cover aus dem Internet zu laden"
-
-#~ msgid "Error installing script"
-#~ msgstr "Fehler beim Installieren vom Skript"
-
-#~ msgid "Error opening script archive"
-#~ msgstr "Fehler beim Öffnen des Skript-Archivs"
-
-#~ msgid "Get new scripts"
-#~ msgstr "Neue Skripte holen"
-
-#~ msgid "Global Shortcuts"
-#~ msgstr "Globale Tastenkürzel"
-
-#~ msgid "Install from file..."
-#~ msgstr "Aus Datei installieren ..."
-
-#~ msgid "Install script file"
-#~ msgstr "Skript-Datei installieren"
-
-#~ msgid "Install scripts"
-#~ msgstr "Skripte installieren"
-
-#~ msgid "My scripts"
-#~ msgstr "Meine Skripte"
-
-#~ msgid "Please fill in the blanks to login into Last.fm"
-#~ msgstr ""
-#~ "Bitte füllen Sie die leeren Felder aus, um sich bei Last.fm anzumelden."
-
-#~ msgid "Python console"
-#~ msgstr "Python-Konsole"
-
-#~ msgid "Reload"
-#~ msgstr "Neu Laden"
-
-#~ msgid "Script Manager"
-#~ msgstr "Skript-Verwaltung"
-
-#~ msgid "Settings..."
-#~ msgstr "Einstellungen..."
-
-#~ msgid "Some files failed to install.  The script may not work correctly."
-#~ msgstr ""
-#~ "Einige Dateien konnten nicht installiert werden. Das Skript funktioniert "
-#~ "eventuell nicht korrekt."
-
-#~ msgid "The '%1' script was modified, you might have to reload it"
-#~ msgstr "Das Skript »%1« wurde geändert, Sie werden es neu laden müssen"
-
-#~ msgid "This is not a valid Clementine script file."
-#~ msgstr "Das ist keine gültige Skript-Datei für Clementine."
-
-#~ msgid ""
-#~ "Warning: scripts have full access to your computer and your music.  Only "
-#~ "install scripts that you trust."
-#~ msgstr ""
-#~ "Hinweis: Die Skripte haben vollen Zugang zu Ihrem Computer und Ihrer "
-#~ "Musik. Installieren Sie nur vertrauenswürdige Skripte."

@@ -1,25 +1,19 @@
-# Swedish translation for clementine
-# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
-# This file is distributed under the same license as the clementine package.
+# Clementine.
+# Copyright (C) 2010 David Sansome
+# This file is distributed under the same license as the Clementine package.
+# 
+# Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: clementine\n"
-"Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/"
-"list\n"
-"POT-Creation-Date: 2011-06-26 20:31+0000\n"
-"PO-Revision-Date: 2011-10-08 10:16+0000\n"
-"Last-Translator: Arve Eriksson <Unknown>\n"
-"Language-Team: Launchpad Swedish Translators <lp-l10n-sv@lists.launchpad."
-"net>\n"
-"Language: sv\n"
-"MIME-Version: 1.0\n"
+"Project-Id-Version: Clementine Music Player\n"
+"Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
+"PO-Revision-Date: 2011-11-01 04:40+0000\n"
+"Last-Translator: clementinebuildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-10-09 05:23+0000\n"
-"X-Generator: Launchpad (build 14110)\n"
-"X-Poedit-Language: Swedish\n"
+"Language: sv\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
 msgid " kbps"
 msgstr " kbps"
@@ -92,15 +86,15 @@ msgstr "%L1 andra lyssnare"
 msgid "%L1 total plays"
 msgstr "%L1 totala uppspelningar"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n failed"
 msgstr "%n misslyckades"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n finished"
 msgstr "%n färdig"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n remaining"
 msgstr "%n återstår"
 
@@ -112,6 +106,9 @@ msgstr "&Centrera"
 
 msgid "&Custom"
 msgstr "A&npassad"
+
+msgid "&Extras"
+msgstr "Extrafunktioner"
 
 msgid "&Help"
 msgstr "Hjälp"
@@ -126,14 +123,26 @@ msgstr "Dölj..."
 msgid "&Left"
 msgstr "&Vänster"
 
+msgid "&Music"
+msgstr "Musik"
+
 msgid "&None"
 msgstr "I&nga"
+
+msgid "&Playlist"
+msgstr "Spellista"
 
 msgid "&Quit"
 msgstr "A&vsluta"
 
+msgid "&Repeat mode"
+msgstr "Upprepningsläge"
+
 msgid "&Right"
 msgstr "&Höger"
+
+msgid "&Shuffle mode"
+msgstr "Blandningsläge"
 
 msgid "&Stretch columns to fit window"
 msgstr "Justera kolumner så de passar fönstret"
@@ -174,13 +183,11 @@ msgstr ""
 msgid ""
 "<p>Tokens start with %, for example: %artist %album %title </p>\n"
 "\n"
-"<p>If you surround sections of text that contain a token with curly-braces, "
-"that section will be hidden if the token is empty.</p>"
+"<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
 msgstr ""
 "<p>En variabel  påbörjas med %, till exempel: %artist %album %titel </p>\n"
 "\n"
-"<p>Om du omgärdar en variabel med klammerparanteser (måsvingar), så kommer "
-"den inte att visas om variabeln är tom.</p>"
+"<p>Om du omgärdar en variabel med klammerparanteser (måsvingar), så kommer den inte att visas om variabeln är tom.</p>"
 
 msgid "A Grooveshark Anywhere account is required."
 msgstr ""
@@ -197,7 +204,8 @@ msgstr ""
 "bibliotek. Det finns olika typer av smarta spellistor som väljer låtar på "
 "olika sätt."
 
-msgid "A song will be included in the playlist if it matches these conditions."
+msgid ""
+"A song will be included in the playlist if it matches these conditions."
 msgstr ""
 "En låt kommer att inkluderas i spellistan om den matchar dessa villkor."
 
@@ -665,7 +673,8 @@ msgstr ""
 
 msgid ""
 "Clementine can be controlled remotely by an Android phone.  To enable this "
-"feature log in with the same Google account that is configured on your phone."
+"feature log in with the same Google account that is configured on your "
+"phone."
 msgstr ""
 "Clementine kan fjärrstyras av en Android-telefon. För att aktivera denna "
 "funktion logga in med samma Google-konto som är konfigurerad i telefonen."
@@ -682,11 +691,12 @@ msgstr ""
 
 msgid ""
 "Clementine couldn't fetch your subscription status since there are problems "
-"with your connection. Played tracks will be cached and sent later to Last.fm."
+"with your connection. Played tracks will be cached and sent later to "
+"Last.fm."
 msgstr ""
-"Clementine kunde inte hämta information om din prenumeration eftersom det är "
-"något problem med din uppkoppling. Spelade spår kommer mellanlagras för att "
-"skickas till Last.fm vid ett senare tillfälle."
+"Clementine kunde inte hämta information om din prenumeration eftersom det är"
+" något problem med din uppkoppling. Spelade spår kommer mellanlagras för att"
+" skickas till Last.fm vid ett senare tillfälle."
 
 msgid "Clementine image viewer"
 msgstr "Clementine-bildvisare"
@@ -718,6 +728,9 @@ msgstr "Club"
 
 msgid "Color"
 msgstr "Färg"
+
+msgid "Combine identical results from different sources"
+msgstr ""
 
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Lista, separerad med komma, över class:level; level är 0-3"
@@ -1132,6 +1145,12 @@ msgstr "Aktivera bakgrundsbild i spellista"
 msgid "Enable shortcuts only when Clementine is focused"
 msgstr "Aktivera endast snabbknappar när Clementine är fokuserat"
 
+msgid ""
+"Enable sources below to include them in Global Search results.  When "
+"identical results are available from more than one source, ones at the top "
+"will take priority."
+msgstr ""
+
 msgid "Enable/disable Last.fm scrobbling"
 msgstr "Aktivera/avaktivera Last.fm-skrobbling"
 
@@ -1209,9 +1228,6 @@ msgstr "Någonsin spelade"
 msgid "Except between tracks on the same album or in the same CUE sheet"
 msgstr "Förutom mellan spår på samma album eller i samma CUE-fil"
 
-msgid "&Extras"
-msgstr "Extrafunktioner"
-
 msgid "F1"
 msgstr "F1"
 
@@ -1244,6 +1260,9 @@ msgstr "Toningslängd"
 
 msgid "Fast"
 msgstr "Snabb"
+
+msgid "Favorites"
+msgstr ""
 
 msgid "Favourite tracks"
 msgstr "Favoritspår"
@@ -1357,6 +1376,9 @@ msgstr "Full diskant"
 msgid "GStreamer audio engine"
 msgstr "GStreamer-ljudmotor"
 
+msgid "General"
+msgstr ""
+
 msgid "General settings"
 msgstr "Allmänna inställningar"
 
@@ -1371,6 +1393,9 @@ msgstr ""
 
 msgid "Give it a name:"
 msgstr "Ge den ett namn:"
+
+msgid "Global Search"
+msgstr ""
 
 msgid "Global search"
 msgstr ""
@@ -1433,6 +1458,9 @@ msgstr "Hårdvaruinformation"
 msgid "Hardware information is only available while the device is connected."
 msgstr "Hårdvaruinformation är endast tillgänglig när enheten är ansluten."
 
+msgid "Hide all other search boxes"
+msgstr ""
+
 msgid "High"
 msgstr "Hög"
 
@@ -1465,8 +1493,8 @@ msgid "Identifying song"
 msgstr "Identifierar låt"
 
 msgid ""
-"If you continue, this device will work slowly and songs copied to it may not "
-"work."
+"If you continue, this device will work slowly and songs copied to it may not"
+" work."
 msgstr ""
 "Om du fortsätter kommer denna enhet att arbeta långsamt och låtar som "
 "kopierats till den kanske inte fungerar."
@@ -1503,6 +1531,9 @@ msgstr "Inkludera albumomslag i notifieringen"
 msgid "Include all songs"
 msgstr "Inkludera alla spår"
 
+msgid "Include keyboard shortcut help in the tooltip"
+msgstr ""
+
 msgid "Increase the volume by 4%"
 msgstr "Öka volymen med 4%"
 
@@ -1520,6 +1551,9 @@ msgstr "Installerad"
 
 msgid "Internet"
 msgstr "Internet"
+
+msgid "Internet providers"
+msgstr ""
 
 msgid "Invalid API key"
 msgstr "Felaktig API-nyckel"
@@ -1857,9 +1891,6 @@ msgstr "Flytta till biblioteket..."
 msgid "Move up"
 msgstr "Flytta uppåt"
 
-msgid "&Music"
-msgstr "Musik"
-
 msgid "Music (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma *.mp4 *.spx *.wav)"
 msgstr "Musik (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma *.mp4 *.spx *.wav)"
 
@@ -1949,7 +1980,8 @@ msgstr "Inga långa block"
 
 msgid ""
 "No matches found.  Clear the search box to show the whole playlist again."
-msgstr "Inga träffar hittades. Töm sökrutan för att visa hela spellistan igen."
+msgstr ""
+"Inga träffar hittades. Töm sökrutan för att visa hela spellistan igen."
 
 msgid "No short blocks"
 msgstr "Inga korta block"
@@ -1983,6 +2015,9 @@ msgstr "Inte tillräckligt med grannar"
 
 msgid "Not installed"
 msgstr "Inte installerad"
+
+msgid "Not logged in"
+msgstr ""
 
 msgid "Not mounted - double click to mount"
 msgstr "Inte monterad - dubbelklicka för att montera"
@@ -2024,6 +2059,9 @@ msgstr "Öppna enhet"
 msgid "Open dir.xiph.org in browser"
 msgstr "Öppna dir.xiph.org i webbläsare"
 
+msgid "Open file..."
+msgstr ""
+
 msgid "Open in new playlist"
 msgstr "Öppna i ny spellista"
 
@@ -2032,9 +2070,6 @@ msgstr "Öppna jamendo.com i webbläsare"
 
 msgid "Open magnatune.com in browser"
 msgstr "Öppna magnatune.com i en webbläsare"
-
-msgid "Open media..."
-msgstr "Öppna media..."
 
 msgid "Open somafm.com in browser"
 msgstr "Öppna somafm.com i en webbläsare"
@@ -2153,7 +2188,7 @@ msgstr "Spelarnamn"
 msgid "Player options"
 msgstr "Spelaralternativ"
 
-msgid "&Playlist"
+msgid "Playlist"
 msgstr "Spellista"
 
 msgid "Playlist finished"
@@ -2343,9 +2378,6 @@ msgstr "Upprepa"
 msgid "Repeat album"
 msgstr "Upprepa album"
 
-msgid "&Repeat mode"
-msgstr "Upprepningsläge"
-
 msgid "Repeat playlist"
 msgstr "Upprepa spellista"
 
@@ -2381,6 +2413,9 @@ msgstr "Återställ låtstatistik"
 
 msgid "Restrict to ASCII characters"
 msgstr "Begränsa till ASCII-tecken"
+
+msgid "Results"
+msgstr ""
 
 msgid "Rock"
 msgstr "Rock"
@@ -2559,6 +2594,9 @@ msgstr "Visa en popup från notifieringsytan"
 msgid "Show a pretty OSD"
 msgstr "Visa en skön notifiering"
 
+msgid "Show a tooltip with more information about each result"
+msgstr ""
+
 msgid "Show above status bar"
 msgstr "Visa ovanför statusraden"
 
@@ -2596,6 +2634,9 @@ msgstr ""
 msgid "Show the \"love\" and \"ban\" buttons"
 msgstr "Visa knapparna \"Älska\" och \"Blockera\""
 
+msgid "Show the Global Search box above the sidebar"
+msgstr ""
+
 msgid "Show the scrobble button in the main window"
 msgstr "Visa skrobbelknappen i huvudfönstret"
 
@@ -2613,9 +2654,6 @@ msgstr "Blanda allt"
 
 msgid "Shuffle by album"
 msgstr "Blanda efter album"
-
-msgid "&Shuffle mode"
-msgstr "Blandningsläge"
 
 msgid "Shuffle playlist"
 msgstr "Blanda spellistan"
@@ -2685,6 +2723,9 @@ msgstr "Ordna låtar efter"
 
 msgid "Sorting"
 msgstr "Sortering"
+
+msgid "Sources"
+msgstr ""
 
 msgid "Speex"
 msgstr "Speex"
@@ -2841,7 +2882,8 @@ msgid ""
 "There were problems copying some songs.  The following files could not be "
 "copied:"
 msgstr ""
-"Fel uppstod vid kopiering av några låtar. Följande filer kunde inte kopieras:"
+"Fel uppstod vid kopiering av några låtar. Följande filer kunde inte "
+"kopieras:"
 
 msgid ""
 "There were problems deleting some songs.  The following files could not be "
@@ -2865,7 +2907,8 @@ msgstr ""
 
 msgid "These folders will be scanned for music to make up your library"
 msgstr ""
-"Dessa mappar kommer att sökas igenom efter musik för att skapa ditt bibliotek"
+"Dessa mappar kommer att sökas igenom efter musik för att skapa ditt "
+"bibliotek"
 
 msgid ""
 "These settings are used in the \"Transcode Music\" dialog, and when "
@@ -2888,8 +2931,8 @@ msgid "This album is not available in the requested format"
 msgstr "Detta album är inte tillgängligt i det begärda formatet"
 
 msgid ""
-"This device must be connected and opened before Clementine can see what file "
-"formats it supports."
+"This device must be connected and opened before Clementine can see what file"
+" formats it supports."
 msgstr ""
 "Denna enhet måste vara ansluten och öppnad före Clementine kan se vilka "
 "filformat den stöder."
@@ -3072,6 +3115,9 @@ msgstr "Använd"
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr ""
 
+msgid "User interface"
+msgstr ""
+
 msgid "Username"
 msgstr "Användarnamn"
 
@@ -3083,9 +3129,6 @@ msgstr "VBR MP3"
 
 msgid "Variable bit rate"
 msgstr "Variabel bithastighet"
-
-msgid "Various Artists"
-msgstr "Diverse artister"
 
 msgid "Various artists"
 msgstr "Diverse artister"
@@ -3135,14 +3178,11 @@ msgid "When Clementine starts"
 msgstr "När Clementine startar"
 
 msgid ""
-"When looking for album art Clementine will first look for picture files that "
-"contain one of these words.\n"
+"When looking for album art Clementine will first look for picture files that contain one of these words.\n"
 "If there are no matches then it will use the largest image in the directory."
 msgstr ""
-"När Clementine letar efter albumomslag söker den först efter bildfiler som "
-"innehåller något av dessa ord.\n"
-"Om det inte finns några matchande så kommer den att använda den största "
-"bilden i katalogen."
+"När Clementine letar efter albumomslag söker den först efter bildfiler som innehåller något av dessa ord.\n"
+"Om det inte finns några matchande så kommer den att använda den största bilden i katalogen."
 
 msgid "WiFi MAC Address"
 msgstr "MAC-adress för WiFi"
@@ -3226,8 +3266,8 @@ msgid ""
 msgstr ""
 
 msgid ""
-"You can listen to Magnatune songs for free without an account.  Purchasing a "
-"membership removes the messages at the end of each track."
+"You can listen to Magnatune songs for free without an account.  Purchasing a"
+" membership removes the messages at the end of each track."
 msgstr ""
 "Du kan lyssna på Magnatune-låtar gratis utan ett konto. Köp av ett "
 "medlemskap tar bort meddelandena i slutet av varje spår."
@@ -3237,20 +3277,21 @@ msgstr ""
 "Du kan lyssna på bakgrundströmmar samtidigt som du lyssnar på annan musik."
 
 msgid ""
-"You can scrobble tracks for free, but only <span style=\" font-weight:600;"
-"\">paid subscribers</span> can stream Last.fm radio from Clementine."
+"You can scrobble tracks for free, but only <span style=\" font-"
+"weight:600;\">paid subscribers</span> can stream Last.fm radio from "
+"Clementine."
 msgstr ""
-"Du kan skrobbla spår gratis, men endast <span style=\" font-weight:600;"
-"\">betalkunder</span> kan strömma Last.fm-radio från Clementine."
+"Du kan skrobbla spår gratis, men endast <span style=\" font-"
+"weight:600;\">betalkunder</span> kan strömma Last.fm-radio från Clementine."
 
 msgid ""
-"You can use your Wii Remote as a remote control for Clementine.  <a href="
-"\"http://www.clementine-player.org/wiimote\">See the page on the Clementine "
-"wiki</a> for more information.\n"
+"You can use your Wii Remote as a remote control for Clementine.  <a "
+"href=\"http://www.clementine-player.org/wiimote\">See the page on the "
+"Clementine wiki</a> for more information.\n"
 msgstr ""
-"Du kan använda din Wii-kontroll som en fjärrkontroll för Clementine. <a href="
-"\"http://www.clementine-player.org/wiimote\">Se sidan på Clementine-wikin</"
-"a> för mer information.\n"
+"Du kan använda din Wii-kontroll som en fjärrkontroll för Clementine. <a "
+"href=\"http://www.clementine-player.org/wiimote\">Se sidan på Clementine-"
+"wikin</a> för mer information.\n"
 
 msgid "You do not have a Grooveshark Anywhere account."
 msgstr ""
@@ -3274,16 +3315,16 @@ msgid ""
 "style:italic;\">Enable access for assistive devices</span>\" to use global "
 "shortcuts in Clementine."
 msgstr ""
-"Du behöver starta Systeminställningar och slå på \"<span style=\" font-style:"
-"italic;\">Aktivera åtkomst för assisterande enheter</span>\" för att använda "
-"globala snabbtangenter i Clementine."
+"Du behöver starta Systeminställningar och slå på \"<span style=\" font-"
+"style:italic;\">Aktivera åtkomst för assisterande enheter</span>\" för att "
+"använda globala snabbtangenter i Clementine."
 
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Du måste starta om Clementine om du ändrar språket."
 
 msgid ""
-"You will not be able to play Last.fm radio stations as you are not a Last.fm "
-"subscriber."
+"You will not be able to play Last.fm radio stations as you are not a Last.fm"
+" subscriber."
 msgstr ""
 "Du kommer inte kunna lyssna på radiostationer på Last.fm eftersom du inte "
 "prenumererar på Last.fm."
@@ -3306,8 +3347,8 @@ msgid ""
 "for automatic tag fetching.  Try installing the 'gstreamer-plugins-bad' "
 "package."
 msgstr ""
-"Din installation av gstreamer saknar insticksprogrammet för 'ofa'. Det krävs "
-"för automatisk hämtning av etiketter. Försök att installera paketet "
+"Din installation av gstreamer saknar insticksprogrammet för 'ofa'. Det krävs"
+" för automatisk hämtning av etiketter. Försök att installera paketet "
 "'gstreamer-plugins-bad'."
 
 msgid "Your library is empty!"
@@ -3329,7 +3370,7 @@ msgstr "Ö-A"
 msgid "Zero"
 msgstr "Noll"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "add %n songs"
 msgstr "lägg till %n låtar"
 
@@ -3418,7 +3459,7 @@ msgstr "alternativ"
 msgid "press enter"
 msgstr "tryck enter"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "remove %n songs"
 msgstr "ta bort %n låtar"
 
@@ -3438,79 +3479,4 @@ msgstr "stoppa"
 msgid "track %1"
 msgstr "spår %1"
 
-#~ msgid "Are you sure you want to install the following scripts?"
-#~ msgstr "Är du säker på att du vill installera följande skript?"
 
-#~ msgid "Clementine scripts"
-#~ msgstr "Clementine skript"
-
-#~ msgid "Context:"
-#~ msgstr "Sammanhang:"
-
-#~ msgid "Developer mode"
-#~ msgstr "Utvecklare läge"
-
-#~ msgid "Disable"
-#~ msgstr "Inaktivera"
-
-#~ msgid "Enable"
-#~ msgstr "Aktivera"
-
-#~ msgid "Enter an URL to download a cover from the Internet:"
-#~ msgstr "Ange en URL för att ladda ner ett omslag från Internet:"
-
-#~ msgid "Error installing script"
-#~ msgstr "Fel vid installation av script"
-
-#~ msgid "Error opening script archive"
-#~ msgstr "Fel vid öppning av script arkiv"
-
-#~ msgid "Get new scripts"
-#~ msgstr "Hämta nya skript"
-
-#~ msgid "Global Shortcuts"
-#~ msgstr "Globala snabbtangenter"
-
-#~ msgid "Install from file..."
-#~ msgstr "Installera från fil..."
-
-#~ msgid "Install script file"
-#~ msgstr "Installera skript fil"
-
-#~ msgid "Install scripts"
-#~ msgstr "Installera skript"
-
-#~ msgid "My scripts"
-#~ msgstr "Mina skript"
-
-#~ msgid "Please fill in the blanks to login into Last.fm"
-#~ msgstr "Fyll i luckorna för att logga in på Last.fm"
-
-#~ msgid "Python console"
-#~ msgstr "Python-konsoll"
-
-#~ msgid "Reload"
-#~ msgstr "Uppdatera"
-
-#~ msgid "Script Manager"
-#~ msgstr "Skripthanterare"
-
-#~ msgid "Settings..."
-#~ msgstr "Inställningar..."
-
-#~ msgid "Some files failed to install.  The script may not work correctly."
-#~ msgstr ""
-#~ "Vissa filer kunde inte installeras. Skriptet fungerar kanske inte korrekt."
-
-#~ msgid "The '%1' script was modified, you might have to reload it"
-#~ msgstr "Skriptet '%1' ändrades - du kan behöva ladda om det"
-
-#~ msgid "This is not a valid Clementine script file."
-#~ msgstr "Detta är inte en giltig Clementine skriptfil."
-
-#~ msgid ""
-#~ "Warning: scripts have full access to your computer and your music.  Only "
-#~ "install scripts that you trust."
-#~ msgstr ""
-#~ "Varning: skript har full tillgång till din dator och din musik. "
-#~ "Installera endast skript som du litar på."

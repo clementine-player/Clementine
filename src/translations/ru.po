@@ -1,22 +1,19 @@
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-#
+# Clementine.
+# Copyright (C) 2010 David Sansome
+# This file is distributed under the same license as the Clementine package.
+# 
+# Translators:
 # Павел Малеев <rolland39@gmail.com>, 2010.
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/"
-"list\n"
-"POT-Creation-Date: 2011-06-26 20:31+0000\n"
-"PO-Revision-Date: 2011-10-11 15:24+0000\n"
-"Last-Translator: Alexej Lihov <Unknown>\n"
-"Language-Team: Russian <kde-russian@lists.kde.ru>\n"
-"Language: ru\n"
-"MIME-Version: 1.0\n"
+"Project-Id-Version: Clementine Music Player\n"
+"Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
+"PO-Revision-Date: 2011-11-01 04:40+0000\n"
+"Last-Translator: clementinebuildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-10-12 04:46+0000\n"
-"X-Generator: Launchpad (build 14124)\n"
+"Language: ru\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
 
 msgid " kbps"
 msgstr " Кбит/с"
@@ -89,15 +86,15 @@ msgstr "%L1 других слушателей"
 msgid "%L1 total plays"
 msgstr "всего %L1 прослушиваний"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n failed"
 msgstr "%n с ошибкой"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n finished"
 msgstr "%n завершено"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n remaining"
 msgstr "%n осталось"
 
@@ -109,6 +106,9 @@ msgstr "По &центру"
 
 msgid "&Custom"
 msgstr "&Другой"
+
+msgid "&Extras"
+msgstr "Расширения"
 
 msgid "&Help"
 msgstr "Помощь"
@@ -123,14 +123,26 @@ msgstr "Скрыть..."
 msgid "&Left"
 msgstr "По &левому краю"
 
+msgid "&Music"
+msgstr "Музыка"
+
 msgid "&None"
 msgstr "&Нет"
+
+msgid "&Playlist"
+msgstr "Список воспроизведения"
 
 msgid "&Quit"
 msgstr "&Выход"
 
+msgid "&Repeat mode"
+msgstr "Режим повтора"
+
 msgid "&Right"
 msgstr "По &правому краю"
+
+msgid "&Shuffle mode"
+msgstr "Случайно"
 
 msgid "&Stretch columns to fit window"
 msgstr "Выровнять поля по размеру окна"
@@ -171,13 +183,11 @@ msgstr ""
 msgid ""
 "<p>Tokens start with %, for example: %artist %album %title </p>\n"
 "\n"
-"<p>If you surround sections of text that contain a token with curly-braces, "
-"that section will be hidden if the token is empty.</p>"
+"<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
 msgstr ""
 "<p>Поля начинаются со знака %, например: %artist %album %title </p>\n"
 "\n"
-"<p>Если Вы окружили часть текста фигурными скобками, то эта часть текста не "
-"будет видна, если значения полей будут пустыми</p>"
+"<p>Если Вы окружили часть текста фигурными скобками, то эта часть текста не будет видна, если значения полей будут пустыми</p>"
 
 msgid "A Grooveshark Anywhere account is required."
 msgstr ""
@@ -194,7 +204,8 @@ msgstr ""
 "Существуют различные типы умных плейлистов, предлагающих различные способы "
 "выбора композиций."
 
-msgid "A song will be included in the playlist if it matches these conditions."
+msgid ""
+"A song will be included in the playlist if it matches these conditions."
 msgstr ""
 "Композиция будет добавлена в плей-лист, если соответствует этим условиям."
 
@@ -661,7 +672,8 @@ msgstr ""
 
 msgid ""
 "Clementine can be controlled remotely by an Android phone.  To enable this "
-"feature log in with the same Google account that is configured on your phone."
+"feature log in with the same Google account that is configured on your "
+"phone."
 msgstr ""
 "Clementine может удаленно управляться телефоном с ОС Android. Для "
 "активирования этой функции зайдите под тем же аккаунтом Google , что и на "
@@ -679,11 +691,12 @@ msgstr ""
 
 msgid ""
 "Clementine couldn't fetch your subscription status since there are problems "
-"with your connection. Played tracks will be cached and sent later to Last.fm."
+"with your connection. Played tracks will be cached and sent later to "
+"Last.fm."
 msgstr ""
 "Clementine не смог получить статус вашей подписки из-за проблем с "
-"соединением. Воспроизведённые треки будут кэшированы и отправлены на Last.fm "
-"позже."
+"соединением. Воспроизведённые треки будут кэшированы и отправлены на Last.fm"
+" позже."
 
 msgid "Clementine image viewer"
 msgstr "Просмотр изображений в Clementine"
@@ -715,6 +728,9 @@ msgstr "Club"
 
 msgid "Color"
 msgstr "Цвет"
+
+msgid "Combine identical results from different sources"
+msgstr ""
 
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Список класс:уровень через запятую, где уровень от 0 до 3"
@@ -1129,6 +1145,12 @@ msgstr "Включить фоновое изображение плейлист�
 msgid "Enable shortcuts only when Clementine is focused"
 msgstr "Реагировать на комбинации клавиш только в окне программы"
 
+msgid ""
+"Enable sources below to include them in Global Search results.  When "
+"identical results are available from more than one source, ones at the top "
+"will take priority."
+msgstr ""
+
 msgid "Enable/disable Last.fm scrobbling"
 msgstr "Включить/отключить сробблинг Last.fm"
 
@@ -1149,7 +1171,8 @@ msgstr "Введите новое имя для этого списка восп
 
 msgid ""
 "Enter an <b>artist</b> or <b>tag</b> to start listening to Last.fm radio."
-msgstr "Укажите <b>исполнителя</b> или <b>тег</b> чтобы слушать радио Last.fm."
+msgstr ""
+"Укажите <b>исполнителя</b> или <b>тег</b> чтобы слушать радио Last.fm."
 
 msgid "Enter search terms here"
 msgstr "Поиск..."
@@ -1204,9 +1227,6 @@ msgstr "Когда-либо проигранных"
 msgid "Except between tracks on the same album or in the same CUE sheet"
 msgstr "Кроме треков с одного и того же альбома или CUE-файла"
 
-msgid "&Extras"
-msgstr "Расширения"
-
 msgid "F1"
 msgstr "F1"
 
@@ -1239,6 +1259,9 @@ msgstr "Длительность затухания"
 
 msgid "Fast"
 msgstr "Быстро"
+
+msgid "Favorites"
+msgstr ""
 
 msgid "Favourite tracks"
 msgstr "Любимые треки"
@@ -1313,8 +1336,8 @@ msgstr "Размер шрифта"
 
 msgid "For licensing reasons Spotify support is in a separate plugin."
 msgstr ""
-"По лицензионным соображениям поддержка Spotify реализована в виде отдельного "
-"плагина"
+"По лицензионным соображениям поддержка Spotify реализована в виде отдельного"
+" плагина"
 
 msgid "Force mono encoding"
 msgstr "Принудительное кодирование в моно"
@@ -1356,6 +1379,9 @@ msgstr "Full Treble"
 msgid "GStreamer audio engine"
 msgstr "Движок аудио GStreamer"
 
+msgid "General"
+msgstr ""
+
 msgid "General settings"
 msgstr "Общие настройки"
 
@@ -1370,6 +1396,9 @@ msgstr ""
 
 msgid "Give it a name:"
 msgstr "Назвать:"
+
+msgid "Global Search"
+msgstr ""
 
 msgid "Global search"
 msgstr ""
@@ -1432,6 +1461,9 @@ msgstr "Информация об оборудовании"
 msgid "Hardware information is only available while the device is connected."
 msgstr "Информация об оборудовании доступна только если устройство подключено"
 
+msgid "Hide all other search boxes"
+msgstr ""
+
 msgid "High"
 msgstr "Высокий"
 
@@ -1464,8 +1496,8 @@ msgid "Identifying song"
 msgstr "Определение песни"
 
 msgid ""
-"If you continue, this device will work slowly and songs copied to it may not "
-"work."
+"If you continue, this device will work slowly and songs copied to it may not"
+" work."
 msgstr ""
 "Если продолжать, то устройство будет работать медленно и копирование "
 "композиций на него может не работать."
@@ -1491,8 +1523,8 @@ msgid ""
 "In dynamic mode new tracks will be chosen and added to the playlist every "
 "time a song finishes."
 msgstr ""
-"В динамическом режиме новые треки выбираются и добавляются в плейлист каждый "
-"раз, когда заканчивается очередная песня."
+"В динамическом режиме новые треки выбираются и добавляются в плейлист каждый"
+" раз, когда заканчивается очередная песня."
 
 msgid "Inbox"
 msgstr "Входящие"
@@ -1502,6 +1534,9 @@ msgstr "Показывать обложку альбома в уведомлен
 
 msgid "Include all songs"
 msgstr "Включить все песни"
+
+msgid "Include keyboard shortcut help in the tooltip"
+msgstr ""
 
 msgid "Increase the volume by 4%"
 msgstr "Увеличить громкость на 4%"
@@ -1520,6 +1555,9 @@ msgstr "Установлено"
 
 msgid "Internet"
 msgstr "Интернет"
+
+msgid "Internet providers"
+msgstr ""
 
 msgid "Invalid API key"
 msgstr "Неправильный ключ API"
@@ -1660,8 +1698,7 @@ msgid "Least favourite tracks"
 msgstr "Наименее любимые треки"
 
 msgid "Leave blank for the default.  Examples: \"/dev/dsp\", \"front\", etc."
-msgstr ""
-"Оставьте пустым для умолчания. Например: \"/dev/dsp\", \"front\", и т.д."
+msgstr "Оставьте пустым для умолчания. Например: \"/dev/dsp\", \"front\", и т.д."
 
 msgid "Length"
 msgstr "Длительность"
@@ -1858,9 +1895,6 @@ msgstr "Переместить в коллекцию..."
 msgid "Move up"
 msgstr "Переместить вверх"
 
-msgid "&Music"
-msgstr "Музыка"
-
 msgid "Music (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma *.mp4 *.spx *.wav)"
 msgstr "Музыка (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma *.mp4 *.spx *.wav)"
 
@@ -1987,6 +2021,9 @@ msgstr "Недостаточно соседей"
 msgid "Not installed"
 msgstr "Не установлено"
 
+msgid "Not logged in"
+msgstr ""
+
 msgid "Not mounted - double click to mount"
 msgstr "Не подключено. Сделайте двойной щелчок мышью для подключения."
 
@@ -2027,6 +2064,9 @@ msgstr "Открыть устройство"
 msgid "Open dir.xiph.org in browser"
 msgstr "Открыть dir.xiph.org в браузере"
 
+msgid "Open file..."
+msgstr ""
+
 msgid "Open in new playlist"
 msgstr "Открыть в новом плейлисте"
 
@@ -2035,9 +2075,6 @@ msgstr "Перейдите в браузере по адресу jamendo.com"
 
 msgid "Open magnatune.com in browser"
 msgstr "Открыть в браузере magnatune.com"
-
-msgid "Open media..."
-msgstr "Открыть..."
 
 msgid "Open somafm.com in browser"
 msgstr "Открыть somafm.com в браузере"
@@ -2156,7 +2193,7 @@ msgstr "Название проигрывателя"
 msgid "Player options"
 msgstr "Настройки проигрывателя"
 
-msgid "&Playlist"
+msgid "Playlist"
 msgstr "Список воспроизведения"
 
 msgid "Playlist finished"
@@ -2346,9 +2383,6 @@ msgstr "Повторять"
 msgid "Repeat album"
 msgstr "Повторять альбом"
 
-msgid "&Repeat mode"
-msgstr "Режим повтора"
-
 msgid "Repeat playlist"
 msgstr "Повторять список воспроизведения"
 
@@ -2384,6 +2418,9 @@ msgstr "Сбросить счётчики воспроизведения"
 
 msgid "Restrict to ASCII characters"
 msgstr "Ограничить только символами ASCII"
+
+msgid "Results"
+msgstr ""
 
 msgid "Rock"
 msgstr "Rock"
@@ -2562,6 +2599,9 @@ msgstr "Показывать всплывающие сообщения"
 msgid "Show a pretty OSD"
 msgstr "Показывать OSD"
 
+msgid "Show a tooltip with more information about each result"
+msgstr ""
+
 msgid "Show above status bar"
 msgstr "Показать над строкой состояния"
 
@@ -2599,6 +2639,9 @@ msgstr ""
 msgid "Show the \"love\" and \"ban\" buttons"
 msgstr "Показывать кнопки \"Избранное\" и \"Запретить\""
 
+msgid "Show the Global Search box above the sidebar"
+msgstr ""
+
 msgid "Show the scrobble button in the main window"
 msgstr "Показывать кнопку скробблинга в главном окне"
 
@@ -2616,9 +2659,6 @@ msgstr "Все в случайном порядке"
 
 msgid "Shuffle by album"
 msgstr "Альбомы в случайном порядке"
-
-msgid "&Shuffle mode"
-msgstr "Случайно"
 
 msgid "Shuffle playlist"
 msgstr "Перемешать список воспроизведения"
@@ -2688,6 +2728,9 @@ msgstr "Сортировать песни по"
 
 msgid "Sorting"
 msgstr "Сортировать"
+
+msgid "Sources"
+msgstr ""
 
 msgid "Speex"
 msgstr "Speex"
@@ -2888,8 +2931,8 @@ msgid "This album is not available in the requested format"
 msgstr "Этот альбом не доступен в требуемом формате"
 
 msgid ""
-"This device must be connected and opened before Clementine can see what file "
-"formats it supports."
+"This device must be connected and opened before Clementine can see what file"
+" formats it supports."
 msgstr ""
 "Устройство должно быть подключено и открыто перед тем, как Clementine "
 "определит, какой формат оно поддерживает."
@@ -3073,6 +3116,9 @@ msgstr "Использовано"
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr ""
 
+msgid "User interface"
+msgstr ""
+
 msgid "Username"
 msgstr "Имя пользователя"
 
@@ -3084,9 +3130,6 @@ msgstr "VBR MP3"
 
 msgid "Variable bit rate"
 msgstr "Переменный битрейт"
-
-msgid "Various Artists"
-msgstr "Различные исполнители"
 
 msgid "Various artists"
 msgstr "Разные исполнители"
@@ -3136,14 +3179,11 @@ msgid "When Clementine starts"
 msgstr "При запуске Clementine"
 
 msgid ""
-"When looking for album art Clementine will first look for picture files that "
-"contain one of these words.\n"
+"When looking for album art Clementine will first look for picture files that contain one of these words.\n"
 "If there are no matches then it will use the largest image in the directory."
 msgstr ""
-"При поиске обложек альбомов Clementine будет сначала искать файлы "
-"изображений, которые содержат одно из этих слов.\n"
-"При отсутствии совпадений, она будет использовать наибольшее изображение в "
-"каталоге."
+"При поиске обложек альбомов Clementine будет сначала искать файлы изображений, которые содержат одно из этих слов.\n"
+"При отсутствии совпадений, она будет использовать наибольшее изображение в каталоге."
 
 msgid "WiFi MAC Address"
 msgstr "MAC адрес WiFi"
@@ -3227,8 +3267,8 @@ msgid ""
 msgstr ""
 
 msgid ""
-"You can listen to Magnatune songs for free without an account.  Purchasing a "
-"membership removes the messages at the end of each track."
+"You can listen to Magnatune songs for free without an account.  Purchasing a"
+" membership removes the messages at the end of each track."
 msgstr ""
 "Вы можете слушать песни с Magnatune свободно без регистрации. Регистрация "
 "убирает сообщения в конце каждой композиции."
@@ -3237,17 +3277,18 @@ msgid "You can listen to background streams at the same time as other music."
 msgstr "Вы можете слушать фоновые звуки одновременно с другой музыкой"
 
 msgid ""
-"You can scrobble tracks for free, but only <span style=\" font-weight:600;"
-"\">paid subscribers</span> can stream Last.fm radio from Clementine."
+"You can scrobble tracks for free, but only <span style=\" font-"
+"weight:600;\">paid subscribers</span> can stream Last.fm radio from "
+"Clementine."
 msgstr ""
 "Вы можете скробблить композиции свободно, но только <span style=\" font-"
 "weight:600;\">платные подписчики</span> могут слушать радио Last.fm из "
 "Clementine."
 
 msgid ""
-"You can use your Wii Remote as a remote control for Clementine.  <a href="
-"\"http://www.clementine-player.org/wiimote\">See the page on the Clementine "
-"wiki</a> for more information.\n"
+"You can use your Wii Remote as a remote control for Clementine.  <a "
+"href=\"http://www.clementine-player.org/wiimote\">See the page on the "
+"Clementine wiki</a> for more information.\n"
 msgstr ""
 "Вы можете использовать пульт Wii для дистанционного управления Clementine. "
 "<a href=\"http://www.clementine-player.org/wiimote\">Смотри раздел на wiki-"
@@ -3283,8 +3324,8 @@ msgid "You will need to restart Clementine if you change the language."
 msgstr "После смены языка потребуется перезапуск"
 
 msgid ""
-"You will not be able to play Last.fm radio stations as you are not a Last.fm "
-"subscriber."
+"You will not be able to play Last.fm radio stations as you are not a Last.fm"
+" subscriber."
 msgstr ""
 "Вы не сможете слушать радиостанцию Last.fm, так как вы не являетесь её "
 "подписчиком."
@@ -3330,7 +3371,7 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "По-умолчанию"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "add %n songs"
 msgstr "добавить %n композиций"
 
@@ -3419,7 +3460,7 @@ msgstr "настройки"
 msgid "press enter"
 msgstr "нажмите \"enter\""
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "remove %n songs"
 msgstr "удалить %n композиций"
 
@@ -3439,80 +3480,4 @@ msgstr "Остановить"
 msgid "track %1"
 msgstr "композиция %1"
 
-#~ msgid "Are you sure you want to install the following scripts?"
-#~ msgstr "Вы уверены, что хотите установить следующие сценарии?"
 
-#~ msgid "Clementine scripts"
-#~ msgstr "Сценарии Clementine"
-
-#~ msgid "Context:"
-#~ msgstr "Контекст:"
-
-#~ msgid "Developer mode"
-#~ msgstr "Режим разработчика"
-
-#~ msgid "Disable"
-#~ msgstr "Отключить"
-
-#~ msgid "Enable"
-#~ msgstr "Включить"
-
-#~ msgid "Enter an URL to download a cover from the Internet:"
-#~ msgstr "Введите ссылку для скачивания обложки с Интернета:"
-
-#~ msgid "Error installing script"
-#~ msgstr "Ошибка установки сценария"
-
-#~ msgid "Error opening script archive"
-#~ msgstr "Ошибка открытия архива сценария"
-
-#~ msgid "Get new scripts"
-#~ msgstr "Получить новые скрипты"
-
-#~ msgid "Global Shortcuts"
-#~ msgstr "Глобальные комбинации клавиш"
-
-#~ msgid "Install from file..."
-#~ msgstr "Установить из файла..."
-
-#~ msgid "Install script file"
-#~ msgstr "Установить файл сценария"
-
-#~ msgid "Install scripts"
-#~ msgstr "Установка сценариев"
-
-#~ msgid "My scripts"
-#~ msgstr "Мои скрипты"
-
-#~ msgid "Please fill in the blanks to login into Last.fm"
-#~ msgstr "Заполните, пожалуйста, поля для входа на Last.fm"
-
-#~ msgid "Python console"
-#~ msgstr "Консоль Python"
-
-#~ msgid "Reload"
-#~ msgstr "Перезагрузить"
-
-#~ msgid "Script Manager"
-#~ msgstr "Менеджер скриптов"
-
-#~ msgid "Settings..."
-#~ msgstr "Настройки..."
-
-#~ msgid "Some files failed to install.  The script may not work correctly."
-#~ msgstr ""
-#~ "Некоторые файлы не удалось восстановить. Сценарий может работать "
-#~ "некорректно."
-
-#~ msgid "The '%1' script was modified, you might have to reload it"
-#~ msgstr "Сценарий '%1' был изменён, нужно его перезапустить"
-
-#~ msgid "This is not a valid Clementine script file."
-#~ msgstr "Это некорректный файл сценария Clementine."
-
-#~ msgid ""
-#~ "Warning: scripts have full access to your computer and your music.  Only "
-#~ "install scripts that you trust."
-#~ msgstr ""
-#~ "Внимание: сценарии будут иметь полный доступ к Вашему компьютеру и Вашей "
-#~ "музыке. Устанавливайте лишь проверенные сценарии."

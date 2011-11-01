@@ -1,23 +1,20 @@
-# Latvian translation for clementine
-# Copyright (c) 2011 Rosetta Contributors and Canonical Ltd 2011
-# This file is distributed under the same license as the clementine package.
+# Clementine.
+# Copyright (C) 2010 David Sansome
+# This file is distributed under the same license as the Clementine package.
+# 
+# Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011.
 # uGGa <ugga@inbox.lv>, 2011.
 msgid ""
 msgstr ""
-"Project-Id-Version: clementine\n"
-"Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/"
-"list\n"
-"POT-Creation-Date: 2011-06-26 20:31+0000\n"
-"PO-Revision-Date: 2011-05-10 13:51+0000\n"
-"Last-Translator: uGGa <Unknown>\n"
-"Language-Team: uGGa\n"
-"Language: lv\n"
-"MIME-Version: 1.0\n"
+"Project-Id-Version: Clementine Music Player\n"
+"Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
+"PO-Revision-Date: 2011-11-01 04:40+0000\n"
+"Last-Translator: clementinebuildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-06-27 04:54+0000\n"
-"X-Generator: Launchpad (build 13168)\n"
+"Language: lv\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : 2)\n"
 
 msgid " kbps"
 msgstr " kb/s"
@@ -90,15 +87,15 @@ msgstr ""
 msgid "%L1 total plays"
 msgstr ""
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n failed"
 msgstr "%n neizdevās"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n finished"
 msgstr "%n pabeigti"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n remaining"
 msgstr "%n atlicis"
 
@@ -110,6 +107,9 @@ msgstr "&Centrs"
 
 msgid "&Custom"
 msgstr "&Izvēles"
+
+msgid "&Extras"
+msgstr "Ekstras"
 
 msgid "&Help"
 msgstr "&Palīdzība"
@@ -124,14 +124,26 @@ msgstr "%Paslēpt..."
 msgid "&Left"
 msgstr "Pa &kreisi"
 
+msgid "&Music"
+msgstr "Mūzika"
+
 msgid "&None"
 msgstr "&Nav"
+
+msgid "&Playlist"
+msgstr "Dziesmu liste"
 
 msgid "&Quit"
 msgstr "&Iziet"
 
+msgid "&Repeat mode"
+msgstr "Atkārtošanas režīms"
+
 msgid "&Right"
 msgstr "&Pa labi"
+
+msgid "&Shuffle mode"
+msgstr "Jaukšanas režīms"
 
 msgid "&Stretch columns to fit window"
 msgstr "&mainīt stabu lielumu"
@@ -172,13 +184,11 @@ msgstr ""
 msgid ""
 "<p>Tokens start with %, for example: %artist %album %title </p>\n"
 "\n"
-"<p>If you surround sections of text that contain a token with curly-braces, "
-"that section will be hidden if the token is empty.</p>"
+"<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
 msgstr ""
 "<p>Elementi sākas ar %, piemēram: %artist %album %title </p>\n"
 "\n"
-"<p> Ja jūs teksta daļas iekļausiet figūriekavās, tās tiks paslēptas, ja "
-"elementi būs tukši.</p>"
+"<p> Ja jūs teksta daļas iekļausiet figūriekavās, tās tiks paslēptas, ja elementi būs tukši.</p>"
 
 msgid "A Grooveshark Anywhere account is required."
 msgstr ""
@@ -191,11 +201,13 @@ msgid ""
 "There are different types of smart playlist that offer different ways of "
 "selecting songs."
 msgstr ""
-"Smart Playlist ir aktīva dziesmu liste no jūsu bibliotēkas. Ir vairāku veidu "
-"Smart Playlist, kas piedāvā dažādus dziesmu izvēles veidus."
+"Smart Playlist ir aktīva dziesmu liste no jūsu bibliotēkas. Ir vairāku veidu"
+" Smart Playlist, kas piedāvā dažādus dziesmu izvēles veidus."
 
-msgid "A song will be included in the playlist if it matches these conditions."
-msgstr "Dziesma tiks iekļauta dziesmu listē, ja tā atbildīs šiem nosacījumiem."
+msgid ""
+"A song will be included in the playlist if it matches these conditions."
+msgstr ""
+"Dziesma tiks iekļauta dziesmu listē, ja tā atbildīs šiem nosacījumiem."
 
 msgid "A-Z"
 msgstr "A-Z"
@@ -462,7 +474,8 @@ msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "Vai esat pārliecināts, ka vēlaties izdzēst \"%1\"?"
 
 msgid "Are you sure you want to reset this song's statistics?"
-msgstr "Vai esat pārliecināt, ka vēlaties no jauna uzsākt dziesmas statistiku?"
+msgstr ""
+"Vai esat pārliecināt, ka vēlaties no jauna uzsākt dziesmas statistiku?"
 
 msgid "Artist"
 msgstr "Izpildītājs"
@@ -655,12 +668,13 @@ msgid ""
 "Clementine can automatically convert the music you copy to this device into "
 "a format that it can play."
 msgstr ""
-"Clementine spēj automātiski konvertēt kopējamo mūziku formātā, ko ierīce var "
-"atskaņot."
+"Clementine spēj automātiski konvertēt kopējamo mūziku formātā, ko ierīce var"
+" atskaņot."
 
 msgid ""
 "Clementine can be controlled remotely by an Android phone.  To enable this "
-"feature log in with the same Google account that is configured on your phone."
+"feature log in with the same Google account that is configured on your "
+"phone."
 msgstr ""
 "Clementine var tikt vadīts attālināti izmantojot Android telefonu. Lai "
 "izmantotu šo iespēju, nepieciešams autentificēties ar Google lietotāja "
@@ -678,7 +692,8 @@ msgstr ""
 
 msgid ""
 "Clementine couldn't fetch your subscription status since there are problems "
-"with your connection. Played tracks will be cached and sent later to Last.fm."
+"with your connection. Played tracks will be cached and sent later to "
+"Last.fm."
 msgstr ""
 
 msgid "Clementine image viewer"
@@ -710,6 +725,9 @@ msgstr "Klubu mūzika"
 
 msgid "Color"
 msgstr "Krāsa"
+
+msgid "Combine identical results from different sources"
+msgstr ""
 
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr ""
@@ -1124,6 +1142,12 @@ msgstr ""
 msgid "Enable shortcuts only when Clementine is focused"
 msgstr "Lietot saīsnes tikai tad, kad izvēlēts Clementine"
 
+msgid ""
+"Enable sources below to include them in Global Search results.  When "
+"identical results are available from more than one source, ones at the top "
+"will take priority."
+msgstr ""
+
 msgid "Enable/disable Last.fm scrobbling"
 msgstr "Ieslēgt/izslēgt Last.fm skroblēšanu"
 
@@ -1201,9 +1225,6 @@ msgstr "Vispār atskaņots"
 msgid "Except between tracks on the same album or in the same CUE sheet"
 msgstr ""
 
-msgid "&Extras"
-msgstr "Ekstras"
-
 msgid "F1"
 msgstr "F1"
 
@@ -1236,6 +1257,9 @@ msgstr "Pārejas garums"
 
 msgid "Fast"
 msgstr "Ātri"
+
+msgid "Favorites"
+msgstr ""
 
 msgid "Favourite tracks"
 msgstr "Mīļākās dziesmas"
@@ -1348,6 +1372,9 @@ msgstr "Pilnas augšas"
 msgid "GStreamer audio engine"
 msgstr "GStreamer audio dzinējs"
 
+msgid "General"
+msgstr ""
+
 msgid "General settings"
 msgstr "Pamata iestatījumi"
 
@@ -1362,6 +1389,9 @@ msgstr ""
 
 msgid "Give it a name:"
 msgstr "Dodiet tam vārdu:"
+
+msgid "Global Search"
+msgstr ""
 
 msgid "Global search"
 msgstr ""
@@ -1424,6 +1454,9 @@ msgstr "\"Dzelžu\" informācija"
 msgid "Hardware information is only available while the device is connected."
 msgstr "\"Dzelžu\" informācija ir pieejama tikai pieslēdzot ierīci."
 
+msgid "Hide all other search boxes"
+msgstr ""
+
 msgid "High"
 msgstr "Augsts"
 
@@ -1456,8 +1489,8 @@ msgid "Identifying song"
 msgstr "Identificēju dziesmu"
 
 msgid ""
-"If you continue, this device will work slowly and songs copied to it may not "
-"work."
+"If you continue, this device will work slowly and songs copied to it may not"
+" work."
 msgstr ""
 "Ja jūs turpināsiet, šī ierīce var darboties lēni un dziesmu kopēšana var "
 "nedarboties."
@@ -1492,6 +1525,9 @@ msgstr "Iekļaut vāku attēlus paziņojumos"
 msgid "Include all songs"
 msgstr "Iekļaut visas dziesmas"
 
+msgid "Include keyboard shortcut help in the tooltip"
+msgstr ""
+
 msgid "Increase the volume by 4%"
 msgstr "Palielināt skaļumu par 4%"
 
@@ -1509,6 +1545,9 @@ msgstr "Uzstādīts"
 
 msgid "Internet"
 msgstr "Internets"
+
+msgid "Internet providers"
+msgstr ""
 
 msgid "Invalid API key"
 msgstr "Nepareiza API atslēga"
@@ -1847,9 +1886,6 @@ msgstr "Pārvietot uz bibliotēku..."
 msgid "Move up"
 msgstr "Pārvietot uz augšu"
 
-msgid "&Music"
-msgstr "Mūzika"
-
 msgid "Music (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma *.mp4 *.spx *.wav)"
 msgstr "Mūzika (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma *.mp4 *.spx *.wav)"
 
@@ -1975,6 +2011,9 @@ msgstr "Nepietiek kaimiņu"
 msgid "Not installed"
 msgstr "Nav uzstādīta"
 
+msgid "Not logged in"
+msgstr ""
+
 msgid "Not mounted - double click to mount"
 msgstr "Nav uzmontēts - dubultklikšķis lai uzmontētu"
 
@@ -2015,6 +2054,9 @@ msgstr "Atvērt ierīci"
 msgid "Open dir.xiph.org in browser"
 msgstr "Atvērt dir.xiph.org pārlūkproprammā"
 
+msgid "Open file..."
+msgstr ""
+
 msgid "Open in new playlist"
 msgstr "Atvērt jaunā skaņsarakstā"
 
@@ -2023,9 +2065,6 @@ msgstr "Atvērt jamendo.com pārlūkprogrammā"
 
 msgid "Open magnatune.com in browser"
 msgstr "Atvērt magnatude.com pārlūkprogrammā"
-
-msgid "Open media..."
-msgstr "Atvērt failu..."
 
 msgid "Open somafm.com in browser"
 msgstr "Atvērt somafm.com pārlūkprogrammā"
@@ -2144,7 +2183,7 @@ msgstr "Atskaņotāja nosaukums"
 msgid "Player options"
 msgstr "Atskaņotāja opcijas"
 
-msgid "&Playlist"
+msgid "Playlist"
 msgstr "Dziesmu liste"
 
 msgid "Playlist finished"
@@ -2334,9 +2373,6 @@ msgstr "Atkartot"
 msgid "Repeat album"
 msgstr "Atkārtot albumu"
 
-msgid "&Repeat mode"
-msgstr "Atkārtošanas režīms"
-
 msgid "Repeat playlist"
 msgstr "Atkārtot dziesmu listi"
 
@@ -2372,6 +2408,9 @@ msgstr "Atstatīt atskaņošanu skaitu"
 
 msgid "Restrict to ASCII characters"
 msgstr "Atļaut tikai ASCII simbolus"
+
+msgid "Results"
+msgstr ""
 
 msgid "Rock"
 msgstr "Roks"
@@ -2550,6 +2589,9 @@ msgstr "Rādīt paziņojumu nu sistēmas joslas"
 msgid "Show a pretty OSD"
 msgstr "Rādīt skaistu paziņojumu logu"
 
+msgid "Show a tooltip with more information about each result"
+msgstr ""
+
 msgid "Show above status bar"
 msgstr "Rādīt virs statusa joslas"
 
@@ -2587,6 +2629,9 @@ msgstr ""
 msgid "Show the \"love\" and \"ban\" buttons"
 msgstr "Rādīt \"patīk\" un \"aizliegt\" pogas"
 
+msgid "Show the Global Search box above the sidebar"
+msgstr ""
+
 msgid "Show the scrobble button in the main window"
 msgstr "Rādīt skroblēšanas pogu galvenajā logā"
 
@@ -2604,9 +2649,6 @@ msgstr "Jaukt visu"
 
 msgid "Shuffle by album"
 msgstr "Jaukt pa albumiem"
-
-msgid "&Shuffle mode"
-msgstr "Jaukšanas režīms"
 
 msgid "Shuffle playlist"
 msgstr "Jaukt dziesmu listi"
@@ -2676,6 +2718,9 @@ msgstr "Kārtot pēc"
 
 msgid "Sorting"
 msgstr "Kārtošana"
+
+msgid "Sources"
+msgstr ""
 
 msgid "Speex"
 msgstr "Speex"
@@ -2865,19 +2910,18 @@ msgid ""
 "This action will create a database which could be as big as 150 MB.\n"
 "Do you want to continue anyway?"
 msgstr ""
-"Šīs darbības rezultātā tiks izveidota datubāze, kas var būt līdz pat 150 MB "
-"liela.\n"
+"Šīs darbības rezultātā tiks izveidota datubāze, kas var būt līdz pat 150 MB liela.\n"
 "Vai jūs vēlaties turpināt?"
 
 msgid "This album is not available in the requested format"
 msgstr "Albums nav pieejams pieprasītajā formātā"
 
 msgid ""
-"This device must be connected and opened before Clementine can see what file "
-"formats it supports."
+"This device must be connected and opened before Clementine can see what file"
+" formats it supports."
 msgstr ""
-"Šai ierīcei jābūt pieslēgtai un atvērtai pirms Clementine var noteikt, kādus "
-"failu formātus tā atbalsta."
+"Šai ierīcei jābūt pieslēgtai un atvērtai pirms Clementine var noteikt, kādus"
+" failu formātus tā atbalsta."
 
 msgid "This device supports the following file formats:"
 msgstr "Ierīce atbalsta šādus failu formātus:"
@@ -3056,6 +3100,9 @@ msgstr "Izmantots"
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr ""
 
+msgid "User interface"
+msgstr ""
+
 msgid "Username"
 msgstr "Lietotājvārds"
 
@@ -3067,9 +3114,6 @@ msgstr "VBR MP3"
 
 msgid "Variable bit rate"
 msgstr "Mainīgs bitreits"
-
-msgid "Various Artists"
-msgstr "Dažādi Izpildītāji"
 
 msgid "Various artists"
 msgstr "Dažādi izpildītāji"
@@ -3119,12 +3163,10 @@ msgid "When Clementine starts"
 msgstr "Kad startējas Clementine"
 
 msgid ""
-"When looking for album art Clementine will first look for picture files that "
-"contain one of these words.\n"
+"When looking for album art Clementine will first look for picture files that contain one of these words.\n"
 "If there are no matches then it will use the largest image in the directory."
 msgstr ""
-"Meklējot vāka attēlu Clementine vispirms apskatīs failus, kas satur šos "
-"vārdus.\n"
+"Meklējot vāka attēlu Clementine vispirms apskatīs failus, kas satur šos vārdus.\n"
 "Ja nekas netiks atrasts, tad tiks izmantots lielākais attēls mapē."
 
 msgid "WiFi MAC Address"
@@ -3209,8 +3251,8 @@ msgid ""
 msgstr ""
 
 msgid ""
-"You can listen to Magnatune songs for free without an account.  Purchasing a "
-"membership removes the messages at the end of each track."
+"You can listen to Magnatune songs for free without an account.  Purchasing a"
+" membership removes the messages at the end of each track."
 msgstr ""
 "Jūs varat klausīties Magnatude dziesmas par brīvu bez lietotāja konta. "
 "Apmāksājot dalību tiks novākti paziņojumi katras dziesmas beigās."
@@ -3219,18 +3261,19 @@ msgid "You can listen to background streams at the same time as other music."
 msgstr "Papildus mūzikai, jūs varat ieslēgt arī kādu no fona skaņām."
 
 msgid ""
-"You can scrobble tracks for free, but only <span style=\" font-weight:600;"
-"\">paid subscribers</span> can stream Last.fm radio from Clementine."
+"You can scrobble tracks for free, but only <span style=\" font-"
+"weight:600;\">paid subscribers</span> can stream Last.fm radio from "
+"Clementine."
 msgstr ""
 
 msgid ""
-"You can use your Wii Remote as a remote control for Clementine.  <a href="
-"\"http://www.clementine-player.org/wiimote\">See the page on the Clementine "
-"wiki</a> for more information.\n"
+"You can use your Wii Remote as a remote control for Clementine.  <a "
+"href=\"http://www.clementine-player.org/wiimote\">See the page on the "
+"Clementine wiki</a> for more information.\n"
 msgstr ""
-"Jūs varat izmantot Wii tālvadību lai kontrolētu Clementine.<a href=\"http://"
-"www.clementine-player.org/wiimote\">Apskatīt Clementine wiki</a> lai "
-"uzzinātu vairāk.\n"
+"Jūs varat izmantot Wii tālvadību lai kontrolētu Clementine.<a "
+"href=\"http://www.clementine-player.org/wiimote\">Apskatīt Clementine "
+"wiki</a> lai uzzinātu vairāk.\n"
 
 msgid "You do not have a Grooveshark Anywhere account."
 msgstr ""
@@ -3259,8 +3302,8 @@ msgid "You will need to restart Clementine if you change the language."
 msgstr "Ja jūs mainīsiet valodu, jums nāksies restartēt Clementine."
 
 msgid ""
-"You will not be able to play Last.fm radio stations as you are not a Last.fm "
-"subscriber."
+"You will not be able to play Last.fm radio stations as you are not a Last.fm"
+" subscriber."
 msgstr "Jūs nevarat atskaņot Last.fm radio stacijas neesot Last.fm lietotājs."
 
 #, qt-format
@@ -3304,7 +3347,7 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "Nulle"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "add %n songs"
 msgstr "pievienot %n dziesmas"
 
@@ -3393,7 +3436,7 @@ msgstr "opcijas"
 msgid "press enter"
 msgstr "piespiediet enter"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "remove %n songs"
 msgstr "aizvākt %n dziesmas"
 
@@ -3413,84 +3456,4 @@ msgstr "apturēt"
 msgid "track %1"
 msgstr "dziesma %1"
 
-#~ msgid "Are you sure you want to install the following scripts?"
-#~ msgstr "Vai jūs tiešām vēlaties uzstādīt sekojošos skriptus?"
 
-#~ msgid "Clementine scripts"
-#~ msgstr "Clementine skripti"
-
-#~ msgid "Developer mode"
-#~ msgstr "Izstrādātāja režīms"
-
-#~ msgid "Disable"
-#~ msgstr "Atslēgt"
-
-#~ msgid "Enable"
-#~ msgstr "Ieslēgt"
-
-#~ msgid "Enter an URL to download a cover from the Internet:"
-#~ msgstr "Ievadiet adresi (URL), lai ielādētu vāka attēlu no Interneta:"
-
-#~ msgid "Error installing script"
-#~ msgstr "Kļūda uzstādot skriptu"
-
-#~ msgid "Error opening script archive"
-#~ msgstr "Kļūda atverot skriptu arhīvu"
-
-#~ msgid "Get new scripts"
-#~ msgstr "Iegūt jaunus skriptus"
-
-#~ msgid "Global Shortcuts"
-#~ msgstr "Globālie īsceļi"
-
-#~ msgid "Install from file..."
-#~ msgstr "Uzstādīt no faila..."
-
-#~ msgid "Install script file"
-#~ msgstr "Uzstādīt skripta failu"
-
-#~ msgid "Install scripts"
-#~ msgstr "Uzstādīt skriptus"
-
-#~ msgid "My scripts"
-#~ msgstr "Mani skripti"
-
-#~ msgid "Please fill in the blanks to login into Last.fm"
-#~ msgstr "Lūdzu aizpildiet tukšās ailes, lai pieslēgtos Last.fm"
-
-#~ msgid "Reload"
-#~ msgstr "Pārlādēt"
-
-#~ msgid "Script Manager"
-#~ msgstr "Skriptu pārvaldnieks"
-
-#~ msgid "Settings..."
-#~ msgstr "Iestatījumi..."
-
-#~ msgid "Some files failed to install.  The script may not work correctly."
-#~ msgstr "Kļūda uzstādot dažus failus. Skripts var nestrādāt pareizi."
-
-#~ msgid "The '%1' script was modified, you might have to reload it"
-#~ msgstr "'%1' skripts tika izmainīts, iespējams tas ir jāielādē par jaunu"
-
-#~ msgid "This is not a valid Clementine script file."
-#~ msgstr "Šis nav pareiz Clementine skriptu fails"
-
-#~ msgid ""
-#~ "Warning: scripts have full access to your computer and your music.  Only "
-#~ "install scripts that you trust."
-#~ msgstr ""
-#~ "Uzmanību: skriptiem ir pilna pieeja jūsu datoram un mūzikai. Uzstādiet "
-#~ "tika skriptus, kam uzticaties."
-
-#~ msgid "%1 other listeners"
-#~ msgstr "%1 citi klausītāji"
-
-#~ msgid "Tools"
-#~ msgstr "Rīki"
-
-#~ msgid "Text color"
-#~ msgstr "Teksta krāsa"
-
-#~ msgid "%1 total plays"
-#~ msgstr "kopā atskaņots %1 reizes"

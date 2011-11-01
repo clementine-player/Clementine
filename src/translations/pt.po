@@ -1,25 +1,20 @@
-# Portuguese translation for clementine
-# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
-# This file is distributed under the same license as the clementine package.
+# Clementine.
+# Copyright (C) 2010 David Sansome
+# This file is distributed under the same license as the Clementine package.
+# 
+# Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
-# Adaptado ao acordo ortográfico de 1990
+# Sérgio Marques <smarquespt@gmail.com>, 2011.
 msgid ""
 msgstr ""
-"Project-Id-Version: clementine\n"
-"Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/"
-"list\n"
-"POT-Creation-Date: 2011-06-26 20:31+0000\n"
-"PO-Revision-Date: 2011-10-17 10:59+0000\n"
-"Last-Translator: Sérgio Marques <Unknown>\n"
-"Language-Team: \n"
-"Language: pt\n"
-"MIME-Version: 1.0\n"
+"Project-Id-Version: Clementine Music Player\n"
+"Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
+"PO-Revision-Date: 2011-11-01 04:40+0000\n"
+"Last-Translator: clementinebuildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-10-18 05:00+0000\n"
-"X-Generator: Launchpad (build 14157)\n"
-"X-Poedit-Country: PORTUGAL\n"
-"X-Poedit-Language: Portuguese\n"
+"Language: pt\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
 msgid " kbps"
 msgstr " kbps"
@@ -50,7 +45,7 @@ msgstr "%1 dias atrás"
 
 #, qt-format
 msgid "%1 playlists (%2)"
-msgstr "Listas de reprodução %1 (%2)"
+msgstr "%1 listas de reprodução (%2)"
 
 #, qt-format
 msgid "%1 selected of"
@@ -74,7 +69,7 @@ msgstr "%1 músicas encontradas (a exibir %2)"
 
 #, qt-format
 msgid "%1 tracks"
-msgstr "%1 músicas"
+msgstr "%1 faixas"
 
 #, qt-format
 msgid "%1 transferred"
@@ -92,15 +87,15 @@ msgstr "%L1 outros ouvintes"
 msgid "%L1 total plays"
 msgstr "%L1 reproduções"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n failed"
 msgstr "%n falha(s)"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n finished"
 msgstr "%n concluída(s)"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n remaining"
 msgstr "%n por converter"
 
@@ -113,6 +108,9 @@ msgstr "&Centro"
 msgid "&Custom"
 msgstr "&Personalizado"
 
+msgid "&Extras"
+msgstr "&Extras"
+
 msgid "&Help"
 msgstr "Aj&uda"
 
@@ -121,19 +119,31 @@ msgid "&Hide %1"
 msgstr "&Ocultar %1"
 
 msgid "&Hide..."
-msgstr "Ocultar..."
+msgstr "&Ocultar..."
 
 msgid "&Left"
 msgstr "&Esquerda"
 
+msgid "&Music"
+msgstr "&Música"
+
 msgid "&None"
 msgstr "&Nenhum"
+
+msgid "&Playlist"
+msgstr "Lista de re&produção"
 
 msgid "&Quit"
 msgstr "&Sair"
 
+msgid "&Repeat mode"
+msgstr "Modo de &repetição"
+
 msgid "&Right"
 msgstr "&Direita"
+
+msgid "&Shuffle mode"
+msgstr "Modo de de&sorganização"
 
 msgid "&Stretch columns to fit window"
 msgstr "Ajustar &colunas à janela"
@@ -157,7 +167,7 @@ msgid "1 day"
 msgstr "1 dia"
 
 msgid "1 track"
-msgstr "1 música"
+msgstr "1 faixa"
 
 msgid "128K MP3"
 msgstr "128K MP3"
@@ -166,27 +176,25 @@ msgid "128k MP3"
 msgstr "128k MP3"
 
 msgid "50 random tracks"
-msgstr "50 músicas aleatórias"
+msgstr "50 faixas aleatórias"
 
 msgid "<a href=\"http://www.di.fm/premium/\">Upgrade to Premium now</a>"
-msgstr ""
+msgstr "<a href=\"http://www.di.fm/premium/\">Atualizar para a versão Premium</a>"
 
 msgid ""
 "<p>Tokens start with %, for example: %artist %album %title </p>\n"
 "\n"
-"<p>If you surround sections of text that contain a token with curly-braces, "
-"that section will be hidden if the token is empty.</p>"
+"<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
 msgstr ""
 "<p>Os \"tokens\" iniciam com %, por exemplo: %artist %album %title </p>\n"
 "\n"
-"<p>Ao colocar parênteses entre as secções de texto que contenham \"tokens\", "
-"essa secção será ocultada se o \"token\" estiver vazio.</p>"
+"<p>Ao colocar parênteses entre as secções de texto que contêm \"tokens\", essa secção será ocultada se o \"token\" estiver vazio.</p>"
 
 msgid "A Grooveshark Anywhere account is required."
-msgstr ""
+msgstr "Requer uma conta Grooveshark Anywhere"
 
 msgid "A Spotify Premium account is required."
-msgstr "Necessita de uma conta Spotify Premium."
+msgstr "Requer uma conta Spotify Premium"
 
 msgid ""
 "A smart playlist is a dynamic list of songs that come from your library.  "
@@ -194,10 +202,11 @@ msgid ""
 "selecting songs."
 msgstr ""
 "Uma lista de reprodução inteligente é aquela que advém da sua coleção. "
-"Existem diversas listas inteligentes, oferecendo diferentes métodos de "
-"seleção de músicas."
+"Existem diversos tipos de listas inteligentes, que oferecem diferentes "
+"métodos de seleção de músicas."
 
-msgid "A song will be included in the playlist if it matches these conditions."
+msgid ""
+"A song will be included in the playlist if it matches these conditions."
 msgstr ""
 "A música será incluída na lista de reprodução se satisfizer estas condições."
 
@@ -208,13 +217,13 @@ msgid "AAC"
 msgstr "AAC"
 
 msgid "AAC 128k (Premium only)"
-msgstr ""
+msgstr "AAC 128k (Premium)"
 
 msgid "AAC 32k"
-msgstr ""
+msgstr "AAC 32k"
 
 msgid "AAC 64k (Premium only)"
-msgstr ""
+msgstr "AAC 64k (Premium)"
 
 msgid "AIFF"
 msgstr "AIFF"
@@ -236,7 +245,7 @@ msgid "Account details"
 msgstr "Detalhes da conta"
 
 msgid "Account details (Premium)"
-msgstr ""
+msgstr "Detalhes da conta (Premium)"
 
 msgid "Action"
 msgstr "Ação"
@@ -248,13 +257,13 @@ msgid "Add Stream"
 msgstr "Adicionar emissão"
 
 msgid "Add a new line if supported by the notification type"
-msgstr "Adicionar uma nova linha se suportado pela notificação"
+msgstr "Adicionar uma nova linha, se suportado pelo serviço de notificações"
 
 msgid "Add action"
 msgstr "Adicionar uma ação"
 
 msgid "Add and play now"
-msgstr ""
+msgstr "Adicionar e reproduzir"
 
 msgid "Add another stream..."
 msgstr "Adicionar outra emissão..."
@@ -275,13 +284,13 @@ msgid "Add folder..."
 msgstr "Adicionar pasta..."
 
 msgid "Add media"
-msgstr "Adicionar \"media\""
+msgstr "Adicionar ficheiros"
 
 msgid "Add new folder..."
 msgstr "Adicionar nova pasta..."
 
 msgid "Add search term"
-msgstr "Adicionar termo de pesquisa"
+msgstr "Adicionar termo de procura"
 
 msgid "Add song album tag"
 msgstr "Adicionar álbum"
@@ -314,7 +323,7 @@ msgid "Add song title tag"
 msgstr "Adicionar título"
 
 msgid "Add song track tag"
-msgstr "Adicionar número da música"
+msgstr "Adicionar número da faixa"
 
 msgid "Add song year tag"
 msgstr "Adicionar ano"
@@ -362,7 +371,7 @@ msgid "Album"
 msgstr "Álbum"
 
 msgid "Album (ideal loudness for all tracks)"
-msgstr "Álbum (volume ideal para todas as músicas)"
+msgstr "Álbum (volume ideal para todas as faixas)"
 
 msgid "Album artist"
 msgstr "Artista do álbum"
@@ -402,7 +411,7 @@ msgid "All the translators"
 msgstr "Todos os tradutores"
 
 msgid "All tracks"
-msgstr "Todas as músicas"
+msgstr "Todas as faixas"
 
 msgid "Allow mid/side encoding"
 msgstr "Permitir codificação mid/side"
@@ -448,7 +457,7 @@ msgid "And:"
 msgstr "E:"
 
 msgid "Appearance"
-msgstr "Aparência"
+msgstr "Aspeto"
 
 msgid "Append files/URLs to the playlist"
 msgstr "Juntar ficheiros/URLs à lista de reprodução"
@@ -464,10 +473,10 @@ msgstr "Aplicar compressão para impedir a distorção"
 
 #, qt-format
 msgid "Are you sure you want to delete the \"%1\" preset?"
-msgstr "Tem a certeza que quer apagar a definição \"%1\"?"
+msgstr "Tem a certeza de que quer eliminar \"%1\"?"
 
 msgid "Are you sure you want to reset this song's statistics?"
-msgstr "Tem a certeza que que reiniciar as estatísticas desta música?"
+msgstr "Tem a certeza de que quer reiniciar as estatísticas desta música?"
 
 msgid "Artist"
 msgstr "Artista"
@@ -488,10 +497,10 @@ msgid "Audio format"
 msgstr "Formato áudio"
 
 msgid "Audio type"
-msgstr ""
+msgstr "Tipo de áudio"
 
 msgid "Authenticating..."
-msgstr "Autenticando..."
+msgstr "A autenticar..."
 
 msgid "Authentication failed"
 msgstr "Falha ao autenticar"
@@ -500,7 +509,7 @@ msgid "Authors"
 msgstr "Autores"
 
 msgid "Auto"
-msgstr "Auto"
+msgstr "Automático"
 
 msgid "Automatic updating"
 msgstr "Atualização automática"
@@ -533,7 +542,7 @@ msgid "Ban"
 msgstr "Banir"
 
 msgid "Bar analyzer"
-msgstr "Analisador da barra"
+msgstr "Analisador de barras"
 
 msgid "Basic Blue"
 msgstr "Azul básico"
@@ -615,7 +624,7 @@ msgid "Choose automatically"
 msgstr "Escolher automaticamente"
 
 msgid "Choose color..."
-msgstr "Escolha a cor.."
+msgstr "Escolha a cor..."
 
 msgid "Choose font..."
 msgstr "Escolha o tipo de letra..."
@@ -626,15 +635,15 @@ msgstr "Escolher da lista"
 msgid "Choose how the playlist is sorted and how many songs it will contain."
 msgstr ""
 "Escolha o método de organização da lista e o número de músicas que irá "
-"conter."
+"conter"
 
 msgid "Choose manual cover"
-msgstr "Escolher a capa manualmente"
+msgstr "Escolher capa de álbum manualmente"
 
 msgid ""
 "Choose the websites you want Clementine to use when searching for lyrics."
 msgstr ""
-"Escolha as páginas que o Clementine vai utilizar para pesquisar as letras "
+"Escolha os sítios web que o Clementine vai utilizar para procurar as letras "
 "das músicas"
 
 msgid "Classical"
@@ -667,29 +676,31 @@ msgstr ""
 
 msgid ""
 "Clementine can be controlled remotely by an Android phone.  To enable this "
-"feature log in with the same Google account that is configured on your phone."
+"feature log in with the same Google account that is configured on your "
+"phone."
 msgstr ""
-"O Clementine pode ser comandado através do sistema Android. Para ativar esta "
-"opção, inicie sessão na mesma conta Google que tem configurada no seu "
+"O Clementine pode ser comandado através do sistema Android. Para ativar esta"
+" opção, inicie sessão na mesma conta Google que tem configurada no seu "
 "telefone."
 
 msgid "Clementine can show a message when the track changes."
-msgstr "O Clementine pode mostrar uma mensagem ao mudar de música"
+msgstr "O Clementine pode mostrar uma mensagem ao mudar de faixa"
 
 msgid ""
 "Clementine could not load any projectM visualisations.  Check that you have "
 "installed Clementine properly."
 msgstr ""
 "O Clementine não conseguiu carregar as visualizações projectM. Verifique se "
-"o Clementine foi bem instalado."
+"o Clementine foi bem instalado"
 
 msgid ""
 "Clementine couldn't fetch your subscription status since there are problems "
-"with your connection. Played tracks will be cached and sent later to Last.fm."
+"with your connection. Played tracks will be cached and sent later to "
+"Last.fm."
 msgstr ""
-"O Clementine não consegue obter o estado da sua subscrição pois existem "
-"problemas na sua ligação. As músicas reproduzidas serão colocadas em cache e "
-"posteriormente enviadas para a last.fm."
+"O Clementine não consegue obter o estado da sua subscrição, pois existem "
+"problemas na sua ligação. As faixas reproduzidas serão colocadas em cache e "
+"posteriormente enviadas para a last.fm"
 
 msgid "Clementine image viewer"
 msgstr "Visualizador de imagens do Clementine"
@@ -710,10 +721,10 @@ msgid "Close visualization"
 msgstr "Fechar visualização"
 
 msgid "Closing this window will cancel the download."
-msgstr "Se fechar esta janela, irá cancelar a transferência."
+msgstr "Se fechar esta janela, irá cancelar a transferência"
 
 msgid "Closing this window will stop searching for album covers."
-msgstr "Se fechar esta janela, irá parar a pesquisa das capas de álbum."
+msgstr "Se fechar esta janela, irá parar a procura das capas de álbum"
 
 msgid "Club"
 msgstr "Clube"
@@ -721,8 +732,11 @@ msgstr "Clube"
 msgid "Color"
 msgstr "Cor"
 
+msgid "Combine identical results from different sources"
+msgstr "Combinar os resultados das diversas origens"
+
 msgid "Comma separated list of class:level, level is 0-3"
-msgstr "Lista de classes separadas por vírgula:nível, entre 0 e 3"
+msgstr "Lista de classes separadas por vírgula: nível, entre 0 e 3"
 
 msgid "Comment"
 msgstr "Comentário"
@@ -737,10 +751,10 @@ msgid "Composer"
 msgstr "Compositor"
 
 msgid "Configure Grooveshark..."
-msgstr ""
+msgstr "Configurar Grooveshark..."
 
 msgid "Configure Last.fm..."
-msgstr "Configurar last.fm..."
+msgstr "Configurar Last.fm..."
 
 msgid "Configure Magnatune..."
 msgstr "Configurar Magnatune..."
@@ -755,7 +769,7 @@ msgid "Configure library..."
 msgstr "Configurar coleção..."
 
 msgid "Configure..."
-msgstr ""
+msgstr "Configurar..."
 
 msgid "Connect Wii Remotes using active/deactive action"
 msgstr "Ligar a Wii Remotes utilizando a ação ativar/desativar"
@@ -767,7 +781,7 @@ msgid "Connecting to Spotify"
 msgstr "Ligar ao Spotify"
 
 msgid "Constant bitrate"
-msgstr "Taxa constante de dados"
+msgstr "Taxa de dados constante"
 
 msgid "Convert all music"
 msgstr "Converter todas as músicas"
@@ -840,10 +854,10 @@ msgid "Covers from %1"
 msgstr "Capas de álbum em %1"
 
 msgid "Cross-fade when changing tracks automatically"
-msgstr "Silêncio progressivo ao mudar automaticamente de música"
+msgstr "Silêncio progressivo ao mudar automaticamente de faixas"
 
 msgid "Cross-fade when changing tracks manually"
-msgstr "Silêncio progressivo ao mudar manualmente de músicas"
+msgstr "Silêncio progressivo ao mudar manualmente de faixas"
 
 msgid "Ctrl+Alt+V"
 msgstr "Ctrl+Alt+V"
@@ -927,46 +941,46 @@ msgid "Days"
 msgstr "Dias"
 
 msgid "De&fault"
-msgstr "Pré-de&finido"
+msgstr "Pa&drão"
 
 msgid "Decrease the volume by 4%"
-msgstr "Diminuir o volume em 4%"
+msgstr "Diminuir volume em 4%"
 
 msgid "Decrease volume"
 msgstr "Diminuir volume"
 
 msgid "Defaults"
-msgstr "Pré-definido"
+msgstr "Padrões"
 
 msgid "Delay between visualizations"
 msgstr "Atraso entre visualizações"
 
 msgid "Delete files"
-msgstr "Apagar ficheiros"
+msgstr "Eliminar ficheiros"
 
 msgid "Delete from device..."
-msgstr "Apagar do dispositivo..."
+msgstr "Eliminar do dispositivo..."
 
 msgid "Delete from disk..."
-msgstr "Apagar ficheiros no disco..."
+msgstr "Eliminar ficheiros do disco..."
 
 msgid "Delete preset"
-msgstr "Apagar pré-ajustes"
+msgstr "Eliminar pré-ajustes"
 
 msgid "Delete smart playlist"
-msgstr "Apagar lista inteligente"
+msgstr "Eliminar lista inteligente"
 
 msgid "Delete the original files"
-msgstr "Apagar os ficheiros originais"
+msgstr "Eliminar ficheiros originais"
 
 msgid "Deleting files"
-msgstr "A remover ficheiros"
+msgstr "A eliminar ficheiros"
 
 msgid "Dequeue selected tracks"
-msgstr "Retirar da fila as músicas selecionadas"
+msgstr "Retirar da fila as faixas selecionadas"
 
 msgid "Dequeue track"
-msgstr "Retirar esta música da fila"
+msgstr "Retirar esta faixa da fila"
 
 msgid "Destination"
 msgstr "Destino"
@@ -990,19 +1004,19 @@ msgid "Devices"
 msgstr "Dispositivos"
 
 msgid "Dialog"
-msgstr ""
+msgstr "Caixa de diálogo"
 
 msgid "Did you mean"
 msgstr "Será que queria dizer"
 
 msgid "Digitally Imported"
-msgstr ""
+msgstr "Digitally Imported"
 
 msgid "Digitally Imported password"
-msgstr ""
+msgstr "Senha Digitally Imported"
 
 msgid "Digitally Imported username"
-msgstr ""
+msgstr "Utilizador Digitally Imported"
 
 msgid "Direct internet connection"
 msgstr "Ligação direta à internet"
@@ -1026,13 +1040,13 @@ msgid "Display options"
 msgstr "Opções de exibição"
 
 msgid "Display the global search popup"
-msgstr ""
+msgstr "Mostrar menu de procura global"
 
 msgid "Display the on-screen-display"
 msgstr "Mostrar notificação"
 
 msgid "Do a full library rescan"
-msgstr "Reanalisar a coleção"
+msgstr "Reanalisar coleção"
 
 msgid "Do not convert any music"
 msgstr "Não converter quaisquer músicas"
@@ -1083,7 +1097,7 @@ msgid "Downloading Spotify plugin"
 msgstr "A transferir o \"plug-in\" Spotify"
 
 msgid "Downloading metadata"
-msgstr "A transferir metadados"
+msgstr "A transferir dados"
 
 msgid "Drag to reposition"
 msgstr "Arraste para posicionar"
@@ -1111,13 +1125,13 @@ msgid "Edit tags"
 msgstr "Editar detalhes"
 
 msgid "Edit track information"
-msgstr "Editar as informações da música"
+msgstr "Editar as informações da faixa"
 
 msgid "Edit track information..."
-msgstr "Editar as informações da música..."
+msgstr "Editar as informações da faixa..."
 
 msgid "Edit tracks information..."
-msgstr "Editar as informações das músicas..."
+msgstr "Editar as informações das faixas..."
 
 msgid "Edit..."
 msgstr "Editar..."
@@ -1132,10 +1146,19 @@ msgid "Enable playlist background image"
 msgstr "Ativar imagem de fundo na lista de reprodução"
 
 msgid "Enable shortcuts only when Clementine is focused"
-msgstr "Apenas ativar os atalhos se o Clementine estiver realçado"
+msgstr "Apenas ativar os atalhos se o Clementine estiver evidenciado"
+
+msgid ""
+"Enable sources below to include them in Global Search results.  When "
+"identical results are available from more than one source, ones at the top "
+"will take priority."
+msgstr ""
+"Ative as origens a incluir nos resultados da procura global. Se forem "
+"encontrados resultados idênticos em mais do que uma origem, as origens mais "
+"acima têm prioridade"
 
 msgid "Enable/disable Last.fm scrobbling"
-msgstr "Ativar/Inativar o envio last.fm"
+msgstr "Ativar/inativar o envio last.fm"
 
 msgid "Encoding complexity"
 msgstr "Complexidade da codificação"
@@ -1147,18 +1170,17 @@ msgid "Encoding mode"
 msgstr "Tipo de codificação"
 
 msgid "Enter a URL to download a cover from the Internet:"
-msgstr "Indique a URL para transferir a capa do álbum na internet:"
+msgstr "Indique o URL para transferir a capa do álbum:"
 
 msgid "Enter a new name for this playlist"
 msgstr "Indique o nome para esta lista de reprodução"
 
 msgid ""
 "Enter an <b>artist</b> or <b>tag</b> to start listening to Last.fm radio."
-msgstr ""
-"Indique um <b>artista</b> ou <b>\"tag\"</b> para ouvir a rádio last.fm."
+msgstr "Indique um <b>artista</b> ou <b>\"tag\"</b> para ouvir a rádio last.fm."
 
 msgid "Enter search terms here"
-msgstr "Indique aqui os termos de pesquisa"
+msgstr "Indique aqui os termos da procura"
 
 msgid "Enter the URL of an internet radio stream:"
 msgstr "Indique o URL da rádio na internet:"
@@ -1185,17 +1207,17 @@ msgid "Error copying songs"
 msgstr "Erro ao copiar músicas"
 
 msgid "Error deleting songs"
-msgstr "Erro ao apagar músicas"
+msgstr "Erro ao eliminar músicas"
 
 msgid "Error downloading Spotify plugin"
-msgstr "Erro durante a transferência do \"plug-in\""
+msgstr "Erro ao transferir o \"plug-in\""
 
 #, qt-format
 msgid "Error loading %1"
 msgstr "Erro ao carregar %1"
 
 msgid "Error loading di.fm playlist"
-msgstr ""
+msgstr "Erro ao carregar a lista de reprodução di.fm"
 
 #, qt-format
 msgid "Error processing %1: %2"
@@ -1208,10 +1230,7 @@ msgid "Ever played"
 msgstr "Reproduzida alguma vez"
 
 msgid "Except between tracks on the same album or in the same CUE sheet"
-msgstr "Excepto entre as músicas do mesmo álbum ou ficheiros CUE"
-
-msgid "&Extras"
-msgstr "Extras"
+msgstr "Excepto entre faixas do mesmo álbum ou ficheiros CUE"
 
 msgid "F1"
 msgstr "F1"
@@ -1235,7 +1254,7 @@ msgid "FLAC"
 msgstr "FLAC"
 
 msgid "Fade out when stopping a track"
-msgstr "Silêncio progressivo ao parar uma música"
+msgstr "Silêncio progressivo ao parar uma faixa"
 
 msgid "Fading"
 msgstr "Desvanecimento"
@@ -1246,8 +1265,11 @@ msgstr "Duração"
 msgid "Fast"
 msgstr "Rápida"
 
+msgid "Favorites"
+msgstr "Favoritos"
+
 msgid "Favourite tracks"
-msgstr "Músicas preferidas"
+msgstr "Faixas preferidas"
 
 msgid "Fetch Missing Covers"
 msgstr "Obter as capas em falta"
@@ -1256,7 +1278,7 @@ msgid "Fetch automatically"
 msgstr "Obter automaticamente"
 
 msgid "Fetch completed"
-msgstr "Transferência concluída"
+msgstr "Obtencão concluída"
 
 msgid "Fetching cover error"
 msgstr "Erro ao obter a capa do álbum"
@@ -1298,8 +1320,7 @@ msgid "Filesystem type"
 msgstr "Tipo de sistema de ficheiros"
 
 msgid "Find songs in your library that match the criteria you specify."
-msgstr ""
-"Descobrir as músicas da coleção que coincidem com os critérios especificados."
+msgstr "Descobrir músicas da coleção que coincidem com os critérios indicados"
 
 msgid "Fingerprinting song"
 msgstr "A procurar identificadores"
@@ -1318,8 +1339,8 @@ msgstr "Tamanho de letra"
 
 msgid "For licensing reasons Spotify support is in a separate plugin."
 msgstr ""
-"Devido ao seu licenciamento, o \"plug-in\" do Spotify é disponibilizado à "
-"parte."
+"Devido à sua licença, o \"plug-in\" do Spotify é disponibilizado "
+"separadamente"
 
 msgid "Force mono encoding"
 msgstr "Forçar codificação mono"
@@ -1332,7 +1353,7 @@ msgid ""
 "to rescan all the songs again next time you connect it."
 msgstr ""
 "Se optar por ignorar um dispositivo, este será removido da lista e na "
-"próxima vez que o ligar, o Clementine terá que procurar novamente as músicas."
+"próxima vez que o ligar, o Clementine terá que procurar novamente as músicas"
 
 msgid "Form"
 msgstr "Formulário"
@@ -1361,6 +1382,9 @@ msgstr "Agudos"
 msgid "GStreamer audio engine"
 msgstr "Sistema de áudio GSTreamer"
 
+msgid "General"
+msgstr "Geral"
+
 msgid "General settings"
 msgstr "Definições gerais"
 
@@ -1368,16 +1392,19 @@ msgid "Genre"
 msgstr "Género"
 
 msgid "Getting channels"
-msgstr "Obtendo canais"
+msgstr "A obter canais"
 
 msgid "Getting streams"
-msgstr ""
+msgstr "A obter emissões"
 
 msgid "Give it a name:"
 msgstr "Dar um nome:"
 
+msgid "Global Search"
+msgstr "Procura global"
+
 msgid "Global search"
-msgstr ""
+msgstr "Procura global"
 
 msgid "Go to next playlist tab"
 msgstr "Ir para o separador seguinte"
@@ -1389,7 +1416,7 @@ msgid "Google password"
 msgstr "Senha Google"
 
 msgid "Google username"
-msgstr "Nome de utilizador Google"
+msgstr "Utilizador Google"
 
 #, qt-format
 msgid "Got %1 covers out of %2 (%3 failed)"
@@ -1399,10 +1426,10 @@ msgid "Grey out non existent songs in my playlists"
 msgstr "Nas listas de reprodução, escurecer as músicas inexistentes"
 
 msgid "Grooveshark"
-msgstr ""
+msgstr "Grooveshark"
 
 msgid "Grooveshark login error"
-msgstr ""
+msgstr "Erro de autenticação no Grooveshark"
 
 msgid "Group Library by..."
 msgstr "Agrupar coleção por..."
@@ -1435,7 +1462,10 @@ msgid "Hardware information"
 msgstr "Informações do equipamento"
 
 msgid "Hardware information is only available while the device is connected."
-msgstr "As informações só estão disponíveis se o dispositivo estiver ligado."
+msgstr "As informações só estão disponíveis se o dispositivo estiver ligado"
+
+msgid "Hide all other search boxes"
+msgstr "Ocultar as outras caixas de procura"
 
 msgid "High"
 msgstr "Alta"
@@ -1469,24 +1499,25 @@ msgid "Identifying song"
 msgstr "A identificar música"
 
 msgid ""
-"If you continue, this device will work slowly and songs copied to it may not "
-"work."
+"If you continue, this device will work slowly and songs copied to it may not"
+" work."
 msgstr ""
 "Se continuar, o dispositivo irá funcionar lentamente e as músicas copiadas "
-"poderão não funcionar."
+"poderão não funcionar"
 
 msgid ""
 "If you use the remote on more than one computer, this name will help you "
 "choose which one to connect to on your phone."
 msgstr ""
-"Se utilizar o controlo em mais que um computador, este nome vai ajudá-lo a "
-"escolher qual o que pretende ligar ao seu telefone."
+"Se utilizar o controlo remoto em mais do que um computador, este nome "
+"ajuda-o a escolher qual o que pretende ligar ao seu telefone"
 
 msgid "Ignore \"The\" in artist names"
 msgstr "Ignorar \"The\" no nome dos artistas"
 
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
-msgstr "Imagens (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
+msgstr ""
+"Imagens (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
 
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgstr "Imagens (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
@@ -1495,20 +1526,23 @@ msgid ""
 "In dynamic mode new tracks will be chosen and added to the playlist every "
 "time a song finishes."
 msgstr ""
-"No modo dinâmico, as músicas serão escolhidas e adicionadas à lista de "
-"reprodução assim que outra termine."
+"No modo dinâmico, as faixas são escolhidas e adicionadas à lista de "
+"reprodução assim que uma música termine."
 
 msgid "Inbox"
 msgstr "Caixa de entrada"
 
 msgid "Include album art in the notification"
-msgstr "Incluir a capa do álbum na notificação"
+msgstr "Incluir capa do álbum na notificação"
 
 msgid "Include all songs"
 msgstr "Incluir todas as músicas"
 
+msgid "Include keyboard shortcut help in the tooltip"
+msgstr "Incluir teclas de atalho na ajuda"
+
 msgid "Increase the volume by 4%"
-msgstr "Aumentar o volume em 4%"
+msgstr "Aumentar volume em 4%"
 
 msgid "Increase volume"
 msgstr "Aumentar volume"
@@ -1525,14 +1559,17 @@ msgstr "Instalado"
 msgid "Internet"
 msgstr "Internet"
 
+msgid "Internet providers"
+msgstr "Fornecedores na Internet"
+
 msgid "Invalid API key"
 msgstr "Chave API inválida"
 
 msgid "Invalid SKY.fm username or password"
-msgstr ""
+msgstr "Senha ou utilizador inválido para SKY.fm"
 
 msgid "Invalid di.fm username or password"
-msgstr ""
+msgstr "Senha ou utilizador inválido para di.fm"
 
 msgid "Invalid format"
 msgstr "Formato inválido"
@@ -1553,28 +1590,28 @@ msgid "Invalid session key"
 msgstr "Chave de sessão inválida"
 
 msgid "Invalid username and/or password"
-msgstr ""
+msgstr "Senha e/ou utilizador inválido"
 
 msgid "Jamendo"
-msgstr ""
+msgstr "Jamendo"
 
 msgid "Jamendo Most Listened Tracks"
-msgstr "As músicas mais ouvidas no Jamendo"
+msgstr "As faixas mais ouvidas no Jamendo"
 
 msgid "Jamendo Top Tracks"
-msgstr "As melhores músicas do Jamendo"
+msgstr "As melhores faixas do Jamendo"
 
 msgid "Jamendo Top Tracks of the Month"
-msgstr "As melhores músicas do mês no Jamendo"
+msgstr "As melhores faixas do mês no Jamendo"
 
 msgid "Jamendo Top Tracks of the Week"
-msgstr "As melhores músicas da semana no Jamendo"
+msgstr "As melhores faixas da semana no Jamendo"
 
 msgid "Jamendo database"
 msgstr "Base de dados Jamendo"
 
 msgid "Jump to the currently playing track"
-msgstr "Ir para a música atual"
+msgstr "Ir para a faixa atual"
 
 #, qt-format
 msgid "Keep buttons for %1 second..."
@@ -1655,18 +1692,18 @@ msgid "Last.fm tags"
 msgstr "\"Tags\" last.fm"
 
 msgid "Last.fm username"
-msgstr "Nome de utilizador last.fm"
+msgstr "Utilizador last.fm"
 
 msgid "Last.fm wiki"
 msgstr "Wiki last.fm"
 
 msgid "Least favourite tracks"
-msgstr "Músicas favoritas (mas pouco)"
+msgstr "Faixas favoritas (mas pouco)"
 
 msgid "Leave blank for the default.  Examples: \"/dev/dsp\", \"front\", etc."
 msgstr ""
 "Deixar em branco para as predefinições. Exemplos: \"/dev/dsp\", \"front\", "
-"etc."
+"etc"
 
 msgid "Length"
 msgstr "Duração"
@@ -1681,7 +1718,7 @@ msgid "Library rescan notice"
 msgstr "Aviso de análise da coleção"
 
 msgid "Library search"
-msgstr "Pesquisa na coleção"
+msgstr "Procurar na coleção"
 
 msgid "Limits"
 msgstr "Restrições"
@@ -1693,13 +1730,13 @@ msgid "Load"
 msgstr "Carregar"
 
 msgid "Load cover from URL"
-msgstr "Carregar capa de álbum da URL"
+msgstr "Carregar capa de álbum do URL"
 
 msgid "Load cover from URL..."
-msgstr "Carregar capa de álbum da URL..."
+msgstr "Carregar capa de álbum do URL..."
 
 msgid "Load cover from disk..."
-msgstr "Carregar capa no disco..."
+msgstr "Carregar capa de álbum no disco..."
 
 msgid "Load playlist"
 msgstr "Carregar lista de reprodução"
@@ -1729,10 +1766,10 @@ msgid "Loading stream"
 msgstr "A carregar emissão"
 
 msgid "Loading tracks"
-msgstr "A carregar músicas"
+msgstr "A carregar faixas"
 
 msgid "Loading tracks info"
-msgstr "A carregar info das músicas"
+msgstr "A carregar informação das faixas"
 
 msgid "Loading..."
 msgstr "A carregar..."
@@ -1773,10 +1810,10 @@ msgid "MP3"
 msgstr "MP3"
 
 msgid "MP3 256k (Premium only)"
-msgstr ""
+msgstr "MP3 256k (Premium)"
 
 msgid "MP3 96k"
-msgstr ""
+msgstr "MP3 96k"
 
 msgid "MP4 AAC"
 msgstr "MP4 AAC"
@@ -1809,13 +1846,13 @@ msgid "Manufacturer"
 msgstr "Fabricante"
 
 msgid "Match every search term (AND)"
-msgstr "Coincidir com cada termo de pesquisa (E)"
+msgstr "Coincidir com cada termo de procura (E)"
 
 msgid "Match one or more search terms (OR)"
-msgstr "Coincidir com um ou mais termos de pesquisa (OU)"
+msgstr "Coincidir com um ou mais termos de procura (OU)"
 
 msgid "Maximum bitrate"
-msgstr "Taxa máxima de dados"
+msgstr "Taxa de dados máxima"
 
 #, qt-format
 msgid "Medium (%1 fps)"
@@ -1831,7 +1868,7 @@ msgid "Membership type"
 msgstr "Tipo de adesão"
 
 msgid "Minimum bitrate"
-msgstr "Taxa mínima de dados"
+msgstr "Taxa de dados mínima"
 
 msgid "Missing projectM presets"
 msgstr "Pré-ajustes projectM em falta"
@@ -1862,9 +1899,6 @@ msgstr "Mover para a coleção..."
 
 msgid "Move up"
 msgstr "Mover para cima"
-
-msgid "&Music"
-msgstr "Música"
 
 msgid "Music (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma *.mp4 *.spx *.wav)"
 msgstr "Música (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma *.mp4 *.spx *.wav)"
@@ -1906,7 +1940,7 @@ msgid "Naming options"
 msgstr "Opções de nomeação"
 
 msgid "Narrow band (NB)"
-msgstr "Narrow band (NB)"
+msgstr "Banda estreita (NB)"
 
 msgid "Neighbors"
 msgstr "Vizinhos"
@@ -1936,16 +1970,16 @@ msgid "New songs"
 msgstr "Novas músicas"
 
 msgid "New tracks will be added automatically."
-msgstr "As novas música serão adicionadas automaticamente"
+msgstr "As novas faixas serão adicionadas automaticamente"
 
 msgid "Newest tracks"
-msgstr "Músicas recentes"
+msgstr "Faixas recentes"
 
 msgid "Next"
 msgstr "Seguinte"
 
 msgid "Next track"
-msgstr "Música seguinte"
+msgstr "Faixa seguinte"
 
 msgid "No analyzer"
 msgstr "Sem analisador"
@@ -1956,7 +1990,7 @@ msgstr "Sem blocos longos"
 msgid ""
 "No matches found.  Clear the search box to show the whole playlist again."
 msgstr ""
-"Nenhuma ocorrência. Limpe a caixa de pesquisa para mostrar toda a lista de "
+"Sem ocorrências. Limpe a caixa de procura para mostrar toda a lista de "
 "reprodução."
 
 msgid "No short blocks"
@@ -1973,7 +2007,7 @@ msgid "Normal block type"
 msgstr "Bloco normal"
 
 msgid "Not available while using a dynamic playlist"
-msgstr "Não disponível se estiver a utilizar uma lista dinâmica"
+msgstr "Não disponível, se estiver a utilizar uma lista dinâmica"
 
 msgid "Not connected"
 msgstr "Não ligado"
@@ -1993,8 +2027,11 @@ msgstr "Vizinhos insuficientes"
 msgid "Not installed"
 msgstr "Não instalado"
 
+msgid "Not logged in"
+msgstr "Não iniciou sessão"
+
 msgid "Not mounted - double click to mount"
-msgstr "Não montado - duplo clique para montar"
+msgstr "Não montado. Duplo clique para montar"
 
 msgid "Notification type"
 msgstr "Tipo de notificação"
@@ -2022,7 +2059,7 @@ msgstr "Mostrar apenas as primeiras"
 
 #, qt-format
 msgid "Open %1 in browser"
-msgstr ""
+msgstr "Abrir %1 no navegador"
 
 msgid "Open &audio CD..."
 msgstr "&Abrir cd áudio"
@@ -2033,6 +2070,9 @@ msgstr "Abrir dispositivo"
 msgid "Open dir.xiph.org in browser"
 msgstr "Abrir dir.xiph.org no navegador"
 
+msgid "Open file..."
+msgstr ""
+
 msgid "Open in new playlist"
 msgstr "Abrir numa nova lista de reprodução"
 
@@ -2041,9 +2081,6 @@ msgstr "Abrir jamendo.com no navegador"
 
 msgid "Open magnatune.com in browser"
 msgstr "Abrir magnatune.com no navegador"
-
-msgid "Open media..."
-msgstr "Abrir ficheiro..."
 
 msgid "Open somafm.com in browser"
 msgstr "Abrir soma.fm no navegador"
@@ -2088,7 +2125,7 @@ msgid "Output plugin"
 msgstr "\"Plug-in\" de saída"
 
 msgid "Overwrite existing files"
-msgstr "Substituir os ficheiros existentes"
+msgstr "Substituir ficheiros existentes"
 
 msgid "Parsing Jamendo catalogue"
 msgstr "Analisando o catálogo Jamendo"
@@ -2136,7 +2173,7 @@ msgid "Play if stopped, pause if playing"
 msgstr "Reproduzir se parado, pausar se em reprodução"
 
 msgid "Play if there is nothing already playing"
-msgstr "Reproduzir se não existir nenhuma música em reprodução"
+msgstr "Reproduzir, se não existir qualquer música em reprodução"
 
 msgid "Play last.fm artist radio"
 msgstr "Reproduzir rádio do artista na last.fm"
@@ -2145,7 +2182,7 @@ msgid "Play last.fm tag radio"
 msgstr "Reproduzir \"tag\" da rádio last.fm"
 
 msgid "Play tag radio..."
-msgstr "Reproduzir a \"tag\" da rádio..."
+msgstr "Reproduzir \"tag\" da rádio..."
 
 msgid "Play the <n>th track in the playlist"
 msgstr "Reproduzir a <n>ª faixa na lista de reprodução"
@@ -2162,7 +2199,7 @@ msgstr "Nome do reprodutor"
 msgid "Player options"
 msgstr "Opções do reprodutor"
 
-msgid "&Playlist"
+msgid "Playlist"
 msgstr "Lista de reprodução"
 
 msgid "Playlist finished"
@@ -2172,7 +2209,7 @@ msgid "Playlist options"
 msgstr "Opções da lista de reprodução"
 
 msgid "Playlist search"
-msgstr "Pesquisa na lista de reprodução"
+msgstr "Procurar na lista de reprodução"
 
 msgid "Playlist type"
 msgstr "Tipo de lista de reprodução"
@@ -2302,13 +2339,13 @@ msgid "Refresh channels"
 msgstr "Atualizar canais"
 
 msgid "Refresh friends list"
-msgstr ""
+msgstr "Atualizar lista de amigos"
 
 msgid "Refresh station list"
-msgstr "Atualizar a lista de estações"
+msgstr "Atualizar lista de estações"
 
 msgid "Refresh streams"
-msgstr ""
+msgstr "Atualizar emissões"
 
 msgid "Reggae"
 msgstr "Reggae"
@@ -2317,7 +2354,7 @@ msgid "Remember Wii remote swing"
 msgstr "Lembrar cadência do Wii remote"
 
 msgid "Remember from last time"
-msgstr "Lembrar a última opção"
+msgstr "Lembrar última opção"
 
 msgid "Remote Control"
 msgstr "Controlo remoto"
@@ -2338,10 +2375,10 @@ msgid "Remove playlist"
 msgstr "Remover lista de reprodução"
 
 msgid "Rename playlist"
-msgstr "Renomear lista de reprodução"
+msgstr "Mudar nome da lista de reprodução"
 
 msgid "Rename playlist..."
-msgstr "Renomear lista de reprodução..."
+msgstr "Mudar nome da lista de reprodução..."
 
 msgid "Renumber tracks in this order..."
 msgstr "Renumerar as músicas por esta ordem..."
@@ -2352,9 +2389,6 @@ msgstr "Repetir"
 msgid "Repeat album"
 msgstr "Repetir álbum"
 
-msgid "&Repeat mode"
-msgstr "Modo de repetição"
-
 msgid "Repeat playlist"
 msgstr "Repetir lista de reprodução"
 
@@ -2362,7 +2396,7 @@ msgid "Repeat track"
 msgstr "Repetir música"
 
 msgid "Replace and play now"
-msgstr ""
+msgstr "Substituir e reproduzir"
 
 msgid "Replace current playlist"
 msgstr "Substituir lista de reprodução atual"
@@ -2391,17 +2425,20 @@ msgstr "Reiniciar número de contagens"
 msgid "Restrict to ASCII characters"
 msgstr "Restringir a caracteres ASCII"
 
+msgid "Results"
+msgstr "Resultados"
+
 msgid "Rock"
 msgstr "Rock"
 
 msgid "SOCKS proxy"
-msgstr "Proxy \"SOCKS\""
+msgstr "Proxy SOCKS"
 
 msgid "Safely remove device"
-msgstr "Remover o dispositivo com segurança"
+msgstr "Remover dispositivo em segurança"
 
 msgid "Safely remove the device after copying"
-msgstr "Após a cópia, remover o dispositivo com segurança"
+msgstr "Depois de copiar, remover dispositivo em segurança"
 
 msgid "Sample rate"
 msgstr "Frequência"
@@ -2413,7 +2450,7 @@ msgid "Save album cover"
 msgstr "Gravar capa de álbum"
 
 msgid "Save cover to disk..."
-msgstr "Gravar capa para o disco..."
+msgstr "Gravar capa de álbum no disco..."
 
 msgid "Save image"
 msgstr "Gravar imagem"
@@ -2443,13 +2480,13 @@ msgid "Scrobble tracks that I listen to"
 msgstr "Enviar as músicas que eu oiço"
 
 msgid "Search"
-msgstr "Pesquisar"
+msgstr "Procurar"
 
 msgid "Search Grooveshark"
-msgstr ""
+msgstr "Procurar no Grooveshark"
 
 msgid "Search Grooveshark (opens a new tab)"
-msgstr ""
+msgstr "Procurar no Grooveshark (abre um novo separador)"
 
 msgid "Search Icecast stations"
 msgstr "Procurar estações Icecast"
@@ -2458,7 +2495,7 @@ msgid "Search Jamendo"
 msgstr "Procurar no Jamendo"
 
 msgid "Search Magnatune"
-msgstr "Pesquisar na Magnatune"
+msgstr "Pesquisar no Magnatune"
 
 msgid "Search Spotify"
 msgstr "Procurar no Spotify"
@@ -2470,16 +2507,16 @@ msgid "Search Spotify (opens a new tab)..."
 msgstr "Procurar no Spotify (abre um novo separador)..."
 
 msgid "Search for album covers..."
-msgstr "Pesquisar capas de álbuns..."
+msgstr "Procurar capas de álbuns..."
 
 msgid "Search mode"
-msgstr "Modo de pesquisa"
+msgstr "Modo de procura"
 
 msgid "Search options"
-msgstr "Opções de pesquisa"
+msgstr "Opções de procura"
 
 msgid "Search terms"
-msgstr "Termos de pesquisa"
+msgstr "Termos de procura"
 
 msgid "Second level"
 msgstr "Segundo nível"
@@ -2503,7 +2540,7 @@ msgid "Select None"
 msgstr "Nenhuma"
 
 msgid "Select best possible match"
-msgstr "Selecionar os prováveis"
+msgstr "Selecione os prováveis"
 
 msgid "Select visualizations"
 msgstr "Selecione as visualizações"
@@ -2522,10 +2559,10 @@ msgid "Set %1 to \"%2\"..."
 msgstr "Definir %1 para \"%2\"..."
 
 msgid "Set the volume to <value> percent"
-msgstr "Ajustar o volume para <value> por cento"
+msgstr "Ajustar volume para <value> por cento"
 
 msgid "Set value for all selected tracks..."
-msgstr "Utilizar o valor para todas as músicas selecionadas..."
+msgstr "Utilizar valor para todas as músicas selecionadas..."
 
 msgid "Settings"
 msgstr "Definições"
@@ -2545,7 +2582,7 @@ msgid "Show"
 msgstr "Mostrar"
 
 msgid "Show Global Search Popup"
-msgstr ""
+msgstr "Mostrar menu de procura global"
 
 msgid "Show OSD"
 msgstr "Mostrar notificação"
@@ -2554,7 +2591,7 @@ msgid "Show a glowing animation on the current track"
 msgstr "Mostrar uma animação brilhante na música atual"
 
 msgid "Show a native desktop notification"
-msgstr "Mostrar a notificação do ambiente de trabalho"
+msgstr "Mostrar notificação do ambiente de trabalho"
 
 msgid "Show a notification when I change the repeat/shuffle mode"
 msgstr ""
@@ -2564,10 +2601,13 @@ msgid "Show a notification when I change the volume"
 msgstr "Mostrar uma notificação quando eu altero o volume"
 
 msgid "Show a popup from the system tray"
-msgstr "Mostrar um alerta na área de notificação"
+msgstr "Mostrar alerta na área de notificação"
 
 msgid "Show a pretty OSD"
-msgstr "Mostrar uma notificação personalizada"
+msgstr "Mostrar notificação personalizada"
+
+msgid "Show a tooltip with more information about each result"
+msgstr "Mostrar ajuda com mais informações sobre os resultados"
 
 msgid "Show above status bar"
 msgstr "Mostrar acima da barra de estado"
@@ -2601,10 +2641,13 @@ msgstr "Mostrar apenas músicas sem detalhes"
 
 #, qt-format
 msgid "Show results from %1"
-msgstr ""
+msgstr "Mostrar resultados de %1"
 
 msgid "Show the \"love\" and \"ban\" buttons"
 msgstr "Mostrar os botões \"adorar\" e \"banir\""
+
+msgid "Show the Global Search box above the sidebar"
+msgstr "Mostrar a procura global por cima da barra lateral"
 
 msgid "Show the scrobble button in the main window"
 msgstr "Mostrar, na janela principal, o botão para \"Enviar\""
@@ -2624,9 +2667,6 @@ msgstr "Desordenar tudo"
 msgid "Shuffle by album"
 msgstr "Desordenar por álbum"
 
-msgid "&Shuffle mode"
-msgstr "Modo de desordenação"
-
 msgid "Shuffle playlist"
 msgstr "Desordenar lista de reprodução"
 
@@ -2634,7 +2674,7 @@ msgid "Sign out"
 msgstr "Terminar sessão"
 
 msgid "Signing in..."
-msgstr ""
+msgstr "A iniciar sessão..."
 
 msgid "Similar artists"
 msgstr "Artistas semelhantes"
@@ -2661,13 +2701,13 @@ msgid "Smart playlist"
 msgstr "Lista de reprodução inteligente"
 
 msgid "Smart playlists"
-msgstr "Listas de reprodução inteligente"
+msgstr "Listas de reprodução inteligentes"
 
 msgid "Soft"
 msgstr "Suave"
 
 msgid "Soft Rock"
-msgstr "Soft Rock"
+msgstr "Rock suave"
 
 msgid "Song Information"
 msgstr "Informações da música"
@@ -2696,6 +2736,9 @@ msgstr "Organizar músicas por"
 msgid "Sorting"
 msgstr "Organização"
 
+msgid "Sources"
+msgstr "Origens"
+
 msgid "Speex"
 msgstr "Speex"
 
@@ -2718,17 +2761,17 @@ msgid "Starred"
 msgstr "Com estrela"
 
 msgid "Start the playlist currently playing"
-msgstr "Iniciar a lista de reprodução atual"
+msgstr "Iniciar lista de reprodução atual"
 
 msgid "Start transcoding"
 msgstr "Iniciar conversão"
 
 msgid "Start typing in the search box above to find music on Grooveshark."
 msgstr ""
+"Escreva algo na caixa de procura para descobrir músicas no Grooveshark"
 
 msgid "Start typing in the search box above to find music on Spotify."
-msgstr ""
-"Escreva o texto na caixa de pesquisa e encontre a(s) música(s) no Spotify."
+msgstr "Escreva algo na caixa de procura para descobrir músicas no Spotify"
 
 #, qt-format
 msgid "Starting %1"
@@ -2747,7 +2790,7 @@ msgid "Stop after this track"
 msgstr "Parar após esta música"
 
 msgid "Stop playback"
-msgstr "Parar a reprodução"
+msgstr "Parar reprodução"
 
 msgid "Stop playing after current track"
 msgstr "Parar reprodução após a música atual"
@@ -2782,7 +2825,7 @@ msgid "Supported formats"
 msgstr "Formatos suportados"
 
 msgid "Switch provider"
-msgstr ""
+msgstr "Trocar fornecedor"
 
 msgid "Syncing Spotify inbox"
 msgstr "A sincronizar caixa de entrada Spotify"
@@ -2791,7 +2834,7 @@ msgid "Syncing Spotify playlist"
 msgstr "A sincronizar lista de reprodução Spotify"
 
 msgid "Syncing Spotify starred tracks"
-msgstr "A sincronizar as músicas Spotify assinaladas"
+msgstr "A sincronizar músicas Spotify assinaladas"
 
 msgid "Tabs on top"
 msgstr "Separadores no topo"
@@ -2819,7 +2862,7 @@ msgstr "Obrigado a"
 
 #, qt-format
 msgid "The \"%1\" command could not be started."
-msgstr "O comando \"%1\" não pôde ser iniciado."
+msgstr "O comando \"%1\" não pôde ser iniciado"
 
 #, qt-format
 msgid "The directory %1 is not valid"
@@ -2827,16 +2870,16 @@ msgstr "O diretório %1 é inválido"
 
 #, qt-format
 msgid "The playlist '%1' was empty or could not be loaded."
-msgstr "A lista de reprodução \"%1\"  está vazia ou não pôde ser carregada."
+msgstr "A lista de reprodução \"%1\" está vazia ou não pôde ser carregada"
 
 msgid "The second value must be greater than the first one!"
 msgstr "O segundo valor tem que ser superior ao primeiro!"
 
 msgid "The site you requested does not exist!"
-msgstr "O sítio que indicou não existe !"
+msgstr "O sítio que indicou não existe!"
 
 msgid "The site you requested is not an image!"
-msgstr "O sítio que indicou não é uma imagem !"
+msgstr "O sítio que indicou não é uma imagem!"
 
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
@@ -2859,30 +2902,31 @@ msgid ""
 "There were problems deleting some songs.  The following files could not be "
 "deleted:"
 msgstr ""
-"Ocorreram alguns problemas ao apagar as músicas. Os seguintes ficheiros não "
-"foram apagados:"
+"Ocorreram alguns problemas ao eliminar as músicas. Os seguintes ficheiros "
+"não foram eliminados:"
 
 msgid ""
 "These files will be deleted from disk, are you sure you want to continue?"
 msgstr ""
-"Estes ficheiros irão ser apagados do disco, tem a certeza que quer continuar?"
+"Estes ficheiros vão ser eliminados do disco. Tem a certeza de que quer "
+"continuar?"
 
 msgid ""
 "These files will be deleted from the device, are you sure you want to "
 "continue?"
 msgstr ""
-"Estes ficheiros irão ser apagados do dispositivo, tem a certeza que quer "
-"continuar?"
+"Estes ficheiros vão ser eliminados do dispositivo. Tem a certeza de que quer"
+" continuar?"
 
 msgid "These folders will be scanned for music to make up your library"
-msgstr "Estas pastas irão ser analisadas para criar a sua coleção"
+msgstr "Estas pastas vão ser analisadas para criar a sua coleção"
 
 msgid ""
 "These settings are used in the \"Transcode Music\" dialog, and when "
 "converting music before copying it to a device."
 msgstr ""
 "Estas definições são utilizadas na \"Conversão de música\", no momento "
-"anterior à cópia para o dispositivo."
+"anterior à cópia para o dispositivo"
 
 msgid "Third level"
 msgstr "Terceiro nível"
@@ -2891,19 +2935,18 @@ msgid ""
 "This action will create a database which could be as big as 150 MB.\n"
 "Do you want to continue anyway?"
 msgstr ""
-"Com esta opção, vai ser criada uma base de dados que pode atingir os 150 "
-"MB.\n"
+"Com esta opção, vai criar uma base de dados que pode atingir os 150 MB.\n"
 "Pretende continuar?"
 
 msgid "This album is not available in the requested format"
 msgstr "Este álbum não está disponível no formato solicitado"
 
 msgid ""
-"This device must be connected and opened before Clementine can see what file "
-"formats it supports."
+"This device must be connected and opened before Clementine can see what file"
+" formats it supports."
 msgstr ""
-"Este dispositivo deve estar ligado e aberto para que o Clementine verifique "
-"os tipos de formatos suportados."
+"Este dispositivo deve estar ligado e aberto, para que o Clementine verifique"
+" os tipos de formatos suportados"
 
 msgid "This device supports the following file formats:"
 msgstr "Este dispositivo tem suporte aos seguintes formatos:"
@@ -2915,12 +2958,12 @@ msgid ""
 "This is an MTP device, but you compiled Clementine without libmtp support."
 msgstr ""
 "Este é um dispositivo MTP, mas você compilou o Clementine sem suporte a "
-"libmtp."
+"libmtp"
 
 msgid "This is an iPod, but you compiled Clementine without libgpod support."
 msgstr ""
 "Este é um dispositivo iPod, mas você compilou o Clementine sem suporte a "
-"libgpod."
+"libgpod"
 
 msgid ""
 "This is the first time you have connected this device.  Clementine will now "
@@ -3011,7 +3054,7 @@ msgid "URL(s)"
 msgstr "URL(s)"
 
 msgid "Ultra wide band (UWB)"
-msgstr "Ultra wide band (UWB)"
+msgstr "Bando ultra larga (UWB)"
 
 #, qt-format
 msgid "Unable to download %1 (%2)"
@@ -3027,30 +3070,30 @@ msgid "Unset cover"
 msgstr "Sem capa"
 
 msgid "Update changed library folders"
-msgstr "Atualizar as pastas alteradas"
+msgstr "Atualizar pastas alteradas"
 
 msgid "Update the library when Clementine starts"
 msgstr "Atualizar coleção ao iniciar o Clementine"
 
 #, qt-format
 msgid "Updating %1"
-msgstr "Atualizando %1"
+msgstr "A atualizar %1"
 
 #, qt-format
 msgid "Updating %1%..."
-msgstr "Atualizando %1%..."
+msgstr "A atualizar %1%..."
 
 msgid "Updating library"
-msgstr "Atualizando coleção"
+msgstr "A atualizar coleção"
 
 msgid "Usage"
 msgstr "Utilização"
 
 msgid "Use Gnome's shortcut keys"
-msgstr "Usar teclas de atalho Gnome"
+msgstr "Utilizar teclas de atalho Gnome"
 
 msgid "Use Replay Gain metadata if it is available"
-msgstr "Se disponível, utilizar a consistência de metadados"
+msgstr "Se disponível, utilizar a consistência de dados (Replay Gain)"
 
 msgid "Use Wii Remote"
 msgstr "Utilizar Wii Remote"
@@ -3065,29 +3108,32 @@ msgid "Use bitrate management engine"
 msgstr "Utilizar mecanismo de gestão de dados"
 
 msgid "Use dynamic mode"
-msgstr "Utilizar o modo dinâmico"
+msgstr "Utilizar modo dinâmico"
 
 msgid "Use notifications to report Wii Remote status"
-msgstr "Utilizar notificações para reportar o estado do Wii Remote"
+msgstr "Utilizar notificações, para reportar o estado do Wii Remote"
 
 msgid "Use temporal noise shaping"
 msgstr "Utilizar modelação de ruído"
 
 msgid "Use the system default"
-msgstr "Utilizar as definições do sistema"
+msgstr "Utilizar definições do sistema"
 
 msgid "Use the system proxy settings"
-msgstr "Utilizar as definições do sistema"
+msgstr "Utilizar definições do sistema"
 
 msgid "Used"
 msgstr "Utilizado"
 
 #, qt-format
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
-msgstr ""
+msgstr "O utilizador %1 não tem uma conta Grooveshark Anywhere"
+
+msgid "User interface"
+msgstr "Interface de utilizador"
 
 msgid "Username"
-msgstr "Nome de utilizador"
+msgstr "Utilizador"
 
 msgid "Using the menu to add a song will..."
 msgstr "Ao utilizar o menu para adicionar uma música..."
@@ -3097,9 +3143,6 @@ msgstr "VBR MP3"
 
 msgid "Variable bit rate"
 msgstr "Taxa de dados variável"
-
-msgid "Various Artists"
-msgstr "Vários artistas"
 
 msgid "Various artists"
 msgstr "Vários artistas"
@@ -3125,7 +3168,7 @@ msgstr "Deteção de voz"
 
 #, qt-format
 msgid "Volume %1%"
-msgstr "Volume %1%"
+msgstr "Disco %1%"
 
 msgid "Volume name"
 msgstr "Nome do disco"
@@ -3149,20 +3192,17 @@ msgid "When Clementine starts"
 msgstr "Ao iniciar o Clementine"
 
 msgid ""
-"When looking for album art Clementine will first look for picture files that "
-"contain one of these words.\n"
+"When looking for album art Clementine will first look for picture files that contain one of these words.\n"
 "If there are no matches then it will use the largest image in the directory."
 msgstr ""
-"Ao procurar pelas capas dos álbuns, o Clementine irá procurar as imagens que "
-"contenham uma destas palavras.\n"
-"Se não existirem ocorrências, o Clementine utilizará a maior imagem do "
-"diretório."
+"Ao procurar pelas capas dos álbuns, o Clementine irá procurar as imagens que contenham uma destas palavras.\n"
+"Se não existirem ocorrências, o Clementine utilizará a maior imagem do diretório."
 
 msgid "WiFi MAC Address"
-msgstr "Endereço MAC \"WiFi\""
+msgstr "Endereço MAC WiFi"
 
 msgid "Wide band (WB)"
-msgstr "Wide band (WB)"
+msgstr "Banda larga (WB)"
 
 #, qt-format
 msgid "Wii Remote %1: actived"
@@ -3174,7 +3214,7 @@ msgstr "Wii Remote %1: ligado"
 
 #, qt-format
 msgid "Wii Remote %1: critical battery (%2%) "
-msgstr "Wii Remote %1: bateria em estado crítico (%2%) "
+msgstr "Wii Remote %1: bateria em estado crítico (%2%)"
 
 #, qt-format
 msgid "Wii Remote %1: disactived"
@@ -3189,22 +3229,22 @@ msgid "Wii Remote %1: low battery (%2%)"
 msgstr "Wii Remote %1: bateria fraca (%2%)"
 
 msgid "Wiimotedev"
-msgstr ""
+msgstr "Wiimotedev"
 
 msgid "Windows Media 128k (Premium only)"
-msgstr ""
+msgstr "Windows Media 128k (Premium)"
 
 msgid "Windows Media 40k"
-msgstr ""
+msgstr "Windows Media 40k"
 
 msgid "Windows Media 64k (Premium only)"
-msgstr ""
+msgstr "Windows Media 64k (Premium)"
 
 msgid "Windows Media audio"
 msgstr "Windows Media Áudio"
 
 msgid "Would you like to run a full rescan right now?"
-msgstr "Pretende executar agora a nova análise?"
+msgstr "Pretende executar a nova análise?"
 
 msgid "Year"
 msgstr "Ano"
@@ -3222,64 +3262,69 @@ msgid "You are about to download the following albums"
 msgstr "Está prestes a transferir os seguintes álbuns"
 
 msgid "You are not signed in."
-msgstr ""
+msgstr "Não iniciou sessão"
 
 #, qt-format
 msgid "You are signed in as %1."
-msgstr ""
+msgstr "Iniciou sessão como %1"
 
 msgid "You are signed in."
-msgstr ""
+msgstr "Sessão iniciada"
 
 msgid "You can change the way the songs in the library are organised."
-msgstr "Pode modificar o modo de organização das músicas na coleção."
+msgstr "Pode modificar o modo de organização das músicas na coleção"
 
 msgid ""
 "You can listen for free without an account, but Premium members can listen "
 "to higher quality streams without advertisements."
 msgstr ""
+"Pode ouvir músicas gratuitamente, mas só os membros Premium podem escutar as"
+" emissões com a melhor qualidade e sem anúncios"
 
 msgid ""
-"You can listen to Magnatune songs for free without an account.  Purchasing a "
-"membership removes the messages at the end of each track."
+"You can listen to Magnatune songs for free without an account.  Purchasing a"
+" membership removes the messages at the end of each track."
 msgstr ""
-"Você pode ouvir as músicas Magnatune sem possuir uma conta. Se aderir ao "
-"serviço, a mensagem no final de cada música será removida."
+"Pode ouvir as músicas Magnatune sem possuir uma conta. Se aderir ao serviço,"
+" a mensagem no final de cada música será removida"
 
 msgid "You can listen to background streams at the same time as other music."
 msgstr ""
-"Pode ouvir as emissões em segundo plano em simultâneo com outras músicas."
+"Pode ouvir as emissões em segundo plano, em simultâneo com outras músicas"
 
 msgid ""
-"You can scrobble tracks for free, but only <span style=\" font-weight:600;"
-"\">paid subscribers</span> can stream Last.fm radio from Clementine."
+"You can scrobble tracks for free, but only <span style=\" font-"
+"weight:600;\">paid subscribers</span> can stream Last.fm radio from "
+"Clementine."
 msgstr ""
-"Pode enviar as suas músicas gratuitamente, mas apenas os <span style=\" font-"
-"weight:600;\">assinantes</span> conseguem ouvir as rádios da last.fm através "
-"do Clementine."
+"Pode enviar as suas músicas gratuitamente, mas apenas os <span style=\" "
+"font-weight:600;\">assinantes</span> conseguem ouvir as rádios da last.fm "
+"através do Clementine"
 
 msgid ""
-"You can use your Wii Remote as a remote control for Clementine.  <a href="
-"\"http://www.clementine-player.org/wiimote\">See the page on the Clementine "
-"wiki</a> for more information.\n"
+"You can use your Wii Remote as a remote control for Clementine.  <a "
+"href=\"http://www.clementine-player.org/wiimote\">See the page on the "
+"Clementine wiki</a> for more information.\n"
 msgstr ""
-"Pode utilizar o seu Wii Remote para controlar o Clementine. <a href=\"http://"
-"www.clementine-player.org/wiimote\">Veja a página no Clementine wiki</a> "
-"para mais informações.\n"
+"Pode utilizar o seu Wii Remote para controlar o Clementine. Consulte o <a "
+"href=\"http://www.clementine-player.org/wiimote\">wiki do Clementine</a> "
+"para mais informações\n"
 
 msgid "You do not have a Grooveshark Anywhere account."
-msgstr ""
+msgstr "Você não tem uma conta Grooveshark Anywhere"
 
 msgid "You do not have a Spotify Premium account."
-msgstr ""
+msgstr "Você não tem uma conta Spotify Premium"
 
 msgid ""
 "You have selected a Premium-only audio type but do not have any account "
 "details entered"
 msgstr ""
+"Selecionou uma emissão apenas disponível para membros Premium, mas não "
+"possui uma conta com detalhes"
 
 msgid "You have selected an invalid audio type setting"
-msgstr ""
+msgstr "Selecionou um tipo de áudio inválido"
 
 msgid "You love this track"
 msgstr "Você adora esta música"
@@ -3290,17 +3335,17 @@ msgid ""
 "shortcuts in Clementine."
 msgstr ""
 "Precisa de iniciar as preferências do sistema e escolher \"<span style=\" "
-"font-style:italic;\">Ativar acesso de apoio a dispositivos</span>\" de modo "
-"a utilizar os atalhos globais do Clementine."
+"font-style:italic;\">Ativar acesso de apoio a dispositivos</span>\", para "
+"utilizar os atalhos globais do Clementine"
 
 msgid "You will need to restart Clementine if you change the language."
-msgstr "Se alterar o idioma, tem que reiniciar o Clementine para o aplicar."
+msgstr "Se alterar o idioma, tem que reiniciar o Clementine para o aplicar"
 
 msgid ""
-"You will not be able to play Last.fm radio stations as you are not a Last.fm "
-"subscriber."
+"You will not be able to play Last.fm radio stations as you are not a Last.fm"
+" subscriber."
 msgstr ""
-"Você só conseguirá ouvir as estações last.fm se possuir uma assinatura."
+"Você só conseguirá ouvir as estações last.fm, se possuir uma assinatura"
 
 #, qt-format
 msgid "You're logged in as <b>%1</b>"
@@ -3321,8 +3366,8 @@ msgid ""
 "package."
 msgstr ""
 "A sua instalação gstreamer não possui o componente \"ofa\". Este componente "
-"é obrigatório para obter detalhes. Tente instalar o pacote gstreamer-plugins-"
-"bad"
+"é obrigatório para obter detalhes. Tente instalar o pacote gstreamer-"
+"plugins-bad"
 
 msgid "Your library is empty!"
 msgstr "A coleção está vazia!"
@@ -3335,15 +3380,15 @@ msgid "Your scrobbles: %1"
 msgstr "Os seus envios: %1"
 
 msgid "Your username or password was incorrect."
-msgstr ""
+msgstr "Utilizador e/ou senha inválida"
 
 msgid "Z-A"
 msgstr "Z-A"
 
 msgid "Zero"
-msgstr "Zero"
+msgstr "Nulo"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "add %n songs"
 msgstr "adicionar %n músicas"
 
@@ -3388,7 +3433,7 @@ msgid "ends with"
 msgstr "termina com"
 
 msgid "equals"
-msgstr "igual"
+msgstr "igual a"
 
 msgid "greater than"
 msgstr "maior que"
@@ -3412,7 +3457,7 @@ msgid "newest first"
 msgstr "a mais recente primeiro"
 
 msgid "not equals"
-msgstr "não igual"
+msgstr "não igual a"
 
 msgid "not in the last"
 msgstr "não nos últimos"
@@ -3432,7 +3477,7 @@ msgstr "opções"
 msgid "press enter"
 msgstr "prima enter"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "remove %n songs"
 msgstr "remover %n músicas"
 
@@ -3452,82 +3497,4 @@ msgstr "parar"
 msgid "track %1"
 msgstr "faixa %1"
 
-#~ msgid "Are you sure you want to install the following scripts?"
-#~ msgstr "Tem a certeza que quer instalar estes \"scripts\"?"
 
-#~ msgid "Clementine scripts"
-#~ msgstr "\"Scripts\" Clementine"
-
-#~ msgid "Context:"
-#~ msgstr "Contexto:"
-
-#~ msgid "Developer mode"
-#~ msgstr "Modo de programação"
-
-#~ msgid "Disable"
-#~ msgstr "Desativar"
-
-#~ msgid "Enable"
-#~ msgstr "Ativar"
-
-#~ msgid "Enter an URL to download a cover from the Internet:"
-#~ msgstr "Indique o URL para transferir a capa do álbum:"
-
-#~ msgid "Error installing script"
-#~ msgstr "Erro ao instalar o \"script\""
-
-#~ msgid "Error opening script archive"
-#~ msgstr "Erro ao abrir o arquivo do \"script\""
-
-#~ msgid "Get new scripts"
-#~ msgstr "Obter \"scripts\""
-
-#~ msgid "Global Shortcuts"
-#~ msgstr "Atalhos globais"
-
-#~ msgid "Install from file..."
-#~ msgstr "Do ficheiro..."
-
-#~ msgid "Install script file"
-#~ msgstr "Instalar \"script\""
-
-#~ msgid "Install scripts"
-#~ msgstr "Instalar \"scripts\""
-
-#~ msgid "My scripts"
-#~ msgstr "Os meus \"scripts\""
-
-#~ msgid "Please fill in the blanks to login into Last.fm"
-#~ msgstr "Preencha os campos vazios para iniciar sessão na last.fm"
-
-#~ msgid "Python console"
-#~ msgstr "Consola Python"
-
-#~ msgid "Reload"
-#~ msgstr "Recarregar"
-
-#~ msgid "Script Manager"
-#~ msgstr "Gestor de \"scripts\""
-
-#~ msgid "Settings..."
-#~ msgstr "Definições..."
-
-#~ msgid "Some files failed to install.  The script may not work correctly."
-#~ msgstr ""
-#~ "Ocorreram erros ao instalar os ficheiros. É possível que o \"script\" não "
-#~ "funcione."
-
-#~ msgid "The '%1' script was modified, you might have to reload it"
-#~ msgstr ""
-#~ "O \"script\" \"%1\" foi modificado. Pode ser que necessite de o "
-#~ "recarregar."
-
-#~ msgid "This is not a valid Clementine script file."
-#~ msgstr "Este não é um ficheiro válido."
-
-#~ msgid ""
-#~ "Warning: scripts have full access to your computer and your music.  Only "
-#~ "install scripts that you trust."
-#~ msgstr ""
-#~ "Aviso: os \"scripts\" tem acesso integral ao seu computador e à sua "
-#~ "música. Só deve instalar \"scripts\" nos quais confia."

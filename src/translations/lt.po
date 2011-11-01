@@ -1,26 +1,19 @@
-# Lithuanian translation for clementine
-# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
-# This file is distributed under the same license as the clementine package.
+# Clementine.
+# Copyright (C) 2010 David Sansome
+# This file is distributed under the same license as the Clementine package.
+# 
+# Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: clementine 0.6\n"
-"Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/"
-"list\n"
-"POT-Creation-Date: 2011-06-26 20:31+0000\n"
-"PO-Revision-Date: 2011-09-05 16:43+0000\n"
-"Last-Translator: Liudas Ališauskas <liudas.alisauskas@gmail.com>\n"
-"Language-Team: Lithuanian <liudas@akmc.lt>\n"
-"Language: lt\n"
-"MIME-Version: 1.0\n"
+"Project-Id-Version: Clementine Music Player\n"
+"Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
+"PO-Revision-Date: 2011-11-01 04:40+0000\n"
+"Last-Translator: clementinebuildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-09-06 04:51+0000\n"
-"X-Generator: Launchpad (build 13861)\n"
-"X-Poedit-Country: LITHUANIA\n"
-"X-Poedit-Language: Lithuanian\n"
-"X-Poedit-SourceCharset: utf-8\n"
+"Language: lt\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
 
 msgid " kbps"
 msgstr " kbps"
@@ -93,15 +86,15 @@ msgstr "%L1 kitų klausytojų"
 msgid "%L1 total plays"
 msgstr "%L1 viso perklausymų"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n failed"
 msgstr "%n nepavyko"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n finished"
 msgstr "%n baigta"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n remaining"
 msgstr "%n pervadinama"
 
@@ -113,6 +106,9 @@ msgstr "&Centras"
 
 msgid "&Custom"
 msgstr "&Pasirinktinas"
+
+msgid "&Extras"
+msgstr "Ekstra"
 
 msgid "&Help"
 msgstr "&Pagalba"
@@ -127,14 +123,26 @@ msgstr "&Paslėpti..."
 msgid "&Left"
 msgstr "&Kairė"
 
+msgid "&Music"
+msgstr "Muzika"
+
 msgid "&None"
 msgstr "&Nieko"
+
+msgid "&Playlist"
+msgstr "Grojaraštis"
 
 msgid "&Quit"
 msgstr "&Baigti"
 
+msgid "&Repeat mode"
+msgstr "Kartojimo režimas"
+
 msgid "&Right"
 msgstr "&Dešinė"
+
+msgid "&Shuffle mode"
+msgstr "Maišymo veiksena"
 
 msgid "&Stretch columns to fit window"
 msgstr "&Ištempti stulpelius, kad užpildytų langą"
@@ -175,14 +183,11 @@ msgstr ""
 msgid ""
 "<p>Tokens start with %, for example: %artist %album %title </p>\n"
 "\n"
-"<p>If you surround sections of text that contain a token with curly-braces, "
-"that section will be hidden if the token is empty.</p>"
+"<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
 msgstr ""
 "<p>Atpažinimo ženklas prasideda iš %, pav.: %albumas %pavadinimas </p>\n"
 "\n"
-"<p>Jei bus teksto skyriai, kurie turi atpažinimo ženklą su riestiniais "
-"skliausteliais, tas skyrius bus paslėptas, jei atpažinimo ženklas yra "
-"tuščias.</p>"
+"<p>Jei bus teksto skyriai, kurie turi atpažinimo ženklą su riestiniais skliausteliais, tas skyrius bus paslėptas, jei atpažinimo ženklas yra tuščias.</p>"
 
 msgid "A Grooveshark Anywhere account is required."
 msgstr ""
@@ -198,7 +203,8 @@ msgstr ""
 "Išmanusis grojaraštis yra dinaminis sąrašas sudaromas iš jūsų fonotekos. "
 "Išmaniųjų grojaraščių yra keli tipai kurie siūlo skirtingai atrinkti dainas."
 
-msgid "A song will be included in the playlist if it matches these conditions."
+msgid ""
+"A song will be included in the playlist if it matches these conditions."
 msgstr "Daina bus įtraukta į grojaraštį jei atitiks šias sąlygas"
 
 msgid "A-Z"
@@ -423,8 +429,8 @@ msgid ""
 "An additional plugin is required to use Spotify in Clementine.  Would you "
 "like to download and install it now?"
 msgstr ""
-"Kad naudotumėte Spotify Clementine grotuve, jums reikia papildomo išplėtimo. "
-"Ar parsiųsti ir įdiegti jį dabar?"
+"Kad naudotumėte Spotify Clementine grotuve, jums reikia papildomo išplėtimo."
+" Ar parsiųsti ir įdiegti jį dabar?"
 
 msgid "An error occurred copying the iTunes database from the device"
 msgstr "Iškilo klaida kopijuojant iTunes duomenų bazę iš įrenginio"
@@ -657,12 +663,13 @@ msgid ""
 "Clementine can automatically convert the music you copy to this device into "
 "a format that it can play."
 msgstr ""
-"Į šį įrenginį „Clementine“ gali automatiškai konvertuoti kopijuojamą  muziką "
-"formatu, kurį įrenginys palaiko."
+"Į šį įrenginį „Clementine“ gali automatiškai konvertuoti kopijuojamą  muziką"
+" formatu, kurį įrenginys palaiko."
 
 msgid ""
 "Clementine can be controlled remotely by an Android phone.  To enable this "
-"feature log in with the same Google account that is configured on your phone."
+"feature log in with the same Google account that is configured on your "
+"phone."
 msgstr ""
 "„Clementine„ gali būti valdomas nuotoliniu būdu per „Android“ telefoną. Kad "
 "įjungti šią savybę prisijunkite ta pačia „Google“ paskyra, kuri yra "
@@ -680,7 +687,8 @@ msgstr ""
 
 msgid ""
 "Clementine couldn't fetch your subscription status since there are problems "
-"with your connection. Played tracks will be cached and sent later to Last.fm."
+"with your connection. Played tracks will be cached and sent later to "
+"Last.fm."
 msgstr ""
 "Clementine negalėjo nustatyti jūsų vartotojo tipo, nes yra problemų su jūsų "
 "internetu. Grojami kūriniai bus išsaugoti ir nusiųsti vėliau į Last.fm."
@@ -714,6 +722,9 @@ msgstr "Klubinė"
 
 msgid "Color"
 msgstr "Spalva"
+
+msgid "Combine identical results from different sources"
+msgstr ""
 
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Kableliais išskirtas sąrašas iš klasės:lygio, lygis yra nuo 0 iki 3"
@@ -1128,6 +1139,12 @@ msgstr "Įjungti grojaraščio fono paveikslėlį"
 msgid "Enable shortcuts only when Clementine is focused"
 msgstr "Įgalinti kombinacijas tik tada kai Clementine yra aktyvus"
 
+msgid ""
+"Enable sources below to include them in Global Search results.  When "
+"identical results are available from more than one source, ones at the top "
+"will take priority."
+msgstr ""
+
 msgid "Enable/disable Last.fm scrobbling"
 msgstr "Įjungti/Išjungti „Last.fm scrobbling“"
 
@@ -1205,9 +1222,6 @@ msgstr "Bet kada grota"
 msgid "Except between tracks on the same album or in the same CUE sheet"
 msgstr "Išskyrus tarp takelių tame pačiame albume arba tame pačiame CUE lape"
 
-msgid "&Extras"
-msgstr "Ekstra"
-
 msgid "F1"
 msgstr "F1"
 
@@ -1240,6 +1254,9 @@ msgstr "Suliejimo trukmė"
 
 msgid "Fast"
 msgstr "Greitai"
+
+msgid "Favorites"
+msgstr ""
 
 msgid "Favourite tracks"
 msgstr "Megstami takeliai"
@@ -1355,6 +1372,9 @@ msgstr "Visi aukšti tonai"
 msgid "GStreamer audio engine"
 msgstr "GStreamer audio variklis"
 
+msgid "General"
+msgstr ""
+
 msgid "General settings"
 msgstr "Pagrindiniai nustatymai"
 
@@ -1369,6 +1389,9 @@ msgstr ""
 
 msgid "Give it a name:"
 msgstr "Suteikti pavadinimą"
+
+msgid "Global Search"
+msgstr ""
 
 msgid "Global search"
 msgstr ""
@@ -1431,6 +1454,9 @@ msgstr "Įrangos informacija"
 msgid "Hardware information is only available while the device is connected."
 msgstr "Aparatūros informacija prieinama tik kai įrenginys yra prijungtas."
 
+msgid "Hide all other search boxes"
+msgstr ""
+
 msgid "High"
 msgstr "Aukšta"
 
@@ -1463,8 +1489,8 @@ msgid "Identifying song"
 msgstr "Nustatoma daina"
 
 msgid ""
-"If you continue, this device will work slowly and songs copied to it may not "
-"work."
+"If you continue, this device will work slowly and songs copied to it may not"
+" work."
 msgstr ""
 "Jei tęsite, šis įrenginys dirbs lėtai ir nukopijuotos dainos gali nedirbti."
 
@@ -1472,8 +1498,8 @@ msgid ""
 "If you use the remote on more than one computer, this name will help you "
 "choose which one to connect to on your phone."
 msgstr ""
-"Jei naudojate nuotolinio valdymo pultą daugiau nei viename kompiuteryje, šis "
-"pavadinimas padės jums pasirinkti, kurį prijunkti prie jūsų telefono."
+"Jei naudojate nuotolinio valdymo pultą daugiau nei viename kompiuteryje, šis"
+" pavadinimas padės jums pasirinkti, kurį prijunkti prie jūsų telefono."
 
 msgid "Ignore \"The\" in artist names"
 msgstr "Nepaisyti \"The\" atlikėjų varduose"
@@ -1501,6 +1527,9 @@ msgstr "Rodyti albumo paveikslus pranešime"
 msgid "Include all songs"
 msgstr "Įtraukti visas dainas"
 
+msgid "Include keyboard shortcut help in the tooltip"
+msgstr ""
+
 msgid "Increase the volume by 4%"
 msgstr "Pagarsinti 4%"
 
@@ -1518,6 +1547,9 @@ msgstr "Įdiegta"
 
 msgid "Internet"
 msgstr "Internetas"
+
+msgid "Internet providers"
+msgstr ""
 
 msgid "Invalid API key"
 msgstr "Netinkamas API raktas"
@@ -1857,9 +1889,6 @@ msgstr "Perkelti į fonoteką"
 msgid "Move up"
 msgstr "Perkelti aukštyn"
 
-msgid "&Music"
-msgstr "Muzika"
-
 msgid "Music (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma *.mp4 *.spx *.wav)"
 msgstr "Muzika (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma *.mp4 *.spx *.wav)"
 
@@ -1985,6 +2014,9 @@ msgstr "Nepakanka kaimynų"
 msgid "Not installed"
 msgstr "Neįdiegta"
 
+msgid "Not logged in"
+msgstr ""
+
 msgid "Not mounted - double click to mount"
 msgstr "Neprijungtas - du kartus spragtelėkite, kad prijungti"
 
@@ -2025,6 +2057,9 @@ msgstr "Atverti įrenginį"
 msgid "Open dir.xiph.org in browser"
 msgstr "Atverti dir.xiph.org interneto naršyklėje"
 
+msgid "Open file..."
+msgstr ""
+
 msgid "Open in new playlist"
 msgstr "Atverti naujame grojaraštyje"
 
@@ -2033,9 +2068,6 @@ msgstr "Atverti jamendo.com interneto naršyklėje"
 
 msgid "Open magnatune.com in browser"
 msgstr "Atverti magnatune.com interneto naršyklėje"
-
-msgid "Open media..."
-msgstr "Atverti media..."
 
 msgid "Open somafm.com in browser"
 msgstr "Atverti somafm.com interneto naršyklėje"
@@ -2154,7 +2186,7 @@ msgstr "Grotuvo pavadinimas"
 msgid "Player options"
 msgstr "Leistuvo parinktys"
 
-msgid "&Playlist"
+msgid "Playlist"
 msgstr "Grojaraštis"
 
 msgid "Playlist finished"
@@ -2345,9 +2377,6 @@ msgstr "Kartoti"
 msgid "Repeat album"
 msgstr "Kartoti albumą"
 
-msgid "&Repeat mode"
-msgstr "Kartojimo režimas"
-
 msgid "Repeat playlist"
 msgstr "Kartoti grojaraštį"
 
@@ -2383,6 +2412,9 @@ msgstr "Atstatyti perklausų skaičių"
 
 msgid "Restrict to ASCII characters"
 msgstr "Naudoti tik SCII simbolius"
+
+msgid "Results"
+msgstr ""
 
 msgid "Rock"
 msgstr "Rokas"
@@ -2561,6 +2593,9 @@ msgstr "Rodyti iššokantį langą iš sistemos dėklo"
 msgid "Show a pretty OSD"
 msgstr "Rodyti gražų OSD"
 
+msgid "Show a tooltip with more information about each result"
+msgstr ""
+
 msgid "Show above status bar"
 msgstr "Rodyti virš būsenos juostos"
 
@@ -2598,6 +2633,9 @@ msgstr ""
 msgid "Show the \"love\" and \"ban\" buttons"
 msgstr "Rodyti \"meilė\" ir \"blokavimas\" mygtukus"
 
+msgid "Show the Global Search box above the sidebar"
+msgstr ""
+
 msgid "Show the scrobble button in the main window"
 msgstr "Rodyti „scrobble“ mygtuką pagrindiniame lange"
 
@@ -2615,9 +2653,6 @@ msgstr "Maišyti viską"
 
 msgid "Shuffle by album"
 msgstr "Maišyti pagal albumus"
-
-msgid "&Shuffle mode"
-msgstr "Maišymo veiksena"
 
 msgid "Shuffle playlist"
 msgstr "Maišyti grojaraštį"
@@ -2687,6 +2722,9 @@ msgstr "Rikiuoti dainas pagal"
 
 msgid "Sorting"
 msgstr "Rikiavimas"
+
+msgid "Sources"
+msgstr ""
 
 msgid "Speex"
 msgstr "Speex"
@@ -2884,8 +2922,8 @@ msgid "This album is not available in the requested format"
 msgstr "Albumas yra negalimas prašomu formatu"
 
 msgid ""
-"This device must be connected and opened before Clementine can see what file "
-"formats it supports."
+"This device must be connected and opened before Clementine can see what file"
+" formats it supports."
 msgstr ""
 "Įrenginys privalo būti prijungtas ir atidarytas, kad Clementine matytų "
 "kokius formatus jis palaiko."
@@ -2903,7 +2941,8 @@ msgstr ""
 
 msgid "This is an iPod, but you compiled Clementine without libgpod support."
 msgstr ""
-"Tai yra iPod įrenginys, bet jūs sukompiliavę Clementine be libgpod palaikymo."
+"Tai yra iPod įrenginys, bet jūs sukompiliavę Clementine be libgpod "
+"palaikymo."
 
 msgid ""
 "This is the first time you have connected this device.  Clementine will now "
@@ -3069,6 +3108,9 @@ msgstr "Panaudota"
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr ""
 
+msgid "User interface"
+msgstr ""
+
 msgid "Username"
 msgstr "Naudotojo vardas"
 
@@ -3080,9 +3122,6 @@ msgstr "VBR MP3"
 
 msgid "Variable bit rate"
 msgstr "Kintamas bitrate"
-
-msgid "Various Artists"
-msgstr "Įvairūs atlikėjai"
 
 msgid "Various artists"
 msgstr "Įvairūs atlikėjai"
@@ -3132,12 +3171,10 @@ msgid "When Clementine starts"
 msgstr "Kai  Clementine paleidžiamas"
 
 msgid ""
-"When looking for album art Clementine will first look for picture files that "
-"contain one of these words.\n"
+"When looking for album art Clementine will first look for picture files that contain one of these words.\n"
 "If there are no matches then it will use the largest image in the directory."
 msgstr ""
-"Ieškant albumo viršelių Clementine pirmiausia ieško paveikslėlių failų, "
-"kuriuose yra vienas iš šių žodžių.\n"
+"Ieškant albumo viršelių Clementine pirmiausia ieško paveikslėlių failų, kuriuose yra vienas iš šių žodžių.\n"
 "Jei nėra atitikmens tada bus naudojamas didžiausias paveikslas kataloge."
 
 msgid "WiFi MAC Address"
@@ -3222,8 +3259,8 @@ msgid ""
 msgstr ""
 
 msgid ""
-"You can listen to Magnatune songs for free without an account.  Purchasing a "
-"membership removes the messages at the end of each track."
+"You can listen to Magnatune songs for free without an account.  Purchasing a"
+" membership removes the messages at the end of each track."
 msgstr ""
 "Galite klausyti Magnatune dainų nemokamai be abonento. Nupirkta narystė "
 "pašalina žinutes iš kiekvieno takelio pabaigos."
@@ -3232,21 +3269,22 @@ msgid "You can listen to background streams at the same time as other music."
 msgstr "Galite klausyti foninių garsų kartu su kita muzika."
 
 msgid ""
-"You can scrobble tracks for free, but only <span style=\" font-weight:600;"
-"\">paid subscribers</span> can stream Last.fm radio from Clementine."
+"You can scrobble tracks for free, but only <span style=\" font-"
+"weight:600;\">paid subscribers</span> can stream Last.fm radio from "
+"Clementine."
 msgstr ""
 "Galite teikti informaciją apie klausomus takelius į Last.fm nemokamai, bet "
 "tik <span style=\" font-weight:600;\">apmokami prenumeratoriai</span> gali "
 "transliuoti Last.fm radiją per Clementine."
 
 msgid ""
-"You can use your Wii Remote as a remote control for Clementine.  <a href="
-"\"http://www.clementine-player.org/wiimote\">See the page on the Clementine "
-"wiki</a> for more information.\n"
+"You can use your Wii Remote as a remote control for Clementine.  <a "
+"href=\"http://www.clementine-player.org/wiimote\">See the page on the "
+"Clementine wiki</a> for more information.\n"
 msgstr ""
 "Galite naudoti Wii pultą nuotoliniam Clementine valdymui. Daugiau "
-"informacijos apie Wii pulto panaudojimą galite rasti <a href=\"http://www."
-"clementine-player.org/wiimote\">Clementine wiki puslapyje</a>.\n"
+"informacijos apie Wii pulto panaudojimą galite rasti <a href=\"http://www"
+".clementine-player.org/wiimote\">Clementine wiki puslapyje</a>.\n"
 
 msgid "You do not have a Grooveshark Anywhere account."
 msgstr ""
@@ -3278,8 +3316,8 @@ msgid "You will need to restart Clementine if you change the language."
 msgstr "Reikės paleisti iš naujo Clementine, kad pasikeistų kalba."
 
 msgid ""
-"You will not be able to play Last.fm radio stations as you are not a Last.fm "
-"subscriber."
+"You will not be able to play Last.fm radio stations as you are not a Last.fm"
+" subscriber."
 msgstr ""
 "Jus negalite klausyti „Last.fm“ radijo stočių, nes neesate „Last.fm“ "
 "abonentas"
@@ -3324,7 +3362,7 @@ msgstr "Z-A"
 msgid "Zero"
 msgstr "Nulis"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "add %n songs"
 msgstr "pridėti %n dainų"
 
@@ -3413,7 +3451,7 @@ msgstr "parinktys"
 msgid "press enter"
 msgstr "paspauskite enter"
 
-#, c-format, qt-plural-format
+#, c-format
 msgid "remove %n songs"
 msgstr "pašalinti %n dainas"
 
@@ -3433,79 +3471,4 @@ msgstr "stabdyti"
 msgid "track %1"
 msgstr "takelis %1"
 
-#~ msgid "Are you sure you want to install the following scripts?"
-#~ msgstr "Ar tikrai norite įdiegti šiuos scenarijus?"
 
-#~ msgid "Clementine scripts"
-#~ msgstr "„Clementine“ scenarijai"
-
-#~ msgid "Context:"
-#~ msgstr "Kontekstas:"
-
-#~ msgid "Developer mode"
-#~ msgstr "Kūrėjo režimas"
-
-#~ msgid "Disable"
-#~ msgstr "Išjungti"
-
-#~ msgid "Enable"
-#~ msgstr "Įgalinti"
-
-#~ msgid "Enter an URL to download a cover from the Internet:"
-#~ msgstr "Įveskite URL, kad atsisiųsti viršelį iš interneto:"
-
-#~ msgid "Error installing script"
-#~ msgstr "Klaida diegiant scenarijų"
-
-#~ msgid "Error opening script archive"
-#~ msgstr "Klaida atveriant scenarijų archyvą"
-
-#~ msgid "Get new scripts"
-#~ msgstr "Gauti naujus skriptus"
-
-#~ msgid "Global Shortcuts"
-#~ msgstr "Klavišų kombinacijos"
-
-#~ msgid "Install from file..."
-#~ msgstr "Įdiegti iš failo..."
-
-#~ msgid "Install script file"
-#~ msgstr "Įdiegti scenarijaus failą"
-
-#~ msgid "Install scripts"
-#~ msgstr "Įdiegti scenarijus"
-
-#~ msgid "My scripts"
-#~ msgstr "Mano scenarijai"
-
-#~ msgid "Please fill in the blanks to login into Last.fm"
-#~ msgstr "Įveskite prisijungimo prie \"Last.fm“ duomenis"
-
-#~ msgid "Python console"
-#~ msgstr "Python konsolė"
-
-#~ msgid "Reload"
-#~ msgstr "Įkelti iš naujo"
-
-#~ msgid "Script Manager"
-#~ msgstr "Scenarijų tvarkyklė"
-
-#~ msgid "Settings..."
-#~ msgstr "Nuostatos..."
-
-#~ msgid "Some files failed to install.  The script may not work correctly."
-#~ msgstr ""
-#~ "Nepavyko įdiegti kai kurių failų. Scenarijus gali neveikti tinkamai."
-
-#~ msgid "The '%1' script was modified, you might have to reload it"
-#~ msgstr "'%1' scenarijus buvo pakeistas, gali tekti paleisti jį iš naujo"
-
-#~ msgid "This is not a valid Clementine script file."
-#~ msgstr "Tai ne tinkamas Clementine scenarijaus failas"
-
-#~ msgid ""
-#~ "Warning: scripts have full access to your computer and your music.  Only "
-#~ "install scripts that you trust."
-#~ msgstr ""
-#~ "Dėmesio: scenarijau turi pilną priėjimą prie jūsų kompiuterio ir jūsų "
-#~ "muzikos. Įdiekite scenarijus tik tuo, kuriais pasitikite."
