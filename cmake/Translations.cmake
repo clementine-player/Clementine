@@ -9,7 +9,7 @@ set (XGETTEXT_OPTIONS --qt --keyword=tr --flag=tr:1:pass-c-format --flag=tr:1:pa
     --keyword=N_ --flag=N_:1:pass-c-format --flag=N_:1:pass-qt-format
     --from-code=utf-8)
 
-macro(add_pot header pot)
+macro(add_pot outfiles header pot)
   # Generate the .pot
   add_custom_command(
     OUTPUT ${pot}
@@ -19,47 +19,38 @@ macro(add_pot header pot)
         --output=${CMAKE_CURRENT_BINARY_DIR}/pot.temp
         ${ARGN}
     COMMAND cat ${header} ${CMAKE_CURRENT_BINARY_DIR}/pot.temp > ${pot}
-    DEPENDS ${ARGN}
+    DEPENDS ${ARGN} ${header}
   )
+
+  list(APPEND ${outfiles} ${pot})
 endmacro(add_pot)
 
 # Syntax is:
 #   add_po(sources_var po_prefix
-#     POT potfile
 #     LANGUAGES language1 language2 ...
 #     DIRECTORY dir
 #     
 macro(add_po outfiles po_prefix)
   parse_arguments(ADD_PO
-    "POT;LANGUAGES;DIRECTORY"
+    "LANGUAGES;DIRECTORY"
     ""
     ${ARGN}
   )
 
   foreach (_lang ${ADD_PO_LANGUAGES})
     set(_po_filename "${_lang}.po")
-    set(_po_stubpath "${CMAKE_CURRENT_BINARY_DIR}/${ADD_PO_DIRECTORY}/${_po_filename}.target")
     set(_po_filepath "${CMAKE_CURRENT_SOURCE_DIR}/${ADD_PO_DIRECTORY}/${_po_filename}")
     set(_qm_filename "clementine_${_lang}.qm")
     set(_qm_filepath "${CMAKE_CURRENT_BINARY_DIR}/${ADD_PO_DIRECTORY}/${_qm_filename}")
-
-    # Merge the .pot into .po files
-    add_custom_command(
-      OUTPUT ${_po_stubpath}
-      COMMAND ${GETTEXT_MSGMERGE_EXECUTABLE} --quiet -U --no-fuzzy-matching --backup=off
-          ${_po_filepath} ${ADD_PO_POT}
-      COMMAND ${CMAKE_COMMAND} -E touch ${_po_stubpath}
-      DEPENDS ${ADD_PO_POT}
-    )
 
     # Convert the .po files to .qm files
     add_custom_command(
       OUTPUT ${_qm_filepath}
       COMMAND ${QT_LCONVERT_EXECUTABLE} ARGS ${_po_filepath} -o ${_qm_filepath} -of qm
-      DEPENDS ${_po_filepath} ${_po_stubpath}
+      DEPENDS ${_po_filepath} ${_po_filepath}
     )
 
-    list(APPEND ${outfiles} ${_po_filepath} ${_qm_filepath})
+    list(APPEND ${outfiles} ${_qm_filepath})
   endforeach (_lang)
 
   # Generate a qrc file for the translations
