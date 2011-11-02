@@ -8,178 +8,243 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2011-11-01 04:40+0000\n"
+"PO-Revision-Date: 2011-11-01 19:50+0000\n"
 "Last-Translator: clementinebuildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: fa\n"
 "Plural-Forms: nplurals=1; plural=0\n"
 
+#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsaac.h:130
+#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsmp3.h:195
+#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsspeex.h:220
+#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsspeex.h:223
+#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsvorbis.h:205
+#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsvorbis.h:208
+#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsvorbis.h:211
+#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionswma.h:80
 msgid " kbps"
 msgstr " کیلو بایت در ثانیه"
 
+#: /home/arno/clementine/clementine-player/src/ui_songinfosettingspage.h:186
+#: /home/arno/clementine/clementine-player/src/ui_playbacksettingspage.h:265
+#: /home/arno/clementine/clementine-player/src/ui_playbacksettingspage.h:285
 msgid " ms"
 msgstr " میلی‌ثانیه"
 
+#: /home/arno/clementine/clementine-player/src/ui_songinfosettingspage.h:182
 msgid " pt"
 msgstr " نقطه"
 
+#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:404
+#: /home/arno/clementine/clementine-player/src/ui_visualisationselector.h:116
 msgid " seconds"
 msgstr " ثانیه"
 
+#: /home/arno/clementine/clementine-player/src/ui_querysortpage.h:143
 msgid " songs"
 msgstr " آهنگ‌ها"
 
+#: widgets/osd.cpp:209
 #, qt-format
 msgid "%1 albums"
 msgstr "%1 آلبوم‌ها"
 
+#: core/utilities.cpp:88
 #, qt-format
 msgid "%1 days"
 msgstr "%1 روز"
 
+#: core/utilities.cpp:109
 #, qt-format
 msgid "%1 days ago"
 msgstr "%1 روز پیش"
 
+#: playlistparsers/playlistparser.cpp:74
 #, qt-format
 msgid "%1 playlists (%2)"
 msgstr "%1 لیست پخش (%2)"
 
+#: playlist/playlistmanager.cpp:298
 #, qt-format
 msgid "%1 selected of"
 msgstr "%1 انتخاب‌شده از"
 
+#: devices/deviceview.cpp:122
 #, qt-format
 msgid "%1 song"
 msgstr "%1 آهنگ"
 
+#: devices/deviceview.cpp:124
 #, qt-format
 msgid "%1 songs"
 msgstr "%1 آهنگ‌ها"
 
+#: smartplaylists/searchpreview.cpp:129
 #, qt-format
 msgid "%1 songs found"
 msgstr "%1 آهنگ پیدا شدن"
 
+#: smartplaylists/searchpreview.cpp:126
 #, qt-format
 msgid "%1 songs found (showing %2)"
 msgstr "%1 آهنگ پیدا شد (نمایش %2)"
 
+#: playlist/playlistmanager.cpp:304
 #, qt-format
 msgid "%1 tracks"
 msgstr "%1 قطعه"
 
+#: ui/albumcovermanager.cpp:437
 #, qt-format
 msgid "%1 transferred"
 msgstr "%1 منتقل شد"
 
+#: widgets/osd.cpp:259 widgets/osd.cpp:264 widgets/osd.cpp:269
+#: widgets/osd.cpp:274 widgets/osd.cpp:279 widgets/osd.cpp:284
 #, qt-format
 msgid "%1: Wiimotedev module"
 msgstr "%1: مدول Wiimotedev"
 
+#: songinfo/lastfmtrackinfoprovider.cpp:102
 #, qt-format
 msgid "%L1 other listeners"
 msgstr "%L1 شنوندگان دیگر"
 
+#: songinfo/lastfmtrackinfoprovider.cpp:100
 #, qt-format
 msgid "%L1 total plays"
 msgstr "%L1 همهٔ اجراها"
 
+#: transcoder/transcodedialog.cpp:198
 #, c-format
 msgid "%n failed"
 msgstr "%n ناموفق"
 
+#: transcoder/transcodedialog.cpp:193
 #, c-format
 msgid "%n finished"
 msgstr "%n پایان یافت"
 
+#: transcoder/transcodedialog.cpp:188
 #, c-format
 msgid "%n remaining"
 msgstr "%n باقی مانده"
 
+#: playlist/playlistheader.cpp:35
 msgid "&Align text"
 msgstr "&چیدمان متن"
 
+#: playlist/playlistheader.cpp:36
 msgid "&Center"
 msgstr "&مرکز‌"
 
+#: /home/arno/clementine/clementine-player/src/ui_globalshortcutssettingspage.h:178
 msgid "&Custom"
 msgstr "&سفارشی‌"
 
+#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:702
 msgid "&Extras"
 msgstr "اضافی"
 
+#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:701
 msgid "&Help"
 msgstr "&راهنما"
 
+#: playlist/playlistheader.cpp:59
 #, qt-format
 msgid "&Hide %1"
 msgstr "&پنهان کردن %1"
 
+#: playlist/playlistheader.cpp:31
 msgid "&Hide..."
 msgstr "&پنهان کردن..."
 
+#: playlist/playlistheader.cpp:35
 msgid "&Left"
 msgstr "&چپ‌"
 
+#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:699
 msgid "&Music"
 msgstr "موسیقی"
 
+#: /home/arno/clementine/clementine-player/src/ui_globalshortcutssettingspage.h:176
 msgid "&None"
 msgstr "&هیچ‌کدام‌"
 
+#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:700
 msgid "&Playlist"
 msgstr "لیست‌پخش"
 
+#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:637
 msgid "&Quit"
 msgstr "&خروج‌"
 
+#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:673
 msgid "&Repeat mode"
 msgstr "حالت تکرار"
 
+#: playlist/playlistheader.cpp:37
 msgid "&Right"
 msgstr "&راست‌"
 
+#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:672
 msgid "&Shuffle mode"
 msgstr "حالت پخش درهم"
 
+#: playlist/playlistheader.cpp:32
 msgid "&Stretch columns to fit window"
 msgstr "&کشیدن ستون‌ها برای پرکردن پنجره"
 
+#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:703
 msgid "&Tools"
 msgstr "&ابزارها‌"
 
+#: ui/edittagdialog.cpp:45
 msgid "(different across multiple songs)"
 msgstr "متفاوت میان چند آهنگ"
 
+#: /home/arno/clementine/clementine-player/src/ui_globalsearchpopup.h:104
+#: /home/arno/clementine/clementine-player/src/ui_globalsearchpopup.h:105
+#: /home/arno/clementine/clementine-player/src/ui_globalsearchpopup.h:106
+#: /home/arno/clementine/clementine-player/src/ui_globalsearchpopup.h:107
 msgid "..."
 msgstr ""
 
+#: ui/about.cpp:76
 msgid "...and all the Amarok contributors"
 msgstr "...و دیگر توسعه‌دهنده‌های آماروک"
 
+#: /home/arno/clementine/clementine-player/src/ui_trackslider.h:70
+#: /home/arno/clementine/clementine-player/src/ui_trackslider.h:74
 msgid "0:00:00"
 msgstr "0:00:00"
 
+#: core/utilities.cpp:88
 msgid "1 day"
 msgstr "۱ روز"
 
+#: playlist/playlistmanager.cpp:304
 msgid "1 track"
 msgstr "۱ قطعه"
 
+#: /home/arno/clementine/clementine-player/src/ui_magnatunedownloaddialog.h:143
 msgid "128K MP3"
 msgstr "128K MP3"
 
+#: /home/arno/clementine/clementine-player/src/ui_magnatunesettingspage.h:170
 msgid "128k MP3"
 msgstr "128k MP3"
 
+#: library/library.cpp:55
 msgid "50 random tracks"
 msgstr "۵۰ قطعهٔ اتفاقی"
 
+#: /home/arno/clementine/clementine-player/src/ui_digitallyimportedsettingspage.h:136
 msgid "<a href=\"http://www.di.fm/premium/\">Upgrade to Premium now</a>"
 msgstr ""
 
+#: /home/arno/clementine/clementine-player/src/ui_organisedialog.h:199
 msgid ""
 "<p>Tokens start with %, for example: %artist %album %title </p>\n"
 "\n"
@@ -189,12 +254,15 @@ msgstr ""
 "\n"
 "<p>اگر قسمتی از متن را احاطه کنید که دارای نشان‌هایی درون آکولاد باش، آن نشان‌ها پنهان می‌شوند اگر نشان خالی باشد.</p>"
 
+#: internet/groovesharksettingspage.cpp:113
 msgid "A Grooveshark Anywhere account is required."
 msgstr ""
 
+#: internet/spotifysettingspage.cpp:147
 msgid "A Spotify Premium account is required."
 msgstr "حساب کاربری «Spotify Premium» مورد نیاز است."
 
+#: smartplaylists/wizard.cpp:72
 msgid ""
 "A smart playlist is a dynamic list of songs that come from your library.  "
 "There are different types of smart playlist that offer different ways of "
@@ -204,229 +272,321 @@ msgstr ""
 "می‌آیند. انواع مختلفی از لیست‌پخش‌های هوشمند وجود دارند که به شما امکان "
 "انتخاب آهنگ‌ها را به روشهای مختلف می‌دهند."
 
+#: smartplaylists/querywizardplugin.cpp:145
 msgid ""
 "A song will be included in the playlist if it matches these conditions."
 msgstr ""
 "آهنگ‌هایی به این لیست‌پخش افزوده می‌شوند که این ویژگیها را داشته باشند."
 
+#: smartplaylists/searchterm.cpp:288
 msgid "A-Z"
 msgstr "الف - ی"
 
+#: /home/arno/clementine/clementine-player/src/ui_transcodersettingspage.h:163
 msgid "AAC"
 msgstr "AAC"
 
+#: /home/arno/clementine/clementine-player/src/ui_digitallyimportedsettingspage.h:145
 msgid "AAC 128k (Premium only)"
 msgstr ""
 
+#: /home/arno/clementine/clementine-player/src/ui_digitallyimportedsettingspage.h:143
 msgid "AAC 32k"
 msgstr ""
 
+#: /home/arno/clementine/clementine-player/src/ui_digitallyimportedsettingspage.h:144
 msgid "AAC 64k (Premium only)"
 msgstr ""
 
+#: core/song.cpp:139
 msgid "AIFF"
 msgstr "AIFF"
 
+#: widgets/nowplayingwidget.cpp:119
 msgid "ALL GLORY TO THE HYPNOTOAD"
 msgstr "ALL GLORY TO THE HYPNOTOAD"
 
+#: ui/about.cpp:32
 #, qt-format
 msgid "About %1"
 msgstr "دربارۀ %1"
 
+#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:658
 msgid "About Clementine..."
 msgstr "دربارهٔ کلمنتاین..."
 
+#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:691
 msgid "About Qt..."
 msgstr "دربارهٔ QT..."
 
+#: /home/arno/clementine/clementine-player/src/ui_groovesharksettingspage.h:113
+#: /home/arno/clementine/clementine-player/src/ui_magnatunesettingspage.h:151
+#: /home/arno/clementine/clementine-player/src/ui_spotifysettingspage.h:179
+#: /home/arno/clementine/clementine-player/src/ui_remotesettingspage.h:203
+#: /home/arno/clementine/clementine-player/src/ui_lastfmsettingspage.h:145
 msgid "Account details"
 msgstr "مشخصات حساب کاربری"
 
+#: /home/arno/clementine/clementine-player/src/ui_digitallyimportedsettingspage.h:133
 msgid "Account details (Premium)"
 msgstr ""
 
+#: /home/arno/clementine/clementine-player/src/ui_wiimotesettingspage.h:191
 msgid "Action"
 msgstr "کنش"
 
+#: wiimotedev/wiimotesettingspage.cpp:98
 msgid "Active/deactive Wiiremote"
 msgstr "کنش\\ناکنش Wiiremote"
 
+#: /home/arno/clementine/clementine-player/src/ui_addstreamdialog.h:113
 msgid "Add Stream"
 msgstr "افزودن جریان"
 
+#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:394
 msgid "Add a new line if supported by the notification type"
 msgstr "افزودن خط جدید اگر توسط آگاه‌ساز پشتیبانی شود"
 
+#: /home/arno/clementine/clementine-player/src/ui_wiimotesettingspage.h:193
 msgid "Add action"
 msgstr "افزودن کنش"
 
+#: globalsearch/globalsearchwidget.cpp:96
 msgid "Add and play now"
 msgstr ""
 
+#: internet/savedradio.cpp:97
 msgid "Add another stream..."
 msgstr "افزودن جریان دیگر..."
 
+#: library/librarysettingspage.cpp:62
 msgid "Add directory..."
 msgstr "افزودن پوشه..."
 
+#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:662
 msgid "Add file..."
 msgstr "افزودن پرونده..."
 
+#: transcoder/transcodedialog.cpp:210
 msgid "Add files to transcode"
 msgstr "افزودن پرونده‌ها به تراکد"
 
+#: ui/mainwindow.cpp:1599
 msgid "Add folder"
 msgstr "افزودن پوشه"
 
+#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:677
 msgid "Add folder..."
 msgstr "افزودن پوشه..."
 
+#: ui/mainwindow.cpp:1574
 msgid "Add media"
 msgstr "اضافه کردن مدیا"
 
+#: /home/arno/clementine/clementine-player/src/ui_librarysettingspage.h:159
 msgid "Add new folder..."
 msgstr "افزودن پوشهٔ جدید..."
 
+#: smartplaylists/searchtermwidget.cpp:333
 msgid "Add search term"
 msgstr "افزودن عبارت جستجو"
 
+#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:361
 msgid "Add song album tag"
 msgstr "افزودن برچسب آلبوم آهنگ"
 
+#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:367
 msgid "Add song albumartist tag"
 msgstr "افزودن برچسب هنرمند آلبوم آهنگ"
 
+#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:358
 msgid "Add song artist tag"
 msgstr "افزودن برچسب هنرمند آهنگ"
 
+#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:373
 msgid "Add song composer tag"
 msgstr "افزودن برچسب تنظیم‌کنندهٔ آهنگ"
 
+#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:376
 msgid "Add song disc tag"
 msgstr "افزودن برچسب دیسک آهنگ"
 
+#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:382
 msgid "Add song genre tag"
 msgstr "افزودن برچسب ژانر آهنگ"
 
+#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:385
 msgid "Add song length tag"
 msgstr "افزودن برچسب زمان آهنگ"
 
+#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:388
 msgid "Add song play count"
 msgstr "افزودن شمارهٔ اجرای آهنگ"
 
+#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:391
 msgid "Add song skip count"
 msgstr "افزودن شمارهٔ پرش آهنگ"
 
+#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:364
 msgid "Add song title tag"
 msgstr "افزودن برچسب عنوان آهنگ"
 
+#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:379
 msgid "Add song track tag"
 msgstr "افزودن برچسب قطعهٔ آهنگ"
 
+#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:370
 msgid "Add song year tag"
 msgstr "افزودن برچسب سال آهنگ"
 
+#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:664
 msgid "Add stream..."
 msgstr "افزودن جریان..."
 
+#: ui/mainwindow.cpp:1403
 msgid "Add to another playlist"
 msgstr "افزودن به لیست پخش دیگر"
 
+#: globalsearch/globalsearchwidget.cpp:95
+#: /home/arno/clementine/clementine-player/src/ui_albumcovermanager.h:152
 msgid "Add to playlist"
 msgstr "افزودن به لیست پخش"
 
+#: /home/arno/clementine/clementine-player/src/ui_behavioursettingspage.h:204
 msgid "Add to the queue"
 msgstr "افزودن به صف"
 
+#: /home/arno/clementine/clementine-player/src/ui_wiimoteshortcutgrabber.h:123
 msgid "Add wiimotedev action"
 msgstr "افزودن کنش wiimotedev"
 
+#: /home/arno/clementine/clementine-player/src/ui_transcodedialog.h:206
 msgid "Add..."
 msgstr "افزودن..."
 
+#: /home/arno/clementine/clementine-player/src/ui_libraryfilterwidget.h:123
 msgid "Added this month"
 msgstr "افزوده شده در ماه جاری"
 
+#: /home/arno/clementine/clementine-player/src/ui_libraryfilterwidget.h:117
 msgid "Added this week"
 msgstr "افزوده شده در هفتهٔ جاری"
 
+#: /home/arno/clementine/clementine-player/src/ui_libraryfilterwidget.h:122
 msgid "Added this year"
 msgstr "افزوده شده در سال جاری"
 
+#: /home/arno/clementine/clementine-player/src/ui_libraryfilterwidget.h:116
 msgid "Added today"
 msgstr "افزوده شده در امروز"
 
+#: /home/arno/clementine/clementine-player/src/ui_libraryfilterwidget.h:118
+#: /home/arno/clementine/clementine-player/src/ui_libraryfilterwidget.h:120
 msgid "Added within three months"
 msgstr "افزوده شده در سه ماه گذشته"
 
+#: /home/arno/clementine/clementine-player/src/ui_libraryfilterwidget.h:130
 msgid "Advanced grouping..."
 msgstr "دسته‌بندی پیشرفته..."
 
+#: /home/arno/clementine/clementine-player/src/ui_organisedialog.h:190
 msgid "After copying..."
 msgstr "پس از کپی‌کردن"
 
+#: playlist/playlist.cpp:1081 ui/organisedialog.cpp:52
+#: ui/qtsystemtrayicon.cpp:252
+#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:129
+#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:142
+#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:155
+#: /home/arno/clementine/clementine-player/src/ui_albumcoversearcher.h:110
+#: /home/arno/clementine/clementine-player/src/ui_albumcoversearcher.h:112
+#: /home/arno/clementine/clementine-player/src/ui_edittagdialog.h:656
+#: /home/arno/clementine/clementine-player/src/ui_trackselectiondialog.h:209
 msgid "Album"
 msgstr "آلبوم"
 
+#: /home/arno/clementine/clementine-player/src/ui_playbacksettingspage.h:272
 msgid "Album (ideal loudness for all tracks)"
 msgstr "آلبوم (بلندی صدای ایده‌آل برای تمام قطعه‌ها)"
 
+#: playlist/playlist.cpp:1087 ui/organisedialog.cpp:55
+#: /home/arno/clementine/clementine-player/src/ui_edittagdialog.h:658
 msgid "Album artist"
 msgstr "هنرمند آلبوم"
 
+#: internet/jamendoservice.cpp:401
 msgid "Album info on jamendo.com..."
 msgstr "اطلاعات آلبوم در jamendo.com..."
 
+#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:131
+#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:144
+#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:157
 msgid "Albumartist"
 msgstr "هنرمندآلبوم"
 
+#: ui/albumcovermanager.cpp:119
 msgid "Albums with covers"
 msgstr "آلبوم‌های با جلد"
 
+#: ui/albumcovermanager.cpp:120
 msgid "Albums without covers"
 msgstr "آلبوم‌های بدون جلد"
 
+#: ui/mainwindow.cpp:152
 msgid "All Files (*)"
 msgstr "همۀ پرونده‌ها(*)"
 
+#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:670
 msgid "All Glory to the Hypnotoad!"
 msgstr "تمام افتخار برای Hypnotoad!"
 
+#: ui/albumcovermanager.cpp:118
 msgid "All albums"
 msgstr "همهٔ آلبوم‌ها"
 
+#: ui/albumcovermanager.cpp:263
 msgid "All artists"
 msgstr "همهٔ هنرمندان"
 
+#: ui/albumcoverchoicecontroller.cpp:45
 msgid "All files (*)"
 msgstr "همه‌ٔ پرونده‌ها (*)"
 
+#: playlistparsers/playlistparser.cpp:61
 #, qt-format
 msgid "All playlists (%1)"
 msgstr "همهٔ لیست‌پخش‌ها (%1)"
 
+#: ui/about.cpp:73
 msgid "All the translators"
 msgstr "همهٔ مترجمان"
 
+#: library/library.cpp:79
 msgid "All tracks"
 msgstr "همهٔ قطعه‌ها"
 
+#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsaac.h:140
 msgid "Allow mid/side encoding"
 msgstr "کدگذاری میانه/کنار"
 
+#: /home/arno/clementine/clementine-player/src/ui_transcodedialog.h:214
 msgid "Alongside the originals"
 msgstr "در کنار اصلی‌ها"
 
+#: /home/arno/clementine/clementine-player/src/ui_behavioursettingspage.h:188
 msgid "Always hide the main window"
 msgstr "پنجره اصلی را همواره پنهان کن"
 
+#: /home/arno/clementine/clementine-player/src/ui_behavioursettingspage.h:187
 msgid "Always show the main window"
 msgstr "پنجره اصلی را همواره نمایش بده"
 
+#: /home/arno/clementine/clementine-player/src/ui_behavioursettingspage.h:196
+#: /home/arno/clementine/clementine-player/src/ui_behavioursettingspage.h:210
 msgid "Always start playing"
 msgstr "همواره پخش را شروع کن"
 
+#: internet/spotifyblobdownloader.cpp:50
 msgid ""
 "An additional plugin is required to use Spotify in Clementine.  Would you "
 "like to download and install it now?"
@@ -434,235 +594,332 @@ msgstr ""
 "کلمنتاین به افزونهٔ  دیگری برای استفادهٔ اسپاتیفای نیاز دارد.  آیا می‌خواهید"
 "  این افزونه را  بارگیری و نصب نمایید؟"
 
+#: devices/afcdevice.cpp:62
 msgid "An error occurred copying the iTunes database from the device"
 msgstr "مشکلی هنگام  کپی‌کردن بانک اطلاعاتی آی‌تیون از دستگاه پیش آمد"
 
+#: devices/afcdevice.cpp:156
 msgid "An error occurred copying the iTunes database onto the device"
 msgstr "مشکلی هنگام  کپی‌کردن بانک اطلاعاتی آی‌تیون به دستگاه پیش آمد"
 
+#: devices/gpodloader.cpp:61
 msgid "An error occurred loading the iTunes database"
 msgstr "مشکلی هنگام  فراخوانی بانک اطلاعاتی آی‌تیون پیش آمد"
 
+#: ui/edittagdialog.cpp:612
 #, qt-format
 msgid "An error occurred writing metadata to '%1'"
 msgstr "مشکلی در نوشتن ابرداده در '%1' پیش آمد"
 
+#: internet/lastfmservice.cpp:918
 #, qt-format
 msgid "An unknown last.fm error occurred: %1"
 msgstr "مشکل ناشناخته‌ای از last.fm پیش آمد: %1"
 
+#: ui/about.cpp:77
 msgid "And:"
 msgstr "و:"
 
+#: /home/arno/clementine/clementine-player/src/ui_songinfosettingspage.h:180
 msgid "Appearance"
 msgstr "شمایل"
 
+#: core/commandlineoptions.cpp:163
 msgid "Append files/URLs to the playlist"
 msgstr "پیوست پرونده/URL به لیست پخش"
 
+#: devices/deviceview.cpp:216 internet/internetservice.cpp:53
+#: library/libraryview.cpp:236 widgets/fileviewlist.cpp:31
 msgid "Append to current playlist"
 msgstr "پیوست به لیست پخش جاری"
 
+#: /home/arno/clementine/clementine-player/src/ui_behavioursettingspage.h:201
 msgid "Append to the playlist"
 msgstr "پیوست به لیست پخش"
 
+#: /home/arno/clementine/clementine-player/src/ui_playbacksettingspage.h:275
 msgid "Apply compression to prevent clipping"
 msgstr "فشرده‌سازی برای چیده نشدن"
 
+#: ui/equalizer.cpp:191
 #, qt-format
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "آیا مطمئنید که می‌خواهید پیش‌نشاندهٔ \"%1\" را پاک کنید؟"
 
+#: ui/edittagdialog.cpp:704
 msgid "Are you sure you want to reset this song's statistics?"
 msgstr "آیا مطمئنید که می‌خواهید آمارهٔ این آهنگ را  پاک کنید؟"
 
+#: playlist/playlist.cpp:1080 ui/organisedialog.cpp:53
+#: ui/qtsystemtrayicon.cpp:250
+#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:130
+#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:143
+#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:156
+#: /home/arno/clementine/clementine-player/src/ui_albumcoversearcher.h:106
+#: /home/arno/clementine/clementine-player/src/ui_albumcoversearcher.h:108
+#: /home/arno/clementine/clementine-player/src/ui_edittagdialog.h:654
+#: /home/arno/clementine/clementine-player/src/ui_trackselectiondialog.h:210
+#: /home/arno/clementine/clementine-player/src/ui_lastfmstationdialog.h:96
 msgid "Artist"
 msgstr "هنرمند"
 
+#: ui/mainwindow.cpp:270
 msgid "Artist info"
 msgstr "اطلاعات هنرمند"
 
+#: internet/lastfmservice.cpp:190
 msgid "Artist radio"
 msgstr "رادیوی هنرمند"
 
+#: songinfo/echonesttags.cpp:59
 msgid "Artist tags"
 msgstr "برچسب هنرمند"
 
+#: ui/organisedialog.cpp:54
 msgid "Artist's initial"
 msgstr "حرف اول هنرمند"
 
+#: /home/arno/clementine/clementine-player/src/ui_transcodedialog.h:209
 msgid "Audio format"
 msgstr "نوع صوت"
 
+#: /home/arno/clementine/clementine-player/src/ui_digitallyimportedsettingspage.h:138
 msgid "Audio type"
 msgstr ""
 
+#: /home/arno/clementine/clementine-player/src/ui_remotesettingspage.h:210
 msgid "Authenticating..."
 msgstr "در حال احراز هویت..."
 
+#: internet/magnatunesettingspage.cpp:113 internet/lastfmservice.cpp:434
+#: internet/lastfmsettingspage.cpp:79 remote/remotesettingspage.cpp:113
 msgid "Authentication failed"
 msgstr "ناکامی در احراز هویت"
 
+#: ui/about.cpp:64
 msgid "Authors"
 msgstr "نویسندگان‌"
 
+#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsspeex.h:227
 msgid "Auto"
 msgstr "خودکار"
 
+#: /home/arno/clementine/clementine-player/src/ui_librarysettingspage.h:161
 msgid "Automatic updating"
 msgstr "به‌روز رسانی خودکار"
 
+#: /home/arno/clementine/clementine-player/src/ui_librarysettingspage.h:170
 msgid "Automatically open single categories in the library tree"
 msgstr "رسته‌های تنها را اتوماتیک در درخت کتابخانه باز کن"
 
+#: widgets/freespacebar.cpp:45
 msgid "Available"
 msgstr "در دسترس"
 
+#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsspeex.h:221
 msgid "Average bitrate"
 msgstr "میانگین ضرباهنگ"
 
+#: covers/coversearchstatisticsdialog.cpp:70
 msgid "Average image size"
 msgstr "میانگین اندازهٔ تصویر"
 
+#: playlist/playlist.cpp:1096 ui/organisedialog.cpp:59
+#: /home/arno/clementine/clementine-player/src/ui_edittagdialog.h:638
 msgid "BPM"
 msgstr "ض.د.د"
 
+#: /home/arno/clementine/clementine-player/src/ui_backgroundstreamssettingspage.h:56
 msgid "Background Streams"
 msgstr "جریان پس‌زمینه"
 
+#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:418
 msgid "Background color"
 msgstr "رنگ پس‌زمینه"
 
+#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:417
 msgid "Background opacity"
 msgstr "تاری پس‌زمینه"
 
+#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:643
 msgid "Ban"
 msgstr "تحریم"
 
+#: analyzers/baranalyzer.cpp:19
 msgid "Bar analyzer"
 msgstr "میلهٔ آنالیز"
 
+#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:421
 msgid "Basic Blue"
 msgstr "آبی ابتدایی"
 
+#: /home/arno/clementine/clementine-player/src/ui_behavioursettingspage.h:176
 msgid "Behavior"
 msgstr "رفتار"
 
+#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsflac.h:83
 msgid "Best"
 msgstr "بهترین"
 
+#: songinfo/echonestbiographies.cpp:83
 #, qt-format
 msgid "Biography from %1"
 msgstr "بیوگرافی از %1"
 
+#: playlist/playlist.cpp:1097
+#: /home/arno/clementine/clementine-player/src/ui_edittagdialog.h:640
 msgid "Bit rate"
 msgstr "ضرب آهنگ"
 
+#: ui/organisedialog.cpp:64
+#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsaac.h:129
+#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsmp3.h:194
+#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsspeex.h:218
+#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionswma.h:79
 msgid "Bitrate"
 msgstr "ضرباهنگ"
 
+#: analyzers/blockanalyzer.cpp:24
 msgid "Block analyzer"
 msgstr "آنالیزور بلوکی"
 
+#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsaac.h:141
 msgid "Block type"
 msgstr "نوع بلوک"
 
+#: devices/ilister.cpp:100
 msgid "Bluetooth MAC Address"
 msgstr "آدرس ماک بلوتوث"
 
+#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:414
 msgid "Body"
 msgstr "بدنه"
 
+#: analyzers/boomanalyzer.cpp:8
 msgid "Boom analyzer"
 msgstr "آنالیزور نرده‌ای"
 
+#: /home/arno/clementine/clementine-player/src/ui_magnatunedownloaddialog.h:146
 msgid "Browse..."
 msgstr "مرور..."
 
+#: /home/arno/clementine/clementine-player/src/ui_playbacksettingspage.h:284
 msgid "Buffer duration"
 msgstr "مدت میانگیر"
 
+#: /home/arno/clementine/clementine-player/src/ui_wiimotesettingspage.h:192
 msgid "Buttons"
 msgstr "دکمه‌ها"
 
+#: core/song.cpp:142
 msgid "CDDA"
 msgstr "CDDA"
 
+#: library/library.cpp:95
 msgid "CUE sheet support"
 msgstr "برگهٔ پشتیبانی CUE"
 
+#: internet/spotifyblobdownloader.cpp:34
 msgid "Cancel"
 msgstr "لغو"
 
+#: /home/arno/clementine/clementine-player/src/ui_edittagdialog.h:634
 msgid "Change cover art"
 msgstr "تغییر جلد هنری"
 
+#: songinfo/songinfotextview.cpp:74
 msgid "Change font size..."
 msgstr "تغییر اندازهٔ قلم..."
 
+#: core/globalshortcuts.cpp:61
 msgid "Change repeat mode"
 msgstr "تغییر حالت تکرار"
 
+#: /home/arno/clementine/clementine-player/src/ui_globalshortcutssettingspage.h:179
 msgid "Change shortcut..."
 msgstr "تغییر میانبر..."
 
+#: core/globalshortcuts.cpp:60
 msgid "Change shuffle mode"
 msgstr "تغییر حالت آمیخته"
 
+#: core/commandlineoptions.cpp:170
 msgid "Change the language"
 msgstr "تغییر زبان"
 
+#: ui/mainwindow.cpp:610
 msgid "Check for updates..."
 msgstr "بررسی به‌روز رسانی..."
 
+#: smartplaylists/wizard.cpp:80
 msgid "Choose a name for your smart playlist"
 msgstr "انتخاب نام برای لیست پخش هوشمند"
 
+#: /home/arno/clementine/clementine-player/src/ui_playbacksettingspage.h:280
 msgid "Choose automatically"
 msgstr "انتخاب اتوماتیک"
 
+#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:426
 msgid "Choose color..."
 msgstr "انتخاب رنگ..."
 
+#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:427
 msgid "Choose font..."
 msgstr "انتخاب قلم..."
 
+#: /home/arno/clementine/clementine-player/src/ui_visualisationselector.h:113
 msgid "Choose from the list"
 msgstr "انتخاب از لیست"
 
+#: smartplaylists/querywizardplugin.cpp:147
 msgid "Choose how the playlist is sorted and how many songs it will contain."
 msgstr "انتخاب روش مرتب‌سازی لیست و تعداد آهنگهای آن"
 
+#: ui/albumcoverchoicecontroller.cpp:92
 msgid "Choose manual cover"
 msgstr "انتخاب دستی جلد"
 
+#: /home/arno/clementine/clementine-player/src/ui_songinfosettingspage.h:188
 msgid ""
 "Choose the websites you want Clementine to use when searching for lyrics."
 msgstr ""
 "پایگاه اینترنتی را انتخاب کنید که می‌خواهید کلمنتاین متن آهنگ‌ها را دانلود "
 "کند"
 
+#: ui/equalizer.cpp:109
 msgid "Classical"
 msgstr "کلاسیک"
 
+#: widgets/lineedit.cpp:41
+#: /home/arno/clementine/clementine-player/src/ui_queuemanager.h:139
 msgid "Clear"
 msgstr "پاک کن"
 
+#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:645
+#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:647
 msgid "Clear playlist"
 msgstr "پاک کردن لیست پخش"
 
+#: smartplaylists/searchtermwidget.cpp:321
+#: visualisations/visualisationcontainer.cpp:196
+#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:628
+#: /home/arno/clementine/clementine-player/src/ui_visualisationoverlay.h:179
 msgid "Clementine"
 msgstr "کلمنتاین"
 
+#: /home/arno/clementine/clementine-player/src/ui_errordialog.h:93
 msgid "Clementine Error"
 msgstr "خطای کلمنتاین"
 
+#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:422
 msgid "Clementine Orange"
 msgstr "پرتقال کلمنتاین"
 
+#: visualisations/visualisationcontainer.cpp:70
 msgid "Clementine Visualization"
 msgstr "تصویرسازی کلمنتاین"
 
+#: /home/arno/clementine/clementine-player/src/ui_deviceproperties.h:376
 msgid ""
 "Clementine can automatically convert the music you copy to this device into "
 "a format that it can play."
@@ -670,6 +927,8 @@ msgstr ""
 "کلمنتاین می‌تواند اتوماتیک‌وار موسیقی‌هایی را که روی این دستگاه ذخیره "
 "می‌کنید به سبکی قابل پخش در دستگاه تبدیل کند."
 
+#: /home/arno/clementine/clementine-player/src/ui_remotesettingspage.h:200
+#: remote/remotesettingspage.cpp:152
 msgid ""
 "Clementine can be controlled remotely by an Android phone.  To enable this "
 "feature log in with the same Google account that is configured on your "
@@ -678,9 +937,11 @@ msgstr ""
 "کلمنتاین را می‌توان با تلفن آندرویدی کنترل کرد. برای فعال‌سازی این ویژگی، با"
 " حساب گوگل تنظیمی تلفن وارد شوید."
 
+#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:396
 msgid "Clementine can show a message when the track changes."
 msgstr "کلمنتاین می‌تواند پیامی در صورت تغییر قطعه نمایش دهد."
 
+#: visualisations/projectmvisualisation.cpp:128
 msgid ""
 "Clementine could not load any projectM visualisations.  Check that you have "
 "installed Clementine properly."
@@ -688,6 +949,7 @@ msgstr ""
 "کلمنتاین نمی‌تواند هیچ تصویرسازی projectM را بارگذاری کند. درستی نصب "
 "کلمنتاین را بررسی کنید."
 
+#: internet/lastfmsettingspage.cpp:103
 msgid ""
 "Clementine couldn't fetch your subscription status since there are problems "
 "with your connection. Played tracks will be cached and sent later to "
@@ -696,102 +958,139 @@ msgstr ""
 "به واسطهٔ مشکل در ارتباط، کلمنتاین نمی‌تواند وضعیت عضویت شما را بیاورد. "
 "قطعه‌های پخش‌شده، دخیره می‌شوند و در آینده به Last.fm فرستاده می‌شود."
 
+#: widgets/prettyimage.cpp:201
 msgid "Clementine image viewer"
 msgstr "نمایشگر تصاویر کلمنتاین"
 
+#: /home/arno/clementine/clementine-player/src/ui_trackselectiondialog.h:206
 msgid "Clementine was unable to find results for this file"
 msgstr "کلمنتاین نتوانست نتایج این پرونده را بیابد"
 
+#: library/libraryview.cpp:218
 msgid "Click here to add some music"
 msgstr "برای افزودن آهنگ‌ها، اینجا را فشار دهید"
 
+#: /home/arno/clementine/clementine-player/src/ui_trackslider.h:72
 msgid "Click to toggle between remaining time and total time"
 msgstr "برای سویچ بین زمان رفته یا باقیمانده، اینجا را کلیک کنید"
 
+#: widgets/didyoumean.cpp:35
 msgid "Close"
 msgstr "بستن"
 
+#: visualisations/visualisationcontainer.cpp:119
 msgid "Close visualization"
 msgstr "بستن تصویرسازی"
 
+#: internet/magnatunedownloaddialog.cpp:280
 msgid "Closing this window will cancel the download."
 msgstr "بستن این پنجره، بارگیری را کنسل می‌کند."
 
+#: ui/albumcovermanager.cpp:213
 msgid "Closing this window will stop searching for album covers."
 msgstr "بستن این پنجره، جستجوی جلد آلبوم‌ها را کنسل می‌کند."
 
+#: ui/equalizer.cpp:110
 msgid "Club"
 msgstr "باشگاه"
 
+#: devices/ilister.cpp:95
 msgid "Color"
 msgstr "رنگ"
 
-msgid "Combine identical results from different sources"
-msgstr ""
-
+#: core/commandlineoptions.cpp:173
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "لیست مجزا بوسیلهٔ ویرگول از class:level، طبقه ۰-۳ است."
 
+#: playlist/playlist.cpp:1106 smartplaylists/searchterm.cpp:279
+#: ui/organisedialog.cpp:62
+#: /home/arno/clementine/clementine-player/src/ui_edittagdialog.h:661
 msgid "Comment"
 msgstr "توضیح"
 
+#: /home/arno/clementine/clementine-player/src/ui_edittagdialog.h:662
 msgid "Complete tags automatically"
 msgstr "تکمیل اتوماتیک برچسب‌ها"
 
+#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:695
 msgid "Complete tags automatically..."
 msgstr "تکمیل اتوماتیک برچسب‌ها..."
 
+#: playlist/playlist.cpp:1088 ui/organisedialog.cpp:56
+#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:132
+#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:145
+#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:158
+#: /home/arno/clementine/clementine-player/src/ui_edittagdialog.h:659
 msgid "Composer"
 msgstr "تنظیم‌کننده"
 
+#: internet/groovesharkservice.cpp:424
 msgid "Configure Grooveshark..."
 msgstr ""
 
+#: internet/lastfmservice.cpp:108
 msgid "Configure Last.fm..."
 msgstr "پیکربندی Last.fm..."
 
+#: internet/magnatuneservice.cpp:265
 msgid "Configure Magnatune..."
 msgstr "پیکربندی Magnatune..."
 
+#: /home/arno/clementine/clementine-player/src/ui_globalshortcutssettingspage.h:167
 msgid "Configure Shortcuts"
 msgstr "پیکربندی میان‌برها"
 
+#: internet/spotifyservice.cpp:458
 msgid "Configure Spotify..."
 msgstr "پیکربندی Spotify..."
 
+#: ui/mainwindow.cpp:504
 msgid "Configure library..."
 msgstr "پیکربندی کتابخانه..."
 
+#: internet/digitallyimportedservicebase.cpp:199
 msgid "Configure..."
 msgstr ""
 
+#: /home/arno/clementine/clementine-player/src/ui_wiimotesettingspage.h:186
 msgid "Connect Wii Remotes using active/deactive action"
 msgstr "کنترل Wii را با استفاده از عمل فعال/غیرفعال وصل کنید"
 
+#: devices/devicemanager.cpp:324 devices/devicemanager.cpp:328
 msgid "Connect device"
 msgstr "اتصال دستگاه"
 
+#: internet/spotifyservice.cpp:217
 msgid "Connecting to Spotify"
 msgstr "اتصال به Spotify"
 
+#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsmp3.h:196
 msgid "Constant bitrate"
 msgstr "ضرباهنگ ثابت"
 
+#: /home/arno/clementine/clementine-player/src/ui_deviceproperties.h:379
 msgid "Convert all music"
 msgstr "برگرداندن تمام موسیقی"
 
+#: /home/arno/clementine/clementine-player/src/ui_deviceproperties.h:378
 msgid "Convert any music that the device can't play"
 msgstr "برگردان تمام موسیقی‌هایی که دستگاه نمی‌تواند پخش کند"
 
+#: library/libraryview.cpp:258 ui/mainwindow.cpp:537
+#: widgets/fileviewlist.cpp:43
 msgid "Copy to device..."
 msgstr "کپی‌کردن در دستگاه..."
 
+#: devices/deviceview.cpp:223 ui/mainwindow.cpp:534
+#: widgets/fileviewlist.cpp:38
 msgid "Copy to library..."
 msgstr "کپی‌کردن در کتابخانه..."
 
+#: devices/afctransfer.cpp:50
 msgid "Copying iPod database"
 msgstr "کپی‌کردن پایگاه داده‌های آی‌پاد"
 
+#: transcoder/transcoder.cpp:62
 #, qt-format
 msgid ""
 "Could not create the GStreamer element \"%1\" - make sure you have all the "
@@ -800,6 +1099,7 @@ msgstr ""
 "نمی‌توانم عنصر «%1» از GStream را ایجا کنم -  مطمئن شوید که همهٔ افزونه‌های "
 "مورد نیاز GStream را نصب کرده‌اید"
 
+#: transcoder/transcoder.cpp:426
 #, qt-format
 msgid ""
 "Couldn't find a muxer for %1, check you have the correct GStreamer plugins "
@@ -808,6 +1108,7 @@ msgstr ""
 "نمی‌توانم موکسر را برای %1 پیدا کنم، بررسی کنید که افزونهٔ مناسب GStream را "
 "نصب کرده‌اید"
 
+#: transcoder/transcoder.cpp:420
 #, qt-format
 msgid ""
 "Couldn't find an encoder for %1, check you have the correct GStreamer "
@@ -816,528 +1117,722 @@ msgstr ""
 "نمی‌توانم رمزگذاری برای %1 پیدا کنم، بررسی کنید که افزونهٔ مناسب GStream را "
 "نصب کرده‌اید"
 
+#: internet/lastfmservice.cpp:915
 msgid "Couldn't load the last.fm radio station"
 msgstr "نمی‌توانم ایستگاه رادیویی last.fm را بارگیری کنم"
 
+#: internet/magnatunedownloaddialog.cpp:203
 #, qt-format
 msgid "Couldn't open output file %1"
 msgstr "نمی‌توانم پروندهٔ خروجی %1 را باز کنم"
 
+#: /home/arno/clementine/clementine-player/src/ui_albumcovermanager.h:149
+#: /home/arno/clementine/clementine-player/src/ui_albumcoversearcher.h:104
+#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:668
 msgid "Cover Manager"
 msgstr "مدیریت جلد"
 
+#: ui/edittagdialog.cpp:406
 msgid "Cover art from embedded image"
 msgstr "جلد هنری را از عکس نشانده شده بردار"
 
+#: ui/edittagdialog.cpp:408
 #, qt-format
 msgid "Cover art loaded automatically from %1"
 msgstr "جلد هنری از %1 اتوماتیک فراخوانی شد"
 
+#: ui/edittagdialog.cpp:401
 msgid "Cover art manually unset"
 msgstr "جلد هنری دستی بازنشانده شد"
 
+#: ui/edittagdialog.cpp:410
 msgid "Cover art not set"
 msgstr "جلد هنری نشانده نشد"
 
+#: ui/edittagdialog.cpp:404
 #, qt-format
 msgid "Cover art set from %1"
 msgstr "جلد هنری از %1 نشانده شد"
 
+#: covers/coversearchstatisticsdialog.cpp:60 ui/albumcoversearcher.cpp:104
 #, qt-format
 msgid "Covers from %1"
 msgstr "جلدها از %1"
 
+#: /home/arno/clementine/clementine-player/src/ui_playbacksettingspage.h:262
 msgid "Cross-fade when changing tracks automatically"
 msgstr "پژمردن آهنگ وقتی‌که قطعه‌ها اتوماتیک تغییر می‌کنند"
 
+#: /home/arno/clementine/clementine-player/src/ui_playbacksettingspage.h:261
 msgid "Cross-fade when changing tracks manually"
 msgstr "پژمردن آهنگ وقتی‌که قطعه‌ها دستی تغییر می‌کنند"
 
+#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:640
 msgid "Ctrl+Alt+V"
 msgstr "Ctrl+Alt+V"
 
+#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:644
 msgid "Ctrl+B"
 msgstr "Ctrl+B"
 
+#: /home/arno/clementine/clementine-player/src/ui_queuemanager.h:133
 msgid "Ctrl+Down"
 msgstr "Ctrl+Down"
 
+#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:651
 msgid "Ctrl+E"
 msgstr "Ctrl+E"
 
+#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:661
 msgid "Ctrl+H"
 msgstr "Ctrl+H"
 
+#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:679
 msgid "Ctrl+J"
 msgstr "Ctrl+J"
 
+#: /home/arno/clementine/clementine-player/src/ui_queuemanager.h:141
+#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:649
 msgid "Ctrl+K"
 msgstr "Ctrl+K"
 
+#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:642
 msgid "Ctrl+L"
 msgstr "Ctrl+L"
 
+#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:693
 msgid "Ctrl+M"
 msgstr "Ctrl+M"
 
+#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:681
 msgid "Ctrl+N"
 msgstr "Ctrl+N"
 
+#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:665
 msgid "Ctrl+O"
 msgstr "Ctrl+O"
 
+#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:657
 msgid "Ctrl+P"
 msgstr "Ctrl+P"
 
+#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:638
 msgid "Ctrl+Q"
 msgstr "Ctrl+Q"
 
+#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:683
 msgid "Ctrl+S"
 msgstr "Ctrl+S"
 
+#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:663
 msgid "Ctrl+Shift+A"
 msgstr "Ctrl+Shift+A"
 
+#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:685
 msgid "Ctrl+Shift+O"
 msgstr "Ctrl+Shift+O"
 
+#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:696
 msgid "Ctrl+T"
 msgstr "Ctrl+T"
 
+#: /home/arno/clementine/clementine-player/src/ui_queuemanager.h:129
 msgid "Ctrl+Up"
 msgstr "Ctrl+Up"
 
+#: ui/equalizer.cpp:108
+#: /home/arno/clementine/clementine-player/src/ui_lastfmstationdialog.h:98
 msgid "Custom"
 msgstr "سفارشی"
 
+#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:409
 msgid "Custom message settings"
 msgstr "تنظیم پیام سفارشی"
 
+#: internet/lastfmservice.cpp:198
 msgid "Custom radio"
 msgstr "رادیوی سفارشی"
 
+#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:423
 msgid "Custom..."
 msgstr "سفارشی..."
 
+#: devices/devicekitlister.cpp:123
 msgid "DBus path"
 msgstr "مسیر DBus"
 
+#: ui/equalizer.cpp:111
 msgid "Dance"
 msgstr "رقص"
 
+#: playlist/playlist.cpp:1104
+#: /home/arno/clementine/clementine-player/src/ui_edittagdialog.h:649
 msgid "Date created"
 msgstr "تاریخ ایجاد شد"
 
+#: playlist/playlist.cpp:1103
+#: /home/arno/clementine/clementine-player/src/ui_edittagdialog.h:648
 msgid "Date modified"
 msgstr "تاریخ اصلاح شد"
 
+#: smartplaylists/searchterm.cpp:301
 msgid "Days"
 msgstr "روزها"
 
+#: /home/arno/clementine/clementine-player/src/ui_globalshortcutssettingspage.h:177
 msgid "De&fault"
 msgstr "پیش‌&فرض"
 
+#: core/commandlineoptions.cpp:159
 msgid "Decrease the volume by 4%"
 msgstr "کاهش صدا ۴٪"
 
+#: core/globalshortcuts.cpp:53 wiimotedev/wiimotesettingspage.cpp:104
 msgid "Decrease volume"
 msgstr "کاهش صدا"
 
+#: /home/arno/clementine/clementine-player/src/ui_wiimotesettingspage.h:195
 msgid "Defaults"
 msgstr "پیش‌فرضها"
 
+#: /home/arno/clementine/clementine-player/src/ui_visualisationselector.h:115
 msgid "Delay between visualizations"
 msgstr "تأخیر بین تصویرسازیها"
 
+#: devices/deviceview.cpp:393 library/libraryview.cpp:450
+#: ui/mainwindow.cpp:1837 widgets/fileview.cpp:185
 msgid "Delete files"
 msgstr "پاک کردن پرونده‌ها"
 
+#: devices/deviceview.cpp:225
 msgid "Delete from device..."
 msgstr "پاک کردن از دستگاه..."
 
+#: library/libraryview.cpp:260 ui/mainwindow.cpp:538
+#: widgets/fileviewlist.cpp:44
 msgid "Delete from disk..."
 msgstr "پاک کردن از دیسک..."
 
+#: ui/equalizer.cpp:190
+#: /home/arno/clementine/clementine-player/src/ui_equalizer.h:124
 msgid "Delete preset"
 msgstr "پاک کردن پیش‌نشانده"
 
+#: library/libraryview.cpp:252
 msgid "Delete smart playlist"
 msgstr "پاک کردن لیست‌پخش هوشمند"
 
+#: /home/arno/clementine/clementine-player/src/ui_organisedialog.h:194
 msgid "Delete the original files"
 msgstr "پاک کردن اصل پرونده‌ها"
 
+#: core/deletefiles.cpp:49
 msgid "Deleting files"
 msgstr "پاک کردن پرونده‌ها"
 
+#: ui/mainwindow.cpp:1348
 msgid "Dequeue selected tracks"
 msgstr "صف‌بندی دوبارهٔ قطعه‌های انتخاب شده"
 
+#: ui/mainwindow.cpp:1346
 msgid "Dequeue track"
 msgstr "صف‌بندی دوبارهٔ قطعه"
 
+#: /home/arno/clementine/clementine-player/src/ui_transcodedialog.h:211
+#: /home/arno/clementine/clementine-player/src/ui_organisedialog.h:189
 msgid "Destination"
 msgstr "مقصد"
 
+#: /home/arno/clementine/clementine-player/src/ui_transcodedialog.h:217
 msgid "Details..."
 msgstr "جزئیات..."
 
+#: devices/devicekitlister.cpp:126 devices/giolister.cpp:158
 msgid "Device"
 msgstr "دستگاه"
 
+#: /home/arno/clementine/clementine-player/src/ui_deviceproperties.h:368
 msgid "Device Properties"
 msgstr "ویژگیهای دستگاه"
 
+#: devices/wmdmlister.cpp:368
 msgid "Device name"
 msgstr "نام دستگاه"
 
+#: devices/deviceview.cpp:212
 msgid "Device properties..."
 msgstr "ویژگیهای دستگاه..."
 
+#: ui/mainwindow.cpp:267
 msgid "Devices"
 msgstr "‌دستگاه‌ها"
 
+#: /home/arno/clementine/clementine-player/src/ui_globalsearchpopup.h:103
 msgid "Dialog"
 msgstr ""
 
+#: widgets/didyoumean.cpp:128
 msgid "Did you mean"
 msgstr "منظورت این بود که"
 
+#: /home/arno/clementine/clementine-player/src/ui_digitallyimportedsettingspage.h:132
 msgid "Digitally Imported"
 msgstr ""
 
+#: /home/arno/clementine/clementine-player/src/ui_digitallyimportedsettingspage.h:135
 msgid "Digitally Imported password"
 msgstr ""
 
+#: /home/arno/clementine/clementine-player/src/ui_digitallyimportedsettingspage.h:134
 msgid "Digitally Imported username"
 msgstr ""
 
+#: /home/arno/clementine/clementine-player/src/ui_networkproxysettingspage.h:159
 msgid "Direct internet connection"
 msgstr "ارتباط مستقیم اینترنت"
 
+#: /home/arno/clementine/clementine-player/src/ui_magnatunedownloaddialog.h:145
+#: /home/arno/clementine/clementine-player/src/ui_transcodedialog.h:204
 msgid "Directory"
 msgstr "فهرست راهنما"
 
+#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:405
 msgid "Disable duration"
 msgstr "مدت غیرفعال‌سازی"
 
+#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:398
 msgid "Disabled"
 msgstr "غیر فعال شد"
 
+#: playlist/playlist.cpp:1084 ui/organisedialog.cpp:58
+#: /home/arno/clementine/clementine-player/src/ui_edittagdialog.h:655
 msgid "Disc"
 msgstr "دیسک"
 
+#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsspeex.h:234
 msgid "Discontinuous transmission"
 msgstr "ارسال ناپیوسته"
 
+#: /home/arno/clementine/clementine-player/src/ui_librarysettingspage.h:169
 msgid "Display options"
 msgstr "گزینه‌های نمایش"
 
+#: core/commandlineoptions.cpp:169
 msgid "Display the global search popup"
 msgstr ""
 
+#: core/commandlineoptions.cpp:167
 msgid "Display the on-screen-display"
 msgstr "نمایش نمایش پرده‌ای"
 
+#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:694
 msgid "Do a full library rescan"
 msgstr "انجام وارسی دوبارهٔ کامل کتابخانه"
 
+#: /home/arno/clementine/clementine-player/src/ui_deviceproperties.h:377
 msgid "Do not convert any music"
 msgstr "هیچ موسیقی را تبدیل نکن"
 
+#: widgets/osd.cpp:306
+#: /home/arno/clementine/clementine-player/src/ui_playlistsequence.h:99
 msgid "Don't repeat"
 msgstr "تکرار نکن"
 
+#: library/libraryview.cpp:274
 msgid "Don't show in various artists"
 msgstr "در هنرمندان گوناگون نشان نده"
 
+#: widgets/osd.cpp:294
+#: /home/arno/clementine/clementine-player/src/ui_playlistsequence.h:103
 msgid "Don't shuffle"
 msgstr "پخش مرتب"
 
+#: internet/magnatunedownloaddialog.cpp:282 ui/albumcovermanager.cpp:215
 msgid "Don't stop!"
 msgstr "توقف نکن!"
 
+#: devices/deviceview.cpp:114
 msgid "Double click to open"
 msgstr "برای گشودن دو بار کلیک کنید"
 
+#: /home/arno/clementine/clementine-player/src/ui_behavioursettingspage.h:198
 msgid "Double clicking a song will..."
 msgstr "دو بار کلیک یک آهنگ باعث..."
 
+#: internet/magnatunedownloaddialog.cpp:252
 msgid "Download directory"
 msgstr "بارگیری پوشه"
 
+#: /home/arno/clementine/clementine-player/src/ui_magnatunesettingspage.h:157
 msgid "Download membership"
 msgstr "بارگیری عضویت"
 
+#: internet/magnatuneservice.cpp:261
 msgid "Download this album"
 msgstr "بارگیری آلبوم"
 
+#: internet/jamendoservice.cpp:403
 msgid "Download this album..."
 msgstr "بارگیری این آلبوم..."
 
+#: /home/arno/clementine/clementine-player/src/ui_spotifysettingspage.h:186
 msgid "Download..."
 msgstr "بارگیری..."
 
+#: internet/icecastservice.cpp:93
 msgid "Downloading Icecast directory"
 msgstr "بارگیری پوشهٔ Icecast"
 
+#: internet/jamendoservice.cpp:173
 msgid "Downloading Jamendo catalogue"
 msgstr "بارگیری کاتالوگ Jamendo"
 
+#: internet/magnatuneservice.cpp:146
 msgid "Downloading Magnatune catalogue"
 msgstr "بارگیری کاتالوگ Magnatune"
 
+#: internet/spotifyblobdownloader.cpp:34
 msgid "Downloading Spotify plugin"
 msgstr "بارگیری افزونهٔ Spotify"
 
+#: musicbrainz/tagfetcher.cpp:99
 msgid "Downloading metadata"
 msgstr "بارگیری ابرداده"
 
+#: ui/notificationssettingspage.cpp:37
 msgid "Drag to reposition"
 msgstr "برای مکان‌گذاری دوباره بکشید"
 
+#: devices/wmdmlister.cpp:365
 msgid "Drive letter"
 msgstr "حرف درایو"
 
+#: /home/arno/clementine/clementine-player/src/ui_dynamicplaylistcontrols.h:103
 msgid "Dynamic mode is on"
 msgstr "حالت دینامیک روشن است"
 
+#: internet/jamendoservice.cpp:109 library/library.cpp:88
 msgid "Dynamic random mix"
 msgstr "درهم‌ریختن تصادفی دینامیک"
 
+#: library/libraryview.cpp:250
 msgid "Edit smart playlist..."
 msgstr "ویرایش لیست‌پخش هوشمند..."
 
+#: ui/mainwindow.cpp:1381
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "ویرایش برچسب \"%1\"..."
 
+#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:654
 msgid "Edit tag..."
 msgstr "ویرایش برچسب..."
 
+#: /home/arno/clementine/clementine-player/src/ui_edittagdialog.h:663
 msgid "Edit tags"
 msgstr "ویرایش برچسب‌ها"
 
+#: /home/arno/clementine/clementine-player/src/ui_edittagdialog.h:632
 msgid "Edit track information"
 msgstr "ویرایش اطلاعات قطعه"
 
+#: library/libraryview.cpp:264
+#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:650
 msgid "Edit track information..."
 msgstr "ویرایش اطلاعات قطعه..."
 
+#: library/libraryview.cpp:266
 msgid "Edit tracks information..."
 msgstr "ویرایش اطلاعات قطعه‌ها..."
 
+#: internet/savedradio.cpp:95
 msgid "Edit..."
 msgstr "ویرایش...."
 
+#: /home/arno/clementine/clementine-player/src/ui_wiimotesettingspage.h:183
 msgid "Enable Wii Remote support"
 msgstr "فعال‌سازی پشتیبانی کنترل Wii"
 
+#: /home/arno/clementine/clementine-player/src/ui_equalizer.h:126
 msgid "Enable equalizer"
 msgstr "توانا ساختن برابرساز"
 
+#: /home/arno/clementine/clementine-player/src/ui_behavioursettingspage.h:179
 msgid "Enable playlist background image"
 msgstr "توانا ساختن تصویر پس‌زمینهٔ لیست‌پخش"
 
+#: /home/arno/clementine/clementine-player/src/ui_wiimotesettingspage.h:187
 msgid "Enable shortcuts only when Clementine is focused"
 msgstr "توانا ساختن میان‌برها تنها وقتی که کلمنتاین در کانون است"
 
-msgid ""
-"Enable sources below to include them in Global Search results.  When "
-"identical results are available from more than one source, ones at the top "
-"will take priority."
-msgstr ""
-
+#: core/globalshortcuts.cpp:62
 msgid "Enable/disable Last.fm scrobbling"
 msgstr "فعال‌سازی/غیرفعال‌سازی واکشی Last.fm"
 
+#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsspeex.h:235
 msgid "Encoding complexity"
 msgstr "پیچیدگی رمزینه"
 
+#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsmp3.h:197
 msgid "Encoding engine quality"
 msgstr "کیفیت موتور رمزینه"
 
+#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsspeex.h:224
 msgid "Encoding mode"
 msgstr "حالت رمزینه"
 
+#: /home/arno/clementine/clementine-player/src/ui_coverfromurldialog.h:103
 msgid "Enter a URL to download a cover from the Internet:"
 msgstr ""
 
+#: playlist/playlisttabbar.cpp:131
 msgid "Enter a new name for this playlist"
 msgstr "نامی برای این لیست‌پخش وارد کنید"
 
+#: /home/arno/clementine/clementine-player/src/ui_lastfmstationdialog.h:93
 msgid ""
 "Enter an <b>artist</b> or <b>tag</b> to start listening to Last.fm radio."
 msgstr ""
 "یک  <b>هنرمند</b> یا <b>برچسب</b>وارد کنید تا به رادیوی  Last.fm گوش کنید."
 
+#: /home/arno/clementine/clementine-player/src/ui_libraryfilterwidget.h:131
+#: /home/arno/clementine/clementine-player/src/ui_albumcovermanager.h:153
 msgid "Enter search terms here"
 msgstr "واژه‌های جستجوی را در اینجا وارد کنید"
 
+#: /home/arno/clementine/clementine-player/src/ui_addstreamdialog.h:114
 msgid "Enter the URL of an internet radio stream:"
 msgstr "آدرس اینترنتی یک ایستگاه رادیویی اینترنتی را وارد کنید:"
 
+#: /home/arno/clementine/clementine-player/src/ui_libraryfilterwidget.h:115
 msgid "Entire collection"
 msgstr "همهٔ مجموعه"
 
+#: /home/arno/clementine/clementine-player/src/ui_equalizer.h:118
+#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:675
 msgid "Equalizer"
 msgstr "برابرساز"
 
+#: core/commandlineoptions.cpp:171
 msgid "Equivalent to --log-levels *:1"
 msgstr "برابر است با --log-levels *:1"
 
+#: core/commandlineoptions.cpp:172
 msgid "Equivalent to --log-levels *:3"
 msgstr "برابر است با --log-levels *:3"
 
+#: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:444
+#: ui/edittagdialog.cpp:719 ui/mainwindow.cpp:1805 ui/mainwindow.cpp:1910
+#: ui/mainwindow.cpp:2128
 msgid "Error"
 msgstr "خطا"
 
+#: devices/mtploader.cpp:56
 msgid "Error connecting MTP device"
 msgstr "خطا در اتصال به دستگاه MTP"
 
+#: ui/organiseerrordialog.cpp:53
 msgid "Error copying songs"
 msgstr "خطا در کپی کردن آهنگ‌ها"
 
+#: ui/organiseerrordialog.cpp:58
 msgid "Error deleting songs"
 msgstr "خطا در پاک کردن آهنگ‌ها"
 
+#: internet/spotifyblobdownloader.cpp:137
 msgid "Error downloading Spotify plugin"
 msgstr "خطا در بارگیری افزونهٔ Spotify"
 
+#: playlist/songloaderinserter.cpp:69 playlist/songloaderinserter.cpp:130
 #, qt-format
 msgid "Error loading %1"
 msgstr "خطا در فراخوانی %1"
 
+#: internet/digitallyimportedservicebase.cpp:240
+#: internet/digitallyimportedurlhandler.cpp:83
 msgid "Error loading di.fm playlist"
 msgstr ""
 
+#: transcoder/transcoder.cpp:393
 #, qt-format
 msgid "Error processing %1: %2"
 msgstr "خطای پردازش %1:%2"
 
+#: playlist/songloaderinserter.cpp:98
 msgid "Error while loading audio CD"
 msgstr "خطا هنگام فراخوانی سی‌دی صوتی"
 
+#: library/library.cpp:58
 msgid "Ever played"
 msgstr "همواره پخش‌شده"
 
+#: /home/arno/clementine/clementine-player/src/ui_playbacksettingspage.h:263
 msgid "Except between tracks on the same album or in the same CUE sheet"
 msgstr "به جز بین قطعه‌های یک آلبوم یا یک پهنهٔ CUE"
 
+#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:659
 msgid "F1"
 msgstr "F1"
 
+#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:655
 msgid "F2"
 msgstr "F2"
 
+#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:630
 msgid "F5"
 msgstr "F5"
 
+#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:632
 msgid "F6"
 msgstr "F6"
 
+#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:634
 msgid "F7"
 msgstr "F7"
 
+#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:636
 msgid "F8"
 msgstr "F8"
 
+#: /home/arno/clementine/clementine-player/src/ui_magnatunedownloaddialog.h:140
+#: /home/arno/clementine/clementine-player/src/ui_magnatunesettingspage.h:167
+#: /home/arno/clementine/clementine-player/src/ui_transcodersettingspage.h:161
 msgid "FLAC"
 msgstr "FLAC"
 
+#: /home/arno/clementine/clementine-player/src/ui_playbacksettingspage.h:260
 msgid "Fade out when stopping a track"
 msgstr "پژمردن هنگام توقف یک قطعه"
 
+#: /home/arno/clementine/clementine-player/src/ui_playbacksettingspage.h:259
 msgid "Fading"
 msgstr "پژمردن"
 
+#: /home/arno/clementine/clementine-player/src/ui_playbacksettingspage.h:264
 msgid "Fading duration"
 msgstr "زمان پژمردن"
 
+#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsflac.h:82
+#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsmp3.h:200
 msgid "Fast"
 msgstr "تند"
 
+#: internet/groovesharkservice.cpp:536
 msgid "Favorites"
 msgstr ""
 
+#: library/library.cpp:72
 msgid "Favourite tracks"
 msgstr "قطعه‌های برگزیده"
 
+#: /home/arno/clementine/clementine-player/src/ui_albumcovermanager.h:155
 msgid "Fetch Missing Covers"
 msgstr "واکشی جلدهای غیرموجود"
 
+#: /home/arno/clementine/clementine-player/src/ui_albumcovermanager.h:150
 msgid "Fetch automatically"
 msgstr "واکشی اتوماتیک"
 
+#: /home/arno/clementine/clementine-player/src/ui_coversearchstatisticsdialog.h:75
 msgid "Fetch completed"
 msgstr "واکشی کامل شد"
 
+#: ui/coverfromurldialog.cpp:71 ui/coverfromurldialog.cpp:82
 msgid "Fetching cover error"
 msgstr "خطای واکشی جلد"
 
+#: ui/organisedialog.cpp:66
 msgid "File extension"
 msgstr "پسوند پرونده"
 
+#: /home/arno/clementine/clementine-player/src/ui_deviceproperties.h:384
 msgid "File formats"
 msgstr "نوع پرونده"
 
+#: playlist/playlist.cpp:1099
+#: /home/arno/clementine/clementine-player/src/ui_edittagdialog.h:650
 msgid "File name"
 msgstr "نام پرونده"
 
+#: playlist/playlist.cpp:1100
 msgid "File name (without path)"
 msgstr "نام پرونده (بدون مسیر)"
 
+#: playlist/playlist.cpp:1101
+#: /home/arno/clementine/clementine-player/src/ui_edittagdialog.h:644
 msgid "File size"
 msgstr "اندازه پرونده"
 
+#: playlist/playlist.cpp:1102
+#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:133
+#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:146
+#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:159
+#: /home/arno/clementine/clementine-player/src/ui_edittagdialog.h:646
 msgid "File type"
 msgstr "نوع پرونده"
 
+#: /home/arno/clementine/clementine-player/src/ui_transcodedialog.h:205
 msgid "Filename"
 msgstr "نام‌پرونده"
 
+#: ui/mainwindow.cpp:265
 msgid "Files"
 msgstr "پرونده‌ها"
 
+#: /home/arno/clementine/clementine-player/src/ui_transcodedialog.h:202
 msgid "Files to transcode"
 msgstr "پرونده‌های برای تراکد"
 
+#: devices/wmdmlister.cpp:367
 msgid "Filesystem name"
 msgstr "نام سیستم‌فایل"
 
+#: devices/wmdmlister.cpp:372
 msgid "Filesystem serial number"
 msgstr "شمارهٔ سریال سیستم‌فایل"
 
+#: devices/wmdmlister.cpp:366
 msgid "Filesystem type"
 msgstr "نوع سیستم‌فایل"
 
+#: smartplaylists/querywizardplugin.cpp:87
 msgid "Find songs in your library that match the criteria you specify."
 msgstr "یافتن آهنگ‌های در کتابخانه که با معیارهای شما مطابقت دارند."
 
+#: musicbrainz/tagfetcher.cpp:52
 msgid "Fingerprinting song"
 msgstr "انگشت‌نگاری آهنگ"
 
+#: smartplaylists/wizard.cpp:79
 msgid "Finish"
 msgstr "پایان"
 
+#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:125
 msgid "First level"
 msgstr "طبقهٔ اول"
 
+#: core/song.cpp:132
 msgid "Flac"
 msgstr "Flac"
 
+#: /home/arno/clementine/clementine-player/src/ui_songinfosettingspage.h:181
 msgid "Font size"
 msgstr "اندازهٔ قلم"
 
+#: /home/arno/clementine/clementine-player/src/ui_spotifysettingspage.h:184
 msgid "For licensing reasons Spotify support is in a separate plugin."
 msgstr "به دلایل اجازه‌نامه، پشتیبانی اسپاتیفای در افزونه‌ای جداگانه است."
 
+#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsmp3.h:204
 msgid "Force mono encoding"
 msgstr "رمزینهٔ مونو پخش کن"
 
+#: devices/deviceview.cpp:209 devices/deviceview.cpp:315
+#: devices/deviceview.cpp:319
 msgid "Forget device"
 msgstr "انصراف دستگاه"
 
+#: devices/deviceview.cpp:316
 msgid ""
 "Forgetting a device will remove it from this list and Clementine will have "
 "to rescan all the songs again next time you connect it."
@@ -1345,149 +1840,216 @@ msgstr ""
 "انصراف یک دستگاه آن را از این لیست حذف می‌کند و بار دیگر که دستگاه را وصل "
 "کردید، کلمنتاین باید همهٔ آهنگهای آن را دوباره جستجو کند."
 
+#: /home/arno/clementine/clementine-player/src/ui_globalsearchwidget.h:64
+#: /home/arno/clementine/clementine-player/src/ui_icecastfilterwidget.h:74
+#: /home/arno/clementine/clementine-player/src/ui_internetviewcontainer.h:70
+#: /home/arno/clementine/clementine-player/src/ui_libraryfilterwidget.h:114
+#: /home/arno/clementine/clementine-player/src/ui_libraryviewcontainer.h:59
+#: /home/arno/clementine/clementine-player/src/ui_playlistcontainer.h:143
+#: /home/arno/clementine/clementine-player/src/ui_querysearchpage.h:70
+#: /home/arno/clementine/clementine-player/src/ui_querysortpage.h:136
+#: /home/arno/clementine/clementine-player/src/ui_searchpreview.h:104
+#: /home/arno/clementine/clementine-player/src/ui_searchtermwidget.h:279
+#: /home/arno/clementine/clementine-player/src/ui_wizardfinishpage.h:83
+#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsaac.h:128
+#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsflac.h:80
+#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsmp3.h:190
+#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsspeex.h:216
+#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsvorbis.h:201
+#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionswma.h:78
+#: /home/arno/clementine/clementine-player/src/ui_equalizerslider.h:82
+#: /home/arno/clementine/clementine-player/src/ui_fileview.h:106
+#: /home/arno/clementine/clementine-player/src/ui_loginstatewidget.h:145
+#: /home/arno/clementine/clementine-player/src/ui_trackslider.h:69
+#: /home/arno/clementine/clementine-player/src/ui_visualisationoverlay.h:178
 msgid "Form"
 msgstr "فرم"
 
+#: /home/arno/clementine/clementine-player/src/ui_magnatunedownloaddialog.h:136
 msgid "Format"
 msgstr "قالب"
 
+#: analyzers/analyzercontainer.cpp:46
+#: visualisations/visualisationcontainer.cpp:97
 msgid "Framerate"
 msgstr "آهنگ فریم"
 
+#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsspeex.h:236
 msgid "Frames per buffer"
 msgstr "فریم در هر بافر"
 
+#: internet/lastfmservice.cpp:206
 msgid "Friends"
 msgstr "دوستان"
 
+#: ui/equalizer.cpp:112
 msgid "Full Bass"
 msgstr "باس کامل"
 
+#: ui/equalizer.cpp:114
 msgid "Full Bass + Treble"
 msgstr "باس کامل + لرزش"
 
+#: ui/equalizer.cpp:113
 msgid "Full Treble"
 msgstr "لرزش کامل"
 
+#: /home/arno/clementine/clementine-player/src/ui_playbacksettingspage.h:276
 msgid "GStreamer audio engine"
 msgstr "موتور صوتی GStreamer"
 
+#: ui/settingsdialog.cpp:111
 msgid "General"
 msgstr ""
 
+#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:402
 msgid "General settings"
 msgstr "تنظیمات عمومی"
 
+#: playlist/playlist.cpp:1086 ui/organisedialog.cpp:61
+#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:134
+#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:147
+#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:160
+#: /home/arno/clementine/clementine-player/src/ui_edittagdialog.h:660
 msgid "Genre"
 msgstr "ژانر"
 
+#: internet/somafmservice.cpp:88
 msgid "Getting channels"
 msgstr "دریافت کانال"
 
+#: internet/digitallyimportedservicebase.cpp:102
 msgid "Getting streams"
 msgstr ""
 
+#: /home/arno/clementine/clementine-player/src/ui_addstreamdialog.h:116
 msgid "Give it a name:"
 msgstr "نامی به آن دهید:"
 
-msgid "Global Search"
-msgstr ""
-
+#: /home/arno/clementine/clementine-player/src/ui_globalsearchwidget.h:65
 msgid "Global search"
 msgstr ""
 
+#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:686
 msgid "Go to next playlist tab"
 msgstr "برو به نوار بعدی لیست‌پخش"
 
+#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:687
 msgid "Go to previous playlist tab"
 msgstr "برو به نوار قبلی لیست‌پخش"
 
+#: /home/arno/clementine/clementine-player/src/ui_remotesettingspage.h:206
 msgid "Google password"
 msgstr "کلمهٔ عبور گوگل"
 
+#: /home/arno/clementine/clementine-player/src/ui_remotesettingspage.h:204
 msgid "Google username"
 msgstr "حساب کاربری گوگل"
 
+#: covers/coversearchstatisticsdialog.cpp:54 ui/albumcovermanager.cpp:431
+#: /home/arno/clementine/clementine-player/src/ui_coversearchstatisticsdialog.h:76
 #, qt-format
 msgid "Got %1 covers out of %2 (%3 failed)"
 msgstr "%1 از %2 جلدها دریافت شد (%3 ناموفق)"
 
+#: /home/arno/clementine/clementine-player/src/ui_behavioursettingspage.h:190
 msgid "Grey out non existent songs in my playlists"
 msgstr "آهنگ‌های ناموجود لیست‌پخش‌های من را خاکستری کن"
 
+#: /home/arno/clementine/clementine-player/src/ui_groovesharksettingspage.h:112
 msgid "Grooveshark"
 msgstr ""
 
+#: internet/groovesharkservice.cpp:377
 msgid "Grooveshark login error"
 msgstr ""
 
+#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:124
 msgid "Group Library by..."
 msgstr "کتابخانه را گروه‌بندی کن طبق..."
 
+#: library/libraryfilterwidget.cpp:103
 msgid "Group by"
 msgstr "گروه‌بندی طبق"
 
+#: /home/arno/clementine/clementine-player/src/ui_libraryfilterwidget.h:127
 msgid "Group by Album"
 msgstr "گروه‌بندی طبق آلبوم"
 
+#: /home/arno/clementine/clementine-player/src/ui_libraryfilterwidget.h:124
 msgid "Group by Artist"
 msgstr "گروه‌بندی طبق هنرمند"
 
+#: /home/arno/clementine/clementine-player/src/ui_libraryfilterwidget.h:125
 msgid "Group by Artist/Album"
 msgstr "گروه‌بندی طبق هنرمند/آلبوم"
 
+#: /home/arno/clementine/clementine-player/src/ui_libraryfilterwidget.h:126
 msgid "Group by Artist/Year - Album"
 msgstr "گروه‌بندی طبق هنرمند/سال - آلبوم"
 
+#: /home/arno/clementine/clementine-player/src/ui_libraryfilterwidget.h:128
 msgid "Group by Genre/Album"
 msgstr "گروه‌بندی طبق ژانر/آلبوم"
 
+#: /home/arno/clementine/clementine-player/src/ui_libraryfilterwidget.h:129
 msgid "Group by Genre/Artist/Album"
 msgstr "گروه‌بندی طبق ژانر/هنرمند/آلبوم"
 
+#: /home/arno/clementine/clementine-player/src/ui_networkproxysettingspage.h:163
 msgid "HTTP proxy"
 msgstr "پراکسی HTTP"
 
+#: /home/arno/clementine/clementine-player/src/ui_deviceproperties.h:371
 msgid "Hardware information"
 msgstr "اطلاعات سخت‌افزاری"
 
+#: /home/arno/clementine/clementine-player/src/ui_deviceproperties.h:372
 msgid "Hardware information is only available while the device is connected."
 msgstr "اطلاعات سخت‌افزاری تنها در صورتی در دسترس است  که دستگاه متصل باشد."
 
-msgid "Hide all other search boxes"
-msgstr ""
-
+#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsmp3.h:202
 msgid "High"
 msgstr "زیاد"
 
+#: analyzers/analyzercontainer.cpp:64
 #, qt-format
 msgid "High (%1 fps)"
 msgstr "زیاد (%1 fps)"
 
+#: visualisations/visualisationcontainer.cpp:112
 msgid "High (1024x1024)"
 msgstr "زیاد (1024x1024)"
 
+#: visualisations/visualisationcontainer.cpp:102
 msgid "High (35 fps)"
 msgstr "زیاد (35 fps)"
 
+#: smartplaylists/searchterm.cpp:300
 msgid "Hours"
 msgstr "ساعت"
 
+#: core/backgroundstreams.cpp:30
 msgid "Hypnotoad"
 msgstr "Hypnotoad"
 
+#: /home/arno/clementine/clementine-player/src/ui_magnatunesettingspage.h:155
 msgid "I don't have a Magnatune account"
 msgstr "حساب کاربری مگناتیون ندارم"
 
+#: /home/arno/clementine/clementine-player/src/ui_deviceproperties.h:370
 msgid "Icon"
 msgstr "آیکون"
 
+#: widgets/fancytabwidget.cpp:651
 msgid "Icons on top"
 msgstr "آیکون در بالا"
 
+#: musicbrainz/tagfetcher.cpp:83
 msgid "Identifying song"
 msgstr "تشخیص آهنگ"
 
+#: devices/devicemanager.cpp:569 devices/devicemanager.cpp:577
 msgid ""
 "If you continue, this device will work slowly and songs copied to it may not"
 " work."
@@ -1495,6 +2057,7 @@ msgstr ""
 "اگر ادامه دهید، این دستگاه آهسته کار خواهد کرد و آهنگهای کپی شده روی آن ممکن"
 " است پخش نشوند."
 
+#: /home/arno/clementine/clementine-player/src/ui_remotesettingspage.h:209
 msgid ""
 "If you use the remote on more than one computer, this name will help you "
 "choose which one to connect to on your phone."
@@ -1502,15 +2065,19 @@ msgstr ""
 "اگر از کنترل برای چندین کامپیوتر استفاده می‌کنید، این نام به شما کمک می‌کند "
 "که معین کنید کدامیک به تلفن شما وصل شود."
 
+#: /home/arno/clementine/clementine-player/src/ui_organisedialog.h:204
 msgid "Ignore \"The\" in artist names"
 msgstr "صرف نظر از \"The\"‌ در نام هنرمندان"
 
+#: ui/albumcoverchoicecontroller.cpp:41
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
 msgstr "تصاویر (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
 
+#: ui/albumcoverchoicecontroller.cpp:43
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgstr "تصاویر (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 
+#: /home/arno/clementine/clementine-player/src/ui_wizardfinishpage.h:86
 msgid ""
 "In dynamic mode new tracks will be chosen and added to the playlist every "
 "time a song finishes."
@@ -1518,1353 +2085,1859 @@ msgstr ""
 "در حالت دینامیک پس از پایان هر آهنگ، قطعه‌های تازه انتخاب و به لیست‌پخش "
 "افزوده می‌شوند."
 
+#: internet/spotifyservice.cpp:314
 msgid "Inbox"
 msgstr "صندوق ورودی"
 
+#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:408
 msgid "Include album art in the notification"
 msgstr "آلبوم هنری را در آگاهساز قرار بده"
 
+#: /home/arno/clementine/clementine-player/src/ui_querysearchpage.h:76
 msgid "Include all songs"
 msgstr "در بر داشتن همهٔ آهنگها"
 
-msgid "Include keyboard shortcut help in the tooltip"
-msgstr ""
-
+#: core/commandlineoptions.cpp:158
 msgid "Increase the volume by 4%"
 msgstr "بلندی صدا را ٪۴ افزایش بده"
 
+#: core/globalshortcuts.cpp:52 wiimotedev/wiimotesettingspage.cpp:103
 msgid "Increase volume"
 msgstr "بلند کردن صدا"
 
+#: wiimotedev/wiimotesettingspage.cpp:124
+#: /home/arno/clementine/clementine-player/src/ui_deviceproperties.h:373
 msgid "Information"
 msgstr "اطلاعات"
 
+#: /home/arno/clementine/clementine-player/src/ui_organisedialog.h:203
 msgid "Insert..."
 msgstr "قرار دادن..."
 
+#: internet/spotifysettingspage.cpp:70
 msgid "Installed"
 msgstr "نصب شد"
 
+#: ui/mainwindow.cpp:266
 msgid "Internet"
 msgstr "اینترنت"
 
+#: ui/settingsdialog.cpp:135
 msgid "Internet providers"
 msgstr ""
 
+#: internet/lastfmservice.cpp:440
 msgid "Invalid API key"
 msgstr "کلید API نامعتبر"
 
+#: internet/skyfmservice.cpp:72
 msgid "Invalid SKY.fm username or password"
 msgstr ""
 
+#: internet/digitallyimportedservicebase.cpp:238
 msgid "Invalid di.fm username or password"
 msgstr ""
 
+#: internet/lastfmservice.cpp:435
 msgid "Invalid format"
 msgstr "قالب نامعتبر"
 
+#: internet/lastfmservice.cpp:433
 msgid "Invalid method"
 msgstr "روش نامعتبر"
 
+#: internet/lastfmservice.cpp:436
 msgid "Invalid parameters"
 msgstr "پارامترهای نامعتبر"
 
+#: internet/lastfmservice.cpp:437
 msgid "Invalid resource specified"
 msgstr "منابع مشخص‌شده نامعتبرند"
 
+#: internet/lastfmservice.cpp:432
 msgid "Invalid service"
 msgstr "سرویس نامعتبر"
 
+#: internet/lastfmservice.cpp:439
 msgid "Invalid session key"
 msgstr "کلید جلسهٔ نامعتبر"
 
+#: internet/groovesharkservice.cpp:370
 msgid "Invalid username and/or password"
 msgstr ""
 
+#: ui/mainwindow.cpp:253
 msgid "Jamendo"
 msgstr ""
 
+#: internet/jamendoservice.cpp:105
 msgid "Jamendo Most Listened Tracks"
 msgstr "قطعه‌های بیشتر شنیده شدهٔ Jamendo"
 
+#: internet/jamendoservice.cpp:103
 msgid "Jamendo Top Tracks"
 msgstr "قطعه‌های برتر Jamendo"
 
+#: internet/jamendoservice.cpp:99
 msgid "Jamendo Top Tracks of the Month"
 msgstr "قطعه‌های برتر ماه Jamendo"
 
+#: internet/jamendoservice.cpp:101
 msgid "Jamendo Top Tracks of the Week"
 msgstr "قطعه‌های برتر هفتهٔ Jamendo"
 
+#: internet/jamendoservice.cpp:157
 msgid "Jamendo database"
 msgstr "پایگاه دادهٔ Jamendo"
 
+#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:678
 msgid "Jump to the currently playing track"
 msgstr "پرش به قطعهٔ در حال پخش"
 
+#: wiimotedev/wiimoteshortcutgrabber.cpp:72
 #, qt-format
 msgid "Keep buttons for %1 second..."
 msgstr "دکمه‌ها را %1 ثانیه نگه دار..."
 
+#: wiimotedev/wiimoteshortcutgrabber.cpp:73
+#: wiimotedev/wiimoteshortcutgrabber.cpp:117
+#: /home/arno/clementine/clementine-player/src/ui_wiimoteshortcutgrabber.h:127
 #, qt-format
 msgid "Keep buttons for %1 seconds..."
 msgstr "دکمه‌ها را %1 ثانیه نگه دار..."
 
+#: /home/arno/clementine/clementine-player/src/ui_behavioursettingspage.h:178
 msgid "Keep running in the background when the window is closed"
 msgstr "پخش را در پس‌زمینه ادامه بده وقتی که پنجره بسته می‌شود"
 
+#: /home/arno/clementine/clementine-player/src/ui_organisedialog.h:193
 msgid "Keep the original files"
 msgstr "اصل پرونده‌ها را نگه دار"
 
+#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:671
 msgid "Kittens"
 msgstr "توله گربه‌ها"
 
+#: /home/arno/clementine/clementine-player/src/ui_behavioursettingspage.h:180
 msgid "Language"
 msgstr "زبان"
 
+#: ui/equalizer.cpp:115
 msgid "Laptop/Headphones"
 msgstr "لپتاپ/هدفون"
 
+#: ui/equalizer.cpp:116
 msgid "Large Hall"
 msgstr "سالن بزرگ"
 
+#: widgets/nowplayingwidget.cpp:91
 msgid "Large album cover"
 msgstr "جلد آلبوم بزرگ"
 
+#: widgets/fancytabwidget.cpp:647
 msgid "Large sidebar"
 msgstr "میلهٔ کناری بزرگ"
 
+#: library/library.cpp:66 playlist/playlist.cpp:1093
+#: /home/arno/clementine/clementine-player/src/ui_edittagdialog.h:641
 msgid "Last played"
 msgstr "آخرین پخش"
 
+#: /home/arno/clementine/clementine-player/src/ui_lastfmsettingspage.h:144
 msgid "Last.fm"
 msgstr "Last.fm"
 
+#: internet/lastfmservice.cpp:70
 #, qt-format
 msgid "Last.fm Custom Radio: %1"
 msgstr "رادیوی سفارشی Last.fm: %1"
 
+#: internet/lastfmservice.cpp:237 internet/lastfmservice.cpp:709
+#: internet/lastfmservice.cpp:744
 #, qt-format
 msgid "Last.fm Library - %1"
 msgstr "کتابخانه Last.fm- %1"
 
+#: globalsearch/lastfmsearchprovider.cpp:69 internet/lastfmservice.cpp:239
+#: internet/lastfmservice.cpp:242
 #, qt-format
 msgid "Last.fm Mix Radio - %1"
 msgstr "رادیوی مختلط  Last.fm- %1"
 
+#: globalsearch/lastfmsearchprovider.cpp:71 internet/lastfmservice.cpp:244
+#: internet/lastfmservice.cpp:247
 #, qt-format
 msgid "Last.fm Neighbor Radio - %1"
 msgstr "رادیوی همسایه Last.fm- %1"
 
+#: globalsearch/lastfmsearchprovider.cpp:67 internet/lastfmservice.cpp:234
 #, qt-format
 msgid "Last.fm Radio Station - %1"
 msgstr "ایستگاه رادیویی Last.fm- %1"
 
+#: internet/lastfmservice.cpp:68
 #, qt-format
 msgid "Last.fm Similar Artists to %1"
 msgstr "هنرمندهایی مشابه %1 در Last.fm"
 
+#: internet/lastfmservice.cpp:69
 #, qt-format
 msgid "Last.fm Tag Radio: %1"
 msgstr "برچسب رادیویی Last.fm: %1"
 
+#: internet/lastfmservice.cpp:444
 msgid "Last.fm is currently busy, please try again in a few minutes"
 msgstr "Last.fm در حال پخش است، چند دقیقه بعد دوباره تلاش کنید"
 
+#: /home/arno/clementine/clementine-player/src/ui_lastfmsettingspage.h:148
 msgid "Last.fm password"
 msgstr "کلمهٔ عبور  Last.fm"
 
+#: songinfo/lastfmtrackinfoprovider.cpp:86
 msgid "Last.fm play counts"
 msgstr "Last.fm شمارش پخش‌شده‌ها"
 
+#: songinfo/lastfmtrackinfoprovider.cpp:139
 msgid "Last.fm tags"
 msgstr "برچسب Last.fm"
 
+#: /home/arno/clementine/clementine-player/src/ui_lastfmsettingspage.h:146
 msgid "Last.fm username"
 msgstr "نام کاربری Last.fm"
 
+#: songinfo/lastfmtrackinfoprovider.cpp:119
 msgid "Last.fm wiki"
 msgstr "ویکی Last.fm"
 
+#: library/library.cpp:82
 msgid "Least favourite tracks"
 msgstr "آخرین قطعه‌های برگزیده"
 
+#: /home/arno/clementine/clementine-player/src/ui_playbacksettingspage.h:282
 msgid "Leave blank for the default.  Examples: \"/dev/dsp\", \"front\", etc."
 msgstr "برای پیش‌فرض، خالی رها کنید. مثال:   \"/dev/dsp\"، \"front\"، و ..."
 
+#: playlist/playlist.cpp:1082 ui/organisedialog.cpp:63
+#: ui/qtsystemtrayicon.cpp:255
+#: /home/arno/clementine/clementine-player/src/ui_edittagdialog.h:636
 msgid "Length"
 msgstr "طول"
 
+#: ui/mainwindow.cpp:241 ui/mainwindow.cpp:264
 msgid "Library"
 msgstr "کتابخانه"
 
+#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:122
 msgid "Library advanced grouping"
 msgstr "گروه‌بندی پیشرفتهٔ کتابخانه"
 
+#: ui/mainwindow.cpp:2030
 msgid "Library rescan notice"
 msgstr "آگاه‌سازی پویش دوبارهٔ کتابخانه"
 
+#: smartplaylists/querywizardplugin.cpp:83
 msgid "Library search"
 msgstr "جستجوی کتابخانه"
 
+#: /home/arno/clementine/clementine-player/src/ui_querysortpage.h:140
 msgid "Limits"
 msgstr "محدودیت‌ها"
 
+#: ui/equalizer.cpp:117
 msgid "Live"
 msgstr "زنده"
 
+#: /home/arno/clementine/clementine-player/src/ui_albumcovermanager.h:151
 msgid "Load"
 msgstr "بارگیری"
 
+#: /home/arno/clementine/clementine-player/src/ui_coverfromurldialog.h:102
 msgid "Load cover from URL"
 msgstr "بارگیری جلدها از URL"
 
+#: ui/albumcoverchoicecontroller.cpp:60
 msgid "Load cover from URL..."
 msgstr "بارگیری جلدها از URL..."
 
+#: ui/albumcoverchoicecontroller.cpp:58
 msgid "Load cover from disk..."
 msgstr "بارگیری جلدها از دیسک"
 
+#: playlist/playlistcontainer.cpp:303
 msgid "Load playlist"
 msgstr "بارگیری لیست‌پخش"
 
+#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:684
 msgid "Load playlist..."
 msgstr "بارگیری لیست‌پخش..."
 
+#: internet/lastfmservice.cpp:928
 msgid "Loading Last.fm radio"
 msgstr "بارگیری رادیوی Last.fm"
 
+#: devices/mtploader.cpp:42
 msgid "Loading MTP device"
 msgstr "بارگیری دستگاه MTP"
 
+#: devices/wmdmloader.cpp:47
 msgid "Loading Windows Media device"
 msgstr "بارگیری دستگاه مدیای ویندوز"
 
+#: devices/gpodloader.cpp:46
 msgid "Loading iPod database"
 msgstr "بارگیری پایگاه دادهٔ آی‌پاد"
 
+#: smartplaylists/generatorinserter.cpp:52
 msgid "Loading smart playlist"
 msgstr "بارگیری لیست‌پخش هوشمند"
 
+#: library/librarymodel.cpp:122
 msgid "Loading songs"
 msgstr "بارگیری آهنگ‌ها"
 
+#: internet/digitallyimportedurlhandler.cpp:61
+#: internet/somafmurlhandler.cpp:45
 msgid "Loading stream"
 msgstr "بارگیری جریان"
 
+#: playlist/songloaderinserter.cpp:77 ui/edittagdialog.cpp:209
 msgid "Loading tracks"
 msgstr "بارگیری قطعه"
 
+#: playlist/songloaderinserter.cpp:136
 msgid "Loading tracks info"
 msgstr "بارگیری اطلاعات قطعه‌ها"
 
+#: library/librarymodel.cpp:117 widgets/prettyimage.cpp:168
+#: widgets/widgetfadehelper.cpp:93
+#: /home/arno/clementine/clementine-player/src/ui_searchpreview.h:106
 msgid "Loading..."
 msgstr "در حال بارگیری..."
 
+#: core/commandlineoptions.cpp:164
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "بارگیری پرونده‌ها/URLها، جانشانی دوبارهٔ لیست‌پخش جاری"
 
+#: /home/arno/clementine/clementine-player/src/ui_groovesharksettingspage.h:116
+#: /home/arno/clementine/clementine-player/src/ui_magnatunesettingspage.h:160
+#: /home/arno/clementine/clementine-player/src/ui_spotifysettingspage.h:182
+#: /home/arno/clementine/clementine-player/src/ui_remotesettingspage.h:205
+#: /home/arno/clementine/clementine-player/src/ui_lastfmsettingspage.h:147
 msgid "Login"
 msgstr "ورود به سیستم"
 
+#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsaac.h:137
 msgid "Long term prediction profile (LTP)"
 msgstr "مشخصات پیش‌بینی بلندمدت"
 
+#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:641
 msgid "Love"
 msgstr "عشق"
 
+#: analyzers/analyzercontainer.cpp:62
 #, qt-format
 msgid "Low (%1 fps)"
 msgstr "پایین (%1 fps)"
 
+#: visualisations/visualisationcontainer.cpp:100
 msgid "Low (15 fps)"
 msgstr "پایین (15 fps)"
 
+#: visualisations/visualisationcontainer.cpp:110
 msgid "Low (256x256)"
 msgstr "پایین (256x256)"
 
+#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsaac.h:135
 msgid "Low complexity profile (LC)"
 msgstr "مشخصات با پیچیدگی کم (LC)"
 
+#: /home/arno/clementine/clementine-player/src/ui_songinfosettingspage.h:187
 msgid "Lyrics"
 msgstr "متن آهنگ"
 
+#: songinfo/ultimatelyricsprovider.cpp:135
 #, qt-format
 msgid "Lyrics from %1"
 msgstr "متن آهنگ از %1"
 
+#: core/song.cpp:135
+#: /home/arno/clementine/clementine-player/src/ui_transcodersettingspage.h:159
 msgid "MP3"
 msgstr "MP3"
 
+#: /home/arno/clementine/clementine-player/src/ui_digitallyimportedsettingspage.h:142
 msgid "MP3 256k (Premium only)"
 msgstr ""
 
+#: /home/arno/clementine/clementine-player/src/ui_digitallyimportedsettingspage.h:141
 msgid "MP3 96k"
 msgstr ""
 
+#: core/song.cpp:133
 msgid "MP4 AAC"
 msgstr "MP4 AAC"
 
+#: core/song.cpp:134
 msgid "MPC"
 msgstr "MPC"
 
+#: ui/mainwindow.cpp:246
+#: /home/arno/clementine/clementine-player/src/ui_magnatunesettingspage.h:150
 msgid "Magnatune"
 msgstr "Magnatune"
 
+#: /home/arno/clementine/clementine-player/src/ui_magnatunedownloaddialog.h:131
 msgid "Magnatune Download"
 msgstr "بارگیری Magnatune"
 
+#: widgets/osd.cpp:211
 msgid "Magnatune download finished"
 msgstr "بارگیری Magnatune پایان یافت"
 
+#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsaac.h:134
 msgid "Main profile (MAIN)"
 msgstr "مشخصات اصلی (MAIN)"
 
+#: internet/spotifyservice.cpp:463
 msgid "Make playlist available offline"
 msgstr "لیست‌پخش را بیرون‌خط در دسترس بگذار"
 
+#: internet/lastfmservice.cpp:451
 msgid "Malformed response"
 msgstr "پاسخ ناهنجار"
 
+#: /home/arno/clementine/clementine-player/src/ui_networkproxysettingspage.h:160
 msgid "Manual proxy configuration"
 msgstr "پیکر بندی  دستی پراکسی"
 
+#: devices/deviceproperties.cpp:153
 msgid "Manufacturer"
 msgstr "تولید‌کننده"
 
+#: /home/arno/clementine/clementine-player/src/ui_querysearchpage.h:74
 msgid "Match every search term (AND)"
 msgstr "مطابقت همهٔ اصطلاحات جستجو (و)"
 
+#: /home/arno/clementine/clementine-player/src/ui_querysearchpage.h:75
 msgid "Match one or more search terms (OR)"
 msgstr "مطابقت یک یا بیشتر از یک اصطلاح جستجو (یا)"
 
+#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsvorbis.h:209
 msgid "Maximum bitrate"
 msgstr "بیشترین ضرباهنگ"
 
+#: analyzers/analyzercontainer.cpp:63
 #, qt-format
 msgid "Medium (%1 fps)"
 msgstr "میانه (%1 fps)"
 
+#: visualisations/visualisationcontainer.cpp:101
 msgid "Medium (25 fps)"
 msgstr "میانه (25 fps)"
 
+#: visualisations/visualisationcontainer.cpp:111
 msgid "Medium (512x512)"
 msgstr "میانه (512x512)"
 
+#: /home/arno/clementine/clementine-player/src/ui_magnatunesettingspage.h:152
 msgid "Membership type"
 msgstr "نوع عضویت"
 
+#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsvorbis.h:206
 msgid "Minimum bitrate"
 msgstr "کمترین ضرباهنگ"
 
+#: visualisations/projectmvisualisation.cpp:127
 msgid "Missing projectM presets"
 msgstr "نبود پیش‌نشان‌های projectM"
 
+#: devices/deviceproperties.cpp:152
 msgid "Model"
 msgstr "مدل"
 
+#: /home/arno/clementine/clementine-player/src/ui_librarysettingspage.h:163
 msgid "Monitor the library for changes"
 msgstr "دیده‌بانی کتابخانه برای تغییرات"
 
+#: smartplaylists/searchterm.cpp:303
 msgid "Months"
 msgstr "ماه"
 
+#: library/library.cpp:69
 msgid "Most played"
 msgstr "بیشترین پخش‌شده‌ها"
 
+#: devices/giolister.cpp:157
 msgid "Mount point"
 msgstr "نقطهٔ سوارکردن"
 
+#: devices/devicekitlister.cpp:125
 msgid "Mount points"
 msgstr "نقطه‌های سوارکردن"
 
+#: /home/arno/clementine/clementine-player/src/ui_queuemanager.h:131
+#: /home/arno/clementine/clementine-player/src/ui_songinfosettingspage.h:190
 msgid "Move down"
 msgstr "پایین بردن"
 
+#: ui/mainwindow.cpp:535 widgets/fileviewlist.cpp:40
 msgid "Move to library..."
 msgstr "جابه‌جایی به کتابخانه..."
 
+#: /home/arno/clementine/clementine-player/src/ui_queuemanager.h:127
+#: /home/arno/clementine/clementine-player/src/ui_songinfosettingspage.h:189
 msgid "Move up"
 msgstr "بالا بردن"
 
+#: ui/mainwindow.cpp:150
 msgid "Music (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma *.mp4 *.spx *.wav)"
 msgstr "موسیقی (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma *.mp4 *.spx *.wav)"
 
+#: /home/arno/clementine/clementine-player/src/ui_librarysettingspage.h:157
 msgid "Music Library"
 msgstr "کتابخانهٔ موسیقی"
 
+#: core/globalshortcuts.cpp:54 wiimotedev/wiimotesettingspage.cpp:105
+#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:692
 msgid "Mute"
 msgstr "بی‌صدا"
 
+#: globalsearch/lastfmsearchprovider.cpp:45 internet/lastfmservice.cpp:177
 msgid "My Last.fm Library"
 msgstr "کتابخانهٔ Last.fm من"
 
+#: globalsearch/lastfmsearchprovider.cpp:47 internet/lastfmservice.cpp:182
 msgid "My Last.fm Mix Radio"
 msgstr "رادیوی مختلط Last.fm من"
 
+#: globalsearch/lastfmsearchprovider.cpp:49 internet/lastfmservice.cpp:187
 msgid "My Last.fm Neighborhood"
 msgstr "همسایهٔ Last.fm من"
 
+#: globalsearch/lastfmsearchprovider.cpp:43 internet/lastfmservice.cpp:172
 msgid "My Last.fm Recommended Radio"
 msgstr "رادیوهای پیشنهادی Last.fm من"
 
+#: internet/lastfmservice.cpp:179
 msgid "My Mix Radio"
 msgstr "رادیوی مختلط من"
 
+#: internet/lastfmservice.cpp:184
 msgid "My Neighborhood"
 msgstr "همسایهٔ من"
 
+#: internet/lastfmservice.cpp:174
 msgid "My Radio Station"
 msgstr "ایستگاه رادیویی من"
 
+#: internet/lastfmservice.cpp:169
 msgid "My Recommendations"
 msgstr "پیشنهادهای من"
 
+#: ui/equalizer.cpp:172
+#: /home/arno/clementine/clementine-player/src/ui_deviceproperties.h:369
+#: /home/arno/clementine/clementine-player/src/ui_magnatunedownloaddialog.h:135
+#: /home/arno/clementine/clementine-player/src/ui_wizardfinishpage.h:84
+#: /home/arno/clementine/clementine-player/src/ui_globalshortcutssettingspage.h:174
 msgid "Name"
 msgstr "نام"
 
+#: /home/arno/clementine/clementine-player/src/ui_organisedialog.h:197
 msgid "Naming options"
 msgstr "گزینه‌های نام‌گذاری"
 
+#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsspeex.h:230
 msgid "Narrow band (NB)"
 msgstr "نوار باریک (NB)"
 
+#: internet/lastfmservice.cpp:211
 msgid "Neighbors"
 msgstr "همسایه‌ها"
 
+#: /home/arno/clementine/clementine-player/src/ui_songinfosettingspage.h:184
 msgid "Network"
 msgstr "شبکه"
 
+#: /home/arno/clementine/clementine-player/src/ui_networkproxysettingspage.h:157
 msgid "Network Proxy"
 msgstr "پیشکار پراکسی"
 
+#: playlist/playlistdelegates.cpp:296 ui/edittagdialog.cpp:445
 msgid "Never"
 msgstr "هرگز"
 
+#: library/library.cpp:62
 msgid "Never played"
 msgstr "هرگز پخش‌نشده"
 
+#: /home/arno/clementine/clementine-player/src/ui_behavioursettingspage.h:194
+#: /home/arno/clementine/clementine-player/src/ui_behavioursettingspage.h:208
 msgid "Never start playing"
 msgstr "هرگز شروع به پخش نشده"
 
+#: ui/mainwindow.cpp:1420
+#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:680
 msgid "New playlist"
 msgstr "لیست‌پخش تازه"
 
+#: library/libraryview.cpp:248
 msgid "New smart playlist..."
 msgstr "لیست‌پخش هوشمند تازه..."
 
+#: widgets/freespacebar.cpp:46
 msgid "New songs"
 msgstr "آهنگ‌‌های تازه"
 
+#: /home/arno/clementine/clementine-player/src/ui_dynamicplaylistcontrols.h:104
 msgid "New tracks will be added automatically."
 msgstr "قطعه‌های تازه اتوماتیک اضافه می‌شوند."
 
+#: library/library.cpp:75
 msgid "Newest tracks"
 msgstr "تازه‌ترین قطعه‌ها"
 
+#: ui/edittagdialog.cpp:157 ui/trackselectiondialog.cpp:47
 msgid "Next"
 msgstr "بعدی"
 
+#: core/globalshortcuts.cpp:50 wiimotedev/wiimotesettingspage.cpp:99
+#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:635
 msgid "Next track"
 msgstr "قطعهٔ بعد"
 
+#: analyzers/analyzercontainer.cpp:80
 msgid "No analyzer"
 msgstr "بدون آنالیزور"
 
+#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsaac.h:146
 msgid "No long blocks"
 msgstr "بدون بلوک‌های بلند"
 
+#: playlist/playlistcontainer.cpp:416
 msgid ""
 "No matches found.  Clear the search box to show the whole playlist again."
 msgstr ""
 "مطابقتی پیدا نشد. جعبه‌های جستجو را پاک کنید تا همهٔ لیست‌پخش‌ها دوباره "
 "نمایش داده شوند."
 
+#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsaac.h:145
 msgid "No short blocks"
 msgstr "بدون بلوک‌های کوتاه"
 
+#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:128
+#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:141
+#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:154
 msgid "None"
 msgstr "هیچ‌کدام"
 
+#: library/libraryview.cpp:445 ui/mainwindow.cpp:1806 ui/mainwindow.cpp:1911
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "هیچ‌کدام از آهنگ‌های انتخابی مناسب کپی کردن در دستگاه نیستند"
 
+#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsaac.h:144
 msgid "Normal block type"
 msgstr "نوع بلوک نرمال"
 
+#: playlist/playlistsequence.cpp:167
 msgid "Not available while using a dynamic playlist"
 msgstr "مهیا نیست وقتی که از یک لیست‌پخش دینامیک استفاده می‌کنید."
 
+#: devices/deviceview.cpp:106
 msgid "Not connected"
 msgstr "متصل نیست"
 
+#: internet/lastfmservice.cpp:446
 msgid "Not enough content"
 msgstr "بدون محتوای کافی"
 
+#: internet/lastfmservice.cpp:448
 msgid "Not enough fans"
 msgstr "بدون هوادار کافی"
 
+#: internet/lastfmservice.cpp:447
 msgid "Not enough members"
 msgstr "بدون عضو کافی"
 
+#: internet/lastfmservice.cpp:449
 msgid "Not enough neighbors"
 msgstr "بدون همسایهٔ کافی"
 
+#: internet/spotifysettingspage.cpp:70
 msgid "Not installed"
 msgstr "نصب نشده"
 
-msgid "Not logged in"
-msgstr ""
-
+#: devices/deviceview.cpp:110
 msgid "Not mounted - double click to mount"
 msgstr "سوار نشده است - دو بار فشار دهید تا سوار شود"
 
+#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:397
 msgid "Notification type"
 msgstr "نوع آگاه‌سازیها"
 
+#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:356
 msgid "Notifications"
 msgstr "آگاه‌سازی‌ها"
 
+#: ui/macsystemtrayicon.mm:64
 msgid "Now Playing"
 msgstr "در حال پخش"
 
+#: ui/notificationssettingspage.cpp:37
 msgid "OSD Preview"
 msgstr "پیش‌مشاهدهٔ OSD"
 
+#: core/song.cpp:136
 msgid "Ogg Flac"
 msgstr "Ogg Flac"
 
+#: core/song.cpp:137
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
 
+#: core/song.cpp:138
+#: /home/arno/clementine/clementine-player/src/ui_magnatunedownloaddialog.h:139
+#: /home/arno/clementine/clementine-player/src/ui_magnatunesettingspage.h:166
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
 
+#: /home/arno/clementine/clementine-player/src/ui_querysortpage.h:142
 msgid "Only show the first"
 msgstr "تنها ابتدا را نمایش بده"
 
+#: internet/digitallyimportedservicebase.cpp:192
 #, qt-format
 msgid "Open %1 in browser"
 msgstr ""
 
+#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:667
 msgid "Open &audio CD..."
 msgstr "گشودن &سی‌دی صوتی..."
 
+#: /home/arno/clementine/clementine-player/src/ui_deviceproperties.h:382
 msgid "Open device"
 msgstr "گشودن دستگاه"
 
+#: internet/icecastservice.cpp:295
 msgid "Open dir.xiph.org in browser"
 msgstr "گشودن dir.xiph.org در مرورگر"
 
+#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:666
 msgid "Open file..."
 msgstr ""
 
+#: devices/deviceview.cpp:220 internet/internetservice.cpp:73
+#: library/libraryview.cpp:240 widgets/fileviewlist.cpp:35
+#: /home/arno/clementine/clementine-player/src/ui_behavioursettingspage.h:203
 msgid "Open in new playlist"
 msgstr "گشودن در لیست‌پخش تازه"
 
+#: internet/jamendoservice.cpp:405
 msgid "Open jamendo.com in browser"
 msgstr "گشودن jamendo.com در مرورگر"
 
+#: internet/magnatuneservice.cpp:263
 msgid "Open magnatune.com in browser"
 msgstr "گشودن magnatune.com در مرورگر"
 
+#: internet/somafmservice.cpp:75
 msgid "Open somafm.com in browser"
 msgstr "گشودن somafm.com در مرورگر"
 
+#: /home/arno/clementine/clementine-player/src/ui_globalshortcutssettingspage.h:169
+#: /home/arno/clementine/clementine-player/src/ui_globalshortcutssettingspage.h:171
 msgid "Open..."
 msgstr "گشودن..."
 
+#: internet/lastfmservice.cpp:438
 msgid "Operation failed"
 msgstr "شکست عملیات"
 
+#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsmp3.h:193
 msgid "Optimize for bitrate"
 msgstr "بهینه‌سازی ضرباهنگ"
 
+#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsmp3.h:191
 msgid "Optimize for quality"
 msgstr "بهینه‌سازی کیفیت"
 
+#: /home/arno/clementine/clementine-player/src/ui_transcodedialog.h:210
 msgid "Options..."
 msgstr "گزینه‌ها..."
 
+#: /home/arno/clementine/clementine-player/src/ui_organisedialog.h:188
 msgid "Organise Files"
 msgstr "سازماندهی پرونده‌ها"
 
+#: library/libraryview.cpp:256 ui/mainwindow.cpp:536
 msgid "Organise files..."
 msgstr "سازماندهی پرونده‌ها..."
 
+#: core/organise.cpp:63
 msgid "Organising files"
 msgstr "پرونده‌های سازماندهی شونده"
 
+#: ui/trackselectiondialog.cpp:164
 msgid "Original tags"
 msgstr "برچسب‌های اصلی"
 
+#: core/commandlineoptions.cpp:166
 msgid "Other options"
 msgstr "گزینه‌های دیگر"
 
+#: /home/arno/clementine/clementine-player/src/ui_playbacksettingspage.h:283
 msgid "Output device"
 msgstr "دستگاه خروجی"
 
+#: /home/arno/clementine/clementine-player/src/ui_transcodedialog.h:208
 msgid "Output options"
 msgstr "گزینه‌های خروجی"
 
+#: /home/arno/clementine/clementine-player/src/ui_playbacksettingspage.h:277
 msgid "Output plugin"
 msgstr "افزونهٔ خروجی"
 
+#: /home/arno/clementine/clementine-player/src/ui_organisedialog.h:207
 msgid "Overwrite existing files"
 msgstr "رونویسی پرونده‌های موجود"
 
+#: internet/jamendoservice.cpp:200
 msgid "Parsing Jamendo catalogue"
 msgstr "بررسی کاتالوگ Jamendo"
 
+#: ui/equalizer.cpp:118
 msgid "Party"
 msgstr "مهمانی"
 
+#: /home/arno/clementine/clementine-player/src/ui_groovesharksettingspage.h:115
+#: /home/arno/clementine/clementine-player/src/ui_magnatunesettingspage.h:161
+#: /home/arno/clementine/clementine-player/src/ui_spotifysettingspage.h:181
+#: /home/arno/clementine/clementine-player/src/ui_networkproxysettingspage.h:169
 msgid "Password"
 msgstr "کلمهٔ عبور"
 
+#: devices/ilister.cpp:97
 msgid "Password Protected"
 msgstr "نگهبانی کلمهٔ عبور"
 
+#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:885 ui/mainwindow.cpp:1271
+#: ui/qtsystemtrayicon.cpp:178 wiimotedev/wiimotesettingspage.cpp:106
 msgid "Pause"
 msgstr "توقف"
 
+#: core/commandlineoptions.cpp:153
 msgid "Pause playback"
 msgstr "توقف پخش"
 
+#: widgets/osd.cpp:177
 msgid "Paused"
 msgstr "متوقف"
 
+#: widgets/fancytabwidget.cpp:649
 msgid "Plain sidebar"
 msgstr "میله‌کنار ساده"
 
+#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:519 ui/mainwindow.cpp:853
+#: ui/mainwindow.cpp:872 ui/mainwindow.cpp:1274 ui/qtsystemtrayicon.cpp:166
+#: ui/qtsystemtrayicon.cpp:192 wiimotedev/wiimotesettingspage.cpp:101
+#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:631
 msgid "Play"
 msgstr "پخش"
 
+#: /home/arno/clementine/clementine-player/src/ui_lastfmstationdialog.h:92
 msgid "Play Artist or Tag"
 msgstr "پخش هنرمند یا برچسب"
 
+#: internet/lastfmservice.cpp:100
 msgid "Play artist radio..."
 msgstr "پخش رادیوی هنرمند..."
 
+#: playlist/playlist.cpp:1091
+#: /home/arno/clementine/clementine-player/src/ui_edittagdialog.h:637
 msgid "Play count"
 msgstr "شمار پخش"
 
+#: internet/lastfmservice.cpp:104
 msgid "Play custom radio..."
 msgstr "پخش رادیوی دلخواه..."
 
+#: songinfo/tagwidget.cpp:147
 msgid "Play from my Library"
 msgstr "پخش از کتابخانهٔ من"
 
+#: core/commandlineoptions.cpp:152
 msgid "Play if stopped, pause if playing"
 msgstr "پخش در صورت توقف، توقف در صورت پخش"
 
+#: /home/arno/clementine/clementine-player/src/ui_behavioursettingspage.h:195
+#: /home/arno/clementine/clementine-player/src/ui_behavioursettingspage.h:209
 msgid "Play if there is nothing already playing"
 msgstr "پخش شود اگر چیزی در حال پخش نیست"
 
+#: songinfo/tagwidget.cpp:145
 msgid "Play last.fm artist radio"
 msgstr "پخش رادیوی هنرمند Last.fm"
 
+#: songinfo/tagwidget.cpp:140
 msgid "Play last.fm tag radio"
 msgstr "پخش رادیوی برچسب Last.fm"
 
+#: internet/lastfmservice.cpp:102
 msgid "Play tag radio..."
 msgstr "پخش رادیوی برچسب..."
 
+#: core/commandlineoptions.cpp:165
 msgid "Play the <n>th track in the playlist"
 msgstr "قطعهٔ <n>-ام در لیست‌پخش را پخش کن"
 
+#: core/globalshortcuts.cpp:47 wiimotedev/wiimotesettingspage.cpp:107
 msgid "Play/Pause"
 msgstr "پخش/توقف"
 
+#: /home/arno/clementine/clementine-player/src/ui_playbacksettingspage.h:257
 msgid "Playback"
 msgstr "بازپخش"
 
+#: /home/arno/clementine/clementine-player/src/ui_remotesettingspage.h:208
 msgid "Player name"
 msgstr "نام پخش‌کننده"
 
+#: core/commandlineoptions.cpp:150
 msgid "Player options"
 msgstr "گزینه‌های پخش‌کننده"
 
+#: playlist/playlistcontainer.cpp:297 playlist/playlistmanager.cpp:76
+#: playlist/playlistmanager.cpp:369 playlist/playlisttabbar.cpp:292
 msgid "Playlist"
 msgstr "لیست‌پخش"
 
+#: widgets/osd.cpp:194
 msgid "Playlist finished"
 msgstr "لیست‌پخش پایان یافت"
 
+#: core/commandlineoptions.cpp:162
 msgid "Playlist options"
 msgstr "گزینه‌های لیست‌پخش"
 
+#: playlist/playlistcontainer.cpp:93 playlist/specialplaylisttype.cpp:23
 msgid "Playlist search"
 msgstr "جستجوی لیست‌پخش"
 
+#: smartplaylists/wizard.cpp:71
 msgid "Playlist type"
 msgstr "نوع لیست‌پخش"
 
+#: /home/arno/clementine/clementine-player/src/ui_spotifysettingspage.h:185
 msgid "Plugin status:"
 msgstr "وضعیت افزونه"
 
+#: ui/equalizer.cpp:119
 msgid "Pop"
 msgstr "پاپ"
 
+#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:403
 msgid "Popup duration"
 msgstr "پنجرک"
 
+#: /home/arno/clementine/clementine-player/src/ui_networkproxysettingspage.h:166
 msgid "Port"
 msgstr "درگاه"
 
+#: ui/equalizer.cpp:46
+#: /home/arno/clementine/clementine-player/src/ui_playbacksettingspage.h:274
 msgid "Pre-amp"
 msgstr "پیش‌تقویت"
 
+#: /home/arno/clementine/clementine-player/src/ui_digitallyimportedsettingspage.h:137
+#: /home/arno/clementine/clementine-player/src/ui_magnatunesettingspage.h:162
+#: /home/arno/clementine/clementine-player/src/ui_settingsdialog.h:115
+#: /home/arno/clementine/clementine-player/src/ui_lastfmsettingspage.h:149
 msgid "Preferences"
 msgstr "تنظیمات‌"
 
+#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:656
 msgid "Preferences..."
 msgstr "تنظیمات..."
 
+#: /home/arno/clementine/clementine-player/src/ui_librarysettingspage.h:164
 msgid "Preferred album art filenames (comma separated)"
 msgstr "پرونده‌های جلد هنری ترجیحی (جداشده با ویرگول)"
 
+#: /home/arno/clementine/clementine-player/src/ui_magnatunesettingspage.h:163
 msgid "Preferred audio format"
 msgstr "فرمت صوتی ترجیحی"
 
+#: /home/arno/clementine/clementine-player/src/ui_deviceproperties.h:380
 msgid "Preferred format"
 msgstr "فرمت ترجیحی"
 
+#: /home/arno/clementine/clementine-player/src/ui_equalizer.h:119
 msgid "Preset:"
 msgstr "پیش‌نشانده:"
 
+#: /home/arno/clementine/clementine-player/src/ui_wiimoteshortcutgrabber.h:124
 msgid "Press a button combination to use for"
 msgstr "یک ترکیب از دکمه‌ها را فشار دهید برای استفاده در"
 
+#: /home/arno/clementine/clementine-player/src/ui_globalshortcutgrabber.h:73
 msgid "Press a key"
 msgstr "کلیدی را فشار دهید"
 
+#: ui/globalshortcutgrabber.cpp:39
+#: /home/arno/clementine/clementine-player/src/ui_globalshortcutgrabber.h:74
 #, qt-format
 msgid "Press a key combination to use for %1..."
 msgstr "یک ترکیب از دکمه‌ها را فشار دهید برای استفاده در %1..."
 
+#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:416
 msgid "Pretty OSD options"
 msgstr "گزینه‌های زیبای OSD"
 
+#: /home/arno/clementine/clementine-player/src/ui_searchpreview.h:105
+#: /home/arno/clementine/clementine-player/src/ui_songinfosettingspage.h:183
+#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:411
+#: /home/arno/clementine/clementine-player/src/ui_organisedialog.h:208
 msgid "Preview"
 msgstr "پيش‌نمايش"
 
+#: ui/edittagdialog.cpp:156 ui/trackselectiondialog.cpp:46
 msgid "Previous"
 msgstr "قبلی"
 
+#: core/globalshortcuts.cpp:51 wiimotedev/wiimotesettingspage.cpp:100
+#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:629
 msgid "Previous track"
 msgstr "قطعهٔ قبلی"
 
+#: core/commandlineoptions.cpp:174
 msgid "Print out version information"
 msgstr "اطلاعات نسخه را چاپ کن"
 
+#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsaac.h:131
 msgid "Profile"
 msgstr "نمایه"
 
+#: /home/arno/clementine/clementine-player/src/ui_magnatunedownloaddialog.h:134
+#: /home/arno/clementine/clementine-player/src/ui_transcodedialog.h:216
 msgid "Progress"
 msgstr "پیشرفت"
 
+#: wiimotedev/wiimotesettingspage.cpp:227
+#: /home/arno/clementine/clementine-player/src/ui_wiimoteshortcutgrabber.h:125
 msgid "Push Wiiremote button"
 msgstr "دکمهٔ کنترل Wii را فشار دهید"
 
+#: /home/arno/clementine/clementine-player/src/ui_querysortpage.h:138
 msgid "Put songs in a random order"
 msgstr "آهنگ‌ها را به طور تصادفی بچین"
 
+#: visualisations/visualisationcontainer.cpp:107
+#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsflac.h:81
+#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsmp3.h:192
+#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsspeex.h:217
+#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsvorbis.h:202
 msgid "Quality"
 msgstr "کیفیت"
 
+#: /home/arno/clementine/clementine-player/src/ui_deviceproperties.h:383
 msgid "Querying device..."
 msgstr "جستجوی دستگاه..."
 
+#: /home/arno/clementine/clementine-player/src/ui_queuemanager.h:125
+#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:690
 msgid "Queue Manager"
 msgstr "مدیر به‌خط‌ کردن"
 
+#: ui/mainwindow.cpp:1352
 msgid "Queue selected tracks"
 msgstr "به‌خط کردن قطعه‌های منتخب"
 
+#: globalsearch/globalsearchwidget.cpp:97 library/libraryview.cpp:244
+#: ui/mainwindow.cpp:1350
 msgid "Queue track"
 msgstr "به‌خط کردن قطعه"
 
+#: /home/arno/clementine/clementine-player/src/ui_playbacksettingspage.h:271
 msgid "Radio (equal loudness for all tracks)"
 msgstr "رادیو (بلندی یکسان برای همهٔ قطعه‌ها)"
 
+#: core/backgroundstreams.cpp:31
+#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:669
 msgid "Rain"
 msgstr "باران"
 
+#: /home/arno/clementine/clementine-player/src/ui_visualisationselector.h:112
 msgid "Random visualization"
 msgstr "تصویرسازی تصادفی"
 
+#: core/globalshortcuts.cpp:65
 msgid "Rate the current song 0 stars"
 msgstr "رتبهٔ آهنگ جاری را صفر ستاره کن"
 
+#: core/globalshortcuts.cpp:66
 msgid "Rate the current song 1 star"
 msgstr "رتبهٔ آهنگ جاری را یک ستاره کن"
 
+#: core/globalshortcuts.cpp:67
 msgid "Rate the current song 2 stars"
 msgstr "رتبهٔ آهنگ جاری را دو ستاره کن"
 
+#: core/globalshortcuts.cpp:68
 msgid "Rate the current song 3 stars"
 msgstr "رتبهٔ آهنگ جاری را سه ستاره کن"
 
+#: core/globalshortcuts.cpp:69
 msgid "Rate the current song 4 stars"
 msgstr "رتبهٔ آهنگ جاری را چهار ستاره کن"
 
+#: core/globalshortcuts.cpp:70
 msgid "Rate the current song 5 stars"
 msgstr "رتبهٔ آهنگ جاری را پنج ستاره کن"
 
+#: playlist/playlist.cpp:1090
+#: /home/arno/clementine/clementine-player/src/ui_edittagdialog.h:645
 msgid "Rating"
 msgstr "رتبه‌بندی"
 
+#: internet/magnatunedownloaddialog.cpp:279 ui/albumcovermanager.cpp:212
 msgid "Really cancel?"
 msgstr "واقعا لغو شود؟"
 
+#: internet/jamendoservice.cpp:406 internet/magnatuneservice.cpp:264
 msgid "Refresh catalogue"
 msgstr "بازخوانی کاتالوگ"
 
+#: internet/somafmservice.cpp:76
 msgid "Refresh channels"
 msgstr "بازخوانی کانالها"
 
+#: internet/lastfmservice.cpp:106
 msgid "Refresh friends list"
 msgstr ""
 
+#: internet/icecastservice.cpp:296
 msgid "Refresh station list"
 msgstr "بازخوانی لیست ایستگاه‌ها"
 
+#: internet/digitallyimportedservicebase.cpp:195
 msgid "Refresh streams"
 msgstr ""
 
+#: ui/equalizer.cpp:120
 msgid "Reggae"
 msgstr "رگه"
 
+#: /home/arno/clementine/clementine-player/src/ui_wiimoteshortcutgrabber.h:126
 msgid "Remember Wii remote swing"
 msgstr "دورکنترل تابی Wii را به‌یاد بیاور"
 
+#: /home/arno/clementine/clementine-player/src/ui_behavioursettingspage.h:189
 msgid "Remember from last time"
 msgstr "از بار آخر به‌یاد بیاور"
 
+#: /home/arno/clementine/clementine-player/src/ui_remotesettingspage.h:199
 msgid "Remote Control"
 msgstr "دورکنترل"
 
+#: internet/savedradio.cpp:94 internet/lastfmservice.cpp:97
+#: /home/arno/clementine/clementine-player/src/ui_queuemanager.h:135
+#: /home/arno/clementine/clementine-player/src/ui_searchtermwidget.h:282
+#: /home/arno/clementine/clementine-player/src/ui_transcodedialog.h:207
 msgid "Remove"
 msgstr "پاک کردن"
 
+#: /home/arno/clementine/clementine-player/src/ui_wiimotesettingspage.h:194
 msgid "Remove action"
 msgstr "پاک کردن عملیات"
 
+#: /home/arno/clementine/clementine-player/src/ui_librarysettingspage.h:160
 msgid "Remove folder"
 msgstr "پاک کردن پوشه"
 
+#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:674
 msgid "Remove from playlist"
 msgstr "از لیست‌پخش پاک کن"
 
+#: playlist/playlisttabbar.cpp:48 playlist/playlisttabbar.cpp:158
 msgid "Remove playlist"
 msgstr "لیست پخش را پاک کن"
 
+#: playlist/playlisttabbar.cpp:131
 msgid "Rename playlist"
 msgstr "لیست‌پخش را دوباره نامگذاری کن"
 
+#: playlist/playlisttabbar.cpp:49
 msgid "Rename playlist..."
 msgstr "لیست‌پخش را دوباره نامگذاری کن..."
 
+#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:652
 msgid "Renumber tracks in this order..."
 msgstr "قطعه‌ها را به این ترتیب دوباره شماره‌گذاری کن..."
 
+#: playlist/playlistsequence.cpp:171
+#: /home/arno/clementine/clementine-player/src/ui_playlistsequence.h:107
 msgid "Repeat"
 msgstr "تکرار"
 
+#: widgets/osd.cpp:308
+#: /home/arno/clementine/clementine-player/src/ui_playlistsequence.h:101
 msgid "Repeat album"
 msgstr "تکرار آلبوم"
 
+#: widgets/osd.cpp:309
+#: /home/arno/clementine/clementine-player/src/ui_playlistsequence.h:102
 msgid "Repeat playlist"
 msgstr "تکرار لیست‌پخش"
 
+#: widgets/osd.cpp:307
+#: /home/arno/clementine/clementine-player/src/ui_playlistsequence.h:100
 msgid "Repeat track"
 msgstr "تکرار قطعه"
 
+#: globalsearch/globalsearchwidget.cpp:99
 msgid "Replace and play now"
 msgstr ""
 
+#: devices/deviceview.cpp:218 globalsearch/globalsearchwidget.cpp:98
+#: internet/internetservice.cpp:63 library/libraryview.cpp:238
+#: widgets/fileviewlist.cpp:33
 msgid "Replace current playlist"
 msgstr "دوباره جانشانی لیست‌پخش جاری"
 
+#: /home/arno/clementine/clementine-player/src/ui_behavioursettingspage.h:202
 msgid "Replace the playlist"
 msgstr "دوباره جانشانی لیست‌پخش"
 
+#: /home/arno/clementine/clementine-player/src/ui_organisedialog.h:205
 msgid "Replaces spaces with underscores"
 msgstr "فاصله‌ها را با زیرخط جانشانی کن"
 
+#: /home/arno/clementine/clementine-player/src/ui_playbacksettingspage.h:266
 msgid "Replay Gain"
 msgstr "پخش دوبارهٔ دستاورد"
 
+#: /home/arno/clementine/clementine-player/src/ui_playbacksettingspage.h:268
 msgid "Replay Gain mode"
 msgstr "پخش دوبارهٔ حالت دستاورد"
 
+#: /home/arno/clementine/clementine-player/src/ui_dynamicplaylistcontrols.h:105
 msgid "Repopulate"
 msgstr "ساکن شدن دوباره"
 
+#: widgets/lineedit.cpp:51
 msgid "Reset"
 msgstr "بازنشانی"
 
+#: ui/edittagdialog.cpp:703
+#: /home/arno/clementine/clementine-player/src/ui_edittagdialog.h:635
 msgid "Reset play counts"
 msgstr "بازنشانی شمار پخش"
 
+#: /home/arno/clementine/clementine-player/src/ui_organisedialog.h:206
 msgid "Restrict to ASCII characters"
 msgstr "محدود به حروف اَسکی کن"
 
-msgid "Results"
-msgstr ""
-
+#: ui/equalizer.cpp:121
 msgid "Rock"
 msgstr "راک"
 
+#: /home/arno/clementine/clementine-player/src/ui_networkproxysettingspage.h:164
 msgid "SOCKS proxy"
 msgstr "پراکسی SOCKS"
 
+#: devices/deviceview.cpp:207
 msgid "Safely remove device"
 msgstr "دستگاه را با امنیت حذف کن"
 
+#: /home/arno/clementine/clementine-player/src/ui_organisedialog.h:196
 msgid "Safely remove the device after copying"
 msgstr "دستگاه را بعد از کپی، با امنیت حذف کن"
 
+#: playlist/playlist.cpp:1098
+#: /home/arno/clementine/clementine-player/src/ui_edittagdialog.h:642
 msgid "Sample rate"
 msgstr "الگوی ضرباهنگ"
 
+#: ui/organisedialog.cpp:65
 msgid "Samplerate"
 msgstr "ضرباهنگ‌الگو"
 
+#: ui/albumcoverchoicecontroller.cpp:115
 msgid "Save album cover"
 msgstr "ذخیرهٔ جلد آلبوم"
 
+#: ui/albumcoverchoicecontroller.cpp:59
 msgid "Save cover to disk..."
 msgstr "در حال ذخیرهٔ جلد در دیسک"
 
+#: widgets/prettyimage.cpp:185 widgets/prettyimage.cpp:232
 msgid "Save image"
 msgstr "ذخیرهٔ تصویر"
 
+#: playlist/playlistcontainer.cpp:340
 msgid "Save playlist"
 msgstr "ذخیرهٔ لیست‌پخش"
 
+#: playlist/playlisttabbar.cpp:50
+#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:682
 msgid "Save playlist..."
 msgstr "ذخیرهٔ لیست‌پخش..."
 
+#: ui/equalizer.cpp:172
+#: /home/arno/clementine/clementine-player/src/ui_equalizer.h:121
 msgid "Save preset"
 msgstr "ذخیرهٔ بازنشانده"
 
+#: /home/arno/clementine/clementine-player/src/ui_addstreamdialog.h:115
 msgid "Save this stream in the Internet tab"
 msgstr "ذخیرهٔ این جریان در باریکهٔ اینترنت"
 
+#: ui/edittagdialog.cpp:619 ui/trackselectiondialog.cpp:249
 msgid "Saving tracks"
 msgstr "ذخیرهٔ قطعه‌ها"
 
+#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsaac.h:136
 msgid "Scalable sampling rate profile (SSR)"
 msgstr "نمایهٔ الگوی ضرباهنگ مقیاس‌پذیر (SSR)"
 
+#: playlist/playlist.cpp:1094
+#: /home/arno/clementine/clementine-player/src/ui_edittagdialog.h:643
 msgid "Score"
 msgstr "امتیاز"
 
+#: /home/arno/clementine/clementine-player/src/ui_lastfmsettingspage.h:150
 msgid "Scrobble tracks that I listen to"
 msgstr "وارانی قطعه‌هایی که گوش می‌دهم"
 
+#: /home/arno/clementine/clementine-player/src/ui_albumcoversearcher.h:113
 msgid "Search"
 msgstr "جستجو"
 
+#: internet/groovesharksearchplaylisttype.cpp:32
+#: internet/groovesharkservice.cpp:602
 msgid "Search Grooveshark"
 msgstr ""
 
+#: internet/groovesharkservice.cpp:422 internet/groovesharkservice.cpp:431
 msgid "Search Grooveshark (opens a new tab)"
 msgstr ""
 
+#: /home/arno/clementine/clementine-player/src/ui_icecastfilterwidget.h:78
 msgid "Search Icecast stations"
 msgstr "جستجوی ایستگاه‌های Icecast"
 
+#: internet/jamendoservice.cpp:412
 msgid "Search Jamendo"
 msgstr "جستجوی Jamendo"
 
+#: internet/magnatuneservice.cpp:270
 msgid "Search Magnatune"
 msgstr "جستجوی Magnatune"
 
+#: internet/spotifysearchplaylisttype.cpp:32 internet/spotifyservice.cpp:571
 msgid "Search Spotify"
 msgstr "جستجوی Spotify"
 
+#: internet/spotifyservice.cpp:305
 msgid "Search Spotify (opens a new tab)"
 msgstr "جستجوی Spotify (گشودن باریکهٔ تازه)"
 
+#: internet/spotifyservice.cpp:456
 msgid "Search Spotify (opens a new tab)..."
 msgstr "جستجوی Spotify (گشودن باریکهٔ تازه)..."
 
+#: ui/albumcoverchoicecontroller.cpp:61
 msgid "Search for album covers..."
 msgstr "جستجوی جلد آلبوم..."
 
+#: /home/arno/clementine/clementine-player/src/ui_querysearchpage.h:71
 msgid "Search mode"
 msgstr "حالت جستجو"
 
+#: smartplaylists/querywizardplugin.cpp:146
 msgid "Search options"
 msgstr "گزینه های جستجو"
 
+#: smartplaylists/querywizardplugin.cpp:144
+#: /home/arno/clementine/clementine-player/src/ui_querysearchpage.h:78
 msgid "Search terms"
 msgstr "عبارات جستجو"
 
+#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:138
 msgid "Second level"
 msgstr "مرتبهٔ دوم"
 
+#: core/globalshortcuts.cpp:56 wiimotedev/wiimotesettingspage.cpp:108
 msgid "Seek backward"
 msgstr "جستجوی عقب‌گرد"
 
+#: core/globalshortcuts.cpp:55 wiimotedev/wiimotesettingspage.cpp:109
 msgid "Seek forward"
 msgstr "جستجوی جلوگرد"
 
+#: core/commandlineoptions.cpp:161
 msgid "Seek the currently playing track by a relative amount"
 msgstr "جستجوی قطعهٔ در حال پخش بوسیلهٔ مقداری نسبی"
 
+#: core/commandlineoptions.cpp:160
 msgid "Seek the currently playing track to an absolute position"
 msgstr "جستجوی قطعهٔ در حال پخش به یک نقطهٔ خاص"
 
+#: visualisations/visualisationselector.cpp:40
 msgid "Select All"
 msgstr "برگزیدن همه"
 
+#: visualisations/visualisationselector.cpp:42
 msgid "Select None"
 msgstr "برگزیدن هیچ‌کدام"
 
+#: /home/arno/clementine/clementine-player/src/ui_trackselectiondialog.h:207
 msgid "Select best possible match"
 msgstr "انتخاب بهترین تطبیق ممکن"
 
+#: /home/arno/clementine/clementine-player/src/ui_visualisationselector.h:108
 msgid "Select visualizations"
 msgstr "انتخاب تصویرسازها"
 
+#: visualisations/visualisationcontainer.cpp:116
 msgid "Select visualizations..."
 msgstr "انتخاب تصویرسازها..."
 
+#: devices/devicekitlister.cpp:124
 msgid "Serial number"
 msgstr "شماره سریال"
 
+#: internet/lastfmservice.cpp:441
 msgid "Service offline"
 msgstr "سرویس برون‌خط"
 
+#: ui/mainwindow.cpp:1379
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "%1 را برابر \"%2‌\"قرار بده..."
 
+#: core/commandlineoptions.cpp:157
 msgid "Set the volume to <value> percent"
 msgstr "بلندی صدا را برابر <value> درصد قرار بده"
 
+#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:653
 msgid "Set value for all selected tracks..."
 msgstr "این مقدار را برای همهٔ قطعه‌های انتخابی قرار بده..."
 
+#: /home/arno/clementine/clementine-player/src/ui_remotesettingspage.h:207
 msgid "Settings"
 msgstr "تنظیمات‌"
 
+#: /home/arno/clementine/clementine-player/src/ui_globalshortcutssettingspage.h:173
 msgid "Shortcut"
 msgstr "میان‌بر"
 
+#: ui/globalshortcutssettingspage.cpp:130
+#: /home/arno/clementine/clementine-player/src/ui_globalshortcutssettingspage.h:175
 #, qt-format
 msgid "Shortcut for %1"
 msgstr "میان‌بر برای %1"
 
+#: wiimotedev/wiimotesettingspage.cpp:124
 #, qt-format
 msgid "Shortcut for %1 already exists"
 msgstr "میان‌بر برای %1 از قبل وجود دارد"
 
+#: library/libraryfilterwidget.cpp:62
 msgid "Show"
 msgstr "نمایش"
 
+#: core/globalshortcuts.cpp:63
 msgid "Show Global Search Popup"
 msgstr ""
 
+#: core/globalshortcuts.cpp:58 wiimotedev/wiimotesettingspage.cpp:111
 msgid "Show OSD"
 msgstr "نمایش OSD"
 
+#: /home/arno/clementine/clementine-player/src/ui_playbacksettingspage.h:258
 msgid "Show a glowing animation on the current track"
 msgstr "انیمیشنی درخشان در قطعه‌ جاری نمایش بده"
 
+#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:399
 msgid "Show a native desktop notification"
 msgstr "یک آگاه‌سازی ذاتی میزکار نمایش بده"
 
+#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:407
 msgid "Show a notification when I change the repeat/shuffle mode"
 msgstr "یک آگاه‌سازی نمایش بده وقتی که حالت تکرار/مختلط را تغییر می‌دهم"
 
+#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:406
 msgid "Show a notification when I change the volume"
 msgstr "نمایش یک آگاه‌سازی وقتی بلندی صدا را تغییر می‌دهم"
 
+#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:401
 msgid "Show a popup from the system tray"
 msgstr "نمایش یک پنجرک در سینی سیستم"
 
+#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:400
 msgid "Show a pretty OSD"
 msgstr "نمایش یک OSD زیبا"
 
-msgid "Show a tooltip with more information about each result"
-msgstr ""
-
+#: widgets/nowplayingwidget.cpp:113
 msgid "Show above status bar"
 msgstr "نمایش در بالای میلهٔ وضعیت"
 
+#: ui/mainwindow.cpp:492
 msgid "Show all songs"
 msgstr "نمایش همهٔ آهنگ‌ها"
 
+#: /home/arno/clementine/clementine-player/src/ui_querysortpage.h:141
 msgid "Show all the songs"
 msgstr "نمایش همهٔ آهنگ‌ها"
 
+#: /home/arno/clementine/clementine-player/src/ui_librarysettingspage.h:171
 msgid "Show cover art in library"
 msgstr "نمایش جلد هنری در کتابخانه"
 
+#: /home/arno/clementine/clementine-player/src/ui_librarysettingspage.h:172
 msgid "Show dividers"
 msgstr "نمایش جداسازها"
 
+#: ui/albumcoverchoicecontroller.cpp:63 widgets/prettyimage.cpp:183
 msgid "Show fullsize..."
 msgstr "نمایش اندازهٔ کامل..."
 
+#: library/libraryview.cpp:268 ui/mainwindow.cpp:539
 msgid "Show in file browser..."
 msgstr "نمایش در مرورگر پرونده..."
 
+#: library/libraryview.cpp:272
 msgid "Show in various artists"
 msgstr "نمایش در هنرمندان گوناگون"
 
+#: ui/mainwindow.cpp:493
 msgid "Show only duplicates"
 msgstr "نمایش تنها دوگانه‌ها"
 
+#: ui/mainwindow.cpp:494
 msgid "Show only untagged"
 msgstr "نمایش تنها بی‌برچسب‌ها"
 
+#: globalsearch/globalsearchwidget.cpp:704
 #, qt-format
 msgid "Show results from %1"
 msgstr ""
 
+#: /home/arno/clementine/clementine-player/src/ui_lastfmsettingspage.h:151
 msgid "Show the \"love\" and \"ban\" buttons"
 msgstr "نمایش دکمه‌های «عشق» و «تحریم»"
 
-msgid "Show the Global Search box above the sidebar"
-msgstr ""
-
+#: /home/arno/clementine/clementine-player/src/ui_lastfmsettingspage.h:152
 msgid "Show the scrobble button in the main window"
 msgstr "نمایش  دکمهٔ واکشی در پنجره اصلی"
 
+#: /home/arno/clementine/clementine-player/src/ui_behavioursettingspage.h:177
 msgid "Show tray icon"
 msgstr "نمایش آیکون سینی"
 
+#: core/globalshortcuts.cpp:57
 msgid "Show/Hide"
 msgstr "آشکار/پنهان"
 
+#: playlist/playlistsequence.cpp:170
+#: /home/arno/clementine/clementine-player/src/ui_playlistsequence.h:110
 msgid "Shuffle"
 msgstr "پخش درهم"
 
+#: widgets/osd.cpp:295
+#: /home/arno/clementine/clementine-player/src/ui_playlistsequence.h:105
 msgid "Shuffle all"
 msgstr "پخش درهم همه"
 
+#: widgets/osd.cpp:296
+#: /home/arno/clementine/clementine-player/src/ui_playlistsequence.h:104
 msgid "Shuffle by album"
 msgstr "پخش درهم هر آلبوم"
 
+#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:660
 msgid "Shuffle playlist"
 msgstr "پخش درهم لیست‌پخش"
 
+#: /home/arno/clementine/clementine-player/src/ui_remotesettingspage.h:202
+#: /home/arno/clementine/clementine-player/src/ui_loginstatewidget.h:147
 msgid "Sign out"
 msgstr "خروج از سیستم"
 
+#: /home/arno/clementine/clementine-player/src/ui_loginstatewidget.h:149
 msgid "Signing in..."
 msgstr ""
 
+#: songinfo/echonestsimilarartists.cpp:57
 msgid "Similar artists"
 msgstr "هنرمندان مشابه"
 
+#: ui/equalizer.cpp:123
 msgid "Ska"
 msgstr "Ska"
 
+#: core/commandlineoptions.cpp:155
 msgid "Skip backwards in playlist"
 msgstr "پرش عقب در لیست‌پخش"
 
+#: playlist/playlist.cpp:1092
+#: /home/arno/clementine/clementine-player/src/ui_edittagdialog.h:639
 msgid "Skip count"
 msgstr "پرش شمار"
 
+#: core/commandlineoptions.cpp:156
 msgid "Skip forwards in playlist"
 msgstr "پرش جلو در لیست‌پخش"
 
+#: widgets/nowplayingwidget.cpp:90
 msgid "Small album cover"
 msgstr "جلد آلبوم کوچک"
 
+#: widgets/fancytabwidget.cpp:648
 msgid "Small sidebar"
 msgstr "میلهٔ کنار کوچک"
 
+#: smartplaylists/wizard.cpp:67
 msgid "Smart playlist"
 msgstr "لیست‌پخش هوشمند"
 
+#: library/librarymodel.cpp:1101
 msgid "Smart playlists"
 msgstr "لیست‌پخش‌های هوشمند"
 
+#: ui/equalizer.cpp:122
 msgid "Soft"
 msgstr "ملایم"
 
+#: ui/equalizer.cpp:124
 msgid "Soft Rock"
 msgstr "راک ملایم"
 
+#: /home/arno/clementine/clementine-player/src/ui_songinfosettingspage.h:179
 msgid "Song Information"
 msgstr "اطلاعات آهنگ"
 
+#: ui/mainwindow.cpp:269
 msgid "Song info"
 msgstr "اطلاعات آهنگ"
 
+#: analyzers/sonogram.cpp:18
 msgid "Sonogram"
 msgstr "سونوگرام"
 
+#: /home/arno/clementine/clementine-player/src/ui_trackselectiondialog.h:205
 msgid "Sorry"
 msgstr "شرمنده"
 
+#: /home/arno/clementine/clementine-player/src/ui_icecastfilterwidget.h:75
 msgid "Sort by genre (alphabetically)"
 msgstr "مرتب‌سازی طبق ژانر (الفبایی)"
 
+#: /home/arno/clementine/clementine-player/src/ui_icecastfilterwidget.h:76
 msgid "Sort by genre (by popularity)"
 msgstr "مرتب‌سازی طبق ژانر ( طبق محبوبیت)"
 
+#: /home/arno/clementine/clementine-player/src/ui_icecastfilterwidget.h:77
 msgid "Sort by station name"
 msgstr "مرتب‌سازی طبق نام ایستگاه"
 
+#: /home/arno/clementine/clementine-player/src/ui_querysortpage.h:139
 msgid "Sort songs by"
 msgstr "مرتب‌سازی آهنگ‌ها طبق"
 
+#: /home/arno/clementine/clementine-player/src/ui_querysortpage.h:137
 msgid "Sorting"
 msgstr "مرتب‌سازی"
 
-msgid "Sources"
-msgstr ""
-
+#: /home/arno/clementine/clementine-player/src/ui_transcodersettingspage.h:162
 msgid "Speex"
 msgstr "Speex"
 
+#: /home/arno/clementine/clementine-player/src/ui_spotifysettingspage.h:178
 msgid "Spotify"
 msgstr "Spotify"
 
+#: internet/spotifyservice.cpp:143
 msgid "Spotify login error"
 msgstr "خطای ورود به سیستم Spotify"
 
+#: /home/arno/clementine/clementine-player/src/ui_spotifysettingspage.h:183
 msgid "Spotify plugin"
 msgstr "افزونهٔ Spotify"
 
+#: internet/spotifyblobdownloader.cpp:49
 msgid "Spotify plugin not installed"
 msgstr "افزونهٔ Spotify نصب نیست"
 
+#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsmp3.h:201
 msgid "Standard"
 msgstr "استاندارد"
 
+#: internet/spotifyservice.cpp:310
 msgid "Starred"
 msgstr "ستاره‌دار"
 
+#: core/commandlineoptions.cpp:151
 msgid "Start the playlist currently playing"
 msgstr "شروع لیست‌پخش در حال پخش"
 
+#: transcoder/transcodedialog.cpp:84
 msgid "Start transcoding"
 msgstr "شروع ترانسکد"
 
+#: internet/groovesharksearchplaylisttype.cpp:36
 msgid "Start typing in the search box above to find music on Grooveshark."
 msgstr ""
 
+#: internet/spotifysearchplaylisttype.cpp:36
 msgid "Start typing in the search box above to find music on Spotify."
 msgstr "برای یافتن آهنگ در اسپاتیفای، در جعبهٔ جستجو شروع به نوشتن کنید."
 
+#: transcoder/transcoder.cpp:399
 #, qt-format
 msgid "Starting %1"
 msgstr "شروع %1"
 
+#: internet/magnatunedownloaddialog.cpp:119
 msgid "Starting..."
 msgstr "شروع..."
 
+#: core/globalshortcuts.cpp:48 wiimotedev/wiimotesettingspage.cpp:102
+#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:633
 msgid "Stop"
 msgstr "توقف"
 
+#: wiimotedev/wiimotesettingspage.cpp:110
 msgid "Stop after"
 msgstr "توقف بعد از"
 
+#: ui/mainwindow.cpp:521
+#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:639
 msgid "Stop after this track"
 msgstr "توقف بعد از این آهنگ"
 
+#: core/commandlineoptions.cpp:154
 msgid "Stop playback"
 msgstr "توقف پخش"
 
+#: core/globalshortcuts.cpp:49
 msgid "Stop playing after current track"
 msgstr "توقف پخش بعد از قطعهٔ جاری"
 
+#: widgets/osd.cpp:187
 msgid "Stopped"
 msgstr "متوقف"
 
+#: core/song.cpp:144
 msgid "Stream"
 msgstr "جریان"
 
+#: /home/arno/clementine/clementine-player/src/ui_magnatunesettingspage.h:156
 msgid "Streaming membership"
 msgstr "عضویت جریان"
 
+#: transcoder/transcoder.cpp:198
 #, qt-format
 msgid "Successfully written %1"
 msgstr "%1 با موفقیت نوشته شد"
 
+#: ui/trackselectiondialog.cpp:168
 msgid "Suggested tags"
 msgstr "برچسب‌های پیشنهادی"
 
+#: /home/arno/clementine/clementine-player/src/ui_edittagdialog.h:651
+#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:413
 msgid "Summary"
 msgstr "چکیده"
 
+#: analyzers/analyzercontainer.cpp:65
 #, qt-format
 msgid "Super high (%1 fps)"
 msgstr "بسیار بالا (%1 fps)"
 
+#: visualisations/visualisationcontainer.cpp:103
 msgid "Super high (60 fps)"
 msgstr "بسیار بالا (60 fps)"
 
+#: /home/arno/clementine/clementine-player/src/ui_deviceproperties.h:374
 msgid "Supported formats"
 msgstr "فرمت‌های قابل پشتیبانی"
 
+#: globalsearch/globalsearchtooltip.cpp:50
 msgid "Switch provider"
 msgstr ""
 
+#: internet/spotifyservice.cpp:482
 msgid "Syncing Spotify inbox"
 msgstr "همگام‌سازی صندوق ورودی اسپاتیفای"
 
+#: internet/spotifyservice.cpp:477
 msgid "Syncing Spotify playlist"
 msgstr "همگام‌سازی لیست‌پخش اسپاتیفای"
 
+#: internet/spotifyservice.cpp:486
 msgid "Syncing Spotify starred tracks"
 msgstr "همگام‌سازی قطعه‌های ستاره‌دار اسپاتیفای"
 
+#: widgets/fancytabwidget.cpp:650
 msgid "Tabs on top"
 msgstr "باریکه‌ها در بالا"
 
+#: /home/arno/clementine/clementine-player/src/ui_lastfmstationdialog.h:97
 msgid "Tag"
 msgstr "برچسب"
 
+#: /home/arno/clementine/clementine-player/src/ui_trackselectiondialog.h:204
 msgid "Tag fetcher"
 msgstr "واکش برچسب‌ها"
 
+#: internet/lastfmservice.cpp:194
 msgid "Tag radio"
 msgstr "برچسب رادیو"
 
+#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsvorbis.h:204
 msgid "Target bitrate"
 msgstr "ضرباهنگ هدف"
 
+#: ui/equalizer.cpp:125
 msgid "Techno"
 msgstr "تکنو"
 
+#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:425
 msgid "Text options"
 msgstr "گزینه‌های متن"
 
+#: ui/about.cpp:69
 msgid "Thanks to"
 msgstr "تشکر از"
 
+#: ui/globalshortcutssettingspage.cpp:172
 #, qt-format
 msgid "The \"%1\" command could not be started."
 msgstr "فرمان \"%1\" نمی‌تواند شروع شود."
 
+#: internet/magnatunedownloaddialog.cpp:89
 #, qt-format
 msgid "The directory %1 is not valid"
 msgstr "پروندهٔ \"%1\" معتبر نیست"
 
+#: playlist/playlistmanager.cpp:147 playlist/playlistmanager.cpp:165
 #, qt-format
 msgid "The playlist '%1' was empty or could not be loaded."
 msgstr "لیست‌پخش '%1' خالی بود با قابل بارگذاری نبود."
 
+#: smartplaylists/searchtermwidget.cpp:322
 msgid "The second value must be greater than the first one!"
 msgstr "مقدار دوم باید بزرگتر از مقدار اول باشد!"
 
+#: ui/coverfromurldialog.cpp:71
 msgid "The site you requested does not exist!"
 msgstr "پایگاه درخواستی وجود ندارد!"
 
+#: ui/coverfromurldialog.cpp:82
 msgid "The site you requested is not an image!"
 msgstr "پایگاه درخواستی تصویر نیست!"
 
+#: ui/mainwindow.cpp:2023
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -2872,35 +3945,42 @@ msgstr ""
 "نسخه‌ای زا کلمنتاین که هم‌اکنون به‌روز کردید، به خاطر ویژگیهای زیر، نیاز به "
 "بررسی کامل کتابخانه دارد:"
 
+#: internet/magnatunedownloaddialog.cpp:157
 msgid "There was a problem fetching the metadata from Magnatune"
 msgstr "مشکلی در واکشی ابرداده‌ها از مگناتیون پیش آمد"
 
+#: ui/organiseerrordialog.cpp:54
 msgid ""
 "There were problems copying some songs.  The following files could not be "
 "copied:"
 msgstr ""
 "مشکلی در کپی کردن تعدادی از آهنگ‌‌ها وجود داشت. پرونده‌های زیر کپی نشدند:"
 
+#: ui/organiseerrordialog.cpp:59
 msgid ""
 "There were problems deleting some songs.  The following files could not be "
 "deleted:"
 msgstr ""
 "مشکلی در پاک کردن تعدادی از آهنگ‌ها وجود داشت. پرونده‌های زیر پاک نشدند:"
 
+#: library/libraryview.cpp:451 ui/mainwindow.cpp:1838 widgets/fileview.cpp:186
 msgid ""
 "These files will be deleted from disk, are you sure you want to continue?"
 msgstr ""
 "این پرونده‌ها از دیسک پاک خواهند شد، آیا مطمئنید که می‌خواهید ادامه دهید؟"
 
+#: devices/deviceview.cpp:394
 msgid ""
 "These files will be deleted from the device, are you sure you want to "
 "continue?"
 msgstr ""
 "این پرونده‌ها از دستگاه پاک خواهند شد، آیا مطمئنید که می‌خواهید ادامه دهید؟"
 
+#: /home/arno/clementine/clementine-player/src/ui_librarysettingspage.h:158
 msgid "These folders will be scanned for music to make up your library"
 msgstr "برای درست کردن کتابخانه، این پوشه‌ها بررسی خواهند شد"
 
+#: /home/arno/clementine/clementine-player/src/ui_transcodersettingspage.h:158
 msgid ""
 "These settings are used in the \"Transcode Music\" dialog, and when "
 "converting music before copying it to a device."
@@ -2908,9 +3988,11 @@ msgstr ""
 "این تنظیمات در دیالوگ «موسیقی تراکد»، و همچنین موقع تبدیل آهنگ قبل از کپی در"
 " دستگاه،  استفاده شده‌اند."
 
+#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:151
 msgid "Third level"
 msgstr "طبقهٔ سوم"
 
+#: internet/jamendoservice.cpp:157
 msgid ""
 "This action will create a database which could be as big as 150 MB.\n"
 "Do you want to continue anyway?"
@@ -2918,9 +4000,11 @@ msgstr ""
 "این عمل پایگاه داده‌ای به بزرگی ۱۵۰ مگابایت درست می‌کند.\n"
 "آیا ادامه می‌دهید؟"
 
+#: internet/magnatunedownloaddialog.cpp:174
 msgid "This album is not available in the requested format"
 msgstr "این آلبوم در فرمت درخواست‌شده در دسترس نیست."
 
+#: /home/arno/clementine/clementine-player/src/ui_deviceproperties.h:381
 msgid ""
 "This device must be connected and opened before Clementine can see what file"
 " formats it supports."
@@ -2928,23 +4012,28 @@ msgstr ""
 "این دستگاه باید متصل و باز شده باشد قبل از اینکه کلمنتاین ببیند چه فرمت‌هایی"
 " پشتیبانی می‌شوند."
 
+#: /home/arno/clementine/clementine-player/src/ui_deviceproperties.h:375
 msgid "This device supports the following file formats:"
 msgstr "این دستگاه از فرمت‌های زیر پشتیبانی می‌کند:"
 
+#: devices/devicemanager.cpp:567 devices/devicemanager.cpp:575
 msgid "This device will not work properly"
 msgstr "این دستگاه درست کار نخواهد کرد"
 
+#: devices/devicemanager.cpp:568
 msgid ""
 "This is an MTP device, but you compiled Clementine without libmtp support."
 msgstr ""
 "این یک دستگاه MTP‌ است، اما شما کلمنتاین را بدون پشتیبانی libmtp پردازش "
 "کرده‌اید."
 
+#: devices/devicemanager.cpp:576
 msgid "This is an iPod, but you compiled Clementine without libgpod support."
 msgstr ""
 "این یک آی‌پاد است، اما شما کلمنتاین را بدون پشتیبانی libgpod پردازش "
 "کرده‌اید."
 
+#: devices/devicemanager.cpp:325
 msgid ""
 "This is the first time you have connected this device.  Clementine will now "
 "scan the device to find music files - this may take some time."
@@ -2952,6 +4041,7 @@ msgstr ""
 "این اولین باری است که این دستگاه را وصل کرده‌اید. کلمنتاین حالا دستگاه را "
 "برای یافتن پرونده‌های موسیقی جستجو می‌کند - این کار ممکن است کمی طول بکشد."
 
+#: playlist/playlisttabbar.cpp:159
 msgid ""
 "This playlist will be removed; the action can't be undone. Are you sure you "
 "want to continue?"
@@ -2959,218 +4049,305 @@ msgstr ""
 "این لیست‌پخش پاک خواهد شد؛ و عمل برگشت‌ناپذیر است. آیا مطمئنید می‌خواهید "
 "ادامه دهید؟"
 
+#: internet/lastfmservice.cpp:442
 msgid "This stream is for paid subscribers only"
 msgstr "این جریان تنها برای مشترکان پولی است"
 
+#: devices/devicemanager.cpp:588
 #, qt-format
 msgid "This type of device is not supported: %1"
 msgstr "این نوع از دستگاه پشتیبانی نمی‌شود: %1"
 
+#: /home/arno/clementine/clementine-player/src/ui_songinfosettingspage.h:185
 msgid "Timeout"
 msgstr "میانگاه"
 
+#: devices/ilister.cpp:98
 msgid "Timezone"
 msgstr "منطقهٔ زمانی"
 
+#: playlist/playlist.cpp:1079 ui/organisedialog.cpp:51
+#: ui/qtsystemtrayicon.cpp:248
+#: /home/arno/clementine/clementine-player/src/ui_about.h:142
+#: /home/arno/clementine/clementine-player/src/ui_edittagdialog.h:652
+#: /home/arno/clementine/clementine-player/src/ui_trackselectiondialog.h:211
 msgid "Title"
 msgstr "عنوان"
 
+#: core/utilities.cpp:105
 msgid "Today"
 msgstr "امروز"
 
+#: core/globalshortcuts.cpp:59
 msgid "Toggle Pretty OSD"
 msgstr "تبدیل به OSD زیبا"
 
+#: visualisations/visualisationcontainer.cpp:94
 msgid "Toggle fullscreen"
 msgstr "تبدیل به تمام‌صفحه"
 
+#: ui/mainwindow.cpp:1354
 msgid "Toggle queue status"
 msgstr "تبدیل به وضعیت صف"
 
+#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:697
 msgid "Toggle scrobbling"
 msgstr "تبدیل به وارانی"
 
+#: core/commandlineoptions.cpp:168
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "تبدیل به پدیداری برای نمایش‌برصفحهٔ زیبا"
 
+#: covers/coversearchstatisticsdialog.cpp:71
 msgid "Total bytes transferred"
 msgstr "همهٔ بایت‌های ارسال شده"
 
+#: covers/coversearchstatisticsdialog.cpp:68
 msgid "Total network requests made"
 msgstr "همهٔ درخواست‌های شبکه انجام شد"
 
+#: playlist/playlist.cpp:1083 ui/organisedialog.cpp:57
+#: /home/arno/clementine/clementine-player/src/ui_edittagdialog.h:653
+#: /home/arno/clementine/clementine-player/src/ui_trackselectiondialog.h:212
 msgid "Track"
 msgstr "قطعه"
 
+#: /home/arno/clementine/clementine-player/src/ui_transcodedialog.h:201
+#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:676
 msgid "Transcode Music"
 msgstr "تراکد موسیقی"
 
+#: /home/arno/clementine/clementine-player/src/ui_transcodelogdialog.h:63
 msgid "Transcoder Log"
 msgstr "صورت عملیات تراکدگر"
 
+#: /home/arno/clementine/clementine-player/src/ui_transcodersettingspage.h:157
 msgid "Transcoding"
 msgstr "تراکدکردن"
 
+#: transcoder/transcoder.cpp:307
 #, qt-format
 msgid "Transcoding %1 files using %2 threads"
 msgstr "تراکدکردن فایلهای %1 با استفاده از سرنخ‌های %2"
 
+#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsdialog.h:54
 msgid "Transcoding options"
 msgstr "گزینه‌های تراکد"
 
+#: core/song.cpp:141
 msgid "TrueAudio"
 msgstr "صدای واقعی"
 
+#: analyzers/turbine.cpp:15
 msgid "Turbine"
 msgstr "توربین"
 
+#: /home/arno/clementine/clementine-player/src/ui_dynamicplaylistcontrols.h:106
 msgid "Turn off"
 msgstr "خاموش"
 
+#: devices/giolister.cpp:159
 msgid "URI"
 msgstr "URI"
 
+#: core/commandlineoptions.cpp:150
 msgid "URL(s)"
 msgstr "URL"
 
+#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsspeex.h:228
 msgid "Ultra wide band (UWB)"
 msgstr "نوار ابرپهن (UWB)"
 
+#: internet/magnatunedownloaddialog.cpp:143
 #, qt-format
 msgid "Unable to download %1 (%2)"
 msgstr "ناکام در باگیری %1 (%2)"
 
+#: core/song.cpp:148 globalsearch/globalsearchitemdelegate.cpp:166
+#: globalsearch/globalsearchitemdelegate.cpp:173 library/librarymodel.cpp:284
+#: library/librarymodel.cpp:289 library/librarymodel.cpp:899
+#: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:377
+#: playlist/playlistmanager.cpp:380 ui/albumcoverchoicecontroller.cpp:111
 msgid "Unknown"
 msgstr "ناشناخته"
 
+#: internet/lastfmservice.cpp:455
 msgid "Unknown error"
 msgstr "خطای ناشناخته"
 
+#: ui/albumcoverchoicecontroller.cpp:62
 msgid "Unset cover"
 msgstr "قرار ندادن جلد"
 
+#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:688
 msgid "Update changed library folders"
 msgstr "تغییرات پوشه‌های کتابخانه را به‌روز برسان"
 
+#: /home/arno/clementine/clementine-player/src/ui_librarysettingspage.h:162
 msgid "Update the library when Clementine starts"
 msgstr "وقتی کلمنتاین شروع می‌شود کتابخانه را به‌روز کن"
 
+#: library/librarywatcher.cpp:81
 #, qt-format
 msgid "Updating %1"
 msgstr "به‌روز رسانی %1"
 
+#: devices/deviceview.cpp:102
 #, qt-format
 msgid "Updating %1%..."
 msgstr "به‌روز رسانی %1%..."
 
+#: library/librarywatcher.cpp:79
 msgid "Updating library"
 msgstr "به‌روز رسانی کتابخانه"
 
+#: core/commandlineoptions.cpp:150
 msgid "Usage"
 msgstr "کاربرد"
 
+#: /home/arno/clementine/clementine-player/src/ui_globalshortcutssettingspage.h:168
 msgid "Use Gnome's shortcut keys"
 msgstr "بکار بردن کلیدهای میان‌بر گنوم"
 
+#: /home/arno/clementine/clementine-player/src/ui_playbacksettingspage.h:267
 msgid "Use Replay Gain metadata if it is available"
 msgstr "در صورت وجود، از ابردادهٔ  Replay Gain استفاده کن"
 
+#: /home/arno/clementine/clementine-player/src/ui_wiimotesettingspage.h:189
 msgid "Use Wii Remote"
 msgstr "بکار بردن دورکنترل Wii"
 
+#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:410
 msgid "Use a custom message for notifications"
 msgstr "بکار بردن پیام پیشنهادی برای آگاه‌سازی‌ها"
 
+#: /home/arno/clementine/clementine-player/src/ui_networkproxysettingspage.h:167
 msgid "Use authentication"
 msgstr "بکار بردن سندیت"
 
+#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsvorbis.h:203
 msgid "Use bitrate management engine"
 msgstr "بکار بردن موتور مدیریتی ضرباهنگ"
 
+#: /home/arno/clementine/clementine-player/src/ui_wizardfinishpage.h:85
 msgid "Use dynamic mode"
 msgstr "بکار بردن حالت دینامیک"
 
+#: /home/arno/clementine/clementine-player/src/ui_wiimotesettingspage.h:188
 msgid "Use notifications to report Wii Remote status"
 msgstr "بکاربردن آگاه‌سازی برای گزارش وضعیت دور Wii"
 
+#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsaac.h:139
 msgid "Use temporal noise shaping"
 msgstr "بکاربردن شکل زمانی پارازیت"
 
+#: /home/arno/clementine/clementine-player/src/ui_behavioursettingspage.h:183
 msgid "Use the system default"
 msgstr "بکاربردن پیش‌فرض‌های سیستم"
 
+#: /home/arno/clementine/clementine-player/src/ui_networkproxysettingspage.h:158
 msgid "Use the system proxy settings"
 msgstr "بکاربردن تنظیمات پراکسی سیستم"
 
+#: widgets/freespacebar.cpp:47
 msgid "Used"
 msgstr "استفاده‌شده"
 
+#: internet/groovesharkservice.cpp:373
 #, qt-format
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr ""
 
+#: ui/settingsdialog.cpp:128
 msgid "User interface"
 msgstr ""
 
+#: /home/arno/clementine/clementine-player/src/ui_groovesharksettingspage.h:114
+#: /home/arno/clementine/clementine-player/src/ui_magnatunesettingspage.h:159
+#: /home/arno/clementine/clementine-player/src/ui_spotifysettingspage.h:180
+#: /home/arno/clementine/clementine-player/src/ui_networkproxysettingspage.h:168
 msgid "Username"
 msgstr "شناسه"
 
+#: /home/arno/clementine/clementine-player/src/ui_behavioursettingspage.h:191
 msgid "Using the menu to add a song will..."
 msgstr "بکاربردن منو برای افزودن آهنگ باعث..."
 
+#: /home/arno/clementine/clementine-player/src/ui_magnatunedownloaddialog.h:142
+#: /home/arno/clementine/clementine-player/src/ui_magnatunesettingspage.h:169
 msgid "VBR MP3"
 msgstr "VBR MP3"
 
+#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsspeex.h:232
 msgid "Variable bit rate"
 msgstr "آهنگ ضرب متغیر"
 
+#: globalsearch/globalsearchitemdelegate.cpp:162 library/librarymodel.cpp:221
+#: playlist/playlistmanager.cpp:392 ui/albumcovermanager.cpp:264
 msgid "Various artists"
 msgstr "هنرمندان گوناگون"
 
+#: ui/about.cpp:34
 #, qt-format
 msgid "Version %1"
 msgstr "نسخه‌ٔ %1"
 
+#: /home/arno/clementine/clementine-player/src/ui_albumcovermanager.h:154
 msgid "View"
 msgstr "نما"
 
+#: /home/arno/clementine/clementine-player/src/ui_visualisationselector.h:109
 msgid "Visualization mode"
 msgstr "حالت تصویرسازی"
 
+#: ui/dbusscreensaver.cpp:35
+#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:689
 msgid "Visualizations"
 msgstr "تصویرسازی‌ها"
 
+#: /home/arno/clementine/clementine-player/src/ui_visualisationoverlay.h:181
 msgid "Visualizations Settings"
 msgstr "تنظیمات تصویرسازی‌ها"
 
+#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsspeex.h:233
 msgid "Voice activity detection"
 msgstr "تشخیص فعالیت صدا"
 
+#: widgets/osd.cpp:201
 #, qt-format
 msgid "Volume %1%"
 msgstr "حجم %1%"
 
+#: devices/wmdmlister.cpp:369
 msgid "Volume name"
 msgstr "نام حجم"
 
+#: /home/arno/clementine/clementine-player/src/ui_transcodersettingspage.h:160
 msgid "Vorbis"
 msgstr "Vorbis"
 
+#: /home/arno/clementine/clementine-player/src/ui_magnatunedownloaddialog.h:141
+#: /home/arno/clementine/clementine-player/src/ui_magnatunesettingspage.h:168
 msgid "WAV"
 msgstr "WAV"
 
+#: /home/arno/clementine/clementine-player/src/ui_transcodersettingspage.h:164
 msgid "WMA"
 msgstr "WMA"
 
+#: core/song.cpp:140
 msgid "Wav"
 msgstr "Wav"
 
+#: smartplaylists/searchterm.cpp:302
 msgid "Weeks"
 msgstr "هفته"
 
+#: /home/arno/clementine/clementine-player/src/ui_behavioursettingspage.h:186
 msgid "When Clementine starts"
 msgstr "وقتی کلمنتاین شروع می‌شود"
 
+#: /home/arno/clementine/clementine-player/src/ui_librarysettingspage.h:166
 msgid ""
 "When looking for album art Clementine will first look for picture files that contain one of these words.\n"
 "If there are no matches then it will use the largest image in the directory."
@@ -3178,88 +4355,119 @@ msgstr ""
 "وقتی که کلمنتاین بدنبال آلبوم هنری می‌گردد، ابتدا بدنبال پرونده‌های تصویری می‌گردد که شامل یکی از کلمات زیر باشد.\n"
 "اگر چیزی پیدا نشد، آنگاه بزرگترین تصویر در پوشه را بکار می‌برد."
 
+#: devices/ilister.cpp:99
 msgid "WiFi MAC Address"
 msgstr "آدرس ماک وای‌فای"
 
+#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsspeex.h:229
 msgid "Wide band (WB)"
 msgstr "باند پهن (WB)"
 
+#: widgets/osd.cpp:260
 #, qt-format
 msgid "Wii Remote %1: actived"
 msgstr "دور کنترل Wii %1: فعال است"
 
+#: widgets/osd.cpp:270
 #, qt-format
 msgid "Wii Remote %1: connected"
 msgstr "دور کنترل Wii %1: وصل است"
 
+#: widgets/osd.cpp:285
 #, qt-format
 msgid "Wii Remote %1: critical battery (%2%) "
 msgstr "دور کنترل Wii %1: باتری بحرانی است (%2%) "
 
+#: widgets/osd.cpp:265
 #, qt-format
 msgid "Wii Remote %1: disactived"
 msgstr "دور کنترل Wii %1: غیرفعال است"
 
+#: widgets/osd.cpp:275
 #, qt-format
 msgid "Wii Remote %1: disconnected"
 msgstr "دور کنترل Wii %1: نصب نیست"
 
+#: widgets/osd.cpp:280
 #, qt-format
 msgid "Wii Remote %1: low battery (%2%)"
 msgstr "دور کنترل Wii %1: باتری اندک (%2%)"
 
+#: /home/arno/clementine/clementine-player/src/ui_wiimotesettingspage.h:182
 msgid "Wiimotedev"
 msgstr ""
 
+#: /home/arno/clementine/clementine-player/src/ui_digitallyimportedsettingspage.h:148
 msgid "Windows Media 128k (Premium only)"
 msgstr ""
 
+#: /home/arno/clementine/clementine-player/src/ui_digitallyimportedsettingspage.h:146
 msgid "Windows Media 40k"
 msgstr ""
 
+#: /home/arno/clementine/clementine-player/src/ui_digitallyimportedsettingspage.h:147
 msgid "Windows Media 64k (Premium only)"
 msgstr ""
 
+#: core/song.cpp:131
 msgid "Windows Media audio"
 msgstr "فرمت صوتی مدیای ویندوز"
 
+#: ui/mainwindow.cpp:2028
 msgid "Would you like to run a full rescan right now?"
 msgstr "آیا مایل هستید که الان بازبینی کامل انجام دهید؟"
 
+#: playlist/playlist.cpp:1085 ui/organisedialog.cpp:60
+#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:135
+#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:148
+#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:161
+#: /home/arno/clementine/clementine-player/src/ui_edittagdialog.h:657
 msgid "Year"
 msgstr "سال"
 
+#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:136
+#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:149
+#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:162
 msgid "Year - Album"
 msgstr "سال - آلبوم"
 
+#: smartplaylists/searchterm.cpp:304
 msgid "Years"
 msgstr "سال"
 
+#: core/utilities.cpp:107
 msgid "Yesterday"
 msgstr "دیروز"
 
+#: /home/arno/clementine/clementine-player/src/ui_magnatunedownloaddialog.h:132
 msgid "You are about to download the following albums"
 msgstr "هم‌اکنون آلبوم‌های زیر بارگیری خواهند شد"
 
+#: /home/arno/clementine/clementine-player/src/ui_loginstatewidget.h:146
 msgid "You are not signed in."
 msgstr ""
 
+#: widgets/loginstatewidget.cpp:67
 #, qt-format
 msgid "You are signed in as %1."
 msgstr ""
 
+#: widgets/loginstatewidget.cpp:65
 msgid "You are signed in."
 msgstr ""
 
+#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:123
 msgid "You can change the way the songs in the library are organised."
 msgstr ""
 "روشی را که آهنگ‌ها در کتابخانه سازماندهی می‌شوند، می‌توانید تغییر دهید."
 
+#: internet/digitallyimportedsettingspage.cpp:33
 msgid ""
 "You can listen for free without an account, but Premium members can listen "
 "to higher quality streams without advertisements."
 msgstr ""
 
+#: internet/magnatunesettingspage.cpp:53
 msgid ""
 "You can listen to Magnatune songs for free without an account.  Purchasing a"
 " membership removes the messages at the end of each track."
@@ -3267,9 +4475,11 @@ msgstr ""
 "بدون داشتن شناسه می‌توانید به آهنگ‌های مگناتیون گوش دهید. با پرداخت حق عضویت"
 " از شر پیام انتهای هر قطعه راحت می‌شوید."
 
+#: /home/arno/clementine/clementine-player/src/ui_backgroundstreamssettingspage.h:57
 msgid "You can listen to background streams at the same time as other music."
 msgstr "به جریان پس‌زمینه همزمان با دیگر آهنگ‌ها می‌توانید گوش دهید."
 
+#: internet/lastfmsettingspage.cpp:140
 msgid ""
 "You can scrobble tracks for free, but only <span style=\" font-"
 "weight:600;\">paid subscribers</span> can stream Last.fm radio from "
@@ -3279,6 +4489,7 @@ msgstr ""
 "weight:600;\">اعضای پولی</span> می‌توانند رادیوی Last.fm را از کلمنتاین پخش "
 "کنند."
 
+#: /home/arno/clementine/clementine-player/src/ui_wiimotesettingspage.h:184
 msgid ""
 "You can use your Wii Remote as a remote control for Clementine.  <a "
 "href=\"http://www.clementine-player.org/wiimote\">See the page on the "
@@ -3288,23 +4499,29 @@ msgstr ""
 "اطلاعات بیشتر به <a href=\"http://www.clementine-player.org/wiimote\">صفحهٔ‌"
 " ویکی کلمنتاین</a> مراجعه کنید.\n"
 
+#: internet/groovesharksettingspage.cpp:105
 msgid "You do not have a Grooveshark Anywhere account."
 msgstr ""
 
+#: internet/spotifysettingspage.cpp:138
 msgid "You do not have a Spotify Premium account."
 msgstr ""
 
+#: internet/digitallyimportedurlhandler.cpp:48
 msgid ""
 "You have selected a Premium-only audio type but do not have any account "
 "details entered"
 msgstr ""
 
+#: internet/digitallyimportedurlhandler.cpp:43
 msgid "You have selected an invalid audio type setting"
 msgstr ""
 
+#: songinfo/lastfmtrackinfoprovider.cpp:95
 msgid "You love this track"
 msgstr "عاشق این آهنگ هستید"
 
+#: /home/arno/clementine/clementine-player/src/ui_globalshortcutssettingspage.h:170
 msgid ""
 "You need to launch System Preferences and turn on \"<span style=\" font-"
 "style:italic;\">Enable access for assistive devices</span>\" to use global "
@@ -3314,9 +4531,11 @@ msgstr ""
 "style:italic;\">Enable access for assistive devices</span>\" را فعال کنید تا"
 " بتوانید از میان‌برهای جامع در کلمنتاین استفاده کنید."
 
+#: /home/arno/clementine/clementine-player/src/ui_behavioursettingspage.h:185
 msgid "You will need to restart Clementine if you change the language."
 msgstr "اگر زبان را تغییر دهید باید کلمنتاین را دوباره بارگذاری کنید."
 
+#: internet/lastfmsettingspage.cpp:107
 msgid ""
 "You will not be able to play Last.fm radio stations as you are not a Last.fm"
 " subscriber."
@@ -3324,19 +4543,24 @@ msgstr ""
 "شما نمی‌توانید ایستگاه رادیویی Last.fm را پخش کنید زیرا شما عضو Last.fm "
 "نیستید."
 
+#: remote/remotesettingspage.cpp:126
 #, qt-format
 msgid "You're logged in as <b>%1</b>"
 msgstr "شما به عنوان <b>%1</b> وارد شده‌اید"
 
+#: remote/remotesettingspage.cpp:113
 msgid "Your Google credentials were incorrect"
 msgstr "اعتبار گوگل شما نادرست بود"
 
+#: internet/lastfmsettingspage.cpp:79
 msgid "Your Last.fm credentials were incorrect"
 msgstr "اعتبار Last.fm شما نادرست بود"
 
+#: internet/magnatunesettingspage.cpp:113
 msgid "Your Magnatune credentials were incorrect"
 msgstr "اعتبار مگناتیون شما نادرست بود"
 
+#: ui/edittagdialog.cpp:719 ui/mainwindow.cpp:2128
 msgid ""
 "Your gstreamer installation is missing the 'ofa' plugin.  This is required "
 "for automatic tag fetching.  Try installing the 'gstreamer-plugins-bad' "
@@ -3345,130 +4569,174 @@ msgstr ""
 "نصب جی‌استریمر شما فاقد افزونهٔ 'ofa' است. این افزونه برای واکشی اتوماتیک "
 "برچسب لازم است. نصب بستهٔ 'gstreamer-plugins-bad' را امتحان کنید."
 
+#: library/libraryview.cpp:212
 msgid "Your library is empty!"
 msgstr "کتابخانهٔ شما خالی است!"
 
+#: internet/savedradio.cpp:44
 msgid "Your radio streams"
 msgstr "جریان‌های رادیویی شما"
 
+#: songinfo/lastfmtrackinfoprovider.cpp:96
 #, qt-format
 msgid "Your scrobbles: %1"
 msgstr "برونکشی‌های شما: %1"
 
+#: internet/groovesharksettingspage.cpp:109
+#: internet/spotifysettingspage.cpp:143
 msgid "Your username or password was incorrect."
 msgstr ""
 
+#: smartplaylists/searchterm.cpp:288
 msgid "Z-A"
 msgstr "ی-ا"
 
+#: ui/equalizer.cpp:126
 msgid "Zero"
 msgstr "صفر"
 
+#: playlist/playlistundocommands.cpp:37
 #, c-format
 msgid "add %n songs"
 msgstr "افزودن %n آهنگ"
 
+#: smartplaylists/searchterm.cpp:200
 msgid "after"
 msgstr "پس از"
 
+#: /home/arno/clementine/clementine-player/src/ui_searchtermwidget.h:281
 msgid "ago"
 msgstr "قبل"
 
+#: /home/arno/clementine/clementine-player/src/ui_searchtermwidget.h:280
 msgid "and"
 msgstr "و"
 
+#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsspeex.h:219
 msgid "automatic"
 msgstr "اتوماتیک"
 
+#: smartplaylists/searchterm.cpp:201
 msgid "before"
 msgstr "پیش از"
 
+#: smartplaylists/searchterm.cpp:206
 msgid "between"
 msgstr "بین"
 
+#: smartplaylists/searchterm.cpp:292
 msgid "biggest first"
 msgstr "بزرگترین اول"
 
+#: playlist/playlistview.cpp:162 ui/edittagdialog.cpp:421
 msgid "bpm"
 msgstr "bpm"
 
+#: smartplaylists/searchterm.cpp:212
 msgid "contains"
 msgstr "شامل‌"
 
+#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsspeex.h:222
+#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsvorbis.h:207
+#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsvorbis.h:210
 msgid "disabled"
 msgstr "غیرفعال"
 
+#: widgets/osd.cpp:112
 #, qt-format
 msgid "disc %1"
 msgstr "دیسک %1"
 
+#: smartplaylists/searchterm.cpp:213
 msgid "does not contain"
 msgstr "شامل نیست"
 
+#: smartplaylists/searchterm.cpp:215
 msgid "ends with"
 msgstr "پایان می‌یابد با"
 
+#: smartplaylists/searchterm.cpp:218
 msgid "equals"
 msgstr "برابر است با"
 
+#: smartplaylists/searchterm.cpp:216
 msgid "greater than"
 msgstr "بزرگتر است از"
 
+#: smartplaylists/searchterm.cpp:204
 msgid "in the last"
 msgstr "در آخرین"
 
+#: playlist/playlistview.cpp:164 ui/edittagdialog.cpp:423
 msgid "kbps"
 msgstr "kbps"
 
+#: smartplaylists/searchterm.cpp:217
 msgid "less than"
 msgstr "کمتر است از"
 
+#: smartplaylists/searchterm.cpp:290
 msgid "longest first"
 msgstr "ابتدا بلندترین"
 
+#: playlist/playlistundocommands.cpp:99
 msgid "move songs"
 msgstr "آهنگ‌ها را انتقال بده"
 
+#: smartplaylists/searchterm.cpp:289
 msgid "newest first"
 msgstr "ابتدا جدیدترین"
 
+#: smartplaylists/searchterm.cpp:219
 msgid "not equals"
 msgstr "برابر نیست با"
 
+#: smartplaylists/searchterm.cpp:205
 msgid "not in the last"
 msgstr "در انتها نیست"
 
+#: smartplaylists/searchterm.cpp:203
 msgid "not on"
 msgstr "نه در"
 
+#: smartplaylists/searchterm.cpp:289
 msgid "oldest first"
 msgstr "ابتدا قدیمی‌ترین"
 
+#: smartplaylists/searchterm.cpp:202
 msgid "on"
 msgstr "در"
 
+#: core/commandlineoptions.cpp:150
 msgid "options"
 msgstr "گزینه‌ها"
 
+#: widgets/didyoumean.cpp:141
 msgid "press enter"
 msgstr "ورود را فشار دهید"
 
+#: playlist/playlistundocommands.cpp:65 playlist/playlistundocommands.cpp:88
 #, c-format
 msgid "remove %n songs"
 msgstr "پاک‌کردن %n آهنگ"
 
+#: smartplaylists/searchterm.cpp:290
 msgid "shortest first"
 msgstr "ابتدا کوتاه‌ترین"
 
+#: smartplaylists/searchterm.cpp:292
 msgid "smallest first"
 msgstr "ابتدا کوچک‌ترین"
 
+#: smartplaylists/searchterm.cpp:214
 msgid "starts with"
 msgstr "شروع شود با"
 
+#: playlist/playlistdelegates.cpp:177
 msgid "stop"
 msgstr "توقف"
 
+#: globalsearch/globalsearchitemdelegate.cpp:150 widgets/osd.cpp:114
 #, qt-format
 msgid "track %1"
 msgstr "قطعهٔ %1"
