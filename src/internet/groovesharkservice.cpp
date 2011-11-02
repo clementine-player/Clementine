@@ -77,6 +77,8 @@ GroovesharkService::GroovesharkService(InternetModel *parent)
     favorites_(NULL),
     network_(new NetworkAccessManager(this)),
     context_menu_(NULL),
+    remove_from_playlist_(NULL),
+    remove_from_favorites_(NULL),
     search_delay_(new QTimer(this)),
     last_search_reply_(NULL),
     api_key_(QByteArray::fromBase64(kApiSecret)),
@@ -406,6 +408,21 @@ void GroovesharkService::ResetSessionId() {
 
 void GroovesharkService::ShowContextMenu(const QModelIndex& index, const QPoint& global_pos) {
   EnsureMenuCreated();
+
+  // Check if we should display actions
+  bool display_remove_from_playlist_action = false,
+       display_remove_from_favorites_action = false;
+  // We check parent's type (instead of index type) because we want to enable
+  // 'remove' actions for items which are inside a playlist
+  int parent_type = index.parent().data(InternetModel::Role_Type).toInt();
+  if (parent_type == InternetModel::Type_UserPlaylist) {
+    display_remove_from_playlist_action = true;
+  } else if (parent_type == Type_UserFavorites) {
+    display_remove_from_favorites_action = true;
+  }
+  remove_from_playlist_->setVisible(display_remove_from_playlist_action);
+  remove_from_favorites_->setVisible(display_remove_from_favorites_action);
+
   context_menu_->popup(global_pos);
   context_item_ = index;
 }
@@ -421,6 +438,12 @@ void GroovesharkService::EnsureMenuCreated() {
   if(!context_menu_) {
     context_menu_ = new QMenu;
     context_menu_->addActions(GetPlaylistActions());
+    remove_from_playlist_ = context_menu_->addAction(
+        IconLoader::Load("list-remove"), tr("Remove from playlist"),
+        this, SLOT(RemoveCurrentFromPlaylist()));
+    remove_from_favorites_ = context_menu_->addAction(
+        IconLoader::Load("list-remove"), tr("Remove from favorites"),
+        this, SLOT(RemoveCurrentFromFavorites()));
     context_menu_->addSeparator();
     context_menu_->addAction(IconLoader::Load("edit-find"), tr("Search Grooveshark (opens a new tab)") + "...", this, SLOT(OpenSearchTab()));
     context_menu_->addSeparator();
@@ -661,7 +684,7 @@ void GroovesharkService::SetPlaylistSongs(int playlist_id, const QList<int>& son
   QList<Param> parameters;
 
   // Convert song ids to QVariant
-  QList<QVariant> songs_ids_qvariant;
+  QVariantList songs_ids_qvariant;
   foreach (int song_id, songs_ids) {
     songs_ids_qvariant << QVariant(song_id);
   }
@@ -716,6 +739,60 @@ void GroovesharkService::UserFavoriteSongAdded(QNetworkReply* reply) {
     return;
   }
   // Refresh user's favorites list
+  RetrieveUserFavorites();
+}
+
+void GroovesharkService::RemoveCurrentFromPlaylist() {
+  if (context_item_.parent().data(InternetModel::Role_Type).toInt() !=
+      InternetModel::Type_UserPlaylist) {
+    return;
+  }
+
+  int playlist_id = context_item_.data(Role_UserPlaylistId).toInt();
+  int song_id = ExtractSongId(context_item_.data(InternetModel::Role_Url).toUrl());
+  if (song_id) {
+    RemoveFromPlaylist(playlist_id, song_id);
+  }
+}
+
+void GroovesharkService::RemoveFromPlaylist(int playlist_id, int song_id) {
+  if (!playlists_.contains(playlist_id)) {
+    return;
+  }
+
+  QList<int> songs_ids = playlists_[playlist_id].songs_ids_;
+  songs_ids.removeOne(song_id);
+
+  SetPlaylistSongs(playlist_id, songs_ids);
+}
+
+void GroovesharkService::RemoveCurrentFromFavorites() {
+  if (context_item_.parent().data(InternetModel::Role_Type).toInt() != Type_UserFavorites) {
+    return;
+  }
+
+  int song_id = ExtractSongId(context_item_.data(InternetModel::Role_Url).toUrl());
+  if (song_id) {
+    RemoveFromFavorites(song_id);
+  }
+}
+
+void GroovesharkService::RemoveFromFavorites(int song_id) {
+  QList<Param> parameters;
+  parameters << Param("songIDs", QVariantList() << QVariant(song_id));
+  QNetworkReply* reply = CreateRequest("removeUserFavoriteSongs", parameters, true);
+  NewClosure(reply, SIGNAL(finished()), this,
+    SLOT(SongRemovedFromFavorites(QNetworkReply*)), reply);
+}
+
+void GroovesharkService::SongRemovedFromFavorites(QNetworkReply* reply) {
+  reply->deleteLater();
+
+  QVariantMap result = ExtractResult(reply);
+  if (!result["success"].toBool()) {
+    qLog(Warning) << "Grooveshark removeUserFavoriteSongs failed";
+    return;
+  }
   RetrieveUserFavorites();
 }
 
@@ -802,13 +879,20 @@ QList<int> GroovesharkService::ExtractSongsIds(const QVariantMap& result) {
   return songs_ids;
 }
 
-QList<int> GroovesharkService::ExtractSongsIds(const QList<QUrl> urls) {
+QList<int> GroovesharkService::ExtractSongsIds(const QList<QUrl>& urls) {
   QList<int> songs_ids;
   foreach (const QUrl& url, urls) {
-    if (url.scheme() == "grooveshark") {
-      qLog(Debug) << url.authority().toInt();
-      songs_ids << url.authority().toInt();
+    int song_id = ExtractSongId(url);
+    if (song_id) {
+      songs_ids << song_id;
     }
   }
   return songs_ids;
+}
+
+int GroovesharkService::ExtractSongId(const QUrl& url) {
+  if (url.scheme() == "grooveshark") {
+    return url.authority().toInt();
+  }
+  return 0;
 }

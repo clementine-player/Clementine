@@ -71,9 +71,11 @@ class GroovesharkService : public InternetService {
   void RetrieveUserPlaylists();
   void RetrieveUserFavorites();
   void SetPlaylistSongs(int playlist_id, const QList<int>& songs_ids);
+  void RemoveFromPlaylist(int playlist_id, int song_id);
   // Refresh playlist_id playlist , or create it if it doesn't exist
   void RefreshPlaylist(int playlist_id, const QString& playlist_name);
   void AddUserFavoriteSong(int song_id);
+  void RemoveFromFavorites(int song_id);
   void MarkStreamKeyOver30Secs(const QString& stream_key, const QString& server_id);
   void MarkSongComplete(const QString& song_id, const QString& stream_key, const QString& server_id);
 
@@ -128,6 +130,9 @@ class GroovesharkService : public InternetService {
   void PlaylistSongsRetrieved();
   void PlaylistSongsSet(QNetworkReply* reply, int playlist_id);
   void UserFavoriteSongAdded(QNetworkReply* reply);
+  void RemoveCurrentFromPlaylist();
+  void RemoveCurrentFromFavorites();
+  void SongRemovedFromFavorites(QNetworkReply* reply);
   void StreamMarked();
   void SongMarkedAsComplete();
 
@@ -150,10 +155,11 @@ class GroovesharkService : public InternetService {
   QVariantMap ExtractResult(QNetworkReply* reply);
   // Convenient function for extracting songs from grooveshark result
   SongList ExtractSongs(const QVariantMap& result);
-  // Convenient function for extracting Grooveshark songs ids from result
+  // Convenient functions for extracting Grooveshark songs ids
   QList<int> ExtractSongsIds(const QVariantMap& result);
-  // Convenient function for extracting Grooveshark songs ids from a list of URLs
-  QList<int> ExtractSongsIds(const QList<QUrl> urls);
+  QList<int> ExtractSongsIds(const QList<QUrl>& urls);
+  int ExtractSongId(const QUrl& url); // Returns 0 if url is not a Grooveshark url
+
   void ResetSessionId();
 
 
@@ -177,6 +183,9 @@ class GroovesharkService : public InternetService {
 
   QMenu* context_menu_;
   QModelIndex context_item_;
+
+  QAction* remove_from_playlist_;
+  QAction* remove_from_favorites_;
 
   QTimer* search_delay_;
   QNetworkReply* last_search_reply_;
