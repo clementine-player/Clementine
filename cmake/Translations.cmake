@@ -10,16 +10,24 @@ set (XGETTEXT_OPTIONS --qt --keyword=tr --flag=tr:1:pass-c-format --flag=tr:1:pa
     --from-code=utf-8)
 
 macro(add_pot outfiles header pot)
+  # Make relative filenames for all source files
+  set(add_pot_sources)
+  foreach(_filename ${ARGN})
+    get_filename_component(_absolute_filename ${_filename} ABSOLUTE)
+    file(RELATIVE_PATH _relative_filename ${CMAKE_CURRENT_SOURCE_DIR} ${_absolute_filename})
+    list(APPEND add_pot_sources ${_relative_filename})
+  endforeach(_filename)
+
   # Generate the .pot
   add_custom_command(
     OUTPUT ${pot}
+    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
     COMMAND ${GETTEXT_XGETTEXT_EXECUTABLE}
         ${XGETTEXT_OPTIONS} -s -C --omit-header
-        --directory=${CMAKE_CURRENT_SOURCE_DIR}
         --output=${CMAKE_CURRENT_BINARY_DIR}/pot.temp
-        ${ARGN}
+        ${add_pot_sources}
     COMMAND cat ${header} ${CMAKE_CURRENT_BINARY_DIR}/pot.temp > ${pot}
-    DEPENDS ${ARGN} ${header}
+    DEPENDS ${add_pot_sources} ${header}
   )
 
   list(APPEND ${outfiles} ${pot})
