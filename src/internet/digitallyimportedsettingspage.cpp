@@ -15,47 +15,119 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "digitallyimportedclient.h"
 #include "digitallyimportedservicebase.h"
 #include "digitallyimportedsettingspage.h"
 #include "ui_digitallyimportedsettingspage.h"
+#include "core/closure.h"
 
+#include <QMessageBox>
+#include <QNetworkReply>
 #include <QSettings>
 
 
 DigitallyImportedSettingsPage::DigitallyImportedSettingsPage(SettingsDialog* dialog)
   : SettingsPage(dialog),
-    ui_(new Ui_DigitallyImportedSettingsPage)
+    ui_(new Ui_DigitallyImportedSettingsPage),
+    client_(new DigitallyImportedClient("di", this))
 {
   ui_->setupUi(this);
   setWindowIcon(QIcon(":/providers/digitallyimported-32.png"));
+
+  connect(ui_->login_state, SIGNAL(LogoutClicked()), SLOT(Logout()));
+  connect(ui_->login_state, SIGNAL(LoginClicked()), SLOT(Login()));
+  connect(ui_->login, SIGNAL(clicked()), SLOT(Login()));
+
+  ui_->login_state->AddCredentialField(ui_->username);
+  ui_->login_state->AddCredentialField(ui_->password);
+  ui_->login_state->AddCredentialGroup(ui_->credential_group);
 
   ui_->login_state->SetAccountTypeText(tr(
       "You can listen for free without an account, but Premium members can "
       "listen to higher quality streams without advertisements."));
   ui_->login_state->SetAccountTypeVisible(true);
-  ui_->login_state->HideLoggedInState();
 }
 
 DigitallyImportedSettingsPage::~DigitallyImportedSettingsPage() {
   delete ui_;
 }
 
+void DigitallyImportedSettingsPage::Login() {
+  ui_->login_state->SetLoggedIn(LoginStateWidget::LoginInProgress);
+
+  QNetworkReply* reply = client_->Auth(ui_->username->text(), ui_->password->text());
+  NewClosure(reply, SIGNAL(finished()),
+             this, SLOT(LoginFinished(QNetworkReply*)), reply);
+}
+
+void DigitallyImportedSettingsPage::LoginFinished(QNetworkReply* reply) {
+  DigitallyImportedClient::AuthReply result = client_->ParseAuthReply(reply);
+
+  QString name = QString("%1 %2").arg(result.first_name_, result.last_name_);
+  UpdateLoginState(result.listen_hash_, name, result.expires_);
+
+  if (result.success_) {
+    // Clear the password field just to be sure
+    ui_->password->clear();
+
+    // Save the listen key and account information
+    QSettings s;
+    s.beginGroup(DigitallyImportedServiceBase::kSettingsGroup);
+    s.setValue("listen_hash", result.listen_hash_);
+    s.setValue("full_name", name);
+    s.setValue("expires", result.expires_);
+  } else {
+    QMessageBox::warning(this, tr("Authentication failed"),
+                         result.error_reason_);
+  }
+}
+
+void DigitallyImportedSettingsPage::UpdateLoginState(
+    const QString& listen_hash, const QString& name, const QDateTime& expires) {
+  if (listen_hash.isEmpty()) {
+    ui_->login_state->SetLoggedIn(LoginStateWidget::LoggedOut);
+    ui_->login_state->SetAccountTypeVisible(true);
+  } else {
+    ui_->login_state->SetLoggedIn(
+          LoginStateWidget::LoggedIn,
+          name + " (" + tr("Expires on %1").arg(expires.date().toString(Qt::SystemLocaleLongDate)) + ")");
+    ui_->login_state->SetAccountTypeVisible(false);
+  }
+
+  ui_->premium_audio_type->setEnabled(!listen_hash.isEmpty());
+  ui_->premium_audio_label->setEnabled(!listen_hash.isEmpty());
+}
+
+void DigitallyImportedSettingsPage::Logout() {
+  QSettings s;
+  s.beginGroup(DigitallyImportedServiceBase::kSettingsGroup);
+  s.setValue("listen_hash", QString());
+  s.setValue("full_name", QString());
+  s.setValue("expires", QDateTime());
+
+  UpdateLoginState(QString(), QString(), QDateTime());
+}
+
 void DigitallyImportedSettingsPage::Load() {
   QSettings s;
   s.beginGroup(DigitallyImportedServiceBase::kSettingsGroup);
 
-  ui_->audio_type->setCurrentIndex(s.value("audio_type", 0).toInt());
+  ui_->basic_audio_type->setCurrentIndex(s.value("basic_audio_type", 1).toInt());
+  ui_->premium_audio_type->setCurrentIndex(s.value("premium_audio_type", 2).toInt());
   ui_->username->setText(s.value("username").toString());
-  ui_->password->setText(s.value("password").toString());
+
+  UpdateLoginState(s.value("listen_hash").toString(),
+                   s.value("full_name").toString(),
+                   s.value("expires").toDateTime());
 }
 
 void DigitallyImportedSettingsPage::Save() {
   QSettings s;
   s.beginGroup(DigitallyImportedServiceBase::kSettingsGroup);
 
-  s.setValue("audio_type", ui_->audio_type->currentIndex());
+  s.setValue("basic_audio_type", ui_->basic_audio_type->currentIndex());
+  s.setValue("premium_audio_type", ui_->premium_audio_type->currentIndex());
   s.setValue("username", ui_->username->text());
-  s.setValue("password", ui_->password->text());
 }
 
 

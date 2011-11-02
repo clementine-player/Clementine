@@ -39,16 +39,6 @@ UrlHandler::LoadResult DigitallyImportedUrlHandler::StartLoading(const QUrl& url
     return ret;
   }
 
-  if (!service_->is_valid_stream_selected()) {
-    service_->StreamError(tr("You have selected an invalid audio type setting"));
-    return ret;
-  }
-
-  if (service_->is_premium_stream_selected() && !service_->is_premium_account()) {
-    service_->StreamError(tr("You have selected a Premium-only audio type but do not have any account details entered"));
-    return ret;
-  }
-
   // Start loading the station
   const QString key = url.host();
   qLog(Info) << "Loading station" << key;

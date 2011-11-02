@@ -132,6 +132,7 @@ set(SOURCES
   globalsearch/tooltipactionwidget.cpp
   globalsearch/tooltipresultwidget.cpp
 
+  internet/digitallyimportedclient.cpp
   internet/digitallyimportedservice.cpp
   internet/digitallyimportedservicebase.cpp
   internet/digitallyimportedsettingspage.cpp
@@ -381,6 +382,7 @@ set(HEADERS
   globalsearch/tooltipactionwidget.h
   globalsearch/tooltipresultwidget.h
 
+  internet/digitallyimportedclient.h
   internet/digitallyimportedservicebase.h
   internet/digitallyimportedsettingspage.h
   internet/groovesharksearchplaylisttype.h

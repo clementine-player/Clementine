@@ -21,21 +21,8 @@
 #include "digitallyimportedservicebase.h"
 
 class SkyFmService : public DigitallyImportedServiceBase {
-  Q_OBJECT
-
 public:
   SkyFmService(InternetModel* model, QObject* parent = NULL);
-
-  void LoadStation(const QString& key);
-
-private:
-  void LoadPlaylist(const QString& key, const QString& hash_key = QString());
-
-private slots:
-  void LoadHashKeyFinished();
-
-private:
-  QString last_key_;
 };
 
 #endif // SKYFMSERVICE_H

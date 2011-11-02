@@ -15,6 +15,7 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "digitallyimportedclient.h"
 #include "digitallyimportedservicebase.h"
 #include "digitallyimportedurlhandler.h"
 #include "internetmodel.h"
@@ -37,29 +38,48 @@ const int DigitallyImportedServiceBase::kStreamsCacheDurationSecs =
 
 
 DigitallyImportedServiceBase::DigitallyImportedServiceBase(
-  const QString& name, const QString& description, const QUrl& homepage_url,
-  const QString& homepage_name, const QUrl& stream_list_url,
-  const QString& url_scheme, const QString& icon_path,
-  InternetModel* model, QObject* parent)
+    const QString& name, InternetModel* model, QObject* parent)
   : InternetService(name, model, parent),
     network_(new NetworkAccessManager(this)),
     url_handler_(new DigitallyImportedUrlHandler(this)),
-    audio_type_(0),
+    basic_audio_type_(1),
+    premium_audio_type_(2),
     task_id_(-1),
-    homepage_url_(homepage_url),
-    homepage_name_(homepage_name),
-    stream_list_url_(stream_list_url),
-    icon_path_(icon_path),
-    icon_(icon_path),
-    service_description_(description),
-    url_scheme_(url_scheme),
     root_(NULL),
     context_menu_(NULL),
-    context_item_(NULL)
+    context_item_(NULL),
+    api_client_(NULL)
 {
-  model->player()->RegisterUrlHandler(url_handler_);
+  basic_playlists_
+      << "http://listen.%1/public3/%2.pls"
+      << "http://listen.%1/public1/%2.pls"
+      << "http://listen.%1/public5/%2.asx";
 
-  model->global_search()->AddProvider(new DigitallyImportedSearchProvider(this, this));
+  premium_playlists_
+      << "http://listen.%1/premium_high/%3.pls?hash=%3"
+      << "http://listen.%1/premium_medium/%2.pls?hash=%3"
+      << "http://listen.%1/premium/%2.pls?hash=%3"
+      << "http://listen.%1/premium_wma_low/%2.asx?hash=%3"
+      << "http://listen.%1/premium_wma/%2.asx?hash=%3";
+}
+
+void DigitallyImportedServiceBase::Init(
+    const QString& description, const QUrl& homepage_url,
+    const QString& homepage_name, const QUrl& stream_list_url,
+    const QString& url_scheme, const QString& icon_path,
+    const QString& api_service_name) {
+  service_description_ = description;
+  homepage_url_ = homepage_url;
+  homepage_name_ = homepage_name;
+  stream_list_url_ = stream_list_url;
+  url_scheme_ = url_scheme;
+  icon_path_ = icon_path;
+  api_service_name_ = api_service_name;
+
+  model()->player()->RegisterUrlHandler(url_handler_);
+  model()->global_search()->AddProvider(new DigitallyImportedSearchProvider(this, this));
+
+  api_client_ = new DigitallyImportedClient(api_service_name, this);
 }
 
 DigitallyImportedServiceBase::~DigitallyImportedServiceBase() {
@@ -176,9 +196,10 @@ void DigitallyImportedServiceBase::ReloadSettings() {
   QSettings s;
   s.beginGroup(kSettingsGroup);
 
-  audio_type_ = s.value("audio_type", 0).toInt();
+  basic_audio_type_ = s.value("basic_audio_type", 1).toInt();
+  premium_audio_type_ = s.value("premium_audio_type", 2).toInt();
   username_ = s.value("username").toString();
-  password_ = s.value("password").toString();
+  listen_hash_ = s.value("listen_hash").toString();
   last_refreshed_streams_ = s.value("last_refreshed_" + url_scheme_).toDateTime();
   saved_streams_ = LoadStreams();
 }
@@ -204,24 +225,8 @@ void DigitallyImportedServiceBase::ShowContextMenu(
   context_menu_->popup(global_pos);
 }
 
-QModelIndex DigitallyImportedServiceBase::GetCurrentIndex() {
-  return context_item_->index();
-}
-
-bool DigitallyImportedServiceBase::is_valid_stream_selected() const {
-  return audio_type_ >= 0 && audio_type_ < playlists_.count();
-}
-
 bool DigitallyImportedServiceBase::is_premium_account() const {
-  return !username_.isEmpty() && !password_.isEmpty();
-}
-
-bool DigitallyImportedServiceBase::is_premium_stream_selected() const {
-  if (!is_valid_stream_selected()) {
-    return false;
-  }
-
-  return playlists_[audio_type_].premium_;
+  return !listen_hash_.isEmpty();
 }
 
 void DigitallyImportedServiceBase::LoadPlaylistFinished() {
@@ -234,11 +239,7 @@ void DigitallyImportedServiceBase::LoadPlaylistFinished() {
   if (reply->header(QNetworkRequest::ContentTypeHeader).toString() == "text/html") {
     url_handler_->CancelTask();
 
-    if (is_premium_stream_selected()) {
-      emit StreamError(tr("Invalid di.fm username or password"));
-    } else {
-      emit StreamError(tr("Error loading di.fm playlist"));
-    }
+    emit StreamError(tr("Error loading di.fm playlist"));
   } else {
     url_handler_->LoadPlaylistFinished(reply);
   }
@@ -301,4 +302,25 @@ DigitallyImportedServiceBase::StreamList DigitallyImportedServiceBase::Streams()
   }
 
   return saved_streams_;
+}
+
+void DigitallyImportedServiceBase::LoadStation(const QString& key) {
+  QUrl playlist_url;
+
+  if (is_premium_account()) {
+    playlist_url = QUrl(premium_playlists_[premium_audio_type_].arg(
+                          homepage_name_, key, listen_hash_));
+  } else {
+    playlist_url = QUrl(basic_playlists_[basic_audio_type_].arg(
+                          homepage_name_, key));
+  }
+
+  qLog(Debug) << "Getting playlist URL" << playlist_url;
+
+  QNetworkReply* reply = network_->get(QNetworkRequest(playlist_url));
+  connect(reply, SIGNAL(finished()), SLOT(LoadPlaylistFinished()));
+}
+
+QModelIndex DigitallyImportedServiceBase::GetCurrentIndex() {
+  return context_item_->index();
 }

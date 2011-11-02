@@ -20,6 +20,7 @@
 
 #include "internetservice.h"
 
+class DigitallyImportedClient;
 class DigitallyImportedUrlHandler;
 
 class QNetworkAccessManager;
@@ -30,11 +31,8 @@ class DigitallyImportedServiceBase : public InternetService {
   friend class DigitallyImportedUrlHandler;
 
 public:
-  DigitallyImportedServiceBase(
-      const QString& name, const QString& description, const QUrl& homepage_url,
-      const QString& homepage_name, const QUrl& stream_list_url,
-      const QString& url_scheme, const QString& icon_path,
-      InternetModel* model, QObject* parent = NULL);
+  DigitallyImportedServiceBase(const QString& name, InternetModel* model,
+                               QObject* parent = NULL);
   ~DigitallyImportedServiceBase();
 
   static const char* kSettingsGroup;
@@ -46,8 +44,6 @@ public:
 
   void ReloadSettings();
 
-  bool is_valid_stream_selected() const;
-  bool is_premium_stream_selected() const;
   bool is_premium_account() const;
 
   const QUrl& homepage_url() const { return homepage_url_; }
@@ -57,6 +53,7 @@ public:
   const QIcon& icon() const { return icon_; }
   const QString& service_description() const { return service_description_; }
   const QString& url_scheme() const { return url_scheme_; }
+  const QString& api_service_name() const { return api_service_name_; }
 
   // Public for the global search provider.
   struct Stream {
@@ -76,19 +73,13 @@ signals:
   void StreamsChanged();
 
 protected:
-  struct Playlist {
-    Playlist(bool premium, const QString& url_template)
-      : premium_(premium), url_template_(url_template) {}
-
-    bool premium_;
-    QString url_template_;
-  };
+  // Subclasses must call this from their constructor
+  void Init(const QString& description, const QUrl& homepage_url,
+            const QString& homepage_name, const QUrl& stream_list_url,
+            const QString& url_scheme, const QString& icon_path,
+            const QString& api_service_name);
 
   QModelIndex GetCurrentIndex();
-
-  // Called by DigitallyImportedUrlHandler, implemented by subclasses, must
-  // call LoadPlaylistFinished eventually.
-  virtual void LoadStation(const QString& key) = 0;
 
 protected slots:
   void LoadPlaylistFinished();
@@ -100,22 +91,12 @@ private slots:
   void RefreshStreamsFinished();
   void ShowSettingsDialog();
 
-protected:
-  QNetworkAccessManager* network_;
-  DigitallyImportedUrlHandler* url_handler_;
-
-  int audio_type_;
-  QString username_;
-  QString password_;
-
-  int task_id_;
-
-  QList<Playlist> playlists_;
-
 private:
   void PopulateStreams();
   StreamList LoadStreams() const;
   void SaveStreams(const StreamList& streams);
+
+  void LoadStation(const QString& key);
 
 private:
   // Set by subclasses through the constructor
@@ -126,6 +107,20 @@ private:
   QIcon icon_;
   QString service_description_;
   QString url_scheme_;
+  QString api_service_name_;
+
+  QStringList basic_playlists_;
+  QStringList premium_playlists_;
+
+  QNetworkAccessManager* network_;
+  DigitallyImportedUrlHandler* url_handler_;
+
+  int basic_audio_type_;
+  int premium_audio_type_;
+  QString username_;
+  QString listen_hash_;
+
+  int task_id_;
 
   QStandardItem* root_;
 
@@ -134,6 +129,8 @@ private:
 
   QList<Stream> saved_streams_;
   QDateTime last_refreshed_streams_;
+
+  DigitallyImportedClient* api_client_;
 };
 
 #endif // DIGITALLYIMPORTEDSERVICEBASE_H

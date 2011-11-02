@@ -23,10 +23,6 @@
 class DigitallyImportedService : public DigitallyImportedServiceBase {
 public:
   DigitallyImportedService(InternetModel* model, QObject* parent = NULL);
-
-  void ReloadSettings();
-
-  void LoadStation(const QString& key);
 };
 
 #endif // DIGITALLYIMPORTEDSERVICE_H
