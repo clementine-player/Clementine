@@ -75,6 +75,7 @@ void DigitallyImportedServiceBase::Init(
   url_scheme_ = url_scheme;
   icon_path_ = icon_path;
   api_service_name_ = api_service_name;
+  icon_ = QIcon(icon_path_);
 
   model()->player()->RegisterUrlHandler(url_handler_);
   model()->global_search()->AddProvider(new DigitallyImportedSearchProvider(this, this));
