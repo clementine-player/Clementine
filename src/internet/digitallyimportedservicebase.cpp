@@ -56,7 +56,7 @@ DigitallyImportedServiceBase::DigitallyImportedServiceBase(
       << "http://listen.%1/public5/%2.asx";
 
   premium_playlists_
-      << "http://listen.%1/premium_high/%3.pls?hash=%3"
+      << "http://listen.%1/premium_high/%2.pls?hash=%3"
       << "http://listen.%1/premium_medium/%2.pls?hash=%3"
       << "http://listen.%1/premium/%2.pls?hash=%3"
       << "http://listen.%1/premium_wma_low/%2.asx?hash=%3"
