@@ -626,6 +626,8 @@ set(RESOURCES
   ../data/data.qrc
 )
 
+set(OTHER_SOURCES)
+
 set(LINGUAS "All" CACHE STRING "A space-seperated list of translations to compile in to Clementine, or \"None\".")
 if (LINGUAS STREQUAL "All")
   # build LANGUAGES from all existing .po files
@@ -958,6 +960,7 @@ add_library(clementine_lib STATIC
   ${QRC}
   ${POT}
   ${PO}
+  ${OTHER_UIC_SOURCES}
 )
 
 add_dependencies(clementine_lib pot)
