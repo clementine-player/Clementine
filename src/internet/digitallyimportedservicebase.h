@@ -20,6 +20,8 @@
 
 #include "internetservice.h"
 
+#include <boost/scoped_ptr.hpp>
+
 class DigitallyImportedClient;
 class DigitallyImportedUrlHandler;
 
@@ -124,7 +126,7 @@ private:
 
   QStandardItem* root_;
 
-  QMenu* context_menu_;
+  boost::scoped_ptr<QMenu> context_menu_;
   QStandardItem* context_item_;
 
   QList<Stream> saved_streams_;

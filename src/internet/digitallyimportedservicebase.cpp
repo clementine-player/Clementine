@@ -46,7 +46,6 @@ DigitallyImportedServiceBase::DigitallyImportedServiceBase(
     premium_audio_type_(2),
     task_id_(-1),
     root_(NULL),
-    context_menu_(NULL),
     context_item_(NULL),
     api_client_(NULL)
 {
@@ -84,7 +83,6 @@ void DigitallyImportedServiceBase::Init(
 }
 
 DigitallyImportedServiceBase::~DigitallyImportedServiceBase() {
-  delete context_menu_;
 }
 
 QStandardItem* DigitallyImportedServiceBase::CreateRootItem() {
@@ -208,7 +206,7 @@ void DigitallyImportedServiceBase::ReloadSettings() {
 void DigitallyImportedServiceBase::ShowContextMenu(
     const QModelIndex& index, const QPoint& global_pos) {
   if (!context_menu_) {
-    context_menu_ = new QMenu;
+    context_menu_.reset(new QMenu);
     context_menu_->addActions(GetPlaylistActions());
     context_menu_->addAction(IconLoader::Load("download"),
                              tr("Open %1 in browser").arg(homepage_name_),
