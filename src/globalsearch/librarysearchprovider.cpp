@@ -30,19 +30,9 @@ LibrarySearchProvider::LibrarySearchProvider(LibraryBackendInterface* backend,
                                              const QIcon& icon,
                                              QObject* parent)
   : BlockingSearchProvider(parent),
-    backend_(backend),
-    cover_loader_(new BackgroundThreadImplementation<AlbumCoverLoader, AlbumCoverLoader>(this))
+    backend_(backend)
 {
-  Init(name, id, icon, WantsSerialisedArtQueries);
-
-  cover_loader_->Start(true);
-  cover_loader_->Worker()->SetDesiredHeight(kArtHeight);
-  cover_loader_->Worker()->SetPadOutputImage(true);
-  cover_loader_->Worker()->SetScaleOutputImage(true);
-
-  connect(cover_loader_->Worker().get(),
-          SIGNAL(ImageLoaded(quint64,QImage)),
-          SLOT(AlbumArtLoaded(quint64,QImage)));
+  Init(name, id, icon, WantsSerialisedArtQueries | ArtIsInSongMetadata);
 }
 
 SearchProvider::ResultList LibrarySearchProvider::Search(int id, const QString& query) {
@@ -112,19 +102,6 @@ SearchProvider::ResultList LibrarySearchProvider::Search(int id, const QString& 
   }
 
   return ret;
-}
-
-void LibrarySearchProvider::LoadArtAsync(int id, const Result& result) {
-  quint64 loader_id = cover_loader_->Worker()->LoadImageAsync(result.metadata_);
-  cover_loader_tasks_[loader_id] = id;
-}
-
-void LibrarySearchProvider::AlbumArtLoaded(quint64 id, const QImage& image) {
-  if (!cover_loader_tasks_.contains(id))
-    return;
-  int orig_id = cover_loader_tasks_.take(id);
-
-  emit ArtLoaded(orig_id, image);
 }
 
 void LibrarySearchProvider::LoadTracksAsync(int id, const Result& result) {

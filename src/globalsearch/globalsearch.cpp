@@ -18,6 +18,7 @@
 #include "librarysearchprovider.h"
 #include "globalsearch.h"
 #include "core/logging.h"
+#include "covers/albumcoverloader.h"
 
 #include <QSettings>
 #include <QStringBuilder>
@@ -29,8 +30,17 @@ const char* GlobalSearch::kSettingsGroup = "GlobalSearch";
 
 GlobalSearch::GlobalSearch(QObject* parent)
   : QObject(parent),
-    next_id_(1)
+    next_id_(1),
+    cover_loader_(new BackgroundThreadImplementation<AlbumCoverLoader, AlbumCoverLoader>(this))
 {
+  cover_loader_->Start(true);
+  cover_loader_->Worker()->SetDesiredHeight(SearchProvider::kArtHeight);
+  cover_loader_->Worker()->SetPadOutputImage(true);
+  cover_loader_->Worker()->SetScaleOutputImage(true);
+
+  connect(cover_loader_->Worker().get(),
+          SIGNAL(ImageLoaded(quint64,QImage)),
+          SLOT(AlbumArtLoaded(quint64,QImage)));
 }
 
 void GlobalSearch::AddProvider(SearchProvider* provider, bool enable_by_default) {
@@ -169,7 +179,10 @@ int GlobalSearch::LoadArtAsync(const SearchProvider::Result& result) {
     return id;
   }
 
-  if (result.provider_->wants_serialised_art()) {
+  if (result.provider_->art_is_in_song_metadata()) {
+    quint64 loader_id = cover_loader_->Worker()->LoadImageAsync(result.metadata_);
+    cover_loader_tasks_[loader_id] = id;
+  } else if (result.provider_->wants_serialised_art()) {
     QueuedArt request;
     request.id_ = id;
     request.result_ = result;
@@ -199,6 +212,18 @@ void GlobalSearch::TakeNextQueuedArt(SearchProvider* provider) {
 
 void GlobalSearch::ArtLoadedSlot(int id, const QImage& image) {
   SearchProvider* provider = static_cast<SearchProvider*>(sender());
+  HandleLoadedArt(id, image, provider);
+}
+
+void GlobalSearch::AlbumArtLoaded(quint64 id, const QImage& image) {
+  if (!cover_loader_tasks_.contains(id))
+    return;
+  int orig_id = cover_loader_tasks_.take(id);
+
+  HandleLoadedArt(orig_id, image, NULL);
+}
+
+void GlobalSearch::HandleLoadedArt(int id, const QImage& image, SearchProvider* provider) {
   const QString key = pending_art_searches_.take(id);
 
   QPixmap pixmap = QPixmap::fromImage(image);
@@ -206,7 +231,8 @@ void GlobalSearch::ArtLoadedSlot(int id, const QImage& image) {
 
   emit ArtLoaded(id, pixmap);
 
-  if (providers_.contains(provider) &&
+  if (provider &&
+      providers_.contains(provider) &&
       !providers_[provider].queued_art_.isEmpty()) {
      providers_[provider].queued_art_.removeFirst();
     TakeNextQueuedArt(provider);

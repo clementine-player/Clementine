@@ -33,6 +33,9 @@ const char* DigitallyImportedClient::kApiPassword = "dayeiph0ne@pp";
 const char* DigitallyImportedClient::kAuthUrl =
     "http://api.audioaddict.com/%1/premium/auth";
 
+const char* DigitallyImportedClient::kChannelListUrl =
+    "http://api.v2.audioaddict.com/v1/%1/mobile/batch_update?asset_group_key=mobile_icons&stream_set_key=";
+
 
 DigitallyImportedClient::DigitallyImportedClient(const QString& service_name, QObject* parent)
   : QObject(parent),
@@ -41,12 +44,16 @@ DigitallyImportedClient::DigitallyImportedClient(const QString& service_name, QO
 {
 }
 
+void DigitallyImportedClient::SetAuthorisationHeader(QNetworkRequest* req) const {
+  req->setRawHeader("Authorization",
+                    "Basic " + QString("%1:%2").arg(kApiUsername, kApiPassword)
+                       .toAscii().toBase64());
+}
+
 QNetworkReply* DigitallyImportedClient::Auth(const QString& username,
                                              const QString& password) {
   QNetworkRequest req(QUrl(QString(kAuthUrl).arg(service_name_)));
-  req.setRawHeader("Authorization",
-                   "Basic " + QString("%1:%2").arg(kApiUsername, kApiPassword)
-                      .toAscii().toBase64());
+  SetAuthorisationHeader(&req);
 
   QByteArray postdata = "username=" + QUrl::toPercentEncoding(username) +
                        "&password=" + QUrl::toPercentEncoding(password);
@@ -82,4 +89,66 @@ DigitallyImportedClient::ParseAuthReply(QNetworkReply* reply) const {
   ret.expires_ = QDateTime::fromString(user["expires"].toString(), Qt::ISODate);
   ret.listen_hash_ = user["listen_hash"].toString();
   return ret;
+}
+
+QNetworkReply* DigitallyImportedClient::GetChannelList() {
+  //QNetworkRequest req(QUrl(QString(kChannelListUrl)));
+  QNetworkRequest req(QUrl(QString(kChannelListUrl).arg(service_name_)));
+  SetAuthorisationHeader(&req);
+
+  return network_->get(req);
+}
+
+DigitallyImportedClient::ChannelList
+DigitallyImportedClient::ParseChannelList(QNetworkReply* reply) const {
+  ChannelList ret;
+
+  QJson::Parser parser;
+  QVariantMap data = parser.parse(reply).toMap();
+
+  if (!data.contains("channel_filters"))
+    return ret;
+
+  QVariantList filters = data["channel_filters"].toList();
+
+  foreach (const QVariant& filter, filters) {
+    // Find the filter called "All"
+    QVariantMap filter_map = filter.toMap();
+    if (filter_map.value("name", QString()).toString() != "All")
+      continue;
+
+    // Add all its stations to the result
+    QVariantList channels = filter_map.value("channels", QVariantList()).toList();
+    foreach (const QVariant& channel_var, channels) {
+      QVariantMap channel_map = channel_var.toMap();
+
+      Channel channel;
+      channel.art_url_ = QUrl(channel_map.value("asset_url").toString());
+      channel.description_ = channel_map.value("description").toString();
+      channel.director_ = channel_map.value("channel_director").toString();
+      channel.key_ = channel_map.value("key").toString();
+      channel.name_ = channel_map.value("name").toString();
+      ret << channel;
+    }
+
+    break;
+  }
+
+  return ret;
+}
+
+void DigitallyImportedClient::Channel::Load(const QSettings& s) {
+  art_url_ = s.value("art_url").toUrl();
+  director_ = s.value("director").toString();
+  description_ = s.value("description").toString();
+  name_ = s.value("name").toString();
+  key_ = s.value("key").toString();
+}
+
+void DigitallyImportedClient::Channel::Save(QSettings* s) const {
+  s->setValue("art_url", art_url_);
+  s->setValue("director", director_);
+  s->setValue("description", description_);
+  s->setValue("name", name_);
+  s->setValue("key", key_);
 }

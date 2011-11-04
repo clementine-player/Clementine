@@ -27,14 +27,11 @@ public:
   DigitallyImportedSearchProvider(DigitallyImportedServiceBase* service,
                                   QObject* parent);
 
-  void LoadArtAsync(int id, const Result& result);
-
 protected:
   void RecreateItems();
 
 private:
   DigitallyImportedServiceBase* service_;
-  QImage icon_;
 };
 
 #endif // DIGITALLYIMPORTEDSEARCHPROVIDER_H

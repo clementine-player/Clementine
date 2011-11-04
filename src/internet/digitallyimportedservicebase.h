@@ -18,6 +18,7 @@
 #ifndef DIGITALLYIMPORTEDSERVICEBASE_H
 #define DIGITALLYIMPORTEDSERVICEBASE_H
 
+#include "digitallyimportedclient.h"
 #include "internetservice.h"
 
 #include <boost/scoped_ptr.hpp>
@@ -57,19 +58,10 @@ public:
   const QString& url_scheme() const { return url_scheme_; }
   const QString& api_service_name() const { return api_service_name_; }
 
-  // Public for the global search provider.
-  struct Stream {
-    int id_;
-    QString key_;
-    QString name_;
-    QString description_;
-
-    bool operator <(const Stream& other) const { return name_ < other.name_; }
-  };
-  typedef QList<Stream> StreamList;
-
-  bool IsStreamListStale() const;
-  StreamList Streams();
+  bool IsChannelListStale() const;
+  DigitallyImportedClient::ChannelList Channels();
+  void SongFromChannel(const DigitallyImportedClient::Channel& channel,
+                       Song* song) const;
 
 signals:
   void StreamsChanged();
@@ -90,13 +82,13 @@ private slots:
   void Homepage();
   void ForceRefreshStreams();
   void RefreshStreams();
-  void RefreshStreamsFinished();
+  void RefreshStreamsFinished(QNetworkReply* reply, int task_id);
   void ShowSettingsDialog();
 
 private:
   void PopulateStreams();
-  StreamList LoadStreams() const;
-  void SaveStreams(const StreamList& streams);
+  DigitallyImportedClient::ChannelList LoadChannels() const;
+  void SaveChannels(const DigitallyImportedClient::ChannelList& streams);
 
   void LoadStation(const QString& key);
 
@@ -122,15 +114,13 @@ private:
   QString username_;
   QString listen_hash_;
 
-  int task_id_;
-
   QStandardItem* root_;
 
   boost::scoped_ptr<QMenu> context_menu_;
   QStandardItem* context_item_;
 
-  QList<Stream> saved_streams_;
-  QDateTime last_refreshed_streams_;
+  DigitallyImportedClient::ChannelList saved_channels_;
+  QDateTime last_refreshed_channels_;
 
   DigitallyImportedClient* api_client_;
 };

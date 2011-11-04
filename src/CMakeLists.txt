@@ -370,7 +370,6 @@ set(HEADERS
   engines/gstenginepipeline.h
   engines/gstelementdeleter.h
 
-  globalsearch/librarysearchprovider.h
   globalsearch/globalsearch.h
   globalsearch/globalsearchpopup.h
   globalsearch/globalsearchsettingspage.h

@@ -137,3 +137,7 @@ namespace {
 void SearchProvider::SortSongs(SongList* list) {
   qStableSort(list->begin(), list->end(), SortSongsCompare);
 }
+
+void SearchProvider::LoadArtAsync(int id, const Result& result) {
+  emit ArtLoaded(id, QImage());
+}

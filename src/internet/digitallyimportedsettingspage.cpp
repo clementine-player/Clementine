@@ -61,6 +61,8 @@ void DigitallyImportedSettingsPage::Login() {
 }
 
 void DigitallyImportedSettingsPage::LoginFinished(QNetworkReply* reply) {
+  reply->deleteLater();
+
   DigitallyImportedClient::AuthReply result = client_->ParseAuthReply(reply);
 
   QString name = QString("%1 %2").arg(result.first_name_, result.last_name_);

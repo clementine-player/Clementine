@@ -20,9 +20,12 @@
 
 #include <QDateTime>
 #include <QObject>
+#include <QSettings>
+#include <QUrl>
 
 class QNetworkAccessManager;
 class QNetworkReply;
+class QNetworkRequest;
 
 class DigitallyImportedClient : public QObject {
   Q_OBJECT
@@ -33,6 +36,7 @@ public:
   static const char* kApiUsername;
   static const char* kApiPassword;
   static const char* kAuthUrl;
+  static const char* kChannelListUrl;
 
   struct AuthReply {
     bool success_;
@@ -47,8 +51,29 @@ public:
     QString listen_hash_;
   };
 
+  struct Channel {
+    QUrl art_url_;
+
+    QString director_;
+    QString description_;
+    QString name_;
+    QString key_;
+
+    void Save(QSettings* s) const;
+    void Load(const QSettings& s);
+
+    bool operator <(const Channel& other) const { return name_ < other.name_; }
+  };
+  typedef QList<Channel> ChannelList;
+
   QNetworkReply* Auth(const QString& username, const QString& password);
   AuthReply ParseAuthReply(QNetworkReply* reply) const;
+
+  QNetworkReply* GetChannelList();
+  ChannelList ParseChannelList(QNetworkReply* reply) const;
+
+private:
+  void SetAuthorisationHeader(QNetworkRequest* req) const;
 
 private:
   QNetworkAccessManager* network_;

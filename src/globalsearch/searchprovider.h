@@ -75,7 +75,13 @@ public:
     // If a third-party application is making art requests over dbus and has
     // to get all the art it can before showing results to the user, it might
     // not load art from this provider.
-    ArtIsProbablyRemote = 0x04
+    ArtIsProbablyRemote = 0x04,
+
+    // Indicates the art URL (or filename) for each result is stored in the
+    // normal place in the song metadata.  LoadArtAsync will never be called and
+    // WantsSerialisedArtQueries and ArtIsProbablyRemote will be ignored if
+    // they are set as well.  The GlobalSearch engine will load the art itself.
+    ArtIsInSongMetadata = 0x08
   };
   Q_DECLARE_FLAGS(Hints, Hint)
 
@@ -87,6 +93,7 @@ public:
   bool wants_delayed_queries() const { return hints() & WantsDelayedQueries; }
   bool wants_serialised_art() const { return hints() & WantsSerialisedArtQueries; }
   bool art_is_probably_remote() const { return hints() & ArtIsProbablyRemote; }
+  bool art_is_in_song_metadata() const { return hints() & ArtIsInSongMetadata; }
 
   // Starts a search.  Must emit ResultsAvailable zero or more times and then
   // SearchFinished exactly once, using this ID.
@@ -94,7 +101,7 @@ public:
 
   // Starts loading an icon for a result that was previously emitted by
   // ResultsAvailable.  Must emit ArtLoaded exactly once with this ID.
-  virtual void LoadArtAsync(int id, const Result& result) = 0;
+  virtual void LoadArtAsync(int id, const Result& result);
 
   // Starts loading tracks for a result that was previously emitted by
   // ResultsAvailable.  Must emit TracksLoaded exactly once with this ID.

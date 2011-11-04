@@ -22,7 +22,10 @@
 #include <QPixmapCache>
 
 #include "searchprovider.h"
+#include "core/backgroundthread.h"
 
+
+class AlbumCoverLoader;
 
 class GlobalSearch : public QObject {
   Q_OBJECT
@@ -74,10 +77,12 @@ private slots:
   void SearchFinishedSlot(int id);
 
   void ArtLoadedSlot(int id, const QImage& image);
+  void AlbumArtLoaded(quint64 id, const QImage& image);
 
   void ProviderDestroyedSlot(QObject* object);
 
 private:
+  void HandleLoadedArt(int id, const QImage& image, SearchProvider* provider);
   void TakeNextQueuedArt(SearchProvider* provider);
   QString PixmapCacheKey(const SearchProvider::Result& result) const;
 
@@ -111,6 +116,10 @@ private:
   QMap<int, QString> pending_art_searches_;
 
   QMap<QString, bool> providers_state_preference_;
+
+  // Used for providers with ArtIsInSongMetadata set.
+  BackgroundThread<AlbumCoverLoader>* cover_loader_;
+  QMap<quint64, int> cover_loader_tasks_;
 };
 
 #endif // GLOBALSEARCH_H
