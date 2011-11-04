@@ -24,7 +24,7 @@ DigitallyImportedSearchProvider::DigitallyImportedSearchProvider(
     : SimpleSearchProvider(parent),
       service_(service)
 {
-  Init(service_->name(), service->url_scheme(), service_->icon(),
+  Init(service_->name(), service->api_service_name(), service_->icon(),
        ArtIsInSongMetadata);
 
   set_safe_words(QStringList() << "sky.fm" << "skyfm" << "di.fm" << "difm"

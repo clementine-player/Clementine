@@ -15,7 +15,7 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "digitallyimportedservice.h"
+#include "digitallyimportedservicebase.h"
 #include "icecastservice.h"
 #include "jamendoservice.h"
 #include "magnatuneservice.h"
@@ -23,7 +23,6 @@
 #include "internetmodel.h"
 #include "internetservice.h"
 #include "savedradio.h"
-#include "skyfmservice.h"
 #include "somafmservice.h"
 #include "groovesharkservice.h"
 #include "core/logging.h"
@@ -66,6 +65,7 @@ InternetModel::InternetModel(BackgroundThread<Database>* db_thread,
 #ifdef HAVE_LIBLASTFM
   AddService(new LastFMService(this));
 #endif
+  AddService(new GroovesharkService(this));
   AddService(new MagnatuneService(this));
   AddService(new SavedRadio(this));
   AddService(new SkyFmService(this));
@@ -73,7 +73,6 @@ InternetModel::InternetModel(BackgroundThread<Database>* db_thread,
 #ifdef HAVE_SPOTIFY
   AddService(new SpotifyService(this));
 #endif
-  AddService(new GroovesharkService(this));
 }
 
 void InternetModel::AddService(InternetService *service) {

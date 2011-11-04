@@ -30,7 +30,7 @@ DigitallyImportedUrlHandler::DigitallyImportedUrlHandler(DigitallyImportedServic
 }
 
 QString DigitallyImportedUrlHandler::scheme() const {
-  return service_->url_scheme_;
+  return service_->api_service_name();
 }
 
 UrlHandler::LoadResult DigitallyImportedUrlHandler::StartLoading(const QUrl& url) {

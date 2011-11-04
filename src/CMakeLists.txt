@@ -133,7 +133,6 @@ set(SOURCES
   globalsearch/tooltipresultwidget.cpp
 
   internet/digitallyimportedclient.cpp
-  internet/digitallyimportedservice.cpp
   internet/digitallyimportedservicebase.cpp
   internet/digitallyimportedsettingspage.cpp
   internet/digitallyimportedurlhandler.cpp
@@ -159,7 +158,6 @@ set(SOURCES
   internet/magnatuneservice.cpp
   internet/magnatuneurlhandler.cpp
   internet/savedradio.cpp
-  internet/skyfmservice.cpp
   internet/somafmservice.cpp
   internet/somafmurlhandler.cpp
 
@@ -403,7 +401,6 @@ set(HEADERS
   internet/magnatunesettingspage.h
   internet/magnatuneservice.h
   internet/savedradio.h
-  internet/skyfmservice.h
   internet/somafmservice.h
   internet/somafmurlhandler.h
 
