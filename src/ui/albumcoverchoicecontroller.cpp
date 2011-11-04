@@ -89,7 +89,7 @@ void AlbumCoverChoiceController::SetLibrary(LibraryBackend* library) {
 
 QString AlbumCoverChoiceController::LoadCoverFromFile(Song* song) {
   QString cover = QFileDialog::getOpenFileName(
-      this, tr("Choose manual cover"), GetInitialPathForFileDialog(*song, QString()),
+      this, tr("Load cover from disk"), GetInitialPathForFileDialog(*song, QString()),
       tr(kLoadImageFileFilter) + ";;" + tr(kAllFilesFilter));
 
   if (cover.isNull())

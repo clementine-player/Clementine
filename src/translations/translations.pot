@@ -111,17 +111,17 @@ msgid "%L1 total plays"
 msgstr ""
 
 #: transcoder/transcodedialog.cpp:198
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n failed"
 msgstr ""
 
 #: transcoder/transcodedialog.cpp:193
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n finished"
 msgstr ""
 
 #: transcoder/transcodedialog.cpp:188
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n remaining"
 msgstr ""
 
@@ -347,6 +347,10 @@ msgstr ""
 msgid "Add directory..."
 msgstr ""
 
+#: ui/mainwindow.cpp:1574
+msgid "Add file"
+msgstr ""
+
 #: ../bin/src/ui_mainwindow.h:662
 msgid "Add file..."
 msgstr ""
@@ -361,10 +365,6 @@ msgstr ""
 
 #: ../bin/src/ui_mainwindow.h:677
 msgid "Add folder..."
-msgstr ""
-
-#: ui/mainwindow.cpp:1574
-msgid "Add media"
 msgstr ""
 
 #: ../bin/src/ui_librarysettingspage.h:159
@@ -849,10 +849,6 @@ msgstr ""
 msgid "Choose how the playlist is sorted and how many songs it will contain."
 msgstr ""
 
-#: ui/albumcoverchoicecontroller.cpp:92
-msgid "Choose manual cover"
-msgstr ""
-
 #: ../bin/src/ui_songinfosettingspage.h:188
 msgid ""
 "Choose the websites you want Clementine to use when searching for lyrics."
@@ -1007,7 +1003,7 @@ msgstr ""
 msgid "Configure library..."
 msgstr ""
 
-#: internet/digitallyimportedservicebase.cpp:220
+#: internet/digitallyimportedservicebase.cpp:219
 #: ../bin/src/ui_globalsearchsettingspage.h:167
 msgid "Configure..."
 msgstr ""
@@ -1597,7 +1593,7 @@ msgstr ""
 msgid "Error loading %1"
 msgstr ""
 
-#: internet/digitallyimportedservicebase.cpp:242
+#: internet/digitallyimportedservicebase.cpp:241
 #: internet/digitallyimportedurlhandler.cpp:73
 msgid "Error loading di.fm playlist"
 msgstr ""
@@ -1858,7 +1854,7 @@ msgstr ""
 msgid "Getting channels"
 msgstr ""
 
-#: internet/digitallyimportedservicebase.cpp:122
+#: internet/digitallyimportedservicebase.cpp:121
 msgid "Getting streams"
 msgstr ""
 
@@ -2293,6 +2289,10 @@ msgstr ""
 
 #: ui/albumcoverchoicecontroller.cpp:60
 msgid "Load cover from URL..."
+msgstr ""
+
+#: ui/albumcoverchoicecontroller.cpp:92
+msgid "Load cover from disk"
 msgstr ""
 
 #: ui/albumcoverchoicecontroller.cpp:58
@@ -2736,7 +2736,7 @@ msgstr ""
 msgid "Only show the first"
 msgstr ""
 
-#: internet/digitallyimportedservicebase.cpp:213
+#: internet/digitallyimportedservicebase.cpp:212
 #, qt-format
 msgid "Open %1 in browser"
 msgstr ""
@@ -3146,7 +3146,7 @@ msgstr ""
 msgid "Refresh station list"
 msgstr ""
 
-#: internet/digitallyimportedservicebase.cpp:216
+#: internet/digitallyimportedservicebase.cpp:215
 msgid "Refresh streams"
 msgstr ""
 
@@ -4471,7 +4471,7 @@ msgid "Zero"
 msgstr ""
 
 #: playlist/playlistundocommands.cpp:37
-#, c-format, qt-plural-format
+#, c-format
 msgid "add %n songs"
 msgstr ""
 
@@ -4591,7 +4591,7 @@ msgid "press enter"
 msgstr ""
 
 #: playlist/playlistundocommands.cpp:65 playlist/playlistundocommands.cpp:88
-#, c-format, qt-plural-format
+#, c-format
 msgid "remove %n songs"
 msgstr ""
 

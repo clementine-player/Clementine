@@ -1571,7 +1571,7 @@ void MainWindow::AddFile() {
 
   // Show dialog
   QStringList file_names = QFileDialog::getOpenFileNames(
-      this, tr("Add media"), directory,
+      this, tr("Add file"), directory,
       QString("%1;;%2;;%3").arg(tr(kMusicFilterSpec), parser.filters(),
                                 tr(kAllFilesFilterSpec)));
   if (file_names.isEmpty())
