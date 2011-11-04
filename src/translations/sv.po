@@ -9,40 +9,40 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2011-11-02 13:10+0000\n"
-"Last-Translator: karoko <robin@karoko.se>\n"
+"PO-Revision-Date: 2011-11-03 17:56+0000\n"
+"Last-Translator: clementinebuildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: sv\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsaac.h:130
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsmp3.h:195
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsspeex.h:220
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsspeex.h:223
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsvorbis.h:205
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsvorbis.h:208
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsvorbis.h:211
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionswma.h:80
+#: ../bin/src/ui_transcoderoptionsaac.h:130
+#: ../bin/src/ui_transcoderoptionsmp3.h:195
+#: ../bin/src/ui_transcoderoptionsspeex.h:220
+#: ../bin/src/ui_transcoderoptionsspeex.h:223
+#: ../bin/src/ui_transcoderoptionsvorbis.h:205
+#: ../bin/src/ui_transcoderoptionsvorbis.h:208
+#: ../bin/src/ui_transcoderoptionsvorbis.h:211
+#: ../bin/src/ui_transcoderoptionswma.h:80
 msgid " kbps"
 msgstr " kbps"
 
-#: /home/arno/clementine/clementine-player/src/ui_songinfosettingspage.h:186
-#: /home/arno/clementine/clementine-player/src/ui_playbacksettingspage.h:265
-#: /home/arno/clementine/clementine-player/src/ui_playbacksettingspage.h:285
+#: ../bin/src/ui_songinfosettingspage.h:186
+#: ../bin/src/ui_playbacksettingspage.h:265
+#: ../bin/src/ui_playbacksettingspage.h:285
 msgid " ms"
 msgstr " ms"
 
-#: /home/arno/clementine/clementine-player/src/ui_songinfosettingspage.h:182
+#: ../bin/src/ui_songinfosettingspage.h:182
 msgid " pt"
 msgstr " pt"
 
-#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:404
-#: /home/arno/clementine/clementine-player/src/ui_visualisationselector.h:116
+#: ../bin/src/ui_notificationssettingspage.h:404
+#: ../bin/src/ui_visualisationselector.h:116
 msgid " seconds"
 msgstr " sekunder"
 
-#: /home/arno/clementine/clementine-player/src/ui_querysortpage.h:143
+#: ../bin/src/ui_querysortpage.h:143
 msgid " songs"
 msgstr " låtar"
 
@@ -118,17 +118,17 @@ msgid "%L1 total plays"
 msgstr "%L1 totala uppspelningar"
 
 #: transcoder/transcodedialog.cpp:198
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n misslyckades"
 
 #: transcoder/transcodedialog.cpp:193
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n färdig"
 
 #: transcoder/transcodedialog.cpp:188
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n återstår"
 
@@ -140,15 +140,15 @@ msgstr "&Justera text"
 msgid "&Center"
 msgstr "&Centrera"
 
-#: /home/arno/clementine/clementine-player/src/ui_globalshortcutssettingspage.h:178
+#: ../bin/src/ui_globalshortcutssettingspage.h:178
 msgid "&Custom"
 msgstr "A&npassad"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:702
+#: ../bin/src/ui_mainwindow.h:702
 msgid "&Extras"
 msgstr "Extrafunktioner"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:701
+#: ../bin/src/ui_mainwindow.h:701
 msgid "&Help"
 msgstr "Hjälp"
 
@@ -165,23 +165,23 @@ msgstr "Dölj..."
 msgid "&Left"
 msgstr "&Vänster"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:699
+#: ../bin/src/ui_mainwindow.h:699
 msgid "&Music"
 msgstr "Musik"
 
-#: /home/arno/clementine/clementine-player/src/ui_globalshortcutssettingspage.h:176
+#: ../bin/src/ui_globalshortcutssettingspage.h:176
 msgid "&None"
 msgstr "I&nga"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:700
+#: ../bin/src/ui_mainwindow.h:700
 msgid "&Playlist"
 msgstr "Spellista"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:637
+#: ../bin/src/ui_mainwindow.h:637
 msgid "&Quit"
 msgstr "A&vsluta"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:673
+#: ../bin/src/ui_mainwindow.h:673
 msgid "&Repeat mode"
 msgstr "Upprepningsläge"
 
@@ -189,7 +189,7 @@ msgstr "Upprepningsläge"
 msgid "&Right"
 msgstr "&Höger"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:672
+#: ../bin/src/ui_mainwindow.h:672
 msgid "&Shuffle mode"
 msgstr "Blandningsläge"
 
@@ -197,7 +197,7 @@ msgstr "Blandningsläge"
 msgid "&Stretch columns to fit window"
 msgstr "Justera kolumner så de passar fönstret"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:703
+#: ../bin/src/ui_mainwindow.h:703
 msgid "&Tools"
 msgstr "Verktyg"
 
@@ -205,10 +205,8 @@ msgstr "Verktyg"
 msgid "(different across multiple songs)"
 msgstr "(olika på flera låtar)"
 
-#: /home/arno/clementine/clementine-player/src/ui_globalsearchpopup.h:104
-#: /home/arno/clementine/clementine-player/src/ui_globalsearchpopup.h:105
-#: /home/arno/clementine/clementine-player/src/ui_globalsearchpopup.h:106
-#: /home/arno/clementine/clementine-player/src/ui_globalsearchpopup.h:107
+#: ../bin/src/ui_globalsearchpopup.h:104 ../bin/src/ui_globalsearchpopup.h:105
+#: ../bin/src/ui_globalsearchpopup.h:106 ../bin/src/ui_globalsearchpopup.h:107
 msgid "..."
 msgstr "..."
 
@@ -216,8 +214,7 @@ msgstr "..."
 msgid "...and all the Amarok contributors"
 msgstr "... och alla Amarok-bidragsgivare"
 
-#: /home/arno/clementine/clementine-player/src/ui_trackslider.h:70
-#: /home/arno/clementine/clementine-player/src/ui_trackslider.h:74
+#: ../bin/src/ui_trackslider.h:70 ../bin/src/ui_trackslider.h:74
 msgid "0:00:00"
 msgstr "0:00:00"
 
@@ -229,11 +226,11 @@ msgstr "1 dag"
 msgid "1 track"
 msgstr "1 spår"
 
-#: /home/arno/clementine/clementine-player/src/ui_magnatunedownloaddialog.h:143
+#: ../bin/src/ui_magnatunedownloaddialog.h:143
 msgid "128K MP3"
 msgstr "128k MP3"
 
-#: /home/arno/clementine/clementine-player/src/ui_magnatunesettingspage.h:170
+#: ../bin/src/ui_magnatunesettingspage.h:170
 msgid "128k MP3"
 msgstr "128k MP3"
 
@@ -241,11 +238,11 @@ msgstr "128k MP3"
 msgid "50 random tracks"
 msgstr "50 slumpmässiga spår"
 
-#: /home/arno/clementine/clementine-player/src/ui_digitallyimportedsettingspage.h:136
+#: ../bin/src/ui_digitallyimportedsettingspage.h:165
 msgid "<a href=\"http://www.di.fm/premium/\">Upgrade to Premium now</a>"
 msgstr "<a href=\"http://www.di.fm/premium/\">Uppgradera till Premium nu</a>"
 
-#: /home/arno/clementine/clementine-player/src/ui_organisedialog.h:199
+#: ../bin/src/ui_organisedialog.h:199
 msgid ""
 "<p>Tokens start with %, for example: %artist %album %title </p>\n"
 "\n"
@@ -283,21 +280,21 @@ msgstr ""
 msgid "A-Z"
 msgstr "A-Ö"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcodersettingspage.h:163
+#: ../bin/src/ui_transcodersettingspage.h:163
 msgid "AAC"
 msgstr "AAC"
 
-#: /home/arno/clementine/clementine-player/src/ui_digitallyimportedsettingspage.h:145
-msgid "AAC 128k (Premium only)"
-msgstr "AAC 128k (Premium endast)"
+#: ../bin/src/ui_digitallyimportedsettingspage.h:179
+msgid "AAC 128k"
+msgstr ""
 
-#: /home/arno/clementine/clementine-player/src/ui_digitallyimportedsettingspage.h:143
+#: ../bin/src/ui_digitallyimportedsettingspage.h:171
 msgid "AAC 32k"
 msgstr "AAC 32k"
 
-#: /home/arno/clementine/clementine-player/src/ui_digitallyimportedsettingspage.h:144
-msgid "AAC 64k (Premium only)"
-msgstr "AAC 64k (Premium endast)"
+#: ../bin/src/ui_digitallyimportedsettingspage.h:178
+msgid "AAC 64k"
+msgstr ""
 
 #: core/song.cpp:139
 msgid "AIFF"
@@ -312,27 +309,27 @@ msgstr "ÄRAD VARE HYPNOTOAD"
 msgid "About %1"
 msgstr "Om %1"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:658
+#: ../bin/src/ui_mainwindow.h:658
 msgid "About Clementine..."
 msgstr "Om Clementine..."
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:691
+#: ../bin/src/ui_mainwindow.h:691
 msgid "About Qt..."
 msgstr "Om Qt..."
 
-#: /home/arno/clementine/clementine-player/src/ui_groovesharksettingspage.h:113
-#: /home/arno/clementine/clementine-player/src/ui_magnatunesettingspage.h:151
-#: /home/arno/clementine/clementine-player/src/ui_spotifysettingspage.h:179
-#: /home/arno/clementine/clementine-player/src/ui_remotesettingspage.h:203
-#: /home/arno/clementine/clementine-player/src/ui_lastfmsettingspage.h:145
+#: ../bin/src/ui_groovesharksettingspage.h:113
+#: ../bin/src/ui_magnatunesettingspage.h:151
+#: ../bin/src/ui_spotifysettingspage.h:179
+#: ../bin/src/ui_remotesettingspage.h:203
+#: ../bin/src/ui_lastfmsettingspage.h:145
 msgid "Account details"
 msgstr "Kontodetaljer"
 
-#: /home/arno/clementine/clementine-player/src/ui_digitallyimportedsettingspage.h:133
+#: ../bin/src/ui_digitallyimportedsettingspage.h:161
 msgid "Account details (Premium)"
 msgstr "Kontoinformation (Premium)"
 
-#: /home/arno/clementine/clementine-player/src/ui_wiimotesettingspage.h:191
+#: ../bin/src/ui_wiimotesettingspage.h:191
 msgid "Action"
 msgstr "Åtgärd"
 
@@ -340,15 +337,15 @@ msgstr "Åtgärd"
 msgid "Active/deactive Wiiremote"
 msgstr "Aktivera/inaktivera Wiiremote"
 
-#: /home/arno/clementine/clementine-player/src/ui_addstreamdialog.h:113
+#: ../bin/src/ui_addstreamdialog.h:113
 msgid "Add Stream"
 msgstr "Lägg till ström"
 
-#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:394
+#: ../bin/src/ui_notificationssettingspage.h:394
 msgid "Add a new line if supported by the notification type"
 msgstr "Lägg till en ny rad om det stöds av notifieringstypen"
 
-#: /home/arno/clementine/clementine-player/src/ui_wiimotesettingspage.h:193
+#: ../bin/src/ui_wiimotesettingspage.h:193
 msgid "Add action"
 msgstr "Lägg till åtgärd"
 
@@ -364,7 +361,7 @@ msgstr "Lägg till en annan ström..."
 msgid "Add directory..."
 msgstr "Lägg till katalog..."
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:662
+#: ../bin/src/ui_mainwindow.h:662
 msgid "Add file..."
 msgstr "Lägg till fil..."
 
@@ -376,7 +373,7 @@ msgstr "Lägg till filer för omkodning"
 msgid "Add folder"
 msgstr "Lägg till mapp"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:677
+#: ../bin/src/ui_mainwindow.h:677
 msgid "Add folder..."
 msgstr "Lägg till mapp..."
 
@@ -384,7 +381,7 @@ msgstr "Lägg till mapp..."
 msgid "Add media"
 msgstr "Lägg till media"
 
-#: /home/arno/clementine/clementine-player/src/ui_librarysettingspage.h:159
+#: ../bin/src/ui_librarysettingspage.h:159
 msgid "Add new folder..."
 msgstr "Lägg till mapp..."
 
@@ -392,55 +389,55 @@ msgstr "Lägg till mapp..."
 msgid "Add search term"
 msgstr "Lägg till sökterm"
 
-#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:361
+#: ../bin/src/ui_notificationssettingspage.h:361
 msgid "Add song album tag"
 msgstr "Lägg en albumetikett till låten"
 
-#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:367
+#: ../bin/src/ui_notificationssettingspage.h:367
 msgid "Add song albumartist tag"
 msgstr "Lägg en albumartistetikett till låten"
 
-#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:358
+#: ../bin/src/ui_notificationssettingspage.h:358
 msgid "Add song artist tag"
 msgstr "Lägg till etikett för låtens artist"
 
-#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:373
+#: ../bin/src/ui_notificationssettingspage.h:373
 msgid "Add song composer tag"
 msgstr "Lägg till etikett för låtens kompositör"
 
-#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:376
+#: ../bin/src/ui_notificationssettingspage.h:376
 msgid "Add song disc tag"
 msgstr "Lägg till etikett för skivnummer"
 
-#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:382
+#: ../bin/src/ui_notificationssettingspage.h:382
 msgid "Add song genre tag"
 msgstr "Lägg till etikett för genre"
 
-#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:385
+#: ../bin/src/ui_notificationssettingspage.h:385
 msgid "Add song length tag"
 msgstr "Lägg till etikett för låtens längd"
 
-#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:388
+#: ../bin/src/ui_notificationssettingspage.h:388
 msgid "Add song play count"
 msgstr "Lägg till antal uppspelningar"
 
-#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:391
+#: ../bin/src/ui_notificationssettingspage.h:391
 msgid "Add song skip count"
 msgstr "Lägg till antal överhoppningar"
 
-#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:364
+#: ../bin/src/ui_notificationssettingspage.h:364
 msgid "Add song title tag"
 msgstr "Lägg till etikett för låtens titel"
 
-#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:379
+#: ../bin/src/ui_notificationssettingspage.h:379
 msgid "Add song track tag"
 msgstr "Lägg till etikett för spårnummer"
 
-#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:370
+#: ../bin/src/ui_notificationssettingspage.h:370
 msgid "Add song year tag"
 msgstr "Lägg till etikett för år"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:664
+#: ../bin/src/ui_mainwindow.h:664
 msgid "Add stream..."
 msgstr "Lägg till ström..."
 
@@ -449,69 +446,66 @@ msgid "Add to another playlist"
 msgstr "Lägg till i en annan spellista"
 
 #: globalsearch/globalsearchwidget.cpp:95
-#: /home/arno/clementine/clementine-player/src/ui_albumcovermanager.h:152
+#: ../bin/src/ui_albumcovermanager.h:152
 msgid "Add to playlist"
 msgstr "Lägg till i spellistan"
 
-#: /home/arno/clementine/clementine-player/src/ui_behavioursettingspage.h:204
+#: ../bin/src/ui_behavioursettingspage.h:204
 msgid "Add to the queue"
 msgstr "Lägg till kön"
 
-#: /home/arno/clementine/clementine-player/src/ui_wiimoteshortcutgrabber.h:123
+#: ../bin/src/ui_wiimoteshortcutgrabber.h:123
 msgid "Add wiimotedev action"
 msgstr "Lägg till Wiimotedev-åtgärd"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcodedialog.h:206
+#: ../bin/src/ui_transcodedialog.h:206
 msgid "Add..."
 msgstr "Lägg till..."
 
-#: /home/arno/clementine/clementine-player/src/ui_libraryfilterwidget.h:123
+#: ../bin/src/ui_libraryfilterwidget.h:123
 msgid "Added this month"
 msgstr "Tillagda denna månad"
 
-#: /home/arno/clementine/clementine-player/src/ui_libraryfilterwidget.h:117
+#: ../bin/src/ui_libraryfilterwidget.h:117
 msgid "Added this week"
 msgstr "Tillagda denna vecka"
 
-#: /home/arno/clementine/clementine-player/src/ui_libraryfilterwidget.h:122
+#: ../bin/src/ui_libraryfilterwidget.h:122
 msgid "Added this year"
 msgstr "Tillagda i år"
 
-#: /home/arno/clementine/clementine-player/src/ui_libraryfilterwidget.h:116
+#: ../bin/src/ui_libraryfilterwidget.h:116
 msgid "Added today"
 msgstr "Tillagda idag"
 
-#: /home/arno/clementine/clementine-player/src/ui_libraryfilterwidget.h:118
-#: /home/arno/clementine/clementine-player/src/ui_libraryfilterwidget.h:120
+#: ../bin/src/ui_libraryfilterwidget.h:118
+#: ../bin/src/ui_libraryfilterwidget.h:120
 msgid "Added within three months"
 msgstr "Tillagda senaste tre månaderna"
 
-#: /home/arno/clementine/clementine-player/src/ui_libraryfilterwidget.h:130
+#: ../bin/src/ui_libraryfilterwidget.h:130
 msgid "Advanced grouping..."
 msgstr "Avancerad gruppering..."
 
-#: /home/arno/clementine/clementine-player/src/ui_organisedialog.h:190
+#: ../bin/src/ui_organisedialog.h:190
 msgid "After copying..."
 msgstr "Efter kopiering..."
 
 #: playlist/playlist.cpp:1081 ui/organisedialog.cpp:52
-#: ui/qtsystemtrayicon.cpp:252
-#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:129
-#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:142
-#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:155
-#: /home/arno/clementine/clementine-player/src/ui_albumcoversearcher.h:110
-#: /home/arno/clementine/clementine-player/src/ui_albumcoversearcher.h:112
-#: /home/arno/clementine/clementine-player/src/ui_edittagdialog.h:656
-#: /home/arno/clementine/clementine-player/src/ui_trackselectiondialog.h:209
+#: ui/qtsystemtrayicon.cpp:252 ../bin/src/ui_groupbydialog.h:129
+#: ../bin/src/ui_groupbydialog.h:142 ../bin/src/ui_groupbydialog.h:155
+#: ../bin/src/ui_albumcoversearcher.h:110
+#: ../bin/src/ui_albumcoversearcher.h:112 ../bin/src/ui_edittagdialog.h:656
+#: ../bin/src/ui_trackselectiondialog.h:209
 msgid "Album"
 msgstr "Album"
 
-#: /home/arno/clementine/clementine-player/src/ui_playbacksettingspage.h:272
+#: ../bin/src/ui_playbacksettingspage.h:272
 msgid "Album (ideal loudness for all tracks)"
 msgstr "Album (lämplig ljudstyrka för alla spår)"
 
 #: playlist/playlist.cpp:1087 ui/organisedialog.cpp:55
-#: /home/arno/clementine/clementine-player/src/ui_edittagdialog.h:658
+#: ../bin/src/ui_edittagdialog.h:658
 msgid "Album artist"
 msgstr "Albumartist"
 
@@ -519,9 +513,8 @@ msgstr "Albumartist"
 msgid "Album info on jamendo.com..."
 msgstr "Album information från jamendo.com..."
 
-#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:131
-#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:144
-#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:157
+#: ../bin/src/ui_groupbydialog.h:131 ../bin/src/ui_groupbydialog.h:144
+#: ../bin/src/ui_groupbydialog.h:157
 msgid "Albumartist"
 msgstr "Albumartist"
 
@@ -537,7 +530,7 @@ msgstr "Album utan omslag"
 msgid "All Files (*)"
 msgstr "Alla filer (*)"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:670
+#: ../bin/src/ui_mainwindow.h:670
 msgid "All Glory to the Hypnotoad!"
 msgstr "All Glory to the Hypnotoad!"
 
@@ -566,24 +559,24 @@ msgstr "Alla översättare"
 msgid "All tracks"
 msgstr "Alla spår"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsaac.h:140
+#: ../bin/src/ui_transcoderoptionsaac.h:140
 msgid "Allow mid/side encoding"
 msgstr "Tillåt mellan-/sidokodning"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcodedialog.h:214
+#: ../bin/src/ui_transcodedialog.h:214
 msgid "Alongside the originals"
 msgstr "Tillsammans med originalen"
 
-#: /home/arno/clementine/clementine-player/src/ui_behavioursettingspage.h:188
+#: ../bin/src/ui_behavioursettingspage.h:188
 msgid "Always hide the main window"
 msgstr "Dölj alltid huvudfönstret"
 
-#: /home/arno/clementine/clementine-player/src/ui_behavioursettingspage.h:187
+#: ../bin/src/ui_behavioursettingspage.h:187
 msgid "Always show the main window"
 msgstr "Visa alltid huvudfönstret"
 
-#: /home/arno/clementine/clementine-player/src/ui_behavioursettingspage.h:196
-#: /home/arno/clementine/clementine-player/src/ui_behavioursettingspage.h:210
+#: ../bin/src/ui_behavioursettingspage.h:196
+#: ../bin/src/ui_behavioursettingspage.h:210
 msgid "Always start playing"
 msgstr "Starta alltid att spela"
 
@@ -621,7 +614,7 @@ msgstr "Ett okänt Last.fm-fel uppstod: %1"
 msgid "And:"
 msgstr "Och:"
 
-#: /home/arno/clementine/clementine-player/src/ui_songinfosettingspage.h:180
+#: ../bin/src/ui_songinfosettingspage.h:180
 msgid "Appearance"
 msgstr "Utseende"
 
@@ -634,11 +627,11 @@ msgstr "Lägg till filer/webbadresser till spellistan"
 msgid "Append to current playlist"
 msgstr "Lägg till i den aktuella spellistan"
 
-#: /home/arno/clementine/clementine-player/src/ui_behavioursettingspage.h:201
+#: ../bin/src/ui_behavioursettingspage.h:201
 msgid "Append to the playlist"
 msgstr "Lägg till i spellistan"
 
-#: /home/arno/clementine/clementine-player/src/ui_playbacksettingspage.h:275
+#: ../bin/src/ui_playbacksettingspage.h:275
 msgid "Apply compression to prevent clipping"
 msgstr "Tillämpa komprimering för att förhindra distorsion"
 
@@ -652,15 +645,12 @@ msgid "Are you sure you want to reset this song's statistics?"
 msgstr "Är du säker på att du vill återställa den här låtens statistik?"
 
 #: playlist/playlist.cpp:1080 ui/organisedialog.cpp:53
-#: ui/qtsystemtrayicon.cpp:250
-#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:130
-#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:143
-#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:156
-#: /home/arno/clementine/clementine-player/src/ui_albumcoversearcher.h:106
-#: /home/arno/clementine/clementine-player/src/ui_albumcoversearcher.h:108
-#: /home/arno/clementine/clementine-player/src/ui_edittagdialog.h:654
-#: /home/arno/clementine/clementine-player/src/ui_trackselectiondialog.h:210
-#: /home/arno/clementine/clementine-player/src/ui_lastfmstationdialog.h:96
+#: ui/qtsystemtrayicon.cpp:250 ../bin/src/ui_groupbydialog.h:130
+#: ../bin/src/ui_groupbydialog.h:143 ../bin/src/ui_groupbydialog.h:156
+#: ../bin/src/ui_albumcoversearcher.h:106
+#: ../bin/src/ui_albumcoversearcher.h:108 ../bin/src/ui_edittagdialog.h:654
+#: ../bin/src/ui_trackselectiondialog.h:210
+#: ../bin/src/ui_lastfmstationdialog.h:96
 msgid "Artist"
 msgstr "Artist"
 
@@ -680,18 +670,15 @@ msgstr "Artist-taggar"
 msgid "Artist's initial"
 msgstr "Artistens initialer"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcodedialog.h:209
+#: ../bin/src/ui_transcodedialog.h:209
 msgid "Audio format"
 msgstr "Ljudformat"
 
-#: /home/arno/clementine/clementine-player/src/ui_digitallyimportedsettingspage.h:138
-msgid "Audio type"
-msgstr "Ljudtyp"
-
-#: /home/arno/clementine/clementine-player/src/ui_remotesettingspage.h:210
+#: ../bin/src/ui_remotesettingspage.h:210
 msgid "Authenticating..."
 msgstr "Kontrollerar behörighet..."
 
+#: internet/digitallyimportedsettingspage.cpp:80
 #: internet/magnatunesettingspage.cpp:113 internet/lastfmservice.cpp:434
 #: internet/lastfmsettingspage.cpp:79 remote/remotesettingspage.cpp:113
 msgid "Authentication failed"
@@ -701,15 +688,15 @@ msgstr "Behörighetskontroll misslyckades"
 msgid "Authors"
 msgstr "Upphovsmän"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsspeex.h:227
+#: ../bin/src/ui_transcoderoptionsspeex.h:227
 msgid "Auto"
 msgstr "Auto"
 
-#: /home/arno/clementine/clementine-player/src/ui_librarysettingspage.h:161
+#: ../bin/src/ui_librarysettingspage.h:161
 msgid "Automatic updating"
 msgstr "Automatisk uppdatering"
 
-#: /home/arno/clementine/clementine-player/src/ui_librarysettingspage.h:170
+#: ../bin/src/ui_librarysettingspage.h:170
 msgid "Automatically open single categories in the library tree"
 msgstr "Öppna enstaka kategorier i biblioteksträdet automatiskt"
 
@@ -717,7 +704,7 @@ msgstr "Öppna enstaka kategorier i biblioteksträdet automatiskt"
 msgid "Available"
 msgstr "Tillgängliga"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsspeex.h:221
+#: ../bin/src/ui_transcoderoptionsspeex.h:221
 msgid "Average bitrate"
 msgstr "Genomsnittlig bithastighet"
 
@@ -726,23 +713,23 @@ msgid "Average image size"
 msgstr "Genomsnittlig bildstorlek"
 
 #: playlist/playlist.cpp:1096 ui/organisedialog.cpp:59
-#: /home/arno/clementine/clementine-player/src/ui_edittagdialog.h:638
+#: ../bin/src/ui_edittagdialog.h:638
 msgid "BPM"
 msgstr "BPM"
 
-#: /home/arno/clementine/clementine-player/src/ui_backgroundstreamssettingspage.h:56
+#: ../bin/src/ui_backgroundstreamssettingspage.h:56
 msgid "Background Streams"
 msgstr "Bakgrundsströmmar"
 
-#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:418
+#: ../bin/src/ui_notificationssettingspage.h:418
 msgid "Background color"
 msgstr "Bakgrundsfärg"
 
-#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:417
+#: ../bin/src/ui_notificationssettingspage.h:417
 msgid "Background opacity"
 msgstr "Bakgrundsopacitet"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:643
+#: ../bin/src/ui_mainwindow.h:643
 msgid "Ban"
 msgstr "Blockera"
 
@@ -750,15 +737,19 @@ msgstr "Blockera"
 msgid "Bar analyzer"
 msgstr "Stapelanalysator"
 
-#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:421
+#: ../bin/src/ui_notificationssettingspage.h:421
 msgid "Basic Blue"
 msgstr "Basblå"
 
-#: /home/arno/clementine/clementine-player/src/ui_behavioursettingspage.h:176
+#: ../bin/src/ui_digitallyimportedsettingspage.h:167
+msgid "Basic audio type"
+msgstr ""
+
+#: ../bin/src/ui_behavioursettingspage.h:176
 msgid "Behavior"
 msgstr "Beteende"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsflac.h:83
+#: ../bin/src/ui_transcoderoptionsflac.h:83
 msgid "Best"
 msgstr "Bästa"
 
@@ -767,16 +758,14 @@ msgstr "Bästa"
 msgid "Biography from %1"
 msgstr "Biografi från %1"
 
-#: playlist/playlist.cpp:1097
-#: /home/arno/clementine/clementine-player/src/ui_edittagdialog.h:640
+#: playlist/playlist.cpp:1097 ../bin/src/ui_edittagdialog.h:640
 msgid "Bit rate"
 msgstr "Bithastighet"
 
-#: ui/organisedialog.cpp:64
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsaac.h:129
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsmp3.h:194
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsspeex.h:218
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionswma.h:79
+#: ui/organisedialog.cpp:64 ../bin/src/ui_transcoderoptionsaac.h:129
+#: ../bin/src/ui_transcoderoptionsmp3.h:194
+#: ../bin/src/ui_transcoderoptionsspeex.h:218
+#: ../bin/src/ui_transcoderoptionswma.h:79
 msgid "Bitrate"
 msgstr "Bitfrekvens"
 
@@ -784,7 +773,7 @@ msgstr "Bitfrekvens"
 msgid "Block analyzer"
 msgstr "Blockanalysator"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsaac.h:141
+#: ../bin/src/ui_transcoderoptionsaac.h:141
 msgid "Block type"
 msgstr "Blocktyp"
 
@@ -792,7 +781,7 @@ msgstr "Blocktyp"
 msgid "Bluetooth MAC Address"
 msgstr "MAC-adress för Bluetooth"
 
-#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:414
+#: ../bin/src/ui_notificationssettingspage.h:414
 msgid "Body"
 msgstr "Brödtext"
 
@@ -800,15 +789,15 @@ msgstr "Brödtext"
 msgid "Boom analyzer"
 msgstr "Boom-analysator"
 
-#: /home/arno/clementine/clementine-player/src/ui_magnatunedownloaddialog.h:146
+#: ../bin/src/ui_magnatunedownloaddialog.h:146
 msgid "Browse..."
 msgstr "Bläddra..."
 
-#: /home/arno/clementine/clementine-player/src/ui_playbacksettingspage.h:284
+#: ../bin/src/ui_playbacksettingspage.h:284
 msgid "Buffer duration"
 msgstr "Längd på buffer"
 
-#: /home/arno/clementine/clementine-player/src/ui_wiimotesettingspage.h:192
+#: ../bin/src/ui_wiimotesettingspage.h:192
 msgid "Buttons"
 msgstr "Knappar"
 
@@ -824,7 +813,7 @@ msgstr "Stöd för CUE-filer"
 msgid "Cancel"
 msgstr "Avbryt"
 
-#: /home/arno/clementine/clementine-player/src/ui_edittagdialog.h:634
+#: ../bin/src/ui_edittagdialog.h:634
 msgid "Change cover art"
 msgstr "Ändra omslag"
 
@@ -836,7 +825,7 @@ msgstr "Ändra typsnittsstorlek"
 msgid "Change repeat mode"
 msgstr "Ändra upprepningsläge"
 
-#: /home/arno/clementine/clementine-player/src/ui_globalshortcutssettingspage.h:179
+#: ../bin/src/ui_globalshortcutssettingspage.h:179
 msgid "Change shortcut..."
 msgstr "Ändra snabbtangent..."
 
@@ -856,19 +845,19 @@ msgstr "Leta efter uppdateringar..."
 msgid "Choose a name for your smart playlist"
 msgstr "Välj ett namn för din smara spellista"
 
-#: /home/arno/clementine/clementine-player/src/ui_playbacksettingspage.h:280
+#: ../bin/src/ui_playbacksettingspage.h:280
 msgid "Choose automatically"
 msgstr "Välj automatiskt"
 
-#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:426
+#: ../bin/src/ui_notificationssettingspage.h:426
 msgid "Choose color..."
 msgstr "Välj färg..."
 
-#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:427
+#: ../bin/src/ui_notificationssettingspage.h:427
 msgid "Choose font..."
 msgstr "Välj typsnitt..."
 
-#: /home/arno/clementine/clementine-player/src/ui_visualisationselector.h:113
+#: ../bin/src/ui_visualisationselector.h:113
 msgid "Choose from the list"
 msgstr "Välj från listan"
 
@@ -881,7 +870,7 @@ msgstr ""
 msgid "Choose manual cover"
 msgstr "Välj manuellt omslag"
 
-#: /home/arno/clementine/clementine-player/src/ui_songinfosettingspage.h:188
+#: ../bin/src/ui_songinfosettingspage.h:188
 msgid ""
 "Choose the websites you want Clementine to use when searching for lyrics."
 msgstr ""
@@ -892,28 +881,25 @@ msgstr ""
 msgid "Classical"
 msgstr "Klassisk"
 
-#: widgets/lineedit.cpp:41
-#: /home/arno/clementine/clementine-player/src/ui_queuemanager.h:139
+#: widgets/lineedit.cpp:41 ../bin/src/ui_queuemanager.h:139
 msgid "Clear"
 msgstr "Rensa"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:645
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:647
+#: ../bin/src/ui_mainwindow.h:645 ../bin/src/ui_mainwindow.h:647
 msgid "Clear playlist"
 msgstr "Rensa spellistan"
 
 #: smartplaylists/searchtermwidget.cpp:321
 #: visualisations/visualisationcontainer.cpp:196
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:628
-#: /home/arno/clementine/clementine-player/src/ui_visualisationoverlay.h:179
+#: ../bin/src/ui_mainwindow.h:628 ../bin/src/ui_visualisationoverlay.h:179
 msgid "Clementine"
 msgstr "Clementine"
 
-#: /home/arno/clementine/clementine-player/src/ui_errordialog.h:93
+#: ../bin/src/ui_errordialog.h:93
 msgid "Clementine Error"
 msgstr "Clementine-fel"
 
-#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:422
+#: ../bin/src/ui_notificationssettingspage.h:422
 msgid "Clementine Orange"
 msgstr "Clementine-orange"
 
@@ -921,7 +907,7 @@ msgstr "Clementine-orange"
 msgid "Clementine Visualization"
 msgstr "Clementine-visualisering"
 
-#: /home/arno/clementine/clementine-player/src/ui_deviceproperties.h:376
+#: ../bin/src/ui_deviceproperties.h:376
 msgid ""
 "Clementine can automatically convert the music you copy to this device into "
 "a format that it can play."
@@ -929,8 +915,7 @@ msgstr ""
 "Clementine kan konvertera musiken du kopierar till denna enhet till ett "
 "format som den kan spela upp."
 
-#: /home/arno/clementine/clementine-player/src/ui_remotesettingspage.h:200
-#: remote/remotesettingspage.cpp:152
+#: ../bin/src/ui_remotesettingspage.h:200 remote/remotesettingspage.cpp:152
 msgid ""
 "Clementine can be controlled remotely by an Android phone.  To enable this "
 "feature log in with the same Google account that is configured on your "
@@ -939,7 +924,7 @@ msgstr ""
 "Clementine kan fjärrstyras av en Android-telefon. För att aktivera denna "
 "funktion logga in med samma Google-konto som är konfigurerad i telefonen."
 
-#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:396
+#: ../bin/src/ui_notificationssettingspage.h:396
 msgid "Clementine can show a message when the track changes."
 msgstr "Clementine kan visa ett meddelande vid byte av spår."
 
@@ -965,7 +950,7 @@ msgstr ""
 msgid "Clementine image viewer"
 msgstr "Clementine-bildvisare"
 
-#: /home/arno/clementine/clementine-player/src/ui_trackselectiondialog.h:206
+#: ../bin/src/ui_trackselectiondialog.h:206
 msgid "Clementine was unable to find results for this file"
 msgstr "Clementine kunde inte hitta resultat för den här filen"
 
@@ -973,7 +958,7 @@ msgstr "Clementine kunde inte hitta resultat för den här filen"
 msgid "Click here to add some music"
 msgstr "Klicka här för att lägga till musik"
 
-#: /home/arno/clementine/clementine-player/src/ui_trackslider.h:72
+#: ../bin/src/ui_trackslider.h:72
 msgid "Click to toggle between remaining time and total time"
 msgstr "Klicka för att växla mellan återstående tid och total tid"
 
@@ -1002,33 +987,34 @@ msgstr "Club"
 msgid "Color"
 msgstr "Färg"
 
+#: ../bin/src/ui_globalsearchsettingspage.h:163
+msgid "Combine identical results from different sources"
+msgstr ""
+
 #: core/commandlineoptions.cpp:173
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Lista, separerad med komma, över class:level; level är 0-3"
 
 #: playlist/playlist.cpp:1106 smartplaylists/searchterm.cpp:279
-#: ui/organisedialog.cpp:62
-#: /home/arno/clementine/clementine-player/src/ui_edittagdialog.h:661
+#: ui/organisedialog.cpp:62 ../bin/src/ui_edittagdialog.h:661
 msgid "Comment"
 msgstr "Kommentar"
 
-#: /home/arno/clementine/clementine-player/src/ui_edittagdialog.h:662
+#: ../bin/src/ui_edittagdialog.h:662
 msgid "Complete tags automatically"
 msgstr "Fyll i etiketter automatiskt"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:695
+#: ../bin/src/ui_mainwindow.h:695
 msgid "Complete tags automatically..."
 msgstr "Fyll i etiketter automatiskt..."
 
 #: playlist/playlist.cpp:1088 ui/organisedialog.cpp:56
-#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:132
-#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:145
-#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:158
-#: /home/arno/clementine/clementine-player/src/ui_edittagdialog.h:659
+#: ../bin/src/ui_groupbydialog.h:132 ../bin/src/ui_groupbydialog.h:145
+#: ../bin/src/ui_groupbydialog.h:158 ../bin/src/ui_edittagdialog.h:659
 msgid "Composer"
 msgstr "Kompositör"
 
-#: internet/groovesharkservice.cpp:424
+#: internet/groovesharkservice.cpp:450
 msgid "Configure Grooveshark..."
 msgstr "Konfigurera Grooveshark..."
 
@@ -1040,7 +1026,7 @@ msgstr "Konfigurera Last.fm..."
 msgid "Configure Magnatune..."
 msgstr "Konfigurera Magnatune..."
 
-#: /home/arno/clementine/clementine-player/src/ui_globalshortcutssettingspage.h:167
+#: ../bin/src/ui_globalshortcutssettingspage.h:167
 msgid "Configure Shortcuts"
 msgstr "Konfigurera snabbtangenter"
 
@@ -1052,11 +1038,12 @@ msgstr "Anpassa Spotify..."
 msgid "Configure library..."
 msgstr "Konfigurera biblioteket..."
 
-#: internet/digitallyimportedservicebase.cpp:199
+#: internet/digitallyimportedservicebase.cpp:220
+#: ../bin/src/ui_globalsearchsettingspage.h:167
 msgid "Configure..."
 msgstr "Konfigurera..."
 
-#: /home/arno/clementine/clementine-player/src/ui_wiimotesettingspage.h:186
+#: ../bin/src/ui_wiimotesettingspage.h:186
 msgid "Connect Wii Remotes using active/deactive action"
 msgstr "Anslut Wii-kontroller med åtgärden aktivera/inaktivera"
 
@@ -1068,15 +1055,15 @@ msgstr "Anslut enhet"
 msgid "Connecting to Spotify"
 msgstr "Ansluter till Spotify"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsmp3.h:196
+#: ../bin/src/ui_transcoderoptionsmp3.h:196
 msgid "Constant bitrate"
 msgstr "Konstant bithastighet"
 
-#: /home/arno/clementine/clementine-player/src/ui_deviceproperties.h:379
+#: ../bin/src/ui_deviceproperties.h:379
 msgid "Convert all music"
 msgstr "Konvertera all musik"
 
-#: /home/arno/clementine/clementine-player/src/ui_deviceproperties.h:378
+#: ../bin/src/ui_deviceproperties.h:378
 msgid "Convert any music that the device can't play"
 msgstr "Konvertera all musik som enheten inte kan spela upp"
 
@@ -1130,9 +1117,8 @@ msgstr "Kunde inte läsa in Last.fm-radiostationen"
 msgid "Couldn't open output file %1"
 msgstr "Kunde inte öppna utdatafilen %1"
 
-#: /home/arno/clementine/clementine-player/src/ui_albumcovermanager.h:149
-#: /home/arno/clementine/clementine-player/src/ui_albumcoversearcher.h:104
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:668
+#: ../bin/src/ui_albumcovermanager.h:149
+#: ../bin/src/ui_albumcoversearcher.h:104 ../bin/src/ui_mainwindow.h:668
 msgid "Cover Manager"
 msgstr "Omslagshanterare"
 
@@ -1163,93 +1149,91 @@ msgstr "Omslagsbild angiven från %1"
 msgid "Covers from %1"
 msgstr "Omslagsbilder från %1"
 
-#: /home/arno/clementine/clementine-player/src/ui_playbacksettingspage.h:262
+#: ../bin/src/ui_playbacksettingspage.h:262
 msgid "Cross-fade when changing tracks automatically"
 msgstr "Korstona vid automatiskt byte av spår"
 
-#: /home/arno/clementine/clementine-player/src/ui_playbacksettingspage.h:261
+#: ../bin/src/ui_playbacksettingspage.h:261
 msgid "Cross-fade when changing tracks manually"
 msgstr "Korstona vid manuellt byte av spår"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:640
+#: ../bin/src/ui_mainwindow.h:640
 msgid "Ctrl+Alt+V"
 msgstr "Ctrl+Alt+V"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:644
+#: ../bin/src/ui_mainwindow.h:644
 msgid "Ctrl+B"
 msgstr "Ctrl+B"
 
-#: /home/arno/clementine/clementine-player/src/ui_queuemanager.h:133
+#: ../bin/src/ui_queuemanager.h:133
 msgid "Ctrl+Down"
 msgstr "Ctrl+Down"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:651
+#: ../bin/src/ui_mainwindow.h:651
 msgid "Ctrl+E"
 msgstr "Ctrl+E"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:661
+#: ../bin/src/ui_mainwindow.h:661
 msgid "Ctrl+H"
 msgstr "Ctrl+H"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:679
+#: ../bin/src/ui_mainwindow.h:679
 msgid "Ctrl+J"
 msgstr "Ctrl+J"
 
-#: /home/arno/clementine/clementine-player/src/ui_queuemanager.h:141
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:649
+#: ../bin/src/ui_queuemanager.h:141 ../bin/src/ui_mainwindow.h:649
 msgid "Ctrl+K"
 msgstr "Ctrl+K"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:642
+#: ../bin/src/ui_mainwindow.h:642
 msgid "Ctrl+L"
 msgstr "Ctrl+L"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:693
+#: ../bin/src/ui_mainwindow.h:693
 msgid "Ctrl+M"
 msgstr "Ctrl+M"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:681
+#: ../bin/src/ui_mainwindow.h:681
 msgid "Ctrl+N"
 msgstr "Ctrl+N"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:665
+#: ../bin/src/ui_mainwindow.h:665
 msgid "Ctrl+O"
 msgstr "Ctrl+O"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:657
+#: ../bin/src/ui_mainwindow.h:657
 msgid "Ctrl+P"
 msgstr "Ctrl+P"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:638
+#: ../bin/src/ui_mainwindow.h:638
 msgid "Ctrl+Q"
 msgstr "Ctrl+Q"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:683
+#: ../bin/src/ui_mainwindow.h:683
 msgid "Ctrl+S"
 msgstr "Ctrl+S"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:663
+#: ../bin/src/ui_mainwindow.h:663
 msgid "Ctrl+Shift+A"
 msgstr "Ctrl+Shift+A"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:685
+#: ../bin/src/ui_mainwindow.h:685
 msgid "Ctrl+Shift+O"
 msgstr "Ctrl+Shift+O"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:696
+#: ../bin/src/ui_mainwindow.h:696
 msgid "Ctrl+T"
 msgstr "Ctrl+T"
 
-#: /home/arno/clementine/clementine-player/src/ui_queuemanager.h:129
+#: ../bin/src/ui_queuemanager.h:129
 msgid "Ctrl+Up"
 msgstr "Ctrl+Up"
 
-#: ui/equalizer.cpp:108
-#: /home/arno/clementine/clementine-player/src/ui_lastfmstationdialog.h:98
+#: ui/equalizer.cpp:108 ../bin/src/ui_lastfmstationdialog.h:98
 msgid "Custom"
 msgstr "Anpassad"
 
-#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:409
+#: ../bin/src/ui_notificationssettingspage.h:409
 msgid "Custom message settings"
 msgstr "Egna meddelandeinställningar"
 
@@ -1257,7 +1241,7 @@ msgstr "Egna meddelandeinställningar"
 msgid "Custom radio"
 msgstr "Anpassad radio"
 
-#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:423
+#: ../bin/src/ui_notificationssettingspage.h:423
 msgid "Custom..."
 msgstr "Anpassad..."
 
@@ -1269,13 +1253,11 @@ msgstr "Dbus-sökväg"
 msgid "Dance"
 msgstr "Dans"
 
-#: playlist/playlist.cpp:1104
-#: /home/arno/clementine/clementine-player/src/ui_edittagdialog.h:649
+#: playlist/playlist.cpp:1104 ../bin/src/ui_edittagdialog.h:649
 msgid "Date created"
 msgstr "Datum skapad"
 
-#: playlist/playlist.cpp:1103
-#: /home/arno/clementine/clementine-player/src/ui_edittagdialog.h:648
+#: playlist/playlist.cpp:1103 ../bin/src/ui_edittagdialog.h:648
 msgid "Date modified"
 msgstr "Datum ändrad"
 
@@ -1283,7 +1265,7 @@ msgstr "Datum ändrad"
 msgid "Days"
 msgstr "Dagar"
 
-#: /home/arno/clementine/clementine-player/src/ui_globalshortcutssettingspage.h:177
+#: ../bin/src/ui_globalshortcutssettingspage.h:177
 msgid "De&fault"
 msgstr "S&tandard"
 
@@ -1295,11 +1277,11 @@ msgstr "Sänk volymen med 4%"
 msgid "Decrease volume"
 msgstr "Sänk volymen"
 
-#: /home/arno/clementine/clementine-player/src/ui_wiimotesettingspage.h:195
+#: ../bin/src/ui_wiimotesettingspage.h:195
 msgid "Defaults"
 msgstr "Standardvärden"
 
-#: /home/arno/clementine/clementine-player/src/ui_visualisationselector.h:115
+#: ../bin/src/ui_visualisationselector.h:115
 msgid "Delay between visualizations"
 msgstr "Fördröjning mellan visualiseringar"
 
@@ -1317,8 +1299,7 @@ msgstr "Ta bort från enhet..."
 msgid "Delete from disk..."
 msgstr "Ta bort från disk..."
 
-#: ui/equalizer.cpp:190
-#: /home/arno/clementine/clementine-player/src/ui_equalizer.h:124
+#: ui/equalizer.cpp:190 ../bin/src/ui_equalizer.h:124
 msgid "Delete preset"
 msgstr "Ta bort förinställning"
 
@@ -1326,7 +1307,7 @@ msgstr "Ta bort förinställning"
 msgid "Delete smart playlist"
 msgstr "Radera smart spellista"
 
-#: /home/arno/clementine/clementine-player/src/ui_organisedialog.h:194
+#: ../bin/src/ui_organisedialog.h:194
 msgid "Delete the original files"
 msgstr "Ta bort originalfilerna"
 
@@ -1342,12 +1323,11 @@ msgstr "Avköa valda spår"
 msgid "Dequeue track"
 msgstr "Avköa spår"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcodedialog.h:211
-#: /home/arno/clementine/clementine-player/src/ui_organisedialog.h:189
+#: ../bin/src/ui_transcodedialog.h:211 ../bin/src/ui_organisedialog.h:189
 msgid "Destination"
 msgstr "Mål"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcodedialog.h:217
+#: ../bin/src/ui_transcodedialog.h:217
 msgid "Details..."
 msgstr "Detaljer..."
 
@@ -1355,7 +1335,7 @@ msgstr "Detaljer..."
 msgid "Device"
 msgstr "Enhet"
 
-#: /home/arno/clementine/clementine-player/src/ui_deviceproperties.h:368
+#: ../bin/src/ui_deviceproperties.h:368
 msgid "Device Properties"
 msgstr "Enhetsinställningar"
 
@@ -1371,7 +1351,7 @@ msgstr "Enhetsinställningar..."
 msgid "Devices"
 msgstr "Enheter"
 
-#: /home/arno/clementine/clementine-player/src/ui_globalsearchpopup.h:103
+#: ../bin/src/ui_globalsearchpopup.h:103
 msgid "Dialog"
 msgstr ""
 
@@ -1379,45 +1359,45 @@ msgstr ""
 msgid "Did you mean"
 msgstr "Menade du"
 
-#: /home/arno/clementine/clementine-player/src/ui_digitallyimportedsettingspage.h:132
+#: ../bin/src/ui_digitallyimportedsettingspage.h:160
 msgid "Digitally Imported"
 msgstr "Digitalt importerad"
 
-#: /home/arno/clementine/clementine-player/src/ui_digitallyimportedsettingspage.h:135
+#: ../bin/src/ui_digitallyimportedsettingspage.h:164
 msgid "Digitally Imported password"
 msgstr "Digitalt importerat lösenord"
 
-#: /home/arno/clementine/clementine-player/src/ui_digitallyimportedsettingspage.h:134
+#: ../bin/src/ui_digitallyimportedsettingspage.h:162
 msgid "Digitally Imported username"
 msgstr "Digitalt importerat användarnamn"
 
-#: /home/arno/clementine/clementine-player/src/ui_networkproxysettingspage.h:159
+#: ../bin/src/ui_networkproxysettingspage.h:159
 msgid "Direct internet connection"
 msgstr "Direkt Internetanslutning"
 
-#: /home/arno/clementine/clementine-player/src/ui_magnatunedownloaddialog.h:145
-#: /home/arno/clementine/clementine-player/src/ui_transcodedialog.h:204
+#: ../bin/src/ui_magnatunedownloaddialog.h:145
+#: ../bin/src/ui_transcodedialog.h:204
 msgid "Directory"
 msgstr "Katalog"
 
-#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:405
+#: ../bin/src/ui_notificationssettingspage.h:405
 msgid "Disable duration"
 msgstr "Avaktivera tidsvisning"
 
-#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:398
+#: ../bin/src/ui_notificationssettingspage.h:398
 msgid "Disabled"
 msgstr "Inaktiverat"
 
 #: playlist/playlist.cpp:1084 ui/organisedialog.cpp:58
-#: /home/arno/clementine/clementine-player/src/ui_edittagdialog.h:655
+#: ../bin/src/ui_edittagdialog.h:655
 msgid "Disc"
 msgstr "Skiva"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsspeex.h:234
+#: ../bin/src/ui_transcoderoptionsspeex.h:234
 msgid "Discontinuous transmission"
 msgstr "Icke-kontinuerlig sändning"
 
-#: /home/arno/clementine/clementine-player/src/ui_librarysettingspage.h:169
+#: ../bin/src/ui_librarysettingspage.h:169
 msgid "Display options"
 msgstr "Visningsalternativ"
 
@@ -1429,16 +1409,15 @@ msgstr "Visa globalt sökfönster"
 msgid "Display the on-screen-display"
 msgstr "Visa on-screen-display"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:694
+#: ../bin/src/ui_mainwindow.h:694
 msgid "Do a full library rescan"
 msgstr "Gör en fullständig omsökning av biblioteket"
 
-#: /home/arno/clementine/clementine-player/src/ui_deviceproperties.h:377
+#: ../bin/src/ui_deviceproperties.h:377
 msgid "Do not convert any music"
 msgstr "Konvertera inte någon musik"
 
-#: widgets/osd.cpp:306
-#: /home/arno/clementine/clementine-player/src/ui_playlistsequence.h:99
+#: widgets/osd.cpp:306 ../bin/src/ui_playlistsequence.h:99
 msgid "Don't repeat"
 msgstr "Upprepa inte"
 
@@ -1446,8 +1425,7 @@ msgstr "Upprepa inte"
 msgid "Don't show in various artists"
 msgstr "Visa inte i diverse artister"
 
-#: widgets/osd.cpp:294
-#: /home/arno/clementine/clementine-player/src/ui_playlistsequence.h:103
+#: widgets/osd.cpp:294 ../bin/src/ui_playlistsequence.h:103
 msgid "Don't shuffle"
 msgstr "Blanda inte"
 
@@ -1459,7 +1437,7 @@ msgstr "Stoppa inte!"
 msgid "Double click to open"
 msgstr "Dubbelklicka för att öppna"
 
-#: /home/arno/clementine/clementine-player/src/ui_behavioursettingspage.h:198
+#: ../bin/src/ui_behavioursettingspage.h:198
 msgid "Double clicking a song will..."
 msgstr "Dubbelklicka på en låt kommer ..."
 
@@ -1467,7 +1445,7 @@ msgstr "Dubbelklicka på en låt kommer ..."
 msgid "Download directory"
 msgstr "Nedladdningskatalog"
 
-#: /home/arno/clementine/clementine-player/src/ui_magnatunesettingspage.h:157
+#: ../bin/src/ui_magnatunesettingspage.h:157
 msgid "Download membership"
 msgstr "Hämta medlemskap"
 
@@ -1479,7 +1457,7 @@ msgstr "Hämta detta album"
 msgid "Download this album..."
 msgstr "Ladda ner det här albumet ..."
 
-#: /home/arno/clementine/clementine-player/src/ui_spotifysettingspage.h:186
+#: ../bin/src/ui_spotifysettingspage.h:186
 msgid "Download..."
 msgstr "Ladda ner..."
 
@@ -1511,7 +1489,7 @@ msgstr "Dra för att ändra position"
 msgid "Drive letter"
 msgstr "Enhetsbeteckning"
 
-#: /home/arno/clementine/clementine-player/src/ui_dynamicplaylistcontrols.h:103
+#: ../bin/src/ui_dynamicplaylistcontrols.h:103
 msgid "Dynamic mode is on"
 msgstr "Dynamisk läge är på"
 
@@ -1528,20 +1506,19 @@ msgstr "Redigera smart spellista..."
 msgid "Edit tag \"%1\"..."
 msgstr "Redigera \"%1\"-taggen..."
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:654
+#: ../bin/src/ui_mainwindow.h:654
 msgid "Edit tag..."
 msgstr "Redigera tagg..."
 
-#: /home/arno/clementine/clementine-player/src/ui_edittagdialog.h:663
+#: ../bin/src/ui_edittagdialog.h:663
 msgid "Edit tags"
 msgstr "Redigera etiketter"
 
-#: /home/arno/clementine/clementine-player/src/ui_edittagdialog.h:632
+#: ../bin/src/ui_edittagdialog.h:632
 msgid "Edit track information"
 msgstr "Redigera spårinformation"
 
-#: library/libraryview.cpp:264
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:650
+#: library/libraryview.cpp:264 ../bin/src/ui_mainwindow.h:650
 msgid "Edit track information..."
 msgstr "Redigera spårinformation..."
 
@@ -1553,39 +1530,46 @@ msgstr "Redigera spår information ..."
 msgid "Edit..."
 msgstr "Redigera..."
 
-#: /home/arno/clementine/clementine-player/src/ui_wiimotesettingspage.h:183
+#: ../bin/src/ui_wiimotesettingspage.h:183
 msgid "Enable Wii Remote support"
 msgstr "Aktivera stöd för Wii-kontroll"
 
-#: /home/arno/clementine/clementine-player/src/ui_equalizer.h:126
+#: ../bin/src/ui_equalizer.h:126
 msgid "Enable equalizer"
 msgstr "Aktivera equalizer"
 
-#: /home/arno/clementine/clementine-player/src/ui_behavioursettingspage.h:179
+#: ../bin/src/ui_behavioursettingspage.h:179
 msgid "Enable playlist background image"
 msgstr "Aktivera bakgrundsbild i spellista"
 
-#: /home/arno/clementine/clementine-player/src/ui_wiimotesettingspage.h:187
+#: ../bin/src/ui_wiimotesettingspage.h:187
 msgid "Enable shortcuts only when Clementine is focused"
 msgstr "Aktivera endast snabbknappar när Clementine är fokuserat"
+
+#: ../bin/src/ui_globalsearchsettingspage.h:164
+msgid ""
+"Enable sources below to include them in Global Search results.  When "
+"identical results are available from more than one source, ones at the top "
+"will take priority."
+msgstr ""
 
 #: core/globalshortcuts.cpp:62
 msgid "Enable/disable Last.fm scrobbling"
 msgstr "Aktivera/avaktivera Last.fm-skrobbling"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsspeex.h:235
+#: ../bin/src/ui_transcoderoptionsspeex.h:235
 msgid "Encoding complexity"
 msgstr "Kodningskomplexitet"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsmp3.h:197
+#: ../bin/src/ui_transcoderoptionsmp3.h:197
 msgid "Encoding engine quality"
 msgstr "Kodningsmotorns kvalitet"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsspeex.h:224
+#: ../bin/src/ui_transcoderoptionsspeex.h:224
 msgid "Encoding mode"
 msgstr "Kodningsläge"
 
-#: /home/arno/clementine/clementine-player/src/ui_coverfromurldialog.h:103
+#: ../bin/src/ui_coverfromurldialog.h:103
 msgid "Enter a URL to download a cover from the Internet:"
 msgstr "Ange en URL för att ladda ner ett omslag från Internet:"
 
@@ -1593,28 +1577,27 @@ msgstr "Ange en URL för att ladda ner ett omslag från Internet:"
 msgid "Enter a new name for this playlist"
 msgstr "Ange ett nytt namn för denna spellista"
 
-#: /home/arno/clementine/clementine-player/src/ui_lastfmstationdialog.h:93
+#: ../bin/src/ui_lastfmstationdialog.h:93
 msgid ""
 "Enter an <b>artist</b> or <b>tag</b> to start listening to Last.fm radio."
 msgstr ""
 "Skriv in en <b>artist</b> eller <b>tagg</b> för att börja lyssna på Last.fm-"
 "radio."
 
-#: /home/arno/clementine/clementine-player/src/ui_libraryfilterwidget.h:131
-#: /home/arno/clementine/clementine-player/src/ui_albumcovermanager.h:153
+#: ../bin/src/ui_libraryfilterwidget.h:131
+#: ../bin/src/ui_albumcovermanager.h:153
 msgid "Enter search terms here"
 msgstr "Ange söktermer här"
 
-#: /home/arno/clementine/clementine-player/src/ui_addstreamdialog.h:114
+#: ../bin/src/ui_addstreamdialog.h:114
 msgid "Enter the URL of an internet radio stream:"
 msgstr "Skriv in webbadressen till en radiostation på Internet:"
 
-#: /home/arno/clementine/clementine-player/src/ui_libraryfilterwidget.h:115
+#: ../bin/src/ui_libraryfilterwidget.h:115
 msgid "Entire collection"
 msgstr "Hela samlingen"
 
-#: /home/arno/clementine/clementine-player/src/ui_equalizer.h:118
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:675
+#: ../bin/src/ui_equalizer.h:118 ../bin/src/ui_mainwindow.h:675
 msgid "Equalizer"
 msgstr "Equalizer"
 
@@ -1653,8 +1636,8 @@ msgstr "Fel vid hämtning av Spotify-insticket"
 msgid "Error loading %1"
 msgstr "Fel vid insläsning av %1"
 
-#: internet/digitallyimportedservicebase.cpp:240
-#: internet/digitallyimportedurlhandler.cpp:83
+#: internet/digitallyimportedservicebase.cpp:242
+#: internet/digitallyimportedurlhandler.cpp:73
 msgid "Error loading di.fm playlist"
 msgstr "Fel vid laddning av di.fm spellista"
 
@@ -1671,58 +1654,63 @@ msgstr "Fel vid läsning av ljud-CD"
 msgid "Ever played"
 msgstr "Någonsin spelade"
 
-#: /home/arno/clementine/clementine-player/src/ui_playbacksettingspage.h:263
+#: ../bin/src/ui_playbacksettingspage.h:263
 msgid "Except between tracks on the same album or in the same CUE sheet"
 msgstr "Förutom mellan spår på samma album eller i samma CUE-fil"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:659
+#: internet/digitallyimportedsettingspage.cpp:93
+#, qt-format
+msgid "Expires on %1"
+msgstr ""
+
+#: ../bin/src/ui_mainwindow.h:659
 msgid "F1"
 msgstr "F1"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:655
+#: ../bin/src/ui_mainwindow.h:655
 msgid "F2"
 msgstr "F2"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:630
+#: ../bin/src/ui_mainwindow.h:630
 msgid "F5"
 msgstr "F5"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:632
+#: ../bin/src/ui_mainwindow.h:632
 msgid "F6"
 msgstr "F6"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:634
+#: ../bin/src/ui_mainwindow.h:634
 msgid "F7"
 msgstr "F7"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:636
+#: ../bin/src/ui_mainwindow.h:636
 msgid "F8"
 msgstr "F8"
 
-#: /home/arno/clementine/clementine-player/src/ui_magnatunedownloaddialog.h:140
-#: /home/arno/clementine/clementine-player/src/ui_magnatunesettingspage.h:167
-#: /home/arno/clementine/clementine-player/src/ui_transcodersettingspage.h:161
+#: ../bin/src/ui_magnatunedownloaddialog.h:140
+#: ../bin/src/ui_magnatunesettingspage.h:167
+#: ../bin/src/ui_transcodersettingspage.h:161
 msgid "FLAC"
 msgstr "FLAC"
 
-#: /home/arno/clementine/clementine-player/src/ui_playbacksettingspage.h:260
+#: ../bin/src/ui_playbacksettingspage.h:260
 msgid "Fade out when stopping a track"
 msgstr "Tona ut när ett spår stoppas"
 
-#: /home/arno/clementine/clementine-player/src/ui_playbacksettingspage.h:259
+#: ../bin/src/ui_playbacksettingspage.h:259
 msgid "Fading"
 msgstr "Toning"
 
-#: /home/arno/clementine/clementine-player/src/ui_playbacksettingspage.h:264
+#: ../bin/src/ui_playbacksettingspage.h:264
 msgid "Fading duration"
 msgstr "Toningslängd"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsflac.h:82
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsmp3.h:200
+#: ../bin/src/ui_transcoderoptionsflac.h:82
+#: ../bin/src/ui_transcoderoptionsmp3.h:200
 msgid "Fast"
 msgstr "Snabb"
 
-#: internet/groovesharkservice.cpp:536
+#: internet/groovesharkservice.cpp:564
 msgid "Favorites"
 msgstr "Favoriter"
 
@@ -1730,15 +1718,15 @@ msgstr "Favoriter"
 msgid "Favourite tracks"
 msgstr "Favoritspår"
 
-#: /home/arno/clementine/clementine-player/src/ui_albumcovermanager.h:155
+#: ../bin/src/ui_albumcovermanager.h:155
 msgid "Fetch Missing Covers"
 msgstr "Hämta saknade omslag"
 
-#: /home/arno/clementine/clementine-player/src/ui_albumcovermanager.h:150
+#: ../bin/src/ui_albumcovermanager.h:150
 msgid "Fetch automatically"
 msgstr "Hämta automatiskt"
 
-#: /home/arno/clementine/clementine-player/src/ui_coversearchstatisticsdialog.h:75
+#: ../bin/src/ui_coversearchstatisticsdialog.h:75
 msgid "Fetch completed"
 msgstr "Hämtning klar"
 
@@ -1750,12 +1738,11 @@ msgstr "Fel vid hämtning av omslag"
 msgid "File extension"
 msgstr "Filändelse"
 
-#: /home/arno/clementine/clementine-player/src/ui_deviceproperties.h:384
+#: ../bin/src/ui_deviceproperties.h:384
 msgid "File formats"
 msgstr "Filformat"
 
-#: playlist/playlist.cpp:1099
-#: /home/arno/clementine/clementine-player/src/ui_edittagdialog.h:650
+#: playlist/playlist.cpp:1099 ../bin/src/ui_edittagdialog.h:650
 msgid "File name"
 msgstr "Filnamn"
 
@@ -1763,20 +1750,17 @@ msgstr "Filnamn"
 msgid "File name (without path)"
 msgstr "Filnamn (utan sökväg)"
 
-#: playlist/playlist.cpp:1101
-#: /home/arno/clementine/clementine-player/src/ui_edittagdialog.h:644
+#: playlist/playlist.cpp:1101 ../bin/src/ui_edittagdialog.h:644
 msgid "File size"
 msgstr "Filstorlek"
 
-#: playlist/playlist.cpp:1102
-#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:133
-#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:146
-#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:159
-#: /home/arno/clementine/clementine-player/src/ui_edittagdialog.h:646
+#: playlist/playlist.cpp:1102 ../bin/src/ui_groupbydialog.h:133
+#: ../bin/src/ui_groupbydialog.h:146 ../bin/src/ui_groupbydialog.h:159
+#: ../bin/src/ui_edittagdialog.h:646
 msgid "File type"
 msgstr "Filtyp"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcodedialog.h:205
+#: ../bin/src/ui_transcodedialog.h:205
 msgid "Filename"
 msgstr "Filnamn"
 
@@ -1784,7 +1768,7 @@ msgstr "Filnamn"
 msgid "Files"
 msgstr "Filer"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcodedialog.h:202
+#: ../bin/src/ui_transcodedialog.h:202
 msgid "Files to transcode"
 msgstr "Filer som skall omkodas"
 
@@ -1812,7 +1796,7 @@ msgstr "Sätter fingeravtryck på låten"
 msgid "Finish"
 msgstr "Avsluta"
 
-#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:125
+#: ../bin/src/ui_groupbydialog.h:125
 msgid "First level"
 msgstr "Första nivån"
 
@@ -1820,15 +1804,15 @@ msgstr "Första nivån"
 msgid "Flac"
 msgstr "FLAC"
 
-#: /home/arno/clementine/clementine-player/src/ui_songinfosettingspage.h:181
+#: ../bin/src/ui_songinfosettingspage.h:181
 msgid "Font size"
 msgstr "Typsnittsstorlek"
 
-#: /home/arno/clementine/clementine-player/src/ui_spotifysettingspage.h:184
+#: ../bin/src/ui_spotifysettingspage.h:184
 msgid "For licensing reasons Spotify support is in a separate plugin."
 msgstr "Av licensskäl finns Spotify-stöd i ett separat insticksprogram."
 
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsmp3.h:204
+#: ../bin/src/ui_transcoderoptionsmp3.h:204
 msgid "Force mono encoding"
 msgstr "Tvinga enkanalskodning"
 
@@ -1845,32 +1829,26 @@ msgstr ""
 "En enhet tas bort från listan om den glöms och Clementine kommer att behöva "
 "söka av alla låtar igen nästa gång du ansluter den."
 
-#: /home/arno/clementine/clementine-player/src/ui_globalsearchwidget.h:64
-#: /home/arno/clementine/clementine-player/src/ui_icecastfilterwidget.h:74
-#: /home/arno/clementine/clementine-player/src/ui_internetviewcontainer.h:70
-#: /home/arno/clementine/clementine-player/src/ui_libraryfilterwidget.h:114
-#: /home/arno/clementine/clementine-player/src/ui_libraryviewcontainer.h:59
-#: /home/arno/clementine/clementine-player/src/ui_playlistcontainer.h:143
-#: /home/arno/clementine/clementine-player/src/ui_querysearchpage.h:70
-#: /home/arno/clementine/clementine-player/src/ui_querysortpage.h:136
-#: /home/arno/clementine/clementine-player/src/ui_searchpreview.h:104
-#: /home/arno/clementine/clementine-player/src/ui_searchtermwidget.h:279
-#: /home/arno/clementine/clementine-player/src/ui_wizardfinishpage.h:83
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsaac.h:128
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsflac.h:80
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsmp3.h:190
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsspeex.h:216
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsvorbis.h:201
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionswma.h:78
-#: /home/arno/clementine/clementine-player/src/ui_equalizerslider.h:82
-#: /home/arno/clementine/clementine-player/src/ui_fileview.h:106
-#: /home/arno/clementine/clementine-player/src/ui_loginstatewidget.h:145
-#: /home/arno/clementine/clementine-player/src/ui_trackslider.h:69
-#: /home/arno/clementine/clementine-player/src/ui_visualisationoverlay.h:178
+#: ../bin/src/ui_globalsearchwidget.h:64
+#: ../bin/src/ui_icecastfilterwidget.h:74
+#: ../bin/src/ui_internetviewcontainer.h:70
+#: ../bin/src/ui_libraryfilterwidget.h:114
+#: ../bin/src/ui_libraryviewcontainer.h:59
+#: ../bin/src/ui_playlistcontainer.h:143 ../bin/src/ui_querysearchpage.h:70
+#: ../bin/src/ui_querysortpage.h:136 ../bin/src/ui_searchpreview.h:104
+#: ../bin/src/ui_searchtermwidget.h:279 ../bin/src/ui_wizardfinishpage.h:83
+#: ../bin/src/ui_transcoderoptionsaac.h:128
+#: ../bin/src/ui_transcoderoptionsflac.h:80
+#: ../bin/src/ui_transcoderoptionsmp3.h:190
+#: ../bin/src/ui_transcoderoptionsspeex.h:216
+#: ../bin/src/ui_transcoderoptionsvorbis.h:201
+#: ../bin/src/ui_transcoderoptionswma.h:78 ../bin/src/ui_equalizerslider.h:82
+#: ../bin/src/ui_fileview.h:106 ../bin/src/ui_loginstatewidget.h:145
+#: ../bin/src/ui_trackslider.h:69 ../bin/src/ui_visualisationoverlay.h:178
 msgid "Form"
 msgstr "Formulär"
 
-#: /home/arno/clementine/clementine-player/src/ui_magnatunedownloaddialog.h:136
+#: ../bin/src/ui_magnatunedownloaddialog.h:136
 msgid "Format"
 msgstr "Format"
 
@@ -1879,7 +1857,7 @@ msgstr "Format"
 msgid "Framerate"
 msgstr "Bildfrekvens"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsspeex.h:236
+#: ../bin/src/ui_transcoderoptionsspeex.h:236
 msgid "Frames per buffer"
 msgstr "Ramar per buffert"
 
@@ -1899,7 +1877,7 @@ msgstr "Full bas + diskant"
 msgid "Full Treble"
 msgstr "Full diskant"
 
-#: /home/arno/clementine/clementine-player/src/ui_playbacksettingspage.h:276
+#: ../bin/src/ui_playbacksettingspage.h:276
 msgid "GStreamer audio engine"
 msgstr "GStreamer-ljudmotor"
 
@@ -1907,15 +1885,13 @@ msgstr "GStreamer-ljudmotor"
 msgid "General"
 msgstr "Allmänt"
 
-#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:402
+#: ../bin/src/ui_notificationssettingspage.h:402
 msgid "General settings"
 msgstr "Allmänna inställningar"
 
 #: playlist/playlist.cpp:1086 ui/organisedialog.cpp:61
-#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:134
-#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:147
-#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:160
-#: /home/arno/clementine/clementine-player/src/ui_edittagdialog.h:660
+#: ../bin/src/ui_groupbydialog.h:134 ../bin/src/ui_groupbydialog.h:147
+#: ../bin/src/ui_groupbydialog.h:160 ../bin/src/ui_edittagdialog.h:660
 msgid "Genre"
 msgstr "Genre"
 
@@ -1923,53 +1899,57 @@ msgstr "Genre"
 msgid "Getting channels"
 msgstr "Hämtar kanaler"
 
-#: internet/digitallyimportedservicebase.cpp:102
+#: internet/digitallyimportedservicebase.cpp:122
 msgid "Getting streams"
 msgstr "Hämtar ström"
 
-#: /home/arno/clementine/clementine-player/src/ui_addstreamdialog.h:116
+#: ../bin/src/ui_addstreamdialog.h:116
 msgid "Give it a name:"
 msgstr "Ge den ett namn:"
 
-#: /home/arno/clementine/clementine-player/src/ui_globalsearchwidget.h:65
+#: ../bin/src/ui_globalsearchsettingspage.h:159
+msgid "Global Search"
+msgstr ""
+
+#: ../bin/src/ui_globalsearchwidget.h:65
 msgid "Global search"
 msgstr "Sök globalt"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:686
+#: ../bin/src/ui_mainwindow.h:686
 msgid "Go to next playlist tab"
 msgstr "Gå till nästa spellisteflik"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:687
+#: ../bin/src/ui_mainwindow.h:687
 msgid "Go to previous playlist tab"
 msgstr "Gå till föregående spellisteflik"
 
-#: /home/arno/clementine/clementine-player/src/ui_remotesettingspage.h:206
+#: ../bin/src/ui_remotesettingspage.h:206
 msgid "Google password"
 msgstr "Google-lösenord"
 
-#: /home/arno/clementine/clementine-player/src/ui_remotesettingspage.h:204
+#: ../bin/src/ui_remotesettingspage.h:204
 msgid "Google username"
 msgstr "Google-användarnamn"
 
 #: covers/coversearchstatisticsdialog.cpp:54 ui/albumcovermanager.cpp:431
-#: /home/arno/clementine/clementine-player/src/ui_coversearchstatisticsdialog.h:76
+#: ../bin/src/ui_coversearchstatisticsdialog.h:76
 #, qt-format
 msgid "Got %1 covers out of %2 (%3 failed)"
 msgstr "Erhöll %1 omslagsbild utav %2 (%3 misslyckades)"
 
-#: /home/arno/clementine/clementine-player/src/ui_behavioursettingspage.h:190
+#: ../bin/src/ui_behavioursettingspage.h:190
 msgid "Grey out non existent songs in my playlists"
 msgstr "Gråa ut icke-existerande låtar i mina spellistor"
 
-#: /home/arno/clementine/clementine-player/src/ui_groovesharksettingspage.h:112
+#: ../bin/src/ui_groovesharksettingspage.h:112
 msgid "Grooveshark"
 msgstr "Grooveshark"
 
-#: internet/groovesharkservice.cpp:377
+#: internet/groovesharkservice.cpp:380
 msgid "Grooveshark login error"
 msgstr "Grooveshark login fel"
 
-#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:124
+#: ../bin/src/ui_groupbydialog.h:124
 msgid "Group Library by..."
 msgstr "Gruppera biblioteket efter..."
 
@@ -1977,43 +1957,47 @@ msgstr "Gruppera biblioteket efter..."
 msgid "Group by"
 msgstr "Gruppera efter"
 
-#: /home/arno/clementine/clementine-player/src/ui_libraryfilterwidget.h:127
+#: ../bin/src/ui_libraryfilterwidget.h:127
 msgid "Group by Album"
 msgstr "Gruppera efter album"
 
-#: /home/arno/clementine/clementine-player/src/ui_libraryfilterwidget.h:124
+#: ../bin/src/ui_libraryfilterwidget.h:124
 msgid "Group by Artist"
 msgstr "Gruppera efter artist"
 
-#: /home/arno/clementine/clementine-player/src/ui_libraryfilterwidget.h:125
+#: ../bin/src/ui_libraryfilterwidget.h:125
 msgid "Group by Artist/Album"
 msgstr "Gruppera efter artist/album"
 
-#: /home/arno/clementine/clementine-player/src/ui_libraryfilterwidget.h:126
+#: ../bin/src/ui_libraryfilterwidget.h:126
 msgid "Group by Artist/Year - Album"
 msgstr "Gruppera efter artist/år - album"
 
-#: /home/arno/clementine/clementine-player/src/ui_libraryfilterwidget.h:128
+#: ../bin/src/ui_libraryfilterwidget.h:128
 msgid "Group by Genre/Album"
 msgstr "Gruppera efter genre/album"
 
-#: /home/arno/clementine/clementine-player/src/ui_libraryfilterwidget.h:129
+#: ../bin/src/ui_libraryfilterwidget.h:129
 msgid "Group by Genre/Artist/Album"
 msgstr "Gruppera efter genre/artist/album"
 
-#: /home/arno/clementine/clementine-player/src/ui_networkproxysettingspage.h:163
+#: ../bin/src/ui_networkproxysettingspage.h:163
 msgid "HTTP proxy"
 msgstr "HTTP-proxy"
 
-#: /home/arno/clementine/clementine-player/src/ui_deviceproperties.h:371
+#: ../bin/src/ui_deviceproperties.h:371
 msgid "Hardware information"
 msgstr "Hårdvaruinformation"
 
-#: /home/arno/clementine/clementine-player/src/ui_deviceproperties.h:372
+#: ../bin/src/ui_deviceproperties.h:372
 msgid "Hardware information is only available while the device is connected."
 msgstr "Hårdvaruinformation är endast tillgänglig när enheten är ansluten."
 
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsmp3.h:202
+#: ../bin/src/ui_globalsearchsettingspage.h:161
+msgid "Hide all other search boxes"
+msgstr ""
+
+#: ../bin/src/ui_transcoderoptionsmp3.h:202
 msgid "High"
 msgstr "Hög"
 
@@ -2038,11 +2022,11 @@ msgstr "Timmar"
 msgid "Hypnotoad"
 msgstr "Hypnotoad"
 
-#: /home/arno/clementine/clementine-player/src/ui_magnatunesettingspage.h:155
+#: ../bin/src/ui_magnatunesettingspage.h:155
 msgid "I don't have a Magnatune account"
 msgstr "Jag har inte ett Magnatune-konto"
 
-#: /home/arno/clementine/clementine-player/src/ui_deviceproperties.h:370
+#: ../bin/src/ui_deviceproperties.h:370
 msgid "Icon"
 msgstr "Ikon"
 
@@ -2062,7 +2046,7 @@ msgstr ""
 "Om du fortsätter kommer denna enhet att arbeta långsamt och låtar som "
 "kopierats till den kanske inte fungerar."
 
-#: /home/arno/clementine/clementine-player/src/ui_remotesettingspage.h:209
+#: ../bin/src/ui_remotesettingspage.h:209
 msgid ""
 "If you use the remote on more than one computer, this name will help you "
 "choose which one to connect to on your phone."
@@ -2070,7 +2054,7 @@ msgstr ""
 "Om du använder fjärrkontrollen på mer än en dator, kommer detta namn att "
 "hjälpa dig välja vilken du vill ansluta till i telefonen."
 
-#: /home/arno/clementine/clementine-player/src/ui_organisedialog.h:204
+#: ../bin/src/ui_organisedialog.h:204
 msgid "Ignore \"The\" in artist names"
 msgstr "Ignorera \"The\" i artistnamn"
 
@@ -2082,7 +2066,7 @@ msgstr "Bilder (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgstr "Bilder (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 
-#: /home/arno/clementine/clementine-player/src/ui_wizardfinishpage.h:86
+#: ../bin/src/ui_wizardfinishpage.h:86
 msgid ""
 "In dynamic mode new tracks will be chosen and added to the playlist every "
 "time a song finishes."
@@ -2094,13 +2078,17 @@ msgstr ""
 msgid "Inbox"
 msgstr "Inkorg"
 
-#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:408
+#: ../bin/src/ui_notificationssettingspage.h:408
 msgid "Include album art in the notification"
 msgstr "Inkludera albumomslag i notifieringen"
 
-#: /home/arno/clementine/clementine-player/src/ui_querysearchpage.h:76
+#: ../bin/src/ui_querysearchpage.h:76
 msgid "Include all songs"
 msgstr "Inkludera alla spår"
+
+#: ../bin/src/ui_globalsearchsettingspage.h:170
+msgid "Include keyboard shortcut help in the tooltip"
+msgstr ""
 
 #: core/commandlineoptions.cpp:158
 msgid "Increase the volume by 4%"
@@ -2110,12 +2098,11 @@ msgstr "Öka volymen med 4%"
 msgid "Increase volume"
 msgstr "Höj volymen"
 
-#: wiimotedev/wiimotesettingspage.cpp:124
-#: /home/arno/clementine/clementine-player/src/ui_deviceproperties.h:373
+#: wiimotedev/wiimotesettingspage.cpp:124 ../bin/src/ui_deviceproperties.h:373
 msgid "Information"
 msgstr "Information"
 
-#: /home/arno/clementine/clementine-player/src/ui_organisedialog.h:203
+#: ../bin/src/ui_organisedialog.h:203
 msgid "Insert..."
 msgstr "Infoga..."
 
@@ -2134,14 +2121,6 @@ msgstr "Internet operatörer"
 #: internet/lastfmservice.cpp:440
 msgid "Invalid API key"
 msgstr "Felaktig API-nyckel"
-
-#: internet/skyfmservice.cpp:72
-msgid "Invalid SKY.fm username or password"
-msgstr "Fel SKY.fm användarnamn eller lösenord"
-
-#: internet/digitallyimportedservicebase.cpp:238
-msgid "Invalid di.fm username or password"
-msgstr "Fel di.fm användarnamn eller lösenord"
 
 #: internet/lastfmservice.cpp:435
 msgid "Invalid format"
@@ -2167,7 +2146,7 @@ msgstr "Ogiltig tjänst"
 msgid "Invalid session key"
 msgstr "Felaktig sessionsnyckel"
 
-#: internet/groovesharkservice.cpp:370
+#: internet/groovesharkservice.cpp:373
 msgid "Invalid username and/or password"
 msgstr "Fel användarnamn och/eller lösenord"
 
@@ -2195,7 +2174,7 @@ msgstr "Jamendos favoritspår för veckan"
 msgid "Jamendo database"
 msgstr "Jamendos databas"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:678
+#: ../bin/src/ui_mainwindow.h:678
 msgid "Jump to the currently playing track"
 msgstr "Hoppa till spåret som spelas just nu"
 
@@ -2206,24 +2185,24 @@ msgstr "Behåll knappar i %1 sekund..."
 
 #: wiimotedev/wiimoteshortcutgrabber.cpp:73
 #: wiimotedev/wiimoteshortcutgrabber.cpp:117
-#: /home/arno/clementine/clementine-player/src/ui_wiimoteshortcutgrabber.h:127
+#: ../bin/src/ui_wiimoteshortcutgrabber.h:127
 #, qt-format
 msgid "Keep buttons for %1 seconds..."
 msgstr "Behåll knappar i %1 sekunder..."
 
-#: /home/arno/clementine/clementine-player/src/ui_behavioursettingspage.h:178
+#: ../bin/src/ui_behavioursettingspage.h:178
 msgid "Keep running in the background when the window is closed"
 msgstr "Fortsätt köra i bakgrunden när fönstret är stängt"
 
-#: /home/arno/clementine/clementine-player/src/ui_organisedialog.h:193
+#: ../bin/src/ui_organisedialog.h:193
 msgid "Keep the original files"
 msgstr "Behåll originalfilerna"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:671
+#: ../bin/src/ui_mainwindow.h:671
 msgid "Kittens"
 msgstr "Kittens"
 
-#: /home/arno/clementine/clementine-player/src/ui_behavioursettingspage.h:180
+#: ../bin/src/ui_behavioursettingspage.h:180
 msgid "Language"
 msgstr "Språk"
 
@@ -2244,11 +2223,11 @@ msgid "Large sidebar"
 msgstr "Stor sidopanel"
 
 #: library/library.cpp:66 playlist/playlist.cpp:1093
-#: /home/arno/clementine/clementine-player/src/ui_edittagdialog.h:641
+#: ../bin/src/ui_edittagdialog.h:641
 msgid "Last played"
 msgstr "Senast spelad"
 
-#: /home/arno/clementine/clementine-player/src/ui_lastfmsettingspage.h:144
+#: ../bin/src/ui_lastfmsettingspage.h:144
 msgid "Last.fm"
 msgstr "Last.fm"
 
@@ -2294,7 +2273,7 @@ msgstr "Last.fm-taggradio: %1"
 msgid "Last.fm is currently busy, please try again in a few minutes"
 msgstr "Last.fm är upptaget för närvarande, försök igen om ett par minuter"
 
-#: /home/arno/clementine/clementine-player/src/ui_lastfmsettingspage.h:148
+#: ../bin/src/ui_lastfmsettingspage.h:148
 msgid "Last.fm password"
 msgstr "Last.fm-lösenord"
 
@@ -2306,7 +2285,7 @@ msgstr "Last.fm-låtstatistik"
 msgid "Last.fm tags"
 msgstr "Last.fm-taggar"
 
-#: /home/arno/clementine/clementine-player/src/ui_lastfmsettingspage.h:146
+#: ../bin/src/ui_lastfmsettingspage.h:146
 msgid "Last.fm username"
 msgstr "Last.fm-användarnamn"
 
@@ -2318,13 +2297,12 @@ msgstr "Last.fm-wiki"
 msgid "Least favourite tracks"
 msgstr "Minst omtyckta spår"
 
-#: /home/arno/clementine/clementine-player/src/ui_playbacksettingspage.h:282
+#: ../bin/src/ui_playbacksettingspage.h:282
 msgid "Leave blank for the default.  Examples: \"/dev/dsp\", \"front\", etc."
 msgstr "Lämna tomt för standardvärdet. Exempel: \"/dev/dsp\", \"front\", etc."
 
 #: playlist/playlist.cpp:1082 ui/organisedialog.cpp:63
-#: ui/qtsystemtrayicon.cpp:255
-#: /home/arno/clementine/clementine-player/src/ui_edittagdialog.h:636
+#: ui/qtsystemtrayicon.cpp:255 ../bin/src/ui_edittagdialog.h:636
 msgid "Length"
 msgstr "Speltid"
 
@@ -2332,7 +2310,7 @@ msgstr "Speltid"
 msgid "Library"
 msgstr "Bibliotek"
 
-#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:122
+#: ../bin/src/ui_groupbydialog.h:122
 msgid "Library advanced grouping"
 msgstr "Avancerad bibliotekgruppering"
 
@@ -2344,7 +2322,7 @@ msgstr "Notis om omsökning av biblioteket"
 msgid "Library search"
 msgstr "Bibliotekssökning"
 
-#: /home/arno/clementine/clementine-player/src/ui_querysortpage.h:140
+#: ../bin/src/ui_querysortpage.h:140
 msgid "Limits"
 msgstr "Begränsningar"
 
@@ -2352,11 +2330,11 @@ msgstr "Begränsningar"
 msgid "Live"
 msgstr "Live"
 
-#: /home/arno/clementine/clementine-player/src/ui_albumcovermanager.h:151
+#: ../bin/src/ui_albumcovermanager.h:151
 msgid "Load"
 msgstr "Läs in"
 
-#: /home/arno/clementine/clementine-player/src/ui_coverfromurldialog.h:102
+#: ../bin/src/ui_coverfromurldialog.h:102
 msgid "Load cover from URL"
 msgstr "Ladda omslag från URL"
 
@@ -2372,7 +2350,7 @@ msgstr "Läs in omslagsbild från disk..."
 msgid "Load playlist"
 msgstr "Läs in spellista"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:684
+#: ../bin/src/ui_mainwindow.h:684
 msgid "Load playlist..."
 msgstr "Läs in spellista..."
 
@@ -2400,7 +2378,7 @@ msgstr "Läser in smart spellista"
 msgid "Loading songs"
 msgstr "Laddar låtar"
 
-#: internet/digitallyimportedurlhandler.cpp:61
+#: internet/digitallyimportedurlhandler.cpp:51
 #: internet/somafmurlhandler.cpp:45
 msgid "Loading stream"
 msgstr "Läser in ström"
@@ -2414,8 +2392,7 @@ msgid "Loading tracks info"
 msgstr "Laddar låtinformation"
 
 #: library/librarymodel.cpp:117 widgets/prettyimage.cpp:168
-#: widgets/widgetfadehelper.cpp:93
-#: /home/arno/clementine/clementine-player/src/ui_searchpreview.h:106
+#: widgets/widgetfadehelper.cpp:93 ../bin/src/ui_searchpreview.h:106
 msgid "Loading..."
 msgstr "Läser in..."
 
@@ -2423,19 +2400,20 @@ msgstr "Läser in..."
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "Läser in filer/webbadresser, ersätter aktuell spellista"
 
-#: /home/arno/clementine/clementine-player/src/ui_groovesharksettingspage.h:116
-#: /home/arno/clementine/clementine-player/src/ui_magnatunesettingspage.h:160
-#: /home/arno/clementine/clementine-player/src/ui_spotifysettingspage.h:182
-#: /home/arno/clementine/clementine-player/src/ui_remotesettingspage.h:205
-#: /home/arno/clementine/clementine-player/src/ui_lastfmsettingspage.h:147
+#: ../bin/src/ui_digitallyimportedsettingspage.h:163
+#: ../bin/src/ui_groovesharksettingspage.h:116
+#: ../bin/src/ui_magnatunesettingspage.h:160
+#: ../bin/src/ui_spotifysettingspage.h:182
+#: ../bin/src/ui_remotesettingspage.h:205
+#: ../bin/src/ui_lastfmsettingspage.h:147
 msgid "Login"
 msgstr "Inloggning"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsaac.h:137
+#: ../bin/src/ui_transcoderoptionsaac.h:137
 msgid "Long term prediction profile (LTP)"
 msgstr "Långsiktig förutsägelseprofil (LTP)"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:641
+#: ../bin/src/ui_mainwindow.h:641
 msgid "Love"
 msgstr "Älska"
 
@@ -2452,11 +2430,11 @@ msgstr "Låg (15 fps)"
 msgid "Low (256x256)"
 msgstr "Låg (256x256)"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsaac.h:135
+#: ../bin/src/ui_transcoderoptionsaac.h:135
 msgid "Low complexity profile (LC)"
 msgstr "Låg komplexitetprofil (LC)"
 
-#: /home/arno/clementine/clementine-player/src/ui_songinfosettingspage.h:187
+#: ../bin/src/ui_songinfosettingspage.h:187
 msgid "Lyrics"
 msgstr "Låttexter"
 
@@ -2465,16 +2443,15 @@ msgstr "Låttexter"
 msgid "Lyrics from %1"
 msgstr "Låttext från %1"
 
-#: core/song.cpp:135
-#: /home/arno/clementine/clementine-player/src/ui_transcodersettingspage.h:159
+#: core/song.cpp:135 ../bin/src/ui_transcodersettingspage.h:159
 msgid "MP3"
 msgstr "MP3"
 
-#: /home/arno/clementine/clementine-player/src/ui_digitallyimportedsettingspage.h:142
-msgid "MP3 256k (Premium only)"
-msgstr "MP3 256k (Premium endast)"
+#: ../bin/src/ui_digitallyimportedsettingspage.h:177
+msgid "MP3 256k"
+msgstr ""
 
-#: /home/arno/clementine/clementine-player/src/ui_digitallyimportedsettingspage.h:141
+#: ../bin/src/ui_digitallyimportedsettingspage.h:170
 msgid "MP3 96k"
 msgstr "MP3 96k"
 
@@ -2486,12 +2463,11 @@ msgstr "MP4 AAC"
 msgid "MPC"
 msgstr "MPC"
 
-#: ui/mainwindow.cpp:246
-#: /home/arno/clementine/clementine-player/src/ui_magnatunesettingspage.h:150
+#: ui/mainwindow.cpp:246 ../bin/src/ui_magnatunesettingspage.h:150
 msgid "Magnatune"
 msgstr "Magnatune"
 
-#: /home/arno/clementine/clementine-player/src/ui_magnatunedownloaddialog.h:131
+#: ../bin/src/ui_magnatunedownloaddialog.h:131
 msgid "Magnatune Download"
 msgstr "Magnatude-hämtning"
 
@@ -2499,7 +2475,7 @@ msgstr "Magnatude-hämtning"
 msgid "Magnatune download finished"
 msgstr "Magnatude-hämtning slutförd"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsaac.h:134
+#: ../bin/src/ui_transcoderoptionsaac.h:134
 msgid "Main profile (MAIN)"
 msgstr "Huvudprofil (MAIN)"
 
@@ -2511,7 +2487,7 @@ msgstr "Gör spellista tillgänglig offline"
 msgid "Malformed response"
 msgstr "Felformaterat svar"
 
-#: /home/arno/clementine/clementine-player/src/ui_networkproxysettingspage.h:160
+#: ../bin/src/ui_networkproxysettingspage.h:160
 msgid "Manual proxy configuration"
 msgstr "Manuell proxykonfiguration"
 
@@ -2519,15 +2495,15 @@ msgstr "Manuell proxykonfiguration"
 msgid "Manufacturer"
 msgstr "Tillverkare"
 
-#: /home/arno/clementine/clementine-player/src/ui_querysearchpage.h:74
+#: ../bin/src/ui_querysearchpage.h:74
 msgid "Match every search term (AND)"
 msgstr "Matcha varje sökterm (OCH)"
 
-#: /home/arno/clementine/clementine-player/src/ui_querysearchpage.h:75
+#: ../bin/src/ui_querysearchpage.h:75
 msgid "Match one or more search terms (OR)"
 msgstr "Matcha en eller flera söktermer (ELLER)"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsvorbis.h:209
+#: ../bin/src/ui_transcoderoptionsvorbis.h:209
 msgid "Maximum bitrate"
 msgstr "Maximal bithastighet"
 
@@ -2544,11 +2520,11 @@ msgstr "Mellan (25 fps)"
 msgid "Medium (512x512)"
 msgstr "Mellan (512x512)"
 
-#: /home/arno/clementine/clementine-player/src/ui_magnatunesettingspage.h:152
+#: ../bin/src/ui_magnatunesettingspage.h:152
 msgid "Membership type"
 msgstr "Medlemskapstyp"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsvorbis.h:206
+#: ../bin/src/ui_transcoderoptionsvorbis.h:206
 msgid "Minimum bitrate"
 msgstr "Minimal bithastighet"
 
@@ -2560,7 +2536,7 @@ msgstr "Saknar förinställningar för projectM"
 msgid "Model"
 msgstr "Modell"
 
-#: /home/arno/clementine/clementine-player/src/ui_librarysettingspage.h:163
+#: ../bin/src/ui_librarysettingspage.h:163
 msgid "Monitor the library for changes"
 msgstr "Övervaka förändringar i biblioteket"
 
@@ -2580,8 +2556,8 @@ msgstr "Monteringspunkt"
 msgid "Mount points"
 msgstr "Monteringspunkter"
 
-#: /home/arno/clementine/clementine-player/src/ui_queuemanager.h:131
-#: /home/arno/clementine/clementine-player/src/ui_songinfosettingspage.h:190
+#: ../bin/src/ui_globalsearchsettingspage.h:166
+#: ../bin/src/ui_queuemanager.h:131 ../bin/src/ui_songinfosettingspage.h:190
 msgid "Move down"
 msgstr "Flytta nedåt"
 
@@ -2589,8 +2565,8 @@ msgstr "Flytta nedåt"
 msgid "Move to library..."
 msgstr "Flytta till biblioteket..."
 
-#: /home/arno/clementine/clementine-player/src/ui_queuemanager.h:127
-#: /home/arno/clementine/clementine-player/src/ui_songinfosettingspage.h:189
+#: ../bin/src/ui_globalsearchsettingspage.h:165
+#: ../bin/src/ui_queuemanager.h:127 ../bin/src/ui_songinfosettingspage.h:189
 msgid "Move up"
 msgstr "Flytta uppåt"
 
@@ -2598,12 +2574,12 @@ msgstr "Flytta uppåt"
 msgid "Music (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma *.mp4 *.spx *.wav)"
 msgstr "Musik (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma *.mp4 *.spx *.wav)"
 
-#: /home/arno/clementine/clementine-player/src/ui_librarysettingspage.h:157
+#: ../bin/src/ui_librarysettingspage.h:157
 msgid "Music Library"
 msgstr "Musikbibliotek"
 
 #: core/globalshortcuts.cpp:54 wiimotedev/wiimotesettingspage.cpp:105
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:692
+#: ../bin/src/ui_mainwindow.h:692
 msgid "Mute"
 msgstr "Tyst"
 
@@ -2639,19 +2615,18 @@ msgstr "Min radiostation"
 msgid "My Recommendations"
 msgstr "Mina rekommendationer"
 
-#: ui/equalizer.cpp:172
-#: /home/arno/clementine/clementine-player/src/ui_deviceproperties.h:369
-#: /home/arno/clementine/clementine-player/src/ui_magnatunedownloaddialog.h:135
-#: /home/arno/clementine/clementine-player/src/ui_wizardfinishpage.h:84
-#: /home/arno/clementine/clementine-player/src/ui_globalshortcutssettingspage.h:174
+#: ui/equalizer.cpp:172 ../bin/src/ui_deviceproperties.h:369
+#: ../bin/src/ui_magnatunedownloaddialog.h:135
+#: ../bin/src/ui_wizardfinishpage.h:84
+#: ../bin/src/ui_globalshortcutssettingspage.h:174
 msgid "Name"
 msgstr "Namn"
 
-#: /home/arno/clementine/clementine-player/src/ui_organisedialog.h:197
+#: ../bin/src/ui_organisedialog.h:197
 msgid "Naming options"
 msgstr "Namngivningsalternativ"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsspeex.h:230
+#: ../bin/src/ui_transcoderoptionsspeex.h:230
 msgid "Narrow band (NB)"
 msgstr "Snävt band (NB)"
 
@@ -2659,11 +2634,11 @@ msgstr "Snävt band (NB)"
 msgid "Neighbors"
 msgstr "Grannar"
 
-#: /home/arno/clementine/clementine-player/src/ui_songinfosettingspage.h:184
+#: ../bin/src/ui_songinfosettingspage.h:184
 msgid "Network"
 msgstr "Nätverk"
 
-#: /home/arno/clementine/clementine-player/src/ui_networkproxysettingspage.h:157
+#: ../bin/src/ui_networkproxysettingspage.h:157
 msgid "Network Proxy"
 msgstr "Nätverksproxy"
 
@@ -2675,13 +2650,12 @@ msgstr "Aldrig"
 msgid "Never played"
 msgstr "Aldrig spelade"
 
-#: /home/arno/clementine/clementine-player/src/ui_behavioursettingspage.h:194
-#: /home/arno/clementine/clementine-player/src/ui_behavioursettingspage.h:208
+#: ../bin/src/ui_behavioursettingspage.h:194
+#: ../bin/src/ui_behavioursettingspage.h:208
 msgid "Never start playing"
 msgstr "Starta aldrig uppspelning"
 
-#: ui/mainwindow.cpp:1420
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:680
+#: ui/mainwindow.cpp:1420 ../bin/src/ui_mainwindow.h:680
 msgid "New playlist"
 msgstr "Ny spellista"
 
@@ -2693,7 +2667,7 @@ msgstr "Ny smart spellista..."
 msgid "New songs"
 msgstr "Nya låtar"
 
-#: /home/arno/clementine/clementine-player/src/ui_dynamicplaylistcontrols.h:104
+#: ../bin/src/ui_dynamicplaylistcontrols.h:104
 msgid "New tracks will be added automatically."
 msgstr "Nya spår läggs till automatiskt."
 
@@ -2706,7 +2680,7 @@ msgid "Next"
 msgstr "Nästa"
 
 #: core/globalshortcuts.cpp:50 wiimotedev/wiimotesettingspage.cpp:99
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:635
+#: ../bin/src/ui_mainwindow.h:635
 msgid "Next track"
 msgstr "Nästa spår"
 
@@ -2714,7 +2688,7 @@ msgstr "Nästa spår"
 msgid "No analyzer"
 msgstr "Ingen analysator"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsaac.h:146
+#: ../bin/src/ui_transcoderoptionsaac.h:146
 msgid "No long blocks"
 msgstr "Inga långa block"
 
@@ -2724,13 +2698,12 @@ msgid ""
 msgstr ""
 "Inga träffar hittades. Töm sökrutan för att visa hela spellistan igen."
 
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsaac.h:145
+#: ../bin/src/ui_transcoderoptionsaac.h:145
 msgid "No short blocks"
 msgstr "Inga korta block"
 
-#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:128
-#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:141
-#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:154
+#: ../bin/src/ui_groupbydialog.h:128 ../bin/src/ui_groupbydialog.h:141
+#: ../bin/src/ui_groupbydialog.h:154
 msgid "None"
 msgstr "Inga"
 
@@ -2738,7 +2711,7 @@ msgstr "Inga"
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Ingen av de valda låtarna lämpar sig för kopiering till en enhet"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsaac.h:144
+#: ../bin/src/ui_transcoderoptionsaac.h:144
 msgid "Normal block type"
 msgstr "Normal blocktyp"
 
@@ -2770,15 +2743,19 @@ msgstr "Inte tillräckligt med grannar"
 msgid "Not installed"
 msgstr "Inte installerad"
 
+#: globalsearch/globalsearchsettingspage.cpp:102
+msgid "Not logged in"
+msgstr ""
+
 #: devices/deviceview.cpp:110
 msgid "Not mounted - double click to mount"
 msgstr "Inte monterad - dubbelklicka för att montera"
 
-#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:397
+#: ../bin/src/ui_notificationssettingspage.h:397
 msgid "Notification type"
 msgstr "Notifieringstyp"
 
-#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:356
+#: ../bin/src/ui_notificationssettingspage.h:356
 msgid "Notifications"
 msgstr "Notifieringar"
 
@@ -2798,26 +2775,25 @@ msgstr "Ogg FLAC"
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
 
-#: core/song.cpp:138
-#: /home/arno/clementine/clementine-player/src/ui_magnatunedownloaddialog.h:139
-#: /home/arno/clementine/clementine-player/src/ui_magnatunesettingspage.h:166
+#: core/song.cpp:138 ../bin/src/ui_magnatunedownloaddialog.h:139
+#: ../bin/src/ui_magnatunesettingspage.h:166
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
 
-#: /home/arno/clementine/clementine-player/src/ui_querysortpage.h:142
+#: ../bin/src/ui_querysortpage.h:142
 msgid "Only show the first"
 msgstr "Visa endast de första"
 
-#: internet/digitallyimportedservicebase.cpp:192
+#: internet/digitallyimportedservicebase.cpp:213
 #, qt-format
 msgid "Open %1 in browser"
 msgstr "Öppna %1 i webbläsare"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:667
+#: ../bin/src/ui_mainwindow.h:667
 msgid "Open &audio CD..."
 msgstr "Öppna &ljud-CD..."
 
-#: /home/arno/clementine/clementine-player/src/ui_deviceproperties.h:382
+#: ../bin/src/ui_deviceproperties.h:382
 msgid "Open device"
 msgstr "Öppna enhet"
 
@@ -2825,13 +2801,13 @@ msgstr "Öppna enhet"
 msgid "Open dir.xiph.org in browser"
 msgstr "Öppna dir.xiph.org i webbläsare"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:666
+#: ../bin/src/ui_mainwindow.h:666
 msgid "Open file..."
 msgstr "Öppna fil..."
 
 #: devices/deviceview.cpp:220 internet/internetservice.cpp:73
 #: library/libraryview.cpp:240 widgets/fileviewlist.cpp:35
-#: /home/arno/clementine/clementine-player/src/ui_behavioursettingspage.h:203
+#: ../bin/src/ui_behavioursettingspage.h:203
 msgid "Open in new playlist"
 msgstr "Öppna i ny spellista"
 
@@ -2847,8 +2823,8 @@ msgstr "Öppna magnatune.com i en webbläsare"
 msgid "Open somafm.com in browser"
 msgstr "Öppna somafm.com i en webbläsare"
 
-#: /home/arno/clementine/clementine-player/src/ui_globalshortcutssettingspage.h:169
-#: /home/arno/clementine/clementine-player/src/ui_globalshortcutssettingspage.h:171
+#: ../bin/src/ui_globalshortcutssettingspage.h:169
+#: ../bin/src/ui_globalshortcutssettingspage.h:171
 msgid "Open..."
 msgstr "Öppna..."
 
@@ -2856,19 +2832,19 @@ msgstr "Öppna..."
 msgid "Operation failed"
 msgstr "Åtgärden misslyckades"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsmp3.h:193
+#: ../bin/src/ui_transcoderoptionsmp3.h:193
 msgid "Optimize for bitrate"
 msgstr "Optimera för bithastighet"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsmp3.h:191
+#: ../bin/src/ui_transcoderoptionsmp3.h:191
 msgid "Optimize for quality"
 msgstr "Optimera för kvalitet"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcodedialog.h:210
+#: ../bin/src/ui_transcodedialog.h:210
 msgid "Options..."
 msgstr "Alternativ..."
 
-#: /home/arno/clementine/clementine-player/src/ui_organisedialog.h:188
+#: ../bin/src/ui_organisedialog.h:188
 msgid "Organise Files"
 msgstr "Organisera filer"
 
@@ -2888,19 +2864,19 @@ msgstr "Ursprungliga etiketter"
 msgid "Other options"
 msgstr "Övriga flaggor"
 
-#: /home/arno/clementine/clementine-player/src/ui_playbacksettingspage.h:283
+#: ../bin/src/ui_playbacksettingspage.h:283
 msgid "Output device"
 msgstr "Utdataenhet"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcodedialog.h:208
+#: ../bin/src/ui_transcodedialog.h:208
 msgid "Output options"
 msgstr "Utdataalternativ"
 
-#: /home/arno/clementine/clementine-player/src/ui_playbacksettingspage.h:277
+#: ../bin/src/ui_playbacksettingspage.h:277
 msgid "Output plugin"
 msgstr "Utdatainstick"
 
-#: /home/arno/clementine/clementine-player/src/ui_organisedialog.h:207
+#: ../bin/src/ui_organisedialog.h:207
 msgid "Overwrite existing files"
 msgstr "Skriv över befintliga filer"
 
@@ -2912,10 +2888,10 @@ msgstr "Sorterar Jamendos katalog"
 msgid "Party"
 msgstr "Party"
 
-#: /home/arno/clementine/clementine-player/src/ui_groovesharksettingspage.h:115
-#: /home/arno/clementine/clementine-player/src/ui_magnatunesettingspage.h:161
-#: /home/arno/clementine/clementine-player/src/ui_spotifysettingspage.h:181
-#: /home/arno/clementine/clementine-player/src/ui_networkproxysettingspage.h:169
+#: ../bin/src/ui_groovesharksettingspage.h:115
+#: ../bin/src/ui_magnatunesettingspage.h:161
+#: ../bin/src/ui_spotifysettingspage.h:181
+#: ../bin/src/ui_networkproxysettingspage.h:169
 msgid "Password"
 msgstr "Lösenord"
 
@@ -2943,11 +2919,11 @@ msgstr "Vanlig sidorad"
 #: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:519 ui/mainwindow.cpp:853
 #: ui/mainwindow.cpp:872 ui/mainwindow.cpp:1274 ui/qtsystemtrayicon.cpp:166
 #: ui/qtsystemtrayicon.cpp:192 wiimotedev/wiimotesettingspage.cpp:101
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:631
+#: ../bin/src/ui_mainwindow.h:631
 msgid "Play"
 msgstr "Spela upp"
 
-#: /home/arno/clementine/clementine-player/src/ui_lastfmstationdialog.h:92
+#: ../bin/src/ui_lastfmstationdialog.h:92
 msgid "Play Artist or Tag"
 msgstr "Spela upp artist eller tagg"
 
@@ -2955,8 +2931,7 @@ msgstr "Spela upp artist eller tagg"
 msgid "Play artist radio..."
 msgstr "Spela upp artistradio..."
 
-#: playlist/playlist.cpp:1091
-#: /home/arno/clementine/clementine-player/src/ui_edittagdialog.h:637
+#: playlist/playlist.cpp:1091 ../bin/src/ui_edittagdialog.h:637
 msgid "Play count"
 msgstr "Antal uppspelningar"
 
@@ -2972,8 +2947,8 @@ msgstr "Spela från mitt bibliotek"
 msgid "Play if stopped, pause if playing"
 msgstr "Spela upp om stoppad, gör paus vid uppspelning"
 
-#: /home/arno/clementine/clementine-player/src/ui_behavioursettingspage.h:195
-#: /home/arno/clementine/clementine-player/src/ui_behavioursettingspage.h:209
+#: ../bin/src/ui_behavioursettingspage.h:195
+#: ../bin/src/ui_behavioursettingspage.h:209
 msgid "Play if there is nothing already playing"
 msgstr "Spela om ingenting redan spelas"
 
@@ -2997,11 +2972,11 @@ msgstr "Spela upp spår nummer <n> från spellistan"
 msgid "Play/Pause"
 msgstr "Spela upp/gör paus"
 
-#: /home/arno/clementine/clementine-player/src/ui_playbacksettingspage.h:257
+#: ../bin/src/ui_playbacksettingspage.h:257
 msgid "Playback"
 msgstr "Uppspelning"
 
-#: /home/arno/clementine/clementine-player/src/ui_remotesettingspage.h:208
+#: ../bin/src/ui_remotesettingspage.h:208
 msgid "Player name"
 msgstr "Spelarnamn"
 
@@ -3030,7 +3005,7 @@ msgstr "Sök i spellistan"
 msgid "Playlist type"
 msgstr "Spellistetyp"
 
-#: /home/arno/clementine/clementine-player/src/ui_spotifysettingspage.h:185
+#: ../bin/src/ui_spotifysettingspage.h:185
 msgid "Plugin status:"
 msgstr "Instickstatus:"
 
@@ -3038,68 +3013,68 @@ msgstr "Instickstatus:"
 msgid "Pop"
 msgstr "Pop"
 
-#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:403
+#: ../bin/src/ui_notificationssettingspage.h:403
 msgid "Popup duration"
 msgstr "Popup-varaktighet"
 
-#: /home/arno/clementine/clementine-player/src/ui_networkproxysettingspage.h:166
+#: ../bin/src/ui_networkproxysettingspage.h:166
 msgid "Port"
 msgstr "Port"
 
-#: ui/equalizer.cpp:46
-#: /home/arno/clementine/clementine-player/src/ui_playbacksettingspage.h:274
+#: ui/equalizer.cpp:46 ../bin/src/ui_playbacksettingspage.h:274
 msgid "Pre-amp"
 msgstr "Förförstärkare"
 
-#: /home/arno/clementine/clementine-player/src/ui_digitallyimportedsettingspage.h:137
-#: /home/arno/clementine/clementine-player/src/ui_magnatunesettingspage.h:162
-#: /home/arno/clementine/clementine-player/src/ui_settingsdialog.h:115
-#: /home/arno/clementine/clementine-player/src/ui_lastfmsettingspage.h:149
+#: ../bin/src/ui_digitallyimportedsettingspage.h:166
+#: ../bin/src/ui_magnatunesettingspage.h:162
+#: ../bin/src/ui_settingsdialog.h:115 ../bin/src/ui_lastfmsettingspage.h:149
 msgid "Preferences"
 msgstr "Inställningar"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:656
+#: ../bin/src/ui_mainwindow.h:656
 msgid "Preferences..."
 msgstr "Inställningar..."
 
-#: /home/arno/clementine/clementine-player/src/ui_librarysettingspage.h:164
+#: ../bin/src/ui_librarysettingspage.h:164
 msgid "Preferred album art filenames (comma separated)"
 msgstr "Föredragna omslagsbildsfilnamn (kommaseparerade)"
 
-#: /home/arno/clementine/clementine-player/src/ui_magnatunesettingspage.h:163
+#: ../bin/src/ui_magnatunesettingspage.h:163
 msgid "Preferred audio format"
 msgstr "Önskat ljudformat"
 
-#: /home/arno/clementine/clementine-player/src/ui_deviceproperties.h:380
+#: ../bin/src/ui_deviceproperties.h:380
 msgid "Preferred format"
 msgstr "Önskat format"
 
-#: /home/arno/clementine/clementine-player/src/ui_equalizer.h:119
+#: ../bin/src/ui_digitallyimportedsettingspage.h:174
+msgid "Premium audio type"
+msgstr ""
+
+#: ../bin/src/ui_equalizer.h:119
 msgid "Preset:"
 msgstr "Förval:"
 
-#: /home/arno/clementine/clementine-player/src/ui_wiimoteshortcutgrabber.h:124
+#: ../bin/src/ui_wiimoteshortcutgrabber.h:124
 msgid "Press a button combination to use for"
 msgstr "Tryck en tangentkombination att använda för"
 
-#: /home/arno/clementine/clementine-player/src/ui_globalshortcutgrabber.h:73
+#: ../bin/src/ui_globalshortcutgrabber.h:73
 msgid "Press a key"
 msgstr "Tryck en tangent"
 
-#: ui/globalshortcutgrabber.cpp:39
-#: /home/arno/clementine/clementine-player/src/ui_globalshortcutgrabber.h:74
+#: ui/globalshortcutgrabber.cpp:39 ../bin/src/ui_globalshortcutgrabber.h:74
 #, qt-format
 msgid "Press a key combination to use for %1..."
 msgstr "Tryck en tangentkombination till att använda för %1"
 
-#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:416
+#: ../bin/src/ui_notificationssettingspage.h:416
 msgid "Pretty OSD options"
 msgstr "Alternativ för Skön notifiering"
 
-#: /home/arno/clementine/clementine-player/src/ui_searchpreview.h:105
-#: /home/arno/clementine/clementine-player/src/ui_songinfosettingspage.h:183
-#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:411
-#: /home/arno/clementine/clementine-player/src/ui_organisedialog.h:208
+#: ../bin/src/ui_searchpreview.h:105 ../bin/src/ui_songinfosettingspage.h:183
+#: ../bin/src/ui_notificationssettingspage.h:411
+#: ../bin/src/ui_organisedialog.h:208
 msgid "Preview"
 msgstr "Förhandsvisning"
 
@@ -3108,7 +3083,7 @@ msgid "Previous"
 msgstr "Föregående"
 
 #: core/globalshortcuts.cpp:51 wiimotedev/wiimotesettingspage.cpp:100
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:629
+#: ../bin/src/ui_mainwindow.h:629
 msgid "Previous track"
 msgstr "Föregående spår"
 
@@ -3116,38 +3091,37 @@ msgstr "Föregående spår"
 msgid "Print out version information"
 msgstr "Visa versionsinformation"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsaac.h:131
+#: ../bin/src/ui_transcoderoptionsaac.h:131
 msgid "Profile"
 msgstr "Profil"
 
-#: /home/arno/clementine/clementine-player/src/ui_magnatunedownloaddialog.h:134
-#: /home/arno/clementine/clementine-player/src/ui_transcodedialog.h:216
+#: ../bin/src/ui_magnatunedownloaddialog.h:134
+#: ../bin/src/ui_transcodedialog.h:216
 msgid "Progress"
 msgstr "Förlopp"
 
 #: wiimotedev/wiimotesettingspage.cpp:227
-#: /home/arno/clementine/clementine-player/src/ui_wiimoteshortcutgrabber.h:125
+#: ../bin/src/ui_wiimoteshortcutgrabber.h:125
 msgid "Push Wiiremote button"
 msgstr "Tryck på Wii-kontrollknapp"
 
-#: /home/arno/clementine/clementine-player/src/ui_querysortpage.h:138
+#: ../bin/src/ui_querysortpage.h:138
 msgid "Put songs in a random order"
 msgstr "Lägg till låtar i slumpmässig ordning"
 
 #: visualisations/visualisationcontainer.cpp:107
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsflac.h:81
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsmp3.h:192
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsspeex.h:217
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsvorbis.h:202
+#: ../bin/src/ui_transcoderoptionsflac.h:81
+#: ../bin/src/ui_transcoderoptionsmp3.h:192
+#: ../bin/src/ui_transcoderoptionsspeex.h:217
+#: ../bin/src/ui_transcoderoptionsvorbis.h:202
 msgid "Quality"
 msgstr "Kvalitet"
 
-#: /home/arno/clementine/clementine-player/src/ui_deviceproperties.h:383
+#: ../bin/src/ui_deviceproperties.h:383
 msgid "Querying device..."
 msgstr "Förfrågar enhet..."
 
-#: /home/arno/clementine/clementine-player/src/ui_queuemanager.h:125
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:690
+#: ../bin/src/ui_queuemanager.h:125 ../bin/src/ui_mainwindow.h:690
 msgid "Queue Manager"
 msgstr "Köhanterare"
 
@@ -3160,16 +3134,15 @@ msgstr "Kölägg valda spår"
 msgid "Queue track"
 msgstr "Kölägg spår"
 
-#: /home/arno/clementine/clementine-player/src/ui_playbacksettingspage.h:271
+#: ../bin/src/ui_playbacksettingspage.h:271
 msgid "Radio (equal loudness for all tracks)"
 msgstr "Radio (likvärdig ljudstyrka för alla spår)"
 
-#: core/backgroundstreams.cpp:31
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:669
+#: core/backgroundstreams.cpp:31 ../bin/src/ui_mainwindow.h:669
 msgid "Rain"
 msgstr "Regn"
 
-#: /home/arno/clementine/clementine-player/src/ui_visualisationselector.h:112
+#: ../bin/src/ui_visualisationselector.h:112
 msgid "Random visualization"
 msgstr "Slumpmässig visualisering"
 
@@ -3197,8 +3170,7 @@ msgstr "Betygsätt den aktuella låten 4 stjärnor"
 msgid "Rate the current song 5 stars"
 msgstr "Betygsätt den aktuella låten 5 stjärnor"
 
-#: playlist/playlist.cpp:1090
-#: /home/arno/clementine/clementine-player/src/ui_edittagdialog.h:645
+#: playlist/playlist.cpp:1090 ../bin/src/ui_edittagdialog.h:645
 msgid "Rating"
 msgstr "Betyg"
 
@@ -3222,7 +3194,7 @@ msgstr ""
 msgid "Refresh station list"
 msgstr "Uppdatera kanallistan"
 
-#: internet/digitallyimportedservicebase.cpp:195
+#: internet/digitallyimportedservicebase.cpp:216
 msgid "Refresh streams"
 msgstr ""
 
@@ -3230,34 +3202,37 @@ msgstr ""
 msgid "Reggae"
 msgstr "Reggae"
 
-#: /home/arno/clementine/clementine-player/src/ui_wiimoteshortcutgrabber.h:126
+#: ../bin/src/ui_wiimoteshortcutgrabber.h:126
 msgid "Remember Wii remote swing"
 msgstr "Kom ihåg Wii-kontrollens rörelse"
 
-#: /home/arno/clementine/clementine-player/src/ui_behavioursettingspage.h:189
+#: ../bin/src/ui_behavioursettingspage.h:189
 msgid "Remember from last time"
 msgstr "Kom ihåg från förra gången"
 
-#: /home/arno/clementine/clementine-player/src/ui_remotesettingspage.h:199
+#: ../bin/src/ui_remotesettingspage.h:199
 msgid "Remote Control"
 msgstr "Fjärrkontroll"
 
 #: internet/savedradio.cpp:94 internet/lastfmservice.cpp:97
-#: /home/arno/clementine/clementine-player/src/ui_queuemanager.h:135
-#: /home/arno/clementine/clementine-player/src/ui_searchtermwidget.h:282
-#: /home/arno/clementine/clementine-player/src/ui_transcodedialog.h:207
+#: ../bin/src/ui_queuemanager.h:135 ../bin/src/ui_searchtermwidget.h:282
+#: ../bin/src/ui_transcodedialog.h:207
 msgid "Remove"
 msgstr "Ta bort"
 
-#: /home/arno/clementine/clementine-player/src/ui_wiimotesettingspage.h:194
+#: ../bin/src/ui_wiimotesettingspage.h:194
 msgid "Remove action"
 msgstr "Ta bort åtgärd"
 
-#: /home/arno/clementine/clementine-player/src/ui_librarysettingspage.h:160
+#: ../bin/src/ui_librarysettingspage.h:160
 msgid "Remove folder"
 msgstr "Ta bort mapp"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:674
+#: internet/groovesharkservice.cpp:445
+msgid "Remove from favorites"
+msgstr ""
+
+#: internet/groovesharkservice.cpp:442 ../bin/src/ui_mainwindow.h:674
 msgid "Remove from playlist"
 msgstr "Ta bort från spellistan"
 
@@ -3273,27 +3248,23 @@ msgstr "Döp om spellista"
 msgid "Rename playlist..."
 msgstr "Döp om spellistan..."
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:652
+#: ../bin/src/ui_mainwindow.h:652
 msgid "Renumber tracks in this order..."
 msgstr "Omnumrera spår i denna ordning..."
 
-#: playlist/playlistsequence.cpp:171
-#: /home/arno/clementine/clementine-player/src/ui_playlistsequence.h:107
+#: playlist/playlistsequence.cpp:171 ../bin/src/ui_playlistsequence.h:107
 msgid "Repeat"
 msgstr "Upprepa"
 
-#: widgets/osd.cpp:308
-#: /home/arno/clementine/clementine-player/src/ui_playlistsequence.h:101
+#: widgets/osd.cpp:308 ../bin/src/ui_playlistsequence.h:101
 msgid "Repeat album"
 msgstr "Upprepa album"
 
-#: widgets/osd.cpp:309
-#: /home/arno/clementine/clementine-player/src/ui_playlistsequence.h:102
+#: widgets/osd.cpp:309 ../bin/src/ui_playlistsequence.h:102
 msgid "Repeat playlist"
 msgstr "Upprepa spellista"
 
-#: widgets/osd.cpp:307
-#: /home/arno/clementine/clementine-player/src/ui_playlistsequence.h:100
+#: widgets/osd.cpp:307 ../bin/src/ui_playlistsequence.h:100
 msgid "Repeat track"
 msgstr "Upprepa spår"
 
@@ -3307,23 +3278,23 @@ msgstr ""
 msgid "Replace current playlist"
 msgstr "Ersätt den aktuella spellistan"
 
-#: /home/arno/clementine/clementine-player/src/ui_behavioursettingspage.h:202
+#: ../bin/src/ui_behavioursettingspage.h:202
 msgid "Replace the playlist"
 msgstr "Ersätt spellistan"
 
-#: /home/arno/clementine/clementine-player/src/ui_organisedialog.h:205
+#: ../bin/src/ui_organisedialog.h:205
 msgid "Replaces spaces with underscores"
 msgstr "Ersätter mellanslag med understreck"
 
-#: /home/arno/clementine/clementine-player/src/ui_playbacksettingspage.h:266
+#: ../bin/src/ui_playbacksettingspage.h:266
 msgid "Replay Gain"
 msgstr "Replay Gain"
 
-#: /home/arno/clementine/clementine-player/src/ui_playbacksettingspage.h:268
+#: ../bin/src/ui_playbacksettingspage.h:268
 msgid "Replay Gain mode"
 msgstr "Replay Gain-läge"
 
-#: /home/arno/clementine/clementine-player/src/ui_dynamicplaylistcontrols.h:105
+#: ../bin/src/ui_dynamicplaylistcontrols.h:105
 msgid "Repopulate"
 msgstr "Fyll i igen"
 
@@ -3331,20 +3302,23 @@ msgstr "Fyll i igen"
 msgid "Reset"
 msgstr "Återställ"
 
-#: ui/edittagdialog.cpp:703
-#: /home/arno/clementine/clementine-player/src/ui_edittagdialog.h:635
+#: ui/edittagdialog.cpp:703 ../bin/src/ui_edittagdialog.h:635
 msgid "Reset play counts"
 msgstr "Återställ låtstatistik"
 
-#: /home/arno/clementine/clementine-player/src/ui_organisedialog.h:206
+#: ../bin/src/ui_organisedialog.h:206
 msgid "Restrict to ASCII characters"
 msgstr "Begränsa till ASCII-tecken"
+
+#: ../bin/src/ui_globalsearchsettingspage.h:168
+msgid "Results"
+msgstr ""
 
 #: ui/equalizer.cpp:121
 msgid "Rock"
 msgstr "Rock"
 
-#: /home/arno/clementine/clementine-player/src/ui_networkproxysettingspage.h:164
+#: ../bin/src/ui_networkproxysettingspage.h:164
 msgid "SOCKS proxy"
 msgstr "SOCKS proxy"
 
@@ -3352,12 +3326,11 @@ msgstr "SOCKS proxy"
 msgid "Safely remove device"
 msgstr "Säker borttagning av enhet"
 
-#: /home/arno/clementine/clementine-player/src/ui_organisedialog.h:196
+#: ../bin/src/ui_organisedialog.h:196
 msgid "Safely remove the device after copying"
 msgstr "Säker borttagning av enheten efter kopiering"
 
-#: playlist/playlist.cpp:1098
-#: /home/arno/clementine/clementine-player/src/ui_edittagdialog.h:642
+#: playlist/playlist.cpp:1098 ../bin/src/ui_edittagdialog.h:642
 msgid "Sample rate"
 msgstr "Samplingsfrekvens"
 
@@ -3381,17 +3354,15 @@ msgstr "Spara bild"
 msgid "Save playlist"
 msgstr "Spara spellista"
 
-#: playlist/playlisttabbar.cpp:50
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:682
+#: playlist/playlisttabbar.cpp:50 ../bin/src/ui_mainwindow.h:682
 msgid "Save playlist..."
 msgstr "Spara spellistan..."
 
-#: ui/equalizer.cpp:172
-#: /home/arno/clementine/clementine-player/src/ui_equalizer.h:121
+#: ui/equalizer.cpp:172 ../bin/src/ui_equalizer.h:121
 msgid "Save preset"
 msgstr "Spara förinställning"
 
-#: /home/arno/clementine/clementine-player/src/ui_addstreamdialog.h:115
+#: ../bin/src/ui_addstreamdialog.h:115
 msgid "Save this stream in the Internet tab"
 msgstr "Spara denna ström i Internet-filken"
 
@@ -3399,33 +3370,32 @@ msgstr "Spara denna ström i Internet-filken"
 msgid "Saving tracks"
 msgstr "Sparar spår"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsaac.h:136
+#: ../bin/src/ui_transcoderoptionsaac.h:136
 msgid "Scalable sampling rate profile (SSR)"
 msgstr "Skalbar samplingsfrekvensprofil (SSR)"
 
-#: playlist/playlist.cpp:1094
-#: /home/arno/clementine/clementine-player/src/ui_edittagdialog.h:643
+#: playlist/playlist.cpp:1094 ../bin/src/ui_edittagdialog.h:643
 msgid "Score"
 msgstr "Poäng"
 
-#: /home/arno/clementine/clementine-player/src/ui_lastfmsettingspage.h:150
+#: ../bin/src/ui_lastfmsettingspage.h:150
 msgid "Scrobble tracks that I listen to"
 msgstr "Skrobbla låtar som jag lyssnar på"
 
-#: /home/arno/clementine/clementine-player/src/ui_albumcoversearcher.h:113
+#: ../bin/src/ui_albumcoversearcher.h:113
 msgid "Search"
 msgstr "Sök"
 
 #: internet/groovesharksearchplaylisttype.cpp:32
-#: internet/groovesharkservice.cpp:602
+#: internet/groovesharkservice.cpp:633
 msgid "Search Grooveshark"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:422 internet/groovesharkservice.cpp:431
+#: internet/groovesharkservice.cpp:448 internet/groovesharkservice.cpp:457
 msgid "Search Grooveshark (opens a new tab)"
 msgstr ""
 
-#: /home/arno/clementine/clementine-player/src/ui_icecastfilterwidget.h:78
+#: ../bin/src/ui_icecastfilterwidget.h:78
 msgid "Search Icecast stations"
 msgstr "Leta efter stationer på Icecast"
 
@@ -3453,7 +3423,7 @@ msgstr "Sök på Spotify (öppnar en ny flik)..."
 msgid "Search for album covers..."
 msgstr "Sök efter albumomslag..."
 
-#: /home/arno/clementine/clementine-player/src/ui_querysearchpage.h:71
+#: ../bin/src/ui_querysearchpage.h:71
 msgid "Search mode"
 msgstr "Sökläge"
 
@@ -3461,12 +3431,11 @@ msgstr "Sökläge"
 msgid "Search options"
 msgstr "Sökalternativ"
 
-#: smartplaylists/querywizardplugin.cpp:144
-#: /home/arno/clementine/clementine-player/src/ui_querysearchpage.h:78
+#: smartplaylists/querywizardplugin.cpp:144 ../bin/src/ui_querysearchpage.h:78
 msgid "Search terms"
 msgstr "Söktermer"
 
-#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:138
+#: ../bin/src/ui_groupbydialog.h:138
 msgid "Second level"
 msgstr "Andra nivån"
 
@@ -3494,11 +3463,11 @@ msgstr "Välj alla"
 msgid "Select None"
 msgstr "Välj ingen"
 
-#: /home/arno/clementine/clementine-player/src/ui_trackselectiondialog.h:207
+#: ../bin/src/ui_trackselectiondialog.h:207
 msgid "Select best possible match"
 msgstr "Välj bästa möjliga matchning"
 
-#: /home/arno/clementine/clementine-player/src/ui_visualisationselector.h:108
+#: ../bin/src/ui_visualisationselector.h:108
 msgid "Select visualizations"
 msgstr "Välj visualiseringar"
 
@@ -3523,20 +3492,20 @@ msgstr "Ställ in %1 till \"%2\"..."
 msgid "Set the volume to <value> percent"
 msgstr "Ställ in volymen till <värde> procent"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:653
+#: ../bin/src/ui_mainwindow.h:653
 msgid "Set value for all selected tracks..."
 msgstr "Ställ in värde för alla valda spår..."
 
-#: /home/arno/clementine/clementine-player/src/ui_remotesettingspage.h:207
+#: ../bin/src/ui_remotesettingspage.h:207
 msgid "Settings"
 msgstr "Inställningar"
 
-#: /home/arno/clementine/clementine-player/src/ui_globalshortcutssettingspage.h:173
+#: ../bin/src/ui_globalshortcutssettingspage.h:173
 msgid "Shortcut"
 msgstr "Snabbtangent"
 
 #: ui/globalshortcutssettingspage.cpp:130
-#: /home/arno/clementine/clementine-player/src/ui_globalshortcutssettingspage.h:175
+#: ../bin/src/ui_globalshortcutssettingspage.h:175
 #, qt-format
 msgid "Shortcut for %1"
 msgstr "Snabbtangent för %1"
@@ -3558,29 +3527,33 @@ msgstr ""
 msgid "Show OSD"
 msgstr "Visa notifiering"
 
-#: /home/arno/clementine/clementine-player/src/ui_playbacksettingspage.h:258
+#: ../bin/src/ui_playbacksettingspage.h:258
 msgid "Show a glowing animation on the current track"
 msgstr "Visa en lysande animation på det nuvarande spåret"
 
-#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:399
+#: ../bin/src/ui_notificationssettingspage.h:399
 msgid "Show a native desktop notification"
 msgstr "Visa en standardiserad skrivbordsnotifiering"
 
-#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:407
+#: ../bin/src/ui_notificationssettingspage.h:407
 msgid "Show a notification when I change the repeat/shuffle mode"
 msgstr "Visa en notifiering när jag ändrar upprepnings/blandningsläge"
 
-#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:406
+#: ../bin/src/ui_notificationssettingspage.h:406
 msgid "Show a notification when I change the volume"
 msgstr "Visa en notifiering när jag ändrar volymen"
 
-#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:401
+#: ../bin/src/ui_notificationssettingspage.h:401
 msgid "Show a popup from the system tray"
 msgstr "Visa en popup från notifieringsytan"
 
-#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:400
+#: ../bin/src/ui_notificationssettingspage.h:400
 msgid "Show a pretty OSD"
 msgstr "Visa en skön notifiering"
+
+#: ../bin/src/ui_globalsearchsettingspage.h:169
+msgid "Show a tooltip with more information about each result"
+msgstr ""
 
 #: widgets/nowplayingwidget.cpp:113
 msgid "Show above status bar"
@@ -3590,15 +3563,15 @@ msgstr "Visa ovanför statusraden"
 msgid "Show all songs"
 msgstr "Visa alla låtar"
 
-#: /home/arno/clementine/clementine-player/src/ui_querysortpage.h:141
+#: ../bin/src/ui_querysortpage.h:141
 msgid "Show all the songs"
 msgstr "Visa alla låtarna"
 
-#: /home/arno/clementine/clementine-player/src/ui_librarysettingspage.h:171
+#: ../bin/src/ui_librarysettingspage.h:171
 msgid "Show cover art in library"
 msgstr "Visa omslagsbilder i biblioteket"
 
-#: /home/arno/clementine/clementine-player/src/ui_librarysettingspage.h:172
+#: ../bin/src/ui_librarysettingspage.h:172
 msgid "Show dividers"
 msgstr "Visa avdelare"
 
@@ -3627,15 +3600,19 @@ msgstr "Visa otaggade endast"
 msgid "Show results from %1"
 msgstr ""
 
-#: /home/arno/clementine/clementine-player/src/ui_lastfmsettingspage.h:151
+#: ../bin/src/ui_lastfmsettingspage.h:151
 msgid "Show the \"love\" and \"ban\" buttons"
 msgstr "Visa knapparna \"Älska\" och \"Blockera\""
 
-#: /home/arno/clementine/clementine-player/src/ui_lastfmsettingspage.h:152
+#: ../bin/src/ui_globalsearchsettingspage.h:160
+msgid "Show the Global Search box above the sidebar"
+msgstr ""
+
+#: ../bin/src/ui_lastfmsettingspage.h:152
 msgid "Show the scrobble button in the main window"
 msgstr "Visa skrobbelknappen i huvudfönstret"
 
-#: /home/arno/clementine/clementine-player/src/ui_behavioursettingspage.h:177
+#: ../bin/src/ui_behavioursettingspage.h:177
 msgid "Show tray icon"
 msgstr "Visa notifieringsikon"
 
@@ -3643,31 +3620,27 @@ msgstr "Visa notifieringsikon"
 msgid "Show/Hide"
 msgstr "Visa/dölj"
 
-#: playlist/playlistsequence.cpp:170
-#: /home/arno/clementine/clementine-player/src/ui_playlistsequence.h:110
+#: playlist/playlistsequence.cpp:170 ../bin/src/ui_playlistsequence.h:110
 msgid "Shuffle"
 msgstr "Blanda"
 
-#: widgets/osd.cpp:295
-#: /home/arno/clementine/clementine-player/src/ui_playlistsequence.h:105
+#: widgets/osd.cpp:295 ../bin/src/ui_playlistsequence.h:105
 msgid "Shuffle all"
 msgstr "Blanda allt"
 
-#: widgets/osd.cpp:296
-#: /home/arno/clementine/clementine-player/src/ui_playlistsequence.h:104
+#: widgets/osd.cpp:296 ../bin/src/ui_playlistsequence.h:104
 msgid "Shuffle by album"
 msgstr "Blanda efter album"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:660
+#: ../bin/src/ui_mainwindow.h:660
 msgid "Shuffle playlist"
 msgstr "Blanda spellistan"
 
-#: /home/arno/clementine/clementine-player/src/ui_remotesettingspage.h:202
-#: /home/arno/clementine/clementine-player/src/ui_loginstatewidget.h:147
+#: ../bin/src/ui_remotesettingspage.h:202 ../bin/src/ui_loginstatewidget.h:147
 msgid "Sign out"
 msgstr "Logga ut"
 
-#: /home/arno/clementine/clementine-player/src/ui_loginstatewidget.h:149
+#: ../bin/src/ui_loginstatewidget.h:149
 msgid "Signing in..."
 msgstr "Loggar in..."
 
@@ -3683,8 +3656,7 @@ msgstr "Ska"
 msgid "Skip backwards in playlist"
 msgstr "Gå bakåt i spellista"
 
-#: playlist/playlist.cpp:1092
-#: /home/arno/clementine/clementine-player/src/ui_edittagdialog.h:639
+#: playlist/playlist.cpp:1092 ../bin/src/ui_edittagdialog.h:639
 msgid "Skip count"
 msgstr "Antal överhoppningar"
 
@@ -3716,7 +3688,7 @@ msgstr "Soft"
 msgid "Soft Rock"
 msgstr "Soft Rock"
 
-#: /home/arno/clementine/clementine-player/src/ui_songinfosettingspage.h:179
+#: ../bin/src/ui_songinfosettingspage.h:179
 msgid "Song Information"
 msgstr "Låtinformation"
 
@@ -3728,35 +3700,39 @@ msgstr "Låtinfo"
 msgid "Sonogram"
 msgstr "Spektrogram"
 
-#: /home/arno/clementine/clementine-player/src/ui_trackselectiondialog.h:205
+#: ../bin/src/ui_trackselectiondialog.h:205
 msgid "Sorry"
 msgstr "Tyvärr"
 
-#: /home/arno/clementine/clementine-player/src/ui_icecastfilterwidget.h:75
+#: ../bin/src/ui_icecastfilterwidget.h:75
 msgid "Sort by genre (alphabetically)"
 msgstr "Sortera på genre (alfabetiskt ordning)"
 
-#: /home/arno/clementine/clementine-player/src/ui_icecastfilterwidget.h:76
+#: ../bin/src/ui_icecastfilterwidget.h:76
 msgid "Sort by genre (by popularity)"
 msgstr "Sortera på genre (ordning efter popularitet)"
 
-#: /home/arno/clementine/clementine-player/src/ui_icecastfilterwidget.h:77
+#: ../bin/src/ui_icecastfilterwidget.h:77
 msgid "Sort by station name"
 msgstr "Sortera efter stationsnamn"
 
-#: /home/arno/clementine/clementine-player/src/ui_querysortpage.h:139
+#: ../bin/src/ui_querysortpage.h:139
 msgid "Sort songs by"
 msgstr "Ordna låtar efter"
 
-#: /home/arno/clementine/clementine-player/src/ui_querysortpage.h:137
+#: ../bin/src/ui_querysortpage.h:137
 msgid "Sorting"
 msgstr "Sortering"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcodersettingspage.h:162
+#: ../bin/src/ui_globalsearchsettingspage.h:162
+msgid "Sources"
+msgstr ""
+
+#: ../bin/src/ui_transcodersettingspage.h:162
 msgid "Speex"
 msgstr "Speex"
 
-#: /home/arno/clementine/clementine-player/src/ui_spotifysettingspage.h:178
+#: ../bin/src/ui_spotifysettingspage.h:178
 msgid "Spotify"
 msgstr "Spotify"
 
@@ -3764,7 +3740,7 @@ msgstr "Spotify"
 msgid "Spotify login error"
 msgstr "Fel vid inloggning på Spotify"
 
-#: /home/arno/clementine/clementine-player/src/ui_spotifysettingspage.h:183
+#: ../bin/src/ui_spotifysettingspage.h:183
 msgid "Spotify plugin"
 msgstr "Spotify-insticksprogram"
 
@@ -3772,7 +3748,7 @@ msgstr "Spotify-insticksprogram"
 msgid "Spotify plugin not installed"
 msgstr "Spotify-insticksprogrammet är inte installerat"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsmp3.h:201
+#: ../bin/src/ui_transcoderoptionsmp3.h:201
 msgid "Standard"
 msgstr "Standard"
 
@@ -3806,7 +3782,7 @@ msgid "Starting..."
 msgstr "Startar..."
 
 #: core/globalshortcuts.cpp:48 wiimotedev/wiimotesettingspage.cpp:102
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:633
+#: ../bin/src/ui_mainwindow.h:633
 msgid "Stop"
 msgstr "Stoppa"
 
@@ -3814,8 +3790,7 @@ msgstr "Stoppa"
 msgid "Stop after"
 msgstr "Stoppa efter"
 
-#: ui/mainwindow.cpp:521
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:639
+#: ui/mainwindow.cpp:521 ../bin/src/ui_mainwindow.h:639
 msgid "Stop after this track"
 msgstr "Stoppa efter detta spår"
 
@@ -3835,7 +3810,7 @@ msgstr "Stoppad"
 msgid "Stream"
 msgstr "Ström"
 
-#: /home/arno/clementine/clementine-player/src/ui_magnatunesettingspage.h:156
+#: ../bin/src/ui_magnatunesettingspage.h:156
 msgid "Streaming membership"
 msgstr "Strömmningsmedlemskap"
 
@@ -3848,8 +3823,8 @@ msgstr "Skrev %1 med lyckat resultat"
 msgid "Suggested tags"
 msgstr "Föreslagna etiketter"
 
-#: /home/arno/clementine/clementine-player/src/ui_edittagdialog.h:651
-#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:413
+#: ../bin/src/ui_edittagdialog.h:651
+#: ../bin/src/ui_notificationssettingspage.h:413
 msgid "Summary"
 msgstr "Sammanfattning"
 
@@ -3862,7 +3837,7 @@ msgstr "Väldigt hög (%1 fps)"
 msgid "Super high (60 fps)"
 msgstr "Super hög (60 fps)"
 
-#: /home/arno/clementine/clementine-player/src/ui_deviceproperties.h:374
+#: ../bin/src/ui_deviceproperties.h:374
 msgid "Supported formats"
 msgstr "Stödda format"
 
@@ -3886,11 +3861,11 @@ msgstr "Synkroniserar stjärnmärkta spår i Spotify"
 msgid "Tabs on top"
 msgstr "Flikar längst upp"
 
-#: /home/arno/clementine/clementine-player/src/ui_lastfmstationdialog.h:97
+#: ../bin/src/ui_lastfmstationdialog.h:97
 msgid "Tag"
 msgstr "Tagg"
 
-#: /home/arno/clementine/clementine-player/src/ui_trackselectiondialog.h:204
+#: ../bin/src/ui_trackselectiondialog.h:204
 msgid "Tag fetcher"
 msgstr "Etiketthämtare"
 
@@ -3898,7 +3873,7 @@ msgstr "Etiketthämtare"
 msgid "Tag radio"
 msgstr "Taggradio"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsvorbis.h:204
+#: ../bin/src/ui_transcoderoptionsvorbis.h:204
 msgid "Target bitrate"
 msgstr "Önskad bithastighet"
 
@@ -3906,7 +3881,7 @@ msgstr "Önskad bithastighet"
 msgid "Techno"
 msgstr "Techno"
 
-#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:425
+#: ../bin/src/ui_notificationssettingspage.h:425
 msgid "Text options"
 msgstr "Textalternativ"
 
@@ -3984,13 +3959,13 @@ msgstr ""
 "Filerna kommer att tas bort från enheten, är du säker på att du vill "
 "fortsätta?"
 
-#: /home/arno/clementine/clementine-player/src/ui_librarysettingspage.h:158
+#: ../bin/src/ui_librarysettingspage.h:158
 msgid "These folders will be scanned for music to make up your library"
 msgstr ""
 "Dessa mappar kommer att sökas igenom efter musik för att skapa ditt "
 "bibliotek"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcodersettingspage.h:158
+#: ../bin/src/ui_transcodersettingspage.h:158
 msgid ""
 "These settings are used in the \"Transcode Music\" dialog, and when "
 "converting music before copying it to a device."
@@ -3998,7 +3973,7 @@ msgstr ""
 "Dessa inställningar används i dialogrutan \"Omkoda musik\", och vid "
 "konvertering av musik innan den kopieras till en bärbar enhet."
 
-#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:151
+#: ../bin/src/ui_groupbydialog.h:151
 msgid "Third level"
 msgstr "Tredje nivån"
 
@@ -4014,7 +3989,7 @@ msgstr ""
 msgid "This album is not available in the requested format"
 msgstr "Detta album är inte tillgängligt i det begärda formatet"
 
-#: /home/arno/clementine/clementine-player/src/ui_deviceproperties.h:381
+#: ../bin/src/ui_deviceproperties.h:381
 msgid ""
 "This device must be connected and opened before Clementine can see what file"
 " formats it supports."
@@ -4022,7 +3997,7 @@ msgstr ""
 "Denna enhet måste vara ansluten och öppnad före Clementine kan se vilka "
 "filformat den stöder."
 
-#: /home/arno/clementine/clementine-player/src/ui_deviceproperties.h:375
+#: ../bin/src/ui_deviceproperties.h:375
 msgid "This device supports the following file formats:"
 msgstr "Denna enhet stöder följande filformat:"
 
@@ -4065,7 +4040,7 @@ msgstr "Denna ström är endast för betalkunder"
 msgid "This type of device is not supported: %1"
 msgstr "Denna typ av enhet är inte stödd: %1"
 
-#: /home/arno/clementine/clementine-player/src/ui_songinfosettingspage.h:185
+#: ../bin/src/ui_songinfosettingspage.h:185
 msgid "Timeout"
 msgstr "Tidsgräns överskriden"
 
@@ -4074,10 +4049,8 @@ msgid "Timezone"
 msgstr "Tidzon"
 
 #: playlist/playlist.cpp:1079 ui/organisedialog.cpp:51
-#: ui/qtsystemtrayicon.cpp:248
-#: /home/arno/clementine/clementine-player/src/ui_about.h:142
-#: /home/arno/clementine/clementine-player/src/ui_edittagdialog.h:652
-#: /home/arno/clementine/clementine-player/src/ui_trackselectiondialog.h:211
+#: ui/qtsystemtrayicon.cpp:248 ../bin/src/ui_about.h:142
+#: ../bin/src/ui_edittagdialog.h:652 ../bin/src/ui_trackselectiondialog.h:211
 msgid "Title"
 msgstr "Titel"
 
@@ -4097,7 +4070,7 @@ msgstr "Växla fullskärm"
 msgid "Toggle queue status"
 msgstr "Växla köstatus"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:697
+#: ../bin/src/ui_mainwindow.h:697
 msgid "Toggle scrobbling"
 msgstr "Växla skrobbling"
 
@@ -4114,21 +4087,19 @@ msgid "Total network requests made"
 msgstr "Totalt antal nätverksbegäran"
 
 #: playlist/playlist.cpp:1083 ui/organisedialog.cpp:57
-#: /home/arno/clementine/clementine-player/src/ui_edittagdialog.h:653
-#: /home/arno/clementine/clementine-player/src/ui_trackselectiondialog.h:212
+#: ../bin/src/ui_edittagdialog.h:653 ../bin/src/ui_trackselectiondialog.h:212
 msgid "Track"
 msgstr "Spår"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcodedialog.h:201
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:676
+#: ../bin/src/ui_transcodedialog.h:201 ../bin/src/ui_mainwindow.h:676
 msgid "Transcode Music"
 msgstr "Omkoda musik"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcodelogdialog.h:63
+#: ../bin/src/ui_transcodelogdialog.h:63
 msgid "Transcoder Log"
 msgstr "Omkodningslogg"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcodersettingspage.h:157
+#: ../bin/src/ui_transcodersettingspage.h:157
 msgid "Transcoding"
 msgstr "Omkodar"
 
@@ -4137,7 +4108,7 @@ msgstr "Omkodar"
 msgid "Transcoding %1 files using %2 threads"
 msgstr "Omkodar %1 filer med %2 trådar"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsdialog.h:54
+#: ../bin/src/ui_transcoderoptionsdialog.h:54
 msgid "Transcoding options"
 msgstr "Omkodningsalternativ"
 
@@ -4149,7 +4120,7 @@ msgstr "TrueAudio"
 msgid "Turbine"
 msgstr "Turbin"
 
-#: /home/arno/clementine/clementine-player/src/ui_dynamicplaylistcontrols.h:106
+#: ../bin/src/ui_dynamicplaylistcontrols.h:106
 msgid "Turn off"
 msgstr "Stäng av"
 
@@ -4161,7 +4132,7 @@ msgstr "URI"
 msgid "URL(s)"
 msgstr "Webbadress(er)"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsspeex.h:228
+#: ../bin/src/ui_transcoderoptionsspeex.h:228
 msgid "Ultra wide band (UWB)"
 msgstr "Ultrabredband (UWB)"
 
@@ -4178,7 +4149,7 @@ msgstr "Det går inte att hämta %1 (%2)"
 msgid "Unknown"
 msgstr "Okänt"
 
-#: internet/lastfmservice.cpp:455
+#: internet/digitallyimportedclient.cpp:61 internet/lastfmservice.cpp:455
 msgid "Unknown error"
 msgstr "Okänt fel"
 
@@ -4186,11 +4157,11 @@ msgstr "Okänt fel"
 msgid "Unset cover"
 msgstr "Ta bort omslag"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:688
+#: ../bin/src/ui_mainwindow.h:688
 msgid "Update changed library folders"
 msgstr "Uppdatera ändrade bibliotekskataloger"
 
-#: /home/arno/clementine/clementine-player/src/ui_librarysettingspage.h:162
+#: ../bin/src/ui_librarysettingspage.h:162
 msgid "Update the library when Clementine starts"
 msgstr "Uppdatera biblioteket när Clementine startar"
 
@@ -4212,47 +4183,47 @@ msgstr "Uppdaterar biblioteket"
 msgid "Usage"
 msgstr "Användning"
 
-#: /home/arno/clementine/clementine-player/src/ui_globalshortcutssettingspage.h:168
+#: ../bin/src/ui_globalshortcutssettingspage.h:168
 msgid "Use Gnome's shortcut keys"
 msgstr "Använd GNOMEs snabbtangenter"
 
-#: /home/arno/clementine/clementine-player/src/ui_playbacksettingspage.h:267
+#: ../bin/src/ui_playbacksettingspage.h:267
 msgid "Use Replay Gain metadata if it is available"
 msgstr "Använd Replay Gain-metadata om det finns tillgängligt"
 
-#: /home/arno/clementine/clementine-player/src/ui_wiimotesettingspage.h:189
+#: ../bin/src/ui_wiimotesettingspage.h:189
 msgid "Use Wii Remote"
 msgstr "Använd Wii-kontroll"
 
-#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:410
+#: ../bin/src/ui_notificationssettingspage.h:410
 msgid "Use a custom message for notifications"
 msgstr "Använd ett eget meddelande för notifieringar"
 
-#: /home/arno/clementine/clementine-player/src/ui_networkproxysettingspage.h:167
+#: ../bin/src/ui_networkproxysettingspage.h:167
 msgid "Use authentication"
 msgstr "Använd autentisering"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsvorbis.h:203
+#: ../bin/src/ui_transcoderoptionsvorbis.h:203
 msgid "Use bitrate management engine"
 msgstr "Använd motor för hantering av bithastighet"
 
-#: /home/arno/clementine/clementine-player/src/ui_wizardfinishpage.h:85
+#: ../bin/src/ui_wizardfinishpage.h:85
 msgid "Use dynamic mode"
 msgstr "Aktivera dynamiskt läge"
 
-#: /home/arno/clementine/clementine-player/src/ui_wiimotesettingspage.h:188
+#: ../bin/src/ui_wiimotesettingspage.h:188
 msgid "Use notifications to report Wii Remote status"
 msgstr "Använd notifieringar för rapportering av Wii-kontrollstatus"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsaac.h:139
+#: ../bin/src/ui_transcoderoptionsaac.h:139
 msgid "Use temporal noise shaping"
 msgstr "Använd tidsbaserad brusformning"
 
-#: /home/arno/clementine/clementine-player/src/ui_behavioursettingspage.h:183
+#: ../bin/src/ui_behavioursettingspage.h:183
 msgid "Use the system default"
 msgstr "Använd systemets standard"
 
-#: /home/arno/clementine/clementine-player/src/ui_networkproxysettingspage.h:158
+#: ../bin/src/ui_networkproxysettingspage.h:158
 msgid "Use the system proxy settings"
 msgstr "Använd systemets proxy inställningar"
 
@@ -4260,7 +4231,7 @@ msgstr "Använd systemets proxy inställningar"
 msgid "Used"
 msgstr "Använd"
 
-#: internet/groovesharkservice.cpp:373
+#: internet/groovesharkservice.cpp:376
 #, qt-format
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr ""
@@ -4269,23 +4240,23 @@ msgstr ""
 msgid "User interface"
 msgstr "Användargränssnitt"
 
-#: /home/arno/clementine/clementine-player/src/ui_groovesharksettingspage.h:114
-#: /home/arno/clementine/clementine-player/src/ui_magnatunesettingspage.h:159
-#: /home/arno/clementine/clementine-player/src/ui_spotifysettingspage.h:180
-#: /home/arno/clementine/clementine-player/src/ui_networkproxysettingspage.h:168
+#: ../bin/src/ui_groovesharksettingspage.h:114
+#: ../bin/src/ui_magnatunesettingspage.h:159
+#: ../bin/src/ui_spotifysettingspage.h:180
+#: ../bin/src/ui_networkproxysettingspage.h:168
 msgid "Username"
 msgstr "Användarnamn"
 
-#: /home/arno/clementine/clementine-player/src/ui_behavioursettingspage.h:191
+#: ../bin/src/ui_behavioursettingspage.h:191
 msgid "Using the menu to add a song will..."
 msgstr "Använda menyn för att lägga till en låt kommer att ..."
 
-#: /home/arno/clementine/clementine-player/src/ui_magnatunedownloaddialog.h:142
-#: /home/arno/clementine/clementine-player/src/ui_magnatunesettingspage.h:169
+#: ../bin/src/ui_magnatunedownloaddialog.h:142
+#: ../bin/src/ui_magnatunesettingspage.h:169
 msgid "VBR MP3"
 msgstr "VBR MP3"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsspeex.h:232
+#: ../bin/src/ui_transcoderoptionsspeex.h:232
 msgid "Variable bit rate"
 msgstr "Variabel bithastighet"
 
@@ -4299,24 +4270,23 @@ msgstr "Diverse artister"
 msgid "Version %1"
 msgstr "Version %1"
 
-#: /home/arno/clementine/clementine-player/src/ui_albumcovermanager.h:154
+#: ../bin/src/ui_albumcovermanager.h:154
 msgid "View"
 msgstr "Visa"
 
-#: /home/arno/clementine/clementine-player/src/ui_visualisationselector.h:109
+#: ../bin/src/ui_visualisationselector.h:109
 msgid "Visualization mode"
 msgstr "Visualiseringsläge"
 
-#: ui/dbusscreensaver.cpp:35
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:689
+#: ui/dbusscreensaver.cpp:35 ../bin/src/ui_mainwindow.h:689
 msgid "Visualizations"
 msgstr "Visualiseringar"
 
-#: /home/arno/clementine/clementine-player/src/ui_visualisationoverlay.h:181
+#: ../bin/src/ui_visualisationoverlay.h:181
 msgid "Visualizations Settings"
 msgstr "Inställningar för visualiseringar"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsspeex.h:233
+#: ../bin/src/ui_transcoderoptionsspeex.h:233
 msgid "Voice activity detection"
 msgstr "Avkänning av röstaktivitet"
 
@@ -4329,16 +4299,16 @@ msgstr "Volym %1%"
 msgid "Volume name"
 msgstr "Volymnamn"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcodersettingspage.h:160
+#: ../bin/src/ui_transcodersettingspage.h:160
 msgid "Vorbis"
 msgstr "Vorbis"
 
-#: /home/arno/clementine/clementine-player/src/ui_magnatunedownloaddialog.h:141
-#: /home/arno/clementine/clementine-player/src/ui_magnatunesettingspage.h:168
+#: ../bin/src/ui_magnatunedownloaddialog.h:141
+#: ../bin/src/ui_magnatunesettingspage.h:168
 msgid "WAV"
 msgstr "WAV"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcodersettingspage.h:164
+#: ../bin/src/ui_transcodersettingspage.h:164
 msgid "WMA"
 msgstr "WMA"
 
@@ -4350,11 +4320,11 @@ msgstr "WAV"
 msgid "Weeks"
 msgstr "Veckor"
 
-#: /home/arno/clementine/clementine-player/src/ui_behavioursettingspage.h:186
+#: ../bin/src/ui_behavioursettingspage.h:186
 msgid "When Clementine starts"
 msgstr "När Clementine startar"
 
-#: /home/arno/clementine/clementine-player/src/ui_librarysettingspage.h:166
+#: ../bin/src/ui_librarysettingspage.h:166
 msgid ""
 "When looking for album art Clementine will first look for picture files that contain one of these words.\n"
 "If there are no matches then it will use the largest image in the directory."
@@ -4366,7 +4336,7 @@ msgstr ""
 msgid "WiFi MAC Address"
 msgstr "MAC-adress för WiFi"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsspeex.h:229
+#: ../bin/src/ui_transcoderoptionsspeex.h:229
 msgid "Wide band (WB)"
 msgstr "Bredband (WB)"
 
@@ -4400,20 +4370,20 @@ msgstr "Wii-kontroll %1: frånkopplad"
 msgid "Wii Remote %1: low battery (%2%)"
 msgstr "Wii-kontroll %1: låg batterinivå (%2%)"
 
-#: /home/arno/clementine/clementine-player/src/ui_wiimotesettingspage.h:182
+#: ../bin/src/ui_wiimotesettingspage.h:182
 msgid "Wiimotedev"
 msgstr ""
 
-#: /home/arno/clementine/clementine-player/src/ui_digitallyimportedsettingspage.h:148
-msgid "Windows Media 128k (Premium only)"
+#: ../bin/src/ui_digitallyimportedsettingspage.h:181
+msgid "Windows Media 128k"
 msgstr ""
 
-#: /home/arno/clementine/clementine-player/src/ui_digitallyimportedsettingspage.h:146
+#: ../bin/src/ui_digitallyimportedsettingspage.h:172
 msgid "Windows Media 40k"
 msgstr ""
 
-#: /home/arno/clementine/clementine-player/src/ui_digitallyimportedsettingspage.h:147
-msgid "Windows Media 64k (Premium only)"
+#: ../bin/src/ui_digitallyimportedsettingspage.h:180
+msgid "Windows Media 64k"
 msgstr ""
 
 #: core/song.cpp:131
@@ -4425,16 +4395,13 @@ msgid "Would you like to run a full rescan right now?"
 msgstr "Vill du köra en fullständig omsökning nu?"
 
 #: playlist/playlist.cpp:1085 ui/organisedialog.cpp:60
-#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:135
-#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:148
-#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:161
-#: /home/arno/clementine/clementine-player/src/ui_edittagdialog.h:657
+#: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:148
+#: ../bin/src/ui_groupbydialog.h:161 ../bin/src/ui_edittagdialog.h:657
 msgid "Year"
 msgstr "År"
 
-#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:136
-#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:149
-#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:162
+#: ../bin/src/ui_groupbydialog.h:136 ../bin/src/ui_groupbydialog.h:149
+#: ../bin/src/ui_groupbydialog.h:162
 msgid "Year - Album"
 msgstr "År - Album"
 
@@ -4446,11 +4413,11 @@ msgstr "År"
 msgid "Yesterday"
 msgstr "Igår"
 
-#: /home/arno/clementine/clementine-player/src/ui_magnatunedownloaddialog.h:132
+#: ../bin/src/ui_magnatunedownloaddialog.h:132
 msgid "You are about to download the following albums"
 msgstr "Du är på väg att hämta de följande albumen"
 
-#: /home/arno/clementine/clementine-player/src/ui_loginstatewidget.h:146
+#: ../bin/src/ui_loginstatewidget.h:146
 msgid "You are not signed in."
 msgstr "Su är inte inloggad."
 
@@ -4463,11 +4430,11 @@ msgstr "Du är inloggad som %1."
 msgid "You are signed in."
 msgstr "Du är inloggad."
 
-#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:123
+#: ../bin/src/ui_groupbydialog.h:123
 msgid "You can change the way the songs in the library are organised."
 msgstr "Du kan ändra hur låtarna i biblioteket är organiserade."
 
-#: internet/digitallyimportedsettingspage.cpp:33
+#: internet/digitallyimportedsettingspage.cpp:46
 msgid ""
 "You can listen for free without an account, but Premium members can listen "
 "to higher quality streams without advertisements."
@@ -4481,7 +4448,7 @@ msgstr ""
 "Du kan lyssna på Magnatune-låtar gratis utan ett konto. Köp av ett "
 "medlemskap tar bort meddelandena i slutet av varje spår."
 
-#: /home/arno/clementine/clementine-player/src/ui_backgroundstreamssettingspage.h:57
+#: ../bin/src/ui_backgroundstreamssettingspage.h:57
 msgid "You can listen to background streams at the same time as other music."
 msgstr ""
 "Du kan lyssna på bakgrundströmmar samtidigt som du lyssnar på annan musik."
@@ -4495,7 +4462,7 @@ msgstr ""
 "Du kan skrobbla spår gratis, men endast <span style=\" font-"
 "weight:600;\">betalkunder</span> kan strömma Last.fm-radio från Clementine."
 
-#: /home/arno/clementine/clementine-player/src/ui_wiimotesettingspage.h:184
+#: ../bin/src/ui_wiimotesettingspage.h:184
 msgid ""
 "You can use your Wii Remote as a remote control for Clementine.  <a "
 "href=\"http://www.clementine-player.org/wiimote\">See the page on the "
@@ -4513,21 +4480,11 @@ msgstr ""
 msgid "You do not have a Spotify Premium account."
 msgstr ""
 
-#: internet/digitallyimportedurlhandler.cpp:48
-msgid ""
-"You have selected a Premium-only audio type but do not have any account "
-"details entered"
-msgstr ""
-
-#: internet/digitallyimportedurlhandler.cpp:43
-msgid "You have selected an invalid audio type setting"
-msgstr ""
-
 #: songinfo/lastfmtrackinfoprovider.cpp:95
 msgid "You love this track"
 msgstr "Du älskar detta spår"
 
-#: /home/arno/clementine/clementine-player/src/ui_globalshortcutssettingspage.h:170
+#: ../bin/src/ui_globalshortcutssettingspage.h:170
 msgid ""
 "You need to launch System Preferences and turn on \"<span style=\" font-"
 "style:italic;\">Enable access for assistive devices</span>\" to use global "
@@ -4537,7 +4494,7 @@ msgstr ""
 "style:italic;\">Aktivera åtkomst för assisterande enheter</span>\" för att "
 "använda globala snabbtangenter i Clementine."
 
-#: /home/arno/clementine/clementine-player/src/ui_behavioursettingspage.h:185
+#: ../bin/src/ui_behavioursettingspage.h:185
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Du måste starta om Clementine om du ändrar språket."
 
@@ -4603,7 +4560,7 @@ msgid "Zero"
 msgstr "Noll"
 
 #: playlist/playlistundocommands.cpp:37
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "lägg till %n låtar"
 
@@ -4611,15 +4568,15 @@ msgstr "lägg till %n låtar"
 msgid "after"
 msgstr "efter"
 
-#: /home/arno/clementine/clementine-player/src/ui_searchtermwidget.h:281
+#: ../bin/src/ui_searchtermwidget.h:281
 msgid "ago"
 msgstr "sedan"
 
-#: /home/arno/clementine/clementine-player/src/ui_searchtermwidget.h:280
+#: ../bin/src/ui_searchtermwidget.h:280
 msgid "and"
 msgstr "och"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsspeex.h:219
+#: ../bin/src/ui_transcoderoptionsspeex.h:219
 msgid "automatic"
 msgstr "automatisk"
 
@@ -4643,9 +4600,9 @@ msgstr "bpm"
 msgid "contains"
 msgstr "som innehåller"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsspeex.h:222
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsvorbis.h:207
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsvorbis.h:210
+#: ../bin/src/ui_transcoderoptionsspeex.h:222
+#: ../bin/src/ui_transcoderoptionsvorbis.h:207
+#: ../bin/src/ui_transcoderoptionsvorbis.h:210
 msgid "disabled"
 msgstr "inaktiverad"
 
@@ -4723,7 +4680,7 @@ msgid "press enter"
 msgstr "tryck enter"
 
 #: playlist/playlistundocommands.cpp:65 playlist/playlistundocommands.cpp:88
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "ta bort %n låtar"
 

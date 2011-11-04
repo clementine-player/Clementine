@@ -8,40 +8,40 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2011-11-01 19:50+0000\n"
+"PO-Revision-Date: 2011-11-03 17:56+0000\n"
 "Last-Translator: clementinebuildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: lt\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsaac.h:130
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsmp3.h:195
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsspeex.h:220
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsspeex.h:223
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsvorbis.h:205
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsvorbis.h:208
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsvorbis.h:211
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionswma.h:80
+#: ../bin/src/ui_transcoderoptionsaac.h:130
+#: ../bin/src/ui_transcoderoptionsmp3.h:195
+#: ../bin/src/ui_transcoderoptionsspeex.h:220
+#: ../bin/src/ui_transcoderoptionsspeex.h:223
+#: ../bin/src/ui_transcoderoptionsvorbis.h:205
+#: ../bin/src/ui_transcoderoptionsvorbis.h:208
+#: ../bin/src/ui_transcoderoptionsvorbis.h:211
+#: ../bin/src/ui_transcoderoptionswma.h:80
 msgid " kbps"
 msgstr " kbps"
 
-#: /home/arno/clementine/clementine-player/src/ui_songinfosettingspage.h:186
-#: /home/arno/clementine/clementine-player/src/ui_playbacksettingspage.h:265
-#: /home/arno/clementine/clementine-player/src/ui_playbacksettingspage.h:285
+#: ../bin/src/ui_songinfosettingspage.h:186
+#: ../bin/src/ui_playbacksettingspage.h:265
+#: ../bin/src/ui_playbacksettingspage.h:285
 msgid " ms"
 msgstr " ms"
 
-#: /home/arno/clementine/clementine-player/src/ui_songinfosettingspage.h:182
+#: ../bin/src/ui_songinfosettingspage.h:182
 msgid " pt"
 msgstr " pt"
 
-#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:404
-#: /home/arno/clementine/clementine-player/src/ui_visualisationselector.h:116
+#: ../bin/src/ui_notificationssettingspage.h:404
+#: ../bin/src/ui_visualisationselector.h:116
 msgid " seconds"
 msgstr " sek."
 
-#: /home/arno/clementine/clementine-player/src/ui_querysortpage.h:143
+#: ../bin/src/ui_querysortpage.h:143
 msgid " songs"
 msgstr " dainos"
 
@@ -117,17 +117,17 @@ msgid "%L1 total plays"
 msgstr "%L1 viso perklausymų"
 
 #: transcoder/transcodedialog.cpp:198
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n nepavyko"
 
 #: transcoder/transcodedialog.cpp:193
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n baigta"
 
 #: transcoder/transcodedialog.cpp:188
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n pervadinama"
 
@@ -139,15 +139,15 @@ msgstr "&Lygiuoti tekstą"
 msgid "&Center"
 msgstr "&Centras"
 
-#: /home/arno/clementine/clementine-player/src/ui_globalshortcutssettingspage.h:178
+#: ../bin/src/ui_globalshortcutssettingspage.h:178
 msgid "&Custom"
 msgstr "&Pasirinktinas"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:702
+#: ../bin/src/ui_mainwindow.h:702
 msgid "&Extras"
 msgstr "Ekstra"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:701
+#: ../bin/src/ui_mainwindow.h:701
 msgid "&Help"
 msgstr "&Pagalba"
 
@@ -164,23 +164,23 @@ msgstr "&Paslėpti..."
 msgid "&Left"
 msgstr "&Kairė"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:699
+#: ../bin/src/ui_mainwindow.h:699
 msgid "&Music"
 msgstr "Muzika"
 
-#: /home/arno/clementine/clementine-player/src/ui_globalshortcutssettingspage.h:176
+#: ../bin/src/ui_globalshortcutssettingspage.h:176
 msgid "&None"
 msgstr "&Nieko"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:700
+#: ../bin/src/ui_mainwindow.h:700
 msgid "&Playlist"
 msgstr "Grojaraštis"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:637
+#: ../bin/src/ui_mainwindow.h:637
 msgid "&Quit"
 msgstr "&Baigti"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:673
+#: ../bin/src/ui_mainwindow.h:673
 msgid "&Repeat mode"
 msgstr "Kartojimo režimas"
 
@@ -188,7 +188,7 @@ msgstr "Kartojimo režimas"
 msgid "&Right"
 msgstr "&Dešinė"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:672
+#: ../bin/src/ui_mainwindow.h:672
 msgid "&Shuffle mode"
 msgstr "Maišymo veiksena"
 
@@ -196,7 +196,7 @@ msgstr "Maišymo veiksena"
 msgid "&Stretch columns to fit window"
 msgstr "&Ištempti stulpelius, kad užpildytų langą"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:703
+#: ../bin/src/ui_mainwindow.h:703
 msgid "&Tools"
 msgstr "Įrankiai"
 
@@ -204,10 +204,8 @@ msgstr "Įrankiai"
 msgid "(different across multiple songs)"
 msgstr "(skirtinga daugelyje dainų)"
 
-#: /home/arno/clementine/clementine-player/src/ui_globalsearchpopup.h:104
-#: /home/arno/clementine/clementine-player/src/ui_globalsearchpopup.h:105
-#: /home/arno/clementine/clementine-player/src/ui_globalsearchpopup.h:106
-#: /home/arno/clementine/clementine-player/src/ui_globalsearchpopup.h:107
+#: ../bin/src/ui_globalsearchpopup.h:104 ../bin/src/ui_globalsearchpopup.h:105
+#: ../bin/src/ui_globalsearchpopup.h:106 ../bin/src/ui_globalsearchpopup.h:107
 msgid "..."
 msgstr ""
 
@@ -215,8 +213,7 @@ msgstr ""
 msgid "...and all the Amarok contributors"
 msgstr "...ir visiems prisidėjusiems prie Amarok"
 
-#: /home/arno/clementine/clementine-player/src/ui_trackslider.h:70
-#: /home/arno/clementine/clementine-player/src/ui_trackslider.h:74
+#: ../bin/src/ui_trackslider.h:70 ../bin/src/ui_trackslider.h:74
 msgid "0:00:00"
 msgstr "0:00:00"
 
@@ -228,11 +225,11 @@ msgstr "1 diena"
 msgid "1 track"
 msgstr "1 daina"
 
-#: /home/arno/clementine/clementine-player/src/ui_magnatunedownloaddialog.h:143
+#: ../bin/src/ui_magnatunedownloaddialog.h:143
 msgid "128K MP3"
 msgstr "128K MP3"
 
-#: /home/arno/clementine/clementine-player/src/ui_magnatunesettingspage.h:170
+#: ../bin/src/ui_magnatunesettingspage.h:170
 msgid "128k MP3"
 msgstr "128k MP3"
 
@@ -240,11 +237,11 @@ msgstr "128k MP3"
 msgid "50 random tracks"
 msgstr "50 atsitiktinių dainų"
 
-#: /home/arno/clementine/clementine-player/src/ui_digitallyimportedsettingspage.h:136
+#: ../bin/src/ui_digitallyimportedsettingspage.h:165
 msgid "<a href=\"http://www.di.fm/premium/\">Upgrade to Premium now</a>"
 msgstr ""
 
-#: /home/arno/clementine/clementine-player/src/ui_organisedialog.h:199
+#: ../bin/src/ui_organisedialog.h:199
 msgid ""
 "<p>Tokens start with %, for example: %artist %album %title </p>\n"
 "\n"
@@ -280,20 +277,20 @@ msgstr "Daina bus įtraukta į grojaraštį jei atitiks šias sąlygas"
 msgid "A-Z"
 msgstr "A-Z"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcodersettingspage.h:163
+#: ../bin/src/ui_transcodersettingspage.h:163
 msgid "AAC"
 msgstr "AAC"
 
-#: /home/arno/clementine/clementine-player/src/ui_digitallyimportedsettingspage.h:145
-msgid "AAC 128k (Premium only)"
+#: ../bin/src/ui_digitallyimportedsettingspage.h:179
+msgid "AAC 128k"
 msgstr ""
 
-#: /home/arno/clementine/clementine-player/src/ui_digitallyimportedsettingspage.h:143
+#: ../bin/src/ui_digitallyimportedsettingspage.h:171
 msgid "AAC 32k"
 msgstr ""
 
-#: /home/arno/clementine/clementine-player/src/ui_digitallyimportedsettingspage.h:144
-msgid "AAC 64k (Premium only)"
+#: ../bin/src/ui_digitallyimportedsettingspage.h:178
+msgid "AAC 64k"
 msgstr ""
 
 #: core/song.cpp:139
@@ -309,27 +306,27 @@ msgstr "Šlovė HYPNOTOAD'ui"
 msgid "About %1"
 msgstr "Apie %1"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:658
+#: ../bin/src/ui_mainwindow.h:658
 msgid "About Clementine..."
 msgstr "Apie Clementine..."
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:691
+#: ../bin/src/ui_mainwindow.h:691
 msgid "About Qt..."
 msgstr "Apie Qt..."
 
-#: /home/arno/clementine/clementine-player/src/ui_groovesharksettingspage.h:113
-#: /home/arno/clementine/clementine-player/src/ui_magnatunesettingspage.h:151
-#: /home/arno/clementine/clementine-player/src/ui_spotifysettingspage.h:179
-#: /home/arno/clementine/clementine-player/src/ui_remotesettingspage.h:203
-#: /home/arno/clementine/clementine-player/src/ui_lastfmsettingspage.h:145
+#: ../bin/src/ui_groovesharksettingspage.h:113
+#: ../bin/src/ui_magnatunesettingspage.h:151
+#: ../bin/src/ui_spotifysettingspage.h:179
+#: ../bin/src/ui_remotesettingspage.h:203
+#: ../bin/src/ui_lastfmsettingspage.h:145
 msgid "Account details"
 msgstr "Paskyros informacija"
 
-#: /home/arno/clementine/clementine-player/src/ui_digitallyimportedsettingspage.h:133
+#: ../bin/src/ui_digitallyimportedsettingspage.h:161
 msgid "Account details (Premium)"
 msgstr ""
 
-#: /home/arno/clementine/clementine-player/src/ui_wiimotesettingspage.h:191
+#: ../bin/src/ui_wiimotesettingspage.h:191
 msgid "Action"
 msgstr "Veiksmas"
 
@@ -337,15 +334,15 @@ msgstr "Veiksmas"
 msgid "Active/deactive Wiiremote"
 msgstr "Aktyvuoti/Deaktyvuoti Wii pultą"
 
-#: /home/arno/clementine/clementine-player/src/ui_addstreamdialog.h:113
+#: ../bin/src/ui_addstreamdialog.h:113
 msgid "Add Stream"
 msgstr "Pridėti srautą"
 
-#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:394
+#: ../bin/src/ui_notificationssettingspage.h:394
 msgid "Add a new line if supported by the notification type"
 msgstr "Jeigu pranešimo tipas palaiko, tai pridedama nauja eilutė"
 
-#: /home/arno/clementine/clementine-player/src/ui_wiimotesettingspage.h:193
+#: ../bin/src/ui_wiimotesettingspage.h:193
 msgid "Add action"
 msgstr "Pridėti veiksmą"
 
@@ -361,7 +358,7 @@ msgstr "Pridėti kitą srautą..."
 msgid "Add directory..."
 msgstr "Pridėti nuorodą..."
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:662
+#: ../bin/src/ui_mainwindow.h:662
 msgid "Add file..."
 msgstr "Pridėti failą..."
 
@@ -373,7 +370,7 @@ msgstr "Pridėti failus perkodavimui"
 msgid "Add folder"
 msgstr "Pridėti aplankalą"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:677
+#: ../bin/src/ui_mainwindow.h:677
 msgid "Add folder..."
 msgstr "Pridėti aplanką..."
 
@@ -381,7 +378,7 @@ msgstr "Pridėti aplanką..."
 msgid "Add media"
 msgstr "Pridėti mediją"
 
-#: /home/arno/clementine/clementine-player/src/ui_librarysettingspage.h:159
+#: ../bin/src/ui_librarysettingspage.h:159
 msgid "Add new folder..."
 msgstr "Pridėti naują aplankalą..."
 
@@ -389,55 +386,55 @@ msgstr "Pridėti naują aplankalą..."
 msgid "Add search term"
 msgstr "Pridėti paieškos frazę"
 
-#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:361
+#: ../bin/src/ui_notificationssettingspage.h:361
 msgid "Add song album tag"
 msgstr "Pridėti žymę kūrinio albumui"
 
-#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:367
+#: ../bin/src/ui_notificationssettingspage.h:367
 msgid "Add song albumartist tag"
 msgstr "Pridėti žymę kūrinio albumui"
 
-#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:358
+#: ../bin/src/ui_notificationssettingspage.h:358
 msgid "Add song artist tag"
 msgstr "Pridėti žymę kūrinio atlikėjui"
 
-#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:373
+#: ../bin/src/ui_notificationssettingspage.h:373
 msgid "Add song composer tag"
 msgstr "Pridėti žymę kūrinio kompozitoriui"
 
-#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:376
+#: ../bin/src/ui_notificationssettingspage.h:376
 msgid "Add song disc tag"
 msgstr "Pridėti žymę kūrinio diskui"
 
-#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:382
+#: ../bin/src/ui_notificationssettingspage.h:382
 msgid "Add song genre tag"
 msgstr "Pridėti žymę kūrinio žanrui"
 
-#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:385
+#: ../bin/src/ui_notificationssettingspage.h:385
 msgid "Add song length tag"
 msgstr "Pridėti žymę kūrinio ilgiui"
 
-#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:388
+#: ../bin/src/ui_notificationssettingspage.h:388
 msgid "Add song play count"
 msgstr "Nustatyi kūrinio perklausymų skaičių"
 
-#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:391
+#: ../bin/src/ui_notificationssettingspage.h:391
 msgid "Add song skip count"
 msgstr "Nustatyti kūrinio prametimų skaičių"
 
-#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:364
+#: ../bin/src/ui_notificationssettingspage.h:364
 msgid "Add song title tag"
 msgstr "Pridėti žymę kūrinio pavadinimui"
 
-#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:379
+#: ../bin/src/ui_notificationssettingspage.h:379
 msgid "Add song track tag"
 msgstr "Pridėti žymę kūrinio numeriui"
 
-#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:370
+#: ../bin/src/ui_notificationssettingspage.h:370
 msgid "Add song year tag"
 msgstr "Pridėti žymę kūrionio metams"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:664
+#: ../bin/src/ui_mainwindow.h:664
 msgid "Add stream..."
 msgstr "Pridėti srautą..."
 
@@ -446,69 +443,66 @@ msgid "Add to another playlist"
 msgstr "Pridėti prie kito grojaraščio"
 
 #: globalsearch/globalsearchwidget.cpp:95
-#: /home/arno/clementine/clementine-player/src/ui_albumcovermanager.h:152
+#: ../bin/src/ui_albumcovermanager.h:152
 msgid "Add to playlist"
 msgstr "Įdėti į grojaraštį"
 
-#: /home/arno/clementine/clementine-player/src/ui_behavioursettingspage.h:204
+#: ../bin/src/ui_behavioursettingspage.h:204
 msgid "Add to the queue"
 msgstr "Įdėti į eilę"
 
-#: /home/arno/clementine/clementine-player/src/ui_wiimoteshortcutgrabber.h:123
+#: ../bin/src/ui_wiimoteshortcutgrabber.h:123
 msgid "Add wiimotedev action"
 msgstr "Pridėti Wii pulto veiksmą"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcodedialog.h:206
+#: ../bin/src/ui_transcodedialog.h:206
 msgid "Add..."
 msgstr "Pridėti..."
 
-#: /home/arno/clementine/clementine-player/src/ui_libraryfilterwidget.h:123
+#: ../bin/src/ui_libraryfilterwidget.h:123
 msgid "Added this month"
 msgstr "Pridėta šį mėnesį"
 
-#: /home/arno/clementine/clementine-player/src/ui_libraryfilterwidget.h:117
+#: ../bin/src/ui_libraryfilterwidget.h:117
 msgid "Added this week"
 msgstr "Pridėta šią savaitę"
 
-#: /home/arno/clementine/clementine-player/src/ui_libraryfilterwidget.h:122
+#: ../bin/src/ui_libraryfilterwidget.h:122
 msgid "Added this year"
 msgstr "Pridėta šiais metais"
 
-#: /home/arno/clementine/clementine-player/src/ui_libraryfilterwidget.h:116
+#: ../bin/src/ui_libraryfilterwidget.h:116
 msgid "Added today"
 msgstr "Pridėta šiandien"
 
-#: /home/arno/clementine/clementine-player/src/ui_libraryfilterwidget.h:118
-#: /home/arno/clementine/clementine-player/src/ui_libraryfilterwidget.h:120
+#: ../bin/src/ui_libraryfilterwidget.h:118
+#: ../bin/src/ui_libraryfilterwidget.h:120
 msgid "Added within three months"
 msgstr "Pridėta tryjų mėnesių tarpe"
 
-#: /home/arno/clementine/clementine-player/src/ui_libraryfilterwidget.h:130
+#: ../bin/src/ui_libraryfilterwidget.h:130
 msgid "Advanced grouping..."
 msgstr "Platesnis grupavimas..."
 
-#: /home/arno/clementine/clementine-player/src/ui_organisedialog.h:190
+#: ../bin/src/ui_organisedialog.h:190
 msgid "After copying..."
 msgstr "Po kopijavimo..."
 
 #: playlist/playlist.cpp:1081 ui/organisedialog.cpp:52
-#: ui/qtsystemtrayicon.cpp:252
-#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:129
-#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:142
-#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:155
-#: /home/arno/clementine/clementine-player/src/ui_albumcoversearcher.h:110
-#: /home/arno/clementine/clementine-player/src/ui_albumcoversearcher.h:112
-#: /home/arno/clementine/clementine-player/src/ui_edittagdialog.h:656
-#: /home/arno/clementine/clementine-player/src/ui_trackselectiondialog.h:209
+#: ui/qtsystemtrayicon.cpp:252 ../bin/src/ui_groupbydialog.h:129
+#: ../bin/src/ui_groupbydialog.h:142 ../bin/src/ui_groupbydialog.h:155
+#: ../bin/src/ui_albumcoversearcher.h:110
+#: ../bin/src/ui_albumcoversearcher.h:112 ../bin/src/ui_edittagdialog.h:656
+#: ../bin/src/ui_trackselectiondialog.h:209
 msgid "Album"
 msgstr "Albumas"
 
-#: /home/arno/clementine/clementine-player/src/ui_playbacksettingspage.h:272
+#: ../bin/src/ui_playbacksettingspage.h:272
 msgid "Album (ideal loudness for all tracks)"
 msgstr "Albumas (idealus garsumas visoms dainoms)"
 
 #: playlist/playlist.cpp:1087 ui/organisedialog.cpp:55
-#: /home/arno/clementine/clementine-player/src/ui_edittagdialog.h:658
+#: ../bin/src/ui_edittagdialog.h:658
 msgid "Album artist"
 msgstr "Albumo atlikėjas"
 
@@ -516,9 +510,8 @@ msgstr "Albumo atlikėjas"
 msgid "Album info on jamendo.com..."
 msgstr "Albumo info iš jamendo.com..."
 
-#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:131
-#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:144
-#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:157
+#: ../bin/src/ui_groupbydialog.h:131 ../bin/src/ui_groupbydialog.h:144
+#: ../bin/src/ui_groupbydialog.h:157
 msgid "Albumartist"
 msgstr "Albumo atlikėjas"
 
@@ -534,7 +527,7 @@ msgstr "Albumai be viršelių"
 msgid "All Files (*)"
 msgstr "Visi Failai (*)"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:670
+#: ../bin/src/ui_mainwindow.h:670
 msgid "All Glory to the Hypnotoad!"
 msgstr "Šlovė Hypnotoad'ui!"
 
@@ -563,24 +556,24 @@ msgstr "Visi vertėjai"
 msgid "All tracks"
 msgstr "Visos dainos"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsaac.h:140
+#: ../bin/src/ui_transcoderoptionsaac.h:140
 msgid "Allow mid/side encoding"
 msgstr "Įgalinti vidurinį/šoninį kodavimą"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcodedialog.h:214
+#: ../bin/src/ui_transcodedialog.h:214
 msgid "Alongside the originals"
 msgstr "Kartu su originalais"
 
-#: /home/arno/clementine/clementine-player/src/ui_behavioursettingspage.h:188
+#: ../bin/src/ui_behavioursettingspage.h:188
 msgid "Always hide the main window"
 msgstr "Visada slėpti pagrindinį langą"
 
-#: /home/arno/clementine/clementine-player/src/ui_behavioursettingspage.h:187
+#: ../bin/src/ui_behavioursettingspage.h:187
 msgid "Always show the main window"
 msgstr "Visada rodyti pagrindinį langą"
 
-#: /home/arno/clementine/clementine-player/src/ui_behavioursettingspage.h:196
-#: /home/arno/clementine/clementine-player/src/ui_behavioursettingspage.h:210
+#: ../bin/src/ui_behavioursettingspage.h:196
+#: ../bin/src/ui_behavioursettingspage.h:210
 msgid "Always start playing"
 msgstr "Visada pradėti grojant"
 
@@ -618,7 +611,7 @@ msgstr "Iškilo nežinoma last.fm klaida: %1"
 msgid "And:"
 msgstr "Ir:"
 
-#: /home/arno/clementine/clementine-player/src/ui_songinfosettingspage.h:180
+#: ../bin/src/ui_songinfosettingspage.h:180
 msgid "Appearance"
 msgstr "Išvaizda"
 
@@ -631,11 +624,11 @@ msgstr "Įterpti failus/URL į grojaraštį"
 msgid "Append to current playlist"
 msgstr "Įterpti į esamą grojaraštį"
 
-#: /home/arno/clementine/clementine-player/src/ui_behavioursettingspage.h:201
+#: ../bin/src/ui_behavioursettingspage.h:201
 msgid "Append to the playlist"
 msgstr "Įterpti į grojaraštį"
 
-#: /home/arno/clementine/clementine-player/src/ui_playbacksettingspage.h:275
+#: ../bin/src/ui_playbacksettingspage.h:275
 msgid "Apply compression to prevent clipping"
 msgstr "Pritaikyti suspaudimą, kad išvengti nukirtimų"
 
@@ -649,15 +642,12 @@ msgid "Are you sure you want to reset this song's statistics?"
 msgstr "Ar tikrai norite atstatyti šios dainos statistiką?"
 
 #: playlist/playlist.cpp:1080 ui/organisedialog.cpp:53
-#: ui/qtsystemtrayicon.cpp:250
-#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:130
-#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:143
-#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:156
-#: /home/arno/clementine/clementine-player/src/ui_albumcoversearcher.h:106
-#: /home/arno/clementine/clementine-player/src/ui_albumcoversearcher.h:108
-#: /home/arno/clementine/clementine-player/src/ui_edittagdialog.h:654
-#: /home/arno/clementine/clementine-player/src/ui_trackselectiondialog.h:210
-#: /home/arno/clementine/clementine-player/src/ui_lastfmstationdialog.h:96
+#: ui/qtsystemtrayicon.cpp:250 ../bin/src/ui_groupbydialog.h:130
+#: ../bin/src/ui_groupbydialog.h:143 ../bin/src/ui_groupbydialog.h:156
+#: ../bin/src/ui_albumcoversearcher.h:106
+#: ../bin/src/ui_albumcoversearcher.h:108 ../bin/src/ui_edittagdialog.h:654
+#: ../bin/src/ui_trackselectiondialog.h:210
+#: ../bin/src/ui_lastfmstationdialog.h:96
 msgid "Artist"
 msgstr "Atlikėjas"
 
@@ -677,18 +667,15 @@ msgstr "Atlikėjo žymės"
 msgid "Artist's initial"
 msgstr "Atlikėjo inicialai"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcodedialog.h:209
+#: ../bin/src/ui_transcodedialog.h:209
 msgid "Audio format"
 msgstr "Audio formatas"
 
-#: /home/arno/clementine/clementine-player/src/ui_digitallyimportedsettingspage.h:138
-msgid "Audio type"
-msgstr ""
-
-#: /home/arno/clementine/clementine-player/src/ui_remotesettingspage.h:210
+#: ../bin/src/ui_remotesettingspage.h:210
 msgid "Authenticating..."
 msgstr "Autorizuojama..."
 
+#: internet/digitallyimportedsettingspage.cpp:80
 #: internet/magnatunesettingspage.cpp:113 internet/lastfmservice.cpp:434
 #: internet/lastfmsettingspage.cpp:79 remote/remotesettingspage.cpp:113
 msgid "Authentication failed"
@@ -698,15 +685,15 @@ msgstr "Autorizacija nepavyko"
 msgid "Authors"
 msgstr "Autoriai"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsspeex.h:227
+#: ../bin/src/ui_transcoderoptionsspeex.h:227
 msgid "Auto"
 msgstr "Automatiškai"
 
-#: /home/arno/clementine/clementine-player/src/ui_librarysettingspage.h:161
+#: ../bin/src/ui_librarysettingspage.h:161
 msgid "Automatic updating"
 msgstr "Automatinis atnaujinimas"
 
-#: /home/arno/clementine/clementine-player/src/ui_librarysettingspage.h:170
+#: ../bin/src/ui_librarysettingspage.h:170
 msgid "Automatically open single categories in the library tree"
 msgstr "Automatiškai atverti pavienias kategorijas fonotekos sąraše"
 
@@ -714,7 +701,7 @@ msgstr "Automatiškai atverti pavienias kategorijas fonotekos sąraše"
 msgid "Available"
 msgstr "Galimas"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsspeex.h:221
+#: ../bin/src/ui_transcoderoptionsspeex.h:221
 msgid "Average bitrate"
 msgstr "Vidutinis bitų dažnis"
 
@@ -723,23 +710,23 @@ msgid "Average image size"
 msgstr "Vidutinis paveikslo dydis"
 
 #: playlist/playlist.cpp:1096 ui/organisedialog.cpp:59
-#: /home/arno/clementine/clementine-player/src/ui_edittagdialog.h:638
+#: ../bin/src/ui_edittagdialog.h:638
 msgid "BPM"
 msgstr "BPM"
 
-#: /home/arno/clementine/clementine-player/src/ui_backgroundstreamssettingspage.h:56
+#: ../bin/src/ui_backgroundstreamssettingspage.h:56
 msgid "Background Streams"
 msgstr "Fono srautai"
 
-#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:418
+#: ../bin/src/ui_notificationssettingspage.h:418
 msgid "Background color"
 msgstr "Fono spalva"
 
-#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:417
+#: ../bin/src/ui_notificationssettingspage.h:417
 msgid "Background opacity"
 msgstr "Fono nepermatomumas"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:643
+#: ../bin/src/ui_mainwindow.h:643
 msgid "Ban"
 msgstr "Užblokuoti"
 
@@ -747,15 +734,19 @@ msgstr "Užblokuoti"
 msgid "Bar analyzer"
 msgstr "Barograma"
 
-#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:421
+#: ../bin/src/ui_notificationssettingspage.h:421
 msgid "Basic Blue"
 msgstr "Įprasta mėlyna"
 
-#: /home/arno/clementine/clementine-player/src/ui_behavioursettingspage.h:176
+#: ../bin/src/ui_digitallyimportedsettingspage.h:167
+msgid "Basic audio type"
+msgstr ""
+
+#: ../bin/src/ui_behavioursettingspage.h:176
 msgid "Behavior"
 msgstr "Elgsena"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsflac.h:83
+#: ../bin/src/ui_transcoderoptionsflac.h:83
 msgid "Best"
 msgstr "Geriausias"
 
@@ -764,16 +755,14 @@ msgstr "Geriausias"
 msgid "Biography from %1"
 msgstr "Biografija iš %1"
 
-#: playlist/playlist.cpp:1097
-#: /home/arno/clementine/clementine-player/src/ui_edittagdialog.h:640
+#: playlist/playlist.cpp:1097 ../bin/src/ui_edittagdialog.h:640
 msgid "Bit rate"
 msgstr "Bitų greitis"
 
-#: ui/organisedialog.cpp:64
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsaac.h:129
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsmp3.h:194
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsspeex.h:218
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionswma.h:79
+#: ui/organisedialog.cpp:64 ../bin/src/ui_transcoderoptionsaac.h:129
+#: ../bin/src/ui_transcoderoptionsmp3.h:194
+#: ../bin/src/ui_transcoderoptionsspeex.h:218
+#: ../bin/src/ui_transcoderoptionswma.h:79
 msgid "Bitrate"
 msgstr "Bitų dažnis"
 
@@ -781,7 +770,7 @@ msgstr "Bitų dažnis"
 msgid "Block analyzer"
 msgstr "Blokograma"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsaac.h:141
+#: ../bin/src/ui_transcoderoptionsaac.h:141
 msgid "Block type"
 msgstr "Bloko tipas"
 
@@ -789,7 +778,7 @@ msgstr "Bloko tipas"
 msgid "Bluetooth MAC Address"
 msgstr "Bluetooth MAC adresas"
 
-#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:414
+#: ../bin/src/ui_notificationssettingspage.h:414
 msgid "Body"
 msgstr "Turinys"
 
@@ -797,15 +786,15 @@ msgstr "Turinys"
 msgid "Boom analyzer"
 msgstr "Bumograma"
 
-#: /home/arno/clementine/clementine-player/src/ui_magnatunedownloaddialog.h:146
+#: ../bin/src/ui_magnatunedownloaddialog.h:146
 msgid "Browse..."
 msgstr "Naršyti..."
 
-#: /home/arno/clementine/clementine-player/src/ui_playbacksettingspage.h:284
+#: ../bin/src/ui_playbacksettingspage.h:284
 msgid "Buffer duration"
 msgstr "Buferio trukmė"
 
-#: /home/arno/clementine/clementine-player/src/ui_wiimotesettingspage.h:192
+#: ../bin/src/ui_wiimotesettingspage.h:192
 msgid "Buttons"
 msgstr "Mygtukai"
 
@@ -821,7 +810,7 @@ msgstr "\"CUE sheet\" palaikymas"
 msgid "Cancel"
 msgstr "Atšaukti"
 
-#: /home/arno/clementine/clementine-player/src/ui_edittagdialog.h:634
+#: ../bin/src/ui_edittagdialog.h:634
 msgid "Change cover art"
 msgstr "Keisti viršelio paveikslėlį"
 
@@ -833,7 +822,7 @@ msgstr "Keisti šrifto dydį..."
 msgid "Change repeat mode"
 msgstr "Keisti kartojimo režimą"
 
-#: /home/arno/clementine/clementine-player/src/ui_globalshortcutssettingspage.h:179
+#: ../bin/src/ui_globalshortcutssettingspage.h:179
 msgid "Change shortcut..."
 msgstr "Keisti greituką..."
 
@@ -853,19 +842,19 @@ msgstr "Atnaujinimų tikrinimas..."
 msgid "Choose a name for your smart playlist"
 msgstr "Parinkite pavadinimą išmaniajam grojaraščiui"
 
-#: /home/arno/clementine/clementine-player/src/ui_playbacksettingspage.h:280
+#: ../bin/src/ui_playbacksettingspage.h:280
 msgid "Choose automatically"
 msgstr "Automatiškai parinkti"
 
-#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:426
+#: ../bin/src/ui_notificationssettingspage.h:426
 msgid "Choose color..."
 msgstr "Parinkti spalvą..."
 
-#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:427
+#: ../bin/src/ui_notificationssettingspage.h:427
 msgid "Choose font..."
 msgstr "Pasirinkite šifrą..."
 
-#: /home/arno/clementine/clementine-player/src/ui_visualisationselector.h:113
+#: ../bin/src/ui_visualisationselector.h:113
 msgid "Choose from the list"
 msgstr "Parinkti iš sąrašo"
 
@@ -877,7 +866,7 @@ msgstr "Pasirinkite kaip grojaraštis bus rikiuojamas ir kiek dainų turės"
 msgid "Choose manual cover"
 msgstr "Parinkti viršelio paveikslėlį"
 
-#: /home/arno/clementine/clementine-player/src/ui_songinfosettingspage.h:188
+#: ../bin/src/ui_songinfosettingspage.h:188
 msgid ""
 "Choose the websites you want Clementine to use when searching for lyrics."
 msgstr "Parinkite tinklapius, kuriuose „Clementine“ galėtų ieškoti lyrikos."
@@ -886,28 +875,25 @@ msgstr "Parinkite tinklapius, kuriuose „Clementine“ galėtų ieškoti lyriko
 msgid "Classical"
 msgstr "Klasika"
 
-#: widgets/lineedit.cpp:41
-#: /home/arno/clementine/clementine-player/src/ui_queuemanager.h:139
+#: widgets/lineedit.cpp:41 ../bin/src/ui_queuemanager.h:139
 msgid "Clear"
 msgstr "Išvalyti"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:645
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:647
+#: ../bin/src/ui_mainwindow.h:645 ../bin/src/ui_mainwindow.h:647
 msgid "Clear playlist"
 msgstr "Išvalyti grojaraštį"
 
 #: smartplaylists/searchtermwidget.cpp:321
 #: visualisations/visualisationcontainer.cpp:196
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:628
-#: /home/arno/clementine/clementine-player/src/ui_visualisationoverlay.h:179
+#: ../bin/src/ui_mainwindow.h:628 ../bin/src/ui_visualisationoverlay.h:179
 msgid "Clementine"
 msgstr "„Clementine“"
 
-#: /home/arno/clementine/clementine-player/src/ui_errordialog.h:93
+#: ../bin/src/ui_errordialog.h:93
 msgid "Clementine Error"
 msgstr "„Clementine“ klaida"
 
-#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:422
+#: ../bin/src/ui_notificationssettingspage.h:422
 msgid "Clementine Orange"
 msgstr "„Clementine“ Oranžinė"
 
@@ -915,7 +901,7 @@ msgstr "„Clementine“ Oranžinė"
 msgid "Clementine Visualization"
 msgstr "„Clementine“ vizualizacija"
 
-#: /home/arno/clementine/clementine-player/src/ui_deviceproperties.h:376
+#: ../bin/src/ui_deviceproperties.h:376
 msgid ""
 "Clementine can automatically convert the music you copy to this device into "
 "a format that it can play."
@@ -923,8 +909,7 @@ msgstr ""
 "Į šį įrenginį „Clementine“ gali automatiškai konvertuoti kopijuojamą  muziką"
 " formatu, kurį įrenginys palaiko."
 
-#: /home/arno/clementine/clementine-player/src/ui_remotesettingspage.h:200
-#: remote/remotesettingspage.cpp:152
+#: ../bin/src/ui_remotesettingspage.h:200 remote/remotesettingspage.cpp:152
 msgid ""
 "Clementine can be controlled remotely by an Android phone.  To enable this "
 "feature log in with the same Google account that is configured on your "
@@ -934,7 +919,7 @@ msgstr ""
 "įjungti šią savybę prisijunkite ta pačia „Google“ paskyra, kuri yra "
 "sukonfigūruota jūsų telefone."
 
-#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:396
+#: ../bin/src/ui_notificationssettingspage.h:396
 msgid "Clementine can show a message when the track changes."
 msgstr "„Clementine“ gali rodyti pranešimą besikeičiant dainoms"
 
@@ -959,7 +944,7 @@ msgstr ""
 msgid "Clementine image viewer"
 msgstr "„Clementine“ nuotraukų peržiūra"
 
-#: /home/arno/clementine/clementine-player/src/ui_trackselectiondialog.h:206
+#: ../bin/src/ui_trackselectiondialog.h:206
 msgid "Clementine was unable to find results for this file"
 msgstr "„Clementine“ nepavyko rasti rezultatų šiam failui"
 
@@ -967,7 +952,7 @@ msgstr "„Clementine“ nepavyko rasti rezultatų šiam failui"
 msgid "Click here to add some music"
 msgstr "Paspauskite čia, kad pridėti muziką"
 
-#: /home/arno/clementine/clementine-player/src/ui_trackslider.h:72
+#: ../bin/src/ui_trackslider.h:72
 msgid "Click to toggle between remaining time and total time"
 msgstr "Spustelėkite, kad perjungti tarp likusio laiko ir viso laiko"
 
@@ -995,33 +980,34 @@ msgstr "Klubinė"
 msgid "Color"
 msgstr "Spalva"
 
+#: ../bin/src/ui_globalsearchsettingspage.h:163
+msgid "Combine identical results from different sources"
+msgstr ""
+
 #: core/commandlineoptions.cpp:173
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Kableliais išskirtas sąrašas iš klasės:lygio, lygis yra nuo 0 iki 3"
 
 #: playlist/playlist.cpp:1106 smartplaylists/searchterm.cpp:279
-#: ui/organisedialog.cpp:62
-#: /home/arno/clementine/clementine-player/src/ui_edittagdialog.h:661
+#: ui/organisedialog.cpp:62 ../bin/src/ui_edittagdialog.h:661
 msgid "Comment"
 msgstr "Komentaras"
 
-#: /home/arno/clementine/clementine-player/src/ui_edittagdialog.h:662
+#: ../bin/src/ui_edittagdialog.h:662
 msgid "Complete tags automatically"
 msgstr "Užbaigti žymes automatiškai"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:695
+#: ../bin/src/ui_mainwindow.h:695
 msgid "Complete tags automatically..."
 msgstr "Pabaigti žymes automatiškai..."
 
 #: playlist/playlist.cpp:1088 ui/organisedialog.cpp:56
-#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:132
-#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:145
-#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:158
-#: /home/arno/clementine/clementine-player/src/ui_edittagdialog.h:659
+#: ../bin/src/ui_groupbydialog.h:132 ../bin/src/ui_groupbydialog.h:145
+#: ../bin/src/ui_groupbydialog.h:158 ../bin/src/ui_edittagdialog.h:659
 msgid "Composer"
 msgstr "Kompozitorius"
 
-#: internet/groovesharkservice.cpp:424
+#: internet/groovesharkservice.cpp:450
 msgid "Configure Grooveshark..."
 msgstr ""
 
@@ -1033,7 +1019,7 @@ msgstr "Konfigūruoti „Last.fm“..."
 msgid "Configure Magnatune..."
 msgstr "Konfigūruoti „Magnatune“..."
 
-#: /home/arno/clementine/clementine-player/src/ui_globalshortcutssettingspage.h:167
+#: ../bin/src/ui_globalshortcutssettingspage.h:167
 msgid "Configure Shortcuts"
 msgstr "Konfigūruoti sparčiuosius klavišus"
 
@@ -1045,11 +1031,12 @@ msgstr "Konfigūruoti Spotify..."
 msgid "Configure library..."
 msgstr "Konfigūruoti fonoteką..."
 
-#: internet/digitallyimportedservicebase.cpp:199
+#: internet/digitallyimportedservicebase.cpp:220
+#: ../bin/src/ui_globalsearchsettingspage.h:167
 msgid "Configure..."
 msgstr ""
 
-#: /home/arno/clementine/clementine-player/src/ui_wiimotesettingspage.h:186
+#: ../bin/src/ui_wiimotesettingspage.h:186
 msgid "Connect Wii Remotes using active/deactive action"
 msgstr "Prijungti Wii pultą naudojant aktyvuoti/deaktyvuoti veiksmą"
 
@@ -1061,15 +1048,15 @@ msgstr "Prijungti įrenginį"
 msgid "Connecting to Spotify"
 msgstr "Jungiamasi prie Spotify"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsmp3.h:196
+#: ../bin/src/ui_transcoderoptionsmp3.h:196
 msgid "Constant bitrate"
 msgstr "Pastovus bitų dažnis"
 
-#: /home/arno/clementine/clementine-player/src/ui_deviceproperties.h:379
+#: ../bin/src/ui_deviceproperties.h:379
 msgid "Convert all music"
 msgstr "Konvertuoti visą muziką"
 
-#: /home/arno/clementine/clementine-player/src/ui_deviceproperties.h:378
+#: ../bin/src/ui_deviceproperties.h:378
 msgid "Convert any music that the device can't play"
 msgstr "Konvertuoti visą įrenginio nepalaikomą muziką"
 
@@ -1123,9 +1110,8 @@ msgstr "Nepavyko įkelti „Last.fm“ radijo stoties"
 msgid "Couldn't open output file %1"
 msgstr "Nepavyko atverti išvesties failo %1"
 
-#: /home/arno/clementine/clementine-player/src/ui_albumcovermanager.h:149
-#: /home/arno/clementine/clementine-player/src/ui_albumcoversearcher.h:104
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:668
+#: ../bin/src/ui_albumcovermanager.h:149
+#: ../bin/src/ui_albumcoversearcher.h:104 ../bin/src/ui_mainwindow.h:668
 msgid "Cover Manager"
 msgstr "Viršelių tvarkyklė"
 
@@ -1156,93 +1142,91 @@ msgstr "Viršelio paveikslėlis nustatytas iš %1"
 msgid "Covers from %1"
 msgstr "Viršeliai iš %1"
 
-#: /home/arno/clementine/clementine-player/src/ui_playbacksettingspage.h:262
+#: ../bin/src/ui_playbacksettingspage.h:262
 msgid "Cross-fade when changing tracks automatically"
 msgstr "Naudoti „Cross-fade“ funkciją kai takeliai keičiami automatiškai"
 
-#: /home/arno/clementine/clementine-player/src/ui_playbacksettingspage.h:261
+#: ../bin/src/ui_playbacksettingspage.h:261
 msgid "Cross-fade when changing tracks manually"
 msgstr "Naudoti „Cross-fade“ funkciją kai takeliai keičiami savarankiškai"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:640
+#: ../bin/src/ui_mainwindow.h:640
 msgid "Ctrl+Alt+V"
 msgstr "Ctrl+Alt+V"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:644
+#: ../bin/src/ui_mainwindow.h:644
 msgid "Ctrl+B"
 msgstr "Ctrl+B"
 
-#: /home/arno/clementine/clementine-player/src/ui_queuemanager.h:133
+#: ../bin/src/ui_queuemanager.h:133
 msgid "Ctrl+Down"
 msgstr "Ctrl+Down"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:651
+#: ../bin/src/ui_mainwindow.h:651
 msgid "Ctrl+E"
 msgstr "Ctrl+E"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:661
+#: ../bin/src/ui_mainwindow.h:661
 msgid "Ctrl+H"
 msgstr "Ctrl+H"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:679
+#: ../bin/src/ui_mainwindow.h:679
 msgid "Ctrl+J"
 msgstr "Ctrl+J"
 
-#: /home/arno/clementine/clementine-player/src/ui_queuemanager.h:141
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:649
+#: ../bin/src/ui_queuemanager.h:141 ../bin/src/ui_mainwindow.h:649
 msgid "Ctrl+K"
 msgstr "Ctrl+K"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:642
+#: ../bin/src/ui_mainwindow.h:642
 msgid "Ctrl+L"
 msgstr "Ctrl+L"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:693
+#: ../bin/src/ui_mainwindow.h:693
 msgid "Ctrl+M"
 msgstr "Ctrl+M"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:681
+#: ../bin/src/ui_mainwindow.h:681
 msgid "Ctrl+N"
 msgstr "Ctrl+N"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:665
+#: ../bin/src/ui_mainwindow.h:665
 msgid "Ctrl+O"
 msgstr "Ctrl+O"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:657
+#: ../bin/src/ui_mainwindow.h:657
 msgid "Ctrl+P"
 msgstr "Ctrl+P"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:638
+#: ../bin/src/ui_mainwindow.h:638
 msgid "Ctrl+Q"
 msgstr "Ctrl+Q"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:683
+#: ../bin/src/ui_mainwindow.h:683
 msgid "Ctrl+S"
 msgstr "Ctrl+S"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:663
+#: ../bin/src/ui_mainwindow.h:663
 msgid "Ctrl+Shift+A"
 msgstr "Ctrl+Shift+A"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:685
+#: ../bin/src/ui_mainwindow.h:685
 msgid "Ctrl+Shift+O"
 msgstr "Ctrl+Shift+O"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:696
+#: ../bin/src/ui_mainwindow.h:696
 msgid "Ctrl+T"
 msgstr "Ctrl+T"
 
-#: /home/arno/clementine/clementine-player/src/ui_queuemanager.h:129
+#: ../bin/src/ui_queuemanager.h:129
 msgid "Ctrl+Up"
 msgstr "Ctrl+Up"
 
-#: ui/equalizer.cpp:108
-#: /home/arno/clementine/clementine-player/src/ui_lastfmstationdialog.h:98
+#: ui/equalizer.cpp:108 ../bin/src/ui_lastfmstationdialog.h:98
 msgid "Custom"
 msgstr "Pasirinktinis"
 
-#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:409
+#: ../bin/src/ui_notificationssettingspage.h:409
 msgid "Custom message settings"
 msgstr "Specifiniai žinutės nustatymai"
 
@@ -1250,7 +1234,7 @@ msgstr "Specifiniai žinutės nustatymai"
 msgid "Custom radio"
 msgstr "Pasirinktinis radijas"
 
-#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:423
+#: ../bin/src/ui_notificationssettingspage.h:423
 msgid "Custom..."
 msgstr "Pasirinktinis..."
 
@@ -1262,13 +1246,11 @@ msgstr "„DBus“ kelias"
 msgid "Dance"
 msgstr "Šokių"
 
-#: playlist/playlist.cpp:1104
-#: /home/arno/clementine/clementine-player/src/ui_edittagdialog.h:649
+#: playlist/playlist.cpp:1104 ../bin/src/ui_edittagdialog.h:649
 msgid "Date created"
 msgstr "Sukūrimo data"
 
-#: playlist/playlist.cpp:1103
-#: /home/arno/clementine/clementine-player/src/ui_edittagdialog.h:648
+#: playlist/playlist.cpp:1103 ../bin/src/ui_edittagdialog.h:648
 msgid "Date modified"
 msgstr "Pakeitimo data"
 
@@ -1276,7 +1258,7 @@ msgstr "Pakeitimo data"
 msgid "Days"
 msgstr "Dienos"
 
-#: /home/arno/clementine/clementine-player/src/ui_globalshortcutssettingspage.h:177
+#: ../bin/src/ui_globalshortcutssettingspage.h:177
 msgid "De&fault"
 msgstr "Numatytas"
 
@@ -1288,11 +1270,11 @@ msgstr "Sumažinti garsą per 4%"
 msgid "Decrease volume"
 msgstr "Sumažinti garsą"
 
-#: /home/arno/clementine/clementine-player/src/ui_wiimotesettingspage.h:195
+#: ../bin/src/ui_wiimotesettingspage.h:195
 msgid "Defaults"
 msgstr "Numatyti"
 
-#: /home/arno/clementine/clementine-player/src/ui_visualisationselector.h:115
+#: ../bin/src/ui_visualisationselector.h:115
 msgid "Delay between visualizations"
 msgstr "Delsa tarp vizualizacijų"
 
@@ -1310,8 +1292,7 @@ msgstr "Ištrinti iš įrenginio..."
 msgid "Delete from disk..."
 msgstr "Ištrinti iš disko..."
 
-#: ui/equalizer.cpp:190
-#: /home/arno/clementine/clementine-player/src/ui_equalizer.h:124
+#: ui/equalizer.cpp:190 ../bin/src/ui_equalizer.h:124
 msgid "Delete preset"
 msgstr "Ištrinti šabloną"
 
@@ -1319,7 +1300,7 @@ msgstr "Ištrinti šabloną"
 msgid "Delete smart playlist"
 msgstr "Ištrinti išmanųjį grojaraštį"
 
-#: /home/arno/clementine/clementine-player/src/ui_organisedialog.h:194
+#: ../bin/src/ui_organisedialog.h:194
 msgid "Delete the original files"
 msgstr "Ištrinti originalius failus"
 
@@ -1335,12 +1316,11 @@ msgstr "Iš eilės pažymėtus takelius"
 msgid "Dequeue track"
 msgstr "Iš eilės takelį"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcodedialog.h:211
-#: /home/arno/clementine/clementine-player/src/ui_organisedialog.h:189
+#: ../bin/src/ui_transcodedialog.h:211 ../bin/src/ui_organisedialog.h:189
 msgid "Destination"
 msgstr "Kopijuoti į aplanką"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcodedialog.h:217
+#: ../bin/src/ui_transcodedialog.h:217
 msgid "Details..."
 msgstr "Detalės..."
 
@@ -1348,7 +1328,7 @@ msgstr "Detalės..."
 msgid "Device"
 msgstr "Įrenginys"
 
-#: /home/arno/clementine/clementine-player/src/ui_deviceproperties.h:368
+#: ../bin/src/ui_deviceproperties.h:368
 msgid "Device Properties"
 msgstr "Įrenginio savybės"
 
@@ -1364,7 +1344,7 @@ msgstr "Įrenginio savybės..."
 msgid "Devices"
 msgstr "Įrenginiai"
 
-#: /home/arno/clementine/clementine-player/src/ui_globalsearchpopup.h:103
+#: ../bin/src/ui_globalsearchpopup.h:103
 msgid "Dialog"
 msgstr ""
 
@@ -1372,45 +1352,45 @@ msgstr ""
 msgid "Did you mean"
 msgstr "Ar turėjote omenyje"
 
-#: /home/arno/clementine/clementine-player/src/ui_digitallyimportedsettingspage.h:132
+#: ../bin/src/ui_digitallyimportedsettingspage.h:160
 msgid "Digitally Imported"
 msgstr ""
 
-#: /home/arno/clementine/clementine-player/src/ui_digitallyimportedsettingspage.h:135
+#: ../bin/src/ui_digitallyimportedsettingspage.h:164
 msgid "Digitally Imported password"
 msgstr ""
 
-#: /home/arno/clementine/clementine-player/src/ui_digitallyimportedsettingspage.h:134
+#: ../bin/src/ui_digitallyimportedsettingspage.h:162
 msgid "Digitally Imported username"
 msgstr ""
 
-#: /home/arno/clementine/clementine-player/src/ui_networkproxysettingspage.h:159
+#: ../bin/src/ui_networkproxysettingspage.h:159
 msgid "Direct internet connection"
 msgstr "Tiesioginis interneto ryšys"
 
-#: /home/arno/clementine/clementine-player/src/ui_magnatunedownloaddialog.h:145
-#: /home/arno/clementine/clementine-player/src/ui_transcodedialog.h:204
+#: ../bin/src/ui_magnatunedownloaddialog.h:145
+#: ../bin/src/ui_transcodedialog.h:204
 msgid "Directory"
 msgstr "Aplankas"
 
-#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:405
+#: ../bin/src/ui_notificationssettingspage.h:405
 msgid "Disable duration"
 msgstr "Išjungti trukmę"
 
-#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:398
+#: ../bin/src/ui_notificationssettingspage.h:398
 msgid "Disabled"
 msgstr "Išjungtas"
 
 #: playlist/playlist.cpp:1084 ui/organisedialog.cpp:58
-#: /home/arno/clementine/clementine-player/src/ui_edittagdialog.h:655
+#: ../bin/src/ui_edittagdialog.h:655
 msgid "Disc"
 msgstr "Diskas"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsspeex.h:234
+#: ../bin/src/ui_transcoderoptionsspeex.h:234
 msgid "Discontinuous transmission"
 msgstr "Nevientisa transliacija"
 
-#: /home/arno/clementine/clementine-player/src/ui_librarysettingspage.h:169
+#: ../bin/src/ui_librarysettingspage.h:169
 msgid "Display options"
 msgstr "Rodymo nuostatos"
 
@@ -1422,16 +1402,15 @@ msgstr ""
 msgid "Display the on-screen-display"
 msgstr "Rodyti OSD"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:694
+#: ../bin/src/ui_mainwindow.h:694
 msgid "Do a full library rescan"
 msgstr "Pilnai perskanuoti fonoteką"
 
-#: /home/arno/clementine/clementine-player/src/ui_deviceproperties.h:377
+#: ../bin/src/ui_deviceproperties.h:377
 msgid "Do not convert any music"
 msgstr "Nekonvertuoti jokios muzikos"
 
-#: widgets/osd.cpp:306
-#: /home/arno/clementine/clementine-player/src/ui_playlistsequence.h:99
+#: widgets/osd.cpp:306 ../bin/src/ui_playlistsequence.h:99
 msgid "Don't repeat"
 msgstr "Nekartoti"
 
@@ -1439,8 +1418,7 @@ msgstr "Nekartoti"
 msgid "Don't show in various artists"
 msgstr "Nerodyti įvairiuose atlikėjuose"
 
-#: widgets/osd.cpp:294
-#: /home/arno/clementine/clementine-player/src/ui_playlistsequence.h:103
+#: widgets/osd.cpp:294 ../bin/src/ui_playlistsequence.h:103
 msgid "Don't shuffle"
 msgstr "Nemaišyti"
 
@@ -1452,7 +1430,7 @@ msgstr "Nesustoti!"
 msgid "Double click to open"
 msgstr "Du kart spustelėkite norėdami atverti"
 
-#: /home/arno/clementine/clementine-player/src/ui_behavioursettingspage.h:198
+#: ../bin/src/ui_behavioursettingspage.h:198
 msgid "Double clicking a song will..."
 msgstr "Du kartus spūstelėjus dainą..."
 
@@ -1460,7 +1438,7 @@ msgstr "Du kartus spūstelėjus dainą..."
 msgid "Download directory"
 msgstr "Atsisiuntimų aplankas"
 
-#: /home/arno/clementine/clementine-player/src/ui_magnatunesettingspage.h:157
+#: ../bin/src/ui_magnatunesettingspage.h:157
 msgid "Download membership"
 msgstr "Atsiųsti narystę"
 
@@ -1472,7 +1450,7 @@ msgstr "Atsisiųsti šį albumą"
 msgid "Download this album..."
 msgstr "Atsisiunčiamas šis albumas"
 
-#: /home/arno/clementine/clementine-player/src/ui_spotifysettingspage.h:186
+#: ../bin/src/ui_spotifysettingspage.h:186
 msgid "Download..."
 msgstr "Atsisiųsti..."
 
@@ -1504,7 +1482,7 @@ msgstr "Temkite, kad pakeisti poziciją"
 msgid "Drive letter"
 msgstr "Disko raidė"
 
-#: /home/arno/clementine/clementine-player/src/ui_dynamicplaylistcontrols.h:103
+#: ../bin/src/ui_dynamicplaylistcontrols.h:103
 msgid "Dynamic mode is on"
 msgstr "Dinaminė veiksena yra įjungta"
 
@@ -1521,20 +1499,19 @@ msgstr "Taisyti išmanųjį grojaraštį..."
 msgid "Edit tag \"%1\"..."
 msgstr "Taisyti žymą \"%1\"..."
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:654
+#: ../bin/src/ui_mainwindow.h:654
 msgid "Edit tag..."
 msgstr "Taisyti žymę..."
 
-#: /home/arno/clementine/clementine-player/src/ui_edittagdialog.h:663
+#: ../bin/src/ui_edittagdialog.h:663
 msgid "Edit tags"
 msgstr "Taisyti žymes"
 
-#: /home/arno/clementine/clementine-player/src/ui_edittagdialog.h:632
+#: ../bin/src/ui_edittagdialog.h:632
 msgid "Edit track information"
 msgstr "Taisyti takelio informaciją"
 
-#: library/libraryview.cpp:264
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:650
+#: library/libraryview.cpp:264 ../bin/src/ui_mainwindow.h:650
 msgid "Edit track information..."
 msgstr "Taisyti takelio informaciją..."
 
@@ -1546,39 +1523,46 @@ msgstr "Taisyti takelių informaciją..."
 msgid "Edit..."
 msgstr "Keisti..."
 
-#: /home/arno/clementine/clementine-player/src/ui_wiimotesettingspage.h:183
+#: ../bin/src/ui_wiimotesettingspage.h:183
 msgid "Enable Wii Remote support"
 msgstr "Įgalinti Wii nuotolinio pulto palaikymą"
 
-#: /home/arno/clementine/clementine-player/src/ui_equalizer.h:126
+#: ../bin/src/ui_equalizer.h:126
 msgid "Enable equalizer"
 msgstr "Įjungti glodintuvą"
 
-#: /home/arno/clementine/clementine-player/src/ui_behavioursettingspage.h:179
+#: ../bin/src/ui_behavioursettingspage.h:179
 msgid "Enable playlist background image"
 msgstr "Įjungti grojaraščio fono paveikslėlį"
 
-#: /home/arno/clementine/clementine-player/src/ui_wiimotesettingspage.h:187
+#: ../bin/src/ui_wiimotesettingspage.h:187
 msgid "Enable shortcuts only when Clementine is focused"
 msgstr "Įgalinti kombinacijas tik tada kai Clementine yra aktyvus"
+
+#: ../bin/src/ui_globalsearchsettingspage.h:164
+msgid ""
+"Enable sources below to include them in Global Search results.  When "
+"identical results are available from more than one source, ones at the top "
+"will take priority."
+msgstr ""
 
 #: core/globalshortcuts.cpp:62
 msgid "Enable/disable Last.fm scrobbling"
 msgstr "Įjungti/Išjungti „Last.fm scrobbling“"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsspeex.h:235
+#: ../bin/src/ui_transcoderoptionsspeex.h:235
 msgid "Encoding complexity"
 msgstr "Kodavimo sudėtingumas"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsmp3.h:197
+#: ../bin/src/ui_transcoderoptionsmp3.h:197
 msgid "Encoding engine quality"
 msgstr "Kodavimo varikliuko kokybė"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsspeex.h:224
+#: ../bin/src/ui_transcoderoptionsspeex.h:224
 msgid "Encoding mode"
 msgstr "Kodavimo režimas"
 
-#: /home/arno/clementine/clementine-player/src/ui_coverfromurldialog.h:103
+#: ../bin/src/ui_coverfromurldialog.h:103
 msgid "Enter a URL to download a cover from the Internet:"
 msgstr "Įveskite URL, kad atsisiųsti viršelį iš interneto:"
 
@@ -1586,28 +1570,27 @@ msgstr "Įveskite URL, kad atsisiųsti viršelį iš interneto:"
 msgid "Enter a new name for this playlist"
 msgstr "Įveskite naują pavadinimą šiam grojaraščiui"
 
-#: /home/arno/clementine/clementine-player/src/ui_lastfmstationdialog.h:93
+#: ../bin/src/ui_lastfmstationdialog.h:93
 msgid ""
 "Enter an <b>artist</b> or <b>tag</b> to start listening to Last.fm radio."
 msgstr ""
 "Įveskite <b>atlikėją</b> arba <b>žymę</b>, kad pradėti klausytis Last.fm "
 "radijo."
 
-#: /home/arno/clementine/clementine-player/src/ui_libraryfilterwidget.h:131
-#: /home/arno/clementine/clementine-player/src/ui_albumcovermanager.h:153
+#: ../bin/src/ui_libraryfilterwidget.h:131
+#: ../bin/src/ui_albumcovermanager.h:153
 msgid "Enter search terms here"
 msgstr "Įveskite paieškos žodžius čia"
 
-#: /home/arno/clementine/clementine-player/src/ui_addstreamdialog.h:114
+#: ../bin/src/ui_addstreamdialog.h:114
 msgid "Enter the URL of an internet radio stream:"
 msgstr "Įveskite internetinio radijo srauto URL:"
 
-#: /home/arno/clementine/clementine-player/src/ui_libraryfilterwidget.h:115
+#: ../bin/src/ui_libraryfilterwidget.h:115
 msgid "Entire collection"
 msgstr "Visa kolekcija"
 
-#: /home/arno/clementine/clementine-player/src/ui_equalizer.h:118
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:675
+#: ../bin/src/ui_equalizer.h:118 ../bin/src/ui_mainwindow.h:675
 msgid "Equalizer"
 msgstr "Glodintuvas"
 
@@ -1646,8 +1629,8 @@ msgstr "Klaida siunčiant Spotify plėtinį"
 msgid "Error loading %1"
 msgstr "Klaida įkeliant %1"
 
-#: internet/digitallyimportedservicebase.cpp:240
-#: internet/digitallyimportedurlhandler.cpp:83
+#: internet/digitallyimportedservicebase.cpp:242
+#: internet/digitallyimportedurlhandler.cpp:73
 msgid "Error loading di.fm playlist"
 msgstr ""
 
@@ -1664,58 +1647,63 @@ msgstr "Klaida įkeliant audio CD"
 msgid "Ever played"
 msgstr "Bet kada grota"
 
-#: /home/arno/clementine/clementine-player/src/ui_playbacksettingspage.h:263
+#: ../bin/src/ui_playbacksettingspage.h:263
 msgid "Except between tracks on the same album or in the same CUE sheet"
 msgstr "Išskyrus tarp takelių tame pačiame albume arba tame pačiame CUE lape"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:659
+#: internet/digitallyimportedsettingspage.cpp:93
+#, qt-format
+msgid "Expires on %1"
+msgstr ""
+
+#: ../bin/src/ui_mainwindow.h:659
 msgid "F1"
 msgstr "F1"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:655
+#: ../bin/src/ui_mainwindow.h:655
 msgid "F2"
 msgstr "F2"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:630
+#: ../bin/src/ui_mainwindow.h:630
 msgid "F5"
 msgstr "F5"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:632
+#: ../bin/src/ui_mainwindow.h:632
 msgid "F6"
 msgstr "F6"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:634
+#: ../bin/src/ui_mainwindow.h:634
 msgid "F7"
 msgstr "F7"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:636
+#: ../bin/src/ui_mainwindow.h:636
 msgid "F8"
 msgstr "F8"
 
-#: /home/arno/clementine/clementine-player/src/ui_magnatunedownloaddialog.h:140
-#: /home/arno/clementine/clementine-player/src/ui_magnatunesettingspage.h:167
-#: /home/arno/clementine/clementine-player/src/ui_transcodersettingspage.h:161
+#: ../bin/src/ui_magnatunedownloaddialog.h:140
+#: ../bin/src/ui_magnatunesettingspage.h:167
+#: ../bin/src/ui_transcodersettingspage.h:161
 msgid "FLAC"
 msgstr "FLAC"
 
-#: /home/arno/clementine/clementine-player/src/ui_playbacksettingspage.h:260
+#: ../bin/src/ui_playbacksettingspage.h:260
 msgid "Fade out when stopping a track"
 msgstr "Palaipsniui nutilti kai stabdomas takelis"
 
-#: /home/arno/clementine/clementine-player/src/ui_playbacksettingspage.h:259
+#: ../bin/src/ui_playbacksettingspage.h:259
 msgid "Fading"
 msgstr "Pradingimas"
 
-#: /home/arno/clementine/clementine-player/src/ui_playbacksettingspage.h:264
+#: ../bin/src/ui_playbacksettingspage.h:264
 msgid "Fading duration"
 msgstr "Suliejimo trukmė"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsflac.h:82
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsmp3.h:200
+#: ../bin/src/ui_transcoderoptionsflac.h:82
+#: ../bin/src/ui_transcoderoptionsmp3.h:200
 msgid "Fast"
 msgstr "Greitai"
 
-#: internet/groovesharkservice.cpp:536
+#: internet/groovesharkservice.cpp:564
 msgid "Favorites"
 msgstr ""
 
@@ -1723,15 +1711,15 @@ msgstr ""
 msgid "Favourite tracks"
 msgstr "Megstami takeliai"
 
-#: /home/arno/clementine/clementine-player/src/ui_albumcovermanager.h:155
+#: ../bin/src/ui_albumcovermanager.h:155
 msgid "Fetch Missing Covers"
 msgstr "Gauti trūkstamus albumų viršelius"
 
-#: /home/arno/clementine/clementine-player/src/ui_albumcovermanager.h:150
+#: ../bin/src/ui_albumcovermanager.h:150
 msgid "Fetch automatically"
 msgstr "Gauti automatiškai"
 
-#: /home/arno/clementine/clementine-player/src/ui_coversearchstatisticsdialog.h:75
+#: ../bin/src/ui_coversearchstatisticsdialog.h:75
 msgid "Fetch completed"
 msgstr "Parsiuntimas baigtas"
 
@@ -1743,12 +1731,11 @@ msgstr "Viršelio atsiuntimo klaida"
 msgid "File extension"
 msgstr "Failo plėtinys"
 
-#: /home/arno/clementine/clementine-player/src/ui_deviceproperties.h:384
+#: ../bin/src/ui_deviceproperties.h:384
 msgid "File formats"
 msgstr "Failų formatai"
 
-#: playlist/playlist.cpp:1099
-#: /home/arno/clementine/clementine-player/src/ui_edittagdialog.h:650
+#: playlist/playlist.cpp:1099 ../bin/src/ui_edittagdialog.h:650
 msgid "File name"
 msgstr "Failo vardas"
 
@@ -1756,20 +1743,17 @@ msgstr "Failo vardas"
 msgid "File name (without path)"
 msgstr "Failo vardas (be kelio)"
 
-#: playlist/playlist.cpp:1101
-#: /home/arno/clementine/clementine-player/src/ui_edittagdialog.h:644
+#: playlist/playlist.cpp:1101 ../bin/src/ui_edittagdialog.h:644
 msgid "File size"
 msgstr "Failo dydis"
 
-#: playlist/playlist.cpp:1102
-#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:133
-#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:146
-#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:159
-#: /home/arno/clementine/clementine-player/src/ui_edittagdialog.h:646
+#: playlist/playlist.cpp:1102 ../bin/src/ui_groupbydialog.h:133
+#: ../bin/src/ui_groupbydialog.h:146 ../bin/src/ui_groupbydialog.h:159
+#: ../bin/src/ui_edittagdialog.h:646
 msgid "File type"
 msgstr "Failo tipas"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcodedialog.h:205
+#: ../bin/src/ui_transcodedialog.h:205
 msgid "Filename"
 msgstr "Failopavadinimas"
 
@@ -1777,7 +1761,7 @@ msgstr "Failopavadinimas"
 msgid "Files"
 msgstr "Failai"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcodedialog.h:202
+#: ../bin/src/ui_transcodedialog.h:202
 msgid "Files to transcode"
 msgstr "Failai perkodavimui"
 
@@ -1805,7 +1789,7 @@ msgstr "Skenuojama daina"
 msgid "Finish"
 msgstr "Baigti"
 
-#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:125
+#: ../bin/src/ui_groupbydialog.h:125
 msgid "First level"
 msgstr "Pirmas lygis"
 
@@ -1813,17 +1797,17 @@ msgstr "Pirmas lygis"
 msgid "Flac"
 msgstr "Flac"
 
-#: /home/arno/clementine/clementine-player/src/ui_songinfosettingspage.h:181
+#: ../bin/src/ui_songinfosettingspage.h:181
 msgid "Font size"
 msgstr "Šrifto dydis"
 
-#: /home/arno/clementine/clementine-player/src/ui_spotifysettingspage.h:184
+#: ../bin/src/ui_spotifysettingspage.h:184
 msgid "For licensing reasons Spotify support is in a separate plugin."
 msgstr ""
 "Dėl licencijavimo priežasčių Spotify palaikymas yra įjungiamas per atskirą "
 "plėtinį."
 
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsmp3.h:204
+#: ../bin/src/ui_transcoderoptionsmp3.h:204
 msgid "Force mono encoding"
 msgstr "Įjungti tik mono kodavimą"
 
@@ -1840,32 +1824,26 @@ msgstr ""
 "Pamirštant įrenginys bus pašalintas iš šio sąrašo ir Clementine turės vėl  "
 "skenuoti visas dainas kai kitą kartą prijungsite šį įrenginį."
 
-#: /home/arno/clementine/clementine-player/src/ui_globalsearchwidget.h:64
-#: /home/arno/clementine/clementine-player/src/ui_icecastfilterwidget.h:74
-#: /home/arno/clementine/clementine-player/src/ui_internetviewcontainer.h:70
-#: /home/arno/clementine/clementine-player/src/ui_libraryfilterwidget.h:114
-#: /home/arno/clementine/clementine-player/src/ui_libraryviewcontainer.h:59
-#: /home/arno/clementine/clementine-player/src/ui_playlistcontainer.h:143
-#: /home/arno/clementine/clementine-player/src/ui_querysearchpage.h:70
-#: /home/arno/clementine/clementine-player/src/ui_querysortpage.h:136
-#: /home/arno/clementine/clementine-player/src/ui_searchpreview.h:104
-#: /home/arno/clementine/clementine-player/src/ui_searchtermwidget.h:279
-#: /home/arno/clementine/clementine-player/src/ui_wizardfinishpage.h:83
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsaac.h:128
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsflac.h:80
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsmp3.h:190
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsspeex.h:216
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsvorbis.h:201
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionswma.h:78
-#: /home/arno/clementine/clementine-player/src/ui_equalizerslider.h:82
-#: /home/arno/clementine/clementine-player/src/ui_fileview.h:106
-#: /home/arno/clementine/clementine-player/src/ui_loginstatewidget.h:145
-#: /home/arno/clementine/clementine-player/src/ui_trackslider.h:69
-#: /home/arno/clementine/clementine-player/src/ui_visualisationoverlay.h:178
+#: ../bin/src/ui_globalsearchwidget.h:64
+#: ../bin/src/ui_icecastfilterwidget.h:74
+#: ../bin/src/ui_internetviewcontainer.h:70
+#: ../bin/src/ui_libraryfilterwidget.h:114
+#: ../bin/src/ui_libraryviewcontainer.h:59
+#: ../bin/src/ui_playlistcontainer.h:143 ../bin/src/ui_querysearchpage.h:70
+#: ../bin/src/ui_querysortpage.h:136 ../bin/src/ui_searchpreview.h:104
+#: ../bin/src/ui_searchtermwidget.h:279 ../bin/src/ui_wizardfinishpage.h:83
+#: ../bin/src/ui_transcoderoptionsaac.h:128
+#: ../bin/src/ui_transcoderoptionsflac.h:80
+#: ../bin/src/ui_transcoderoptionsmp3.h:190
+#: ../bin/src/ui_transcoderoptionsspeex.h:216
+#: ../bin/src/ui_transcoderoptionsvorbis.h:201
+#: ../bin/src/ui_transcoderoptionswma.h:78 ../bin/src/ui_equalizerslider.h:82
+#: ../bin/src/ui_fileview.h:106 ../bin/src/ui_loginstatewidget.h:145
+#: ../bin/src/ui_trackslider.h:69 ../bin/src/ui_visualisationoverlay.h:178
 msgid "Form"
 msgstr "Forma"
 
-#: /home/arno/clementine/clementine-player/src/ui_magnatunedownloaddialog.h:136
+#: ../bin/src/ui_magnatunedownloaddialog.h:136
 msgid "Format"
 msgstr "Formatas"
 
@@ -1874,7 +1852,7 @@ msgstr "Formatas"
 msgid "Framerate"
 msgstr "Kadrų dažnis"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsspeex.h:236
+#: ../bin/src/ui_transcoderoptionsspeex.h:236
 msgid "Frames per buffer"
 msgstr "Kadrai per buferį"
 
@@ -1894,7 +1872,7 @@ msgstr "Visi žemi ir aukšti tonai"
 msgid "Full Treble"
 msgstr "Visi aukšti tonai"
 
-#: /home/arno/clementine/clementine-player/src/ui_playbacksettingspage.h:276
+#: ../bin/src/ui_playbacksettingspage.h:276
 msgid "GStreamer audio engine"
 msgstr "GStreamer audio variklis"
 
@@ -1902,15 +1880,13 @@ msgstr "GStreamer audio variklis"
 msgid "General"
 msgstr ""
 
-#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:402
+#: ../bin/src/ui_notificationssettingspage.h:402
 msgid "General settings"
 msgstr "Pagrindiniai nustatymai"
 
 #: playlist/playlist.cpp:1086 ui/organisedialog.cpp:61
-#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:134
-#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:147
-#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:160
-#: /home/arno/clementine/clementine-player/src/ui_edittagdialog.h:660
+#: ../bin/src/ui_groupbydialog.h:134 ../bin/src/ui_groupbydialog.h:147
+#: ../bin/src/ui_groupbydialog.h:160 ../bin/src/ui_edittagdialog.h:660
 msgid "Genre"
 msgstr "Žanras"
 
@@ -1918,53 +1894,57 @@ msgstr "Žanras"
 msgid "Getting channels"
 msgstr "gaunami kanalai"
 
-#: internet/digitallyimportedservicebase.cpp:102
+#: internet/digitallyimportedservicebase.cpp:122
 msgid "Getting streams"
 msgstr ""
 
-#: /home/arno/clementine/clementine-player/src/ui_addstreamdialog.h:116
+#: ../bin/src/ui_addstreamdialog.h:116
 msgid "Give it a name:"
 msgstr "Suteikti pavadinimą"
 
-#: /home/arno/clementine/clementine-player/src/ui_globalsearchwidget.h:65
+#: ../bin/src/ui_globalsearchsettingspage.h:159
+msgid "Global Search"
+msgstr ""
+
+#: ../bin/src/ui_globalsearchwidget.h:65
 msgid "Global search"
 msgstr ""
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:686
+#: ../bin/src/ui_mainwindow.h:686
 msgid "Go to next playlist tab"
 msgstr "Eiti į sekančią grojaraščių kortelę"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:687
+#: ../bin/src/ui_mainwindow.h:687
 msgid "Go to previous playlist tab"
 msgstr "Eiti į praeitą grojarasčių kortelę"
 
-#: /home/arno/clementine/clementine-player/src/ui_remotesettingspage.h:206
+#: ../bin/src/ui_remotesettingspage.h:206
 msgid "Google password"
 msgstr "Google slaptažodis"
 
-#: /home/arno/clementine/clementine-player/src/ui_remotesettingspage.h:204
+#: ../bin/src/ui_remotesettingspage.h:204
 msgid "Google username"
 msgstr "Google vartotojo vardas"
 
 #: covers/coversearchstatisticsdialog.cpp:54 ui/albumcovermanager.cpp:431
-#: /home/arno/clementine/clementine-player/src/ui_coversearchstatisticsdialog.h:76
+#: ../bin/src/ui_coversearchstatisticsdialog.h:76
 #, qt-format
 msgid "Got %1 covers out of %2 (%3 failed)"
 msgstr "VaizdasGauta %1 viršelių iš %2 (%3 nepavyko)"
 
-#: /home/arno/clementine/clementine-player/src/ui_behavioursettingspage.h:190
+#: ../bin/src/ui_behavioursettingspage.h:190
 msgid "Grey out non existent songs in my playlists"
 msgstr "Pažymėti pilkai neegzistuojančias dainas mano grojaraštyje"
 
-#: /home/arno/clementine/clementine-player/src/ui_groovesharksettingspage.h:112
+#: ../bin/src/ui_groovesharksettingspage.h:112
 msgid "Grooveshark"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:377
+#: internet/groovesharkservice.cpp:380
 msgid "Grooveshark login error"
 msgstr ""
 
-#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:124
+#: ../bin/src/ui_groupbydialog.h:124
 msgid "Group Library by..."
 msgstr "Grupuoti fonoteką pagal..."
 
@@ -1972,43 +1952,47 @@ msgstr "Grupuoti fonoteką pagal..."
 msgid "Group by"
 msgstr "Grupuoti pagal"
 
-#: /home/arno/clementine/clementine-player/src/ui_libraryfilterwidget.h:127
+#: ../bin/src/ui_libraryfilterwidget.h:127
 msgid "Group by Album"
 msgstr "Grupuoti pagal Albumą"
 
-#: /home/arno/clementine/clementine-player/src/ui_libraryfilterwidget.h:124
+#: ../bin/src/ui_libraryfilterwidget.h:124
 msgid "Group by Artist"
 msgstr "Grupuoti  pagal Atlikėją"
 
-#: /home/arno/clementine/clementine-player/src/ui_libraryfilterwidget.h:125
+#: ../bin/src/ui_libraryfilterwidget.h:125
 msgid "Group by Artist/Album"
 msgstr "Grupuoti  pagal Atlikėją/Albumą"
 
-#: /home/arno/clementine/clementine-player/src/ui_libraryfilterwidget.h:126
+#: ../bin/src/ui_libraryfilterwidget.h:126
 msgid "Group by Artist/Year - Album"
 msgstr "Grupuoti  pagal Atlikėją/Metus - Albumą"
 
-#: /home/arno/clementine/clementine-player/src/ui_libraryfilterwidget.h:128
+#: ../bin/src/ui_libraryfilterwidget.h:128
 msgid "Group by Genre/Album"
 msgstr "Grupuoti pagal Žanrą/Albumą"
 
-#: /home/arno/clementine/clementine-player/src/ui_libraryfilterwidget.h:129
+#: ../bin/src/ui_libraryfilterwidget.h:129
 msgid "Group by Genre/Artist/Album"
 msgstr "Grupuoti pagal Žanrą/Atlikėją/Albumą"
 
-#: /home/arno/clementine/clementine-player/src/ui_networkproxysettingspage.h:163
+#: ../bin/src/ui_networkproxysettingspage.h:163
 msgid "HTTP proxy"
 msgstr "HTTP įgaliotasis serveris"
 
-#: /home/arno/clementine/clementine-player/src/ui_deviceproperties.h:371
+#: ../bin/src/ui_deviceproperties.h:371
 msgid "Hardware information"
 msgstr "Įrangos informacija"
 
-#: /home/arno/clementine/clementine-player/src/ui_deviceproperties.h:372
+#: ../bin/src/ui_deviceproperties.h:372
 msgid "Hardware information is only available while the device is connected."
 msgstr "Aparatūros informacija prieinama tik kai įrenginys yra prijungtas."
 
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsmp3.h:202
+#: ../bin/src/ui_globalsearchsettingspage.h:161
+msgid "Hide all other search boxes"
+msgstr ""
+
+#: ../bin/src/ui_transcoderoptionsmp3.h:202
 msgid "High"
 msgstr "Aukšta"
 
@@ -2033,11 +2017,11 @@ msgstr "Valandos"
 msgid "Hypnotoad"
 msgstr "Hypnotoad'as"
 
-#: /home/arno/clementine/clementine-player/src/ui_magnatunesettingspage.h:155
+#: ../bin/src/ui_magnatunesettingspage.h:155
 msgid "I don't have a Magnatune account"
 msgstr "Aš neturiu Magnatune paskyros"
 
-#: /home/arno/clementine/clementine-player/src/ui_deviceproperties.h:370
+#: ../bin/src/ui_deviceproperties.h:370
 msgid "Icon"
 msgstr "Piktograma"
 
@@ -2056,7 +2040,7 @@ msgid ""
 msgstr ""
 "Jei tęsite, šis įrenginys dirbs lėtai ir nukopijuotos dainos gali nedirbti."
 
-#: /home/arno/clementine/clementine-player/src/ui_remotesettingspage.h:209
+#: ../bin/src/ui_remotesettingspage.h:209
 msgid ""
 "If you use the remote on more than one computer, this name will help you "
 "choose which one to connect to on your phone."
@@ -2064,7 +2048,7 @@ msgstr ""
 "Jei naudojate nuotolinio valdymo pultą daugiau nei viename kompiuteryje, šis"
 " pavadinimas padės jums pasirinkti, kurį prijunkti prie jūsų telefono."
 
-#: /home/arno/clementine/clementine-player/src/ui_organisedialog.h:204
+#: ../bin/src/ui_organisedialog.h:204
 msgid "Ignore \"The\" in artist names"
 msgstr "Nepaisyti \"The\" atlikėjų varduose"
 
@@ -2077,7 +2061,7 @@ msgstr ""
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgstr "Paveikslai (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 
-#: /home/arno/clementine/clementine-player/src/ui_wizardfinishpage.h:86
+#: ../bin/src/ui_wizardfinishpage.h:86
 msgid ""
 "In dynamic mode new tracks will be chosen and added to the playlist every "
 "time a song finishes."
@@ -2089,13 +2073,17 @@ msgstr ""
 msgid "Inbox"
 msgstr "Gautieji"
 
-#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:408
+#: ../bin/src/ui_notificationssettingspage.h:408
 msgid "Include album art in the notification"
 msgstr "Rodyti albumo paveikslus pranešime"
 
-#: /home/arno/clementine/clementine-player/src/ui_querysearchpage.h:76
+#: ../bin/src/ui_querysearchpage.h:76
 msgid "Include all songs"
 msgstr "Įtraukti visas dainas"
+
+#: ../bin/src/ui_globalsearchsettingspage.h:170
+msgid "Include keyboard shortcut help in the tooltip"
+msgstr ""
 
 #: core/commandlineoptions.cpp:158
 msgid "Increase the volume by 4%"
@@ -2105,12 +2093,11 @@ msgstr "Pagarsinti 4%"
 msgid "Increase volume"
 msgstr "Pagarsinti"
 
-#: wiimotedev/wiimotesettingspage.cpp:124
-#: /home/arno/clementine/clementine-player/src/ui_deviceproperties.h:373
+#: wiimotedev/wiimotesettingspage.cpp:124 ../bin/src/ui_deviceproperties.h:373
 msgid "Information"
 msgstr "Informacija"
 
-#: /home/arno/clementine/clementine-player/src/ui_organisedialog.h:203
+#: ../bin/src/ui_organisedialog.h:203
 msgid "Insert..."
 msgstr "Įterpti..."
 
@@ -2129,14 +2116,6 @@ msgstr ""
 #: internet/lastfmservice.cpp:440
 msgid "Invalid API key"
 msgstr "Netinkamas API raktas"
-
-#: internet/skyfmservice.cpp:72
-msgid "Invalid SKY.fm username or password"
-msgstr ""
-
-#: internet/digitallyimportedservicebase.cpp:238
-msgid "Invalid di.fm username or password"
-msgstr ""
 
 #: internet/lastfmservice.cpp:435
 msgid "Invalid format"
@@ -2162,7 +2141,7 @@ msgstr "Netinkama paslauga"
 msgid "Invalid session key"
 msgstr "Netinkamas sesijos raktas"
 
-#: internet/groovesharkservice.cpp:370
+#: internet/groovesharkservice.cpp:373
 msgid "Invalid username and/or password"
 msgstr ""
 
@@ -2190,7 +2169,7 @@ msgstr "Jamendo savaitės Top takelia"
 msgid "Jamendo database"
 msgstr "Jamendo duomenų bazė"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:678
+#: ../bin/src/ui_mainwindow.h:678
 msgid "Jump to the currently playing track"
 msgstr "Peršokti prie dabar grojamo takelio"
 
@@ -2201,24 +2180,24 @@ msgstr "Laikykite mygtukus %1 sek."
 
 #: wiimotedev/wiimoteshortcutgrabber.cpp:73
 #: wiimotedev/wiimoteshortcutgrabber.cpp:117
-#: /home/arno/clementine/clementine-player/src/ui_wiimoteshortcutgrabber.h:127
+#: ../bin/src/ui_wiimoteshortcutgrabber.h:127
 #, qt-format
 msgid "Keep buttons for %1 seconds..."
 msgstr "Laikyti mygtukus %1 sekundžių..."
 
-#: /home/arno/clementine/clementine-player/src/ui_behavioursettingspage.h:178
+#: ../bin/src/ui_behavioursettingspage.h:178
 msgid "Keep running in the background when the window is closed"
 msgstr "Veikti fone kai langas uždaromas"
 
-#: /home/arno/clementine/clementine-player/src/ui_organisedialog.h:193
+#: ../bin/src/ui_organisedialog.h:193
 msgid "Keep the original files"
 msgstr "Palikti originialius failus"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:671
+#: ../bin/src/ui_mainwindow.h:671
 msgid "Kittens"
 msgstr "Kačiukai"
 
-#: /home/arno/clementine/clementine-player/src/ui_behavioursettingspage.h:180
+#: ../bin/src/ui_behavioursettingspage.h:180
 msgid "Language"
 msgstr "Kalba"
 
@@ -2239,11 +2218,11 @@ msgid "Large sidebar"
 msgstr "Didelė juosta"
 
 #: library/library.cpp:66 playlist/playlist.cpp:1093
-#: /home/arno/clementine/clementine-player/src/ui_edittagdialog.h:641
+#: ../bin/src/ui_edittagdialog.h:641
 msgid "Last played"
 msgstr "Vėliausiai grota"
 
-#: /home/arno/clementine/clementine-player/src/ui_lastfmsettingspage.h:144
+#: ../bin/src/ui_lastfmsettingspage.h:144
 msgid "Last.fm"
 msgstr "Last.fm"
 
@@ -2289,7 +2268,7 @@ msgstr "Last.fm Žymės Radijas: %1"
 msgid "Last.fm is currently busy, please try again in a few minutes"
 msgstr "Last.fm šiuo metu užimtas, prašome pamėginti po kelių minučių"
 
-#: /home/arno/clementine/clementine-player/src/ui_lastfmsettingspage.h:148
+#: ../bin/src/ui_lastfmsettingspage.h:148
 msgid "Last.fm password"
 msgstr "Last.fm slaptažodis"
 
@@ -2301,7 +2280,7 @@ msgstr "Last.fm grojimų skaitliukas"
 msgid "Last.fm tags"
 msgstr "Last.fm žymės"
 
-#: /home/arno/clementine/clementine-player/src/ui_lastfmsettingspage.h:146
+#: ../bin/src/ui_lastfmsettingspage.h:146
 msgid "Last.fm username"
 msgstr "Last.fm naudotojo vardas"
 
@@ -2313,15 +2292,14 @@ msgstr "Last.fm wiki"
 msgid "Least favourite tracks"
 msgstr "Mažiausiai populiarūs takeliai"
 
-#: /home/arno/clementine/clementine-player/src/ui_playbacksettingspage.h:282
+#: ../bin/src/ui_playbacksettingspage.h:282
 msgid "Leave blank for the default.  Examples: \"/dev/dsp\", \"front\", etc."
 msgstr ""
 "Palikite tuščią numatytoms reikšmėms. Pavyzdžiai: \"/dev/dsp\", \"front\", "
 "ir t.t."
 
 #: playlist/playlist.cpp:1082 ui/organisedialog.cpp:63
-#: ui/qtsystemtrayicon.cpp:255
-#: /home/arno/clementine/clementine-player/src/ui_edittagdialog.h:636
+#: ui/qtsystemtrayicon.cpp:255 ../bin/src/ui_edittagdialog.h:636
 msgid "Length"
 msgstr "Trukmė"
 
@@ -2329,7 +2307,7 @@ msgstr "Trukmė"
 msgid "Library"
 msgstr "Fonoteka"
 
-#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:122
+#: ../bin/src/ui_groupbydialog.h:122
 msgid "Library advanced grouping"
 msgstr "Sudėtingesnis fonotekos grupavimas"
 
@@ -2341,7 +2319,7 @@ msgstr "Fonotekos perskanavimo žinutė"
 msgid "Library search"
 msgstr "Fonotekos paieška"
 
-#: /home/arno/clementine/clementine-player/src/ui_querysortpage.h:140
+#: ../bin/src/ui_querysortpage.h:140
 msgid "Limits"
 msgstr "Apribojimai"
 
@@ -2349,11 +2327,11 @@ msgstr "Apribojimai"
 msgid "Live"
 msgstr "Gyvai"
 
-#: /home/arno/clementine/clementine-player/src/ui_albumcovermanager.h:151
+#: ../bin/src/ui_albumcovermanager.h:151
 msgid "Load"
 msgstr "Įkelti"
 
-#: /home/arno/clementine/clementine-player/src/ui_coverfromurldialog.h:102
+#: ../bin/src/ui_coverfromurldialog.h:102
 msgid "Load cover from URL"
 msgstr "Įkelti viršelį iš URL"
 
@@ -2369,7 +2347,7 @@ msgstr "Įkelti viršelį iš disko..."
 msgid "Load playlist"
 msgstr "Įkelti grojaraštį"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:684
+#: ../bin/src/ui_mainwindow.h:684
 msgid "Load playlist..."
 msgstr "Įkelti grojaraštį..."
 
@@ -2397,7 +2375,7 @@ msgstr "Įkeliamas išmanusis grojaraštis"
 msgid "Loading songs"
 msgstr "Keliamos dainos"
 
-#: internet/digitallyimportedurlhandler.cpp:61
+#: internet/digitallyimportedurlhandler.cpp:51
 #: internet/somafmurlhandler.cpp:45
 msgid "Loading stream"
 msgstr "Įkeliamas srautas"
@@ -2411,8 +2389,7 @@ msgid "Loading tracks info"
 msgstr "Užkraunama kūrinio informacija"
 
 #: library/librarymodel.cpp:117 widgets/prettyimage.cpp:168
-#: widgets/widgetfadehelper.cpp:93
-#: /home/arno/clementine/clementine-player/src/ui_searchpreview.h:106
+#: widgets/widgetfadehelper.cpp:93 ../bin/src/ui_searchpreview.h:106
 msgid "Loading..."
 msgstr "Įkeliama..."
 
@@ -2420,19 +2397,20 @@ msgstr "Įkeliama..."
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "Įkelia failus/URL, pakeičiant esamą sąrašą"
 
-#: /home/arno/clementine/clementine-player/src/ui_groovesharksettingspage.h:116
-#: /home/arno/clementine/clementine-player/src/ui_magnatunesettingspage.h:160
-#: /home/arno/clementine/clementine-player/src/ui_spotifysettingspage.h:182
-#: /home/arno/clementine/clementine-player/src/ui_remotesettingspage.h:205
-#: /home/arno/clementine/clementine-player/src/ui_lastfmsettingspage.h:147
+#: ../bin/src/ui_digitallyimportedsettingspage.h:163
+#: ../bin/src/ui_groovesharksettingspage.h:116
+#: ../bin/src/ui_magnatunesettingspage.h:160
+#: ../bin/src/ui_spotifysettingspage.h:182
+#: ../bin/src/ui_remotesettingspage.h:205
+#: ../bin/src/ui_lastfmsettingspage.h:147
 msgid "Login"
 msgstr "Prisijungti"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsaac.h:137
+#: ../bin/src/ui_transcoderoptionsaac.h:137
 msgid "Long term prediction profile (LTP)"
 msgstr "Ilgalaikio nuspėjimo profilis (LTP)"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:641
+#: ../bin/src/ui_mainwindow.h:641
 msgid "Love"
 msgstr "Meilė"
 
@@ -2449,11 +2427,11 @@ msgstr "Žemas (15 kps)"
 msgid "Low (256x256)"
 msgstr "Žema (256x256)"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsaac.h:135
+#: ../bin/src/ui_transcoderoptionsaac.h:135
 msgid "Low complexity profile (LC)"
 msgstr "Žemo sudėtingumo profilis (LC)"
 
-#: /home/arno/clementine/clementine-player/src/ui_songinfosettingspage.h:187
+#: ../bin/src/ui_songinfosettingspage.h:187
 msgid "Lyrics"
 msgstr "Dainų žodžiai"
 
@@ -2462,16 +2440,15 @@ msgstr "Dainų žodžiai"
 msgid "Lyrics from %1"
 msgstr "Žodžiai iš %1"
 
-#: core/song.cpp:135
-#: /home/arno/clementine/clementine-player/src/ui_transcodersettingspage.h:159
+#: core/song.cpp:135 ../bin/src/ui_transcodersettingspage.h:159
 msgid "MP3"
 msgstr "MP3"
 
-#: /home/arno/clementine/clementine-player/src/ui_digitallyimportedsettingspage.h:142
-msgid "MP3 256k (Premium only)"
+#: ../bin/src/ui_digitallyimportedsettingspage.h:177
+msgid "MP3 256k"
 msgstr ""
 
-#: /home/arno/clementine/clementine-player/src/ui_digitallyimportedsettingspage.h:141
+#: ../bin/src/ui_digitallyimportedsettingspage.h:170
 msgid "MP3 96k"
 msgstr ""
 
@@ -2483,12 +2460,11 @@ msgstr "MP4 AAC"
 msgid "MPC"
 msgstr "MPC"
 
-#: ui/mainwindow.cpp:246
-#: /home/arno/clementine/clementine-player/src/ui_magnatunesettingspage.h:150
+#: ui/mainwindow.cpp:246 ../bin/src/ui_magnatunesettingspage.h:150
 msgid "Magnatune"
 msgstr "Magnatune"
 
-#: /home/arno/clementine/clementine-player/src/ui_magnatunedownloaddialog.h:131
+#: ../bin/src/ui_magnatunedownloaddialog.h:131
 msgid "Magnatune Download"
 msgstr "Magnatune atsiuntimas"
 
@@ -2496,7 +2472,7 @@ msgstr "Magnatune atsiuntimas"
 msgid "Magnatune download finished"
 msgstr "Magnatune  atsiuntimas baigtas"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsaac.h:134
+#: ../bin/src/ui_transcoderoptionsaac.h:134
 msgid "Main profile (MAIN)"
 msgstr "Pagrindinis profilis"
 
@@ -2508,7 +2484,7 @@ msgstr "Padaryti šį grojaraštį prieinamą atsijungus"
 msgid "Malformed response"
 msgstr "Netinkamas atsakymas"
 
-#: /home/arno/clementine/clementine-player/src/ui_networkproxysettingspage.h:160
+#: ../bin/src/ui_networkproxysettingspage.h:160
 msgid "Manual proxy configuration"
 msgstr "Rankinis tarpinės stoties konfigūravimas"
 
@@ -2516,15 +2492,15 @@ msgstr "Rankinis tarpinės stoties konfigūravimas"
 msgid "Manufacturer"
 msgstr "Gamintojas"
 
-#: /home/arno/clementine/clementine-player/src/ui_querysearchpage.h:74
+#: ../bin/src/ui_querysearchpage.h:74
 msgid "Match every search term (AND)"
 msgstr "Atitikti kiekvieną paieškos frazę (IR)"
 
-#: /home/arno/clementine/clementine-player/src/ui_querysearchpage.h:75
+#: ../bin/src/ui_querysearchpage.h:75
 msgid "Match one or more search terms (OR)"
 msgstr "Atitinka vieną ar daugiau paieškos frazių (ARBA)"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsvorbis.h:209
+#: ../bin/src/ui_transcoderoptionsvorbis.h:209
 msgid "Maximum bitrate"
 msgstr "Maksimalus bitrate"
 
@@ -2541,11 +2517,11 @@ msgstr "Vidutinis (25 kps)"
 msgid "Medium (512x512)"
 msgstr "Vidutinė (512x512)"
 
-#: /home/arno/clementine/clementine-player/src/ui_magnatunesettingspage.h:152
+#: ../bin/src/ui_magnatunesettingspage.h:152
 msgid "Membership type"
 msgstr "Narystės tipas"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsvorbis.h:206
+#: ../bin/src/ui_transcoderoptionsvorbis.h:206
 msgid "Minimum bitrate"
 msgstr "Minimalus bitrate"
 
@@ -2557,7 +2533,7 @@ msgstr "Trūksta projectM šablonų"
 msgid "Model"
 msgstr "Modelis"
 
-#: /home/arno/clementine/clementine-player/src/ui_librarysettingspage.h:163
+#: ../bin/src/ui_librarysettingspage.h:163
 msgid "Monitor the library for changes"
 msgstr "Stebėti fonoteką dėl pasikeitimų"
 
@@ -2577,8 +2553,8 @@ msgstr "Prijungimo vieta"
 msgid "Mount points"
 msgstr "Prijungimo vietos"
 
-#: /home/arno/clementine/clementine-player/src/ui_queuemanager.h:131
-#: /home/arno/clementine/clementine-player/src/ui_songinfosettingspage.h:190
+#: ../bin/src/ui_globalsearchsettingspage.h:166
+#: ../bin/src/ui_queuemanager.h:131 ../bin/src/ui_songinfosettingspage.h:190
 msgid "Move down"
 msgstr "Perkelti žemyn"
 
@@ -2586,8 +2562,8 @@ msgstr "Perkelti žemyn"
 msgid "Move to library..."
 msgstr "Perkelti į fonoteką"
 
-#: /home/arno/clementine/clementine-player/src/ui_queuemanager.h:127
-#: /home/arno/clementine/clementine-player/src/ui_songinfosettingspage.h:189
+#: ../bin/src/ui_globalsearchsettingspage.h:165
+#: ../bin/src/ui_queuemanager.h:127 ../bin/src/ui_songinfosettingspage.h:189
 msgid "Move up"
 msgstr "Perkelti aukštyn"
 
@@ -2595,12 +2571,12 @@ msgstr "Perkelti aukštyn"
 msgid "Music (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma *.mp4 *.spx *.wav)"
 msgstr "Muzika (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma *.mp4 *.spx *.wav)"
 
-#: /home/arno/clementine/clementine-player/src/ui_librarysettingspage.h:157
+#: ../bin/src/ui_librarysettingspage.h:157
 msgid "Music Library"
 msgstr "Fonoteka"
 
 #: core/globalshortcuts.cpp:54 wiimotedev/wiimotesettingspage.cpp:105
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:692
+#: ../bin/src/ui_mainwindow.h:692
 msgid "Mute"
 msgstr "Nutildyti"
 
@@ -2636,19 +2612,18 @@ msgstr "Mano radijo stotis"
 msgid "My Recommendations"
 msgstr "Mano rekomendacijos"
 
-#: ui/equalizer.cpp:172
-#: /home/arno/clementine/clementine-player/src/ui_deviceproperties.h:369
-#: /home/arno/clementine/clementine-player/src/ui_magnatunedownloaddialog.h:135
-#: /home/arno/clementine/clementine-player/src/ui_wizardfinishpage.h:84
-#: /home/arno/clementine/clementine-player/src/ui_globalshortcutssettingspage.h:174
+#: ui/equalizer.cpp:172 ../bin/src/ui_deviceproperties.h:369
+#: ../bin/src/ui_magnatunedownloaddialog.h:135
+#: ../bin/src/ui_wizardfinishpage.h:84
+#: ../bin/src/ui_globalshortcutssettingspage.h:174
 msgid "Name"
 msgstr "Veiksmas"
 
-#: /home/arno/clementine/clementine-player/src/ui_organisedialog.h:197
+#: ../bin/src/ui_organisedialog.h:197
 msgid "Naming options"
 msgstr "Pavadinimų nustatymai"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsspeex.h:230
+#: ../bin/src/ui_transcoderoptionsspeex.h:230
 msgid "Narrow band (NB)"
 msgstr "Siauras dažnis (NB)"
 
@@ -2656,11 +2631,11 @@ msgstr "Siauras dažnis (NB)"
 msgid "Neighbors"
 msgstr "Kaimynai"
 
-#: /home/arno/clementine/clementine-player/src/ui_songinfosettingspage.h:184
+#: ../bin/src/ui_songinfosettingspage.h:184
 msgid "Network"
 msgstr "Tinklas"
 
-#: /home/arno/clementine/clementine-player/src/ui_networkproxysettingspage.h:157
+#: ../bin/src/ui_networkproxysettingspage.h:157
 msgid "Network Proxy"
 msgstr "Tinklo įgaliotasis serveris"
 
@@ -2672,13 +2647,12 @@ msgstr "Naujesni"
 msgid "Never played"
 msgstr "Niekada negrota"
 
-#: /home/arno/clementine/clementine-player/src/ui_behavioursettingspage.h:194
-#: /home/arno/clementine/clementine-player/src/ui_behavioursettingspage.h:208
+#: ../bin/src/ui_behavioursettingspage.h:194
+#: ../bin/src/ui_behavioursettingspage.h:208
 msgid "Never start playing"
 msgstr "Niekada nepradėti groti"
 
-#: ui/mainwindow.cpp:1420
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:680
+#: ui/mainwindow.cpp:1420 ../bin/src/ui_mainwindow.h:680
 msgid "New playlist"
 msgstr "Naujas grojaraštis"
 
@@ -2690,7 +2664,7 @@ msgstr "Naujas išmanusis grojaraštis..."
 msgid "New songs"
 msgstr "Naujos dainos"
 
-#: /home/arno/clementine/clementine-player/src/ui_dynamicplaylistcontrols.h:104
+#: ../bin/src/ui_dynamicplaylistcontrols.h:104
 msgid "New tracks will be added automatically."
 msgstr "Nauji takeliai bus pridėti automatiškai."
 
@@ -2703,7 +2677,7 @@ msgid "Next"
 msgstr "Toliau"
 
 #: core/globalshortcuts.cpp:50 wiimotedev/wiimotesettingspage.cpp:99
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:635
+#: ../bin/src/ui_mainwindow.h:635
 msgid "Next track"
 msgstr "Kitas takelis"
 
@@ -2711,7 +2685,7 @@ msgstr "Kitas takelis"
 msgid "No analyzer"
 msgstr "Jokio analizatoriaus"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsaac.h:146
+#: ../bin/src/ui_transcoderoptionsaac.h:146
 msgid "No long blocks"
 msgstr "Jokių ilgų blokų"
 
@@ -2721,13 +2695,12 @@ msgid ""
 msgstr ""
 "Nieko nerasta. Išvalykite paieškos laukelį, kad vėl matyti visą sąrašą."
 
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsaac.h:145
+#: ../bin/src/ui_transcoderoptionsaac.h:145
 msgid "No short blocks"
 msgstr "Jokių trumpų blokų"
 
-#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:128
-#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:141
-#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:154
+#: ../bin/src/ui_groupbydialog.h:128 ../bin/src/ui_groupbydialog.h:141
+#: ../bin/src/ui_groupbydialog.h:154
 msgid "None"
 msgstr "Nėra"
 
@@ -2735,7 +2708,7 @@ msgstr "Nėra"
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Nei viena iš pažymėtų dainų netinka kopijavimui į įrenginį"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsaac.h:144
+#: ../bin/src/ui_transcoderoptionsaac.h:144
 msgid "Normal block type"
 msgstr "Normalus bloko tipas"
 
@@ -2767,15 +2740,19 @@ msgstr "Nepakanka kaimynų"
 msgid "Not installed"
 msgstr "Neįdiegta"
 
+#: globalsearch/globalsearchsettingspage.cpp:102
+msgid "Not logged in"
+msgstr ""
+
 #: devices/deviceview.cpp:110
 msgid "Not mounted - double click to mount"
 msgstr "Neprijungtas - du kartus spragtelėkite, kad prijungti"
 
-#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:397
+#: ../bin/src/ui_notificationssettingspage.h:397
 msgid "Notification type"
 msgstr "Pranešimo tipas"
 
-#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:356
+#: ../bin/src/ui_notificationssettingspage.h:356
 msgid "Notifications"
 msgstr "Pranešimai"
 
@@ -2795,26 +2772,25 @@ msgstr "Ogg Flac"
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
 
-#: core/song.cpp:138
-#: /home/arno/clementine/clementine-player/src/ui_magnatunedownloaddialog.h:139
-#: /home/arno/clementine/clementine-player/src/ui_magnatunesettingspage.h:166
+#: core/song.cpp:138 ../bin/src/ui_magnatunedownloaddialog.h:139
+#: ../bin/src/ui_magnatunesettingspage.h:166
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
 
-#: /home/arno/clementine/clementine-player/src/ui_querysortpage.h:142
+#: ../bin/src/ui_querysortpage.h:142
 msgid "Only show the first"
 msgstr "Rodyti tik pirmą"
 
-#: internet/digitallyimportedservicebase.cpp:192
+#: internet/digitallyimportedservicebase.cpp:213
 #, qt-format
 msgid "Open %1 in browser"
 msgstr ""
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:667
+#: ../bin/src/ui_mainwindow.h:667
 msgid "Open &audio CD..."
 msgstr "Atverti &audio CD..."
 
-#: /home/arno/clementine/clementine-player/src/ui_deviceproperties.h:382
+#: ../bin/src/ui_deviceproperties.h:382
 msgid "Open device"
 msgstr "Atverti įrenginį"
 
@@ -2822,13 +2798,13 @@ msgstr "Atverti įrenginį"
 msgid "Open dir.xiph.org in browser"
 msgstr "Atverti dir.xiph.org interneto naršyklėje"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:666
+#: ../bin/src/ui_mainwindow.h:666
 msgid "Open file..."
 msgstr ""
 
 #: devices/deviceview.cpp:220 internet/internetservice.cpp:73
 #: library/libraryview.cpp:240 widgets/fileviewlist.cpp:35
-#: /home/arno/clementine/clementine-player/src/ui_behavioursettingspage.h:203
+#: ../bin/src/ui_behavioursettingspage.h:203
 msgid "Open in new playlist"
 msgstr "Atverti naujame grojaraštyje"
 
@@ -2844,8 +2820,8 @@ msgstr "Atverti magnatune.com interneto naršyklėje"
 msgid "Open somafm.com in browser"
 msgstr "Atverti somafm.com interneto naršyklėje"
 
-#: /home/arno/clementine/clementine-player/src/ui_globalshortcutssettingspage.h:169
-#: /home/arno/clementine/clementine-player/src/ui_globalshortcutssettingspage.h:171
+#: ../bin/src/ui_globalshortcutssettingspage.h:169
+#: ../bin/src/ui_globalshortcutssettingspage.h:171
 msgid "Open..."
 msgstr "Atverti..."
 
@@ -2853,19 +2829,19 @@ msgstr "Atverti..."
 msgid "Operation failed"
 msgstr "Operacija nepavyko"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsmp3.h:193
+#: ../bin/src/ui_transcoderoptionsmp3.h:193
 msgid "Optimize for bitrate"
 msgstr "Optimizuoti grojimo bitrate dydžiui"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsmp3.h:191
+#: ../bin/src/ui_transcoderoptionsmp3.h:191
 msgid "Optimize for quality"
 msgstr "Optimizuoti kokybei"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcodedialog.h:210
+#: ../bin/src/ui_transcodedialog.h:210
 msgid "Options..."
 msgstr "Pasirinktys..."
 
-#: /home/arno/clementine/clementine-player/src/ui_organisedialog.h:188
+#: ../bin/src/ui_organisedialog.h:188
 msgid "Organise Files"
 msgstr "Tvarkyti failus"
 
@@ -2885,19 +2861,19 @@ msgstr "Originalios žymės"
 msgid "Other options"
 msgstr "Kitos parinktys"
 
-#: /home/arno/clementine/clementine-player/src/ui_playbacksettingspage.h:283
+#: ../bin/src/ui_playbacksettingspage.h:283
 msgid "Output device"
 msgstr "Išvesties įrenginys"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcodedialog.h:208
+#: ../bin/src/ui_transcodedialog.h:208
 msgid "Output options"
 msgstr "Išvesties parinktys"
 
-#: /home/arno/clementine/clementine-player/src/ui_playbacksettingspage.h:277
+#: ../bin/src/ui_playbacksettingspage.h:277
 msgid "Output plugin"
 msgstr "Išvesties įskiepis"
 
-#: /home/arno/clementine/clementine-player/src/ui_organisedialog.h:207
+#: ../bin/src/ui_organisedialog.h:207
 msgid "Overwrite existing files"
 msgstr "Perrašyti egzistuojančius failus"
 
@@ -2909,10 +2885,10 @@ msgstr "Apdorojamas Jamendo katalogas"
 msgid "Party"
 msgstr "Vakarėlis"
 
-#: /home/arno/clementine/clementine-player/src/ui_groovesharksettingspage.h:115
-#: /home/arno/clementine/clementine-player/src/ui_magnatunesettingspage.h:161
-#: /home/arno/clementine/clementine-player/src/ui_spotifysettingspage.h:181
-#: /home/arno/clementine/clementine-player/src/ui_networkproxysettingspage.h:169
+#: ../bin/src/ui_groovesharksettingspage.h:115
+#: ../bin/src/ui_magnatunesettingspage.h:161
+#: ../bin/src/ui_spotifysettingspage.h:181
+#: ../bin/src/ui_networkproxysettingspage.h:169
 msgid "Password"
 msgstr "Slaptažodis"
 
@@ -2940,11 +2916,11 @@ msgstr "Paprasta juosta"
 #: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:519 ui/mainwindow.cpp:853
 #: ui/mainwindow.cpp:872 ui/mainwindow.cpp:1274 ui/qtsystemtrayicon.cpp:166
 #: ui/qtsystemtrayicon.cpp:192 wiimotedev/wiimotesettingspage.cpp:101
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:631
+#: ../bin/src/ui_mainwindow.h:631
 msgid "Play"
 msgstr "Groti"
 
-#: /home/arno/clementine/clementine-player/src/ui_lastfmstationdialog.h:92
+#: ../bin/src/ui_lastfmstationdialog.h:92
 msgid "Play Artist or Tag"
 msgstr "Groti Atlikėją ar Žymę"
 
@@ -2952,8 +2928,7 @@ msgstr "Groti Atlikėją ar Žymę"
 msgid "Play artist radio..."
 msgstr "Groti Atlikėjoradijo stotį"
 
-#: playlist/playlist.cpp:1091
-#: /home/arno/clementine/clementine-player/src/ui_edittagdialog.h:637
+#: playlist/playlist.cpp:1091 ../bin/src/ui_edittagdialog.h:637
 msgid "Play count"
 msgstr "Grojimo skaitiklis"
 
@@ -2969,8 +2944,8 @@ msgstr "Groti iš mano fonotekos"
 msgid "Play if stopped, pause if playing"
 msgstr "Groti jei sustabdyta, Pristabdyti jei grojama"
 
-#: /home/arno/clementine/clementine-player/src/ui_behavioursettingspage.h:195
-#: /home/arno/clementine/clementine-player/src/ui_behavioursettingspage.h:209
+#: ../bin/src/ui_behavioursettingspage.h:195
+#: ../bin/src/ui_behavioursettingspage.h:209
 msgid "Play if there is nothing already playing"
 msgstr "Groti jei jau kas nors negroja"
 
@@ -2994,11 +2969,11 @@ msgstr "Groti <n> takelį grojaraštyje"
 msgid "Play/Pause"
 msgstr "Groti/Pristabdyti"
 
-#: /home/arno/clementine/clementine-player/src/ui_playbacksettingspage.h:257
+#: ../bin/src/ui_playbacksettingspage.h:257
 msgid "Playback"
 msgstr "Grojimas"
 
-#: /home/arno/clementine/clementine-player/src/ui_remotesettingspage.h:208
+#: ../bin/src/ui_remotesettingspage.h:208
 msgid "Player name"
 msgstr "Grotuvo pavadinimas"
 
@@ -3027,7 +3002,7 @@ msgstr "Ieškoti grojaraštyje"
 msgid "Playlist type"
 msgstr "Grojaraščio tipas"
 
-#: /home/arno/clementine/clementine-player/src/ui_spotifysettingspage.h:185
+#: ../bin/src/ui_spotifysettingspage.h:185
 msgid "Plugin status:"
 msgstr "Plėtinio būklė:"
 
@@ -3035,69 +3010,69 @@ msgstr "Plėtinio būklė:"
 msgid "Pop"
 msgstr "Pop"
 
-#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:403
+#: ../bin/src/ui_notificationssettingspage.h:403
 msgid "Popup duration"
 msgstr "Pranešino rodymo trukmė"
 
-#: /home/arno/clementine/clementine-player/src/ui_networkproxysettingspage.h:166
+#: ../bin/src/ui_networkproxysettingspage.h:166
 msgid "Port"
 msgstr "Prievadas"
 
-#: ui/equalizer.cpp:46
-#: /home/arno/clementine/clementine-player/src/ui_playbacksettingspage.h:274
+#: ui/equalizer.cpp:46 ../bin/src/ui_playbacksettingspage.h:274
 msgid "Pre-amp"
 msgstr "Sustiprinti"
 
-#: /home/arno/clementine/clementine-player/src/ui_digitallyimportedsettingspage.h:137
-#: /home/arno/clementine/clementine-player/src/ui_magnatunesettingspage.h:162
-#: /home/arno/clementine/clementine-player/src/ui_settingsdialog.h:115
-#: /home/arno/clementine/clementine-player/src/ui_lastfmsettingspage.h:149
+#: ../bin/src/ui_digitallyimportedsettingspage.h:166
+#: ../bin/src/ui_magnatunesettingspage.h:162
+#: ../bin/src/ui_settingsdialog.h:115 ../bin/src/ui_lastfmsettingspage.h:149
 msgid "Preferences"
 msgstr "Nustatymai"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:656
+#: ../bin/src/ui_mainwindow.h:656
 msgid "Preferences..."
 msgstr "Nustatymai..."
 
-#: /home/arno/clementine/clementine-player/src/ui_librarysettingspage.h:164
+#: ../bin/src/ui_librarysettingspage.h:164
 msgid "Preferred album art filenames (comma separated)"
 msgstr ""
 "Pageidaujamas viršelio paveikslėlio failo pavadinimas (atskirta kableliais)"
 
-#: /home/arno/clementine/clementine-player/src/ui_magnatunesettingspage.h:163
+#: ../bin/src/ui_magnatunesettingspage.h:163
 msgid "Preferred audio format"
 msgstr "Pageidaujamas audio formatas"
 
-#: /home/arno/clementine/clementine-player/src/ui_deviceproperties.h:380
+#: ../bin/src/ui_deviceproperties.h:380
 msgid "Preferred format"
 msgstr "Pageidaujamas formatas"
 
-#: /home/arno/clementine/clementine-player/src/ui_equalizer.h:119
+#: ../bin/src/ui_digitallyimportedsettingspage.h:174
+msgid "Premium audio type"
+msgstr ""
+
+#: ../bin/src/ui_equalizer.h:119
 msgid "Preset:"
 msgstr "Šablonas:"
 
-#: /home/arno/clementine/clementine-player/src/ui_wiimoteshortcutgrabber.h:124
+#: ../bin/src/ui_wiimoteshortcutgrabber.h:124
 msgid "Press a button combination to use for"
 msgstr "Spauskite mygtukų kombinaciją panaudojimui"
 
-#: /home/arno/clementine/clementine-player/src/ui_globalshortcutgrabber.h:73
+#: ../bin/src/ui_globalshortcutgrabber.h:73
 msgid "Press a key"
 msgstr "Paspauskite klavišą"
 
-#: ui/globalshortcutgrabber.cpp:39
-#: /home/arno/clementine/clementine-player/src/ui_globalshortcutgrabber.h:74
+#: ui/globalshortcutgrabber.cpp:39 ../bin/src/ui_globalshortcutgrabber.h:74
 #, qt-format
 msgid "Press a key combination to use for %1..."
 msgstr "Spauskite mygtukų kombinaciją panaudojimui  %1..."
 
-#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:416
+#: ../bin/src/ui_notificationssettingspage.h:416
 msgid "Pretty OSD options"
 msgstr "Gražus OSD"
 
-#: /home/arno/clementine/clementine-player/src/ui_searchpreview.h:105
-#: /home/arno/clementine/clementine-player/src/ui_songinfosettingspage.h:183
-#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:411
-#: /home/arno/clementine/clementine-player/src/ui_organisedialog.h:208
+#: ../bin/src/ui_searchpreview.h:105 ../bin/src/ui_songinfosettingspage.h:183
+#: ../bin/src/ui_notificationssettingspage.h:411
+#: ../bin/src/ui_organisedialog.h:208
 msgid "Preview"
 msgstr "Peržiūra"
 
@@ -3106,7 +3081,7 @@ msgid "Previous"
 msgstr "Atgal"
 
 #: core/globalshortcuts.cpp:51 wiimotedev/wiimotesettingspage.cpp:100
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:629
+#: ../bin/src/ui_mainwindow.h:629
 msgid "Previous track"
 msgstr "Ankstesnis takelis"
 
@@ -3114,38 +3089,37 @@ msgstr "Ankstesnis takelis"
 msgid "Print out version information"
 msgstr "Išvesti versijos informaciją"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsaac.h:131
+#: ../bin/src/ui_transcoderoptionsaac.h:131
 msgid "Profile"
 msgstr "Profilis"
 
-#: /home/arno/clementine/clementine-player/src/ui_magnatunedownloaddialog.h:134
-#: /home/arno/clementine/clementine-player/src/ui_transcodedialog.h:216
+#: ../bin/src/ui_magnatunedownloaddialog.h:134
+#: ../bin/src/ui_transcodedialog.h:216
 msgid "Progress"
 msgstr "Progresas"
 
 #: wiimotedev/wiimotesettingspage.cpp:227
-#: /home/arno/clementine/clementine-player/src/ui_wiimoteshortcutgrabber.h:125
+#: ../bin/src/ui_wiimoteshortcutgrabber.h:125
 msgid "Push Wiiremote button"
 msgstr "Spauskite Wii pulto mygtuką"
 
-#: /home/arno/clementine/clementine-player/src/ui_querysortpage.h:138
+#: ../bin/src/ui_querysortpage.h:138
 msgid "Put songs in a random order"
 msgstr "Dėti dainas atsitiktine tvarka"
 
 #: visualisations/visualisationcontainer.cpp:107
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsflac.h:81
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsmp3.h:192
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsspeex.h:217
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsvorbis.h:202
+#: ../bin/src/ui_transcoderoptionsflac.h:81
+#: ../bin/src/ui_transcoderoptionsmp3.h:192
+#: ../bin/src/ui_transcoderoptionsspeex.h:217
+#: ../bin/src/ui_transcoderoptionsvorbis.h:202
 msgid "Quality"
 msgstr "Kokybė"
 
-#: /home/arno/clementine/clementine-player/src/ui_deviceproperties.h:383
+#: ../bin/src/ui_deviceproperties.h:383
 msgid "Querying device..."
 msgstr "Pateikiama užklausa įrenginiui..."
 
-#: /home/arno/clementine/clementine-player/src/ui_queuemanager.h:125
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:690
+#: ../bin/src/ui_queuemanager.h:125 ../bin/src/ui_mainwindow.h:690
 msgid "Queue Manager"
 msgstr "Eilės tvarkyklė"
 
@@ -3158,16 +3132,15 @@ msgstr "į eilę pažymėtus takelius"
 msgid "Queue track"
 msgstr "į eilę takelį"
 
-#: /home/arno/clementine/clementine-player/src/ui_playbacksettingspage.h:271
+#: ../bin/src/ui_playbacksettingspage.h:271
 msgid "Radio (equal loudness for all tracks)"
 msgstr "Radijas (vienodas garsumas visiems takeliams)"
 
-#: core/backgroundstreams.cpp:31
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:669
+#: core/backgroundstreams.cpp:31 ../bin/src/ui_mainwindow.h:669
 msgid "Rain"
 msgstr "Lietus"
 
-#: /home/arno/clementine/clementine-player/src/ui_visualisationselector.h:112
+#: ../bin/src/ui_visualisationselector.h:112
 msgid "Random visualization"
 msgstr "Atsitiktinis vaizdinys"
 
@@ -3195,8 +3168,7 @@ msgstr "Įvertinti šią dainą 4 žvaigždėmis"
 msgid "Rate the current song 5 stars"
 msgstr "Įvertinti šią dainą 5 žvaigždėmis"
 
-#: playlist/playlist.cpp:1090
-#: /home/arno/clementine/clementine-player/src/ui_edittagdialog.h:645
+#: playlist/playlist.cpp:1090 ../bin/src/ui_edittagdialog.h:645
 msgid "Rating"
 msgstr "Įvertinimas"
 
@@ -3220,7 +3192,7 @@ msgstr ""
 msgid "Refresh station list"
 msgstr "Atnaujinti stočių sąrašą"
 
-#: internet/digitallyimportedservicebase.cpp:195
+#: internet/digitallyimportedservicebase.cpp:216
 msgid "Refresh streams"
 msgstr ""
 
@@ -3228,34 +3200,37 @@ msgstr ""
 msgid "Reggae"
 msgstr "Regis"
 
-#: /home/arno/clementine/clementine-player/src/ui_wiimoteshortcutgrabber.h:126
+#: ../bin/src/ui_wiimoteshortcutgrabber.h:126
 msgid "Remember Wii remote swing"
 msgstr "Prisiminti Wii pulto pasukimą"
 
-#: /home/arno/clementine/clementine-player/src/ui_behavioursettingspage.h:189
+#: ../bin/src/ui_behavioursettingspage.h:189
 msgid "Remember from last time"
 msgstr "Prisiminti paskutinio karto būseną"
 
-#: /home/arno/clementine/clementine-player/src/ui_remotesettingspage.h:199
+#: ../bin/src/ui_remotesettingspage.h:199
 msgid "Remote Control"
 msgstr "Nuotolinis valdymas"
 
 #: internet/savedradio.cpp:94 internet/lastfmservice.cpp:97
-#: /home/arno/clementine/clementine-player/src/ui_queuemanager.h:135
-#: /home/arno/clementine/clementine-player/src/ui_searchtermwidget.h:282
-#: /home/arno/clementine/clementine-player/src/ui_transcodedialog.h:207
+#: ../bin/src/ui_queuemanager.h:135 ../bin/src/ui_searchtermwidget.h:282
+#: ../bin/src/ui_transcodedialog.h:207
 msgid "Remove"
 msgstr "Pašalinti"
 
-#: /home/arno/clementine/clementine-player/src/ui_wiimotesettingspage.h:194
+#: ../bin/src/ui_wiimotesettingspage.h:194
 msgid "Remove action"
 msgstr "Pašalinti veiksmą"
 
-#: /home/arno/clementine/clementine-player/src/ui_librarysettingspage.h:160
+#: ../bin/src/ui_librarysettingspage.h:160
 msgid "Remove folder"
 msgstr "Pašalinti aplanką"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:674
+#: internet/groovesharkservice.cpp:445
+msgid "Remove from favorites"
+msgstr ""
+
+#: internet/groovesharkservice.cpp:442 ../bin/src/ui_mainwindow.h:674
 msgid "Remove from playlist"
 msgstr "Ištrinti iš grojaraščio"
 
@@ -3271,27 +3246,23 @@ msgstr "Pervadinti grojaraštį"
 msgid "Rename playlist..."
 msgstr "Pervadinti grojaraštį..."
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:652
+#: ../bin/src/ui_mainwindow.h:652
 msgid "Renumber tracks in this order..."
 msgstr "Pernumeruoti takelius šia tvarka..."
 
-#: playlist/playlistsequence.cpp:171
-#: /home/arno/clementine/clementine-player/src/ui_playlistsequence.h:107
+#: playlist/playlistsequence.cpp:171 ../bin/src/ui_playlistsequence.h:107
 msgid "Repeat"
 msgstr "Kartoti"
 
-#: widgets/osd.cpp:308
-#: /home/arno/clementine/clementine-player/src/ui_playlistsequence.h:101
+#: widgets/osd.cpp:308 ../bin/src/ui_playlistsequence.h:101
 msgid "Repeat album"
 msgstr "Kartoti albumą"
 
-#: widgets/osd.cpp:309
-#: /home/arno/clementine/clementine-player/src/ui_playlistsequence.h:102
+#: widgets/osd.cpp:309 ../bin/src/ui_playlistsequence.h:102
 msgid "Repeat playlist"
 msgstr "Kartoti grojaraštį"
 
-#: widgets/osd.cpp:307
-#: /home/arno/clementine/clementine-player/src/ui_playlistsequence.h:100
+#: widgets/osd.cpp:307 ../bin/src/ui_playlistsequence.h:100
 msgid "Repeat track"
 msgstr "Kartoti takelį"
 
@@ -3305,23 +3276,23 @@ msgstr ""
 msgid "Replace current playlist"
 msgstr "Pakeisti esamą griojaraštį"
 
-#: /home/arno/clementine/clementine-player/src/ui_behavioursettingspage.h:202
+#: ../bin/src/ui_behavioursettingspage.h:202
 msgid "Replace the playlist"
 msgstr "Pakeisti grojaraštį"
 
-#: /home/arno/clementine/clementine-player/src/ui_organisedialog.h:205
+#: ../bin/src/ui_organisedialog.h:205
 msgid "Replaces spaces with underscores"
 msgstr "Pakeisti tarpus pabraukimo simboliais"
 
-#: /home/arno/clementine/clementine-player/src/ui_playbacksettingspage.h:266
+#: ../bin/src/ui_playbacksettingspage.h:266
 msgid "Replay Gain"
 msgstr "Garsumo suvienodinimas"
 
-#: /home/arno/clementine/clementine-player/src/ui_playbacksettingspage.h:268
+#: ../bin/src/ui_playbacksettingspage.h:268
 msgid "Replay Gain mode"
 msgstr "Garsumo suvienodinimo veiksena"
 
-#: /home/arno/clementine/clementine-player/src/ui_dynamicplaylistcontrols.h:105
+#: ../bin/src/ui_dynamicplaylistcontrols.h:105
 msgid "Repopulate"
 msgstr "Užpildyti naujai"
 
@@ -3329,20 +3300,23 @@ msgstr "Užpildyti naujai"
 msgid "Reset"
 msgstr "Atstatyti"
 
-#: ui/edittagdialog.cpp:703
-#: /home/arno/clementine/clementine-player/src/ui_edittagdialog.h:635
+#: ui/edittagdialog.cpp:703 ../bin/src/ui_edittagdialog.h:635
 msgid "Reset play counts"
 msgstr "Atstatyti perklausų skaičių"
 
-#: /home/arno/clementine/clementine-player/src/ui_organisedialog.h:206
+#: ../bin/src/ui_organisedialog.h:206
 msgid "Restrict to ASCII characters"
 msgstr "Naudoti tik SCII simbolius"
+
+#: ../bin/src/ui_globalsearchsettingspage.h:168
+msgid "Results"
+msgstr ""
 
 #: ui/equalizer.cpp:121
 msgid "Rock"
 msgstr "Rokas"
 
-#: /home/arno/clementine/clementine-player/src/ui_networkproxysettingspage.h:164
+#: ../bin/src/ui_networkproxysettingspage.h:164
 msgid "SOCKS proxy"
 msgstr "SOCKS įgaliotasis serveris"
 
@@ -3350,12 +3324,11 @@ msgstr "SOCKS įgaliotasis serveris"
 msgid "Safely remove device"
 msgstr "Saugiai pašalinti įrenginį"
 
-#: /home/arno/clementine/clementine-player/src/ui_organisedialog.h:196
+#: ../bin/src/ui_organisedialog.h:196
 msgid "Safely remove the device after copying"
 msgstr "Saugiai pašalinti įrenginį po kopijavimo"
 
-#: playlist/playlist.cpp:1098
-#: /home/arno/clementine/clementine-player/src/ui_edittagdialog.h:642
+#: playlist/playlist.cpp:1098 ../bin/src/ui_edittagdialog.h:642
 msgid "Sample rate"
 msgstr "Išrankos dažnis"
 
@@ -3379,17 +3352,15 @@ msgstr "Išsaugoti paveikslėlį"
 msgid "Save playlist"
 msgstr "Įrašyti grojaraštį"
 
-#: playlist/playlisttabbar.cpp:50
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:682
+#: playlist/playlisttabbar.cpp:50 ../bin/src/ui_mainwindow.h:682
 msgid "Save playlist..."
 msgstr "Įrašyti grojaraštį..."
 
-#: ui/equalizer.cpp:172
-#: /home/arno/clementine/clementine-player/src/ui_equalizer.h:121
+#: ui/equalizer.cpp:172 ../bin/src/ui_equalizer.h:121
 msgid "Save preset"
 msgstr "Išsaugoti šabloną"
 
-#: /home/arno/clementine/clementine-player/src/ui_addstreamdialog.h:115
+#: ../bin/src/ui_addstreamdialog.h:115
 msgid "Save this stream in the Internet tab"
 msgstr "Išsaugoti šį srautą interneto kortelėje"
 
@@ -3397,33 +3368,32 @@ msgstr "Išsaugoti šį srautą interneto kortelėje"
 msgid "Saving tracks"
 msgstr "Išsaugomi takeliai"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsaac.h:136
+#: ../bin/src/ui_transcoderoptionsaac.h:136
 msgid "Scalable sampling rate profile (SSR)"
 msgstr "Besikeičiantis kodavimo dažnio profilis (SSR)"
 
-#: playlist/playlist.cpp:1094
-#: /home/arno/clementine/clementine-player/src/ui_edittagdialog.h:643
+#: playlist/playlist.cpp:1094 ../bin/src/ui_edittagdialog.h:643
 msgid "Score"
 msgstr "Įvertinimas"
 
-#: /home/arno/clementine/clementine-player/src/ui_lastfmsettingspage.h:150
+#: ../bin/src/ui_lastfmsettingspage.h:150
 msgid "Scrobble tracks that I listen to"
 msgstr "Pateikti klausomų takelių informaciją"
 
-#: /home/arno/clementine/clementine-player/src/ui_albumcoversearcher.h:113
+#: ../bin/src/ui_albumcoversearcher.h:113
 msgid "Search"
 msgstr "Ieškoti"
 
 #: internet/groovesharksearchplaylisttype.cpp:32
-#: internet/groovesharkservice.cpp:602
+#: internet/groovesharkservice.cpp:633
 msgid "Search Grooveshark"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:422 internet/groovesharkservice.cpp:431
+#: internet/groovesharkservice.cpp:448 internet/groovesharkservice.cpp:457
 msgid "Search Grooveshark (opens a new tab)"
 msgstr ""
 
-#: /home/arno/clementine/clementine-player/src/ui_icecastfilterwidget.h:78
+#: ../bin/src/ui_icecastfilterwidget.h:78
 msgid "Search Icecast stations"
 msgstr "Ieškoti Icecast stočių"
 
@@ -3451,7 +3421,7 @@ msgstr "Ieškoti Spotify (atveria naują kortelę)..."
 msgid "Search for album covers..."
 msgstr "Ieškoti albumo viršelių..."
 
-#: /home/arno/clementine/clementine-player/src/ui_querysearchpage.h:71
+#: ../bin/src/ui_querysearchpage.h:71
 msgid "Search mode"
 msgstr "Paieškos veiksena"
 
@@ -3459,12 +3429,11 @@ msgstr "Paieškos veiksena"
 msgid "Search options"
 msgstr "Paieškos parinktys"
 
-#: smartplaylists/querywizardplugin.cpp:144
-#: /home/arno/clementine/clementine-player/src/ui_querysearchpage.h:78
+#: smartplaylists/querywizardplugin.cpp:144 ../bin/src/ui_querysearchpage.h:78
 msgid "Search terms"
 msgstr "Paieškos terminai"
 
-#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:138
+#: ../bin/src/ui_groupbydialog.h:138
 msgid "Second level"
 msgstr "Antras lygis"
 
@@ -3492,11 +3461,11 @@ msgstr "Pažymėti visus"
 msgid "Select None"
 msgstr "N"
 
-#: /home/arno/clementine/clementine-player/src/ui_trackselectiondialog.h:207
+#: ../bin/src/ui_trackselectiondialog.h:207
 msgid "Select best possible match"
 msgstr "Pažymėti geriausią galimą atitikimą"
 
-#: /home/arno/clementine/clementine-player/src/ui_visualisationselector.h:108
+#: ../bin/src/ui_visualisationselector.h:108
 msgid "Select visualizations"
 msgstr "Pasirinkti vaizdinius"
 
@@ -3521,20 +3490,20 @@ msgstr "Nustatyti %1 į \"%2\"..."
 msgid "Set the volume to <value> percent"
 msgstr "Nustatyti garsumą iki <value> procentų"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:653
+#: ../bin/src/ui_mainwindow.h:653
 msgid "Set value for all selected tracks..."
 msgstr "Nustatyti vertę visiems pažymėtiems takeliams..."
 
-#: /home/arno/clementine/clementine-player/src/ui_remotesettingspage.h:207
+#: ../bin/src/ui_remotesettingspage.h:207
 msgid "Settings"
 msgstr "Nustatymai"
 
-#: /home/arno/clementine/clementine-player/src/ui_globalshortcutssettingspage.h:173
+#: ../bin/src/ui_globalshortcutssettingspage.h:173
 msgid "Shortcut"
 msgstr "Kombinacija"
 
 #: ui/globalshortcutssettingspage.cpp:130
-#: /home/arno/clementine/clementine-player/src/ui_globalshortcutssettingspage.h:175
+#: ../bin/src/ui_globalshortcutssettingspage.h:175
 #, qt-format
 msgid "Shortcut for %1"
 msgstr "Kombinacija veiksmui: %1"
@@ -3556,29 +3525,33 @@ msgstr ""
 msgid "Show OSD"
 msgstr "Rodyti OSD"
 
-#: /home/arno/clementine/clementine-player/src/ui_playbacksettingspage.h:258
+#: ../bin/src/ui_playbacksettingspage.h:258
 msgid "Show a glowing animation on the current track"
 msgstr "Švytėjimo efektas ant dabar grojamo takelio"
 
-#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:399
+#: ../bin/src/ui_notificationssettingspage.h:399
 msgid "Show a native desktop notification"
 msgstr "Rodyti numatytą darbastalio pranešimą"
 
-#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:407
+#: ../bin/src/ui_notificationssettingspage.h:407
 msgid "Show a notification when I change the repeat/shuffle mode"
 msgstr "Rodyti pranešimą kai aš keičiu kartojimo/išmėtymo veikseną"
 
-#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:406
+#: ../bin/src/ui_notificationssettingspage.h:406
 msgid "Show a notification when I change the volume"
 msgstr "Rodyti pranešimą kai keičiu garsumą"
 
-#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:401
+#: ../bin/src/ui_notificationssettingspage.h:401
 msgid "Show a popup from the system tray"
 msgstr "Rodyti iššokantį langą iš sistemos dėklo"
 
-#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:400
+#: ../bin/src/ui_notificationssettingspage.h:400
 msgid "Show a pretty OSD"
 msgstr "Rodyti gražų OSD"
+
+#: ../bin/src/ui_globalsearchsettingspage.h:169
+msgid "Show a tooltip with more information about each result"
+msgstr ""
 
 #: widgets/nowplayingwidget.cpp:113
 msgid "Show above status bar"
@@ -3588,15 +3561,15 @@ msgstr "Rodyti virš būsenos juostos"
 msgid "Show all songs"
 msgstr "Rodyti visas dainas"
 
-#: /home/arno/clementine/clementine-player/src/ui_querysortpage.h:141
+#: ../bin/src/ui_querysortpage.h:141
 msgid "Show all the songs"
 msgstr "Rodyti visas dainas"
 
-#: /home/arno/clementine/clementine-player/src/ui_librarysettingspage.h:171
+#: ../bin/src/ui_librarysettingspage.h:171
 msgid "Show cover art in library"
 msgstr "Rodyti albumo viršelius fonotekoje"
 
-#: /home/arno/clementine/clementine-player/src/ui_librarysettingspage.h:172
+#: ../bin/src/ui_librarysettingspage.h:172
 msgid "Show dividers"
 msgstr "Rodyti skirtukus"
 
@@ -3625,15 +3598,19 @@ msgstr "Rodyti tik be žyių"
 msgid "Show results from %1"
 msgstr ""
 
-#: /home/arno/clementine/clementine-player/src/ui_lastfmsettingspage.h:151
+#: ../bin/src/ui_lastfmsettingspage.h:151
 msgid "Show the \"love\" and \"ban\" buttons"
 msgstr "Rodyti \"meilė\" ir \"blokavimas\" mygtukus"
 
-#: /home/arno/clementine/clementine-player/src/ui_lastfmsettingspage.h:152
+#: ../bin/src/ui_globalsearchsettingspage.h:160
+msgid "Show the Global Search box above the sidebar"
+msgstr ""
+
+#: ../bin/src/ui_lastfmsettingspage.h:152
 msgid "Show the scrobble button in the main window"
 msgstr "Rodyti „scrobble“ mygtuką pagrindiniame lange"
 
-#: /home/arno/clementine/clementine-player/src/ui_behavioursettingspage.h:177
+#: ../bin/src/ui_behavioursettingspage.h:177
 msgid "Show tray icon"
 msgstr "Rodyti piktogramą sistemos dėkle"
 
@@ -3641,31 +3618,27 @@ msgstr "Rodyti piktogramą sistemos dėkle"
 msgid "Show/Hide"
 msgstr "Rodyti/Slėpti"
 
-#: playlist/playlistsequence.cpp:170
-#: /home/arno/clementine/clementine-player/src/ui_playlistsequence.h:110
+#: playlist/playlistsequence.cpp:170 ../bin/src/ui_playlistsequence.h:110
 msgid "Shuffle"
 msgstr "Maišyti"
 
-#: widgets/osd.cpp:295
-#: /home/arno/clementine/clementine-player/src/ui_playlistsequence.h:105
+#: widgets/osd.cpp:295 ../bin/src/ui_playlistsequence.h:105
 msgid "Shuffle all"
 msgstr "Maišyti viską"
 
-#: widgets/osd.cpp:296
-#: /home/arno/clementine/clementine-player/src/ui_playlistsequence.h:104
+#: widgets/osd.cpp:296 ../bin/src/ui_playlistsequence.h:104
 msgid "Shuffle by album"
 msgstr "Maišyti pagal albumus"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:660
+#: ../bin/src/ui_mainwindow.h:660
 msgid "Shuffle playlist"
 msgstr "Maišyti grojaraštį"
 
-#: /home/arno/clementine/clementine-player/src/ui_remotesettingspage.h:202
-#: /home/arno/clementine/clementine-player/src/ui_loginstatewidget.h:147
+#: ../bin/src/ui_remotesettingspage.h:202 ../bin/src/ui_loginstatewidget.h:147
 msgid "Sign out"
 msgstr "Atsijungti"
 
-#: /home/arno/clementine/clementine-player/src/ui_loginstatewidget.h:149
+#: ../bin/src/ui_loginstatewidget.h:149
 msgid "Signing in..."
 msgstr ""
 
@@ -3681,8 +3654,7 @@ msgstr "Ska"
 msgid "Skip backwards in playlist"
 msgstr "Ankstesnis kūrinys grojaraštyje"
 
-#: playlist/playlist.cpp:1092
-#: /home/arno/clementine/clementine-player/src/ui_edittagdialog.h:639
+#: playlist/playlist.cpp:1092 ../bin/src/ui_edittagdialog.h:639
 msgid "Skip count"
 msgstr "Praleisti skaičiavimą"
 
@@ -3714,7 +3686,7 @@ msgstr "Rami"
 msgid "Soft Rock"
 msgstr "Ramus rokas"
 
-#: /home/arno/clementine/clementine-player/src/ui_songinfosettingspage.h:179
+#: ../bin/src/ui_songinfosettingspage.h:179
 msgid "Song Information"
 msgstr "Dainos informacija"
 
@@ -3726,35 +3698,39 @@ msgstr "Dainos info"
 msgid "Sonogram"
 msgstr "Sonograma"
 
-#: /home/arno/clementine/clementine-player/src/ui_trackselectiondialog.h:205
+#: ../bin/src/ui_trackselectiondialog.h:205
 msgid "Sorry"
 msgstr "Atleiskite"
 
-#: /home/arno/clementine/clementine-player/src/ui_icecastfilterwidget.h:75
+#: ../bin/src/ui_icecastfilterwidget.h:75
 msgid "Sort by genre (alphabetically)"
 msgstr "Rikiuoti pagal žanrą (alfabetiškai)"
 
-#: /home/arno/clementine/clementine-player/src/ui_icecastfilterwidget.h:76
+#: ../bin/src/ui_icecastfilterwidget.h:76
 msgid "Sort by genre (by popularity)"
 msgstr "Rikiuoti pagal žanrą (pagal populiarumą)"
 
-#: /home/arno/clementine/clementine-player/src/ui_icecastfilterwidget.h:77
+#: ../bin/src/ui_icecastfilterwidget.h:77
 msgid "Sort by station name"
 msgstr "Rikiuoti stoties pavadinimą"
 
-#: /home/arno/clementine/clementine-player/src/ui_querysortpage.h:139
+#: ../bin/src/ui_querysortpage.h:139
 msgid "Sort songs by"
 msgstr "Rikiuoti dainas pagal"
 
-#: /home/arno/clementine/clementine-player/src/ui_querysortpage.h:137
+#: ../bin/src/ui_querysortpage.h:137
 msgid "Sorting"
 msgstr "Rikiavimas"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcodersettingspage.h:162
+#: ../bin/src/ui_globalsearchsettingspage.h:162
+msgid "Sources"
+msgstr ""
+
+#: ../bin/src/ui_transcodersettingspage.h:162
 msgid "Speex"
 msgstr "Speex"
 
-#: /home/arno/clementine/clementine-player/src/ui_spotifysettingspage.h:178
+#: ../bin/src/ui_spotifysettingspage.h:178
 msgid "Spotify"
 msgstr "Spotify"
 
@@ -3762,7 +3738,7 @@ msgstr "Spotify"
 msgid "Spotify login error"
 msgstr "Spotify prisijungimo klaida"
 
-#: /home/arno/clementine/clementine-player/src/ui_spotifysettingspage.h:183
+#: ../bin/src/ui_spotifysettingspage.h:183
 msgid "Spotify plugin"
 msgstr "Spotify plėtinys"
 
@@ -3770,7 +3746,7 @@ msgstr "Spotify plėtinys"
 msgid "Spotify plugin not installed"
 msgstr "Spotify plėtinys neįdiegtas"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsmp3.h:201
+#: ../bin/src/ui_transcoderoptionsmp3.h:201
 msgid "Standard"
 msgstr "Standartinis"
 
@@ -3805,7 +3781,7 @@ msgid "Starting..."
 msgstr "Pradedama..."
 
 #: core/globalshortcuts.cpp:48 wiimotedev/wiimotesettingspage.cpp:102
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:633
+#: ../bin/src/ui_mainwindow.h:633
 msgid "Stop"
 msgstr "Stabdyti"
 
@@ -3813,8 +3789,7 @@ msgstr "Stabdyti"
 msgid "Stop after"
 msgstr "Stabdyti po"
 
-#: ui/mainwindow.cpp:521
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:639
+#: ui/mainwindow.cpp:521 ../bin/src/ui_mainwindow.h:639
 msgid "Stop after this track"
 msgstr "Sustabdyti po šio takelio"
 
@@ -3834,7 +3809,7 @@ msgstr "Sustabdyta"
 msgid "Stream"
 msgstr "Srautas"
 
-#: /home/arno/clementine/clementine-player/src/ui_magnatunesettingspage.h:156
+#: ../bin/src/ui_magnatunesettingspage.h:156
 msgid "Streaming membership"
 msgstr "Transliavimo narystė"
 
@@ -3847,8 +3822,8 @@ msgstr "Sėkmingai įrašyta %1"
 msgid "Suggested tags"
 msgstr "Siūlomos žymės"
 
-#: /home/arno/clementine/clementine-player/src/ui_edittagdialog.h:651
-#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:413
+#: ../bin/src/ui_edittagdialog.h:651
+#: ../bin/src/ui_notificationssettingspage.h:413
 msgid "Summary"
 msgstr "Santrauka"
 
@@ -3861,7 +3836,7 @@ msgstr "Super aukšta (%1 kps)"
 msgid "Super high (60 fps)"
 msgstr "Labai aukštas (60 kps)"
 
-#: /home/arno/clementine/clementine-player/src/ui_deviceproperties.h:374
+#: ../bin/src/ui_deviceproperties.h:374
 msgid "Supported formats"
 msgstr "Palaikomi formatai"
 
@@ -3885,11 +3860,11 @@ msgstr "Atnaujinama Spotify pažymėti kūriniai"
 msgid "Tabs on top"
 msgstr "Kortelės viršuje"
 
-#: /home/arno/clementine/clementine-player/src/ui_lastfmstationdialog.h:97
+#: ../bin/src/ui_lastfmstationdialog.h:97
 msgid "Tag"
 msgstr "Žyma"
 
-#: /home/arno/clementine/clementine-player/src/ui_trackselectiondialog.h:204
+#: ../bin/src/ui_trackselectiondialog.h:204
 msgid "Tag fetcher"
 msgstr "Žymių gavėjas"
 
@@ -3897,7 +3872,7 @@ msgstr "Žymių gavėjas"
 msgid "Tag radio"
 msgstr "Žymėti radijas"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsvorbis.h:204
+#: ../bin/src/ui_transcoderoptionsvorbis.h:204
 msgid "Target bitrate"
 msgstr "Numatomas bitrate"
 
@@ -3905,7 +3880,7 @@ msgstr "Numatomas bitrate"
 msgid "Techno"
 msgstr "Techno"
 
-#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:425
+#: ../bin/src/ui_notificationssettingspage.h:425
 msgid "Text options"
 msgstr "Teksto nustatymai"
 
@@ -3976,11 +3951,11 @@ msgid ""
 "continue?"
 msgstr "Šie failai bus ištrinti iš įrenginio, ar tikrai norite tęsti?"
 
-#: /home/arno/clementine/clementine-player/src/ui_librarysettingspage.h:158
+#: ../bin/src/ui_librarysettingspage.h:158
 msgid "These folders will be scanned for music to make up your library"
 msgstr "Šie aplankai bus skenuojami formuojant fonoteką"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcodersettingspage.h:158
+#: ../bin/src/ui_transcodersettingspage.h:158
 msgid ""
 "These settings are used in the \"Transcode Music\" dialog, and when "
 "converting music before copying it to a device."
@@ -3988,7 +3963,7 @@ msgstr ""
 "Šie nustatymai yra naudojimo \"Muzikos perkodavimas\" lange ir tada, kad "
 "muzika kopijuojama į įrenginį."
 
-#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:151
+#: ../bin/src/ui_groupbydialog.h:151
 msgid "Third level"
 msgstr "Trečias lygis"
 
@@ -4004,7 +3979,7 @@ msgstr ""
 msgid "This album is not available in the requested format"
 msgstr "Albumas yra negalimas prašomu formatu"
 
-#: /home/arno/clementine/clementine-player/src/ui_deviceproperties.h:381
+#: ../bin/src/ui_deviceproperties.h:381
 msgid ""
 "This device must be connected and opened before Clementine can see what file"
 " formats it supports."
@@ -4012,7 +3987,7 @@ msgstr ""
 "Įrenginys privalo būti prijungtas ir atidarytas, kad Clementine matytų "
 "kokius formatus jis palaiko."
 
-#: /home/arno/clementine/clementine-player/src/ui_deviceproperties.h:375
+#: ../bin/src/ui_deviceproperties.h:375
 msgid "This device supports the following file formats:"
 msgstr "Šis įrenginys palaiko šiuos formatus:"
 
@@ -4057,7 +4032,7 @@ msgstr "Šis srautas yra tik apmokamiems prenumeratoriams"
 msgid "This type of device is not supported: %1"
 msgstr "Šio tipo įrenginys yra nepalaikomas: %1"
 
-#: /home/arno/clementine/clementine-player/src/ui_songinfosettingspage.h:185
+#: ../bin/src/ui_songinfosettingspage.h:185
 msgid "Timeout"
 msgstr "Pertrauka"
 
@@ -4066,10 +4041,8 @@ msgid "Timezone"
 msgstr "Laiko juosta"
 
 #: playlist/playlist.cpp:1079 ui/organisedialog.cpp:51
-#: ui/qtsystemtrayicon.cpp:248
-#: /home/arno/clementine/clementine-player/src/ui_about.h:142
-#: /home/arno/clementine/clementine-player/src/ui_edittagdialog.h:652
-#: /home/arno/clementine/clementine-player/src/ui_trackselectiondialog.h:211
+#: ui/qtsystemtrayicon.cpp:248 ../bin/src/ui_about.h:142
+#: ../bin/src/ui_edittagdialog.h:652 ../bin/src/ui_trackselectiondialog.h:211
 msgid "Title"
 msgstr "Pavadinimas"
 
@@ -4089,7 +4062,7 @@ msgstr "Visame ekrane"
 msgid "Toggle queue status"
 msgstr "Perjungti eilės statusą"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:697
+#: ../bin/src/ui_mainwindow.h:697
 msgid "Toggle scrobbling"
 msgstr "Perjungti „scrobbling“ būseną"
 
@@ -4106,21 +4079,19 @@ msgid "Total network requests made"
 msgstr "Viso tinklo užklausų padaryta"
 
 #: playlist/playlist.cpp:1083 ui/organisedialog.cpp:57
-#: /home/arno/clementine/clementine-player/src/ui_edittagdialog.h:653
-#: /home/arno/clementine/clementine-player/src/ui_trackselectiondialog.h:212
+#: ../bin/src/ui_edittagdialog.h:653 ../bin/src/ui_trackselectiondialog.h:212
 msgid "Track"
 msgstr "Takelis"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcodedialog.h:201
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:676
+#: ../bin/src/ui_transcodedialog.h:201 ../bin/src/ui_mainwindow.h:676
 msgid "Transcode Music"
 msgstr "Perkoduoti muziką"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcodelogdialog.h:63
+#: ../bin/src/ui_transcodelogdialog.h:63
 msgid "Transcoder Log"
 msgstr "Perkodavimo logas"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcodersettingspage.h:157
+#: ../bin/src/ui_transcodersettingspage.h:157
 msgid "Transcoding"
 msgstr "Perkoduojama"
 
@@ -4129,7 +4100,7 @@ msgstr "Perkoduojama"
 msgid "Transcoding %1 files using %2 threads"
 msgstr "Perkoduojami %1 failai naudojant %2 gijų"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsdialog.h:54
+#: ../bin/src/ui_transcoderoptionsdialog.h:54
 msgid "Transcoding options"
 msgstr "Perkodavimo pasirinktys"
 
@@ -4141,7 +4112,7 @@ msgstr "TrueAudio"
 msgid "Turbine"
 msgstr "Turbina"
 
-#: /home/arno/clementine/clementine-player/src/ui_dynamicplaylistcontrols.h:106
+#: ../bin/src/ui_dynamicplaylistcontrols.h:106
 msgid "Turn off"
 msgstr "Išjungti"
 
@@ -4153,7 +4124,7 @@ msgstr "URI"
 msgid "URL(s)"
 msgstr "URL"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsspeex.h:228
+#: ../bin/src/ui_transcoderoptionsspeex.h:228
 msgid "Ultra wide band (UWB)"
 msgstr "Ultra platus dažnis (UWB)"
 
@@ -4170,7 +4141,7 @@ msgstr "Nepavyko atsiųsti %1 (%2)"
 msgid "Unknown"
 msgstr "Nežinomas"
 
-#: internet/lastfmservice.cpp:455
+#: internet/digitallyimportedclient.cpp:61 internet/lastfmservice.cpp:455
 msgid "Unknown error"
 msgstr "Nežinoma klaida"
 
@@ -4178,11 +4149,11 @@ msgstr "Nežinoma klaida"
 msgid "Unset cover"
 msgstr "Pašalinti viršelį"
 
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:688
+#: ../bin/src/ui_mainwindow.h:688
 msgid "Update changed library folders"
 msgstr "Atnaujinti pakeistus fonotekos katalogus"
 
-#: /home/arno/clementine/clementine-player/src/ui_librarysettingspage.h:162
+#: ../bin/src/ui_librarysettingspage.h:162
 msgid "Update the library when Clementine starts"
 msgstr "Atnaujinti fonoteką paleidžiant Clementine"
 
@@ -4204,47 +4175,47 @@ msgstr "Atnaujinama biblioteka"
 msgid "Usage"
 msgstr "Naudojimas"
 
-#: /home/arno/clementine/clementine-player/src/ui_globalshortcutssettingspage.h:168
+#: ../bin/src/ui_globalshortcutssettingspage.h:168
 msgid "Use Gnome's shortcut keys"
 msgstr "Naudoti Gnome klavišų kombinacijas"
 
-#: /home/arno/clementine/clementine-player/src/ui_playbacksettingspage.h:267
+#: ../bin/src/ui_playbacksettingspage.h:267
 msgid "Use Replay Gain metadata if it is available"
 msgstr "Naudoti garsumo suvienodinimo meta duodeninis jei tai yra prieinama"
 
-#: /home/arno/clementine/clementine-player/src/ui_wiimotesettingspage.h:189
+#: ../bin/src/ui_wiimotesettingspage.h:189
 msgid "Use Wii Remote"
 msgstr "Naudoti Wii valdymo pultą"
 
-#: /home/arno/clementine/clementine-player/src/ui_notificationssettingspage.h:410
+#: ../bin/src/ui_notificationssettingspage.h:410
 msgid "Use a custom message for notifications"
 msgstr "Naudoti savo žinutę pranešimams"
 
-#: /home/arno/clementine/clementine-player/src/ui_networkproxysettingspage.h:167
+#: ../bin/src/ui_networkproxysettingspage.h:167
 msgid "Use authentication"
 msgstr "Naudoti tapatybės patvirtinimą"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsvorbis.h:203
+#: ../bin/src/ui_transcoderoptionsvorbis.h:203
 msgid "Use bitrate management engine"
 msgstr "Naudoti bitrate valdymo varikliuklą"
 
-#: /home/arno/clementine/clementine-player/src/ui_wizardfinishpage.h:85
+#: ../bin/src/ui_wizardfinishpage.h:85
 msgid "Use dynamic mode"
 msgstr "Naudoti dinaminę veikseną"
 
-#: /home/arno/clementine/clementine-player/src/ui_wiimotesettingspage.h:188
+#: ../bin/src/ui_wiimotesettingspage.h:188
 msgid "Use notifications to report Wii Remote status"
 msgstr "Naudoti pranešimus Wii pulto būsenos rodymui"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsaac.h:139
+#: ../bin/src/ui_transcoderoptionsaac.h:139
 msgid "Use temporal noise shaping"
 msgstr "Naudoti laikinąjį triukšmų formavimą"
 
-#: /home/arno/clementine/clementine-player/src/ui_behavioursettingspage.h:183
+#: ../bin/src/ui_behavioursettingspage.h:183
 msgid "Use the system default"
 msgstr "Naudoti sistemos numatytus"
 
-#: /home/arno/clementine/clementine-player/src/ui_networkproxysettingspage.h:158
+#: ../bin/src/ui_networkproxysettingspage.h:158
 msgid "Use the system proxy settings"
 msgstr "Naudoti sistemos tarpinio serverio nustatymus"
 
@@ -4252,7 +4223,7 @@ msgstr "Naudoti sistemos tarpinio serverio nustatymus"
 msgid "Used"
 msgstr "Panaudota"
 
-#: internet/groovesharkservice.cpp:373
+#: internet/groovesharkservice.cpp:376
 #, qt-format
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr ""
@@ -4261,23 +4232,23 @@ msgstr ""
 msgid "User interface"
 msgstr ""
 
-#: /home/arno/clementine/clementine-player/src/ui_groovesharksettingspage.h:114
-#: /home/arno/clementine/clementine-player/src/ui_magnatunesettingspage.h:159
-#: /home/arno/clementine/clementine-player/src/ui_spotifysettingspage.h:180
-#: /home/arno/clementine/clementine-player/src/ui_networkproxysettingspage.h:168
+#: ../bin/src/ui_groovesharksettingspage.h:114
+#: ../bin/src/ui_magnatunesettingspage.h:159
+#: ../bin/src/ui_spotifysettingspage.h:180
+#: ../bin/src/ui_networkproxysettingspage.h:168
 msgid "Username"
 msgstr "Naudotojo vardas"
 
-#: /home/arno/clementine/clementine-player/src/ui_behavioursettingspage.h:191
+#: ../bin/src/ui_behavioursettingspage.h:191
 msgid "Using the menu to add a song will..."
 msgstr "Naudojant meniu pridėti dainai..."
 
-#: /home/arno/clementine/clementine-player/src/ui_magnatunedownloaddialog.h:142
-#: /home/arno/clementine/clementine-player/src/ui_magnatunesettingspage.h:169
+#: ../bin/src/ui_magnatunedownloaddialog.h:142
+#: ../bin/src/ui_magnatunesettingspage.h:169
 msgid "VBR MP3"
 msgstr "VBR MP3"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsspeex.h:232
+#: ../bin/src/ui_transcoderoptionsspeex.h:232
 msgid "Variable bit rate"
 msgstr "Kintamas bitrate"
 
@@ -4291,24 +4262,23 @@ msgstr "Įvairūs atlikėjai"
 msgid "Version %1"
 msgstr "Versija %1"
 
-#: /home/arno/clementine/clementine-player/src/ui_albumcovermanager.h:154
+#: ../bin/src/ui_albumcovermanager.h:154
 msgid "View"
 msgstr "Rodymas"
 
-#: /home/arno/clementine/clementine-player/src/ui_visualisationselector.h:109
+#: ../bin/src/ui_visualisationselector.h:109
 msgid "Visualization mode"
 msgstr "Vaizdinio veiksena"
 
-#: ui/dbusscreensaver.cpp:35
-#: /home/arno/clementine/clementine-player/src/ui_mainwindow.h:689
+#: ui/dbusscreensaver.cpp:35 ../bin/src/ui_mainwindow.h:689
 msgid "Visualizations"
 msgstr "Vaizdiniai"
 
-#: /home/arno/clementine/clementine-player/src/ui_visualisationoverlay.h:181
+#: ../bin/src/ui_visualisationoverlay.h:181
 msgid "Visualizations Settings"
 msgstr "Vaizdinio nustatymai"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsspeex.h:233
+#: ../bin/src/ui_transcoderoptionsspeex.h:233
 msgid "Voice activity detection"
 msgstr "Balso aktyvumo aptikimas"
 
@@ -4321,16 +4291,16 @@ msgstr "Garsumas %1%"
 msgid "Volume name"
 msgstr "Rinkinio pavadinimas"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcodersettingspage.h:160
+#: ../bin/src/ui_transcodersettingspage.h:160
 msgid "Vorbis"
 msgstr "Vorbis"
 
-#: /home/arno/clementine/clementine-player/src/ui_magnatunedownloaddialog.h:141
-#: /home/arno/clementine/clementine-player/src/ui_magnatunesettingspage.h:168
+#: ../bin/src/ui_magnatunedownloaddialog.h:141
+#: ../bin/src/ui_magnatunesettingspage.h:168
 msgid "WAV"
 msgstr "WAV"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcodersettingspage.h:164
+#: ../bin/src/ui_transcodersettingspage.h:164
 msgid "WMA"
 msgstr "WMA"
 
@@ -4342,11 +4312,11 @@ msgstr "Wav"
 msgid "Weeks"
 msgstr "Savaitės"
 
-#: /home/arno/clementine/clementine-player/src/ui_behavioursettingspage.h:186
+#: ../bin/src/ui_behavioursettingspage.h:186
 msgid "When Clementine starts"
 msgstr "Kai  Clementine paleidžiamas"
 
-#: /home/arno/clementine/clementine-player/src/ui_librarysettingspage.h:166
+#: ../bin/src/ui_librarysettingspage.h:166
 msgid ""
 "When looking for album art Clementine will first look for picture files that contain one of these words.\n"
 "If there are no matches then it will use the largest image in the directory."
@@ -4358,7 +4328,7 @@ msgstr ""
 msgid "WiFi MAC Address"
 msgstr "WiFi MAC Adresas"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsspeex.h:229
+#: ../bin/src/ui_transcoderoptionsspeex.h:229
 msgid "Wide band (WB)"
 msgstr "Platus dažnis (WB)"
 
@@ -4392,20 +4362,20 @@ msgstr "Wii pultas %1: atjungtas"
 msgid "Wii Remote %1: low battery (%2%)"
 msgstr "Wii pultas %1: išsekusi baterija (%2%)"
 
-#: /home/arno/clementine/clementine-player/src/ui_wiimotesettingspage.h:182
+#: ../bin/src/ui_wiimotesettingspage.h:182
 msgid "Wiimotedev"
 msgstr ""
 
-#: /home/arno/clementine/clementine-player/src/ui_digitallyimportedsettingspage.h:148
-msgid "Windows Media 128k (Premium only)"
+#: ../bin/src/ui_digitallyimportedsettingspage.h:181
+msgid "Windows Media 128k"
 msgstr ""
 
-#: /home/arno/clementine/clementine-player/src/ui_digitallyimportedsettingspage.h:146
+#: ../bin/src/ui_digitallyimportedsettingspage.h:172
 msgid "Windows Media 40k"
 msgstr ""
 
-#: /home/arno/clementine/clementine-player/src/ui_digitallyimportedsettingspage.h:147
-msgid "Windows Media 64k (Premium only)"
+#: ../bin/src/ui_digitallyimportedsettingspage.h:180
+msgid "Windows Media 64k"
 msgstr ""
 
 #: core/song.cpp:131
@@ -4417,16 +4387,13 @@ msgid "Would you like to run a full rescan right now?"
 msgstr "Ar norite paleisti pilną perskenavimą dabar?"
 
 #: playlist/playlist.cpp:1085 ui/organisedialog.cpp:60
-#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:135
-#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:148
-#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:161
-#: /home/arno/clementine/clementine-player/src/ui_edittagdialog.h:657
+#: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:148
+#: ../bin/src/ui_groupbydialog.h:161 ../bin/src/ui_edittagdialog.h:657
 msgid "Year"
 msgstr "Metai"
 
-#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:136
-#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:149
-#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:162
+#: ../bin/src/ui_groupbydialog.h:136 ../bin/src/ui_groupbydialog.h:149
+#: ../bin/src/ui_groupbydialog.h:162
 msgid "Year - Album"
 msgstr "Metai - Albumas"
 
@@ -4438,11 +4405,11 @@ msgstr "Metai"
 msgid "Yesterday"
 msgstr "Vakar"
 
-#: /home/arno/clementine/clementine-player/src/ui_magnatunedownloaddialog.h:132
+#: ../bin/src/ui_magnatunedownloaddialog.h:132
 msgid "You are about to download the following albums"
 msgstr "Jūs ketinate atsisiųsti šiuos albumus"
 
-#: /home/arno/clementine/clementine-player/src/ui_loginstatewidget.h:146
+#: ../bin/src/ui_loginstatewidget.h:146
 msgid "You are not signed in."
 msgstr ""
 
@@ -4455,11 +4422,11 @@ msgstr ""
 msgid "You are signed in."
 msgstr ""
 
-#: /home/arno/clementine/clementine-player/src/ui_groupbydialog.h:123
+#: ../bin/src/ui_groupbydialog.h:123
 msgid "You can change the way the songs in the library are organised."
 msgstr "Galite nustatyti kaip organizuoti dainas fonotekoje"
 
-#: internet/digitallyimportedsettingspage.cpp:33
+#: internet/digitallyimportedsettingspage.cpp:46
 msgid ""
 "You can listen for free without an account, but Premium members can listen "
 "to higher quality streams without advertisements."
@@ -4473,7 +4440,7 @@ msgstr ""
 "Galite klausyti Magnatune dainų nemokamai be abonento. Nupirkta narystė "
 "pašalina žinutes iš kiekvieno takelio pabaigos."
 
-#: /home/arno/clementine/clementine-player/src/ui_backgroundstreamssettingspage.h:57
+#: ../bin/src/ui_backgroundstreamssettingspage.h:57
 msgid "You can listen to background streams at the same time as other music."
 msgstr "Galite klausyti foninių garsų kartu su kita muzika."
 
@@ -4487,7 +4454,7 @@ msgstr ""
 "tik <span style=\" font-weight:600;\">apmokami prenumeratoriai</span> gali "
 "transliuoti Last.fm radiją per Clementine."
 
-#: /home/arno/clementine/clementine-player/src/ui_wiimotesettingspage.h:184
+#: ../bin/src/ui_wiimotesettingspage.h:184
 msgid ""
 "You can use your Wii Remote as a remote control for Clementine.  <a "
 "href=\"http://www.clementine-player.org/wiimote\">See the page on the "
@@ -4505,21 +4472,11 @@ msgstr ""
 msgid "You do not have a Spotify Premium account."
 msgstr ""
 
-#: internet/digitallyimportedurlhandler.cpp:48
-msgid ""
-"You have selected a Premium-only audio type but do not have any account "
-"details entered"
-msgstr ""
-
-#: internet/digitallyimportedurlhandler.cpp:43
-msgid "You have selected an invalid audio type setting"
-msgstr ""
-
 #: songinfo/lastfmtrackinfoprovider.cpp:95
 msgid "You love this track"
 msgstr "Jūs mylite šį takelį"
 
-#: /home/arno/clementine/clementine-player/src/ui_globalshortcutssettingspage.h:170
+#: ../bin/src/ui_globalshortcutssettingspage.h:170
 msgid ""
 "You need to launch System Preferences and turn on \"<span style=\" font-"
 "style:italic;\">Enable access for assistive devices</span>\" to use global "
@@ -4529,7 +4486,7 @@ msgstr ""
 "style:italic;\">Suteikti prieigą pagalbiniams įrenginiams</span>\", kad "
 "naudoti Bendrąsias klavišų kombinacijas Clementine programoje."
 
-#: /home/arno/clementine/clementine-player/src/ui_behavioursettingspage.h:185
+#: ../bin/src/ui_behavioursettingspage.h:185
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Reikės paleisti iš naujo Clementine, kad pasikeistų kalba."
 
@@ -4594,7 +4551,7 @@ msgid "Zero"
 msgstr "Nulis"
 
 #: playlist/playlistundocommands.cpp:37
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "pridėti %n dainų"
 
@@ -4602,15 +4559,15 @@ msgstr "pridėti %n dainų"
 msgid "after"
 msgstr "po"
 
-#: /home/arno/clementine/clementine-player/src/ui_searchtermwidget.h:281
+#: ../bin/src/ui_searchtermwidget.h:281
 msgid "ago"
 msgstr "prieš"
 
-#: /home/arno/clementine/clementine-player/src/ui_searchtermwidget.h:280
+#: ../bin/src/ui_searchtermwidget.h:280
 msgid "and"
 msgstr "ir"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsspeex.h:219
+#: ../bin/src/ui_transcoderoptionsspeex.h:219
 msgid "automatic"
 msgstr "automatinis"
 
@@ -4634,9 +4591,9 @@ msgstr "dpm"
 msgid "contains"
 msgstr "susideda iš"
 
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsspeex.h:222
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsvorbis.h:207
-#: /home/arno/clementine/clementine-player/src/ui_transcoderoptionsvorbis.h:210
+#: ../bin/src/ui_transcoderoptionsspeex.h:222
+#: ../bin/src/ui_transcoderoptionsvorbis.h:207
+#: ../bin/src/ui_transcoderoptionsvorbis.h:210
 msgid "disabled"
 msgstr "išjungta"
 
@@ -4714,7 +4671,7 @@ msgid "press enter"
 msgstr "paspauskite enter"
 
 #: playlist/playlistundocommands.cpp:65 playlist/playlistundocommands.cpp:88
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "pašalinti %n dainas"
 
