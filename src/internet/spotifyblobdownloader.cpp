@@ -19,11 +19,16 @@
 #include "spotifyservice.h"
 #include "core/logging.h"
 #include "core/network.h"
+#include "core/utilities.h"
 
 #include <QDir>
 #include <QMessageBox>
 #include <QNetworkReply>
 #include <QProgressDialog>
+#include <QtCrypto>
+
+const char* SpotifyBlobDownloader::kSignatureSuffix = ".sha1";
+
 
 SpotifyBlobDownloader::SpotifyBlobDownloader(
       const QString& version, const QString& path, QObject* parent)
@@ -56,7 +61,10 @@ void SpotifyBlobDownloader::Start() {
   qDeleteAll(replies_);
   replies_.clear();
 
-  const QStringList filenames = QStringList() << "blob" << "libspotify.so.8";
+  const QStringList filenames = QStringList()
+      << "blob"
+      << "blob" + QString(kSignatureSuffix)
+      << "libspotify.so.8";
 
   foreach (const QString& filename, filenames) {
     const QUrl url(SpotifyService::kBlobDownloadUrl + version_ + "/" + filename);
@@ -87,12 +95,14 @@ void SpotifyBlobDownloader::ReplyFinished() {
     }
   }
 
-  // Make the destination directory and write the files into it
-  QDir().mkpath(path_);
+  // Let's verify signatures in a temporary directory first, before we write
+  // anything into its final position.
+  QString temp_directory = Utilities::MakeTempDir();
+  QStringList signatures;
 
   foreach (QNetworkReply* reply, replies_) {
     const QString filename = reply->url().path().section('/', -1, -1);
-    const QString path = path_ + "/" + filename;
+    const QString path = temp_directory + "/" + filename;
 
     qLog(Info) << "Saving file" << path;
     QFile file(path);
@@ -101,9 +111,68 @@ void SpotifyBlobDownloader::ReplyFinished() {
       return;
     }
 
+    if (path.endsWith(kSignatureSuffix)) {
+      signatures << path;
+    }
+
     file.setPermissions(QFile::Permissions(0x7755));
     file.write(reply->readAll());
   }
+
+  // Load the public key
+  QCA::ConvertResult conversion_result;
+  QCA::PublicKey key = QCA::PublicKey::fromPEMFile(":/clementine-spotify-public.pem",
+                                                   &conversion_result);
+  if (QCA::ConvertGood != conversion_result) {
+    ShowError("Failed to load Spotify public key");
+    return;
+  }
+
+  // Verify signatures
+  foreach (const QString& signature_filename, signatures) {
+    QString filename = signature_filename;
+    filename.remove(kSignatureSuffix);
+
+    qLog(Debug) << "Verifying" << filename << "against" << signature_filename;
+
+    QFile actual_file(filename);
+    if (!actual_file.open(QIODevice::ReadOnly))
+      return;
+
+    QFile signature_file(signature_filename);
+    if (!signature_file.open(QIODevice::ReadOnly))
+      return;
+
+    if (!key.verifyMessage(actual_file.readAll(), signature_file.readAll(),
+                           QCA::EMSA3_SHA1)) {
+      ShowError("Invalid signature: " + filename);
+      return;
+    }
+
+    qLog(Debug) << "Verification OK";
+  }
+
+  // Make the destination directory and write the files into it
+  QDir().mkpath(path_);
+
+  foreach (QNetworkReply* reply, replies_) {
+    const QString filename = reply->url().path().section('/', -1, -1);
+    const QString source_path = temp_directory + "/" + filename;
+    const QString dest_path = path_ + "/" + filename;
+
+    if (filename.endsWith(kSignatureSuffix))
+      continue;
+
+    qLog(Info) << "Moving" << source_path << "to" << dest_path;
+
+    if (!QFile::rename(source_path, dest_path)) {
+      ShowError("Writing file failed: " + dest_path);
+      return;
+    }
+  }
+
+  // Remove the temporary directory
+  Utilities::RemoveRecursive(temp_directory);
 
   EmitFinished();
 }
