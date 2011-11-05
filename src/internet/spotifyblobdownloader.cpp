@@ -95,28 +95,18 @@ void SpotifyBlobDownloader::ReplyFinished() {
     }
   }
 
-  // Let's verify signatures in a temporary directory first, before we write
-  // anything into its final position.
-  QString temp_directory = Utilities::MakeTempDir();
-  QStringList signatures;
+  // Read files into memory first.
+  QMap<QString, QByteArray> file_data;
+  QStringList signature_filenames;
 
   foreach (QNetworkReply* reply, replies_) {
     const QString filename = reply->url().path().section('/', -1, -1);
-    const QString path = temp_directory + "/" + filename;
 
-    qLog(Info) << "Saving file" << path;
-    QFile file(path);
-    if (!file.open(QIODevice::WriteOnly)) {
-      ShowError("Failed to open file for writing: " + path);
-      return;
+    if (filename.endsWith(kSignatureSuffix)) {
+      signature_filenames << filename;
     }
 
-    if (path.endsWith(kSignatureSuffix)) {
-      signatures << path;
-    }
-
-    file.setPermissions(QFile::Permissions(0x7755));
-    file.write(reply->readAll());
+    file_data[filename] = reply->readAll();
   }
 
   // Load the public key
@@ -129,50 +119,41 @@ void SpotifyBlobDownloader::ReplyFinished() {
   }
 
   // Verify signatures
-  foreach (const QString& signature_filename, signatures) {
-    QString filename = signature_filename;
-    filename.remove(kSignatureSuffix);
+  foreach (const QString& signature_filename, signature_filenames) {
+    QString actual_filename = signature_filename;
+    actual_filename.remove(kSignatureSuffix);
 
-    qLog(Debug) << "Verifying" << filename << "against" << signature_filename;
+    qLog(Debug) << "Verifying" << actual_filename << "against" << signature_filename;
 
-    QFile actual_file(filename);
-    if (!actual_file.open(QIODevice::ReadOnly))
-      return;
-
-    QFile signature_file(signature_filename);
-    if (!signature_file.open(QIODevice::ReadOnly))
-      return;
-
-    if (!key.verifyMessage(actual_file.readAll(), signature_file.readAll(),
+    if (!key.verifyMessage(file_data[actual_filename],
+                           file_data[signature_filename],
                            QCA::EMSA3_SHA1)) {
-      ShowError("Invalid signature: " + filename);
+      ShowError("Invalid signature: " + actual_filename);
       return;
     }
-
-    qLog(Debug) << "Verification OK";
   }
 
   // Make the destination directory and write the files into it
   QDir().mkpath(path_);
 
-  foreach (QNetworkReply* reply, replies_) {
-    const QString filename = reply->url().path().section('/', -1, -1);
-    const QString source_path = temp_directory + "/" + filename;
+  foreach (const QString& filename, file_data.keys()) {
     const QString dest_path = path_ + "/" + filename;
 
     if (filename.endsWith(kSignatureSuffix))
       continue;
 
-    qLog(Info) << "Moving" << source_path << "to" << dest_path;
+    qLog(Info) << "Writing" << dest_path;
 
-    if (!QFile::rename(source_path, dest_path)) {
-      ShowError("Writing file failed: " + dest_path);
+    QFile file(dest_path);
+    if (!file.open(QIODevice::WriteOnly)) {
+      ShowError("Failed to open " + dest_path + " for writing");
       return;
     }
-  }
 
-  // Remove the temporary directory
-  Utilities::RemoveRecursive(temp_directory);
+    file.write(file_data[filename]);
+    file.close();
+    file.setPermissions(QFile::Permissions(0x7755));
+  }
 
   EmitFinished();
 }
