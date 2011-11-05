@@ -20,6 +20,7 @@
 
 #include "digitallyimportedclient.h"
 #include "internetservice.h"
+#include "core/cachedlist.h"
 
 #include <boost/scoped_ptr.hpp>
 
@@ -59,7 +60,7 @@ public:
   const QString& service_description() const { return service_description_; }
   const QString& api_service_name() const { return api_service_name_; }
 
-  bool IsChannelListStale() const;
+  bool IsChannelListStale() const { return saved_channels_.IsStale(); }
   DigitallyImportedClient::ChannelList Channels();
   void SongFromChannel(const DigitallyImportedClient::Channel& channel,
                        Song* song) const;
@@ -80,8 +81,6 @@ private slots:
 
 private:
   void PopulateStreams();
-  DigitallyImportedClient::ChannelList LoadChannels() const;
-  void SaveChannels(const DigitallyImportedClient::ChannelList& streams);
 
   void LoadStation(const QString& key);
 
@@ -108,8 +107,7 @@ private:
   boost::scoped_ptr<QMenu> context_menu_;
   QStandardItem* context_item_;
 
-  DigitallyImportedClient::ChannelList saved_channels_;
-  QDateTime last_refreshed_channels_;
+  CachedList<DigitallyImportedClient::Channel> saved_channels_;
 
   DigitallyImportedClient* api_client_;
 };

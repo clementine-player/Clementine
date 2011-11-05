@@ -33,6 +33,7 @@ uint qHash(const lastfm::Track& track);
 #include "internetmodel.h"
 #include "internetservice.h"
 #include "lastfmstationdialog.h"
+#include "core/cachedlist.h"
 #include "core/song.h"
 #include "playlist/playlistitem.h"
 
@@ -111,7 +112,7 @@ class LastFMService : public InternetService {
 
   PlaylistItemPtr PlaylistItemForUrl(const QUrl& url);
 
-  bool IsFriendsListStale() const;
+  bool IsFriendsListStale() const { return friend_names_.IsStale(); }
 
   // Thread safe
   QStringList FriendNames();
@@ -225,8 +226,7 @@ class LastFMService : public InternetService {
 
   QHash<lastfm::Track, QString> art_urls_;
 
-  QStringList friend_names_;
-  QDateTime last_refreshed_friends_;
+  CachedList<QString> friend_names_;
 
   // Useful to inform the user that we can't scrobble right now
   bool connection_problems_;

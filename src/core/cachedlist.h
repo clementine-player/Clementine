@@ -1,0 +1,92 @@
+/* This file is part of Clementine.
+   Copyright 2011, David Sansome <me@davidsansome.com>
+
+   Clementine is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
+
+   Clementine is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+#ifndef CACHEDLIST_H
+#define CACHEDLIST_H
+
+#include <QDateTime>
+#include <QSettings>
+
+template <typename T>
+class CachedList {
+public:
+  typedef QList<T> ListType;
+  typedef typename ListType::const_iterator const_iterator;
+
+  CachedList(const char* settings_group, const QString& name,
+             int cache_duration_secs)
+    : settings_group_(settings_group),
+      name_(name),
+      cache_duration_secs_(cache_duration_secs) {
+  }
+
+  void Load() {
+    QSettings s;
+    s.beginGroup(settings_group_);
+
+    last_updated_ = s.value("last_refreshed_" + name_).toDateTime();
+    data_.clear();
+
+    const int count = s.beginReadArray(name_ + "_data");
+    for (int i=0 ; i<count ; ++i) {
+      s.setArrayIndex(i);
+      data_ << s.value("value").value<T>();
+    }
+    s.endArray();
+  }
+
+  void Save() const {
+    QSettings s;
+    s.beginGroup(settings_group_);
+
+    s.setValue("last_refreshed_" + name_, last_updated_);
+
+    s.beginWriteArray(name_ + "_data", data_.size());
+    for (int i=0 ; i<data_.size() ; ++i) {
+      s.setArrayIndex(i);
+      s.setValue("value", QVariant::fromValue(data_[i]));
+    }
+    s.endArray();
+  }
+
+  void Update(const ListType& data) {
+    data_ = data;
+    last_updated_ = QDateTime::currentDateTime();
+    Save();
+  }
+
+  bool IsStale() const {
+    return last_updated_.isNull() ||
+           last_updated_.secsTo(QDateTime::currentDateTime()) > cache_duration_secs_;
+  }
+
+  const ListType& Data() const { return data_; }
+  operator ListType() const { return data_; }
+
+  const_iterator begin() const { return data_.begin(); }
+  const_iterator end() const { return data_.end(); }
+
+private:
+  const char* settings_group_;
+  const QString name_;
+  const int cache_duration_secs_;
+
+  QDateTime last_updated_;
+  ListType data_;
+};
+
+#endif // CACHEDLIST_H

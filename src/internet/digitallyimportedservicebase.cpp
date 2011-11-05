@@ -56,6 +56,7 @@ DigitallyImportedServiceBase::DigitallyImportedServiceBase(
     premium_audio_type_(2),
     root_(NULL),
     context_item_(NULL),
+    saved_channels_(kSettingsGroup, api_service_name, kStreamsCacheDurationSecs),
     api_client_(new DigitallyImportedClient(api_service_name, this))
 {
   model->player()->RegisterUrlHandler(url_handler_);
@@ -112,14 +113,13 @@ void DigitallyImportedServiceBase::RefreshStreamsFinished(QNetworkReply* reply, 
   model()->task_manager()->SetTaskFinished(task_id);
   reply->deleteLater();
 
-  saved_channels_ = api_client_->ParseChannelList(reply);
+  // Parse the list and sort by name
+  DigitallyImportedClient::ChannelList channels = api_client_->ParseChannelList(reply);
+  qSort(channels);
 
-  // Sort by name
-  qSort(saved_channels_);
+  saved_channels_.Update(channels);
 
-  SaveChannels(saved_channels_);
   PopulateStreams();
-
   emit StreamsChanged();
 }
 
@@ -161,8 +161,7 @@ void DigitallyImportedServiceBase::ReloadSettings() {
   premium_audio_type_ = s.value("premium_audio_type", 2).toInt();
   username_ = s.value("username").toString();
   listen_hash_ = s.value("listen_hash").toString();
-  last_refreshed_channels_ = s.value("last_refreshed_" + api_service_name_).toDateTime();
-  saved_channels_ = LoadChannels();
+  saved_channels_.Load();
 }
 
 void DigitallyImportedServiceBase::ShowContextMenu(
@@ -208,48 +207,6 @@ void DigitallyImportedServiceBase::LoadPlaylistFinished() {
 
 void DigitallyImportedServiceBase::ShowSettingsDialog() {
   emit OpenSettingsAtPage(SettingsDialog::Page_DigitallyImported);
-}
-
-DigitallyImportedClient::ChannelList DigitallyImportedServiceBase::LoadChannels() const {
-  DigitallyImportedClient::ChannelList ret;
-
-  QSettings s;
-  s.beginGroup(kSettingsGroup);
-
-  int count = s.beginReadArray(api_service_name_);
-  for (int i=0 ; i<count ; ++i) {
-    s.setArrayIndex(i);
-
-    DigitallyImportedClient::Channel channel;
-    channel.Load(s);
-    ret << channel;
-  }
-  s.endArray();
-
-  return ret;
-}
-
-void DigitallyImportedServiceBase::SaveChannels(
-    const DigitallyImportedClient::ChannelList& channels) {
-
-  QSettings s;
-  s.beginGroup(kSettingsGroup);
-
-  s.beginWriteArray(api_service_name_, channels.count());
-  for (int i=0 ; i<channels.count() ; ++i) {
-    s.setArrayIndex(i);
-    channels[i].Save(&s);
-  }
-  s.endArray();
-
-  last_refreshed_channels_ = QDateTime::currentDateTime();
-  s.setValue("last_refreshed_" + api_service_name_, last_refreshed_channels_);
-}
-
-bool DigitallyImportedServiceBase::IsChannelListStale() const {
-  return last_refreshed_channels_.isNull() ||
-         last_refreshed_channels_.secsTo(QDateTime::currentDateTime()) >
-            kStreamsCacheDurationSecs;
 }
 
 DigitallyImportedClient::ChannelList DigitallyImportedServiceBase::Channels() {

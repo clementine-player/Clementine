@@ -44,6 +44,7 @@
 #include "covers/coverproviders.h"
 #include "engines/enginebase.h"
 #include "globalsearch/globalsearch.h"
+#include "internet/digitallyimportedclient.h"
 #include "internet/internetmodel.h"
 #include "library/directory.h"
 #include "playlist/playlist.h"
@@ -227,6 +228,8 @@ int main(int argc, char *argv[]) {
   qRegisterMetaType<QList<QNetworkCookie> >("QList<QNetworkCookie>");
   qRegisterMetaType<SearchProvider::Result>("SearchProvider::Result");
   qRegisterMetaType<SearchProvider::ResultList>("SearchProvider::ResultList");
+  qRegisterMetaType<DigitallyImportedClient::Channel>("DigitallyImportedClient::Channel");
+  qRegisterMetaTypeStreamOperators<DigitallyImportedClient::Channel>("DigitallyImportedClient::Channel");
 
   qRegisterMetaType<GstBuffer*>("GstBuffer*");
   qRegisterMetaType<GstElement*>("GstElement*");

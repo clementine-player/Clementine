@@ -137,18 +137,20 @@ DigitallyImportedClient::ParseChannelList(QNetworkReply* reply) const {
   return ret;
 }
 
-void DigitallyImportedClient::Channel::Load(const QSettings& s) {
-  art_url_ = s.value("art_url").toUrl();
-  director_ = s.value("director").toString();
-  description_ = s.value("description").toString();
-  name_ = s.value("name").toString();
-  key_ = s.value("key").toString();
+QDataStream& operator<<(QDataStream& out, const DigitallyImportedClient::Channel& channel) {
+  out << channel.art_url_
+      << channel.director_
+      << channel.description_
+      << channel.name_
+      << channel.key_;
+  return out;
 }
 
-void DigitallyImportedClient::Channel::Save(QSettings* s) const {
-  s->setValue("art_url", art_url_);
-  s->setValue("director", director_);
-  s->setValue("description", description_);
-  s->setValue("name", name_);
-  s->setValue("key", key_);
+QDataStream& operator>>(QDataStream& in, DigitallyImportedClient::Channel& channel) {
+  in >> channel.art_url_
+     >> channel.director_
+     >> channel.description_
+     >> channel.name_
+     >> channel.key_;
+  return in;
 }

@@ -59,9 +59,6 @@ public:
     QString name_;
     QString key_;
 
-    void Save(QSettings* s) const;
-    void Load(const QSettings& s);
-
     bool operator <(const Channel& other) const { return name_ < other.name_; }
   };
   typedef QList<Channel> ChannelList;
@@ -80,5 +77,9 @@ private:
 
   QString service_name_;
 };
+
+QDataStream& operator<<(QDataStream& out, const DigitallyImportedClient::Channel& channel);
+QDataStream& operator>>(QDataStream& in, DigitallyImportedClient::Channel& channel);
+Q_DECLARE_METATYPE(DigitallyImportedClient::Channel)
 
 #endif // DIGITALLYIMPORTEDCLIENT_H

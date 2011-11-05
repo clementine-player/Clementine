@@ -87,6 +87,7 @@ LastFMService::LastFMService(InternetModel* parent)
     custom_list_(NULL),
     friends_list_(NULL),
     neighbours_list_(NULL),
+    friend_names_(kSettingsGroup, "friend_names", kFriendsCacheDurationSecs),
     connection_problems_(false)
 {
   //we emit the signal the first time to be sure the buttons are in the right state
@@ -130,9 +131,7 @@ void LastFMService::ReloadSettings() {
   scrobbling_enabled_ = settings.value("ScrobblingEnabled", true).toBool();
   buttons_visible_ = settings.value("ShowLoveBanButtons", true).toBool();
   scrobble_button_visible_ = settings.value("ShowScrobbleButton", true).toBool();
-
-  last_refreshed_friends_ = settings.value("LastRefreshedFriends").toDateTime();
-  friend_names_ = settings.value("FriendNames").toStringList();
+  friend_names_.Load();
 
   //avoid emitting signal if it's not changed
   if(scrobbling_enabled_old != scrobbling_enabled_)
@@ -281,16 +280,13 @@ void LastFMService::SignOut() {
   lastfm::ws::Username.clear();
   lastfm::ws::SessionKey.clear();
 
-  friend_names_ = QStringList();
-  last_refreshed_friends_ = QDateTime();
+  friend_names_.Update(QStringList());
 
   QSettings settings;
   settings.beginGroup(kSettingsGroup);
 
   settings.setValue("Username", QString());
   settings.setValue("Session", QString());
-  settings.setValue("FriendNames", friend_names_);
-  settings.setValue("LastRefreshedFriends", last_refreshed_friends_);
 }
 
 void LastFMService::AuthenticateReplyFinished() {
@@ -589,20 +585,12 @@ void LastFMService::ShowContextMenu(const QModelIndex& index, const QPoint &glob
   context_menu_->popup(global_pos);
 }
 
-bool LastFMService::IsFriendsListStale() const {
-  return last_refreshed_friends_.isNull() ||
-         last_refreshed_friends_.secsTo(QDateTime::currentDateTime()) >
-            kFriendsCacheDurationSecs;
-}
-
 QStringList LastFMService::FriendNames() {
   // Update the list for next time, in the main thread.
   if (IsFriendsListStale())
     metaObject()->invokeMethod(this, "RefreshFriends", Qt::QueuedConnection);
 
-  QSettings s;
-  s.beginGroup(LastFMService::kSettingsGroup);
-  return s.value("FriendNames").toStringList();
+  return friend_names_.Data();
 }
 
 static QStringList SavedArtistOrTagRadioNames(const QString& name) {
@@ -682,20 +670,14 @@ void LastFMService::RefreshFriendsFinished() {
     return;
   }
 
-  last_refreshed_friends_ = QDateTime::currentDateTime();
-
-  friend_names_ = QStringList();
+  QStringList names;
   foreach (const lastfm::User& f, friends) {
-    friend_names_ << f.name();
+    names << f.name();
   }
 
-  QSettings s;
-  s.beginGroup(kSettingsGroup);
-  s.setValue("FriendNames", friend_names_);
-  s.setValue("LastRefreshedFriends", last_refreshed_friends_);
+  friend_names_.Update(names);
 
   PopulateFriendsList();
-
   emit SavedItemsChanged();
 }
 
