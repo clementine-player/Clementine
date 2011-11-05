@@ -709,9 +709,9 @@ optional_source(HAVE_SPOTIFY
     internet/spotifyservice.h
     internet/spotifysettingspage.h
     resolvers/spotifyresolver.h
-  INCLUDE_DIRECTORIES
-    ${QCA_INCLUDE_DIRS}
 )
+
+optional_source(HAVE_QCA INCLUDE_DIRECTORIES ${QCA_INCLUDE_DIRS})
 
 # Platform specific - OS X
 optional_source(APPLE
