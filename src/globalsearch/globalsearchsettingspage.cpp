@@ -92,26 +92,37 @@ void GlobalSearchSettingsPage::AddProviderItem(GlobalSearch* engine,
   QTreeWidgetItem* item = new QTreeWidgetItem;
   item->setText(0, provider->name());
   item->setIcon(0, provider->icon());
+  item->setData(0, Qt::UserRole, QVariant::fromValue(provider));
+
+  UpdateLoggedInState(engine, item, true);
+
+  ui_->sources->invisibleRootItem()->addChild(item);
+}
+
+void GlobalSearchSettingsPage::UpdateLoggedInState(GlobalSearch* engine,
+                                                   QTreeWidgetItem* item,
+                                                   bool set_checked_state) {
+  SearchProvider* provider = item->data(0, Qt::UserRole).value<SearchProvider*>();
 
   const bool enabled = engine->is_provider_enabled(provider);
   const bool logged_in = provider->IsLoggedIn();
 
-  if (!logged_in) {
-    item->setData(0, Qt::CheckStateRole, Qt::Unchecked);
+  Qt::CheckState check_state = logged_in && enabled ? Qt::Checked : Qt::Unchecked;
+  Qt::ItemFlags flags = Qt::ItemIsEnabled | Qt::ItemIsSelectable;
+  if (logged_in)
+    flags |= Qt::ItemIsUserCheckable;
+
+  if (set_checked_state)
+    item->setData(0, Qt::CheckStateRole, check_state);
+  item->setFlags(flags);
+
+  if (logged_in) {
+    item->setIcon(1, QIcon());
+    item->setText(1, QString());
+  } else {
     item->setIcon(1, warning_icon_);
     item->setText(1, tr("Not logged in") + "    ");
-    item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
-  } else if (enabled) {
-    item->setData(0, Qt::CheckStateRole, Qt::Checked);
-    item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsUserCheckable);
-  } else {
-    item->setData(0, Qt::CheckStateRole, Qt::Unchecked);
-    item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsUserCheckable);
   }
-
-  item->setData(0, Qt::UserRole, QVariant::fromValue(provider));
-
-  ui_->sources->invisibleRootItem()->addChild(item);
 }
 
 void GlobalSearchSettingsPage::Save() {
@@ -185,4 +196,16 @@ void GlobalSearchSettingsPage::CurrentProviderChanged(QTreeWidgetItem* item) {
   ui_->up->setEnabled(row != 0);
   ui_->down->setEnabled(row != root->childCount() - 1);
   ui_->configure->setEnabled(provider->can_show_config());
+}
+
+void GlobalSearchSettingsPage::showEvent(QShowEvent* e) {
+  QWidget::showEvent(e);
+
+  // Update the logged-in state of each item when we come back to this page in
+  // the dialog.
+  for (int i = 0 ; i < ui_->sources->invisibleRootItem()->childCount() ; ++i) {
+    UpdateLoggedInState(dialog()->global_search(),
+                        ui_->sources->invisibleRootItem()->child(i),
+                        false);
+  }
 }

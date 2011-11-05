@@ -39,6 +39,9 @@ public:
   void Load();
   void Save();
 
+protected:
+  void showEvent(QShowEvent* e);
+
 private slots:
   void MoveUp();
   void MoveDown();
@@ -48,6 +51,8 @@ private slots:
 
 private:
   void AddProviderItem(GlobalSearch* engine, SearchProvider* provider);
+  void UpdateLoggedInState(GlobalSearch* engine, QTreeWidgetItem* item,
+                           bool set_checked_state);
   void MoveCurrentItem(int d);
 
 private:
