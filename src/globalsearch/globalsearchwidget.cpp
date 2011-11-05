@@ -604,7 +604,7 @@ GlobalSearchWidget::CombineAction GlobalSearchWidget::CanCombineResults(
   const int p1 = provider_order_.indexOf(r1.provider_->id());
   const int p2 = provider_order_.indexOf(r2.provider_->id());
 
-  return p2 > p1 ? RightPreferred : LeftPreferred;
+  return p2 > p1 ? LeftPreferred : RightPreferred;
 }
 
 void GlobalSearchWidget::CombineResults(const QModelIndex& superior, const QModelIndex& inferior) {
