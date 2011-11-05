@@ -78,6 +78,10 @@ using boost::scoped_ptr;
 
 #include <echonest/Config.h>
 
+#ifdef HAVE_SPOTIFY
+  #include <QtCrypto>
+#endif
+
 #ifdef Q_OS_DARWIN
   #include <sys/resource.h>
   #include <sys/sysctl.h>
@@ -367,6 +371,10 @@ int main(int argc, char *argv[]) {
     // Set -rw-------
     QFile::setPermissions(s.fileName(), QFile::ReadOwner | QFile::WriteOwner);
   }
+#endif
+
+#ifdef HAVE_SPOTIFY
+  QCA::Initializer qca_initializer;
 #endif
 
   // Resources

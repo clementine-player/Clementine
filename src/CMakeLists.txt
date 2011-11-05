@@ -709,6 +709,8 @@ optional_source(HAVE_SPOTIFY
     internet/spotifyservice.h
     internet/spotifysettingspage.h
     resolvers/spotifyresolver.h
+  INCLUDE_DIRECTORIES
+    ${QCA_INCLUDE_DIRS}
 )
 
 # Platform specific - OS X
@@ -1047,6 +1049,7 @@ if(HAVE_SPOTIFY)
   target_link_libraries(clementine_lib
     clementine-spotifyblob-messages
     gstspotifytcpsrc
+    ${QCA_LIBRARIES}
   )
 endif(HAVE_SPOTIFY)
 
