@@ -117,6 +117,9 @@ GlobalSearchWidget::GlobalSearchWidget(QWidget* parent)
   StyleSheetLoader* style_loader = new StyleSheetLoader(this);
   style_loader->SetStyleSheet(this, ":globalsearch.css");
 
+  // Icons
+  ui_->settings->setIcon(IconLoader::Load("configure"));
+
   swap_models_timer_->setSingleShot(true);
   swap_models_timer_->setInterval(kSwapModelsTimeoutMsec);
 
@@ -125,6 +128,7 @@ GlobalSearchWidget::GlobalSearchWidget(QWidget* parent)
   connect(view_->selectionModel(), SIGNAL(currentChanged(QModelIndex,QModelIndex)),
           SLOT(UpdateTooltip()));
   connect(swap_models_timer_, SIGNAL(timeout()), SLOT(SwapModels()));
+  connect(ui_->settings, SIGNAL(clicked()), SLOT(SettingsClicked()));
 }
 
 GlobalSearchWidget::~GlobalSearchWidget() {
@@ -143,18 +147,6 @@ void GlobalSearchWidget::Init(GlobalSearch* engine) {
           Qt::QueuedConnection);
   connect(engine_, SIGNAL(TracksLoaded(int,MimeData*)), SLOT(TracksLoaded(int,MimeData*)),
           Qt::QueuedConnection);
-
-  connect(engine_, SIGNAL(ProviderAdded(const SearchProvider*)),
-          SLOT(ProviderAdded(const SearchProvider*)));
-  connect(engine_, SIGNAL(ProviderRemoved(const SearchProvider*)),
-          SLOT(ProviderRemoved(const SearchProvider*)));
-  connect(engine_, SIGNAL(ProviderToggled(const SearchProvider*,bool)),
-          SLOT(ProviderToggled(const SearchProvider*,bool)));
-
-  // Take all the ProviderAdded signals we missed.
-  foreach (const SearchProvider* provider, engine_->providers()) {
-    ProviderAdded(provider);
-  }
 
   view_->setStyle(new PlaylistProxyStyle(style()));
 
@@ -325,10 +317,6 @@ bool GlobalSearchWidget::eventFilter(QObject* o, QEvent* e) {
   if (o == view_)
     return EventFilterPopup(o, e);
 
-  QToolButton* button = qobject_cast<QToolButton*>(o);
-  if (button && provider_buttons_.right.count(button))
-    return EventFilterProviderButton(button, e);
-
   return QWidget::eventFilter(o, e);
 }
 
@@ -467,28 +455,6 @@ bool GlobalSearchWidget::EventFilterPopup(QObject*, QEvent* e) {
 
   default:
     return false;
-  }
-
-  return false;
-}
-
-bool GlobalSearchWidget::EventFilterProviderButton(QToolButton* button, QEvent* e) {
-  switch (e->type()) {
-  case QEvent::Enter:
-    QToolTip::showText(button->mapToGlobal(button->rect().bottomLeft()),
-                       button->toolTip(), button);
-    break;
-
-  case QEvent::Leave:
-    QToolTip::hideText();
-    break;
-
-  case QEvent::ToolTip:
-    // Ignore normal tooltip events.
-    return true;
-
-  default:
-    break;
   }
 
   return false;
@@ -692,97 +658,6 @@ void GlobalSearchWidget::UpdateTooltip() {
   tooltip_->ShowAt(view_->mapToGlobal(popup_pos));
 }
 
-void GlobalSearchWidget::ProviderAdded(const SearchProvider* provider) {
-  if (provider_buttons_.left.count(provider)) {
-    qLog(Error) << "Tried to add the same provider twice:"
-                << provider->name() << provider->id();
-    return;
-  }
-
-  // Create a button for the provider.
-  QToolButton* button = new QToolButton(this);
-  button->setToolTip(tr("Show results from %1").arg(provider->name()));
-  button->setCheckable(true);
-  button->setChecked(engine_->is_provider_enabled(provider));
-  button->installEventFilter(this);
-
-  // Make the "Off" icon state greyed out, semi transparent and blurred.
-  QImage disabled_image = provider->icon().pixmap(
-        button->iconSize(), QIcon::Disabled).toImage();
-
-  QImage off_image = QImage(disabled_image.size(), QImage::Format_ARGB32);
-  off_image.fill(Qt::transparent);
-
-  QPainter p(&off_image);
-  p.setOpacity(0.5);
-  qt_blurImage(&p, disabled_image, 3.0, true, false);
-  p.end();
-
-  QIcon icon;
-  icon.addPixmap(provider->icon().pixmap(button->iconSize(), QIcon::Normal),
-                 QIcon::Normal, QIcon::On);
-  icon.addPixmap(QPixmap::fromImage(off_image), QIcon::Normal, QIcon::Off);
-
-  button->setIcon(icon);
-
-  connect(button, SIGNAL(toggled(bool)), SLOT(ProviderButtonToggled(bool)));
-
-  // Find the appropriate insertion point.
-  bool inserted = false;
-  for (int i = 0; i < ui_->provider_layout->count(); ++i) {
-    QToolButton* item_button = static_cast<QToolButton*>(
-        ui_->provider_layout->itemAt(i)->widget());
-
-    if (!item_button) {
-      continue;
-    }
-    const QString& name = provider_buttons_.right.find(item_button)->second->name();
-    if (provider->name() < name) {
-      ui_->provider_layout->insertWidget(i, button);
-      inserted = true;
-      break;
-    }
-  }
-
-  if (!inserted) {
-    // Insert it at the end but before the spacer.
-    ui_->provider_layout->insertWidget(ui_->provider_layout->count() - 1, button);
-  }
-
-  provider_buttons_.insert(ProviderButton(provider, button));
-}
-
-void GlobalSearchWidget::ProviderRemoved(const SearchProvider* provider) {
-  if (!provider_buttons_.left.count(provider)) {
-    qLog(Error) << "Tried to remove a provider that hadn't been added yet:"
-                << provider->name() << provider->id();
-    return;
-  }
-
-  ProviderButtonMap::left_const_iterator it = provider_buttons_.left.find(provider);
-  delete it->second;
-  provider_buttons_.left.erase(provider);
-}
-
-void GlobalSearchWidget::ProviderButtonToggled(bool on) {
-  QToolButton* button = qobject_cast<QToolButton*>(sender());
-  if (!button)
-    return;
-
-  const SearchProvider* provider = provider_buttons_.right.find(button)->second;
-  if (!provider)
-    return;
-
-  if (!engine_->SetProviderEnabled(provider, on)) {
-    // If we were not able to change provider state, toggle back provider button
-    button->toggle();
-  }
-}
-
-void GlobalSearchWidget::ProviderToggled(const SearchProvider* provider, bool on) {
-  QToolButton* button = provider_buttons_.left.find(provider)->second;
-  if (!button)
-    return;
-
-  button->setChecked(on);
+void GlobalSearchWidget::SettingsClicked() {
+  emit OpenSettingsAtPage(SettingsDialog::Page_GlobalSearch);
 }

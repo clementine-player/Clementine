@@ -259,6 +259,7 @@ MainWindow::MainWindow(
 
   ui_->global_search->Init(global_search);
   connect(ui_->global_search, SIGNAL(AddToPlaylist(QMimeData*)), SLOT(AddToPlaylist(QMimeData*)));
+  connect(ui_->global_search, SIGNAL(OpenSettingsAtPage(SettingsDialog::Page)), SLOT(OpenSettingsDialogAtPage(SettingsDialog::Page)));
 
   // Add tabs to the fancy tab widget
   ui_->tabs->AddTab(library_view_, IconLoader::Load("folder-sound"), tr("Library"));

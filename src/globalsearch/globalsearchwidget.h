@@ -19,6 +19,7 @@
 #define GLOBALSEARCHWIDGET_H
 
 #include "searchprovider.h"
+#include "ui/settingsdialog.h"
 
 #include <QScopedPointer>
 #include <QWidget>
@@ -70,6 +71,7 @@ public slots:
 
 signals:
   void AddToPlaylist(QMimeData* data);
+  void OpenSettingsAtPage(SettingsDialog::Page page);
 
 protected:
   void resizeEvent(QResizeEvent* e);
@@ -89,16 +91,12 @@ private slots:
   void AddAndQueueCurrent();
   void ReplaceCurrent();
   void ReplaceAndPlayCurrent();
+  void SettingsClicked();
 
   void HidePopup();
   void UpdateTooltip();
 
   void SwapModels();
-
-  void ProviderAdded(const SearchProvider* provider);
-  void ProviderRemoved(const SearchProvider* provider);
-  void ProviderButtonToggled(bool on);
-  void ProviderToggled(const SearchProvider* provider, bool on);
 
 private:
   // Return values from CanCombineResults
@@ -114,7 +112,6 @@ private:
 
   bool EventFilterSearchWidget(QObject* o, QEvent* e);
   bool EventFilterPopup(QObject* o, QEvent* e);
-  bool EventFilterProviderButton(QToolButton* button, QEvent* e);
 
   void LoadTracks(QAction* trigger);
 
@@ -161,10 +158,6 @@ private:
   QAction* replace_;
   QAction* replace_and_play_;
   QList<QAction*> actions_;
-
-  typedef boost::bimap<const SearchProvider*, QToolButton*> ProviderButtonMap;
-  typedef ProviderButtonMap::value_type ProviderButton;
-  ProviderButtonMap provider_buttons_;
 };
 
 #endif // GLOBALSEARCHWIDGET_H

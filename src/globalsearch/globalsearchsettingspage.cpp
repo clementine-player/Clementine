@@ -99,7 +99,7 @@ void GlobalSearchSettingsPage::AddProviderItem(GlobalSearch* engine,
   if (!logged_in) {
     item->setData(0, Qt::CheckStateRole, Qt::Unchecked);
     item->setIcon(1, warning_icon_);
-    item->setText(1, tr("Not logged in"));
+    item->setText(1, tr("Not logged in") + "    ");
     item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
   } else if (enabled) {
     item->setData(0, Qt::CheckStateRole, Qt::Checked);

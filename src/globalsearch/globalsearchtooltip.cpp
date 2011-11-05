@@ -31,7 +31,7 @@
 
 const qreal GlobalSearchTooltip::kBorderRadius = 8.0;
 const qreal GlobalSearchTooltip::kTotalBorderWidth = 4.0;
-const qreal GlobalSearchTooltip::kOuterBorderWidth = 1.0;
+const qreal GlobalSearchTooltip::kOuterBorderWidth = 0.5;
 const qreal GlobalSearchTooltip::kArrowWidth = 10.0;
 const qreal GlobalSearchTooltip::kArrowHeight = 10.0;
 
@@ -177,7 +177,7 @@ bool GlobalSearchTooltip::event(QEvent* e) {
 void GlobalSearchTooltip::paintEvent(QPaintEvent*) {
   QPainter p(this);
 
-  const QColor outer_color = Qt::black;
+  const QColor outer_color(0, 0, 0, 192);
   const QColor inner_color = palette().color(QPalette::Highlight);
   const QColor center_color = palette().color(QPalette::Base);
 
@@ -189,6 +189,7 @@ void GlobalSearchTooltip::paintEvent(QPaintEvent*) {
       kTotalBorderWidth/2, kTotalBorderWidth/2));
 
   // Draw the border
+  p.setCompositionMode(QPainter::CompositionMode_Source);
   p.setRenderHint(QPainter::Antialiasing);
   p.setPen(QPen(outer_color, kTotalBorderWidth));
   p.drawRoundedRect(area, kBorderRadius, kBorderRadius);
@@ -211,14 +212,15 @@ void GlobalSearchTooltip::paintEvent(QPaintEvent*) {
       inner_border_width/2, inner_border_width/2));
 
   // Inner border
+  p.setCompositionMode(QPainter::CompositionMode_SourceOver);
   p.setBrush(center_color);
   p.setPen(QPen(inner_color, inner_border_width));
   p.drawRoundedRect(inner_area, kBorderRadius, kBorderRadius);
 
   // Inner arrow
-  arrow[0].setY(arrow[0].y() + kOuterBorderWidth);
-  arrow[1].setX(arrow[1].x() + kOuterBorderWidth + 1);
-  arrow[2].setY(arrow[2].y() - kOuterBorderWidth);
+  arrow[0].setY(arrow[0].y() + kOuterBorderWidth + 0.5);
+  arrow[1].setX(arrow[1].x() + kOuterBorderWidth + 1.5);
+  arrow[2].setY(arrow[2].y() - kOuterBorderWidth - 0.5);
 
   p.setBrush(inner_color);
   p.setPen(inner_color);
