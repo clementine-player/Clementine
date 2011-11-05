@@ -17,6 +17,9 @@
 
 #include "groovesharkservice.h"
 
+#include <boost/scoped_ptr.hpp>
+
+#include <QInputDialog>
 #include <QMenu>
 #include <QMessageBox>
 #include <QMimeData>
@@ -410,8 +413,13 @@ void GroovesharkService::ShowContextMenu(const QModelIndex& index, const QPoint&
   EnsureMenuCreated();
 
   // Check if we should display actions
-  bool display_remove_from_playlist_action = false,
-       display_remove_from_favorites_action = false;
+  bool  display_delete_playlist_action = false,
+        display_remove_from_playlist_action = false,
+        display_remove_from_favorites_action = false;
+
+  if (index.data(InternetModel::Role_Type).toInt() == InternetModel::Type_UserPlaylist) {
+    display_delete_playlist_action = true;
+  }
   // We check parent's type (instead of index type) because we want to enable
   // 'remove' actions for items which are inside a playlist
   int parent_type = index.parent().data(InternetModel::Role_Type).toInt();
@@ -420,6 +428,7 @@ void GroovesharkService::ShowContextMenu(const QModelIndex& index, const QPoint&
   } else if (parent_type == Type_UserFavorites) {
     display_remove_from_favorites_action = true;
   }
+  delete_playlist_->setVisible(display_delete_playlist_action);
   remove_from_playlist_->setVisible(display_remove_from_playlist_action);
   remove_from_favorites_->setVisible(display_remove_from_favorites_action);
 
@@ -438,6 +447,13 @@ void GroovesharkService::EnsureMenuCreated() {
   if(!context_menu_) {
     context_menu_ = new QMenu;
     context_menu_->addActions(GetPlaylistActions());
+    create_playlist_ = context_menu_->addAction(
+        IconLoader::Load("list-add"), tr("Create a new Grooveshark playlist"),
+        this, SLOT(CreateNewPlaylist()));
+    delete_playlist_ = context_menu_->addAction(
+        IconLoader::Load("edit-delete"), tr("Delete Grooveshark playlist"),
+        this, SLOT(DeleteCurrentPlaylist()));
+    context_menu_->addSeparator();
     remove_from_playlist_ = context_menu_->addAction(
         IconLoader::Load("list-remove"), tr("Remove from playlist"),
         this, SLOT(RemoveCurrentFromPlaylist()));
@@ -470,6 +486,17 @@ void GroovesharkService::EnsureConnected() {
   } else {
     EnsureItemsCreated();
   }
+}
+
+QStandardItem* GroovesharkService::CreatePlaylistItem(const QString& playlist_name,
+                                                      int playlist_id) {
+  QStandardItem* item = new QStandardItem(playlist_name);
+  item->setData(InternetModel::Type_UserPlaylist, InternetModel::Role_Type);
+  item->setData(true, InternetModel::Role_CanLazyLoad);
+  item->setData(true, InternetModel::Role_CanBeModified);
+  item->setData(InternetModel::PlayBehaviour_SingleItem, InternetModel::Role_PlayBehaviour);
+  item->setData(playlist_id, Role_UserPlaylistId);
+  return item;
 }
 
 void GroovesharkService::RetrieveUserPlaylists() {
@@ -516,12 +543,7 @@ void GroovesharkService::PlaylistSongsRetrieved() {
   if (item) {
     item->removeRows(0, item->rowCount());
   } else {
-    item = new QStandardItem(playlist_info.name_);
-    item->setData(InternetModel::Type_UserPlaylist, InternetModel::Role_Type);
-    item->setData(true, InternetModel::Role_CanLazyLoad);
-    item->setData(true, InternetModel::Role_CanBeModified);
-    item->setData(InternetModel::PlayBehaviour_SingleItem, InternetModel::Role_PlayBehaviour);
-    item->setData(playlist_info.id_, Role_UserPlaylistId);
+    item = CreatePlaylistItem(playlist_info.name_, playlist_info.id_);
   }
 
   QVariantMap result = ExtractResult(reply);
@@ -719,6 +741,83 @@ void GroovesharkService::RefreshPlaylist(int playlist_id, const QString& playlis
 
   // Keep in mind correspondance between reply object and playlist
   pending_retrieve_playlists_.insert(reply, PlaylistInfo(playlist_id, playlist_name));
+}
+
+void GroovesharkService::CreateNewPlaylist() {
+  QString name = QInputDialog::getText(NULL,
+                                       tr("Create a new Grooveshark playlist"),
+                                       tr("Name"),
+                                       QLineEdit::Normal);
+  if (name.isEmpty()) {
+    return;
+  }
+
+  QList<Param> parameters;
+  parameters << Param("name", name)
+             << Param("songIDs", QVariantList());
+  QNetworkReply* reply = CreateRequest("createPlaylist", parameters, true);
+  NewClosure(reply, SIGNAL(finished()),
+    this, SLOT(NewPlaylistCreated(QNetworkReply*, const QString&)), reply, name);
+}
+
+void GroovesharkService::NewPlaylistCreated(QNetworkReply* reply, const QString& name) {
+  reply->deleteLater();
+  QVariantMap result = ExtractResult(reply);
+  if (!result["success"].toBool() || !result["playlistID"].isValid()) {
+    qLog(Warning) << "Grooveshark createPlaylist failed";
+    return;
+  }
+
+  int playlist_id = result["playlistID"].toInt();
+  QStandardItem* new_playlist_item = CreatePlaylistItem(name, playlist_id);
+  PlaylistInfo playlist_info(playlist_id, name);
+  playlist_info.item_ = new_playlist_item;
+  root_->appendRow(new_playlist_item);
+  playlists_.insert(playlist_id, playlist_info);
+}
+
+void GroovesharkService::DeleteCurrentPlaylist() {
+  if (context_item_.data(InternetModel::Role_Type).toInt() !=
+      InternetModel::Type_UserPlaylist) {
+    return;
+  }
+
+  int playlist_id = context_item_.data(Role_UserPlaylistId).toInt();
+  DeletePlaylist(playlist_id);
+}
+
+void GroovesharkService::DeletePlaylist(int playlist_id) {
+  if (!playlists_.contains(playlist_id)) {
+    return;
+  }
+  
+  boost::scoped_ptr<QMessageBox> confirmation_dialog(new QMessageBox(
+      QMessageBox::Question, tr("Delete Grooveshark playlist"),
+      tr("Are you sure you want to delete this playlist?"),
+      QMessageBox::Yes | QMessageBox::Cancel));
+  if (confirmation_dialog->exec() != QMessageBox::Yes) {
+    return;
+  }
+
+  QList<Param> parameters;
+  parameters << Param("playlistID", playlist_id);
+  QNetworkReply* reply = CreateRequest("deletePlaylist", parameters, true);
+  NewClosure(reply, SIGNAL(finished()),
+    this, SLOT(PlaylistDeleted(QNetworkReply*, int)), reply, playlist_id);
+}
+
+void GroovesharkService::PlaylistDeleted(QNetworkReply* reply, int playlist_id) {
+  reply->deleteLater();
+  QVariantMap result = ExtractResult(reply);
+  if (!result["success"].toBool()) {
+    qLog(Warning) << "Grooveshark deletePlaylist failed";
+    return;
+  }
+  if (!playlists_.contains(playlist_id)) {
+    return;
+  }
+  PlaylistInfo playlist_info = playlists_.take(playlist_id);
+  root_->removeRow(playlist_info.item_->row());
 }
 
 void GroovesharkService::AddUserFavoriteSong(int song_id) {

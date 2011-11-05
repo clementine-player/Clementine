@@ -74,6 +74,7 @@ class GroovesharkService : public InternetService {
   void RemoveFromPlaylist(int playlist_id, int song_id);
   // Refresh playlist_id playlist , or create it if it doesn't exist
   void RefreshPlaylist(int playlist_id, const QString& playlist_name);
+  void DeletePlaylist(int playlist_id);
   void AddUserFavoriteSong(int song_id);
   void RemoveFromFavorites(int song_id);
   void MarkStreamKeyOver30Secs(const QString& stream_key, const QString& server_id);
@@ -129,6 +130,10 @@ class GroovesharkService : public InternetService {
   void UserFavoritesRetrieved();
   void PlaylistSongsRetrieved();
   void PlaylistSongsSet(QNetworkReply* reply, int playlist_id);
+  void CreateNewPlaylist();
+  void NewPlaylistCreated(QNetworkReply* reply, const QString& name);
+  void DeleteCurrentPlaylist();
+  void PlaylistDeleted(QNetworkReply* reply, int playlist_id);
   void UserFavoriteSongAdded(QNetworkReply* reply);
   void RemoveCurrentFromPlaylist();
   void RemoveCurrentFromFavorites();
@@ -141,6 +146,10 @@ class GroovesharkService : public InternetService {
   void EnsureMenuCreated();
   void EnsureItemsCreated();
   void EnsureConnected();
+
+  // Create a playlist item, with data set as excepted. Doesn't fill the item
+  // with songs rows.
+  QStandardItem* CreatePlaylistItem(const QString& playlist_name, int playlist_id);
 
   void AuthenticateSession();
   void InitCountry();
@@ -184,6 +193,8 @@ class GroovesharkService : public InternetService {
   QMenu* context_menu_;
   QModelIndex context_item_;
 
+  QAction* create_playlist_;
+  QAction* delete_playlist_;
   QAction* remove_from_playlist_;
   QAction* remove_from_favorites_;
 
