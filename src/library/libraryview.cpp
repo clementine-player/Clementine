@@ -16,6 +16,7 @@
 */
 
 #include "librarydirectorymodel.h"
+#include "libraryfilterwidget.h"
 #include "librarymodel.h"
 #include "libraryview.h"
 #include "libraryitem.h"
@@ -131,6 +132,9 @@ LibraryView::LibraryView(QWidget* parent)
   : AutoExpandingTreeView(parent),
     cover_providers_(NULL),
     library_(NULL),
+    devices_(NULL),
+    task_manager_(NULL),
+    filter_(NULL),
     total_song_count_(-1),
     nomusic_(":nomusic.png"),
     context_menu_(NULL),
@@ -144,7 +148,6 @@ LibraryView::LibraryView(QWidget* parent)
   setDragDropMode(QAbstractItemView::DragOnly);
   setSelectionMode(QAbstractItemView::ExtendedSelection);
 
-  ReloadSettings();
   setStyleSheet("QTreeView::item{padding-top:1px;}");
 }
 
@@ -177,6 +180,10 @@ void LibraryView::SetLibrary(LibraryModel* library) {
 
 void LibraryView::SetDeviceManager(DeviceManager* device_manager) {
   devices_ = device_manager;
+}
+
+void LibraryView::SetFilter(LibraryFilterWidget* filter) {
+  filter_ = filter;
 }
 
 void LibraryView::TotalSongCountUpdated(int count) {
@@ -274,6 +281,8 @@ void LibraryView::contextMenuEvent(QContextMenuEvent *e) {
         tr("Don't show in various artists"), this, SLOT(NoShowInVarious()));
 
     context_menu_->addSeparator();
+
+    context_menu_->addMenu(filter_->menu());
 
     copy_to_device_->setDisabled(devices_->connected_devices_model()->rowCount() == 0);
     connect(devices_->connected_devices_model(), SIGNAL(IsEmptyChanged(bool)),

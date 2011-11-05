@@ -53,6 +53,8 @@ public:
   QList<SearchProvider*> providers() const;
   bool is_provider_enabled(const SearchProvider* provider) const;
 
+  static bool HideOtherSearchBoxes();
+
 public slots:
   void ReloadSettings();
 

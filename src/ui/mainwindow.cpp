@@ -830,7 +830,7 @@ void MainWindow::ReloadAllSettings() {
   library_->ReloadSettings();
   player_->ReloadSettings();
   osd_->ReloadSettings();
-  library_view_->view()->ReloadSettings();
+  library_view_->ReloadSettings();
   song_info_view_->ReloadSettings();
   player_->engine()->ReloadSettings();
   ui_->playlist->view()->ReloadSettings();

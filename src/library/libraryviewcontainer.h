@@ -34,6 +34,8 @@ public:
   LibraryFilterWidget* filter() const;
   LibraryView* view() const;
 
+  void ReloadSettings();
+
 private:
   Ui_LibraryViewContainer* ui_;
 };

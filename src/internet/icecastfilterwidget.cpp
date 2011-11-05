@@ -30,6 +30,7 @@ const char* IcecastFilterWidget::kSettingsGroup = "Icecast";
 IcecastFilterWidget::IcecastFilterWidget(QWidget *parent)
   : QWidget(parent),
     ui_(new Ui_IcecastFilterWidget),
+    menu_(new QMenu(tr("Display options"), this)),
     sort_mode_mapper_(new QSignalMapper(this))
 {
   ui_->setupUi(this);
@@ -44,9 +45,9 @@ IcecastFilterWidget::IcecastFilterWidget(QWidget *parent)
   AddAction(group, ui_->action_sort_station, IcecastModel::SortMode_StationAlphabetical);
 
   // Options menu
-  QMenu* options_menu = new QMenu(this);
-  options_menu->addActions(group->actions());
-  ui_->options->setMenu(options_menu);
+  menu_->setIcon(ui_->options->icon());
+  menu_->addActions(group->actions());
+  ui_->options->setMenu(menu_);
 
   connect(sort_mode_mapper_, SIGNAL(mapped(int)), SLOT(SortModeChanged(int)));
 

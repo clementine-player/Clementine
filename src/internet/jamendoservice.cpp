@@ -411,6 +411,9 @@ void JamendoService::EnsureMenuCreated() {
     library_filter_->SetLibraryModel(library_model_);
     library_filter_->SetFilterHint(tr("Search Jamendo"));
     library_filter_->SetAgeFilterEnabled(false);
+
+    context_menu_->addSeparator();
+    context_menu_->addMenu(library_filter_->menu());
   }
 }
 

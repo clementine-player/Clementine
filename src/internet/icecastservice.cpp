@@ -294,6 +294,9 @@ void IcecastService::EnsureMenuCreated() {
   context_menu_->addActions(GetPlaylistActions());
   context_menu_->addAction(IconLoader::Load("download"), tr("Open dir.xiph.org in browser"), this, SLOT(Homepage()));
   context_menu_->addAction(IconLoader::Load("view-refresh"), tr("Refresh station list"), this, SLOT(LoadDirectory()));
+
+  context_menu_->addSeparator();
+  context_menu_->addMenu(filter_->menu());
 }
 
 void IcecastService::Homepage() {

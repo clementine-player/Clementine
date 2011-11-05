@@ -26,6 +26,7 @@ class LineEditInterface;
 class Ui_IcecastFilterWidget;
 
 class QActionGroup;
+class QMenu;
 class QSignalMapper;
 
 class IcecastFilterWidget : public QWidget {
@@ -39,6 +40,8 @@ public:
 
   void SetIcecastModel(IcecastModel* model);
 
+  QMenu* menu() const { return menu_; }
+
 public slots:
   void FocusOnFilter(QKeyEvent* e);
 
@@ -51,6 +54,7 @@ private:
 private:
   Ui_IcecastFilterWidget* ui_;
   IcecastModel* model_;
+  QMenu* menu_;
 
   QSignalMapper* sort_mode_mapper_;
 

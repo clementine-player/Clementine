@@ -27,6 +27,7 @@
 #include <boost/scoped_ptr.hpp>
 
 class DeviceManager;
+class LibraryFilterWidget;
 class LibraryModel;
 class OrganiseDialog;
 class TaskManager;
@@ -65,6 +66,7 @@ class LibraryView : public AutoExpandingTreeView {
   void SetTaskManager(TaskManager* task_manager);
   void SetLibrary(LibraryModel* library);
   void SetDeviceManager(DeviceManager* device_manager);
+  void SetFilter(LibraryFilterWidget* filter);
 
   // QTreeView
   void keyboardSearch(const QString &search);
@@ -116,6 +118,7 @@ class LibraryView : public AutoExpandingTreeView {
   LibraryModel* library_;
   DeviceManager* devices_;
   TaskManager* task_manager_;
+  LibraryFilterWidget* filter_;
 
   int total_song_count_;
 

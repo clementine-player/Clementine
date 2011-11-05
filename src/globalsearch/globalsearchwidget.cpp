@@ -180,7 +180,8 @@ void GlobalSearchWidget::paintEvent(QPaintEvent* e) {
   Utils::StyleHelper::verticalGradient(&p, total_rect, total_rect);
 
   QRect background_rect = background_scaled_.rect();
-  background_rect.moveLeft(total_rect.right() - background_rect.width());
+  background_rect.moveLeft(ui_->settings->mapTo(this, ui_->settings->rect().center()).x() -
+                           background_rect.width());
   background_rect.moveTop(total_rect.top());
 
   p.setOpacity(0.5);
@@ -570,10 +571,12 @@ void GlobalSearchWidget::ReloadSettings() {
   show_tooltip_ = s.value("tooltip", true).toBool();
   combine_identical_results_ = s.value("combine_identical_results", true).toBool();
   provider_order_ = s.value("provider_order", QStringList() << "library").toStringList();
+  setVisible(s.value("show_globalsearch", true).toBool());
 
   if (tooltip_) {
     tooltip_->ReloadSettings();
   }
+
 }
 
 GlobalSearchWidget::CombineAction GlobalSearchWidget::CanCombineResults(

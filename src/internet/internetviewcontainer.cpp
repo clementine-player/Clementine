@@ -20,6 +20,7 @@
 #include "internetservice.h"
 #include "ui_internetviewcontainer.h"
 #include "core/mergedproxymodel.h"
+#include "globalsearch/globalsearch.h"
 
 #include <QMetaMethod>
 #include <QTimeLine>
@@ -104,6 +105,9 @@ void InternetViewContainer::Expanded(const QModelIndex& index) {
 
 void InternetViewContainer::SetHeaderVisible(QWidget* header, bool visible) {
   if (!header)
+    return;
+
+  if (visible && GlobalSearch::HideOtherSearchBoxes())
     return;
 
   HeaderData& d = headers_[header];

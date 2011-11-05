@@ -17,17 +17,21 @@
 
 #include "libraryviewcontainer.h"
 #include "ui_libraryviewcontainer.h"
+#include "globalsearch/globalsearch.h"
 
 LibraryViewContainer::LibraryViewContainer(QWidget* parent)
   : QWidget(parent),
     ui_(new Ui_LibraryViewContainer)
 {
   ui_->setupUi(this);
+  view()->SetFilter(filter());
 
   connect(filter(), SIGNAL(UpPressed()), view(), SLOT(UpAndFocus()));
   connect(filter(), SIGNAL(DownPressed()), view(), SLOT(DownAndFocus()));
   connect(filter(), SIGNAL(ReturnPressed()), view(), SLOT(FilterReturnPressed()));
   connect(view(), SIGNAL(FocusOnFilterSignal(QKeyEvent*)), filter(), SLOT(FocusOnFilter(QKeyEvent*)));
+
+  ReloadSettings();
 }
 
 LibraryViewContainer::~LibraryViewContainer() {
@@ -40,4 +44,9 @@ LibraryView* LibraryViewContainer::view() const {
 
 LibraryFilterWidget* LibraryViewContainer::filter() const {
   return ui_->filter;
+}
+
+void LibraryViewContainer::ReloadSettings() {
+  filter()->setVisible(!GlobalSearch::HideOtherSearchBoxes());
+  view()->ReloadSettings();
 }

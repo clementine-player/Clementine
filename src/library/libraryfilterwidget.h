@@ -56,6 +56,7 @@ class LibraryFilterWidget : public QWidget {
   void SetAgeFilterEnabled(bool enabled);
   void SetGroupByEnabled(bool enabled);
 
+  QMenu* menu() const { return library_menu_; }
   void AddMenuAction(QAction* action);
 
   void SetSettingsGroup(const QString& group) { settings_group_ = group; }

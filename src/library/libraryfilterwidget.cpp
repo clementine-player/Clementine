@@ -106,7 +106,8 @@ LibraryFilterWidget::LibraryFilterWidget(QWidget *parent)
   connect(group_by_group_, SIGNAL(triggered(QAction*)), SLOT(GroupByClicked(QAction*)));
 
   // Library config menu
-  library_menu_ = new QMenu(this);
+  library_menu_ = new QMenu(tr("Display options"), this);
+  library_menu_->setIcon(ui_->options->icon());
   library_menu_->addMenu(filter_age_menu_);
   library_menu_->addMenu(group_by_menu_);
   library_menu_->addSeparator();

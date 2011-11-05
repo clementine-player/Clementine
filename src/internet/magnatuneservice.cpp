@@ -270,6 +270,9 @@ void MagnatuneService::EnsureMenuCreated() {
   library_filter_->SetFilterHint(tr("Search Magnatune"));
   library_filter_->SetAgeFilterEnabled(false);
   library_filter_->AddMenuAction(config_action);
+
+  context_menu_->addSeparator();
+  context_menu_->addMenu(library_filter_->menu());
 }
 
 void MagnatuneService::ShowContextMenu(const QModelIndex& index, const QPoint& global_pos) {
