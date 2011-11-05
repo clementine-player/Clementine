@@ -15,6 +15,7 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "config.h"
 #include "spotifyblobdownloader.h"
 #include "spotifyservice.h"
 #include "core/logging.h"
@@ -25,7 +26,10 @@
 #include <QMessageBox>
 #include <QNetworkReply>
 #include <QProgressDialog>
-#include <QtCrypto>
+
+#ifdef HAVE_QCA
+  #include <QtCrypto>
+#endif // HAVE_QCA
 
 const char* SpotifyBlobDownloader::kSignatureSuffix = ".sha1";
 
@@ -109,6 +113,7 @@ void SpotifyBlobDownloader::ReplyFinished() {
     file_data[filename] = reply->readAll();
   }
 
+#ifdef HAVE_QCA
   // Load the public key
   QCA::ConvertResult conversion_result;
   QCA::PublicKey key = QCA::PublicKey::fromPEMFile(":/clementine-spotify-public.pem",
@@ -132,6 +137,7 @@ void SpotifyBlobDownloader::ReplyFinished() {
       return;
     }
   }
+#endif
 
   // Make the destination directory and write the files into it
   QDir().mkpath(path_);
