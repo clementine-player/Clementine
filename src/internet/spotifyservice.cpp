@@ -85,7 +85,7 @@ SpotifyService::~SpotifyService() {
 }
 
 QStandardItem* SpotifyService::CreateRootItem() {
-  root_ = new QStandardItem(QIcon(":icons/svg/spotify.svg"), kServiceName);
+  root_ = new QStandardItem(QIcon(":icons/22x22/spotify.png"), kServiceName);
   root_->setData(true, InternetModel::Role_CanLazyLoad);
   return root_;
 }

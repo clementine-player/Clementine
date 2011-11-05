@@ -25,7 +25,7 @@ SpotifySearchPlaylistType::SpotifySearchPlaylistType(SpotifyService* service)
 }
 
 QIcon SpotifySearchPlaylistType::icon(Playlist* playlist) const {
-  return QIcon(":icons/svg/spotify.svg");
+  return QIcon(":icons/32x32/spotify.png");
 }
 
 QString SpotifySearchPlaylistType::search_hint_text(Playlist* playlist) const {

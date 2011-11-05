@@ -28,7 +28,7 @@ SpotifySearchProvider::SpotifySearchProvider(QObject* parent)
     server_(NULL),
     service_(NULL)
 {
-  Init("Spotify", "spotify", QIcon(":icons/svg/spotify.svg"),
+  Init("Spotify", "spotify", QIcon(":icons/32x32/spotify.png"),
        WantsDelayedQueries | WantsSerialisedArtQueries | ArtIsProbablyRemote);
 }
 
