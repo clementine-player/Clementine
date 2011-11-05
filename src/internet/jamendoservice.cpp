@@ -20,6 +20,20 @@
 #include "jamendodynamicplaylist.h"
 #include "jamendoplaylistitem.h"
 #include "internetmodel.h"
+#include "core/database.h"
+#include "core/logging.h"
+#include "core/mergedproxymodel.h"
+#include "core/network.h"
+#include "core/scopedtransaction.h"
+#include "core/taskmanager.h"
+#include "globalsearch/globalsearch.h"
+#include "globalsearch/librarysearchprovider.h"
+#include "library/librarybackend.h"
+#include "library/libraryfilterwidget.h"
+#include "library/librarymodel.h"
+#include "smartplaylists/generator.h"
+#include "smartplaylists/querygenerator.h"
+#include "ui/iconloader.h"
 
 #include <QDesktopServices>
 #include <QFutureWatcher>
@@ -30,19 +44,6 @@
 #include <QtConcurrentRun>
 #include <QXmlStreamReader>
 #include "qtiocompressor.h"
-
-#include "core/database.h"
-#include "core/logging.h"
-#include "core/mergedproxymodel.h"
-#include "core/network.h"
-#include "core/scopedtransaction.h"
-#include "core/taskmanager.h"
-#include "library/librarybackend.h"
-#include "library/libraryfilterwidget.h"
-#include "library/librarymodel.h"
-#include "smartplaylists/generator.h"
-#include "smartplaylists/querygenerator.h"
-#include "ui/iconloader.h"
 
 const char* JamendoService::kServiceName = "Jamendo";
 const char* JamendoService::kDirectoryUrl =
@@ -116,6 +117,14 @@ JamendoService::JamendoService(InternetModel* parent)
   library_sort_model_->setSortRole(LibraryModel::Role_SortText);
   library_sort_model_->setDynamicSortFilter(true);
   library_sort_model_->sort(0);
+
+  model()->global_search()->AddProvider(new LibrarySearchProvider(
+      library_backend_,
+      tr("Jamendo"),
+      "jamendo",
+      QIcon(":/providers/jamendo.png"),
+      this),
+    false /* disabled Jamendo by default */);
 }
 
 JamendoService::~JamendoService() {

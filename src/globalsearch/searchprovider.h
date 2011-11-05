@@ -111,7 +111,7 @@ public:
 
   // Starts loading tracks for a result that was previously emitted by
   // ResultsAvailable.  Must emit TracksLoaded exactly once with this ID.
-  virtual void LoadTracksAsync(int id, const Result& result) = 0;
+  virtual void LoadTracksAsync(int id, const Result& result);
 
   // If provider needs user login to search and play songs, this method should
   // be reimplemented

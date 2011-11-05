@@ -1,5 +1,5 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2011, David Sansome <me@davidsansome.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -15,24 +15,22 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef LIBRARYSEARCHPROVIDER_H
-#define LIBRARYSEARCHPROVIDER_H
+#ifndef ICECASTSEARCHPROVIDER_H
+#define ICECASTSEARCHPROVIDER_H
 
 #include "searchprovider.h"
 
-class LibraryBackendInterface;
+class IcecastBackend;
 
 
-class LibrarySearchProvider : public BlockingSearchProvider {
+class IcecastSearchProvider : public BlockingSearchProvider {
 public:
-  LibrarySearchProvider(LibraryBackendInterface* backend, const QString& name,
-                        const QString& id, const QIcon& icon, QObject* parent = 0);
+  IcecastSearchProvider(IcecastBackend* backend, QObject* parent);
 
   ResultList Search(int id, const QString& query);
-  void LoadTracksAsync(int id, const Result& result);
 
 private:
-  LibraryBackendInterface* backend_;
+  IcecastBackend* backend_;
 };
 
-#endif // LIBRARYSEARCHPROVIDER_H
+#endif // ICECASTSEARCHPROVIDER_H

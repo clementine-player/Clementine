@@ -17,6 +17,7 @@
 
 #include "searchprovider.h"
 #include "core/boundfuturewatcher.h"
+#include "playlist/songmimedata.h"
 
 #include <QPainter>
 #include <QtConcurrentRun>
@@ -140,4 +141,11 @@ void SearchProvider::SortSongs(SongList* list) {
 
 void SearchProvider::LoadArtAsync(int id, const Result& result) {
   emit ArtLoaded(id, QImage());
+}
+
+void SearchProvider::LoadTracksAsync(int id, const Result& result) {
+  SongMimeData* mime_data = new SongMimeData;
+  mime_data->songs = SongList() << result.metadata_;
+
+  emit TracksLoaded(id, mime_data);
 }

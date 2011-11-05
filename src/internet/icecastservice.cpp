@@ -15,7 +15,18 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "icecastbackend.h"
+#include "icecastfilterwidget.h"
+#include "icecastmodel.h"
 #include "icecastservice.h"
+#include "internetmodel.h"
+#include "core/mergedproxymodel.h"
+#include "core/network.h"
+#include "core/taskmanager.h"
+#include "globalsearch/globalsearch.h"
+#include "globalsearch/icecastsearchprovider.h"
+#include "playlist/songplaylistitem.h"
+#include "ui/iconloader.h"
 
 #include <algorithm>
 using std::sort;
@@ -29,15 +40,6 @@ using std::unique;
 #include <QRegExp>
 #include <QtConcurrentRun>
 
-#include "icecastbackend.h"
-#include "icecastfilterwidget.h"
-#include "icecastmodel.h"
-#include "internetmodel.h"
-#include "core/mergedproxymodel.h"
-#include "core/network.h"
-#include "core/taskmanager.h"
-#include "playlist/songplaylistitem.h"
-#include "ui/iconloader.h"
 
 const char* IcecastService::kServiceName = "Icecast";
 const char* IcecastService::kDirectoryUrl = "http://data.clementine-player.org/icecast-directory";
@@ -58,6 +60,9 @@ IcecastService::IcecastService(InternetModel* parent)
 
   model_ = new IcecastModel(backend_, this);
   filter_->SetIcecastModel(model_);
+
+  model()->global_search()->AddProvider(
+        new IcecastSearchProvider(backend_, this), false);
 }
 
 IcecastService::~IcecastService() {

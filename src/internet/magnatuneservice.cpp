@@ -26,6 +26,8 @@
 #include "core/player.h"
 #include "core/song.h"
 #include "core/taskmanager.h"
+#include "globalsearch/globalsearch.h"
+#include "globalsearch/librarysearchprovider.h"
 #include "library/librarymodel.h"
 #include "library/librarybackend.h"
 #include "library/libraryfilterwidget.h"
@@ -92,6 +94,12 @@ MagnatuneService::MagnatuneService(InternetModel* parent)
   library_sort_model_->sort(0);
 
   model()->player()->RegisterUrlHandler(url_handler_);
+  model()->global_search()->AddProvider(new LibrarySearchProvider(
+      library_backend_,
+      tr("Magnatune"),
+      "magnatune",
+      QIcon(":/providers/magnatune.png"),
+      this));
 }
 
 MagnatuneService::~MagnatuneService() {

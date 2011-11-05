@@ -58,6 +58,8 @@ protected:
 private slots:
   void LoadDirectory();
   void Homepage();
+  void DownloadDirectoryFinished();
+  void ParseDirectoryFinished();
 
 private:
   void RequestDirectory(const QUrl& url);
@@ -75,10 +77,6 @@ private:
   IcecastFilterWidget* filter_;
 
   int load_directory_task_id_;
-
- private slots:
-  void DownloadDirectoryFinished();
-  void ParseDirectoryFinished();
 };
 
 #endif

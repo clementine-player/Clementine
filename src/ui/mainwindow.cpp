@@ -241,20 +241,6 @@ MainWindow::MainWindow(
       library_->backend(), tr("Library"), "library",
       IconLoader::Load("folder-sound"), global_search));
 
-  global_search->AddProvider(new LibrarySearchProvider(
-      internet_model_->Service<MagnatuneService>()->library_backend(),
-      tr("Magnatune"),
-      "magnatune",
-      QIcon(":/providers/magnatune.png"),
-      global_search));
-
-  global_search->AddProvider(new LibrarySearchProvider(
-      internet_model_->Service<JamendoService>()->library_backend(),
-      tr("Jamendo"),
-      "jamendo",
-      QIcon(":/providers/jamendo.png"),
-      global_search),
-    false /* disabled Jamendo by default */);
   global_search->ReloadSettings();
 
   ui_->global_search->Init(global_search);

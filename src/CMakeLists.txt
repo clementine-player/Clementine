@@ -126,6 +126,7 @@ set(SOURCES
   globalsearch/globalsearchtooltip.cpp
   globalsearch/globalsearchwidget.cpp
   globalsearch/groovesharksearchprovider.cpp
+  globalsearch/icecastsearchprovider.cpp
   globalsearch/librarysearchprovider.cpp
   globalsearch/searchprovider.cpp
   globalsearch/simplesearchprovider.cpp
