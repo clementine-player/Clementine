@@ -540,7 +540,9 @@ void GroovesharkService::PlaylistSongsRetrieved() {
   if (playlists_.contains(playlist_info.id_)) {
     item = playlists_[playlist_info.id_].item_;
   }
+  bool item_already_exists = false;
   if (item) {
+    item_already_exists = true;
     item->removeRows(0, item->rowCount());
   } else {
     item = CreatePlaylistItem(playlist_info.name_, playlist_info.id_);
@@ -559,7 +561,9 @@ void GroovesharkService::PlaylistSongsRetrieved() {
 
     item->appendRow(child);
   }
-  root_->appendRow(item);
+  if (!item_already_exists) {
+    root_->appendRow(item);
+  }
 
   // Keep in mind this playlist
   playlist_info.songs_ids_ = ExtractSongsIds(result);
@@ -580,7 +584,9 @@ void GroovesharkService::UserFavoritesRetrieved() {
 
   reply->deleteLater();
 
+  bool favorites_item_already_exists = false;
   if (favorites_) {
+    favorites_item_already_exists = true;
     favorites_->removeRows(0, favorites_->rowCount());
   } else {
     favorites_ = new QStandardItem(QIcon(":/last.fm/love.png"), tr("Favorites"));
@@ -602,7 +608,9 @@ void GroovesharkService::UserFavoritesRetrieved() {
 
     favorites_->appendRow(child);
   }
-  root_->appendRow(favorites_);
+  if (!favorites_item_already_exists) {
+    root_->appendRow(favorites_);
+  }
 }
 
 void GroovesharkService::MarkStreamKeyOver30Secs(const QString& stream_key,
