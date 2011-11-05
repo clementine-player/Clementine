@@ -33,7 +33,7 @@ QString GroovesharkSearchPlaylistType::search_hint_text(Playlist* playlist) cons
 }
 
 QString GroovesharkSearchPlaylistType::empty_playlist_text(Playlist* playlist) const {
-  return QObject::tr("Start typing in the search box above to find music on Grooveshark.");
+  return QObject::tr("Start typing in the search box above to find music on %1.").arg("Grooveshark");
 }
 
 bool GroovesharkSearchPlaylistType::has_special_search_behaviour(Playlist* playlist) const {
