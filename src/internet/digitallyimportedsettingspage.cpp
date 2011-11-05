@@ -88,11 +88,11 @@ void DigitallyImportedSettingsPage::UpdateLoginState(
     const QString& listen_hash, const QString& name, const QDateTime& expires) {
   if (listen_hash.isEmpty()) {
     ui_->login_state->SetLoggedIn(LoginStateWidget::LoggedOut);
+    ui_->login_state->SetExpires(QDate());
     ui_->login_state->SetAccountTypeVisible(true);
   } else {
-    ui_->login_state->SetLoggedIn(
-          LoginStateWidget::LoggedIn,
-          name + " (" + tr("Expires on %1").arg(expires.date().toString(Qt::SystemLocaleLongDate)) + ")");
+    ui_->login_state->SetLoggedIn(LoginStateWidget::LoggedIn, name);
+    ui_->login_state->SetExpires(expires.date());
     ui_->login_state->SetAccountTypeVisible(false);
   }
 

@@ -18,6 +18,7 @@
 #ifndef LOGINSTATEWIDGET_H
 #define LOGINSTATEWIDGET_H
 
+#include <QDate>
 #include <QWidget>
 
 class Ui_LoginStateWidget;
@@ -56,6 +57,8 @@ public slots:
 
   void SetAccountTypeText(const QString& text);
   void SetAccountTypeVisible(bool visible);
+
+  void SetExpires(const QDate& expires);
 
 signals:
   void LogoutClicked();

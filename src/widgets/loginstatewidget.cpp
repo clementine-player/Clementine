@@ -19,6 +19,7 @@
 #include "ui_loginstatewidget.h"
 #include "ui/iconloader.h"
 
+#include <QDate>
 #include <QKeyEvent>
 
 LoginStateWidget::LoginStateWidget(QWidget* parent)
@@ -27,6 +28,7 @@ LoginStateWidget::LoginStateWidget(QWidget* parent)
 {
   ui_->setupUi(this);
   ui_->signed_in->hide();
+  ui_->expires->hide();
   ui_->account_type->hide();
   ui_->busy->hide();
 
@@ -100,5 +102,14 @@ bool LoginStateWidget::eventFilter(QObject* object, QEvent* event) {
   }
 
   return QWidget::eventFilter(object, event);
+}
+
+void LoginStateWidget::SetExpires(const QDate& expires) {
+  ui_->expires->setVisible(expires.isValid());
+
+  if (expires.isValid()) {
+    const QString expires_text = expires.toString(Qt::SystemLocaleLongDate);
+    ui_->expires_label->setText(tr("Expires on %1").arg("<b>" + expires_text + "</b>"));
+  }
 }
 
