@@ -7,12 +7,13 @@
 # Pavel Fric <fripohled.blogspot.com>, 2010.
 # Pavel Fric <fripohled@blogspot.com>, 2004, 2010.
 # Pavel Fric <pavelfric@seznam.cz>, 2011.
+#   <pavelfric@seznam.cz>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2011-11-03 17:56+0000\n"
-"Last-Translator: clementinebuildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2011-11-04 21:39+0000\n"
+"Last-Translator: fri <pavelfric@seznam.cz>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: cs\n"
@@ -242,7 +243,7 @@ msgstr "50 náhodných skladeb"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:165
 msgid "<a href=\"http://www.di.fm/premium/\">Upgrade to Premium now</a>"
-msgstr ""
+msgstr "<a href=\"http://www.di.fm/premium/\">Povýšit na Premium</a>"
 
 #: ../bin/src/ui_organisedialog.h:199
 msgid ""
@@ -256,7 +257,7 @@ msgstr ""
 
 #: internet/groovesharksettingspage.cpp:113
 msgid "A Grooveshark Anywhere account is required."
-msgstr ""
+msgstr "Je požadován účet Grooveshark Anywhere."
 
 #: internet/spotifysettingspage.cpp:147
 msgid "A Spotify Premium account is required."
@@ -289,15 +290,15 @@ msgstr "AAC"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:179
 msgid "AAC 128k"
-msgstr ""
+msgstr "AAC 128k"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:171
 msgid "AAC 32k"
-msgstr ""
+msgstr "AAC 32k"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:178
 msgid "AAC 64k"
-msgstr ""
+msgstr "AAC 64k"
 
 #: core/song.cpp:139
 msgid "AIFF"
@@ -330,7 +331,7 @@ msgstr "Podrobnosti o účtu"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:161
 msgid "Account details (Premium)"
-msgstr ""
+msgstr "Podrobnosti k účtu (Premium)"
 
 #: ../bin/src/ui_wiimotesettingspage.h:191
 msgid "Action"
@@ -354,7 +355,7 @@ msgstr "Přidat činnost"
 
 #: globalsearch/globalsearchwidget.cpp:96
 msgid "Add and play now"
-msgstr ""
+msgstr "Přidat a přehrát nyní"
 
 #: internet/savedradio.cpp:97
 msgid "Add another stream..."
@@ -363,6 +364,10 @@ msgstr "Přidat další proud..."
 #: library/librarysettingspage.cpp:62
 msgid "Add directory..."
 msgstr "Přidat složku..."
+
+#: ui/mainwindow.cpp:1574
+msgid "Add file"
+msgstr "Přidat soubor"
 
 #: ../bin/src/ui_mainwindow.h:662
 msgid "Add file..."
@@ -379,10 +384,6 @@ msgstr "Přidat složku"
 #: ../bin/src/ui_mainwindow.h:677
 msgid "Add folder..."
 msgstr "Přidat složku..."
-
-#: ui/mainwindow.cpp:1574
-msgid "Add media"
-msgstr "Přidat hudební soubory"
 
 #: ../bin/src/ui_librarysettingspage.h:159
 msgid "Add new folder..."
@@ -583,12 +584,12 @@ msgstr "Vždy zobrazit hlavní okno"
 msgid "Always start playing"
 msgstr "Vždy začít přehrávat"
 
-#: internet/spotifyblobdownloader.cpp:50
+#: internet/spotifyblobdownloader.cpp:55
 msgid ""
 "An additional plugin is required to use Spotify in Clementine.  Would you "
 "like to download and install it now?"
 msgstr ""
-"Pro používání Spotify v Clementine je vyžadován zásuvný modul. Chcete jej "
+"Pro používání Spotify v Clementine je vyžadován přídavný modul. Chcete jej "
 "stáhnout a nainstalovat nyní?"
 
 #: devices/afcdevice.cpp:62
@@ -681,7 +682,7 @@ msgstr "Zvukový formát"
 msgid "Authenticating..."
 msgstr "Ověřuje se..."
 
-#: internet/digitallyimportedsettingspage.cpp:80
+#: internet/digitallyimportedsettingspage.cpp:82
 #: internet/magnatunesettingspage.cpp:113 internet/lastfmservice.cpp:434
 #: internet/lastfmsettingspage.cpp:79 remote/remotesettingspage.cpp:113
 msgid "Authentication failed"
@@ -746,7 +747,7 @@ msgstr "Jednoduchá modrá"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:167
 msgid "Basic audio type"
-msgstr ""
+msgstr "Základní typ zvuku"
 
 #: ../bin/src/ui_behavioursettingspage.h:176
 msgid "Behavior"
@@ -812,7 +813,7 @@ msgstr "CDDA"
 msgid "CUE sheet support"
 msgstr "Podpora pro list CUE"
 
-#: internet/spotifyblobdownloader.cpp:34
+#: internet/spotifyblobdownloader.cpp:39
 msgid "Cancel"
 msgstr "Zrušit"
 
@@ -867,10 +868,6 @@ msgstr "Vybrat ze seznamu"
 #: smartplaylists/querywizardplugin.cpp:147
 msgid "Choose how the playlist is sorted and how many songs it will contain."
 msgstr "Zvolte počet písní v seznamu skladeb a způsob jejich řazení."
-
-#: ui/albumcoverchoicecontroller.cpp:92
-msgid "Choose manual cover"
-msgstr "Vybrat obal ručně"
 
 #: ../bin/src/ui_songinfosettingspage.h:188
 msgid ""
@@ -927,7 +924,7 @@ msgstr ""
 
 #: ../bin/src/ui_notificationssettingspage.h:396
 msgid "Clementine can show a message when the track changes."
-msgstr "Clementine může při změně skladby zobrazit zprávu."
+msgstr "Clementine může při změně skladby ukázat zprávu."
 
 #: visualisations/projectmvisualisation.cpp:128
 msgid ""
@@ -989,7 +986,7 @@ msgstr "Barva"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:163
 msgid "Combine identical results from different sources"
-msgstr ""
+msgstr "Spojit totožné výsledky z různých zdrojů"
 
 #: core/commandlineoptions.cpp:173
 msgid "Comma separated list of class:level, level is 0-3"
@@ -1016,7 +1013,7 @@ msgstr "Skladatel"
 
 #: internet/groovesharkservice.cpp:450
 msgid "Configure Grooveshark..."
-msgstr ""
+msgstr "Nastavit Grooveshark..."
 
 #: internet/lastfmservice.cpp:108
 msgid "Configure Last.fm..."
@@ -1038,10 +1035,10 @@ msgstr "Nastavit Spotify..."
 msgid "Configure library..."
 msgstr "Nastavit sbírku..."
 
-#: internet/digitallyimportedservicebase.cpp:220
+#: internet/digitallyimportedservicebase.cpp:181
 #: ../bin/src/ui_globalsearchsettingspage.h:167
 msgid "Configure..."
-msgstr ""
+msgstr "Nastavit..."
 
 #: ../bin/src/ui_wiimotesettingspage.h:186
 msgid "Connect Wii Remotes using active/deactive action"
@@ -1088,7 +1085,7 @@ msgid ""
 "required GStreamer plugins installed"
 msgstr ""
 "Nepodařilo se vytvořit prvek GStreamer \"%1\" - ujistěte se, že máte "
-"nainstalovány všechny požadované zásuvné moduly GStreamer"
+"nainstalovány všechny požadované přídavné moduly GStreamer"
 
 #: transcoder/transcoder.cpp:426
 #, qt-format
@@ -1097,7 +1094,7 @@ msgid ""
 "installed"
 msgstr ""
 "Nepodařilo se najít multiplexer pro \"%1\" - ujistěte se, že máte "
-"nainstalovány správné zásuvné moduly GStreamer"
+"nainstalovány správné přídavné moduly GStreamer"
 
 #: transcoder/transcoder.cpp:420
 #, qt-format
@@ -1106,7 +1103,7 @@ msgid ""
 "plugins installed"
 msgstr ""
 "Nepodařilo se najít kodér \"%1\" - ujistěte se, že máte nainstalovány "
-"správné zásuvné moduly GStreamer"
+"správné přídavné moduly GStreamer"
 
 #: internet/lastfmservice.cpp:915
 msgid "Couldn't load the last.fm radio station"
@@ -1353,7 +1350,7 @@ msgstr "Zařízení"
 
 #: ../bin/src/ui_globalsearchpopup.h:103
 msgid "Dialog"
-msgstr ""
+msgstr "Dialog"
 
 #: widgets/didyoumean.cpp:128
 msgid "Did you mean"
@@ -1361,15 +1358,15 @@ msgstr "Mysleli jste"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:160
 msgid "Digitally Imported"
-msgstr ""
+msgstr "Zavedeno digitálně"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:164
 msgid "Digitally Imported password"
-msgstr ""
+msgstr "Digitálně zavedené heslo"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:162
 msgid "Digitally Imported username"
-msgstr ""
+msgstr "Digitálně zavedené uživatelské jméno"
 
 #: ../bin/src/ui_networkproxysettingspage.h:159
 msgid "Direct internet connection"
@@ -1403,7 +1400,7 @@ msgstr "Volby zobrazení"
 
 #: core/commandlineoptions.cpp:169
 msgid "Display the global search popup"
-msgstr ""
+msgstr "Zobrazit vyskakovací okno pro celkové hledání"
 
 #: core/commandlineoptions.cpp:167
 msgid "Display the on-screen-display"
@@ -1473,9 +1470,9 @@ msgstr "Stahuje se katalog Jamendo"
 msgid "Downloading Magnatune catalogue"
 msgstr "Stahuje se katalog Magnatune"
 
-#: internet/spotifyblobdownloader.cpp:34
+#: internet/spotifyblobdownloader.cpp:39
 msgid "Downloading Spotify plugin"
-msgstr "Stahuje se zásuvný modul Spotify"
+msgstr "Stahuje se přídavný modul Spotify"
 
 #: musicbrainz/tagfetcher.cpp:99
 msgid "Downloading metadata"
@@ -1552,6 +1549,9 @@ msgid ""
 "identical results are available from more than one source, ones at the top "
 "will take priority."
 msgstr ""
+"Povolit zdroje níže pro jejich zahrnutí ve výsledcích celkového hledání.  "
+"Když jsou dostupné totožné výsledky z více než jednoho zdroje, dostane "
+"přednost ten úplně nahoře."
 
 #: core/globalshortcuts.cpp:62
 msgid "Enable/disable Last.fm scrobbling"
@@ -1625,19 +1625,19 @@ msgstr "Chyba při kopírování písní"
 msgid "Error deleting songs"
 msgstr "Chyba při mazání písní"
 
-#: internet/spotifyblobdownloader.cpp:137
+#: internet/spotifyblobdownloader.cpp:206
 msgid "Error downloading Spotify plugin"
-msgstr "Chyba při stahování zásuvného modulu Spotify"
+msgstr "Chyba při stahování přídavného modulu Spotify"
 
 #: playlist/songloaderinserter.cpp:69 playlist/songloaderinserter.cpp:130
 #, qt-format
 msgid "Error loading %1"
 msgstr "Chyba při nahrávání %1"
 
-#: internet/digitallyimportedservicebase.cpp:242
+#: internet/digitallyimportedservicebase.cpp:203
 #: internet/digitallyimportedurlhandler.cpp:73
 msgid "Error loading di.fm playlist"
-msgstr ""
+msgstr "Chyba při nahrávání seznamu skladeb di.fm"
 
 #: transcoder/transcoder.cpp:393
 #, qt-format
@@ -1656,10 +1656,10 @@ msgstr "Přehrané skladby"
 msgid "Except between tracks on the same album or in the same CUE sheet"
 msgstr "Kromě mezistop na tom samém albu nebo v tom samém listu CUE"
 
-#: internet/digitallyimportedsettingspage.cpp:93
+#: internet/digitallyimportedsettingspage.cpp:95
 #, qt-format
 msgid "Expires on %1"
-msgstr ""
+msgstr "Vyprší %1"
 
 #: ../bin/src/ui_mainwindow.h:659
 msgid "F1"
@@ -1710,7 +1710,7 @@ msgstr "Rychlý"
 
 #: internet/groovesharkservice.cpp:564
 msgid "Favorites"
-msgstr ""
+msgstr "Oblíbené"
 
 #: library/library.cpp:72
 msgid "Favourite tracks"
@@ -1809,7 +1809,7 @@ msgstr "Velikost písma"
 #: ../bin/src/ui_spotifysettingspage.h:184
 msgid "For licensing reasons Spotify support is in a separate plugin."
 msgstr ""
-"Z licenčních důvodů je podpora pro Spotify v odděleném zásuvném modulu"
+"Z licenčních důvodů je podpora pro Spotify v odděleném přídavném modulu"
 
 #: ../bin/src/ui_transcoderoptionsmp3.h:204
 msgid "Force mono encoding"
@@ -1882,7 +1882,7 @@ msgstr "Zvukový systém GStreamer"
 
 #: ui/settingsdialog.cpp:111
 msgid "General"
-msgstr ""
+msgstr "Obecné"
 
 #: ../bin/src/ui_notificationssettingspage.h:402
 msgid "General settings"
@@ -1898,9 +1898,9 @@ msgstr "Žánr"
 msgid "Getting channels"
 msgstr "Získávají se kanály"
 
-#: internet/digitallyimportedservicebase.cpp:122
+#: internet/digitallyimportedservicebase.cpp:103
 msgid "Getting streams"
-msgstr ""
+msgstr "Získávají se proudy"
 
 #: ../bin/src/ui_addstreamdialog.h:116
 msgid "Give it a name:"
@@ -1908,11 +1908,11 @@ msgstr "Pojmenujte to:"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:159
 msgid "Global Search"
-msgstr ""
+msgstr "Celkové hledání"
 
 #: ../bin/src/ui_globalsearchwidget.h:65
 msgid "Global search"
-msgstr ""
+msgstr "Celkové hledání"
 
 #: ../bin/src/ui_mainwindow.h:686
 msgid "Go to next playlist tab"
@@ -1942,11 +1942,11 @@ msgstr "Nechat zešedivět neexistující písně v mých seznamech skladeb"
 
 #: ../bin/src/ui_groovesharksettingspage.h:112
 msgid "Grooveshark"
-msgstr ""
+msgstr "Grooveshark"
 
 #: internet/groovesharkservice.cpp:380
 msgid "Grooveshark login error"
-msgstr ""
+msgstr "Chyba přihlášení Grooveshark"
 
 #: ../bin/src/ui_groupbydialog.h:124
 msgid "Group Library by..."
@@ -1995,7 +1995,7 @@ msgstr ""
 
 #: ../bin/src/ui_globalsearchsettingspage.h:161
 msgid "Hide all other search boxes"
-msgstr ""
+msgstr "Skrýt všechna jiná pole pro hledání"
 
 #: ../bin/src/ui_transcoderoptionsmp3.h:202
 msgid "High"
@@ -2089,7 +2089,7 @@ msgstr "Zahrnout všechny písně"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:170
 msgid "Include keyboard shortcut help in the tooltip"
-msgstr ""
+msgstr "Zahrnout nápovědu ke klávesovým zkratkám v nástrojové radě"
 
 #: core/commandlineoptions.cpp:158
 msgid "Increase the volume by 4%"
@@ -2117,7 +2117,7 @@ msgstr "Internet"
 
 #: ui/settingsdialog.cpp:135
 msgid "Internet providers"
-msgstr ""
+msgstr "Poskytovatelé internetu"
 
 #: internet/lastfmservice.cpp:440
 msgid "Invalid API key"
@@ -2149,11 +2149,11 @@ msgstr "Neplatný klíč sezení"
 
 #: internet/groovesharkservice.cpp:373
 msgid "Invalid username and/or password"
-msgstr ""
+msgstr "Neplatné uživatelské jméno a/nebo heslo"
 
 #: ui/mainwindow.cpp:253
 msgid "Jamendo"
-msgstr ""
+msgstr "Jamendo"
 
 #: internet/jamendoservice.cpp:105
 msgid "Jamendo Most Listened Tracks"
@@ -2345,6 +2345,10 @@ msgstr "Nahrát obal z adresy (URL)"
 msgid "Load cover from URL..."
 msgstr "Nahrát obal z adresy (URL)..."
 
+#: ui/albumcoverchoicecontroller.cpp:92
+msgid "Load cover from disk"
+msgstr "Nahrát obal z disku"
+
 #: ui/albumcoverchoicecontroller.cpp:58
 msgid "Load cover from disk..."
 msgstr "Nahrát obal na disku..."
@@ -2452,11 +2456,11 @@ msgstr "MP3"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:177
 msgid "MP3 256k"
-msgstr ""
+msgstr "MP3 256k"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:170
 msgid "MP3 96k"
-msgstr ""
+msgstr "MP3 96k"
 
 #: core/song.cpp:133
 msgid "MP4 AAC"
@@ -2751,7 +2755,7 @@ msgstr "Nenainstalován"
 
 #: globalsearch/globalsearchsettingspage.cpp:102
 msgid "Not logged in"
-msgstr ""
+msgstr "Nepřihlášen"
 
 #: devices/deviceview.cpp:110
 msgid "Not mounted - double click to mount"
@@ -2790,10 +2794,10 @@ msgstr "Ogg Vorbis"
 msgid "Only show the first"
 msgstr "Ukázat pouze první"
 
-#: internet/digitallyimportedservicebase.cpp:213
+#: internet/digitallyimportedservicebase.cpp:174
 #, qt-format
 msgid "Open %1 in browser"
-msgstr ""
+msgstr "Otevřít %1 v prohlížeči"
 
 #: ../bin/src/ui_mainwindow.h:667
 msgid "Open &audio CD..."
@@ -2809,7 +2813,7 @@ msgstr "Otevřít dir.xiph.org v prohlížeči"
 
 #: ../bin/src/ui_mainwindow.h:666
 msgid "Open file..."
-msgstr ""
+msgstr "Otevřít soubor"
 
 #: devices/deviceview.cpp:220 internet/internetservice.cpp:73
 #: library/libraryview.cpp:240 widgets/fileviewlist.cpp:35
@@ -3013,7 +3017,7 @@ msgstr "Typ seznamu skladeb"
 
 #: ../bin/src/ui_spotifysettingspage.h:185
 msgid "Plugin status:"
-msgstr "Stav zásuvného modulu:"
+msgstr "Stav přídavného modulu:"
 
 #: ui/equalizer.cpp:119
 msgid "Pop"
@@ -3055,7 +3059,7 @@ msgstr "Upřednostňovaný formát"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:174
 msgid "Premium audio type"
-msgstr ""
+msgstr "Typ zvuku Premium"
 
 #: ../bin/src/ui_equalizer.h:119
 msgid "Preset:"
@@ -3194,15 +3198,15 @@ msgstr "Obnovit kanály"
 
 #: internet/lastfmservice.cpp:106
 msgid "Refresh friends list"
-msgstr ""
+msgstr "Obnovit seznam přátel"
 
 #: internet/icecastservice.cpp:296
 msgid "Refresh station list"
 msgstr "Obnovit seznam stanic"
 
-#: internet/digitallyimportedservicebase.cpp:216
+#: internet/digitallyimportedservicebase.cpp:177
 msgid "Refresh streams"
-msgstr ""
+msgstr "Obnovit proudy"
 
 #: ui/equalizer.cpp:120
 msgid "Reggae"
@@ -3236,7 +3240,7 @@ msgstr "Odstranit složku"
 
 #: internet/groovesharkservice.cpp:445
 msgid "Remove from favorites"
-msgstr ""
+msgstr "Odstranit z oblíbených"
 
 #: internet/groovesharkservice.cpp:442 ../bin/src/ui_mainwindow.h:674
 msgid "Remove from playlist"
@@ -3276,7 +3280,7 @@ msgstr "Opakovat skladbu"
 
 #: globalsearch/globalsearchwidget.cpp:99
 msgid "Replace and play now"
-msgstr ""
+msgstr "Nahradit a přehrát nyní"
 
 #: devices/deviceview.cpp:218 globalsearch/globalsearchwidget.cpp:98
 #: internet/internetservice.cpp:63 library/libraryview.cpp:238
@@ -3318,7 +3322,7 @@ msgstr "Omezit na znaky &ASCII"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:168
 msgid "Results"
-msgstr ""
+msgstr "Výsledky"
 
 #: ui/equalizer.cpp:121
 msgid "Rock"
@@ -3395,11 +3399,11 @@ msgstr "Hledat"
 #: internet/groovesharksearchplaylisttype.cpp:32
 #: internet/groovesharkservice.cpp:633
 msgid "Search Grooveshark"
-msgstr ""
+msgstr "Hledat na Grooveshark"
 
 #: internet/groovesharkservice.cpp:448 internet/groovesharkservice.cpp:457
 msgid "Search Grooveshark (opens a new tab)"
-msgstr ""
+msgstr "Hledat na Grooveshark (otevře novou kartu)"
 
 #: ../bin/src/ui_icecastfilterwidget.h:78
 msgid "Search Icecast stations"
@@ -3523,27 +3527,27 @@ msgstr "Klávesová zkratka pro %1 již existuje"
 
 #: library/libraryfilterwidget.cpp:62
 msgid "Show"
-msgstr "Zobrazit"
+msgstr "Ukázat"
 
 #: core/globalshortcuts.cpp:63
 msgid "Show Global Search Popup"
-msgstr ""
+msgstr "Ukázat vyskakovací okno pro celkové hledání"
 
 #: core/globalshortcuts.cpp:58 wiimotedev/wiimotesettingspage.cpp:111
 msgid "Show OSD"
-msgstr "Zobrazovat OSD"
+msgstr "Ukázat OSD"
 
 #: ../bin/src/ui_playbacksettingspage.h:258
 msgid "Show a glowing animation on the current track"
-msgstr "Zobrazovat zářící animaci nyní přehrávané skladby"
+msgstr "Ukazovat zářící animaci nyní přehrávané skladby"
 
 #: ../bin/src/ui_notificationssettingspage.h:399
 msgid "Show a native desktop notification"
-msgstr "Zobrazovat systémová oznámení"
+msgstr "Ukazovat systémová oznámení"
 
 #: ../bin/src/ui_notificationssettingspage.h:407
 msgid "Show a notification when I change the repeat/shuffle mode"
-msgstr "Zobrazovat oznámení při změně režimu opakování/míchání"
+msgstr "Ukazovat oznámení při změně režimu opakování/míchání"
 
 #: ../bin/src/ui_notificationssettingspage.h:406
 msgid "Show a notification when I change the volume"
@@ -3551,77 +3555,76 @@ msgstr "Zobrazovat oznámení při změně hlasitosti"
 
 #: ../bin/src/ui_notificationssettingspage.h:401
 msgid "Show a popup from the system tray"
-msgstr "Zobrazovat okno vyskakující z oznamovací části panelu"
+msgstr "Ukazovat okno vyskakující z oznamovací části panelu"
 
 #: ../bin/src/ui_notificationssettingspage.h:400
 msgid "Show a pretty OSD"
-msgstr "Zobrazovat OSD"
+msgstr "Ukazovat OSD"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:169
 msgid "Show a tooltip with more information about each result"
-msgstr ""
+msgstr "Ukázat nástrojovou radu s dalšími informacemi ke každému výsledku"
 
 #: widgets/nowplayingwidget.cpp:113
 msgid "Show above status bar"
-msgstr "Zobrazovat nad stavovým řádkem"
+msgstr "Ukazovat nad stavovým řádkem"
 
 #: ui/mainwindow.cpp:492
 msgid "Show all songs"
-msgstr "Zobrazit všechny písně"
+msgstr "Ukázat všechny písně"
 
 #: ../bin/src/ui_querysortpage.h:141
 msgid "Show all the songs"
-msgstr "Zobrazit všechny písně"
+msgstr "Ukázat všechny písně"
 
 #: ../bin/src/ui_librarysettingspage.h:171
 msgid "Show cover art in library"
-msgstr "Zobrazovat obal ve sbírce"
+msgstr "Ukazovat obal ve sbírce"
 
 #: ../bin/src/ui_librarysettingspage.h:172
 msgid "Show dividers"
-msgstr "Zobrazovat oddělovače"
+msgstr "Ukazovat oddělovače"
 
 #: ui/albumcoverchoicecontroller.cpp:63 widgets/prettyimage.cpp:183
 msgid "Show fullsize..."
-msgstr "Zobrazit v plné velikosti..."
+msgstr "Ukázat v plné velikosti..."
 
 #: library/libraryview.cpp:268 ui/mainwindow.cpp:539
 msgid "Show in file browser..."
-msgstr "Zobrazit v prohlížeči souborů..."
+msgstr "Ukázat v prohlížeči souborů..."
 
 #: library/libraryview.cpp:272
 msgid "Show in various artists"
-msgstr "Zobrazit pod různými umělci"
+msgstr "Ukázat pod různými umělci"
 
 #: ui/mainwindow.cpp:493
 msgid "Show only duplicates"
-msgstr "Zobrazit pouze duplikáty"
+msgstr "Ukázat pouze duplikáty"
 
 #: ui/mainwindow.cpp:494
 msgid "Show only untagged"
-msgstr "Zobrazit pouze bez štítku"
+msgstr "Ukázat pouze bez štítku"
 
 #: globalsearch/globalsearchwidget.cpp:704
 #, qt-format
 msgid "Show results from %1"
-msgstr ""
+msgstr "Ukázat výsledky z %1"
 
 #: ../bin/src/ui_lastfmsettingspage.h:151
 msgid "Show the \"love\" and \"ban\" buttons"
-msgstr "Zobrazovat tlačítka \"Oblíbit\" a \"Zakázat\""
+msgstr "Ukazovat tlačítka \"Oblíbit\" a \"Zakázat\""
 
 #: ../bin/src/ui_globalsearchsettingspage.h:160
 msgid "Show the Global Search box above the sidebar"
-msgstr ""
+msgstr "Ukázat pole pro celkové hledání nad posuvníkem"
 
 #: ../bin/src/ui_lastfmsettingspage.h:152
 msgid "Show the scrobble button in the main window"
-msgstr ""
-"Zobrazovat v hlavním okně tlačítko pro odesílání informací o přehrávání"
+msgstr "Ukazovat v hlavním okně tlačítko pro odesílání informací o přehrávání"
 
 #: ../bin/src/ui_behavioursettingspage.h:177
 msgid "Show tray icon"
-msgstr "Zobrazovat ikonu v oznamovací oblasti"
+msgstr "Ukazovat ikonu v oznamovací oblasti"
 
 #: core/globalshortcuts.cpp:57
 msgid "Show/Hide"
@@ -3649,7 +3652,7 @@ msgstr "Odhlásit"
 
 #: ../bin/src/ui_loginstatewidget.h:149
 msgid "Signing in..."
-msgstr ""
+msgstr "Přihlašuje se..."
 
 #: songinfo/echonestsimilarartists.cpp:57
 msgid "Similar artists"
@@ -3733,7 +3736,7 @@ msgstr "Řazení"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:162
 msgid "Sources"
-msgstr ""
+msgstr "Zdroje"
 
 #: ../bin/src/ui_transcodersettingspage.h:162
 msgid "Speex"
@@ -3749,11 +3752,11 @@ msgstr "Chyba přihlášení k Spotify"
 
 #: ../bin/src/ui_spotifysettingspage.h:183
 msgid "Spotify plugin"
-msgstr "Zásuvný modul Spotify"
+msgstr "Přídavný modul Spotify"
 
-#: internet/spotifyblobdownloader.cpp:49
+#: internet/spotifyblobdownloader.cpp:54
 msgid "Spotify plugin not installed"
-msgstr "Zásuvný modul Spotify není nainstalován"
+msgstr "Přídavný modul Spotify není nainstalován"
 
 #: ../bin/src/ui_transcoderoptionsmp3.h:201
 msgid "Standard"
@@ -3774,6 +3777,7 @@ msgstr "Převést"
 #: internet/groovesharksearchplaylisttype.cpp:36
 msgid "Start typing in the search box above to find music on Grooveshark."
 msgstr ""
+"Začněte zadávání v poli pro hledání výše pro nalezení hudby na Grooveshark."
 
 #: internet/spotifysearchplaylisttype.cpp:36
 msgid "Start typing in the search box above to find music on Spotify."
@@ -3850,7 +3854,7 @@ msgstr "Podporované formáty"
 
 #: globalsearch/globalsearchtooltip.cpp:50
 msgid "Switch provider"
-msgstr ""
+msgstr "Přepnout poskytovatele"
 
 #: internet/spotifyservice.cpp:482
 msgid "Syncing Spotify inbox"
@@ -4150,7 +4154,7 @@ msgstr "Nepodařilo se stáhnout %1 (%2)"
 msgid "Unknown"
 msgstr "Neznámý"
 
-#: internet/digitallyimportedclient.cpp:61 internet/lastfmservice.cpp:455
+#: internet/digitallyimportedclient.cpp:68 internet/lastfmservice.cpp:455
 msgid "Unknown error"
 msgstr "Neznámá chyba"
 
@@ -4235,11 +4239,11 @@ msgstr "Použito"
 #: internet/groovesharkservice.cpp:376
 #, qt-format
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
-msgstr ""
+msgstr "Uživatel %1 nemá účet Grooveshark Anywhere"
 
 #: ui/settingsdialog.cpp:128
 msgid "User interface"
-msgstr ""
+msgstr "Uživatelské rozhraní"
 
 #: ../bin/src/ui_groovesharksettingspage.h:114
 #: ../bin/src/ui_magnatunesettingspage.h:159
@@ -4373,19 +4377,19 @@ msgstr "Wii Remote %1: nízká hladina baterie (%2%)"
 
 #: ../bin/src/ui_wiimotesettingspage.h:182
 msgid "Wiimotedev"
-msgstr ""
+msgstr "Wiimotedev"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:181
 msgid "Windows Media 128k"
-msgstr ""
+msgstr "Windows Media 128k"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:172
 msgid "Windows Media 40k"
-msgstr ""
+msgstr "Windows Media 40k"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:180
 msgid "Windows Media 64k"
-msgstr ""
+msgstr "Windows Media 64k"
 
 #: core/song.cpp:131
 msgid "Windows Media audio"
@@ -4420,16 +4424,16 @@ msgstr "Chystáte se stáhnout následující alba"
 
 #: ../bin/src/ui_loginstatewidget.h:146
 msgid "You are not signed in."
-msgstr ""
+msgstr "Nejste přihlášen."
 
 #: widgets/loginstatewidget.cpp:67
 #, qt-format
 msgid "You are signed in as %1."
-msgstr ""
+msgstr "Jste přihlášen jako %1."
 
 #: widgets/loginstatewidget.cpp:65
 msgid "You are signed in."
-msgstr ""
+msgstr "Jste přihlášen."
 
 #: ../bin/src/ui_groupbydialog.h:123
 msgid "You can change the way the songs in the library are organised."
@@ -4440,6 +4444,8 @@ msgid ""
 "You can listen for free without an account, but Premium members can listen "
 "to higher quality streams without advertisements."
 msgstr ""
+"Můžete poslouchat zdarma bez účtu, ale členové Premium mohou poslouchat "
+"proudy o vyšší kvalitě a bez reklam."
 
 #: internet/magnatunesettingspage.cpp:53
 msgid ""
@@ -4475,11 +4481,11 @@ msgstr ""
 
 #: internet/groovesharksettingspage.cpp:105
 msgid "You do not have a Grooveshark Anywhere account."
-msgstr ""
+msgstr "Nemáte účet Grooveshark Anywhere."
 
 #: internet/spotifysettingspage.cpp:138
 msgid "You do not have a Spotify Premium account."
-msgstr ""
+msgstr "Nemáte účet Spotify Premium."
 
 #: songinfo/lastfmtrackinfoprovider.cpp:95
 msgid "You love this track"
@@ -4530,7 +4536,7 @@ msgid ""
 "for automatic tag fetching.  Try installing the 'gstreamer-plugins-bad' "
 "package."
 msgstr ""
-"Vaše instalace programu gstreamer postrádá zásuvný modul ´ofa´. Ten je "
+"Vaše instalace programu gstreamer postrádá přídavný modul ´ofa´. Ten je "
 "vyžadován pro automatické stahování štítků. Zkuste nainstalovat balíček "
 "'gstreamer-plugins-bad'."
 
@@ -4550,7 +4556,7 @@ msgstr "Váš počet přehrání: %1"
 #: internet/groovesharksettingspage.cpp:109
 #: internet/spotifysettingspage.cpp:143
 msgid "Your username or password was incorrect."
-msgstr ""
+msgstr "Uživatelské jméno nebo heslo bylo nesprávné."
 
 #: smartplaylists/searchterm.cpp:288
 msgid "Z-A"

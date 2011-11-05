@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2011-11-03 18:40+0000\n"
+"PO-Revision-Date: 2011-11-04 15:30+0000\n"
 "Last-Translator: smarquespt <smarquespt@gmail.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -361,6 +361,10 @@ msgstr "Adicionar outra emissão..."
 msgid "Add directory..."
 msgstr "Adicionar diretório..."
 
+#: ui/mainwindow.cpp:1574
+msgid "Add file"
+msgstr "Adicionar ficheiro"
+
 #: ../bin/src/ui_mainwindow.h:662
 msgid "Add file..."
 msgstr "Adicionar ficheiro..."
@@ -376,10 +380,6 @@ msgstr "Adicionar pasta"
 #: ../bin/src/ui_mainwindow.h:677
 msgid "Add folder..."
 msgstr "Adicionar pasta..."
-
-#: ui/mainwindow.cpp:1574
-msgid "Add media"
-msgstr "Adicionar ficheiros"
 
 #: ../bin/src/ui_librarysettingspage.h:159
 msgid "Add new folder..."
@@ -580,7 +580,7 @@ msgstr "Mostrar sempre a janela principal"
 msgid "Always start playing"
 msgstr "Iniciar sempre a reprodução"
 
-#: internet/spotifyblobdownloader.cpp:50
+#: internet/spotifyblobdownloader.cpp:55
 msgid ""
 "An additional plugin is required to use Spotify in Clementine.  Would you "
 "like to download and install it now?"
@@ -679,7 +679,7 @@ msgstr "Formato áudio"
 msgid "Authenticating..."
 msgstr "A autenticar..."
 
-#: internet/digitallyimportedsettingspage.cpp:80
+#: internet/digitallyimportedsettingspage.cpp:82
 #: internet/magnatunesettingspage.cpp:113 internet/lastfmservice.cpp:434
 #: internet/lastfmsettingspage.cpp:79 remote/remotesettingspage.cpp:113
 msgid "Authentication failed"
@@ -810,7 +810,7 @@ msgstr "CDDA"
 msgid "CUE sheet support"
 msgstr "Suporte a ficheiros CUE"
 
-#: internet/spotifyblobdownloader.cpp:34
+#: internet/spotifyblobdownloader.cpp:39
 msgid "Cancel"
 msgstr "Cancelar"
 
@@ -867,10 +867,6 @@ msgid "Choose how the playlist is sorted and how many songs it will contain."
 msgstr ""
 "Escolha o método de organização da lista e o número de músicas que irá "
 "conter"
-
-#: ui/albumcoverchoicecontroller.cpp:92
-msgid "Choose manual cover"
-msgstr "Escolher capa de álbum manualmente"
 
 #: ../bin/src/ui_songinfosettingspage.h:188
 msgid ""
@@ -1040,7 +1036,7 @@ msgstr "Configurar Spotify..."
 msgid "Configure library..."
 msgstr "Configurar coleção..."
 
-#: internet/digitallyimportedservicebase.cpp:220
+#: internet/digitallyimportedservicebase.cpp:181
 #: ../bin/src/ui_globalsearchsettingspage.h:167
 msgid "Configure..."
 msgstr "Configurar..."
@@ -1475,7 +1471,7 @@ msgstr "A transferir o catálogo Jamendo"
 msgid "Downloading Magnatune catalogue"
 msgstr "A transferir o catálogo Magnatune"
 
-#: internet/spotifyblobdownloader.cpp:34
+#: internet/spotifyblobdownloader.cpp:39
 msgid "Downloading Spotify plugin"
 msgstr "A transferir o \"plug-in\" Spotify"
 
@@ -1630,7 +1626,7 @@ msgstr "Erro ao copiar músicas"
 msgid "Error deleting songs"
 msgstr "Erro ao eliminar músicas"
 
-#: internet/spotifyblobdownloader.cpp:137
+#: internet/spotifyblobdownloader.cpp:206
 msgid "Error downloading Spotify plugin"
 msgstr "Erro ao transferir o \"plug-in\""
 
@@ -1639,7 +1635,7 @@ msgstr "Erro ao transferir o \"plug-in\""
 msgid "Error loading %1"
 msgstr "Erro ao carregar %1"
 
-#: internet/digitallyimportedservicebase.cpp:242
+#: internet/digitallyimportedservicebase.cpp:203
 #: internet/digitallyimportedurlhandler.cpp:73
 msgid "Error loading di.fm playlist"
 msgstr "Erro ao carregar a lista de reprodução di.fm"
@@ -1661,7 +1657,7 @@ msgstr "Reproduzida alguma vez"
 msgid "Except between tracks on the same album or in the same CUE sheet"
 msgstr "Exceto entre faixas do mesmo álbum ou ficheiros CUE"
 
-#: internet/digitallyimportedsettingspage.cpp:93
+#: internet/digitallyimportedsettingspage.cpp:95
 #, qt-format
 msgid "Expires on %1"
 msgstr "Termina em %1"
@@ -1904,7 +1900,7 @@ msgstr "Género"
 msgid "Getting channels"
 msgstr "A obter canais"
 
-#: internet/digitallyimportedservicebase.cpp:122
+#: internet/digitallyimportedservicebase.cpp:103
 msgid "Getting streams"
 msgstr "A obter emissões"
 
@@ -2350,6 +2346,10 @@ msgstr "Carregar capa de álbum do URL"
 msgid "Load cover from URL..."
 msgstr "Carregar capa de álbum do URL..."
 
+#: ui/albumcoverchoicecontroller.cpp:92
+msgid "Load cover from disk"
+msgstr "Carregar capa de álbum no disco rígido"
+
 #: ui/albumcoverchoicecontroller.cpp:58
 msgid "Load cover from disk..."
 msgstr "Carregar capa de álbum no disco..."
@@ -2794,7 +2794,7 @@ msgstr "Ogg Vorbis"
 msgid "Only show the first"
 msgstr "Mostrar apenas as primeiras"
 
-#: internet/digitallyimportedservicebase.cpp:213
+#: internet/digitallyimportedservicebase.cpp:174
 #, qt-format
 msgid "Open %1 in browser"
 msgstr "Abrir %1 no navegador"
@@ -3204,7 +3204,7 @@ msgstr "Atualizar lista de amigos"
 msgid "Refresh station list"
 msgstr "Atualizar lista de estações"
 
-#: internet/digitallyimportedservicebase.cpp:216
+#: internet/digitallyimportedservicebase.cpp:177
 msgid "Refresh streams"
 msgstr "Atualizar emissões"
 
@@ -3755,7 +3755,7 @@ msgstr "Erro de autenticação Spotify"
 msgid "Spotify plugin"
 msgstr "\"Plug-in\" Spotify"
 
-#: internet/spotifyblobdownloader.cpp:49
+#: internet/spotifyblobdownloader.cpp:54
 msgid "Spotify plugin not installed"
 msgstr "\"Plug-in\" Spotify não instalado"
 
@@ -4162,7 +4162,7 @@ msgstr "Incapaz de transferir %1 (%2)"
 msgid "Unknown"
 msgstr "Desconhecido"
 
-#: internet/digitallyimportedclient.cpp:61 internet/lastfmservice.cpp:455
+#: internet/digitallyimportedclient.cpp:68 internet/lastfmservice.cpp:455
 msgid "Unknown error"
 msgstr "Erro desconhecido"
 

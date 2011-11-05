@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2011-11-03 21:06+0000\n"
-"Last-Translator: hiveNzin0 <gilleshabran@gmail.com>\n"
+"PO-Revision-Date: 2011-11-04 19:40+0000\n"
+"Last-Translator: arnaudbienner <arnaud.bienner@gmail.com>\n"
 "Language-Team: French (http://www.transifex.net/projects/p/clementine/team/fr/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -148,7 +148,7 @@ msgstr "&Personnaliser"
 
 #: ../bin/src/ui_mainwindow.h:702
 msgid "&Extras"
-msgstr "Extras"
+msgstr "&Extras"
 
 #: ../bin/src/ui_mainwindow.h:701
 msgid "&Help"
@@ -169,7 +169,7 @@ msgstr "&Gauche"
 
 #: ../bin/src/ui_mainwindow.h:699
 msgid "&Music"
-msgstr "Musique"
+msgstr "&Musique"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:176
 msgid "&None"
@@ -177,7 +177,7 @@ msgstr "Aucu&n"
 
 #: ../bin/src/ui_mainwindow.h:700
 msgid "&Playlist"
-msgstr "Liste de lecture"
+msgstr "&Liste de lecture"
 
 #: ../bin/src/ui_mainwindow.h:637
 msgid "&Quit"
@@ -368,6 +368,10 @@ msgstr "Ajouter un autre flux..."
 msgid "Add directory..."
 msgstr "Ajouter un répertoire..."
 
+#: ui/mainwindow.cpp:1574
+msgid "Add file"
+msgstr ""
+
 #: ../bin/src/ui_mainwindow.h:662
 msgid "Add file..."
 msgstr "Ajouter un fichier..."
@@ -383,10 +387,6 @@ msgstr "Ajouter un dossier"
 #: ../bin/src/ui_mainwindow.h:677
 msgid "Add folder..."
 msgstr "Ajouter un dossier..."
-
-#: ui/mainwindow.cpp:1574
-msgid "Add media"
-msgstr "Ajouter un média"
 
 #: ../bin/src/ui_librarysettingspage.h:159
 msgid "Add new folder..."
@@ -587,7 +587,7 @@ msgstr "Toujours afficher la fenêtre principale"
 msgid "Always start playing"
 msgstr "Toujours commencer à lire"
 
-#: internet/spotifyblobdownloader.cpp:50
+#: internet/spotifyblobdownloader.cpp:55
 msgid ""
 "An additional plugin is required to use Spotify in Clementine.  Would you "
 "like to download and install it now?"
@@ -692,7 +692,7 @@ msgstr "Format audio"
 msgid "Authenticating..."
 msgstr "Authentification en cours..."
 
-#: internet/digitallyimportedsettingspage.cpp:80
+#: internet/digitallyimportedsettingspage.cpp:82
 #: internet/magnatunesettingspage.cpp:113 internet/lastfmservice.cpp:434
 #: internet/lastfmsettingspage.cpp:79 remote/remotesettingspage.cpp:113
 msgid "Authentication failed"
@@ -824,7 +824,7 @@ msgstr "CDDA"
 msgid "CUE sheet support"
 msgstr "Support des CUE sheet."
 
-#: internet/spotifyblobdownloader.cpp:34
+#: internet/spotifyblobdownloader.cpp:39
 msgid "Cancel"
 msgstr "Annuler"
 
@@ -881,10 +881,6 @@ msgid "Choose how the playlist is sorted and how many songs it will contain."
 msgstr ""
 "Choisissez comment la liste de lecture est triée et combien de morceaux elle"
 " contient."
-
-#: ui/albumcoverchoicecontroller.cpp:92
-msgid "Choose manual cover"
-msgstr "Choisir une pochette manuellement"
 
 #: ../bin/src/ui_songinfosettingspage.h:188
 msgid ""
@@ -1054,7 +1050,7 @@ msgstr "Configurer Spotify…"
 msgid "Configure library..."
 msgstr "Configurer votre bibliothèque..."
 
-#: internet/digitallyimportedservicebase.cpp:220
+#: internet/digitallyimportedservicebase.cpp:181
 #: ../bin/src/ui_globalsearchsettingspage.h:167
 msgid "Configure..."
 msgstr "Configurer..."
@@ -1489,7 +1485,7 @@ msgstr "Téléchargement du catalogue de Jamendo"
 msgid "Downloading Magnatune catalogue"
 msgstr "Téléchargement du catalogue Magnatune"
 
-#: internet/spotifyblobdownloader.cpp:34
+#: internet/spotifyblobdownloader.cpp:39
 msgid "Downloading Spotify plugin"
 msgstr "Téléchargement du module Spotify"
 
@@ -1570,8 +1566,8 @@ msgid ""
 "identical results are available from more than one source, ones at the top "
 "will take priority."
 msgstr ""
-"Activer les sources ci-dessous pour les inclure dans les résultats de la rechercher globale.\n"
-"Quand des résultats identiques sont disponibles pour plus d'une source, la source la plus en haut de la liste à la plus forte priorité."
+"Activer les sources ci-dessous pour les inclure dans les résultats de la recherche globale.\n"
+"Quand des résultats identiques sont disponibles pour plus d'une source, la source en haut de la liste à la plus forte priorité."
 
 #: core/globalshortcuts.cpp:62
 msgid "Enable/disable Last.fm scrobbling"
@@ -1647,7 +1643,7 @@ msgstr "Erreur lors de la copie des morceaux"
 msgid "Error deleting songs"
 msgstr "Erreur lors de la suppression des morceaux"
 
-#: internet/spotifyblobdownloader.cpp:137
+#: internet/spotifyblobdownloader.cpp:206
 msgid "Error downloading Spotify plugin"
 msgstr "Erreur lors du téléchargement du module Spotify"
 
@@ -1656,7 +1652,7 @@ msgstr "Erreur lors du téléchargement du module Spotify"
 msgid "Error loading %1"
 msgstr "Erreur lors du chargement de %1"
 
-#: internet/digitallyimportedservicebase.cpp:242
+#: internet/digitallyimportedservicebase.cpp:203
 #: internet/digitallyimportedurlhandler.cpp:73
 msgid "Error loading di.fm playlist"
 msgstr "Erreur du chargement de la liste de lecture di.fm"
@@ -1678,7 +1674,7 @@ msgstr "Déjà joués"
 msgid "Except between tracks on the same album or in the same CUE sheet"
 msgstr "Excepté entre les pistes d'un même album ou d'une même CUE sheet"
 
-#: internet/digitallyimportedsettingspage.cpp:93
+#: internet/digitallyimportedsettingspage.cpp:95
 #, qt-format
 msgid "Expires on %1"
 msgstr "Expire au %1"
@@ -1924,9 +1920,9 @@ msgstr "Genre"
 msgid "Getting channels"
 msgstr "Récupération des canaux"
 
-#: internet/digitallyimportedservicebase.cpp:122
+#: internet/digitallyimportedservicebase.cpp:103
 msgid "Getting streams"
-msgstr "Les flux sont en cours de réception"
+msgstr "Réception des flux"
 
 #: ../bin/src/ui_addstreamdialog.h:116
 msgid "Give it a name:"
@@ -2374,6 +2370,10 @@ msgstr "Charger une pochette à partir d'une URL"
 msgid "Load cover from URL..."
 msgstr "Charger une pochette à partir d'une URL..."
 
+#: ui/albumcoverchoicecontroller.cpp:92
+msgid "Load cover from disk"
+msgstr ""
+
 #: ui/albumcoverchoicecontroller.cpp:58
 msgid "Load cover from disk..."
 msgstr "Charger la pochette depuis le disque..."
@@ -2820,7 +2820,7 @@ msgstr "Ogg Vorbis"
 msgid "Only show the first"
 msgstr "Afficher seulement le premier"
 
-#: internet/digitallyimportedservicebase.cpp:213
+#: internet/digitallyimportedservicebase.cpp:174
 #, qt-format
 msgid "Open %1 in browser"
 msgstr "Ouvrir %1 dans le navigateur"
@@ -3230,9 +3230,9 @@ msgstr "Actualiser la liste d'amis"
 msgid "Refresh station list"
 msgstr "Mettre à jour la liste des stations"
 
-#: internet/digitallyimportedservicebase.cpp:216
+#: internet/digitallyimportedservicebase.cpp:177
 msgid "Refresh streams"
-msgstr ""
+msgstr "Actualiser les flux"
 
 #: ui/equalizer.cpp:120
 msgid "Reggae"
@@ -3590,7 +3590,7 @@ msgstr "Utiliser l'affichage à l'écran (OSD)"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:169
 msgid "Show a tooltip with more information about each result"
-msgstr ""
+msgstr "Afficher une infobulle avec plus d'informations sur chaque résultat"
 
 #: widgets/nowplayingwidget.cpp:113
 msgid "Show above status bar"
@@ -3643,7 +3643,7 @@ msgstr "Afficher les boutons « j'aime » et « je déteste »"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:160
 msgid "Show the Global Search box above the sidebar"
-msgstr ""
+msgstr "Afficher la Recherche Globale au dessus de la barre latérale"
 
 #: ../bin/src/ui_lastfmsettingspage.h:152
 msgid "Show the scrobble button in the main window"
@@ -3781,7 +3781,7 @@ msgstr "Erreur lors de la connexion à Spotify"
 msgid "Spotify plugin"
 msgstr "Module externe Spotify"
 
-#: internet/spotifyblobdownloader.cpp:49
+#: internet/spotifyblobdownloader.cpp:54
 msgid "Spotify plugin not installed"
 msgstr "Le module externe de Spotify n'est pas installé"
 
@@ -3805,6 +3805,7 @@ msgstr "Démarrer transcodage"
 msgid "Start typing in the search box above to find music on Grooveshark."
 msgstr ""
 "Commencer à écrire dans le champ de recherche ci-dessus pour trouver de la "
+"musique dans Grooveshark."
 
 #: internet/spotifysearchplaylisttype.cpp:36
 msgid "Start typing in the search box above to find music on Spotify."
@@ -4192,7 +4193,7 @@ msgstr "Impossible de télécharger %1 (%2)"
 msgid "Unknown"
 msgstr "Inconnu"
 
-#: internet/digitallyimportedclient.cpp:61 internet/lastfmservice.cpp:455
+#: internet/digitallyimportedclient.cpp:68 internet/lastfmservice.cpp:455
 msgid "Unknown error"
 msgstr "Erreur de type inconnu"
 
