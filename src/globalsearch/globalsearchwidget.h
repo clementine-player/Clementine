@@ -147,6 +147,7 @@ private:
 
   QDesktopWidget* desktop_;
 
+  bool show_tooltip_;
   bool combine_identical_results_;
   QStringList provider_order_;
 

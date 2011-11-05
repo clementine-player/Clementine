@@ -48,6 +48,9 @@ public:
 
   bool event(QEvent* e);
 
+public slots:
+  void ReloadSettings();
+
 protected:
   void paintEvent(QPaintEvent*);
 
@@ -73,6 +76,8 @@ private:
   QWidgetList widgets_;
   QList<QAbstractButton*> result_buttons_;
   int active_result_;
+
+  bool show_tooltip_help_;
 };
 
 #endif // GLOBALSEARCHTOOLTIP_H

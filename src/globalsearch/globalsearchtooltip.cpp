@@ -15,6 +15,7 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "globalsearch.h"
 #include "globalsearchtooltip.h"
 #include "tooltipactionwidget.h"
 #include "tooltipresultwidget.h"
@@ -27,6 +28,7 @@
 #include <QKeyEvent>
 #include <QLayoutItem>
 #include <QPainter>
+#include <QSettings>
 #include <QVBoxLayout>
 
 const qreal GlobalSearchTooltip::kBorderRadius = 8.0;
@@ -40,7 +42,8 @@ GlobalSearchTooltip::GlobalSearchTooltip(QWidget* event_target)
   : QWidget(NULL),
     desktop_(qApp->desktop()),
     event_target_(event_target),
-    active_result_(0)
+    active_result_(0),
+    show_tooltip_help_(true)
 {
   setWindowFlags(Qt::Popup);
   setFocusPolicy(Qt::NoFocus);
@@ -50,6 +53,8 @@ GlobalSearchTooltip::GlobalSearchTooltip(QWidget* event_target)
   switch_action_ = new QAction(tr("Switch provider"), this);
   switch_action_->setShortcut(QKeySequence(Qt::Key_Tab));
   connect(switch_action_, SIGNAL(triggered()), SLOT(SwitchProvider()));
+
+  ReloadSettings();
 }
 
 void GlobalSearchTooltip::SetResults(const SearchProvider::ResultList& results) {
@@ -78,16 +83,18 @@ void GlobalSearchTooltip::SetResults(const SearchProvider::ResultList& results) 
     result_buttons_ << widget;
   }
 
-  // Add the action widget
-  QList<QAction*> actions;
-  if (results_.count() > 1) {
-    actions.append(switch_action_);
-  }
-  actions.append(common_actions_);
+  if (show_tooltip_help_) {
+    // Add the action widget
+    QList<QAction*> actions;
+    if (results_.count() > 1) {
+      actions.append(switch_action_);
+    }
+    actions.append(common_actions_);
 
-  action_widget_ = new TooltipActionWidget(this);
-  action_widget_->SetActions(actions);
-  AddWidget(action_widget_, &w, &y);
+    action_widget_ = new TooltipActionWidget(this);
+    action_widget_->SetActions(actions);
+    AddWidget(action_widget_, &w, &y);
+  }
 
   // Set the width of each widget
   foreach (QWidget* widget, widgets_) {
@@ -246,3 +253,9 @@ void GlobalSearchTooltip::SwitchProvider() {
   result_buttons_[active_result_]->setChecked(true);
 }
 
+void GlobalSearchTooltip::ReloadSettings() {
+  QSettings s;
+  s.beginGroup(GlobalSearch::kSettingsGroup);
+
+  show_tooltip_help_ = s.value("tooltip_help", true).toBool();
+}

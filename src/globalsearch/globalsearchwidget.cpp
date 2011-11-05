@@ -63,6 +63,7 @@ GlobalSearchWidget::GlobalSearchWidget(QWidget* parent)
     swap_models_timer_(new QTimer(this)),
     background_(":allthethings.png"),
     desktop_(qApp->desktop()),
+    show_tooltip_(true),
     combine_identical_results_(true)
 {
   ui_->setupUi(this);
@@ -566,8 +567,13 @@ void GlobalSearchWidget::ReloadSettings() {
   QSettings s;
   s.beginGroup(GlobalSearch::kSettingsGroup);
 
+  show_tooltip_ = s.value("tooltip", true).toBool();
   combine_identical_results_ = s.value("combine_identical_results", true).toBool();
   provider_order_ = s.value("provider_order", QStringList() << "library").toStringList();
+
+  if (tooltip_) {
+    tooltip_->ReloadSettings();
+  }
 }
 
 GlobalSearchWidget::CombineAction GlobalSearchWidget::CanCombineResults(
@@ -629,7 +635,7 @@ void GlobalSearchWidget::HidePopup() {
 }
 
 void GlobalSearchWidget::UpdateTooltip() {
-  if (!view_->isVisible()) {
+  if (!view_->isVisible() || !show_tooltip_) {
     if (tooltip_)
       tooltip_->hide();
     return;

@@ -826,6 +826,7 @@ void MainWindow::ReloadAllSettings() {
 
   // Other settings
   global_search_->ReloadSettings();
+  ui_->global_search->ReloadSettings();
   library_->ReloadSettings();
   player_->ReloadSettings();
   osd_->ReloadSettings();
