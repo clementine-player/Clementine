@@ -28,6 +28,9 @@ public:
 
   void LoadArtAsync(int id, const Result& result);
 
+  bool IsLoggedIn();
+  void ShowConfig();
+
 protected:
   void RecreateItems();
 

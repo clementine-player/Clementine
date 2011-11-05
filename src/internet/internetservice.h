@@ -58,9 +58,6 @@ public:
 
   virtual QString Icon() { return QString(); }
 
-  // Services which need user login will need to reimplement this method
-  virtual bool IsLoggedIn() const { return true; }
-
 public slots:
   // Show configuration panel for services which have one
   virtual void ShowConfig() { }

@@ -32,7 +32,7 @@ void GroovesharkSearchProvider::Init(GroovesharkService* service) {
   service_ = service;
   SearchProvider::Init("Grooveshark", "grooveshark",
                        QIcon(":providers/grooveshark.png"),
-                       WantsDelayedQueries | ArtIsProbablyRemote);
+                       WantsDelayedQueries | ArtIsProbablyRemote | CanShowConfig);
 
   connect(service_, SIGNAL(SimpleSearchResults(int, SongList)),
           SLOT(SearchDone(int, SongList)));

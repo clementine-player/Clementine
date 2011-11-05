@@ -184,5 +184,5 @@ void GlobalSearchSettingsPage::CurrentProviderChanged(QTreeWidgetItem* item) {
 
   ui_->up->setEnabled(row != 0);
   ui_->down->setEnabled(row != root->childCount() - 1);
-  ui_->configure->setEnabled(provider->CanShowConfig());
+  ui_->configure->setEnabled(provider->can_show_config());
 }

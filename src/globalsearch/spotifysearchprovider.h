@@ -36,7 +36,6 @@ public:
   void LoadTracksAsync(int id, const Result& result);
 
   bool IsLoggedIn();
-  bool CanShowConfig() const { return true; }
   void ShowConfig();
 
 private slots:

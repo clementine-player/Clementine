@@ -81,7 +81,12 @@ public:
     // normal place in the song metadata.  LoadArtAsync will never be called and
     // WantsSerialisedArtQueries and ArtIsProbablyRemote will be ignored if
     // they are set as well.  The GlobalSearch engine will load the art itself.
-    ArtIsInSongMetadata = 0x08
+    ArtIsInSongMetadata = 0x08,
+
+    // Indicates this provider has a config dialog that can be shown by calling
+    // CanShowConfig.  If this is not set then the button will be greyed out
+    // in the GUI.
+    CanShowConfig = 0x10
   };
   Q_DECLARE_FLAGS(Hints, Hint)
 
@@ -94,6 +99,7 @@ public:
   bool wants_serialised_art() const { return hints() & WantsSerialisedArtQueries; }
   bool art_is_probably_remote() const { return hints() & ArtIsProbablyRemote; }
   bool art_is_in_song_metadata() const { return hints() & ArtIsInSongMetadata; }
+  bool can_show_config() const { return hints() & CanShowConfig; }
 
   // Starts a search.  Must emit ResultsAvailable zero or more times and then
   // SearchFinished exactly once, using this ID.
@@ -110,8 +116,7 @@ public:
   // If provider needs user login to search and play songs, this method should
   // be reimplemented
   virtual bool IsLoggedIn() { return true; }
-  virtual bool CanShowConfig() const { return false; }
-  virtual void ShowConfig() { }
+  virtual void ShowConfig() { } // Remember to set the CanShowConfig hint
 
   static QImage ScaleAndPad(const QImage& image);
 

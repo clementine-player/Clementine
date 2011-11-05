@@ -23,7 +23,7 @@
 LastFMSearchProvider::LastFMSearchProvider(LastFMService* service, QObject* parent)
   : SimpleSearchProvider(parent),
     service_(service) {
-  Init("Last.fm", "lastfm", QIcon(":last.fm/as.png"));
+  Init("Last.fm", "lastfm", QIcon(":last.fm/as.png"), CanShowConfig);
   icon_ = ScaleAndPad(QImage(":last.fm/as.png"));
 
   set_safe_words(QStringList() << "lastfm" << "last.fm");
@@ -73,4 +73,12 @@ void LastFMSearchProvider::RecreateItems() {
   }
 
   SetItems(items);
+}
+
+bool LastFMSearchProvider::IsLoggedIn() {
+  return service_->IsAuthenticated();
+}
+
+void LastFMSearchProvider::ShowConfig() {
+  service_->ShowConfig();
 }
