@@ -25,7 +25,7 @@ DigitallyImportedSearchProvider::DigitallyImportedSearchProvider(
       service_(service)
 {
   Init(service_->name(), service->api_service_name(), service_->icon(),
-       ArtIsInSongMetadata);
+       ArtIsInSongMetadata | CanGiveSuggestions);
 
   set_safe_words(QStringList() << "sky.fm" << "skyfm" << "di.fm" << "difm"
                                << "digitallyimported");

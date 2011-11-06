@@ -44,6 +44,8 @@
 const int GlobalSearchWidget::kMinVisibleItems = 3;
 const int GlobalSearchWidget::kMaxVisibleItems = 25;
 const int GlobalSearchWidget::kSwapModelsTimeoutMsec = 250;
+const int GlobalSearchWidget::kSuggestionTimeoutMsec = 60000; // 1 minute
+const int GlobalSearchWidget::kSuggestionCount = 3;
 
 
 GlobalSearchWidget::GlobalSearchWidget(QWidget* parent)
@@ -64,7 +66,8 @@ GlobalSearchWidget::GlobalSearchWidget(QWidget* parent)
     background_(":allthethings.png"),
     desktop_(qApp->desktop()),
     show_tooltip_(true),
-    combine_identical_results_(true)
+    combine_identical_results_(true),
+    next_suggestion_timer_(new QTimer(this))
 {
   ui_->setupUi(this);
   ReloadSettings();
@@ -124,12 +127,16 @@ GlobalSearchWidget::GlobalSearchWidget(QWidget* parent)
   swap_models_timer_->setSingleShot(true);
   swap_models_timer_->setInterval(kSwapModelsTimeoutMsec);
 
+  next_suggestion_timer_->setInterval(kSuggestionTimeoutMsec);
+  hint_text_ = ui_->search->hint();
+
   connect(ui_->search, SIGNAL(textEdited(QString)), SLOT(TextEdited(QString)));
   connect(view_, SIGNAL(doubleClicked(QModelIndex)), SLOT(ResultDoubleClicked()));
   connect(view_->selectionModel(), SIGNAL(currentChanged(QModelIndex,QModelIndex)),
           SLOT(UpdateTooltip()));
   connect(swap_models_timer_, SIGNAL(timeout()), SLOT(SwapModels()));
   connect(ui_->settings, SIGNAL(clicked()), SLOT(SettingsClicked()));
+  connect(next_suggestion_timer_, SIGNAL(timeout()), SLOT(NextSuggestion()));
 }
 
 GlobalSearchWidget::~GlobalSearchWidget() {
@@ -194,6 +201,19 @@ void GlobalSearchWidget::paintEvent(QPaintEvent* e) {
   QColor light = Utils::StyleHelper::sidebarHighlight();
   p.setPen(light);
   p.drawLine(total_rect.bottomLeft(), total_rect.bottomRight());
+}
+
+void GlobalSearchWidget::hideEvent(QHideEvent* e) {
+  QWidget::hideEvent(e);
+
+  next_suggestion_timer_->stop();
+}
+
+void GlobalSearchWidget::showEvent(QShowEvent* e) {
+  QWidget::showEvent(e);
+
+  next_suggestion_timer_->start();
+  NextSuggestion();
 }
 
 void GlobalSearchWidget::TextEdited(const QString& text) {
@@ -669,4 +689,15 @@ void GlobalSearchWidget::UpdateTooltip() {
 
 void GlobalSearchWidget::SettingsClicked() {
   emit OpenSettingsAtPage(SettingsDialog::Page_GlobalSearch);
+}
+
+void GlobalSearchWidget::NextSuggestion() {
+  const QStringList suggestions = engine_->GetSuggestions(kSuggestionCount);
+  QString hint = hint_text_;
+
+  if (!suggestions.isEmpty()) {
+    hint += ", e.g. " + suggestions.join(", ");
+  }
+
+  ui_->search->set_hint(hint);
 }

@@ -86,7 +86,11 @@ public:
     // Indicates this provider has a config dialog that can be shown by calling
     // CanShowConfig.  If this is not set then the button will be greyed out
     // in the GUI.
-    CanShowConfig = 0x10
+    CanShowConfig = 0x10,
+
+    // This provider can provide some example search strings to display in the
+    // UI.
+    CanGiveSuggestions = 0x20
   };
   Q_DECLARE_FLAGS(Hints, Hint)
 
@@ -100,6 +104,7 @@ public:
   bool art_is_probably_remote() const { return hints() & ArtIsProbablyRemote; }
   bool art_is_in_song_metadata() const { return hints() & ArtIsInSongMetadata; }
   bool can_show_config() const { return hints() & CanShowConfig; }
+  bool can_give_suggestions() const { return hints() & CanGiveSuggestions; }
 
   // Starts a search.  Must emit ResultsAvailable zero or more times and then
   // SearchFinished exactly once, using this ID.
@@ -112,6 +117,11 @@ public:
   // Starts loading tracks for a result that was previously emitted by
   // ResultsAvailable.  Must emit TracksLoaded exactly once with this ID.
   virtual void LoadTracksAsync(int id, const Result& result);
+
+  // Returns an example search string to display in the UI.  The provider should
+  // pick one of its items at random.  Remember to set the CanGiveSuggestions
+  // hint.
+  virtual QString GetSuggestion() { return QString(); }
 
   // If provider needs user login to search and play songs, this method should
   // be reimplemented

@@ -32,7 +32,8 @@ LibrarySearchProvider::LibrarySearchProvider(LibraryBackendInterface* backend,
   : BlockingSearchProvider(parent),
     backend_(backend)
 {
-  Init(name, id, icon, WantsSerialisedArtQueries | ArtIsInSongMetadata);
+  Init(name, id, icon, WantsSerialisedArtQueries | ArtIsInSongMetadata |
+                       CanGiveSuggestions);
 }
 
 SearchProvider::ResultList LibrarySearchProvider::Search(int id, const QString& query) {
@@ -145,4 +146,46 @@ void LibrarySearchProvider::LoadTracksAsync(int id, const Result& result) {
   mime_data->songs = ret;
 
   emit TracksLoaded(id, mime_data);
+}
+
+QString LibrarySearchProvider::GetSuggestion() {
+  // We'd like to use order by random(), but that's O(n) in sqlite, so instead
+  // get the largest ROWID and pick a couple of random numbers within that
+  // range.
+
+  LibraryQuery q;
+  q.SetColumnSpec("ROWID");
+  q.SetOrderBy("ROWID DESC");
+  q.SetIncludeUnavailable(true);
+  q.SetLimit(1);
+
+  if (!backend_->ExecQuery(&q) || !q.Next()) {
+    return QString();
+  }
+
+  const int largest_rowid = q.Value(0).toInt();
+
+  for (int attempt=0 ; attempt<10 ; ++attempt) {
+    LibraryQuery q;
+    q.SetColumnSpec("artist, album");
+    q.SetIncludeUnavailable(true);
+    q.AddWhere("ROWID", qrand() % largest_rowid);
+    q.SetLimit(1);
+
+    if (!backend_->ExecQuery(&q) || !q.Next()) {
+      continue;
+    }
+
+    const QString artist = q.Value(0).toString();
+    const QString album  = q.Value(1).toString();
+
+    if (!artist.isEmpty() && !album.isEmpty())
+      return (qrand() % 2 == 0) ? artist : album;
+    else if (!artist.isEmpty())
+      return artist;
+    else if (!album.isEmpty())
+      return album;
+  }
+
+  return QString();
 }

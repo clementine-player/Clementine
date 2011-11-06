@@ -318,3 +318,23 @@ void GlobalSearch::SaveProvidersSettings() {
     s.setValue("enabled_" + provider->id(), providers_[provider].enabled_);
   }
 }
+
+QStringList GlobalSearch::GetSuggestions(int max) {
+  QStringList ret;
+  QList<SearchProvider*> eligible_providers;
+
+  foreach (SearchProvider* provider, providers_.keys()) {
+    if (is_provider_enabled(provider) && provider->can_give_suggestions()) {
+      eligible_providers << provider;
+    }
+  }
+
+  while (ret.count() < max && !eligible_providers.isEmpty()) {
+    SearchProvider* provider = eligible_providers.takeAt(qrand() % eligible_providers.count());
+    QString suggestion = provider->GetSuggestion().trimmed();
+    if (!suggestion.isEmpty())
+      ret << suggestion;
+  }
+
+  return ret;
+}

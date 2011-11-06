@@ -124,3 +124,18 @@ void SimpleSearchProvider::SetItems(const ItemList& items) {
   QMutexLocker l(&items_mutex_);
   items_ = items;
 }
+
+QString SimpleSearchProvider::GetSuggestion() {
+  QMutexLocker l(&items_mutex_);
+
+  if (items_.isEmpty())
+    return QString();
+
+  for (int attempt=0 ; attempt<10 ; ++attempt) {
+    const Item& item = items_[qrand() % items_.count()];
+    if (!item.keyword_.isEmpty())
+      return item.keyword_;
+  }
+
+  return QString();
+}

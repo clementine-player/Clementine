@@ -33,6 +33,7 @@ public:
 
   // SearchProvider
   void LoadTracksAsync(int id, const Result& result);
+  QString GetSuggestion();
 
 protected slots:
   // Calls RecreateItems now if the user has done a global search with this

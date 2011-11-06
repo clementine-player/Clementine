@@ -22,7 +22,7 @@ SomaFMSearchProvider::SomaFMSearchProvider(SomaFMService* service, QObject* pare
   : SimpleSearchProvider(parent),
     service_(service)
 {
-  Init("SomaFM", "somafm", QIcon(":/providers/somafm.png"));
+  Init("SomaFM", "somafm", QIcon(":/providers/somafm.png"), CanGiveSuggestions);
   set_result_limit(3);
   icon_ = ScaleAndPad(QImage(":/providers/somafm.png"));
 

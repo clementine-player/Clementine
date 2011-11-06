@@ -30,6 +30,7 @@ public:
 
   ResultList Search(int id, const QString& query);
   void LoadTracksAsync(int id, const Result& result);
+  QString GetSuggestion();
 
 private:
   LibraryBackendInterface* backend_;

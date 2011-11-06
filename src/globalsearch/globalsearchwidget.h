@@ -50,6 +50,8 @@ public:
   static const int kMinVisibleItems;
   static const int kMaxVisibleItems;
   static const int kSwapModelsTimeoutMsec;
+  static const int kSuggestionTimeoutMsec;
+  static const int kSuggestionCount;
 
   enum Role {
     Role_PrimaryResult = Qt::UserRole + 1,
@@ -63,7 +65,7 @@ public:
   // Called by the delegate
   void LazyLoadArt(const QModelIndex& index);
 
-  // QWidget
+  // QObject
   bool eventFilter(QObject* o, QEvent* e);
 
 public slots:
@@ -76,6 +78,8 @@ signals:
 protected:
   void resizeEvent(QResizeEvent* e);
   void paintEvent(QPaintEvent* e);
+  void showEvent(QShowEvent* e);
+  void hideEvent(QHideEvent* e);
 
 private slots:
   void TextEdited(const QString& text);
@@ -97,6 +101,8 @@ private slots:
   void UpdateTooltip();
 
   void SwapModels();
+
+  void NextSuggestion();
 
 private:
   // Return values from CanCombineResults
@@ -159,6 +165,9 @@ private:
   QAction* replace_;
   QAction* replace_and_play_;
   QList<QAction*> actions_;
+
+  QString hint_text_;
+  QTimer* next_suggestion_timer_;
 };
 
 #endif // GLOBALSEARCHWIDGET_H

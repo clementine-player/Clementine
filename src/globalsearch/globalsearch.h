@@ -44,6 +44,7 @@ public:
   int SearchAsync(const QString& query);
   int LoadArtAsync(const SearchProvider::Result& result);
   int LoadTracksAsync(const SearchProvider::Result& result);
+  QStringList GetSuggestions(int max);
 
   void CancelSearch(int id);
   void CancelArt(int id);
