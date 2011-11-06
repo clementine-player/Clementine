@@ -128,6 +128,7 @@ set(SOURCES
   globalsearch/groovesharksearchprovider.cpp
   globalsearch/icecastsearchprovider.cpp
   globalsearch/librarysearchprovider.cpp
+  globalsearch/savedradiosearchprovider.cpp
   globalsearch/searchprovider.cpp
   globalsearch/simplesearchprovider.cpp
   globalsearch/somafmsearchprovider.cpp

@@ -37,27 +37,6 @@ class SavedRadio : public InternetService {
     Type_Stream = 2000,
   };
 
-  static const char* kServiceName;
-  static const char* kSettingsGroup;
-
-  QStandardItem* CreateRootItem();
-  void LazyPopulate(QStandardItem* item);
-
-  void ShowContextMenu(const QModelIndex& index, const QPoint& global_pos);
-
-  void Add(const QUrl& url, const QString& name = QString());
-
- signals:
-  void ShowAddStreamDialog();
-
- protected:
-  QModelIndex GetCurrentIndex();
-
- private slots:
-  void Remove();
-  void Edit();
-
- private:
   struct Stream {
     Stream(const QUrl& url, const QString& name = QString())
       : url_(url), name_(name) {}
@@ -68,7 +47,32 @@ class SavedRadio : public InternetService {
     QUrl url_;
     QString name_;
   };
+  typedef QList<Stream> StreamList;
 
+  static const char* kServiceName;
+  static const char* kSettingsGroup;
+
+  QStandardItem* CreateRootItem();
+  void LazyPopulate(QStandardItem* item);
+
+  void ShowContextMenu(const QModelIndex& index, const QPoint& global_pos);
+
+  void Add(const QUrl& url, const QString& name = QString());
+
+  StreamList Streams() const { return streams_; }
+
+ signals:
+  void ShowAddStreamDialog();
+  void StreamsChanged();
+
+ protected:
+  QModelIndex GetCurrentIndex();
+
+ private slots:
+  void Remove();
+  void Edit();
+
+ private:
   void LoadStreams();
   void SaveStreams();
   void AddStreamToList(const Stream& stream, QStandardItem* parent);
@@ -81,7 +85,7 @@ class SavedRadio : public InternetService {
   QAction* remove_action_;
   QAction* edit_action_;
 
-  QList<Stream> streams_;
+  StreamList streams_;
 
   boost::scoped_ptr<AddStreamDialog> edit_dialog_;
 };

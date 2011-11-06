@@ -18,6 +18,8 @@
 #include "internetmodel.h"
 #include "savedradio.h"
 #include "core/mimedata.h"
+#include "globalsearch/globalsearch.h"
+#include "globalsearch/savedradiosearchprovider.h"
 #include "ui/addstreamdialog.h"
 #include "ui/iconloader.h"
 
@@ -33,6 +35,8 @@ SavedRadio::SavedRadio(InternetModel* parent)
     root_(NULL)
 {
   LoadStreams();
+
+  model()->global_search()->AddProvider(new SavedRadioSearchProvider(this, this));
 }
 
 SavedRadio::~SavedRadio() {
@@ -84,6 +88,8 @@ void SavedRadio::SaveStreams() {
     s.setValue("name", streams_[i].name_);
   }
   s.endArray();
+
+  emit StreamsChanged();
 }
 
 void SavedRadio::ShowContextMenu(const QModelIndex& index,
