@@ -696,7 +696,7 @@ void GlobalSearchWidget::NextSuggestion() {
   QString hint = hint_text_;
 
   if (!suggestions.isEmpty()) {
-    hint += ", e.g. " + suggestions.join(", ");
+    hint += QString(", %1 ").arg(tr("e.g.")) + suggestions.join(", ");
   }
 
   ui_->search->set_hint(hint);
