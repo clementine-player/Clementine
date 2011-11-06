@@ -18,10 +18,13 @@
 #include "somafmservice.h"
 #include "somafmurlhandler.h"
 #include "internetmodel.h"
+#include "core/closure.h"
 #include "core/logging.h"
 #include "core/network.h"
 #include "core/player.h"
 #include "core/taskmanager.h"
+#include "globalsearch/globalsearch.h"
+#include "globalsearch/somafmsearchprovider.h"
 #include "ui/iconloader.h"
 
 #include <QCoreApplication>
@@ -33,18 +36,24 @@
 #include <QtDebug>
 
 const char* SomaFMService::kServiceName = "SomaFM";
+const char* SomaFMService::kSettingsGroup = "SomaFM";
 const char* SomaFMService::kChannelListUrl = "http://somafm.com/channels.xml";
 const char* SomaFMService::kHomepage = "http://somafm.com";
+const int SomaFMService::kStreamsCacheDurationSecs =
+    60 * 60 * 24 * 28; // 4 weeks
 
 SomaFMService::SomaFMService(InternetModel* parent)
   : InternetService(kServiceName, parent, parent),
     url_handler_(new SomaFMUrlHandler(this, this)),
     root_(NULL),
     context_menu_(NULL),
-    get_channels_task_id_(0),
-    network_(new NetworkAccessManager(this))
+    network_(new NetworkAccessManager(this)),
+    streams_(kSettingsGroup, "streams", kStreamsCacheDurationSecs)
 {
   model()->player()->RegisterUrlHandler(url_handler_);
+  model()->global_search()->AddProvider(new SomaFMSearchProvider(this, this));
+
+  ReloadSettings();
 }
 
 SomaFMService::~SomaFMService() {
@@ -60,7 +69,7 @@ QStandardItem* SomaFMService::CreateRootItem() {
 void SomaFMService::LazyPopulate(QStandardItem* item) {
   switch (item->data(InternetModel::Role_Type).toInt()) {
     case InternetModel::Type_Service:
-      RefreshChannels();
+      RefreshStreams();
       break;
 
     default:
@@ -73,25 +82,25 @@ void SomaFMService::ShowContextMenu(const QModelIndex& index, const QPoint& glob
     context_menu_ = new QMenu;
     context_menu_->addActions(GetPlaylistActions());
     context_menu_->addAction(IconLoader::Load("download"), tr("Open somafm.com in browser"), this, SLOT(Homepage()));
-    context_menu_->addAction(IconLoader::Load("view-refresh"), tr("Refresh channels"), this, SLOT(RefreshChannels()));
+    context_menu_->addAction(IconLoader::Load("view-refresh"), tr("Refresh channels"), this, SLOT(RefreshStreams()));
   }
 
   context_item_ = model()->itemFromIndex(index);
   context_menu_->popup(global_pos);
 }
 
-void SomaFMService::RefreshChannels() {
+void SomaFMService::ForceRefreshStreams() {
   QNetworkReply* reply = network_->get(QNetworkRequest(QUrl(kChannelListUrl)));
-  connect(reply, SIGNAL(finished()), SLOT(RefreshChannelsFinished()));
+  int task_id = model()->task_manager()->StartTask(tr("Getting channels"));
 
-  if (!get_channels_task_id_)
-    get_channels_task_id_ = model()->task_manager()->StartTask(tr("Getting channels"));
+  NewClosure(reply, SIGNAL(finished()),
+             this, SLOT(RefreshStreamsFinished(QNetworkReply*,int)),
+             reply, task_id);
 }
 
-void SomaFMService::RefreshChannelsFinished() {
-  QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
-  model()->task_manager()->SetTaskFinished(get_channels_task_id_);
-  get_channels_task_id_ = 0;
+void SomaFMService::RefreshStreamsFinished(QNetworkReply* reply, int task_id) {
+  model()->task_manager()->SetTaskFinished(task_id);
+  reply->deleteLater();
 
   if (reply->error() != QNetworkReply::NoError) {
     // TODO: Error handling
@@ -99,8 +108,7 @@ void SomaFMService::RefreshChannelsFinished() {
     return;
   }
 
-  if (root_->hasChildren())
-    root_->removeRows(0, root_->rowCount());
+  StreamList list;
 
   QXmlStreamReader reader(reply);
   while (!reader.atEnd()) {
@@ -108,39 +116,36 @@ void SomaFMService::RefreshChannelsFinished() {
 
     if (reader.tokenType() == QXmlStreamReader::StartElement &&
         reader.name() == "channel") {
-      ReadChannel(reader);
+      ReadChannel(reader, &list);
     }
   }
+
+  streams_.Update(list);
+  PopulateStreams();
+  emit StreamsChanged();
 }
 
-void SomaFMService::ReadChannel(QXmlStreamReader& reader) {
-  Song song;
+void SomaFMService::ReadChannel(QXmlStreamReader& reader, StreamList* ret) {
+  Stream stream;
 
   while (!reader.atEnd()) {
     switch (reader.readNext()) {
       case QXmlStreamReader::EndElement:
-        if (!song.url().isEmpty()) {
-          QStandardItem* item = new QStandardItem(QIcon(":last.fm/icon_radio.png"), QString());
-          item->setText(song.title());
-
-          song.set_title("SomaFM " + song.title());
-          item->setData(QVariant::fromValue(song), InternetModel::Role_SongMetadata);
-          item->setData(InternetModel::PlayBehaviour_SingleItem, InternetModel::Role_PlayBehaviour);
-
-          root_->appendRow(item);
+        if (!stream.url_.isEmpty()) {
+          ret->append(stream);
         }
         return;
 
       case QXmlStreamReader::StartElement:
         if (reader.name() == "title") {
-          song.set_title(reader.readElementText());
+          stream.title_ = reader.readElementText();
         } else if (reader.name() == "dj") {
-          song.set_artist(reader.readElementText());
+          stream.dj_ = reader.readElementText();
         } else if (reader.name() == "fastpls" && reader.attributes().value("format") == "mp3") {
           QUrl url(reader.readElementText());
           url.setScheme("somafm");
 
-          song.set_url(url);
+          stream.url_ = url;
         } else {
           ConsumeElement(reader);
         }
@@ -150,6 +155,15 @@ void SomaFMService::ReadChannel(QXmlStreamReader& reader) {
         break;
     }
   }
+}
+
+Song SomaFMService::Stream::ToSong() const {
+  Song ret;
+  ret.set_valid(true);
+  ret.set_title("SomaFM " + title_);
+  ret.set_artist(dj_);
+  ret.set_url(url_);
+  return ret;
 }
 
 void SomaFMService::ConsumeElement(QXmlStreamReader& reader) {
@@ -176,4 +190,51 @@ QModelIndex SomaFMService::GetCurrentIndex() {
 
 PlaylistItem::Options SomaFMService::playlistitem_options() const {
   return PlaylistItem::PauseDisabled;
+}
+
+SomaFMService::StreamList SomaFMService::Streams() {
+  if (IsStreamListStale()) {
+    metaObject()->invokeMethod(this, "ForceRefreshStreams", Qt::QueuedConnection);
+  }
+  return streams_;
+}
+
+void SomaFMService::RefreshStreams() {
+  if (IsStreamListStale()) {
+    ForceRefreshStreams();
+    return;
+  }
+  PopulateStreams();
+}
+
+void SomaFMService::PopulateStreams() {
+  if (root_->hasChildren())
+    root_->removeRows(0, root_->rowCount());
+
+  foreach (const Stream& stream, streams_) {
+    QStandardItem* item = new QStandardItem(QIcon(":last.fm/icon_radio.png"), QString());
+    item->setText(stream.title_);
+    item->setData(QVariant::fromValue(stream.ToSong()), InternetModel::Role_SongMetadata);
+    item->setData(InternetModel::PlayBehaviour_SingleItem, InternetModel::Role_PlayBehaviour);
+
+    root_->appendRow(item);
+  }
+}
+
+QDataStream& operator<<(QDataStream& out, const SomaFMService::Stream& stream) {
+  out << stream.title_
+      << stream.dj_
+      << stream.url_;
+  return out;
+}
+
+QDataStream& operator>>(QDataStream& in, SomaFMService::Stream& stream) {
+  in >> stream.title_
+     >> stream.dj_
+     >> stream.url_;
+  return in;
+}
+
+void SomaFMService::ReloadSettings() {
+  streams_.Load();
 }

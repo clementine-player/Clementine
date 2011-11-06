@@ -130,6 +130,7 @@ set(SOURCES
   globalsearch/librarysearchprovider.cpp
   globalsearch/searchprovider.cpp
   globalsearch/simplesearchprovider.cpp
+  globalsearch/somafmsearchprovider.cpp
   globalsearch/tooltipactionwidget.cpp
   globalsearch/tooltipresultwidget.cpp
 
@@ -377,6 +378,7 @@ set(HEADERS
   globalsearch/groovesharksearchprovider.h
   globalsearch/searchprovider.h
   globalsearch/simplesearchprovider.h
+  globalsearch/somafmsearchprovider.h
   globalsearch/tooltipactionwidget.h
   globalsearch/tooltipresultwidget.h
 

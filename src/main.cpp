@@ -46,6 +46,7 @@
 #include "globalsearch/globalsearch.h"
 #include "internet/digitallyimportedclient.h"
 #include "internet/internetmodel.h"
+#include "internet/somafmservice.h"
 #include "library/directory.h"
 #include "playlist/playlist.h"
 #include "playlist/playlistmanager.h"
@@ -229,7 +230,9 @@ int main(int argc, char *argv[]) {
   qRegisterMetaType<SearchProvider::Result>("SearchProvider::Result");
   qRegisterMetaType<SearchProvider::ResultList>("SearchProvider::ResultList");
   qRegisterMetaType<DigitallyImportedClient::Channel>("DigitallyImportedClient::Channel");
+  qRegisterMetaType<SomaFMService::Stream>("SomaFMService::Stream");
   qRegisterMetaTypeStreamOperators<DigitallyImportedClient::Channel>("DigitallyImportedClient::Channel");
+  qRegisterMetaTypeStreamOperators<SomaFMService::Stream>("SomaFMService::Stream");
 
   qRegisterMetaType<GstBuffer*>("GstBuffer*");
   qRegisterMetaType<GstElement*>("GstElement*");
