@@ -61,7 +61,6 @@ GSTREAMER_PLUGINS=[
     'libgstmusepack.so',
     'libgstogg.so',
     'libgstqtdemux.so',
-    'libgstqtwrapper.so',
     'libgstreplaygain.so',
     'libgstspeex.so',
     'libgsttaglib.so',
@@ -262,7 +261,7 @@ def FixBinary(path):
 
 def CopyLibrary(path):
   new_path = os.path.join(frameworks_dir, os.path.basename(path))
-  args = ['ditto', '--arch=i386', path, new_path]
+  args = ['ditto', '--arch=x86_64', path, new_path]
   commands.append(args)
   return new_path
 
@@ -270,7 +269,7 @@ def CopyPlugin(path, subdir):
   new_path = os.path.join(plugins_dir, subdir, os.path.basename(path))
   args = ['mkdir', '-p', os.path.dirname(new_path)]
   commands.append(args)
-  args = ['ditto', '--arch=i386', path, new_path]
+  args = ['ditto', '--arch=x86_64', path, new_path]
   commands.append(args)
   return new_path
 
@@ -282,7 +281,7 @@ def CopyFramework(path):
       break
   args = ['mkdir', '-p', full_path]
   commands.append(args)
-  args = ['ditto', '--arch=i386', path, full_path]
+  args = ['ditto', '--arch=x86_64', path, full_path]
   commands.append(args)
 
   menu_nib = os.path.join(os.path.split(path)[0], 'Resources', 'qt_menu.nib')
