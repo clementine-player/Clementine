@@ -60,11 +60,6 @@ public:
 
   virtual QString Icon() { return QString(); }
 
-public slots:
-  // Show configuration panel for services which have one
-  virtual void ShowConfig() { }
-  
-
 signals:
   void StreamError(const QString& message);
   void StreamMetadataFound(const QUrl& original_url, const Song& song);

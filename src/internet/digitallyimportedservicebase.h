@@ -65,6 +65,9 @@ public:
   void SongFromChannel(const DigitallyImportedClient::Channel& channel,
                        Song* song) const;
 
+public slots:
+  void ShowSettingsDialog();
+
 signals:
   void StreamsChanged();
 
@@ -77,7 +80,6 @@ private slots:
   void ForceRefreshStreams();
   void RefreshStreams();
   void RefreshStreamsFinished(QNetworkReply* reply, int task_id);
-  void ShowSettingsDialog();
 
 private:
   void PopulateStreams();

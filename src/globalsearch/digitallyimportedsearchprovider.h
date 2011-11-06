@@ -27,6 +27,8 @@ public:
   DigitallyImportedSearchProvider(DigitallyImportedServiceBase* service,
                                   QObject* parent);
 
+  void ShowConfig();
+
 protected:
   void RecreateItems();
 
