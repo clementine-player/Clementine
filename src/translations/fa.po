@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2011-11-04 13:47+0000\n"
+"PO-Revision-Date: 2011-11-05 18:36+0000\n"
 "Last-Translator: clementinebuildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -348,7 +348,7 @@ msgstr "افزودن خط جدید اگر توسط آگاه‌ساز پشتیب�
 msgid "Add action"
 msgstr "افزودن کنش"
 
-#: globalsearch/globalsearchwidget.cpp:96
+#: globalsearch/globalsearchwidget.cpp:97
 msgid "Add and play now"
 msgstr ""
 
@@ -360,7 +360,7 @@ msgstr "افزودن جریان دیگر..."
 msgid "Add directory..."
 msgstr "افزودن پوشه..."
 
-#: ui/mainwindow.cpp:1574
+#: ui/mainwindow.cpp:1562
 msgid "Add file"
 msgstr ""
 
@@ -372,7 +372,7 @@ msgstr "افزودن پرونده..."
 msgid "Add files to transcode"
 msgstr "افزودن پرونده‌ها به تراکد"
 
-#: ui/mainwindow.cpp:1599
+#: ui/mainwindow.cpp:1587
 msgid "Add folder"
 msgstr "افزودن پوشه"
 
@@ -440,11 +440,11 @@ msgstr "افزودن برچسب سال آهنگ"
 msgid "Add stream..."
 msgstr "افزودن جریان..."
 
-#: ui/mainwindow.cpp:1403
+#: ui/mainwindow.cpp:1391
 msgid "Add to another playlist"
 msgstr "افزودن به لیست پخش دیگر"
 
-#: globalsearch/globalsearchwidget.cpp:95
+#: globalsearch/globalsearchwidget.cpp:96
 #: ../bin/src/ui_albumcovermanager.h:152
 msgid "Add to playlist"
 msgstr "افزودن به لیست پخش"
@@ -508,7 +508,7 @@ msgstr "آلبوم (بلندی صدای ایده‌آل برای تمام قطع
 msgid "Album artist"
 msgstr "هنرمند آلبوم"
 
-#: internet/jamendoservice.cpp:401
+#: internet/jamendoservice.cpp:410
 msgid "Album info on jamendo.com..."
 msgstr "اطلاعات آلبوم در jamendo.com..."
 
@@ -579,7 +579,7 @@ msgstr "پنجره اصلی را همواره نمایش بده"
 msgid "Always start playing"
 msgstr "همواره پخش را شروع کن"
 
-#: internet/spotifyblobdownloader.cpp:55
+#: internet/spotifyblobdownloader.cpp:59
 msgid ""
 "An additional plugin is required to use Spotify in Clementine.  Would you "
 "like to download and install it now?"
@@ -604,7 +604,7 @@ msgstr "مشکلی هنگام  فراخوانی بانک اطلاعاتی آی�
 msgid "An error occurred writing metadata to '%1'"
 msgstr "مشکلی در نوشتن ابرداده در '%1' پیش آمد"
 
-#: internet/lastfmservice.cpp:918
+#: internet/lastfmservice.cpp:900
 #, qt-format
 msgid "An unknown last.fm error occurred: %1"
 msgstr "مشکل ناشناخته‌ای از last.fm پیش آمد: %1"
@@ -622,7 +622,7 @@ msgid "Append files/URLs to the playlist"
 msgstr "پیوست پرونده/URL به لیست پخش"
 
 #: devices/deviceview.cpp:216 internet/internetservice.cpp:53
-#: library/libraryview.cpp:236 widgets/fileviewlist.cpp:31
+#: library/libraryview.cpp:243 widgets/fileviewlist.cpp:31
 msgid "Append to current playlist"
 msgstr "پیوست به لیست پخش جاری"
 
@@ -639,6 +639,10 @@ msgstr "فشرده‌سازی برای چیده نشدن"
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "آیا مطمئنید که می‌خواهید پیش‌نشاندهٔ \"%1\" را پاک کنید؟"
 
+#: internet/groovesharkservice.cpp:804
+msgid "Are you sure you want to delete this playlist?"
+msgstr ""
+
 #: ui/edittagdialog.cpp:704
 msgid "Are you sure you want to reset this song's statistics?"
 msgstr "آیا مطمئنید که می‌خواهید آمارهٔ این آهنگ را  پاک کنید؟"
@@ -653,11 +657,11 @@ msgstr "آیا مطمئنید که می‌خواهید آمارهٔ این آه�
 msgid "Artist"
 msgstr "هنرمند"
 
-#: ui/mainwindow.cpp:270
+#: ui/mainwindow.cpp:257
 msgid "Artist info"
 msgstr "اطلاعات هنرمند"
 
-#: internet/lastfmservice.cpp:190
+#: internet/lastfmservice.cpp:189
 msgid "Artist radio"
 msgstr "رادیوی هنرمند"
 
@@ -678,7 +682,7 @@ msgid "Authenticating..."
 msgstr "در حال احراز هویت..."
 
 #: internet/digitallyimportedsettingspage.cpp:82
-#: internet/magnatunesettingspage.cpp:113 internet/lastfmservice.cpp:434
+#: internet/magnatunesettingspage.cpp:113 internet/lastfmservice.cpp:430
 #: internet/lastfmsettingspage.cpp:79 remote/remotesettingspage.cpp:113
 msgid "Authentication failed"
 msgstr "ناکامی در احراز هویت"
@@ -808,7 +812,7 @@ msgstr "CDDA"
 msgid "CUE sheet support"
 msgstr "برگهٔ پشتیبانی CUE"
 
-#: internet/spotifyblobdownloader.cpp:39
+#: internet/spotifyblobdownloader.cpp:43
 msgid "Cancel"
 msgstr "لغو"
 
@@ -836,7 +840,7 @@ msgstr "تغییر حالت آمیخته"
 msgid "Change the language"
 msgstr "تغییر زبان"
 
-#: ui/mainwindow.cpp:610
+#: ui/mainwindow.cpp:597
 msgid "Check for updates..."
 msgstr "بررسی به‌روز رسانی..."
 
@@ -947,7 +951,7 @@ msgstr "نمایشگر تصاویر کلمنتاین"
 msgid "Clementine was unable to find results for this file"
 msgstr "کلمنتاین نتوانست نتایج این پرونده را بیابد"
 
-#: library/libraryview.cpp:218
+#: library/libraryview.cpp:225
 msgid "Click here to add some music"
 msgstr "برای افزودن آهنگ‌ها، اینجا را فشار دهید"
 
@@ -1006,15 +1010,15 @@ msgstr "تکمیل اتوماتیک برچسب‌ها..."
 msgid "Composer"
 msgstr "تنظیم‌کننده"
 
-#: internet/groovesharkservice.cpp:450
+#: internet/groovesharkservice.cpp:466
 msgid "Configure Grooveshark..."
 msgstr ""
 
-#: internet/lastfmservice.cpp:108
+#: internet/lastfmservice.cpp:109
 msgid "Configure Last.fm..."
 msgstr "پیکربندی Last.fm..."
 
-#: internet/magnatuneservice.cpp:265
+#: internet/magnatuneservice.cpp:273
 msgid "Configure Magnatune..."
 msgstr "پیکربندی Magnatune..."
 
@@ -1026,11 +1030,11 @@ msgstr "پیکربندی میان‌برها"
 msgid "Configure Spotify..."
 msgstr "پیکربندی Spotify..."
 
-#: ui/mainwindow.cpp:504
+#: ui/mainwindow.cpp:491
 msgid "Configure library..."
 msgstr "پیکربندی کتابخانه..."
 
-#: internet/digitallyimportedservicebase.cpp:181
+#: internet/digitallyimportedservicebase.cpp:180
 #: ../bin/src/ui_globalsearchsettingspage.h:167
 msgid "Configure..."
 msgstr ""
@@ -1059,12 +1063,12 @@ msgstr "برگرداندن تمام موسیقی"
 msgid "Convert any music that the device can't play"
 msgstr "برگردان تمام موسیقی‌هایی که دستگاه نمی‌تواند پخش کند"
 
-#: library/libraryview.cpp:258 ui/mainwindow.cpp:537
+#: library/libraryview.cpp:265 ui/mainwindow.cpp:524
 #: widgets/fileviewlist.cpp:43
 msgid "Copy to device..."
 msgstr "کپی‌کردن در دستگاه..."
 
-#: devices/deviceview.cpp:223 ui/mainwindow.cpp:534
+#: devices/deviceview.cpp:223 ui/mainwindow.cpp:521
 #: widgets/fileviewlist.cpp:38
 msgid "Copy to library..."
 msgstr "کپی‌کردن در کتابخانه..."
@@ -1100,7 +1104,7 @@ msgstr ""
 "نمی‌توانم رمزگذاری برای %1 پیدا کنم، بررسی کنید که افزونهٔ مناسب GStream را "
 "نصب کرده‌اید"
 
-#: internet/lastfmservice.cpp:915
+#: internet/lastfmservice.cpp:897
 msgid "Couldn't load the last.fm radio station"
 msgstr "نمی‌توانم ایستگاه رادیویی last.fm را بارگیری کنم"
 
@@ -1140,6 +1144,10 @@ msgstr "جلد هنری از %1 نشانده شد"
 #, qt-format
 msgid "Covers from %1"
 msgstr "جلدها از %1"
+
+#: internet/groovesharkservice.cpp:451 internet/groovesharkservice.cpp:756
+msgid "Create a new Grooveshark playlist"
+msgstr ""
 
 #: ../bin/src/ui_playbacksettingspage.h:262
 msgid "Cross-fade when changing tracks automatically"
@@ -1229,7 +1237,7 @@ msgstr "سفارشی"
 msgid "Custom message settings"
 msgstr "تنظیم پیام سفارشی"
 
-#: internet/lastfmservice.cpp:198
+#: internet/lastfmservice.cpp:197
 msgid "Custom radio"
 msgstr "رادیوی سفارشی"
 
@@ -1277,8 +1285,12 @@ msgstr "پیش‌فرضها"
 msgid "Delay between visualizations"
 msgstr "تأخیر بین تصویرسازیها"
 
-#: devices/deviceview.cpp:393 library/libraryview.cpp:450
-#: ui/mainwindow.cpp:1837 widgets/fileview.cpp:185
+#: internet/groovesharkservice.cpp:454 internet/groovesharkservice.cpp:803
+msgid "Delete Grooveshark playlist"
+msgstr ""
+
+#: devices/deviceview.cpp:393 library/libraryview.cpp:459
+#: ui/mainwindow.cpp:1825 widgets/fileview.cpp:185
 msgid "Delete files"
 msgstr "پاک کردن پرونده‌ها"
 
@@ -1286,7 +1298,7 @@ msgstr "پاک کردن پرونده‌ها"
 msgid "Delete from device..."
 msgstr "پاک کردن از دستگاه..."
 
-#: library/libraryview.cpp:260 ui/mainwindow.cpp:538
+#: library/libraryview.cpp:267 ui/mainwindow.cpp:525
 #: widgets/fileviewlist.cpp:44
 msgid "Delete from disk..."
 msgstr "پاک کردن از دیسک..."
@@ -1295,7 +1307,7 @@ msgstr "پاک کردن از دیسک..."
 msgid "Delete preset"
 msgstr "پاک کردن پیش‌نشانده"
 
-#: library/libraryview.cpp:252
+#: library/libraryview.cpp:259
 msgid "Delete smart playlist"
 msgstr "پاک کردن لیست‌پخش هوشمند"
 
@@ -1307,11 +1319,11 @@ msgstr "پاک کردن اصل پرونده‌ها"
 msgid "Deleting files"
 msgstr "پاک کردن پرونده‌ها"
 
-#: ui/mainwindow.cpp:1348
+#: ui/mainwindow.cpp:1336
 msgid "Dequeue selected tracks"
 msgstr "صف‌بندی دوبارهٔ قطعه‌های انتخاب شده"
 
-#: ui/mainwindow.cpp:1346
+#: ui/mainwindow.cpp:1334
 msgid "Dequeue track"
 msgstr "صف‌بندی دوبارهٔ قطعه"
 
@@ -1339,7 +1351,7 @@ msgstr "نام دستگاه"
 msgid "Device properties..."
 msgstr "ویژگیهای دستگاه..."
 
-#: ui/mainwindow.cpp:267
+#: ui/mainwindow.cpp:254
 msgid "Devices"
 msgstr "‌دستگاه‌ها"
 
@@ -1389,6 +1401,7 @@ msgstr "دیسک"
 msgid "Discontinuous transmission"
 msgstr "ارسال ناپیوسته"
 
+#: internet/icecastfilterwidget.cpp:33 library/libraryfilterwidget.cpp:109
 #: ../bin/src/ui_librarysettingspage.h:169
 msgid "Display options"
 msgstr "گزینه‌های نمایش"
@@ -1413,7 +1426,7 @@ msgstr "هیچ موسیقی را تبدیل نکن"
 msgid "Don't repeat"
 msgstr "تکرار نکن"
 
-#: library/libraryview.cpp:274
+#: library/libraryview.cpp:281
 msgid "Don't show in various artists"
 msgstr "در هنرمندان گوناگون نشان نده"
 
@@ -1441,11 +1454,11 @@ msgstr "بارگیری پوشه"
 msgid "Download membership"
 msgstr "بارگیری عضویت"
 
-#: internet/magnatuneservice.cpp:261
+#: internet/magnatuneservice.cpp:269
 msgid "Download this album"
 msgstr "بارگیری آلبوم"
 
-#: internet/jamendoservice.cpp:403
+#: internet/jamendoservice.cpp:412
 msgid "Download this album..."
 msgstr "بارگیری این آلبوم..."
 
@@ -1453,19 +1466,19 @@ msgstr "بارگیری این آلبوم..."
 msgid "Download..."
 msgstr "بارگیری..."
 
-#: internet/icecastservice.cpp:93
+#: internet/icecastservice.cpp:98
 msgid "Downloading Icecast directory"
 msgstr "بارگیری پوشهٔ Icecast"
 
-#: internet/jamendoservice.cpp:173
+#: internet/jamendoservice.cpp:182
 msgid "Downloading Jamendo catalogue"
 msgstr "بارگیری کاتالوگ Jamendo"
 
-#: internet/magnatuneservice.cpp:146
+#: internet/magnatuneservice.cpp:154
 msgid "Downloading Magnatune catalogue"
 msgstr "بارگیری کاتالوگ Magnatune"
 
-#: internet/spotifyblobdownloader.cpp:39
+#: internet/spotifyblobdownloader.cpp:43
 msgid "Downloading Spotify plugin"
 msgstr "بارگیری افزونهٔ Spotify"
 
@@ -1485,15 +1498,15 @@ msgstr "حرف درایو"
 msgid "Dynamic mode is on"
 msgstr "حالت دینامیک روشن است"
 
-#: internet/jamendoservice.cpp:109 library/library.cpp:88
+#: internet/jamendoservice.cpp:110 library/library.cpp:88
 msgid "Dynamic random mix"
 msgstr "درهم‌ریختن تصادفی دینامیک"
 
-#: library/libraryview.cpp:250
+#: library/libraryview.cpp:257
 msgid "Edit smart playlist..."
 msgstr "ویرایش لیست‌پخش هوشمند..."
 
-#: ui/mainwindow.cpp:1381
+#: ui/mainwindow.cpp:1369
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "ویرایش برچسب \"%1\"..."
@@ -1510,11 +1523,11 @@ msgstr "ویرایش برچسب‌ها"
 msgid "Edit track information"
 msgstr "ویرایش اطلاعات قطعه"
 
-#: library/libraryview.cpp:264 ../bin/src/ui_mainwindow.h:650
+#: library/libraryview.cpp:271 ../bin/src/ui_mainwindow.h:650
 msgid "Edit track information..."
 msgstr "ویرایش اطلاعات قطعه..."
 
-#: library/libraryview.cpp:266
+#: library/libraryview.cpp:273
 msgid "Edit tracks information..."
 msgstr "ویرایش اطلاعات قطعه‌ها..."
 
@@ -1600,9 +1613,9 @@ msgstr "برابر است با --log-levels *:1"
 msgid "Equivalent to --log-levels *:3"
 msgstr "برابر است با --log-levels *:3"
 
-#: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:444
-#: ui/edittagdialog.cpp:719 ui/mainwindow.cpp:1805 ui/mainwindow.cpp:1910
-#: ui/mainwindow.cpp:2128
+#: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:453
+#: ui/edittagdialog.cpp:719 ui/mainwindow.cpp:1793 ui/mainwindow.cpp:1898
+#: ui/mainwindow.cpp:2116
 msgid "Error"
 msgstr "خطا"
 
@@ -1618,7 +1631,7 @@ msgstr "خطا در کپی کردن آهنگ‌ها"
 msgid "Error deleting songs"
 msgstr "خطا در پاک کردن آهنگ‌ها"
 
-#: internet/spotifyblobdownloader.cpp:206
+#: internet/spotifyblobdownloader.cpp:194
 msgid "Error downloading Spotify plugin"
 msgstr "خطا در بارگیری افزونهٔ Spotify"
 
@@ -1627,7 +1640,7 @@ msgstr "خطا در بارگیری افزونهٔ Spotify"
 msgid "Error loading %1"
 msgstr "خطا در فراخوانی %1"
 
-#: internet/digitallyimportedservicebase.cpp:203
+#: internet/digitallyimportedservicebase.cpp:202
 #: internet/digitallyimportedurlhandler.cpp:73
 msgid "Error loading di.fm playlist"
 msgstr ""
@@ -1649,7 +1662,7 @@ msgstr "همواره پخش‌شده"
 msgid "Except between tracks on the same album or in the same CUE sheet"
 msgstr "به جز بین قطعه‌های یک آلبوم یا یک پهنهٔ CUE"
 
-#: internet/digitallyimportedsettingspage.cpp:95
+#: widgets/loginstatewidget.cpp:112
 #, qt-format
 msgid "Expires on %1"
 msgstr ""
@@ -1701,7 +1714,7 @@ msgstr "زمان پژمردن"
 msgid "Fast"
 msgstr "تند"
 
-#: internet/groovesharkservice.cpp:564
+#: internet/groovesharkservice.cpp:592
 msgid "Favorites"
 msgstr ""
 
@@ -1755,7 +1768,7 @@ msgstr "نوع پرونده"
 msgid "Filename"
 msgstr "نام‌پرونده"
 
-#: ui/mainwindow.cpp:265
+#: ui/mainwindow.cpp:252
 msgid "Files"
 msgstr "پرونده‌ها"
 
@@ -1820,7 +1833,7 @@ msgstr ""
 "انصراف یک دستگاه آن را از این لیست حذف می‌کند و بار دیگر که دستگاه را وصل "
 "کردید، کلمنتاین باید همهٔ آهنگهای آن را دوباره جستجو کند."
 
-#: ../bin/src/ui_globalsearchwidget.h:64
+#: ../bin/src/ui_globalsearchwidget.h:59
 #: ../bin/src/ui_icecastfilterwidget.h:74
 #: ../bin/src/ui_internetviewcontainer.h:70
 #: ../bin/src/ui_libraryfilterwidget.h:114
@@ -1834,7 +1847,7 @@ msgstr ""
 #: ../bin/src/ui_transcoderoptionsspeex.h:216
 #: ../bin/src/ui_transcoderoptionsvorbis.h:201
 #: ../bin/src/ui_transcoderoptionswma.h:78 ../bin/src/ui_equalizerslider.h:82
-#: ../bin/src/ui_fileview.h:106 ../bin/src/ui_loginstatewidget.h:145
+#: ../bin/src/ui_fileview.h:106 ../bin/src/ui_loginstatewidget.h:171
 #: ../bin/src/ui_trackslider.h:69 ../bin/src/ui_visualisationoverlay.h:178
 msgid "Form"
 msgstr "فرم"
@@ -1852,7 +1865,7 @@ msgstr "آهنگ فریم"
 msgid "Frames per buffer"
 msgstr "فریم در هر بافر"
 
-#: internet/lastfmservice.cpp:206
+#: internet/lastfmservice.cpp:205
 msgid "Friends"
 msgstr "دوستان"
 
@@ -1886,11 +1899,11 @@ msgstr "تنظیمات عمومی"
 msgid "Genre"
 msgstr "ژانر"
 
-#: internet/somafmservice.cpp:88
+#: internet/somafmservice.cpp:94
 msgid "Getting channels"
 msgstr "دریافت کانال"
 
-#: internet/digitallyimportedservicebase.cpp:103
+#: internet/digitallyimportedservicebase.cpp:104
 msgid "Getting streams"
 msgstr ""
 
@@ -1902,7 +1915,7 @@ msgstr "نامی به آن دهید:"
 msgid "Global Search"
 msgstr ""
 
-#: ../bin/src/ui_globalsearchwidget.h:65
+#: ../bin/src/ui_globalsearchwidget.h:60
 msgid "Global search"
 msgstr ""
 
@@ -1936,7 +1949,7 @@ msgstr "آهنگ‌های ناموجود لیست‌پخش‌های من را خ
 msgid "Grooveshark"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:380
+#: internet/groovesharkservice.cpp:383
 msgid "Grooveshark login error"
 msgstr ""
 
@@ -2101,7 +2114,7 @@ msgstr "قرار دادن..."
 msgid "Installed"
 msgstr "نصب شد"
 
-#: ui/mainwindow.cpp:266
+#: ui/mainwindow.cpp:253
 msgid "Internet"
 msgstr "اینترنت"
 
@@ -2109,59 +2122,59 @@ msgstr "اینترنت"
 msgid "Internet providers"
 msgstr ""
 
-#: internet/lastfmservice.cpp:440
+#: internet/lastfmservice.cpp:436
 msgid "Invalid API key"
 msgstr "کلید API نامعتبر"
 
-#: internet/lastfmservice.cpp:435
+#: internet/lastfmservice.cpp:431
 msgid "Invalid format"
 msgstr "قالب نامعتبر"
 
-#: internet/lastfmservice.cpp:433
+#: internet/lastfmservice.cpp:429
 msgid "Invalid method"
 msgstr "روش نامعتبر"
 
-#: internet/lastfmservice.cpp:436
+#: internet/lastfmservice.cpp:432
 msgid "Invalid parameters"
 msgstr "پارامترهای نامعتبر"
 
-#: internet/lastfmservice.cpp:437
+#: internet/lastfmservice.cpp:433
 msgid "Invalid resource specified"
 msgstr "منابع مشخص‌شده نامعتبرند"
 
-#: internet/lastfmservice.cpp:432
+#: internet/lastfmservice.cpp:428
 msgid "Invalid service"
 msgstr "سرویس نامعتبر"
 
-#: internet/lastfmservice.cpp:439
+#: internet/lastfmservice.cpp:435
 msgid "Invalid session key"
 msgstr "کلید جلسهٔ نامعتبر"
 
-#: internet/groovesharkservice.cpp:373
+#: internet/groovesharkservice.cpp:376
 msgid "Invalid username and/or password"
 msgstr ""
 
-#: ui/mainwindow.cpp:253
+#: internet/jamendoservice.cpp:123
 msgid "Jamendo"
 msgstr ""
 
-#: internet/jamendoservice.cpp:105
+#: internet/jamendoservice.cpp:106
 msgid "Jamendo Most Listened Tracks"
 msgstr "قطعه‌های بیشتر شنیده شدهٔ Jamendo"
 
-#: internet/jamendoservice.cpp:103
+#: internet/jamendoservice.cpp:104
 msgid "Jamendo Top Tracks"
 msgstr "قطعه‌های برتر Jamendo"
 
-#: internet/jamendoservice.cpp:99
+#: internet/jamendoservice.cpp:100
 msgid "Jamendo Top Tracks of the Month"
 msgstr "قطعه‌های برتر ماه Jamendo"
 
-#: internet/jamendoservice.cpp:101
+#: internet/jamendoservice.cpp:102
 msgid "Jamendo Top Tracks of the Week"
 msgstr "قطعه‌های برتر هفتهٔ Jamendo"
 
-#: internet/jamendoservice.cpp:157
+#: internet/jamendoservice.cpp:166
 msgid "Jamendo database"
 msgstr "پایگاه دادهٔ Jamendo"
 
@@ -2227,25 +2240,25 @@ msgstr "Last.fm"
 msgid "Last.fm Custom Radio: %1"
 msgstr "رادیوی سفارشی Last.fm: %1"
 
-#: internet/lastfmservice.cpp:237 internet/lastfmservice.cpp:709
-#: internet/lastfmservice.cpp:744
+#: internet/lastfmservice.cpp:236 internet/lastfmservice.cpp:691
+#: internet/lastfmservice.cpp:726
 #, qt-format
 msgid "Last.fm Library - %1"
 msgstr "کتابخانه Last.fm- %1"
 
-#: globalsearch/lastfmsearchprovider.cpp:69 internet/lastfmservice.cpp:239
-#: internet/lastfmservice.cpp:242
+#: globalsearch/lastfmsearchprovider.cpp:69 internet/lastfmservice.cpp:238
+#: internet/lastfmservice.cpp:241
 #, qt-format
 msgid "Last.fm Mix Radio - %1"
 msgstr "رادیوی مختلط  Last.fm- %1"
 
-#: globalsearch/lastfmsearchprovider.cpp:71 internet/lastfmservice.cpp:244
-#: internet/lastfmservice.cpp:247
+#: globalsearch/lastfmsearchprovider.cpp:71 internet/lastfmservice.cpp:243
+#: internet/lastfmservice.cpp:246
 #, qt-format
 msgid "Last.fm Neighbor Radio - %1"
 msgstr "رادیوی همسایه Last.fm- %1"
 
-#: globalsearch/lastfmsearchprovider.cpp:67 internet/lastfmservice.cpp:234
+#: globalsearch/lastfmsearchprovider.cpp:67 internet/lastfmservice.cpp:233
 #, qt-format
 msgid "Last.fm Radio Station - %1"
 msgstr "ایستگاه رادیویی Last.fm- %1"
@@ -2260,7 +2273,7 @@ msgstr "هنرمندهایی مشابه %1 در Last.fm"
 msgid "Last.fm Tag Radio: %1"
 msgstr "برچسب رادیویی Last.fm: %1"
 
-#: internet/lastfmservice.cpp:444
+#: internet/lastfmservice.cpp:440
 msgid "Last.fm is currently busy, please try again in a few minutes"
 msgstr "Last.fm در حال پخش است، چند دقیقه بعد دوباره تلاش کنید"
 
@@ -2297,7 +2310,7 @@ msgstr "برای پیش‌فرض، خالی رها کنید. مثال:   \"/dev/
 msgid "Length"
 msgstr "طول"
 
-#: ui/mainwindow.cpp:241 ui/mainwindow.cpp:264
+#: ui/mainwindow.cpp:241 ui/mainwindow.cpp:251
 msgid "Library"
 msgstr "کتابخانه"
 
@@ -2305,7 +2318,7 @@ msgstr "کتابخانه"
 msgid "Library advanced grouping"
 msgstr "گروه‌بندی پیشرفتهٔ کتابخانه"
 
-#: ui/mainwindow.cpp:2030
+#: ui/mainwindow.cpp:2018
 msgid "Library rescan notice"
 msgstr "آگاه‌سازی پویش دوبارهٔ کتابخانه"
 
@@ -2349,7 +2362,7 @@ msgstr "بارگیری لیست‌پخش"
 msgid "Load playlist..."
 msgstr "بارگیری لیست‌پخش..."
 
-#: internet/lastfmservice.cpp:928
+#: internet/lastfmservice.cpp:910
 msgid "Loading Last.fm radio"
 msgstr "بارگیری رادیوی Last.fm"
 
@@ -2458,7 +2471,7 @@ msgstr "MP4 AAC"
 msgid "MPC"
 msgstr "MPC"
 
-#: ui/mainwindow.cpp:246 ../bin/src/ui_magnatunesettingspage.h:150
+#: internet/magnatuneservice.cpp:99 ../bin/src/ui_magnatunesettingspage.h:150
 msgid "Magnatune"
 msgstr "Magnatune"
 
@@ -2478,7 +2491,7 @@ msgstr "مشخصات اصلی (MAIN)"
 msgid "Make playlist available offline"
 msgstr "لیست‌پخش را بیرون‌خط در دسترس بگذار"
 
-#: internet/lastfmservice.cpp:451
+#: internet/lastfmservice.cpp:447
 msgid "Malformed response"
 msgstr "پاسخ ناهنجار"
 
@@ -2556,7 +2569,7 @@ msgstr "نقطه‌های سوارکردن"
 msgid "Move down"
 msgstr "پایین بردن"
 
-#: ui/mainwindow.cpp:535 widgets/fileviewlist.cpp:40
+#: ui/mainwindow.cpp:522 widgets/fileviewlist.cpp:40
 msgid "Move to library..."
 msgstr "جابه‌جایی به کتابخانه..."
 
@@ -2578,39 +2591,40 @@ msgstr "کتابخانهٔ موسیقی"
 msgid "Mute"
 msgstr "بی‌صدا"
 
-#: globalsearch/lastfmsearchprovider.cpp:45 internet/lastfmservice.cpp:177
+#: globalsearch/lastfmsearchprovider.cpp:45 internet/lastfmservice.cpp:176
 msgid "My Last.fm Library"
 msgstr "کتابخانهٔ Last.fm من"
 
-#: globalsearch/lastfmsearchprovider.cpp:47 internet/lastfmservice.cpp:182
+#: globalsearch/lastfmsearchprovider.cpp:47 internet/lastfmservice.cpp:181
 msgid "My Last.fm Mix Radio"
 msgstr "رادیوی مختلط Last.fm من"
 
-#: globalsearch/lastfmsearchprovider.cpp:49 internet/lastfmservice.cpp:187
+#: globalsearch/lastfmsearchprovider.cpp:49 internet/lastfmservice.cpp:186
 msgid "My Last.fm Neighborhood"
 msgstr "همسایهٔ Last.fm من"
 
-#: globalsearch/lastfmsearchprovider.cpp:43 internet/lastfmservice.cpp:172
+#: globalsearch/lastfmsearchprovider.cpp:43 internet/lastfmservice.cpp:171
 msgid "My Last.fm Recommended Radio"
 msgstr "رادیوهای پیشنهادی Last.fm من"
 
-#: internet/lastfmservice.cpp:179
+#: internet/lastfmservice.cpp:178
 msgid "My Mix Radio"
 msgstr "رادیوی مختلط من"
 
-#: internet/lastfmservice.cpp:184
+#: internet/lastfmservice.cpp:183
 msgid "My Neighborhood"
 msgstr "همسایهٔ من"
 
-#: internet/lastfmservice.cpp:174
+#: internet/lastfmservice.cpp:173
 msgid "My Radio Station"
 msgstr "ایستگاه رادیویی من"
 
-#: internet/lastfmservice.cpp:169
+#: internet/lastfmservice.cpp:168
 msgid "My Recommendations"
 msgstr "پیشنهادهای من"
 
-#: ui/equalizer.cpp:172 ../bin/src/ui_deviceproperties.h:369
+#: internet/groovesharkservice.cpp:757 ui/equalizer.cpp:172
+#: ../bin/src/ui_deviceproperties.h:369
 #: ../bin/src/ui_magnatunedownloaddialog.h:135
 #: ../bin/src/ui_wizardfinishpage.h:84
 #: ../bin/src/ui_globalshortcutssettingspage.h:174
@@ -2625,7 +2639,7 @@ msgstr "گزینه‌های نام‌گذاری"
 msgid "Narrow band (NB)"
 msgstr "نوار باریک (NB)"
 
-#: internet/lastfmservice.cpp:211
+#: internet/lastfmservice.cpp:210
 msgid "Neighbors"
 msgstr "همسایه‌ها"
 
@@ -2650,11 +2664,11 @@ msgstr "هرگز پخش‌نشده"
 msgid "Never start playing"
 msgstr "هرگز شروع به پخش نشده"
 
-#: ui/mainwindow.cpp:1420 ../bin/src/ui_mainwindow.h:680
+#: ui/mainwindow.cpp:1408 ../bin/src/ui_mainwindow.h:680
 msgid "New playlist"
 msgstr "لیست‌پخش تازه"
 
-#: library/libraryview.cpp:248
+#: library/libraryview.cpp:255
 msgid "New smart playlist..."
 msgstr "لیست‌پخش هوشمند تازه..."
 
@@ -2703,7 +2717,7 @@ msgstr "بدون بلوک‌های کوتاه"
 msgid "None"
 msgstr "هیچ‌کدام"
 
-#: library/libraryview.cpp:445 ui/mainwindow.cpp:1806 ui/mainwindow.cpp:1911
+#: library/libraryview.cpp:454 ui/mainwindow.cpp:1794 ui/mainwindow.cpp:1899
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "هیچ‌کدام از آهنگ‌های انتخابی مناسب کپی کردن در دستگاه نیستند"
 
@@ -2719,19 +2733,19 @@ msgstr "مهیا نیست وقتی که از یک لیست‌پخش دینامی
 msgid "Not connected"
 msgstr "متصل نیست"
 
-#: internet/lastfmservice.cpp:446
+#: internet/lastfmservice.cpp:442
 msgid "Not enough content"
 msgstr "بدون محتوای کافی"
 
-#: internet/lastfmservice.cpp:448
+#: internet/lastfmservice.cpp:444
 msgid "Not enough fans"
 msgstr "بدون هوادار کافی"
 
-#: internet/lastfmservice.cpp:447
+#: internet/lastfmservice.cpp:443
 msgid "Not enough members"
 msgstr "بدون عضو کافی"
 
-#: internet/lastfmservice.cpp:449
+#: internet/lastfmservice.cpp:445
 msgid "Not enough neighbors"
 msgstr "بدون همسایهٔ کافی"
 
@@ -2739,7 +2753,7 @@ msgstr "بدون همسایهٔ کافی"
 msgid "Not installed"
 msgstr "نصب نشده"
 
-#: globalsearch/globalsearchsettingspage.cpp:102
+#: globalsearch/globalsearchsettingspage.cpp:124
 msgid "Not logged in"
 msgstr ""
 
@@ -2780,7 +2794,7 @@ msgstr "Ogg Vorbis"
 msgid "Only show the first"
 msgstr "تنها ابتدا را نمایش بده"
 
-#: internet/digitallyimportedservicebase.cpp:174
+#: internet/digitallyimportedservicebase.cpp:173
 #, qt-format
 msgid "Open %1 in browser"
 msgstr ""
@@ -2793,7 +2807,7 @@ msgstr "گشودن &سی‌دی صوتی..."
 msgid "Open device"
 msgstr "گشودن دستگاه"
 
-#: internet/icecastservice.cpp:295
+#: internet/icecastservice.cpp:300
 msgid "Open dir.xiph.org in browser"
 msgstr "گشودن dir.xiph.org در مرورگر"
 
@@ -2802,20 +2816,20 @@ msgid "Open file..."
 msgstr ""
 
 #: devices/deviceview.cpp:220 internet/internetservice.cpp:73
-#: library/libraryview.cpp:240 widgets/fileviewlist.cpp:35
+#: library/libraryview.cpp:247 widgets/fileviewlist.cpp:35
 #: ../bin/src/ui_behavioursettingspage.h:203
 msgid "Open in new playlist"
 msgstr "گشودن در لیست‌پخش تازه"
 
-#: internet/jamendoservice.cpp:405
+#: internet/jamendoservice.cpp:414
 msgid "Open jamendo.com in browser"
 msgstr "گشودن jamendo.com در مرورگر"
 
-#: internet/magnatuneservice.cpp:263
+#: internet/magnatuneservice.cpp:271
 msgid "Open magnatune.com in browser"
 msgstr "گشودن magnatune.com در مرورگر"
 
-#: internet/somafmservice.cpp:75
+#: internet/somafmservice.cpp:84
 msgid "Open somafm.com in browser"
 msgstr "گشودن somafm.com در مرورگر"
 
@@ -2824,7 +2838,7 @@ msgstr "گشودن somafm.com در مرورگر"
 msgid "Open..."
 msgstr "گشودن..."
 
-#: internet/lastfmservice.cpp:438
+#: internet/lastfmservice.cpp:434
 msgid "Operation failed"
 msgstr "شکست عملیات"
 
@@ -2844,7 +2858,7 @@ msgstr "گزینه‌ها..."
 msgid "Organise Files"
 msgstr "سازماندهی پرونده‌ها"
 
-#: library/libraryview.cpp:256 ui/mainwindow.cpp:536
+#: library/libraryview.cpp:263 ui/mainwindow.cpp:523
 msgid "Organise files..."
 msgstr "سازماندهی پرونده‌ها..."
 
@@ -2876,7 +2890,7 @@ msgstr "افزونهٔ خروجی"
 msgid "Overwrite existing files"
 msgstr "رونویسی پرونده‌های موجود"
 
-#: internet/jamendoservice.cpp:200
+#: internet/jamendoservice.cpp:209
 msgid "Parsing Jamendo catalogue"
 msgstr "بررسی کاتالوگ Jamendo"
 
@@ -2895,7 +2909,7 @@ msgstr "کلمهٔ عبور"
 msgid "Password Protected"
 msgstr "نگهبانی کلمهٔ عبور"
 
-#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:885 ui/mainwindow.cpp:1271
+#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:873 ui/mainwindow.cpp:1259
 #: ui/qtsystemtrayicon.cpp:178 wiimotedev/wiimotesettingspage.cpp:106
 msgid "Pause"
 msgstr "توقف"
@@ -2912,8 +2926,8 @@ msgstr "متوقف"
 msgid "Plain sidebar"
 msgstr "میله‌کنار ساده"
 
-#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:519 ui/mainwindow.cpp:853
-#: ui/mainwindow.cpp:872 ui/mainwindow.cpp:1274 ui/qtsystemtrayicon.cpp:166
+#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:506 ui/mainwindow.cpp:841
+#: ui/mainwindow.cpp:860 ui/mainwindow.cpp:1262 ui/qtsystemtrayicon.cpp:166
 #: ui/qtsystemtrayicon.cpp:192 wiimotedev/wiimotesettingspage.cpp:101
 #: ../bin/src/ui_mainwindow.h:631
 msgid "Play"
@@ -2923,7 +2937,7 @@ msgstr "پخش"
 msgid "Play Artist or Tag"
 msgstr "پخش هنرمند یا برچسب"
 
-#: internet/lastfmservice.cpp:100
+#: internet/lastfmservice.cpp:101
 msgid "Play artist radio..."
 msgstr "پخش رادیوی هنرمند..."
 
@@ -2931,7 +2945,7 @@ msgstr "پخش رادیوی هنرمند..."
 msgid "Play count"
 msgstr "شمار پخش"
 
-#: internet/lastfmservice.cpp:104
+#: internet/lastfmservice.cpp:105
 msgid "Play custom radio..."
 msgstr "پخش رادیوی دلخواه..."
 
@@ -2956,7 +2970,7 @@ msgstr "پخش رادیوی هنرمند Last.fm"
 msgid "Play last.fm tag radio"
 msgstr "پخش رادیوی برچسب Last.fm"
 
-#: internet/lastfmservice.cpp:102
+#: internet/lastfmservice.cpp:103
 msgid "Play tag radio..."
 msgstr "پخش رادیوی برچسب..."
 
@@ -3121,12 +3135,12 @@ msgstr "جستجوی دستگاه..."
 msgid "Queue Manager"
 msgstr "مدیر به‌خط‌ کردن"
 
-#: ui/mainwindow.cpp:1352
+#: ui/mainwindow.cpp:1340
 msgid "Queue selected tracks"
 msgstr "به‌خط کردن قطعه‌های منتخب"
 
-#: globalsearch/globalsearchwidget.cpp:97 library/libraryview.cpp:244
-#: ui/mainwindow.cpp:1350
+#: globalsearch/globalsearchwidget.cpp:98 library/libraryview.cpp:251
+#: ui/mainwindow.cpp:1338
 msgid "Queue track"
 msgstr "به‌خط کردن قطعه"
 
@@ -3174,23 +3188,23 @@ msgstr "رتبه‌بندی"
 msgid "Really cancel?"
 msgstr "واقعا لغو شود؟"
 
-#: internet/jamendoservice.cpp:406 internet/magnatuneservice.cpp:264
+#: internet/jamendoservice.cpp:415 internet/magnatuneservice.cpp:272
 msgid "Refresh catalogue"
 msgstr "بازخوانی کاتالوگ"
 
-#: internet/somafmservice.cpp:76
+#: internet/somafmservice.cpp:85
 msgid "Refresh channels"
 msgstr "بازخوانی کانالها"
 
-#: internet/lastfmservice.cpp:106
+#: internet/lastfmservice.cpp:107
 msgid "Refresh friends list"
 msgstr ""
 
-#: internet/icecastservice.cpp:296
+#: internet/icecastservice.cpp:301
 msgid "Refresh station list"
 msgstr "بازخوانی لیست ایستگاه‌ها"
 
-#: internet/digitallyimportedservicebase.cpp:177
+#: internet/digitallyimportedservicebase.cpp:176
 msgid "Refresh streams"
 msgstr ""
 
@@ -3210,7 +3224,7 @@ msgstr "از بار آخر به‌یاد بیاور"
 msgid "Remote Control"
 msgstr "دورکنترل"
 
-#: internet/savedradio.cpp:94 internet/lastfmservice.cpp:97
+#: internet/savedradio.cpp:94 internet/lastfmservice.cpp:98
 #: ../bin/src/ui_queuemanager.h:135 ../bin/src/ui_searchtermwidget.h:282
 #: ../bin/src/ui_transcodedialog.h:207
 msgid "Remove"
@@ -3224,11 +3238,11 @@ msgstr "پاک کردن عملیات"
 msgid "Remove folder"
 msgstr "پاک کردن پوشه"
 
-#: internet/groovesharkservice.cpp:445
+#: internet/groovesharkservice.cpp:461
 msgid "Remove from favorites"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:442 ../bin/src/ui_mainwindow.h:674
+#: internet/groovesharkservice.cpp:458 ../bin/src/ui_mainwindow.h:674
 msgid "Remove from playlist"
 msgstr "از لیست‌پخش پاک کن"
 
@@ -3264,12 +3278,12 @@ msgstr "تکرار لیست‌پخش"
 msgid "Repeat track"
 msgstr "تکرار قطعه"
 
-#: globalsearch/globalsearchwidget.cpp:99
+#: globalsearch/globalsearchwidget.cpp:100
 msgid "Replace and play now"
 msgstr ""
 
-#: devices/deviceview.cpp:218 globalsearch/globalsearchwidget.cpp:98
-#: internet/internetservice.cpp:63 library/libraryview.cpp:238
+#: devices/deviceview.cpp:218 globalsearch/globalsearchwidget.cpp:99
+#: internet/internetservice.cpp:63 library/libraryview.cpp:245
 #: widgets/fileviewlist.cpp:33
 msgid "Replace current playlist"
 msgstr "دوباره جانشانی لیست‌پخش جاری"
@@ -3383,11 +3397,11 @@ msgid "Search"
 msgstr "جستجو"
 
 #: internet/groovesharksearchplaylisttype.cpp:32
-#: internet/groovesharkservice.cpp:633
+#: internet/groovesharkservice.cpp:663
 msgid "Search Grooveshark"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:448 internet/groovesharkservice.cpp:457
+#: internet/groovesharkservice.cpp:464 internet/groovesharkservice.cpp:473
 msgid "Search Grooveshark (opens a new tab)"
 msgstr ""
 
@@ -3395,11 +3409,11 @@ msgstr ""
 msgid "Search Icecast stations"
 msgstr "جستجوی ایستگاه‌های Icecast"
 
-#: internet/jamendoservice.cpp:412
+#: internet/jamendoservice.cpp:421
 msgid "Search Jamendo"
 msgstr "جستجوی Jamendo"
 
-#: internet/magnatuneservice.cpp:270
+#: internet/magnatuneservice.cpp:278
 msgid "Search Magnatune"
 msgstr "جستجوی Magnatune"
 
@@ -3475,11 +3489,11 @@ msgstr "انتخاب تصویرسازها..."
 msgid "Serial number"
 msgstr "شماره سریال"
 
-#: internet/lastfmservice.cpp:441
+#: internet/lastfmservice.cpp:437
 msgid "Service offline"
 msgstr "سرویس برون‌خط"
 
-#: ui/mainwindow.cpp:1379
+#: ui/mainwindow.cpp:1367
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "%1 را برابر \"%2‌\"قرار بده..."
@@ -3555,7 +3569,7 @@ msgstr ""
 msgid "Show above status bar"
 msgstr "نمایش در بالای میلهٔ وضعیت"
 
-#: ui/mainwindow.cpp:492
+#: ui/mainwindow.cpp:479
 msgid "Show all songs"
 msgstr "نمایش همهٔ آهنگ‌ها"
 
@@ -3575,26 +3589,21 @@ msgstr "نمایش جداسازها"
 msgid "Show fullsize..."
 msgstr "نمایش اندازهٔ کامل..."
 
-#: library/libraryview.cpp:268 ui/mainwindow.cpp:539
+#: library/libraryview.cpp:275 ui/mainwindow.cpp:526
 msgid "Show in file browser..."
 msgstr "نمایش در مرورگر پرونده..."
 
-#: library/libraryview.cpp:272
+#: library/libraryview.cpp:279
 msgid "Show in various artists"
 msgstr "نمایش در هنرمندان گوناگون"
 
-#: ui/mainwindow.cpp:493
+#: ui/mainwindow.cpp:480
 msgid "Show only duplicates"
 msgstr "نمایش تنها دوگانه‌ها"
 
-#: ui/mainwindow.cpp:494
+#: ui/mainwindow.cpp:481
 msgid "Show only untagged"
 msgstr "نمایش تنها بی‌برچسب‌ها"
-
-#: globalsearch/globalsearchwidget.cpp:704
-#, qt-format
-msgid "Show results from %1"
-msgstr ""
 
 #: ../bin/src/ui_lastfmsettingspage.h:151
 msgid "Show the \"love\" and \"ban\" buttons"
@@ -3632,11 +3641,11 @@ msgstr "پخش درهم هر آلبوم"
 msgid "Shuffle playlist"
 msgstr "پخش درهم لیست‌پخش"
 
-#: ../bin/src/ui_remotesettingspage.h:202 ../bin/src/ui_loginstatewidget.h:147
+#: ../bin/src/ui_remotesettingspage.h:202 ../bin/src/ui_loginstatewidget.h:173
 msgid "Sign out"
 msgstr "خروج از سیستم"
 
-#: ../bin/src/ui_loginstatewidget.h:149
+#: ../bin/src/ui_loginstatewidget.h:175
 msgid "Signing in..."
 msgstr ""
 
@@ -3688,7 +3697,7 @@ msgstr "راک ملایم"
 msgid "Song Information"
 msgstr "اطلاعات آهنگ"
 
-#: ui/mainwindow.cpp:269
+#: ui/mainwindow.cpp:256
 msgid "Song info"
 msgstr "اطلاعات آهنگ"
 
@@ -3740,7 +3749,7 @@ msgstr "خطای ورود به سیستم Spotify"
 msgid "Spotify plugin"
 msgstr "افزونهٔ Spotify"
 
-#: internet/spotifyblobdownloader.cpp:54
+#: internet/spotifyblobdownloader.cpp:58
 msgid "Spotify plugin not installed"
 msgstr "افزونهٔ Spotify نصب نیست"
 
@@ -3761,12 +3770,10 @@ msgid "Start transcoding"
 msgstr "شروع ترانسکد"
 
 #: internet/groovesharksearchplaylisttype.cpp:36
-msgid "Start typing in the search box above to find music on Grooveshark."
-msgstr ""
-
 #: internet/spotifysearchplaylisttype.cpp:36
-msgid "Start typing in the search box above to find music on Spotify."
-msgstr "برای یافتن آهنگ در اسپاتیفای، در جعبهٔ جستجو شروع به نوشتن کنید."
+#, qt-format
+msgid "Start typing in the search box above to find music on %1."
+msgstr ""
 
 #: transcoder/transcoder.cpp:399
 #, qt-format
@@ -3786,7 +3793,7 @@ msgstr "توقف"
 msgid "Stop after"
 msgstr "توقف بعد از"
 
-#: ui/mainwindow.cpp:521 ../bin/src/ui_mainwindow.h:639
+#: ui/mainwindow.cpp:508 ../bin/src/ui_mainwindow.h:639
 msgid "Stop after this track"
 msgstr "توقف بعد از این آهنگ"
 
@@ -3837,7 +3844,7 @@ msgstr "بسیار بالا (60 fps)"
 msgid "Supported formats"
 msgstr "فرمت‌های قابل پشتیبانی"
 
-#: globalsearch/globalsearchtooltip.cpp:50
+#: globalsearch/globalsearchtooltip.cpp:53
 msgid "Switch provider"
 msgstr ""
 
@@ -3865,7 +3872,7 @@ msgstr "برچسب"
 msgid "Tag fetcher"
 msgstr "واکش برچسب‌ها"
 
-#: internet/lastfmservice.cpp:194
+#: internet/lastfmservice.cpp:193
 msgid "Tag radio"
 msgstr "برچسب رادیو"
 
@@ -3912,7 +3919,7 @@ msgstr "پایگاه درخواستی وجود ندارد!"
 msgid "The site you requested is not an image!"
 msgstr "پایگاه درخواستی تصویر نیست!"
 
-#: ui/mainwindow.cpp:2023
+#: ui/mainwindow.cpp:2011
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -3938,7 +3945,7 @@ msgid ""
 msgstr ""
 "مشکلی در پاک کردن تعدادی از آهنگ‌ها وجود داشت. پرونده‌های زیر پاک نشدند:"
 
-#: library/libraryview.cpp:451 ui/mainwindow.cpp:1838 widgets/fileview.cpp:186
+#: library/libraryview.cpp:460 ui/mainwindow.cpp:1826 widgets/fileview.cpp:186
 msgid ""
 "These files will be deleted from disk, are you sure you want to continue?"
 msgstr ""
@@ -3967,7 +3974,7 @@ msgstr ""
 msgid "Third level"
 msgstr "طبقهٔ سوم"
 
-#: internet/jamendoservice.cpp:157
+#: internet/jamendoservice.cpp:166
 msgid ""
 "This action will create a database which could be as big as 150 MB.\n"
 "Do you want to continue anyway?"
@@ -4024,7 +4031,7 @@ msgstr ""
 "این لیست‌پخش پاک خواهد شد؛ و عمل برگشت‌ناپذیر است. آیا مطمئنید می‌خواهید "
 "ادامه دهید؟"
 
-#: internet/lastfmservice.cpp:442
+#: internet/lastfmservice.cpp:438
 msgid "This stream is for paid subscribers only"
 msgstr "این جریان تنها برای مشترکان پولی است"
 
@@ -4059,7 +4066,7 @@ msgstr "تبدیل به OSD زیبا"
 msgid "Toggle fullscreen"
 msgstr "تبدیل به تمام‌صفحه"
 
-#: ui/mainwindow.cpp:1354
+#: ui/mainwindow.cpp:1342
 msgid "Toggle queue status"
 msgstr "تبدیل به وضعیت صف"
 
@@ -4142,7 +4149,7 @@ msgstr "ناکام در باگیری %1 (%2)"
 msgid "Unknown"
 msgstr "ناشناخته"
 
-#: internet/digitallyimportedclient.cpp:68 internet/lastfmservice.cpp:455
+#: internet/digitallyimportedclient.cpp:68 internet/lastfmservice.cpp:451
 msgid "Unknown error"
 msgstr "خطای ناشناخته"
 
@@ -4224,7 +4231,7 @@ msgstr "بکاربردن تنظیمات پراکسی سیستم"
 msgid "Used"
 msgstr "استفاده‌شده"
 
-#: internet/groovesharkservice.cpp:376
+#: internet/groovesharkservice.cpp:379
 #, qt-format
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr ""
@@ -4383,7 +4390,7 @@ msgstr ""
 msgid "Windows Media audio"
 msgstr "فرمت صوتی مدیای ویندوز"
 
-#: ui/mainwindow.cpp:2028
+#: ui/mainwindow.cpp:2016
 msgid "Would you like to run a full rescan right now?"
 msgstr "آیا مایل هستید که الان بازبینی کامل انجام دهید؟"
 
@@ -4410,16 +4417,16 @@ msgstr "دیروز"
 msgid "You are about to download the following albums"
 msgstr "هم‌اکنون آلبوم‌های زیر بارگیری خواهند شد"
 
-#: ../bin/src/ui_loginstatewidget.h:146
+#: ../bin/src/ui_loginstatewidget.h:172
 msgid "You are not signed in."
 msgstr ""
 
-#: widgets/loginstatewidget.cpp:67
+#: widgets/loginstatewidget.cpp:69
 #, qt-format
 msgid "You are signed in as %1."
 msgstr ""
 
-#: widgets/loginstatewidget.cpp:65
+#: widgets/loginstatewidget.cpp:67
 msgid "You are signed in."
 msgstr ""
 
@@ -4517,7 +4524,7 @@ msgstr "اعتبار Last.fm شما نادرست بود"
 msgid "Your Magnatune credentials were incorrect"
 msgstr "اعتبار مگناتیون شما نادرست بود"
 
-#: ui/edittagdialog.cpp:719 ui/mainwindow.cpp:2128
+#: ui/edittagdialog.cpp:719 ui/mainwindow.cpp:2116
 msgid ""
 "Your gstreamer installation is missing the 'ofa' plugin.  This is required "
 "for automatic tag fetching.  Try installing the 'gstreamer-plugins-bad' "
@@ -4526,7 +4533,7 @@ msgstr ""
 "نصب جی‌استریمر شما فاقد افزونهٔ 'ofa' است. این افزونه برای واکشی اتوماتیک "
 "برچسب لازم است. نصب بستهٔ 'gstreamer-plugins-bad' را امتحان کنید."
 
-#: library/libraryview.cpp:212
+#: library/libraryview.cpp:219
 msgid "Your library is empty!"
 msgstr "کتابخانهٔ شما خالی است!"
 

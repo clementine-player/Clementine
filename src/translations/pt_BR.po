@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2011-11-04 13:47+0000\n"
+"PO-Revision-Date: 2011-11-05 18:36+0000\n"
 "Last-Translator: clementinebuildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -346,7 +346,7 @@ msgstr "Adicionar uma nova linha se suportado pelo tipo de notificação"
 msgid "Add action"
 msgstr "Adicionar ação"
 
-#: globalsearch/globalsearchwidget.cpp:96
+#: globalsearch/globalsearchwidget.cpp:97
 msgid "Add and play now"
 msgstr ""
 
@@ -358,7 +358,7 @@ msgstr "Adicionar outro canal..."
 msgid "Add directory..."
 msgstr "Adicionar diretório"
 
-#: ui/mainwindow.cpp:1574
+#: ui/mainwindow.cpp:1562
 msgid "Add file"
 msgstr ""
 
@@ -370,7 +370,7 @@ msgstr "Adicionar arquivo..."
 msgid "Add files to transcode"
 msgstr "Adicionar arquivos ao transcodificador"
 
-#: ui/mainwindow.cpp:1599
+#: ui/mainwindow.cpp:1587
 msgid "Add folder"
 msgstr "Adicionar pasta"
 
@@ -438,11 +438,11 @@ msgstr "Adicionar etiqueta ano da música"
 msgid "Add stream..."
 msgstr "Adicionar transmissão..."
 
-#: ui/mainwindow.cpp:1403
+#: ui/mainwindow.cpp:1391
 msgid "Add to another playlist"
 msgstr "Adicionar à outra lista de reprodução"
 
-#: globalsearch/globalsearchwidget.cpp:95
+#: globalsearch/globalsearchwidget.cpp:96
 #: ../bin/src/ui_albumcovermanager.h:152
 msgid "Add to playlist"
 msgstr "Adicionar à lista de reprodução"
@@ -506,7 +506,7 @@ msgstr "Álbum (sonoridade ideal para todas as faixas)"
 msgid "Album artist"
 msgstr "Artista do álbum"
 
-#: internet/jamendoservice.cpp:401
+#: internet/jamendoservice.cpp:410
 msgid "Album info on jamendo.com..."
 msgstr "Informação do álbum no jamendo.com..."
 
@@ -577,7 +577,7 @@ msgstr "Sempre exibir a janela principal"
 msgid "Always start playing"
 msgstr "Sempre começar tocando"
 
-#: internet/spotifyblobdownloader.cpp:55
+#: internet/spotifyblobdownloader.cpp:59
 msgid ""
 "An additional plugin is required to use Spotify in Clementine.  Would you "
 "like to download and install it now?"
@@ -604,7 +604,7 @@ msgstr "Ocorreu um erro no carregamento do banco de dados do iTunes"
 msgid "An error occurred writing metadata to '%1'"
 msgstr "Ocorreu um erro de escrita de metadados para '%1'"
 
-#: internet/lastfmservice.cpp:918
+#: internet/lastfmservice.cpp:900
 #, qt-format
 msgid "An unknown last.fm error occurred: %1"
 msgstr "Ocorreu um erro desconhecido no Last.fm: %1"
@@ -622,7 +622,7 @@ msgid "Append files/URLs to the playlist"
 msgstr "Acrescentar arquivos/sites para a lista de reprodução"
 
 #: devices/deviceview.cpp:216 internet/internetservice.cpp:53
-#: library/libraryview.cpp:236 widgets/fileviewlist.cpp:31
+#: library/libraryview.cpp:243 widgets/fileviewlist.cpp:31
 msgid "Append to current playlist"
 msgstr "Adicionar à lista de reprodução atual"
 
@@ -639,6 +639,10 @@ msgstr "Aplicar compressão para prevenir travamento"
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "Tem certeza que deseja apagar a pré-regulagem \"%1\" ?"
 
+#: internet/groovesharkservice.cpp:804
+msgid "Are you sure you want to delete this playlist?"
+msgstr ""
+
 #: ui/edittagdialog.cpp:704
 msgid "Are you sure you want to reset this song's statistics?"
 msgstr "Você tem certeza que quer limpar as estatísticas dessa música?"
@@ -653,11 +657,11 @@ msgstr "Você tem certeza que quer limpar as estatísticas dessa música?"
 msgid "Artist"
 msgstr "Artista"
 
-#: ui/mainwindow.cpp:270
+#: ui/mainwindow.cpp:257
 msgid "Artist info"
 msgstr "Sobre o Artista"
 
-#: internet/lastfmservice.cpp:190
+#: internet/lastfmservice.cpp:189
 msgid "Artist radio"
 msgstr "Rádio do artista"
 
@@ -678,7 +682,7 @@ msgid "Authenticating..."
 msgstr "Autenticando..."
 
 #: internet/digitallyimportedsettingspage.cpp:82
-#: internet/magnatunesettingspage.cpp:113 internet/lastfmservice.cpp:434
+#: internet/magnatunesettingspage.cpp:113 internet/lastfmservice.cpp:430
 #: internet/lastfmsettingspage.cpp:79 remote/remotesettingspage.cpp:113
 msgid "Authentication failed"
 msgstr "Falha na autenticação"
@@ -808,7 +812,7 @@ msgstr "CDDA"
 msgid "CUE sheet support"
 msgstr "Suporte a lista CUE"
 
-#: internet/spotifyblobdownloader.cpp:39
+#: internet/spotifyblobdownloader.cpp:43
 msgid "Cancel"
 msgstr "Cancelar"
 
@@ -836,7 +840,7 @@ msgstr "Alterar modo aleatório"
 msgid "Change the language"
 msgstr "Alterar idioma"
 
-#: ui/mainwindow.cpp:610
+#: ui/mainwindow.cpp:597
 msgid "Check for updates..."
 msgstr "Checar atualizações..."
 
@@ -948,7 +952,7 @@ msgstr "Visualizador de imagens do Clementine"
 msgid "Clementine was unable to find results for this file"
 msgstr "O Clementine não conseguiu encontrar resultados para este arquivo"
 
-#: library/libraryview.cpp:218
+#: library/libraryview.cpp:225
 msgid "Click here to add some music"
 msgstr "Clique aqui para adicionar algumas músicas"
 
@@ -1007,15 +1011,15 @@ msgstr "Preencher etiquetas automaticamente..."
 msgid "Composer"
 msgstr "Composto por"
 
-#: internet/groovesharkservice.cpp:450
+#: internet/groovesharkservice.cpp:466
 msgid "Configure Grooveshark..."
 msgstr ""
 
-#: internet/lastfmservice.cpp:108
+#: internet/lastfmservice.cpp:109
 msgid "Configure Last.fm..."
 msgstr "Configurar Last.fm..."
 
-#: internet/magnatuneservice.cpp:265
+#: internet/magnatuneservice.cpp:273
 msgid "Configure Magnatune..."
 msgstr "Configurar Magnatune..."
 
@@ -1027,11 +1031,11 @@ msgstr "Configurar atalhos"
 msgid "Configure Spotify..."
 msgstr "Configurar Spotify..."
 
-#: ui/mainwindow.cpp:504
+#: ui/mainwindow.cpp:491
 msgid "Configure library..."
 msgstr "Configurar biblioteca"
 
-#: internet/digitallyimportedservicebase.cpp:181
+#: internet/digitallyimportedservicebase.cpp:180
 #: ../bin/src/ui_globalsearchsettingspage.h:167
 msgid "Configure..."
 msgstr ""
@@ -1060,12 +1064,12 @@ msgstr "Converter todas as músicas"
 msgid "Convert any music that the device can't play"
 msgstr "Converte qualquer música que o dispositivo não puder tocar"
 
-#: library/libraryview.cpp:258 ui/mainwindow.cpp:537
+#: library/libraryview.cpp:265 ui/mainwindow.cpp:524
 #: widgets/fileviewlist.cpp:43
 msgid "Copy to device..."
 msgstr "Copiar para o dispositivo..."
 
-#: devices/deviceview.cpp:223 ui/mainwindow.cpp:534
+#: devices/deviceview.cpp:223 ui/mainwindow.cpp:521
 #: widgets/fileviewlist.cpp:38
 msgid "Copy to library..."
 msgstr "Copiar para biblioteca..."
@@ -1101,7 +1105,7 @@ msgstr ""
 "Não foi possível encontrar um codificador para %1, verifique se você tem os "
 "plugins corretos do GStreamer instalados"
 
-#: internet/lastfmservice.cpp:915
+#: internet/lastfmservice.cpp:897
 msgid "Couldn't load the last.fm radio station"
 msgstr "Não foi possível carregar a estação de rádio do last.fm"
 
@@ -1141,6 +1145,10 @@ msgstr "Capa configurada de %1"
 #, qt-format
 msgid "Covers from %1"
 msgstr "Capas do %1"
+
+#: internet/groovesharkservice.cpp:451 internet/groovesharkservice.cpp:756
+msgid "Create a new Grooveshark playlist"
+msgstr ""
 
 #: ../bin/src/ui_playbacksettingspage.h:262
 msgid "Cross-fade when changing tracks automatically"
@@ -1230,7 +1238,7 @@ msgstr "Personalizar"
 msgid "Custom message settings"
 msgstr "Configurações de mensagem personalizada"
 
-#: internet/lastfmservice.cpp:198
+#: internet/lastfmservice.cpp:197
 msgid "Custom radio"
 msgstr "Rádio personalizada"
 
@@ -1278,8 +1286,12 @@ msgstr "Padrões"
 msgid "Delay between visualizations"
 msgstr "Atraso entre as visualizações"
 
-#: devices/deviceview.cpp:393 library/libraryview.cpp:450
-#: ui/mainwindow.cpp:1837 widgets/fileview.cpp:185
+#: internet/groovesharkservice.cpp:454 internet/groovesharkservice.cpp:803
+msgid "Delete Grooveshark playlist"
+msgstr ""
+
+#: devices/deviceview.cpp:393 library/libraryview.cpp:459
+#: ui/mainwindow.cpp:1825 widgets/fileview.cpp:185
 msgid "Delete files"
 msgstr "Excluir arquivos"
 
@@ -1287,7 +1299,7 @@ msgstr "Excluir arquivos"
 msgid "Delete from device..."
 msgstr "Apagar do dispositivo..."
 
-#: library/libraryview.cpp:260 ui/mainwindow.cpp:538
+#: library/libraryview.cpp:267 ui/mainwindow.cpp:525
 #: widgets/fileviewlist.cpp:44
 msgid "Delete from disk..."
 msgstr "Apagar do disco..."
@@ -1296,7 +1308,7 @@ msgstr "Apagar do disco..."
 msgid "Delete preset"
 msgstr "Apagar pré-regulagem"
 
-#: library/libraryview.cpp:252
+#: library/libraryview.cpp:259
 msgid "Delete smart playlist"
 msgstr "Apagar lista inteligente"
 
@@ -1308,11 +1320,11 @@ msgstr "Apagar os arquivos originais"
 msgid "Deleting files"
 msgstr "Apagando arquivos"
 
-#: ui/mainwindow.cpp:1348
+#: ui/mainwindow.cpp:1336
 msgid "Dequeue selected tracks"
 msgstr "Retirar faixas selecionadas da fila"
 
-#: ui/mainwindow.cpp:1346
+#: ui/mainwindow.cpp:1334
 msgid "Dequeue track"
 msgstr "Retirar faixa da fila"
 
@@ -1340,7 +1352,7 @@ msgstr "Nome do dispositivo"
 msgid "Device properties..."
 msgstr "Propriedades do dispositivo..."
 
-#: ui/mainwindow.cpp:267
+#: ui/mainwindow.cpp:254
 msgid "Devices"
 msgstr "Dispositivos"
 
@@ -1390,6 +1402,7 @@ msgstr "Disco"
 msgid "Discontinuous transmission"
 msgstr "Transmissão descontínua"
 
+#: internet/icecastfilterwidget.cpp:33 library/libraryfilterwidget.cpp:109
 #: ../bin/src/ui_librarysettingspage.h:169
 msgid "Display options"
 msgstr "Opções de exibição"
@@ -1414,7 +1427,7 @@ msgstr "Não converter nenhuma música"
 msgid "Don't repeat"
 msgstr "Não repetir"
 
-#: library/libraryview.cpp:274
+#: library/libraryview.cpp:281
 msgid "Don't show in various artists"
 msgstr "Não exibir em vários artistas"
 
@@ -1442,11 +1455,11 @@ msgstr "Pasta de download"
 msgid "Download membership"
 msgstr "Download de membro"
 
-#: internet/magnatuneservice.cpp:261
+#: internet/magnatuneservice.cpp:269
 msgid "Download this album"
 msgstr "Baixar este álbum"
 
-#: internet/jamendoservice.cpp:403
+#: internet/jamendoservice.cpp:412
 msgid "Download this album..."
 msgstr "Baixar este álbum..."
 
@@ -1454,19 +1467,19 @@ msgstr "Baixar este álbum..."
 msgid "Download..."
 msgstr "Baixar..."
 
-#: internet/icecastservice.cpp:93
+#: internet/icecastservice.cpp:98
 msgid "Downloading Icecast directory"
 msgstr "Baixando diretório Icecast"
 
-#: internet/jamendoservice.cpp:173
+#: internet/jamendoservice.cpp:182
 msgid "Downloading Jamendo catalogue"
 msgstr "Baixando catálogo do Jamendo"
 
-#: internet/magnatuneservice.cpp:146
+#: internet/magnatuneservice.cpp:154
 msgid "Downloading Magnatune catalogue"
 msgstr "Baixando catálogo da Magnatune"
 
-#: internet/spotifyblobdownloader.cpp:39
+#: internet/spotifyblobdownloader.cpp:43
 msgid "Downloading Spotify plugin"
 msgstr "Baixando plugin Spotify"
 
@@ -1486,15 +1499,15 @@ msgstr "Letra do drive"
 msgid "Dynamic mode is on"
 msgstr "Modo dinâmico ligado"
 
-#: internet/jamendoservice.cpp:109 library/library.cpp:88
+#: internet/jamendoservice.cpp:110 library/library.cpp:88
 msgid "Dynamic random mix"
 msgstr "Mix aleatório dinâmico"
 
-#: library/libraryview.cpp:250
+#: library/libraryview.cpp:257
 msgid "Edit smart playlist..."
 msgstr "Editar lista de reprodução inteligente..."
 
-#: ui/mainwindow.cpp:1381
+#: ui/mainwindow.cpp:1369
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "Editar marcador \"%1\"..."
@@ -1511,11 +1524,11 @@ msgstr "Editar etiquetas"
 msgid "Edit track information"
 msgstr "Editar informações da faixa"
 
-#: library/libraryview.cpp:264 ../bin/src/ui_mainwindow.h:650
+#: library/libraryview.cpp:271 ../bin/src/ui_mainwindow.h:650
 msgid "Edit track information..."
 msgstr "Editar informações da faixa..."
 
-#: library/libraryview.cpp:266
+#: library/libraryview.cpp:273
 msgid "Edit tracks information..."
 msgstr "Editar informações da faixa..."
 
@@ -1602,9 +1615,9 @@ msgstr "Equivalente ao --log-levels *:1"
 msgid "Equivalent to --log-levels *:3"
 msgstr "Equivalente ao --log-levels *:3"
 
-#: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:444
-#: ui/edittagdialog.cpp:719 ui/mainwindow.cpp:1805 ui/mainwindow.cpp:1910
-#: ui/mainwindow.cpp:2128
+#: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:453
+#: ui/edittagdialog.cpp:719 ui/mainwindow.cpp:1793 ui/mainwindow.cpp:1898
+#: ui/mainwindow.cpp:2116
 msgid "Error"
 msgstr "Erro"
 
@@ -1620,7 +1633,7 @@ msgstr "Erro ao copiar músicas"
 msgid "Error deleting songs"
 msgstr "Erro ao apagar músicas"
 
-#: internet/spotifyblobdownloader.cpp:206
+#: internet/spotifyblobdownloader.cpp:194
 msgid "Error downloading Spotify plugin"
 msgstr "Erro ao baixar o plugin Spotify"
 
@@ -1629,7 +1642,7 @@ msgstr "Erro ao baixar o plugin Spotify"
 msgid "Error loading %1"
 msgstr "Erro carregando %1"
 
-#: internet/digitallyimportedservicebase.cpp:203
+#: internet/digitallyimportedservicebase.cpp:202
 #: internet/digitallyimportedurlhandler.cpp:73
 msgid "Error loading di.fm playlist"
 msgstr ""
@@ -1651,7 +1664,7 @@ msgstr "Já reproduzido"
 msgid "Except between tracks on the same album or in the same CUE sheet"
 msgstr "Exceto entre as faixas do mesmo álbum ou lista CUE"
 
-#: internet/digitallyimportedsettingspage.cpp:95
+#: widgets/loginstatewidget.cpp:112
 #, qt-format
 msgid "Expires on %1"
 msgstr ""
@@ -1703,7 +1716,7 @@ msgstr "Duração da dimunuição"
 msgid "Fast"
 msgstr "Rápida"
 
-#: internet/groovesharkservice.cpp:564
+#: internet/groovesharkservice.cpp:592
 msgid "Favorites"
 msgstr ""
 
@@ -1757,7 +1770,7 @@ msgstr "Tipo de arquivo"
 msgid "Filename"
 msgstr "Nome do arquivo"
 
-#: ui/mainwindow.cpp:265
+#: ui/mainwindow.cpp:252
 msgid "Files"
 msgstr "Arquivos"
 
@@ -1826,7 +1839,7 @@ msgstr ""
 "Esquecer um dispositivo irá removê-lo desta lista e o Clementine terá que "
 "examinar todas as músicas de novo, da próxima vez que você conectá-lo."
 
-#: ../bin/src/ui_globalsearchwidget.h:64
+#: ../bin/src/ui_globalsearchwidget.h:59
 #: ../bin/src/ui_icecastfilterwidget.h:74
 #: ../bin/src/ui_internetviewcontainer.h:70
 #: ../bin/src/ui_libraryfilterwidget.h:114
@@ -1840,7 +1853,7 @@ msgstr ""
 #: ../bin/src/ui_transcoderoptionsspeex.h:216
 #: ../bin/src/ui_transcoderoptionsvorbis.h:201
 #: ../bin/src/ui_transcoderoptionswma.h:78 ../bin/src/ui_equalizerslider.h:82
-#: ../bin/src/ui_fileview.h:106 ../bin/src/ui_loginstatewidget.h:145
+#: ../bin/src/ui_fileview.h:106 ../bin/src/ui_loginstatewidget.h:171
 #: ../bin/src/ui_trackslider.h:69 ../bin/src/ui_visualisationoverlay.h:178
 msgid "Form"
 msgstr "Formulário"
@@ -1858,7 +1871,7 @@ msgstr "Frames por segundo"
 msgid "Frames per buffer"
 msgstr "Quadros por buffer"
 
-#: internet/lastfmservice.cpp:206
+#: internet/lastfmservice.cpp:205
 msgid "Friends"
 msgstr "Amigos"
 
@@ -1892,11 +1905,11 @@ msgstr "Configurações gerais"
 msgid "Genre"
 msgstr "Gênero"
 
-#: internet/somafmservice.cpp:88
+#: internet/somafmservice.cpp:94
 msgid "Getting channels"
 msgstr "Adquirindo canais"
 
-#: internet/digitallyimportedservicebase.cpp:103
+#: internet/digitallyimportedservicebase.cpp:104
 msgid "Getting streams"
 msgstr ""
 
@@ -1908,7 +1921,7 @@ msgstr "Dê-lhe um nome:"
 msgid "Global Search"
 msgstr ""
 
-#: ../bin/src/ui_globalsearchwidget.h:65
+#: ../bin/src/ui_globalsearchwidget.h:60
 msgid "Global search"
 msgstr ""
 
@@ -1942,7 +1955,7 @@ msgstr "Acinzentar músicas inexistentes da minha lista de reprodução"
 msgid "Grooveshark"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:380
+#: internet/groovesharkservice.cpp:383
 msgid "Grooveshark login error"
 msgstr ""
 
@@ -2110,7 +2123,7 @@ msgstr "Inserir..."
 msgid "Installed"
 msgstr "Instalado"
 
-#: ui/mainwindow.cpp:266
+#: ui/mainwindow.cpp:253
 msgid "Internet"
 msgstr "Internet"
 
@@ -2118,59 +2131,59 @@ msgstr "Internet"
 msgid "Internet providers"
 msgstr ""
 
-#: internet/lastfmservice.cpp:440
+#: internet/lastfmservice.cpp:436
 msgid "Invalid API key"
 msgstr "Chave API inválida"
 
-#: internet/lastfmservice.cpp:435
+#: internet/lastfmservice.cpp:431
 msgid "Invalid format"
 msgstr "Formato inválido"
 
-#: internet/lastfmservice.cpp:433
+#: internet/lastfmservice.cpp:429
 msgid "Invalid method"
 msgstr "Método inválido"
 
-#: internet/lastfmservice.cpp:436
+#: internet/lastfmservice.cpp:432
 msgid "Invalid parameters"
 msgstr "Parâmetros inválidos"
 
-#: internet/lastfmservice.cpp:437
+#: internet/lastfmservice.cpp:433
 msgid "Invalid resource specified"
 msgstr "Recurso especificado inválido"
 
-#: internet/lastfmservice.cpp:432
+#: internet/lastfmservice.cpp:428
 msgid "Invalid service"
 msgstr "Serviço inválido"
 
-#: internet/lastfmservice.cpp:439
+#: internet/lastfmservice.cpp:435
 msgid "Invalid session key"
 msgstr "Chave de sessão inválida"
 
-#: internet/groovesharkservice.cpp:373
+#: internet/groovesharkservice.cpp:376
 msgid "Invalid username and/or password"
 msgstr ""
 
-#: ui/mainwindow.cpp:253
+#: internet/jamendoservice.cpp:123
 msgid "Jamendo"
 msgstr ""
 
-#: internet/jamendoservice.cpp:105
+#: internet/jamendoservice.cpp:106
 msgid "Jamendo Most Listened Tracks"
 msgstr "Faixas mais ouvidas do Jamendo"
 
-#: internet/jamendoservice.cpp:103
+#: internet/jamendoservice.cpp:104
 msgid "Jamendo Top Tracks"
 msgstr "Faixas principais no Jamendo"
 
-#: internet/jamendoservice.cpp:99
+#: internet/jamendoservice.cpp:100
 msgid "Jamendo Top Tracks of the Month"
 msgstr "Faixas principais no Jamendo este mês"
 
-#: internet/jamendoservice.cpp:101
+#: internet/jamendoservice.cpp:102
 msgid "Jamendo Top Tracks of the Week"
 msgstr "Faixas principais no Jamendo esta semana"
 
-#: internet/jamendoservice.cpp:157
+#: internet/jamendoservice.cpp:166
 msgid "Jamendo database"
 msgstr "Banco de dados Jamendo"
 
@@ -2236,25 +2249,25 @@ msgstr "Last.fm"
 msgid "Last.fm Custom Radio: %1"
 msgstr "Rádio personalizada do Last.fm: %1"
 
-#: internet/lastfmservice.cpp:237 internet/lastfmservice.cpp:709
-#: internet/lastfmservice.cpp:744
+#: internet/lastfmservice.cpp:236 internet/lastfmservice.cpp:691
+#: internet/lastfmservice.cpp:726
 #, qt-format
 msgid "Last.fm Library - %1"
 msgstr "Biblioteca Last.fm - %1"
 
-#: globalsearch/lastfmsearchprovider.cpp:69 internet/lastfmservice.cpp:239
-#: internet/lastfmservice.cpp:242
+#: globalsearch/lastfmsearchprovider.cpp:69 internet/lastfmservice.cpp:238
+#: internet/lastfmservice.cpp:241
 #, qt-format
 msgid "Last.fm Mix Radio - %1"
 msgstr "Rádio mista do last.fm: %1"
 
-#: globalsearch/lastfmsearchprovider.cpp:71 internet/lastfmservice.cpp:244
-#: internet/lastfmservice.cpp:247
+#: globalsearch/lastfmsearchprovider.cpp:71 internet/lastfmservice.cpp:243
+#: internet/lastfmservice.cpp:246
 #, qt-format
 msgid "Last.fm Neighbor Radio - %1"
 msgstr "Rádio do vizinho no Last.fm - %1"
 
-#: globalsearch/lastfmsearchprovider.cpp:67 internet/lastfmservice.cpp:234
+#: globalsearch/lastfmsearchprovider.cpp:67 internet/lastfmservice.cpp:233
 #, qt-format
 msgid "Last.fm Radio Station - %1"
 msgstr "Estação de Rádio Last.fm - %1"
@@ -2269,7 +2282,7 @@ msgstr "Artistas Last.fm Similares a %1"
 msgid "Last.fm Tag Radio: %1"
 msgstr "Rádio da marcação do Last.fm: %1"
 
-#: internet/lastfmservice.cpp:444
+#: internet/lastfmservice.cpp:440
 msgid "Last.fm is currently busy, please try again in a few minutes"
 msgstr ""
 "Last.fm está ocupado no momento, por favor tente novamente daqui a alguns "
@@ -2308,7 +2321,7 @@ msgstr "Deixe em branco por padrão. Exemplos: \"/dev/dsp\", \"front\", etc."
 msgid "Length"
 msgstr "Duração"
 
-#: ui/mainwindow.cpp:241 ui/mainwindow.cpp:264
+#: ui/mainwindow.cpp:241 ui/mainwindow.cpp:251
 msgid "Library"
 msgstr "Biblioteca"
 
@@ -2316,7 +2329,7 @@ msgstr "Biblioteca"
 msgid "Library advanced grouping"
 msgstr "Organização avançada de biblioteca"
 
-#: ui/mainwindow.cpp:2030
+#: ui/mainwindow.cpp:2018
 msgid "Library rescan notice"
 msgstr "Aviso de reescaneamento da biblioteca"
 
@@ -2360,7 +2373,7 @@ msgstr "Carregar lista de reprodução"
 msgid "Load playlist..."
 msgstr "Carregar lista de reprodução..."
 
-#: internet/lastfmservice.cpp:928
+#: internet/lastfmservice.cpp:910
 msgid "Loading Last.fm radio"
 msgstr "Carregando rádio Last.fm"
 
@@ -2469,7 +2482,7 @@ msgstr "MP4 AAC"
 msgid "MPC"
 msgstr "MPC"
 
-#: ui/mainwindow.cpp:246 ../bin/src/ui_magnatunesettingspage.h:150
+#: internet/magnatuneservice.cpp:99 ../bin/src/ui_magnatunesettingspage.h:150
 msgid "Magnatune"
 msgstr "Magnatune"
 
@@ -2489,7 +2502,7 @@ msgstr "Meu perfil (PRINCIPAL)"
 msgid "Make playlist available offline"
 msgstr "Tornar lista de reprodução disponível offline"
 
-#: internet/lastfmservice.cpp:451
+#: internet/lastfmservice.cpp:447
 msgid "Malformed response"
 msgstr "Resposta inválida"
 
@@ -2567,7 +2580,7 @@ msgstr "Pontos de montagem"
 msgid "Move down"
 msgstr "Para baixo"
 
-#: ui/mainwindow.cpp:535 widgets/fileviewlist.cpp:40
+#: ui/mainwindow.cpp:522 widgets/fileviewlist.cpp:40
 msgid "Move to library..."
 msgstr "Mover para biblioteca..."
 
@@ -2589,39 +2602,40 @@ msgstr "Biblioteca de Músicas"
 msgid "Mute"
 msgstr "Mudo"
 
-#: globalsearch/lastfmsearchprovider.cpp:45 internet/lastfmservice.cpp:177
+#: globalsearch/lastfmsearchprovider.cpp:45 internet/lastfmservice.cpp:176
 msgid "My Last.fm Library"
 msgstr "Minha biblioteca no Last.fm"
 
-#: globalsearch/lastfmsearchprovider.cpp:47 internet/lastfmservice.cpp:182
+#: globalsearch/lastfmsearchprovider.cpp:47 internet/lastfmservice.cpp:181
 msgid "My Last.fm Mix Radio"
 msgstr "Minha Rádio Mix do Last.fm"
 
-#: globalsearch/lastfmsearchprovider.cpp:49 internet/lastfmservice.cpp:187
+#: globalsearch/lastfmsearchprovider.cpp:49 internet/lastfmservice.cpp:186
 msgid "My Last.fm Neighborhood"
 msgstr "Minha Vizinhança no Last.fm"
 
-#: globalsearch/lastfmsearchprovider.cpp:43 internet/lastfmservice.cpp:172
+#: globalsearch/lastfmsearchprovider.cpp:43 internet/lastfmservice.cpp:171
 msgid "My Last.fm Recommended Radio"
 msgstr "Minha Rádio de Recomendações no Last.fm"
 
-#: internet/lastfmservice.cpp:179
+#: internet/lastfmservice.cpp:178
 msgid "My Mix Radio"
 msgstr "Minha Rádio Mix"
 
-#: internet/lastfmservice.cpp:184
+#: internet/lastfmservice.cpp:183
 msgid "My Neighborhood"
 msgstr "Minha Vizinhança"
 
-#: internet/lastfmservice.cpp:174
+#: internet/lastfmservice.cpp:173
 msgid "My Radio Station"
 msgstr "Minha Estação de Rádio"
 
-#: internet/lastfmservice.cpp:169
+#: internet/lastfmservice.cpp:168
 msgid "My Recommendations"
 msgstr "Minhas Recomendações"
 
-#: ui/equalizer.cpp:172 ../bin/src/ui_deviceproperties.h:369
+#: internet/groovesharkservice.cpp:757 ui/equalizer.cpp:172
+#: ../bin/src/ui_deviceproperties.h:369
 #: ../bin/src/ui_magnatunedownloaddialog.h:135
 #: ../bin/src/ui_wizardfinishpage.h:84
 #: ../bin/src/ui_globalshortcutssettingspage.h:174
@@ -2636,7 +2650,7 @@ msgstr "Opções de nomes"
 msgid "Narrow band (NB)"
 msgstr "Banda estreita (NB)"
 
-#: internet/lastfmservice.cpp:211
+#: internet/lastfmservice.cpp:210
 msgid "Neighbors"
 msgstr "Vizinhos"
 
@@ -2661,11 +2675,11 @@ msgstr "Nunca tocado"
 msgid "Never start playing"
 msgstr "Nunca iniciar tocando"
 
-#: ui/mainwindow.cpp:1420 ../bin/src/ui_mainwindow.h:680
+#: ui/mainwindow.cpp:1408 ../bin/src/ui_mainwindow.h:680
 msgid "New playlist"
 msgstr "Nova lista de reprodução"
 
-#: library/libraryview.cpp:248
+#: library/libraryview.cpp:255
 msgid "New smart playlist..."
 msgstr "Nova lista de reprodução inteligente..."
 
@@ -2714,7 +2728,7 @@ msgstr "Sem blocos curtos"
 msgid "None"
 msgstr "Nenhum"
 
-#: library/libraryview.cpp:445 ui/mainwindow.cpp:1806 ui/mainwindow.cpp:1911
+#: library/libraryview.cpp:454 ui/mainwindow.cpp:1794 ui/mainwindow.cpp:1899
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr ""
 "Nenhuma das músicas selecionadas estão adequadas para copiar para um "
@@ -2732,19 +2746,19 @@ msgstr "Não disponível enquanto uma lista dinâmica estiver em uso"
 msgid "Not connected"
 msgstr "Desconectado"
 
-#: internet/lastfmservice.cpp:446
+#: internet/lastfmservice.cpp:442
 msgid "Not enough content"
 msgstr "Conteúdo insuficiente"
 
-#: internet/lastfmservice.cpp:448
+#: internet/lastfmservice.cpp:444
 msgid "Not enough fans"
 msgstr "Fãs insuficientes"
 
-#: internet/lastfmservice.cpp:447
+#: internet/lastfmservice.cpp:443
 msgid "Not enough members"
 msgstr "Sem membros o bastante"
 
-#: internet/lastfmservice.cpp:449
+#: internet/lastfmservice.cpp:445
 msgid "Not enough neighbors"
 msgstr "Sem vizinhos o bastante"
 
@@ -2752,7 +2766,7 @@ msgstr "Sem vizinhos o bastante"
 msgid "Not installed"
 msgstr "Não instalado"
 
-#: globalsearch/globalsearchsettingspage.cpp:102
+#: globalsearch/globalsearchsettingspage.cpp:124
 msgid "Not logged in"
 msgstr ""
 
@@ -2793,7 +2807,7 @@ msgstr "Ogg Vorbis"
 msgid "Only show the first"
 msgstr "Só mostrar o primeiro"
 
-#: internet/digitallyimportedservicebase.cpp:174
+#: internet/digitallyimportedservicebase.cpp:173
 #, qt-format
 msgid "Open %1 in browser"
 msgstr ""
@@ -2806,7 +2820,7 @@ msgstr "Abrir CD de &áudio..."
 msgid "Open device"
 msgstr "Abrir dispositivo"
 
-#: internet/icecastservice.cpp:295
+#: internet/icecastservice.cpp:300
 msgid "Open dir.xiph.org in browser"
 msgstr "Abrir dir.xiph.org no navegador"
 
@@ -2815,20 +2829,20 @@ msgid "Open file..."
 msgstr ""
 
 #: devices/deviceview.cpp:220 internet/internetservice.cpp:73
-#: library/libraryview.cpp:240 widgets/fileviewlist.cpp:35
+#: library/libraryview.cpp:247 widgets/fileviewlist.cpp:35
 #: ../bin/src/ui_behavioursettingspage.h:203
 msgid "Open in new playlist"
 msgstr "Abrir em nova lista de reprodução"
 
-#: internet/jamendoservice.cpp:405
+#: internet/jamendoservice.cpp:414
 msgid "Open jamendo.com in browser"
 msgstr "Abrir jamendo.com no navegador"
 
-#: internet/magnatuneservice.cpp:263
+#: internet/magnatuneservice.cpp:271
 msgid "Open magnatune.com in browser"
 msgstr "Abrir magnatune.com no navegador"
 
-#: internet/somafmservice.cpp:75
+#: internet/somafmservice.cpp:84
 msgid "Open somafm.com in browser"
 msgstr "Abrir somafm.com no navegador"
 
@@ -2837,7 +2851,7 @@ msgstr "Abrir somafm.com no navegador"
 msgid "Open..."
 msgstr "Abrir..."
 
-#: internet/lastfmservice.cpp:438
+#: internet/lastfmservice.cpp:434
 msgid "Operation failed"
 msgstr "A operação falhou"
 
@@ -2857,7 +2871,7 @@ msgstr "Opções..."
 msgid "Organise Files"
 msgstr "Organizar Arquivos"
 
-#: library/libraryview.cpp:256 ui/mainwindow.cpp:536
+#: library/libraryview.cpp:263 ui/mainwindow.cpp:523
 msgid "Organise files..."
 msgstr "Organizar arquivos..."
 
@@ -2889,7 +2903,7 @@ msgstr "Plugin de saída"
 msgid "Overwrite existing files"
 msgstr "Sobrescrever arquivos existentes"
 
-#: internet/jamendoservice.cpp:200
+#: internet/jamendoservice.cpp:209
 msgid "Parsing Jamendo catalogue"
 msgstr "Analisando catálogo do Jamendo"
 
@@ -2908,7 +2922,7 @@ msgstr "Senha"
 msgid "Password Protected"
 msgstr "Protegido por senha"
 
-#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:885 ui/mainwindow.cpp:1271
+#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:873 ui/mainwindow.cpp:1259
 #: ui/qtsystemtrayicon.cpp:178 wiimotedev/wiimotesettingspage.cpp:106
 msgid "Pause"
 msgstr "Pausar"
@@ -2925,8 +2939,8 @@ msgstr "Pausado"
 msgid "Plain sidebar"
 msgstr "Barra lateral simples"
 
-#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:519 ui/mainwindow.cpp:853
-#: ui/mainwindow.cpp:872 ui/mainwindow.cpp:1274 ui/qtsystemtrayicon.cpp:166
+#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:506 ui/mainwindow.cpp:841
+#: ui/mainwindow.cpp:860 ui/mainwindow.cpp:1262 ui/qtsystemtrayicon.cpp:166
 #: ui/qtsystemtrayicon.cpp:192 wiimotedev/wiimotesettingspage.cpp:101
 #: ../bin/src/ui_mainwindow.h:631
 msgid "Play"
@@ -2936,7 +2950,7 @@ msgstr "Reproduzir"
 msgid "Play Artist or Tag"
 msgstr "Reproduzir Artista ou Marcador"
 
-#: internet/lastfmservice.cpp:100
+#: internet/lastfmservice.cpp:101
 msgid "Play artist radio..."
 msgstr "Reproduzir rádio do artista..."
 
@@ -2944,7 +2958,7 @@ msgstr "Reproduzir rádio do artista..."
 msgid "Play count"
 msgstr "Número de reproduções"
 
-#: internet/lastfmservice.cpp:104
+#: internet/lastfmservice.cpp:105
 msgid "Play custom radio..."
 msgstr "Tocar rádio personalizada..."
 
@@ -2969,7 +2983,7 @@ msgstr "Tocar rádio do artista no Last.fm"
 msgid "Play last.fm tag radio"
 msgstr "Tocar rádio da tag no Last.fm"
 
-#: internet/lastfmservice.cpp:102
+#: internet/lastfmservice.cpp:103
 msgid "Play tag radio..."
 msgstr "Reproduzir rádio de marcação..."
 
@@ -3134,12 +3148,12 @@ msgstr "Consultando dispositivo..."
 msgid "Queue Manager"
 msgstr "Gerenciador de Fila"
 
-#: ui/mainwindow.cpp:1352
+#: ui/mainwindow.cpp:1340
 msgid "Queue selected tracks"
 msgstr "Colocar as faixas selecionadas na fila"
 
-#: globalsearch/globalsearchwidget.cpp:97 library/libraryview.cpp:244
-#: ui/mainwindow.cpp:1350
+#: globalsearch/globalsearchwidget.cpp:98 library/libraryview.cpp:251
+#: ui/mainwindow.cpp:1338
 msgid "Queue track"
 msgstr "Colocar a faixa na fila"
 
@@ -3187,23 +3201,23 @@ msgstr "Avaliação"
 msgid "Really cancel?"
 msgstr "Deseja realmente cancelar?"
 
-#: internet/jamendoservice.cpp:406 internet/magnatuneservice.cpp:264
+#: internet/jamendoservice.cpp:415 internet/magnatuneservice.cpp:272
 msgid "Refresh catalogue"
 msgstr "Atualizar catálogo"
 
-#: internet/somafmservice.cpp:76
+#: internet/somafmservice.cpp:85
 msgid "Refresh channels"
 msgstr "Atualizar canais"
 
-#: internet/lastfmservice.cpp:106
+#: internet/lastfmservice.cpp:107
 msgid "Refresh friends list"
 msgstr ""
 
-#: internet/icecastservice.cpp:296
+#: internet/icecastservice.cpp:301
 msgid "Refresh station list"
 msgstr "Atualizar lista de estações"
 
-#: internet/digitallyimportedservicebase.cpp:177
+#: internet/digitallyimportedservicebase.cpp:176
 msgid "Refresh streams"
 msgstr ""
 
@@ -3223,7 +3237,7 @@ msgstr "Lembrar da última vez"
 msgid "Remote Control"
 msgstr "Controle Remoto"
 
-#: internet/savedradio.cpp:94 internet/lastfmservice.cpp:97
+#: internet/savedradio.cpp:94 internet/lastfmservice.cpp:98
 #: ../bin/src/ui_queuemanager.h:135 ../bin/src/ui_searchtermwidget.h:282
 #: ../bin/src/ui_transcodedialog.h:207
 msgid "Remove"
@@ -3237,11 +3251,11 @@ msgstr "Remover ação"
 msgid "Remove folder"
 msgstr "Remover pasta"
 
-#: internet/groovesharkservice.cpp:445
+#: internet/groovesharkservice.cpp:461
 msgid "Remove from favorites"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:442 ../bin/src/ui_mainwindow.h:674
+#: internet/groovesharkservice.cpp:458 ../bin/src/ui_mainwindow.h:674
 msgid "Remove from playlist"
 msgstr "Remover da lista de reprodução"
 
@@ -3277,12 +3291,12 @@ msgstr "Repetir lista de reprodução"
 msgid "Repeat track"
 msgstr "Repetir faixa"
 
-#: globalsearch/globalsearchwidget.cpp:99
+#: globalsearch/globalsearchwidget.cpp:100
 msgid "Replace and play now"
 msgstr ""
 
-#: devices/deviceview.cpp:218 globalsearch/globalsearchwidget.cpp:98
-#: internet/internetservice.cpp:63 library/libraryview.cpp:238
+#: devices/deviceview.cpp:218 globalsearch/globalsearchwidget.cpp:99
+#: internet/internetservice.cpp:63 library/libraryview.cpp:245
 #: widgets/fileviewlist.cpp:33
 msgid "Replace current playlist"
 msgstr "Substituir lista de reprodução atual"
@@ -3396,11 +3410,11 @@ msgid "Search"
 msgstr "Pesquisar"
 
 #: internet/groovesharksearchplaylisttype.cpp:32
-#: internet/groovesharkservice.cpp:633
+#: internet/groovesharkservice.cpp:663
 msgid "Search Grooveshark"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:448 internet/groovesharkservice.cpp:457
+#: internet/groovesharkservice.cpp:464 internet/groovesharkservice.cpp:473
 msgid "Search Grooveshark (opens a new tab)"
 msgstr ""
 
@@ -3408,11 +3422,11 @@ msgstr ""
 msgid "Search Icecast stations"
 msgstr "Pesquisar estações do Icecast"
 
-#: internet/jamendoservice.cpp:412
+#: internet/jamendoservice.cpp:421
 msgid "Search Jamendo"
 msgstr "Pesquisar Jamendo"
 
-#: internet/magnatuneservice.cpp:270
+#: internet/magnatuneservice.cpp:278
 msgid "Search Magnatune"
 msgstr "Pesquisar Magnatune"
 
@@ -3488,11 +3502,11 @@ msgstr "Selecionar visualizações..."
 msgid "Serial number"
 msgstr "Número de série"
 
-#: internet/lastfmservice.cpp:441
+#: internet/lastfmservice.cpp:437
 msgid "Service offline"
 msgstr "Serviço indisponível"
 
-#: ui/mainwindow.cpp:1379
+#: ui/mainwindow.cpp:1367
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "Mudar %1 para \"%2\"..."
@@ -3568,7 +3582,7 @@ msgstr ""
 msgid "Show above status bar"
 msgstr "Mostrar acima da barra de status"
 
-#: ui/mainwindow.cpp:492
+#: ui/mainwindow.cpp:479
 msgid "Show all songs"
 msgstr "Mostrar todas as músicas"
 
@@ -3588,26 +3602,21 @@ msgstr "Mostrar divisores"
 msgid "Show fullsize..."
 msgstr "Exibir tamanho real..."
 
-#: library/libraryview.cpp:268 ui/mainwindow.cpp:539
+#: library/libraryview.cpp:275 ui/mainwindow.cpp:526
 msgid "Show in file browser..."
 msgstr "Mostrar no navegador de arquivos"
 
-#: library/libraryview.cpp:272
+#: library/libraryview.cpp:279
 msgid "Show in various artists"
 msgstr "Exibir em vários artistas"
 
-#: ui/mainwindow.cpp:493
+#: ui/mainwindow.cpp:480
 msgid "Show only duplicates"
 msgstr "Mostrar somente os duplicados"
 
-#: ui/mainwindow.cpp:494
+#: ui/mainwindow.cpp:481
 msgid "Show only untagged"
 msgstr "Mostrar somente os sem etiqueta"
-
-#: globalsearch/globalsearchwidget.cpp:704
-#, qt-format
-msgid "Show results from %1"
-msgstr ""
 
 #: ../bin/src/ui_lastfmsettingspage.h:151
 msgid "Show the \"love\" and \"ban\" buttons"
@@ -3645,11 +3654,11 @@ msgstr "Misturar por álbum"
 msgid "Shuffle playlist"
 msgstr "Misturar lista de reprodução"
 
-#: ../bin/src/ui_remotesettingspage.h:202 ../bin/src/ui_loginstatewidget.h:147
+#: ../bin/src/ui_remotesettingspage.h:202 ../bin/src/ui_loginstatewidget.h:173
 msgid "Sign out"
 msgstr "Sair"
 
-#: ../bin/src/ui_loginstatewidget.h:149
+#: ../bin/src/ui_loginstatewidget.h:175
 msgid "Signing in..."
 msgstr ""
 
@@ -3701,7 +3710,7 @@ msgstr "Soft Rock"
 msgid "Song Information"
 msgstr "Sobre a Música"
 
-#: ui/mainwindow.cpp:269
+#: ui/mainwindow.cpp:256
 msgid "Song info"
 msgstr "Sobre a Música"
 
@@ -3753,7 +3762,7 @@ msgstr "Erro ao conectar no Spotify"
 msgid "Spotify plugin"
 msgstr "Plugin Spofity"
 
-#: internet/spotifyblobdownloader.cpp:54
+#: internet/spotifyblobdownloader.cpp:58
 msgid "Spotify plugin not installed"
 msgstr "Plugin Spofity não instalado"
 
@@ -3774,14 +3783,10 @@ msgid "Start transcoding"
 msgstr "Começar transcodificação"
 
 #: internet/groovesharksearchplaylisttype.cpp:36
-msgid "Start typing in the search box above to find music on Grooveshark."
-msgstr ""
-
 #: internet/spotifysearchplaylisttype.cpp:36
-msgid "Start typing in the search box above to find music on Spotify."
+#, qt-format
+msgid "Start typing in the search box above to find music on %1."
 msgstr ""
-"Comece digitando na caixa de pesquisa acima para encontrar música no "
-"Spotify."
 
 #: transcoder/transcoder.cpp:399
 #, qt-format
@@ -3801,7 +3806,7 @@ msgstr "Parar"
 msgid "Stop after"
 msgstr "Parar depois"
 
-#: ui/mainwindow.cpp:521 ../bin/src/ui_mainwindow.h:639
+#: ui/mainwindow.cpp:508 ../bin/src/ui_mainwindow.h:639
 msgid "Stop after this track"
 msgstr "Parar depois desta música"
 
@@ -3852,7 +3857,7 @@ msgstr "Super alto (60 fps)"
 msgid "Supported formats"
 msgstr "Formatos suportados"
 
-#: globalsearch/globalsearchtooltip.cpp:50
+#: globalsearch/globalsearchtooltip.cpp:53
 msgid "Switch provider"
 msgstr ""
 
@@ -3880,7 +3885,7 @@ msgstr "Marcador"
 msgid "Tag fetcher"
 msgstr "Buscador de tags"
 
-#: internet/lastfmservice.cpp:194
+#: internet/lastfmservice.cpp:193
 msgid "Tag radio"
 msgstr "Marcar rádio"
 
@@ -3927,7 +3932,7 @@ msgstr "O site que você pediu não existe!"
 msgid "The site you requested is not an image!"
 msgstr "O site que você pediu não é uma imagem!"
 
-#: ui/mainwindow.cpp:2023
+#: ui/mainwindow.cpp:2011
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -3955,7 +3960,7 @@ msgstr ""
 "Houve problemas ao deletar algumas músicas. Os seguintes arquivos não "
 "puderam ser deletados:"
 
-#: library/libraryview.cpp:451 ui/mainwindow.cpp:1838 widgets/fileview.cpp:186
+#: library/libraryview.cpp:460 ui/mainwindow.cpp:1826 widgets/fileview.cpp:186
 msgid ""
 "These files will be deleted from disk, are you sure you want to continue?"
 msgstr ""
@@ -3986,7 +3991,7 @@ msgstr ""
 msgid "Third level"
 msgstr "Terceiro nível"
 
-#: internet/jamendoservice.cpp:157
+#: internet/jamendoservice.cpp:166
 msgid ""
 "This action will create a database which could be as big as 150 MB.\n"
 "Do you want to continue anyway?"
@@ -4041,7 +4046,7 @@ msgstr ""
 "Essa lista de reprodução será removida; a ação não poderá ser desfeita. Você"
 " tem certeza disso?"
 
-#: internet/lastfmservice.cpp:442
+#: internet/lastfmservice.cpp:438
 msgid "This stream is for paid subscribers only"
 msgstr "Este canal é apenas para assinantes"
 
@@ -4076,7 +4081,7 @@ msgstr "Alternar Pretty OSD"
 msgid "Toggle fullscreen"
 msgstr "Alternar tela cheia"
 
-#: ui/mainwindow.cpp:1354
+#: ui/mainwindow.cpp:1342
 msgid "Toggle queue status"
 msgstr "Mudar status da fila"
 
@@ -4159,7 +4164,7 @@ msgstr "Não foi possível baixar %1 (%2)"
 msgid "Unknown"
 msgstr "Desconhecido"
 
-#: internet/digitallyimportedclient.cpp:68 internet/lastfmservice.cpp:455
+#: internet/digitallyimportedclient.cpp:68 internet/lastfmservice.cpp:451
 msgid "Unknown error"
 msgstr "Erro desconhecido"
 
@@ -4241,7 +4246,7 @@ msgstr "Usar configurações de proxy do sistema"
 msgid "Used"
 msgstr "Usado"
 
-#: internet/groovesharkservice.cpp:376
+#: internet/groovesharkservice.cpp:379
 #, qt-format
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr ""
@@ -4400,7 +4405,7 @@ msgstr ""
 msgid "Windows Media audio"
 msgstr "Áudio do Windows Media"
 
-#: ui/mainwindow.cpp:2028
+#: ui/mainwindow.cpp:2016
 msgid "Would you like to run a full rescan right now?"
 msgstr "Gostaria de realizar um reescaneamento completo agora?"
 
@@ -4427,16 +4432,16 @@ msgstr "Ontem"
 msgid "You are about to download the following albums"
 msgstr "Você fará o download dos seguintes álbuns"
 
-#: ../bin/src/ui_loginstatewidget.h:146
+#: ../bin/src/ui_loginstatewidget.h:172
 msgid "You are not signed in."
 msgstr ""
 
-#: widgets/loginstatewidget.cpp:67
+#: widgets/loginstatewidget.cpp:69
 #, qt-format
 msgid "You are signed in as %1."
 msgstr ""
 
-#: widgets/loginstatewidget.cpp:65
+#: widgets/loginstatewidget.cpp:67
 msgid "You are signed in."
 msgstr ""
 
@@ -4532,7 +4537,7 @@ msgstr "Suas credencias do Last.fm estavam incorretas"
 msgid "Your Magnatune credentials were incorrect"
 msgstr "Suas credenciais do Magnatune estão incorretas"
 
-#: ui/edittagdialog.cpp:719 ui/mainwindow.cpp:2128
+#: ui/edittagdialog.cpp:719 ui/mainwindow.cpp:2116
 msgid ""
 "Your gstreamer installation is missing the 'ofa' plugin.  This is required "
 "for automatic tag fetching.  Try installing the 'gstreamer-plugins-bad' "
@@ -4541,7 +4546,7 @@ msgstr ""
 "Falta o plugin 'ofa' na sua instalação gstreamer. Este é necessário para "
 "busca automática de tags. Tente o pacote 'gstreamer-plugins-bad' ."
 
-#: library/libraryview.cpp:212
+#: library/libraryview.cpp:219
 msgid "Your library is empty!"
 msgstr "Sua biblioteca está vazia!"
 
