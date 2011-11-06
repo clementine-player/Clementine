@@ -27,6 +27,7 @@
 
 #include "core/song.h"
 
+class QAction;
 class SqlRow;
 
 class PlaylistItem : public boost::enable_shared_from_this<PlaylistItem> {
@@ -52,6 +53,8 @@ class PlaylistItem : public boost::enable_shared_from_this<PlaylistItem> {
   virtual QString type() const { return type_; }
 
   virtual Options options() const { return Default; }
+
+  virtual QList<QAction*> actions() { return QList<QAction*>(); }
 
   virtual bool InitFromQuery(const SqlRow& query) = 0;
   void BindToQuery(QSqlQuery* query) const;

@@ -1379,6 +1379,15 @@ void MainWindow::PlaylistRightClick(const QPoint& global_pos, const QModelIndex&
 
     playlist_delete_->setVisible(editable);
     playlist_copy_to_device_->setVisible(editable);
+
+    // Remove old item actions, if any.
+    foreach(QAction* action, playlistitem_actions_) {
+      playlist_menu_->removeAction(action);
+    }
+
+    // Get the new item actions, and add them
+    playlistitem_actions_ = item->actions();
+    playlist_menu_->insertActions(ui_->action_clear_playlist, playlistitem_actions_);
   }
 
   //if it isn't the first time we right click, we need to remove the menu previously created

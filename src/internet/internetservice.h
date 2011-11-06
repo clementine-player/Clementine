@@ -51,6 +51,8 @@ public:
   virtual void DropMimeData(const QMimeData* data, const QModelIndex& index) {}
 
   virtual PlaylistItem::Options playlistitem_options() const { return PlaylistItem::Default; }
+  // Redefine this function to add service' specific actions to the playlist item
+  virtual QList<QAction*> playlistitem_actions(const Song& song) { return QList<QAction*>(); }
 
   virtual QWidget* HeaderWidget() const { return NULL; }
 

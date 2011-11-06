@@ -963,6 +963,17 @@ void Playlist::InsertInternetItems(const InternetModel* model,
   InsertItems(playlist_items, pos, play_now, enqueue);
 }
 
+void Playlist::InsertInternetItems(InternetService* service,
+                                   const SongList& songs,
+                                   int pos, bool play_now, bool enqueue) {
+  PlaylistItemList playlist_items;
+  foreach (const Song& song, songs) {
+    playlist_items << shared_ptr<PlaylistItem>(new InternetPlaylistItem(service, song));
+  }
+
+  InsertItems(playlist_items, pos, play_now, enqueue);
+}
+
 void Playlist::UpdateItems(const SongList& songs) {
   qLog(Debug) << "Updating playlist with new tracks' info";
   foreach (const Song& song, songs) {

@@ -33,6 +33,7 @@ class PlaylistBackend;
 class PlaylistFilter;
 class Queue;
 class InternetModel;
+class InternetService;
 class TaskManager;
 
 class QSortFilterProxyModel;
@@ -214,6 +215,8 @@ class Playlist : public QAbstractListModel {
   void InsertSongsOrLibraryItems(const SongList& items,             int pos = -1, bool play_now = false, bool enqueue = false);
   void InsertSmartPlaylist      (smart_playlists::GeneratorPtr gen, int pos = -1, bool play_now = false, bool enqueue = false);
   void InsertUrls               (const QList<QUrl>& urls,           int pos = -1, bool play_now = false, bool enqueue = false);
+  void InsertInternetItems      (InternetService* service,
+                                 const SongList& songs,             int pos = -1, bool play_now = false, bool enqueue = false);
   // Removes items with given indices from the playlist. This operation is not undoable.
   void RemoveItemsWithoutUndo   (const QList<int>& indices);
   void UpdateItems              (const SongList& songs);

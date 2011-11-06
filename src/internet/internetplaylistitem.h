@@ -32,6 +32,8 @@ class InternetPlaylistItem : public PlaylistItem {
 
   Options options() const;
 
+  QList<QAction*> actions();
+
   bool InitFromQuery(const SqlRow& query);
 
   Song Metadata() const;

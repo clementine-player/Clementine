@@ -58,6 +58,7 @@ class GroovesharkService : public InternetService {
 
   void ItemDoubleClicked(QStandardItem* item);
   void DropMimeData(const QMimeData* data, const QModelIndex& index);
+  QList<QAction*> playlistitem_actions(const Song& song);
   void ShowContextMenu(const QModelIndex& index, const QPoint& global_pos);
 
   void Search(const QString& text, Playlist* playlist, bool now = false);
@@ -134,6 +135,8 @@ class GroovesharkService : public InternetService {
   void NewPlaylistCreated(QNetworkReply* reply, const QString& name);
   void DeleteCurrentPlaylist();
   void PlaylistDeleted(QNetworkReply* reply, int playlist_id);
+  void AddCurrentSongToUserFavorites() { AddUserFavoriteSong(current_song_id_); }
+  void AddCurrentSongToPlaylist(QAction* action);
   void UserFavoriteSongAdded(QNetworkReply* reply);
   void RemoveCurrentFromPlaylist();
   void RemoveCurrentFromFavorites();
@@ -192,11 +195,13 @@ class GroovesharkService : public InternetService {
 
   QMenu* context_menu_;
   QModelIndex context_item_;
+  int current_song_id_;
 
   QAction* create_playlist_;
   QAction* delete_playlist_;
   QAction* remove_from_playlist_;
   QAction* remove_from_favorites_;
+  QList<QAction*> playlistitem_actions_;
 
   QTimer* search_delay_;
   QNetworkReply* last_search_reply_;

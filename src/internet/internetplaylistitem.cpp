@@ -103,3 +103,10 @@ PlaylistItem::Options InternetPlaylistItem::options() const {
     return Default;
   return s->playlistitem_options();
 }
+
+QList<QAction*> InternetPlaylistItem::actions() {
+  InternetService* s = service();
+  if (!s)
+    return QList<QAction*>();
+  return s->playlistitem_actions(metadata_);
+}

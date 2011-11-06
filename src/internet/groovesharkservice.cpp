@@ -265,7 +265,7 @@ void GroovesharkService::SearchSongsFinished() {
   QVariantMap result = ExtractResult(reply);
   SongList songs = ExtractSongs(result);
   pending_search_playlist_->Clear();
-  pending_search_playlist_->InsertSongs(songs);
+  pending_search_playlist_->InsertInternetItems(this, songs);
 }
 
 void GroovesharkService::InitCountry() {
@@ -710,6 +710,54 @@ void GroovesharkService::DropMimeData(const QMimeData* data, const QModelIndex& 
   }
 }
 
+QList<QAction*> GroovesharkService::playlistitem_actions(const Song& song) {
+  // Clear previous actions
+  while (!playlistitem_actions_.isEmpty()) {
+    QAction* action = playlistitem_actions_.takeFirst();
+    QMenu* menu = action->menu();
+    if (menu)
+      delete menu;
+    delete action;
+  }
+
+  // Create a 'add to favorites' action
+  QAction* add_to_favorites = new QAction(QIcon(":/last.fm/love.png"),
+                                          tr("Add to Grooveshark favorites"), this);
+  connect(add_to_favorites, SIGNAL(triggered()), SLOT(AddCurrentSongToUserFavorites()));
+  playlistitem_actions_.append(add_to_favorites);
+
+  // Create a menu with 'add to playlist' actions for each Grooveshark playlist
+  QAction* add_to_playlists = new QAction(IconLoader::Load("list-add"),
+                                          tr("Add to Grooveshark playlists"), this);
+  QMenu* playlists_menu = new QMenu();
+  foreach (PlaylistInfo playlist_info, playlists_.values()) {
+    QAction* add_to_playlist = new QAction(playlist_info.name_, this);
+    add_to_playlist->setData(playlist_info.id_);
+    playlists_menu->addAction(add_to_playlist);
+  }
+  connect(playlists_menu, SIGNAL(triggered(QAction*)), SLOT(AddCurrentSongToPlaylist(QAction*)));
+  add_to_playlists->setMenu(playlists_menu);
+  playlistitem_actions_.append(add_to_playlists);
+
+  // Keep in mind the current song id
+  current_song_id_ = ExtractSongId(song.url());
+
+  return playlistitem_actions_;
+}
+
+void GroovesharkService::AddCurrentSongToPlaylist(QAction* action) {
+  int playlist_id = action->data().toInt();
+  if (!playlists_.contains(playlist_id)) {
+    return;
+  }
+  // Get the current playlist's songs
+  PlaylistInfo playlist = playlists_[playlist_id];
+  QList<int> songs_ids = playlist.songs_ids_;
+  songs_ids << current_song_id_;
+
+  SetPlaylistSongs(playlist_id, songs_ids);
+}
+
 void GroovesharkService::SetPlaylistSongs(int playlist_id, const QList<int>& songs_ids) {
   QList<Param> parameters;
 
@@ -904,8 +952,8 @@ void GroovesharkService::SongRemovedFromFavorites(QNetworkReply* reply) {
 }
 
 QNetworkReply* GroovesharkService::CreateRequest(const QString& method_name, QList<Param> params,
-                                       bool need_authentication,
-                                       bool use_https) {
+                                                 bool need_authentication,
+                                                 bool use_https) {
   QVariantMap request_params;
   request_params.insert("method", method_name);
 
