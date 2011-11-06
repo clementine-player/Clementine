@@ -66,7 +66,6 @@ public:
   QString get_name_for_new_playlist() {
     return name_for_new_playlist_.isEmpty() ? tr("Playlist") : name_for_new_playlist_;
   }
-
 };
 
 #endif // MIMEDATA_H

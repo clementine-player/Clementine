@@ -24,8 +24,13 @@
 template <typename T>
 class CachedList {
 public:
+  // Use a CachedList when you want to download and save a list of things from a
+  // remote service, updating it only periodically.
+  // T must be a registered metatype and must support being stored in
+  // QSettings.  This usually means you have to implement QDataStream streaming
+  // operators, and use qRegisterMetaTypeStreamOperators.
+
   typedef QList<T> ListType;
-  typedef typename ListType::const_iterator const_iterator;
 
   CachedList(const char* settings_group, const QString& name,
              int cache_duration_secs)
@@ -77,6 +82,8 @@ public:
   const ListType& Data() const { return data_; }
   operator ListType() const { return data_; }
 
+  // Q_FOREACH support
+  typedef typename ListType::const_iterator const_iterator;
   const_iterator begin() const { return data_.begin(); }
   const_iterator end() const { return data_.end(); }
 
