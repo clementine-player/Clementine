@@ -166,7 +166,9 @@ def GetBrokenLibraries(binary):
       continue
     if os.path.basename(binary) in line:
       continue
-    if re.match(r'^\s*/System/', line):
+    if 'libiconv' in line:
+      broken_libs['libs'].append(line)
+    elif re.match(r'^\s*/System/', line):
       continue  # System framework
     elif re.match(r'^\s*/usr/lib/', line):
       continue  # unix style system library
@@ -295,7 +297,7 @@ def FixId(path, library_name):
   id = '@executable_path/../Frameworks/%s' % library_name
   args = ['install_name_tool', '-id', id, path]
   commands.append(args)
-  
+
 def FixLibraryId(path):
   library_name = os.path.basename(path)
   FixId(path, library_name)
@@ -308,6 +310,8 @@ def FixInstallPath(library_path, library, new_path):
   commands.append(args)
 
 def FindSystemLibrary(library_name):
+  if 'iconv' in library_name:
+    return None
   for path in ['/lib', '/usr/lib']:
     full_path = os.path.join(path, library_name)
     if os.path.exists(full_path):
