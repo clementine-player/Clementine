@@ -1055,6 +1055,7 @@ if(HAVE_SPOTIFY)
     gstspotifytcpsrc
     ${QCA_LIBRARIES}
   )
+  link_directories(${QCA_LIBRARY_DIRS})
 endif(HAVE_SPOTIFY)
 
 if (APPLE)
