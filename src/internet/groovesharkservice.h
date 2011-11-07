@@ -36,12 +36,19 @@ class GroovesharkService : public InternetService {
 
   enum Type {
     Type_SearchResults = InternetModel::TypeCount,
-    Type_Track,
-    Type_UserFavorites
+    Type_Track
   };
 
   enum Role {
     Role_UserPlaylistId = InternetModel::RoleCount,
+    Role_PlaylistType
+  };
+
+  enum PlaylistType {
+    NormalPlaylist = Qt::UserRole,
+    // Favorites list is like a playlist, but we want to do special treatments
+    // in some cases
+    UserFavorites
   };
 
   // Values are persisted - don't change.

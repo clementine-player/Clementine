@@ -417,16 +417,19 @@ void GroovesharkService::ShowContextMenu(const QModelIndex& index, const QPoint&
         display_remove_from_playlist_action = false,
         display_remove_from_favorites_action = false;
 
-  if (index.data(InternetModel::Role_Type).toInt() == InternetModel::Type_UserPlaylist) {
+  if (index.data(InternetModel::Role_Type).toInt() == InternetModel::Type_UserPlaylist &&
+      index.data(Role_PlaylistType).toInt() != UserFavorites) {
     display_delete_playlist_action = true;
   }
   // We check parent's type (instead of index type) because we want to enable
   // 'remove' actions for items which are inside a playlist
   int parent_type = index.parent().data(InternetModel::Role_Type).toInt();
   if (parent_type == InternetModel::Type_UserPlaylist) {
-    display_remove_from_playlist_action = true;
-  } else if (parent_type == Type_UserFavorites) {
-    display_remove_from_favorites_action = true;
+    int parent_playlist_type = index.parent().data(Role_PlaylistType).toInt();
+    if (parent_playlist_type == UserFavorites)
+      display_remove_from_favorites_action = true;
+    else
+      display_remove_from_playlist_action = true;
   }
   delete_playlist_->setVisible(display_delete_playlist_action);
   remove_from_playlist_->setVisible(display_remove_from_playlist_action);
@@ -590,7 +593,8 @@ void GroovesharkService::UserFavoritesRetrieved() {
     favorites_->removeRows(0, favorites_->rowCount());
   } else {
     favorites_ = new QStandardItem(QIcon(":/last.fm/love.png"), tr("Favorites"));
-    favorites_->setData(Type_UserFavorites, InternetModel::Role_Type);
+    favorites_->setData(InternetModel::Type_UserPlaylist, InternetModel::Role_Type);
+    favorites_->setData(UserFavorites, Role_PlaylistType);
     favorites_->setData(true, InternetModel::Role_CanLazyLoad);
     favorites_->setData(true, InternetModel::Role_CanBeModified);
     favorites_->setData(InternetModel::PlayBehaviour_SingleItem, InternetModel::Role_PlayBehaviour);
@@ -688,25 +692,28 @@ void GroovesharkService::DropMimeData(const QMimeData* data, const QModelIndex& 
   int type = index.data(InternetModel::Role_Type).toInt();
   int parent_type = index.parent().data(InternetModel::Role_Type).toInt();
 
-  // If dropped on Favorites list
-  if (type == Type_UserFavorites || parent_type == Type_UserFavorites) {
-    foreach (int song_id, data_songs_ids) {
-      AddUserFavoriteSong(song_id);
-    }
-  // If dropped on a playlist
-  } else if (type == InternetModel::Type_UserPlaylist ||
-             parent_type == InternetModel::Type_UserPlaylist) {
-    // Get the playlist
-    int playlist_id = index.data(Role_UserPlaylistId).toInt();
-    if (!playlists_.contains(playlist_id)) {
-      return;
-    }
-    // Get the current playlist's songs
-    PlaylistInfo playlist = playlists_[playlist_id];
-    QList<int> songs_ids = playlist.songs_ids_;
-    songs_ids << data_songs_ids;
+  if (type == InternetModel::Type_UserPlaylist ||
+      parent_type == InternetModel::Type_UserPlaylist) {
+    int playlist_type = index.data(Role_PlaylistType).toInt();
+    int parent_playlist_type = index.parent().data(Role_PlaylistType).toInt();
+    // If dropped on Favorites list
+    if (playlist_type == UserFavorites || parent_playlist_type == UserFavorites) {
+      foreach (int song_id, data_songs_ids) {
+        AddUserFavoriteSong(song_id);
+      }
+    } else { // Dropped on a normal playlist
+      // Get the playlist
+      int playlist_id = index.data(Role_UserPlaylistId).toInt();
+      if (!playlists_.contains(playlist_id)) {
+        return;
+      }
+      // Get the current playlist's songs
+      PlaylistInfo playlist = playlists_[playlist_id];
+      QList<int> songs_ids = playlist.songs_ids_;
+      songs_ids << data_songs_ids;
 
-    SetPlaylistSongs(playlist_id, songs_ids);
+      SetPlaylistSongs(playlist_id, songs_ids);
+    }
   }
 }
 
@@ -922,7 +929,7 @@ void GroovesharkService::RemoveFromPlaylist(int playlist_id, int song_id) {
 }
 
 void GroovesharkService::RemoveCurrentFromFavorites() {
-  if (context_item_.parent().data(InternetModel::Role_Type).toInt() != Type_UserFavorites) {
+  if (context_item_.parent().data(Role_PlaylistType).toInt() != UserFavorites) {
     return;
   }
 
