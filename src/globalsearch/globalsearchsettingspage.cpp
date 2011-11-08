@@ -29,7 +29,6 @@ GlobalSearchSettingsPage::GlobalSearchSettingsPage(SettingsDialog* dialog)
     ui_(new Ui::GlobalSearchSettingsPage)
 {
   ui_->setupUi(this);
-  setWindowIcon(IconLoader::Load("edit-find"));
 
   ui_->sources->header()->setResizeMode(0, QHeaderView::Stretch);
   ui_->sources->header()->setResizeMode(1, QHeaderView::ResizeToContents);
