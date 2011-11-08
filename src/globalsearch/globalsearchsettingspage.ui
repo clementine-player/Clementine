@@ -23,6 +23,9 @@
    </item>
    <item>
     <widget class="QCheckBox" name="hide_others">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="text">
       <string>Hide all other search boxes</string>
      </property>
@@ -30,6 +33,9 @@
    </item>
    <item>
     <widget class="QGroupBox" name="sources_group">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="title">
       <string>Sources</string>
      </property>
@@ -127,6 +133,9 @@
    </item>
    <item>
     <widget class="QGroupBox" name="results_group">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="title">
       <string>Results</string>
      </property>
@@ -140,6 +149,9 @@
       </item>
       <item>
        <widget class="QCheckBox" name="tooltip_help">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="text">
          <string>Include keyboard shortcut help in the tooltip</string>
         </property>
