@@ -113,7 +113,8 @@ void ExtendedEditor::Paint(QPaintDevice* device) {
       p.setFont(font);
 
       QRect r(5, kBorder, device->width() - 10, device->height() - kBorder*2);
-      p.drawText(r, Qt::AlignLeft | Qt::AlignVCenter, hint_);
+      p.drawText(r, Qt::AlignLeft | Qt::AlignVCenter,
+                 m.elidedText(hint_, Qt::ElideRight, r.width()));
     }
   } else {
     clear_button_->setVisible(has_clear_button_);
