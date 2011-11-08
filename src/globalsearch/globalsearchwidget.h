@@ -127,6 +127,7 @@ private:
   GlobalSearch* engine_;
   int last_id_;
   int order_arrived_counter_;
+  bool closed_since_search_began_;
 
   QMap<int, QModelIndex> art_requests_;
   QMap<int, QAction*> track_requests_;

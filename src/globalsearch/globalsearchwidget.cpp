@@ -54,6 +54,7 @@ GlobalSearchWidget::GlobalSearchWidget(QWidget* parent)
     engine_(NULL),
     last_id_(0),
     order_arrived_counter_(0),
+    closed_since_search_began_(false),
     front_model_(new QStandardItemModel(this)),
     back_model_(new QStandardItemModel(this)),
     current_model_(front_model_),
@@ -218,9 +219,11 @@ void GlobalSearchWidget::showEvent(QShowEvent* e) {
 
 void GlobalSearchWidget::TextEdited(const QString& text) {
   const QString trimmed_text = text.trimmed();
+  closed_since_search_began_ = false;
 
   if (trimmed_text.length() < 3) {
     RepositionPopup();
+    last_id_ = -1;
     return;
   }
 
@@ -245,7 +248,9 @@ void GlobalSearchWidget::SwapModels() {
   view_->setModel(front_proxy_);
   connect(view_->selectionModel(), SIGNAL(currentChanged(QModelIndex,QModelIndex)),
           SLOT(UpdateTooltip()));
-  RepositionPopup();
+
+  if (!closed_since_search_began_)
+    RepositionPopup();
 }
 
 void GlobalSearchWidget::AddResults(int id, const SearchProvider::ResultList& results) {
@@ -305,7 +310,8 @@ void GlobalSearchWidget::AddResults(int id, const SearchProvider::ResultList& re
 
   order_arrived_counter_ ++;
 
-  RepositionPopup();
+  if (!closed_since_search_began_)
+    RepositionPopup();
 }
 
 void GlobalSearchWidget::RepositionPopup() {
@@ -313,6 +319,8 @@ void GlobalSearchWidget::RepositionPopup() {
     HidePopup();
     return;
   }
+
+  closed_since_search_began_ = false;
 
   int h = view_->sizeHintForRow(0) * float(0.5 +
       qBound(kMinVisibleItems, front_model_->rowCount(), kMaxVisibleItems));
@@ -652,6 +660,7 @@ void GlobalSearchWidget::CombineResults(const QModelIndex& superior, const QMode
 }
 
 void GlobalSearchWidget::HidePopup() {
+  closed_since_search_began_ = true;
   if (tooltip_)
     tooltip_->hide();
   view_->hide();
