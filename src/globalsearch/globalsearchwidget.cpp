@@ -318,7 +318,7 @@ void GlobalSearchWidget::AddResults(int id, const SearchProvider::ResultList& re
 
 void GlobalSearchWidget::RepositionPopup() {
   if (front_model_->rowCount() == 0) {
-    HidePopup();
+    HidePopup(false);
     return;
   }
 
@@ -434,7 +434,7 @@ bool GlobalSearchWidget::EventFilterPopup(QObject*, QEvent* e) {
     if (e->isAccepted() || !view_->isVisible()) {
       // widget lost focus, hide the popup
       if (!ui_->search->hasFocus())
-        HidePopup();
+        HidePopup(true);
       if (e->isAccepted())
         return true;
     }
@@ -458,12 +458,12 @@ bool GlobalSearchWidget::EventFilterPopup(QObject*, QEvent* e) {
 
     case Qt::Key_F4:
       if (ke->modifiers() & Qt::AltModifier)
-        HidePopup();
+        HidePopup(true);
       break;
 
     case Qt::Key_Backtab:
     case Qt::Key_Escape:
-      HidePopup();
+      HidePopup(true);
       break;
 
     default:
@@ -475,7 +475,7 @@ bool GlobalSearchWidget::EventFilterPopup(QObject*, QEvent* e) {
 
   case QEvent::MouseButtonPress:
     if (!view_->underMouse()) {
-      HidePopup();
+      HidePopup(true);
       return true;
     }
     return false;
@@ -664,8 +664,11 @@ void GlobalSearchWidget::CombineResults(const QModelIndex& superior, const QMode
   current_model_->invisibleRootItem()->removeRow(inferior_item->row());
 }
 
-void GlobalSearchWidget::HidePopup() {
-  closed_since_search_began_ = true;
+void GlobalSearchWidget::HidePopup(bool manual) {
+  if (manual) {
+    closed_since_search_began_ = true;
+  }
+
   if (tooltip_)
     tooltip_->hide();
   view_->hide();

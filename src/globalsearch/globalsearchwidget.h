@@ -97,7 +97,7 @@ private slots:
   void ReplaceAndPlayCurrent();
   void SettingsClicked();
 
-  void HidePopup();
+  void HidePopup(bool manual);
   void UpdateTooltip();
   void UpdateTooltipPosition();
 
