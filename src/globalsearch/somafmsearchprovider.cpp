@@ -27,6 +27,11 @@ SomaFMSearchProvider::SomaFMSearchProvider(SomaFMService* service, QObject* pare
   icon_ = ScaleAndPad(QImage(":/providers/somafm.png"));
 
   connect(service, SIGNAL(StreamsChanged()), SLOT(MaybeRecreateItems()));
+
+  // Load the stream list on startup only if it doesn't involve going to update
+  // info from the server.
+  if (!service_->IsStreamListStale())
+    RecreateItems();
 }
 
 void SomaFMSearchProvider::LoadArtAsync(int id, const Result& result) {

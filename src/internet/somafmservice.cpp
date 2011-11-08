@@ -50,10 +50,10 @@ SomaFMService::SomaFMService(InternetModel* parent)
     network_(new NetworkAccessManager(this)),
     streams_(kSettingsGroup, "streams", kStreamsCacheDurationSecs)
 {
+  ReloadSettings();
+
   model()->player()->RegisterUrlHandler(url_handler_);
   model()->global_search()->AddProvider(new SomaFMSearchProvider(this, this));
-
-  ReloadSettings();
 }
 
 SomaFMService::~SomaFMService() {

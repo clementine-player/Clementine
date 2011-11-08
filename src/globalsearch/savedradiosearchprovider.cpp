@@ -27,6 +27,8 @@ SavedRadioSearchProvider::SavedRadioSearchProvider(SavedRadio* service, QObject*
   Init(tr("Your radio streams"), "savedradio", IconLoader::Load("document-open-remote"));
 
   connect(service_, SIGNAL(StreamsChanged()), SLOT(MaybeRecreateItems()));
+
+  RecreateItems();
 }
 
 void SavedRadioSearchProvider::RecreateItems() {

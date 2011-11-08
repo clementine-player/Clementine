@@ -59,6 +59,8 @@ DigitallyImportedServiceBase::DigitallyImportedServiceBase(
     saved_channels_(kSettingsGroup, api_service_name, kStreamsCacheDurationSecs),
     api_client_(new DigitallyImportedClient(api_service_name, this))
 {
+  ReloadSettings();
+
   model->player()->RegisterUrlHandler(url_handler_);
   model->global_search()->AddProvider(new DigitallyImportedSearchProvider(this, this));
 

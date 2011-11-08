@@ -31,6 +31,11 @@ DigitallyImportedSearchProvider::DigitallyImportedSearchProvider(
                                << "digitallyimported");
 
   connect(service_, SIGNAL(StreamsChanged()), SLOT(MaybeRecreateItems()));
+
+  // Load the channel list on startup only if it doesn't involve going to update
+  // info from the server.
+  if (!service_->IsChannelListStale())
+    RecreateItems();
 }
 
 void DigitallyImportedSearchProvider::RecreateItems() {

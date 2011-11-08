@@ -90,6 +90,8 @@ LastFMService::LastFMService(InternetModel* parent)
     friend_names_(kSettingsGroup, "friend_names", kFriendsCacheDurationSecs),
     connection_problems_(false)
 {
+  ReloadSettings();
+
   //we emit the signal the first time to be sure the buttons are in the right state
   emit ScrobblingEnabledChanged(scrobbling_enabled_);
 

@@ -30,6 +30,11 @@ LastFMSearchProvider::LastFMSearchProvider(LastFMService* service, QObject* pare
   set_safe_words(QStringList() << "lastfm" << "last.fm");
 
   connect(service, SIGNAL(SavedItemsChanged()), SLOT(MaybeRecreateItems()));
+
+  // Load the friends list on startup only if it doesn't involve going to update
+  // info from the server.
+  if (!service_->IsFriendsListStale())
+    RecreateItems();
 }
 
 void LastFMSearchProvider::LoadArtAsync(int id, const Result& result) {
