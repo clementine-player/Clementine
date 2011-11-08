@@ -112,6 +112,22 @@ private:
     RightPreferred  // The two results can be combined - the right one is better
   };
 
+  class CombineCache {
+  public:
+    CombineCache(QAbstractItemModel* model);
+
+    QModelIndexList FindCandidates(const QModelIndex& result) const;
+    void Insert(const QModelIndex& index);
+    void Remove(const QModelIndex& index);
+    void Clear();
+
+    static uint Hash(const QModelIndex& index);
+
+  private:
+    QAbstractItemModel* model_;
+    QMultiMap<uint, int> data_;
+  };
+
   void RepositionPopup();
   CombineAction CanCombineResults(const QModelIndex& left, const QModelIndex& right) const;
   void CombineResults(const QModelIndex& superior, const QModelIndex& inferior);
@@ -139,6 +155,8 @@ private:
   QStandardItemModel* front_model_;
   QStandardItemModel* back_model_;
   QStandardItemModel* current_model_;
+
+  QMap<QStandardItemModel*, CombineCache*> combine_cache_;
 
   QSortFilterProxyModel* front_proxy_;
   QSortFilterProxyModel* back_proxy_;

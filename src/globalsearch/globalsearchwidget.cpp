@@ -82,6 +82,9 @@ GlobalSearchWidget::GlobalSearchWidget(QWidget* parent)
   back_proxy_->setDynamicSortFilter(true);
   back_proxy_->sort(0);
 
+  combine_cache_[front_model_] = new CombineCache(front_model_);
+  combine_cache_[back_model_] = new CombineCache(back_model_);
+
   // Set up the popup
   view_->setObjectName("popup");
   view_->setWindowFlags(Qt::Popup);
@@ -142,6 +145,7 @@ GlobalSearchWidget::GlobalSearchWidget(QWidget* parent)
 
 GlobalSearchWidget::~GlobalSearchWidget() {
   delete ui_;
+  qDeleteAll(combine_cache_.values());
 }
 
 void GlobalSearchWidget::Init(GlobalSearch* engine) {
@@ -229,6 +233,7 @@ void GlobalSearchWidget::TextEdited(const QString& text) {
 
   // Add results to the back model, switch models after some delay.
   back_model_->clear();
+  combine_cache_[back_model_]->Clear();
   current_model_ = back_model_;
   current_proxy_ = back_proxy_;
   order_arrived_counter_ = 0;
@@ -270,35 +275,30 @@ void GlobalSearchWidget::AddResults(int id, const SearchProvider::ResultList& re
 
     current_model_->appendRow(item);
 
+    QModelIndex index = item->index();
+    combine_cache_[current_model_]->Insert(index);
+
     if (combine_identical_results_) {
       // Maybe we can combine this result with an identical result from another
-      // provider.  We can use the sorted model to narrow the scope of the
-      // search a bit - look at the result after the current one, then all the
-      // results before.
-      QModelIndex my_proxy_index = current_proxy_->mapFromSource(item->index());
-      QModelIndexList candidates;
-      candidates << my_proxy_index.sibling(my_proxy_index.row() + 1, 0);
+      // provider.
+      QModelIndexList candidates = combine_cache_[current_model_]->FindCandidates(index);
 
-      for (int i=my_proxy_index.row()-1 ; i>=0 ; --i) {
-        candidates << my_proxy_index.sibling(i, 0);
-      }
-
-      foreach (const QModelIndex& index, candidates) {
-        if (!index.isValid())
+      foreach (const QModelIndex& candidate, candidates) {
+        if (!candidate.isValid())
           continue;
 
-        CombineAction action = CanCombineResults(my_proxy_index, index);
+        CombineAction action = CanCombineResults(index, candidate);
 
         switch (action) {
         case CannotCombine:
           continue;
 
         case LeftPreferred:
-          CombineResults(my_proxy_index, index);
+          CombineResults(index, candidate);
           break;
 
         case RightPreferred:
-          CombineResults(index, my_proxy_index);
+          CombineResults(candidate, index);
           break;
         }
 
@@ -614,6 +614,8 @@ GlobalSearchWidget::CombineAction GlobalSearchWidget::CanCombineResults(
   const SearchProvider::Result r2 = right.data(Role_PrimaryResult)
       .value<SearchProvider::Result>();
 
+  // If you change the logic here remember to change CombineCache::Hash too.
+
   if (r1.match_quality_ != r2.match_quality_ || r1.type_ != r2.type_)
     return CannotCombine;
 
@@ -645,8 +647,8 @@ GlobalSearchWidget::CombineAction GlobalSearchWidget::CanCombineResults(
 }
 
 void GlobalSearchWidget::CombineResults(const QModelIndex& superior, const QModelIndex& inferior) {
-  QStandardItem* superior_item = current_model_->itemFromIndex(current_proxy_->mapToSource(superior));
-  QStandardItem* inferior_item = current_model_->itemFromIndex(current_proxy_->mapToSource(inferior));
+  QStandardItem* superior_item = current_model_->itemFromIndex(superior);
+  QStandardItem* inferior_item = current_model_->itemFromIndex(inferior);
 
   SearchProvider::ResultList superior_results =
       superior_item->data(Role_AllResults).value<SearchProvider::ResultList>();
@@ -656,6 +658,7 @@ void GlobalSearchWidget::CombineResults(const QModelIndex& superior, const QMode
   superior_results.append(inferior_results);
   superior_item->setData(QVariant::fromValue(superior_results), Role_AllResults);
 
+  combine_cache_[current_model_]->Remove(inferior_item->index());
   current_model_->invisibleRootItem()->removeRow(inferior_item->row());
 }
 
@@ -709,4 +712,67 @@ void GlobalSearchWidget::NextSuggestion() {
   }
 
   ui_->search->set_hint(hint);
+}
+
+GlobalSearchWidget::CombineCache::CombineCache(QAbstractItemModel* model)
+  : model_(model)
+{
+}
+
+uint GlobalSearchWidget::CombineCache::Hash(const QModelIndex& index) {
+  const SearchProvider::Result r = index.data(Role_PrimaryResult)
+      .value<SearchProvider::Result>();
+
+  uint ret = qHash(r.match_quality_) ^ qHash(r.type_);
+
+  switch (r.type_) {
+  case globalsearch::Type_Track:
+    ret ^= qHash(r.metadata_.title());
+    // fallthrough
+  case globalsearch::Type_Album:
+    ret ^= qHash(r.metadata_.album());
+    ret ^= qHash(r.metadata_.artist());
+    break;
+
+  case globalsearch::Type_Stream:
+    ret ^= qHash(r.metadata_.url().toString());
+    break;
+  }
+
+  return ret;
+}
+
+void GlobalSearchWidget::CombineCache::Insert(const QModelIndex& index) {
+  data_.insert(Hash(index), index.row());
+}
+
+void GlobalSearchWidget::CombineCache::Remove(const QModelIndex& index) {
+  // This is really inefficient but we're not doing it much - find any items
+  // with a row greater than this one and shuffle them down one.
+
+  for (QMultiMap<uint, int>::iterator it = data_.begin() ; it != data_.end() ; ++it) {
+    if (it.value() > index.row())
+      (*it) --;
+  }
+
+  // Now remove the row itself.
+  QMultiMap<uint, int>::iterator it = data_.find(Hash(index), index.row());
+  if (it != data_.end())
+    data_.erase(it);
+}
+
+QModelIndexList GlobalSearchWidget::CombineCache::FindCandidates(
+    const QModelIndex& result) const {
+  QModelIndexList ret;
+  foreach (int row, data_.values(Hash(result))) {
+    if (row != result.row()) {
+      ret << model_->index(row, 0);
+    }
+  }
+
+  return ret;
+}
+
+void GlobalSearchWidget::CombineCache::Clear() {
+  data_.clear();
 }
