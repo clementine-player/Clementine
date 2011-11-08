@@ -310,8 +310,10 @@ void GlobalSearchWidget::AddResults(int id, const SearchProvider::ResultList& re
 
   order_arrived_counter_ ++;
 
-  if (!closed_since_search_began_)
+  if (!closed_since_search_began_) {
     RepositionPopup();
+    UpdateTooltipPosition();
+  }
 }
 
 void GlobalSearchWidget::RepositionPopup() {
@@ -690,12 +692,25 @@ void GlobalSearchWidget::UpdateTooltip() {
     tooltip_->SetActions(actions_);
   }
 
+  tooltip_->SetResults(results);
+  UpdateTooltipPosition();
+}
+
+void GlobalSearchWidget::UpdateTooltipPosition() {
+  if (!tooltip_ || !view_->isVisible())
+    return;
+
+  const QModelIndex current = view_->selectionModel()->currentIndex();
+  if (!current.isValid()) {
+    tooltip_->hide();
+    return;
+  }
+
   const QRect item_rect = view_->visualRect(current);
   const QPoint popup_pos = item_rect.topRight() +
       QPoint(-GlobalSearchTooltip::kArrowWidth,
              item_rect.height() / 2);
 
-  tooltip_->SetResults(results);
   tooltip_->ShowAt(view_->mapToGlobal(popup_pos));
 }
 

@@ -99,6 +99,7 @@ private slots:
 
   void HidePopup();
   void UpdateTooltip();
+  void UpdateTooltipPosition();
 
   void SwapModels();
 
