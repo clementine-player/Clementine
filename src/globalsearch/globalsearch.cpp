@@ -26,6 +26,7 @@
 
 const int GlobalSearch::kDelayedSearchTimeoutMs = 200;
 const char* GlobalSearch::kSettingsGroup = "GlobalSearch";
+const int GlobalSearch::kMaxResultsPerEmission = 100;
 
 
 GlobalSearch::GlobalSearch(QObject* parent)
@@ -125,6 +126,15 @@ QString GlobalSearch::PixmapCacheKey(const SearchProvider::Result& result) const
 void GlobalSearch::ResultsAvailableSlot(int id, SearchProvider::ResultList results) {
   if (results.isEmpty())
     return;
+
+  // Limit the number of results that are used from each emission.
+  // Just a sanity check to stop some providers (Jamendo) returning thousands
+  // of results.
+  if (results.count() > kMaxResultsPerEmission) {
+    SearchProvider::ResultList::iterator begin = results.begin();
+    std::advance(begin, kMaxResultsPerEmission);
+    results.erase(begin, results.end());
+  }
 
   // Load cached pixmaps into the results
   for (SearchProvider::ResultList::iterator it = results.begin() ; it != results.end() ; ++it) {

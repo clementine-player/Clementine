@@ -35,6 +35,7 @@ public:
 
   static const int kDelayedSearchTimeoutMs;
   static const char* kSettingsGroup;
+  static const int kMaxResultsPerEmission;
 
   void AddProvider(SearchProvider* provider, bool enable_by_default = true);
   // Try to change provider state. Returns false if we can't (e.g. we can't
