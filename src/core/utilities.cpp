@@ -42,6 +42,7 @@
 
 #ifdef Q_OS_DARWIN
 #  include "core/mac_startup.h"
+#  include "CoreServices/CoreServices.h"
 #endif
 
 #include <boost/scoped_array.hpp>
@@ -282,6 +283,14 @@ QString GetConfigPath(ConfigPath config) {
       return QString::null;
   }
 }
+
+#ifdef Q_OS_DARWIN
+qint32 GetMacVersion() {
+  SInt32 minor_version;
+  Gestalt(gestaltSystemVersionMinor, &minor_version);
+  return minor_version;
+}
+#endif  // Q_OS_DARWIN
 
 void OpenInFileBrowser(const QList<QUrl>& urls) {
   QSet<QString> dirs;

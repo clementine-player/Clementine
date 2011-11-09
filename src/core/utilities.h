@@ -79,6 +79,9 @@ namespace Utilities {
     Path_LocalSpotifyBlob,
   };
   QString GetConfigPath(ConfigPath config);
+
+  // Returns the minor version of OS X (ie. 6 for Snow Leopard, 7 for Lion).
+  qint32 GetMacVersion();
 }
 
 class ScopedWCharArray {
