@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2011-11-06 20:35+0000\n"
+"PO-Revision-Date: 2011-11-08 20:46+0000\n"
 "Last-Translator: clementinebuildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -349,7 +349,7 @@ msgstr "Dodaj novu liniju ako je podržana od tipa obavijesti"
 msgid "Add action"
 msgstr "Dodajte radnju"
 
-#: globalsearch/globalsearchwidget.cpp:100
+#: globalsearch/globalsearchwidget.cpp:104
 msgid "Add and play now"
 msgstr ""
 
@@ -441,11 +441,11 @@ msgstr "Dodajte oznaku godine pjesme"
 msgid "Add stream..."
 msgstr "Dodajte stream..."
 
-#: internet/groovesharkservice.cpp:725
+#: internet/groovesharkservice.cpp:732
 msgid "Add to Grooveshark favorites"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:731
+#: internet/groovesharkservice.cpp:738
 msgid "Add to Grooveshark playlists"
 msgstr ""
 
@@ -453,7 +453,7 @@ msgstr ""
 msgid "Add to another playlist"
 msgstr "Dodajte na drugi popis izvođenja"
 
-#: globalsearch/globalsearchwidget.cpp:99
+#: globalsearch/globalsearchwidget.cpp:103
 #: ../bin/src/ui_albumcovermanager.h:152
 msgid "Add to playlist"
 msgstr "Dodajte u popis izvođenja"
@@ -613,7 +613,7 @@ msgstr "Pogreška je nastala tijekom učitavanja iTunes baze podataka"
 msgid "An error occurred writing metadata to '%1'"
 msgstr "Pogreška je nastala zapisivanjem metapodataka '%1'"
 
-#: internet/lastfmservice.cpp:900
+#: internet/lastfmservice.cpp:902
 #, qt-format
 msgid "An unknown last.fm error occurred: %1"
 msgstr "Nepoznata last.fm pogreška je nastala: %1"
@@ -648,7 +648,7 @@ msgstr "Primjenite kompresiju da spriječite isječak"
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "Jeste li sigurni da želite izbrisati \"%1\" postavke?"
 
-#: internet/groovesharkservice.cpp:852
+#: internet/groovesharkservice.cpp:859
 msgid "Are you sure you want to delete this playlist?"
 msgstr ""
 
@@ -670,7 +670,7 @@ msgstr "Izvođač"
 msgid "Artist info"
 msgstr "Info izvođača"
 
-#: internet/lastfmservice.cpp:189
+#: internet/lastfmservice.cpp:191
 msgid "Artist radio"
 msgstr "Izvođač radia"
 
@@ -691,7 +691,7 @@ msgid "Authenticating..."
 msgstr "Provjera autentičnosti..."
 
 #: internet/digitallyimportedsettingspage.cpp:82
-#: internet/magnatunesettingspage.cpp:113 internet/lastfmservice.cpp:430
+#: internet/magnatunesettingspage.cpp:113 internet/lastfmservice.cpp:432
 #: internet/lastfmsettingspage.cpp:79 remote/remotesettingspage.cpp:113
 msgid "Authentication failed"
 msgstr "Provjera autentičnosti nije uspjela"
@@ -995,7 +995,7 @@ msgstr "Klub"
 msgid "Color"
 msgstr "Boja"
 
-#: ../bin/src/ui_globalsearchsettingspage.h:163
+#: ../bin/src/ui_globalsearchsettingspage.h:170
 msgid "Combine identical results from different sources"
 msgstr ""
 
@@ -1022,11 +1022,11 @@ msgstr "Završite oznake automatski..."
 msgid "Composer"
 msgstr "Skladatelj"
 
-#: internet/groovesharkservice.cpp:466
+#: internet/groovesharkservice.cpp:469
 msgid "Configure Grooveshark..."
 msgstr ""
 
-#: internet/lastfmservice.cpp:109
+#: internet/lastfmservice.cpp:111
 msgid "Configure Last.fm..."
 msgstr "Podesi Last.fm..."
 
@@ -1046,8 +1046,8 @@ msgstr "Podesite Spotify ..."
 msgid "Configure library..."
 msgstr "Podesi zbirku..."
 
-#: internet/digitallyimportedservicebase.cpp:180
-#: ../bin/src/ui_globalsearchsettingspage.h:167
+#: internet/digitallyimportedservicebase.cpp:182
+#: ../bin/src/ui_globalsearchsettingspage.h:174
 msgid "Configure..."
 msgstr ""
 
@@ -1116,7 +1116,7 @@ msgstr ""
 "Nije moguće pronaći enkoder za %1, provjerite imate li ispravne GStreamer "
 "pluginove instalirane"
 
-#: internet/lastfmservice.cpp:897
+#: internet/lastfmservice.cpp:899
 msgid "Couldn't load the last.fm radio station"
 msgstr "Nije moguće učitati Last.fm radio stanicu"
 
@@ -1157,7 +1157,7 @@ msgstr "Omot albuma postavljen iz %1"
 msgid "Covers from %1"
 msgstr "Omoti sa %1"
 
-#: internet/groovesharkservice.cpp:451 internet/groovesharkservice.cpp:804
+#: internet/groovesharkservice.cpp:454 internet/groovesharkservice.cpp:811
 msgid "Create a new Grooveshark playlist"
 msgstr ""
 
@@ -1249,7 +1249,7 @@ msgstr "Prilagođeno"
 msgid "Custom message settings"
 msgstr "Prilagođene postavke poruka"
 
-#: internet/lastfmservice.cpp:197
+#: internet/lastfmservice.cpp:199
 msgid "Custom radio"
 msgstr "Ručno odabrani radio"
 
@@ -1297,7 +1297,7 @@ msgstr "Zadano"
 msgid "Delay between visualizations"
 msgstr "Pauza između vizualizacija"
 
-#: internet/groovesharkservice.cpp:454 internet/groovesharkservice.cpp:851
+#: internet/groovesharkservice.cpp:457 internet/groovesharkservice.cpp:858
 msgid "Delete Grooveshark playlist"
 msgstr ""
 
@@ -1563,7 +1563,7 @@ msgstr "Omogući pozadinsku sliku na popisu izvođenja"
 msgid "Enable shortcuts only when Clementine is focused"
 msgstr "Omogući prečac samo ako je Clementine fokusiran"
 
-#: ../bin/src/ui_globalsearchsettingspage.h:164
+#: ../bin/src/ui_globalsearchsettingspage.h:171
 msgid ""
 "Enable sources below to include them in search results.  When identical "
 "results are available from more than one source, ones at the top will take "
@@ -1652,7 +1652,7 @@ msgstr "pogreška pri preuzimanju Spotify dodatka"
 msgid "Error loading %1"
 msgstr "Pogreška pri učitavanju %1"
 
-#: internet/digitallyimportedservicebase.cpp:202
+#: internet/digitallyimportedservicebase.cpp:204
 #: internet/digitallyimportedurlhandler.cpp:73
 msgid "Error loading di.fm playlist"
 msgstr ""
@@ -1726,7 +1726,7 @@ msgstr "Trajanje utišavanja"
 msgid "Fast"
 msgstr "Brzo"
 
-#: internet/groovesharkservice.cpp:592
+#: internet/groovesharkservice.cpp:595
 msgid "Favorites"
 msgstr ""
 
@@ -1877,7 +1877,7 @@ msgstr "Broj sličica"
 msgid "Frames per buffer"
 msgstr "Okvira po međuspremniku"
 
-#: internet/lastfmservice.cpp:205
+#: internet/lastfmservice.cpp:207
 msgid "Friends"
 msgstr "Prijatelji"
 
@@ -1915,7 +1915,7 @@ msgstr "Vrsta glazbe"
 msgid "Getting channels"
 msgstr "Dobivanje kanala"
 
-#: internet/digitallyimportedservicebase.cpp:104
+#: internet/digitallyimportedservicebase.cpp:106
 msgid "Getting streams"
 msgstr ""
 
@@ -2001,7 +2001,7 @@ msgstr "Informacije o Hardweru"
 msgid "Hardware information is only available while the device is connected."
 msgstr "Informacije o Hardweru samo su dostupne dok je uređaj spojen"
 
-#: ../bin/src/ui_globalsearchsettingspage.h:161
+#: ../bin/src/ui_globalsearchsettingspage.h:168
 msgid "Hide all other search boxes"
 msgstr ""
 
@@ -2094,7 +2094,7 @@ msgstr "Prikaži omot albuma u obavijesti"
 msgid "Include all songs"
 msgstr "Obuhvati sve pjesme"
 
-#: ../bin/src/ui_globalsearchsettingspage.h:170
+#: ../bin/src/ui_globalsearchsettingspage.h:177
 msgid "Include keyboard shortcut help in the tooltip"
 msgstr ""
 
@@ -2126,31 +2126,31 @@ msgstr "Internet"
 msgid "Internet providers"
 msgstr ""
 
-#: internet/lastfmservice.cpp:436
+#: internet/lastfmservice.cpp:438
 msgid "Invalid API key"
 msgstr "Pogrešan API ključ"
 
-#: internet/lastfmservice.cpp:431
+#: internet/lastfmservice.cpp:433
 msgid "Invalid format"
 msgstr "Pogrešan format"
 
-#: internet/lastfmservice.cpp:429
+#: internet/lastfmservice.cpp:431
 msgid "Invalid method"
 msgstr "Pogrešna metoda"
 
-#: internet/lastfmservice.cpp:432
+#: internet/lastfmservice.cpp:434
 msgid "Invalid parameters"
 msgstr "Pogrešni parametri"
 
-#: internet/lastfmservice.cpp:433
+#: internet/lastfmservice.cpp:435
 msgid "Invalid resource specified"
 msgstr "Pogrešan izvor naveden"
 
-#: internet/lastfmservice.cpp:428
+#: internet/lastfmservice.cpp:430
 msgid "Invalid service"
 msgstr "Pogrešan servis"
 
-#: internet/lastfmservice.cpp:435
+#: internet/lastfmservice.cpp:437
 msgid "Invalid session key"
 msgstr "Pogrešan ključ sesije"
 
@@ -2244,25 +2244,25 @@ msgstr "Last.fm"
 msgid "Last.fm Custom Radio: %1"
 msgstr "Last.fm naručen radio: %1"
 
-#: internet/lastfmservice.cpp:236 internet/lastfmservice.cpp:691
-#: internet/lastfmservice.cpp:726
+#: internet/lastfmservice.cpp:238 internet/lastfmservice.cpp:693
+#: internet/lastfmservice.cpp:728
 #, qt-format
 msgid "Last.fm Library - %1"
 msgstr "Last.fm zbirka - %1"
 
-#: globalsearch/lastfmsearchprovider.cpp:70 internet/lastfmservice.cpp:238
-#: internet/lastfmservice.cpp:241
+#: globalsearch/lastfmsearchprovider.cpp:75 internet/lastfmservice.cpp:240
+#: internet/lastfmservice.cpp:243
 #, qt-format
 msgid "Last.fm Mix Radio - %1"
 msgstr "Last.fm mix radio -  %1"
 
-#: globalsearch/lastfmsearchprovider.cpp:72 internet/lastfmservice.cpp:243
-#: internet/lastfmservice.cpp:246
+#: globalsearch/lastfmsearchprovider.cpp:77 internet/lastfmservice.cpp:245
+#: internet/lastfmservice.cpp:248
 #, qt-format
 msgid "Last.fm Neighbor Radio - %1"
 msgstr "Last.fm susjedni radio -  %1"
 
-#: globalsearch/lastfmsearchprovider.cpp:68 internet/lastfmservice.cpp:233
+#: globalsearch/lastfmsearchprovider.cpp:73 internet/lastfmservice.cpp:235
 #, qt-format
 msgid "Last.fm Radio Station - %1"
 msgstr "Last.fm radio stanica -  %1"
@@ -2277,7 +2277,7 @@ msgstr "Last.fm slični izvođači u  %1"
 msgid "Last.fm Tag Radio: %1"
 msgstr "Last.fm oznaka radio:  %1"
 
-#: internet/lastfmservice.cpp:440
+#: internet/lastfmservice.cpp:442
 msgid "Last.fm is currently busy, please try again in a few minutes"
 msgstr "Last.fm je trenutno zauzet, pokušajte ponovno za nekoliko minuta"
 
@@ -2366,7 +2366,7 @@ msgstr "Otvorite popis izvođenja"
 msgid "Load playlist..."
 msgstr "Otvorite popis izvođenja..."
 
-#: internet/lastfmservice.cpp:910
+#: internet/lastfmservice.cpp:912
 msgid "Loading Last.fm radio"
 msgstr "Učitaj  Last.fm radio"
 
@@ -2495,7 +2495,7 @@ msgstr "Glavni profil (GLAVNI)"
 msgid "Make playlist available offline"
 msgstr "Učini popis izvođenja dostupnim kada je veza prekinuta"
 
-#: internet/lastfmservice.cpp:447
+#: internet/lastfmservice.cpp:449
 msgid "Malformed response"
 msgstr "Pogreška u odgovoru"
 
@@ -2568,7 +2568,7 @@ msgstr "Točka montiranja"
 msgid "Mount points"
 msgstr "Točke montiranja"
 
-#: ../bin/src/ui_globalsearchsettingspage.h:166
+#: ../bin/src/ui_globalsearchsettingspage.h:173
 #: ../bin/src/ui_queuemanager.h:131 ../bin/src/ui_songinfosettingspage.h:190
 msgid "Move down"
 msgstr "Pomakni dolje"
@@ -2577,7 +2577,7 @@ msgstr "Pomakni dolje"
 msgid "Move to library..."
 msgstr "Premjesti u zbirku..."
 
-#: ../bin/src/ui_globalsearchsettingspage.h:165
+#: ../bin/src/ui_globalsearchsettingspage.h:172
 #: ../bin/src/ui_queuemanager.h:127 ../bin/src/ui_songinfosettingspage.h:189
 msgid "Move up"
 msgstr "Pomakni gore"
@@ -2595,39 +2595,39 @@ msgstr "Zbirka glazbe"
 msgid "Mute"
 msgstr "Utišaj"
 
-#: globalsearch/lastfmsearchprovider.cpp:46 internet/lastfmservice.cpp:176
+#: globalsearch/lastfmsearchprovider.cpp:51 internet/lastfmservice.cpp:178
 msgid "My Last.fm Library"
 msgstr "Moja Last.fm zbirka"
 
-#: globalsearch/lastfmsearchprovider.cpp:48 internet/lastfmservice.cpp:181
+#: globalsearch/lastfmsearchprovider.cpp:53 internet/lastfmservice.cpp:183
 msgid "My Last.fm Mix Radio"
 msgstr "Moj Last.fm mix radio"
 
-#: globalsearch/lastfmsearchprovider.cpp:50 internet/lastfmservice.cpp:186
+#: globalsearch/lastfmsearchprovider.cpp:55 internet/lastfmservice.cpp:188
 msgid "My Last.fm Neighborhood"
 msgstr "Moj Last.fm susjed"
 
-#: globalsearch/lastfmsearchprovider.cpp:44 internet/lastfmservice.cpp:171
+#: globalsearch/lastfmsearchprovider.cpp:49 internet/lastfmservice.cpp:173
 msgid "My Last.fm Recommended Radio"
 msgstr "Moj Last.fm preporučeni radio"
 
-#: internet/lastfmservice.cpp:178
+#: internet/lastfmservice.cpp:180
 msgid "My Mix Radio"
 msgstr "Moj mix radio"
 
-#: internet/lastfmservice.cpp:183
+#: internet/lastfmservice.cpp:185
 msgid "My Neighborhood"
 msgstr "Moje susjedstvo"
 
-#: internet/lastfmservice.cpp:173
+#: internet/lastfmservice.cpp:175
 msgid "My Radio Station"
 msgstr "Moje radio stanice"
 
-#: internet/lastfmservice.cpp:168
+#: internet/lastfmservice.cpp:170
 msgid "My Recommendations"
 msgstr "Moje preporuke"
 
-#: internet/groovesharkservice.cpp:805 ui/equalizer.cpp:172
+#: internet/groovesharkservice.cpp:812 ui/equalizer.cpp:172
 #: ../bin/src/ui_deviceproperties.h:369
 #: ../bin/src/ui_magnatunedownloaddialog.h:135
 #: ../bin/src/ui_wizardfinishpage.h:84
@@ -2643,7 +2643,7 @@ msgstr "Opcije promjene naziva"
 msgid "Narrow band (NB)"
 msgstr "Uskopojasni (UP)"
 
-#: internet/lastfmservice.cpp:210
+#: internet/lastfmservice.cpp:212
 msgid "Neighbors"
 msgstr "Susjedi"
 
@@ -2737,19 +2737,19 @@ msgstr "Nije dostupno tijekom korištenja dinamičkog popis izvođenja"
 msgid "Not connected"
 msgstr "Nije spojeno"
 
-#: internet/lastfmservice.cpp:442
+#: internet/lastfmservice.cpp:444
 msgid "Not enough content"
 msgstr "Nema dovoljno sadržaja"
 
-#: internet/lastfmservice.cpp:444
+#: internet/lastfmservice.cpp:446
 msgid "Not enough fans"
 msgstr "Nema dovoljno obožavatelja"
 
-#: internet/lastfmservice.cpp:443
+#: internet/lastfmservice.cpp:445
 msgid "Not enough members"
 msgstr "Nema dovoljno članova"
 
-#: internet/lastfmservice.cpp:445
+#: internet/lastfmservice.cpp:447
 msgid "Not enough neighbors"
 msgstr "Nema dovoljno susjeda"
 
@@ -2757,7 +2757,7 @@ msgstr "Nema dovoljno susjeda"
 msgid "Not installed"
 msgstr "Nije instalirano"
 
-#: globalsearch/globalsearchsettingspage.cpp:124
+#: globalsearch/globalsearchsettingspage.cpp:123
 msgid "Not logged in"
 msgstr ""
 
@@ -2798,7 +2798,7 @@ msgstr "Ogg Vorbis"
 msgid "Only show the first"
 msgstr "Samo prikaži prvi"
 
-#: internet/digitallyimportedservicebase.cpp:173
+#: internet/digitallyimportedservicebase.cpp:175
 #, qt-format
 msgid "Open %1 in browser"
 msgstr ""
@@ -2842,7 +2842,7 @@ msgstr "Otvorite somafm.com u Internet pretraživaču"
 msgid "Open..."
 msgstr "Otvorite..."
 
-#: internet/lastfmservice.cpp:434
+#: internet/lastfmservice.cpp:436
 msgid "Operation failed"
 msgstr "Operacija nije izvršena"
 
@@ -2941,7 +2941,7 @@ msgstr "Play"
 msgid "Play Artist or Tag"
 msgstr "Reproduciraj izvođača ili oznaku"
 
-#: internet/lastfmservice.cpp:101
+#: internet/lastfmservice.cpp:103
 msgid "Play artist radio..."
 msgstr "Reproduciraj Izvođača radia..."
 
@@ -2949,7 +2949,7 @@ msgstr "Reproduciraj Izvođača radia..."
 msgid "Play count"
 msgstr "Broj izvođenja"
 
-#: internet/lastfmservice.cpp:105
+#: internet/lastfmservice.cpp:107
 msgid "Play custom radio..."
 msgstr "Reproduciraj ručno odabrani radio..."
 
@@ -2974,7 +2974,7 @@ msgstr "Reproduciraj last.fm izvođača radia"
 msgid "Play last.fm tag radio"
 msgstr "Reproduciraj last.fm odabrani radio"
 
-#: internet/lastfmservice.cpp:103
+#: internet/lastfmservice.cpp:105
 msgid "Play tag radio..."
 msgstr "Reproduciraj odabrani radio..."
 
@@ -3143,7 +3143,7 @@ msgstr "Upravljanje odabranim pjesmama za reprodukciju"
 msgid "Queue selected tracks"
 msgstr "Odaberite označenu pjesmu za reprodukciju"
 
-#: globalsearch/globalsearchwidget.cpp:101 library/libraryview.cpp:251
+#: globalsearch/globalsearchwidget.cpp:105 library/libraryview.cpp:251
 #: ui/mainwindow.cpp:1338
 msgid "Queue track"
 msgstr "Odaberite pjesmu za reprodukciju"
@@ -3200,7 +3200,7 @@ msgstr "Osvježi katalog"
 msgid "Refresh channels"
 msgstr "Osvježi kanale"
 
-#: internet/lastfmservice.cpp:107
+#: internet/lastfmservice.cpp:109
 msgid "Refresh friends list"
 msgstr ""
 
@@ -3208,7 +3208,7 @@ msgstr ""
 msgid "Refresh station list"
 msgstr "Osvježi popis stanica"
 
-#: internet/digitallyimportedservicebase.cpp:176
+#: internet/digitallyimportedservicebase.cpp:178
 msgid "Refresh streams"
 msgstr ""
 
@@ -3228,7 +3228,7 @@ msgstr "Zapamti od prošlog puta"
 msgid "Remote Control"
 msgstr "Daljinsko upravljanje"
 
-#: internet/savedradio.cpp:100 internet/lastfmservice.cpp:98
+#: internet/savedradio.cpp:100 internet/lastfmservice.cpp:100
 #: ../bin/src/ui_queuemanager.h:135 ../bin/src/ui_searchtermwidget.h:282
 #: ../bin/src/ui_transcodedialog.h:207
 msgid "Remove"
@@ -3242,11 +3242,11 @@ msgstr "Uklonite radnju"
 msgid "Remove folder"
 msgstr "Uklonite mapu"
 
-#: internet/groovesharkservice.cpp:461
+#: internet/groovesharkservice.cpp:464
 msgid "Remove from favorites"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:458 ../bin/src/ui_mainwindow.h:674
+#: internet/groovesharkservice.cpp:461 ../bin/src/ui_mainwindow.h:674
 msgid "Remove from playlist"
 msgstr "Uklonite iz popisa izvođenja"
 
@@ -3282,11 +3282,11 @@ msgstr "Ponovi popis izvođenja"
 msgid "Repeat track"
 msgstr "Ponovi pjesmu"
 
-#: globalsearch/globalsearchwidget.cpp:103
+#: globalsearch/globalsearchwidget.cpp:107
 msgid "Replace and play now"
 msgstr ""
 
-#: devices/deviceview.cpp:218 globalsearch/globalsearchwidget.cpp:102
+#: devices/deviceview.cpp:218 globalsearch/globalsearchwidget.cpp:106
 #: internet/internetservice.cpp:63 library/libraryview.cpp:245
 #: widgets/fileviewlist.cpp:33
 msgid "Replace current playlist"
@@ -3324,7 +3324,7 @@ msgstr "Poništite broj izvođenja"
 msgid "Restrict to ASCII characters"
 msgstr "Ograniči na ASCII znakove"
 
-#: ../bin/src/ui_globalsearchsettingspage.h:168
+#: ../bin/src/ui_globalsearchsettingspage.h:175
 msgid "Results"
 msgstr ""
 
@@ -3396,17 +3396,17 @@ msgstr "Pogodci"
 msgid "Scrobble tracks that I listen to"
 msgstr "Scrobblaj pjesmu koju slušam"
 
-#: ../bin/src/ui_globalsearchsettingspage.h:159
+#: ../bin/src/ui_globalsearchsettingspage.h:166
 #: ../bin/src/ui_albumcoversearcher.h:113
 msgid "Search"
 msgstr "Traži"
 
 #: internet/groovesharksearchplaylisttype.cpp:32
-#: internet/groovesharkservice.cpp:663
+#: internet/groovesharkservice.cpp:667
 msgid "Search Grooveshark"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:464 internet/groovesharkservice.cpp:473
+#: internet/groovesharkservice.cpp:467 internet/groovesharkservice.cpp:476
 msgid "Search Grooveshark (opens a new tab)"
 msgstr ""
 
@@ -3434,13 +3434,17 @@ msgstr "Pretražite Spotify (otvori u novoj kartici)"
 msgid "Search Spotify (opens a new tab)..."
 msgstr "Pretražite Spotify (otvori u novoj kartici)..."
 
-#: ../bin/src/ui_globalsearchwidget.h:60
-msgid "Search everywhere"
+#: ../bin/src/ui_globalsearchwidget.h:61
+msgid "Search around all your sources (library, internet services, ...)"
 msgstr ""
 
 #: ui/albumcoverchoicecontroller.cpp:61
 msgid "Search for album covers..."
 msgstr "Pretražite omote albuma..."
+
+#: ../bin/src/ui_globalsearchwidget.h:63
+msgid "Search for anything"
+msgstr ""
 
 #: ../bin/src/ui_querysearchpage.h:71
 msgid "Search mode"
@@ -3498,7 +3502,7 @@ msgstr "Odaberi vizualizaciju..."
 msgid "Serial number"
 msgstr "Serijski broj"
 
-#: internet/lastfmservice.cpp:437
+#: internet/lastfmservice.cpp:439
 msgid "Service offline"
 msgstr "Servis offline"
 
@@ -3571,7 +3575,7 @@ msgstr "Prikažite skočni prozor iz sistemske trake"
 msgid "Show a pretty OSD"
 msgstr "Prikaži ljepši OSD"
 
-#: ../bin/src/ui_globalsearchsettingspage.h:169
+#: ../bin/src/ui_globalsearchsettingspage.h:176
 msgid "Show a tooltip with more information about each result"
 msgstr ""
 
@@ -3615,8 +3619,8 @@ msgstr "Prikaži samo duplicirane pjesme"
 msgid "Show only untagged"
 msgstr "Prikaži samo neoznačene pjesme"
 
-#: ../bin/src/ui_globalsearchsettingspage.h:160
-msgid "Show the \"Search everywhere\" box above the sidebar"
+#: ../bin/src/ui_globalsearchsettingspage.h:167
+msgid "Show the \"Search for anything\" box above the sidebar"
 msgstr ""
 
 #: ../bin/src/ui_lastfmsettingspage.h:151
@@ -3739,7 +3743,7 @@ msgstr "Sortiraj pjesmu po"
 msgid "Sorting"
 msgstr "Sortiranje"
 
-#: ../bin/src/ui_globalsearchsettingspage.h:162
+#: ../bin/src/ui_globalsearchsettingspage.h:169
 msgid "Sources"
 msgstr ""
 
@@ -3882,7 +3886,7 @@ msgstr "Oznake"
 msgid "Tag fetcher"
 msgstr "Preuzimanje oznaka"
 
-#: internet/lastfmservice.cpp:193
+#: internet/lastfmservice.cpp:195
 msgid "Tag radio"
 msgstr "Označi radio"
 
@@ -4040,7 +4044,7 @@ msgstr ""
 "Ovaj popis izvođenja će biti uklonjen, ova radnja se ne može poništiti. "
 "Jeste li sigurni da želite nastaviti?"
 
-#: internet/lastfmservice.cpp:438
+#: internet/lastfmservice.cpp:440
 msgid "This stream is for paid subscribers only"
 msgstr "Ovaj stream je samo za pretplaćene korisnike"
 
@@ -4158,7 +4162,7 @@ msgstr "Nije moguće preuzeti %1 (%2)"
 msgid "Unknown"
 msgstr "Nepoznato"
 
-#: internet/digitallyimportedclient.cpp:68 internet/lastfmservice.cpp:451
+#: internet/digitallyimportedclient.cpp:68 internet/lastfmservice.cpp:453
 msgid "Unknown error"
 msgstr "Nepoznata pogreška"
 
@@ -4625,7 +4629,7 @@ msgstr "disk %1"
 msgid "does not contain"
 msgstr "ne sadrži"
 
-#: globalsearch/globalsearchwidget.cpp:699
+#: globalsearch/globalsearchwidget.cpp:729
 msgid "e.g."
 msgstr ""
 

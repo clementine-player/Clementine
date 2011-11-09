@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2011-11-06 20:35+0000\n"
+"PO-Revision-Date: 2011-11-08 20:46+0000\n"
 "Last-Translator: clementinebuildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -348,7 +348,7 @@ msgstr "Sortörés hozzáadása ha az értesítés támogatja"
 msgid "Add action"
 msgstr "Esemény felvétele"
 
-#: globalsearch/globalsearchwidget.cpp:100
+#: globalsearch/globalsearchwidget.cpp:104
 msgid "Add and play now"
 msgstr ""
 
@@ -440,11 +440,11 @@ msgstr "Szám évének hozzáadása"
 msgid "Add stream..."
 msgstr "Adatfolyam hozzáadása..."
 
-#: internet/groovesharkservice.cpp:725
+#: internet/groovesharkservice.cpp:732
 msgid "Add to Grooveshark favorites"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:731
+#: internet/groovesharkservice.cpp:738
 msgid "Add to Grooveshark playlists"
 msgstr ""
 
@@ -452,7 +452,7 @@ msgstr ""
 msgid "Add to another playlist"
 msgstr "Hozzáadás másik lejátszási listához"
 
-#: globalsearch/globalsearchwidget.cpp:99
+#: globalsearch/globalsearchwidget.cpp:103
 #: ../bin/src/ui_albumcovermanager.h:152
 msgid "Add to playlist"
 msgstr "Hozzáadás a lejátszási listához"
@@ -612,7 +612,7 @@ msgstr "Hiba történt az iTunes adatbázis betöltése közben"
 msgid "An error occurred writing metadata to '%1'"
 msgstr "Hiba történt '%1' metaadatainak írása közben"
 
-#: internet/lastfmservice.cpp:900
+#: internet/lastfmservice.cpp:902
 #, qt-format
 msgid "An unknown last.fm error occurred: %1"
 msgstr "Ismeretlen Last.fm hiba történt: %1"
@@ -647,7 +647,7 @@ msgstr "Tömörítés engedélyezése a túlvezérlés elkerülése érdekében"
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "Biztos benne, hogy törli a \"%1\" beállítást?"
 
-#: internet/groovesharkservice.cpp:852
+#: internet/groovesharkservice.cpp:859
 msgid "Are you sure you want to delete this playlist?"
 msgstr ""
 
@@ -670,7 +670,7 @@ msgstr "Előadó"
 msgid "Artist info"
 msgstr "Előadó infó"
 
-#: internet/lastfmservice.cpp:189
+#: internet/lastfmservice.cpp:191
 msgid "Artist radio"
 msgstr "Előadó rádió"
 
@@ -691,7 +691,7 @@ msgid "Authenticating..."
 msgstr "Hitelesítés…"
 
 #: internet/digitallyimportedsettingspage.cpp:82
-#: internet/magnatunesettingspage.cpp:113 internet/lastfmservice.cpp:430
+#: internet/magnatunesettingspage.cpp:113 internet/lastfmservice.cpp:432
 #: internet/lastfmsettingspage.cpp:79 remote/remotesettingspage.cpp:113
 msgid "Authentication failed"
 msgstr "A hitelesítés meghiúsult"
@@ -995,7 +995,7 @@ msgstr "Club"
 msgid "Color"
 msgstr "Szín"
 
-#: ../bin/src/ui_globalsearchsettingspage.h:163
+#: ../bin/src/ui_globalsearchsettingspage.h:170
 msgid "Combine identical results from different sources"
 msgstr ""
 
@@ -1024,11 +1024,11 @@ msgstr "Címkék automatikus kiegészítése"
 msgid "Composer"
 msgstr "Zeneszerző"
 
-#: internet/groovesharkservice.cpp:466
+#: internet/groovesharkservice.cpp:469
 msgid "Configure Grooveshark..."
 msgstr ""
 
-#: internet/lastfmservice.cpp:109
+#: internet/lastfmservice.cpp:111
 msgid "Configure Last.fm..."
 msgstr "Last.fm beállítása"
 
@@ -1048,8 +1048,8 @@ msgstr "Spotify beállítása..."
 msgid "Configure library..."
 msgstr "Zenetár beállítása..."
 
-#: internet/digitallyimportedservicebase.cpp:180
-#: ../bin/src/ui_globalsearchsettingspage.h:167
+#: internet/digitallyimportedservicebase.cpp:182
+#: ../bin/src/ui_globalsearchsettingspage.h:174
 msgid "Configure..."
 msgstr ""
 
@@ -1120,7 +1120,7 @@ msgstr ""
 "Nem található megfelelő kódoló %1 tömörítéséhez. Ellenőrizze, hogy a "
 "GStreamer beépülők megfelelően vannak-e telepítve"
 
-#: internet/lastfmservice.cpp:897
+#: internet/lastfmservice.cpp:899
 msgid "Couldn't load the last.fm radio station"
 msgstr "Nem sikerült betölteni a Last.fm rádióállomást"
 
@@ -1161,7 +1161,7 @@ msgstr "Albumborító beállítva %1 helyről"
 msgid "Covers from %1"
 msgstr "Borítók %1 helyről"
 
-#: internet/groovesharkservice.cpp:451 internet/groovesharkservice.cpp:804
+#: internet/groovesharkservice.cpp:454 internet/groovesharkservice.cpp:811
 msgid "Create a new Grooveshark playlist"
 msgstr ""
 
@@ -1253,7 +1253,7 @@ msgstr "Egyéni"
 msgid "Custom message settings"
 msgstr "Egyedi üzenetbeállítások"
 
-#: internet/lastfmservice.cpp:197
+#: internet/lastfmservice.cpp:199
 msgid "Custom radio"
 msgstr "Egyéni rádió"
 
@@ -1301,7 +1301,7 @@ msgstr "Alapértelmezések"
 msgid "Delay between visualizations"
 msgstr "Megjelenítések között váltás ideje"
 
-#: internet/groovesharkservice.cpp:454 internet/groovesharkservice.cpp:851
+#: internet/groovesharkservice.cpp:457 internet/groovesharkservice.cpp:858
 msgid "Delete Grooveshark playlist"
 msgstr ""
 
@@ -1568,7 +1568,7 @@ msgid "Enable shortcuts only when Clementine is focused"
 msgstr ""
 "Gyorsbillentyűk engedélyezése csak akkor, ha a Clementine fókuszba kerül"
 
-#: ../bin/src/ui_globalsearchsettingspage.h:164
+#: ../bin/src/ui_globalsearchsettingspage.h:171
 msgid ""
 "Enable sources below to include them in search results.  When identical "
 "results are available from more than one source, ones at the top will take "
@@ -1658,7 +1658,7 @@ msgstr "Hiba a Spotify beépülő letöltése közben"
 msgid "Error loading %1"
 msgstr "Hiba %1 betöltésekor"
 
-#: internet/digitallyimportedservicebase.cpp:202
+#: internet/digitallyimportedservicebase.cpp:204
 #: internet/digitallyimportedurlhandler.cpp:73
 msgid "Error loading di.fm playlist"
 msgstr ""
@@ -1732,7 +1732,7 @@ msgstr "Elhalkulás hossza"
 msgid "Fast"
 msgstr "Gyors"
 
-#: internet/groovesharkservice.cpp:592
+#: internet/groovesharkservice.cpp:595
 msgid "Favorites"
 msgstr ""
 
@@ -1886,7 +1886,7 @@ msgstr "Frissítési gyakoriság"
 msgid "Frames per buffer"
 msgstr ""
 
-#: internet/lastfmservice.cpp:205
+#: internet/lastfmservice.cpp:207
 msgid "Friends"
 msgstr "Barátok"
 
@@ -1924,7 +1924,7 @@ msgstr "Műfaj"
 msgid "Getting channels"
 msgstr "Csatornák betöltése"
 
-#: internet/digitallyimportedservicebase.cpp:104
+#: internet/digitallyimportedservicebase.cpp:106
 msgid "Getting streams"
 msgstr ""
 
@@ -2011,7 +2011,7 @@ msgid "Hardware information is only available while the device is connected."
 msgstr ""
 "A hardverjellemzők csak csatlakoztatott eszköz esetén tekinthetők meg."
 
-#: ../bin/src/ui_globalsearchsettingspage.h:161
+#: ../bin/src/ui_globalsearchsettingspage.h:168
 msgid "Hide all other search boxes"
 msgstr ""
 
@@ -2102,7 +2102,7 @@ msgstr "Albumborító megjelenítése az értesítésben"
 msgid "Include all songs"
 msgstr "Vegyen bele minden számot"
 
-#: ../bin/src/ui_globalsearchsettingspage.h:170
+#: ../bin/src/ui_globalsearchsettingspage.h:177
 msgid "Include keyboard shortcut help in the tooltip"
 msgstr ""
 
@@ -2134,31 +2134,31 @@ msgstr "Internet"
 msgid "Internet providers"
 msgstr ""
 
-#: internet/lastfmservice.cpp:436
+#: internet/lastfmservice.cpp:438
 msgid "Invalid API key"
 msgstr "Érvénytelen API kulcs"
 
-#: internet/lastfmservice.cpp:431
+#: internet/lastfmservice.cpp:433
 msgid "Invalid format"
 msgstr "Érvénytelen formátum"
 
-#: internet/lastfmservice.cpp:429
+#: internet/lastfmservice.cpp:431
 msgid "Invalid method"
 msgstr "Érvénytelen eljárás"
 
-#: internet/lastfmservice.cpp:432
+#: internet/lastfmservice.cpp:434
 msgid "Invalid parameters"
 msgstr "Érvénytelen paraméterek"
 
-#: internet/lastfmservice.cpp:433
+#: internet/lastfmservice.cpp:435
 msgid "Invalid resource specified"
 msgstr "Hibás eszközspecifikáció"
 
-#: internet/lastfmservice.cpp:428
+#: internet/lastfmservice.cpp:430
 msgid "Invalid service"
 msgstr "Érvénytelen szolgáltatás"
 
-#: internet/lastfmservice.cpp:435
+#: internet/lastfmservice.cpp:437
 msgid "Invalid session key"
 msgstr "Érvénytelen munkafolyamat kulcs"
 
@@ -2252,25 +2252,25 @@ msgstr "Last.fm"
 msgid "Last.fm Custom Radio: %1"
 msgstr "Last.fm Egyéni Rádió: %1"
 
-#: internet/lastfmservice.cpp:236 internet/lastfmservice.cpp:691
-#: internet/lastfmservice.cpp:726
+#: internet/lastfmservice.cpp:238 internet/lastfmservice.cpp:693
+#: internet/lastfmservice.cpp:728
 #, qt-format
 msgid "Last.fm Library - %1"
 msgstr "Last.fm Zenetár - %1"
 
-#: globalsearch/lastfmsearchprovider.cpp:70 internet/lastfmservice.cpp:238
-#: internet/lastfmservice.cpp:241
+#: globalsearch/lastfmsearchprovider.cpp:75 internet/lastfmservice.cpp:240
+#: internet/lastfmservice.cpp:243
 #, qt-format
 msgid "Last.fm Mix Radio - %1"
 msgstr "Last.fm Mix Rádió - %1"
 
-#: globalsearch/lastfmsearchprovider.cpp:72 internet/lastfmservice.cpp:243
-#: internet/lastfmservice.cpp:246
+#: globalsearch/lastfmsearchprovider.cpp:77 internet/lastfmservice.cpp:245
+#: internet/lastfmservice.cpp:248
 #, qt-format
 msgid "Last.fm Neighbor Radio - %1"
 msgstr "Last.fm Szomszédos Rádió - %1"
 
-#: globalsearch/lastfmsearchprovider.cpp:68 internet/lastfmservice.cpp:233
+#: globalsearch/lastfmsearchprovider.cpp:73 internet/lastfmservice.cpp:235
 #, qt-format
 msgid "Last.fm Radio Station - %1"
 msgstr "Last.fm Rádió Állomás - %1"
@@ -2285,7 +2285,7 @@ msgstr "Last.fm Hasonló Előadók - %1"
 msgid "Last.fm Tag Radio: %1"
 msgstr "Last.fm Címke Rádió: %1"
 
-#: internet/lastfmservice.cpp:440
+#: internet/lastfmservice.cpp:442
 msgid "Last.fm is currently busy, please try again in a few minutes"
 msgstr "A Last.fm nem elérhető, kérlek próbáld később"
 
@@ -2374,7 +2374,7 @@ msgstr "Lejátszási lista betöltése"
 msgid "Load playlist..."
 msgstr "Lejátszási lista betöltése..."
 
-#: internet/lastfmservice.cpp:910
+#: internet/lastfmservice.cpp:912
 msgid "Loading Last.fm radio"
 msgstr "Last.fm rádió betöltése"
 
@@ -2503,7 +2503,7 @@ msgstr "Fő profil (MAIN)"
 msgid "Make playlist available offline"
 msgstr ""
 
-#: internet/lastfmservice.cpp:447
+#: internet/lastfmservice.cpp:449
 msgid "Malformed response"
 msgstr "Hibásan formázott válasz"
 
@@ -2576,7 +2576,7 @@ msgstr "Csatolási pont"
 msgid "Mount points"
 msgstr "Csatolási pontok"
 
-#: ../bin/src/ui_globalsearchsettingspage.h:166
+#: ../bin/src/ui_globalsearchsettingspage.h:173
 #: ../bin/src/ui_queuemanager.h:131 ../bin/src/ui_songinfosettingspage.h:190
 msgid "Move down"
 msgstr "Mozgatás lefelé"
@@ -2585,7 +2585,7 @@ msgstr "Mozgatás lefelé"
 msgid "Move to library..."
 msgstr "Áthelyezés a zenetárba..."
 
-#: ../bin/src/ui_globalsearchsettingspage.h:165
+#: ../bin/src/ui_globalsearchsettingspage.h:172
 #: ../bin/src/ui_queuemanager.h:127 ../bin/src/ui_songinfosettingspage.h:189
 msgid "Move up"
 msgstr "Mozgatás felfelé"
@@ -2603,39 +2603,39 @@ msgstr "Zenetár"
 msgid "Mute"
 msgstr "Némítás"
 
-#: globalsearch/lastfmsearchprovider.cpp:46 internet/lastfmservice.cpp:176
+#: globalsearch/lastfmsearchprovider.cpp:51 internet/lastfmservice.cpp:178
 msgid "My Last.fm Library"
 msgstr "A Last.fm zenetáram"
 
-#: globalsearch/lastfmsearchprovider.cpp:48 internet/lastfmservice.cpp:181
+#: globalsearch/lastfmsearchprovider.cpp:53 internet/lastfmservice.cpp:183
 msgid "My Last.fm Mix Radio"
 msgstr "A Last.fm mix rádióm"
 
-#: globalsearch/lastfmsearchprovider.cpp:50 internet/lastfmservice.cpp:186
+#: globalsearch/lastfmsearchprovider.cpp:55 internet/lastfmservice.cpp:188
 msgid "My Last.fm Neighborhood"
 msgstr "A Last.fm szomszédaim"
 
-#: globalsearch/lastfmsearchprovider.cpp:44 internet/lastfmservice.cpp:171
+#: globalsearch/lastfmsearchprovider.cpp:49 internet/lastfmservice.cpp:173
 msgid "My Last.fm Recommended Radio"
 msgstr "A Last.fm ajánlott rádióm"
 
-#: internet/lastfmservice.cpp:178
+#: internet/lastfmservice.cpp:180
 msgid "My Mix Radio"
 msgstr "Az én mixem rádió"
 
-#: internet/lastfmservice.cpp:183
+#: internet/lastfmservice.cpp:185
 msgid "My Neighborhood"
 msgstr "Szomszédaim"
 
-#: internet/lastfmservice.cpp:173
+#: internet/lastfmservice.cpp:175
 msgid "My Radio Station"
 msgstr "A rádióadóm"
 
-#: internet/lastfmservice.cpp:168
+#: internet/lastfmservice.cpp:170
 msgid "My Recommendations"
 msgstr "Ajánlásaim"
 
-#: internet/groovesharkservice.cpp:805 ui/equalizer.cpp:172
+#: internet/groovesharkservice.cpp:812 ui/equalizer.cpp:172
 #: ../bin/src/ui_deviceproperties.h:369
 #: ../bin/src/ui_magnatunedownloaddialog.h:135
 #: ../bin/src/ui_wizardfinishpage.h:84
@@ -2651,7 +2651,7 @@ msgstr "Elnevezési opciók"
 msgid "Narrow band (NB)"
 msgstr "Keskenysávú (NB)"
 
-#: internet/lastfmservice.cpp:210
+#: internet/lastfmservice.cpp:212
 msgid "Neighbors"
 msgstr "Szomszédok"
 
@@ -2745,19 +2745,19 @@ msgstr "Nem elérhető dinamikus lejátszási lista használatakor"
 msgid "Not connected"
 msgstr "Nincs kapcsolat"
 
-#: internet/lastfmservice.cpp:442
+#: internet/lastfmservice.cpp:444
 msgid "Not enough content"
 msgstr "Nincs elég tartalom"
 
-#: internet/lastfmservice.cpp:444
+#: internet/lastfmservice.cpp:446
 msgid "Not enough fans"
 msgstr "Nincs elég rajongó"
 
-#: internet/lastfmservice.cpp:443
+#: internet/lastfmservice.cpp:445
 msgid "Not enough members"
 msgstr "Nincs elég tag"
 
-#: internet/lastfmservice.cpp:445
+#: internet/lastfmservice.cpp:447
 msgid "Not enough neighbors"
 msgstr "Nincs elég szomszédja"
 
@@ -2765,7 +2765,7 @@ msgstr "Nincs elég szomszédja"
 msgid "Not installed"
 msgstr "Nincs telepítve"
 
-#: globalsearch/globalsearchsettingspage.cpp:124
+#: globalsearch/globalsearchsettingspage.cpp:123
 msgid "Not logged in"
 msgstr ""
 
@@ -2806,7 +2806,7 @@ msgstr "Ogg Vorbis"
 msgid "Only show the first"
 msgstr "Csak a legelsőt mutassa"
 
-#: internet/digitallyimportedservicebase.cpp:173
+#: internet/digitallyimportedservicebase.cpp:175
 #, qt-format
 msgid "Open %1 in browser"
 msgstr ""
@@ -2850,7 +2850,7 @@ msgstr "A somafm.com megnyitása böngészőben"
 msgid "Open..."
 msgstr "Megnyitás..."
 
-#: internet/lastfmservice.cpp:434
+#: internet/lastfmservice.cpp:436
 msgid "Operation failed"
 msgstr "A művelet sikertelen"
 
@@ -2949,7 +2949,7 @@ msgstr "Lejátszás"
 msgid "Play Artist or Tag"
 msgstr "Előadó vagy Címke lejátszása"
 
-#: internet/lastfmservice.cpp:101
+#: internet/lastfmservice.cpp:103
 msgid "Play artist radio..."
 msgstr "Előadó rádió lejátszása"
 
@@ -2957,7 +2957,7 @@ msgstr "Előadó rádió lejátszása"
 msgid "Play count"
 msgstr "Lejátszások száma"
 
-#: internet/lastfmservice.cpp:105
+#: internet/lastfmservice.cpp:107
 msgid "Play custom radio..."
 msgstr "Egyéni rádió lejátszása..."
 
@@ -2982,7 +2982,7 @@ msgstr "Last.fm előadó rádió lejátszása"
 msgid "Play last.fm tag radio"
 msgstr "Last.fm címke rádió lejátszása"
 
-#: internet/lastfmservice.cpp:103
+#: internet/lastfmservice.cpp:105
 msgid "Play tag radio..."
 msgstr "Címke rádió lejátszása..."
 
@@ -3151,7 +3151,7 @@ msgstr "Sorkezelő"
 msgid "Queue selected tracks"
 msgstr "Sorba állítja a kiválasztott számokat"
 
-#: globalsearch/globalsearchwidget.cpp:101 library/libraryview.cpp:251
+#: globalsearch/globalsearchwidget.cpp:105 library/libraryview.cpp:251
 #: ui/mainwindow.cpp:1338
 msgid "Queue track"
 msgstr "Szám sorba állítása"
@@ -3208,7 +3208,7 @@ msgstr "Katalógus frissítése"
 msgid "Refresh channels"
 msgstr "Csatornák frissítése"
 
-#: internet/lastfmservice.cpp:107
+#: internet/lastfmservice.cpp:109
 msgid "Refresh friends list"
 msgstr ""
 
@@ -3216,7 +3216,7 @@ msgstr ""
 msgid "Refresh station list"
 msgstr "Állomáslista frissítése"
 
-#: internet/digitallyimportedservicebase.cpp:176
+#: internet/digitallyimportedservicebase.cpp:178
 msgid "Refresh streams"
 msgstr ""
 
@@ -3236,7 +3236,7 @@ msgstr "Ahogy legutoljára volt"
 msgid "Remote Control"
 msgstr "Távirányítás"
 
-#: internet/savedradio.cpp:100 internet/lastfmservice.cpp:98
+#: internet/savedradio.cpp:100 internet/lastfmservice.cpp:100
 #: ../bin/src/ui_queuemanager.h:135 ../bin/src/ui_searchtermwidget.h:282
 #: ../bin/src/ui_transcodedialog.h:207
 msgid "Remove"
@@ -3250,11 +3250,11 @@ msgstr "Esemény eltávolítása"
 msgid "Remove folder"
 msgstr "Mappa eltávolítása"
 
-#: internet/groovesharkservice.cpp:461
+#: internet/groovesharkservice.cpp:464
 msgid "Remove from favorites"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:458 ../bin/src/ui_mainwindow.h:674
+#: internet/groovesharkservice.cpp:461 ../bin/src/ui_mainwindow.h:674
 msgid "Remove from playlist"
 msgstr "Eltávolítás a lejátszási listáról"
 
@@ -3290,11 +3290,11 @@ msgstr "Lejátszási lista ismétlése"
 msgid "Repeat track"
 msgstr "Szám ismétlése"
 
-#: globalsearch/globalsearchwidget.cpp:103
+#: globalsearch/globalsearchwidget.cpp:107
 msgid "Replace and play now"
 msgstr ""
 
-#: devices/deviceview.cpp:218 globalsearch/globalsearchwidget.cpp:102
+#: devices/deviceview.cpp:218 globalsearch/globalsearchwidget.cpp:106
 #: internet/internetservice.cpp:63 library/libraryview.cpp:245
 #: widgets/fileviewlist.cpp:33
 msgid "Replace current playlist"
@@ -3332,7 +3332,7 @@ msgstr "Lejátszás számlálók visszaállítása"
 msgid "Restrict to ASCII characters"
 msgstr "Korlátozás ASCII karakterekre"
 
-#: ../bin/src/ui_globalsearchsettingspage.h:168
+#: ../bin/src/ui_globalsearchsettingspage.h:175
 msgid "Results"
 msgstr ""
 
@@ -3404,17 +3404,17 @@ msgstr "Pontszám"
 msgid "Scrobble tracks that I listen to"
 msgstr "Az általam hallgatott számok Scrobble funkcióval történő figyelése"
 
-#: ../bin/src/ui_globalsearchsettingspage.h:159
+#: ../bin/src/ui_globalsearchsettingspage.h:166
 #: ../bin/src/ui_albumcoversearcher.h:113
 msgid "Search"
 msgstr "Keresés"
 
 #: internet/groovesharksearchplaylisttype.cpp:32
-#: internet/groovesharkservice.cpp:663
+#: internet/groovesharkservice.cpp:667
 msgid "Search Grooveshark"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:464 internet/groovesharkservice.cpp:473
+#: internet/groovesharkservice.cpp:467 internet/groovesharkservice.cpp:476
 msgid "Search Grooveshark (opens a new tab)"
 msgstr ""
 
@@ -3442,13 +3442,17 @@ msgstr "Keresés Spotifyon (új lapot nyit)"
 msgid "Search Spotify (opens a new tab)..."
 msgstr "Keresés Spotifyon (új lapot nyit)..."
 
-#: ../bin/src/ui_globalsearchwidget.h:60
-msgid "Search everywhere"
+#: ../bin/src/ui_globalsearchwidget.h:61
+msgid "Search around all your sources (library, internet services, ...)"
 msgstr ""
 
 #: ui/albumcoverchoicecontroller.cpp:61
 msgid "Search for album covers..."
 msgstr "Album borítók keresése..."
+
+#: ../bin/src/ui_globalsearchwidget.h:63
+msgid "Search for anything"
+msgstr ""
 
 #: ../bin/src/ui_querysearchpage.h:71
 msgid "Search mode"
@@ -3506,7 +3510,7 @@ msgstr "Megjelenítések kiválasztása..."
 msgid "Serial number"
 msgstr "Sorozatszám"
 
-#: internet/lastfmservice.cpp:437
+#: internet/lastfmservice.cpp:439
 msgid "Service offline"
 msgstr "A szolgáltatás nem üzemel"
 
@@ -3581,7 +3585,7 @@ msgstr "Értesítés megjelenítése a rendszertálcán"
 msgid "Show a pretty OSD"
 msgstr "Pretty OSD megjelenítése"
 
-#: ../bin/src/ui_globalsearchsettingspage.h:169
+#: ../bin/src/ui_globalsearchsettingspage.h:176
 msgid "Show a tooltip with more information about each result"
 msgstr ""
 
@@ -3625,8 +3629,8 @@ msgstr "Csak az ismétlődések mutatása"
 msgid "Show only untagged"
 msgstr "Csak a címke nélküliek mutatása"
 
-#: ../bin/src/ui_globalsearchsettingspage.h:160
-msgid "Show the \"Search everywhere\" box above the sidebar"
+#: ../bin/src/ui_globalsearchsettingspage.h:167
+msgid "Show the \"Search for anything\" box above the sidebar"
 msgstr ""
 
 #: ../bin/src/ui_lastfmsettingspage.h:151
@@ -3749,7 +3753,7 @@ msgstr "Számok rendezése"
 msgid "Sorting"
 msgstr "Rendezés"
 
-#: ../bin/src/ui_globalsearchsettingspage.h:162
+#: ../bin/src/ui_globalsearchsettingspage.h:169
 msgid "Sources"
 msgstr ""
 
@@ -3892,7 +3896,7 @@ msgstr "Címke"
 msgid "Tag fetcher"
 msgstr "Címke letöltő"
 
-#: internet/lastfmservice.cpp:193
+#: internet/lastfmservice.cpp:195
 msgid "Tag radio"
 msgstr "Címkerádió"
 
@@ -4048,7 +4052,7 @@ msgid ""
 "want to continue?"
 msgstr ""
 
-#: internet/lastfmservice.cpp:438
+#: internet/lastfmservice.cpp:440
 msgid "This stream is for paid subscribers only"
 msgstr "Ez az adatfolyam csak előfizetőknek érhető el"
 
@@ -4166,7 +4170,7 @@ msgstr "%1 (%2) nem letölthető"
 msgid "Unknown"
 msgstr "Ismeretlen"
 
-#: internet/digitallyimportedclient.cpp:68 internet/lastfmservice.cpp:451
+#: internet/digitallyimportedclient.cpp:68 internet/lastfmservice.cpp:453
 msgid "Unknown error"
 msgstr "Ismeretlen hiba"
 
@@ -4631,7 +4635,7 @@ msgstr "%1. lemez"
 msgid "does not contain"
 msgstr "nem tartalmazza"
 
-#: globalsearch/globalsearchwidget.cpp:699
+#: globalsearch/globalsearchwidget.cpp:729
 msgid "e.g."
 msgstr ""
 
