@@ -97,6 +97,7 @@ void SearchTargetWrapper::SetEnabled(bool enabled) {
 MacLineEdit::MacLineEdit(QWidget* parent)
     : QMacCocoaViewContainer(0, parent),
       LineEditInterface(this) {
+  setAttribute(Qt::WA_PaintOnScreen);
   NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
 
   NSSearchField* search = [[NSSearchField alloc] init];
