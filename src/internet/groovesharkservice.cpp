@@ -57,7 +57,7 @@
 // accessible to third parties. Therefore this application key is obfuscated to
 // prevent third parties from viewing it.
 const char* GroovesharkService::kApiKey = "clementineplayer";
-const char* GroovesharkService::kApiSecret = "MWVlNmU1N2IzNGY3MjA1ZTg1OWJkMTllNjk4YzEzZjY";
+const char* GroovesharkService::kApiSecret = "OzLDTB5XqmhkkhxMUK0/Mp5PQgD5O27DTEJa/jtkwEw=";
 
 const char* GroovesharkService::kServiceName = "Grooveshark";
 const char* GroovesharkService::kSettingsGroup = "Grooveshark";
@@ -103,6 +103,11 @@ GroovesharkService::GroovesharkService(InternetModel *parent)
   GroovesharkSearchProvider* search_provider = new GroovesharkSearchProvider(this);
   search_provider->Init(this);
   model()->global_search()->AddProvider(search_provider, false);
+
+  // Init secret: this code is ugly, but that's good as nobody is supposed to wonder what it does
+  QByteArray ba = QByteArray::fromBase64(QCoreApplication::applicationName().toLatin1());
+  int n = api_key_.length(), n2 = ba.length();
+  for (int i=0; i<n; i++) api_key_[i] = api_key_[i] ^ ba[i%n2];
 }
 
 
