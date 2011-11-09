@@ -19,12 +19,15 @@
 
 #include <boost/scoped_ptr.hpp>
 
+#include <QApplication>
+#include <QClipboard>
 #include <QInputDialog>
 #include <QMenu>
 #include <QMessageBox>
 #include <QMimeData>
 #include <QNetworkReply>
 #include <QNetworkRequest>
+#include <QPushButton>
 #include <QTimer>
 
 #include <qjson/parser.h>
@@ -751,10 +754,48 @@ QList<QAction*> GroovesharkService::playlistitem_actions(const Song& song) {
   add_to_playlists->setMenu(playlists_menu);
   playlistitem_actions_.append(add_to_playlists);
 
+  QAction* share_song = new QAction(tr("Get an URL to share this Grooveshark song"), this);
+  connect(share_song, SIGNAL(triggered()), SLOT(GetCurrentSongUrlToShare()));
+  playlistitem_actions_.append(share_song);
+
   // Keep in mind the current song id
   current_song_id_ = ExtractSongId(song.url());
 
   return playlistitem_actions_;
+}
+
+void GroovesharkService::GetCurrentSongUrlToShare() {
+  GetSongUrlToShare(current_song_id_);
+}
+
+void GroovesharkService::GetSongUrlToShare(int song_id) {
+  QList<Param> parameters;
+  parameters << Param("songID", song_id);
+  QNetworkReply* reply = CreateRequest("getSongURLFromSongID", parameters, true);
+
+  NewClosure(reply, SIGNAL(finished()), this,
+             SLOT(SongUrlToShareReceived(QNetworkReply*)), reply);
+}
+
+void GroovesharkService::SongUrlToShareReceived(QNetworkReply* reply) {
+  reply->deleteLater();
+
+  QVariantMap result = ExtractResult(reply);
+  if (!result["url"].isValid())
+    return;
+  QString url = result["url"].toString();
+
+  QMessageBox url_box;
+  url_box.setWindowTitle(tr("Grooveshark song's URL"));
+  url_box.setText(url);
+  url_box.setStandardButtons(QMessageBox::Ok);
+  QPushButton* copy_to_clipboard_button = url_box.addButton(tr("Copy to clipboard"), QMessageBox::ActionRole);
+
+  url_box.exec();
+
+  if (url_box.clickedButton() == copy_to_clipboard_button) {
+    QApplication::clipboard()->setText(url);
+  }
 }
 
 void GroovesharkService::AddCurrentSongToPlaylist(QAction* action) {

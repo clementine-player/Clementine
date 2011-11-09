@@ -85,6 +85,7 @@ class GroovesharkService : public InternetService {
   void DeletePlaylist(int playlist_id);
   void AddUserFavoriteSong(int song_id);
   void RemoveFromFavorites(int song_id);
+  void GetSongUrlToShare(int song_id);
   void MarkStreamKeyOver30Secs(const QString& stream_key, const QString& server_id);
   void MarkSongComplete(const QString& song_id, const QString& stream_key, const QString& server_id);
 
@@ -145,6 +146,8 @@ class GroovesharkService : public InternetService {
   void AddCurrentSongToUserFavorites() { AddUserFavoriteSong(current_song_id_); }
   void AddCurrentSongToPlaylist(QAction* action);
   void UserFavoriteSongAdded(QNetworkReply* reply);
+  void GetCurrentSongUrlToShare();
+  void SongUrlToShareReceived(QNetworkReply* reply);
   void RemoveCurrentFromPlaylist();
   void RemoveCurrentFromFavorites();
   void SongRemovedFromFavorites(QNetworkReply* reply);
