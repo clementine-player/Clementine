@@ -3,21 +3,15 @@
 #include "config.h"
 #include "macglobalshortcutbackend.h"
 
-#include "3rdparty/SPMediaKeyTap/SPMediaKeyTap.h"
-
-
 #ifdef HAVE_BREAKPAD
 #import <Breakpad/Breakpad.h>
 #endif
 
 
 class PlatformInterface;
+@class SPMediaKeyTap;
 
-#ifdef SNOW_LEOPARD
 @interface AppDelegate :NSObject <NSApplicationDelegate> {
-#else
-@interface AppDelegate :NSObject {
-#endif
   PlatformInterface* application_handler_;
   NSMenu* dock_menu_;
   MacGlobalShortcutBackend* shortcut_handler_;
