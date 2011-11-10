@@ -276,6 +276,7 @@ class Playlist : public QAbstractListModel {
 
   void ShuffleModeChanged(PlaylistSequence::ShuffleMode mode);
 
+  void ExpandDynamicPlaylist();
   void RepopulateDynamicPlaylist();
   void TurnOffDynamicPlaylist();
 
@@ -308,6 +309,8 @@ class Playlist : public QAbstractListModel {
   template<typename T>
   void InsertSongItems(const SongList& songs, int pos, bool play_now, bool enqueue);
 
+  void InsertDynamicItems(int count) ;
+ 
   // Modify the playlist without changing the undo stack.  These are used by
   // our friends in PlaylistUndoCommands
   void InsertItemsWithoutUndo(const PlaylistItemList& items, int pos,

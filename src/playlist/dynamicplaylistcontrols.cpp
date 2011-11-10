@@ -24,6 +24,7 @@ DynamicPlaylistControls::DynamicPlaylistControls(QWidget *parent)
 {
   ui_->setupUi(this);
 
+  connect(ui_->expand, SIGNAL(clicked()), SIGNAL(Expand()));
   connect(ui_->repopulate, SIGNAL(clicked()), SIGNAL(Repopulate()));
   connect(ui_->off, SIGNAL(clicked()), SIGNAL(TurnOff()));
 }

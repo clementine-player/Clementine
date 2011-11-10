@@ -30,6 +30,7 @@ public:
   ~DynamicPlaylistControls();
 
 signals:
+  void Expand();
   void Repopulate();
   void TurnOff();
 

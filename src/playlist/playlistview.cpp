@@ -175,6 +175,8 @@ void PlaylistView::SetPlaylist(Playlist* playlist) {
                this, SLOT(DynamicModeChanged(bool)));
     disconnect(playlist_, SIGNAL(destroyed()), this, SLOT(PlaylistDestroyed()));
 
+    disconnect(dynamic_controls_, SIGNAL(Expand()),
+               playlist_, SLOT(ExpandDynamicPlaylist()));
     disconnect(dynamic_controls_, SIGNAL(Repopulate()),
                playlist_, SLOT(RepopulateDynamicPlaylist()));
     disconnect(dynamic_controls_, SIGNAL(TurnOff()),
@@ -193,6 +195,7 @@ void PlaylistView::SetPlaylist(Playlist* playlist) {
   connect(playlist_, SIGNAL(CurrentSongChanged(Song)), SLOT(MaybeAutoscroll()));
   connect(playlist_, SIGNAL(DynamicModeChanged(bool)), SLOT(DynamicModeChanged(bool)));
   connect(playlist_, SIGNAL(destroyed()), SLOT(PlaylistDestroyed()));
+  connect(dynamic_controls_, SIGNAL(Expand()), playlist_, SLOT(ExpandDynamicPlaylist()));
   connect(dynamic_controls_, SIGNAL(Repopulate()), playlist_, SLOT(RepopulateDynamicPlaylist()));
   connect(dynamic_controls_, SIGNAL(TurnOff()), playlist_, SLOT(TurnOffDynamicPlaylist()));
 }

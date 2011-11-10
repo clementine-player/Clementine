@@ -576,11 +576,7 @@ void Playlist::set_current_row(int i) {
     // Add more dynamic playlist items
     const int count = current_item_index_.row() + dynamic_playlist_->GetDynamicFuture() - items_.count();
     if (count > 0) {
-      GeneratorInserter* inserter = new GeneratorInserter(task_manager_, library_, this);
-      connect(inserter, SIGNAL(Error(QString)), SIGNAL(LoadTracksError(QString)));
-      connect(inserter, SIGNAL(PlayRequested(QModelIndex)), SIGNAL(PlayRequested(QModelIndex)));
-
-      inserter->Load(this, -1, false, false, dynamic_playlist_, count);
+      InsertDynamicItems(count);
     }
 
     // Remove the first item
@@ -590,6 +586,14 @@ void Playlist::set_current_row(int i) {
   }
 
   UpdateScrobblePoint();
+}
+
+void Playlist::InsertDynamicItems(int count) {
+  GeneratorInserter* inserter = new GeneratorInserter(task_manager_, library_, this);
+  connect(inserter, SIGNAL(Error(QString)), SIGNAL(LoadTracksError(QString)));
+  connect(inserter, SIGNAL(PlayRequested(QModelIndex)), SIGNAL(PlayRequested(QModelIndex)));
+
+  inserter->Load(this, -1, false, false, dynamic_playlist_, count);
 }
 
 Qt::ItemFlags Playlist::flags(const QModelIndex &index) const {
@@ -1496,6 +1500,13 @@ void Playlist::RepopulateDynamicPlaylist() {
 
   RemoveItemsNotInQueue();
   InsertSmartPlaylist(dynamic_playlist_);
+}
+
+void Playlist::ExpandDynamicPlaylist() {
+  if (!dynamic_playlist_)
+    return;
+
+  InsertDynamicItems(5);
 }
 
 void Playlist::RemoveItemsNotInQueue() {
