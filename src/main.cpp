@@ -245,6 +245,7 @@ int main(int argc, char *argv[]) {
 #ifdef HAVE_LIBLASTFM
   lastfm::ws::ApiKey = LastFMService::kApiKey;
   lastfm::ws::SharedSecret = LastFMService::kSecret;
+  lastfm::setNetworkAccessManager(new NetworkAccessManager);
 #endif
 
   CommandlineOptions options(argc, argv);

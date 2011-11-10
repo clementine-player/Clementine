@@ -91,6 +91,12 @@ QNetworkReply* NetworkAccessManager::createRequest(
       QCoreApplication::applicationName(),
       QCoreApplication::applicationVersion()).toUtf8());
 
+  if (op == QNetworkAccessManager::PostOperation &&
+      !new_request.header(QNetworkRequest::ContentTypeHeader).isValid()) {
+    new_request.setHeader(QNetworkRequest::ContentTypeHeader,
+                          "application/x-www-form-urlencoded");
+  }
+
   // Prefer the cache unless the caller has changed the setting already
   if (request.attribute(QNetworkRequest::CacheLoadControlAttribute).toInt()
       == QNetworkRequest::PreferNetwork) {
