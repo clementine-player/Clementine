@@ -475,7 +475,7 @@ void SongLoader::TypeFound(GstElement*, uint, GstCaps* caps, void* self) {
   instance->StopTypefindAsync(true);
 }
 
-void SongLoader::DataReady(GstPad *, GstBuffer *buf, void *self) {
+void SongLoader::DataReady(GstPad*, GstBuffer* buf, void* self) {
   SongLoader* instance = static_cast<SongLoader*>(self);
 
   if (instance->state_ == Finished)
@@ -487,7 +487,8 @@ void SongLoader::DataReady(GstPad *, GstBuffer *buf, void *self) {
   qLog(Debug) << "Received total" << instance->buffer_.size() << "bytes";
 
   if (instance->state_ == WaitingForMagic &&
-      instance->buffer_.size() >= PlaylistParser::kMagicSize) {
+      (instance->buffer_.size() >= PlaylistParser::kMagicSize ||
+       !instance->IsPipelinePlaying())) {
     // Got enough that we can test the magic
     instance->MagicReady();
   }
@@ -553,6 +554,7 @@ void SongLoader::ErrorMessageReceived(GstMessage* msg) {
 }
 
 void SongLoader::EndOfStreamReached() {
+  qLog(Debug) << Q_FUNC_INFO << state_;
   switch (state_) {
   case Finished:
     break;
@@ -577,6 +579,7 @@ void SongLoader::EndOfStreamReached() {
 }
 
 void SongLoader::MagicReady() {
+  qLog(Debug) << Q_FUNC_INFO;
   parser_ = playlist_parser_->ParserForMagic(buffer_, mime_type_);
 
   if (!parser_) {
@@ -597,6 +600,16 @@ void SongLoader::MagicReady() {
     StopTypefindAsync(true);
   }
   state_ = WaitingForData;
+
+  if (!IsPipelinePlaying()) {
+    EndOfStreamReached();
+  }
+}
+
+bool SongLoader::IsPipelinePlaying() {
+  GstState pipeline_state;
+  gst_element_get_state(pipeline_.get(), &pipeline_state, NULL, GST_MSECOND);
+  return pipeline_state == GST_STATE_PLAYING;
 }
 
 void SongLoader::StopTypefindAsync(bool success) {

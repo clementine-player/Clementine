@@ -103,6 +103,7 @@ private:
   void ErrorMessageReceived(GstMessage* msg);
   void EndOfStreamReached();
   void MagicReady();
+  bool IsPipelinePlaying();
 
 private:
   static QSet<QString> sRawUriSchemes;
