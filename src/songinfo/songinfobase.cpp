@@ -221,7 +221,7 @@ void SongInfoBase::ConnectWidget(QWidget* widget) {
     connect(widget, SIGNAL(ShowSettingsDialog()), SIGNAL(ShowSettingsDialog()));
   }
 
-  if (m->indexOfSignal("AddToPlaylist(QMimeData*)") != -1) {
-    connect(widget, SIGNAL(AddToPlaylist(QMimeData*)), SIGNAL(AddToPlaylist(QMimeData*)));
+  if (m->indexOfSignal("DoGlobalSearch(QString)") != -1) {
+    connect(widget, SIGNAL(DoGlobalSearch(QString)), SIGNAL(DoGlobalSearch(QString)));
   }
 }

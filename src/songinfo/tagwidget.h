@@ -83,25 +83,18 @@ public:
 
 signals:
   void AddToPlaylist(QMimeData* data);
+  void DoGlobalSearch(const QString& query);
 
 private slots:
   void TagClicked();
 
-  void PlayLastFmTagRadio();
-  void PlayLastFmArtistRadio();
-  void PlayFromLibrary();
-
 private:
-  void EnsureMenuCreated();
   void PlayLastFm(const QString& url_pattern);
 
 private:
   Type type_;
   QIcon icon_;
   QList<TagWidgetTag*> tags_;
-
-  QString context_item_;
-  QMenu* menu_;
 };
 
 #endif // TAGWIDGET_H

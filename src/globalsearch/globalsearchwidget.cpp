@@ -258,6 +258,15 @@ void GlobalSearchWidget::SwapModels() {
     RepositionPopup();
 }
 
+void GlobalSearchWidget::StartSearch(const QString& query) {
+  ui_->search->setText(query);
+  TextEdited(query);
+
+  // Swap models immediately
+  swap_models_timer_->stop();
+  SwapModels();
+}
+
 void GlobalSearchWidget::AddResults(int id, const SearchProvider::ResultList& results) {
   if (id != last_id_)
     return;

@@ -113,8 +113,7 @@ void TagWidgetTag::contextMenuEvent(QContextMenuEvent*) {
 
 TagWidget::TagWidget(Type type, QWidget* parent)
   : QWidget(parent),
-    type_(type),
-    menu_(NULL)
+    type_(type)
 {
   setLayout(new FlowLayout(4, 6, 4));
 }
@@ -130,70 +129,10 @@ void TagWidget::AddTag(const QString& tag) {
   tags_ << widget;
 }
 
-void TagWidget::EnsureMenuCreated() {
-  if (menu_)
-    return;
-
-  menu_ = new QMenu(this);
-  switch (type_) {
-    case Type_Tags:
-      menu_->addAction(QIcon(":/last.fm/as.png"), tr("Play last.fm tag radio"),
-                       this, SLOT(PlayLastFmTagRadio()));
-      break;
-
-    case Type_Artists:
-      menu_->addAction(QIcon(":/last.fm/as.png"), tr("Play last.fm artist radio"),
-                       this, SLOT(PlayLastFmArtistRadio()));
-      menu_->addAction(IconLoader::Load("folder-sound"), tr("Play from my Library"),
-                       this, SLOT(PlayFromLibrary()));
-      break;
-  }
-}
-
 void TagWidget::TagClicked() {
   TagWidgetTag* tag = qobject_cast<TagWidgetTag*>(sender());
   if (!tag)
     return;
 
-  EnsureMenuCreated();
-
-  context_item_ = tag->text();
-  menu_->popup(tag->mapToGlobal(tag->rect().bottomLeft()));
-}
-
-void TagWidget::PlayLastFmArtistRadio() {
-  PlayLastFm("lastfm://artist/%1/similarartists");
-}
-
-void TagWidget::PlayLastFmTagRadio() {
-  PlayLastFm("lastfm://globaltags/%1");
-}
-
-void TagWidget::PlayFromLibrary() {
-  using smart_playlists::GeneratorMimeData;
-  using smart_playlists::GeneratorPtr;
-  using smart_playlists::QueryGenerator;
-  using smart_playlists::Search;
-  using smart_playlists::SearchTerm;
-
-  GeneratorPtr gen(new QueryGenerator(QString(), Search(
-      Search::Type_And, Search::TermList() <<
-        SearchTerm(SearchTerm::Field_Artist, SearchTerm::Op_Contains, context_item_),
-      Search::Sort_FieldAsc, SearchTerm::Field_Album, 100)));
-  emit AddToPlaylist(new GeneratorMimeData(gen));
-}
-
-void TagWidget::PlayLastFm(const QString& url_pattern) {
-  LastFMService* last_fm = InternetModel::Service<LastFMService>();
-  if (!last_fm->IsAuthenticated()) {
-    last_fm->ShowConfig();
-    return;
-  }
-
-  QUrl url(url_pattern.arg(context_item_));
-  PlaylistItemPtr item(last_fm->PlaylistItemForUrl(url));
-  if (!item)
-    return;
-
-  emit AddToPlaylist(new PlaylistItemMimeData(item));
+  emit DoGlobalSearch(tag->text());
 }

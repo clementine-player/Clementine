@@ -49,7 +49,7 @@ public slots:
 
 signals:
   void ShowSettingsDialog();
-  void AddToPlaylist(QMimeData* data);
+  void DoGlobalSearch(const QString& query);
 
 protected:
   void showEvent(QShowEvent* e);

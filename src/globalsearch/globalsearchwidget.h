@@ -70,6 +70,7 @@ public:
 
 public slots:
   void ReloadSettings();
+  void StartSearch(const QString& query);
 
 signals:
   void AddToPlaylist(QMimeData* data);

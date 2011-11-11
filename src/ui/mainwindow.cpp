@@ -2063,7 +2063,8 @@ void MainWindow::ConnectInfoView(SongInfoBase* view) {
   connect(player_, SIGNAL(Stopped()), view, SLOT(SongFinished()));
 
   connect(view, SIGNAL(ShowSettingsDialog()), SLOT(ShowSongInfoConfig()));
-  connect(view, SIGNAL(AddToPlaylist(QMimeData*)), SLOT(AddToPlaylist(QMimeData*)));
+  connect(view, SIGNAL(DoGlobalSearch(QString)),
+          ui_->global_search, SLOT(StartSearch(QString)));
 }
 
 void MainWindow::AddSongInfoGenerator(smart_playlists::GeneratorPtr gen) {
