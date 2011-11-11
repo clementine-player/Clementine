@@ -236,6 +236,7 @@ class Playlist : public QAbstractListModel {
 
   void StopAfter(int row);
   void ReloadItems(const QList<int>& rows);
+  void InformOfCurrentSongChange();
 
   // Changes rating of a song to the given value asynchronously
   void RateSong(const QModelIndex& index, double rating);
@@ -323,8 +324,6 @@ class Playlist : public QAbstractListModel {
 
   // Removes rows with given indices from this playlist.
   bool removeRows(QList<int>& rows);
-
-  void InformOfCurrentSongChange();
 
  private slots:
   void TracksAboutToBeDequeued(const QModelIndex&, int begin, int end);

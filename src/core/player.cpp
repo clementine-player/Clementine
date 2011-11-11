@@ -110,7 +110,7 @@ void Player::HandleLoadResult(const UrlHandler::LoadResult& result) {
       Song song = item->Metadata();
       song.set_length_nanosec(result.length_nanosec_);
       item->SetTemporaryMetadata(song);
-      playlists_->active()->UpdateItems(SongList() << song);
+      playlists_->active()->InformOfCurrentSongChange();
     }
     engine_->Play(result.media_url_, stream_change_type_,
                   item->Metadata().has_cue(),

@@ -789,7 +789,8 @@ void GroovesharkService::SongUrlToShareReceived(QNetworkReply* reply) {
   url_box.setWindowTitle(tr("Grooveshark song's URL"));
   url_box.setText(url);
   url_box.setStandardButtons(QMessageBox::Ok);
-  QPushButton* copy_to_clipboard_button = url_box.addButton(tr("Copy to clipboard"), QMessageBox::ActionRole);
+  QPushButton* copy_to_clipboard_button =
+      url_box.addButton(tr("Copy to clipboard"), QMessageBox::ActionRole);
 
   url_box.exec();
 
