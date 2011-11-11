@@ -133,7 +133,7 @@ void GlobalSearchItemDelegate::paint(QPainter* p,
   case globalsearch::Type_Track:
   case globalsearch::Type_Stream: {
     // Title
-    line_1 += m.title() + " ";
+    line_1 += m.PrettyTitle() + " ";
 
     // Artist - Album - Track n
     if (!m.artist().isEmpty()) {

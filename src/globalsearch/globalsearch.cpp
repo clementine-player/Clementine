@@ -17,6 +17,7 @@
 
 #include "librarysearchprovider.h"
 #include "globalsearch.h"
+#include "urlsearchprovider.h"
 #include "core/logging.h"
 #include "covers/albumcoverloader.h"
 
@@ -32,7 +33,8 @@ const int GlobalSearch::kMaxResultsPerEmission = 100;
 GlobalSearch::GlobalSearch(QObject* parent)
   : QObject(parent),
     next_id_(1),
-    cover_loader_(new BackgroundThreadImplementation<AlbumCoverLoader, AlbumCoverLoader>(this))
+    cover_loader_(new BackgroundThreadImplementation<AlbumCoverLoader, AlbumCoverLoader>(this)),
+    url_provider_(new UrlSearchProvider(this))
 {
   cover_loader_->Start(true);
   cover_loader_->Worker()->SetDesiredHeight(SearchProvider::kArtHeight);
@@ -42,11 +44,11 @@ GlobalSearch::GlobalSearch(QObject* parent)
   connect(cover_loader_->Worker().get(),
           SIGNAL(ImageLoaded(quint64,QImage)),
           SLOT(AlbumArtLoaded(quint64,QImage)));
+
+  ConnectProvider(url_provider_);
 }
 
-void GlobalSearch::AddProvider(SearchProvider* provider, bool enable_by_default) {
-  Q_ASSERT(!provider->name().isEmpty());
-
+void GlobalSearch::ConnectProvider(SearchProvider* provider) {
   connect(provider, SIGNAL(ResultsAvailable(int,SearchProvider::ResultList)),
           SLOT(ResultsAvailableSlot(int,SearchProvider::ResultList)));
   connect(provider, SIGNAL(SearchFinished(int)),
@@ -57,6 +59,12 @@ void GlobalSearch::AddProvider(SearchProvider* provider, bool enable_by_default)
           SIGNAL(TracksLoaded(int,MimeData*)));
   connect(provider, SIGNAL(destroyed(QObject*)),
           SLOT(ProviderDestroyedSlot(QObject*)));
+}
+
+void GlobalSearch::AddProvider(SearchProvider* provider, bool enable_by_default) {
+  Q_ASSERT(!provider->name().isEmpty());
+
+  ConnectProvider(provider);
 
   ProviderData data;
   data.enabled_ = providers_state_preference_.contains(provider->id()) ?
@@ -68,25 +76,29 @@ void GlobalSearch::AddProvider(SearchProvider* provider, bool enable_by_default)
 
 int GlobalSearch::SearchAsync(const QString& query) {
   const int id = next_id_ ++;
+  pending_search_providers_[id] = 0;
 
   int timer_id = -1;
 
-  pending_search_providers_[id] = 0;
-  foreach (SearchProvider* provider, providers_.keys()) {
-    if (!providers_[provider].enabled_)
-      continue;
+  if (url_provider_->LooksLikeUrl(query)) {
+    url_provider_->SearchAsync(id, query);
+  } else {
+    foreach (SearchProvider* provider, providers_.keys()) {
+      if (!providers_[provider].enabled_)
+        continue;
 
-    pending_search_providers_[id] ++;
+      pending_search_providers_[id] ++;
 
-    if (provider->wants_delayed_queries()) {
-      if (timer_id == -1) {
-        timer_id = startTimer(kDelayedSearchTimeoutMs);
-        delayed_searches_[timer_id].id_ = id;
-        delayed_searches_[timer_id].query_ = query;
+      if (provider->wants_delayed_queries()) {
+        if (timer_id == -1) {
+          timer_id = startTimer(kDelayedSearchTimeoutMs);
+          delayed_searches_[timer_id].id_ = id;
+          delayed_searches_[timer_id].query_ = query;
+        }
+        delayed_searches_[timer_id].providers_ << provider;
+      } else {
+        provider->SearchAsync(id, query);
       }
-      delayed_searches_[timer_id].providers_ << provider;
-    } else {
-      provider->SearchAsync(id, query);
     }
   }
 
@@ -183,7 +195,7 @@ int GlobalSearch::LoadArtAsync(const SearchProvider::Result& result) {
 
   pending_art_searches_[id] = result.pixmap_cache_key_;
 
-  if (!providers_.contains(result.provider_) ||
+  if (providers_.contains(result.provider_) &&
       !providers_[result.provider_].enabled_) {
     emit ArtLoaded(id, QPixmap());
     return id;
@@ -192,7 +204,8 @@ int GlobalSearch::LoadArtAsync(const SearchProvider::Result& result) {
   if (result.provider_->art_is_in_song_metadata()) {
     quint64 loader_id = cover_loader_->Worker()->LoadImageAsync(result.metadata_);
     cover_loader_tasks_[loader_id] = id;
-  } else if (result.provider_->wants_serialised_art()) {
+  } else if (providers_.contains(result.provider_) &&
+             result.provider_->wants_serialised_art()) {
     QueuedArt request;
     request.id_ = id;
     request.result_ = result;

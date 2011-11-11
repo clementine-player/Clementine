@@ -26,6 +26,7 @@
 
 
 class AlbumCoverLoader;
+class UrlSearchProvider;
 
 class GlobalSearch : public QObject {
   Q_OBJECT
@@ -86,6 +87,7 @@ private slots:
   void ProviderDestroyedSlot(QObject* object);
 
 private:
+  void ConnectProvider(SearchProvider* provider);
   void HandleLoadedArt(int id, const QImage& image, SearchProvider* provider);
   void TakeNextQueuedArt(SearchProvider* provider);
   QString PixmapCacheKey(const SearchProvider::Result& result) const;
@@ -124,6 +126,9 @@ private:
   // Used for providers with ArtIsInSongMetadata set.
   BackgroundThread<AlbumCoverLoader>* cover_loader_;
   QMap<quint64, int> cover_loader_tasks_;
+
+  // Special search provider that's used for queries that look like URLs
+  UrlSearchProvider* url_provider_;
 };
 
 #endif // GLOBALSEARCH_H

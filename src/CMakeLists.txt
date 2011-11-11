@@ -134,6 +134,7 @@ set(SOURCES
   globalsearch/somafmsearchprovider.cpp
   globalsearch/tooltipactionwidget.cpp
   globalsearch/tooltipresultwidget.cpp
+  globalsearch/urlsearchprovider.cpp
 
   internet/digitallyimportedclient.cpp
   internet/digitallyimportedservicebase.cpp

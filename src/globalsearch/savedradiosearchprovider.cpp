@@ -46,11 +46,8 @@ void SavedRadioSearchProvider::RecreateItems() {
 }
 
 void SavedRadioSearchProvider::LoadTracksAsync(int id, const Result& result) {
-  Song metadata = result.metadata_;
-  metadata.set_filetype(Song::Type_Stream);
-
   MimeData* mime_data = new MimeData;
-  mime_data->setUrls(QList<QUrl>() << metadata.url());
+  mime_data->setUrls(QList<QUrl>() << result.metadata_.url());
 
   emit TracksLoaded(id, mime_data);
 }
