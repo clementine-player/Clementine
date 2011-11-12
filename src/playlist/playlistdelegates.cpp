@@ -423,8 +423,13 @@ QWidget* TagCompletionItemDelegate::createEditor(
 }
 
 QString NativeSeparatorsDelegate::displayText(const QVariant& value, const QLocale&) const {
-  QString str = value.toString();
-  if (str.contains("://"))
-    return str;
-  return QDir::toNativeSeparators(str);
+  const QString text = value.toString();
+  if (text.contains("://")) {
+    const QUrl url = QUrl::fromEncoded(text.toAscii());
+    if (url.scheme() == "file") {
+      return QDir::toNativeSeparators(url.toLocalFile());
+    }
+    return text;
+  }
+  return QDir::toNativeSeparators(text);
 }
