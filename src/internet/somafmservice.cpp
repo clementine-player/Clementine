@@ -121,7 +121,11 @@ void SomaFMService::RefreshStreamsFinished(QNetworkReply* reply, int task_id) {
   }
 
   streams_.Update(list);
-  PopulateStreams();
+
+  // Only update the item's children if it's already been expanded
+  if (root_->hasChildren())
+    PopulateStreams();
+
   emit StreamsChanged();
 }
 

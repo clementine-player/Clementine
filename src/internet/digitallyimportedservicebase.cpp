@@ -121,7 +121,10 @@ void DigitallyImportedServiceBase::RefreshStreamsFinished(QNetworkReply* reply, 
 
   saved_channels_.Update(channels);
 
-  PopulateStreams();
+  // Only update the item's children if it's already been expanded
+  if (root_->hasChildren())
+    PopulateStreams();
+
   emit StreamsChanged();
 }
 
