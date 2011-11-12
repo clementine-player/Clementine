@@ -138,7 +138,7 @@ void SpotifyBlobDownloader::ReplyFinished() {
       return;
     }
   }
-#endif
+#endif // HAVE_QCA
 
   // Make the destination directory and write the files into it
   QDir().mkpath(path_);
@@ -160,6 +160,22 @@ void SpotifyBlobDownloader::ReplyFinished() {
     file.write(file_data[filename]);
     file.close();
     file.setPermissions(QFile::Permissions(0x7755));
+
+#ifdef Q_OS_UNIX
+    const int so_pos = filename.lastIndexOf(".so.");
+    if (so_pos != -1) {
+      QString link_path = path_ + "/" + filename.left(so_pos + 3);
+      QStringList version_parts = filename.mid(so_pos + 4).split('.');
+
+      while (!version_parts.isEmpty()) {
+        qLog(Debug) << "Linking" << dest_path << "to" << link_path;
+        symlink(dest_path.toLocal8Bit().constData(),
+                link_path.toLocal8Bit().constData());
+
+        link_path += "." + version_parts.takeFirst();
+      }
+    }
+#endif // Q_OS_UNIX
   }
 
   EmitFinished();
