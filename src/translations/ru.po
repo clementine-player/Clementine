@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2011-11-10 12:16+0000\n"
+"PO-Revision-Date: 2011-11-11 23:22+0000\n"
 "Last-Translator: clementinebuildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -118,17 +118,17 @@ msgid "%L1 total plays"
 msgstr "всего %L1 прослушиваний"
 
 #: transcoder/transcodedialog.cpp:198
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n с ошибкой"
 
 #: transcoder/transcodedialog.cpp:193
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n завершено"
 
 #: transcoder/transcodedialog.cpp:188
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n осталось"
 
@@ -649,7 +649,7 @@ msgstr "Применить компрессию для предотвращен�
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "Вы действительно хотите удалить настройку \"%1\"?"
 
-#: internet/groovesharkservice.cpp:905
+#: internet/groovesharkservice.cpp:906
 msgid "Are you sure you want to delete this playlist?"
 msgstr ""
 
@@ -1076,7 +1076,7 @@ msgstr "Конвертировать всю музыку"
 msgid "Convert any music that the device can't play"
 msgstr "Конвертировать всю музыку, которую может проигрывать устройство."
 
-#: internet/groovesharkservice.cpp:792
+#: internet/groovesharkservice.cpp:793
 msgid "Copy to clipboard"
 msgstr ""
 
@@ -1162,7 +1162,7 @@ msgstr "Обложка задана из %1"
 msgid "Covers from %1"
 msgstr "Обложки из %1"
 
-#: internet/groovesharkservice.cpp:462 internet/groovesharkservice.cpp:857
+#: internet/groovesharkservice.cpp:462 internet/groovesharkservice.cpp:858
 msgid "Create a new Grooveshark playlist"
 msgstr ""
 
@@ -1302,7 +1302,7 @@ msgstr "По умолчанию"
 msgid "Delay between visualizations"
 msgstr "Задержка между визуализациями"
 
-#: internet/groovesharkservice.cpp:465 internet/groovesharkservice.cpp:904
+#: internet/groovesharkservice.cpp:465 internet/groovesharkservice.cpp:905
 msgid "Delete Grooveshark playlist"
 msgstr ""
 
@@ -1632,7 +1632,7 @@ msgstr "Аналогично --log-levels *:3"
 
 #: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:453
 #: ui/edittagdialog.cpp:719 ui/mainwindow.cpp:1802 ui/mainwindow.cpp:1907
-#: ui/mainwindow.cpp:2125
+#: ui/mainwindow.cpp:2126
 msgid "Error"
 msgstr "Ошибка"
 
@@ -2649,7 +2649,7 @@ msgstr "Моя радиостанция"
 msgid "My Recommendations"
 msgstr "Мои рекомендации"
 
-#: internet/groovesharkservice.cpp:858 ui/equalizer.cpp:172
+#: internet/groovesharkservice.cpp:859 ui/equalizer.cpp:172
 #: ../bin/src/ui_deviceproperties.h:369
 #: ../bin/src/ui_magnatunedownloaddialog.h:135
 #: ../bin/src/ui_wizardfinishpage.h:84
@@ -2975,10 +2975,6 @@ msgstr "Количество воспроизведений"
 msgid "Play custom radio..."
 msgstr "Слушать пользовательское радио..."
 
-#: songinfo/tagwidget.cpp:147
-msgid "Play from my Library"
-msgstr "Проигрывать из коллекции"
-
 #: core/commandlineoptions.cpp:152
 msgid "Play if stopped, pause if playing"
 msgstr "Воспроизвести если остановлено, приостановить если воспроизводится"
@@ -2987,14 +2983,6 @@ msgstr "Воспроизвести если остановлено, приост
 #: ../bin/src/ui_behavioursettingspage.h:209
 msgid "Play if there is nothing already playing"
 msgstr "Проиграть, если еще ничего не проигрывается"
-
-#: songinfo/tagwidget.cpp:145
-msgid "Play last.fm artist radio"
-msgstr "Слушать last.fm радио исполнителя"
-
-#: songinfo/tagwidget.cpp:140
-msgid "Play last.fm tag radio"
-msgstr "Слушать last.fm радио тега"
 
 #: internet/lastfmservice.cpp:105
 msgid "Play tag radio..."
@@ -4557,7 +4545,7 @@ msgstr "Ваши данные Last.fm некорректны"
 msgid "Your Magnatune credentials were incorrect"
 msgstr "Введенные имя пользователя и/или пароль Magnatune неверны"
 
-#: ui/edittagdialog.cpp:719 ui/mainwindow.cpp:2125
+#: ui/edittagdialog.cpp:719 ui/mainwindow.cpp:2126
 msgid ""
 "Your gstreamer installation is missing the 'ofa' plugin.  This is required "
 "for automatic tag fetching.  Try installing the 'gstreamer-plugins-bad' "
@@ -4594,7 +4582,7 @@ msgid "Zero"
 msgstr "По-умолчанию"
 
 #: playlist/playlistundocommands.cpp:37
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "добавить %n композиций"
 
@@ -4649,7 +4637,7 @@ msgstr "диск %1"
 msgid "does not contain"
 msgstr "не содержит"
 
-#: globalsearch/globalsearchwidget.cpp:731
+#: globalsearch/globalsearchwidget.cpp:740
 msgid "e.g."
 msgstr ""
 
@@ -4718,7 +4706,7 @@ msgid "press enter"
 msgstr "нажмите \"enter\""
 
 #: playlist/playlistundocommands.cpp:65 playlist/playlistundocommands.cpp:88
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "удалить %n композиций"
 

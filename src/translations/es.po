@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2011-11-10 12:16+0000\n"
+"PO-Revision-Date: 2011-11-11 23:22+0000\n"
 "Last-Translator: clementinebuildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -118,17 +118,17 @@ msgid "%L1 total plays"
 msgstr "%L1 reproducciones totales"
 
 #: transcoder/transcodedialog.cpp:198
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n falló"
 
 #: transcoder/transcodedialog.cpp:193
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n completado(s)"
 
 #: transcoder/transcodedialog.cpp:188
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n pendiente(s)"
 
@@ -652,7 +652,7 @@ msgstr "Aplicar compresión para evitar cortes"
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "¿Está seguro de que quiere eliminar la predefinición «%1»?"
 
-#: internet/groovesharkservice.cpp:905
+#: internet/groovesharkservice.cpp:906
 msgid "Are you sure you want to delete this playlist?"
 msgstr "Estas seguro que deseas eliminar esta lista de reproducción?"
 
@@ -1081,7 +1081,7 @@ msgstr "Convertir toda la música"
 msgid "Convert any music that the device can't play"
 msgstr "Convertir cualquier música que el dispositivo no pueda reproducir"
 
-#: internet/groovesharkservice.cpp:792
+#: internet/groovesharkservice.cpp:793
 msgid "Copy to clipboard"
 msgstr ""
 
@@ -1167,7 +1167,7 @@ msgstr "Portada establecida desde %1"
 msgid "Covers from %1"
 msgstr "Portadas de %1"
 
-#: internet/groovesharkservice.cpp:462 internet/groovesharkservice.cpp:857
+#: internet/groovesharkservice.cpp:462 internet/groovesharkservice.cpp:858
 msgid "Create a new Grooveshark playlist"
 msgstr "Crear una lista de reproducción nueva en Grooveshark "
 
@@ -1307,7 +1307,7 @@ msgstr "Valores predefinidos"
 msgid "Delay between visualizations"
 msgstr "Retardo entre visualizaciones"
 
-#: internet/groovesharkservice.cpp:465 internet/groovesharkservice.cpp:904
+#: internet/groovesharkservice.cpp:465 internet/groovesharkservice.cpp:905
 msgid "Delete Grooveshark playlist"
 msgstr "Eliminar Grooveshark Lista de reproducción"
 
@@ -1638,7 +1638,7 @@ msgstr "Equivalente a --log-levels*:3"
 
 #: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:453
 #: ui/edittagdialog.cpp:719 ui/mainwindow.cpp:1802 ui/mainwindow.cpp:1907
-#: ui/mainwindow.cpp:2125
+#: ui/mainwindow.cpp:2126
 msgid "Error"
 msgstr "Error"
 
@@ -2659,7 +2659,7 @@ msgstr "Mi Estación de Radio"
 msgid "My Recommendations"
 msgstr "Mis Recomendaciones"
 
-#: internet/groovesharkservice.cpp:858 ui/equalizer.cpp:172
+#: internet/groovesharkservice.cpp:859 ui/equalizer.cpp:172
 #: ../bin/src/ui_deviceproperties.h:369
 #: ../bin/src/ui_magnatunedownloaddialog.h:135
 #: ../bin/src/ui_wizardfinishpage.h:84
@@ -2987,10 +2987,6 @@ msgstr "Número de reproducciones"
 msgid "Play custom radio..."
 msgstr "Reproducir Radio Personalizada"
 
-#: songinfo/tagwidget.cpp:147
-msgid "Play from my Library"
-msgstr "Reproducir desde la colección"
-
 #: core/commandlineoptions.cpp:152
 msgid "Play if stopped, pause if playing"
 msgstr "Reproducir si está detenida, pausar si se está reproduciendo"
@@ -2999,14 +2995,6 @@ msgstr "Reproducir si está detenida, pausar si se está reproduciendo"
 #: ../bin/src/ui_behavioursettingspage.h:209
 msgid "Play if there is nothing already playing"
 msgstr "Reproducir si no hay nada en reproducción"
-
-#: songinfo/tagwidget.cpp:145
-msgid "Play last.fm artist radio"
-msgstr "Reproducir radio de artista de Last.fm"
-
-#: songinfo/tagwidget.cpp:140
-msgid "Play last.fm tag radio"
-msgstr "Reproducir radio de etiqueta de Last.fm"
 
 #: internet/lastfmservice.cpp:105
 msgid "Play tag radio..."
@@ -4576,7 +4564,7 @@ msgstr "Sus credenciales de Last.fm fueron incorrectas"
 msgid "Your Magnatune credentials were incorrect"
 msgstr "Sus credenciales de Magnatune son incorrectas"
 
-#: ui/edittagdialog.cpp:719 ui/mainwindow.cpp:2125
+#: ui/edittagdialog.cpp:719 ui/mainwindow.cpp:2126
 msgid ""
 "Your gstreamer installation is missing the 'ofa' plugin.  This is required "
 "for automatic tag fetching.  Try installing the 'gstreamer-plugins-bad' "
@@ -4613,7 +4601,7 @@ msgid "Zero"
 msgstr "Cero"
 
 #: playlist/playlistundocommands.cpp:37
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "añadir %n pistas"
 
@@ -4668,7 +4656,7 @@ msgstr "Disco %1"
 msgid "does not contain"
 msgstr "no contiene"
 
-#: globalsearch/globalsearchwidget.cpp:731
+#: globalsearch/globalsearchwidget.cpp:740
 msgid "e.g."
 msgstr "por ejemplo"
 
@@ -4737,7 +4725,7 @@ msgid "press enter"
 msgstr "pulse enter"
 
 #: playlist/playlistundocommands.cpp:65 playlist/playlistundocommands.cpp:88
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "remover %n pistas"
 

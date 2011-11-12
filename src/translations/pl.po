@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2011-11-10 12:16+0000\n"
+"PO-Revision-Date: 2011-11-11 23:22+0000\n"
 "Last-Translator: clementinebuildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -117,17 +117,17 @@ msgid "%L1 total plays"
 msgstr "%L1 odtworzeń"
 
 #: transcoder/transcodedialog.cpp:198
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n nieudane"
 
 #: transcoder/transcodedialog.cpp:193
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n zakończone"
 
 #: transcoder/transcodedialog.cpp:188
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "pozostało %n"
 
@@ -648,7 +648,7 @@ msgstr "Skompresuj, aby zapobiec przesterowaniu"
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "Na pewno chcesz usunąć ustawienie \"%1\"?"
 
-#: internet/groovesharkservice.cpp:905
+#: internet/groovesharkservice.cpp:906
 msgid "Are you sure you want to delete this playlist?"
 msgstr ""
 
@@ -1075,7 +1075,7 @@ msgstr "Przekonwertuj całą muzykę"
 msgid "Convert any music that the device can't play"
 msgstr "Przekonwertuj muzykę, której nie może odtworzyć urządzenie"
 
-#: internet/groovesharkservice.cpp:792
+#: internet/groovesharkservice.cpp:793
 msgid "Copy to clipboard"
 msgstr ""
 
@@ -1161,7 +1161,7 @@ msgstr "Źródło okładki: %1"
 msgid "Covers from %1"
 msgstr "Okładki z %1"
 
-#: internet/groovesharkservice.cpp:462 internet/groovesharkservice.cpp:857
+#: internet/groovesharkservice.cpp:462 internet/groovesharkservice.cpp:858
 msgid "Create a new Grooveshark playlist"
 msgstr ""
 
@@ -1301,7 +1301,7 @@ msgstr "Domyślne"
 msgid "Delay between visualizations"
 msgstr "Opóźnienie pomiędzy wizualizacjami"
 
-#: internet/groovesharkservice.cpp:465 internet/groovesharkservice.cpp:904
+#: internet/groovesharkservice.cpp:465 internet/groovesharkservice.cpp:905
 msgid "Delete Grooveshark playlist"
 msgstr ""
 
@@ -1631,7 +1631,7 @@ msgstr "Rownoważny --log-levels *:3"
 
 #: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:453
 #: ui/edittagdialog.cpp:719 ui/mainwindow.cpp:1802 ui/mainwindow.cpp:1907
-#: ui/mainwindow.cpp:2125
+#: ui/mainwindow.cpp:2126
 msgid "Error"
 msgstr "Błąd"
 
@@ -2649,7 +2649,7 @@ msgstr "Moje stacje radiowe"
 msgid "My Recommendations"
 msgstr "Moje rekomendacje"
 
-#: internet/groovesharkservice.cpp:858 ui/equalizer.cpp:172
+#: internet/groovesharkservice.cpp:859 ui/equalizer.cpp:172
 #: ../bin/src/ui_deviceproperties.h:369
 #: ../bin/src/ui_magnatunedownloaddialog.h:135
 #: ../bin/src/ui_wizardfinishpage.h:84
@@ -2976,10 +2976,6 @@ msgstr "Ilość odtworzeń"
 msgid "Play custom radio..."
 msgstr "Odtwarzaj własne radio..."
 
-#: songinfo/tagwidget.cpp:147
-msgid "Play from my Library"
-msgstr "Odtwórz z mojej biblioteki"
-
 #: core/commandlineoptions.cpp:152
 msgid "Play if stopped, pause if playing"
 msgstr "Odtwarzaj, gdy zatrzymane; zatrzymaj, gdy odtwarzane"
@@ -2988,14 +2984,6 @@ msgstr "Odtwarzaj, gdy zatrzymane; zatrzymaj, gdy odtwarzane"
 #: ../bin/src/ui_behavioursettingspage.h:209
 msgid "Play if there is nothing already playing"
 msgstr "Odtwarzaj jeśli nic nie jest aktualnie odtwarzane"
-
-#: songinfo/tagwidget.cpp:145
-msgid "Play last.fm artist radio"
-msgstr "Odtwórz radio wykonawcy last.fm"
-
-#: songinfo/tagwidget.cpp:140
-msgid "Play last.fm tag radio"
-msgstr "Odtwórz radio znacznika last.fm"
 
 #: internet/lastfmservice.cpp:105
 msgid "Play tag radio..."
@@ -4560,7 +4548,7 @@ msgstr "Niepoprawne dane konta last.fm"
 msgid "Your Magnatune credentials were incorrect"
 msgstr "Niepoprawne dane konta Magnatune"
 
-#: ui/edittagdialog.cpp:719 ui/mainwindow.cpp:2125
+#: ui/edittagdialog.cpp:719 ui/mainwindow.cpp:2126
 msgid ""
 "Your gstreamer installation is missing the 'ofa' plugin.  This is required "
 "for automatic tag fetching.  Try installing the 'gstreamer-plugins-bad' "
@@ -4597,7 +4585,7 @@ msgid "Zero"
 msgstr "Zero"
 
 #: playlist/playlistundocommands.cpp:37
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "dodaj %n utworów"
 
@@ -4652,7 +4640,7 @@ msgstr "płyta %1"
 msgid "does not contain"
 msgstr "nie zawiera"
 
-#: globalsearch/globalsearchwidget.cpp:731
+#: globalsearch/globalsearchwidget.cpp:740
 msgid "e.g."
 msgstr ""
 
@@ -4721,7 +4709,7 @@ msgid "press enter"
 msgstr "wciśnij enter"
 
 #: playlist/playlistundocommands.cpp:65 playlist/playlistundocommands.cpp:88
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "usuń %n utworów"
 

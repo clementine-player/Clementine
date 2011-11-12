@@ -4,11 +4,12 @@
 # 
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
+# Roger Pueyo Centelles <transifex@rogerpueyo.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2011-11-10 12:16+0000\n"
+"PO-Revision-Date: 2011-11-11 23:22+0000\n"
 "Last-Translator: clementinebuildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -73,7 +74,7 @@ msgstr "%1 seleccionades de"
 #: devices/deviceview.cpp:122
 #, qt-format
 msgid "%1 song"
-msgstr "%1 cancó"
+msgstr "%1 cançó"
 
 #: devices/deviceview.cpp:124
 #, qt-format
@@ -114,20 +115,20 @@ msgstr "%L1 altres oients"
 #: songinfo/lastfmtrackinfoprovider.cpp:100
 #, qt-format
 msgid "%L1 total plays"
-msgstr ""
+msgstr "%L1 reproduccions en total"
 
 #: transcoder/transcodedialog.cpp:198
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n han fallat"
 
 #: transcoder/transcodedialog.cpp:193
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n han acabat"
 
 #: transcoder/transcodedialog.cpp:188
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n restants"
 
@@ -194,7 +195,7 @@ msgstr "Mode aleatori"
 
 #: playlist/playlistheader.cpp:32
 msgid "&Stretch columns to fit window"
-msgstr ""
+msgstr "&Encabeix les columnes a la finestra"
 
 #: ../bin/src/ui_mainwindow.h:703
 msgid "&Tools"
@@ -202,12 +203,12 @@ msgstr "Eines"
 
 #: ui/edittagdialog.cpp:45
 msgid "(different across multiple songs)"
-msgstr ""
+msgstr "(diferents a les diverses cançons)"
 
 #: ../bin/src/ui_globalsearchpopup.h:104 ../bin/src/ui_globalsearchpopup.h:105
 #: ../bin/src/ui_globalsearchpopup.h:106 ../bin/src/ui_globalsearchpopup.h:107
 msgid "..."
-msgstr ""
+msgstr "..."
 
 #: ui/about.cpp:76
 msgid "...and all the Amarok contributors"
@@ -239,7 +240,7 @@ msgstr "50 pistes aleatòries"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:165
 msgid "<a href=\"http://www.di.fm/premium/\">Upgrade to Premium now</a>"
-msgstr ""
+msgstr "<a href=\"http://www.di.fm/premium/\">Actualitzeu a Premium ara</a>"
 
 #: ../bin/src/ui_organisedialog.h:199
 msgid ""
@@ -253,7 +254,7 @@ msgstr ""
 
 #: internet/groovesharksettingspage.cpp:113
 msgid "A Grooveshark Anywhere account is required."
-msgstr ""
+msgstr "Us cal un compte Grooveshark Anywhere."
 
 #: internet/spotifysettingspage.cpp:147
 msgid "A Spotify Premium account is required."
@@ -291,7 +292,7 @@ msgstr ""
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:171
 msgid "AAC 32k"
-msgstr ""
+msgstr "AAC 32k"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:178
 msgid "AAC 64k"
@@ -303,7 +304,7 @@ msgstr "AIFF"
 
 #: widgets/nowplayingwidget.cpp:119
 msgid "ALL GLORY TO THE HYPNOTOAD"
-msgstr ""
+msgstr "Lloem l'hipnogripau!"
 
 #: ui/about.cpp:32
 #, qt-format
@@ -328,7 +329,7 @@ msgstr "Detalls del compte"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:161
 msgid "Account details (Premium)"
-msgstr ""
+msgstr "Detalls del compte (Premium)"
 
 #: ../bin/src/ui_wiimotesettingspage.h:191
 msgid "Action"
@@ -344,7 +345,7 @@ msgstr "Afegeix un corrent de dades"
 
 #: ../bin/src/ui_notificationssettingspage.h:394
 msgid "Add a new line if supported by the notification type"
-msgstr ""
+msgstr "Afegiu una nova línia si és compatible amb el tipus de notificació"
 
 #: ../bin/src/ui_wiimotesettingspage.h:193
 msgid "Add action"
@@ -352,7 +353,7 @@ msgstr "Afegeix acció"
 
 #: globalsearch/globalsearchwidget.cpp:104
 msgid "Add and play now"
-msgstr ""
+msgstr "Afegir i reproduir ara"
 
 #: internet/savedradio.cpp:103
 msgid "Add another stream..."
@@ -364,7 +365,7 @@ msgstr "Afegir directori..."
 
 #: ui/mainwindow.cpp:1571
 msgid "Add file"
-msgstr ""
+msgstr "Afegiu un fitxer"
 
 #: ../bin/src/ui_mainwindow.h:662
 msgid "Add file..."
@@ -388,11 +389,11 @@ msgstr "Afegir nova carpeta..."
 
 #: smartplaylists/searchtermwidget.cpp:333
 msgid "Add search term"
-msgstr ""
+msgstr "Afegir un terme de cerca"
 
 #: ../bin/src/ui_notificationssettingspage.h:361
 msgid "Add song album tag"
-msgstr ""
+msgstr "Afegeix l'etiqueta d'àlbum a la cançó"
 
 #: ../bin/src/ui_notificationssettingspage.h:367
 msgid "Add song albumartist tag"
@@ -400,27 +401,27 @@ msgstr ""
 
 #: ../bin/src/ui_notificationssettingspage.h:358
 msgid "Add song artist tag"
-msgstr ""
+msgstr "Afegeix l'etiqueta d'artista a la cançó"
 
 #: ../bin/src/ui_notificationssettingspage.h:373
 msgid "Add song composer tag"
-msgstr ""
+msgstr "Afegeix l'etiqueta de compositor a la cançó"
 
 #: ../bin/src/ui_notificationssettingspage.h:376
 msgid "Add song disc tag"
-msgstr ""
+msgstr "Afegeix l'etiqueta de disc a la cançó"
 
 #: ../bin/src/ui_notificationssettingspage.h:382
 msgid "Add song genre tag"
-msgstr ""
+msgstr "Afegeix l'etiqueta de gènere musical a la cançó"
 
 #: ../bin/src/ui_notificationssettingspage.h:385
 msgid "Add song length tag"
-msgstr ""
+msgstr "Afegeix l'etiqueta de durada a la cançó"
 
 #: ../bin/src/ui_notificationssettingspage.h:388
 msgid "Add song play count"
-msgstr ""
+msgstr "Afegir el nombre de reproduccions"
 
 #: ../bin/src/ui_notificationssettingspage.h:391
 msgid "Add song skip count"
@@ -428,15 +429,15 @@ msgstr ""
 
 #: ../bin/src/ui_notificationssettingspage.h:364
 msgid "Add song title tag"
-msgstr ""
+msgstr "Afegeix l'etiqueta de títol a la cançó"
 
 #: ../bin/src/ui_notificationssettingspage.h:379
 msgid "Add song track tag"
-msgstr ""
+msgstr "Afegeix l'etiqueda de número de pista a la cançó"
 
 #: ../bin/src/ui_notificationssettingspage.h:370
 msgid "Add song year tag"
-msgstr ""
+msgstr "Afegeix l'etiqueta d'any a la cançó"
 
 #: ../bin/src/ui_mainwindow.h:664
 msgid "Add stream..."
@@ -444,7 +445,7 @@ msgstr "Afegir flux..."
 
 #: internet/groovesharkservice.cpp:740
 msgid "Add to Grooveshark favorites"
-msgstr ""
+msgstr "Afegir als favorits de Grooveshark"
 
 #: internet/groovesharkservice.cpp:746
 msgid "Add to Grooveshark playlists"
@@ -452,7 +453,7 @@ msgstr ""
 
 #: ui/mainwindow.cpp:1400
 msgid "Add to another playlist"
-msgstr ""
+msgstr "Afegir a una altra llista de reproducció"
 
 #: globalsearch/globalsearchwidget.cpp:103
 #: ../bin/src/ui_albumcovermanager.h:152
@@ -562,7 +563,7 @@ msgstr "Totes les llistes de reproducció (%1)"
 
 #: ui/about.cpp:73
 msgid "All the translators"
-msgstr ""
+msgstr "Tots els traductors"
 
 #: library/library.cpp:79
 msgid "All tracks"
@@ -587,13 +588,15 @@ msgstr "Mostra sempre la finestra principal"
 #: ../bin/src/ui_behavioursettingspage.h:196
 #: ../bin/src/ui_behavioursettingspage.h:210
 msgid "Always start playing"
-msgstr ""
+msgstr "Començar sempre reproduint"
 
 #: internet/spotifyblobdownloader.cpp:59
 msgid ""
 "An additional plugin is required to use Spotify in Clementine.  Would you "
 "like to download and install it now?"
 msgstr ""
+"Cal un connector addicional per utilitzar Spotify a Clementine. Voleu "
+"descarregar-lo i instaŀlar-lo ara?"
 
 #: devices/afcdevice.cpp:62
 msgid "An error occurred copying the iTunes database from the device"
@@ -634,11 +637,11 @@ msgstr "Afegir fitxers/URLs a la llista de reproducció"
 #: devices/deviceview.cpp:216 internet/internetservice.cpp:53
 #: library/libraryview.cpp:243 widgets/fileviewlist.cpp:31
 msgid "Append to current playlist"
-msgstr ""
+msgstr "Afegir a la llista de reproducció actual"
 
 #: ../bin/src/ui_behavioursettingspage.h:201
 msgid "Append to the playlist"
-msgstr ""
+msgstr "Afegir a la llista de reproducció"
 
 #: ../bin/src/ui_playbacksettingspage.h:275
 msgid "Apply compression to prevent clipping"
@@ -649,13 +652,13 @@ msgstr "Afegir compressió per evitar el clipping"
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "Estas segur de que vols esborrar el \"%1\" preestablert?"
 
-#: internet/groovesharkservice.cpp:905
+#: internet/groovesharkservice.cpp:906
 msgid "Are you sure you want to delete this playlist?"
-msgstr ""
+msgstr "Esteu segur que voleu eliminar aquesta llista de reproducció?"
 
 #: ui/edittagdialog.cpp:704
 msgid "Are you sure you want to reset this song's statistics?"
-msgstr ""
+msgstr "Esteu segur que voleu restablir les estadístiques d'aquesta cançó?"
 
 #: playlist/playlist.cpp:1095 ui/organisedialog.cpp:53
 #: ui/qtsystemtrayicon.cpp:250 ../bin/src/ui_groupbydialog.h:130
@@ -703,7 +706,7 @@ msgstr "Autors"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:227
 msgid "Auto"
-msgstr ""
+msgstr "Auto"
 
 #: ../bin/src/ui_librarysettingspage.h:161
 msgid "Automatic updating"
@@ -720,11 +723,11 @@ msgstr "Disponible"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:221
 msgid "Average bitrate"
-msgstr ""
+msgstr "Velocitat de bits mitja"
 
 #: covers/coversearchstatisticsdialog.cpp:70
 msgid "Average image size"
-msgstr ""
+msgstr "Mida d'imatge mitja"
 
 #: playlist/playlist.cpp:1111 ui/organisedialog.cpp:59
 #: ../bin/src/ui_edittagdialog.h:638
@@ -733,7 +736,7 @@ msgstr "BPM"
 
 #: ../bin/src/ui_backgroundstreamssettingspage.h:56
 msgid "Background Streams"
-msgstr ""
+msgstr "Fluxes en segon pla"
 
 #: ../bin/src/ui_notificationssettingspage.h:418
 msgid "Background color"
@@ -765,7 +768,7 @@ msgstr "Comportament"
 
 #: ../bin/src/ui_transcoderoptionsflac.h:83
 msgid "Best"
-msgstr ""
+msgstr "Millor"
 
 #: songinfo/echonestbiographies.cpp:83
 #, qt-format
@@ -797,7 +800,7 @@ msgstr "Bluetooth Adreça MAC"
 
 #: ../bin/src/ui_notificationssettingspage.h:414
 msgid "Body"
-msgstr ""
+msgstr "Cos"
 
 #: analyzers/boomanalyzer.cpp:8
 msgid "Boom analyzer"
@@ -809,7 +812,7 @@ msgstr "Explora..."
 
 #: ../bin/src/ui_playbacksettingspage.h:284
 msgid "Buffer duration"
-msgstr ""
+msgstr "Mida del buffer"
 
 #: ../bin/src/ui_wiimotesettingspage.h:192
 msgid "Buttons"
@@ -817,27 +820,27 @@ msgstr "Botons"
 
 #: core/song.cpp:142
 msgid "CDDA"
-msgstr ""
+msgstr "CDDA"
 
 #: library/library.cpp:95
 msgid "CUE sheet support"
-msgstr ""
+msgstr "Suport per a CUE sheet"
 
 #: internet/spotifyblobdownloader.cpp:43
 msgid "Cancel"
-msgstr ""
+msgstr "Canceŀla"
 
 #: ../bin/src/ui_edittagdialog.h:634
 msgid "Change cover art"
-msgstr ""
+msgstr "Canviar la imatge de la portada"
 
 #: songinfo/songinfotextview.cpp:74
 msgid "Change font size..."
-msgstr ""
+msgstr "Canvieu la mida de la font"
 
 #: core/globalshortcuts.cpp:61
 msgid "Change repeat mode"
-msgstr ""
+msgstr "Canvia el tipus de repetició"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:179
 msgid "Change shortcut..."
@@ -845,7 +848,7 @@ msgstr "Canviar combinació de tecles"
 
 #: core/globalshortcuts.cpp:60
 msgid "Change shuffle mode"
-msgstr ""
+msgstr "Canvia el mode aleatori"
 
 #: core/commandlineoptions.cpp:170
 msgid "Change the language"
@@ -857,7 +860,7 @@ msgstr "Comproba actualitzacions..."
 
 #: smartplaylists/wizard.cpp:80
 msgid "Choose a name for your smart playlist"
-msgstr ""
+msgstr "Escolliu un nom per a la llista de reproducció inteŀligent"
 
 #: ../bin/src/ui_playbacksettingspage.h:280
 msgid "Choose automatically"
@@ -869,7 +872,7 @@ msgstr "Tria el color..."
 
 #: ../bin/src/ui_notificationssettingspage.h:427
 msgid "Choose font..."
-msgstr ""
+msgstr "Escolliu font..."
 
 #: ../bin/src/ui_visualisationselector.h:113
 msgid "Choose from the list"
@@ -931,6 +934,9 @@ msgid ""
 "feature log in with the same Google account that is configured on your "
 "phone."
 msgstr ""
+"Podeu controlar el Clementine remotament mitjançant un telèfon amb Android."
+"  Per habilitar aquesta opció inicieu sessió amb el mateix compte que "
+"tingueu configurat al telèfon."
 
 #: ../bin/src/ui_notificationssettingspage.h:396
 msgid "Clementine can show a message when the track changes."
@@ -957,7 +963,7 @@ msgstr "Visor d'imatges Clementine"
 
 #: ../bin/src/ui_trackselectiondialog.h:206
 msgid "Clementine was unable to find results for this file"
-msgstr ""
+msgstr "El Clementine no ha trobat resultats per a aquest fitxer"
 
 #: library/libraryview.cpp:225
 msgid "Click here to add some music"
@@ -966,10 +972,11 @@ msgstr "Fes click aquí per afegir música"
 #: ../bin/src/ui_trackslider.h:72
 msgid "Click to toggle between remaining time and total time"
 msgstr ""
+"Feu clic aquí per alternar entre el temps de reproducció restant i total"
 
 #: widgets/didyoumean.cpp:35
 msgid "Close"
-msgstr ""
+msgstr "Tanca"
 
 #: visualisations/visualisationcontainer.cpp:119
 msgid "Close visualization"
@@ -1007,7 +1014,7 @@ msgstr "Comentari"
 
 #: ../bin/src/ui_edittagdialog.h:662
 msgid "Complete tags automatically"
-msgstr ""
+msgstr "Completa les etiquetes automàticament"
 
 #: ../bin/src/ui_mainwindow.h:695
 msgid "Complete tags automatically..."
@@ -1072,9 +1079,9 @@ msgstr "Converitr tota la música"
 msgid "Convert any music that the device can't play"
 msgstr "Convertir qualsevol música que el dispositiu no pugui reproduir"
 
-#: internet/groovesharkservice.cpp:792
+#: internet/groovesharkservice.cpp:793
 msgid "Copy to clipboard"
-msgstr ""
+msgstr "Copiar al porta-retalls"
 
 #: library/libraryview.cpp:265 ui/mainwindow.cpp:524
 #: widgets/fileviewlist.cpp:43
@@ -1158,9 +1165,9 @@ msgstr ""
 msgid "Covers from %1"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:462 internet/groovesharkservice.cpp:857
+#: internet/groovesharkservice.cpp:462 internet/groovesharkservice.cpp:858
 msgid "Create a new Grooveshark playlist"
-msgstr ""
+msgstr "Crear una nova llista de reproducció de Grooveshark"
 
 #: ../bin/src/ui_playbacksettingspage.h:262
 msgid "Cross-fade when changing tracks automatically"
@@ -1298,9 +1305,9 @@ msgstr "Opcions per defecte"
 msgid "Delay between visualizations"
 msgstr "Retard entre visualitzacions"
 
-#: internet/groovesharkservice.cpp:465 internet/groovesharkservice.cpp:904
+#: internet/groovesharkservice.cpp:465 internet/groovesharkservice.cpp:905
 msgid "Delete Grooveshark playlist"
-msgstr ""
+msgstr "Esborrar la llista de reproducció de Grooveshark"
 
 #: devices/deviceview.cpp:393 library/libraryview.cpp:459
 #: ui/mainwindow.cpp:1834 widgets/fileview.cpp:185
@@ -1629,7 +1636,7 @@ msgstr ""
 
 #: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:453
 #: ui/edittagdialog.cpp:719 ui/mainwindow.cpp:1802 ui/mainwindow.cpp:1907
-#: ui/mainwindow.cpp:2125
+#: ui/mainwindow.cpp:2126
 msgid "Error"
 msgstr "Error"
 
@@ -1678,7 +1685,7 @@ msgstr ""
 
 #: ../bin/src/ui_dynamicplaylistcontrols.h:111
 msgid "Expand"
-msgstr ""
+msgstr "Expandeix"
 
 #: widgets/loginstatewidget.cpp:112
 #, qt-format
@@ -2639,7 +2646,7 @@ msgstr "La meva emissora de ràdio"
 msgid "My Recommendations"
 msgstr "Les meves recomanacions"
 
-#: internet/groovesharkservice.cpp:858 ui/equalizer.cpp:172
+#: internet/groovesharkservice.cpp:859 ui/equalizer.cpp:172
 #: ../bin/src/ui_deviceproperties.h:369
 #: ../bin/src/ui_magnatunedownloaddialog.h:135
 #: ../bin/src/ui_wizardfinishpage.h:84
@@ -2965,10 +2972,6 @@ msgstr ""
 msgid "Play custom radio..."
 msgstr ""
 
-#: songinfo/tagwidget.cpp:147
-msgid "Play from my Library"
-msgstr ""
-
 #: core/commandlineoptions.cpp:152
 msgid "Play if stopped, pause if playing"
 msgstr "Reprodueix si esta parat, pausa si esta reproduïnt"
@@ -2976,14 +2979,6 @@ msgstr "Reprodueix si esta parat, pausa si esta reproduïnt"
 #: ../bin/src/ui_behavioursettingspage.h:195
 #: ../bin/src/ui_behavioursettingspage.h:209
 msgid "Play if there is nothing already playing"
-msgstr ""
-
-#: songinfo/tagwidget.cpp:145
-msgid "Play last.fm artist radio"
-msgstr ""
-
-#: songinfo/tagwidget.cpp:140
-msgid "Play last.fm tag radio"
 msgstr ""
 
 #: internet/lastfmservice.cpp:105
@@ -3256,7 +3251,7 @@ msgstr "Suprimeix carpeta"
 
 #: internet/groovesharkservice.cpp:472
 msgid "Remove from favorites"
-msgstr ""
+msgstr "Esborreu dels favorits"
 
 #: internet/groovesharkservice.cpp:469 ../bin/src/ui_mainwindow.h:674
 msgid "Remove from playlist"
@@ -3338,7 +3333,7 @@ msgstr "Limitar als caràcters ASCII"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:175
 msgid "Results"
-msgstr ""
+msgstr "Resultats"
 
 #: ui/equalizer.cpp:121
 msgid "Rock"
@@ -3660,7 +3655,7 @@ msgstr "Remena-ho tot"
 
 #: widgets/osd.cpp:296 ../bin/src/ui_playlistsequence.h:104
 msgid "Shuffle by album"
-msgstr "Rema"
+msgstr "Remena per àlbum"
 
 #: ../bin/src/ui_mainwindow.h:660
 msgid "Shuffle playlist"
@@ -3756,7 +3751,7 @@ msgstr ""
 
 #: ../bin/src/ui_globalsearchsettingspage.h:169
 msgid "Sources"
-msgstr ""
+msgstr "Fonts"
 
 #: ../bin/src/ui_transcodersettingspage.h:162
 msgid "Speex"
@@ -4389,7 +4384,7 @@ msgstr ""
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:181
 msgid "Windows Media 128k"
-msgstr ""
+msgstr "Windows Media 128k"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:172
 msgid "Windows Media 40k"
@@ -4397,7 +4392,7 @@ msgstr ""
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:180
 msgid "Windows Media 64k"
-msgstr ""
+msgstr "Windows Media 64k"
 
 #: core/song.cpp:131
 msgid "Windows Media audio"
@@ -4529,7 +4524,7 @@ msgstr "Les teves credencials de Last.fm son incorrectes"
 msgid "Your Magnatune credentials were incorrect"
 msgstr ""
 
-#: ui/edittagdialog.cpp:719 ui/mainwindow.cpp:2125
+#: ui/edittagdialog.cpp:719 ui/mainwindow.cpp:2126
 msgid ""
 "Your gstreamer installation is missing the 'ofa' plugin.  This is required "
 "for automatic tag fetching.  Try installing the 'gstreamer-plugins-bad' "
@@ -4563,7 +4558,7 @@ msgid "Zero"
 msgstr "Zero"
 
 #: playlist/playlistundocommands.cpp:37
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "afegeix %n cançons"
 
@@ -4618,9 +4613,9 @@ msgstr "disc %1"
 msgid "does not contain"
 msgstr ""
 
-#: globalsearch/globalsearchwidget.cpp:731
+#: globalsearch/globalsearchwidget.cpp:740
 msgid "e.g."
-msgstr ""
+msgstr "ex.:"
 
 #: smartplaylists/searchterm.cpp:215
 msgid "ends with"
@@ -4687,7 +4682,7 @@ msgid "press enter"
 msgstr ""
 
 #: playlist/playlistundocommands.cpp:65 playlist/playlistundocommands.cpp:88
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "elimina %n cançons"
 

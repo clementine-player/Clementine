@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2011-11-10 12:16+0000\n"
+"PO-Revision-Date: 2011-11-11 23:22+0000\n"
 "Last-Translator: clementinebuildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -119,17 +119,17 @@ msgid "%L1 total plays"
 msgstr "%L1 toplam çalma"
 
 #: transcoder/transcodedialog.cpp:198
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n başarısız"
 
 #: transcoder/transcodedialog.cpp:193
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n tamamlandı"
 
 #: transcoder/transcodedialog.cpp:188
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n kaldı"
 
@@ -648,7 +648,7 @@ msgstr "Kesintiyi engellemek için sıkıştırma uygula"
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "\"%1\" ayarını silmek istediğinizden emin misiniz?"
 
-#: internet/groovesharkservice.cpp:905
+#: internet/groovesharkservice.cpp:906
 msgid "Are you sure you want to delete this playlist?"
 msgstr "Bu çalan listeyi silmek istediğinizden emin misiniz?"
 
@@ -1072,7 +1072,7 @@ msgstr "Tüm müzikleri dönüştür"
 msgid "Convert any music that the device can't play"
 msgstr "Aygıtın çalamadığı müzikleri dönüştür"
 
-#: internet/groovesharkservice.cpp:792
+#: internet/groovesharkservice.cpp:793
 msgid "Copy to clipboard"
 msgstr ""
 
@@ -1158,7 +1158,7 @@ msgstr "Kapak resmi %1 adresinden ayarlandı"
 msgid "Covers from %1"
 msgstr "%1 adresindeki kapak resimleri"
 
-#: internet/groovesharkservice.cpp:462 internet/groovesharkservice.cpp:857
+#: internet/groovesharkservice.cpp:462 internet/groovesharkservice.cpp:858
 msgid "Create a new Grooveshark playlist"
 msgstr "Yeni bir Grooveshark müzik listesi oluşturun"
 
@@ -1298,7 +1298,7 @@ msgstr "Öntanımlılar"
 msgid "Delay between visualizations"
 msgstr "Görselleştirmeler arasındaki gecikme"
 
-#: internet/groovesharkservice.cpp:465 internet/groovesharkservice.cpp:904
+#: internet/groovesharkservice.cpp:465 internet/groovesharkservice.cpp:905
 msgid "Delete Grooveshark playlist"
 msgstr "Grooveshark müzik listesini sil"
 
@@ -1632,7 +1632,7 @@ msgstr "--log-levels *:3'e eşdeğer"
 
 #: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:453
 #: ui/edittagdialog.cpp:719 ui/mainwindow.cpp:1802 ui/mainwindow.cpp:1907
-#: ui/mainwindow.cpp:2125
+#: ui/mainwindow.cpp:2126
 msgid "Error"
 msgstr "Hata"
 
@@ -2647,7 +2647,7 @@ msgstr "Radyom"
 msgid "My Recommendations"
 msgstr "Önerdiklerim"
 
-#: internet/groovesharkservice.cpp:858 ui/equalizer.cpp:172
+#: internet/groovesharkservice.cpp:859 ui/equalizer.cpp:172
 #: ../bin/src/ui_deviceproperties.h:369
 #: ../bin/src/ui_magnatunedownloaddialog.h:135
 #: ../bin/src/ui_wizardfinishpage.h:84
@@ -2973,10 +2973,6 @@ msgstr "Çalma sayısı"
 msgid "Play custom radio..."
 msgstr "Özel radyo çal..."
 
-#: songinfo/tagwidget.cpp:147
-msgid "Play from my Library"
-msgstr "Kütüphanemden çal"
-
 #: core/commandlineoptions.cpp:152
 msgid "Play if stopped, pause if playing"
 msgstr "Duraklatılmışsa çal, çalıyorsa beklet"
@@ -2985,14 +2981,6 @@ msgstr "Duraklatılmışsa çal, çalıyorsa beklet"
 #: ../bin/src/ui_behavioursettingspage.h:209
 msgid "Play if there is nothing already playing"
 msgstr "Çalan birşey yoksa çal"
-
-#: songinfo/tagwidget.cpp:145
-msgid "Play last.fm artist radio"
-msgstr "Last.fm sanatçı radyosunu çal"
-
-#: songinfo/tagwidget.cpp:140
-msgid "Play last.fm tag radio"
-msgstr "Last.fm etiket radyosunu çal"
 
 #: internet/lastfmservice.cpp:105
 msgid "Play tag radio..."
@@ -4548,7 +4536,7 @@ msgstr "Last.fm giriş bilgileriniz doğru değil"
 msgid "Your Magnatune credentials were incorrect"
 msgstr "Magnatune kimlik bilgileriniz hatalı"
 
-#: ui/edittagdialog.cpp:719 ui/mainwindow.cpp:2125
+#: ui/edittagdialog.cpp:719 ui/mainwindow.cpp:2126
 msgid ""
 "Your gstreamer installation is missing the 'ofa' plugin.  This is required "
 "for automatic tag fetching.  Try installing the 'gstreamer-plugins-bad' "
@@ -4585,7 +4573,7 @@ msgid "Zero"
 msgstr "Sıfır"
 
 #: playlist/playlistundocommands.cpp:37
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "%n şarkıyı ekle"
 
@@ -4640,7 +4628,7 @@ msgstr "disk %1"
 msgid "does not contain"
 msgstr "şunu içermiyor"
 
-#: globalsearch/globalsearchwidget.cpp:731
+#: globalsearch/globalsearchwidget.cpp:740
 msgid "e.g."
 msgstr "Örn."
 
@@ -4709,7 +4697,7 @@ msgid "press enter"
 msgstr "enter'a basın"
 
 #: playlist/playlistundocommands.cpp:65 playlist/playlistundocommands.cpp:88
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "%n şarkıyı kaldır"
 

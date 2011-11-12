@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2011-11-10 12:16+0000\n"
+"PO-Revision-Date: 2011-11-11 23:22+0000\n"
 "Last-Translator: clementinebuildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -117,17 +117,17 @@ msgid "%L1 total plays"
 msgstr ""
 
 #: transcoder/transcodedialog.cpp:198
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n failed"
 msgstr "%n 曲失敗しました"
 
 #: transcoder/transcodedialog.cpp:193
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n finished"
 msgstr "%n が完了しました"
 
 #: transcoder/transcodedialog.cpp:188
-#, c-format
+#, c-format, qt-plural-format
 msgid "%n remaining"
 msgstr "%n 曲残っています"
 
@@ -642,7 +642,7 @@ msgstr "圧縮を適用してクリップを禁止する"
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "\"%1\" プリセットを削除してもよろしいですか?"
 
-#: internet/groovesharkservice.cpp:905
+#: internet/groovesharkservice.cpp:906
 msgid "Are you sure you want to delete this playlist?"
 msgstr ""
 
@@ -1058,7 +1058,7 @@ msgstr "すべてのミュージックを変換する"
 msgid "Convert any music that the device can't play"
 msgstr "デバイスが再生できないすべてのミュージックを変換する"
 
-#: internet/groovesharkservice.cpp:792
+#: internet/groovesharkservice.cpp:793
 msgid "Copy to clipboard"
 msgstr ""
 
@@ -1142,7 +1142,7 @@ msgstr "%1 からのカバー アート セット"
 msgid "Covers from %1"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:462 internet/groovesharkservice.cpp:857
+#: internet/groovesharkservice.cpp:462 internet/groovesharkservice.cpp:858
 msgid "Create a new Grooveshark playlist"
 msgstr ""
 
@@ -1282,7 +1282,7 @@ msgstr "既定"
 msgid "Delay between visualizations"
 msgstr "視覚化の間の遅延"
 
-#: internet/groovesharkservice.cpp:465 internet/groovesharkservice.cpp:904
+#: internet/groovesharkservice.cpp:465 internet/groovesharkservice.cpp:905
 msgid "Delete Grooveshark playlist"
 msgstr ""
 
@@ -1611,7 +1611,7 @@ msgstr ""
 
 #: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:453
 #: ui/edittagdialog.cpp:719 ui/mainwindow.cpp:1802 ui/mainwindow.cpp:1907
-#: ui/mainwindow.cpp:2125
+#: ui/mainwindow.cpp:2126
 msgid "Error"
 msgstr "エラー"
 
@@ -2615,7 +2615,7 @@ msgstr "ラジオ局"
 msgid "My Recommendations"
 msgstr "おすすめ"
 
-#: internet/groovesharkservice.cpp:858 ui/equalizer.cpp:172
+#: internet/groovesharkservice.cpp:859 ui/equalizer.cpp:172
 #: ../bin/src/ui_deviceproperties.h:369
 #: ../bin/src/ui_magnatunedownloaddialog.h:135
 #: ../bin/src/ui_wizardfinishpage.h:84
@@ -2939,10 +2939,6 @@ msgstr "再生回数"
 msgid "Play custom radio..."
 msgstr "カスタム ラジオの再生..."
 
-#: songinfo/tagwidget.cpp:147
-msgid "Play from my Library"
-msgstr "ライブラリから再生"
-
 #: core/commandlineoptions.cpp:152
 msgid "Play if stopped, pause if playing"
 msgstr "停止中は再生し、再生中は一時停止します"
@@ -2951,14 +2947,6 @@ msgstr "停止中は再生し、再生中は一時停止します"
 #: ../bin/src/ui_behavioursettingspage.h:209
 msgid "Play if there is nothing already playing"
 msgstr ""
-
-#: songinfo/tagwidget.cpp:145
-msgid "Play last.fm artist radio"
-msgstr "last.fm アーティスト ラジオの再生"
-
-#: songinfo/tagwidget.cpp:140
-msgid "Play last.fm tag radio"
-msgstr "last.fm タグ ラジオの再生"
 
 #: internet/lastfmservice.cpp:105
 msgid "Play tag radio..."
@@ -4497,7 +4485,7 @@ msgstr "Last.fm の資格情報が正しくありません"
 msgid "Your Magnatune credentials were incorrect"
 msgstr ""
 
-#: ui/edittagdialog.cpp:719 ui/mainwindow.cpp:2125
+#: ui/edittagdialog.cpp:719 ui/mainwindow.cpp:2126
 msgid ""
 "Your gstreamer installation is missing the 'ofa' plugin.  This is required "
 "for automatic tag fetching.  Try installing the 'gstreamer-plugins-bad' "
@@ -4531,7 +4519,7 @@ msgid "Zero"
 msgstr "Zero"
 
 #: playlist/playlistundocommands.cpp:37
-#, c-format
+#, c-format, qt-plural-format
 msgid "add %n songs"
 msgstr "%n 曲追加"
 
@@ -4586,7 +4574,7 @@ msgstr "ディスク %1"
 msgid "does not contain"
 msgstr "次を含まない"
 
-#: globalsearch/globalsearchwidget.cpp:731
+#: globalsearch/globalsearchwidget.cpp:740
 msgid "e.g."
 msgstr ""
 
@@ -4655,7 +4643,7 @@ msgid "press enter"
 msgstr ""
 
 #: playlist/playlistundocommands.cpp:65 playlist/playlistundocommands.cpp:88
-#, c-format
+#, c-format, qt-plural-format
 msgid "remove %n songs"
 msgstr "%n 曲削除"
 
