@@ -169,8 +169,12 @@ void SpotifyBlobDownloader::ReplyFinished() {
 
       while (!version_parts.isEmpty()) {
         qLog(Debug) << "Linking" << dest_path << "to" << link_path;
-        symlink(dest_path.toLocal8Bit().constData(),
-                link_path.toLocal8Bit().constData());
+        int ret = symlink(dest_path.toLocal8Bit().constData(),
+                          link_path.toLocal8Bit().constData());
+
+        if (ret != 0) {
+          qLog(Warning) << "Creating symlink failed with return code" << ret;
+        }
 
         link_path += "." + version_parts.takeFirst();
       }
