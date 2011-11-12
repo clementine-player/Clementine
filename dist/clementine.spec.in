@@ -16,7 +16,7 @@ BuildRequires:  libimobiledevice-devel libplist-devel usbmuxd-devel
 BuildRequires:  libmtp-devel protobuf-devel protobuf-compiler libcdio-devel
 BuildRequires:  qjson-devel qca2-devel
 
-Requires:       libgpod protobuf-lite libcdio qjson
+Requires:       libgpod protobuf-lite libcdio qjson qca-ossl
 
 # GStreamer codec dependencies
 Requires:       gstreamer-plugins-ugly
