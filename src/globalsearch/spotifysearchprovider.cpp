@@ -52,7 +52,7 @@ SpotifyServer* SpotifySearchProvider::server() {
           SLOT(AlbumBrowseResponse(spotify_pb::BrowseAlbumResponse)));
   connect(server_, SIGNAL(destroyed()), SLOT(ServerDestroyed()));
 
-  return service_->server();
+  return server_;
 }
 
 void SpotifySearchProvider::ServerDestroyed() {

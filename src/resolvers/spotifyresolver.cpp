@@ -6,15 +6,39 @@
 #include "internet/spotifyservice.h"
 #include "spotifyblob/common/spotifymessages.pb.h"
 
-SpotifyResolver::SpotifyResolver(SpotifyServer* spotify, QObject* parent)
+SpotifyResolver::SpotifyResolver(SpotifyService* service, QObject* parent)
     : Resolver(parent),
-      spotify_(spotify),
-      next_id_(0) {
-  connect(spotify_, SIGNAL(SearchResults(spotify_pb::SearchResponse)),
+      service_(service),
+      server_(NULL),
+      next_id_(0)
+{
+}
+
+SpotifyServer* SpotifyResolver::server() {
+  if (server_)
+    return server_;
+
+  if (service_->login_state() != SpotifyService::LoginState_LoggedIn)
+    return NULL;
+
+  server_ = service_->server();
+  connect(server_, SIGNAL(SearchResults(spotify_pb::SearchResponse)),
           SLOT(SearchFinished(spotify_pb::SearchResponse)));
+  connect(server_, SIGNAL(destroyed()), SLOT(ServerDestroyed()));
+
+  return server_;
+}
+
+void SpotifyResolver::ServerDestroyed() {
+  server_ = NULL;
 }
 
 int SpotifyResolver::ResolveSong(const Song& song) {
+  SpotifyServer* s = server();
+  if (!s) {
+    return -1;
+  }
+
   QString query_string;
   query_string += "artist:\"" + song.artist() + "\"";
   query_string += " title:\"" + song.title() + "\"";
@@ -22,7 +46,7 @@ int SpotifyResolver::ResolveSong(const Song& song) {
 
   qLog(Debug) << query_string;
 
-  spotify_->Search(query_string, 25);
+  s->Search(query_string, 25);
 
   int id = next_id_++;
   queries_[query_string] = id;
