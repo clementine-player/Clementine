@@ -35,7 +35,6 @@ class PlaylistHeader : public StretchHeaderView {
 
  signals:
   void SectionVisibilityChanged(int logical, bool visible);
-  void ColumnAlignmentChanged();
   void MouseEntered();
 
  private slots:

@@ -117,7 +117,6 @@ PlaylistView::PlaylistView(QWidget *parent)
   connect(header_, SIGNAL(sectionMoved(int,int,int)), SLOT(InvalidateCachedCurrentPixmap()));
   connect(header_, SIGNAL(SectionVisibilityChanged(int,bool)), SLOT(InvalidateCachedCurrentPixmap()));
   connect(header_, SIGNAL(StretchEnabledChanged(bool)), SLOT(SaveSettings()));
-  connect(header_, SIGNAL(ColumnAlignmentChanged()), SLOT(SaveSettings()));
   connect(header_, SIGNAL(StretchEnabledChanged(bool)), SLOT(StretchChanged(bool)));
   connect(header_, SIGNAL(MouseEntered()), SLOT(RatingHoverOut()));
 
@@ -893,8 +892,12 @@ void PlaylistView::ReloadSettings() {
     setting_initial_header_layout_ = false;
   }
 
-  ColumnAlignmentMap column_alignments = s.value("column_alignments").value<ColumnAlignmentMap>();
-  if (!column_alignments.isEmpty()) playlist_->set_column_alignments(column_alignments);
+  column_alignment_ = s.value("column_alignments").value<ColumnAlignmentMap>();
+  if (column_alignment_.isEmpty()) {
+    column_alignment_ = DefaultColumnAlignment();
+  }
+
+  emit ColumnAlignmentChanged(column_alignment_);
 }
 
 void PlaylistView::SaveSettings() {
@@ -904,7 +907,7 @@ void PlaylistView::SaveSettings() {
   QSettings s;
   s.beginGroup(Playlist::kSettingsGroup);
   s.setValue("glow_effect", glow_enabled_);
-  s.setValue("column_alignments", QVariant::fromValue(playlist_->column_alignments()));
+  s.setValue("column_alignments", QVariant::fromValue(column_alignment_));
   s.setValue("bg_enabled", background_enabled_);
 }
 
@@ -954,4 +957,31 @@ void PlaylistView::rowsInserted(const QModelIndex& parent, int start, int end) {
     // the view so the user can see.
     scrollTo(model()->index(start, 0, parent), QAbstractItemView::PositionAtTop);
   }
+}
+
+ColumnAlignmentMap PlaylistView::DefaultColumnAlignment() {
+  ColumnAlignmentMap ret;
+
+  ret[Playlist::Column_Length] =
+  ret[Playlist::Column_Track] =
+  ret[Playlist::Column_Disc] =
+  ret[Playlist::Column_Year] =
+  ret[Playlist::Column_BPM] =
+  ret[Playlist::Column_Bitrate] =
+  ret[Playlist::Column_Samplerate] =
+  ret[Playlist::Column_Filesize] =
+  ret[Playlist::Column_PlayCount] =
+  ret[Playlist::Column_SkipCount] = (Qt::AlignRight | Qt::AlignVCenter);
+  ret[Playlist::Column_Score]     = (Qt::AlignCenter);
+
+  return ret;
+}
+
+void PlaylistView::SetColumnAlignment(int section, Qt::Alignment alignment) {
+  if (section < 0)
+    return;
+
+  column_alignment_[section] = alignment;
+  emit ColumnAlignmentChanged(column_alignment_);
+  SaveSettings();
 }

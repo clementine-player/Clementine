@@ -87,27 +87,18 @@ void PlaylistHeader::HideCurrent() {
 }
 
 void PlaylistHeader::AlignCurrentLeft() {
-  if (menu_section_ == -1)
-    return;
-  PlaylistView* view = static_cast<PlaylistView*>(parent());
-  view->playlist()->set_column_align_left(menu_section_);
-  emit ColumnAlignmentChanged();
+  static_cast<PlaylistView*>(parent())->SetColumnAlignment(
+        menu_section_, Qt::AlignLeft | Qt::AlignVCenter);
 }
 
 void PlaylistHeader::AlignCurrentCenter() {
-  if (menu_section_ == -1)
-    return;
-  PlaylistView* view = static_cast<PlaylistView*>(parent());
-  view->playlist()->set_column_align_center(menu_section_);
-  emit ColumnAlignmentChanged();
+  static_cast<PlaylistView*>(parent())->SetColumnAlignment(
+        menu_section_, Qt::AlignHCenter | Qt::AlignVCenter);
 }
 
 void PlaylistHeader::AlignCurrentRight() {
-  if (menu_section_ == -1)
-    return;
-  PlaylistView* view = static_cast<PlaylistView*>(parent());
-  view->playlist()->set_column_align_right(menu_section_);
-  emit ColumnAlignmentChanged();
+  static_cast<PlaylistView*>(parent())->SetColumnAlignment(
+        menu_section_, Qt::AlignRight | Qt::AlignVCenter);
 }
 
 void PlaylistHeader::ToggleVisible(int section) {

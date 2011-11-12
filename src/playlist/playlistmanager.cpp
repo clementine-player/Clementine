@@ -17,7 +17,9 @@
 
 #include "playlist.h"
 #include "playlistbackend.h"
+#include "playlistcontainer.h"
 #include "playlistmanager.h"
+#include "playlistview.h"
 #include "specialplaylisttype.h"
 #include "core/logging.h"
 #include "core/songloader.h"
@@ -104,6 +106,8 @@ Playlist* PlaylistManager::AddPlaylist(int id, const QString& name,
   connect(ret, SIGNAL(EditingFinished(QModelIndex)), SIGNAL(EditingFinished(QModelIndex)));
   connect(ret, SIGNAL(LoadTracksError(QString)), SIGNAL(Error(QString)));
   connect(ret, SIGNAL(PlayRequested(QModelIndex)), SIGNAL(PlayRequested(QModelIndex)));
+  connect(playlist_container_->view(), SIGNAL(ColumnAlignmentChanged(ColumnAlignmentMap)),
+          ret, SLOT(SetColumnAlignment(ColumnAlignmentMap)));
 
   playlists_[id] = Data(ret, name);
 

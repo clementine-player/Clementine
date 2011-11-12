@@ -195,12 +195,6 @@ class Playlist : public QAbstractListModel {
 
   QUndoStack* undo_stack() const { return undo_stack_; }
 
-  ColumnAlignmentMap column_alignments() const { return column_alignments_; }
-  void set_column_alignments(const ColumnAlignmentMap& column_alignments);
-  void set_column_align_left(int column);
-  void set_column_align_center(int column);
-  void set_column_align_right(int column);
-
   // Scrobbling
   qint64 scrobble_point_nanosec() const { return scrobble_point_; }
   LastFMStatus get_lastfm_status() const { return lastfm_status_; }
@@ -280,6 +274,8 @@ class Playlist : public QAbstractListModel {
   void ExpandDynamicPlaylist();
   void RepopulateDynamicPlaylist();
   void TurnOffDynamicPlaylist();
+
+  void SetColumnAlignment(const ColumnAlignmentMap& alignment);
 
  signals:
   void RestoreFinished();

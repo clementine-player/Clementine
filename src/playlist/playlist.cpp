@@ -20,6 +20,7 @@
 #include "playlistfilter.h"
 #include "playlistitemmimedata.h"
 #include "playlistundocommands.h"
+#include "playlistview.h"
 #include "queue.h"
 #include "songloaderinserter.h"
 #include "songmimedata.h"
@@ -121,19 +122,7 @@ Playlist::Playlist(PlaylistBackend* backend,
 
   connect(queue_, SIGNAL(layoutChanged()), SLOT(QueueLayoutChanged()));
 
-  column_alignments_[Column_Length]
-      = column_alignments_[Column_Track]
-      = column_alignments_[Column_Disc]
-      = column_alignments_[Column_Year]
-      = column_alignments_[Column_BPM]
-      = column_alignments_[Column_Bitrate]
-      = column_alignments_[Column_Samplerate]
-      = column_alignments_[Column_Filesize]
-      = column_alignments_[Column_PlayCount]
-      = column_alignments_[Column_SkipCount]
-      = (Qt::AlignRight | Qt::AlignVCenter);
-
-  column_alignments_[Column_Score] = (Qt::AlignCenter);
+  column_alignments_ = PlaylistView::DefaultColumnAlignment();
 }
 
 Playlist::~Playlist() {
@@ -1697,22 +1686,6 @@ void Playlist::ItemChanged(PlaylistItemPtr item) {
   }
 }
 
-void Playlist::set_column_alignments(const ColumnAlignmentMap& column_alignments) {
-  column_alignments_ = column_alignments;
-}
-
-void Playlist::set_column_align_left(int column) {
-  column_alignments_[column] = (Qt::AlignLeft | Qt::AlignVCenter);
-}
-
-void Playlist::set_column_align_center(int column) {
-  column_alignments_[column] = Qt::AlignCenter;
-}
-
-void Playlist::set_column_align_right(int column) {
-  column_alignments_[column] = (Qt::AlignRight | Qt::AlignVCenter);
-}
-
 void Playlist::InformOfCurrentSongChange() {
   emit dataChanged(index(current_item_index_.row(), 0),
                    index(current_item_index_.row(), ColumnCount-1));
@@ -1787,4 +1760,8 @@ bool Playlist::ApplyValidityOnCurrentSong(const QUrl& url, bool valid) {
   }
 
   return current;
+}
+
+void Playlist::SetColumnAlignment(const ColumnAlignmentMap& alignment) {
+  column_alignments_ = alignment;
 }
