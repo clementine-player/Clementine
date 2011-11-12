@@ -516,6 +516,12 @@ void Database::UpdateDatabaseSchema(int version, QSqlDatabase &db) {
     
     UrlEncodeFilenameColumn("songs", db);
     UrlEncodeFilenameColumn("playlist_items", db);
+
+    foreach (const QString& table, db.tables()) {
+      if (table.startsWith("device_") && table.endsWith("_songs")) {
+        UrlEncodeFilenameColumn(table, db);
+      }
+    }
   }
   
   ExecFromFile(filename, db, version - 1);
