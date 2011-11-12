@@ -75,6 +75,7 @@ class PlaylistView : public QTreeView {
 
   Playlist* playlist() const { return playlist_; }
   bool      background_enabled() const { return background_enabled_; }
+  Qt::Alignment column_alignment(int section) const;
 
   // QTreeView
   void drawTree(QPainter* painter, const QRegion& region) const;

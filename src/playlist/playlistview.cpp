@@ -85,7 +85,7 @@ PlaylistView::PlaylistView(QWidget *parent)
   : QTreeView(parent),
     style_(new PlaylistProxyStyle(style())),
     playlist_(NULL),
-    header_(new PlaylistHeader(Qt::Horizontal, this)),
+    header_(new PlaylistHeader(Qt::Horizontal, this, this)),
     setting_initial_header_layout_(false),
     upgrading_from_qheaderview_(false),
     read_only_settings_(true),
@@ -984,4 +984,8 @@ void PlaylistView::SetColumnAlignment(int section, Qt::Alignment alignment) {
   column_alignment_[section] = alignment;
   emit ColumnAlignmentChanged(column_alignment_);
   SaveSettings();
+}
+
+Qt::Alignment PlaylistView::column_alignment(int section) const {
+  return column_alignment_.value(section, Qt::AlignLeft | Qt::AlignVCenter);
 }

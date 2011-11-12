@@ -23,8 +23,10 @@
 #include <QMenu>
 #include <QSignalMapper>
 
-PlaylistHeader::PlaylistHeader(Qt::Orientation orientation, QWidget* parent)
+PlaylistHeader::PlaylistHeader(Qt::Orientation orientation, PlaylistView* view,
+                               QWidget* parent)
     : StretchHeaderView(orientation, parent),
+      view_(view),
       menu_(new QMenu(this)),
       show_mapper_(new QSignalMapper(this))
 {
@@ -32,9 +34,18 @@ PlaylistHeader::PlaylistHeader(Qt::Orientation orientation, QWidget* parent)
   stretch_action_ = menu_->addAction(tr("&Stretch columns to fit window"), this, SLOT(ToggleStretchEnabled()));
   menu_->addSeparator();
 
-  QMenu* align_menu = new QMenu(tr("&Align text"), this); align_left_action_ = align_menu->addAction(tr("&Left"), this, SLOT(AlignCurrentLeft()));
-  align_center_action_ = align_menu->addAction(tr("&Center"), this, SLOT(AlignCurrentCenter()));
-  align_right_action_ = align_menu->addAction(tr("&Right"), this, SLOT(AlignCurrentRight()));
+  QMenu* align_menu         = new QMenu(tr("&Align text"), this);
+  QActionGroup* align_group = new QActionGroup(this);
+  align_left_action_        = new QAction(tr("&Left"), align_group);
+  align_center_action_      = new QAction(tr("&Center"), align_group);
+  align_right_action_       = new QAction(tr("&Right"), align_group);
+
+  align_left_action_->setCheckable(true);
+  align_center_action_->setCheckable(true);
+  align_right_action_->setCheckable(true);
+  align_menu->addActions(align_group->actions());
+
+  connect(align_group, SIGNAL(triggered(QAction*)), SLOT(SetColumnAlignment(QAction*)));
 
   menu_->addMenu(align_menu);
   menu_->addSeparator();
@@ -49,14 +60,19 @@ PlaylistHeader::PlaylistHeader(Qt::Orientation orientation, QWidget* parent)
 void PlaylistHeader::contextMenuEvent(QContextMenuEvent* e) {
   menu_section_ = logicalIndexAt(e->pos());
 
-  if (menu_section_ == -1 || (
-        menu_section_ == logicalIndex(0) && logicalIndex(1) == -1))
+  if (menu_section_ == -1 ||
+      (menu_section_ == logicalIndex(0) && logicalIndex(1) == -1))
     hide_action_->setVisible(false);
   else {
     hide_action_->setVisible(true);
 
     QString title(model()->headerData(menu_section_, Qt::Horizontal).toString());
     hide_action_->setText(tr("&Hide %1").arg(title));
+
+    Qt::Alignment alignment = view_->column_alignment(menu_section_);
+    if      (alignment & Qt::AlignLeft)    align_left_action_->setChecked(true);
+    else if (alignment & Qt::AlignHCenter) align_center_action_->setChecked(true);
+    else if (alignment & Qt::AlignRight)   align_right_action_->setChecked(true);
   }
 
   qDeleteAll(show_actions_);
@@ -86,19 +102,14 @@ void PlaylistHeader::HideCurrent() {
   SetSectionHidden(menu_section_, true);
 }
 
-void PlaylistHeader::AlignCurrentLeft() {
-  static_cast<PlaylistView*>(parent())->SetColumnAlignment(
-        menu_section_, Qt::AlignLeft | Qt::AlignVCenter);
-}
+void PlaylistHeader::SetColumnAlignment(QAction* action) {
+  Qt::Alignment alignment = Qt::AlignVCenter;
 
-void PlaylistHeader::AlignCurrentCenter() {
-  static_cast<PlaylistView*>(parent())->SetColumnAlignment(
-        menu_section_, Qt::AlignHCenter | Qt::AlignVCenter);
-}
+  if (action == align_left_action_)   alignment |= Qt::AlignLeft;
+  if (action == align_center_action_) alignment |= Qt::AlignHCenter;
+  if (action == align_right_action_)  alignment |= Qt::AlignRight;
 
-void PlaylistHeader::AlignCurrentRight() {
-  static_cast<PlaylistView*>(parent())->SetColumnAlignment(
-        menu_section_, Qt::AlignRight | Qt::AlignVCenter);
+  view_->SetColumnAlignment(menu_section_, alignment);
 }
 
 void PlaylistHeader::ToggleVisible(int section) {
