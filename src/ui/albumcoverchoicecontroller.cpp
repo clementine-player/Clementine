@@ -186,7 +186,16 @@ QString AlbumCoverChoiceController::UnsetCover(Song* song) {
 void AlbumCoverChoiceController::ShowCover(const Song& song) {
   QDialog* dialog = new QDialog(this);
   dialog->setAttribute(Qt::WA_DeleteOnClose, true);
-  dialog->setWindowTitle(song.title());
+
+  // Use Artist - Album as the window title
+  QString title_text(song.albumartist());
+  if (title_text.isEmpty())
+    title_text = song.artist();
+
+  if (!song.album().isEmpty())
+    title_text += " - " + song.album();
+
+  dialog->setWindowTitle(title_text);
 
   QLabel* label = new QLabel(dialog);
   label->setPixmap(AlbumCoverLoader::TryLoadPixmap(
