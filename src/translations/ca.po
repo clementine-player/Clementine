@@ -66,7 +66,7 @@ msgstr "fa %1 dies"
 msgid "%1 playlists (%2)"
 msgstr "%1 llistes de reproducció (%2)"
 
-#: playlist/playlistmanager.cpp:298
+#: playlist/playlistmanager.cpp:302
 #, qt-format
 msgid "%1 selected of"
 msgstr "%1 seleccionades de"
@@ -91,7 +91,7 @@ msgstr "%1 cançons trobades"
 msgid "%1 songs found (showing %2)"
 msgstr "%1 cançons trobades (mostrant %2)"
 
-#: playlist/playlistmanager.cpp:304
+#: playlist/playlistmanager.cpp:308
 #, qt-format
 msgid "%1 tracks"
 msgstr "%1 temes"
@@ -132,11 +132,11 @@ msgstr "%n han acabat"
 msgid "%n remaining"
 msgstr "%n restants"
 
-#: playlist/playlistheader.cpp:35
+#: playlist/playlistheader.cpp:37
 msgid "&Align text"
 msgstr "%Alinear text"
 
-#: playlist/playlistheader.cpp:36
+#: playlist/playlistheader.cpp:40
 msgid "&Center"
 msgstr "&Centre"
 
@@ -152,16 +152,16 @@ msgstr "Extres"
 msgid "&Help"
 msgstr "Ajuda"
 
-#: playlist/playlistheader.cpp:59
+#: playlist/playlistheader.cpp:70
 #, qt-format
 msgid "&Hide %1"
 msgstr "Amaga %1"
 
-#: playlist/playlistheader.cpp:31
+#: playlist/playlistheader.cpp:33
 msgid "&Hide..."
 msgstr "Amaga..."
 
-#: playlist/playlistheader.cpp:35
+#: playlist/playlistheader.cpp:39
 msgid "&Left"
 msgstr "&Esquerra"
 
@@ -185,7 +185,7 @@ msgstr "&Abandona"
 msgid "&Repeat mode"
 msgstr "Mode de repetició"
 
-#: playlist/playlistheader.cpp:37
+#: playlist/playlistheader.cpp:41
 msgid "&Right"
 msgstr "&Dreta"
 
@@ -193,7 +193,7 @@ msgstr "&Dreta"
 msgid "&Shuffle mode"
 msgstr "Mode aleatori"
 
-#: playlist/playlistheader.cpp:32
+#: playlist/playlistheader.cpp:34
 msgid "&Stretch columns to fit window"
 msgstr "&Encabeix les columnes a la finestra"
 
@@ -222,7 +222,7 @@ msgstr "0:00:00"
 msgid "1 day"
 msgstr "1 dia"
 
-#: playlist/playlistmanager.cpp:304
+#: playlist/playlistmanager.cpp:308
 msgid "1 track"
 msgstr "1 pista"
 
@@ -501,7 +501,7 @@ msgstr "Agrupament avançat..."
 msgid "After copying..."
 msgstr "Despres de copiar..."
 
-#: playlist/playlist.cpp:1096 ui/organisedialog.cpp:52
+#: playlist/playlist.cpp:1085 ui/organisedialog.cpp:52
 #: ui/qtsystemtrayicon.cpp:252 ../bin/src/ui_groupbydialog.h:129
 #: ../bin/src/ui_groupbydialog.h:142 ../bin/src/ui_groupbydialog.h:155
 #: ../bin/src/ui_albumcoversearcher.h:110
@@ -514,7 +514,7 @@ msgstr "Àlbum"
 msgid "Album (ideal loudness for all tracks)"
 msgstr "Àlbum (volum ideal per a totes les pistes)"
 
-#: playlist/playlist.cpp:1102 ui/organisedialog.cpp:55
+#: playlist/playlist.cpp:1091 ui/organisedialog.cpp:55
 #: ../bin/src/ui_edittagdialog.h:658
 msgid "Album artist"
 msgstr "Artista de l'àlbum"
@@ -612,7 +612,7 @@ msgstr ""
 msgid "An error occurred loading the iTunes database"
 msgstr "S'ha produït un error carregant la base de dades d'iTunes"
 
-#: ui/edittagdialog.cpp:612
+#: ui/edittagdialog.cpp:610
 #, qt-format
 msgid "An error occurred writing metadata to '%1'"
 msgstr ""
@@ -656,11 +656,11 @@ msgstr "Estas segur de que vols esborrar el \"%1\" preestablert?"
 msgid "Are you sure you want to delete this playlist?"
 msgstr "Esteu segur que voleu eliminar aquesta llista de reproducció?"
 
-#: ui/edittagdialog.cpp:704
+#: ui/edittagdialog.cpp:702
 msgid "Are you sure you want to reset this song's statistics?"
 msgstr "Esteu segur que voleu restablir les estadístiques d'aquesta cançó?"
 
-#: playlist/playlist.cpp:1095 ui/organisedialog.cpp:53
+#: playlist/playlist.cpp:1084 ui/organisedialog.cpp:53
 #: ui/qtsystemtrayicon.cpp:250 ../bin/src/ui_groupbydialog.h:130
 #: ../bin/src/ui_groupbydialog.h:143 ../bin/src/ui_groupbydialog.h:156
 #: ../bin/src/ui_albumcoversearcher.h:106
@@ -729,7 +729,7 @@ msgstr "Velocitat de bits mitja"
 msgid "Average image size"
 msgstr "Mida d'imatge mitja"
 
-#: playlist/playlist.cpp:1111 ui/organisedialog.cpp:59
+#: playlist/playlist.cpp:1100 ui/organisedialog.cpp:59
 #: ../bin/src/ui_edittagdialog.h:638
 msgid "BPM"
 msgstr "BPM"
@@ -775,7 +775,7 @@ msgstr "Millor"
 msgid "Biography from %1"
 msgstr "Biografia de %1"
 
-#: playlist/playlist.cpp:1112 ../bin/src/ui_edittagdialog.h:640
+#: playlist/playlist.cpp:1101 ../bin/src/ui_edittagdialog.h:640
 msgid "Bit rate"
 msgstr "Taxa de bits"
 
@@ -1007,7 +1007,7 @@ msgstr ""
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr ""
 
-#: playlist/playlist.cpp:1121 smartplaylists/searchterm.cpp:279
+#: playlist/playlist.cpp:1110 smartplaylists/searchterm.cpp:279
 #: ui/organisedialog.cpp:62 ../bin/src/ui_edittagdialog.h:661
 msgid "Comment"
 msgstr "Comentari"
@@ -1020,7 +1020,7 @@ msgstr "Completa les etiquetes automàticament"
 msgid "Complete tags automatically..."
 msgstr ""
 
-#: playlist/playlist.cpp:1103 ui/organisedialog.cpp:56
+#: playlist/playlist.cpp:1092 ui/organisedialog.cpp:56
 #: ../bin/src/ui_groupbydialog.h:132 ../bin/src/ui_groupbydialog.h:145
 #: ../bin/src/ui_groupbydialog.h:158 ../bin/src/ui_edittagdialog.h:659
 msgid "Composer"
@@ -1050,7 +1050,7 @@ msgstr ""
 msgid "Configure library..."
 msgstr "Configura la llibreria..."
 
-#: internet/digitallyimportedservicebase.cpp:182
+#: internet/digitallyimportedservicebase.cpp:185
 #: ../bin/src/ui_globalsearchsettingspage.h:174
 msgid "Configure..."
 msgstr ""
@@ -1138,24 +1138,24 @@ msgstr "No es va poder obrir el fitxer de sortida %1"
 msgid "Cover Manager"
 msgstr "Gestor de caràtules"
 
-#: ui/edittagdialog.cpp:406
+#: ui/edittagdialog.cpp:404
 msgid "Cover art from embedded image"
 msgstr ""
 
-#: ui/edittagdialog.cpp:408
+#: ui/edittagdialog.cpp:406
 #, qt-format
 msgid "Cover art loaded automatically from %1"
 msgstr ""
 
-#: ui/edittagdialog.cpp:401
+#: ui/edittagdialog.cpp:399
 msgid "Cover art manually unset"
 msgstr ""
 
-#: ui/edittagdialog.cpp:410
+#: ui/edittagdialog.cpp:408
 msgid "Cover art not set"
 msgstr ""
 
-#: ui/edittagdialog.cpp:404
+#: ui/edittagdialog.cpp:402
 #, qt-format
 msgid "Cover art set from %1"
 msgstr ""
@@ -1273,11 +1273,11 @@ msgstr "Ruta DBus"
 msgid "Dance"
 msgstr "Dance"
 
-#: playlist/playlist.cpp:1119 ../bin/src/ui_edittagdialog.h:649
+#: playlist/playlist.cpp:1108 ../bin/src/ui_edittagdialog.h:649
 msgid "Date created"
 msgstr "Data de creació"
 
-#: playlist/playlist.cpp:1118 ../bin/src/ui_edittagdialog.h:648
+#: playlist/playlist.cpp:1107 ../bin/src/ui_edittagdialog.h:648
 msgid "Date modified"
 msgstr "Data de modificació"
 
@@ -1412,7 +1412,7 @@ msgstr ""
 msgid "Disabled"
 msgstr "Deshabilitat"
 
-#: playlist/playlist.cpp:1099 ui/organisedialog.cpp:58
+#: playlist/playlist.cpp:1088 ui/organisedialog.cpp:58
 #: ../bin/src/ui_edittagdialog.h:655
 msgid "Disc"
 msgstr "Disc"
@@ -1635,7 +1635,7 @@ msgid "Equivalent to --log-levels *:3"
 msgstr ""
 
 #: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:453
-#: ui/edittagdialog.cpp:719 ui/mainwindow.cpp:1802 ui/mainwindow.cpp:1907
+#: ui/edittagdialog.cpp:717 ui/mainwindow.cpp:1802 ui/mainwindow.cpp:1907
 #: ui/mainwindow.cpp:2126
 msgid "Error"
 msgstr "Error"
@@ -1652,7 +1652,7 @@ msgstr "Error copiant cançons"
 msgid "Error deleting songs"
 msgstr "Error esborrant cançons"
 
-#: internet/spotifyblobdownloader.cpp:194
+#: internet/spotifyblobdownloader.cpp:214
 msgid "Error downloading Spotify plugin"
 msgstr ""
 
@@ -1661,7 +1661,7 @@ msgstr ""
 msgid "Error loading %1"
 msgstr "Error carregant %1"
 
-#: internet/digitallyimportedservicebase.cpp:204
+#: internet/digitallyimportedservicebase.cpp:207
 #: internet/digitallyimportedurlhandler.cpp:73
 msgid "Error loading di.fm playlist"
 msgstr ""
@@ -1771,19 +1771,19 @@ msgstr "Extensió del fitxer"
 msgid "File formats"
 msgstr "Format dels fitxers"
 
-#: playlist/playlist.cpp:1114 ../bin/src/ui_edittagdialog.h:650
+#: playlist/playlist.cpp:1103 ../bin/src/ui_edittagdialog.h:650
 msgid "File name"
 msgstr "Nom del fitxer"
 
-#: playlist/playlist.cpp:1115
+#: playlist/playlist.cpp:1104
 msgid "File name (without path)"
 msgstr "Nom del fitxer (sense la ruta)"
 
-#: playlist/playlist.cpp:1116 ../bin/src/ui_edittagdialog.h:644
+#: playlist/playlist.cpp:1105 ../bin/src/ui_edittagdialog.h:644
 msgid "File size"
 msgstr "Mida del fitxer"
 
-#: playlist/playlist.cpp:1117 ../bin/src/ui_groupbydialog.h:133
+#: playlist/playlist.cpp:1106 ../bin/src/ui_groupbydialog.h:133
 #: ../bin/src/ui_groupbydialog.h:146 ../bin/src/ui_groupbydialog.h:159
 #: ../bin/src/ui_edittagdialog.h:646
 msgid "File type"
@@ -1918,7 +1918,7 @@ msgstr ""
 msgid "General settings"
 msgstr "Arranjaments generals"
 
-#: playlist/playlist.cpp:1101 ui/organisedialog.cpp:61
+#: playlist/playlist.cpp:1090 ui/organisedialog.cpp:61
 #: ../bin/src/ui_groupbydialog.h:134 ../bin/src/ui_groupbydialog.h:147
 #: ../bin/src/ui_groupbydialog.h:160 ../bin/src/ui_edittagdialog.h:660
 msgid "Genre"
@@ -2247,7 +2247,7 @@ msgstr "Caràtula gran de l'àlbum"
 msgid "Large sidebar"
 msgstr "Barra lateral gran"
 
-#: library/library.cpp:66 playlist/playlist.cpp:1108
+#: library/library.cpp:66 playlist/playlist.cpp:1097
 #: ../bin/src/ui_edittagdialog.h:641
 msgid "Last played"
 msgstr "Últim reproduït"
@@ -2328,7 +2328,7 @@ msgstr ""
 "Deixar-ho en blanc per assignar el valor per defecte. Exemples : "
 "\"/dev/dsp\", \"front\", etc."
 
-#: playlist/playlist.cpp:1097 ui/organisedialog.cpp:63
+#: playlist/playlist.cpp:1086 ui/organisedialog.cpp:63
 #: ui/qtsystemtrayicon.cpp:255 ../bin/src/ui_edittagdialog.h:636
 msgid "Length"
 msgstr "Durada"
@@ -2405,7 +2405,7 @@ msgstr "Carregant la base de dades de l'iPod"
 msgid "Loading smart playlist"
 msgstr ""
 
-#: library/librarymodel.cpp:122
+#: library/librarymodel.cpp:131
 msgid "Loading songs"
 msgstr ""
 
@@ -2422,7 +2422,7 @@ msgstr "Carregant pistes"
 msgid "Loading tracks info"
 msgstr ""
 
-#: library/librarymodel.cpp:117 widgets/prettyimage.cpp:168
+#: library/librarymodel.cpp:126 widgets/prettyimage.cpp:168
 #: widgets/widgetfadehelper.cpp:93 ../bin/src/ui_searchpreview.h:106
 msgid "Loading..."
 msgstr ""
@@ -2674,7 +2674,7 @@ msgstr ""
 msgid "Network Proxy"
 msgstr ""
 
-#: playlist/playlistdelegates.cpp:296 ui/edittagdialog.cpp:445
+#: playlist/playlistdelegates.cpp:296 ui/edittagdialog.cpp:443
 msgid "Never"
 msgstr ""
 
@@ -2817,7 +2817,7 @@ msgstr "Ogg Vorbis"
 msgid "Only show the first"
 msgstr ""
 
-#: internet/digitallyimportedservicebase.cpp:175
+#: internet/digitallyimportedservicebase.cpp:178
 #, qt-format
 msgid "Open %1 in browser"
 msgstr ""
@@ -2964,7 +2964,7 @@ msgstr "Reprodueix Artista o Etiqueta"
 msgid "Play artist radio..."
 msgstr "Reprodueix la radio de l'artista"
 
-#: playlist/playlist.cpp:1106 ../bin/src/ui_edittagdialog.h:637
+#: playlist/playlist.cpp:1095 ../bin/src/ui_edittagdialog.h:637
 msgid "Play count"
 msgstr ""
 
@@ -3005,8 +3005,8 @@ msgstr ""
 msgid "Player options"
 msgstr "Opcions del reproductor"
 
-#: playlist/playlistcontainer.cpp:297 playlist/playlistmanager.cpp:76
-#: playlist/playlistmanager.cpp:369 playlist/playlisttabbar.cpp:292
+#: playlist/playlistcontainer.cpp:297 playlist/playlistmanager.cpp:78
+#: playlist/playlistmanager.cpp:373 playlist/playlisttabbar.cpp:292
 msgid "Playlist"
 msgstr "Llista de reproducció"
 
@@ -3191,7 +3191,7 @@ msgstr ""
 msgid "Rate the current song 5 stars"
 msgstr ""
 
-#: playlist/playlist.cpp:1105 ../bin/src/ui_edittagdialog.h:645
+#: playlist/playlist.cpp:1094 ../bin/src/ui_edittagdialog.h:645
 msgid "Rating"
 msgstr ""
 
@@ -3215,7 +3215,7 @@ msgstr ""
 msgid "Refresh station list"
 msgstr ""
 
-#: internet/digitallyimportedservicebase.cpp:178
+#: internet/digitallyimportedservicebase.cpp:181
 msgid "Refresh streams"
 msgstr ""
 
@@ -3323,7 +3323,7 @@ msgstr ""
 msgid "Reset"
 msgstr ""
 
-#: ui/edittagdialog.cpp:703 ../bin/src/ui_edittagdialog.h:635
+#: ui/edittagdialog.cpp:701 ../bin/src/ui_edittagdialog.h:635
 msgid "Reset play counts"
 msgstr ""
 
@@ -3351,7 +3351,7 @@ msgstr "Treure el dispositiu amb seguretat"
 msgid "Safely remove the device after copying"
 msgstr "Treure el dispositiu amb seguretat després de copiar"
 
-#: playlist/playlist.cpp:1113 ../bin/src/ui_edittagdialog.h:642
+#: playlist/playlist.cpp:1102 ../bin/src/ui_edittagdialog.h:642
 msgid "Sample rate"
 msgstr "Freqüència de mostreig"
 
@@ -3387,7 +3387,7 @@ msgstr "Desa els valors"
 msgid "Save this stream in the Internet tab"
 msgstr "Salva aquest flux a la pestanya d'Internet"
 
-#: ui/edittagdialog.cpp:619 ui/trackselectiondialog.cpp:249
+#: ui/edittagdialog.cpp:617 ui/trackselectiondialog.cpp:249
 msgid "Saving tracks"
 msgstr ""
 
@@ -3395,7 +3395,7 @@ msgstr ""
 msgid "Scalable sampling rate profile (SSR)"
 msgstr ""
 
-#: playlist/playlist.cpp:1109 ../bin/src/ui_edittagdialog.h:643
+#: playlist/playlist.cpp:1098 ../bin/src/ui_edittagdialog.h:643
 msgid "Score"
 msgstr ""
 
@@ -3681,7 +3681,7 @@ msgstr "Ska"
 msgid "Skip backwards in playlist"
 msgstr "Salta enrere en la llista de reproducció"
 
-#: playlist/playlist.cpp:1107 ../bin/src/ui_edittagdialog.h:639
+#: playlist/playlist.cpp:1096 ../bin/src/ui_edittagdialog.h:639
 msgid "Skip count"
 msgstr ""
 
@@ -3701,7 +3701,7 @@ msgstr ""
 msgid "Smart playlist"
 msgstr ""
 
-#: library/librarymodel.cpp:1101
+#: library/librarymodel.cpp:1118
 msgid "Smart playlists"
 msgstr ""
 
@@ -3922,7 +3922,7 @@ msgstr ""
 msgid "The directory %1 is not valid"
 msgstr "El directori %1 bo es vàlid"
 
-#: playlist/playlistmanager.cpp:147 playlist/playlistmanager.cpp:165
+#: playlist/playlistmanager.cpp:151 playlist/playlistmanager.cpp:169
 #, qt-format
 msgid "The playlist '%1' was empty or could not be loaded."
 msgstr "La llista de reproducció '%1' esta buida o no es pot carregar."
@@ -4058,7 +4058,7 @@ msgstr ""
 msgid "Timezone"
 msgstr "Zona horària"
 
-#: playlist/playlist.cpp:1094 ui/organisedialog.cpp:51
+#: playlist/playlist.cpp:1083 ui/organisedialog.cpp:51
 #: ui/qtsystemtrayicon.cpp:248 ../bin/src/ui_about.h:142
 #: ../bin/src/ui_edittagdialog.h:652 ../bin/src/ui_trackselectiondialog.h:211
 msgid "Title"
@@ -4096,7 +4096,7 @@ msgstr ""
 msgid "Total network requests made"
 msgstr ""
 
-#: playlist/playlist.cpp:1098 ui/organisedialog.cpp:57
+#: playlist/playlist.cpp:1087 ui/organisedialog.cpp:57
 #: ../bin/src/ui_edittagdialog.h:653 ../bin/src/ui_trackselectiondialog.h:212
 msgid "Track"
 msgstr "Pista"
@@ -4152,10 +4152,10 @@ msgid "Unable to download %1 (%2)"
 msgstr "No es pot descarregar %1 (%2)"
 
 #: core/song.cpp:148 globalsearch/globalsearchitemdelegate.cpp:166
-#: globalsearch/globalsearchitemdelegate.cpp:173 library/librarymodel.cpp:284
-#: library/librarymodel.cpp:289 library/librarymodel.cpp:899
-#: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:377
-#: playlist/playlistmanager.cpp:380 ui/albumcoverchoicecontroller.cpp:111
+#: globalsearch/globalsearchitemdelegate.cpp:173 library/librarymodel.cpp:293
+#: library/librarymodel.cpp:298 library/librarymodel.cpp:916
+#: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:381
+#: playlist/playlistmanager.cpp:384 ui/albumcoverchoicecontroller.cpp:111
 msgid "Unknown"
 msgstr "Desconegut"
 
@@ -4270,8 +4270,8 @@ msgstr "VBR MP3"
 msgid "Variable bit rate"
 msgstr ""
 
-#: globalsearch/globalsearchitemdelegate.cpp:162 library/librarymodel.cpp:221
-#: playlist/playlistmanager.cpp:392 ui/albumcovermanager.cpp:264
+#: globalsearch/globalsearchitemdelegate.cpp:162 library/librarymodel.cpp:230
+#: playlist/playlistmanager.cpp:396 ui/albumcovermanager.cpp:264
 msgid "Various artists"
 msgstr "Artistes varis"
 
@@ -4402,7 +4402,7 @@ msgstr "Audio Windows Media"
 msgid "Would you like to run a full rescan right now?"
 msgstr ""
 
-#: playlist/playlist.cpp:1100 ui/organisedialog.cpp:60
+#: playlist/playlist.cpp:1089 ui/organisedialog.cpp:60
 #: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:148
 #: ../bin/src/ui_groupbydialog.h:161 ../bin/src/ui_edittagdialog.h:657
 msgid "Year"
@@ -4524,7 +4524,7 @@ msgstr "Les teves credencials de Last.fm son incorrectes"
 msgid "Your Magnatune credentials were incorrect"
 msgstr ""
 
-#: ui/edittagdialog.cpp:719 ui/mainwindow.cpp:2126
+#: ui/edittagdialog.cpp:717 ui/mainwindow.cpp:2126
 msgid ""
 "Your gstreamer installation is missing the 'ofa' plugin.  This is required "
 "for automatic tag fetching.  Try installing the 'gstreamer-plugins-bad' "
@@ -4590,7 +4590,7 @@ msgstr ""
 msgid "biggest first"
 msgstr ""
 
-#: playlist/playlistview.cpp:162 ui/edittagdialog.cpp:421
+#: playlist/playlistview.cpp:161 ui/edittagdialog.cpp:419
 msgid "bpm"
 msgstr "Tempo"
 
@@ -4633,7 +4633,7 @@ msgstr ""
 msgid "in the last"
 msgstr ""
 
-#: playlist/playlistview.cpp:164 ui/edittagdialog.cpp:423
+#: playlist/playlistview.cpp:163 ui/edittagdialog.cpp:421
 msgid "kbps"
 msgstr "kbps"
 

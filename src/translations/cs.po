@@ -69,7 +69,7 @@ msgstr "před %1 dny"
 msgid "%1 playlists (%2)"
 msgstr "%1 seznamů skladeb (%2)"
 
-#: playlist/playlistmanager.cpp:298
+#: playlist/playlistmanager.cpp:302
 #, qt-format
 msgid "%1 selected of"
 msgstr "%1 vybráno z"
@@ -94,7 +94,7 @@ msgstr "Bylo nalezeno %1 písní"
 msgid "%1 songs found (showing %2)"
 msgstr "Bylo nalezeno %1 písní (zobrazeno %2)"
 
-#: playlist/playlistmanager.cpp:304
+#: playlist/playlistmanager.cpp:308
 #, qt-format
 msgid "%1 tracks"
 msgstr "%1 skladeb"
@@ -135,11 +135,11 @@ msgstr "dokončeno %n"
 msgid "%n remaining"
 msgstr "zůstávají %n"
 
-#: playlist/playlistheader.cpp:35
+#: playlist/playlistheader.cpp:37
 msgid "&Align text"
 msgstr "&Zarovnat text"
 
-#: playlist/playlistheader.cpp:36
+#: playlist/playlistheader.cpp:40
 msgid "&Center"
 msgstr "&Na střed"
 
@@ -155,16 +155,16 @@ msgstr "Doplňky"
 msgid "&Help"
 msgstr "Nápo&věda"
 
-#: playlist/playlistheader.cpp:59
+#: playlist/playlistheader.cpp:70
 #, qt-format
 msgid "&Hide %1"
 msgstr "Skrýt %1"
 
-#: playlist/playlistheader.cpp:31
+#: playlist/playlistheader.cpp:33
 msgid "&Hide..."
 msgstr "Skrýt..."
 
-#: playlist/playlistheader.cpp:35
+#: playlist/playlistheader.cpp:39
 msgid "&Left"
 msgstr "&Vlevo"
 
@@ -188,7 +188,7 @@ msgstr "&Ukončit"
 msgid "&Repeat mode"
 msgstr "Režim opakování"
 
-#: playlist/playlistheader.cpp:37
+#: playlist/playlistheader.cpp:41
 msgid "&Right"
 msgstr "&Vpravo"
 
@@ -196,7 +196,7 @@ msgstr "&Vpravo"
 msgid "&Shuffle mode"
 msgstr "Režim míchání"
 
-#: playlist/playlistheader.cpp:32
+#: playlist/playlistheader.cpp:34
 msgid "&Stretch columns to fit window"
 msgstr "Roztáhnout sloupce tak, aby se vešly do okna"
 
@@ -225,7 +225,7 @@ msgstr "0:00:00"
 msgid "1 day"
 msgstr "1 den"
 
-#: playlist/playlistmanager.cpp:304
+#: playlist/playlistmanager.cpp:308
 msgid "1 track"
 msgstr "1 stopa"
 
@@ -503,7 +503,7 @@ msgstr "Pokročilé seskupování..."
 msgid "After copying..."
 msgstr "Po zkopírování..."
 
-#: playlist/playlist.cpp:1096 ui/organisedialog.cpp:52
+#: playlist/playlist.cpp:1085 ui/organisedialog.cpp:52
 #: ui/qtsystemtrayicon.cpp:252 ../bin/src/ui_groupbydialog.h:129
 #: ../bin/src/ui_groupbydialog.h:142 ../bin/src/ui_groupbydialog.h:155
 #: ../bin/src/ui_albumcoversearcher.h:110
@@ -516,7 +516,7 @@ msgstr "Album"
 msgid "Album (ideal loudness for all tracks)"
 msgstr "Album (ideální hlasitost pro všechny skladby)"
 
-#: playlist/playlist.cpp:1102 ui/organisedialog.cpp:55
+#: playlist/playlist.cpp:1091 ui/organisedialog.cpp:55
 #: ../bin/src/ui_edittagdialog.h:658
 msgid "Album artist"
 msgstr "Umělec alba"
@@ -612,7 +612,7 @@ msgstr "Při kopírování databáze iTunes do zařízení nastala chyba"
 msgid "An error occurred loading the iTunes database"
 msgstr "Při nahrávání databáze iTunes nastala chyba"
 
-#: ui/edittagdialog.cpp:612
+#: ui/edittagdialog.cpp:610
 #, qt-format
 msgid "An error occurred writing metadata to '%1'"
 msgstr "Při zápisu údajů do '%1' se vyskytla chyba"
@@ -656,11 +656,11 @@ msgstr "Opravdu chcete smazat nastavení \"%1\"?"
 msgid "Are you sure you want to delete this playlist?"
 msgstr "Opravdu chcete smazat tento seznam skladeb?"
 
-#: ui/edittagdialog.cpp:704
+#: ui/edittagdialog.cpp:702
 msgid "Are you sure you want to reset this song's statistics?"
 msgstr "Opravdu chcete nastavit statistiku této písně znovu?"
 
-#: playlist/playlist.cpp:1095 ui/organisedialog.cpp:53
+#: playlist/playlist.cpp:1084 ui/organisedialog.cpp:53
 #: ui/qtsystemtrayicon.cpp:250 ../bin/src/ui_groupbydialog.h:130
 #: ../bin/src/ui_groupbydialog.h:143 ../bin/src/ui_groupbydialog.h:156
 #: ../bin/src/ui_albumcoversearcher.h:106
@@ -728,7 +728,7 @@ msgstr "Průměrný datový tok"
 msgid "Average image size"
 msgstr "Průměrná velikost obrázku"
 
-#: playlist/playlist.cpp:1111 ui/organisedialog.cpp:59
+#: playlist/playlist.cpp:1100 ui/organisedialog.cpp:59
 #: ../bin/src/ui_edittagdialog.h:638
 msgid "BPM"
 msgstr "BPM"
@@ -774,7 +774,7 @@ msgstr "Nejlepší"
 msgid "Biography from %1"
 msgstr "Životopis od %1"
 
-#: playlist/playlist.cpp:1112 ../bin/src/ui_edittagdialog.h:640
+#: playlist/playlist.cpp:1101 ../bin/src/ui_edittagdialog.h:640
 msgid "Bit rate"
 msgstr "Datový tok"
 
@@ -1004,7 +1004,7 @@ msgstr "Spojit totožné výsledky z různých zdrojů"
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Čárkou oddělený seznam class:level, level je 0-3"
 
-#: playlist/playlist.cpp:1121 smartplaylists/searchterm.cpp:279
+#: playlist/playlist.cpp:1110 smartplaylists/searchterm.cpp:279
 #: ui/organisedialog.cpp:62 ../bin/src/ui_edittagdialog.h:661
 msgid "Comment"
 msgstr "Poznámka"
@@ -1017,7 +1017,7 @@ msgstr "Doplnit štítky automaticky"
 msgid "Complete tags automatically..."
 msgstr "Doplnit štítky automaticky..."
 
-#: playlist/playlist.cpp:1103 ui/organisedialog.cpp:56
+#: playlist/playlist.cpp:1092 ui/organisedialog.cpp:56
 #: ../bin/src/ui_groupbydialog.h:132 ../bin/src/ui_groupbydialog.h:145
 #: ../bin/src/ui_groupbydialog.h:158 ../bin/src/ui_edittagdialog.h:659
 msgid "Composer"
@@ -1047,7 +1047,7 @@ msgstr "Nastavit Spotify..."
 msgid "Configure library..."
 msgstr "Nastavit sbírku..."
 
-#: internet/digitallyimportedservicebase.cpp:182
+#: internet/digitallyimportedservicebase.cpp:185
 #: ../bin/src/ui_globalsearchsettingspage.h:174
 msgid "Configure..."
 msgstr "Nastavit..."
@@ -1135,24 +1135,24 @@ msgstr "Nepodařilo se otevřít výstupní soubor %1"
 msgid "Cover Manager"
 msgstr "Správce obalů"
 
-#: ui/edittagdialog.cpp:406
+#: ui/edittagdialog.cpp:404
 msgid "Cover art from embedded image"
 msgstr "Obal z vloženého obrázku"
 
-#: ui/edittagdialog.cpp:408
+#: ui/edittagdialog.cpp:406
 #, qt-format
 msgid "Cover art loaded automatically from %1"
 msgstr "Obal nahraný automaticky z %1"
 
-#: ui/edittagdialog.cpp:401
+#: ui/edittagdialog.cpp:399
 msgid "Cover art manually unset"
 msgstr "Obal zrušený ručně"
 
-#: ui/edittagdialog.cpp:410
+#: ui/edittagdialog.cpp:408
 msgid "Cover art not set"
 msgstr "Obal nenastaven"
 
-#: ui/edittagdialog.cpp:404
+#: ui/edittagdialog.cpp:402
 #, qt-format
 msgid "Cover art set from %1"
 msgstr "Obal nastaven z %1"
@@ -1270,11 +1270,11 @@ msgstr "Cesta k DBus"
 msgid "Dance"
 msgstr "Taneční hudba"
 
-#: playlist/playlist.cpp:1119 ../bin/src/ui_edittagdialog.h:649
+#: playlist/playlist.cpp:1108 ../bin/src/ui_edittagdialog.h:649
 msgid "Date created"
 msgstr "Datum vytvoření"
 
-#: playlist/playlist.cpp:1118 ../bin/src/ui_edittagdialog.h:648
+#: playlist/playlist.cpp:1107 ../bin/src/ui_edittagdialog.h:648
 msgid "Date modified"
 msgstr "Datum změny"
 
@@ -1409,7 +1409,7 @@ msgstr "Zakázat délku"
 msgid "Disabled"
 msgstr "Zakázáno"
 
-#: playlist/playlist.cpp:1099 ui/organisedialog.cpp:58
+#: playlist/playlist.cpp:1088 ui/organisedialog.cpp:58
 #: ../bin/src/ui_edittagdialog.h:655
 msgid "Disc"
 msgstr "Disk"
@@ -1633,7 +1633,7 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "Rovnocenné s --log-levels *:3"
 
 #: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:453
-#: ui/edittagdialog.cpp:719 ui/mainwindow.cpp:1802 ui/mainwindow.cpp:1907
+#: ui/edittagdialog.cpp:717 ui/mainwindow.cpp:1802 ui/mainwindow.cpp:1907
 #: ui/mainwindow.cpp:2126
 msgid "Error"
 msgstr "Chyba"
@@ -1650,7 +1650,7 @@ msgstr "Chyba při kopírování písní"
 msgid "Error deleting songs"
 msgstr "Chyba při mazání písní"
 
-#: internet/spotifyblobdownloader.cpp:194
+#: internet/spotifyblobdownloader.cpp:214
 msgid "Error downloading Spotify plugin"
 msgstr "Chyba při stahování přídavného modulu Spotify"
 
@@ -1659,7 +1659,7 @@ msgstr "Chyba při stahování přídavného modulu Spotify"
 msgid "Error loading %1"
 msgstr "Chyba při nahrávání %1"
 
-#: internet/digitallyimportedservicebase.cpp:204
+#: internet/digitallyimportedservicebase.cpp:207
 #: internet/digitallyimportedurlhandler.cpp:73
 msgid "Error loading di.fm playlist"
 msgstr "Chyba při nahrávání seznamu skladeb di.fm"
@@ -1769,19 +1769,19 @@ msgstr "Přípona souboru"
 msgid "File formats"
 msgstr "Formáty souborů"
 
-#: playlist/playlist.cpp:1114 ../bin/src/ui_edittagdialog.h:650
+#: playlist/playlist.cpp:1103 ../bin/src/ui_edittagdialog.h:650
 msgid "File name"
 msgstr "Název souboru"
 
-#: playlist/playlist.cpp:1115
+#: playlist/playlist.cpp:1104
 msgid "File name (without path)"
 msgstr "Název souboru bez cesty"
 
-#: playlist/playlist.cpp:1116 ../bin/src/ui_edittagdialog.h:644
+#: playlist/playlist.cpp:1105 ../bin/src/ui_edittagdialog.h:644
 msgid "File size"
 msgstr "Velikost souboru"
 
-#: playlist/playlist.cpp:1117 ../bin/src/ui_groupbydialog.h:133
+#: playlist/playlist.cpp:1106 ../bin/src/ui_groupbydialog.h:133
 #: ../bin/src/ui_groupbydialog.h:146 ../bin/src/ui_groupbydialog.h:159
 #: ../bin/src/ui_edittagdialog.h:646
 msgid "File type"
@@ -1917,7 +1917,7 @@ msgstr "Obecné"
 msgid "General settings"
 msgstr "Obecná nastavení"
 
-#: playlist/playlist.cpp:1101 ui/organisedialog.cpp:61
+#: playlist/playlist.cpp:1090 ui/organisedialog.cpp:61
 #: ../bin/src/ui_groupbydialog.h:134 ../bin/src/ui_groupbydialog.h:147
 #: ../bin/src/ui_groupbydialog.h:160 ../bin/src/ui_edittagdialog.h:660
 msgid "Genre"
@@ -2252,7 +2252,7 @@ msgstr "Velký obal alba"
 msgid "Large sidebar"
 msgstr "Velký postranní panel"
 
-#: library/library.cpp:66 playlist/playlist.cpp:1108
+#: library/library.cpp:66 playlist/playlist.cpp:1097
 #: ../bin/src/ui_edittagdialog.h:641
 msgid "Last played"
 msgstr "Naposledy hrané"
@@ -2333,7 +2333,7 @@ msgstr ""
 "Pro výchozí nastavení ponechte prázdné. Příklady: \"/dev/dsp\", \"front\", "
 "atd."
 
-#: playlist/playlist.cpp:1097 ui/organisedialog.cpp:63
+#: playlist/playlist.cpp:1086 ui/organisedialog.cpp:63
 #: ui/qtsystemtrayicon.cpp:255 ../bin/src/ui_edittagdialog.h:636
 msgid "Length"
 msgstr "Délka"
@@ -2410,7 +2410,7 @@ msgstr "Nahrává se databáze iPod"
 msgid "Loading smart playlist"
 msgstr "Nahrává se chytrý seznam skladeb"
 
-#: library/librarymodel.cpp:122
+#: library/librarymodel.cpp:131
 msgid "Loading songs"
 msgstr "Nahrávají se písně"
 
@@ -2427,7 +2427,7 @@ msgstr "Nahrávají se skladby"
 msgid "Loading tracks info"
 msgstr "Nahrávají se informace o skladbě"
 
-#: library/librarymodel.cpp:117 widgets/prettyimage.cpp:168
+#: library/librarymodel.cpp:126 widgets/prettyimage.cpp:168
 #: widgets/widgetfadehelper.cpp:93 ../bin/src/ui_searchpreview.h:106
 msgid "Loading..."
 msgstr "Nahrává se..."
@@ -2681,7 +2681,7 @@ msgstr "Síť"
 msgid "Network Proxy"
 msgstr "Síťová proxy"
 
-#: playlist/playlistdelegates.cpp:296 ui/edittagdialog.cpp:445
+#: playlist/playlistdelegates.cpp:296 ui/edittagdialog.cpp:443
 msgid "Never"
 msgstr "Nikdy"
 
@@ -2824,7 +2824,7 @@ msgstr "Ogg Vorbis"
 msgid "Only show the first"
 msgstr "Ukázat pouze první"
 
-#: internet/digitallyimportedservicebase.cpp:175
+#: internet/digitallyimportedservicebase.cpp:178
 #, qt-format
 msgid "Open %1 in browser"
 msgstr "Otevřít %1 v prohlížeči"
@@ -2971,7 +2971,7 @@ msgstr "Přehrát umělce nebo štítek"
 msgid "Play artist radio..."
 msgstr "Přehrát rádio umělce..."
 
-#: playlist/playlist.cpp:1106 ../bin/src/ui_edittagdialog.h:637
+#: playlist/playlist.cpp:1095 ../bin/src/ui_edittagdialog.h:637
 msgid "Play count"
 msgstr "Počet přehrání"
 
@@ -3012,8 +3012,8 @@ msgstr "Název přehrávače"
 msgid "Player options"
 msgstr "Nastavení přehrávače"
 
-#: playlist/playlistcontainer.cpp:297 playlist/playlistmanager.cpp:76
-#: playlist/playlistmanager.cpp:369 playlist/playlisttabbar.cpp:292
+#: playlist/playlistcontainer.cpp:297 playlist/playlistmanager.cpp:78
+#: playlist/playlistmanager.cpp:373 playlist/playlisttabbar.cpp:292
 msgid "Playlist"
 msgstr "Seznam skladeb"
 
@@ -3198,7 +3198,7 @@ msgstr "Ohodnotit současnou píseň čtyřmi hvězdičkami"
 msgid "Rate the current song 5 stars"
 msgstr "Ohodnotit současnou píseň pěti hvězdičkami"
 
-#: playlist/playlist.cpp:1105 ../bin/src/ui_edittagdialog.h:645
+#: playlist/playlist.cpp:1094 ../bin/src/ui_edittagdialog.h:645
 msgid "Rating"
 msgstr "Hodnocení"
 
@@ -3222,7 +3222,7 @@ msgstr "Obnovit seznam přátel"
 msgid "Refresh station list"
 msgstr "Obnovit seznam stanic"
 
-#: internet/digitallyimportedservicebase.cpp:178
+#: internet/digitallyimportedservicebase.cpp:181
 msgid "Refresh streams"
 msgstr "Obnovit proudy"
 
@@ -3330,7 +3330,7 @@ msgstr "Znovu zaplnit"
 msgid "Reset"
 msgstr "Obnovit výchozí"
 
-#: ui/edittagdialog.cpp:703 ../bin/src/ui_edittagdialog.h:635
+#: ui/edittagdialog.cpp:701 ../bin/src/ui_edittagdialog.h:635
 msgid "Reset play counts"
 msgstr "Vynulovat počty přehrání"
 
@@ -3358,7 +3358,7 @@ msgstr "Bezpečně odebrat zařízení"
 msgid "Safely remove the device after copying"
 msgstr "Po dokončení kopírování bezpečně odebrat zařízení"
 
-#: playlist/playlist.cpp:1113 ../bin/src/ui_edittagdialog.h:642
+#: playlist/playlist.cpp:1102 ../bin/src/ui_edittagdialog.h:642
 msgid "Sample rate"
 msgstr "Vzorkovací kmitočet"
 
@@ -3394,7 +3394,7 @@ msgstr "Uložit předvolbu"
 msgid "Save this stream in the Internet tab"
 msgstr "Uložit tento proud na kartě Internet"
 
-#: ui/edittagdialog.cpp:619 ui/trackselectiondialog.cpp:249
+#: ui/edittagdialog.cpp:617 ui/trackselectiondialog.cpp:249
 msgid "Saving tracks"
 msgstr "Ukládají se skladby"
 
@@ -3402,7 +3402,7 @@ msgstr "Ukládají se skladby"
 msgid "Scalable sampling rate profile (SSR)"
 msgstr "Profil škálovatelného vzorkovacího kmitočtu"
 
-#: playlist/playlist.cpp:1109 ../bin/src/ui_edittagdialog.h:643
+#: playlist/playlist.cpp:1098 ../bin/src/ui_edittagdialog.h:643
 msgid "Score"
 msgstr "Výsledek"
 
@@ -3688,7 +3688,7 @@ msgstr "Ska"
 msgid "Skip backwards in playlist"
 msgstr "Předchozí skladba v seznamu skladeb"
 
-#: playlist/playlist.cpp:1107 ../bin/src/ui_edittagdialog.h:639
+#: playlist/playlist.cpp:1096 ../bin/src/ui_edittagdialog.h:639
 msgid "Skip count"
 msgstr "Počet přeskočení"
 
@@ -3708,7 +3708,7 @@ msgstr "Malý postranní panel"
 msgid "Smart playlist"
 msgstr "Chytrý seznam skladeb"
 
-#: library/librarymodel.cpp:1101
+#: library/librarymodel.cpp:1118
 msgid "Smart playlists"
 msgstr "Chytré seznamy skladeb"
 
@@ -3929,7 +3929,7 @@ msgstr "Příkaz \"%1\" se nepodařilo provést."
 msgid "The directory %1 is not valid"
 msgstr "Adresář \"%1\" je neplatný"
 
-#: playlist/playlistmanager.cpp:147 playlist/playlistmanager.cpp:165
+#: playlist/playlistmanager.cpp:151 playlist/playlistmanager.cpp:169
 #, qt-format
 msgid "The playlist '%1' was empty or could not be loaded."
 msgstr "Seznam skladeb \"%1\" je prázdný, nebo se jej nepodařilo nahrát."
@@ -4072,7 +4072,7 @@ msgstr "Časové omezení"
 msgid "Timezone"
 msgstr "Časové pásmo"
 
-#: playlist/playlist.cpp:1094 ui/organisedialog.cpp:51
+#: playlist/playlist.cpp:1083 ui/organisedialog.cpp:51
 #: ui/qtsystemtrayicon.cpp:248 ../bin/src/ui_about.h:142
 #: ../bin/src/ui_edittagdialog.h:652 ../bin/src/ui_trackselectiondialog.h:211
 msgid "Title"
@@ -4110,7 +4110,7 @@ msgstr "Celkem přeneseno bajtů"
 msgid "Total network requests made"
 msgstr "Celkem uskutečněno síťových požadavků"
 
-#: playlist/playlist.cpp:1098 ui/organisedialog.cpp:57
+#: playlist/playlist.cpp:1087 ui/organisedialog.cpp:57
 #: ../bin/src/ui_edittagdialog.h:653 ../bin/src/ui_trackselectiondialog.h:212
 msgid "Track"
 msgstr "Skladba"
@@ -4166,10 +4166,10 @@ msgid "Unable to download %1 (%2)"
 msgstr "Nepodařilo se stáhnout %1 (%2)"
 
 #: core/song.cpp:148 globalsearch/globalsearchitemdelegate.cpp:166
-#: globalsearch/globalsearchitemdelegate.cpp:173 library/librarymodel.cpp:284
-#: library/librarymodel.cpp:289 library/librarymodel.cpp:899
-#: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:377
-#: playlist/playlistmanager.cpp:380 ui/albumcoverchoicecontroller.cpp:111
+#: globalsearch/globalsearchitemdelegate.cpp:173 library/librarymodel.cpp:293
+#: library/librarymodel.cpp:298 library/librarymodel.cpp:916
+#: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:381
+#: playlist/playlistmanager.cpp:384 ui/albumcoverchoicecontroller.cpp:111
 msgid "Unknown"
 msgstr "Neznámý"
 
@@ -4284,8 +4284,8 @@ msgstr "Proměnlivý datový tok MP3"
 msgid "Variable bit rate"
 msgstr "Proměnlivý datový tok"
 
-#: globalsearch/globalsearchitemdelegate.cpp:162 library/librarymodel.cpp:221
-#: playlist/playlistmanager.cpp:392 ui/albumcovermanager.cpp:264
+#: globalsearch/globalsearchitemdelegate.cpp:162 library/librarymodel.cpp:230
+#: playlist/playlistmanager.cpp:396 ui/albumcovermanager.cpp:264
 msgid "Various artists"
 msgstr "Různí umělci"
 
@@ -4418,7 +4418,7 @@ msgstr "Windows Media Audio"
 msgid "Would you like to run a full rescan right now?"
 msgstr "Chcete spustit toto úplné nové prohledání hned teď?"
 
-#: playlist/playlist.cpp:1100 ui/organisedialog.cpp:60
+#: playlist/playlist.cpp:1089 ui/organisedialog.cpp:60
 #: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:148
 #: ../bin/src/ui_groupbydialog.h:161 ../bin/src/ui_edittagdialog.h:657
 msgid "Year"
@@ -4549,7 +4549,7 @@ msgstr "Vaše přihlašovací údaje k Last.fm byly nesprávné"
 msgid "Your Magnatune credentials were incorrect"
 msgstr "Vaše přihlašovací údaje k Magnatune byly nesprávné"
 
-#: ui/edittagdialog.cpp:719 ui/mainwindow.cpp:2126
+#: ui/edittagdialog.cpp:717 ui/mainwindow.cpp:2126
 msgid ""
 "Your gstreamer installation is missing the 'ofa' plugin.  This is required "
 "for automatic tag fetching.  Try installing the 'gstreamer-plugins-bad' "
@@ -4618,7 +4618,7 @@ msgstr "mezi"
 msgid "biggest first"
 msgstr "nejprve největší"
 
-#: playlist/playlistview.cpp:162 ui/edittagdialog.cpp:421
+#: playlist/playlistview.cpp:161 ui/edittagdialog.cpp:419
 msgid "bpm"
 msgstr "bpm"
 
@@ -4661,7 +4661,7 @@ msgstr "větší než"
 msgid "in the last"
 msgstr "za posledních"
 
-#: playlist/playlistview.cpp:164 ui/edittagdialog.cpp:423
+#: playlist/playlistview.cpp:163 ui/edittagdialog.cpp:421
 msgid "kbps"
 msgstr "kb/s"
 

@@ -65,7 +65,7 @@ msgstr "pred %1 dnevi"
 msgid "%1 playlists (%2)"
 msgstr "%1 seznamov predvajanja (%2)"
 
-#: playlist/playlistmanager.cpp:298
+#: playlist/playlistmanager.cpp:302
 #, qt-format
 msgid "%1 selected of"
 msgstr "izbran %1 od"
@@ -90,7 +90,7 @@ msgstr "najdenih %1 skladb"
 msgid "%1 songs found (showing %2)"
 msgstr "najdenih %1 skladb (prikazanih %2)"
 
-#: playlist/playlistmanager.cpp:304
+#: playlist/playlistmanager.cpp:308
 #, qt-format
 msgid "%1 tracks"
 msgstr "%1 skladb"
@@ -131,11 +131,11 @@ msgstr "%n končanih"
 msgid "%n remaining"
 msgstr "%n preostaja"
 
-#: playlist/playlistheader.cpp:35
+#: playlist/playlistheader.cpp:37
 msgid "&Align text"
 msgstr "Por&avnaj besedilo"
 
-#: playlist/playlistheader.cpp:36
+#: playlist/playlistheader.cpp:40
 msgid "&Center"
 msgstr "&Sredinsko"
 
@@ -151,16 +151,16 @@ msgstr "Dodatki"
 msgid "&Help"
 msgstr "Pomoč"
 
-#: playlist/playlistheader.cpp:59
+#: playlist/playlistheader.cpp:70
 #, qt-format
 msgid "&Hide %1"
 msgstr "Skrij %1"
 
-#: playlist/playlistheader.cpp:31
+#: playlist/playlistheader.cpp:33
 msgid "&Hide..."
 msgstr "Skrij ..."
 
-#: playlist/playlistheader.cpp:35
+#: playlist/playlistheader.cpp:39
 msgid "&Left"
 msgstr "&Levo"
 
@@ -184,7 +184,7 @@ msgstr "&Končaj"
 msgid "&Repeat mode"
 msgstr "Način ponavljanja"
 
-#: playlist/playlistheader.cpp:37
+#: playlist/playlistheader.cpp:41
 msgid "&Right"
 msgstr "&Desno"
 
@@ -192,7 +192,7 @@ msgstr "&Desno"
 msgid "&Shuffle mode"
 msgstr "Premešano predvajanje"
 
-#: playlist/playlistheader.cpp:32
+#: playlist/playlistheader.cpp:34
 msgid "&Stretch columns to fit window"
 msgstr "Raztegni stolpce, da se prilegajo oknu"
 
@@ -221,7 +221,7 @@ msgstr "0:00:00"
 msgid "1 day"
 msgstr "1 dan"
 
-#: playlist/playlistmanager.cpp:304
+#: playlist/playlistmanager.cpp:308
 msgid "1 track"
 msgstr "1 skladba"
 
@@ -497,7 +497,7 @@ msgstr "Napredno združevanje ..."
 msgid "After copying..."
 msgstr "Po kopiranju ..."
 
-#: playlist/playlist.cpp:1096 ui/organisedialog.cpp:52
+#: playlist/playlist.cpp:1085 ui/organisedialog.cpp:52
 #: ui/qtsystemtrayicon.cpp:252 ../bin/src/ui_groupbydialog.h:129
 #: ../bin/src/ui_groupbydialog.h:142 ../bin/src/ui_groupbydialog.h:155
 #: ../bin/src/ui_albumcoversearcher.h:110
@@ -510,7 +510,7 @@ msgstr "Album"
 msgid "Album (ideal loudness for all tracks)"
 msgstr "Album (najboljša glasnost za vse skladbe)"
 
-#: playlist/playlist.cpp:1102 ui/organisedialog.cpp:55
+#: playlist/playlist.cpp:1091 ui/organisedialog.cpp:55
 #: ../bin/src/ui_edittagdialog.h:658
 msgid "Album artist"
 msgstr "Izvajalec albuma"
@@ -608,7 +608,7 @@ msgstr ""
 msgid "An error occurred loading the iTunes database"
 msgstr "Pri nalaganju podatkovne zbirke iTunes, je prišlo do napake"
 
-#: ui/edittagdialog.cpp:612
+#: ui/edittagdialog.cpp:610
 #, qt-format
 msgid "An error occurred writing metadata to '%1'"
 msgstr "Med zapisovanjem metapodatkov v '%1' je prišlo do napake"
@@ -652,11 +652,11 @@ msgstr "Ali resnično želite izbrisati prednastavitev \"%1\"?"
 msgid "Are you sure you want to delete this playlist?"
 msgstr ""
 
-#: ui/edittagdialog.cpp:704
+#: ui/edittagdialog.cpp:702
 msgid "Are you sure you want to reset this song's statistics?"
 msgstr "Ste prepričani, da želite ponastaviti statistike te skladbe"
 
-#: playlist/playlist.cpp:1095 ui/organisedialog.cpp:53
+#: playlist/playlist.cpp:1084 ui/organisedialog.cpp:53
 #: ui/qtsystemtrayicon.cpp:250 ../bin/src/ui_groupbydialog.h:130
 #: ../bin/src/ui_groupbydialog.h:143 ../bin/src/ui_groupbydialog.h:156
 #: ../bin/src/ui_albumcoversearcher.h:106
@@ -724,7 +724,7 @@ msgstr "Povprečna bitna hitrost"
 msgid "Average image size"
 msgstr "Povprečna velikost slike"
 
-#: playlist/playlist.cpp:1111 ui/organisedialog.cpp:59
+#: playlist/playlist.cpp:1100 ui/organisedialog.cpp:59
 #: ../bin/src/ui_edittagdialog.h:638
 msgid "BPM"
 msgstr "udarcev/min"
@@ -770,7 +770,7 @@ msgstr "Najboljše"
 msgid "Biography from %1"
 msgstr "Biografija iz %1"
 
-#: playlist/playlist.cpp:1112 ../bin/src/ui_edittagdialog.h:640
+#: playlist/playlist.cpp:1101 ../bin/src/ui_edittagdialog.h:640
 msgid "Bit rate"
 msgstr "Bitna hitrost"
 
@@ -1003,7 +1003,7 @@ msgstr ""
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Z vejicami ločen seznam razred:raven, raven je 0-3"
 
-#: playlist/playlist.cpp:1121 smartplaylists/searchterm.cpp:279
+#: playlist/playlist.cpp:1110 smartplaylists/searchterm.cpp:279
 #: ui/organisedialog.cpp:62 ../bin/src/ui_edittagdialog.h:661
 msgid "Comment"
 msgstr "Opomba"
@@ -1016,7 +1016,7 @@ msgstr "Samodejno dopolni oznake"
 msgid "Complete tags automatically..."
 msgstr "Samodejno dopolni oznake ..."
 
-#: playlist/playlist.cpp:1103 ui/organisedialog.cpp:56
+#: playlist/playlist.cpp:1092 ui/organisedialog.cpp:56
 #: ../bin/src/ui_groupbydialog.h:132 ../bin/src/ui_groupbydialog.h:145
 #: ../bin/src/ui_groupbydialog.h:158 ../bin/src/ui_edittagdialog.h:659
 msgid "Composer"
@@ -1046,7 +1046,7 @@ msgstr "Nastavi Spotify ..."
 msgid "Configure library..."
 msgstr "Nastavi knjižnico ..."
 
-#: internet/digitallyimportedservicebase.cpp:182
+#: internet/digitallyimportedservicebase.cpp:185
 #: ../bin/src/ui_globalsearchsettingspage.h:174
 msgid "Configure..."
 msgstr ""
@@ -1134,24 +1134,24 @@ msgstr "Izhodne datoteke %1 ni bilo mogoče odpreti"
 msgid "Cover Manager"
 msgstr "Upravljalnik ovitkov"
 
-#: ui/edittagdialog.cpp:406
+#: ui/edittagdialog.cpp:404
 msgid "Cover art from embedded image"
 msgstr "Ovitek albuma iz vstavljene slike"
 
-#: ui/edittagdialog.cpp:408
+#: ui/edittagdialog.cpp:406
 #, qt-format
 msgid "Cover art loaded automatically from %1"
 msgstr "Ovitek albuma je bil samodejno naložen iz %1"
 
-#: ui/edittagdialog.cpp:401
+#: ui/edittagdialog.cpp:399
 msgid "Cover art manually unset"
 msgstr "Ovitek albuma je bil ročno odstranjen iz uporabe"
 
-#: ui/edittagdialog.cpp:410
+#: ui/edittagdialog.cpp:408
 msgid "Cover art not set"
 msgstr "Ovitek albuma ni nastavljen"
 
-#: ui/edittagdialog.cpp:404
+#: ui/edittagdialog.cpp:402
 #, qt-format
 msgid "Cover art set from %1"
 msgstr "Ovitek albuma je nastavljen iz %1"
@@ -1269,11 +1269,11 @@ msgstr "Pot DBus"
 msgid "Dance"
 msgstr "Plesna"
 
-#: playlist/playlist.cpp:1119 ../bin/src/ui_edittagdialog.h:649
+#: playlist/playlist.cpp:1108 ../bin/src/ui_edittagdialog.h:649
 msgid "Date created"
 msgstr "Datum ustvarjenja"
 
-#: playlist/playlist.cpp:1118 ../bin/src/ui_edittagdialog.h:648
+#: playlist/playlist.cpp:1107 ../bin/src/ui_edittagdialog.h:648
 msgid "Date modified"
 msgstr "Datum spremembe"
 
@@ -1408,7 +1408,7 @@ msgstr "Trajanje onemogočenja"
 msgid "Disabled"
 msgstr "Onemogočeno"
 
-#: playlist/playlist.cpp:1099 ui/organisedialog.cpp:58
+#: playlist/playlist.cpp:1088 ui/organisedialog.cpp:58
 #: ../bin/src/ui_edittagdialog.h:655
 msgid "Disc"
 msgstr "Disk"
@@ -1632,7 +1632,7 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "Enakovredno --log-levels *:3"
 
 #: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:453
-#: ui/edittagdialog.cpp:719 ui/mainwindow.cpp:1802 ui/mainwindow.cpp:1907
+#: ui/edittagdialog.cpp:717 ui/mainwindow.cpp:1802 ui/mainwindow.cpp:1907
 #: ui/mainwindow.cpp:2126
 msgid "Error"
 msgstr "Napaka"
@@ -1649,7 +1649,7 @@ msgstr "Napaka pri kopiranju skladb"
 msgid "Error deleting songs"
 msgstr "Napaka pri brisanju skladb"
 
-#: internet/spotifyblobdownloader.cpp:194
+#: internet/spotifyblobdownloader.cpp:214
 msgid "Error downloading Spotify plugin"
 msgstr "Napaka med prejemanjem vstavka Spotify"
 
@@ -1658,7 +1658,7 @@ msgstr "Napaka med prejemanjem vstavka Spotify"
 msgid "Error loading %1"
 msgstr "Napaka med nalaganjem %1"
 
-#: internet/digitallyimportedservicebase.cpp:204
+#: internet/digitallyimportedservicebase.cpp:207
 #: internet/digitallyimportedurlhandler.cpp:73
 msgid "Error loading di.fm playlist"
 msgstr ""
@@ -1768,19 +1768,19 @@ msgstr "Pripona datoteke"
 msgid "File formats"
 msgstr "Vrste datotek"
 
-#: playlist/playlist.cpp:1114 ../bin/src/ui_edittagdialog.h:650
+#: playlist/playlist.cpp:1103 ../bin/src/ui_edittagdialog.h:650
 msgid "File name"
 msgstr "Ime datoteke"
 
-#: playlist/playlist.cpp:1115
+#: playlist/playlist.cpp:1104
 msgid "File name (without path)"
 msgstr "Ime datoteke (brez poti)"
 
-#: playlist/playlist.cpp:1116 ../bin/src/ui_edittagdialog.h:644
+#: playlist/playlist.cpp:1105 ../bin/src/ui_edittagdialog.h:644
 msgid "File size"
 msgstr "Velikost datoteke"
 
-#: playlist/playlist.cpp:1117 ../bin/src/ui_groupbydialog.h:133
+#: playlist/playlist.cpp:1106 ../bin/src/ui_groupbydialog.h:133
 #: ../bin/src/ui_groupbydialog.h:146 ../bin/src/ui_groupbydialog.h:159
 #: ../bin/src/ui_edittagdialog.h:646
 msgid "File type"
@@ -1915,7 +1915,7 @@ msgstr ""
 msgid "General settings"
 msgstr "Splošne nastavitve"
 
-#: playlist/playlist.cpp:1101 ui/organisedialog.cpp:61
+#: playlist/playlist.cpp:1090 ui/organisedialog.cpp:61
 #: ../bin/src/ui_groupbydialog.h:134 ../bin/src/ui_groupbydialog.h:147
 #: ../bin/src/ui_groupbydialog.h:160 ../bin/src/ui_edittagdialog.h:660
 msgid "Genre"
@@ -2249,7 +2249,7 @@ msgstr "Velik ovitek albuma"
 msgid "Large sidebar"
 msgstr "Velika stranska vrstica"
 
-#: library/library.cpp:66 playlist/playlist.cpp:1108
+#: library/library.cpp:66 playlist/playlist.cpp:1097
 #: ../bin/src/ui_edittagdialog.h:641
 msgid "Last played"
 msgstr "Zadnjič predvajano"
@@ -2328,7 +2328,7 @@ msgstr "Najmanj priljubljene skladbe"
 msgid "Leave blank for the default.  Examples: \"/dev/dsp\", \"front\", etc."
 msgstr "Pustite prazno za privzeto. Primeri: \"/dev/dsp\", \"front\", itd."
 
-#: playlist/playlist.cpp:1097 ui/organisedialog.cpp:63
+#: playlist/playlist.cpp:1086 ui/organisedialog.cpp:63
 #: ui/qtsystemtrayicon.cpp:255 ../bin/src/ui_edittagdialog.h:636
 msgid "Length"
 msgstr "Dolžina"
@@ -2405,7 +2405,7 @@ msgstr "Nalaganje zbirke podatkov iPod"
 msgid "Loading smart playlist"
 msgstr "Nalaganje pametnega seznama predvajanja"
 
-#: library/librarymodel.cpp:122
+#: library/librarymodel.cpp:131
 msgid "Loading songs"
 msgstr "Nalaganje skladb"
 
@@ -2422,7 +2422,7 @@ msgstr "Nalaganje skladb"
 msgid "Loading tracks info"
 msgstr "Nalaganje podrobnosti o skladbah"
 
-#: library/librarymodel.cpp:117 widgets/prettyimage.cpp:168
+#: library/librarymodel.cpp:126 widgets/prettyimage.cpp:168
 #: widgets/widgetfadehelper.cpp:93 ../bin/src/ui_searchpreview.h:106
 msgid "Loading..."
 msgstr "Nalaganje ..."
@@ -2674,7 +2674,7 @@ msgstr "Omrežje"
 msgid "Network Proxy"
 msgstr "Omrežni posrednik"
 
-#: playlist/playlistdelegates.cpp:296 ui/edittagdialog.cpp:445
+#: playlist/playlistdelegates.cpp:296 ui/edittagdialog.cpp:443
 msgid "Never"
 msgstr "Nikoli"
 
@@ -2817,7 +2817,7 @@ msgstr "Ogg Vorbis"
 msgid "Only show the first"
 msgstr "Pokaži le prve"
 
-#: internet/digitallyimportedservicebase.cpp:175
+#: internet/digitallyimportedservicebase.cpp:178
 #, qt-format
 msgid "Open %1 in browser"
 msgstr ""
@@ -2964,7 +2964,7 @@ msgstr "Predvajaj izvajalca ali oznako"
 msgid "Play artist radio..."
 msgstr "Predvajaj radio izvajalca ..."
 
-#: playlist/playlist.cpp:1106 ../bin/src/ui_edittagdialog.h:637
+#: playlist/playlist.cpp:1095 ../bin/src/ui_edittagdialog.h:637
 msgid "Play count"
 msgstr "Število predvajanj"
 
@@ -3005,8 +3005,8 @@ msgstr "Ime predvajalnika"
 msgid "Player options"
 msgstr "Možnosti predvajalnika"
 
-#: playlist/playlistcontainer.cpp:297 playlist/playlistmanager.cpp:76
-#: playlist/playlistmanager.cpp:369 playlist/playlisttabbar.cpp:292
+#: playlist/playlistcontainer.cpp:297 playlist/playlistmanager.cpp:78
+#: playlist/playlistmanager.cpp:373 playlist/playlisttabbar.cpp:292
 msgid "Playlist"
 msgstr "Seznam predvajanja"
 
@@ -3191,7 +3191,7 @@ msgstr "Oceni trenutno skladbo: 4 zvezdice"
 msgid "Rate the current song 5 stars"
 msgstr "Oceni trenutno skladbo: 5 zvezdic"
 
-#: playlist/playlist.cpp:1105 ../bin/src/ui_edittagdialog.h:645
+#: playlist/playlist.cpp:1094 ../bin/src/ui_edittagdialog.h:645
 msgid "Rating"
 msgstr "Ocena"
 
@@ -3215,7 +3215,7 @@ msgstr ""
 msgid "Refresh station list"
 msgstr "Osveži seznam postaj"
 
-#: internet/digitallyimportedservicebase.cpp:178
+#: internet/digitallyimportedservicebase.cpp:181
 msgid "Refresh streams"
 msgstr ""
 
@@ -3323,7 +3323,7 @@ msgstr "Znova napolni"
 msgid "Reset"
 msgstr "Ponastavi"
 
-#: ui/edittagdialog.cpp:703 ../bin/src/ui_edittagdialog.h:635
+#: ui/edittagdialog.cpp:701 ../bin/src/ui_edittagdialog.h:635
 msgid "Reset play counts"
 msgstr "Ponastavi število predvajanj"
 
@@ -3351,7 +3351,7 @@ msgstr "Varno odstrani napravo"
 msgid "Safely remove the device after copying"
 msgstr "Varno odstrani napravo po kopiranju"
 
-#: playlist/playlist.cpp:1113 ../bin/src/ui_edittagdialog.h:642
+#: playlist/playlist.cpp:1102 ../bin/src/ui_edittagdialog.h:642
 msgid "Sample rate"
 msgstr "Hitrost vzorčenja"
 
@@ -3387,7 +3387,7 @@ msgstr "Shrani prednastavitev"
 msgid "Save this stream in the Internet tab"
 msgstr "Shrani ta pretok v zavihek Medmrežje"
 
-#: ui/edittagdialog.cpp:619 ui/trackselectiondialog.cpp:249
+#: ui/edittagdialog.cpp:617 ui/trackselectiondialog.cpp:249
 msgid "Saving tracks"
 msgstr "Shranjevanje skladb"
 
@@ -3395,7 +3395,7 @@ msgstr "Shranjevanje skladb"
 msgid "Scalable sampling rate profile (SSR)"
 msgstr "Profil prilagodljive vzorčne hitrosti (SSR)"
 
-#: playlist/playlist.cpp:1109 ../bin/src/ui_edittagdialog.h:643
+#: playlist/playlist.cpp:1098 ../bin/src/ui_edittagdialog.h:643
 msgid "Score"
 msgstr "Rezultat"
 
@@ -3682,7 +3682,7 @@ msgstr "Ska"
 msgid "Skip backwards in playlist"
 msgstr "Skoči nazaj po seznamu predvajanja"
 
-#: playlist/playlist.cpp:1107 ../bin/src/ui_edittagdialog.h:639
+#: playlist/playlist.cpp:1096 ../bin/src/ui_edittagdialog.h:639
 msgid "Skip count"
 msgstr "Število preskočenih"
 
@@ -3702,7 +3702,7 @@ msgstr "Majhna stranska vrstica"
 msgid "Smart playlist"
 msgstr "Pametni seznami predvajanja"
 
-#: library/librarymodel.cpp:1101
+#: library/librarymodel.cpp:1118
 msgid "Smart playlists"
 msgstr "Pametni seznami predvajanja"
 
@@ -3923,7 +3923,7 @@ msgstr "Ukaza \"%1\" ni bilo mogoče zagnati."
 msgid "The directory %1 is not valid"
 msgstr "Mapa %1 ni veljavna"
 
-#: playlist/playlistmanager.cpp:147 playlist/playlistmanager.cpp:165
+#: playlist/playlistmanager.cpp:151 playlist/playlistmanager.cpp:169
 #, qt-format
 msgid "The playlist '%1' was empty or could not be loaded."
 msgstr "Seznam predvajanja '%1' je prazen ali pa ga ni bilo mogoče naložiti."
@@ -4069,7 +4069,7 @@ msgstr "Zakasnitev"
 msgid "Timezone"
 msgstr "Časovni pas"
 
-#: playlist/playlist.cpp:1094 ui/organisedialog.cpp:51
+#: playlist/playlist.cpp:1083 ui/organisedialog.cpp:51
 #: ui/qtsystemtrayicon.cpp:248 ../bin/src/ui_about.h:142
 #: ../bin/src/ui_edittagdialog.h:652 ../bin/src/ui_trackselectiondialog.h:211
 msgid "Title"
@@ -4107,7 +4107,7 @@ msgstr "Skupno prenešenih bajtov"
 msgid "Total network requests made"
 msgstr "Skupno število omrežnih zahtevkov"
 
-#: playlist/playlist.cpp:1098 ui/organisedialog.cpp:57
+#: playlist/playlist.cpp:1087 ui/organisedialog.cpp:57
 #: ../bin/src/ui_edittagdialog.h:653 ../bin/src/ui_trackselectiondialog.h:212
 msgid "Track"
 msgstr "Skladba"
@@ -4163,10 +4163,10 @@ msgid "Unable to download %1 (%2)"
 msgstr "Ni bilo mogoče prenesti %1 (%2)"
 
 #: core/song.cpp:148 globalsearch/globalsearchitemdelegate.cpp:166
-#: globalsearch/globalsearchitemdelegate.cpp:173 library/librarymodel.cpp:284
-#: library/librarymodel.cpp:289 library/librarymodel.cpp:899
-#: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:377
-#: playlist/playlistmanager.cpp:380 ui/albumcoverchoicecontroller.cpp:111
+#: globalsearch/globalsearchitemdelegate.cpp:173 library/librarymodel.cpp:293
+#: library/librarymodel.cpp:298 library/librarymodel.cpp:916
+#: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:381
+#: playlist/playlistmanager.cpp:384 ui/albumcoverchoicecontroller.cpp:111
 msgid "Unknown"
 msgstr "Neznano"
 
@@ -4281,8 +4281,8 @@ msgstr "VBR MP3"
 msgid "Variable bit rate"
 msgstr "Spremenljiva bitna hitrost"
 
-#: globalsearch/globalsearchitemdelegate.cpp:162 library/librarymodel.cpp:221
-#: playlist/playlistmanager.cpp:392 ui/albumcovermanager.cpp:264
+#: globalsearch/globalsearchitemdelegate.cpp:162 library/librarymodel.cpp:230
+#: playlist/playlistmanager.cpp:396 ui/albumcovermanager.cpp:264
 msgid "Various artists"
 msgstr "Različni izvajalci"
 
@@ -4415,7 +4415,7 @@ msgstr "Windows Media Audio"
 msgid "Would you like to run a full rescan right now?"
 msgstr "Želite opraviti ponovno branje celotno knjižnice zdaj?"
 
-#: playlist/playlist.cpp:1100 ui/organisedialog.cpp:60
+#: playlist/playlist.cpp:1089 ui/organisedialog.cpp:60
 #: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:148
 #: ../bin/src/ui_groupbydialog.h:161 ../bin/src/ui_edittagdialog.h:657
 msgid "Year"
@@ -4543,7 +4543,7 @@ msgstr "Vaši podatki Last.fm so bili napačni"
 msgid "Your Magnatune credentials were incorrect"
 msgstr "Vaši prijavni podatki Magnatune so bili napačni"
 
-#: ui/edittagdialog.cpp:719 ui/mainwindow.cpp:2126
+#: ui/edittagdialog.cpp:717 ui/mainwindow.cpp:2126
 msgid ""
 "Your gstreamer installation is missing the 'ofa' plugin.  This is required "
 "for automatic tag fetching.  Try installing the 'gstreamer-plugins-bad' "
@@ -4612,7 +4612,7 @@ msgstr "med"
 msgid "biggest first"
 msgstr "najprej največji"
 
-#: playlist/playlistview.cpp:162 ui/edittagdialog.cpp:421
+#: playlist/playlistview.cpp:161 ui/edittagdialog.cpp:419
 msgid "bpm"
 msgstr "udarcev/min"
 
@@ -4655,7 +4655,7 @@ msgstr "večje kot"
 msgid "in the last"
 msgstr "v zadnjih"
 
-#: playlist/playlistview.cpp:164 ui/edittagdialog.cpp:423
+#: playlist/playlistview.cpp:163 ui/edittagdialog.cpp:421
 msgid "kbps"
 msgstr "kb/s"
 

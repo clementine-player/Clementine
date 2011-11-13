@@ -65,7 +65,7 @@ msgstr "Преди %1 дни"
 msgid "%1 playlists (%2)"
 msgstr "%1 списъци с песни (%2)"
 
-#: playlist/playlistmanager.cpp:298
+#: playlist/playlistmanager.cpp:302
 #, qt-format
 msgid "%1 selected of"
 msgstr "%1 избрани от"
@@ -90,7 +90,7 @@ msgstr "%1 песни намерени"
 msgid "%1 songs found (showing %2)"
 msgstr "%1 песни намерени (показване %2)"
 
-#: playlist/playlistmanager.cpp:304
+#: playlist/playlistmanager.cpp:308
 #, qt-format
 msgid "%1 tracks"
 msgstr "%1 песни"
@@ -131,11 +131,11 @@ msgstr "%n завършено"
 msgid "%n remaining"
 msgstr "%n оставащо"
 
-#: playlist/playlistheader.cpp:35
+#: playlist/playlistheader.cpp:37
 msgid "&Align text"
 msgstr "&Подравни текста"
 
-#: playlist/playlistheader.cpp:36
+#: playlist/playlistheader.cpp:40
 msgid "&Center"
 msgstr "&Центъра"
 
@@ -151,16 +151,16 @@ msgstr "Допълнения"
 msgid "&Help"
 msgstr "Помо&щ"
 
-#: playlist/playlistheader.cpp:59
+#: playlist/playlistheader.cpp:70
 #, qt-format
 msgid "&Hide %1"
 msgstr "&Скриване на %1"
 
-#: playlist/playlistheader.cpp:31
+#: playlist/playlistheader.cpp:33
 msgid "&Hide..."
 msgstr "&Скриване..."
 
-#: playlist/playlistheader.cpp:35
+#: playlist/playlistheader.cpp:39
 msgid "&Left"
 msgstr "&Ляво"
 
@@ -184,7 +184,7 @@ msgstr "&Изход"
 msgid "&Repeat mode"
 msgstr "Режим „Повторение“"
 
-#: playlist/playlistheader.cpp:37
+#: playlist/playlistheader.cpp:41
 msgid "&Right"
 msgstr "&Дясно"
 
@@ -192,7 +192,7 @@ msgstr "&Дясно"
 msgid "&Shuffle mode"
 msgstr "Режим „Случаен ред“"
 
-#: playlist/playlistheader.cpp:32
+#: playlist/playlistheader.cpp:34
 msgid "&Stretch columns to fit window"
 msgstr "&Разтегли колоните да се вместят в прозореца"
 
@@ -221,7 +221,7 @@ msgstr "0:00:00"
 msgid "1 day"
 msgstr "1 ден"
 
-#: playlist/playlistmanager.cpp:304
+#: playlist/playlistmanager.cpp:308
 msgid "1 track"
 msgstr "1 песен"
 
@@ -498,7 +498,7 @@ msgstr "Разширено групиране..."
 msgid "After copying..."
 msgstr "След копиране..."
 
-#: playlist/playlist.cpp:1096 ui/organisedialog.cpp:52
+#: playlist/playlist.cpp:1085 ui/organisedialog.cpp:52
 #: ui/qtsystemtrayicon.cpp:252 ../bin/src/ui_groupbydialog.h:129
 #: ../bin/src/ui_groupbydialog.h:142 ../bin/src/ui_groupbydialog.h:155
 #: ../bin/src/ui_albumcoversearcher.h:110
@@ -511,7 +511,7 @@ msgstr "Албум"
 msgid "Album (ideal loudness for all tracks)"
 msgstr "Албум (идеална сила на звука за всички песни)"
 
-#: playlist/playlist.cpp:1102 ui/organisedialog.cpp:55
+#: playlist/playlist.cpp:1091 ui/organisedialog.cpp:55
 #: ../bin/src/ui_edittagdialog.h:658
 msgid "Album artist"
 msgstr "Изпълнител на албума"
@@ -607,7 +607,7 @@ msgstr "Получи се грешка при копирането на iTunes �
 msgid "An error occurred loading the iTunes database"
 msgstr "Възникна грешка при зареждането на базата данни на iTunes"
 
-#: ui/edittagdialog.cpp:612
+#: ui/edittagdialog.cpp:610
 #, qt-format
 msgid "An error occurred writing metadata to '%1'"
 msgstr "Получи се грешка при направата върху '%1'"
@@ -651,11 +651,11 @@ msgstr "Сигурни ли сте,че искате да изтриете \"%1\
 msgid "Are you sure you want to delete this playlist?"
 msgstr ""
 
-#: ui/edittagdialog.cpp:704
+#: ui/edittagdialog.cpp:702
 msgid "Are you sure you want to reset this song's statistics?"
 msgstr "Сигурни ли сте,че иската да нулирате статистиката за тази песен"
 
-#: playlist/playlist.cpp:1095 ui/organisedialog.cpp:53
+#: playlist/playlist.cpp:1084 ui/organisedialog.cpp:53
 #: ui/qtsystemtrayicon.cpp:250 ../bin/src/ui_groupbydialog.h:130
 #: ../bin/src/ui_groupbydialog.h:143 ../bin/src/ui_groupbydialog.h:156
 #: ../bin/src/ui_albumcoversearcher.h:106
@@ -723,7 +723,7 @@ msgstr "Среден битов поток"
 msgid "Average image size"
 msgstr "Среден размер на изображение"
 
-#: playlist/playlist.cpp:1111 ui/organisedialog.cpp:59
+#: playlist/playlist.cpp:1100 ui/organisedialog.cpp:59
 #: ../bin/src/ui_edittagdialog.h:638
 msgid "BPM"
 msgstr "Темпо"
@@ -769,7 +769,7 @@ msgstr "Най-добро"
 msgid "Biography from %1"
 msgstr "Биография от %1"
 
-#: playlist/playlist.cpp:1112 ../bin/src/ui_edittagdialog.h:640
+#: playlist/playlist.cpp:1101 ../bin/src/ui_edittagdialog.h:640
 msgid "Bit rate"
 msgstr "Качество"
 
@@ -1001,7 +1001,7 @@ msgstr ""
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Разделен със запетая списък с class:level, нивото е 0-3"
 
-#: playlist/playlist.cpp:1121 smartplaylists/searchterm.cpp:279
+#: playlist/playlist.cpp:1110 smartplaylists/searchterm.cpp:279
 #: ui/organisedialog.cpp:62 ../bin/src/ui_edittagdialog.h:661
 msgid "Comment"
 msgstr "Коментар"
@@ -1014,7 +1014,7 @@ msgstr "Автоматично довършване на етикетите"
 msgid "Complete tags automatically..."
 msgstr "Автоматично довършване на етикетите..."
 
-#: playlist/playlist.cpp:1103 ui/organisedialog.cpp:56
+#: playlist/playlist.cpp:1092 ui/organisedialog.cpp:56
 #: ../bin/src/ui_groupbydialog.h:132 ../bin/src/ui_groupbydialog.h:145
 #: ../bin/src/ui_groupbydialog.h:158 ../bin/src/ui_edittagdialog.h:659
 msgid "Composer"
@@ -1044,7 +1044,7 @@ msgstr "Настройване на Spotify..."
 msgid "Configure library..."
 msgstr "Настройване на библиотека..."
 
-#: internet/digitallyimportedservicebase.cpp:182
+#: internet/digitallyimportedservicebase.cpp:185
 #: ../bin/src/ui_globalsearchsettingspage.h:174
 msgid "Configure..."
 msgstr ""
@@ -1134,24 +1134,24 @@ msgstr "Не може да бъде отворен изходен файл %1"
 msgid "Cover Manager"
 msgstr "Обложки"
 
-#: ui/edittagdialog.cpp:406
+#: ui/edittagdialog.cpp:404
 msgid "Cover art from embedded image"
 msgstr "Обложка от изображение"
 
-#: ui/edittagdialog.cpp:408
+#: ui/edittagdialog.cpp:406
 #, qt-format
 msgid "Cover art loaded automatically from %1"
 msgstr "Обложката е заредена автоматично от %1"
 
-#: ui/edittagdialog.cpp:401
+#: ui/edittagdialog.cpp:399
 msgid "Cover art manually unset"
 msgstr "Обложката е ръчно премахната"
 
-#: ui/edittagdialog.cpp:410
+#: ui/edittagdialog.cpp:408
 msgid "Cover art not set"
 msgstr "Обложката не е зададена"
 
-#: ui/edittagdialog.cpp:404
+#: ui/edittagdialog.cpp:402
 #, qt-format
 msgid "Cover art set from %1"
 msgstr "Обложката е зададена от %1"
@@ -1269,11 +1269,11 @@ msgstr "Път то DBus"
 msgid "Dance"
 msgstr "Денс"
 
-#: playlist/playlist.cpp:1119 ../bin/src/ui_edittagdialog.h:649
+#: playlist/playlist.cpp:1108 ../bin/src/ui_edittagdialog.h:649
 msgid "Date created"
 msgstr "Дата на създаване"
 
-#: playlist/playlist.cpp:1118 ../bin/src/ui_edittagdialog.h:648
+#: playlist/playlist.cpp:1107 ../bin/src/ui_edittagdialog.h:648
 msgid "Date modified"
 msgstr "Дата на променяне"
 
@@ -1408,7 +1408,7 @@ msgstr "Изключване на продължитеност"
 msgid "Disabled"
 msgstr "Изключено"
 
-#: playlist/playlist.cpp:1099 ui/organisedialog.cpp:58
+#: playlist/playlist.cpp:1088 ui/organisedialog.cpp:58
 #: ../bin/src/ui_edittagdialog.h:655
 msgid "Disc"
 msgstr "Диск"
@@ -1631,7 +1631,7 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "Еквивалентно на --log-levels *:3"
 
 #: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:453
-#: ui/edittagdialog.cpp:719 ui/mainwindow.cpp:1802 ui/mainwindow.cpp:1907
+#: ui/edittagdialog.cpp:717 ui/mainwindow.cpp:1802 ui/mainwindow.cpp:1907
 #: ui/mainwindow.cpp:2126
 msgid "Error"
 msgstr "Грешка"
@@ -1648,7 +1648,7 @@ msgstr "Грешка при копиране на песни"
 msgid "Error deleting songs"
 msgstr "Грешка при изтриване на песни"
 
-#: internet/spotifyblobdownloader.cpp:194
+#: internet/spotifyblobdownloader.cpp:214
 msgid "Error downloading Spotify plugin"
 msgstr "Грешка при изтеглянето на приставка за Spotify"
 
@@ -1657,7 +1657,7 @@ msgstr "Грешка при изтеглянето на приставка за 
 msgid "Error loading %1"
 msgstr "Грешка при зареждане на %1"
 
-#: internet/digitallyimportedservicebase.cpp:204
+#: internet/digitallyimportedservicebase.cpp:207
 #: internet/digitallyimportedurlhandler.cpp:73
 msgid "Error loading di.fm playlist"
 msgstr ""
@@ -1767,19 +1767,19 @@ msgstr "Файлово разширение"
 msgid "File formats"
 msgstr "Файлови формати"
 
-#: playlist/playlist.cpp:1114 ../bin/src/ui_edittagdialog.h:650
+#: playlist/playlist.cpp:1103 ../bin/src/ui_edittagdialog.h:650
 msgid "File name"
 msgstr "Име на файл"
 
-#: playlist/playlist.cpp:1115
+#: playlist/playlist.cpp:1104
 msgid "File name (without path)"
 msgstr "Име на файл (без път)"
 
-#: playlist/playlist.cpp:1116 ../bin/src/ui_edittagdialog.h:644
+#: playlist/playlist.cpp:1105 ../bin/src/ui_edittagdialog.h:644
 msgid "File size"
 msgstr "Размер на файла"
 
-#: playlist/playlist.cpp:1117 ../bin/src/ui_groupbydialog.h:133
+#: playlist/playlist.cpp:1106 ../bin/src/ui_groupbydialog.h:133
 #: ../bin/src/ui_groupbydialog.h:146 ../bin/src/ui_groupbydialog.h:159
 #: ../bin/src/ui_edittagdialog.h:646
 msgid "File type"
@@ -1916,7 +1916,7 @@ msgstr ""
 msgid "General settings"
 msgstr "Общи настройки"
 
-#: playlist/playlist.cpp:1101 ui/organisedialog.cpp:61
+#: playlist/playlist.cpp:1090 ui/organisedialog.cpp:61
 #: ../bin/src/ui_groupbydialog.h:134 ../bin/src/ui_groupbydialog.h:147
 #: ../bin/src/ui_groupbydialog.h:160 ../bin/src/ui_edittagdialog.h:660
 msgid "Genre"
@@ -2252,7 +2252,7 @@ msgstr "Голяма обложка"
 msgid "Large sidebar"
 msgstr "Голяма странична лента"
 
-#: library/library.cpp:66 playlist/playlist.cpp:1108
+#: library/library.cpp:66 playlist/playlist.cpp:1097
 #: ../bin/src/ui_edittagdialog.h:641
 msgid "Last played"
 msgstr "Последно изпълнение"
@@ -2333,7 +2333,7 @@ msgstr ""
 "Оставете празно за данни по подразбиране. Примери: \"/dev/dsp\", \"front\" и"
 " т.н."
 
-#: playlist/playlist.cpp:1097 ui/organisedialog.cpp:63
+#: playlist/playlist.cpp:1086 ui/organisedialog.cpp:63
 #: ui/qtsystemtrayicon.cpp:255 ../bin/src/ui_edittagdialog.h:636
 msgid "Length"
 msgstr "Дължина"
@@ -2410,7 +2410,7 @@ msgstr "Зареждане на iPod база данни"
 msgid "Loading smart playlist"
 msgstr "Зареждане на умен списък с песни"
 
-#: library/librarymodel.cpp:122
+#: library/librarymodel.cpp:131
 msgid "Loading songs"
 msgstr "Зареждане на песни"
 
@@ -2427,7 +2427,7 @@ msgstr "Зареждане на песни"
 msgid "Loading tracks info"
 msgstr "Зареждане на информация за песните"
 
-#: library/librarymodel.cpp:117 widgets/prettyimage.cpp:168
+#: library/librarymodel.cpp:126 widgets/prettyimage.cpp:168
 #: widgets/widgetfadehelper.cpp:93 ../bin/src/ui_searchpreview.h:106
 msgid "Loading..."
 msgstr "Зареждане…"
@@ -2680,7 +2680,7 @@ msgstr "Мрежа"
 msgid "Network Proxy"
 msgstr "Мрежов сървър-посредник"
 
-#: playlist/playlistdelegates.cpp:296 ui/edittagdialog.cpp:445
+#: playlist/playlistdelegates.cpp:296 ui/edittagdialog.cpp:443
 msgid "Never"
 msgstr "Никога"
 
@@ -2824,7 +2824,7 @@ msgstr "Ogg Vorbis"
 msgid "Only show the first"
 msgstr "Покажи само първите"
 
-#: internet/digitallyimportedservicebase.cpp:175
+#: internet/digitallyimportedservicebase.cpp:178
 #, qt-format
 msgid "Open %1 in browser"
 msgstr ""
@@ -2971,7 +2971,7 @@ msgstr "Възпроизвеждане на изпълнител или етик
 msgid "Play artist radio..."
 msgstr "Възпроизвеждане радиото на изпълнителя"
 
-#: playlist/playlist.cpp:1106 ../bin/src/ui_edittagdialog.h:637
+#: playlist/playlist.cpp:1095 ../bin/src/ui_edittagdialog.h:637
 msgid "Play count"
 msgstr "Брой изпълнения"
 
@@ -3012,8 +3012,8 @@ msgstr "Име на плеъра"
 msgid "Player options"
 msgstr "Настройки на плеър"
 
-#: playlist/playlistcontainer.cpp:297 playlist/playlistmanager.cpp:76
-#: playlist/playlistmanager.cpp:369 playlist/playlisttabbar.cpp:292
+#: playlist/playlistcontainer.cpp:297 playlist/playlistmanager.cpp:78
+#: playlist/playlistmanager.cpp:373 playlist/playlisttabbar.cpp:292
 msgid "Playlist"
 msgstr "Списък с песни"
 
@@ -3199,7 +3199,7 @@ msgstr "Задай рейтинг на текущата песен 4 звезд�
 msgid "Rate the current song 5 stars"
 msgstr "Задай рейтинг на текущата песен 5 звезди"
 
-#: playlist/playlist.cpp:1105 ../bin/src/ui_edittagdialog.h:645
+#: playlist/playlist.cpp:1094 ../bin/src/ui_edittagdialog.h:645
 msgid "Rating"
 msgstr "Рейтинг"
 
@@ -3223,7 +3223,7 @@ msgstr ""
 msgid "Refresh station list"
 msgstr "Презареди листа със станциите"
 
-#: internet/digitallyimportedservicebase.cpp:178
+#: internet/digitallyimportedservicebase.cpp:181
 msgid "Refresh streams"
 msgstr ""
 
@@ -3331,7 +3331,7 @@ msgstr "Ново попълване"
 msgid "Reset"
 msgstr "Възстановяване"
 
-#: ui/edittagdialog.cpp:703 ../bin/src/ui_edittagdialog.h:635
+#: ui/edittagdialog.cpp:701 ../bin/src/ui_edittagdialog.h:635
 msgid "Reset play counts"
 msgstr "Изчистване на броя възпроизвеждания"
 
@@ -3359,7 +3359,7 @@ msgstr "Безопасно премахване на устройството"
 msgid "Safely remove the device after copying"
 msgstr "Безопасно премахване на устройството след приключване на копирането"
 
-#: playlist/playlist.cpp:1113 ../bin/src/ui_edittagdialog.h:642
+#: playlist/playlist.cpp:1102 ../bin/src/ui_edittagdialog.h:642
 msgid "Sample rate"
 msgstr "Дискретизация"
 
@@ -3395,7 +3395,7 @@ msgstr "Запис на фиксирани настройки"
 msgid "Save this stream in the Internet tab"
 msgstr "Запази този поток в интернет таб"
 
-#: ui/edittagdialog.cpp:619 ui/trackselectiondialog.cpp:249
+#: ui/edittagdialog.cpp:617 ui/trackselectiondialog.cpp:249
 msgid "Saving tracks"
 msgstr "Запазване на песните"
 
@@ -3403,7 +3403,7 @@ msgstr "Запазване на песните"
 msgid "Scalable sampling rate profile (SSR)"
 msgstr ""
 
-#: playlist/playlist.cpp:1109 ../bin/src/ui_edittagdialog.h:643
+#: playlist/playlist.cpp:1098 ../bin/src/ui_edittagdialog.h:643
 msgid "Score"
 msgstr "Резултат"
 
@@ -3690,7 +3690,7 @@ msgstr "Ска"
 msgid "Skip backwards in playlist"
 msgstr "Прескачане назад в списъка с песни"
 
-#: playlist/playlist.cpp:1107 ../bin/src/ui_edittagdialog.h:639
+#: playlist/playlist.cpp:1096 ../bin/src/ui_edittagdialog.h:639
 msgid "Skip count"
 msgstr "Презключи броя"
 
@@ -3710,7 +3710,7 @@ msgstr "Малка странична лента"
 msgid "Smart playlist"
 msgstr "Умен списък с песни"
 
-#: library/librarymodel.cpp:1101
+#: library/librarymodel.cpp:1118
 msgid "Smart playlists"
 msgstr "Умни списъци с песни"
 
@@ -3931,7 +3931,7 @@ msgstr "Командата \"%1\" не може да бъде стартиран
 msgid "The directory %1 is not valid"
 msgstr "Директорията \"%1\" не е валидна"
 
-#: playlist/playlistmanager.cpp:147 playlist/playlistmanager.cpp:165
+#: playlist/playlistmanager.cpp:151 playlist/playlistmanager.cpp:169
 #, qt-format
 msgid "The playlist '%1' was empty or could not be loaded."
 msgstr "Списъкът с песни '%1' беше празен или не можа да бъде зареден"
@@ -4081,7 +4081,7 @@ msgstr "Изтичане на времето"
 msgid "Timezone"
 msgstr "Часови пояс"
 
-#: playlist/playlist.cpp:1094 ui/organisedialog.cpp:51
+#: playlist/playlist.cpp:1083 ui/organisedialog.cpp:51
 #: ui/qtsystemtrayicon.cpp:248 ../bin/src/ui_about.h:142
 #: ../bin/src/ui_edittagdialog.h:652 ../bin/src/ui_trackselectiondialog.h:211
 msgid "Title"
@@ -4119,7 +4119,7 @@ msgstr "Общо прехвърлени байта"
 msgid "Total network requests made"
 msgstr "Общ брой направени мрежови заявки"
 
-#: playlist/playlist.cpp:1098 ui/organisedialog.cpp:57
+#: playlist/playlist.cpp:1087 ui/organisedialog.cpp:57
 #: ../bin/src/ui_edittagdialog.h:653 ../bin/src/ui_trackselectiondialog.h:212
 msgid "Track"
 msgstr "Песен"
@@ -4175,10 +4175,10 @@ msgid "Unable to download %1 (%2)"
 msgstr "Неуспешно сваляне %1 (%2)"
 
 #: core/song.cpp:148 globalsearch/globalsearchitemdelegate.cpp:166
-#: globalsearch/globalsearchitemdelegate.cpp:173 library/librarymodel.cpp:284
-#: library/librarymodel.cpp:289 library/librarymodel.cpp:899
-#: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:377
-#: playlist/playlistmanager.cpp:380 ui/albumcoverchoicecontroller.cpp:111
+#: globalsearch/globalsearchitemdelegate.cpp:173 library/librarymodel.cpp:293
+#: library/librarymodel.cpp:298 library/librarymodel.cpp:916
+#: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:381
+#: playlist/playlistmanager.cpp:384 ui/albumcoverchoicecontroller.cpp:111
 msgid "Unknown"
 msgstr "Непознат"
 
@@ -4294,8 +4294,8 @@ msgstr "VBR MP3"
 msgid "Variable bit rate"
 msgstr "Променлив битов поток"
 
-#: globalsearch/globalsearchitemdelegate.cpp:162 library/librarymodel.cpp:221
-#: playlist/playlistmanager.cpp:392 ui/albumcovermanager.cpp:264
+#: globalsearch/globalsearchitemdelegate.cpp:162 library/librarymodel.cpp:230
+#: playlist/playlistmanager.cpp:396 ui/albumcovermanager.cpp:264
 msgid "Various artists"
 msgstr "Сборни формации"
 
@@ -4428,7 +4428,7 @@ msgstr "Аудио — Windows Media"
 msgid "Would you like to run a full rescan right now?"
 msgstr "Искате ли да изпълните пълно повторно сканиране сега?"
 
-#: playlist/playlist.cpp:1100 ui/organisedialog.cpp:60
+#: playlist/playlist.cpp:1089 ui/organisedialog.cpp:60
 #: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:148
 #: ../bin/src/ui_groupbydialog.h:161 ../bin/src/ui_edittagdialog.h:657
 msgid "Year"
@@ -4559,7 +4559,7 @@ msgstr "Вашите Last.fm данни са грешни"
 msgid "Your Magnatune credentials were incorrect"
 msgstr "Вашите данни за достъп за Magnatune бяха грешни"
 
-#: ui/edittagdialog.cpp:719 ui/mainwindow.cpp:2126
+#: ui/edittagdialog.cpp:717 ui/mainwindow.cpp:2126
 msgid ""
 "Your gstreamer installation is missing the 'ofa' plugin.  This is required "
 "for automatic tag fetching.  Try installing the 'gstreamer-plugins-bad' "
@@ -4628,7 +4628,7 @@ msgstr "между"
 msgid "biggest first"
 msgstr "Пъво най-големите"
 
-#: playlist/playlistview.cpp:162 ui/edittagdialog.cpp:421
+#: playlist/playlistview.cpp:161 ui/edittagdialog.cpp:419
 msgid "bpm"
 msgstr "удари в минута"
 
@@ -4671,7 +4671,7 @@ msgstr "по-голям от"
 msgid "in the last"
 msgstr "в последните"
 
-#: playlist/playlistview.cpp:164 ui/edittagdialog.cpp:423
+#: playlist/playlistview.cpp:163 ui/edittagdialog.cpp:421
 msgid "kbps"
 msgstr "килобита/сек"
 
