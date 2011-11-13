@@ -224,7 +224,7 @@ void AlbumCoverLoader::RemoteFetchFinished() {
   NextState(&task);
 }
 
-QImage AlbumCoverLoader::ScaleAndPad(const QImage &image) const {
+QImage AlbumCoverLoader::ScaleAndPad(const QImage& image) const {
   if (image.isNull())
     return image;
 

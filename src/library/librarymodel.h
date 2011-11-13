@@ -34,6 +34,7 @@
 
 #include <boost/scoped_ptr.hpp>
 
+class AlbumCoverLoader;
 class LibraryDirectoryModel;
 class LibraryBackend;
 namespace smart_playlists { class Search; }
@@ -53,6 +54,7 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
   static const char* kSmartPlaylistsSettingsGroup;
   static const char* kSmartPlaylistsArray;
   static const int kSmartPlaylistsVersion;
+  static const int kPrettyCoverSize;
 
   enum Role {
     Role_Type = Qt::UserRole + 1,
@@ -165,6 +167,8 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
   // Called after ResetAsync
   void ResetAsyncQueryFinished();
 
+  void AlbumArtLoaded(quint64 id, const QImage& image);
+
  private:
   // Provides some optimisations for loading the list of items in the root.
   // This gets called a lot when filtering the playlist, so it's nice to be
@@ -218,7 +222,7 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
   QString DividerDisplayText(GroupBy type, const QString& key) const;
 
   // Helpers
-  QVariant AlbumIcon(const QModelIndex& index, int role) const;
+  QVariant AlbumIcon(const QModelIndex& index);
   QVariant data(const LibraryItem* item, int role) const;
   bool CompareItems(const LibraryItem* a, const LibraryItem* b) const;
 
@@ -261,9 +265,11 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
 
   int init_task_id_;
   
-  QSize pretty_cover_size_;
   bool use_pretty_covers_;
   bool show_dividers_;
+
+  BackgroundThread<AlbumCoverLoader>* cover_loader_;
+  QMap<quint64, LibraryItem*> pending_art_;
 };
 
 Q_DECLARE_METATYPE(LibraryModel::Grouping);

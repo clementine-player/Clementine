@@ -49,6 +49,7 @@ using smart_playlists::QueryGenerator;
 const char* LibraryModel::kSmartPlaylistsMimeType = "application/x-clementine-smart-playlist-generator";
 const char* LibraryModel::kSmartPlaylistsSettingsGroup = "SerialisedSmartPlaylists";
 const int LibraryModel::kSmartPlaylistsVersion = 4;
+const int LibraryModel::kPrettyCoverSize = 32;
 
 typedef QFuture<SqlRowList> RootQueryFuture;
 typedef QFutureWatcher<SqlRowList> RootQueryWatcher;
@@ -68,20 +69,28 @@ LibraryModel::LibraryModel(LibraryBackend* backend, TaskManager* task_manager,
     playlists_dir_icon_(IconLoader::Load("folder-sound")),
     playlist_icon_(":/icons/22x22/x-clementine-albums.png"),
     init_task_id_(-1),
-    pretty_cover_size_(32, 32),
     use_pretty_covers_(false),
-    show_dividers_(true)
+    show_dividers_(true),
+    cover_loader_(new BackgroundThreadImplementation<AlbumCoverLoader, AlbumCoverLoader>(this))
 {
   root_->lazy_loaded = true;
 
   group_by_[0] = GroupBy_Artist;
   group_by_[1] = GroupBy_Album;
   group_by_[2] = GroupBy_None;
-  
-  no_cover_icon_pretty_ = QImage(":nocover.png").scaled(pretty_cover_size_,
-                                                    Qt::KeepAspectRatio,
-                                                    Qt::SmoothTransformation);
 
+  cover_loader_->Start(true);
+  cover_loader_->Worker()->SetDesiredHeight(kPrettyCoverSize);
+  cover_loader_->Worker()->SetPadOutputImage(true);
+  cover_loader_->Worker()->SetScaleOutputImage(true);
+
+  connect(cover_loader_->Worker().get(),
+          SIGNAL(ImageLoaded(quint64,QImage)),
+          SLOT(AlbumArtLoaded(quint64,QImage)));
+
+  no_cover_icon_pretty_ = QImage(":nocover.png").scaled(
+        kPrettyCoverSize, kPrettyCoverSize,
+        Qt::KeepAspectRatio, Qt::SmoothTransformation);
 }
 
 LibraryModel::~LibraryModel() {
@@ -378,33 +387,38 @@ void LibraryModel::SongsDeleted(const SongList& songs) {
   }
 }
 
-QVariant LibraryModel::AlbumIcon(const QModelIndex& index, int role) const {  
-  
-  // the easiest way to get from *here* to working out what album art an index 
-  // represents seems to be to get the node's child songs and look at their metadata.
-  // if none is found, return the generic CD icon
-
+QVariant LibraryModel::AlbumIcon(const QModelIndex& index) {
   // Cache the art in the item's metadata field
   LibraryItem* item = IndexToItem(index);
   if (!item)
     return no_cover_icon_pretty_;
   if (!item->metadata.image().isNull())
     return item->metadata.image();
-  
+
+  // No art is cached - load art for the first Song in the album.
   SongList songs = GetChildSongs(index);
   if (!songs.isEmpty()) {
-    const Song& s = songs.first();
-    QPixmap pixmap = AlbumCoverLoader::TryLoadPixmap(
-      s.art_automatic(), s.art_manual(), s.url().toLocalFile());
-
-    if (!pixmap.isNull()) {
-      QImage image = pixmap.toImage().scaled(
-            pretty_cover_size_, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
-      item->metadata.set_image(image);
-      return image;
-    }
+    const quint64 id = cover_loader_->Worker()->LoadImageAsync(songs.first());
+    pending_art_[id] = item;
   }
+
   return no_cover_icon_pretty_;
+}
+
+void LibraryModel::AlbumArtLoaded(quint64 id, const QImage& image) {
+  LibraryItem* item = pending_art_.take(id);
+  if (!item)
+    return;
+
+  if (image.isNull()) {
+    // Set the no_cover image so we don't continually try to load art.
+    item->metadata.set_image(no_cover_icon_pretty_);
+  } else {
+    item->metadata.set_image(image);
+  }
+
+  const QModelIndex index = ItemToIndex(item);
+  emit dataChanged(index, index);
 }
 
 QVariant LibraryModel::data(const QModelIndex& index, int role) const {
@@ -415,15 +429,17 @@ QVariant LibraryModel::data(const QModelIndex& index, int role) const {
   // QModelIndex& version of GetChildSongs, which satisfies const-ness, instead
   // of the LibraryItem* version, which doesn't.
   if (use_pretty_covers_) {    
-    bool album_node = false;
+    bool is_album_node = false;
     if (role == Qt::DecorationRole && item->type == LibraryItem::Type_Container) {
       GroupBy container_type = group_by_[item->container_level];
-      album_node = container_type == GroupBy_Album 
-                    || container_type == GroupBy_YearAlbum
-                    || container_type == GroupBy_AlbumArtist;
+      is_album_node = container_type == GroupBy_Album
+                   || container_type == GroupBy_YearAlbum
+                   || container_type == GroupBy_AlbumArtist;
     }
-    if (album_node)
-      return AlbumIcon(index, role);
+    if (is_album_node) {
+      // It has const behaviour some of the time - that's ok right?
+      return const_cast<LibraryModel*>(this)->AlbumIcon(index);
+    }
   }
 
   return data(item, role);
@@ -634,6 +650,7 @@ void LibraryModel::BeginReset() {
   container_nodes_[1].clear();
   container_nodes_[2].clear();
   divider_nodes_.clear();
+  pending_art_.clear();
   compilation_artist_node_ = NULL;
   smart_playlist_node_ = NULL;
 
@@ -1243,3 +1260,5 @@ void LibraryModel::TotalSongCountUpdatedSlot(int count) {
   total_song_count_ = count;
   emit TotalSongCountUpdated(count);
 }
+
+
