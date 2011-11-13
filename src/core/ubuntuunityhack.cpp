@@ -18,6 +18,7 @@
 #include "ubuntuunityhack.h"
 #include "core/logging.h"
 
+#include <QFile>
 #include <QProcess>
 
 const char* UbuntuUnityHack::kGSettingsFileName     = "gsettings";
@@ -27,6 +28,16 @@ const char* UbuntuUnityHack::kUnitySystrayWhitelist = "systray-whitelist";
 UbuntuUnityHack::UbuntuUnityHack(QObject* parent)
   : QObject(parent)
 {
+  // Check if we're on Ubuntu first.
+  QFile lsb_release("/etc/lsb-release");
+  if (lsb_release.open(QIODevice::ReadOnly)) {
+    QByteArray data = lsb_release.readAll();
+    if (!data.contains("DISTRIB_ID=Ubuntu")) {
+      // It's not Ubuntu - don't do anything.
+      return;
+    }
+  }
+
   // Get the systray whitelist from gsettings.  If this fails we're probably
   // not running on a system with unity
   QProcess* get = new QProcess(this);
