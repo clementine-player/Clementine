@@ -247,8 +247,6 @@ void EditTagDialog::SetSongsFinished() {
   ui_->song_list->setVisible(multiple);
   previous_button_->setEnabled(multiple);
   next_button_->setEnabled(multiple);
-
-  ui_->tab_widget->setCurrentWidget(multiple ? ui_->tags_tab : ui_->summary_tab);
 }
 
 void EditTagDialog::SetTagCompleter(LibraryBackend* backend) {
