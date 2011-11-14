@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2011-11-11 23:22+0000\n"
-"Last-Translator: clementinebuildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2011-11-13 21:41+0000\n"
+"Last-Translator: yurchor <yurchor@ukr.net>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: uk\n"
@@ -53,7 +53,7 @@ msgstr "%1 альбом(ів)"
 #: core/utilities.cpp:89
 #, qt-format
 msgid "%1 days"
-msgstr "%1 дн."
+msgstr "%1 д."
 
 #: core/utilities.cpp:110
 #, qt-format
@@ -207,7 +207,7 @@ msgstr "(відрізняється поміж багатьма піснями)"
 #: ../bin/src/ui_globalsearchpopup.h:104 ../bin/src/ui_globalsearchpopup.h:105
 #: ../bin/src/ui_globalsearchpopup.h:106 ../bin/src/ui_globalsearchpopup.h:107
 msgid "..."
-msgstr ""
+msgstr "…"
 
 #: ui/about.cpp:76
 msgid "...and all the Amarok contributors"
@@ -257,7 +257,7 @@ msgstr ""
 
 #: internet/spotifysettingspage.cpp:147
 msgid "A Spotify Premium account is required."
-msgstr "Для Spotify обов'яковий обліковий запис Premium."
+msgstr "Для Spotify обов'язковий обліковий запис Premium."
 
 #: smartplaylists/wizard.cpp:72
 msgid ""
@@ -286,15 +286,15 @@ msgstr "AAC"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:179
 msgid "AAC 128k"
-msgstr ""
+msgstr "AAC, 128 кб"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:171
 msgid "AAC 32k"
-msgstr ""
+msgstr "AAC, 32 кб"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:178
 msgid "AAC 64k"
-msgstr ""
+msgstr "AAC, 64 кб"
 
 #: core/song.cpp:139
 msgid "AIFF"
@@ -351,7 +351,7 @@ msgstr "Додати дію"
 
 #: globalsearch/globalsearchwidget.cpp:104
 msgid "Add and play now"
-msgstr ""
+msgstr "Додати і відтворити зараз"
 
 #: internet/savedradio.cpp:103
 msgid "Add another stream..."
@@ -363,7 +363,7 @@ msgstr "Додати теку..."
 
 #: ui/mainwindow.cpp:1571
 msgid "Add file"
-msgstr ""
+msgstr "Додати файл"
 
 #: ../bin/src/ui_mainwindow.h:662
 msgid "Add file..."
@@ -646,11 +646,11 @@ msgstr "Застосувати стиснення для запобігання 
 #: ui/equalizer.cpp:191
 #, qt-format
 msgid "Are you sure you want to delete the \"%1\" preset?"
-msgstr "Ви дійсно хочите вилучити задане \"%1\"?"
+msgstr "Ви дійсно хочете вилучити задане \"%1\"?"
 
 #: internet/groovesharkservice.cpp:906
 msgid "Are you sure you want to delete this playlist?"
-msgstr ""
+msgstr "Ви справді хочете вилучити цей список відтворення?"
 
 #: ui/edittagdialog.cpp:702
 msgid "Are you sure you want to reset this song's statistics?"
@@ -755,7 +755,7 @@ msgstr "Стандартний синій"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:167
 msgid "Basic audio type"
-msgstr ""
+msgstr "Основний тип звуку"
 
 #: ../bin/src/ui_behavioursettingspage.h:176
 msgid "Behavior"
@@ -950,8 +950,7 @@ msgid ""
 "Last.fm."
 msgstr ""
 "Clementine не вдається отримати стан вашої передплати через проблеми зі "
-"зв'язком. Відтворювані доріжки буде кешовано на тадіслано до Last.fm "
-"пізніше."
+"зв'язком. Відтворювані доріжки буде кешовано і надіслано до Last.fm пізніше."
 
 #: widgets/prettyimage.cpp:201
 msgid "Clementine image viewer"
@@ -1031,7 +1030,7 @@ msgstr "Налаштування Last.fm..."
 
 #: internet/magnatuneservice.cpp:273
 msgid "Configure Magnatune..."
-msgstr "Налаштуати Magnatune..."
+msgstr "Налаштувати Magnatune..."
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:167
 msgid "Configure Shortcuts"
@@ -1048,7 +1047,7 @@ msgstr "Налаштувати фонотеку"
 #: internet/digitallyimportedservicebase.cpp:185
 #: ../bin/src/ui_globalsearchsettingspage.h:174
 msgid "Configure..."
-msgstr ""
+msgstr "Налаштувати…"
 
 #: ../bin/src/ui_wiimotesettingspage.h:186
 msgid "Connect Wii Remotes using active/deactive action"
@@ -1076,7 +1075,7 @@ msgstr "Конвертувати всю музику, яку не може ві�
 
 #: internet/groovesharkservice.cpp:793
 msgid "Copy to clipboard"
-msgstr ""
+msgstr "Копіювати до буфера"
 
 #: library/libraryview.cpp:265 ui/mainwindow.cpp:524
 #: widgets/fileviewlist.cpp:43
@@ -1182,7 +1181,7 @@ msgstr "Ctrl+B"
 
 #: ../bin/src/ui_queuemanager.h:133
 msgid "Ctrl+Down"
-msgstr "Ctrl+Down"
+msgstr "Ctrl+Вниз"
 
 #: ../bin/src/ui_mainwindow.h:651
 msgid "Ctrl+E"
@@ -1242,7 +1241,7 @@ msgstr "Ctrl+T"
 
 #: ../bin/src/ui_queuemanager.h:129
 msgid "Ctrl+Up"
-msgstr "Ctrl+Up"
+msgstr "Ctrl+Вгору"
 
 #: ui/equalizer.cpp:108 ../bin/src/ui_lastfmstationdialog.h:98
 msgid "Custom"
@@ -1372,7 +1371,7 @@ msgstr "Пристрої"
 
 #: ../bin/src/ui_globalsearchpopup.h:103
 msgid "Dialog"
-msgstr ""
+msgstr "Діалогове вікно"
 
 #: widgets/didyoumean.cpp:128
 msgid "Did you mean"
@@ -1734,7 +1733,7 @@ msgstr "Швидко"
 
 #: internet/groovesharkservice.cpp:603
 msgid "Favorites"
-msgstr ""
+msgstr "Улюблені"
 
 #: library/library.cpp:72
 msgid "Favourite tracks"
@@ -1906,7 +1905,7 @@ msgstr "Аудіо-рушій GStreamer"
 
 #: ui/settingsdialog.cpp:111
 msgid "General"
-msgstr ""
+msgstr "Загальне"
 
 #: ../bin/src/ui_notificationssettingspage.h:402
 msgid "General settings"
@@ -1928,7 +1927,7 @@ msgstr "Отримання каналів"
 
 #: internet/digitallyimportedservicebase.cpp:106
 msgid "Getting streams"
-msgstr ""
+msgstr "Отримання потоків"
 
 #: ../bin/src/ui_addstreamdialog.h:116
 msgid "Give it a name:"
@@ -1990,19 +1989,19 @@ msgstr "Групувати за виконавцем"
 
 #: ../bin/src/ui_libraryfilterwidget.h:125
 msgid "Group by Artist/Album"
-msgstr "Групувати як Виконавец/Альбом"
+msgstr "Групувати за виконавецем/альбомом"
 
 #: ../bin/src/ui_libraryfilterwidget.h:126
 msgid "Group by Artist/Year - Album"
-msgstr "Групувати як Виконавец/Рік -Альбом"
+msgstr "Групувати зак виконавцем/роком - альбомом"
 
 #: ../bin/src/ui_libraryfilterwidget.h:128
 msgid "Group by Genre/Album"
-msgstr "Групувати як Жанр/Альбом"
+msgstr "Групувати за жанром/альбомом"
 
 #: ../bin/src/ui_libraryfilterwidget.h:129
 msgid "Group by Genre/Artist/Album"
-msgstr "Групувати як Жанр/Виконавець/Альбом"
+msgstr "Групувати за жанром/Виконавцем/альбомом"
 
 #: ../bin/src/ui_networkproxysettingspage.h:163
 msgid "HTTP proxy"
@@ -2018,7 +2017,7 @@ msgstr "Відомості про обладнання доступні лише
 
 #: ../bin/src/ui_globalsearchsettingspage.h:168
 msgid "Hide all other search boxes"
-msgstr ""
+msgstr "Приховати всі інші панелі пошуку"
 
 #: ../bin/src/ui_transcoderoptionsmp3.h:202
 msgid "High"
@@ -2112,7 +2111,7 @@ msgstr "Включити всі композиції"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:177
 msgid "Include keyboard shortcut help in the tooltip"
-msgstr ""
+msgstr "Показувати довідку щодо клавіатурного скорочення у підказці"
 
 #: core/commandlineoptions.cpp:158
 msgid "Increase the volume by 4%"
@@ -2172,11 +2171,11 @@ msgstr "Неправильний ключ сеансу"
 
 #: internet/groovesharkservice.cpp:384
 msgid "Invalid username and/or password"
-msgstr ""
+msgstr "Некоректне ім’я користувача і/або пароль"
 
 #: internet/jamendoservice.cpp:123
 msgid "Jamendo"
-msgstr ""
+msgstr "Jamendo"
 
 #: internet/jamendoservice.cpp:106
 msgid "Jamendo Most Listened Tracks"
@@ -2368,7 +2367,7 @@ msgstr "Завантажити обкладинку з нетрів..."
 
 #: ui/albumcoverchoicecontroller.cpp:92
 msgid "Load cover from disk"
-msgstr ""
+msgstr "Завантажити обкладинку з диска"
 
 #: ui/albumcoverchoicecontroller.cpp:58
 msgid "Load cover from disk..."
@@ -2409,7 +2408,7 @@ msgstr "Завантаження пісень"
 #: internet/digitallyimportedurlhandler.cpp:51
 #: internet/somafmurlhandler.cpp:45
 msgid "Loading stream"
-msgstr "Завнтаження потоку"
+msgstr "Завантаження потоку"
 
 #: playlist/songloaderinserter.cpp:77 ui/edittagdialog.cpp:209
 msgid "Loading tracks"
@@ -2477,11 +2476,11 @@ msgstr "MP3"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:177
 msgid "MP3 256k"
-msgstr ""
+msgstr "MP3, 256 кб"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:170
 msgid "MP3 96k"
-msgstr ""
+msgstr "MP3, 96 кб"
 
 #: core/song.cpp:133
 msgid "MP4 AAC"
@@ -2817,7 +2816,7 @@ msgstr "Показувати лише перший"
 #: internet/digitallyimportedservicebase.cpp:178
 #, qt-format
 msgid "Open %1 in browser"
-msgstr ""
+msgstr "Відкрити %1 у переглядачі"
 
 #: ../bin/src/ui_mainwindow.h:667
 msgid "Open &audio CD..."
@@ -2833,7 +2832,7 @@ msgstr "Відкрити dir.xiph.org в оглядачі"
 
 #: ../bin/src/ui_mainwindow.h:666
 msgid "Open file..."
-msgstr ""
+msgstr "Відкрити файл…"
 
 #: devices/deviceview.cpp:220 internet/internetservice.cpp:73
 #: library/libraryview.cpp:247 widgets/fileviewlist.cpp:35
@@ -3214,7 +3213,7 @@ msgstr "Оновити список станцій"
 
 #: internet/digitallyimportedservicebase.cpp:181
 msgid "Refresh streams"
-msgstr ""
+msgstr "Оновити потоки"
 
 #: ui/equalizer.cpp:120
 msgid "Reggae"
@@ -3248,7 +3247,7 @@ msgstr "Вилучити теку"
 
 #: internet/groovesharkservice.cpp:472
 msgid "Remove from favorites"
-msgstr ""
+msgstr "Вилучити з улюблених"
 
 #: internet/groovesharkservice.cpp:469 ../bin/src/ui_mainwindow.h:674
 msgid "Remove from playlist"
@@ -3288,7 +3287,7 @@ msgstr "Повторювати композицію"
 
 #: globalsearch/globalsearchwidget.cpp:107
 msgid "Replace and play now"
-msgstr ""
+msgstr "Замінити і відтворити зараз"
 
 #: devices/deviceview.cpp:218 globalsearch/globalsearchwidget.cpp:106
 #: internet/internetservice.cpp:63 library/libraryview.cpp:245
@@ -3330,7 +3329,7 @@ msgstr "Обмежитись символами ASCII"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:175
 msgid "Results"
-msgstr ""
+msgstr "Результати"
 
 #: ui/equalizer.cpp:121
 msgid "Rock"
@@ -3448,7 +3447,7 @@ msgstr "Пошук обкладинок альбомів..."
 
 #: ../bin/src/ui_globalsearchwidget.h:63
 msgid "Search for anything"
-msgstr ""
+msgstr "Шукати всюди"
 
 #: ../bin/src/ui_querysearchpage.h:71
 msgid "Search mode"
@@ -3492,7 +3491,7 @@ msgstr "Скасувати вибір"
 
 #: ../bin/src/ui_trackselectiondialog.h:207
 msgid "Select best possible match"
-msgstr "Оберіть найкраще співпадіння"
+msgstr "Оберіть найкращий збіг"
 
 #: ../bin/src/ui_visualisationselector.h:108
 msgid "Select visualizations"
@@ -3748,7 +3747,7 @@ msgstr "Сортування"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:169
 msgid "Sources"
-msgstr ""
+msgstr "Джерела"
 
 #: ../bin/src/ui_transcodersettingspage.h:162
 msgid "Speex"
@@ -3922,7 +3921,7 @@ msgstr "Тека %1 не чинна"
 #: playlist/playlistmanager.cpp:151 playlist/playlistmanager.cpp:169
 #, qt-format
 msgid "The playlist '%1' was empty or could not be loaded."
-msgstr "Список відтворення '%1' порожній або немже бути завантажений."
+msgstr "Список відтворення '%1' порожній або не може бути завантажений."
 
 #: smartplaylists/searchtermwidget.cpp:322
 msgid "The second value must be greater than the first one!"
@@ -4015,7 +4014,7 @@ msgstr "Цей пристрій підтримує такі формати фа�
 
 #: devices/devicemanager.cpp:567 devices/devicemanager.cpp:575
 msgid "This device will not work properly"
-msgstr "Цей пристрів не працюватиме як слід"
+msgstr "Цей пристрій не працюватиме як слід"
 
 #: devices/devicemanager.cpp:568
 msgid ""
@@ -4040,7 +4039,7 @@ msgid ""
 "This playlist will be removed; the action can't be undone. Are you sure you "
 "want to continue?"
 msgstr ""
-"Цей список відтворення буде вилучено, цю дію не можна відмініти. Ви "
+"Цей список відтворення буде вилучено, цю дію не можна скасувати. Ви "
 "впевнені, що бажаєте продовжити?"
 
 #: internet/lastfmservice.cpp:440
@@ -4201,7 +4200,7 @@ msgstr "Використовувати комбінації клавіш Gnome"
 
 #: ../bin/src/ui_playbacksettingspage.h:267
 msgid "Use Replay Gain metadata if it is available"
-msgstr "Використувувати метадані Replay Gain, якщо такі є"
+msgstr "Використовувати метадані Replay Gain, якщо такі є"
 
 #: ../bin/src/ui_wiimotesettingspage.h:189
 msgid "Use Wii Remote"
@@ -4250,7 +4249,7 @@ msgstr ""
 
 #: ui/settingsdialog.cpp:128
 msgid "User interface"
-msgstr ""
+msgstr "Інтерфейс користувача"
 
 #: ../bin/src/ui_groovesharksettingspage.h:114
 #: ../bin/src/ui_magnatunesettingspage.h:159
@@ -4629,7 +4628,7 @@ msgstr "не містить"
 
 #: globalsearch/globalsearchwidget.cpp:740
 msgid "e.g."
-msgstr ""
+msgstr "напр."
 
 #: smartplaylists/searchterm.cpp:215
 msgid "ends with"
