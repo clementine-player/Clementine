@@ -171,7 +171,6 @@ class GroovesharkService : public InternetService {
   // If need_authentication is true, add session_id to params.
   // Returns the reply object created
   QNetworkReply* CreateRequest(const QString& method_name, const QList<QPair<QString, QVariant> > params,
-                     bool need_authentication = false,
                      bool use_https = false);
   // Convenient function for extracting result from reply
   QVariantMap ExtractResult(QNetworkReply* reply);
