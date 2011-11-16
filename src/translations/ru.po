@@ -4,13 +4,14 @@
 # 
 # Translators:
 # Nikita Putko <admi136@mail.ru>, 2011.
+# Oleg Sevostyanov <oleg.sev@gmail.com>, 2011.
 # Павел Малеев <rolland39@gmail.com>, 2010.
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2011-11-11 23:22+0000\n"
-"Last-Translator: clementinebuildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2011-11-15 11:05+0000\n"
+"Last-Translator: boothehamster <oleg.sev@gmail.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: ru\n"
@@ -287,7 +288,7 @@ msgstr "AAC"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:179
 msgid "AAC 128k"
-msgstr ""
+msgstr "AAC 128к"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:171
 msgid "AAC 32k"
@@ -295,7 +296,7 @@ msgstr "AAC 32k"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:178
 msgid "AAC 64k"
-msgstr ""
+msgstr "AAC 64к"
 
 #: core/song.cpp:139
 msgid "AIFF"
@@ -303,7 +304,7 @@ msgstr "AIFF"
 
 #: widgets/nowplayingwidget.cpp:119
 msgid "ALL GLORY TO THE HYPNOTOAD"
-msgstr "СЛАВА ГИПНОЖАБЕ"
+msgstr "СЛАВА ГИПНОЖАБЕ!"
 
 #: ui/about.cpp:32
 #, qt-format
@@ -364,7 +365,7 @@ msgstr "Добавить папку"
 
 #: ui/mainwindow.cpp:1571
 msgid "Add file"
-msgstr ""
+msgstr "Добавить файл"
 
 #: ../bin/src/ui_mainwindow.h:662
 msgid "Add file..."
@@ -444,11 +445,11 @@ msgstr "Добавить поток..."
 
 #: internet/groovesharkservice.cpp:740
 msgid "Add to Grooveshark favorites"
-msgstr ""
+msgstr "Добавить в избранное Grooveshark"
 
 #: internet/groovesharkservice.cpp:746
 msgid "Add to Grooveshark playlists"
-msgstr ""
+msgstr "Добавить в списки воспроизведения Grooveshark"
 
 #: ui/mainwindow.cpp:1400
 msgid "Add to another playlist"
@@ -651,7 +652,7 @@ msgstr "Вы действительно хотите удалить настро
 
 #: internet/groovesharkservice.cpp:906
 msgid "Are you sure you want to delete this playlist?"
-msgstr ""
+msgstr "Вы действительно хотите удалить список воспроизведения"
 
 #: ui/edittagdialog.cpp:702
 msgid "Are you sure you want to reset this song's statistics?"
@@ -756,7 +757,7 @@ msgstr "Стандартно голубой"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:167
 msgid "Basic audio type"
-msgstr ""
+msgstr "Формат аудиозаписей"
 
 #: ../bin/src/ui_behavioursettingspage.h:176
 msgid "Behavior"
@@ -1078,7 +1079,7 @@ msgstr "Конвертировать всю музыку, которую мож�
 
 #: internet/groovesharkservice.cpp:793
 msgid "Copy to clipboard"
-msgstr ""
+msgstr "Скопировать в буфер"
 
 #: library/libraryview.cpp:265 ui/mainwindow.cpp:524
 #: widgets/fileviewlist.cpp:43
@@ -1164,7 +1165,7 @@ msgstr "Обложки из %1"
 
 #: internet/groovesharkservice.cpp:462 internet/groovesharkservice.cpp:858
 msgid "Create a new Grooveshark playlist"
-msgstr ""
+msgstr "Создать новый список воспроизведения Grooveshark"
 
 #: ../bin/src/ui_playbacksettingspage.h:262
 msgid "Cross-fade when changing tracks automatically"
@@ -1304,7 +1305,7 @@ msgstr "Задержка между визуализациями"
 
 #: internet/groovesharkservice.cpp:465 internet/groovesharkservice.cpp:905
 msgid "Delete Grooveshark playlist"
-msgstr ""
+msgstr "Удалить список воспроизведения Grooveshark"
 
 #: devices/deviceview.cpp:393 library/libraryview.cpp:459
 #: ui/mainwindow.cpp:1834 widgets/fileview.cpp:185
@@ -1681,7 +1682,7 @@ msgstr "Кроме треков с одного и того же альбома 
 
 #: ../bin/src/ui_dynamicplaylistcontrols.h:111
 msgid "Expand"
-msgstr ""
+msgstr "Развернуть"
 
 #: widgets/loginstatewidget.cpp:112
 #, qt-format
@@ -2049,7 +2050,7 @@ msgstr "Часа(ов)"
 
 #: core/backgroundstreams.cpp:30
 msgid "Hypnotoad"
-msgstr "Гипножапа"
+msgstr "Гипножаба"
 
 #: ../bin/src/ui_magnatunesettingspage.h:155
 msgid "I don't have a Magnatune account"
@@ -2374,7 +2375,7 @@ msgstr "Загрузить обложку из URL..."
 
 #: ui/albumcoverchoicecontroller.cpp:92
 msgid "Load cover from disk"
-msgstr ""
+msgstr "Загрузить обложку с диска"
 
 #: ui/albumcoverchoicecontroller.cpp:58
 msgid "Load cover from disk..."
@@ -2487,7 +2488,7 @@ msgstr ""
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:170
 msgid "MP3 96k"
-msgstr ""
+msgstr "MP3 96k"
 
 #: core/song.cpp:133
 msgid "MP4 AAC"
@@ -3869,7 +3870,7 @@ msgstr "Поддерживаемые форматы"
 
 #: globalsearch/globalsearchtooltip.cpp:53
 msgid "Switch provider"
-msgstr ""
+msgstr "Выбрать другой источник"
 
 #: internet/spotifyservice.cpp:482
 msgid "Syncing Spotify inbox"
@@ -4256,7 +4257,7 @@ msgstr "Использовано"
 #: internet/groovesharkservice.cpp:387
 #, qt-format
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
-msgstr ""
+msgstr "У пользователь %1 нет учетной записи Grooveshark Anywhere"
 
 #: ui/settingsdialog.cpp:128
 msgid "User interface"
@@ -4398,15 +4399,15 @@ msgstr "Wiimotedev"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:181
 msgid "Windows Media 128k"
-msgstr ""
+msgstr "Windows Media 128к"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:172
 msgid "Windows Media 40k"
-msgstr ""
+msgstr "Windows Media 40к"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:180
 msgid "Windows Media 64k"
-msgstr ""
+msgstr "Windows Media 64к"
 
 #: core/song.cpp:131
 msgid "Windows Media audio"
@@ -4496,11 +4497,11 @@ msgstr ""
 
 #: internet/groovesharksettingspage.cpp:105
 msgid "You do not have a Grooveshark Anywhere account."
-msgstr ""
+msgstr "У вас нет учетной записи Grooveshark Anywhere"
 
 #: internet/spotifysettingspage.cpp:138
 msgid "You do not have a Spotify Premium account."
-msgstr ""
+msgstr "У вас нет учетной записи Spotify Premium"
 
 #: songinfo/lastfmtrackinfoprovider.cpp:95
 msgid "You love this track"
@@ -4639,7 +4640,7 @@ msgstr "не содержит"
 
 #: globalsearch/globalsearchwidget.cpp:740
 msgid "e.g."
-msgstr ""
+msgstr "например, "
 
 #: smartplaylists/searchterm.cpp:215
 msgid "ends with"
