@@ -43,6 +43,7 @@ public:
 
 signals:
   void Error(const QString& message);
+  void EffectiveLoadFinished(const SongList& songs);
 
 private slots:
   void PendingLoadFinished(bool success);

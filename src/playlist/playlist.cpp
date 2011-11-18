@@ -972,7 +972,7 @@ void Playlist::UpdateItems(const SongList& songs) {
   foreach (const Song& song, songs) {
     // Update current items list
     for (int i=0; i<items_.size(); i++) {
-      PlaylistItemPtr item = items_[i];
+      PlaylistItemPtr& item = items_[i];
       if (item->Metadata().url() == song.url() &&
           (item->Metadata().filetype() == Song::Type_Unknown ||
             // Stream may change and may need to be updated too
@@ -1730,7 +1730,7 @@ void Playlist::RemoveDeletedSongs() {
     Song song = item->Metadata();
 
     if(!song.is_stream() && !QFile::exists(song.url().toLocalFile())) {
-        rows_to_remove.append(row);
+      rows_to_remove.append(row);
     }
   }
 

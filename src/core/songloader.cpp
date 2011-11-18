@@ -308,15 +308,10 @@ void SongLoader::EffectiveSongsLoad() {
       continue;
     }
 
-    LibraryQuery query;
-    query.SetColumnSpec("%songs_table.ROWID, " + Song::kColumnSpec);
-    query.AddWhere("filename", song.url().toEncoded());
-
-    if (library_->ExecQuery(&query) && query.Next()) {
-      // we may have many results when the file has many sections
-      do {
-        song.InitFromQuery(query, true);
-      } while(query.Next());
+    // First, try to get the song from the library
+    Song library_song = library_->GetSongByUrl(song.url());
+    if (library_song.is_valid()) {
+      song = library_song;
     } else {
       // it's a normal media file
       QString filename = song.url().toLocalFile();

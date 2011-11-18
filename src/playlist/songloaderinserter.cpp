@@ -49,6 +49,8 @@ void SongLoaderInserter::Load(Playlist *destination,
   enqueue_ = enqueue;
 
   connect(destination, SIGNAL(destroyed()), SLOT(DestinationDestroyed()));
+  connect(this, SIGNAL(EffectiveLoadFinished(const SongList&)),
+          destination, SLOT(UpdateItems(const SongList&)));
 
   foreach (const QUrl& url, urls) {
     SongLoader* loader = new SongLoader(library_, this);
@@ -105,6 +107,7 @@ void SongLoaderInserter::LoadAudioCD(Playlist *destination,
 void SongLoaderInserter::DestinationDestroyed() {
   destination_ = NULL;
 }
+
 void SongLoaderInserter::AudioCDTagsLoaded(bool success) {
   SongLoader* loader = qobject_cast<SongLoader*>(sender());
   if (!loader || !destination_)
@@ -152,9 +155,7 @@ void SongLoaderInserter::EffectiveLoad() {
   foreach (SongLoader* loader, pending_async_) {
     loader->EffectiveSongsLoad();
     task_manager_->SetTaskProgress(async_load_id_, ++async_progress_);
-    if (destination_) {
-      destination_->UpdateItems(loader->songs());
-    }
+    emit EffectiveLoadFinished(loader->songs());
   }
   task_manager_->SetTaskFinished(async_load_id_);
 
