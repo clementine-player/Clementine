@@ -47,6 +47,7 @@
 #include <QBuffer>
 #include <QDirIterator>
 #include <QFileInfo>
+#include <QLinkedList>
 #include <QMimeData>
 #include <QMutableListIterator>
 #include <QSortFilterProxyModel>
@@ -969,9 +970,21 @@ void Playlist::InsertInternetItems(InternetService* service,
 
 void Playlist::UpdateItems(const SongList& songs) {
   qLog(Debug) << "Updating playlist with new tracks' info";
-  foreach (const Song& song, songs) {
+  // We first convert our songs list into a linked list (a 'real' list),
+  // because removals are faster with QLinkedList.
+  // Next, we walk through the list of playlist's items then the list of songs
+  // we want to update: if an item corresponds to the song (we rely on URL for
+  // this), we update the item with the new metadata, then we remove song from
+  // our list because we will not need to check it again.
+  // And we also update undo actions.
+  QLinkedList<Song> songs_list;
+  foreach (const Song& song, songs) songs_list.append(song);
+
+  for (int i=0; i<items_.size(); i++) {
     // Update current items list
-    for (int i=0; i<items_.size(); i++) {
+    QMutableLinkedListIterator<Song> it(songs_list);
+    while (it.hasNext()) {
+      const Song& song = it.next();
       PlaylistItemPtr& item = items_[i];
       if (item->Metadata().url() == song.url() &&
           (item->Metadata().filetype() == Song::Type_Unknown ||
@@ -996,6 +1009,7 @@ void Playlist::UpdateItems(const SongList& songs) {
             if (found_and_updated) break;
           }
         }
+        it.remove();
         break;
       }
     }
