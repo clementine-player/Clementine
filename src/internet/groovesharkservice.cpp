@@ -484,8 +484,18 @@ void GroovesharkService::EnsureItemsCreated() {
                                 tr("Search Grooveshark (opens a new tab)"));
     search_->setData(Type_SearchResults, InternetModel::Role_Type);
     search_->setData(InternetModel::PlayBehaviour_DoubleClickAction,
-                             InternetModel::Role_PlayBehaviour);
+                     InternetModel::Role_PlayBehaviour);
     root_->appendRow(search_);
+
+    favorites_ = new QStandardItem(QIcon(":/last.fm/love.png"), tr("Favorites"));
+    favorites_->setData(InternetModel::Type_UserPlaylist, InternetModel::Role_Type);
+    favorites_->setData(UserFavorites, Role_PlaylistType);
+    favorites_->setData(true, InternetModel::Role_CanLazyLoad);
+    favorites_->setData(true, InternetModel::Role_CanBeModified);
+    favorites_->setData(InternetModel::PlayBehaviour_SingleItem,
+                        InternetModel::Role_PlayBehaviour);
+    root_->appendRow(favorites_);
+
     RetrieveUserFavorites();
     RetrieveUserPlaylists();
   }
@@ -595,18 +605,7 @@ void GroovesharkService::UserFavoritesRetrieved() {
 
   reply->deleteLater();
 
-  bool favorites_item_already_exists = false;
-  if (favorites_) {
-    favorites_item_already_exists = true;
-    favorites_->removeRows(0, favorites_->rowCount());
-  } else {
-    favorites_ = new QStandardItem(QIcon(":/last.fm/love.png"), tr("Favorites"));
-    favorites_->setData(InternetModel::Type_UserPlaylist, InternetModel::Role_Type);
-    favorites_->setData(UserFavorites, Role_PlaylistType);
-    favorites_->setData(true, InternetModel::Role_CanLazyLoad);
-    favorites_->setData(true, InternetModel::Role_CanBeModified);
-    favorites_->setData(InternetModel::PlayBehaviour_SingleItem, InternetModel::Role_PlayBehaviour);
-  }
+  favorites_->removeRows(0, favorites_->rowCount());
 
   QVariantMap result = ExtractResult(reply);
   SongList songs = ExtractSongs(result);
@@ -619,9 +618,6 @@ void GroovesharkService::UserFavoritesRetrieved() {
     child->setData(true, InternetModel::Role_CanBeModified);
 
     favorites_->appendRow(child);
-  }
-  if (!favorites_item_already_exists) {
-    root_->appendRow(favorites_);
   }
 }
 
