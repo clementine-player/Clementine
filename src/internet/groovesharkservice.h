@@ -78,6 +78,8 @@ class GroovesharkService : public InternetService {
   bool IsLoggedIn() const { return !session_id_.isEmpty(); }
   void RetrieveUserPlaylists();
   void RetrieveUserFavorites();
+  void RetrievePopularSongsMonth();
+  void RetrievePopularSongsToday();
   void SetPlaylistSongs(int playlist_id, const QList<int>& songs_ids);
   void RemoveFromPlaylist(int playlist_id, int song_id);
   // Refresh playlist_id playlist , or create it if it doesn't exist
@@ -137,6 +139,8 @@ class GroovesharkService : public InternetService {
   void Authenticated();
   void UserPlaylistsRetrieved();
   void UserFavoritesRetrieved();
+  void PopularSongsMonthRetrieved(QNetworkReply* reply);
+  void PopularSongsTodayRetrieved(QNetworkReply* reply);
   void PlaylistSongsRetrieved();
   void PlaylistSongsSet(QNetworkReply* reply, int playlist_id);
   void CreateNewPlaylist();
@@ -198,6 +202,8 @@ class GroovesharkService : public InternetService {
 
   QStandardItem* root_;
   QStandardItem* search_;
+  QStandardItem* popular_month_;
+  QStandardItem* popular_today_;
   QStandardItem* favorites_;
 
   NetworkAccessManager* network_;

@@ -80,6 +80,8 @@ GroovesharkService::GroovesharkService(InternetModel *parent)
     next_pending_search_id_(0),
     root_(NULL),
     search_(NULL),
+    popular_month_(NULL),
+    popular_today_(NULL),
     favorites_(NULL),
     network_(new NetworkAccessManager(this)),
     context_menu_(NULL),
@@ -402,9 +404,11 @@ void GroovesharkService::Authenticated() {
 void GroovesharkService::Logout() {
   ResetSessionId();
   root_->removeRows(0, root_->rowCount());
-  // 'search' and 'favorites' items were root's children, and have been deleted:
-  // we should update these now invalid pointers
+  // 'search', 'favorites' and 'popular' items were root's children, and have
+  // been deleted: we should update these now invalid pointers
   search_ = NULL;
+  popular_month_ = NULL;
+  popular_today_ = NULL;
   favorites_ = NULL;
   playlists_.clear();
 }
@@ -487,6 +491,20 @@ void GroovesharkService::EnsureItemsCreated() {
                      InternetModel::Role_PlayBehaviour);
     root_->appendRow(search_);
 
+    popular_month_ = new QStandardItem(QIcon(":/star-on.png"), tr("Popular songs of the Month"));
+    popular_month_->setData(InternetModel::Type_UserPlaylist, InternetModel::Role_Type);
+    popular_month_->setData(true, InternetModel::Role_CanLazyLoad);
+    popular_month_->setData(InternetModel::PlayBehaviour_SingleItem,
+                        InternetModel::Role_PlayBehaviour);
+    root_->appendRow(popular_month_);
+
+    popular_today_ = new QStandardItem(QIcon(":/star-on.png"), tr("Popular songs today"));
+    popular_today_->setData(InternetModel::Type_UserPlaylist, InternetModel::Role_Type);
+    popular_today_->setData(true, InternetModel::Role_CanLazyLoad);
+    popular_today_->setData(InternetModel::PlayBehaviour_SingleItem,
+                        InternetModel::Role_PlayBehaviour);
+    root_->appendRow(popular_today_);
+
     favorites_ = new QStandardItem(QIcon(":/last.fm/love.png"), tr("Favorites"));
     favorites_->setData(InternetModel::Type_UserPlaylist, InternetModel::Role_Type);
     favorites_->setData(UserFavorites, Role_PlaylistType);
@@ -498,6 +516,8 @@ void GroovesharkService::EnsureItemsCreated() {
 
     RetrieveUserFavorites();
     RetrieveUserPlaylists();
+    RetrievePopularSongsMonth();
+    RetrievePopularSongsToday();
   }
 }
 
@@ -618,6 +638,52 @@ void GroovesharkService::UserFavoritesRetrieved() {
     child->setData(true, InternetModel::Role_CanBeModified);
 
     favorites_->appendRow(child);
+  }
+}
+
+void GroovesharkService::RetrievePopularSongsMonth() {
+  QList<Param> parameters;
+  parameters  << Param("limit", QString::number(kSongSearchLimit));
+  QNetworkReply* reply = CreateRequest("getPopularSongsMonth", parameters);
+  NewClosure(reply, SIGNAL(finished()),
+      this, SLOT(PopularSongsMonthRetrieved(QNetworkReply*)), reply);
+}
+
+void GroovesharkService::PopularSongsMonthRetrieved(QNetworkReply* reply) {
+  reply->deleteLater();
+  QVariantMap result = ExtractResult(reply);
+  SongList songs = ExtractSongs(result);
+  foreach (const Song& song, songs) {
+    QStandardItem* child = new QStandardItem(song.PrettyTitleWithArtist());
+    child->setData(Type_Track, InternetModel::Role_Type);
+    child->setData(QVariant::fromValue(song), InternetModel::Role_SongMetadata);
+    child->setData(InternetModel::PlayBehaviour_SingleItem, InternetModel::Role_PlayBehaviour);
+    child->setData(song.url(), InternetModel::Role_Url);
+
+    popular_month_->appendRow(child);
+  }
+}
+
+void GroovesharkService::RetrievePopularSongsToday() {
+  QList<Param> parameters;
+  parameters  << Param("limit", QString::number(kSongSearchLimit));
+  QNetworkReply* reply = CreateRequest("getPopularSongsToday", parameters);
+  NewClosure(reply, SIGNAL(finished()),
+      this, SLOT(PopularSongsTodayRetrieved(QNetworkReply*)), reply);
+}
+
+void GroovesharkService::PopularSongsTodayRetrieved(QNetworkReply* reply) {
+  reply->deleteLater();
+  QVariantMap result = ExtractResult(reply);
+  SongList songs = ExtractSongs(result);
+  foreach (const Song& song, songs) {
+    QStandardItem* child = new QStandardItem(song.PrettyTitleWithArtist());
+    child->setData(Type_Track, InternetModel::Role_Type);
+    child->setData(QVariant::fromValue(song), InternetModel::Role_SongMetadata);
+    child->setData(InternetModel::PlayBehaviour_SingleItem, InternetModel::Role_PlayBehaviour);
+    child->setData(song.url(), InternetModel::Role_Url);
+
+    popular_today_->appendRow(child);
   }
 }
 
