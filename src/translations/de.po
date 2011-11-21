@@ -5,14 +5,15 @@
 # Translators:
 # Claudius Henrichs <claudius.h@gmx.de>, 2011.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
+# Martin Herkt <lachs0r@hong-mailing.de>, 2011.
 # Martin Herkt <luck3r@phicode.de>, 2010.
 #   <stefan@stefantiemann.de>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2011-11-19 19:42+0000\n"
-"Last-Translator: clementinebuildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2011-11-20 11:42+0000\n"
+"Last-Translator: lachs0r <lachs0r@hong-mailing.de>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: de\n"
@@ -440,11 +441,11 @@ msgstr "Stream hinzufügen..."
 
 #: internet/groovesharkservice.cpp:802
 msgid "Add to Grooveshark favorites"
-msgstr ""
+msgstr "Zu Grooveshark-Favoriten hinzufügen"
 
 #: internet/groovesharkservice.cpp:808
 msgid "Add to Grooveshark playlists"
-msgstr ""
+msgstr "Zu Grooveshark-Wiedergabelisten hinzufügen"
 
 #: ui/mainwindow.cpp:1400
 msgid "Add to another playlist"
@@ -985,7 +986,7 @@ msgstr "Farbe"
 
 #: ui_globalsearchsettingspage.h:170
 msgid "Combine identical results from different sources"
-msgstr ""
+msgstr "Identische Ergebnisse verschiedener Quellen vereinen"
 
 #: core/commandlineoptions.cpp:173
 msgid "Comma separated list of class:level, level is 0-3"
@@ -1557,6 +1558,9 @@ msgid ""
 "results are available from more than one source, ones at the top will take "
 "priority."
 msgstr ""
+"Aktivieren Sie die untenstehenden Quellen, um sie in die globalen "
+"Suchergebnisse aufzunehmen.  Falls identische Ergebnisse aus mehr als einer "
+"Quelle vorliegen, wird der jeweils obere Eintrag priorisiert."
 
 #: core/globalshortcuts.cpp:62
 msgid "Enable/disable Last.fm scrobbling"
@@ -2090,7 +2094,7 @@ msgstr "Alle Stück einbeziehen"
 
 #: ui_globalsearchsettingspage.h:177
 msgid "Include keyboard shortcut help in the tooltip"
-msgstr ""
+msgstr "Hilfe zu Tastenkürzeln im Tooltip anzeigen"
 
 #: core/commandlineoptions.cpp:158
 msgid "Increase the volume by 4%"
@@ -2118,7 +2122,7 @@ msgstr "Internet"
 
 #: ui/settingsdialog.cpp:135
 msgid "Internet providers"
-msgstr ""
+msgstr "Internetdienstanbieter"
 
 #: internet/lastfmservice.cpp:438
 msgid "Invalid API key"
@@ -2346,7 +2350,7 @@ msgstr "Cover aus URL-Adresse laden..."
 
 #: ui/albumcoverchoicecontroller.cpp:92
 msgid "Load cover from disk"
-msgstr ""
+msgstr "Cover aus Datei laden"
 
 #: ui/albumcoverchoicecontroller.cpp:58
 msgid "Load cover from disk..."
@@ -3408,7 +3412,7 @@ msgstr "Spotify-Suche (öffnet im neuen Tab)"
 
 #: ui_globalsearchwidget.h:61
 msgid "Search around all your sources (library, internet services, ...)"
-msgstr ""
+msgstr "Alle Quellen durchsuchen (Sammlung, Internetdienste, …)"
 
 #: ui/albumcoverchoicecontroller.cpp:61
 msgid "Search for album covers..."
@@ -3549,7 +3553,7 @@ msgstr "Clementine-OSD benutzen"
 
 #: ui_globalsearchsettingspage.h:176
 msgid "Show a tooltip with more information about each result"
-msgstr ""
+msgstr "Tooltip mit weiteren Informationen über einzelne Ergebnisse zeigen"
 
 #: widgets/nowplayingwidget.cpp:113
 msgid "Show above status bar"
@@ -4224,7 +4228,7 @@ msgstr "Belegt"
 #: internet/groovesharkservice.cpp:389
 #, qt-format
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
-msgstr ""
+msgstr "Der Benutzer %1 besitzt kein Grooveshark-Anywhere-Konto."
 
 #: ui/settingsdialog.cpp:128
 msgid "User interface"
@@ -4423,6 +4427,8 @@ msgid ""
 "You can listen for free without an account, but Premium members can listen "
 "to higher quality streams without advertisements."
 msgstr ""
+"Das Zuhören ist kostenlos ohne Anmeldung möglich, aber Premium-Mitglieder "
+"haben Zugriff auf werbefreie Streams mit höherer Audioqualität."
 
 #: internet/magnatunesettingspage.cpp:53
 msgid ""
@@ -4602,7 +4608,7 @@ msgstr "enthält nicht"
 
 #: globalsearch/globalsearchwidget.cpp:740
 msgid "e.g."
-msgstr ""
+msgstr "z.B."
 
 #: smartplaylists/searchterm.cpp:215
 msgid "ends with"
