@@ -253,6 +253,20 @@ NSObject* GetPropertyForDevice(io_object_t device, CFStringRef key) {
   return nil;
 }
 
+int GetUSBDeviceClass(io_object_t device) {
+  CFTypeRef interface_class = IORegistryEntrySearchCFProperty(
+      device,
+      kIOServicePlane,
+      CFSTR(kUSBInterfaceClass),
+      kCFAllocatorDefault,
+      kIORegistryIterateRecursively);
+  NSNumber* number = (NSNumber*)interface_class;
+  if (number) {
+    return [number unsignedShortValue];
+  }
+  return 0;
+}
+
 QString GetIconForDevice(io_object_t device) {
   NSDictionary* media_icon = (NSDictionary*)GetPropertyForDevice(device, CFSTR("IOMediaIcon"));
   if (media_icon) {
@@ -460,6 +474,9 @@ void MacDeviceLister::USBDeviceAddedCallback(void* refcon, io_iterator_t it) {
       NSString* product = (NSString*)GetPropertyForDevice(object, CFSTR(kUSBProductString));
       NSNumber* vendor_id = (NSNumber*)GetPropertyForDevice(object, CFSTR(kUSBVendorID));
       NSNumber* product_id = (NSNumber*)GetPropertyForDevice(object, CFSTR(kUSBProductID));
+      int interface_class = GetUSBDeviceClass(object);
+      qLog(Debug) << "Interface class:" << interface_class;
+
       QString serial = GetSerialForMTPDevice(object);
 
       MTPDevice device;
@@ -472,11 +489,14 @@ void MacDeviceLister::USBDeviceAddedCallback(void* refcon, io_iterator_t it) {
       device.bus = -1;
       device.address = -1;
 
-      if (device.vendor_id == 0x5ac || // I think we can safely skip Apple products.
+      if (device.vendor_id == kAppleVendorID || // I think we can safely skip Apple products.
           // Blacklist ilok2 as this probe may be breaking it.
           (device.vendor_id == 0x088e && device.product_id == 0x5036) ||
           // Blacklist eLicenser
-          (device.vendor_id == 0x0819 && device.product_id == 0x0101)) {
+          (device.vendor_id == 0x0819 && device.product_id == 0x0101) ||
+          // Skip HID devices and hubs.
+          interface_class == kUSBHIDInterfaceClass ||
+          interface_class == kUSBHubClass) {
         continue;
       }
 
@@ -656,9 +676,8 @@ QString MacDeviceLister::MakeFriendlyName(const QString& serial) {
 
   if (IsCDDevice(serial)) {
     NSDictionary* properties = (NSDictionary*)DADiskCopyDescription(disk);
-    NSLog(@"%@", properties);
-
-    NSString* device_name = (NSString*)[properties objectForKey:(NSString*)kDADiskDescriptionMediaNameKey];
+    NSString* device_name = (NSString*)[properties objectForKey:
+        (NSString*)kDADiskDescriptionMediaNameKey];
 
     CFRelease(disk);
     CFRelease(session);
