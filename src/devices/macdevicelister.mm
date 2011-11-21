@@ -262,7 +262,9 @@ int GetUSBDeviceClass(io_object_t device) {
       kIORegistryIterateRecursively);
   NSNumber* number = (NSNumber*)interface_class;
   if (number) {
-    return [number unsignedShortValue];
+    int ret = [number unsignedShortValue];
+    CFRelease(interface_class);
+    return ret;
   }
   return 0;
 }
