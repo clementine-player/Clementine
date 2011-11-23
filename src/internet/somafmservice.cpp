@@ -81,7 +81,7 @@ void SomaFMService::ShowContextMenu(const QModelIndex& index, const QPoint& glob
   if (!context_menu_) {
     context_menu_ = new QMenu;
     context_menu_->addActions(GetPlaylistActions());
-    context_menu_->addAction(IconLoader::Load("download"), tr("Open somafm.com in browser"), this, SLOT(Homepage()));
+    context_menu_->addAction(IconLoader::Load("download"), tr("Open %1 in browser").arg("somafm.com"), this, SLOT(Homepage()));
     context_menu_->addAction(IconLoader::Load("view-refresh"), tr("Refresh channels"), this, SLOT(RefreshStreams()));
   }
 

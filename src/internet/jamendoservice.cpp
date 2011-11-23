@@ -411,7 +411,7 @@ void JamendoService::EnsureMenuCreated() {
   download_album_ = context_menu_->addAction(IconLoader::Load("download"),
       tr("Download this album..."), this, SLOT(DownloadAlbum()));
   context_menu_->addSeparator();
-  context_menu_->addAction(IconLoader::Load("download"), tr("Open jamendo.com in browser"), this, SLOT(Homepage()));
+  context_menu_->addAction(IconLoader::Load("download"), tr("Open %1 in browser").arg("jamendo.com"), this, SLOT(Homepage()));
   context_menu_->addAction(IconLoader::Load("view-refresh"), tr("Refresh catalogue"), this, SLOT(DownloadDirectory()));
 
   if (accepted_download_) {
