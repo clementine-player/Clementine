@@ -80,6 +80,21 @@ void TaskManager::SetTaskProgress(int id, int progress, int max) {
   emit TasksChanged();
 }
 
+void TaskManager::IncreaseTaskProgress(int id, int progress, int max) {
+  {
+    QMutexLocker l(&mutex_);
+    if (!tasks_.contains(id))
+      return;
+
+    Task& t = tasks_[id];
+    t.progress += progress;
+    if (max)
+      t.progress_max = max;
+  }
+
+  emit TasksChanged();
+}
+
 void TaskManager::SetTaskFinished(int id) {
   bool resume_library_watchers = false;
 
@@ -104,4 +119,13 @@ void TaskManager::SetTaskFinished(int id) {
   emit TasksChanged();
   if (resume_library_watchers)
     emit ResumeLibraryWatchers();
+}
+
+int TaskManager::GetTaskProgress(int id) {
+  {
+    QMutexLocker l(&mutex_);
+    if (!tasks_.contains(id))
+      return 0;
+    return tasks_[id].progress;
+  }
 }

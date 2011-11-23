@@ -78,6 +78,7 @@ class GroovesharkService : public InternetService {
   bool IsLoggedIn() const { return !session_id_.isEmpty(); }
   void RetrieveUserPlaylists();
   void RetrieveUserFavorites();
+  void RetrievePopularSongs();
   void RetrievePopularSongsMonth();
   void RetrievePopularSongsToday();
   void SetPlaylistSongs(int playlist_id, const QList<int>& songs_ids);
@@ -138,23 +139,23 @@ class GroovesharkService : public InternetService {
   void GetAlbumSongsFinished(QNetworkReply* reply, int id);
   void Authenticated();
   void UserPlaylistsRetrieved();
-  void UserFavoritesRetrieved();
+  void UserFavoritesRetrieved(QNetworkReply* reply, int task_id);
   void PopularSongsMonthRetrieved(QNetworkReply* reply);
   void PopularSongsTodayRetrieved(QNetworkReply* reply);
   void PlaylistSongsRetrieved();
-  void PlaylistSongsSet(QNetworkReply* reply, int playlist_id);
+  void PlaylistSongsSet(QNetworkReply* reply, int playlist_id, int task_id);
   void CreateNewPlaylist();
   void NewPlaylistCreated(QNetworkReply* reply, const QString& name);
   void DeleteCurrentPlaylist();
   void PlaylistDeleted(QNetworkReply* reply, int playlist_id);
   void AddCurrentSongToUserFavorites() { AddUserFavoriteSong(current_song_id_); }
   void AddCurrentSongToPlaylist(QAction* action);
-  void UserFavoriteSongAdded(QNetworkReply* reply);
+  void UserFavoriteSongAdded(QNetworkReply* reply, int task_id);
   void GetCurrentSongUrlToShare();
   void SongUrlToShareReceived(QNetworkReply* reply);
   void RemoveCurrentFromPlaylist();
   void RemoveCurrentFromFavorites();
-  void SongRemovedFromFavorites(QNetworkReply* reply);
+  void SongRemovedFromFavorites(QNetworkReply* reply, int task_id);
   void StreamMarked();
   void SongMarkedAsComplete();
 
@@ -229,6 +230,12 @@ class GroovesharkService : public InternetService {
   QByteArray api_key_;
 
   LoginState login_state_;
+
+  // Tasks' ids: we need to keep them in mind to be able to update task status
+  // on each step
+  int task_popular_id_;
+  int task_playlists_id_;
+  int task_search_id_;
 
   static const char* kUrl;
   static const char* kUrlCover;
