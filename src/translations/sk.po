@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2011-11-19 20:41+0000\n"
+"PO-Revision-Date: 2011-11-23 08:04+0000\n"
 "Last-Translator: dagsoftware <dagsoftware@yahoo.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -431,11 +431,11 @@ msgstr "Pridať tag roka piesne"
 msgid "Add stream..."
 msgstr "Pridať stream..."
 
-#: internet/groovesharkservice.cpp:802
+#: internet/groovesharkservice.cpp:833
 msgid "Add to Grooveshark favorites"
 msgstr "Pridať k obľúbeným na Grooveshark"
 
-#: internet/groovesharkservice.cpp:808
+#: internet/groovesharkservice.cpp:839
 msgid "Add to Grooveshark playlists"
 msgstr "Pridať do Grooveshark playlistov"
 
@@ -478,6 +478,10 @@ msgstr "Pridané dnes"
 #: ui_libraryfilterwidget.h:118 ui_libraryfilterwidget.h:120
 msgid "Added within three months"
 msgstr "Pridané posledný štvrťrok"
+
+#: internet/groovesharkservice.cpp:1031
+msgid "Adding song to favorites"
+msgstr "Pridať pieseň k obľúbeným"
 
 #: ui_libraryfilterwidget.h:130
 msgid "Advanced grouping..."
@@ -632,7 +636,7 @@ msgstr "Použiť kompresiu na zabránenie odrezávania"
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "Ste si istý, že chcete vymazať predvoľbu \"%1\"?"
 
-#: internet/groovesharkservice.cpp:968
+#: internet/groovesharkservice.cpp:1003
 msgid "Are you sure you want to delete this playlist?"
 msgstr "Ste si istí, že chcete zmazať tento playlist?"
 
@@ -998,7 +1002,7 @@ msgstr "Vyplniť tagy automaticky..."
 msgid "Composer"
 msgstr "Skladateľ"
 
-#: internet/groovesharkservice.cpp:481
+#: internet/groovesharkservice.cpp:490
 msgid "Configure Grooveshark..."
 msgstr "Nastaviť Grooveshark ..."
 
@@ -1051,7 +1055,7 @@ msgstr "Konvertovať všetku hudbu"
 msgid "Convert any music that the device can't play"
 msgstr "Konvertovať hudbu ktorú zariadenie nemôže prehrať"
 
-#: internet/groovesharkservice.cpp:855
+#: internet/groovesharkservice.cpp:886
 msgid "Copy to clipboard"
 msgstr "Kopírovať do schránky"
 
@@ -1136,7 +1140,7 @@ msgstr "Obal nastavený z %1"
 msgid "Covers from %1"
 msgstr "Obaly z %1"
 
-#: internet/groovesharkservice.cpp:466 internet/groovesharkservice.cpp:920
+#: internet/groovesharkservice.cpp:475 internet/groovesharkservice.cpp:955
 msgid "Create a new Grooveshark playlist"
 msgstr "Vytvoriť nový playlist Grooveshark"
 
@@ -1276,7 +1280,7 @@ msgstr "Predvolené"
 msgid "Delay between visualizations"
 msgstr "Oneskorenie medzi vizualizáciami"
 
-#: internet/groovesharkservice.cpp:469 internet/groovesharkservice.cpp:967
+#: internet/groovesharkservice.cpp:478 internet/groovesharkservice.cpp:1002
 msgid "Delete Grooveshark playlist"
 msgstr "Vymazať Grooveshark playlist"
 
@@ -1708,7 +1712,7 @@ msgstr "Trvanie zoslabovania"
 msgid "Fast"
 msgstr "Rýchla"
 
-#: internet/groovesharkservice.cpp:508
+#: internet/groovesharkservice.cpp:517
 msgid "Favorites"
 msgstr "Obľúbené"
 
@@ -1886,9 +1890,13 @@ msgstr "Všeobecné nastavenia"
 msgid "Genre"
 msgstr "Žáner"
 
-#: internet/groovesharkservice.cpp:819
+#: internet/groovesharkservice.cpp:850
 msgid "Get an URL to share this Grooveshark song"
 msgstr "Získať URL adresu na zdieľanie tejto Grooveshark piesne"
+
+#: internet/groovesharkservice.cpp:660
+msgid "Getting Grooveshark popular songs"
+msgstr "Získavajú sa populárne piesne z Grooveshark"
 
 #: internet/somafmservice.cpp:94
 msgid "Getting channels"
@@ -1932,11 +1940,11 @@ msgstr "Zošednúť neexistujúce piesne v playlistoch"
 msgid "Grooveshark"
 msgstr "Grooveshark"
 
-#: internet/groovesharkservice.cpp:393
+#: internet/groovesharkservice.cpp:402
 msgid "Grooveshark login error"
 msgstr "Chyba pri prihlásení na Grooveshark"
 
-#: internet/groovesharkservice.cpp:851
+#: internet/groovesharkservice.cpp:882
 msgid "Grooveshark song's URL"
 msgstr "URL adresa Grooveshark piesne "
 
@@ -2138,7 +2146,7 @@ msgstr "Nefunkčná služba"
 msgid "Invalid session key"
 msgstr "Neplatný kľúč sedenia"
 
-#: internet/groovesharkservice.cpp:386
+#: internet/groovesharkservice.cpp:395
 msgid "Invalid username and/or password"
 msgstr "Neplatné meno používateľa a/alebo heslo"
 
@@ -2606,7 +2614,7 @@ msgstr "Moja rádio stanica"
 msgid "My Recommendations"
 msgstr "Moje odporúčania"
 
-#: internet/groovesharkservice.cpp:921 ui/equalizer.cpp:172
+#: internet/groovesharkservice.cpp:956 ui/equalizer.cpp:172
 #: ui_deviceproperties.h:369 ui_magnatunedownloaddialog.h:135
 #: ui_wizardfinishpage.h:84 ui_globalshortcutssettingspage.h:174
 msgid "Name"
@@ -2986,11 +2994,11 @@ msgstr "Stav pluginu:"
 msgid "Pop"
 msgstr "Pop"
 
-#: internet/groovesharkservice.cpp:494
+#: internet/groovesharkservice.cpp:503
 msgid "Popular songs of the Month"
 msgstr "Populárne piesne tohto mesiaca"
 
-#: internet/groovesharkservice.cpp:501
+#: internet/groovesharkservice.cpp:510
 msgid "Popular songs today"
 msgstr "Populárne piesne dneška"
 
@@ -3202,17 +3210,21 @@ msgstr "Odstrániť akciu"
 msgid "Remove folder"
 msgstr "Odstrániť priečinok"
 
-#: internet/groovesharkservice.cpp:476
+#: internet/groovesharkservice.cpp:485
 msgid "Remove from favorites"
 msgstr "Odstrániť z obľúbených"
 
-#: internet/groovesharkservice.cpp:473 ui_mainwindow.h:674
+#: internet/groovesharkservice.cpp:482 ui_mainwindow.h:674
 msgid "Remove from playlist"
 msgstr "Odstrániť z playlistu"
 
 #: playlist/playlisttabbar.cpp:48 playlist/playlisttabbar.cpp:158
 msgid "Remove playlist"
 msgstr "Odstrániť playlist"
+
+#: internet/groovesharkservice.cpp:1089
+msgid "Removing song from favorites"
+msgstr "Odstrániť pieseň z obľúbených"
 
 #: playlist/playlisttabbar.cpp:131
 msgid "Rename playlist"
@@ -3288,6 +3300,14 @@ msgstr "Obmedziť na ASCII písmená"
 msgid "Results"
 msgstr "Výsledky"
 
+#: internet/groovesharkservice.cpp:631
+msgid "Retrieving Grooveshark favorites songs"
+msgstr "Získavanie populárnych piesní z Grooveshark"
+
+#: internet/groovesharkservice.cpp:553
+msgid "Retrieving Grooveshark playlists"
+msgstr "Získavajú sa Grooveshark playlisty"
+
 #: ui/equalizer.cpp:121
 msgid "Rock"
 msgstr "Rock"
@@ -3361,11 +3381,11 @@ msgid "Search"
 msgstr "Hľadať"
 
 #: internet/groovesharksearchplaylisttype.cpp:32
-#: internet/groovesharkservice.cpp:737
+#: internet/groovesharkservice.cpp:768
 msgid "Search Grooveshark"
 msgstr "Hľadať na Grooveshark"
 
-#: internet/groovesharkservice.cpp:479 internet/groovesharkservice.cpp:488
+#: internet/groovesharkservice.cpp:488 internet/groovesharkservice.cpp:497
 msgid "Search Grooveshark (opens a new tab)"
 msgstr "Hľadať na Grooveshark (otvorí novú kartu)"
 
@@ -3417,6 +3437,10 @@ msgstr "Možnosti hľadania"
 #: smartplaylists/querywizardplugin.cpp:144 ui_querysearchpage.h:78
 msgid "Search terms"
 msgstr "Výrazy na hľadanie"
+
+#: internet/groovesharkservice.cpp:262
+msgid "Searching on Grooveshark"
+msgstr "Hľadanie na Grooveshak"
 
 #: ui_groupbydialog.h:138
 msgid "Second level"
@@ -4131,6 +4155,10 @@ msgstr "Neznáma chyba"
 msgid "Unset cover"
 msgstr "Nenastavený obal"
 
+#: internet/groovesharkservice.cpp:910
+msgid "Update Grooveshark playlist"
+msgstr "Aktualizovať Grooveshark playlist"
+
 #: ui_mainwindow.h:688
 msgid "Update changed library folders"
 msgstr "Aktualizovať zmenené priečinky v zbierke"
@@ -4205,7 +4233,7 @@ msgstr "Použiť systémové nastavenia proxy"
 msgid "Used"
 msgstr "Použitých"
 
-#: internet/groovesharkservice.cpp:389
+#: internet/groovesharkservice.cpp:398
 #, qt-format
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr "Používateľ %1 nemá Grooveshark Anywhere účet"

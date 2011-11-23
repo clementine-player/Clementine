@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2011-11-19 19:42+0000\n"
+"PO-Revision-Date: 2011-11-23 00:38+0000\n"
 "Last-Translator: clementinebuildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -432,11 +432,11 @@ msgstr ""
 msgid "Add stream..."
 msgstr "Pievienot straumi..."
 
-#: internet/groovesharkservice.cpp:802
+#: internet/groovesharkservice.cpp:833
 msgid "Add to Grooveshark favorites"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:808
+#: internet/groovesharkservice.cpp:839
 msgid "Add to Grooveshark playlists"
 msgstr ""
 
@@ -479,6 +479,10 @@ msgstr "Pievienots šodien"
 #: ui_libraryfilterwidget.h:118 ui_libraryfilterwidget.h:120
 msgid "Added within three months"
 msgstr "Pievienots pēdējos 3 mēnešos"
+
+#: internet/groovesharkservice.cpp:1031
+msgid "Adding song to favorites"
+msgstr ""
 
 #: ui_libraryfilterwidget.h:130
 msgid "Advanced grouping..."
@@ -633,7 +637,7 @@ msgstr "Saspiest, lai izvairītos no izgriešanas"
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "Vai esat pārliecināts, ka vēlaties izdzēst \"%1\"?"
 
-#: internet/groovesharkservice.cpp:968
+#: internet/groovesharkservice.cpp:1003
 msgid "Are you sure you want to delete this playlist?"
 msgstr ""
 
@@ -999,7 +1003,7 @@ msgstr "Noformēt tagus automātiski..."
 msgid "Composer"
 msgstr "Komponists"
 
-#: internet/groovesharkservice.cpp:481
+#: internet/groovesharkservice.cpp:490
 msgid "Configure Grooveshark..."
 msgstr ""
 
@@ -1052,7 +1056,7 @@ msgstr "Konvertēt visu mūziku"
 msgid "Convert any music that the device can't play"
 msgstr "Konvertēt mūziku, ko ierīce nespēj atskaņot"
 
-#: internet/groovesharkservice.cpp:855
+#: internet/groovesharkservice.cpp:886
 msgid "Copy to clipboard"
 msgstr ""
 
@@ -1137,7 +1141,7 @@ msgstr "Vāka attēls uzstādīts no %1"
 msgid "Covers from %1"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:466 internet/groovesharkservice.cpp:920
+#: internet/groovesharkservice.cpp:475 internet/groovesharkservice.cpp:955
 msgid "Create a new Grooveshark playlist"
 msgstr ""
 
@@ -1277,7 +1281,7 @@ msgstr "Noklusētie"
 msgid "Delay between visualizations"
 msgstr "Aizture starp vizualizācijām"
 
-#: internet/groovesharkservice.cpp:469 internet/groovesharkservice.cpp:967
+#: internet/groovesharkservice.cpp:478 internet/groovesharkservice.cpp:1002
 msgid "Delete Grooveshark playlist"
 msgstr ""
 
@@ -1706,7 +1710,7 @@ msgstr "Pārejas garums"
 msgid "Fast"
 msgstr "Ātri"
 
-#: internet/groovesharkservice.cpp:508
+#: internet/groovesharkservice.cpp:517
 msgid "Favorites"
 msgstr ""
 
@@ -1882,8 +1886,12 @@ msgstr "Pamata iestatījumi"
 msgid "Genre"
 msgstr "Žanrs"
 
-#: internet/groovesharkservice.cpp:819
+#: internet/groovesharkservice.cpp:850
 msgid "Get an URL to share this Grooveshark song"
+msgstr ""
+
+#: internet/groovesharkservice.cpp:660
+msgid "Getting Grooveshark popular songs"
 msgstr ""
 
 #: internet/somafmservice.cpp:94
@@ -1928,11 +1936,11 @@ msgstr "Padarīt pelēkas neeksistējošās dziesmas manās dziesmu listēs"
 msgid "Grooveshark"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:393
+#: internet/groovesharkservice.cpp:402
 msgid "Grooveshark login error"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:851
+#: internet/groovesharkservice.cpp:882
 msgid "Grooveshark song's URL"
 msgstr ""
 
@@ -2131,7 +2139,7 @@ msgstr "Nepareizs serviss"
 msgid "Invalid session key"
 msgstr "Nepareiza sesijas atslēga"
 
-#: internet/groovesharkservice.cpp:386
+#: internet/groovesharkservice.cpp:395
 msgid "Invalid username and/or password"
 msgstr ""
 
@@ -2600,7 +2608,7 @@ msgstr "Mana radio stacija"
 msgid "My Recommendations"
 msgstr "Mani ieteikumi"
 
-#: internet/groovesharkservice.cpp:921 ui/equalizer.cpp:172
+#: internet/groovesharkservice.cpp:956 ui/equalizer.cpp:172
 #: ui_deviceproperties.h:369 ui_magnatunedownloaddialog.h:135
 #: ui_wizardfinishpage.h:84 ui_globalshortcutssettingspage.h:174
 msgid "Name"
@@ -2979,11 +2987,11 @@ msgstr "Spraudņa statuss:"
 msgid "Pop"
 msgstr "Popmūzika"
 
-#: internet/groovesharkservice.cpp:494
+#: internet/groovesharkservice.cpp:503
 msgid "Popular songs of the Month"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:501
+#: internet/groovesharkservice.cpp:510
 msgid "Popular songs today"
 msgstr ""
 
@@ -3195,17 +3203,21 @@ msgstr "Noņemt darbību"
 msgid "Remove folder"
 msgstr "Aizvākt mapi"
 
-#: internet/groovesharkservice.cpp:476
+#: internet/groovesharkservice.cpp:485
 msgid "Remove from favorites"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:473 ui_mainwindow.h:674
+#: internet/groovesharkservice.cpp:482 ui_mainwindow.h:674
 msgid "Remove from playlist"
 msgstr "Azivākt no dziesmu listes"
 
 #: playlist/playlisttabbar.cpp:48 playlist/playlisttabbar.cpp:158
 msgid "Remove playlist"
 msgstr "Aizvākt dziesmu listi"
+
+#: internet/groovesharkservice.cpp:1089
+msgid "Removing song from favorites"
+msgstr ""
 
 #: playlist/playlisttabbar.cpp:131
 msgid "Rename playlist"
@@ -3281,6 +3293,14 @@ msgstr "Atļaut tikai ASCII simbolus"
 msgid "Results"
 msgstr ""
 
+#: internet/groovesharkservice.cpp:631
+msgid "Retrieving Grooveshark favorites songs"
+msgstr ""
+
+#: internet/groovesharkservice.cpp:553
+msgid "Retrieving Grooveshark playlists"
+msgstr ""
+
 #: ui/equalizer.cpp:121
 msgid "Rock"
 msgstr "Roks"
@@ -3354,11 +3374,11 @@ msgid "Search"
 msgstr "Meklēt"
 
 #: internet/groovesharksearchplaylisttype.cpp:32
-#: internet/groovesharkservice.cpp:737
+#: internet/groovesharkservice.cpp:768
 msgid "Search Grooveshark"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:479 internet/groovesharkservice.cpp:488
+#: internet/groovesharkservice.cpp:488 internet/groovesharkservice.cpp:497
 msgid "Search Grooveshark (opens a new tab)"
 msgstr ""
 
@@ -3409,6 +3429,10 @@ msgstr "Meklēšanas opcijas"
 #: smartplaylists/querywizardplugin.cpp:144 ui_querysearchpage.h:78
 msgid "Search terms"
 msgstr "Meklēšanas nosacījumi"
+
+#: internet/groovesharkservice.cpp:262
+msgid "Searching on Grooveshark"
+msgstr ""
 
 #: ui_groupbydialog.h:138
 msgid "Second level"
@@ -4112,6 +4136,10 @@ msgstr "Nezināma kļūda"
 msgid "Unset cover"
 msgstr "Noņemt vāka attēlu"
 
+#: internet/groovesharkservice.cpp:910
+msgid "Update Grooveshark playlist"
+msgstr ""
+
 #: ui_mainwindow.h:688
 msgid "Update changed library folders"
 msgstr "Atjaunot mainītās bibliotēkas mapes"
@@ -4186,7 +4214,7 @@ msgstr "Lietot sistēmas starpniekservera uzstādījumus"
 msgid "Used"
 msgstr "Izmantots"
 
-#: internet/groovesharkservice.cpp:389
+#: internet/groovesharkservice.cpp:398
 #, qt-format
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr ""

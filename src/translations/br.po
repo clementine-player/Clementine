@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2011-11-19 19:42+0000\n"
+"PO-Revision-Date: 2011-11-23 00:38+0000\n"
 "Last-Translator: clementinebuildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -432,11 +432,11 @@ msgstr "Ouzhpennañ tag bloavezh an ton"
 msgid "Add stream..."
 msgstr "Ouzhpennan ul lanv..."
 
-#: internet/groovesharkservice.cpp:802
+#: internet/groovesharkservice.cpp:833
 msgid "Add to Grooveshark favorites"
 msgstr "Ouzhpennañ da tonioù gwellañ Grooveshark"
 
-#: internet/groovesharkservice.cpp:808
+#: internet/groovesharkservice.cpp:839
 msgid "Add to Grooveshark playlists"
 msgstr "Ouzhpennañ da rollioù c'hoari Grooveshark"
 
@@ -479,6 +479,10 @@ msgstr "Ouzhpennet hiziv"
 #: ui_libraryfilterwidget.h:118 ui_libraryfilterwidget.h:120
 msgid "Added within three months"
 msgstr "Ouzhpennet e-kerzh an tri miz diwezhañ"
+
+#: internet/groovesharkservice.cpp:1031
+msgid "Adding song to favorites"
+msgstr ""
 
 #: ui_libraryfilterwidget.h:130
 msgid "Advanced grouping..."
@@ -635,7 +639,7 @@ msgstr "Koazhañ a-benn pareañ an troc'hadennoù"
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "Ha sur oc'h da gaout c'hoant skarzhan an talvoud raktermenet « %1 »"
 
-#: internet/groovesharkservice.cpp:968
+#: internet/groovesharkservice.cpp:1003
 msgid "Are you sure you want to delete this playlist?"
 msgstr "Ha sur oc'h ho peus c'hoant diverkañ ar roll c'hoari ?"
 
@@ -1004,7 +1008,7 @@ msgstr "Leuniañ an tagoù ez aotomatikel..."
 msgid "Composer"
 msgstr "Aozer"
 
-#: internet/groovesharkservice.cpp:481
+#: internet/groovesharkservice.cpp:490
 msgid "Configure Grooveshark..."
 msgstr "Kefluniañ Grooveshark"
 
@@ -1057,7 +1061,7 @@ msgstr "Treuzkemm an holl sonerezh"
 msgid "Convert any music that the device can't play"
 msgstr "Treuzkemm ar sonerezh ne c'hell ket an drobarzhell lenn"
 
-#: internet/groovesharkservice.cpp:855
+#: internet/groovesharkservice.cpp:886
 msgid "Copy to clipboard"
 msgstr "Kopiañ d'ar golver"
 
@@ -1142,7 +1146,7 @@ msgstr "Golo diuzet adalek %1"
 msgid "Covers from %1"
 msgstr "Goloioù adalek %1"
 
-#: internet/groovesharkservice.cpp:466 internet/groovesharkservice.cpp:920
+#: internet/groovesharkservice.cpp:475 internet/groovesharkservice.cpp:955
 msgid "Create a new Grooveshark playlist"
 msgstr "Krouiñ ur roll c'hoari Grooveshak nevez"
 
@@ -1282,7 +1286,7 @@ msgstr "Dre ziouer"
 msgid "Delay between visualizations"
 msgstr "Amzer etre ar gweladennoù"
 
-#: internet/groovesharkservice.cpp:469 internet/groovesharkservice.cpp:967
+#: internet/groovesharkservice.cpp:478 internet/groovesharkservice.cpp:1002
 msgid "Delete Grooveshark playlist"
 msgstr "Diverkañ ur roll c'hoari Grooveshark"
 
@@ -1714,7 +1718,7 @@ msgstr "Padelezh an arveuz"
 msgid "Fast"
 msgstr "Trumm"
 
-#: internet/groovesharkservice.cpp:508
+#: internet/groovesharkservice.cpp:517
 msgid "Favorites"
 msgstr "Gwellañ"
 
@@ -1893,9 +1897,13 @@ msgstr "Kefluniadur hollek"
 msgid "Genre"
 msgstr "Doare"
 
-#: internet/groovesharkservice.cpp:819
+#: internet/groovesharkservice.cpp:850
 msgid "Get an URL to share this Grooveshark song"
 msgstr "Kaout an URL evit rannañ ar gannaouenn Grooveshark-mañ."
+
+#: internet/groovesharkservice.cpp:660
+msgid "Getting Grooveshark popular songs"
+msgstr ""
 
 #: internet/somafmservice.cpp:94
 msgid "Getting channels"
@@ -1939,11 +1947,11 @@ msgstr "Grisaat an tonioù n'int ket mui em roll c'hoari"
 msgid "Grooveshark"
 msgstr "Grooveshark"
 
-#: internet/groovesharkservice.cpp:393
+#: internet/groovesharkservice.cpp:402
 msgid "Grooveshark login error"
 msgstr "Kudenn kennaskañ gant Grooveshark"
 
-#: internet/groovesharkservice.cpp:851
+#: internet/groovesharkservice.cpp:882
 msgid "Grooveshark song's URL"
 msgstr "URL ar ganaouenn Grooveshark"
 
@@ -2148,7 +2156,7 @@ msgstr "Servij direizh"
 msgid "Invalid session key"
 msgstr "Kudenn gant alc'hwez an dalc'h"
 
-#: internet/groovesharkservice.cpp:386
+#: internet/groovesharkservice.cpp:395
 msgid "Invalid username and/or password"
 msgstr "Kudenn gant an anv implijer pe an tremenger"
 
@@ -2617,7 +2625,7 @@ msgstr "Ma savlec'h radio"
 msgid "My Recommendations"
 msgstr "Ma erbedadennoù"
 
-#: internet/groovesharkservice.cpp:921 ui/equalizer.cpp:172
+#: internet/groovesharkservice.cpp:956 ui/equalizer.cpp:172
 #: ui_deviceproperties.h:369 ui_magnatunedownloaddialog.h:135
 #: ui_wizardfinishpage.h:84 ui_globalshortcutssettingspage.h:174
 msgid "Name"
@@ -2998,11 +3006,11 @@ msgstr "Stad an enlugellad"
 msgid "Pop"
 msgstr "Pop"
 
-#: internet/groovesharkservice.cpp:494
+#: internet/groovesharkservice.cpp:503
 msgid "Popular songs of the Month"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:501
+#: internet/groovesharkservice.cpp:510
 msgid "Popular songs today"
 msgstr ""
 
@@ -3214,17 +3222,21 @@ msgstr "Diverkañ an oberadenn"
 msgid "Remove folder"
 msgstr "Diverkañ an doser"
 
-#: internet/groovesharkservice.cpp:476
+#: internet/groovesharkservice.cpp:485
 msgid "Remove from favorites"
 msgstr "Skarzhañ eus an tonioù gwellañ"
 
-#: internet/groovesharkservice.cpp:473 ui_mainwindow.h:674
+#: internet/groovesharkservice.cpp:482 ui_mainwindow.h:674
 msgid "Remove from playlist"
 msgstr "Tennañ kuit eus ar roll c'hoari"
 
 #: playlist/playlisttabbar.cpp:48 playlist/playlisttabbar.cpp:158
 msgid "Remove playlist"
 msgstr "Tennañ kuit ar roll c'hoari"
+
+#: internet/groovesharkservice.cpp:1089
+msgid "Removing song from favorites"
+msgstr ""
 
 #: playlist/playlisttabbar.cpp:131
 msgid "Rename playlist"
@@ -3300,6 +3312,14 @@ msgstr "Bevenniñ d'an arouezennoù ASCII"
 msgid "Results"
 msgstr "Disoc'hoù"
 
+#: internet/groovesharkservice.cpp:631
+msgid "Retrieving Grooveshark favorites songs"
+msgstr ""
+
+#: internet/groovesharkservice.cpp:553
+msgid "Retrieving Grooveshark playlists"
+msgstr ""
+
 #: ui/equalizer.cpp:121
 msgid "Rock"
 msgstr "Rock"
@@ -3373,11 +3393,11 @@ msgid "Search"
 msgstr "Klask"
 
 #: internet/groovesharksearchplaylisttype.cpp:32
-#: internet/groovesharkservice.cpp:737
+#: internet/groovesharkservice.cpp:768
 msgid "Search Grooveshark"
 msgstr "Klask war Grooveshark"
 
-#: internet/groovesharkservice.cpp:479 internet/groovesharkservice.cpp:488
+#: internet/groovesharkservice.cpp:488 internet/groovesharkservice.cpp:497
 msgid "Search Grooveshark (opens a new tab)"
 msgstr "Klask war Grooveshark (digeriñ un ivinell nevez)"
 
@@ -3428,6 +3448,10 @@ msgstr "Dibarzhioù klask"
 #: smartplaylists/querywizardplugin.cpp:144 ui_querysearchpage.h:78
 msgid "Search terms"
 msgstr "Gerioù enklask"
+
+#: internet/groovesharkservice.cpp:262
+msgid "Searching on Grooveshark"
+msgstr ""
 
 #: ui_groupbydialog.h:138
 msgid "Second level"
@@ -4141,6 +4165,10 @@ msgstr "Kudenn dianav"
 msgid "Unset cover"
 msgstr "Ar golo n'eo ket bet lakaet"
 
+#: internet/groovesharkservice.cpp:910
+msgid "Update Grooveshark playlist"
+msgstr ""
+
 #: ui_mainwindow.h:688
 msgid "Update changed library folders"
 msgstr "Hizivaat doserioù al levraoueg"
@@ -4215,7 +4243,7 @@ msgstr "Implij dibarzhioù dre ziouer ar proksi"
 msgid "Used"
 msgstr "Implijet"
 
-#: internet/groovesharkservice.cpp:389
+#: internet/groovesharkservice.cpp:398
 #, qt-format
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr "An implijer %1 n'en deus kont Grooveshark ebet"

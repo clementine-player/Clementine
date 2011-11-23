@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2011-11-19 19:42+0000\n"
+"PO-Revision-Date: 2011-11-23 00:38+0000\n"
 "Last-Translator: clementinebuildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -435,11 +435,11 @@ msgstr "Afegeix l'etiqueta d'any a la cançó"
 msgid "Add stream..."
 msgstr "Afegir flux..."
 
-#: internet/groovesharkservice.cpp:802
+#: internet/groovesharkservice.cpp:833
 msgid "Add to Grooveshark favorites"
 msgstr "Afegir als favorits de Grooveshark"
 
-#: internet/groovesharkservice.cpp:808
+#: internet/groovesharkservice.cpp:839
 msgid "Add to Grooveshark playlists"
 msgstr ""
 
@@ -482,6 +482,10 @@ msgstr "Afegit avui"
 #: ui_libraryfilterwidget.h:118 ui_libraryfilterwidget.h:120
 msgid "Added within three months"
 msgstr "Afegit els ultims tres messos"
+
+#: internet/groovesharkservice.cpp:1031
+msgid "Adding song to favorites"
+msgstr ""
 
 #: ui_libraryfilterwidget.h:130
 msgid "Advanced grouping..."
@@ -638,7 +642,7 @@ msgstr "Afegir compressió per evitar el clipping"
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "Estas segur de que vols esborrar el \"%1\" preestablert?"
 
-#: internet/groovesharkservice.cpp:968
+#: internet/groovesharkservice.cpp:1003
 msgid "Are you sure you want to delete this playlist?"
 msgstr "Esteu segur que voleu eliminar aquesta llista de reproducció?"
 
@@ -1007,7 +1011,7 @@ msgstr ""
 msgid "Composer"
 msgstr "Compositor"
 
-#: internet/groovesharkservice.cpp:481
+#: internet/groovesharkservice.cpp:490
 msgid "Configure Grooveshark..."
 msgstr ""
 
@@ -1060,7 +1064,7 @@ msgstr "Converitr tota la música"
 msgid "Convert any music that the device can't play"
 msgstr "Convertir qualsevol música que el dispositiu no pugui reproduir"
 
-#: internet/groovesharkservice.cpp:855
+#: internet/groovesharkservice.cpp:886
 msgid "Copy to clipboard"
 msgstr "Copiar al porta-retalls"
 
@@ -1145,7 +1149,7 @@ msgstr ""
 msgid "Covers from %1"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:466 internet/groovesharkservice.cpp:920
+#: internet/groovesharkservice.cpp:475 internet/groovesharkservice.cpp:955
 msgid "Create a new Grooveshark playlist"
 msgstr "Crear una nova llista de reproducció de Grooveshark"
 
@@ -1285,7 +1289,7 @@ msgstr "Opcions per defecte"
 msgid "Delay between visualizations"
 msgstr "Retard entre visualitzacions"
 
-#: internet/groovesharkservice.cpp:469 internet/groovesharkservice.cpp:967
+#: internet/groovesharkservice.cpp:478 internet/groovesharkservice.cpp:1002
 msgid "Delete Grooveshark playlist"
 msgstr "Esborrar la llista de reproducció de Grooveshark"
 
@@ -1714,7 +1718,7 @@ msgstr "Durada de l'esvaïment"
 msgid "Fast"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:508
+#: internet/groovesharkservice.cpp:517
 msgid "Favorites"
 msgstr ""
 
@@ -1891,8 +1895,12 @@ msgstr "Arranjaments generals"
 msgid "Genre"
 msgstr "Gènere"
 
-#: internet/groovesharkservice.cpp:819
+#: internet/groovesharkservice.cpp:850
 msgid "Get an URL to share this Grooveshark song"
+msgstr ""
+
+#: internet/groovesharkservice.cpp:660
+msgid "Getting Grooveshark popular songs"
 msgstr ""
 
 #: internet/somafmservice.cpp:94
@@ -1937,11 +1945,11 @@ msgstr ""
 msgid "Grooveshark"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:393
+#: internet/groovesharkservice.cpp:402
 msgid "Grooveshark login error"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:851
+#: internet/groovesharkservice.cpp:882
 msgid "Grooveshark song's URL"
 msgstr ""
 
@@ -2138,7 +2146,7 @@ msgstr "Servei invàlid"
 msgid "Invalid session key"
 msgstr "Sessió no vàlida"
 
-#: internet/groovesharkservice.cpp:386
+#: internet/groovesharkservice.cpp:395
 msgid "Invalid username and/or password"
 msgstr ""
 
@@ -2608,7 +2616,7 @@ msgstr "La meva emissora de ràdio"
 msgid "My Recommendations"
 msgstr "Les meves recomanacions"
 
-#: internet/groovesharkservice.cpp:921 ui/equalizer.cpp:172
+#: internet/groovesharkservice.cpp:956 ui/equalizer.cpp:172
 #: ui_deviceproperties.h:369 ui_magnatunedownloaddialog.h:135
 #: ui_wizardfinishpage.h:84 ui_globalshortcutssettingspage.h:174
 msgid "Name"
@@ -2988,11 +2996,11 @@ msgstr ""
 msgid "Pop"
 msgstr "Pop"
 
-#: internet/groovesharkservice.cpp:494
+#: internet/groovesharkservice.cpp:503
 msgid "Popular songs of the Month"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:501
+#: internet/groovesharkservice.cpp:510
 msgid "Popular songs today"
 msgstr ""
 
@@ -3204,17 +3212,21 @@ msgstr "Elimina acció"
 msgid "Remove folder"
 msgstr "Suprimeix carpeta"
 
-#: internet/groovesharkservice.cpp:476
+#: internet/groovesharkservice.cpp:485
 msgid "Remove from favorites"
 msgstr "Esborreu dels favorits"
 
-#: internet/groovesharkservice.cpp:473 ui_mainwindow.h:674
+#: internet/groovesharkservice.cpp:482 ui_mainwindow.h:674
 msgid "Remove from playlist"
 msgstr "Suprimeix de la llista de reproducció"
 
 #: playlist/playlisttabbar.cpp:48 playlist/playlisttabbar.cpp:158
 msgid "Remove playlist"
 msgstr "Suprimeix la llista de reproducció"
+
+#: internet/groovesharkservice.cpp:1089
+msgid "Removing song from favorites"
+msgstr ""
 
 #: playlist/playlisttabbar.cpp:131
 msgid "Rename playlist"
@@ -3290,6 +3302,14 @@ msgstr "Limitar als caràcters ASCII"
 msgid "Results"
 msgstr "Resultats"
 
+#: internet/groovesharkservice.cpp:631
+msgid "Retrieving Grooveshark favorites songs"
+msgstr ""
+
+#: internet/groovesharkservice.cpp:553
+msgid "Retrieving Grooveshark playlists"
+msgstr ""
+
 #: ui/equalizer.cpp:121
 msgid "Rock"
 msgstr "Rock"
@@ -3363,11 +3383,11 @@ msgid "Search"
 msgstr "Cercar"
 
 #: internet/groovesharksearchplaylisttype.cpp:32
-#: internet/groovesharkservice.cpp:737
+#: internet/groovesharkservice.cpp:768
 msgid "Search Grooveshark"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:479 internet/groovesharkservice.cpp:488
+#: internet/groovesharkservice.cpp:488 internet/groovesharkservice.cpp:497
 msgid "Search Grooveshark (opens a new tab)"
 msgstr ""
 
@@ -3417,6 +3437,10 @@ msgstr ""
 
 #: smartplaylists/querywizardplugin.cpp:144 ui_querysearchpage.h:78
 msgid "Search terms"
+msgstr ""
+
+#: internet/groovesharkservice.cpp:262
+msgid "Searching on Grooveshark"
 msgstr ""
 
 #: ui_groupbydialog.h:138
@@ -4119,6 +4143,10 @@ msgstr "Error desconegut"
 msgid "Unset cover"
 msgstr ""
 
+#: internet/groovesharkservice.cpp:910
+msgid "Update Grooveshark playlist"
+msgstr ""
+
 #: ui_mainwindow.h:688
 msgid "Update changed library folders"
 msgstr ""
@@ -4193,7 +4221,7 @@ msgstr ""
 msgid "Used"
 msgstr "Usat"
 
-#: internet/groovesharkservice.cpp:389
+#: internet/groovesharkservice.cpp:398
 #, qt-format
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr ""
