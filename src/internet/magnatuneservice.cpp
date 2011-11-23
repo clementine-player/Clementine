@@ -268,7 +268,7 @@ void MagnatuneService::EnsureMenuCreated() {
   download_ = context_menu_->addAction(
       IconLoader::Load("download"), tr("Download this album"), this, SLOT(Download()));
   context_menu_->addSeparator();
-  context_menu_->addAction(IconLoader::Load("download"), tr("Open magnatune.com in browser"), this, SLOT(Homepage()));
+  context_menu_->addAction(IconLoader::Load("download"), tr("Open %1 in browser").arg("magnatune.com"), this, SLOT(Homepage()));
   context_menu_->addAction(IconLoader::Load("view-refresh"), tr("Refresh catalogue"), this, SLOT(ReloadDatabase()));
   QAction* config_action = context_menu_->addAction(IconLoader::Load("configure"), tr("Configure Magnatune..."), this, SLOT(ShowConfig()));
 
