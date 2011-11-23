@@ -21,6 +21,7 @@
 
 #include <QApplication>
 #include <QClipboard>
+#include <QDesktopServices>
 #include <QInputDialog>
 #include <QMenu>
 #include <QMessageBox>
@@ -66,6 +67,7 @@ const char* GroovesharkService::kServiceName = "Grooveshark";
 const char* GroovesharkService::kSettingsGroup = "Grooveshark";
 const char* GroovesharkService::kUrl = "http://api.grooveshark.com/ws/3.0/";
 const char* GroovesharkService::kUrlCover = "http://beta.grooveshark.com/static/amazonart/m";
+const char* GroovesharkService::kHomepage = "http://grooveshark.com/";
 
 const int GroovesharkService::kSearchDelayMsec = 400;
 const int GroovesharkService::kSongSearchLimit = 50;
@@ -488,7 +490,12 @@ void GroovesharkService::EnsureMenuCreated() {
     context_menu_->addAction(IconLoader::Load("edit-find"), tr("Search Grooveshark (opens a new tab)") + "...", this, SLOT(OpenSearchTab()));
     context_menu_->addSeparator();
     context_menu_->addAction(IconLoader::Load("configure"), tr("Configure Grooveshark..."), this, SLOT(ShowConfig()));
+    context_menu_->addAction(IconLoader::Load("download"), tr("Open %1 in browser").arg("grooveshark.com"), this, SLOT(Homepage()));
   }
+}
+
+void GroovesharkService::Homepage() {
+  QDesktopServices::openUrl(QUrl(kHomepage));
 }
 
 void GroovesharkService::EnsureItemsCreated() {

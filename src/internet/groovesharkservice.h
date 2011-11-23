@@ -159,6 +159,7 @@ class GroovesharkService : public InternetService {
   void StreamMarked();
   void SongMarkedAsComplete();
 
+  void Homepage();
 
  private:
   void EnsureMenuCreated();
@@ -239,6 +240,7 @@ class GroovesharkService : public InternetService {
 
   static const char* kUrl;
   static const char* kUrlCover;
+  static const char* kHomepage;
 
   static const int kSongSearchLimit;
   static const int kSongSimpleSearchLimit;
