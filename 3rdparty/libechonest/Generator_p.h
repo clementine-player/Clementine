@@ -34,7 +34,7 @@ QByteArray catalogEntryToJson( const CatalogUpdateEntry& item );
 QVariantList catalogEntriesToVariant( const CatalogUpdateEntries& items );
 QVariant catalogEntryToVariant( const CatalogUpdateEntry& item );
 
-};
+}
 
-};
+}
 #endif

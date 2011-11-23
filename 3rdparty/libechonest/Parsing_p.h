@@ -114,8 +114,8 @@ namespace Parser
     QVector< QString > parseRulesList( QXmlStreamReader& xml ) throw( ParseError );
     QVector< SessionItem > parseSessionSongItem( QXmlStreamReader& xml, const QString& type ) throw( ParseError );
 
-};
-};
+}
+}
 
 #endif
 

@@ -30,7 +30,7 @@ public:
                           favoriteSet( false ), bannedSet( false ) 
     {}
     
-    CatalogUpdateEntryData( const CatalogUpdateEntryData& other ) {
+    CatalogUpdateEntryData( const CatalogUpdateEntryData& other ) : QSharedData( other ) {
         item_id = other.item_id;
         action = other.action;
         fp_code = other.fp_code;

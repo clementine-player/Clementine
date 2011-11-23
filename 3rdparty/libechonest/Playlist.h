@@ -245,7 +245,7 @@ namespace Echonest{
          * Returns a description of this dynamic playlist session
          */
         QNetworkReply* fetchSessionInfo() const;
-        SessionInfo parseSessionInfo( QNetworkReply* reply ) throw( ParseError );;
+        SessionInfo parseSessionInfo( QNetworkReply* reply ) throw( ParseError );
 
         /**
          * Generate a static playlist, according to the desired criteria. Use parseXSPFPlaylist if
@@ -272,7 +272,7 @@ namespace Echonest{
     ECHONEST_EXPORT QDebug operator<<(QDebug d, const Echonest::DynamicPlaylist& playlist);
 
 
-}; // namespace
+} // namespace
 
 
 Q_DECLARE_METATYPE( Echonest::DynamicPlaylist )

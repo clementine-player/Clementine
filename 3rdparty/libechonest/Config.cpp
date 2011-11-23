@@ -169,7 +169,12 @@ void Echonest::Config::setNetworkAccessManager(QNetworkAccessManager* nam)
         oldNam = d->threadNamHash[ currThread ];
 
     if( oldNam == nam )
+    {
+        // If we're being passed back our own NAM, assume they want to
+        // ensure that we don't delete it out from under them 
+        d->ourNamSet.remove( currThread );
         return;
+    }
 
     d->threadNamHash[ currThread ] = nam;
     d->ourNamSet.remove( currThread );

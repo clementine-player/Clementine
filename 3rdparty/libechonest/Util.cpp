@@ -18,6 +18,15 @@
 
 #include <QString>
 
+QByteArray Echonest::escapeSpacesAndPluses(const QString& in)
+{
+    // Echonest wants " " treated as "+", so we force QUrl to encode spaces as +es rather than %20
+    QByteArray escaped = QUrl::toPercentEncoding( in, " " );
+    escaped.replace( " ", "+" );
+    return escaped;
+}
+
+
 Echonest::Analysis::AnalysisStatus Echonest::statusToEnum(const QString& status)
 {
     if( status == QLatin1String("unknown") ) {
@@ -115,7 +124,7 @@ Echonest::CatalogTypes::Action Echonest::literalToCatalogUpdateAction(const QByt
         return Echonest::CatalogTypes::Update;
     else if( type == "skip" )
         return Echonest::CatalogTypes::Skip;
-    
+
     return Echonest::CatalogTypes::Update;
 }
 

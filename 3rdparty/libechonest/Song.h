@@ -77,7 +77,7 @@ public:
       MinEnergy,
       Mode,
       Key,
-      Sort,
+      Sort
   };
   typedef QPair< Echonest::Song::SearchParam, QVariant > SearchParamData;
   typedef QVector< SearchParamData > SearchParams;
@@ -236,7 +236,7 @@ typedef QVector< Song > SongList;
 
 ECHONEST_EXPORT QDebug operator<<(QDebug d, const Song &song);
 
-}; // namespace
+} // namespace
 
 Q_DECLARE_METATYPE( Echonest::Song )
 

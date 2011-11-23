@@ -31,7 +31,7 @@ class CatalogItemData : public QSharedData
 public:
     CatalogItemData() {}
     
-    CatalogItemData(const CatalogItemData& other)
+    CatalogItemData(const CatalogItemData& other) : QSharedData( other )
     {
         foreign_id = other.foreign_id;
         request = other.request;

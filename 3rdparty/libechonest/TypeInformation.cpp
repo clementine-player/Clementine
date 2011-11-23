@@ -42,7 +42,7 @@ public:
     QStringList idSpaces;
 };
 
-}; // namespace 
+} // namespace 
 Echonest::ArtistInformation::ArtistInformation() 
     : d_ptr( new Echonest::ArtistInformationPrivate )
 {

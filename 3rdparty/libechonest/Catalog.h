@@ -218,7 +218,7 @@ private:
 
 ECHONEST_EXPORT QDebug operator<<(QDebug d, const Catalog &catalog);
 
-};
+}
 
 Q_DECLARE_METATYPE( Echonest::Catalog )
 

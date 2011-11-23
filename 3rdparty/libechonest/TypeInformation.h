@@ -48,7 +48,7 @@ namespace Echonest {
             Reviews = 0x0080,
             Terms = 0x0100,
             Urls = 0x200,
-            Videos = 0x0400,
+            Videos = 0x0400
         };
         Q_DECLARE_FLAGS( ArtistInformationFlags, ArtistInformationFlag )
         
@@ -127,7 +127,7 @@ namespace Echonest {
     };
     
     Q_DECLARE_OPERATORS_FOR_FLAGS(SongInformation::SongInformationFlags)
-};
+}
 
 Q_DECLARE_METATYPE( Echonest::ArtistInformation )
 Q_DECLARE_METATYPE( Echonest::SongInformation )

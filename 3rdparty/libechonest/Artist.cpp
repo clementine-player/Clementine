@@ -359,7 +359,7 @@ QNetworkReply* Echonest::Artist::fetchSimilar(const Echonest::Artist::SearchPara
 
     Echonest::Artist::SearchParams::const_iterator iter = params.constBegin();
     for( ; iter < params.constEnd(); ++iter )
-        url.addQueryItem( QLatin1String( searchParamToString( iter->first ) ), iter->second.toString().replace( QLatin1Char( ' ' ), QLatin1Char( '+' ) ) );
+        url.addEncodedQueryItem( searchParamToString( iter->first ), Echonest::escapeSpacesAndPluses( iter->second.toString() ) );
 
     return Echonest::Config::instance()->nam()->get( QNetworkRequest( url ) );
 }
@@ -403,7 +403,7 @@ QNetworkReply* Echonest::Artist::search(const Echonest::Artist::SearchParams& pa
 
     Echonest::Artist::SearchParams::const_iterator iter = params.constBegin();
     for( ; iter < params.constEnd(); ++iter )
-        url.addQueryItem( QLatin1String( searchParamToString( iter->first ) ), iter->second.toString().replace( QLatin1Char( ' ' ), QLatin1Char( '+' ) ) );
+        url.addEncodedQueryItem( searchParamToString( iter->first ), Echonest::escapeSpacesAndPluses( iter->second.toString() ) );
     url.addEncodedQueryItem( "limit", limit ? "true" : "false" );
     addQueryInformation( url, information );
 
@@ -446,7 +446,7 @@ QNetworkReply* Echonest::Artist::suggest( const QString& name, int results )
 {
     QUrl url = Echonest::baseGetQuery( "artist", "suggest" );
     QString realname = name;
-    url.addQueryItem( QLatin1String( "name" ), realname.replace( QLatin1Char( ' ' ), QLatin1Char( '+' ) ) );
+    url.addEncodedQueryItem( "name", Echonest::escapeSpacesAndPluses( realname ) );
     url.addEncodedQueryItem( "results", QByteArray::number( results ) );
 
     return Echonest::Config::instance()->nam()->get( QNetworkRequest( url ) );
@@ -540,9 +540,7 @@ QUrl Echonest::Artist::setupQuery( const QByteArray& methodName, int numResults,
     if( !d->id.isEmpty() )
         url.addEncodedQueryItem( "id", d->id );
     else if( !d->name.isEmpty() ) {
-        QString name = d->name;
-        name.replace( QLatin1Char( ' ' ), QLatin1Char( '+' ) );
-        url.addQueryItem( QLatin1String( "name" ), name );
+        url.addEncodedQueryItem( "name", Echonest::escapeSpacesAndPluses( d->name ) );
     } else {
         qWarning() << "Artist method" << methodName << "called on an artist object without name or id!";
         return QUrl();

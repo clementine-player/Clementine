@@ -84,7 +84,7 @@ protected:
 };
 
 typedef QVector< CatalogItem > CatalogItems;
-};
+}
 
 
 #endif

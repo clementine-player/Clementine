@@ -22,7 +22,7 @@ class DynamicPlaylistData : public QSharedData
 {
 public:
     DynamicPlaylistData() {}
-    DynamicPlaylistData(const DynamicPlaylistData& other)
+    DynamicPlaylistData(const DynamicPlaylistData& other) : QSharedData(other)
     {
         sessionId = other.sessionId;
         currentSong = other.currentSong;

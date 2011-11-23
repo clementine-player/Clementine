@@ -108,7 +108,7 @@ QNetworkReply* Echonest::DynamicPlaylist::fetchNextSong(const DynamicControls& c
     DynamicControls::const_iterator iter = controls.begin();
     for( ; iter != controls.end(); ++iter ) {
         QString value = iter->second;
-        url.addEncodedQueryItem( dynamicControlToString( iter->first ), value.replace( QLatin1Char( ' ' ), QLatin1Char( '+' ) ).toUtf8() );
+        url.addEncodedQueryItem( dynamicControlToString( iter->first ), Echonest::escapeSpacesAndPluses( value ) );
     }
 
     return Echonest::Config::instance()->nam()->get( QNetworkRequest( url ) );
@@ -208,7 +208,7 @@ QNetworkReply* Echonest::DynamicPlaylist::generateInternal(const Echonest::Dynam
         } else if( iter->first == SongInformation ){
             Echonest::Song::addQueryInformation( url, Echonest::SongInformation( iter->second.value< Echonest::SongInformation >() ) );
         } else {
-            url.addQueryItem( QLatin1String( playlistParamToString( iter->first ) ), iter->second.toString().replace( QLatin1Char( ' ' ), QLatin1Char( '+' ) ) );
+            url.addEncodedQueryItem( playlistParamToString( iter->first ), Echonest::escapeSpacesAndPluses( iter->second.toString() ) );
         }
     }
 

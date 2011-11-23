@@ -29,7 +29,7 @@ class AudioFileData : public QSharedData
 {
 public:
     AudioFileData() {}
-    AudioFileData( const AudioFileData& other ) {
+    AudioFileData( const AudioFileData& other ) : QSharedData( other ) {
         title = other.title;
         artist = other.artist;
         url = other.url;
@@ -54,7 +54,7 @@ class BiographyData : public QSharedData
 {
 public:
     BiographyData() {}
-    BiographyData( const BiographyData& other ) {
+    BiographyData( const BiographyData& other ) : QSharedData( other ) {
         url = other.url;
         text = other.text;
         site = other.site;
@@ -71,7 +71,7 @@ class BlogData : public QSharedData
 {
 public:
     BlogData() {}
-    BlogData( const BlogData& other ) {
+    BlogData( const BlogData& other ) : QSharedData( other ) {
         name = other.name;
         url = other.url;
         date_posted = other.date_posted;
@@ -92,7 +92,7 @@ class ArtistImageData : public QSharedData
 {
 public:
     ArtistImageData() {}
-    ArtistImageData( const ArtistImageData& other ) {
+    ArtistImageData( const ArtistImageData& other ) : QSharedData( other ) {
         url = other.url;
         license = other.license;
     }
@@ -105,7 +105,7 @@ class ReviewData : public QSharedData
 {
 public:
     ReviewData() {}
-    ReviewData( const ReviewData& other ) {
+    ReviewData( const ReviewData& other ) : QSharedData( other ) {
         name = other.name;
         url = other.url;
         summary = other.summary;
@@ -130,7 +130,7 @@ class TermData : public QSharedData
 {
 public:
     TermData() {}
-    TermData( const TermData& other ) {   
+    TermData( const TermData& other ) : QSharedData( other ) {   
         name = other.name;
         frequency = other.frequency;
         weight = other.weight;
@@ -145,7 +145,7 @@ class VideoData : public QSharedData
 {
 public:
     VideoData() {}
-    VideoData( const VideoData& other ) {
+    VideoData( const VideoData& other ) : QSharedData( other ) {
         title = other.title;
         url = other.url;
         site = other.site;

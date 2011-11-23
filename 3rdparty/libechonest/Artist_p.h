@@ -33,7 +33,7 @@ class ArtistData : public QSharedData
 public:
     ArtistData() : familiarity( -1 ), hotttnesss( -1 ) {}
     ArtistData( const QByteArray& id, const QString& name ) : id( id ), name( name ), familiarity( -1 ), hotttnesss( -1 ) {}
-    ArtistData(const ArtistData& other)
+    ArtistData(const ArtistData& other) : QSharedData( other )
     {
         id = other.id;
         name = other.name;

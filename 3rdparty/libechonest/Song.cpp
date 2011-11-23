@@ -197,7 +197,7 @@ QNetworkReply* Echonest::Song::search( const Echonest::Song::SearchParams& param
 
     SearchParams::const_iterator iter = params.constBegin();
     for( ; iter < params.constEnd(); ++iter )
-        url.addQueryItem( QLatin1String( searchParamToString( iter->first ) ), iter->second.toString().replace( QLatin1Char( ' ' ), QLatin1Char( '+' ) ) );
+        url.addEncodedQueryItem( searchParamToString( iter->first ), Echonest::escapeSpacesAndPluses( iter->second.toString() ) );
 
     qDebug() << "Creating search URL" << url;
     return Echonest::Config::instance()->nam()->get( QNetworkRequest( url ) );

@@ -27,7 +27,7 @@ class CatalogData : public QSharedData
 {
 public:
     CatalogData() : total( 0 ), resolved( 0 ) {}
-    CatalogData( const CatalogData& other ) {
+    CatalogData( const CatalogData& other ) : QSharedData( other ) {
         name = other.name;
         id = other.id;
         type = other.type;

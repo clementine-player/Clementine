@@ -45,14 +45,14 @@ namespace  Echonest {
         request.setHeader( QNetworkRequest::ContentTypeHeader, QLatin1String( "application/x-www-form-urlencoded" ) );
         return Echonest::Config::instance()->nam()->post( request, data );
     }
-};
+}
 
 class TrackData : public QSharedData
 {
 public:
     TrackData() {}
 
-    TrackData(const TrackData& other)
+    TrackData(const TrackData& other) : QSharedData( other )
     {
         analyzer_version = other.analyzer_version;
         artist = other.artist;
