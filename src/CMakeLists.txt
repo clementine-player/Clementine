@@ -398,6 +398,7 @@ set(HEADERS
   internet/internetmimedata.h
   internet/internetmodel.h
   internet/internetservice.h
+  internet/internetsongmimedata.h
   internet/internetview.h
   internet/internetviewcontainer.h
   internet/jamendodynamicplaylist.h

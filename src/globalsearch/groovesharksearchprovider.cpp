@@ -22,7 +22,7 @@
 #include "core/logging.h"
 #include "covers/albumcoverloader.h"
 #include "internet/groovesharkservice.h"
-#include "playlist/songmimedata.h"
+#include "internet/internetsongmimedata.h"
 
 GroovesharkSearchProvider::GroovesharkSearchProvider(QObject* parent)
     : service_(NULL) {
@@ -131,7 +131,7 @@ void GroovesharkSearchProvider::LoadTracksAsync(int id, const Result& result) {
       ret << result.metadata_;
       SortSongs(&ret);
 
-      SongMimeData* mime_data = new SongMimeData;
+      InternetSongMimeData* mime_data = new InternetSongMimeData(service_);
       mime_data->songs = ret;
 
       emit TracksLoaded(id, mime_data);
@@ -161,7 +161,7 @@ void GroovesharkSearchProvider::FetchAlbum(int id, const Result& result) {
 }
 
 void GroovesharkSearchProvider::AlbumSongsLoaded(int id, const SongList& songs) {
-  SongMimeData* mime_data = new SongMimeData;
+  InternetSongMimeData* mime_data = new InternetSongMimeData(service_);
   mime_data->songs = songs;
   SortSongs(&mime_data->songs);
 

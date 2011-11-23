@@ -34,6 +34,7 @@
 #include "internet/internetmimedata.h"
 #include "internet/internetmodel.h"
 #include "internet/internetplaylistitem.h"
+#include "internet/internetsongmimedata.h"
 #include "internet/savedradio.h"
 #include "library/library.h"
 #include "library/librarybackend.h"
@@ -638,6 +639,9 @@ bool Playlist::dropMimeData(const QMimeData* data, Qt::DropAction action, int ro
   } else if (const InternetMimeData* internet_data = qobject_cast<const InternetMimeData*>(data)) {
     // Dragged from the Internet pane
     InsertInternetItems(internet_data->model, internet_data->indexes,
+                        row, play_now, enqueue_now);
+  } else if (const InternetSongMimeData* internet_song_data = qobject_cast<const InternetSongMimeData*>(data)) {
+    InsertInternetItems(internet_song_data->service, internet_song_data->songs,
                         row, play_now, enqueue_now);
   } else if (const GeneratorMimeData* generator_data = qobject_cast<const GeneratorMimeData*>(data)) {
     InsertSmartPlaylist(generator_data->generator_, row, play_now, enqueue_now);
