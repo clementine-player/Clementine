@@ -489,8 +489,8 @@ void GroovesharkService::EnsureMenuCreated() {
     context_menu_->addSeparator();
     context_menu_->addAction(IconLoader::Load("edit-find"), tr("Search Grooveshark (opens a new tab)") + "...", this, SLOT(OpenSearchTab()));
     context_menu_->addSeparator();
-    context_menu_->addAction(IconLoader::Load("configure"), tr("Configure Grooveshark..."), this, SLOT(ShowConfig()));
     context_menu_->addAction(IconLoader::Load("download"), tr("Open %1 in browser").arg("grooveshark.com"), this, SLOT(Homepage()));
+    context_menu_->addAction(IconLoader::Load("configure"), tr("Configure Grooveshark..."), this, SLOT(ShowConfig()));
   }
 }
 
