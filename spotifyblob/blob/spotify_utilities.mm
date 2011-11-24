@@ -1,6 +1,7 @@
 #include "spotify_utilities.h"
 
 #import <Foundation/NSAutoreleasePool.h>
+#import <Foundation/NSFileManager.h>
 #import <Foundation/NSPathUtilities.h>
 
 namespace utilities {
@@ -22,6 +23,32 @@ QString GetUserCacheDirectory() {
   }
   [pool drain];
   return ret;
+}
+
+QString GetSettingsDirectory() {
+  NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
+  NSArray* paths = NSSearchPathForDirectoriesInDomains(
+      NSApplicationSupportDirectory,
+      NSUserDomainMask,
+      YES);
+  NSString* ret;
+  if ([paths count] > 0) {
+    ret = [paths objectAtIndex:0];
+  } else {
+    ret = @"~/Library/Application Support";
+  }
+  ret = [ret stringByAppendingString:@"/Clementine/spotify-settings"];
+
+  NSFileManager* file_manager = [NSFileManager defaultManager];
+  [file_manager createDirectoryAtPath:
+      ret
+      withIntermediateDirectories:YES
+      attributes:nil
+      error:nil];
+
+  QString path = QString::fromUtf8([ret UTF8String]);
+  [pool drain];
+  return path;
 }
 
 }

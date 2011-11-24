@@ -33,6 +33,7 @@ QString GetCacheDirectory() {
   return user_cache + "/" + QCoreApplication::applicationName() + "/spotify-cache";
 }
 
+#ifndef Q_OS_DARWIN
 QString GetSettingsDirectory() {
   QSettings settings;
   QString file_name = settings.fileName();
@@ -41,5 +42,6 @@ QString GetSettingsDirectory() {
   dir.mkdir("spotify-settings");
   return info.absolutePath() + "/spotify-settings";
 }
+#endif
 
 }  // namespace utilities
