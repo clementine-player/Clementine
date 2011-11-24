@@ -220,7 +220,7 @@ void SpotifyService::EnsureServerCreated(const QString& username,
     QSettings s;
     s.beginGroup(kSettingsGroup);
 
-    server_->Login(s.value("username").toString(), s.value("password").toString());
+    server_->Login(s.value("username").toString(), QString::null);
   } else {
     server_->Login(username, password);
   }

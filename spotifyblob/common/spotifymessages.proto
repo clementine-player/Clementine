@@ -26,7 +26,7 @@ option optimize_for = LITE_RUNTIME;
 
 message LoginRequest {
   required string username = 1;
-  required string password = 2;
+  optional string password = 2;
 }
 
 message LoginResponse {

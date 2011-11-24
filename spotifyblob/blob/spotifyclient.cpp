@@ -289,11 +289,19 @@ void SpotifyClient::Login(const QString& username, const QString& password) {
   sp_session_preferred_bitrate(session_, SP_BITRATE_320k);
   sp_session_preferred_offline_bitrate(session_, SP_BITRATE_320k, false);
 
-#if SPOTIFY_API_VERSION < 9
-  sp_session_login(session_, username.toUtf8().constData(), password.toUtf8().constData());
-#else
-  sp_session_login(session_, username.toUtf8().constData(), password.toUtf8().constData(), true);
-#endif
+  if (password.isEmpty()) {
+    sp_error error = sp_session_relogin(session_);
+    if (error != SP_ERROR_OK) {
+      qLog(Warning) << "Tried to relogin but no stored credentials";
+      SendLoginCompleted(false, sp_error_message(error),
+                         spotify_pb::LoginResponse_Error_BadUsernameOrPassword);
+    }
+  } else {
+    sp_session_login(session_,
+                     username.toUtf8().constData(),
+                     password.toUtf8().constData(),
+                     true);  // Remember the password.
+  }
 }
 
 void SpotifyClient::SendLoginCompleted(bool success, const QString& error,

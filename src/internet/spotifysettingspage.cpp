@@ -100,10 +100,8 @@ void SpotifySettingsPage::Load() {
   s.beginGroup(SpotifyService::kSettingsGroup);
 
   original_username_ = s.value("username").toString();
-  original_password_ = s.value("password").toString();
 
   ui_->username->setText(original_username_);
-  ui_->password->setText(original_password_);
   validated_ = false;
 
   UpdateLoginState();

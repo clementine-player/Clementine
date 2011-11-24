@@ -80,7 +80,9 @@ void SpotifyServer::Login(const QString& username, const QString& password) {
 
   spotify_pb::LoginRequest* request = message.mutable_login_request();
   request->set_username(DataCommaSizeFromQString(username));
-  request->set_password(DataCommaSizeFromQString(password));
+  if (!password.isEmpty()) {
+    request->set_password(DataCommaSizeFromQString(password));
+  }
 
   SendMessage(message);
 }
