@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2011-11-23 00:38+0000\n"
+"PO-Revision-Date: 2011-11-23 23:28+0000\n"
 "Last-Translator: clementinebuildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -430,11 +430,11 @@ msgstr ""
 msgid "Add stream..."
 msgstr "ストリームを追加..."
 
-#: internet/groovesharkservice.cpp:833
+#: internet/groovesharkservice.cpp:840
 msgid "Add to Grooveshark favorites"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:839
+#: internet/groovesharkservice.cpp:846
 msgid "Add to Grooveshark playlists"
 msgstr ""
 
@@ -478,7 +478,7 @@ msgstr "今日追加されました"
 msgid "Added within three months"
 msgstr "3ヶ月以内に追加されました"
 
-#: internet/groovesharkservice.cpp:1031
+#: internet/groovesharkservice.cpp:1038
 msgid "Adding song to favorites"
 msgstr ""
 
@@ -633,7 +633,7 @@ msgstr "圧縮を適用してクリップを禁止する"
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "\"%1\" プリセットを削除してもよろしいですか?"
 
-#: internet/groovesharkservice.cpp:1003
+#: internet/groovesharkservice.cpp:1010
 msgid "Are you sure you want to delete this playlist?"
 msgstr "本当にこのプレイリストを削除しますか？"
 
@@ -991,7 +991,7 @@ msgstr ""
 msgid "Composer"
 msgstr "作曲者"
 
-#: internet/groovesharkservice.cpp:490
+#: internet/groovesharkservice.cpp:492
 msgid "Configure Grooveshark..."
 msgstr ""
 
@@ -1044,7 +1044,7 @@ msgstr "すべてのミュージックを変換する"
 msgid "Convert any music that the device can't play"
 msgstr "デバイスが再生できないすべてのミュージックを変換する"
 
-#: internet/groovesharkservice.cpp:886
+#: internet/groovesharkservice.cpp:893
 msgid "Copy to clipboard"
 msgstr "クリップボードにコピー"
 
@@ -1127,7 +1127,7 @@ msgstr "%1 からのカバー アート セット"
 msgid "Covers from %1"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:475 internet/groovesharkservice.cpp:955
+#: internet/groovesharkservice.cpp:477 internet/groovesharkservice.cpp:962
 msgid "Create a new Grooveshark playlist"
 msgstr ""
 
@@ -1267,7 +1267,7 @@ msgstr "既定"
 msgid "Delay between visualizations"
 msgstr "視覚化の間の遅延"
 
-#: internet/groovesharkservice.cpp:478 internet/groovesharkservice.cpp:1002
+#: internet/groovesharkservice.cpp:480 internet/groovesharkservice.cpp:1009
 msgid "Delete Grooveshark playlist"
 msgstr ""
 
@@ -1694,7 +1694,7 @@ msgstr "フェードの長さ"
 msgid "Fast"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:517
+#: internet/groovesharkservice.cpp:524
 msgid "Favorites"
 msgstr ""
 
@@ -1869,11 +1869,11 @@ msgstr "全般設定"
 msgid "Genre"
 msgstr "ジャンル"
 
-#: internet/groovesharkservice.cpp:850
+#: internet/groovesharkservice.cpp:857
 msgid "Get an URL to share this Grooveshark song"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:660
+#: internet/groovesharkservice.cpp:667
 msgid "Getting Grooveshark popular songs"
 msgstr ""
 
@@ -1919,11 +1919,11 @@ msgstr "プレイリスト上の存在しない曲をグレーで表示する"
 msgid "Grooveshark"
 msgstr "Grooveshark"
 
-#: internet/groovesharkservice.cpp:402
+#: internet/groovesharkservice.cpp:404
 msgid "Grooveshark login error"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:882
+#: internet/groovesharkservice.cpp:889
 msgid "Grooveshark song's URL"
 msgstr ""
 
@@ -2118,7 +2118,7 @@ msgstr "不正なサービスです"
 msgid "Invalid session key"
 msgstr "不正なセッション キーです"
 
-#: internet/groovesharkservice.cpp:395
+#: internet/groovesharkservice.cpp:397
 msgid "Invalid username and/or password"
 msgstr ""
 
@@ -2586,7 +2586,7 @@ msgstr "ラジオ局"
 msgid "My Recommendations"
 msgstr "おすすめ"
 
-#: internet/groovesharkservice.cpp:956 ui/equalizer.cpp:172
+#: internet/groovesharkservice.cpp:963 ui/equalizer.cpp:172
 #: ui_deviceproperties.h:369 ui_magnatunedownloaddialog.h:135
 #: ui_wizardfinishpage.h:84 ui_globalshortcutssettingspage.h:174
 msgid "Name"
@@ -2752,6 +2752,9 @@ msgid "Only show the first"
 msgstr "先頭の未表示する"
 
 #: internet/digitallyimportedservicebase.cpp:178
+#: internet/groovesharkservice.cpp:493 internet/icecastservice.cpp:300
+#: internet/jamendoservice.cpp:414 internet/magnatuneservice.cpp:271
+#: internet/somafmservice.cpp:84
 #, qt-format
 msgid "Open %1 in browser"
 msgstr ""
@@ -2764,10 +2767,6 @@ msgstr ""
 msgid "Open device"
 msgstr "デバイスを開く"
 
-#: internet/icecastservice.cpp:300
-msgid "Open dir.xiph.org in browser"
-msgstr "ブラウザで dir.xiph.org を開きます"
-
 #: ui_mainwindow.h:666
 msgid "Open file..."
 msgstr "ファイルを開く..."
@@ -2777,18 +2776,6 @@ msgstr "ファイルを開く..."
 #: ui_behavioursettingspage.h:203
 msgid "Open in new playlist"
 msgstr "新しいプレイリストで開く"
-
-#: internet/jamendoservice.cpp:414
-msgid "Open jamendo.com in browser"
-msgstr "ブラウザで jamendo.com を開きます"
-
-#: internet/magnatuneservice.cpp:271
-msgid "Open magnatune.com in browser"
-msgstr "ブラウザで magnatune.com を開きます"
-
-#: internet/somafmservice.cpp:84
-msgid "Open somafm.com in browser"
-msgstr "ブラウザで somafm.com を開きます"
 
 #: ui_globalshortcutssettingspage.h:169 ui_globalshortcutssettingspage.h:171
 msgid "Open..."
@@ -2964,11 +2951,11 @@ msgstr ""
 msgid "Pop"
 msgstr "Pop"
 
-#: internet/groovesharkservice.cpp:503
+#: internet/groovesharkservice.cpp:510
 msgid "Popular songs of the Month"
 msgstr "今月の人気曲"
 
-#: internet/groovesharkservice.cpp:510
+#: internet/groovesharkservice.cpp:517
 msgid "Popular songs today"
 msgstr "今日の人気曲"
 
@@ -3180,11 +3167,11 @@ msgstr "アクションの削除"
 msgid "Remove folder"
 msgstr "フォルダーの削除"
 
-#: internet/groovesharkservice.cpp:485
+#: internet/groovesharkservice.cpp:487
 msgid "Remove from favorites"
 msgstr "お気に入りから削除する"
 
-#: internet/groovesharkservice.cpp:482 ui_mainwindow.h:674
+#: internet/groovesharkservice.cpp:484 ui_mainwindow.h:674
 msgid "Remove from playlist"
 msgstr "プレイリストから削除"
 
@@ -3192,7 +3179,7 @@ msgstr "プレイリストから削除"
 msgid "Remove playlist"
 msgstr "プレイリストの削除"
 
-#: internet/groovesharkservice.cpp:1089
+#: internet/groovesharkservice.cpp:1096
 msgid "Removing song from favorites"
 msgstr ""
 
@@ -3270,11 +3257,11 @@ msgstr "ASCII 文字に限定する"
 msgid "Results"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:631
+#: internet/groovesharkservice.cpp:638
 msgid "Retrieving Grooveshark favorites songs"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:553
+#: internet/groovesharkservice.cpp:560
 msgid "Retrieving Grooveshark playlists"
 msgstr ""
 
@@ -3351,11 +3338,11 @@ msgid "Search"
 msgstr "検索"
 
 #: internet/groovesharksearchplaylisttype.cpp:32
-#: internet/groovesharkservice.cpp:768
+#: internet/groovesharkservice.cpp:775
 msgid "Search Grooveshark"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:488 internet/groovesharkservice.cpp:497
+#: internet/groovesharkservice.cpp:490 internet/groovesharkservice.cpp:504
 msgid "Search Grooveshark (opens a new tab)"
 msgstr ""
 
@@ -3407,7 +3394,7 @@ msgstr "検索のぷしょん"
 msgid "Search terms"
 msgstr "検索条件"
 
-#: internet/groovesharkservice.cpp:262
+#: internet/groovesharkservice.cpp:264
 msgid "Searching on Grooveshark"
 msgstr ""
 
@@ -4103,7 +4090,7 @@ msgstr "不明なエラー"
 msgid "Unset cover"
 msgstr "未設定のカバー"
 
-#: internet/groovesharkservice.cpp:910
+#: internet/groovesharkservice.cpp:917
 msgid "Update Grooveshark playlist"
 msgstr ""
 
@@ -4181,7 +4168,7 @@ msgstr "システムのプロキシ設定を使用する"
 msgid "Used"
 msgstr "使用中"
 
-#: internet/groovesharkservice.cpp:398
+#: internet/groovesharkservice.cpp:400
 #, qt-format
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr ""
