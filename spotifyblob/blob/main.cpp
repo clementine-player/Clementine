@@ -28,6 +28,8 @@
 int main(int argc, char** argv) {
   QCoreApplication a(argc, argv);
   QCoreApplication::setApplicationName("Clementine");
+  QCoreApplication::setOrganizationName("Clementine");
+  QCoreApplication::setOrganizationDomain("clementine-player.org");
 
   logging::Init();
 

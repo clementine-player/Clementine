@@ -70,6 +70,11 @@ private:
   static void SP_CALLCONV EndOfTrackCallback(sp_session* session);
   static void SP_CALLCONV StreamingErrorCallback(sp_session* session, sp_error error);
   static void SP_CALLCONV OfflineStatusUpdatedCallback(sp_session* session);
+  static void SP_CALLCONV ConnectionErrorCallback(sp_session* session, sp_error error);
+  static void SP_CALLCONV UserMessageCallback(sp_session* session, const char* message);
+  static void SP_CALLCONV GetAudioBufferStatsCallback(
+      sp_session* session,
+      sp_audio_buffer_stats* stats);
 
   // Spotify playlist container callbacks.
   static void SP_CALLCONV PlaylistAddedCallback(

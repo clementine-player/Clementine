@@ -10,6 +10,8 @@ QString GetUserCacheDirectory();
 // Get the path for Clementine's cache.
 QString GetCacheDirectory();
 
+QString GetSettingsDirectory();
+
 }
 
 #endif

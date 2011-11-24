@@ -60,6 +60,10 @@ SpotifyClient::SpotifyClient(QObject* parent)
   spotify_callbacks_.end_of_track = &EndOfTrackCallback;
   spotify_callbacks_.streaming_error = &StreamingErrorCallback;
   spotify_callbacks_.offline_status_updated = &OfflineStatusUpdatedCallback;
+  spotify_callbacks_.connection_error = &ConnectionErrorCallback;
+  spotify_callbacks_.message_to_user = &UserMessageCallback;
+  spotify_callbacks_.get_audio_buffer_stats = &GetAudioBufferStatsCallback;
+
 
   playlistcontainer_callbacks_.container_loaded = &PlaylistContainerLoadedCallback;
   playlistcontainer_callbacks_.playlist_added = &PlaylistAddedCallback;
@@ -72,10 +76,12 @@ SpotifyClient::SpotifyClient(QObject* parent)
 
   QString cache = utilities::GetCacheDirectory();
   qLog(Debug) << "Using:" << cache << "for Spotify cache";
+  QString settings_dir = utilities::GetSettingsDirectory();
+  qLog(Debug) << "Using:" << settings_dir << "for Spotify settings";
 
   spotify_config_.api_version = SPOTIFY_API_VERSION;  // From libspotify/api.h
-  spotify_config_.cache_location = strdup(cache.toLocal8Bit().constData());
-  spotify_config_.settings_location = strdup(QDir::tempPath().toLocal8Bit().constData());
+  spotify_config_.cache_location = strdup(cache.toUtf8().constData());
+  spotify_config_.settings_location = strdup(settings_dir.toUtf8().constData());
   spotify_config_.application_key = api_key_.constData();
   spotify_config_.application_key_size = api_key_.size();
   spotify_config_.callbacks = &spotify_callbacks_;
@@ -692,6 +698,22 @@ void SpotifyClient::StreamingErrorCallback(sp_session* session, sp_error error) 
 
   // Send the error
   me->SendPlaybackError(QString::fromUtf8(sp_error_message(error)));
+}
+
+void SpotifyClient::ConnectionErrorCallback(sp_session* session, sp_error error) {
+  qLog(Debug) << Q_FUNC_INFO << sp_error_message(error);
+}
+
+void SpotifyClient::UserMessageCallback(sp_session* session, const char* message) {
+  qLog(Debug) << Q_FUNC_INFO << message;
+}
+
+void SpotifyClient::GetAudioBufferStatsCallback(
+    sp_session* session,
+    sp_audio_buffer_stats* stats) {
+  SpotifyClient* me = reinterpret_cast<SpotifyClient*>(sp_session_userdata(session));
+  stats->stutter = 0;
+  stats->samples = me->media_socket_ ? me->media_socket_->bytesToWrite() / 2 : 0;
 }
 
 void SpotifyClient::OfflineStatusUpdatedCallback(sp_session* session) {

@@ -4,6 +4,8 @@
 
 #include <QCoreApplication>
 #include <QDir>
+#include <QFileInfo>
+#include <QSettings>
 
 namespace utilities {
 
@@ -29,6 +31,15 @@ QString GetUserCacheDirectory() {
 QString GetCacheDirectory() {
   QString user_cache = GetUserCacheDirectory();
   return user_cache + "/" + QCoreApplication::applicationName() + "/spotify-cache";
+}
+
+QString GetSettingsDirectory() {
+  QSettings settings;
+  QString file_name = settings.fileName();
+  QFileInfo info(file_name);
+  QDir dir = info.dir();
+  dir.mkdir("spotify-settings");
+  return info.absolutePath() + "/spotify-settings";
 }
 
 }  // namespace utilities
