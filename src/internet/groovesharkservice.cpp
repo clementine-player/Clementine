@@ -515,6 +515,10 @@ void GroovesharkService::EnsureItemsCreated() {
                      InternetModel::Role_PlayBehaviour);
     root_->appendRow(search_);
 
+    QStandardItem* popular_divider = new QStandardItem(tr("Popular songs"));
+    popular_divider->setData(true, InternetModel::Role_IsDivider);
+    root_->appendRow(popular_divider);
+
     popular_month_ = new QStandardItem(QIcon(":/star-on.png"), tr("Popular songs of the Month"));
     popular_month_->setData(InternetModel::Type_UserPlaylist, InternetModel::Role_Type);
     popular_month_->setData(true, InternetModel::Role_CanLazyLoad);
@@ -528,6 +532,10 @@ void GroovesharkService::EnsureItemsCreated() {
     popular_today_->setData(InternetModel::PlayBehaviour_SingleItem,
                         InternetModel::Role_PlayBehaviour);
     root_->appendRow(popular_today_);
+
+    QStandardItem* playlists_divider = new QStandardItem(tr("Playlists"));
+    playlists_divider->setData(true, InternetModel::Role_IsDivider);
+    root_->appendRow(playlists_divider);
 
     favorites_ = new QStandardItem(QIcon(":/last.fm/love.png"), tr("Favorites"));
     favorites_->setData(InternetModel::Type_UserPlaylist, InternetModel::Role_Type);

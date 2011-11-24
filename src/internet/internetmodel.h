@@ -20,6 +20,7 @@
 
 #include "core/backgroundthread.h"
 #include "core/song.h"
+#include "library/librarymodel.h"
 #include "playlist/playlistitem.h"
 #include "ui/settingsdialog.h"
 #include "widgets/multiloadingindicator.h"
@@ -79,7 +80,9 @@ public:
     // (e.g. changing remote playlists)
     Role_CanBeModified,
 
-    RoleCount
+    RoleCount,
+
+    Role_IsDivider = LibraryModel::Role_IsDivider,
   };
 
   enum Type {
