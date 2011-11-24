@@ -63,6 +63,8 @@ SpotifyClient::SpotifyClient(QObject* parent)
   spotify_callbacks_.connection_error = &ConnectionErrorCallback;
   spotify_callbacks_.message_to_user = &UserMessageCallback;
   spotify_callbacks_.get_audio_buffer_stats = &GetAudioBufferStatsCallback;
+  spotify_callbacks_.start_playback = &StartPlaybackCallback;
+  spotify_callbacks_.stop_playback = &StopPlaybackCallback;
 
 
   playlistcontainer_callbacks_.container_loaded = &PlaylistContainerLoadedCallback;
@@ -713,6 +715,14 @@ void SpotifyClient::GetAudioBufferStatsCallback(
   SpotifyClient* me = reinterpret_cast<SpotifyClient*>(sp_session_userdata(session));
   stats->stutter = 0;
   stats->samples = me->media_socket_ ? me->media_socket_->bytesToWrite() / 2 : 0;
+}
+
+void SpotifyClient::StartPlaybackCallback(sp_session* session) {
+  qLog(Debug) << Q_FUNC_INFO;
+}
+
+void SpotifyClient::StopPlaybackCallback(sp_session* session) {
+  qLog(Debug) << Q_FUNC_INFO;
 }
 
 void SpotifyClient::OfflineStatusUpdatedCallback(sp_session* session) {

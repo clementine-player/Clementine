@@ -75,6 +75,8 @@ private:
   static void SP_CALLCONV GetAudioBufferStatsCallback(
       sp_session* session,
       sp_audio_buffer_stats* stats);
+  static void SP_CALLCONV StartPlaybackCallback(sp_session* session);
+  static void SP_CALLCONV StopPlaybackCallback(sp_session* session);
 
   // Spotify playlist container callbacks.
   static void SP_CALLCONV PlaylistAddedCallback(
