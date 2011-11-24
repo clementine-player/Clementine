@@ -45,7 +45,7 @@ class GroovesharkService : public InternetService {
   };
 
   enum PlaylistType {
-    NormalPlaylist = Qt::UserRole,
+    UserPlaylist = Qt::UserRole,
     // Favorites list is like a playlist, but we want to do special treatments
     // in some cases
     UserFavorites

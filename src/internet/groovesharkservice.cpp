@@ -449,7 +449,7 @@ void GroovesharkService::ShowContextMenu(const QModelIndex& index, const QPoint&
         display_remove_from_favorites_action = false;
 
   if (index.data(InternetModel::Role_Type).toInt() == InternetModel::Type_UserPlaylist &&
-      index.data(Role_PlaylistType).toInt() != UserFavorites) {
+      index.data(Role_PlaylistType).toInt() == UserPlaylist) {
     display_delete_playlist_action = true;
   }
   // We check parent's type (instead of index type) because we want to enable
@@ -556,6 +556,7 @@ QStandardItem* GroovesharkService::CreatePlaylistItem(const QString& playlist_na
                                                       int playlist_id) {
   QStandardItem* item = new QStandardItem(playlist_name);
   item->setData(InternetModel::Type_UserPlaylist, InternetModel::Role_Type);
+  item->setData(UserPlaylist, Role_PlaylistType);
   item->setData(true, InternetModel::Role_CanLazyLoad);
   item->setData(true, InternetModel::Role_CanBeModified);
   item->setData(InternetModel::PlayBehaviour_SingleItem, InternetModel::Role_PlayBehaviour);
