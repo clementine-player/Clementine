@@ -104,7 +104,6 @@ SpotifyClient::~SpotifyClient() {
 
   free(const_cast<char*>(spotify_config_.cache_location));
   free(const_cast<char*>(spotify_config_.settings_location));
-  free(const_cast<void*>(spotify_config_.application_key));
 }
 
 void SpotifyClient::Init(quint16 port) {
