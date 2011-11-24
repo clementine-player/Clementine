@@ -151,6 +151,14 @@ void GroovesharkService::Search(const QString& text, Playlist* playlist, bool no
   pending_search_ = text;
   pending_search_playlist_ = playlist;
 
+  // If there is no text (e.g. user cleared search box), we don't need to do a
+  // real query that will return nothing: we can clear the playlist now
+  if (text.isEmpty()) {
+    search_delay_->stop();
+    pending_search_playlist_->Clear();
+    return;
+  }
+
   if (now) {
     search_delay_->stop();
     DoSearch();
