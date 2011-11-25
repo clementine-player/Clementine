@@ -611,7 +611,7 @@ MainWindow::MainWindow(
 #ifdef Q_OS_WIN32
   qLog(Debug) << "Creating sparkle updater";
   qtsparkle::Updater* updater = new qtsparkle::Updater(
-      QUrl("http://data.clementine-player.org/sparkle-windows"), this);
+      QUrl("https://clementine-data.appspot.com/sparkle-windows"), this);
   updater->SetNetworkAccessManager(new NetworkAccessManager(this));
   updater->SetVersion(CLEMENTINE_VERSION);
   connect(check_updates, SIGNAL(triggered()), updater, SLOT(CheckNow()));
