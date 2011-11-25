@@ -48,7 +48,8 @@ class GroovesharkService : public InternetService {
     UserPlaylist = Qt::UserRole,
     // Favorites list is like a playlist, but we want to do special treatments
     // in some cases
-    UserFavorites
+    UserFavorites,
+    SubscribedPlaylist
   };
 
   // Values are persisted - don't change.
@@ -81,6 +82,7 @@ class GroovesharkService : public InternetService {
   void RetrievePopularSongs();
   void RetrievePopularSongsMonth();
   void RetrievePopularSongsToday();
+  void RetrieveSubscribedPlaylists();
   void SetPlaylistSongs(int playlist_id, const QList<int>& songs_ids);
   void RemoveFromPlaylist(int playlist_id, int song_id);
   // Refresh playlist_id playlist , or create it if it doesn't exist
@@ -118,8 +120,8 @@ class GroovesharkService : public InternetService {
 
   struct PlaylistInfo {
     PlaylistInfo() {}
-    PlaylistInfo(int id, QString name)
-      : id_(id), name_(name), item_(NULL) {}
+    PlaylistInfo(int id, QString name, QStandardItem* item = NULL)
+      : id_(id), name_(name), item_(item) {}
 
     int id_;
     QString name_;
@@ -142,6 +144,7 @@ class GroovesharkService : public InternetService {
   void UserFavoritesRetrieved(QNetworkReply* reply, int task_id);
   void PopularSongsMonthRetrieved(QNetworkReply* reply);
   void PopularSongsTodayRetrieved(QNetworkReply* reply);
+  void SubscribedPlaylistsRetrieved(QNetworkReply* reply);
   void PlaylistSongsRetrieved();
   void PlaylistSongsSet(QNetworkReply* reply, int playlist_id, int task_id);
   void CreateNewPlaylist();
@@ -201,12 +204,14 @@ class GroovesharkService : public InternetService {
   QMap<QNetworkReply*, PlaylistInfo> pending_retrieve_playlists_;
 
   QMap<int, PlaylistInfo> playlists_;
+  QMap<int, PlaylistInfo> subscribed_playlists_;
 
   QStandardItem* root_;
   QStandardItem* search_;
   QStandardItem* popular_month_;
   QStandardItem* popular_today_;
   QStandardItem* favorites_;
+  QStandardItem* subscribed_playlists_divider_;
 
   NetworkAccessManager* network_;
 

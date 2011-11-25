@@ -85,6 +85,7 @@ GroovesharkService::GroovesharkService(InternetModel *parent)
     popular_month_(NULL),
     popular_today_(NULL),
     favorites_(NULL),
+    subscribed_playlists_divider_(NULL),
     network_(new NetworkAccessManager(this)),
     context_menu_(NULL),
     remove_from_playlist_(NULL),
@@ -429,7 +430,9 @@ void GroovesharkService::Logout() {
   popular_month_ = NULL;
   popular_today_ = NULL;
   favorites_ = NULL;
+  subscribed_playlists_divider_ = NULL;
   playlists_.clear();
+  subscribed_playlists_.clear();
 }
 
 void GroovesharkService::ResetSessionId() {
@@ -459,7 +462,7 @@ void GroovesharkService::ShowContextMenu(const QModelIndex& index, const QPoint&
     int parent_playlist_type = index.parent().data(Role_PlaylistType).toInt();
     if (parent_playlist_type == UserFavorites)
       display_remove_from_favorites_action = true;
-    else
+    else if (parent_playlist_type == UserPlaylist)
       display_remove_from_playlist_action = true;
   }
   delete_playlist_->setVisible(display_delete_playlist_action);
@@ -546,8 +549,13 @@ void GroovesharkService::EnsureItemsCreated() {
                         InternetModel::Role_PlayBehaviour);
     root_->appendRow(favorites_);
 
+    subscribed_playlists_divider_ = new QStandardItem(tr("Subscribed playlists"));
+    subscribed_playlists_divider_->setData(true, InternetModel::Role_IsDivider);
+    root_->appendRow(subscribed_playlists_divider_);
+
     RetrieveUserFavorites();
     RetrieveUserPlaylists();
+    RetrieveSubscribedPlaylists();
     RetrievePopularSongs();
   }
 }
@@ -612,8 +620,12 @@ void GroovesharkService::PlaylistSongsRetrieved() {
   PlaylistInfo playlist_info = pending_retrieve_playlists_.take(reply);
   // Get the playlist item (in case of refresh) or create a new one
   QStandardItem* item = NULL;
+  PlaylistType playlist_type = UserPlaylist;
   if (playlists_.contains(playlist_info.id_)) {
     item = playlists_[playlist_info.id_].item_;
+  } else if (subscribed_playlists_.contains(playlist_info.id_)) { 
+    item = subscribed_playlists_[playlist_info.id_].item_;
+    playlist_type = SubscribedPlaylist;
   }
   bool item_already_exists = false;
   if (item) {
@@ -637,13 +649,18 @@ void GroovesharkService::PlaylistSongsRetrieved() {
     item->appendRow(child);
   }
   if (!item_already_exists) {
-    root_->appendRow(item);
+    // Insert this new item just below the favorites list
+    root_->insertRow(favorites_->row() + 1, item);
   }
 
   // Keep in mind this playlist
   playlist_info.songs_ids_ = ExtractSongsIds(result);
   playlist_info.item_ = item;
-  playlists_.insert(playlist_info.id_, playlist_info);
+  if (playlist_type == SubscribedPlaylist) {
+    subscribed_playlists_.insert(playlist_info.id_, playlist_info);
+  } else {
+    playlists_.insert(playlist_info.id_, playlist_info);
+  }
 
   if (pending_retrieve_playlists_.isEmpty()) {
     model()->task_manager()->SetTaskFinished(task_playlists_id_);
@@ -739,6 +756,37 @@ void GroovesharkService::PopularSongsTodayRetrieved(QNetworkReply* reply) {
   model()->task_manager()->IncreaseTaskProgress(task_popular_id_, 50, 100);
   if (model()->task_manager()->GetTaskProgress(task_popular_id_) >= 100) {
     model()->task_manager()->SetTaskFinished(task_popular_id_);
+  }
+}
+
+void GroovesharkService::RetrieveSubscribedPlaylists() {
+  QNetworkReply* reply = CreateRequest("getUserPlaylistsSubscribed", QList<Param>());
+  NewClosure(reply, SIGNAL(finished()),
+      this, SLOT(SubscribedPlaylistsRetrieved(QNetworkReply*)), reply);
+}
+
+void GroovesharkService::SubscribedPlaylistsRetrieved(QNetworkReply* reply) {
+  reply->deleteLater();
+  QVariantMap result = ExtractResult(reply);
+  QVariantList playlists = result["playlists"].toList();
+  QVariantList::iterator it;
+  for (it = playlists.begin(); it != playlists.end(); ++it) {
+    // Get playlist info
+    QVariantMap playlist = (*it).toMap();
+    int playlist_id = playlist["PlaylistID"].toInt();
+    QString playlist_name = playlist["PlaylistName"].toString();
+
+    QStandardItem* playlist_item = CreatePlaylistItem(playlist_name, playlist_id);
+    // Refine some playlist properties that should be different for subscribed
+    // playlists
+    playlist_item->setData(SubscribedPlaylist, Role_PlaylistType);
+    playlist_item->setData(false, InternetModel::Role_CanBeModified);
+    PlaylistInfo playlist_info(playlist_id, playlist_name, playlist_item);
+    subscribed_playlists_.insert(playlist_id, playlist_info);
+    root_->insertRow(subscribed_playlists_divider_->row() + 1, playlist_item);
+
+    // Request playlist's songs
+    RefreshPlaylist(playlist_id, playlist_name);
   }
 }
 
