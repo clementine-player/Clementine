@@ -27,29 +27,29 @@ FilesystemMusicStorage::FilesystemMusicStorage(const QString& root)
 }
 
 bool FilesystemMusicStorage::CopyToStorage(const CopyJob& job) {
-  const QString dest_filename = root_ + "/" + job.destination_;
+  const QFileInfo src = QFileInfo(job.source_);
+  const QFileInfo dest = QFileInfo(root_ + "/" + job.destination_ );
 
   // Don't do anything if the destination is the same as the source
-  if (job.source_ == dest_filename)
+  if (src == dest)
     return true;
 
   // Create directories as required
-  const QString dest_directory = dest_filename.section('/', 0, -2);
   QDir dir;
-  if (!dir.mkpath(dest_directory)) {
-    qLog(Warning) << "Failed to create directory" << dest_directory;
+  if (!dir.mkpath(dest.absolutePath())) {
+    qLog(Warning) << "Failed to create directory" << dest.dir().absolutePath();
     return false;
   }
 
   // Remove the destination file if it exists and we want to overwrite
-  if (job.overwrite_ && QFile::exists(dest_filename))
-    QFile::remove(dest_filename);
+  if (job.overwrite_ && dest.exists())
+    QFile::remove(dest.absoluteFilePath());
 
   // Copy or move
   if (job.remove_original_)
-    return QFile::rename(job.source_, dest_filename);
+    return QFile::rename(src.absoluteFilePath(), dest.absoluteFilePath());
   else
-    return QFile::copy(job.source_, dest_filename);
+    return QFile::copy(src.absoluteFilePath(), dest.absoluteFilePath());
 }
 
 bool FilesystemMusicStorage::DeleteFromStorage(const DeleteJob& job) {
