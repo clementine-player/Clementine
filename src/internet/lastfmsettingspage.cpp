@@ -74,11 +74,11 @@ void LastFMSettingsPage::AuthenticationComplete(bool success) {
     ui_->password->clear();
     // Save settings
     Save();
-    RefreshControls(true);
   } else {
     QMessageBox::warning(this, tr("Authentication failed"), tr("Your Last.fm credentials were incorrect"));
   }
 
+  RefreshControls(success);
   service_->UpdateSubscriberStatus();
 }
 
