@@ -371,14 +371,14 @@ bool Playlist::FilterContainsVirtualIndex(int i) const {
   return proxy_->filterAcceptsRow(virtual_items_[i], QModelIndex());
 }
 
-int Playlist::NextVirtualIndex(int i) const {
+int Playlist::NextVirtualIndex(int i, bool ignore_repeat_track) const {
   PlaylistSequence::RepeatMode repeat_mode = playlist_sequence_->repeat_mode();
   PlaylistSequence::ShuffleMode shuffle_mode = playlist_sequence_->shuffle_mode();
   bool album_only = repeat_mode == PlaylistSequence::Repeat_Album ||
                     shuffle_mode == PlaylistSequence::Shuffle_InsideAlbum;
 
   // This one's easy - if we have to repeat the current track then just return i
-  if (repeat_mode == PlaylistSequence::Repeat_Track) {
+  if (repeat_mode == PlaylistSequence::Repeat_Track && !ignore_repeat_track) {
     if (!FilterContainsVirtualIndex(i))
       return virtual_items_.count(); // It's not in the filter any more
     return i;
@@ -451,7 +451,7 @@ int Playlist::PreviousVirtualIndex(int i) const {
   return -1;
 }
 
-int Playlist::next_row() const {
+int Playlist::next_row(bool ignore_repeat_track) const {
   // Did we want to stop after this track?
   if (stop_after_.isValid() && current_row() == stop_after_.row())
     return -1;
@@ -461,7 +461,7 @@ int Playlist::next_row() const {
     return queue_->PeekNext();
   }
 
-  int next_virtual_index = NextVirtualIndex(current_virtual_index_);
+  int next_virtual_index = NextVirtualIndex(current_virtual_index_, ignore_repeat_track);
   if (next_virtual_index >= virtual_items_.count()) {
     // We've gone off the end of the playlist.
 
@@ -473,7 +473,7 @@ int Playlist::next_row() const {
         break;
 
       default:
-        next_virtual_index = NextVirtualIndex(-1);
+        next_virtual_index = NextVirtualIndex(-1, ignore_repeat_track);
         break;
     }
   }

@@ -158,7 +158,10 @@ void Player::NextInternal(Engine::TrackChangeFlags change) {
 }
 
 void Player::NextItem(Engine::TrackChangeFlags change) {
-  int i = playlists_->active()->next_row();
+  // Manual track changes override "Repeat track"
+  const bool ignore_repeat_track = change & Engine::Manual;
+
+  int i = playlists_->active()->next_row(ignore_repeat_track);
   if (i == -1) {
     playlists_->active()->set_current_row(i);
     emit PlaylistFinished();
