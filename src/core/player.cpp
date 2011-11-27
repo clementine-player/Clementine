@@ -88,7 +88,7 @@ void Player::HandleLoadResult(const UrlHandler::LoadResult& result) {
                 << "said no more tracks";
 
     loading_async_ = QUrl();
-    NextItem(Engine::Auto);
+    NextItem(stream_change_type_);
     break;
 
   case UrlHandler::LoadResult::TrackAvailable: {
