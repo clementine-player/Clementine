@@ -1055,7 +1055,8 @@ void GroovesharkService::NewPlaylistCreated(QNetworkReply* reply, const QString&
   QStandardItem* new_playlist_item = CreatePlaylistItem(name, playlist_id);
   PlaylistInfo playlist_info(playlist_id, name);
   playlist_info.item_ = new_playlist_item;
-  root_->appendRow(new_playlist_item);
+  // Insert the newly created playlist just above the subscribed playlists
+  root_->insertRow(subscribed_playlists_divider_->row(), new_playlist_item);
   playlists_.insert(playlist_id, playlist_info);
 }
 
