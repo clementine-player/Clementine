@@ -266,8 +266,7 @@ void SpotifyClient::SendSearchResponse(sp_search* result) {
 
 void SpotifyClient::HandleMessage(const spotify_pb::SpotifyMessage& message) {
   if (message.has_login_request()) {
-    const spotify_pb::LoginRequest& r = message.login_request();
-    Login(QStringFromStdString(r.username()), QStringFromStdString(r.password()));
+    Login(message.login_request());
   } else if (message.has_load_playlist_request()) {
     LoadPlaylist(message.load_playlist_request());
   } else if (message.has_playback_request()) {
@@ -282,10 +281,28 @@ void SpotifyClient::HandleMessage(const spotify_pb::SpotifyMessage& message) {
     SyncPlaylist(message.sync_playlist_request());
   } else if (message.has_browse_album_request()) {
     BrowseAlbum(QStringFromStdString(message.browse_album_request().uri()));
+  } else if (message.has_set_playback_settings_request()) {
+    SetPlaybackSettings(message.set_playback_settings_request());
   }
 }
 
-void SpotifyClient::Login(const QString& username, const QString& password) {
+void SpotifyClient::SetPlaybackSettings(const spotify_pb::PlaybackSettings& req) {
+  sp_bitrate bitrate = SP_BITRATE_320k;
+  switch (req.bitrate()) {
+    case spotify_pb::Bitrate96k:  bitrate = SP_BITRATE_96k;  break;
+    case spotify_pb::Bitrate160k: bitrate = SP_BITRATE_160k; break;
+    case spotify_pb::Bitrate320k: bitrate = SP_BITRATE_320k; break;
+  }
+
+  qLog(Debug) << "Setting playback settings: bitrate"
+              << bitrate << "normalisation" << req.volume_normalisation();
+
+  sp_session_preferred_bitrate(session_, bitrate);
+  sp_session_preferred_offline_bitrate(session_, bitrate, false);
+  sp_session_set_volume_normalization(session_, req.volume_normalisation());
+}
+
+void SpotifyClient::Login(const spotify_pb::LoginRequest& req) {
   sp_error error = sp_session_create(&spotify_config_, &session_);
   if (error != SP_ERROR_OK) {
     qLog(Warning) << "Failed to create session" << sp_error_message(error);
@@ -293,10 +310,9 @@ void SpotifyClient::Login(const QString& username, const QString& password) {
     return;
   }
 
-  sp_session_preferred_bitrate(session_, SP_BITRATE_320k);
-  sp_session_preferred_offline_bitrate(session_, SP_BITRATE_320k, false);
+  SetPlaybackSettings(req.playback_settings());
 
-  if (password.isEmpty()) {
+  if (req.password().empty()) {
     sp_error error = sp_session_relogin(session_);
     if (error != SP_ERROR_OK) {
       qLog(Warning) << "Tried to relogin but no stored credentials";
@@ -305,8 +321,8 @@ void SpotifyClient::Login(const QString& username, const QString& password) {
     }
   } else {
     sp_session_login(session_,
-                     username.toUtf8().constData(),
-                     password.toUtf8().constData(),
+                     req.username().c_str(),
+                     req.password().c_str(),
                      true);  // Remember the password.
   }
 }

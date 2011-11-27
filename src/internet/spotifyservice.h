@@ -88,7 +88,7 @@ private:
   void EnsureMenuCreated();
 
   QStandardItem* PlaylistBySpotifyIndex(int index) const;
-  bool DoPlaylistsDiffer(const spotify_pb::Playlists& response);
+  bool DoPlaylistsDiffer(const spotify_pb::Playlists& response) const;
 
 private slots:
   void EnsureServerCreated(const QString& username = QString(),
@@ -140,6 +140,8 @@ private:
   QMap<int, int> playlist_sync_ids_;
 
   LoginState login_state_;
+  spotify_pb::Bitrate bitrate_;
+  bool volume_normalisation_;
 };
 
 #endif

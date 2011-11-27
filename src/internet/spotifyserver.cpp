@@ -75,7 +75,8 @@ void SpotifyServer::SendMessage(const spotify_pb::SpotifyMessage& message) {
   }
 }
 
-void SpotifyServer::Login(const QString& username, const QString& password) {
+void SpotifyServer::Login(const QString& username, const QString& password,
+                          spotify_pb::Bitrate bitrate, bool volume_normalisation) {
   spotify_pb::SpotifyMessage message;
 
   spotify_pb::LoginRequest* request = message.mutable_login_request();
@@ -83,6 +84,18 @@ void SpotifyServer::Login(const QString& username, const QString& password) {
   if (!password.isEmpty()) {
     request->set_password(DataCommaSizeFromQString(password));
   }
+  request->mutable_playback_settings()->set_bitrate(bitrate);
+  request->mutable_playback_settings()->set_volume_normalisation(volume_normalisation);
+
+  SendMessage(message);
+}
+
+void SpotifyServer::SetPlaybackSettings(spotify_pb::Bitrate bitrate, bool volume_normalisation) {
+  spotify_pb::SpotifyMessage message;
+
+  spotify_pb::PlaybackSettings* request = message.mutable_set_playback_settings_request();
+  request->set_bitrate(bitrate);
+  request->set_volume_normalisation(volume_normalisation);
 
   SendMessage(message);
 }

@@ -106,7 +106,7 @@ private:
   static void SP_CALLCONV AlbumBrowseComplete(sp_albumbrowse* result, void* userdata);
 
   // Request handlers.
-  void Login(const QString& username, const QString& password);
+  void Login(const spotify_pb::LoginRequest& req);
   void Search(const spotify_pb::SearchRequest& req);
   void LoadPlaylist(const spotify_pb::LoadPlaylistRequest& req);
   void SyncPlaylist(const spotify_pb::SyncPlaylistRequest& req);
@@ -114,6 +114,7 @@ private:
   void Seek(qint64 offset_bytes);
   void LoadImage(const QString& id_b64);
   void BrowseAlbum(const QString& uri);
+  void SetPlaybackSettings(const spotify_pb::PlaybackSettings& req);
 
   void SendPlaylistList();
 

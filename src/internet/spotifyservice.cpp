@@ -47,7 +47,10 @@ SpotifyService::SpotifyService(InternetModel* parent)
       pending_search_playlist_(NULL),
       context_menu_(NULL),
       search_delay_(new QTimer(this)),
-      login_state_(LoginState_OtherError) {
+      login_state_(LoginState_OtherError),
+      bitrate_(spotify_pb::Bitrate320k),
+      volume_normalisation_(false)
+{
   // Build the search path for the binary blob.
   // Look for one distributed alongside clementine first, then check in the
   // user's home directory for any that have been downloaded.
@@ -182,6 +185,13 @@ void SpotifyService::ReloadSettings() {
   s.beginGroup(kSettingsGroup);
 
   login_state_ = LoginState(s.value("login_state", LoginState_OtherError).toInt());
+  bitrate_ = static_cast<spotify_pb::Bitrate>(
+        s.value("bitrate", spotify_pb::Bitrate320k).toInt());
+  volume_normalisation_ = s.value("volume_normalisation", false).toBool();
+
+  if (server_ && blob_process_) {
+    server_->SetPlaybackSettings(bitrate_, volume_normalisation_);
+  }
 }
 
 void SpotifyService::EnsureServerCreated(const QString& username,
@@ -216,14 +226,18 @@ void SpotifyService::EnsureServerCreated(const QString& username,
 
   login_task_id_ = model()->task_manager()->StartTask(tr("Connecting to Spotify"));
 
+  QString login_username = username;
+  QString login_password = password;
+
   if (username.isEmpty()) {
     QSettings s;
     s.beginGroup(kSettingsGroup);
 
-    server_->Login(s.value("username").toString(), QString::null);
-  } else {
-    server_->Login(username, password);
+    login_username = s.value("username").toString();
+    login_password = QString();
   }
+
+  server_->Login(login_username, login_password, bitrate_, volume_normalisation_);
 
   StartBlobProcess();
 }
@@ -349,7 +363,7 @@ void SpotifyService::PlaylistsUpdated(const spotify_pb::Playlists& response) {
   }
 }
 
-bool SpotifyService::DoPlaylistsDiffer(const spotify_pb::Playlists& response) {
+bool SpotifyService::DoPlaylistsDiffer(const spotify_pb::Playlists& response) const {
   if (playlists_.count() != response.playlist_size()) {
     return true;
   }
