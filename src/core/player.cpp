@@ -302,6 +302,11 @@ void Player::PlayAt(int index, Engine::TrackChangeFlags change, bool reshuffle) 
     playlists_->active()->set_current_row(-1);
   playlists_->active()->set_current_row(index);
 
+  if (playlists()->active()->current_row() == -1) {
+    // Maybe index didn't exist in the playlist.
+    return;
+  }
+
   current_item_ = playlists_->active()->current_item();
   const QUrl url = current_item_->Url();
 
