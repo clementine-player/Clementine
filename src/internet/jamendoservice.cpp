@@ -373,8 +373,8 @@ Song JamendoService::ReadTrack(const QString& artist,
         if (id == 0)
           continue;
 
-        QString ogg_url = QString(kOggStreamUrl).arg(id_text);
-        song.set_url(QUrl(ogg_url));
+        QString mp3_url = QString(kMp3StreamUrl).arg(id_text);
+        song.set_url(QUrl(mp3_url));
         song.set_art_automatic(album_cover);
         song.set_valid(true);
 
