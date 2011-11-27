@@ -43,6 +43,7 @@
 #include <QtDebug>
 
 const char* EditTagDialog::kHintText = QT_TR_NOOP("(different across multiple songs)");
+const char* EditTagDialog::kSettingsGroup = "EditTagDialog";
 
 EditTagDialog::EditTagDialog(CoverProviders* cover_providers, QWidget* parent)
   : QDialog(parent),
@@ -675,7 +676,21 @@ void EditTagDialog::showEvent(QShowEvent* e) {
   // Set the dialog's height to the smallest possible
   resize(width(), sizeHint().height());
 
+  // Restore the tab that was current last time.
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+  ui_->tab_widget->setCurrentIndex(s.value("current_tab").toInt());
+
   QDialog::showEvent(e);
+}
+
+void EditTagDialog::hideEvent(QHideEvent* e) {
+  // Save the current tab
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+  s.setValue("current_tab", ui_->tab_widget->currentIndex());
+
+  QDialog::hideEvent(e);
 }
 
 void EditTagDialog::SongRated(float rating) {

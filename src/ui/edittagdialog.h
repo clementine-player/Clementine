@@ -48,6 +48,7 @@ public:
   ~EditTagDialog();
 
   static const char* kHintText;
+  static const char* kSettingsGroup;
 
   void SetSongs(const SongList& songs, const PlaylistItemList& items = PlaylistItemList());
   void SetTagCompleter(LibraryBackend* backend);
@@ -62,6 +63,7 @@ signals:
 protected:
   bool eventFilter(QObject* o, QEvent* e);
   void showEvent(QShowEvent*);
+  void hideEvent(QHideEvent*);
 
 private slots:
   void SetSongsFinished();
