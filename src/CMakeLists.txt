@@ -214,9 +214,6 @@ set(SOURCES
   playlistparsers/xmlparser.cpp
   playlistparsers/xspfparser.cpp
 
-  resolvers/libraryresolver.cpp
-  resolvers/songresolver.cpp
-
   smartplaylists/generator.cpp
   smartplaylists/generatorinserter.cpp
   smartplaylists/querygenerator.cpp
@@ -450,10 +447,6 @@ set(HEADERS
   playlistparsers/playlistparser.h
   playlistparsers/plsparser.h
   playlistparsers/xspfparser.h
-
-  resolvers/libraryresolver.h
-  resolvers/resolver.h
-  resolvers/songresolver.h
 
   smartplaylists/generator.h
   smartplaylists/generatorinserter.h
@@ -707,14 +700,12 @@ optional_source(HAVE_SPOTIFY
     internet/spotifyserver.cpp
     internet/spotifyservice.cpp
     internet/spotifysettingspage.cpp
-    resolvers/spotifyresolver.cpp
   HEADERS
     globalsearch/spotifysearchprovider.h
     internet/spotifyblobdownloader.h
     internet/spotifyserver.h
     internet/spotifyservice.h
     internet/spotifysettingspage.h
-    resolvers/spotifyresolver.h
 )
 
 optional_source(HAVE_QCA INCLUDE_DIRECTORIES ${QCA_INCLUDE_DIRS})
