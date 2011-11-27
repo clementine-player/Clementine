@@ -38,7 +38,7 @@ add_executable(clementine-spotifyblob
 )
 
 target_link_libraries(clementine-spotifyblob
-  ${SPOTIFY_LIBRARIES}
+  ${SPOTIFY_LIBRARIES} ${SPOTIFY_LDFLAGS}
   ${QT_QTCORE_LIBRARY}
   ${QT_QTNETWORK_LIBRARY}
   clementine-spotifyblob-messages

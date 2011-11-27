@@ -66,7 +66,7 @@ pkg_check_modules(PLIST libplist)
 pkg_check_modules(USBMUXD libusbmuxd)
 pkg_check_modules(LIBMTP libmtp>=1.0)
 pkg_check_modules(INDICATEQT indicate-qt)
-pkg_check_modules(SPOTIFY libspotify>=0.0.8)
+pkg_check_modules(SPOTIFY libspotify>=10.1.16)
 pkg_check_modules(CDIO libcdio)
 pkg_check_modules(QCA qca2)
 

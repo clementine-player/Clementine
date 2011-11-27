@@ -93,6 +93,9 @@ Section "Delete old files" oldfiles
   Delete "$INSTDIR\gstreamer-plugins\libgstffmpeg-gpl.dll"
   Delete "$INSTDIR\gstreamer-plugins\libgstqueue2.dll"
   Delete "$INSTDIR\gstreamer-plugins\libgstsoup.dll"
+
+  ; 1.0 prerelease
+  Delete "$INSTDIR\spotify.dll"
 SectionEnd
 
 Section "Clementine" Clementine
@@ -155,7 +158,7 @@ Section "Clementine" Clementine
   File "libqjson.dll"
   File "libsoup-2.4-1.dll"
   File "libspeex-1.dll"
-  File "spotify.dll"
+  File "libspotify.dll"
   File "libtag.dll"
   File "libtasn1-3.dll"
   File "libusbmuxd.dll"
@@ -991,7 +994,7 @@ Section "Uninstall"
   Delete "$INSTDIR\libqjson.dll"
   Delete "$INSTDIR\libsoup-2.4-1.dll"
   Delete "$INSTDIR\libspeex-1.dll"
-  Delete "$INSTDIR\spotify.dll"
+  Delete "$INSTDIR\libspotify.dll"
   Delete "$INSTDIR\libtag.dll"
   Delete "$INSTDIR\libtasn1-3.dll"
   Delete "$INSTDIR\libusbmuxd.dll"
