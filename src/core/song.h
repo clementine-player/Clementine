@@ -47,6 +47,19 @@
    struct IWMDMMetaData;
 #endif
 
+// Taglib pulls in some windows headers that #define all sorts of nasties.
+// Undef those here.
+#ifdef RemoveDirectory
+# undef RemoveDirectory
+#endif
+#ifdef AddJob
+# undef AddJob
+#endif
+#ifdef LoadIcon
+# undef LoadIcon
+#endif
+
+
 class SqlRow;
 
 #ifdef HAVE_LIBLASTFM

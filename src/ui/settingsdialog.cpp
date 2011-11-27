@@ -125,11 +125,11 @@ SettingsDialog::SettingsDialog(BackgroundStreams* streams, QWidget* parent)
 #endif
 
   // User interface
-  QTreeWidgetItem* interface = AddCategory(tr("User interface"));
-  AddPage(Page_GlobalShortcuts, new GlobalShortcutsSettingsPage(this), interface);
-  AddPage(Page_GlobalSearch, new GlobalSearchSettingsPage(this), interface);
-  AddPage(Page_SongInformation, new SongInfoSettingsPage(this), interface);
-  AddPage(Page_Notifications, new NotificationsSettingsPage(this), interface);
+  QTreeWidgetItem* iface = AddCategory(tr("User interface"));
+  AddPage(Page_GlobalShortcuts, new GlobalShortcutsSettingsPage(this), iface);
+  AddPage(Page_GlobalSearch, new GlobalSearchSettingsPage(this), iface);
+  AddPage(Page_SongInformation, new SongInfoSettingsPage(this), iface);
+  AddPage(Page_Notifications, new NotificationsSettingsPage(this), iface);
 
   // Internet providers
   QTreeWidgetItem* providers = AddCategory(tr("Internet providers"));
