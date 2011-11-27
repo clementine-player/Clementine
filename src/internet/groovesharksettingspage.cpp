@@ -15,11 +15,11 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "groovesharksettingspage.h"
-
-#include "core/network.h"
 #include "groovesharkservice.h"
+#include "groovesharksettingspage.h"
 #include "internetmodel.h"
+#include "core/logging.h"
+#include "core/network.h"
 #include "ui_groovesharksettingspage.h"
 #include "ui/iconloader.h"
 
@@ -49,7 +49,6 @@ GroovesharkSettingsPage::GroovesharkSettingsPage(SettingsDialog* dialog)
   ui_->login_state->AddCredentialField(ui_->username);
   ui_->login_state->AddCredentialField(ui_->password);
   ui_->login_state->AddCredentialGroup(ui_->account_group);
-
 }
 
 GroovesharkSettingsPage::~GroovesharkSettingsPage() {
@@ -113,7 +112,6 @@ void GroovesharkSettingsPage::UpdateLoginState() {
     ui_->login_state->SetAccountTypeText(tr("A Grooveshark Anywhere account is required."));
     break;
   }
-  //ui_->login_state->SetAccountTypeText(tr("A Grooveshark Anywhere account is required."));
 }
 
 void GroovesharkSettingsPage::Logout() {

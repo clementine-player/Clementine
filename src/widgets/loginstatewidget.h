@@ -66,9 +66,12 @@ signals:
 
 private slots:
   void Logout();
+  void FocusLastCredentialField();
 
 private:
   Ui_LoginStateWidget* ui_;
+
+  State state_;
 
   QList<QObject*> credential_fields_;
   QList<QWidget*> credential_groups_;

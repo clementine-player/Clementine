@@ -21,10 +21,13 @@
 
 #include <QDate>
 #include <QKeyEvent>
+#include <QLineEdit>
+#include <QTimer>
 
 LoginStateWidget::LoginStateWidget(QWidget* parent)
   : QWidget(parent),
-    ui_(new Ui_LoginStateWidget)
+    ui_(new Ui_LoginStateWidget),
+    state_(LoggedOut)
 {
   ui_->setupUi(this);
   ui_->signed_in->hide();
@@ -59,6 +62,9 @@ void LoginStateWidget::SetAccountTypeVisible(bool visible) {
 }
 
 void LoginStateWidget::SetLoggedIn(State state, const QString& account_name) {
+  State last_state = state_;
+  state_ = state;
+
   ui_->signed_in->setVisible(state == LoggedIn);
   ui_->signed_out->setVisible(state != LoggedIn);
   ui_->busy->setVisible(state == LoginInProgress);
@@ -71,6 +77,30 @@ void LoginStateWidget::SetLoggedIn(State state, const QString& account_name) {
   foreach (QWidget* widget, credential_groups_) {
     widget->setVisible(state != LoggedIn);
     widget->setEnabled(state != LoginInProgress);
+  }
+
+  if (state == LoggedOut && last_state == LoginInProgress) {
+    // A login just failed - give focus back to the last crediental field
+    // (usually password).  We have to do this after control gets back to the
+    // event loop because the user might have just closed a dialog and our
+    // widget might not be active yet.
+    QTimer::singleShot(0, this, SLOT(FocusLastCredentialField()));
+  }
+}
+
+void LoginStateWidget::FocusLastCredentialField() {
+  if (!credential_fields_.isEmpty()) {
+    QObject* object = credential_fields_.last();
+    QWidget* widget = qobject_cast<QWidget*>(object);
+    QLineEdit* line_edit = qobject_cast<QLineEdit*>(object);
+
+    if (widget) {
+      widget->setFocus();
+    }
+
+    if (line_edit) {
+      line_edit->selectAll();
+    }
   }
 }
 
