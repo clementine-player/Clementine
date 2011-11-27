@@ -44,7 +44,8 @@ class PlaylistSequence : public QWidget {
   enum ShuffleMode {
     Shuffle_Off = 0,
     Shuffle_All = 1,
-    Shuffle_Album = 2,
+    Shuffle_InsideAlbum = 2,
+    Shuffle_Albums = 3,
   };
 
   static const char* kSettingsGroup;

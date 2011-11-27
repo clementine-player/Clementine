@@ -53,6 +53,7 @@
 
 #include <QFile>
 #include <QFileInfo>
+#include <QLatin1Literal>
 #include <QSqlQuery>
 #include <QtConcurrentRun>
 #include <QTextCodec>
@@ -1357,6 +1358,13 @@ bool Song::IsOnSameAlbum(const Song& other) const {
     return true;
 
   return album() == other.album() && artist() == other.artist();
+}
+
+QString Song::AlbumKey() const {
+  return QString("%1|%2|%3").arg(
+        is_compilation() ? "_compilation" : artist(),
+        has_cue() ? cue_path() : "",
+        album());
 }
 
 void Song::ToXesam(QVariantMap* map) const {

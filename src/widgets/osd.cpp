@@ -291,9 +291,10 @@ void OSD::ShuffleModeChanged(PlaylistSequence::ShuffleMode mode) {
   if (show_on_play_mode_change_) {
     QString current_mode = QString();
     switch (mode) {
-      case PlaylistSequence::Shuffle_Off:   current_mode = tr("Don't shuffle");   break;
-      case PlaylistSequence::Shuffle_All:   current_mode = tr("Shuffle all");   break;
-      case PlaylistSequence::Shuffle_Album: current_mode = tr("Shuffle by album"); break;
+      case PlaylistSequence::Shuffle_Off:         current_mode = tr("Don't shuffle");   break;
+      case PlaylistSequence::Shuffle_All:         current_mode = tr("Shuffle all");     break;
+      case PlaylistSequence::Shuffle_InsideAlbum: current_mode = tr("Shuffle tracks in this album"); break;
+      case PlaylistSequence::Shuffle_Albums:      current_mode = tr("Shuffle albums");  break;
     }
     ShowMessage(QCoreApplication::applicationName(), current_mode);
   }

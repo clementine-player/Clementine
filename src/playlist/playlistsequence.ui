@@ -109,12 +109,12 @@
     <string>Don't shuffle</string>
    </property>
   </action>
-  <action name="action_shuffle_album">
+  <action name="action_shuffle_inside_album">
    <property name="checkable">
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>Shuffle by album</string>
+    <string>Shuffle tracks in this album</string>
    </property>
   </action>
   <action name="action_shuffle_all">
@@ -123,6 +123,14 @@
    </property>
    <property name="text">
     <string>Shuffle all</string>
+   </property>
+  </action>
+  <action name="action_shuffle_albums">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Shuffle albums</string>
    </property>
   </action>
  </widget>

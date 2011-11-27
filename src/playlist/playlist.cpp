@@ -375,7 +375,7 @@ int Playlist::NextVirtualIndex(int i) const {
   PlaylistSequence::RepeatMode repeat_mode = playlist_sequence_->repeat_mode();
   PlaylistSequence::ShuffleMode shuffle_mode = playlist_sequence_->shuffle_mode();
   bool album_only = repeat_mode == PlaylistSequence::Repeat_Album ||
-                    shuffle_mode == PlaylistSequence::Shuffle_Album;
+                    shuffle_mode == PlaylistSequence::Shuffle_InsideAlbum;
 
   // This one's easy - if we have to repeat the current track then just return i
   if (repeat_mode == PlaylistSequence::Repeat_Track) {
@@ -415,7 +415,7 @@ int Playlist::PreviousVirtualIndex(int i) const {
   PlaylistSequence::RepeatMode repeat_mode = playlist_sequence_->repeat_mode();
   PlaylistSequence::ShuffleMode shuffle_mode = playlist_sequence_->shuffle_mode();
   bool album_only = repeat_mode == PlaylistSequence::Repeat_Album ||
-                    shuffle_mode == PlaylistSequence::Shuffle_Album;
+                    shuffle_mode == PlaylistSequence::Shuffle_InsideAlbum;
 
   // This one's easy - if we have to repeat the current track then just return i
   if (repeat_mode == PlaylistSequence::Repeat_Track) {
@@ -1617,17 +1617,84 @@ void Playlist::Shuffle() {
   Save();
 }
 
+namespace {
+bool AlbumShuffleComparator(const QMap<QString, int>& album_key_positions,
+                            const QMap<int, QString>& album_keys,
+                            int left, int right) {
+  const int left_pos = album_key_positions[album_keys[left]];
+  const int right_pos = album_key_positions[album_keys[right]];
+
+  if (left_pos == right_pos)
+    return left < right;
+  return left_pos < right_pos;
+}
+}
+
 void Playlist::ReshuffleIndices() {
-  if (!is_shuffled_) {
+  if (playlist_sequence_->shuffle_mode() == PlaylistSequence::Shuffle_Off) {
+    // No shuffling - sort the virtual item list normally.
     std::sort(virtual_items_.begin(), virtual_items_.end());
     if (current_row() != -1)
       current_virtual_index_ = virtual_items_.indexOf(current_row());
-  } else {
-    QList<int>::iterator begin = virtual_items_.begin();
-    if (current_virtual_index_ != -1)
-      std::advance(begin, current_virtual_index_ + 1);
+    return;
+  }
 
-    std::random_shuffle(begin, virtual_items_.end());
+  // If the user is already playing a song, advance the begin iterator to
+  // only shuffle items that haven't been played yet.
+  QList<int>::iterator begin = virtual_items_.begin();
+  QList<int>::iterator end = virtual_items_.end();
+  if (current_virtual_index_ != -1)
+    std::advance(begin, current_virtual_index_ + 1);
+
+  switch (playlist_sequence_->shuffle_mode()) {
+  case PlaylistSequence::Shuffle_Off:
+    // Handled above.
+    break;
+
+  case PlaylistSequence::Shuffle_All:
+  case PlaylistSequence::Shuffle_InsideAlbum:
+    std::random_shuffle(begin, end);
+    break;
+
+  case PlaylistSequence::Shuffle_Albums: {
+    QMap<int, QString> album_keys; // real index -> key
+    QSet<QString> album_key_set;   // unique keys
+
+    // Find all the unique albums in the playlist
+    for (QList<int>::iterator it = begin ; it != end ; ++it) {
+      const int index = *it;
+      const QString key = items_[index]->Metadata().AlbumKey();
+      album_keys[index] = key;
+      album_key_set << key;
+    }
+
+    // Shuffle them
+    QStringList shuffled_album_keys = album_key_set.toList();
+    std::random_shuffle(shuffled_album_keys.begin(),
+                        shuffled_album_keys.end());
+
+    // If the user is currently playing a song, force its album to be first.
+    if (current_virtual_index_ != -1) {
+      const QString key = items_[current_row()]->Metadata().AlbumKey();
+      const int pos = shuffled_album_keys.indexOf(key);
+      if (pos >= 1) {
+        std::swap(shuffled_album_keys[0], shuffled_album_keys[pos]);
+      }
+    }
+
+    // Create album key -> position mapping for fast lookup
+    QMap<QString, int> album_key_positions;
+    for (int i=0 ; i<shuffled_album_keys.count() ; ++i) {
+      album_key_positions[shuffled_album_keys[i]] = i;
+    }
+
+    // Sort the virtual items
+    std::stable_sort(begin, end,
+                     boost::bind(AlbumShuffleComparator, album_key_positions,
+                                 album_keys, _1, _2));
+
+    break;
+  }
   }
 }
 

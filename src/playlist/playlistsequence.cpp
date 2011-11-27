@@ -57,7 +57,8 @@ PlaylistSequence::PlaylistSequence(QWidget *parent, SettingsProvider *settings)
   QActionGroup* shuffle_group = new QActionGroup(this);
   shuffle_group->addAction(ui_->action_shuffle_off);
   shuffle_group->addAction(ui_->action_shuffle_all);
-  shuffle_group->addAction(ui_->action_shuffle_album);
+  shuffle_group->addAction(ui_->action_shuffle_inside_album);
+  shuffle_group->addAction(ui_->action_shuffle_albums);
   shuffle_menu_->addActions(shuffle_group->actions());
   ui_->shuffle->setMenu(shuffle_menu_);
 
@@ -120,8 +121,9 @@ void PlaylistSequence::RepeatActionTriggered(QAction* action) {
 
 void PlaylistSequence::ShuffleActionTriggered(QAction* action) {
   ShuffleMode mode = Shuffle_Off;
-  if (action == ui_->action_shuffle_all)   mode = Shuffle_All;
-  if (action == ui_->action_shuffle_album) mode = Shuffle_Album;
+  if (action == ui_->action_shuffle_all)          mode = Shuffle_All;
+  if (action == ui_->action_shuffle_inside_album) mode = Shuffle_InsideAlbum;
+  if (action == ui_->action_shuffle_albums)       mode = Shuffle_Albums;
 
   SetShuffleMode(mode);
 }
@@ -148,9 +150,10 @@ void PlaylistSequence::SetShuffleMode(ShuffleMode mode) {
   ui_->shuffle->setChecked(mode != Shuffle_Off);
 
   switch (mode) {
-    case Shuffle_Off:   ui_->action_shuffle_off->setChecked(true);   break;
-    case Shuffle_All:   ui_->action_shuffle_all->setChecked(true);   break;
-    case Shuffle_Album: ui_->action_shuffle_album->setChecked(true); break;
+    case Shuffle_Off:         ui_->action_shuffle_off->setChecked(true);          break;
+    case Shuffle_All:         ui_->action_shuffle_all->setChecked(true);          break;
+    case Shuffle_InsideAlbum: ui_->action_shuffle_inside_album->setChecked(true); break;
+    case Shuffle_Albums:      ui_->action_shuffle_albums->setChecked(true);       break;
   }
 
 
@@ -184,9 +187,10 @@ void PlaylistSequence::CycleShuffleMode() {
   ShuffleMode mode = Shuffle_Off;
   //we cycle through the shuffle modes
   switch (shuffle_mode()) {
-    case Shuffle_Off:   mode = Shuffle_All;   break;
-    case Shuffle_All:   mode = Shuffle_Album;   break;
-    case Shuffle_Album: break;
+    case Shuffle_Off:         mode = Shuffle_All;           break;
+    case Shuffle_All:         mode = Shuffle_InsideAlbum;   break;
+    case Shuffle_InsideAlbum: mode = Shuffle_Albums;        break;
+    case Shuffle_Albums: break;
   }
 
   SetShuffleMode(mode);
