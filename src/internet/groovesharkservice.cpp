@@ -597,15 +597,19 @@ void GroovesharkService::UserPlaylistsRetrieved() {
 
   QVariantMap result = ExtractResult(reply);
   QVariantList playlists = result["playlists"].toList();
-  QVariantList::iterator it;
-  for (it = playlists.begin(); it != playlists.end(); ++it) {
+
+  foreach (const QVariant& playlist_variant, playlists) {
     // Get playlist info
-    QVariantMap playlist = (*it).toMap();
+    QVariantMap playlist = playlist_variant.toMap();
     int playlist_id = playlist["PlaylistID"].toInt();
     QString playlist_name = playlist["PlaylistName"].toString();
 
     // Request playlist's songs
     RefreshPlaylist(playlist_id, playlist_name);
+  }
+
+  if (playlists.isEmpty()) {
+    model()->task_manager()->SetTaskFinished(task_playlists_id_);
   }
 }
 
