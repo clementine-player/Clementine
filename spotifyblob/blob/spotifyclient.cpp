@@ -651,6 +651,10 @@ int SpotifyClient::MusicDeliveryCallback(
     }
   }
 
+  if (!me->media_pipeline_->is_accepting_data()) {
+    return 0;
+  }
+
   me->media_pipeline_->WriteData(
         reinterpret_cast<const char*>(frames),
         num_frames * format->channels * 2);

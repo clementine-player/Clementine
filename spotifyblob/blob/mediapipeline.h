@@ -32,16 +32,24 @@ public:
   ~MediaPipeline();
 
   bool is_initialised() const { return pipeline_; }
+  bool is_accepting_data() const { return accepting_data_; }
   bool Init(int sample_rate, int channels);
 
   void WriteData(const char* data, qint64 length);
   void EndStream();
 
 private:
+  static void NeedDataCallback(GstAppSrc* src, guint length, void* data);
+  static void EnoughDataCallback(GstAppSrc* src, void* data);
+  static gboolean SeekDataCallback(GstAppSrc* src, guint64 offset, void* data);
+
+private:
   Q_DISABLE_COPY(MediaPipeline)
 
   const int port_;
   const quint64 length_msec_;
+
+  bool accepting_data_;
 
   GstElement* pipeline_;
   GstAppSrc* appsrc_;

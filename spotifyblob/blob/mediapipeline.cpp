@@ -27,6 +27,7 @@
 MediaPipeline::MediaPipeline(int port, quint64 length_msec)
   : port_(port),
     length_msec_(length_msec),
+    accepting_data_(true),
     pipeline_(NULL),
     appsrc_(NULL),
     byte_rate_(1),
@@ -70,7 +71,16 @@ bool MediaPipeline::Init(int sample_rate, int channels) {
   g_object_set(G_OBJECT(tcpsink_), "host", "127.0.0.1", NULL);
   g_object_set(G_OBJECT(tcpsink_), "port", port_, NULL);
 
+  // We know the time of each buffer
   g_object_set(G_OBJECT(appsrc_), "format", GST_FORMAT_TIME, NULL);
+
+  // Set callbacks for when to start/stop pushing data
+  GstAppSrcCallbacks callbacks;
+  callbacks.enough_data = EnoughDataCallback;
+  callbacks.need_data = NeedDataCallback;
+  callbacks.seek_data = SeekDataCallback;
+
+  gst_app_src_set_callbacks(appsrc_, &callbacks, this, NULL);
 
 #if Q_BYTE_ORDER == Q_BIG_ENDIAN
   const int endianness = G_BIG_ENDIAN;
@@ -125,4 +135,21 @@ void MediaPipeline::EndStream() {
     return;
 
   gst_app_src_end_of_stream(appsrc_);
+}
+
+void MediaPipeline::NeedDataCallback(GstAppSrc* src, guint length, void* data) {
+  MediaPipeline* me = reinterpret_cast<MediaPipeline*>(data);
+  me->accepting_data_ = true;
+}
+
+void MediaPipeline::EnoughDataCallback(GstAppSrc* src, void* data) {
+  MediaPipeline* me = reinterpret_cast<MediaPipeline*>(data);
+  me->accepting_data_ = false;
+}
+
+gboolean MediaPipeline::SeekDataCallback(GstAppSrc* src, guint64 offset, void * data) {
+  //MediaPipeline* me = reinterpret_cast<MediaPipeline*>(data);
+
+  qLog(Debug) << "Gstreamer wants seek to" << offset;
+  return false;
 }
