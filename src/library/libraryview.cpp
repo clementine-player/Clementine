@@ -380,16 +380,17 @@ void LibraryView::ShowInVarious(bool on) {
   if (!context_menu_index_.isValid())
     return;
 
-  // Build a list of the selected unique album/artist combos
-  typedef QPair<QString, QString> AlbumArtist;
-  QSet<AlbumArtist> selected;
+  // Map is from album name -> all artists sharing that album name, built from each selected
+  // song. We put through "Various Artists" changes one album at a time, to make sure the old album
+  // node gets removed (due to all children removed), before the new one gets added
+  QMultiMap<QString, QString> albums;
   foreach (const Song& song, GetSelectedSongs()) {
-    selected << AlbumArtist(song.album(), song.artist());
+    if (albums.find(song.album(), song.artist()) == albums.end())
+      albums.insert( song.album(), song.artist() );
   }
 
-  foreach (const AlbumArtist& albumartist, selected.values()) {
-    library_->backend()->ForceCompilation(
-          albumartist.second, albumartist.first, on);
+  foreach (const QString& album, QSet<QString>::fromList(albums.keys())) {
+    library_->backend()->ForceCompilation(album, albums.values(album), on);
   }
 }
 

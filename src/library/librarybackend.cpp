@@ -878,52 +878,53 @@ void LibraryBackend::UpdateManualAlbumArt(const QString &artist,
   }
 }
 
-void LibraryBackend::ForceCompilation(const QString& artist, const QString& album, bool on) {
+void LibraryBackend::ForceCompilation(const QString& album, const QList<QString>& artists, bool on) {
   QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
+  SongList deleted_songs, added_songs;
 
-  // Get the songs before they're updated
-  LibraryQuery query;
-  query.SetColumnSpec("ROWID, " + Song::kColumnSpec);
-  query.AddWhere("album", album);
-  if (!artist.isNull())
-    query.AddWhere("artist", artist);
+  foreach(const QString &artist, artists) {
+    // Get the songs before they're updated
+    LibraryQuery query;
+    query.SetColumnSpec("ROWID, " + Song::kColumnSpec);
+    query.AddWhere("album", album);
+    if (!artist.isNull())
+      query.AddWhere("artist", artist);
 
-  if (!ExecQuery(&query)) return;
+    if (!ExecQuery(&query)) return;
 
-  SongList deleted_songs;
-  while (query.Next()) {
-    Song song;
-    song.InitFromQuery(query, true);
-    deleted_songs << song;
-  }
+    while (query.Next()) {
+      Song song;
+      song.InitFromQuery(query, true);
+      deleted_songs << song;
+    }
 
-  // Update the songs
-  QString sql(QString("UPDATE %1 SET forced_compilation_on = :forced_compilation_on,"
-                      "              forced_compilation_off = :forced_compilation_off,"
-                      "              effective_compilation = ((compilation OR sampler OR :forced_compilation_on) AND NOT :forced_compilation_off) + 0"
-                      " WHERE album = :album AND unavailable = 0").arg(songs_table_));
-  if (!artist.isEmpty())
-    sql += " AND artist = :artist";
+    // Update the songs
+    QString sql(QString("UPDATE %1 SET forced_compilation_on = :forced_compilation_on,"
+                        "              forced_compilation_off = :forced_compilation_off,"
+                        "              effective_compilation = ((compilation OR sampler OR :forced_compilation_on) AND NOT :forced_compilation_off) + 0"
+                        " WHERE album = :album AND unavailable = 0").arg(songs_table_));
+    if (!artist.isEmpty())
+      sql += " AND artist = :artist";
 
-  QSqlQuery q(sql, db);
-  q.bindValue(":forced_compilation_on", on ? 1 : 0);
-  q.bindValue(":forced_compilation_off", on ? 0 : 1);
-  q.bindValue(":album", album);
-  if (!artist.isEmpty())
-    q.bindValue(":artist", artist);
+    QSqlQuery q(sql, db);
+    q.bindValue(":forced_compilation_on", on ? 1 : 0);
+    q.bindValue(":forced_compilation_off", on ? 0 : 1);
+    q.bindValue(":album", album);
+    if (!artist.isEmpty())
+      q.bindValue(":artist", artist);
 
-  q.exec();
-  db_->CheckErrors(q);
+    q.exec();
+    db_->CheckErrors(q);
 
-  // Now get the updated songs
-  if (!ExecQuery(&query)) return;
+    // Now get the updated songs
+    if (!ExecQuery(&query)) return;
 
-  SongList added_songs;
-  while (query.Next()) {
-    Song song;
-    song.InitFromQuery(query, true);
-    added_songs << song;
+    while (query.Next()) {
+      Song song;
+      song.InitFromQuery(query, true);
+      added_songs << song;
+    }
   }
 
   if (!added_songs.isEmpty() || !deleted_songs.isEmpty()) {

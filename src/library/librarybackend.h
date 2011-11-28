@@ -173,7 +173,7 @@ class LibraryBackend : public LibraryBackendInterface {
   void AddOrUpdateSubdirs(const SubdirectoryList& subdirs);
   void UpdateCompilations();
   void UpdateManualAlbumArt(const QString& artist, const QString& album, const QString& art);
-  void ForceCompilation(const QString& artist, const QString& album, bool on);
+  void ForceCompilation(const QString& album, const QList<QString>& artists, bool on);
   void IncrementPlayCount(int id);
   void IncrementSkipCount(int id, float progress);
   void ResetStatistics(int id);
