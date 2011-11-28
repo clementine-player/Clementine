@@ -35,6 +35,7 @@
 
 
 static const int kPollTimeoutMsec = 100;
+static const int kMaxConnectionWaits = 50; // each one takes kPollTimeoutMsec
 
 // This is about one second of audio at spotify's bitrate.
 static const int kSocketBufferSize = 176400;
@@ -231,9 +232,16 @@ static gboolean gst_spotifytcp_src_start(GstBaseSrc* src) {
   server->StartPlayback(QString::fromAscii(*self->uri_), self->server_->serverPort());
 
   // Wait for a client to connect
+  int attempts = 0;
   while (!self->server_->waitForNewConnection(kPollTimeoutMsec)) {
     if (self->unlock_) {
       qLog(Warning) << "Unlock while waiting for connection";
+      return FALSE;
+    }
+
+    ++attempts;
+    if (attempts > kMaxConnectionWaits) {
+      qLog(Warning) << "Timed out waiting for connection";
       return FALSE;
     }
   }
