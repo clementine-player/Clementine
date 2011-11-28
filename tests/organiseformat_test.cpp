@@ -19,6 +19,9 @@
 #include "test_utils.h"
 
 #include "core/organiseformat.h"
+#include "core/timeconstants.h"
+
+#include <QUrl>
 
 class OrganiseFormatTest : public ::testing::Test {
 protected:

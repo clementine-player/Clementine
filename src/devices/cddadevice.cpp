@@ -15,10 +15,10 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-
 #include <QMutexLocker>
 
 #include "core/logging.h"
+#include "core/timeconstants.h"
 #include "library/librarybackend.h"
 #include "library/librarymodel.h"
 

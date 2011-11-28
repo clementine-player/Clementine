@@ -8,6 +8,7 @@
 #include "core/logging.h"
 #include "core/player.h"
 #include "core/taskmanager.h"
+#include "core/timeconstants.h"
 #include "core/utilities.h"
 #include "globalsearch/globalsearch.h"
 #include "globalsearch/spotifysearchprovider.h"

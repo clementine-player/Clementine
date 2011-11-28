@@ -20,6 +20,7 @@
 #include "ui/iconloader.h"
 
 #include <QIcon>
+#include <QUrl>
 
 const char* UrlSearchProvider::kUrlRegex = "^[a-zA-Z][a-zA-Z0-9+-.]*://";
 

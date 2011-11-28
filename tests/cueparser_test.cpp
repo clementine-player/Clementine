@@ -21,7 +21,10 @@
 #include "test_utils.h"
 #include "mock_taglib.h"
 
+#include "core/timeconstants.h"
 #include "playlistparsers/cueparser.h"
+
+#include <QUrl>
 
 class CueParserTest : public ::testing::Test {
  protected:

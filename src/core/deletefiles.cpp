@@ -22,6 +22,7 @@
 #include <QStringList>
 #include <QTimer>
 #include <QThread>
+#include <QUrl>
 
 const int DeleteFiles::kBatchSize = 50;
 

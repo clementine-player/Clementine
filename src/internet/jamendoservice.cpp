@@ -26,6 +26,7 @@
 #include "core/network.h"
 #include "core/scopedtransaction.h"
 #include "core/taskmanager.h"
+#include "core/timeconstants.h"
 #include "globalsearch/globalsearch.h"
 #include "globalsearch/librarysearchprovider.h"
 #include "library/librarybackend.h"

@@ -24,6 +24,7 @@
 #include <QFileInfo>
 #include <QTimer>
 #include <QThread>
+#include <QUrl>
 
 #include <boost/bind.hpp>
 

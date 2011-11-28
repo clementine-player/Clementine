@@ -24,6 +24,7 @@
 #include "core/mpris2_root.h"
 #include "core/mpris2_tracklist.h"
 #include "core/player.h"
+#include "core/timeconstants.h"
 #include "covers/artloader.h"
 #include "engines/enginebase.h"
 #include "playlist/playlist.h"

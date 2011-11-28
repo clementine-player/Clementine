@@ -19,6 +19,7 @@
 #include "songloader.h"
 #include "core/logging.h"
 #include "core/song.h"
+#include "core/timeconstants.h"
 #include "library/librarybackend.h"
 #include "library/sqlrow.h"
 #include "playlistparsers/parserbase.h"

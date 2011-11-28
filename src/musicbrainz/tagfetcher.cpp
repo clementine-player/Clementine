@@ -19,9 +19,11 @@
 #include "musicbrainzclient.h"
 #include "musicdnsclient.h"
 #include "tagfetcher.h"
+#include "core/timeconstants.h"
 
 #include <QFuture>
 #include <QFutureWatcher>
+#include <QUrl>
 #include <QtConcurrentMap>
 
 TagFetcher::TagFetcher(QObject* parent)

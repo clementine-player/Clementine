@@ -26,6 +26,7 @@
 #include "core/player.h"
 #include "core/song.h"
 #include "core/taskmanager.h"
+#include "core/timeconstants.h"
 #include "globalsearch/globalsearch.h"
 #include "globalsearch/librarysearchprovider.h"
 #include "library/librarymodel.h"

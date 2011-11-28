@@ -20,6 +20,7 @@
 #include "test_utils.h"
 #include "mock_taglib.h"
 
+#include "core/timeconstants.h"
 #include "playlistparsers/m3uparser.h"
 
 #include <QBuffer>

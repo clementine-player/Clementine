@@ -20,47 +20,27 @@
 
 #include <QFuture>
 #include <QImage>
-#include <QList>
 #include <QMetaType>
-#include <QSharedData>
 #include <QSharedDataPointer>
-#include <QSqlQuery>
-#include <QString>
-#include <QUrl>
 #include <QVariantMap>
 
-#include <xiphcomment.h>
-
 #include "config.h"
-#include "timeconstants.h"
 #include "engines/engine_fwd.h"
 
+class QSqlQuery;
+class QUrl;
+
 #ifdef HAVE_LIBGPOD
-#  include <gpod/itdb.h>
+  struct _Itdb_Track;
 #endif
 
 #ifdef HAVE_LIBMTP
-#  include <libmtp.h>
+  struct LIBMTP_track_struct;
 #endif
 
 #ifdef Q_OS_WIN32
-   struct IWMDMMetaData;
+  struct IWMDMMetaData;
 #endif
-
-// Taglib pulls in some windows headers that #define all sorts of nasties.
-// Undef those here.
-#ifdef RemoveDirectory
-# undef RemoveDirectory
-#endif
-#ifdef AddJob
-# undef AddJob
-#endif
-#ifdef LoadIcon
-# undef LoadIcon
-#endif
-
-
-class SqlRow;
 
 #ifdef HAVE_LIBLASTFM
   namespace lastfm {
@@ -76,6 +56,8 @@ namespace TagLib {
     class Tag;
   }
 }
+
+class SqlRow;
 
 
 class FileRefFactory {
@@ -95,6 +77,7 @@ class Song {
   Song();
   Song(const Song& other);
   Song(FileRefFactory* factory);
+  ~Song();
 
   static const QStringList kColumns;
   static const QString kColumnSpec;
@@ -153,13 +136,13 @@ class Song {
   void MergeFromSimpleMetaBundle(const Engine::SimpleMetaBundle& bundle);
 
 #ifdef HAVE_LIBGPOD
-  void InitFromItdb(const Itdb_Track* track, const QString& prefix);
-  void ToItdb(Itdb_Track* track) const;
+  void InitFromItdb(const _Itdb_Track* track, const QString& prefix);
+  void ToItdb(_Itdb_Track* track) const;
 #endif
 
 #ifdef HAVE_LIBMTP
-  void InitFromMTP(const LIBMTP_track_t* track, const QString& host);
-  void ToMTP(LIBMTP_track_t* track) const;
+  void InitFromMTP(const LIBMTP_track_struct* track, const QString& host);
+  void ToMTP(LIBMTP_track_struct* track) const;
 #endif
 
 #ifdef Q_OS_WIN32
@@ -179,72 +162,69 @@ class Song {
   void ToXesam(QVariantMap* map) const;
 
   // Simple accessors
-  bool is_valid() const { return d->valid_; }
-  bool is_unavailable() const { return d->unavailable_; }
-  int id() const { return d->id_; }
+  bool is_valid() const;
+  bool is_unavailable() const;
+  int id() const;
 
-  const QString& title() const { return d->title_; }
-  const QString& album() const { return d->album_; }
-  const QString& artist() const { return d->artist_; }
-  const QString& albumartist() const { return d->albumartist_; }
-  const QString& effective_albumartist() const { return d->albumartist_.isEmpty() ? d->artist_ : d->albumartist_; }
+  const QString& title() const;
+  const QString& album() const;
+  const QString& artist() const;
+  const QString& albumartist() const;
+  const QString& effective_albumartist() const;
   // Playlist views are special because you don't want to fill in album artists automatically for
   // compilations, but you do for normal albums:
-  const QString& playlist_albumartist() const { return is_compilation() ? d->albumartist_ : effective_albumartist(); }
-  const QString& composer() const { return d->composer_; }
-  int track() const { return d->track_; }
-  int disc() const { return d->disc_; }
-  float bpm() const { return d->bpm_; }
-  int year() const { return d->year_; }
-  const QString& genre() const { return d->genre_; }
-  const QString& comment() const { return d->comment_; }
-  bool is_compilation() const {
-    return (d->compilation_ || d->sampler_ || d->forced_compilation_on_)
-            && ! d->forced_compilation_off_;
-  }
-  float rating() const { return d->rating_; }
-  int playcount() const { return d->playcount_; }
-  int skipcount() const { return d->skipcount_; }
-  int lastplayed() const { return d->lastplayed_; }
-  int score() const { return d->score_; }
+  const QString& playlist_albumartist() const;
+  const QString& composer() const;
+  int track() const;
+  int disc() const;
+  float bpm() const;
+  int year() const;
+  const QString& genre() const;
+  const QString& comment() const;
+  bool is_compilation() const;
+  float rating() const;
+  int playcount() const;
+  int skipcount() const;
+  int lastplayed() const;
+  int score() const;
 
-  const QString& cue_path() const { return d->cue_path_; }
-  bool has_cue() const { return !d->cue_path_.isEmpty(); }
+  const QString& cue_path() const;
+  bool has_cue() const;
 
-  qint64 beginning_nanosec() const { return d->beginning_; }
-  qint64 end_nanosec() const { return d->end_; }
+  qint64 beginning_nanosec() const;
+  qint64 end_nanosec() const;
 
-  qint64 length_nanosec() const { return d->end_ - d->beginning_; }
+  qint64 length_nanosec() const;
 
-  int bitrate() const { return d->bitrate_; }
-  int samplerate() const { return d->samplerate_; }
+  int bitrate() const;
+  int samplerate() const;
 
-  int directory_id() const { return d->directory_id_; }
-  const QUrl& url() const { return d->url_; }
-  const QString& basefilename() const { return d->basefilename_; }
-  uint mtime() const { return d->mtime_; }
-  uint ctime() const { return d->ctime_; }
-  int filesize() const { return d->filesize_; }
-  FileType filetype() const { return d->filetype_; }
-  bool is_stream() const { return d->filetype_ == Type_Stream; }
-  bool is_cdda() const { return d->filetype_ == Type_Cdda; }
+  int directory_id() const;
+  const QUrl& url() const;
+  const QString& basefilename() const;
+  uint mtime() const;
+  uint ctime() const;
+  int filesize() const;
+  FileType filetype() const;
+  bool is_stream() const;
+  bool is_cdda() const;
 
-  const QString& art_automatic() const { return d->art_automatic_; }
-  const QString& art_manual() const { return d->art_manual_; }
+  const QString& art_automatic() const;
+  const QString& art_manual() const;
 
   // Returns true if this Song had it's cover manually unset by user.
-  bool has_manually_unset_cover() const { return d->art_manual_ == kManuallyUnsetCover; }
+  bool has_manually_unset_cover() const;
   // This method represents an explicit request to unset this song's
   // cover.
-  void manually_unset_cover() { d->art_manual_ = kManuallyUnsetCover; }
+  void manually_unset_cover();
 
   // Returns true if this song (it's media file) has an embedded cover.
-  bool has_embedded_cover() const { return d->art_automatic_ == kEmbeddedCover; }
+  bool has_embedded_cover() const;
   // Sets a flag saying that this song (it's media file) has an embedded
   // cover.
-  void set_embedded_cover() { d->art_automatic_ = kEmbeddedCover; }
+  void set_embedded_cover();
 
-  const QImage& image() const { return d->image_; }
+  const QImage& image() const;
 
   // Pretty accessors
   QString PrettyTitle() const;
@@ -259,49 +239,49 @@ class Song {
   bool Save() const;
   QFuture<bool> BackgroundSave() const;
 
-  void set_id(int id) { d->id_ = id; }
-  void set_valid(bool v) { d->valid_ = v; }
-  void set_title(const QString& v) { d->title_ = v; }
+  void set_id(int id);
+  void set_valid(bool v);
+  void set_title(const QString& v);
 
-  void set_album(const QString& v) { d->album_ = v; }
-  void set_artist(const QString& v) { d->artist_ = v; }
-  void set_albumartist(const QString& v) { d->albumartist_ = v; }
-  void set_composer(const QString& v) { d->composer_ = v; }
-  void set_track(int v) { d->track_ = v; }
-  void set_disc(int v) { d->disc_ = v; }
-  void set_bpm(float v) { d->bpm_ = v; }
-  void set_year(int v) { d->year_ = v; }
-  void set_genre(const QString& v) { d->genre_ = v; }
+  void set_album(const QString& v);
+  void set_artist(const QString& v);
+  void set_albumartist(const QString& v);
+  void set_composer(const QString& v);
+  void set_track(int v);
+  void set_disc(int v);
+  void set_bpm(float v);
+  void set_year(int v);
+  void set_genre(const QString& v);
   void set_genre_id3(int id);
-  void set_comment(const QString& v) { d->comment_ = v; }
-  void set_compilation(bool v) { d->compilation_ = v; }
-  void set_sampler(bool v) { d->sampler_ = v; }
-  void set_beginning_nanosec(qint64 v) { d->beginning_ = qMax(0ll, v); }
-  void set_end_nanosec(qint64 v) { d->end_ = v; }
-  void set_length_nanosec(qint64 v) { d->end_ = d->beginning_ + v; }
-  void set_bitrate(int v) { d->bitrate_ = v; }
-  void set_samplerate(int v) { d->samplerate_ = v; }
-  void set_mtime(int v) { d->mtime_ = v; }
-  void set_ctime(int v) { d->ctime_ = v; }
-  void set_filesize(int v) { d->filesize_ = v; }
-  void set_filetype(FileType v) { d->filetype_ = v; }
-  void set_art_automatic(const QString& v) { d->art_automatic_ = v; }
-  void set_art_manual(const QString& v) { d->art_manual_ = v; }
-  void set_image(const QImage& i) { d->image_ = i; }
-  void set_forced_compilation_on(bool v) { d->forced_compilation_on_ = v; }
-  void set_forced_compilation_off(bool v) { d->forced_compilation_off_ = v; }
-  void set_rating(float v) { d->rating_ = v; }
-  void set_playcount(int v) { d->playcount_ = v; }
-  void set_skipcount(int v) { d->skipcount_ = v; }
-  void set_lastplayed(int v) { d->lastplayed_ = v; }
-  void set_score(int v) { d->score_ = qBound(0, v, 100); }
-  void set_cue_path(const QString& v) { d->cue_path_ = v; }
-  void set_unavailable(bool v) { d->unavailable_ = v; }
+  void set_comment(const QString& v);
+  void set_compilation(bool v);
+  void set_sampler(bool v);
+  void set_beginning_nanosec(qint64 v);
+  void set_end_nanosec(qint64 v);
+  void set_length_nanosec(qint64 v);
+  void set_bitrate(int v);
+  void set_samplerate(int v);
+  void set_mtime(int v);
+  void set_ctime(int v);
+  void set_filesize(int v);
+  void set_filetype(FileType v);
+  void set_art_automatic(const QString& v);
+  void set_art_manual(const QString& v);
+  void set_image(const QImage& i);
+  void set_forced_compilation_on(bool v);
+  void set_forced_compilation_off(bool v);
+  void set_rating(float v);
+  void set_playcount(int v);
+  void set_skipcount(int v);
+  void set_lastplayed(int v);
+  void set_score(int v);
+  void set_cue_path(const QString& v);
+  void set_unavailable(bool v);
 
   // Setters that should only be used by tests
-  void set_url(const QUrl& v) { d->url_ = v; }
-  void set_basefilename(const QString& v) { d->basefilename_ = v; } 
-  void set_directory_id(int v) { d->directory_id_ = v; }
+  void set_url(const QUrl& v);
+  void set_basefilename(const QString& v);
+  void set_directory_id(int v);
 
   // Comparison functions
   bool IsMetadataEqual(const Song& other) const;
@@ -314,6 +294,8 @@ class Song {
   // you need to hash the key to do fast lookups.
   QString AlbumKey() const;
 
+  Song& operator=(const Song& other);
+
  private:
   void GuessFileType(TagLib::FileRef* fileref);
   static bool Save(const Song& song);
@@ -324,86 +306,14 @@ class Song {
   void ParseFMPSFrame(const QString& name, const QString& value);
 
  private:
-  struct Private : public QSharedData {
-    Private();
-
-    bool valid_;
-    int id_;
-
-    QString title_;
-    QString album_;
-    QString artist_;
-    QString albumartist_;
-    QString composer_;
-    int track_;
-    int disc_;
-    float bpm_;
-    int year_;
-    QString genre_;
-    QString comment_;
-    bool compilation_;            // From the file tag
-    bool sampler_;                // From the library scanner
-    bool forced_compilation_on_;  // Set by the user
-    bool forced_compilation_off_; // Set by the user
-
-    float rating_;
-    int playcount_;
-    int skipcount_;
-    int lastplayed_;
-    int score_;
-
-    // The beginning of the song in seconds. In case of single-part media
-    // streams, this will equal to 0. In case of multi-part streams on the
-    // other hand, this will mark the beginning of a section represented by
-    // this Song object. This is always greater than 0.
-    qint64 beginning_;
-    // The end of the song in seconds. In case of single-part media
-    // streams, this will equal to the song's length. In case of multi-part
-    // streams on the other hand, this will mark the end of a section
-    // represented by this Song object.
-    // This may be negative indicating that the length of this song is
-    // unknown.
-    qint64 end_;
-
-    int bitrate_;
-    int samplerate_;
-
-    int directory_id_;
-    QUrl url_;
-    QString basefilename_;
-    int mtime_;
-    int ctime_;
-    int filesize_;
-    FileType filetype_;
-
-    // If the song has a CUE, this contains it's path.
-    QString cue_path_;
-
-    // Filenames to album art for this song.
-    QString art_automatic_; // Guessed by LibraryWatcher
-    QString art_manual_;    // Set by the user - should take priority
-
-    QImage image_;
-
-    // Whether this song was loaded from a file using taglib.
-    bool init_from_file_;
-    // Whether our encoding guesser thinks these tags might be incorrectly encoded.
-    bool suspicious_tags_;
-    
-    // Whether the song does not exist on the file system anymore, but is still
-    // stored in the database so as to remember the user's metadata.
-    bool unavailable_;
-  };
-
-  void ParseOggTag(const TagLib::Ogg::FieldListMap& map, const QTextCodec* codec, QString* disc, QString* compilation);
-
- private:
+  struct Private;
   QSharedDataPointer<Private> d;
+
   FileRefFactory* factory_;
 
   static TagLibFileRefFactory kDefaultFactory;
 
-  static QMutex taglib_mutex_;
+  static QMutex sTaglibMutex;
 };
 Q_DECLARE_METATYPE(Song);
 

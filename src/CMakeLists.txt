@@ -377,14 +377,12 @@ set(HEADERS
   globalsearch/groovesharksearchprovider.h
   globalsearch/searchprovider.h
   globalsearch/simplesearchprovider.h
-  globalsearch/somafmsearchprovider.h
   globalsearch/tooltipactionwidget.h
   globalsearch/tooltipresultwidget.h
 
   internet/digitallyimportedclient.h
   internet/digitallyimportedservicebase.h
   internet/digitallyimportedsettingspage.h
-  internet/groovesharksearchplaylisttype.h
   internet/groovesharkservice.h
   internet/groovesharksettingspage.h
   internet/groovesharkurlhandler.h

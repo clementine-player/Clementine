@@ -24,6 +24,7 @@
 #include <QPushButton>
 #include <QShortcut>
 #include <QTreeWidget>
+#include <QUrl>
 #include <QtConcurrentRun>
 #include <QtDebug>
 

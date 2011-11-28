@@ -27,7 +27,7 @@
 #include "library/library.h"
 #include "library/libraryplaylistitem.h"
 
-
+#include <QSqlQuery>
 #include <QtConcurrentRun>
 #include <QtDebug>
 

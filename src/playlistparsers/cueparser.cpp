@@ -17,6 +17,7 @@
 
 #include "cueparser.h"
 #include "core/logging.h"
+#include "core/timeconstants.h"
 
 #include <QBuffer>
 #include <QDateTime>

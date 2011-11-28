@@ -20,6 +20,7 @@
 
 #include <QObject>
 #include <QSet>
+#include <QUrl>
 
 #include "directory.h"
 #include "libraryquery.h"

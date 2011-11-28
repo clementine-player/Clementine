@@ -27,6 +27,7 @@
 #include "songplaylistitem.h"
 #include "core/logging.h"
 #include "core/modelfuturewatcher.h"
+#include "core/timeconstants.h"
 #include "internet/jamendoplaylistitem.h"
 #include "internet/jamendoservice.h"
 #include "internet/magnatuneplaylistitem.h"

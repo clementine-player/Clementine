@@ -23,6 +23,7 @@
 #include "playlistparsers/playlistparser.h"
 
 #include <QBuffer>
+#include <QUrl>
 
 class AsxIniParserTest : public ::testing::Test {
 protected:

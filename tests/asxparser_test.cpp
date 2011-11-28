@@ -19,9 +19,11 @@
 #include "gmock/gmock-matchers.h"
 #include "gtest/gtest.h"
 
+#include "core/timeconstants.h"
 #include "playlistparsers/asxparser.h"
 
 #include <QBuffer>
+#include <QUrl>
 
 using ::testing::HasSubstr;
 

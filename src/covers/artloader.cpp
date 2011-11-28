@@ -20,6 +20,7 @@
 
 #include <QDir>
 #include <QTemporaryFile>
+#include <QUrl>
 
 ArtLoader::ArtLoader(QObject* parent)
   : QObject(parent),

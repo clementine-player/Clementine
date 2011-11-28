@@ -21,6 +21,7 @@
 #include <plist/plist.h>
 
 #include <QCoreApplication>
+#include <QUrl>
 #include <QtDebug>
 
 iMobileDeviceConnection::iMobileDeviceConnection(const QString& uuid)

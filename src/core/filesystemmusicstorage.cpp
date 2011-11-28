@@ -20,6 +20,7 @@
 
 #include <QDir>
 #include <QFile>
+#include <QUrl>
 
 FilesystemMusicStorage::FilesystemMusicStorage(const QString& root)
   : root_(root)

@@ -21,10 +21,11 @@
 #include "core/backgroundthread.h"
 #include "core/song.h"
 
-#include <QObject>
 #include <QImage>
 #include <QMutex>
+#include <QObject>
 #include <QQueue>
+#include <QUrl>
 
 class NetworkAccessManager;
 class QNetworkReply;

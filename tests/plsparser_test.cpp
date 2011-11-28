@@ -18,11 +18,13 @@
 #include "test_utils.h"
 #include "gtest/gtest.h"
 
+#include "core/timeconstants.h"
 #include "playlistparsers/plsparser.h"
 
 #include <QBuffer>
 #include <QFile>
 #include <QTemporaryFile>
+#include <QUrl>
 #include <QtDebug>
 
 #include <boost/shared_ptr.hpp>

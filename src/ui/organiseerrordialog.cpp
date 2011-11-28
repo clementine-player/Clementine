@@ -18,6 +18,8 @@
 #include "organiseerrordialog.h"
 #include "ui_organiseerrordialog.h"
 
+#include <QUrl>
+
 OrganiseErrorDialog::OrganiseErrorDialog(QWidget *parent)
   : QDialog(parent),
     ui_(new Ui_OrganiseErrorDialog)

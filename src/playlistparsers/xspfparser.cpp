@@ -16,6 +16,7 @@
 */
 
 #include "xspfparser.h"
+#include "core/timeconstants.h"
 
 #include <QDomDocument>
 #include <QFile>

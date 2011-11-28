@@ -16,9 +16,11 @@
 */
 
 #include "organiseformat.h"
+#include "core/timeconstants.h"
 
 #include <QApplication>
 #include <QPalette>
+#include <QUrl>
 
 const char* OrganiseFormat::kTagPattern = "\\%([a-zA-Z]*)";
 const char* OrganiseFormat::kBlockPattern = "\\{([^{}]+)\\}";
