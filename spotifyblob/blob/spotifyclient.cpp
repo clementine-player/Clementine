@@ -133,6 +133,9 @@ void SpotifyClient::LoggedInCallback(sp_session* session, sp_error error) {
   case SP_ERROR_USER_NEEDS_PREMIUM :
     error_code = spotify_pb::LoginResponse_Error_UserNeedsPremium;
     break;
+  default:
+    error_code = spotify_pb::LoginResponse_Error_Other;
+    break;
   }
 
   me->SendLoginCompleted(success, sp_error_message(error), error_code);
