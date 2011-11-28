@@ -655,10 +655,10 @@ void LibraryBackend::UpdateCompilations() {
   QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
 
-  // Look for albums that have songs by more than one artist in the same
+  // Look for albums that have songs by more than one 'effective album artist' in the same
   // directory
 
-  QSqlQuery q(QString("SELECT artist, album, filename, sampler "
+  QSqlQuery q(QString("SELECT effective_albumartist, album, filename, sampler "
     "FROM %1 WHERE unavailable = 0 ORDER BY album").arg(songs_table_), db);
   q.exec();
   if (db_->CheckErrors(q)) return;
@@ -705,7 +705,7 @@ void LibraryBackend::UpdateCompilations() {
     const CompilationInfo& info = it.value();
     QString album(it.key());
 
-    // If there were more artists than there were directories for this album,
+    // If there were more 'effective album artists' than there were directories for this album,
     // then it's a compilation
 
     if (info.artists.count() > info.directories.count()) {
