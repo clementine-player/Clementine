@@ -875,6 +875,9 @@ void MainWindow::MediaPlaying() {
   bool enable_play_pause = !(player_->GetCurrentItem()->options() & PlaylistItem::PauseDisabled);
   ui_->action_play_pause->setEnabled(enable_play_pause);
 
+  bool can_seek = !(player_->GetCurrentItem()->options() & PlaylistItem::SeekDisabled);
+  ui_->track_slider->SetCanSeek(can_seek);
+
 #ifdef HAVE_LIBLASTFM
   bool is_lastfm = (player_->GetCurrentItem()->options() & PlaylistItem::LastFMControls);
   LastFMService* lastfm = InternetModel::Service<LastFMService>();
@@ -887,10 +890,7 @@ void MainWindow::MediaPlaying() {
   tray_icon_->LastFMButtonLoveStateChanged(enable_love);
 
   tray_icon_->SetPlaying(enable_play_pause, enable_ban, enable_love);
-
-  ui_->track_slider->SetCanSeek(!is_lastfm);
 #else
-  ui_->track_slider->SetCanSeek(true);
   tray_icon_->SetPlaying(enable_play_pause);
 #endif
 

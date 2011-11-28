@@ -941,7 +941,8 @@ void LastFMService::TuneFinished() {
 
 PlaylistItem::Options LastFMService::playlistitem_options() const {
   return PlaylistItem::LastFMControls |
-         PlaylistItem::PauseDisabled;
+         PlaylistItem::PauseDisabled |
+         PlaylistItem::SeekDisabled;
 }
 
 PlaylistItemPtr LastFMService::PlaylistItemForUrl(const QUrl& url) {

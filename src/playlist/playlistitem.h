@@ -47,6 +47,9 @@ class PlaylistItem : public boost::enable_shared_from_this<PlaylistItem> {
 
     // Enables the last.fm "ban" action.
     LastFMControls = 0x02,
+
+    // Disables the seek slider.
+    SeekDisabled = 0x04,
   };
   Q_DECLARE_FLAGS(Options, Option);
 

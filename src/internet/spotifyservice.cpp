@@ -475,7 +475,7 @@ void SpotifyService::SongFromProtobuf(const spotify_pb::Track& track, Song* song
 }
 
 PlaylistItem::Options SpotifyService::playlistitem_options() const {
-  return PlaylistItem::PauseDisabled;
+  return PlaylistItem::PauseDisabled | PlaylistItem::SeekDisabled;
 }
 
 void SpotifyService::EnsureMenuCreated() {
