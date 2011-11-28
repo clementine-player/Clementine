@@ -679,6 +679,11 @@ int SpotifyClient::MusicDeliveryCallback(
     me->byte_rate_ = byte_rate;
   }
 
+#ifdef Q_OS_DARWIN
+  // For some reason, the data doesn't reliably get pushed to the underlying socket on Mac.
+  me->media_socket_->flush();
+#endif
+
   if (me->media_socket_->bytesToWrite() >= 8192) {
     return 0;
   }
@@ -687,11 +692,6 @@ int SpotifyClient::MusicDeliveryCallback(
   qint64 bytes_written = me->media_socket_->write(
         reinterpret_cast<const char*>(frames),
         num_frames * format->channels * 2);
-
-#ifdef Q_OS_DARWIN
-  // ???
-  me->media_socket_->flush();
-#endif
 
   return bytes_written / (format->channels * 2);
 }
