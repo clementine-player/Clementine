@@ -187,6 +187,7 @@ class Song {
   const QString& album() const { return d->album_; }
   const QString& artist() const { return d->artist_; }
   const QString& albumartist() const { return d->albumartist_; }
+  const QString& effective_albumartist() const { return d->albumartist_.isEmpty() ? d->artist_ : d->albumartist_; }
   const QString& composer() const { return d->composer_; }
   int track() const { return d->track_; }
   int disc() const { return d->disc_; }

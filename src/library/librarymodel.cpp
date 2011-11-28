@@ -174,7 +174,7 @@ void LibraryModel::SongsDiscovered(const SongList& songs) {
           case GroupBy_Artist:      key = song.artist(); break;
           case GroupBy_Composer:    key = song.composer(); break;
           case GroupBy_Genre:       key = song.genre(); break;
-          case GroupBy_AlbumArtist: key = song.albumartist(); break;
+          case GroupBy_AlbumArtist: key = song.effective_albumartist(); break;
           case GroupBy_Year:
             key = QString::number(qMax(0, song.year())); break;
           case GroupBy_YearAlbum:
@@ -700,7 +700,7 @@ void LibraryModel::InitQuery(GroupBy type, LibraryQuery* q) {
     q->SetColumnSpec("DISTINCT genre");
     break;
   case GroupBy_AlbumArtist:
-    q->SetColumnSpec("DISTINCT albumartist");
+    q->SetColumnSpec("DISTINCT effective_albumartist");
     break;
   case GroupBy_None:
     q->SetColumnSpec("%songs_table.ROWID, " + Song::kColumnSpec);
@@ -742,7 +742,7 @@ void LibraryModel::FilterQuery(GroupBy type, LibraryItem* item, LibraryQuery* q)
     q->AddWhere("genre", item->key);
     break;
   case GroupBy_AlbumArtist:
-    q->AddWhere("albumartist", item->key);
+    q->AddWhere("effective_albumartist", item->key);
     break;
   case GroupBy_FileType:
     q->AddWhere("filetype", item->metadata.filetype());
@@ -854,7 +854,7 @@ LibraryItem* LibraryModel::ItemFromSong(GroupBy type,
   case GroupBy_Composer:                      item->key = s.composer();
   case GroupBy_Genre: if (item->key.isNull()) item->key = s.genre();
   case GroupBy_Album: if (item->key.isNull()) item->key = s.album();
-  case GroupBy_AlbumArtist: if (item->key.isNull()) item->key = s.albumartist();
+  case GroupBy_AlbumArtist: if (item->key.isNull()) item->key = s.effective_albumartist();
     item->display_text = TextOrUnknown(item->key);
     item->sort_text = SortTextForArtist(item->key);
     break;

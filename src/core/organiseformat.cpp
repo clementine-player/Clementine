@@ -140,13 +140,11 @@ QString OrganiseFormat::TagValue(const QString &tag, const Song &song) const {
   else if (tag == "samplerate")  value = QString::number(song.samplerate());
   else if (tag == "extension")   value = song.url().toLocalFile().section('.', -1, -1);
   else if (tag == "artistinitial") {
-    value = song.albumartist().trimmed();
-    if (value.isEmpty())  value = song.artist().trimmed();
+    value = song.effective_albumartist().trimmed();
     if (!value.isEmpty()) value = value[0].toUpper();
   }
   else if (tag == "albumartist") {
-    value = song.albumartist();
-    if (value.isEmpty()) value = song.artist();
+    value = song.is_compilation() ? "Various Artists" : song.effective_albumartist();
   }
 
   if (replace_the_ && (tag == "artist" || tag == "albumartist"))

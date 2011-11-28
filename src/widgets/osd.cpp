@@ -322,7 +322,7 @@ QString OSD::ReplaceVariable(const QString& variable, const Song& song) {
   } else if (variable == "%title%") {
     return song.PrettyTitle();
   } else if (variable == "%albumartist%") {
-    return song.albumartist();
+    return song.effective_albumartist();
   } else if (variable == "%year%") {
     return song.PrettyYear();
   } else if (variable == "%composer%") {
