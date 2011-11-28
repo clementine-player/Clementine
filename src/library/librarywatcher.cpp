@@ -35,6 +35,11 @@
 #include <fileref.h>
 #include <tag.h>
 
+// This is defined by one of the windows headers that is included by taglib.
+#ifdef RemoveDirectory
+#undef RemoveDirectory
+#endif
+
 QStringList LibraryWatcher::sValidImages;
 
 const char* LibraryWatcher::kSettingsGroup = "LibraryWatcher";
