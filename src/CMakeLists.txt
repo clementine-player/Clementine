@@ -1182,7 +1182,7 @@ if (APPLE)
   add_custom_command(
     OUTPUT ${PROJECT_BINARY_DIR}/clementine-${CLEMENTINE_VERSION_RPM}.dmg
     ${CMAKE_COMMAND} -E remove -f ${PROJECT_BINARY_DIR}/clementine-${CLEMENTINE_VERSION_RPM}.dmg
-    COMMAND macdeployqt clementine.app -no-plugins -dmg
+    COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/../dist/create-dmg.sh ${PROJECT_BINARY_DIR}/clementine.app
     COMMAND ${CMAKE_COMMAND} -E rename
       ${PROJECT_BINARY_DIR}/clementine.dmg
       ${PROJECT_BINARY_DIR}/clementine-${CLEMENTINE_VERSION_RPM}.dmg
