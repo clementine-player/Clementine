@@ -47,11 +47,6 @@ class CommandlineOptions {
     Player_Previous = 5,
     Player_Next = 6,
   };
-  enum StunTestDirection {
-    StunTestNone = 0,
-    StunTestOffer = 1,
-    StunTestAccept = 2,
-  };
 
   bool Parse();
 
@@ -70,9 +65,6 @@ class CommandlineOptions {
   QList<QUrl> urls() const { return urls_; }
   QString language() const { return language_; }
   QString log_levels() const { return log_levels_; }
-
-  StunTestDirection stun_test() const { return stun_test_; }
-
 
   QByteArray Serialize() const;
   void Load(const QByteArray& serialized);
@@ -113,7 +105,6 @@ class CommandlineOptions {
   bool toggle_pretty_osd_;
   bool show_search_popup_;
   QString language_;
-  StunTestDirection stun_test_;
   QString log_levels_;
 
   QList<QUrl> urls_;

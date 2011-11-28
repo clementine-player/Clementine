@@ -2,6 +2,8 @@
 
 #include <gst/app/gstappsink.h>
 
+#include <QUrl>
+
 #include "core/logging.h"
 
 const char* StreamPipeline::kPipeline =

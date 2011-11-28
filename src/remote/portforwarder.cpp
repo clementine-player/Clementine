@@ -1,6 +1,6 @@
 #include "portforwarder.h"
 
-#include <QtConcurrent>
+#include <QtConcurrentRun>
 
 #include "core/boundfuturewatcher.h"
 
@@ -9,14 +9,15 @@ PortForwarder::PortForwarder(QObject* parent)
 }
 
 void PortForwarder::Init() {
-  QFuture<bool> future = QtConcurrent::run(this, &PortForwarder::Init);
+  QFuture<bool> future = QtConcurrent::run(this, &PortForwarder::InitSync);
   QFutureWatcher<bool>* watcher = new QFutureWatcher<bool>(this);
   watcher->setFuture(future);
   connect(watcher, SIGNAL(finished()), SLOT(InitFinished()));
 }
 
-void PortForwarder::InitSync() {
+bool PortForwarder::InitSync() {
   portfwd_.init(10000);
+  return true;
 }
 
 void PortForwarder::InitFinished() {
@@ -31,9 +32,9 @@ void PortForwarder::AddPortMapping(quint16 port) {
   QFuture<bool> future = QtConcurrent::run(
       this, &PortForwarder::AddPortMappingSync, port);
   BoundFutureWatcher<bool, quint16>* watcher =
-      new BoundFutureWatcher<bool, quint16>(this);
+      new BoundFutureWatcher<bool, quint16>(port, this);
   watcher->setFuture(future);
-  connect(watcher, SIGNAL(finished()). SLOT(AddPortMappingFinished()));
+  connect(watcher, SIGNAL(finished()), SLOT(AddPortMappingFinished()));
 }
 
 bool PortForwarder::AddPortMappingSync(quint16 port) {
@@ -54,9 +55,9 @@ void PortForwarder::RemovePortMapping(quint16 port) {
   QFuture<bool> future = QtConcurrent::run(
       this, &PortForwarder::RemovePortMappingSync, port);
   BoundFutureWatcher<bool, quint16>* watcher =
-      new BoundFutureWatcher<bool, quint16>(this);
+      new BoundFutureWatcher<bool, quint16>(port, this);
   watcher->setFuture(future);
-  connect(watcher, SIGNAL(finished()). SLOT(RemovePortMappingFinished()));
+  connect(watcher, SIGNAL(finished()), SLOT(RemovePortMappingFinished()));
 }
 
 bool PortForwarder::RemovePortMappingSync(quint16 port) {
@@ -70,5 +71,5 @@ void PortForwarder::RemovePortMappingFinished() {
   watcher->deleteLater();
 
   if (watcher->result())
-    emit(PortMappingRemoveed(watcher->data()));
+    emit(PortMappingRemoved(watcher->data()));
 }

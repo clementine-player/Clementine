@@ -76,7 +76,6 @@ CommandlineOptions::CommandlineOptions(int argc, char** argv)
     show_osd_(false),
     toggle_pretty_osd_(false),
     show_search_popup_(false),
-    stun_test_(StunTestNone),
     log_levels_(logging::kDefaultLogLevels)
 {
 #ifdef Q_OS_DARWIN
@@ -129,8 +128,6 @@ bool CommandlineOptions::Parse() {
     {"verbose",           no_argument,       0, Verbose},
     {"log-levels",        required_argument, 0, LogLevels},
     {"version",           no_argument,       0, Version},
-
-    {"stun-test",   required_argument, 0, 'z'},
 
     {0, 0, 0, 0}
   };
@@ -218,13 +215,6 @@ bool CommandlineOptions::Parse() {
         play_track_at_ = QString(optarg).toInt(&ok);
         if (!ok) play_track_at_ = -1;
         break;
-
-      case 'z': {
-        // Stun test
-        QString direction = QString(optarg);
-        stun_test_ = direction == "offer" ? StunTestOffer : StunTestAccept;
-        break;
-      }
 
       case '?':
       default:

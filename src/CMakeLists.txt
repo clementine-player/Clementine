@@ -40,10 +40,6 @@ if(HAVE_BREAKPAD)
   include_directories(../3rdparty/google-breakpad)
 endif(HAVE_BREAKPAD)
 
-if(HAVE_REMOTE)
-  include_directories(${PJSIP_INCLUDE_DIRS})
-endif(HAVE_REMOTE)
-
 cmake_policy(SET CMP0011 NEW)
 include(../cmake/ParseArguments.cmake)
 include(../cmake/Translations.cmake)
@@ -907,13 +903,11 @@ optional_source(WIN32
 
 optional_source(HAVE_REMOTE
   SOURCES
-    remote/icesession.cpp
     remote/portforwarder.cpp
     remote/remote.cpp
     remote/remotesettingspage.cpp
     remote/streampipeline.cpp
   HEADERS
-    remote/icesession.h
     remote/portforwarder.h
     remote/remote.h
     remote/remotesettingspage.h
@@ -1025,8 +1019,6 @@ if(HAVE_REMOTE)
   link_directories(${GLOOX_LIBRARY_DIRS})
   target_link_libraries(clementine_lib xrme)
   target_link_libraries(clementine_lib portfwd)
-  target_link_libraries(clementine_lib ${PJSIP_LIBRARIES})
-  link_directories(${PJSIP_LIBRARY_DIRS})
 endif(HAVE_REMOTE)
 
 if(HAVE_BREAKPAD)

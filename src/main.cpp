@@ -140,7 +140,6 @@ void LoadTranslation(const QString& prefix, const QString& path,
 
 #ifdef HAVE_REMOTE
 #include <xrme/connection.h>
-#include "remote/icesession.h"
 #endif
 
 int main(int argc, char *argv[]) {
@@ -277,57 +276,6 @@ int main(int argc, char *argv[]) {
   // Detect technically invalid usage of non-ASCII in ID3v1 tags.
   UniversalEncodingHandler handler;
   TagLib::ID3v1::Tag::setStringHandler(&handler);
-
-#ifdef HAVE_REMOTE
-  if (options.stun_test() != CommandlineOptions::StunTestNone) {
-    QCoreApplication app(argc, argv);
-
-    ICESession::StaticInit();
-    ICESession ice;
-    ice.Init(options.stun_test() == CommandlineOptions::StunTestOffer
-             ? ICESession::DirectionControlling
-             : ICESession::DirectionControlled);
-
-    QEventLoop loop;
-    QObject::connect(&ice,
-        SIGNAL(CandidatesAvailable(const xrme::SIPInfo&)),
-        &loop, SLOT(quit()));
-    loop.exec();
-
-    const xrme::SIPInfo& candidates = ice.candidates();
-    qDebug() << candidates;
-
-    QString sip_info;
-    {
-      QFile file;
-      file.open(stdin, QIODevice::ReadOnly);
-      QTextStream in(&file);
-      in >> sip_info;
-    }
-    QStringList sip_components = sip_info.split(':');
-
-    xrme::SIPInfo remote_session;
-    remote_session.user_fragment = sip_components[0];
-    remote_session.password = sip_components[1];
-
-    xrme::SIPInfo::Candidate cand;
-    cand.address = sip_components[2];
-    cand.port = sip_components[3].toUShort();
-    cand.type = sip_components[4];
-    cand.component = sip_components[5].toInt();
-    cand.priority = sip_components[6].toInt();
-    cand.foundation = sip_components[7];
-
-    remote_session.candidates << cand;
-
-    qDebug() << "Remote:" << remote_session;
-
-    ice.StartNegotiation(remote_session);
-    loop.exec();
-
-    return 0;
-  }
-#endif
 
 #ifdef Q_OS_LINUX
   // Force Clementine's menu to be shown in the Clementine window and not in

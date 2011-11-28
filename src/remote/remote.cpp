@@ -18,6 +18,7 @@
 #include "remote.h"
 #include "remotesettingspage.h"
 #include "core/player.h"
+#include "core/timeconstants.h"
 #include "engines/enginebase.h"
 #include "playlist/playlist.h"
 #include "playlist/playlistmanager.h"

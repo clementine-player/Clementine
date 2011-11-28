@@ -19,7 +19,9 @@ class PortForwarder : public QObject {
   bool RemovePortMappingSync(quint16 port);
 
  private slots:
+  void InitFinished();
   void AddPortMappingFinished();
+  void RemovePortMappingFinished();
 
  signals:
   void InitFinished(bool success);
