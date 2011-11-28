@@ -54,6 +54,10 @@ const int LibraryModel::kPrettyCoverSize = 32;
 typedef QFuture<SqlRowList> RootQueryFuture;
 typedef QFutureWatcher<SqlRowList> RootQueryWatcher;
 
+static bool IsArtistGroupBy(const LibraryModel::GroupBy by) {
+  return by == LibraryModel::GroupBy_Artist || by == LibraryModel::GroupBy_AlbumArtist;
+}
+
 LibraryModel::LibraryModel(LibraryBackend* backend, TaskManager* task_manager,
                            QObject* parent)
   : SimpleTreeModel<LibraryItem>(new LibraryItem(this), parent),
@@ -161,7 +165,7 @@ void LibraryModel::SongsDiscovered(const SongList& songs) {
 
       // Special case: if we're at the top level and the song is a compilation
       // and the top level is Artists, then we want the Various Artists node :(
-      if (i == 0 && type == GroupBy_Artist && song.is_compilation()) {
+      if (i == 0 && IsArtistGroupBy(type) && song.is_compilation()) {
         if (compilation_artist_node_ == NULL)
           CreateCompilationArtistNode(true, root_);
         container = compilation_artist_node_;
@@ -536,7 +540,7 @@ SqlRowList LibraryModel::RunRootQuery(const QueryOptions& query_options,
   InitQuery(child_type, &q);
 
   // Top-level artists is special - we don't want compilation albums appearing
-  if (child_type == GroupBy_Artist) {
+  if (IsArtistGroupBy(child_type)) {
     q.AddCompilationRequirement(false);
   }
 
@@ -569,7 +573,7 @@ void LibraryModel::LazyPopulate(LibraryItem* parent, bool signal) {
   InitQuery(child_type, &q);
 
   // Top-level artists is special - we don't want compilation albums appearing
-  if (child_level == 0 && child_type == GroupBy_Artist) {
+  if (child_level == 0 && IsArtistGroupBy(child_type)) {
     q.AddCompilationRequirement(false);
   }
 
@@ -659,7 +663,7 @@ void LibraryModel::BeginReset() {
 
   if (show_various_artists_) {
     // Various artists?
-    if (group_by_[0] == GroupBy_Artist &&
+    if (IsArtistGroupBy(group_by_[0]) &&
         backend_->HasCompilations(query_options_))
       CreateCompilationArtistNode(false, root_);
   }
@@ -742,7 +746,13 @@ void LibraryModel::FilterQuery(GroupBy type, LibraryItem* item, LibraryQuery* q)
     q->AddWhere("genre", item->key);
     break;
   case GroupBy_AlbumArtist:
-    q->AddWhere("effective_albumartist", item->key);
+    if (item == compilation_artist_node_)
+      q->AddCompilationRequirement(true);
+    else {
+      if (item->container_level == 0) // Same stupid hack as above
+        q->AddCompilationRequirement(false);
+      q->AddWhere("effective_albumartist", item->key);
+    }
     break;
   case GroupBy_FileType:
     q->AddWhere("filetype", item->metadata.filetype());
