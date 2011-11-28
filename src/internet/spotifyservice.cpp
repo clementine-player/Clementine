@@ -140,10 +140,9 @@ void SpotifyService::LoginCompleted(bool success, const QString& error,
     login_task_id_ = 0;
   }
 
-  login_state_ = LoginState_LoggedIn;
-
   if (!success) {
-    QMessageBox::warning(NULL, tr("Spotify login error"), error, QMessageBox::Close);
+    bool show_error_dialog = true;
+    QString error_copy(error);
 
     switch (error_code) {
     case spotify_pb::LoginResponse_Error_BadUsernameOrPassword:
@@ -158,9 +157,28 @@ void SpotifyService::LoginCompleted(bool success, const QString& error,
       login_state_ = LoginState_NoPremium;
       break;
 
+    case spotify_pb::LoginResponse_Error_ReloginFailed:
+      if (login_state_ == LoginState_LoggedIn) {
+        // This is the first time the relogin has failed - show a message this
+        // time only.
+        error_copy = tr("You have been logged out of Spotify, please re-enter your password in the Settings dialog.");
+      } else {
+        show_error_dialog = false;
+      }
+
+      login_state_ = LoginState_ReloginFailed;
+      break;
+
     default:
       login_state_ = LoginState_OtherError;
+      break;
     }
+
+    if (show_error_dialog) {
+      QMessageBox::warning(NULL, tr("Spotify login error"), error_copy, QMessageBox::Close);
+    }
+  } else {
+    login_state_ = LoginState_LoggedIn;
   }
 
   QSettings s;

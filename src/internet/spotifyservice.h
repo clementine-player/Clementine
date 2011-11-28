@@ -39,7 +39,8 @@ public:
     LoginState_Banned = 2,
     LoginState_BadCredentials = 3,
     LoginState_NoPremium = 4,
-    LoginState_OtherError = 5
+    LoginState_OtherError = 5,
+    LoginState_ReloginFailed = 6
   };
 
   static const char* kServiceName;

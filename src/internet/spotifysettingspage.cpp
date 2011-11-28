@@ -154,6 +154,10 @@ void SpotifySettingsPage::UpdateLoginState() {
     ui_->login_state->SetAccountTypeText(tr("Your username or password was incorrect."));
     break;
 
+  case SpotifyService::LoginState_ReloginFailed:
+    ui_->login_state->SetAccountTypeText(tr("You have been logged out of Spotify, please re-enter your password."));
+    break;
+
   default:
     ui_->login_state->SetAccountTypeText(tr("A Spotify Premium account is required."));
     break;

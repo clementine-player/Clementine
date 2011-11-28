@@ -37,6 +37,7 @@ message LoginResponse {
     UserBanned = 2;
     UserNeedsPremium = 3;
     Other = 4;
+    ReloginFailed = 5;
   }
 
   required bool success = 1;

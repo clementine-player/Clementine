@@ -317,7 +317,7 @@ void SpotifyClient::Login(const spotify_pb::LoginRequest& req) {
     if (error != SP_ERROR_OK) {
       qLog(Warning) << "Tried to relogin but no stored credentials";
       SendLoginCompleted(false, sp_error_message(error),
-                         spotify_pb::LoginResponse_Error_BadUsernameOrPassword);
+                         spotify_pb::LoginResponse_Error_ReloginFailed);
     }
   } else {
     sp_session_login(session_,
