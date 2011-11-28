@@ -256,7 +256,7 @@ QVariant Playlist::data(const QModelIndex& index, int role) const {
         case Column_Disc:         return song.disc();
         case Column_Year:         return song.year();
         case Column_Genre:        return song.genre();
-        case Column_AlbumArtist:  return song.albumartist();
+        case Column_AlbumArtist:  return song.playlist_albumartist();
         case Column_Composer:     return song.composer();
 
         case Column_Rating:       return song.rating();
@@ -1068,7 +1068,7 @@ bool Playlist::CompareItems(int column, Qt::SortOrder order,
     case Column_Disc:         cmp(disc);
     case Column_Year:         cmp(year);
     case Column_Genre:        strcmp(genre);
-    case Column_AlbumArtist:  strcmp(albumartist);
+    case Column_AlbumArtist:  strcmp(playlist_albumartist);
     case Column_Composer:     strcmp(composer);
 
     case Column_Rating:       cmp(rating);

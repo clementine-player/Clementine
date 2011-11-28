@@ -188,6 +188,9 @@ class Song {
   const QString& artist() const { return d->artist_; }
   const QString& albumartist() const { return d->albumartist_; }
   const QString& effective_albumartist() const { return d->albumartist_.isEmpty() ? d->artist_ : d->albumartist_; }
+  // Playlist views are special because you don't want to fill in album artists automatically for
+  // compilations, but you do for normal albums:
+  const QString& playlist_albumartist() const { return is_compilation() ? d->albumartist_ : effective_albumartist(); }
   const QString& composer() const { return d->composer_; }
   int track() const { return d->track_; }
   int disc() const { return d->disc_; }
