@@ -381,7 +381,6 @@ if(HAVE_BREAKPAD)
 endif(HAVE_BREAKPAD)
 
 if(HAVE_SPOTIFY)
-  add_subdirectory(gst/spotifytcpsrc)
   add_subdirectory(spotifyblob/common)
 endif(HAVE_SPOTIFY)
 

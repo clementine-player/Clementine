@@ -62,6 +62,11 @@ namespace Utilities {
   QByteArray Sha256(const QByteArray& data);
 
 
+  // Picks an unused ephemeral port number.  Doesn't hold the port open so
+  // there's the obvious race condition
+  quint16 PickUnusedPort();
+
+
   // Forwards a mouse event to a different widget, remapping the event's widget
   // coordinates relative to those of the target widget.
   void ForwardMouseEvent(const QMouseEvent* e, QWidget* target);

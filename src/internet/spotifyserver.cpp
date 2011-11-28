@@ -16,6 +16,7 @@
 */
 
 #include "spotifyserver.h"
+#include "core/closure.h"
 #include "core/logging.h"
 
 #include "spotifyblob/common/spotifymessages.pb.h"
@@ -23,6 +24,7 @@
 
 #include <QTcpServer>
 #include <QTcpSocket>
+#include <QTimer>
 
 SpotifyServer::SpotifyServer(QObject* parent)
   : QObject(parent),
@@ -203,6 +205,16 @@ void SpotifyServer::LoadStarred() {
 void SpotifyServer::LoadUserPlaylist(int index) {
   Q_ASSERT(index >= 0);
   LoadPlaylist(spotify_pb::UserPlaylist, index);
+}
+
+void SpotifyServer::StartPlaybackLater(const QString& uri, quint16 port) {
+  QTimer* timer = new QTimer(this);
+  connect(timer, SIGNAL(timeout()), timer, SLOT(deleteLater()));
+
+  timer->start(100); // lol
+  NewClosure(timer, SIGNAL(timeout()),
+             this, SLOT(StartPlayback(QString,quint16)),
+             uri, port);
 }
 
 void SpotifyServer::StartPlayback(const QString& uri, quint16 port) {

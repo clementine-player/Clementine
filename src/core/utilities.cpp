@@ -28,6 +28,7 @@
 #include <QIODevice>
 #include <QMouseEvent>
 #include <QStringList>
+#include <QTcpServer>
 #include <QTemporaryFile>
 #include <QUrl>
 #include <QWidget>
@@ -369,6 +370,17 @@ void ForwardMouseEvent(const QMouseEvent* e, QWidget* target) {
 
 bool IsMouseEventInWidget(const QMouseEvent* e, const QWidget* widget) {
   return widget->rect().contains(widget->mapFromGlobal(e->globalPos()));
+}
+
+quint16 PickUnusedPort() {
+  forever {
+    const quint16 port = 49152 + qrand() % 16384;
+
+    QTcpServer server;
+    if (server.listen(QHostAddress::Any, port)) {
+      return port;
+    }
+  }
 }
 
 }  // namespace Utilities

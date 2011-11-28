@@ -1035,7 +1035,6 @@ endif(HAVE_BREAKPAD)
 if(HAVE_SPOTIFY)
   target_link_libraries(clementine_lib
     clementine-spotifyblob-messages
-    gstspotifytcpsrc
     ${QCA_LIBRARIES}
   )
   link_directories(${QCA_LIBRARY_DIRS})

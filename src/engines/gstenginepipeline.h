@@ -135,6 +135,10 @@ class GstEnginePipeline : public QObject {
 
   void TransitionToNext();
 
+  // If the decodebin is special (ie. not really a uridecodebin) then it'll have
+  // a src pad immediately and we can link it after everything's created.
+  void MaybeLinkDecodeToAudio();
+
  private slots:
   void FaderTimelineFinished();
 

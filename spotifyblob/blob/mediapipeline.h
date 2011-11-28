@@ -18,17 +18,37 @@
 // it is used by the Spotify blob which links against libspotify and is not GPL
 // compatible.
 
-#ifndef TIMECONSTANTS_H
-#define TIMECONSTANTS_H
+#ifndef MEDIAPIPELINE_H
+#define MEDIAPIPELINE_H
 
 #include <QtGlobal>
 
-// Use these to convert between time units
-const qint64 kMsecPerSec  = 1000ll;
-const qint64 kUsecPerMsec = 1000ll;
-const qint64 kUsecPerSec  = 1000000ll;
-const qint64 kNsecPerUsec = 1000ll;
-const qint64 kNsecPerMsec = 1000000ll;
-const qint64 kNsecPerSec  = 1000000000ll;
+#include <gst/gst.h>
+#include <gst/app/gstappsrc.h>
 
-#endif // TIMECONSTANTS_H
+class MediaPipeline {
+public:
+  MediaPipeline(int port, quint64 length_msec);
+  ~MediaPipeline();
+
+  bool is_initialised() const { return pipeline_; }
+  bool Init(int sample_rate, int channels);
+
+  void WriteData(const char* data, qint64 length);
+  void EndStream();
+
+private:
+  Q_DISABLE_COPY(MediaPipeline)
+
+  const int port_;
+  const quint64 length_msec_;
+
+  GstElement* pipeline_;
+  GstAppSrc* appsrc_;
+  GstElement* tcpsink_;
+
+  quint64 byte_rate_;
+  quint64 offset_bytes_;
+};
+
+#endif // MEDIAPIPELINE_H

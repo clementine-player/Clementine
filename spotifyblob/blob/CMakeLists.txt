@@ -11,6 +11,7 @@ set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR})
 
 set(SOURCES
   main.cpp
+  mediapipeline.cpp
   spotifyclient.cpp
   spotify_utilities.cpp
 
@@ -41,6 +42,8 @@ target_link_libraries(clementine-spotifyblob
   ${SPOTIFY_LIBRARIES} ${SPOTIFY_LDFLAGS}
   ${QT_QTCORE_LIBRARY}
   ${QT_QTNETWORK_LIBRARY}
+  ${GSTREAMER_BASE_LIBRARIES}
+  ${GSTREAMER_APP_LIBRARIES}
   clementine-spotifyblob-messages
 )
 

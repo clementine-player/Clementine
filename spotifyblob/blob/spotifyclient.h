@@ -32,6 +32,7 @@
 class QTcpSocket;
 class QTimer;
 
+class MediaPipeline;
 class ResponseMessage;
 class SpotifyMessageHandler;
 
@@ -50,7 +51,6 @@ public:
 private slots:
   void HandleMessage(const spotify_pb::SpotifyMessage& message);
   void ProcessEvents();
-  void MediaSocketDisconnected();
 
 private:
   void SendLoginCompleted(bool success, const QString& error,
@@ -72,9 +72,6 @@ private:
   static void SP_CALLCONV OfflineStatusUpdatedCallback(sp_session* session);
   static void SP_CALLCONV ConnectionErrorCallback(sp_session* session, sp_error error);
   static void SP_CALLCONV UserMessageCallback(sp_session* session, const char* message);
-  static void SP_CALLCONV GetAudioBufferStatsCallback(
-      sp_session* session,
-      sp_audio_buffer_stats* stats);
   static void SP_CALLCONV StartPlaybackCallback(sp_session* session);
   static void SP_CALLCONV StopPlaybackCallback(sp_session* session);
 
@@ -158,7 +155,6 @@ private:
   QByteArray api_key_;
 
   QTcpSocket* protocol_socket_;
-  QTcpSocket* media_socket_;
   SpotifyMessageHandler* handler_;
 
   sp_session_config spotify_config_;
@@ -180,8 +176,7 @@ private:
   QMap<sp_search*, QList<sp_albumbrowse*> > pending_search_album_browses_;
   QMap<sp_albumbrowse*, sp_search*> pending_search_album_browse_responses_;
 
-  int media_length_msec_;
-  int byte_rate_;
+  QScopedPointer<MediaPipeline> media_pipeline_;
 };
 
 #endif // SPOTIFYCLIENT_H
