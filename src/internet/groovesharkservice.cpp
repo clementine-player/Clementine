@@ -88,6 +88,9 @@ GroovesharkService::GroovesharkService(InternetModel *parent)
     subscribed_playlists_divider_(NULL),
     network_(new NetworkAccessManager(this)),
     context_menu_(NULL),
+    create_playlist_(NULL),
+    delete_playlist_(NULL),
+    rename_playlist_(NULL),
     remove_from_playlist_(NULL),
     remove_from_favorites_(NULL),
     search_delay_(new QTimer(this)),
@@ -466,6 +469,8 @@ void GroovesharkService::ShowContextMenu(const QModelIndex& index, const QPoint&
       display_remove_from_playlist_action = true;
   }
   delete_playlist_->setVisible(display_delete_playlist_action);
+  // If we can delete this playlist, we can also rename it
+  rename_playlist_->setVisible(display_delete_playlist_action);
   remove_from_playlist_->setVisible(display_remove_from_playlist_action);
   remove_from_favorites_->setVisible(display_remove_from_favorites_action);
 
@@ -490,6 +495,9 @@ void GroovesharkService::EnsureMenuCreated() {
     delete_playlist_ = context_menu_->addAction(
         IconLoader::Load("edit-delete"), tr("Delete Grooveshark playlist"),
         this, SLOT(DeleteCurrentPlaylist()));
+    rename_playlist_ = context_menu_->addAction(
+        IconLoader::Load("edit-rename"), tr("Rename Grooveshark playlist"),
+        this, SLOT(RenameCurrentPlaylist()));
     context_menu_->addSeparator();
     remove_from_playlist_ = context_menu_->addAction(
         IconLoader::Load("list-remove"), tr("Remove from playlist"),
@@ -1102,6 +1110,54 @@ void GroovesharkService::PlaylistDeleted(QNetworkReply* reply, int playlist_id) 
   }
   PlaylistInfo playlist_info = playlists_.take(playlist_id);
   root_->removeRow(playlist_info.item_->row());
+}
+
+void GroovesharkService::RenameCurrentPlaylist() {
+  if (context_item_.data(InternetModel::Role_Type).toInt() != InternetModel::Type_UserPlaylist
+      || context_item_.data(Role_PlaylistType).toInt() != UserPlaylist) {
+    return;
+  }
+
+  int playlist_id = context_item_.data(Role_UserPlaylistId).toInt();
+  RenamePlaylist(playlist_id);
+}
+
+void GroovesharkService::RenamePlaylist(int playlist_id) {
+  if (!playlists_.contains(playlist_id)) {
+    return;
+  }
+  const QString& old_name = playlists_[playlist_id].name_;
+  QString new_name = QInputDialog::getText(NULL,
+                                       tr("Rename \"%1\" playlist").arg(old_name),
+                                       tr("Name"),
+                                       QLineEdit::Normal);
+  if (new_name.isEmpty()) {
+    return;
+  }
+
+  QList<Param> parameters;
+  parameters  << Param("playlistID", playlist_id)
+              << Param("name", new_name);
+  QNetworkReply* reply = CreateRequest("renamePlaylist", parameters);
+  NewClosure(reply, SIGNAL(finished()),
+    this, SLOT(PlaylistRenamed(QNetworkReply*, int, const QString&)), reply, playlist_id, new_name);
+}
+
+void GroovesharkService::PlaylistRenamed(QNetworkReply* reply,
+                                         int playlist_id,
+                                         const QString& new_name) {
+  reply->deleteLater();
+  QVariantMap result = ExtractResult(reply);
+  if (!result["success"].toBool()) {
+    qLog(Warning) << "Grooveshark renamePlaylist failed";
+    return;
+  }
+  if (!playlists_.contains(playlist_id)) {
+    return;
+  }
+  PlaylistInfo& playlist_info = playlists_[playlist_id];
+  playlist_info.name_ = new_name;
+  playlist_info.item_->setText(new_name);
 }
 
 void GroovesharkService::AddUserFavoriteSong(int song_id) {

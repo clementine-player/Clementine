@@ -88,6 +88,7 @@ class GroovesharkService : public InternetService {
   // Refresh playlist_id playlist , or create it if it doesn't exist
   void RefreshPlaylist(int playlist_id, const QString& playlist_name);
   void DeletePlaylist(int playlist_id);
+  void RenamePlaylist(int playlist_id);
   void AddUserFavoriteSong(int song_id);
   void RemoveFromFavorites(int song_id);
   void GetSongUrlToShare(int song_id);
@@ -150,7 +151,9 @@ class GroovesharkService : public InternetService {
   void CreateNewPlaylist();
   void NewPlaylistCreated(QNetworkReply* reply, const QString& name);
   void DeleteCurrentPlaylist();
+  void RenameCurrentPlaylist();
   void PlaylistDeleted(QNetworkReply* reply, int playlist_id);
+  void PlaylistRenamed(QNetworkReply* reply, int playlist_id, const QString& new_name);
   void AddCurrentSongToUserFavorites() { AddUserFavoriteSong(current_song_id_); }
   void AddCurrentSongToPlaylist(QAction* action);
   void UserFavoriteSongAdded(QNetworkReply* reply, int task_id);
@@ -221,6 +224,7 @@ class GroovesharkService : public InternetService {
 
   QAction* create_playlist_;
   QAction* delete_playlist_;
+  QAction* rename_playlist_;
   QAction* remove_from_playlist_;
   QAction* remove_from_favorites_;
   QList<QAction*> playlistitem_actions_;
