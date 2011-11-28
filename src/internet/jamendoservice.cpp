@@ -124,8 +124,8 @@ JamendoService::JamendoService(InternetModel* parent)
       tr("Jamendo"),
       "jamendo",
       QIcon(":/providers/jamendo.png"),
-      this),
-    false /* disabled Jamendo by default */);
+      false,
+      this));
 }
 
 JamendoService::~JamendoService() {

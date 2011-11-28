@@ -22,7 +22,7 @@ IcecastSearchProvider::IcecastSearchProvider(IcecastBackend* backend, QObject* p
   : BlockingSearchProvider(parent),
     backend_(backend)
 {
-  Init("Icecast", "icecast", QIcon(":last.fm/icon_radio.png"));
+  Init("Icecast", "icecast", QIcon(":last.fm/icon_radio.png"), DisabledByDefault);
 }
 
 SearchProvider::ResultList IcecastSearchProvider::Search(int id, const QString& query) {

@@ -239,7 +239,7 @@ MainWindow::MainWindow(
   // Add global search providers
   global_search->AddProvider(new LibrarySearchProvider(
       library_->backend(), tr("Library"), "library",
-      IconLoader::Load("folder-sound"), global_search));
+      IconLoader::Load("folder-sound"), true, this));
 
   global_search->ReloadSettings();
 

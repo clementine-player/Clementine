@@ -90,7 +90,12 @@ public:
 
     // This provider can provide some example search strings to display in the
     // UI.
-    CanGiveSuggestions = 0x20
+    CanGiveSuggestions = 0x20,
+
+    // Normally providers get enabled unless the user chooses otherwise.
+    // Setting this flag indicates that this provider is disabled by default
+    // instead.
+    DisabledByDefault = 0x40
   };
   Q_DECLARE_FLAGS(Hints, Hint)
 
@@ -105,6 +110,8 @@ public:
   bool art_is_in_song_metadata() const { return hints() & ArtIsInSongMetadata; }
   bool can_show_config() const { return hints() & CanShowConfig; }
   bool can_give_suggestions() const { return hints() & CanGiveSuggestions; }
+  bool is_disabled_by_default() const { return hints() & DisabledByDefault; }
+  bool is_enabled_by_default() const { return !is_disabled_by_default(); }
 
   // Starts a search.  Must emit ResultsAvailable zero or more times and then
   // SearchFinished exactly once, using this ID.

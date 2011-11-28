@@ -113,7 +113,7 @@ GroovesharkService::GroovesharkService(InternetModel *parent)
 
   GroovesharkSearchProvider* search_provider = new GroovesharkSearchProvider(this);
   search_provider->Init(this);
-  model()->global_search()->AddProvider(search_provider, false);
+  model()->global_search()->AddProvider(search_provider);
 
   // Init secret: this code is ugly, but that's good as nobody is supposed to wonder what it does
   QByteArray ba = QByteArray::fromBase64(QCoreApplication::applicationName().toLatin1());

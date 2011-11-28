@@ -61,16 +61,25 @@ void GlobalSearch::ConnectProvider(SearchProvider* provider) {
           SLOT(ProviderDestroyedSlot(QObject*)));
 }
 
-void GlobalSearch::AddProvider(SearchProvider* provider, bool enable_by_default) {
+void GlobalSearch::AddProvider(SearchProvider* provider) {
   Q_ASSERT(!provider->name().isEmpty());
 
-  ConnectProvider(provider);
+  bool enabled = provider->is_enabled_by_default();
 
+  // Check if there is saved enabled/disabled state for this provider.
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+  QVariant enabled_variant = s.value("enabled_" + provider->id());
+  if (enabled_variant.isValid()) {
+    enabled = enabled_variant.toBool();
+  }
+
+  // Add data
   ProviderData data;
-  data.enabled_ = providers_state_preference_.contains(provider->id()) ?
-      providers_state_preference_[provider->id()] : enable_by_default;
+  data.enabled_ = enabled;
   providers_[provider] = data;
 
+  ConnectProvider(provider);
   emit ProviderAdded(provider);
 }
 
@@ -84,7 +93,7 @@ int GlobalSearch::SearchAsync(const QString& query) {
     url_provider_->SearchAsync(id, query);
   } else {
     foreach (SearchProvider* provider, providers_.keys()) {
-      if (!providers_[provider].enabled_)
+      if (!is_provider_usable(provider))
         continue;
 
       pending_search_providers_[id] ++;
@@ -196,7 +205,7 @@ int GlobalSearch::LoadArtAsync(const SearchProvider::Result& result) {
   pending_art_searches_[id] = result.pixmap_cache_key_;
 
   if (providers_.contains(result.provider_) &&
-      !providers_[result.provider_].enabled_) {
+      !is_provider_usable(result.provider_)) {
     emit ArtLoaded(id, QPixmap());
     return id;
   }
@@ -289,7 +298,6 @@ bool GlobalSearch::SetProviderEnabled(const SearchProvider* const_provider,
       return false;
     } else {
       providers_[provider].enabled_ = enabled;
-      emit ProviderToggled(provider, enabled);
       SaveProvidersSettings();
       return true;
     }
@@ -305,6 +313,10 @@ bool GlobalSearch::is_provider_enabled(const SearchProvider* const_provider) con
   return providers_[provider].enabled_;
 }
 
+bool GlobalSearch::is_provider_usable(SearchProvider* provider) const {
+  return is_provider_enabled(provider) && provider->IsLoggedIn();
+}
+
 void GlobalSearch::ReloadSettings() {
   QSettings s;
   s.beginGroup(kSettingsGroup);
@@ -314,15 +326,7 @@ void GlobalSearch::ReloadSettings() {
     if (!value.isValid())
       continue;
 
-    providers_state_preference_.insert(provider->id(), value.toBool());
-
-    const bool old_state = providers_[provider].enabled_;
-    const bool new_state = value.toBool() && provider->IsLoggedIn();
-
-    if (old_state != new_state) {
-      providers_[provider].enabled_ = new_state;
-      emit ProviderToggled(provider, new_state);
-    }
+    providers_[provider].enabled_ = value.toBool();
   }
 }
 

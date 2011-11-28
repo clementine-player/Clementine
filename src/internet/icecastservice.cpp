@@ -61,8 +61,7 @@ IcecastService::IcecastService(InternetModel* parent)
   model_ = new IcecastModel(backend_, this);
   filter_->SetIcecastModel(model_);
 
-  model()->global_search()->AddProvider(
-        new IcecastSearchProvider(backend_, this), false);
+  model()->global_search()->AddProvider(new IcecastSearchProvider(backend_, this));
 }
 
 IcecastService::~IcecastService() {

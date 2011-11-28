@@ -38,7 +38,7 @@ public:
   static const char* kSettingsGroup;
   static const int kMaxResultsPerEmission;
 
-  void AddProvider(SearchProvider* provider, bool enable_by_default = true);
+  void AddProvider(SearchProvider* provider);
   // Try to change provider state. Returns false if we can't (e.g. we can't
   // enable a provider because it requires the user to be logged-in)
   bool SetProviderEnabled(const SearchProvider* provider, bool enabled);
@@ -53,8 +53,10 @@ public:
 
   bool FindCachedPixmap(const SearchProvider::Result& result, QPixmap* pixmap) const;
 
+  // "enabled" is the user preference.  "usable" is enabled AND logged in.
   QList<SearchProvider*> providers() const;
   bool is_provider_enabled(const SearchProvider* provider) const;
+  bool is_provider_usable(SearchProvider* provider) const;
 
   static bool HideOtherSearchBoxes();
 
@@ -72,7 +74,6 @@ signals:
 
   void ProviderAdded(const SearchProvider* provider);
   void ProviderRemoved(const SearchProvider* provider);
-  void ProviderToggled(const SearchProvider* provider, bool enabled);
 
 protected:
   void timerEvent(QTimerEvent* e);
@@ -120,8 +121,6 @@ private:
 
   QPixmapCache pixmap_cache_;
   QMap<int, QString> pending_art_searches_;
-
-  QMap<QString, bool> providers_state_preference_;
 
   // Used for providers with ArtIsInSongMetadata set.
   BackgroundThread<AlbumCoverLoader>* cover_loader_;

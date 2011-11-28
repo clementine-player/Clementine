@@ -28,12 +28,19 @@ LibrarySearchProvider::LibrarySearchProvider(LibraryBackendInterface* backend,
                                              const QString& name,
                                              const QString& id,
                                              const QIcon& icon,
+                                             bool enabled_by_default,
                                              QObject* parent)
   : BlockingSearchProvider(parent),
     backend_(backend)
 {
-  Init(name, id, icon, WantsSerialisedArtQueries | ArtIsInSongMetadata |
-                       CanGiveSuggestions);
+  Hints hints = WantsSerialisedArtQueries | ArtIsInSongMetadata |
+                CanGiveSuggestions;
+
+  if (!enabled_by_default) {
+    hints |= DisabledByDefault;
+  }
+
+  Init(name, id, icon, hints);
 }
 
 SearchProvider::ResultList LibrarySearchProvider::Search(int id, const QString& query) {
