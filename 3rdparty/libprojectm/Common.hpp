@@ -63,6 +63,7 @@ extern FILE *fmemopen(void *buf, size_t len, const char *pMode);
 
 #ifdef LINUX
 #include <cstdlib>
+#include <cmath>
 #define projectM_isnan isnan
 
 #endif

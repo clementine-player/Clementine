@@ -27,6 +27,9 @@ include_directories(${QTIOCOMPRESSOR_INCLUDE_DIRS})
 include_directories(${QXT_INCLUDE_DIRS})
 include_directories(${ECHONEST_INCLUDE_DIRS})
 
+find_package(OpenGL)
+include_directories(${OPENGL_INCLUDE_DIR})
+
 if(HAVE_LIBINDICATE)
   link_directories(${INDICATEQT_LIBRARY_DIRS})
   include_directories(${INDICATEQT_INCLUDE_DIRS})
@@ -971,7 +974,6 @@ target_link_libraries(clementine_lib
   ${QTSINGLECOREAPPLICATION_LIBRARIES}
   ${QTIOCOMPRESSOR_LIBRARIES}
   ${CMAKE_THREAD_LIBS_INIT}
-  dl
   z
 )
 
@@ -1080,7 +1082,8 @@ if (LINUX)
   # command but they're actually used by libraries that appear after them, so
   # they end up getting ignored.  This appends them to the very end of the link
   # line, ensuring they're always used.
-  target_link_libraries(clementine_lib -lX11 -ldl)
+  find_package(X11)
+  target_link_libraries(clementine_lib ${X11_X11_LIB})
 endif (LINUX)
 
 add_dependencies(clementine_lib qtsingleapplication)
