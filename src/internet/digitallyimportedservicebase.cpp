@@ -121,8 +121,8 @@ void DigitallyImportedServiceBase::RefreshStreamsFinished(QNetworkReply* reply, 
 
   saved_channels_.Update(channels);
 
-  // Only update the item's children if it's already been expanded
-  if (root_->hasChildren())
+  // Only update the item's children if it's already been populated
+  if (!root_->data(InternetModel::Role_CanLazyLoad).toBool())
     PopulateStreams();
 
   emit StreamsChanged();
