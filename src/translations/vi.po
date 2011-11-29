@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2011-11-28 05:28+0000\n"
+"PO-Revision-Date: 2011-11-29 06:38+0000\n"
 "Last-Translator: anix <truongan@linuxmail.org>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -52,12 +52,12 @@ msgstr " bài hát"
 msgid "%1 albums"
 msgstr "%1 album"
 
-#: core/utilities.cpp:89
+#: core/utilities.cpp:90
 #, qt-format
 msgid "%1 days"
 msgstr "%1 ngày"
 
-#: core/utilities.cpp:110
+#: core/utilities.cpp:111
 #, qt-format
 msgid "%1 days ago"
 msgstr "%1 ngày trước"
@@ -219,7 +219,7 @@ msgstr "...và tất cả cộng tác viên của Amarok"
 msgid "0:00:00"
 msgstr "0:00:00"
 
-#: core/utilities.cpp:89
+#: core/utilities.cpp:90
 msgid "1 day"
 msgstr "1 ngày"
 
@@ -256,7 +256,7 @@ msgstr ""
 msgid "A Grooveshark Anywhere account is required."
 msgstr "Cần có tài khoản Grooveshark Anywhere."
 
-#: internet/spotifysettingspage.cpp:158
+#: internet/spotifysettingspage.cpp:162
 msgid "A Spotify Premium account is required."
 msgstr "Yêu cầu một tài khoản Premium của Spotify."
 
@@ -297,7 +297,7 @@ msgstr "AAC 32k"
 msgid "AAC 64k"
 msgstr "AAC 64k"
 
-#: core/song.cpp:140
+#: core/song.cpp:393
 msgid "AIFF"
 msgstr "AIFF"
 
@@ -442,11 +442,11 @@ msgstr "Thêm thẻ năm của bài hát"
 msgid "Add stream..."
 msgstr "Thêm luồng dữ liệu..."
 
-#: internet/groovesharkservice.cpp:905
+#: internet/groovesharkservice.cpp:909
 msgid "Add to Grooveshark favorites"
 msgstr "Thêm vào yêu thích của Grooveshark"
 
-#: internet/groovesharkservice.cpp:911
+#: internet/groovesharkservice.cpp:915
 msgid "Add to Grooveshark playlists"
 msgstr "Thêm vào danh sách Gr"
 
@@ -492,7 +492,7 @@ msgstr "Đã thêm vào ngày hôm nay"
 msgid "Added within three months"
 msgstr "Đã thêm vào trong ba tháng"
 
-#: internet/groovesharkservice.cpp:1103
+#: internet/groovesharkservice.cpp:1108
 msgid "Adding song to favorites"
 msgstr "Đang thêm bài hát vào yêu thích"
 
@@ -504,7 +504,7 @@ msgstr "Nhóm nâng cao..."
 msgid "After copying..."
 msgstr "Sau khi sao chép..."
 
-#: playlist/playlist.cpp:1103 ui/organisedialog.cpp:52
+#: playlist/playlist.cpp:1104 ui/organisedialog.cpp:52
 #: ui/qtsystemtrayicon.cpp:252 ../bin/src/ui_groupbydialog.h:129
 #: ../bin/src/ui_groupbydialog.h:142 ../bin/src/ui_groupbydialog.h:155
 #: ../bin/src/ui_albumcoversearcher.h:110
@@ -517,12 +517,12 @@ msgstr "Album"
 msgid "Album (ideal loudness for all tracks)"
 msgstr "Album (âm lượng lớn lý tưởng cho mọi bài hát)"
 
-#: playlist/playlist.cpp:1109 ui/organisedialog.cpp:55
+#: playlist/playlist.cpp:1110 ui/organisedialog.cpp:55
 #: ../bin/src/ui_edittagdialog.h:658
 msgid "Album artist"
 msgstr "Nghệ sĩ của Album"
 
-#: internet/jamendoservice.cpp:410
+#: internet/jamendoservice.cpp:411
 msgid "Album info on jamendo.com..."
 msgstr "Thông tin của album trên jamendo.com..."
 
@@ -613,7 +613,7 @@ msgstr "Có lỗi xảy ra khi sao chép cơ sở dữ liệu iTunes lên thiế
 msgid "An error occurred loading the iTunes database"
 msgstr "Có lỗi xảy ra khi nạp cơ sở dữ liệu iTunes"
 
-#: ui/edittagdialog.cpp:610
+#: ui/edittagdialog.cpp:611
 #, qt-format
 msgid "An error occurred writing metadata to '%1'"
 msgstr "Một mỗi đã xảy ra khi ghi siêu dữ liệu vào '%1'"
@@ -653,15 +653,15 @@ msgstr "Nén để chặn việc ngắt đoạn"
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "Bạn có chắc sẽ xóa thiết lập \"%1\"?"
 
-#: internet/groovesharkservice.cpp:1075
+#: internet/groovesharkservice.cpp:1080
 msgid "Are you sure you want to delete this playlist?"
 msgstr "Bạn có chắc muốn xóa danh sách này?"
 
-#: ui/edittagdialog.cpp:702
+#: ui/edittagdialog.cpp:717
 msgid "Are you sure you want to reset this song's statistics?"
 msgstr "Bạn có chắc muốn thiết đặt lại bộ đếm của bài hát này?"
 
-#: playlist/playlist.cpp:1102 ui/organisedialog.cpp:53
+#: playlist/playlist.cpp:1103 ui/organisedialog.cpp:53
 #: ui/qtsystemtrayicon.cpp:250 ../bin/src/ui_groupbydialog.h:130
 #: ../bin/src/ui_groupbydialog.h:143 ../bin/src/ui_groupbydialog.h:156
 #: ../bin/src/ui_albumcoversearcher.h:106
@@ -729,7 +729,7 @@ msgstr "Bitrate trung bình"
 msgid "Average image size"
 msgstr "Kích thước ảnh trung bình"
 
-#: playlist/playlist.cpp:1118 ui/organisedialog.cpp:59
+#: playlist/playlist.cpp:1119 ui/organisedialog.cpp:59
 #: ../bin/src/ui_edittagdialog.h:638
 msgid "BPM"
 msgstr "BPM"
@@ -775,7 +775,7 @@ msgstr "Tốt nhất"
 msgid "Biography from %1"
 msgstr "Thông tin từ %1"
 
-#: playlist/playlist.cpp:1119 ../bin/src/ui_edittagdialog.h:640
+#: playlist/playlist.cpp:1120 ../bin/src/ui_edittagdialog.h:640
 msgid "Bit rate"
 msgstr "Bit rate"
 
@@ -818,7 +818,7 @@ msgstr "Thời gian đệm"
 msgid "Buttons"
 msgstr "Nút"
 
-#: core/song.cpp:143
+#: core/song.cpp:396
 msgid "CDDA"
 msgstr "CDDA"
 
@@ -1005,7 +1005,7 @@ msgstr "Kết hợp các kết quả giống nhau từ những nguồn khác nha
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Dấu phẩy phân cách danh sách lớp:mức độ, mức độ từ 0-3"
 
-#: playlist/playlist.cpp:1128 smartplaylists/searchterm.cpp:279
+#: playlist/playlist.cpp:1129 smartplaylists/searchterm.cpp:279
 #: ui/organisedialog.cpp:62 ../bin/src/ui_edittagdialog.h:661
 msgid "Comment"
 msgstr "Lời bình"
@@ -1018,7 +1018,7 @@ msgstr "Tự động gán thẻ"
 msgid "Complete tags automatically..."
 msgstr "Tự động hoàn tất các thẻ..."
 
-#: playlist/playlist.cpp:1110 ui/organisedialog.cpp:56
+#: playlist/playlist.cpp:1111 ui/organisedialog.cpp:56
 #: ../bin/src/ui_groupbydialog.h:132 ../bin/src/ui_groupbydialog.h:145
 #: ../bin/src/ui_groupbydialog.h:158 ../bin/src/ui_edittagdialog.h:659
 msgid "Composer"
@@ -1032,7 +1032,7 @@ msgstr "Cấu hình Grooveshark..."
 msgid "Configure Last.fm..."
 msgstr "Cấu hình Last.fm..."
 
-#: internet/magnatuneservice.cpp:273
+#: internet/magnatuneservice.cpp:275
 msgid "Configure Magnatune..."
 msgstr "Cấu hình Magnatune..."
 
@@ -1040,7 +1040,7 @@ msgstr "Cấu hình Magnatune..."
 msgid "Configure Shortcuts"
 msgstr "Phím tắt"
 
-#: internet/spotifyservice.cpp:472
+#: internet/spotifyservice.cpp:491
 msgid "Configure Spotify..."
 msgstr "Cấu hình Spotify..."
 
@@ -1061,7 +1061,7 @@ msgstr "Kết nối Wii Remotes sử dụng thao tác kích hoạt/vô hiệu"
 msgid "Connect device"
 msgstr "Kết nối thiết bị"
 
-#: internet/spotifyservice.cpp:227
+#: internet/spotifyservice.cpp:246
 msgid "Connecting to Spotify"
 msgstr "Kết nối đến Spotify"
 
@@ -1077,7 +1077,7 @@ msgstr "Chuyển đổi toàn bộ nhạc"
 msgid "Convert any music that the device can't play"
 msgstr "Chuyển đổi bất kì bản nhạc nào mà thiết bị không thể chơi"
 
-#: internet/groovesharkservice.cpp:958
+#: internet/groovesharkservice.cpp:962
 msgid "Copy to clipboard"
 msgstr "Chép vào bộ đệm"
 
@@ -1136,24 +1136,24 @@ msgstr "Không thể mở tập tin %1"
 msgid "Cover Manager"
 msgstr "Quản lí ảnh bìa"
 
-#: ui/edittagdialog.cpp:404
+#: ui/edittagdialog.cpp:405
 msgid "Cover art from embedded image"
 msgstr "Ảnh bìa nghệ thuật từ ảnh được lồng ghép"
 
-#: ui/edittagdialog.cpp:406
+#: ui/edittagdialog.cpp:407
 #, qt-format
 msgid "Cover art loaded automatically from %1"
 msgstr "Ảnh bìa nghệ thuật tự động nạp từ %1"
 
-#: ui/edittagdialog.cpp:399
+#: ui/edittagdialog.cpp:400
 msgid "Cover art manually unset"
 msgstr "Bỏ thiết đặt ảnh bìa một cách thủ công"
 
-#: ui/edittagdialog.cpp:408
+#: ui/edittagdialog.cpp:409
 msgid "Cover art not set"
 msgstr "Chưa có ảnh bìa"
 
-#: ui/edittagdialog.cpp:402
+#: ui/edittagdialog.cpp:403
 #, qt-format
 msgid "Cover art set from %1"
 msgstr "Ảnh bìa được thiết lập từ %1"
@@ -1163,7 +1163,7 @@ msgstr "Ảnh bìa được thiết lập từ %1"
 msgid "Covers from %1"
 msgstr "Ảnh bìa từ %1"
 
-#: internet/groovesharkservice.cpp:488 internet/groovesharkservice.cpp:1027
+#: internet/groovesharkservice.cpp:488 internet/groovesharkservice.cpp:1031
 msgid "Create a new Grooveshark playlist"
 msgstr "Tạo danh sách Grooveshark mới"
 
@@ -1271,11 +1271,11 @@ msgstr "Đường dẫn Dbus"
 msgid "Dance"
 msgstr "Dance"
 
-#: playlist/playlist.cpp:1126 ../bin/src/ui_edittagdialog.h:649
+#: playlist/playlist.cpp:1127 ../bin/src/ui_edittagdialog.h:649
 msgid "Date created"
 msgstr "Ngày tạo"
 
-#: playlist/playlist.cpp:1125 ../bin/src/ui_edittagdialog.h:648
+#: playlist/playlist.cpp:1126 ../bin/src/ui_edittagdialog.h:648
 msgid "Date modified"
 msgstr "Ngày chỉnh sửa"
 
@@ -1303,11 +1303,11 @@ msgstr "Mặc định"
 msgid "Delay between visualizations"
 msgstr "Độ trễ giữa các hiệu ứng hình ảnh ảo"
 
-#: internet/groovesharkservice.cpp:491 internet/groovesharkservice.cpp:1074
+#: internet/groovesharkservice.cpp:491 internet/groovesharkservice.cpp:1079
 msgid "Delete Grooveshark playlist"
 msgstr "Xoá danh sách Grooveshark"
 
-#: devices/deviceview.cpp:393 library/libraryview.cpp:459
+#: devices/deviceview.cpp:393 library/libraryview.cpp:460
 #: ui/mainwindow.cpp:1834 widgets/fileview.cpp:185
 msgid "Delete files"
 msgstr "Xóa các tập tin"
@@ -1333,7 +1333,7 @@ msgstr "Xóa danh sách thông minh"
 msgid "Delete the original files"
 msgstr "Xóa tập tin gốc"
 
-#: core/deletefiles.cpp:49
+#: core/deletefiles.cpp:50
 msgid "Deleting files"
 msgstr "Đang xóa các tập tin"
 
@@ -1410,7 +1410,7 @@ msgstr "Tắt thời lượng"
 msgid "Disabled"
 msgstr "Tắt"
 
-#: playlist/playlist.cpp:1106 ui/organisedialog.cpp:58
+#: playlist/playlist.cpp:1107 ui/organisedialog.cpp:58
 #: ../bin/src/ui_edittagdialog.h:655
 msgid "Disc"
 msgstr "Đĩa"
@@ -1472,11 +1472,11 @@ msgstr "Tải thư mục"
 msgid "Download membership"
 msgstr "Tải với tư cách thành viên"
 
-#: internet/magnatuneservice.cpp:269
+#: internet/magnatuneservice.cpp:271
 msgid "Download this album"
 msgstr "Tải album này"
 
-#: internet/jamendoservice.cpp:412
+#: internet/jamendoservice.cpp:413
 msgid "Download this album..."
 msgstr "Tải album này..."
 
@@ -1484,15 +1484,15 @@ msgstr "Tải album này..."
 msgid "Download..."
 msgstr "Tải về..."
 
-#: internet/icecastservice.cpp:98
+#: internet/icecastservice.cpp:97
 msgid "Downloading Icecast directory"
 msgstr "Đang tải thư mục Icecast"
 
-#: internet/jamendoservice.cpp:182
+#: internet/jamendoservice.cpp:183
 msgid "Downloading Jamendo catalogue"
 msgstr "Đang tải mục lục Jamendo"
 
-#: internet/magnatuneservice.cpp:154
+#: internet/magnatuneservice.cpp:156
 msgid "Downloading Magnatune catalogue"
 msgstr "Đang tải mục lục Magnatune"
 
@@ -1500,7 +1500,7 @@ msgstr "Đang tải mục lục Magnatune"
 msgid "Downloading Spotify plugin"
 msgstr "Tải trình cắm thêm Spotify"
 
-#: musicbrainz/tagfetcher.cpp:99
+#: musicbrainz/tagfetcher.cpp:101
 msgid "Downloading metadata"
 msgstr "Đang tải thông tin dữ liệu"
 
@@ -1516,7 +1516,7 @@ msgstr "Tên phân vùng ổ đĩa"
 msgid "Dynamic mode is on"
 msgstr "Chế độ năng động đã bật"
 
-#: internet/jamendoservice.cpp:110 library/library.cpp:88
+#: internet/jamendoservice.cpp:111 library/library.cpp:88
 msgid "Dynamic random mix"
 msgstr "Hòa trộn âm thanh động một cách ngẫu nhiên"
 
@@ -1634,8 +1634,8 @@ msgstr "Tương đương với --log-levels *:1"
 msgid "Equivalent to --log-levels *:3"
 msgstr "Tương đương với --log-levels *:3"
 
-#: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:453
-#: ui/edittagdialog.cpp:717 ui/mainwindow.cpp:1802 ui/mainwindow.cpp:1907
+#: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:454
+#: ui/edittagdialog.cpp:732 ui/mainwindow.cpp:1802 ui/mainwindow.cpp:1907
 #: ui/mainwindow.cpp:2126
 msgid "Error"
 msgstr "Lỗi"
@@ -1644,11 +1644,11 @@ msgstr "Lỗi"
 msgid "Error connecting MTP device"
 msgstr "Lỗi kết nối thiết bị MTP"
 
-#: ui/organiseerrordialog.cpp:53
+#: ui/organiseerrordialog.cpp:55
 msgid "Error copying songs"
 msgstr "Lỗi sao chép nhạc"
 
-#: ui/organiseerrordialog.cpp:58
+#: ui/organiseerrordialog.cpp:60
 msgid "Error deleting songs"
 msgstr "Lỗi xóa các bài hát"
 
@@ -1773,19 +1773,19 @@ msgstr "Phần mở rộng tập tin"
 msgid "File formats"
 msgstr "Định dạng tập tin"
 
-#: playlist/playlist.cpp:1121 ../bin/src/ui_edittagdialog.h:650
+#: playlist/playlist.cpp:1122 ../bin/src/ui_edittagdialog.h:650
 msgid "File name"
 msgstr "Tên tập tin"
 
-#: playlist/playlist.cpp:1122
+#: playlist/playlist.cpp:1123
 msgid "File name (without path)"
 msgstr "Tên tập tin (không kèm đường dẫn)"
 
-#: playlist/playlist.cpp:1123 ../bin/src/ui_edittagdialog.h:644
+#: playlist/playlist.cpp:1124 ../bin/src/ui_edittagdialog.h:644
 msgid "File size"
 msgstr "Kích thước tập tin"
 
-#: playlist/playlist.cpp:1124 ../bin/src/ui_groupbydialog.h:133
+#: playlist/playlist.cpp:1125 ../bin/src/ui_groupbydialog.h:133
 #: ../bin/src/ui_groupbydialog.h:146 ../bin/src/ui_groupbydialog.h:159
 #: ../bin/src/ui_edittagdialog.h:646
 msgid "File type"
@@ -1820,7 +1820,7 @@ msgid "Find songs in your library that match the criteria you specify."
 msgstr ""
 "Tìm bài hát trong thư viện của bạn phù hợp với tiêu chuẩn mà bạn chỉ định."
 
-#: musicbrainz/tagfetcher.cpp:52
+#: musicbrainz/tagfetcher.cpp:54
 msgid "Fingerprinting song"
 msgstr "Đang chuyển thông tin của bài hát"
 
@@ -1832,7 +1832,7 @@ msgstr "Hoàn tất"
 msgid "First level"
 msgstr "Cấp bậc đầu"
 
-#: core/song.cpp:133
+#: core/song.cpp:386
 msgid "Flac"
 msgstr "Flac"
 
@@ -1921,17 +1921,17 @@ msgstr "Tổng quát"
 msgid "General settings"
 msgstr "Thiết lập chung"
 
-#: playlist/playlist.cpp:1108 ui/organisedialog.cpp:61
+#: playlist/playlist.cpp:1109 ui/organisedialog.cpp:61
 #: ../bin/src/ui_groupbydialog.h:134 ../bin/src/ui_groupbydialog.h:147
 #: ../bin/src/ui_groupbydialog.h:160 ../bin/src/ui_edittagdialog.h:660
 msgid "Genre"
 msgstr "Thể loại"
 
-#: internet/groovesharkservice.cpp:922
+#: internet/groovesharkservice.cpp:926
 msgid "Get an URL to share this Grooveshark song"
 msgstr "Lấy địa chỉ URL trên Grooveshark để chia sẻ"
 
-#: internet/groovesharkservice.cpp:701
+#: internet/groovesharkservice.cpp:705
 msgid "Getting Grooveshark popular songs"
 msgstr "Đang lấy danh sách các bài hát phổ biến trên Grooveshark"
 
@@ -1981,7 +1981,7 @@ msgstr "Grooveshark"
 msgid "Grooveshark login error"
 msgstr "Lỗi đăng nhập Grooveshark"
 
-#: internet/groovesharkservice.cpp:954
+#: internet/groovesharkservice.cpp:958
 msgid "Grooveshark song's URL"
 msgstr "URL của bài hát trên Grooveshark"
 
@@ -2070,7 +2070,7 @@ msgstr "Biểu tượng"
 msgid "Icons on top"
 msgstr "Biểu tượng ở trên cùng"
 
-#: musicbrainz/tagfetcher.cpp:83
+#: musicbrainz/tagfetcher.cpp:85
 msgid "Identifying song"
 msgstr "Đang nhận diện bài hát"
 
@@ -2111,7 +2111,7 @@ msgstr ""
 "Trong chế độ năng động, các bài hát mới sẽ được chọn và thêm vào danh sách "
 "mỗi khi một bài hát được phát xong."
 
-#: internet/spotifyservice.cpp:328
+#: internet/spotifyservice.cpp:347
 msgid "Inbox"
 msgstr "Hộp thư đến"
 
@@ -2187,27 +2187,27 @@ msgstr "Khoá phiên chạy không hợp lệ"
 msgid "Invalid username and/or password"
 msgstr "Tên người dùng và/hay mật khẩu không hợp lệ"
 
-#: internet/jamendoservice.cpp:123
+#: internet/jamendoservice.cpp:124
 msgid "Jamendo"
 msgstr "Jamendo"
 
-#: internet/jamendoservice.cpp:106
+#: internet/jamendoservice.cpp:107
 msgid "Jamendo Most Listened Tracks"
 msgstr "Những bài hát được nghe nhiều nhất trên Jamendo"
 
-#: internet/jamendoservice.cpp:104
+#: internet/jamendoservice.cpp:105
 msgid "Jamendo Top Tracks"
 msgstr "Những bài hát đầu bảng trên Jamendo"
 
-#: internet/jamendoservice.cpp:100
+#: internet/jamendoservice.cpp:101
 msgid "Jamendo Top Tracks of the Month"
 msgstr "Những bài hát đầu bảng trong tháng trên Jamendo"
 
-#: internet/jamendoservice.cpp:102
+#: internet/jamendoservice.cpp:103
 msgid "Jamendo Top Tracks of the Week"
 msgstr "Những bài hát đầu bảng trong tuần trên Jamendo"
 
-#: internet/jamendoservice.cpp:166
+#: internet/jamendoservice.cpp:167
 msgid "Jamendo database"
 msgstr "Cơ sở dữ liệu Jamendo"
 
@@ -2259,7 +2259,7 @@ msgstr "Bìa album cỡ lớn"
 msgid "Large sidebar"
 msgstr "Thanh bên cỡ lớn"
 
-#: library/library.cpp:66 playlist/playlist.cpp:1115
+#: library/library.cpp:66 playlist/playlist.cpp:1116
 #: ../bin/src/ui_edittagdialog.h:641
 msgid "Last played"
 msgstr "Lần phát cuối"
@@ -2338,7 +2338,7 @@ msgstr "Những bài hát ít được yêu thích nhất"
 msgid "Leave blank for the default.  Examples: \"/dev/dsp\", \"front\", etc."
 msgstr "Để trống cho mặc định. Ví dụ: \"/dev/dsp\", \"front\", ..."
 
-#: playlist/playlist.cpp:1104 ui/organisedialog.cpp:63
+#: playlist/playlist.cpp:1105 ui/organisedialog.cpp:63
 #: ui/qtsystemtrayicon.cpp:255 ../bin/src/ui_edittagdialog.h:636
 msgid "Length"
 msgstr "Độ dài"
@@ -2415,7 +2415,7 @@ msgstr "Đang nạp cơ sở dữ liệu iPod"
 msgid "Loading smart playlist"
 msgstr "Đang nạp danh sách thông minh"
 
-#: library/librarymodel.cpp:131
+#: library/librarymodel.cpp:135
 msgid "Loading songs"
 msgstr "Đang nạp các bài hát"
 
@@ -2424,7 +2424,7 @@ msgstr "Đang nạp các bài hát"
 msgid "Loading stream"
 msgstr "Đang nạp luồng dữ liệu"
 
-#: playlist/songloaderinserter.cpp:79 ui/edittagdialog.cpp:209
+#: playlist/songloaderinserter.cpp:79 ui/edittagdialog.cpp:210
 msgid "Loading tracks"
 msgstr "Đang nạp các bài hát"
 
@@ -2432,7 +2432,7 @@ msgstr "Đang nạp các bài hát"
 msgid "Loading tracks info"
 msgstr "Đang nạp thông tin bài hát"
 
-#: library/librarymodel.cpp:126 widgets/prettyimage.cpp:168
+#: library/librarymodel.cpp:130 widgets/prettyimage.cpp:168
 #: widgets/widgetfadehelper.cpp:93 ../bin/src/ui_searchpreview.h:106
 msgid "Loading..."
 msgstr "Đang nạp..."
@@ -2484,7 +2484,7 @@ msgstr "Lời bài hát"
 msgid "Lyrics from %1"
 msgstr "Lời bài hát từ %1"
 
-#: core/song.cpp:136 ../bin/src/ui_transcodersettingspage.h:159
+#: core/song.cpp:389 ../bin/src/ui_transcodersettingspage.h:159
 msgid "MP3"
 msgstr "MP3"
 
@@ -2496,15 +2496,15 @@ msgstr "MP3 256k"
 msgid "MP3 96k"
 msgstr "MP3 96k"
 
-#: core/song.cpp:134
+#: core/song.cpp:387
 msgid "MP4 AAC"
 msgstr "MP4 AAC"
 
-#: core/song.cpp:135
+#: core/song.cpp:388
 msgid "MPC"
 msgstr "MPC"
 
-#: internet/magnatuneservice.cpp:99 ../bin/src/ui_magnatunesettingspage.h:154
+#: internet/magnatuneservice.cpp:100 ../bin/src/ui_magnatunesettingspage.h:154
 msgid "Magnatune"
 msgstr "Magnatune"
 
@@ -2520,7 +2520,7 @@ msgstr "Hoàn tất tải về Magnatune"
 msgid "Main profile (MAIN)"
 msgstr "Hồ sơ chính (MAIN)"
 
-#: internet/spotifyservice.cpp:477
+#: internet/spotifyservice.cpp:496
 msgid "Make playlist available offline"
 msgstr "Danh sách sẵn sàng ngoại tuyến"
 
@@ -2656,7 +2656,7 @@ msgstr "Đài phát thanh của tôi"
 msgid "My Recommendations"
 msgstr "Bài nên nghe"
 
-#: internet/groovesharkservice.cpp:1028 ui/equalizer.cpp:172
+#: internet/groovesharkservice.cpp:1032 ui/equalizer.cpp:172
 #: ../bin/src/ui_deviceproperties.h:369
 #: ../bin/src/ui_magnatunedownloaddialog.h:135
 #: ../bin/src/ui_wizardfinishpage.h:84
@@ -2684,7 +2684,7 @@ msgstr "Mạng"
 msgid "Network Proxy"
 msgstr "Proxy"
 
-#: playlist/playlistdelegates.cpp:296 ui/edittagdialog.cpp:443
+#: playlist/playlistdelegates.cpp:296 ui/edittagdialog.cpp:444
 msgid "Never"
 msgstr "Chưa bao giờ"
 
@@ -2717,7 +2717,7 @@ msgstr "Những bài hát mới sẽ được tự động thêm vào."
 msgid "Newest tracks"
 msgstr "Các bài hát mới nhất"
 
-#: ui/edittagdialog.cpp:157 ui/trackselectiondialog.cpp:47
+#: ui/edittagdialog.cpp:158 ui/trackselectiondialog.cpp:48
 msgid "Next"
 msgstr "Tiếp theo"
 
@@ -2750,7 +2750,7 @@ msgstr "Các khối ngắn"
 msgid "None"
 msgstr "Không"
 
-#: library/libraryview.cpp:454 ui/mainwindow.cpp:1803 ui/mainwindow.cpp:1908
+#: library/libraryview.cpp:455 ui/mainwindow.cpp:1803 ui/mainwindow.cpp:1908
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Không bài hát nào phù hợp để chép qua thiết bị"
 
@@ -2810,15 +2810,15 @@ msgstr "Đang phát"
 msgid "OSD Preview"
 msgstr "Xem trước hộp thông báo"
 
-#: core/song.cpp:137
+#: core/song.cpp:390
 msgid "Ogg Flac"
 msgstr "Ogg Flac"
 
-#: core/song.cpp:138
+#: core/song.cpp:391
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
 
-#: core/song.cpp:139 ../bin/src/ui_magnatunedownloaddialog.h:139
+#: core/song.cpp:392 ../bin/src/ui_magnatunedownloaddialog.h:139
 #: ../bin/src/ui_magnatunesettingspage.h:170
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
@@ -2828,8 +2828,8 @@ msgid "Only show the first"
 msgstr "Hiện số bài hát đầu tiên"
 
 #: internet/digitallyimportedservicebase.cpp:178
-#: internet/groovesharkservice.cpp:503 internet/icecastservice.cpp:300
-#: internet/jamendoservice.cpp:414 internet/magnatuneservice.cpp:271
+#: internet/groovesharkservice.cpp:503 internet/icecastservice.cpp:299
+#: internet/jamendoservice.cpp:415 internet/magnatuneservice.cpp:273
 #: internet/somafmservice.cpp:84
 #, qt-format
 msgid "Open %1 in browser"
@@ -2882,11 +2882,11 @@ msgstr "Tổ chức tập tin"
 msgid "Organise files..."
 msgstr "Tổ chức tập tin..."
 
-#: core/organise.cpp:63
+#: core/organise.cpp:64
 msgid "Organising files"
 msgstr "Tổ chức tập tin"
 
-#: ui/trackselectiondialog.cpp:164
+#: ui/trackselectiondialog.cpp:165
 msgid "Original tags"
 msgstr "Thẻ gốc"
 
@@ -2910,7 +2910,7 @@ msgstr "Đầu ra"
 msgid "Overwrite existing files"
 msgstr "Ghi đè lên các tập tin đã tồn tại"
 
-#: internet/jamendoservice.cpp:209
+#: internet/jamendoservice.cpp:210
 msgid "Parsing Jamendo catalogue"
 msgstr "Đang phân tích mục lục Jamendo"
 
@@ -2961,7 +2961,7 @@ msgstr "Phát theo Nghệ sĩ hoặc theo Thẻ"
 msgid "Play artist radio..."
 msgstr "Phát kênh phát thanh nghệ sĩ..."
 
-#: playlist/playlist.cpp:1113 ../bin/src/ui_edittagdialog.h:637
+#: playlist/playlist.cpp:1114 ../bin/src/ui_edittagdialog.h:637
 msgid "Play count"
 msgstr "Số lần phát"
 
@@ -3118,7 +3118,7 @@ msgstr "Tùy chọn hộp thông báo"
 msgid "Preview"
 msgstr "Xem trước"
 
-#: ui/edittagdialog.cpp:156 ui/trackselectiondialog.cpp:46
+#: ui/edittagdialog.cpp:157 ui/trackselectiondialog.cpp:47
 msgid "Previous"
 msgstr "Trước"
 
@@ -3210,7 +3210,7 @@ msgstr "Đánh giá 4 sao cho bài hát hiện tại"
 msgid "Rate the current song 5 stars"
 msgstr "Đánh giá 5 sao cho bài hát hiện tại"
 
-#: playlist/playlist.cpp:1112 ../bin/src/ui_edittagdialog.h:645
+#: playlist/playlist.cpp:1113 ../bin/src/ui_edittagdialog.h:645
 msgid "Rating"
 msgstr "Đánh giá"
 
@@ -3218,7 +3218,7 @@ msgstr "Đánh giá"
 msgid "Really cancel?"
 msgstr "Thực sự hủy bỏ?"
 
-#: internet/jamendoservice.cpp:415 internet/magnatuneservice.cpp:272
+#: internet/jamendoservice.cpp:416 internet/magnatuneservice.cpp:274
 msgid "Refresh catalogue"
 msgstr "Làm mới mục lục"
 
@@ -3230,7 +3230,7 @@ msgstr "Làm mới các kênh"
 msgid "Refresh friends list"
 msgstr "Cập nhật danh sách bạn"
 
-#: internet/icecastservice.cpp:301
+#: internet/icecastservice.cpp:300
 msgid "Refresh station list"
 msgstr "Làm mới danh sách đài"
 
@@ -3280,7 +3280,7 @@ msgstr "Loại bỏ khỏi danh sách"
 msgid "Remove playlist"
 msgstr "Gỡ bỏ danh sách"
 
-#: internet/groovesharkservice.cpp:1161
+#: internet/groovesharkservice.cpp:1166
 msgid "Removing song from favorites"
 msgstr "Đang loại bỏ bài hát khỏi yêu thích"
 
@@ -3346,7 +3346,7 @@ msgstr "Phục hồi số lượng"
 msgid "Reset"
 msgstr "Thiết lập lại"
 
-#: ui/edittagdialog.cpp:701 ../bin/src/ui_edittagdialog.h:635
+#: ui/edittagdialog.cpp:716 ../bin/src/ui_edittagdialog.h:635
 msgid "Reset play counts"
 msgstr "Thiết lập lại bộ đếm số lần phát"
 
@@ -3358,7 +3358,7 @@ msgstr "Phải dùng kí tự mã ASCII"
 msgid "Results"
 msgstr "Kết quả"
 
-#: internet/groovesharkservice.cpp:672
+#: internet/groovesharkservice.cpp:676
 msgid "Retrieving Grooveshark favorites songs"
 msgstr "Đang tải các bài hát yêu thích trên Grooveshark"
 
@@ -3382,7 +3382,7 @@ msgstr "Tháo gỡ thiết bị an toàn"
 msgid "Safely remove the device after copying"
 msgstr "Tháo gỡ thiết bị an toàn sau khi sao chép"
 
-#: playlist/playlist.cpp:1120 ../bin/src/ui_edittagdialog.h:642
+#: playlist/playlist.cpp:1121 ../bin/src/ui_edittagdialog.h:642
 msgid "Sample rate"
 msgstr "Tần số âm"
 
@@ -3418,7 +3418,7 @@ msgstr "Lưu thiết lập"
 msgid "Save this stream in the Internet tab"
 msgstr "Lưu luồng dữ liệu này trong thẻ Internet"
 
-#: ui/edittagdialog.cpp:617 ui/trackselectiondialog.cpp:249
+#: ui/edittagdialog.cpp:618 ui/trackselectiondialog.cpp:250
 msgid "Saving tracks"
 msgstr "Lưu các bài hát"
 
@@ -3426,7 +3426,7 @@ msgstr "Lưu các bài hát"
 msgid "Scalable sampling rate profile (SSR)"
 msgstr "Hồ sơ tỉ lệ mẫu có thể mở rộng (SSR)"
 
-#: playlist/playlist.cpp:1116 ../bin/src/ui_edittagdialog.h:643
+#: playlist/playlist.cpp:1117 ../bin/src/ui_edittagdialog.h:643
 msgid "Score"
 msgstr "Điểm"
 
@@ -3440,7 +3440,7 @@ msgid "Search"
 msgstr "Tìm kiếm"
 
 #: internet/groovesharksearchplaylisttype.cpp:32
-#: internet/groovesharkservice.cpp:840
+#: internet/groovesharkservice.cpp:844
 msgid "Search Grooveshark"
 msgstr "Tìm trên Grooveshark"
 
@@ -3452,23 +3452,23 @@ msgstr "Tìm trên Grooveshark (mở tab mới)"
 msgid "Search Icecast stations"
 msgstr "Tìm kiếm trên Icecast"
 
-#: internet/jamendoservice.cpp:421
+#: internet/jamendoservice.cpp:422
 msgid "Search Jamendo"
 msgstr "Tìm kiếm trên Jamendo"
 
-#: internet/magnatuneservice.cpp:278
+#: internet/magnatuneservice.cpp:280
 msgid "Search Magnatune"
 msgstr "Tìm kiếm trên Magnatune"
 
-#: internet/spotifysearchplaylisttype.cpp:32 internet/spotifyservice.cpp:585
+#: internet/spotifysearchplaylisttype.cpp:32 internet/spotifyservice.cpp:604
 msgid "Search Spotify"
 msgstr "Tìm kiếm trong Spotify"
 
-#: internet/spotifyservice.cpp:319
+#: internet/spotifyservice.cpp:338
 msgid "Search Spotify (opens a new tab)"
 msgstr "Tìm kiếm trong Spotify (mở trong tab mới)"
 
-#: internet/spotifyservice.cpp:470
+#: internet/spotifyservice.cpp:489
 msgid "Search Spotify (opens a new tab)..."
 msgstr "Tìm kiếm trong Spotify (mở trong tab mới)..."
 
@@ -3720,7 +3720,7 @@ msgstr "Ska"
 msgid "Skip backwards in playlist"
 msgstr "Lùi lại bài trước trong danh sách"
 
-#: playlist/playlist.cpp:1114 ../bin/src/ui_edittagdialog.h:639
+#: playlist/playlist.cpp:1115 ../bin/src/ui_edittagdialog.h:639
 msgid "Skip count"
 msgstr "Bỏ qua việc đếm"
 
@@ -3740,7 +3740,7 @@ msgstr "Thanh bên nhỏ"
 msgid "Smart playlist"
 msgstr "Danh sách thông minh"
 
-#: library/librarymodel.cpp:1118
+#: library/librarymodel.cpp:1128
 msgid "Smart playlists"
 msgstr "Danh sách thông minh"
 
@@ -3800,7 +3800,7 @@ msgstr "Speex"
 msgid "Spotify"
 msgstr "Spotify"
 
-#: internet/spotifyservice.cpp:146
+#: internet/spotifyservice.cpp:179
 msgid "Spotify login error"
 msgstr "Lỗi đăng nhập Spotify"
 
@@ -3816,7 +3816,7 @@ msgstr "Trình cắm thêm Spotify chưa được cài đặt"
 msgid "Standard"
 msgstr "Chuẩn"
 
-#: internet/spotifyservice.cpp:324
+#: internet/spotifyservice.cpp:343
 msgid "Starred"
 msgstr "Đã bắt đầu"
 
@@ -3868,7 +3868,7 @@ msgstr "Dừng phát sau bài hát hiện tại"
 msgid "Stopped"
 msgstr "Đã dừng"
 
-#: core/song.cpp:145
+#: core/song.cpp:398
 msgid "Stream"
 msgstr "Truyền tải"
 
@@ -3878,14 +3878,14 @@ msgstr "Truyền tải thông tin thành viên"
 
 #: internet/groovesharkservice.cpp:552
 msgid "Subscribed playlists"
-msgstr ""
+msgstr "Danh sách đã đăng kí"
 
 #: transcoder/transcoder.cpp:198
 #, qt-format
 msgid "Successfully written %1"
 msgstr "Đã ghi vào %1"
 
-#: ui/trackselectiondialog.cpp:168
+#: ui/trackselectiondialog.cpp:169
 msgid "Suggested tags"
 msgstr "Thẻ được đề nghị"
 
@@ -3911,15 +3911,15 @@ msgstr "Các định dạng được hỗ trợ"
 msgid "Switch provider"
 msgstr "Đổi nhà cung cấp"
 
-#: internet/spotifyservice.cpp:496
+#: internet/spotifyservice.cpp:515
 msgid "Syncing Spotify inbox"
 msgstr "Đang đồng bộ hộp thư đến Spotify"
 
-#: internet/spotifyservice.cpp:491
+#: internet/spotifyservice.cpp:510
 msgid "Syncing Spotify playlist"
 msgstr "Đang đồng bộ danh sách Spotify"
 
-#: internet/spotifyservice.cpp:500
+#: internet/spotifyservice.cpp:519
 msgid "Syncing Spotify starred tracks"
 msgstr "Đang đồng bộ các bài hát được đánh dấu sao của Spotify"
 
@@ -3994,7 +3994,7 @@ msgstr ""
 msgid "There was a problem fetching the metadata from Magnatune"
 msgstr "Có vấn đề khi lấy siêu dữ liệu từ Magnatune"
 
-#: ui/organiseerrordialog.cpp:54
+#: ui/organiseerrordialog.cpp:56
 msgid ""
 "There were problems copying some songs.  The following files could not be "
 "copied:"
@@ -4002,13 +4002,13 @@ msgstr ""
 "Có vấn đề khi đang sao chép một số bài hát. Không thể sao chép các tập tin "
 "sau đây:"
 
-#: ui/organiseerrordialog.cpp:59
+#: ui/organiseerrordialog.cpp:61
 msgid ""
 "There were problems deleting some songs.  The following files could not be "
 "deleted:"
 msgstr "Có vấn đề khi xóa một số bài hát. Không thể xóa các tập tin sau đây:"
 
-#: library/libraryview.cpp:460 ui/mainwindow.cpp:1835 widgets/fileview.cpp:186
+#: library/libraryview.cpp:461 ui/mainwindow.cpp:1835 widgets/fileview.cpp:186
 msgid ""
 "These files will be deleted from disk, are you sure you want to continue?"
 msgstr "Các tập tin này sẽ bị xóa khỏi đĩa cứng, bạn có muốn tiếp tục?"
@@ -4035,7 +4035,7 @@ msgstr ""
 msgid "Third level"
 msgstr "Cấp bậc ba"
 
-#: internet/jamendoservice.cpp:166
+#: internet/jamendoservice.cpp:167
 msgid ""
 "This action will create a database which could be as big as 150 MB.\n"
 "Do you want to continue anyway?"
@@ -4109,13 +4109,13 @@ msgstr "Thời gian chờ"
 msgid "Timezone"
 msgstr "Múi giờ"
 
-#: playlist/playlist.cpp:1101 ui/organisedialog.cpp:51
+#: playlist/playlist.cpp:1102 ui/organisedialog.cpp:51
 #: ui/qtsystemtrayicon.cpp:248 ../bin/src/ui_about.h:142
 #: ../bin/src/ui_edittagdialog.h:652 ../bin/src/ui_trackselectiondialog.h:211
 msgid "Title"
 msgstr "Tên"
 
-#: core/utilities.cpp:106
+#: core/utilities.cpp:107
 msgid "Today"
 msgstr "Hôm nay"
 
@@ -4147,7 +4147,7 @@ msgstr "Số byte đã truyền tải"
 msgid "Total network requests made"
 msgstr "Số lần gửi yêu cầu"
 
-#: playlist/playlist.cpp:1105 ui/organisedialog.cpp:57
+#: playlist/playlist.cpp:1106 ui/organisedialog.cpp:57
 #: ../bin/src/ui_edittagdialog.h:653 ../bin/src/ui_trackselectiondialog.h:212
 msgid "Track"
 msgstr "Bài hát"
@@ -4173,7 +4173,7 @@ msgstr "Đang chuyển mã %1 tập tin sử dụng %2 luồng"
 msgid "Transcoding options"
 msgstr "Tùy chỉnh chuyển mã"
 
-#: core/song.cpp:142
+#: core/song.cpp:395
 msgid "TrueAudio"
 msgstr "TrueAudio"
 
@@ -4202,9 +4202,9 @@ msgstr "Băng siêu rộng (UWB)"
 msgid "Unable to download %1 (%2)"
 msgstr "Không thể tải về %1 (%2)"
 
-#: core/song.cpp:149 globalsearch/globalsearchitemdelegate.cpp:166
-#: globalsearch/globalsearchitemdelegate.cpp:173 library/librarymodel.cpp:293
-#: library/librarymodel.cpp:298 library/librarymodel.cpp:916
+#: core/song.cpp:402 globalsearch/globalsearchitemdelegate.cpp:166
+#: globalsearch/globalsearchitemdelegate.cpp:173 library/librarymodel.cpp:297
+#: library/librarymodel.cpp:302 library/librarymodel.cpp:926
 #: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:381
 #: playlist/playlistmanager.cpp:384 ui/albumcoverchoicecontroller.cpp:111
 msgid "Unknown"
@@ -4218,7 +4218,7 @@ msgstr "Lỗi không xác định"
 msgid "Unset cover"
 msgstr "Bỏ thiết đặt ảnh bìa"
 
-#: internet/groovesharkservice.cpp:982
+#: internet/groovesharkservice.cpp:986
 msgid "Update Grooveshark playlist"
 msgstr "Cập nhật danh sách Grooveshark"
 
@@ -4330,7 +4330,7 @@ msgstr "VBR MP3"
 msgid "Variable bit rate"
 msgstr "Bit rate thay đổi"
 
-#: globalsearch/globalsearchitemdelegate.cpp:162 library/librarymodel.cpp:230
+#: globalsearch/globalsearchitemdelegate.cpp:162 library/librarymodel.cpp:234
 #: playlist/playlistmanager.cpp:396 ui/albumcovermanager.cpp:264
 msgid "Various artists"
 msgstr "Nhiều nghệ sỹ"
@@ -4382,7 +4382,7 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
-#: core/song.cpp:141
+#: core/song.cpp:394
 msgid "Wav"
 msgstr "Wav"
 
@@ -4456,7 +4456,7 @@ msgstr "Windows Media 40k"
 msgid "Windows Media 64k"
 msgstr "Windows Media 64k"
 
-#: core/song.cpp:132
+#: core/song.cpp:385
 msgid "Windows Media audio"
 msgstr "Âm thanh Windows Media"
 
@@ -4464,7 +4464,7 @@ msgstr "Âm thanh Windows Media"
 msgid "Would you like to run a full rescan right now?"
 msgstr "Bạn có muốn quét lại toàn bộ ngay không?"
 
-#: playlist/playlist.cpp:1107 ui/organisedialog.cpp:60
+#: playlist/playlist.cpp:1108 ui/organisedialog.cpp:60
 #: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:148
 #: ../bin/src/ui_groupbydialog.h:161 ../bin/src/ui_edittagdialog.h:657
 msgid "Year"
@@ -4479,7 +4479,7 @@ msgstr "Năm - Album"
 msgid "Years"
 msgstr "Năm"
 
-#: core/utilities.cpp:108
+#: core/utilities.cpp:109
 msgid "Yesterday"
 msgstr "Ngày hôm qua"
 
@@ -4553,6 +4553,18 @@ msgstr "Bạn không có tài khoản Grooveshark Anywhere."
 msgid "You do not have a Spotify Premium account."
 msgstr "Bạn không có tài khoản cao cấp của Spotify."
 
+#: internet/spotifyservice.cpp:165
+msgid ""
+"You have been logged out of Spotify, please re-enter your password in the "
+"Settings dialog."
+msgstr ""
+"Bạn đã đăng xuất khỏi Spotify, hãy nhập lại mật khẩu trong hộp thoại Thiết "
+"lập."
+
+#: internet/spotifysettingspage.cpp:158
+msgid "You have been logged out of Spotify, please re-enter your password."
+msgstr "Bạn đã đăng xuất khỏi Spotify, hãy nhập lại mật khẩu."
+
 #: songinfo/lastfmtrackinfoprovider.cpp:95
 msgid "You love this track"
 msgstr "Bạn thích bài hát này"
@@ -4596,7 +4608,7 @@ msgstr "Chứng thư Last.fm của bạn không đúng"
 msgid "Your Magnatune credentials were incorrect"
 msgstr "Thông tin tài khoản Magnatune không đúng"
 
-#: ui/edittagdialog.cpp:717 ui/mainwindow.cpp:2126
+#: ui/edittagdialog.cpp:732 ui/mainwindow.cpp:2126
 msgid ""
 "Your gstreamer installation is missing the 'ofa' plugin.  This is required "
 "for automatic tag fetching.  Try installing the 'gstreamer-plugins-bad' "
@@ -4664,7 +4676,7 @@ msgstr "giữa"
 msgid "biggest first"
 msgstr "lớn nhất trước"
 
-#: playlist/playlistview.cpp:161 ui/edittagdialog.cpp:419
+#: playlist/playlistview.cpp:161 ui/edittagdialog.cpp:420
 msgid "bpm"
 msgstr "bpm"
 
@@ -4707,7 +4719,7 @@ msgstr "lớn hơn"
 msgid "in the last"
 msgstr "cuối"
 
-#: playlist/playlistview.cpp:163 ui/edittagdialog.cpp:421
+#: playlist/playlistview.cpp:163 ui/edittagdialog.cpp:422
 #: internet/spotifysettingspage.cpp:60 internet/spotifysettingspage.cpp:61
 #: internet/spotifysettingspage.cpp:62
 msgid "kbps"

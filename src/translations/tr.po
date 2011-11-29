@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2011-11-27 19:42+0000\n"
+"PO-Revision-Date: 2011-11-28 16:20+0000\n"
 "Last-Translator: clementinebuildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -53,12 +53,12 @@ msgstr " şarkılar"
 msgid "%1 albums"
 msgstr "%1 albüm"
 
-#: core/utilities.cpp:89
+#: core/utilities.cpp:90
 #, qt-format
 msgid "%1 days"
 msgstr "%1 gün"
 
-#: core/utilities.cpp:110
+#: core/utilities.cpp:111
 #, qt-format
 msgid "%1 days ago"
 msgstr "%1 gün önce"
@@ -220,7 +220,7 @@ msgstr "...ve tüm Amarok katkıcılarına"
 msgid "0:00:00"
 msgstr "0:00:00"
 
-#: core/utilities.cpp:89
+#: core/utilities.cpp:90
 msgid "1 day"
 msgstr "1 gün"
 
@@ -255,7 +255,7 @@ msgstr ""
 msgid "A Grooveshark Anywhere account is required."
 msgstr "Grooveshark Anywhere hesabı gereklidir."
 
-#: internet/spotifysettingspage.cpp:158
+#: internet/spotifysettingspage.cpp:162
 msgid "A Spotify Premium account is required."
 msgstr "Spotify üyeliği gerekli."
 
@@ -294,7 +294,7 @@ msgstr "AAC 32k"
 msgid "AAC 64k"
 msgstr "AAC 64k"
 
-#: core/song.cpp:140
+#: core/song.cpp:393
 msgid "AIFF"
 msgstr "AIFF"
 
@@ -439,11 +439,11 @@ msgstr "Yıl etiketi ekle"
 msgid "Add stream..."
 msgstr "Yayın ekle..."
 
-#: internet/groovesharkservice.cpp:905
+#: internet/groovesharkservice.cpp:909
 msgid "Add to Grooveshark favorites"
 msgstr "Grooveshark'i favorilere ekle"
 
-#: internet/groovesharkservice.cpp:911
+#: internet/groovesharkservice.cpp:915
 msgid "Add to Grooveshark playlists"
 msgstr "Grooveshark'i müzik listelerine ekle"
 
@@ -489,7 +489,7 @@ msgstr "Bugün eklenenler"
 msgid "Added within three months"
 msgstr "Son üç ay içinde eklenenler"
 
-#: internet/groovesharkservice.cpp:1103
+#: internet/groovesharkservice.cpp:1108
 msgid "Adding song to favorites"
 msgstr ""
 
@@ -501,7 +501,7 @@ msgstr "Gelişmiş gruplama..."
 msgid "After copying..."
 msgstr "Kopyalandıktan sonra..."
 
-#: playlist/playlist.cpp:1103 ui/organisedialog.cpp:52
+#: playlist/playlist.cpp:1104 ui/organisedialog.cpp:52
 #: ui/qtsystemtrayicon.cpp:252 ../bin/src/ui_groupbydialog.h:129
 #: ../bin/src/ui_groupbydialog.h:142 ../bin/src/ui_groupbydialog.h:155
 #: ../bin/src/ui_albumcoversearcher.h:110
@@ -514,12 +514,12 @@ msgstr "Albüm"
 msgid "Album (ideal loudness for all tracks)"
 msgstr "Albüm (tüm parçalar için ideal ses yüksekliği)"
 
-#: playlist/playlist.cpp:1109 ui/organisedialog.cpp:55
+#: playlist/playlist.cpp:1110 ui/organisedialog.cpp:55
 #: ../bin/src/ui_edittagdialog.h:658
 msgid "Album artist"
 msgstr "Albüm sanatçısı"
 
-#: internet/jamendoservice.cpp:410
+#: internet/jamendoservice.cpp:411
 msgid "Album info on jamendo.com..."
 msgstr "Jamendo.com'daki albüm bilgileri..."
 
@@ -610,7 +610,7 @@ msgstr "iTunes veritabanı aygıta kopyalanırken hata oluştu"
 msgid "An error occurred loading the iTunes database"
 msgstr "iTunes veritabanı yüklenirken hata oluştu"
 
-#: ui/edittagdialog.cpp:610
+#: ui/edittagdialog.cpp:611
 #, qt-format
 msgid "An error occurred writing metadata to '%1'"
 msgstr "'%1' dosyasına metadata yazarken hata oluştu"
@@ -650,15 +650,15 @@ msgstr "Kesintiyi engellemek için sıkıştırma uygula"
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "\"%1\" ayarını silmek istediğinizden emin misiniz?"
 
-#: internet/groovesharkservice.cpp:1075
+#: internet/groovesharkservice.cpp:1080
 msgid "Are you sure you want to delete this playlist?"
 msgstr "Bu çalan listeyi silmek istediğinizden emin misiniz?"
 
-#: ui/edittagdialog.cpp:702
+#: ui/edittagdialog.cpp:717
 msgid "Are you sure you want to reset this song's statistics?"
 msgstr "Bu şarkının istatistik bilgisini sıfırlamak istiyor musunuz?"
 
-#: playlist/playlist.cpp:1102 ui/organisedialog.cpp:53
+#: playlist/playlist.cpp:1103 ui/organisedialog.cpp:53
 #: ui/qtsystemtrayicon.cpp:250 ../bin/src/ui_groupbydialog.h:130
 #: ../bin/src/ui_groupbydialog.h:143 ../bin/src/ui_groupbydialog.h:156
 #: ../bin/src/ui_albumcoversearcher.h:106
@@ -726,7 +726,7 @@ msgstr "Ortalama bithızı"
 msgid "Average image size"
 msgstr "Ortalama resim boyutu"
 
-#: playlist/playlist.cpp:1118 ui/organisedialog.cpp:59
+#: playlist/playlist.cpp:1119 ui/organisedialog.cpp:59
 #: ../bin/src/ui_edittagdialog.h:638
 msgid "BPM"
 msgstr "BPM"
@@ -772,7 +772,7 @@ msgstr "En iyi"
 msgid "Biography from %1"
 msgstr "%1'den biyografi"
 
-#: playlist/playlist.cpp:1119 ../bin/src/ui_edittagdialog.h:640
+#: playlist/playlist.cpp:1120 ../bin/src/ui_edittagdialog.h:640
 msgid "Bit rate"
 msgstr "Bit oranı"
 
@@ -815,7 +815,7 @@ msgstr "Önbellek süresi"
 msgid "Buttons"
 msgstr "Düğmeler"
 
-#: core/song.cpp:143
+#: core/song.cpp:396
 msgid "CDDA"
 msgstr "CDDA"
 
@@ -1002,7 +1002,7 @@ msgstr "Farklı kaynaklardan gelen aynı sonuçları birleştir"
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Virgülle ayrılmış sınıf:seviye listesi, sınıf 0-3 arasında olabilir "
 
-#: playlist/playlist.cpp:1128 smartplaylists/searchterm.cpp:279
+#: playlist/playlist.cpp:1129 smartplaylists/searchterm.cpp:279
 #: ui/organisedialog.cpp:62 ../bin/src/ui_edittagdialog.h:661
 msgid "Comment"
 msgstr "Yorum"
@@ -1015,7 +1015,7 @@ msgstr "Etiketleri otomatik tamamla"
 msgid "Complete tags automatically..."
 msgstr "Etiketleri otomatik tamamla..."
 
-#: playlist/playlist.cpp:1110 ui/organisedialog.cpp:56
+#: playlist/playlist.cpp:1111 ui/organisedialog.cpp:56
 #: ../bin/src/ui_groupbydialog.h:132 ../bin/src/ui_groupbydialog.h:145
 #: ../bin/src/ui_groupbydialog.h:158 ../bin/src/ui_edittagdialog.h:659
 msgid "Composer"
@@ -1029,7 +1029,7 @@ msgstr "Grooveshark'i ayarla"
 msgid "Configure Last.fm..."
 msgstr "Last.fm'i Yapılandır..."
 
-#: internet/magnatuneservice.cpp:273
+#: internet/magnatuneservice.cpp:275
 msgid "Configure Magnatune..."
 msgstr "Magnatune'u Yapılandır..."
 
@@ -1037,7 +1037,7 @@ msgstr "Magnatune'u Yapılandır..."
 msgid "Configure Shortcuts"
 msgstr "Kısayolları Yapılandır"
 
-#: internet/spotifyservice.cpp:472
+#: internet/spotifyservice.cpp:491
 msgid "Configure Spotify..."
 msgstr "Spotify Ayarları..."
 
@@ -1058,7 +1058,7 @@ msgstr "Etkinleştir/pasifleştir eylemiyle Wii kumandasına bağlan"
 msgid "Connect device"
 msgstr "Aygıtı bağla"
 
-#: internet/spotifyservice.cpp:227
+#: internet/spotifyservice.cpp:246
 msgid "Connecting to Spotify"
 msgstr "Spotify'a bağlanılıyor."
 
@@ -1074,7 +1074,7 @@ msgstr "Tüm müzikleri dönüştür"
 msgid "Convert any music that the device can't play"
 msgstr "Aygıtın çalamadığı müzikleri dönüştür"
 
-#: internet/groovesharkservice.cpp:958
+#: internet/groovesharkservice.cpp:962
 msgid "Copy to clipboard"
 msgstr "Panoya kopyala"
 
@@ -1133,24 +1133,24 @@ msgstr "%1 çıktı dosyası açılamadı"
 msgid "Cover Manager"
 msgstr "Kapak Yöneticisi"
 
-#: ui/edittagdialog.cpp:404
+#: ui/edittagdialog.cpp:405
 msgid "Cover art from embedded image"
 msgstr "Gömülü resimden kapak resmi"
 
-#: ui/edittagdialog.cpp:406
+#: ui/edittagdialog.cpp:407
 #, qt-format
 msgid "Cover art loaded automatically from %1"
 msgstr "Kapak resmi %1 adresinden otomatik olarak yüklendi"
 
-#: ui/edittagdialog.cpp:399
+#: ui/edittagdialog.cpp:400
 msgid "Cover art manually unset"
 msgstr "Kapak resmi elle çıkarıldı"
 
-#: ui/edittagdialog.cpp:408
+#: ui/edittagdialog.cpp:409
 msgid "Cover art not set"
 msgstr "Kapak resmi ayarlanmamış"
 
-#: ui/edittagdialog.cpp:402
+#: ui/edittagdialog.cpp:403
 #, qt-format
 msgid "Cover art set from %1"
 msgstr "Kapak resmi %1 adresinden ayarlandı"
@@ -1160,7 +1160,7 @@ msgstr "Kapak resmi %1 adresinden ayarlandı"
 msgid "Covers from %1"
 msgstr "%1 adresindeki kapak resimleri"
 
-#: internet/groovesharkservice.cpp:488 internet/groovesharkservice.cpp:1027
+#: internet/groovesharkservice.cpp:488 internet/groovesharkservice.cpp:1031
 msgid "Create a new Grooveshark playlist"
 msgstr "Yeni bir Grooveshark müzik listesi oluşturun"
 
@@ -1268,11 +1268,11 @@ msgstr "DBus yolu"
 msgid "Dance"
 msgstr "Dans"
 
-#: playlist/playlist.cpp:1126 ../bin/src/ui_edittagdialog.h:649
+#: playlist/playlist.cpp:1127 ../bin/src/ui_edittagdialog.h:649
 msgid "Date created"
 msgstr "Oluşturulduğu tarih"
 
-#: playlist/playlist.cpp:1125 ../bin/src/ui_edittagdialog.h:648
+#: playlist/playlist.cpp:1126 ../bin/src/ui_edittagdialog.h:648
 msgid "Date modified"
 msgstr "Değiştirildiği tarih"
 
@@ -1300,11 +1300,11 @@ msgstr "Öntanımlılar"
 msgid "Delay between visualizations"
 msgstr "Görselleştirmeler arasındaki gecikme"
 
-#: internet/groovesharkservice.cpp:491 internet/groovesharkservice.cpp:1074
+#: internet/groovesharkservice.cpp:491 internet/groovesharkservice.cpp:1079
 msgid "Delete Grooveshark playlist"
 msgstr "Grooveshark müzik listesini sil"
 
-#: devices/deviceview.cpp:393 library/libraryview.cpp:459
+#: devices/deviceview.cpp:393 library/libraryview.cpp:460
 #: ui/mainwindow.cpp:1834 widgets/fileview.cpp:185
 msgid "Delete files"
 msgstr "Dosyaları sil"
@@ -1330,7 +1330,7 @@ msgstr "Akıllı çalma listesini silin"
 msgid "Delete the original files"
 msgstr "Orijinal dosyaları sil"
 
-#: core/deletefiles.cpp:49
+#: core/deletefiles.cpp:50
 msgid "Deleting files"
 msgstr "Dosyalar siliniyor"
 
@@ -1407,7 +1407,7 @@ msgstr "Süreyi devre dışı bırak"
 msgid "Disabled"
 msgstr "Devre Dışı"
 
-#: playlist/playlist.cpp:1106 ui/organisedialog.cpp:58
+#: playlist/playlist.cpp:1107 ui/organisedialog.cpp:58
 #: ../bin/src/ui_edittagdialog.h:655
 msgid "Disc"
 msgstr "Disk"
@@ -1469,11 +1469,11 @@ msgstr "İndirme dizini"
 msgid "Download membership"
 msgstr "İndirme üyeliği"
 
-#: internet/magnatuneservice.cpp:269
+#: internet/magnatuneservice.cpp:271
 msgid "Download this album"
 msgstr "Bu albümü indir"
 
-#: internet/jamendoservice.cpp:412
+#: internet/jamendoservice.cpp:413
 msgid "Download this album..."
 msgstr "Bu albümü indirin..."
 
@@ -1481,15 +1481,15 @@ msgstr "Bu albümü indirin..."
 msgid "Download..."
 msgstr "İndir..."
 
-#: internet/icecastservice.cpp:98
+#: internet/icecastservice.cpp:97
 msgid "Downloading Icecast directory"
 msgstr "Icecast dizini indiriliyor"
 
-#: internet/jamendoservice.cpp:182
+#: internet/jamendoservice.cpp:183
 msgid "Downloading Jamendo catalogue"
 msgstr "Jamendo kataloğu indiriliyor"
 
-#: internet/magnatuneservice.cpp:154
+#: internet/magnatuneservice.cpp:156
 msgid "Downloading Magnatune catalogue"
 msgstr "Magnatune kataloğu indiriliyor"
 
@@ -1497,7 +1497,7 @@ msgstr "Magnatune kataloğu indiriliyor"
 msgid "Downloading Spotify plugin"
 msgstr "Spotify eklentisi indiriliyor"
 
-#: musicbrainz/tagfetcher.cpp:99
+#: musicbrainz/tagfetcher.cpp:101
 msgid "Downloading metadata"
 msgstr "Üstveri indiriliyor"
 
@@ -1513,7 +1513,7 @@ msgstr "Sürücü harfi"
 msgid "Dynamic mode is on"
 msgstr "Dinamik kip açık"
 
-#: internet/jamendoservice.cpp:110 library/library.cpp:88
+#: internet/jamendoservice.cpp:111 library/library.cpp:88
 msgid "Dynamic random mix"
 msgstr "Dinamik rastgele karışım"
 
@@ -1632,8 +1632,8 @@ msgstr "--log-levels *:1'e eşdeğer"
 msgid "Equivalent to --log-levels *:3"
 msgstr "--log-levels *:3'e eşdeğer"
 
-#: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:453
-#: ui/edittagdialog.cpp:717 ui/mainwindow.cpp:1802 ui/mainwindow.cpp:1907
+#: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:454
+#: ui/edittagdialog.cpp:732 ui/mainwindow.cpp:1802 ui/mainwindow.cpp:1907
 #: ui/mainwindow.cpp:2126
 msgid "Error"
 msgstr "Hata"
@@ -1642,11 +1642,11 @@ msgstr "Hata"
 msgid "Error connecting MTP device"
 msgstr "MTP aygıtına bağlanırken hata"
 
-#: ui/organiseerrordialog.cpp:53
+#: ui/organiseerrordialog.cpp:55
 msgid "Error copying songs"
 msgstr "Şarkılar kopyalanırken hata"
 
-#: ui/organiseerrordialog.cpp:58
+#: ui/organiseerrordialog.cpp:60
 msgid "Error deleting songs"
 msgstr "Şarkılar silinirken hata"
 
@@ -1769,19 +1769,19 @@ msgstr "Dosya uzantısı"
 msgid "File formats"
 msgstr "Dosya biçimleri"
 
-#: playlist/playlist.cpp:1121 ../bin/src/ui_edittagdialog.h:650
+#: playlist/playlist.cpp:1122 ../bin/src/ui_edittagdialog.h:650
 msgid "File name"
 msgstr "Dosya adı"
 
-#: playlist/playlist.cpp:1122
+#: playlist/playlist.cpp:1123
 msgid "File name (without path)"
 msgstr "Dosya adı (yol hariç)"
 
-#: playlist/playlist.cpp:1123 ../bin/src/ui_edittagdialog.h:644
+#: playlist/playlist.cpp:1124 ../bin/src/ui_edittagdialog.h:644
 msgid "File size"
 msgstr "Dosya boyutu"
 
-#: playlist/playlist.cpp:1124 ../bin/src/ui_groupbydialog.h:133
+#: playlist/playlist.cpp:1125 ../bin/src/ui_groupbydialog.h:133
 #: ../bin/src/ui_groupbydialog.h:146 ../bin/src/ui_groupbydialog.h:159
 #: ../bin/src/ui_edittagdialog.h:646
 msgid "File type"
@@ -1815,7 +1815,7 @@ msgstr "Dosya sistemi türü"
 msgid "Find songs in your library that match the criteria you specify."
 msgstr "Kütüphanenizde belirttiğiniz kriterlerle eşleşen şarkıları bulun."
 
-#: musicbrainz/tagfetcher.cpp:52
+#: musicbrainz/tagfetcher.cpp:54
 msgid "Fingerprinting song"
 msgstr "Şarkının parmak izi çıkartılıyor"
 
@@ -1827,7 +1827,7 @@ msgstr "Bitir"
 msgid "First level"
 msgstr "İlk Seviye"
 
-#: core/song.cpp:133
+#: core/song.cpp:386
 msgid "Flac"
 msgstr "Flac"
 
@@ -1916,17 +1916,17 @@ msgstr "Genel"
 msgid "General settings"
 msgstr "Genel ayarlar"
 
-#: playlist/playlist.cpp:1108 ui/organisedialog.cpp:61
+#: playlist/playlist.cpp:1109 ui/organisedialog.cpp:61
 #: ../bin/src/ui_groupbydialog.h:134 ../bin/src/ui_groupbydialog.h:147
 #: ../bin/src/ui_groupbydialog.h:160 ../bin/src/ui_edittagdialog.h:660
 msgid "Genre"
 msgstr "Tür"
 
-#: internet/groovesharkservice.cpp:922
+#: internet/groovesharkservice.cpp:926
 msgid "Get an URL to share this Grooveshark song"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:701
+#: internet/groovesharkservice.cpp:705
 msgid "Getting Grooveshark popular songs"
 msgstr ""
 
@@ -1976,7 +1976,7 @@ msgstr "Grooveshark"
 msgid "Grooveshark login error"
 msgstr "Grooveshark giriş hatası"
 
-#: internet/groovesharkservice.cpp:954
+#: internet/groovesharkservice.cpp:958
 msgid "Grooveshark song's URL"
 msgstr "Grooveshark şarkısının adresi"
 
@@ -2065,7 +2065,7 @@ msgstr "Simge"
 msgid "Icons on top"
 msgstr "Üstteki simgeler"
 
-#: musicbrainz/tagfetcher.cpp:83
+#: musicbrainz/tagfetcher.cpp:85
 msgid "Identifying song"
 msgstr "Şarkı teşhis ediliyor"
 
@@ -2106,7 +2106,7 @@ msgstr ""
 "Dinamik modda yeni şarkılar seçilerek, her şarkı bittiğinde çalma listesine "
 "eklenecektir."
 
-#: internet/spotifyservice.cpp:328
+#: internet/spotifyservice.cpp:347
 msgid "Inbox"
 msgstr "Gelen Kutusu"
 
@@ -2182,27 +2182,27 @@ msgstr "Geçersiz oturum anahtarı"
 msgid "Invalid username and/or password"
 msgstr "Geçersiz kullanici adi yada şifre"
 
-#: internet/jamendoservice.cpp:123
+#: internet/jamendoservice.cpp:124
 msgid "Jamendo"
 msgstr "Jamendo"
 
-#: internet/jamendoservice.cpp:106
+#: internet/jamendoservice.cpp:107
 msgid "Jamendo Most Listened Tracks"
 msgstr "Jamendo En Çok Dinlenen Parçalar"
 
-#: internet/jamendoservice.cpp:104
+#: internet/jamendoservice.cpp:105
 msgid "Jamendo Top Tracks"
 msgstr "Jamendo Zirvedeki Parçalar"
 
-#: internet/jamendoservice.cpp:100
+#: internet/jamendoservice.cpp:101
 msgid "Jamendo Top Tracks of the Month"
 msgstr "Jamendo Ayın Zirvedeki Parçaları"
 
-#: internet/jamendoservice.cpp:102
+#: internet/jamendoservice.cpp:103
 msgid "Jamendo Top Tracks of the Week"
 msgstr "Jamendo Haftanın Zirvedeki Parçaları"
 
-#: internet/jamendoservice.cpp:166
+#: internet/jamendoservice.cpp:167
 msgid "Jamendo database"
 msgstr "Jamendo veritabanı"
 
@@ -2254,7 +2254,7 @@ msgstr "Geniş albüm kapağı"
 msgid "Large sidebar"
 msgstr "Büyük kenar çubuğu"
 
-#: library/library.cpp:66 playlist/playlist.cpp:1115
+#: library/library.cpp:66 playlist/playlist.cpp:1116
 #: ../bin/src/ui_edittagdialog.h:641
 msgid "Last played"
 msgstr "Son çalınan"
@@ -2335,7 +2335,7 @@ msgstr ""
 "Öntanımlıların kullanılması için boş bırakın. Örnekler: \"/dev/dsp\", "
 "\"front\" vs."
 
-#: playlist/playlist.cpp:1104 ui/organisedialog.cpp:63
+#: playlist/playlist.cpp:1105 ui/organisedialog.cpp:63
 #: ui/qtsystemtrayicon.cpp:255 ../bin/src/ui_edittagdialog.h:636
 msgid "Length"
 msgstr "Süre"
@@ -2412,7 +2412,7 @@ msgstr "iPod veritabanı yükleniyor"
 msgid "Loading smart playlist"
 msgstr "Akıllı çalma listesi yükleniyor"
 
-#: library/librarymodel.cpp:131
+#: library/librarymodel.cpp:135
 msgid "Loading songs"
 msgstr "Şarkılar yükleniyor"
 
@@ -2421,7 +2421,7 @@ msgstr "Şarkılar yükleniyor"
 msgid "Loading stream"
 msgstr "Yayın akışı yükleniyor"
 
-#: playlist/songloaderinserter.cpp:79 ui/edittagdialog.cpp:209
+#: playlist/songloaderinserter.cpp:79 ui/edittagdialog.cpp:210
 msgid "Loading tracks"
 msgstr "Parçalar yükleniyor"
 
@@ -2429,7 +2429,7 @@ msgstr "Parçalar yükleniyor"
 msgid "Loading tracks info"
 msgstr "Parça bilgileri yükleniyor"
 
-#: library/librarymodel.cpp:126 widgets/prettyimage.cpp:168
+#: library/librarymodel.cpp:130 widgets/prettyimage.cpp:168
 #: widgets/widgetfadehelper.cpp:93 ../bin/src/ui_searchpreview.h:106
 msgid "Loading..."
 msgstr "Yükleniyor..."
@@ -2481,7 +2481,7 @@ msgstr "Şarkı sözleri"
 msgid "Lyrics from %1"
 msgstr "%1'den şarkı sözleri"
 
-#: core/song.cpp:136 ../bin/src/ui_transcodersettingspage.h:159
+#: core/song.cpp:389 ../bin/src/ui_transcodersettingspage.h:159
 msgid "MP3"
 msgstr "MP3"
 
@@ -2493,15 +2493,15 @@ msgstr "MP3 256k"
 msgid "MP3 96k"
 msgstr "MP3 96k"
 
-#: core/song.cpp:134
+#: core/song.cpp:387
 msgid "MP4 AAC"
 msgstr "MP4 AAC"
 
-#: core/song.cpp:135
+#: core/song.cpp:388
 msgid "MPC"
 msgstr "MPC"
 
-#: internet/magnatuneservice.cpp:99 ../bin/src/ui_magnatunesettingspage.h:154
+#: internet/magnatuneservice.cpp:100 ../bin/src/ui_magnatunesettingspage.h:154
 msgid "Magnatune"
 msgstr "Magnatune"
 
@@ -2517,7 +2517,7 @@ msgstr "Magnatune indirme bitti"
 msgid "Main profile (MAIN)"
 msgstr "Ana profil (MAIN)"
 
-#: internet/spotifyservice.cpp:477
+#: internet/spotifyservice.cpp:496
 msgid "Make playlist available offline"
 msgstr "Çalma listesini çevrim dışındayken kullanılabilir yap"
 
@@ -2653,7 +2653,7 @@ msgstr "Radyom"
 msgid "My Recommendations"
 msgstr "Önerdiklerim"
 
-#: internet/groovesharkservice.cpp:1028 ui/equalizer.cpp:172
+#: internet/groovesharkservice.cpp:1032 ui/equalizer.cpp:172
 #: ../bin/src/ui_deviceproperties.h:369
 #: ../bin/src/ui_magnatunedownloaddialog.h:135
 #: ../bin/src/ui_wizardfinishpage.h:84
@@ -2681,7 +2681,7 @@ msgstr "Ağ"
 msgid "Network Proxy"
 msgstr "Vekil Sunucu"
 
-#: playlist/playlistdelegates.cpp:296 ui/edittagdialog.cpp:443
+#: playlist/playlistdelegates.cpp:296 ui/edittagdialog.cpp:444
 msgid "Never"
 msgstr "Hiçbir zaman"
 
@@ -2714,7 +2714,7 @@ msgstr "Yeni parçalar otomatik olarak eklenecektir."
 msgid "Newest tracks"
 msgstr "En yeni parçalar"
 
-#: ui/edittagdialog.cpp:157 ui/trackselectiondialog.cpp:47
+#: ui/edittagdialog.cpp:158 ui/trackselectiondialog.cpp:48
 msgid "Next"
 msgstr "İleri"
 
@@ -2747,7 +2747,7 @@ msgstr "Kısa blok yok"
 msgid "None"
 msgstr "Hiçbiri"
 
-#: library/libraryview.cpp:454 ui/mainwindow.cpp:1803 ui/mainwindow.cpp:1908
+#: library/libraryview.cpp:455 ui/mainwindow.cpp:1803 ui/mainwindow.cpp:1908
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Seçili şarkıların hiçbiri aygıta yüklemeye uygun değil"
 
@@ -2807,15 +2807,15 @@ msgstr "Şimdi Çalıyor"
 msgid "OSD Preview"
 msgstr "OSD Önizleme"
 
-#: core/song.cpp:137
+#: core/song.cpp:390
 msgid "Ogg Flac"
 msgstr "Ogg Flac"
 
-#: core/song.cpp:138
+#: core/song.cpp:391
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
 
-#: core/song.cpp:139 ../bin/src/ui_magnatunedownloaddialog.h:139
+#: core/song.cpp:392 ../bin/src/ui_magnatunedownloaddialog.h:139
 #: ../bin/src/ui_magnatunesettingspage.h:170
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
@@ -2825,8 +2825,8 @@ msgid "Only show the first"
 msgstr "Sadece ilki göster"
 
 #: internet/digitallyimportedservicebase.cpp:178
-#: internet/groovesharkservice.cpp:503 internet/icecastservice.cpp:300
-#: internet/jamendoservice.cpp:414 internet/magnatuneservice.cpp:271
+#: internet/groovesharkservice.cpp:503 internet/icecastservice.cpp:299
+#: internet/jamendoservice.cpp:415 internet/magnatuneservice.cpp:273
 #: internet/somafmservice.cpp:84
 #, qt-format
 msgid "Open %1 in browser"
@@ -2879,11 +2879,11 @@ msgstr "Dosyaları Düzenle"
 msgid "Organise files..."
 msgstr "Dosyaları düzenle..."
 
-#: core/organise.cpp:63
+#: core/organise.cpp:64
 msgid "Organising files"
 msgstr "Dosyalar düzenleniyor"
 
-#: ui/trackselectiondialog.cpp:164
+#: ui/trackselectiondialog.cpp:165
 msgid "Original tags"
 msgstr "Özgün etiketler"
 
@@ -2907,7 +2907,7 @@ msgstr "Çıktı eklentisi"
 msgid "Overwrite existing files"
 msgstr "Mevcut dosyaların üzerine yaz"
 
-#: internet/jamendoservice.cpp:209
+#: internet/jamendoservice.cpp:210
 msgid "Parsing Jamendo catalogue"
 msgstr "Jamendo kataloğu ayrıştırılıyor"
 
@@ -2958,7 +2958,7 @@ msgstr "Sanatçı veya Etiket Çal"
 msgid "Play artist radio..."
 msgstr "Sanatçı radyosu çal..."
 
-#: playlist/playlist.cpp:1113 ../bin/src/ui_edittagdialog.h:637
+#: playlist/playlist.cpp:1114 ../bin/src/ui_edittagdialog.h:637
 msgid "Play count"
 msgstr "Çalma sayısı"
 
@@ -3114,7 +3114,7 @@ msgstr "OSD seçenekleri"
 msgid "Preview"
 msgstr "Önizleme"
 
-#: ui/edittagdialog.cpp:156 ui/trackselectiondialog.cpp:46
+#: ui/edittagdialog.cpp:157 ui/trackselectiondialog.cpp:47
 msgid "Previous"
 msgstr "Önceki"
 
@@ -3206,7 +3206,7 @@ msgstr "Geçerli şarkıyı 4 yıldızla oyla"
 msgid "Rate the current song 5 stars"
 msgstr "Geçerli şarkıyı 5 yıldızla oyla"
 
-#: playlist/playlist.cpp:1112 ../bin/src/ui_edittagdialog.h:645
+#: playlist/playlist.cpp:1113 ../bin/src/ui_edittagdialog.h:645
 msgid "Rating"
 msgstr "Beğeni"
 
@@ -3214,7 +3214,7 @@ msgstr "Beğeni"
 msgid "Really cancel?"
 msgstr "Gerçekten iptal edeyim mi?"
 
-#: internet/jamendoservice.cpp:415 internet/magnatuneservice.cpp:272
+#: internet/jamendoservice.cpp:416 internet/magnatuneservice.cpp:274
 msgid "Refresh catalogue"
 msgstr "Kataloğu yenile"
 
@@ -3226,7 +3226,7 @@ msgstr "Kanalları yenile"
 msgid "Refresh friends list"
 msgstr "Arkadaş listesini yenile"
 
-#: internet/icecastservice.cpp:301
+#: internet/icecastservice.cpp:300
 msgid "Refresh station list"
 msgstr "İstasyon listesini yenile"
 
@@ -3276,7 +3276,7 @@ msgstr "Çalma listesinden kaldır"
 msgid "Remove playlist"
 msgstr "Çalma listesini kaldır"
 
-#: internet/groovesharkservice.cpp:1161
+#: internet/groovesharkservice.cpp:1166
 msgid "Removing song from favorites"
 msgstr ""
 
@@ -3342,7 +3342,7 @@ msgstr "Yeniden doldur"
 msgid "Reset"
 msgstr "Sıfırla"
 
-#: ui/edittagdialog.cpp:701 ../bin/src/ui_edittagdialog.h:635
+#: ui/edittagdialog.cpp:716 ../bin/src/ui_edittagdialog.h:635
 msgid "Reset play counts"
 msgstr "Çalma sayısını sıfırla"
 
@@ -3354,7 +3354,7 @@ msgstr "ASCII karakterler olarak kısıtla"
 msgid "Results"
 msgstr "Sonuçlar"
 
-#: internet/groovesharkservice.cpp:672
+#: internet/groovesharkservice.cpp:676
 msgid "Retrieving Grooveshark favorites songs"
 msgstr ""
 
@@ -3378,7 +3378,7 @@ msgstr "Aygıtı güvenli kaldır"
 msgid "Safely remove the device after copying"
 msgstr "Kopyalama işleminden sonra aygıtı güvenli kaldır"
 
-#: playlist/playlist.cpp:1120 ../bin/src/ui_edittagdialog.h:642
+#: playlist/playlist.cpp:1121 ../bin/src/ui_edittagdialog.h:642
 msgid "Sample rate"
 msgstr "Örnekleme oranı"
 
@@ -3414,7 +3414,7 @@ msgstr "Ayarı kaydet"
 msgid "Save this stream in the Internet tab"
 msgstr "Bu akışı Internet sekmesine kaydet"
 
-#: ui/edittagdialog.cpp:617 ui/trackselectiondialog.cpp:249
+#: ui/edittagdialog.cpp:618 ui/trackselectiondialog.cpp:250
 msgid "Saving tracks"
 msgstr "Parçalar kaydediliyor"
 
@@ -3422,7 +3422,7 @@ msgstr "Parçalar kaydediliyor"
 msgid "Scalable sampling rate profile (SSR)"
 msgstr "Ölçeklenebilir örnekleme oranı profili (SSR)"
 
-#: playlist/playlist.cpp:1116 ../bin/src/ui_edittagdialog.h:643
+#: playlist/playlist.cpp:1117 ../bin/src/ui_edittagdialog.h:643
 msgid "Score"
 msgstr "Puan"
 
@@ -3436,7 +3436,7 @@ msgid "Search"
 msgstr "Ara"
 
 #: internet/groovesharksearchplaylisttype.cpp:32
-#: internet/groovesharkservice.cpp:840
+#: internet/groovesharkservice.cpp:844
 msgid "Search Grooveshark"
 msgstr "Grooveshark de ara"
 
@@ -3448,23 +3448,23 @@ msgstr "Grooveshark de ara (yeni bir sekmede açılır)"
 msgid "Search Icecast stations"
 msgstr "Icecast istasyonları ara"
 
-#: internet/jamendoservice.cpp:421
+#: internet/jamendoservice.cpp:422
 msgid "Search Jamendo"
 msgstr "Jamendo'da ara"
 
-#: internet/magnatuneservice.cpp:278
+#: internet/magnatuneservice.cpp:280
 msgid "Search Magnatune"
 msgstr "Magnatune'da Ara"
 
-#: internet/spotifysearchplaylisttype.cpp:32 internet/spotifyservice.cpp:585
+#: internet/spotifysearchplaylisttype.cpp:32 internet/spotifyservice.cpp:604
 msgid "Search Spotify"
 msgstr "Spotify'i ara"
 
-#: internet/spotifyservice.cpp:319
+#: internet/spotifyservice.cpp:338
 msgid "Search Spotify (opens a new tab)"
 msgstr "Spotify'i ara (yeni sekme açar)"
 
-#: internet/spotifyservice.cpp:470
+#: internet/spotifyservice.cpp:489
 msgid "Search Spotify (opens a new tab)..."
 msgstr "Spotify'i ara (yeni sekme açar)..."
 
@@ -3716,7 +3716,7 @@ msgstr "Ska"
 msgid "Skip backwards in playlist"
 msgstr "Parça listesinde geri git"
 
-#: playlist/playlist.cpp:1114 ../bin/src/ui_edittagdialog.h:639
+#: playlist/playlist.cpp:1115 ../bin/src/ui_edittagdialog.h:639
 msgid "Skip count"
 msgstr "Atlama sayısı"
 
@@ -3736,7 +3736,7 @@ msgstr "Küçük kenar çubuğu"
 msgid "Smart playlist"
 msgstr "Akıllı çalma listesi"
 
-#: library/librarymodel.cpp:1118
+#: library/librarymodel.cpp:1128
 msgid "Smart playlists"
 msgstr "Akıllı çalma listeleri"
 
@@ -3796,7 +3796,7 @@ msgstr "Speex"
 msgid "Spotify"
 msgstr "Spotify"
 
-#: internet/spotifyservice.cpp:146
+#: internet/spotifyservice.cpp:179
 msgid "Spotify login error"
 msgstr "Spotify giriş hatası"
 
@@ -3812,7 +3812,7 @@ msgstr "Spotify eklentisi kurulu değil"
 msgid "Standard"
 msgstr "Standard"
 
-#: internet/spotifyservice.cpp:324
+#: internet/spotifyservice.cpp:343
 msgid "Starred"
 msgstr "Yıldızlı"
 
@@ -3864,7 +3864,7 @@ msgstr "Bu parçadan sonra durdur"
 msgid "Stopped"
 msgstr "Durduruldu"
 
-#: core/song.cpp:145
+#: core/song.cpp:398
 msgid "Stream"
 msgstr "Akış"
 
@@ -3881,7 +3881,7 @@ msgstr ""
 msgid "Successfully written %1"
 msgstr "%1 başarıyla yazıldı"
 
-#: ui/trackselectiondialog.cpp:168
+#: ui/trackselectiondialog.cpp:169
 msgid "Suggested tags"
 msgstr "Önerilen etiketler"
 
@@ -3907,15 +3907,15 @@ msgstr "Desteklenen biçimler"
 msgid "Switch provider"
 msgstr "Anahtar sağlayıcı"
 
-#: internet/spotifyservice.cpp:496
+#: internet/spotifyservice.cpp:515
 msgid "Syncing Spotify inbox"
 msgstr "Spotify gelen kutusu eşleniyor"
 
-#: internet/spotifyservice.cpp:491
+#: internet/spotifyservice.cpp:510
 msgid "Syncing Spotify playlist"
 msgstr "Spotify çalma listesi eşleniyor"
 
-#: internet/spotifyservice.cpp:500
+#: internet/spotifyservice.cpp:519
 msgid "Syncing Spotify starred tracks"
 msgstr "Spotify yıldızlı şarkılar eşleniyor"
 
@@ -3990,19 +3990,19 @@ msgstr ""
 msgid "There was a problem fetching the metadata from Magnatune"
 msgstr "Magnatude servisinden veri alınırken hata oluştu"
 
-#: ui/organiseerrordialog.cpp:54
+#: ui/organiseerrordialog.cpp:56
 msgid ""
 "There were problems copying some songs.  The following files could not be "
 "copied:"
 msgstr "Bazı şarkılar kopyalanırken hata oluştu. Şu dosyalar kopyalanamadı:"
 
-#: ui/organiseerrordialog.cpp:59
+#: ui/organiseerrordialog.cpp:61
 msgid ""
 "There were problems deleting some songs.  The following files could not be "
 "deleted:"
 msgstr "Bazı şarkılar silinirken hata oluştu. Şu dosyalar silinemedi:"
 
-#: library/libraryview.cpp:460 ui/mainwindow.cpp:1835 widgets/fileview.cpp:186
+#: library/libraryview.cpp:461 ui/mainwindow.cpp:1835 widgets/fileview.cpp:186
 msgid ""
 "These files will be deleted from disk, are you sure you want to continue?"
 msgstr "Bu dosyalar diskten silinecek, devam etmek istiyor musunuz?"
@@ -4029,7 +4029,7 @@ msgstr ""
 msgid "Third level"
 msgstr "Üçüncü seviye"
 
-#: internet/jamendoservice.cpp:166
+#: internet/jamendoservice.cpp:167
 msgid ""
 "This action will create a database which could be as big as 150 MB.\n"
 "Do you want to continue anyway?"
@@ -4099,13 +4099,13 @@ msgstr "Zaman Aşımı"
 msgid "Timezone"
 msgstr "Zaman dilimi"
 
-#: playlist/playlist.cpp:1101 ui/organisedialog.cpp:51
+#: playlist/playlist.cpp:1102 ui/organisedialog.cpp:51
 #: ui/qtsystemtrayicon.cpp:248 ../bin/src/ui_about.h:142
 #: ../bin/src/ui_edittagdialog.h:652 ../bin/src/ui_trackselectiondialog.h:211
 msgid "Title"
 msgstr "Başlık"
 
-#: core/utilities.cpp:106
+#: core/utilities.cpp:107
 msgid "Today"
 msgstr "Bugün"
 
@@ -4137,7 +4137,7 @@ msgstr "Aktarılan toplam bayt"
 msgid "Total network requests made"
 msgstr "Yapılmış toplam ağ istemi"
 
-#: playlist/playlist.cpp:1105 ui/organisedialog.cpp:57
+#: playlist/playlist.cpp:1106 ui/organisedialog.cpp:57
 #: ../bin/src/ui_edittagdialog.h:653 ../bin/src/ui_trackselectiondialog.h:212
 msgid "Track"
 msgstr "Parça"
@@ -4163,7 +4163,7 @@ msgstr "%1 adet dosya %2 adet thread ile dönüştürülüyor"
 msgid "Transcoding options"
 msgstr "Kod çevrimi seçenekleri"
 
-#: core/song.cpp:142
+#: core/song.cpp:395
 msgid "TrueAudio"
 msgstr "TrueAudio"
 
@@ -4192,9 +4192,9 @@ msgstr "Engin frekans bandı (UWB)"
 msgid "Unable to download %1 (%2)"
 msgstr "%1 indirilemedi (%2)"
 
-#: core/song.cpp:149 globalsearch/globalsearchitemdelegate.cpp:166
-#: globalsearch/globalsearchitemdelegate.cpp:173 library/librarymodel.cpp:293
-#: library/librarymodel.cpp:298 library/librarymodel.cpp:916
+#: core/song.cpp:402 globalsearch/globalsearchitemdelegate.cpp:166
+#: globalsearch/globalsearchitemdelegate.cpp:173 library/librarymodel.cpp:297
+#: library/librarymodel.cpp:302 library/librarymodel.cpp:926
 #: playlist/playlistdelegates.cpp:306 playlist/playlistmanager.cpp:381
 #: playlist/playlistmanager.cpp:384 ui/albumcoverchoicecontroller.cpp:111
 msgid "Unknown"
@@ -4208,7 +4208,7 @@ msgstr "Bilinmeyen hata"
 msgid "Unset cover"
 msgstr "Albüm kapağını çıkar"
 
-#: internet/groovesharkservice.cpp:982
+#: internet/groovesharkservice.cpp:986
 msgid "Update Grooveshark playlist"
 msgstr ""
 
@@ -4319,7 +4319,7 @@ msgstr "VBR MP3"
 msgid "Variable bit rate"
 msgstr "Değişken bit oranı"
 
-#: globalsearch/globalsearchitemdelegate.cpp:162 library/librarymodel.cpp:230
+#: globalsearch/globalsearchitemdelegate.cpp:162 library/librarymodel.cpp:234
 #: playlist/playlistmanager.cpp:396 ui/albumcovermanager.cpp:264
 msgid "Various artists"
 msgstr "Çeşitli sanatçılar"
@@ -4371,7 +4371,7 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
-#: core/song.cpp:141
+#: core/song.cpp:394
 msgid "Wav"
 msgstr "Wav"
 
@@ -4445,7 +4445,7 @@ msgstr "Windows Media 40k"
 msgid "Windows Media 64k"
 msgstr "Windows Medya 64k"
 
-#: core/song.cpp:132
+#: core/song.cpp:385
 msgid "Windows Media audio"
 msgstr "Windows Media audio"
 
@@ -4453,7 +4453,7 @@ msgstr "Windows Media audio"
 msgid "Would you like to run a full rescan right now?"
 msgstr "Şu anda tam bir yeniden tarama çalıştırmak ister misiniz?"
 
-#: playlist/playlist.cpp:1107 ui/organisedialog.cpp:60
+#: playlist/playlist.cpp:1108 ui/organisedialog.cpp:60
 #: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:148
 #: ../bin/src/ui_groupbydialog.h:161 ../bin/src/ui_edittagdialog.h:657
 msgid "Year"
@@ -4468,7 +4468,7 @@ msgstr "Yıl - Albüm"
 msgid "Years"
 msgstr "Yıl"
 
-#: core/utilities.cpp:108
+#: core/utilities.cpp:109
 msgid "Yesterday"
 msgstr "Dün"
 
@@ -4540,6 +4540,16 @@ msgstr "Bir Grooveshark Anywhere hesabınız yok"
 msgid "You do not have a Spotify Premium account."
 msgstr "Spotify Premium hesabınız yok."
 
+#: internet/spotifyservice.cpp:165
+msgid ""
+"You have been logged out of Spotify, please re-enter your password in the "
+"Settings dialog."
+msgstr ""
+
+#: internet/spotifysettingspage.cpp:158
+msgid "You have been logged out of Spotify, please re-enter your password."
+msgstr ""
+
 #: songinfo/lastfmtrackinfoprovider.cpp:95
 msgid "You love this track"
 msgstr "Bu şarkıyı seviyorsunuz"
@@ -4582,7 +4592,7 @@ msgstr "Last.fm giriş bilgileriniz doğru değil"
 msgid "Your Magnatune credentials were incorrect"
 msgstr "Magnatune kimlik bilgileriniz hatalı"
 
-#: ui/edittagdialog.cpp:717 ui/mainwindow.cpp:2126
+#: ui/edittagdialog.cpp:732 ui/mainwindow.cpp:2126
 msgid ""
 "Your gstreamer installation is missing the 'ofa' plugin.  This is required "
 "for automatic tag fetching.  Try installing the 'gstreamer-plugins-bad' "
@@ -4651,7 +4661,7 @@ msgstr "arasında"
 msgid "biggest first"
 msgstr "ilk önce en büyüğü"
 
-#: playlist/playlistview.cpp:161 ui/edittagdialog.cpp:419
+#: playlist/playlistview.cpp:161 ui/edittagdialog.cpp:420
 msgid "bpm"
 msgstr "bpm"
 
@@ -4694,7 +4704,7 @@ msgstr "büyüktür"
 msgid "in the last"
 msgstr "Sonuncu"
 
-#: playlist/playlistview.cpp:163 ui/edittagdialog.cpp:421
+#: playlist/playlistview.cpp:163 ui/edittagdialog.cpp:422
 #: internet/spotifysettingspage.cpp:60 internet/spotifysettingspage.cpp:61
 #: internet/spotifysettingspage.cpp:62
 msgid "kbps"
