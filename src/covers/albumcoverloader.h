@@ -65,7 +65,7 @@ class AlbumCoverLoader : public QObject {
  protected slots:
   void ProcessTasks();
   void RemoteFetchFinished();
-  void SpotifyImageLoaded(const QUrl& url, const QImage& image);
+  void SpotifyImageLoaded(const QString& url, const QImage& image);
 
  protected:
   enum State {
@@ -108,7 +108,7 @@ class AlbumCoverLoader : public QObject {
   QMutex mutex_;
   QQueue<Task> tasks_;
   QMap<QNetworkReply*, Task> remote_tasks_;
-  QMap<QUrl, Task> remote_spotify_tasks_;
+  QMap<QString, Task> remote_spotify_tasks_;
   quint64 next_id_;
 
   NetworkAccessManager* network_;

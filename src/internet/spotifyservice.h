@@ -59,7 +59,7 @@ public:
   void Logout();
   void Login(const QString& username, const QString& password);
   void Search(const QString& text, Playlist* playlist, bool now = false);
-  Q_INVOKABLE void LoadImage(const QUrl& url);
+  Q_INVOKABLE void LoadImage(const QString& id);
 
   SpotifyServer* server() const;
 
@@ -75,7 +75,7 @@ public:
 signals:
   void BlobStateChanged();
   void LoginFinished(bool success);
-  void ImageLoaded(const QUrl& url, const QImage& image);
+  void ImageLoaded(const QString& id, const QImage& image);
 
 public slots:
   void ShowConfig();
@@ -102,7 +102,6 @@ private slots:
   void StarredLoaded(const spotify_pb::LoadPlaylistResponse& response);
   void UserPlaylistLoaded(const spotify_pb::LoadPlaylistResponse& response);
   void SearchResults(const spotify_pb::SearchResponse& response);
-  void ImageLoaded(const QString& id, const QImage& image);
   void SyncPlaylistProgress(const spotify_pb::SyncPlaylistProgress& progress);
 
   void OpenSearchTab();

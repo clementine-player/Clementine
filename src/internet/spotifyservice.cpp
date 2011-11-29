@@ -237,7 +237,7 @@ void SpotifyService::EnsureServerCreated(const QString& username,
   connect(server_, SIGNAL(SearchResults(spotify_pb::SearchResponse)),
           SLOT(SearchResults(spotify_pb::SearchResponse)));
   connect(server_, SIGNAL(ImageLoaded(QString,QImage)),
-          SLOT(ImageLoaded(QString,QImage)));
+          SIGNAL(ImageLoaded(QString,QImage)));
   connect(server_, SIGNAL(SyncPlaylistProgress(spotify_pb::SyncPlaylistProgress)),
           SLOT(SyncPlaylistProgress(spotify_pb::SyncPlaylistProgress)));
 
@@ -611,23 +611,9 @@ void SpotifyService::ItemDoubleClicked(QStandardItem* item) {
   }
 }
 
-void SpotifyService::LoadImage(const QUrl& url) {
-  if (url.scheme() != "spotify" || url.host() != "image") {
-    return;
-  }
-
-  QString image_id = url.path();
-  if (image_id.startsWith('/')) {
-    image_id.remove(0, 1);
-  }
-
+void SpotifyService::LoadImage(const QString& id) {
   EnsureServerCreated();
-  server_->LoadImage(image_id);
-}
-
-void SpotifyService::ImageLoaded(const QString& id, const QImage& image) {
-  qLog(Debug) << "Image loaded:" << id;
-  emit ImageLoaded(QUrl("spotify://image/" + id), image);
+  server_->LoadImage(id);
 }
 
 void SpotifyService::SyncPlaylistProgress(

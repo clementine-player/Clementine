@@ -154,17 +154,20 @@ AlbumCoverLoader::TryLoadResult AlbumCoverLoader::TryLoadImage(
       SpotifyService* spotify = InternetModel::Service<SpotifyService>();
 
       if (!connected_spotify_) {
-        connect(spotify, SIGNAL(ImageLoaded(QUrl,QImage)),
-                SLOT(SpotifyImageLoaded(QUrl,QImage)));
+        connect(spotify, SIGNAL(ImageLoaded(QString,QImage)),
+                SLOT(SpotifyImageLoaded(QString,QImage)));
         connected_spotify_ = true;
       }
 
-      QUrl url = QUrl(filename);
-      remote_spotify_tasks_.insert(url, task);
+      QString id = QUrl(filename).path();
+      if (id.startsWith('/')) {
+        id.remove(0, 1);
+      }
+      remote_spotify_tasks_.insert(id, task);
 
       // Need to schedule this in the spotify service's thread
       QMetaObject::invokeMethod(spotify, "LoadImage", Qt::QueuedConnection,
-                                Q_ARG(QUrl, url));
+                                Q_ARG(QString, id));
       return TryLoadResult(true, false, QImage());
     #else
       return TryLoadResult(false, false, QImage());
@@ -175,16 +178,14 @@ AlbumCoverLoader::TryLoadResult AlbumCoverLoader::TryLoadImage(
   return TryLoadResult(false, !image.isNull(), image.isNull() ? default_ : image);
 }
 
-void AlbumCoverLoader::SpotifyImageLoaded(const QUrl& url, const QImage& image) {
-  if (!remote_spotify_tasks_.contains(url))
+void AlbumCoverLoader::SpotifyImageLoaded(const QString& id, const QImage& image) {
+  if (!remote_spotify_tasks_.contains(id))
     return;
 
-  Task task = remote_spotify_tasks_.take(url);
+  Task task = remote_spotify_tasks_.take(id);
   QImage scaled = ScaleAndPad(image);
   emit ImageLoaded(task.id, scaled);
   emit ImageLoaded(task.id, scaled, image);
-
-  qLog(Debug) << "Spotify image was for task" << task.id;
 }
 
 void AlbumCoverLoader::RemoteFetchFinished() {
