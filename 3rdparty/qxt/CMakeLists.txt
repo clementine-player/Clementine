@@ -9,6 +9,9 @@ set(QXT-MOC-HEADERS
   qxtglobalshortcut.h
 )
 
+find_package(X11)
+include_directories(${X11_INCLUDE_DIR})
+
 if(WIN32)
   set(QXT-SOURCES ${QXT-SOURCES} qxtglobalshortcut_win.cpp)
 elseif(APPLE)

@@ -61,7 +61,7 @@ bool MediaPipeline::Init(int sample_rate, int channels) {
     return false;
   }
 
-  // Add elements to the pipelin and link them
+  // Add elements to the pipeline and link them
   gst_bin_add(GST_BIN(pipeline_), GST_ELEMENT(appsrc_));
   gst_bin_add(GST_BIN(pipeline_), gdppay);
   gst_bin_add(GST_BIN(pipeline_), tcpsink_);
@@ -73,6 +73,10 @@ bool MediaPipeline::Init(int sample_rate, int channels) {
 
   // We know the time of each buffer
   g_object_set(G_OBJECT(appsrc_), "format", GST_FORMAT_TIME, NULL);
+
+  // Spotify only pushes data to us every 100ms, so keep the appsrc half full
+  // to prevent tiny stalls.
+  g_object_set(G_OBJECT(appsrc_), "min-percent", 50, NULL);
 
   // Set callbacks for when to start/stop pushing data
   GstAppSrcCallbacks callbacks;
@@ -121,8 +125,6 @@ void MediaPipeline::WriteData(const char* data, qint64 length) {
   GST_BUFFER_OFFSET(buffer) = offset_bytes_;
   GST_BUFFER_TIMESTAMP(buffer) = offset_bytes_ * kNsecPerSec / byte_rate_;
   GST_BUFFER_DURATION(buffer) = length * kNsecPerSec / byte_rate_;
-
-  //qLog(Debug) << GST_BUFFER_OFFSET(buffer) << GST_BUFFER_TIMESTAMP(buffer) << GST_BUFFER_DURATION(buffer);
 
   offset_bytes_ += length;
   GST_BUFFER_OFFSET_END(buffer) = offset_bytes_;

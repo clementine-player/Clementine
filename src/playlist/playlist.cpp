@@ -777,12 +777,17 @@ void Playlist::MoveItemsWithoutUndo(int start, const QList<int>& dest_rows) {
   layoutAboutToBeChanged();
   PlaylistItemList moved_items;
 
-  if (start == -1)
+  if (start == -1) {
     start = items_.count() - dest_rows.count();
+  } else {
+    foreach (int dest_row, dest_rows) {
+      if (start >= dest_row)
+        start--;
+    }
+  }
 
-  // Take the items out of the list first, keeping track of whether the
-  // insertion point changes
-  for (int i=start ; i<start + dest_rows.count() ; ++i)
+  // Take the items out of the list first
+  for (int i = 0; i < dest_rows.count(); i++)
     moved_items << items_.takeAt(start);
 
   // Put the items back in

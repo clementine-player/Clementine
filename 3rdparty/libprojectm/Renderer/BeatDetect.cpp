@@ -36,6 +36,8 @@
 #include <cmath>
 #include "BeatDetect.hpp"
 
+using namespace std;
+
 BeatDetect::BeatDetect(PCM *pcm) {
   int x,y; 
 
