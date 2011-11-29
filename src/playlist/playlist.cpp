@@ -1637,6 +1637,10 @@ bool AlbumShuffleComparator(const QMap<QString, int>& album_key_positions,
 }
 
 void Playlist::ReshuffleIndices() {
+  if (!playlist_sequence_) {
+    return;
+  }
+
   if (playlist_sequence_->shuffle_mode() == PlaylistSequence::Shuffle_Off) {
     // No shuffling - sort the virtual item list normally.
     std::sort(virtual_items_.begin(), virtual_items_.end());
