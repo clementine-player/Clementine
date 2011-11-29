@@ -21,11 +21,6 @@
 #include "core/logging.h"
 #include "internet/internetplaylistitem.h"
 
-GroovesharkRadio::GroovesharkRadio()
-  : tag_id_(0),
-    first_time_(true) {
-}
-
 GroovesharkRadio::GroovesharkRadio(GroovesharkService* service, int tag_id)
   : service_(service),
     tag_id_(tag_id),

@@ -25,7 +25,6 @@ class GroovesharkService;
 class GroovesharkRadio : public smart_playlists::Generator {
 
 public:
-  //GroovesharkRadio();
   GroovesharkRadio(GroovesharkService* service, int tag_id);
 
   QString type() const { return "Grooveshark"; }
