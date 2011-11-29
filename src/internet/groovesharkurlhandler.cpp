@@ -40,14 +40,23 @@ GroovesharkUrlHandler::GroovesharkUrlHandler(GroovesharkService* service, QObjec
 }
 
 UrlHandler::LoadResult GroovesharkUrlHandler::StartLoading(const QUrl& url) {
-  qint64 length_nanosec;
-  last_song_id_ = url.toString().remove("grooveshark://");
+  qint64 length_nanosec = 0;
+  QUrl streaming_url;
+  QStringList ids = url.toString().remove("grooveshark://").split("/");
+  if (ids.size() < 3) {
+    qLog(Error) << "Invalid grooveshark URL: " << url.toString();
+    qLog(Error) << "Should be grooveshark://artist_id/album_id/song_id";
+  } else {
+    last_artist_id_ = ids[0];
+    last_album_id_  = ids[1];
+    last_song_id_   = ids[2];
 
-  QUrl streaming_url = service_->GetStreamingUrlFromSongId(last_song_id_,
-      &last_server_id_, &last_stream_key_, &length_nanosec);
-  qLog(Debug) << "Grooveshark Streaming URL: " << streaming_url;
+    streaming_url = service_->GetStreamingUrlFromSongId(last_song_id_, last_artist_id_,
+        &last_server_id_, &last_stream_key_, &length_nanosec);
+    qLog(Debug) << "Grooveshark Streaming URL: " << streaming_url;
 
-  timer_mark_stream_key_->start();
+    timer_mark_stream_key_->start();
+  }
 
   return LoadResult(url, LoadResult::TrackAvailable, streaming_url, length_nanosec);
 }

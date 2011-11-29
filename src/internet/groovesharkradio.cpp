@@ -21,9 +21,17 @@
 #include "core/logging.h"
 #include "internet/internetplaylistitem.h"
 
+GroovesharkRadio::GroovesharkRadio(GroovesharkService* service)
+  : service_(service),
+    tag_id_(0),
+    use_tag_(false),
+    first_time_(true) {
+}
+
 GroovesharkRadio::GroovesharkRadio(GroovesharkService* service, int tag_id)
   : service_(service),
     tag_id_(tag_id),
+    use_tag_(true),
     first_time_(true) {
 }
 
@@ -37,7 +45,12 @@ QByteArray GroovesharkRadio::Save() const {
 PlaylistItemList GroovesharkRadio::Generate() {
   PlaylistItemList items;
   if (first_time_) {
-    Song song = service_->StartAutoplayTag(tag_id_, autoplay_state_);
+    Song song;
+    if (use_tag_) {
+      song = service_->StartAutoplayTag(tag_id_, autoplay_state_);
+    } else {
+      song = service_->StartAutoplay(autoplay_state_);
+    }
     PlaylistItemPtr playlist_item = PlaylistItemPtr(new InternetPlaylistItem(service_, song));
     items << playlist_item;
     first_time_ = false;

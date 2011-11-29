@@ -72,7 +72,7 @@ class GroovesharkService : public InternetService {
 
   void Search(const QString& text, Playlist* playlist, bool now = false);
   // User should be logged in to be able to generate streaming urls
-  QUrl GetStreamingUrlFromSongId(const QString& song_id,
+  QUrl GetStreamingUrlFromSongId(const QString& song_id, const QString& artist_id,
                                  QString* server_id, QString* stream_key,
                                  qint64* length_nanosec);
   void Login(const QString& username, const QString& password);
@@ -97,6 +97,7 @@ class GroovesharkService : public InternetService {
   // Start autoplay for the given tag_id, fill the autoplay_state, returns a
   // first song to play
   Song StartAutoplayTag(int tag_id, QVariantMap& autoplay_state);
+  Song StartAutoplay(QVariantMap& autoplay_state);
   // Get another autoplay song. autoplay_state is the autoplay_state received from StartAutoplayTag
   Song GetAutoplaySong(QVariantMap& autoplay_state);
   void MarkStreamKeyOver30Secs(const QString& stream_key, const QString& server_id);
@@ -230,6 +231,7 @@ class GroovesharkService : public InternetService {
   QStandardItem* popular_month_;
   QStandardItem* popular_today_;
   QStandardItem* stations_;
+  QStandardItem* grooveshark_radio_;
   QStandardItem* favorites_;
   QStandardItem* subscribed_playlists_divider_;
 
@@ -254,6 +256,9 @@ class GroovesharkService : public InternetService {
   QString user_id_;
   QString session_id_;
   QMap<QString, QVariant> country_;
+  // The last artists and songs ids th users has listened to. Used for autoplay
+  QList<int> last_artists_ids_;
+  QList<int> last_songs_ids_;
   QByteArray api_key_;
 
   LoginState login_state_;

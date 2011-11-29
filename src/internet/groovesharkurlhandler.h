@@ -39,6 +39,8 @@ private slots:
 private:
   GroovesharkService* service_;
   QTimer* timer_mark_stream_key_;
+  QString last_artist_id_;
+  QString last_album_id_;
   QString last_song_id_;
   QString last_server_id_;
   QString last_stream_key_;

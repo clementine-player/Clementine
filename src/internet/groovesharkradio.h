@@ -15,8 +15,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef GROOVESHARKDYNAMICPLAYLIST_H
-#define GROOVESHARKDYNAMICPLAYLIST_H
+#ifndef GROOVESHARKRADIO_H
+#define GROOVESHARKRADIO_H
 
 #include "smartplaylists/generator.h"
 
@@ -25,7 +25,10 @@ class GroovesharkService;
 class GroovesharkRadio : public smart_playlists::Generator {
 
 public:
+  // Start Grooveshark radio for a particular type of music
   GroovesharkRadio(GroovesharkService* service, int tag_id);
+  // Start Grooveshark radio based on last artists and songs you listen to
+  GroovesharkRadio(GroovesharkService* service);
 
   QString type() const { return "Grooveshark"; }
   void Load(const QByteArray& data);
@@ -37,9 +40,12 @@ public:
 private:
   GroovesharkService* service_;
   int tag_id_;
+  // Boolean to specify if we should use tag. If not, we will used autoplay
+  // without tag
+  bool use_tag_;
   // For Generate: indicates if it's the first time we generate songs
   bool first_time_;
   QVariantMap autoplay_state_;
 };
  
-#endif // GROOVESHARKDYNAMICPLAYLIST_H
+#endif // GROOVESHARKRADIO_H
