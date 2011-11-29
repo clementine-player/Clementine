@@ -135,6 +135,8 @@ QString SimpleSearchProvider::GetSuggestion() {
     const Item& item = items_[qrand() % items_.count()];
     if (!item.keyword_.isEmpty())
       return item.keyword_;
+    if (!item.metadata_.title().isEmpty())
+      return item.metadata_.title();
   }
 
   return QString();
