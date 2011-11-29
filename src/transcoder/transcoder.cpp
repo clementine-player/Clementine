@@ -438,8 +438,8 @@ bool Transcoder::StartJob(const Job &job) {
     gst_element_link_many(convert, muxer, sink, NULL);
 
   // Set properties
-  g_object_set(src, "location", job.input.toLocal8Bit().constData(), NULL);
-  g_object_set(sink, "location", job.output.toLocal8Bit().constData(), NULL);
+  g_object_set(src, "location", job.input.toUtf8().constData(), NULL);
+  g_object_set(sink, "location", job.output.toUtf8().constData(), NULL);
 
   // Set callbacks
   state->convert_element_ = convert;
