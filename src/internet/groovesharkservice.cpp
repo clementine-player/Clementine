@@ -74,7 +74,7 @@ const char* GroovesharkService::kUrlCover = "http://beta.grooveshark.com/static/
 const char* GroovesharkService::kHomepage = "http://grooveshark.com/";
 
 const int GroovesharkService::kSearchDelayMsec = 400;
-const int GroovesharkService::kSongSearchLimit = 50;
+const int GroovesharkService::kSongSearchLimit = 100;
 const int GroovesharkService::kSongSimpleSearchLimit = 10;
 
 typedef QPair<QString, QVariant> Param;
