@@ -65,6 +65,7 @@ class GroovesharkService : public InternetService {
   void LazyPopulate(QStandardItem *parent);
 
   void ItemDoubleClicked(QStandardItem* item);
+  smart_playlists::GeneratorPtr CreateGenerator(QStandardItem* item);
   void DropMimeData(const QMimeData* data, const QModelIndex& index);
   QList<QAction*> playlistitem_actions(const Song& song);
   void ShowContextMenu(const QModelIndex& index, const QPoint& global_pos);
@@ -83,6 +84,7 @@ class GroovesharkService : public InternetService {
   void RetrievePopularSongsMonth();
   void RetrievePopularSongsToday();
   void RetrieveSubscribedPlaylists();
+  void RetrieveAutoplayTags();
   void SetPlaylistSongs(int playlist_id, const QList<int>& songs_ids);
   void RemoveFromPlaylist(int playlist_id, int song_id);
   // Refresh playlist_id playlist , or create it if it doesn't exist
@@ -92,6 +94,11 @@ class GroovesharkService : public InternetService {
   void AddUserFavoriteSong(int song_id);
   void RemoveFromFavorites(int song_id);
   void GetSongUrlToShare(int song_id);
+  // Start autoplay for the given tag_id, fill the autoplay_state, returns a
+  // first song to play
+  Song StartAutoplayTag(int tag_id, QVariantMap& autoplay_state);
+  // Get another autoplay song. autoplay_state is the autoplay_state received from StartAutoplayTag
+  Song GetAutoplaySong(QVariantMap& autoplay_state);
   void MarkStreamKeyOver30Secs(const QString& stream_key, const QString& server_id);
   void MarkSongComplete(const QString& song_id, const QString& stream_key, const QString& server_id);
 
@@ -146,6 +153,7 @@ class GroovesharkService : public InternetService {
   void PopularSongsMonthRetrieved(QNetworkReply* reply);
   void PopularSongsTodayRetrieved(QNetworkReply* reply);
   void SubscribedPlaylistsRetrieved(QNetworkReply* reply);
+  void AutoplayTagsRetrieved(QNetworkReply* reply);
   void PlaylistSongsRetrieved();
   void PlaylistSongsSet(QNetworkReply* reply, int playlist_id, int task_id);
   void CreateNewPlaylist();
@@ -184,10 +192,18 @@ class GroovesharkService : public InternetService {
   // Returns the reply object created
   QNetworkReply* CreateRequest(const QString& method_name, const QList<QPair<QString, QVariant> > params,
                      bool use_https = false);
+  // Convenient function which block until 'reply' replies, or timeout after 10
+  // seconds. Returns false if reply has timeouted
+  bool WaitForReply(QNetworkReply* reply);
   // Convenient function for extracting result from reply
   QVariantMap ExtractResult(QNetworkReply* reply);
-  // Convenient function for extracting songs from grooveshark result
+  // Convenient function for extracting songs from grooveshark result. result
+  // should be the "result" field of most Grooveshark replies
   SongList ExtractSongs(const QVariantMap& result);
+  // Convenient function for extracting song from grooveshark result.
+  // result_song should be the song field ('song', 'nextSong', ...) of the
+  // Grooveshark reply
+  Song ExtractSong(const QVariantMap& result_song);
   // Convenient functions for extracting Grooveshark songs ids
   QList<int> ExtractSongsIds(const QVariantMap& result);
   QList<int> ExtractSongsIds(const QList<QUrl>& urls);
@@ -213,6 +229,7 @@ class GroovesharkService : public InternetService {
   QStandardItem* search_;
   QStandardItem* popular_month_;
   QStandardItem* popular_today_;
+  QStandardItem* stations_;
   QStandardItem* favorites_;
   QStandardItem* subscribed_playlists_divider_;
 

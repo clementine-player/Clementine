@@ -27,6 +27,7 @@
 #include "groovesharkservice.h"
 #include "core/logging.h"
 #include "core/mergedproxymodel.h"
+#include "smartplaylists/generatormimedata.h"
 
 #ifdef HAVE_LIBLASTFM
   #include "lastfmservice.h"
@@ -37,6 +38,10 @@
 
 #include <QMimeData>
 #include <QtDebug>
+
+using smart_playlists::Generator;
+using smart_playlists::GeneratorMimeData;
+using smart_playlists::GeneratorPtr;
 
 QMap<QString, InternetService*>* InternetModel::sServices = NULL;
 
@@ -195,6 +200,18 @@ QMimeData* InternetModel::mimeData(const QModelIndexList& indexes) const {
           PlayBehaviour_DoubleClickAction) {
     InternetModel::ServiceForIndex(indexes[0])->ItemDoubleClicked(itemFromIndex(indexes[0]));
     return NULL;
+  }
+
+  if (indexes.count() == 1 &&
+      indexes[0].data(Role_Type).toInt() == Type_SmartPlaylist) {
+    GeneratorPtr generator =
+        InternetModel::ServiceForIndex(indexes[0])->CreateGenerator(itemFromIndex(indexes[0]));
+    if (!generator)
+      return NULL;
+    GeneratorMimeData* data = new GeneratorMimeData(generator);
+    data->setData(LibraryModel::kSmartPlaylistsMimeType, QByteArray());
+    data->name_for_new_playlist_ = this->data(indexes.first()).toString();
+    return data;
   }
 
   QList<QUrl> urls;

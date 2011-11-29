@@ -88,6 +88,7 @@ public:
   enum Type {
     Type_Service = 1,
     Type_UserPlaylist,
+    Type_SmartPlaylist,
 
     TypeCount
   };

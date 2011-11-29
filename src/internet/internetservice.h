@@ -24,6 +24,7 @@
 
 #include "core/song.h"
 #include "playlist/playlistitem.h"
+#include "smartplaylists/generator.h"
 #include "ui/settingsdialog.h"
 #include "widgets/multiloadingindicator.h"
 
@@ -47,6 +48,8 @@ public:
 
   virtual void ShowContextMenu(const QModelIndex& index, const QPoint& global_pos) {}
   virtual void ItemDoubleClicked(QStandardItem* item) {}
+  // Create a generator for smart playlists
+  virtual smart_playlists::GeneratorPtr CreateGenerator(QStandardItem* item) { return smart_playlists::GeneratorPtr(); }
   // Give the service a chance to do a custom action when data is dropped on it
   virtual void DropMimeData(const QMimeData* data, const QModelIndex& index) {}
 

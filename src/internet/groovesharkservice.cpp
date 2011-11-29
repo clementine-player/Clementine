@@ -37,6 +37,7 @@
 #include "qtiocompressor.h"
 
 #include "internetmodel.h"
+#include "groovesharkradio.h"
 #include "groovesharksearchplaylisttype.h"
 #include "groovesharkurlhandler.h"
 
@@ -56,6 +57,9 @@
 #include "playlist/playlistcontainer.h"
 #include "playlist/playlistmanager.h"
 #include "ui/iconloader.h"
+
+using smart_playlists::Generator;
+using smart_playlists::GeneratorPtr;
 
 // The Grooveshark terms of service require that application keys are not
 // accessible to third parties. Therefore this application key is obfuscated to
@@ -84,6 +88,7 @@ GroovesharkService::GroovesharkService(InternetModel *parent)
     search_(NULL),
     popular_month_(NULL),
     popular_today_(NULL),
+    stations_(NULL),
     favorites_(NULL),
     subscribed_playlists_divider_(NULL),
     network_(new NetworkAccessManager(this)),
@@ -306,21 +311,9 @@ void GroovesharkService::InitCountry() {
     return;
   // Get country info
   QNetworkReply *reply_country = CreateRequest("getCountry", QList<Param>());
+  if (!WaitForReply(reply_country))
+    return;
 
-  // Wait for the reply
-  {
-    QEventLoop event_loop;
-    QTimer timeout_timer;
-    connect(&timeout_timer, SIGNAL(timeout()), &event_loop, SLOT(quit()));
-    connect(reply_country, SIGNAL(finished()), &event_loop, SLOT(quit()));
-    timeout_timer.start(3000);
-    event_loop.exec();
-    if (!timeout_timer.isActive()) {
-      qLog(Error) << "Grooveshark request timeout";
-      return;
-    }
-    timeout_timer.stop();
-  }
   country_ = ExtractResult(reply_country);
 }
 
@@ -332,20 +325,8 @@ QUrl GroovesharkService::GetStreamingUrlFromSongId(const QString& song_id,
   parameters  << Param("songID", song_id)
               << Param("country", country_);
   QNetworkReply* reply = CreateRequest("getSubscriberStreamKey", parameters);
-  // Wait for the reply
-  {
-    QEventLoop event_loop;
-    QTimer timeout_timer;
-    connect(&timeout_timer, SIGNAL(timeout()), &event_loop, SLOT(quit()));
-    connect(reply, SIGNAL(finished()), &event_loop, SLOT(quit()));
-    timeout_timer.start(3000);
-    event_loop.exec();
-    if (!timeout_timer.isActive()) {
-      qLog(Error) << "Grooveshark request timeout";
-      return QUrl();
-    }
-    timeout_timer.stop();
-  }
+  if (!WaitForReply(reply))
+    return QUrl();
   QVariantMap result = ExtractResult(reply);
   server_id->clear();
   server_id->append(result["StreamServerID"].toString());
@@ -544,6 +525,15 @@ void GroovesharkService::EnsureItemsCreated() {
                         InternetModel::Role_PlayBehaviour);
     root_->appendRow(popular_today_);
 
+    QStandardItem* radios_divider = new QStandardItem(tr("Radios"));
+    radios_divider->setData(true, InternetModel::Role_IsDivider);
+    root_->appendRow(radios_divider);
+
+    stations_ = new QStandardItem(QIcon(":last.fm/icon_radio.png"), tr("Stations"));
+    stations_->setData(InternetModel::Type_UserPlaylist, InternetModel::Role_Type);
+    stations_->setData(true, InternetModel::Role_CanLazyLoad);
+    root_->appendRow(stations_);
+
     QStandardItem* playlists_divider = new QStandardItem(tr("Playlists"));
     playlists_divider->setData(true, InternetModel::Role_IsDivider);
     root_->appendRow(playlists_divider);
@@ -564,6 +554,7 @@ void GroovesharkService::EnsureItemsCreated() {
     RetrieveUserFavorites();
     RetrieveUserPlaylists();
     RetrieveSubscribedPlaylists();
+    RetrieveAutoplayTags();
     RetrievePopularSongs();
   }
 }
@@ -802,6 +793,56 @@ void GroovesharkService::SubscribedPlaylistsRetrieved(QNetworkReply* reply) {
   }
 }
 
+void GroovesharkService::RetrieveAutoplayTags() {
+  QNetworkReply* reply = CreateRequest("getAutoplayTags", QList<Param>());
+  NewClosure(reply, SIGNAL(finished()),
+      this, SLOT(AutoplayTagsRetrieved(QNetworkReply*)), reply);
+}
+
+void GroovesharkService::AutoplayTagsRetrieved(QNetworkReply* reply) {
+  reply->deleteLater();
+  QVariantMap result = ExtractResult(reply);
+  QVariantMap::const_iterator it;
+  for (it = result.constBegin(); it != result.constEnd(); ++it) {
+    int id = it.key().toInt();
+    QString name = it.value().toString().toLower();
+    // Names received aren't very nice: make them more user friendly to display
+    name.replace("_", " ");
+    name[0] = name[0].toUpper();
+
+    QStandardItem* item = new QStandardItem(QIcon(":last.fm/icon_radio.png"), name);
+    item->setData(InternetModel::Type_SmartPlaylist, InternetModel::Role_Type);
+    item->setData(InternetModel::PlayBehaviour_SingleItem, InternetModel::Role_PlayBehaviour);
+    item->setData(id, Role_UserPlaylistId);
+
+    stations_->appendRow(item);
+  }
+}
+
+Song GroovesharkService::StartAutoplayTag(int tag_id, QVariantMap& autoplay_state) {
+  QList<Param> parameters;
+  parameters << Param("tagID", tag_id);
+  QNetworkReply* reply = CreateRequest("startAutoplayTag", parameters);
+  if (!WaitForReply(reply))
+    return Song();
+  reply->deleteLater();
+  QVariantMap result = ExtractResult(reply);
+  autoplay_state = result["autoplayState"].toMap();
+  return ExtractSong(result["nextSong"].toMap());
+}
+
+Song GroovesharkService::GetAutoplaySong(QVariantMap& autoplay_state) {
+  QList<Param> parameters;
+  parameters << Param("autoplayState", autoplay_state);
+  QNetworkReply* reply = CreateRequest("getAutoplaySong", parameters);
+  if (!WaitForReply(reply))
+    return Song();
+  reply->deleteLater();
+  QVariantMap result = ExtractResult(reply);
+  autoplay_state = result["autoplayState"].toMap();
+  return ExtractSong(result["nextSong"].toMap());
+}
+
 void GroovesharkService::MarkStreamKeyOver30Secs(const QString& stream_key,
                                                  const QString& server_id) {
   QList<Param> parameters;
@@ -860,6 +901,17 @@ void GroovesharkService::ItemDoubleClicked(QStandardItem* item) {
   if (item == root_) {
     EnsureConnected();
   }
+}
+
+GeneratorPtr GroovesharkService::CreateGenerator(QStandardItem* item) {
+  GeneratorPtr ret;
+  if (!item ||
+      item->data(InternetModel::Role_Type).toInt() != InternetModel::Type_SmartPlaylist) {
+    return ret;
+  }
+  int tag_id = item->data(Role_UserPlaylistId).toInt();
+  ret = GeneratorPtr(new GroovesharkRadio(this ,tag_id));
+  return ret;
 }
 
 void GroovesharkService::DropMimeData(const QMimeData* data, const QModelIndex& index) {
@@ -1279,6 +1331,21 @@ QNetworkReply* GroovesharkService::CreateRequest(const QString& method_name, QLi
   return reply;
 }
 
+bool GroovesharkService::WaitForReply(QNetworkReply* reply) {
+  QEventLoop event_loop;
+  QTimer timeout_timer;
+  connect(&timeout_timer, SIGNAL(timeout()), &event_loop, SLOT(quit()));
+  connect(reply, SIGNAL(finished()), &event_loop, SLOT(quit()));
+  timeout_timer.start(10000);
+  event_loop.exec();
+  if (!timeout_timer.isActive()) {
+    qLog(Error) << "Grooveshark request timeout";
+    return false;
+  }
+  timeout_timer.stop();
+  return true;
+}
+
 QVariantMap GroovesharkService::ExtractResult(QNetworkReply* reply) {
   QJson::Parser parser;
   bool ok;
@@ -1309,21 +1376,26 @@ SongList GroovesharkService::ExtractSongs(const QVariantMap& result) {
   SongList songs;
   for (int i=0; i<result_songs.size(); ++i) {
     QVariantMap result_song = result_songs[i].toMap();
-    Song song;
-    int song_id = result_song["SongID"].toInt();
-    QString song_name = result_song["SongName"].toString();
-    QString artist_name = result_song["ArtistName"].toString();
-    QString album_name = result_song["AlbumName"].toString();
-    QString cover = result_song["CoverArtFilename"].toString();
-    song.Init(song_name, artist_name, album_name, 0);
-    song.set_art_automatic(QString(kUrlCover) + cover);
-    // Special kind of URL: because we need to request a stream key for each
-    // play, we generate a fake URL for now, and we will create a real streaming
-    // URL when user will actually play the song (through url handler)
-    song.set_url(QString("grooveshark://%1").arg(song_id));
-    songs << song;
+    songs << ExtractSong(result_song);
   }
   return songs;
+}
+
+Song GroovesharkService::ExtractSong(const QVariantMap& result_song) {
+  Song song;
+  int song_id = result_song["SongID"].toInt();
+  QString song_name = result_song["SongName"].toString();
+  QString artist_name = result_song["ArtistName"].toString();
+  QString album_name = result_song["AlbumName"].toString();
+  QString cover = result_song["CoverArtFilename"].toString();
+  song.Init(song_name, artist_name, album_name, 0);
+  song.set_art_automatic(QString(kUrlCover) + cover);
+  // Special kind of URL: because we need to request a stream key for each
+  // play, we generate a fake URL for now, and we will create a real streaming
+  // URL when user will actually play the song (through url handler)
+  song.set_url(QString("grooveshark://%1").arg(song_id));
+
+  return song;
 }
 
 QList<int> GroovesharkService::ExtractSongsIds(const QVariantMap& result) {
