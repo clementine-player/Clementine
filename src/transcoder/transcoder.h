@@ -91,14 +91,16 @@ class Transcoder : public QObject {
   // job's thread.
   struct JobState {
     JobState(const Job& job, Transcoder* parent)
-      : job_(job), parent_(parent), convert_element_(NULL), bus_callback_id_(0) {}
+      : job_(job), parent_(parent), pipeline_(NULL), convert_element_(NULL),
+        bus_callback_id_(0) {}
+    ~JobState();
 
     void PostFinished(bool success);
     void ReportError(GstMessage* msg);
 
     Job job_;
     Transcoder* parent_;
-    boost::shared_ptr<GstElement> pipeline_;
+    GstElement* pipeline_;
     GstElement* convert_element_;
     int bus_callback_id_;
   };
