@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2011-11-28 16:20+0000\n"
+"PO-Revision-Date: 2011-11-29 12:32+0000\n"
 "Last-Translator: clementinebuildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -438,11 +438,11 @@ msgstr "Lägg till etikett för år"
 msgid "Add stream..."
 msgstr "Lägg till ström..."
 
-#: internet/groovesharkservice.cpp:909
+#: internet/groovesharkservice.cpp:917
 msgid "Add to Grooveshark favorites"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:915
+#: internet/groovesharkservice.cpp:923
 msgid "Add to Grooveshark playlists"
 msgstr ""
 
@@ -488,7 +488,7 @@ msgstr "Tillagda idag"
 msgid "Added within three months"
 msgstr "Tillagda senaste tre månaderna"
 
-#: internet/groovesharkservice.cpp:1108
+#: internet/groovesharkservice.cpp:1164
 msgid "Adding song to favorites"
 msgstr ""
 
@@ -500,7 +500,7 @@ msgstr "Avancerad gruppering..."
 msgid "After copying..."
 msgstr "Efter kopiering..."
 
-#: playlist/playlist.cpp:1104 ui/organisedialog.cpp:52
+#: playlist/playlist.cpp:1109 ui/organisedialog.cpp:52
 #: ui/qtsystemtrayicon.cpp:252 ../bin/src/ui_groupbydialog.h:129
 #: ../bin/src/ui_groupbydialog.h:142 ../bin/src/ui_groupbydialog.h:155
 #: ../bin/src/ui_albumcoversearcher.h:110
@@ -513,7 +513,7 @@ msgstr "Album"
 msgid "Album (ideal loudness for all tracks)"
 msgstr "Album (lämplig ljudstyrka för alla spår)"
 
-#: playlist/playlist.cpp:1110 ui/organisedialog.cpp:55
+#: playlist/playlist.cpp:1115 ui/organisedialog.cpp:55
 #: ../bin/src/ui_edittagdialog.h:658
 msgid "Album artist"
 msgstr "Albumartist"
@@ -627,7 +627,7 @@ msgstr "Och:"
 msgid "Appearance"
 msgstr "Utseende"
 
-#: core/commandlineoptions.cpp:163
+#: core/commandlineoptions.cpp:160
 msgid "Append files/URLs to the playlist"
 msgstr "Lägg till filer/webbadresser till spellistan"
 
@@ -649,7 +649,7 @@ msgstr "Tillämpa komprimering för att förhindra distorsion"
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "Är du säker på att du vill ta bort förinställningen \"%1\"?"
 
-#: internet/groovesharkservice.cpp:1080
+#: internet/groovesharkservice.cpp:1088
 msgid "Are you sure you want to delete this playlist?"
 msgstr ""
 
@@ -657,7 +657,7 @@ msgstr ""
 msgid "Are you sure you want to reset this song's statistics?"
 msgstr "Är du säker på att du vill återställa den här låtens statistik?"
 
-#: playlist/playlist.cpp:1103 ui/organisedialog.cpp:53
+#: playlist/playlist.cpp:1108 ui/organisedialog.cpp:53
 #: ui/qtsystemtrayicon.cpp:250 ../bin/src/ui_groupbydialog.h:130
 #: ../bin/src/ui_groupbydialog.h:143 ../bin/src/ui_groupbydialog.h:156
 #: ../bin/src/ui_albumcoversearcher.h:106
@@ -725,7 +725,7 @@ msgstr "Genomsnittlig bithastighet"
 msgid "Average image size"
 msgstr "Genomsnittlig bildstorlek"
 
-#: playlist/playlist.cpp:1119 ui/organisedialog.cpp:59
+#: playlist/playlist.cpp:1124 ui/organisedialog.cpp:59
 #: ../bin/src/ui_edittagdialog.h:638
 msgid "BPM"
 msgstr "BPM"
@@ -771,7 +771,7 @@ msgstr "Bästa"
 msgid "Biography from %1"
 msgstr "Biografi från %1"
 
-#: playlist/playlist.cpp:1120 ../bin/src/ui_edittagdialog.h:640
+#: playlist/playlist.cpp:1125 ../bin/src/ui_edittagdialog.h:640
 msgid "Bit rate"
 msgstr "Bithastighet"
 
@@ -846,7 +846,7 @@ msgstr "Ändra snabbtangent..."
 msgid "Change shuffle mode"
 msgstr "Ändra blandningsläge"
 
-#: core/commandlineoptions.cpp:170
+#: core/commandlineoptions.cpp:167
 msgid "Change the language"
 msgstr "Ändra språket"
 
@@ -1000,11 +1000,11 @@ msgstr "Färg"
 msgid "Combine identical results from different sources"
 msgstr ""
 
-#: core/commandlineoptions.cpp:173
+#: core/commandlineoptions.cpp:170
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Lista, separerad med komma, över class:level; level är 0-3"
 
-#: playlist/playlist.cpp:1129 smartplaylists/searchterm.cpp:279
+#: playlist/playlist.cpp:1134 smartplaylists/searchterm.cpp:279
 #: ui/organisedialog.cpp:62 ../bin/src/ui_edittagdialog.h:661
 msgid "Comment"
 msgstr "Kommentar"
@@ -1017,13 +1017,13 @@ msgstr "Fyll i etiketter automatiskt"
 msgid "Complete tags automatically..."
 msgstr "Fyll i etiketter automatiskt..."
 
-#: playlist/playlist.cpp:1111 ui/organisedialog.cpp:56
+#: playlist/playlist.cpp:1116 ui/organisedialog.cpp:56
 #: ../bin/src/ui_groupbydialog.h:132 ../bin/src/ui_groupbydialog.h:145
 #: ../bin/src/ui_groupbydialog.h:158 ../bin/src/ui_edittagdialog.h:659
 msgid "Composer"
 msgstr "Kompositör"
 
-#: internet/groovesharkservice.cpp:504
+#: internet/groovesharkservice.cpp:512
 msgid "Configure Grooveshark..."
 msgstr "Konfigurera Grooveshark..."
 
@@ -1076,7 +1076,7 @@ msgstr "Konvertera all musik"
 msgid "Convert any music that the device can't play"
 msgstr "Konvertera all musik som enheten inte kan spela upp"
 
-#: internet/groovesharkservice.cpp:962
+#: internet/groovesharkservice.cpp:970
 msgid "Copy to clipboard"
 msgstr ""
 
@@ -1162,7 +1162,7 @@ msgstr "Omslagsbild angiven från %1"
 msgid "Covers from %1"
 msgstr "Omslagsbilder från %1"
 
-#: internet/groovesharkservice.cpp:488 internet/groovesharkservice.cpp:1031
+#: internet/groovesharkservice.cpp:493 internet/groovesharkservice.cpp:1039
 msgid "Create a new Grooveshark playlist"
 msgstr ""
 
@@ -1270,11 +1270,11 @@ msgstr "Dbus-sökväg"
 msgid "Dance"
 msgstr "Dans"
 
-#: playlist/playlist.cpp:1127 ../bin/src/ui_edittagdialog.h:649
+#: playlist/playlist.cpp:1132 ../bin/src/ui_edittagdialog.h:649
 msgid "Date created"
 msgstr "Datum skapad"
 
-#: playlist/playlist.cpp:1126 ../bin/src/ui_edittagdialog.h:648
+#: playlist/playlist.cpp:1131 ../bin/src/ui_edittagdialog.h:648
 msgid "Date modified"
 msgstr "Datum ändrad"
 
@@ -1286,7 +1286,7 @@ msgstr "Dagar"
 msgid "De&fault"
 msgstr "S&tandard"
 
-#: core/commandlineoptions.cpp:159
+#: core/commandlineoptions.cpp:156
 msgid "Decrease the volume by 4%"
 msgstr "Sänk volymen med 4%"
 
@@ -1302,7 +1302,7 @@ msgstr "Standardvärden"
 msgid "Delay between visualizations"
 msgstr "Fördröjning mellan visualiseringar"
 
-#: internet/groovesharkservice.cpp:491 internet/groovesharkservice.cpp:1079
+#: internet/groovesharkservice.cpp:496 internet/groovesharkservice.cpp:1087
 msgid "Delete Grooveshark playlist"
 msgstr ""
 
@@ -1409,7 +1409,7 @@ msgstr "Avaktivera tidsvisning"
 msgid "Disabled"
 msgstr "Inaktiverat"
 
-#: playlist/playlist.cpp:1107 ui/organisedialog.cpp:58
+#: playlist/playlist.cpp:1112 ui/organisedialog.cpp:58
 #: ../bin/src/ui_edittagdialog.h:655
 msgid "Disc"
 msgstr "Skiva"
@@ -1423,11 +1423,11 @@ msgstr "Icke-kontinuerlig sändning"
 msgid "Display options"
 msgstr "Visningsalternativ"
 
-#: core/commandlineoptions.cpp:169
+#: core/commandlineoptions.cpp:166
 msgid "Display the global search popup"
 msgstr "Visa globalt sökfönster"
 
-#: core/commandlineoptions.cpp:167
+#: core/commandlineoptions.cpp:164
 msgid "Display the on-screen-display"
 msgstr "Visa on-screen-display"
 
@@ -1623,11 +1623,11 @@ msgstr "Hela samlingen"
 msgid "Equalizer"
 msgstr "Equalizer"
 
-#: core/commandlineoptions.cpp:171
+#: core/commandlineoptions.cpp:168
 msgid "Equivalent to --log-levels *:1"
 msgstr "Motsvarar --log-levels *:1"
 
-#: core/commandlineoptions.cpp:172
+#: core/commandlineoptions.cpp:169
 msgid "Equivalent to --log-levels *:3"
 msgstr "Motsvarar --log-levels *:3"
 
@@ -1736,7 +1736,7 @@ msgstr "Toningslängd"
 msgid "Fast"
 msgstr "Snabb"
 
-#: internet/groovesharkservice.cpp:543
+#: internet/groovesharkservice.cpp:551
 msgid "Favorites"
 msgstr "Favoriter"
 
@@ -1768,19 +1768,19 @@ msgstr "Filändelse"
 msgid "File formats"
 msgstr "Filformat"
 
-#: playlist/playlist.cpp:1122 ../bin/src/ui_edittagdialog.h:650
+#: playlist/playlist.cpp:1127 ../bin/src/ui_edittagdialog.h:650
 msgid "File name"
 msgstr "Filnamn"
 
-#: playlist/playlist.cpp:1123
+#: playlist/playlist.cpp:1128
 msgid "File name (without path)"
 msgstr "Filnamn (utan sökväg)"
 
-#: playlist/playlist.cpp:1124 ../bin/src/ui_edittagdialog.h:644
+#: playlist/playlist.cpp:1129 ../bin/src/ui_edittagdialog.h:644
 msgid "File size"
 msgstr "Filstorlek"
 
-#: playlist/playlist.cpp:1125 ../bin/src/ui_groupbydialog.h:133
+#: playlist/playlist.cpp:1130 ../bin/src/ui_groupbydialog.h:133
 #: ../bin/src/ui_groupbydialog.h:146 ../bin/src/ui_groupbydialog.h:159
 #: ../bin/src/ui_edittagdialog.h:646
 msgid "File type"
@@ -1915,17 +1915,17 @@ msgstr "Allmänt"
 msgid "General settings"
 msgstr "Allmänna inställningar"
 
-#: playlist/playlist.cpp:1109 ui/organisedialog.cpp:61
+#: playlist/playlist.cpp:1114 ui/organisedialog.cpp:61
 #: ../bin/src/ui_groupbydialog.h:134 ../bin/src/ui_groupbydialog.h:147
 #: ../bin/src/ui_groupbydialog.h:160 ../bin/src/ui_edittagdialog.h:660
 msgid "Genre"
 msgstr "Genre"
 
-#: internet/groovesharkservice.cpp:926
+#: internet/groovesharkservice.cpp:934
 msgid "Get an URL to share this Grooveshark song"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:705
+#: internet/groovesharkservice.cpp:713
 msgid "Getting Grooveshark popular songs"
 msgstr ""
 
@@ -1971,11 +1971,11 @@ msgstr "Gråa ut icke-existerande låtar i mina spellistor"
 msgid "Grooveshark"
 msgstr "Grooveshark"
 
-#: internet/groovesharkservice.cpp:413
+#: internet/groovesharkservice.cpp:416
 msgid "Grooveshark login error"
 msgstr "Grooveshark login fel"
 
-#: internet/groovesharkservice.cpp:958
+#: internet/groovesharkservice.cpp:966
 msgid "Grooveshark song's URL"
 msgstr ""
 
@@ -2120,7 +2120,7 @@ msgstr "Inkludera alla spår"
 msgid "Include keyboard shortcut help in the tooltip"
 msgstr ""
 
-#: core/commandlineoptions.cpp:158
+#: core/commandlineoptions.cpp:155
 msgid "Increase the volume by 4%"
 msgstr "Öka volymen med 4%"
 
@@ -2128,7 +2128,7 @@ msgstr "Öka volymen med 4%"
 msgid "Increase volume"
 msgstr "Höj volymen"
 
-#: wiimotedev/wiimotesettingspage.cpp:124 ../bin/src/ui_deviceproperties.h:373
+#: ../bin/src/ui_deviceproperties.h:373 wiimotedev/wiimotesettingspage.cpp:124
 msgid "Information"
 msgstr "Information"
 
@@ -2176,7 +2176,7 @@ msgstr "Ogiltig tjänst"
 msgid "Invalid session key"
 msgstr "Felaktig sessionsnyckel"
 
-#: internet/groovesharkservice.cpp:406
+#: internet/groovesharkservice.cpp:409
 msgid "Invalid username and/or password"
 msgstr "Fel användarnamn och/eller lösenord"
 
@@ -2213,9 +2213,9 @@ msgstr "Hoppa till spåret som spelas just nu"
 msgid "Keep buttons for %1 second..."
 msgstr "Behåll knappar i %1 sekund..."
 
+#: ../bin/src/ui_wiimoteshortcutgrabber.h:127
 #: wiimotedev/wiimoteshortcutgrabber.cpp:73
 #: wiimotedev/wiimoteshortcutgrabber.cpp:117
-#: ../bin/src/ui_wiimoteshortcutgrabber.h:127
 #, qt-format
 msgid "Keep buttons for %1 seconds..."
 msgstr "Behåll knappar i %1 sekunder..."
@@ -2252,7 +2252,7 @@ msgstr "Stort albumomslag"
 msgid "Large sidebar"
 msgstr "Stor sidopanel"
 
-#: library/library.cpp:66 playlist/playlist.cpp:1116
+#: library/library.cpp:66 playlist/playlist.cpp:1121
 #: ../bin/src/ui_edittagdialog.h:641
 msgid "Last played"
 msgstr "Senast spelad"
@@ -2331,7 +2331,7 @@ msgstr "Minst omtyckta spår"
 msgid "Leave blank for the default.  Examples: \"/dev/dsp\", \"front\", etc."
 msgstr "Lämna tomt för standardvärdet. Exempel: \"/dev/dsp\", \"front\", etc."
 
-#: playlist/playlist.cpp:1105 ui/organisedialog.cpp:63
+#: playlist/playlist.cpp:1110 ui/organisedialog.cpp:63
 #: ui/qtsystemtrayicon.cpp:255 ../bin/src/ui_edittagdialog.h:636
 msgid "Length"
 msgstr "Speltid"
@@ -2430,7 +2430,7 @@ msgstr "Laddar låtinformation"
 msgid "Loading..."
 msgstr "Läser in..."
 
-#: core/commandlineoptions.cpp:164
+#: core/commandlineoptions.cpp:161
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "Läser in filer/webbadresser, ersätter aktuell spellista"
 
@@ -2612,8 +2612,8 @@ msgstr "Musik (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma *.mp4 *.spx *.wav)"
 msgid "Music Library"
 msgstr "Musikbibliotek"
 
-#: core/globalshortcuts.cpp:54 wiimotedev/wiimotesettingspage.cpp:105
-#: ../bin/src/ui_mainwindow.h:692
+#: core/globalshortcuts.cpp:54 ../bin/src/ui_mainwindow.h:692
+#: wiimotedev/wiimotesettingspage.cpp:105
 msgid "Mute"
 msgstr "Tyst"
 
@@ -2649,8 +2649,8 @@ msgstr "Min radiostation"
 msgid "My Recommendations"
 msgstr "Mina rekommendationer"
 
-#: internet/groovesharkservice.cpp:1032 ui/equalizer.cpp:172
-#: ../bin/src/ui_deviceproperties.h:369
+#: internet/groovesharkservice.cpp:1040 internet/groovesharkservice.cpp:1132
+#: ui/equalizer.cpp:172 ../bin/src/ui_deviceproperties.h:369
 #: ../bin/src/ui_magnatunedownloaddialog.h:135
 #: ../bin/src/ui_wizardfinishpage.h:84
 #: ../bin/src/ui_globalshortcutssettingspage.h:174
@@ -2714,8 +2714,8 @@ msgstr "Nyaste spåren"
 msgid "Next"
 msgstr "Nästa"
 
-#: core/globalshortcuts.cpp:50 wiimotedev/wiimotesettingspage.cpp:99
-#: ../bin/src/ui_mainwindow.h:635
+#: core/globalshortcuts.cpp:50 ../bin/src/ui_mainwindow.h:635
+#: wiimotedev/wiimotesettingspage.cpp:99
 msgid "Next track"
 msgstr "Nästa spår"
 
@@ -2820,7 +2820,7 @@ msgid "Only show the first"
 msgstr "Visa endast de första"
 
 #: internet/digitallyimportedservicebase.cpp:178
-#: internet/groovesharkservice.cpp:503 internet/icecastservice.cpp:299
+#: internet/groovesharkservice.cpp:511 internet/icecastservice.cpp:299
 #: internet/jamendoservice.cpp:415 internet/magnatuneservice.cpp:273
 #: internet/somafmservice.cpp:84
 #, qt-format
@@ -2882,7 +2882,7 @@ msgstr "Organiserar filer..."
 msgid "Original tags"
 msgstr "Ursprungliga etiketter"
 
-#: core/commandlineoptions.cpp:166
+#: core/commandlineoptions.cpp:163
 msgid "Other options"
 msgstr "Övriga flaggor"
 
@@ -2926,7 +2926,7 @@ msgstr "Lösenordsskyddad"
 msgid "Pause"
 msgstr "Gör paus"
 
-#: core/commandlineoptions.cpp:153
+#: core/commandlineoptions.cpp:150
 msgid "Pause playback"
 msgstr "Gör paus i uppspelning"
 
@@ -2940,8 +2940,8 @@ msgstr "Vanlig sidorad"
 
 #: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:506 ui/mainwindow.cpp:841
 #: ui/mainwindow.cpp:860 ui/mainwindow.cpp:1262 ui/qtsystemtrayicon.cpp:166
-#: ui/qtsystemtrayicon.cpp:192 wiimotedev/wiimotesettingspage.cpp:101
-#: ../bin/src/ui_mainwindow.h:631
+#: ui/qtsystemtrayicon.cpp:192 ../bin/src/ui_mainwindow.h:631
+#: wiimotedev/wiimotesettingspage.cpp:101
 msgid "Play"
 msgstr "Spela upp"
 
@@ -2953,7 +2953,7 @@ msgstr "Spela upp artist eller tagg"
 msgid "Play artist radio..."
 msgstr "Spela upp artistradio..."
 
-#: playlist/playlist.cpp:1114 ../bin/src/ui_edittagdialog.h:637
+#: playlist/playlist.cpp:1119 ../bin/src/ui_edittagdialog.h:637
 msgid "Play count"
 msgstr "Antal uppspelningar"
 
@@ -2961,7 +2961,7 @@ msgstr "Antal uppspelningar"
 msgid "Play custom radio..."
 msgstr "Spela upp anpassad radio..."
 
-#: core/commandlineoptions.cpp:152
+#: core/commandlineoptions.cpp:149
 msgid "Play if stopped, pause if playing"
 msgstr "Spela upp om stoppad, gör paus vid uppspelning"
 
@@ -2974,7 +2974,7 @@ msgstr "Spela om ingenting redan spelas"
 msgid "Play tag radio..."
 msgstr "Spela upp taggradio..."
 
-#: core/commandlineoptions.cpp:165
+#: core/commandlineoptions.cpp:162
 msgid "Play the <n>th track in the playlist"
 msgstr "Spela upp spår nummer <n> från spellistan"
 
@@ -2990,7 +2990,7 @@ msgstr "Uppspelning"
 msgid "Player name"
 msgstr "Spelarnamn"
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:147
 msgid "Player options"
 msgstr "Spelaralternativ"
 
@@ -3003,7 +3003,7 @@ msgstr "Spellista"
 msgid "Playlist finished"
 msgstr "Spellistan slutförd"
 
-#: core/commandlineoptions.cpp:162
+#: core/commandlineoptions.cpp:159
 msgid "Playlist options"
 msgstr "Alternativ för spellista"
 
@@ -3015,7 +3015,7 @@ msgstr "Sök i spellistan"
 msgid "Playlist type"
 msgstr "Spellistetyp"
 
-#: internet/groovesharkservice.cpp:539
+#: internet/groovesharkservice.cpp:547
 msgid "Playlists"
 msgstr ""
 
@@ -3027,15 +3027,15 @@ msgstr "Instickstatus:"
 msgid "Pop"
 msgstr "Pop"
 
-#: internet/groovesharkservice.cpp:521
+#: internet/groovesharkservice.cpp:529
 msgid "Popular songs"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:525
+#: internet/groovesharkservice.cpp:533
 msgid "Popular songs of the Month"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:532
+#: internet/groovesharkservice.cpp:540
 msgid "Popular songs today"
 msgstr ""
 
@@ -3113,12 +3113,12 @@ msgstr "Förhandsvisning"
 msgid "Previous"
 msgstr "Föregående"
 
-#: core/globalshortcuts.cpp:51 wiimotedev/wiimotesettingspage.cpp:100
-#: ../bin/src/ui_mainwindow.h:629
+#: core/globalshortcuts.cpp:51 ../bin/src/ui_mainwindow.h:629
+#: wiimotedev/wiimotesettingspage.cpp:100
 msgid "Previous track"
 msgstr "Föregående spår"
 
-#: core/commandlineoptions.cpp:174
+#: core/commandlineoptions.cpp:171
 msgid "Print out version information"
 msgstr "Visa versionsinformation"
 
@@ -3131,8 +3131,8 @@ msgstr "Profil"
 msgid "Progress"
 msgstr "Förlopp"
 
-#: wiimotedev/wiimotesettingspage.cpp:227
 #: ../bin/src/ui_wiimoteshortcutgrabber.h:125
+#: wiimotedev/wiimotesettingspage.cpp:227
 msgid "Push Wiiremote button"
 msgstr "Tryck på Wii-kontrollknapp"
 
@@ -3201,7 +3201,7 @@ msgstr "Betygsätt den aktuella låten 4 stjärnor"
 msgid "Rate the current song 5 stars"
 msgstr "Betygsätt den aktuella låten 5 stjärnor"
 
-#: playlist/playlist.cpp:1113 ../bin/src/ui_edittagdialog.h:645
+#: playlist/playlist.cpp:1118 ../bin/src/ui_edittagdialog.h:645
 msgid "Rating"
 msgstr "Betyg"
 
@@ -3259,11 +3259,11 @@ msgstr "Ta bort åtgärd"
 msgid "Remove folder"
 msgstr "Ta bort mapp"
 
-#: internet/groovesharkservice.cpp:498
+#: internet/groovesharkservice.cpp:506
 msgid "Remove from favorites"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:495 ../bin/src/ui_mainwindow.h:674
+#: internet/groovesharkservice.cpp:503 ../bin/src/ui_mainwindow.h:674
 msgid "Remove from playlist"
 msgstr "Ta bort från spellistan"
 
@@ -3271,8 +3271,17 @@ msgstr "Ta bort från spellistan"
 msgid "Remove playlist"
 msgstr "Ta bort spellistan"
 
-#: internet/groovesharkservice.cpp:1166
+#: internet/groovesharkservice.cpp:1222
 msgid "Removing song from favorites"
+msgstr ""
+
+#: internet/groovesharkservice.cpp:1131
+#, qt-format
+msgid "Rename \"%1\" playlist"
+msgstr ""
+
+#: internet/groovesharkservice.cpp:499
+msgid "Rename Grooveshark playlist"
 msgstr ""
 
 #: playlist/playlisttabbar.cpp:131
@@ -3349,11 +3358,11 @@ msgstr "Begränsa till ASCII-tecken"
 msgid "Results"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:676
+#: internet/groovesharkservice.cpp:684
 msgid "Retrieving Grooveshark favorites songs"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:585
+#: internet/groovesharkservice.cpp:593
 msgid "Retrieving Grooveshark playlists"
 msgstr ""
 
@@ -3373,7 +3382,7 @@ msgstr "Säker borttagning av enhet"
 msgid "Safely remove the device after copying"
 msgstr "Säker borttagning av enheten efter kopiering"
 
-#: playlist/playlist.cpp:1121 ../bin/src/ui_edittagdialog.h:642
+#: playlist/playlist.cpp:1126 ../bin/src/ui_edittagdialog.h:642
 msgid "Sample rate"
 msgstr "Samplingsfrekvens"
 
@@ -3417,7 +3426,7 @@ msgstr "Sparar spår"
 msgid "Scalable sampling rate profile (SSR)"
 msgstr "Skalbar samplingsfrekvensprofil (SSR)"
 
-#: playlist/playlist.cpp:1117 ../bin/src/ui_edittagdialog.h:643
+#: playlist/playlist.cpp:1122 ../bin/src/ui_edittagdialog.h:643
 msgid "Score"
 msgstr "Poäng"
 
@@ -3431,11 +3440,11 @@ msgid "Search"
 msgstr "Sök"
 
 #: internet/groovesharksearchplaylisttype.cpp:32
-#: internet/groovesharkservice.cpp:844
+#: internet/groovesharkservice.cpp:852
 msgid "Search Grooveshark"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:501 internet/groovesharkservice.cpp:515
+#: internet/groovesharkservice.cpp:509 internet/groovesharkservice.cpp:523
 msgid "Search Grooveshark (opens a new tab)"
 msgstr ""
 
@@ -3487,7 +3496,7 @@ msgstr "Sökalternativ"
 msgid "Search terms"
 msgstr "Söktermer"
 
-#: internet/groovesharkservice.cpp:273
+#: internet/groovesharkservice.cpp:276
 msgid "Searching on Grooveshark"
 msgstr ""
 
@@ -3503,11 +3512,11 @@ msgstr "Hoppa bakåt"
 msgid "Seek forward"
 msgstr "Hoppa framåt"
 
-#: core/commandlineoptions.cpp:161
+#: core/commandlineoptions.cpp:158
 msgid "Seek the currently playing track by a relative amount"
 msgstr "Hoppa till en relativ position i spåret som spelas för närvarande"
 
-#: core/commandlineoptions.cpp:160
+#: core/commandlineoptions.cpp:157
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Hoppa till en absolut position i spåret som spelas för närvarande"
 
@@ -3544,7 +3553,7 @@ msgstr "Tjänst inte tillgänglig"
 msgid "Set %1 to \"%2\"..."
 msgstr "Ställ in %1 till \"%2\"..."
 
-#: core/commandlineoptions.cpp:157
+#: core/commandlineoptions.cpp:154
 msgid "Set the volume to <value> percent"
 msgstr "Ställ in volymen till <värde> procent"
 
@@ -3707,15 +3716,15 @@ msgstr "Liknande artister"
 msgid "Ska"
 msgstr "Ska"
 
-#: core/commandlineoptions.cpp:155
+#: core/commandlineoptions.cpp:152
 msgid "Skip backwards in playlist"
 msgstr "Gå bakåt i spellista"
 
-#: playlist/playlist.cpp:1115 ../bin/src/ui_edittagdialog.h:639
+#: playlist/playlist.cpp:1120 ../bin/src/ui_edittagdialog.h:639
 msgid "Skip count"
 msgstr "Antal överhoppningar"
 
-#: core/commandlineoptions.cpp:156
+#: core/commandlineoptions.cpp:153
 msgid "Skip forwards in playlist"
 msgstr "Gå framåt i spellista"
 
@@ -3811,7 +3820,7 @@ msgstr "Standard"
 msgid "Starred"
 msgstr "Stjärnmärkta"
 
-#: core/commandlineoptions.cpp:151
+#: core/commandlineoptions.cpp:148
 msgid "Start the playlist currently playing"
 msgstr "Starta spellistan som spelas för närvarande"
 
@@ -3834,8 +3843,8 @@ msgstr "Startar %1"
 msgid "Starting..."
 msgstr "Startar..."
 
-#: core/globalshortcuts.cpp:48 wiimotedev/wiimotesettingspage.cpp:102
-#: ../bin/src/ui_mainwindow.h:633
+#: core/globalshortcuts.cpp:48 ../bin/src/ui_mainwindow.h:633
+#: wiimotedev/wiimotesettingspage.cpp:102
 msgid "Stop"
 msgstr "Stoppa"
 
@@ -3847,7 +3856,7 @@ msgstr "Stoppa efter"
 msgid "Stop after this track"
 msgstr "Stoppa efter detta spår"
 
-#: core/commandlineoptions.cpp:154
+#: core/commandlineoptions.cpp:151
 msgid "Stop playback"
 msgstr "Stoppa uppspelning"
 
@@ -3867,7 +3876,7 @@ msgstr "Ström"
 msgid "Streaming membership"
 msgstr "Strömmningsmedlemskap"
 
-#: internet/groovesharkservice.cpp:552
+#: internet/groovesharkservice.cpp:560
 msgid "Subscribed playlists"
 msgstr ""
 
@@ -4105,7 +4114,7 @@ msgstr "Tidsgräns överskriden"
 msgid "Timezone"
 msgstr "Tidzon"
 
-#: playlist/playlist.cpp:1102 ui/organisedialog.cpp:51
+#: playlist/playlist.cpp:1107 ui/organisedialog.cpp:51
 #: ui/qtsystemtrayicon.cpp:248 ../bin/src/ui_about.h:142
 #: ../bin/src/ui_edittagdialog.h:652 ../bin/src/ui_trackselectiondialog.h:211
 msgid "Title"
@@ -4131,7 +4140,7 @@ msgstr "Växla köstatus"
 msgid "Toggle scrobbling"
 msgstr "Växla skrobbling"
 
-#: core/commandlineoptions.cpp:168
+#: core/commandlineoptions.cpp:165
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr ""
 
@@ -4143,7 +4152,7 @@ msgstr "Totalt antal byte överfört"
 msgid "Total network requests made"
 msgstr "Totalt antal nätverksbegäran"
 
-#: playlist/playlist.cpp:1106 ui/organisedialog.cpp:57
+#: playlist/playlist.cpp:1111 ui/organisedialog.cpp:57
 #: ../bin/src/ui_edittagdialog.h:653 ../bin/src/ui_trackselectiondialog.h:212
 msgid "Track"
 msgstr "Spår"
@@ -4185,7 +4194,7 @@ msgstr "Stäng av"
 msgid "URI"
 msgstr "URI"
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:147
 msgid "URL(s)"
 msgstr "Webbadress(er)"
 
@@ -4214,7 +4223,7 @@ msgstr "Okänt fel"
 msgid "Unset cover"
 msgstr "Ta bort omslag"
 
-#: internet/groovesharkservice.cpp:986
+#: internet/groovesharkservice.cpp:994
 msgid "Update Grooveshark playlist"
 msgstr ""
 
@@ -4226,7 +4235,7 @@ msgstr "Uppdatera ändrade bibliotekskataloger"
 msgid "Update the library when Clementine starts"
 msgstr "Uppdatera biblioteket när Clementine startar"
 
-#: library/librarywatcher.cpp:81
+#: library/librarywatcher.cpp:86
 #, qt-format
 msgid "Updating %1"
 msgstr "Uppdaterar %1"
@@ -4236,11 +4245,11 @@ msgstr "Uppdaterar %1"
 msgid "Updating %1%..."
 msgstr "Uppdaterar %1%..."
 
-#: library/librarywatcher.cpp:79
+#: library/librarywatcher.cpp:84
 msgid "Updating library"
 msgstr "Uppdaterar biblioteket"
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:147
 msgid "Usage"
 msgstr "Användning"
 
@@ -4296,7 +4305,7 @@ msgstr ""
 msgid "Used"
 msgstr "Använd"
 
-#: internet/groovesharkservice.cpp:409
+#: internet/groovesharkservice.cpp:412
 #, qt-format
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr ""
@@ -4459,7 +4468,7 @@ msgstr "Windows Media-ljud"
 msgid "Would you like to run a full rescan right now?"
 msgstr "Vill du köra en fullständig omsökning nu?"
 
-#: playlist/playlist.cpp:1108 ui/organisedialog.cpp:60
+#: playlist/playlist.cpp:1113 ui/organisedialog.cpp:60
 #: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:148
 #: ../bin/src/ui_groupbydialog.h:161 ../bin/src/ui_edittagdialog.h:657
 msgid "Year"
@@ -4752,7 +4761,7 @@ msgstr "äldsta först"
 msgid "on"
 msgstr "på"
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:147
 msgid "options"
 msgstr "alternativ"
 

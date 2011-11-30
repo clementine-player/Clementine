@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2011-11-28 16:19+0000\n"
-"Last-Translator: clementinebuildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2011-11-29 17:02+0000\n"
+"Last-Translator: firewalker <firew4lker@gmail.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: el\n"
@@ -440,11 +440,11 @@ msgstr "Προσθήκη ετικέτας χρονολογίας τραγουδ�
 msgid "Add stream..."
 msgstr "Προσθήκη ροής..."
 
-#: internet/groovesharkservice.cpp:909
+#: internet/groovesharkservice.cpp:917
 msgid "Add to Grooveshark favorites"
 msgstr "Προσθήκη στα αγαπημένα του "
 
-#: internet/groovesharkservice.cpp:915
+#: internet/groovesharkservice.cpp:923
 msgid "Add to Grooveshark playlists"
 msgstr "Προσθήκη στη λίστα του "
 
@@ -490,7 +490,7 @@ msgstr "Προστέθηκε σήμερα"
 msgid "Added within three months"
 msgstr "Προστέθηκε εντός τριών μηνών"
 
-#: internet/groovesharkservice.cpp:1108
+#: internet/groovesharkservice.cpp:1164
 msgid "Adding song to favorites"
 msgstr "Προσθήκη τραγουδιού στα αγαπημένα"
 
@@ -502,7 +502,7 @@ msgstr "Προχωρημένη ομαδοποίηση..."
 msgid "After copying..."
 msgstr "Μετά την αντιγραφή..."
 
-#: playlist/playlist.cpp:1104 ui/organisedialog.cpp:52
+#: playlist/playlist.cpp:1109 ui/organisedialog.cpp:52
 #: ui/qtsystemtrayicon.cpp:252 ../bin/src/ui_groupbydialog.h:129
 #: ../bin/src/ui_groupbydialog.h:142 ../bin/src/ui_groupbydialog.h:155
 #: ../bin/src/ui_albumcoversearcher.h:110
@@ -515,7 +515,7 @@ msgstr "Άλμπουμ"
 msgid "Album (ideal loudness for all tracks)"
 msgstr "Άλμπουμ (ιδανική ένταση για όλα τα κομμάτια)"
 
-#: playlist/playlist.cpp:1110 ui/organisedialog.cpp:55
+#: playlist/playlist.cpp:1115 ui/organisedialog.cpp:55
 #: ../bin/src/ui_edittagdialog.h:658
 msgid "Album artist"
 msgstr "Καλλιτέχνης άλμπουμ"
@@ -631,7 +631,7 @@ msgstr "Και:"
 msgid "Appearance"
 msgstr "Εμφάνιση"
 
-#: core/commandlineoptions.cpp:163
+#: core/commandlineoptions.cpp:160
 msgid "Append files/URLs to the playlist"
 msgstr "Προσάρτηση αρχείων/URLs στην λίστα αναπαραγωγής"
 
@@ -653,7 +653,7 @@ msgstr "Εφαρμογή συμπίεσης για αποφυγή κολλημά
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "Είστε σίγουροι πως θέλετε να διαγράψετε τη ρύθμιση \"%1\";"
 
-#: internet/groovesharkservice.cpp:1080
+#: internet/groovesharkservice.cpp:1088
 msgid "Are you sure you want to delete this playlist?"
 msgstr "Είστε σίγουρος πως θέλετε να διαγράψετε αυτή την λίστα αναπαραγωγής;"
 
@@ -662,7 +662,7 @@ msgid "Are you sure you want to reset this song's statistics?"
 msgstr ""
 "Είστε σίγουροι πως θέλετε να επαναφέρετε τα στατιστικά του τραγουδιού;"
 
-#: playlist/playlist.cpp:1103 ui/organisedialog.cpp:53
+#: playlist/playlist.cpp:1108 ui/organisedialog.cpp:53
 #: ui/qtsystemtrayicon.cpp:250 ../bin/src/ui_groupbydialog.h:130
 #: ../bin/src/ui_groupbydialog.h:143 ../bin/src/ui_groupbydialog.h:156
 #: ../bin/src/ui_albumcoversearcher.h:106
@@ -730,7 +730,7 @@ msgstr "Μέσος ρυθμός bit"
 msgid "Average image size"
 msgstr "Μέσο μέγεθος εικόνας"
 
-#: playlist/playlist.cpp:1119 ui/organisedialog.cpp:59
+#: playlist/playlist.cpp:1124 ui/organisedialog.cpp:59
 #: ../bin/src/ui_edittagdialog.h:638
 msgid "BPM"
 msgstr "BPM"
@@ -776,7 +776,7 @@ msgstr "Βέλτιστος"
 msgid "Biography from %1"
 msgstr "Βιογραφία από %1"
 
-#: playlist/playlist.cpp:1120 ../bin/src/ui_edittagdialog.h:640
+#: playlist/playlist.cpp:1125 ../bin/src/ui_edittagdialog.h:640
 msgid "Bit rate"
 msgstr "Ρυθμός bit"
 
@@ -851,7 +851,7 @@ msgstr "Αλλαγή συντόμευσης..."
 msgid "Change shuffle mode"
 msgstr "Αλλάξτε μέθοδο ανάμιξης"
 
-#: core/commandlineoptions.cpp:170
+#: core/commandlineoptions.cpp:167
 msgid "Change the language"
 msgstr "Αλλαγή γλώσσας"
 
@@ -1007,11 +1007,11 @@ msgstr "Χρώμα"
 msgid "Combine identical results from different sources"
 msgstr "Συνδυασμός πανομοιότυπων αποτελεσμάτων από διαφορετικές πηγές"
 
-#: core/commandlineoptions.cpp:173
+#: core/commandlineoptions.cpp:170
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Λίστα χωρισμένη με κόμμα από class:level, το level είναι 0-3"
 
-#: playlist/playlist.cpp:1129 smartplaylists/searchterm.cpp:279
+#: playlist/playlist.cpp:1134 smartplaylists/searchterm.cpp:279
 #: ui/organisedialog.cpp:62 ../bin/src/ui_edittagdialog.h:661
 msgid "Comment"
 msgstr "Σχόλια"
@@ -1024,13 +1024,13 @@ msgstr "Συμπλήρωση των ετικετών αυτόματα"
 msgid "Complete tags automatically..."
 msgstr "Συμπλήρωση των ετικετών αυτόματα..."
 
-#: playlist/playlist.cpp:1111 ui/organisedialog.cpp:56
+#: playlist/playlist.cpp:1116 ui/organisedialog.cpp:56
 #: ../bin/src/ui_groupbydialog.h:132 ../bin/src/ui_groupbydialog.h:145
 #: ../bin/src/ui_groupbydialog.h:158 ../bin/src/ui_edittagdialog.h:659
 msgid "Composer"
 msgstr "Συνθέτης"
 
-#: internet/groovesharkservice.cpp:504
+#: internet/groovesharkservice.cpp:512
 msgid "Configure Grooveshark..."
 msgstr "Παραμετροποίηση του GrooveShark..."
 
@@ -1085,7 +1085,7 @@ msgstr "Μετατροπή όλης της μουσικής"
 msgid "Convert any music that the device can't play"
 msgstr "Μετατροπή κάθε μουσικής που η συσκευή δεν μπορεί να αναπαράγει"
 
-#: internet/groovesharkservice.cpp:962
+#: internet/groovesharkservice.cpp:970
 msgid "Copy to clipboard"
 msgstr "Αντιγραφή στο πρόχειρο"
 
@@ -1171,7 +1171,7 @@ msgstr "Το εξώφυλλο ορίστηκε από %1"
 msgid "Covers from %1"
 msgstr "Εξώφυλλα από %1"
 
-#: internet/groovesharkservice.cpp:488 internet/groovesharkservice.cpp:1031
+#: internet/groovesharkservice.cpp:493 internet/groovesharkservice.cpp:1039
 msgid "Create a new Grooveshark playlist"
 msgstr "Δημιουργία μίας νέας λίστας αναπαραγωγής "
 
@@ -1279,11 +1279,11 @@ msgstr "Διαδρομή του DBus"
 msgid "Dance"
 msgstr "Dance"
 
-#: playlist/playlist.cpp:1127 ../bin/src/ui_edittagdialog.h:649
+#: playlist/playlist.cpp:1132 ../bin/src/ui_edittagdialog.h:649
 msgid "Date created"
 msgstr "Ημερομηνία δημιουργίας"
 
-#: playlist/playlist.cpp:1126 ../bin/src/ui_edittagdialog.h:648
+#: playlist/playlist.cpp:1131 ../bin/src/ui_edittagdialog.h:648
 msgid "Date modified"
 msgstr "Ημερομηνία τροποποίησης"
 
@@ -1295,7 +1295,7 @@ msgstr "Ημέρες"
 msgid "De&fault"
 msgstr "Προ&επιλογή"
 
-#: core/commandlineoptions.cpp:159
+#: core/commandlineoptions.cpp:156
 msgid "Decrease the volume by 4%"
 msgstr "Μείωση της έντασης ήχου κατά 4%"
 
@@ -1311,7 +1311,7 @@ msgstr "Προκαθορισμένα"
 msgid "Delay between visualizations"
 msgstr "Καθυστέρηση μεταξύ οπτικών εφέ"
 
-#: internet/groovesharkservice.cpp:491 internet/groovesharkservice.cpp:1079
+#: internet/groovesharkservice.cpp:496 internet/groovesharkservice.cpp:1087
 msgid "Delete Grooveshark playlist"
 msgstr "Διαγραφή της λίστας αναπαραγωγής "
 
@@ -1418,7 +1418,7 @@ msgstr "Απενεργοποίηση διάρκειας"
 msgid "Disabled"
 msgstr "Απενεργοποιημένο"
 
-#: playlist/playlist.cpp:1107 ui/organisedialog.cpp:58
+#: playlist/playlist.cpp:1112 ui/organisedialog.cpp:58
 #: ../bin/src/ui_edittagdialog.h:655
 msgid "Disc"
 msgstr "Δίσκος"
@@ -1432,11 +1432,11 @@ msgstr "Διακεκομμένη μετάδοση"
 msgid "Display options"
 msgstr "Επιλογές απεικόνισης"
 
-#: core/commandlineoptions.cpp:169
+#: core/commandlineoptions.cpp:166
 msgid "Display the global search popup"
 msgstr "Εμφάνιση αναδυόμενου μηνύματος των κεντρικών αναζητήσεων"
 
-#: core/commandlineoptions.cpp:167
+#: core/commandlineoptions.cpp:164
 msgid "Display the on-screen-display"
 msgstr "Απεικόνιση της «απεικόνισης στην οθόνη»"
 
@@ -1637,11 +1637,11 @@ msgstr "Ολόκληρη η συλλογή"
 msgid "Equalizer"
 msgstr "Ισοσταθμιστής"
 
-#: core/commandlineoptions.cpp:171
+#: core/commandlineoptions.cpp:168
 msgid "Equivalent to --log-levels *:1"
 msgstr "Ισοδύναμο με --log-levels *:1"
 
-#: core/commandlineoptions.cpp:172
+#: core/commandlineoptions.cpp:169
 msgid "Equivalent to --log-levels *:3"
 msgstr "Ισοδύναμο με --log-levels *:3"
 
@@ -1750,7 +1750,7 @@ msgstr "Διάρκειας «Σβησίματος»"
 msgid "Fast"
 msgstr "Γρήγορη"
 
-#: internet/groovesharkservice.cpp:543
+#: internet/groovesharkservice.cpp:551
 msgid "Favorites"
 msgstr "Αγαπημένα"
 
@@ -1782,19 +1782,19 @@ msgstr "Επέκταση αρχείου"
 msgid "File formats"
 msgstr "Μορφή αρχείων"
 
-#: playlist/playlist.cpp:1122 ../bin/src/ui_edittagdialog.h:650
+#: playlist/playlist.cpp:1127 ../bin/src/ui_edittagdialog.h:650
 msgid "File name"
 msgstr "Όνομα αρχείου"
 
-#: playlist/playlist.cpp:1123
+#: playlist/playlist.cpp:1128
 msgid "File name (without path)"
 msgstr "Όνομα αρχείου (χωρίς διαδρομή)"
 
-#: playlist/playlist.cpp:1124 ../bin/src/ui_edittagdialog.h:644
+#: playlist/playlist.cpp:1129 ../bin/src/ui_edittagdialog.h:644
 msgid "File size"
 msgstr "Μέγεθος αρχείου"
 
-#: playlist/playlist.cpp:1125 ../bin/src/ui_groupbydialog.h:133
+#: playlist/playlist.cpp:1130 ../bin/src/ui_groupbydialog.h:133
 #: ../bin/src/ui_groupbydialog.h:146 ../bin/src/ui_groupbydialog.h:159
 #: ../bin/src/ui_edittagdialog.h:646
 msgid "File type"
@@ -1932,17 +1932,17 @@ msgstr "Γενικά"
 msgid "General settings"
 msgstr "Γενικές ρυθμίσεις"
 
-#: playlist/playlist.cpp:1109 ui/organisedialog.cpp:61
+#: playlist/playlist.cpp:1114 ui/organisedialog.cpp:61
 #: ../bin/src/ui_groupbydialog.h:134 ../bin/src/ui_groupbydialog.h:147
 #: ../bin/src/ui_groupbydialog.h:160 ../bin/src/ui_edittagdialog.h:660
 msgid "Genre"
 msgstr "Είδος"
 
-#: internet/groovesharkservice.cpp:926
+#: internet/groovesharkservice.cpp:934
 msgid "Get an URL to share this Grooveshark song"
 msgstr "Λήψη ενός URL για να μοιράστείτε αυτό το τραγούδι του Grooveshark"
 
-#: internet/groovesharkservice.cpp:705
+#: internet/groovesharkservice.cpp:713
 msgid "Getting Grooveshark popular songs"
 msgstr "Λήψη δημοφιλών τραγουδιών από το Grooveshark"
 
@@ -1988,11 +1988,11 @@ msgstr "Σκίαση στην λίστα τραγουδιών που δεν υπ
 msgid "Grooveshark"
 msgstr "Grooveshark"
 
-#: internet/groovesharkservice.cpp:413
+#: internet/groovesharkservice.cpp:416
 msgid "Grooveshark login error"
 msgstr "Σφάλμα εισόδου στο "
 
-#: internet/groovesharkservice.cpp:958
+#: internet/groovesharkservice.cpp:966
 msgid "Grooveshark song's URL"
 msgstr "URL του τραγουδιού στο "
 
@@ -2142,7 +2142,7 @@ msgstr ""
 "Συμπερίληψη της βοήθειας συντομευμένων του πληκτρολογίου στα βοηθητικά "
 "μηνύματα (tooltip)"
 
-#: core/commandlineoptions.cpp:158
+#: core/commandlineoptions.cpp:155
 msgid "Increase the volume by 4%"
 msgstr "Αύξηση της έντασης ήχου κατά 4%"
 
@@ -2150,7 +2150,7 @@ msgstr "Αύξηση της έντασης ήχου κατά 4%"
 msgid "Increase volume"
 msgstr "Αύξηση έντασης"
 
-#: wiimotedev/wiimotesettingspage.cpp:124 ../bin/src/ui_deviceproperties.h:373
+#: ../bin/src/ui_deviceproperties.h:373 wiimotedev/wiimotesettingspage.cpp:124
 msgid "Information"
 msgstr "Πληροφορία"
 
@@ -2198,7 +2198,7 @@ msgstr "Εσφαλμένη υπηρεσία"
 msgid "Invalid session key"
 msgstr "Εσφαλμένο κλειδί συνεδρίας"
 
-#: internet/groovesharkservice.cpp:406
+#: internet/groovesharkservice.cpp:409
 msgid "Invalid username and/or password"
 msgstr "Εσφαλμένο όνομα χρήστη και/ή συνθηματικό"
 
@@ -2235,9 +2235,9 @@ msgstr "Μετάβαση στο τρέχον κομμάτι που παίζει"
 msgid "Keep buttons for %1 second..."
 msgstr "Κράτημα των κουμπιών για %1 δευτερόλεπτα..."
 
+#: ../bin/src/ui_wiimoteshortcutgrabber.h:127
 #: wiimotedev/wiimoteshortcutgrabber.cpp:73
 #: wiimotedev/wiimoteshortcutgrabber.cpp:117
-#: ../bin/src/ui_wiimoteshortcutgrabber.h:127
 #, qt-format
 msgid "Keep buttons for %1 seconds..."
 msgstr "Κράτημα των κουμπιών για %1 δευτερόλεπτα..."
@@ -2274,7 +2274,7 @@ msgstr "Μεγάλο εξώφυλλο άλμπουμ"
 msgid "Large sidebar"
 msgstr "Μεγάλη πλευρική μπάρα"
 
-#: library/library.cpp:66 playlist/playlist.cpp:1116
+#: library/library.cpp:66 playlist/playlist.cpp:1121
 #: ../bin/src/ui_edittagdialog.h:641
 msgid "Last played"
 msgstr "Τελευταία εκτέλεση"
@@ -2353,7 +2353,7 @@ msgstr "Λιγότερο αγαπημένα κομμάτια"
 msgid "Leave blank for the default.  Examples: \"/dev/dsp\", \"front\", etc."
 msgstr "Κενό για τα προεπιλεγμένα.  Π.χ. \"/dev/dsp\", \"front\", κ.τ.λ."
 
-#: playlist/playlist.cpp:1105 ui/organisedialog.cpp:63
+#: playlist/playlist.cpp:1110 ui/organisedialog.cpp:63
 #: ui/qtsystemtrayicon.cpp:255 ../bin/src/ui_edittagdialog.h:636
 msgid "Length"
 msgstr "Διάρκεια"
@@ -2452,7 +2452,7 @@ msgstr "Φόρτωση πληροφοριών κομματιού"
 msgid "Loading..."
 msgstr "Φόρτωση..."
 
-#: core/commandlineoptions.cpp:164
+#: core/commandlineoptions.cpp:161
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "Φορτώνει αρχεία/URLs, αντικαθιστώντας την τρέχουσα λίστα αναπαραγωγής"
 
@@ -2635,8 +2635,8 @@ msgstr ""
 msgid "Music Library"
 msgstr "Μουσική βιβλιοθήκη"
 
-#: core/globalshortcuts.cpp:54 wiimotedev/wiimotesettingspage.cpp:105
-#: ../bin/src/ui_mainwindow.h:692
+#: core/globalshortcuts.cpp:54 ../bin/src/ui_mainwindow.h:692
+#: wiimotedev/wiimotesettingspage.cpp:105
 msgid "Mute"
 msgstr "Σίγαση"
 
@@ -2672,8 +2672,8 @@ msgstr "Οι Σταθμοί μου"
 msgid "My Recommendations"
 msgstr "Οι Προτάσεις μου"
 
-#: internet/groovesharkservice.cpp:1032 ui/equalizer.cpp:172
-#: ../bin/src/ui_deviceproperties.h:369
+#: internet/groovesharkservice.cpp:1040 internet/groovesharkservice.cpp:1132
+#: ui/equalizer.cpp:172 ../bin/src/ui_deviceproperties.h:369
 #: ../bin/src/ui_magnatunedownloaddialog.h:135
 #: ../bin/src/ui_wizardfinishpage.h:84
 #: ../bin/src/ui_globalshortcutssettingspage.h:174
@@ -2737,8 +2737,8 @@ msgstr "Νεότερα κομμάτια"
 msgid "Next"
 msgstr "Επόμενο"
 
-#: core/globalshortcuts.cpp:50 wiimotedev/wiimotesettingspage.cpp:99
-#: ../bin/src/ui_mainwindow.h:635
+#: core/globalshortcuts.cpp:50 ../bin/src/ui_mainwindow.h:635
+#: wiimotedev/wiimotesettingspage.cpp:99
 msgid "Next track"
 msgstr "Επόμενο κομμάτι"
 
@@ -2846,7 +2846,7 @@ msgid "Only show the first"
 msgstr "Εμφάνιση μόνο του πρώτου"
 
 #: internet/digitallyimportedservicebase.cpp:178
-#: internet/groovesharkservice.cpp:503 internet/icecastservice.cpp:299
+#: internet/groovesharkservice.cpp:511 internet/icecastservice.cpp:299
 #: internet/jamendoservice.cpp:415 internet/magnatuneservice.cpp:273
 #: internet/somafmservice.cpp:84
 #, qt-format
@@ -2908,7 +2908,7 @@ msgstr "Γίνετε οργάνωση αρχείων"
 msgid "Original tags"
 msgstr "Αρχικές ετικέτες"
 
-#: core/commandlineoptions.cpp:166
+#: core/commandlineoptions.cpp:163
 msgid "Other options"
 msgstr "Άλλες επιλογές"
 
@@ -2952,7 +2952,7 @@ msgstr "Προστασία Κωδικού"
 msgid "Pause"
 msgstr "Παύση"
 
-#: core/commandlineoptions.cpp:153
+#: core/commandlineoptions.cpp:150
 msgid "Pause playback"
 msgstr "Παύση αναπαραγωγής"
 
@@ -2966,8 +2966,8 @@ msgstr "Απλή πλευρική μπάρα"
 
 #: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:506 ui/mainwindow.cpp:841
 #: ui/mainwindow.cpp:860 ui/mainwindow.cpp:1262 ui/qtsystemtrayicon.cpp:166
-#: ui/qtsystemtrayicon.cpp:192 wiimotedev/wiimotesettingspage.cpp:101
-#: ../bin/src/ui_mainwindow.h:631
+#: ui/qtsystemtrayicon.cpp:192 ../bin/src/ui_mainwindow.h:631
+#: wiimotedev/wiimotesettingspage.cpp:101
 msgid "Play"
 msgstr "Αναπαραγωγή"
 
@@ -2979,7 +2979,7 @@ msgstr "Αναπαραγωγή καλλιτέχνη ή ετικέτας"
 msgid "Play artist radio..."
 msgstr "Αναπαραγωγή ραδιοφώνου καλλιτέχνη..."
 
-#: playlist/playlist.cpp:1114 ../bin/src/ui_edittagdialog.h:637
+#: playlist/playlist.cpp:1119 ../bin/src/ui_edittagdialog.h:637
 msgid "Play count"
 msgstr "Μετρητής εκτελέσεων"
 
@@ -2987,7 +2987,7 @@ msgstr "Μετρητής εκτελέσεων"
 msgid "Play custom radio..."
 msgstr "Αναπαραγωγή προσαρμοσμένου ραδιοφώνου..."
 
-#: core/commandlineoptions.cpp:152
+#: core/commandlineoptions.cpp:149
 msgid "Play if stopped, pause if playing"
 msgstr "Αναπαραγωγή αν είναι σταματημένο, αλλιώς παύση"
 
@@ -3000,7 +3000,7 @@ msgstr "Αναπαραγωγή εάν δεν παίζει κάτι άλλο"
 msgid "Play tag radio..."
 msgstr "Αναπαραγωγή ραδιοφώνου ετικετών..."
 
-#: core/commandlineoptions.cpp:165
+#: core/commandlineoptions.cpp:162
 msgid "Play the <n>th track in the playlist"
 msgstr "Αναπαραγωγή του <n>ου κομματιού της λίστας αναπαραγωγής"
 
@@ -3016,7 +3016,7 @@ msgstr "Αναπαραγωγή"
 msgid "Player name"
 msgstr "Όνομα Player"
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:147
 msgid "Player options"
 msgstr "Επιλογές αναπαραγωγής"
 
@@ -3029,7 +3029,7 @@ msgstr "Λίστα"
 msgid "Playlist finished"
 msgstr "Η λίστα τελείωσε"
 
-#: core/commandlineoptions.cpp:162
+#: core/commandlineoptions.cpp:159
 msgid "Playlist options"
 msgstr "Επιλογές λίστας αναπαραγωγής"
 
@@ -3041,9 +3041,9 @@ msgstr "Αναζήτηση στη λίστα αναπαραγωγής"
 msgid "Playlist type"
 msgstr "Τύπος λίστας αναπαραγωγής"
 
-#: internet/groovesharkservice.cpp:539
+#: internet/groovesharkservice.cpp:547
 msgid "Playlists"
-msgstr ""
+msgstr "Λίστες"
 
 #: ../bin/src/ui_spotifysettingspage.h:215
 msgid "Plugin status:"
@@ -3053,15 +3053,15 @@ msgstr "Κατάσταση πρόσθετου:"
 msgid "Pop"
 msgstr "Pop"
 
-#: internet/groovesharkservice.cpp:521
+#: internet/groovesharkservice.cpp:529
 msgid "Popular songs"
-msgstr ""
+msgstr "Δημοφιλή τραγούδια"
 
-#: internet/groovesharkservice.cpp:525
+#: internet/groovesharkservice.cpp:533
 msgid "Popular songs of the Month"
 msgstr "Δημοφιλή τραγούδια του μήνα"
 
-#: internet/groovesharkservice.cpp:532
+#: internet/groovesharkservice.cpp:540
 msgid "Popular songs today"
 msgstr "Δημοφιλή τραγούδια σήμερα"
 
@@ -3100,7 +3100,7 @@ msgstr "Προτιμώμενη ηχητική διαμόρφωση"
 
 #: ../bin/src/ui_spotifysettingspage.h:218
 msgid "Preferred bitrate"
-msgstr ""
+msgstr "Προτιμώμενος ρυθμός bit "
 
 #: ../bin/src/ui_deviceproperties.h:380
 msgid "Preferred format"
@@ -3141,12 +3141,12 @@ msgstr "Προεπισκόπηση"
 msgid "Previous"
 msgstr "Προηγούμενο"
 
-#: core/globalshortcuts.cpp:51 wiimotedev/wiimotesettingspage.cpp:100
-#: ../bin/src/ui_mainwindow.h:629
+#: core/globalshortcuts.cpp:51 ../bin/src/ui_mainwindow.h:629
+#: wiimotedev/wiimotesettingspage.cpp:100
 msgid "Previous track"
 msgstr "Προηγούμενο κομμάτι"
 
-#: core/commandlineoptions.cpp:174
+#: core/commandlineoptions.cpp:171
 msgid "Print out version information"
 msgstr "Εκτύπωση πληροφοριών έκδοσης"
 
@@ -3159,8 +3159,8 @@ msgstr "Προφίλ"
 msgid "Progress"
 msgstr "Πρόοδος"
 
-#: wiimotedev/wiimotesettingspage.cpp:227
 #: ../bin/src/ui_wiimoteshortcutgrabber.h:125
+#: wiimotedev/wiimotesettingspage.cpp:227
 msgid "Push Wiiremote button"
 msgstr "πιέστε ένα πλήκτρο Wiiremote"
 
@@ -3229,7 +3229,7 @@ msgstr "Βαθμολογία τρέχοντος τραγουδιού με 4 ασ
 msgid "Rate the current song 5 stars"
 msgstr "Βαθμολογία τρέχοντος τραγουδιού με 5 αστέρια"
 
-#: playlist/playlist.cpp:1113 ../bin/src/ui_edittagdialog.h:645
+#: playlist/playlist.cpp:1118 ../bin/src/ui_edittagdialog.h:645
 msgid "Rating"
 msgstr "Βαθμολόγηση"
 
@@ -3287,11 +3287,11 @@ msgstr "Αφαίρεση ενέργειας"
 msgid "Remove folder"
 msgstr "Αφαίρεση φακέλου"
 
-#: internet/groovesharkservice.cpp:498
+#: internet/groovesharkservice.cpp:506
 msgid "Remove from favorites"
 msgstr "Αφαίρεση από τα αγαπημένα"
 
-#: internet/groovesharkservice.cpp:495 ../bin/src/ui_mainwindow.h:674
+#: internet/groovesharkservice.cpp:503 ../bin/src/ui_mainwindow.h:674
 msgid "Remove from playlist"
 msgstr "Αφαίρεση από την λίστα"
 
@@ -3299,9 +3299,18 @@ msgstr "Αφαίρεση από την λίστα"
 msgid "Remove playlist"
 msgstr "Αφαίρεση λίστας αναπαραγωγής"
 
-#: internet/groovesharkservice.cpp:1166
+#: internet/groovesharkservice.cpp:1222
 msgid "Removing song from favorites"
 msgstr "Αφαίρεση τραγουδιού από τα αγαπημένα"
+
+#: internet/groovesharkservice.cpp:1131
+#, qt-format
+msgid "Rename \"%1\" playlist"
+msgstr "Μετονομασία της λίστας \"%1\""
+
+#: internet/groovesharkservice.cpp:499
+msgid "Rename Grooveshark playlist"
+msgstr "Μετονομασία της λίστας Grooveshark"
 
 #: playlist/playlisttabbar.cpp:131
 msgid "Rename playlist"
@@ -3377,11 +3386,11 @@ msgstr "Περιορισμός σε χαρακτήρες ASCII"
 msgid "Results"
 msgstr "Αποτελέσματα"
 
-#: internet/groovesharkservice.cpp:676
+#: internet/groovesharkservice.cpp:684
 msgid "Retrieving Grooveshark favorites songs"
 msgstr "Ανάκτηση αγαπημένων τραγουδιών από το Grooveshark"
 
-#: internet/groovesharkservice.cpp:585
+#: internet/groovesharkservice.cpp:593
 msgid "Retrieving Grooveshark playlists"
 msgstr "Ανάκτηση λιστών αναπαραγωγής από το Grooveshark"
 
@@ -3401,7 +3410,7 @@ msgstr "Ασφαλής αφαίρεση συσκευής"
 msgid "Safely remove the device after copying"
 msgstr "Ασφαλής αφαίρεση συσκευής μετά την αντιγραφή"
 
-#: playlist/playlist.cpp:1121 ../bin/src/ui_edittagdialog.h:642
+#: playlist/playlist.cpp:1126 ../bin/src/ui_edittagdialog.h:642
 msgid "Sample rate"
 msgstr "Ρυθμός δειγματοληψίας"
 
@@ -3445,7 +3454,7 @@ msgstr "Αποθήκευση κομματιών"
 msgid "Scalable sampling rate profile (SSR)"
 msgstr "Προφίλ κλιμακούμενου ρυθμού δειγματοληψίας (SSR)"
 
-#: playlist/playlist.cpp:1117 ../bin/src/ui_edittagdialog.h:643
+#: playlist/playlist.cpp:1122 ../bin/src/ui_edittagdialog.h:643
 msgid "Score"
 msgstr "Σκορ"
 
@@ -3459,11 +3468,11 @@ msgid "Search"
 msgstr "Αναζήτηση"
 
 #: internet/groovesharksearchplaylisttype.cpp:32
-#: internet/groovesharkservice.cpp:844
+#: internet/groovesharkservice.cpp:852
 msgid "Search Grooveshark"
 msgstr "Αναζήτηση στο GrooveShark"
 
-#: internet/groovesharkservice.cpp:501 internet/groovesharkservice.cpp:515
+#: internet/groovesharkservice.cpp:509 internet/groovesharkservice.cpp:523
 msgid "Search Grooveshark (opens a new tab)"
 msgstr "Αναζήτηση στο GrooveShark (ανοίγει νέα καρτέλα)"
 
@@ -3515,7 +3524,7 @@ msgstr "Επιλογές εύρεσης"
 msgid "Search terms"
 msgstr "Όροι αναζήτησης"
 
-#: internet/groovesharkservice.cpp:273
+#: internet/groovesharkservice.cpp:276
 msgid "Searching on Grooveshark"
 msgstr "Αναζήτηση στο Grooveshark"
 
@@ -3531,11 +3540,11 @@ msgstr "Αναζήτηση πίσω"
 msgid "Seek forward"
 msgstr "Αναζήτηση εμπρός"
 
-#: core/commandlineoptions.cpp:161
+#: core/commandlineoptions.cpp:158
 msgid "Seek the currently playing track by a relative amount"
 msgstr "Άλμα στο τρέχον κομμάτι κατά ένα σχετικό ποσό."
 
-#: core/commandlineoptions.cpp:160
+#: core/commandlineoptions.cpp:157
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Άλμα σε σε μια καθορισμένη θέση στο τρέχον κομμάτι."
 
@@ -3572,7 +3581,7 @@ msgstr "Υπηρεσία εκτός σύνδεσης"
 msgid "Set %1 to \"%2\"..."
 msgstr "Δώσε %1 στο \"%2\"..."
 
-#: core/commandlineoptions.cpp:157
+#: core/commandlineoptions.cpp:154
 msgid "Set the volume to <value> percent"
 msgstr "Ρύθμιση της έντασης ήχου στο <value> της εκατό"
 
@@ -3708,7 +3717,7 @@ msgstr "Ανακάτεμα"
 
 #: widgets/osd.cpp:297 ../bin/src/ui_playlistsequence.h:110
 msgid "Shuffle albums"
-msgstr ""
+msgstr "Ανακάτεμα άλμπουμ"
 
 #: widgets/osd.cpp:295 ../bin/src/ui_playlistsequence.h:109
 msgid "Shuffle all"
@@ -3720,7 +3729,7 @@ msgstr "Ανακάτεμα λίστας"
 
 #: widgets/osd.cpp:296 ../bin/src/ui_playlistsequence.h:108
 msgid "Shuffle tracks in this album"
-msgstr ""
+msgstr "Ανακάτεμα των κομματιών σε αυτό το άλμπουμ"
 
 #: ../bin/src/ui_remotesettingspage.h:202 ../bin/src/ui_loginstatewidget.h:173
 msgid "Sign out"
@@ -3738,15 +3747,15 @@ msgstr "Παρόμοιοι καλλιτέχνες"
 msgid "Ska"
 msgstr "Ska"
 
-#: core/commandlineoptions.cpp:155
+#: core/commandlineoptions.cpp:152
 msgid "Skip backwards in playlist"
 msgstr "Παράλειψη προς τα πίσω στη λίστα"
 
-#: playlist/playlist.cpp:1115 ../bin/src/ui_edittagdialog.h:639
+#: playlist/playlist.cpp:1120 ../bin/src/ui_edittagdialog.h:639
 msgid "Skip count"
 msgstr "Μετρητής παραλήψεων"
 
-#: core/commandlineoptions.cpp:156
+#: core/commandlineoptions.cpp:153
 msgid "Skip forwards in playlist"
 msgstr "Παράλειψη προς τα μπροστά στη λίστα"
 
@@ -3842,7 +3851,7 @@ msgstr "Κανονικό"
 msgid "Starred"
 msgstr "Με αστέρι"
 
-#: core/commandlineoptions.cpp:151
+#: core/commandlineoptions.cpp:148
 msgid "Start the playlist currently playing"
 msgstr "Εκκίνηση της λίστας αναπαραγωγής που παίζει τώρα"
 
@@ -3867,8 +3876,8 @@ msgstr "Εκκίνηση %1"
 msgid "Starting..."
 msgstr "Εκκίνηση..."
 
-#: core/globalshortcuts.cpp:48 wiimotedev/wiimotesettingspage.cpp:102
-#: ../bin/src/ui_mainwindow.h:633
+#: core/globalshortcuts.cpp:48 ../bin/src/ui_mainwindow.h:633
+#: wiimotedev/wiimotesettingspage.cpp:102
 msgid "Stop"
 msgstr "Σταμάτημα"
 
@@ -3880,7 +3889,7 @@ msgstr "Στοπ μετά"
 msgid "Stop after this track"
 msgstr "Σταμάτημα μετά από αυτό το κομμάτι"
 
-#: core/commandlineoptions.cpp:154
+#: core/commandlineoptions.cpp:151
 msgid "Stop playback"
 msgstr "Διακοπή αναπαραγωγής"
 
@@ -3900,9 +3909,9 @@ msgstr "Stream"
 msgid "Streaming membership"
 msgstr "Συνδρομή ροής"
 
-#: internet/groovesharkservice.cpp:552
+#: internet/groovesharkservice.cpp:560
 msgid "Subscribed playlists"
-msgstr ""
+msgstr "Λίστες συνδρομής"
 
 #: transcoder/transcoder.cpp:198
 #, qt-format
@@ -4140,7 +4149,7 @@ msgstr "Λήξη χρονικού ορίου"
 msgid "Timezone"
 msgstr "Ζώνη ώρας"
 
-#: playlist/playlist.cpp:1102 ui/organisedialog.cpp:51
+#: playlist/playlist.cpp:1107 ui/organisedialog.cpp:51
 #: ui/qtsystemtrayicon.cpp:248 ../bin/src/ui_about.h:142
 #: ../bin/src/ui_edittagdialog.h:652 ../bin/src/ui_trackselectiondialog.h:211
 msgid "Title"
@@ -4166,7 +4175,7 @@ msgstr "Εναλλαγή της κατάστασης της λίστας ανα�
 msgid "Toggle scrobbling"
 msgstr "Εναλλαγή του scrobbling"
 
-#: core/commandlineoptions.cpp:168
+#: core/commandlineoptions.cpp:165
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Εναλλαγή ορατότητας της όμορφης «απεικόνισης στην οθόνη»"
 
@@ -4178,7 +4187,7 @@ msgstr "Συνολικά bytes που μεταφέρθηκαν"
 msgid "Total network requests made"
 msgstr "Συνολικές αιτήσεις δικτύου που πραγματοποιήθηκαν"
 
-#: playlist/playlist.cpp:1106 ui/organisedialog.cpp:57
+#: playlist/playlist.cpp:1111 ui/organisedialog.cpp:57
 #: ../bin/src/ui_edittagdialog.h:653 ../bin/src/ui_trackselectiondialog.h:212
 msgid "Track"
 msgstr "Κομμάτι"
@@ -4220,7 +4229,7 @@ msgstr "Απενεργοποίηση"
 msgid "URI"
 msgstr "URI"
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:147
 msgid "URL(s)"
 msgstr "URL(s)"
 
@@ -4249,7 +4258,7 @@ msgstr "Άγνωστο σφάλμα"
 msgid "Unset cover"
 msgstr "Αφαίρεση εξώφυλλου"
 
-#: internet/groovesharkservice.cpp:986
+#: internet/groovesharkservice.cpp:994
 msgid "Update Grooveshark playlist"
 msgstr "Ενημέρωση λίστας αναπαραγωγής του Grooveshark"
 
@@ -4261,7 +4270,7 @@ msgstr "Ενημέρωση φακέλων βιβλιοθήκης που άλλα
 msgid "Update the library when Clementine starts"
 msgstr "Ενημέρωση της βιβλιοθήκης κατά την εκκίνηση του Clementine"
 
-#: library/librarywatcher.cpp:81
+#: library/librarywatcher.cpp:86
 #, qt-format
 msgid "Updating %1"
 msgstr "Ενημέρωση %1"
@@ -4271,11 +4280,11 @@ msgstr "Ενημέρωση %1"
 msgid "Updating %1%..."
 msgstr "Ενημέρωση %1%..."
 
-#: library/librarywatcher.cpp:79
+#: library/librarywatcher.cpp:84
 msgid "Updating library"
 msgstr "Ενημέρωση λίστας"
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:147
 msgid "Usage"
 msgstr "Χρήση"
 
@@ -4326,13 +4335,13 @@ msgstr "Χρήση ρυθμίσεων του διαμεσολαβητή του �
 
 #: ../bin/src/ui_spotifysettingspage.h:219
 msgid "Use volume normalisation"
-msgstr ""
+msgstr "Χρήση κανονικοποίησης ήχου"
 
 #: widgets/freespacebar.cpp:47
 msgid "Used"
 msgstr "Σε χρήση"
 
-#: internet/groovesharkservice.cpp:409
+#: internet/groovesharkservice.cpp:412
 #, qt-format
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr "Ο χρήστης %1 δεν διαθέτει έναν λογαριασμό στο GrooveShark Anywhere"
@@ -4495,7 +4504,7 @@ msgstr "Windows Media audio"
 msgid "Would you like to run a full rescan right now?"
 msgstr "Θέλετε να εκτελέσετε μία πλήρη επανασάρωση αμέσως τώρα;"
 
-#: playlist/playlist.cpp:1108 ui/organisedialog.cpp:60
+#: playlist/playlist.cpp:1113 ui/organisedialog.cpp:60
 #: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:148
 #: ../bin/src/ui_groupbydialog.h:161 ../bin/src/ui_edittagdialog.h:657
 msgid "Year"
@@ -4589,10 +4598,12 @@ msgid ""
 "You have been logged out of Spotify, please re-enter your password in the "
 "Settings dialog."
 msgstr ""
+"Έχετε εξέλθει από το Spotify, παρακαλώ εισάγετε πάλι τον κωδικό σας στις "
+"ρυθμίσεις."
 
 #: internet/spotifysettingspage.cpp:158
 msgid "You have been logged out of Spotify, please re-enter your password."
-msgstr ""
+msgstr "Έχετε εξέλθει από το Spotify, παρακαλώ εισάγετε πάλι τον κωδικό σας."
 
 #: songinfo/lastfmtrackinfoprovider.cpp:95
 msgid "You love this track"
@@ -4790,7 +4801,7 @@ msgstr "το παλαιότερο πρώτα"
 msgid "on"
 msgstr "σε"
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:147
 msgid "options"
 msgstr "επιλογές"
 

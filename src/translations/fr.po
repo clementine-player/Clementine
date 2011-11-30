@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2011-11-29 00:15+0000\n"
-"Last-Translator: arnaudbienner <arnaud.bienner@gmail.com>\n"
+"PO-Revision-Date: 2011-11-29 12:32+0000\n"
+"Last-Translator: clementinebuildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: French (http://www.transifex.net/projects/p/clementine/team/fr/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -28,7 +28,7 @@ msgstr ""
 #: ../bin/src/ui_transcoderoptionsvorbis.h:211
 #: ../bin/src/ui_transcoderoptionswma.h:80
 msgid " kbps"
-msgstr "Supprimer cette liste de lecture Grooveshark"
+msgstr " kbps"
 
 #: ../bin/src/ui_songinfosettingspage.h:186
 #: ../bin/src/ui_playbacksettingspage.h:265
@@ -38,15 +38,12 @@ msgstr " ms"
 
 #: ../bin/src/ui_songinfosettingspage.h:182
 msgid " pt"
-msgstr ""
-"Vous avez été déconnecté de Spotify ; merci de re-saisir votre mot de passe "
-"dans la fenêtre des préférences."
+msgstr " pt"
 
 #: ../bin/src/ui_notificationssettingspage.h:404
 #: ../bin/src/ui_visualisationselector.h:116
 msgid " seconds"
-msgstr ""
-"Vous avez été déconnecté de Spotify ; merci de re-saisir votre mot de passe."
+msgstr " secondes"
 
 #: ../bin/src/ui_querysortpage.h:143
 msgid " songs"
@@ -449,11 +446,11 @@ msgstr "Ajouter le tag année du morceau"
 msgid "Add stream..."
 msgstr "Ajouter un flux..."
 
-#: internet/groovesharkservice.cpp:909
+#: internet/groovesharkservice.cpp:917
 msgid "Add to Grooveshark favorites"
 msgstr "Ajouter aux favoris Grooveshark"
 
-#: internet/groovesharkservice.cpp:915
+#: internet/groovesharkservice.cpp:923
 msgid "Add to Grooveshark playlists"
 msgstr "Ajouter aux listes de lectures Grooveshark"
 
@@ -499,7 +496,7 @@ msgstr "Ajouté aujourd'hui"
 msgid "Added within three months"
 msgstr "Ajouté au cours des 3 derniers mois"
 
-#: internet/groovesharkservice.cpp:1108
+#: internet/groovesharkservice.cpp:1164
 msgid "Adding song to favorites"
 msgstr "Ajout du morceau aux favoris"
 
@@ -511,7 +508,7 @@ msgstr "Groupement avancé..."
 msgid "After copying..."
 msgstr "Après avoir copié..."
 
-#: playlist/playlist.cpp:1104 ui/organisedialog.cpp:52
+#: playlist/playlist.cpp:1109 ui/organisedialog.cpp:52
 #: ui/qtsystemtrayicon.cpp:252 ../bin/src/ui_groupbydialog.h:129
 #: ../bin/src/ui_groupbydialog.h:142 ../bin/src/ui_groupbydialog.h:155
 #: ../bin/src/ui_albumcoversearcher.h:110
@@ -524,7 +521,7 @@ msgstr "Album"
 msgid "Album (ideal loudness for all tracks)"
 msgstr "Album (volume idéal pour toutes les pistes)"
 
-#: playlist/playlist.cpp:1110 ui/organisedialog.cpp:55
+#: playlist/playlist.cpp:1115 ui/organisedialog.cpp:55
 #: ../bin/src/ui_edittagdialog.h:658
 msgid "Album artist"
 msgstr "Artiste de l'album"
@@ -644,7 +641,7 @@ msgstr "Et :"
 msgid "Appearance"
 msgstr "Apparence"
 
-#: core/commandlineoptions.cpp:163
+#: core/commandlineoptions.cpp:160
 msgid "Append files/URLs to the playlist"
 msgstr "Ajouter des fichiers/URLs à la liste de lecture"
 
@@ -666,7 +663,7 @@ msgstr "Appliquer une compression pour prévenir les coupures"
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "Êtes-vous sûr de vouloir supprimer la valeur prédéfinie « %1 »"
 
-#: internet/groovesharkservice.cpp:1080
+#: internet/groovesharkservice.cpp:1088
 msgid "Are you sure you want to delete this playlist?"
 msgstr "Êtes-vous sur de vouloir supprimer cette liste de lecture ?"
 
@@ -675,7 +672,7 @@ msgid "Are you sure you want to reset this song's statistics?"
 msgstr ""
 "Êtes vous sûr de vouloir réinitialiser les statistiques de ce morceau ?"
 
-#: playlist/playlist.cpp:1103 ui/organisedialog.cpp:53
+#: playlist/playlist.cpp:1108 ui/organisedialog.cpp:53
 #: ui/qtsystemtrayicon.cpp:250 ../bin/src/ui_groupbydialog.h:130
 #: ../bin/src/ui_groupbydialog.h:143 ../bin/src/ui_groupbydialog.h:156
 #: ../bin/src/ui_albumcoversearcher.h:106
@@ -744,7 +741,7 @@ msgstr "Débit moyen"
 msgid "Average image size"
 msgstr "Taille moyenne de l'image"
 
-#: playlist/playlist.cpp:1119 ui/organisedialog.cpp:59
+#: playlist/playlist.cpp:1124 ui/organisedialog.cpp:59
 #: ../bin/src/ui_edittagdialog.h:638
 msgid "BPM"
 msgstr "BPM"
@@ -790,7 +787,7 @@ msgstr "Meilleur"
 msgid "Biography from %1"
 msgstr "Biographie de %1"
 
-#: playlist/playlist.cpp:1120 ../bin/src/ui_edittagdialog.h:640
+#: playlist/playlist.cpp:1125 ../bin/src/ui_edittagdialog.h:640
 msgid "Bit rate"
 msgstr "Débit"
 
@@ -865,7 +862,7 @@ msgstr "Changer le raccourci..."
 msgid "Change shuffle mode"
 msgstr "Changer le mode aléatoire"
 
-#: core/commandlineoptions.cpp:170
+#: core/commandlineoptions.cpp:167
 msgid "Change the language"
 msgstr "Changer la langue"
 
@@ -1018,13 +1015,13 @@ msgstr "Couleur"
 msgid "Combine identical results from different sources"
 msgstr "Combiner les résultats identiques provenant de différentes sources"
 
-#: core/commandlineoptions.cpp:173
+#: core/commandlineoptions.cpp:170
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr ""
 "Liste séparée par une virgule des classes:niveau, le niveau étant entre 1 et"
 " 3"
 
-#: playlist/playlist.cpp:1129 smartplaylists/searchterm.cpp:279
+#: playlist/playlist.cpp:1134 smartplaylists/searchterm.cpp:279
 #: ui/organisedialog.cpp:62 ../bin/src/ui_edittagdialog.h:661
 msgid "Comment"
 msgstr "Commentaire"
@@ -1037,13 +1034,13 @@ msgstr "Compléter les tags automatiquement"
 msgid "Complete tags automatically..."
 msgstr "Compléter les tags automatiquement..."
 
-#: playlist/playlist.cpp:1111 ui/organisedialog.cpp:56
+#: playlist/playlist.cpp:1116 ui/organisedialog.cpp:56
 #: ../bin/src/ui_groupbydialog.h:132 ../bin/src/ui_groupbydialog.h:145
 #: ../bin/src/ui_groupbydialog.h:158 ../bin/src/ui_edittagdialog.h:659
 msgid "Composer"
 msgstr "Compositeur"
 
-#: internet/groovesharkservice.cpp:504
+#: internet/groovesharkservice.cpp:512
 msgid "Configure Grooveshark..."
 msgstr "Configurer Grooveshark..."
 
@@ -1096,7 +1093,7 @@ msgstr "Convertir toutes les musiques"
 msgid "Convert any music that the device can't play"
 msgstr "Convertir la musique que le périphérique ne peut pas lire"
 
-#: internet/groovesharkservice.cpp:962
+#: internet/groovesharkservice.cpp:970
 msgid "Copy to clipboard"
 msgstr "Copier dans le presse papier"
 
@@ -1182,7 +1179,7 @@ msgstr "Pochette définie depuis %1"
 msgid "Covers from %1"
 msgstr "Pochettes depuis %1"
 
-#: internet/groovesharkservice.cpp:488 internet/groovesharkservice.cpp:1031
+#: internet/groovesharkservice.cpp:493 internet/groovesharkservice.cpp:1039
 msgid "Create a new Grooveshark playlist"
 msgstr "Créer une nouvelle liste de lecture Grooveshark"
 
@@ -1290,11 +1287,11 @@ msgstr "Chemin DBus"
 msgid "Dance"
 msgstr "Danse"
 
-#: playlist/playlist.cpp:1127 ../bin/src/ui_edittagdialog.h:649
+#: playlist/playlist.cpp:1132 ../bin/src/ui_edittagdialog.h:649
 msgid "Date created"
 msgstr "Date de création"
 
-#: playlist/playlist.cpp:1126 ../bin/src/ui_edittagdialog.h:648
+#: playlist/playlist.cpp:1131 ../bin/src/ui_edittagdialog.h:648
 msgid "Date modified"
 msgstr "Date de modification"
 
@@ -1306,7 +1303,7 @@ msgstr "Jours"
 msgid "De&fault"
 msgstr "Dé&faut"
 
-#: core/commandlineoptions.cpp:159
+#: core/commandlineoptions.cpp:156
 msgid "Decrease the volume by 4%"
 msgstr "Baisser le volume de 4%"
 
@@ -1322,7 +1319,7 @@ msgstr "Par défaut"
 msgid "Delay between visualizations"
 msgstr "Délai entre les visualisations"
 
-#: internet/groovesharkservice.cpp:491 internet/groovesharkservice.cpp:1079
+#: internet/groovesharkservice.cpp:496 internet/groovesharkservice.cpp:1087
 msgid "Delete Grooveshark playlist"
 msgstr "Supprimer la liste de lecture Grooveshark"
 
@@ -1429,7 +1426,7 @@ msgstr "Désactiver la durée"
 msgid "Disabled"
 msgstr "Désactivées"
 
-#: playlist/playlist.cpp:1107 ui/organisedialog.cpp:58
+#: playlist/playlist.cpp:1112 ui/organisedialog.cpp:58
 #: ../bin/src/ui_edittagdialog.h:655
 msgid "Disc"
 msgstr "CD"
@@ -1443,11 +1440,11 @@ msgstr "Transmission discontinue"
 msgid "Display options"
 msgstr "Options d'affichage"
 
-#: core/commandlineoptions.cpp:169
+#: core/commandlineoptions.cpp:166
 msgid "Display the global search popup"
 msgstr "Afficher la popup de recherche globale"
 
-#: core/commandlineoptions.cpp:167
+#: core/commandlineoptions.cpp:164
 msgid "Display the on-screen-display"
 msgstr "Afficher le menu à l'écran"
 
@@ -1647,11 +1644,11 @@ msgstr "Collection complète"
 msgid "Equalizer"
 msgstr "Égaliseur"
 
-#: core/commandlineoptions.cpp:171
+#: core/commandlineoptions.cpp:168
 msgid "Equivalent to --log-levels *:1"
 msgstr "Equivalent à --log-levels *:1"
 
-#: core/commandlineoptions.cpp:172
+#: core/commandlineoptions.cpp:169
 msgid "Equivalent to --log-levels *:3"
 msgstr "Equivalent à --log-levels *:3"
 
@@ -1760,7 +1757,7 @@ msgstr "Durée du fondu"
 msgid "Fast"
 msgstr "Rapide"
 
-#: internet/groovesharkservice.cpp:543
+#: internet/groovesharkservice.cpp:551
 msgid "Favorites"
 msgstr "Favoris"
 
@@ -1792,19 +1789,19 @@ msgstr "Extension de fichier"
 msgid "File formats"
 msgstr "Formats de fichier"
 
-#: playlist/playlist.cpp:1122 ../bin/src/ui_edittagdialog.h:650
+#: playlist/playlist.cpp:1127 ../bin/src/ui_edittagdialog.h:650
 msgid "File name"
 msgstr "Fichier"
 
-#: playlist/playlist.cpp:1123
+#: playlist/playlist.cpp:1128
 msgid "File name (without path)"
 msgstr "Fichier (sans le chemin)"
 
-#: playlist/playlist.cpp:1124 ../bin/src/ui_edittagdialog.h:644
+#: playlist/playlist.cpp:1129 ../bin/src/ui_edittagdialog.h:644
 msgid "File size"
 msgstr "Taille du fichier"
 
-#: playlist/playlist.cpp:1125 ../bin/src/ui_groupbydialog.h:133
+#: playlist/playlist.cpp:1130 ../bin/src/ui_groupbydialog.h:133
 #: ../bin/src/ui_groupbydialog.h:146 ../bin/src/ui_groupbydialog.h:159
 #: ../bin/src/ui_edittagdialog.h:646
 msgid "File type"
@@ -1944,17 +1941,17 @@ msgstr "Général"
 msgid "General settings"
 msgstr "Configuration générale"
 
-#: playlist/playlist.cpp:1109 ui/organisedialog.cpp:61
+#: playlist/playlist.cpp:1114 ui/organisedialog.cpp:61
 #: ../bin/src/ui_groupbydialog.h:134 ../bin/src/ui_groupbydialog.h:147
 #: ../bin/src/ui_groupbydialog.h:160 ../bin/src/ui_edittagdialog.h:660
 msgid "Genre"
 msgstr "Genre"
 
-#: internet/groovesharkservice.cpp:926
+#: internet/groovesharkservice.cpp:934
 msgid "Get an URL to share this Grooveshark song"
 msgstr "Obtenir une URL pour partager ce morceau Grooveshark"
 
-#: internet/groovesharkservice.cpp:705
+#: internet/groovesharkservice.cpp:713
 msgid "Getting Grooveshark popular songs"
 msgstr "Récupération des morceaux populaires Grooveshark"
 
@@ -2000,11 +1997,11 @@ msgstr "Griser les morceaux qui n'existent plus dans mes listes de lecture"
 msgid "Grooveshark"
 msgstr "Grooveshark"
 
-#: internet/groovesharkservice.cpp:413
+#: internet/groovesharkservice.cpp:416
 msgid "Grooveshark login error"
 msgstr "Erreur de connexion à Grooveshark"
 
-#: internet/groovesharkservice.cpp:958
+#: internet/groovesharkservice.cpp:966
 msgid "Grooveshark song's URL"
 msgstr "URL du morceau Grooveshark "
 
@@ -2152,7 +2149,7 @@ msgstr "Inclure tous les morceaux"
 msgid "Include keyboard shortcut help in the tooltip"
 msgstr "Inclure l'aide des raccourcis clavier dans l'infobulle"
 
-#: core/commandlineoptions.cpp:158
+#: core/commandlineoptions.cpp:155
 msgid "Increase the volume by 4%"
 msgstr "Augmenter le volume de 4%"
 
@@ -2160,7 +2157,7 @@ msgstr "Augmenter le volume de 4%"
 msgid "Increase volume"
 msgstr "Augmenter le volume"
 
-#: wiimotedev/wiimotesettingspage.cpp:124 ../bin/src/ui_deviceproperties.h:373
+#: ../bin/src/ui_deviceproperties.h:373 wiimotedev/wiimotesettingspage.cpp:124
 msgid "Information"
 msgstr "Information"
 
@@ -2208,7 +2205,7 @@ msgstr "Service invalide"
 msgid "Invalid session key"
 msgstr "Clé de session invalide"
 
-#: internet/groovesharkservice.cpp:406
+#: internet/groovesharkservice.cpp:409
 msgid "Invalid username and/or password"
 msgstr "Nom d'utilisateur et / ou mot de passe invalide"
 
@@ -2245,9 +2242,9 @@ msgstr "Aller à la piste jouée actuellement"
 msgid "Keep buttons for %1 second..."
 msgstr "Pressez le bouton pendant %1 seconde..."
 
+#: ../bin/src/ui_wiimoteshortcutgrabber.h:127
 #: wiimotedev/wiimoteshortcutgrabber.cpp:73
 #: wiimotedev/wiimoteshortcutgrabber.cpp:117
-#: ../bin/src/ui_wiimoteshortcutgrabber.h:127
 #, qt-format
 msgid "Keep buttons for %1 seconds..."
 msgstr "Pressez le bouton pendant %1 secondes..."
@@ -2284,7 +2281,7 @@ msgstr "Grande pochette d'album"
 msgid "Large sidebar"
 msgstr "Barre latérale large"
 
-#: library/library.cpp:66 playlist/playlist.cpp:1116
+#: library/library.cpp:66 playlist/playlist.cpp:1121
 #: ../bin/src/ui_edittagdialog.h:641
 msgid "Last played"
 msgstr "Dernière écoute"
@@ -2367,7 +2364,7 @@ msgstr ""
 "Laisser vide pour les paramètres par défaut. Exemples : \"/dev/dsp\", "
 "\"front\", etc."
 
-#: playlist/playlist.cpp:1105 ui/organisedialog.cpp:63
+#: playlist/playlist.cpp:1110 ui/organisedialog.cpp:63
 #: ui/qtsystemtrayicon.cpp:255 ../bin/src/ui_edittagdialog.h:636
 msgid "Length"
 msgstr "Durée"
@@ -2466,7 +2463,7 @@ msgstr "Chargement des info des pistes"
 msgid "Loading..."
 msgstr "Chargement..."
 
-#: core/commandlineoptions.cpp:164
+#: core/commandlineoptions.cpp:161
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "Charger des fichiers/URLs, et remplacer la liste de lecture actuelle"
 
@@ -2649,8 +2646,8 @@ msgstr ""
 msgid "Music Library"
 msgstr "Bibliothèque musicale"
 
-#: core/globalshortcuts.cpp:54 wiimotedev/wiimotesettingspage.cpp:105
-#: ../bin/src/ui_mainwindow.h:692
+#: core/globalshortcuts.cpp:54 ../bin/src/ui_mainwindow.h:692
+#: wiimotedev/wiimotesettingspage.cpp:105
 msgid "Mute"
 msgstr "Sourdine"
 
@@ -2686,8 +2683,8 @@ msgstr "Ma station de radio"
 msgid "My Recommendations"
 msgstr "Mes suggestions"
 
-#: internet/groovesharkservice.cpp:1032 ui/equalizer.cpp:172
-#: ../bin/src/ui_deviceproperties.h:369
+#: internet/groovesharkservice.cpp:1040 internet/groovesharkservice.cpp:1132
+#: ui/equalizer.cpp:172 ../bin/src/ui_deviceproperties.h:369
 #: ../bin/src/ui_magnatunedownloaddialog.h:135
 #: ../bin/src/ui_wizardfinishpage.h:84
 #: ../bin/src/ui_globalshortcutssettingspage.h:174
@@ -2751,8 +2748,8 @@ msgstr "Nouvelles pistes"
 msgid "Next"
 msgstr "Suivant"
 
-#: core/globalshortcuts.cpp:50 wiimotedev/wiimotesettingspage.cpp:99
-#: ../bin/src/ui_mainwindow.h:635
+#: core/globalshortcuts.cpp:50 ../bin/src/ui_mainwindow.h:635
+#: wiimotedev/wiimotesettingspage.cpp:99
 msgid "Next track"
 msgstr "Piste suivante"
 
@@ -2860,7 +2857,7 @@ msgid "Only show the first"
 msgstr "Afficher seulement le premier"
 
 #: internet/digitallyimportedservicebase.cpp:178
-#: internet/groovesharkservice.cpp:503 internet/icecastservice.cpp:299
+#: internet/groovesharkservice.cpp:511 internet/icecastservice.cpp:299
 #: internet/jamendoservice.cpp:415 internet/magnatuneservice.cpp:273
 #: internet/somafmservice.cpp:84
 #, qt-format
@@ -2922,7 +2919,7 @@ msgstr "Organisation des fichiers"
 msgid "Original tags"
 msgstr "Tags originaux"
 
-#: core/commandlineoptions.cpp:166
+#: core/commandlineoptions.cpp:163
 msgid "Other options"
 msgstr "Autres options"
 
@@ -2966,7 +2963,7 @@ msgstr "Protégé par mot de passe"
 msgid "Pause"
 msgstr "Pause"
 
-#: core/commandlineoptions.cpp:153
+#: core/commandlineoptions.cpp:150
 msgid "Pause playback"
 msgstr "Mettre la lecture en pause"
 
@@ -2980,8 +2977,8 @@ msgstr "Barre latérale simple"
 
 #: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:506 ui/mainwindow.cpp:841
 #: ui/mainwindow.cpp:860 ui/mainwindow.cpp:1262 ui/qtsystemtrayicon.cpp:166
-#: ui/qtsystemtrayicon.cpp:192 wiimotedev/wiimotesettingspage.cpp:101
-#: ../bin/src/ui_mainwindow.h:631
+#: ui/qtsystemtrayicon.cpp:192 ../bin/src/ui_mainwindow.h:631
+#: wiimotedev/wiimotesettingspage.cpp:101
 msgid "Play"
 msgstr "Lecture"
 
@@ -2993,7 +2990,7 @@ msgstr "Écouter une radio par artiste ou par tag"
 msgid "Play artist radio..."
 msgstr "Écouter la radio d'un artiste..."
 
-#: playlist/playlist.cpp:1114 ../bin/src/ui_edittagdialog.h:637
+#: playlist/playlist.cpp:1119 ../bin/src/ui_edittagdialog.h:637
 msgid "Play count"
 msgstr "Compteur d'écoutes"
 
@@ -3001,7 +2998,7 @@ msgstr "Compteur d'écoutes"
 msgid "Play custom radio..."
 msgstr "Jouer une radio personnalisée..."
 
-#: core/commandlineoptions.cpp:152
+#: core/commandlineoptions.cpp:149
 msgid "Play if stopped, pause if playing"
 msgstr "Lire ou mettre en pause, selon l'état courant"
 
@@ -3014,7 +3011,7 @@ msgstr "Lire s'il n'y a rien d'autre en cours de lecture"
 msgid "Play tag radio..."
 msgstr "Écouter la radio à partir d'un tag..."
 
-#: core/commandlineoptions.cpp:165
+#: core/commandlineoptions.cpp:162
 msgid "Play the <n>th track in the playlist"
 msgstr "Jouer la <n>ème piste de la liste de lecture"
 
@@ -3030,7 +3027,7 @@ msgstr "Lecture sonore"
 msgid "Player name"
 msgstr "Nom du lecteur"
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:147
 msgid "Player options"
 msgstr "Options du lecteur"
 
@@ -3043,7 +3040,7 @@ msgstr "Liste de lecture"
 msgid "Playlist finished"
 msgstr "Liste de lecture terminée"
 
-#: core/commandlineoptions.cpp:162
+#: core/commandlineoptions.cpp:159
 msgid "Playlist options"
 msgstr "Options de la liste de lecture"
 
@@ -3055,7 +3052,7 @@ msgstr "Rechercher dans la liste de lecture"
 msgid "Playlist type"
 msgstr "Type de liste de lecture"
 
-#: internet/groovesharkservice.cpp:539
+#: internet/groovesharkservice.cpp:547
 msgid "Playlists"
 msgstr "Listes de lecture"
 
@@ -3067,15 +3064,15 @@ msgstr "État du module externe :"
 msgid "Pop"
 msgstr "Pop"
 
-#: internet/groovesharkservice.cpp:521
+#: internet/groovesharkservice.cpp:529
 msgid "Popular songs"
 msgstr "Morceaux populaires"
 
-#: internet/groovesharkservice.cpp:525
+#: internet/groovesharkservice.cpp:533
 msgid "Popular songs of the Month"
 msgstr "Morceaux populaires ce mois-ci"
 
-#: internet/groovesharkservice.cpp:532
+#: internet/groovesharkservice.cpp:540
 msgid "Popular songs today"
 msgstr "Morceaux populaires aujourd'hui"
 
@@ -3153,12 +3150,12 @@ msgstr "Aperçu"
 msgid "Previous"
 msgstr "Précédent"
 
-#: core/globalshortcuts.cpp:51 wiimotedev/wiimotesettingspage.cpp:100
-#: ../bin/src/ui_mainwindow.h:629
+#: core/globalshortcuts.cpp:51 ../bin/src/ui_mainwindow.h:629
+#: wiimotedev/wiimotesettingspage.cpp:100
 msgid "Previous track"
 msgstr "Piste précédente"
 
-#: core/commandlineoptions.cpp:174
+#: core/commandlineoptions.cpp:171
 msgid "Print out version information"
 msgstr "Afficher la version"
 
@@ -3171,8 +3168,8 @@ msgstr "Profil"
 msgid "Progress"
 msgstr "Progression"
 
-#: wiimotedev/wiimotesettingspage.cpp:227
 #: ../bin/src/ui_wiimoteshortcutgrabber.h:125
+#: wiimotedev/wiimotesettingspage.cpp:227
 msgid "Push Wiiremote button"
 msgstr "Appuyer sur le bouton Wiiremote"
 
@@ -3241,7 +3238,7 @@ msgstr "Noter ce morceau 4 étoiles"
 msgid "Rate the current song 5 stars"
 msgstr "Noter ce morceau 5 étoiles"
 
-#: playlist/playlist.cpp:1113 ../bin/src/ui_edittagdialog.h:645
+#: playlist/playlist.cpp:1118 ../bin/src/ui_edittagdialog.h:645
 msgid "Rating"
 msgstr "Note"
 
@@ -3299,11 +3296,11 @@ msgstr "Effacer l'action"
 msgid "Remove folder"
 msgstr "Supprimer un dossier"
 
-#: internet/groovesharkservice.cpp:498
+#: internet/groovesharkservice.cpp:506
 msgid "Remove from favorites"
 msgstr "Supprimer des favoris"
 
-#: internet/groovesharkservice.cpp:495 ../bin/src/ui_mainwindow.h:674
+#: internet/groovesharkservice.cpp:503 ../bin/src/ui_mainwindow.h:674
 msgid "Remove from playlist"
 msgstr "Supprimer de la liste de lecture"
 
@@ -3311,9 +3308,18 @@ msgstr "Supprimer de la liste de lecture"
 msgid "Remove playlist"
 msgstr "Supprimer la liste de lecture"
 
-#: internet/groovesharkservice.cpp:1166
+#: internet/groovesharkservice.cpp:1222
 msgid "Removing song from favorites"
 msgstr "Suppression du morceau des favoris"
+
+#: internet/groovesharkservice.cpp:1131
+#, qt-format
+msgid "Rename \"%1\" playlist"
+msgstr ""
+
+#: internet/groovesharkservice.cpp:499
+msgid "Rename Grooveshark playlist"
+msgstr ""
 
 #: playlist/playlisttabbar.cpp:131
 msgid "Rename playlist"
@@ -3389,11 +3395,11 @@ msgstr "Limiter aux caractères ASCII"
 msgid "Results"
 msgstr "Résultats"
 
-#: internet/groovesharkservice.cpp:676
+#: internet/groovesharkservice.cpp:684
 msgid "Retrieving Grooveshark favorites songs"
 msgstr "Récupération des morceaux Grooveshark favoris"
 
-#: internet/groovesharkservice.cpp:585
+#: internet/groovesharkservice.cpp:593
 msgid "Retrieving Grooveshark playlists"
 msgstr "Récupération des listes de lecture Grooveshark"
 
@@ -3413,7 +3419,7 @@ msgstr "Enlever le périphérique en toute sécurité"
 msgid "Safely remove the device after copying"
 msgstr "Enlever le périphérique en toute sécurité à la fin de la copie"
 
-#: playlist/playlist.cpp:1121 ../bin/src/ui_edittagdialog.h:642
+#: playlist/playlist.cpp:1126 ../bin/src/ui_edittagdialog.h:642
 msgid "Sample rate"
 msgstr "Échantillonnage"
 
@@ -3457,7 +3463,7 @@ msgstr "Sauvegarde des pistes"
 msgid "Scalable sampling rate profile (SSR)"
 msgstr "Profil du taux d'échantillonnage"
 
-#: playlist/playlist.cpp:1117 ../bin/src/ui_edittagdialog.h:643
+#: playlist/playlist.cpp:1122 ../bin/src/ui_edittagdialog.h:643
 msgid "Score"
 msgstr "Score"
 
@@ -3471,11 +3477,11 @@ msgid "Search"
 msgstr "Recherche"
 
 #: internet/groovesharksearchplaylisttype.cpp:32
-#: internet/groovesharkservice.cpp:844
+#: internet/groovesharkservice.cpp:852
 msgid "Search Grooveshark"
 msgstr "Chercher sur Grooveshark"
 
-#: internet/groovesharkservice.cpp:501 internet/groovesharkservice.cpp:515
+#: internet/groovesharkservice.cpp:509 internet/groovesharkservice.cpp:523
 msgid "Search Grooveshark (opens a new tab)"
 msgstr "Chercher sur Grooveshark (ouvre un nouvel onglet)"
 
@@ -3529,7 +3535,7 @@ msgstr "Options de recherche"
 msgid "Search terms"
 msgstr "Termes de recherche"
 
-#: internet/groovesharkservice.cpp:273
+#: internet/groovesharkservice.cpp:276
 msgid "Searching on Grooveshark"
 msgstr "Recherche sur Grooveshark"
 
@@ -3545,11 +3551,11 @@ msgstr "Reculer"
 msgid "Seek forward"
 msgstr "Avancer"
 
-#: core/commandlineoptions.cpp:161
+#: core/commandlineoptions.cpp:158
 msgid "Seek the currently playing track by a relative amount"
 msgstr "Déplacer la lecture de la piste courante par une quantité relative"
 
-#: core/commandlineoptions.cpp:160
+#: core/commandlineoptions.cpp:157
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Déplacer la lecture de la piste courante à une position absolue"
 
@@ -3586,7 +3592,7 @@ msgstr "Service hors-ligne"
 msgid "Set %1 to \"%2\"..."
 msgstr "Définir %1 à la valeur « %2 »..."
 
-#: core/commandlineoptions.cpp:157
+#: core/commandlineoptions.cpp:154
 msgid "Set the volume to <value> percent"
 msgstr "Définir le volume à <value> pourcents"
 
@@ -3750,15 +3756,15 @@ msgstr "Artistes similaires"
 msgid "Ska"
 msgstr "Ska"
 
-#: core/commandlineoptions.cpp:155
+#: core/commandlineoptions.cpp:152
 msgid "Skip backwards in playlist"
 msgstr "Lire la piste précédente"
 
-#: playlist/playlist.cpp:1115 ../bin/src/ui_edittagdialog.h:639
+#: playlist/playlist.cpp:1120 ../bin/src/ui_edittagdialog.h:639
 msgid "Skip count"
 msgstr "Compteur de morceaux sautés"
 
-#: core/commandlineoptions.cpp:156
+#: core/commandlineoptions.cpp:153
 msgid "Skip forwards in playlist"
 msgstr "Lire la piste suivante"
 
@@ -3854,7 +3860,7 @@ msgstr "Standard"
 msgid "Starred"
 msgstr "Favoris"
 
-#: core/commandlineoptions.cpp:151
+#: core/commandlineoptions.cpp:148
 msgid "Start the playlist currently playing"
 msgstr "Commencer la liste de lecture jouée actuellement"
 
@@ -3879,8 +3885,8 @@ msgstr "Lancement de %1"
 msgid "Starting..."
 msgstr "Démarrage..."
 
-#: core/globalshortcuts.cpp:48 wiimotedev/wiimotesettingspage.cpp:102
-#: ../bin/src/ui_mainwindow.h:633
+#: core/globalshortcuts.cpp:48 ../bin/src/ui_mainwindow.h:633
+#: wiimotedev/wiimotesettingspage.cpp:102
 msgid "Stop"
 msgstr "Stop"
 
@@ -3892,7 +3898,7 @@ msgstr "Arrêter après"
 msgid "Stop after this track"
 msgstr "Arrêter la lecture après cette piste"
 
-#: core/commandlineoptions.cpp:154
+#: core/commandlineoptions.cpp:151
 msgid "Stop playback"
 msgstr "Arrêter la lecture"
 
@@ -3912,7 +3918,7 @@ msgstr "Flux"
 msgid "Streaming membership"
 msgstr "Membres de streaming"
 
-#: internet/groovesharkservice.cpp:552
+#: internet/groovesharkservice.cpp:560
 msgid "Subscribed playlists"
 msgstr ""
 
@@ -4153,7 +4159,7 @@ msgstr "Délai d'expiration"
 msgid "Timezone"
 msgstr "Fuseau horaire"
 
-#: playlist/playlist.cpp:1102 ui/organisedialog.cpp:51
+#: playlist/playlist.cpp:1107 ui/organisedialog.cpp:51
 #: ui/qtsystemtrayicon.cpp:248 ../bin/src/ui_about.h:142
 #: ../bin/src/ui_edittagdialog.h:652 ../bin/src/ui_trackselectiondialog.h:211
 msgid "Title"
@@ -4179,7 +4185,7 @@ msgstr "Basculer l'état de la file d'attente"
 msgid "Toggle scrobbling"
 msgstr "Basculer le scrobbling"
 
-#: core/commandlineoptions.cpp:168
+#: core/commandlineoptions.cpp:165
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Passer l'OSD en mode joli"
 
@@ -4191,7 +4197,7 @@ msgstr "Nombre total d'octets transférés"
 msgid "Total network requests made"
 msgstr "Nombre total de requêtes réseau effectuées"
 
-#: playlist/playlist.cpp:1106 ui/organisedialog.cpp:57
+#: playlist/playlist.cpp:1111 ui/organisedialog.cpp:57
 #: ../bin/src/ui_edittagdialog.h:653 ../bin/src/ui_trackselectiondialog.h:212
 msgid "Track"
 msgstr "Piste"
@@ -4233,7 +4239,7 @@ msgstr "Éteindre"
 msgid "URI"
 msgstr "URI"
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:147
 msgid "URL(s)"
 msgstr "URL(s)"
 
@@ -4262,7 +4268,7 @@ msgstr "Erreur de type inconnu"
 msgid "Unset cover"
 msgstr "Enlever cette pochette"
 
-#: internet/groovesharkservice.cpp:986
+#: internet/groovesharkservice.cpp:994
 msgid "Update Grooveshark playlist"
 msgstr "Mise à jour de la liste de lecture Grooveshark"
 
@@ -4274,7 +4280,7 @@ msgstr "Mettre à jour les dossiers de la bibliothèque"
 msgid "Update the library when Clementine starts"
 msgstr "Mettre à jour la bibliothèque quand Clementine démarre"
 
-#: library/librarywatcher.cpp:81
+#: library/librarywatcher.cpp:86
 #, qt-format
 msgid "Updating %1"
 msgstr "Mise à jour %1"
@@ -4284,11 +4290,11 @@ msgstr "Mise à jour %1"
 msgid "Updating %1%..."
 msgstr "Mise à jour %1%..."
 
-#: library/librarywatcher.cpp:79
+#: library/librarywatcher.cpp:84
 msgid "Updating library"
 msgstr "Mise à jour de la bibliothèque"
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:147
 msgid "Usage"
 msgstr "Usage"
 
@@ -4344,7 +4350,7 @@ msgstr ""
 msgid "Used"
 msgstr "Utilisé"
 
-#: internet/groovesharkservice.cpp:409
+#: internet/groovesharkservice.cpp:412
 #, qt-format
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr "L'utilisateur %1 n'a pas de compte Grooveshark Anywhere"
@@ -4508,7 +4514,7 @@ msgid "Would you like to run a full rescan right now?"
 msgstr ""
 "Voulez-vous effectuer une analyse complète de la bibliothèque maintenant ?"
 
-#: playlist/playlist.cpp:1108 ui/organisedialog.cpp:60
+#: playlist/playlist.cpp:1113 ui/organisedialog.cpp:60
 #: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:148
 #: ../bin/src/ui_groupbydialog.h:161 ../bin/src/ui_edittagdialog.h:657
 msgid "Year"
@@ -4606,7 +4612,7 @@ msgid ""
 "Settings dialog."
 msgstr ""
 "Vous avez été déconnecté de Spotify ; merci de ressaisir votre mot de passe "
-"dans la fenêtres des préférences."
+"dans la fenêtre des préférences."
 
 #: internet/spotifysettingspage.cpp:158
 msgid "You have been logged out of Spotify, please re-enter your password."
@@ -4810,7 +4816,7 @@ msgstr "le plus ancien en premier"
 msgid "on"
 msgstr "sur"
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:147
 msgid "options"
 msgstr "options"
 
