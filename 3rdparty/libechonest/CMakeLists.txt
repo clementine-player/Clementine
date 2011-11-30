@@ -52,7 +52,7 @@ ELSE( APPLE OR MINGW )
 ENDIF( APPLE OR MINGW )
 
 
-add_library( echonest ${LIBECHONEST_SRC} )
+add_library( echonest STATIC ${LIBECHONEST_SRC} )
 target_link_libraries( echonest ${OS_SPECIFIC_LINK_LIBRARIES} ${QT_QTCORE_LIBRARY} ${QT_QTNETWORK_LIBRARY}  )
 
 foreach(file ${LIBECHONEST_H} echonest_export.h Util.h)
