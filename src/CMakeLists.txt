@@ -1086,7 +1086,7 @@ if (LINUX)
   # they end up getting ignored.  This appends them to the very end of the link
   # line, ensuring they're always used.
   find_package(X11)
-  target_link_libraries(clementine_lib ${X11_X11_LIB})
+  target_link_libraries(clementine_lib ${X11_X11_LIB} ${CMAKE_DL_LIBS})
 endif (LINUX)
 
 add_dependencies(clementine_lib qtsingleapplication)
