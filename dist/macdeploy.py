@@ -31,6 +31,7 @@ LIBRARY_SEARCH_PATH=['/target/lib', '/usr/local/lib', '/sw/lib']
 
 GSTREAMER_PLUGINS=[
     # Core plugins
+    'libgstapp.so',
     'libgstaudioconvert.so',
     'libgstaudiofx.so',
     'libgstaudiotestsrc.so',
