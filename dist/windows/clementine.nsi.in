@@ -125,6 +125,7 @@ Section "Clementine" Clementine
   File "libgnutls-26.dll"
   File "libgobject-2.0-0.dll"
   File "libgpg-error-0.dll"
+  File "libgstapp-0.10-0.dll"
   File "libgstaudio-0.10-0.dll"
   File "libgstbase-0.10-0.dll"
   File "libgstcdda-0.10-0.dll"
@@ -241,6 +242,7 @@ Section "Gstreamer plugins" gstreamer-plugins
   SetOutPath "$INSTDIR\gstreamer-plugins"
   
   File "/oname=libgstapetag.dll" "gstreamer-plugins\libgstapetag.dll"
+  File "/oname=libgstapp.dll" "gstreamer-plugins\libgstapp.dll"
   File "/oname=libgstasf.dll" "gstreamer-plugins\libgstasf.dll"
   File "/oname=libgstaudioconvert.dll" "gstreamer-plugins\libgstaudioconvert.dll"
   File "/oname=libgstaudiofx.dll" "gstreamer-plugins\libgstaudiofx.dll"
