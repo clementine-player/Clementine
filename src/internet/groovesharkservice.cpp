@@ -619,8 +619,15 @@ void GroovesharkService::UserPlaylistsRetrieved() {
     int playlist_id = playlist["PlaylistID"].toInt();
     QString playlist_name = playlist["PlaylistName"].toString();
 
+    QStandardItem* playlist_item =
+        CreatePlaylistItem(playlist_name, playlist_id);
+    // Insert this new item just below the favorites list
+    root_->insertRow(favorites_->row() + 1, playlist_item);
+    // Keep in mind this playlist
+    playlists_.insert(playlist_id,
+                      PlaylistInfo(playlist_id, playlist_name, playlist_item));
     // Request playlist's songs
-    RefreshPlaylist(playlist_id, playlist_name);
+    RefreshPlaylist(playlist_id);
   }
 
   if (playlists.isEmpty()) {
@@ -636,23 +643,12 @@ void GroovesharkService::PlaylistSongsRetrieved() {
   reply->deleteLater();
 
   // Find corresponding playlist info
-  PlaylistInfo playlist_info = pending_retrieve_playlists_.take(reply);
-  // Get the playlist item (in case of refresh) or create a new one
-  QStandardItem* item = NULL;
-  PlaylistType playlist_type = UserPlaylist;
-  if (playlists_.contains(playlist_info.id_)) {
-    item = playlists_[playlist_info.id_].item_;
-  } else if (subscribed_playlists_.contains(playlist_info.id_)) { 
-    item = subscribed_playlists_[playlist_info.id_].item_;
-    playlist_type = SubscribedPlaylist;
+  int playlist_id = pending_retrieve_playlists_.take(reply);
+  PlaylistInfo& playlist_info = playlists_[playlist_id];
+  if (subscribed_playlists_.contains(playlist_id)) { 
+    playlist_info = subscribed_playlists_[playlist_id];
   }
-  bool item_already_exists = false;
-  if (item) {
-    item_already_exists = true;
-    item->removeRows(0, item->rowCount());
-  } else {
-    item = CreatePlaylistItem(playlist_info.name_, playlist_info.id_);
-  }
+  playlist_info.item_->removeRows(0, playlist_info.item_->rowCount());
 
   QVariantMap result = ExtractResult(reply);
   SongList songs = ExtractSongs(result);
@@ -665,21 +661,11 @@ void GroovesharkService::PlaylistSongsRetrieved() {
     child->setData(playlist_info.id_, Role_UserPlaylistId);
     child->setData(true, InternetModel::Role_CanBeModified);
 
-    item->appendRow(child);
-  }
-  if (!item_already_exists) {
-    // Insert this new item just below the favorites list
-    root_->insertRow(favorites_->row() + 1, item);
+    playlist_info.item_->appendRow(child);
   }
 
   // Keep in mind this playlist
   playlist_info.songs_ids_ = ExtractSongsIds(result);
-  playlist_info.item_ = item;
-  if (playlist_type == SubscribedPlaylist) {
-    subscribed_playlists_.insert(playlist_info.id_, playlist_info);
-  } else {
-    playlists_.insert(playlist_info.id_, playlist_info);
-  }
 
   if (pending_retrieve_playlists_.isEmpty()) {
     model()->task_manager()->SetTaskFinished(task_playlists_id_);
@@ -805,7 +791,7 @@ void GroovesharkService::SubscribedPlaylistsRetrieved(QNetworkReply* reply) {
     root_->insertRow(subscribed_playlists_divider_->row() + 1, playlist_item);
 
     // Request playlist's songs
-    RefreshPlaylist(playlist_id, playlist_name);
+    RefreshPlaylist(playlist_id);
   }
 }
 
@@ -1089,6 +1075,10 @@ void GroovesharkService::AddCurrentSongToPlaylist(QAction* action) {
 }
 
 void GroovesharkService::SetPlaylistSongs(int playlist_id, const QList<int>& songs_ids) {
+  // If we are still retrieving playlists songs, don't update playlist: don't
+  // take the risk to erase all (not yet retrieved) playlist's songs.
+  if (!pending_retrieve_playlists_.isEmpty())
+    return;
   int task_id =
     model()->task_manager()->StartTask(tr("Update Grooveshark playlist"));
 
@@ -1120,17 +1110,17 @@ void GroovesharkService::PlaylistSongsSet(QNetworkReply* reply, int playlist_id,
     return;
   }
 
-  RefreshPlaylist(playlist_id, playlists_[playlist_id].name_);
+  RefreshPlaylist(playlist_id);
 }
 
-void GroovesharkService::RefreshPlaylist(int playlist_id, const QString& playlist_name) {
+void GroovesharkService::RefreshPlaylist(int playlist_id) {
   QList<Param> parameters;
   parameters << Param("playlistID", playlist_id);
   QNetworkReply* reply = CreateRequest("getPlaylistSongs", parameters); 
   connect(reply, SIGNAL(finished()), SLOT(PlaylistSongsRetrieved()));
 
   // Keep in mind correspondance between reply object and playlist
-  pending_retrieve_playlists_.insert(reply, PlaylistInfo(playlist_id, playlist_name));
+  pending_retrieve_playlists_.insert(reply, playlist_id);
 }
 
 void GroovesharkService::CreateNewPlaylist() {
@@ -1160,7 +1150,7 @@ void GroovesharkService::NewPlaylistCreated(QNetworkReply* reply, const QString&
 
   int playlist_id = result["playlistID"].toInt();
   QStandardItem* new_playlist_item = CreatePlaylistItem(name, playlist_id);
-  PlaylistInfo playlist_info(playlist_id, name);
+  PlaylistInfo playlist_info(playlist_id, name, new_playlist_item);
   playlist_info.item_ = new_playlist_item;
   // Insert the newly created playlist just above the subscribed playlists
   root_->insertRow(subscribed_playlists_divider_->row(), new_playlist_item);

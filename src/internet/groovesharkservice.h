@@ -88,7 +88,7 @@ class GroovesharkService : public InternetService {
   void SetPlaylistSongs(int playlist_id, const QList<int>& songs_ids);
   void RemoveFromPlaylist(int playlist_id, int song_id);
   // Refresh playlist_id playlist , or create it if it doesn't exist
-  void RefreshPlaylist(int playlist_id, const QString& playlist_name);
+  void RefreshPlaylist(int playlist_id);
   void DeletePlaylist(int playlist_id);
   void RenamePlaylist(int playlist_id);
   void AddUserFavoriteSong(int song_id);
@@ -129,7 +129,7 @@ class GroovesharkService : public InternetService {
 
   struct PlaylistInfo {
     PlaylistInfo() {}
-    PlaylistInfo(int id, QString name, QStandardItem* item = NULL)
+    PlaylistInfo(int id, QString name, QStandardItem* item)
       : id_(id), name_(name), item_(item) {}
 
     int id_;
@@ -221,7 +221,7 @@ class GroovesharkService : public InternetService {
   int next_pending_search_id_;
   QMap<QNetworkReply*, int> pending_searches_;
 
-  QMap<QNetworkReply*, PlaylistInfo> pending_retrieve_playlists_;
+  QMap<QNetworkReply*, int> pending_retrieve_playlists_;
 
   QMap<int, PlaylistInfo> playlists_;
   QMap<int, PlaylistInfo> subscribed_playlists_;
