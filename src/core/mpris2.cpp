@@ -152,9 +152,7 @@ bool Mpris2::HasTrackList() const {
 }
 
 QString Mpris2::Identity() const {
-  return QString("%1 %2").arg(
-      QCoreApplication::applicationName(),
-      QCoreApplication::applicationVersion());
+  return QCoreApplication::applicationName();
 }
 
 QString Mpris2::DesktopEntryAbsolutePath() const {
