@@ -383,7 +383,6 @@ set(HEADERS
   internet/digitallyimportedclient.h
   internet/digitallyimportedservicebase.h
   internet/digitallyimportedsettingspage.h
-  internet/groovesharkradio.h
   internet/groovesharkservice.h
   internet/groovesharksettingspage.h
   internet/groovesharkurlhandler.h
