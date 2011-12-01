@@ -136,8 +136,11 @@ void GlobalSearchSettingsPage::Save() {
 
     provider_order << provider->id();
 
-    s.setValue("enabled_" + provider->id(),
-        item->data(0, Qt::CheckStateRole).toInt() == Qt::Checked);
+    // Only save the enabled state for this provider if it's logged in.
+    if (item->flags() & Qt::ItemIsUserCheckable) {
+      s.setValue("enabled_" + provider->id(),
+          item->data(0, Qt::CheckStateRole).toInt() == Qt::Checked);
+    }
   }
 
   s.setValue("provider_order", provider_order);
