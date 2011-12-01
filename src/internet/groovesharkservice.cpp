@@ -1430,21 +1430,22 @@ SongList GroovesharkService::ExtractSongs(const QVariantMap& result) {
 
 Song GroovesharkService::ExtractSong(const QVariantMap& result_song) {
   Song song;
-  int song_id = result_song["SongID"].toInt();
-  QString song_name = result_song["SongName"].toString();
-  int artist_id = result_song["ArtistID"].toInt();
-  QString artist_name = result_song["ArtistName"].toString();
-  int album_id = result_song["AlbumID"].toInt();
-  QString album_name = result_song["AlbumName"].toString();
-  QString cover = result_song["CoverArtFilename"].toString();
-  song.Init(song_name, artist_name, album_name, 0);
-  song.set_art_automatic(QString(kUrlCover) + cover);
-  // Special kind of URL: because we need to request a stream key for each
-  // play, we generate a fake URL for now, and we will create a real streaming
-  // URL when user will actually play the song (through url handler)
-  // URL is grooveshark://artist_id/album_id/song_id
-  song.set_url(QString("grooveshark://%1/%2/%3").arg(artist_id).arg(album_id).arg(song_id));
-
+  if (!result_song.isEmpty()) {
+    int song_id = result_song["SongID"].toInt();
+    QString song_name = result_song["SongName"].toString();
+    int artist_id = result_song["ArtistID"].toInt();
+    QString artist_name = result_song["ArtistName"].toString();
+    int album_id = result_song["AlbumID"].toInt();
+    QString album_name = result_song["AlbumName"].toString();
+    QString cover = result_song["CoverArtFilename"].toString();
+    song.Init(song_name, artist_name, album_name, 0);
+    song.set_art_automatic(QString(kUrlCover) + cover);
+    // Special kind of URL: because we need to request a stream key for each
+    // play, we generate a fake URL for now, and we will create a real streaming
+    // URL when user will actually play the song (through url handler)
+    // URL is grooveshark://artist_id/album_id/song_id
+    song.set_url(QString("grooveshark://%1/%2/%3").arg(artist_id).arg(album_id).arg(song_id));
+  }
   return song;
 }
 

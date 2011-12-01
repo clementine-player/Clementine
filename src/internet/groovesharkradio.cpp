@@ -52,7 +52,7 @@ PlaylistItemList GroovesharkRadio::Generate() {
       song = service_->StartAutoplay(autoplay_state_);
     }
     // If the song url isn't valid, stop here
-    if (song.url().toString() == "grooveshark://0/0/0") {
+    if (!song.is_valid()) {
       return items;
     }
     PlaylistItemPtr playlist_item = PlaylistItemPtr(new InternetPlaylistItem(service_, song));
@@ -60,7 +60,7 @@ PlaylistItemList GroovesharkRadio::Generate() {
     first_time_ = false;
   }
   Song song = service_->GetAutoplaySong(autoplay_state_);
-  if (song.url().toString() == "grooveshark://0/0/0") {
+  if (!song.is_valid()) {
     return items;
   }
   PlaylistItemPtr playlist_item = PlaylistItemPtr(new InternetPlaylistItem(service_, song));
