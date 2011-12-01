@@ -32,6 +32,7 @@ NyanCatAnalyzer::NyanCatAnalyzer(QWidget* parent)
     cat_(":/nyancat.png"),
     timer_id_(startTimer(kFrameIntervalMs)),
     frame_(0),
+    current_buffer_(0),
     available_rainbow_width_(0),
     px_per_frame_(0),
     x_offset_(0),
@@ -65,7 +66,8 @@ void NyanCatAnalyzer::timerEvent(QTimerEvent* e) {
 void NyanCatAnalyzer::resizeEvent(QResizeEvent* e) {
   // Invalidate the buffer so it's recreated from scratch in the next paint
   // event.
-  buffer_ = QPixmap();
+  buffer_[0] = QPixmap();
+  buffer_[1] = QPixmap();
 
   available_rainbow_width_ = width() - kCatWidth + kRainbowOverlap;
   px_per_frame_ = float(available_rainbow_width_) / (kHistorySize-1) + 1;
@@ -118,22 +120,28 @@ void NyanCatAnalyzer::analyze(QPainter& p, const Analyzer::Scope& s, bool new_fr
     }
 
     // Do we have to draw the whole rainbow into the buffer?
-    if (buffer_.isNull()) {
-      buffer_ = QPixmap(QSize(width() + x_offset_, height()));
-      buffer_.fill(background_brush_.color());
+    if (buffer_[0].isNull()) {
+      for (int i=0 ; i<2 ; ++i) {
+        buffer_[i] = QPixmap(QSize(width() + x_offset_, height()));
+        buffer_[i].fill(background_brush_.color());
+      }
+      current_buffer_ = 0;
 
-      QPainter buffer_painter(&buffer_);
+      QPainter buffer_painter(&buffer_[0]);
       buffer_painter.setRenderHint(QPainter::Antialiasing);
       for (int band=kRainbowBands-1 ; band>=0 ; --band) {
         buffer_painter.setPen(colors_[band]);
         buffer_painter.drawPolyline(&polyline[band*kHistorySize], kHistorySize);
       }
     } else {
+      const int last_buffer = current_buffer_;
+      current_buffer_ = (current_buffer_ + 1) % 2;
+
       // We can just shuffle the buffer along a bit and draw the new frame's data.
-      QPainter buffer_painter(&buffer_);
+      QPainter buffer_painter(&buffer_[current_buffer_]);
       buffer_painter.setRenderHint(QPainter::Antialiasing);
 
-      buffer_painter.drawPixmap(0, 0, buffer_,
+      buffer_painter.drawPixmap(0, 0, buffer_[last_buffer],
                                 px_per_frame_, 0,
                                 x_offset_ + available_rainbow_width_ - px_per_frame_, 0);
       buffer_painter.fillRect(x_offset_ + available_rainbow_width_ - px_per_frame_, 0,
@@ -148,7 +156,7 @@ void NyanCatAnalyzer::analyze(QPainter& p, const Analyzer::Scope& s, bool new_fr
   }
 
   // Draw the buffer on to the widget
-  p.drawPixmap(0, 0, buffer_, x_offset_, 0, 0, 0);
+  p.drawPixmap(0, 0, buffer_[current_buffer_], x_offset_, 0, 0, 0);
 
   // Draw nyan cat (he's been waiting for this for 75 lines).
   // Nyan nyan nyan nyan.

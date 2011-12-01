@@ -70,7 +70,8 @@ private:
   float history_[kHistorySize * kRainbowBands];
 
   // A cache of the last frame's rainbow, so it can be used in the next frame.
-  QPixmap buffer_;
+  QPixmap buffer_[2];
+  int current_buffer_;
 
   // Geometry information that's updated on resize:
   // The width of the widget minus the space for the cat
