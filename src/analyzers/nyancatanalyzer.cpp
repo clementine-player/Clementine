@@ -43,7 +43,7 @@ NyanCatAnalyzer::NyanCatAnalyzer(QWidget* parent)
   for (int i=0 ; i<kRainbowBands ; ++i) {
     colors_[i] = QPen(QColor::fromHsv(i * 255 / kRainbowBands, 255, 255),
                       kCatHeight/kRainbowBands,
-                      Qt::SolidLine, Qt::FlatCap);
+                      Qt::SolidLine, Qt::FlatCap, Qt::RoundJoin);
 
     // pow constants computed so that
     // | band_scale(0) | ~= .5 and | band_scale(5) | ~= 32
@@ -132,6 +132,7 @@ void NyanCatAnalyzer::analyze(QPainter& p, const Analyzer::Scope& s, bool new_fr
       for (int band=kRainbowBands-1 ; band>=0 ; --band) {
         buffer_painter.setPen(colors_[band]);
         buffer_painter.drawPolyline(&polyline[band*kHistorySize], kHistorySize);
+        buffer_painter.drawPolyline(&polyline[band*kHistorySize], kHistorySize);
       }
     } else {
       const int last_buffer = current_buffer_;
@@ -150,7 +151,7 @@ void NyanCatAnalyzer::analyze(QPainter& p, const Analyzer::Scope& s, bool new_fr
 
       for (int band=kRainbowBands-1 ; band>=0 ; --band) {
         buffer_painter.setPen(colors_[band]);
-        buffer_painter.drawPolyline(&polyline[(band+1)*kHistorySize - 2], 2);
+        buffer_painter.drawPolyline(&polyline[(band+1)*kHistorySize - 3], 3);
       }
     }
   }
