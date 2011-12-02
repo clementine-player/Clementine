@@ -87,9 +87,11 @@ set(INCLUDE_GIT_REVISION OFF)
 #     Without git: $major.$minor.$patch[$prerelease]
 #
 #   Mac info.plist: CFBundleVersion
-#     Prerelease:   $major.$minor.$patch.0
-#     Without git:  $major.$minor.$patch.1
-#     With git:     $tagname.2.$commitcount
+#     Prerelease:   4096.$major.$minor.$patch.0
+#     Without git:  4096.$major.$minor.$patch.1
+#     With git:     4096.$tagname.2.$commitcount
+#   The 4096. prefix is because the previous versioning scheme used svn revision
+#   numbers, which got up to 3000+.
 
 
 set(majorminorpatch "${CLEMENTINE_VERSION_MAJOR}.${CLEMENTINE_VERSION_MINOR}.${CLEMENTINE_VERSION_PATCH}")
@@ -99,7 +101,7 @@ set(CLEMENTINE_VERSION_DEB     "${majorminorpatch}")
 set(CLEMENTINE_VERSION_RPM_V   "${majorminorpatch}")
 set(CLEMENTINE_VERSION_RPM_R   "1")
 set(CLEMENTINE_VERSION_SPARKLE "${majorminorpatch}")
-set(CLEMENTINE_VERSION_PLIST   "${majorminorpatch}")
+set(CLEMENTINE_VERSION_PLIST   "4096.${majorminorpatch}")
 
 if(${CLEMENTINE_VERSION_PATCH} EQUAL "0")
   set(CLEMENTINE_VERSION_DISPLAY "${CLEMENTINE_VERSION_MAJOR}.${CLEMENTINE_VERSION_MINOR}")
@@ -151,7 +153,7 @@ if(INCLUDE_GIT_REVISION AND HAS_GET_REVISION)
   set(CLEMENTINE_VERSION_RPM_V   "${GIT_TAGNAME}")
   set(CLEMENTINE_VERSION_RPM_R   "2.${GIT_COMMITCOUNT}.${GIT_SHA1}")
   set(CLEMENTINE_VERSION_SPARKLE "${GIT_REV}")
-  set(CLEMENTINE_VERSION_PLIST   "${GIT_TAGNAME}.2.${GIT_COMMITCOUNT}")
+  set(CLEMENTINE_VERSION_PLIST   "4096.${GIT_TAGNAME}.2.${GIT_COMMITCOUNT}")
 endif(INCLUDE_GIT_REVISION AND HAS_GET_REVISION)
 
 if(0)
