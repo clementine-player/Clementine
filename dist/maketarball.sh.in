@@ -1,8 +1,7 @@
 #!/bin/bash
 
 name=clementine
-version="@CLEMENTINE_VERSION_RPM@"
-deb_version="@CLEMENTINE_VERSION_DEB@"
+version="@CLEMENTINE_VERSION_DEB@"
 deb_dist="@DEB_DIST@"
 root=$(cd "${0%/*}/.." && echo $PWD/${0##*/})
 root=`dirname "$root"`
@@ -17,6 +16,6 @@ tar -czf $name-$version.tar.gz "$root" \
     --exclude "$root/debian" \
     --exclude "$root/dist/*.tar.gz"
 
-echo "Also creating ${name}_${deb_version}~${deb_dist}.orig.tar.gz..."
-cp "$name-$version.tar.gz" "${name}_${deb_version}~${deb_dist}.orig.tar.gz"
+echo "Also creating ${name}_${version}~${deb_dist}.orig.tar.gz..."
+cp "$name-$version.tar.gz" "${name}_${version}~${deb_dist}.orig.tar.gz"
 

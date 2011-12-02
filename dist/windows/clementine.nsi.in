@@ -48,7 +48,7 @@ SetCompressor /SOLID lzma
 !insertmacro MUI_LANGUAGE "English"
 
 Name "${PRODUCT_NAME}"
-OutFile "${PRODUCT_NAME}Setup-@CLEMENTINE_VERSION_RPM@.exe"
+OutFile "${PRODUCT_NAME}Setup-@CLEMENTINE_VERSION_SPARKLE@.exe"
 InstallDir "${PRODUCT_INSTALL_DIR}"
 ShowInstDetails show
 ShowUnInstDetails show
