@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2011-11-30 13:40+0000\n"
-"Last-Translator: clementinebuildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2011-12-03 03:05+0000\n"
+"Last-Translator: smarquespt <smarquespt@gmail.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: pt\n"
@@ -38,7 +38,7 @@ msgstr " segundos"
 
 #: ui_querysortpage.h:143
 msgid " songs"
-msgstr " músicas"
+msgstr " faixas"
 
 #: widgets/osd.cpp:209
 #, qt-format
@@ -68,22 +68,22 @@ msgstr "selecionada(s) %1 de"
 #: devices/deviceview.cpp:122
 #, qt-format
 msgid "%1 song"
-msgstr "%1 música"
+msgstr "%1 faixa"
 
 #: devices/deviceview.cpp:124
 #, qt-format
 msgid "%1 songs"
-msgstr "%1 músicas"
+msgstr "%1 faixas"
 
 #: smartplaylists/searchpreview.cpp:129
 #, qt-format
 msgid "%1 songs found"
-msgstr "%1 músicas encontradas"
+msgstr "%1 faixas encontradas"
 
 #: smartplaylists/searchpreview.cpp:126
 #, qt-format
 msgid "%1 songs found (showing %2)"
-msgstr "%1 músicas encontradas (a exibir %2)"
+msgstr "%1 faixas encontradas (a exibir %2)"
 
 #: playlist/playlistmanager.cpp:308
 #, qt-format
@@ -197,7 +197,7 @@ msgstr "&Ferramentas"
 
 #: ui/edittagdialog.cpp:45
 msgid "(different across multiple songs)"
-msgstr "(diferente em todas as músicas)"
+msgstr "(diferente em todas as faixas)"
 
 #: ui_globalsearchpopup.h:104 ui_globalsearchpopup.h:105
 #: ui_globalsearchpopup.h:106 ui_globalsearchpopup.h:107
@@ -258,13 +258,13 @@ msgid ""
 msgstr ""
 "Uma lista de reprodução inteligente é aquela que advém da sua coleção. "
 "Existem diversos tipos de listas inteligentes, que oferecem diferentes "
-"métodos de seleção de músicas."
+"métodos de seleção de faixas"
 
 #: smartplaylists/querywizardplugin.cpp:145
 msgid ""
 "A song will be included in the playlist if it matches these conditions."
 msgstr ""
-"A música será incluída na lista de reprodução se satisfizer estas condições."
+"A faixa será incluída na lista de reprodução se satisfizer estas condições"
 
 #: smartplaylists/searchterm.cpp:288
 msgid "A-Z"
@@ -641,7 +641,7 @@ msgstr "Tem a certeza de que pretende eliminar esta lista de reprodução?"
 
 #: ui/edittagdialog.cpp:717
 msgid "Are you sure you want to reset this song's statistics?"
-msgstr "Tem a certeza de que quer reiniciar as estatísticas desta música?"
+msgstr "Tem a certeza de que quer reiniciar as estatísticas desta faixa?"
 
 #: playlist/playlist.cpp:1108 ui/organisedialog.cpp:53
 #: ui/qtsystemtrayicon.cpp:250 ui_groupbydialog.h:130 ui_groupbydialog.h:143
@@ -859,15 +859,14 @@ msgstr "Escolher da lista"
 #: smartplaylists/querywizardplugin.cpp:147
 msgid "Choose how the playlist is sorted and how many songs it will contain."
 msgstr ""
-"Escolha o método de organização da lista e o número de músicas que irá "
-"conter"
+"Escolha o método de organização da lista e o número de faixas a incluir"
 
 #: ui_songinfosettingspage.h:188
 msgid ""
 "Choose the websites you want Clementine to use when searching for lyrics."
 msgstr ""
 "Escolha os sítios web que o Clementine vai utilizar para procurar as letras "
-"das músicas"
+"das faixas"
 
 #: ui/equalizer.cpp:109
 msgid "Classical"
@@ -904,8 +903,8 @@ msgid ""
 "Clementine can automatically convert the music you copy to this device into "
 "a format that it can play."
 msgstr ""
-"O Clementine pode converter automaticamente as músicas que copiou para o "
-"dispositivo num formato reconhecido pelo leitor."
+"O Clementine pode converter automaticamente, num formato reconhecido pelo "
+"leitor, as faixas que copiou para o dispositivo"
 
 #: ui_remotesettingspage.h:200 remote/remotesettingspage.cpp:152
 msgid ""
@@ -915,7 +914,7 @@ msgid ""
 msgstr ""
 "O Clementine pode ser comandado através do sistema Android. Para ativar esta"
 " opção, inicie sessão na mesma conta Google que tem configurada no seu "
-"telefone."
+"telefone"
 
 #: ui_notificationssettingspage.h:396
 msgid "Clementine can show a message when the track changes."
@@ -949,7 +948,7 @@ msgstr "O Clementine não conseguiu encontrar resultados para este ficheiro"
 
 #: library/libraryview.cpp:225
 msgid "Click here to add some music"
-msgstr "Clique aqui para adicionar músicas"
+msgstr "Clique aqui para adicionar faixas"
 
 #: ui_trackslider.h:72
 msgid "Click to toggle between remaining time and total time"
@@ -1052,11 +1051,11 @@ msgstr "Taxa de dados constante"
 
 #: ui_deviceproperties.h:379
 msgid "Convert all music"
-msgstr "Converter todas as músicas"
+msgstr "Converter todas as faixas"
 
 #: ui_deviceproperties.h:378
 msgid "Convert any music that the device can't play"
-msgstr "Converter quaisquer músicas não reconhecidas pelo dispositivo"
+msgstr "Converter quaisquer faixas não reconhecidas pelo dispositivo"
 
 #: internet/groovesharkservice.cpp:1069
 msgid "Copy to clipboard"
@@ -1416,7 +1415,7 @@ msgstr "Reanalisar coleção"
 
 #: ui_deviceproperties.h:377
 msgid "Do not convert any music"
-msgstr "Não converter quaisquer músicas"
+msgstr "Não converter quaisquer faixas"
 
 #: widgets/osd.cpp:307 ui_playlistsequence.h:103
 msgid "Don't repeat"
@@ -1440,7 +1439,7 @@ msgstr "Duplo clique para abrir"
 
 #: ui_behavioursettingspage.h:198
 msgid "Double clicking a song will..."
-msgstr "Ao clicar duas vezes numa música..."
+msgstr "Ao clicar duas vezes numa faixa..."
 
 #: internet/magnatunedownloaddialog.cpp:252
 msgid "Download directory"
@@ -1521,11 +1520,11 @@ msgstr "Editar as informações da faixa"
 
 #: library/libraryview.cpp:271 ui_mainwindow.h:650
 msgid "Edit track information..."
-msgstr "Editar as informações da faixa..."
+msgstr "Editar informações da faixa..."
 
 #: library/libraryview.cpp:273
 msgid "Edit tracks information..."
-msgstr "Editar as informações das faixas..."
+msgstr "Editar informações das faixas..."
 
 #: internet/savedradio.cpp:101
 msgid "Edit..."
@@ -1584,7 +1583,7 @@ msgstr "Indique o nome para esta lista de reprodução"
 #: ui_lastfmstationdialog.h:93
 msgid ""
 "Enter an <b>artist</b> or <b>tag</b> to start listening to Last.fm radio."
-msgstr "Indique um <b>artista</b> ou <b>\"tag\"</b> para ouvir a rádio last.fm."
+msgstr "Indique um <b>artista</b> ou <b>\"tag\"</b> para ouvir a rádio last.fm"
 
 #: ui_libraryfilterwidget.h:131 ui_albumcovermanager.h:153
 msgid "Enter search terms here"
@@ -1623,11 +1622,11 @@ msgstr "Erro ao ligar ao dispositivo MTP"
 
 #: ui/organiseerrordialog.cpp:55
 msgid "Error copying songs"
-msgstr "Erro ao copiar músicas"
+msgstr "Erro ao copiar faixas"
 
 #: ui/organiseerrordialog.cpp:60
 msgid "Error deleting songs"
-msgstr "Erro ao eliminar músicas"
+msgstr "Erro ao eliminar faixas"
 
 #: internet/spotifyblobdownloader.cpp:214
 msgid "Error downloading Spotify plugin"
@@ -1789,7 +1788,7 @@ msgstr "Tipo de sistema de ficheiros"
 
 #: smartplaylists/querywizardplugin.cpp:87
 msgid "Find songs in your library that match the criteria you specify."
-msgstr "Descobrir músicas da coleção que coincidem com os critérios indicados"
+msgstr "Descobrir faixas da coleção que coincidem com os critérios indicados"
 
 #: musicbrainz/tagfetcher.cpp:54
 msgid "Fingerprinting song"
@@ -1832,7 +1831,7 @@ msgid ""
 "to rescan all the songs again next time you connect it."
 msgstr ""
 "Se optar por ignorar um dispositivo, este será removido da lista e na "
-"próxima vez que o ligar, o Clementine terá que procurar novamente as músicas"
+"próxima vez que o ligar, o Clementine terá que procurar as faixas novamente"
 
 #: ui_globalsearchwidget.h:59 ui_icecastfilterwidget.h:74
 #: ui_internetviewcontainer.h:70 ui_libraryfilterwidget.h:114
@@ -1937,7 +1936,7 @@ msgstr "Foram obtidas %1 de %2 capa(s) (não foram obtidas %3)"
 
 #: ui_behavioursettingspage.h:190
 msgid "Grey out non existent songs in my playlists"
-msgstr "Nas listas de reprodução, escurecer as músicas inexistentes"
+msgstr "Nas listas de reprodução, escurecer as faixas inexistentes"
 
 #: ui_groovesharksettingspage.h:112
 msgid "Grooveshark"
@@ -1949,7 +1948,7 @@ msgstr "Erro de autenticação no Grooveshark"
 
 #: internet/groovesharkservice.cpp:548
 msgid "Grooveshark radio"
-msgstr ""
+msgstr "Rádio Grooveshark"
 
 #: internet/groovesharkservice.cpp:1065
 msgid "Grooveshark song's URL"
@@ -2042,14 +2041,14 @@ msgstr "Ícones no topo"
 
 #: musicbrainz/tagfetcher.cpp:85
 msgid "Identifying song"
-msgstr "A identificar música"
+msgstr "A identificar faixa"
 
 #: devices/devicemanager.cpp:569 devices/devicemanager.cpp:577
 msgid ""
 "If you continue, this device will work slowly and songs copied to it may not"
 " work."
 msgstr ""
-"Se continuar, o dispositivo irá funcionar lentamente e as músicas copiadas "
+"Se continuar, o dispositivo irá funcionar lentamente e as faixas copiadas "
 "poderão não funcionar"
 
 #: ui_remotesettingspage.h:209
@@ -2079,7 +2078,7 @@ msgid ""
 "time a song finishes."
 msgstr ""
 "No modo dinâmico, as faixas são escolhidas e adicionadas à lista de "
-"reprodução assim que uma música termine."
+"reprodução assim que uma música termine"
 
 #: internet/spotifyservice.cpp:347
 msgid "Inbox"
@@ -2091,7 +2090,7 @@ msgstr "Incluir capa do álbum na notificação"
 
 #: ui_querysearchpage.h:76
 msgid "Include all songs"
-msgstr "Incluir todas as músicas"
+msgstr "Incluir todas as faixas"
 
 #: ui_globalsearchsettingspage.h:177
 msgid "Include keyboard shortcut help in the tooltip"
@@ -2336,7 +2335,7 @@ msgstr "Restrições"
 #: internet/groovesharkservice.cpp:549
 msgid ""
 "Listen to Grooveshark songs based on what you've listened to previously"
-msgstr ""
+msgstr "Ouvir músicas Grooveshark com base nas que reproduziu anteriormente"
 
 #: ui/equalizer.cpp:117
 msgid "Live"
@@ -2392,7 +2391,7 @@ msgstr "A carregar lista de reprodução inteligente"
 
 #: library/librarymodel.cpp:135
 msgid "Loading songs"
-msgstr "A carregar músicas"
+msgstr "A carregar faixas"
 
 #: internet/digitallyimportedurlhandler.cpp:51
 #: internet/somafmurlhandler.cpp:45
@@ -2589,7 +2588,7 @@ msgstr "Música (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma *.mp4 *.spx *.wav)"
 
 #: ui_librarysettingspage.h:157
 msgid "Music Library"
-msgstr "Coleção de músicas"
+msgstr "Coleção de faixas"
 
 #: core/globalshortcuts.cpp:54 wiimotedev/wiimotesettingspage.cpp:105
 #: ui_mainwindow.h:692
@@ -2677,7 +2676,7 @@ msgstr "Nova lista de reprodução inteligente..."
 
 #: widgets/freespacebar.cpp:46
 msgid "New songs"
-msgstr "Novas músicas"
+msgstr "Novas faixas"
 
 #: ui_dynamicplaylistcontrols.h:110
 msgid "New tracks will be added automatically."
@@ -2709,7 +2708,7 @@ msgid ""
 "No matches found.  Clear the search box to show the whole playlist again."
 msgstr ""
 "Sem ocorrências. Limpe a caixa de procura para mostrar toda a lista de "
-"reprodução."
+"reprodução"
 
 #: ui_transcoderoptionsaac.h:145
 msgid "No short blocks"
@@ -2722,7 +2721,7 @@ msgstr "Nenhum"
 #: library/libraryview.cpp:455 ui/mainwindow.cpp:1803 ui/mainwindow.cpp:1908
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr ""
-"Nenhuma das músicas selecionadas eram adequadas à cópia para o dispositivo"
+"Nenhuma das faixas selecionadas eram adequadas à cópia para o dispositivo"
 
 #: ui_transcoderoptionsaac.h:144
 msgid "Normal block type"
@@ -2807,7 +2806,7 @@ msgstr "Abrir %1 no navegador"
 
 #: ui_mainwindow.h:667
 msgid "Open &audio CD..."
-msgstr "&Abrir cd áudio"
+msgstr "&Abrir CD áudio"
 
 #: ui_deviceproperties.h:382
 msgid "Open device"
@@ -3108,7 +3107,7 @@ msgstr "Carregue no botão do Wiiremote"
 
 #: ui_querysortpage.h:138
 msgid "Put songs in a random order"
-msgstr "Colocar músicas aleatoriamente"
+msgstr "Colocar faixas aleatoriamente"
 
 #: visualisations/visualisationcontainer.cpp:107 ui_transcoderoptionsflac.h:81
 #: ui_transcoderoptionsmp3.h:192 ui_transcoderoptionsspeex.h:217
@@ -3139,7 +3138,7 @@ msgstr "Rádio (volume igual para todas as faixas)"
 
 #: internet/groovesharkservice.cpp:539
 msgid "Radios"
-msgstr ""
+msgstr "Rádios"
 
 #: core/backgroundstreams.cpp:31 ui_mainwindow.h:669
 msgid "Rain"
@@ -3151,27 +3150,27 @@ msgstr "Visualização aleatória"
 
 #: core/globalshortcuts.cpp:65
 msgid "Rate the current song 0 stars"
-msgstr "Atribuir 0 estrelas à música atual"
+msgstr "Atribuir 0 estrelas à faixa atual"
 
 #: core/globalshortcuts.cpp:66
 msgid "Rate the current song 1 star"
-msgstr "Atribuir 1 estrela à música atual"
+msgstr "Atribuir 1 estrela à faixa atual"
 
 #: core/globalshortcuts.cpp:67
 msgid "Rate the current song 2 stars"
-msgstr "Atribuir 2 estrelas à música atual"
+msgstr "Atribuir 2 estrelas à faixa atual"
 
 #: core/globalshortcuts.cpp:68
 msgid "Rate the current song 3 stars"
-msgstr "Atribuir 3 estrelas à música atual"
+msgstr "Atribuir 3 estrelas à faixa atual"
 
 #: core/globalshortcuts.cpp:69
 msgid "Rate the current song 4 stars"
-msgstr "Atribuir 4 estrelas à música atual"
+msgstr "Atribuir 4 estrelas à faixa atual"
 
 #: core/globalshortcuts.cpp:70
 msgid "Rate the current song 5 stars"
-msgstr "Atribuir 5 estrelas à música atual"
+msgstr "Atribuir 5 estrelas à faixa atual"
 
 #: playlist/playlist.cpp:1118 ui_edittagdialog.h:645
 msgid "Rating"
@@ -3596,11 +3595,11 @@ msgstr "Mostrar acima da barra de estado"
 
 #: ui/mainwindow.cpp:479
 msgid "Show all songs"
-msgstr "Mostrar todas as músicas"
+msgstr "Mostrar todas as faixas"
 
 #: ui_querysortpage.h:141
 msgid "Show all the songs"
-msgstr "Mostrar todas as músicas"
+msgstr "Mostrar todas as faixas"
 
 #: ui_librarysettingspage.h:171
 msgid "Show cover art in library"
@@ -3724,11 +3723,11 @@ msgstr "Rock suave"
 
 #: ui_songinfosettingspage.h:179
 msgid "Song Information"
-msgstr "Informações da música"
+msgstr "Informações da faixa"
 
 #: ui/mainwindow.cpp:256
 msgid "Song info"
-msgstr "Info da música"
+msgstr "Info da faixa"
 
 #: analyzers/sonogram.cpp:18
 msgid "Sonogram"
@@ -3752,7 +3751,7 @@ msgstr "Organizar pelo nome da estação"
 
 #: ui_querysortpage.h:139
 msgid "Sort songs by"
-msgstr "Organizar músicas por"
+msgstr "Organizar faixas por"
 
 #: ui_querysortpage.h:137
 msgid "Sorting"
@@ -3802,7 +3801,7 @@ msgstr "Iniciar conversão"
 #: internet/spotifysearchplaylisttype.cpp:36
 #, qt-format
 msgid "Start typing in the search box above to find music on %1."
-msgstr "Escreva algo na caixa de procura para descobrir músicas no %1"
+msgstr "Escreva algo na caixa de procura para descobrir faixas no %1"
 
 #: transcoder/transcoder.cpp:399
 #, qt-format
@@ -3815,7 +3814,7 @@ msgstr "A iniciar..."
 
 #: internet/groovesharkservice.cpp:543
 msgid "Stations"
-msgstr ""
+msgstr "Estações"
 
 #: core/globalshortcuts.cpp:48 wiimotedev/wiimotesettingspage.cpp:102
 #: ui_mainwindow.h:633
@@ -3972,7 +3971,7 @@ msgid ""
 "There were problems copying some songs.  The following files could not be "
 "copied:"
 msgstr ""
-"Ocorreram alguns problemas as copiar as músicas. Os seguintes ficheiros não "
+"Ocorreram alguns problemas as copiar as faixas. Os seguintes ficheiros não "
 "foram copiados:"
 
 #: ui/organiseerrordialog.cpp:61
@@ -3980,8 +3979,8 @@ msgid ""
 "There were problems deleting some songs.  The following files could not be "
 "deleted:"
 msgstr ""
-"Ocorreram alguns problemas ao eliminar as músicas. Os seguintes ficheiros "
-"não foram eliminados:"
+"Ocorreram alguns problemas ao eliminar as faixas. Os seguintes ficheiros não"
+" foram eliminados:"
 
 #: library/libraryview.cpp:461 ui/mainwindow.cpp:1835 widgets/fileview.cpp:186
 msgid ""
@@ -4007,7 +4006,7 @@ msgid ""
 "These settings are used in the \"Transcode Music\" dialog, and when "
 "converting music before copying it to a device."
 msgstr ""
-"Estas definições são utilizadas na \"Conversão de música\", no momento "
+"Estas definições são utilizadas na \"Conversão de faixas\", no momento "
 "anterior à cópia para o dispositivo"
 
 #: ui_groupbydialog.h:151
@@ -4060,8 +4059,8 @@ msgid ""
 "This is the first time you have connected this device.  Clementine will now "
 "scan the device to find music files - this may take some time."
 msgstr ""
-"Está a ligar este dispositivo pela 1ª vez. O Clementine vai pesquisar a "
-"existência de músicas no dispositivo. Pode levar algum tempo."
+"Está a ligar este dispositivo pela 1.ª vez. O Clementine vai procurar a "
+"existência de faixas no dispositivo. Pode levar algum tempo"
 
 #: playlist/playlisttabbar.cpp:159
 msgid ""
@@ -4099,6 +4098,7 @@ msgid ""
 "To start Grooveshark radio, you should first listen to few other Grooveshark"
 " songs"
 msgstr ""
+"Para reproduzir uma rádio Grooveshark, deve reproduzir algumas músicas"
 
 #: core/utilities.cpp:107
 msgid "Today"
@@ -4139,7 +4139,7 @@ msgstr "Faixa"
 
 #: ui_transcodedialog.h:201 ui_mainwindow.h:676
 msgid "Transcode Music"
-msgstr "Conversão de música"
+msgstr "Conversão de faixas"
 
 #: ui_transcodelogdialog.h:63
 msgid "Transcoder Log"
@@ -4301,7 +4301,7 @@ msgstr "Utilizador"
 
 #: ui_behavioursettingspage.h:191
 msgid "Using the menu to add a song will..."
-msgstr "Ao utilizar o menu para adicionar uma música..."
+msgstr "Ao utilizar o menu para adicionar uma faixa..."
 
 #: ui_magnatunedownloaddialog.h:142 ui_magnatunesettingspage.h:173
 msgid "VBR MP3"
@@ -4380,7 +4380,7 @@ msgid ""
 "If there are no matches then it will use the largest image in the directory."
 msgstr ""
 "Ao procurar pelas capas dos álbuns, o Clementine irá procurar as imagens que contenham uma destas palavras.\n"
-"Se não existirem ocorrências, o Clementine utilizará a maior imagem do diretório."
+"Se não existirem ocorrências, o Clementine utilizará a maior imagem do diretório"
 
 #: devices/ilister.cpp:99
 msgid "WiFi MAC Address"
@@ -4501,7 +4501,7 @@ msgstr ""
 #: ui_backgroundstreamssettingspage.h:57
 msgid "You can listen to background streams at the same time as other music."
 msgstr ""
-"Pode ouvir as emissões em segundo plano, em simultâneo com outras músicas"
+"Pode ouvir as emissões em segundo plano, em simultâneo com outras faixas"
 
 #: internet/lastfmsettingspage.cpp:140
 msgid ""
