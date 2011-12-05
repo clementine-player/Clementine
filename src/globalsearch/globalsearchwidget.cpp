@@ -134,7 +134,7 @@ GlobalSearchWidget::GlobalSearchWidget(QWidget* parent)
   next_suggestion_timer_->setInterval(kSuggestionTimeoutMsec);
   hint_text_ = ui_->search->hint();
 
-  connect(ui_->search, SIGNAL(textEdited(QString)), SLOT(TextEdited(QString)));
+  connect(ui_->search, SIGNAL(textChanged(QString)), SLOT(TextEdited(QString)));
   connect(view_, SIGNAL(doubleClicked(QModelIndex)), SLOT(ResultDoubleClicked()));
   connect(view_->selectionModel(), SIGNAL(currentChanged(QModelIndex,QModelIndex)),
           SLOT(UpdateTooltip()));
