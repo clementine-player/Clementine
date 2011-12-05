@@ -225,12 +225,6 @@ void GlobalSearchWidget::TextEdited(const QString& text) {
   const QString trimmed_text = text.trimmed();
   closed_since_search_began_ = false;
 
-  if (trimmed_text.length() < 3) {
-    RepositionPopup();
-    last_id_ = -1;
-    return;
-  }
-
   // Add results to the back model, switch models after some delay.
   back_model_->clear();
   combine_cache_[back_model_]->Clear();
@@ -241,6 +235,11 @@ void GlobalSearchWidget::TextEdited(const QString& text) {
 
   // Cancel the last search (if any) and start the new one.
   engine_->CancelSearch(last_id_);
+  // If text query is empty, don't start a new search
+  if (trimmed_text.isEmpty()) {
+    last_id_ = -1;
+    return;
+  }
   last_id_ = engine_->SearchAsync(trimmed_text);
 }
 
