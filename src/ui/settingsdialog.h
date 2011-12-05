@@ -75,6 +75,7 @@ public:
     Page_Transcoding,
     Page_Remote,
     Page_Wiimotedev,
+    Page_Subsonic,
   };
 
   enum Role {

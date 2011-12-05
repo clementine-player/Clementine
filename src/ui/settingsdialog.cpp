@@ -35,6 +35,7 @@
 #include "internet/digitallyimportedsettingspage.h"
 #include "internet/groovesharksettingspage.h"
 #include "internet/magnatunesettingspage.h"
+#include "internet/subsonicsettingspage.h"
 #include "library/librarysettingspage.h"
 #include "playlist/playlistview.h"
 #include "songinfo/songinfosettingspage.h"
@@ -149,6 +150,7 @@ SettingsDialog::SettingsDialog(BackgroundStreams* streams, QWidget* parent)
   AddPage(Page_Magnatune, new MagnatuneSettingsPage(this), providers);
   AddPage(Page_DigitallyImported, new DigitallyImportedSettingsPage(this), providers);
   AddPage(Page_BackgroundStreams, new BackgroundStreamsSettingsPage(this), providers);
+  AddPage(Page_Subsonic, new SubsonicSettingsPage(this), providers);
 
   // List box
   connect(ui_->list, SIGNAL(currentItemChanged(QTreeWidgetItem*,QTreeWidgetItem*)),

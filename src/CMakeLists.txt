@@ -169,6 +169,8 @@ set(SOURCES
   internet/savedradio.cpp
   internet/somafmservice.cpp
   internet/somafmurlhandler.cpp
+  internet/subsonicservice.cpp
+  internet/subsonicsettingspage.cpp
 
   library/groupbydialog.cpp
   library/library.cpp
@@ -411,6 +413,8 @@ set(HEADERS
   internet/savedradio.h
   internet/somafmservice.h
   internet/somafmurlhandler.h
+  internet/subsonicservice.h
+  internet/subsonicsettingspage.h
 
   library/groupbydialog.h
   library/library.h
@@ -559,6 +563,7 @@ set(UI
   internet/magnatunedownloaddialog.ui
   internet/magnatunesettingspage.ui
   internet/spotifysettingspage.ui
+  internet/subsonicsettingspage.ui
 
   library/groupbydialog.ui
   library/libraryfilterwidget.ui
