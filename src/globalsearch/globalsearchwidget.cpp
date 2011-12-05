@@ -367,6 +367,10 @@ bool GlobalSearchWidget::EventFilterSearchWidget(QObject* o, QEvent* e) {
       return true;
     break;
 
+  case QEvent::FocusIn:
+    RepositionPopup();
+    break;
+
   case QEvent::KeyPress: {
     QKeyEvent* ke = static_cast<QKeyEvent*>(e);
     const int key = ke->key();
