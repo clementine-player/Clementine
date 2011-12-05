@@ -381,6 +381,10 @@ bool GlobalSearchWidget::EventFilterSearchWidget(QObject* o, QEvent* e) {
       RepositionPopup();
       return true;
 
+    case Qt::Key_Escape:
+      ui_->search->LineEditInterface::clear();
+      return true;
+
     default:
       break;
     }
