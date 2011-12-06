@@ -367,9 +367,13 @@ bool GlobalSearchWidget::EventFilterSearchWidget(QObject* o, QEvent* e) {
       return true;
     break;
 
-  case QEvent::FocusIn:
-    RepositionPopup();
+  case QEvent::FocusIn: {
+    QFocusEvent* fe = static_cast<QFocusEvent*>(e);
+    if (fe->reason() == Qt::MouseFocusReason) {
+      RepositionPopup();
+    }
     break;
+  }
 
   case QEvent::KeyPress: {
     QKeyEvent* ke = static_cast<QKeyEvent*>(e);
