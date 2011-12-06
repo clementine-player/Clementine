@@ -47,7 +47,6 @@ private:
   void UpdateLoginState();
 
 private:
-  NetworkAccessManager* network_;
   Ui_SpotifySettingsPage* ui_;
   SpotifyService* service_;
 

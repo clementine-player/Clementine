@@ -31,7 +31,6 @@
 
 GroovesharkSettingsPage::GroovesharkSettingsPage(SettingsDialog* dialog)
   : SettingsPage(dialog),
-    network_(new NetworkAccessManager(this)),
     ui_(new Ui_GroovesharkSettingsPage),
     service_(InternetModel::Service<GroovesharkService>()),
     validated_(false)

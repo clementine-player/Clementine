@@ -32,7 +32,6 @@
 
 SpotifySettingsPage::SpotifySettingsPage(SettingsDialog* dialog)
   : SettingsPage(dialog),
-    network_(new NetworkAccessManager(this)),
     ui_(new Ui_SpotifySettingsPage),
     service_(InternetModel::Service<SpotifyService>()),
     validated_(false)

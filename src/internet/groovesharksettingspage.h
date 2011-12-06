@@ -43,7 +43,6 @@ private:
   void UpdateLoginState();
 
 private:
-  NetworkAccessManager* network_;
   Ui_GroovesharkSettingsPage* ui_;
   GroovesharkService* service_;
 
