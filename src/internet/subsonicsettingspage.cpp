@@ -10,7 +10,7 @@ SubsonicSettingsPage::SubsonicSettingsPage(SettingsDialog *dialog)
 {
   ui_->setupUi(this);
 
-  setWindowIcon(QIcon(":/providers/subsonic.png"));
+  setWindowIcon(QIcon(":/providers/subsonic-32.png"));
 }
 
 SubsonicSettingsPage::~SubsonicSettingsPage()
