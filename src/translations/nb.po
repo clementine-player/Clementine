@@ -3,13 +3,14 @@
 # This file is distributed under the same license as the Clementine package.
 # 
 # Translators:
+# Arno Teigseth <arnotixe@gmail.com>, 2011.
 #   <arnotixe@gmail.com>, 2011.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2011-12-06 04:09+0000\n"
+"PO-Revision-Date: 2011-12-07 03:59+0000\n"
 "Last-Translator: arnotixe <arnotixe@gmail.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -616,7 +617,7 @@ msgstr "Det oppstod en feil når metadata skulle skrives til '%1'"
 #: internet/lastfmservice.cpp:902
 #, qt-format
 msgid "An unknown last.fm error occurred: %1"
-msgstr "En ukjent last.fm feil oppsto: %1"
+msgstr "En ukjent feil med Last.fm oppstod: %1"
 
 #: ui/about.cpp:77
 msgid "And:"
@@ -1027,7 +1028,7 @@ msgstr "Innstillinger for Grooveshark..."
 
 #: internet/lastfmservice.cpp:111
 msgid "Configure Last.fm..."
-msgstr "Sett opp last.fm..."
+msgstr "Sett opp Last.fm..."
 
 #: internet/magnatuneservice.cpp:275
 msgid "Configure Magnatune..."
@@ -1121,7 +1122,7 @@ msgstr ""
 
 #: internet/lastfmservice.cpp:899
 msgid "Couldn't load the last.fm radio station"
-msgstr "Kunne ikke laste inn last.fm radio stasjon"
+msgstr "Kunne ikke laste inn Last.fm-radiostasjon"
 
 #: internet/magnatunedownloaddialog.cpp:203
 #, qt-format
@@ -1601,7 +1602,7 @@ msgstr "Gi denne spillelista et nytt navn"
 msgid ""
 "Enter an <b>artist</b> or <b>tag</b> to start listening to Last.fm radio."
 msgstr ""
-"Skriv en <b>artist</b> eller <b>merkelapp</b> for å lytte til Last.fm radio."
+"Skriv en <b>artist</b> eller <b>merkelapp</b> for å lytte til Last.fm-radio."
 
 #: ../bin/src/ui_libraryfilterwidget.h:131
 #: ../bin/src/ui_albumcovermanager.h:153
@@ -2267,7 +2268,7 @@ msgstr "Last.fm"
 #: internet/lastfmservice.cpp:70
 #, qt-format
 msgid "Last.fm Custom Radio: %1"
-msgstr "Egendefinert radio på last.fm: %1"
+msgstr "Egendefinert radio på Last.fm: %1"
 
 #: internet/lastfmservice.cpp:238 internet/lastfmservice.cpp:693
 #: internet/lastfmservice.cpp:728
@@ -2295,7 +2296,7 @@ msgstr "Last.fm-radio: %1"
 #: internet/lastfmservice.cpp:68
 #, qt-format
 msgid "Last.fm Similar Artists to %1"
-msgstr "Artister liknende %1 fra last.fm"
+msgstr "Artister liknende %1 fra Last.fm"
 
 #: internet/lastfmservice.cpp:69
 #, qt-format
@@ -2308,19 +2309,19 @@ msgstr "Last.fm er opptatt, vennligst prøv igjen om et par minutter"
 
 #: ../bin/src/ui_lastfmsettingspage.h:148
 msgid "Last.fm password"
-msgstr "Last.fm passord"
+msgstr "Last.fm-passord"
 
 #: songinfo/lastfmtrackinfoprovider.cpp:86
 msgid "Last.fm play counts"
-msgstr "Antall avspillinger fra last.fm"
+msgstr "Antall avspillinger fra Last.fm"
 
 #: songinfo/lastfmtrackinfoprovider.cpp:139
 msgid "Last.fm tags"
-msgstr "Tagger fra last.fm"
+msgstr "Tagger fra Last.fm"
 
 #: ../bin/src/ui_lastfmsettingspage.h:146
 msgid "Last.fm username"
-msgstr "Last.fm brukernavn"
+msgstr "Last.fm-brukernavn"
 
 #: songinfo/lastfmtrackinfoprovider.cpp:119
 msgid "Last.fm wiki"
@@ -2398,7 +2399,7 @@ msgstr "Åpne spilleliste..."
 
 #: internet/lastfmservice.cpp:912
 msgid "Loading Last.fm radio"
-msgstr "Laster inn Last.fm radio"
+msgstr "Laster inn Last.fm-radio"
 
 #: devices/mtploader.cpp:42
 msgid "Loading MTP device"
@@ -2627,19 +2628,19 @@ msgstr "Demp"
 
 #: globalsearch/lastfmsearchprovider.cpp:51 internet/lastfmservice.cpp:178
 msgid "My Last.fm Library"
-msgstr "Mitt last.fm-bibliotek"
+msgstr "Mitt Last.fm-bibliotek"
 
 #: globalsearch/lastfmsearchprovider.cpp:53 internet/lastfmservice.cpp:183
 msgid "My Last.fm Mix Radio"
-msgstr "Min last.fm-miksradio"
+msgstr "Min Last.fm-miksradio"
 
 #: globalsearch/lastfmsearchprovider.cpp:55 internet/lastfmservice.cpp:188
 msgid "My Last.fm Neighborhood"
-msgstr "Mitt last.fm-nabolag"
+msgstr "Mitt Last.fm-nabolag"
 
 #: globalsearch/lastfmsearchprovider.cpp:49 internet/lastfmservice.cpp:173
 msgid "My Last.fm Recommended Radio"
-msgstr "Min anbefalt radio på last.fm"
+msgstr "Min anbefalt radio på Last.fm"
 
 #: internet/lastfmservice.cpp:180
 msgid "My Mix Radio"
@@ -3443,7 +3444,7 @@ msgstr "Karakte"
 
 #: ../bin/src/ui_lastfmsettingspage.h:150
 msgid "Scrobble tracks that I listen to"
-msgstr "Fortell last.fm om sangene jeg har lyttet til"
+msgstr "Fortell last.fm om (\"scrobble\") sangene jeg har lyttet til"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:166
 #: ../bin/src/ui_albumcoversearcher.h:113
@@ -3681,7 +3682,7 @@ msgstr "Vis \"Elsk\" og \"Bannlys\" knappene"
 
 #: ../bin/src/ui_lastfmsettingspage.h:152
 msgid "Show the scrobble button in the main window"
-msgstr ""
+msgstr "Vis scrobble-knappen i hovedvinduet"
 
 #: ../bin/src/ui_behavioursettingspage.h:177
 msgid "Show tray icon"
@@ -3717,11 +3718,11 @@ msgstr "Logg ut"
 
 #: ../bin/src/ui_loginstatewidget.h:175
 msgid "Signing in..."
-msgstr ""
+msgstr "Logger på..."
 
 #: songinfo/echonestsimilarartists.cpp:57
 msgid "Similar artists"
-msgstr ""
+msgstr "Lignende artister"
 
 #: ui/equalizer.cpp:123
 msgid "Ska"
@@ -3729,31 +3730,31 @@ msgstr "Ska"
 
 #: core/commandlineoptions.cpp:152
 msgid "Skip backwards in playlist"
-msgstr ""
+msgstr "Gå bakover i spillelista"
 
 #: playlist/playlist.cpp:1120 ../bin/src/ui_edittagdialog.h:639
 msgid "Skip count"
-msgstr ""
+msgstr "Antall ganger hoppet over"
 
 #: core/commandlineoptions.cpp:153
 msgid "Skip forwards in playlist"
-msgstr ""
+msgstr "Gå fremover i spillelista"
 
 #: widgets/nowplayingwidget.cpp:90
 msgid "Small album cover"
-msgstr ""
+msgstr "Lite albumbilde"
 
 #: widgets/fancytabwidget.cpp:648
 msgid "Small sidebar"
-msgstr ""
+msgstr "Lite sidefelt"
 
 #: smartplaylists/wizard.cpp:67
 msgid "Smart playlist"
-msgstr ""
+msgstr "Smart spilleliste"
 
 #: library/librarymodel.cpp:1128
 msgid "Smart playlists"
-msgstr ""
+msgstr "Smarte spillelister"
 
 #: ui/equalizer.cpp:122
 msgid "Soft"
@@ -3765,11 +3766,11 @@ msgstr "Soft Rock"
 
 #: ../bin/src/ui_songinfosettingspage.h:179
 msgid "Song Information"
-msgstr ""
+msgstr "Informasjon om sange"
 
 #: ui/mainwindow.cpp:256
 msgid "Song info"
-msgstr ""
+msgstr "Info om sangen"
 
 #: analyzers/sonogram.cpp:18
 msgid "Sonogram"
@@ -3777,27 +3778,27 @@ msgstr "Sonogram"
 
 #: ../bin/src/ui_trackselectiondialog.h:205
 msgid "Sorry"
-msgstr ""
+msgstr "Beklager"
 
 #: ../bin/src/ui_icecastfilterwidget.h:75
 msgid "Sort by genre (alphabetically)"
-msgstr ""
+msgstr "Sorter alfabetisk etter sjanger"
 
 #: ../bin/src/ui_icecastfilterwidget.h:76
 msgid "Sort by genre (by popularity)"
-msgstr ""
+msgstr "Sorter etter sjangerens popularitet"
 
 #: ../bin/src/ui_icecastfilterwidget.h:77
 msgid "Sort by station name"
-msgstr ""
+msgstr "Sorter etter kanalnavn"
 
 #: ../bin/src/ui_querysortpage.h:139
 msgid "Sort songs by"
-msgstr ""
+msgstr "Sorter sanger etter"
 
 #: ../bin/src/ui_querysortpage.h:137
 msgid "Sorting"
-msgstr ""
+msgstr "Sortering"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:169
 msgid "Sources"
@@ -3805,39 +3806,39 @@ msgstr ""
 
 #: ../bin/src/ui_transcodersettingspage.h:162
 msgid "Speex"
-msgstr ""
+msgstr "Speex"
 
 #: ../bin/src/ui_spotifysettingspage.h:208
 msgid "Spotify"
-msgstr ""
+msgstr "Spotify"
 
 #: internet/spotifyservice.cpp:179
 msgid "Spotify login error"
-msgstr ""
+msgstr "Kunne ikke logge på Spotify"
 
 #: ../bin/src/ui_spotifysettingspage.h:213
 msgid "Spotify plugin"
-msgstr ""
+msgstr "Spotify-modul"
 
 #: internet/spotifyblobdownloader.cpp:58
 msgid "Spotify plugin not installed"
-msgstr ""
+msgstr "Har ikke installert Spotify-modul"
 
 #: ../bin/src/ui_transcoderoptionsmp3.h:201
 msgid "Standard"
-msgstr ""
+msgstr "Standard"
 
 #: internet/spotifyservice.cpp:343
 msgid "Starred"
-msgstr ""
+msgstr "Har stjerner"
 
 #: core/commandlineoptions.cpp:148
 msgid "Start the playlist currently playing"
-msgstr ""
+msgstr "Begynn på spillelista nå"
 
 #: transcoder/transcodedialog.cpp:84
 msgid "Start transcoding"
-msgstr ""
+msgstr "Start koding"
 
 #: internet/groovesharksearchplaylisttype.cpp:36
 #: internet/spotifysearchplaylisttype.cpp:36
@@ -3865,7 +3866,7 @@ msgstr "Stopp"
 
 #: wiimotedev/wiimotesettingspage.cpp:110
 msgid "Stop after"
-msgstr ""
+msgstr "Stopp etter"
 
 #: ui/mainwindow.cpp:508 ../bin/src/ui_mainwindow.h:639
 msgid "Stop after this track"
@@ -3873,15 +3874,15 @@ msgstr "Stopp etter denne sangen"
 
 #: core/commandlineoptions.cpp:151
 msgid "Stop playback"
-msgstr ""
+msgstr "Stopp avspilling"
 
 #: core/globalshortcuts.cpp:49
 msgid "Stop playing after current track"
-msgstr ""
+msgstr "Stopp avspilling etter gjeldende spor"
 
 #: widgets/osd.cpp:187
 msgid "Stopped"
-msgstr ""
+msgstr "Stoppet"
 
 #: core/song.cpp:398
 msgid "Stream"
@@ -3889,7 +3890,7 @@ msgstr "Strøm"
 
 #: ../bin/src/ui_magnatunesettingspage.h:160
 msgid "Streaming membership"
-msgstr ""
+msgstr "Streaming-medlemskap"
 
 #: internet/groovesharkservice.cpp:566
 msgid "Subscribed playlists"
@@ -3898,49 +3899,49 @@ msgstr ""
 #: transcoder/transcoder.cpp:198
 #, qt-format
 msgid "Successfully written %1"
-msgstr ""
+msgstr "Skrev %1"
 
 #: ui/trackselectiondialog.cpp:169
 msgid "Suggested tags"
-msgstr ""
+msgstr "Foreslåtte tagger"
 
 #: ../bin/src/ui_edittagdialog.h:651
 #: ../bin/src/ui_notificationssettingspage.h:413
 msgid "Summary"
-msgstr ""
+msgstr "Sammendrag"
 
 #: analyzers/analyzercontainer.cpp:65
 #, qt-format
 msgid "Super high (%1 fps)"
-msgstr ""
+msgstr "Super-høy (%1 bilder/sek)"
 
 #: visualisations/visualisationcontainer.cpp:103
 msgid "Super high (60 fps)"
-msgstr ""
+msgstr "Super-høy (60 bilder/sek)"
 
 #: ../bin/src/ui_deviceproperties.h:374
 msgid "Supported formats"
-msgstr ""
+msgstr "Støttede formater"
 
 #: globalsearch/globalsearchtooltip.cpp:53
 msgid "Switch provider"
-msgstr ""
+msgstr "Switch-leverandør"
 
 #: internet/spotifyservice.cpp:515
 msgid "Syncing Spotify inbox"
-msgstr ""
+msgstr "Synkroniserer Spotify-innboksen"
 
 #: internet/spotifyservice.cpp:510
 msgid "Syncing Spotify playlist"
-msgstr ""
+msgstr "Synkroniserer Spotify-spillelista"
 
 #: internet/spotifyservice.cpp:519
 msgid "Syncing Spotify starred tracks"
-msgstr ""
+msgstr "Synkroniserer spor med sterner mot Spotify"
 
 #: widgets/fancytabwidget.cpp:650
 msgid "Tabs on top"
-msgstr ""
+msgstr "Fliker på toppen"
 
 #: ../bin/src/ui_lastfmstationdialog.h:97
 msgid "Tag"
@@ -3948,7 +3949,7 @@ msgstr "Merkelapp"
 
 #: ../bin/src/ui_trackselectiondialog.h:204
 msgid "Tag fetcher"
-msgstr ""
+msgstr "Tagg-henter"
 
 #: internet/lastfmservice.cpp:195
 msgid "Tag radio"
@@ -3956,7 +3957,7 @@ msgstr "Merkelappradio"
 
 #: ../bin/src/ui_transcoderoptionsvorbis.h:204
 msgid "Target bitrate"
-msgstr ""
+msgstr "Ønsket bitrate"
 
 #: ui/equalizer.cpp:125
 msgid "Techno"
@@ -3964,7 +3965,7 @@ msgstr "Tekno"
 
 #: ../bin/src/ui_notificationssettingspage.h:425
 msgid "Text options"
-msgstr ""
+msgstr "Tekstinnstillinger"
 
 #: ui/about.cpp:69
 msgid "Thanks to"
@@ -3973,51 +3974,55 @@ msgstr "Takk til"
 #: ui/globalshortcutssettingspage.cpp:175
 #, qt-format
 msgid "The \"%1\" command could not be started."
-msgstr ""
+msgstr "Kunne ikke starte kommandoen \"%1\""
 
 #: internet/magnatunedownloaddialog.cpp:89
 #, qt-format
 msgid "The directory %1 is not valid"
-msgstr ""
+msgstr "Katalogen %1 er ikke gyldig"
 
 #: playlist/playlistmanager.cpp:151 playlist/playlistmanager.cpp:169
 #, qt-format
 msgid "The playlist '%1' was empty or could not be loaded."
-msgstr ""
+msgstr "Spillelista '%1' var tom, eller kunne ikke lastes inn"
 
 #: smartplaylists/searchtermwidget.cpp:322
 msgid "The second value must be greater than the first one!"
-msgstr ""
+msgstr "Den andre verdien må være større enn den første!"
 
 #: ui/coverfromurldialog.cpp:71
 msgid "The site you requested does not exist!"
-msgstr ""
+msgstr "Siden du spesifiserte, finnes ikke!"
 
 #: ui/coverfromurldialog.cpp:82
 msgid "The site you requested is not an image!"
-msgstr ""
+msgstr "Stedet du spesifiserte, er ikke et bilde!"
 
 #: ui/mainwindow.cpp:2020
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
 msgstr ""
+"Fordi du har oppdatert Clementine til en nyere versjon, må hele "
+"lydbiblioteket sees gjennom på ny. Grunnen er følgende nye funksjoner:"
 
 #: internet/magnatunedownloaddialog.cpp:157
 msgid "There was a problem fetching the metadata from Magnatune"
-msgstr ""
+msgstr "Kunne ikke hente metadata fra Magnatune"
 
 #: ui/organiseerrordialog.cpp:56
 msgid ""
 "There were problems copying some songs.  The following files could not be "
 "copied:"
 msgstr ""
+"Fikk problemer med å kopiere enkelte sanger.  Følgende kunne ikke kopieres:"
 
 #: ui/organiseerrordialog.cpp:61
 msgid ""
 "There were problems deleting some songs.  The following files could not be "
 "deleted:"
 msgstr ""
+"Fikk problemer med å slette enkelte sanger.  Følgende kunne ikke slettes:"
 
 #: library/libraryview.cpp:461 ui/mainwindow.cpp:1835 widgets/fileview.cpp:186
 msgid ""
@@ -4527,6 +4532,9 @@ msgid ""
 "weight:600;\">paid subscribers</span> can stream Last.fm radio from "
 "Clementine."
 msgstr ""
+"Du kan dele lyttevaner (\"scrobble\") gratis, men bare <span style=\" font-"
+"weight:600;\">betalende abonnenter</span> kan høre Last.fm-radio i "
+"Clementine."
 
 #: ../bin/src/ui_wiimotesettingspage.h:184
 msgid ""
@@ -4573,6 +4581,7 @@ msgid ""
 "You will not be able to play Last.fm radio stations as you are not a Last.fm"
 " subscriber."
 msgstr ""
+"Siden du ikke er en Last.fm-abonnent, kan du ikke høre Last.fm-radiokanaler."
 
 #: remote/remotesettingspage.cpp:126
 #, qt-format
@@ -4585,7 +4594,7 @@ msgstr ""
 
 #: internet/lastfmsettingspage.cpp:78
 msgid "Your Last.fm credentials were incorrect"
-msgstr "Din last.fm brukerinformasjon var ikke korrekt"
+msgstr "Din Last.fm-brukerinformasjon var ikke riktig"
 
 #: internet/magnatunesettingspage.cpp:113
 msgid "Your Magnatune credentials were incorrect"
@@ -4609,7 +4618,7 @@ msgstr "Dine radiokanaler"
 #: songinfo/lastfmtrackinfoprovider.cpp:96
 #, qt-format
 msgid "Your scrobbles: %1"
-msgstr ""
+msgstr "Dine delte lyttevaner (\"scrobbles\"): %1"
 
 #: internet/groovesharksettingspage.cpp:108
 #: internet/spotifysettingspage.cpp:154
