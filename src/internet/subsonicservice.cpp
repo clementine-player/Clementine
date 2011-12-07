@@ -1,5 +1,11 @@
 #include "subsonicservice.h"
 #include "internetmodel.h"
+#include "core/logging.h"
+
+#include <QNetworkAccessManager>
+#include <QNetworkReply>
+#include <QNetworkCookieJar>
+#include <QXmlStreamReader>
 
 const char* SubsonicService::kServiceName = "Subsonic";
 const char* SubsonicService::kSettingsGroup = "Subsonic";
@@ -7,7 +13,9 @@ const char* SubsonicService::kApiVersion = "1.6.0";
 const char* SubsonicService::kApiClientName = "Clementine";
 
 SubsonicService::SubsonicService(InternetModel *parent)
-  : InternetService(kServiceName, parent, parent)
+  : InternetService(kServiceName, parent, parent),
+    network_(new QNetworkAccessManager(this)),
+    login_state_(LoginState_OtherError)
 {
 }
 
@@ -27,21 +35,102 @@ void SubsonicService::LazyPopulate(QStandardItem *item)
 
 }
 
+void SubsonicService::ReloadSettings()
+{
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+
+  server_ = s.value("server").toString();
+  username_ = s.value("username").toString();
+  password_ = s.value("password").toString();
+
+  // TODO: Move this?
+  Login();
+}
+
+void SubsonicService::Login()
+{
+  // Forget session ID
+  network_->setCookieJar(new QNetworkCookieJar(network_));
+  // Ping is enough to authenticate
+  Ping();
+}
+
+void SubsonicService::Login(const QString &server, const QString &username, const QString &password)
+{
+  server_ = QString(server);
+  username_ = QString(username);
+  password_ = QString(password);
+  Login();
+}
+
+void SubsonicService::Ping()
+{
+  QUrl request_url = BuildRequestUrl("ping");
+  QNetworkReply *reply = network_->get(QNetworkRequest(request_url));
+  reply->ignoreSslErrors();
+  connect(reply, SIGNAL(finished()), this, SLOT(onPingFinished()));
+}
+
 QModelIndex SubsonicService::GetCurrentIndex()
 {
   return context_item_;
 }
 
-QUrl SubsonicService::BuildRequestUrl(const QString &view, const RequestOptions &options)
+QUrl SubsonicService::BuildRequestUrl(const QString &view, const RequestOptions *options)
 {
-  QUrl url(server_url_ + "rest/" + view + ".view");
+  QUrl url(server_ + "rest/" + view + ".view");
   url.addQueryItem("v", kApiVersion);
   url.addQueryItem("c", kApiClientName);
+  // TODO: only send username/password for login
   url.addQueryItem("u", username_);
   url.addQueryItem("p", password_);
-  for (RequestOptions::const_iterator i = options.begin(); i != options.end(); ++i)
+  if (options)
   {
-    url.addQueryItem(i.key(), i.value());
+    for (RequestOptions::const_iterator i = options->begin(); i != options->end(); ++i)
+    {
+      url.addQueryItem(i.key(), i.value());
+    }
   }
   return url;
+}
+
+void SubsonicService::onPingFinished()
+{
+  QNetworkReply *reply = qobject_cast<QNetworkReply*>(sender());
+  reply->deleteLater();
+
+  if (reply->error() != QNetworkReply::NoError)
+  {
+    login_state_ = LoginState_BadServer;
+  }
+  else
+  {
+    QXmlStreamReader reader(reply);
+    reader.readNextStartElement();
+    QStringRef status = reader.attributes().value("status");
+    if (status == "ok")
+    {
+      login_state_ = LoginState_Loggedin;
+    }
+    else
+    {
+      reader.readNextStartElement();
+      int error = reader.attributes().value("code").toString().toInt();
+      switch (error)
+      {
+      case ApiError_BadCredentials:
+        login_state_ = LoginState_BadCredentials;
+        break;
+      case ApiError_Unlicensed:
+        login_state_ = LoginState_Unlicensed;
+        break;
+      default:
+        login_state_ = LoginState_OtherError;
+        break;
+      }
+    }
+  }
+  qLog(Debug) << "Login state changed: " << login_state_;
+  emit LoginStateChanged();
 }
