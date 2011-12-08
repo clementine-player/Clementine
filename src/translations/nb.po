@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2011-12-07 03:59+0000\n"
+"PO-Revision-Date: 2011-12-08 01:58+0000\n"
 "Last-Translator: arnotixe <arnotixe@gmail.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -32,7 +32,7 @@ msgstr "kbps"
 #: ../bin/src/ui_playbacksettingspage.h:265
 #: ../bin/src/ui_playbacksettingspage.h:285
 msgid " ms"
-msgstr " ms"
+msgstr "Normaliseringsmodus"
 
 #: ../bin/src/ui_songinfosettingspage.h:182
 msgid " pt"
@@ -3344,7 +3344,7 @@ msgstr "Erstatt mellomrom med understrek"
 
 #: ../bin/src/ui_playbacksettingspage.h:266
 msgid "Replay Gain"
-msgstr "Replay Gain"
+msgstr "Normalisering"
 
 #: ../bin/src/ui_playbacksettingspage.h:268
 msgid "Replay Gain mode"
@@ -4027,13 +4027,13 @@ msgstr ""
 #: library/libraryview.cpp:461 ui/mainwindow.cpp:1835 widgets/fileview.cpp:186
 msgid ""
 "These files will be deleted from disk, are you sure you want to continue?"
-msgstr ""
+msgstr "Filene vil bli slettet fra disken. Er du sikker?"
 
 #: devices/deviceview.cpp:394
 msgid ""
 "These files will be deleted from the device, are you sure you want to "
 "continue?"
-msgstr ""
+msgstr "Filene vil bli slettet fra enheten. Er du sikker?"
 
 #: ../bin/src/ui_librarysettingspage.h:158
 msgid "These folders will be scanned for music to make up your library"
@@ -4045,6 +4045,8 @@ msgid ""
 "These settings are used in the \"Transcode Music\" dialog, and when "
 "converting music before copying it to a device."
 msgstr ""
+"Disse innstillingene brukes i \"Kode musikk\"-dialogvinduet, og når musikken"
+" kodes før kopiering til en enhet."
 
 #: ../bin/src/ui_groupbydialog.h:151
 msgid "Third level"
@@ -4055,45 +4057,52 @@ msgid ""
 "This action will create a database which could be as big as 150 MB.\n"
 "Do you want to continue anyway?"
 msgstr ""
+"Dette oppretter en database som kan bli inntil 150MB stor.\n"
+"Er du sikker?"
 
 #: internet/magnatunedownloaddialog.cpp:174
 msgid "This album is not available in the requested format"
-msgstr ""
+msgstr "Dette albumet er ikke tilgjengelig i formatet du bad om"
 
 #: ../bin/src/ui_deviceproperties.h:381
 msgid ""
 "This device must be connected and opened before Clementine can see what file"
 " formats it supports."
 msgstr ""
+"Enheten må kobles til og åpnes før Clementine kan se hvilke filformater den "
+"støtter."
 
 #: ../bin/src/ui_deviceproperties.h:375
 msgid "This device supports the following file formats:"
-msgstr ""
+msgstr "Denne enheten støtter følgende filformat:"
 
 #: devices/devicemanager.cpp:567 devices/devicemanager.cpp:575
 msgid "This device will not work properly"
-msgstr ""
+msgstr "Enheten vil ikke fungere ordentlig"
 
 #: devices/devicemanager.cpp:568
 msgid ""
 "This is an MTP device, but you compiled Clementine without libmtp support."
 msgstr ""
+"Dette er en MTP-enhet, men Clementine ble kompilert uten libmtp-støtte."
 
 #: devices/devicemanager.cpp:576
 msgid "This is an iPod, but you compiled Clementine without libgpod support."
-msgstr ""
+msgstr "Dette er en iPod, men Clementine ble kompilert uten libgpod-støtte."
 
 #: devices/devicemanager.cpp:325
 msgid ""
 "This is the first time you have connected this device.  Clementine will now "
 "scan the device to find music files - this may take some time."
 msgstr ""
+"Det er første gang du kobler til denne enheten.  Clementine ser nå gjennom "
+"enheten for å finne musikkfiler. Dette kan ta noe tid."
 
 #: playlist/playlisttabbar.cpp:159
 msgid ""
 "This playlist will be removed; the action can't be undone. Are you sure you "
 "want to continue?"
-msgstr ""
+msgstr "Spillelista slettes for alltid. Er du sikker?"
 
 #: internet/lastfmservice.cpp:440
 msgid "This stream is for paid subscribers only"
@@ -4102,15 +4111,15 @@ msgstr "Denne tjenesten er kun for betalende kunder"
 #: devices/devicemanager.cpp:588
 #, qt-format
 msgid "This type of device is not supported: %1"
-msgstr ""
+msgstr "Denne enhetstypen (%1) støttes ikke."
 
 #: ../bin/src/ui_songinfosettingspage.h:185
 msgid "Timeout"
-msgstr ""
+msgstr "Tidsavbrud"
 
 #: devices/ilister.cpp:98
 msgid "Timezone"
-msgstr ""
+msgstr "Tidssone"
 
 #: playlist/playlist.cpp:1107 ui/organisedialog.cpp:51
 #: ui/qtsystemtrayicon.cpp:248 ../bin/src/ui_about.h:142
@@ -4126,35 +4135,35 @@ msgstr ""
 
 #: core/utilities.cpp:107
 msgid "Today"
-msgstr ""
+msgstr "I dag"
 
 #: core/globalshortcuts.cpp:59
 msgid "Toggle Pretty OSD"
-msgstr ""
+msgstr "Slå av/på Pent Display"
 
 #: visualisations/visualisationcontainer.cpp:94
 msgid "Toggle fullscreen"
-msgstr ""
+msgstr "Slå av/på fullskjerm-modus"
 
 #: ui/mainwindow.cpp:1342
 msgid "Toggle queue status"
-msgstr ""
+msgstr "Slå av/på køstatus"
 
 #: ../bin/src/ui_mainwindow.h:697
 msgid "Toggle scrobbling"
-msgstr ""
+msgstr "Slå av/på deling av lyttevaner"
 
 #: core/commandlineoptions.cpp:165
 msgid "Toggle visibility for the pretty on-screen-display"
-msgstr ""
+msgstr "Slå av/på Pent Display"
 
 #: covers/coversearchstatisticsdialog.cpp:71
 msgid "Total bytes transferred"
-msgstr ""
+msgstr "Totalt overført, bytes"
 
 #: covers/coversearchstatisticsdialog.cpp:68
 msgid "Total network requests made"
-msgstr ""
+msgstr "Totalt antall forespørsler over nettet"
 
 #: playlist/playlist.cpp:1111 ui/organisedialog.cpp:57
 #: ../bin/src/ui_edittagdialog.h:653 ../bin/src/ui_trackselectiondialog.h:212
@@ -4163,24 +4172,24 @@ msgstr "Spor"
 
 #: ../bin/src/ui_transcodedialog.h:201 ../bin/src/ui_mainwindow.h:676
 msgid "Transcode Music"
-msgstr ""
+msgstr "Kod om musikk"
 
 #: ../bin/src/ui_transcodelogdialog.h:63
 msgid "Transcoder Log"
-msgstr ""
+msgstr "Logg for omkoder"
 
 #: ../bin/src/ui_transcodersettingspage.h:157
 msgid "Transcoding"
-msgstr ""
+msgstr "Omkoding"
 
 #: transcoder/transcoder.cpp:307
 #, qt-format
 msgid "Transcoding %1 files using %2 threads"
-msgstr ""
+msgstr "Koder om %1 filer i %2 tråder"
 
 #: ../bin/src/ui_transcoderoptionsdialog.h:54
 msgid "Transcoding options"
-msgstr ""
+msgstr "Innstillinger for omkoding"
 
 #: core/song.cpp:395
 msgid "TrueAudio"
@@ -4192,24 +4201,24 @@ msgstr "Turbin"
 
 #: ../bin/src/ui_dynamicplaylistcontrols.h:113
 msgid "Turn off"
-msgstr ""
+msgstr "Slå av"
 
 #: devices/giolister.cpp:159
 msgid "URI"
-msgstr ""
+msgstr "URI"
 
 #: core/commandlineoptions.cpp:147
 msgid "URL(s)"
-msgstr ""
+msgstr "URL(er)"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:228
 msgid "Ultra wide band (UWB)"
-msgstr ""
+msgstr "Ultrabredt bånd (UWB)"
 
 #: internet/magnatunedownloaddialog.cpp:143
 #, qt-format
 msgid "Unable to download %1 (%2)"
-msgstr ""
+msgstr "Kunne ikke laste ned %1 (%2)"
 
 #: core/song.cpp:402 globalsearch/globalsearchitemdelegate.cpp:166
 #: globalsearch/globalsearchitemdelegate.cpp:173 library/librarymodel.cpp:297
@@ -4233,11 +4242,11 @@ msgstr ""
 
 #: ../bin/src/ui_mainwindow.h:688
 msgid "Update changed library folders"
-msgstr ""
+msgstr "Oppdatér endrede bibliotekkataloge"
 
 #: ../bin/src/ui_librarysettingspage.h:162
 msgid "Update the library when Clementine starts"
-msgstr ""
+msgstr "Oppdatér biblioteket når Clementine starte"
 
 #: library/librarywatcher.cpp:86
 #, qt-format
@@ -4255,39 +4264,39 @@ msgstr "Oppdaterer bibliotek"
 
 #: core/commandlineoptions.cpp:147
 msgid "Usage"
-msgstr ""
+msgstr "Bruk"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:168
 msgid "Use Gnome's shortcut keys"
-msgstr ""
+msgstr "Bruk hurtigtaster fra Gnome"
 
 #: ../bin/src/ui_playbacksettingspage.h:267
 msgid "Use Replay Gain metadata if it is available"
-msgstr ""
+msgstr "Bruk normaliserings-metadata hvis tilgjengelig"
 
 #: ../bin/src/ui_wiimotesettingspage.h:189
 msgid "Use Wii Remote"
-msgstr ""
+msgstr "Bruk Wii-fjernkontroll"
 
 #: ../bin/src/ui_notificationssettingspage.h:410
 msgid "Use a custom message for notifications"
-msgstr ""
+msgstr "Bruk egendefinert meldingstype for beskjeder"
 
 #: ../bin/src/ui_networkproxysettingspage.h:167
 msgid "Use authentication"
-msgstr ""
+msgstr "Bruk autentisering"
 
 #: ../bin/src/ui_transcoderoptionsvorbis.h:203
 msgid "Use bitrate management engine"
-msgstr ""
+msgstr "Bruk kontrollert bitrate"
 
 #: ../bin/src/ui_wizardfinishpage.h:85
 msgid "Use dynamic mode"
-msgstr ""
+msgstr "Bruk dynamisk modus"
 
 #: ../bin/src/ui_wiimotesettingspage.h:188
 msgid "Use notifications to report Wii Remote status"
-msgstr ""
+msgstr "Vis meldinger om Wii-fjernkontrollen"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:139
 msgid "Use temporal noise shaping"
