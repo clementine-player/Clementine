@@ -44,7 +44,6 @@ void SubsonicService::ReloadSettings()
   username_ = s.value("username").toString();
   password_ = s.value("password").toString();
 
-  // TODO: Move this?
   Login();
 }
 
@@ -52,7 +51,9 @@ void SubsonicService::Login()
 {
   // Forget session ID
   network_->setCookieJar(new QNetworkCookieJar(network_));
-  // Ping is enough to authenticate
+  // Forget login state whilst waiting
+  login_state_ = LoginState_Unknown;
+  // Ping is enough to check credentials
   Ping();
 }
 
@@ -82,7 +83,6 @@ QUrl SubsonicService::BuildRequestUrl(const QString &view, const RequestOptions 
   QUrl url(server_ + "rest/" + view + ".view");
   url.addQueryItem("v", kApiVersion);
   url.addQueryItem("c", kApiClientName);
-  // TODO: only send username/password for login
   url.addQueryItem("u", username_);
   url.addQueryItem("p", password_);
   if (options)
@@ -119,6 +119,8 @@ void SubsonicService::onPingFinished()
       int error = reader.attributes().value("code").toString().toInt();
       switch (error)
       {
+      // "Parameter missing" for "ping" is always blank username or password
+      case ApiError_ParameterMissing:
       case ApiError_BadCredentials:
         login_state_ = LoginState_BadCredentials;
         break;
@@ -132,5 +134,5 @@ void SubsonicService::onPingFinished()
     }
   }
   qLog(Debug) << "Login state changed: " << login_state_;
-  emit LoginStateChanged();
+  emit LoginStateChanged(login_state_);
 }

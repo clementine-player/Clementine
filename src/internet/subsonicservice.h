@@ -19,6 +19,7 @@ class SubsonicService : public InternetService
     LoginState_BadCredentials,
     LoginState_Unlicensed,
     LoginState_OtherError,
+    LoginState_Unknown,
   };
 
   typedef QMap<QString, QString> RequestOptions;
@@ -40,7 +41,7 @@ class SubsonicService : public InternetService
   static const char* kApiClientName;
 
  signals:
-  void LoginStateChanged();
+  void LoginStateChanged(SubsonicService::LoginState newstate);
 
  protected:
   QModelIndex GetCurrentIndex();

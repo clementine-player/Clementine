@@ -2,9 +2,9 @@
 #define SUBSONICSETTINGSPAGE_H
 
 #include "ui/settingspage.h"
+#include "subsonicservice.h"
 
 class Ui_SubsonicSettingsPage;
-class SubsonicService;
 
 class SubsonicSettingsPage : public SettingsPage
 {
@@ -16,6 +16,13 @@ class SubsonicSettingsPage : public SettingsPage
 
   void Load();
   void Save();
+
+ public slots:
+  void LoginStateChanged(SubsonicService::LoginState newstate);
+
+ private slots:
+  void Login();
+  void Logout();
 
  private:
   Ui_SubsonicSettingsPage* ui_;
