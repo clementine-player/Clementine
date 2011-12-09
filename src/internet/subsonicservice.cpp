@@ -32,7 +32,15 @@ QStandardItem* SubsonicService::CreateRootItem()
 
 void SubsonicService::LazyPopulate(QStandardItem *item)
 {
+  switch (item->data(InternetModel::Role_Type).toInt())
+  {
+  case InternetModel::Type_Service:
+    GetMusicFolders();
+    break;
 
+  default:
+    break;
+  }
 }
 
 void SubsonicService::ReloadSettings()
@@ -67,10 +75,12 @@ void SubsonicService::Login(const QString &server, const QString &username, cons
 
 void SubsonicService::Ping()
 {
-  QUrl request_url = BuildRequestUrl("ping");
-  QNetworkReply *reply = network_->get(QNetworkRequest(request_url));
-  reply->ignoreSslErrors();
-  connect(reply, SIGNAL(finished()), this, SLOT(onPingFinished()));
+  Send(BuildRequestUrl("ping"), SLOT(onPingFinished()));
+}
+
+void SubsonicService::GetMusicFolders()
+{
+  Send(BuildRequestUrl("getMusicFolders"), SLOT(onGetMusicFoldersFinished()));
 }
 
 QModelIndex SubsonicService::GetCurrentIndex()
@@ -78,21 +88,22 @@ QModelIndex SubsonicService::GetCurrentIndex()
   return context_item_;
 }
 
-QUrl SubsonicService::BuildRequestUrl(const QString &view, const RequestOptions *options)
+QUrl SubsonicService::BuildRequestUrl(const QString &view)
 {
   QUrl url(server_ + "rest/" + view + ".view");
   url.addQueryItem("v", kApiVersion);
   url.addQueryItem("c", kApiClientName);
   url.addQueryItem("u", username_);
   url.addQueryItem("p", password_);
-  if (options)
-  {
-    for (RequestOptions::const_iterator i = options->begin(); i != options->end(); ++i)
-    {
-      url.addQueryItem(i.key(), i.value());
-    }
-  }
   return url;
+}
+
+void SubsonicService::Send(const QUrl &url, const char *slot)
+{
+  QNetworkReply *reply = network_->get(QNetworkRequest(url));
+  // It's very unlikely the Subsonic server will have a valid SSL certificate
+  reply->ignoreSslErrors();
+  connect(reply, SIGNAL(finished()), slot);
 }
 
 void SubsonicService::onPingFinished()
@@ -135,4 +146,28 @@ void SubsonicService::onPingFinished()
   }
   qLog(Debug) << "Login state changed: " << login_state_;
   emit LoginStateChanged(login_state_);
+}
+
+void SubsonicService::onGetMusicFoldersFinished()
+{
+  QNetworkReply *reply = qobject_cast<QNetworkReply*>(sender());
+  reply->deleteLater();
+  QXmlStreamReader reader(reply);
+
+  reader.readNextStartElement();
+  if (reader.attributes().value("status") != "ok")
+  {
+    // TODO: error handling
+    return;
+  }
+
+  reader.readNextStartElement();
+  Q_ASSERT(reader.name() == "musicFolders");
+  while (reader.readNextStartElement())
+  {
+    QStandardItem *item = new QStandardItem(reader.attributes().value("name").toString());
+    item->setData(Type_TopLevel, InternetModel::Role_Type);
+    root_->appendRow(item);
+    reader.skipCurrentElement();
+  }
 }

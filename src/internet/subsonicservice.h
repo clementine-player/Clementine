@@ -1,6 +1,7 @@
 #ifndef SUBSONICSERVICE_H
 #define SUBSONICSERVICE_H
 
+#include "internetmodel.h"
 #include "internetservice.h"
 
 class QNetworkAccessManager;
@@ -22,6 +23,17 @@ class SubsonicService : public InternetService
     LoginState_Unknown,
   };
 
+  enum Type {
+    Type_TopLevel = InternetModel::TypeCount,
+    Type_Artist,
+    Type_Album,
+    Type_Track,
+  };
+
+  enum Role {
+    Role_Id = InternetModel::RoleCount,
+  };
+
   typedef QMap<QString, QString> RequestOptions;
 
   QStandardItem* CreateRootItem();
@@ -34,6 +46,7 @@ class SubsonicService : public InternetService
 
   // Subsonic API methods
   void Ping();
+  void GetMusicFolders();
 
   static const char* kServiceName;
   static const char* kSettingsGroup;
@@ -58,8 +71,9 @@ class SubsonicService : public InternetService
     ApiError_NotFound = 70,
   };
 
-  // TODO: Remove second argument, let caller call addQueryItem()
-  QUrl BuildRequestUrl(const QString &view, const RequestOptions *options = 0);
+  QUrl BuildRequestUrl(const QString &view);
+  // Convenience function to reduce QNetworkRequest/QNetworkReply/connect boilerplate
+  void Send(const QUrl &url, const char *slot);
 
   QModelIndex context_item_;
   QStandardItem* root_;
@@ -74,6 +88,7 @@ class SubsonicService : public InternetService
 
  private slots:
   void onPingFinished();
+  void onGetMusicFoldersFinished();
 };
 
 #endif // SUBSONICSERVICE_H
