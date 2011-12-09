@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2011-12-08 08:20+0000\n"
+"PO-Revision-Date: 2011-12-08 10:43+0000\n"
 "Last-Translator: SvetlanaK <kolyadas89@gmail.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1580,6 +1580,9 @@ msgid ""
 "results are available from more than one source, ones at the top will take "
 "priority."
 msgstr ""
+"Включить нижеперечисленные источники, чтобы добавить их в результаты поиска."
+" Если одинаковые результаты доступны в нескольких источниках, то результаты,"
+" находящиеся сверху, будут иметь приоритет."
 
 #: core/globalshortcuts.cpp:62
 msgid "Enable/disable Last.fm scrobbling"
@@ -3052,7 +3055,7 @@ msgstr "Pop"
 
 #: internet/groovesharkservice.cpp:521
 msgid "Popular songs"
-msgstr ""
+msgstr "Популярные песни"
 
 #: internet/groovesharkservice.cpp:525
 msgid "Popular songs of the Month"
@@ -3095,7 +3098,7 @@ msgstr "Предпочитаемый аудио формат"
 
 #: ../bin/src/ui_spotifysettingspage.h:218
 msgid "Preferred bitrate"
-msgstr ""
+msgstr "Предпочитаемый битрейт"
 
 #: ../bin/src/ui_deviceproperties.h:380
 msgid "Preferred format"
@@ -3103,7 +3106,7 @@ msgstr "Предпочитаемый формат"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:174
 msgid "Premium audio type"
-msgstr ""
+msgstr "Премиум аудио"
 
 #: ../bin/src/ui_equalizer.h:119
 msgid "Preset:"
@@ -3305,7 +3308,7 @@ msgstr "Удаляем песню из избранных"
 #: internet/groovesharkservice.cpp:1220
 #, qt-format
 msgid "Rename \"%1\" playlist"
-msgstr ""
+msgstr "Переименовать список воспроизведения \\\"%1\\\""
 
 #: internet/groovesharkservice.cpp:491
 msgid "Rename Grooveshark playlist"
@@ -3910,7 +3913,7 @@ msgstr "\"Streaming\" подписка"
 
 #: internet/groovesharkservice.cpp:566
 msgid "Subscribed playlists"
-msgstr ""
+msgstr "Списки воспроизведения, на которые вы подписаны"
 
 #: transcoder/transcoder.cpp:198
 #, qt-format
@@ -4178,7 +4181,7 @@ msgstr "Вкл/выкл скробблинг"
 
 #: core/commandlineoptions.cpp:165
 msgid "Toggle visibility for the pretty on-screen-display"
-msgstr ""
+msgstr "Показать/скрыть экранное уведомление"
 
 #: covers/coversearchstatisticsdialog.cpp:71
 msgid "Total bytes transferred"
@@ -4335,7 +4338,7 @@ msgstr "Использовать системные настройки прок�
 
 #: ../bin/src/ui_spotifysettingspage.h:219
 msgid "Use volume normalisation"
-msgstr ""
+msgstr "Использовать выравнивание громкости"
 
 #: widgets/freespacebar.cpp:47
 msgid "Used"
@@ -4597,10 +4600,13 @@ msgid ""
 "You have been logged out of Spotify, please re-enter your password in the "
 "Settings dialog."
 msgstr ""
+"Подключение к сервису  Spotify было разорвано,  введите ваш пароль ещё раз в"
+" диалоге Настройки."
 
 #: internet/spotifysettingspage.cpp:158
 msgid "You have been logged out of Spotify, please re-enter your password."
 msgstr ""
+"Подключение к сервису  Spotify было разорвано,  введите ваш пароль ещё раз."
 
 #: songinfo/lastfmtrackinfoprovider.cpp:95
 msgid "You love this track"
