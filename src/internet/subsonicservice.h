@@ -5,6 +5,7 @@
 #include "internetservice.h"
 
 class QNetworkAccessManager;
+class QXmlStreamReader;
 
 class SubsonicService : public InternetService
 {
@@ -24,8 +25,7 @@ class SubsonicService : public InternetService
   };
 
   enum Type {
-    Type_TopLevel = InternetModel::TypeCount,
-    Type_Artist,
+    Type_Artist = InternetModel::TypeCount,
     Type_Album,
     Type_Track,
   };
@@ -46,7 +46,8 @@ class SubsonicService : public InternetService
 
   // Subsonic API methods
   void Ping();
-  void GetMusicFolders();
+  void GetIndexes();
+  void GetMusicDirectory(const QString &id);
 
   static const char* kServiceName;
   static const char* kSettingsGroup;
@@ -75,6 +76,11 @@ class SubsonicService : public InternetService
   // Convenience function to reduce QNetworkRequest/QNetworkReply/connect boilerplate
   void Send(const QUrl &url, const char *slot);
 
+  void ReadIndex(QXmlStreamReader *reader, QStandardItem *parent);
+  void ReadArtist(QXmlStreamReader *reader, QStandardItem *parent);
+  void ReadAlbum(QXmlStreamReader *reader, QStandardItem *parent);
+  void ReadTrack(QXmlStreamReader *reader, QStandardItem *parent);
+
   QModelIndex context_item_;
   QStandardItem* root_;
   QNetworkAccessManager* network_;
@@ -86,9 +92,12 @@ class SubsonicService : public InternetService
 
   LoginState login_state_;
 
+  QMap<QString, QStandardItem*> item_lookup_;
+
  private slots:
   void onPingFinished();
-  void onGetMusicFoldersFinished();
+  void onGetIndexesFinished();
+  void onGetMusicDirectoryFinished();
 };
 
 #endif // SUBSONICSERVICE_H

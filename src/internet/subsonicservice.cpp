@@ -9,13 +9,14 @@
 
 const char* SubsonicService::kServiceName = "Subsonic";
 const char* SubsonicService::kSettingsGroup = "Subsonic";
-const char* SubsonicService::kApiVersion = "1.6.0";
+const char* SubsonicService::kApiVersion = "1.7.0";
 const char* SubsonicService::kApiClientName = "Clementine";
 
 SubsonicService::SubsonicService(InternetModel *parent)
   : InternetService(kServiceName, parent, parent),
     network_(new QNetworkAccessManager(this)),
-    login_state_(LoginState_OtherError)
+    login_state_(LoginState_OtherError),
+    item_lookup_()
 {
 }
 
@@ -35,7 +36,12 @@ void SubsonicService::LazyPopulate(QStandardItem *item)
   switch (item->data(InternetModel::Role_Type).toInt())
   {
   case InternetModel::Type_Service:
-    GetMusicFolders();
+    GetIndexes();
+    break;
+
+  case Type_Artist:
+  case Type_Album:
+    GetMusicDirectory(item->data(Role_Id).toString());
     break;
 
   default:
@@ -78,9 +84,16 @@ void SubsonicService::Ping()
   Send(BuildRequestUrl("ping"), SLOT(onPingFinished()));
 }
 
-void SubsonicService::GetMusicFolders()
+void SubsonicService::GetIndexes()
 {
-  Send(BuildRequestUrl("getMusicFolders"), SLOT(onGetMusicFoldersFinished()));
+  Send(BuildRequestUrl("getIndexes"), SLOT(onGetIndexesFinished()));
+}
+
+void SubsonicService::GetMusicDirectory(const QString &id)
+{
+  QUrl url = BuildRequestUrl("getMusicDirectory");
+  url.addQueryItem("id", id);
+  Send(url, SLOT(onGetMusicDirectoryFinished()));
 }
 
 QModelIndex SubsonicService::GetCurrentIndex()
@@ -104,6 +117,54 @@ void SubsonicService::Send(const QUrl &url, const char *slot)
   // It's very unlikely the Subsonic server will have a valid SSL certificate
   reply->ignoreSslErrors();
   connect(reply, SIGNAL(finished()), slot);
+}
+
+void SubsonicService::ReadIndex(QXmlStreamReader *reader, QStandardItem *parent)
+{
+  Q_ASSERT(reader->name() == "index");
+
+  while (reader->readNextStartElement())
+  {
+    ReadArtist(reader, parent);
+  }
+}
+
+void SubsonicService::ReadArtist(QXmlStreamReader *reader, QStandardItem *parent)
+{
+  Q_ASSERT(reader->name() == "artist");
+  QString id = reader->attributes().value("id").toString();
+  QStandardItem *item = new QStandardItem(reader->attributes().value("name").toString());
+  item->setData(Type_Artist, InternetModel::Role_Type);
+  item->setData(true, InternetModel::Role_CanLazyLoad);
+  item->setData(id, Role_Id);
+  parent->appendRow(item);
+  item_lookup_.insert(id, item);
+  reader->skipCurrentElement();
+}
+
+void SubsonicService::ReadAlbum(QXmlStreamReader *reader, QStandardItem *parent)
+{
+  Q_ASSERT(reader->name() == "child");
+  QString id = reader->attributes().value("id").toString();
+  QStandardItem *item = new QStandardItem(reader->attributes().value("title").toString());
+  item->setData(Type_Album, InternetModel::Role_Type);
+  item->setData(true, InternetModel::Role_CanLazyLoad);
+  item->setData(id, Role_Id);
+  parent->appendRow(item);
+  item_lookup_.insert(id, item);
+  reader->skipCurrentElement();
+}
+
+void SubsonicService::ReadTrack(QXmlStreamReader *reader, QStandardItem *parent)
+{
+  Q_ASSERT(reader->name() == "child");
+  QString id = reader->attributes().value("id").toString();
+  QStandardItem *item = new QStandardItem(reader->attributes().value("title").toString());
+  item->setData(Type_Track, InternetModel::Role_Type);
+  item->setData(id, Role_Id);
+  parent->appendRow(item);
+  item_lookup_.insert(id, item);
+  reader->skipCurrentElement();
 }
 
 void SubsonicService::onPingFinished()
@@ -148,13 +209,15 @@ void SubsonicService::onPingFinished()
   emit LoginStateChanged(login_state_);
 }
 
-void SubsonicService::onGetMusicFoldersFinished()
+void SubsonicService::onGetIndexesFinished()
 {
   QNetworkReply *reply = qobject_cast<QNetworkReply*>(sender());
+  Q_ASSERT(reply);
   reply->deleteLater();
   QXmlStreamReader reader(reply);
 
   reader.readNextStartElement();
+  Q_ASSERT(reader.name() == "subsonic-response");
   if (reader.attributes().value("status") != "ok")
   {
     // TODO: error handling
@@ -162,12 +225,55 @@ void SubsonicService::onGetMusicFoldersFinished()
   }
 
   reader.readNextStartElement();
-  Q_ASSERT(reader.name() == "musicFolders");
+  Q_ASSERT(reader.name() == "indexes");
   while (reader.readNextStartElement())
   {
-    QStandardItem *item = new QStandardItem(reader.attributes().value("name").toString());
-    item->setData(Type_TopLevel, InternetModel::Role_Type);
-    root_->appendRow(item);
-    reader.skipCurrentElement();
+    if (reader.name() == "index")
+    {
+      ReadIndex(&reader, root_);
+    }
+    else if (reader.name() == "child" && reader.attributes().value("isVideo") == "false")
+    {
+      ReadTrack(&reader, root_);
+    }
+    else
+    {
+      reader.skipCurrentElement();
+    }
+  }
+}
+
+void SubsonicService::onGetMusicDirectoryFinished()
+{
+  QNetworkReply *reply = qobject_cast<QNetworkReply*>(sender());
+  Q_ASSERT(reply);
+  reply->deleteLater();
+  QXmlStreamReader reader(reply);
+
+  reader.readNextStartElement();
+  Q_ASSERT(reader.name() == "subsonic-response");
+  if (reader.attributes().value("status") != "ok")
+  {
+    // TODO: error handling
+    return;
+  }
+
+  reader.readNextStartElement();
+  Q_ASSERT(reader.name() == "directory");
+  QStandardItem *parent = item_lookup_.value(reader.attributes().value("id").toString());
+  while (reader.readNextStartElement())
+  {
+    if (reader.attributes().value("isDir") == "true")
+    {
+      ReadAlbum(&reader, parent);
+    }
+    else if (reader.attributes().value("isVideo") == "false")
+    {
+      ReadTrack(&reader, parent);
+    }
+    else
+    {
+      reader.skipCurrentElement();
+    }
   }
 }
