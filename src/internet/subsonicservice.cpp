@@ -158,10 +158,28 @@ void SubsonicService::ReadAlbum(QXmlStreamReader *reader, QStandardItem *parent)
 void SubsonicService::ReadTrack(QXmlStreamReader *reader, QStandardItem *parent)
 {
   Q_ASSERT(reader->name() == "child");
+
+  Song song;
   QString id = reader->attributes().value("id").toString();
+  song.set_title(reader->attributes().value("title").toString());
+  song.set_album(reader->attributes().value("album").toString());
+  song.set_artist(reader->attributes().value("artist").toString());
+  song.set_bitrate(reader->attributes().value("bitRate").toString().toInt());
+  song.set_year(reader->attributes().value("year").toString().toInt());
+  song.set_genre(reader->attributes().value("genre").toString());
+  qint64 length = reader->attributes().value("duration").toString().toInt();
+  length *= 1000000000;
+  song.set_length_nanosec(length);
+  QUrl url = BuildRequestUrl("stream");
+  url.addQueryItem("id", id);
+  song.set_url(url);
+
   QStandardItem *item = new QStandardItem(reader->attributes().value("title").toString());
   item->setData(Type_Track, InternetModel::Role_Type);
   item->setData(id, Role_Id);
+  item->setData(QVariant::fromValue(song), InternetModel::Role_SongMetadata);
+  item->setData(InternetModel::PlayBehaviour_SingleItem, InternetModel::Role_PlayBehaviour);
+  item->setData(song.url(), InternetModel::Role_Url);
   parent->appendRow(item);
   item_lookup_.insert(id, item);
   reader->skipCurrentElement();
