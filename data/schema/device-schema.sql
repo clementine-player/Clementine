@@ -52,7 +52,9 @@ CREATE TABLE device_%deviceid_songs (
   beginning NOT NULL DEFAULT 0,
 
   cue_path TEXT,
-  unavailable INTEGER DEFAULT 0
+  unavailable INTEGER DEFAULT 0,
+
+  effective_albumartist TEXT
 );
 
 CREATE INDEX idx_device_%deviceid_songs_album ON device_%deviceid_songs (album);
