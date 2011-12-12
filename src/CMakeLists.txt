@@ -119,7 +119,6 @@ set(SOURCES
   globalsearch/digitallyimportedsearchprovider.cpp
   globalsearch/globalsearch.cpp
   globalsearch/globalsearchitemdelegate.cpp
-  globalsearch/globalsearchpopup.cpp
   globalsearch/globalsearchsettingspage.cpp
   globalsearch/globalsearchsortmodel.cpp
   globalsearch/globalsearchtooltip.cpp
@@ -370,7 +369,6 @@ set(HEADERS
   engines/gstelementdeleter.h
 
   globalsearch/globalsearch.h
-  globalsearch/globalsearchpopup.h
   globalsearch/globalsearchsettingspage.h
   globalsearch/globalsearchtooltip.h
   globalsearch/globalsearchwidget.h
@@ -541,7 +539,6 @@ set(UI
 
   devices/deviceproperties.ui
 
-  globalsearch/globalsearchpopup.ui
   globalsearch/globalsearchsettingspage.ui
   globalsearch/globalsearchwidget.ui
 
@@ -717,7 +714,6 @@ optional_source(APPLE
     core/macglobalshortcutbackend.mm
     core/mac_startup.mm
     devices/macdevicelister.mm
-    globalsearch/globalsearchpopup.mm
     ui/globalshortcutgrabber.mm
     ui/macscreensaver.cpp
     ui/macsystemtrayicon.mm
