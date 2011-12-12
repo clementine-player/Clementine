@@ -16,6 +16,7 @@
 */
 
 #include "amazoncoverprovider.h"
+#include "core/closure.h"
 #include "core/logging.h"
 #include "core/network.h"
 #include "core/utilities.h"
@@ -77,20 +78,15 @@ bool AmazonCoverProvider::StartSearch(const QString& artist, const QString& albu
   encoded_args << EncodedArg("Signature", QUrl::toPercentEncoding(signature.toBase64()));
   url.setEncodedQueryItems(encoded_args);
 
-  // Make the request
   QNetworkReply* reply = network_->get(QNetworkRequest(url));
-  connect(reply, SIGNAL(finished()), SLOT(QueryFinished()));
-  pending_queries_[reply] = id;
+  NewClosure(reply, SIGNAL(finished()),
+             this, SLOT(QueryFinished(QNetworkReply*, int)),
+             reply, id);
 
   return true;
 }
 
-void AmazonCoverProvider::QueryFinished() {
-  QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
-  if (!reply || !pending_queries_.contains(reply))
-    return;
-
-  int id = pending_queries_.take(reply);
+void AmazonCoverProvider::QueryFinished(QNetworkReply* reply, int id) {
   reply->deleteLater();
 
   CoverSearchResults results;

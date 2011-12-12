@@ -39,7 +39,7 @@ public:
   bool StartSearch(const QString& artist, const QString& album, int id);
 
 private slots:
-  void QueryFinished();
+  void QueryFinished(QNetworkReply* reply, int id);
 
 private:
   void ReadItem(QXmlStreamReader* reader, CoverSearchResults* results);
@@ -47,7 +47,6 @@ private:
 
 private:
   QNetworkAccessManager* network_;
-  QMap<QNetworkReply*, int> pending_queries_;
 };
 
 #endif // AMAZONCOVERPROVIDER_H
