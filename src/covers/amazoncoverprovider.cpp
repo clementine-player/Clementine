@@ -28,6 +28,7 @@
 const char* AmazonCoverProvider::kAccessKey = "AKIAJ4QO3GQTSM3A43BQ";
 const char* AmazonCoverProvider::kSecretAccessKey = "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";
 const char* AmazonCoverProvider::kUrl = "http://ecs.amazonaws.com/onca/xml";
+const char* AmazonCoverProvider::kAssociateTag = "clementine-20";
 
 AmazonCoverProvider::AmazonCoverProvider(QObject* parent)
   : CoverProvider("Amazon", parent),
@@ -45,6 +46,7 @@ bool AmazonCoverProvider::StartSearch(const QString& artist, const QString& albu
   // Must be sorted by parameter name
   ArgList args = ArgList()
       << Arg("AWSAccessKeyId", kAccessKey)
+      << Arg("AssociateTag", kAssociateTag)
       << Arg("Keywords", artist + " " + album)
       << Arg("Operation", "ItemSearch")
       << Arg("ResponseGroup", "Images")

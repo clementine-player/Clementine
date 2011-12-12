@@ -34,6 +34,7 @@ public:
   static const char* kAccessKey;
   static const char* kSecretAccessKey;
   static const char* kUrl;
+  static const char* kAssociateTag;
 
   bool StartSearch(const QString& artist, const QString& album, int id);
 
