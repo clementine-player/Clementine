@@ -41,7 +41,6 @@
 #include "engines/enginebase.h"
 #include "engines/gstengine.h"
 #include "globalsearch/globalsearch.h"
-#include "globalsearch/globalsearchpopup.h"
 #include "globalsearch/librarysearchprovider.h"
 #include "internet/jamendoservice.h"
 #include "internet/magnatuneservice.h"
@@ -633,7 +632,6 @@ MainWindow::MainWindow(
   connect(global_shortcuts_, SIGNAL(ShowHide()), SLOT(ToggleShowHide()));
   connect(global_shortcuts_, SIGNAL(ShowOSD()), player_, SLOT(ShowOSD()));
   connect(global_shortcuts_, SIGNAL(TogglePrettyOSD()), player_, SLOT(TogglePrettyOSD()));
-  connect(global_shortcuts_, SIGNAL(ShowGlobalSearch()), SLOT(ShowGlobalSearch()));
 #ifdef HAVE_LIBLASTFM
   connect(global_shortcuts_, SIGNAL(ToggleScrobbling()), internet_model->InternetModel::Service<LastFMService>(), SLOT(ToggleScrobbling()));
 #endif
@@ -1715,9 +1713,6 @@ void MainWindow::CommandlineOptionsReceived(const CommandlineOptions &options) {
 
   if (options.toggle_pretty_osd())
     player_->TogglePrettyOSD();
-
-  if (options.show_search_popup())
-    ShowGlobalSearch();
 }
 
 void MainWindow::ForceShowOSD(const Song &song, const bool toggle) {
@@ -2270,15 +2265,4 @@ void MainWindow::HandleNotificationPreview(OSD::Behaviour type, QString line1, Q
 
     osd_->ShowPreview(type, line1, line2, fake);
   }
-}
-
-void MainWindow::ShowGlobalSearch() {
-  if (!search_popup_) {
-    search_popup_.reset(new GlobalSearchPopup);
-    search_popup_->Init(global_search_, player_);
-    StyleSheetLoader* css_loader = new StyleSheetLoader(search_popup_.get());
-    css_loader->SetStyleSheet(search_popup_.get(), ":mainwindow.css");
-    connect(search_popup_.get(), SIGNAL(AddToPlaylist(QMimeData*)), SLOT(AddToPlaylist(QMimeData*)));
-  }
-  search_popup_->show();
 }

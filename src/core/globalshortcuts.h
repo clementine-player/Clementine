@@ -73,7 +73,6 @@ signals:
   void CycleShuffleMode();
   void CycleRepeatMode();
   void ToggleScrobbling();
-  void ShowGlobalSearch();
 
 private:
   void AddShortcut(const QString& id, const QString& name, const char* signal,

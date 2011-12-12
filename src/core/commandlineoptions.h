@@ -61,7 +61,6 @@ class CommandlineOptions {
   int play_track_at() const { return play_track_at_; }
   bool show_osd() const { return show_osd_; }
   bool toggle_pretty_osd() const { return toggle_pretty_osd_; }
-  bool show_search_popup() const { return show_search_popup_; }
   QList<QUrl> urls() const { return urls_; }
   QString language() const { return language_; }
   QString log_levels() const { return log_levels_; }
@@ -81,7 +80,6 @@ class CommandlineOptions {
     Verbose,
     LogLevels,
     Version,
-    SearchPopup,
   };
 
   QString tr(const char* source_text);
@@ -103,7 +101,6 @@ class CommandlineOptions {
   int play_track_at_;
   bool show_osd_;
   bool toggle_pretty_osd_;
-  bool show_search_popup_;
   QString language_;
   QString log_levels_;
 
