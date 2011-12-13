@@ -90,7 +90,7 @@ QString TooltipResultWidget::TitleText() const {
 void TooltipResultWidget::paintEvent(QPaintEvent*) {
   QPainter p(this);
 
-  const QColor text_color = palette().color(QPalette::Text);
+  const QColor text_color = palette().color(QPalette::BrightText);
 
   const qreal line_opacity  = 0.1 + (isChecked() ? 0.2 : 0.0);
   const qreal track_opacity = 0.1 + (isChecked() ? 0.5 : 0.0);
