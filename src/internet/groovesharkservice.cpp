@@ -936,7 +936,7 @@ GeneratorPtr GroovesharkService::CreateGenerator(QStandardItem* item) {
   if (item == grooveshark_radio_) {
     if (last_artists_ids_.isEmpty()) {
       QMessageBox::warning(NULL, tr("Error"),
-        tr("To start Grooveshark radio, you should first listen to few other Grooveshark songs"));
+        tr("To start Grooveshark radio, you should first listen to a few other Grooveshark songs"));
       return ret;
     }
     ret = GeneratorPtr(new GroovesharkRadio(this));
