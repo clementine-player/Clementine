@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2011-12-08 10:43+0000\n"
-"Last-Translator: SvetlanaK <kolyadas89@gmail.com>\n"
+"PO-Revision-Date: 2011-12-13 17:09+0000\n"
+"Last-Translator: clementinebuildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: ru\n"
@@ -120,17 +120,17 @@ msgid "%L1 total plays"
 msgstr "всего %L1 прослушиваний"
 
 #: transcoder/transcodedialog.cpp:198
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n failed"
 msgstr "%n с ошибкой"
 
 #: transcoder/transcodedialog.cpp:193
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n finished"
 msgstr "%n завершено"
 
 #: transcoder/transcodedialog.cpp:188
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n remaining"
 msgstr "%n осталось"
 
@@ -207,11 +207,6 @@ msgstr "Инструменты"
 msgid "(different across multiple songs)"
 msgstr "(различный через несколько композиций)"
 
-#: ../bin/src/ui_globalsearchpopup.h:104 ../bin/src/ui_globalsearchpopup.h:105
-#: ../bin/src/ui_globalsearchpopup.h:106 ../bin/src/ui_globalsearchpopup.h:107
-msgid "..."
-msgstr "..."
-
 #: ui/about.cpp:76
 msgid "...and all the Amarok contributors"
 msgstr "...и всем создателям Amarok"
@@ -252,11 +247,11 @@ msgstr ""
 "\n"
 "<p>Если Вы окружили часть текста фигурными скобками, то эта часть текста не будет видна, если значения полей будут пустыми</p>"
 
-#: internet/groovesharksettingspage.cpp:112
+#: internet/groovesharksettingspage.cpp:111
 msgid "A Grooveshark Anywhere account is required."
 msgstr "Требуется учётная запись Grooveshark Anywhere."
 
-#: internet/spotifysettingspage.cpp:162
+#: internet/spotifysettingspage.cpp:161
 msgid "A Spotify Premium account is required."
 msgstr "Требуется Premium аккаунт Spotify"
 
@@ -362,7 +357,7 @@ msgstr "Добавить другое потоковое вещание..."
 msgid "Add directory..."
 msgstr "Добавить папку..."
 
-#: ui/mainwindow.cpp:1571
+#: ui/mainwindow.cpp:1569
 msgid "Add file"
 msgstr "Добавить файл"
 
@@ -374,7 +369,7 @@ msgstr "Добавить файл..."
 msgid "Add files to transcode"
 msgstr "Добавить файлы для перекодирования"
 
-#: ui/mainwindow.cpp:1596
+#: ui/mainwindow.cpp:1594
 msgid "Add folder"
 msgstr "Добавить каталог"
 
@@ -450,7 +445,7 @@ msgstr "Добавить в избранное Grooveshark"
 msgid "Add to Grooveshark playlists"
 msgstr "Добавить в списки воспроизведения Grooveshark"
 
-#: ui/mainwindow.cpp:1400
+#: ui/mainwindow.cpp:1398
 msgid "Add to another playlist"
 msgstr "Добавить в другой список воспроизведения"
 
@@ -539,7 +534,7 @@ msgstr "Альбомы с обложками"
 msgid "Albums without covers"
 msgstr "Альбомы без обложек"
 
-#: ui/mainwindow.cpp:152
+#: ui/mainwindow.cpp:151
 msgid "All Files (*)"
 msgstr "Все файлы (*)"
 
@@ -631,7 +626,7 @@ msgstr "И:"
 msgid "Appearance"
 msgstr "Внешний вид"
 
-#: core/commandlineoptions.cpp:160
+#: core/commandlineoptions.cpp:157
 msgid "Append files/URLs to the playlist"
 msgstr "Добавить файлы/URLs в список воспроизведения"
 
@@ -671,7 +666,7 @@ msgstr "Вы действительно хотите сбросить стати
 msgid "Artist"
 msgstr "Исполнитель"
 
-#: ui/mainwindow.cpp:257
+#: ui/mainwindow.cpp:256
 msgid "Artist info"
 msgstr "Информация об исполнителе"
 
@@ -850,11 +845,11 @@ msgstr "Изменить комбинацию клавиш..."
 msgid "Change shuffle mode"
 msgstr "Изменить режим перемешивания"
 
-#: core/commandlineoptions.cpp:167
+#: core/commandlineoptions.cpp:163
 msgid "Change the language"
 msgstr "Сменить язык"
 
-#: ui/mainwindow.cpp:597
+#: ui/mainwindow.cpp:596
 msgid "Check for updates..."
 msgstr "Проверить обновления..."
 
@@ -1006,7 +1001,7 @@ msgstr "Цвет"
 msgid "Combine identical results from different sources"
 msgstr "Объединять одинаковые результаты из разных источников"
 
-#: core/commandlineoptions.cpp:170
+#: core/commandlineoptions.cpp:166
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Разделенный запятыми список \"класс:уровень\", где уровень от 0 до 3"
 
@@ -1049,7 +1044,7 @@ msgstr "Комбинации клавиш"
 msgid "Configure Spotify..."
 msgstr "Настройка Spotify..."
 
-#: ui/mainwindow.cpp:491
+#: ui/mainwindow.cpp:490
 msgid "Configure library..."
 msgstr "Настроить коллекцию..."
 
@@ -1086,12 +1081,12 @@ msgstr "Конвертировать всю музыку, которую мож�
 msgid "Copy to clipboard"
 msgstr "Скопировать в буфер"
 
-#: library/libraryview.cpp:265 ui/mainwindow.cpp:524
+#: library/libraryview.cpp:265 ui/mainwindow.cpp:523
 #: widgets/fileviewlist.cpp:43
 msgid "Copy to device..."
 msgstr "Копировать на устройство..."
 
-#: devices/deviceview.cpp:223 ui/mainwindow.cpp:521
+#: devices/deviceview.cpp:223 ui/mainwindow.cpp:520
 #: widgets/fileviewlist.cpp:38
 msgid "Copy to library..."
 msgstr "Копировать в коллекцию..."
@@ -1292,7 +1287,7 @@ msgstr "день (дня, дней)"
 msgid "De&fault"
 msgstr "По &умолчанию"
 
-#: core/commandlineoptions.cpp:156
+#: core/commandlineoptions.cpp:153
 msgid "Decrease the volume by 4%"
 msgstr "Уменьшить громкость на 4%"
 
@@ -1313,7 +1308,7 @@ msgid "Delete Grooveshark playlist"
 msgstr "Удалить список воспроизведения Grooveshark"
 
 #: devices/deviceview.cpp:393 library/libraryview.cpp:460
-#: ui/mainwindow.cpp:1834 widgets/fileview.cpp:185
+#: ui/mainwindow.cpp:1829 widgets/fileview.cpp:185
 msgid "Delete files"
 msgstr "Удалить файлы"
 
@@ -1321,7 +1316,7 @@ msgstr "Удалить файлы"
 msgid "Delete from device..."
 msgstr "Удалить с устройства"
 
-#: library/libraryview.cpp:267 ui/mainwindow.cpp:525
+#: library/libraryview.cpp:267 ui/mainwindow.cpp:524
 #: widgets/fileviewlist.cpp:44
 msgid "Delete from disk..."
 msgstr "Удалить с диска..."
@@ -1342,11 +1337,11 @@ msgstr "Удалить оригинальные файлы"
 msgid "Deleting files"
 msgstr "Удаление файлов"
 
-#: ui/mainwindow.cpp:1336
+#: ui/mainwindow.cpp:1334
 msgid "Dequeue selected tracks"
 msgstr "Убрать из очереди выбранные композиции"
 
-#: ui/mainwindow.cpp:1334
+#: ui/mainwindow.cpp:1332
 msgid "Dequeue track"
 msgstr "Убрать из очереди композицию"
 
@@ -1374,13 +1369,9 @@ msgstr "Имя устройства"
 msgid "Device properties..."
 msgstr "Свойства носителя..."
 
-#: ui/mainwindow.cpp:254
+#: ui/mainwindow.cpp:253
 msgid "Devices"
 msgstr "Носители"
-
-#: ../bin/src/ui_globalsearchpopup.h:103
-msgid "Dialog"
-msgstr "Диалог"
 
 #: widgets/didyoumean.cpp:128
 msgid "Did you mean"
@@ -1429,11 +1420,7 @@ msgstr "Непрерывная передача"
 msgid "Display options"
 msgstr "Настройки отображения"
 
-#: core/commandlineoptions.cpp:166
-msgid "Display the global search popup"
-msgstr "Отобразить всплывающую строку глобального поиска"
-
-#: core/commandlineoptions.cpp:164
+#: core/commandlineoptions.cpp:161
 msgid "Display the on-screen-display"
 msgstr "Показывать экранное уведомление"
 
@@ -1529,7 +1516,7 @@ msgstr "Случайный динамичный микс"
 msgid "Edit smart playlist..."
 msgstr "Изменить умный список воспроизведения"
 
-#: ui/mainwindow.cpp:1369
+#: ui/mainwindow.cpp:1367
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "Редактировать тег \"%1\"..."
@@ -1631,18 +1618,18 @@ msgstr "Вся коллекция"
 msgid "Equalizer"
 msgstr "Эквалайзер"
 
-#: core/commandlineoptions.cpp:168
+#: core/commandlineoptions.cpp:164
 msgid "Equivalent to --log-levels *:1"
 msgstr "Аналогично --log-levels *:1"
 
-#: core/commandlineoptions.cpp:169
+#: core/commandlineoptions.cpp:165
 msgid "Equivalent to --log-levels *:3"
 msgstr "Аналогично --log-levels *:3"
 
 #: internet/groovesharkservice.cpp:938
 #: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:454
-#: ui/edittagdialog.cpp:732 ui/mainwindow.cpp:1802 ui/mainwindow.cpp:1907
-#: ui/mainwindow.cpp:2126
+#: ui/edittagdialog.cpp:732 ui/mainwindow.cpp:1797 ui/mainwindow.cpp:1902
+#: ui/mainwindow.cpp:2121
 msgid "Error"
 msgstr "Ошибка"
 
@@ -1799,7 +1786,7 @@ msgstr "Тип Файла"
 msgid "Filename"
 msgstr "Имя файла"
 
-#: ui/mainwindow.cpp:252
+#: ui/mainwindow.cpp:251
 msgid "Files"
 msgstr "Файлы"
 
@@ -2138,7 +2125,7 @@ msgstr "Включить все песни"
 msgid "Include keyboard shortcut help in the tooltip"
 msgstr "Показывать горячие клавиши в всплывающей подсказке"
 
-#: core/commandlineoptions.cpp:155
+#: core/commandlineoptions.cpp:152
 msgid "Increase the volume by 4%"
 msgstr "Увеличить громкость на 4%"
 
@@ -2154,11 +2141,11 @@ msgstr "Сведения"
 msgid "Insert..."
 msgstr "Вставить..."
 
-#: internet/spotifysettingspage.cpp:75
+#: internet/spotifysettingspage.cpp:74
 msgid "Installed"
 msgstr "Установлено"
 
-#: ui/mainwindow.cpp:253
+#: ui/mainwindow.cpp:252
 msgid "Internet"
 msgstr "Интернет"
 
@@ -2354,7 +2341,7 @@ msgstr "Оставьте пустым для умолчания. Наприме�
 msgid "Length"
 msgstr "Длительность"
 
-#: ui/mainwindow.cpp:241 ui/mainwindow.cpp:251
+#: ui/mainwindow.cpp:240 ui/mainwindow.cpp:250
 msgid "Library"
 msgstr "Коллекция"
 
@@ -2362,7 +2349,7 @@ msgstr "Коллекция"
 msgid "Library advanced grouping"
 msgstr "Расширенная сортировка коллекции"
 
-#: ui/mainwindow.cpp:2027
+#: ui/mainwindow.cpp:2022
 msgid "Library rescan notice"
 msgstr "Уведомление сканирования музыкальной коллекции"
 
@@ -2455,7 +2442,7 @@ msgstr "Загрузка информации о композиции"
 msgid "Loading..."
 msgstr "Загрузка..."
 
-#: core/commandlineoptions.cpp:161
+#: core/commandlineoptions.cpp:158
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "Загрузить файлы/URLs, заменяя текущий список воспроизведения"
 
@@ -2620,7 +2607,7 @@ msgstr "Точки монтирования"
 msgid "Move down"
 msgstr "Переместить вниз"
 
-#: ui/mainwindow.cpp:522 widgets/fileviewlist.cpp:40
+#: ui/mainwindow.cpp:521 widgets/fileviewlist.cpp:40
 msgid "Move to library..."
 msgstr "Переместить в коллекцию..."
 
@@ -2629,7 +2616,7 @@ msgstr "Переместить в коллекцию..."
 msgid "Move up"
 msgstr "Переместить вверх"
 
-#: ui/mainwindow.cpp:150
+#: ui/mainwindow.cpp:149
 msgid "Music (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma *.mp4 *.spx *.wav)"
 msgstr "Музыка (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma *.mp4 *.spx *.wav)"
 
@@ -2715,7 +2702,7 @@ msgstr "Никогда не прослушивались"
 msgid "Never start playing"
 msgstr "Никогда не начинать проигрывать"
 
-#: ui/mainwindow.cpp:1417 ../bin/src/ui_mainwindow.h:680
+#: ui/mainwindow.cpp:1415 ../bin/src/ui_mainwindow.h:680
 msgid "New playlist"
 msgstr "Новый список воспроизведения"
 
@@ -2768,7 +2755,7 @@ msgstr "Без коротких блоков"
 msgid "None"
 msgstr "Ничего"
 
-#: library/libraryview.cpp:455 ui/mainwindow.cpp:1803 ui/mainwindow.cpp:1908
+#: library/libraryview.cpp:455 ui/mainwindow.cpp:1798 ui/mainwindow.cpp:1903
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Ни одна из выбранных песен не будет скопирована на устройство"
 
@@ -2800,7 +2787,7 @@ msgstr "Не достаточно участников"
 msgid "Not enough neighbors"
 msgstr "Недостаточно соседей"
 
-#: internet/spotifysettingspage.cpp:75
+#: internet/spotifysettingspage.cpp:74
 msgid "Not installed"
 msgstr "Не установлено"
 
@@ -2896,7 +2883,7 @@ msgstr "Настройки..."
 msgid "Organise Files"
 msgstr "Упорядочить файлы"
 
-#: library/libraryview.cpp:263 ui/mainwindow.cpp:523
+#: library/libraryview.cpp:263 ui/mainwindow.cpp:522
 msgid "Organise files..."
 msgstr "Упорядочить файлы..."
 
@@ -2908,7 +2895,7 @@ msgstr "Организация файлов"
 msgid "Original tags"
 msgstr "Первоначальные теги"
 
-#: core/commandlineoptions.cpp:163
+#: core/commandlineoptions.cpp:160
 msgid "Other options"
 msgstr "Другие настройки"
 
@@ -2947,12 +2934,12 @@ msgstr "Пароль"
 msgid "Password Protected"
 msgstr "Защищено паролем"
 
-#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:873 ui/mainwindow.cpp:1259
+#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:871 ui/mainwindow.cpp:1257
 #: ui/qtsystemtrayicon.cpp:178 wiimotedev/wiimotesettingspage.cpp:106
 msgid "Pause"
 msgstr "Приостановить"
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:147
 msgid "Pause playback"
 msgstr "Приостановить воспроизведение"
 
@@ -2964,8 +2951,8 @@ msgstr "Приостановлен"
 msgid "Plain sidebar"
 msgstr "Нормальная боковая панель"
 
-#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:506 ui/mainwindow.cpp:841
-#: ui/mainwindow.cpp:860 ui/mainwindow.cpp:1262 ui/qtsystemtrayicon.cpp:166
+#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:505 ui/mainwindow.cpp:839
+#: ui/mainwindow.cpp:858 ui/mainwindow.cpp:1260 ui/qtsystemtrayicon.cpp:166
 #: ui/qtsystemtrayicon.cpp:192 wiimotedev/wiimotesettingspage.cpp:101
 #: ../bin/src/ui_mainwindow.h:631
 msgid "Play"
@@ -2987,7 +2974,7 @@ msgstr "Количество воспроизведений"
 msgid "Play custom radio..."
 msgstr "Слушать пользовательское радио..."
 
-#: core/commandlineoptions.cpp:149
+#: core/commandlineoptions.cpp:146
 msgid "Play if stopped, pause if playing"
 msgstr "Воспроизвести если остановлено, приостановить если воспроизводится"
 
@@ -3000,7 +2987,7 @@ msgstr "Проиграть, если еще ничего не проигрыва
 msgid "Play tag radio..."
 msgstr "Проиграть радио тега..."
 
-#: core/commandlineoptions.cpp:162
+#: core/commandlineoptions.cpp:159
 msgid "Play the <n>th track in the playlist"
 msgstr "Воспроизвести  <n> композицию в списке воспроизведения"
 
@@ -3016,7 +3003,7 @@ msgstr "Воспроизведение"
 msgid "Player name"
 msgstr "Название проигрывателя"
 
-#: core/commandlineoptions.cpp:147
+#: core/commandlineoptions.cpp:144
 msgid "Player options"
 msgstr "Настройки проигрывателя"
 
@@ -3029,7 +3016,7 @@ msgstr "Список воспроизведения"
 msgid "Playlist finished"
 msgstr "Список воспроизведения закончился"
 
-#: core/commandlineoptions.cpp:159
+#: core/commandlineoptions.cpp:156
 msgid "Playlist options"
 msgstr "Настройки списка воспроизведения"
 
@@ -3144,7 +3131,7 @@ msgstr "Предыдущий"
 msgid "Previous track"
 msgstr "Предыдущая композиция"
 
-#: core/commandlineoptions.cpp:171
+#: core/commandlineoptions.cpp:167
 msgid "Print out version information"
 msgstr "Вывести информацию о версии"
 
@@ -3182,12 +3169,12 @@ msgstr "Опрашиваем устройство..."
 msgid "Queue Manager"
 msgstr "Управление очередью"
 
-#: ui/mainwindow.cpp:1340
+#: ui/mainwindow.cpp:1338
 msgid "Queue selected tracks"
 msgstr "Добавить в очередь выбранные композиции"
 
 #: globalsearch/globalsearchwidget.cpp:105 library/libraryview.cpp:251
-#: ui/mainwindow.cpp:1338
+#: ui/mainwindow.cpp:1336
 msgid "Queue track"
 msgstr "Добавить в очередь композицию"
 
@@ -3207,27 +3194,27 @@ msgstr "Дождь"
 msgid "Random visualization"
 msgstr "Случайная визуализация"
 
-#: core/globalshortcuts.cpp:65
+#: core/globalshortcuts.cpp:64
 msgid "Rate the current song 0 stars"
 msgstr "Рэйтинг текущей песни 0 звёзд"
 
-#: core/globalshortcuts.cpp:66
+#: core/globalshortcuts.cpp:65
 msgid "Rate the current song 1 star"
 msgstr "Оценка текущей песни 1 звезда"
 
-#: core/globalshortcuts.cpp:67
+#: core/globalshortcuts.cpp:66
 msgid "Rate the current song 2 stars"
 msgstr "Оценка текущей песни 1 звезды"
 
-#: core/globalshortcuts.cpp:68
+#: core/globalshortcuts.cpp:67
 msgid "Rate the current song 3 stars"
 msgstr "Оценка текущей песни 3 звезды"
 
-#: core/globalshortcuts.cpp:69
+#: core/globalshortcuts.cpp:68
 msgid "Rate the current song 4 stars"
 msgstr "Оценка текущей песни 4 звезды"
 
-#: core/globalshortcuts.cpp:70
+#: core/globalshortcuts.cpp:69
 msgid "Rate the current song 5 stars"
 msgstr "Оценка текущей песни 3 звёзд"
 
@@ -3542,11 +3529,11 @@ msgstr "Перемотка назад"
 msgid "Seek forward"
 msgstr "Перемотка вперед"
 
-#: core/commandlineoptions.cpp:158
+#: core/commandlineoptions.cpp:155
 msgid "Seek the currently playing track by a relative amount"
 msgstr "Немного перемотать текущую композицию"
 
-#: core/commandlineoptions.cpp:157
+#: core/commandlineoptions.cpp:154
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Перемотать текущую композицию на абсолютную позицию"
 
@@ -3578,12 +3565,12 @@ msgstr "Серийный номер"
 msgid "Service offline"
 msgstr "Служба не работает"
 
-#: ui/mainwindow.cpp:1367
+#: ui/mainwindow.cpp:1365
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "Установить %1 в \"%2\"..."
 
-#: core/commandlineoptions.cpp:154
+#: core/commandlineoptions.cpp:151
 msgid "Set the volume to <value> percent"
 msgstr "Установить громкость в <value> процентов"
 
@@ -3613,10 +3600,6 @@ msgstr "Комбинация клавиш для %1 уже существует"
 #: library/libraryfilterwidget.cpp:62
 msgid "Show"
 msgstr "Показать"
-
-#: core/globalshortcuts.cpp:63
-msgid "Show Global Search Popup"
-msgstr "Показывать глобальное всплывающее окно поиска"
 
 #: core/globalshortcuts.cpp:58 wiimotedev/wiimotesettingspage.cpp:111
 msgid "Show OSD"
@@ -3655,7 +3638,7 @@ msgstr ""
 msgid "Show above status bar"
 msgstr "Показать над строкой состояния"
 
-#: ui/mainwindow.cpp:479
+#: ui/mainwindow.cpp:478
 msgid "Show all songs"
 msgstr "Показать все композиции"
 
@@ -3675,7 +3658,7 @@ msgstr "Показывать разделители"
 msgid "Show fullsize..."
 msgstr "Показать полный размер..."
 
-#: library/libraryview.cpp:275 ui/mainwindow.cpp:526
+#: library/libraryview.cpp:275 ui/mainwindow.cpp:525
 msgid "Show in file browser..."
 msgstr "Показать в обозревателе файлов"
 
@@ -3683,11 +3666,11 @@ msgstr "Показать в обозревателе файлов"
 msgid "Show in various artists"
 msgstr "Показать в \"Разных исполнителях\""
 
-#: ui/mainwindow.cpp:480
+#: ui/mainwindow.cpp:479
 msgid "Show only duplicates"
 msgstr "Показывать только дублированные"
 
-#: ui/mainwindow.cpp:481
+#: ui/mainwindow.cpp:480
 msgid "Show only untagged"
 msgstr "Показывать только без тэгов"
 
@@ -3747,7 +3730,7 @@ msgstr "Похожие исполнители"
 msgid "Ska"
 msgstr "Ska"
 
-#: core/commandlineoptions.cpp:152
+#: core/commandlineoptions.cpp:149
 msgid "Skip backwards in playlist"
 msgstr "Переместить назад в списке воспроизведения"
 
@@ -3755,7 +3738,7 @@ msgstr "Переместить назад в списке воспроизвед
 msgid "Skip count"
 msgstr "Пропустить подсчет"
 
-#: core/commandlineoptions.cpp:153
+#: core/commandlineoptions.cpp:150
 msgid "Skip forwards in playlist"
 msgstr "Переместить вперед в списке воспроизведения"
 
@@ -3787,7 +3770,7 @@ msgstr "Soft Rock"
 msgid "Song Information"
 msgstr "Информация о композиции"
 
-#: ui/mainwindow.cpp:256
+#: ui/mainwindow.cpp:255
 msgid "Song info"
 msgstr "Инф-ия о композиции"
 
@@ -3851,7 +3834,7 @@ msgstr "Стандартный"
 msgid "Starred"
 msgstr "Оцененные"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:145
 msgid "Start the playlist currently playing"
 msgstr "Запустить список воспроизведения проигрываемый в данный момент"
 
@@ -3887,11 +3870,11 @@ msgstr "Остановить"
 msgid "Stop after"
 msgstr "Остановить после"
 
-#: ui/mainwindow.cpp:508 ../bin/src/ui_mainwindow.h:639
+#: ui/mainwindow.cpp:507 ../bin/src/ui_mainwindow.h:639
 msgid "Stop after this track"
 msgstr "Остановить после этой композиции"
 
-#: core/commandlineoptions.cpp:151
+#: core/commandlineoptions.cpp:148
 msgid "Stop playback"
 msgstr "Остановить воспроизведение"
 
@@ -4017,7 +4000,7 @@ msgstr "Запрошенный вами сайт не существует!"
 msgid "The site you requested is not an image!"
 msgstr "Запрошенный вами ссылка не является изображением!"
 
-#: ui/mainwindow.cpp:2020
+#: ui/mainwindow.cpp:2015
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -4045,7 +4028,7 @@ msgstr ""
 "В процессе удаления некоторых композиций возникли проблемы. Следующие файлы "
 "не могут быть удалены:"
 
-#: library/libraryview.cpp:461 ui/mainwindow.cpp:1835 widgets/fileview.cpp:186
+#: library/libraryview.cpp:461 ui/mainwindow.cpp:1830 widgets/fileview.cpp:186
 msgid ""
 "These files will be deleted from disk, are you sure you want to continue?"
 msgstr "Эти файлы будут удалены с диска, вы точно хотите продолжить?"
@@ -4153,11 +4136,9 @@ msgstr "Название"
 
 #: internet/groovesharkservice.cpp:939
 msgid ""
-"To start Grooveshark radio, you should first listen to few other Grooveshark"
-" songs"
+"To start Grooveshark radio, you should first listen to a few other "
+"Grooveshark songs"
 msgstr ""
-"Чтобы включить радио Grooveshark, вам следует сначала прослушать несколько "
-"других песен на этом сервисе"
 
 #: core/utilities.cpp:107
 msgid "Today"
@@ -4171,7 +4152,7 @@ msgstr "Включить"
 msgid "Toggle fullscreen"
 msgstr "Переключение в полноэкранный режим"
 
-#: ui/mainwindow.cpp:1342
+#: ui/mainwindow.cpp:1340
 msgid "Toggle queue status"
 msgstr "Переключить состояние очереди"
 
@@ -4179,7 +4160,7 @@ msgstr "Переключить состояние очереди"
 msgid "Toggle scrobbling"
 msgstr "Вкл/выкл скробблинг"
 
-#: core/commandlineoptions.cpp:165
+#: core/commandlineoptions.cpp:162
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Показать/скрыть экранное уведомление"
 
@@ -4233,7 +4214,7 @@ msgstr "Выключить"
 msgid "URI"
 msgstr "URI"
 
-#: core/commandlineoptions.cpp:147
+#: core/commandlineoptions.cpp:144
 msgid "URL(s)"
 msgstr "URL(s)"
 
@@ -4288,7 +4269,7 @@ msgstr "Обновление %1%..."
 msgid "Updating library"
 msgstr "Обновление библиотеки"
 
-#: core/commandlineoptions.cpp:147
+#: core/commandlineoptions.cpp:144
 msgid "Usage"
 msgstr "Использование"
 
@@ -4503,7 +4484,7 @@ msgstr "Windows Media 64к"
 msgid "Windows Media audio"
 msgstr "Windows Media"
 
-#: ui/mainwindow.cpp:2025
+#: ui/mainwindow.cpp:2020
 msgid "Would you like to run a full rescan right now?"
 msgstr "Желаете запустить повторное сканирование?"
 
@@ -4587,11 +4568,11 @@ msgstr ""
 "<a href=\"http://www.clementine-player.org/wiimote\">Смотри раздел на wiki-"
 "странице Clementine</a> для более подробной информации.\n"
 
-#: internet/groovesharksettingspage.cpp:104
+#: internet/groovesharksettingspage.cpp:103
 msgid "You do not have a Grooveshark Anywhere account."
 msgstr "У вас нет учетной записи Grooveshark Anywhere"
 
-#: internet/spotifysettingspage.cpp:149
+#: internet/spotifysettingspage.cpp:148
 msgid "You do not have a Spotify Premium account."
 msgstr "У вас нет учетной записи Spotify Premium"
 
@@ -4603,7 +4584,7 @@ msgstr ""
 "Подключение к сервису  Spotify было разорвано,  введите ваш пароль ещё раз в"
 " диалоге Настройки."
 
-#: internet/spotifysettingspage.cpp:158
+#: internet/spotifysettingspage.cpp:157
 msgid "You have been logged out of Spotify, please re-enter your password."
 msgstr ""
 "Подключение к сервису  Spotify было разорвано,  введите ваш пароль ещё раз."
@@ -4651,7 +4632,7 @@ msgstr "Ваши данные Last.fm некорректны"
 msgid "Your Magnatune credentials were incorrect"
 msgstr "Введенные имя пользователя и/или пароль Magnatune неверны"
 
-#: ui/edittagdialog.cpp:732 ui/mainwindow.cpp:2126
+#: ui/edittagdialog.cpp:732 ui/mainwindow.cpp:2121
 msgid ""
 "Your gstreamer installation is missing the 'ofa' plugin.  This is required "
 "for automatic tag fetching.  Try installing the 'gstreamer-plugins-bad' "
@@ -4674,8 +4655,8 @@ msgstr "Ваши потоки радио"
 msgid "Your scrobbles: %1"
 msgstr "Ваш скробблинг: %1"
 
-#: internet/groovesharksettingspage.cpp:108
-#: internet/spotifysettingspage.cpp:154
+#: internet/groovesharksettingspage.cpp:107
+#: internet/spotifysettingspage.cpp:153
 msgid "Your username or password was incorrect."
 msgstr "Имя пользователя или пароль неправильные."
 
@@ -4688,7 +4669,7 @@ msgid "Zero"
 msgstr "По-умолчанию"
 
 #: playlist/playlistundocommands.cpp:37
-#, c-format, qt-plural-format
+#, c-format
 msgid "add %n songs"
 msgstr "добавить %n композиций"
 
@@ -4743,7 +4724,7 @@ msgstr "диск %1"
 msgid "does not contain"
 msgstr "не содержит"
 
-#: globalsearch/globalsearchwidget.cpp:740
+#: globalsearch/globalsearchwidget.cpp:751
 msgid "e.g."
 msgstr "например, "
 
@@ -4764,8 +4745,8 @@ msgid "in the last"
 msgstr "в последние"
 
 #: playlist/playlistview.cpp:163 ui/edittagdialog.cpp:422
-#: internet/spotifysettingspage.cpp:60 internet/spotifysettingspage.cpp:61
-#: internet/spotifysettingspage.cpp:62
+#: internet/spotifysettingspage.cpp:59 internet/spotifysettingspage.cpp:60
+#: internet/spotifysettingspage.cpp:61
 msgid "kbps"
 msgstr "кбит/с"
 
@@ -4805,7 +4786,7 @@ msgstr "самые старые сначала"
 msgid "on"
 msgstr "на"
 
-#: core/commandlineoptions.cpp:147
+#: core/commandlineoptions.cpp:144
 msgid "options"
 msgstr "настройки"
 
@@ -4814,7 +4795,7 @@ msgid "press enter"
 msgstr "нажмите \"enter\""
 
 #: playlist/playlistundocommands.cpp:65 playlist/playlistundocommands.cpp:88
-#, c-format, qt-plural-format
+#, c-format
 msgid "remove %n songs"
 msgstr "удалить %n композиций"
 

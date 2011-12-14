@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2011-11-30 13:40+0000\n"
+"PO-Revision-Date: 2011-12-13 17:09+0000\n"
 "Last-Translator: clementinebuildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -118,17 +118,17 @@ msgid "%L1 total plays"
 msgstr ""
 
 #: transcoder/transcodedialog.cpp:198
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n failed"
 msgstr "%n neizdevās"
 
 #: transcoder/transcodedialog.cpp:193
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n finished"
 msgstr "%n pabeigti"
 
 #: transcoder/transcodedialog.cpp:188
-#, c-format, qt-plural-format
+#, c-format
 msgid "%n remaining"
 msgstr "%n atlicis"
 
@@ -205,11 +205,6 @@ msgstr "&Rīki"
 msgid "(different across multiple songs)"
 msgstr "(dažādām dziesmām atšķiras)"
 
-#: ../bin/src/ui_globalsearchpopup.h:104 ../bin/src/ui_globalsearchpopup.h:105
-#: ../bin/src/ui_globalsearchpopup.h:106 ../bin/src/ui_globalsearchpopup.h:107
-msgid "..."
-msgstr ""
-
 #: ui/about.cpp:76
 msgid "...and all the Amarok contributors"
 msgstr "... un visiem Amarok atbalstītājiem"
@@ -249,11 +244,11 @@ msgstr ""
 "\n"
 "<p> Ja jūs teksta daļas iekļausiet figūriekavās, tās tiks paslēptas, ja elementi būs tukši.</p>"
 
-#: internet/groovesharksettingspage.cpp:112
+#: internet/groovesharksettingspage.cpp:111
 msgid "A Grooveshark Anywhere account is required."
 msgstr ""
 
-#: internet/spotifysettingspage.cpp:162
+#: internet/spotifysettingspage.cpp:161
 msgid "A Spotify Premium account is required."
 msgstr "Nepieciešams Spotify Premium konts."
 
@@ -357,7 +352,7 @@ msgstr "Pievienot citu straumi..."
 msgid "Add directory..."
 msgstr "Pievienot mapi..."
 
-#: ui/mainwindow.cpp:1571
+#: ui/mainwindow.cpp:1569
 msgid "Add file"
 msgstr ""
 
@@ -369,7 +364,7 @@ msgstr "Pievienot failu..."
 msgid "Add files to transcode"
 msgstr "Pievienot failus pārkodēšanai"
 
-#: ui/mainwindow.cpp:1596
+#: ui/mainwindow.cpp:1594
 msgid "Add folder"
 msgstr "Pievienot mapi"
 
@@ -445,7 +440,7 @@ msgstr ""
 msgid "Add to Grooveshark playlists"
 msgstr ""
 
-#: ui/mainwindow.cpp:1400
+#: ui/mainwindow.cpp:1398
 msgid "Add to another playlist"
 msgstr "Pievienot citai dziesmu listei"
 
@@ -534,7 +529,7 @@ msgstr "Albumi ar vāka attēlu"
 msgid "Albums without covers"
 msgstr "Albumi bez vāka attēla"
 
-#: ui/mainwindow.cpp:152
+#: ui/mainwindow.cpp:151
 msgid "All Files (*)"
 msgstr "Visi faili (*)"
 
@@ -626,7 +621,7 @@ msgstr "Un:"
 msgid "Appearance"
 msgstr "Izskats"
 
-#: core/commandlineoptions.cpp:160
+#: core/commandlineoptions.cpp:157
 msgid "Append files/URLs to the playlist"
 msgstr "Pievienot failus/saites dziesmu listei"
 
@@ -667,7 +662,7 @@ msgstr ""
 msgid "Artist"
 msgstr "Izpildītājs"
 
-#: ui/mainwindow.cpp:257
+#: ui/mainwindow.cpp:256
 msgid "Artist info"
 msgstr "Izpildītāja info"
 
@@ -846,11 +841,11 @@ msgstr "Mainīt īsceļu..."
 msgid "Change shuffle mode"
 msgstr "Mainīt jaukšanas režīmu"
 
-#: core/commandlineoptions.cpp:167
+#: core/commandlineoptions.cpp:163
 msgid "Change the language"
 msgstr "Mainīt valodu"
 
-#: ui/mainwindow.cpp:597
+#: ui/mainwindow.cpp:596
 msgid "Check for updates..."
 msgstr "Pārbaudīt atjauninājumus..."
 
@@ -996,7 +991,7 @@ msgstr "Krāsa"
 msgid "Combine identical results from different sources"
 msgstr ""
 
-#: core/commandlineoptions.cpp:170
+#: core/commandlineoptions.cpp:166
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr ""
 
@@ -1039,7 +1034,7 @@ msgstr "Konfigurēt īsceļus"
 msgid "Configure Spotify..."
 msgstr "Konfigurēt Spotify..."
 
-#: ui/mainwindow.cpp:491
+#: ui/mainwindow.cpp:490
 msgid "Configure library..."
 msgstr "Konfigurēt bibliotēku..."
 
@@ -1076,12 +1071,12 @@ msgstr "Konvertēt mūziku, ko ierīce nespēj atskaņot"
 msgid "Copy to clipboard"
 msgstr ""
 
-#: library/libraryview.cpp:265 ui/mainwindow.cpp:524
+#: library/libraryview.cpp:265 ui/mainwindow.cpp:523
 #: widgets/fileviewlist.cpp:43
 msgid "Copy to device..."
 msgstr "Kopēt uz ierīci..."
 
-#: devices/deviceview.cpp:223 ui/mainwindow.cpp:521
+#: devices/deviceview.cpp:223 ui/mainwindow.cpp:520
 #: widgets/fileviewlist.cpp:38
 msgid "Copy to library..."
 msgstr "Kopēt uz bibliotēku..."
@@ -1282,7 +1277,7 @@ msgstr "Dienas"
 msgid "De&fault"
 msgstr "Nok&lusētais"
 
-#: core/commandlineoptions.cpp:156
+#: core/commandlineoptions.cpp:153
 msgid "Decrease the volume by 4%"
 msgstr "Samazināt skaļumu par 4%"
 
@@ -1303,7 +1298,7 @@ msgid "Delete Grooveshark playlist"
 msgstr ""
 
 #: devices/deviceview.cpp:393 library/libraryview.cpp:460
-#: ui/mainwindow.cpp:1834 widgets/fileview.cpp:185
+#: ui/mainwindow.cpp:1829 widgets/fileview.cpp:185
 msgid "Delete files"
 msgstr "Dzēst failus"
 
@@ -1311,7 +1306,7 @@ msgstr "Dzēst failus"
 msgid "Delete from device..."
 msgstr "Dzēst no ierīces..."
 
-#: library/libraryview.cpp:267 ui/mainwindow.cpp:525
+#: library/libraryview.cpp:267 ui/mainwindow.cpp:524
 #: widgets/fileviewlist.cpp:44
 msgid "Delete from disk..."
 msgstr "Dzēst no diska..."
@@ -1332,11 +1327,11 @@ msgstr "Dzēst oriģinālos failus"
 msgid "Deleting files"
 msgstr "Dzēš failus"
 
-#: ui/mainwindow.cpp:1336
+#: ui/mainwindow.cpp:1334
 msgid "Dequeue selected tracks"
 msgstr "Izņemt dziesmas no rindas"
 
-#: ui/mainwindow.cpp:1334
+#: ui/mainwindow.cpp:1332
 msgid "Dequeue track"
 msgstr "Izņemt dziesmu no rindas"
 
@@ -1364,13 +1359,9 @@ msgstr "Ierīces nosaukums"
 msgid "Device properties..."
 msgstr "Ierīces īpašības..."
 
-#: ui/mainwindow.cpp:254
+#: ui/mainwindow.cpp:253
 msgid "Devices"
 msgstr "Ierīces"
-
-#: ../bin/src/ui_globalsearchpopup.h:103
-msgid "Dialog"
-msgstr ""
 
 #: widgets/didyoumean.cpp:128
 msgid "Did you mean"
@@ -1419,11 +1410,7 @@ msgstr ""
 msgid "Display options"
 msgstr "Displeja opcijas"
 
-#: core/commandlineoptions.cpp:166
-msgid "Display the global search popup"
-msgstr ""
-
-#: core/commandlineoptions.cpp:164
+#: core/commandlineoptions.cpp:161
 msgid "Display the on-screen-display"
 msgstr "Rādīt displeju-uz-ekrāna"
 
@@ -1519,7 +1506,7 @@ msgstr "Dinamisks nejaušs mikss"
 msgid "Edit smart playlist..."
 msgstr "Rediģēt gudro dziesmu listi..."
 
-#: ui/mainwindow.cpp:1369
+#: ui/mainwindow.cpp:1367
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "Rediģēt birku \"%1\"..."
@@ -1619,18 +1606,18 @@ msgstr "Visa kolekcija"
 msgid "Equalizer"
 msgstr "Ekvalaizers"
 
-#: core/commandlineoptions.cpp:168
+#: core/commandlineoptions.cpp:164
 msgid "Equivalent to --log-levels *:1"
 msgstr "Vienāds ar --log-levels *:1"
 
-#: core/commandlineoptions.cpp:169
+#: core/commandlineoptions.cpp:165
 msgid "Equivalent to --log-levels *:3"
 msgstr "Vienāds ar --log-levels *:3"
 
 #: internet/groovesharkservice.cpp:938
 #: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:454
-#: ui/edittagdialog.cpp:732 ui/mainwindow.cpp:1802 ui/mainwindow.cpp:1907
-#: ui/mainwindow.cpp:2126
+#: ui/edittagdialog.cpp:732 ui/mainwindow.cpp:1797 ui/mainwindow.cpp:1902
+#: ui/mainwindow.cpp:2121
 msgid "Error"
 msgstr "Kļūda"
 
@@ -1787,7 +1774,7 @@ msgstr "Faila tips"
 msgid "Filename"
 msgstr "Faila nosaukums"
 
-#: ui/mainwindow.cpp:252
+#: ui/mainwindow.cpp:251
 msgid "Files"
 msgstr "Faili"
 
@@ -2118,7 +2105,7 @@ msgstr "Iekļaut visas dziesmas"
 msgid "Include keyboard shortcut help in the tooltip"
 msgstr ""
 
-#: core/commandlineoptions.cpp:155
+#: core/commandlineoptions.cpp:152
 msgid "Increase the volume by 4%"
 msgstr "Palielināt skaļumu par 4%"
 
@@ -2134,11 +2121,11 @@ msgstr "Informācija"
 msgid "Insert..."
 msgstr "Ievietot..."
 
-#: internet/spotifysettingspage.cpp:75
+#: internet/spotifysettingspage.cpp:74
 msgid "Installed"
 msgstr "Uzstādīts"
 
-#: ui/mainwindow.cpp:253
+#: ui/mainwindow.cpp:252
 msgid "Internet"
 msgstr "Internets"
 
@@ -2335,7 +2322,7 @@ msgstr "Atstājiet tukšu noklusētajam. Piemēri: /dev/dsp\", \"front\", utt."
 msgid "Length"
 msgstr "Ilgums"
 
-#: ui/mainwindow.cpp:241 ui/mainwindow.cpp:251
+#: ui/mainwindow.cpp:240 ui/mainwindow.cpp:250
 msgid "Library"
 msgstr "Bibliotēka"
 
@@ -2343,7 +2330,7 @@ msgstr "Bibliotēka"
 msgid "Library advanced grouping"
 msgstr "Advancēta Bibliotēkas grupēšana"
 
-#: ui/mainwindow.cpp:2027
+#: ui/mainwindow.cpp:2022
 msgid "Library rescan notice"
 msgstr "Bibliotēkās skenēšanas paziņojums"
 
@@ -2434,7 +2421,7 @@ msgstr "Ielādē dziesmas info"
 msgid "Loading..."
 msgstr "Ielādē..."
 
-#: core/commandlineoptions.cpp:161
+#: core/commandlineoptions.cpp:158
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "Ielādē failus/adreses, aizstājot pašreizējo dziesmu listi"
 
@@ -2599,7 +2586,7 @@ msgstr "Montēšanas punkti"
 msgid "Move down"
 msgstr "Pārvietot uz leju"
 
-#: ui/mainwindow.cpp:522 widgets/fileviewlist.cpp:40
+#: ui/mainwindow.cpp:521 widgets/fileviewlist.cpp:40
 msgid "Move to library..."
 msgstr "Pārvietot uz bibliotēku..."
 
@@ -2608,7 +2595,7 @@ msgstr "Pārvietot uz bibliotēku..."
 msgid "Move up"
 msgstr "Pārvietot uz augšu"
 
-#: ui/mainwindow.cpp:150
+#: ui/mainwindow.cpp:149
 msgid "Music (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma *.mp4 *.spx *.wav)"
 msgstr "Mūzika (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma *.mp4 *.spx *.wav)"
 
@@ -2694,7 +2681,7 @@ msgstr "Nekad nav atskaņotas"
 msgid "Never start playing"
 msgstr "Nekad Nesākt atskaņot"
 
-#: ui/mainwindow.cpp:1417 ../bin/src/ui_mainwindow.h:680
+#: ui/mainwindow.cpp:1415 ../bin/src/ui_mainwindow.h:680
 msgid "New playlist"
 msgstr "Jauna dziesmu liste"
 
@@ -2746,7 +2733,7 @@ msgstr "Bez īsiem blokiem"
 msgid "None"
 msgstr "Nekas"
 
-#: library/libraryview.cpp:455 ui/mainwindow.cpp:1803 ui/mainwindow.cpp:1908
+#: library/libraryview.cpp:455 ui/mainwindow.cpp:1798 ui/mainwindow.cpp:1903
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Neviena no izvēlētajām dziesmām nav piemērota kopēšanai uz ierīci"
 
@@ -2778,7 +2765,7 @@ msgstr "Nepietiek dalībnieku"
 msgid "Not enough neighbors"
 msgstr "Nepietiek kaimiņu"
 
-#: internet/spotifysettingspage.cpp:75
+#: internet/spotifysettingspage.cpp:74
 msgid "Not installed"
 msgstr "Nav uzstādīta"
 
@@ -2874,7 +2861,7 @@ msgstr "Opcijas..."
 msgid "Organise Files"
 msgstr "Organizēt Failus"
 
-#: library/libraryview.cpp:263 ui/mainwindow.cpp:523
+#: library/libraryview.cpp:263 ui/mainwindow.cpp:522
 msgid "Organise files..."
 msgstr "Organizēt failus..."
 
@@ -2886,7 +2873,7 @@ msgstr "Kārtoju failus"
 msgid "Original tags"
 msgstr "Oriģinālās birkas"
 
-#: core/commandlineoptions.cpp:163
+#: core/commandlineoptions.cpp:160
 msgid "Other options"
 msgstr "Citas opcijas"
 
@@ -2925,12 +2912,12 @@ msgstr "Parole"
 msgid "Password Protected"
 msgstr "Aizsargāts ar paroli"
 
-#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:873 ui/mainwindow.cpp:1259
+#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:871 ui/mainwindow.cpp:1257
 #: ui/qtsystemtrayicon.cpp:178 wiimotedev/wiimotesettingspage.cpp:106
 msgid "Pause"
 msgstr "Pauze"
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:147
 msgid "Pause playback"
 msgstr "Pauzēt atskaņošanu"
 
@@ -2942,8 +2929,8 @@ msgstr "Nopauzēts"
 msgid "Plain sidebar"
 msgstr "Parasta sānjosla"
 
-#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:506 ui/mainwindow.cpp:841
-#: ui/mainwindow.cpp:860 ui/mainwindow.cpp:1262 ui/qtsystemtrayicon.cpp:166
+#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:505 ui/mainwindow.cpp:839
+#: ui/mainwindow.cpp:858 ui/mainwindow.cpp:1260 ui/qtsystemtrayicon.cpp:166
 #: ui/qtsystemtrayicon.cpp:192 wiimotedev/wiimotesettingspage.cpp:101
 #: ../bin/src/ui_mainwindow.h:631
 msgid "Play"
@@ -2965,7 +2952,7 @@ msgstr "Atskaņošanu skaits"
 msgid "Play custom radio..."
 msgstr "Atskaņot pielāgoto radio..."
 
-#: core/commandlineoptions.cpp:149
+#: core/commandlineoptions.cpp:146
 msgid "Play if stopped, pause if playing"
 msgstr "Atskaņot, ja apturēts, pauzēt, ja atskaņo"
 
@@ -2978,7 +2965,7 @@ msgstr "Atskaņot, ja nekas netiek atskaņots"
 msgid "Play tag radio..."
 msgstr "Atskaņot birku radio..."
 
-#: core/commandlineoptions.cpp:162
+#: core/commandlineoptions.cpp:159
 msgid "Play the <n>th track in the playlist"
 msgstr "Atskaņot <n> dziesmu no dziesmu listes"
 
@@ -2994,7 +2981,7 @@ msgstr "Atskaņošana"
 msgid "Player name"
 msgstr "Atskaņotāja nosaukums"
 
-#: core/commandlineoptions.cpp:147
+#: core/commandlineoptions.cpp:144
 msgid "Player options"
 msgstr "Atskaņotāja opcijas"
 
@@ -3007,7 +2994,7 @@ msgstr "Dziesmu liste"
 msgid "Playlist finished"
 msgstr "Dziesmu liste beigusies"
 
-#: core/commandlineoptions.cpp:159
+#: core/commandlineoptions.cpp:156
 msgid "Playlist options"
 msgstr "Dziesmu listes opcijas"
 
@@ -3122,7 +3109,7 @@ msgstr "Iepriekšējais"
 msgid "Previous track"
 msgstr "Iepriekšējā"
 
-#: core/commandlineoptions.cpp:171
+#: core/commandlineoptions.cpp:167
 msgid "Print out version information"
 msgstr ""
 
@@ -3160,12 +3147,12 @@ msgstr "Ierindoju ierīci..."
 msgid "Queue Manager"
 msgstr "Rindas pārvaldnieks"
 
-#: ui/mainwindow.cpp:1340
+#: ui/mainwindow.cpp:1338
 msgid "Queue selected tracks"
 msgstr "Ierindot izvēlētās dziesmas"
 
 #: globalsearch/globalsearchwidget.cpp:105 library/libraryview.cpp:251
-#: ui/mainwindow.cpp:1338
+#: ui/mainwindow.cpp:1336
 msgid "Queue track"
 msgstr "Ierindot dziesmu"
 
@@ -3185,27 +3172,27 @@ msgstr "Lietus"
 msgid "Random visualization"
 msgstr "Nejauša vizualizācija"
 
-#: core/globalshortcuts.cpp:65
+#: core/globalshortcuts.cpp:64
 msgid "Rate the current song 0 stars"
 msgstr "Novērtēt dziesmu ar 0 zvaigznēm"
 
-#: core/globalshortcuts.cpp:66
+#: core/globalshortcuts.cpp:65
 msgid "Rate the current song 1 star"
 msgstr "Novērtēt ar 1 zvaigzni"
 
-#: core/globalshortcuts.cpp:67
+#: core/globalshortcuts.cpp:66
 msgid "Rate the current song 2 stars"
 msgstr "Novērtēt ar 2 zvaigznēm"
 
-#: core/globalshortcuts.cpp:68
+#: core/globalshortcuts.cpp:67
 msgid "Rate the current song 3 stars"
 msgstr "Novērtēt ar 3 zvaigznēm"
 
-#: core/globalshortcuts.cpp:69
+#: core/globalshortcuts.cpp:68
 msgid "Rate the current song 4 stars"
 msgstr "Novērtēt ar 4 zvaigznēm"
 
-#: core/globalshortcuts.cpp:70
+#: core/globalshortcuts.cpp:69
 msgid "Rate the current song 5 stars"
 msgstr "Novērtēt ar 5 zvaigznēm"
 
@@ -3520,11 +3507,11 @@ msgstr "Patīt atpakaļ"
 msgid "Seek forward"
 msgstr "Patīt uz priekšu"
 
-#: core/commandlineoptions.cpp:158
+#: core/commandlineoptions.cpp:155
 msgid "Seek the currently playing track by a relative amount"
 msgstr "Patīt skanošo dziesmu par relatīvu attālumu"
 
-#: core/commandlineoptions.cpp:157
+#: core/commandlineoptions.cpp:154
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Patīt skanošo dziesmu par absolūtu attālumu"
 
@@ -3556,12 +3543,12 @@ msgstr "Sērijas numurs"
 msgid "Service offline"
 msgstr "Serviss atslēgts"
 
-#: ui/mainwindow.cpp:1367
+#: ui/mainwindow.cpp:1365
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "Uzstādīt %1 uz \"%2\"..."
 
-#: core/commandlineoptions.cpp:154
+#: core/commandlineoptions.cpp:151
 msgid "Set the volume to <value> percent"
 msgstr "Uzstādīt skaļumu uz <value> procentiem"
 
@@ -3591,10 +3578,6 @@ msgstr "Īsceļš priekš %1 jau eksistē"
 #: library/libraryfilterwidget.cpp:62
 msgid "Show"
 msgstr "Parādit"
-
-#: core/globalshortcuts.cpp:63
-msgid "Show Global Search Popup"
-msgstr ""
 
 #: core/globalshortcuts.cpp:58 wiimotedev/wiimotesettingspage.cpp:111
 msgid "Show OSD"
@@ -3632,7 +3615,7 @@ msgstr ""
 msgid "Show above status bar"
 msgstr "Rādīt virs statusa joslas"
 
-#: ui/mainwindow.cpp:479
+#: ui/mainwindow.cpp:478
 msgid "Show all songs"
 msgstr "Rādīt visas dziesmas"
 
@@ -3652,7 +3635,7 @@ msgstr "Rādīt atdalītājus"
 msgid "Show fullsize..."
 msgstr "Radīt pa visu ekrānu..."
 
-#: library/libraryview.cpp:275 ui/mainwindow.cpp:526
+#: library/libraryview.cpp:275 ui/mainwindow.cpp:525
 msgid "Show in file browser..."
 msgstr "Rādīt failu pārlūkā..."
 
@@ -3660,11 +3643,11 @@ msgstr "Rādīt failu pārlūkā..."
 msgid "Show in various artists"
 msgstr "Rādīt pie dažādiem izpildītājiem"
 
-#: ui/mainwindow.cpp:480
+#: ui/mainwindow.cpp:479
 msgid "Show only duplicates"
 msgstr "Rādīt tikai dublikātus"
 
-#: ui/mainwindow.cpp:481
+#: ui/mainwindow.cpp:480
 msgid "Show only untagged"
 msgstr "Rādīt tikai bez birkām"
 
@@ -3724,7 +3707,7 @@ msgstr "Līdzīgi izpildītāji"
 msgid "Ska"
 msgstr "Ska"
 
-#: core/commandlineoptions.cpp:152
+#: core/commandlineoptions.cpp:149
 msgid "Skip backwards in playlist"
 msgstr "Izlaist atpakaļejot dziesmu listē"
 
@@ -3732,7 +3715,7 @@ msgstr "Izlaist atpakaļejot dziesmu listē"
 msgid "Skip count"
 msgstr "Izlaista"
 
-#: core/commandlineoptions.cpp:153
+#: core/commandlineoptions.cpp:150
 msgid "Skip forwards in playlist"
 msgstr "Izlaist turpinot dziesmu listē"
 
@@ -3764,7 +3747,7 @@ msgstr "Vieglais roks"
 msgid "Song Information"
 msgstr "Dziesmas informācija"
 
-#: ui/mainwindow.cpp:256
+#: ui/mainwindow.cpp:255
 msgid "Song info"
 msgstr "Dziesmas info"
 
@@ -3828,7 +3811,7 @@ msgstr "Standarts"
 msgid "Starred"
 msgstr "Novērtēts ar zvaigzni"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:145
 msgid "Start the playlist currently playing"
 msgstr "Sākt pašreiz atskaņoto dziesmu listi"
 
@@ -3864,11 +3847,11 @@ msgstr "Apturēt"
 msgid "Stop after"
 msgstr "Apturēt pēc"
 
-#: ui/mainwindow.cpp:508 ../bin/src/ui_mainwindow.h:639
+#: ui/mainwindow.cpp:507 ../bin/src/ui_mainwindow.h:639
 msgid "Stop after this track"
 msgstr "Apturēt pēc šīs dziesmas"
 
-#: core/commandlineoptions.cpp:151
+#: core/commandlineoptions.cpp:148
 msgid "Stop playback"
 msgstr "Apturēt atskaņošanu"
 
@@ -3994,7 +3977,7 @@ msgstr "Pieprasītā adrese neeksistē!"
 msgid "The site you requested is not an image!"
 msgstr "Pieprasītā adrese nav attēls!"
 
-#: ui/mainwindow.cpp:2020
+#: ui/mainwindow.cpp:2015
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -4018,7 +4001,7 @@ msgid ""
 "deleted:"
 msgstr "Kļuda dzēšot dažas dziesmas. Nevar izdzēst sekojošos failus:"
 
-#: library/libraryview.cpp:461 ui/mainwindow.cpp:1835 widgets/fileview.cpp:186
+#: library/libraryview.cpp:461 ui/mainwindow.cpp:1830 widgets/fileview.cpp:186
 msgid ""
 "These files will be deleted from disk, are you sure you want to continue?"
 msgstr "Šie faili tiks dzēsti no diska. Vai jūs tiešām vēlaties turpināt?"
@@ -4123,8 +4106,8 @@ msgstr "Nosaukums"
 
 #: internet/groovesharkservice.cpp:939
 msgid ""
-"To start Grooveshark radio, you should first listen to few other Grooveshark"
-" songs"
+"To start Grooveshark radio, you should first listen to a few other "
+"Grooveshark songs"
 msgstr ""
 
 #: core/utilities.cpp:107
@@ -4139,7 +4122,7 @@ msgstr ""
 msgid "Toggle fullscreen"
 msgstr "Ieslēgt pilnu ekrānu"
 
-#: ui/mainwindow.cpp:1342
+#: ui/mainwindow.cpp:1340
 msgid "Toggle queue status"
 msgstr "Ieslēgt rindas statusu"
 
@@ -4147,7 +4130,7 @@ msgstr "Ieslēgt rindas statusu"
 msgid "Toggle scrobbling"
 msgstr "Ieslēgt skroblēšanu"
 
-#: core/commandlineoptions.cpp:165
+#: core/commandlineoptions.cpp:162
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr ""
 
@@ -4201,7 +4184,7 @@ msgstr "Izslēgt"
 msgid "URI"
 msgstr "URI"
 
-#: core/commandlineoptions.cpp:147
+#: core/commandlineoptions.cpp:144
 msgid "URL(s)"
 msgstr "Adreses (URL)"
 
@@ -4256,7 +4239,7 @@ msgstr "Atjaunoju %1%..."
 msgid "Updating library"
 msgstr "Atjaunoju bibliotēku"
 
-#: core/commandlineoptions.cpp:147
+#: core/commandlineoptions.cpp:144
 msgid "Usage"
 msgstr "Pielietojums"
 
@@ -4471,7 +4454,7 @@ msgstr ""
 msgid "Windows Media audio"
 msgstr "Windows Media audio"
 
-#: ui/mainwindow.cpp:2025
+#: ui/mainwindow.cpp:2020
 msgid "Would you like to run a full rescan right now?"
 msgstr "Vai jūs vēlaties palaist pilnu skenēšanu?"
 
@@ -4550,11 +4533,11 @@ msgstr ""
 "href=\"http://www.clementine-player.org/wiimote\">Apskatīt Clementine "
 "wiki</a> lai uzzinātu vairāk.\n"
 
-#: internet/groovesharksettingspage.cpp:104
+#: internet/groovesharksettingspage.cpp:103
 msgid "You do not have a Grooveshark Anywhere account."
 msgstr ""
 
-#: internet/spotifysettingspage.cpp:149
+#: internet/spotifysettingspage.cpp:148
 msgid "You do not have a Spotify Premium account."
 msgstr ""
 
@@ -4564,7 +4547,7 @@ msgid ""
 "Settings dialog."
 msgstr ""
 
-#: internet/spotifysettingspage.cpp:158
+#: internet/spotifysettingspage.cpp:157
 msgid "You have been logged out of Spotify, please re-enter your password."
 msgstr ""
 
@@ -4606,7 +4589,7 @@ msgstr "Jūsu Last.fm dati ir nepareizi"
 msgid "Your Magnatune credentials were incorrect"
 msgstr "Jūsu Magnatude dati ir nepareizi"
 
-#: ui/edittagdialog.cpp:732 ui/mainwindow.cpp:2126
+#: ui/edittagdialog.cpp:732 ui/mainwindow.cpp:2121
 msgid ""
 "Your gstreamer installation is missing the 'ofa' plugin.  This is required "
 "for automatic tag fetching.  Try installing the 'gstreamer-plugins-bad' "
@@ -4629,8 +4612,8 @@ msgstr "Jūsu radio straumes"
 msgid "Your scrobbles: %1"
 msgstr "Jūsu skrobli: %1"
 
-#: internet/groovesharksettingspage.cpp:108
-#: internet/spotifysettingspage.cpp:154
+#: internet/groovesharksettingspage.cpp:107
+#: internet/spotifysettingspage.cpp:153
 msgid "Your username or password was incorrect."
 msgstr ""
 
@@ -4643,7 +4626,7 @@ msgid "Zero"
 msgstr "Nulle"
 
 #: playlist/playlistundocommands.cpp:37
-#, c-format, qt-plural-format
+#, c-format
 msgid "add %n songs"
 msgstr "pievienot %n dziesmas"
 
@@ -4698,7 +4681,7 @@ msgstr "disks %1"
 msgid "does not contain"
 msgstr "nesatur"
 
-#: globalsearch/globalsearchwidget.cpp:740
+#: globalsearch/globalsearchwidget.cpp:751
 msgid "e.g."
 msgstr ""
 
@@ -4719,8 +4702,8 @@ msgid "in the last"
 msgstr "pēdējās"
 
 #: playlist/playlistview.cpp:163 ui/edittagdialog.cpp:422
-#: internet/spotifysettingspage.cpp:60 internet/spotifysettingspage.cpp:61
-#: internet/spotifysettingspage.cpp:62
+#: internet/spotifysettingspage.cpp:59 internet/spotifysettingspage.cpp:60
+#: internet/spotifysettingspage.cpp:61
 msgid "kbps"
 msgstr "kb/s"
 
@@ -4760,7 +4743,7 @@ msgstr "vecākais vispirms"
 msgid "on"
 msgstr "uz"
 
-#: core/commandlineoptions.cpp:147
+#: core/commandlineoptions.cpp:144
 msgid "options"
 msgstr "opcijas"
 
@@ -4769,7 +4752,7 @@ msgid "press enter"
 msgstr "piespiediet enter"
 
 #: playlist/playlistundocommands.cpp:65 playlist/playlistundocommands.cpp:88
-#, c-format, qt-plural-format
+#, c-format
 msgid "remove %n songs"
 msgstr "aizvākt %n dziesmas"
 
