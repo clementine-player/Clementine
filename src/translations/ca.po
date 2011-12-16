@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2011-12-13 17:09+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2011-12-15 15:36+0000\n"
+"Last-Translator: Roger Pueyo Centelles <transifex@rogerpueyo.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: ca\n"
@@ -1141,7 +1141,7 @@ msgstr "Imatge de la portada autocontinguda al fitxer"
 #: ui/edittagdialog.cpp:407
 #, qt-format
 msgid "Cover art loaded automatically from %1"
-msgstr ""
+msgstr "Imatge de portada carregada automàticament de %1"
 
 #: ui/edittagdialog.cpp:400
 msgid "Cover art manually unset"
@@ -1398,7 +1398,7 @@ msgstr "Directori"
 
 #: ../bin/src/ui_notificationssettingspage.h:405
 msgid "Disable duration"
-msgstr ""
+msgstr "Deshabilita la durada"
 
 #: ../bin/src/ui_notificationssettingspage.h:398
 msgid "Disabled"
@@ -1411,7 +1411,7 @@ msgstr "Disc"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:234
 msgid "Discontinuous transmission"
-msgstr ""
+msgstr "Transmissió discontínua"
 
 #: internet/icecastfilterwidget.cpp:33 library/libraryfilterwidget.cpp:109
 #: ../bin/src/ui_librarysettingspage.h:169
@@ -1452,7 +1452,7 @@ msgstr "Doble click per obrir"
 
 #: ../bin/src/ui_behavioursettingspage.h:198
 msgid "Double clicking a song will..."
-msgstr ""
+msgstr "En fer doble clic a una cançó..."
 
 #: internet/magnatunedownloaddialog.cpp:252
 msgid "Download directory"
@@ -1568,7 +1568,7 @@ msgstr ""
 
 #: core/globalshortcuts.cpp:62
 msgid "Enable/disable Last.fm scrobbling"
-msgstr ""
+msgstr "Habilita/deshabilita l'scrobble de Last.fm"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:235
 msgid "Encoding complexity"
@@ -1584,7 +1584,7 @@ msgstr "Mode de codificació"
 
 #: ../bin/src/ui_coverfromurldialog.h:103
 msgid "Enter a URL to download a cover from the Internet:"
-msgstr ""
+msgstr "Introduïu l'URL per descarregar una imatge de portada des d'Internet"
 
 #: playlist/playlisttabbar.cpp:131
 msgid "Enter a new name for this playlist"
@@ -1616,11 +1616,11 @@ msgstr "Equalitzador"
 
 #: core/commandlineoptions.cpp:164
 msgid "Equivalent to --log-levels *:1"
-msgstr ""
+msgstr "Equivalent a --log-levels *:1"
 
 #: core/commandlineoptions.cpp:165
 msgid "Equivalent to --log-levels *:3"
-msgstr ""
+msgstr "Equivalent a --log-levels *:3"
 
 #: internet/groovesharkservice.cpp:938
 #: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:454
@@ -1643,7 +1643,7 @@ msgstr "Error esborrant cançons"
 
 #: internet/spotifyblobdownloader.cpp:214
 msgid "Error downloading Spotify plugin"
-msgstr ""
+msgstr "S'ha produït un error en descarregar el connector d'Spotify"
 
 #: playlist/songloaderinserter.cpp:71 playlist/songloaderinserter.cpp:133
 #, qt-format
@@ -1654,6 +1654,7 @@ msgstr "Error carregant %1"
 #: internet/digitallyimportedurlhandler.cpp:73
 msgid "Error loading di.fm playlist"
 msgstr ""
+"S'ha produït un error en descarregar la llista de reproducció de di.fm"
 
 #: transcoder/transcoder.cpp:393
 #, qt-format
@@ -1662,7 +1663,7 @@ msgstr "Error processant %1: %2"
 
 #: playlist/songloaderinserter.cpp:100
 msgid "Error while loading audio CD"
-msgstr ""
+msgstr "S'ha produït un error en carregar el CD d'àudio"
 
 #: library/library.cpp:58
 msgid "Ever played"
@@ -1670,7 +1671,7 @@ msgstr ""
 
 #: ../bin/src/ui_playbacksettingspage.h:263
 msgid "Except between tracks on the same album or in the same CUE sheet"
-msgstr ""
+msgstr "Excepte entre pistes del mateix àlbum o del mateix full CUE"
 
 #: ../bin/src/ui_dynamicplaylistcontrols.h:111
 msgid "Expand"
@@ -1927,7 +1928,7 @@ msgstr "Obtenint canals"
 
 #: internet/digitallyimportedservicebase.cpp:106
 msgid "Getting streams"
-msgstr ""
+msgstr "S'estan obtenint els fluxos"
 
 #: ../bin/src/ui_addstreamdialog.h:116
 msgid "Give it a name:"
@@ -1935,11 +1936,11 @@ msgstr "Posa-li un nom:"
 
 #: ../bin/src/ui_mainwindow.h:686
 msgid "Go to next playlist tab"
-msgstr ""
+msgstr "Vés a la pestanya de la següent llista de reproducció"
 
 #: ../bin/src/ui_mainwindow.h:687
 msgid "Go to previous playlist tab"
-msgstr ""
+msgstr "Vés a la pestanya de l'anterior llista de reproducció"
 
 #: ../bin/src/ui_remotesettingspage.h:206
 msgid "Google password"
@@ -1961,11 +1962,11 @@ msgstr ""
 
 #: ../bin/src/ui_groovesharksettingspage.h:112
 msgid "Grooveshark"
-msgstr ""
+msgstr "Grooveshark"
 
 #: internet/groovesharkservice.cpp:406
 msgid "Grooveshark login error"
-msgstr ""
+msgstr "S'ha produït un error en iniciar sessió a Grooveshark"
 
 #: internet/groovesharkservice.cpp:548
 msgid "Grooveshark radio"
@@ -2009,7 +2010,7 @@ msgstr "Agrupar per Gènere/Artista/Àlbum"
 
 #: ../bin/src/ui_networkproxysettingspage.h:163
 msgid "HTTP proxy"
-msgstr ""
+msgstr "Proxy HTTP"
 
 #: ../bin/src/ui_deviceproperties.h:371
 msgid "Hardware information"
@@ -2171,7 +2172,7 @@ msgstr "Sessió no vàlida"
 
 #: internet/groovesharkservice.cpp:399
 msgid "Invalid username and/or password"
-msgstr ""
+msgstr "Nom d'usuari i/o contrasenya invàlids"
 
 #: internet/jamendoservice.cpp:124
 msgid "Jamendo"
@@ -2179,7 +2180,7 @@ msgstr "Jamendo"
 
 #: internet/jamendoservice.cpp:107
 msgid "Jamendo Most Listened Tracks"
-msgstr ""
+msgstr "Pistes més escoltades a Jamendo"
 
 #: internet/jamendoservice.cpp:105
 msgid "Jamendo Top Tracks"
@@ -2216,6 +2217,7 @@ msgstr "Pressioni els botons per %1 segons..."
 #: ../bin/src/ui_behavioursettingspage.h:178
 msgid "Keep running in the background when the window is closed"
 msgstr ""
+"Mantingues l'aplicació executant-se en segon pla quan tanqui la finestra"
 
 #: ../bin/src/ui_organisedialog.h:193
 msgid "Keep the original files"
@@ -2345,7 +2347,7 @@ msgstr ""
 
 #: smartplaylists/querywizardplugin.cpp:83
 msgid "Library search"
-msgstr ""
+msgstr "Cerca a la biblioteca"
 
 #: ../bin/src/ui_querysortpage.h:140
 msgid "Limits"
@@ -2475,7 +2477,7 @@ msgstr "Llletres"
 #: songinfo/ultimatelyricsprovider.cpp:135
 #, qt-format
 msgid "Lyrics from %1"
-msgstr ""
+msgstr "Lletres des de %1"
 
 #: core/song.cpp:389 ../bin/src/ui_transcodersettingspage.h:159
 msgid "MP3"
