@@ -530,6 +530,13 @@ void SpotifyClient::PlaylistStateChangedForLoadPlaylist(sp_playlist* pl, void* u
   spotify_pb::SpotifyMessage message;
   spotify_pb::LoadPlaylistResponse* response = message.mutable_load_playlist_response();
 
+  // For some reason, we receive the starred tracks in reverse order but not
+  // other playlists.
+  if (pending_load->request_.type() == spotify_pb::Starred) {
+    std::reverse(pending_load->tracks_.begin(),
+                 pending_load->tracks_.end());
+  }
+
   *response->mutable_request() = pending_load->request_;
   foreach (sp_track* track, pending_load->tracks_) {
     me->ConvertTrack(track, response->add_track());
