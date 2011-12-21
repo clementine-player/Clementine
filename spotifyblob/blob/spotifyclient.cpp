@@ -18,6 +18,7 @@
 // it is used by the Spotify blob which links against libspotify and is not GPL
 // compatible.
 
+#include <algorithm>
 
 #include "mediapipeline.h"
 #include "spotifyclient.h"
