@@ -1219,7 +1219,8 @@ void GroovesharkService::RenamePlaylist(int playlist_id) {
   QString new_name = QInputDialog::getText(NULL,
                                        tr("Rename \"%1\" playlist").arg(old_name),
                                        tr("Name"),
-                                       QLineEdit::Normal);
+                                       QLineEdit::Normal,
+                                       old_name);
   if (new_name.isEmpty()) {
     return;
   }
