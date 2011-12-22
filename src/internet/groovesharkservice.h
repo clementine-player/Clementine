@@ -175,10 +175,13 @@ class GroovesharkService : public InternetService {
   void SongMarkedAsComplete();
 
   void Homepage();
+  // Refresh all Grooveshark's items, and re-fill them
+  void RefreshItems();
 
  private:
   void EnsureMenuCreated();
   void EnsureItemsCreated();
+  void RemoveItems();
   void EnsureConnected();
 
   // Create a playlist item, with data set as excepted. Doesn't fill the item
