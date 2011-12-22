@@ -416,6 +416,10 @@ void GroovesharkService::Authenticated() {
 
 void GroovesharkService::Logout() {
   ResetSessionId();
+  RemoveItems();
+}
+
+void GroovesharkService::RemoveItems() {
   root_->removeRows(0, root_->rowCount());
   // 'search', 'favorites', 'popular', ... items were root's children, and have
   // been deleted: we should update these now invalid pointers
@@ -501,12 +505,19 @@ void GroovesharkService::EnsureMenuCreated() {
     context_menu_->addAction(IconLoader::Load("edit-find"), tr("Search Grooveshark (opens a new tab)") + "...", this, SLOT(OpenSearchTab()));
     context_menu_->addSeparator();
     context_menu_->addAction(IconLoader::Load("download"), tr("Open %1 in browser").arg("grooveshark.com"), this, SLOT(Homepage()));
+    context_menu_->addAction(IconLoader::Load("view-refresh"), tr("Refresh"), this, SLOT(RefreshItems()));
+    context_menu_->addSeparator();
     context_menu_->addAction(IconLoader::Load("configure"), tr("Configure Grooveshark..."), this, SLOT(ShowConfig()));
   }
 }
 
 void GroovesharkService::Homepage() {
   QDesktopServices::openUrl(QUrl(kHomepage));
+}
+
+void GroovesharkService::RefreshItems() {
+  RemoveItems();
+  EnsureItemsCreated();
 }
 
 void GroovesharkService::EnsureItemsCreated() {
