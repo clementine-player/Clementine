@@ -221,7 +221,9 @@ Song MagnatuneService::ReadTrack(QXmlStreamReader& reader) {
       if (name == "cover_small")     song.set_art_automatic(value);
       if (name == "albumsku")        song.set_comment(value);
       if (name == "url") {
-        QUrl url(value);
+        QUrl url;
+        // Magnatune's URLs are already encoded
+        url.setEncodedUrl(value.toLocal8Bit());
         url.setScheme("magnatune");
         song.set_url(url);
       }
