@@ -75,6 +75,7 @@ OSDPretty::OSDPretty(Mode mode, QWidget *parent)
 
   setWindowFlags(flags);
   setAttribute(Qt::WA_TranslucentBackground, true);
+  setAttribute(Qt::WA_X11NetWmWindowTypeNotification, true);
   ui_->setupUi(this);
 
   // Mode settings
