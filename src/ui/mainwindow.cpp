@@ -612,7 +612,7 @@ MainWindow::MainWindow(
   qtsparkle::Updater* updater = new qtsparkle::Updater(
       QUrl("https://clementine-data.appspot.com/sparkle-windows"), this);
   updater->SetNetworkAccessManager(new NetworkAccessManager(this));
-  updater->SetVersion(CLEMENTINE_VERSION);
+  updater->SetVersion(CLEMENTINE_VERSION_SPARKLE);
   connect(check_updates, SIGNAL(triggered()), updater, SLOT(CheckNow()));
 #endif
 

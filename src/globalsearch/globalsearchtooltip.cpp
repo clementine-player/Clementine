@@ -45,7 +45,7 @@ GlobalSearchTooltip::GlobalSearchTooltip(QWidget* event_target)
     active_result_(0),
     show_tooltip_help_(true)
 {
-  setWindowFlags(Qt::Popup);
+  setWindowFlags(Qt::FramelessWindowHint | Qt::Popup);
   setFocusPolicy(Qt::NoFocus);
   setAttribute(Qt::WA_NoSystemBackground);
   setAttribute(Qt::WA_TranslucentBackground);

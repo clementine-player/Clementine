@@ -1,12 +1,12 @@
 Name:           clementine
-Version:        @CLEMENTINE_VERSION_RPM@
-Release:        1.@RPM_DISTRO@
+Version:        @CLEMENTINE_VERSION_RPM_V@
+Release:        @CLEMENTINE_VERSION_RPM_R@.@RPM_DISTRO@
 Summary:        A music player and library organiser
 
 Group:          Applications/Multimedia
 License:        GPLv3
 URL:            http://www.clementine-player.org/
-Source0:        %{name}-%{version}.tar.gz
+Source0:        %{name}-@CLEMENTINE_VERSION_SPARKLE@.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires:  desktop-file-utils liblastfm-devel taglib-devel gettext
@@ -55,7 +55,7 @@ Features include:
   * Queue manager
 
 %prep
-%setup -q
+%setup -q -n %{name}-@CLEMENTINE_VERSION_SPARKLE@
 
 
 %build
@@ -83,5 +83,5 @@ make clean
 %{_datadir}/clementine/projectm-presets
 
 %changelog
-* @RPM_DATE@ David Sansome <me@davidsansome.com> - @CLEMENTINE_VERSION_RPM@
+* @RPM_DATE@ David Sansome <me@davidsansome.com> - @CLEMENTINE_VERSION_RPM_V@
 - Version @CLEMENTINE_VERSION_DISPLAY@
