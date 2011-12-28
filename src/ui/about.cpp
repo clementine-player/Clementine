@@ -70,8 +70,8 @@ QString About::MakeHtml() const {
 
   foreach (const Person& person, thanks_to_)
     ret += "<br />" + MakeHtml(person);
-  ret += QString("<br />" + tr("All the translators") + " &lt;<a href=\"https://translations.launchpad.net/clementine\">"
-                 "https://translations.launchpad.net/clementine</a>&gt;");
+  ret += QString("<br />" + tr("All the translators") + " &lt;<a href=\"https://www.transifex.net/projects/p/clementine\">"
+                 "https://www.transifex.net/projects/p/clementine</a>&gt;");
 
   ret += QString("<br />%1</p>").arg(tr("...and all the Amarok contributors"));
   ret += QString("<p><b>%1</b>").arg(tr("And:"));
