@@ -19,10 +19,11 @@ DIRECTORY=clementine
 rm -rfv $BASE/$DIRECTORY $BASE/*.diff.gz $BASE/*.tar.gz $BASE/*.dsc $BASE/*_source.changes
 
 # Checkout
-git init $DIRECTORY
+git clone $REPO $DIRECTORY
 cd $BASE/$DIRECTORY
-git fetch -t $REPO $REFSPEC
 git checkout $REFSPEC
+git cherry-pick -n 9e2e035ae1a25bc5f37a17ae7ea10ba7c37fb328
+git cherry-pick -n 5b9a273227648919c8c57c73df9c980c049eccc4
 
 # Generate changelog and maketarball.sh
 mkdir $BASE/$DIRECTORY/bin
