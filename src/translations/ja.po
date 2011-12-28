@@ -2,19 +2,11 @@
 # Copyright (C) 2010 David Sansome
 # This file is distributed under the same license as the Clementine package.
 # 
-# Translators:
-# David Sansome <me@davidsansome.com>, 2010.
-#   <m.sagami+sourceforge@gmail.com>, 2011.
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Clementine Music Player\n"
-"Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2011-12-13 17:09+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: ja\n"
-"Plural-Forms: nplurals=1; plural=0\n"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:130
 #: ../bin/src/ui_transcoderoptionsmp3.h:195
@@ -232,17 +224,16 @@ msgstr "ランダムな 50 トラック"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:165
 msgid "<a href=\"http://www.di.fm/premium/\">Upgrade to Premium now</a>"
-msgstr "<a href=\"http://www.di.fm/premium/\">すぐにプレミアムへアップグレードする</a>"
+msgstr "<a href="http://www.di.fm/premium/">すぐにプレミアムへアップグレードする</a>"
 
 #: ../bin/src/ui_organisedialog.h:199
 msgid ""
 "<p>Tokens start with %, for example: %artist %album %title </p>\n"
 "\n"
 "<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
-msgstr ""
-"<p>トークンは % で始まります、例: %artist %album %title </p>\n"
-"\n"
-"<p>トークンを含むテキストの一部を波括弧で囲むと、トークンが空である場合に限りそのセクションは非表示になります。</p>"
+msgstr "<p>トークンは % で始まります、例: %artist %album %title </p>
+
+<p>トークンを含むテキストの一部を波括弧で囲むと、トークンが空である場合に限りそのセクションは非表示になります。</p>"
 
 #: internet/groovesharksettingspage.cpp:111
 msgid "A Grooveshark Anywhere account is required."
@@ -257,8 +248,7 @@ msgid ""
 "A smart playlist is a dynamic list of songs that come from your library.  "
 "There are different types of smart playlist that offer different ways of "
 "selecting songs."
-msgstr ""
-"スマートプレイリストは、ライブラリから一定の条件に従って抽出されるプレイリストです。さまざまな選曲方法を提供する、さまざまなスマートプレイリストがあります。"
+msgstr "スマートプレイリストは、ライブラリから一定の条件に従って抽出されるプレイリストです。さまざまな選曲方法を提供する、さまざまなスマートプレイリストがあります。"
 
 #: smartplaylists/querywizardplugin.cpp:145
 msgid ""
@@ -637,7 +627,7 @@ msgstr "圧縮を適用してクリップを禁止する"
 #: ui/equalizer.cpp:191
 #, qt-format
 msgid "Are you sure you want to delete the \"%1\" preset?"
-msgstr "\"%1\" プリセットを削除してもよろしいですか?"
+msgstr ""%1" プリセットを削除してもよろしいですか?"
 
 #: internet/groovesharkservice.cpp:1177
 msgid "Are you sure you want to delete this playlist?"
@@ -924,9 +914,7 @@ msgstr "Clementine はトラックの変更時にメッセージを表示しま�
 msgid ""
 "Clementine could not load any projectM visualisations.  Check that you have "
 "installed Clementine properly."
-msgstr ""
-"Clementine はいかなる projectM の視覚化も読み込むことができませんでした。Clementine "
-"が適切にインストールされているかチェックしてください。"
+msgstr "Clementine はいかなる projectM の視覚化も読み込むことができませんでした。Clementine が適切にインストールされているかチェックしてください。"
 
 #: internet/lastfmsettingspage.cpp:103
 msgid ""
@@ -1078,25 +1066,21 @@ msgstr "iPod データベースのコピー中"
 msgid ""
 "Could not create the GStreamer element \"%1\" - make sure you have all the "
 "required GStreamer plugins installed"
-msgstr ""
-"GStreamer 要素 \"%1\" を作成できませんでした - 必要な GStreamer "
-"プラグインがすべてインストールされていることを確認してください"
+msgstr "GStreamer 要素 "%1" を作成できませんでした - 必要な GStreamer プラグインがすべてインストールされていることを確認してください"
 
 #: transcoder/transcoder.cpp:425
 #, qt-format
 msgid ""
 "Couldn't find a muxer for %1, check you have the correct GStreamer plugins "
 "installed"
-msgstr ""
-"%1 のミュクサーを見つけることができませんでした、正しい GStreamer プラグインがインストールされていることをチェックしてください"
+msgstr "%1 のミュクサーを見つけることができませんでした、正しい GStreamer プラグインがインストールされていることをチェックしてください"
 
 #: transcoder/transcoder.cpp:419
 #, qt-format
 msgid ""
 "Couldn't find an encoder for %1, check you have the correct GStreamer "
 "plugins installed"
-msgstr ""
-"%1 のエンコーダーを見つけることができませんでした、正しい GStreamer プラグインがインストールされていることをチェックしてください"
+msgstr "%1 のエンコーダーを見つけることができませんでした、正しい GStreamer プラグインがインストールされていることをチェックしてください"
 
 #: internet/lastfmservice.cpp:899
 msgid "Couldn't load the last.fm radio station"
@@ -1495,7 +1479,7 @@ msgstr "スマートプレイリストを編集..."
 #: ui/mainwindow.cpp:1367
 #, qt-format
 msgid "Edit tag \"%1\"..."
-msgstr "タグ \"%1\" の編集..."
+msgstr "タグ "%1" の編集..."
 
 #: ../bin/src/ui_mainwindow.h:654
 msgid "Edit tag..."
@@ -2052,7 +2036,7 @@ msgstr ""
 
 #: ../bin/src/ui_organisedialog.h:204
 msgid "Ignore \"The\" in artist names"
-msgstr "アーティスト名の \"The\" を無視する"
+msgstr "アーティスト名の "The" を無視する"
 
 #: ui/albumcoverchoicecontroller.cpp:41
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
@@ -2293,7 +2277,7 @@ msgstr "最低のお気に入りトラック"
 
 #: ../bin/src/ui_playbacksettingspage.h:282
 msgid "Leave blank for the default.  Examples: \"/dev/dsp\", \"front\", etc."
-msgstr "既定にするには空のままにします。例: \"/dev/dsp\"、\"front\"、など"
+msgstr "既定にするには空のままにします。例: "/dev/dsp"、"front"、など"
 
 #: playlist/playlist.cpp:1110 ui/organisedialog.cpp:63
 #: ui/qtsystemtrayicon.cpp:255 ../bin/src/ui_edittagdialog.h:636
@@ -3523,7 +3507,7 @@ msgstr "サービスがオフラインです"
 #: ui/mainwindow.cpp:1365
 #, qt-format
 msgid "Set %1 to \"%2\"..."
-msgstr "%1 を \"%2\" へ設定します..."
+msgstr "%1 を "%2" へ設定します..."
 
 #: core/commandlineoptions.cpp:151
 msgid "Set the volume to <value> percent"
@@ -3634,7 +3618,7 @@ msgstr ""
 
 #: ../bin/src/ui_lastfmsettingspage.h:151
 msgid "Show the \"love\" and \"ban\" buttons"
-msgstr "\"Love\" および \"Ban\" ボタンを表示する"
+msgstr ""Love" および "Ban" ボタンを表示する"
 
 #: ../bin/src/ui_lastfmsettingspage.h:152
 msgid "Show the scrobble button in the main window"
@@ -3930,7 +3914,7 @@ msgstr "謝辞"
 #: ui/globalshortcutssettingspage.cpp:175
 #, qt-format
 msgid "The \"%1\" command could not be started."
-msgstr "\"%1\" コマンドは開始できませんでした。"
+msgstr ""%1" コマンドは開始できませんでした。"
 
 #: internet/magnatunedownloaddialog.cpp:89
 #, qt-format
@@ -4038,9 +4022,7 @@ msgstr "これは iPod ですが、Clementine は libgpod サポートなしで�
 msgid ""
 "This is the first time you have connected this device.  Clementine will now "
 "scan the device to find music files - this may take some time."
-msgstr ""
-"このデバイスに初めて接続しました。Clementine はミュージック ファイルを検索するためにデバイスをスキャンします - "
-"これには時間がかかる可能性があります。"
+msgstr "このデバイスに初めて接続しました。Clementine はミュージック ファイルを検索するためにデバイスをスキャンします - これには時間がかかる可能性があります。"
 
 #: playlist/playlisttabbar.cpp:159
 msgid ""
@@ -4359,9 +4341,8 @@ msgstr "Clementine の起動時"
 msgid ""
 "When looking for album art Clementine will first look for picture files that contain one of these words.\n"
 "If there are no matches then it will use the largest image in the directory."
-msgstr ""
-"アルバム アートの検索時に Clementine はまずこれらの単語の 1 つを含む画像ファイルを探します。\n"
-"一致がない場合はディレクトリの最も大きいイメージを使用します。"
+msgstr "アルバム アートの検索時に Clementine はまずこれらの単語の 1 つを含む画像ファイルを探します。
+一致がない場合はディレクトリの最も大きいイメージを使用します。"
 
 #: devices/ilister.cpp:99
 msgid "WiFi MAC Address"
@@ -4486,18 +4467,15 @@ msgid ""
 "You can scrobble tracks for free, but only <span style=\" font-"
 "weight:600;\">paid subscribers</span> can stream Last.fm radio from "
 "Clementine."
-msgstr ""
-"トラックは無料で Scrobble できますが、<span style=\" font-weight:600;\">有料会員</span>になると "
-"Clementine から Last.fm ラジオを配信できます。"
+msgstr "トラックは無料で Scrobble できますが、<span style=" font-weight:600;">有料会員</span>になると Clementine から Last.fm ラジオを配信できます。"
 
 #: ../bin/src/ui_wiimotesettingspage.h:184
 msgid ""
 "You can use your Wii Remote as a remote control for Clementine.  <a "
 "href=\"http://www.clementine-player.org/wiimote\">See the page on the "
 "Clementine wiki</a> for more information.\n"
-msgstr ""
-"Clementine のリモート コントロールとして Wii Remote を使用できます。詳細は<a href=\"http://www"
-".clementine-player.org/wiimote\">Clementine wiki のページをご覧ください</a>。\n"
+msgstr "Clementine のリモート コントロールとして Wii Remote を使用できます。詳細は<a href="http://www.clementine-player.org/wiimote">Clementine wiki のページをご覧ください</a>。
+"
 
 #: internet/groovesharksettingspage.cpp:103
 msgid "You do not have a Grooveshark Anywhere account."
@@ -4526,9 +4504,7 @@ msgid ""
 "You need to launch System Preferences and turn on \"<span style=\" font-"
 "style:italic;\">Enable access for assistive devices</span>\" to use global "
 "shortcuts in Clementine."
-msgstr ""
-"Clementine でグローバル ショートカットを使用するには [システム環境設定] を起動して \"<span style=\" font-"
-"style:italic;\">補助装置にアクセスできるようにする</span>\" をオンにする必要があります。"
+msgstr "Clementine でグローバル ショートカットを使用するには [システム環境設定] を起動して "<span style=" font-style:italic;">補助装置にアクセスできるようにする</span>" をオンにする必要があります。"
 
 #: ../bin/src/ui_behavioursettingspage.h:185
 msgid "You will need to restart Clementine if you change the language."
@@ -4741,5 +4717,4 @@ msgstr "停止"
 #, qt-format
 msgid "track %1"
 msgstr "トラック %1"
-
 

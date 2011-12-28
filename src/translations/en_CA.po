@@ -2,18 +2,11 @@
 # Copyright (C) 2010 David Sansome
 # This file is distributed under the same license as the Clementine package.
 # 
-# Translators:
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Clementine Music Player\n"
-"Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2011-12-13 17:09+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: en_CA\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:130
 #: ../bin/src/ui_transcoderoptionsmp3.h:195
@@ -632,7 +625,7 @@ msgstr "Apply compression to prevent clipping"
 #: ui/equalizer.cpp:191
 #, qt-format
 msgid "Are you sure you want to delete the \"%1\" preset?"
-msgstr "Are you sure you want to delete the \"%1\" preset?"
+msgstr "Are you sure you want to delete the "%1" preset?"
 
 #: internet/groovesharkservice.cpp:1177
 msgid "Are you sure you want to delete this playlist?"
@@ -1071,9 +1064,7 @@ msgstr ""
 msgid ""
 "Could not create the GStreamer element \"%1\" - make sure you have all the "
 "required GStreamer plugins installed"
-msgstr ""
-"Could not create the GStreamer element \"%1\" - make sure you have all the "
-"required GStreamer plugins installed"
+msgstr "Could not create the GStreamer element "%1" - make sure you have all the required GStreamer plugins installed"
 
 #: transcoder/transcoder.cpp:425
 #, qt-format
@@ -1486,7 +1477,7 @@ msgstr ""
 #: ui/mainwindow.cpp:1367
 #, qt-format
 msgid "Edit tag \"%1\"..."
-msgstr "Edit tag \"%1\"..."
+msgstr "Edit tag "%1"..."
 
 #: ../bin/src/ui_mainwindow.h:654
 msgid "Edit tag..."
@@ -1562,8 +1553,7 @@ msgstr "Enter a new name for this playlist"
 #: ../bin/src/ui_lastfmstationdialog.h:93
 msgid ""
 "Enter an <b>artist</b> or <b>tag</b> to start listening to Last.fm radio."
-msgstr ""
-"Enter an <b>artist</b> or <b>tag</b> to start listening to Last.fm radio."
+msgstr "Enter an <b>artist</b> or <b>tag</b> to start listening to Last.fm radio."
 
 #: ../bin/src/ui_libraryfilterwidget.h:131
 #: ../bin/src/ui_albumcovermanager.h:153
@@ -2285,7 +2275,7 @@ msgstr ""
 
 #: ../bin/src/ui_playbacksettingspage.h:282
 msgid "Leave blank for the default.  Examples: \"/dev/dsp\", \"front\", etc."
-msgstr "Leave blank for the default.  Examples: \"/dev/dsp\", \"front\", etc."
+msgstr "Leave blank for the default.  Examples: "/dev/dsp", "front", etc."
 
 #: playlist/playlist.cpp:1110 ui/organisedialog.cpp:63
 #: ui/qtsystemtrayicon.cpp:255 ../bin/src/ui_edittagdialog.h:636
@@ -2691,8 +2681,7 @@ msgstr ""
 #: playlist/playlistcontainer.cpp:416
 msgid ""
 "No matches found.  Clear the search box to show the whole playlist again."
-msgstr ""
-"No matches found.  Clear the search box to show the whole playlist again."
+msgstr "No matches found.  Clear the search box to show the whole playlist again."
 
 #: ../bin/src/ui_transcoderoptionsaac.h:145
 msgid "No short blocks"
@@ -3516,7 +3505,7 @@ msgstr "Service offline"
 #: ui/mainwindow.cpp:1365
 #, qt-format
 msgid "Set %1 to \"%2\"..."
-msgstr "Set %1 to \"%2\"..."
+msgstr "Set %1 to "%2"..."
 
 #: core/commandlineoptions.cpp:151
 msgid "Set the volume to <value> percent"
@@ -3627,7 +3616,7 @@ msgstr ""
 
 #: ../bin/src/ui_lastfmsettingspage.h:151
 msgid "Show the \"love\" and \"ban\" buttons"
-msgstr "Show the \"love\" and \"ban\" buttons"
+msgstr "Show the "love" and "ban" buttons"
 
 #: ../bin/src/ui_lastfmsettingspage.h:152
 msgid "Show the scrobble button in the main window"
@@ -3923,7 +3912,7 @@ msgstr "Thanks to"
 #: ui/globalshortcutssettingspage.cpp:175
 #, qt-format
 msgid "The \"%1\" command could not be started."
-msgstr "The \"%1\" command could not be started."
+msgstr "The "%1" command could not be started."
 
 #: internet/magnatunedownloaddialog.cpp:89
 #, qt-format
@@ -4724,5 +4713,4 @@ msgstr ""
 #, qt-format
 msgid "track %1"
 msgstr "track %1"
-
 

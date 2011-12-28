@@ -2,24 +2,11 @@
 # Copyright (C) 2010 David Sansome
 # This file is distributed under the same license as the Clementine package.
 # 
-# Translators:
-# Christian Sturm <reezer@reezer.org>, 2011.
-# Claudius Henrichs <claudius.h@gmx.de>, 2011.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
-# Martin Herkt <lachs0r@hong-mailing.de>, 2011.
-# Martin Herkt <luck3r@phicode.de>, 2010.
-#   <stefan@stefantiemann.de>, 2011.
-#   <the.crazy.zorro@googlemail.com>, 2011.
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Clementine Music Player\n"
-"Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2011-12-13 17:09+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: de\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:130
 #: ../bin/src/ui_transcoderoptionsmp3.h:195
@@ -49,7 +36,7 @@ msgstr " Sekunden"
 
 #: ../bin/src/ui_querysortpage.h:143
 msgid " songs"
-msgstr " Titel"
+msgstr "Titel"
 
 #: widgets/osd.cpp:209
 #, qt-format
@@ -99,7 +86,7 @@ msgstr "%1 Titel gefunden (zeige %2)"
 #: playlist/playlistmanager.cpp:308
 #, qt-format
 msgid "%1 tracks"
-msgstr "%1 Titel"
+msgstr "%1 Stück"
 
 #: ui/albumcovermanager.cpp:437
 #, qt-format
@@ -208,7 +195,7 @@ msgstr "&Werkzeuge"
 
 #: ui/edittagdialog.cpp:45
 msgid "(different across multiple songs)"
-msgstr "(unterschiedlich für mehrere Lieder)"
+msgstr "(unterschiedlich für mehrere Titel)"
 
 #: ui/about.cpp:76
 msgid "...and all the Amarok contributors"
@@ -237,17 +224,16 @@ msgstr "50 zufällige Stücke"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:165
 msgid "<a href=\"http://www.di.fm/premium/\">Upgrade to Premium now</a>"
-msgstr "<a href=\"http://www.di.fm/premium/\">Jetzt auf Premium erweitern</a>"
+msgstr "<a href="http://www.di.fm/premium/">Jetzt auf Premium erweitern</a>"
 
 #: ../bin/src/ui_organisedialog.h:199
 msgid ""
 "<p>Tokens start with %, for example: %artist %album %title </p>\n"
 "\n"
 "<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
-msgstr ""
-"<p>Schlüsselwörter beginnen mit %, zum Beispiel: %artist %album %title </p>\n"
-"\n"
-"<p>Steht ein Textbereich in geschweiften Klammern, wird dieser nicht angezeigt, falls das Schlüsselwort leer ist.</p>"
+msgstr "<p>Schlüsselwörter beginnen mit %, zum Beispiel: %artist %album %title </p>
+
+<p>Steht ein Textbereich in geschweiften Klammern, wird dieser nicht angezeigt, falls das Schlüsselwort leer ist.</p>"
 
 #: internet/groovesharksettingspage.cpp:111
 msgid "A Grooveshark Anywhere account is required."
@@ -262,18 +248,12 @@ msgid ""
 "A smart playlist is a dynamic list of songs that come from your library.  "
 "There are different types of smart playlist that offer different ways of "
 "selecting songs."
-msgstr ""
-"Eine intelligente Wiedergabeliste ist eine Liste von Songs, die aus Ihrer "
-"Musiksammlung stammen. Es gibt mehrere Arten von intelligenten "
-"Wiedergabelisten, die unterschiedliche Möglichkeiten bieten, eine Auswahl "
-"von Songs zu treffen."
+msgstr "Eine intelligente Wiedergabeliste ist eine Liste von Titeln, die aus Ihrer Musiksammlung stammen. Es gibt mehrere Arten von intelligenten Wiedergabelisten, die unterschiedliche Möglichkeiten bieten, eine Auswahl von Titeln zu treffen."
 
 #: smartplaylists/querywizardplugin.cpp:145
 msgid ""
 "A song will be included in the playlist if it matches these conditions."
-msgstr ""
-"Ein Titel wird in die Wiedergabeliste aufgenommen, wenn er die folgenden "
-"Bedingungen erfüllt."
+msgstr "Ein Titel wird in die Wiedergabeliste aufgenommen, wenn er die folgenden Bedingungen erfüllt."
 
 #: smartplaylists/searchterm.cpp:288
 msgid "A-Z"
@@ -342,8 +322,7 @@ msgstr "Stream hinzufügen"
 
 #: ../bin/src/ui_notificationssettingspage.h:394
 msgid "Add a new line if supported by the notification type"
-msgstr ""
-"Zeilenumbruch einfügen (falls vom Benachrichtigungssystem unterstützt)"
+msgstr "Zeilenumbruch einfügen (falls vom Benachrichtigungssystem unterstützt)"
 
 #: ../bin/src/ui_wiimotesettingspage.h:193
 msgid "Add action"
@@ -391,31 +370,31 @@ msgstr "Suchbegriff hinzufügen"
 
 #: ../bin/src/ui_notificationssettingspage.h:361
 msgid "Add song album tag"
-msgstr "Tag \"Album\" hinzufügen"
+msgstr "Tag "Album" hinzufügen"
 
 #: ../bin/src/ui_notificationssettingspage.h:367
 msgid "Add song albumartist tag"
-msgstr "Tag \"Album-Künstler\" hinzufügen"
+msgstr "Tag "Album-Künstler" hinzufügen"
 
 #: ../bin/src/ui_notificationssettingspage.h:358
 msgid "Add song artist tag"
-msgstr "Tag \"Künstler\" hinzufügen"
+msgstr "Tag "Künstler" hinzufügen"
 
 #: ../bin/src/ui_notificationssettingspage.h:373
 msgid "Add song composer tag"
-msgstr "Tag \"Komponist\" hinzufügen"
+msgstr "Tag "Komponist" hinzufügen"
 
 #: ../bin/src/ui_notificationssettingspage.h:376
 msgid "Add song disc tag"
-msgstr "Tag \"CD\" hinzufügen"
+msgstr "Tag "CD" hinzufügen"
 
 #: ../bin/src/ui_notificationssettingspage.h:382
 msgid "Add song genre tag"
-msgstr "Tag \"Genre\" hinzufügen"
+msgstr "Tag "Genre" hinzufügen"
 
 #: ../bin/src/ui_notificationssettingspage.h:385
 msgid "Add song length tag"
-msgstr "Tag \"Länge\" hinzufügen"
+msgstr "Tag "Länge" hinzufügen"
 
 #: ../bin/src/ui_notificationssettingspage.h:388
 msgid "Add song play count"
@@ -427,15 +406,15 @@ msgstr "Sprungzähler hinzufügen"
 
 #: ../bin/src/ui_notificationssettingspage.h:364
 msgid "Add song title tag"
-msgstr "Tag \"Titel\" hinzufügen"
+msgstr "Tag "Titel" hinzufügen"
 
 #: ../bin/src/ui_notificationssettingspage.h:379
 msgid "Add song track tag"
-msgstr "Tag \"Stück\" hinzufügen"
+msgstr "Tag "Stück" hinzufügen"
 
 #: ../bin/src/ui_notificationssettingspage.h:370
 msgid "Add song year tag"
-msgstr "Tag \"Jahr\" hinzufügen"
+msgstr "Tag "Jahr" hinzufügen"
 
 #: ../bin/src/ui_mainwindow.h:664
 msgid "Add stream..."
@@ -460,7 +439,7 @@ msgstr "Zur Wiedergabeliste hinzufügen"
 
 #: ../bin/src/ui_behavioursettingspage.h:204
 msgid "Add to the queue"
-msgstr "In die Warteschlange einreihen"
+msgstr "In die Warteschlange eingereiht und..."
 
 #: ../bin/src/ui_wiimoteshortcutgrabber.h:123
 msgid "Add wiimotedev action"
@@ -493,7 +472,7 @@ msgstr "In den letzten drei Wochen hinzugefügt"
 
 #: internet/groovesharkservice.cpp:1253
 msgid "Adding song to favorites"
-msgstr ""
+msgstr "Füge Titel zu den Favoriten hinzu"
 
 #: ../bin/src/ui_libraryfilterwidget.h:130
 msgid "Advanced grouping..."
@@ -590,25 +569,21 @@ msgstr "Clementine anzeigen"
 #: ../bin/src/ui_behavioursettingspage.h:196
 #: ../bin/src/ui_behavioursettingspage.h:210
 msgid "Always start playing"
-msgstr "Immer mit der Wiedergabe beginnen"
+msgstr "Immer mit der Wiedergabe begonnen"
 
 #: internet/spotifyblobdownloader.cpp:59
 msgid ""
 "An additional plugin is required to use Spotify in Clementine.  Would you "
 "like to download and install it now?"
-msgstr ""
-"Ein zusätzlich Plugin ist benötigt, um Spotify in Clementine zu benutzen. "
-"Möchten Sie es jetzt herunterladen und installieren?"
+msgstr "Ein zusätzlich Plugin ist benötigt, um Spotify in Clementine zu benutzen. Möchten Sie es jetzt herunterladen und installieren?"
 
 #: devices/afcdevice.cpp:62
 msgid "An error occurred copying the iTunes database from the device"
-msgstr ""
-"Beim Kopieren der iTunes Datenbank vom Gerät ist ein Fehler aufgetreten"
+msgstr "Beim Kopieren der iTunes Datenbank vom Gerät ist ein Fehler aufgetreten"
 
 #: devices/afcdevice.cpp:156
 msgid "An error occurred copying the iTunes database onto the device"
-msgstr ""
-"Beim Kopieren der iTunes Datenbank auf das Gerät ist ein Fehler aufgetreten"
+msgstr "Beim Kopieren der iTunes Datenbank auf das Gerät ist ein Fehler aufgetreten"
 
 #: devices/gpodloader.cpp:61
 msgid "An error occurred loading the iTunes database"
@@ -643,7 +618,7 @@ msgstr "Zur aktuellen Wiedergabeliste hinzufügen"
 
 #: ../bin/src/ui_behavioursettingspage.h:201
 msgid "Append to the playlist"
-msgstr "Zur Wiedergabeliste hinzufügen"
+msgstr "Zur Wiedergabeliste hinzugefügt und..."
 
 #: ../bin/src/ui_playbacksettingspage.h:275
 msgid "Apply compression to prevent clipping"
@@ -652,7 +627,7 @@ msgstr "Komprimieren um Clippingfehler zu vermeiden"
 #: ui/equalizer.cpp:191
 #, qt-format
 msgid "Are you sure you want to delete the \"%1\" preset?"
-msgstr "Profil \"%1\" wirklich löschen?"
+msgstr "Profil "%1" wirklich löschen?"
 
 #: internet/groovesharkservice.cpp:1177
 msgid "Are you sure you want to delete this playlist?"
@@ -660,7 +635,7 @@ msgstr "Möchten Sie diese Wiedergabeliste wirklich löschen?"
 
 #: ui/edittagdialog.cpp:717
 msgid "Are you sure you want to reset this song's statistics?"
-msgstr "Wollen Sie die Statistiken dieses Liedes wirklich zurücksetzen?"
+msgstr "Wollen Sie die Statistiken dieses Titels wirklich zurücksetzen?"
 
 #: playlist/playlist.cpp:1108 ui/organisedialog.cpp:53
 #: ui/qtsystemtrayicon.cpp:250 ../bin/src/ui_groupbydialog.h:130
@@ -881,16 +856,12 @@ msgstr "Von der Liste wählen"
 
 #: smartplaylists/querywizardplugin.cpp:147
 msgid "Choose how the playlist is sorted and how many songs it will contain."
-msgstr ""
-"Wählen Sie, wie die Wiedergabeliste sortiert wird und wie viele Titel sie "
-"enthalten soll."
+msgstr "Wählen Sie, wie die Wiedergabeliste sortiert wird und wie viele Titel sie enthalten soll."
 
 #: ../bin/src/ui_songinfosettingspage.h:188
 msgid ""
 "Choose the websites you want Clementine to use when searching for lyrics."
-msgstr ""
-"Internetseite auswählen, welche Clementine verwenden soll um nach Liedtexten"
-" zu suchen"
+msgstr "Internetseite auswählen, welche Clementine verwenden soll um nach Liedtexten zu suchen"
 
 #: ui/equalizer.cpp:109
 msgid "Classical"
@@ -926,18 +897,14 @@ msgstr "Clementine Visualisierung"
 msgid ""
 "Clementine can automatically convert the music you copy to this device into "
 "a format that it can play."
-msgstr ""
-"Clementine kann die Musik, die Sie auf dieses Gerät kopieren, automatisch in"
-" ein Format konvertieren, welches das Gerät abspielen kann."
+msgstr "Clementine kann die Musik, die Sie auf dieses Gerät kopieren, automatisch in ein Format konvertieren, welches das Gerät abspielen kann."
 
 #: ../bin/src/ui_remotesettingspage.h:200 remote/remotesettingspage.cpp:152
 msgid ""
 "Clementine can be controlled remotely by an Android phone.  To enable this "
 "feature log in with the same Google account that is configured on your "
 "phone."
-msgstr ""
-"Clementine kann von Android aus ferngesteuert werden. Um diese Funktion zu "
-"aktivieren mit dem auf dem Telefon eingerichteten Google-Account anmelden."
+msgstr "Clementine kann von Android aus ferngesteuert werden. Um diese Funktion zu aktivieren mit dem auf dem Telefon eingerichteten Google-Account anmelden."
 
 #: ../bin/src/ui_notificationssettingspage.h:396
 msgid "Clementine can show a message when the track changes."
@@ -947,18 +914,14 @@ msgstr "Clementine kann beim Stückwechsel Benachrichtigungen anzeigen"
 msgid ""
 "Clementine could not load any projectM visualisations.  Check that you have "
 "installed Clementine properly."
-msgstr ""
-"Clementine konnte keine projectM-Visualisierungen laden. Überprüfen Sie Ihre"
-" Installation."
+msgstr "Clementine konnte keine projectM-Visualisierungen laden. Überprüfen Sie Ihre Installation."
 
 #: internet/lastfmsettingspage.cpp:103
 msgid ""
 "Clementine couldn't fetch your subscription status since there are problems "
 "with your connection. Played tracks will be cached and sent later to "
 "Last.fm."
-msgstr ""
-"Clementine konnte Ihre Abo-Status nicht erhalten aufgrund von Problemen mit "
-"Ihrer Verbindung."
+msgstr "Clementine konnte Ihre Abo-Status nicht erhalten aufgrund von Problemen mit Ihrer Verbindung."
 
 #: widgets/prettyimage.cpp:201
 msgid "Clementine image viewer"
@@ -1006,7 +969,7 @@ msgstr "Identische Ergebnisse verschiedener Quellen vereinen"
 
 #: core/commandlineoptions.cpp:166
 msgid "Comma separated list of class:level, level is 0-3"
-msgstr "Komma getrennte Liste mit \"class:level\" (level zwischen 0-3)"
+msgstr "Komma getrennte Liste mit "class:level" (level zwischen 0-3)"
 
 #: playlist/playlist.cpp:1134 smartplaylists/searchterm.cpp:279
 #: ui/organisedialog.cpp:62 ../bin/src/ui_edittagdialog.h:661
@@ -1103,27 +1066,21 @@ msgstr "Kopiere iPod Datenbank"
 msgid ""
 "Could not create the GStreamer element \"%1\" - make sure you have all the "
 "required GStreamer plugins installed"
-msgstr ""
-"Konnte GStreamer-Element \"%1\" nicht erstellen. Stellen Sie sicher, dass "
-"alle nötigen GStreamer-Plugins installiert sind."
+msgstr "Konnte GStreamer-Element "%1" nicht erstellen. Stellen Sie sicher, dass alle nötigen GStreamer-Plugins installiert sind."
 
 #: transcoder/transcoder.cpp:425
 #, qt-format
 msgid ""
 "Couldn't find a muxer for %1, check you have the correct GStreamer plugins "
 "installed"
-msgstr ""
-"Es konnte kein Multiplexer für %1 gefunden werden. Prüfen Sie ob die "
-"erforderlichen GStreamer-Plugins installiert sind."
+msgstr "Es konnte kein Multiplexer für %1 gefunden werden. Prüfen Sie ob die erforderlichen GStreamer-Plugins installiert sind."
 
 #: transcoder/transcoder.cpp:419
 #, qt-format
 msgid ""
 "Couldn't find an encoder for %1, check you have the correct GStreamer "
 "plugins installed"
-msgstr ""
-"Es konnte kein Encoder für %1 gefunden werden. Prüfen Sie ob die "
-"erforderlichen GStreamer-Plugins installiert sind."
+msgstr "Es konnte kein Encoder für %1 gefunden werden. Prüfen Sie ob die erforderlichen GStreamer-Plugins installiert sind."
 
 #: internet/lastfmservice.cpp:899
 msgid "Couldn't load the last.fm radio station"
@@ -1441,7 +1398,7 @@ msgstr "Nicht wiederholen"
 
 #: library/libraryview.cpp:281
 msgid "Don't show in various artists"
-msgstr "Nicht unter \"Verschiedene Interpreten\" anzeigen"
+msgstr "Nicht unter "Verschiedene Interpreten" anzeigen"
 
 #: widgets/osd.cpp:294 ../bin/src/ui_playlistsequence.h:107
 msgid "Don't shuffle"
@@ -1457,7 +1414,7 @@ msgstr "Zum Öffnen doppelklicken"
 
 #: ../bin/src/ui_behavioursettingspage.h:198
 msgid "Double clicking a song will..."
-msgstr "Doppelklick auf einen Titel wird..."
+msgstr "Bei Doppelklick auf einen Titel wird dieser..."
 
 #: internet/magnatunedownloaddialog.cpp:252
 msgid "Download directory"
@@ -1569,10 +1526,7 @@ msgid ""
 "Enable sources below to include them in search results.  When identical "
 "results are available from more than one source, ones at the top will take "
 "priority."
-msgstr ""
-"Aktivieren Sie die untenstehenden Quellen, um sie in die globalen "
-"Suchergebnisse aufzunehmen.  Falls identische Ergebnisse aus mehr als einer "
-"Quelle vorliegen, wird der jeweils obere Eintrag priorisiert."
+msgstr "Aktivieren Sie die untenstehenden Quellen, um sie in die globalen Suchergebnisse aufzunehmen.  Falls identische Ergebnisse aus mehr als einer Quelle vorliegen, wird der jeweils obere Eintrag priorisiert."
 
 #: core/globalshortcuts.cpp:62
 msgid "Enable/disable Last.fm scrobbling"
@@ -1601,9 +1555,7 @@ msgstr "Neuer Name für diese Wiedergabeliste"
 #: ../bin/src/ui_lastfmstationdialog.h:93
 msgid ""
 "Enter an <b>artist</b> or <b>tag</b> to start listening to Last.fm radio."
-msgstr ""
-"Geben Sie einen <b>Künstler</b> oder ein <b>Stichwort</b> ein, um Last.fm "
-"Radio zu hören."
+msgstr "Geben Sie einen <b>Künstler</b> oder ein <b>Stichwort</b> ein, um Last.fm Radio zu hören."
 
 #: ../bin/src/ui_libraryfilterwidget.h:131
 #: ../bin/src/ui_albumcovermanager.h:153
@@ -1816,7 +1768,7 @@ msgstr "Titel in Ihrer Musiksammlung finden, die den Kriterien entsprechen."
 
 #: musicbrainz/tagfetcher.cpp:54
 msgid "Fingerprinting song"
-msgstr "Song analysieren"
+msgstr "Titel analysieren"
 
 #: smartplaylists/wizard.cpp:79
 msgid "Finish"
@@ -1836,9 +1788,7 @@ msgstr "Schriftgröße"
 
 #: ../bin/src/ui_spotifysettingspage.h:214
 msgid "For licensing reasons Spotify support is in a separate plugin."
-msgstr ""
-"Aus lizenzrechtlichen Gründen, ist die Spotify-Unterstützung in einem "
-"Separaten Plugin enthalten."
+msgstr "Aus lizenzrechtlichen Gründen, ist die Spotify-Unterstützung in einem Separaten Plugin enthalten."
 
 #: ../bin/src/ui_transcoderoptionsmp3.h:204
 msgid "Force mono encoding"
@@ -1853,9 +1803,7 @@ msgstr "Gerät vergessen"
 msgid ""
 "Forgetting a device will remove it from this list and Clementine will have "
 "to rescan all the songs again next time you connect it."
-msgstr ""
-"Das Vergessen eines Geräts wird es aus dieser Liste entfernen und Clementine"
-" wird beim nächsten Verbinden alle Stücke erneut erfassen müssen."
+msgstr "Das Vergessen eines Geräts wird es aus dieser Liste entfernen und Clementine wird beim nächsten Verbinden alle Titel erneut erfassen müssen."
 
 #: ../bin/src/ui_globalsearchwidget.h:59
 #: ../bin/src/ui_icecastfilterwidget.h:74
@@ -1929,7 +1877,7 @@ msgstr "Erstelle eine URL um diesen Titel auf Grooveshark zu teilen."
 
 #: internet/groovesharkservice.cpp:706
 msgid "Getting Grooveshark popular songs"
-msgstr ""
+msgstr "Empfange "Beliebte Titel" von Grooveshark"
 
 #: internet/somafmservice.cpp:94
 msgid "Getting channels"
@@ -1967,7 +1915,7 @@ msgstr "%1 Cover von %2 wurden gefunden (%3 fehlgeschlagen)"
 
 #: ../bin/src/ui_behavioursettingspage.h:190
 msgid "Grey out non existent songs in my playlists"
-msgstr "Nicht vorhandene Stücke in meinen Wiedergabelisten ausblenden"
+msgstr "Nicht vorhandene Titel in meinen Wiedergabelisten ausgrauen"
 
 #: ../bin/src/ui_groovesharksettingspage.h:112
 msgid "Grooveshark"
@@ -1983,7 +1931,7 @@ msgstr ""
 
 #: internet/groovesharkservice.cpp:1051
 msgid "Grooveshark song's URL"
-msgstr ""
+msgstr "Grooveshark-URL des Titels"
 
 #: ../bin/src/ui_groupbydialog.h:124
 msgid "Group Library by..."
@@ -2027,9 +1975,7 @@ msgstr "Hardwareinformationen"
 
 #: ../bin/src/ui_deviceproperties.h:372
 msgid "Hardware information is only available while the device is connected."
-msgstr ""
-"Die Hardwareinformationen sind nur verfügbar, solange das Gerät "
-"angeschlossen ist."
+msgstr "Die Hardwareinformationen sind nur verfügbar, solange das Gerät angeschlossen ist."
 
 #: ../bin/src/ui_globalsearchsettingspage.h:168
 msgid "Hide all other search boxes"
@@ -2074,27 +2020,23 @@ msgstr "Icons oben"
 
 #: musicbrainz/tagfetcher.cpp:85
 msgid "Identifying song"
-msgstr "Lied erkennen"
+msgstr "Musiktitel erkennen"
 
 #: devices/devicemanager.cpp:569 devices/devicemanager.cpp:577
 msgid ""
 "If you continue, this device will work slowly and songs copied to it may not"
 " work."
-msgstr ""
-"Wenn Sie fortfahren, wird das Gerät langsam arbeiten und kopierte Titel "
-"könnten nicht abspielbar sein."
+msgstr "Wenn Sie fortfahren, wird das Gerät langsam arbeiten und kopierte Titel könnten nicht abspielbar sein."
 
 #: ../bin/src/ui_remotesettingspage.h:209
 msgid ""
 "If you use the remote on more than one computer, this name will help you "
 "choose which one to connect to on your phone."
-msgstr ""
-"Wenn sie die Fernbedienung mit mehr als einem Computer verwenden, kann ihnen"
-" dieser Name bei der Auswahl der Verbindung auf ihrem Telefon helfen."
+msgstr "Wenn sie die Fernbedienung mit mehr als einem Computer verwenden, kann ihnen dieser Name bei der Auswahl der Verbindung auf ihrem Telefon helfen."
 
 #: ../bin/src/ui_organisedialog.h:204
 msgid "Ignore \"The\" in artist names"
-msgstr "Ignoriere \"The\" in Künstlernamen"
+msgstr "Ignoriere "The" in Künstlernamen"
 
 #: ui/albumcoverchoicecontroller.cpp:41
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
@@ -2108,9 +2050,7 @@ msgstr "Bilder (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgid ""
 "In dynamic mode new tracks will be chosen and added to the playlist every "
 "time a song finishes."
-msgstr ""
-"Im dynamischen Modus werden neue Stücke automatisch ausgewählt und an die "
-"Wiedergabeliste angehängt, sobald ein Titel zu Ende ist."
+msgstr "Im dynamischen Modus werden neue Titel automatisch ausgewählt und an die Wiedergabeliste angehängt, sobald ein Titel zu Ende ist."
 
 #: internet/spotifyservice.cpp:347
 msgid "Inbox"
@@ -2122,7 +2062,7 @@ msgstr "Cover in der Benachrichtigung anzeigen"
 
 #: ../bin/src/ui_querysearchpage.h:76
 msgid "Include all songs"
-msgstr "Alle Stück einbeziehen"
+msgstr "Alle Titel einbeziehen"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:177
 msgid "Include keyboard shortcut help in the tooltip"
@@ -2198,15 +2138,15 @@ msgstr "Jamendos beliebteste Stücke"
 
 #: internet/jamendoservice.cpp:105
 msgid "Jamendo Top Tracks"
-msgstr "Jamendo top Titel"
+msgstr "Jamendo Top-Titel"
 
 #: internet/jamendoservice.cpp:101
 msgid "Jamendo Top Tracks of the Month"
-msgstr "Jamendo top Titel des Monats"
+msgstr "Jamendo Top-Titel des Monats"
 
 #: internet/jamendoservice.cpp:103
 msgid "Jamendo Top Tracks of the Week"
-msgstr "Jamendo top Titel der Woche"
+msgstr "Jamendo Top-Titel der Woche"
 
 #: internet/jamendoservice.cpp:167
 msgid "Jamendo database"
@@ -2337,9 +2277,7 @@ msgstr "Am wenigsten gemochte Stücke"
 
 #: ../bin/src/ui_playbacksettingspage.h:282
 msgid "Leave blank for the default.  Examples: \"/dev/dsp\", \"front\", etc."
-msgstr ""
-"Beispiele: \"/dev/dsp\" , \"front\", usw. Leer lassen für "
-"Standardeinstellung."
+msgstr "Beispiele: "/dev/dsp" , "front", usw. Leer lassen für Standardeinstellung."
 
 #: playlist/playlist.cpp:1110 ui/organisedialog.cpp:63
 #: ui/qtsystemtrayicon.cpp:255 ../bin/src/ui_edittagdialog.h:636
@@ -2425,7 +2363,7 @@ msgstr "Intelligente Wiedergabeliste wird geladen"
 
 #: library/librarymodel.cpp:135
 msgid "Loading songs"
-msgstr "Lade Lieder"
+msgstr "Lade Titel"
 
 #: internet/digitallyimportedurlhandler.cpp:51
 #: internet/somafmurlhandler.cpp:45
@@ -2703,7 +2641,7 @@ msgstr "Nie gespielt"
 #: ../bin/src/ui_behavioursettingspage.h:194
 #: ../bin/src/ui_behavioursettingspage.h:208
 msgid "Never start playing"
-msgstr "Nie mit der Wiedergabe beginnen"
+msgstr "Nie mit der Wiedergabe begonnen"
 
 #: ui/mainwindow.cpp:1415 ../bin/src/ui_mainwindow.h:680
 msgid "New playlist"
@@ -2719,7 +2657,7 @@ msgstr "Neue Titel"
 
 #: ../bin/src/ui_dynamicplaylistcontrols.h:110
 msgid "New tracks will be added automatically."
-msgstr "Neue Titel werden automatisch hinzugefügt."
+msgstr "Neue Musiktitel werden automatisch hinzugefügt."
 
 #: library/library.cpp:75
 msgid "Newest tracks"
@@ -2745,9 +2683,7 @@ msgstr "Keine langen Blöcke"
 #: playlist/playlistcontainer.cpp:416
 msgid ""
 "No matches found.  Clear the search box to show the whole playlist again."
-msgstr ""
-"Keine Treffer. Leeren Sie das Suchfeld, um wieder die gesamte "
-"Wiedergabeliste anzuzeigen."
+msgstr "Keine Treffer. Leeren Sie das Suchfeld, um wieder die gesamte Wiedergabeliste anzuzeigen."
 
 #: ../bin/src/ui_transcoderoptionsaac.h:145
 msgid "No short blocks"
@@ -2760,7 +2696,7 @@ msgstr "Nichts"
 
 #: library/libraryview.cpp:455 ui/mainwindow.cpp:1798 ui/mainwindow.cpp:1903
 msgid "None of the selected songs were suitable for copying to a device"
-msgstr "Keins der gewählten Stücke war zum Kopieren auf ein Gerät geeignet."
+msgstr "Keiner der gewählten Titel war zum Kopieren auf ein Gerät geeignet."
 
 #: ../bin/src/ui_transcoderoptionsaac.h:144
 msgid "Normal block type"
@@ -2812,7 +2748,7 @@ msgstr "Benachrichtigungen"
 
 #: ui/macsystemtrayicon.mm:64
 msgid "Now Playing"
-msgstr "Aktueller Titel"
+msgstr "Aktueller Musiktitel"
 
 #: ui/notificationssettingspage.cpp:37
 msgid "OSD Preview"
@@ -2859,7 +2795,7 @@ msgstr "Datei öffnen..."
 #: library/libraryview.cpp:247 widgets/fileviewlist.cpp:35
 #: ../bin/src/ui_behavioursettingspage.h:203
 msgid "Open in new playlist"
-msgstr "In neuer Wiedergabeliste öffnen"
+msgstr "In einer neuen Wiedergabeliste geöffnet und..."
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:169
 #: ../bin/src/ui_globalshortcutssettingspage.h:171
@@ -2984,8 +2920,7 @@ msgstr "Wiedergeben wenn angehalten, pausieren bei Wiedergabe"
 #: ../bin/src/ui_behavioursettingspage.h:195
 #: ../bin/src/ui_behavioursettingspage.h:209
 msgid "Play if there is nothing already playing"
-msgstr ""
-"Mit der Wiedergabe beginnen falls gerade nichts anderes abgespielt wird"
+msgstr "Mit der Wiedergabe begonnen, falls gerade nichts anderes abgespielt wird"
 
 #: internet/lastfmservice.cpp:105
 msgid "Play tag radio..."
@@ -3034,7 +2969,7 @@ msgstr "Art der Wiedergabeliste"
 
 #: internet/groovesharkservice.cpp:553
 msgid "Playlists"
-msgstr ""
+msgstr "Wiedergabelisten"
 
 #: ../bin/src/ui_spotifysettingspage.h:215
 msgid "Plugin status:"
@@ -3046,15 +2981,15 @@ msgstr "Pop"
 
 #: internet/groovesharkservice.cpp:521
 msgid "Popular songs"
-msgstr ""
+msgstr "Beliebte Titel"
 
 #: internet/groovesharkservice.cpp:525
 msgid "Popular songs of the Month"
-msgstr ""
+msgstr "Beliebte Titel diesen Monat"
 
 #: internet/groovesharkservice.cpp:532
 msgid "Popular songs today"
-msgstr ""
+msgstr "Beliebte Titel Heute"
 
 #: ../bin/src/ui_notificationssettingspage.h:403
 msgid "Popup duration"
@@ -3294,16 +3229,16 @@ msgstr "Wiedergabeliste entfernen"
 
 #: internet/groovesharkservice.cpp:1311
 msgid "Removing song from favorites"
-msgstr ""
+msgstr "Titel aus den Favoriten entfernen"
 
 #: internet/groovesharkservice.cpp:1220
 #, qt-format
 msgid "Rename \"%1\" playlist"
-msgstr ""
+msgstr "Die Wiedergabeliste "%1" umbenennen"
 
 #: internet/groovesharkservice.cpp:491
 msgid "Rename Grooveshark playlist"
-msgstr ""
+msgstr "Grooveshark-Wiedergabeliste umbenennen"
 
 #: playlist/playlisttabbar.cpp:131
 msgid "Rename playlist"
@@ -3315,7 +3250,7 @@ msgstr "Wiedergabeliste umbenennen..."
 
 #: ../bin/src/ui_mainwindow.h:652
 msgid "Renumber tracks in this order..."
-msgstr "Titel in dieser Reihenfolge neu nummerieren..."
+msgstr "Musiktitel in dieser Reihenfolge neu nummerieren..."
 
 #: playlist/playlistsequence.cpp:174 ../bin/src/ui_playlistsequence.h:112
 msgid "Repeat"
@@ -3345,7 +3280,7 @@ msgstr "Wiedergabeliste ersetzen"
 
 #: ../bin/src/ui_behavioursettingspage.h:202
 msgid "Replace the playlist"
-msgstr "Wiedergabeliste ersetzen"
+msgstr "Die Wiedergabeliste ersetzen und..."
 
 #: ../bin/src/ui_organisedialog.h:205
 msgid "Replaces spaces with underscores"
@@ -3381,11 +3316,11 @@ msgstr "Ergebnisse"
 
 #: internet/groovesharkservice.cpp:677
 msgid "Retrieving Grooveshark favorites songs"
-msgstr ""
+msgstr "Rufe favorisierte Titel von Grooveshark ab"
 
 #: internet/groovesharkservice.cpp:600
 msgid "Retrieving Grooveshark playlists"
-msgstr ""
+msgstr "Rufe Grooveshark-Wiedergabelisten ab"
 
 #: ui/equalizer.cpp:121
 msgid "Rock"
@@ -3441,7 +3376,7 @@ msgstr "Diesen Stream im Internet-Tab sichern"
 
 #: ui/edittagdialog.cpp:618 ui/trackselectiondialog.cpp:250
 msgid "Saving tracks"
-msgstr "Titel werden gespeichert"
+msgstr "itel werden gespeichert"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:136
 msgid "Scalable sampling rate profile (SSR)"
@@ -3453,7 +3388,7 @@ msgstr "Bewertung"
 
 #: ../bin/src/ui_lastfmsettingspage.h:150
 msgid "Scrobble tracks that I listen to"
-msgstr "Stücke die ich höre \"scrobbeln\""
+msgstr "Stücke die ich höre "scrobbeln""
 
 #: ../bin/src/ui_globalsearchsettingspage.h:166
 #: ../bin/src/ui_albumcoversearcher.h:113
@@ -3503,7 +3438,7 @@ msgstr "Nach Covern suchen..."
 
 #: ../bin/src/ui_globalsearchwidget.h:63
 msgid "Search for anything"
-msgstr ""
+msgstr "Suche in allen Quellen"
 
 #: ../bin/src/ui_querysearchpage.h:71
 msgid "Search mode"
@@ -3519,7 +3454,7 @@ msgstr "Suchbegriffe"
 
 #: internet/groovesharkservice.cpp:282
 msgid "Searching on Grooveshark"
-msgstr ""
+msgstr "Suche auf Grooveshark"
 
 #: ../bin/src/ui_groupbydialog.h:138
 msgid "Second level"
@@ -3572,7 +3507,7 @@ msgstr "Dienst nicht verfügbar"
 #: ui/mainwindow.cpp:1365
 #, qt-format
 msgid "Set %1 to \"%2\"..."
-msgstr "Setze %1 zu \"%2\"..."
+msgstr "Setze %1 zu "%2"..."
 
 #: core/commandlineoptions.cpp:151
 msgid "Set the volume to <value> percent"
@@ -3619,9 +3554,7 @@ msgstr "Benachrichtigungen des Systems benutzen"
 
 #: ../bin/src/ui_notificationssettingspage.h:407
 msgid "Show a notification when I change the repeat/shuffle mode"
-msgstr ""
-"Zeige eine Benachrichtigung beim Wechsel zwischen Wiederholen/Zufällige "
-"Wiedergabe"
+msgstr "Zeige eine Benachrichtigung beim Wechsel zwischen Wiederholen/Zufällige Wiedergabe"
 
 #: ../bin/src/ui_notificationssettingspage.h:406
 msgid "Show a notification when I change the volume"
@@ -3669,7 +3602,7 @@ msgstr "Im Dateibrowser anzeigen"
 
 #: library/libraryview.cpp:279
 msgid "Show in various artists"
-msgstr "Unter \"Verschiedene Interpreten\" anzeigen"
+msgstr "Unter "Verschiedene Interpreten" anzeigen"
 
 #: ui/mainwindow.cpp:479
 msgid "Show only duplicates"
@@ -3681,11 +3614,11 @@ msgstr "Nur Stücke ohne Metadaten zeigen"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:167
 msgid "Show the \"Search for anything\" box above the sidebar"
-msgstr ""
+msgstr "Zeige das "Suche in allen Quellen"-Feld über der Seitenleiste"
 
 #: ../bin/src/ui_lastfmsettingspage.h:151
 msgid "Show the \"love\" and \"ban\" buttons"
-msgstr "\"Lieben\" und \"Bannen\" Knöpfe anzeigen"
+msgstr ""Lieben" und "Bannen" Knöpfe anzeigen"
 
 #: ../bin/src/ui_lastfmsettingspage.h:152
 msgid "Show the scrobble button in the main window"
@@ -3901,7 +3834,7 @@ msgstr "Streamingmitgliedschaft"
 
 #: internet/groovesharkservice.cpp:566
 msgid "Subscribed playlists"
-msgstr ""
+msgstr "Abonnierte Wiedergabelisten"
 
 #: transcoder/transcoder.cpp:198
 #, qt-format
@@ -3981,7 +3914,7 @@ msgstr "Dank an:"
 #: ui/globalshortcutssettingspage.cpp:175
 #, qt-format
 msgid "The \"%1\" command could not be started."
-msgstr "Der \"%1\" Befehl konnte nicht ausgeführt werden."
+msgstr "Der "%1" Befehl konnte nicht ausgeführt werden."
 
 #: internet/magnatunedownloaddialog.cpp:89
 #, qt-format
@@ -3991,7 +3924,7 @@ msgstr "Ordner %1 ist ungültig"
 #: playlist/playlistmanager.cpp:151 playlist/playlistmanager.cpp:169
 #, qt-format
 msgid "The playlist '%1' was empty or could not be loaded."
-msgstr "Die Wiedergabeliste \"%1\" ist leer oder konnte nicht geladen werden."
+msgstr "Die Wiedergabeliste "%1" ist leer oder konnte nicht geladen werden."
 
 #: smartplaylists/searchtermwidget.cpp:322
 msgid "The second value must be greater than the first one!"
@@ -4009,10 +3942,7 @@ msgstr "Die angeforderte Seite ist kein Bild!"
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
-msgstr ""
-"Die Clementine Version, auf die Sie gerade aktualisiert haben, erfordert "
-"eine komplette Aktualisierung Ihrer Musiksammlung, damit die folgenden neuen"
-" Funktionen genutzt werden können:"
+msgstr "Die Clementine Version, auf die Sie gerade aktualisiert haben, erfordert eine komplette Aktualisierung Ihrer Musiksammlung, damit die folgenden neuen Funktionen genutzt werden können:"
 
 #: internet/magnatunedownloaddialog.cpp:157
 msgid "There was a problem fetching the metadata from Magnatune"
@@ -4022,31 +3952,24 @@ msgstr "Beim Holen der Metadaten von Magnatune ist ein Fehler aufgetreten"
 msgid ""
 "There were problems copying some songs.  The following files could not be "
 "copied:"
-msgstr ""
-"Beim Kopieren einiger Titel ist ein Fehler aufgetreten. Die folgenden "
-"Dateien konnten nicht kopiert werden:"
+msgstr "Beim Kopieren einiger Titel ist ein Fehler aufgetreten. Die folgenden Dateien konnten nicht kopiert werden:"
 
 #: ui/organiseerrordialog.cpp:61
 msgid ""
 "There were problems deleting some songs.  The following files could not be "
 "deleted:"
-msgstr ""
-"Beim Löschen einiger Titel ist ein Fehler aufgetreten. Die folgenden Dateien"
-" konnten nicht gelöscht werden:"
+msgstr "Beim Löschen einiger Titel ist ein Fehler aufgetreten. Die folgenden Dateien konnten nicht gelöscht werden:"
 
 #: library/libraryview.cpp:461 ui/mainwindow.cpp:1830 widgets/fileview.cpp:186
 msgid ""
 "These files will be deleted from disk, are you sure you want to continue?"
-msgstr ""
-"Diese Dateien werden von der Festplatte gelöscht. Möchten Sie wirklich "
-"fortfahren?"
+msgstr "Diese Dateien werden von der Festplatte gelöscht. Möchten Sie wirklich fortfahren?"
 
 #: devices/deviceview.cpp:394
 msgid ""
 "These files will be deleted from the device, are you sure you want to "
 "continue?"
-msgstr ""
-"Diese Dateien werden vom Gerät gelöscht. Möchten Sie wirklich fortfahren?"
+msgstr "Diese Dateien werden vom Gerät gelöscht. Möchten Sie wirklich fortfahren?"
 
 #: ../bin/src/ui_librarysettingspage.h:158
 msgid "These folders will be scanned for music to make up your library"
@@ -4056,9 +3979,7 @@ msgstr "Diese Ordner werden für Ihre Musiksammlung durchsucht"
 msgid ""
 "These settings are used in the \"Transcode Music\" dialog, and when "
 "converting music before copying it to a device."
-msgstr ""
-"Diese Einstellungen werden im \"Musik konvertieren\" Fenster, und wenn Musik"
-" vor dem Kopieren auf ein Gerät konvertiert wird, verwendet."
+msgstr "Diese Einstellungen werden im "Musik konvertieren" Fenster, und wenn Musik vor dem Kopieren auf ein Gerät konvertiert wird, verwendet."
 
 #: ../bin/src/ui_groupbydialog.h:151
 msgid "Third level"
@@ -4068,9 +3989,7 @@ msgstr "Dritte Stufe"
 msgid ""
 "This action will create a database which could be as big as 150 MB.\n"
 "Do you want to continue anyway?"
-msgstr ""
-"Diese Aktion wird eine Datenbank erstellen, die ungefähr 150 MB einnehmen "
-"könnte."
+msgstr "Diese Aktion wird eine Datenbank erstellen, die ungefähr 150 MB einnehmen könnte."
 
 #: internet/magnatunedownloaddialog.cpp:174
 msgid "This album is not available in the requested format"
@@ -4080,9 +3999,7 @@ msgstr "Das Album ist im gewünschten Format nicht verfügbar"
 msgid ""
 "This device must be connected and opened before Clementine can see what file"
 " formats it supports."
-msgstr ""
-"Dieses Gerät muss verbunden und geöffnet sein, bevor Clementine feststellen "
-"kann, welche Dateiformate es unterstützt."
+msgstr "Dieses Gerät muss verbunden und geöffnet sein, bevor Clementine feststellen kann, welche Dateiformate es unterstützt."
 
 #: ../bin/src/ui_deviceproperties.h:375
 msgid "This device supports the following file formats:"
@@ -4095,31 +4012,23 @@ msgstr "Dieses Gerät wird nicht ordnungsgemäß funktionieren"
 #: devices/devicemanager.cpp:568
 msgid ""
 "This is an MTP device, but you compiled Clementine without libmtp support."
-msgstr ""
-"Dies ist ein MTP-Gerät, aber Clementine wurde ohne Unterstützung für libmtp "
-"kompiliert."
+msgstr "Dies ist ein MTP-Gerät, aber Clementine wurde ohne Unterstützung für libmtp kompiliert."
 
 #: devices/devicemanager.cpp:576
 msgid "This is an iPod, but you compiled Clementine without libgpod support."
-msgstr ""
-"Dies ist ein iPod, aber Clementine wurde ohne Unterstützung für libgpod "
-"kompiliert."
+msgstr "Dies ist ein iPod, aber Clementine wurde ohne Unterstützung für libgpod kompiliert."
 
 #: devices/devicemanager.cpp:325
 msgid ""
 "This is the first time you have connected this device.  Clementine will now "
 "scan the device to find music files - this may take some time."
-msgstr ""
-"Dieses Gerät wurde zum ersten Mal verbunden. Clementine wird es nun nach "
-"Musikdateien durchsuchen - dies kann einige Zeit dauern."
+msgstr "Dieses Gerät wurde zum ersten Mal verbunden. Clementine wird es nun nach Musikdateien durchsuchen - dies kann einige Zeit dauern."
 
 #: playlist/playlisttabbar.cpp:159
 msgid ""
 "This playlist will be removed; the action can't be undone. Are you sure you "
 "want to continue?"
-msgstr ""
-"Die Wiedergabeliste wird gelöscht. Diese Aktion kann nicht rückgängig "
-"gemacht werden. Möchten Sie wirklich fortfahren?"
+msgstr "Die Wiedergabeliste wird gelöscht. Diese Aktion kann nicht rückgängig gemacht werden. Möchten Sie wirklich fortfahren?"
 
 #: internet/lastfmservice.cpp:440
 msgid "This stream is for paid subscribers only"
@@ -4255,7 +4164,7 @@ msgstr "Cover löschen"
 
 #: internet/groovesharkservice.cpp:1083
 msgid "Update Grooveshark playlist"
-msgstr ""
+msgstr "Aktualisiere Grooveshark-Wiedergabelisten"
 
 #: ../bin/src/ui_mainwindow.h:688
 msgid "Update changed library folders"
@@ -4313,12 +4222,11 @@ msgstr "Benutze dynamischen Modus"
 
 #: ../bin/src/ui_wiimotesettingspage.h:188
 msgid "Use notifications to report Wii Remote status"
-msgstr ""
-"Benachrichtigungen zum Anzeigen des Status der Wii-Fernbedienung benutzen"
+msgstr "Benachrichtigungen zum Anzeigen des Status der Wii-Fernbedienung benutzen"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:139
 msgid "Use temporal noise shaping"
-msgstr "\"Temporal Noise-Shaping\" verwenden"
+msgstr ""Temporal Noise-Shaping" verwenden"
 
 #: ../bin/src/ui_behavioursettingspage.h:183
 msgid "Use the system default"
@@ -4330,7 +4238,7 @@ msgstr "Verwende Proxy-Einstellungen des Betriebssystems"
 
 #: ../bin/src/ui_spotifysettingspage.h:219
 msgid "Use volume normalisation"
-msgstr ""
+msgstr "Lautstärkepegel angleichen"
 
 #: widgets/freespacebar.cpp:47
 msgid "Used"
@@ -4354,7 +4262,7 @@ msgstr "Benutzername"
 
 #: ../bin/src/ui_behavioursettingspage.h:191
 msgid "Using the menu to add a song will..."
-msgstr "Das Benutzen des Menüs zum Song hinzufügen wird..."
+msgstr "Bei Benutzung des Menüs zum Titel hinzufügen wird..."
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:142
 #: ../bin/src/ui_magnatunesettingspage.h:173
@@ -4433,9 +4341,8 @@ msgstr "Bei Programmstart"
 msgid ""
 "When looking for album art Clementine will first look for picture files that contain one of these words.\n"
 "If there are no matches then it will use the largest image in the directory."
-msgstr ""
-"Auf der Suche nach Cover-Bildern wird Clementine zuerst nach Bilddateien suchen, die eines dieser Wörter enthalten.\n"
-"Falls es keine Treffer gibt, wird das größte Bild aus dem Verzeichnis ausgewählt."
+msgstr "Auf der Suche nach Cover-Bildern wird Clementine zuerst nach Bilddateien suchen, die eines dieser Wörter enthalten.
+Falls es keine Treffer gibt, wird das größte Bild aus dem Verzeichnis ausgewählt."
 
 #: devices/ilister.cpp:99
 msgid "WiFi MAC Address"
@@ -4543,43 +4450,32 @@ msgstr "Sie können hier einstellen wie Ihre Musiksammlung sortiert wird."
 msgid ""
 "You can listen for free without an account, but Premium members can listen "
 "to higher quality streams without advertisements."
-msgstr ""
-"Das Zuhören ist kostenlos ohne Anmeldung möglich, aber Premium-Mitglieder "
-"haben Zugriff auf werbefreie Streams mit höherer Audioqualität."
+msgstr "Das Zuhören ist kostenlos ohne Anmeldung möglich, aber Premium-Mitglieder haben Zugriff auf werbefreie Streams mit höherer Audioqualität."
 
 #: internet/magnatunesettingspage.cpp:53
 msgid ""
 "You can listen to Magnatune songs for free without an account.  Purchasing a"
 " membership removes the messages at the end of each track."
-msgstr ""
-"Sie können ohne Benutzerkonto Musik von Magnatune hören. Um die Hinweise am "
-"Ende der einzelnen Stücke zu entfernen, müssen Sie eine Mitgliedschaft "
-"kaufen."
+msgstr "Sie können ohne Benutzerkonto Musik von Magnatune hören. Um die Hinweise am Ende der einzelnen Titel zu entfernen, müssen Sie eine Mitgliedschaft kaufen."
 
 #: ../bin/src/ui_backgroundstreamssettingspage.h:57
 msgid "You can listen to background streams at the same time as other music."
-msgstr ""
-"Sie können zur gleichen Zeit Hintergrundstreams und andere Musik hören."
+msgstr "Sie können zur gleichen Zeit Hintergrundstreams und andere Musik hören."
 
 #: internet/lastfmsettingspage.cpp:140
 msgid ""
 "You can scrobble tracks for free, but only <span style=\" font-"
 "weight:600;\">paid subscribers</span> can stream Last.fm radio from "
 "Clementine."
-msgstr ""
-"Sie können Musik kostenlos \"scrobbeln\", aber nur <span style=\"font-"
-"weight:600;\">zahlende Last.fm-Kunden</span> können Last.fm-Radio mit "
-"Clementine hören."
+msgstr "Sie können Musik kostenlos "scrobbeln", aber nur <span style="font-weight:600;">zahlende Last.fm-Kunden</span> können Last.fm-Radio mit Clementine hören."
 
 #: ../bin/src/ui_wiimotesettingspage.h:184
 msgid ""
 "You can use your Wii Remote as a remote control for Clementine.  <a "
 "href=\"http://www.clementine-player.org/wiimote\">See the page on the "
 "Clementine wiki</a> for more information.\n"
-msgstr ""
-"Sie können Ihre Wii-Fernbedienung als Fernbedienung für Clementine benutzen."
-" Mehr Informationen dazu gibt es auf der <a href=\"http://www.clementine-"
-"player.org/wiimote\">entsprechenden Seite im Clementine Wiki.</a>\n"
+msgstr "Sie können Ihre Wii-Fernbedienung als Fernbedienung für Clementine benutzen. Mehr Informationen dazu gibt es auf der <a href="http://www.clementine-player.org/wiimote">entsprechenden Seite im Clementine Wiki.</a>
+"
 
 #: internet/groovesharksettingspage.cpp:103
 msgid "You do not have a Grooveshark Anywhere account."
@@ -4608,10 +4504,7 @@ msgid ""
 "You need to launch System Preferences and turn on \"<span style=\" font-"
 "style:italic;\">Enable access for assistive devices</span>\" to use global "
 "shortcuts in Clementine."
-msgstr ""
-"Öffnen Sie die Systemeinstellungen und aktivieren Sie \"<span style=\" font-"
-"style:italic;\">Zugriff für Hilfsgeräte aktivieren</span>\" in "
-"\"Bedienhilfen\" um Clementines Tastenkürzel zu benutzen."
+msgstr "Öffnen Sie die Systemeinstellungen und aktivieren Sie "<span style=" font-style:italic;">Zugriff für Hilfsgeräte aktivieren</span>" in "Bedienhilfen" um Clementines Tastenkürzel zu benutzen."
 
 #: ../bin/src/ui_behavioursettingspage.h:185
 msgid "You will need to restart Clementine if you change the language."
@@ -4621,9 +4514,7 @@ msgstr "Sie müssen Clementine nach dem Ändern der Sprache neustarten."
 msgid ""
 "You will not be able to play Last.fm radio stations as you are not a Last.fm"
 " subscriber."
-msgstr ""
-"Sie werden kein Last.fm-Radio abspielen können, da sie kein Last.fm-Abonnent"
-" sind."
+msgstr "Sie werden kein Last.fm-Radio abspielen können, da sie kein Last.fm-Abonnent sind."
 
 #: remote/remotesettingspage.cpp:126
 #, qt-format
@@ -4647,10 +4538,7 @@ msgid ""
 "Your gstreamer installation is missing the 'ofa' plugin.  This is required "
 "for automatic tag fetching.  Try installing the 'gstreamer-plugins-bad' "
 "package."
-msgstr ""
-"Ihrer GStreamer-Installation fehlt das \"ofa\" Plugin. Dieses ist nötig um "
-"Tags automatisch zu vervollständigen. Versuchen Sie das Paket \"gstreamer-"
-"plugins-bad\" zu installieren."
+msgstr "Ihrer GStreamer-Installation fehlt das "ofa" Plugin. Dieses ist nötig um Tags automatisch zu vervollständigen. Versuchen Sie das Paket "gstreamer-plugins-bad" zu installieren."
 
 #: library/libraryview.cpp:219
 msgid "Your library is empty!"
@@ -4681,7 +4569,7 @@ msgstr "Null"
 #: playlist/playlistundocommands.cpp:37
 #, c-format
 msgid "add %n songs"
-msgstr "%n Stücke hinzufügen"
+msgstr "%n Titel hinzufügen"
 
 #: smartplaylists/searchterm.cpp:200
 msgid "after"
@@ -4770,7 +4658,7 @@ msgstr "längste zuerst"
 
 #: playlist/playlistundocommands.cpp:99
 msgid "move songs"
-msgstr "Stücke verschieben"
+msgstr "Titel verschieben"
 
 #: smartplaylists/searchterm.cpp:289
 msgid "newest first"
@@ -4807,7 +4695,7 @@ msgstr "Drücken Sie die Eingabetaste"
 #: playlist/playlistundocommands.cpp:65 playlist/playlistundocommands.cpp:88
 #, c-format
 msgid "remove %n songs"
-msgstr "%n Stücke entfernen"
+msgstr "%n Titel entfernen"
 
 #: smartplaylists/searchterm.cpp:290
 msgid "shortest first"
@@ -4829,5 +4717,4 @@ msgstr "Anhalten"
 #, qt-format
 msgid "track %1"
 msgstr "Stück %1"
-
 

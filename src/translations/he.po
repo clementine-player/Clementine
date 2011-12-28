@@ -2,18 +2,11 @@
 # Copyright (C) 2010 David Sansome
 # This file is distributed under the same license as the Clementine package.
 # 
-# Translators:
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Clementine Music Player\n"
-"Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2011-12-13 17:09+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: he\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:130
 #: ../bin/src/ui_transcoderoptionsmp3.h:195
@@ -238,10 +231,9 @@ msgid ""
 "<p>Tokens start with %, for example: %artist %album %title </p>\n"
 "\n"
 "<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
-msgstr ""
-"<p>מילים שמורות מתחילות עם %, לדוגמא: %artist %album %title </p>\n"
-"\n"
-"<p>סגירת טקסט על־ידי סוגריים מסולסלות משני צידיו תגרום להסתרתו במקרה והטקסט מכיל מילה שמורה אשר לא מכילה כלום.</p>"
+msgstr "<p>מילים שמורות מתחילות עם %, לדוגמא: %artist %album %title </p>
+
+<p>סגירת טקסט על־ידי סוגריים מסולסלות משני צידיו תגרום להסתרתו במקרה והטקסט מכיל מילה שמורה אשר לא מכילה כלום.</p>"
 
 #: internet/groovesharksettingspage.cpp:111
 msgid "A Grooveshark Anywhere account is required."
@@ -256,9 +248,7 @@ msgid ""
 "A smart playlist is a dynamic list of songs that come from your library.  "
 "There are different types of smart playlist that offer different ways of "
 "selecting songs."
-msgstr ""
-"רשימת־השמעה חכמה היא רשימה דינאמית של שירים שמגיעים מספריית המוזיקה שלך. "
-"ישנם סוגים שונים של רשימות־השמעה חכמות המציעות דרכים שונות לבחירת שירים."
+msgstr "רשימת־השמעה חכמה היא רשימה דינאמית של שירים שמגיעים מספריית המוזיקה שלך. ישנם סוגים שונים של רשימות־השמעה חכמות המציעות דרכים שונות לבחירת שירים."
 
 #: smartplaylists/querywizardplugin.cpp:145
 msgid ""
@@ -637,7 +627,7 @@ msgstr "כווץ כדי למנוע חיתוך"
 #: ui/equalizer.cpp:191
 #, qt-format
 msgid "Are you sure you want to delete the \"%1\" preset?"
-msgstr "האם אתה בטוח שברצונך למחוק את האפשרות הקבועה \"%1\"?"
+msgstr "האם אתה בטוח שברצונך למחוק את האפשרות הקבועה "%1"?"
 
 #: internet/groovesharkservice.cpp:1177
 msgid "Are you sure you want to delete this playlist?"
@@ -907,9 +897,7 @@ msgstr "אפקטים חזותיים של Clementine"
 msgid ""
 "Clementine can automatically convert the music you copy to this device into "
 "a format that it can play."
-msgstr ""
-"Clementine יכול להמיר אוטומטית כל מוזיקה המעותקת להתקן לפורמט שההתקן מסוגל "
-"לנגן."
+msgstr "Clementine יכול להמיר אוטומטית כל מוזיקה המעותקת להתקן לפורמט שההתקן מסוגל לנגן."
 
 #: ../bin/src/ui_remotesettingspage.h:200 remote/remotesettingspage.cpp:152
 msgid ""
@@ -926,9 +914,7 @@ msgstr "Clementine יכול להציג הודעה כשהרצועה משתנה."
 msgid ""
 "Clementine could not load any projectM visualisations.  Check that you have "
 "installed Clementine properly."
-msgstr ""
-"Clementine לא יכל לטעון אפקטים חזותיים של projectM. וודא שהתקנת את "
-"Clementine כמו שצריך."
+msgstr "Clementine לא יכל לטעון אפקטים חזותיים של projectM. וודא שהתקנת את Clementine כמו שצריך."
 
 #: internet/lastfmsettingspage.cpp:103
 msgid ""
@@ -1080,26 +1066,21 @@ msgstr "מעתיק את מסד הנתונים של ה-iPod"
 msgid ""
 "Could not create the GStreamer element \"%1\" - make sure you have all the "
 "required GStreamer plugins installed"
-msgstr ""
-"לא ניתן ליצור את אלמנט ה-GStreamer \"%1\" - יש לוודא שכל תוספי ה-GStreamer "
-"מותקנים כראוי"
+msgstr "לא ניתן ליצור את אלמנט ה-GStreamer "%1" - יש לוודא שכל תוספי ה-GStreamer מותקנים כראוי"
 
 #: transcoder/transcoder.cpp:425
 #, qt-format
 msgid ""
 "Couldn't find a muxer for %1, check you have the correct GStreamer plugins "
 "installed"
-msgstr ""
-"לא ניתן למצוא מרבב עבור %1, וודא שתוספי ה-GStreamer הנכונים מותקנים כראוי"
+msgstr "לא ניתן למצוא מרבב עבור %1, וודא שתוספי ה-GStreamer הנכונים מותקנים כראוי"
 
 #: transcoder/transcoder.cpp:419
 #, qt-format
 msgid ""
 "Couldn't find an encoder for %1, check you have the correct GStreamer "
 "plugins installed"
-msgstr ""
-"לא ניתן למצוא מקודד עבור %1, יש לוודא שתוספי ה-GStreamer הנכונים מותקנים "
-"כראוי"
+msgstr "לא ניתן למצוא מקודד עבור %1, יש לוודא שתוספי ה-GStreamer הנכונים מותקנים כראוי"
 
 #: internet/lastfmservice.cpp:899
 msgid "Couldn't load the last.fm radio station"
@@ -1498,7 +1479,7 @@ msgstr "עריכת רשימת השמעה חכמה..."
 #: ui/mainwindow.cpp:1367
 #, qt-format
 msgid "Edit tag \"%1\"..."
-msgstr "עריכת התגית \"%1\".."
+msgstr "עריכת התגית "%1".."
 
 #: ../bin/src/ui_mainwindow.h:654
 msgid "Edit tag..."
@@ -1822,9 +1803,7 @@ msgstr "שכח התקן"
 msgid ""
 "Forgetting a device will remove it from this list and Clementine will have "
 "to rescan all the songs again next time you connect it."
-msgstr ""
-"\"שכח התקן\" יסיר את ההתקן מרשימה זו וכאשר ההתקן יחובר שוב, Clementine יצטרך"
-" לסרוק אותו שוב."
+msgstr ""שכח התקן" יסיר את ההתקן מרשימה זו וכאשר ההתקן יחובר שוב, Clementine יצטרך לסרוק אותו שוב."
 
 #: ../bin/src/ui_globalsearchwidget.h:59
 #: ../bin/src/ui_icecastfilterwidget.h:74
@@ -2057,7 +2036,7 @@ msgstr ""
 
 #: ../bin/src/ui_organisedialog.h:204
 msgid "Ignore \"The\" in artist names"
-msgstr "התעלם מה-\"The\" בשם האמן"
+msgstr "התעלם מה-"The" בשם האמן"
 
 #: ui/albumcoverchoicecontroller.cpp:41
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
@@ -2298,7 +2277,7 @@ msgstr "רצועות הכי פחות אהובות"
 
 #: ../bin/src/ui_playbacksettingspage.h:282
 msgid "Leave blank for the default.  Examples: \"/dev/dsp\", \"front\", etc."
-msgstr "השאר ריק בשביל ברירת המחדל. דוגמאות: \"/dev/dsp\", \"front\", וכו'."
+msgstr "השאר ריק בשביל ברירת המחדל. דוגמאות: "/dev/dsp", "front", וכו'."
 
 #: playlist/playlist.cpp:1110 ui/organisedialog.cpp:63
 #: ui/qtsystemtrayicon.cpp:255 ../bin/src/ui_edittagdialog.h:636
@@ -2704,8 +2683,7 @@ msgstr ""
 #: playlist/playlistcontainer.cpp:416
 msgid ""
 "No matches found.  Clear the search box to show the whole playlist again."
-msgstr ""
-"לא נמצא פריט תואם. נקה את תיבת החיפוש על מנת לראות את כל רשימת ההשמעה שוב."
+msgstr "לא נמצא פריט תואם. נקה את תיבת החיפוש על מנת לראות את כל רשימת ההשמעה שוב."
 
 #: ../bin/src/ui_transcoderoptionsaac.h:145
 msgid "No short blocks"
@@ -3529,7 +3507,7 @@ msgstr "שירות לא מקוון"
 #: ui/mainwindow.cpp:1365
 #, qt-format
 msgid "Set %1 to \"%2\"..."
-msgstr "בחר %1 להיות \"%2\"..."
+msgstr "בחר %1 להיות "%2"..."
 
 #: core/commandlineoptions.cpp:151
 msgid "Set the volume to <value> percent"
@@ -3640,7 +3618,7 @@ msgstr ""
 
 #: ../bin/src/ui_lastfmsettingspage.h:151
 msgid "Show the \"love\" and \"ban\" buttons"
-msgstr "להציג את הלחצנים \"אוהב\" ו-\"חסום\""
+msgstr "להציג את הלחצנים "אוהב" ו-"חסום""
 
 #: ../bin/src/ui_lastfmsettingspage.h:152
 msgid "Show the scrobble button in the main window"
@@ -3744,7 +3722,7 @@ msgstr ""
 
 #: ../bin/src/ui_icecastfilterwidget.h:75
 msgid "Sort by genre (alphabetically)"
-msgstr "מיין על־פי סגנון (א\"ב)"
+msgstr "מיין על־פי סגנון (א"ב)"
 
 #: ../bin/src/ui_icecastfilterwidget.h:76
 msgid "Sort by genre (by popularity)"
@@ -3936,7 +3914,7 @@ msgstr "תודתנו נתונה לבאים"
 #: ui/globalshortcutssettingspage.cpp:175
 #, qt-format
 msgid "The \"%1\" command could not be started."
-msgstr "לא ניתן להתחיל את הפקודה \"%1\"."
+msgstr "לא ניתן להתחיל את הפקודה "%1"."
 
 #: internet/magnatunedownloaddialog.cpp:89
 #, qt-format
@@ -4021,9 +3999,7 @@ msgstr "אלבום זה לא זמין בפורמט המבוקש"
 msgid ""
 "This device must be connected and opened before Clementine can see what file"
 " formats it supports."
-msgstr ""
-"ההתקן הזה חייב להיות מחובר ופתוח על מנת ש-Clementine יוכל לבדוק באילו "
-"פורמטים הוא תומך."
+msgstr "ההתקן הזה חייב להיות מחובר ופתוח על מנת ש-Clementine יוכל לבדוק באילו פורמטים הוא תומך."
 
 #: ../bin/src/ui_deviceproperties.h:375
 msgid "This device supports the following file formats:"
@@ -4036,8 +4012,7 @@ msgstr "ההתקן הזה לא יעבוד כראוי"
 #: devices/devicemanager.cpp:568
 msgid ""
 "This is an MTP device, but you compiled Clementine without libmtp support."
-msgstr ""
-"התקן זה הוא התקן מסוג MTP, אולם Clementine לא קומפל עם תמיכה ב-libmtp."
+msgstr "התקן זה הוא התקן מסוג MTP, אולם Clementine לא קומפל עם תמיכה ב-libmtp."
 
 #: devices/devicemanager.cpp:576
 msgid "This is an iPod, but you compiled Clementine without libgpod support."
@@ -4047,9 +4022,7 @@ msgstr "זהו iPod, אולם Clementine לא קומפל עם תמיכה ב-libg
 msgid ""
 "This is the first time you have connected this device.  Clementine will now "
 "scan the device to find music files - this may take some time."
-msgstr ""
-"זוהי הפעם הראשונה שחיברת את ההתקן הזה. Clementine יסרוק כעת את ההתקן אחר "
-"קבצי מוזיקה - ייתכן ופעולה זו תיקח זמן מה."
+msgstr "זוהי הפעם הראשונה שחיברת את ההתקן הזה. Clementine יסרוק כעת את ההתקן אחר קבצי מוזיקה - ייתכן ופעולה זו תיקח זמן מה."
 
 #: playlist/playlisttabbar.cpp:159
 msgid ""
@@ -4368,9 +4341,8 @@ msgstr "בהפעלת Clementine"
 msgid ""
 "When looking for album art Clementine will first look for picture files that contain one of these words.\n"
 "If there are no matches then it will use the largest image in the directory."
-msgstr ""
-"בחיפוש אחר תמונות אלבום, Clementine יחפש קודם קבצי תמונה המכילים אחת המילים האלו.\n"
-"אם לא נמצאו קבצים מתאימים, אז תבחר התמונה הכי גדולה שבתיקייה."
+msgstr "בחיפוש אחר תמונות אלבום, Clementine יחפש קודם קבצי תמונה המכילים אחת המילים האלו.
+אם לא נמצאו קבצים מתאימים, אז תבחר התמונה הכי גדולה שבתיקייה."
 
 #: devices/ilister.cpp:99
 msgid "WiFi MAC Address"
@@ -4484,9 +4456,7 @@ msgstr ""
 msgid ""
 "You can listen to Magnatune songs for free without an account.  Purchasing a"
 " membership removes the messages at the end of each track."
-msgstr ""
-"ניתן להאזין לשירים מ-Magnatune בחינם ללא חשבון משתמש. רכישת חברות מורידה את "
-"ההודעות שבסוף כל רצועה."
+msgstr "ניתן להאזין לשירים מ-Magnatune בחינם ללא חשבון משתמש. רכישת חברות מורידה את ההודעות שבסוף כל רצועה."
 
 #: ../bin/src/ui_backgroundstreamssettingspage.h:57
 msgid "You can listen to background streams at the same time as other music."
@@ -4497,19 +4467,15 @@ msgid ""
 "You can scrobble tracks for free, but only <span style=\" font-"
 "weight:600;\">paid subscribers</span> can stream Last.fm radio from "
 "Clementine."
-msgstr ""
-"ניתן להאזין לרצועות בחינם, אולם רק <span style=\" font-weight:600;\">חברות "
-"בתשלום</span> מאפשרת להזרים מ-Clementine לרדיו שב־Last.fm."
+msgstr "ניתן להאזין לרצועות בחינם, אולם רק <span style=" font-weight:600;">חברות בתשלום</span> מאפשרת להזרים מ-Clementine לרדיו שב־Last.fm."
 
 #: ../bin/src/ui_wiimotesettingspage.h:184
 msgid ""
 "You can use your Wii Remote as a remote control for Clementine.  <a "
 "href=\"http://www.clementine-player.org/wiimote\">See the page on the "
 "Clementine wiki</a> for more information.\n"
-msgstr ""
-"ניתן להשתמש ב-Wii Remote כשלט רחוק ל-Clementine. <a href=\"http://www"
-".clementine-player.org/wiimote\">ניתן לקרוא את העמוד בויקי של Clementine</a>"
-" לקבלת מידע נוסף.\n"
+msgstr "ניתן להשתמש ב-Wii Remote כשלט רחוק ל-Clementine. <a href="http://www.clementine-player.org/wiimote">ניתן לקרוא את העמוד בויקי של Clementine</a> לקבלת מידע נוסף.
+"
 
 #: internet/groovesharksettingspage.cpp:103
 msgid "You do not have a Grooveshark Anywhere account."
@@ -4538,10 +4504,7 @@ msgid ""
 "You need to launch System Preferences and turn on \"<span style=\" font-"
 "style:italic;\">Enable access for assistive devices</span>\" to use global "
 "shortcuts in Clementine."
-msgstr ""
-"יש באפשרותך לפתוח את הגדרות המערכת ולהפעיל את \"<span style=\" font-"
-"style:italic;\">אפשר גישה להתקני עזר</span>\" על מנת להשתמש בקיצורי דרך "
-"גלובאליים ב-Clementine."
+msgstr "יש באפשרותך לפתוח את הגדרות המערכת ולהפעיל את "<span style=" font-style:italic;">אפשר גישה להתקני עזר</span>" על מנת להשתמש בקיצורי דרך גלובאליים ב-Clementine."
 
 #: ../bin/src/ui_behavioursettingspage.h:185
 msgid "You will need to restart Clementine if you change the language."
@@ -4754,5 +4717,4 @@ msgstr "הפסקה"
 #, qt-format
 msgid "track %1"
 msgstr "רצועה %1"
-
 
