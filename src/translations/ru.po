@@ -2,11 +2,22 @@
 # Copyright (C) 2010 David Sansome
 # This file is distributed under the same license as the Clementine package.
 # 
-#, fuzzy
+# Translators:
+#   <arnaud.bienner@gmail.com>, 2011.
+#   <kolyadas89@gmail.com>, 2011.
+# Nikita Putko <admi136@mail.ru>, 2011.
+# Oleg Sevostyanov <oleg.sev@gmail.com>, 2011.
+# Павел Малеев <rolland39@gmail.com>, 2010.
 msgid ""
 msgstr ""
-"Content-Type: text/plain; charset=utf-8\n"
+"Project-Id-Version: Clementine Music Player\n"
+"Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
+"PO-Revision-Date: 2011-12-14 12:52+0000\n"
+"Last-Translator: arnaudbienner <arnaud.bienner@gmail.com>\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: ru\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:130
 #: ../bin/src/ui_transcoderoptionsmp3.h:195
@@ -224,16 +235,18 @@ msgstr "50 случайных композиций"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:165
 msgid "<a href=\"http://www.di.fm/premium/\">Upgrade to Premium now</a>"
-msgstr "<a href="http://www.di.fm/premium/">Обновить до версии Premium сейчас</a>"
+msgstr ""
+"<a href=\"http://www.di.fm/premium/\">Обновить до версии Premium сейчас</a>"
 
 #: ../bin/src/ui_organisedialog.h:199
 msgid ""
 "<p>Tokens start with %, for example: %artist %album %title </p>\n"
 "\n"
 "<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
-msgstr "<p>Поля начинаются со знака %, например: %artist %album %title </p>
-
-<p>Если Вы окружили часть текста фигурными скобками, то эта часть текста не будет видна, если значения полей будут пустыми</p>"
+msgstr ""
+"<p>Поля начинаются со знака %, например: %artist %album %title </p>\n"
+"\n"
+"<p>Если Вы окружили часть текста фигурными скобками, то эта часть текста не будет видна, если значения полей будут пустыми</p>"
 
 #: internet/groovesharksettingspage.cpp:111
 msgid "A Grooveshark Anywhere account is required."
@@ -248,12 +261,17 @@ msgid ""
 "A smart playlist is a dynamic list of songs that come from your library.  "
 "There are different types of smart playlist that offer different ways of "
 "selecting songs."
-msgstr "Умный список воспроизведения — это динамический список композиций из Вашей библиотеки. Существуют различные типы умных списков воспроизведения, предлагающих различные способы выбора композиций."
+msgstr ""
+"Умный список воспроизведения — это динамический список композиций из Вашей "
+"библиотеки. Существуют различные типы умных списков воспроизведения, "
+"предлагающих различные способы выбора композиций."
 
 #: smartplaylists/querywizardplugin.cpp:145
 msgid ""
 "A song will be included in the playlist if it matches these conditions."
-msgstr "Композиция будет добавлена в список воспроизведения, если соответствует этим условиям."
+msgstr ""
+"Композиция будет добавлена в список воспроизведения, если соответствует этим"
+" условиям."
 
 #: smartplaylists/searchterm.cpp:288
 msgid "A-Z"
@@ -370,31 +388,31 @@ msgstr "Добавить условие поиска"
 
 #: ../bin/src/ui_notificationssettingspage.h:361
 msgid "Add song album tag"
-msgstr "Добавить тег "Альбом""
+msgstr "Добавить тег \"Альбом\""
 
 #: ../bin/src/ui_notificationssettingspage.h:367
 msgid "Add song albumartist tag"
-msgstr "Добавить тег "Исполнитель альбома""
+msgstr "Добавить тег \"Исполнитель альбома\""
 
 #: ../bin/src/ui_notificationssettingspage.h:358
 msgid "Add song artist tag"
-msgstr "Добавить тег "Исполнитель""
+msgstr "Добавить тег \"Исполнитель\""
 
 #: ../bin/src/ui_notificationssettingspage.h:373
 msgid "Add song composer tag"
-msgstr "Добавить тег "Композитор""
+msgstr "Добавить тег \"Композитор\""
 
 #: ../bin/src/ui_notificationssettingspage.h:376
 msgid "Add song disc tag"
-msgstr "Добавить тег "Диск""
+msgstr "Добавить тег \"Диск\""
 
 #: ../bin/src/ui_notificationssettingspage.h:382
 msgid "Add song genre tag"
-msgstr "Добавить тег "Жанр""
+msgstr "Добавить тег \"Жанр\""
 
 #: ../bin/src/ui_notificationssettingspage.h:385
 msgid "Add song length tag"
-msgstr "Добавить тег "Время""
+msgstr "Добавить тег \"Время\""
 
 #: ../bin/src/ui_notificationssettingspage.h:388
 msgid "Add song play count"
@@ -406,15 +424,15 @@ msgstr "Добавить число пропусков"
 
 #: ../bin/src/ui_notificationssettingspage.h:364
 msgid "Add song title tag"
-msgstr "Добавить тег "Название""
+msgstr "Добавить тег \"Название\""
 
 #: ../bin/src/ui_notificationssettingspage.h:379
 msgid "Add song track tag"
-msgstr "Добавить тег "Номер дорожки""
+msgstr "Добавить тег \"Номер дорожки\""
 
 #: ../bin/src/ui_notificationssettingspage.h:370
 msgid "Add song year tag"
-msgstr "Добавить тег "Год""
+msgstr "Добавить тег \"Год\""
 
 #: ../bin/src/ui_mainwindow.h:664
 msgid "Add stream..."
@@ -575,7 +593,9 @@ msgstr "Всегда начинать воспроизведение"
 msgid ""
 "An additional plugin is required to use Spotify in Clementine.  Would you "
 "like to download and install it now?"
-msgstr "Требуется дополнительный модуль для использования Spotify в Clementine. Скачать и установить его?"
+msgstr ""
+"Требуется дополнительный модуль для использования Spotify в Clementine. "
+"Скачать и установить его?"
 
 #: devices/afcdevice.cpp:62
 msgid "An error occurred copying the iTunes database from the device"
@@ -627,7 +647,7 @@ msgstr "Применить сжатие для предотвращения ис
 #: ui/equalizer.cpp:191
 #, qt-format
 msgid "Are you sure you want to delete the \"%1\" preset?"
-msgstr "Вы действительно хотите удалить настройку "%1"?"
+msgstr "Вы действительно хотите удалить настройку \"%1\"?"
 
 #: internet/groovesharkservice.cpp:1177
 msgid "Are you sure you want to delete this playlist?"
@@ -856,12 +876,16 @@ msgstr "Выбор из списка"
 
 #: smartplaylists/querywizardplugin.cpp:147
 msgid "Choose how the playlist is sorted and how many songs it will contain."
-msgstr "Выбрать, как отсортирован список воспроизведения и как много в нём будет композиций."
+msgstr ""
+"Выбрать, как отсортирован список воспроизведения и как много в нём будет "
+"композиций."
 
 #: ../bin/src/ui_songinfosettingspage.h:188
 msgid ""
 "Choose the websites you want Clementine to use when searching for lyrics."
-msgstr "Выберите сайт, который Clementine будет использовать для поиска текстов песен."
+msgstr ""
+"Выберите сайт, который Clementine будет использовать для поиска текстов "
+"песен."
 
 #: ui/equalizer.cpp:109
 msgid "Classical"
@@ -897,14 +921,19 @@ msgstr "Визуализация Clementine"
 msgid ""
 "Clementine can automatically convert the music you copy to this device into "
 "a format that it can play."
-msgstr "Clementine может автоматически конвертировать музыку, которую копируете на это устройство в формат, который оно поддерживает."
+msgstr ""
+"Clementine может автоматически конвертировать музыку, которую копируете на "
+"это устройство в формат, который оно поддерживает."
 
 #: ../bin/src/ui_remotesettingspage.h:200 remote/remotesettingspage.cpp:152
 msgid ""
 "Clementine can be controlled remotely by an Android phone.  To enable this "
 "feature log in with the same Google account that is configured on your "
 "phone."
-msgstr "Clementine может удаленно управляться телефоном с ОС Android. Для активирования этой функции зайдите под тем же аккаунтом Google , что и на телефоне."
+msgstr ""
+"Clementine может удаленно управляться телефоном с ОС Android. Для "
+"активирования этой функции зайдите под тем же аккаунтом Google , что и на "
+"телефоне."
 
 #: ../bin/src/ui_notificationssettingspage.h:396
 msgid "Clementine can show a message when the track changes."
@@ -914,14 +943,19 @@ msgstr "Clementine может показывать сообщения при с�
 msgid ""
 "Clementine could not load any projectM visualisations.  Check that you have "
 "installed Clementine properly."
-msgstr "Clementine не может загрузить какою-либо визуализацию projectM. Проверьте, что установили Clementine правильно."
+msgstr ""
+"Clementine не может загрузить какою-либо визуализацию projectM. Проверьте, "
+"что установили Clementine правильно."
 
 #: internet/lastfmsettingspage.cpp:103
 msgid ""
 "Clementine couldn't fetch your subscription status since there are problems "
 "with your connection. Played tracks will be cached and sent later to "
 "Last.fm."
-msgstr "Clementine не смог получить статус вашей подписки из-за проблем с соединением. Воспроизведённые треки будут кэшированы и отправлены на Last.fm позже."
+msgstr ""
+"Clementine не смог получить статус вашей подписки из-за проблем с "
+"соединением. Воспроизведённые треки будут кэшированы и отправлены на Last.fm"
+" позже."
 
 #: widgets/prettyimage.cpp:201
 msgid "Clementine image viewer"
@@ -937,7 +971,8 @@ msgstr "Щелкните здесь, чтобы добавить музыку"
 
 #: ../bin/src/ui_trackslider.h:72
 msgid "Click to toggle between remaining time and total time"
-msgstr "Нажмите для переключения между остающимся временем и полной длительностью"
+msgstr ""
+"Нажмите для переключения между остающимся временем и полной длительностью"
 
 #: widgets/didyoumean.cpp:35
 msgid "Close"
@@ -969,7 +1004,7 @@ msgstr "Объединять одинаковые результаты из ра
 
 #: core/commandlineoptions.cpp:166
 msgid "Comma separated list of class:level, level is 0-3"
-msgstr "Разделенный запятыми список "класс:уровень", где уровень от 0 до 3"
+msgstr "Разделенный запятыми список \"класс:уровень\", где уровень от 0 до 3"
 
 #: playlist/playlist.cpp:1134 smartplaylists/searchterm.cpp:279
 #: ui/organisedialog.cpp:62 ../bin/src/ui_edittagdialog.h:661
@@ -1066,21 +1101,27 @@ msgstr "Копирование базы iPod"
 msgid ""
 "Could not create the GStreamer element \"%1\" - make sure you have all the "
 "required GStreamer plugins installed"
-msgstr "Невозможно создать элемент GStreamer "%1" - убедитесь, что у вас установлены все необходимые дополнения GStreamer"
+msgstr ""
+"Невозможно создать элемент GStreamer \"%1\" - убедитесь, что у вас "
+"установлены все необходимые дополнения GStreamer"
 
 #: transcoder/transcoder.cpp:425
 #, qt-format
 msgid ""
 "Couldn't find a muxer for %1, check you have the correct GStreamer plugins "
 "installed"
-msgstr "Не возможно найти мультиплексор для %1. Убедитесь, что установлены необходимые модули GStreamer"
+msgstr ""
+"Не возможно найти мультиплексор для %1. Убедитесь, что установлены "
+"необходимые модули GStreamer"
 
 #: transcoder/transcoder.cpp:419
 #, qt-format
 msgid ""
 "Couldn't find an encoder for %1, check you have the correct GStreamer "
 "plugins installed"
-msgstr "Невозможно найти кодировщик для %1, проверьте, что установлены все необходимые модули GStreamer"
+msgstr ""
+"Невозможно найти кодировщик для %1, проверьте, что установлены все "
+"необходимые модули GStreamer"
 
 #: internet/lastfmservice.cpp:899
 msgid "Couldn't load the last.fm radio station"
@@ -1398,7 +1439,7 @@ msgstr "Не повторять"
 
 #: library/libraryview.cpp:281
 msgid "Don't show in various artists"
-msgstr "Не показывать в "Разных исполнителях""
+msgstr "Не показывать в \"Разных исполнителях\""
 
 #: widgets/osd.cpp:294 ../bin/src/ui_playlistsequence.h:107
 msgid "Don't shuffle"
@@ -1422,7 +1463,7 @@ msgstr "Каталог загрузок"
 
 #: ../bin/src/ui_magnatunesettingspage.h:161
 msgid "Download membership"
-msgstr ""Download" подписка"
+msgstr "\"Download\" подписка"
 
 #: internet/magnatuneservice.cpp:271
 msgid "Download this album"
@@ -1479,7 +1520,7 @@ msgstr "Изменить умный список воспроизведения"
 #: ui/mainwindow.cpp:1367
 #, qt-format
 msgid "Edit tag \"%1\"..."
-msgstr "Редактировать тег "%1"..."
+msgstr "Редактировать тег \"%1\"..."
 
 #: ../bin/src/ui_mainwindow.h:654
 msgid "Edit tag..."
@@ -1526,7 +1567,10 @@ msgid ""
 "Enable sources below to include them in search results.  When identical "
 "results are available from more than one source, ones at the top will take "
 "priority."
-msgstr "Включить нижеперечисленные источники, чтобы добавить их в результаты поиска. Если одинаковые результаты доступны в нескольких источниках, то результаты, находящиеся сверху, будут иметь приоритет."
+msgstr ""
+"Включить нижеперечисленные источники, чтобы добавить их в результаты поиска."
+" Если одинаковые результаты доступны в нескольких источниках, то результаты,"
+" находящиеся сверху, будут иметь приоритет."
 
 #: core/globalshortcuts.cpp:62
 msgid "Enable/disable Last.fm scrobbling"
@@ -1555,7 +1599,8 @@ msgstr "Введите новое имя для этого списка восп
 #: ../bin/src/ui_lastfmstationdialog.h:93
 msgid ""
 "Enter an <b>artist</b> or <b>tag</b> to start listening to Last.fm radio."
-msgstr "Укажите <b>исполнителя</b> или <b>тег</b> чтобы слушать радио Last.fm."
+msgstr ""
+"Укажите <b>исполнителя</b> или <b>тег</b> чтобы слушать радио Last.fm."
 
 #: ../bin/src/ui_libraryfilterwidget.h:131
 #: ../bin/src/ui_albumcovermanager.h:153
@@ -1764,7 +1809,9 @@ msgstr "Тип файловой системы"
 
 #: smartplaylists/querywizardplugin.cpp:87
 msgid "Find songs in your library that match the criteria you specify."
-msgstr "Найти композиции в вашей библиотеке, которые соответствуют указанным вами критериям."
+msgstr ""
+"Найти композиции в вашей библиотеке, которые соответствуют указанным вами "
+"критериям."
 
 #: musicbrainz/tagfetcher.cpp:54
 msgid "Fingerprinting song"
@@ -1788,7 +1835,9 @@ msgstr "Размер шрифта"
 
 #: ../bin/src/ui_spotifysettingspage.h:214
 msgid "For licensing reasons Spotify support is in a separate plugin."
-msgstr "По лицензионным соображениям поддержка Spotify реализована в виде отдельного плагина"
+msgstr ""
+"По лицензионным соображениям поддержка Spotify реализована в виде отдельного"
+" плагина"
 
 #: ../bin/src/ui_transcoderoptionsmp3.h:204
 msgid "Force mono encoding"
@@ -1797,13 +1846,15 @@ msgstr "Принудительное кодирование в моно"
 #: devices/deviceview.cpp:209 devices/deviceview.cpp:315
 #: devices/deviceview.cpp:319
 msgid "Forget device"
-msgstr ""Забыть" устройство"
+msgstr "\"Забыть\" устройство"
 
 #: devices/deviceview.cpp:316
 msgid ""
 "Forgetting a device will remove it from this list and Clementine will have "
 "to rescan all the songs again next time you connect it."
-msgstr "Если выбрать "Забыть устройство", то оно будет удалено из этого списка и Clementine пересканирует все песни на нём при следующем подключении"
+msgstr ""
+"Если выбрать \"Забыть устройство\", то оно будет удалено из этого списка и "
+"Clementine пересканирует все песни на нём при следующем подключении"
 
 #: ../bin/src/ui_globalsearchwidget.h:59
 #: ../bin/src/ui_icecastfilterwidget.h:74
@@ -2026,21 +2077,26 @@ msgstr "Определение песни"
 msgid ""
 "If you continue, this device will work slowly and songs copied to it may not"
 " work."
-msgstr "Если продолжать, то устройство будет работать медленно и копирование композиций на него может не работать."
+msgstr ""
+"Если продолжать, то устройство будет работать медленно и копирование "
+"композиций на него может не работать."
 
 #: ../bin/src/ui_remotesettingspage.h:209
 msgid ""
 "If you use the remote on more than one computer, this name will help you "
 "choose which one to connect to on your phone."
-msgstr "Если вы используете функцию удаленного управления больше чем на одном компьютере, это имя поможет выбрать к какому подключиться с телефона."
+msgstr ""
+"Если вы используете функцию удаленного управления больше чем на одном "
+"компьютере, это имя поможет выбрать к какому подключиться с телефона."
 
 #: ../bin/src/ui_organisedialog.h:204
 msgid "Ignore \"The\" in artist names"
-msgstr "Игнорировать "The" в имени исполнителя"
+msgstr "Игнорировать \"The\" в имени исполнителя"
 
 #: ui/albumcoverchoicecontroller.cpp:41
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
-msgstr "Изображения (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
+msgstr ""
+"Изображения (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
 
 #: ui/albumcoverchoicecontroller.cpp:43
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
@@ -2050,7 +2106,9 @@ msgstr "Изображения (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm
 msgid ""
 "In dynamic mode new tracks will be chosen and added to the playlist every "
 "time a song finishes."
-msgstr "В динамическом режиме новые треки выбираются и добавляются в список воспроизведения каждый раз, когда заканчивается очередная песня."
+msgstr ""
+"В динамическом режиме новые треки выбираются и добавляются в список "
+"воспроизведения каждый раз, когда заканчивается очередная песня."
 
 #: internet/spotifyservice.cpp:347
 msgid "Inbox"
@@ -2277,7 +2335,7 @@ msgstr "Наименее любимые треки"
 
 #: ../bin/src/ui_playbacksettingspage.h:282
 msgid "Leave blank for the default.  Examples: \"/dev/dsp\", \"front\", etc."
-msgstr "Оставьте пустым для умолчания. Например: "/dev/dsp", "front", и т.д."
+msgstr "Оставьте пустым для умолчания. Например: \"/dev/dsp\", \"front\", и т.д."
 
 #: playlist/playlist.cpp:1110 ui/organisedialog.cpp:63
 #: ui/qtsystemtrayicon.cpp:255 ../bin/src/ui_edittagdialog.h:636
@@ -2307,7 +2365,9 @@ msgstr "Ограничения"
 #: internet/groovesharkservice.cpp:549
 msgid ""
 "Listen to Grooveshark songs based on what you've listened to previously"
-msgstr "Слушать музыку на сервисе Grooveshark, исходя из  прослушанных ранее композиций"
+msgstr ""
+"Слушать музыку на сервисе Grooveshark, исходя из  прослушанных ранее "
+"композиций"
 
 #: ui/equalizer.cpp:117
 msgid "Live"
@@ -2683,7 +2743,9 @@ msgstr "Без длинных блоков"
 #: playlist/playlistcontainer.cpp:416
 msgid ""
 "No matches found.  Clear the search box to show the whole playlist again."
-msgstr "Совпадений не найдено. Очистите строку поиска, чтобы снова увидеть список воспроизведения."
+msgstr ""
+"Совпадений не найдено. Очистите строку поиска, чтобы снова увидеть список "
+"воспроизведения."
 
 #: ../bin/src/ui_transcoderoptionsaac.h:145
 msgid "No short blocks"
@@ -3234,7 +3296,7 @@ msgstr "Удаляем песню из избранных"
 #: internet/groovesharkservice.cpp:1220
 #, qt-format
 msgid "Rename \"%1\" playlist"
-msgstr "Переименовать список воспроизведения \"%1\""
+msgstr "Переименовать список воспроизведения \\\"%1\\\""
 
 #: internet/groovesharkservice.cpp:491
 msgid "Rename Grooveshark playlist"
@@ -3507,7 +3569,7 @@ msgstr "Служба не работает"
 #: ui/mainwindow.cpp:1365
 #, qt-format
 msgid "Set %1 to \"%2\"..."
-msgstr "Установить %1 в "%2"..."
+msgstr "Установить %1 в \"%2\"..."
 
 #: core/commandlineoptions.cpp:151
 msgid "Set the volume to <value> percent"
@@ -3570,7 +3632,8 @@ msgstr "Показывать OSD"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:176
 msgid "Show a tooltip with more information about each result"
-msgstr "Показывать больше информации во всплывающей подсказке по каждому результату"
+msgstr ""
+"Показывать больше информации во всплывающей подсказке по каждому результату"
 
 #: widgets/nowplayingwidget.cpp:113
 msgid "Show above status bar"
@@ -3602,7 +3665,7 @@ msgstr "Показать в обозревателе файлов"
 
 #: library/libraryview.cpp:279
 msgid "Show in various artists"
-msgstr "Показать в "Разных исполнителях""
+msgstr "Показать в \"Разных исполнителях\""
 
 #: ui/mainwindow.cpp:479
 msgid "Show only duplicates"
@@ -3614,11 +3677,11 @@ msgstr "Показывать только без тэгов"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:167
 msgid "Show the \"Search for anything\" box above the sidebar"
-msgstr "Показывать "Универсальный поиск" выше боковой панели"
+msgstr "Показывать \"Универсальный поиск\" выше боковой панели"
 
 #: ../bin/src/ui_lastfmsettingspage.h:151
 msgid "Show the \"love\" and \"ban\" buttons"
-msgstr "Показывать кнопки "Избранное" и "Запретить""
+msgstr "Показывать кнопки \"Избранное\" и \"Запретить\""
 
 #: ../bin/src/ui_lastfmsettingspage.h:152
 msgid "Show the scrobble button in the main window"
@@ -3830,7 +3893,7 @@ msgstr "Поток"
 
 #: ../bin/src/ui_magnatunesettingspage.h:160
 msgid "Streaming membership"
-msgstr ""Streaming" подписка"
+msgstr "\"Streaming\" подписка"
 
 #: internet/groovesharkservice.cpp:566
 msgid "Subscribed playlists"
@@ -3914,7 +3977,7 @@ msgstr "Спасибо"
 #: ui/globalshortcutssettingspage.cpp:175
 #, qt-format
 msgid "The \"%1\" command could not be started."
-msgstr "Команда "%1" не может быть выполнена"
+msgstr "Команда \"%1\" не может быть выполнена"
 
 #: internet/magnatunedownloaddialog.cpp:89
 #, qt-format
@@ -3942,7 +4005,9 @@ msgstr "Запрошенный вами ссылка не является из�
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
-msgstr "Обновленная версия Clementine требует повторного сканирования библиотеки из-за нижеперечисленных особенностей:"
+msgstr ""
+"Обновленная версия Clementine требует повторного сканирования библиотеки из-"
+"за нижеперечисленных особенностей:"
 
 #: internet/magnatunedownloaddialog.cpp:157
 msgid "There was a problem fetching the metadata from Magnatune"
@@ -3952,13 +4017,17 @@ msgstr "Проблема получения метаданных с Magnatune"
 msgid ""
 "There were problems copying some songs.  The following files could not be "
 "copied:"
-msgstr "В процессе копирования некоторых композиций возникли проблемы. Следующие файлы не могут быть скопированы:"
+msgstr ""
+"В процессе копирования некоторых композиций возникли проблемы. Следующие "
+"файлы не могут быть скопированы:"
 
 #: ui/organiseerrordialog.cpp:61
 msgid ""
 "There were problems deleting some songs.  The following files could not be "
 "deleted:"
-msgstr "В процессе удаления некоторых композиций возникли проблемы. Следующие файлы не могут быть удалены:"
+msgstr ""
+"В процессе удаления некоторых композиций возникли проблемы. Следующие файлы "
+"не могут быть удалены:"
 
 #: library/libraryview.cpp:461 ui/mainwindow.cpp:1830 widgets/fileview.cpp:186
 msgid ""
@@ -3973,13 +4042,16 @@ msgstr "Эти файлы будут удалены с устройства. В�
 
 #: ../bin/src/ui_librarysettingspage.h:158
 msgid "These folders will be scanned for music to make up your library"
-msgstr "В этих каталогах будет выполнен поиск музыки для создания вашей коллекции"
+msgstr ""
+"В этих каталогах будет выполнен поиск музыки для создания вашей коллекции"
 
 #: ../bin/src/ui_transcodersettingspage.h:158
 msgid ""
 "These settings are used in the \"Transcode Music\" dialog, and when "
 "converting music before copying it to a device."
-msgstr "Эти настройки используются в диалоге "Перекодирование музыки" и при конвертировании музыки перед копированием на устройство."
+msgstr ""
+"Эти настройки используются в диалоге \"Перекодирование музыки\" и при "
+"конвертировании музыки перед копированием на устройство."
 
 #: ../bin/src/ui_groupbydialog.h:151
 msgid "Third level"
@@ -3989,8 +4061,9 @@ msgstr "Третий уровень"
 msgid ""
 "This action will create a database which could be as big as 150 MB.\n"
 "Do you want to continue anyway?"
-msgstr "Это действие создаст базу данных, которая может занимать более 150Мб.
-Продолжить?"
+msgstr ""
+"Это действие создаст базу данных, которая может занимать более 150Мб.\n"
+"Продолжить?"
 
 #: internet/magnatunedownloaddialog.cpp:174
 msgid "This album is not available in the requested format"
@@ -4000,7 +4073,9 @@ msgstr "Этот альбом не доступен в требуемом фор
 msgid ""
 "This device must be connected and opened before Clementine can see what file"
 " formats it supports."
-msgstr "Устройство должно быть подключено и открыто перед тем, как Clementine определит, какой формат оно поддерживает."
+msgstr ""
+"Устройство должно быть подключено и открыто перед тем, как Clementine "
+"определит, какой формат оно поддерживает."
 
 #: ../bin/src/ui_deviceproperties.h:375
 msgid "This device supports the following file formats:"
@@ -4013,17 +4088,23 @@ msgstr "Это устройство не будет работать прави�
 #: devices/devicemanager.cpp:568
 msgid ""
 "This is an MTP device, but you compiled Clementine without libmtp support."
-msgstr "Это MTP устройство, а ваша версия Clementine скомпилирована без поддержки libmtp."
+msgstr ""
+"Это MTP устройство, а ваша версия Clementine скомпилирована без поддержки "
+"libmtp."
 
 #: devices/devicemanager.cpp:576
 msgid "This is an iPod, but you compiled Clementine without libgpod support."
-msgstr "Это iPod, а ваша версия Clementine скомпилирована без поддержки libgpod."
+msgstr ""
+"Это iPod, а ваша версия Clementine скомпилирована без поддержки libgpod."
 
 #: devices/devicemanager.cpp:325
 msgid ""
 "This is the first time you have connected this device.  Clementine will now "
 "scan the device to find music files - this may take some time."
-msgstr "Это первый раз, когда вы подключили это устройство. Clementine просканировать устройство для получения музыкальных файлов - это может занять некоторое время"
+msgstr ""
+"Это первый раз, когда вы подключили это устройство. Clementine "
+"просканировать устройство для получения музыкальных файлов - это может "
+"занять некоторое время"
 
 #: playlist/playlisttabbar.cpp:159
 msgid ""
@@ -4058,7 +4139,9 @@ msgstr "Название"
 msgid ""
 "To start Grooveshark radio, you should first listen to a few other "
 "Grooveshark songs"
-msgstr "Чтобы включить радио Grooveshark, вам следует сначала прослушать несколько других песен на этом сервисе"
+msgstr ""
+"Чтобы включить радио Grooveshark, вам следует сначала прослушать несколько "
+"других песен на этом сервисе"
 
 #: core/utilities.cpp:107
 msgid "Today"
@@ -4342,8 +4425,9 @@ msgstr "При запуске Clementine"
 msgid ""
 "When looking for album art Clementine will first look for picture files that contain one of these words.\n"
 "If there are no matches then it will use the largest image in the directory."
-msgstr "При поиске обложек альбомов Clementine будет сначала искать файлы изображений, которые содержат одно из этих слов.
-При отсутствии совпадений, она будет использовать наибольшее изображение в каталоге."
+msgstr ""
+"При поиске обложек альбомов Clementine будет сначала искать файлы изображений, которые содержат одно из этих слов.\n"
+"При отсутствии совпадений, она будет использовать наибольшее изображение в каталоге."
 
 #: devices/ilister.cpp:99
 msgid "WiFi MAC Address"
@@ -4451,13 +4535,17 @@ msgstr "Вы можете выбрать способ сортировки ко�
 msgid ""
 "You can listen for free without an account, but Premium members can listen "
 "to higher quality streams without advertisements."
-msgstr "Вы можете свободно слушать музыку  без регистрации, но члены Premium аккаунтов могут слушать потоки в более высоком качестве без рекламы."
+msgstr ""
+"Вы можете свободно слушать музыку  без регистрации, но члены Premium "
+"аккаунтов могут слушать потоки в более высоком качестве без рекламы."
 
 #: internet/magnatunesettingspage.cpp:53
 msgid ""
 "You can listen to Magnatune songs for free without an account.  Purchasing a"
 " membership removes the messages at the end of each track."
-msgstr "Вы можете слушать песни с Magnatune свободно без регистрации. Регистрация убирает сообщения в конце каждой композиции."
+msgstr ""
+"Вы можете слушать песни с Magnatune свободно без регистрации. Регистрация "
+"убирает сообщения в конце каждой композиции."
 
 #: ../bin/src/ui_backgroundstreamssettingspage.h:57
 msgid "You can listen to background streams at the same time as other music."
@@ -4468,15 +4556,20 @@ msgid ""
 "You can scrobble tracks for free, but only <span style=\" font-"
 "weight:600;\">paid subscribers</span> can stream Last.fm radio from "
 "Clementine."
-msgstr "Вы можете скробблить композиции свободно, но только <span style=" font-weight:600;">платные подписчики</span> могут слушать радио Last.fm из Clementine."
+msgstr ""
+"Вы можете скробблить композиции свободно, но только <span style=\" font-"
+"weight:600;\">платные подписчики</span> могут слушать радио Last.fm из "
+"Clementine."
 
 #: ../bin/src/ui_wiimotesettingspage.h:184
 msgid ""
 "You can use your Wii Remote as a remote control for Clementine.  <a "
 "href=\"http://www.clementine-player.org/wiimote\">See the page on the "
 "Clementine wiki</a> for more information.\n"
-msgstr "Вы можете использовать пульт Wii для дистанционного управления Clementine. <a href="http://www.clementine-player.org/wiimote">Смотри раздел на wiki-странице Clementine</a> для более подробной информации.
-"
+msgstr ""
+"Вы можете использовать пульт Wii для дистанционного управления Clementine. "
+"<a href=\"http://www.clementine-player.org/wiimote\">Смотри раздел на wiki-"
+"странице Clementine</a> для более подробной информации.\n"
 
 #: internet/groovesharksettingspage.cpp:103
 msgid "You do not have a Grooveshark Anywhere account."
@@ -4490,11 +4583,14 @@ msgstr "У вас нет учетной записи Spotify Premium"
 msgid ""
 "You have been logged out of Spotify, please re-enter your password in the "
 "Settings dialog."
-msgstr "Подключение к сервису  Spotify было разорвано,  введите ваш пароль ещё раз в диалоге Настройки."
+msgstr ""
+"Подключение к сервису  Spotify было разорвано,  введите ваш пароль ещё раз в"
+" диалоге Настройки."
 
 #: internet/spotifysettingspage.cpp:157
 msgid "You have been logged out of Spotify, please re-enter your password."
-msgstr "Подключение к сервису  Spotify было разорвано,  введите ваш пароль ещё раз."
+msgstr ""
+"Подключение к сервису  Spotify было разорвано,  введите ваш пароль ещё раз."
 
 #: songinfo/lastfmtrackinfoprovider.cpp:95
 msgid "You love this track"
@@ -4505,7 +4601,10 @@ msgid ""
 "You need to launch System Preferences and turn on \"<span style=\" font-"
 "style:italic;\">Enable access for assistive devices</span>\" to use global "
 "shortcuts in Clementine."
-msgstr "Запустите Настройку системы (System Preferences) и включить функцию "Разрешить доступ для вспомогательных  устройств" для использования глобальных комбинаций клавиш в Clementine"
+msgstr ""
+"Запустите Настройку системы (System Preferences) и включить функцию "
+"\"Разрешить доступ для вспомогательных  устройств\" для использования "
+"глобальных комбинаций клавиш в Clementine"
 
 #: ../bin/src/ui_behavioursettingspage.h:185
 msgid "You will need to restart Clementine if you change the language."
@@ -4515,7 +4614,9 @@ msgstr "После смены языка потребуется перезапу
 msgid ""
 "You will not be able to play Last.fm radio stations as you are not a Last.fm"
 " subscriber."
-msgstr "Вы не сможете слушать радиостанцию Last.fm, так как вы не являетесь её подписчиком."
+msgstr ""
+"Вы не сможете слушать радиостанцию Last.fm, так как вы не являетесь её "
+"подписчиком."
 
 #: remote/remotesettingspage.cpp:126
 #, qt-format
@@ -4539,7 +4640,10 @@ msgid ""
 "Your gstreamer installation is missing the 'ofa' plugin.  This is required "
 "for automatic tag fetching.  Try installing the 'gstreamer-plugins-bad' "
 "package."
-msgstr "В установленном пакете gstreamer отсутствует плагин 'ofa'. Он требуется для автоматического извлечения тегов. Попробуйте установить пакет 'gstreamer-plugins-bad'."
+msgstr ""
+"В установленном пакете gstreamer отсутствует плагин 'ofa'. Он требуется для "
+"автоматического извлечения тегов. Попробуйте установить пакет 'gstreamer-"
+"plugins-bad'."
 
 #: library/libraryview.cpp:219
 msgid "Your library is empty!"
@@ -4691,7 +4795,7 @@ msgstr "настройки"
 
 #: widgets/didyoumean.cpp:141
 msgid "press enter"
-msgstr "нажмите "enter""
+msgstr "нажмите \"enter\""
 
 #: playlist/playlistundocommands.cpp:65 playlist/playlistundocommands.cpp:88
 #, c-format
@@ -4718,4 +4822,5 @@ msgstr "Остановить"
 #, qt-format
 msgid "track %1"
 msgstr "композиция %1"
+
 

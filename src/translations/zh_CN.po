@@ -2,11 +2,18 @@
 # Copyright (C) 2010 David Sansome
 # This file is distributed under the same license as the Clementine package.
 # 
-#, fuzzy
+# Translators:
+# Aron Xu <aronxu@gnome.org>, 2011.
 msgid ""
 msgstr ""
-"Content-Type: text/plain; charset=utf-8\n"
+"Project-Id-Version: Clementine Music Player\n"
+"Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
+"PO-Revision-Date: 2011-12-13 17:09+0000\n"
+"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: zh_CN\n"
+"Plural-Forms: nplurals=1; plural=0\n"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:130
 #: ../bin/src/ui_transcoderoptionsmp3.h:195
@@ -1064,7 +1071,7 @@ msgstr "正在复制 iPod 数据库"
 msgid ""
 "Could not create the GStreamer element \"%1\" - make sure you have all the "
 "required GStreamer plugins installed"
-msgstr "无法创建GStreamer元素 "%1" - 请确认您已安装了所需GStreamer插件。"
+msgstr "无法创建GStreamer元素 \"%1\" - 请确认您已安装了所需GStreamer插件。"
 
 #: transcoder/transcoder.cpp:425
 #, qt-format
@@ -2275,7 +2282,7 @@ msgstr "最不喜欢的歌曲"
 
 #: ../bin/src/ui_playbacksettingspage.h:282
 msgid "Leave blank for the default.  Examples: \"/dev/dsp\", \"front\", etc."
-msgstr "空白为默认,例如: "/dev/dsp", "front"等."
+msgstr "空白为默认,例如: \"/dev/dsp\", \"front\"等."
 
 #: playlist/playlist.cpp:1110 ui/organisedialog.cpp:63
 #: ui/qtsystemtrayicon.cpp:255 ../bin/src/ui_edittagdialog.h:636
@@ -3912,7 +3919,7 @@ msgstr ""
 #: ui/globalshortcutssettingspage.cpp:175
 #, qt-format
 msgid "The \"%1\" command could not be started."
-msgstr "命令"%1"无法执行."
+msgstr "命令\"%1\"无法执行."
 
 #: internet/magnatunedownloaddialog.cpp:89
 #, qt-format
@@ -4339,8 +4346,9 @@ msgstr "Clementine 启动时"
 msgid ""
 "When looking for album art Clementine will first look for picture files that contain one of these words.\n"
 "If there are no matches then it will use the largest image in the directory."
-msgstr "当查找专辑封面时,Clementine将首先查找包含这些关键词的图片.
-如果未能匹配,Clementine将使用目录下最大的图片."
+msgstr ""
+"当查找专辑封面时,Clementine将首先查找包含这些关键词的图片.\n"
+"如果未能匹配,Clementine将使用目录下最大的图片."
 
 #: devices/ilister.cpp:99
 msgid "WiFi MAC Address"
@@ -4465,8 +4473,9 @@ msgid ""
 "You can scrobble tracks for free, but only <span style=\" font-"
 "weight:600;\">paid subscribers</span> can stream Last.fm radio from "
 "Clementine."
-msgstr "您可以免费提交收听的音乐,但是只有 <span style=" font-
-weight:600;">付费用户</span>才可以使用Clementine收听Last.fm提供的流媒体."
+msgstr ""
+"您可以免费提交收听的音乐,但是只有 <span style=\" font-\r\n"
+"weight:600;\">付费用户</span>才可以使用Clementine收听Last.fm提供的流媒体."
 
 #: ../bin/src/ui_wiimotesettingspage.h:184
 msgid ""
@@ -4536,7 +4545,8 @@ msgid ""
 "Your gstreamer installation is missing the 'ofa' plugin.  This is required "
 "for automatic tag fetching.  Try installing the 'gstreamer-plugins-bad' "
 "package."
-msgstr "您计算机上的gstreamer缺少ofa插件.自动获取标签需要该插件,您可以安装 'gstreamer-plugins-bad'以解决该问题."
+msgstr ""
+"您计算机上的gstreamer缺少ofa插件.自动获取标签需要该插件,您可以安装 'gstreamer-plugins-bad'以解决该问题."
 
 #: library/libraryview.cpp:219
 msgid "Your library is empty!"
@@ -4715,4 +4725,5 @@ msgstr "停止"
 #, qt-format
 msgid "track %1"
 msgstr "音轨 %1"
+
 
