@@ -1,16 +1,16 @@
 #!/bin/sh -e
 
-BRANCH=$1
+REFSPEC=$1
 DIST=$2
 
-if [ -z "$BRANCH" -o -z "$DIST" ]; then
-  echo "Usage: $0 <branch> <dist>"
+if [ -z "$REFSPEC" -o -z "$DIST" ]; then
+  echo "Usage: $0 <refspec> <dist>"
   echo "Example: $0 tags/0.7 natty"
   exit 1
 fi
 
 PPA=ppa:me-davidsansome/clementine
-REPO=http://svn.clementine-player.org/clementine-mirror/$1
+REPO=https://code.google.com/p/clementine-player/
 
 BASE=`pwd`
 DIRECTORY=clementine
@@ -19,9 +19,13 @@ DIRECTORY=clementine
 rm -rfv $BASE/$DIRECTORY $BASE/*.diff.gz $BASE/*.tar.gz $BASE/*.dsc $BASE/*_source.changes
 
 # Checkout
-svn checkout $REPO $DIRECTORY
+git init $DIRECTORY
+cd $BASE/$DIRECTORY
+git fetch -t $REPO $REFSPEC
+git checkout $REFSPEC
 
 # Generate changelog and maketarball.sh
+mkdir $BASE/$DIRECTORY/bin
 cd $BASE/$DIRECTORY/bin
 cmake .. -DDEB_DIST=$DIST -DWITH_DEBIAN=ON
 rm -rfv $BASE/$DIRECTORY/bin/*
@@ -31,7 +35,7 @@ cd $BASE/$DIRECTORY/dist
 ./maketarball.sh
 mv -v $BASE/$DIRECTORY/dist/*.orig.tar.gz $BASE/
 rm -v $BASE/$DIRECTORY/dist/*.tar.gz
-find $BASE/$DIRECTORY/ -depth -path '*/.svn*' -delete
+rm -vrf $BASE/$DIRECTORY/.git
 
 # Build the deb
 cd $BASE/$DIRECTORY
