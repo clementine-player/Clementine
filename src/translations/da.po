@@ -2,11 +2,19 @@
 # Copyright (C) 2010 David Sansome
 # This file is distributed under the same license as the Clementine package.
 # 
-#, fuzzy
+# Translators:
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
+# Morten Anton Bach Sjøgren <m_abs@mabs.dk>, 2010.
 msgid ""
 msgstr ""
-"Content-Type: text/plain; charset=utf-8\n"
+"Project-Id-Version: Clementine Music Player\n"
+"Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
+"PO-Revision-Date: 2011-12-13 17:09+0000\n"
+"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: da\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:130
 #: ../bin/src/ui_transcoderoptionsmp3.h:195
@@ -231,9 +239,10 @@ msgid ""
 "<p>Tokens start with %, for example: %artist %album %title </p>\n"
 "\n"
 "<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
-msgstr "<p>Variabler starter med %, for eksempel: %artist %album %title </p>
-
-<p>Hvis du angiver krøllede parenteser uden om en del af teksten, vil denne blive skjult hvis variablen er tom.</p>"
+msgstr ""
+"<p>Variabler starter med %, for eksempel: %artist %album %title </p>\n"
+"\n"
+"<p>Hvis du angiver krøllede parenteser uden om en del af teksten, vil denne blive skjult hvis variablen er tom.</p>"
 
 #: internet/groovesharksettingspage.cpp:111
 msgid "A Grooveshark Anywhere account is required."
@@ -248,7 +257,10 @@ msgid ""
 "A smart playlist is a dynamic list of songs that come from your library.  "
 "There are different types of smart playlist that offer different ways of "
 "selecting songs."
-msgstr "En smart playliste er en dynamisk liste af sange fra dit arkiv. Der findes forskellige typer af smart playlister der tilbyder forskellige måder at udvælge sange på."
+msgstr ""
+"En smart playliste er en dynamisk liste af sange fra dit arkiv. Der findes "
+"forskellige typer af smart playlister der tilbyder forskellige måder at "
+"udvælge sange på."
 
 #: smartplaylists/querywizardplugin.cpp:145
 msgid ""
@@ -627,7 +639,7 @@ msgstr "Påfør kompression for at undgå klipping"
 #: ui/equalizer.cpp:191
 #, qt-format
 msgid "Are you sure you want to delete the \"%1\" preset?"
-msgstr "Vil du slettet "%1"-forudindstilling?"
+msgstr "Vil du slettet \"%1\"-forudindstilling?"
 
 #: internet/groovesharkservice.cpp:1177
 msgid "Are you sure you want to delete this playlist?"
@@ -1479,7 +1491,7 @@ msgstr ""
 #: ui/mainwindow.cpp:1367
 #, qt-format
 msgid "Edit tag \"%1\"..."
-msgstr "Redigér mærke "%1"..."
+msgstr "Redigér mærke \"%1\"..."
 
 #: ../bin/src/ui_mainwindow.h:654
 msgid "Edit tag..."
@@ -1555,7 +1567,9 @@ msgstr ""
 #: ../bin/src/ui_lastfmstationdialog.h:93
 msgid ""
 "Enter an <b>artist</b> or <b>tag</b> to start listening to Last.fm radio."
-msgstr "Indtast en <b>kunstner</b> eller et <b>mærke</b> for a begynde at lytte til Last.fm-radio."
+msgstr ""
+"Indtast en <b>kunstner</b> eller et <b>mærke</b> for a begynde at lytte til "
+"Last.fm-radio."
 
 #: ../bin/src/ui_libraryfilterwidget.h:131
 #: ../bin/src/ui_albumcovermanager.h:153
@@ -2277,7 +2291,7 @@ msgstr ""
 
 #: ../bin/src/ui_playbacksettingspage.h:282
 msgid "Leave blank for the default.  Examples: \"/dev/dsp\", \"front\", etc."
-msgstr "Lad stå blank for standard. Eksempler: "/dev/dsp", "front", osv."
+msgstr "Lad stå blank for standard. Eksempler: \"/dev/dsp\", \"front\", osv."
 
 #: playlist/playlist.cpp:1110 ui/organisedialog.cpp:63
 #: ui/qtsystemtrayicon.cpp:255 ../bin/src/ui_edittagdialog.h:636
@@ -3470,11 +3484,13 @@ msgstr ""
 
 #: core/commandlineoptions.cpp:155
 msgid "Seek the currently playing track by a relative amount"
-msgstr "Søg med en relativ mængde i det spor der afspilles på nuværende tidspunkt"
+msgstr ""
+"Søg med en relativ mængde i det spor der afspilles på nuværende tidspunkt"
 
 #: core/commandlineoptions.cpp:154
 msgid "Seek the currently playing track to an absolute position"
-msgstr "Søg til en bestemt position i det spor der afspilles på nuværende tidspunkt"
+msgstr ""
+"Søg til en bestemt position i det spor der afspilles på nuværende tidspunkt"
 
 #: visualisations/visualisationselector.cpp:40
 msgid "Select All"
@@ -3507,7 +3523,7 @@ msgstr "Tjeneste offline"
 #: ui/mainwindow.cpp:1365
 #, qt-format
 msgid "Set %1 to \"%2\"..."
-msgstr "Sæt %1 til "%2"..."
+msgstr "Sæt %1 til \"%2\"..."
 
 #: core/commandlineoptions.cpp:151
 msgid "Set the volume to <value> percent"
@@ -3618,7 +3634,7 @@ msgstr ""
 
 #: ../bin/src/ui_lastfmsettingspage.h:151
 msgid "Show the \"love\" and \"ban\" buttons"
-msgstr "Vis "elsker" og "bandlys"-knapperne"
+msgstr "Vis \"elsker\" og \"bandlys\"-knapperne"
 
 #: ../bin/src/ui_lastfmsettingspage.h:152
 msgid "Show the scrobble button in the main window"
@@ -3973,7 +3989,8 @@ msgstr ""
 
 #: ../bin/src/ui_librarysettingspage.h:158
 msgid "These folders will be scanned for music to make up your library"
-msgstr "Disse mapper vil blive scannet for musik til at opbygget dit bibliotek"
+msgstr ""
+"Disse mapper vil blive scannet for musik til at opbygget dit bibliotek"
 
 #: ../bin/src/ui_transcodersettingspage.h:158
 msgid ""
@@ -4715,4 +4732,5 @@ msgstr ""
 #, qt-format
 msgid "track %1"
 msgstr "spor %1"
+
 

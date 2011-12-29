@@ -2,11 +2,18 @@
 # Copyright (C) 2010 David Sansome
 # This file is distributed under the same license as the Clementine package.
 # 
-#, fuzzy
+# Translators:
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
 msgid ""
 msgstr ""
-"Content-Type: text/plain; charset=utf-8\n"
+"Project-Id-Version: Clementine Music Player\n"
+"Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
+"PO-Revision-Date: 2011-12-13 17:09+0000\n"
+"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: sr\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:130
 #: ../bin/src/ui_transcoderoptionsmp3.h:195
@@ -246,7 +253,10 @@ msgid ""
 "A smart playlist is a dynamic list of songs that come from your library.  "
 "There are different types of smart playlist that offer different ways of "
 "selecting songs."
-msgstr "Паметна листа је промењива листа песама која потиче из твоје библиотеке. Постоје различити типови паметних листа који нуде различите путеве избирања песама."
+msgstr ""
+"Паметна листа је промењива листа песама која потиче из твоје библиотеке. "
+"Постоје различити типови паметних листа који нуде различите путеве избирања "
+"песама."
 
 #: smartplaylists/querywizardplugin.cpp:145
 msgid ""
@@ -573,7 +583,9 @@ msgstr "Увек почни да свираш"
 msgid ""
 "An additional plugin is required to use Spotify in Clementine.  Would you "
 "like to download and install it now?"
-msgstr "Додатак је потребан да би се користио Spotify у Клементини. Да ли желиш да га преузмеш и одмах уградиш?"
+msgstr ""
+"Додатак је потребан да би се користио Spotify у Клементини. Да ли желиш да "
+"га преузмеш и одмах уградиш?"
 
 #: devices/afcdevice.cpp:62
 msgid "An error occurred copying the iTunes database from the device"
@@ -625,7 +637,7 @@ msgstr "Примени компресије како би се спречило 
 #: ui/equalizer.cpp:191
 #, qt-format
 msgid "Are you sure you want to delete the \"%1\" preset?"
-msgstr "Сигурнисте да желите обрисати претподешавање "%1"?"
+msgstr "Сигурнисте да желите обрисати претподешавање \"%1\"?"
 
 #: internet/groovesharkservice.cpp:1177
 msgid "Are you sure you want to delete this playlist?"
@@ -895,14 +907,18 @@ msgstr "Визуелизација Клементине"
 msgid ""
 "Clementine can automatically convert the music you copy to this device into "
 "a format that it can play."
-msgstr "Клементина може аутоматски да конвертује музику коју ти умножиш на овај уређај у формат који може бити пуштен."
+msgstr ""
+"Клементина може аутоматски да конвертује музику коју ти умножиш на овај "
+"уређај у формат који може бити пуштен."
 
 #: ../bin/src/ui_remotesettingspage.h:200 remote/remotesettingspage.cpp:152
 msgid ""
 "Clementine can be controlled remotely by an Android phone.  To enable this "
 "feature log in with the same Google account that is configured on your "
 "phone."
-msgstr "Клементина се може контролисати даљински Андроид телефоном. Да омогућиш ову ставку, пријави се са истим Google налогом који је подешен на твом телефону."
+msgstr ""
+"Клементина се може контролисати даљински Андроид телефоном. Да омогућиш ову "
+"ставку, пријави се са истим Google налогом који је подешен на твом телефону."
 
 #: ../bin/src/ui_notificationssettingspage.h:396
 msgid "Clementine can show a message when the track changes."
@@ -912,14 +928,19 @@ msgstr "Клементина може приказивати поруке при
 msgid ""
 "Clementine could not load any projectM visualisations.  Check that you have "
 "installed Clementine properly."
-msgstr "Клементина не може учитати пројекатМ  визуализацију. Проверите да ли сте правилно инсталирали Клементину."
+msgstr ""
+"Клементина не може учитати пројекатМ  визуализацију. Проверите да ли сте "
+"правилно инсталирали Клементину."
 
 #: internet/lastfmsettingspage.cpp:103
 msgid ""
 "Clementine couldn't fetch your subscription status since there are problems "
 "with your connection. Played tracks will be cached and sent later to "
 "Last.fm."
-msgstr "Клементина није могла да узме твој претплатнички статус пошто има проблема са твојом конекцијом. Пуштене нумере ће бити кеширане и касније послате на Last.fm."
+msgstr ""
+"Клементина није могла да узме твој претплатнички статус пошто има проблема "
+"са твојом конекцијом. Пуштене нумере ће бити кеширане и касније послате на "
+"Last.fm."
 
 #: widgets/prettyimage.cpp:201
 msgid "Clementine image viewer"
@@ -1064,21 +1085,27 @@ msgstr "Умножава базуподатака iPod-а"
 msgid ""
 "Could not create the GStreamer element \"%1\" - make sure you have all the "
 "required GStreamer plugins installed"
-msgstr "Не могу да направим Гстример елемент "%1" - проверите да ли су инсталирани сви Гстример прикључци"
+msgstr ""
+"Не могу да направим Гстример елемент \"%1\" - проверите да ли су инсталирани"
+" сви Гстример прикључци"
 
 #: transcoder/transcoder.cpp:425
 #, qt-format
 msgid ""
 "Couldn't find a muxer for %1, check you have the correct GStreamer plugins "
 "installed"
-msgstr "Не може да нађе муксер за %1, провери да ли имаш уграђен исправан додатак Гстримера"
+msgstr ""
+"Не може да нађе муксер за %1, провери да ли имаш уграђен исправан додатак "
+"Гстримера"
 
 #: transcoder/transcoder.cpp:419
 #, qt-format
 msgid ""
 "Couldn't find an encoder for %1, check you have the correct GStreamer "
 "plugins installed"
-msgstr "Не може да нађе енкодер за %1, провери да ли имаш уграђен исправан додатак Гстримера"
+msgstr ""
+"Не може да нађе енкодер за %1, провери да ли имаш уграђен исправан додатак "
+"Гстримера"
 
 #: internet/lastfmservice.cpp:899
 msgid "Couldn't load the last.fm radio station"
@@ -1477,7 +1504,7 @@ msgstr "Измени паметну листу"
 #: ui/mainwindow.cpp:1367
 #, qt-format
 msgid "Edit tag \"%1\"..."
-msgstr "Уреди ознаку "%1"..."
+msgstr "Уреди ознаку \"%1\"..."
 
 #: ../bin/src/ui_mainwindow.h:654
 msgid "Edit tag..."
@@ -1553,7 +1580,9 @@ msgstr "Унеси нови назив листе нумера"
 #: ../bin/src/ui_lastfmstationdialog.h:93
 msgid ""
 "Enter an <b>artist</b> or <b>tag</b> to start listening to Last.fm radio."
-msgstr "Унесите <b>извођача</b> or <b>ознаку</b> да почнете са слушањем ЛастФМ радиа."
+msgstr ""
+"Унесите <b>извођача</b> or <b>ознаку</b> да почнете са слушањем ЛастФМ "
+"радиа."
 
 #: ../bin/src/ui_libraryfilterwidget.h:131
 #: ../bin/src/ui_albumcovermanager.h:153
@@ -1762,7 +1791,9 @@ msgstr ""
 
 #: smartplaylists/querywizardplugin.cpp:87
 msgid "Find songs in your library that match the criteria you specify."
-msgstr "Пронађи песме у твојој библиотеци које одговарају критеријуму који си прецизирао."
+msgstr ""
+"Пронађи песме у твојој библиотеци које одговарају критеријуму који си "
+"прецизирао."
 
 #: musicbrainz/tagfetcher.cpp:54
 msgid "Fingerprinting song"
@@ -1801,7 +1832,9 @@ msgstr "Заборави уређај"
 msgid ""
 "Forgetting a device will remove it from this list and Clementine will have "
 "to rescan all the songs again next time you connect it."
-msgstr "Заборављање уређаја ће га уклоните из ове листе и Клементина ће морати поново да скенира све песме следећи пут када га повежете."
+msgstr ""
+"Заборављање уређаја ће га уклоните из ове листе и Клементина ће морати "
+"поново да скенира све песме следећи пут када га повежете."
 
 #: ../bin/src/ui_globalsearchwidget.h:59
 #: ../bin/src/ui_icecastfilterwidget.h:74
@@ -2024,17 +2057,21 @@ msgstr "Препознавање песме"
 msgid ""
 "If you continue, this device will work slowly and songs copied to it may not"
 " work."
-msgstr "Ако наставиш, овај уређај ће радити спорије и умножене песме на њему можда неће радити."
+msgstr ""
+"Ако наставиш, овај уређај ће радити спорије и умножене песме на њему можда "
+"неће радити."
 
 #: ../bin/src/ui_remotesettingspage.h:209
 msgid ""
 "If you use the remote on more than one computer, this name will help you "
 "choose which one to connect to on your phone."
-msgstr "Ако користиш даљински на више од једног рачунара, његово име ће ти помоћи да изабереш један да се повежеш на свој телефон."
+msgstr ""
+"Ако користиш даљински на више од једног рачунара, његово име ће ти помоћи да"
+" изабереш један да се повежеш на свој телефон."
 
 #: ../bin/src/ui_organisedialog.h:204
 msgid "Ignore \"The\" in artist names"
-msgstr "Игонориши "The" у имену извођача"
+msgstr "Игонориши \"The\" у имену извођача"
 
 #: ui/albumcoverchoicecontroller.cpp:41
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
@@ -2048,7 +2085,9 @@ msgstr "Slike (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgid ""
 "In dynamic mode new tracks will be chosen and added to the playlist every "
 "time a song finishes."
-msgstr "У промењивом режиму нове нумере ће бити изабране и додате листи сваки пут кад се песма заврши."
+msgstr ""
+"У промењивом режиму нове нумере ће бити изабране и додате листи сваки пут "
+"кад се песма заврши."
 
 #: internet/spotifyservice.cpp:347
 msgid "Inbox"
@@ -2247,7 +2286,8 @@ msgstr ""
 
 #: internet/lastfmservice.cpp:442
 msgid "Last.fm is currently busy, please try again in a few minutes"
-msgstr "ЛастФМ је тренутно заузет, молимо Вас пробајте поново за неколико минута"
+msgstr ""
+"ЛастФМ је тренутно заузет, молимо Вас пробајте поново за неколико минута"
 
 #: ../bin/src/ui_lastfmsettingspage.h:148
 msgid "Last.fm password"
@@ -2275,7 +2315,7 @@ msgstr "Најмање омиљене нумере"
 
 #: ../bin/src/ui_playbacksettingspage.h:282
 msgid "Leave blank for the default.  Examples: \"/dev/dsp\", \"front\", etc."
-msgstr "Оставите празно за подразмевано.  Примери: "/dev/dsp", "front", итд.."
+msgstr "Оставите празно за подразмевано.  Примери: \"/dev/dsp\", \"front\", итд.."
 
 #: playlist/playlist.cpp:1110 ui/organisedialog.cpp:63
 #: ui/qtsystemtrayicon.cpp:255 ../bin/src/ui_edittagdialog.h:636
@@ -2681,7 +2721,8 @@ msgstr ""
 #: playlist/playlistcontainer.cpp:416
 msgid ""
 "No matches found.  Clear the search box to show the whole playlist again."
-msgstr "Није нађено. Очистите поље за претрагу да би приказали целу листу поново."
+msgstr ""
+"Није нађено. Очистите поље за претрагу да би приказали целу листу поново."
 
 #: ../bin/src/ui_transcoderoptionsaac.h:145
 msgid "No short blocks"
@@ -3505,7 +3546,7 @@ msgstr "Сервис ван мреже"
 #: ui/mainwindow.cpp:1365
 #, qt-format
 msgid "Set %1 to \"%2\"..."
-msgstr "Подешено %1 од "%2"..."
+msgstr "Подешено %1 од \"%2\"..."
 
 #: core/commandlineoptions.cpp:151
 msgid "Set the volume to <value> percent"
@@ -3912,12 +3953,12 @@ msgstr "Захвалнице"
 #: ui/globalshortcutssettingspage.cpp:175
 #, qt-format
 msgid "The \"%1\" command could not be started."
-msgstr ""%1" команди се не могу покренути."
+msgstr "\"%1\" команди се не могу покренути."
 
 #: internet/magnatunedownloaddialog.cpp:89
 #, qt-format
 msgid "The directory %1 is not valid"
-msgstr ""%1" директоријума није исправно"
+msgstr "\"%1\" директоријума није исправно"
 
 #: playlist/playlistmanager.cpp:151 playlist/playlistmanager.cpp:169
 #, qt-format
@@ -3940,7 +3981,9 @@ msgstr "Сајт који сте затражили није слика!"
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
-msgstr "Верзија Клементине на коју сте надоградили захтева потпуну обнову библиотеке због нових могућности које су излистане испод:"
+msgstr ""
+"Верзија Клементине на коју сте надоградили захтева потпуну обнову библиотеке"
+" због нових могућности које су излистане испод:"
 
 #: internet/magnatunedownloaddialog.cpp:157
 msgid "There was a problem fetching the metadata from Magnatune"
@@ -3950,34 +3993,44 @@ msgstr "Искрсао проблем приликом добављања мет
 msgid ""
 "There were problems copying some songs.  The following files could not be "
 "copied:"
-msgstr "Искрсао проблем приликом умножавања истих песама. Следећи фајлови се нису умножили:"
+msgstr ""
+"Искрсао проблем приликом умножавања истих песама. Следећи фајлови се нису "
+"умножили:"
 
 #: ui/organiseerrordialog.cpp:61
 msgid ""
 "There were problems deleting some songs.  The following files could not be "
 "deleted:"
-msgstr "Искрсао је проблем приликом брисања неких песама. Следећи фајлови се нису избрисали:"
+msgstr ""
+"Искрсао је проблем приликом брисања неких песама. Следећи фајлови се нису "
+"избрисали:"
 
 #: library/libraryview.cpp:461 ui/mainwindow.cpp:1830 widgets/fileview.cpp:186
 msgid ""
 "These files will be deleted from disk, are you sure you want to continue?"
-msgstr "Ови фајлове ће се избрисати са диска, да ли сигурно желите да наставите?"
+msgstr ""
+"Ови фајлове ће се избрисати са диска, да ли сигурно желите да наставите?"
 
 #: devices/deviceview.cpp:394
 msgid ""
 "These files will be deleted from the device, are you sure you want to "
 "continue?"
-msgstr "Ови фајлови ће се избрисати са уређаја, да ли сигурно желите да наставите?"
+msgstr ""
+"Ови фајлови ће се избрисати са уређаја, да ли сигурно желите да наставите?"
 
 #: ../bin/src/ui_librarysettingspage.h:158
 msgid "These folders will be scanned for music to make up your library"
-msgstr "Ови директоријуми ће бити скенирани због музике да би се направила библиотека"
+msgstr ""
+"Ови директоријуми ће бити скенирани због музике да би се направила "
+"библиотека"
 
 #: ../bin/src/ui_transcodersettingspage.h:158
 msgid ""
 "These settings are used in the \"Transcode Music\" dialog, and when "
 "converting music before copying it to a device."
-msgstr "Ова подешавања се користе у  "Transcode Music" дијалогу, и кад се претвара музика пре умножавања на уређај."
+msgstr ""
+"Ова подешавања се користе у  \"Transcode Music\" дијалогу, и кад се претвара"
+" музика пре умножавања на уређај."
 
 #: ../bin/src/ui_groupbydialog.h:151
 msgid "Third level"
@@ -3987,8 +4040,9 @@ msgstr "Трећи ниво"
 msgid ""
 "This action will create a database which could be as big as 150 MB.\n"
 "Do you want to continue anyway?"
-msgstr "Овај избор ће направити базу података која може бити велика и до 150 мб.
-Да ли ипак желиш да наставиш?"
+msgstr ""
+"Овај избор ће направити базу података која може бити велика и до 150 мб.\n"
+"Да ли ипак желиш да наставиш?"
 
 #: internet/magnatunedownloaddialog.cpp:174
 msgid "This album is not available in the requested format"
@@ -3998,7 +4052,9 @@ msgstr "Ovaj album nije dostupan u traženom formatu"
 msgid ""
 "This device must be connected and opened before Clementine can see what file"
 " formats it supports."
-msgstr "Овај уређај мора бити повезан и отворен пре него што Клементина може да види које формате фајлова подржава."
+msgstr ""
+"Овај уређај мора бити повезан и отворен пре него што Клементина може да види"
+" које формате фајлова подржава."
 
 #: ../bin/src/ui_deviceproperties.h:375
 msgid "This device supports the following file formats:"
@@ -4011,7 +4067,8 @@ msgstr "Овај уређај неће радити исравно"
 #: devices/devicemanager.cpp:568
 msgid ""
 "This is an MTP device, but you compiled Clementine without libmtp support."
-msgstr "Ово је MTP уређај, али ви сте саставили Клементину без libmtp подршке."
+msgstr ""
+"Ово је MTP уређај, али ви сте саставили Клементину без libmtp подршке."
 
 #: devices/devicemanager.cpp:576
 msgid "This is an iPod, but you compiled Clementine without libgpod support."
@@ -4021,13 +4078,17 @@ msgstr "Ово је иПод,  али ви сте саставили Клеме�
 msgid ""
 "This is the first time you have connected this device.  Clementine will now "
 "scan the device to find music files - this may take some time."
-msgstr "Ово је први пут да сте повезали овај уређај. Клементина ће сад да скенира уређај да би нашла музику - може потрајати."
+msgstr ""
+"Ово је први пут да сте повезали овај уређај. Клементина ће сад да скенира "
+"уређај да би нашла музику - може потрајати."
 
 #: playlist/playlisttabbar.cpp:159
 msgid ""
 "This playlist will be removed; the action can't be undone. Are you sure you "
 "want to continue?"
-msgstr "Ова листа ће бити избрисана; избор се не може вратити. Да ли сте сигурни да желите да наставите?"
+msgstr ""
+"Ова листа ће бити избрисана; избор се не може вратити. Да ли сте сигурни да "
+"желите да наставите?"
 
 #: internet/lastfmservice.cpp:440
 msgid "This stream is for paid subscribers only"
@@ -4340,8 +4401,9 @@ msgstr "Када се Клементина упали"
 msgid ""
 "When looking for album art Clementine will first look for picture files that contain one of these words.\n"
 "If there are no matches then it will use the largest image in the directory."
-msgstr "Када тражи за омотницом Клементина ће прво да потражи слике које садрже једну од ових речи.
-Уколико нема тражених појмова тад ће узети највећу слику у директоријуму."
+msgstr ""
+"Када тражи за омотницом Клементина ће прво да потражи слике које садрже једну од ових речи.\n"
+"Уколико нема тражених појмова тад ће узети највећу слику у директоријуму."
 
 #: devices/ilister.cpp:99
 msgid "WiFi MAC Address"
@@ -4455,7 +4517,9 @@ msgstr ""
 msgid ""
 "You can listen to Magnatune songs for free without an account.  Purchasing a"
 " membership removes the messages at the end of each track."
-msgstr "Можете бесплатно слушати песеме на Магнатјуну без регистровања налога. Куповином чланства ослободићете се порука на крају сваке нумере."
+msgstr ""
+"Можете бесплатно слушати песеме на Магнатјуну без регистровања налога. "
+"Куповином чланства ослободићете се порука на крају сваке нумере."
 
 #: ../bin/src/ui_backgroundstreamssettingspage.h:57
 msgid "You can listen to background streams at the same time as other music."
@@ -4715,4 +4779,5 @@ msgstr "Заустави"
 #, qt-format
 msgid "track %1"
 msgstr "нумера %1"
+
 
