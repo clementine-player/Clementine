@@ -2,22 +2,11 @@
 # Copyright (C) 2010 David Sansome
 # This file is distributed under the same license as the Clementine package.
 # 
-# Translators:
-#   <arnaud.bienner@gmail.com>, 2011.
-# H. İbrahim Güngör <h.ibrahim.gungor@gmail.com>, 2011.
-# H. İbrahim Güngör <ibrahim@pardus.org.tr>, 2010.
-# H. İbrahim Güngör <igungor@gmail.com>, 2011.
-# Irfan YAZICI <irfanyazici@gmail.com>, 2011.
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Clementine Music Player\n"
-"Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2011-12-13 17:09+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: tr\n"
-"Plural-Forms: nplurals=1; plural=0\n"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:130
 #: ../bin/src/ui_transcoderoptionsmp3.h:195
@@ -235,17 +224,16 @@ msgstr "50 rasgele parça"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:165
 msgid "<a href=\"http://www.di.fm/premium/\">Upgrade to Premium now</a>"
-msgstr "<a href=\"http://www.di.fm/premium/\">Şimdi Premium üyeliğine geçin</a>"
+msgstr "<a href="http://www.di.fm/premium/">Şimdi Premium üyeliğine geçin</a>"
 
 #: ../bin/src/ui_organisedialog.h:199
 msgid ""
 "<p>Tokens start with %, for example: %artist %album %title </p>\n"
 "\n"
 "<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
-msgstr ""
-"<p>% ile başlayan özellikler, örneğin: %artist %album %title </p>\n"
-"\n"
-"<p>İşaret içeren metnin bölümlerini süslü parantez ile sarmalarsanız, işaret boşsa o bölüm görünmeyecektir.</p>"
+msgstr "<p>% ile başlayan özellikler, örneğin: %artist %album %title </p>
+
+<p>İşaret içeren metnin bölümlerini süslü parantez ile sarmalarsanız, işaret boşsa o bölüm görünmeyecektir.</p>"
 
 #: internet/groovesharksettingspage.cpp:111
 msgid "A Grooveshark Anywhere account is required."
@@ -260,10 +248,7 @@ msgid ""
 "A smart playlist is a dynamic list of songs that come from your library.  "
 "There are different types of smart playlist that offer different ways of "
 "selecting songs."
-msgstr ""
-"Akıllı çalma listesi, kütüphanenizden gelen şarkıların dinamik bir "
-"listesidir. Şarkı seçmenin farklı yollarını sunan farklı akıllı şarkı "
-"listesi türleri vardır."
+msgstr "Akıllı çalma listesi, kütüphanenizden gelen şarkıların dinamik bir listesidir. Şarkı seçmenin farklı yollarını sunan farklı akıllı şarkı listesi türleri vardır."
 
 #: smartplaylists/querywizardplugin.cpp:145
 msgid ""
@@ -590,9 +575,7 @@ msgstr "Her zaman çalarak başlat"
 msgid ""
 "An additional plugin is required to use Spotify in Clementine.  Would you "
 "like to download and install it now?"
-msgstr ""
-"Spotify'ın Clementine'de kullanılması için harici bir eklenti gerekmektedir."
-"  Şimdi indirmek ve kurulumunu yapmak ister misiniz?"
+msgstr "Spotify'ın Clementine'de kullanılması için harici bir eklenti gerekmektedir.  Şimdi indirmek ve kurulumunu yapmak ister misiniz?"
 
 #: devices/afcdevice.cpp:62
 msgid "An error occurred copying the iTunes database from the device"
@@ -644,7 +627,7 @@ msgstr "Kesintiyi engellemek için sıkıştırma uygula"
 #: ui/equalizer.cpp:191
 #, qt-format
 msgid "Are you sure you want to delete the \"%1\" preset?"
-msgstr "\"%1\" ayarını silmek istediğinizden emin misiniz?"
+msgstr ""%1" ayarını silmek istediğinizden emin misiniz?"
 
 #: internet/groovesharkservice.cpp:1177
 msgid "Are you sure you want to delete this playlist?"
@@ -914,19 +897,14 @@ msgstr "Clementine Görselliği"
 msgid ""
 "Clementine can automatically convert the music you copy to this device into "
 "a format that it can play."
-msgstr ""
-"Clementine bu aygıta kopyaladığınız müzikleri, aygıtın çalacağı biçime "
-"dönüştürebilir."
+msgstr "Clementine bu aygıta kopyaladığınız müzikleri, aygıtın çalacağı biçime dönüştürebilir."
 
 #: ../bin/src/ui_remotesettingspage.h:200 remote/remotesettingspage.cpp:152
 msgid ""
 "Clementine can be controlled remotely by an Android phone.  To enable this "
 "feature log in with the same Google account that is configured on your "
 "phone."
-msgstr ""
-"Clementine Android telefon tarafından uzaktan kontrol edilebilir. Bu "
-"özelliği etkinleştirmek için telefonunuzda yapılandırılan Google hesabınızla"
-" oturum açın."
+msgstr "Clementine Android telefon tarafından uzaktan kontrol edilebilir. Bu özelliği etkinleştirmek için telefonunuzda yapılandırılan Google hesabınızla oturum açın."
 
 #: ../bin/src/ui_notificationssettingspage.h:396
 msgid "Clementine can show a message when the track changes."
@@ -936,19 +914,14 @@ msgstr "Parça değiştiğinde Clementine bir ileti gösterebilir."
 msgid ""
 "Clementine could not load any projectM visualisations.  Check that you have "
 "installed Clementine properly."
-msgstr ""
-"Clementine projectM görsellerini yükleyemedi. Clementine programını düzgün "
-"yüklediğinizi kontrol edin."
+msgstr "Clementine projectM görsellerini yükleyemedi. Clementine programını düzgün yüklediğinizi kontrol edin."
 
 #: internet/lastfmsettingspage.cpp:103
 msgid ""
 "Clementine couldn't fetch your subscription status since there are problems "
 "with your connection. Played tracks will be cached and sent later to "
 "Last.fm."
-msgstr ""
-"Clementine bağlantı sorunlarından dolayı abone bilgilerinize ulaşamadı. "
-"Çalınan şarkılar ön belleğe kaydedilecek ve daha sonra Last.fm'e "
-"gönderilecek."
+msgstr "Clementine bağlantı sorunlarından dolayı abone bilgilerinize ulaşamadı. Çalınan şarkılar ön belleğe kaydedilecek ve daha sonra Last.fm'e gönderilecek."
 
 #: widgets/prettyimage.cpp:201
 msgid "Clementine image viewer"
@@ -1093,27 +1066,21 @@ msgstr "iPod veritabanı kopyalanıyor"
 msgid ""
 "Could not create the GStreamer element \"%1\" - make sure you have all the "
 "required GStreamer plugins installed"
-msgstr ""
-"GStreamer elementi  \"%1\" oluşturulamadı - tüm Gstreamer eklentilerinin "
-"kurulu olduğundan emin olun"
+msgstr "GStreamer elementi  "%1" oluşturulamadı - tüm Gstreamer eklentilerinin kurulu olduğundan emin olun"
 
 #: transcoder/transcoder.cpp:425
 #, qt-format
 msgid ""
 "Couldn't find a muxer for %1, check you have the correct GStreamer plugins "
 "installed"
-msgstr ""
-"%1 için ayrıştırıcı bulunamadı, gerekli GStreamer eklentilerinin kurulu olup"
-" olmadığını kontrol edin"
+msgstr "%1 için ayrıştırıcı bulunamadı, gerekli GStreamer eklentilerinin kurulu olup olmadığını kontrol edin"
 
 #: transcoder/transcoder.cpp:419
 #, qt-format
 msgid ""
 "Couldn't find an encoder for %1, check you have the correct GStreamer "
 "plugins installed"
-msgstr ""
-"%1 için kodlayıcı bulunamadı, gerekli GStreamer eklentilerinin yüklü olup "
-"olmadığını kontrol edin"
+msgstr "%1 için kodlayıcı bulunamadı, gerekli GStreamer eklentilerinin yüklü olup olmadığını kontrol edin"
 
 #: internet/lastfmservice.cpp:899
 msgid "Couldn't load the last.fm radio station"
@@ -1512,7 +1479,7 @@ msgstr "Akıllı çalma listesini düzenleyin"
 #: ui/mainwindow.cpp:1367
 #, qt-format
 msgid "Edit tag \"%1\"..."
-msgstr "\"%1\" etiketini düzenle..."
+msgstr ""%1" etiketini düzenle..."
 
 #: ../bin/src/ui_mainwindow.h:654
 msgid "Edit tag..."
@@ -1559,10 +1526,7 @@ msgid ""
 "Enable sources below to include them in search results.  When identical "
 "results are available from more than one source, ones at the top will take "
 "priority."
-msgstr ""
-"Arama sonuçlarında eklemek için aşağıdaki kaynaklardan etkinleştirin. Birden"
-" fazla kaynaktan aynı sonuçları mevcut olduğunda, üst kısmında olanlar "
-"önceliklidir."
+msgstr "Arama sonuçlarında eklemek için aşağıdaki kaynaklardan etkinleştirin. Birden fazla kaynaktan aynı sonuçları mevcut olduğunda, üst kısmında olanlar önceliklidir."
 
 #: core/globalshortcuts.cpp:62
 msgid "Enable/disable Last.fm scrobbling"
@@ -1591,9 +1555,7 @@ msgstr "Bu çalma listesi için yeni bir isim gir"
 #: ../bin/src/ui_lastfmstationdialog.h:93
 msgid ""
 "Enter an <b>artist</b> or <b>tag</b> to start listening to Last.fm radio."
-msgstr ""
-"Last.fm radyosunu dinlemeye başlamak için bir <b>sanatçı</b> veya bir "
-"<b>etiket</b> girin."
+msgstr "Last.fm radyosunu dinlemeye başlamak için bir <b>sanatçı</b> veya bir <b>etiket</b> girin."
 
 #: ../bin/src/ui_libraryfilterwidget.h:131
 #: ../bin/src/ui_albumcovermanager.h:153
@@ -1841,9 +1803,7 @@ msgstr "Aygıtı unut"
 msgid ""
 "Forgetting a device will remove it from this list and Clementine will have "
 "to rescan all the songs again next time you connect it."
-msgstr ""
-"Bir aygıtı unuttuğunuzda listeden silinecek ve bu aygıtı tekrar "
-"bağladığızda, Clementine tüm şarkıları tekrar taramak zorunda kalacak."
+msgstr "Bir aygıtı unuttuğunuzda listeden silinecek ve bu aygıtı tekrar bağladığızda, Clementine tüm şarkıları tekrar taramak zorunda kalacak."
 
 #: ../bin/src/ui_globalsearchwidget.h:59
 #: ../bin/src/ui_icecastfilterwidget.h:74
@@ -2066,26 +2026,21 @@ msgstr "Şarkı teşhis ediliyor"
 msgid ""
 "If you continue, this device will work slowly and songs copied to it may not"
 " work."
-msgstr ""
-"Devam ederseniz, aygıt yavaş çalışacak ve kopyaladığınız şarkılar düzgün "
-"çalışmayacak."
+msgstr "Devam ederseniz, aygıt yavaş çalışacak ve kopyaladığınız şarkılar düzgün çalışmayacak."
 
 #: ../bin/src/ui_remotesettingspage.h:209
 msgid ""
 "If you use the remote on more than one computer, this name will help you "
 "choose which one to connect to on your phone."
-msgstr ""
-"Uzaktan kumandayı birden fazla bilgisayarda kullanırsanız, bu isim "
-"telefonunuzdan hangisine bağlanacağınıza yardımcı olacak."
+msgstr "Uzaktan kumandayı birden fazla bilgisayarda kullanırsanız, bu isim telefonunuzdan hangisine bağlanacağınıza yardımcı olacak."
 
 #: ../bin/src/ui_organisedialog.h:204
 msgid "Ignore \"The\" in artist names"
-msgstr "Sanatçı isimlerinde \"The\" kelimesini önemseme"
+msgstr "Sanatçı isimlerinde "The" kelimesini önemseme"
 
 #: ui/albumcoverchoicecontroller.cpp:41
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
-msgstr ""
-"Resimler (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
+msgstr "Resimler (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
 
 #: ui/albumcoverchoicecontroller.cpp:43
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
@@ -2095,9 +2050,7 @@ msgstr "Resimler (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgid ""
 "In dynamic mode new tracks will be chosen and added to the playlist every "
 "time a song finishes."
-msgstr ""
-"Dinamik modda yeni şarkılar seçilerek, her şarkı bittiğinde çalma listesine "
-"eklenecektir."
+msgstr "Dinamik modda yeni şarkılar seçilerek, her şarkı bittiğinde çalma listesine eklenecektir."
 
 #: internet/spotifyservice.cpp:347
 msgid "Inbox"
@@ -2324,9 +2277,7 @@ msgstr "Az beğenilen parçalar"
 
 #: ../bin/src/ui_playbacksettingspage.h:282
 msgid "Leave blank for the default.  Examples: \"/dev/dsp\", \"front\", etc."
-msgstr ""
-"Öntanımlıların kullanılması için boş bırakın. Örnekler: \"/dev/dsp\", "
-"\"front\" vs."
+msgstr "Öntanımlıların kullanılması için boş bırakın. Örnekler: "/dev/dsp", "front" vs."
 
 #: playlist/playlist.cpp:1110 ui/organisedialog.cpp:63
 #: ui/qtsystemtrayicon.cpp:255 ../bin/src/ui_edittagdialog.h:636
@@ -2356,9 +2307,7 @@ msgstr "Limitler"
 #: internet/groovesharkservice.cpp:549
 msgid ""
 "Listen to Grooveshark songs based on what you've listened to previously"
-msgstr ""
-"Daha önceden dinlediğiniz şarkılar temel alınarak Grooveshark şarkıları "
-"dinleyin"
+msgstr "Daha önceden dinlediğiniz şarkılar temel alınarak Grooveshark şarkıları dinleyin"
 
 #: ui/equalizer.cpp:117
 msgid "Live"
@@ -2734,9 +2683,7 @@ msgstr "Uzun blok yok"
 #: playlist/playlistcontainer.cpp:416
 msgid ""
 "No matches found.  Clear the search box to show the whole playlist again."
-msgstr ""
-"Eşleşen bulunmadı. Çalma listesini tekrar görmek için arama çubuğunu "
-"temizleyin."
+msgstr "Eşleşen bulunmadı. Çalma listesini tekrar görmek için arama çubuğunu temizleyin."
 
 #: ../bin/src/ui_transcoderoptionsaac.h:145
 msgid "No short blocks"
@@ -3287,7 +3234,7 @@ msgstr "Şarkı favorilerden kaldırılıyor"
 #: internet/groovesharkservice.cpp:1220
 #, qt-format
 msgid "Rename \"%1\" playlist"
-msgstr "\"%1\" çalma listesini yeniden adlandır"
+msgstr ""%1" çalma listesini yeniden adlandır"
 
 #: internet/groovesharkservice.cpp:491
 msgid "Rename Grooveshark playlist"
@@ -3560,7 +3507,7 @@ msgstr "Hizmet çevrim dışı"
 #: ui/mainwindow.cpp:1365
 #, qt-format
 msgid "Set %1 to \"%2\"..."
-msgstr "%1'i \"%2\" olarak ayarla"
+msgstr "%1'i "%2" olarak ayarla"
 
 #: core/commandlineoptions.cpp:151
 msgid "Set the volume to <value> percent"
@@ -3667,11 +3614,11 @@ msgstr "Sadece etiketi olmayanları göster"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:167
 msgid "Show the \"Search for anything\" box above the sidebar"
-msgstr "\"Herhangi birşey ara\" kutusunu yan çubuğun üzerinde göster"
+msgstr ""Herhangi birşey ara" kutusunu yan çubuğun üzerinde göster"
 
 #: ../bin/src/ui_lastfmsettingspage.h:151
 msgid "Show the \"love\" and \"ban\" buttons"
-msgstr "\"Beğen\" ve \"Yasakla\" tuşlarını göster"
+msgstr ""Beğen" ve "Yasakla" tuşlarını göster"
 
 #: ../bin/src/ui_lastfmsettingspage.h:152
 msgid "Show the scrobble button in the main window"
@@ -3967,7 +3914,7 @@ msgstr "Teşekkürler"
 #: ui/globalshortcutssettingspage.cpp:175
 #, qt-format
 msgid "The \"%1\" command could not be started."
-msgstr "\"%1\" komutu başlatılamadı."
+msgstr ""%1" komutu başlatılamadı."
 
 #: internet/magnatunedownloaddialog.cpp:89
 #, qt-format
@@ -3995,9 +3942,7 @@ msgstr "İstediğiniz site bir resim değil!"
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
-msgstr ""
-"Güncellediğiniz Clementine sürümü, aşağıda listelenen yeni özellikler "
-"nedeniyle kütüphanenizin baştan taranmasını gerektiriyor:"
+msgstr "Güncellediğiniz Clementine sürümü, aşağıda listelenen yeni özellikler nedeniyle kütüphanenizin baştan taranmasını gerektiriyor:"
 
 #: internet/magnatunedownloaddialog.cpp:157
 msgid "There was a problem fetching the metadata from Magnatune"
@@ -4034,9 +3979,7 @@ msgstr "Bu klasörler, kütüphaneyi oluşturacak müzikler için taranacak"
 msgid ""
 "These settings are used in the \"Transcode Music\" dialog, and when "
 "converting music before copying it to a device."
-msgstr ""
-"Bu seçenekler \"Müzik Dönüştür\" penceresinde ve aygıta müzik kopyalamadan "
-"önce dönüştürme işleminde kullanılır."
+msgstr "Bu seçenekler "Müzik Dönüştür" penceresinde ve aygıta müzik kopyalamadan önce dönüştürme işleminde kullanılır."
 
 #: ../bin/src/ui_groupbydialog.h:151
 msgid "Third level"
@@ -4046,9 +3989,8 @@ msgstr "Üçüncü seviye"
 msgid ""
 "This action will create a database which could be as big as 150 MB.\n"
 "Do you want to continue anyway?"
-msgstr ""
-"Bu eylem 150 MB kadar büyüklükte olabilecek bir veri tabanı oluşturacak.\n"
-"Yine de devam etmek istiyor musunuz?"
+msgstr "Bu eylem 150 MB kadar büyüklükte olabilecek bir veri tabanı oluşturacak.
+Yine de devam etmek istiyor musunuz?"
 
 #: internet/magnatunedownloaddialog.cpp:174
 msgid "This album is not available in the requested format"
@@ -4058,9 +4000,7 @@ msgstr "Bu albüm istenilen biçimde mevcut değil"
 msgid ""
 "This device must be connected and opened before Clementine can see what file"
 " formats it supports."
-msgstr ""
-"Bu aygıt Clementine başlamadan önce bağlanmalı ve açılmalıdır aksi takdirde "
-"hangi dosya biçimleri desteklendiği algılanamaz."
+msgstr "Bu aygıt Clementine başlamadan önce bağlanmalı ve açılmalıdır aksi takdirde hangi dosya biçimleri desteklendiği algılanamaz."
 
 #: ../bin/src/ui_deviceproperties.h:375
 msgid "This device supports the following file formats:"
@@ -4083,17 +4023,13 @@ msgstr "Bu bir iPod fakat Clementine libgpod desteği olmadan derlenmiş."
 msgid ""
 "This is the first time you have connected this device.  Clementine will now "
 "scan the device to find music files - this may take some time."
-msgstr ""
-"Bu aygıtı ilk defa bağlıyorsunuz.  Clementine müzik dosyalarını bulmak için "
-"aygıtı tarayacak - bu işlem biraz zaman alabilir."
+msgstr "Bu aygıtı ilk defa bağlıyorsunuz.  Clementine müzik dosyalarını bulmak için aygıtı tarayacak - bu işlem biraz zaman alabilir."
 
 #: playlist/playlisttabbar.cpp:159
 msgid ""
 "This playlist will be removed; the action can't be undone. Are you sure you "
 "want to continue?"
-msgstr ""
-"Bu çalma listesi kaldırılacaktır; işbu eylem geri alınamaz. Devam etmek "
-"istediğinizden emin misiniz?"
+msgstr "Bu çalma listesi kaldırılacaktır; işbu eylem geri alınamaz. Devam etmek istediğinizden emin misiniz?"
 
 #: internet/lastfmservice.cpp:440
 msgid "This stream is for paid subscribers only"
@@ -4406,9 +4342,8 @@ msgstr "Clementine başladığında"
 msgid ""
 "When looking for album art Clementine will first look for picture files that contain one of these words.\n"
 "If there are no matches then it will use the largest image in the directory."
-msgstr ""
-"Clementine albüm kapağı ararken ilk önce dosya adında şu kelimelerden birini içeren resim dosyasına bakacak.\n"
-"Eğer eşleşen bir dosya bulamazsa, bulunduğu dizindeki en büyük resmi kullanacak."
+msgstr "Clementine albüm kapağı ararken ilk önce dosya adında şu kelimelerden birini içeren resim dosyasına bakacak.
+Eğer eşleşen bir dosya bulamazsa, bulunduğu dizindeki en büyük resmi kullanacak."
 
 #: devices/ilister.cpp:99
 msgid "WiFi MAC Address"
@@ -4516,17 +4451,13 @@ msgstr "Kütüphanedeki parçalarını farklı şekilde organize edebilirsiniz."
 msgid ""
 "You can listen for free without an account, but Premium members can listen "
 "to higher quality streams without advertisements."
-msgstr ""
-"Hesabınız olmadan ücretsiz dinleyebilirsiniz fakat Premium üyeler reklamsız "
-"ve daha yüksek kalitedeki akışları dinleyebilir."
+msgstr "Hesabınız olmadan ücretsiz dinleyebilirsiniz fakat Premium üyeler reklamsız ve daha yüksek kalitedeki akışları dinleyebilir."
 
 #: internet/magnatunesettingspage.cpp:53
 msgid ""
 "You can listen to Magnatune songs for free without an account.  Purchasing a"
 " membership removes the messages at the end of each track."
-msgstr ""
-"Bir hesabınız olmadan ücretsiz olarak Magnatude'dan şarkı dinleyebilirsiniz."
-"  Üyelik alırsanız her şarkının sonunda görünen bu mesajı kaldırabilirsiniz."
+msgstr "Bir hesabınız olmadan ücretsiz olarak Magnatude'dan şarkı dinleyebilirsiniz.  Üyelik alırsanız her şarkının sonunda görünen bu mesajı kaldırabilirsiniz."
 
 #: ../bin/src/ui_backgroundstreamssettingspage.h:57
 msgid "You can listen to background streams at the same time as other music."
@@ -4537,19 +4468,15 @@ msgid ""
 "You can scrobble tracks for free, but only <span style=\" font-"
 "weight:600;\">paid subscribers</span> can stream Last.fm radio from "
 "Clementine."
-msgstr ""
-"Parçaları ücretsiz olarak skroplayabilirsiniz, fakat sadece <span style=\" "
-"font-weight:600;\">ücretli aboneler</span> Last.fm radyosunu dinleyebilir."
+msgstr "Parçaları ücretsiz olarak skroplayabilirsiniz, fakat sadece <span style=" font-weight:600;">ücretli aboneler</span> Last.fm radyosunu dinleyebilir."
 
 #: ../bin/src/ui_wiimotesettingspage.h:184
 msgid ""
 "You can use your Wii Remote as a remote control for Clementine.  <a "
 "href=\"http://www.clementine-player.org/wiimote\">See the page on the "
 "Clementine wiki</a> for more information.\n"
-msgstr ""
-"Wii kumandanızı kullanarak Clementine'ı uzaktan kumanda edebilirsiniz.  Daha"
-" fazla bilgi için <a href=\"http://www.clementine-"
-"player.org/wiimote\">Clementine wikideki ilgili sayfayı</a> ziyaret edin.\n"
+msgstr "Wii kumandanızı kullanarak Clementine'ı uzaktan kumanda edebilirsiniz.  Daha fazla bilgi için <a href="http://www.clementine-player.org/wiimote">Clementine wikideki ilgili sayfayı</a> ziyaret edin.
+"
 
 #: internet/groovesharksettingspage.cpp:103
 msgid "You do not have a Grooveshark Anywhere account."
@@ -4563,9 +4490,7 @@ msgstr "Spotify Premium hesabınız yok."
 msgid ""
 "You have been logged out of Spotify, please re-enter your password in the "
 "Settings dialog."
-msgstr ""
-"Spotify servisinden çıktınız, lütfen Ayarlar ekranında parolanızı yeniden "
-"girin."
+msgstr "Spotify servisinden çıktınız, lütfen Ayarlar ekranında parolanızı yeniden girin."
 
 #: internet/spotifysettingspage.cpp:157
 msgid "You have been logged out of Spotify, please re-enter your password."
@@ -4580,10 +4505,7 @@ msgid ""
 "You need to launch System Preferences and turn on \"<span style=\" font-"
 "style:italic;\">Enable access for assistive devices</span>\" to use global "
 "shortcuts in Clementine."
-msgstr ""
-"Clementine'da genel kısayolları kullanabilmek için Sistem Ayarlarına girin "
-"ve \"<span style=\" font-style:italic;\">Yardımcı aygıtlara erişimi "
-"etkinleştir</span>\" seçeneğini açın."
+msgstr "Clementine'da genel kısayolları kullanabilmek için Sistem Ayarlarına girin ve "<span style=" font-style:italic;">Yardımcı aygıtlara erişimi etkinleştir</span>" seçeneğini açın."
 
 #: ../bin/src/ui_behavioursettingspage.h:185
 msgid "You will need to restart Clementine if you change the language."
@@ -4593,8 +4515,7 @@ msgstr "Dili değiştirdiyseniz programı yeniden başlatmanız gerekmektedir."
 msgid ""
 "You will not be able to play Last.fm radio stations as you are not a Last.fm"
 " subscriber."
-msgstr ""
-"Last.fm abonesi olmadığınız için Last.fm kanallarını dinleyemeyeceksiniz."
+msgstr "Last.fm abonesi olmadığınız için Last.fm kanallarını dinleyemeyeceksiniz."
 
 #: remote/remotesettingspage.cpp:126
 #, qt-format
@@ -4618,10 +4539,7 @@ msgid ""
 "Your gstreamer installation is missing the 'ofa' plugin.  This is required "
 "for automatic tag fetching.  Try installing the 'gstreamer-plugins-bad' "
 "package."
-msgstr ""
-"Gstreamer kurulumunuzda 'ofa' eklentisi bulunmuyor. Bu eklenti otomatik "
-"etiket getirmek için gereklidir. 'gstreamer-plugins-bad' paketini kurmayı "
-"deneyin."
+msgstr "Gstreamer kurulumunuzda 'ofa' eklentisi bulunmuyor. Bu eklenti otomatik etiket getirmek için gereklidir. 'gstreamer-plugins-bad' paketini kurmayı deneyin."
 
 #: library/libraryview.cpp:219
 msgid "Your library is empty!"
@@ -4800,5 +4718,4 @@ msgstr "durdur"
 #, qt-format
 msgid "track %1"
 msgstr "parça %1"
-
 
