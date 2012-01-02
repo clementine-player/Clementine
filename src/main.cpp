@@ -275,10 +275,6 @@ int main(int argc, char *argv[]) {
     }
   }
 
-  // Detect technically invalid usage of non-ASCII in ID3v1 tags.
-  UniversalEncodingHandler handler;
-  TagLib::ID3v1::Tag::setStringHandler(&handler);
-
 #ifdef Q_OS_LINUX
   // Force Clementine's menu to be shown in the Clementine window and not in
   // the Unity global menubar thing.  See:

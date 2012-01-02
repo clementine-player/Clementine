@@ -64,14 +64,11 @@ set(SOURCES
   core/crashreporting.cpp
   core/database.cpp
   core/deletefiles.cpp
-  core/encoding.cpp
   core/filesystemmusicstorage.cpp
   core/fht.cpp
-  core/fmpsparser.cpp
   core/globalshortcutbackend.cpp
   core/globalshortcuts.cpp
   core/gnomeglobalshortcutbackend.cpp
-  core/logging.cpp
   core/mergedproxymodel.cpp
   core/multisortfilterproxy.cpp
   core/musicstorage.cpp
@@ -956,13 +953,11 @@ add_dependencies(clementine_lib pot)
 
 
 target_link_libraries(clementine_lib
-  chardet
   echoprint
   sha2
   ${ECHONEST_LIBRARIES}
   ${GOBJECT_LIBRARIES}
   ${GLIB_LIBRARIES}
-  ${TAGLIB_LIBRARIES}
   ${QJSON_LIBRARIES}
   ${QT_LIBRARIES}
   ${GSTREAMER_BASE_LIBRARIES}

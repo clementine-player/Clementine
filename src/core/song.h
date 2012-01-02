@@ -26,6 +26,7 @@
 
 #include "config.h"
 #include "engines/engine_fwd.h"
+#include "tagreader/common/tagreadermessages.pb.h"
 
 class QSqlQuery;
 class QUrl;
@@ -48,35 +49,13 @@ class QUrl;
   }
 #endif
 
-namespace TagLib {
-  class FileRef;
-  class String;
-
-  namespace ID3v2 {
-    class Tag;
-  }
-}
-
 class SqlRow;
-
-
-class FileRefFactory {
- public:
-  virtual ~FileRefFactory() {}
-  virtual TagLib::FileRef* GetFileRef(const QString& filename) = 0;
-};
-
-class TagLibFileRefFactory : public FileRefFactory {
- public:
-  virtual TagLib::FileRef* GetFileRef(const QString& filename);
-};
 
 
 class Song {
  public:
   Song();
   Song(const Song& other);
-  Song(FileRefFactory* factory);
   ~Song();
 
   static const QStringList kColumns;
@@ -94,7 +73,8 @@ class Song {
 
   static QString JoinSpec(const QString& table);
 
-  // Don't change these values - they're stored in the database
+  // Don't change these values - they're stored in the database, and defined
+  // in the tag reader protobuf.
   enum FileType {
     Type_Unknown = 0,
     Type_Asf = 1,
@@ -115,18 +95,10 @@ class Song {
   static QString TextForFiletype(FileType type);
   QString TextForFiletype() const { return TextForFiletype(filetype()); }
 
-  // Helper function to load embedded cover art from a music file.  This is not
-  // actually used by the Song class, but instead it is called by
-  // AlbumCoverLoader and is here so it can lock on the taglib mutex.
-  static QImage LoadEmbeddedArt(const QString& filename);
-  // Checks if this Song can be properly initialized from it's media file.
-  // This requires the 'filename' attribute to be set first.
-  bool HasProperMediaFile() const;
-
   // Constructors
   void Init(const QString& title, const QString& artist, const QString& album, qint64 length_nanosec);
   void Init(const QString& title, const QString& artist, const QString& album, qint64 beginning, qint64 end);
-  void InitFromFile(const QString& filename, int directory_id);
+  void InitFromProtobuf(const pb::tagreader::SongMetadata& pb);
   void InitFromQuery(const SqlRow& query, bool reliable_metadata, int col = 0);
   void InitFromFilePartial(const QString& filename); // Just store the filename: incomplete but fast
 #ifdef HAVE_LIBLASTFM
@@ -150,7 +122,6 @@ class Song {
   void ToWmdm(IWMDMMetaData* metadata) const;
 #endif
 
-  static QString Decode(const TagLib::String& tag, const QTextCodec* codec = NULL);
   static QString Decode(const QString& tag, const QTextCodec* codec = NULL);
 
   // Save
@@ -160,6 +131,7 @@ class Song {
   void ToLastFM(lastfm::Track* track) const;
 #endif
   void ToXesam(QVariantMap* map) const;
+  void ToProtobuf(pb::tagreader::SongMetadata* pb) const;
 
   // Simple accessors
   bool is_valid() const;
@@ -297,23 +269,8 @@ class Song {
   Song& operator=(const Song& other);
 
  private:
-  void GuessFileType(TagLib::FileRef* fileref);
-  static bool Save(const Song& song);
-
-  // Helper methods for taglib
-  static void SetTextFrame(const QString& id, const QString& value,
-                           TagLib::ID3v2::Tag* tag);
-  void ParseFMPSFrame(const QString& name, const QString& value);
-
- private:
   struct Private;
   QSharedDataPointer<Private> d;
-
-  FileRefFactory* factory_;
-
-  static TagLibFileRefFactory kDefaultFactory;
-
-  static QMutex sTaglibMutex;
 };
 Q_DECLARE_METATYPE(Song);
 
