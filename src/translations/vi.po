@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2011-12-26 06:54+0000\n"
+"PO-Revision-Date: 2011-12-31 07:30+0000\n"
 "Last-Translator: Lê Trường An <truongan@linuxmail.org>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -253,7 +253,7 @@ msgstr "Cần có tài khoản Grooveshark Anywhere."
 
 #: internet/spotifysettingspage.cpp:161
 msgid "A Spotify Premium account is required."
-msgstr "Yêu cầu một tài khoản Premium của Spotify."
+msgstr "Cần có tài khoản cao cấp của Spotify."
 
 #: smartplaylists/wizard.cpp:72
 msgid ""
@@ -598,20 +598,20 @@ msgstr ""
 
 #: devices/afcdevice.cpp:62
 msgid "An error occurred copying the iTunes database from the device"
-msgstr "Một lỗi đã xảy ra khi sao chép cơ sở dữ liệu iTunes từ thiết bị"
+msgstr "Có lỗi khi chép cơ sở dữ liệu iTunes từ thiết bị"
 
 #: devices/afcdevice.cpp:156
 msgid "An error occurred copying the iTunes database onto the device"
-msgstr "Có lỗi xảy ra khi sao chép cơ sở dữ liệu iTunes lên thiết bị"
+msgstr "Có lỗi khi chép cơ sở dữ liệu iTunes lên thiết bị"
 
 #: devices/gpodloader.cpp:61
 msgid "An error occurred loading the iTunes database"
-msgstr "Có lỗi xảy ra khi nạp cơ sở dữ liệu iTunes"
+msgstr "Có lỗi khi nạp cơ sở dữ liệu iTunes"
 
 #: ui/edittagdialog.cpp:611
 #, qt-format
 msgid "An error occurred writing metadata to '%1'"
-msgstr "Một mỗi đã xảy ra khi ghi siêu dữ liệu vào '%1'"
+msgstr "Có lỗi khi ghi thông tin vào '%1'"
 
 #: internet/lastfmservice.cpp:902
 #, qt-format
@@ -755,7 +755,7 @@ msgstr "Xanh dương"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:167
 msgid "Basic audio type"
-msgstr "Kiểu âm thanh bình th"
+msgstr "Loại âm thanh cơ bản"
 
 #: ../bin/src/ui_behavioursettingspage.h:176
 msgid "Behavior"
@@ -851,7 +851,7 @@ msgstr "Đổi ngôn ngữ"
 
 #: ui/mainwindow.cpp:596
 msgid "Check for updates..."
-msgstr "Kiểm tra các bản cập nhật..."
+msgstr "Kiểm tra cập nhật..."
 
 #: smartplaylists/wizard.cpp:80
 msgid "Choose a name for your smart playlist"
@@ -880,7 +880,7 @@ msgstr "Chọn cách sắp xếp của danh sách nhạc và số bài hát tron
 #: ../bin/src/ui_songinfosettingspage.h:188
 msgid ""
 "Choose the websites you want Clementine to use when searching for lyrics."
-msgstr "Chọn tên các trang web bạn muốn Clementine duyệt tìm lời bài hát."
+msgstr "Chọn tên các trang web bạn muốn Clementine tìm lời bài hát."
 
 #: ui/equalizer.cpp:109
 msgid "Classical"
@@ -910,7 +910,7 @@ msgstr "Clementine Orange"
 
 #: visualisations/visualisationcontainer.cpp:70
 msgid "Clementine Visualization"
-msgstr "Hiệu ứng hình ảnh ảo Clementine"
+msgstr "Clementine - Hình ảnh ảo"
 
 #: ../bin/src/ui_deviceproperties.h:376
 msgid ""
@@ -932,15 +932,15 @@ msgstr ""
 
 #: ../bin/src/ui_notificationssettingspage.h:396
 msgid "Clementine can show a message when the track changes."
-msgstr "Clementine hiển thị một tin nhắn khi bài hát thay đổi."
+msgstr "Clementine có thể hiện thông báo khi bài hát thay đổi."
 
 #: visualisations/projectmvisualisation.cpp:128
 msgid ""
 "Clementine could not load any projectM visualisations.  Check that you have "
 "installed Clementine properly."
 msgstr ""
-"Clementine không thể nạp hiệu ứng hình ảnh ảo projectM. XIn chắc rằng bạn đã"
-" cài đặt Clementine đúng cách."
+"Clementine không thể nạp hiệu ứng hình ảnh ảo projectM. Hãy chắc rằng bạn đã"
+" cài Clementine đúng cách."
 
 #: internet/lastfmsettingspage.cpp:103
 msgid ""
@@ -982,7 +982,7 @@ msgstr "Đóng cửa sổ này sẽ hủy bỏ việc tải xuống."
 
 #: ui/albumcovermanager.cpp:213
 msgid "Closing this window will stop searching for album covers."
-msgstr "Đóng cửa sổ này sẽ ngừng việc tìm kiếm ảnh bìa album."
+msgstr "Đóng cửa sổ này sẽ ngưng việc tìm kiếm ảnh bìa."
 
 #: ui/equalizer.cpp:110
 msgid "Club"
@@ -1429,7 +1429,7 @@ msgstr "Không chuyển đổi bất kì bản nhạc nào"
 
 #: widgets/osd.cpp:307 ../bin/src/ui_playlistsequence.h:103
 msgid "Don't repeat"
-msgstr "Không lập lại"
+msgstr "Không lặp lại"
 
 #: library/libraryview.cpp:281
 msgid "Don't show in various artists"
@@ -1437,7 +1437,7 @@ msgstr "Không hiển thị trong mục nhiều nghệ sĩ"
 
 #: widgets/osd.cpp:294 ../bin/src/ui_playlistsequence.h:107
 msgid "Don't shuffle"
-msgstr "Không đảo thứ tự phát các bản nhạc"
+msgstr "Không phát ngẫu nhiên"
 
 #: internet/magnatunedownloaddialog.cpp:282 ui/albumcovermanager.cpp:215
 msgid "Don't stop!"
@@ -1485,7 +1485,7 @@ msgstr "Đang tải mục lục Magnatune"
 
 #: internet/spotifyblobdownloader.cpp:43
 msgid "Downloading Spotify plugin"
-msgstr "Tải phần hỗ trợ cho Spotify"
+msgstr "Đang tải phần hỗ trợ cho Spotify"
 
 #: musicbrainz/tagfetcher.cpp:101
 msgid "Downloading metadata"
@@ -1550,7 +1550,7 @@ msgstr "Bật bộ cân chỉnh âm"
 
 #: ../bin/src/ui_behavioursettingspage.h:179
 msgid "Enable playlist background image"
-msgstr "Bật ảnh nền cho danh sách"
+msgstr "Ảnh nền danh sách"
 
 #: ../bin/src/ui_wiimotesettingspage.h:187
 msgid "Enable shortcuts only when Clementine is focused"
@@ -1830,7 +1830,8 @@ msgstr "Kích cỡ phông chữ"
 
 #: ../bin/src/ui_spotifysettingspage.h:214
 msgid "For licensing reasons Spotify support is in a separate plugin."
-msgstr "Vì lí do giấy phép nên Spotify được hỗ trợ thông qua phần mở rộng."
+msgstr ""
+"Vì lí do giấy phép nên Spotify được hỗ trợ thông qua một phần mở rộng."
 
 #: ../bin/src/ui_transcoderoptionsmp3.h:204
 msgid "Force mono encoding"
@@ -2019,7 +2020,7 @@ msgstr "Thông tin phần cứng"
 
 #: ../bin/src/ui_deviceproperties.h:372
 msgid "Hardware information is only available while the device is connected."
-msgstr "Chỉ xem được thông tin phần cứng trong khi đã kết nối thiết bị."
+msgstr "Chỉ xem được thông tin phần cứng khi đã kết nối thiết bị."
 
 #: ../bin/src/ui_globalsearchsettingspage.h:168
 msgid "Hide all other search boxes"
@@ -2071,8 +2072,8 @@ msgid ""
 "If you continue, this device will work slowly and songs copied to it may not"
 " work."
 msgstr ""
-"Nếu bạn tiếp tục, thiết bị này sẽ hoạt động chậm lại và các bài hát đã được "
-"sao chép có thể sẽ không phát được."
+"Nếu bạn tiếp tục, thiết bị này sẽ hoạt động chậm lại và các bài hát đã chép "
+"có thể sẽ không phát được."
 
 #: ../bin/src/ui_remotesettingspage.h:209
 msgid ""
@@ -2145,7 +2146,7 @@ msgstr "Internet"
 
 #: ui/settingsdialog.cpp:135
 msgid "Internet providers"
-msgstr "Nhà cung cấp dịch vụ Internet"
+msgstr "Dịch vụ"
 
 #: internet/lastfmservice.cpp:438
 msgid "Invalid API key"
@@ -2177,7 +2178,7 @@ msgstr "Khoá phiên chạy không hợp lệ"
 
 #: internet/groovesharkservice.cpp:399
 msgid "Invalid username and/or password"
-msgstr "Tên người dùng và/hay mật khẩu không hợp lệ"
+msgstr "Vui lòng kiểm tra lại tên người dùng và mật khẩu"
 
 #: internet/jamendoservice.cpp:124
 msgid "Jamendo"
@@ -2349,7 +2350,7 @@ msgstr "Chú ý quét lại thư viện"
 
 #: smartplaylists/querywizardplugin.cpp:83
 msgid "Library search"
-msgstr "Tìm kiếm trong thư viện"
+msgstr "Tìm trong thư viện"
 
 #: ../bin/src/ui_querysortpage.h:140
 msgid "Limits"
@@ -2712,7 +2713,7 @@ msgstr "Những bài hát mới sẽ được tự động thêm vào."
 
 #: library/library.cpp:75
 msgid "Newest tracks"
-msgstr "Các bài hát mới nhất"
+msgstr "Những bài mới nhất"
 
 #: ui/edittagdialog.cpp:158 ui/trackselectiondialog.cpp:48
 msgid "Next"
@@ -2735,8 +2736,8 @@ msgstr "Các khối không dài"
 msgid ""
 "No matches found.  Clear the search box to show the whole playlist again."
 msgstr ""
-"Không có kết quả nào trùng khớp. Hãy xóa nội dung trong ô tìm kiếm để hiện "
-"danh sách nhạc trở lại."
+"Không có kết quả nào trùng khớp. Xóa nội dung trong ô tìm kiếm để hiện danh "
+"sách trở lại."
 
 #: ../bin/src/ui_transcoderoptionsaac.h:145
 msgid "No short blocks"
@@ -2924,7 +2925,7 @@ msgstr "Mật khẩu"
 
 #: devices/ilister.cpp:97
 msgid "Password Protected"
-msgstr "Đã được bảo vệ bằng mật khẩu"
+msgstr "Được bảo vệ bằng mật khẩu"
 
 #: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:871 ui/mainwindow.cpp:1257
 #: ui/qtsystemtrayicon.cpp:178 wiimotedev/wiimotesettingspage.cpp:106
@@ -3010,11 +3011,11 @@ msgstr "Kết thúc danh sách"
 
 #: core/commandlineoptions.cpp:156
 msgid "Playlist options"
-msgstr "Tùy chỉnh danh sách"
+msgstr "Tùy chọn danh sách"
 
 #: playlist/playlistcontainer.cpp:93 playlist/specialplaylisttype.cpp:23
 msgid "Playlist search"
-msgstr "Tìm kiếm trong danh sách"
+msgstr "Tìm trong danh sách"
 
 #: smartplaylists/wizard.cpp:71
 msgid "Playlist type"
@@ -3034,19 +3035,19 @@ msgstr "Pop"
 
 #: internet/groovesharkservice.cpp:521
 msgid "Popular songs"
-msgstr "Bài hát phổ biến"
+msgstr "Những bài hát phổ biến"
 
 #: internet/groovesharkservice.cpp:525
 msgid "Popular songs of the Month"
-msgstr "Bài hát nghe nhiều trong tháng"
+msgstr "Bài hát phổ biến trong tháng"
 
 #: internet/groovesharkservice.cpp:532
 msgid "Popular songs today"
-msgstr "Bài hát nghe nhiều hôm nay"
+msgstr "Bài hát phổ biến hôm nay"
 
 #: ../bin/src/ui_notificationssettingspage.h:403
 msgid "Popup duration"
-msgstr "Thời gian xuất hiện Popup"
+msgstr "Thời gian xuất hiện"
 
 #: ../bin/src/ui_networkproxysettingspage.h:166
 msgid "Port"
@@ -3061,16 +3062,16 @@ msgstr "Pre-amp"
 #: ../bin/src/ui_spotifysettingspage.h:217 ../bin/src/ui_settingsdialog.h:115
 #: ../bin/src/ui_lastfmsettingspage.h:149
 msgid "Preferences"
-msgstr "Thiết lập"
+msgstr "Tùy chỉnh"
 
 #: ../bin/src/ui_mainwindow.h:656
 msgid "Preferences..."
-msgstr "Thiết lập..."
+msgstr "Tùy chỉnh..."
 
 #: ../bin/src/ui_librarysettingspage.h:164
 msgid "Preferred album art filenames (comma separated)"
 msgstr ""
-"Tìm ảnh bìa bằng tên tập tin có chứa các từ sau (phân cách bằng dấu phẩy)"
+"Tìm ảnh bìa với tên tập tin có chứa các từ sau (phân cách bằng dấu phẩy)"
 
 #: ../bin/src/ui_magnatunesettingspage.h:167
 msgid "Preferred audio format"
@@ -3094,7 +3095,7 @@ msgstr "Thể loại:"
 
 #: ../bin/src/ui_wiimoteshortcutgrabber.h:124
 msgid "Press a button combination to use for"
-msgstr "Ấn tổ hợp phím để sử dụng cho"
+msgstr "Ấn tổ hợp phím để"
 
 #: ../bin/src/ui_globalshortcutgrabber.h:73
 msgid "Press a key"
@@ -3103,7 +3104,7 @@ msgstr "Ấn một phím"
 #: ui/globalshortcutgrabber.cpp:39 ../bin/src/ui_globalshortcutgrabber.h:74
 #, qt-format
 msgid "Press a key combination to use for %1..."
-msgstr "Bấm tổ hợp phím để sử dụng cho %1..."
+msgstr "Bấm tổ hợp phím để %1..."
 
 #: ../bin/src/ui_notificationssettingspage.h:416
 msgid "Pretty OSD options"
@@ -3144,7 +3145,7 @@ msgstr "Ấn vào nút Wiiremote"
 
 #: ../bin/src/ui_querysortpage.h:138
 msgid "Put songs in a random order"
-msgstr "Sắp xếp các bài hát một cách ngẫu nhiên"
+msgstr "Sắp xếp ngẫu nhiên các bài hát"
 
 #: visualisations/visualisationcontainer.cpp:107
 #: ../bin/src/ui_transcoderoptionsflac.h:81
@@ -3164,12 +3165,12 @@ msgstr "Trình quản lý danh sách chờ"
 
 #: ui/mainwindow.cpp:1338
 msgid "Queue selected tracks"
-msgstr "Xếp các bài hát đã chọn vào danh sách chờ"
+msgstr "Chờ phát những bài đã chọn"
 
 #: globalsearch/globalsearchwidget.cpp:105 library/libraryview.cpp:251
 #: ui/mainwindow.cpp:1336
 msgid "Queue track"
-msgstr "Thêm vào danh sách chờ"
+msgstr "Chờ phát sau"
 
 #: ../bin/src/ui_playbacksettingspage.h:271
 msgid "Radio (equal loudness for all tracks)"
@@ -3181,7 +3182,7 @@ msgstr "Phát thanh"
 
 #: core/backgroundstreams.cpp:31 ../bin/src/ui_mainwindow.h:669
 msgid "Rain"
-msgstr "Rain"
+msgstr "Mưa"
 
 #: ../bin/src/ui_visualisationselector.h:112
 msgid "Random visualization"
@@ -3524,11 +3525,11 @@ msgstr "Tiến về trước"
 
 #: core/commandlineoptions.cpp:155
 msgid "Seek the currently playing track by a relative amount"
-msgstr "Tìm những bài hát có liên quan đến bài hiện tại"
+msgstr "Tua đến khoảng tương đối trong bài đang phát"
 
 #: core/commandlineoptions.cpp:154
 msgid "Seek the currently playing track to an absolute position"
-msgstr "Tìm đến vị trí chính xác trong bài hát đang phát"
+msgstr "Tua đến vị trí chính xác trong bài đang phát"
 
 #: visualisations/visualisationselector.cpp:40
 msgid "Select All"
@@ -3565,11 +3566,11 @@ msgstr "Thiết lập %1 sang \"%2\"..."
 
 #: core/commandlineoptions.cpp:151
 msgid "Set the volume to <value> percent"
-msgstr "Thiết lập âm lượng đến <value> phần trăm"
+msgstr "Đặt âm lượng ở mức <value> phần trăm"
 
 #: ../bin/src/ui_mainwindow.h:653
 msgid "Set value for all selected tracks..."
-msgstr "Thiết lập giá trị cho tất cả bài hát được chọn..."
+msgstr "Đặt giá trị cho tất cả những bài được chọn..."
 
 #: ../bin/src/ui_remotesettingspage.h:207
 msgid "Settings"
@@ -3588,7 +3589,7 @@ msgstr "Phím tắt để %1"
 #: wiimotedev/wiimotesettingspage.cpp:124
 #, qt-format
 msgid "Shortcut for %1 already exists"
-msgstr "Phím tắt để %1 đã tồn tại"
+msgstr "Đã có phím tắt để %1"
 
 #: library/libraryfilterwidget.cpp:62
 msgid "Show"
@@ -3724,7 +3725,7 @@ msgstr "Ska"
 
 #: core/commandlineoptions.cpp:149
 msgid "Skip backwards in playlist"
-msgstr "Không lùi lại trong danh sách"
+msgstr "Không cho lùi lại trong danh sách"
 
 #: playlist/playlist.cpp:1120 ../bin/src/ui_edittagdialog.h:639
 msgid "Skip count"
@@ -3732,7 +3733,7 @@ msgstr "Bỏ qua việc đếm"
 
 #: core/commandlineoptions.cpp:150
 msgid "Skip forwards in playlist"
-msgstr "Không tiến về trước trong danh sách"
+msgstr "Không cho chuyển bài trong danh sách"
 
 #: widgets/nowplayingwidget.cpp:90
 msgid "Small album cover"
@@ -3824,11 +3825,11 @@ msgstr "Chuẩn"
 
 #: internet/spotifyservice.cpp:343
 msgid "Starred"
-msgstr "Đã bắt đầu"
+msgstr "Đã đánh giá"
 
 #: core/commandlineoptions.cpp:145
 msgid "Start the playlist currently playing"
-msgstr "Bắt đầu danh sách hiện đang phát"
+msgstr "Bắt đầu danh sách đang phát"
 
 #: transcoder/transcodedialog.cpp:84
 msgid "Start transcoding"
@@ -3868,11 +3869,11 @@ msgstr "Dừng lại sau khi phát xong bài này"
 
 #: core/commandlineoptions.cpp:148
 msgid "Stop playback"
-msgstr "Ngừng phát"
+msgstr "Dừng lại"
 
 #: core/globalshortcuts.cpp:49
 msgid "Stop playing after current track"
-msgstr "Dừng phát sau bài hát hiện tại"
+msgstr "Dừng lại khi phát xong bài hiện tại"
 
 #: widgets/osd.cpp:187
 msgid "Stopped"
@@ -3919,7 +3920,7 @@ msgstr "Các định dạng được hỗ trợ"
 
 #: globalsearch/globalsearchtooltip.cpp:53
 msgid "Switch provider"
-msgstr "Đổi nhà cung cấp"
+msgstr "Đổi dịch vụ"
 
 #: internet/spotifyservice.cpp:515
 msgid "Syncing Spotify inbox"
@@ -3997,12 +3998,12 @@ msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
 msgstr ""
-"Phiên bản Clementine bạn vừa cập nhật yêu cầu quét thư viện vì các tính năng"
-" mới được liệt kê bên dưới:"
+"Phiên bản Clementine bạn vừa cập nhật yêu cầu quét thư viện bởi các tính "
+"năng mới được liệt kê bên dưới:"
 
 #: internet/magnatunedownloaddialog.cpp:157
 msgid "There was a problem fetching the metadata from Magnatune"
-msgstr "Có vấn đề khi lấy siêu dữ liệu từ Magnatune"
+msgstr "Có vấn đề khi lấy thông tin từ Magnatune"
 
 #: ui/organiseerrordialog.cpp:56
 msgid ""
@@ -4368,11 +4369,11 @@ msgstr "Chế độ hình ảnh ảo"
 
 #: ui/dbusscreensaver.cpp:35 ../bin/src/ui_mainwindow.h:689
 msgid "Visualizations"
-msgstr "Hiệu ứng hình ảnh ảo"
+msgstr "Hình ảnh ảo"
 
 #: ../bin/src/ui_visualisationoverlay.h:181
 msgid "Visualizations Settings"
-msgstr "Các thiết đặt hiệu ứng hình ảnh ảo"
+msgstr "Thiết đặt hiệu ứng hình ảnh ảo"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:233
 msgid "Voice activity detection"
@@ -4418,7 +4419,7 @@ msgid ""
 "If there are no matches then it will use the largest image in the directory."
 msgstr ""
 "Khi tìm kiếm ảnh bìa album Clementine sẽ tìm các tập tin ảnh chứa một trong các từ này trước.\n"
-"Nếu không có kết quả nào trùng khớp sẽ sử dụng bức ảnh lớn nhất trong thư mục."
+"Nếu không có kết quả nào trùng khớp thì sẽ sử dụng bức ảnh lớn nhất trong thư mục."
 
 #: devices/ilister.cpp:99
 msgid "WiFi MAC Address"
@@ -4480,7 +4481,7 @@ msgstr "Âm thanh Windows Media"
 
 #: ui/mainwindow.cpp:2020
 msgid "Would you like to run a full rescan right now?"
-msgstr "Bạn có muốn quét lại toàn bộ ngay không?"
+msgstr "Bạn muốn quét lại toàn bộ ngay bây giờ?"
 
 #: playlist/playlist.cpp:1113 ui/organisedialog.cpp:60
 #: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:148
@@ -4499,7 +4500,7 @@ msgstr "Năm"
 
 #: core/utilities.cpp:109
 msgid "Yesterday"
-msgstr "Ngày hôm qua"
+msgstr "Hôm qua"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:132
 msgid "You are about to download the following albums"
@@ -4550,8 +4551,8 @@ msgid ""
 "Clementine."
 msgstr ""
 "Bạn có thể gửi thông tin các bài hát một cách miễn phí nhưng chỉ  <span "
-"style=\" font-weight:600;\">những khách hàng đã thanh toán phí</span> mới có"
-" thể lấy dữ liệu của kênh phát thanh Last.fm từ Clementine."
+"style=\" font-weight:600;\">những thành viên đã thanh toán</span> mới có thể"
+" lấy dữ liệu của kênh phát thanh Last.fm từ Clementine."
 
 #: ../bin/src/ui_wiimotesettingspage.h:184
 msgid ""
@@ -4599,7 +4600,7 @@ msgstr ""
 
 #: ../bin/src/ui_behavioursettingspage.h:185
 msgid "You will need to restart Clementine if you change the language."
-msgstr "Bạn cần khởi động lại Clementine nếu bạn thay đổi ngôn ngữ."
+msgstr "Bạn cần khởi động lại Clementine khi thay đổi ngôn ngữ."
 
 #: internet/lastfmsettingspage.cpp:107
 msgid ""
@@ -4616,7 +4617,7 @@ msgstr "Bạn đã đăng nhập với tên <b>%1</b>"
 
 #: remote/remotesettingspage.cpp:113
 msgid "Your Google credentials were incorrect"
-msgstr "Thông tin tài khoản Google của bạn không đúng"
+msgstr "Thông tin tài khoản Google không đúng"
 
 #: internet/lastfmsettingspage.cpp:78
 msgid "Your Last.fm credentials were incorrect"
@@ -4632,8 +4633,8 @@ msgid ""
 "for automatic tag fetching.  Try installing the 'gstreamer-plugins-bad' "
 "package."
 msgstr ""
-"Gstreamer bị thiếu trình cắm thêm 'ofa'. Trình cắm này cần cho việc tự động "
-"tải thẻ. Hãy thử cài đặt lại gói 'gstreamer-plugins-bad'."
+"Gstreamer bị thiếu phần bổ trợ 'ofa'. Phần bổ trợ này cần cho việc tự động "
+"tải thông tin. Hãy thử cài đặt lại gói 'gstreamer-plugins-bad'."
 
 #: library/libraryview.cpp:219
 msgid "Your library is empty!"
@@ -4659,7 +4660,7 @@ msgstr "Z-A"
 
 #: ui/equalizer.cpp:126
 msgid "Zero"
-msgstr "Zero"
+msgstr "Không"
 
 #: playlist/playlistundocommands.cpp:37
 #, c-format

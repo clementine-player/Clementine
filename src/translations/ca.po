@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2011-12-15 15:36+0000\n"
+"PO-Revision-Date: 2011-12-27 23:51+0000\n"
 "Last-Translator: Roger Pueyo Centelles <transifex@rogerpueyo.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -788,7 +788,7 @@ msgstr "Analitzador de blocs"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:141
 msgid "Block type"
-msgstr ""
+msgstr "Tipus de bloc"
 
 #: devices/ilister.cpp:100
 msgid "Bluetooth MAC Address"
@@ -2372,7 +2372,7 @@ msgstr "Carrega la portada des de l'adreça"
 
 #: ui/albumcoverchoicecontroller.cpp:60
 msgid "Load cover from URL..."
-msgstr ""
+msgstr "Carrega la portada des de l'URL"
 
 #: ui/albumcoverchoicecontroller.cpp:92
 msgid "Load cover from disk"
@@ -2513,11 +2513,11 @@ msgstr "Desarrega de Magnatune finalitzada"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:134
 msgid "Main profile (MAIN)"
-msgstr ""
+msgstr "Perfil principal (MAIN)"
 
 #: internet/spotifyservice.cpp:496
 msgid "Make playlist available offline"
-msgstr ""
+msgstr "Fes la llista de reproducció disponible fora de línia"
 
 #: internet/lastfmservice.cpp:449
 msgid "Malformed response"
@@ -2525,7 +2525,7 @@ msgstr "Resposta malformada"
 
 #: ../bin/src/ui_networkproxysettingspage.h:160
 msgid "Manual proxy configuration"
-msgstr ""
+msgstr "Configuració manual del proxy"
 
 #: devices/deviceproperties.cpp:153
 msgid "Manufacturer"
@@ -2562,7 +2562,7 @@ msgstr "Tipus d'afiliació"
 
 #: ../bin/src/ui_transcoderoptionsvorbis.h:206
 msgid "Minimum bitrate"
-msgstr ""
+msgstr "Taxa de bits mínima"
 
 #: visualisations/projectmvisualisation.cpp:127
 msgid "Missing projectM presets"
@@ -2582,7 +2582,7 @@ msgstr "Mesos"
 
 #: library/library.cpp:69
 msgid "Most played"
-msgstr ""
+msgstr "Més reproduïdes"
 
 #: devices/giolister.cpp:157
 msgid "Mount point"
@@ -2621,7 +2621,7 @@ msgstr "Silenci"
 
 #: globalsearch/lastfmsearchprovider.cpp:51 internet/lastfmservice.cpp:178
 msgid "My Last.fm Library"
-msgstr ""
+msgstr "La meva biblioteca de Last.fm"
 
 #: globalsearch/lastfmsearchprovider.cpp:53 internet/lastfmservice.cpp:183
 msgid "My Last.fm Mix Radio"
@@ -2685,12 +2685,12 @@ msgstr "Mai"
 
 #: library/library.cpp:62
 msgid "Never played"
-msgstr ""
+msgstr "Mai reproduïdes"
 
 #: ../bin/src/ui_behavioursettingspage.h:194
 #: ../bin/src/ui_behavioursettingspage.h:208
 msgid "Never start playing"
-msgstr ""
+msgstr "Mai comencis a reproduir"
 
 #: ui/mainwindow.cpp:1415 ../bin/src/ui_mainwindow.h:680
 msgid "New playlist"
@@ -2698,7 +2698,7 @@ msgstr "Llista de reproducció nova"
 
 #: library/libraryview.cpp:255
 msgid "New smart playlist..."
-msgstr ""
+msgstr "Nova llista de reproducció inteŀligent"
 
 #: widgets/freespacebar.cpp:46
 msgid "New songs"
@@ -2706,11 +2706,11 @@ msgstr "Cançons noves"
 
 #: ../bin/src/ui_dynamicplaylistcontrols.h:110
 msgid "New tracks will be added automatically."
-msgstr ""
+msgstr "Les pistes noves seran afegides automàticament"
 
 #: library/library.cpp:75
 msgid "Newest tracks"
-msgstr ""
+msgstr "Pistes més noves"
 
 #: ui/edittagdialog.cpp:158 ui/trackselectiondialog.cpp:48
 msgid "Next"
@@ -2907,7 +2907,7 @@ msgstr "Sobreescriu els fitxers existents"
 
 #: internet/jamendoservice.cpp:210
 msgid "Parsing Jamendo catalogue"
-msgstr ""
+msgstr "S'està analitzant el catàleg de Jamendo"
 
 #: ui/equalizer.cpp:118
 msgid "Party"
@@ -2958,11 +2958,11 @@ msgstr "Reprodueix la radio de l'artista"
 
 #: playlist/playlist.cpp:1119 ../bin/src/ui_edittagdialog.h:637
 msgid "Play count"
-msgstr ""
+msgstr "Comptador de reproduccions"
 
 #: internet/lastfmservice.cpp:107
 msgid "Play custom radio..."
-msgstr ""
+msgstr "Reproducció de ràdio personalitzada..."
 
 #: core/commandlineoptions.cpp:146
 msgid "Play if stopped, pause if playing"
@@ -2971,7 +2971,7 @@ msgstr "Reprodueix si esta parat, pausa si esta reproduïnt"
 #: ../bin/src/ui_behavioursettingspage.h:195
 #: ../bin/src/ui_behavioursettingspage.h:209
 msgid "Play if there is nothing already playing"
-msgstr ""
+msgstr "Reprodueix si encara no hi ha res reproduint-se"
 
 #: internet/lastfmservice.cpp:105
 msgid "Play tag radio..."
@@ -3048,7 +3048,7 @@ msgstr "Duració de la finestra emergent"
 
 #: ../bin/src/ui_networkproxysettingspage.h:166
 msgid "Port"
-msgstr ""
+msgstr "Port"
 
 #: ui/equalizer.cpp:46 ../bin/src/ui_playbacksettingspage.h:274
 msgid "Pre-amp"
@@ -3114,7 +3114,7 @@ msgstr "Previsualitza"
 
 #: ui/edittagdialog.cpp:157 ui/trackselectiondialog.cpp:47
 msgid "Previous"
-msgstr ""
+msgstr "Anterior"
 
 #: core/globalshortcuts.cpp:51 wiimotedev/wiimotesettingspage.cpp:100
 #: ../bin/src/ui_mainwindow.h:629
@@ -3123,11 +3123,11 @@ msgstr "Pista anterior"
 
 #: core/commandlineoptions.cpp:167
 msgid "Print out version information"
-msgstr ""
+msgstr "Mostra la informació de la versió"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:131
 msgid "Profile"
-msgstr ""
+msgstr "Perfil"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:134
 #: ../bin/src/ui_transcodedialog.h:216
@@ -3137,7 +3137,7 @@ msgstr "Progrés"
 #: wiimotedev/wiimotesettingspage.cpp:227
 #: ../bin/src/ui_wiimoteshortcutgrabber.h:125
 msgid "Push Wiiremote button"
-msgstr ""
+msgstr "Premeu el botó del Wiiremote"
 
 #: ../bin/src/ui_querysortpage.h:138
 msgid "Put songs in a random order"
@@ -3153,7 +3153,7 @@ msgstr "Qualitat"
 
 #: ../bin/src/ui_deviceproperties.h:383
 msgid "Querying device..."
-msgstr ""
+msgstr "S'està consultant el dispositiu..."
 
 #: ../bin/src/ui_queuemanager.h:125 ../bin/src/ui_mainwindow.h:690
 msgid "Queue Manager"
@@ -3186,31 +3186,31 @@ msgstr "Visualització al.leatòria"
 
 #: core/globalshortcuts.cpp:64
 msgid "Rate the current song 0 stars"
-msgstr ""
+msgstr "Puntua la cançó actual amb 0 estrelles"
 
 #: core/globalshortcuts.cpp:65
 msgid "Rate the current song 1 star"
-msgstr ""
+msgstr "Puntua la cançó actual amb 1 estrella"
 
 #: core/globalshortcuts.cpp:66
 msgid "Rate the current song 2 stars"
-msgstr ""
+msgstr "Puntua la cançó actual amb 2 estrelles"
 
 #: core/globalshortcuts.cpp:67
 msgid "Rate the current song 3 stars"
-msgstr ""
+msgstr "Puntua la cançó actual amb 3 estrelles"
 
 #: core/globalshortcuts.cpp:68
 msgid "Rate the current song 4 stars"
-msgstr ""
+msgstr "Puntua la cançó actual amb 4 estrelles"
 
 #: core/globalshortcuts.cpp:69
 msgid "Rate the current song 5 stars"
-msgstr ""
+msgstr "Puntua la cançó actual amb 5 estrelles"
 
 #: playlist/playlist.cpp:1118 ../bin/src/ui_edittagdialog.h:645
 msgid "Rating"
-msgstr ""
+msgstr "Puntuació"
 
 #: internet/magnatunedownloaddialog.cpp:279 ui/albumcovermanager.cpp:212
 msgid "Really cancel?"
@@ -3226,15 +3226,15 @@ msgstr "Actualitzar canals"
 
 #: internet/lastfmservice.cpp:109
 msgid "Refresh friends list"
-msgstr ""
+msgstr "Refresca la llista d'amics"
 
 #: internet/icecastservice.cpp:300
 msgid "Refresh station list"
-msgstr ""
+msgstr "Refresca la llista d'emissores"
 
 #: internet/digitallyimportedservicebase.cpp:181
 msgid "Refresh streams"
-msgstr ""
+msgstr "Refresca els fluxes"
 
 #: ui/equalizer.cpp:120
 msgid "Reggae"
@@ -3250,7 +3250,7 @@ msgstr "Recorda de l'últim cop"
 
 #: ../bin/src/ui_remotesettingspage.h:199
 msgid "Remote Control"
-msgstr ""
+msgstr "Comandament remot"
 
 #: internet/savedradio.cpp:100 internet/lastfmservice.cpp:100
 #: ../bin/src/ui_queuemanager.h:135 ../bin/src/ui_searchtermwidget.h:282
@@ -3351,11 +3351,11 @@ msgstr ""
 
 #: widgets/lineedit.cpp:51
 msgid "Reset"
-msgstr ""
+msgstr "Posa a zero"
 
 #: ui/edittagdialog.cpp:716 ../bin/src/ui_edittagdialog.h:635
 msgid "Reset play counts"
-msgstr ""
+msgstr "Posa a zero el comptador de reproduccions"
 
 #: ../bin/src/ui_organisedialog.h:206
 msgid "Restrict to ASCII characters"
@@ -3407,7 +3407,7 @@ msgstr ""
 
 #: widgets/prettyimage.cpp:185 widgets/prettyimage.cpp:232
 msgid "Save image"
-msgstr ""
+msgstr "Desa la imatge"
 
 #: playlist/playlistcontainer.cpp:340
 msgid "Save playlist"
@@ -3427,7 +3427,7 @@ msgstr "Salva aquest flux a la pestanya d'Internet"
 
 #: ui/edittagdialog.cpp:618 ui/trackselectiondialog.cpp:250
 msgid "Saving tracks"
-msgstr ""
+msgstr "S'estan desant les pistes"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:136
 msgid "Scalable sampling rate profile (SSR)"
@@ -3435,7 +3435,7 @@ msgstr ""
 
 #: playlist/playlist.cpp:1122 ../bin/src/ui_edittagdialog.h:643
 msgid "Score"
-msgstr ""
+msgstr "Puntuació"
 
 #: ../bin/src/ui_lastfmsettingspage.h:150
 msgid "Scrobble tracks that I listen to"
@@ -3449,7 +3449,7 @@ msgstr "Cercar"
 #: internet/groovesharksearchplaylisttype.cpp:32
 #: internet/groovesharkservice.cpp:916
 msgid "Search Grooveshark"
-msgstr ""
+msgstr "Cerca a Grooveshark"
 
 #: internet/groovesharkservice.cpp:501 internet/groovesharkservice.cpp:515
 msgid "Search Grooveshark (opens a new tab)"
@@ -3457,11 +3457,11 @@ msgstr ""
 
 #: ../bin/src/ui_icecastfilterwidget.h:78
 msgid "Search Icecast stations"
-msgstr ""
+msgstr "Cerca emissores Icecast"
 
 #: internet/jamendoservice.cpp:422
 msgid "Search Jamendo"
-msgstr ""
+msgstr "Cerca a Jamendo"
 
 #: internet/magnatuneservice.cpp:280
 msgid "Search Magnatune"
@@ -3469,7 +3469,7 @@ msgstr "Cercar a Magnatune"
 
 #: internet/spotifysearchplaylisttype.cpp:32 internet/spotifyservice.cpp:604
 msgid "Search Spotify"
-msgstr ""
+msgstr "Cerca a Spotify"
 
 #: internet/spotifyservice.cpp:338
 msgid "Search Spotify (opens a new tab)"
@@ -4575,7 +4575,7 @@ msgstr ""
 
 #: ../bin/src/ui_behavioursettingspage.h:185
 msgid "You will need to restart Clementine if you change the language."
-msgstr "Si canvies la llengua, tindràs que re-iniciar Clementine"
+msgstr "Si canvieu l'idioma haureu de reiniciar el Clementine."
 
 #: internet/lastfmsettingspage.cpp:107
 msgid ""
