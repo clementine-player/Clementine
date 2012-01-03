@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 2.8)
 
-execute_process(COMMAND date "+%a, %-d %b %Y %H:%M:%S %z"
+execute_process(COMMAND env LC_ALL=C date "+%a, %-d %b %Y %H:%M:%S %z"
                 OUTPUT_VARIABLE DEB_DATE OUTPUT_STRIP_TRAILING_WHITESPACE)
 
 set(DEB_REWRITE_RULES ON CACHE BOOL "Rewrite the debian rules file from rules.in")
