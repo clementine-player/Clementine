@@ -939,6 +939,7 @@ add_po(PO clementine_
   LANGUAGES ${LANGUAGES}
   DIRECTORY translations
 )
+add_custom_target(pot DEPENDS ${POT})
 
 add_library(clementine_lib STATIC
   ${SOURCES}
