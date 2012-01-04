@@ -102,7 +102,8 @@ PlaylistView::PlaylistView(QWidget *parent)
     cached_current_row_row_(-1),
     drop_indicator_row_(-1),
     drag_over_(false),
-    dynamic_controls_(new DynamicPlaylistControls(this))
+    dynamic_controls_(new DynamicPlaylistControls(this)),
+    player_(NULL)
 {
   setHeader(header_);
   header_->setMovable(true);
@@ -139,6 +140,7 @@ PlaylistView::PlaylistView(QWidget *parent)
 }
 
 void PlaylistView::SetItemDelegates(LibraryBackend* backend) {
+  Q_ASSERT(player_);
   rating_delegate_ = new RatingItemDelegate(this);
 
   setItemDelegate(new PlaylistDelegateBase(this));
@@ -164,6 +166,7 @@ void PlaylistView::SetItemDelegates(LibraryBackend* backend) {
   setItemDelegateForColumn(Playlist::Column_Filename, new NativeSeparatorsDelegate(this));
   setItemDelegateForColumn(Playlist::Column_Rating, rating_delegate_);
   setItemDelegateForColumn(Playlist::Column_LastPlayed, new LastPlayedItemDelegate(this));
+  setItemDelegateForColumn(Playlist::Column_Source, new SongSourceDelegate(this, player_));
 }
 
 void PlaylistView::SetPlaylist(Playlist* playlist) {

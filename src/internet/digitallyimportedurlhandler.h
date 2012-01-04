@@ -28,6 +28,7 @@ public:
   DigitallyImportedUrlHandler(DigitallyImportedServiceBase* service);
 
   QString scheme() const;
+  QIcon icon() const { return QIcon(":providers/digitallyimported.png"); }
   LoadResult StartLoading(const QUrl& url);
 
   void CancelTask();

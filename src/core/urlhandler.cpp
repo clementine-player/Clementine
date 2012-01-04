@@ -27,3 +27,7 @@ UrlHandler::UrlHandler(QObject* parent)
   : QObject(parent)
 {
 }
+
+QIcon UrlHandler::icon() const {
+  return QIcon();
+}

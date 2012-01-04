@@ -54,6 +54,7 @@ public:
   void LazyPopulate(QStandardItem* parent);
   void ShowContextMenu(const QModelIndex& index, const QPoint& global_pos);
   void ItemDoubleClicked(QStandardItem* item);
+  void DropMimeData(const QMimeData* data, const QModelIndex& index);
   PlaylistItem::Options playlistitem_options() const;
 
   void Logout();

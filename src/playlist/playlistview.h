@@ -30,6 +30,7 @@ class QCleanlooksStyle;
 
 class DynamicPlaylistControls;
 class LibraryBackend;
+class Player;
 class PlaylistHeader;
 class RadioLoadingIndicator;
 class RatingItemDelegate;
@@ -72,6 +73,7 @@ class PlaylistView : public QTreeView {
   void RemoveSelected();
 
   void SetReadOnlySettings(bool read_only) { read_only_settings_ = read_only; }
+  void SetPlayer(Player* player) { player_ = player; }
 
   Playlist* playlist() const { return playlist_; }
   bool      background_enabled() const { return background_enabled_; }
@@ -201,6 +203,7 @@ class PlaylistView : public QTreeView {
   DynamicPlaylistControls* dynamic_controls_;
 
   ColumnAlignmentMap column_alignment_;
+  Player* player_;
 };
 
 #endif // PLAYLISTVIEW_H

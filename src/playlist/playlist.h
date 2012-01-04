@@ -109,6 +109,8 @@ class Playlist : public QAbstractListModel {
 
     Column_Comment,
 
+    Column_Source,
+
     ColumnCount
   };
 

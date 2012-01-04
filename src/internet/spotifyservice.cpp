@@ -25,6 +25,7 @@
 #include <QFileInfo>
 #include <QMenu>
 #include <QMessageBox>
+#include <QMimeData>
 #include <QProcess>
 #include <QSettings>
 #include <QVariant>
@@ -609,6 +610,10 @@ void SpotifyService::ItemDoubleClicked(QStandardItem* item) {
   if (item == search_) {
     OpenSearchTab();
   }
+}
+
+void SpotifyService::DropMimeData(const QMimeData* data, const QModelIndex& index) {
+  qLog(Debug) << Q_FUNC_INFO << data->urls();
 }
 
 void SpotifyService::LoadImage(const QString& id) {

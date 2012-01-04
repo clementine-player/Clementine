@@ -18,6 +18,7 @@
 #include "playlistdelegates.h"
 #include "queue.h"
 #include "core/logging.h"
+#include "core/player.h"
 #include "core/utilities.h"
 #include "library/librarybackend.h"
 #include "widgets/trackslider.h"
@@ -432,4 +433,40 @@ QString NativeSeparatorsDelegate::displayText(const QVariant& value, const QLoca
     return text;
   }
   return QDir::toNativeSeparators(text);
+}
+
+SongSourceDelegate::SongSourceDelegate(QObject* parent, Player* player)
+    : PlaylistDelegateBase(parent),
+      player_(player) {
+}
+
+QString SongSourceDelegate::displayText(const QVariant& value, const QLocale&) const {
+  return "";
+}
+
+void SongSourceDelegate::paint(
+    QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const {
+  PlaylistDelegateBase::paint(painter, option, index);
+  QStyleOptionViewItem option_copy(option);
+  initStyleOption(&option_copy, index);
+  QIcon icon;
+  const QUrl& url = index.data().toUrl();
+  const UrlHandler* handler = player_->HandlerForUrl(url);
+  if (handler) {
+    icon = handler->icon();
+  } else {
+    if (url.scheme() == "spotify") {
+      icon = IconLoader::Load("spotify");
+    } else if (url.scheme() == "file") {
+      icon = IconLoader::Load("folder-sound");
+    }
+  }
+  QPixmap pixmap = icon.pixmap(option_copy.decorationSize.height());
+  const int margin = (option_copy.rect.width() - pixmap.width()) / 2;
+  QRect draw_rect(
+      margin + option_copy.rect.x(),
+      option_copy.rect.y(),
+      option_copy.decorationSize.width(),
+      option_copy.decorationSize.height());
+  painter->drawPixmap(draw_rect, pixmap);
 }

@@ -29,6 +29,7 @@ public:
   GroovesharkUrlHandler(GroovesharkService* service, QObject* parent);
 
   QString scheme() const { return "grooveshark"; }
+  QIcon icon() const { return QIcon(":providers/grooveshark.png"); }
   LoadResult StartLoading(const QUrl& url);
   void TrackAboutToEnd();
   void TrackSkipped();

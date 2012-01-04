@@ -18,6 +18,7 @@
 #ifndef URLHANDLER_H
 #define URLHANDLER_H
 
+#include <QIcon>
 #include <QObject>
 #include <QUrl>
 
@@ -29,6 +30,7 @@ public:
 
   // The URL scheme that this handler handles.
   virtual QString scheme() const = 0;
+  virtual QIcon icon() const;
 
   // Returned by StartLoading() and LoadNext(), indicates what the player
   // should do when it wants to load a URL.

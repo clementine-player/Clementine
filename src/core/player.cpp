@@ -552,6 +552,14 @@ void Player::UnregisterUrlHandler(UrlHandler* handler) {
              this, SLOT(HandleLoadResult(UrlHandler::LoadResult)));
 }
 
+const UrlHandler* Player::HandlerForUrl(const QUrl& url) const {
+  QMap<QString, UrlHandler*>::const_iterator it = url_handlers_.constFind(url.scheme());
+  if (it == url_handlers_.constEnd()) {
+    return NULL;
+  }
+  return *it;
+}
+
 void Player::UrlHandlerDestroyed(QObject* object) {
   UrlHandler* handler = static_cast<UrlHandler*>(object);
   const QString scheme = url_handlers_.key(handler);

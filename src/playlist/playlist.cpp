@@ -280,6 +280,9 @@ QVariant Playlist::data(const QModelIndex& index, int role) const {
           if (role == Qt::DisplayRole)
             return song.comment().simplified();
           return song.comment();
+
+        case Column_Source:
+          return item->Url();
       }
     }
 
@@ -1094,6 +1097,7 @@ bool Playlist::CompareItems(int column, Qt::SortOrder order,
     case Column_DateCreated:  cmp(ctime);
 
     case Column_Comment:      strcmp(comment);
+    case Column_Source:       cmp(url);
   }
 
 #undef cmp
@@ -1132,6 +1136,7 @@ QString Playlist::column_name(Column column) {
     case Column_DateCreated:  return tr("Date created");
 
     case Column_Comment:      return tr("Comment");
+    case Column_Source:       return tr("Source");
     default: return QString();
   }
   return "";

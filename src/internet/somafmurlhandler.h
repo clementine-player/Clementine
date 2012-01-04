@@ -30,6 +30,7 @@ public:
   SomaFMUrlHandler(SomaFMService* service, QObject* parent);
 
   QString scheme() const { return "somafm"; }
+  QIcon icon() const { return QIcon(":providers/somafm.png"); }
   LoadResult StartLoading(const QUrl& url);
 
 private slots:

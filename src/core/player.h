@@ -123,6 +123,8 @@ public:
   void RegisterUrlHandler(UrlHandler* handler);
   void UnregisterUrlHandler(UrlHandler* handler);
 
+  const UrlHandler* HandlerForUrl(const QUrl& url) const;
+
 public slots:
   void ReloadSettings();
 

@@ -30,6 +30,7 @@ public:
   LastFMUrlHandler(LastFMService* service, QObject* parent);
 
   QString scheme() const { return "lastfm"; }
+  QIcon icon() const { return QIcon(":last.fm/as.png"); }
   LoadResult StartLoading(const QUrl& url);
   LoadResult LoadNext(const QUrl& url);
 

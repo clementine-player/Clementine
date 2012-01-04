@@ -28,6 +28,7 @@ public:
   MagnatuneUrlHandler(MagnatuneService* service, QObject* parent);
 
   QString scheme() const { return "magnatune"; }
+  QIcon icon() const { return QIcon(":providers/magnatune.png"); }
   LoadResult StartLoading(const QUrl& url);
 
 private:
