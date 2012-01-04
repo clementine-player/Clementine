@@ -5,6 +5,7 @@
 #include <Foundation/NSString.h>
 
 #include "core/logging.h"
+#include "core/scoped_nsobject.h"
 
 MacFSListener::MacFSListener(QObject* parent)
     : QObject(parent),
@@ -40,6 +41,7 @@ void MacFSListener::AddPath(const QString& path) {
 void MacFSListener::UpdateStream() {
   if (stream_) {
     FSEventStreamInvalidate(stream_);
+    FSEventStreamRelease(stream_);
     stream_ = NULL;
   }
 
@@ -47,12 +49,12 @@ void MacFSListener::UpdateStream() {
     return;
   }
 
-  NSMutableArray* array = [[NSMutableArray alloc] init];
+  scoped_nsobject<NSMutableArray> array([[NSMutableArray alloc] init]);
 
   foreach (const QString& path, paths_) {
-    NSString* string = [[NSString alloc] initWithUTF8String: path.toUtf8().constData()];
-    [array addObject: string];
-    [string release];
+    scoped_nsobject<NSString> string(
+        [[NSString alloc] initWithUTF8String: path.toUtf8().constData()]);
+    [array addObject: string.get()];
   }
 
   FSEventStreamContext context;
@@ -64,13 +66,11 @@ void MacFSListener::UpdateStream() {
       NULL,
       &EventStreamCallback,
       &context,  // Copied
-      (CFArrayRef)array,
+      reinterpret_cast<CFArrayRef>(array.get()),
       kFSEventStreamEventIdSinceNow,
       latency,
       kFSEventStreamCreateFlagNone);
 
   FSEventStreamScheduleWithRunLoop(stream_, run_loop_, kCFRunLoopDefaultMode);
   FSEventStreamStart(stream_);
-
-  [array release];
 }
