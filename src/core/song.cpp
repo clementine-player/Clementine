@@ -849,7 +849,12 @@ void Song::InitFromLastFM(const lastfm::Track& track) {
     QString filename = QString::fromLocal8Bit(track->ipod_path);
     filename.replace(':', '/');
 
-    d->url_ = QUrl::fromLocalFile(prefix + filename);
+    if (prefix.contains("://")) {
+      d->url_ = prefix + filename;
+    } else {
+      d->url_ = QUrl::fromLocalFile(prefix + filename);
+    }
+
     d->basefilename_ = QFileInfo(filename).fileName();
   }
 
