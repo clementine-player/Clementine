@@ -441,7 +441,7 @@ SongSourceDelegate::SongSourceDelegate(QObject* parent, Player* player)
 }
 
 QString SongSourceDelegate::displayText(const QVariant& value, const QLocale&) const {
-  return "";
+  return QString();
 }
 
 QPixmap SongSourceDelegate::LookupPixmap(const QUrl& url, const QSize& size) const {

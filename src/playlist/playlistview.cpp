@@ -35,7 +35,7 @@
 
 #include <math.h>
 
-const int PlaylistView::kStateVersion = 3;
+const int PlaylistView::kStateVersion = 4;
 const int PlaylistView::kGlowIntensitySteps = 24;
 const int PlaylistView::kAutoscrollGraceTimeout = 60; // seconds
 const int PlaylistView::kDropIndicatorWidth = 2;
@@ -55,7 +55,7 @@ void PlaylistProxyStyle::drawControl(
     const QRect& rect = header_option->rect;
     const QString& text = header_option->text;
     const QFontMetrics& font_metrics = header_option->fontMetrics;
-    
+
     // spaces added to make transition less abrupt
     if (rect.width() < font_metrics.width(text + "  ")) {
       const Playlist::Column column = static_cast<Playlist::Column>(header_option->section);
@@ -266,6 +266,9 @@ void PlaylistView::LoadGeometry() {
   }
   if (state_version < 3) {
     header_->HideSection(Playlist::Column_Comment);
+  }
+  if (state_version < 4) {
+    header_->SetColumnWidth(Playlist::Column_Source, 0.05);
   }
 
   // Make sure at least one column is visible
