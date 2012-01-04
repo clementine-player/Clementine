@@ -6,8 +6,9 @@
 
 #include "core/logging.h"
 
-MacFSListener::MacFSListener()
-    : run_loop_(NULL),
+MacFSListener::MacFSListener(QObject* parent)
+    : QObject(parent),
+      run_loop_(NULL),
       stream_(NULL) {
 }
 

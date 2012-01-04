@@ -10,7 +10,7 @@ class MacFSListener : public QObject {
   Q_OBJECT
 
  public:
-  MacFSListener();
+  explicit MacFSListener(QObject* parent = 0);
   void Init();
 
   void AddPath(const QString& path);
