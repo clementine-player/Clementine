@@ -477,7 +477,7 @@ void SongSourceDelegate::paint(
   QRect draw_rect(
       margin + option_copy.rect.x(),
       option_copy.rect.y(),
-      option_copy.decorationSize.width(),
-      option_copy.decorationSize.height());
+      qMin(option_copy.decorationSize.width(), pixmap.width()),
+      qMin(option_copy.decorationSize.height(), pixmap.height()));
   painter->drawPixmap(draw_rect, pixmap);
 }
