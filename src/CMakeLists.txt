@@ -711,6 +711,7 @@ optional_source(APPLE
     ${GROWL}/Headers
     ${CMAKE_CURRENT_SOURCE_DIR}/../3rdparty/google-breakpad/client/mac/build/Release/Breakpad.framework
   SOURCES
+    core/macfslistener.mm
     core/macglobalshortcutbackend.mm
     core/mac_startup.mm
     devices/macdevicelister.mm
@@ -720,6 +721,7 @@ optional_source(APPLE
     widgets/maclineedit.mm
     widgets/osd_mac.mm
   HEADERS
+    core/macfslistener.h
     core/macglobalshortcutbackend.h
     devices/macdevicelister.h
     ui/macscreensaver.h
