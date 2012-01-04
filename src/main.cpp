@@ -142,6 +142,27 @@ void LoadTranslation(const QString& prefix, const QString& path,
 #include <xrme/connection.h>
 #endif
 
+void IncreaseFDLimit() {
+#ifdef Q_OS_DARWIN
+  // Bump the soft limit for the number of file descriptors from the default of 256 to
+  // the maximum (usually 10240).
+  struct rlimit limit;
+  getrlimit(RLIMIT_NOFILE, &limit);
+
+  // getrlimit() lies about the hard limit so we have to check sysctl.
+  int max_fd = 0;
+  size_t len = sizeof(max_fd);
+  sysctlbyname("kern.maxfilesperproc", &max_fd, &len, NULL, 0);
+
+  limit.rlim_cur = max_fd;
+  int ret = setrlimit(RLIMIT_NOFILE, &limit);
+
+  if (ret == 0) {
+    qLog(Debug) << "Max fd:" << max_fd;
+  }
+#endif
+}
+
 int main(int argc, char *argv[]) {
   if (CrashReporting::SendCrashReport(argc, argv)) {
     return 0;
@@ -153,25 +174,6 @@ int main(int argc, char *argv[]) {
   // Do Mac specific startup to get media keys working.
   // This must go before QApplication initialisation.
   mac::MacMain();
-
-  {
-    // Bump the soft limit for the number of file descriptors from the default of 256 to
-    // the maximum (usually 10240).
-    struct rlimit limit;
-    getrlimit(RLIMIT_NOFILE, &limit);
-
-    // getrlimit() lies about the hard limit so we have to check sysctl.
-    int max_fd = 0;
-    size_t len = sizeof(max_fd);
-    sysctlbyname("kern.maxfilesperproc", &max_fd, &len, NULL, 0);
-
-    limit.rlim_cur = max_fd;
-    int ret = setrlimit(RLIMIT_NOFILE, &limit);
-
-    if (ret == 0) {
-      qLog(Debug) << "Max fd:" << max_fd;
-    }
-  }
 #endif
 
   QCoreApplication::setApplicationName("Clementine");
@@ -288,6 +290,8 @@ int main(int argc, char *argv[]) {
   logging::Init();
   logging::SetLevels(options.log_levels());
   g_log_set_default_handler(reinterpret_cast<GLogFunc>(&logging::GLog), NULL);
+
+  IncreaseFDLimit();
 
   QtSingleApplication a(argc, argv);
 #ifdef Q_OS_DARWIN
