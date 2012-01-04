@@ -237,6 +237,12 @@ void OrganiseDialog::UpdatePreviews() {
       ui_->preview->addItem(QDir::toNativeSeparators(filename));
     }
   }
+
+  adjustSize();
+}
+
+QSize OrganiseDialog::sizeHint() const {
+  return QSize(650, 0);
 }
 
 void OrganiseDialog::Reset() {

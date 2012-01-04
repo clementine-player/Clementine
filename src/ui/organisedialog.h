@@ -45,6 +45,8 @@ public:
   static const char* kDefaultFormat;
   static const char* kSettingsGroup;
 
+  QSize sizeHint() const;
+
   void SetDestinationModel(QAbstractItemModel* model, bool devices = false);
 
   int SetSongs(const SongList& songs);
