@@ -58,7 +58,8 @@ public slots:
   void accept();
 
 protected:
-  void showEvent(QShowEvent *);
+  void showEvent(QShowEvent*);
+  void resizeEvent(QResizeEvent*);
 
 private slots:
   void Reset();
@@ -80,6 +81,8 @@ private:
   quint64 total_size_;
 
   boost::scoped_ptr<OrganiseErrorDialog> error_dialog_;
+
+  bool resized_by_user_;
 };
 
 #endif // ORGANISEDIALOG_H

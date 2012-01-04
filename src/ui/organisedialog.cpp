@@ -26,6 +26,7 @@
 #include <QFileInfo>
 #include <QMenu>
 #include <QPushButton>
+#include <QResizeEvent>
 #include <QSettings>
 #include <QSignalMapper>
 #include <QtDebug>
@@ -39,7 +40,8 @@ OrganiseDialog::OrganiseDialog(TaskManager* task_manager, QWidget *parent)
   : QDialog(parent),
     ui_(new Ui_OrganiseDialog),
     task_manager_(task_manager),
-    total_size_(0)
+    total_size_(0),
+    resized_by_user_(false)
 {
   ui_->setupUi(this);
   connect(ui_->buttonBox->button(QDialogButtonBox::Reset), SIGNAL(clicked()), SLOT(Reset()));
@@ -238,7 +240,9 @@ void OrganiseDialog::UpdatePreviews() {
     }
   }
 
-  adjustSize();
+  if (!resized_by_user_) {
+    adjustSize();
+  }
 }
 
 QSize OrganiseDialog::sizeHint() const {
@@ -254,7 +258,9 @@ void OrganiseDialog::Reset() {
   ui_->eject_after->setChecked(false);
 }
 
-void OrganiseDialog::showEvent(QShowEvent *) {
+void OrganiseDialog::showEvent(QShowEvent*) {
+  resized_by_user_ = false;
+
   QSettings s;
   s.beginGroup(kSettingsGroup);
   ui_->naming->setPlainText(s.value("format", kDefaultFormat).toString());
@@ -308,4 +314,12 @@ void OrganiseDialog::OrganiseFinished(const QStringList& files_with_errors) {
 
   error_dialog_.reset(new OrganiseErrorDialog);
   error_dialog_->Show(OrganiseErrorDialog::Type_Copy, files_with_errors);
+}
+
+void OrganiseDialog::resizeEvent(QResizeEvent* e) {
+  if (e->spontaneous()) {
+    resized_by_user_ = true;
+  }
+
+  QDialog::resizeEvent(e);
 }
