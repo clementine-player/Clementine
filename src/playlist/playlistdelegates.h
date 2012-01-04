@@ -23,6 +23,7 @@
 #include "widgets/ratingwidget.h"
 
 #include <QCompleter>
+#include <QPixmapCache>
 #include <QStringListModel>
 #include <QStyledItemDelegate>
 #include <QTreeView>
@@ -183,7 +184,10 @@ class SongSourceDelegate : public PlaylistDelegateBase {
   void paint(QPainter* paint, const QStyleOptionViewItem& option, const QModelIndex& index) const;
 
  private:
+  QPixmap LookupPixmap(const QUrl& url, const QSize& size) const;
+
   Player* player_;
+  mutable QPixmapCache cache_;
 };
 
 #endif // PLAYLISTDELEGATES_H

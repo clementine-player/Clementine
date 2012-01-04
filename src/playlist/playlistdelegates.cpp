@@ -444,13 +444,13 @@ QString SongSourceDelegate::displayText(const QVariant& value, const QLocale&) c
   return "";
 }
 
-void SongSourceDelegate::paint(
-    QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const {
-  PlaylistDelegateBase::paint(painter, option, index);
-  QStyleOptionViewItem option_copy(option);
-  initStyleOption(&option_copy, index);
+QPixmap SongSourceDelegate::LookupPixmap(const QUrl& url, const QSize& size) const {
+  QPixmap pixmap;
+  if (cache_.find(url.scheme(), &pixmap)) {
+    return pixmap;
+  }
+
   QIcon icon;
-  const QUrl& url = index.data().toUrl();
   const UrlHandler* handler = player_->HandlerForUrl(url);
   if (handler) {
     icon = handler->icon();
@@ -461,7 +461,18 @@ void SongSourceDelegate::paint(
       icon = IconLoader::Load("folder-sound");
     }
   }
-  QPixmap pixmap = icon.pixmap(option_copy.decorationSize.height());
+  pixmap = icon.pixmap(size.height());
+  cache_.insert(url.scheme(), pixmap);
+  return pixmap;
+}
+
+void SongSourceDelegate::paint(
+    QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const {
+  PlaylistDelegateBase::paint(painter, option, index);
+  QStyleOptionViewItem option_copy(option);
+  initStyleOption(&option_copy, index);
+  const QUrl& url = index.data().toUrl();
+  QPixmap pixmap = LookupPixmap(url, option_copy.decorationSize);
   const int margin = (option_copy.rect.width() - pixmap.width()) / 2;
   QRect draw_rect(
       margin + option_copy.rect.x(),
