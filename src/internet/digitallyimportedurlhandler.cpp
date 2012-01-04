@@ -33,6 +33,15 @@ QString DigitallyImportedUrlHandler::scheme() const {
   return service_->api_service_name();
 }
 
+QIcon DigitallyImportedUrlHandler::icon() const {
+  if (scheme() == "di") {
+    return QIcon(":providers/digitallyimported.png");
+  } else if (scheme() == "sky") {
+    return QIcon(":providers/skyfm.png");
+  }
+  return QIcon();
+}
+
 UrlHandler::LoadResult DigitallyImportedUrlHandler::StartLoading(const QUrl& url) {
   LoadResult ret(url);
   if (task_id_ != -1) {
