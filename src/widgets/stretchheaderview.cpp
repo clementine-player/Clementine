@@ -270,6 +270,11 @@ bool StretchHeaderView::RestoreState(const QByteArray& data) {
       resizeSection(i, pixel_widths[i]);
     }
   }
+  
+  // Have we added more columns since the last time?
+  while (column_widths_.count() < count()) {
+    column_widths_ << 0;
+  }
 
   if (stretch_enabled_) {
     // In stretch mode, we've already set the proportional column widths so apply

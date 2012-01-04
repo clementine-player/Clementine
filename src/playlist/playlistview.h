@@ -168,6 +168,7 @@ class PlaylistView : public QTreeView {
   bool setting_initial_header_layout_;
   bool upgrading_from_qheaderview_;
   bool read_only_settings_;
+  int upgrading_from_version_;
 
   bool background_enabled_;
 

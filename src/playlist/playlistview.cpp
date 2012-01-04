@@ -89,6 +89,7 @@ PlaylistView::PlaylistView(QWidget *parent)
     setting_initial_header_layout_(false),
     upgrading_from_qheaderview_(false),
     read_only_settings_(true),
+    upgrading_from_version_(-1),
     glow_enabled_(true),
     currently_glowing_(false),
     glow_intensity_step_(0),
@@ -255,6 +256,8 @@ void PlaylistView::LoadGeometry() {
   // New columns that we add are visible by default if the user has upgraded
   // Clementine.  Hide them again here
   const int state_version = settings.value("state_version", 0).toInt();
+  upgrading_from_version_ = state_version;
+  
   if (state_version < 1) {
     header_->HideSection(Playlist::Column_Rating);
     header_->HideSection(Playlist::Column_PlayCount);
@@ -266,9 +269,6 @@ void PlaylistView::LoadGeometry() {
   }
   if (state_version < 3) {
     header_->HideSection(Playlist::Column_Comment);
-  }
-  if (state_version < 4) {
-    header_->SetColumnWidth(Playlist::Column_Source, 0.05);
   }
 
   // Make sure at least one column is visible
@@ -896,6 +896,13 @@ void PlaylistView::ReloadSettings() {
     header_->SetColumnWidth(Playlist::Column_Length, 0.06);
     header_->SetColumnWidth(Playlist::Column_Track, 0.05);
     setting_initial_header_layout_ = false;
+  }
+  
+  if (upgrading_from_version_ != -1) {
+    if (upgrading_from_version_ < 4) {
+      header_->SetColumnWidth(Playlist::Column_Source, 0.05);
+    }
+    upgrading_from_version_ = -1;
   }
 
   column_alignment_ = s.value("column_alignments").value<ColumnAlignmentMap>();
