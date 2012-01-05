@@ -39,6 +39,11 @@ void MacFSListener::AddPath(const QString& path) {
   UpdateStream();
 }
 
+void MacFSListener::Clear() {
+  paths_.clear();
+  UpdateStream();
+}
+
 void MacFSListener::UpdateStream() {
   if (stream_) {
     FSEventStreamStop(stream_);

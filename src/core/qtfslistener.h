@@ -10,6 +10,7 @@ class QtFSListener : public FileSystemWatcherInterface {
  public:
   QtFSListener(QObject* parent);
   virtual void AddPath(const QString& path);
+  virtual void Clear();
 
  private:
   QFileSystemWatcher watcher_;
