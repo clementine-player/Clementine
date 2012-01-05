@@ -546,7 +546,7 @@ uint LibraryWatcher::GetMtimeForCue(const QString& cue_path) {
              : 0;
 }
 
-void LibraryWatcher::AddWatch(DirData dir, const QString& path) {
+void LibraryWatcher::AddWatch(const DirData& dir, const QString& path) {
   if (!QFile::exists(path))
     return;
 

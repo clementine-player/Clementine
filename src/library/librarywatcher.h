@@ -152,7 +152,7 @@ class LibraryWatcher : public QObject {
   inline static QString DirectoryPart( const QString &fileName );
   QString PickBestImage(const QStringList& images);
   QString ImageForSong(const QString& path, QMap<QString, QStringList>& album_art);
-  void AddWatch(DirData dir, const QString& path);
+  void AddWatch(const DirData& dir, const QString& path);
   uint GetMtimeForCue(const QString& cue_path);
   void PerformScan(bool incremental, bool ignore_mtimes);
 
