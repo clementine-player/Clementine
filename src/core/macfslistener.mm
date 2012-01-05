@@ -46,6 +46,9 @@ void MacFSListener::EventStreamCallback(
   for (int i = 0; i < num_events; ++i) {
     QString path = QString::fromUtf8(paths[i]);
     qLog(Debug) << "Something changed at:" << path;
+    if (path.endsWith('/')) {
+      path.chop(1);
+    }
     emit me->PathChanged(path);
   }
 }
