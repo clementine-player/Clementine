@@ -68,6 +68,7 @@ class SongInfoBase;
 class SongInfoView;
 class SystemTrayIcon;
 class TagFetcher;
+class TagReaderClient;
 class TaskManager;
 class TrackSelectionDialog;
 class TranscodeDialog;
@@ -92,6 +93,7 @@ class MainWindow : public QMainWindow, public PlatformInterface {
              ArtLoader* art_loader,
              CoverProviders* cover_providers,
              GlobalSearch* global_search,
+             TagReaderClient* tag_reader_client,
              QWidget *parent = 0);
   ~MainWindow();
 
@@ -279,6 +281,7 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   Library* library_;
   GlobalShortcuts* global_shortcuts_;
   GlobalSearch* global_search_;
+  TagReaderClient* tag_reader_client_;
   Remote* remote_;
 
   DeviceManager* devices_;

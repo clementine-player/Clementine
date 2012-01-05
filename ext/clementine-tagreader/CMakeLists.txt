@@ -1,10 +1,9 @@
 include_directories(${PROTOBUF_INCLUDE_DIRS})
+include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
-include_directories(${CMAKE_CURRENT_BINARY_DIR}/../common)
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../common)
+include_directories(${CMAKE_SOURCE_DIR}/ext/libclementine-common)
+include_directories(${CMAKE_BINARY_DIR}/ext/libclementine-tagreader)
 include_directories(${CMAKE_SOURCE_DIR}/src)
-
-link_directories(${SPOTIFY_LIBRARY_DIRS})
 
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR})
 
@@ -28,7 +27,8 @@ target_link_libraries(clementine-tagreader
   ${TAGLIB_LIBRARIES}
   ${QT_QTCORE_LIBRARY}
   ${QT_QTNETWORK_LIBRARY}
-  clementine-tagreader-common
+  libclementine-common
+  libclementine-tagreader
 )
 
 if(APPLE)

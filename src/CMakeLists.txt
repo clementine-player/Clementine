@@ -43,6 +43,10 @@ if(HAVE_BREAKPAD)
   include_directories(../3rdparty/google-breakpad)
 endif(HAVE_BREAKPAD)
 
+include_directories(${CMAKE_SOURCE_DIR}/ext/libclementine-common)
+include_directories(${CMAKE_SOURCE_DIR}/ext/libclementine-tagreader)
+include_directories(${CMAKE_BINARY_DIR}/ext/libclementine-tagreader)
+
 cmake_policy(SET CMP0011 NEW)
 include(../cmake/ParseArguments.cmake)
 include(../cmake/Translations.cmake)
@@ -59,7 +63,6 @@ set(SOURCES
 
   core/backgroundstreams.cpp
   core/backgroundthread.cpp
-  core/closure.cpp
   core/commandlineoptions.cpp
   core/crashreporting.cpp
   core/database.cpp
@@ -83,6 +86,7 @@ set(SOURCES
   core/song.cpp
   core/songloader.cpp
   core/stylesheetloader.cpp
+  core/tagreaderclient.cpp
   core/taskmanager.cpp
   core/urlhandler.cpp
   core/utilities.cpp
@@ -325,7 +329,6 @@ set(HEADERS
 
   core/backgroundstreams.h
   core/backgroundthread.h
-  core/closure.h
   core/crashreporting.h
   core/database.h
   core/deletefiles.h
@@ -338,6 +341,7 @@ set(HEADERS
   core/organise.h
   core/player.h
   core/songloader.h
+  core/tagreaderclient.h
   core/taskmanager.h
   core/urlhandler.h
 
@@ -953,6 +957,8 @@ add_dependencies(clementine_lib pot)
 
 
 target_link_libraries(clementine_lib
+  libclementine-common
+  libclementine-tagreader
   echoprint
   sha2
   ${ECHONEST_LIBRARIES}

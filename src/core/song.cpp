@@ -15,12 +15,12 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "encoding.h"
-#include "logging.h"
 #include "mpris_common.h"
 #include "song.h"
 #include "timeconstants.h"
-#include "tagreader/common/messagehandler.h"
+#include "core/encoding.h"
+#include "core/logging.h"
+#include "core/messagehandler.h"
 
 #include <algorithm>
 

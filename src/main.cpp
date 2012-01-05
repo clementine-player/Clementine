@@ -35,6 +35,7 @@
 #include "core/player.h"
 #include "core/potranslator.h"
 #include "core/song.h"
+#include "core/tagreaderclient.h"
 #include "core/taskmanager.h"
 #include "core/ubuntuunityhack.h"
 #include "core/utilities.h"
@@ -407,6 +408,9 @@ int main(int argc, char *argv[]) {
   GlobalSearchService global_search_service(&global_search);
 #endif
 
+  // Tag reader client
+  TagReaderClient tag_reader_client;
+
   // Window
   MainWindow w(
       database.get(),
@@ -418,7 +422,8 @@ int main(int argc, char *argv[]) {
       &osd,
       &art_loader,
       &cover_providers,
-      &global_search);
+      &global_search,
+      &tag_reader_client);
 #ifdef HAVE_DBUS
   QObject::connect(&mpris, SIGNAL(RaiseMainWindow()), &w, SLOT(Raise()));
 #endif

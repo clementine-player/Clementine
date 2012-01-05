@@ -67,6 +67,8 @@ protected:
 template <typename MessageType>
 class MessageReply : public _MessageReplyBase {
 public:
+  MessageReply(int id, QObject* parent);
+
   const MessageType& message() const { return message_; }
 
   void SetReply(const MessageType& message);
@@ -88,7 +90,7 @@ public:
 protected slots:
   void WriteMessage(const QByteArray& data);
   void DeviceReadyRead();
-  virtual bool SocketClosed() {}
+  virtual void SocketClosed() {}
 
 protected:
   virtual bool MessageArrived(const QByteArray& data) = 0;
@@ -145,6 +147,7 @@ protected:
 
   // _MessageHandlerBase
   bool MessageArrived(const QByteArray& data);
+  void SocketClosed();
 
 private:
   QMutex mutex_;
@@ -243,6 +246,12 @@ void AbstractMessageHandler<MessageType>::SocketClosed() {
     reply->Abort();
   }
   pending_replies_.clear();
+}
+
+template<typename MessageType>
+MessageReply<MessageType>::MessageReply(int id, QObject* parent)
+  : _MessageReplyBase(id, parent)
+{
 }
 
 template<typename MessageType>

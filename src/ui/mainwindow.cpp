@@ -161,6 +161,7 @@ MainWindow::MainWindow(
     ArtLoader* art_loader,
     CoverProviders* cover_providers,
     GlobalSearch* global_search,
+    TagReader* tag_reader_client,
     QWidget* parent)
   : QMainWindow(parent),
     ui_(new Ui_MainWindow),
@@ -177,6 +178,7 @@ MainWindow::MainWindow(
     library_(NULL),
     global_shortcuts_(new GlobalShortcuts(this)),
     global_search_(global_search),
+    tag_reader_client_(tag_reader_client),
     remote_(NULL),
     devices_(NULL),
     library_view_(new LibraryViewContainer(this)),

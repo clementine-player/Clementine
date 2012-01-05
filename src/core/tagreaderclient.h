@@ -18,10 +18,14 @@
 #ifndef TAGREADERCLIENT_H
 #define TAGREADERCLIENT_H
 
-#include "messagehandler.h"
 #include "song.h"
 #include "tagreadermessages.pb.h"
+#include "core/messagehandler.h"
+#include "core/workerpool.h"
 
+#include <QStringList>
+
+class QLocalServer;
 class QProcess;
 
 class TagReaderClient : public QObject {
@@ -33,6 +37,8 @@ public:
   typedef AbstractMessageHandler<pb::tagreader::Message> HandlerType;
   typedef typename HandlerType::ReplyType ReplyType;
 
+  static const char* kWorkerExecutableName;
+
   void Start();
 
   ReplyType* ReadFile(const QString& filename);
@@ -41,8 +47,11 @@ public:
   ReplyType* LoadEmbeddedArt(const QString& filename);
 
 private:
-  QProcess* process_;
-  HandlerType* handler_;
+  void SendOrQueue(const pb::tagreader::Message& message);
+
+private:
+  WorkerPool<HandlerType>* worker_pool_;
+  QList<pb::tagreader::Message> message_queue_;
 };
 
 typedef TagReaderClient::ReplyType TagReaderReply;

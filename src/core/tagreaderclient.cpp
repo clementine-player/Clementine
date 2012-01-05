@@ -17,21 +17,22 @@
 
 #include "tagreaderclient.h"
 
+#include <QCoreApplication>
+#include <QFile>
 #include <QProcess>
+#include <QTcpServer>
+
+
+const char* TagReaderClient::kWorkerExecutableName = "clementine-tagreader";
 
 TagReaderClient::TagReaderClient(QObject* parent)
   : QObject(parent),
-    process_(NULL),
-    handler_(NULL)
+    worker_pool_(new WorkerPool<HandlerType>(this))
 {
 }
 
 void TagReaderClient::Start() {
-  delete process_;
-  delete handler_;
-
-  process_ = new QProcess(this);
-  process_->start();
+  worker_pool_->Start();
 }
 
 TagReaderReply* TagReaderClient::ReadFile(const QString& filename) {
@@ -40,7 +41,7 @@ TagReaderReply* TagReaderClient::ReadFile(const QString& filename) {
 
   req->set_filename(DataCommaSizeFromQString(filename));
 
-  return SendMessageWithReply(&message);
+  return handler_->SendMessageWithReply(&message);
 }
 
 TagReaderReply* TagReaderClient::SaveFile(const QString& filename, const Song& metadata) {
@@ -50,7 +51,7 @@ TagReaderReply* TagReaderClient::SaveFile(const QString& filename, const Song& m
   req->set_filename(DataCommaSizeFromQString(filename));
   metadata.ToProtobuf(req->mutable_metadata());
 
-  return SendMessageWithReply(&message);
+  return handler_->SendMessageWithReply(&message);
 }
 
 TagReaderReply* TagReaderClient::IsMediaFile(const QString& filename) {
@@ -59,7 +60,7 @@ TagReaderReply* TagReaderClient::IsMediaFile(const QString& filename) {
 
   req->set_filename(DataCommaSizeFromQString(filename));
 
-  return SendMessageWithReply(&message);
+  return handler_->SendMessageWithReply(&message);
 }
 
 TagReaderReply* TagReaderClient::LoadEmbeddedArt(const QString& filename) {
@@ -68,5 +69,5 @@ TagReaderReply* TagReaderClient::LoadEmbeddedArt(const QString& filename) {
 
   req->set_filename(DataCommaSizeFromQString(filename));
 
-  return SendMessageWithReply(&message);
+  return handler_->SendMessageWithReply(&message);
 }

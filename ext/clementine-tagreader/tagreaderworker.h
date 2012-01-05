@@ -18,8 +18,8 @@
 #ifndef TAGREADERWORKER_H
 #define TAGREADERWORKER_H
 
-#include "messagehandler.h"
 #include "tagreadermessages.pb.h"
+#include "core/messagehandler.h"
 
 #include <taglib/xiphcomment.h>
 
