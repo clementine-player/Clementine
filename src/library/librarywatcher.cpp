@@ -115,7 +115,7 @@ LibraryWatcher::ScanTransaction::~ScanTransaction() {
   if (watcher_->monitor_) {
     // Watch the new subdirectories
     foreach (const Subdirectory& subdir, new_subdirs) {
-      watcher_->AddWatch(subdir.path);
+      watcher_->AddWatch(watcher_->watched_dirs_[dir_], subdir.path);
     }
   }
 }
@@ -207,7 +207,7 @@ void LibraryWatcher::AddDirectory(const Directory& dir, const SubdirectoryList& 
         ScanSubdirectory(subdir.path, subdir, &transaction);
 
       if (monitor_)
-        AddWatch(subdir.path);
+        AddWatch(data, subdir.path);
     }
   }
 
@@ -546,13 +546,14 @@ uint LibraryWatcher::GetMtimeForCue(const QString& cue_path) {
              : 0;
 }
 
-void LibraryWatcher::AddWatch(const QString& path) {
+void LibraryWatcher::AddWatch(DirData dir, const QString& path) {
   if (!QFile::exists(path))
     return;
 
   connect(fs_watcher_, SIGNAL(PathChanged(const QString&)), this,
       SLOT(DirectoryChanged(const QString&)), Qt::UniqueConnection);
   fs_watcher_->AddPath(path);
+  subdir_mapping_[path] = dir;
 }
 
 void LibraryWatcher::RemoveDirectory(const Directory& dir) {
@@ -573,11 +574,11 @@ bool LibraryWatcher::FindSongByPath(const SongList& list, const QString& path, S
 
 void LibraryWatcher::DirectoryChanged(const QString &subdir) {
   // Find what dir it was in
-  Directory dir;
-  foreach (const DirData& info, watched_dirs_) {
-    if (subdir.startsWith(info.dir.path))
-      dir = info.dir;
+  QHash<QString, DirData>::const_iterator it = subdir_mapping_.constFind(subdir);
+  if (it == subdir_mapping_.constEnd()) {
+    return;
   }
+  Directory dir = it->dir;
 
   qLog(Debug) << "Subdir" << subdir << "changed under directory" << dir.path << "id" << dir.id;
 
@@ -700,7 +701,7 @@ void LibraryWatcher::ReloadSettings() {
     foreach (const DirData& data, watched_dirs_.values()) {
       SubdirectoryList subdirs = backend_->SubdirsInDirectory(data.dir.id);
       foreach (const Subdirectory& subdir, subdirs) {
-        AddWatch(subdir.path);
+        AddWatch(data, subdir.path);
       }
     }
   }
