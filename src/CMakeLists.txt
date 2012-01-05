@@ -66,6 +66,7 @@ set(SOURCES
   core/deletefiles.cpp
   core/encoding.cpp
   core/filesystemmusicstorage.cpp
+  core/filesystemwatcherinterface.cpp
   core/fht.cpp
   core/fmpsparser.cpp
   core/globalshortcutbackend.cpp
@@ -80,6 +81,7 @@ set(SOURCES
   core/organise.cpp
   core/organiseformat.cpp
   core/player.cpp
+  core/qtfslistener.cpp
   core/qxtglobalshortcutbackend.cpp
   core/scopedtransaction.cpp
   core/settingsprovider.cpp
@@ -332,6 +334,7 @@ set(HEADERS
   core/crashreporting.h
   core/database.h
   core/deletefiles.h
+  core/filesystemwatcherinterface.h
   core/globalshortcuts.h
   core/globalshortcutbackend.h
   core/gnomeglobalshortcutbackend.h
@@ -340,6 +343,7 @@ set(HEADERS
   core/network.h
   core/organise.h
   core/player.h
+  core/qtfslistener.h
   core/songloader.h
   core/taskmanager.h
   core/urlhandler.h

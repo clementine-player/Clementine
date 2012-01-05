@@ -16,14 +16,18 @@
 */
 
 #include "musicdnsclient.h"
-#include "core/network.h"
 
+#include <QBuffer>
 #include <QCoreApplication>
 #include <QNetworkReply>
 #include <QXmlStreamReader>
 #include <QtDebug>
 
-const char* MusicDnsClient::kClientId = "c44f70e49000dd7c0d1388bff2bf4152";
+#include "core/logging.h"
+#include "core/network.h"
+
+//const char* MusicDnsClient::kClientId = "c44f70e49000dd7c0d1388bff2bf4152";
+const char* MusicDnsClient::kClientId = "0736ac2cd889ef77f26f6b5e3fb8a09c";
 const char* MusicDnsClient::kUrl = "http://ofa.musicdns.org/ofa/1/track";
 const int MusicDnsClient::kDefaultTimeout = 5000; // msec
 
@@ -49,10 +53,12 @@ void MusicDnsClient::Start(int id, const QString& fingerprint, int duration_msec
              << Param("cvr", QString("%1 %2").arg(QCoreApplication::applicationName(),
                                                   QCoreApplication::applicationVersion()))
              << Param("dur", QString::number(duration_msec))
+             << Param("lkt", "1")
              << Param("fmt", "unknown")
              << Param("fpt", fingerprint)
              << Param("gnr", "unknown")
              << Param("rmd", "1")
+             << Param("rmt", "0")
              << Param("tnm", "0")
              << Param("ttl", "unknown")
              << Param("yrr", "0");
@@ -60,6 +66,8 @@ void MusicDnsClient::Start(int id, const QString& fingerprint, int duration_msec
   QUrl url(kUrl);
   url.setQueryItems(parameters);
   QNetworkRequest req(url);
+
+  qLog(Debug) << url;
 
   QNetworkReply* reply = network_->get(req);
   connect(reply, SIGNAL(finished()), SLOT(RequestFinished()));
@@ -90,12 +98,19 @@ void MusicDnsClient::RequestFinished() {
 
   int id = requests_.take(reply);
 
+  qLog(Debug) << reply->attribute(QNetworkRequest::HttpStatusCodeAttribute);
+
   if (reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt() != 200) {
     emit Finished(id, QString());
     return;
   }
 
-  QXmlStreamReader reader(reply);
+  QByteArray data = reply->readAll();
+  qLog(Debug) << data;
+  QBuffer buffer(&data);
+  buffer.open(QIODevice::ReadOnly);
+
+  QXmlStreamReader reader(&buffer);
   while (!reader.atEnd()) {
     if (reader.readNext() == QXmlStreamReader::StartElement && reader.name() == "puid") {
       QString puid = reader.attributes().value("id").toString();

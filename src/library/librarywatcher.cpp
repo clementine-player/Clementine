@@ -16,12 +16,13 @@
 */
 
 #include "librarywatcher.h"
+
 #include "librarybackend.h"
+#include "core/filesystemwatcherinterface.h"
 #include "core/logging.h"
 #include "core/taskmanager.h"
 #include "playlistparsers/cueparser.h"
 
-#include <QFileSystemWatcher>
 #include <QDateTime>
 #include <QDirIterator>
 #include <QtDebug>
@@ -48,6 +49,7 @@ LibraryWatcher::LibraryWatcher(QObject* parent)
   : QObject(parent),
     backend_(NULL),
     task_manager_(NULL),
+    fs_watcher_(NULL),
     stop_requested_(false),
     scan_on_startup_(true),
     monitor_(true),
@@ -113,7 +115,7 @@ LibraryWatcher::ScanTransaction::~ScanTransaction() {
   if (watcher_->monitor_) {
     // Watch the new subdirectories
     foreach (const Subdirectory& subdir, new_subdirs) {
-      watcher_->AddWatch(watcher_->watched_dirs_[dir_].watcher, subdir.path);
+      watcher_->AddWatch(subdir.path);
     }
   }
 }
@@ -183,8 +185,6 @@ SubdirectoryList LibraryWatcher::ScanTransaction::GetAllSubdirs() {
 void LibraryWatcher::AddDirectory(const Directory& dir, const SubdirectoryList& subdirs) {
   DirData data;
   data.dir = dir;
-  data.watcher = new QFileSystemWatcher(this);
-  connect(data.watcher, SIGNAL(directoryChanged(QString)), SLOT(DirectoryChanged(QString)));
   watched_dirs_[dir.id] = data;
 
   if (subdirs.isEmpty()) {
@@ -207,7 +207,7 @@ void LibraryWatcher::AddDirectory(const Directory& dir, const SubdirectoryList& 
         ScanSubdirectory(subdir.path, subdir, &transaction);
 
       if (monitor_)
-        AddWatch(data.watcher, subdir.path);
+        AddWatch(subdir.path);
     }
   }
 
@@ -546,18 +546,16 @@ uint LibraryWatcher::GetMtimeForCue(const QString& cue_path) {
              : 0;
 }
 
-void LibraryWatcher::AddWatch(QFileSystemWatcher* w, const QString& path) {
+void LibraryWatcher::AddWatch(const QString& path) {
   if (!QFile::exists(path))
     return;
 
-  w->addPath(path);
+  connect(fs_watcher_, SIGNAL(PathChanged(const QString&)), this,
+      SLOT(DirectoryChanged(const QString&)), Qt::UniqueConnection);
+  fs_watcher_->AddPath(path);
 }
 
 void LibraryWatcher::RemoveDirectory(const Directory& dir) {
-  if (watched_dirs_.contains(dir.id)) {
-    delete watched_dirs_[dir.id].watcher;
-  }
-
   rescan_queue_.remove(dir.id);
   watched_dirs_.remove(dir.id);
 }
@@ -575,13 +573,9 @@ bool LibraryWatcher::FindSongByPath(const SongList& list, const QString& path, S
 
 void LibraryWatcher::DirectoryChanged(const QString &subdir) {
   // Find what dir it was in
-  QFileSystemWatcher* watcher = qobject_cast<QFileSystemWatcher*>(sender());
-  if (!watcher)
-    return;
-
   Directory dir;
   foreach (const DirData& info, watched_dirs_) {
-    if (info.watcher == watcher)
+    if (subdir.startsWith(info.dir.path))
       dir = info.dir;
   }
 
@@ -689,7 +683,7 @@ void LibraryWatcher::ReloadSettings() {
   s.beginGroup(kSettingsGroup);
   scan_on_startup_ = s.value("startup_scan", true).toBool();
   monitor_ = s.value("monitor", true).toBool();
-  
+
   best_image_filters_.clear();
   QStringList filters = s.value("cover_art_patterns",
       QStringList() << "front" << "cover").toStringList();
@@ -698,18 +692,15 @@ void LibraryWatcher::ReloadSettings() {
     if (!s.isEmpty())
       best_image_filters_ << s;
   }
-  
+
   if (!monitor_ && was_monitoring_before) {
-    // Remove all directories from all QFileSystemWatchers
-    foreach (const DirData& data, watched_dirs_.values()) {
-      data.watcher->removePaths(data.watcher->directories());
-    }
+    // TODO: Remove all directories from watcher.
   } else if (monitor_ && !was_monitoring_before) {
     // Add all directories to all QFileSystemWatchers again
     foreach (const DirData& data, watched_dirs_.values()) {
       SubdirectoryList subdirs = backend_->SubdirsInDirectory(data.dir.id);
       foreach (const Subdirectory& subdir, subdirs) {
-        AddWatch(data.watcher, subdir.path);
+        AddWatch(subdir.path);
       }
     }
   }

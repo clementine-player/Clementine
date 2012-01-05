@@ -8,7 +8,7 @@
 #include "core/scoped_nsobject.h"
 
 MacFSListener::MacFSListener(QObject* parent)
-    : QObject(parent),
+    : FileSystemWatcherInterface(parent),
       run_loop_(NULL),
       stream_(NULL) {
 }
@@ -34,12 +34,14 @@ void MacFSListener::EventStreamCallback(
 }
 
 void MacFSListener::AddPath(const QString& path) {
+  Q_ASSERT(run_loop_);
   paths_.insert(path);
   UpdateStream();
 }
 
 void MacFSListener::UpdateStream() {
   if (stream_) {
+    FSEventStreamStop(stream_);
     FSEventStreamInvalidate(stream_);
     FSEventStreamRelease(stream_);
     stream_ = NULL;

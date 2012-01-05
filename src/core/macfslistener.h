@@ -6,7 +6,9 @@
 #include <QObject>
 #include <QSet>
 
-class MacFSListener : public QObject {
+#include "filesystemwatcherinterface.h"
+
+class MacFSListener : public FileSystemWatcherInterface {
   Q_OBJECT
 
  public:
