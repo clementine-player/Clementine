@@ -1,0 +1,39 @@
+set(EXTRA_LIBS)
+if(APPLE)
+    set(EXTRA_LIBS ${EXTRA_LIBS} -lz)
+endif()
+if(UNIX)
+    set(EXTRA_LIBS ${EXTRA_LIBS} -lpthread)
+endif()
+
+set(CMAKE_REQUIRED_LIBRARIES
+	${FFMPEG_LIBAVFORMAT_LIBRARIES}
+	${FFMPEG_LIBAVCODEC_LIBRARIES}
+	${FFMPEG_LIBAVUTIL_LIBRARIES}
+	${EXTRA_LIBS})
+check_function_exists(av_audio_convert HAVE_AV_AUDIO_CONVERT)
+
+if(HAVE_AV_AUDIO_CONVERT)
+	add_definitions(-DHAVE_AV_AUDIO_CONVERT)
+endif()
+
+include_directories(
+	${CMAKE_CURRENT_SOURCE_DIR}/../src
+	${FFMPEG_LIBAVCODEC_INCLUDE_DIRS}
+	${FFMPEG_LIBAVFORMAT_INCLUDE_DIRS}
+	${FFMPEG_LIBAVUTIL_INCLUDE_DIRS}
+)
+
+add_executable(fpcalc fpcalc.c)
+
+
+target_link_libraries(fpcalc chromaprint
+	${FFMPEG_LIBAVFORMAT_LIBRARIES}
+	${FFMPEG_LIBAVCODEC_LIBRARIES}
+	${FFMPEG_LIBAVUTIL_LIBRARIES}
+	${EXTRA_LIBS})
+
+install(TARGETS fpcalc
+	RUNTIME DESTINATION ${BIN_INSTALL_DIR}
+)
+
