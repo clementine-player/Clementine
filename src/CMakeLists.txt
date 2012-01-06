@@ -181,7 +181,6 @@ set(SOURCES
   library/sqlrow.cpp
 
   musicbrainz/chromaprinter.cpp
-  musicbrainz/echoprinter.cpp
   musicbrainz/musicbrainzclient.cpp
   musicbrainz/musicdnsclient.cpp
   musicbrainz/tagfetcher.cpp
@@ -962,7 +961,6 @@ add_dependencies(clementine_lib pot)
 target_link_libraries(clementine_lib
   chardet
   chromaprint_p
-  echoprint
   sha2
   ${ECHONEST_LIBRARIES}
   ${GOBJECT_LIBRARIES}
