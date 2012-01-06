@@ -180,6 +180,7 @@ set(SOURCES
   library/librarywatcher.cpp
   library/sqlrow.cpp
 
+  musicbrainz/chromaprinter.cpp
   musicbrainz/echoprinter.cpp
   musicbrainz/fingerprinter.cpp
   musicbrainz/musicbrainzclient.cpp
