@@ -16,15 +16,18 @@
 */
 
 #include "musicdnsclient.h"
-#include "core/network.h"
 
 #include <QCoreApplication>
 #include <QNetworkReply>
-#include <QXmlStreamReader>
-#include <QtDebug>
 
-const char* MusicDnsClient::kClientId = "c44f70e49000dd7c0d1388bff2bf4152";
-const char* MusicDnsClient::kUrl = "http://ofa.musicdns.org/ofa/1/track";
+#include <qjson/parser.h>
+
+#include "core/logging.h"
+#include "core/network.h"
+#include "core/timeconstants.h"
+
+const char* MusicDnsClient::kClientId = "qsZGpeLx";
+const char* MusicDnsClient::kUrl = "http://api.acoustid.org/v2/lookup";
 const int MusicDnsClient::kDefaultTimeout = 5000; // msec
 
 MusicDnsClient::MusicDnsClient(QObject* parent)
@@ -42,20 +45,11 @@ void MusicDnsClient::Start(int id, const QString& fingerprint, int duration_msec
   typedef QPair<QString, QString> Param;
 
   QList<Param> parameters;
-  parameters << Param("alb", "unknown")
-             << Param("art", "unknown")
-             << Param("brt", "0")
-             << Param("cid", kClientId)
-             << Param("cvr", QString("%1 %2").arg(QCoreApplication::applicationName(),
-                                                  QCoreApplication::applicationVersion()))
-             << Param("dur", QString::number(duration_msec))
-             << Param("fmt", "unknown")
-             << Param("fpt", fingerprint)
-             << Param("gnr", "unknown")
-             << Param("rmd", "1")
-             << Param("tnm", "0")
-             << Param("ttl", "unknown")
-             << Param("yrr", "0");
+  parameters << Param("format", "json")
+             << Param("client", kClientId)
+             << Param("duration", QString::number(duration_msec / kMsecPerSec))
+             << Param("meta", "recordingids")
+             << Param("fingerprint", fingerprint);
 
   QUrl url(kUrl);
   url.setQueryItems(parameters);
@@ -95,12 +89,31 @@ void MusicDnsClient::RequestFinished() {
     return;
   }
 
-  QXmlStreamReader reader(reply);
-  while (!reader.atEnd()) {
-    if (reader.readNext() == QXmlStreamReader::StartElement && reader.name() == "puid") {
-      QString puid = reader.attributes().value("id").toString();
-      emit Finished(id, puid);
-      return;
+  QJson::Parser parser;
+  bool ok = false;
+  QVariantMap result = parser.parse(reply, &ok).toMap();
+  if (!ok) {
+    emit Finished(id, QString());
+    return;
+  }
+
+  QString status = result["status"].toString();
+  if (status != "ok") {
+    emit Finished(id, QString());
+    return;
+  }
+  QVariantList results = result["results"].toList();
+  foreach (const QVariant& v, results) {
+    QVariantMap r = v.toMap();
+    if (r.contains("recordings")) {
+      QVariantList recordings = r["recordings"].toList();
+      foreach (const QVariant& recording, recordings) {
+        QVariantMap o = recording.toMap();
+        if (o.contains("id")) {
+          emit Finished(id, o["id"].toString());
+          return;
+        }
+      }
     }
   }
 

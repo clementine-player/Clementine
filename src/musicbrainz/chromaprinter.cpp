@@ -142,8 +142,6 @@ QString Chromaprinter::CreateFingerprint() {
 
   qLog(Debug) << "Decode time:" << decode_time << "Codegen time:" << codegen_time;
 
-  qLog(Debug) << "Chromaprint:" << fingerprint;
-
   // Cleanup
   gst_bus_set_sync_handler(gst_pipeline_get_bus(GST_PIPELINE(pipeline_)), NULL, NULL);
   g_source_remove(bus_callback_id);

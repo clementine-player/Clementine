@@ -29,9 +29,9 @@ class QNetworkReply;
 class MusicDnsClient : public QObject {
   Q_OBJECT
 
-  // Gets a PUID from an OFA fingerprint.
+  // Gets a MBID from a Chromaprint fingerprint.
   // A fingerprint identifies one particular encoding of a song and is created
-  // by Fingerprinter.  A PUID identifies the actual song and can be passed to
+  // by Fingerprinter.  An MBID identifies the actual song and can be passed to
   // Musicbrainz to get metadata.
   // You can create one MusicDnsClient and make multiple requests using it.
   // IDs are provided by the caller when a request is started and included in
@@ -56,7 +56,7 @@ public:
   void CancelAll();
 
 signals:
-  void Finished(int id, const QString& puid);
+  void Finished(int id, const QString& mbid);
 
 private slots:
   void RequestFinished();
