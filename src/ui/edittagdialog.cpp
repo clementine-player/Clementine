@@ -20,6 +20,7 @@
 #include "trackselectiondialog.h"
 #include "ui_edittagdialog.h"
 #include "core/logging.h"
+#include "core/tagreaderclient.h"
 #include "core/utilities.h"
 #include "covers/albumcoverloader.h"
 #include "covers/coverproviders.h"
@@ -195,7 +196,7 @@ QList<EditTagDialog::Data> EditTagDialog::LoadData(const SongList& songs) const 
     if (song.IsEditable()) {
       // Try reloading the tags from file
       Song copy(song);
-      copy.InitFromFile(copy.url().toLocalFile(), copy.directory_id());
+      TagReaderClient::Instance()->ReadFileBlocking(copy.url().toLocalFile(), &copy);
 
       if (copy.is_valid())
         ret << Data(copy);
@@ -607,7 +608,8 @@ void EditTagDialog::SaveData(const QList<Data>& data) {
     if (ref.current_.IsMetadataEqual(ref.original_))
       continue;
 
-    if (!ref.current_.Save()) {
+    if (!TagReaderClient::Instance()->SaveFileBlocking(
+          ref.current_.url().toLocalFile(), ref.current_)) {
       emit Error(tr("An error occurred writing metadata to '%1'").arg(ref.current_.url().toLocalFile()));
     }
   }

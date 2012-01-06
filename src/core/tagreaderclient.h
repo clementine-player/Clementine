@@ -46,10 +46,20 @@ public:
   ReplyType* IsMediaFile(const QString& filename);
   ReplyType* LoadEmbeddedArt(const QString& filename);
 
-private:
-  void SendOrQueue(const pb::tagreader::Message& message);
+  // Convenience functions that call the above functions and wait for a
+  // response.  These block the calling thread with a semaphore, and must NOT
+  // be called from the TagReaderClient's thread.
+  void ReadFileBlocking(const QString& filename, Song* song);
+  bool SaveFileBlocking(const QString& filename, const Song& metadata);
+  bool IsMediaFileBlocking(const QString& filename);
+  QImage LoadEmbeddedArtBlocking(const QString& filename);
+
+  // TODO: Make this not a singleton
+  static TagReaderClient* Instance() { return sInstance; }
 
 private:
+  static TagReaderClient* sInstance;
+
   WorkerPool<HandlerType>* worker_pool_;
   QList<pb::tagreader::Message> message_queue_;
 };

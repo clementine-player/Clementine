@@ -18,6 +18,7 @@
 #include "fmpsparser.h"
 #include "tagreaderworker.h"
 #include "core/encoding.h"
+#include "core/logging.h"
 #include "core/timeconstants.h"
 
 #include <QDateTime>
@@ -90,6 +91,7 @@ TagLib::String QStringToTaglibString(const QString& s) {
 
 TagReaderWorker::TagReaderWorker(QIODevice* socket, QObject* parent)
   : AbstractMessageHandler<pb::tagreader::Message>(socket, parent),
+    factory_(new TagLibFileRefFactory),
     kEmbeddedCover("(embedded)")
 {
 }
@@ -121,6 +123,8 @@ void TagReaderWorker::ReadFile(const QString& filename,
                                pb::tagreader::SongMetadata* song) const {
   const QByteArray url(QUrl::fromLocalFile(filename).toEncoded());
   const QFileInfo info(filename);
+
+  qLog(Debug) << "Reading tags from" << filename;
 
   song->set_basefilename(DataCommaSizeFromQString(info.fileName()));
   song->set_url(url.constData(), url.size());
@@ -402,6 +406,8 @@ bool TagReaderWorker::SaveFile(const QString& filename,
   if (filename.isNull())
     return false;
 
+  qLog(Debug) << "Saving tags to" << filename;
+
   scoped_ptr<TagLib::FileRef> fileref(factory_->GetFileRef(filename));
 
   if (!fileref || fileref->isNull()) // The file probably doesn't exist
@@ -475,6 +481,8 @@ void TagReaderWorker::SetTextFrame(const char* id, const std::string& value,
 }
 
 bool TagReaderWorker::IsMediaFile(const QString& filename) const {
+  qLog(Debug) << "Checking for valid file" << filename;
+
   scoped_ptr<TagLib::FileRef> fileref(factory_->GetFileRef(filename));
   return !fileref->isNull() && fileref->tag();
 }
@@ -482,6 +490,8 @@ bool TagReaderWorker::IsMediaFile(const QString& filename) const {
 QByteArray TagReaderWorker::LoadEmbeddedArt(const QString& filename) const {
   if (filename.isEmpty())
     return QByteArray();
+
+  qLog(Debug) << "Loading art from" << filename;
 
 #ifdef Q_OS_WIN32
   TagLib::FileRef ref(filename.toStdWString().c_str());

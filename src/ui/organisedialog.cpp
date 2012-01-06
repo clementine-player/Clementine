@@ -21,6 +21,7 @@
 #include "ui_organisedialog.h"
 #include "core/musicstorage.h"
 #include "core/organise.h"
+#include "core/tagreaderclient.h"
 
 #include <QDir>
 #include <QFileInfo>
@@ -172,7 +173,8 @@ void OrganiseDialog::LoadPreviewSongs(const QString& filename) {
   }
 
   Song song;
-  song.InitFromFile(filename, -1);
+  TagReaderClient::Instance()->ReadFileBlocking(filename, &song);
+
   if (song.is_valid())
     preview_songs_ << song;
 }

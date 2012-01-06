@@ -21,11 +21,14 @@
 #include <QCoreApplication>
 #include <QFile>
 #include <QLocalServer>
+#include <QLocalSocket>
 #include <QObject>
 #include <QProcess>
 #include <QThread>
 
 #include "core/closure.h"
+#include "core/logging.h"
+#include "core/waitforsignal.h"
 
 
 // Base class containing signals and slots - required because moc doesn't do
@@ -46,6 +49,7 @@ signals:
   void WorkerConnected();
 
 protected slots:
+  virtual void DoStart() {}
   virtual void NewConnection() {}
   virtual void ProcessError(QProcess::ProcessError) {}
 };
@@ -83,6 +87,7 @@ public:
   HandlerType* NextHandler();
 
 protected:
+  void DoStart();
   void NewConnection();
   void ProcessError(QProcess::ProcessError error);
 
@@ -99,15 +104,17 @@ private:
 
   template <typename T>
   Worker* FindWorker(T Worker::*member, T value) {
-    foreach (Worker& worker, workers_) {
-      if (worker.*member == value) {
-        return &worker;
+    for (typename QList<Worker>::iterator it = workers_.begin() ;
+         it != workers_.end() ; ++it) {
+      if ((*it).*member == value) {
+        return &(*it);
       }
     }
     return NULL;
   }
 
-  void DeleteQObjectPointerLater(QObject** p) {
+  template <typename T>
+  void DeleteQObjectPointerLater(T** p) {
     if (*p) {
       (*p)->deleteLater();
       *p = NULL;
@@ -157,7 +164,13 @@ void WorkerPool<HandlerType>::SetExecutableName(const QString& executable_name) 
 
 template <typename HandlerType>
 void WorkerPool<HandlerType>::Start() {
+  metaObject()->invokeMethod(this, "DoStart");
+}
+
+template <typename HandlerType>
+void WorkerPool<HandlerType>::DoStart() {
   Q_ASSERT(workers_.isEmpty());
+  Q_ASSERT(!executable_name_.isEmpty());
 
   // Find the executable if we can, default to searching $PATH
   executable_path_ = executable_name_;
@@ -200,7 +213,7 @@ void WorkerPool<HandlerType>::StartOneWorker(Worker* worker) {
 
   // Create a server, find an unused name and start listening
   forever {
-    const int unique_number = qrand() ^ reinterpret_cast<int>(this);
+    const int unique_number = qrand() ^ ((int)(quint64(this) & 0xFFFFFFFF));
     const QString name = QString("%1_%2").arg(local_server_name_).arg(unique_number);
 
     if (worker->local_server_->listen(name)) {
@@ -208,10 +221,13 @@ void WorkerPool<HandlerType>::StartOneWorker(Worker* worker) {
     }
   }
 
+  qLog(Debug) << "Starting worker" << executable_path_
+              << worker->local_server_->fullServerName();
+
   // Start the process
   worker->process_->setProcessChannelMode(QProcess::ForwardedChannels);
   worker->process_->start(executable_path_,
-                          QStringList() << worker->socket_server_->fullServerName());
+                          QStringList() << worker->local_server_->fullServerName());
 }
 
 template <typename HandlerType>
@@ -223,11 +239,14 @@ void WorkerPool<HandlerType>::NewConnection() {
   if (!worker)
     return;
 
+  qLog(Debug) << "Worker connected to" << server->fullServerName();
+
   // Accept the connection.
   QLocalSocket* socket = server->nextPendingConnection();
 
   // We only ever accept one connection per worker, so destroy the server now.
-  server->deleteLater();
+  socket->setParent(this);
+  worker->local_server_->deleteLater();
   worker->local_server_ = NULL;
 
   // Create the handler.
@@ -250,11 +269,13 @@ void WorkerPool<HandlerType>::ProcessError(QProcess::ProcessError error) {
     // Failed to start errors are bad - it usually means the worker isn't
     // installed.  Don't restart the process, but tell our owner, who will
     // probably want to do something fatal.
+    qLog(Error) << "Worker failed to start";
     emit WorkerFailedToStart();
     break;
 
   default:
     // On any other error we just restart the process.
+    qLog(Debug) << "Worker failed with error" << error << "- restarting";
     StartOneWorker(worker);
     break;
   }
@@ -262,15 +283,19 @@ void WorkerPool<HandlerType>::ProcessError(QProcess::ProcessError error) {
 
 template <typename HandlerType>
 HandlerType* WorkerPool<HandlerType>::NextHandler() {
-  for (int i=0 ; i<workers_.count() ; ++i) {
-    const int worker_index = (next_worker_ + i) % workers_.count();
+  forever {
+    for (int i=0 ; i<workers_.count() ; ++i) {
+      const int worker_index = (next_worker_ + i) % workers_.count();
 
-    if (workers_[worker_index].handler_) {
-      next_worker_ = (worker_index + 1) % workers_.count();
-      return workers_[worker_index].handler_;
+      if (workers_[worker_index].handler_) {
+        next_worker_ = (worker_index + 1) % workers_.count();
+        return workers_[worker_index].handler_;
+      }
     }
+
+    // No workers were connected, wait for one.
+    WaitForSignal(this, SIGNAL(WorkerConnected()));
   }
-  return NULL;
 }
 
 #endif // WORKERPOOL_H

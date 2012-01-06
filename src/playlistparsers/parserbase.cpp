@@ -16,6 +16,7 @@
 */
 
 #include "parserbase.h"
+#include "core/tagreaderclient.h"
 #include "library/librarybackend.h"
 #include "library/libraryquery.h"
 #include "library/sqlrow.h"
@@ -74,7 +75,7 @@ void ParserBase::LoadSong(const QString& filename_or_url, qint64 beginning,
   if (library_song.is_valid()) {
     *song = library_song;
   } else {
-    song->InitFromFile(filename, -1);
+    TagReaderClient::Instance()->ReadFileBlocking(filename, song);
   }
 }
 

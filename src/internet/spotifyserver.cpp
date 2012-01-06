@@ -19,8 +19,8 @@
 #include "core/closure.h"
 #include "core/logging.h"
 
-#include "spotifyblob/common/spotifymessages.pb.h"
-#include "spotifyblob/common/spotifymessagehandler.h"
+#include "spotifymessages.pb.h"
+#include "spotifymessagehandler.h"
 
 #include <QTcpServer>
 #include <QTcpSocket>

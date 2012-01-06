@@ -369,6 +369,14 @@ int main(int argc, char *argv[]) {
   CoverProviders cover_providers;
   cover_providers.AddProvider(new AmazonCoverProvider);
 
+  // Create the tag loader on another thread.
+  TagReaderClient tag_reader_client;
+
+  QThread tag_reader_thread;
+  tag_reader_thread.start();
+  tag_reader_client.moveToThread(&tag_reader_thread);
+  tag_reader_client.Start();
+
   // Create some key objects
   scoped_ptr<BackgroundThread<Database> > database(
       new BackgroundThreadImplementation<Database, Database>(NULL));
@@ -408,9 +416,6 @@ int main(int argc, char *argv[]) {
   GlobalSearchService global_search_service(&global_search);
 #endif
 
-  // Tag reader client
-  TagReaderClient tag_reader_client;
-
   // Window
   MainWindow w(
       database.get(),
@@ -422,8 +427,7 @@ int main(int argc, char *argv[]) {
       &osd,
       &art_loader,
       &cover_providers,
-      &global_search,
-      &tag_reader_client);
+      &global_search);
 #ifdef HAVE_DBUS
   QObject::connect(&mpris, SIGNAL(RaiseMainWindow()), &w, SLOT(Raise()));
 #endif

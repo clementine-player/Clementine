@@ -27,6 +27,7 @@
 #include <QMutex>
 #include <QMutexLocker>
 #include <QObject>
+#include <QSemaphore>
 #include <QThread>
 
 class QAbstractSocket;
@@ -46,10 +47,16 @@ class _MessageReplyBase : public QObject {
   Q_OBJECT
 
 public:
-  _MessageReplyBase(int id, QObject* parent);
+  _MessageReplyBase(int id, QObject* parent = 0);
 
   int id() const { return id_; }
   bool is_finished() const { return finished_; }
+  bool is_successful() const { return success_; }
+
+  // Waits for the reply to finish by waiting on a semaphore.  Never call this
+  // from the MessageHandler's thread or it will block forever.
+  // Returns true if the call was successful.
+  bool WaitForFinished();
 
   void Abort();
 
@@ -59,6 +66,9 @@ signals:
 protected:
   int id_;
   bool finished_;
+  bool success_;
+
+  QSemaphore semaphore_;
 };
 
 
@@ -67,7 +77,7 @@ protected:
 template <typename MessageType>
 class MessageReply : public _MessageReplyBase {
 public:
-  MessageReply(int id, QObject* parent);
+  MessageReply(int id, QObject* parent = 0);
 
   const MessageType& message() const { return message_; }
 
@@ -219,7 +229,7 @@ AbstractMessageHandler<MessageType>::NewReply(
     QMutexLocker l(&mutex_);
 
     const int id = next_id_ ++;
-    reply = new ReplyType(id, this);
+    reply = new ReplyType(id);
     pending_replies_[id] = reply;
   }
 
@@ -260,8 +270,10 @@ void MessageReply<MessageType>::SetReply(const MessageType& message) {
 
   message_.MergeFrom(message);
   finished_ = true;
+  success_ = true;
 
-  emit Finished(true);
+  emit Finished(success_);
+  semaphore_.release();
 }
 
 #endif // MESSAGEHANDLER_H

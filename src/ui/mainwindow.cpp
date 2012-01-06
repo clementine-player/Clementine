@@ -161,7 +161,6 @@ MainWindow::MainWindow(
     ArtLoader* art_loader,
     CoverProviders* cover_providers,
     GlobalSearch* global_search,
-    TagReader* tag_reader_client,
     QWidget* parent)
   : QMainWindow(parent),
     ui_(new Ui_MainWindow),
@@ -178,7 +177,6 @@ MainWindow::MainWindow(
     library_(NULL),
     global_shortcuts_(new GlobalShortcuts(this)),
     global_search_(global_search),
-    tag_reader_client_(tag_reader_client),
     remote_(NULL),
     devices_(NULL),
     library_view_(new LibraryViewContainer(this)),
@@ -1499,21 +1497,24 @@ void MainWindow::RenumberTracks() {
 
     if (song.IsEditable()) {
       song.set_track(track);
-      QFuture<bool> future = song.BackgroundSave();
-      ModelFutureWatcher<bool>* watcher = new ModelFutureWatcher<bool>(source_index, this);
-      watcher->setFuture(future);
-      connect(watcher, SIGNAL(finished()), SLOT(SongSaveComplete()));
+
+      TagReaderReply* reply =
+          TagReaderClient::Instance()->SaveFile(song.url().toLocalFile(), song);
+
+      NewClosure(reply, SIGNAL(Finished(bool)),
+                 this, SLOT(SongSaveComplete(TagReaderReply*,QPersistentModelIndex)),
+                 reply, QPersistentModelIndex(source_index));
     }
     track++;
   }
 }
 
-void MainWindow::SongSaveComplete() {
-  ModelFutureWatcher<bool>* watcher = static_cast<ModelFutureWatcher<bool>*>(sender());
-  watcher->deleteLater();
-  if (watcher->index().isValid()) {
-    playlists_->current()->ReloadItems(QList<int>() << watcher->index().row());
+void MainWindow::SongSaveComplete(TagReaderReply* reply,
+                                  const QPersistentModelIndex& index) {
+  if (reply->is_successful() && index.isValid()) {
+    playlists_->current()->ReloadItems(QList<int>() << index.row());
   }
+  reply->deleteLater();
 }
 
 void MainWindow::SelectionSetValue() {
@@ -1531,10 +1532,12 @@ void MainWindow::SelectionSetValue() {
     Song song = playlists_->current()->item_at(row)->Metadata();
 
     if (Playlist::set_column_value(song, column, column_value)) {
-      QFuture<bool> future = song.BackgroundSave();
-      ModelFutureWatcher<bool>* watcher = new ModelFutureWatcher<bool>(source_index, this);
-      watcher->setFuture(future);
-      connect(watcher, SIGNAL(finished()), SLOT(SongSaveComplete()));
+      TagReaderReply* reply =
+          TagReaderClient::Instance()->SaveFile(song.url().toLocalFile(), song);
+
+      NewClosure(reply, SIGNAL(Finished(bool)),
+                 this, SLOT(SongSaveComplete(TagReaderReply*,QPersistentModelIndex)),
+                 reply, QPersistentModelIndex(source_index));
     }
   }
 }

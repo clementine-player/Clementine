@@ -1,6 +1,8 @@
+#include "blobversion.h"
 #include "config.h"
 #include "internetmodel.h"
 #include "spotifyblobdownloader.h"
+#include "spotifymessagehandler.h"
 #include "spotifyserver.h"
 #include "spotifyservice.h"
 #include "spotifysearchplaylisttype.h"
@@ -15,8 +17,6 @@
 #include "playlist/playlist.h"
 #include "playlist/playlistcontainer.h"
 #include "playlist/playlistmanager.h"
-#include "spotifyblob/common/blobversion.h"
-#include "spotifyblob/common/spotifymessagehandler.h"
 #include "widgets/didyoumean.h"
 #include "ui/iconloader.h"
 

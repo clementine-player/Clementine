@@ -15,13 +15,13 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "spotifymessagehandler.h"
 #include "spotifysearchprovider.h"
 #include "core/logging.h"
 #include "internet/internetmodel.h"
 #include "internet/spotifyserver.h"
 #include "internet/spotifyservice.h"
 #include "playlist/songmimedata.h"
-#include "spotifyblob/common/spotifymessagehandler.h"
 
 SpotifySearchProvider::SpotifySearchProvider(QObject* parent)
   : SearchProvider(parent),

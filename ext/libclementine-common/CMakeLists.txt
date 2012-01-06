@@ -8,6 +8,7 @@ set(SOURCES
   core/encoding.cpp
   core/logging.cpp
   core/messagehandler.cpp
+  core/waitforsignal.cpp
   core/workerpool.cpp
 )
 

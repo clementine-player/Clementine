@@ -26,6 +26,7 @@
 
 #include "config.h"
 #include "core/mac_startup.h"
+#include "core/tagreaderclient.h"
 #include "engines/engine_fwd.h"
 #include "library/librarymodel.h"
 #include "playlist/playlistitem.h"
@@ -68,7 +69,6 @@ class SongInfoBase;
 class SongInfoView;
 class SystemTrayIcon;
 class TagFetcher;
-class TagReaderClient;
 class TaskManager;
 class TrackSelectionDialog;
 class TranscodeDialog;
@@ -93,7 +93,6 @@ class MainWindow : public QMainWindow, public PlatformInterface {
              ArtLoader* art_loader,
              CoverProviders* cover_providers,
              GlobalSearch* global_search,
-             TagReaderClient* tag_reader_client,
              QWidget *parent = 0);
   ~MainWindow();
 
@@ -222,7 +221,8 @@ class MainWindow : public QMainWindow, public PlatformInterface {
 
   void NowPlayingWidgetPositionChanged(bool above_status_bar);
 
-  void SongSaveComplete();
+  void SongSaveComplete(TagReaderReply* reply,
+                        const QPersistentModelIndex& index);
 
   void ShowCoverManager();
 #ifdef HAVE_LIBLASTFM
@@ -281,7 +281,6 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   Library* library_;
   GlobalShortcuts* global_shortcuts_;
   GlobalSearch* global_search_;
-  TagReaderClient* tag_reader_client_;
   Remote* remote_;
 
   DeviceManager* devices_;

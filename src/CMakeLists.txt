@@ -702,6 +702,9 @@ optional_source(HAVE_SPOTIFY
     internet/spotifyserver.h
     internet/spotifyservice.h
     internet/spotifysettingspage.h
+  INCLUDE_DIRECTORIES
+    ${CMAKE_SOURCE_DIR}/ext/libclementine-spotifyblob
+    ${CMAKE_BINARY_DIR}/ext/libclementine-spotifyblob
 )
 
 optional_source(HAVE_QCA INCLUDE_DIRECTORIES ${QCA_INCLUDE_DIRS})
@@ -961,6 +964,7 @@ target_link_libraries(clementine_lib
   libclementine-tagreader
   echoprint
   sha2
+  ${TAGLIB_LIBRARIES}
   ${ECHONEST_LIBRARIES}
   ${GOBJECT_LIBRARIES}
   ${GLIB_LIBRARIES}

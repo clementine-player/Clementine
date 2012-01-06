@@ -208,8 +208,6 @@ class Song {
 
   // Setters
   bool IsEditable() const;
-  bool Save() const;
-  QFuture<bool> BackgroundSave() const;
 
   void set_id(int id);
   void set_valid(bool v);
