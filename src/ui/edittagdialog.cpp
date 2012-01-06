@@ -25,7 +25,6 @@
 #include "covers/coverproviders.h"
 #include "library/library.h"
 #include "library/librarybackend.h"
-#include "musicbrainz/fingerprinter.h"
 #include "playlist/playlistdelegates.h"
 #include "ui/albumcoverchoicecontroller.h"
 #include "ui/coverfromurldialog.h"
@@ -728,11 +727,6 @@ void EditTagDialog::ResetPlayCounts() {
 }
 
 void EditTagDialog::FetchTag() {
-  if (!Fingerprinter::GstreamerHasOfa()) {
-    QMessageBox::warning(this, tr("Error"), tr("Your gstreamer installation is missing the 'ofa' plugin.  This is required for automatic tag fetching.  Try installing the 'gstreamer-plugins-bad' package."));
-    return;
-  }
-
   const QModelIndexList sel = ui_->song_list->selectionModel()->selectedIndexes();
 
   SongList songs;

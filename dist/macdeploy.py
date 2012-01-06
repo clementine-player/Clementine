@@ -76,9 +76,6 @@ GSTREAMER_PLUGINS=[
     # Icecast support
     'libgsticydemux.so',
 
-    # Fingerprinting support
-    'libgstofa.so',
-
     # CD support
     'libgstcdio.so',
 ]

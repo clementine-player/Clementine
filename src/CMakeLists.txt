@@ -182,7 +182,6 @@ set(SOURCES
 
   musicbrainz/chromaprinter.cpp
   musicbrainz/echoprinter.cpp
-  musicbrainz/fingerprinter.cpp
   musicbrainz/musicbrainzclient.cpp
   musicbrainz/musicdnsclient.cpp
   musicbrainz/tagfetcher.cpp
