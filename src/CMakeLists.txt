@@ -961,6 +961,7 @@ add_dependencies(clementine_lib pot)
 
 target_link_libraries(clementine_lib
   chardet
+  chromaprint_p
   echoprint
   sha2
   ${ECHONEST_LIBRARIES}
