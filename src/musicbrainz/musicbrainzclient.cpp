@@ -24,7 +24,7 @@
 #include <QXmlStreamReader>
 #include <QtDebug>
 
-const char* MusicBrainzClient::kTrackUrl = "http://musicbrainz.org/ws/1/track/";
+const char* MusicBrainzClient::kTrackUrl = "http://musicbrainz.org/ws/2/recording/";
 const char* MusicBrainzClient::kDiscUrl = "http://musicbrainz.org/ws/1/release/";
 const int MusicBrainzClient::kDefaultTimeout = 5000; // msec
 
@@ -39,8 +39,7 @@ void MusicBrainzClient::Start(int id, const QString& mbid) {
   typedef QPair<QString, QString> Param;
 
   QList<Param> parameters;
-  parameters << Param("type", "xml")
-             << Param("inc", "artist+releases");
+  parameters << Param("inc", "artists+releases+media");
 
   QUrl url(kTrackUrl + mbid);
   url.setQueryItems(parameters);
@@ -151,7 +150,7 @@ void MusicBrainzClient::RequestFinished() {
 
   QXmlStreamReader reader(reply);
   while (!reader.atEnd()) {
-    if (reader.readNext() == QXmlStreamReader::StartElement && reader.name() == "track") {
+    if (reader.readNext() == QXmlStreamReader::StartElement && reader.name() == "recording") {
       Result track = ParseTrack(&reader);
       if (!track.title_.isEmpty()) {
         ret << track;
@@ -173,7 +172,7 @@ MusicBrainzClient::Result MusicBrainzClient::ParseTrack(QXmlStreamReader* reader
 
       if (name == "title") {
         ret.title_ = reader->readElementText();
-      } else if (name == "duration") {
+      } else if (name == "length") {
         ret.duration_msec_ = reader->readElementText().toInt();
       } else if (name == "artist") {
         ParseArtist(reader, &ret.artist_);
@@ -182,7 +181,7 @@ MusicBrainzClient::Result MusicBrainzClient::ParseTrack(QXmlStreamReader* reader
       }
     }
 
-    if (type == QXmlStreamReader::EndElement && reader->name() == "track") {
+    if (type == QXmlStreamReader::EndElement && reader->name() == "recording") {
       break;
     }
   }
