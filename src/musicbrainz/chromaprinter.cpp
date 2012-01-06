@@ -143,6 +143,8 @@ QString Chromaprinter::CreateFingerprint() {
   qLog(Debug) << "Decode time:" << decode_time << "Codegen time:" << codegen_time;
 
   // Cleanup
+  callbacks.new_buffer = NULL;
+  gst_app_sink_set_callbacks(reinterpret_cast<GstAppSink*>(sink), &callbacks, this, NULL);
   gst_bus_set_sync_handler(gst_pipeline_get_bus(GST_PIPELINE(pipeline_)), NULL, NULL);
   g_source_remove(bus_callback_id);
   gst_object_unref(pipeline_);
