@@ -87,17 +87,19 @@ Section "Delete old files" oldfiles
   Delete "$INSTDIR\libgstrtsp-0.10.dll"
   Delete "$INSTDIR\libgstsdp-0.10.dll"
   Delete "$INSTDIR\libgsttag-0.10.dll"
-  Delete "$INSTDIR\libofa.dll"
   Delete "$INSTDIR\libxml2.dll"
   Delete "$INSTDIR\z.dll"
   Delete "$INSTDIR\gstreamer-plugins\libgstasfdemux.dll"
   Delete "$INSTDIR\gstreamer-plugins\libgstffmpeg-gpl.dll"
-  Delete "$INSTDIR\gstreamer-plugins\libgstofa.dll"
   Delete "$INSTDIR\gstreamer-plugins\libgstqueue2.dll"
   Delete "$INSTDIR\gstreamer-plugins\libgstsoup.dll"
 
   ; 1.0 prerelease
   Delete "$INSTDIR\spotify.dll"
+
+  ; 1.0
+  Delete "$INSTDIR\libofa.dll"
+  Delete "$INSTDIR\gstreamer-plugins\libgstofa.dll"
 SectionEnd
 
 Section "Clementine" Clementine
