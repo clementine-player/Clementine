@@ -180,9 +180,9 @@ set(SOURCES
   library/librarywatcher.cpp
   library/sqlrow.cpp
 
+  musicbrainz/acoustidclient.cpp
   musicbrainz/chromaprinter.cpp
   musicbrainz/musicbrainzclient.cpp
-  musicbrainz/musicdnsclient.cpp
   musicbrainz/tagfetcher.cpp
 
   playlist/dynamicplaylistcontrols.cpp
@@ -417,8 +417,8 @@ set(HEADERS
   library/libraryviewcontainer.h
   library/librarywatcher.h
 
+  musicbrainz/acoustidclient.h
   musicbrainz/musicbrainzclient.h
-  musicbrainz/musicdnsclient.h
   musicbrainz/tagfetcher.h
 
   playlist/dynamicplaylistcontrols.h
