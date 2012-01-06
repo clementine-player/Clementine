@@ -15,8 +15,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef MUSICDNSCLIENT_H
-#define MUSICDNSCLIENT_H
+#ifndef ACOUSTIDCLIENT_H
+#define ACOUSTIDCLIENT_H
 
 #include <QMap>
 #include <QObject>
@@ -26,19 +26,19 @@ class NetworkTimeouts;
 class QNetworkAccessManager;
 class QNetworkReply;
 
-class MusicDnsClient : public QObject {
+class AcoustidClient : public QObject {
   Q_OBJECT
 
   // Gets a MBID from a Chromaprint fingerprint.
   // A fingerprint identifies one particular encoding of a song and is created
   // by Fingerprinter.  An MBID identifies the actual song and can be passed to
   // Musicbrainz to get metadata.
-  // You can create one MusicDnsClient and make multiple requests using it.
+  // You can create one AcoustidClient and make multiple requests using it.
   // IDs are provided by the caller when a request is started and included in
-  // the Finished signal - they have no meaning to MusicDnsClient.
+  // the Finished signal - they have no meaning to AcoustidClient.
 
 public:
-  MusicDnsClient(QObject* parent = 0);
+  AcoustidClient(QObject* parent = 0);
 
   // Network requests will be aborted after this interval.
   void SetTimeout(int msec);
@@ -71,4 +71,4 @@ private:
   QMap<QNetworkReply*, int> requests_;
 };
 
-#endif // MUSICDNSCLIENT_H
+#endif // ACOUSTIDCLIENT_H

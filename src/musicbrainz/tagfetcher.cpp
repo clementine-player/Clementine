@@ -17,9 +17,9 @@
 
 #include "tagfetcher.h"
 
+#include "acoustidclient.h"
 #include "chromaprinter.h"
 #include "musicbrainzclient.h"
-#include "musicdnsclient.h"
 #include "core/timeconstants.h"
 
 #include <QFuture>
@@ -30,10 +30,10 @@
 TagFetcher::TagFetcher(QObject* parent)
   : QObject(parent),
     fingerprint_watcher_(NULL),
-    musicdns_client_(new MusicDnsClient(this)),
+    acoustid_client_(new AcoustidClient(this)),
     musicbrainz_client_(new MusicBrainzClient(this))
 {
-  connect(musicdns_client_, SIGNAL(Finished(int,QString)), SLOT(PuidFound(int,QString)));
+  connect(acoustid_client_, SIGNAL(Finished(int,QString)), SLOT(PuidFound(int,QString)));
   connect(musicbrainz_client_, SIGNAL(Finished(int,MusicBrainzClient::ResultList)), SLOT(TagsFetched(int,MusicBrainzClient::ResultList)));
 }
 
@@ -64,7 +64,7 @@ void TagFetcher::Cancel() {
     fingerprint_watcher_ = NULL;
   }
 
-  musicdns_client_->CancelAll();
+  acoustid_client_->CancelAll();
   musicbrainz_client_->CancelAll();
   songs_.clear();
 }
@@ -84,7 +84,7 @@ void TagFetcher::FingerprintFound(int index) {
   }
 
   emit Progress(song, tr("Identifying song"));
-  musicdns_client_->Start(index, fingerprint, song.length_nanosec() / kNsecPerMsec);
+  acoustid_client_->Start(index, fingerprint, song.length_nanosec() / kNsecPerMsec);
 }
 
 void TagFetcher::PuidFound(int index, const QString& puid) {

@@ -15,7 +15,7 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "musicdnsclient.h"
+#include "acoustidclient.h"
 
 #include <QCoreApplication>
 #include <QNetworkReply>
@@ -26,22 +26,22 @@
 #include "core/network.h"
 #include "core/timeconstants.h"
 
-const char* MusicDnsClient::kClientId = "qsZGpeLx";
-const char* MusicDnsClient::kUrl = "http://api.acoustid.org/v2/lookup";
-const int MusicDnsClient::kDefaultTimeout = 5000; // msec
+const char* AcoustidClient::kClientId = "qsZGpeLx";
+const char* AcoustidClient::kUrl = "http://api.acoustid.org/v2/lookup";
+const int AcoustidClient::kDefaultTimeout = 5000; // msec
 
-MusicDnsClient::MusicDnsClient(QObject* parent)
+AcoustidClient::AcoustidClient(QObject* parent)
   : QObject(parent),
     network_(new NetworkAccessManager(this)),
     timeouts_(new NetworkTimeouts(kDefaultTimeout, this))
 {
 }
 
-void MusicDnsClient::SetTimeout(int msec) {
+void AcoustidClient::SetTimeout(int msec) {
   timeouts_->SetTimeout(msec);
 }
 
-void MusicDnsClient::Start(int id, const QString& fingerprint, int duration_msec) {
+void AcoustidClient::Start(int id, const QString& fingerprint, int duration_msec) {
   typedef QPair<QString, QString> Param;
 
   QList<Param> parameters;
@@ -62,18 +62,18 @@ void MusicDnsClient::Start(int id, const QString& fingerprint, int duration_msec
   timeouts_->AddReply(reply);
 }
 
-void MusicDnsClient::Cancel(int id) {
+void AcoustidClient::Cancel(int id) {
   QNetworkReply* reply = requests_.key(id);
   requests_.remove(reply);
   delete reply;
 }
 
-void MusicDnsClient::CancelAll() {
+void AcoustidClient::CancelAll() {
   qDeleteAll(requests_.keys());
   requests_.clear();
 }
 
-void MusicDnsClient::RequestFinished() {
+void AcoustidClient::RequestFinished() {
   QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
   if (!reply)
     return;
