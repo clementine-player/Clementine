@@ -35,14 +35,14 @@ MusicBrainzClient::MusicBrainzClient(QObject* parent)
 {
 }
 
-void MusicBrainzClient::Start(int id, const QString& puid) {
+void MusicBrainzClient::Start(int id, const QString& mbid) {
   typedef QPair<QString, QString> Param;
 
   QList<Param> parameters;
   parameters << Param("type", "xml")
-             << Param("puid", puid);
+             << Param("inc", "artist+releases");
 
-  QUrl url(kTrackUrl);
+  QUrl url(kTrackUrl + mbid);
   url.setQueryItems(parameters);
   QNetworkRequest req(url);
 

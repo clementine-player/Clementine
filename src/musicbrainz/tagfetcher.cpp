@@ -15,10 +15,11 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "fingerprinter.h"
+#include "tagfetcher.h"
+
+#include "chromaprinter.h"
 #include "musicbrainzclient.h"
 #include "musicdnsclient.h"
-#include "tagfetcher.h"
 #include "core/timeconstants.h"
 
 #include <QFuture>
@@ -37,7 +38,7 @@ TagFetcher::TagFetcher(QObject* parent)
 }
 
 QString TagFetcher::GetFingerprint(const Song& song) {
-  return Fingerprinter(song.url().toLocalFile()).CreateFingerprint();
+  return Chromaprinter(song.url().toLocalFile()).CreateFingerprint();
 }
 
 void TagFetcher::StartFetch(const SongList& songs) {
