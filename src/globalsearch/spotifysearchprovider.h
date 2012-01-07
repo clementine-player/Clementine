@@ -19,7 +19,7 @@
 #define SPOTIFYSEARCHPROVIDER_H
 
 #include "searchprovider.h"
-#include "spotifyblob/common/spotifymessages.pb.h"
+#include "spotifymessages.pb.h"
 
 class SpotifyServer;
 class SpotifyService;
@@ -40,10 +40,10 @@ public:
 
 private slots:
   void ServerDestroyed();
-  void SearchFinishedSlot(const spotify_pb::SearchResponse& response);
+  void SearchFinishedSlot(const pb::spotify::SearchResponse& response);
   void ArtLoadedSlot(const QString& id, const QImage& image);
 
-  void AlbumBrowseResponse(const spotify_pb::BrowseAlbumResponse& response);
+  void AlbumBrowseResponse(const pb::spotify::BrowseAlbumResponse& response);
 
 private:
   SpotifyServer* server();

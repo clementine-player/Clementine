@@ -35,7 +35,7 @@ public:
   TagReaderClient(QObject* parent = 0);
 
   typedef AbstractMessageHandler<pb::tagreader::Message> HandlerType;
-  typedef typename HandlerType::ReplyType ReplyType;
+  typedef HandlerType::ReplyType ReplyType;
 
   static const char* kWorkerExecutableName;
 

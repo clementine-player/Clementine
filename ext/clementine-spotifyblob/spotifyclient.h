@@ -49,12 +49,12 @@ public:
   void Init(quint16 port);
 
 private slots:
-  void HandleMessage(const spotify_pb::SpotifyMessage& message);
+  void HandleMessage(const pb::spotify::SpotifyMessage& message);
   void ProcessEvents();
 
 private:
   void SendLoginCompleted(bool success, const QString& error,
-                          spotify_pb::LoginResponse_Error error_code);
+                          pb::spotify::LoginResponse_Error error_code);
   void SendPlaybackError(const QString& error);
   void SendSearchResponse(sp_search* result);
 
@@ -103,35 +103,35 @@ private:
   static void SP_CALLCONV AlbumBrowseComplete(sp_albumbrowse* result, void* userdata);
 
   // Request handlers.
-  void Login(const spotify_pb::LoginRequest& req);
-  void Search(const spotify_pb::SearchRequest& req);
-  void LoadPlaylist(const spotify_pb::LoadPlaylistRequest& req);
-  void SyncPlaylist(const spotify_pb::SyncPlaylistRequest& req);
-  void StartPlayback(const spotify_pb::PlaybackRequest& req);
+  void Login(const pb::spotify::LoginRequest& req);
+  void Search(const pb::spotify::SearchRequest& req);
+  void LoadPlaylist(const pb::spotify::LoadPlaylistRequest& req);
+  void SyncPlaylist(const pb::spotify::SyncPlaylistRequest& req);
+  void StartPlayback(const pb::spotify::PlaybackRequest& req);
   void Seek(qint64 offset_bytes);
   void LoadImage(const QString& id_b64);
   void BrowseAlbum(const QString& uri);
-  void SetPlaybackSettings(const spotify_pb::PlaybackSettings& req);
+  void SetPlaybackSettings(const pb::spotify::PlaybackSettings& req);
 
   void SendPlaylistList();
 
-  void ConvertTrack(sp_track* track, spotify_pb::Track* pb);
-  void ConvertAlbum(sp_album* album, spotify_pb::Track* pb);
-  void ConvertAlbumBrowse(sp_albumbrowse* browse, spotify_pb::Track* pb);
+  void ConvertTrack(sp_track* track, pb::spotify::Track* pb);
+  void ConvertAlbum(sp_album* album, pb::spotify::Track* pb);
+  void ConvertAlbumBrowse(sp_albumbrowse* browse, pb::spotify::Track* pb);
 
   // Gets the appropriate sp_playlist* but does not load it.
-  sp_playlist* GetPlaylist(spotify_pb::PlaylistType type, int user_index);
+  sp_playlist* GetPlaylist(pb::spotify::PlaylistType type, int user_index);
 
 private:
   struct PendingLoadPlaylist {
-    spotify_pb::LoadPlaylistRequest request_;
+    pb::spotify::LoadPlaylistRequest request_;
     sp_playlist* playlist_;
     QList<sp_track*> tracks_;
     bool offline_sync;
   };
 
   struct PendingPlaybackRequest {
-    spotify_pb::PlaybackRequest request_;
+    pb::spotify::PlaybackRequest request_;
     sp_link* link_;
     sp_track* track_;
 
@@ -150,7 +150,7 @@ private:
   void TryPlaybackAgain(const PendingPlaybackRequest& req);
   void TryImageAgain(sp_image* image);
   int GetDownloadProgress(sp_playlist* playlist);
-  void SendDownloadProgress(spotify_pb::PlaylistType type, int index, int download_progress);
+  void SendDownloadProgress(pb::spotify::PlaylistType type, int index, int download_progress);
 
   QByteArray api_key_;
 
@@ -170,7 +170,7 @@ private:
   QList<PendingPlaybackRequest> pending_playback_requests_;
   QList<PendingImageRequest> pending_image_requests_;
   QMap<sp_image*, int> image_callbacks_registered_;
-  QMap<sp_search*, spotify_pb::SearchRequest> pending_searches_;
+  QMap<sp_search*, pb::spotify::SearchRequest> pending_searches_;
   QMap<sp_albumbrowse*, QString> pending_album_browses_;
 
   QMap<sp_search*, QList<sp_albumbrowse*> > pending_search_album_browses_;

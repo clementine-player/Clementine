@@ -52,7 +52,7 @@ void SpotifyMessageHandler::DeviceReadyRead() {
     // Did we get everything?
     if (buffer_.size() == expected_length_) {
       // Parse the message
-      spotify_pb::SpotifyMessage message;
+      pb::spotify::SpotifyMessage message;
       if (!message.ParseFromArray(buffer_.data().constData(), buffer_.size())) {
         qLog(Error) << "Malformed protobuf message";
         device_->close();
@@ -70,12 +70,12 @@ void SpotifyMessageHandler::DeviceReadyRead() {
   }
 }
 
-void SpotifyMessageHandler::SendMessage(const spotify_pb::SpotifyMessage& message) {
+void SpotifyMessageHandler::SendMessage(const pb::spotify::SpotifyMessage& message) {
   std::string data = message.SerializeAsString();
   WriteMessage(QByteArray(data.data(), data.size()));
 }
 
-void SpotifyMessageHandler::SendMessageAsync(const spotify_pb::SpotifyMessage& message) {
+void SpotifyMessageHandler::SendMessageAsync(const pb::spotify::SpotifyMessage& message) {
   std::string data = message.SerializeAsString();
   metaObject()->invokeMethod(this, "WriteMessage", Qt::QueuedConnection,
                              Q_ARG(QByteArray, QByteArray(data.data(), data.size())));

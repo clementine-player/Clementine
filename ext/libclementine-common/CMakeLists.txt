@@ -34,6 +34,7 @@ endif(PROTOBUF_LITE_LIBRARY AND USE_PROTOBUF_LITE)
 
 target_link_libraries(libclementine-common
   ${protobuf}
+  ${TAGLIB_LIBRARIES}
   ${CMAKE_THREAD_LIBS_INIT}
   chardet
 )

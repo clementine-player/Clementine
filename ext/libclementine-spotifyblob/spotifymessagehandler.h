@@ -27,8 +27,10 @@
 
 class QAbstractSocket;
 
-namespace spotify_pb {
-  class SpotifyMessage;
+namespace pb {
+  namespace spotify {
+    class SpotifyMessage;
+  }
 }
 
 
@@ -44,11 +46,11 @@ class SpotifyMessageHandler : public QObject {
 public:
   SpotifyMessageHandler(QAbstractSocket* device, QObject* parent);
 
-  void SendMessage(const spotify_pb::SpotifyMessage& message);
-  void SendMessageAsync(const spotify_pb::SpotifyMessage& message);
+  void SendMessage(const pb::spotify::SpotifyMessage& message);
+  void SendMessageAsync(const pb::spotify::SpotifyMessage& message);
 
 signals:
-  void MessageArrived(const spotify_pb::SpotifyMessage& message);
+  void MessageArrived(const pb::spotify::SpotifyMessage& message);
 
 private slots:
   void WriteMessage(const QByteArray& data);

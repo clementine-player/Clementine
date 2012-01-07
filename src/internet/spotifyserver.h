@@ -18,7 +18,7 @@
 #ifndef SPOTIFYSERVER_H
 #define SPOTIFYSERVER_H
 
-#include "spotifyblob/common/spotifymessages.pb.h"
+#include "spotifymessages.pb.h"
 
 #include <QImage>
 #include <QObject>
@@ -36,7 +36,7 @@ public:
 
   void Init();
   void Login(const QString& username, const QString& password,
-             spotify_pb::Bitrate bitrate, bool volume_normalisation);
+             pb::spotify::Bitrate bitrate, bool volume_normalisation);
 
   void LoadStarred();
   void SyncStarred();
@@ -48,7 +48,7 @@ public:
   void Search(const QString& text, int limit, int limit_album = 0);
   void LoadImage(const QString& id);
   void AlbumBrowse(const QString& uri);
-  void SetPlaybackSettings(spotify_pb::Bitrate bitrate, bool volume_normalisation);
+  void SetPlaybackSettings(pb::spotify::Bitrate bitrate, bool volume_normalisation);
 
   int server_port() const;
 
@@ -58,34 +58,34 @@ public slots:
 
 signals:
   void LoginCompleted(bool success, const QString& error,
-                      spotify_pb::LoginResponse_Error error_code);
-  void PlaylistsUpdated(const spotify_pb::Playlists& playlists);
+                      pb::spotify::LoginResponse_Error error_code);
+  void PlaylistsUpdated(const pb::spotify::Playlists& playlists);
 
-  void StarredLoaded(const spotify_pb::LoadPlaylistResponse& response);
-  void InboxLoaded(const spotify_pb::LoadPlaylistResponse& response);
-  void UserPlaylistLoaded(const spotify_pb::LoadPlaylistResponse& response);
+  void StarredLoaded(const pb::spotify::LoadPlaylistResponse& response);
+  void InboxLoaded(const pb::spotify::LoadPlaylistResponse& response);
+  void UserPlaylistLoaded(const pb::spotify::LoadPlaylistResponse& response);
   void PlaybackError(const QString& message);
-  void SearchResults(const spotify_pb::SearchResponse& response);
+  void SearchResults(const pb::spotify::SearchResponse& response);
   void ImageLoaded(const QString& id, const QImage& image);
-  void SyncPlaylistProgress(const spotify_pb::SyncPlaylistProgress& progress);
-  void AlbumBrowseResults(const spotify_pb::BrowseAlbumResponse& response);
+  void SyncPlaylistProgress(const pb::spotify::SyncPlaylistProgress& progress);
+  void AlbumBrowseResults(const pb::spotify::BrowseAlbumResponse& response);
 
 private slots:
   void NewConnection();
-  void HandleMessage(const spotify_pb::SpotifyMessage& message);
+  void HandleMessage(const pb::spotify::SpotifyMessage& message);
 
 private:
-  void LoadPlaylist(spotify_pb::PlaylistType type, int index = -1);
-  void SyncPlaylist(spotify_pb::PlaylistType type, int index, bool offline);
-  void SendMessage(const spotify_pb::SpotifyMessage& message);
+  void LoadPlaylist(pb::spotify::PlaylistType type, int index = -1);
+  void SyncPlaylist(pb::spotify::PlaylistType type, int index, bool offline);
+  void SendMessage(const pb::spotify::SpotifyMessage& message);
 
   QTcpServer* server_;
   QTcpSocket* protocol_socket_;
   SpotifyMessageHandler* handler_;
   bool logged_in_;
 
-  QList<spotify_pb::SpotifyMessage> queued_login_messages_;
-  QList<spotify_pb::SpotifyMessage> queued_messages_;
+  QList<pb::spotify::SpotifyMessage> queued_login_messages_;
+  QList<pb::spotify::SpotifyMessage> queued_messages_;
 };
 
 #endif // SPOTIFYSERVER_H

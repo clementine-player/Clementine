@@ -44,12 +44,12 @@ SpotifyServer* SpotifySearchProvider::server() {
     return NULL;
 
   server_ = service_->server();
-  connect(server_, SIGNAL(SearchResults(spotify_pb::SearchResponse)),
-          SLOT(SearchFinishedSlot(spotify_pb::SearchResponse)));
+  connect(server_, SIGNAL(SearchResults(pb::spotify::SearchResponse)),
+          SLOT(SearchFinishedSlot(pb::spotify::SearchResponse)));
   connect(server_, SIGNAL(ImageLoaded(QString,QImage)),
           SLOT(ArtLoadedSlot(QString,QImage)));
-  connect(server_, SIGNAL(AlbumBrowseResults(spotify_pb::BrowseAlbumResponse)),
-          SLOT(AlbumBrowseResponse(spotify_pb::BrowseAlbumResponse)));
+  connect(server_, SIGNAL(AlbumBrowseResults(pb::spotify::BrowseAlbumResponse)),
+          SLOT(AlbumBrowseResponse(pb::spotify::BrowseAlbumResponse)));
   connect(server_, SIGNAL(destroyed()), SLOT(ServerDestroyed()));
 
   return server_;
@@ -75,7 +75,7 @@ void SpotifySearchProvider::SearchAsync(int id, const QString& query) {
   queries_[query_string] = state;
 }
 
-void SpotifySearchProvider::SearchFinishedSlot(const spotify_pb::SearchResponse& response) {
+void SpotifySearchProvider::SearchFinishedSlot(const pb::spotify::SearchResponse& response) {
   QString query_string = QString::fromUtf8(response.request().query().c_str());
   QMap<QString, PendingState>::iterator it = queries_.find(query_string);
   if (it == queries_.end())
@@ -86,7 +86,7 @@ void SpotifySearchProvider::SearchFinishedSlot(const spotify_pb::SearchResponse&
 
   ResultList ret;
   for (int i=0; i < response.result_size() ; ++i) {
-    const spotify_pb::Track& track = response.result(i);
+    const pb::spotify::Track& track = response.result(i);
 
     Result result(this);
     result.type_ = globalsearch::Type_Track;
@@ -97,7 +97,7 @@ void SpotifySearchProvider::SearchFinishedSlot(const spotify_pb::SearchResponse&
   }
 
   for (int i=0 ; i<response.album_size() ; ++i) {
-    const spotify_pb::Album& album = response.album(i);
+    const pb::spotify::Album& album = response.album(i);
 
     Result result(this);
     result.type_ = globalsearch::Type_Album;
@@ -174,7 +174,7 @@ void SpotifySearchProvider::LoadTracksAsync(int id, const Result& result) {
   }
 }
 
-void SpotifySearchProvider::AlbumBrowseResponse(const spotify_pb::BrowseAlbumResponse& response) {
+void SpotifySearchProvider::AlbumBrowseResponse(const pb::spotify::BrowseAlbumResponse& response) {
   QString uri = QStringFromStdString(response.uri());
   QMap<QString, int>::iterator it = pending_tracks_.find(uri);
   if (it == pending_tracks_.end())
