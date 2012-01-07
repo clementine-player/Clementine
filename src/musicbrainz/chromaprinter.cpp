@@ -22,7 +22,7 @@
 #include <QtDebug>
 #include <QTime>
 
-#include "3rdparty/chromaprint/src/chromaprint.h"
+#include <chromaprint.h>
 
 #include "core/logging.h"
 #include "core/timeconstants.h"
