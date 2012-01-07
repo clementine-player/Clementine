@@ -26,6 +26,7 @@ include_directories(${QTSINGLEAPPLICATION_INCLUDE_DIRS})
 include_directories(${QTIOCOMPRESSOR_INCLUDE_DIRS})
 include_directories(${QXT_INCLUDE_DIRS})
 include_directories(${ECHONEST_INCLUDE_DIRS})
+include_directories(${CHROMAPRINT_INCLUDE_DIRS})
 
 find_package(OpenGL)
 include_directories(${OPENGL_INCLUDE_DIR})
@@ -960,8 +961,8 @@ add_dependencies(clementine_lib pot)
 
 target_link_libraries(clementine_lib
   chardet
-  chromaprint_p
   sha2
+  ${CHROMAPRINT_LIBRARIES}
   ${ECHONEST_LIBRARIES}
   ${GOBJECT_LIBRARIES}
   ${GLIB_LIBRARIES}
