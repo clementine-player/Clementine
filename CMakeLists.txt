@@ -361,6 +361,10 @@ if(NOT CHROMAPRINT_FOUND)
   add_subdirectory(3rdparty/chromaprint)
   set(CHROMAPRINT_LIBRARIES chromaprint_p)
   set(CHROMAPRINT_INCLUDE_DIRS ${CMAKE_SOURCE_DIR}/3rdparty/chromaprint/src)
+
+  if(WIN32)
+    add_definitions(-DCHROMAPRINT_NODLL)
+  endif(WIN32)
 endif(NOT CHROMAPRINT_FOUND)
 
 # Subdirectories
