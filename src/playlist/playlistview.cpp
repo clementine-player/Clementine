@@ -141,7 +141,6 @@ PlaylistView::PlaylistView(QWidget *parent)
 }
 
 void PlaylistView::SetItemDelegates(LibraryBackend* backend) {
-  Q_ASSERT(player_);
   rating_delegate_ = new RatingItemDelegate(this);
 
   setItemDelegate(new PlaylistDelegateBase(this));
@@ -167,7 +166,12 @@ void PlaylistView::SetItemDelegates(LibraryBackend* backend) {
   setItemDelegateForColumn(Playlist::Column_Filename, new NativeSeparatorsDelegate(this));
   setItemDelegateForColumn(Playlist::Column_Rating, rating_delegate_);
   setItemDelegateForColumn(Playlist::Column_LastPlayed, new LastPlayedItemDelegate(this));
-  setItemDelegateForColumn(Playlist::Column_Source, new SongSourceDelegate(this, player_));
+  
+  if (player_) {
+    setItemDelegateForColumn(Playlist::Column_Source, new SongSourceDelegate(this, player_));
+  } else {
+    header_->HideSection(Playlist::Column_Source);
+  }
 }
 
 void PlaylistView::SetPlaylist(Playlist* playlist) {

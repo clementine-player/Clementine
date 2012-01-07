@@ -69,6 +69,7 @@ pkg_check_modules(INDICATEQT indicate-qt)
 pkg_check_modules(SPOTIFY libspotify>=10.1.16)
 pkg_check_modules(CDIO libcdio)
 pkg_check_modules(QCA qca2)
+pkg_check_modules(CHROMAPRINT libchromaprint)
 
 if (WIN32)
   find_package(ZLIB REQUIRED)
@@ -355,12 +356,22 @@ if(GMOCK_INCLUDE_DIRS)
   endif(GTEST_INCLUDE_DIRS)
 endif(GMOCK_INCLUDE_DIRS)
 
+# Use our 3rdparty chromaprint if a system one wasn't found
+if(NOT CHROMAPRINT_FOUND)
+  add_subdirectory(3rdparty/chromaprint)
+  set(CHROMAPRINT_LIBRARIES chromaprint_p)
+  set(CHROMAPRINT_INCLUDE_DIRS ${CMAKE_SOURCE_DIR}/3rdparty/chromaprint/src)
+
+  if(WIN32)
+    add_definitions(-DCHROMAPRINT_NODLL)
+  endif(WIN32)
+endif(NOT CHROMAPRINT_FOUND)
+
 # Subdirectories
 add_subdirectory(src)
 if (WIN32)
   add_subdirectory(3rdparty/qtwin)
 endif (WIN32)
-add_subdirectory(3rdparty/echoprint-codegen)
 add_subdirectory(3rdparty/sha2)
 add_subdirectory(3rdparty/universalchardet)
 add_subdirectory(tests)

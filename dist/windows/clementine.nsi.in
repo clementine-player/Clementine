@@ -96,6 +96,10 @@ Section "Delete old files" oldfiles
 
   ; 1.0 prerelease
   Delete "$INSTDIR\spotify.dll"
+
+  ; 1.0
+  Delete "$INSTDIR\libofa.dll"
+  Delete "$INSTDIR\gstreamer-plugins\libgstofa.dll"
 SectionEnd
 
 Section "Clementine" Clementine
@@ -149,7 +153,6 @@ Section "Clementine" Clementine
   File "libmad.dll"
   File "libmms-0.dll"
   File "libmp3lame-0.dll"
-  File "libofa.dll"
   File "libogg-0.dll"
   File "liboil-0.3-0.dll"
   File "liborc-0.4-0.dll"
@@ -267,7 +270,6 @@ Section "Gstreamer plugins" gstreamer-plugins
   File "/oname=libgstmad.dll" "gstreamer-plugins\libgstmad.dll"
   File "/oname=libgstmms.dll" "gstreamer-plugins\libgstmms.dll"
   File "/oname=libgstmpegaudioparse.dll" "gstreamer-plugins\libgstmpegaudioparse.dll"
-  File "/oname=libgstofa.dll" "gstreamer-plugins\libgstofa.dll"
   File "/oname=libgstogg.dll" "gstreamer-plugins\libgstogg.dll"
   File "/oname=libgstqtdemux.dll" "gstreamer-plugins\libgstqtdemux.dll"
   File "/oname=libgstreplaygain.dll" "gstreamer-plugins\libgstreplaygain.dll"
@@ -990,7 +992,6 @@ Section "Uninstall"
   Delete "$INSTDIR\libmad.dll"
   Delete "$INSTDIR\libmms-0.dll"
   Delete "$INSTDIR\libmp3lame-0.dll"
-  Delete "$INSTDIR\libofa.dll"
   Delete "$INSTDIR\libogg-0.dll"
   Delete "$INSTDIR\liboil-0.3-0.dll"
   Delete "$INSTDIR\liborc-0.4-0.dll"
@@ -1048,7 +1049,6 @@ Section "Uninstall"
   Delete "$INSTDIR\gstreamer-plugins\libgstmad.dll"
   Delete "$INSTDIR\gstreamer-plugins\libgstmms.dll"
   Delete "$INSTDIR\gstreamer-plugins\libgstmpegaudioparse.dll"
-  Delete "$INSTDIR\gstreamer-plugins\libgstofa.dll"
   Delete "$INSTDIR\gstreamer-plugins\libgstogg.dll"
   Delete "$INSTDIR\gstreamer-plugins\libgstqtdemux.dll"
   Delete "$INSTDIR\gstreamer-plugins\libgstreplaygain.dll"

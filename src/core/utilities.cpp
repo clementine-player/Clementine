@@ -32,6 +32,7 @@
 #include <QTemporaryFile>
 #include <QUrl>
 #include <QWidget>
+#include <QXmlStreamReader>
 #include <QtDebug>
 #include <QtGlobal>
 
@@ -379,6 +380,17 @@ quint16 PickUnusedPort() {
     QTcpServer server;
     if (server.listen(QHostAddress::Any, port)) {
       return port;
+    }
+  }
+}
+
+void ConsumeCurrentElement(QXmlStreamReader* reader) {
+  int level = 1;
+  while (level != 0 && !reader->atEnd()) {
+    switch (reader->readNext()) {
+      case QXmlStreamReader::StartElement: ++level; break;
+      case QXmlStreamReader::EndElement:   --level; break;
+      default: break;
     }
   }
 }

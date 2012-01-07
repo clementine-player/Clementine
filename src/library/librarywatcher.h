@@ -21,6 +21,7 @@
 #include "directory.h"
 #include "core/song.h"
 
+#include <QHash>
 #include <QObject>
 #include <QStringList>
 #include <QMap>
@@ -29,6 +30,7 @@ class QFileSystemWatcher;
 class QTimer;
 
 class CueParser;
+class FileSystemWatcherInterface;
 class LibraryBackend;
 class TaskManager;
 
@@ -42,8 +44,9 @@ class LibraryWatcher : public QObject {
 
   void set_backend(LibraryBackend* backend) { backend_ = backend; }
   void set_task_manager(TaskManager* task_manager) { task_manager_ = task_manager; }
+  void set_filesystem_watcher(FileSystemWatcherInterface* watcher) { fs_watcher_ = watcher; }
   void set_device_name(const QString& device_name) { device_name_ = device_name; }
-  
+
   void IncrementalScanAsync();
   void FullScanAsync();
   void SetRescanPausedAsync(bool pause);
@@ -138,13 +141,18 @@ class LibraryWatcher : public QObject {
                         ScanTransaction* t, bool force_noincremental = false);
 
  private:
+  // One of these gets stored for each Directory we're watching
+  struct DirData {
+    Directory dir;
+  };
+
   static bool FindSongByPath(const SongList& list, const QString& path, Song* out);
   inline static QString NoExtensionPart( const QString &fileName );
   inline static QString ExtensionPart( const QString &fileName );
   inline static QString DirectoryPart( const QString &fileName );
   QString PickBestImage(const QStringList& images);
   QString ImageForSong(const QString& path, QMap<QString, QStringList>& album_art);
-  void AddWatch(QFileSystemWatcher* w, const QString& path);
+  void AddWatch(const DirData& dir, const QString& path);
   uint GetMtimeForCue(const QString& cue_path);
   void PerformScan(bool incremental, bool ignore_mtimes);
 
@@ -169,23 +177,20 @@ class LibraryWatcher : public QObject {
                        const QString& matching_cue, QSet<QString>* cues_processed);
 
  private:
-  // One of these gets stored for each Directory we're watching
-  struct DirData {
-    Directory dir;
-    QFileSystemWatcher* watcher;
-  };
-
   LibraryBackend* backend_;
   TaskManager* task_manager_;
   QString device_name_;
-  
+
+  FileSystemWatcherInterface* fs_watcher_;
+  QHash<QString, DirData> subdir_mapping_;
+
   /* A list of words use to try to identify the (likely) best image 
    * found in an directory to use as cover artwork.
    * e.g. using ["front", "cover"] would identify front.jpg and
    * exclude back.jpg.
    */
   QStringList best_image_filters_; 
-  
+
   bool stop_requested_;
   bool scan_on_startup_;
   bool monitor_;
@@ -200,10 +205,6 @@ class LibraryWatcher : public QObject {
   CueParser* cue_parser_;
 
   static QStringList sValidImages;
-
-  #ifdef Q_OS_DARWIN
-  static const int kMaxWatches = 100;
-  #endif
 };
 
 inline QString LibraryWatcher::NoExtensionPart( const QString &fileName ) {

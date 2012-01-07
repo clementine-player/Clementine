@@ -15,10 +15,11 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "fingerprinter.h"
-#include "musicbrainzclient.h"
-#include "musicdnsclient.h"
 #include "tagfetcher.h"
+
+#include "acoustidclient.h"
+#include "chromaprinter.h"
+#include "musicbrainzclient.h"
 #include "core/timeconstants.h"
 
 #include <QFuture>
@@ -29,15 +30,15 @@
 TagFetcher::TagFetcher(QObject* parent)
   : QObject(parent),
     fingerprint_watcher_(NULL),
-    musicdns_client_(new MusicDnsClient(this)),
+    acoustid_client_(new AcoustidClient(this)),
     musicbrainz_client_(new MusicBrainzClient(this))
 {
-  connect(musicdns_client_, SIGNAL(Finished(int,QString)), SLOT(PuidFound(int,QString)));
+  connect(acoustid_client_, SIGNAL(Finished(int,QString)), SLOT(PuidFound(int,QString)));
   connect(musicbrainz_client_, SIGNAL(Finished(int,MusicBrainzClient::ResultList)), SLOT(TagsFetched(int,MusicBrainzClient::ResultList)));
 }
 
 QString TagFetcher::GetFingerprint(const Song& song) {
-  return Fingerprinter(song.url().toLocalFile()).CreateFingerprint();
+  return Chromaprinter(song.url().toLocalFile()).CreateFingerprint();
 }
 
 void TagFetcher::StartFetch(const SongList& songs) {
@@ -63,7 +64,7 @@ void TagFetcher::Cancel() {
     fingerprint_watcher_ = NULL;
   }
 
-  musicdns_client_->CancelAll();
+  acoustid_client_->CancelAll();
   musicbrainz_client_->CancelAll();
   songs_.clear();
 }
@@ -83,7 +84,7 @@ void TagFetcher::FingerprintFound(int index) {
   }
 
   emit Progress(song, tr("Identifying song"));
-  musicdns_client_->Start(index, fingerprint, song.length_nanosec() / kNsecPerMsec);
+  acoustid_client_->Start(index, fingerprint, song.length_nanosec() / kNsecPerMsec);
 }
 
 void TagFetcher::PuidFound(int index, const QString& puid) {
@@ -115,6 +116,7 @@ void TagFetcher::TagsFetched(int index, const MusicBrainzClient::ResultList& res
     song.Init(result.title_, result.artist_, result.album_,
               result.duration_msec_ * kNsecPerMsec);
     song.set_track(result.track_);
+    song.set_year(result.year_);
     songs_guessed << song;
   }
 

@@ -26,6 +26,7 @@ include_directories(${QTSINGLEAPPLICATION_INCLUDE_DIRS})
 include_directories(${QTIOCOMPRESSOR_INCLUDE_DIRS})
 include_directories(${QXT_INCLUDE_DIRS})
 include_directories(${ECHONEST_INCLUDE_DIRS})
+include_directories(${CHROMAPRINT_INCLUDE_DIRS})
 
 find_package(OpenGL)
 include_directories(${OPENGL_INCLUDE_DIR})
@@ -68,6 +69,7 @@ set(SOURCES
   core/database.cpp
   core/deletefiles.cpp
   core/filesystemmusicstorage.cpp
+  core/filesystemwatcherinterface.cpp
   core/fht.cpp
   core/globalshortcutbackend.cpp
   core/globalshortcuts.cpp
@@ -80,6 +82,7 @@ set(SOURCES
   core/organise.cpp
   core/organiseformat.cpp
   core/player.cpp
+  core/qtfslistener.cpp
   core/qxtglobalshortcutbackend.cpp
   core/scopedtransaction.cpp
   core/settingsprovider.cpp
@@ -179,10 +182,9 @@ set(SOURCES
   library/librarywatcher.cpp
   library/sqlrow.cpp
 
-  musicbrainz/echoprinter.cpp
-  musicbrainz/fingerprinter.cpp
+  musicbrainz/acoustidclient.cpp
+  musicbrainz/chromaprinter.cpp
   musicbrainz/musicbrainzclient.cpp
-  musicbrainz/musicdnsclient.cpp
   musicbrainz/tagfetcher.cpp
 
   playlist/dynamicplaylistcontrols.cpp
@@ -332,6 +334,7 @@ set(HEADERS
   core/crashreporting.h
   core/database.h
   core/deletefiles.h
+  core/filesystemwatcherinterface.h
   core/globalshortcuts.h
   core/globalshortcutbackend.h
   core/gnomeglobalshortcutbackend.h
@@ -340,6 +343,7 @@ set(HEADERS
   core/network.h
   core/organise.h
   core/player.h
+  core/qtfslistener.h
   core/songloader.h
   core/tagreaderclient.h
   core/taskmanager.h
@@ -415,8 +419,8 @@ set(HEADERS
   library/libraryviewcontainer.h
   library/librarywatcher.h
 
+  musicbrainz/acoustidclient.h
   musicbrainz/musicbrainzclient.h
-  musicbrainz/musicdnsclient.h
   musicbrainz/tagfetcher.h
 
   playlist/dynamicplaylistcontrols.h
@@ -962,9 +966,9 @@ add_dependencies(clementine_lib pot)
 target_link_libraries(clementine_lib
   libclementine-common
   libclementine-tagreader
-  echoprint
   sha2
   ${TAGLIB_LIBRARIES}
+  ${CHROMAPRINT_LIBRARIES}
   ${ECHONEST_LIBRARIES}
   ${GOBJECT_LIBRARIES}
   ${GLIB_LIBRARIES}

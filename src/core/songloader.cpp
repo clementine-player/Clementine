@@ -202,6 +202,7 @@ void SongLoader::AudioCDTagsLoaded(const QString& artist, const QString& album,
     song.set_title(ret.title_);
     song.set_length_nanosec(ret.duration_msec_ * kNsecPerMsec);
     song.set_track(track_number);
+    song.set_year(ret.year_);
     // We need to set url: that's how playlist will find the correct item to update
     song.set_url(QUrl(QString("cdda://%1").arg(track_number++)));
     songs_ << song;

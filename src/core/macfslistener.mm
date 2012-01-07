@@ -1,3 +1,20 @@
+/* This file is part of Clementine.
+   Copyright 2012, David Sansome <me@davidsansome.com>
+
+   Clementine is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
+
+   Clementine is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
 #include "macfslistener.h"
 
 #include <CoreFoundation/CFArray.h>
@@ -8,7 +25,7 @@
 #include "core/scoped_nsobject.h"
 
 MacFSListener::MacFSListener(QObject* parent)
-    : QObject(parent),
+    : FileSystemWatcherInterface(parent),
       run_loop_(NULL),
       stream_(NULL) {
 }
@@ -29,17 +46,27 @@ void MacFSListener::EventStreamCallback(
   for (int i = 0; i < num_events; ++i) {
     QString path = QString::fromUtf8(paths[i]);
     qLog(Debug) << "Something changed at:" << path;
+    while (path.endsWith('/')) {
+      path.chop(1);
+    }
     emit me->PathChanged(path);
   }
 }
 
 void MacFSListener::AddPath(const QString& path) {
+  Q_ASSERT(run_loop_);
   paths_.insert(path);
+  UpdateStream();
+}
+
+void MacFSListener::Clear() {
+  paths_.clear();
   UpdateStream();
 }
 
 void MacFSListener::UpdateStream() {
   if (stream_) {
+    FSEventStreamStop(stream_);
     FSEventStreamInvalidate(stream_);
     FSEventStreamRelease(stream_);
     stream_ = NULL;

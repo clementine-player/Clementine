@@ -61,9 +61,10 @@ TrackSelectionDialog::TrackSelectionDialog(QWidget *parent)
 
   // Resize columns
   ui_->results->setColumnWidth(0, 50);  // Track column
-  ui_->results->setColumnWidth(1, 175); // Title column
-  ui_->results->setColumnWidth(2, 175); // Artist column
-  ui_->results->setColumnWidth(3, 175); // Album column
+  ui_->results->setColumnWidth(1, 50);  // Year column
+  ui_->results->setColumnWidth(2, 160); // Title column
+  ui_->results->setColumnWidth(3, 160); // Artist column
+  ui_->results->setColumnWidth(4, 160); // Album column
 }
 
 TrackSelectionDialog::~TrackSelectionDialog() {
@@ -199,8 +200,9 @@ void TrackSelectionDialog::AddDivider(const QString& text, QTreeWidget* parent) 
 
 void TrackSelectionDialog::AddSong(const Song& song, int result_index, QTreeWidget* parent) const {
   QStringList values;
-  values << ((song.track() > 0) ? QString::number(song.track()) : QString());
-  values << song.title() << song.artist() << song.album();
+  values << ((song.track() > 0) ? QString::number(song.track()) : QString())
+         << ((song.year() > 0) ? QString::number(song.year()) : QString())
+         << song.title() << song.artist() << song.album();
 
   QTreeWidgetItem* item = new QTreeWidgetItem(parent, values);
   item->setData(0, Qt::UserRole, result_index);
