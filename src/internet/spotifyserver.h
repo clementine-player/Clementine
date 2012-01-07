@@ -72,20 +72,20 @@ signals:
 
 private slots:
   void NewConnection();
-  void HandleMessage(const pb::spotify::SpotifyMessage& message);
+  void HandleMessage(const pb::spotify::Message& message);
 
 private:
   void LoadPlaylist(pb::spotify::PlaylistType type, int index = -1);
   void SyncPlaylist(pb::spotify::PlaylistType type, int index, bool offline);
-  void SendMessage(const pb::spotify::SpotifyMessage& message);
+  void SendMessage(const pb::spotify::Message& message);
 
   QTcpServer* server_;
   QTcpSocket* protocol_socket_;
   SpotifyMessageHandler* handler_;
   bool logged_in_;
 
-  QList<pb::spotify::SpotifyMessage> queued_login_messages_;
-  QList<pb::spotify::SpotifyMessage> queued_messages_;
+  QList<pb::spotify::Message> queued_login_messages_;
+  QList<pb::spotify::Message> queued_messages_;
 };
 
 #endif // SPOTIFYSERVER_H

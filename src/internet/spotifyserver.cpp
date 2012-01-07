@@ -52,22 +52,22 @@ void SpotifyServer::NewConnection() {
 
   protocol_socket_ = server_->nextPendingConnection();
   handler_ = new SpotifyMessageHandler(protocol_socket_, this);
-  connect(handler_, SIGNAL(MessageArrived(pb::spotify::SpotifyMessage)),
-          SLOT(HandleMessage(pb::spotify::SpotifyMessage)));
+  connect(handler_, SIGNAL(MessageArrived(pb::spotify::Message)),
+          SLOT(HandleMessage(pb::spotify::Message)));
 
   qLog(Info) << "Connection from port" << protocol_socket_->peerPort();
 
   // Send any login messages that were queued before the client connected
-  foreach (const pb::spotify::SpotifyMessage& message, queued_login_messages_) {
+  foreach (const pb::spotify::Message& message, queued_login_messages_) {
     SendMessage(message);
   }
   queued_login_messages_.clear();
 }
 
-void SpotifyServer::SendMessage(const pb::spotify::SpotifyMessage& message) {
+void SpotifyServer::SendMessage(const pb::spotify::Message& message) {
   const bool is_login_message = message.has_login_request();
 
-  QList<pb::spotify::SpotifyMessage>* queue =
+  QList<pb::spotify::Message>* queue =
       is_login_message ? &queued_login_messages_ : &queued_messages_;
 
   if (!protocol_socket_ || (!is_login_message && !logged_in_)) {
@@ -79,7 +79,7 @@ void SpotifyServer::SendMessage(const pb::spotify::SpotifyMessage& message) {
 
 void SpotifyServer::Login(const QString& username, const QString& password,
                           pb::spotify::Bitrate bitrate, bool volume_normalisation) {
-  pb::spotify::SpotifyMessage message;
+  pb::spotify::Message message;
 
   pb::spotify::LoginRequest* request = message.mutable_login_request();
   request->set_username(DataCommaSizeFromQString(username));
@@ -93,7 +93,7 @@ void SpotifyServer::Login(const QString& username, const QString& password,
 }
 
 void SpotifyServer::SetPlaybackSettings(pb::spotify::Bitrate bitrate, bool volume_normalisation) {
-  pb::spotify::SpotifyMessage message;
+  pb::spotify::Message message;
 
   pb::spotify::PlaybackSettings* request = message.mutable_set_playback_settings_request();
   request->set_bitrate(bitrate);
@@ -102,14 +102,14 @@ void SpotifyServer::SetPlaybackSettings(pb::spotify::Bitrate bitrate, bool volum
   SendMessage(message);
 }
 
-void SpotifyServer::HandleMessage(const pb::spotify::SpotifyMessage& message) {
+void SpotifyServer::HandleMessage(const pb::spotify::Message& message) {
   if (message.has_login_response()) {
     const pb::spotify::LoginResponse& response = message.login_response();
     logged_in_ = response.success();
 
     if (response.success()) {
       // Send any messages that were queued before the client logged in
-      foreach (const pb::spotify::SpotifyMessage& message, queued_messages_) {
+      foreach (const pb::spotify::Message& message, queued_messages_) {
         SendMessage(message);
       }
       queued_messages_.clear();
@@ -157,7 +157,7 @@ void SpotifyServer::HandleMessage(const pb::spotify::SpotifyMessage& message) {
 }
 
 void SpotifyServer::LoadPlaylist(pb::spotify::PlaylistType type, int index) {
-  pb::spotify::SpotifyMessage message;
+  pb::spotify::Message message;
   pb::spotify::LoadPlaylistRequest* req = message.mutable_load_playlist_request();
 
   req->set_type(type);
@@ -170,7 +170,7 @@ void SpotifyServer::LoadPlaylist(pb::spotify::PlaylistType type, int index) {
 
 void SpotifyServer::SyncPlaylist(
     pb::spotify::PlaylistType type, int index, bool offline) {
-  pb::spotify::SpotifyMessage message;
+  pb::spotify::Message message;
   pb::spotify::SyncPlaylistRequest* req = message.mutable_sync_playlist_request();
   req->mutable_request()->set_type(type);
   if (index != -1) {
@@ -218,7 +218,7 @@ void SpotifyServer::StartPlaybackLater(const QString& uri, quint16 port) {
 }
 
 void SpotifyServer::StartPlayback(const QString& uri, quint16 port) {
-  pb::spotify::SpotifyMessage message;
+  pb::spotify::Message message;
   pb::spotify::PlaybackRequest* req = message.mutable_playback_request();
 
   req->set_track_uri(DataCommaSizeFromQString(uri));
@@ -227,7 +227,7 @@ void SpotifyServer::StartPlayback(const QString& uri, quint16 port) {
 }
 
 void SpotifyServer::Seek(qint64 offset_bytes) {
-  pb::spotify::SpotifyMessage message;
+  pb::spotify::Message message;
   pb::spotify::SeekRequest* req = message.mutable_seek_request();
 
   req->set_offset_bytes(offset_bytes);
@@ -235,7 +235,7 @@ void SpotifyServer::Seek(qint64 offset_bytes) {
 }
 
 void SpotifyServer::Search(const QString& text, int limit, int limit_album) {
-  pb::spotify::SpotifyMessage message;
+  pb::spotify::Message message;
   pb::spotify::SearchRequest* req = message.mutable_search_request();
 
   req->set_query(DataCommaSizeFromQString(text));
@@ -245,7 +245,7 @@ void SpotifyServer::Search(const QString& text, int limit, int limit_album) {
 }
 
 void SpotifyServer::LoadImage(const QString& id) {
-  pb::spotify::SpotifyMessage message;
+  pb::spotify::Message message;
   pb::spotify::ImageRequest* req = message.mutable_image_request();
 
   req->set_id(DataCommaSizeFromQString(id));
@@ -253,7 +253,7 @@ void SpotifyServer::LoadImage(const QString& id) {
 }
 
 void SpotifyServer::AlbumBrowse(const QString& uri) {
-  pb::spotify::SpotifyMessage message;
+  pb::spotify::Message message;
   pb::spotify::BrowseAlbumRequest* req = message.mutable_browse_album_request();
 
   req->set_uri(DataCommaSizeFromQString(uri));

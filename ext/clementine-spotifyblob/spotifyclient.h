@@ -49,7 +49,7 @@ public:
   void Init(quint16 port);
 
 private slots:
-  void HandleMessage(const pb::spotify::SpotifyMessage& message);
+  void HandleMessage(const pb::spotify::Message& message);
   void ProcessEvents();
 
 private:

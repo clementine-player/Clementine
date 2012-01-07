@@ -91,8 +91,8 @@ SpotifyClient::SpotifyClient(QObject* parent)
   events_timer_->setSingleShot(true);
   connect(events_timer_, SIGNAL(timeout()), SLOT(ProcessEvents()));
 
-  connect(handler_, SIGNAL(MessageArrived(pb::spotify::SpotifyMessage)),
-          SLOT(HandleMessage(pb::spotify::SpotifyMessage)));
+  connect(handler_, SIGNAL(MessageArrived(pb::spotify::Message)),
+          SLOT(HandleMessage(pb::spotify::Message)));
   connect(protocol_socket_, SIGNAL(disconnected()),
           QCoreApplication::instance(), SLOT(quit()));
 }
@@ -217,7 +217,7 @@ void SpotifyClient::SendSearchResponse(sp_search* result) {
   pb::spotify::SearchRequest req = pending_searches_.take(result);
 
   // Prepare the response
-  pb::spotify::SpotifyMessage message;
+  pb::spotify::Message message;
   pb::spotify::SearchResponse* response = message.mutable_search_response();
 
   *response->mutable_request() = req;
@@ -265,7 +265,7 @@ void SpotifyClient::SendSearchResponse(sp_search* result) {
   sp_search_release(result);
 }
 
-void SpotifyClient::HandleMessage(const pb::spotify::SpotifyMessage& message) {
+void SpotifyClient::HandleMessage(const pb::spotify::Message& message) {
   if (message.has_login_request()) {
     Login(message.login_request());
   } else if (message.has_load_playlist_request()) {
@@ -330,7 +330,7 @@ void SpotifyClient::Login(const pb::spotify::LoginRequest& req) {
 
 void SpotifyClient::SendLoginCompleted(bool success, const QString& error,
                                        pb::spotify::LoginResponse_Error error_code) {
-  pb::spotify::SpotifyMessage message;
+  pb::spotify::Message message;
 
   pb::spotify::LoginResponse* response = message.mutable_login_response();
   response->set_success(success);
@@ -380,7 +380,7 @@ void SpotifyClient::PlaylistRemovedCallback(sp_playlistcontainer* pc, sp_playlis
 }
 
 void SpotifyClient::SendPlaylistList() {
-  pb::spotify::SpotifyMessage message;
+  pb::spotify::Message message;
   pb::spotify::Playlists* response = message.mutable_playlists_updated();
 
   sp_playlistcontainer* container = sp_session_playlistcontainer(session_);
@@ -464,7 +464,7 @@ void SpotifyClient::LoadPlaylist(const pb::spotify::LoadPlaylistRequest& req) {
   if (!pending_load.playlist_) {
     qLog(Warning) << "Invalid playlist requested or not logged in";
 
-    pb::spotify::SpotifyMessage message;
+    pb::spotify::Message message;
     pb::spotify::LoadPlaylistResponse* response = message.mutable_load_playlist_response();
     *response->mutable_request() = req;
     handler_->SendMessage(message);
@@ -528,7 +528,7 @@ void SpotifyClient::PlaylistStateChangedForLoadPlaylist(sp_playlist* pl, void* u
   }
 
   // Everything is loaded so send the response protobuf and unref everything.
-  pb::spotify::SpotifyMessage message;
+  pb::spotify::Message message;
   pb::spotify::LoadPlaylistResponse* response = message.mutable_load_playlist_response();
 
   // For some reason, we receive the starred tracks in reverse order but not
@@ -745,7 +745,7 @@ void SpotifyClient::OfflineStatusUpdatedCallback(sp_session* session) {
 
 void SpotifyClient::SendDownloadProgress(
     pb::spotify::PlaylistType type, int index, int download_progress) {
-  pb::spotify::SpotifyMessage message;
+  pb::spotify::Message message;
   pb::spotify::SyncPlaylistProgress* progress = message.mutable_sync_playlist_progress();
   progress->mutable_request()->set_type(type);
   if (index != -1) {
@@ -835,7 +835,7 @@ void SpotifyClient::TryPlaybackAgain(const PendingPlaybackRequest& req) {
 }
 
 void SpotifyClient::SendPlaybackError(const QString& error) {
-  pb::spotify::SpotifyMessage message;
+  pb::spotify::Message message;
   pb::spotify::PlaybackError* msg = message.mutable_playback_error();
 
   msg->set_error(DataCommaSizeFromQString(error));
@@ -849,7 +849,7 @@ void SpotifyClient::LoadImage(const QString& id_b64) {
                   << kSpotifyImageIDSize << "bytes):" << id_b64;
 
     // Send an error response straight away
-    pb::spotify::SpotifyMessage message;
+    pb::spotify::Message message;
     pb::spotify::ImageResponse* msg = message.mutable_image_response();
     msg->set_id(DataCommaSizeFromQString(id_b64));
     handler_->SendMessage(message);
@@ -898,7 +898,7 @@ void SpotifyClient::TryImageAgain(sp_image* image) {
   const void* data = sp_image_data(image, &size);
 
   // Send the response
-  pb::spotify::SpotifyMessage message;
+  pb::spotify::Message message;
   pb::spotify::ImageResponse* msg = message.mutable_image_response();
   msg->set_id(DataCommaSizeFromQString(req->id_b64_));
   if (data && size) {
@@ -951,7 +951,7 @@ void SpotifyClient::AlbumBrowseComplete(sp_albumbrowse* result, void* userdata) 
 
   QString uri = me->pending_album_browses_.take(result);
 
-  pb::spotify::SpotifyMessage message;
+  pb::spotify::Message message;
   pb::spotify::BrowseAlbumResponse* msg = message.mutable_browse_album_response();
 
   msg->set_uri(DataCommaSizeFromQString(uri));
