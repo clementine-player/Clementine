@@ -103,13 +103,15 @@ void QueuedItemDelegate::DrawBox(
   painter->setRenderHint(QPainter::Antialiasing);
 
   // Draw the box
+  painter->translate(0.5, 0.5);
   painter->setPen(QPen(Qt::white, 1));
   painter->setBrush(gradient);
   painter->drawRoundedRect(rect, kQueueBoxCornerRadius, kQueueBoxCornerRadius);
 
   // Draw the text
   painter->setFont(smaller);
-  painter->drawText(rect, Qt::AlignCenter, text);
+  painter->drawText(rect.translated(-1, -1), Qt::AlignCenter, text);
+  painter->translate(-0.5, -0.5);
 }
 
 int QueuedItemDelegate::queue_indicator_size(const QModelIndex& index) const {
