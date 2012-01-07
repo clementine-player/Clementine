@@ -25,8 +25,8 @@
 #include <QVariantMap>
 
 #include "config.h"
+#include "tagreadermessages.pb.h"
 #include "engines/engine_fwd.h"
-#include "tagreader/common/tagreadermessages.pb.h"
 
 class QSqlQuery;
 class QUrl;
