@@ -29,6 +29,7 @@
 
 class QIODevice;
 class QMouseEvent;
+class QXmlStreamReader;
 
 namespace Utilities {
   QString PrettyTime(int seconds);
@@ -73,6 +74,12 @@ namespace Utilities {
 
   // Checks if the mouse event was inside the widget's rectangle.
   bool IsMouseEventInWidget(const QMouseEvent* e, const QWidget* widget);
+
+
+  // Reads all children of the current element, and returns with the stream
+  // reader either on the EndElement for the current element, or the end of the
+  // file - whichever came first.
+  void ConsumeCurrentElement(QXmlStreamReader* reader);
 
 
   enum ConfigPath {

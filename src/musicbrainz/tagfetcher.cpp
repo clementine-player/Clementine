@@ -116,6 +116,7 @@ void TagFetcher::TagsFetched(int index, const MusicBrainzClient::ResultList& res
     song.Init(result.title_, result.artist_, result.album_,
               result.duration_msec_ * kNsecPerMsec);
     song.set_track(result.track_);
+    song.set_year(result.year_);
     songs_guessed << song;
   }
 

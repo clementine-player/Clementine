@@ -144,8 +144,9 @@ void CddaDevice::AudioCDTagsLoaded(const QString& artist, const QString& album,
     song.set_album(album);
     song.set_title(ret.title_);
     song.set_length_nanosec(ret.duration_msec_ * kNsecPerMsec);
-    song.set_id(track_number);
     song.set_track(track_number);
+    song.set_year(ret.year_);
+    song.set_id(track_number);
     // We need to set url: that's how playlist will find the correct item to update
     song.set_url(QUrl(QString("cdda://%1/%2").arg(unique_id()).arg(track_number++)));
     songs << song;
