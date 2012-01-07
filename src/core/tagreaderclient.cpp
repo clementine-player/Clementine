@@ -33,10 +33,17 @@ TagReaderClient::TagReaderClient(QObject* parent)
   sInstance = this;
 
   worker_pool_->SetExecutableName(kWorkerExecutableName);
+  connect(worker_pool_, SIGNAL(WorkerFailedToStart()), SLOT(WorkerFailedToStart()));
 }
 
 void TagReaderClient::Start() {
   worker_pool_->Start();
+}
+
+void TagReaderClient::WorkerFailedToStart() {
+  qLog(Error) << "The" << kWorkerExecutableName << "executable was not found"
+              << "in the current directory or on the PATH.  Clementine will"
+              << "not be able to read music file tags without it.";
 }
 
 TagReaderReply* TagReaderClient::ReadFile(const QString& filename) {

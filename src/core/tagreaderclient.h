@@ -57,6 +57,9 @@ public:
   // TODO: Make this not a singleton
   static TagReaderClient* Instance() { return sInstance; }
 
+private slots:
+  void WorkerFailedToStart();
+
 private:
   static TagReaderClient* sInstance;
 
