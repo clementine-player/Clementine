@@ -2,7 +2,6 @@
 #include "config.h"
 #include "internetmodel.h"
 #include "spotifyblobdownloader.h"
-#include "spotifymessagehandler.h"
 #include "spotifyserver.h"
 #include "spotifyservice.h"
 #include "spotifysearchplaylisttype.h"

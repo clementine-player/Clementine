@@ -19,16 +19,16 @@
 #define SPOTIFYSERVER_H
 
 #include "spotifymessages.pb.h"
+#include "core/messagehandler.h"
 
 #include <QImage>
 #include <QObject>
 
-class SpotifyMessageHandler;
 
 class QTcpServer;
 class QTcpSocket;
 
-class SpotifyServer : public QObject {
+class SpotifyServer : public AbstractMessageHandler<pb::spotify::Message> {
   Q_OBJECT
 
 public:
@@ -70,18 +70,18 @@ signals:
   void SyncPlaylistProgress(const pb::spotify::SyncPlaylistProgress& progress);
   void AlbumBrowseResults(const pb::spotify::BrowseAlbumResponse& response);
 
+protected:
+  void MessageArrived(const pb::spotify::Message& message);
+
 private slots:
   void NewConnection();
-  void HandleMessage(const pb::spotify::Message& message);
 
 private:
   void LoadPlaylist(pb::spotify::PlaylistType type, int index = -1);
   void SyncPlaylist(pb::spotify::PlaylistType type, int index, bool offline);
-  void SendMessage(const pb::spotify::Message& message);
+  void SendOrQueueMessage(const pb::spotify::Message& message);
 
   QTcpServer* server_;
-  QTcpSocket* protocol_socket_;
-  SpotifyMessageHandler* handler_;
   bool logged_in_;
 
   QList<pb::spotify::Message> queued_login_messages_;

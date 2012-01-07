@@ -95,7 +95,11 @@ class _MessageHandlerBase : public QObject {
   Q_OBJECT
 
 public:
+  // device can be NULL, in which case you must call SetDevice before writing
+  // any messages.
   _MessageHandlerBase(QIODevice* device, QObject* parent);
+
+  void SetDevice(QIODevice* device);
 
 protected slots:
   void WriteMessage(const QByteArray& data);
@@ -103,7 +107,7 @@ protected slots:
   virtual void SocketClosed() {}
 
 protected:
-  virtual bool MessageArrived(const QByteArray& data) = 0;
+  virtual bool RawMessageArrived(const QByteArray& data) = 0;
 
 protected:
   typedef bool (QAbstractSocket::*FlushAbstractSocket)();
@@ -156,7 +160,7 @@ protected:
   virtual void MessageArrived(const MessageType& message) {}
 
   // _MessageHandlerBase
-  bool MessageArrived(const QByteArray& data);
+  bool RawMessageArrived(const QByteArray& data);
   void SocketClosed();
 
 private:
@@ -197,7 +201,7 @@ void AbstractMessageHandler<MessageType>::SendReply(const MessageType& request,
 }
 
 template<typename MessageType>
-bool AbstractMessageHandler<MessageType>::MessageArrived(const QByteArray& data) {
+bool AbstractMessageHandler<MessageType>::RawMessageArrived(const QByteArray& data) {
   MessageType message;
   if (!message.ParseFromArray(data.constData(), data.size())) {
     return false;

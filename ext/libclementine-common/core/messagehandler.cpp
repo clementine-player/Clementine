@@ -27,11 +27,19 @@
 
 _MessageHandlerBase::_MessageHandlerBase(QIODevice* device, QObject* parent)
   : QObject(parent),
-    device_(device),
+    device_(NULL),
     flush_abstract_socket_(NULL),
     flush_local_socket_(NULL),
     reading_protobuf_(false),
     expected_length_(0) {
+  if (device) {
+    SetDevice(device);
+  }
+}
+
+void _MessageHandlerBase::SetDevice(QIODevice* device) {
+  device_ = device;
+
   buffer_.open(QIODevice::ReadWrite);
 
   connect(device, SIGNAL(readyRead()), SLOT(DeviceReadyRead()));
@@ -64,7 +72,7 @@ void _MessageHandlerBase::DeviceReadyRead() {
     // Did we get everything?
     if (buffer_.size() == expected_length_) {
       // Parse the message
-      if (!MessageArrived(buffer_.data())) {
+      if (!RawMessageArrived(buffer_.data())) {
         qLog(Error) << "Malformed protobuf message";
         device_->close();
         return;

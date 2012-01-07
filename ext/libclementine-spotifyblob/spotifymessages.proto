@@ -163,6 +163,9 @@ message PlaybackSettings {
 }
 
 message Message {
+  // Not currently used
+  optional int32 id = 18;
+
   optional LoginRequest login_request = 1;
   optional LoginResponse login_response = 2;
   optional Playlists playlists_updated = 3;

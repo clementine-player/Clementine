@@ -1,5 +1,4 @@
 include_directories(${PROTOBUF_INCLUDE_DIRS})
-include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
 set(MESSAGES
   tagreadermessages.proto

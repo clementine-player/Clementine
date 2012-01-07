@@ -15,7 +15,6 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "spotifymessagehandler.h"
 #include "spotifysearchprovider.h"
 #include "core/logging.h"
 #include "internet/internetmodel.h"

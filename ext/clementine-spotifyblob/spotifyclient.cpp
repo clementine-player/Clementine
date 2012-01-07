@@ -23,7 +23,6 @@
 #include "mediapipeline.h"
 #include "spotifyclient.h"
 #include "spotifykey.h"
-#include "spotifymessagehandler.h"
 #include "spotifymessages.pb.h"
 #include "spotify_utilities.h"
 #include "core/logging.h"
@@ -39,12 +38,13 @@ const int SpotifyClient::kWaveHeaderSize = 44;
 
 
 SpotifyClient::SpotifyClient(QObject* parent)
-  : QObject(parent),
+  : AbstractMessageHandler<pb::spotify::Message>(NULL, parent),
     api_key_(QByteArray::fromBase64(kSpotifyApiKey)),
     protocol_socket_(new QTcpSocket(this)),
-    handler_(new SpotifyMessageHandler(protocol_socket_, this)),
     session_(NULL),
     events_timer_(new QTimer(this)) {
+  SetDevice(protocol_socket_);
+
   memset(&spotify_callbacks_, 0, sizeof(spotify_callbacks_));
   memset(&spotify_config_, 0, sizeof(spotify_config_));
   memset(&playlistcontainer_callbacks_, 0, sizeof(playlistcontainer_callbacks_));
@@ -91,8 +91,6 @@ SpotifyClient::SpotifyClient(QObject* parent)
   events_timer_->setSingleShot(true);
   connect(events_timer_, SIGNAL(timeout()), SLOT(ProcessEvents()));
 
-  connect(handler_, SIGNAL(MessageArrived(pb::spotify::Message)),
-          SLOT(HandleMessage(pb::spotify::Message)));
   connect(protocol_socket_, SIGNAL(disconnected()),
           QCoreApplication::instance(), SLOT(quit()));
 }
@@ -227,7 +225,7 @@ void SpotifyClient::SendSearchResponse(sp_search* result) {
   if (error != SP_ERROR_OK) {
     response->set_error(sp_error_message(error));
 
-    handler_->SendMessage(message);
+    SendMessage(message);
     sp_search_release(result);
     return;
   }
@@ -261,11 +259,11 @@ void SpotifyClient::SendSearchResponse(sp_search* result) {
   response->set_total_tracks(sp_search_total_tracks(result));
   response->set_did_you_mean(sp_search_did_you_mean(result));
 
-  handler_->SendMessage(message);
+  SendMessage(message);
   sp_search_release(result);
 }
 
-void SpotifyClient::HandleMessage(const pb::spotify::Message& message) {
+void SpotifyClient::MessageArrived(const pb::spotify::Message& message) {
   if (message.has_login_request()) {
     Login(message.login_request());
   } else if (message.has_load_playlist_request()) {
@@ -340,7 +338,7 @@ void SpotifyClient::SendLoginCompleted(bool success, const QString& error,
     response->set_error_code(error_code);
   }
 
-  handler_->SendMessage(message);
+  SendMessage(message);
 }
 
 void SpotifyClient::PlaylistContainerLoadedCallback(sp_playlistcontainer* pc, void* userdata) {
@@ -424,7 +422,7 @@ void SpotifyClient::SendPlaylistList() {
     }
   }
 
-  handler_->SendMessage(message);
+  SendMessage(message);
 }
 
 sp_playlist* SpotifyClient::GetPlaylist(pb::spotify::PlaylistType type, int user_index) {
@@ -467,7 +465,7 @@ void SpotifyClient::LoadPlaylist(const pb::spotify::LoadPlaylistRequest& req) {
     pb::spotify::Message message;
     pb::spotify::LoadPlaylistResponse* response = message.mutable_load_playlist_response();
     *response->mutable_request() = req;
-    handler_->SendMessage(message);
+    SendMessage(message);
     return;
   }
 
@@ -543,7 +541,7 @@ void SpotifyClient::PlaylistStateChangedForLoadPlaylist(sp_playlist* pl, void* u
     me->ConvertTrack(track, response->add_track());
     sp_track_release(track);
   }
-  me->handler_->SendMessage(message);
+  me->SendMessage(message);
 
   // Unref the playlist and remove our callbacks
   sp_playlist_remove_callbacks(pl, &me->load_playlist_callbacks_, me);
@@ -752,7 +750,7 @@ void SpotifyClient::SendDownloadProgress(
     progress->mutable_request()->set_user_playlist_index(index);
   }
   progress->set_sync_progress(download_progress);
-  handler_->SendMessage(message);
+  SendMessage(message);
 }
 
 int SpotifyClient::GetDownloadProgress(sp_playlist* playlist) {
@@ -839,7 +837,7 @@ void SpotifyClient::SendPlaybackError(const QString& error) {
   pb::spotify::PlaybackError* msg = message.mutable_playback_error();
 
   msg->set_error(DataCommaSizeFromQString(error));
-  handler_->SendMessage(message);
+  SendMessage(message);
 }
 
 void SpotifyClient::LoadImage(const QString& id_b64) {
@@ -852,7 +850,7 @@ void SpotifyClient::LoadImage(const QString& id_b64) {
     pb::spotify::Message message;
     pb::spotify::ImageResponse* msg = message.mutable_image_response();
     msg->set_id(DataCommaSizeFromQString(id_b64));
-    handler_->SendMessage(message);
+    SendMessage(message);
     return;
   }
 
@@ -904,7 +902,7 @@ void SpotifyClient::TryImageAgain(sp_image* image) {
   if (data && size) {
     msg->set_data(data, size);
   }
-  handler_->SendMessage(message);
+  SendMessage(message);
 
   // Free stuff
   image_callbacks_registered_[image] --;
@@ -961,6 +959,6 @@ void SpotifyClient::AlbumBrowseComplete(sp_albumbrowse* result, void* userdata) 
     me->ConvertTrack(sp_albumbrowse_track(result, i), msg->add_track());
   }
 
-  me->handler_->SendMessage(message);
+  me->SendMessage(message);
   sp_albumbrowse_release(result);
 }

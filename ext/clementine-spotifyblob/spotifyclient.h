@@ -23,6 +23,7 @@
 #define SPOTIFYCLIENT_H
 
 #include "spotifymessages.pb.h"
+#include "core/messagehandler.h"
 
 #include <QMap>
 #include <QObject>
@@ -34,9 +35,8 @@ class QTimer;
 
 class MediaPipeline;
 class ResponseMessage;
-class SpotifyMessageHandler;
 
-class SpotifyClient : public QObject {
+class SpotifyClient : public AbstractMessageHandler<pb::spotify::Message> {
   Q_OBJECT
 
 public:
@@ -48,8 +48,10 @@ public:
 
   void Init(quint16 port);
 
+protected:
+  void MessageArrived(const pb::spotify::Message& message);
+
 private slots:
-  void HandleMessage(const pb::spotify::Message& message);
   void ProcessEvents();
 
 private:
@@ -155,7 +157,6 @@ private:
   QByteArray api_key_;
 
   QTcpSocket* protocol_socket_;
-  SpotifyMessageHandler* handler_;
 
   sp_session_config spotify_config_;
   sp_session_callbacks spotify_callbacks_;
