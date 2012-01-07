@@ -39,28 +39,9 @@ set(BIN_INSTALL_DIR ${EXEC_INSTALL_PREFIX}/bin CACHE PATH "Installation prefix f
 set(LIB_INSTALL_DIR ${EXEC_INSTALL_PREFIX}/lib${LIB_SUFFIX} CACHE PATH  "Installation prefix for object code libraries" FORCE)
 set(INCLUDE_INSTALL_DIR ${CMAKE_INSTALL_PREFIX}/include CACHE PATH "Installation prefix for C header files" FORCE)
 
-if(APPLE)
-	option(BUILD_FRAMEWORK "Build an OS X framework" OFF)
-	set(FRAMEWORK_INSTALL_DIR "/Library/Frameworks" CACHE STRING "Directory to install frameworks to.")
-endif()
-
-option(BUILD_SHARED_LIBS "Build shared libraries" OFF)
-option(BUILD_EXAMPLES "Build the examples" OFF)
-option(BUILD_TESTS "Build the test suite" OFF)
-option(BUILD_TOOLS "Build standard tools" OFF)
-option(BUILD_EXTRA_TOOLS "Build extra tools (only useful for development of this library)" OFF)
-
 if(CMAKE_COMPILER_IS_GNUCXX)
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall")
 	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall")
-endif()
-if(CMAKE_COMPILER_IS_GNUCXX AND BUILD_SHARED_LIBS)
-	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fvisibility=hidden -fvisibility-inlines-hidden")
-	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fvisibility=hidden")
-endif()
-
-if(NOT BUILD_SHARED_LIBS)
-	add_definitions(-DCHROMAPRINT_NODLL)
 endif()
 
 option(WITH_AVFFT "Use FFmpeg for FFT calculations" OFF)
@@ -123,36 +104,7 @@ if(WITH_FFTW3)
 	message(STATUS "Using FFTW3 for FFT calculations")
 endif(WITH_FFTW3)
 
-if(NOT APPLE AND NOT BUILD_FRAMEWORK)
-	configure_file(${CMAKE_CURRENT_SOURCE_DIR}/libchromaprint.pc.cmake ${CMAKE_CURRENT_BINARY_DIR}/libchromaprint.pc)
-	install(FILES ${CMAKE_CURRENT_BINARY_DIR}/libchromaprint.pc DESTINATION ${LIB_INSTALL_DIR}/pkgconfig)
-endif()
-
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/config.h.in ${CMAKE_CURRENT_BINARY_DIR}/config.h)
 
 add_subdirectory(src)
-
-if(BUILD_TOOLS_EXTRA)
-	find_package(PNG REQUIRED)
-endif(BUILD_TOOLS_EXTRA)
-
-find_package(Boost COMPONENTS system filesystem)
-if(BUILD_TOOLS OR BUILD_TOOLS_EXTRA OR BUILD_EXAMPLES)
-	find_package(FFmpeg REQUIRED)
-endif()
-
-if(BUILD_EXAMPLES)
-	add_subdirectory(examples)
-endif()
-
-if(BUILD_TOOLS OR BUILD_TOOLS_EXTRA)
-	find_package(Taglib REQUIRED)
-	add_subdirectory(tools)
-endif(BUILD_TOOLS OR BUILD_TOOLS_EXTRA)
-
-if(BUILD_TESTS)
-	find_package(Threads)
-	find_package(GTest REQUIRED)
-	add_subdirectory(tests)
-endif(BUILD_TESTS)
 
