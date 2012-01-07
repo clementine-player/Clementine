@@ -43,20 +43,3 @@ bool XMLParser::ParseUntilElement(QXmlStreamReader* reader, const QString& name)
   }
   return false;
 }
-
-void XMLParser::IgnoreElement(QXmlStreamReader* reader) const {
-  int level = 1;
-  while (level != 0 && !reader->atEnd()) {
-    QXmlStreamReader::TokenType type = reader->readNext();
-    switch (type) {
-      case QXmlStreamReader::StartElement:
-        ++level;
-        break;
-      case QXmlStreamReader::EndElement:
-        --level;
-        break;
-      default:
-        break;
-    }
-  }
-}

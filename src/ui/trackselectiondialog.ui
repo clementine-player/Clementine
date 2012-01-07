@@ -69,7 +69,7 @@
            </spacer>
           </item>
           <item>
-           <widget class="BusyIndicator" name="progress"/>
+           <widget class="BusyIndicator" name="progress" native="true"/>
           </item>
           <item>
            <spacer name="horizontalSpacer_2">
@@ -193,6 +193,11 @@
           </column>
           <column>
            <property name="text">
+            <string>Year</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
             <string>Title</string>
            </property>
           </column>
@@ -216,7 +221,7 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_2">
      <item>
-      <widget class="BusyIndicator" name="loading_label"/>
+      <widget class="BusyIndicator" name="loading_label" native="true"/>
      </item>
      <item>
       <widget class="QDialogButtonBox" name="button_box">
