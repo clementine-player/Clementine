@@ -49,7 +49,7 @@ LibraryWatcher::LibraryWatcher(QObject* parent)
   : QObject(parent),
     backend_(NULL),
     task_manager_(NULL),
-    fs_watcher_(NULL),
+    fs_watcher_(FileSystemWatcherInterface::Create(this)),
     stop_requested_(false),
     scan_on_startup_(true),
     monitor_(true),
@@ -695,9 +695,7 @@ void LibraryWatcher::ReloadSettings() {
   }
 
   if (!monitor_ && was_monitoring_before) {
-    if (fs_watcher_) {
-      fs_watcher_->Clear();
-    }
+    fs_watcher_->Clear();
   } else if (monitor_ && !was_monitoring_before) {
     // Add all directories to all QFileSystemWatchers again
     foreach (const DirData& data, watched_dirs_.values()) {

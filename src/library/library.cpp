@@ -20,7 +20,6 @@
 #include "librarymodel.h"
 #include "librarybackend.h"
 #include "core/database.h"
-#include "core/filesystemwatcherinterface.h"
 #include "smartplaylists/generator.h"
 #include "smartplaylists/querygenerator.h"
 #include "smartplaylists/search.h"
@@ -121,7 +120,6 @@ void Library::WatcherInitialised() {
 
   watcher->set_backend(backend_);
   watcher->set_task_manager(task_manager_);
-  watcher->set_filesystem_watcher(FileSystemWatcherInterface::Create());
 
   connect(backend_, SIGNAL(DirectoryDiscovered(Directory,SubdirectoryList)),
           watcher,  SLOT(AddDirectory(Directory,SubdirectoryList)));
