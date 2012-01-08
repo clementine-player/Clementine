@@ -44,7 +44,6 @@ class LibraryWatcher : public QObject {
 
   void set_backend(LibraryBackend* backend) { backend_ = backend; }
   void set_task_manager(TaskManager* task_manager) { task_manager_ = task_manager; }
-  void set_filesystem_watcher(FileSystemWatcherInterface* watcher) { fs_watcher_ = watcher; }
   void set_device_name(const QString& device_name) { device_name_ = device_name; }
 
   void IncrementalScanAsync();
