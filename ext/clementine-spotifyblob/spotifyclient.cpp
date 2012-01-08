@@ -962,3 +962,9 @@ void SpotifyClient::AlbumBrowseComplete(sp_albumbrowse* result, void* userdata) 
   me->SendMessage(message);
   sp_albumbrowse_release(result);
 }
+
+void SpotifyClient::SocketClosed() {
+  AbstractMessageHandler<pb::spotify::Message>::SocketClosed();
+
+  qApp->exit();
+}

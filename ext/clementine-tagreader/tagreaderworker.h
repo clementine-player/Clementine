@@ -41,6 +41,7 @@ public:
 
 protected:
   void MessageArrived(const pb::tagreader::Message& message);
+  void SocketClosed();
 
 private:
   void ReadFile(const QString& filename, pb::tagreader::SongMetadata* song) const;

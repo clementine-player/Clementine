@@ -63,6 +63,7 @@ template <typename HandlerType>
 class WorkerPool : public _WorkerPoolBase {
 public:
   WorkerPool(QObject* parent = 0);
+  ~WorkerPool();
 
   // Sets the name of the worker executable.  This is looked for first in the
   // current directory, and then in $PATH.  You must call this before calling
@@ -81,9 +82,8 @@ public:
   // Starts all workers.
   void Start();
 
-  // Returns a handler in a round-robin fashion.  May return NULL if no handlers
-  // are running yet, in which case you must queue the request yourself and
-  // re-send it when the WorkerConnected() signal is emitted.
+  // Returns a handler in a round-robin fashion.  Will block if no handlers are
+  // available yet.
   HandlerType* NextHandler();
 
 protected:
@@ -93,9 +93,11 @@ protected:
 
 private:
   struct Worker {
-    Worker() : local_server_(NULL), process_(NULL), handler_(NULL) {}
+    Worker() : local_server_(NULL), local_socket_(NULL), process_(NULL),
+               handler_(NULL) {}
 
     QLocalServer* local_server_;
+    QLocalSocket* local_socket_;
     QProcess* process_;
     HandlerType* handler_;
   };
@@ -142,6 +144,27 @@ WorkerPool<HandlerType>::WorkerPool(QObject* parent)
 
   if (local_server_name_.isEmpty())
     local_server_name_ = "workerpool";
+}
+
+template <typename HandlerType>
+WorkerPool<HandlerType>::~WorkerPool() {
+  foreach (const Worker& worker, workers_) {
+    if (worker.local_socket_ && worker.process_) {
+      // The worker is connected.  Close his socket and wait for him to exit.
+      qLog(Debug) << "Closing worker socket";
+      worker.local_socket_->close();
+      worker.process_->waitForFinished(500);
+    }
+
+    if (worker.process_ && worker.process_->state() == QProcess::Running) {
+      // The worker is still running - kill it.
+      qLog(Debug) << "Killing worker process";
+      worker.process_->terminate();
+      if (!worker.process_->waitForFinished(500)) {
+        worker.process_->kill();
+      }
+    }
+  }
 }
 
 template <typename HandlerType>
@@ -201,6 +224,7 @@ void WorkerPool<HandlerType>::DoStart() {
 template <typename HandlerType>
 void WorkerPool<HandlerType>::StartOneWorker(Worker* worker) {
   DeleteQObjectPointerLater(&worker->local_server_);
+  DeleteQObjectPointerLater(&worker->local_socket_);
   DeleteQObjectPointerLater(&worker->process_);
   DeleteQObjectPointerLater(&worker->handler_);
 
@@ -242,15 +266,15 @@ void WorkerPool<HandlerType>::NewConnection() {
   qLog(Debug) << "Worker connected to" << server->fullServerName();
 
   // Accept the connection.
-  QLocalSocket* socket = server->nextPendingConnection();
+  worker->local_socket_ = server->nextPendingConnection();
 
   // We only ever accept one connection per worker, so destroy the server now.
-  socket->setParent(this);
+  worker->local_socket_->setParent(this);
   worker->local_server_->deleteLater();
   worker->local_server_ = NULL;
 
   // Create the handler.
-  worker->handler_ = new HandlerType(socket, this);
+  worker->handler_ = new HandlerType(worker->local_socket_, this);
 
   emit WorkerConnected();
 }

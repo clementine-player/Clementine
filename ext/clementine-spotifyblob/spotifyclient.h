@@ -50,6 +50,7 @@ public:
 
 protected:
   void MessageArrived(const pb::spotify::Message& message);
+  void SocketClosed();
 
 private slots:
   void ProcessEvents();

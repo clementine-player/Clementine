@@ -21,6 +21,7 @@
 #include "core/logging.h"
 #include "core/timeconstants.h"
 
+#include <QCoreApplication>
 #include <QDateTime>
 #include <QFileInfo>
 #include <QTextCodec>
@@ -548,4 +549,10 @@ QByteArray TagReaderWorker::LoadEmbeddedArt(const QString& filename) const {
 #endif
 
   return QByteArray();
+}
+
+void TagReaderWorker::SocketClosed() {
+  AbstractMessageHandler<pb::tagreader::Message>::SocketClosed();
+
+  qApp->exit();
 }
