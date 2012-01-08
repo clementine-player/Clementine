@@ -25,6 +25,7 @@
 
 #include "playlistitem.h"
 #include "playlistsequence.h"
+#include "core/tagreaderclient.h"
 #include "core/song.h"
 #include "smartplaylists/generator_fwd.h"
 
@@ -328,7 +329,7 @@ class Playlist : public QAbstractListModel {
   void TracksDequeued();
   void TracksEnqueued(const QModelIndex&, int begin, int end);
   void QueueLayoutChanged();
-  void SongSaveComplete();
+  void SongSaveComplete(TagReaderReply* reply, const QPersistentModelIndex& index);
   void ItemReloadComplete();
   void ItemsLoaded();
   void SongInsertVetoListenerDestroyed();

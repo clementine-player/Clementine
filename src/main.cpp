@@ -35,6 +35,7 @@
 #include "core/player.h"
 #include "core/potranslator.h"
 #include "core/song.h"
+#include "core/tagreaderclient.h"
 #include "core/taskmanager.h"
 #include "core/ubuntuunityhack.h"
 #include "core/utilities.h"
@@ -275,10 +276,6 @@ int main(int argc, char *argv[]) {
     }
   }
 
-  // Detect technically invalid usage of non-ASCII in ID3v1 tags.
-  UniversalEncodingHandler handler;
-  TagLib::ID3v1::Tag::setStringHandler(&handler);
-
 #ifdef Q_OS_LINUX
   // Force Clementine's menu to be shown in the Clementine window and not in
   // the Unity global menubar thing.  See:
@@ -372,6 +369,14 @@ int main(int argc, char *argv[]) {
   CoverProviders cover_providers;
   cover_providers.AddProvider(new AmazonCoverProvider);
 
+  // Create the tag loader on another thread.
+  TagReaderClient* tag_reader_client = new TagReaderClient;
+
+  QThread tag_reader_thread;
+  tag_reader_thread.start();
+  tag_reader_client->moveToThread(&tag_reader_thread);
+  tag_reader_client->Start();
+
   // Create some key objects
   scoped_ptr<BackgroundThread<Database> > database(
       new BackgroundThreadImplementation<Database, Database>(NULL));
@@ -430,6 +435,10 @@ int main(int argc, char *argv[]) {
   w.CommandlineOptionsReceived(options);
 
   int ret = a.exec();
+
+  tag_reader_client->deleteLater();
+  tag_reader_thread.quit();
+  tag_reader_thread.wait();
 
 #ifdef Q_OS_LINUX
   // The nvidia driver would cause Clementine (or any application that used

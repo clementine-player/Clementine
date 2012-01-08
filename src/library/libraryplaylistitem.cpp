@@ -16,6 +16,7 @@
 */
 
 #include "libraryplaylistitem.h"
+#include "core/tagreaderclient.h"
 
 #include <QSettings>
 
@@ -36,7 +37,7 @@ QUrl LibraryPlaylistItem::Url() const {
 }
 
 void LibraryPlaylistItem::Reload() {
-  song_.InitFromFile(song_.url().toLocalFile(), song_.directory_id());
+  TagReaderClient::Instance()->ReadFileBlocking(song_.url().toLocalFile(), &song_);
 }
 
 bool LibraryPlaylistItem::InitFromQuery(const SqlRow& query) {

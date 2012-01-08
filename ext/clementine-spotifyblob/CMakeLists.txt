@@ -1,8 +1,10 @@
 include_directories(${SPOTIFY_INCLUDE_DIRS})
 include_directories(${PROTOBUF_INCLUDE_DIRS})
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
-include_directories(${CMAKE_CURRENT_BINARY_DIR}/../common)
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../common)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR})
+include_directories(${CMAKE_BINARY_DIR}/ext/libclementine-spotifyblob)
+include_directories(${CMAKE_SOURCE_DIR}/ext/libclementine-spotifyblob)
+include_directories(${CMAKE_SOURCE_DIR}/ext/libclementine-common)
 include_directories(${CMAKE_SOURCE_DIR}/src)
 
 link_directories(${SPOTIFY_LIBRARY_DIRS})
@@ -14,8 +16,6 @@ set(SOURCES
   mediapipeline.cpp
   spotifyclient.cpp
   spotify_utilities.cpp
-
-  ${CMAKE_SOURCE_DIR}/src/core/logging.cpp
 )
 
 set(HEADERS
@@ -45,6 +45,7 @@ target_link_libraries(clementine-spotifyblob
   ${GSTREAMER_BASE_LIBRARIES}
   ${GSTREAMER_APP_LIBRARIES}
   clementine-spotifyblob-messages
+  libclementine-common
 )
 
 if(APPLE)

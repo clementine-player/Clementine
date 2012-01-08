@@ -19,6 +19,7 @@
 #include "config.h"
 #include "core/logging.h"
 #include "core/network.h"
+#include "core/tagreaderclient.h"
 #include "core/utilities.h"
 #include "internet/internetmodel.h"
 
@@ -137,7 +138,9 @@ AlbumCoverLoader::TryLoadResult AlbumCoverLoader::TryLoadImage(
     return TryLoadResult(false, true, default_);
 
   if (filename == Song::kEmbeddedCover && !task.song_filename.isEmpty()) {
-    QImage taglib_image = Song::LoadEmbeddedArt(task.song_filename);
+    const QImage taglib_image =
+        TagReaderClient::Instance()->LoadEmbeddedArtBlocking(task.song_filename);
+
     if (!taglib_image.isNull())
       return TryLoadResult(false, true, ScaleAndPad(taglib_image));
   }
@@ -263,7 +266,8 @@ QPixmap AlbumCoverLoader::TryLoadPixmap(const QString& automatic,
     ret.load(manual);
   if (ret.isNull()) {
     if (automatic == Song::kEmbeddedCover && !filename.isNull())
-      ret = QPixmap::fromImage(Song::LoadEmbeddedArt(filename));
+      ret = QPixmap::fromImage(
+            TagReaderClient::Instance()->LoadEmbeddedArtBlocking(filename));
     else if (!automatic.isEmpty())
       ret.load(automatic);
   }

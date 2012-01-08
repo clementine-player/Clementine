@@ -19,7 +19,7 @@
 // compatible.
 
 
-package spotify_pb;
+package pb.spotify;
 
 option optimize_for = LITE_RUNTIME;
 
@@ -162,7 +162,10 @@ message PlaybackSettings {
   optional bool volume_normalisation = 2 [default = false];
 }
 
-message SpotifyMessage {
+message Message {
+  // Not currently used
+  optional int32 id = 18;
+
   optional LoginRequest login_request = 1;
   optional LoginResponse login_response = 2;
   optional Playlists playlists_updated = 3;

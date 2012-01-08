@@ -44,6 +44,10 @@ if(HAVE_BREAKPAD)
   include_directories(../3rdparty/google-breakpad)
 endif(HAVE_BREAKPAD)
 
+include_directories(${CMAKE_SOURCE_DIR}/ext/libclementine-common)
+include_directories(${CMAKE_SOURCE_DIR}/ext/libclementine-tagreader)
+include_directories(${CMAKE_BINARY_DIR}/ext/libclementine-tagreader)
+
 cmake_policy(SET CMP0011 NEW)
 include(../cmake/ParseArguments.cmake)
 include(../cmake/Translations.cmake)
@@ -60,20 +64,16 @@ set(SOURCES
 
   core/backgroundstreams.cpp
   core/backgroundthread.cpp
-  core/closure.cpp
   core/commandlineoptions.cpp
   core/crashreporting.cpp
   core/database.cpp
   core/deletefiles.cpp
-  core/encoding.cpp
   core/filesystemmusicstorage.cpp
   core/filesystemwatcherinterface.cpp
   core/fht.cpp
-  core/fmpsparser.cpp
   core/globalshortcutbackend.cpp
   core/globalshortcuts.cpp
   core/gnomeglobalshortcutbackend.cpp
-  core/logging.cpp
   core/mergedproxymodel.cpp
   core/multisortfilterproxy.cpp
   core/musicstorage.cpp
@@ -89,6 +89,7 @@ set(SOURCES
   core/song.cpp
   core/songloader.cpp
   core/stylesheetloader.cpp
+  core/tagreaderclient.cpp
   core/taskmanager.cpp
   core/urlhandler.cpp
   core/utilities.cpp
@@ -330,7 +331,6 @@ set(HEADERS
 
   core/backgroundstreams.h
   core/backgroundthread.h
-  core/closure.h
   core/crashreporting.h
   core/database.h
   core/deletefiles.h
@@ -345,6 +345,7 @@ set(HEADERS
   core/player.h
   core/qtfslistener.h
   core/songloader.h
+  core/tagreaderclient.h
   core/taskmanager.h
   core/urlhandler.h
 
@@ -705,6 +706,9 @@ optional_source(HAVE_SPOTIFY
     internet/spotifyserver.h
     internet/spotifyservice.h
     internet/spotifysettingspage.h
+  INCLUDE_DIRECTORIES
+    ${CMAKE_SOURCE_DIR}/ext/libclementine-spotifyblob
+    ${CMAKE_BINARY_DIR}/ext/libclementine-spotifyblob
 )
 
 optional_source(HAVE_QCA INCLUDE_DIRECTORIES ${QCA_INCLUDE_DIRS})
@@ -960,13 +964,14 @@ add_dependencies(clementine_lib pot)
 
 
 target_link_libraries(clementine_lib
-  chardet
+  libclementine-common
+  libclementine-tagreader
   sha2
+  ${TAGLIB_LIBRARIES}
   ${CHROMAPRINT_LIBRARIES}
   ${ECHONEST_LIBRARIES}
   ${GOBJECT_LIBRARIES}
   ${GLIB_LIBRARIES}
-  ${TAGLIB_LIBRARIES}
   ${QJSON_LIBRARIES}
   ${QT_LIBRARIES}
   ${GSTREAMER_BASE_LIBRARIES}

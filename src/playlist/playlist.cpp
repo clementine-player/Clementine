@@ -25,8 +25,10 @@
 #include "songloaderinserter.h"
 #include "songmimedata.h"
 #include "songplaylistitem.h"
+#include "core/closure.h"
 #include "core/logging.h"
 #include "core/modelfuturewatcher.h"
+#include "core/tagreaderclient.h"
 #include "core/timeconstants.h"
 #include "internet/jamendoplaylistitem.h"
 #include "internet/jamendoservice.h"
@@ -321,24 +323,25 @@ bool Playlist::setData(const QModelIndex &index, const QVariant &value, int) {
     library_->AddOrUpdateSongs(SongList() << song);
     emit EditingFinished(index);
   } else {
-    QFuture<bool> future = song.BackgroundSave();
-    ModelFutureWatcher<bool>* watcher = new ModelFutureWatcher<bool>(index, this);
-    watcher->setFuture(future);
-    connect(watcher, SIGNAL(finished()), SLOT(SongSaveComplete()));
+    TagReaderReply* reply = TagReaderClient::Instance()->SaveFile(
+          song.url().toLocalFile(), song);
+
+    NewClosure(reply, SIGNAL(Finished(bool)),
+               this, SLOT(SongSaveComplete(TagReaderReply*,QPersistentModelIndex)),
+               reply, QPersistentModelIndex(index));
   }
   return true;
 }
 
-void Playlist::SongSaveComplete() {
-  ModelFutureWatcher<bool>* watcher = static_cast<ModelFutureWatcher<bool>*>(sender());
-  watcher->deleteLater();
-  const QPersistentModelIndex& index = watcher->index();
-  if (index.isValid()) {
+void Playlist::SongSaveComplete(TagReaderReply* reply, const QPersistentModelIndex& index) {
+  if (reply->is_successful() && index.isValid()) {
     QFuture<void> future = item_at(index.row())->BackgroundReload();
     ModelFutureWatcher<void>* watcher = new ModelFutureWatcher<void>(index, this);
     watcher->setFuture(future);
     connect(watcher, SIGNAL(finished()), SLOT(ItemReloadComplete()));
   }
+
+  reply->deleteLater();
 }
 
 void Playlist::ItemReloadComplete() {

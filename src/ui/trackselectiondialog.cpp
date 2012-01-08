@@ -18,6 +18,7 @@
 #include "iconloader.h"
 #include "trackselectiondialog.h"
 #include "ui_trackselectiondialog.h"
+#include "core/tagreaderclient.h"
 
 #include <QFileInfo>
 #include <QFutureWatcher>
@@ -243,7 +244,7 @@ void TrackSelectionDialog::SaveData(const QList<Data>& data) {
     copy.set_album(new_metadata.album());
     copy.set_track(new_metadata.track());
 
-    copy.Save();
+    TagReaderClient::Instance()->SaveFileBlocking(copy.url().toLocalFile(), copy);
   }
 }
 

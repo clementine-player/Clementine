@@ -26,6 +26,7 @@
 
 #include "config.h"
 #include "core/mac_startup.h"
+#include "core/tagreaderclient.h"
 #include "engines/engine_fwd.h"
 #include "library/librarymodel.h"
 #include "playlist/playlistitem.h"
@@ -220,7 +221,8 @@ class MainWindow : public QMainWindow, public PlatformInterface {
 
   void NowPlayingWidgetPositionChanged(bool above_status_bar);
 
-  void SongSaveComplete();
+  void SongSaveComplete(TagReaderReply* reply,
+                        const QPersistentModelIndex& index);
 
   void ShowCoverManager();
 #ifdef HAVE_LIBLASTFM

@@ -15,37 +15,14 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "fmpsparser.h"
-#include "logging.h"
 #include "mpris_common.h"
 #include "song.h"
 #include "timeconstants.h"
+#include "core/encoding.h"
+#include "core/logging.h"
+#include "core/messagehandler.h"
 
 #include <algorithm>
-
-#include <sys/stat.h>
-
-#include <aifffile.h>
-#include <asffile.h>
-#include <attachedpictureframe.h>
-#include <commentsframe.h>
-#include <fileref.h>
-#include <flacfile.h>
-#include <id3v1genres.h>
-#include <id3v2tag.h>
-#include <mp4file.h>
-#include <mp4tag.h>
-#include <mpcfile.h>
-#include <mpegfile.h>
-#include <oggfile.h>
-#include <oggflacfile.h>
-#include <speexfile.h>
-#include <tag.h>
-#include <textidentificationframe.h>
-#include <trueaudiofile.h>
-#include <tstring.h>
-#include <vorbisfile.h>
-#include <wavfile.h>
 
 #ifdef HAVE_LIBLASTFM
   #include "internet/fixlastfm.h"
@@ -61,6 +38,8 @@
 #include <QTime>
 #include <QVariant>
 #include <QtConcurrentRun>
+
+#include <id3v1genres.h>
 
 #ifdef Q_OS_WIN32
 # include <mswmdm.h>
@@ -79,18 +58,11 @@
 #include <boost/scoped_ptr.hpp>
 using boost::scoped_ptr;
 
-#include "encoding.h"
 #include "utilities.h"
 #include "covers/albumcoverloader.h"
 #include "engines/enginebase.h"
 #include "library/sqlrow.h"
 #include "widgets/trackslider.h"
-
-
-// Taglib added support for FLAC pictures in 1.7.0
-#if (TAGLIB_MAJOR_VERSION > 1) || (TAGLIB_MAJOR_VERSION == 1 && TAGLIB_MINOR_VERSION >= 7)
-# define TAGLIB_HAS_FLAC_PICTURELIST
-#endif
 
 
 namespace {
@@ -107,10 +79,6 @@ QStringList Updateify(const QStringList& list) {
   for (int i=0 ; i<ret.count() ; ++i)
     ret[i].prepend(ret[i] + " = :");
   return ret;
-}
-
-TagLib::String QStringToTaglibString(const QString& s) {
-  return TagLib::String(s.toUtf8().constData(), TagLib::String::UTF8);
 }
 
 } // namespace
@@ -142,17 +110,9 @@ const QString Song::kFtsUpdateSpec = Updateify(Song::kFtsColumns).join(", ");
 const QString Song::kManuallyUnsetCover = "(unset)";
 const QString Song::kEmbeddedCover = "(embedded)";
 
-TagLibFileRefFactory Song::kDefaultFactory;
-QMutex Song::sTaglibMutex;
-
 
 struct Song::Private : public QSharedData {
   Private();
-
-  // This is here and not in Song itself so we don't have to include
-  // <xiphcomment.h> in the main header.
-  void ParseOggTag(const TagLib::Ogg::FieldListMap& map, const QTextCodec* codec,
-                   QString* disc, QString* compilation);
 
   bool valid_;
   int id_;
@@ -254,29 +214,15 @@ Song::Private::Private()
 {
 }
 
-TagLib::FileRef* TagLibFileRefFactory::GetFileRef(const QString& filename) {
-#ifdef Q_OS_WIN32
-  return new TagLib::FileRef(filename.toStdWString().c_str());
-#else
-  return new TagLib::FileRef(QFile::encodeName(filename).constData());
-#endif
-}
 
 Song::Song()
-  : d(new Private),
-    factory_(&kDefaultFactory)
+  : d(new Private)
 {
 }
 
 Song::Song(const Song &other)
-  : d(other.d),
-    factory_(&kDefaultFactory)
+  : d(other.d)
 {
-}
-
-Song::Song(FileRefFactory* factory)
-    : d(new Private),
-      factory_(factory) {
 }
 
 Song::~Song() {
@@ -284,7 +230,6 @@ Song::~Song() {
 
 Song& Song::operator =(const Song& other) {
   d = other.d;
-  factory_ = other.factory_;
   return *this;
 }
 
@@ -430,15 +375,6 @@ void Song::set_genre_id3(int id) {
   set_genre(TStringToQString(TagLib::ID3v1::genre(id)));
 }
 
-QString Song::Decode(const TagLib::String& tag, const QTextCodec* codec) {
-  if (codec && tag.isLatin1()) {  // Never override UTF-8.
-    const std::string fixed = QString::fromUtf8(tag.toCString(true)).toStdString();
-    return codec->toUnicode(fixed.c_str()).trimmed();
-  } else {
-    return TStringToQString(tag).trimmed();
-  }
-}
-
 QString Song::Decode(const QString& tag, const QTextCodec* codec) {
   if (!codec) {
     return tag;
@@ -447,275 +383,71 @@ QString Song::Decode(const QString& tag, const QTextCodec* codec) {
   return codec->toUnicode(tag.toUtf8());
 }
 
-bool Song::HasProperMediaFile() const {
-#ifndef QT_NO_DEBUG_OUTPUT
-  if (qApp->thread() == QThread::currentThread())
-    qLog(Warning) << "HasProperMediaFile() on GUI thread!";
-#endif
-
-  QMutexLocker l(&sTaglibMutex);
-  scoped_ptr<TagLib::FileRef> fileref(factory_->GetFileRef(d->url_.toLocalFile()));
-
-  return !fileref->isNull() && fileref->tag();
-}
-
-void Song::InitFromFile(const QString& filename, int directory_id) {
-#ifndef QT_NO_DEBUG_OUTPUT
-  if (qApp->thread() == QThread::currentThread())
-    qLog(Warning) << "InitFromFile() on GUI thread!";
-#endif
-
+void Song::InitFromProtobuf(const pb::tagreader::SongMetadata& pb) {
   d->init_from_file_ = true;
-
-  d->url_ = QUrl::fromLocalFile(filename);
-  d->directory_id_ = directory_id;
-
-  QFileInfo info(filename);
-  d->basefilename_ = info.fileName();
-
-  QMutexLocker l(&sTaglibMutex);
-  scoped_ptr<TagLib::FileRef> fileref(factory_->GetFileRef(filename));
-
-  if(fileref->isNull()) {
-    return;
-  }
-
-  d->filesize_ = info.size();
-  d->mtime_ = info.lastModified().toTime_t();
-  d->ctime_ = info.created().toTime_t();
-
-  // This is single byte encoding, therefore can't be CJK.
-  UniversalEncodingHandler detector(NS_FILTER_NON_CJK);
-
-  TagLib::Tag* tag = fileref->tag();
-  QTextCodec* codec = NULL;
-  if (tag) {
-    TagLib::MPEG::File* file = dynamic_cast<TagLib::MPEG::File*>(fileref->file());
-    if (file && (file->ID3v2Tag() || file->ID3v1Tag())) {
-      codec = detector.Guess(*fileref);
-    }
-    if (codec &&
-        codec->name() != "UTF-8" &&
-        codec->name() != "ISO-8859-1") {
-      // Mark tags where we detect an unusual codec as suspicious.
-      d->suspicious_tags_ = true;
-    }
-
-
-    d->title_ = Decode(tag->title());
-    d->artist_ = Decode(tag->artist());
-    d->album_ = Decode(tag->album());
-    d->genre_ = Decode(tag->genre());
-    d->year_ = tag->year();
-    d->track_ = tag->track();
-
-    d->valid_ = true;
-  }
-
-  QString disc;
-  QString compilation;
-  if (TagLib::MPEG::File* file = dynamic_cast<TagLib::MPEG::File*>(fileref->file())) {
-    if (file->ID3v2Tag()) {
-      const TagLib::ID3v2::FrameListMap& map = file->ID3v2Tag()->frameListMap();
-
-      if (!map["TPOS"].isEmpty())
-        disc = TStringToQString(map["TPOS"].front()->toString()).trimmed();
-
-      if (!map["TBPM"].isEmpty())
-        d->bpm_ = TStringToQString(map["TBPM"].front()->toString()).trimmed().toFloat();
-
-      if (!map["TCOM"].isEmpty())
-        d->composer_ = Decode(map["TCOM"].front()->toString());
-
-      if (!map["TPE2"].isEmpty()) // non-standard: Apple, Microsoft
-        d->albumartist_ = Decode(map["TPE2"].front()->toString());
-
-      if (!map["TCMP"].isEmpty())
-        compilation = TStringToQString(map["TCMP"].front()->toString()).trimmed();
-
-      if (!map["APIC"].isEmpty())
-        set_embedded_cover();
-
-      // Find a suitable comment tag.  For now we ignore iTunNORM comments.
-      for (int i=0 ; i<map["COMM"].size() ; ++i) {
-        const TagLib::ID3v2::CommentsFrame* frame =
-            dynamic_cast<const TagLib::ID3v2::CommentsFrame*>(map["COMM"][i]);
-
-        if (frame && TStringToQString(frame->description()) != "iTunNORM") {
-          d->comment_ = Decode(frame->text());
-          break;
-        }
-      }
-
-      // Parse FMPS frames
-      for (int i=0 ; i<map["TXXX"].size() ; ++i) {
-        const TagLib::ID3v2::UserTextIdentificationFrame* frame =
-            dynamic_cast<const TagLib::ID3v2::UserTextIdentificationFrame*>(map["TXXX"][i]);
-
-        if (frame && frame->description().startsWith("FMPS_")) {
-          ParseFMPSFrame(TStringToQString(frame->description()),
-                         TStringToQString(frame->fieldList()[1]));
-        }
-      }
-    }
-  } else if (TagLib::Ogg::Vorbis::File* file = dynamic_cast<TagLib::Ogg::Vorbis::File*>(fileref->file())) {
-    if (file->tag()) {
-      d->ParseOggTag(file->tag()->fieldListMap(), NULL, &disc, &compilation);
-    }
-    d->comment_ = Decode(tag->comment());
-  } else if (TagLib::FLAC::File* file = dynamic_cast<TagLib::FLAC::File*>(fileref->file())) {
-    if ( file->xiphComment() ) {
-      d->ParseOggTag(file->xiphComment()->fieldListMap(), NULL, &disc, &compilation);
-#ifdef TAGLIB_HAS_FLAC_PICTURELIST
-      if (!file->pictureList().isEmpty()) {
-        set_embedded_cover();
-      }
-#endif
-    }
-    d->comment_ = Decode(tag->comment());
-  } else if (TagLib::MP4::File* file = dynamic_cast<TagLib::MP4::File*>(fileref->file())) {
-    if (file->tag()) {
-      TagLib::MP4::Tag* mp4_tag = file->tag();
-      const TagLib::MP4::ItemListMap& items = mp4_tag->itemListMap();
-      TagLib::MP4::ItemListMap::ConstIterator it = items.find("aART");
-      if (it != items.end()) {
-        TagLib::StringList album_artists = it->second.toStringList();
-        if (!album_artists.isEmpty()) {
-          d->albumartist_ = Decode(album_artists.front());
-        }
-      }
-    }
-  } else if (tag) {
-    d->comment_ = Decode(tag->comment());
-  }
-
-  if ( !disc.isEmpty() )   {
-    int i = disc.indexOf('/');
-    if ( i != -1 )
-      // disc.right( i ).toInt() is total number of discs, we don't use this at the moment
-      d->disc_ = disc.left( i ).toInt();
-    else
-      d->disc_ = disc.toInt();
-  }
-
-  if ( compilation.isEmpty() ) {
-    // well, it wasn't set, but if the artist is VA assume it's a compilation
-    if ( d->artist_.toLower()  == "various artists" )
-      d->compilation_ = true;
-  } else {
-    int i = compilation.toInt();
-    d->compilation_ = (i == 1);
-  }
-
-  if (fileref->audioProperties()) {
-    d->bitrate_    = fileref->audioProperties()->bitrate();
-    d->samplerate_ = fileref->audioProperties()->sampleRate();
-    set_length_nanosec(fileref->audioProperties()->length() * kNsecPerSec);
-  }
-
-  // Get the filetype if we can
-  GuessFileType(fileref.get());
-
-  // Set integer fields to -1 if they're not valid
-  #define intval(x) (x <= 0 ? -1 : x)
-  d->track_ = intval(d->track_);
-  d->disc_ = intval(d->disc_);
-  d->bpm_ = intval(d->bpm_);
-  d->year_ = intval(d->year_);
-  d->bitrate_ = intval(d->bitrate_);
-  d->samplerate_ = intval(d->samplerate_);
-  d->lastplayed_ = intval(d->lastplayed_);
-  d->rating_ = intval(d->rating_);
-  #undef intval
+  d->valid_ = pb.valid();
+  d->title_ = QStringFromStdString(pb.title());
+  d->album_ = QStringFromStdString(pb.album());
+  d->artist_ = QStringFromStdString(pb.artist());
+  d->albumartist_ = QStringFromStdString(pb.albumartist());
+  d->composer_ = QStringFromStdString(pb.composer());
+  d->track_ = pb.track();
+  d->disc_ = pb.disc();
+  d->bpm_ = pb.bpm();
+  d->year_ = pb.year();
+  d->genre_ = QStringFromStdString(pb.genre());
+  d->comment_ = QStringFromStdString(pb.comment());
+  d->compilation_ = pb.compilation();
+  d->rating_ = pb.rating();
+  d->playcount_ = pb.playcount();
+  d->skipcount_ = pb.skipcount();
+  d->lastplayed_ = pb.lastplayed();
+  d->score_ = pb.score();
+  set_length_nanosec(pb.length_nanosec());
+  d->bitrate_ = pb.bitrate();
+  d->samplerate_ = pb.samplerate();
+  d->url_ = QUrl::fromEncoded(QByteArray(pb.url().data(), pb.url().size()));
+  d->basefilename_ = QStringFromStdString(pb.basefilename());
+  d->mtime_ = pb.mtime();
+  d->ctime_ = pb.ctime();
+  d->filesize_ = pb.filesize();
+  d->suspicious_tags_ = pb.suspicious_tags();
+  d->art_automatic_ = QStringFromStdString(pb.art_automatic());
+  d->filetype_ = static_cast<FileType>(pb.type());
 }
 
-void Song::ParseFMPSFrame(const QString& name, const QString& value) {
-  FMPSParser parser;
-  if (!parser.Parse(value) || parser.is_empty())
-    return;
+void Song::ToProtobuf(pb::tagreader::SongMetadata* pb) const {
+  const QByteArray url(d->url_.toEncoded());
 
-  QVariant var;
-  if (name == "FMPS_Rating") {
-    var = parser.result()[0][0];
-    if (var.type() == QVariant::Double) {
-      d->rating_ = var.toDouble();
-    }
-  } else if (name == "FMPS_Rating_User") {
-    // Take a user rating only if there's no rating already set
-    if (d->rating_ == -1 && parser.result()[0].count() >= 2) {
-      var = parser.result()[0][1];
-      if (var.type() == QVariant::Double) {
-        d->rating_ = var.toDouble();
-      }
-    }
-  } else if (name == "FMPS_PlayCount") {
-    var = parser.result()[0][0];
-    if (var.type() == QVariant::Double) {
-      d->playcount_ = var.toDouble();
-    }
-  } else if (name == "FMPS_PlayCount_User") {
-    // Take a user rating only if there's no playcount already set
-    if (d->rating_ == -1 && parser.result()[0].count() >= 2) {
-      var = parser.result()[0][1];
-      if (var.type() == QVariant::Double) {
-        d->playcount_ = var.toDouble();
-      }
-    }
-  }
-}
-
-void Song::Private::ParseOggTag(const TagLib::Ogg::FieldListMap& map,
-                                const QTextCodec* codec,
-                                QString* disc, QString* compilation) {
-  if (!map["COMPOSER"].isEmpty())
-    composer_ = Decode(map["COMPOSER"].front(), codec);
-
-  if (!map["ALBUMARTIST"].isEmpty()) {
-    albumartist_ = Decode(map["ALBUMARTIST"].front(), codec);
-  } else if (!map["ALBUM ARTIST"].isEmpty()) {
-    albumartist_ = Decode(map["ALBUM ARTIST"].front(), codec);
-  }
-
-  if (!map["BPM"].isEmpty() )
-    bpm_ = TStringToQString( map["BPM"].front() ).trimmed().toFloat();
-
-  if (!map["DISCNUMBER"].isEmpty() )
-    *disc = TStringToQString( map["DISCNUMBER"].front() ).trimmed();
-
-  if (!map["COMPILATION"].isEmpty() )
-    *compilation = TStringToQString( map["COMPILATION"].front() ).trimmed();
-
-  if (!map["COVERART"].isEmpty())
-    art_automatic_ = kEmbeddedCover;
-}
-
-void Song::GuessFileType(TagLib::FileRef* fileref) {
-#ifdef TAGLIB_WITH_ASF
-  if (dynamic_cast<TagLib::ASF::File*>(fileref->file()))
-    d->filetype_ = Type_Asf;
-#endif
-  if (dynamic_cast<TagLib::FLAC::File*>(fileref->file()))
-    d->filetype_ = Type_Flac;
-#ifdef TAGLIB_WITH_MP4
-  if (dynamic_cast<TagLib::MP4::File*>(fileref->file()))
-    d->filetype_ = Type_Mp4;
-#endif
-  if (dynamic_cast<TagLib::MPC::File*>(fileref->file()))
-    d->filetype_ = Type_Mpc;
-  if (dynamic_cast<TagLib::MPEG::File*>(fileref->file()))
-    d->filetype_ = Type_Mpeg;
-  if (dynamic_cast<TagLib::Ogg::FLAC::File*>(fileref->file()))
-    d->filetype_ = Type_OggFlac;
-  if (dynamic_cast<TagLib::Ogg::Speex::File*>(fileref->file()))
-    d->filetype_ = Type_OggSpeex;
-  if (dynamic_cast<TagLib::Ogg::Vorbis::File*>(fileref->file()))
-    d->filetype_ = Type_OggVorbis;
-  if (dynamic_cast<TagLib::RIFF::AIFF::File*>(fileref->file()))
-    d->filetype_ = Type_Aiff;
-  if (dynamic_cast<TagLib::RIFF::WAV::File*>(fileref->file()))
-    d->filetype_ = Type_Wav;
-  if (dynamic_cast<TagLib::TrueAudio::File*>(fileref->file()))
-    d->filetype_ = Type_TrueAudio;
+  pb->set_valid(d->valid_);
+  pb->set_title(DataCommaSizeFromQString(d->title_));
+  pb->set_album(DataCommaSizeFromQString(d->album_));
+  pb->set_artist(DataCommaSizeFromQString(d->artist_));
+  pb->set_albumartist(DataCommaSizeFromQString(d->albumartist_));
+  pb->set_composer(DataCommaSizeFromQString(d->composer_));
+  pb->set_track(d->track_);
+  pb->set_disc(d->disc_);
+  pb->set_bpm(d->bpm_);
+  pb->set_year(d->year_);
+  pb->set_genre(DataCommaSizeFromQString(d->genre_));
+  pb->set_comment(DataCommaSizeFromQString(d->comment_));
+  pb->set_compilation(d->compilation_);
+  pb->set_rating(d->rating_);
+  pb->set_playcount(d->playcount_);
+  pb->set_skipcount(d->skipcount_);
+  pb->set_lastplayed(d->lastplayed_);
+  pb->set_score(d->score_);
+  pb->set_length_nanosec(length_nanosec());
+  pb->set_bitrate(d->bitrate_);
+  pb->set_samplerate(d->samplerate_);
+  pb->set_url(url.constData(), url.size());
+  pb->set_basefilename(DataCommaSizeFromQString(d->basefilename_));
+  pb->set_mtime(d->mtime_);
+  pb->set_ctime(d->ctime_);
+  pb->set_filesize(d->filesize_);
+  pb->set_suspicious_tags(d->suspicious_tags_);
+  pb->set_art_automatic(DataCommaSizeFromQString(d->art_automatic_));
+  pb->set_type(static_cast< ::pb::tagreader::SongMetadata_Type>(d->filetype_));
 }
 
 void Song::InitFromQuery(const SqlRow& q, bool reliable_metadata, int col) {
@@ -1371,90 +1103,9 @@ bool Song::IsMetadataEqual(const Song& other) const {
          d->cue_path_ == other.d->cue_path_;
 }
 
-void Song::SetTextFrame(const QString& id, const QString& value,
-                        TagLib::ID3v2::Tag* tag) {
-  TagLib::ByteVector id_vector = id.toUtf8().constData();
-
-  // Remove the frame if it already exists
-  while (tag->frameListMap().contains(id_vector) &&
-         tag->frameListMap()[id_vector].size() != 0) {
-    tag->removeFrame(tag->frameListMap()[id_vector].front());
-  }
-
-  // Create and add a new frame
-  TagLib::ID3v2::TextIdentificationFrame* frame =
-      new TagLib::ID3v2::TextIdentificationFrame(id.toUtf8().constData(),
-                                                 TagLib::String::UTF8);
-  frame->setText(QStringToTaglibString(value));
-  tag->addFrame(frame);
-}
-
 bool Song::IsEditable() const {
   return d->valid_ && !d->url_.isEmpty() && !is_stream() &&
          d->filetype_ != Type_Unknown && !has_cue();
-}
-
-bool Song::Save() const {
-  const QString filename = d->url_.toLocalFile();
-  if (filename.isNull())
-    return false;
-
-  QMutexLocker l(&sTaglibMutex);
-  scoped_ptr<TagLib::FileRef> fileref(factory_->GetFileRef(filename));
-
-  if (!fileref || fileref->isNull()) // The file probably doesn't exist
-    return false;
-
-  fileref->tag()->setTitle(QStringToTaglibString(d->title_));
-  fileref->tag()->setArtist(QStringToTaglibString(d->artist_));
-  fileref->tag()->setAlbum(QStringToTaglibString(d->album_));
-  fileref->tag()->setGenre(QStringToTaglibString(d->genre_));
-  fileref->tag()->setComment(QStringToTaglibString(d->comment_));
-  fileref->tag()->setYear(d->year_);
-  fileref->tag()->setTrack(d->track_);
-
-  if (TagLib::MPEG::File* file = dynamic_cast<TagLib::MPEG::File*>(fileref->file())) {
-    TagLib::ID3v2::Tag* tag = file->ID3v2Tag(true);
-    SetTextFrame("TPOS", d->disc_ <= 0 -1 ? QString() : QString::number(d->disc_), tag);
-    SetTextFrame("TBPM", d->bpm_ <= 0 -1 ? QString() : QString::number(d->bpm_), tag);
-    SetTextFrame("TCOM", d->composer_, tag);
-    SetTextFrame("TPE2", d->albumartist_, tag);
-    SetTextFrame("TCMP", d->compilation_ ? "1" : "0", tag);
-  }
-  else if (TagLib::Ogg::Vorbis::File* file = dynamic_cast<TagLib::Ogg::Vorbis::File*>(fileref->file())) {
-    TagLib::Ogg::XiphComment* tag = file->tag();
-    tag->addField("COMPOSER", QStringToTaglibString(d->composer_), true);
-    tag->addField("BPM", QStringToTaglibString(d->bpm_ <= 0 -1 ? QString() : QString::number(d->bpm_)), true);
-    tag->addField("DISCNUMBER", QStringToTaglibString(d->disc_ <= 0 -1 ? QString() : QString::number(d->disc_)), true);
-    tag->addField("COMPILATION", QStringToTaglibString(d->compilation_ ? "1" : "0"), true);
-  }
-  else if (TagLib::FLAC::File* file = dynamic_cast<TagLib::FLAC::File*>(fileref->file())) {
-    TagLib::Ogg::XiphComment* tag = file->xiphComment();
-    tag->addField("COMPOSER", QStringToTaglibString(d->composer_), true);
-    tag->addField("BPM", QStringToTaglibString(d->bpm_ <= 0 -1 ? QString() : QString::number(d->bpm_)), true);
-    tag->addField("DISCNUMBER", QStringToTaglibString(d->disc_ <= 0 -1 ? QString() : QString::number(d->disc_)), true);
-    tag->addField("COMPILATION", QStringToTaglibString(d->compilation_ ? "1" : "0"), true);
-  }
-
-  bool ret = fileref->save();
-  #ifdef Q_OS_LINUX
-  if (ret) {
-    // Linux: inotify doesn't seem to notice the change to the file unless we
-    // change the timestamps as well. (this is what touch does)
-    utimensat(0, QFile::encodeName(filename).constData(), NULL, 0);
-  }
-  #endif  // Q_OS_LINUX
-
-  return ret;
-}
-
-bool Song::Save(const Song& song) {
-  return song.Save();
-}
-
-QFuture<bool> Song::BackgroundSave() const {
-  QFuture<bool> future = QtConcurrent::run(&Song::Save, Song(*this));
-  return future;
 }
 
 bool Song::operator==(const Song& other) const {
@@ -1466,79 +1117,6 @@ bool Song::operator==(const Song& other) const {
 uint qHash(const Song& song) {
   // Should compare the same fields as operator==
   return qHash(song.url().toString()) ^ qHash(song.beginning_nanosec());
-}
-
-QImage Song::LoadEmbeddedArt(const QString& filename) {
-  QImage ret;
-  if (filename.isEmpty())
-    return ret;
-
-  QMutexLocker l(&sTaglibMutex);
-
-#ifdef Q_OS_WIN32
-  TagLib::FileRef ref(filename.toStdWString().c_str());
-#else
-  TagLib::FileRef ref(QFile::encodeName(filename).constData());
-#endif
-
-  if (ref.isNull() || !ref.file())
-    return ret;
-
-  // MP3
-  TagLib::MPEG::File* file = dynamic_cast<TagLib::MPEG::File*>(ref.file());
-  if (file && file->ID3v2Tag()) {
-    TagLib::ID3v2::FrameList apic_frames = file->ID3v2Tag()->frameListMap()["APIC"];
-    if (apic_frames.isEmpty())
-      return ret;
-
-    TagLib::ID3v2::AttachedPictureFrame* pic =
-        static_cast<TagLib::ID3v2::AttachedPictureFrame*>(apic_frames.front());
-
-    ret.loadFromData((const uchar*) pic->picture().data(), pic->picture().size());
-    return ret;
-  }
-
-  // Ogg vorbis/speex
-  TagLib::Ogg::XiphComment* xiph_comment =
-      dynamic_cast<TagLib::Ogg::XiphComment*>(ref.file()->tag());
-
-  if (xiph_comment) {
-    TagLib::Ogg::FieldListMap map = xiph_comment->fieldListMap();
-
-    // Ogg lacks a definitive standard for embedding cover art, but it seems
-    // b64 encoding a field called COVERART is the general convention
-    if (!map.contains("COVERART"))
-      return ret;
-
-    QByteArray image_data_b64(map["COVERART"].toString().toCString());
-    QByteArray image_data = QByteArray::fromBase64(image_data_b64);
-
-    if (!ret.loadFromData(image_data))
-      ret.loadFromData(image_data_b64); //maybe it's not b64 after all
-
-    return ret;
-  }
-  
-#ifdef TAGLIB_HAS_FLAC_PICTURELIST
-  // Flac
-  TagLib::FLAC::File* flac_file = dynamic_cast<TagLib::FLAC::File*>(ref.file());
-  if (flac_file && flac_file->xiphComment()) {
-    TagLib::List<TagLib::FLAC::Picture*> pics = flac_file->pictureList();
-    if (!pics.isEmpty()) {
-      // Use the first picture in the file - this could be made cleverer and
-      // pick the front cover if it's present.
-
-      std::list<TagLib::FLAC::Picture*>::iterator it = pics.begin();
-      TagLib::FLAC::Picture* picture = *it;
-
-      QByteArray image_data(picture->data().data(), picture->data().size());
-      ret.loadFromData(image_data);
-      return ret;
-    }
-  }
-#endif
-    
-  return ret;
 }
 
 bool Song::IsOnSameAlbum(const Song& other) const {

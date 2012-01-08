@@ -47,7 +47,7 @@ find_package(OpenGL REQUIRED)
 find_package(Boost REQUIRED)
 find_package(Gettext REQUIRED)
 find_package(PkgConfig REQUIRED)
-find_package(Protobuf)
+find_package(Protobuf REQUIRED)
 
 pkg_check_modules(TAGLIB REQUIRED taglib>=1.6)
 pkg_check_modules(QJSON REQUIRED QJson)
@@ -377,6 +377,9 @@ add_subdirectory(3rdparty/universalchardet)
 add_subdirectory(tests)
 add_subdirectory(dist)
 add_subdirectory(tools/ultimate_lyrics_parser)
+add_subdirectory(ext/libclementine-common)
+add_subdirectory(ext/libclementine-tagreader)
+add_subdirectory(ext/clementine-tagreader)
 
 option(WITH_DEBIAN OFF)
 if(WITH_DEBIAN)
@@ -392,11 +395,11 @@ if(HAVE_BREAKPAD)
 endif(HAVE_BREAKPAD)
 
 if(HAVE_SPOTIFY)
-  add_subdirectory(spotifyblob/common)
+  add_subdirectory(ext/libclementine-spotifyblob)
 endif(HAVE_SPOTIFY)
 
 if(HAVE_SPOTIFY_BLOB)
-  add_subdirectory(spotifyblob/blob)
+  add_subdirectory(ext/clementine-spotifyblob)
 endif(HAVE_SPOTIFY_BLOB)
 
 # This goes after everything else because KDE fucks everything else up with its

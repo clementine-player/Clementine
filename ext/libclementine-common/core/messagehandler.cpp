@@ -19,24 +19,44 @@
 // compatible.
 
 
-#include "spotifymessages.pb.h"
-#include "spotifymessagehandler.h"
+#include "messagehandler.h"
 #include "core/logging.h"
 
 #include <QAbstractSocket>
-#include <QBuffer>
+#include <QLocalSocket>
 
-SpotifyMessageHandler::SpotifyMessageHandler(QAbstractSocket* device, QObject* parent)
+_MessageHandlerBase::_MessageHandlerBase(QIODevice* device, QObject* parent)
   : QObject(parent),
-    device_(device),
+    device_(NULL),
+    flush_abstract_socket_(NULL),
+    flush_local_socket_(NULL),
     reading_protobuf_(false),
     expected_length_(0) {
+  if (device) {
+    SetDevice(device);
+  }
+}
+
+void _MessageHandlerBase::SetDevice(QIODevice* device) {
+  device_ = device;
+
   buffer_.open(QIODevice::ReadWrite);
 
   connect(device, SIGNAL(readyRead()), SLOT(DeviceReadyRead()));
+
+  // Yeah I know.
+  if (QAbstractSocket* socket = qobject_cast<QAbstractSocket*>(device)) {
+    flush_abstract_socket_ = &QAbstractSocket::flush;
+    connect(socket, SIGNAL(disconnected()), SLOT(SocketClosed()));
+  } else if (QLocalSocket* socket = qobject_cast<QLocalSocket*>(device)) {
+    flush_local_socket_ = &QLocalSocket::flush;
+    connect(socket, SIGNAL(disconnected()), SLOT(SocketClosed()));
+  } else {
+    qFatal("Unsupported device type passed to _MessageHandlerBase");
+  }
 }
 
-void SpotifyMessageHandler::DeviceReadyRead() {
+void _MessageHandlerBase::DeviceReadyRead() {
   while (device_->bytesAvailable()) {
     if (!reading_protobuf_) {
       // Read the length of the next message
@@ -52,14 +72,11 @@ void SpotifyMessageHandler::DeviceReadyRead() {
     // Did we get everything?
     if (buffer_.size() == expected_length_) {
       // Parse the message
-      spotify_pb::SpotifyMessage message;
-      if (!message.ParseFromArray(buffer_.data().constData(), buffer_.size())) {
+      if (!RawMessageArrived(buffer_.data())) {
         qLog(Error) << "Malformed protobuf message";
         device_->close();
         return;
       }
-
-      emit MessageArrived(message);
 
       // Clear the buffer
       buffer_.close();
@@ -70,21 +87,37 @@ void SpotifyMessageHandler::DeviceReadyRead() {
   }
 }
 
-void SpotifyMessageHandler::SendMessage(const spotify_pb::SpotifyMessage& message) {
-  std::string data = message.SerializeAsString();
-  WriteMessage(QByteArray(data.data(), data.size()));
-}
-
-void SpotifyMessageHandler::SendMessageAsync(const spotify_pb::SpotifyMessage& message) {
-  std::string data = message.SerializeAsString();
-  metaObject()->invokeMethod(this, "WriteMessage", Qt::QueuedConnection,
-                             Q_ARG(QByteArray, QByteArray(data.data(), data.size())));
-}
-
-void SpotifyMessageHandler::WriteMessage(const QByteArray& data) {
+void _MessageHandlerBase::WriteMessage(const QByteArray& data) {
   QDataStream s(device_);
   s << quint32(data.length());
   s.writeRawData(data.data(), data.length());
 
-  device_->flush();
+  // Sorry.
+  if (flush_abstract_socket_) {
+    ((static_cast<QAbstractSocket*>(device_))->*(flush_abstract_socket_))();
+  } else if (flush_local_socket_) {
+    ((static_cast<QLocalSocket*>(device_))->*(flush_local_socket_))();
+  }
+}
+
+_MessageReplyBase::_MessageReplyBase(int id, QObject* parent)
+  : QObject(parent),
+    id_(id),
+    finished_(false),
+    success_(false)
+{
+}
+
+bool _MessageReplyBase::WaitForFinished() {
+  semaphore_.acquire();
+  return success_;
+}
+
+void _MessageReplyBase::Abort() {
+  Q_ASSERT(!finished_);
+  finished_ = true;
+  success_ = false;
+
+  emit Finished(success_);
+  semaphore_.release();
 }

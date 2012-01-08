@@ -17,8 +17,8 @@
 
 #include "config.h"
 #include "commandlineoptions.h"
-#include "logging.h"
 #include "version.h"
+#include "core/logging.h"
 
 #include <cstdlib>
 #include <getopt.h>

@@ -1,0 +1,102 @@
+package pb.tagreader;
+
+option optimize_for = LITE_RUNTIME;
+
+
+message SongMetadata {
+  enum Type {
+    UNKNOWN = 0;
+    ASF = 1;
+    FLAC = 2;
+    MP4 = 3;
+    MPC = 4;
+    MPEG = 5;
+    OGGFLAC = 6;
+    OGGSPEEX = 7;
+    OGGVORBIS = 8;
+    AIFF = 9;
+    WAV = 10;
+    TRUEAUDIO = 11;
+    CDDA = 12;
+    STREAM = 99;
+  }
+
+  optional bool valid = 1;
+  optional string title = 2;
+  optional string album = 3;
+  optional string artist = 4;
+  optional string albumartist = 5;
+  optional string composer = 6;
+  optional int32 track = 7;
+  optional int32 disc = 8;
+  optional float bpm = 9;
+  optional int32 year = 10;
+  optional string genre = 11;
+  optional string comment = 12;
+  optional bool compilation = 13;
+  optional float rating = 14;
+  optional int32 playcount = 15;
+  optional int32 skipcount = 16;
+  optional int32 lastplayed = 17;
+  optional int32 score = 18;
+  optional uint64 length_nanosec = 19;
+  optional int32 bitrate = 20;
+  optional int32 samplerate = 21;
+  optional string url = 22;
+  optional string basefilename = 23;
+  optional int32 mtime = 24;
+  optional int32 ctime = 25;
+  optional int32 filesize = 26;
+  optional bool suspicious_tags = 27;
+  optional string art_automatic = 28;
+  optional Type type = 29;
+}
+
+message ReadFileRequest {
+  optional string filename = 1;
+}
+
+message ReadFileResponse {
+  optional SongMetadata metadata = 1;
+}
+
+message SaveFileRequest {
+  optional string filename = 1;
+  optional SongMetadata metadata = 2;
+}
+
+message SaveFileResponse {
+  optional bool success = 1;
+}
+
+message IsMediaFileRequest {
+  optional string filename = 1;
+}
+
+message IsMediaFileResponse {
+  optional bool success = 1;
+}
+
+message LoadEmbeddedArtRequest {
+  optional string filename = 1;
+}
+
+message LoadEmbeddedArtResponse {
+  optional bytes data = 1;
+}
+
+message Message {
+  optional int32 id = 1;
+
+  optional ReadFileRequest read_file_request = 2;
+  optional ReadFileResponse read_file_response = 3;
+
+  optional SaveFileRequest save_file_request = 4;
+  optional SaveFileResponse save_file_response = 5;
+
+  optional IsMediaFileRequest is_media_file_request = 6;
+  optional IsMediaFileResponse is_media_file_response = 7;
+
+  optional LoadEmbeddedArtRequest load_embedded_art_request = 8;
+  optional LoadEmbeddedArtResponse load_embedded_art_response = 9;
+}
