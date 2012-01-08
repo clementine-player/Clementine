@@ -695,7 +695,9 @@ void LibraryWatcher::ReloadSettings() {
   }
 
   if (!monitor_ && was_monitoring_before) {
-    fs_watcher_->Clear();
+    if (fs_watcher_) {
+      fs_watcher_->Clear();
+    }
   } else if (monitor_ && !was_monitoring_before) {
     // Add all directories to all QFileSystemWatchers again
     foreach (const DirData& data, watched_dirs_.values()) {
