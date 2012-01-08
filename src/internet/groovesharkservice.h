@@ -21,6 +21,8 @@
 #include "internetmodel.h"
 #include "internetservice.h"
 
+#include <QSslError>
+
 class GroovesharkUrlHandler;
 class NetworkAccessManager;
 class Playlist;
@@ -173,6 +175,8 @@ class GroovesharkService : public InternetService {
   void SongRemovedFromFavorites(QNetworkReply* reply, int task_id);
   void StreamMarked();
   void SongMarkedAsComplete();
+
+  void RequestSslErrors(const QList<QSslError>& errors);
 
   void Homepage();
   // Refresh all Grooveshark's items, and re-fill them
