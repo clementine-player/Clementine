@@ -18,7 +18,7 @@
 #include "test_utils.h"
 #include "gtest/gtest.h"
 
-#include "core/fmpsparser.h"
+#include "fmpsparser.h"
 
 #include <QtDebug>
 
