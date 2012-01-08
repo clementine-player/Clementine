@@ -366,6 +366,13 @@ void GroovesharkService::SessionCreated() {
 
   reply->deleteLater();
 
+  if (reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt() != 200) {
+    emit StreamError("Failed to create Grooveshark session: " +
+                     reply->errorString());
+    emit LoginFinished(false);
+    return;
+  }
+
   QVariantMap result = ExtractResult(reply);
   if (!result["success"].toBool()) {
     qLog(Error) << "Grooveshark returned an error during session creation";
@@ -1377,7 +1384,21 @@ QNetworkReply* GroovesharkService::CreateRequest(const QString& method_name, QLi
   QNetworkRequest req(url);
   QNetworkReply *reply = network_->post(req, post_params);
 
+  if (use_https) {
+    connect(reply, SIGNAL(sslErrors(QList<QSslError>)),
+            SLOT(RequestSslErrors(QList<QSslError>)));
+  }
+
   return reply;
+}
+
+void GroovesharkService::RequestSslErrors(const QList<QSslError>& errors) {
+  QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
+
+  foreach (const QSslError& error, errors) {
+    emit StreamError("SSL error occurred in Grooveshark request for " +
+                     reply->url().toString() + ": " + error.errorString());
+  }
 }
 
 bool GroovesharkService::WaitForReply(QNetworkReply* reply) {
