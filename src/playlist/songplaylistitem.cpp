@@ -17,6 +17,7 @@
 
 #include "playlistbackend.h"
 #include "songplaylistitem.h"
+#include "core/tagreaderclient.h"
 
 #include "library/sqlrow.h"
 
@@ -40,8 +41,6 @@ bool SongPlaylistItem::InitFromQuery(const SqlRow& query) {
 
   if (type() == "Stream") {
     song_.set_filetype(Song::Type_Stream);
-  } else {
-    song_.set_directory_id(-1);
   }
 
   return true;
@@ -54,11 +53,8 @@ QUrl SongPlaylistItem::Url() const {
 void SongPlaylistItem::Reload() {
   if (song_.url().scheme() != "file")
     return;
-  QString old_filename = song_.url().toLocalFile();
-  int old_directory_id = song_.directory_id();
 
-  song_ = Song();
-  song_.InitFromFile(old_filename, old_directory_id);
+  TagReaderClient::Instance()->ReadFileBlocking(song_.url().toLocalFile(), &song_);
 }
 
 Song SongPlaylistItem::Metadata() const {

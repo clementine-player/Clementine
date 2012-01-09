@@ -19,7 +19,6 @@
 #include "gmock/gmock-matchers.h"
 #include "gtest/gtest.h"
 #include "test_utils.h"
-#include "mock_taglib.h"
 
 #include "core/timeconstants.h"
 #include "playlistparsers/cueparser.h"
@@ -28,10 +27,6 @@
 
 class CueParserTest : public ::testing::Test {
  protected:
-  static void SetUpTestCase() {
-    testing::DefaultValue<TagLib::String>::Set("foobarbaz");
-  }
-
   CueParserTest()
       : parser_(NULL) {
   }
@@ -52,7 +47,6 @@ class CueParserTest : public ::testing::Test {
   }
 
   CueParser parser_;
-  MockFileRefFactory taglib_;
 };
 
 TEST_F(CueParserTest, ParsesASong) {

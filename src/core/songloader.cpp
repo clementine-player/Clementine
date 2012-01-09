@@ -19,13 +19,14 @@
 #include "songloader.h"
 #include "core/logging.h"
 #include "core/song.h"
+#include "core/tagreaderclient.h"
 #include "core/timeconstants.h"
+#include "internet/fixlastfm.h"
 #include "library/librarybackend.h"
 #include "library/sqlrow.h"
 #include "playlistparsers/parserbase.h"
 #include "playlistparsers/cueparser.h"
 #include "playlistparsers/playlistparser.h"
-#include "internet/fixlastfm.h"
 
 #include <QBuffer>
 #include <QDirIterator>
@@ -201,6 +202,7 @@ void SongLoader::AudioCDTagsLoaded(const QString& artist, const QString& album,
     song.set_title(ret.title_);
     song.set_length_nanosec(ret.duration_msec_ * kNsecPerMsec);
     song.set_track(track_number);
+    song.set_year(ret.year_);
     // We need to set url: that's how playlist will find the correct item to update
     song.set_url(QUrl(QString("cdda://%1").arg(track_number++)));
     songs_ << song;
@@ -286,7 +288,7 @@ SongLoader::Result SongLoader::LoadLocal(const QString& filename, bool block,
     // it's a normal media file
     } else {
       Song song;
-      song.InitFromFile(filename, -1);
+      TagReaderClient::Instance()->ReadFileBlocking(filename, &song);
 
       song_list << song;
 
@@ -316,7 +318,7 @@ void SongLoader::EffectiveSongsLoad() {
     } else {
       // it's a normal media file
       QString filename = song.url().toLocalFile();
-      song.InitFromFile(filename, -1);
+      TagReaderClient::Instance()->ReadFileBlocking(filename, &song);
     }
   }
 }

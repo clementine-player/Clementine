@@ -23,6 +23,7 @@
 #include "core/network.h"
 #include "core/player.h"
 #include "core/taskmanager.h"
+#include "core/utilities.h"
 #include "globalsearch/globalsearch.h"
 #include "globalsearch/somafmsearchprovider.h"
 #include "ui/iconloader.h"
@@ -151,7 +152,7 @@ void SomaFMService::ReadChannel(QXmlStreamReader& reader, StreamList* ret) {
 
           stream.url_ = url;
         } else {
-          ConsumeElement(reader);
+          Utilities::ConsumeCurrentElement(&reader);
         }
         break;
 
@@ -168,20 +169,6 @@ Song SomaFMService::Stream::ToSong() const {
   ret.set_artist(dj_);
   ret.set_url(url_);
   return ret;
-}
-
-void SomaFMService::ConsumeElement(QXmlStreamReader& reader) {
-  int level = 1;
-  while (!reader.atEnd()) {
-    switch (reader.readNext()) {
-      case QXmlStreamReader::StartElement: level++; break;
-      case QXmlStreamReader::EndElement:   level--; break;
-      default: break;
-    }
-
-    if (level == 0)
-      return;
-  }
 }
 
 void SomaFMService::Homepage() {

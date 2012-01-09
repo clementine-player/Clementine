@@ -8,8 +8,13 @@ else(USE_SYSTEM_GMOCK)
   include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../3rdparty/gmock/gtest)
 endif(USE_SYSTEM_GMOCK)
 
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../src)
-include_directories(${CMAKE_CURRENT_BINARY_DIR}/../src)
+include_directories(${CMAKE_SOURCE_DIR}/src)
+include_directories(${CMAKE_BINARY_DIR}/src)
+include_directories(${CMAKE_SOURCE_DIR}/ext/clementine-tagreader)
+include_directories(${CMAKE_SOURCE_DIR}/ext/libclementine-common)
+include_directories(${CMAKE_SOURCE_DIR}/ext/libclementine-tagreader)
+include_directories(${CMAKE_BINARY_DIR}/ext/libclementine-tagreader)
+
 include_directories(${QT_QTTEST_INCLUDE_DIR})
 
 if(HAVE_LIBGPOD)
@@ -45,14 +50,15 @@ if(NOT USE_SYSTEM_GMOCK)
   set(GMOCK_LIBRARIES gmock gtest)
 endif(NOT USE_SYSTEM_GMOCK)
 
-add_definitions(-DGTEST_USE_OWN_TR1_TUPLE=1)
+add_definitions(-DGTEST_USE_OWN_TR1_TUPLE=0)
 
 set(TESTUTILS-SOURCES
   mock_networkaccessmanager.cpp
-  mock_taglib.cpp
   mock_playlistitem.cpp
   test_utils.cpp
   testobjectdecorators.cpp
+
+  ${CMAKE_SOURCE_DIR}/ext/clementine-tagreader/fmpsparser.cpp
 )
 
 set(TESTUTILS-MOC-HEADERS
@@ -114,24 +120,24 @@ endmacro (add_test_file)
 add_test_file(albumcovermanager_test.cpp true)
 add_test_file(asxparser_test.cpp false)
 add_test_file(asxiniparser_test.cpp false)
-add_test_file(cueparser_test.cpp false)
+#add_test_file(cueparser_test.cpp false)
 add_test_file(database_test.cpp false)
-add_test_file(fileformats_test.cpp false)
+#add_test_file(fileformats_test.cpp false)
 add_test_file(fmpsparser_test.cpp false)
 add_test_file(librarybackend_test.cpp false)
 add_test_file(librarymodel_test.cpp true)
-add_test_file(m3uparser_test.cpp false)
+#add_test_file(m3uparser_test.cpp false)
 add_test_file(mergedproxymodel_test.cpp false)
 add_test_file(organiseformat_test.cpp false)
 add_test_file(playlist_test.cpp true)
-add_test_file(plsparser_test.cpp false)
+#add_test_file(plsparser_test.cpp false)
 add_test_file(scopedtransaction_test.cpp false)
-add_test_file(songloader_test.cpp false)
+#add_test_file(songloader_test.cpp false)
 add_test_file(songplaylistitem_test.cpp false)
 add_test_file(song_test.cpp false)
 add_test_file(translations_test.cpp false)
 add_test_file(utilities_test.cpp false)
-add_test_file(xspfparser_test.cpp false)
+#add_test_file(xspfparser_test.cpp false)
 
 if(LINUX AND HAVE_DBUS)
   add_test_file(mpris1_test.cpp true)

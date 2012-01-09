@@ -55,7 +55,6 @@
 #include "library/librarydirectorymodel.h"
 #include "library/libraryfilterwidget.h"
 #include "library/libraryviewcontainer.h"
-#include "musicbrainz/fingerprinter.h"
 #include "musicbrainz/tagfetcher.h"
 #include "playlist/playlistbackend.h"
 #include "playlist/playlist.h"
@@ -1500,21 +1499,24 @@ void MainWindow::RenumberTracks() {
 
     if (song.IsEditable()) {
       song.set_track(track);
-      QFuture<bool> future = song.BackgroundSave();
-      ModelFutureWatcher<bool>* watcher = new ModelFutureWatcher<bool>(source_index, this);
-      watcher->setFuture(future);
-      connect(watcher, SIGNAL(finished()), SLOT(SongSaveComplete()));
+
+      TagReaderReply* reply =
+          TagReaderClient::Instance()->SaveFile(song.url().toLocalFile(), song);
+
+      NewClosure(reply, SIGNAL(Finished(bool)),
+                 this, SLOT(SongSaveComplete(TagReaderReply*,QPersistentModelIndex)),
+                 reply, QPersistentModelIndex(source_index));
     }
     track++;
   }
 }
 
-void MainWindow::SongSaveComplete() {
-  ModelFutureWatcher<bool>* watcher = static_cast<ModelFutureWatcher<bool>*>(sender());
-  watcher->deleteLater();
-  if (watcher->index().isValid()) {
-    playlists_->current()->ReloadItems(QList<int>() << watcher->index().row());
+void MainWindow::SongSaveComplete(TagReaderReply* reply,
+                                  const QPersistentModelIndex& index) {
+  if (reply->is_successful() && index.isValid()) {
+    playlists_->current()->ReloadItems(QList<int>() << index.row());
   }
+  reply->deleteLater();
 }
 
 void MainWindow::SelectionSetValue() {
@@ -1532,10 +1534,12 @@ void MainWindow::SelectionSetValue() {
     Song song = playlists_->current()->item_at(row)->Metadata();
 
     if (Playlist::set_column_value(song, column, column_value)) {
-      QFuture<bool> future = song.BackgroundSave();
-      ModelFutureWatcher<bool>* watcher = new ModelFutureWatcher<bool>(source_index, this);
-      watcher->setFuture(future);
-      connect(watcher, SIGNAL(finished()), SLOT(SongSaveComplete()));
+      TagReaderReply* reply =
+          TagReaderClient::Instance()->SaveFile(song.url().toLocalFile(), song);
+
+      NewClosure(reply, SIGNAL(Finished(bool)),
+                 this, SLOT(SongSaveComplete(TagReaderReply*,QPersistentModelIndex)),
+                 reply, QPersistentModelIndex(source_index));
     }
   }
 }
@@ -2121,11 +2125,6 @@ void MainWindow::Exit() {
 }
 
 void MainWindow::AutoCompleteTags() {
-  if (!Fingerprinter::GstreamerHasOfa()) {
-    QMessageBox::warning(this, tr("Error"), tr("Your gstreamer installation is missing the 'ofa' plugin.  This is required for automatic tag fetching.  Try installing the 'gstreamer-plugins-bad' package."));
-    return;
-  }
-
   // Create the tag fetching stuff if it hasn't been already
   if (!tag_fetcher_) {
     tag_fetcher_.reset(new TagFetcher);

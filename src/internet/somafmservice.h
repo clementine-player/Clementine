@@ -81,7 +81,6 @@ private slots:
 
 private:
   void ReadChannel(QXmlStreamReader& reader, StreamList* ret);
-  void ConsumeElement(QXmlStreamReader& reader);
   void PopulateStreams();
 
 private:

@@ -34,7 +34,7 @@ class Library : public QObject {
   Q_OBJECT
 
  public:
-  Library(BackgroundThread<Database>* db_thread, TaskManager* task_manager_,
+  Library(BackgroundThread<Database>* db_thread, TaskManager* task_manager,
           QObject* parent);
 
   static const char* kSongsTable;

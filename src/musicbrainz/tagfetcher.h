@@ -24,12 +24,12 @@
 #include <QFutureWatcher>
 #include <QObject>
 
-class MusicDnsClient;
+class AcoustidClient;
 
 class TagFetcher : public QObject {
   Q_OBJECT
 
-  // High level interface to Fingerprinter, MusicDnsClient and
+  // High level interface to Fingerprinter, AcoustidClient and
   // MusicBrainzClient.
 
 public:
@@ -54,7 +54,7 @@ private:
   static QString GetFingerprint(const Song& song);
 
   QFutureWatcher<QString>* fingerprint_watcher_;
-  MusicDnsClient* musicdns_client_;
+  AcoustidClient* acoustid_client_;
   MusicBrainzClient* musicbrainz_client_;
 
   SongList songs_;

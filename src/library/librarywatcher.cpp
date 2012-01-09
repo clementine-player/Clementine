@@ -20,6 +20,7 @@
 #include "librarybackend.h"
 #include "core/filesystemwatcherinterface.h"
 #include "core/logging.h"
+#include "core/tagreaderclient.h"
 #include "core/taskmanager.h"
 #include "playlistparsers/cueparser.h"
 
@@ -49,7 +50,7 @@ LibraryWatcher::LibraryWatcher(QObject* parent)
   : QObject(parent),
     backend_(NULL),
     task_manager_(NULL),
-    fs_watcher_(NULL),
+    fs_watcher_(FileSystemWatcherInterface::Create(this)),
     stop_requested_(false),
     scan_on_startup_(true),
     monitor_(true),
@@ -451,7 +452,8 @@ void LibraryWatcher::UpdateNonCueAssociatedSong(const QString& file, const Song&
   }
 
   Song song_on_disk;
-  song_on_disk.InitFromFile(file, t->dir());
+  song_on_disk.set_directory_id(t->dir());
+  TagReaderClient::Instance()->ReadFileBlocking(file, &song_on_disk);
 
   if(song_on_disk.is_valid()) {
     PreserveUserSetData(file, image, matching_song, &song_on_disk, t);
@@ -476,8 +478,10 @@ SongList LibraryWatcher::ScanNewFile(const QString& file, const QString& path,
     // media files. Playlist parser for CUEs considers every entry in sheet
     // valid and we don't want invalid media getting into library!
     foreach(const Song& cue_song, cue_parser_->Load(&cue, matching_cue, path)) {
-      if(cue_song.url().toLocalFile() == file && cue_song.HasProperMediaFile()) {
-        song_list << cue_song;
+      if (cue_song.url().toLocalFile() == file) {
+        if (TagReaderClient::Instance()->IsMediaFileBlocking(file)) {
+          song_list << cue_song;
+        }
       }
     }
 
@@ -488,7 +492,7 @@ SongList LibraryWatcher::ScanNewFile(const QString& file, const QString& path,
   // it's a normal media file
   } else {
     Song song;
-    song.InitFromFile(file, -1);
+    TagReaderClient::Instance()->ReadFileBlocking(file, &song);
 
     if (song.is_valid()) {
       song_list << song;

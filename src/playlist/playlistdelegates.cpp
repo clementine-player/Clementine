@@ -103,13 +103,15 @@ void QueuedItemDelegate::DrawBox(
   painter->setRenderHint(QPainter::Antialiasing);
 
   // Draw the box
+  painter->translate(0.5, 0.5);
   painter->setPen(QPen(Qt::white, 1));
   painter->setBrush(gradient);
   painter->drawRoundedRect(rect, kQueueBoxCornerRadius, kQueueBoxCornerRadius);
 
   // Draw the text
   painter->setFont(smaller);
-  painter->drawText(rect, Qt::AlignCenter, text);
+  painter->drawText(rect.translated(-1, -1), Qt::AlignCenter, text);
+  painter->translate(-0.5, -0.5);
 }
 
 int QueuedItemDelegate::queue_indicator_size(const QModelIndex& index) const {
@@ -456,7 +458,7 @@ QPixmap SongSourceDelegate::LookupPixmap(const QUrl& url, const QSize& size) con
     icon = handler->icon();
   } else {
     if (url.scheme() == "spotify") {
-      icon = IconLoader::Load("spotify");
+      icon = QIcon(":icons/22x22/spotify.png");
     } else if (url.scheme() == "file") {
       icon = IconLoader::Load("folder-sound");
     }
@@ -468,16 +470,19 @@ QPixmap SongSourceDelegate::LookupPixmap(const QUrl& url, const QSize& size) con
 
 void SongSourceDelegate::paint(
     QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const {
+  // Draw the background
   PlaylistDelegateBase::paint(painter, option, index);
+
   QStyleOptionViewItem option_copy(option);
   initStyleOption(&option_copy, index);
+
+  // Find the pixmap to use for this URL
   const QUrl& url = index.data().toUrl();
   QPixmap pixmap = LookupPixmap(url, option_copy.decorationSize);
-  const int margin = (option_copy.rect.width() - pixmap.width()) / 2;
-  QRect draw_rect(
-      margin + option_copy.rect.x(),
-      option_copy.rect.y(),
-      qMin(option_copy.decorationSize.width(), pixmap.width()),
-      qMin(option_copy.decorationSize.height(), pixmap.height()));
+
+  // Draw the pixmap in the middle of the rectangle
+  QRect draw_rect(QPoint(0, 0), option_copy.decorationSize);
+  draw_rect.moveCenter(option_copy.rect.center());
+
   painter->drawPixmap(draw_rect, pixmap);
 }

@@ -3,7 +3,7 @@
 
 #include "internetmodel.h"
 #include "internetservice.h"
-#include "spotifyblob/common/spotifymessages.pb.h"
+#include "spotifymessages.pb.h"
 
 #include <QProcess>
 #include <QTimer>
@@ -71,7 +71,7 @@ public:
   LoginState login_state() const { return login_state_; }
   bool IsLoggedIn() const { return login_state_ == LoginState_LoggedIn; }
 
-  static void SongFromProtobuf(const spotify_pb::Track& track, Song* song);
+  static void SongFromProtobuf(const pb::spotify::Track& track, Song* song);
 
 signals:
   void BlobStateChanged();
@@ -86,24 +86,24 @@ protected:
 
 private:
   void StartBlobProcess();
-  void FillPlaylist(QStandardItem* item, const spotify_pb::LoadPlaylistResponse& response);
+  void FillPlaylist(QStandardItem* item, const pb::spotify::LoadPlaylistResponse& response);
   void EnsureMenuCreated();
 
   QStandardItem* PlaylistBySpotifyIndex(int index) const;
-  bool DoPlaylistsDiffer(const spotify_pb::Playlists& response) const;
+  bool DoPlaylistsDiffer(const pb::spotify::Playlists& response) const;
 
 private slots:
   void EnsureServerCreated(const QString& username = QString(),
                            const QString& password = QString());
   void BlobProcessError(QProcess::ProcessError error);
   void LoginCompleted(bool success, const QString& error,
-                      spotify_pb::LoginResponse_Error error_code);
-  void PlaylistsUpdated(const spotify_pb::Playlists& response);
-  void InboxLoaded(const spotify_pb::LoadPlaylistResponse& response);
-  void StarredLoaded(const spotify_pb::LoadPlaylistResponse& response);
-  void UserPlaylistLoaded(const spotify_pb::LoadPlaylistResponse& response);
-  void SearchResults(const spotify_pb::SearchResponse& response);
-  void SyncPlaylistProgress(const spotify_pb::SyncPlaylistProgress& progress);
+                      pb::spotify::LoginResponse_Error error_code);
+  void PlaylistsUpdated(const pb::spotify::Playlists& response);
+  void InboxLoaded(const pb::spotify::LoadPlaylistResponse& response);
+  void StarredLoaded(const pb::spotify::LoadPlaylistResponse& response);
+  void UserPlaylistLoaded(const pb::spotify::LoadPlaylistResponse& response);
+  void SearchResults(const pb::spotify::SearchResponse& response);
+  void SyncPlaylistProgress(const pb::spotify::SyncPlaylistProgress& progress);
 
   void OpenSearchTab();
   void DoSearch();
@@ -141,7 +141,7 @@ private:
   QMap<int, int> playlist_sync_ids_;
 
   LoginState login_state_;
-  spotify_pb::Bitrate bitrate_;
+  pb::spotify::Bitrate bitrate_;
   bool volume_normalisation_;
 };
 

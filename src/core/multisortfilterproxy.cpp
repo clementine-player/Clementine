@@ -1,5 +1,5 @@
-#include "logging.h"
 #include "multisortfilterproxy.h"
+#include "core/logging.h"
 
 #include <QDate>
 #include <QDateTime>

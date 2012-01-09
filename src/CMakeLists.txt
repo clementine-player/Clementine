@@ -26,6 +26,7 @@ include_directories(${QTSINGLEAPPLICATION_INCLUDE_DIRS})
 include_directories(${QTIOCOMPRESSOR_INCLUDE_DIRS})
 include_directories(${QXT_INCLUDE_DIRS})
 include_directories(${ECHONEST_INCLUDE_DIRS})
+include_directories(${CHROMAPRINT_INCLUDE_DIRS})
 
 find_package(OpenGL)
 include_directories(${OPENGL_INCLUDE_DIR})
@@ -42,6 +43,10 @@ endif(HAVE_LIBLASTFM)
 if(HAVE_BREAKPAD)
   include_directories(../3rdparty/google-breakpad)
 endif(HAVE_BREAKPAD)
+
+include_directories(${CMAKE_SOURCE_DIR}/ext/libclementine-common)
+include_directories(${CMAKE_SOURCE_DIR}/ext/libclementine-tagreader)
+include_directories(${CMAKE_BINARY_DIR}/ext/libclementine-tagreader)
 
 cmake_policy(SET CMP0011 NEW)
 include(../cmake/ParseArguments.cmake)
@@ -60,20 +65,16 @@ set(SOURCES
   core/appearance.cpp
   core/backgroundstreams.cpp
   core/backgroundthread.cpp
-  core/closure.cpp
   core/commandlineoptions.cpp
   core/crashreporting.cpp
   core/database.cpp
   core/deletefiles.cpp
-  core/encoding.cpp
   core/filesystemmusicstorage.cpp
   core/filesystemwatcherinterface.cpp
   core/fht.cpp
-  core/fmpsparser.cpp
   core/globalshortcutbackend.cpp
   core/globalshortcuts.cpp
   core/gnomeglobalshortcutbackend.cpp
-  core/logging.cpp
   core/mergedproxymodel.cpp
   core/multisortfilterproxy.cpp
   core/musicstorage.cpp
@@ -89,6 +90,7 @@ set(SOURCES
   core/song.cpp
   core/songloader.cpp
   core/stylesheetloader.cpp
+  core/tagreaderclient.cpp
   core/taskmanager.cpp
   core/urlhandler.cpp
   core/utilities.cpp
@@ -181,10 +183,9 @@ set(SOURCES
   library/librarywatcher.cpp
   library/sqlrow.cpp
 
-  musicbrainz/echoprinter.cpp
-  musicbrainz/fingerprinter.cpp
+  musicbrainz/acoustidclient.cpp
+  musicbrainz/chromaprinter.cpp
   musicbrainz/musicbrainzclient.cpp
-  musicbrainz/musicdnsclient.cpp
   musicbrainz/tagfetcher.cpp
 
   playlist/dynamicplaylistcontrols.cpp
@@ -332,7 +333,6 @@ set(HEADERS
 
   core/backgroundstreams.h
   core/backgroundthread.h
-  core/closure.h
   core/crashreporting.h
   core/database.h
   core/deletefiles.h
@@ -347,6 +347,7 @@ set(HEADERS
   core/player.h
   core/qtfslistener.h
   core/songloader.h
+  core/tagreaderclient.h
   core/taskmanager.h
   core/urlhandler.h
 
@@ -420,8 +421,8 @@ set(HEADERS
   library/libraryviewcontainer.h
   library/librarywatcher.h
 
+  musicbrainz/acoustidclient.h
   musicbrainz/musicbrainzclient.h
-  musicbrainz/musicdnsclient.h
   musicbrainz/tagfetcher.h
 
   playlist/dynamicplaylistcontrols.h
@@ -709,6 +710,9 @@ optional_source(HAVE_SPOTIFY
     internet/spotifyserver.h
     internet/spotifyservice.h
     internet/spotifysettingspage.h
+  INCLUDE_DIRECTORIES
+    ${CMAKE_SOURCE_DIR}/ext/libclementine-spotifyblob
+    ${CMAKE_BINARY_DIR}/ext/libclementine-spotifyblob
 )
 
 optional_source(HAVE_QCA INCLUDE_DIRECTORIES ${QCA_INCLUDE_DIRS})
@@ -964,13 +968,14 @@ add_dependencies(clementine_lib pot)
 
 
 target_link_libraries(clementine_lib
-  chardet
-  echoprint
+  libclementine-common
+  libclementine-tagreader
   sha2
+  ${TAGLIB_LIBRARIES}
+  ${CHROMAPRINT_LIBRARIES}
   ${ECHONEST_LIBRARIES}
   ${GOBJECT_LIBRARIES}
   ${GLIB_LIBRARIES}
-  ${TAGLIB_LIBRARIES}
   ${QJSON_LIBRARIES}
   ${QT_LIBRARIES}
   ${GSTREAMER_BASE_LIBRARIES}
@@ -1126,6 +1131,7 @@ target_link_libraries(clementine
 if(HAVE_SPOTIFY_BLOB)
   add_dependencies(clementine clementine-spotifyblob)
 endif(HAVE_SPOTIFY_BLOB)
+add_dependencies(clementine clementine-tagreader)
 
 set_target_properties(clementine PROPERTIES
   MACOSX_BUNDLE_INFO_PLIST "../dist/Info.plist"
