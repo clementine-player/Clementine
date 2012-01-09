@@ -19,6 +19,7 @@ import os
 import re
 import subprocess
 import sys
+import traceback
 
 FRAMEWORK_SEARCH_PATH=[
     '/target',
@@ -370,8 +371,8 @@ FixPlugin(FindGstreamerPlugin('gst-plugin-scanner'), '.')
 try:
   FixPlugin('clementine-spotifyblob', '.')
   FixPlugin('clementine-tagreader', '.')
-except Exception, e:
-  print 'Failed to find spotify blob: %s' % e
+except:
+  print 'Failed to find blob: %s' % traceback.format_exc()
 
 for plugin in QT_PLUGINS:
   FixPlugin(FindQtPlugin(plugin), os.path.dirname(plugin))
