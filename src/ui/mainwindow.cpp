@@ -17,6 +17,7 @@
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "core/appearance.h"
 #include "core/backgroundstreams.h"
 #include "core/commandlineoptions.h"
 #include "core/database.h"
@@ -690,6 +691,8 @@ MainWindow::MainWindow(
   // Load theme
   StyleSheetLoader* css_loader = new StyleSheetLoader(this);
   css_loader->SetStyleSheet(this, ":mainwindow.css");
+  appearance_ = new Appearance(this);
+  appearance_->Load();
 
   // Load playlists
   playlists_->Init(library_->backend(), playlist_backend_,

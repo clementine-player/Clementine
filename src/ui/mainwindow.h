@@ -34,6 +34,7 @@
 class About;
 class AddStreamDialog;
 class AlbumCoverManager;
+class Appearance;
 class ArtistInfoView;
 class ArtLoader;
 class BackgroundStreams;
@@ -264,6 +265,7 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   Ui_MainWindow* ui_;
   Windows7ThumbBar* thumbbar_;
 
+  Appearance* appearance_;
   SystemTrayIcon* tray_icon_;
   OSD* osd_;
   boost::scoped_ptr<EditTagDialog> edit_tag_dialog_;

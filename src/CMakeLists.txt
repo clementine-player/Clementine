@@ -57,6 +57,7 @@ set(SOURCES
   analyzers/sonogram.cpp
   analyzers/turbine.cpp
 
+  core/appearance.cpp
   core/backgroundstreams.cpp
   core/backgroundthread.cpp
   core/closure.cpp
@@ -258,6 +259,7 @@ set(SOURCES
   ui/albumcovermanager.cpp
   ui/albumcovermanagerlist.cpp
   ui/albumcoversearcher.cpp
+  ui/appearancesettingspage.cpp
   ui/backgroundstreamssettingspage.cpp
   ui/behavioursettingspage.cpp
   ui/coverfromurldialog.cpp
@@ -484,6 +486,7 @@ set(HEADERS
   ui/albumcovermanager.h
   ui/albumcovermanagerlist.h
   ui/albumcoversearcher.h
+  ui/appearancesettingspage.h
   ui/backgroundstreamssettingspage.h
   ui/behavioursettingspage.h
   ui/coverfromurldialog.h
@@ -589,6 +592,7 @@ set(UI
   ui/addstreamdialog.ui
   ui/albumcovermanager.ui
   ui/albumcoversearcher.ui
+  ui/appearancesettingspage.ui
   ui/backgroundstreamssettingspage.ui
   ui/behavioursettingspage.ui
   ui/coverfromurldialog.ui

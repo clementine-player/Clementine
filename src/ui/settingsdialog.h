@@ -61,6 +61,7 @@ public:
     Page_SongInformation,
     Page_GlobalShortcuts,
     Page_GlobalSearch,
+    Page_Appearance,
     Page_Notifications,
     Page_Library,
     Page_Lastfm,

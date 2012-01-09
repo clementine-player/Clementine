@@ -18,7 +18,6 @@
 #include "stylesheetloader.h"
 #include "core/logging.h"
 
-#include <QtDebug>
 #include <QFile>
 #include <QEvent>
 

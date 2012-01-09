@@ -15,6 +15,7 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "appearancesettingspage.h"
 #include "backgroundstreamssettingspage.h"
 #include "behavioursettingspage.h"
 #include "config.h"
@@ -128,6 +129,7 @@ SettingsDialog::SettingsDialog(BackgroundStreams* streams, QWidget* parent)
   QTreeWidgetItem* iface = AddCategory(tr("User interface"));
   AddPage(Page_GlobalShortcuts, new GlobalShortcutsSettingsPage(this), iface);
   AddPage(Page_GlobalSearch, new GlobalSearchSettingsPage(this), iface);
+  AddPage(Page_Appearance, new AppearanceSettingsPage(this), iface);
   AddPage(Page_SongInformation, new SongInfoSettingsPage(this), iface);
   AddPage(Page_Notifications, new NotificationsSettingsPage(this), iface);
 

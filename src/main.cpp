@@ -24,6 +24,7 @@
 #endif // Q_OS_WIN32
 
 #include "config.h"
+#include "core/appearance.h"
 #include "core/commandlineoptions.h"
 #include "core/crashreporting.h"
 #include "core/database.h"
@@ -356,6 +357,9 @@ int main(int argc, char *argv[]) {
 
   // Icons
   IconLoader::Init();
+
+  // Appearance (UI costumization)
+  Appearance appearance;
 
   Echonest::Config::instance()->setAPIKey("DFLFLJBUF4EGTXHIG");
   Echonest::Config::instance()->setNetworkAccessManager(new NetworkAccessManager);
