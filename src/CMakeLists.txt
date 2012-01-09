@@ -1127,6 +1127,7 @@ target_link_libraries(clementine
 if(HAVE_SPOTIFY_BLOB)
   add_dependencies(clementine clementine-spotifyblob)
 endif(HAVE_SPOTIFY_BLOB)
+add_dependencies(clementine clementine-tagreader)
 
 set_target_properties(clementine PROPERTIES
   MACOSX_BUNDLE_INFO_PLIST "../dist/Info.plist"
