@@ -227,6 +227,15 @@ void SettingsDialog::accept() {
   QDialog::accept();
 }
 
+void SettingsDialog::reject() {
+  // Notify each page that user clicks on Cancel
+  foreach (const PageData& data, pages_.values()) {
+    data.page_->Cancel();
+  }
+
+  QDialog::reject();
+}
+
 void SettingsDialog::showEvent(QShowEvent* e) {
   // Load settings
   loading_settings_ = true;

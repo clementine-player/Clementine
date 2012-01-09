@@ -688,10 +688,10 @@ MainWindow::MainWindow(
   NowPlayingWidgetPositionChanged(ui_->now_playing->show_above_status_bar());
 
   // Load theme
+  appearance_ = new Appearance(this);
+  appearance_->LoadUserTheme();
   StyleSheetLoader* css_loader = new StyleSheetLoader(this);
   css_loader->SetStyleSheet(this, ":mainwindow.css");
-  appearance_ = new Appearance(this);
-  appearance_->Load();
 
   // Load playlists
   playlists_->Init(library_->backend(), playlist_backend_,
@@ -1944,6 +1944,7 @@ void MainWindow::EnsureSettingsDialogCreated() {
   settings_dialog_->SetGlobalShortcutManager(global_shortcuts_);
   settings_dialog_->SetGlobalSearch(global_search_);
   settings_dialog_->SetSongInfoView(song_info_view_);
+  settings_dialog_->SetAppearance(appearance_);
 
   // Settings
   connect(settings_dialog_.get(), SIGNAL(accepted()), SLOT(ReloadAllSettings()));

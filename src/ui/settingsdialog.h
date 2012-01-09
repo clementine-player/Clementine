@@ -27,6 +27,7 @@
 class QScrollArea;
 class QTreeWidgetItem;
 
+class Appearance;
 class BackgroundStreams;
 class GlobalSearch;
 class GlobalShortcuts;
@@ -85,6 +86,7 @@ public:
   void SetGstEngine(const GstEngine* engine) { gst_engine_ = engine; }
   void SetSongInfoView(SongInfoView* view) { song_info_view_ = view; }
   void SetGlobalSearch(GlobalSearch* global_search) { global_search_ = global_search; }
+  void SetAppearance(Appearance* appearance) { appearance_ = appearance; }
 
   bool is_loading_settings() const { return loading_settings_; }
 
@@ -94,11 +96,13 @@ public:
   SongInfoView* song_info_view() const { return song_info_view_; }
   BackgroundStreams* background_streams() const { return streams_; }
   GlobalSearch* global_search() const { return global_search_; }
+  Appearance* appearance() const { return appearance_; }
 
   void OpenAtPage(Page page);
 
   // QDialog
   void accept();
+  void reject();
 
   // QWidget
   void showEvent(QShowEvent* e);
@@ -127,6 +131,7 @@ private:
   SongInfoView* song_info_view_;
   BackgroundStreams* streams_;
   GlobalSearch* global_search_;
+  Appearance* appearance_;
 
   Ui_SettingsDialog* ui_;
   bool loading_settings_;
