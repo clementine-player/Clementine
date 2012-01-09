@@ -67,6 +67,7 @@
 #include <QLibraryInfo>
 #include <QNetworkCookie>
 #include <QNetworkProxyFactory>
+#include <QSslSocket>
 #include <QSqlDatabase>
 #include <QSqlQuery>
 #include <QTextCodec>
@@ -337,6 +338,15 @@ int main(int argc, char *argv[]) {
   // Resources
   Q_INIT_RESOURCE(data);
   Q_INIT_RESOURCE(translations);
+
+  // Grooveshark uses GoDaddy to sign its SSL certificates, which are in turn
+  // signed by a ValiCert CA.  This CA certificate isn't installed by default
+  // in Windows, it's only added by windows update, or manually browsing to a
+  // website with a certificate signed by ValiCert.  Here we explicitly add
+  // that CA to the default list used by QSslSocket, so it always works in
+  // Clementine.
+  QSslSocket::addDefaultCaCertificates(
+        QSslCertificate::fromPath(":/grooveshark-valicert-ca.pem", QSsl::Pem));
 
   // Has the user forced a different language?
   QString language = options.language();
