@@ -1,5 +1,5 @@
 /* This file is part of Clementine.
-   Copyright 2010, David Sansome <me@davidsansome.com>
+   Copyright 2012, David Sansome <me@davidsansome.com>
 
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -17,8 +17,10 @@
 
 #include "chromaprinter.h"
 
+#include <QCoreApplication>
 #include <QDir>
 #include <QEventLoop>
+#include <QThread>
 #include <QtDebug>
 #include <QTime>
 
@@ -32,9 +34,7 @@ Chromaprinter::Chromaprinter(const QString& filename)
   : filename_(filename),
     event_loop_(NULL),
     convert_element_(NULL),
-    finishing_(false)
-{
-  buffer_.open(QIODevice::WriteOnly);
+    finishing_(false) {
 }
 
 Chromaprinter::~Chromaprinter() {
@@ -57,6 +57,10 @@ GstElement* Chromaprinter::CreateElement(const QString &factory_name,
 }
 
 QString Chromaprinter::CreateFingerprint() {
+  Q_ASSERT(QThread::currentThread() != qApp->thread());
+
+  buffer_.open(QIODevice::WriteOnly);
+
   GMainContext* context = g_main_context_new();
   g_main_context_push_thread_default(context);
   event_loop_ = g_main_loop_new(context, FALSE);
