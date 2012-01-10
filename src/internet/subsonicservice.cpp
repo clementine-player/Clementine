@@ -53,6 +53,10 @@ void SubsonicService::LazyPopulate(QStandardItem *item)
   default:
     break;
   }
+
+  item->setRowCount(0);
+  QStandardItem* loading = new QStandardItem(tr("Loading..."));
+  item->appendRow(loading);
 }
 
 void SubsonicService::ReloadSettings()
@@ -169,6 +173,7 @@ void SubsonicService::ReadTrack(QXmlStreamReader *reader, QStandardItem *parent)
   QString id = reader->attributes().value("id").toString();
   song.set_title(reader->attributes().value("title").toString());
   song.set_album(reader->attributes().value("album").toString());
+  song.set_track(reader->attributes().value("track").toString().toInt());
   song.set_artist(reader->attributes().value("artist").toString());
   song.set_bitrate(reader->attributes().value("bitRate").toString().toInt());
   song.set_year(reader->attributes().value("year").toString().toInt());
@@ -180,6 +185,7 @@ void SubsonicService::ReadTrack(QXmlStreamReader *reader, QStandardItem *parent)
   url.setScheme(url.scheme() == "https" ? "subsonics" : "subsonic");
   url.addQueryItem("id", id);
   song.set_url(url);
+  song.set_filesize(reader->attributes().value("size").toString().toInt());
 
   QStandardItem *item = new QStandardItem(reader->attributes().value("title").toString());
   item->setData(Type_Track, InternetModel::Role_Type);
@@ -251,6 +257,7 @@ void SubsonicService::onGetIndexesFinished()
 
   reader.readNextStartElement();
   Q_ASSERT(reader.name() == "indexes");
+  root_->setRowCount(0);
   while (reader.readNextStartElement())
   {
     if (reader.name() == "index")
@@ -286,6 +293,7 @@ void SubsonicService::onGetMusicDirectoryFinished()
   reader.readNextStartElement();
   Q_ASSERT(reader.name() == "directory");
   QStandardItem *parent = item_lookup_.value(reader.attributes().value("id").toString());
+  parent->setRowCount(0);
   while (reader.readNextStartElement())
   {
     if (reader.attributes().value("isDir") == "true")
