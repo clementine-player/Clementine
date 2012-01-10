@@ -56,13 +56,16 @@ using boost::shared_ptr;
 
 const char* GstEngine::kSettingsGroup = "GstEngine";
 const char* GstEngine::kAutoSink = "autoaudiosink";
-const char* GstEngine::kHypnotoadPipeline = 
+const char* GstEngine::kHypnotoadPipeline =
       "audiotestsrc wave=6 ! "
       "audioecho intensity=1 delay=50000000 ! "
       "audioecho intensity=1 delay=25000000 ! "
       "equalizer-10bands "
       "band0=-24 band1=-3 band2=7.5 band3=12 band4=8 "
       "band5=6 band6=5 band7=6 band8=0 band9=-24";
+const char* GstEngine::kEnterprisePipeline =
+      "audiotestsrc wave=5 ! "
+      "audiocheblimit mode=0 cutoff=120";
 
 GstEngine::GstEngine()
   : Engine::Base(),
@@ -697,6 +700,11 @@ shared_ptr<GstEnginePipeline> GstEngine::CreatePipeline(const QUrl& url,
 
   if (url.scheme() == "hypnotoad") {
     ret->InitFromString(kHypnotoadPipeline);
+    return ret;
+  }
+
+  if (url.scheme() == "enterprise") {
+    ret->InitFromString(kEnterprisePipeline);
     return ret;
   }
 

@@ -59,10 +59,11 @@ class BackgroundStreams : public QObject {
   QMap<QString, Stream*> streams_;
 
   static const char* kSettingsGroup;
-  static const int kVersion = 1;
+  static const int kVersion = 2;
 
   static const char* kHypnotoadUrl;
   static const char* kRainUrl;
+  static const char* kEnterpriseUrl;
 };
 
 #endif

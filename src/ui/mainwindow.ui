@@ -474,6 +474,7 @@
     </property>
     <addaction name="action_rain"/>
     <addaction name="action_hypnotoad"/>
+    <addaction name="action_enterprise"/>
     <addaction name="action_kittens"/>
     <addaction name="separator"/>
    </widget>
@@ -685,6 +686,14 @@
    </property>
    <property name="text">
     <string comment="Label for button to enable/disable Hypnotoad background sound.">All Glory to the Hypnotoad!</string>
+   </property>
+  </action>
+  <action name="action_enterprise">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string comment="Label for button to enable/disable Enterprise background sound.">Make it so!</string>
    </property>
   </action>
   <action name="action_kittens">

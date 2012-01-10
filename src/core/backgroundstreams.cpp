@@ -10,6 +10,7 @@
 const char* BackgroundStreams::kSettingsGroup = "BackgroundStreams";
 const char* BackgroundStreams::kHypnotoadUrl = "hypnotoad:///";
 const char* BackgroundStreams::kRainUrl = "http://data.clementine-player.org/rainymood";
+const char* BackgroundStreams::kEnterpriseUrl = "enterprise:///";
 
 BackgroundStreams::BackgroundStreams(EngineBase* engine, QObject* parent)
     : QObject(parent),
@@ -25,12 +26,14 @@ void BackgroundStreams::LoadStreams() {
   s.beginGroup(kSettingsGroup);
 
   int version = s.value("version", 0).toInt();
-  if (version < kVersion) {
-    s.setValue("version", kVersion);
+  if (version < 1) {
     AddStream(QT_TR_NOOP("Hypnotoad"), QUrl(kHypnotoadUrl));
     AddStream(QT_TR_NOOP("Rain"), QUrl(kRainUrl));
-    SaveStreams();
-    return;
+  }
+
+  if (version < kVersion) {
+    s.setValue("version", kVersion);
+    AddStream(QT_TR_NOOP("Make it so!"), QUrl(kEnterpriseUrl));
   }
 
   int size = s.beginReadArray("streams");
@@ -41,6 +44,8 @@ void BackgroundStreams::LoadStreams() {
               s.value("volume").toInt(),
               s.value("enabled").toBool());
   }
+
+  SaveStreams();
 }
 
 void BackgroundStreams::SaveStreams() {

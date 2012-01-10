@@ -153,6 +153,7 @@ class GstEngine : public Engine::Base, public BufferConsumer {
   static const int kSeekDelayNanosec = 100 * kNsecPerMsec; // 100msec
 
   static const char* kHypnotoadPipeline;
+  static const char* kEnterprisePipeline;
 
   QFuture<void> initialising_;
 

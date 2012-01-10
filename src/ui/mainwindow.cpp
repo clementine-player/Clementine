@@ -371,6 +371,7 @@ MainWindow::MainWindow(
 
   background_streams_->AddAction("Rain", ui_->action_rain);
   background_streams_->AddAction("Hypnotoad", ui_->action_hypnotoad);
+  background_streams_->AddAction("Make it so!", ui_->action_enterprise);
 
   // Playlist view actions
   ui_->action_next_playlist->setShortcuts(QList<QKeySequence>()
