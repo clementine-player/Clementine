@@ -171,6 +171,7 @@ set(SOURCES
   internet/somafmurlhandler.cpp
   internet/subsonicservice.cpp
   internet/subsonicsettingspage.cpp
+  internet/subsonicurlhandler.cpp
 
   library/groupbydialog.cpp
   library/library.cpp
@@ -415,6 +416,7 @@ set(HEADERS
   internet/somafmurlhandler.h
   internet/subsonicservice.h
   internet/subsonicsettingspage.h
+  internet/subsonicurlhandler.h
 
   library/groupbydialog.h
   library/library.h

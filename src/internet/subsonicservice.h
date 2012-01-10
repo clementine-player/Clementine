@@ -7,6 +7,9 @@
 class QNetworkAccessManager;
 class QXmlStreamReader;
 
+class SubsonicUrlHandler;
+class SubsonicHttpsUrlHandler;
+
 class SubsonicService : public InternetService
 {
   Q_OBJECT
@@ -84,6 +87,8 @@ class SubsonicService : public InternetService
   QModelIndex context_item_;
   QStandardItem* root_;
   QNetworkAccessManager* network_;
+  SubsonicUrlHandler* http_url_handler_;
+  SubsonicHttpsUrlHandler* https_url_handler_;
 
   // Configuration
   QString server_;

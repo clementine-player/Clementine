@@ -1,6 +1,8 @@
+#include "subsonicurlhandler.h"
 #include "subsonicservice.h"
 #include "internetmodel.h"
 #include "core/logging.h"
+#include "core/player.h"
 
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
@@ -15,9 +17,13 @@ const char* SubsonicService::kApiClientName = "Clementine";
 SubsonicService::SubsonicService(InternetModel *parent)
   : InternetService(kServiceName, parent, parent),
     network_(new QNetworkAccessManager(this)),
+    http_url_handler_(new SubsonicUrlHandler(this, this)),
+    https_url_handler_(new SubsonicHttpsUrlHandler(this, this)),
     login_state_(LoginState_OtherError),
     item_lookup_()
 {
+  model()->player()->RegisterUrlHandler(http_url_handler_);
+  model()->player()->RegisterUrlHandler(https_url_handler_);
 }
 
 SubsonicService::~SubsonicService()
@@ -171,6 +177,7 @@ void SubsonicService::ReadTrack(QXmlStreamReader *reader, QStandardItem *parent)
   length *= 1000000000;
   song.set_length_nanosec(length);
   QUrl url = BuildRequestUrl("stream");
+  url.setScheme(url.scheme() == "https" ? "subsonics" : "subsonic");
   url.addQueryItem("id", id);
   song.set_url(url);
 
