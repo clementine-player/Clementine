@@ -3,7 +3,7 @@
 # Version numbers.
 set(CLEMENTINE_VERSION_MAJOR 1)
 set(CLEMENTINE_VERSION_MINOR 0)
-set(CLEMENTINE_VERSION_PATCH 0)
+set(CLEMENTINE_VERSION_PATCH 1)
 #set(CLEMENTINE_VERSION_PRERELEASE rc1)
 
 # This should be set to OFF in a release branch
