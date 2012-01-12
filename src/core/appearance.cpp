@@ -25,6 +25,8 @@ const char* Appearance::kUseCustomColorSet = "use-custom-set";
 const char* Appearance::kForegroundColor = "foreground-color";
 const char* Appearance::kBackgroundColor = "background-color";
 
+const QPalette Appearance::kDefaultPalette = QPalette();
+
 Appearance::Appearance(QObject* parent)
   : QObject(parent)
 {
@@ -49,7 +51,7 @@ void Appearance::LoadUserTheme() {
 }
 
 void Appearance::ResetToSystemDefaultTheme() {
-  QApplication::setPalette(QPalette());
+  QApplication::setPalette(kDefaultPalette);
 }
 
 void Appearance::ChangeForegroundColor(const QColor& color) {
