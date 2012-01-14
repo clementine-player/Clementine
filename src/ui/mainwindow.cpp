@@ -690,6 +690,9 @@ MainWindow::MainWindow(
 
   // Load theme
   appearance_ = new Appearance(this);
+  // This is tricky: we need to save the default/system palette now, before
+  // loading user preferred theme (which will overide it), to be able to restore it later
+  const_cast<QPalette&>(Appearance::kDefaultPalette) = QApplication::palette();
   appearance_->LoadUserTheme();
   StyleSheetLoader* css_loader = new StyleSheetLoader(this);
   css_loader->SetStyleSheet(this, ":mainwindow.css");

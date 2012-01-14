@@ -35,8 +35,8 @@ class Appearance : public QObject {
     static const char* kUseCustomColorSet;
     static const char* kForegroundColor;
     static const char* kBackgroundColor;
-
     static const QPalette kDefaultPalette;
+
   private:
     QColor foreground_color_;
     QColor background_color_;
