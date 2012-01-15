@@ -160,7 +160,7 @@ if (WIN32)
   # RC compiler
   string(REPLACE "gcc" "windres" CMAKE_RC_COMPILER_INIT ${CMAKE_C_COMPILER})
   enable_language(RC)
-  SET(CMAKE_RC_COMPILE_OBJECT "<CMAKE_RC_COMPILER> -O coff -o <OBJECT> <SOURCE> -I../../dist/windows")
+  SET(CMAKE_RC_COMPILE_OBJECT "<CMAKE_RC_COMPILER> -O coff -o <OBJECT> <SOURCE> -I ${CMAKE_SOURCE_DIR}/dist/windows")
 endif(WIN32)
 
 add_definitions(-DQT_NO_CAST_TO_ASCII -DQT_STRICT_ITERATORS)
