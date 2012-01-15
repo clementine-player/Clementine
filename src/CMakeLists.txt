@@ -902,7 +902,7 @@ optional_source(HAVE_LIBMTP
 )
 
 # Windows media lister
-optional_source(WIN32
+optional_source(HAVE_SAC
   SOURCES
     devices/wmdmdevice.cpp
     devices/wmdmlister.cpp
@@ -1082,10 +1082,14 @@ if (WIN32)
   target_link_libraries(clementine_lib
     ${ZLIB_LIBRARIES}
     ${MSWMDM_LIBRARIES}
-    ${SAC_SHIM_LIBRARIES}
     ${QTSPARKLE_LIBRARIES}
     qtwin
   )
+  if (HAVE_SAC)
+    target_link_libraries(clementine_lib
+      ${SAC_SHIM_LIBRARIES}
+    )
+  endif (HAVE_SAC)
 endif (WIN32)
 
 if (LINUX)

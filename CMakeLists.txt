@@ -197,6 +197,9 @@ option(ENABLE_PLASMARUNNER "Enable plasma krunner global search" OFF)
 
 if(WIN32)
   option(ENABLE_WIN32_CONSOLE "Show the windows console even outside Debug mode" OFF)
+  if(SAC_SHIM_LIBRARIES)
+    set(HAVE_SAC ON)
+  endif(SAC_SHIM_LIBRARIES)
 endif(WIN32)
 
 if(ENABLE_LIBGPOD AND LIBGPOD_FOUND)

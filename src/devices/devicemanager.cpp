@@ -36,8 +36,10 @@
 #  include "macdevicelister.h"
 #endif
 #ifdef Q_OS_WIN32
-#  include "wmdmlister.h"
-#  include "wmdmdevice.h"
+#  ifdef HAVE_SAC
+#    include "wmdmlister.h"
+#    include "wmdmdevice.h"
+#  endif
 #endif
 #ifdef HAVE_LIBGPOD
 #  include "gpoddevice.h"
@@ -201,7 +203,7 @@ DeviceManager::DeviceManager(BackgroundThread<Database>* database,
 #ifdef Q_OS_DARWIN
   AddLister(new MacDeviceLister);
 #endif
-#ifdef Q_OS_WIN32
+#if defined(Q_OS_WIN32) && defined(HAVE_SAC)
   AddLister(new WmdmLister);
   AddDeviceClass<WmdmDevice>();
 #endif
