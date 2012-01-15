@@ -4,6 +4,9 @@
 #include <vector>
 #include <cassert>
 #include <iostream>
+#ifdef WIN32
+#include <stdlib.h>
+#endif
 
 #define WEIGHTED_RANDOM_DEBUG 0
 

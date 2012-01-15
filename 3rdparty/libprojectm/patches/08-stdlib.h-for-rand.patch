@@ -1,0 +1,40 @@
+From 9e66adb8c6f69cd1a8cdcb6aebde3073b70d3b87 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?=D0=A0=D1=83=D1=81=D0=BB=D0=B0=D0=BD=20=D0=98=D0=B6=D0=B1=D1?=
+ =?UTF-8?q?=83=D0=BB=D0=B0=D1=82=D0=BE=D0=B2?= <lrn1986@gmail.com>
+Date: Sun, 15 Jan 2012 19:51:07 +0400
+Subject: [PATCH 2/6] Need stdlib.h for rand()
+
+---
+ 3rdparty/libprojectm/RandomNumberGenerators.hpp  |    3 +++
+ 3rdparty/libprojectm/Renderer/TextureManager.cpp |    1 +
+ 2 files changed, 4 insertions(+), 0 deletions(-)
+
+diff --git a/3rdparty/libprojectm/RandomNumberGenerators.hpp b/3rdparty/libprojectm/RandomNumberGenerators.hpp
+index 862e43b..840b4ef 100644
+--- a/3rdparty/libprojectm/RandomNumberGenerators.hpp
++++ b/3rdparty/libprojectm/RandomNumberGenerators.hpp
+@@ -4,6 +4,9 @@
+ #include <vector>
+ #include <cassert>
+ #include <iostream>
++#ifdef WIN32
++#include <stdlib.h>
++#endif
+ 
+ #define WEIGHTED_RANDOM_DEBUG 0
+ 
+diff --git a/3rdparty/libprojectm/Renderer/TextureManager.cpp b/3rdparty/libprojectm/Renderer/TextureManager.cpp
+index a54ae59..9328e6d 100644
+--- a/3rdparty/libprojectm/Renderer/TextureManager.cpp
++++ b/3rdparty/libprojectm/Renderer/TextureManager.cpp
+@@ -16,6 +16,7 @@
+ 
+ #ifdef WIN32
+ #include "win32-dirent.h"
++#include <stdlib.h>
+ #endif
+ 
+ #ifdef LINUX
+-- 
+1.7.4
+
