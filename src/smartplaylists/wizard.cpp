@@ -65,7 +65,7 @@ Wizard::Wizard(LibraryBackend* library, QWidget* parent)
 {
   setWindowIcon(QIcon(":/icon.png"));
   setWindowTitle(tr("Smart playlist"));
-  resize(687, 628);
+  resize(788, 628);
 
   // Type page
   type_page_->setTitle(tr("Playlist type"));

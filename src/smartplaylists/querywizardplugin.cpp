@@ -21,6 +21,7 @@
 #include "ui_querysearchpage.h"
 #include "ui_querysortpage.h"
 
+#include <QScrollBar>
 #include <QWizardPage>
 
 namespace smart_playlists {
@@ -72,7 +73,8 @@ public:
 
 QueryWizardPlugin::QueryWizardPlugin(LibraryBackend* library, QObject* parent)
   : WizardPlugin(library, parent),
-    search_page_(NULL)
+    search_page_(NULL),
+    previous_scrollarea_max_(0)
 {
 }
 
@@ -105,9 +107,12 @@ int QueryWizardPlugin::CreatePages(QWizard* wizard, int finish_page_id) {
   connect(search_page_->new_term_, SIGNAL(Clicked()), SLOT(AddSearchTerm()));
 
   // Add an empty initial term
-  search_page_->layout_ = static_cast<QVBoxLayout*>(search_page_->ui_->terms_group->layout());
+  search_page_->layout_ = static_cast<QVBoxLayout*>(search_page_->ui_->terms_scrollArea_content->layout());
   search_page_->layout_->addWidget(search_page_->new_term_);
   AddSearchTerm();
+
+  // Ensure that the terms are scrolled to the bottom when a new one is added
+  connect(search_page_->ui_->terms_scrollArea->verticalScrollBar(), SIGNAL(rangeChanged(int,int)), this, SLOT(MoveTermListToBottom(int, int)));
 
   // Add the preview widget at the bottom of the search terms page
   QVBoxLayout* terms_page_layout = static_cast<QVBoxLayout*>(search_page_->layout());
@@ -291,9 +296,19 @@ Search QueryWizardPlugin::MakeSearch() const {
 
 void QueryWizardPlugin::SearchTypeChanged() {
   const bool all = search_page_->ui_->type->currentIndex() == 2;
-  search_page_->ui_->terms_group->setEnabled(!all);
+  search_page_->ui_->terms_scrollArea_content->setEnabled(!all);
 
   UpdateTermPreview();
 }
+
+void QueryWizardPlugin::MoveTermListToBottom(int min, int max) {
+   Q_UNUSED(min);
+   // Only scroll to the bottom if a new term is added
+   if (previous_scrollarea_max_ < max)
+      search_page_->ui_->terms_scrollArea->verticalScrollBar()->setValue(max);
+
+   previous_scrollarea_max_ = max;
+}
+
 
 } // namespace smart_playlists
