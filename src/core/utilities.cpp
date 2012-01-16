@@ -35,6 +35,7 @@
 #include <QXmlStreamReader>
 #include <QtDebug>
 #include <QtGlobal>
+#include <QMetaEnum>
 
 #if defined(Q_OS_UNIX)
 #  include <sys/statvfs.h>
@@ -393,6 +394,17 @@ void ConsumeCurrentElement(QXmlStreamReader* reader) {
       default: break;
     }
   }
+}
+
+const char* EnumToString(const QMetaObject& meta, const char* name, int value) {
+  int index = meta.indexOfEnumerator(name);
+  if (index == -1)
+    return "[UnknownEnum]";
+  QMetaEnum metaenum = meta.enumerator(index);
+  const char* result = metaenum.valueToKey(value);
+  if (result == 0)
+    return "[UnknownEnumValue]";
+  return result;
 }
 
 }  // namespace Utilities

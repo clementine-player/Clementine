@@ -30,6 +30,7 @@
 class QIODevice;
 class QMouseEvent;
 class QXmlStreamReader;
+class QMetaObject;
 
 namespace Utilities {
   QString PrettyTime(int seconds);
@@ -80,6 +81,11 @@ namespace Utilities {
   // reader either on the EndElement for the current element, or the end of the
   // file - whichever came first.
   void ConsumeCurrentElement(QXmlStreamReader* reader);
+
+  // Shortcut for getting a Qt-aware enum value as a string.
+  // Pass in the QMetaObject of the class that owns the enum, the string name of
+  // the enum and a valid value from that enum.
+  const char* EnumToString(const QMetaObject& meta, const char* name, int value);
 
 
   enum ConfigPath {
