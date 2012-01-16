@@ -8,6 +8,7 @@
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QNetworkCookieJar>
+#include <QSslConfiguration>
 #include <QXmlStreamReader>
 
 const char* SubsonicService::kServiceName = "Subsonic";
@@ -124,9 +125,13 @@ QUrl SubsonicService::BuildRequestUrl(const QString &view)
 
 void SubsonicService::Send(const QUrl &url, const char *slot)
 {
-  QNetworkReply *reply = network_->get(QNetworkRequest(url));
-  // It's very unlikely the Subsonic server will have a valid SSL certificate
-  reply->ignoreSslErrors();
+  QNetworkRequest request(url);
+  // Don't try and check the authenticity of the SSL certificate - it'll almost
+  // certainly be self-signed.
+  QSslConfiguration sslconfig = QSslConfiguration::defaultConfiguration();
+  sslconfig.setPeerVerifyMode(QSslSocket::VerifyNone);
+  request.setSslConfiguration(sslconfig);
+  QNetworkReply *reply = network_->get(request);
   connect(reply, SIGNAL(finished()), slot);
 }
 
