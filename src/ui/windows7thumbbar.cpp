@@ -69,7 +69,7 @@ static void SetupButton(const QAction* action, THUMBBUTTON* button) {
     }
   } else {
     button->hIcon = 0;
-    button->szTip[0] = '\0';
+    button->szTip[0] = L'\0';
     button->dwFlags = THBF_NOBACKGROUND;
   }
 }
