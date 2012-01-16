@@ -14,6 +14,7 @@ class SubsonicService : public InternetService
 {
   Q_OBJECT
   Q_ENUMS(LoginState)
+  Q_ENUMS(ApiError)
 
  public:
   SubsonicService(InternetModel *parent);
@@ -26,6 +27,17 @@ class SubsonicService : public InternetService
     LoginState_Unlicensed,
     LoginState_OtherError,
     LoginState_Unknown,
+  };
+
+  enum ApiError {
+    ApiError_Generic = 0,
+    ApiError_ParameterMissing = 10,
+    ApiError_OutdatedClient = 20,
+    ApiError_OutdatedServer = 30,
+    ApiError_BadCredentials = 40,
+    ApiError_Unauthorized = 50,
+    ApiError_Unlicensed = 60,
+    ApiError_NotFound = 70,
   };
 
   enum Type {
@@ -65,17 +77,6 @@ class SubsonicService : public InternetService
   QModelIndex GetCurrentIndex();
 
  private:
-  enum ApiError {
-    ApiError_Generic = 0,
-    ApiError_ParameterMissing = 10,
-    ApiError_OutdatedClient = 20,
-    ApiError_OutdatedServer = 30,
-    ApiError_BadCredentials = 40,
-    ApiError_Unauthorized = 50,
-    ApiError_Unlicensed = 60,
-    ApiError_NotFound = 70,
-  };
-
   QUrl BuildRequestUrl(const QString &view);
   // Convenience function to reduce QNetworkRequest/QNetworkReply/connect boilerplate
   void Send(const QUrl &url, const char *slot);

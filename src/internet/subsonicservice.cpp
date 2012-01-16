@@ -224,6 +224,9 @@ void SubsonicService::onPingFinished()
     {
       reader.readNextStartElement();
       int error = reader.attributes().value("code").toString().toInt();
+      qLog(Error) << "Subsonic error ("
+                  << Utilities::EnumToString(SubsonicService::staticMetaObject, "ApiError", error)
+                  << "):" << reader.attributes().value("message").toString();
       switch (error)
       {
       // "Parameter missing" for "ping" is always blank username or password
