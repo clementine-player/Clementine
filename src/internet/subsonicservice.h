@@ -13,6 +13,7 @@ class SubsonicHttpsUrlHandler;
 class SubsonicService : public InternetService
 {
   Q_OBJECT
+  Q_ENUMS(LoginState)
 
  public:
   SubsonicService(InternetModel *parent);

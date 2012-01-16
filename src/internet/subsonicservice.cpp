@@ -3,6 +3,7 @@
 #include "internetmodel.h"
 #include "core/logging.h"
 #include "core/player.h"
+#include "core/utilities.h"
 
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
@@ -206,6 +207,9 @@ void SubsonicService::onPingFinished()
   if (reply->error() != QNetworkReply::NoError)
   {
     login_state_ = LoginState_BadServer;
+    qLog(Error) << "Failed to connect ("
+                << Utilities::EnumToString(QNetworkReply::staticMetaObject, "NetworkError", reply->error())
+                << "):" << reply->errorString();
   }
   else
   {
@@ -236,7 +240,8 @@ void SubsonicService::onPingFinished()
       }
     }
   }
-  qLog(Debug) << "Login state changed: " << login_state_;
+  qLog(Debug) << "Login state changed:"
+              << Utilities::EnumToString(SubsonicService::staticMetaObject, "LoginState", login_state_);
   emit LoginStateChanged(login_state_);
 }
 
