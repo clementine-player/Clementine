@@ -356,6 +356,15 @@ if(GMOCK_INCLUDE_DIRS)
   endif(GTEST_INCLUDE_DIRS)
 endif(GMOCK_INCLUDE_DIRS)
 
+# Use system sha2 if it's available
+find_path(SHA2_INCLUDE_DIRS sha2.h)
+find_library(SHA2_LIBRARIES sha2)
+if(NOT SHA2_INCLUDE_DIRS OR NOT SHA2_LIBRARIES)
+  add_subdirectory(3rdparty/sha2)
+  set(SHA2_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/sha2)
+  set(SHA2_LIBRARIES sha2)
+endif(NOT SHA2_INCLUDE_DIRS OR NOT SHA2_LIBRARIES)
+
 # Use our 3rdparty chromaprint if a system one wasn't found
 if(NOT CHROMAPRINT_FOUND)
   add_subdirectory(3rdparty/chromaprint)
@@ -372,7 +381,6 @@ add_subdirectory(src)
 if (WIN32)
   add_subdirectory(3rdparty/qtwin)
 endif (WIN32)
-add_subdirectory(3rdparty/sha2)
 add_subdirectory(3rdparty/universalchardet)
 add_subdirectory(tests)
 add_subdirectory(dist)

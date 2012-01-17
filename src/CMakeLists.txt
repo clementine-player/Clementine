@@ -12,7 +12,6 @@ endif(BUILD_WERROR)
 
 include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(../3rdparty/gmock/gtest/include)
-include_directories(../3rdparty/sha2)
 if(WIN32)
   include_directories(../3rdparty/qtwin)
 endif(WIN32)
@@ -26,6 +25,7 @@ include_directories(${QTSINGLEAPPLICATION_INCLUDE_DIRS})
 include_directories(${QTIOCOMPRESSOR_INCLUDE_DIRS})
 include_directories(${QXT_INCLUDE_DIRS})
 include_directories(${ECHONEST_INCLUDE_DIRS})
+include_directories(${SHA2_INCLUDE_DIRS})
 include_directories(${CHROMAPRINT_INCLUDE_DIRS})
 
 find_package(OpenGL)
@@ -970,7 +970,7 @@ add_dependencies(clementine_lib pot)
 target_link_libraries(clementine_lib
   libclementine-common
   libclementine-tagreader
-  sha2
+  ${SHA2_LIBRARIES}
   ${TAGLIB_LIBRARIES}
   ${CHROMAPRINT_LIBRARIES}
   ${ECHONEST_LIBRARIES}
