@@ -18,6 +18,8 @@
 // it is used by the Spotify blob which links against libspotify and is not GPL
 // compatible.
 
+#include <cxxabi.h>
+#include <execinfo.h>
 
 #include <QCoreApplication>
 #include <QDateTime>
@@ -175,6 +177,34 @@ QDebug CreateLogger(Level level, const QString& class_name, int line) {
       << level_name << function_line.leftJustified(32).toAscii().constData();
 
   return ret.space();
+}
+
+QString DemangleSymbol(const QString& symbol) {
+  QStringList split = symbol.split(' ', QString::SkipEmptyParts);
+  QString mangled_function = split[3];
+  int status;
+  char* demangled_function = abi::__cxa_demangle(
+      mangled_function.toAscii().constData(),
+      NULL,
+      NULL,
+      &status);
+  if (status == 0) {
+    QString ret = QString::fromAscii(demangled_function);
+    free(demangled_function);
+    return ret;
+  }
+  return mangled_function;  // Probably not a C++ function.
+}
+
+void DumpStackTrace() {
+  void* callstack[128];
+  int callstack_size = backtrace(reinterpret_cast<void**>(&callstack), sizeof(callstack));
+  char** symbols = backtrace_symbols(reinterpret_cast<void**>(&callstack), callstack_size);
+  // Start from 1 to skip ourself.
+  for (int i = 1; i < callstack_size; ++i) {
+    qLog(Debug) << DemangleSymbol(QString::fromAscii(symbols[i]));
+  }
+  free(symbols);
 }
 
 } // namespace logging

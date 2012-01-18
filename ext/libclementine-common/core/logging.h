@@ -49,6 +49,8 @@ namespace logging {
   void Init();
   void SetLevels(const QString& levels);
 
+  void DumpStackTrace();
+
   QString ParsePrettyFunction(const char* pretty_function);
   QDebug CreateLogger(Level level, const QString& class_name, int line);
 
