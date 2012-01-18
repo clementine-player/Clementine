@@ -197,6 +197,7 @@ QString DemangleSymbol(const QString& symbol) {
 }
 
 void DumpStackTrace() {
+#ifdef Q_OS_UNIX
   void* callstack[128];
   int callstack_size = backtrace(reinterpret_cast<void**>(&callstack), sizeof(callstack));
   char** symbols = backtrace_symbols(reinterpret_cast<void**>(&callstack), callstack_size);
@@ -205,6 +206,9 @@ void DumpStackTrace() {
     qLog(Debug) << DemangleSymbol(QString::fromAscii(symbols[i]));
   }
   free(symbols);
+#else
+  qLog(Debug) << "FIXME: Implement printing stack traces on this platform";
+#endif
 }
 
 } // namespace logging
