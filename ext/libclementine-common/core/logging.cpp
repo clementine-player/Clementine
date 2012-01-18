@@ -18,6 +18,8 @@
 // it is used by the Spotify blob which links against libspotify and is not GPL
 // compatible.
 
+#include <QtGlobal>
+
 #include <cxxabi.h>
 #ifdef Q_OS_UNIX
 #include <execinfo.h>
