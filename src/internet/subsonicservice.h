@@ -25,6 +25,7 @@ class SubsonicService : public InternetService
     LoginState_BadServer,
     LoginState_BadCredentials,
     LoginState_Unlicensed,
+    LoginState_OutdatedServer,
     LoginState_OtherError,
     LoginState_Unknown,
   };

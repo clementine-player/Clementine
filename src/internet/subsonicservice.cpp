@@ -242,6 +242,9 @@ void SubsonicService::onPingFinished()
       case ApiError_Unlicensed:
         login_state_ = LoginState_Unlicensed;
         break;
+      case ApiError_OutdatedServer:
+        login_state_ = LoginState_OutdatedServer;
+        break;
       default:
         login_state_ = LoginState_OtherError;
         break;

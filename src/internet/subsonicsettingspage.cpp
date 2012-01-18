@@ -76,6 +76,10 @@ void SubsonicSettingsPage::LoginStateChanged(SubsonicService::LoginState newstat
     ui_->login_state->SetAccountTypeText(tr("The Subsonic API is only available on licensed servers."));
     break;
 
+  case SubsonicService::LoginState_OutdatedServer:
+    ui_->login_state->SetAccountTypeText(tr("Incompatible Subsonic REST protocol version. Server must upgrade."));
+    break;
+
   case SubsonicService::LoginState_OtherError:
     ui_->login_state->SetAccountTypeText(tr("An unspecified error occurred."));
     break;
