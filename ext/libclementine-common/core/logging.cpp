@@ -19,7 +19,9 @@
 // compatible.
 
 #include <cxxabi.h>
+#ifdef Q_OS_UNIX
 #include <execinfo.h>
+#endif
 
 #include <QCoreApplication>
 #include <QDateTime>
