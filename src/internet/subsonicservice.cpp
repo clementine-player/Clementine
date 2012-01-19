@@ -239,11 +239,14 @@ void SubsonicService::onPingFinished()
       case ApiError_BadCredentials:
         login_state_ = LoginState_BadCredentials;
         break;
-      case ApiError_Unlicensed:
-        login_state_ = LoginState_Unlicensed;
+      case ApiError_OutdatedClient:
+        login_state_ = LoginState_OutdatedClient;
         break;
       case ApiError_OutdatedServer:
         login_state_ = LoginState_OutdatedServer;
+        break;
+      case ApiError_Unlicensed:
+        login_state_ = LoginState_Unlicensed;
         break;
       default:
         login_state_ = LoginState_OtherError;

@@ -23,9 +23,10 @@ class SubsonicService : public InternetService
   enum LoginState {
     LoginState_Loggedin,
     LoginState_BadServer,
+    LoginState_OutdatedClient,
+    LoginState_OutdatedServer,
     LoginState_BadCredentials,
     LoginState_Unlicensed,
-    LoginState_OutdatedServer,
     LoginState_OtherError,
     LoginState_Unknown,
   };

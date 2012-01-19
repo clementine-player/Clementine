@@ -65,19 +65,25 @@ void SubsonicSettingsPage::LoginStateChanged(SubsonicService::LoginState newstat
   switch (newstate)
   {
   case SubsonicService::LoginState_BadServer:
-    ui_->login_state->SetAccountTypeText(tr("Unable to contact Subsonic server - check server URL."));
+    ui_->login_state->SetAccountTypeText(tr("Could not connect to Subsonic, check server URL. "
+                                            "Example: http://localhost:4040/"));
     break;
 
   case SubsonicService::LoginState_BadCredentials:
-    ui_->login_state->SetAccountTypeText(tr("Your username or password was incorrect."));
+    ui_->login_state->SetAccountTypeText(tr("Wrong username or password."));
     break;
 
-  case SubsonicService::LoginState_Unlicensed:
-    ui_->login_state->SetAccountTypeText(tr("The Subsonic API is only available on licensed servers."));
+  case SubsonicService::LoginState_OutdatedClient:
+    ui_->login_state->SetAccountTypeText(tr("Incompatible Subsonic REST protocol version. Client must upgrade."));
     break;
 
   case SubsonicService::LoginState_OutdatedServer:
     ui_->login_state->SetAccountTypeText(tr("Incompatible Subsonic REST protocol version. Server must upgrade."));
+    break;
+
+  case SubsonicService::LoginState_Unlicensed:
+    ui_->login_state->SetAccountTypeText(tr("The trial period for the Subsonic server is over. "
+                                            "Please donate to get a license key. Visit subsonic.org for details."));
     break;
 
   case SubsonicService::LoginState_OtherError:
