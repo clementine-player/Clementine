@@ -26,6 +26,8 @@ SubsonicService::SubsonicService(InternetModel *parent)
 {
   model()->player()->RegisterUrlHandler(http_url_handler_);
   model()->player()->RegisterUrlHandler(https_url_handler_);
+  connect(this, SIGNAL(LoginStateChanged(SubsonicService::LoginState)),
+          SLOT(onLoginStateChanged(SubsonicService::LoginState)));
 }
 
 SubsonicService::~SubsonicService()
@@ -202,6 +204,12 @@ void SubsonicService::ReadTrack(QXmlStreamReader *reader, QStandardItem *parent)
   parent->appendRow(item);
   item_lookup_.insert(id, item);
   reader->skipCurrentElement();
+}
+
+void SubsonicService::onLoginStateChanged(SubsonicService::LoginState newstate)
+{
+  root_->setRowCount(0);
+  root_->setData(true, InternetModel::Role_CanLazyLoad);
 }
 
 void SubsonicService::onPingFinished()

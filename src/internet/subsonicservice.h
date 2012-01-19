@@ -104,6 +104,7 @@ class SubsonicService : public InternetService
   QMap<QString, QStandardItem*> item_lookup_;
 
  private slots:
+  void onLoginStateChanged(SubsonicService::LoginState newstate);
   void onPingFinished();
   void onGetIndexesFinished();
   void onGetMusicDirectoryFinished();

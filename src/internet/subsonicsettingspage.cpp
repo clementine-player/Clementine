@@ -37,8 +37,9 @@ void SubsonicSettingsPage::Load()
   ui_->username->setText(s.value("username").toString());
   ui_->password->setText(s.value("password").toString());
 
-  // "Login" with the existing settings to see if they work
-  Login();
+  // These are the same settings SubsonicService will have used already, so see if
+  // they were successful...
+  LoginStateChanged(service_->login_state());
 }
 
 void SubsonicSettingsPage::Save()
