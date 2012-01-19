@@ -30,7 +30,7 @@
 class QIODevice;
 class QMouseEvent;
 class QXmlStreamReader;
-class QMetaObject;
+struct QMetaObject;
 
 namespace Utilities {
   QString PrettyTime(int seconds);
