@@ -514,7 +514,6 @@ void MacDeviceLister::USBDeviceAddedCallback(void* refcon, io_iterator_t it) {
       // First check the libmtp device list.
       QSet<MTPDevice>::const_iterator it = sMTPDeviceList.find(device);
       if (it != sMTPDeviceList.end()) {
-        qDebug() << "Found in table";
         // Fill in quirks flags from libmtp.
         device.quirks = it->quirks;
         me->FoundMTPDevice(device, GetSerialForMTPDevice(object));
@@ -629,7 +628,7 @@ void MacDeviceLister::USBDeviceRemovedCallback(void* refcon, io_iterator_t it) {
       device.product = QString::fromUtf8([product UTF8String]);
       device.vendor_id = [vendor_id unsignedShortValue];
       device.product_id = [product_id unsignedShortValue];
-  
+
       me->RemovedMTPDevice(serial);
     }
   }
@@ -638,13 +637,13 @@ void MacDeviceLister::USBDeviceRemovedCallback(void* refcon, io_iterator_t it) {
 void MacDeviceLister::RemovedMTPDevice(const QString& serial) {
   int count = mtp_devices_.remove(serial);
   if (count) {
-    qDebug() << "MTP device removed:" << serial;
+    qLog(Debug) << "MTP device removed:" << serial;
     emit DeviceRemoved(serial);
   }
 }
 
 void MacDeviceLister::FoundMTPDevice(const MTPDevice& device, const QString& serial) {
-  qDebug() << "New MTP device detected!" << device.bus << device.address;
+  qLog(Debug) << "New MTP device detected!" << device.bus << device.address;
   mtp_devices_[serial] = device;
   QList<QUrl> urls = MakeDeviceUrls(serial);
   MTPDevice* d = &mtp_devices_[serial];
