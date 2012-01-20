@@ -46,6 +46,7 @@
 #include "macglobalshortcutbackend.h"
 #include "utilities.h"
 #include "core/logging.h"
+#include "core/scoped_cftyperef.h"
 
 #ifdef HAVE_SPARKLE
 #import <Sparkle/SUUpdater.h>
@@ -259,12 +260,10 @@ void CheckForUpdates() {
 }
 
 QString GetBundlePath() {
-  CFURLRef app_url = CFBundleCopyBundleURL(CFBundleGetMainBundle());
-  CFStringRef mac_path = CFURLCopyFileSystemPath(app_url, kCFURLPOSIXPathStyle);
-  const char* path = CFStringGetCStringPtr(mac_path, CFStringGetSystemEncoding());
+  ScopedCFTypeRef<CFURLRef> app_url(CFBundleCopyBundleURL(CFBundleGetMainBundle()));
+  ScopedCFTypeRef<CFStringRef> mac_path(CFURLCopyFileSystemPath(app_url.get(), kCFURLPOSIXPathStyle));
+  const char* path = CFStringGetCStringPtr(mac_path.get(), CFStringGetSystemEncoding());
   QString bundle_path = QString::fromUtf8(path);
-  CFRelease(app_url);
-  CFRelease(mac_path);
   return bundle_path;
 }
 
