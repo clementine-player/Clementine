@@ -95,6 +95,7 @@ void BackgroundStreams::EnableStream(const QString& name, bool enable) {
   } else {
     StopStream(stream);
   }
+  SaveStreams();
 }
 
 void BackgroundStreams::SetStreamVolume(const QString& name, int volume) {
