@@ -177,6 +177,7 @@ void MacDeviceLister::ShutDown() {
 // IOKit helpers.
 namespace {
 
+// Caller is responsible for calling CFRelease().
 CFTypeRef GetUSBRegistryEntry(io_object_t device, CFStringRef key) {
   io_iterator_t it;
   if (IORegistryEntryGetParentIterator(device, kIOServicePlane, &it) == KERN_SUCCESS) {
@@ -239,9 +240,11 @@ NSObject* GetPropertyForDevice(io_object_t device, CFStringRef key) {
     return nil;
   }
 
-  NSDictionary* dict = (NSDictionary*)properties;
+  scoped_nsobject<NSDictionary> dict((NSDictionary*)properties);  // Takes ownership.
   NSObject* prop = [dict objectForKey:(NSString*)key];
   if (prop) {
+    // The dictionary goes out of scope so we should retain this object.
+    [prop retain];
     return prop;
   }
 
@@ -270,13 +273,13 @@ int GetUSBDeviceClass(io_object_t device) {
 }
 
 QString GetIconForDevice(io_object_t device) {
-  NSDictionary* media_icon = (NSDictionary*)GetPropertyForDevice(device, CFSTR("IOMediaIcon"));
+  scoped_nsobject<NSDictionary> media_icon((NSDictionary*)GetPropertyForDevice(device, CFSTR("IOMediaIcon")));
   if (media_icon) {
     NSString* bundle = (NSString*)[media_icon objectForKey:@"CFBundleIdentifier"];
     NSString* file = (NSString*)[media_icon objectForKey:@"IOBundleResourceFile"];
 
-    NSURL* bundle_url = (NSURL*)KextManagerCreateURLForBundleIdentifier(
-        kCFAllocatorDefault, (CFStringRef)bundle);
+    scoped_nsobject<NSURL> bundle_url((NSURL*)KextManagerCreateURLForBundleIdentifier(
+        kCFAllocatorDefault, (CFStringRef)bundle));
 
     QString path = QString::fromUtf8([[bundle_url path] UTF8String]);
     path += "/Contents/Resources/";
@@ -296,8 +299,9 @@ QString GetSerialForDevice(io_object_t device) {
 }
 
 QString GetSerialForMTPDevice(io_object_t device) {
-  return QString(
-      QString("MTP/") + [(NSString*)GetPropertyForDevice(device, CFSTR(kUSBSerialNumberString)) UTF8String]);
+  scoped_nsobject<NSString> serial((NSString*)
+      GetPropertyForDevice(device, CFSTR(kUSBSerialNumberString)));
+  return QString(QString("MTP/") + [serial UTF8String]);
 }
 
 QString FindDeviceProperty(const QString& bsd_name, CFStringRef property) {
@@ -348,7 +352,7 @@ quint64 MacDeviceLister::GetCapacity(const QUrl& url) {
 void MacDeviceLister::DiskAddedCallback(DADiskRef disk, void* context) {
   MacDeviceLister* me = reinterpret_cast<MacDeviceLister*>(context);
 
-  NSDictionary* properties = (NSDictionary*)DADiskCopyDescription(disk);
+  scoped_nsobject<NSDictionary> properties((NSDictionary*)DADiskCopyDescription(disk));
 
   NSString* kind = [properties objectForKey:(NSString*)kDADiskDescriptionMediaKindKey];
 #ifdef HAVE_AUDIOCD
@@ -371,12 +375,12 @@ void MacDeviceLister::DiskAddedCallback(DADiskRef disk, void* context) {
       QString vendor = GetUSBRegistryEntryString(device, CFSTR(kUSBVendorString));
       QString product = GetUSBRegistryEntryString(device, CFSTR(kUSBProductString));
 
-      CFMutableDictionaryRef properties;
+      CFMutableDictionaryRef cf_properties;
       kern_return_t ret = IORegistryEntryCreateCFProperties(
-          device, &properties, kCFAllocatorDefault, 0);
+          device, &cf_properties, kCFAllocatorDefault, 0);
 
       if (ret == KERN_SUCCESS) {
-        NSDictionary* dict = (NSDictionary*)properties;
+        scoped_nsobject<NSDictionary> dict((NSDictionary*)cf_properties);  // Takes ownership.
         if ([[dict objectForKey:@"Removable"] intValue] == 1) {
           QString serial = GetSerialForDevice(device);
           if (!serial.isEmpty()) {
