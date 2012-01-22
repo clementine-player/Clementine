@@ -1,3 +1,13 @@
+Version 1.0.1:
+  Bugfixes:
+    * Use Chromaprinter and Acoustid instead of Echoprint and MusicDNS.
+    * Make it possible to play songs from connected iPod Touches again.
+    * (Windows) Fix an SSL issue that would sometimes result in an "Invalid
+      username or password" error when logging in to Grooveshark.
+    * (Mac OS X) Use FSEvent-based filesystem watcher to fix a number of crashes
+      due to running out of file handles when monitoring a large library.
+
+
 Version 1.0:
   Major features:
     * Add Spotify support.
