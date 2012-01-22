@@ -173,6 +173,9 @@ template <typename HandlerType>
 WorkerPool<HandlerType>::~WorkerPool() {
   foreach (const Worker& worker, workers_) {
     if (worker.local_socket_ && worker.process_) {
+      disconnect(worker.process_, SIGNAL(error(QProcess::ProcessError)),
+                 this, SLOT(ProcessError(QProcess::ProcessError)));
+
       // The worker is connected.  Close his socket and wait for him to exit.
       qLog(Debug) << "Closing worker socket";
       worker.local_socket_->close();
