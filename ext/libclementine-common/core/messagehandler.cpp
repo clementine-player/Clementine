@@ -31,7 +31,8 @@ _MessageHandlerBase::_MessageHandlerBase(QIODevice* device, QObject* parent)
     flush_abstract_socket_(NULL),
     flush_local_socket_(NULL),
     reading_protobuf_(false),
-    expected_length_(0) {
+    expected_length_(0),
+    is_device_closed_(false) {
   if (device) {
     SetDevice(device);
   }
@@ -47,10 +48,10 @@ void _MessageHandlerBase::SetDevice(QIODevice* device) {
   // Yeah I know.
   if (QAbstractSocket* socket = qobject_cast<QAbstractSocket*>(device)) {
     flush_abstract_socket_ = &QAbstractSocket::flush;
-    connect(socket, SIGNAL(disconnected()), SLOT(SocketClosed()));
+    connect(socket, SIGNAL(disconnected()), SLOT(DeviceClosed()));
   } else if (QLocalSocket* socket = qobject_cast<QLocalSocket*>(device)) {
     flush_local_socket_ = &QLocalSocket::flush;
-    connect(socket, SIGNAL(disconnected()), SLOT(SocketClosed()));
+    connect(socket, SIGNAL(disconnected()), SLOT(DeviceClosed()));
   } else {
     qFatal("Unsupported device type passed to _MessageHandlerBase");
   }
@@ -100,4 +101,7 @@ void _MessageHandlerBase::WriteMessage(const QByteArray& data) {
   }
 }
 
+void _MessageHandlerBase::DeviceClosed() {
+  is_device_closed_ = true;
+  AbortAll();
 }

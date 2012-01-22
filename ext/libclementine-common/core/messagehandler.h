@@ -56,13 +56,17 @@ public:
 
   void SetDevice(QIODevice* device);
 
+  // After this is true, messages cannot be sent to the handler any more.
+  bool is_device_closed() const { return is_device_closed_; }
+
 protected slots:
   void WriteMessage(const QByteArray& data);
   void DeviceReadyRead();
-  virtual void SocketClosed() {}
+  virtual void DeviceClosed();
 
 protected:
   virtual bool RawMessageArrived(const QByteArray& data) = 0;
+  virtual void AbortAll() = 0;
 
 protected:
   typedef bool (QAbstractSocket::*FlushAbstractSocket)();
@@ -75,6 +79,8 @@ protected:
   bool reading_protobuf_;
   quint32 expected_length_;
   QBuffer buffer_;
+
+  bool is_device_closed_;
 };
 
 
@@ -85,6 +91,7 @@ template <typename MT>
 class AbstractMessageHandler : public _MessageHandlerBase {
 public:
   AbstractMessageHandler(QIODevice* device, QObject* parent);
+  ~AbstractMessageHandler() { AbortAll(); }
 
   typedef MT MessageType;
   typedef MessageReply<MT> ReplyType;
@@ -112,7 +119,7 @@ protected:
 
   // _MessageHandlerBase
   bool RawMessageArrived(const QByteArray& data);
-  void SocketClosed();
+  void AbortAll();
 
 private:
   QMap<int, ReplyType*> pending_replies_;
@@ -174,9 +181,7 @@ bool AbstractMessageHandler<MT>::RawMessageArrived(const QByteArray& data) {
 }
 
 template<typename MT>
-void AbstractMessageHandler<MT>::SocketClosed() {
-  QMutexLocker l(&mutex_);
-
+void AbstractMessageHandler<MT>::AbortAll() {
   foreach (ReplyType* reply, pending_replies_) {
     reply->Abort();
   }

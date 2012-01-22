@@ -390,7 +390,8 @@ HandlerType* WorkerPool<HandlerType>::NextHandler() const {
   for (int i=0 ; i<workers_.count() ; ++i) {
     const int worker_index = (next_worker_ + i) % workers_.count();
 
-    if (workers_[worker_index].handler_) {
+    if (workers_[worker_index].handler_ &&
+        !workers_[worker_index].handler_->is_device_closed()) {
       next_worker_ = (worker_index + 1) % workers_.count();
       return workers_[worker_index].handler_;
     }

@@ -559,8 +559,8 @@ QByteArray TagReaderWorker::LoadEmbeddedArt(const QString& filename) const {
   return QByteArray();
 }
 
-void TagReaderWorker::SocketClosed() {
-  AbstractMessageHandler<pb::tagreader::Message>::SocketClosed();
+void TagReaderWorker::DeviceClosed() {
+  AbstractMessageHandler<pb::tagreader::Message>::DeviceClosed();
 
   qApp->exit();
 }
