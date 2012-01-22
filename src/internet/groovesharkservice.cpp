@@ -662,10 +662,8 @@ void GroovesharkService::PlaylistSongsRetrieved() {
 
   // Find corresponding playlist info
   int playlist_id = pending_retrieve_playlists_.take(reply);
-  PlaylistInfo& playlist_info = playlists_[playlist_id];
-  if (subscribed_playlists_.contains(playlist_id)) { 
-    playlist_info = subscribed_playlists_[playlist_id];
-  }
+  PlaylistInfo& playlist_info = subscribed_playlists_.contains(playlist_id) ?
+      subscribed_playlists_[playlist_id] : playlists_[playlist_id];
   playlist_info.item_->removeRows(0, playlist_info.item_->rowCount());
 
   QVariantMap result = ExtractResult(reply);
