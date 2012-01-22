@@ -24,6 +24,7 @@
 #include <QStringList>
 
 #include <iostream>
+#include <sys/time.h>
 
 int main(int argc, char** argv) {
   QCoreApplication a(argc, argv);
@@ -35,6 +36,11 @@ int main(int argc, char** argv) {
                  "files.  It is not meant to be run on its own.\n";
     return 1;
   }
+
+  // Seed random number generator
+  timeval time;
+  gettimeofday(&time,NULL);
+  qsrand((time.tv_sec * 1000) + (time.tv_usec / 1000));
 
   logging::Init();
   qLog(Info) << "TagReader worker connecting to" << args[1];
