@@ -52,7 +52,7 @@ TagReaderReply* TagReaderClient::ReadFile(const QString& filename) {
 
   req->set_filename(DataCommaSizeFromQString(filename));
 
-  return worker_pool_->NextHandler()->SendMessageWithReply(&message);
+  return worker_pool_->SendMessageWithReply(&message);
 }
 
 TagReaderReply* TagReaderClient::SaveFile(const QString& filename, const Song& metadata) {
@@ -62,7 +62,7 @@ TagReaderReply* TagReaderClient::SaveFile(const QString& filename, const Song& m
   req->set_filename(DataCommaSizeFromQString(filename));
   metadata.ToProtobuf(req->mutable_metadata());
 
-  return worker_pool_->NextHandler()->SendMessageWithReply(&message);
+  return worker_pool_->SendMessageWithReply(&message);
 }
 
 TagReaderReply* TagReaderClient::IsMediaFile(const QString& filename) {
@@ -71,7 +71,7 @@ TagReaderReply* TagReaderClient::IsMediaFile(const QString& filename) {
 
   req->set_filename(DataCommaSizeFromQString(filename));
 
-  return worker_pool_->NextHandler()->SendMessageWithReply(&message);
+  return worker_pool_->SendMessageWithReply(&message);
 }
 
 TagReaderReply* TagReaderClient::LoadEmbeddedArt(const QString& filename) {
@@ -80,7 +80,7 @@ TagReaderReply* TagReaderClient::LoadEmbeddedArt(const QString& filename) {
 
   req->set_filename(DataCommaSizeFromQString(filename));
 
-  return worker_pool_->NextHandler()->SendMessageWithReply(&message);
+  return worker_pool_->SendMessageWithReply(&message);
 }
 
 void TagReaderClient::ReadFileBlocking(const QString& filename, Song* song) {

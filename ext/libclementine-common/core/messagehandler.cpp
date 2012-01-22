@@ -100,24 +100,4 @@ void _MessageHandlerBase::WriteMessage(const QByteArray& data) {
   }
 }
 
-_MessageReplyBase::_MessageReplyBase(int id, QObject* parent)
-  : QObject(parent),
-    id_(id),
-    finished_(false),
-    success_(false)
-{
-}
-
-bool _MessageReplyBase::WaitForFinished() {
-  semaphore_.acquire();
-  return success_;
-}
-
-void _MessageReplyBase::Abort() {
-  Q_ASSERT(!finished_);
-  finished_ = true;
-  success_ = false;
-
-  emit Finished(success_);
-  semaphore_.release();
 }

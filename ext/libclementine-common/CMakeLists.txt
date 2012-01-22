@@ -8,6 +8,7 @@ set(SOURCES
   core/encoding.cpp
   core/logging.cpp
   core/messagehandler.cpp
+  core/messagereply.cpp
   core/waitforsignal.cpp
   core/workerpool.cpp
 )
@@ -15,6 +16,7 @@ set(SOURCES
 set(HEADERS
   core/closure.h
   core/messagehandler.h
+  core/messagereply.h
   core/workerpool.h
 )
 

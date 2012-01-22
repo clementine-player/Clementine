@@ -18,17 +18,19 @@
 #ifndef WORKERPOOL_H
 #define WORKERPOOL_H
 
+#include <QAtomicInt>
 #include <QCoreApplication>
 #include <QFile>
 #include <QLocalServer>
 #include <QLocalSocket>
+#include <QMutex>
 #include <QObject>
 #include <QProcess>
+#include <QQueue>
 #include <QThread>
 
 #include "core/closure.h"
 #include "core/logging.h"
-#include "core/waitforsignal.h"
 
 
 // Base class containing signals and slots - required because moc doesn't do
@@ -44,14 +46,11 @@ signals:
   // worker wasn't found, or couldn't be executed.
   void WorkerFailedToStart();
 
-  // A worker connected and a handler was created for it.  The next call to
-  // NextHandler() won't return NULL.
-  void WorkerConnected();
-
 protected slots:
   virtual void DoStart() {}
   virtual void NewConnection() {}
   virtual void ProcessError(QProcess::ProcessError) {}
+  virtual void SendQueuedMessages() {}
 };
 
 
@@ -59,11 +58,15 @@ protected slots:
 // started for each process, and the address is passed to the process as
 // argv[1].  The process is expected to connect back to the socket server, and
 // when it does a HandlerType is created for it.
+// Instances of HandlerType are created in the WorkerPool's thread.
 template <typename HandlerType>
 class WorkerPool : public _WorkerPoolBase {
 public:
   WorkerPool(QObject* parent = 0);
   ~WorkerPool();
+
+  typedef typename HandlerType::MessageType MessageType;
+  typedef typename HandlerType::ReplyType ReplyType;
 
   // Sets the name of the worker executable.  This is looked for first in the
   // current directory, and then in $PATH.  You must call this before calling
@@ -82,14 +85,18 @@ public:
   // Starts all workers.
   void Start();
 
-  // Returns a handler in a round-robin fashion.  Will block if no handlers are
-  // available yet.
-  HandlerType* NextHandler();
+  // Fills in the message's "id" field and creates a reply future.  The message
+  // is queued and the WorkerPool's thread will send it to the next available
+  // worker.  Can be called from any thread.
+  ReplyType* SendMessageWithReply(MessageType* message);
 
 protected:
+  // These are all reimplemented slots, they are called on the WorkerPool's
+  // thread.
   void DoStart();
   void NewConnection();
   void ProcessError(QProcess::ProcessError error);
+  void SendQueuedMessages();
 
 private:
   struct Worker {
@@ -102,6 +109,7 @@ private:
     HandlerType* handler_;
   };
 
+  // Must only ever be called on my thread.
   void StartOneWorker(Worker* worker);
 
   template <typename T>
@@ -123,21 +131,36 @@ private:
     }
   }
 
+  // Creates a new reply future for the request with the next sequential ID,
+  // and sets the request's ID to the ID of the reply.  Can be called from any
+  // thread
+  ReplyType* NewReply(MessageType* message);
+
+  // Returns the next handler, or NULL if there isn't one.  Must be called from
+  // my thread.
+  HandlerType* NextHandler() const;
+
 private:
   QString local_server_name_;
   QString executable_name_;
   QString executable_path_;
 
   int worker_count_;
-  int next_worker_;
+  mutable int next_worker_;
   QList<Worker> workers_;
+
+  QAtomicInt next_id_;
+
+  QMutex message_queue_mutex_;
+  QQueue<ReplyType*> message_queue_;
 };
 
 
 template <typename HandlerType>
 WorkerPool<HandlerType>::WorkerPool(QObject* parent)
   : _WorkerPoolBase(parent),
-    next_worker_(0)
+    next_worker_(0),
+    next_id_(0)
 {
   worker_count_ = qBound(1, QThread::idealThreadCount() / 2, 2);
   local_server_name_ = qApp->applicationName().toLower();
@@ -194,6 +217,7 @@ template <typename HandlerType>
 void WorkerPool<HandlerType>::DoStart() {
   Q_ASSERT(workers_.isEmpty());
   Q_ASSERT(!executable_name_.isEmpty());
+  Q_ASSERT(QThread::currentThread() == thread());
 
   // Find the executable if we can, default to searching $PATH
   executable_path_ = executable_name_;
@@ -223,6 +247,8 @@ void WorkerPool<HandlerType>::DoStart() {
 
 template <typename HandlerType>
 void WorkerPool<HandlerType>::StartOneWorker(Worker* worker) {
+  Q_ASSERT(QThread::currentThread() == thread());
+
   DeleteQObjectPointerLater(&worker->local_server_);
   DeleteQObjectPointerLater(&worker->local_socket_);
   DeleteQObjectPointerLater(&worker->process_);
@@ -245,7 +271,7 @@ void WorkerPool<HandlerType>::StartOneWorker(Worker* worker) {
     }
   }
 
-  qLog(Debug) << "Starting worker" << executable_path_
+  qLog(Debug) << "Starting worker" << worker << executable_path_
               << worker->local_server_->fullServerName();
 
   // Start the process
@@ -256,6 +282,8 @@ void WorkerPool<HandlerType>::StartOneWorker(Worker* worker) {
 
 template <typename HandlerType>
 void WorkerPool<HandlerType>::NewConnection() {
+  Q_ASSERT(QThread::currentThread() == thread());
+
   QLocalServer* server = qobject_cast<QLocalServer*>(sender());
 
   // Find the worker with this server.
@@ -263,7 +291,7 @@ void WorkerPool<HandlerType>::NewConnection() {
   if (!worker)
     return;
 
-  qLog(Debug) << "Worker connected to" << server->fullServerName();
+  qLog(Debug) << "Worker" << worker << "connected to" << server->fullServerName();
 
   // Accept the connection.
   worker->local_socket_ = server->nextPendingConnection();
@@ -276,11 +304,13 @@ void WorkerPool<HandlerType>::NewConnection() {
   // Create the handler.
   worker->handler_ = new HandlerType(worker->local_socket_, this);
 
-  emit WorkerConnected();
+  SendQueuedMessages();
 }
 
 template <typename HandlerType>
 void WorkerPool<HandlerType>::ProcessError(QProcess::ProcessError error) {
+  Q_ASSERT(QThread::currentThread() == thread());
+
   QProcess* process = qobject_cast<QProcess*>(sender());
 
   // Find the worker with this process.
@@ -299,27 +329,74 @@ void WorkerPool<HandlerType>::ProcessError(QProcess::ProcessError error) {
 
   default:
     // On any other error we just restart the process.
-    qLog(Debug) << "Worker failed with error" << error << "- restarting";
+    qLog(Debug) << "Worker" << worker << "failed with error" << error << "- restarting";
     StartOneWorker(worker);
     break;
   }
 }
 
 template <typename HandlerType>
-HandlerType* WorkerPool<HandlerType>::NextHandler() {
-  forever {
-    for (int i=0 ; i<workers_.count() ; ++i) {
-      const int worker_index = (next_worker_ + i) % workers_.count();
+typename WorkerPool<HandlerType>::ReplyType*
+WorkerPool<HandlerType>::NewReply(MessageType* message) {
+  const int id = next_id_.fetchAndAddOrdered(1);
+  message->set_id(id);
 
-      if (workers_[worker_index].handler_) {
-        next_worker_ = (worker_index + 1) % workers_.count();
-        return workers_[worker_index].handler_;
-      }
+  return new ReplyType(*message);
+}
+
+template <typename HandlerType>
+typename WorkerPool<HandlerType>::ReplyType*
+WorkerPool<HandlerType>::SendMessageWithReply(MessageType* message) {
+  ReplyType* reply = NewReply(message);
+
+  // Copy the message
+  MessageType copy;
+  copy.MergeFrom(*message);
+
+  // Add the copy to the queue
+  {
+    QMutexLocker l(&message_queue_mutex_);
+    message_queue_.enqueue(reply);
+  }
+
+  // Wake up the main thread
+  metaObject()->invokeMethod(this, "SendQueuedMessages", Qt::QueuedConnection);
+
+  return reply;
+}
+
+template <typename HandlerType>
+void WorkerPool<HandlerType>::SendQueuedMessages() {
+  QMutexLocker l(&message_queue_mutex_);
+
+  while (!message_queue_.isEmpty()) {
+    ReplyType* reply = message_queue_.dequeue();
+
+    // Find a worker for this message
+    HandlerType* handler = NextHandler();
+    if (!handler) {
+      // No available handlers - put the message on the front of the queue.
+      message_queue_.prepend(reply);
+      qLog(Debug) << "No available handlers to process request";
+      break;
     }
 
-    // No workers were connected, wait for one.
-    WaitForSignal(this, SIGNAL(WorkerConnected()));
+    handler->SendRequest(reply);
   }
+}
+
+template <typename HandlerType>
+HandlerType* WorkerPool<HandlerType>::NextHandler() const {
+  for (int i=0 ; i<workers_.count() ; ++i) {
+    const int worker_index = (next_worker_ + i) % workers_.count();
+
+    if (workers_[worker_index].handler_) {
+      next_worker_ = (worker_index + 1) % workers_.count();
+      return workers_[worker_index].handler_;
+    }
+  }
+
+  return NULL;
 }
 
 #endif // WORKERPOOL_H
