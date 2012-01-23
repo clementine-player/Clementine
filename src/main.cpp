@@ -397,7 +397,7 @@ int main(int argc, char *argv[]) {
   database->Start(true);
   TaskManager task_manager;
   PlaylistManager playlists(&task_manager, NULL);
-  Player player(&playlists);
+  Player player(&playlists, &task_manager);
   GlobalSearch global_search;
   InternetModel internet_model(database.get(), &task_manager, &player,
                                &cover_providers, &global_search, NULL);

@@ -60,6 +60,7 @@ GstEnginePipeline::GstEnginePipeline(GstEngine* engine)
     rg_preamp_(0.0),
     rg_compression_(true),
     buffer_duration_nanosec_(1 * kNsecPerSec),
+    buffering_(false),
     end_offset_nanosec_(-1),
     next_beginning_offset_nanosec_(-1),
     next_end_offset_nanosec_(-1),
@@ -227,7 +228,7 @@ bool GstEnginePipeline::Init() {
   GstElement *tee, *probe_queue, *probe_converter, *probe_sink, *audio_queue,
              *convert;
 
-  queue_            = engine_->CreateElement("queue",            audiobin_);
+  queue_            = engine_->CreateElement("queue2",           audiobin_);
   audioconvert_     = engine_->CreateElement("audioconvert",     audiobin_);
   tee               = engine_->CreateElement("tee",              audiobin_);
 
@@ -309,6 +310,7 @@ bool GstEnginePipeline::Init() {
   // decode bin (in ReplaceDecodeBin()) because setting it on the decode bin
   // only affects network sources.
   g_object_set(G_OBJECT(queue_), "max-size-time", buffer_duration_nanosec_, NULL);
+  g_object_set(G_OBJECT(queue_), "use-buffering", true, NULL);
 
   gst_element_link(queue_, audioconvert_);
   
@@ -463,6 +465,10 @@ GstBusSyncReply GstEnginePipeline::BusCallbackSync(GstBus*, GstMessage* msg, gpo
       instance->StateChangedMessageReceived(msg);
       break;
 
+    case GST_MESSAGE_BUFFERING:
+      instance->BufferingMessageReceived(msg);
+      break;
+
     default:
       break;
   }
@@ -559,6 +565,27 @@ void GstEnginePipeline::StateChangedMessageReceived(GstMessage* msg) {
 
   if (pipeline_is_initialised_ && new_state != GST_STATE_PAUSED && new_state != GST_STATE_PLAYING) {
     pipeline_is_initialised_ = false;
+  }
+}
+
+void GstEnginePipeline::BufferingMessageReceived(GstMessage* msg) {
+  int percent = 0;
+  gst_message_parse_buffering(msg, &percent);
+
+  const GstState current_state = state();
+
+  if (percent == 0 && current_state == GST_STATE_PLAYING && !buffering_) {
+    buffering_ = true;
+    emit BufferingStarted();
+
+    gst_element_set_state(pipeline_, GST_STATE_PAUSED);
+  } else if (percent == 100 && buffering_) {
+    buffering_ = false;
+    emit BufferingFinished();
+
+    gst_element_set_state(pipeline_, GST_STATE_PLAYING);
+  } else if (buffering_) {
+    emit BufferingProgress(percent);
   }
 }
 

@@ -41,6 +41,7 @@ class QTimer;
 class QTimerEvent;
 
 class GstEnginePipeline;
+class TaskManager;
 
 /**
  * @class GstEngine
@@ -51,7 +52,7 @@ class GstEngine : public Engine::Base, public BufferConsumer {
   Q_OBJECT
 
  public:
-  GstEngine();
+  GstEngine(TaskManager* task_manager);
   ~GstEngine();
 
   struct PluginDetails {
@@ -125,6 +126,10 @@ class GstEngine : public Engine::Base, public BufferConsumer {
   void BackgroundStreamPlayDone();
   void PlayDone();
 
+  void BufferingStarted();
+  void BufferingProgress(int percent);
+  void BufferingFinished();
+
  private:
   typedef QPair<quint64, int> PlayFutureWatcherArg;
   typedef BoundFutureWatcher<GstStateChangeReturn, PlayFutureWatcherArg> PlayFutureWatcher;
@@ -154,6 +159,9 @@ class GstEngine : public Engine::Base, public BufferConsumer {
 
   static const char* kHypnotoadPipeline;
   static const char* kEnterprisePipeline;
+
+  TaskManager* task_manager_;
+  int buffering_task_id_;
 
   QFuture<void> initialising_;
 

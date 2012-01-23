@@ -34,6 +34,7 @@ class GstElementDeleter;
 class GstEngine;
 class BufferConsumer;
 
+struct GstQueue;
 struct GstURIDecodeBin;
 
 class GstEnginePipeline : public QObject {
@@ -89,6 +90,10 @@ class GstEnginePipeline : public QObject {
   GstState state() const;
   qint64 segment_start() const { return segment_start_; }
 
+  // Don't allow the user to change the playback state (playing/paused) while
+  // the pipeline is buffering.
+  bool is_buffering() const { return buffering_; }
+
   QUrl redirect_url() const { return redirect_url_; }
 
   QString source_device() const { return source_device_; }
@@ -103,6 +108,10 @@ class GstEnginePipeline : public QObject {
   // The message, domain and error_code are related to GStreamer's GError.
   void Error(int pipeline_id, const QString& message, int domain, int error_code);
   void FaderFinished();
+
+  void BufferingStarted();
+  void BufferingProgress(int percent);
+  void BufferingFinished();
 
  protected:
   void timerEvent(QTimerEvent *);
@@ -122,6 +131,7 @@ class GstEnginePipeline : public QObject {
   void ErrorMessageReceived(GstMessage*);
   void ElementMessageReceived(GstMessage*);
   void StateChangedMessageReceived(GstMessage*);
+  void BufferingMessageReceived(GstMessage*);
 
   QString ParseTag(GstTagList* list, const char* tag) const;
 
@@ -182,7 +192,9 @@ class GstEnginePipeline : public QObject {
   int rg_mode_;
   float rg_preamp_;
   bool rg_compression_;
+
   quint64 buffer_duration_nanosec_;
+  bool buffering_;
 
   // The URL that is currently playing, and the URL that is to be preloaded
   // when the current track is close to finishing.

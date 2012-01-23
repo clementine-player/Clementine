@@ -25,6 +25,7 @@
 #include "gstengine.h"
 #include "gstenginepipeline.h"
 #include "core/logging.h"
+#include "core/taskmanager.h"
 #include "core/utilities.h"
 
 #ifdef HAVE_IMOBILEDEVICE
@@ -67,8 +68,10 @@ const char* GstEngine::kEnterprisePipeline =
       "audiotestsrc wave=5 ! "
       "audiocheblimit mode=0 cutoff=120";
 
-GstEngine::GstEngine()
+GstEngine::GstEngine(TaskManager* task_manager)
   : Engine::Base(),
+    task_manager_(task_manager),
+    buffering_task_id_(-1),
     delayq_(g_queue_new()),
     current_sample_(0),
     equalizer_enabled_(false),
@@ -369,6 +372,7 @@ bool GstEngine::Load(const QUrl& url, Engine::TrackChangeFlags change,
   if (crossfade)
     StartFadeout();
 
+  BufferingFinished();
   current_pipeline_ = pipeline;
 
   SetVolume(volume_);
@@ -396,7 +400,7 @@ void GstEngine::StartFadeout() {
 bool GstEngine::Play(quint64 offset_nanosec) {
   EnsureInitialised();
 
-  if (!current_pipeline_)
+  if (!current_pipeline_ || current_pipeline_->is_buffering())
     return false;
 
   QFuture<GstStateChangeReturn> future = current_pipeline_->SetState(GST_STATE_PLAYING);
@@ -432,6 +436,7 @@ void GstEngine::PlayDone() {
     // Failure - give up
     qLog(Warning) << "Could not set thread to PLAYING.";
     current_pipeline_.reset();
+    BufferingFinished();
     return;
   }
 
@@ -460,6 +465,7 @@ void GstEngine::Stop() {
     StartFadeout();
 
   current_pipeline_.reset();
+  BufferingFinished();
   emit StateChanged(Engine::Empty);
 }
 
@@ -469,7 +475,7 @@ void GstEngine::FadeoutFinished() {
 }
 
 void GstEngine::Pause() {
-  if (!current_pipeline_)
+  if (!current_pipeline_ || current_pipeline_->is_buffering())
     return;
 
   if ( current_pipeline_->state() == GST_STATE_PLAYING ) {
@@ -481,7 +487,7 @@ void GstEngine::Pause() {
 }
 
 void GstEngine::Unpause() {
-  if (!current_pipeline_)
+  if (!current_pipeline_ || current_pipeline_->is_buffering())
     return;
 
   if ( current_pipeline_->state() == GST_STATE_PAUSED ) {
@@ -589,6 +595,7 @@ void GstEngine::HandlePipelineError(int pipeline_id, const QString& message,
 
   current_pipeline_.reset();
 
+  BufferingFinished();
   emit StateChanged(Engine::Empty);
   // unable to play media stream with this url
   emit InvalidSongRequested(url_);
@@ -610,8 +617,10 @@ void GstEngine::EndOfStreamReached(int pipeline_id, bool has_next_track) {
   if (!current_pipeline_.get() || current_pipeline_->id() != pipeline_id)
     return;
 
-  if (!has_next_track)
+  if (!has_next_track) {
     current_pipeline_.reset();
+    BufferingFinished();
+  }
   ClearScopeBuffers();
   emit TrackEnded();
 }
@@ -690,6 +699,9 @@ shared_ptr<GstEnginePipeline> GstEngine::CreatePipeline() {
   connect(ret.get(), SIGNAL(MetadataFound(int, Engine::SimpleMetaBundle)),
           SLOT(NewMetaData(int, Engine::SimpleMetaBundle)));
   connect(ret.get(), SIGNAL(destroyed()), SLOT(ClearScopeBuffers()));
+  connect(ret.get(), SIGNAL(BufferingStarted()), SLOT(BufferingStarted()));
+  connect(ret.get(), SIGNAL(BufferingProgress(int)), SLOT(BufferingProgress(int)));
+  connect(ret.get(), SIGNAL(BufferingFinished()), SLOT(BufferingFinished()));
 
   return ret;
 }
@@ -827,4 +839,24 @@ void GstEngine::SetBackgroundStreamVolume(int id, int volume) {
   shared_ptr<GstEnginePipeline> pipeline = background_streams_[id];
   Q_ASSERT(pipeline);
   pipeline->SetVolume(volume);
+}
+
+void GstEngine::BufferingStarted() {
+  if (buffering_task_id_ != -1) {
+    task_manager_->SetTaskFinished(buffering_task_id_);
+  }
+
+  buffering_task_id_ = task_manager_->StartTask(tr("Buffering"));
+  task_manager_->SetTaskProgress(buffering_task_id_, 0, 100);
+}
+
+void GstEngine::BufferingProgress(int percent) {
+  task_manager_->SetTaskProgress(buffering_task_id_, percent, 100);
+}
+
+void GstEngine::BufferingFinished() {
+  if (buffering_task_id_ != -1) {
+    task_manager_->SetTaskFinished(buffering_task_id_);
+    buffering_task_id_ = -1;
+  }
 }

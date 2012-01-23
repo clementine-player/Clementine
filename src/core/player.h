@@ -34,6 +34,7 @@ class LastFMService;
 class MainWindow;
 class PlaylistManagerInterface;
 class Settings;
+class TaskManager;
 
 
 class PlayerInterface : public QObject {
@@ -107,7 +108,8 @@ class Player : public PlayerInterface {
   Q_OBJECT
 
 public:
-  Player(PlaylistManagerInterface* playlists, QObject* parent = 0);
+  Player(PlaylistManagerInterface* playlists, TaskManager* task_manager,
+         QObject* parent = 0);
   ~Player();
 
   void Init();

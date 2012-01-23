@@ -38,11 +38,12 @@
 using boost::shared_ptr;
 
 
-Player::Player(PlaylistManagerInterface* playlists, QObject* parent)
+Player::Player(PlaylistManagerInterface* playlists, TaskManager* task_manager,
+               QObject* parent)
   : PlayerInterface(parent),
     playlists_(playlists),
     lastfm_(NULL),
-    engine_(new GstEngine),
+    engine_(new GstEngine(task_manager)),
     stream_change_type_(Engine::First),
     last_state_(Engine::Empty),
     volume_before_mute_(50)
