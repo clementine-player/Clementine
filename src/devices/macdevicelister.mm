@@ -60,6 +60,29 @@
 #define kUSBProductString "USB Product Name"
 #endif
 
+// io_object_t, io_service_t, io_iterator_t etc. are all typedef'd to unsigned int,
+// hence the lack of templating here.
+class ScopedIOObject {
+ public:
+  explicit ScopedIOObject(io_object_t object = NULL)
+      : object_(object) {
+  }
+
+  ~ScopedIOObject() {
+    if (object_)
+      IOObjectRelease(object_);
+  }
+
+  io_object_t get() const {
+    return object_;
+  }
+
+ private:
+  io_object_t object_;
+
+  Q_DISABLE_COPY(ScopedIOObject);
+};
+
 // Helpful MTP & USB links:
 // Apple USB device interface guide:
 // http://developer.apple.com/mac/library/documentation/DeviceDrivers/Conceptual/USBBook/USBDeviceInterfaces/USBDevInterfaces.html
@@ -309,9 +332,8 @@ QString FindDeviceProperty(const QString& bsd_name, CFStringRef property) {
   ScopedCFTypeRef<DADiskRef> disk(DADiskCreateFromBSDName(
       kCFAllocatorDefault, session.get(), bsd_name.toAscii().constData()));
 
-  io_object_t device = DADiskCopyIOMedia(disk.get());
-  QString ret = GetUSBRegistryEntryString(device, property);
-  IOObjectRelease(device);
+  ScopedIOObject device(DADiskCopyIOMedia(disk.get()));
+  QString ret = GetUSBRegistryEntryString(device.get(), property);
   return ret;
 }
 
@@ -369,20 +391,20 @@ void MacDeviceLister::DiskAddedCallback(DADiskRef disk, void* context) {
       [[properties objectForKey:(NSString*)kDADiskDescriptionVolumePathKey] copy];
 
   if (volume_path) {
-    io_object_t device = DADiskCopyIOMedia(disk);
-    ScopedCFTypeRef<CFStringRef> class_name(IOObjectCopyClass(device));
+    ScopedIOObject device(DADiskCopyIOMedia(disk));
+    ScopedCFTypeRef<CFStringRef> class_name(IOObjectCopyClass(device.get()));
     if (class_name && CFStringCompare(class_name.get(), CFSTR(kIOMediaClass), 0) == kCFCompareEqualTo) {
-      QString vendor = GetUSBRegistryEntryString(device, CFSTR(kUSBVendorString));
-      QString product = GetUSBRegistryEntryString(device, CFSTR(kUSBProductString));
+      QString vendor = GetUSBRegistryEntryString(device.get(), CFSTR(kUSBVendorString));
+      QString product = GetUSBRegistryEntryString(device.get(), CFSTR(kUSBProductString));
 
       CFMutableDictionaryRef cf_properties;
       kern_return_t ret = IORegistryEntryCreateCFProperties(
-          device, &cf_properties, kCFAllocatorDefault, 0);
+          device.get(), &cf_properties, kCFAllocatorDefault, 0);
 
       if (ret == KERN_SUCCESS) {
         scoped_nsobject<NSDictionary> dict((NSDictionary*)cf_properties);  // Takes ownership.
         if ([[dict objectForKey:@"Removable"] intValue] == 1) {
-          QString serial = GetSerialForDevice(device);
+          QString serial = GetSerialForDevice(device.get());
           if (!serial.isEmpty()) {
             me->current_devices_[serial] = QString(DADiskGetBSDName(disk));
             emit me->DeviceAdded(serial);
@@ -390,8 +412,6 @@ void MacDeviceLister::DiskAddedCallback(DADiskRef disk, void* context) {
         }
       }
     }
-
-    IOObjectRelease(device);
   }
 }
 
@@ -679,11 +699,10 @@ QString MacDeviceLister::MakeFriendlyName(const QString& serial) {
     return QString::fromUtf8([device_name UTF8String]);
   }
 
-  io_object_t device = DADiskCopyIOMedia(disk);
+  ScopedIOObject device(DADiskCopyIOMedia(disk));
 
-  QString vendor = GetUSBRegistryEntryString(device, CFSTR(kUSBVendorString));
-  QString product = GetUSBRegistryEntryString(device, CFSTR(kUSBProductString));
-  IOObjectRelease(device);
+  QString vendor = GetUSBRegistryEntryString(device.get(), CFSTR(kUSBVendorString));
+  QString product = GetUSBRegistryEntryString(device.get(), CFSTR(kUSBProductString));
 
   if (vendor.isEmpty()) {
     return product;
@@ -742,16 +761,14 @@ QVariantList MacDeviceLister::DeviceIcons(const QString& serial) {
   ScopedCFTypeRef<DADiskRef> disk(DADiskCreateFromBSDName(
       kCFAllocatorDefault, session.get(), bsd_name.toAscii().constData()));
 
-  io_object_t device = DADiskCopyIOMedia(disk.get());
-  QString icon = GetIconForDevice(device);
+  ScopedIOObject device(DADiskCopyIOMedia(disk.get()));
+  QString icon = GetIconForDevice(device.get());
 
   scoped_nsobject<NSDictionary> properties((NSDictionary*)DADiskCopyDescription(disk));
   scoped_nsobject<NSURL> volume_path(
       [[properties objectForKey:(NSString*)kDADiskDescriptionVolumePathKey] copy]);
 
   QString path = QString::fromUtf8([[volume_path path] UTF8String]);
-
-  IOObjectRelease(device);
 
   QVariantList ret;
   ret << GuessIconForPath(path);
