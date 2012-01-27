@@ -164,9 +164,6 @@ bool GstEnginePipeline::ReplaceDecodeBin(const QUrl& url) {
   } else {
     new_bin = engine_->CreateElement("uridecodebin");
     g_object_set(G_OBJECT(new_bin), "uri", url.toEncoded().constData(), NULL);
-    g_object_set(G_OBJECT(new_bin), "buffer-duration", buffer_duration_nanosec_, NULL);
-    g_object_set(G_OBJECT(new_bin), "download", true, NULL);
-    g_object_set(G_OBJECT(new_bin), "use-buffering", true, NULL);
     g_signal_connect(G_OBJECT(new_bin), "drained", G_CALLBACK(SourceDrainedCallback), this);
     g_signal_connect(G_OBJECT(new_bin), "pad-added", G_CALLBACK(NewPadCallback), this);
     g_signal_connect(G_OBJECT(new_bin), "notify::source", G_CALLBACK(SourceSetupCallback), this);
@@ -309,8 +306,14 @@ bool GstEnginePipeline::Init() {
   // Set the buffer duration.  We set this on the queue as well as on the
   // decode bin (in ReplaceDecodeBin()) because setting it on the decode bin
   // only affects network sources.
+  g_object_set(G_OBJECT(queue_), "max-size-buffers", 0, NULL);
+  g_object_set(G_OBJECT(queue_), "max-size-bytes", 0, NULL);
   g_object_set(G_OBJECT(queue_), "max-size-time", buffer_duration_nanosec_, NULL);
-  g_object_set(G_OBJECT(queue_), "use-buffering", true, NULL);
+  g_object_set(G_OBJECT(queue_), "low-percent", 1, NULL);
+
+  if (buffer_duration_nanosec_ > 0) {
+    g_object_set(G_OBJECT(queue_), "use-buffering", true, NULL);
+  }
 
   gst_element_link(queue_, audioconvert_);
   
@@ -569,6 +572,12 @@ void GstEnginePipeline::StateChangedMessageReceived(GstMessage* msg) {
 }
 
 void GstEnginePipeline::BufferingMessageReceived(GstMessage* msg) {
+  // Only handle buffering messages from the queue2 element in audiobin - not
+  // the one that's created automatically by uridecidebin.
+  if (GST_ELEMENT(GST_MESSAGE_SRC(msg)) != queue_) {
+    return;
+  }
+
   int percent = 0;
   gst_message_parse_buffering(msg, &percent);
 
