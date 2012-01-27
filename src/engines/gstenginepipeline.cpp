@@ -303,9 +303,11 @@ bool GstEnginePipeline::Init() {
     g_object_unref(G_OBJECT(band));
   }
 
-  // Set the buffer duration.  We set this on the queue as well as on the
+  // Set the buffer duration.  We set this on this queue instead of the
   // decode bin (in ReplaceDecodeBin()) because setting it on the decode bin
   // only affects network sources.
+  // Disable the default buffer and byte limits, so we only buffer based on
+  // time.
   g_object_set(G_OBJECT(queue_), "max-size-buffers", 0, NULL);
   g_object_set(G_OBJECT(queue_), "max-size-bytes", 0, NULL);
   g_object_set(G_OBJECT(queue_), "max-size-time", buffer_duration_nanosec_, NULL);
