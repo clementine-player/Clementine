@@ -104,6 +104,7 @@ set(SOURCES
   covers/coverproviders.cpp
   covers/coversearchstatistics.cpp
   covers/coversearchstatisticsdialog.cpp
+  covers/discogscoverprovider.cpp
   covers/kittenloader.cpp
 
   devices/connecteddevice.cpp
@@ -359,6 +360,7 @@ set(HEADERS
   covers/coverprovider.h
   covers/coverproviders.h
   covers/coversearchstatisticsdialog.h
+  covers/discogscoverprovider.h
   covers/kittenloader.h
 
   devices/connecteddevice.h

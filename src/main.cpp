@@ -42,6 +42,7 @@
 #include "core/utilities.h"
 #include "covers/albumcoverfetcher.h"
 #include "covers/amazoncoverprovider.h"
+#include "covers/discogscoverprovider.h"
 #include "covers/artloader.h"
 #include "covers/coverproviders.h"
 #include "engines/enginebase.h"
@@ -382,6 +383,7 @@ int main(int argc, char *argv[]) {
   // when its service is created.
   CoverProviders cover_providers;
   cover_providers.AddProvider(new AmazonCoverProvider);
+  cover_providers.AddProvider(new DiscogsCoverProvider);
 
   // Create the tag loader on another thread.
   TagReaderClient* tag_reader_client = new TagReaderClient;
