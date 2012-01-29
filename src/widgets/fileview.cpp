@@ -29,9 +29,9 @@
 #include <QMessageBox>
 #include <QScrollBar>
 
-const char* FileView::kFileFilter = "*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma \
-                                    *.mp4 *.spx *.wav *.m3u *.m3u8 *.pls *.xspf \
-                                    *.asx *.asxini *.cue";
+const char* FileView::kFileFilter = "*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma "
+                                    "*.mp4 *.spx *.wav *.m3u *.m3u8 *.pls *.xspf "
+                                    "*.asx *.asxini *.cue *.ape *.wv";
 
 FileView::FileView(QWidget* parent)
     : QWidget(parent),

@@ -145,8 +145,6 @@ void qt_mac_set_dock_menu(QMenu*);
 #endif
 
 const char* MainWindow::kSettingsGroup = "MainWindow";
-const char* MainWindow::kMusicFilterSpec =
-    QT_TR_NOOP("Music (*.mp3 *.ogg *.flac *.mpc *.m4a *.aac *.wma *.mp4 *.spx *.wav)");
 const char* MainWindow::kAllFilesFilterSpec =
     QT_TR_NOOP("All Files (*)");
 
@@ -1579,8 +1577,11 @@ void MainWindow::AddFile() {
   // Show dialog
   QStringList file_names = QFileDialog::getOpenFileNames(
       this, tr("Add file"), directory,
-      QString("%1;;%2;;%3").arg(tr(kMusicFilterSpec), parser.filters(),
-                                tr(kAllFilesFilterSpec)));
+      QString("%1 (%2);;%3;;%4").arg(
+          tr("Music"),
+          FileView::kFileFilter,
+          parser.filters(),
+          tr(kAllFilesFilterSpec)));
   if (file_names.isEmpty())
     return;
 

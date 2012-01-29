@@ -98,7 +98,6 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   ~MainWindow();
 
   static const char* kSettingsGroup;
-  static const char* kMusicFilterSpec;
   static const char* kAllFilesFilterSpec;
 
   // Don't change the values
