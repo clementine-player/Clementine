@@ -437,8 +437,7 @@ QVariant LibraryModel::data(const QModelIndex& index, int role) const {
     if (role == Qt::DecorationRole && item->type == LibraryItem::Type_Container) {
       GroupBy container_type = group_by_[item->container_level];
       is_album_node = container_type == GroupBy_Album
-                   || container_type == GroupBy_YearAlbum
-                   || container_type == GroupBy_AlbumArtist;
+                   || container_type == GroupBy_YearAlbum;
     }
     if (is_album_node) {
       // It has const behaviour some of the time - that's ok right?
@@ -469,6 +468,7 @@ QVariant LibraryModel::data(const LibraryItem* item, int role) const {
             case GroupBy_YearAlbum:
               return album_icon_;
             case GroupBy_Artist:
+            case GroupBy_AlbumArtist:
               return artist_icon_;
             default:
               break;
