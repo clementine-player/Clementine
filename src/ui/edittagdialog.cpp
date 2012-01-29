@@ -169,6 +169,16 @@ EditTagDialog::EditTagDialog(CoverProviders* cover_providers, QWidget* parent)
   new QShortcut(QKeySequence::Forward, next_button_, SLOT(click()));
   new QShortcut(QKeySequence::MoveToPreviousPage, previous_button_, SLOT(click()));
   new QShortcut(QKeySequence::MoveToNextPage, next_button_, SLOT(click()));
+
+  // Show the shortcuts as tooltips
+  previous_button_->setToolTip(QString("%1 (%2 / %3)").arg(
+      previous_button_->text(),
+      QKeySequence(QKeySequence::Back).toString(QKeySequence::NativeText),
+      QKeySequence(QKeySequence::MoveToPreviousPage).toString(QKeySequence::NativeText)));
+  next_button_->setToolTip(QString("%1 (%2 / %3)").arg(
+      next_button_->text(),
+      QKeySequence(QKeySequence::Forward).toString(QKeySequence::NativeText),
+      QKeySequence(QKeySequence::MoveToNextPage).toString(QKeySequence::NativeText)));
 }
 
 EditTagDialog::~EditTagDialog() {
