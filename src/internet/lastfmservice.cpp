@@ -602,6 +602,7 @@ static QStringList SavedArtistOrTagRadioNames(const QString& name) {
   s.beginGroup(LastFMService::kSettingsGroup);
   int count = s.beginReadArray(name);
   for (int i=0 ; i<count ; ++i) {
+    s.setArrayIndex(i);
     ret << s.value("key").toString();
   }
   s.endArray();
