@@ -82,7 +82,6 @@ class PlaylistView : public QTreeView {
   // QTreeView
   void drawTree(QPainter* painter, const QRegion& region) const;
   void drawRow(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const;
-  void keyPressEvent(QKeyEvent* event);
   void setModel(QAbstractItemModel* model);
 
  public slots:
@@ -95,6 +94,8 @@ class PlaylistView : public QTreeView {
   void DynamicModeChanged(bool dynamic);
   void SetColumnAlignment(int section, Qt::Alignment alignment);
 
+  void CopyCurrentSongToClipboard() const;
+
  signals:
   void PlayItem(const QModelIndex& index);
   void PlayPause();
@@ -106,6 +107,7 @@ class PlaylistView : public QTreeView {
 
  protected:
   // QWidget
+  void keyPressEvent(QKeyEvent* event);
   void contextMenuEvent(QContextMenuEvent* e);
   void hideEvent(QHideEvent* event);
   void showEvent(QShowEvent* event);

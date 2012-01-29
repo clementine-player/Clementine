@@ -23,6 +23,7 @@
 #include "core/logging.h"
 
 #include <QCleanlooksStyle>
+#include <QClipboard>
 #include <QPainter>
 #include <QHeaderView>
 #include <QSettings>
@@ -467,11 +468,9 @@ bool CompareSelectionRanges(const QItemSelectionRange& a, const QItemSelectionRa
 }
 
 void PlaylistView::keyPressEvent(QKeyEvent* event) {
-  if (!model()) {
+  if (!model() || state() == QAbstractItemView::EditingState) {
     QTreeView::keyPressEvent(event);
-  } else if (state() == QAbstractItemView::EditingState) {
-    QTreeView::keyPressEvent(event);
-  } else if (event->matches(QKeySequence::Delete)) {
+  } else if (event == QKeySequence::Delete) {
     RemoveSelected();
     event->accept();
 #ifdef Q_OS_DARWIN
@@ -479,6 +478,8 @@ void PlaylistView::keyPressEvent(QKeyEvent* event) {
     RemoveSelected();
     event->accept();
 #endif
+  } else if (event == QKeySequence::Copy) {
+    CopyCurrentSongToClipboard();
   } else if (event->key() == Qt::Key_Enter ||
              event->key() == Qt::Key_Return) {
     if (currentIndex().isValid())
@@ -1005,4 +1006,31 @@ void PlaylistView::SetColumnAlignment(int section, Qt::Alignment alignment) {
 
 Qt::Alignment PlaylistView::column_alignment(int section) const {
   return column_alignment_.value(section, Qt::AlignLeft | Qt::AlignVCenter);
+}
+
+void PlaylistView::CopyCurrentSongToClipboard() const {
+  // Get the display text of all visible columns.
+  QStringList columns;
+
+  for (int i=0 ; i<header()->count() ; ++i) {
+    if (header()->isSectionHidden(i)) {
+      continue;
+    }
+
+    const QVariant data = model()->data(
+          currentIndex().sibling(currentIndex().row(), i));
+    if (data.type() == QVariant::String) {
+      columns << data.toString();
+    }
+  }
+
+  // Get the song's URL
+  const QUrl url = model()->data(currentIndex().sibling(
+      currentIndex().row(), Playlist::Column_Filename)).toUrl();
+
+  QMimeData* mime_data = new QMimeData;
+  mime_data->setUrls(QList<QUrl>() << url);
+  mime_data->setText(columns.join(" - "));
+
+  QApplication::clipboard()->setMimeData(mime_data);
 }
