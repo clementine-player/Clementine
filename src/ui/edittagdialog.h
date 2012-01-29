@@ -129,6 +129,7 @@ private:
   void UpdateStatisticsTab(const Song& song);
 
   bool SetLoading(const QString& message);
+  void SetSongListVisibility(bool visible);
 
   // Called by QtConcurrentRun
   QList<Data> LoadData(const SongList& songs) const;

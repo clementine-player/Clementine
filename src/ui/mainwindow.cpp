@@ -329,6 +329,7 @@ MainWindow::MainWindow(
   connect(file_view_, SIGNAL(PathChanged(QString)), SLOT(FilePathChanged(QString)));
   connect(file_view_, SIGNAL(CopyToLibrary(QList<QUrl>)), SLOT(CopyFilesToLibrary(QList<QUrl>)));
   connect(file_view_, SIGNAL(MoveToLibrary(QList<QUrl>)), SLOT(MoveFilesToLibrary(QList<QUrl>)));
+  connect(file_view_, SIGNAL(EditTags(QList<QUrl>)), SLOT(EditFileTags(QList<QUrl>)));
   connect(file_view_, SIGNAL(CopyToDevice(QList<QUrl>)), SLOT(CopyFilesToDevice(QList<QUrl>)));
   file_view_->SetTaskManager(task_manager_);
 
@@ -1462,7 +1463,6 @@ void MainWindow::EditTracks() {
 
   EnsureEditTagDialogCreated();
   edit_tag_dialog_->SetSongs(songs, items);
-  edit_tag_dialog_->SetTagCompleter(library_->model()->backend());
   edit_tag_dialog_->show();
 }
 
@@ -1786,21 +1786,21 @@ void MainWindow::NowPlayingWidgetPositionChanged(bool above_status_bar) {
   ui_->status_bar->show();
 }
 
-void MainWindow::CopyFilesToLibrary(const QList<QUrl> &urls) {
+void MainWindow::CopyFilesToLibrary(const QList<QUrl>& urls) {
   organise_dialog_->SetDestinationModel(library_->model()->directory_model());
   organise_dialog_->SetUrls(urls);
   organise_dialog_->SetCopy(true);
   organise_dialog_->show();
 }
 
-void MainWindow::MoveFilesToLibrary(const QList<QUrl> &urls) {
+void MainWindow::MoveFilesToLibrary(const QList<QUrl>& urls) {
   organise_dialog_->SetDestinationModel(library_->model()->directory_model());
   organise_dialog_->SetUrls(urls);
   organise_dialog_->SetCopy(false);
   organise_dialog_->show();
 }
 
-void MainWindow::CopyFilesToDevice(const QList<QUrl> &urls) {
+void MainWindow::CopyFilesToDevice(const QList<QUrl>& urls) {
   organise_dialog_->SetDestinationModel(devices_->connected_devices_model(), true);
   organise_dialog_->SetCopy(true);
   if (organise_dialog_->SetUrls(urls))
@@ -1809,6 +1809,22 @@ void MainWindow::CopyFilesToDevice(const QList<QUrl> &urls) {
     QMessageBox::warning(this, tr("Error"),
         tr("None of the selected songs were suitable for copying to a device"));
   }
+}
+
+void MainWindow::EditFileTags(const QList<QUrl>& urls) {
+  EnsureEditTagDialogCreated();
+
+  SongList songs;
+  foreach (const QUrl& url, urls) {
+    Song song;
+    song.set_url(url);
+    song.set_valid(true);
+    song.set_filetype(Song::Type_Mpeg);
+    songs << song;
+  }
+
+  edit_tag_dialog_->SetSongs(songs);
+  edit_tag_dialog_->show();
 }
 
 void MainWindow::PlaylistCopyToLibrary() {
@@ -1979,6 +1995,8 @@ void MainWindow::EnsureEditTagDialogCreated() {
   edit_tag_dialog_.reset(new EditTagDialog(cover_providers_));
   connect(edit_tag_dialog_.get(), SIGNAL(accepted()), SLOT(EditTagDialogAccepted()));
   connect(edit_tag_dialog_.get(), SIGNAL(Error(QString)), SLOT(ShowErrorDialog(QString)));
+
+  edit_tag_dialog_->SetTagCompleter(library_->model()->backend());
 }
 
 void MainWindow::ShowAboutDialog() {

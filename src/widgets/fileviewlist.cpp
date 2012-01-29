@@ -17,6 +17,7 @@
 
 #include "fileviewlist.h"
 #include "core/mimedata.h"
+#include "core/utilities.h"
 #include "ui/iconloader.h"
 
 #include <QContextMenuEvent>
@@ -43,6 +44,13 @@ FileViewList::FileViewList(QWidget* parent)
                    tr("Copy to device..."), this, SLOT(CopyToDeviceSlot()));
   menu_->addAction(IconLoader::Load("edit-delete"), tr("Delete from disk..."),
                    this, SLOT(DeleteSlot()));
+
+  menu_->addSeparator();
+  menu_->addAction(IconLoader::Load("edit-rename"),
+    tr("Edit track information..."), this, SLOT(EditTagsSlot()));
+  menu_->addAction(IconLoader::Load("document-open-folder"),
+    tr("Show in file browser..."), this, SLOT(ShowInBrowser()));
+
   setAttribute(Qt::WA_MacShowFocusRect, false);
 }
 
@@ -120,6 +128,10 @@ void FileViewList::DeleteSlot() {
   emit Delete(FilenamesFromSelection());
 }
 
+void FileViewList::EditTagsSlot() {
+  emit EditTags(UrlListFromSelection());
+}
+
 void FileViewList::mousePressEvent(QMouseEvent* e) {
   QListView::mousePressEvent(e);
 
@@ -133,4 +145,8 @@ void FileViewList::mousePressEvent(QMouseEvent* e) {
     data->enqueue_now_ = true;
     emit AddToPlaylist(data);
   }
+}
+
+void FileViewList::ShowInBrowser() {
+  Utilities::OpenInFileBrowser(UrlListFromSelection());
 }

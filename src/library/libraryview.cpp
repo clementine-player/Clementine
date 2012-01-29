@@ -477,9 +477,9 @@ void LibraryView::Delete() {
 void LibraryView::EditTracks() {
   if(!edit_tag_dialog_) {
     edit_tag_dialog_.reset(new EditTagDialog(cover_providers_, this));
+    edit_tag_dialog_->SetTagCompleter(library_->backend());
   }
   edit_tag_dialog_->SetSongs(GetSelectedSongs());
-  edit_tag_dialog_->SetTagCompleter(library_->backend());
   edit_tag_dialog_->show();
 }
 

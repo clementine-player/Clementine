@@ -65,6 +65,7 @@ FileView::FileView(QWidget* parent)
   connect(ui_->list, SIGNAL(MoveToLibrary(QList<QUrl>)), SIGNAL(MoveToLibrary(QList<QUrl>)));
   connect(ui_->list, SIGNAL(CopyToDevice(QList<QUrl>)), SIGNAL(CopyToDevice(QList<QUrl>)));
   connect(ui_->list, SIGNAL(Delete(QStringList)), SLOT(Delete(QStringList)));
+  connect(ui_->list, SIGNAL(EditTags(QList<QUrl>)), SIGNAL(EditTags(QList<QUrl>)));
 
   QString filter(FileView::kFileFilter);
   filter_list_ << filter.split(" ");

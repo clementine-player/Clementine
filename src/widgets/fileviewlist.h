@@ -37,6 +37,7 @@ class FileViewList : public QListView {
   void MoveToLibrary(const QList<QUrl>& urls);
   void CopyToDevice(const QList<QUrl>& urls);
   void Delete(const QStringList& filenames);
+  void EditTags(const QList<QUrl>& urls);
 
  protected:
   void contextMenuEvent(QContextMenuEvent* e);
@@ -49,6 +50,8 @@ class FileViewList : public QListView {
   void MoveToLibrarySlot();
   void CopyToDeviceSlot();
   void DeleteSlot();
+  void EditTagsSlot();
+  void ShowInBrowser();
 
   QStringList FilenamesFromSelection() const;
   QList<QUrl> UrlListFromSelection() const;

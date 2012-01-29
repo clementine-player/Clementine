@@ -42,6 +42,8 @@
 #include <QtConcurrentRun>
 #include <QtDebug>
 
+#include <limits>
+
 const char* EditTagDialog::kHintText = QT_TR_NOOP("(different across multiple songs)");
 const char* EditTagDialog::kSettingsGroup = "EditTagDialog";
 
@@ -231,8 +233,18 @@ void EditTagDialog::SetSongsFinished() {
     return;
 
   data_ = watcher->result();
-  if (data_.count() == 0)
+  if (data_.count() == 0) {
+    // If there were no valid songs, disable everything
+    ui_->song_list->setEnabled(false);
+    ui_->tab_widget->setEnabled(false);
+
+    // Show a summary with empty information
+    UpdateSummaryTab(Song());
+    ui_->tab_widget->setCurrentWidget(ui_->summary_tab);
+
+    SetSongListVisibility(false);
     return;
+  }
 
   // Add the filenames to the list
   foreach (const Data& data, data_) {
@@ -244,10 +256,13 @@ void EditTagDialog::SetSongsFinished() {
   ui_->song_list->selectAll();
 
   // Hide the list if there's only one song in it
-  const bool multiple = data_.count() != 1;
-  ui_->song_list->setVisible(multiple);
-  previous_button_->setEnabled(multiple);
-  next_button_->setEnabled(multiple);
+  SetSongListVisibility(data_.count() != 1);
+}
+
+void EditTagDialog::SetSongListVisibility(bool visible) {
+  ui_->song_list->setVisible(visible);
+  previous_button_->setEnabled(visible);
+  next_button_->setEnabled(visible);
 }
 
 void EditTagDialog::SetTagCompleter(LibraryBackend* backend) {
@@ -390,6 +405,15 @@ static void SetText(QLabel* label, int value, const QString& suffix, const QStri
   label->setText(value <= 0 ? def : (QString::number(value) + " " + suffix));
 }
 
+static void SetDate(QLabel* label, uint time) {
+  if (time == std::numeric_limits<uint>::max()) { // -1
+    label->setText(QObject::tr("Unknown"));
+  } else {
+    label->setText(QDateTime::fromTime_t(time).toString(
+        QLocale::system().dateTimeFormat(QLocale::LongFormat)));
+  }
+}
+
 void EditTagDialog::UpdateSummaryTab(const Song& song) {
   cover_art_id_ = cover_loader_->Worker()->LoadImageAsync(song);
 
@@ -420,11 +444,15 @@ void EditTagDialog::UpdateSummaryTab(const Song& song) {
   SetText(ui_->bpm, song.bpm(), tr("bpm"));
   SetText(ui_->samplerate, song.samplerate(), "Hz");
   SetText(ui_->bitrate, song.bitrate(), tr("kbps"));
-  ui_->mtime->setText(QDateTime::fromTime_t(song.mtime()).toString(
-        QLocale::system().dateTimeFormat(QLocale::LongFormat)));
-  ui_->ctime->setText(QDateTime::fromTime_t(song.ctime()).toString(
-        QLocale::system().dateTimeFormat(QLocale::LongFormat)));
-  ui_->filesize->setText(Utilities::PrettySize(song.filesize()));
+  SetDate(ui_->mtime, song.mtime());
+  SetDate(ui_->ctime, song.ctime());
+
+  if (song.filesize() == -1) {
+    ui_->filesize->setText(tr("Unknown"));
+  } else {
+    ui_->filesize->setText(Utilities::PrettySize(song.filesize()));
+  }
+
   ui_->filetype->setText(song.TextForFiletype());
 
   if (song.url().scheme() == "file")
@@ -586,11 +614,19 @@ void EditTagDialog::UpdateCoverOf(const Song& selected, const QModelIndexList& s
 }
 
 void EditTagDialog::NextSong() {
+  if (ui_->song_list->count() == 0) {
+    return;
+  }
+
   int row = (ui_->song_list->currentRow() + 1) % ui_->song_list->count();
   ui_->song_list->setCurrentRow(row);
 }
 
 void EditTagDialog::PreviousSong() {
+  if (ui_->song_list->count() == 0) {
+    return;
+  }
+
   int row = (ui_->song_list->currentRow() - 1 + ui_->song_list->count()) % ui_->song_list->count();
   ui_->song_list->setCurrentRow(row);
 }
