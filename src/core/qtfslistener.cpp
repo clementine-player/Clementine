@@ -30,6 +30,10 @@ void QtFSListener::AddPath(const QString& path) {
   watcher_.addPath(path);
 }
 
+void QtFSListener::RemovePath(const QString& path) {
+  watcher_.removePath(path);
+}
+
 void QtFSListener::Clear() {
   watcher_.removePaths(watcher_.directories());
   watcher_.removePaths(watcher_.files());

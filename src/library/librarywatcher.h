@@ -140,18 +140,13 @@ class LibraryWatcher : public QObject {
                         ScanTransaction* t, bool force_noincremental = false);
 
  private:
-  // One of these gets stored for each Directory we're watching
-  struct DirData {
-    Directory dir;
-  };
-
   static bool FindSongByPath(const SongList& list, const QString& path, Song* out);
   inline static QString NoExtensionPart( const QString &fileName );
   inline static QString ExtensionPart( const QString &fileName );
   inline static QString DirectoryPart( const QString &fileName );
   QString PickBestImage(const QStringList& images);
   QString ImageForSong(const QString& path, QMap<QString, QStringList>& album_art);
-  void AddWatch(const DirData& dir, const QString& path);
+  void AddWatch(const Directory& dir, const QString& path);
   uint GetMtimeForCue(const QString& cue_path);
   void PerformScan(bool incremental, bool ignore_mtimes);
 
@@ -181,7 +176,7 @@ class LibraryWatcher : public QObject {
   QString device_name_;
 
   FileSystemWatcherInterface* fs_watcher_;
-  QHash<QString, DirData> subdir_mapping_;
+  QHash<QString, Directory> subdir_mapping_;
 
   /* A list of words use to try to identify the (likely) best image 
    * found in an directory to use as cover artwork.
@@ -194,7 +189,7 @@ class LibraryWatcher : public QObject {
   bool scan_on_startup_;
   bool monitor_;
 
-  QMap<int, DirData> watched_dirs_;
+  QMap<int, Directory> watched_dirs_;
   QTimer* rescan_timer_;
   QMap<int, QStringList> rescan_queue_; // dir id -> list of subdirs to be scanned
   bool rescan_paused_;

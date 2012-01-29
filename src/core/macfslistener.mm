@@ -59,6 +59,12 @@ void MacFSListener::AddPath(const QString& path) {
   UpdateStream();
 }
 
+void MacFSListener::RemovePath(const QString& path) {
+  Q_ASSERT(run_loop_);
+  paths_.remove(path);
+  UpdateStream();
+}
+
 void MacFSListener::Clear() {
   paths_.clear();
   UpdateStream();

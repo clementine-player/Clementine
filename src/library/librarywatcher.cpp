@@ -184,9 +184,7 @@ SubdirectoryList LibraryWatcher::ScanTransaction::GetAllSubdirs() {
 }
 
 void LibraryWatcher::AddDirectory(const Directory& dir, const SubdirectoryList& subdirs) {
-  DirData data;
-  data.dir = dir;
-  watched_dirs_[dir.id] = data;
+  watched_dirs_[dir.id] = dir;
 
   if (subdirs.isEmpty()) {
     // This is a new directory that we've never seen before.
@@ -208,7 +206,7 @@ void LibraryWatcher::AddDirectory(const Directory& dir, const SubdirectoryList& 
         ScanSubdirectory(subdir.path, subdir, &transaction);
 
       if (monitor_)
-        AddWatch(data, subdir.path);
+        AddWatch(dir, subdir.path);
     }
   }
 
@@ -223,8 +221,8 @@ void LibraryWatcher::ScanSubdirectory(
   // Do not scan symlinked dirs that are already in collection
   if (path_info.isSymLink()) {
     QString real_path = path_info.symLinkTarget();
-    foreach (const DirData& dir_data, watched_dirs_) {
-      if (real_path.startsWith(dir_data.dir.path)) {
+    foreach (const Directory& dir, watched_dirs_) {
+      if (real_path.startsWith(dir.path)) {
         t->AddToProgress(1);
         return;
       }
@@ -550,7 +548,7 @@ uint LibraryWatcher::GetMtimeForCue(const QString& cue_path) {
              : 0;
 }
 
-void LibraryWatcher::AddWatch(const DirData& dir, const QString& path) {
+void LibraryWatcher::AddWatch(const Directory& dir, const QString& path) {
   if (!QFile::exists(path))
     return;
 
@@ -563,6 +561,12 @@ void LibraryWatcher::AddWatch(const DirData& dir, const QString& path) {
 void LibraryWatcher::RemoveDirectory(const Directory& dir) {
   rescan_queue_.remove(dir.id);
   watched_dirs_.remove(dir.id);
+
+  // Stop watching the directory's subdirectories
+  foreach (const QString& subdir_path, subdir_mapping_.keys(dir)) {
+    fs_watcher_->RemovePath(subdir_path);
+    subdir_mapping_.remove(subdir_path);
+  }
 }
 
 bool LibraryWatcher::FindSongByPath(const SongList& list, const QString& path, Song* out) {
@@ -578,11 +582,11 @@ bool LibraryWatcher::FindSongByPath(const SongList& list, const QString& path, S
 
 void LibraryWatcher::DirectoryChanged(const QString &subdir) {
   // Find what dir it was in
-  QHash<QString, DirData>::const_iterator it = subdir_mapping_.constFind(subdir);
+  QHash<QString, Directory>::const_iterator it = subdir_mapping_.constFind(subdir);
   if (it == subdir_mapping_.constEnd()) {
     return;
   }
-  Directory dir = it->dir;
+  Directory dir = *it;
 
   qLog(Debug) << "Subdir" << subdir << "changed under directory" << dir.path << "id" << dir.id;
 
@@ -702,10 +706,10 @@ void LibraryWatcher::ReloadSettings() {
     fs_watcher_->Clear();
   } else if (monitor_ && !was_monitoring_before) {
     // Add all directories to all QFileSystemWatchers again
-    foreach (const DirData& data, watched_dirs_.values()) {
-      SubdirectoryList subdirs = backend_->SubdirsInDirectory(data.dir.id);
+    foreach (const Directory& dir, watched_dirs_.values()) {
+      SubdirectoryList subdirs = backend_->SubdirsInDirectory(dir.id);
       foreach (const Subdirectory& subdir, subdirs) {
-        AddWatch(data, subdir.path);
+        AddWatch(dir, subdir.path);
       }
     }
   }
@@ -739,8 +743,8 @@ void LibraryWatcher::FullScanNow() {
 }
 
 void LibraryWatcher::PerformScan(bool incremental, bool ignore_mtimes) {
-  foreach (const DirData& data, watched_dirs_.values()) {
-    ScanTransaction transaction(this, data.dir.id,
+  foreach (const Directory& dir, watched_dirs_.values()) {
+    ScanTransaction transaction(this, dir.id,
                                 incremental, ignore_mtimes);
     SubdirectoryList subdirs(transaction.GetAllSubdirs());
     transaction.AddToProgressMax(subdirs.count());
