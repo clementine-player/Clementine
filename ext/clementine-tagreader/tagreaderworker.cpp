@@ -239,12 +239,19 @@ void TagReaderWorker::ReadFile(const QString& filename,
     if (file->tag()) {
       TagLib::MP4::Tag* mp4_tag = file->tag();
       const TagLib::MP4::ItemListMap& items = mp4_tag->itemListMap();
+
+      // Find album artists
       TagLib::MP4::ItemListMap::ConstIterator it = items.find("aART");
       if (it != items.end()) {
         TagLib::StringList album_artists = it->second.toStringList();
         if (!album_artists.isEmpty()) {
           Decode(album_artists.front(), NULL, song->mutable_albumartist());
         }
+      }
+
+      // Find album cover art
+      if (items.find("covr") != items.end()) {
+        song->set_art_automatic(kEmbeddedCover);
       }
     }
   } else if (tag) {
@@ -555,6 +562,23 @@ QByteArray TagReaderWorker::LoadEmbeddedArt(const QString& filename) const {
     }
   }
 #endif
+
+  // MP4/AAC
+  TagLib::MP4::File* aac_file = dynamic_cast<TagLib::MP4::File*>(ref.file());
+  if (aac_file) {
+    TagLib::MP4::Tag* tag = aac_file->tag();
+    const TagLib::MP4::ItemListMap& items = tag->itemListMap();
+    TagLib::MP4::ItemListMap::ConstIterator it = items.find("covr");
+    if (it != items.end()) {
+      const TagLib::MP4::CoverArtList& art_list = it->second.toCoverArtList();
+
+      if (!art_list.isEmpty()) {
+        // Just take the first one for now
+        const TagLib::MP4::CoverArt& art = art_list.front();
+        return QByteArray(art.data().data(), art.data().size());
+      }
+    }
+  }
 
   return QByteArray();
 }
