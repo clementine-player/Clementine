@@ -135,8 +135,10 @@ void Windows7ThumbBar::HandleWinEvent(MSG* msg) {
     const int button_id = LOWORD(msg->wParam);
 
     if (button_id >= 0 && button_id < actions_.count()) {
-      qLog(Debug) << "Button activated";
-      actions_[button_id]->activate(QAction::Trigger);
+      if (actions_[button_id]) {
+        qLog(Debug) << "Button activated";
+        actions_[button_id]->activate(QAction::Trigger);
+      }
     }
   }
 #endif // Q_OS_WIN32
