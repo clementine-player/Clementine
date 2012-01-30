@@ -4,6 +4,7 @@
 #include "core/logging.h"
 #include "core/player.h"
 #include "core/utilities.h"
+#include "ui/iconloader.h"
 
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
@@ -151,7 +152,8 @@ void SubsonicService::ReadArtist(QXmlStreamReader *reader, QStandardItem *parent
 {
   Q_ASSERT(reader->name() == "artist");
   QString id = reader->attributes().value("id").toString();
-  QStandardItem *item = new QStandardItem(reader->attributes().value("name").toString());
+  QStandardItem *item = new QStandardItem(IconLoader::Load("document-open-folder"),
+                                          reader->attributes().value("name").toString());
   item->setData(Type_Artist, InternetModel::Role_Type);
   item->setData(true, InternetModel::Role_CanLazyLoad);
   item->setData(id, Role_Id);
@@ -164,7 +166,8 @@ void SubsonicService::ReadAlbum(QXmlStreamReader *reader, QStandardItem *parent)
 {
   Q_ASSERT(reader->name() == "child");
   QString id = reader->attributes().value("id").toString();
-  QStandardItem *item = new QStandardItem(reader->attributes().value("title").toString());
+  QStandardItem *item = new QStandardItem(IconLoader::Load("document-open-folder"),
+                                          reader->attributes().value("title").toString());
   item->setData(Type_Album, InternetModel::Role_Type);
   item->setData(true, InternetModel::Role_CanLazyLoad);
   item->setData(id, Role_Id);
