@@ -46,12 +46,14 @@ void SubsonicService::LazyPopulate(QStandardItem *item)
 {
   switch (item->data(InternetModel::Role_Type).toInt())
   {
+  // The "root" item
   case InternetModel::Type_Service:
     GetIndexes();
     break;
 
-  case Type_Artist:
-  case Type_Album:
+  // Any folder item
+  case InternetModel::Type_UserPlaylist:
+    qLog(Debug) << "Lazy loading" << item->data(Role_Id).toString();
     GetMusicDirectory(item->data(Role_Id).toString());
     break;
 
@@ -62,6 +64,12 @@ void SubsonicService::LazyPopulate(QStandardItem *item)
   item->setRowCount(0);
   QStandardItem* loading = new QStandardItem(tr("Loading..."));
   item->appendRow(loading);
+}
+
+smart_playlists::GeneratorPtr SubsonicService::CreateGenerator(QStandardItem* item)
+{
+  qLog(Debug) << "Attempting to smart load" << item->data(Role_Id).toString();
+  return smart_playlists::GeneratorPtr();
 }
 
 void SubsonicService::ReloadSettings()
@@ -154,8 +162,9 @@ void SubsonicService::ReadArtist(QXmlStreamReader *reader, QStandardItem *parent
   QString id = reader->attributes().value("id").toString();
   QStandardItem *item = new QStandardItem(IconLoader::Load("document-open-folder"),
                                           reader->attributes().value("name").toString());
-  item->setData(Type_Artist, InternetModel::Role_Type);
   item->setData(true, InternetModel::Role_CanLazyLoad);
+  item->setData(InternetModel::Type_UserPlaylist, InternetModel::Role_Type);
+  item->setData(InternetModel::PlayBehaviour_SingleItem, InternetModel::Role_PlayBehaviour);
   item->setData(id, Role_Id);
   parent->appendRow(item);
   item_lookup_.insert(id, item);
@@ -168,8 +177,9 @@ void SubsonicService::ReadAlbum(QXmlStreamReader *reader, QStandardItem *parent)
   QString id = reader->attributes().value("id").toString();
   QStandardItem *item = new QStandardItem(IconLoader::Load("document-open-folder"),
                                           reader->attributes().value("title").toString());
-  item->setData(Type_Album, InternetModel::Role_Type);
   item->setData(true, InternetModel::Role_CanLazyLoad);
+  item->setData(InternetModel::Type_UserPlaylist, InternetModel::Role_Type);
+  item->setData(InternetModel::PlayBehaviour_SingleItem, InternetModel::Role_PlayBehaviour);
   item->setData(id, Role_Id);
   parent->appendRow(item);
   item_lookup_.insert(id, item);

@@ -56,6 +56,7 @@ class SubsonicService : public InternetService
 
   QStandardItem* CreateRootItem();
   void LazyPopulate(QStandardItem *item);
+  smart_playlists::GeneratorPtr CreateGenerator(QStandardItem* item);
   void ReloadSettings();
 
   void Login();

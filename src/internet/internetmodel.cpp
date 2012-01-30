@@ -231,8 +231,24 @@ QMimeData* InternetModel::mimeData(const QModelIndexList& indexes) const {
       int column = 0;
       QModelIndex child = index.child(row, column);
       while (child.isValid()) {
-        new_indexes << child;
-        urls << child.data(Role_Url).toUrl();
+        // If the playlist contains another playlist, expand it
+        if (child.data(Role_Type).toInt() == Type_UserPlaylist) {
+          // "List" of indexes to recurse on
+          QModelIndexList templist;
+          templist.append(child);
+          // We know this is going to be an InternetMimeData because we're calling
+          // ourselves with something that we always return InternetMimeData for!
+          InternetMimeData* recurse = qobject_cast<InternetMimeData*>(mimeData(templist));
+          // Add children if there were any
+          if (recurse) {
+            new_indexes.append(recurse->indexes);
+            urls.append(recurse->urls());
+            delete recurse;
+          }
+        } else {
+          new_indexes << child;
+          urls << child.data(Role_Url).toUrl();
+        }
         child = index.child(++row, column);
       }
     } else {
