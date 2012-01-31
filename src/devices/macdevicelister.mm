@@ -20,6 +20,7 @@
 #include "mtpconnection.h"
 #include "core/logging.h"
 #include "core/scoped_cftyperef.h"
+#include "core/scoped_nsautorelease_pool.h"
 #include "core/scoped_nsobject.h"
 
 #include <CoreFoundation/CFRunLoop.h>
@@ -31,7 +32,6 @@
 #include <IOKit/storage/IOCDMedia.h>
 
 #import <AppKit/NSWorkspace.h>
-#import <Foundation/NSAutoreleasePool.h>
 #import <Foundation/NSDictionary.h>
 #import <Foundation/NSNotification.h>
 #import <Foundation/NSPathUtilities.h>
@@ -113,7 +113,7 @@ MacDeviceLister::~MacDeviceLister() {
 }
 
 void MacDeviceLister::Init() {
-  [[NSAutoreleasePool alloc] init];
+  ScopedNSAutoreleasePool pool;
 
   // Populate MTP Device list.
   if (sMTPDeviceList.empty()) {

@@ -728,6 +728,7 @@ optional_source(APPLE
     core/macfslistener.mm
     core/macglobalshortcutbackend.mm
     core/mac_startup.mm
+    core/scoped_nsautorelease_pool.mm
     devices/macdevicelister.mm
     ui/globalshortcutgrabber.mm
     ui/macscreensaver.cpp

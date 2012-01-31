@@ -24,6 +24,8 @@
 
 #import <GrowlApplicationBridge.h>
 
+#include "core/scoped_nsautorelease_pool.h"
+
 @interface GrowlInterface :NSObject <GrowlApplicationBridgeDelegate> {
 }
 -(void) SendGrowlAlert:(NSString*)message title:(NSString*)title image:(NSData*)image;
@@ -120,6 +122,7 @@ class OSD::GrowlNotificationWrapper {
 
  private:
   GrowlInterface* growl_interface_;
+  ScopedNSAutoreleasePool pool_;
 };
 
 void OSD::Init() {

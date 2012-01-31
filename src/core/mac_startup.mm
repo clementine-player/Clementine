@@ -21,7 +21,6 @@
 #import <AppKit/NSNibDeclarations.h>
 #import <AppKit/NSViewController.h>
 
-#import <Foundation/NSAutoreleasePool.h>
 #import <Foundation/NSBundle.h>
 #import <Foundation/NSError.h>
 #import <Foundation/NSFileManager.h>
@@ -47,6 +46,7 @@
 #include "utilities.h"
 #include "core/logging.h"
 #include "core/scoped_cftyperef.h"
+#include "core/scoped_nsautorelease_pool.h"
 
 #ifdef HAVE_SPARKLE
 #import <Sparkle/SUUpdater.h>
@@ -85,7 +85,7 @@ static bool BreakpadCallback(int, int, mach_port_t, void*) {
 }
 
 static BreakpadRef InitBreakpad() {
-  NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
+  ScopedNSAutoreleasePool pool;
   BreakpadRef breakpad = nil;
   NSDictionary* plist = [[NSBundle mainBundle] infoDictionary];
   if (plist) {
@@ -236,7 +236,7 @@ static BreakpadRef InitBreakpad() {
 namespace mac {
 
 void MacMain() {
-  [[NSAutoreleasePool alloc] init];
+  ScopedNSAutoreleasePool pool;
   // Creates and sets the magic global variable so QApplication will find it.
   [MacApplication sharedApplication];
   #ifdef HAVE_SPARKLE
@@ -273,8 +273,7 @@ QString GetResourcesPath() {
 }
 
 QString GetApplicationSupportPath() {
-  NSAutoreleasePool* pool = [NSAutoreleasePool alloc];
-  [pool init];
+  ScopedNSAutoreleasePool pool;
   NSArray* paths = NSSearchPathForDirectoriesInDomains(
       NSApplicationSupportDirectory,
       NSUserDomainMask,
@@ -286,13 +285,11 @@ QString GetApplicationSupportPath() {
   } else {
     ret = "~/Library/Application Support";
   }
-  [pool drain];
   return ret;
 }
 
 QString GetMusicDirectory() {
-  NSAutoreleasePool* pool = [NSAutoreleasePool alloc];
-  [pool init];
+  ScopedNSAutoreleasePool pool;
   NSArray* paths = NSSearchPathForDirectoriesInDomains(
       NSMusicDirectory,
       NSUserDomainMask,
@@ -304,7 +301,6 @@ QString GetMusicDirectory() {
   } else {
     ret = "~/Music";
   }
-  [pool drain];
   return ret;
 }
 
