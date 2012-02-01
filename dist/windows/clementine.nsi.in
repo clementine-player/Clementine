@@ -243,6 +243,12 @@ Section "Qt image format plugins" imageformats
   File "/oname=qjpeg4.dll" "imageformats\qjpeg4.dll"
 SectionEnd
 
+Section "GIO modules" gio-modules
+  SetOutPath "$INSTDIR\gio-modules"
+
+  File "/oname=libgiognutls.dll" "gio-modules\libgiognutls.dll"
+SectionEnd
+
 Section "Gstreamer plugins" gstreamer-plugins
   SetOutPath "$INSTDIR\gstreamer-plugins"
   
@@ -1637,12 +1643,15 @@ Section "Uninstall"
   Delete "$INSTDIR\projectm-presets\Zylot - Waves Of Blood.milk"
   Delete "$INSTDIR\projectm-presets\Zylot - Wisps.milk"
 
+  Delete "$INSTDIR\gio-modules\libgiognutls.dll"
+
   Delete "$INSTDIR\Uninstall.exe"
   
   ; Remove the installation folders.
   RMDir "$INSTDIR\gstreamer-plugins"
   RMDir "$INSTDIR\projectm-presets"
   RMDir "$INSTDIR\imageformats"
+  RMDir "$INSTDIR\gio-modules"
   RMDir "$INSTDIR"
 
   ; Remove the Shortcuts

@@ -167,6 +167,25 @@ void IncreaseFDLimit() {
 #endif
 }
 
+#ifdef HAVE_GIO
+# undef signals // Clashes with GIO, and not needed in this file
+# include <gio/gio.h>
+
+void ScanGIOModulePath() {
+  QString gio_module_path;
+
+#if defined(Q_OS_WIN32)
+  gio_module_path = QCoreApplication::applicationDirPath() + "/gio-modules";
+#endif
+
+  if (!gio_module_path.isEmpty()) {
+    qLog(Debug) << "Adding GIO module path:" << gio_module_path;
+    QByteArray bytes = gio_module_path.toLocal8Bit();
+    g_io_modules_scan_all_in_directory(bytes.data());
+  }
+}
+#endif
+
 int main(int argc, char *argv[]) {
   if (CrashReporting::SendCrashReport(argc, argv)) {
     return 0;
@@ -444,6 +463,9 @@ int main(int argc, char *argv[]) {
       &art_loader,
       &cover_providers,
       &global_search);
+#ifdef HAVE_GIO
+  ScanGIOModulePath();
+#endif
 #ifdef HAVE_DBUS
   QObject::connect(&mpris, SIGNAL(RaiseMainWindow()), &w, SLOT(Raise()));
 #endif
