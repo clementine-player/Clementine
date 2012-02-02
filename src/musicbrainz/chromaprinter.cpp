@@ -142,6 +142,7 @@ QString Chromaprinter::CreateFingerprint() {
     chromaprint_dealloc(fprint);
     chromaprint_dealloc(encoded);
   }
+  chromaprint_free(chromaprint);
   int codegen_time = time.elapsed();
 
   qLog(Debug) << "Decode time:" << decode_time << "Codegen time:" << codegen_time;
