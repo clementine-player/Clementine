@@ -29,6 +29,8 @@
 #include "core/logging.h"
 #include "core/timeconstants.h"
 
+static const int kDecodeRate = 11025;
+static const int kDecodeChannels = 1;
 
 Chromaprinter::Chromaprinter(const QString& filename)
   : filename_(filename),
@@ -86,8 +88,8 @@ QString Chromaprinter::CreateFingerprint() {
   GstCaps* caps = gst_caps_new_simple(
       "audio/x-raw-int",
       "width", G_TYPE_INT, 16,
-      "channels", G_TYPE_INT, 1,
-      "rate", G_TYPE_INT, 11025,
+      "channels", G_TYPE_INT, kDecodeChannels,
+      "rate", G_TYPE_INT, kDecodeRate,
       NULL);
   gst_element_link_filtered(resample, sink, caps);
   gst_caps_unref(caps);
@@ -123,7 +125,7 @@ QString Chromaprinter::CreateFingerprint() {
   QByteArray data = buffer_.data();
 
   ChromaprintContext* chromaprint = chromaprint_new(CHROMAPRINT_ALGORITHM_DEFAULT);
-  chromaprint_start(chromaprint, 11025, 1);
+  chromaprint_start(chromaprint, kDecodeRate, kDecodeChannels);
   chromaprint_feed(chromaprint, reinterpret_cast<void*>(data.data()), data.size() / 2);
   chromaprint_finish(chromaprint);
 
