@@ -339,6 +339,8 @@ QString OSD::ReplaceVariable(const QString& variable, const Song& song) {
     return return_value.setNum(song.playcount());
   } else if (variable == "%skipcount%") {
     return return_value.setNum(song.skipcount());
+  } else if (variable == "%filename%") {
+    return song.basefilename();
   } else if (variable == "%newline%") {
     // We need different strings depending on notification type
     switch (behaviour_) {
