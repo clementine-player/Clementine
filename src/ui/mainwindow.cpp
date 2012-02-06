@@ -222,6 +222,9 @@ MainWindow::MainWindow(
 
   // Initialise the UI
   ui_->setupUi(this);
+#ifdef Q_OS_DARWIN
+  ui_->menu_help->menuAction()->setVisible(false);
+#endif
 
   ui_->multi_loading_indicator->SetTaskManager(task_manager_);
   ui_->now_playing->SetCoverProviders(cover_providers_);
