@@ -222,6 +222,7 @@ MainWindow::MainWindow(
 
   // Initialise the UI
   ui_->setupUi(this);
+
   ui_->multi_loading_indicator->SetTaskManager(task_manager_);
   ui_->now_playing->SetCoverProviders(cover_providers_);
   ui_->now_playing->SetLibraryBackend(library_->backend());
@@ -597,15 +598,6 @@ MainWindow::MainWindow(
   QAction* check_updates = ui_->menu_tools->addAction(tr("Check for updates..."));
   check_updates->setMenuRole(QAction::ApplicationSpecificRole);
   connect(check_updates, SIGNAL(triggered(bool)), SLOT(CheckForUpdates()));
-#endif
-
-#ifdef Q_OS_DARWIN
-  // Force this menu to be the app "Preferences".
-  ui_->action_configure->setMenuRole(QAction::PreferencesRole);
-  // Force this menu to be the app "About".
-  ui_->action_about->setMenuRole(QAction::AboutRole);
-  // Force this menu to be the app "Quit".
-  ui_->action_quit->setMenuRole(QAction::QuitRole);
 #endif
 
 #ifdef Q_OS_WIN32
