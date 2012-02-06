@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-01-29 22:42+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2012-02-03 09:01+0000\n"
+"Last-Translator: Belvar <glasbarg@gmail.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: br\n"
@@ -38,7 +38,7 @@ msgstr " me"
 msgid " pt"
 msgstr " pik"
 
-#: ../bin/src/ui_notificationssettingspage.h:404
+#: ../bin/src/ui_notificationssettingspage.h:411
 #: ../bin/src/ui_visualisationselector.h:116
 msgid " seconds"
 msgstr " eilenn"
@@ -117,6 +117,10 @@ msgstr "%L1 selaouer all"
 #, qt-format
 msgid "%L1 total plays"
 msgstr "bet selaouet %L1 gwech"
+
+#: ../bin/src/ui_notificationssettingspage.h:399
+msgid "%filename%"
+msgstr "%filename%"
 
 #: transcoder/transcodedialog.cpp:199
 #, c-format
@@ -332,7 +336,7 @@ msgstr "Gweredekaat/Diweredekaat Wiiremote"
 msgid "Add Stream"
 msgstr "Ouzhpennañ ul lanv"
 
-#: ../bin/src/ui_notificationssettingspage.h:394
+#: ../bin/src/ui_notificationssettingspage.h:397
 msgid "Add a new line if supported by the notification type"
 msgstr ""
 "Ouzhpennañ ul linenn nevez, ma 'z eo kemeret e karg gant an doare kemenadenn"
@@ -381,51 +385,55 @@ msgstr "Ouzhpennañ un teuliad nevez..."
 msgid "Add search term"
 msgstr "Ouzhpennañ ur ger klask"
 
-#: ../bin/src/ui_notificationssettingspage.h:361
+#: ../bin/src/ui_notificationssettingspage.h:364
 msgid "Add song album tag"
 msgstr "Ouzhpennañ tag albom an ton"
 
-#: ../bin/src/ui_notificationssettingspage.h:367
+#: ../bin/src/ui_notificationssettingspage.h:370
 msgid "Add song albumartist tag"
 msgstr "Ouzhpennañ tag arzour an albom d'an ton"
 
-#: ../bin/src/ui_notificationssettingspage.h:358
+#: ../bin/src/ui_notificationssettingspage.h:361
 msgid "Add song artist tag"
 msgstr "Ouzhpennañ tag arzour an ton"
 
-#: ../bin/src/ui_notificationssettingspage.h:373
+#: ../bin/src/ui_notificationssettingspage.h:376
 msgid "Add song composer tag"
 msgstr "Ouzhpennañ tag sonaozour an ton"
 
-#: ../bin/src/ui_notificationssettingspage.h:376
+#: ../bin/src/ui_notificationssettingspage.h:379
 msgid "Add song disc tag"
 msgstr "Ouzhpennañ tag niverenn ar bladenn an ton"
 
-#: ../bin/src/ui_notificationssettingspage.h:382
+#: ../bin/src/ui_notificationssettingspage.h:401
+msgid "Add song filename"
+msgstr "Ouzhpennañ anv restr an ton"
+
+#: ../bin/src/ui_notificationssettingspage.h:385
 msgid "Add song genre tag"
 msgstr "Ouzhpennañ tag doare an ton"
 
-#: ../bin/src/ui_notificationssettingspage.h:385
+#: ../bin/src/ui_notificationssettingspage.h:388
 msgid "Add song length tag"
 msgstr "Ouzhpennañ tag padelezh an ton"
 
-#: ../bin/src/ui_notificationssettingspage.h:388
+#: ../bin/src/ui_notificationssettingspage.h:391
 msgid "Add song play count"
 msgstr "Ouzhpennañ an niver a wech ma'z eo bet lennet an ton"
 
-#: ../bin/src/ui_notificationssettingspage.h:391
+#: ../bin/src/ui_notificationssettingspage.h:394
 msgid "Add song skip count"
 msgstr "Ouzhpennañ an niver a wech ma 'z eo bet lammet an ton"
 
-#: ../bin/src/ui_notificationssettingspage.h:364
+#: ../bin/src/ui_notificationssettingspage.h:367
 msgid "Add song title tag"
 msgstr "Ouzhpennañ tag titl an ton"
 
-#: ../bin/src/ui_notificationssettingspage.h:379
+#: ../bin/src/ui_notificationssettingspage.h:382
 msgid "Add song track tag"
 msgstr "Ouzhpennañ tag niverenn an ton"
 
-#: ../bin/src/ui_notificationssettingspage.h:370
+#: ../bin/src/ui_notificationssettingspage.h:373
 msgid "Add song year tag"
 msgstr "Ouzhpennañ tag bloavezh an ton"
 
@@ -439,7 +447,7 @@ msgstr "Ouzhpennañ da tonioù karetañ Grooveshark"
 
 #: internet/groovesharkservice.cpp:1024
 msgid "Add to Grooveshark playlists"
-msgstr "Ouzhpennañ da rollioù seniñ Grooveshark"
+msgstr "Ouzhpennañ da rolloù seniñ Grooveshark"
 
 #: ui/mainwindow.cpp:1404
 msgid "Add to another playlist"
@@ -549,7 +557,7 @@ msgstr "Holl restroù (*)"
 #: playlistparsers/playlistparser.cpp:61
 #, qt-format
 msgid "All playlists (%1)"
-msgstr "Holl rollioù seniñ (%1)"
+msgstr "Holl rolloù seniñ (%1)"
 
 #: ui/about.cpp:73
 msgid "All the translators"
@@ -586,7 +594,7 @@ msgid ""
 "like to download and install it now?"
 msgstr ""
 "Un enlugellad a zo ezhomm a-benn implij Spotify e-barzh Clementine. C'hoant "
-"ho peus pellkargañ ha staliañ anezhañ bremañ ?"
+"ho peus pellgargañ ha staliañ anezhañ bremañ ?"
 
 #: devices/afcdevice.cpp:62
 msgid "An error occurred copying the iTunes database from the device"
@@ -729,11 +737,11 @@ msgstr "BPM"
 msgid "Background Streams"
 msgstr "Lanvioù drekleur"
 
-#: ../bin/src/ui_notificationssettingspage.h:418
+#: ../bin/src/ui_notificationssettingspage.h:425
 msgid "Background color"
 msgstr "Liv an drekleur"
 
-#: ../bin/src/ui_notificationssettingspage.h:417
+#: ../bin/src/ui_notificationssettingspage.h:424
 msgid "Background opacity"
 msgstr "Divoullder drekleur"
 
@@ -745,7 +753,7 @@ msgstr "Skarzhañ"
 msgid "Bar analyzer"
 msgstr "Spektrogram barennoù"
 
-#: ../bin/src/ui_notificationssettingspage.h:421
+#: ../bin/src/ui_notificationssettingspage.h:428
 msgid "Basic Blue"
 msgstr "Glas boutin"
 
@@ -789,7 +797,7 @@ msgstr "Stumm blok"
 msgid "Bluetooth MAC Address"
 msgstr "Lec'hienn MAC Bluetooth"
 
-#: ../bin/src/ui_notificationssettingspage.h:414
+#: ../bin/src/ui_notificationssettingspage.h:421
 msgid "Body"
 msgstr "Korf"
 
@@ -861,11 +869,11 @@ msgstr "Choazit un anv evit ho roll seniñ spredek"
 msgid "Choose automatically"
 msgstr "Choaz ez emgefreek"
 
-#: ../bin/src/ui_notificationssettingspage.h:426
+#: ../bin/src/ui_notificationssettingspage.h:433
 msgid "Choose color..."
 msgstr "Choaz ul liv..."
 
-#: ../bin/src/ui_notificationssettingspage.h:427
+#: ../bin/src/ui_notificationssettingspage.h:434
 msgid "Choose font..."
 msgstr "Choaz ur font..."
 
@@ -905,7 +913,7 @@ msgstr "Clementine"
 msgid "Clementine Error"
 msgstr "Kudenn gant Clementine"
 
-#: ../bin/src/ui_notificationssettingspage.h:422
+#: ../bin/src/ui_notificationssettingspage.h:429
 msgid "Clementine Orange"
 msgstr "Oranjez Clementine"
 
@@ -931,7 +939,7 @@ msgstr ""
 "Evit aotreañ kement-se, kenaskit gant ar memes kont Google ha hini ho "
 "pellgomzer."
 
-#: ../bin/src/ui_notificationssettingspage.h:396
+#: ../bin/src/ui_notificationssettingspage.h:403
 msgid "Clementine can show a message when the track changes."
 msgstr "Clementine a c'hell diskouez ur gemennadenn pa gemm ar roud."
 
@@ -979,7 +987,7 @@ msgstr "Serriñ an diskkwel"
 
 #: internet/magnatunedownloaddialog.cpp:280
 msgid "Closing this window will cancel the download."
-msgstr "Serrin ar prenestr-mañ a paouezo ar pellkargadenn"
+msgstr "Serrin ar prenestr-mañ a paouezo ar pellgargadenn"
 
 #: ui/albumcovermanager.cpp:213
 msgid "Closing this window will stop searching for album covers."
@@ -1251,7 +1259,7 @@ msgstr "Ctrl+Up"
 msgid "Custom"
 msgstr "Personalaat"
 
-#: ../bin/src/ui_notificationssettingspage.h:409
+#: ../bin/src/ui_notificationssettingspage.h:416
 msgid "Custom message settings"
 msgstr "Kemennadenn gwellvezioù personelaet"
 
@@ -1259,7 +1267,7 @@ msgstr "Kemennadenn gwellvezioù personelaet"
 msgid "Custom radio"
 msgstr "Skingomz personelaet"
 
-#: ../bin/src/ui_notificationssettingspage.h:423
+#: ../bin/src/ui_notificationssettingspage.h:430
 msgid "Custom..."
 msgstr "Personelaat..."
 
@@ -1398,11 +1406,11 @@ msgstr "Kennaskañ eeun da Internet"
 msgid "Directory"
 msgstr "Doser"
 
-#: ../bin/src/ui_notificationssettingspage.h:405
+#: ../bin/src/ui_notificationssettingspage.h:412
 msgid "Disable duration"
 msgstr "Diweredekaat ar padelezh"
 
-#: ../bin/src/ui_notificationssettingspage.h:398
+#: ../bin/src/ui_notificationssettingspage.h:405
 msgid "Disabled"
 msgstr "Diwederakaet"
 
@@ -1458,35 +1466,35 @@ msgstr "Daouglikañ war un ton..."
 
 #: internet/magnatunedownloaddialog.cpp:252
 msgid "Download directory"
-msgstr "Doser pellkargañ"
+msgstr "Doser pellgargañ"
 
 #: ../bin/src/ui_magnatunesettingspage.h:161
 msgid "Download membership"
-msgstr "Kevreañ d'ar pellkargadenn"
+msgstr "Kevreañ d'ar pellgargadenn"
 
 #: internet/magnatuneservice.cpp:273
 msgid "Download this album"
-msgstr "Pelkkargañ an albom"
+msgstr "Pellgargañ an albom"
 
 #: internet/jamendoservice.cpp:413
 msgid "Download this album..."
-msgstr "Pelkkargañ an albom..."
+msgstr "Pellgargañ an albom..."
 
 #: ../bin/src/ui_spotifysettingspage.h:216
 msgid "Download..."
-msgstr "Pellkargañ"
+msgstr "Pellgargañ"
 
 #: internet/icecastservice.cpp:97
 msgid "Downloading Icecast directory"
-msgstr "O pellkargañ katalog Icecast"
+msgstr "O pellgargañ katalog Icecast"
 
 #: internet/jamendoservice.cpp:183
 msgid "Downloading Jamendo catalogue"
-msgstr "O pellkargañ katalog Jamendo"
+msgstr "O pellgargañ katalog Jamendo"
 
 #: internet/magnatuneservice.cpp:156
 msgid "Downloading Magnatune catalogue"
-msgstr "O pellkargañ katalog Magnatune"
+msgstr "O pellgargañ katalog Magnatune"
 
 #: internet/spotifyblobdownloader.cpp:43
 msgid "Downloading Spotify plugin"
@@ -1589,7 +1597,7 @@ msgstr "Doare enkodiñ"
 
 #: ../bin/src/ui_coverfromurldialog.h:103
 msgid "Enter a URL to download a cover from the Internet:"
-msgstr "Lakait un URL evit pellkargañ ur golo adalek internet"
+msgstr "Lakait un URL evit pellgargañ ur golo adalek internet"
 
 #: playlist/playlisttabbar.cpp:131
 msgid "Enter a new name for this playlist"
@@ -1743,11 +1751,11 @@ msgstr "Roudoù karetañ"
 
 #: ../bin/src/ui_albumcovermanager.h:155
 msgid "Fetch Missing Covers"
-msgstr "Pellkargañ ar goloioù a vank"
+msgstr "Pellgargañ ar goloioù a vank"
 
 #: ../bin/src/ui_albumcovermanager.h:150
 msgid "Fetch automatically"
-msgstr "Pellkargañ ez emgefreek"
+msgstr "Pellgargañ ez emgefreek"
 
 #: ../bin/src/ui_coversearchstatisticsdialog.h:75
 msgid "Fetch completed"
@@ -1755,7 +1763,7 @@ msgstr "Pellgargadur echu"
 
 #: ui/coverfromurldialog.cpp:71 ui/coverfromurldialog.cpp:82
 msgid "Fetching cover error"
-msgstr "Ur gudenn a zo savet e-pad pellkargadur ar golo"
+msgstr "Ur gudenn a zo savet e-pad pellgargadur ar golo"
 
 #: ui/organisedialog.cpp:69
 msgid "File extension"
@@ -1910,7 +1918,7 @@ msgstr "Lusker son GStreamer"
 msgid "General"
 msgstr "Hollek"
 
-#: ../bin/src/ui_notificationssettingspage.h:402
+#: ../bin/src/ui_notificationssettingspage.h:409
 msgid "General settings"
 msgstr "Kefluniadur hollek"
 
@@ -2115,7 +2123,7 @@ msgstr ""
 msgid "Inbox"
 msgstr "Boest degemer"
 
-#: ../bin/src/ui_notificationssettingspage.h:408
+#: ../bin/src/ui_notificationssettingspage.h:415
 msgid "Include album art in the notification"
 msgstr "Diskouez an albom er gemenadenn"
 
@@ -2516,7 +2524,7 @@ msgstr "Magnatune"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:131
 msgid "Magnatune Download"
-msgstr "Pellkargañ Magnatune"
+msgstr "Pellgargañ Magnatune"
 
 #: widgets/osd.cpp:211
 msgid "Magnatune download finished"
@@ -2623,7 +2631,7 @@ msgstr "A-us"
 
 #: transcoder/transcodedialog.cpp:213 ui/mainwindow.cpp:1581
 msgid "Music"
-msgstr ""
+msgstr "Sonerezh"
 
 #: ../bin/src/ui_librarysettingspage.h:157
 msgid "Music Library"
@@ -2805,11 +2813,11 @@ msgstr "N'eo ket kannasket"
 msgid "Not mounted - double click to mount"
 msgstr "N'est ket savet - daouglikañ evit sevel"
 
-#: ../bin/src/ui_notificationssettingspage.h:397
+#: ../bin/src/ui_notificationssettingspage.h:404
 msgid "Notification type"
 msgstr "Doare kemenadenn"
 
-#: ../bin/src/ui_notificationssettingspage.h:356
+#: ../bin/src/ui_notificationssettingspage.h:359
 msgid "Notifications"
 msgstr "Kemenadennoù"
 
@@ -3036,7 +3044,7 @@ msgstr "Doare ar roll seniñ"
 
 #: internet/groovesharkservice.cpp:571
 msgid "Playlists"
-msgstr "Rollioù seniñ"
+msgstr "Rolloù seniñ"
 
 #: ../bin/src/ui_spotifysettingspage.h:215
 msgid "Plugin status:"
@@ -3058,7 +3066,7 @@ msgstr "Tonioù brudet ar miz-mañ"
 msgid "Popular songs today"
 msgstr "Tonioù brudet hiziv"
 
-#: ../bin/src/ui_notificationssettingspage.h:403
+#: ../bin/src/ui_notificationssettingspage.h:410
 msgid "Popup duration"
 msgstr "Padelezh ar popup"
 
@@ -3118,12 +3126,12 @@ msgstr "Pouezit war un douchenn"
 msgid "Press a key combination to use for %1..."
 msgstr "Pouezit war ur kombinadenn touchennoù evit implij %1"
 
-#: ../bin/src/ui_notificationssettingspage.h:416
+#: ../bin/src/ui_notificationssettingspage.h:423
 msgid "Pretty OSD options"
 msgstr "Dibaboù an OSD brav"
 
 #: ../bin/src/ui_searchpreview.h:105 ../bin/src/ui_songinfosettingspage.h:183
-#: ../bin/src/ui_notificationssettingspage.h:411
+#: ../bin/src/ui_notificationssettingspage.h:418
 #: ../bin/src/ui_organisedialog.h:208
 msgid "Preview"
 msgstr "Rakwel"
@@ -3391,7 +3399,7 @@ msgstr "O taspugnat ho tonioù Grooveshark karetañ"
 
 #: internet/groovesharkservice.cpp:618
 msgid "Retrieving Grooveshark playlists"
-msgstr "O taspugnat rollioù seniñ Grooveshark"
+msgstr "O taspugnat rolloù seniñ Grooveshark"
 
 #: ui/equalizer.cpp:121
 msgid "Rock"
@@ -3628,23 +3636,23 @@ msgstr "Diskouez OSD"
 msgid "Show a glowing animation on the current track"
 msgstr "Lugerniñ ar roud o vezañ lennet"
 
-#: ../bin/src/ui_notificationssettingspage.h:399
+#: ../bin/src/ui_notificationssettingspage.h:406
 msgid "Show a native desktop notification"
 msgstr "Implij reizhad kemenadenn ar burev"
 
-#: ../bin/src/ui_notificationssettingspage.h:407
+#: ../bin/src/ui_notificationssettingspage.h:414
 msgid "Show a notification when I change the repeat/shuffle mode"
 msgstr "Diskouez ur gemenadenn pa cheñchan an doare adseniñ/dre-zegouezh"
 
-#: ../bin/src/ui_notificationssettingspage.h:406
+#: ../bin/src/ui_notificationssettingspage.h:413
 msgid "Show a notification when I change the volume"
 msgstr "Diskouez ur gemenadenn pa cheñchan an ampled"
 
-#: ../bin/src/ui_notificationssettingspage.h:401
+#: ../bin/src/ui_notificationssettingspage.h:408
 msgid "Show a popup from the system tray"
 msgstr "Diskouez ur popup e-kichen ar zonenn kemenadennoù"
 
-#: ../bin/src/ui_notificationssettingspage.h:400
+#: ../bin/src/ui_notificationssettingspage.h:407
 msgid "Show a pretty OSD"
 msgstr "Diskouez un OSD brav"
 
@@ -3775,7 +3783,7 @@ msgstr "Roll seniñ speredek"
 
 #: library/librarymodel.cpp:1128
 msgid "Smart playlists"
-msgstr "Rollioù seniñ speredek"
+msgstr "Rolloù seniñ speredek"
 
 #: ui/equalizer.cpp:122
 msgid "Soft"
@@ -3931,7 +3939,7 @@ msgid "Suggested tags"
 msgstr "Tagoù atizet"
 
 #: ../bin/src/ui_edittagdialog.h:651
-#: ../bin/src/ui_notificationssettingspage.h:413
+#: ../bin/src/ui_notificationssettingspage.h:420
 msgid "Summary"
 msgstr "Taolenn"
 
@@ -3988,7 +3996,7 @@ msgstr "Fonnder tizhet"
 msgid "Techno"
 msgstr "Tekno"
 
-#: ../bin/src/ui_notificationssettingspage.h:425
+#: ../bin/src/ui_notificationssettingspage.h:432
 msgid "Text options"
 msgstr "Dibaboù an testenn"
 
@@ -4253,7 +4261,7 @@ msgstr "Bandenn ledan tre (UWB)"
 #: internet/magnatunedownloaddialog.cpp:143
 #, qt-format
 msgid "Unable to download %1 (%2)"
-msgstr "N'eus ket tu pellkargañ %1 (%2)"
+msgstr "N'eus ket tu pellgargañ %1 (%2)"
 
 #: core/song.cpp:349 globalsearch/globalsearchitemdelegate.cpp:166
 #: globalsearch/globalsearchitemdelegate.cpp:173 library/librarymodel.cpp:297
@@ -4318,7 +4326,7 @@ msgstr "Implij ar Wii Remote"
 msgid "Use a custom color set"
 msgstr "Implij ur roll livioù personelaet"
 
-#: ../bin/src/ui_notificationssettingspage.h:410
+#: ../bin/src/ui_notificationssettingspage.h:417
 msgid "Use a custom message for notifications"
 msgstr "Implij ur kemenadennoù personelaet"
 
@@ -4548,7 +4556,7 @@ msgstr "Derc'h"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:132
 msgid "You are about to download the following albums"
-msgstr "Emaoc'h o vont da pellkargañ an albomoù-mañ"
+msgstr "Emaoc'h o vont da pellgargañ an albomoù-mañ"
 
 #: ../bin/src/ui_loginstatewidget.h:172
 msgid "You are not signed in."
@@ -4581,7 +4589,7 @@ msgid ""
 " membership removes the messages at the end of each track."
 msgstr ""
 "Tu zo deoc'h selaou digoust tonioù Magnatune hep kaout a gont. O prenan ur "
-"gont ez eus tu deoc'h diverkañ ar gemenadenn e fin pep ton."
+"gont ez eus tu deoc'h diverkañ ar gemennadenn e fin pep ton."
 
 #: ../bin/src/ui_backgroundstreamssettingspage.h:57
 msgid "You can listen to background streams at the same time as other music."

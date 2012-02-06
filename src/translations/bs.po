@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-01-29 22:42+0000\n"
+"PO-Revision-Date: 2012-02-02 20:06+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -36,7 +36,7 @@ msgstr " ms"
 msgid " pt"
 msgstr " pt"
 
-#: ../bin/src/ui_notificationssettingspage.h:404
+#: ../bin/src/ui_notificationssettingspage.h:411
 #: ../bin/src/ui_visualisationselector.h:116
 msgid " seconds"
 msgstr " sekundi"
@@ -114,6 +114,10 @@ msgstr ""
 #: songinfo/lastfmtrackinfoprovider.cpp:100
 #, qt-format
 msgid "%L1 total plays"
+msgstr ""
+
+#: ../bin/src/ui_notificationssettingspage.h:399
+msgid "%filename%"
 msgstr ""
 
 #: transcoder/transcodedialog.cpp:199
@@ -328,7 +332,7 @@ msgstr "Pokreni/zaustavi Wii-daljinski"
 msgid "Add Stream"
 msgstr "Dodaj tok"
 
-#: ../bin/src/ui_notificationssettingspage.h:394
+#: ../bin/src/ui_notificationssettingspage.h:397
 msgid "Add a new line if supported by the notification type"
 msgstr ""
 
@@ -376,51 +380,55 @@ msgstr "Dodaj novu fasciklu..."
 msgid "Add search term"
 msgstr "Unesi termin za pretraživanje"
 
-#: ../bin/src/ui_notificationssettingspage.h:361
+#: ../bin/src/ui_notificationssettingspage.h:364
 msgid "Add song album tag"
 msgstr ""
 
-#: ../bin/src/ui_notificationssettingspage.h:367
+#: ../bin/src/ui_notificationssettingspage.h:370
 msgid "Add song albumartist tag"
 msgstr ""
 
-#: ../bin/src/ui_notificationssettingspage.h:358
+#: ../bin/src/ui_notificationssettingspage.h:361
 msgid "Add song artist tag"
 msgstr ""
 
-#: ../bin/src/ui_notificationssettingspage.h:373
+#: ../bin/src/ui_notificationssettingspage.h:376
 msgid "Add song composer tag"
 msgstr ""
 
-#: ../bin/src/ui_notificationssettingspage.h:376
+#: ../bin/src/ui_notificationssettingspage.h:379
 msgid "Add song disc tag"
 msgstr ""
 
-#: ../bin/src/ui_notificationssettingspage.h:382
-msgid "Add song genre tag"
+#: ../bin/src/ui_notificationssettingspage.h:401
+msgid "Add song filename"
 msgstr ""
 
 #: ../bin/src/ui_notificationssettingspage.h:385
-msgid "Add song length tag"
+msgid "Add song genre tag"
 msgstr ""
 
 #: ../bin/src/ui_notificationssettingspage.h:388
-msgid "Add song play count"
+msgid "Add song length tag"
 msgstr ""
 
 #: ../bin/src/ui_notificationssettingspage.h:391
+msgid "Add song play count"
+msgstr ""
+
+#: ../bin/src/ui_notificationssettingspage.h:394
 msgid "Add song skip count"
 msgstr ""
 
-#: ../bin/src/ui_notificationssettingspage.h:364
+#: ../bin/src/ui_notificationssettingspage.h:367
 msgid "Add song title tag"
 msgstr ""
 
-#: ../bin/src/ui_notificationssettingspage.h:379
+#: ../bin/src/ui_notificationssettingspage.h:382
 msgid "Add song track tag"
 msgstr ""
 
-#: ../bin/src/ui_notificationssettingspage.h:370
+#: ../bin/src/ui_notificationssettingspage.h:373
 msgid "Add song year tag"
 msgstr ""
 
@@ -719,11 +727,11 @@ msgstr "BPM"
 msgid "Background Streams"
 msgstr "Pozadinski tokovi"
 
-#: ../bin/src/ui_notificationssettingspage.h:418
+#: ../bin/src/ui_notificationssettingspage.h:425
 msgid "Background color"
 msgstr "Boja pozadine"
 
-#: ../bin/src/ui_notificationssettingspage.h:417
+#: ../bin/src/ui_notificationssettingspage.h:424
 msgid "Background opacity"
 msgstr "Providnost pozadine"
 
@@ -735,7 +743,7 @@ msgstr "Zabrana"
 msgid "Bar analyzer"
 msgstr ""
 
-#: ../bin/src/ui_notificationssettingspage.h:421
+#: ../bin/src/ui_notificationssettingspage.h:428
 msgid "Basic Blue"
 msgstr "Osnovna plava"
 
@@ -779,7 +787,7 @@ msgstr ""
 msgid "Bluetooth MAC Address"
 msgstr "MAC adresa Bluetooth adaptera"
 
-#: ../bin/src/ui_notificationssettingspage.h:414
+#: ../bin/src/ui_notificationssettingspage.h:421
 msgid "Body"
 msgstr ""
 
@@ -851,11 +859,11 @@ msgstr "Izaberite ime za svoju pametnu listu pjesama"
 msgid "Choose automatically"
 msgstr "Izaberi automatski"
 
-#: ../bin/src/ui_notificationssettingspage.h:426
+#: ../bin/src/ui_notificationssettingspage.h:433
 msgid "Choose color..."
 msgstr "Izaberi boju..."
 
-#: ../bin/src/ui_notificationssettingspage.h:427
+#: ../bin/src/ui_notificationssettingspage.h:434
 msgid "Choose font..."
 msgstr ""
 
@@ -897,7 +905,7 @@ msgstr "Clementine"
 msgid "Clementine Error"
 msgstr "Clementine Greška"
 
-#: ../bin/src/ui_notificationssettingspage.h:422
+#: ../bin/src/ui_notificationssettingspage.h:429
 msgid "Clementine Orange"
 msgstr "Clementine narandžasta"
 
@@ -923,7 +931,7 @@ msgstr ""
 " omogućili ovu mogućnost, prijavite se preko svoga Google računa koji je "
 "glavni na vašem telefonu."
 
-#: ../bin/src/ui_notificationssettingspage.h:396
+#: ../bin/src/ui_notificationssettingspage.h:403
 msgid "Clementine can show a message when the track changes."
 msgstr "Clementine može prikazati poruku kada se promjeni pjesma."
 
@@ -1238,7 +1246,7 @@ msgstr "Ctrl+Up"
 msgid "Custom"
 msgstr "Prilagođeno"
 
-#: ../bin/src/ui_notificationssettingspage.h:409
+#: ../bin/src/ui_notificationssettingspage.h:416
 msgid "Custom message settings"
 msgstr ""
 
@@ -1246,7 +1254,7 @@ msgstr ""
 msgid "Custom radio"
 msgstr "Posebni radio"
 
-#: ../bin/src/ui_notificationssettingspage.h:423
+#: ../bin/src/ui_notificationssettingspage.h:430
 msgid "Custom..."
 msgstr "Posebno..."
 
@@ -1385,11 +1393,11 @@ msgstr "Direktna internet veza"
 msgid "Directory"
 msgstr "Fascikla"
 
-#: ../bin/src/ui_notificationssettingspage.h:405
+#: ../bin/src/ui_notificationssettingspage.h:412
 msgid "Disable duration"
 msgstr ""
 
-#: ../bin/src/ui_notificationssettingspage.h:398
+#: ../bin/src/ui_notificationssettingspage.h:405
 msgid "Disabled"
 msgstr "Onemogućeno"
 
@@ -1888,7 +1896,7 @@ msgstr ""
 msgid "General"
 msgstr ""
 
-#: ../bin/src/ui_notificationssettingspage.h:402
+#: ../bin/src/ui_notificationssettingspage.h:409
 msgid "General settings"
 msgstr ""
 
@@ -2083,7 +2091,7 @@ msgstr ""
 msgid "Inbox"
 msgstr ""
 
-#: ../bin/src/ui_notificationssettingspage.h:408
+#: ../bin/src/ui_notificationssettingspage.h:415
 msgid "Include album art in the notification"
 msgstr ""
 
@@ -2769,11 +2777,11 @@ msgstr ""
 msgid "Not mounted - double click to mount"
 msgstr ""
 
-#: ../bin/src/ui_notificationssettingspage.h:397
+#: ../bin/src/ui_notificationssettingspage.h:404
 msgid "Notification type"
 msgstr ""
 
-#: ../bin/src/ui_notificationssettingspage.h:356
+#: ../bin/src/ui_notificationssettingspage.h:359
 msgid "Notifications"
 msgstr ""
 
@@ -3022,7 +3030,7 @@ msgstr ""
 msgid "Popular songs today"
 msgstr ""
 
-#: ../bin/src/ui_notificationssettingspage.h:403
+#: ../bin/src/ui_notificationssettingspage.h:410
 msgid "Popup duration"
 msgstr ""
 
@@ -3082,12 +3090,12 @@ msgstr ""
 msgid "Press a key combination to use for %1..."
 msgstr ""
 
-#: ../bin/src/ui_notificationssettingspage.h:416
+#: ../bin/src/ui_notificationssettingspage.h:423
 msgid "Pretty OSD options"
 msgstr ""
 
 #: ../bin/src/ui_searchpreview.h:105 ../bin/src/ui_songinfosettingspage.h:183
-#: ../bin/src/ui_notificationssettingspage.h:411
+#: ../bin/src/ui_notificationssettingspage.h:418
 #: ../bin/src/ui_organisedialog.h:208
 msgid "Preview"
 msgstr ""
@@ -3592,23 +3600,23 @@ msgstr ""
 msgid "Show a glowing animation on the current track"
 msgstr ""
 
-#: ../bin/src/ui_notificationssettingspage.h:399
+#: ../bin/src/ui_notificationssettingspage.h:406
 msgid "Show a native desktop notification"
 msgstr ""
 
-#: ../bin/src/ui_notificationssettingspage.h:407
+#: ../bin/src/ui_notificationssettingspage.h:414
 msgid "Show a notification when I change the repeat/shuffle mode"
 msgstr ""
 
-#: ../bin/src/ui_notificationssettingspage.h:406
+#: ../bin/src/ui_notificationssettingspage.h:413
 msgid "Show a notification when I change the volume"
 msgstr ""
 
-#: ../bin/src/ui_notificationssettingspage.h:401
+#: ../bin/src/ui_notificationssettingspage.h:408
 msgid "Show a popup from the system tray"
 msgstr ""
 
-#: ../bin/src/ui_notificationssettingspage.h:400
+#: ../bin/src/ui_notificationssettingspage.h:407
 msgid "Show a pretty OSD"
 msgstr ""
 
@@ -3895,7 +3903,7 @@ msgid "Suggested tags"
 msgstr ""
 
 #: ../bin/src/ui_edittagdialog.h:651
-#: ../bin/src/ui_notificationssettingspage.h:413
+#: ../bin/src/ui_notificationssettingspage.h:420
 msgid "Summary"
 msgstr ""
 
@@ -3952,7 +3960,7 @@ msgstr ""
 msgid "Techno"
 msgstr ""
 
-#: ../bin/src/ui_notificationssettingspage.h:425
+#: ../bin/src/ui_notificationssettingspage.h:432
 msgid "Text options"
 msgstr ""
 
@@ -4258,7 +4266,7 @@ msgstr ""
 msgid "Use a custom color set"
 msgstr ""
 
-#: ../bin/src/ui_notificationssettingspage.h:410
+#: ../bin/src/ui_notificationssettingspage.h:417
 msgid "Use a custom message for notifications"
 msgstr ""
 

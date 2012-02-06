@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-01-29 22:42+0000\n"
+"PO-Revision-Date: 2012-02-02 20:06+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -38,7 +38,7 @@ msgstr " ms"
 msgid " pt"
 msgstr " pct"
 
-#: ../bin/src/ui_notificationssettingspage.h:404
+#: ../bin/src/ui_notificationssettingspage.h:411
 #: ../bin/src/ui_visualisationselector.h:116
 msgid " seconds"
 msgstr " secunde"
@@ -117,6 +117,10 @@ msgstr "%L1 alți ascultători"
 #, qt-format
 msgid "%L1 total plays"
 msgstr "%L1 redări în total"
+
+#: ../bin/src/ui_notificationssettingspage.h:399
+msgid "%filename%"
+msgstr ""
 
 #: transcoder/transcodedialog.cpp:199
 #, c-format
@@ -335,7 +339,7 @@ msgstr "Activează/dezactivează telecomanda Wii"
 msgid "Add Stream"
 msgstr "Adaugă flux"
 
-#: ../bin/src/ui_notificationssettingspage.h:394
+#: ../bin/src/ui_notificationssettingspage.h:397
 msgid "Add a new line if supported by the notification type"
 msgstr "Adaugă o linie nouă dacă este acceptată de tipul de notificare"
 
@@ -383,51 +387,55 @@ msgstr "Adaugă un dosar nou..."
 msgid "Add search term"
 msgstr "Adaugă termen de căutare"
 
-#: ../bin/src/ui_notificationssettingspage.h:361
+#: ../bin/src/ui_notificationssettingspage.h:364
 msgid "Add song album tag"
 msgstr "Adaugă tagul de album al melodiei"
 
-#: ../bin/src/ui_notificationssettingspage.h:367
+#: ../bin/src/ui_notificationssettingspage.h:370
 msgid "Add song albumartist tag"
 msgstr "Adaugă tagul album de artist al melodiei"
 
-#: ../bin/src/ui_notificationssettingspage.h:358
+#: ../bin/src/ui_notificationssettingspage.h:361
 msgid "Add song artist tag"
 msgstr "Adaugă tagul de artist al melodiei"
 
-#: ../bin/src/ui_notificationssettingspage.h:373
+#: ../bin/src/ui_notificationssettingspage.h:376
 msgid "Add song composer tag"
 msgstr "Adaugă tagul de compozitor al melodiei"
 
-#: ../bin/src/ui_notificationssettingspage.h:376
+#: ../bin/src/ui_notificationssettingspage.h:379
 msgid "Add song disc tag"
 msgstr "Adaugă tagul de disc al melodiei"
 
-#: ../bin/src/ui_notificationssettingspage.h:382
+#: ../bin/src/ui_notificationssettingspage.h:401
+msgid "Add song filename"
+msgstr ""
+
+#: ../bin/src/ui_notificationssettingspage.h:385
 msgid "Add song genre tag"
 msgstr "Adaugă tagul de gen al melodiei"
 
-#: ../bin/src/ui_notificationssettingspage.h:385
+#: ../bin/src/ui_notificationssettingspage.h:388
 msgid "Add song length tag"
 msgstr "Adaugă tagul de lungime al melodiei"
 
-#: ../bin/src/ui_notificationssettingspage.h:388
+#: ../bin/src/ui_notificationssettingspage.h:391
 msgid "Add song play count"
 msgstr "Adaugă numărul de ascultări al melodiei"
 
-#: ../bin/src/ui_notificationssettingspage.h:391
+#: ../bin/src/ui_notificationssettingspage.h:394
 msgid "Add song skip count"
 msgstr "Adaugă de câte ori am sărit peste melodie"
 
-#: ../bin/src/ui_notificationssettingspage.h:364
+#: ../bin/src/ui_notificationssettingspage.h:367
 msgid "Add song title tag"
 msgstr "Adaugă tagul de titlu al melodiei"
 
-#: ../bin/src/ui_notificationssettingspage.h:379
+#: ../bin/src/ui_notificationssettingspage.h:382
 msgid "Add song track tag"
 msgstr "Adaugă tagul de pistă al melodiei"
 
-#: ../bin/src/ui_notificationssettingspage.h:370
+#: ../bin/src/ui_notificationssettingspage.h:373
 msgid "Add song year tag"
 msgstr "Adaugă tagul de an al melodiei"
 
@@ -728,11 +736,11 @@ msgstr "BPM"
 msgid "Background Streams"
 msgstr "Fluxuri de fundal"
 
-#: ../bin/src/ui_notificationssettingspage.h:418
+#: ../bin/src/ui_notificationssettingspage.h:425
 msgid "Background color"
 msgstr "Culoare de fundal"
 
-#: ../bin/src/ui_notificationssettingspage.h:417
+#: ../bin/src/ui_notificationssettingspage.h:424
 msgid "Background opacity"
 msgstr "Opacitatea fundalului"
 
@@ -744,7 +752,7 @@ msgstr "Blochează"
 msgid "Bar analyzer"
 msgstr "Analizator cu bare"
 
-#: ../bin/src/ui_notificationssettingspage.h:421
+#: ../bin/src/ui_notificationssettingspage.h:428
 msgid "Basic Blue"
 msgstr "Albastru de bază"
 
@@ -788,7 +796,7 @@ msgstr "Tip bloc"
 msgid "Bluetooth MAC Address"
 msgstr "Adresa MAC a bluetooth-ului"
 
-#: ../bin/src/ui_notificationssettingspage.h:414
+#: ../bin/src/ui_notificationssettingspage.h:421
 msgid "Body"
 msgstr "Corp"
 
@@ -860,11 +868,11 @@ msgstr "Alegeți un nume pentru lista de redare inteligentă"
 msgid "Choose automatically"
 msgstr "Alege automat"
 
-#: ../bin/src/ui_notificationssettingspage.h:426
+#: ../bin/src/ui_notificationssettingspage.h:433
 msgid "Choose color..."
 msgstr "Alege culoarea..."
 
-#: ../bin/src/ui_notificationssettingspage.h:427
+#: ../bin/src/ui_notificationssettingspage.h:434
 msgid "Choose font..."
 msgstr "Alege font..."
 
@@ -905,7 +913,7 @@ msgstr "Clementine"
 msgid "Clementine Error"
 msgstr "Eroare Clementine"
 
-#: ../bin/src/ui_notificationssettingspage.h:422
+#: ../bin/src/ui_notificationssettingspage.h:429
 msgid "Clementine Orange"
 msgstr "Portocaliu Clementine"
 
@@ -931,7 +939,7 @@ msgstr ""
 "Pentru a activa această facilitate înregistrează-te în jurnal cu același "
 "cont Google care este configurat pe telefonul tău."
 
-#: ../bin/src/ui_notificationssettingspage.h:396
+#: ../bin/src/ui_notificationssettingspage.h:403
 msgid "Clementine can show a message when the track changes."
 msgstr "Clementine poate afișa un mesaj când se schimbă melodia."
 
@@ -1249,7 +1257,7 @@ msgstr "Ctrl+Up"
 msgid "Custom"
 msgstr "Personalizat"
 
-#: ../bin/src/ui_notificationssettingspage.h:409
+#: ../bin/src/ui_notificationssettingspage.h:416
 msgid "Custom message settings"
 msgstr "Setări mesaj personalizat"
 
@@ -1257,7 +1265,7 @@ msgstr "Setări mesaj personalizat"
 msgid "Custom radio"
 msgstr "Radio personalizat"
 
-#: ../bin/src/ui_notificationssettingspage.h:423
+#: ../bin/src/ui_notificationssettingspage.h:430
 msgid "Custom..."
 msgstr "Personalizat..."
 
@@ -1396,11 +1404,11 @@ msgstr "Conexiune directă la Internet"
 msgid "Directory"
 msgstr "Dosar"
 
-#: ../bin/src/ui_notificationssettingspage.h:405
+#: ../bin/src/ui_notificationssettingspage.h:412
 msgid "Disable duration"
 msgstr "Dezactivează durată"
 
-#: ../bin/src/ui_notificationssettingspage.h:398
+#: ../bin/src/ui_notificationssettingspage.h:405
 msgid "Disabled"
 msgstr "Dezactivat"
 
@@ -1907,7 +1915,7 @@ msgstr "Motor audio GStreamer"
 msgid "General"
 msgstr ""
 
-#: ../bin/src/ui_notificationssettingspage.h:402
+#: ../bin/src/ui_notificationssettingspage.h:409
 msgid "General settings"
 msgstr "Setări generale"
 
@@ -2111,7 +2119,7 @@ msgstr ""
 msgid "Inbox"
 msgstr ""
 
-#: ../bin/src/ui_notificationssettingspage.h:408
+#: ../bin/src/ui_notificationssettingspage.h:415
 msgid "Include album art in the notification"
 msgstr "Includeți album de artă în notificare"
 
@@ -2797,11 +2805,11 @@ msgstr ""
 msgid "Not mounted - double click to mount"
 msgstr ""
 
-#: ../bin/src/ui_notificationssettingspage.h:397
+#: ../bin/src/ui_notificationssettingspage.h:404
 msgid "Notification type"
 msgstr "Tipul notificării"
 
-#: ../bin/src/ui_notificationssettingspage.h:356
+#: ../bin/src/ui_notificationssettingspage.h:359
 msgid "Notifications"
 msgstr "Notificări"
 
@@ -3050,7 +3058,7 @@ msgstr "Melodiile populare ale lunii"
 msgid "Popular songs today"
 msgstr "Melodii populare azi"
 
-#: ../bin/src/ui_notificationssettingspage.h:403
+#: ../bin/src/ui_notificationssettingspage.h:410
 msgid "Popup duration"
 msgstr "Durata afișării"
 
@@ -3110,12 +3118,12 @@ msgstr "Apasă o tastă"
 msgid "Press a key combination to use for %1..."
 msgstr "Apasă o combinație de taste pentru a folosi la %1..."
 
-#: ../bin/src/ui_notificationssettingspage.h:416
+#: ../bin/src/ui_notificationssettingspage.h:423
 msgid "Pretty OSD options"
 msgstr "Opțiuni OSD drăguț"
 
 #: ../bin/src/ui_searchpreview.h:105 ../bin/src/ui_songinfosettingspage.h:183
-#: ../bin/src/ui_notificationssettingspage.h:411
+#: ../bin/src/ui_notificationssettingspage.h:418
 #: ../bin/src/ui_organisedialog.h:208
 msgid "Preview"
 msgstr "Previzualizare"
@@ -3620,23 +3628,23 @@ msgstr "Arată OSD"
 msgid "Show a glowing animation on the current track"
 msgstr ""
 
-#: ../bin/src/ui_notificationssettingspage.h:399
+#: ../bin/src/ui_notificationssettingspage.h:406
 msgid "Show a native desktop notification"
 msgstr "Arată o notificare de desktop nativă"
 
-#: ../bin/src/ui_notificationssettingspage.h:407
+#: ../bin/src/ui_notificationssettingspage.h:414
 msgid "Show a notification when I change the repeat/shuffle mode"
 msgstr "Arată o notificare când schimb modul de repetare/amestecare"
 
-#: ../bin/src/ui_notificationssettingspage.h:406
+#: ../bin/src/ui_notificationssettingspage.h:413
 msgid "Show a notification when I change the volume"
 msgstr "Arată o notificare când schimb volumul"
 
-#: ../bin/src/ui_notificationssettingspage.h:401
+#: ../bin/src/ui_notificationssettingspage.h:408
 msgid "Show a popup from the system tray"
 msgstr "Arată o notificare din zona de notificări"
 
-#: ../bin/src/ui_notificationssettingspage.h:400
+#: ../bin/src/ui_notificationssettingspage.h:407
 msgid "Show a pretty OSD"
 msgstr "Arată un OSD drăguț"
 
@@ -3923,7 +3931,7 @@ msgid "Suggested tags"
 msgstr "Taguri sugerate"
 
 #: ../bin/src/ui_edittagdialog.h:651
-#: ../bin/src/ui_notificationssettingspage.h:413
+#: ../bin/src/ui_notificationssettingspage.h:420
 msgid "Summary"
 msgstr "Sumar"
 
@@ -3980,7 +3988,7 @@ msgstr "Rată de biți țintă"
 msgid "Techno"
 msgstr "Techno"
 
-#: ../bin/src/ui_notificationssettingspage.h:425
+#: ../bin/src/ui_notificationssettingspage.h:432
 msgid "Text options"
 msgstr "Opțiuni text"
 
@@ -4288,7 +4296,7 @@ msgstr "Folosește Telecomandă Wii"
 msgid "Use a custom color set"
 msgstr ""
 
-#: ../bin/src/ui_notificationssettingspage.h:410
+#: ../bin/src/ui_notificationssettingspage.h:417
 msgid "Use a custom message for notifications"
 msgstr ""
 

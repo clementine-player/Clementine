@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-01-29 22:42+0000\n"
+"PO-Revision-Date: 2012-02-02 20:06+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -41,7 +41,7 @@ msgstr " ms"
 msgid " pt"
 msgstr " pt"
 
-#: ../bin/src/ui_notificationssettingspage.h:404
+#: ../bin/src/ui_notificationssettingspage.h:411
 #: ../bin/src/ui_visualisationselector.h:116
 msgid " seconds"
 msgstr " saniye"
@@ -120,6 +120,10 @@ msgstr "%L1 başka dinleyici"
 #, qt-format
 msgid "%L1 total plays"
 msgstr "%L1 toplam çalma"
+
+#: ../bin/src/ui_notificationssettingspage.h:399
+msgid "%filename%"
+msgstr ""
 
 #: transcoder/transcodedialog.cpp:199
 #, c-format
@@ -336,7 +340,7 @@ msgstr "Wiiremote etkinleştir/pasifleştir"
 msgid "Add Stream"
 msgstr "Müzik Yayını Ekle"
 
-#: ../bin/src/ui_notificationssettingspage.h:394
+#: ../bin/src/ui_notificationssettingspage.h:397
 msgid "Add a new line if supported by the notification type"
 msgstr "Bildirim türü olarak yeni bir satır ekleyin"
 
@@ -384,51 +388,55 @@ msgstr "Yeni klasör ekle..."
 msgid "Add search term"
 msgstr "Arama terimi ekle"
 
-#: ../bin/src/ui_notificationssettingspage.h:361
+#: ../bin/src/ui_notificationssettingspage.h:364
 msgid "Add song album tag"
 msgstr "Albüm etiketi ekle"
 
-#: ../bin/src/ui_notificationssettingspage.h:367
+#: ../bin/src/ui_notificationssettingspage.h:370
 msgid "Add song albumartist tag"
 msgstr "Albüm sanatçısı etiketi ekle"
 
-#: ../bin/src/ui_notificationssettingspage.h:358
+#: ../bin/src/ui_notificationssettingspage.h:361
 msgid "Add song artist tag"
 msgstr "Sanatçı etiketi ekle"
 
-#: ../bin/src/ui_notificationssettingspage.h:373
+#: ../bin/src/ui_notificationssettingspage.h:376
 msgid "Add song composer tag"
 msgstr "Besteci etiketi ekle"
 
-#: ../bin/src/ui_notificationssettingspage.h:376
+#: ../bin/src/ui_notificationssettingspage.h:379
 msgid "Add song disc tag"
 msgstr "Şarkı diski etiketi ekle"
 
-#: ../bin/src/ui_notificationssettingspage.h:382
+#: ../bin/src/ui_notificationssettingspage.h:401
+msgid "Add song filename"
+msgstr ""
+
+#: ../bin/src/ui_notificationssettingspage.h:385
 msgid "Add song genre tag"
 msgstr "Şarkı tarzı etiketi ekle"
 
-#: ../bin/src/ui_notificationssettingspage.h:385
+#: ../bin/src/ui_notificationssettingspage.h:388
 msgid "Add song length tag"
 msgstr "Şarkı uzunluğu etiketi ekle"
 
-#: ../bin/src/ui_notificationssettingspage.h:388
+#: ../bin/src/ui_notificationssettingspage.h:391
 msgid "Add song play count"
 msgstr "Şarkı çalma sayısı ekle"
 
-#: ../bin/src/ui_notificationssettingspage.h:391
+#: ../bin/src/ui_notificationssettingspage.h:394
 msgid "Add song skip count"
 msgstr "Şarkı atlama sayısı ekle"
 
-#: ../bin/src/ui_notificationssettingspage.h:364
+#: ../bin/src/ui_notificationssettingspage.h:367
 msgid "Add song title tag"
 msgstr "Şarkı adı etiketi ekle"
 
-#: ../bin/src/ui_notificationssettingspage.h:379
+#: ../bin/src/ui_notificationssettingspage.h:382
 msgid "Add song track tag"
 msgstr "Şarkıya parça etiketi ekle"
 
-#: ../bin/src/ui_notificationssettingspage.h:370
+#: ../bin/src/ui_notificationssettingspage.h:373
 msgid "Add song year tag"
 msgstr "Yıl etiketi ekle"
 
@@ -729,11 +737,11 @@ msgstr "BPM"
 msgid "Background Streams"
 msgstr "Arkaplan Akışları"
 
-#: ../bin/src/ui_notificationssettingspage.h:418
+#: ../bin/src/ui_notificationssettingspage.h:425
 msgid "Background color"
 msgstr "Arkaplan rengi"
 
-#: ../bin/src/ui_notificationssettingspage.h:417
+#: ../bin/src/ui_notificationssettingspage.h:424
 msgid "Background opacity"
 msgstr "Artalan saydamlığı"
 
@@ -745,7 +753,7 @@ msgstr "Yasakla"
 msgid "Bar analyzer"
 msgstr "Bar çözümleyici"
 
-#: ../bin/src/ui_notificationssettingspage.h:421
+#: ../bin/src/ui_notificationssettingspage.h:428
 msgid "Basic Blue"
 msgstr "Temel Mavi"
 
@@ -789,7 +797,7 @@ msgstr "Engelleme türü"
 msgid "Bluetooth MAC Address"
 msgstr "Bluetooth MAC Adresi"
 
-#: ../bin/src/ui_notificationssettingspage.h:414
+#: ../bin/src/ui_notificationssettingspage.h:421
 msgid "Body"
 msgstr "Gövde"
 
@@ -861,11 +869,11 @@ msgstr "Akıllı çalma listesi için isim seçin"
 msgid "Choose automatically"
 msgstr "Otomatik seç"
 
-#: ../bin/src/ui_notificationssettingspage.h:426
+#: ../bin/src/ui_notificationssettingspage.h:433
 msgid "Choose color..."
 msgstr "Rengi seç..."
 
-#: ../bin/src/ui_notificationssettingspage.h:427
+#: ../bin/src/ui_notificationssettingspage.h:434
 msgid "Choose font..."
 msgstr "Font seçiniz..."
 
@@ -904,7 +912,7 @@ msgstr "Clementine"
 msgid "Clementine Error"
 msgstr "Clementine Hatası"
 
-#: ../bin/src/ui_notificationssettingspage.h:422
+#: ../bin/src/ui_notificationssettingspage.h:429
 msgid "Clementine Orange"
 msgstr "Clementine Turuncu"
 
@@ -930,7 +938,7 @@ msgstr ""
 "özelliği etkinleştirmek için telefonunuzda yapılandırılan Google hesabınızla"
 " oturum açın."
 
-#: ../bin/src/ui_notificationssettingspage.h:396
+#: ../bin/src/ui_notificationssettingspage.h:403
 msgid "Clementine can show a message when the track changes."
 msgstr "Parça değiştiğinde Clementine bir ileti gösterebilir."
 
@@ -1250,7 +1258,7 @@ msgstr "Ctrl+Up"
 msgid "Custom"
 msgstr "Özel"
 
-#: ../bin/src/ui_notificationssettingspage.h:409
+#: ../bin/src/ui_notificationssettingspage.h:416
 msgid "Custom message settings"
 msgstr "Mesaj ayarlarını özelleştir"
 
@@ -1258,7 +1266,7 @@ msgstr "Mesaj ayarlarını özelleştir"
 msgid "Custom radio"
 msgstr "Özel radyo"
 
-#: ../bin/src/ui_notificationssettingspage.h:423
+#: ../bin/src/ui_notificationssettingspage.h:430
 msgid "Custom..."
 msgstr "Özel..."
 
@@ -1397,11 +1405,11 @@ msgstr "Doğrudan internet bağlantısı"
 msgid "Directory"
 msgstr "Dizin"
 
-#: ../bin/src/ui_notificationssettingspage.h:405
+#: ../bin/src/ui_notificationssettingspage.h:412
 msgid "Disable duration"
 msgstr "Süreyi devre dışı bırak"
 
-#: ../bin/src/ui_notificationssettingspage.h:398
+#: ../bin/src/ui_notificationssettingspage.h:405
 msgid "Disabled"
 msgstr "Devre Dışı"
 
@@ -1907,7 +1915,7 @@ msgstr "GStreamer ses motoru"
 msgid "General"
 msgstr "Genel"
 
-#: ../bin/src/ui_notificationssettingspage.h:402
+#: ../bin/src/ui_notificationssettingspage.h:409
 msgid "General settings"
 msgstr "Genel ayarlar"
 
@@ -2109,7 +2117,7 @@ msgstr ""
 msgid "Inbox"
 msgstr "Gelen Kutusu"
 
-#: ../bin/src/ui_notificationssettingspage.h:408
+#: ../bin/src/ui_notificationssettingspage.h:415
 msgid "Include album art in the notification"
 msgstr "Bildirimde albüm resimlendirmesini göster"
 
@@ -2801,11 +2809,11 @@ msgstr "Giriş yapmadınız"
 msgid "Not mounted - double click to mount"
 msgstr "Bağlı değil - bağlamak için çift tıklayın"
 
-#: ../bin/src/ui_notificationssettingspage.h:397
+#: ../bin/src/ui_notificationssettingspage.h:404
 msgid "Notification type"
 msgstr "Bildirim türü"
 
-#: ../bin/src/ui_notificationssettingspage.h:356
+#: ../bin/src/ui_notificationssettingspage.h:359
 msgid "Notifications"
 msgstr "Bildirimler"
 
@@ -3054,7 +3062,7 @@ msgstr "Bu ayın popüler şarkıları"
 msgid "Popular songs today"
 msgstr "Bugünün popüler şarkıları"
 
-#: ../bin/src/ui_notificationssettingspage.h:403
+#: ../bin/src/ui_notificationssettingspage.h:410
 msgid "Popup duration"
 msgstr "Açılır pencere süresi"
 
@@ -3114,12 +3122,12 @@ msgstr "Bir tuşa basın"
 msgid "Press a key combination to use for %1..."
 msgstr "%1 için kullanmak için bir tuş kombinasyonun basın..."
 
-#: ../bin/src/ui_notificationssettingspage.h:416
+#: ../bin/src/ui_notificationssettingspage.h:423
 msgid "Pretty OSD options"
 msgstr "OSD seçenekleri"
 
 #: ../bin/src/ui_searchpreview.h:105 ../bin/src/ui_songinfosettingspage.h:183
-#: ../bin/src/ui_notificationssettingspage.h:411
+#: ../bin/src/ui_notificationssettingspage.h:418
 #: ../bin/src/ui_organisedialog.h:208
 msgid "Preview"
 msgstr "Önizleme"
@@ -3624,23 +3632,23 @@ msgstr "OSD göster"
 msgid "Show a glowing animation on the current track"
 msgstr "Mevcut parçada parlayan bir animasyon göster"
 
-#: ../bin/src/ui_notificationssettingspage.h:399
+#: ../bin/src/ui_notificationssettingspage.h:406
 msgid "Show a native desktop notification"
 msgstr "Masaüstü bildirimi göster"
 
-#: ../bin/src/ui_notificationssettingspage.h:407
+#: ../bin/src/ui_notificationssettingspage.h:414
 msgid "Show a notification when I change the repeat/shuffle mode"
 msgstr "Tekrarla/karıştır modunu değiştirdiğimde bir bildirim göster"
 
-#: ../bin/src/ui_notificationssettingspage.h:406
+#: ../bin/src/ui_notificationssettingspage.h:413
 msgid "Show a notification when I change the volume"
 msgstr "Ses düzeyini değiştirdiğimde bir bildirim göster"
 
-#: ../bin/src/ui_notificationssettingspage.h:401
+#: ../bin/src/ui_notificationssettingspage.h:408
 msgid "Show a popup from the system tray"
 msgstr "Sistem tepsisinden bir açılır pencere göster"
 
-#: ../bin/src/ui_notificationssettingspage.h:400
+#: ../bin/src/ui_notificationssettingspage.h:407
 msgid "Show a pretty OSD"
 msgstr "Şirin bir OSD göster"
 
@@ -3927,7 +3935,7 @@ msgid "Suggested tags"
 msgstr "Önerilen etiketler"
 
 #: ../bin/src/ui_edittagdialog.h:651
-#: ../bin/src/ui_notificationssettingspage.h:413
+#: ../bin/src/ui_notificationssettingspage.h:420
 msgid "Summary"
 msgstr "Özet"
 
@@ -3984,7 +3992,7 @@ msgstr "Hedeflenen bit oranı"
 msgid "Techno"
 msgstr "Tekno"
 
-#: ../bin/src/ui_notificationssettingspage.h:425
+#: ../bin/src/ui_notificationssettingspage.h:432
 msgid "Text options"
 msgstr "Metin seçenekleri"
 
@@ -4302,7 +4310,7 @@ msgstr "Wii kumandasını kullan"
 msgid "Use a custom color set"
 msgstr ""
 
-#: ../bin/src/ui_notificationssettingspage.h:410
+#: ../bin/src/ui_notificationssettingspage.h:417
 msgid "Use a custom message for notifications"
 msgstr "Bildirimler için özel bir mesaj kullan"
 

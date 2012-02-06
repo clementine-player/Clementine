@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-01-29 22:42+0000\n"
+"PO-Revision-Date: 2012-02-02 20:06+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -36,7 +36,7 @@ msgstr " ms"
 msgid " pt"
 msgstr " bodov"
 
-#: ../bin/src/ui_notificationssettingspage.h:404
+#: ../bin/src/ui_notificationssettingspage.h:411
 #: ../bin/src/ui_visualisationselector.h:116
 msgid " seconds"
 msgstr " sekúnd"
@@ -115,6 +115,10 @@ msgstr "%L1 ďalších poslucháčov"
 #, qt-format
 msgid "%L1 total plays"
 msgstr "%L1 spolu prehraní"
+
+#: ../bin/src/ui_notificationssettingspage.h:399
+msgid "%filename%"
+msgstr ""
 
 #: transcoder/transcodedialog.cpp:199
 #, c-format
@@ -331,7 +335,7 @@ msgstr "Aktivovať/deaktivovať Wiiremote"
 msgid "Add Stream"
 msgstr "Pridať stream"
 
-#: ../bin/src/ui_notificationssettingspage.h:394
+#: ../bin/src/ui_notificationssettingspage.h:397
 msgid "Add a new line if supported by the notification type"
 msgstr "Pridať nový riadok, ak je to podporované typom upozornení"
 
@@ -379,51 +383,55 @@ msgstr "Pridať nový priečinok..."
 msgid "Add search term"
 msgstr "Pridať výraz hľadania"
 
-#: ../bin/src/ui_notificationssettingspage.h:361
+#: ../bin/src/ui_notificationssettingspage.h:364
 msgid "Add song album tag"
 msgstr "Pridať tag albumu"
 
-#: ../bin/src/ui_notificationssettingspage.h:367
+#: ../bin/src/ui_notificationssettingspage.h:370
 msgid "Add song albumartist tag"
 msgstr "Pridať tag interpréta albumu"
 
-#: ../bin/src/ui_notificationssettingspage.h:358
+#: ../bin/src/ui_notificationssettingspage.h:361
 msgid "Add song artist tag"
 msgstr "Pridať tag interpréta piesne"
 
-#: ../bin/src/ui_notificationssettingspage.h:373
+#: ../bin/src/ui_notificationssettingspage.h:376
 msgid "Add song composer tag"
 msgstr "Pridať tag skladateľa piesne"
 
-#: ../bin/src/ui_notificationssettingspage.h:376
+#: ../bin/src/ui_notificationssettingspage.h:379
 msgid "Add song disc tag"
 msgstr "Pridať tag disku"
 
-#: ../bin/src/ui_notificationssettingspage.h:382
+#: ../bin/src/ui_notificationssettingspage.h:401
+msgid "Add song filename"
+msgstr ""
+
+#: ../bin/src/ui_notificationssettingspage.h:385
 msgid "Add song genre tag"
 msgstr "Pridať tag žánru piesne"
 
-#: ../bin/src/ui_notificationssettingspage.h:385
+#: ../bin/src/ui_notificationssettingspage.h:388
 msgid "Add song length tag"
 msgstr "Pridať tag dĺžky piesne"
 
-#: ../bin/src/ui_notificationssettingspage.h:388
+#: ../bin/src/ui_notificationssettingspage.h:391
 msgid "Add song play count"
 msgstr "Pridať počet prehraní piesne"
 
-#: ../bin/src/ui_notificationssettingspage.h:391
+#: ../bin/src/ui_notificationssettingspage.h:394
 msgid "Add song skip count"
 msgstr "Pridať počet preskočení piesne"
 
-#: ../bin/src/ui_notificationssettingspage.h:364
+#: ../bin/src/ui_notificationssettingspage.h:367
 msgid "Add song title tag"
 msgstr "Pridať tag názvu piesne"
 
-#: ../bin/src/ui_notificationssettingspage.h:379
+#: ../bin/src/ui_notificationssettingspage.h:382
 msgid "Add song track tag"
 msgstr "Pridať tag čísla skladby"
 
-#: ../bin/src/ui_notificationssettingspage.h:370
+#: ../bin/src/ui_notificationssettingspage.h:373
 msgid "Add song year tag"
 msgstr "Pridať tag roka piesne"
 
@@ -724,11 +732,11 @@ msgstr "BPM"
 msgid "Background Streams"
 msgstr "Streamy na pozadí"
 
-#: ../bin/src/ui_notificationssettingspage.h:418
+#: ../bin/src/ui_notificationssettingspage.h:425
 msgid "Background color"
 msgstr "Farba pozadia"
 
-#: ../bin/src/ui_notificationssettingspage.h:417
+#: ../bin/src/ui_notificationssettingspage.h:424
 msgid "Background opacity"
 msgstr "Priehľadnosť pozadia"
 
@@ -740,7 +748,7 @@ msgstr "Zakázané"
 msgid "Bar analyzer"
 msgstr "Prúžkový analyzér"
 
-#: ../bin/src/ui_notificationssettingspage.h:421
+#: ../bin/src/ui_notificationssettingspage.h:428
 msgid "Basic Blue"
 msgstr "Základná modrá"
 
@@ -784,7 +792,7 @@ msgstr "Typ bloku"
 msgid "Bluetooth MAC Address"
 msgstr "Bluetooth MAC adresa"
 
-#: ../bin/src/ui_notificationssettingspage.h:414
+#: ../bin/src/ui_notificationssettingspage.h:421
 msgid "Body"
 msgstr "Obsah"
 
@@ -856,11 +864,11 @@ msgstr "Vyberte názov pre váš inteligentný playlist"
 msgid "Choose automatically"
 msgstr "Vybrať automaticky"
 
-#: ../bin/src/ui_notificationssettingspage.h:426
+#: ../bin/src/ui_notificationssettingspage.h:433
 msgid "Choose color..."
 msgstr "Vybrať farbu..."
 
-#: ../bin/src/ui_notificationssettingspage.h:427
+#: ../bin/src/ui_notificationssettingspage.h:434
 msgid "Choose font..."
 msgstr "Vybrať písmo..."
 
@@ -899,7 +907,7 @@ msgstr "Clementine"
 msgid "Clementine Error"
 msgstr "Chyba Clementine"
 
-#: ../bin/src/ui_notificationssettingspage.h:422
+#: ../bin/src/ui_notificationssettingspage.h:429
 msgid "Clementine Orange"
 msgstr "Klementínková oranžová"
 
@@ -925,7 +933,7 @@ msgstr ""
 "tejto funkcie sa prihláste s rovnakým Google účtom, aký je nastavený na "
 "vašom telefóne."
 
-#: ../bin/src/ui_notificationssettingspage.h:396
+#: ../bin/src/ui_notificationssettingspage.h:403
 msgid "Clementine can show a message when the track changes."
 msgstr "Clementine môže zobraziť správu keď sa zmení skladba."
 
@@ -1245,7 +1253,7 @@ msgstr "Ctrl+Up"
 msgid "Custom"
 msgstr "Vlastné"
 
-#: ../bin/src/ui_notificationssettingspage.h:409
+#: ../bin/src/ui_notificationssettingspage.h:416
 msgid "Custom message settings"
 msgstr "Vlastné nastavenie správy"
 
@@ -1253,7 +1261,7 @@ msgstr "Vlastné nastavenie správy"
 msgid "Custom radio"
 msgstr "Vlastné rádio"
 
-#: ../bin/src/ui_notificationssettingspage.h:423
+#: ../bin/src/ui_notificationssettingspage.h:430
 msgid "Custom..."
 msgstr "Vlastná..."
 
@@ -1392,11 +1400,11 @@ msgstr "Priame pripojenie na internet"
 msgid "Directory"
 msgstr "Priečinok"
 
-#: ../bin/src/ui_notificationssettingspage.h:405
+#: ../bin/src/ui_notificationssettingspage.h:412
 msgid "Disable duration"
 msgstr "Zakázať trvanie"
 
-#: ../bin/src/ui_notificationssettingspage.h:398
+#: ../bin/src/ui_notificationssettingspage.h:405
 msgid "Disabled"
 msgstr "Žiadne"
 
@@ -1903,7 +1911,7 @@ msgstr "GStreamer audio engine"
 msgid "General"
 msgstr "Všeobecné"
 
-#: ../bin/src/ui_notificationssettingspage.h:402
+#: ../bin/src/ui_notificationssettingspage.h:409
 msgid "General settings"
 msgstr "Všeobecné nastavenia"
 
@@ -2105,7 +2113,7 @@ msgstr ""
 msgid "Inbox"
 msgstr "Doručené"
 
-#: ../bin/src/ui_notificationssettingspage.h:408
+#: ../bin/src/ui_notificationssettingspage.h:415
 msgid "Include album art in the notification"
 msgstr "Zahrnúť obal do upozornenia"
 
@@ -2793,11 +2801,11 @@ msgstr "Nieprihlásený"
 msgid "Not mounted - double click to mount"
 msgstr "Nepripojené - pripojíte dvojklikom"
 
-#: ../bin/src/ui_notificationssettingspage.h:397
+#: ../bin/src/ui_notificationssettingspage.h:404
 msgid "Notification type"
 msgstr "Typ upozornení"
 
-#: ../bin/src/ui_notificationssettingspage.h:356
+#: ../bin/src/ui_notificationssettingspage.h:359
 msgid "Notifications"
 msgstr "Upozornenia"
 
@@ -3046,7 +3054,7 @@ msgstr "Populárne piesne tohto mesiaca"
 msgid "Popular songs today"
 msgstr "Populárne piesne dneška"
 
-#: ../bin/src/ui_notificationssettingspage.h:403
+#: ../bin/src/ui_notificationssettingspage.h:410
 msgid "Popup duration"
 msgstr "Trvanie upozornenia"
 
@@ -3106,12 +3114,12 @@ msgstr "Stlač tlačítko"
 msgid "Press a key combination to use for %1..."
 msgstr "Stlač kombináciu tlačítok na použitie pre %1..."
 
-#: ../bin/src/ui_notificationssettingspage.h:416
+#: ../bin/src/ui_notificationssettingspage.h:423
 msgid "Pretty OSD options"
 msgstr "Možnosti krásneho OSD"
 
 #: ../bin/src/ui_searchpreview.h:105 ../bin/src/ui_songinfosettingspage.h:183
-#: ../bin/src/ui_notificationssettingspage.h:411
+#: ../bin/src/ui_notificationssettingspage.h:418
 #: ../bin/src/ui_organisedialog.h:208
 msgid "Preview"
 msgstr "Ukážka"
@@ -3617,23 +3625,23 @@ msgstr "Zobraziť OSD"
 msgid "Show a glowing animation on the current track"
 msgstr "Zobraziť blikajúcu animáciu na súčasnej skladbe"
 
-#: ../bin/src/ui_notificationssettingspage.h:399
+#: ../bin/src/ui_notificationssettingspage.h:406
 msgid "Show a native desktop notification"
 msgstr "Zobrazovať natívne desktopové upozornenia"
 
-#: ../bin/src/ui_notificationssettingspage.h:407
+#: ../bin/src/ui_notificationssettingspage.h:414
 msgid "Show a notification when I change the repeat/shuffle mode"
 msgstr "Zobraziť upozornenie keď zmením režim opakovania alebo zamiešavania"
 
-#: ../bin/src/ui_notificationssettingspage.h:406
+#: ../bin/src/ui_notificationssettingspage.h:413
 msgid "Show a notification when I change the volume"
 msgstr "Zobraziť upozornenie keď zmením hlasitosť"
 
-#: ../bin/src/ui_notificationssettingspage.h:401
+#: ../bin/src/ui_notificationssettingspage.h:408
 msgid "Show a popup from the system tray"
 msgstr "Zobrazovať upozornenia z tray lišty"
 
-#: ../bin/src/ui_notificationssettingspage.h:400
+#: ../bin/src/ui_notificationssettingspage.h:407
 msgid "Show a pretty OSD"
 msgstr "Zobrazovať krásne OSD"
 
@@ -3921,7 +3929,7 @@ msgid "Suggested tags"
 msgstr "Nájdené tagy"
 
 #: ../bin/src/ui_edittagdialog.h:651
-#: ../bin/src/ui_notificationssettingspage.h:413
+#: ../bin/src/ui_notificationssettingspage.h:420
 msgid "Summary"
 msgstr "Zhrnutie"
 
@@ -3978,7 +3986,7 @@ msgstr "Cieľový dátový tok"
 msgid "Techno"
 msgstr "Techno"
 
-#: ../bin/src/ui_notificationssettingspage.h:425
+#: ../bin/src/ui_notificationssettingspage.h:432
 msgid "Text options"
 msgstr "Textové možnosti"
 
@@ -4308,7 +4316,7 @@ msgstr "Použiť Wii diaľkové"
 msgid "Use a custom color set"
 msgstr "Použiť vlastný set farieb"
 
-#: ../bin/src/ui_notificationssettingspage.h:410
+#: ../bin/src/ui_notificationssettingspage.h:417
 msgid "Use a custom message for notifications"
 msgstr "Používať vlastnú správu pre upozornenia"
 
