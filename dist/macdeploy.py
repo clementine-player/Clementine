@@ -55,7 +55,6 @@ GSTREAMER_PLUGINS=[
     'libgstfaad.so',
     'libgstffmpeg.so',
     'libgstflac.so',
-    'libgstgio.so',
     'libgstid3demux.so',
     'libgstlame.so',
     'libgstmad.so',
