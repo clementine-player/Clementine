@@ -298,13 +298,6 @@ int main(int argc, char *argv[]) {
     }
   }
 
-#ifdef Q_OS_LINUX
-  // Force Clementine's menu to be shown in the Clementine window and not in
-  // the Unity global menubar thing.  See:
-  // https://bugs.launchpad.net/unity/+bug/775278
-  setenv("QT_X11_NO_NATIVE_MENUBAR", "1", true);
-#endif
-
   // Initialise logging
   logging::Init();
   logging::SetLevels(options.log_levels());
