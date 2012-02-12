@@ -113,7 +113,8 @@ void SongInfoView::ReloadSettings() {
                 << "teksty.org"
                 << "tekstowo.pl (Polish translations)"
                 << "vagalume.uol.com.br"
-                << "vagalume.uol.com.br (Portuguese translations)";
+                << "vagalume.uol.com.br (Portuguese translations)"
+                << "darklyrics.com";
 
   QVariant saved_order = s.value("search_order", default_order);
   foreach (const QVariant& name, saved_order.toList()) {

@@ -71,7 +71,10 @@ private:
   static QString Exclude(const QString& source, const QString& begin, const QString& end);
   static QString FirstChar(const QString& text);
   static QString TitleCase(const QString& text);
-  void DoUrlReplace(const QString& tag, const QString& value, QString* url) const;
+  static QString NoSpace(const QString& text);
+
+  void ReplaceField(const QString& tag, const QString& value, QString* text) const;
+  void ReplaceFields(const Song& metadata, QString* text) const;
 
 private:
   NetworkAccessManager* network_;
@@ -88,6 +91,7 @@ private:
   QList<Rule> exclude_rules_;
   QStringList invalid_indicators_;
 
+  Song metadata_;
   int redirect_count_;
 };
 
