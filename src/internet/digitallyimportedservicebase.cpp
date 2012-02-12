@@ -19,6 +19,7 @@
 #include "digitallyimportedservicebase.h"
 #include "digitallyimportedurlhandler.h"
 #include "internetmodel.h"
+#include "core/application.h"
 #include "core/closure.h"
 #include "core/logging.h"
 #include "core/network.h"
@@ -39,19 +40,19 @@ const int DigitallyImportedServiceBase::kStreamsCacheDurationSecs =
 
 
 DigitallyImportedServiceBase::DigitallyImportedServiceBase(
-  const QString& name,
-  const QString& description,
-  const QUrl& homepage_url,
-  const QIcon& icon,
-  const QString& api_service_name,
-  InternetModel* model, QObject* parent)
-  : InternetService(name, model, parent),
+      const QString& name,
+      const QString& description,
+      const QUrl& homepage_url,
+      const QIcon& icon,
+      const QString& api_service_name,
+      Application* app, InternetModel* model, QObject* parent)
+  : InternetService(name, app, model, parent),
     homepage_url_(homepage_url),
     icon_(icon),
     service_description_(description),
     api_service_name_(api_service_name),
     network_(new NetworkAccessManager(this)),
-    url_handler_(new DigitallyImportedUrlHandler(this)),
+    url_handler_(new DigitallyImportedUrlHandler(app, this)),
     basic_audio_type_(1),
     premium_audio_type_(2),
     root_(NULL),
@@ -61,8 +62,8 @@ DigitallyImportedServiceBase::DigitallyImportedServiceBase(
 {
   ReloadSettings();
 
-  model->player()->RegisterUrlHandler(url_handler_);
-  model->global_search()->AddProvider(new DigitallyImportedSearchProvider(this, this));
+  model->app()->player()->RegisterUrlHandler(url_handler_);
+  model->app()->global_search()->AddProvider(new DigitallyImportedSearchProvider(this, this));
 
   basic_playlists_
       << "http://%1/public3/%2.pls"
@@ -103,7 +104,7 @@ void DigitallyImportedServiceBase::RefreshStreams() {
 
 void DigitallyImportedServiceBase::ForceRefreshStreams() {
   // Start a task to tell the user we're busy
-  int task_id = model()->task_manager()->StartTask(tr("Getting streams"));
+  int task_id = app_->task_manager()->StartTask(tr("Getting streams"));
 
   QNetworkReply* reply = api_client_->GetChannelList();
   NewClosure(reply, SIGNAL(finished()),
@@ -112,7 +113,7 @@ void DigitallyImportedServiceBase::ForceRefreshStreams() {
 }
 
 void DigitallyImportedServiceBase::RefreshStreamsFinished(QNetworkReply* reply, int task_id) {
-  model()->task_manager()->SetTaskFinished(task_id);
+  app_->task_manager()->SetTaskFinished(task_id);
   reply->deleteLater();
 
   // Parse the list and sort by name
@@ -247,22 +248,24 @@ QModelIndex DigitallyImportedServiceBase::GetCurrentIndex() {
 }
 
 
-DigitallyImportedService::DigitallyImportedService(InternetModel* model, QObject* parent)
+DigitallyImportedService::DigitallyImportedService(
+      Application* app, InternetModel* model, QObject* parent)
   : DigitallyImportedServiceBase("DigitallyImported",
                                  "Digitally Imported",
                                  QUrl("http://www.di.fm"),
                                  QIcon(":/providers/digitallyimported.png"),
                                  "di",
-                                 model, parent)
+                                 app, model, parent)
 {
 }
 
-SkyFmService::SkyFmService(InternetModel* model, QObject* parent)
+SkyFmService::SkyFmService(
+      Application* app, InternetModel* model, QObject* parent)
   : DigitallyImportedServiceBase("SKY.fm",
                                  "SKY.fm",
                                  QUrl("http://www.sky.fm"),
                                  QIcon(":/providers/skyfm.png"),
                                  "sky",
-                                 model, parent)
+                                 app, model, parent)
 {
 }

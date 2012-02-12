@@ -88,9 +88,11 @@ void SizeOverlayDelegate::paint(QPainter* painter,
 }
 
 
-AlbumCoverSearcher::AlbumCoverSearcher(const QIcon& no_cover_icon, QWidget* parent)
+AlbumCoverSearcher::AlbumCoverSearcher(const QIcon& no_cover_icon,
+                                       Application* app, QWidget* parent)
   : QDialog(parent),
     ui_(new Ui_AlbumCoverSearcher),
+    app_(app),
     model_(new QStandardItemModel(this)),
     no_cover_icon_(no_cover_icon),
     loader_(new BackgroundThreadImplementation<AlbumCoverLoader, AlbumCoverLoader>(this)),

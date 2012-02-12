@@ -27,9 +27,8 @@
 
 class AlbumCoverChoiceController;
 class AlbumCoverLoader;
-class CoverProviders;
+class Application;
 class FullscreenHypnotoad;
-class LibraryBackend;
 
 class QAction;
 class QActionGroup;
@@ -60,8 +59,7 @@ public:
     LargeSongDetails = 1,
   };
 
-  void SetLibraryBackend(LibraryBackend* backend);
-  void SetCoverProviders(CoverProviders* cover_providers);
+  void SetApplication(Application* app);
 
   void set_ideal_height(int height);
   bool show_above_status_bar() const;
@@ -113,7 +111,7 @@ private:
   void DrawContents(QPainter* p);
 
 private:
-  CoverProviders* cover_providers_;
+  Application* app_;
   AlbumCoverChoiceController* album_cover_choice_controller_;
 
   BackgroundThread<AlbumCoverLoader>* cover_loader_;

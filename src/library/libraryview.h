@@ -26,11 +26,9 @@
 
 #include <boost/scoped_ptr.hpp>
 
-class DeviceManager;
+class Application;
 class LibraryFilterWidget;
-class LibraryModel;
 class OrganiseDialog;
-class TaskManager;
 
 class QMimeData;
 
@@ -62,10 +60,7 @@ class LibraryView : public AutoExpandingTreeView {
   // this will return all of it's songs.
   SongList GetSelectedSongs() const;
 
-  void SetCoverProviders(CoverProviders* cover_providers);
-  void SetTaskManager(TaskManager* task_manager);
-  void SetLibrary(LibraryModel* library);
-  void SetDeviceManager(DeviceManager* device_manager);
+  void SetApplication(Application* app);
   void SetFilter(LibraryFilterWidget* filter);
 
   // QTreeView
@@ -114,10 +109,7 @@ class LibraryView : public AutoExpandingTreeView {
   void ShowInVarious(bool on);
 
  private:
-  CoverProviders* cover_providers_;
-  LibraryModel* library_;
-  DeviceManager* devices_;
-  TaskManager* task_manager_;
+  Application* app_;
   LibraryFilterWidget* filter_;
 
   int total_song_count_;

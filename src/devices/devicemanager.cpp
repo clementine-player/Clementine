@@ -21,6 +21,8 @@
 #include "devicemanager.h"
 #include "devicestatefiltermodel.h"
 #include "filesystemdevice.h"
+#include "core/application.h"
+#include "core/database.h"
 #include "core/logging.h"
 #include "core/musicstorage.h"
 #include "core/taskmanager.h"
@@ -165,19 +167,17 @@ const DeviceManager::DeviceInfo::Backend* DeviceManager::DeviceInfo::BestBackend
 }
 
 
-DeviceManager::DeviceManager(BackgroundThread<Database>* database,
-                             TaskManager* task_manager, QObject *parent)
+DeviceManager::DeviceManager(Application* app, QObject *parent)
   : QAbstractListModel(parent),
-    database_(database),
-    task_manager_(task_manager),
+    app_(app),
     not_connected_overlay_(IconLoader::Load("edit-delete"))
 {
-  connect(task_manager_, SIGNAL(TasksChanged()), SLOT(TasksChanged()));
+  connect(app_->task_manager(), SIGNAL(TasksChanged()), SLOT(TasksChanged()));
 
   // Create the backend in the database thread
   backend_ = new DeviceDatabaseBackend;
-  backend_->moveToThread(database);
-  backend_->Init(database_->Worker());
+  backend_->moveToThread(app_->database()->thread());
+  backend_->Init(app_->database());
 
   DeviceDatabaseBackend::DeviceList devices = backend_->GetAllDevices();
   foreach (const DeviceDatabaseBackend::Device& device, devices) {
@@ -587,7 +587,7 @@ boost::shared_ptr<ConnectedDevice> DeviceManager::Connect(int row) {
     QStringList url_strings;
     foreach (const QUrl& url, urls) { url_strings << url.toString(); }
 
-    emit Error(tr("This type of device is not supported: %1").arg(url_strings.join(", ")));
+    app_->AddError(tr("This type of device is not supported: %1").arg(url_strings.join(", ")));
     return ret;
   }
 
@@ -606,7 +606,6 @@ boost::shared_ptr<ConnectedDevice> DeviceManager::Connect(int row) {
     info.device_ = ret;
     emit dataChanged(index(row), index(row));
     connect(info.device_.get(), SIGNAL(TaskStarted(int)), SLOT(DeviceTaskStarted(int)));
-    connect(info.device_.get(), SIGNAL(Error(QString)), SIGNAL(Error(QString)));
     connect(info.device_.get(), SIGNAL(SongCountUpdated(int)), SLOT(DeviceSongCountUpdated(int)));
   }
 
@@ -706,7 +705,7 @@ void DeviceManager::DeviceTaskStarted(int id) {
 }
 
 void DeviceManager::TasksChanged() {
-  QList<TaskManager::Task> tasks = task_manager_->GetTasks();
+  QList<TaskManager::Task> tasks = app_->task_manager()->GetTasks();
   QList<QPersistentModelIndex> finished_tasks = active_tasks_.values();
 
   foreach (const TaskManager::Task& task, tasks) {

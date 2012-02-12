@@ -35,7 +35,7 @@ class QSortFilterProxyModel;
 class JamendoService : public InternetService {
   Q_OBJECT
  public:
-  JamendoService(InternetModel* parent);
+  JamendoService(Application* app, InternetModel* parent);
   ~JamendoService();
 
   QStandardItem* CreateRootItem();

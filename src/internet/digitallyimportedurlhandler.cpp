@@ -18,12 +18,15 @@
 #include "digitallyimportedservicebase.h"
 #include "digitallyimportedurlhandler.h"
 #include "internetmodel.h"
+#include "core/application.h"
 #include "core/logging.h"
 #include "core/taskmanager.h"
 #include "playlistparsers/playlistparser.h"
 
-DigitallyImportedUrlHandler::DigitallyImportedUrlHandler(DigitallyImportedServiceBase* service)
+DigitallyImportedUrlHandler::DigitallyImportedUrlHandler(
+    Application* app, DigitallyImportedServiceBase* service)
   : UrlHandler(service),
+    app_(app),
     service_(service),
     task_id_(-1)
 {
@@ -57,7 +60,7 @@ UrlHandler::LoadResult DigitallyImportedUrlHandler::StartLoading(const QUrl& url
   last_original_url_ = url;
 
   // Tell the user what's happening
-  task_id_ = service_->model()->task_manager()->StartTask(tr("Loading stream"));
+  task_id_ = app_->task_manager()->StartTask(tr("Loading stream"));
 
   ret.type_ = LoadResult::WillLoadAsynchronously;
   return ret;
@@ -88,6 +91,6 @@ void DigitallyImportedUrlHandler::LoadPlaylistFinished(QIODevice* device) {
 }
 
 void DigitallyImportedUrlHandler::CancelTask() {
-  service_->model()->task_manager()->SetTaskFinished(task_id_);
+  app_->task_manager()->SetTaskFinished(task_id_);
   task_id_ = -1;
 }

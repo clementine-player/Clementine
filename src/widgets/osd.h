@@ -29,6 +29,7 @@
 #include "covers/albumcoverloader.h"
 #include "playlist/playlistsequence.h"
 
+class Application;
 class OrgFreedesktopNotificationsInterface;
 class OSDPretty;
 class SystemTrayIcon;
@@ -47,7 +48,7 @@ class OSD : public QObject {
   Q_OBJECT
 
  public:
-  OSD(SystemTrayIcon* tray_icon, QObject* parent = 0);
+  OSD(SystemTrayIcon* tray_icon, Application* app, QObject* parent = 0);
   ~OSD();
 
   static const char* kSettingsGroup;
@@ -120,6 +121,7 @@ class OSD : public QObject {
 
  private:
   SystemTrayIcon* tray_icon_;
+  Application* app_;
   int timeout_msec_;
   Behaviour behaviour_;
   bool show_on_volume_change_;

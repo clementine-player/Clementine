@@ -18,6 +18,7 @@
 #include "somafmservice.h"
 #include "somafmurlhandler.h"
 #include "internetmodel.h"
+#include "core/application.h"
 #include "core/closure.h"
 #include "core/logging.h"
 #include "core/network.h"
@@ -43,9 +44,9 @@ const char* SomaFMService::kHomepage = "http://somafm.com";
 const int SomaFMService::kStreamsCacheDurationSecs =
     60 * 60 * 24 * 28; // 4 weeks
 
-SomaFMService::SomaFMService(InternetModel* parent)
-  : InternetService(kServiceName, parent, parent),
-    url_handler_(new SomaFMUrlHandler(this, this)),
+SomaFMService::SomaFMService(Application* app, InternetModel* parent)
+  : InternetService(kServiceName, app, parent, parent),
+    url_handler_(new SomaFMUrlHandler(app, this, this)),
     root_(NULL),
     context_menu_(NULL),
     network_(new NetworkAccessManager(this)),
@@ -53,8 +54,8 @@ SomaFMService::SomaFMService(InternetModel* parent)
 {
   ReloadSettings();
 
-  model()->player()->RegisterUrlHandler(url_handler_);
-  model()->global_search()->AddProvider(new SomaFMSearchProvider(this, this));
+  app_->player()->RegisterUrlHandler(url_handler_);
+  app_->global_search()->AddProvider(new SomaFMSearchProvider(this, this));
 }
 
 SomaFMService::~SomaFMService() {
@@ -92,7 +93,7 @@ void SomaFMService::ShowContextMenu(const QModelIndex& index, const QPoint& glob
 
 void SomaFMService::ForceRefreshStreams() {
   QNetworkReply* reply = network_->get(QNetworkRequest(QUrl(kChannelListUrl)));
-  int task_id = model()->task_manager()->StartTask(tr("Getting channels"));
+  int task_id = app_->task_manager()->StartTask(tr("Getting channels"));
 
   NewClosure(reply, SIGNAL(finished()),
              this, SLOT(RefreshStreamsFinished(QNetworkReply*,int)),
@@ -100,7 +101,7 @@ void SomaFMService::ForceRefreshStreams() {
 }
 
 void SomaFMService::RefreshStreamsFinished(QNetworkReply* reply, int task_id) {
-  model()->task_manager()->SetTaskFinished(task_id);
+  app_->task_manager()->SetTaskFinished(task_id);
   reply->deleteLater();
 
   if (reply->error() != QNetworkReply::NoError) {

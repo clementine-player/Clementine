@@ -21,7 +21,9 @@
 #include "playlistmanager.h"
 #include "playlistview.h"
 #include "specialplaylisttype.h"
+#include "core/application.h"
 #include "core/logging.h"
+#include "core/player.h"
 #include "core/songloader.h"
 #include "core/utilities.h"
 #include "library/librarybackend.h"
@@ -34,9 +36,9 @@
 
 using smart_playlists::GeneratorPtr;
 
-PlaylistManager::PlaylistManager(TaskManager* task_manager, QObject *parent)
-  : PlaylistManagerInterface(parent),
-    task_manager_(task_manager),
+PlaylistManager::PlaylistManager(Application* app, QObject *parent)
+  : PlaylistManagerInterface(app, parent),
+    app_(app),
     playlist_backend_(NULL),
     library_backend_(NULL),
     sequence_(NULL),
@@ -45,6 +47,9 @@ PlaylistManager::PlaylistManager(TaskManager* task_manager, QObject *parent)
     current_(-1),
     active_(-1)
 {
+  connect(app_->player(), SIGNAL(Paused()), SLOT(SetActivePaused()));
+  connect(app_->player(), SIGNAL(Playing()), SLOT(SetActivePlaying()));
+  connect(app_->player(), SIGNAL(Stopped()), SLOT(SetActiveStopped()));
 }
 
 PlaylistManager::~PlaylistManager() {
@@ -97,7 +102,8 @@ QItemSelection PlaylistManager::selection(int id) const {
 
 Playlist* PlaylistManager::AddPlaylist(int id, const QString& name,
                                        const QString& special_type) {
-  Playlist* ret = new Playlist(playlist_backend_, task_manager_, library_backend_, id, special_type);
+  Playlist* ret = new Playlist(playlist_backend_, app_->task_manager(),
+                               library_backend_, id, special_type);
   ret->set_sequence(sequence_);
 
   connect(ret, SIGNAL(CurrentSongChanged(Song)), SIGNAL(CurrentSongChanged(Song)));
@@ -148,7 +154,7 @@ void PlaylistManager::Load(const QString& filename) {
 
   if (result == SongLoader::Error ||
       (result == SongLoader::Success && loader->songs().isEmpty())) {
-    emit Error(tr("The playlist '%1' was empty or could not be loaded.").arg(
+    app_->AddError(tr("The playlist '%1' was empty or could not be loaded.").arg(
         info.completeBaseName()));
     delete loader;
     return;
@@ -166,7 +172,7 @@ void PlaylistManager::LoadFinished(bool success) {
   QString localfile = loader->url().toLocalFile();
   QFileInfo info(localfile);
   if (!success || loader->songs().isEmpty()) {
-    emit Error(tr("The playlist '%1' was empty or could not be loaded.").arg(
+    app_->AddError(tr("The playlist '%1' was empty or could not be loaded.").arg(
         info.completeBaseName()));
   }
 

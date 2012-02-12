@@ -40,6 +40,7 @@ public:
                                const QUrl& homepage_url,
                                const QIcon& icon,
                                const QString& api_service_name,
+                               Application* app,
                                InternetModel* model,
                                QObject* parent = NULL);
   ~DigitallyImportedServiceBase();
@@ -116,12 +117,12 @@ private:
 
 class DigitallyImportedService : public DigitallyImportedServiceBase {
 public:
-  DigitallyImportedService(InternetModel* model, QObject* parent = NULL);
+  DigitallyImportedService(Application* app, InternetModel* model, QObject* parent = NULL);
 };
 
 class SkyFmService : public DigitallyImportedServiceBase {
 public:
-  SkyFmService(InternetModel* model, QObject* parent = NULL);
+  SkyFmService(Application* app, InternetModel* model, QObject* parent = NULL);
 };
 
 #endif // DIGITALLYIMPORTEDSERVICEBASE_H

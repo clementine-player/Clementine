@@ -37,6 +37,7 @@
 #include "internetplaylistitem.h"
 #include "globalsearch/globalsearch.h"
 #include "globalsearch/lastfmsearchprovider.h"
+#include "core/application.h"
 #include "core/logging.h"
 #include "core/player.h"
 #include "core/song.h"
@@ -86,8 +87,8 @@ const char* LastFMService::kTitleCustom = QT_TR_NOOP("Last.fm Custom Radio: %1")
 
 const int LastFMService::kFriendsCacheDurationSecs = 60 * 60 * 24; // 1 day
 
-LastFMService::LastFMService(InternetModel* parent)
-  : InternetService(kServiceName, parent, parent),
+LastFMService::LastFMService(Application* app, InternetModel* parent)
+  : InternetService(kServiceName, app, parent, parent),
     url_handler_(new LastFMUrlHandler(this, this)),
     scrobbler_(NULL),
     already_scrobbled_(false),
@@ -130,10 +131,10 @@ LastFMService::LastFMService(InternetModel* parent)
   add_tag_action_->setEnabled(false);
   add_custom_action_->setEnabled(false);
 
-  model()->player()->RegisterUrlHandler(url_handler_);
-  model()->cover_providers()->AddProvider(new LastFmCoverProvider(this));
+  app_->player()->RegisterUrlHandler(url_handler_);
+  app_->cover_providers()->AddProvider(new LastFmCoverProvider(this));
 
-  model()->global_search()->AddProvider(new LastFMSearchProvider(this, this));
+  app_->global_search()->AddProvider(new LastFMSearchProvider(this, this));
 }
 
 LastFMService::~LastFMService() {
@@ -429,7 +430,7 @@ void LastFMService::TunerError(lastfm::ws::Error error) {
   if (!initial_tune_)
     return;
 
-  model()->task_manager()->SetTaskFinished(tune_task_id_);
+  app_->task_manager()->SetTaskFinished(tune_task_id_);
   tune_task_id_ = 0;
 
   if (error == lastfm::ws::NotEnoughContent) {
@@ -577,7 +578,7 @@ void LastFMService::Ban() {
   last_track_ = mtrack;
 
   Scrobble();
-  model()->player()->Next();
+  app_->player()->Next();
 }
 
 void LastFMService::ShowContextMenu(const QModelIndex& index, const QPoint &global_pos) {
@@ -882,7 +883,7 @@ void LastFMService::FetchMoreTracksFinished() {
     return;
   }
   reply->deleteLater();
-  model()->task_manager()->SetTaskFinished(tune_task_id_);
+  app_->task_manager()->SetTaskFinished(tune_task_id_);
   tune_task_id_ = 0;
 
   try {
@@ -925,7 +926,7 @@ void LastFMService::FetchMoreTracksFinished() {
 
 void LastFMService::Tune(const QUrl& url) {
   if (!tune_task_id_)
-    tune_task_id_ = model()->task_manager()->StartTask(tr("Loading Last.fm radio"));
+    tune_task_id_ = app_->task_manager()->StartTask(tr("Loading Last.fm radio"));
 
   last_url_ = url;
   initial_tune_ = true;

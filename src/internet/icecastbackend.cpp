@@ -29,7 +29,7 @@ IcecastBackend::IcecastBackend(QObject* parent)
 {
 }
 
-void IcecastBackend::Init(boost::shared_ptr<Database> db) {
+void IcecastBackend::Init(Database* db) {
   db_ = db;
 }
 

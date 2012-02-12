@@ -22,10 +22,10 @@
 
 namespace mpris {
 
-Mpris::Mpris(Player* player, ArtLoader* art_loader, QObject* parent)
+Mpris::Mpris(Application* app, ArtLoader* art_loader, QObject* parent)
   : QObject(parent),
-    mpris1_(new mpris::Mpris1(player, art_loader, this)),
-    mpris2_(new mpris::Mpris2(player, art_loader, mpris1_, this))
+    mpris1_(new mpris::Mpris1(app, art_loader, this)),
+    mpris2_(new mpris::Mpris2(app, art_loader, mpris1_, this))
 {
   connect(mpris2_, SIGNAL(RaiseMainWindow()), SIGNAL(RaiseMainWindow()));
   mpris2_->InitLibIndicate();

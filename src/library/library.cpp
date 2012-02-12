@@ -19,6 +19,7 @@
 
 #include "librarymodel.h"
 #include "librarybackend.h"
+#include "core/application.h"
 #include "core/database.h"
 #include "smartplaylists/generator.h"
 #include "smartplaylists/querygenerator.h"
@@ -29,19 +30,18 @@ const char* Library::kDirsTable = "directories";
 const char* Library::kSubdirsTable = "subdirectories";
 const char* Library::kFtsTable = "songs_fts";
 
-Library::Library(BackgroundThread<Database>* db_thread, TaskManager* task_manager,
-                 QObject *parent)
+Library::Library(Application* app, QObject *parent)
   : QObject(parent),
-    task_manager_(task_manager),
+    app_(app),
     backend_(NULL),
     model_(NULL),
     watcher_factory_(new BackgroundThreadFactoryImplementation<LibraryWatcher, LibraryWatcher>),
     watcher_(NULL)
 {
   backend_ = new LibraryBackend;
-  backend()->moveToThread(db_thread);
+  backend()->moveToThread(app->database()->thread());
 
-  backend_->Init(db_thread->Worker(), kSongsTable, kDirsTable, kSubdirsTable, kFtsTable);
+  backend_->Init(app->database(), kSongsTable, kDirsTable, kSubdirsTable, kFtsTable);
 
   using smart_playlists::Generator;
   using smart_playlists::GeneratorPtr;
@@ -49,7 +49,7 @@ Library::Library(BackgroundThread<Database>* db_thread, TaskManager* task_manage
   using smart_playlists::Search;
   using smart_playlists::SearchTerm;
 
-  model_ = new LibraryModel(backend_, task_manager_, this);
+  model_ = new LibraryModel(backend_, app_, this);
   model_->set_show_smart_playlists(true);
   model_->set_default_smart_playlists(LibraryModel::DefaultGenerators()
     << (LibraryModel::GeneratorList()
@@ -119,7 +119,7 @@ void Library::WatcherInitialised() {
   LibraryWatcher* watcher = watcher_->Worker().get();
 
   watcher->set_backend(backend_);
-  watcher->set_task_manager(task_manager_);
+  watcher->set_task_manager(app_->task_manager());
 
   connect(backend_, SIGNAL(DirectoryDiscovered(Directory,SubdirectoryList)),
           watcher,  SLOT(AddDirectory(Directory,SubdirectoryList)));

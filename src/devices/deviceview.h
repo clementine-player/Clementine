@@ -26,6 +26,7 @@ class QAction;
 class QMenu;
 class QSortFilterProxyModel;
 
+class Application;
 class DeviceManager;
 class DeviceProperties;
 class LibraryModel;
@@ -48,8 +49,7 @@ public:
   DeviceView(QWidget* parent = 0);
   ~DeviceView();
 
-  void SetDeviceManager(DeviceManager* manager);
-  void SetLibrary(LibraryModel* library);
+  void SetApplication(Application* app);
 
 protected:
   void contextMenuEvent(QContextMenuEvent *);
@@ -84,8 +84,7 @@ private:
   SongList GetSelectedSongs() const;
 
 private:
-  DeviceManager* manager_;
-  LibraryModel* library_;
+  Application* app_;
   MergedProxyModel* merged_model_;
   QSortFilterProxyModel* sort_model_;
 

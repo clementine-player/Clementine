@@ -21,6 +21,7 @@
 #include "librarydirectorymodel.h"
 #include "libraryview.h"
 #include "sqlrow.h"
+#include "core/application.h"
 #include "core/database.h"
 #include "core/logging.h"
 #include "core/taskmanager.h"
@@ -58,11 +59,11 @@ static bool IsArtistGroupBy(const LibraryModel::GroupBy by) {
   return by == LibraryModel::GroupBy_Artist || by == LibraryModel::GroupBy_AlbumArtist;
 }
 
-LibraryModel::LibraryModel(LibraryBackend* backend, TaskManager* task_manager,
+LibraryModel::LibraryModel(LibraryBackend* backend, Application* app,
                            QObject* parent)
   : SimpleTreeModel<LibraryItem>(new LibraryItem(this), parent),
     backend_(backend),
-    task_manager_(task_manager),
+    app_(app),
     dir_model_(new LibraryDirectoryModel(backend, this)),
     show_smart_playlists_(false),
     show_various_artists_(true),
@@ -132,7 +133,7 @@ void LibraryModel::Init(bool async) {
     reset();
 
     // Show a loading indicator in the status bar too.
-    init_task_id_ = task_manager_->StartTask(tr("Loading songs"));
+    init_task_id_ = app_->task_manager()->StartTask(tr("Loading songs"));
 
     ResetAsync();
   } else {
@@ -640,7 +641,7 @@ void LibraryModel::ResetAsyncQueryFinished() {
   }
 
   if (init_task_id_ != -1) {
-    task_manager_->SetTaskFinished(init_task_id_);
+    app_->task_manager()->SetTaskFinished(init_task_id_);
     init_task_id_ = -1;
   }
 

@@ -45,17 +45,10 @@ using smart_playlists::GeneratorPtr;
 
 QMap<QString, InternetService*>* InternetModel::sServices = NULL;
 
-InternetModel::InternetModel(BackgroundThread<Database>* db_thread,
-                       TaskManager* task_manager, PlayerInterface* player,
-                       CoverProviders* cover_providers,
-                       GlobalSearch* global_search, QObject* parent)
+InternetModel::InternetModel(Application* app, QObject* parent)
   : QStandardItemModel(parent),
-    db_thread_(db_thread),
-    merged_model_(new MergedProxyModel(this)),
-    task_manager_(task_manager),
-    player_(player),
-    cover_providers_(cover_providers),
-    global_search_(global_search)
+    app_(app),
+    merged_model_(new MergedProxyModel(this))
 {
   if (!sServices) {
     sServices = new QMap<QString, InternetService*>;
@@ -64,19 +57,19 @@ InternetModel::InternetModel(BackgroundThread<Database>* db_thread,
 
   merged_model_->setSourceModel(this);
 
-  AddService(new DigitallyImportedService(this));
-  AddService(new IcecastService(this));
-  AddService(new JamendoService(this));
+  AddService(new DigitallyImportedService(app, this));
+  AddService(new IcecastService(app, this));
+  AddService(new JamendoService(app, this));
 #ifdef HAVE_LIBLASTFM
-  AddService(new LastFMService(this));
+  AddService(new LastFMService(app, this));
 #endif
-  AddService(new GroovesharkService(this));
-  AddService(new MagnatuneService(this));
-  AddService(new SavedRadio(this));
-  AddService(new SkyFmService(this));
-  AddService(new SomaFMService(this));
+  AddService(new GroovesharkService(app, this));
+  AddService(new MagnatuneService(app, this));
+  AddService(new SavedRadio(app, this));
+  AddService(new SkyFmService(app, this));
+  AddService(new SomaFMService(app, this));
 #ifdef HAVE_SPOTIFY
-  AddService(new SpotifyService(this));
+  AddService(new SpotifyService(app, this));
 #endif
 }
 

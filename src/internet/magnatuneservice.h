@@ -34,7 +34,7 @@ class MagnatuneService : public InternetService {
   Q_OBJECT
 
  public:
-  MagnatuneService(InternetModel* parent);
+  MagnatuneService(Application* app, InternetModel* parent);
   ~MagnatuneService();
 
   // Values are saved in QSettings and are indices into the combo box in

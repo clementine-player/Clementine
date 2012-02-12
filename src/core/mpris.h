@@ -20,8 +20,8 @@
 
 #include <QObject>
 
+class Application;
 class ArtLoader;
-class Player;
 
 namespace mpris {
 
@@ -32,7 +32,7 @@ class Mpris : public QObject {
   Q_OBJECT
 
 public:
-  Mpris(Player* player, ArtLoader* art_loader, QObject* parent = 0);
+  Mpris(Application* app, ArtLoader* art_loader, QObject* parent = 0);
 
 signals:
   void RaiseMainWindow();

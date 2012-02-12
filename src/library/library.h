@@ -24,6 +24,7 @@
 
 #include <boost/scoped_ptr.hpp>
 
+class Application;
 class Database;
 class LibraryBackend;
 class LibraryModel;
@@ -34,8 +35,7 @@ class Library : public QObject {
   Q_OBJECT
 
  public:
-  Library(BackgroundThread<Database>* db_thread, TaskManager* task_manager,
-          QObject* parent);
+  Library(Application* app, QObject* parent);
 
   static const char* kSongsTable;
   static const char* kDirsTable;
@@ -66,7 +66,7 @@ class Library : public QObject {
   void WatcherInitialised();
 
  private:
-  TaskManager* task_manager_;
+  Application* app_;
   LibraryBackend* backend_;
   LibraryModel* model_;
 

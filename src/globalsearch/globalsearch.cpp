@@ -30,8 +30,9 @@ const char* GlobalSearch::kSettingsGroup = "GlobalSearch";
 const int GlobalSearch::kMaxResultsPerEmission = 100;
 
 
-GlobalSearch::GlobalSearch(QObject* parent)
+GlobalSearch::GlobalSearch(Application* app, QObject* parent)
   : QObject(parent),
+    app_(app),
     next_id_(1),
     cover_loader_(new BackgroundThreadImplementation<AlbumCoverLoader, AlbumCoverLoader>(this)),
     url_provider_(new UrlSearchProvider(this))

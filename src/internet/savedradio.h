@@ -30,7 +30,7 @@ class SavedRadio : public InternetService {
   Q_OBJECT
 
  public:
-  SavedRadio(InternetModel* parent);
+  SavedRadio(Application* app, InternetModel* parent);
   ~SavedRadio();
 
   enum ItemType {

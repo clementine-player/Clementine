@@ -16,6 +16,7 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "core/application.h"
 #include "core/logging.h"
 #include "covers/albumcoverfetcher.h"
 #include "covers/albumcoverloader.h"
@@ -48,12 +49,11 @@ QSet<QString>* AlbumCoverChoiceController::sImageExtensions = NULL;
 
 AlbumCoverChoiceController::AlbumCoverChoiceController(QWidget* parent)
   : QWidget(parent),
-    cover_providers_(NULL),
-    cover_searcher_(new AlbumCoverSearcher(QIcon(":/nocover.png"), this)),
+    app_(NULL),
+    cover_searcher_(NULL),
     cover_fetcher_(NULL),
     save_file_dialog_(NULL),
-    cover_from_url_dialog_(NULL),
-    library_(NULL)
+    cover_from_url_dialog_(NULL)
 {
   cover_from_file_ = new QAction(IconLoader::Load("document-open"), tr("Load cover from disk..."), this);
   cover_to_file_ = new QAction(IconLoader::Load("document-save"), tr("Save cover to disk..."), this);
@@ -70,9 +70,11 @@ AlbumCoverChoiceController::~AlbumCoverChoiceController()
 {
 }
 
-void AlbumCoverChoiceController::SetCoverProviders(CoverProviders* cover_providers) {
-  cover_providers_ = cover_providers;
-  cover_fetcher_ = new AlbumCoverFetcher(cover_providers_, this);
+void AlbumCoverChoiceController::SetApplication(Application* app) {
+  app_ = app;
+
+  cover_fetcher_ = new AlbumCoverFetcher(app_->cover_providers(), this);
+  cover_searcher_ = new AlbumCoverSearcher(QIcon(":/nocover.png"), app, this);
   cover_searcher_->Init(cover_fetcher_);
 }
 
@@ -81,10 +83,6 @@ QList<QAction*> AlbumCoverChoiceController::GetAllActions() {
                            << separator_
                            << cover_from_url_ << search_for_cover_
                            << unset_cover_ << show_cover_;
-}
-
-void AlbumCoverChoiceController::SetLibrary(LibraryBackend* library) {
-  library_ = library;
 }
 
 QString AlbumCoverChoiceController::LoadCoverFromFile(Song* song) {
@@ -208,7 +206,7 @@ void AlbumCoverChoiceController::ShowCover(const Song& song) {
 void AlbumCoverChoiceController::SaveCover(Song* song, const QString &cover) {
   if(song->is_valid() && song->id() != -1) {
     song->set_art_manual(cover);
-    library_->UpdateManualAlbumArtAsync(song->artist(), song->album(), cover);
+    app_->library_backend()->UpdateManualAlbumArtAsync(song->artist(), song->album(), cover);
   }
 }
 

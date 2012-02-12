@@ -37,17 +37,18 @@ struct sqlite3_tokenizer_module;
 
 }
 
+class Application;
+
 class Database : public QObject {
   Q_OBJECT
 
  public:
-  Database(QObject* parent = 0, const QString& database_name = QString());
+  Database(Application* app, QObject* parent = 0,
+           const QString& database_name = QString());
 
   static const int kSchemaVersion;
   static const char* kDatabaseFilename;
   static const char* kMagicAllSongsTables;
-
-  void Stop() {}
 
   QSqlDatabase Connect();
   bool CheckErrors(const QSqlQuery& query);
@@ -78,6 +79,8 @@ class Database : public QObject {
     QString filename_;
     QString schema_;
   };
+
+  Application* app_;
 
   // Alias -> filename
   QMap<QString, AttachedDatabase> attached_databases_;
@@ -177,7 +180,8 @@ class Database : public QObject {
 
 class MemoryDatabase : public Database {
  public:
-  MemoryDatabase(QObject* parent = 0) : Database(parent, ":memory:") {}
+  MemoryDatabase(Application* app, QObject* parent = 0)
+    : Database(app, parent, ":memory:") {}
   ~MemoryDatabase() {
     // Make sure Qt doesn't reuse the same database
     QSqlDatabase::removeDatabase(Connect().connectionName());

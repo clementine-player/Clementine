@@ -24,8 +24,10 @@
 
 #include <QMenu>
 
-InternetService::InternetService(const QString& name, InternetModel* model, QObject* parent)
+InternetService::InternetService(const QString& name, Application* app,
+                                 InternetModel* model, QObject* parent)
   : QObject(parent),
+    app_(app),
     model_(model),
     name_(name),
     append_to_playlist_(NULL),

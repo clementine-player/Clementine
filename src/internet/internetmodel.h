@@ -25,6 +25,7 @@
 #include "ui/settingsdialog.h"
 #include "widgets/multiloadingindicator.h"
 
+class Application;
 class CoverProviders;
 class Database;
 class GlobalSearch;
@@ -42,9 +43,7 @@ class InternetModel : public QStandardItemModel {
   Q_OBJECT
 
 public:
-  InternetModel(BackgroundThread<Database>* db_thread, TaskManager* task_manager,
-             PlayerInterface* player, CoverProviders* cover_providers,
-             GlobalSearch* global_search, QObject* parent = 0);
+  InternetModel(Application* app, QObject* parent = 0);
 
   enum Role {
     // Services can use this role to distinguish between different types of
@@ -147,12 +146,8 @@ public:
                        const QPoint& global_pos);
   void ReloadSettings();
 
-  BackgroundThread<Database>* db_thread() const { return db_thread_; }
+  Application* app() const { return app_; }
   MergedProxyModel* merged_model() const { return merged_model_; }
-  TaskManager* task_manager() const { return task_manager_; }
-  PlayerInterface* player() const { return player_; }
-  CoverProviders* cover_providers() const { return cover_providers_; }
-  GlobalSearch* global_search() const { return global_search_; }
 
 signals:
   void StreamError(const QString& message);
@@ -166,12 +161,9 @@ private slots:
 
 private:
   static QMap<QString, InternetService*>* sServices;
-  BackgroundThread<Database>* db_thread_;
+
+  Application* app_;
   MergedProxyModel* merged_model_;
-  TaskManager* task_manager_;
-  PlayerInterface* player_;
-  CoverProviders* cover_providers_;
-  GlobalSearch* global_search_;
 };
 
 #endif // INTERNETMODEL_H

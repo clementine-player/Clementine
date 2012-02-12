@@ -34,6 +34,7 @@
 
 #include <boost/scoped_ptr.hpp>
 
+class Application;
 class AlbumCoverLoader;
 class LibraryDirectoryModel;
 class LibraryBackend;
@@ -46,7 +47,7 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
   Q_ENUMS(GroupBy);
 
  public:
-  LibraryModel(LibraryBackend* backend, TaskManager* task_manager,
+  LibraryModel(LibraryBackend* backend, Application* app,
                QObject* parent = 0);
   ~LibraryModel();
 
@@ -228,7 +229,7 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
 
  private:
   LibraryBackend* backend_;
-  TaskManager* task_manager_;
+  Application* app_;
   LibraryDirectoryModel* dir_model_;
   bool show_smart_playlists_;
   DefaultGenerators default_smart_playlists_;

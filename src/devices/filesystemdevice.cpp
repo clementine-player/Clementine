@@ -18,6 +18,7 @@
 #include "devicelister.h"
 #include "devicemanager.h"
 #include "filesystemdevice.h"
+#include "core/application.h"
 #include "library/librarybackend.h"
 #include "library/librarymodel.h"
 #include "library/librarywatcher.h"
@@ -27,9 +28,10 @@
 FilesystemDevice::FilesystemDevice(
     const QUrl& url, DeviceLister* lister,
     const QString& unique_id, DeviceManager* manager,
+    Application* app,
     int database_id, bool first_time)
       : FilesystemMusicStorage(url.toLocalFile()),
-        ConnectedDevice(url, lister, unique_id, manager, database_id, first_time),
+        ConnectedDevice(url, lister, unique_id, manager, app, database_id, first_time),
         watcher_(new BackgroundThreadImplementation<LibraryWatcher, LibraryWatcher>(this))
 {
   // Create the library watcher
@@ -37,7 +39,7 @@ FilesystemDevice::FilesystemDevice(
   watcher_->Worker()->set_device_name(manager->data(manager->index(
       manager->FindDeviceById(unique_id)), DeviceManager::Role_FriendlyName).toString());
   watcher_->Worker()->set_backend(backend_);
-  watcher_->Worker()->set_task_manager(manager_->task_manager());
+  watcher_->Worker()->set_task_manager(app_->task_manager());
 
   // To make the connections below less verbose
   LibraryWatcher* watcher = watcher_->Worker().get();

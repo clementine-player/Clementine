@@ -36,6 +36,7 @@ class About;
 class AddStreamDialog;
 class AlbumCoverManager;
 class Appearance;
+class Application;
 class ArtistInfoView;
 class ArtLoader;
 class BackgroundStreams;
@@ -84,16 +85,10 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   Q_OBJECT
 
  public:
-  MainWindow(BackgroundThread<Database>* database,
-             TaskManager* task_manager,
-             PlaylistManager* playlists,
-             InternetModel* internet_model,
-             Player* player,
+  MainWindow(Application* app,
              SystemTrayIcon* tray_icon,
              OSD* osd,
              ArtLoader* art_loader,
-             CoverProviders* cover_providers,
-             GlobalSearch* global_search,
              QWidget *parent = 0);
   ~MainWindow();
 
@@ -267,25 +262,14 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   Ui_MainWindow* ui_;
   Windows7ThumbBar* thumbbar_;
 
-  Appearance* appearance_;
+  Application* app_;
   SystemTrayIcon* tray_icon_;
   OSD* osd_;
   boost::scoped_ptr<EditTagDialog> edit_tag_dialog_;
-  TaskManager* task_manager_;
   boost::scoped_ptr<About> about_dialog_;
 
-  BackgroundThread<Database>* database_;
-  CoverProviders* cover_providers_;
-  InternetModel* internet_model_;
-  PlaylistBackend* playlist_backend_;
-  PlaylistManager* playlists_;
-  Player* player_;
-  Library* library_;
   GlobalShortcuts* global_shortcuts_;
-  GlobalSearch* global_search_;
   Remote* remote_;
-
-  DeviceManager* devices_;
 
   LibraryViewContainer* library_view_;
   FileView* file_view_;

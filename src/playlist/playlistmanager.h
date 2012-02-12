@@ -26,6 +26,7 @@
 #include "core/song.h"
 #include "smartplaylists/generator_fwd.h"
 
+class Application;
 class LibraryBackend;
 class Playlist;
 class PlaylistBackend;
@@ -42,7 +43,7 @@ class PlaylistManagerInterface : public QObject {
   Q_OBJECT
 
 public:
-  PlaylistManagerInterface(QObject* parent)
+  PlaylistManagerInterface(Application* app, QObject* parent)
     : QObject(parent) {}
 
   virtual int current_id() const = 0;
@@ -65,7 +66,6 @@ public:
 
   virtual QString GetPlaylistName(int index) const = 0;
 
-  virtual TaskManager* task_manager() const = 0;
   virtual LibraryBackend* library_backend() const = 0;
   virtual PlaylistBackend* playlist_backend() const = 0;
   virtual PlaylistSequence* sequence() const = 0;
@@ -133,7 +133,7 @@ class PlaylistManager : public PlaylistManagerInterface {
   Q_OBJECT
 
 public:
-  PlaylistManager(TaskManager* task_manager, QObject *parent = 0);
+  PlaylistManager(Application* app, QObject *parent = 0);
   ~PlaylistManager();
 
   int current_id() const { return current_; }
@@ -163,7 +163,6 @@ public:
   void Init(LibraryBackend* library_backend, PlaylistBackend* playlist_backend,
             PlaylistSequence* sequence, PlaylistContainer* playlist_container);
 
-  TaskManager* task_manager() const { return task_manager_; }
   LibraryBackend* library_backend() const { return library_backend_; }
   PlaylistBackend* playlist_backend() const { return playlist_backend_; }
   PlaylistSequence* sequence() const { return sequence_; }
@@ -192,9 +191,6 @@ public slots:
   // Convenience slots that defer to either current() or active()
   void ClearCurrent();
   void ShuffleCurrent();
-  void SetActivePlaying();
-  void SetActivePaused();
-  void SetActiveStopped();
   void SetActiveStreamMetadata(const QUrl& url, const Song& song);
   // Rate current song using 0.0 - 1.0 scale.
   void RateCurrentSong(double rating);
@@ -206,6 +202,10 @@ public slots:
   void SongChangeRequestProcessed(const QUrl& url, bool valid);
 
 private slots:
+  void SetActivePlaying();
+  void SetActivePaused();
+  void SetActiveStopped();
+
   void OneOfPlaylistsChanged();
   void UpdateSummaryText();
   void SongsDiscovered(const SongList& songs);
@@ -222,7 +222,7 @@ private:
     QItemSelection selection;
   };
 
-  TaskManager* task_manager_;
+  Application* app_;
   PlaylistBackend* playlist_backend_;
   LibraryBackend* library_backend_;
   PlaylistSequence* sequence_;

@@ -31,9 +31,10 @@
 
 const char* OSD::kSettingsGroup = "OSD";
 
-OSD::OSD(SystemTrayIcon* tray_icon, QObject* parent)
+OSD::OSD(SystemTrayIcon* tray_icon, Application* app, QObject* parent)
   : QObject(parent),
     tray_icon_(tray_icon),
+    app_(app),
     timeout_msec_(5000),
     behaviour_(Native),
     show_on_volume_change_(false),

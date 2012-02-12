@@ -20,6 +20,8 @@
 #include "icecastmodel.h"
 #include "icecastservice.h"
 #include "internetmodel.h"
+#include "core/application.h"
+#include "core/database.h"
 #include "core/mergedproxymodel.h"
 #include "core/network.h"
 #include "core/taskmanager.h"
@@ -45,8 +47,8 @@ const char* IcecastService::kServiceName = "Icecast";
 const char* IcecastService::kDirectoryUrl = "http://data.clementine-player.org/icecast-directory";
 const char* IcecastService::kHomepage = "http://dir.xiph.org/";
 
-IcecastService::IcecastService(InternetModel* parent)
-    : InternetService(kServiceName, parent, parent),
+IcecastService::IcecastService(Application* app, InternetModel* parent)
+    : InternetService(kServiceName, app, parent, parent),
       network_(new NetworkAccessManager(this)),
       context_menu_(NULL),
       backend_(NULL),
@@ -55,13 +57,13 @@ IcecastService::IcecastService(InternetModel* parent)
       load_directory_task_id_(0)
 {
   backend_ = new IcecastBackend;
-  backend_->moveToThread(parent->db_thread());
-  backend_->Init(parent->db_thread()->Worker());
+  backend_->moveToThread(app_->database()->thread());
+  backend_->Init(app_->database());
 
   model_ = new IcecastModel(backend_, this);
   filter_->SetIcecastModel(model_);
 
-  model()->global_search()->AddProvider(new IcecastSearchProvider(backend_, this));
+  app_->global_search()->AddProvider(new IcecastSearchProvider(backend_, this));
 }
 
 IcecastService::~IcecastService() {
@@ -93,7 +95,7 @@ void IcecastService::LoadDirectory() {
   RequestDirectory(QUrl(kDirectoryUrl));
 
   if (!load_directory_task_id_) {
-    load_directory_task_id_ = model()->task_manager()->StartTask(
+    load_directory_task_id_ = app_->task_manager()->StartTask(
         tr("Downloading Icecast directory"));
   }
 }
@@ -219,7 +221,7 @@ void IcecastService::ParseDirectoryFinished() {
   backend_->ClearAndAddStations(all_stations);
   delete watcher;
 
-  model()->task_manager()->SetTaskFinished(load_directory_task_id_);
+  app_->task_manager()->SetTaskFinished(load_directory_task_id_);
   load_directory_task_id_ = 0;
 }
 

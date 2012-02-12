@@ -28,6 +28,7 @@
 #include <boost/shared_ptr.hpp>
 
 class AlbumCoverLoader;
+class Application;
 class Ui_AlbumCoverSearcher;
 
 class QModelIndex;
@@ -57,7 +58,7 @@ class AlbumCoverSearcher : public QDialog {
   Q_OBJECT
 
 public:
-  AlbumCoverSearcher(const QIcon& no_cover_icon, QWidget* parent);
+  AlbumCoverSearcher(const QIcon& no_cover_icon, Application* app, QWidget* parent);
   ~AlbumCoverSearcher();
 
   enum Role {
@@ -85,6 +86,7 @@ private slots:
 private:
   Ui_AlbumCoverSearcher* ui_;
 
+  Application* app_;
   QStandardItemModel* model_;
 
   QIcon no_cover_icon_;

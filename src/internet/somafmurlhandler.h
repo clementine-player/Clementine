@@ -20,6 +20,7 @@
 
 #include "core/urlhandler.h"
 
+class Application;
 class SomaFMService;
 
 
@@ -27,7 +28,7 @@ class SomaFMUrlHandler : public UrlHandler {
   Q_OBJECT
 
 public:
-  SomaFMUrlHandler(SomaFMService* service, QObject* parent);
+  SomaFMUrlHandler(Application* app, SomaFMService* service, QObject* parent);
 
   QString scheme() const { return "somafm"; }
   QIcon icon() const { return QIcon(":providers/somafm.png"); }
@@ -37,6 +38,7 @@ private slots:
   void LoadPlaylistFinished();
 
 private:
+  Application* app_;
   SomaFMService* service_;
 
   int task_id_;

@@ -26,13 +26,14 @@
 
 
 class AlbumCoverLoader;
+class Application;
 class UrlSearchProvider;
 
 class GlobalSearch : public QObject {
   Q_OBJECT
 
 public:
-  GlobalSearch(QObject* parent = 0);
+  GlobalSearch(Application* app, QObject* parent = 0);
 
   static const int kDelayedSearchTimeoutMs;
   static const char* kSettingsGroup;
@@ -111,6 +112,8 @@ private:
     QList<QueuedArt> queued_art_;
     bool enabled_;
   };
+
+  Application* app_;
 
   QMap<SearchProvider*, ProviderData> providers_;
 

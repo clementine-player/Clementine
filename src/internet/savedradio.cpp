@@ -17,6 +17,7 @@
 
 #include "internetmodel.h"
 #include "savedradio.h"
+#include "core/application.h"
 #include "core/mimedata.h"
 #include "globalsearch/globalsearch.h"
 #include "globalsearch/savedradiosearchprovider.h"
@@ -29,14 +30,14 @@
 const char* SavedRadio::kServiceName = "SavedRadio";
 const char* SavedRadio::kSettingsGroup = "SavedRadio";
 
-SavedRadio::SavedRadio(InternetModel* parent)
-  : InternetService(kServiceName, parent, parent),
+SavedRadio::SavedRadio(Application* app, InternetModel* parent)
+  : InternetService(kServiceName, app, parent, parent),
     context_menu_(NULL),
     root_(NULL)
 {
   LoadStreams();
 
-  model()->global_search()->AddProvider(new SavedRadioSearchProvider(this, this));
+  app_->global_search()->AddProvider(new SavedRadioSearchProvider(this, this));
 }
 
 SavedRadio::~SavedRadio() {

@@ -24,20 +24,16 @@
 #endif // Q_OS_WIN32
 
 #include "config.h"
-#include "core/appearance.h"
+#include "core/application.h"
 #include "core/commandlineoptions.h"
 #include "core/crashreporting.h"
-#include "core/database.h"
 #include "core/encoding.h"
 #include "core/logging.h"
 #include "core/mac_startup.h"
 #include "core/network.h"
 #include "core/networkproxyfactory.h"
-#include "core/player.h"
 #include "core/potranslator.h"
 #include "core/song.h"
-#include "core/tagreaderclient.h"
-#include "core/taskmanager.h"
 #include "core/ubuntuunityhack.h"
 #include "core/utilities.h"
 #include "covers/albumcoverfetcher.h"
@@ -46,13 +42,10 @@
 #include "covers/artloader.h"
 #include "covers/coverproviders.h"
 #include "engines/enginebase.h"
-#include "globalsearch/globalsearch.h"
 #include "internet/digitallyimportedclient.h"
-#include "internet/internetmodel.h"
 #include "internet/somafmservice.h"
 #include "library/directory.h"
 #include "playlist/playlist.h"
-#include "playlist/playlistmanager.h"
 #include "smartplaylists/generator.h"
 #include "ui/equalizer.h"
 #include "ui/iconloader.h"
@@ -378,8 +371,7 @@ int main(int argc, char *argv[]) {
   // Icons
   IconLoader::Init();
 
-  // Appearance (UI costumization)
-  Appearance appearance;
+  Application app;
 
   Echonest::Config::instance()->setAPIKey("DFLFLJBUF4EGTXHIG");
   Echonest::Config::instance()->setNetworkAccessManager(new NetworkAccessManager);
@@ -393,28 +385,8 @@ int main(int argc, char *argv[]) {
 
   // Initialize the repository of cover providers.  Last.fm registers itself
   // when its service is created.
-  CoverProviders cover_providers;
-  cover_providers.AddProvider(new AmazonCoverProvider);
-  cover_providers.AddProvider(new DiscogsCoverProvider);
-
-  // Create the tag loader on another thread.
-  TagReaderClient* tag_reader_client = new TagReaderClient;
-
-  QThread tag_reader_thread;
-  tag_reader_thread.start();
-  tag_reader_client->moveToThread(&tag_reader_thread);
-  tag_reader_client->Start();
-
-  // Create some key objects
-  scoped_ptr<BackgroundThread<Database> > database(
-      new BackgroundThreadImplementation<Database, Database>(NULL));
-  database->Start(true);
-  TaskManager task_manager;
-  PlaylistManager playlists(&task_manager, NULL);
-  Player player(&playlists, &task_manager);
-  GlobalSearch global_search;
-  InternetModel internet_model(database.get(), &task_manager, &player,
-                               &cover_providers, &global_search, NULL);
+  app.cover_providers()->AddProvider(new AmazonCoverProvider);
+  app.cover_providers()->AddProvider(new DiscogsCoverProvider);
 
 #ifdef Q_OS_LINUX
   // In 11.04 Ubuntu decided that the system tray should be reserved for certain
@@ -425,7 +397,7 @@ int main(int argc, char *argv[]) {
 
   // Create the tray icon and OSD
   scoped_ptr<SystemTrayIcon> tray_icon(SystemTrayIcon::CreateSystemTrayIcon());
-  OSD osd(tray_icon.get());
+  OSD osd(tray_icon.get(), &app);
 
   ArtLoader art_loader;
 
@@ -435,27 +407,17 @@ int main(int argc, char *argv[]) {
   qDBusRegisterMetaType<TrackIds>();
   qDBusRegisterMetaType<QList<QByteArray> >();
 
-  mpris::Mpris mpris(&player, &art_loader);
+  mpris::Mpris mpris(&app, &art_loader);
 
-  QObject::connect(&playlists, SIGNAL(CurrentSongChanged(Song)), &art_loader, SLOT(LoadArt(Song)));
+  QObject::connect(app.playlist_manager(), SIGNAL(CurrentSongChanged(Song)), &art_loader, SLOT(LoadArt(Song)));
   QObject::connect(&art_loader, SIGNAL(ThumbnailLoaded(Song, QString, QImage)),
                    &osd, SLOT(CoverArtPathReady(Song, QString)));
 
-  GlobalSearchService global_search_service(&global_search);
+  GlobalSearchService global_search_service(app.global_search());
 #endif
 
   // Window
-  MainWindow w(
-      database.get(),
-      &task_manager,
-      &playlists,
-      &internet_model,
-      &player,
-      tray_icon.get(),
-      &osd,
-      &art_loader,
-      &cover_providers,
-      &global_search);
+  MainWindow w(&app, tray_icon.get(), &osd, &art_loader);
 #ifdef HAVE_GIO
   ScanGIOModulePath();
 #endif
@@ -466,10 +428,6 @@ int main(int argc, char *argv[]) {
   w.CommandlineOptionsReceived(options);
 
   int ret = a.exec();
-
-  tag_reader_client->deleteLater();
-  tag_reader_thread.quit();
-  tag_reader_thread.wait();
 
 #ifdef Q_OS_LINUX
   // The nvidia driver would cause Clementine (or any application that used

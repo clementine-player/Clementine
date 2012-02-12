@@ -33,7 +33,7 @@ class QMenu;
 class IcecastService : public InternetService {
   Q_OBJECT
 public:
-  IcecastService(InternetModel* parent);
+  IcecastService(Application* app, InternetModel* parent);
   ~IcecastService();
 
   static const char* kServiceName;

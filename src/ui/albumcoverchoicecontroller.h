@@ -25,9 +25,8 @@
 
 class AlbumCoverFetcher;
 class AlbumCoverSearcher;
+class Application;
 class CoverFromURLDialog;
-class CoverProviders;
-class LibraryBackend;
 class QFileDialog;
 class Song;
 
@@ -43,7 +42,7 @@ class AlbumCoverChoiceController : public QWidget {
   AlbumCoverChoiceController(QWidget* parent = 0);
   ~AlbumCoverChoiceController();
 
-  void SetCoverProviders(CoverProviders* cover_providers);
+  void SetApplication(Application* app);
 
   // Getters for all QActions implemented by this controller.
 
@@ -62,10 +61,6 @@ class AlbumCoverChoiceController : public QWidget {
   // 4. unsetting the cover manually
   // 5. showing the cover in original size
   QList<QAction*> GetAllActions();
-
-  // Sets LibraryBackend on this controller. This is necessary for the controller
-  // to work properly!
-  void SetLibrary(LibraryBackend* library);
 
   // All of the methods below require a currently selected song as an
   // input parameter. Also - LoadCoverFromFile, LoadCoverFromURL,
@@ -115,14 +110,12 @@ private:
   static bool IsKnownImageExtension(const QString& suffix);
   static QSet<QString>* sImageExtensions;
 
-  CoverProviders* cover_providers_;
+  Application* app_;
   AlbumCoverSearcher* cover_searcher_;
   AlbumCoverFetcher* cover_fetcher_;
 
   QFileDialog* save_file_dialog_;
   CoverFromURLDialog* cover_from_url_dialog_;
-
-  LibraryBackend* library_;
 
   QAction* cover_from_file_;
   QAction* cover_to_file_;

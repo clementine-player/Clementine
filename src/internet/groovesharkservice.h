@@ -33,7 +33,7 @@ class QNetworkRequest;
 class GroovesharkService : public InternetService {
   Q_OBJECT
  public:
-  GroovesharkService(InternetModel *parent);
+  GroovesharkService(Application* app, InternetModel *parent);
   ~GroovesharkService();
 
   enum Type {

@@ -72,6 +72,7 @@ set(SOURCES
   analyzers/turbine.cpp
 
   core/appearance.cpp
+  core/application.cpp
   core/backgroundstreams.cpp
   core/backgroundthread.cpp
   core/commandlineoptions.cpp
@@ -341,6 +342,7 @@ set(HEADERS
   analyzers/sonogram.h
   analyzers/turbine.h
 
+  core/application.h
   core/backgroundstreams.h
   core/backgroundthread.h
   core/crashreporting.h

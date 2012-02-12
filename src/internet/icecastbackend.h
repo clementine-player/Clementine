@@ -23,8 +23,6 @@
 #include <QObject>
 #include <QUrl>
 
-#include <boost/shared_ptr.hpp>
-
 class Database;
 
 class IcecastBackend : public QObject {
@@ -32,7 +30,7 @@ class IcecastBackend : public QObject {
 
 public:
   IcecastBackend(QObject* parent = 0);
-  void Init(boost::shared_ptr<Database> db);
+  void Init(Database* db);
 
   static const char* kTableName;
 
@@ -68,8 +66,7 @@ signals:
   void DatabaseReset();
 
 private:
-  boost::shared_ptr<Database> db_;
-
+  Database* db_;
 };
 
 #endif // ICECASTBACKEND_H

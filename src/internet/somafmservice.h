@@ -32,7 +32,7 @@ class SomaFMService : public InternetService {
   Q_OBJECT
 
 public:
-  SomaFMService(InternetModel* parent);
+  SomaFMService(Application* app, InternetModel* parent);
   ~SomaFMService();
 
   enum ItemType {

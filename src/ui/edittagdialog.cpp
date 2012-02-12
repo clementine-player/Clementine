@@ -19,6 +19,7 @@
 #include "edittagdialog.h"
 #include "trackselectiondialog.h"
 #include "ui_edittagdialog.h"
+#include "core/application.h"
 #include "core/logging.h"
 #include "core/tagreaderclient.h"
 #include "core/utilities.h"
@@ -47,10 +48,10 @@
 const char* EditTagDialog::kHintText = QT_TR_NOOP("(different across multiple songs)");
 const char* EditTagDialog::kSettingsGroup = "EditTagDialog";
 
-EditTagDialog::EditTagDialog(CoverProviders* cover_providers, QWidget* parent)
+EditTagDialog::EditTagDialog(Application* app, QWidget* parent)
   : QDialog(parent),
     ui_(new Ui_EditTagDialog),
-    cover_providers_(cover_providers),
+    app_(app),
     album_cover_choice_controller_(new AlbumCoverChoiceController(this)),
     backend_(NULL),
     loading_(false),
@@ -74,7 +75,7 @@ EditTagDialog::EditTagDialog(CoverProviders* cover_providers, QWidget* parent)
           SLOT(FetchTagSongChosen(Song, Song)));
   connect(results_dialog_, SIGNAL(finished(int)), tag_fetcher_, SLOT(Cancel()));
 
-  album_cover_choice_controller_->SetCoverProviders(cover_providers);
+  album_cover_choice_controller_->SetApplication(app_);
 
   ui_->setupUi(this);
   ui_->splitter->setSizes(QList<int>() << 200 << width() - 200);
@@ -179,6 +180,12 @@ EditTagDialog::EditTagDialog(CoverProviders* cover_providers, QWidget* parent)
       next_button_->text(),
       QKeySequence(QKeySequence::Forward).toString(QKeySequence::NativeText),
       QKeySequence(QKeySequence::MoveToNextPage).toString(QKeySequence::NativeText)));
+
+  new TagCompleter(app_->library_backend(), Playlist::Column_Artist, ui_->artist);
+  new TagCompleter(app_->library_backend(), Playlist::Column_Album, ui_->album);
+  new TagCompleter(app_->library_backend(), Playlist::Column_AlbumArtist, ui_->albumartist);
+  new TagCompleter(app_->library_backend(), Playlist::Column_Genre, ui_->genre);
+  new TagCompleter(app_->library_backend(), Playlist::Column_Composer, ui_->composer);
 }
 
 EditTagDialog::~EditTagDialog() {
@@ -273,17 +280,6 @@ void EditTagDialog::SetSongListVisibility(bool visible) {
   ui_->song_list->setVisible(visible);
   previous_button_->setEnabled(visible);
   next_button_->setEnabled(visible);
-}
-
-void EditTagDialog::SetTagCompleter(LibraryBackend* backend) {
-  backend_ = backend;
-  album_cover_choice_controller_->SetLibrary(backend);
-
-  new TagCompleter(backend, Playlist::Column_Artist, ui_->artist);
-  new TagCompleter(backend, Playlist::Column_Album, ui_->album);
-  new TagCompleter(backend, Playlist::Column_AlbumArtist, ui_->albumartist);
-  new TagCompleter(backend, Playlist::Column_Genre, ui_->genre);
-  new TagCompleter(backend, Playlist::Column_Composer, ui_->composer);
 }
 
 QVariant EditTagDialog::Data::value(const Song& song, const QString& id) {
@@ -470,7 +466,8 @@ void EditTagDialog::UpdateSummaryTab(const Song& song) {
   else
     ui_->filename->setText(song.url().toString());
 
-  album_cover_choice_controller_->search_for_cover_action()->setEnabled(cover_providers_->HasAnyProviders());
+  album_cover_choice_controller_->search_for_cover_action()->setEnabled(
+        app_->cover_providers()->HasAnyProviders());
 }
 
 void EditTagDialog::UpdateStatisticsTab(const Song& song) {

@@ -54,7 +54,7 @@ class LastFMService : public InternetService {
   friend class LastFMUrlHandler;
 
  public:
-  LastFMService(InternetModel* parent);
+  LastFMService(Application* app, InternetModel* parent);
   ~LastFMService();
 
   static const char* kServiceName;

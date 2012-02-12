@@ -19,7 +19,7 @@ class SpotifyService : public InternetService {
   Q_OBJECT
 
 public:
-  SpotifyService(InternetModel* parent);
+  SpotifyService(Application* app, InternetModel* parent);
   ~SpotifyService();
 
   enum Type {

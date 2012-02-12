@@ -19,6 +19,7 @@
 #include "database.h"
 #include "scopedtransaction.h"
 #include "utilities.h"
+#include "core/application.h"
 #include "core/logging.h"
 
 #include <QCoreApplication>
@@ -324,8 +325,9 @@ void Database::SqliteLike(sqlite3_context* context, int argc, sqlite3_value** ar
   }
 }
 
-Database::Database(QObject* parent, const QString& database_name)
+Database::Database(Application* app, QObject* parent, const QString& database_name)
   : QObject(parent),
+    app_(app),
     mutex_(QMutex::Recursive),
     injected_database_name_(database_name),
     query_hash_(0),
@@ -374,7 +376,7 @@ QSqlDatabase Database::Connect() {
     db.setDatabaseName(directory_ + "/" + kDatabaseFilename);
 
   if (!db.open()) {
-    emit Error("Database: " + db.lastError().text());
+    app_->AddError("Database: " + db.lastError().text());
     return db;
   }
 
@@ -626,7 +628,7 @@ bool Database::CheckErrors(const QSqlQuery& query) {
     qLog(Error) << "faulty query: " << query.lastQuery();
     qLog(Error) << "bound values: " << query.boundValues();
 
-    emit Error("LibraryBackend: " + last_error.text());
+    app_->AddError("LibraryBackend: " + last_error.text());
     return true;
   }
 

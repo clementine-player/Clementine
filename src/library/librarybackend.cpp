@@ -40,7 +40,7 @@ LibraryBackend::LibraryBackend(QObject *parent)
 {
 }
 
-void LibraryBackend::Init(boost::shared_ptr<Database> db, const QString& songs_table,
+void LibraryBackend::Init(Database* db, const QString& songs_table,
                           const QString& dirs_table, const QString& subdirs_table,
                           const QString& fts_table) {
   db_ = db;

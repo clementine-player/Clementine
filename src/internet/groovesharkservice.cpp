@@ -41,6 +41,7 @@
 #include "groovesharksearchplaylisttype.h"
 #include "groovesharkurlhandler.h"
 
+#include "core/application.h"
 #include "core/closure.h"
 #include "core/database.h"
 #include "core/logging.h"
@@ -79,8 +80,8 @@ const int GroovesharkService::kSongSimpleSearchLimit = 10;
 
 typedef QPair<QString, QVariant> Param;
 
-GroovesharkService::GroovesharkService(InternetModel *parent)
-  : InternetService(kServiceName, parent, parent),
+GroovesharkService::GroovesharkService(Application* app, InternetModel *parent)
+  : InternetService(kServiceName, app, parent, parent),
     url_handler_(new GroovesharkUrlHandler(this, this)),
     pending_search_playlist_(NULL),
     next_pending_search_id_(0),
@@ -107,8 +108,8 @@ GroovesharkService::GroovesharkService(InternetModel *parent)
     task_playlists_id_(0),
     task_search_id_(0) {
 
-  model()->player()->RegisterUrlHandler(url_handler_);
-  model()->player()->playlists()->RegisterSpecialPlaylistType(new GroovesharkSearchPlaylistType(this));
+  app_->player()->RegisterUrlHandler(url_handler_);
+  app_->playlist_manager()->RegisterSpecialPlaylistType(new GroovesharkSearchPlaylistType(this));
 
   search_delay_->setInterval(kSearchDelayMsec);
   search_delay_->setSingleShot(true);
@@ -122,7 +123,7 @@ GroovesharkService::GroovesharkService(InternetModel *parent)
 
   GroovesharkSearchProvider* search_provider = new GroovesharkSearchProvider(this);
   search_provider->Init(this);
-  model()->global_search()->AddProvider(search_provider);
+  app_->global_search()->AddProvider(search_provider);
 
   // Init secret: this code is ugly, but that's good as nobody is supposed to wonder what it does
   QByteArray ba = QByteArray::fromBase64(QCoreApplication::applicationName().toLatin1());
@@ -279,7 +280,7 @@ void GroovesharkService::GetAlbumSongsFinished(
 
 void GroovesharkService::DoSearch() {
   if (!task_search_id_) {
-    task_search_id_ = model()->task_manager()->StartTask(tr("Searching on Grooveshark"));
+    task_search_id_ = app_->task_manager()->StartTask(tr("Searching on Grooveshark"));
   }
 
   QList<Param> parameters;
@@ -303,7 +304,7 @@ void GroovesharkService::SearchSongsFinished() {
   SongList songs = ExtractSongs(result);
   pending_search_playlist_->Clear();
   pending_search_playlist_->InsertInternetItems(this, songs);
-  model()->task_manager()->SetTaskFinished(task_search_id_);
+  app_->task_manager()->SetTaskFinished(task_search_id_);
   task_search_id_ = 0;
 }
 
@@ -615,7 +616,7 @@ QStandardItem* GroovesharkService::CreatePlaylistItem(const QString& playlist_na
 
 void GroovesharkService::RetrieveUserPlaylists() {
   task_playlists_id_ =
-    model()->task_manager()->StartTask(tr("Retrieving Grooveshark playlists"));
+    app_->task_manager()->StartTask(tr("Retrieving Grooveshark playlists"));
   QNetworkReply* reply = CreateRequest("getUserPlaylists", QList<Param>());
 
   connect(reply, SIGNAL(finished()), SLOT(UserPlaylistsRetrieved()));
@@ -649,7 +650,7 @@ void GroovesharkService::UserPlaylistsRetrieved() {
   }
 
   if (playlists.isEmpty()) {
-    model()->task_manager()->SetTaskFinished(task_playlists_id_);
+    app_->task_manager()->SetTaskFinished(task_playlists_id_);
   }
 }
 
@@ -684,13 +685,13 @@ void GroovesharkService::PlaylistSongsRetrieved() {
   playlist_info.songs_ids_ = ExtractSongsIds(result);
 
   if (pending_retrieve_playlists_.isEmpty()) {
-    model()->task_manager()->SetTaskFinished(task_playlists_id_);
+    app_->task_manager()->SetTaskFinished(task_playlists_id_);
   }
 }
 
 void GroovesharkService::RetrieveUserFavorites() {
   int task_id =
-    model()->task_manager()->StartTask(tr("Retrieving Grooveshark favorites songs"));
+    app_->task_manager()->StartTask(tr("Retrieving Grooveshark favorites songs"));
   QNetworkReply* reply = CreateRequest("getUserFavoriteSongs", QList<Param>());
 
   NewClosure(reply, SIGNAL(finished()),
@@ -714,12 +715,12 @@ void GroovesharkService::UserFavoritesRetrieved(QNetworkReply* reply, int task_i
 
     favorites_->appendRow(child);
   }
-  model()->task_manager()->SetTaskFinished(task_id);
+  app_->task_manager()->SetTaskFinished(task_id);
 }
 
 void GroovesharkService::RetrievePopularSongs() {
   task_popular_id_ =
-    model()->task_manager()->StartTask(tr("Getting Grooveshark popular songs"));
+    app_->task_manager()->StartTask(tr("Getting Grooveshark popular songs"));
   RetrievePopularSongsMonth();
   RetrievePopularSongsToday();
 }
@@ -746,9 +747,9 @@ void GroovesharkService::PopularSongsMonthRetrieved(QNetworkReply* reply) {
     popular_month_->appendRow(child);
   }
 
-  model()->task_manager()->IncreaseTaskProgress(task_popular_id_, 50, 100);
-  if (model()->task_manager()->GetTaskProgress(task_popular_id_) >= 100) {
-    model()->task_manager()->SetTaskFinished(task_popular_id_);
+  app_->task_manager()->IncreaseTaskProgress(task_popular_id_, 50, 100);
+  if (app_->task_manager()->GetTaskProgress(task_popular_id_) >= 100) {
+    app_->task_manager()->SetTaskFinished(task_popular_id_);
   }
 }
 
@@ -774,9 +775,9 @@ void GroovesharkService::PopularSongsTodayRetrieved(QNetworkReply* reply) {
     popular_today_->appendRow(child);
   }
 
-  model()->task_manager()->IncreaseTaskProgress(task_popular_id_, 50, 100);
-  if (model()->task_manager()->GetTaskProgress(task_popular_id_) >= 100) {
-    model()->task_manager()->SetTaskFinished(task_popular_id_);
+  app_->task_manager()->IncreaseTaskProgress(task_popular_id_, 50, 100);
+  if (app_->task_manager()->GetTaskProgress(task_popular_id_) >= 100) {
+    app_->task_manager()->SetTaskFinished(task_popular_id_);
   }
 }
 
@@ -929,8 +930,8 @@ void GroovesharkService::SongMarkedAsComplete() {
 }
 
 void GroovesharkService::OpenSearchTab() {
-  model()->player()->playlists()->New(tr("Search Grooveshark"), SongList(),
-                                      GroovesharkSearchPlaylistType::kName);
+  app_->playlist_manager()->New(tr("Search Grooveshark"), SongList(),
+                                          GroovesharkSearchPlaylistType::kName);
 }
 
 void GroovesharkService::ItemDoubleClicked(QStandardItem* item) {
@@ -1096,7 +1097,7 @@ void GroovesharkService::SetPlaylistSongs(int playlist_id, const QList<int>& son
   if (!pending_retrieve_playlists_.isEmpty())
     return;
   int task_id =
-    model()->task_manager()->StartTask(tr("Update Grooveshark playlist"));
+    app_->task_manager()->StartTask(tr("Update Grooveshark playlist"));
 
   QList<Param> parameters;
 
@@ -1118,7 +1119,7 @@ void GroovesharkService::SetPlaylistSongs(int playlist_id, const QList<int>& son
 
 void GroovesharkService::PlaylistSongsSet(QNetworkReply* reply, int playlist_id, int task_id) {
   reply->deleteLater();
-  model()->task_manager()->SetTaskFinished(task_id);
+  app_->task_manager()->SetTaskFinished(task_id);
 
   QVariantMap result = ExtractResult(reply);
   if (!result["success"].toBool()) {
@@ -1267,7 +1268,7 @@ void GroovesharkService::PlaylistRenamed(QNetworkReply* reply,
 }
 
 void GroovesharkService::AddUserFavoriteSong(int song_id) {
-  int task_id = model()->task_manager()->StartTask(tr("Adding song to favorites"));
+  int task_id = app_->task_manager()->StartTask(tr("Adding song to favorites"));
   QList<Param> parameters;
   parameters << Param("songID", song_id);
   QNetworkReply* reply = CreateRequest("addUserFavoriteSong", parameters);
@@ -1278,7 +1279,7 @@ void GroovesharkService::AddUserFavoriteSong(int song_id) {
 
 void GroovesharkService::UserFavoriteSongAdded(QNetworkReply* reply, int task_id) {
   reply->deleteLater();
-  model()->task_manager()->SetTaskFinished(task_id);
+  app_->task_manager()->SetTaskFinished(task_id);
 
   QVariantMap result = ExtractResult(reply);
   if (!result["success"].toBool()) {
@@ -1325,7 +1326,7 @@ void GroovesharkService::RemoveCurrentFromFavorites() {
 }
 
 void GroovesharkService::RemoveFromFavorites(int song_id) {
-  int task_id = model()->task_manager()->StartTask(tr("Removing song from favorites"));
+  int task_id = app_->task_manager()->StartTask(tr("Removing song from favorites"));
   QList<Param> parameters;
   parameters << Param("songIDs", QVariantList() << QVariant(song_id));
   QNetworkReply* reply = CreateRequest("removeUserFavoriteSongs", parameters);
@@ -1334,7 +1335,7 @@ void GroovesharkService::RemoveFromFavorites(int song_id) {
 }
 
 void GroovesharkService::SongRemovedFromFavorites(QNetworkReply* reply, int task_id) {
-  model()->task_manager()->SetTaskFinished(task_id);
+  app_->task_manager()->SetTaskFinished(task_id);
   reply->deleteLater();
 
   QVariantMap result = ExtractResult(reply);
