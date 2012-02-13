@@ -589,12 +589,12 @@ void GstEnginePipeline::BufferingMessageReceived(GstMessage* msg) {
     buffering_ = true;
     emit BufferingStarted();
 
-    gst_element_set_state(pipeline_, GST_STATE_PAUSED);
+    SetState(GST_STATE_PAUSED);
   } else if (percent == 100 && buffering_) {
     buffering_ = false;
     emit BufferingFinished();
 
-    gst_element_set_state(pipeline_, GST_STATE_PLAYING);
+    SetState(GST_STATE_PLAYING);
   } else if (buffering_) {
     emit BufferingProgress(percent);
   }
