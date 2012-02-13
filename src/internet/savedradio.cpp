@@ -37,7 +37,7 @@ SavedRadio::SavedRadio(Application* app, InternetModel* parent)
 {
   LoadStreams();
 
-  app_->global_search()->AddProvider(new SavedRadioSearchProvider(this, this));
+  app_->global_search()->AddProvider(new SavedRadioSearchProvider(this, app_, this));
 }
 
 SavedRadio::~SavedRadio() {

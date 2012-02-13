@@ -102,8 +102,7 @@ MagnatuneService::MagnatuneService(Application* app, InternetModel* parent)
       tr("Magnatune"),
       "magnatune",
       QIcon(":/providers/magnatune.png"),
-      true,
-      this));
+      true, app_, this));
 }
 
 MagnatuneService::~MagnatuneService() {

@@ -15,40 +15,41 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "albumcoverloader.h"
-#include "artloader.h"
+#include "currentartloader.h"
+#include "core/application.h"
+#include "covers/albumcoverloader.h"
+#include "playlist/playlistmanager.h"
 
 #include <QDir>
 #include <QTemporaryFile>
 #include <QUrl>
 
-ArtLoader::ArtLoader(QObject* parent)
+CurrentArtLoader::CurrentArtLoader(Application* app, QObject* parent)
   : QObject(parent),
+    app_(app),
     temp_file_pattern_(QDir::tempPath() + "/clementine-art-XXXXXX.jpg"),
-    cover_loader_(new BackgroundThreadImplementation<AlbumCoverLoader, AlbumCoverLoader>(this)),
     id_(0)
 {
-  cover_loader_->Start();
-  connect(cover_loader_, SIGNAL(Initialised()), SLOT(Initialised()));
-}
+  options_.scale_output_image_ = false;
+  options_.pad_output_image_ = false;
+  options_.default_output_image_ = QImage(":nocover.png");
 
-ArtLoader::~ArtLoader() {
-}
-
-void ArtLoader::Initialised() {
-  cover_loader_->Worker()->SetScaleOutputImage(false);
-  cover_loader_->Worker()->SetPadOutputImage(false);
-  cover_loader_->Worker()->SetDefaultOutputImage(QImage(":nocover.png"));
-  connect(cover_loader_->Worker().get(), SIGNAL(ImageLoaded(quint64,QImage)),
+  connect(app_->album_cover_loader(), SIGNAL(ImageLoaded(quint64,QImage)),
           SLOT(TempArtLoaded(quint64,QImage)));
+
+  connect(app_->playlist_manager(), SIGNAL(CurrentSongChanged(Song)),
+          SLOT(LoadArt(Song)));
 }
 
-void ArtLoader::LoadArt(const Song& song) {
+CurrentArtLoader::~CurrentArtLoader() {
+}
+
+void CurrentArtLoader::LoadArt(const Song& song) {
   last_song_ = song;
-  id_ = cover_loader_->Worker()->LoadImageAsync(song);
+  id_ = app_->album_cover_loader()->LoadImageAsync(options_, last_song_);
 }
 
-void ArtLoader::TempArtLoaded(quint64 id, const QImage& image) {
+void CurrentArtLoader::TempArtLoaded(quint64 id, const QImage& image) {
   if (id != id_)
     return;
   id_ = 0;

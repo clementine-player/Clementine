@@ -20,6 +20,7 @@
 
 #include "searchprovider.h"
 #include "core/backgroundthread.h"
+#include "covers/albumcoverloaderoptions.h"
 
 class AlbumCoverLoader;
 class GroovesharkService;
@@ -28,7 +29,7 @@ class GroovesharkSearchProvider : public SearchProvider {
   Q_OBJECT
 
  public:
-  explicit GroovesharkSearchProvider(QObject* parent = 0);
+  explicit GroovesharkSearchProvider(Application* app, QObject* parent = 0);
   void Init(GroovesharkService* service);
 
   // SearchProvider
@@ -51,7 +52,7 @@ class GroovesharkSearchProvider : public SearchProvider {
   GroovesharkService* service_;
   QMap<int, PendingState> pending_searches_;
 
-  BackgroundThread<AlbumCoverLoader>* cover_loader_;
+  AlbumCoverLoaderOptions cover_loader_options_;
   QMap<quint64, int> cover_loader_tasks_;
 };
 

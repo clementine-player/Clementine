@@ -20,8 +20,10 @@
 
 #include <QObject>
 
+class AlbumCoverLoader;
 class Appearance;
 class CoverProviders;
+class CurrentArtLoader;
 class Database;
 class DeviceManager;
 class GlobalSearch;
@@ -45,11 +47,13 @@ public:
 
   TagReaderClient* tag_reader_client() const { return tag_reader_client_; }
   Database* database() const { return database_; }
+  AlbumCoverLoader* album_cover_loader() const { return album_cover_loader_; }
   Appearance* appearance() const { return appearance_; }
   CoverProviders* cover_providers() const { return cover_providers_; }
   TaskManager* task_manager() const { return task_manager_; }
   Player* player() const { return player_; }
   PlaylistManager* playlist_manager() const { return playlist_manager_; }
+  CurrentArtLoader* current_art_loader() const { return current_art_loader_; }
   GlobalSearch* global_search() const { return global_search_; }
   InternetModel* internet_model() const { return internet_model_; }
 
@@ -60,6 +64,9 @@ public:
   LibraryBackend* library_backend() const;
   LibraryModel* library_model() const;
 
+  void MoveToNewThread(QObject* object);
+  void MoveToThread(QObject* object, QThread* thread);
+
 public slots:
   void AddError(const QString& message);
 
@@ -67,17 +74,15 @@ signals:
   void ErrorAdded(const QString& message);
 
 private:
-  void MoveToNewThread(QObject* object);
-  void MoveToThread(QObject* object, QThread* thread);
-
-private:
   TagReaderClient* tag_reader_client_;
   Database* database_;
+  AlbumCoverLoader* album_cover_loader_;
   Appearance* appearance_;
   CoverProviders* cover_providers_;
   TaskManager* task_manager_;
   Player* player_;
   PlaylistManager* playlist_manager_;
+  CurrentArtLoader* current_art_loader_;
   GlobalSearch* global_search_;
   InternetModel* internet_model_;
 

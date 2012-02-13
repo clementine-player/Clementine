@@ -125,8 +125,7 @@ JamendoService::JamendoService(Application* app, InternetModel* parent)
       tr("Jamendo"),
       "jamendo",
       QIcon(":/providers/jamendo.png"),
-      false,
-      this));
+      false, app_, this));
 }
 
 JamendoService::~JamendoService() {

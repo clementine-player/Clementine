@@ -22,8 +22,8 @@
 #include "internet/spotifyservice.h"
 #include "playlist/songmimedata.h"
 
-SpotifySearchProvider::SpotifySearchProvider(QObject* parent)
-  : SearchProvider(parent),
+SpotifySearchProvider::SpotifySearchProvider(Application* app, QObject* parent)
+  : SearchProvider(app, parent),
     server_(NULL),
     service_(NULL)
 {

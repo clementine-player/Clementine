@@ -39,7 +39,6 @@
 #include "covers/albumcoverfetcher.h"
 #include "covers/amazoncoverprovider.h"
 #include "covers/discogscoverprovider.h"
-#include "covers/artloader.h"
 #include "covers/coverproviders.h"
 #include "engines/enginebase.h"
 #include "internet/digitallyimportedclient.h"
@@ -399,25 +398,19 @@ int main(int argc, char *argv[]) {
   scoped_ptr<SystemTrayIcon> tray_icon(SystemTrayIcon::CreateSystemTrayIcon());
   OSD osd(tray_icon.get(), &app);
 
-  ArtLoader art_loader;
-
 #ifdef HAVE_DBUS
   qDBusRegisterMetaType<QImage>();
   qDBusRegisterMetaType<TrackMetadata>();
   qDBusRegisterMetaType<TrackIds>();
   qDBusRegisterMetaType<QList<QByteArray> >();
 
-  mpris::Mpris mpris(&app, &art_loader);
-
-  QObject::connect(app.playlist_manager(), SIGNAL(CurrentSongChanged(Song)), &art_loader, SLOT(LoadArt(Song)));
-  QObject::connect(&art_loader, SIGNAL(ThumbnailLoaded(Song, QString, QImage)),
-                   &osd, SLOT(CoverArtPathReady(Song, QString)));
+  mpris::Mpris mpris(&app);
 
   GlobalSearchService global_search_service(app.global_search());
 #endif
 
   // Window
-  MainWindow w(&app, tray_icon.get(), &osd, &art_loader);
+  MainWindow w(&app, tray_icon.get(), &osd);
 #ifdef HAVE_GIO
   ScanGIOModulePath();
 #endif

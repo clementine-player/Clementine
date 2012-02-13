@@ -15,27 +15,30 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ARTLOADER_H
-#define ARTLOADER_H
+#ifndef CURRENTARTLOADER_H
+#define CURRENTARTLOADER_H
 
-#include "core/backgroundthread.h"
 #include "core/song.h"
+#include "covers/albumcoverloaderoptions.h"
 
 #include <QObject>
 
 #include <boost/scoped_ptr.hpp>
 
-class AlbumCoverLoader;
+class Application;
 
 class QImage;
 class QTemporaryFile;
 
-class ArtLoader : public QObject {
+class CurrentArtLoader : public QObject {
   Q_OBJECT
 
 public:
-  ArtLoader(QObject* parent = 0);
-  ~ArtLoader();
+  CurrentArtLoader(Application* app, QObject* parent = 0);
+  ~CurrentArtLoader();
+
+  const AlbumCoverLoaderOptions& options() const { return options_; }
+  const Song& last_song() const { return last_song_; }
 
 public slots:
   void LoadArt(const Song& song);
@@ -45,18 +48,19 @@ signals:
   void ThumbnailLoaded(const Song& song, const QString& uri, const QImage& image);
 
 private slots:
-  void Initialised();
   void TempArtLoaded(quint64 id, const QImage& image);
 
 private:
+  Application* app_;
+  AlbumCoverLoaderOptions options_;
+
   QString temp_file_pattern_;
 
   boost::scoped_ptr<QTemporaryFile> temp_art_;
   boost::scoped_ptr<QTemporaryFile> temp_art_thumbnail_;
-  BackgroundThread<AlbumCoverLoader>* cover_loader_;
   quint64 id_;
 
   Song last_song_;
 };
 
-#endif // ARTLOADER_H
+#endif // CURRENTARTLOADER_H

@@ -26,9 +26,11 @@
 class GroovesharkUrlHandler;
 class NetworkAccessManager;
 class Playlist;
+
 class QMenu;
-class QSortFilterProxyModel;
+class QNetworkReply;
 class QNetworkRequest;
+class QSortFilterProxyModel;
 
 class GroovesharkService : public InternetService {
   Q_OBJECT

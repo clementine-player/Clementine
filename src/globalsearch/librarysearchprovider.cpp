@@ -29,8 +29,9 @@ LibrarySearchProvider::LibrarySearchProvider(LibraryBackendInterface* backend,
                                              const QString& id,
                                              const QIcon& icon,
                                              bool enabled_by_default,
+                                             Application* app,
                                              QObject* parent)
-  : BlockingSearchProvider(parent),
+  : BlockingSearchProvider(app, parent),
     backend_(backend)
 {
   Hints hints = WantsSerialisedArtQueries | ArtIsInSongMetadata |

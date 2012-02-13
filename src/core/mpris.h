@@ -21,7 +21,6 @@
 #include <QObject>
 
 class Application;
-class ArtLoader;
 
 namespace mpris {
 
@@ -32,7 +31,7 @@ class Mpris : public QObject {
   Q_OBJECT
 
 public:
-  Mpris(Application* app, ArtLoader* art_loader, QObject* parent = 0);
+  Mpris(Application* app, QObject* parent = 0);
 
 signals:
   void RaiseMainWindow();

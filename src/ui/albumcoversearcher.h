@@ -18,8 +18,8 @@
 #ifndef ALBUMCOVERSEARCHER_H
 #define ALBUMCOVERSEARCHER_H
 
-#include "core/backgroundthread.h"
 #include "covers/albumcoverfetcher.h"
+#include "covers/albumcoverloaderoptions.h"
 
 #include <QDialog>
 #include <QIcon>
@@ -90,7 +90,7 @@ private:
   QStandardItemModel* model_;
 
   QIcon no_cover_icon_;
-  BackgroundThread<AlbumCoverLoader>* loader_;
+  AlbumCoverLoaderOptions options_;
   AlbumCoverFetcher* fetcher_;
 
   quint64 id_;

@@ -75,8 +75,7 @@ LibraryModel::LibraryModel(LibraryBackend* backend, Application* app,
     playlist_icon_(":/icons/22x22/x-clementine-albums.png"),
     init_task_id_(-1),
     use_pretty_covers_(false),
-    show_dividers_(true),
-    cover_loader_(new BackgroundThreadImplementation<AlbumCoverLoader, AlbumCoverLoader>(this))
+    show_dividers_(true)
 {
   root_->lazy_loaded = true;
 
@@ -84,12 +83,11 @@ LibraryModel::LibraryModel(LibraryBackend* backend, Application* app,
   group_by_[1] = GroupBy_Album;
   group_by_[2] = GroupBy_None;
 
-  cover_loader_->Start(true);
-  cover_loader_->Worker()->SetDesiredHeight(kPrettyCoverSize);
-  cover_loader_->Worker()->SetPadOutputImage(true);
-  cover_loader_->Worker()->SetScaleOutputImage(true);
+  cover_loader_options_.desired_height_ = kPrettyCoverSize;
+  cover_loader_options_.pad_output_image_ = true;
+  cover_loader_options_.scale_output_image_ = true;
 
-  connect(cover_loader_->Worker().get(),
+  connect(app_->album_cover_loader(),
           SIGNAL(ImageLoaded(quint64,QImage)),
           SLOT(AlbumArtLoaded(quint64,QImage)));
 
@@ -403,7 +401,8 @@ QVariant LibraryModel::AlbumIcon(const QModelIndex& index) {
   // No art is cached - load art for the first Song in the album.
   SongList songs = GetChildSongs(index);
   if (!songs.isEmpty()) {
-    const quint64 id = cover_loader_->Worker()->LoadImageAsync(songs.first());
+    const quint64 id = app_->album_cover_loader()->LoadImageAsync(
+          cover_loader_options_, songs.first());
     pending_art_[id] = item;
   }
 

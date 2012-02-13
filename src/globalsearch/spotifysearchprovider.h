@@ -29,7 +29,7 @@ class SpotifySearchProvider : public SearchProvider {
   Q_OBJECT
 
 public:
-  SpotifySearchProvider(QObject* parent = 0);
+  SpotifySearchProvider(Application* app, QObject* parent = 0);
 
   void SearchAsync(int id, const QString& query);
   void LoadArtAsync(int id, const Result& result);

@@ -24,7 +24,7 @@
 
 class UrlSearchProvider : public SearchProvider {
 public:
-  UrlSearchProvider(QObject* parent);
+  UrlSearchProvider(Application* app, QObject* parent);
 
   bool LooksLikeUrl(const QString& query) const;
 

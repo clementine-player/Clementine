@@ -25,6 +25,7 @@
 
 #include <QDir>
 #include <QFile>
+#include <QThread>
 #include <QtDebug>
 
 #include <gpod/itdb.h>

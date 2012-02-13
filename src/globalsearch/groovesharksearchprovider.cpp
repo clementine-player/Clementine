@@ -19,13 +19,16 @@
 
 #include <QIcon>
 
+#include "core/application.h"
 #include "core/logging.h"
 #include "covers/albumcoverloader.h"
 #include "internet/groovesharkservice.h"
 #include "internet/internetsongmimedata.h"
 
-GroovesharkSearchProvider::GroovesharkSearchProvider(QObject* parent)
-    : service_(NULL) {
+GroovesharkSearchProvider::GroovesharkSearchProvider(Application* app, QObject* parent)
+    : SearchProvider(app, parent),
+      service_(NULL)
+{
 }
 
 void GroovesharkSearchProvider::Init(GroovesharkService* service) {
@@ -41,13 +44,11 @@ void GroovesharkSearchProvider::Init(GroovesharkService* service) {
   connect(service_, SIGNAL(AlbumSongsLoaded(int, SongList)),
           SLOT(AlbumSongsLoaded(int, SongList)));
 
-  cover_loader_ = new BackgroundThreadImplementation<AlbumCoverLoader, AlbumCoverLoader>(this);
-  cover_loader_->Start(true);
-  cover_loader_->Worker()->SetDesiredHeight(kArtHeight);
-  cover_loader_->Worker()->SetPadOutputImage(true);
-  cover_loader_->Worker()->SetScaleOutputImage(true);
+  cover_loader_options_.desired_height_ = kArtHeight;
+  cover_loader_options_.pad_output_image_ = true;
+  cover_loader_options_.scale_output_image_ = true;
 
-  connect(cover_loader_->Worker().get(),
+  connect(app_->album_cover_loader(),
           SIGNAL(ImageLoaded(quint64, QImage)),
           SLOT(AlbumArtLoaded(quint64, QImage)));
 }
@@ -111,7 +112,8 @@ void GroovesharkSearchProvider::MaybeSearchFinished(int id) {
 
 
 void GroovesharkSearchProvider::LoadArtAsync(int id, const Result& result) {
-  quint64 loader_id = cover_loader_->Worker()->LoadImageAsync(result.metadata_);
+  quint64 loader_id = app_->album_cover_loader()->LoadImageAsync(
+        cover_loader_options_, result.metadata_);
   cover_loader_tasks_[loader_id] = id;
 }
 

@@ -27,7 +27,8 @@ class LibrarySearchProvider : public BlockingSearchProvider {
 public:
   LibrarySearchProvider(LibraryBackendInterface* backend, const QString& name,
                         const QString& id, const QIcon& icon,
-                        bool enabled_by_default, QObject* parent = 0);
+                        bool enabled_by_default,
+                        Application* app, QObject* parent = 0);
 
   ResultList Search(int id, const QString& query);
   void LoadTracksAsync(int id, const Result& result);

@@ -26,6 +26,7 @@
 class SomaFMUrlHandler;
 
 class QNetworkAccessManager;
+class QNetworkReply;
 class QMenu;
 
 class SomaFMService : public InternetService {

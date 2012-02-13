@@ -20,8 +20,9 @@
 #include "internet/savedradio.h"
 #include "ui/iconloader.h"
 
-SavedRadioSearchProvider::SavedRadioSearchProvider(SavedRadio* service, QObject* parent)
-  : SimpleSearchProvider(parent),
+SavedRadioSearchProvider::SavedRadioSearchProvider(SavedRadio* service,
+                                                   Application* app, QObject* parent)
+  : SimpleSearchProvider(app, parent),
     service_(service)
 {
   Init(tr("Your radio streams"), "savedradio", IconLoader::Load("document-open-remote"));

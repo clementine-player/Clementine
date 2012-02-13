@@ -18,8 +18,8 @@
 #include "somafmsearchprovider.h"
 #include "internet/somafmservice.h"
 
-SomaFMSearchProvider::SomaFMSearchProvider(SomaFMService* service, QObject* parent)
-  : SimpleSearchProvider(parent),
+SomaFMSearchProvider::SomaFMSearchProvider(SomaFMService* service, Application* app, QObject* parent)
+  : SimpleSearchProvider(app, parent),
     service_(service)
 {
   Init("SomaFM", "somafm", QIcon(":/providers/somafm.png"), CanGiveSuggestions);

@@ -20,8 +20,9 @@
 #include "internet/lastfmservice.h"
 
 
-LastFMSearchProvider::LastFMSearchProvider(LastFMService* service, QObject* parent)
-  : SimpleSearchProvider(parent),
+LastFMSearchProvider::LastFMSearchProvider(LastFMService* service,
+                                           Application* app, QObject* parent)
+  : SimpleSearchProvider(app, parent),
     service_(service) {
   Init("Last.fm", "lastfm", QIcon(":last.fm/as.png"),
        CanShowConfig | CanGiveSuggestions);

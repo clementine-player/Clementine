@@ -23,6 +23,7 @@
 #include "core/logging.h"
 #include "core/utilities.h"
 #include "covers/albumcoverfetcher.h"
+#include "covers/albumcoverloader.h"
 #include "covers/coverproviders.h"
 #include "covers/coversearchstatisticsdialog.h"
 #include "library/librarybackend.h"
@@ -57,7 +58,6 @@ AlbumCoverManager::AlbumCoverManager(Application* app,
     ui_(new Ui_CoverManager),
     app_(app),
     album_cover_choice_controller_(new AlbumCoverChoiceController(this)),
-    cover_loader_(new BackgroundThreadImplementation<AlbumCoverLoader, AlbumCoverLoader>(this)),
     cover_fetcher_(new AlbumCoverFetcher(app_->cover_providers(), this, network)),
     cover_searcher_(NULL),
     artist_icon_(IconLoader::Load("x-clementine-artist")),
@@ -191,17 +191,13 @@ void AlbumCoverManager::Init() {
     ui_->splitter->setSizes(QList<int>() << 200 << width() - 200);
   }
 
-  cover_loader_->Start(true);
-  CoverLoaderInitialised();
+  connect(app_->album_cover_loader(),
+          SIGNAL(ImageLoaded(quint64,QImage)),
+          SLOT(CoverImageLoaded(quint64,QImage)));
+
   cover_searcher_->Init(cover_fetcher_);
 
   new ForceScrollPerPixel(ui_->albums, this);
-}
-
-void AlbumCoverManager::CoverLoaderInitialised() {
-  cover_loader_->Worker()->SetDefaultOutputImage(QImage());
-  connect(cover_loader_->Worker().get(), SIGNAL(ImageLoaded(quint64,QImage)),
-          SLOT(CoverImageLoaded(quint64,QImage)));
 }
 
 void AlbumCoverManager::showEvent(QShowEvent *) {
@@ -234,10 +230,9 @@ void AlbumCoverManager::closeEvent(QCloseEvent* e) {
 }
 
 void AlbumCoverManager::CancelRequests() {
+  app_->album_cover_loader()->CancelTasks(
+        QSet<quint64>::fromList(cover_loading_tasks_.keys()));
   cover_loading_tasks_.clear();
-  if (cover_loader_ && cover_loader_->Worker()) {
-    cover_loader_->Worker()->Clear();
-  }
 
   cover_fetching_tasks_.clear();
   cover_fetcher_->Clear();
@@ -278,8 +273,6 @@ void AlbumCoverManager::ResetFetchCoversButton() {
 }
 
 void AlbumCoverManager::ArtistChanged(QListWidgetItem* current) {
-  if (!cover_loader_->Worker())
-    return;
   if (!current)
     return;
 
@@ -319,7 +312,8 @@ void AlbumCoverManager::ArtistChanged(QListWidgetItem* current) {
     item->setToolTip(info.artist + " - " + info.album_name);
 
     if (!info.art_automatic.isEmpty() || !info.art_manual.isEmpty()) {
-      quint64 id = cover_loader_->Worker()->LoadImageAsync(
+      quint64 id = app_->album_cover_loader()->LoadImageAsync(
+          cover_loader_options_,
           info.art_automatic, info.art_manual, info.first_url.toLocalFile());
       item->setData(Role_PathAutomatic, info.art_automatic);
       item->setData(Role_PathManual, info.art_manual);
@@ -538,7 +532,8 @@ void AlbumCoverManager::FetchSingleCover() {
 
 
 void AlbumCoverManager::UpdateCoverInList(QListWidgetItem* item, const QString& cover) {
-  quint64 id = cover_loader_->Worker()->LoadImageAsync(QString(), cover);
+  quint64 id = app_->album_cover_loader()->LoadImageAsync(
+        cover_loader_options_, QString(), cover);
   item->setData(Role_PathManual, cover);
   cover_loading_tasks_[id] = item;
 }
@@ -712,7 +707,8 @@ void AlbumCoverManager::SaveAndSetCover(QListWidgetItem *item, const QImage &ima
   app_->library_backend()->UpdateManualAlbumArtAsync(artist, album, path);
 
   // Update the icon in our list
-  quint64 id = cover_loader_->Worker()->LoadImageAsync(QString(), path);
+  quint64 id = app_->album_cover_loader()->LoadImageAsync(
+        cover_loader_options_, QString(), path);
   item->setData(Role_PathManual, path);
   cover_loading_tasks_[id] = item;
 }

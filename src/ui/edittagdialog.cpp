@@ -57,15 +57,15 @@ EditTagDialog::EditTagDialog(Application* app, QWidget* parent)
     loading_(false),
     ignore_edits_(false),
     tag_fetcher_(new TagFetcher(this)),
-    cover_loader_(new BackgroundThreadImplementation<AlbumCoverLoader, AlbumCoverLoader>(this)),
     cover_art_id_(0),
     cover_art_is_set_(false),
     results_dialog_(new TrackSelectionDialog(this))
 {
-  cover_loader_->Start(true);
-  cover_loader_->Worker()->SetDefaultOutputImage(QImage(":nocover.png"));
-  connect(cover_loader_->Worker().get(), SIGNAL(ImageLoaded(quint64,QImage,QImage)),
+  cover_options_.default_output_image_ = QImage(":nocover.png");
+
+  connect(app_->album_cover_loader(), SIGNAL(ImageLoaded(quint64,QImage,QImage)),
           SLOT(ArtLoaded(quint64,QImage,QImage)));
+
   connect(tag_fetcher_, SIGNAL(ResultAvailable(Song, SongList)),
           results_dialog_, SLOT(FetchTagFinished(Song, SongList)),
           Qt::QueuedConnection);
@@ -421,7 +421,7 @@ static void SetDate(QLabel* label, uint time) {
 }
 
 void EditTagDialog::UpdateSummaryTab(const Song& song) {
-  cover_art_id_ = cover_loader_->Worker()->LoadImageAsync(song);
+  cover_art_id_ = app_->album_cover_loader()->LoadImageAsync(cover_options_, song);
 
   QString summary = "<b>" + Qt::escape(song.PrettyTitleWithArtist()) + "</b><br/>";
 

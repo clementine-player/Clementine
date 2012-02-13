@@ -25,7 +25,6 @@
 #include <QObject>
 
 class Application;
-class ArtLoader;
 class Playlist;
 
 struct DBusStatus {    // From Amarok.
@@ -77,7 +76,7 @@ class Mpris1 : public QObject {
   Q_OBJECT
 
 public:
-  Mpris1(Application* app, ArtLoader* art_loader, QObject* parent = 0,
+  Mpris1(Application* app, QObject* parent = 0,
          const QString& dbus_service_name = QString());
   ~Mpris1();
 

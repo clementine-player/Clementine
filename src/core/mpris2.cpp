@@ -26,7 +26,7 @@
 #include "core/mpris2_tracklist.h"
 #include "core/player.h"
 #include "core/timeconstants.h"
-#include "covers/artloader.h"
+#include "covers/currentartloader.h"
 #include "engines/enginebase.h"
 #include "playlist/playlist.h"
 #include "playlist/playlistmanager.h"
@@ -47,8 +47,7 @@ const char* Mpris2::kMprisObjectPath = "/org/mpris/MediaPlayer2";
 const char* Mpris2::kServiceName = "org.mpris.MediaPlayer2.clementine";
 const char* Mpris2::kFreedesktopPath = "org.freedesktop.DBus.Properties";
 
-Mpris2::Mpris2(Application* app, ArtLoader* art_loader,
-               Mpris1* mpris1, QObject* parent)
+Mpris2::Mpris2(Application* app, Mpris1* mpris1, QObject* parent)
   : QObject(parent),
     app_(app),
     mpris1_(mpris1)
@@ -64,7 +63,7 @@ Mpris2::Mpris2(Application* app, ArtLoader* art_loader,
 
   QDBusConnection::sessionBus().registerObject(kMprisObjectPath, this);
 
-  connect(art_loader, SIGNAL(ArtLoaded(Song,QString,QImage)), SLOT(ArtLoaded(Song,QString)));
+  connect(app_->current_art_loader(), SIGNAL(ArtLoaded(Song,QString,QImage)), SLOT(ArtLoaded(Song,QString)));
 
   connect(app_->player()->engine(), SIGNAL(StateChanged(Engine::State)), SLOT(EngineStateChanged(Engine::State)));
   connect(app_->player(), SIGNAL(VolumeChanged(int)), SLOT(VolumeChanged()));

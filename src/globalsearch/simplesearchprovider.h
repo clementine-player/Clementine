@@ -24,7 +24,7 @@ class SimpleSearchProvider : public BlockingSearchProvider {
   Q_OBJECT
 
 public:
-  SimpleSearchProvider(QObject* parent);
+  SimpleSearchProvider(Application* app, QObject* parent);
 
   static const int kDefaultResultLimit;
 

@@ -27,6 +27,7 @@
 #include <libmtp.h>
 
 #include <QFile>
+#include <QThread>
 
 bool MtpDevice::sInitialisedLibMTP = false;
 

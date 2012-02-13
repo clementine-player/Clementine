@@ -55,7 +55,7 @@ SomaFMService::SomaFMService(Application* app, InternetModel* parent)
   ReloadSettings();
 
   app_->player()->RegisterUrlHandler(url_handler_);
-  app_->global_search()->AddProvider(new SomaFMSearchProvider(this, this));
+  app_->global_search()->AddProvider(new SomaFMSearchProvider(this, app_, this));
 }
 
 SomaFMService::~SomaFMService() {

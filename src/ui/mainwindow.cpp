@@ -36,7 +36,6 @@
 #include "core/stylesheetloader.h"
 #include "core/taskmanager.h"
 #include "core/utilities.h"
-#include "covers/artloader.h"
 #include "devices/devicemanager.h"
 #include "devices/devicestatefiltermodel.h"
 #include "devices/deviceview.h"
@@ -152,7 +151,6 @@ const char* MainWindow::kAllFilesFilterSpec =
 MainWindow::MainWindow(Application* app,
                        SystemTrayIcon* tray_icon,
                        OSD* osd,
-                       ArtLoader* art_loader,
                        QWidget* parent)
   : QMainWindow(parent),
     ui_(new Ui_MainWindow),
@@ -213,7 +211,7 @@ MainWindow::MainWindow(Application* app,
   // Add global search providers
   app_->global_search()->AddProvider(new LibrarySearchProvider(
       app_->library_backend(), tr("Library"), "library",
-      IconLoader::Load("folder-sound"), true, this));
+      IconLoader::Load("folder-sound"), true, app_, this));
 
   app_->global_search()->ReloadSettings();
 
@@ -412,7 +410,6 @@ MainWindow::MainWindow(Application* app,
   connect(app_->player(), SIGNAL(VolumeChanged(int)), ui_->volume, SLOT(setValue(int)));
   connect(app_->player(), SIGNAL(ForceShowOSD(Song, bool)), SLOT(ForceShowOSD(Song, bool)));
   connect(app_->playlist_manager(), SIGNAL(CurrentSongChanged(Song)), SLOT(SongChanged(Song)));
-  connect(app_->playlist_manager(), SIGNAL(CurrentSongChanged(Song)), osd_, SLOT(SongChanged(Song)));
   connect(app_->playlist_manager(), SIGNAL(CurrentSongChanged(Song)), app_->player(), SLOT(CurrentMetadataChanged(Song)));
   connect(app_->playlist_manager(), SIGNAL(EditingFinished(QModelIndex)), SLOT(PlaylistEditFinished(QModelIndex)));
   connect(app_->playlist_manager(), SIGNAL(Error(QString)), SLOT(ShowErrorDialog(QString)));
@@ -636,7 +633,6 @@ MainWindow::MainWindow(Application* app,
   qLog(Debug) << "Creating now playing widget";
   ui_->now_playing->set_ideal_height(ui_->status_bar->sizeHint().height() +
                                      ui_->player_controls->sizeHint().height());
-  connect(app_->playlist_manager(), SIGNAL(CurrentSongChanged(Song)), ui_->now_playing, SLOT(NowPlaying(Song)));
   connect(app_->player(), SIGNAL(Stopped()), ui_->now_playing, SLOT(Stopped()));
   connect(ui_->now_playing, SIGNAL(ShowAboveStatusBarChanged(bool)),
           SLOT(NowPlayingWidgetPositionChanged(bool)));
@@ -1675,13 +1671,11 @@ void MainWindow::CommandlineOptionsReceived(const CommandlineOptions &options) {
     app_->player()->TogglePrettyOSD();
 }
 
-void MainWindow::ForceShowOSD(const Song &song, const bool toggle) {
+void MainWindow::ForceShowOSD(const Song& song, const bool toggle) {
   if (toggle) {
     osd_->SetPrettyOSDToggleMode(toggle);
-  } else {
-    osd_->ForceShowNextNotification();
   }
-  osd_->SongChanged(song);
+  osd_->ReshowCurrentSong();
 }
 
 void MainWindow::Activate() {

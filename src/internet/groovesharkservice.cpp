@@ -121,7 +121,7 @@ GroovesharkService::GroovesharkService(Application* app, InternetModel *parent)
   session_id_ = s.value("sessionid").toString();
   username_ = s.value("username").toString();
 
-  GroovesharkSearchProvider* search_provider = new GroovesharkSearchProvider(this);
+  GroovesharkSearchProvider* search_provider = new GroovesharkSearchProvider(app_, this);
   search_provider->Init(this);
   app_->global_search()->AddProvider(search_provider);
 

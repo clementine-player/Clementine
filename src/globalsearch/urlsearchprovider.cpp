@@ -24,8 +24,8 @@
 
 const char* UrlSearchProvider::kUrlRegex = "^[a-zA-Z][a-zA-Z0-9+-.]*://";
 
-UrlSearchProvider::UrlSearchProvider(QObject* parent)
-  : SearchProvider(parent),
+UrlSearchProvider::UrlSearchProvider(Application* app, QObject* parent)
+  : SearchProvider(app, parent),
     url_regex_(kUrlRegex)
 {
   QIcon icon = IconLoader::Load("applications-internet");

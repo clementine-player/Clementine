@@ -22,8 +22,8 @@
 #include <QModelIndexList>
 
 #include "config.h"
-#include "core/backgroundthread.h"
 #include "core/song.h"
+#include "covers/albumcoverloaderoptions.h"
 #include "musicbrainz/tagfetcher.h"
 #include "playlist/playlistitem.h"
 #include "widgets/lineedit.h"
@@ -31,7 +31,6 @@
 
 class Application;
 class AlbumCoverChoiceController;
-class AlbumCoverLoader;
 class LibraryBackend;
 class Ui_EditTagDialog;
 
@@ -152,7 +151,7 @@ private:
 
   TagFetcher* tag_fetcher_;
 
-  BackgroundThread<AlbumCoverLoader>* cover_loader_;
+  AlbumCoverLoaderOptions cover_options_;
   quint64 cover_art_id_;
   bool cover_art_is_set_;
 

@@ -22,8 +22,7 @@
 #include <QPixmapCache>
 
 #include "searchprovider.h"
-#include "core/backgroundthread.h"
-
+#include "covers/albumcoverloaderoptions.h"
 
 class AlbumCoverLoader;
 class Application;
@@ -126,7 +125,7 @@ private:
   QMap<int, QString> pending_art_searches_;
 
   // Used for providers with ArtIsInSongMetadata set.
-  BackgroundThread<AlbumCoverLoader>* cover_loader_;
+  AlbumCoverLoaderOptions cover_loader_options_;
   QMap<quint64, int> cover_loader_tasks_;
 
   // Special search provider that's used for queries that look like URLs

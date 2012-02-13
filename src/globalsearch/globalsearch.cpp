@@ -18,6 +18,7 @@
 #include "librarysearchprovider.h"
 #include "globalsearch.h"
 #include "urlsearchprovider.h"
+#include "core/application.h"
 #include "core/logging.h"
 #include "covers/albumcoverloader.h"
 
@@ -34,15 +35,13 @@ GlobalSearch::GlobalSearch(Application* app, QObject* parent)
   : QObject(parent),
     app_(app),
     next_id_(1),
-    cover_loader_(new BackgroundThreadImplementation<AlbumCoverLoader, AlbumCoverLoader>(this)),
-    url_provider_(new UrlSearchProvider(this))
+    url_provider_(new UrlSearchProvider(app, this))
 {
-  cover_loader_->Start(true);
-  cover_loader_->Worker()->SetDesiredHeight(SearchProvider::kArtHeight);
-  cover_loader_->Worker()->SetPadOutputImage(true);
-  cover_loader_->Worker()->SetScaleOutputImage(true);
+  cover_loader_options_.desired_height_ = SearchProvider::kArtHeight;
+  cover_loader_options_.pad_output_image_ = true;
+  cover_loader_options_.scale_output_image_ = true;
 
-  connect(cover_loader_->Worker().get(),
+  connect(app_->album_cover_loader(),
           SIGNAL(ImageLoaded(quint64,QImage)),
           SLOT(AlbumArtLoaded(quint64,QImage)));
 
@@ -212,7 +211,8 @@ int GlobalSearch::LoadArtAsync(const SearchProvider::Result& result) {
   }
 
   if (result.provider_->art_is_in_song_metadata()) {
-    quint64 loader_id = cover_loader_->Worker()->LoadImageAsync(result.metadata_);
+    quint64 loader_id = app_->album_cover_loader()->LoadImageAsync(
+          cover_loader_options_, result.metadata_);
     cover_loader_tasks_[loader_id] = id;
   } else if (providers_.contains(result.provider_) &&
              result.provider_->wants_serialised_art()) {

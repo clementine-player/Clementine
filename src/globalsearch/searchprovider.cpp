@@ -25,8 +25,9 @@
 const int SearchProvider::kArtHeight = 32;
 
 
-SearchProvider::SearchProvider(QObject* parent)
+SearchProvider::SearchProvider(Application* app, QObject* parent)
   : QObject(parent),
+    app_(app),
     hints_(0)
 {
 }
@@ -72,8 +73,8 @@ globalsearch::MatchQuality SearchProvider::MatchQuality(
   return ret;
 }
 
-BlockingSearchProvider::BlockingSearchProvider(QObject* parent)
-  : SearchProvider(parent) {
+BlockingSearchProvider::BlockingSearchProvider(Application* app, QObject* parent)
+  : SearchProvider(app, parent) {
 }
 
 void BlockingSearchProvider::SearchAsync(int id, const QString& query) {

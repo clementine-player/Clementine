@@ -37,9 +37,6 @@
 AlbumCoverLoader::AlbumCoverLoader(QObject* parent)
   : QObject(parent),
     stop_requested_(false),
-    height_(120),
-    scale_(true),
-    padding_(true),
     next_id_(0),
     network_(new NetworkAccessManager(this)),
     connected_spotify_(false)
@@ -50,16 +47,34 @@ QString AlbumCoverLoader::ImageCacheDir() {
   return Utilities::GetConfigPath(Utilities::Path_AlbumCovers);
 }
 
-void AlbumCoverLoader::Clear() {
+void AlbumCoverLoader::CancelTask(quint64 id) {
   QMutexLocker l(&mutex_);
-  tasks_.clear();
+  for (QQueue<Task>::iterator it = tasks_.begin() ; it != tasks_.end() ; ++it) {
+    if (it->id == id) {
+      tasks_.erase(it);
+      break;
+    }
+  }
 }
 
-quint64 AlbumCoverLoader::LoadImageAsync(const QString& art_automatic,
+void AlbumCoverLoader::CancelTasks(const QSet<quint64>& ids) {
+  QMutexLocker l(&mutex_);
+  for (QQueue<Task>::iterator it = tasks_.begin() ; it != tasks_.end() ; ) {
+    if (ids.contains(it->id)) {
+      it = tasks_.erase(it);
+    } else {
+      ++it;
+    }
+  }
+}
+
+quint64 AlbumCoverLoader::LoadImageAsync(const AlbumCoverLoaderOptions& options,
+                                         const QString& art_automatic,
                                          const QString& art_manual,
                                          const QString& song_filename,
                                          const QImage& embedded_image) {
   Task task;
+  task.options = options;
   task.art_automatic = art_automatic;
   task.art_manual = art_manual;
   task.song_filename = song_filename;
@@ -101,7 +116,7 @@ void AlbumCoverLoader::ProcessTask(Task *task) {
   }
 
   if (result.loaded_success) {
-    QImage scaled = ScaleAndPad(result.image);
+    QImage scaled = ScaleAndPad(task->options, result.image);
     emit ImageLoaded(task->id, scaled);
     emit ImageLoaded(task->id, scaled, result.image);
     return;
@@ -117,8 +132,9 @@ void AlbumCoverLoader::NextState(Task* task) {
     ProcessTask(task);
   } else {
     // Give up
-    emit ImageLoaded(task->id, default_);
-    emit ImageLoaded(task->id, default_, default_);
+    emit ImageLoaded(task->id, task->options.default_output_image_);
+    emit ImageLoaded(task->id, task->options.default_output_image_,
+                     task->options.default_output_image_);
   }
 }
 
@@ -126,7 +142,7 @@ AlbumCoverLoader::TryLoadResult AlbumCoverLoader::TryLoadImage(
     const Task& task) {
   // An image embedded in the song itself takes priority
   if (!task.embedded_image.isNull())
-    return TryLoadResult(false, true, ScaleAndPad(task.embedded_image));
+    return TryLoadResult(false, true, ScaleAndPad(task.options, task.embedded_image));
 
   QString filename;
   switch (task.state) {
@@ -135,14 +151,14 @@ AlbumCoverLoader::TryLoadResult AlbumCoverLoader::TryLoadImage(
   }
 
   if (filename == Song::kManuallyUnsetCover)
-    return TryLoadResult(false, true, default_);
+    return TryLoadResult(false, true, task.options.default_output_image_);
 
   if (filename == Song::kEmbeddedCover && !task.song_filename.isEmpty()) {
     const QImage taglib_image =
         TagReaderClient::Instance()->LoadEmbeddedArtBlocking(task.song_filename);
 
     if (!taglib_image.isNull())
-      return TryLoadResult(false, true, ScaleAndPad(taglib_image));
+      return TryLoadResult(false, true, ScaleAndPad(task.options, taglib_image));
   }
 
   if (filename.toLower().startsWith("http://")) {
@@ -178,7 +194,8 @@ AlbumCoverLoader::TryLoadResult AlbumCoverLoader::TryLoadImage(
   }
 
   QImage image(filename);
-  return TryLoadResult(false, !image.isNull(), image.isNull() ? default_ : image);
+  return TryLoadResult(false, !image.isNull(),
+                       image.isNull() ? task.options.default_output_image_: image);
 }
 
 void AlbumCoverLoader::SpotifyImageLoaded(const QString& id, const QImage& image) {
@@ -186,7 +203,7 @@ void AlbumCoverLoader::SpotifyImageLoaded(const QString& id, const QImage& image
     return;
 
   Task task = remote_spotify_tasks_.take(id);
-  QImage scaled = ScaleAndPad(image);
+  QImage scaled = ScaleAndPad(task.options, image);
   emit ImageLoaded(task.id, scaled);
   emit ImageLoaded(task.id, scaled, image);
 }
@@ -218,7 +235,7 @@ void AlbumCoverLoader::RemoteFetchFinished() {
     // Try to load the image
     QImage image;
     if (image.load(reply, 0)) {
-      QImage scaled = ScaleAndPad(image);
+      QImage scaled = ScaleAndPad(task.options, image);
       emit ImageLoaded(task.id, scaled);
       emit ImageLoaded(task.id, scaled, image);
       return;
@@ -228,28 +245,31 @@ void AlbumCoverLoader::RemoteFetchFinished() {
   NextState(&task);
 }
 
-QImage AlbumCoverLoader::ScaleAndPad(const QImage& image) const {
+QImage AlbumCoverLoader::ScaleAndPad(const AlbumCoverLoaderOptions& options,
+                                     const QImage& image) {
   if (image.isNull())
     return image;
 
   // Scale the image down
   QImage copy;
-  if (scale_) {
-    copy = image.scaled(QSize(height_, height_),
+  if (options.scale_output_image_) {
+    copy = image.scaled(QSize(options.desired_height_, options.desired_height_),
                         Qt::KeepAspectRatio, Qt::SmoothTransformation);
   } else {
     copy = image;
   }
 
-  if (!padding_)
+  if (!options.pad_output_image_)
     return copy;
 
   // Pad the image to height_ x height_
-  QImage padded_image(height_, height_, QImage::Format_ARGB32);
+  QImage padded_image(options.desired_height_, options.desired_height_,
+                      QImage::Format_ARGB32);
   padded_image.fill(0);
 
   QPainter p(&padded_image);
-  p.drawImage((height_ - copy.width()) / 2, (height_ - copy.height()) / 2,
+  p.drawImage((options.desired_height_ - copy.width()) / 2,
+              (options.desired_height_ - copy.height()) / 2,
               copy);
   p.end();
 
@@ -274,11 +294,9 @@ QPixmap AlbumCoverLoader::TryLoadPixmap(const QString& automatic,
   return ret;
 }
 
-void AlbumCoverLoader::SetDefaultOutputImage(const QImage &image) {
-  default_ = ScaleAndPad(image);
-}
-
-quint64 AlbumCoverLoader::LoadImageAsync(const Song &song) {
-  return LoadImageAsync(song.art_automatic(), song.art_manual(),
+quint64 AlbumCoverLoader::LoadImageAsync(const AlbumCoverLoaderOptions& options,
+                                         const Song &song) {
+  return LoadImageAsync(options,
+                        song.art_automatic(), song.art_manual(),
                         song.url().toLocalFile(), song.image());
 }

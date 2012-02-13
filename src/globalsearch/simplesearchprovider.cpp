@@ -36,8 +36,8 @@ SimpleSearchProvider::Item::Item(const Song& song, const QString& keyword)
 }
 
 
-SimpleSearchProvider::SimpleSearchProvider(QObject* parent)
-  : BlockingSearchProvider(parent),
+SimpleSearchProvider::SimpleSearchProvider(Application* app, QObject* parent)
+  : BlockingSearchProvider(app, parent),
     result_limit_(kDefaultResultLimit),
     items_dirty_(true),
     has_searched_before_(false)

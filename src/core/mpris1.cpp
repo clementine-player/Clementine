@@ -19,7 +19,7 @@
 #include "mpris_common.h"
 #include "core/application.h"
 #include "core/logging.h"
-#include "covers/artloader.h"
+#include "covers/currentartloader.h"
 
 #include <QCoreApplication>
 #include <QDBusConnection>
@@ -37,7 +37,7 @@ namespace mpris {
 
 const char* Mpris1::kDefaultDbusServiceName = "org.mpris.clementine";
 
-Mpris1::Mpris1(Application* app, ArtLoader* art_loader, QObject* parent,
+Mpris1::Mpris1(Application* app, QObject* parent,
                const QString& dbus_service_name)
   : QObject(parent),
     dbus_service_name_(dbus_service_name),
@@ -61,7 +61,7 @@ Mpris1::Mpris1(Application* app, ArtLoader* art_loader, QObject* parent,
   player_ = new Mpris1Player(app, this);
   tracklist_ = new Mpris1TrackList(app, this);
 
-  connect(art_loader, SIGNAL(ArtLoaded(const Song&, const QString&, const QImage&)),
+  connect(app->current_art_loader(), SIGNAL(ArtLoaded(const Song&, const QString&, const QImage&)),
           player_, SLOT(CurrentSongChanged(const Song&, const QString&, const QImage&)));
 }
 

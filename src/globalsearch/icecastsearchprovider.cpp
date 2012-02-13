@@ -18,8 +18,9 @@
 #include "icecastsearchprovider.h"
 #include "internet/icecastbackend.h"
 
-IcecastSearchProvider::IcecastSearchProvider(IcecastBackend* backend, QObject* parent)
-  : BlockingSearchProvider(parent),
+IcecastSearchProvider::IcecastSearchProvider(IcecastBackend* backend,
+                                             Application* app, QObject* parent)
+  : BlockingSearchProvider(app, parent),
     backend_(backend)
 {
   Init("Icecast", "icecast", QIcon(":last.fm/icon_radio.png"), DisabledByDefault);

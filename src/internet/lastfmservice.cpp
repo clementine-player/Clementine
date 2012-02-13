@@ -134,7 +134,7 @@ LastFMService::LastFMService(Application* app, InternetModel* parent)
   app_->player()->RegisterUrlHandler(url_handler_);
   app_->cover_providers()->AddProvider(new LastFmCoverProvider(this));
 
-  app_->global_search()->AddProvider(new LastFMSearchProvider(this, this));
+  app_->global_search()->AddProvider(new LastFMSearchProvider(this, app_, this));
 }
 
 LastFMService::~LastFMService() {

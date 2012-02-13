@@ -74,7 +74,7 @@ SpotifyService::SpotifyService(Application* app, InternetModel* parent)
   app_->playlist_manager()->RegisterSpecialPlaylistType(
         new SpotifySearchPlaylistType(this));
 
-  app_->global_search()->AddProvider(new SpotifySearchProvider(this));
+  app_->global_search()->AddProvider(new SpotifySearchProvider(app_, this));
 
   search_delay_->setInterval(kSearchDelayMsec);
   search_delay_->setSingleShot(true);

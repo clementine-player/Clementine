@@ -109,11 +109,11 @@ set(SOURCES
   covers/albumcoverfetchersearch.cpp
   covers/albumcoverloader.cpp
   covers/amazoncoverprovider.cpp
-  covers/artloader.cpp
   covers/coverprovider.cpp
   covers/coverproviders.cpp
   covers/coversearchstatistics.cpp
   covers/coversearchstatisticsdialog.cpp
+  covers/currentartloader.cpp
   covers/discogscoverprovider.cpp
   covers/kittenloader.cpp
 
@@ -367,10 +367,10 @@ set(HEADERS
   covers/albumcoverfetchersearch.h
   covers/albumcoverloader.h
   covers/amazoncoverprovider.h
-  covers/artloader.h
   covers/coverprovider.h
   covers/coverproviders.h
   covers/coversearchstatisticsdialog.h
+  covers/currentartloader.h
   covers/discogscoverprovider.h
   covers/kittenloader.h
 

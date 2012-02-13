@@ -25,9 +25,9 @@
 #include "libraryquery.h"
 #include "librarywatcher.h"
 #include "sqlrow.h"
-#include "core/backgroundthread.h"
 #include "core/simpletreemodel.h"
 #include "core/song.h"
+#include "covers/albumcoverloaderoptions.h"
 #include "engines/engine_fwd.h"
 #include "playlist/playlistmanager.h"
 #include "smartplaylists/generator_fwd.h"
@@ -269,7 +269,7 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
   bool use_pretty_covers_;
   bool show_dividers_;
 
-  BackgroundThread<AlbumCoverLoader>* cover_loader_;
+  AlbumCoverLoaderOptions cover_loader_options_;
   QMap<quint64, LibraryItem*> pending_art_;
 };
 

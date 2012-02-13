@@ -21,7 +21,9 @@
 #include "player.h"
 #include "tagreaderclient.h"
 #include "taskmanager.h"
+#include "covers/albumcoverloader.h"
 #include "covers/coverproviders.h"
+#include "covers/currentartloader.h"
 #include "devices/devicemanager.h"
 #include "internet/internetmodel.h"
 #include "globalsearch/globalsearch.h"
@@ -34,11 +36,13 @@ Application::Application(QObject* parent)
   : QObject(parent),
     tag_reader_client_(NULL),
     database_(NULL),
+    album_cover_loader_(NULL),
     appearance_(NULL),
     cover_providers_(NULL),
     task_manager_(NULL),
     player_(NULL),
     playlist_manager_(NULL),
+    current_art_loader_(NULL),
     global_search_(NULL),
     internet_model_(NULL),
     library_(NULL),
@@ -52,11 +56,15 @@ Application::Application(QObject* parent)
   database_ = new Database(this, this);
   MoveToNewThread(database_);
 
+  album_cover_loader_ = new AlbumCoverLoader(this);
+  MoveToNewThread(album_cover_loader_);
+
   appearance_ = new Appearance(this);
   cover_providers_ = new CoverProviders(this);
   task_manager_ = new TaskManager(this);
   player_ = new Player(this, this);
   playlist_manager_ = new PlaylistManager(this, this);
+  current_art_loader_ = new CurrentArtLoader(this, this);
   global_search_ = new GlobalSearch(this, this);
   internet_model_ = new InternetModel(this, this);
 

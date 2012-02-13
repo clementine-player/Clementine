@@ -24,9 +24,8 @@
 
 #include "gtest/gtest_prod.h"
 
-#include "core/backgroundthread.h"
 #include "core/song.h"
-#include "covers/albumcoverloader.h"
+#include "covers/albumcoverloaderoptions.h"
 #include "covers/coversearchstatistics.h"
 
 class AlbumCoverChoiceController;
@@ -77,7 +76,6 @@ class AlbumCoverManager : public QMainWindow {
 
  private slots:
   void ArtistChanged(QListWidgetItem* current);
-  void CoverLoaderInitialised();
   void CoverImageLoaded(quint64 id, const QImage& image);
   void UpdateFilter();
   void FetchAlbumCovers();
@@ -151,7 +149,7 @@ class AlbumCoverManager : public QMainWindow {
   QAction* filter_with_covers_;
   QAction* filter_without_covers_;
 
-  BackgroundThread<AlbumCoverLoader>* cover_loader_;
+  AlbumCoverLoaderOptions cover_loader_options_;
   QMap<quint64, QListWidgetItem*> cover_loading_tasks_;
 
   AlbumCoverFetcher* cover_fetcher_;

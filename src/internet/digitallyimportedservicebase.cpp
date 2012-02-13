@@ -63,7 +63,8 @@ DigitallyImportedServiceBase::DigitallyImportedServiceBase(
   ReloadSettings();
 
   model->app()->player()->RegisterUrlHandler(url_handler_);
-  model->app()->global_search()->AddProvider(new DigitallyImportedSearchProvider(this, this));
+  model->app()->global_search()->AddProvider(
+        new DigitallyImportedSearchProvider(this, app_, this));
 
   basic_playlists_
       << "http://%1/public3/%2.pls"

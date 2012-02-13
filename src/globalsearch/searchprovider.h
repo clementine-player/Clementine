@@ -25,6 +25,7 @@
 #include "core/song.h"
 #include "globalsearch/common.h"
 
+class Application;
 class MimeData;
 
 
@@ -32,7 +33,7 @@ class SearchProvider : public QObject {
   Q_OBJECT
 
 public:
-  SearchProvider(QObject* parent = 0);
+  SearchProvider(Application* app, QObject* parent = 0);
 
   static const int kArtHeight;
 
@@ -177,6 +178,8 @@ protected:
     }
   };
 
+protected:
+  Application* app_;
 
 private:
   QString name_;
@@ -194,7 +197,7 @@ class BlockingSearchProvider : public SearchProvider {
   Q_OBJECT
 
 public:
-  BlockingSearchProvider(QObject* parent = 0);
+  BlockingSearchProvider(Application* app, QObject* parent = 0);
 
   void SearchAsync(int id, const QString& query);
   virtual ResultList Search(int id, const QString& query) = 0;

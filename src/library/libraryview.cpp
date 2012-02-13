@@ -380,7 +380,7 @@ void LibraryView::ShowInVarious(bool on) {
   // if there are other Artists in this album and prompt the user if they'd like them moved, too
   if(on && albums.keys().count() == 1) {
     const QString album = albums.keys().first();
-    QList<Song> all_of_album = library_->backend()->GetSongsByAlbum(album);
+    QList<Song> all_of_album = app_->library_backend()->GetSongsByAlbum(album);
     QSet<QString> other_artists;
     foreach (const Song& s, all_of_album) {
       if(!albums.contains(album, s.artist()) && !other_artists.contains(s.artist())) {

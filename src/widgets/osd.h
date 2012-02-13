@@ -24,9 +24,7 @@
 
 #include "config.h"
 #include "engines/engine_fwd.h"
-#include "core/backgroundthread.h"
 #include "core/song.h"
-#include "covers/albumcoverloader.h"
 #include "playlist/playlistsequence.h"
 
 class Application;
@@ -71,8 +69,6 @@ class OSD : public QObject {
  public slots:
   void ReloadSettings();
 
-  void ForceShowNextNotification() { force_show_next_ = true; }
-  void SongChanged(const Song& song);
   void Paused();
   void Stopped();
   void PlaylistFinished();
@@ -80,6 +76,8 @@ class OSD : public QObject {
   void MagnatuneDownloadFinished(const QStringList& albums);
   void RepeatModeChanged(PlaylistSequence::RepeatMode mode);
   void ShuffleModeChanged(PlaylistSequence::ShuffleMode mode);
+
+  void ReshowCurrentSong();
 
 #ifdef HAVE_WIIMOTEDEV
   void WiiremoteActived(int id);
@@ -93,12 +91,6 @@ class OSD : public QObject {
   void ShowPreview(const Behaviour type, const QString& line1, const QString& line2, const Song& song);
 
  private:
-  struct WaitingForAlbumArt {
-    QString summary;
-    QString message;
-    QString icon;
-  };
-
   void ShowMessage(const QString& summary,
                    const QString& message = QString(),
                    const QString& icon = QString(),
@@ -114,10 +106,7 @@ class OSD : public QObject {
 
  private slots:
   void CallFinished(QDBusPendingCallWatcher* watcher);
-  void CoverLoaderInitialised();
-  void CoverArtPathReady(const Song& song, const QString& image_path);
-  void AlbumArtLoaded(quint64 id, const QImage& image);
-  void AlbumArtLoaded(const WaitingForAlbumArt info, const QImage& image);
+  void AlbumArtLoaded(const Song& song, const QString& uri, const QImage& image);
 
  private:
   SystemTrayIcon* tray_icon_;
@@ -137,8 +126,9 @@ class OSD : public QObject {
 
   OSDPretty* pretty_popup_;
 
-  BackgroundThread<AlbumCoverLoader>* cover_loader_;
-  QMap<quint64, WaitingForAlbumArt> waiting_for_album_art_;
+  Song last_song_;
+  QString last_image_uri_;
+  QImage last_image_;
 
 #ifdef Q_OS_DARWIN
   class GrowlNotificationWrapper;

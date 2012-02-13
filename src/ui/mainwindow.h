@@ -38,7 +38,6 @@ class AlbumCoverManager;
 class Appearance;
 class Application;
 class ArtistInfoView;
-class ArtLoader;
 class BackgroundStreams;
 class CommandlineOptions;
 class CoverProviders;
@@ -88,7 +87,6 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   MainWindow(Application* app,
              SystemTrayIcon* tray_icon,
              OSD* osd,
-             ArtLoader* art_loader,
              QWidget *parent = 0);
   ~MainWindow();
 

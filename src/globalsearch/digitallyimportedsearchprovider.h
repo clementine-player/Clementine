@@ -25,7 +25,7 @@ class DigitallyImportedServiceBase;
 class DigitallyImportedSearchProvider : public SimpleSearchProvider {
 public:
   DigitallyImportedSearchProvider(DigitallyImportedServiceBase* service,
-                                  QObject* parent);
+                                  Application* app, QObject* parent);
 
   void ShowConfig();
 

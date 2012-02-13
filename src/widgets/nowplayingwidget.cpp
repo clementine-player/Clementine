@@ -20,6 +20,7 @@
 #include "core/application.h"
 #include "covers/albumcoverloader.h"
 #include "covers/coverproviders.h"
+#include "covers/currentartloader.h"
 #include "covers/kittenloader.h"
 #include "library/librarybackend.h"
 #include "ui/albumcoverchoicecontroller.h"
@@ -60,21 +61,19 @@ NowPlayingWidget::NowPlayingWidget(QWidget* parent)
   : QWidget(parent),
     app_(NULL),
     album_cover_choice_controller_(new AlbumCoverChoiceController(this)),
-    cover_loader_(new BackgroundThreadImplementation<AlbumCoverLoader, AlbumCoverLoader>(this)),
-    kitten_loader_(NULL),
     mode_(SmallSongDetails),
     menu_(new QMenu(this)),
     above_statusbar_action_(NULL),
     visible_(false),
     small_ideal_height_(0),
-    cover_height_(0),
     show_hide_animation_(new QTimeLine(500, this)),
     fade_animation_(new QTimeLine(1000, this)),
-    load_cover_id_(0),
     details_(new QTextDocument(this)),
     previous_track_opacity_(0.0),
     bask_in_his_glory_action_(NULL),
-    aww_(false)
+    aww_(false),
+    kittens_(NULL),
+    pending_kitten_(0)
 {
   // Load settings
   QSettings s;
@@ -128,9 +127,7 @@ NowPlayingWidget::NowPlayingWidget(QWidget* parent)
   connect(fade_animation_, SIGNAL(valueChanged(qreal)), SLOT(FadePreviousTrack(qreal)));
   fade_animation_->setDirection(QTimeLine::Backward); // 1.0 -> 0.0
 
-  // Start loading the cover loader thread
-  cover_loader_->Start();
-  connect(cover_loader_, SIGNAL(Initialised()), SLOT(CoverLoaderInitialised()));
+  UpdateHeight();
 }
 
 NowPlayingWidget::~NowPlayingWidget() {
@@ -140,6 +137,8 @@ void NowPlayingWidget::SetApplication(Application* app) {
   app_ = app;
 
   album_cover_choice_controller_->SetApplication(app_);
+  connect(app_->current_art_loader(), SIGNAL(ArtLoaded(Song,QString,QImage)),
+          SLOT(AlbumArtLoaded(Song,QString,QImage)));
 }
 
 void NowPlayingWidget::CreateModeAction(Mode mode, const QString &text, QActionGroup *group, QSignalMapper* mapper) {
@@ -154,38 +153,23 @@ void NowPlayingWidget::CreateModeAction(Mode mode, const QString &text, QActionG
 
 void NowPlayingWidget::set_ideal_height(int height) {
   small_ideal_height_ = height;
-  UpdateHeight(aww_
-      ? kitten_loader_->Worker().get()
-      : cover_loader_->Worker().get());
+  UpdateHeight();
 }
 
 QSize NowPlayingWidget::sizeHint() const {
-  return QSize(cover_height_, total_height_);
+  return QSize(cover_loader_options_.desired_height_, total_height_);
 }
 
-void NowPlayingWidget::CoverLoaderInitialised() {
-  BackgroundThread<AlbumCoverLoader>* loader =
-      static_cast<BackgroundThread<AlbumCoverLoader>*>(sender());
-  UpdateHeight(loader->Worker().get());
-  loader->Worker()->SetPadOutputImage(true);
-  connect(loader->Worker().get(), SIGNAL(ImageLoaded(quint64,QImage,QImage)),
-          SLOT(AlbumArtLoaded(quint64,QImage,QImage)));
-}
-
-void NowPlayingWidget::UpdateHeight(AlbumCoverLoader* loader) {
-  if (!loader) {
-    return;
-  }
-
+void NowPlayingWidget::UpdateHeight() {
   switch (mode_) {
   case SmallSongDetails:
-    cover_height_ = small_ideal_height_;
+    cover_loader_options_.desired_height_ = small_ideal_height_;
     total_height_ = small_ideal_height_;
     break;
 
   case LargeSongDetails:
-    cover_height_ = qMin(kMaxCoverSize, width());
-    total_height_ = kTopBorder + cover_height_ + kBottomOffset;
+    cover_loader_options_.desired_height_ = qMin(kMaxCoverSize, width());
+    total_height_ = kTopBorder + cover_loader_options_.desired_height_ + kBottomOffset;
     break;
   }
 
@@ -194,39 +178,13 @@ void NowPlayingWidget::UpdateHeight(AlbumCoverLoader* loader) {
   if (visible_ && show_hide_animation_->state() != QTimeLine::Running)
     setMaximumHeight(total_height_);
 
-  // Tell the cover loader what size we want the images in
-  loader->SetDesiredHeight(cover_height_);
-  loader->SetDefaultOutputImage(QImage(":nocover.png"));
-
-  // Re-fetch the current image
-  load_cover_id_ = loader->LoadImageAsync(metadata_);
+  // Re-scale the current image
+  if (metadata_.is_valid()) {
+    ScaleCover();
+  }
 
   // Tell Qt we've changed size
   updateGeometry();
-}
-
-void NowPlayingWidget::NowPlaying(const Song& metadata) {
-  if (visible_) {
-    // Cache the current pixmap so we can fade between them
-    previous_track_ = QPixmap(size());
-    previous_track_.fill(palette().background().color());
-    previous_track_opacity_ = 1.0;
-    QPainter p(&previous_track_);
-    DrawContents(&p);
-    p.end();
-  }
-
-  metadata_ = metadata;
-  cover_ = QPixmap();
-
-  // Loads the cover too.
-  UpdateHeight(aww_
-      ? kitten_loader_->Worker().get()
-      : cover_loader_->Worker().get());
-  UpdateDetailsText();
-
-  SetVisible(true);
-  update();
 }
 
 void NowPlayingWidget::Stopped() {
@@ -244,7 +202,7 @@ void NowPlayingWidget::UpdateDetailsText() {
       break;
 
     case LargeSongDetails:
-      details_->setTextWidth(cover_height_);
+      details_->setTextWidth(cover_loader_options_.desired_height_);
       details_->setDefaultStyleSheet("p {"
           "  font-size: small;"
           "  color: white;"
@@ -262,13 +220,46 @@ void NowPlayingWidget::UpdateDetailsText() {
   details_->setHtml(html);
 }
 
-void NowPlayingWidget::AlbumArtLoaded(quint64 id, const QImage& scaled, const QImage& original) {
-  if (id != load_cover_id_)
-    return;
-
-  cover_ = QPixmap::fromImage(scaled);
-  original_ = original;
+void NowPlayingWidget::ScaleCover() {
+  cover_ = QPixmap::fromImage(
+        AlbumCoverLoader::ScaleAndPad(cover_loader_options_, original_));
   update();
+}
+
+void NowPlayingWidget::KittenLoaded(quint64 id, const QImage& image) {
+  if (aww_ && pending_kitten_ == id) {
+    SetImage(image);
+  }
+}
+
+void NowPlayingWidget::AlbumArtLoaded(const Song& metadata, const QString&,
+                                      const QImage& image) {
+  metadata_ = metadata;
+
+  if (aww_) {
+    pending_kitten_ = kittens_->LoadKitten(app_->current_art_loader()->options());
+    return;
+  }
+
+  SetImage(image);
+}
+
+void NowPlayingWidget::SetImage(const QImage& image) {
+  if (visible_) {
+    // Cache the current pixmap so we can fade between them
+    previous_track_ = QPixmap(size());
+    previous_track_.fill(palette().background().color());
+    previous_track_opacity_ = 1.0;
+    QPainter p(&previous_track_);
+    DrawContents(&p);
+    p.end();
+  }
+
+  original_ = image;
+
+  UpdateDetailsText();
+  ScaleCover();
+  SetVisible(true);
 
   // Were we waiting for this cover to load before we started fading?
   if (!previous_track_.isNull()) {
@@ -319,7 +310,7 @@ void NowPlayingWidget::DrawContents(QPainter *p) {
 
   case LargeSongDetails:
     const int total_size = qMin(kMaxCoverSize, width());
-    const int x_offset = (width() - cover_height_) / 2;
+    const int x_offset = (width() - cover_loader_options_.desired_height_) / 2;
 
     // Draw the black background
     p->fillRect(QRect(0, kTopBorder, width(), height() - kTopBorder), Qt::black);
@@ -363,9 +354,7 @@ void NowPlayingWidget::FadePreviousTrack(qreal value) {
 
 void NowPlayingWidget::SetMode(int mode) {
   mode_ = Mode(mode);
-  UpdateHeight(aww_
-      ? kitten_loader_->Worker().get()
-      : cover_loader_->Worker().get());
+  UpdateHeight();
   UpdateDetailsText();
   update();
 
@@ -376,9 +365,7 @@ void NowPlayingWidget::SetMode(int mode) {
 
 void NowPlayingWidget::resizeEvent(QResizeEvent* e) {
   if (visible_ && mode_ == LargeSongDetails && e->oldSize().width() != e->size().width()) {
-    UpdateHeight(aww_
-        ? kitten_loader_->Worker().get()
-        : cover_loader_->Worker().get());
+    UpdateHeight();
     UpdateDetailsText();
   }
 }
@@ -432,36 +419,25 @@ void NowPlayingWidget::AllHail(bool hypnotoad) {
 }
 
 void NowPlayingWidget::EnableKittens(bool aww) {
-  if (!kitten_loader_ && aww) {
-    kitten_loader_ = new BackgroundThreadImplementation<AlbumCoverLoader, KittenLoader>(this);
-    kitten_loader_->Start();
-    connect(kitten_loader_, SIGNAL(Initialised()), SLOT(CoverLoaderInitialised()));
-  } else if (aww) {
-    NowPlaying(metadata_);
+  if (!kittens_ && aww) {
+    kittens_ = new KittenLoader(this);
+    app_->MoveToNewThread(kittens_);
+    connect(kittens_, SIGNAL(ImageLoaded(quint64,QImage)), SLOT(KittenLoaded(quint64,QImage)));
   }
 
   aww_ = aww;
 }
 
 void NowPlayingWidget::LoadCoverFromFile() {
-  QString cover = album_cover_choice_controller_->LoadCoverFromFile(&metadata_);
-
-  if(!cover.isEmpty())
-    NowPlaying(metadata_);
+  album_cover_choice_controller_->LoadCoverFromFile(&metadata_);
 }
 
 void NowPlayingWidget::LoadCoverFromURL() {
-  QString cover = album_cover_choice_controller_->LoadCoverFromURL(&metadata_);
-
-  if(!cover.isEmpty())
-    NowPlaying(metadata_);
+  album_cover_choice_controller_->LoadCoverFromURL(&metadata_);
 }
 
 void NowPlayingWidget::SearchForCover() {
-  QString cover = album_cover_choice_controller_->SearchForCover(&metadata_);
-
-  if(!cover.isEmpty())
-    NowPlaying(metadata_);
+  album_cover_choice_controller_->SearchForCover(&metadata_);
 }
 
 void NowPlayingWidget::SaveCoverToFile() {
@@ -470,7 +446,6 @@ void NowPlayingWidget::SaveCoverToFile() {
 
 void NowPlayingWidget::UnsetCover() {
   album_cover_choice_controller_->UnsetCover(&metadata_);
-  NowPlaying(metadata_);
 }
 
 void NowPlayingWidget::ShowCover() {
@@ -492,7 +467,6 @@ void NowPlayingWidget::dragEnterEvent(QDragEnterEvent* e) {
 
 void NowPlayingWidget::dropEvent(QDropEvent* e) {
   album_cover_choice_controller_->SaveCover(&metadata_, e);
-  NowPlaying(metadata_);
 
   QWidget::dropEvent(e);
 }

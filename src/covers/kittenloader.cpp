@@ -21,14 +21,11 @@ KittenLoader::KittenLoader(QObject* parent)
     : AlbumCoverLoader(parent) {
 }
 
-quint64 KittenLoader::LoadImageAsync(
-    const QString& art_automatic,
-    const QString& art_manual,
-    const QString& song_filename,
-    const QImage& embedded_image) {
+quint64 KittenLoader::LoadKitten(const AlbumCoverLoaderOptions& options) {
   if (!kitten_urls_.isEmpty()) {
     QUrl url = kitten_urls_.dequeue();
     return AlbumCoverLoader::LoadImageAsync(
+        options,
         QString::null,
         url.toString(),
         QString::null,
@@ -36,6 +33,7 @@ quint64 KittenLoader::LoadImageAsync(
   }
 
   Task task;
+  task.options = options;
   {
     QMutexLocker l(&mutex_);
     task.id = next_id_++;
