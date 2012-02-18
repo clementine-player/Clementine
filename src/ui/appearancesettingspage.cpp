@@ -19,18 +19,23 @@
 
 #include <QApplication>
 #include <QColorDialog>
+#include <QFileDialog>
 #include <QSettings>
 
 #include "iconloader.h"
+#include "mainwindow.h"
 #include "settingsdialog.h"
 #include "ui_appearancesettingspage.h"
 #include "core/appearance.h"
 #include "core/logging.h"
+#include "playlist/playlistview.h"
+#include "ui/albumcoverchoicecontroller.h"
 
 AppearanceSettingsPage::AppearanceSettingsPage(SettingsDialog* dialog)
   : SettingsPage(dialog),
     ui_(new Ui_AppearanceSettingsPage),
-    original_use_a_custom_color_set_(false)
+    original_use_a_custom_color_set_(false),
+    playlist_view_background_image_type_(PlaylistView::Default)
 {
   ui_->setupUi(this);
   setWindowIcon(IconLoader::Load("view-media-visualization"));
@@ -43,6 +48,25 @@ AppearanceSettingsPage::AppearanceSettingsPage(SettingsDialog* dialog)
   connect(ui_->select_foreground_color, SIGNAL(pressed()), SLOT(SelectForegroundColor()));
   connect(ui_->select_background_color, SIGNAL(pressed()), SLOT(SelectBackgroundColor()));
   connect(ui_->use_a_custom_color_set, SIGNAL(toggled(bool)), SLOT(UseCustomColorSetOptionChanged(bool)));
+
+  connect(ui_->select_background_image_filename_button, SIGNAL(pressed()), SLOT(SelectBackgroundImage()));
+  connect(ui_->use_custom_background_image, SIGNAL(toggled(bool)),
+      ui_->background_image_filename, SLOT(setEnabled(bool)));
+  connect(ui_->use_custom_background_image, SIGNAL(toggled(bool)),
+      ui_->select_background_image_filename_button, SLOT(setEnabled(bool)));
+
+  switch (playlist_view_background_image_type_) {
+    case PlaylistView::None:
+      ui_->use_no_background->setChecked(true);
+      break;
+    case PlaylistView::Custom:
+      ui_->use_custom_background_image->setChecked(true);
+      break;
+    case PlaylistView::Default:
+    default:
+      ui_->use_default_background->setChecked(true);
+  }
+  ui_->background_image_filename->setText(playlist_view_background_image_filename_);
 }
 
 AppearanceSettingsPage::~AppearanceSettingsPage() {
@@ -67,6 +91,14 @@ void AppearanceSettingsPage::Load() {
   current_background_color_   = original_background_color_;
 
   InitColorSelectorsColors();
+
+  QSettings playlist_settings;
+  playlist_settings.beginGroup(Playlist::kSettingsGroup);
+  playlist_view_background_image_type_ =
+      static_cast<PlaylistView::BackgroundImageType>(
+          playlist_settings.value(PlaylistView::kSettingBackgroundImageType).toInt());
+  playlist_view_background_image_filename_  =
+      playlist_settings.value(PlaylistView::kSettingBackgroundImageFilename).toString();
 }
 
 void AppearanceSettingsPage::Save() {
@@ -80,6 +112,21 @@ void AppearanceSettingsPage::Save() {
   } else {
     dialog()->appearance()->ResetToSystemDefaultTheme();
   }
+
+  QSettings playlist_settings;
+  playlist_settings.beginGroup(Playlist::kSettingsGroup);
+  playlist_view_background_image_filename_ = ui_->background_image_filename->text();
+  if (ui_->use_no_background->isChecked()) {
+    playlist_view_background_image_type_ = PlaylistView::None;
+  } else if (ui_->use_default_background->isChecked()) {
+    playlist_view_background_image_type_ = PlaylistView::Default;
+  } else if (ui_->use_custom_background_image->isChecked()) {
+    playlist_view_background_image_type_ = PlaylistView::Custom;
+    playlist_settings.setValue(PlaylistView::kSettingBackgroundImageFilename,
+        playlist_view_background_image_filename_);
+  }
+  playlist_settings.setValue(PlaylistView::kSettingBackgroundImageType,
+      playlist_view_background_image_type_);
 }
 
 void AppearanceSettingsPage::Cancel() {
@@ -133,4 +180,16 @@ void AppearanceSettingsPage::UpdateColorSelectorColor(QWidget* color_selector, c
       .arg(color.green())
       .arg(color.blue());
   color_selector->setStyleSheet(css);
+}
+
+void AppearanceSettingsPage::SelectBackgroundImage() {
+  QString selected_filename =
+    QFileDialog::getOpenFileName(this, tr("Select background image"),
+      playlist_view_background_image_filename_,
+      tr(AlbumCoverChoiceController::kLoadImageFileFilter) + ";;" +
+        tr(AlbumCoverChoiceController::kAllFilesFilter));
+  if (selected_filename.isEmpty())
+    return;
+  playlist_view_background_image_filename_ = selected_filename;
+  ui_->background_image_filename->setText(playlist_view_background_image_filename_);
 }

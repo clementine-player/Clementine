@@ -111,7 +111,6 @@ void BehaviourSettingsPage::Load() {
 
   s.beginGroup(Playlist::kSettingsGroup);
   ui_->b_grey_out_deleted_->setChecked(s.value("greyoutdeleted", false).toBool());
-  ui_->b_enable_background_img_->setChecked(s.value("bg_enabled", true).toBool());
   s.endGroup();
 }
 
@@ -146,7 +145,6 @@ void BehaviourSettingsPage::Save() {
 
   s.beginGroup(Playlist::kSettingsGroup);
   s.setValue("greyoutdeleted", ui_->b_grey_out_deleted_->isChecked());
-  s.setValue("bg_enabled", ui_->b_enable_background_img_->isChecked());
   s.endGroup();
 }
 

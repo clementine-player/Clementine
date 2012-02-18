@@ -36,6 +36,10 @@ class AlbumCoverChoiceController : public QWidget {
   Q_OBJECT
 
  public:
+  static const char* kLoadImageFileFilter;
+  static const char* kSaveImageFileFilter;
+  static const char* kAllFilesFilter;
+
   AlbumCoverChoiceController(QWidget* parent = 0);
   ~AlbumCoverChoiceController();
 
@@ -107,10 +111,6 @@ class AlbumCoverChoiceController : public QWidget {
 private:
   QString GetInitialPathForFileDialog(const Song& song,
                                       const QString& filename);
-
-  static const char* kLoadImageFileFilter;
-  static const char* kSaveImageFileFilter;
-  static const char* kAllFilesFilter;
 
   static bool IsKnownImageExtension(const QString& suffix);
   static QSet<QString>* sImageExtensions;

@@ -20,6 +20,8 @@
 
 #include "settingspage.h"
 
+#include "playlist/playlistview.h"
+
 class QWidget;
 
 class Ui_AppearanceSettingsPage;
@@ -39,6 +41,7 @@ private slots:
   void SelectForegroundColor();
   void SelectBackgroundColor();
   void UseCustomColorSetOptionChanged(bool);
+  void SelectBackgroundImage();
 
 private:
   // Set the widget's background to new_color
@@ -52,6 +55,8 @@ private:
   QColor original_background_color_;
   QColor current_foreground_color_;
   QColor current_background_color_;
+  PlaylistView::BackgroundImageType playlist_view_background_image_type_;
+  QString playlist_view_background_image_filename_;
 };
 
 #endif // APPEARANCESETTINGSPAGE_H

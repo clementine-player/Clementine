@@ -57,14 +57,20 @@ private:
 
 class PlaylistView : public QTreeView {
   Q_OBJECT
-  Q_PROPERTY(bool background_enabled 
-             READ background_enabled 
-             WRITE set_background_enabled 
-             NOTIFY BackgroundPropertyChanged)
  public:
+
+  enum BackgroundImageType {
+    Default,
+    None,
+    Custom,
+  };
+
   PlaylistView(QWidget* parent = 0);
 
   static const int kStateVersion;
+  // Constants for settings: are persistent, values should not be changed
+  static const char* kSettingBackgroundImageType;
+  static const char* kSettingBackgroundImageFilename;
 
   static ColumnAlignmentMap DefaultColumnAlignment();
 
@@ -76,7 +82,7 @@ class PlaylistView : public QTreeView {
   void SetPlayer(Player* player) { player_ = player; }
 
   Playlist* playlist() const { return playlist_; }
-  bool      background_enabled() const { return background_enabled_; }
+  BackgroundImageType background_image_type() const { return background_image_type_; }
   Qt::Alignment column_alignment(int section) const;
 
   // QTreeView
@@ -150,13 +156,14 @@ class PlaylistView : public QTreeView {
   void UpdateCachedCurrentRowPixmap(QStyleOptionViewItemV4 option,
                                     const QModelIndex& index);
 
-  inline void set_background_enabled(bool bg) { background_enabled_ = bg; emit BackgroundPropertyChanged(); }
+  void set_background_image_type(BackgroundImageType bg) { background_image_type_ = bg; emit BackgroundPropertyChanged(); }
 
  private:
   static const int kGlowIntensitySteps;
   static const int kAutoscrollGraceTimeout;
   static const int kDropIndicatorWidth;
   static const int kDropIndicatorGradientWidth;
+  static const qreal kBackgroundOpacity;
 
   QList<int> GetEditableColumns();
   QModelIndex NextEditableIndex(const QModelIndex& current);
@@ -172,7 +179,11 @@ class PlaylistView : public QTreeView {
   bool read_only_settings_;
   int upgrading_from_version_;
 
-  bool background_enabled_;
+  BackgroundImageType background_image_type_;
+  QPixmap background_image_;
+  QPixmap cached_scaled_background_image_;
+  int last_height_;
+  int last_width_;
 
   bool glow_enabled_;
   bool currently_glowing_;
