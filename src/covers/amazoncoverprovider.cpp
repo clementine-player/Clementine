@@ -64,7 +64,7 @@ bool AmazonCoverProvider::StartSearch(const QString& artist, const QString& albu
     EncodedArg encoded_arg(QUrl::toPercentEncoding(arg.first),
                            QUrl::toPercentEncoding(arg.second));
     encoded_args << encoded_arg;
-    query_items << encoded_arg.first + "=" + encoded_arg.second;
+    query_items << QString(encoded_arg.first + "=" + encoded_arg.second);
   }
 
   // Sign the request
