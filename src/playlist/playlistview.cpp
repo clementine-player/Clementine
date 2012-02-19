@@ -43,7 +43,7 @@ const int PlaylistView::kDropIndicatorWidth = 2;
 const int PlaylistView::kDropIndicatorGradientWidth = 5;
 // Opacity value used by all background images but the default clementine one
 // (because it is already opaque and load through the mainwindow.css file)
-const qreal PlaylistView::kBackgroundOpacity = 0.3;
+const qreal PlaylistView::kBackgroundOpacity = 0.4;
 
 const char* PlaylistView::kSettingBackgroundImageType = "playlistview_background_type";
 const char* PlaylistView::kSettingBackgroundImageFilename = "playlistview_background_image_file";
@@ -808,7 +808,7 @@ void PlaylistView::paintEvent(QPaintEvent* event) {
         p.setCompositionMode(QPainter::CompositionMode_Source);
         p.drawPixmap(0, 0, cached_scaled_background_image_);
         p.setCompositionMode(QPainter::CompositionMode_DestinationIn);
-        p.fillRect(temp.rect(), QColor(0, 0, 0, 127*kBackgroundOpacity));
+        p.fillRect(temp.rect(), QColor(0, 0, 0, 255*kBackgroundOpacity));
         p.end();
 
         cached_scaled_background_image_ = temp;
