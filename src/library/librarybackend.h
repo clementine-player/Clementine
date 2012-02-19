@@ -72,6 +72,7 @@ public:
 
   virtual QStringList GetAllArtists(const QueryOptions& opt = QueryOptions()) = 0;
   virtual QStringList GetAllArtistsWithAlbums(const QueryOptions& opt = QueryOptions()) = 0;
+  virtual SongList GetSongsByAlbum(const QString& album, const QueryOptions& opt = QueryOptions()) = 0;
   virtual SongList GetSongs(
       const QString& artist, const QString& album, const QueryOptions& opt = QueryOptions()) = 0;
 
@@ -130,6 +131,7 @@ class LibraryBackend : public LibraryBackendInterface {
   QStringList GetAll(const QString& column, const QueryOptions& opt = QueryOptions());
   QStringList GetAllArtists(const QueryOptions& opt = QueryOptions());
   QStringList GetAllArtistsWithAlbums(const QueryOptions& opt = QueryOptions());
+  SongList GetSongsByAlbum(const QString& album, const QueryOptions& opt = QueryOptions());
   SongList GetSongs(const QString& artist, const QString& album, const QueryOptions& opt = QueryOptions());
 
   bool HasCompilations(const QueryOptions& opt = QueryOptions());
@@ -155,6 +157,7 @@ class LibraryBackend : public LibraryBackendInterface {
   void RemoveDirectory(const Directory& dir);
 
   bool ExecQuery(LibraryQuery* q);
+  SongList ExecLibraryQuery(LibraryQuery* query);
   SongList FindSongs(const smart_playlists::Search& search);
 
   void IncrementPlayCountAsync(int id);
@@ -200,6 +203,7 @@ class LibraryBackend : public LibraryBackendInterface {
 
     bool has_samplers;
     bool has_not_samplers;
+
   };
 
   static const char* kNewScoreSql;

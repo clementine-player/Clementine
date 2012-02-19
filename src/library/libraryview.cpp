@@ -22,6 +22,7 @@
 #include "libraryitem.h"
 #include "librarybackend.h"
 #include "core/deletefiles.h"
+#include "core/logging.h"
 #include "core/mimedata.h"
 #include "core/musicstorage.h"
 #include "core/utilities.h"
@@ -387,6 +388,30 @@ void LibraryView::ShowInVarious(bool on) {
   foreach (const Song& song, GetSelectedSongs()) {
     if (albums.find(song.album(), song.artist()) == albums.end())
       albums.insert( song.album(), song.artist() );
+  }
+
+  // If we have only one album and we are putting it into Various Artists, check to see
+  // if there are other Artists in this album and prompt the user if they'd like them moved, too
+  if(on && albums.keys().count() == 1) {
+    const QString album = albums.keys().first();
+    QList<Song> all_of_album = library_->backend()->GetSongsByAlbum(album);
+    QSet<QString> other_artists;
+    foreach (const Song& s, all_of_album) {
+      if(!albums.contains(album, s.artist()) && !other_artists.contains(s.artist())) {
+        other_artists.insert(s.artist());
+      }
+    }
+    if (other_artists.count() > 0) {
+      if (QMessageBox::question(this,
+              tr("There are other songs in this album"),
+              tr("Would you like to move the other songs in this album to Various Artists as well?"),
+              QMessageBox::Yes | QMessageBox::No,
+              QMessageBox::Yes) == QMessageBox::Yes) {
+        foreach (const QString& s, other_artists) {
+          albums.insert(album, s);
+        }
+      }
+    }
   }
 
   foreach (const QString& album, QSet<QString>::fromList(albums.keys())) {

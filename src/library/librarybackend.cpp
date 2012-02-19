@@ -493,20 +493,31 @@ LibraryBackend::AlbumList LibraryBackend::GetAlbumsByArtist(const QString& artis
   return GetAlbums(artist, false, opt);
 }
 
+
+SongList LibraryBackend::GetSongsByAlbum(const QString& album, const QueryOptions& opt) {
+  LibraryQuery query(opt);
+  query.AddCompilationRequirement(false);
+  query.AddWhere("album", album);
+  return ExecLibraryQuery(&query);
+}
+
 SongList LibraryBackend::GetSongs(const QString& artist, const QString& album, const QueryOptions& opt) {
   LibraryQuery query(opt);
-  query.SetColumnSpec("%songs_table.ROWID, " + Song::kColumnSpec);
   query.AddCompilationRequirement(false);
   query.AddWhere("artist", artist);
   query.AddWhere("album", album);
+  return ExecLibraryQuery(&query);
+}
 
+SongList LibraryBackend::ExecLibraryQuery(LibraryQuery* query) {
+  query->SetColumnSpec("%songs_table.ROWID, " + Song::kColumnSpec);
   QMutexLocker l(db_->Mutex());
-  if (!ExecQuery(&query)) return SongList();
+  if (!ExecQuery(query)) return SongList();
 
   SongList ret;
-  while (query.Next()) {
+  while (query->Next()) {
     Song song;
-    song.InitFromQuery(query, true);
+    song.InitFromQuery(*query, true);
     ret << song;
   }
   return ret;
