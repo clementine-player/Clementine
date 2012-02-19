@@ -801,10 +801,21 @@ void PlaylistView::paintEvent(QPaintEvent* event) {
                                               width(), height(),
                                               Qt::KeepAspectRatioByExpanding,
                                               Qt::SmoothTransformation);
+        QPixmap temp(cached_scaled_background_image_.size());
+        temp.fill(Qt::transparent);
+
+        QPainter p(&temp);
+        p.setCompositionMode(QPainter::CompositionMode_Source);
+        p.drawPixmap(0, 0, cached_scaled_background_image_);
+        p.setCompositionMode(QPainter::CompositionMode_DestinationIn);
+        p.fillRect(temp.rect(), QColor(0, 0, 0, 127*kBackgroundOpacity));
+        p.end();
+
+        cached_scaled_background_image_ = temp;
+
         last_height_  = height();
         last_width_   = width();
       }
-      background_painter.setOpacity(kBackgroundOpacity);
       background_painter.drawPixmap((width() - cached_scaled_background_image_.width()) / 2,
                                     (height() - cached_scaled_background_image_.height()) / 2,
                                     cached_scaled_background_image_);
