@@ -100,6 +100,7 @@ PlaylistView::PlaylistView(QWidget *parent)
     background_image_type_(Default),
     last_height_(-1),
     last_width_(-1),
+    force_background_redraw_(false),
     glow_enabled_(true),
     currently_glowing_(false),
     glow_intensity_step_(0),
@@ -796,7 +797,8 @@ void PlaylistView::paintEvent(QPaintEvent* event) {
   if (background_image_type_ == Custom) {
     if (!background_image_.isNull()) {
       QPainter background_painter(viewport());
-      if (height() != last_height_ || width() != last_width_) {
+      if (height() != last_height_ || width() != last_width_
+          || force_background_redraw_) {
         cached_scaled_background_image_ = background_image_.scaled(
                                               width(), height(),
                                               Qt::KeepAspectRatioByExpanding,
@@ -815,6 +817,7 @@ void PlaylistView::paintEvent(QPaintEvent* event) {
 
         last_height_  = height();
         last_width_   = width();
+        force_background_redraw_ = false;
       }
       background_painter.drawPixmap((width() - cached_scaled_background_image_.width()) / 2,
                                     (height() - cached_scaled_background_image_.height()) / 2,
@@ -971,6 +974,7 @@ void PlaylistView::ReloadSettings() {
   QString background_image_filename = s.value(kSettingBackgroundImageFilename).toString();
   if (!background_image_filename.isEmpty()) {
     background_image_ = QPixmap(background_image_filename);
+    force_background_redraw_ = true;
   }
 
   emit ColumnAlignmentChanged(column_alignment_);

@@ -184,6 +184,7 @@ class PlaylistView : public QTreeView {
   QPixmap cached_scaled_background_image_;
   int last_height_;
   int last_width_;
+  bool force_background_redraw_;
 
   bool glow_enabled_;
   bool currently_glowing_;
