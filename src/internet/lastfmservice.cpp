@@ -15,6 +15,21 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+// StringBuilder is activated to speed-up QString concatenation. As explained here:
+// http://labs.qt.nokia.com/2011/06/13/string-concatenation-with-qstringbuilder/
+// this cause some compilation errors in some cases. As Lasfm library inlines
+// some functions in their includes files, which aren't compatible with
+// QStringBuilder, we undef it here
+#include <QtGlobal>
+#if QT_VERSION >= 0x040600
+  #if QT_VERSION >= 0x040800
+    #undef QT_USE_QSTRINGBUILDER
+  #else
+    #undef QT_USE_FAST_CONCATENATION
+    #undef QT_USE_FAST_OPERATOR_PLUS
+  #endif // QT_VERSION >= 0x040800
+#endif // QT_VERSION >= 0x040600
+
 #include "lastfmservice.h"
 #include "lastfmstationdialog.h"
 #include "lastfmurlhandler.h"

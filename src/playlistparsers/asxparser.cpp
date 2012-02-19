@@ -55,7 +55,7 @@ SongList ASXParser::Load(QIODevice *device, const QString& playlist_path,
     QString url = ex.cap(2);
     url.replace(QRegExp("&(?!amp;|quot;|apos;|lt;|gt;)"), "&amp;");
 
-    QByteArray replacement = (ex.cap(1) + url + "\"").toLocal8Bit();
+    QByteArray replacement = QString(ex.cap(1) + url + "\"").toLocal8Bit();
     data.replace(ex.cap(0).toLocal8Bit(), replacement);
     index += replacement.length();
   }

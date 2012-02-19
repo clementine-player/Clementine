@@ -16,6 +16,15 @@ if(WIN32)
   include_directories(../3rdparty/qtwin)
 endif(WIN32)
 
+# Activate fast QString concatenation
+if (QT_VERSION_MINOR GREATER 5)
+  if (QT_VERSION_MINOR GREATER 7)
+    add_definitions(-DQT_USE_QSTRINGBUILDER)
+  else(QT_VERSION_MINOR GREATER 7)
+    add_definitions(-DQT_USE_FAST_CONCATENATION -DQT_USE_FAST_OPERATOR_PLUS)
+  endif(QT_VERSION_MINOR GREATER 7)
+endif(QT_VERSION_MINOR GREATER 5)
+
 include_directories(${CMAKE_BINARY_DIR})
 include_directories(${GLIB_INCLUDE_DIRS})
 include_directories(${LIBXML_INCLUDE_DIRS})

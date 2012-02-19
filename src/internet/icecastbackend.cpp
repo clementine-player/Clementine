@@ -45,7 +45,7 @@ QStringList IcecastBackend::GetGenresAlphabetical(const QString& filter) {
 
   QSqlQuery q(sql, db);
   if (!filter.isEmpty()) {
-    q.bindValue(":filter", "%" + filter + "%");
+    q.bindValue(":filter", QString("%" + filter + "%"));
   }
 
   q.exec();
@@ -70,7 +70,7 @@ QStringList IcecastBackend::GetGenresByPopularity(const QString& filter) {
                         " ORDER BY count DESC").arg(kTableName, where);
   QSqlQuery q(sql, db);
   if (!filter.isEmpty()) {
-    q.bindValue(":filter", "%" + filter + "%");
+    q.bindValue(":filter", QString("%" + filter + "%"));
   }
 
   q.exec();
