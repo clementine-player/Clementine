@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-02-02 20:06+0000\n"
+"PO-Revision-Date: 2012-02-19 14:26+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -450,7 +450,7 @@ msgstr "Додај у другу листу"
 msgid "Add to playlist"
 msgstr "Додај у листу нумера"
 
-#: ../bin/src/ui_behavioursettingspage.h:204
+#: ../bin/src/ui_behavioursettingspage.h:196
 msgid "Add to the queue"
 msgstr "Стави у ред"
 
@@ -567,16 +567,16 @@ msgstr ""
 msgid "Alongside the originals"
 msgstr "Поред оригинала"
 
-#: ../bin/src/ui_behavioursettingspage.h:188
+#: ../bin/src/ui_behavioursettingspage.h:180
 msgid "Always hide the main window"
 msgstr "Увек сакриј главни прозор"
 
-#: ../bin/src/ui_behavioursettingspage.h:187
+#: ../bin/src/ui_behavioursettingspage.h:179
 msgid "Always show the main window"
 msgstr "Увек прикажи главни прозор"
 
-#: ../bin/src/ui_behavioursettingspage.h:196
-#: ../bin/src/ui_behavioursettingspage.h:210
+#: ../bin/src/ui_behavioursettingspage.h:188
+#: ../bin/src/ui_behavioursettingspage.h:202
 msgid "Always start playing"
 msgstr "Увек почни да свираш"
 
@@ -603,7 +603,7 @@ msgstr "Дошло је до грешке услед учитавања базе
 msgid "An error occurred writing metadata to '%1'"
 msgstr "Дошло је до грешке услед писања метаподатака на '%1'"
 
-#: internet/lastfmservice.cpp:903
+#: internet/lastfmservice.cpp:918
 #, qt-format
 msgid "An unknown last.fm error occurred: %1"
 msgstr "Непозната ЛастФМ грешка: %1"
@@ -613,7 +613,7 @@ msgid "And:"
 msgstr "И:"
 
 #: ../bin/src/ui_songinfosettingspage.h:180
-#: ../bin/src/ui_appearancesettingspage.h:119
+#: ../bin/src/ui_appearancesettingspage.h:179
 msgid "Appearance"
 msgstr "Изглед"
 
@@ -622,11 +622,11 @@ msgid "Append files/URLs to the playlist"
 msgstr "Додај нумере/УРЛ токове у листу нумера"
 
 #: devices/deviceview.cpp:216 internet/internetservice.cpp:53
-#: library/libraryview.cpp:243 widgets/fileviewlist.cpp:32
+#: library/libraryview.cpp:244 widgets/fileviewlist.cpp:32
 msgid "Append to current playlist"
 msgstr "Додај у тренутну листу нумера"
 
-#: ../bin/src/ui_behavioursettingspage.h:201
+#: ../bin/src/ui_behavioursettingspage.h:193
 msgid "Append to the playlist"
 msgstr "Додај у листу нумера"
 
@@ -661,7 +661,7 @@ msgstr "Извођач"
 msgid "Artist info"
 msgstr "Инфо извођача"
 
-#: internet/lastfmservice.cpp:191
+#: internet/lastfmservice.cpp:206
 msgid "Artist radio"
 msgstr "Радио извођача"
 
@@ -682,7 +682,7 @@ msgid "Authenticating..."
 msgstr "Аутентификујем се..."
 
 #: internet/digitallyimportedsettingspage.cpp:82
-#: internet/magnatunesettingspage.cpp:113 internet/lastfmservice.cpp:432
+#: internet/magnatunesettingspage.cpp:113 internet/lastfmservice.cpp:447
 #: internet/lastfmsettingspage.cpp:78 remote/remotesettingspage.cpp:113
 msgid "Authentication failed"
 msgstr "Аутентификација није успела"
@@ -728,6 +728,10 @@ msgstr "Позадински токови"
 msgid "Background color"
 msgstr "Боја позадине"
 
+#: ../bin/src/ui_appearancesettingspage.h:187
+msgid "Background image"
+msgstr ""
+
 #: ../bin/src/ui_notificationssettingspage.h:424
 msgid "Background opacity"
 msgstr "Непрозирност позадине"
@@ -748,7 +752,7 @@ msgstr "Основно плаво"
 msgid "Basic audio type"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:176
+#: ../bin/src/ui_behavioursettingspage.h:169
 msgid "Behavior"
 msgstr "Понашање"
 
@@ -793,6 +797,7 @@ msgid "Boom analyzer"
 msgstr "Бум анализатор"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:146
+#: ../bin/src/ui_appearancesettingspage.h:191
 msgid "Browse..."
 msgstr "Прегледај..."
 
@@ -945,7 +950,7 @@ msgstr "Клеметинин прегледач слика"
 msgid "Clementine was unable to find results for this file"
 msgstr "Клементине није била у могућности да нађе резултате за овај фајл."
 
-#: library/libraryview.cpp:225
+#: library/libraryview.cpp:226
 msgid "Click here to add some music"
 msgstr "Кликни овде да додате неку музику"
 
@@ -977,7 +982,7 @@ msgstr "Клуб"
 msgid "Color"
 msgstr "Boja"
 
-#: ../bin/src/ui_appearancesettingspage.h:120
+#: ../bin/src/ui_appearancesettingspage.h:180
 msgid "Colors"
 msgstr ""
 
@@ -1012,7 +1017,7 @@ msgstr "Композитор"
 msgid "Configure Grooveshark..."
 msgstr ""
 
-#: internet/lastfmservice.cpp:111
+#: internet/lastfmservice.cpp:126
 msgid "Configure Last.fm..."
 msgstr "Подеси ЛастФМ"
 
@@ -1065,7 +1070,7 @@ msgstr "Претвори сву музику коју уређај не може
 msgid "Copy to clipboard"
 msgstr ""
 
-#: library/libraryview.cpp:265 ui/mainwindow.cpp:528
+#: library/libraryview.cpp:266 ui/mainwindow.cpp:528
 #: widgets/fileviewlist.cpp:44
 msgid "Copy to device..."
 msgstr "Умножи на уређај...."
@@ -1100,7 +1105,7 @@ msgid ""
 "plugins installed"
 msgstr "Не може да нађе енкодер за %1, провери да ли имаш уграђен исправан додатак Гстримера"
 
-#: internet/lastfmservice.cpp:900
+#: internet/lastfmservice.cpp:915
 msgid "Couldn't load the last.fm radio station"
 msgstr "Не може да учита last.fm радио станицу"
 
@@ -1229,11 +1234,15 @@ msgstr "Ctrl+Up"
 msgid "Custom"
 msgstr "Прилагођено"
 
+#: ../bin/src/ui_appearancesettingspage.h:190
+msgid "Custom image:"
+msgstr ""
+
 #: ../bin/src/ui_notificationssettingspage.h:416
 msgid "Custom message settings"
 msgstr ""
 
-#: internet/lastfmservice.cpp:199
+#: internet/lastfmservice.cpp:214
 msgid "Custom radio"
 msgstr ""
 
@@ -1273,6 +1282,10 @@ msgstr "Утишај јачину звука за 4%"
 msgid "Decrease volume"
 msgstr "Утишај звук"
 
+#: ../bin/src/ui_appearancesettingspage.h:188
+msgid "Default background image"
+msgstr ""
+
 #: ../bin/src/ui_wiimotesettingspage.h:195
 msgid "Defaults"
 msgstr "Podrazumevano"
@@ -1285,7 +1298,7 @@ msgstr "Застој између визуелизација"
 msgid "Delete Grooveshark playlist"
 msgstr ""
 
-#: devices/deviceview.cpp:393 library/libraryview.cpp:460
+#: devices/deviceview.cpp:393 library/libraryview.cpp:485
 #: ui/mainwindow.cpp:1853 widgets/fileview.cpp:186
 msgid "Delete files"
 msgstr "Obriši fajlove"
@@ -1294,7 +1307,7 @@ msgstr "Obriši fajlove"
 msgid "Delete from device..."
 msgstr "Избруши са уређаја"
 
-#: library/libraryview.cpp:267 ui/mainwindow.cpp:529
+#: library/libraryview.cpp:268 ui/mainwindow.cpp:529
 #: widgets/fileviewlist.cpp:45
 msgid "Delete from disk..."
 msgstr "Обриши са диска..."
@@ -1303,7 +1316,7 @@ msgstr "Обриши са диска..."
 msgid "Delete preset"
 msgstr "Обриши претподешавање"
 
-#: library/libraryview.cpp:259
+#: library/libraryview.cpp:260
 msgid "Delete smart playlist"
 msgstr "Избриши паметну листу"
 
@@ -1414,7 +1427,7 @@ msgstr "Немој претварати омотницу"
 msgid "Don't repeat"
 msgstr "Не понављај"
 
-#: library/libraryview.cpp:281
+#: library/libraryview.cpp:282
 msgid "Don't show in various artists"
 msgstr "Немој показивати различите извођаче"
 
@@ -1430,7 +1443,7 @@ msgstr "Не заустављај!"
 msgid "Double click to open"
 msgstr "Кликни двапут да отвориш"
 
-#: ../bin/src/ui_behavioursettingspage.h:198
+#: ../bin/src/ui_behavioursettingspage.h:190
 msgid "Double clicking a song will..."
 msgstr "Двостуки клик на песму ће..."
 
@@ -1490,7 +1503,7 @@ msgstr "Промењив режим је укључен"
 msgid "Dynamic random mix"
 msgstr "Промењиво насумично мешање"
 
-#: library/libraryview.cpp:257
+#: library/libraryview.cpp:258
 msgid "Edit smart playlist..."
 msgstr "Измени паметну листу"
 
@@ -1511,12 +1524,12 @@ msgstr "Измени ознаке"
 msgid "Edit track information"
 msgstr "Уреди податке о нумери"
 
-#: library/libraryview.cpp:271 widgets/fileviewlist.cpp:50
+#: library/libraryview.cpp:272 widgets/fileviewlist.cpp:50
 #: ../bin/src/ui_mainwindow.h:659
 msgid "Edit track information..."
 msgstr "Уреди податке о нумери..."
 
-#: library/libraryview.cpp:273
+#: library/libraryview.cpp:274
 msgid "Edit tracks information..."
 msgstr "Измени податке о нумери"
 
@@ -1531,10 +1544,6 @@ msgstr "Омогући Wii Remote подршку"
 #: ../bin/src/ui_equalizer.h:126
 msgid "Enable equalizer"
 msgstr "Укључи еквилајзер"
-
-#: ../bin/src/ui_behavioursettingspage.h:179
-msgid "Enable playlist background image"
-msgstr "Омогући позадинску слику листе"
 
 #: ../bin/src/ui_wiimotesettingspage.h:187
 msgid "Enable shortcuts only when Clementine is focused"
@@ -1602,7 +1611,7 @@ msgid "Equivalent to --log-levels *:3"
 msgstr ""
 
 #: internet/groovesharkservice.cpp:954
-#: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:454
+#: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:479
 #: ui/mainwindow.cpp:1805 ui/mainwindow.cpp:1926
 msgid "Error"
 msgstr "Грешка"
@@ -1855,7 +1864,7 @@ msgstr "Број кадрова"
 msgid "Frames per buffer"
 msgstr ""
 
-#: internet/lastfmservice.cpp:207
+#: internet/lastfmservice.cpp:222
 msgid "Friends"
 msgstr "Пријатељи"
 
@@ -1931,7 +1940,7 @@ msgstr "Google korisničko ime"
 msgid "Got %1 covers out of %2 (%3 failed)"
 msgstr "Набавио %1 омота од %2 (%3 неуспешно)"
 
-#: ../bin/src/ui_behavioursettingspage.h:190
+#: ../bin/src/ui_behavioursettingspage.h:182
 msgid "Grey out non existent songs in my playlists"
 msgstr "Посиви непостојеће песме у листи"
 
@@ -2114,31 +2123,31 @@ msgstr "Интернет"
 msgid "Internet providers"
 msgstr ""
 
-#: internet/lastfmservice.cpp:438
+#: internet/lastfmservice.cpp:453
 msgid "Invalid API key"
 msgstr "Неисправан АПИ кључ"
 
-#: internet/lastfmservice.cpp:433
+#: internet/lastfmservice.cpp:448
 msgid "Invalid format"
 msgstr "Неисправан формат"
 
-#: internet/lastfmservice.cpp:431
+#: internet/lastfmservice.cpp:446
 msgid "Invalid method"
 msgstr "Неисправан начин"
 
-#: internet/lastfmservice.cpp:434
+#: internet/lastfmservice.cpp:449
 msgid "Invalid parameters"
 msgstr "Netačni parametri"
 
-#: internet/lastfmservice.cpp:435
+#: internet/lastfmservice.cpp:450
 msgid "Invalid resource specified"
 msgstr "Наведени ресурс неважећи"
 
-#: internet/lastfmservice.cpp:430
+#: internet/lastfmservice.cpp:445
 msgid "Invalid service"
 msgstr "Неважећи сервис"
 
-#: internet/lastfmservice.cpp:437
+#: internet/lastfmservice.cpp:452
 msgid "Invalid session key"
 msgstr "Неважећи кључ сесије"
 
@@ -2186,7 +2195,7 @@ msgstr ""
 msgid "Keep buttons for %1 seconds..."
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:178
+#: ../bin/src/ui_behavioursettingspage.h:171
 msgid "Keep running in the background when the window is closed"
 msgstr ""
 
@@ -2198,7 +2207,7 @@ msgstr "Задржи оригиналне фајлове"
 msgid "Kittens"
 msgstr "Мачићи"
 
-#: ../bin/src/ui_behavioursettingspage.h:180
+#: ../bin/src/ui_behavioursettingspage.h:172
 msgid "Language"
 msgstr "Jezik"
 
@@ -2227,45 +2236,45 @@ msgstr "Последње пуштано"
 msgid "Last.fm"
 msgstr "ЛастФМ"
 
-#: internet/lastfmservice.cpp:70
+#: internet/lastfmservice.cpp:85
 #, qt-format
 msgid "Last.fm Custom Radio: %1"
 msgstr ""
 
-#: internet/lastfmservice.cpp:238 internet/lastfmservice.cpp:694
-#: internet/lastfmservice.cpp:729
+#: internet/lastfmservice.cpp:253 internet/lastfmservice.cpp:709
+#: internet/lastfmservice.cpp:744
 #, qt-format
 msgid "Last.fm Library - %1"
 msgstr "ЛастФМ Библиотека - %1"
 
-#: globalsearch/lastfmsearchprovider.cpp:75 internet/lastfmservice.cpp:240
-#: internet/lastfmservice.cpp:243
+#: globalsearch/lastfmsearchprovider.cpp:75 internet/lastfmservice.cpp:255
+#: internet/lastfmservice.cpp:258
 #, qt-format
 msgid "Last.fm Mix Radio - %1"
 msgstr ""
 
-#: globalsearch/lastfmsearchprovider.cpp:77 internet/lastfmservice.cpp:245
-#: internet/lastfmservice.cpp:248
+#: globalsearch/lastfmsearchprovider.cpp:77 internet/lastfmservice.cpp:260
+#: internet/lastfmservice.cpp:263
 #, qt-format
 msgid "Last.fm Neighbor Radio - %1"
 msgstr "ЛастФМ комшијски радио -%1"
 
-#: globalsearch/lastfmsearchprovider.cpp:73 internet/lastfmservice.cpp:235
+#: globalsearch/lastfmsearchprovider.cpp:73 internet/lastfmservice.cpp:250
 #, qt-format
 msgid "Last.fm Radio Station - %1"
 msgstr "ЛастФМ радио станица - %1"
 
-#: internet/lastfmservice.cpp:68
+#: internet/lastfmservice.cpp:83
 #, qt-format
 msgid "Last.fm Similar Artists to %1"
 msgstr "Last.fm Сличан Извођач са %1"
 
-#: internet/lastfmservice.cpp:69
+#: internet/lastfmservice.cpp:84
 #, qt-format
 msgid "Last.fm Tag Radio: %1"
 msgstr ""
 
-#: internet/lastfmservice.cpp:442
+#: internet/lastfmservice.cpp:457
 msgid "Last.fm is currently busy, please try again in a few minutes"
 msgstr "ЛастФМ је тренутно заузет, молимо Вас пробајте поново за неколико минута"
 
@@ -2359,7 +2368,7 @@ msgstr "Учитај листу нумера"
 msgid "Load playlist..."
 msgstr "Учитај листу нумера"
 
-#: internet/lastfmservice.cpp:913
+#: internet/lastfmservice.cpp:928
 msgid "Loading Last.fm radio"
 msgstr "Учитавам ЛастФМ радио"
 
@@ -2492,7 +2501,7 @@ msgstr ""
 msgid "Make playlist available offline"
 msgstr "Направи листу доступну ван мреже"
 
-#: internet/lastfmservice.cpp:449
+#: internet/lastfmservice.cpp:464
 msgid "Malformed response"
 msgstr "Лош одговор"
 
@@ -2592,35 +2601,35 @@ msgstr "Музичка библиотека"
 msgid "Mute"
 msgstr "Утишај"
 
-#: globalsearch/lastfmsearchprovider.cpp:51 internet/lastfmservice.cpp:178
+#: globalsearch/lastfmsearchprovider.cpp:51 internet/lastfmservice.cpp:193
 msgid "My Last.fm Library"
 msgstr "Моја Last.fm библиотека"
 
-#: globalsearch/lastfmsearchprovider.cpp:53 internet/lastfmservice.cpp:183
+#: globalsearch/lastfmsearchprovider.cpp:53 internet/lastfmservice.cpp:198
 msgid "My Last.fm Mix Radio"
 msgstr ""
 
-#: globalsearch/lastfmsearchprovider.cpp:55 internet/lastfmservice.cpp:188
+#: globalsearch/lastfmsearchprovider.cpp:55 internet/lastfmservice.cpp:203
 msgid "My Last.fm Neighborhood"
 msgstr ""
 
-#: globalsearch/lastfmsearchprovider.cpp:49 internet/lastfmservice.cpp:173
+#: globalsearch/lastfmsearchprovider.cpp:49 internet/lastfmservice.cpp:188
 msgid "My Last.fm Recommended Radio"
 msgstr ""
 
-#: internet/lastfmservice.cpp:180
+#: internet/lastfmservice.cpp:195
 msgid "My Mix Radio"
 msgstr "Мој бирани радио"
 
-#: internet/lastfmservice.cpp:185
+#: internet/lastfmservice.cpp:200
 msgid "My Neighborhood"
 msgstr "Мој комшилук"
 
-#: internet/lastfmservice.cpp:175
+#: internet/lastfmservice.cpp:190
 msgid "My Radio Station"
 msgstr "Моја радио станица"
 
-#: internet/lastfmservice.cpp:170
+#: internet/lastfmservice.cpp:185
 msgid "My Recommendations"
 msgstr "Моје препоруке"
 
@@ -2640,7 +2649,7 @@ msgstr ""
 msgid "Narrow band (NB)"
 msgstr "Уски опсег (NB)"
 
-#: internet/lastfmservice.cpp:212
+#: internet/lastfmservice.cpp:227
 msgid "Neighbors"
 msgstr "Комшије"
 
@@ -2660,8 +2669,8 @@ msgstr "Nikad"
 msgid "Never played"
 msgstr "Никад пуштено"
 
-#: ../bin/src/ui_behavioursettingspage.h:194
-#: ../bin/src/ui_behavioursettingspage.h:208
+#: ../bin/src/ui_behavioursettingspage.h:186
+#: ../bin/src/ui_behavioursettingspage.h:200
 msgid "Never start playing"
 msgstr "Никад пуштано"
 
@@ -2669,7 +2678,7 @@ msgstr "Никад пуштано"
 msgid "New playlist"
 msgstr "Нова листа нумера"
 
-#: library/libraryview.cpp:255
+#: library/libraryview.cpp:256
 msgid "New smart playlist..."
 msgstr "Нова паметна листа"
 
@@ -2698,6 +2707,10 @@ msgstr "Следећа нумера"
 msgid "No analyzer"
 msgstr "Без анализатора"
 
+#: ../bin/src/ui_appearancesettingspage.h:189
+msgid "No background image"
+msgstr ""
+
 #: ../bin/src/ui_transcoderoptionsaac.h:146
 msgid "No long blocks"
 msgstr ""
@@ -2716,7 +2729,7 @@ msgstr ""
 msgid "None"
 msgstr "Ништа"
 
-#: library/libraryview.cpp:455 ui/mainwindow.cpp:1806 ui/mainwindow.cpp:1927
+#: library/libraryview.cpp:480 ui/mainwindow.cpp:1806 ui/mainwindow.cpp:1927
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Ниједна од одабраних песама није погодна за умножавање на уређај"
 
@@ -2732,19 +2745,19 @@ msgstr "Није доступно док се користи промењива 
 msgid "Not connected"
 msgstr "Неповезан"
 
-#: internet/lastfmservice.cpp:444
+#: internet/lastfmservice.cpp:459
 msgid "Not enough content"
 msgstr "Нема довољно садржаја"
 
-#: internet/lastfmservice.cpp:446
+#: internet/lastfmservice.cpp:461
 msgid "Not enough fans"
 msgstr "Нема довољно фанова"
 
-#: internet/lastfmservice.cpp:445
+#: internet/lastfmservice.cpp:460
 msgid "Not enough members"
 msgstr "Нема довољно чланова"
 
-#: internet/lastfmservice.cpp:447
+#: internet/lastfmservice.cpp:462
 msgid "Not enough neighbors"
 msgstr "Нема довољно комшија"
 
@@ -2814,8 +2827,8 @@ msgid "Open file..."
 msgstr ""
 
 #: devices/deviceview.cpp:220 internet/internetservice.cpp:73
-#: library/libraryview.cpp:247 widgets/fileviewlist.cpp:36
-#: ../bin/src/ui_behavioursettingspage.h:203
+#: library/libraryview.cpp:248 widgets/fileviewlist.cpp:36
+#: ../bin/src/ui_behavioursettingspage.h:195
 msgid "Open in new playlist"
 msgstr "Отвори у новој листи"
 
@@ -2824,7 +2837,7 @@ msgstr "Отвори у новој листи"
 msgid "Open..."
 msgstr "Отвори..."
 
-#: internet/lastfmservice.cpp:436
+#: internet/lastfmservice.cpp:451
 msgid "Operation failed"
 msgstr "Радња није успела"
 
@@ -2844,7 +2857,7 @@ msgstr "Opcije..."
 msgid "Organise Files"
 msgstr "Организуј фајлове"
 
-#: library/libraryview.cpp:263 ui/mainwindow.cpp:527
+#: library/libraryview.cpp:264 ui/mainwindow.cpp:527
 msgid "Organise files..."
 msgstr "Организуј фајлове..."
 
@@ -2923,7 +2936,7 @@ msgstr "Пусти"
 msgid "Play Artist or Tag"
 msgstr ""
 
-#: internet/lastfmservice.cpp:103
+#: internet/lastfmservice.cpp:118
 msgid "Play artist radio..."
 msgstr ""
 
@@ -2931,7 +2944,7 @@ msgstr ""
 msgid "Play count"
 msgstr "број пуштања"
 
-#: internet/lastfmservice.cpp:107
+#: internet/lastfmservice.cpp:122
 msgid "Play custom radio..."
 msgstr ""
 
@@ -2939,12 +2952,12 @@ msgstr ""
 msgid "Play if stopped, pause if playing"
 msgstr "Пусти ако је заустављено, заустави ако се пушта"
 
-#: ../bin/src/ui_behavioursettingspage.h:195
-#: ../bin/src/ui_behavioursettingspage.h:209
+#: ../bin/src/ui_behavioursettingspage.h:187
+#: ../bin/src/ui_behavioursettingspage.h:201
 msgid "Play if there is nothing already playing"
 msgstr "Пусти ако ништа тренутно не свира"
 
-#: internet/lastfmservice.cpp:105
+#: internet/lastfmservice.cpp:120
 msgid "Play tag radio..."
 msgstr ""
 
@@ -3134,7 +3147,7 @@ msgstr "Menaxer редоследа"
 msgid "Queue selected tracks"
 msgstr "Стави у ред одабране нумере"
 
-#: globalsearch/globalsearchwidget.cpp:105 library/libraryview.cpp:251
+#: globalsearch/globalsearchwidget.cpp:105 library/libraryview.cpp:252
 #: ui/mainwindow.cpp:1337
 msgid "Queue track"
 msgstr "Стави нумеру у ред"
@@ -3199,7 +3212,7 @@ msgstr "Освежи каталог"
 msgid "Refresh channels"
 msgstr "Освежи канале"
 
-#: internet/lastfmservice.cpp:109
+#: internet/lastfmservice.cpp:124
 msgid "Refresh friends list"
 msgstr ""
 
@@ -3219,7 +3232,7 @@ msgstr "Реге"
 msgid "Remember Wii remote swing"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:189
+#: ../bin/src/ui_behavioursettingspage.h:181
 msgid "Remember from last time"
 msgstr ""
 
@@ -3229,7 +3242,7 @@ msgstr "Даљински управљач"
 
 #: internet/savedradio.cpp:100 ../bin/src/ui_queuemanager.h:135
 #: ../bin/src/ui_searchtermwidget.h:282 ../bin/src/ui_transcodedialog.h:207
-#: internet/lastfmservice.cpp:100
+#: internet/lastfmservice.cpp:115
 msgid "Remove"
 msgstr "Уклони"
 
@@ -3299,12 +3312,12 @@ msgid "Replace and play now"
 msgstr ""
 
 #: devices/deviceview.cpp:218 globalsearch/globalsearchwidget.cpp:106
-#: internet/internetservice.cpp:63 library/libraryview.cpp:245
+#: internet/internetservice.cpp:63 library/libraryview.cpp:246
 #: widgets/fileviewlist.cpp:34
 msgid "Replace current playlist"
 msgstr "Замени тренутну листу"
 
-#: ../bin/src/ui_behavioursettingspage.h:202
+#: ../bin/src/ui_behavioursettingspage.h:194
 msgid "Replace the playlist"
 msgstr "Zameni listu"
 
@@ -3511,15 +3524,19 @@ msgstr "Изабери све"
 msgid "Select None"
 msgstr "Означи ништа"
 
-#: ../bin/src/ui_appearancesettingspage.h:125
+#: ../bin/src/ui_appearancesettingspage.h:185
 msgid "Select background color:"
+msgstr ""
+
+#: ui/appearancesettingspage.cpp:187
+msgid "Select background image"
 msgstr ""
 
 #: ../bin/src/ui_trackselectiondialog.h:207
 msgid "Select best possible match"
 msgstr "Одабери најбоље поклапање"
 
-#: ../bin/src/ui_appearancesettingspage.h:123
+#: ../bin/src/ui_appearancesettingspage.h:183
 msgid "Select foreground color:"
 msgstr ""
 
@@ -3535,7 +3552,7 @@ msgstr "Одабери визуелизације..."
 msgid "Serial number"
 msgstr "Серијски број"
 
-#: internet/lastfmservice.cpp:439
+#: internet/lastfmservice.cpp:454
 msgid "Service offline"
 msgstr "Сервис ван мреже"
 
@@ -3631,12 +3648,12 @@ msgstr "Прикажи раздвајаче"
 msgid "Show fullsize..."
 msgstr "Прикажи пуну величину..."
 
-#: library/libraryview.cpp:275 ui/mainwindow.cpp:530
+#: library/libraryview.cpp:276 ui/mainwindow.cpp:530
 #: widgets/fileviewlist.cpp:52
 msgid "Show in file browser..."
 msgstr "Прикажи у фајл прегледачу..."
 
-#: library/libraryview.cpp:279
+#: library/libraryview.cpp:280
 msgid "Show in various artists"
 msgstr "Прикажи у разним извођачима"
 
@@ -3660,7 +3677,7 @@ msgstr "Прикажи ''волим'' и ''мрзим'' дугмад"
 msgid "Show the scrobble button in the main window"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:177
+#: ../bin/src/ui_behavioursettingspage.h:170
 msgid "Show tray icon"
 msgstr "Прикажи икону системске касете"
 
@@ -3931,7 +3948,7 @@ msgstr "Ознака"
 msgid "Tag fetcher"
 msgstr "Ознаке добављене"
 
-#: internet/lastfmservice.cpp:195
+#: internet/lastfmservice.cpp:210
 msgid "Tag radio"
 msgstr "Означи радио"
 
@@ -3984,6 +4001,10 @@ msgid ""
 "rescan because of the new features listed below:"
 msgstr "Верзија Клементине на коју сте надоградили захтева потпуну обнову библиотеке због нових могућности које су излистане испод:"
 
+#: library/libraryview.cpp:406
+msgid "There are other songs in this album"
+msgstr ""
+
 #: internet/magnatunedownloaddialog.cpp:157
 msgid "There was a problem fetching the metadata from Magnatune"
 msgstr "Искрсао проблем приликом добављања метаподатака са Magnatune"
@@ -4000,7 +4021,7 @@ msgid ""
 "deleted:"
 msgstr "Искрсао је проблем приликом брисања неких песама. Следећи фајлови се нису избрисали:"
 
-#: library/libraryview.cpp:461 ui/mainwindow.cpp:1854 widgets/fileview.cpp:187
+#: library/libraryview.cpp:486 ui/mainwindow.cpp:1854 widgets/fileview.cpp:187
 msgid ""
 "These files will be deleted from disk, are you sure you want to continue?"
 msgstr "Ови фајлове ће се избрисати са диска, да ли сигурно желите да наставите?"
@@ -4070,7 +4091,7 @@ msgid ""
 "want to continue?"
 msgstr "Ова листа ће бити избрисана; избор се не може вратити. Да ли сте сигурни да желите да наставите?"
 
-#: internet/lastfmservice.cpp:440
+#: internet/lastfmservice.cpp:455
 msgid "This stream is for paid subscribers only"
 msgstr "Овај ток је само за претплатнике"
 
@@ -4195,7 +4216,7 @@ msgstr "Не могу да преузмем %1 (%2)"
 msgid "Unknown"
 msgstr "Непознато"
 
-#: internet/digitallyimportedclient.cpp:68 internet/lastfmservice.cpp:453
+#: internet/digitallyimportedclient.cpp:68 internet/lastfmservice.cpp:468
 msgid "Unknown error"
 msgstr "Непозната грешка"
 
@@ -4245,7 +4266,7 @@ msgstr ""
 msgid "Use Wii Remote"
 msgstr "Користи Wii даљински"
 
-#: ../bin/src/ui_appearancesettingspage.h:122
+#: ../bin/src/ui_appearancesettingspage.h:182
 msgid "Use a custom color set"
 msgstr ""
 
@@ -4273,11 +4294,11 @@ msgstr ""
 msgid "Use temporal noise shaping"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:183
+#: ../bin/src/ui_behavioursettingspage.h:175
 msgid "Use the system default"
 msgstr ""
 
-#: ../bin/src/ui_appearancesettingspage.h:121
+#: ../bin/src/ui_appearancesettingspage.h:181
 msgid "Use the system default color set"
 msgstr ""
 
@@ -4309,7 +4330,7 @@ msgstr ""
 msgid "Username"
 msgstr "Корисничко име"
 
-#: ../bin/src/ui_behavioursettingspage.h:191
+#: ../bin/src/ui_behavioursettingspage.h:183
 msgid "Using the menu to add a song will..."
 msgstr ""
 
@@ -4382,7 +4403,7 @@ msgstr "Wav"
 msgid "Weeks"
 msgstr "Nedelje"
 
-#: ../bin/src/ui_behavioursettingspage.h:186
+#: ../bin/src/ui_behavioursettingspage.h:178
 msgid "When Clementine starts"
 msgstr "Када се Клементина упали"
 
@@ -4448,6 +4469,12 @@ msgstr ""
 
 #: core/song.cpp:332
 msgid "Windows Media audio"
+msgstr ""
+
+#: library/libraryview.cpp:407
+msgid ""
+"Would you like to move the other songs in this album to Various Artists as "
+"well?"
 msgstr ""
 
 #: ui/mainwindow.cpp:2047
@@ -4554,7 +4581,7 @@ msgid ""
 "shortcuts in Clementine."
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:185
+#: ../bin/src/ui_behavioursettingspage.h:177
 msgid "You will need to restart Clementine if you change the language."
 msgstr ""
 
@@ -4581,7 +4608,7 @@ msgstr "Акредитиви за ЛастФМ које сте унели су �
 msgid "Your Magnatune credentials were incorrect"
 msgstr ""
 
-#: library/libraryview.cpp:219
+#: library/libraryview.cpp:220
 msgid "Your library is empty!"
 msgstr "Ваша библиотека је празна"
 
@@ -4640,7 +4667,7 @@ msgstr ""
 msgid "biggest first"
 msgstr ""
 
-#: playlist/playlistview.cpp:164 ui/edittagdialog.cpp:454
+#: playlist/playlistview.cpp:174 ui/edittagdialog.cpp:454
 msgid "bpm"
 msgstr "опм"
 
@@ -4683,7 +4710,7 @@ msgstr ""
 msgid "in the last"
 msgstr ""
 
-#: playlist/playlistview.cpp:166 ui/edittagdialog.cpp:456
+#: playlist/playlistview.cpp:176 ui/edittagdialog.cpp:456
 #: internet/spotifysettingspage.cpp:59 internet/spotifysettingspage.cpp:60
 #: internet/spotifysettingspage.cpp:61
 msgid "kbps"

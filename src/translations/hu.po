@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-02-02 20:06+0000\n"
+"PO-Revision-Date: 2012-02-19 14:26+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -451,7 +451,7 @@ msgstr "Hozzáadás másik lejátszási listához"
 msgid "Add to playlist"
 msgstr "Hozzáadás a lejátszási listához"
 
-#: ../bin/src/ui_behavioursettingspage.h:204
+#: ../bin/src/ui_behavioursettingspage.h:196
 msgid "Add to the queue"
 msgstr "Sorbaállít"
 
@@ -568,16 +568,16 @@ msgstr "Mid/side kódolás engedélyezése"
 msgid "Alongside the originals"
 msgstr "Az eredetiek mellett"
 
-#: ../bin/src/ui_behavioursettingspage.h:188
+#: ../bin/src/ui_behavioursettingspage.h:180
 msgid "Always hide the main window"
 msgstr "Mindig rejtse a főablakot"
 
-#: ../bin/src/ui_behavioursettingspage.h:187
+#: ../bin/src/ui_behavioursettingspage.h:179
 msgid "Always show the main window"
 msgstr "Mindig mutassa a főablakot"
 
-#: ../bin/src/ui_behavioursettingspage.h:196
-#: ../bin/src/ui_behavioursettingspage.h:210
+#: ../bin/src/ui_behavioursettingspage.h:188
+#: ../bin/src/ui_behavioursettingspage.h:202
 msgid "Always start playing"
 msgstr "Mindig indítja a lejátszást"
 
@@ -604,7 +604,7 @@ msgstr "Hiba történt az iTunes adatbázis betöltése közben"
 msgid "An error occurred writing metadata to '%1'"
 msgstr "Hiba történt '%1' metaadatainak írása közben"
 
-#: internet/lastfmservice.cpp:903
+#: internet/lastfmservice.cpp:918
 #, qt-format
 msgid "An unknown last.fm error occurred: %1"
 msgstr "Ismeretlen Last.fm hiba történt: %1"
@@ -614,7 +614,7 @@ msgid "And:"
 msgstr "És:"
 
 #: ../bin/src/ui_songinfosettingspage.h:180
-#: ../bin/src/ui_appearancesettingspage.h:119
+#: ../bin/src/ui_appearancesettingspage.h:179
 msgid "Appearance"
 msgstr "Megjelenés"
 
@@ -623,11 +623,11 @@ msgid "Append files/URLs to the playlist"
 msgstr "Fájlok/URL-ek hozzáadása a lejátszási listához"
 
 #: devices/deviceview.cpp:216 internet/internetservice.cpp:53
-#: library/libraryview.cpp:243 widgets/fileviewlist.cpp:32
+#: library/libraryview.cpp:244 widgets/fileviewlist.cpp:32
 msgid "Append to current playlist"
 msgstr "Hozzáfűz az aktuális listához"
 
-#: ../bin/src/ui_behavioursettingspage.h:201
+#: ../bin/src/ui_behavioursettingspage.h:193
 msgid "Append to the playlist"
 msgstr "Hozzáadja a lejátszási listához"
 
@@ -662,7 +662,7 @@ msgstr "Előadó"
 msgid "Artist info"
 msgstr "Előadó infó"
 
-#: internet/lastfmservice.cpp:191
+#: internet/lastfmservice.cpp:206
 msgid "Artist radio"
 msgstr "Előadó rádió"
 
@@ -683,7 +683,7 @@ msgid "Authenticating..."
 msgstr "Hitelesítés…"
 
 #: internet/digitallyimportedsettingspage.cpp:82
-#: internet/magnatunesettingspage.cpp:113 internet/lastfmservice.cpp:432
+#: internet/magnatunesettingspage.cpp:113 internet/lastfmservice.cpp:447
 #: internet/lastfmsettingspage.cpp:78 remote/remotesettingspage.cpp:113
 msgid "Authentication failed"
 msgstr "A hitelesítés meghiúsult"
@@ -729,6 +729,10 @@ msgstr "Háttér adatfolyamok"
 msgid "Background color"
 msgstr "Háttérszín"
 
+#: ../bin/src/ui_appearancesettingspage.h:187
+msgid "Background image"
+msgstr ""
+
 #: ../bin/src/ui_notificationssettingspage.h:424
 msgid "Background opacity"
 msgstr "Háttér áttetszősége"
@@ -749,7 +753,7 @@ msgstr "Egyszerű kék"
 msgid "Basic audio type"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:176
+#: ../bin/src/ui_behavioursettingspage.h:169
 msgid "Behavior"
 msgstr "Viselkedés"
 
@@ -794,6 +798,7 @@ msgid "Boom analyzer"
 msgstr "Fellendülés"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:146
+#: ../bin/src/ui_appearancesettingspage.h:191
 msgid "Browse..."
 msgstr "Tallózás…"
 
@@ -946,7 +951,7 @@ msgstr "Clementine képmegjelenítő"
 msgid "Clementine was unable to find results for this file"
 msgstr "Nincsenek találatok ehhez a fájlhoz"
 
-#: library/libraryview.cpp:225
+#: library/libraryview.cpp:226
 msgid "Click here to add some music"
 msgstr "Zene felvételéhez kattintson ide"
 
@@ -978,7 +983,7 @@ msgstr "Club"
 msgid "Color"
 msgstr "Szín"
 
-#: ../bin/src/ui_appearancesettingspage.h:120
+#: ../bin/src/ui_appearancesettingspage.h:180
 msgid "Colors"
 msgstr ""
 
@@ -1013,7 +1018,7 @@ msgstr "Zeneszerző"
 msgid "Configure Grooveshark..."
 msgstr "Grooveshark beállítás..."
 
-#: internet/lastfmservice.cpp:111
+#: internet/lastfmservice.cpp:126
 msgid "Configure Last.fm..."
 msgstr "Last.fm beállítása"
 
@@ -1066,7 +1071,7 @@ msgstr "Az eszköz által nem támogatott számok konvertálása"
 msgid "Copy to clipboard"
 msgstr ""
 
-#: library/libraryview.cpp:265 ui/mainwindow.cpp:528
+#: library/libraryview.cpp:266 ui/mainwindow.cpp:528
 #: widgets/fileviewlist.cpp:44
 msgid "Copy to device..."
 msgstr "Másolás eszközre..."
@@ -1101,7 +1106,7 @@ msgid ""
 "plugins installed"
 msgstr "Nem található megfelelő kódoló %1 tömörítéséhez. Ellenőrizze, hogy a GStreamer beépülők megfelelően vannak-e telepítve"
 
-#: internet/lastfmservice.cpp:900
+#: internet/lastfmservice.cpp:915
 msgid "Couldn't load the last.fm radio station"
 msgstr "Nem sikerült betölteni a Last.fm rádióállomást"
 
@@ -1230,11 +1235,15 @@ msgstr "Ctrl+Up"
 msgid "Custom"
 msgstr "Egyéni"
 
+#: ../bin/src/ui_appearancesettingspage.h:190
+msgid "Custom image:"
+msgstr ""
+
 #: ../bin/src/ui_notificationssettingspage.h:416
 msgid "Custom message settings"
 msgstr "Egyedi üzenetbeállítások"
 
-#: internet/lastfmservice.cpp:199
+#: internet/lastfmservice.cpp:214
 msgid "Custom radio"
 msgstr "Egyéni rádió"
 
@@ -1274,6 +1283,10 @@ msgstr "Hangerő csökkentése 4%-kal"
 msgid "Decrease volume"
 msgstr "Hangerő csökkentése"
 
+#: ../bin/src/ui_appearancesettingspage.h:188
+msgid "Default background image"
+msgstr ""
+
 #: ../bin/src/ui_wiimotesettingspage.h:195
 msgid "Defaults"
 msgstr "Alapértelmezések"
@@ -1286,7 +1299,7 @@ msgstr "Megjelenítések között váltás ideje"
 msgid "Delete Grooveshark playlist"
 msgstr ""
 
-#: devices/deviceview.cpp:393 library/libraryview.cpp:460
+#: devices/deviceview.cpp:393 library/libraryview.cpp:485
 #: ui/mainwindow.cpp:1853 widgets/fileview.cpp:186
 msgid "Delete files"
 msgstr "Fájlok törlése"
@@ -1295,7 +1308,7 @@ msgstr "Fájlok törlése"
 msgid "Delete from device..."
 msgstr "Törlés az eszközről..."
 
-#: library/libraryview.cpp:267 ui/mainwindow.cpp:529
+#: library/libraryview.cpp:268 ui/mainwindow.cpp:529
 #: widgets/fileviewlist.cpp:45
 msgid "Delete from disk..."
 msgstr "Törlés a lemezről..."
@@ -1304,7 +1317,7 @@ msgstr "Törlés a lemezről..."
 msgid "Delete preset"
 msgstr "Beállítás törlése"
 
-#: library/libraryview.cpp:259
+#: library/libraryview.cpp:260
 msgid "Delete smart playlist"
 msgstr "Intelligens lejátszási lista törlése"
 
@@ -1415,7 +1428,7 @@ msgstr "Ne konvertáljon egy számot sem"
 msgid "Don't repeat"
 msgstr "Ne ismételjen"
 
-#: library/libraryview.cpp:281
+#: library/libraryview.cpp:282
 msgid "Don't show in various artists"
 msgstr "Ne mutassa a különböző előadók között"
 
@@ -1431,7 +1444,7 @@ msgstr "Ne álljon meg!"
 msgid "Double click to open"
 msgstr "Dupla kattintás a megnyitáshoz"
 
-#: ../bin/src/ui_behavioursettingspage.h:198
+#: ../bin/src/ui_behavioursettingspage.h:190
 msgid "Double clicking a song will..."
 msgstr "Dupla kattintásra egy számon..."
 
@@ -1491,7 +1504,7 @@ msgstr "Dinamikus mód bekapcsolva"
 msgid "Dynamic random mix"
 msgstr "Dinamikus véletlenszerű mix"
 
-#: library/libraryview.cpp:257
+#: library/libraryview.cpp:258
 msgid "Edit smart playlist..."
 msgstr "Intelligens lejátszási lista szerkesztése..."
 
@@ -1512,12 +1525,12 @@ msgstr "Címkék szerkesztése"
 msgid "Edit track information"
 msgstr "Száminformációk szerkesztése"
 
-#: library/libraryview.cpp:271 widgets/fileviewlist.cpp:50
+#: library/libraryview.cpp:272 widgets/fileviewlist.cpp:50
 #: ../bin/src/ui_mainwindow.h:659
 msgid "Edit track information..."
 msgstr "Száminformációk szerkesztése..."
 
-#: library/libraryview.cpp:273
+#: library/libraryview.cpp:274
 msgid "Edit tracks information..."
 msgstr "Száminformációk szerkesztése"
 
@@ -1532,10 +1545,6 @@ msgstr "Wii távvezérlő támogatás engedélyezése"
 #: ../bin/src/ui_equalizer.h:126
 msgid "Enable equalizer"
 msgstr "Hangszínszabályzó engedélyezése"
-
-#: ../bin/src/ui_behavioursettingspage.h:179
-msgid "Enable playlist background image"
-msgstr "Lejátszási lista hátterének engedélyezése"
 
 #: ../bin/src/ui_wiimotesettingspage.h:187
 msgid "Enable shortcuts only when Clementine is focused"
@@ -1603,7 +1612,7 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "Megegyezik a --log-levels *:3 kapcsolóval"
 
 #: internet/groovesharkservice.cpp:954
-#: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:454
+#: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:479
 #: ui/mainwindow.cpp:1805 ui/mainwindow.cpp:1926
 msgid "Error"
 msgstr "Hiba"
@@ -1856,7 +1865,7 @@ msgstr "Frissítési gyakoriság"
 msgid "Frames per buffer"
 msgstr ""
 
-#: internet/lastfmservice.cpp:207
+#: internet/lastfmservice.cpp:222
 msgid "Friends"
 msgstr "Barátok"
 
@@ -1932,7 +1941,7 @@ msgstr "Google felhasználónév"
 msgid "Got %1 covers out of %2 (%3 failed)"
 msgstr "%1 borító a %2-ból/ből letöltve (%3 sikertelen)"
 
-#: ../bin/src/ui_behavioursettingspage.h:190
+#: ../bin/src/ui_behavioursettingspage.h:182
 msgid "Grey out non existent songs in my playlists"
 msgstr "Nem létező számok szürke színnel jelölése a lejátszási listákon"
 
@@ -2115,31 +2124,31 @@ msgstr "Internet"
 msgid "Internet providers"
 msgstr ""
 
-#: internet/lastfmservice.cpp:438
+#: internet/lastfmservice.cpp:453
 msgid "Invalid API key"
 msgstr "Érvénytelen API kulcs"
 
-#: internet/lastfmservice.cpp:433
+#: internet/lastfmservice.cpp:448
 msgid "Invalid format"
 msgstr "Érvénytelen formátum"
 
-#: internet/lastfmservice.cpp:431
+#: internet/lastfmservice.cpp:446
 msgid "Invalid method"
 msgstr "Érvénytelen eljárás"
 
-#: internet/lastfmservice.cpp:434
+#: internet/lastfmservice.cpp:449
 msgid "Invalid parameters"
 msgstr "Érvénytelen paraméterek"
 
-#: internet/lastfmservice.cpp:435
+#: internet/lastfmservice.cpp:450
 msgid "Invalid resource specified"
 msgstr "Hibás eszközspecifikáció"
 
-#: internet/lastfmservice.cpp:430
+#: internet/lastfmservice.cpp:445
 msgid "Invalid service"
 msgstr "Érvénytelen szolgáltatás"
 
-#: internet/lastfmservice.cpp:437
+#: internet/lastfmservice.cpp:452
 msgid "Invalid session key"
 msgstr "Érvénytelen munkafolyamat kulcs"
 
@@ -2187,7 +2196,7 @@ msgstr "Tartsa nyomva a gombokat %1 másodpercig"
 msgid "Keep buttons for %1 seconds..."
 msgstr "Tartsa nyomva a gombokat %1 másodpercig"
 
-#: ../bin/src/ui_behavioursettingspage.h:178
+#: ../bin/src/ui_behavioursettingspage.h:171
 msgid "Keep running in the background when the window is closed"
 msgstr "Futás a háttérben bezárt ablak esetén is"
 
@@ -2199,7 +2208,7 @@ msgstr "Eredeti fájlok megőrzése"
 msgid "Kittens"
 msgstr "Kismacskák"
 
-#: ../bin/src/ui_behavioursettingspage.h:180
+#: ../bin/src/ui_behavioursettingspage.h:172
 msgid "Language"
 msgstr "Nyelv"
 
@@ -2228,45 +2237,45 @@ msgstr "Utoljára lejátszva"
 msgid "Last.fm"
 msgstr "Last.fm"
 
-#: internet/lastfmservice.cpp:70
+#: internet/lastfmservice.cpp:85
 #, qt-format
 msgid "Last.fm Custom Radio: %1"
 msgstr "Last.fm Egyéni Rádió: %1"
 
-#: internet/lastfmservice.cpp:238 internet/lastfmservice.cpp:694
-#: internet/lastfmservice.cpp:729
+#: internet/lastfmservice.cpp:253 internet/lastfmservice.cpp:709
+#: internet/lastfmservice.cpp:744
 #, qt-format
 msgid "Last.fm Library - %1"
 msgstr "Last.fm Zenetár - %1"
 
-#: globalsearch/lastfmsearchprovider.cpp:75 internet/lastfmservice.cpp:240
-#: internet/lastfmservice.cpp:243
+#: globalsearch/lastfmsearchprovider.cpp:75 internet/lastfmservice.cpp:255
+#: internet/lastfmservice.cpp:258
 #, qt-format
 msgid "Last.fm Mix Radio - %1"
 msgstr "Last.fm Mix Rádió - %1"
 
-#: globalsearch/lastfmsearchprovider.cpp:77 internet/lastfmservice.cpp:245
-#: internet/lastfmservice.cpp:248
+#: globalsearch/lastfmsearchprovider.cpp:77 internet/lastfmservice.cpp:260
+#: internet/lastfmservice.cpp:263
 #, qt-format
 msgid "Last.fm Neighbor Radio - %1"
 msgstr "Last.fm Szomszédos Rádió - %1"
 
-#: globalsearch/lastfmsearchprovider.cpp:73 internet/lastfmservice.cpp:235
+#: globalsearch/lastfmsearchprovider.cpp:73 internet/lastfmservice.cpp:250
 #, qt-format
 msgid "Last.fm Radio Station - %1"
 msgstr "Last.fm Rádió Állomás - %1"
 
-#: internet/lastfmservice.cpp:68
+#: internet/lastfmservice.cpp:83
 #, qt-format
 msgid "Last.fm Similar Artists to %1"
 msgstr "Last.fm Hasonló Előadók - %1"
 
-#: internet/lastfmservice.cpp:69
+#: internet/lastfmservice.cpp:84
 #, qt-format
 msgid "Last.fm Tag Radio: %1"
 msgstr "Last.fm Címke Rádió: %1"
 
-#: internet/lastfmservice.cpp:442
+#: internet/lastfmservice.cpp:457
 msgid "Last.fm is currently busy, please try again in a few minutes"
 msgstr "A Last.fm nem elérhető, kérlek próbáld később"
 
@@ -2360,7 +2369,7 @@ msgstr "Lejátszási lista betöltése"
 msgid "Load playlist..."
 msgstr "Lejátszási lista betöltése..."
 
-#: internet/lastfmservice.cpp:913
+#: internet/lastfmservice.cpp:928
 msgid "Loading Last.fm radio"
 msgstr "Last.fm rádió betöltése"
 
@@ -2493,7 +2502,7 @@ msgstr ""
 msgid "Make playlist available offline"
 msgstr ""
 
-#: internet/lastfmservice.cpp:449
+#: internet/lastfmservice.cpp:464
 msgid "Malformed response"
 msgstr "Hibásan formázott válasz"
 
@@ -2593,35 +2602,35 @@ msgstr "Zenetár"
 msgid "Mute"
 msgstr "Némítás"
 
-#: globalsearch/lastfmsearchprovider.cpp:51 internet/lastfmservice.cpp:178
+#: globalsearch/lastfmsearchprovider.cpp:51 internet/lastfmservice.cpp:193
 msgid "My Last.fm Library"
 msgstr "A Last.fm zenetáram"
 
-#: globalsearch/lastfmsearchprovider.cpp:53 internet/lastfmservice.cpp:183
+#: globalsearch/lastfmsearchprovider.cpp:53 internet/lastfmservice.cpp:198
 msgid "My Last.fm Mix Radio"
 msgstr "A Last.fm mix rádióm"
 
-#: globalsearch/lastfmsearchprovider.cpp:55 internet/lastfmservice.cpp:188
+#: globalsearch/lastfmsearchprovider.cpp:55 internet/lastfmservice.cpp:203
 msgid "My Last.fm Neighborhood"
 msgstr "A Last.fm szomszédaim"
 
-#: globalsearch/lastfmsearchprovider.cpp:49 internet/lastfmservice.cpp:173
+#: globalsearch/lastfmsearchprovider.cpp:49 internet/lastfmservice.cpp:188
 msgid "My Last.fm Recommended Radio"
 msgstr "A Last.fm ajánlott rádióm"
 
-#: internet/lastfmservice.cpp:180
+#: internet/lastfmservice.cpp:195
 msgid "My Mix Radio"
 msgstr "Az én mixem rádió"
 
-#: internet/lastfmservice.cpp:185
+#: internet/lastfmservice.cpp:200
 msgid "My Neighborhood"
 msgstr "Szomszédaim"
 
-#: internet/lastfmservice.cpp:175
+#: internet/lastfmservice.cpp:190
 msgid "My Radio Station"
 msgstr "A rádióadóm"
 
-#: internet/lastfmservice.cpp:170
+#: internet/lastfmservice.cpp:185
 msgid "My Recommendations"
 msgstr "Ajánlásaim"
 
@@ -2641,7 +2650,7 @@ msgstr "Elnevezési opciók"
 msgid "Narrow band (NB)"
 msgstr "Keskenysávú (NB)"
 
-#: internet/lastfmservice.cpp:212
+#: internet/lastfmservice.cpp:227
 msgid "Neighbors"
 msgstr "Szomszédok"
 
@@ -2661,8 +2670,8 @@ msgstr "Soha"
 msgid "Never played"
 msgstr "Sohasem játszott"
 
-#: ../bin/src/ui_behavioursettingspage.h:194
-#: ../bin/src/ui_behavioursettingspage.h:208
+#: ../bin/src/ui_behavioursettingspage.h:186
+#: ../bin/src/ui_behavioursettingspage.h:200
 msgid "Never start playing"
 msgstr "Soha ne indítsa el a lejátszást"
 
@@ -2670,7 +2679,7 @@ msgstr "Soha ne indítsa el a lejátszást"
 msgid "New playlist"
 msgstr "Új lejátszási lista"
 
-#: library/libraryview.cpp:255
+#: library/libraryview.cpp:256
 msgid "New smart playlist..."
 msgstr "Új intelligens lejátszási lista..."
 
@@ -2699,6 +2708,10 @@ msgstr "Következő szám"
 msgid "No analyzer"
 msgstr "Kikapcsolva"
 
+#: ../bin/src/ui_appearancesettingspage.h:189
+msgid "No background image"
+msgstr ""
+
 #: ../bin/src/ui_transcoderoptionsaac.h:146
 msgid "No long blocks"
 msgstr "Hosszú blokkok nélkül"
@@ -2717,7 +2730,7 @@ msgstr "Rövid blokkok nélkül"
 msgid "None"
 msgstr "Egyik sem"
 
-#: library/libraryview.cpp:455 ui/mainwindow.cpp:1806 ui/mainwindow.cpp:1927
+#: library/libraryview.cpp:480 ui/mainwindow.cpp:1806 ui/mainwindow.cpp:1927
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Egy kiválasztott szám sem alkalmas az eszközre való másoláshoz"
 
@@ -2733,19 +2746,19 @@ msgstr "Nem elérhető dinamikus lejátszási lista használatakor"
 msgid "Not connected"
 msgstr "Nincs kapcsolat"
 
-#: internet/lastfmservice.cpp:444
+#: internet/lastfmservice.cpp:459
 msgid "Not enough content"
 msgstr "Nincs elég tartalom"
 
-#: internet/lastfmservice.cpp:446
+#: internet/lastfmservice.cpp:461
 msgid "Not enough fans"
 msgstr "Nincs elég rajongó"
 
-#: internet/lastfmservice.cpp:445
+#: internet/lastfmservice.cpp:460
 msgid "Not enough members"
 msgstr "Nincs elég tag"
 
-#: internet/lastfmservice.cpp:447
+#: internet/lastfmservice.cpp:462
 msgid "Not enough neighbors"
 msgstr "Nincs elég szomszédja"
 
@@ -2815,8 +2828,8 @@ msgid "Open file..."
 msgstr ""
 
 #: devices/deviceview.cpp:220 internet/internetservice.cpp:73
-#: library/libraryview.cpp:247 widgets/fileviewlist.cpp:36
-#: ../bin/src/ui_behavioursettingspage.h:203
+#: library/libraryview.cpp:248 widgets/fileviewlist.cpp:36
+#: ../bin/src/ui_behavioursettingspage.h:195
 msgid "Open in new playlist"
 msgstr "Megnyitás új lejátszási listán"
 
@@ -2825,7 +2838,7 @@ msgstr "Megnyitás új lejátszási listán"
 msgid "Open..."
 msgstr "Megnyitás..."
 
-#: internet/lastfmservice.cpp:436
+#: internet/lastfmservice.cpp:451
 msgid "Operation failed"
 msgstr "A művelet sikertelen"
 
@@ -2845,7 +2858,7 @@ msgstr "Beállítások..."
 msgid "Organise Files"
 msgstr "Fájlok rendezése"
 
-#: library/libraryview.cpp:263 ui/mainwindow.cpp:527
+#: library/libraryview.cpp:264 ui/mainwindow.cpp:527
 msgid "Organise files..."
 msgstr "Fájlok rendezése..."
 
@@ -2924,7 +2937,7 @@ msgstr "Lejátszás"
 msgid "Play Artist or Tag"
 msgstr "Előadó vagy Címke lejátszása"
 
-#: internet/lastfmservice.cpp:103
+#: internet/lastfmservice.cpp:118
 msgid "Play artist radio..."
 msgstr "Előadó rádió lejátszása"
 
@@ -2932,7 +2945,7 @@ msgstr "Előadó rádió lejátszása"
 msgid "Play count"
 msgstr "Lejátszások száma"
 
-#: internet/lastfmservice.cpp:107
+#: internet/lastfmservice.cpp:122
 msgid "Play custom radio..."
 msgstr "Egyéni rádió lejátszása..."
 
@@ -2940,12 +2953,12 @@ msgstr "Egyéni rádió lejátszása..."
 msgid "Play if stopped, pause if playing"
 msgstr "Lejátszás, ha le van állítva, különben szünet"
 
-#: ../bin/src/ui_behavioursettingspage.h:195
-#: ../bin/src/ui_behavioursettingspage.h:209
+#: ../bin/src/ui_behavioursettingspage.h:187
+#: ../bin/src/ui_behavioursettingspage.h:201
 msgid "Play if there is nothing already playing"
 msgstr "Lejátszás, ha nincs lejátszás folyamatban"
 
-#: internet/lastfmservice.cpp:105
+#: internet/lastfmservice.cpp:120
 msgid "Play tag radio..."
 msgstr "Címke rádió lejátszása..."
 
@@ -3135,7 +3148,7 @@ msgstr "Sorkezelő"
 msgid "Queue selected tracks"
 msgstr "Sorba állítja a kiválasztott számokat"
 
-#: globalsearch/globalsearchwidget.cpp:105 library/libraryview.cpp:251
+#: globalsearch/globalsearchwidget.cpp:105 library/libraryview.cpp:252
 #: ui/mainwindow.cpp:1337
 msgid "Queue track"
 msgstr "Szám sorba állítása"
@@ -3200,7 +3213,7 @@ msgstr "Katalógus frissítése"
 msgid "Refresh channels"
 msgstr "Csatornák frissítése"
 
-#: internet/lastfmservice.cpp:109
+#: internet/lastfmservice.cpp:124
 msgid "Refresh friends list"
 msgstr ""
 
@@ -3220,7 +3233,7 @@ msgstr "Reggae"
 msgid "Remember Wii remote swing"
 msgstr "Emlékezzen a Wii távvezérlő mozdulatra"
 
-#: ../bin/src/ui_behavioursettingspage.h:189
+#: ../bin/src/ui_behavioursettingspage.h:181
 msgid "Remember from last time"
 msgstr "Ahogy legutoljára volt"
 
@@ -3230,7 +3243,7 @@ msgstr "Távirányítás"
 
 #: internet/savedradio.cpp:100 ../bin/src/ui_queuemanager.h:135
 #: ../bin/src/ui_searchtermwidget.h:282 ../bin/src/ui_transcodedialog.h:207
-#: internet/lastfmservice.cpp:100
+#: internet/lastfmservice.cpp:115
 msgid "Remove"
 msgstr "Eltávolítás"
 
@@ -3300,12 +3313,12 @@ msgid "Replace and play now"
 msgstr ""
 
 #: devices/deviceview.cpp:218 globalsearch/globalsearchwidget.cpp:106
-#: internet/internetservice.cpp:63 library/libraryview.cpp:245
+#: internet/internetservice.cpp:63 library/libraryview.cpp:246
 #: widgets/fileviewlist.cpp:34
 msgid "Replace current playlist"
 msgstr "Az aktuális lista cseréje"
 
-#: ../bin/src/ui_behavioursettingspage.h:202
+#: ../bin/src/ui_behavioursettingspage.h:194
 msgid "Replace the playlist"
 msgstr "Lejátszási lista cseréje"
 
@@ -3512,15 +3525,19 @@ msgstr "Összes kiválasztása"
 msgid "Select None"
 msgstr "Kiválasztás megszüntetése"
 
-#: ../bin/src/ui_appearancesettingspage.h:125
+#: ../bin/src/ui_appearancesettingspage.h:185
 msgid "Select background color:"
+msgstr ""
+
+#: ui/appearancesettingspage.cpp:187
+msgid "Select background image"
 msgstr ""
 
 #: ../bin/src/ui_trackselectiondialog.h:207
 msgid "Select best possible match"
 msgstr "A legjobban illeszkedő találatot választja"
 
-#: ../bin/src/ui_appearancesettingspage.h:123
+#: ../bin/src/ui_appearancesettingspage.h:183
 msgid "Select foreground color:"
 msgstr ""
 
@@ -3536,7 +3553,7 @@ msgstr "Megjelenítések kiválasztása..."
 msgid "Serial number"
 msgstr "Sorozatszám"
 
-#: internet/lastfmservice.cpp:439
+#: internet/lastfmservice.cpp:454
 msgid "Service offline"
 msgstr "A szolgáltatás nem üzemel"
 
@@ -3632,12 +3649,12 @@ msgstr "Elválasztók mutatása"
 msgid "Show fullsize..."
 msgstr "Jelenítse meg teljes méretben..."
 
-#: library/libraryview.cpp:275 ui/mainwindow.cpp:530
+#: library/libraryview.cpp:276 ui/mainwindow.cpp:530
 #: widgets/fileviewlist.cpp:52
 msgid "Show in file browser..."
 msgstr "Mutassa a fájlböngészőben..."
 
-#: library/libraryview.cpp:279
+#: library/libraryview.cpp:280
 msgid "Show in various artists"
 msgstr "Jelenítse meg a különböző előadók között"
 
@@ -3661,7 +3678,7 @@ msgstr "Jelenítse meg a \"kedvenc\" és \"tiltás\" gombokat"
 msgid "Show the scrobble button in the main window"
 msgstr "Scrobble gomb mutatása a főablakban"
 
-#: ../bin/src/ui_behavioursettingspage.h:177
+#: ../bin/src/ui_behavioursettingspage.h:170
 msgid "Show tray icon"
 msgstr "Tálcaikon megjelenítése"
 
@@ -3932,7 +3949,7 @@ msgstr "Címke"
 msgid "Tag fetcher"
 msgstr "Címke letöltő"
 
-#: internet/lastfmservice.cpp:195
+#: internet/lastfmservice.cpp:210
 msgid "Tag radio"
 msgstr "Címkerádió"
 
@@ -3985,6 +4002,10 @@ msgid ""
 "rescan because of the new features listed below:"
 msgstr "A Clementine most frissült verziójának szüksége van a teljes zenetár újraolvasására az alább sorolt új funkciók használatához:"
 
+#: library/libraryview.cpp:406
+msgid "There are other songs in this album"
+msgstr ""
+
 #: internet/magnatunedownloaddialog.cpp:157
 msgid "There was a problem fetching the metadata from Magnatune"
 msgstr "Hiba lépett fel az adatok Magnatuneról való letöltése közben"
@@ -4001,7 +4022,7 @@ msgid ""
 "deleted:"
 msgstr "Néhány szám törlése közben hiba lépett fel. Az alábbi fájlokat nem sikerült törölni:"
 
-#: library/libraryview.cpp:461 ui/mainwindow.cpp:1854 widgets/fileview.cpp:187
+#: library/libraryview.cpp:486 ui/mainwindow.cpp:1854 widgets/fileview.cpp:187
 msgid ""
 "These files will be deleted from disk, are you sure you want to continue?"
 msgstr "Ezek a fájlok törölve lesznek a lemezről. Biztos benne, hogy folytatja?"
@@ -4071,7 +4092,7 @@ msgid ""
 "want to continue?"
 msgstr ""
 
-#: internet/lastfmservice.cpp:440
+#: internet/lastfmservice.cpp:455
 msgid "This stream is for paid subscribers only"
 msgstr "Ez az adatfolyam csak előfizetőknek érhető el"
 
@@ -4196,7 +4217,7 @@ msgstr "%1 (%2) nem letölthető"
 msgid "Unknown"
 msgstr "Ismeretlen"
 
-#: internet/digitallyimportedclient.cpp:68 internet/lastfmservice.cpp:453
+#: internet/digitallyimportedclient.cpp:68 internet/lastfmservice.cpp:468
 msgid "Unknown error"
 msgstr "Ismeretlen hiba"
 
@@ -4246,7 +4267,7 @@ msgstr "Replay Gain adatok használata, ha elérhetőek"
 msgid "Use Wii Remote"
 msgstr "Wii távvezérlő használata"
 
-#: ../bin/src/ui_appearancesettingspage.h:122
+#: ../bin/src/ui_appearancesettingspage.h:182
 msgid "Use a custom color set"
 msgstr ""
 
@@ -4274,11 +4295,11 @@ msgstr "Értesítések használata a Wii távvezérlő állapotváltozásaihoz"
 msgid "Use temporal noise shaping"
 msgstr "Átmeneti zajszűrő alkalmazása"
 
-#: ../bin/src/ui_behavioursettingspage.h:183
+#: ../bin/src/ui_behavioursettingspage.h:175
 msgid "Use the system default"
 msgstr "Rendszer alapértelmezés használata"
 
-#: ../bin/src/ui_appearancesettingspage.h:121
+#: ../bin/src/ui_appearancesettingspage.h:181
 msgid "Use the system default color set"
 msgstr ""
 
@@ -4310,7 +4331,7 @@ msgstr ""
 msgid "Username"
 msgstr "Felhasználónév"
 
-#: ../bin/src/ui_behavioursettingspage.h:191
+#: ../bin/src/ui_behavioursettingspage.h:183
 msgid "Using the menu to add a song will..."
 msgstr "Szám felvételéhez a menü használatával..."
 
@@ -4383,7 +4404,7 @@ msgstr "WAV"
 msgid "Weeks"
 msgstr "Hét"
 
-#: ../bin/src/ui_behavioursettingspage.h:186
+#: ../bin/src/ui_behavioursettingspage.h:178
 msgid "When Clementine starts"
 msgstr "Amikor a Clementine elindul"
 
@@ -4450,6 +4471,12 @@ msgstr "Windows Media 64k"
 #: core/song.cpp:332
 msgid "Windows Media audio"
 msgstr "Windows Media audio"
+
+#: library/libraryview.cpp:407
+msgid ""
+"Would you like to move the other songs in this album to Various Artists as "
+"well?"
+msgstr ""
 
 #: ui/mainwindow.cpp:2047
 msgid "Would you like to run a full rescan right now?"
@@ -4555,7 +4582,7 @@ msgid ""
 "shortcuts in Clementine."
 msgstr "A Rendszerbeállításokban engedélyeznie kell a \"<span style=\" font-style:italic;\">Hozzáférés engedélyezése kisegítő eszközökhöz</span>\" opciót a globális billentyűparancsok használatához."
 
-#: ../bin/src/ui_behavioursettingspage.h:185
+#: ../bin/src/ui_behavioursettingspage.h:177
 msgid "You will need to restart Clementine if you change the language."
 msgstr "A nyelv megváltoztatásához újra kell indítania a Clementinet."
 
@@ -4582,7 +4609,7 @@ msgstr "A Last.fm előfizetési adatai hibásak"
 msgid "Your Magnatune credentials were incorrect"
 msgstr "A Magnatune bejelentkezési adataid nem megfelelőek"
 
-#: library/libraryview.cpp:219
+#: library/libraryview.cpp:220
 msgid "Your library is empty!"
 msgstr "Az ön zenetára üres!"
 
@@ -4641,7 +4668,7 @@ msgstr "között"
 msgid "biggest first"
 msgstr "nagyobb először"
 
-#: playlist/playlistview.cpp:164 ui/edittagdialog.cpp:454
+#: playlist/playlistview.cpp:174 ui/edittagdialog.cpp:454
 msgid "bpm"
 msgstr "bpm"
 
@@ -4684,7 +4711,7 @@ msgstr "nagyobb mint"
 msgid "in the last"
 msgstr "az utóbbi"
 
-#: playlist/playlistview.cpp:166 ui/edittagdialog.cpp:456
+#: playlist/playlistview.cpp:176 ui/edittagdialog.cpp:456
 #: internet/spotifysettingspage.cpp:59 internet/spotifysettingspage.cpp:60
 #: internet/spotifysettingspage.cpp:61
 msgid "kbps"

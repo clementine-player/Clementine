@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-02-02 20:06+0000\n"
+"PO-Revision-Date: 2012-02-19 14:26+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -452,7 +452,7 @@ msgstr "Lägg till i en annan spellista"
 msgid "Add to playlist"
 msgstr "Lägg till i spellistan"
 
-#: ../bin/src/ui_behavioursettingspage.h:204
+#: ../bin/src/ui_behavioursettingspage.h:196
 msgid "Add to the queue"
 msgstr "Lägg till kön"
 
@@ -569,16 +569,16 @@ msgstr "Tillåt mellan-/sidokodning"
 msgid "Alongside the originals"
 msgstr "Tillsammans med originalen"
 
-#: ../bin/src/ui_behavioursettingspage.h:188
+#: ../bin/src/ui_behavioursettingspage.h:180
 msgid "Always hide the main window"
 msgstr "Dölj alltid huvudfönstret"
 
-#: ../bin/src/ui_behavioursettingspage.h:187
+#: ../bin/src/ui_behavioursettingspage.h:179
 msgid "Always show the main window"
 msgstr "Visa alltid huvudfönstret"
 
-#: ../bin/src/ui_behavioursettingspage.h:196
-#: ../bin/src/ui_behavioursettingspage.h:210
+#: ../bin/src/ui_behavioursettingspage.h:188
+#: ../bin/src/ui_behavioursettingspage.h:202
 msgid "Always start playing"
 msgstr "Starta alltid att spela"
 
@@ -605,7 +605,7 @@ msgstr "Ett fel uppstod vid inläsning av iTunes-databasen"
 msgid "An error occurred writing metadata to '%1'"
 msgstr "Ett fel uppstod när metadata skulle skrivas till '%1'"
 
-#: internet/lastfmservice.cpp:903
+#: internet/lastfmservice.cpp:918
 #, qt-format
 msgid "An unknown last.fm error occurred: %1"
 msgstr "Ett okänt Last.fm-fel uppstod: %1"
@@ -615,7 +615,7 @@ msgid "And:"
 msgstr "Och:"
 
 #: ../bin/src/ui_songinfosettingspage.h:180
-#: ../bin/src/ui_appearancesettingspage.h:119
+#: ../bin/src/ui_appearancesettingspage.h:179
 msgid "Appearance"
 msgstr "Utseende"
 
@@ -624,11 +624,11 @@ msgid "Append files/URLs to the playlist"
 msgstr "Lägg till filer/webbadresser till spellistan"
 
 #: devices/deviceview.cpp:216 internet/internetservice.cpp:53
-#: library/libraryview.cpp:243 widgets/fileviewlist.cpp:32
+#: library/libraryview.cpp:244 widgets/fileviewlist.cpp:32
 msgid "Append to current playlist"
 msgstr "Lägg till i den aktuella spellistan"
 
-#: ../bin/src/ui_behavioursettingspage.h:201
+#: ../bin/src/ui_behavioursettingspage.h:193
 msgid "Append to the playlist"
 msgstr "Lägg till i spellistan"
 
@@ -663,7 +663,7 @@ msgstr "Artist"
 msgid "Artist info"
 msgstr "Artistinfo"
 
-#: internet/lastfmservice.cpp:191
+#: internet/lastfmservice.cpp:206
 msgid "Artist radio"
 msgstr "Artistradio"
 
@@ -684,7 +684,7 @@ msgid "Authenticating..."
 msgstr "Kontrollerar behörighet..."
 
 #: internet/digitallyimportedsettingspage.cpp:82
-#: internet/magnatunesettingspage.cpp:113 internet/lastfmservice.cpp:432
+#: internet/magnatunesettingspage.cpp:113 internet/lastfmservice.cpp:447
 #: internet/lastfmsettingspage.cpp:78 remote/remotesettingspage.cpp:113
 msgid "Authentication failed"
 msgstr "Behörighetskontroll misslyckades"
@@ -730,6 +730,10 @@ msgstr "Bakgrundsströmmar"
 msgid "Background color"
 msgstr "Bakgrundsfärg"
 
+#: ../bin/src/ui_appearancesettingspage.h:187
+msgid "Background image"
+msgstr ""
+
 #: ../bin/src/ui_notificationssettingspage.h:424
 msgid "Background opacity"
 msgstr "Bakgrundsopacitet"
@@ -750,7 +754,7 @@ msgstr "Basblå"
 msgid "Basic audio type"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:176
+#: ../bin/src/ui_behavioursettingspage.h:169
 msgid "Behavior"
 msgstr "Beteende"
 
@@ -795,6 +799,7 @@ msgid "Boom analyzer"
 msgstr "Boom-analysator"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:146
+#: ../bin/src/ui_appearancesettingspage.h:191
 msgid "Browse..."
 msgstr "Bläddra..."
 
@@ -947,7 +952,7 @@ msgstr "Clementine-bildvisare"
 msgid "Clementine was unable to find results for this file"
 msgstr "Clementine kunde inte hitta resultat för den här filen"
 
-#: library/libraryview.cpp:225
+#: library/libraryview.cpp:226
 msgid "Click here to add some music"
 msgstr "Klicka här för att lägga till musik"
 
@@ -979,7 +984,7 @@ msgstr "Club"
 msgid "Color"
 msgstr "Färg"
 
-#: ../bin/src/ui_appearancesettingspage.h:120
+#: ../bin/src/ui_appearancesettingspage.h:180
 msgid "Colors"
 msgstr ""
 
@@ -1014,7 +1019,7 @@ msgstr "Kompositör"
 msgid "Configure Grooveshark..."
 msgstr "Konfigurera Grooveshark..."
 
-#: internet/lastfmservice.cpp:111
+#: internet/lastfmservice.cpp:126
 msgid "Configure Last.fm..."
 msgstr "Konfigurera Last.fm..."
 
@@ -1067,7 +1072,7 @@ msgstr "Konvertera all musik som enheten inte kan spela upp"
 msgid "Copy to clipboard"
 msgstr ""
 
-#: library/libraryview.cpp:265 ui/mainwindow.cpp:528
+#: library/libraryview.cpp:266 ui/mainwindow.cpp:528
 #: widgets/fileviewlist.cpp:44
 msgid "Copy to device..."
 msgstr "Kopiera till enhet..."
@@ -1102,7 +1107,7 @@ msgid ""
 "plugins installed"
 msgstr "Kunde inte hitta en kodare för %1, kontrollera att du har de korrekta GStreamer-insticken installerade"
 
-#: internet/lastfmservice.cpp:900
+#: internet/lastfmservice.cpp:915
 msgid "Couldn't load the last.fm radio station"
 msgstr "Kunde inte läsa in Last.fm-radiostationen"
 
@@ -1231,11 +1236,15 @@ msgstr "Ctrl+Up"
 msgid "Custom"
 msgstr "Anpassad"
 
+#: ../bin/src/ui_appearancesettingspage.h:190
+msgid "Custom image:"
+msgstr ""
+
 #: ../bin/src/ui_notificationssettingspage.h:416
 msgid "Custom message settings"
 msgstr "Egna meddelandeinställningar"
 
-#: internet/lastfmservice.cpp:199
+#: internet/lastfmservice.cpp:214
 msgid "Custom radio"
 msgstr "Anpassad radio"
 
@@ -1275,6 +1284,10 @@ msgstr "Sänk volymen med 4%"
 msgid "Decrease volume"
 msgstr "Sänk volymen"
 
+#: ../bin/src/ui_appearancesettingspage.h:188
+msgid "Default background image"
+msgstr ""
+
 #: ../bin/src/ui_wiimotesettingspage.h:195
 msgid "Defaults"
 msgstr "Standardvärden"
@@ -1287,7 +1300,7 @@ msgstr "Fördröjning mellan visualiseringar"
 msgid "Delete Grooveshark playlist"
 msgstr "Ta bort Grooveshark spellista"
 
-#: devices/deviceview.cpp:393 library/libraryview.cpp:460
+#: devices/deviceview.cpp:393 library/libraryview.cpp:485
 #: ui/mainwindow.cpp:1853 widgets/fileview.cpp:186
 msgid "Delete files"
 msgstr "Ta bort filer"
@@ -1296,7 +1309,7 @@ msgstr "Ta bort filer"
 msgid "Delete from device..."
 msgstr "Ta bort från enhet..."
 
-#: library/libraryview.cpp:267 ui/mainwindow.cpp:529
+#: library/libraryview.cpp:268 ui/mainwindow.cpp:529
 #: widgets/fileviewlist.cpp:45
 msgid "Delete from disk..."
 msgstr "Ta bort från disk..."
@@ -1305,7 +1318,7 @@ msgstr "Ta bort från disk..."
 msgid "Delete preset"
 msgstr "Ta bort förinställning"
 
-#: library/libraryview.cpp:259
+#: library/libraryview.cpp:260
 msgid "Delete smart playlist"
 msgstr "Radera smart spellista"
 
@@ -1416,7 +1429,7 @@ msgstr "Konvertera inte någon musik"
 msgid "Don't repeat"
 msgstr "Upprepa inte"
 
-#: library/libraryview.cpp:281
+#: library/libraryview.cpp:282
 msgid "Don't show in various artists"
 msgstr "Visa inte i diverse artister"
 
@@ -1432,7 +1445,7 @@ msgstr "Stoppa inte!"
 msgid "Double click to open"
 msgstr "Dubbelklicka för att öppna"
 
-#: ../bin/src/ui_behavioursettingspage.h:198
+#: ../bin/src/ui_behavioursettingspage.h:190
 msgid "Double clicking a song will..."
 msgstr "Dubbelklicka på en låt kommer ..."
 
@@ -1492,7 +1505,7 @@ msgstr "Dynamisk läge är på"
 msgid "Dynamic random mix"
 msgstr "Dynamisk slumpmässig blandning"
 
-#: library/libraryview.cpp:257
+#: library/libraryview.cpp:258
 msgid "Edit smart playlist..."
 msgstr "Redigera smart spellista..."
 
@@ -1513,12 +1526,12 @@ msgstr "Redigera etiketter"
 msgid "Edit track information"
 msgstr "Redigera spårinformation"
 
-#: library/libraryview.cpp:271 widgets/fileviewlist.cpp:50
+#: library/libraryview.cpp:272 widgets/fileviewlist.cpp:50
 #: ../bin/src/ui_mainwindow.h:659
 msgid "Edit track information..."
 msgstr "Redigera spårinformation..."
 
-#: library/libraryview.cpp:273
+#: library/libraryview.cpp:274
 msgid "Edit tracks information..."
 msgstr "Redigera spår information ..."
 
@@ -1533,10 +1546,6 @@ msgstr "Aktivera stöd för Wii-kontroll"
 #: ../bin/src/ui_equalizer.h:126
 msgid "Enable equalizer"
 msgstr "Aktivera equalizer"
-
-#: ../bin/src/ui_behavioursettingspage.h:179
-msgid "Enable playlist background image"
-msgstr "Aktivera bakgrundsbild i spellista"
 
 #: ../bin/src/ui_wiimotesettingspage.h:187
 msgid "Enable shortcuts only when Clementine is focused"
@@ -1604,7 +1613,7 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "Motsvarar --log-levels *:3"
 
 #: internet/groovesharkservice.cpp:954
-#: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:454
+#: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:479
 #: ui/mainwindow.cpp:1805 ui/mainwindow.cpp:1926
 msgid "Error"
 msgstr "Fel"
@@ -1857,7 +1866,7 @@ msgstr "Bildfrekvens"
 msgid "Frames per buffer"
 msgstr "Ramar per buffert"
 
-#: internet/lastfmservice.cpp:207
+#: internet/lastfmservice.cpp:222
 msgid "Friends"
 msgstr "Vänner"
 
@@ -1933,7 +1942,7 @@ msgstr "Google-användarnamn"
 msgid "Got %1 covers out of %2 (%3 failed)"
 msgstr "Erhöll %1 omslagsbild utav %2 (%3 misslyckades)"
 
-#: ../bin/src/ui_behavioursettingspage.h:190
+#: ../bin/src/ui_behavioursettingspage.h:182
 msgid "Grey out non existent songs in my playlists"
 msgstr "Gråa ut icke-existerande låtar i mina spellistor"
 
@@ -2116,31 +2125,31 @@ msgstr "Internet"
 msgid "Internet providers"
 msgstr "Internet operatörer"
 
-#: internet/lastfmservice.cpp:438
+#: internet/lastfmservice.cpp:453
 msgid "Invalid API key"
 msgstr "Felaktig API-nyckel"
 
-#: internet/lastfmservice.cpp:433
+#: internet/lastfmservice.cpp:448
 msgid "Invalid format"
 msgstr "Ogiltigt format"
 
-#: internet/lastfmservice.cpp:431
+#: internet/lastfmservice.cpp:446
 msgid "Invalid method"
 msgstr "Ogiltig metod"
 
-#: internet/lastfmservice.cpp:434
+#: internet/lastfmservice.cpp:449
 msgid "Invalid parameters"
 msgstr "Ogiltiga parametrar"
 
-#: internet/lastfmservice.cpp:435
+#: internet/lastfmservice.cpp:450
 msgid "Invalid resource specified"
 msgstr "Ogiltig resurs angiven"
 
-#: internet/lastfmservice.cpp:430
+#: internet/lastfmservice.cpp:445
 msgid "Invalid service"
 msgstr "Ogiltig tjänst"
 
-#: internet/lastfmservice.cpp:437
+#: internet/lastfmservice.cpp:452
 msgid "Invalid session key"
 msgstr "Felaktig sessionsnyckel"
 
@@ -2188,7 +2197,7 @@ msgstr "Behåll knappar i %1 sekund..."
 msgid "Keep buttons for %1 seconds..."
 msgstr "Behåll knappar i %1 sekunder..."
 
-#: ../bin/src/ui_behavioursettingspage.h:178
+#: ../bin/src/ui_behavioursettingspage.h:171
 msgid "Keep running in the background when the window is closed"
 msgstr "Fortsätt köra i bakgrunden när fönstret är stängt"
 
@@ -2200,7 +2209,7 @@ msgstr "Behåll originalfilerna"
 msgid "Kittens"
 msgstr "Kittens"
 
-#: ../bin/src/ui_behavioursettingspage.h:180
+#: ../bin/src/ui_behavioursettingspage.h:172
 msgid "Language"
 msgstr "Språk"
 
@@ -2229,45 +2238,45 @@ msgstr "Senast spelad"
 msgid "Last.fm"
 msgstr "Last.fm"
 
-#: internet/lastfmservice.cpp:70
+#: internet/lastfmservice.cpp:85
 #, qt-format
 msgid "Last.fm Custom Radio: %1"
 msgstr "Last.fm Anpassad Radio: %1"
 
-#: internet/lastfmservice.cpp:238 internet/lastfmservice.cpp:694
-#: internet/lastfmservice.cpp:729
+#: internet/lastfmservice.cpp:253 internet/lastfmservice.cpp:709
+#: internet/lastfmservice.cpp:744
 #, qt-format
 msgid "Last.fm Library - %1"
 msgstr "Last.fm-bibliotek - %1"
 
-#: globalsearch/lastfmsearchprovider.cpp:75 internet/lastfmservice.cpp:240
-#: internet/lastfmservice.cpp:243
+#: globalsearch/lastfmsearchprovider.cpp:75 internet/lastfmservice.cpp:255
+#: internet/lastfmservice.cpp:258
 #, qt-format
 msgid "Last.fm Mix Radio - %1"
 msgstr "Last.fm Blandad Radio - %1"
 
-#: globalsearch/lastfmsearchprovider.cpp:77 internet/lastfmservice.cpp:245
-#: internet/lastfmservice.cpp:248
+#: globalsearch/lastfmsearchprovider.cpp:77 internet/lastfmservice.cpp:260
+#: internet/lastfmservice.cpp:263
 #, qt-format
 msgid "Last.fm Neighbor Radio - %1"
 msgstr "Last.fm-grannradio - %1"
 
-#: globalsearch/lastfmsearchprovider.cpp:73 internet/lastfmservice.cpp:235
+#: globalsearch/lastfmsearchprovider.cpp:73 internet/lastfmservice.cpp:250
 #, qt-format
 msgid "Last.fm Radio Station - %1"
 msgstr "Last.fm-radiostation - %1"
 
-#: internet/lastfmservice.cpp:68
+#: internet/lastfmservice.cpp:83
 #, qt-format
 msgid "Last.fm Similar Artists to %1"
 msgstr "Last.fm-artister som liknar %1"
 
-#: internet/lastfmservice.cpp:69
+#: internet/lastfmservice.cpp:84
 #, qt-format
 msgid "Last.fm Tag Radio: %1"
 msgstr "Last.fm-taggradio: %1"
 
-#: internet/lastfmservice.cpp:442
+#: internet/lastfmservice.cpp:457
 msgid "Last.fm is currently busy, please try again in a few minutes"
 msgstr "Last.fm är upptaget för närvarande, försök igen om ett par minuter"
 
@@ -2361,7 +2370,7 @@ msgstr "Läs in spellista"
 msgid "Load playlist..."
 msgstr "Läs in spellista..."
 
-#: internet/lastfmservice.cpp:913
+#: internet/lastfmservice.cpp:928
 msgid "Loading Last.fm radio"
 msgstr "Läser in Last.fm-radio"
 
@@ -2494,7 +2503,7 @@ msgstr ""
 msgid "Make playlist available offline"
 msgstr "Gör spellista tillgänglig offline"
 
-#: internet/lastfmservice.cpp:449
+#: internet/lastfmservice.cpp:464
 msgid "Malformed response"
 msgstr "Felformaterat svar"
 
@@ -2594,35 +2603,35 @@ msgstr "Musikbibliotek"
 msgid "Mute"
 msgstr "Tyst"
 
-#: globalsearch/lastfmsearchprovider.cpp:51 internet/lastfmservice.cpp:178
+#: globalsearch/lastfmsearchprovider.cpp:51 internet/lastfmservice.cpp:193
 msgid "My Last.fm Library"
 msgstr "Mitt Last.fm Bibliotek"
 
-#: globalsearch/lastfmsearchprovider.cpp:53 internet/lastfmservice.cpp:183
+#: globalsearch/lastfmsearchprovider.cpp:53 internet/lastfmservice.cpp:198
 msgid "My Last.fm Mix Radio"
 msgstr "Min Last.fm Mix Radio"
 
-#: globalsearch/lastfmsearchprovider.cpp:55 internet/lastfmservice.cpp:188
+#: globalsearch/lastfmsearchprovider.cpp:55 internet/lastfmservice.cpp:203
 msgid "My Last.fm Neighborhood"
 msgstr "Mitt Last.fm-grannskap"
 
-#: globalsearch/lastfmsearchprovider.cpp:49 internet/lastfmservice.cpp:173
+#: globalsearch/lastfmsearchprovider.cpp:49 internet/lastfmservice.cpp:188
 msgid "My Last.fm Recommended Radio"
 msgstr "Min Last.fm rekommenderade radio"
 
-#: internet/lastfmservice.cpp:180
+#: internet/lastfmservice.cpp:195
 msgid "My Mix Radio"
 msgstr "Min Blandade Radio"
 
-#: internet/lastfmservice.cpp:185
+#: internet/lastfmservice.cpp:200
 msgid "My Neighborhood"
 msgstr "Mitt grannskap"
 
-#: internet/lastfmservice.cpp:175
+#: internet/lastfmservice.cpp:190
 msgid "My Radio Station"
 msgstr "Min radiostation"
 
-#: internet/lastfmservice.cpp:170
+#: internet/lastfmservice.cpp:185
 msgid "My Recommendations"
 msgstr "Mina rekommendationer"
 
@@ -2642,7 +2651,7 @@ msgstr "Namngivningsalternativ"
 msgid "Narrow band (NB)"
 msgstr "Snävt band (NB)"
 
-#: internet/lastfmservice.cpp:212
+#: internet/lastfmservice.cpp:227
 msgid "Neighbors"
 msgstr "Grannar"
 
@@ -2662,8 +2671,8 @@ msgstr "Aldrig"
 msgid "Never played"
 msgstr "Aldrig spelade"
 
-#: ../bin/src/ui_behavioursettingspage.h:194
-#: ../bin/src/ui_behavioursettingspage.h:208
+#: ../bin/src/ui_behavioursettingspage.h:186
+#: ../bin/src/ui_behavioursettingspage.h:200
 msgid "Never start playing"
 msgstr "Starta aldrig uppspelning"
 
@@ -2671,7 +2680,7 @@ msgstr "Starta aldrig uppspelning"
 msgid "New playlist"
 msgstr "Ny spellista"
 
-#: library/libraryview.cpp:255
+#: library/libraryview.cpp:256
 msgid "New smart playlist..."
 msgstr "Ny smart spellista..."
 
@@ -2700,6 +2709,10 @@ msgstr "Nästa spår"
 msgid "No analyzer"
 msgstr "Ingen analysator"
 
+#: ../bin/src/ui_appearancesettingspage.h:189
+msgid "No background image"
+msgstr ""
+
 #: ../bin/src/ui_transcoderoptionsaac.h:146
 msgid "No long blocks"
 msgstr "Inga långa block"
@@ -2718,7 +2731,7 @@ msgstr "Inga korta block"
 msgid "None"
 msgstr "Inga"
 
-#: library/libraryview.cpp:455 ui/mainwindow.cpp:1806 ui/mainwindow.cpp:1927
+#: library/libraryview.cpp:480 ui/mainwindow.cpp:1806 ui/mainwindow.cpp:1927
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Ingen av de valda låtarna lämpar sig för kopiering till en enhet"
 
@@ -2734,19 +2747,19 @@ msgstr "Inte tillgängligt när du använder en dynamisk spellista"
 msgid "Not connected"
 msgstr "Inte ansluten"
 
-#: internet/lastfmservice.cpp:444
+#: internet/lastfmservice.cpp:459
 msgid "Not enough content"
 msgstr "Inte tillräckligt med innehåll"
 
-#: internet/lastfmservice.cpp:446
+#: internet/lastfmservice.cpp:461
 msgid "Not enough fans"
 msgstr "Inte tillräckligt många fans"
 
-#: internet/lastfmservice.cpp:445
+#: internet/lastfmservice.cpp:460
 msgid "Not enough members"
 msgstr "Inte tillräckligt många medlemmar"
 
-#: internet/lastfmservice.cpp:447
+#: internet/lastfmservice.cpp:462
 msgid "Not enough neighbors"
 msgstr "Inte tillräckligt med grannar"
 
@@ -2816,8 +2829,8 @@ msgid "Open file..."
 msgstr "Öppna fil..."
 
 #: devices/deviceview.cpp:220 internet/internetservice.cpp:73
-#: library/libraryview.cpp:247 widgets/fileviewlist.cpp:36
-#: ../bin/src/ui_behavioursettingspage.h:203
+#: library/libraryview.cpp:248 widgets/fileviewlist.cpp:36
+#: ../bin/src/ui_behavioursettingspage.h:195
 msgid "Open in new playlist"
 msgstr "Öppna i ny spellista"
 
@@ -2826,7 +2839,7 @@ msgstr "Öppna i ny spellista"
 msgid "Open..."
 msgstr "Öppna..."
 
-#: internet/lastfmservice.cpp:436
+#: internet/lastfmservice.cpp:451
 msgid "Operation failed"
 msgstr "Åtgärden misslyckades"
 
@@ -2846,7 +2859,7 @@ msgstr "Alternativ..."
 msgid "Organise Files"
 msgstr "Organisera filer"
 
-#: library/libraryview.cpp:263 ui/mainwindow.cpp:527
+#: library/libraryview.cpp:264 ui/mainwindow.cpp:527
 msgid "Organise files..."
 msgstr "Organisera filer..."
 
@@ -2925,7 +2938,7 @@ msgstr "Spela upp"
 msgid "Play Artist or Tag"
 msgstr "Spela upp artist eller tagg"
 
-#: internet/lastfmservice.cpp:103
+#: internet/lastfmservice.cpp:118
 msgid "Play artist radio..."
 msgstr "Spela upp artistradio..."
 
@@ -2933,7 +2946,7 @@ msgstr "Spela upp artistradio..."
 msgid "Play count"
 msgstr "Antal uppspelningar"
 
-#: internet/lastfmservice.cpp:107
+#: internet/lastfmservice.cpp:122
 msgid "Play custom radio..."
 msgstr "Spela upp anpassad radio..."
 
@@ -2941,12 +2954,12 @@ msgstr "Spela upp anpassad radio..."
 msgid "Play if stopped, pause if playing"
 msgstr "Spela upp om stoppad, gör paus vid uppspelning"
 
-#: ../bin/src/ui_behavioursettingspage.h:195
-#: ../bin/src/ui_behavioursettingspage.h:209
+#: ../bin/src/ui_behavioursettingspage.h:187
+#: ../bin/src/ui_behavioursettingspage.h:201
 msgid "Play if there is nothing already playing"
 msgstr "Spela om ingenting redan spelas"
 
-#: internet/lastfmservice.cpp:105
+#: internet/lastfmservice.cpp:120
 msgid "Play tag radio..."
 msgstr "Spela upp taggradio..."
 
@@ -3136,7 +3149,7 @@ msgstr "Köhanterare"
 msgid "Queue selected tracks"
 msgstr "Kölägg valda spår"
 
-#: globalsearch/globalsearchwidget.cpp:105 library/libraryview.cpp:251
+#: globalsearch/globalsearchwidget.cpp:105 library/libraryview.cpp:252
 #: ui/mainwindow.cpp:1337
 msgid "Queue track"
 msgstr "Kölägg spår"
@@ -3201,7 +3214,7 @@ msgstr "Updatera katalog"
 msgid "Refresh channels"
 msgstr "Uppdatera kanaler"
 
-#: internet/lastfmservice.cpp:109
+#: internet/lastfmservice.cpp:124
 msgid "Refresh friends list"
 msgstr "Uppdatera vän listan"
 
@@ -3221,7 +3234,7 @@ msgstr "Reggae"
 msgid "Remember Wii remote swing"
 msgstr "Kom ihåg Wii-kontrollens rörelse"
 
-#: ../bin/src/ui_behavioursettingspage.h:189
+#: ../bin/src/ui_behavioursettingspage.h:181
 msgid "Remember from last time"
 msgstr "Kom ihåg från förra gången"
 
@@ -3231,7 +3244,7 @@ msgstr "Fjärrkontroll"
 
 #: internet/savedradio.cpp:100 ../bin/src/ui_queuemanager.h:135
 #: ../bin/src/ui_searchtermwidget.h:282 ../bin/src/ui_transcodedialog.h:207
-#: internet/lastfmservice.cpp:100
+#: internet/lastfmservice.cpp:115
 msgid "Remove"
 msgstr "Ta bort"
 
@@ -3301,12 +3314,12 @@ msgid "Replace and play now"
 msgstr "Ersätt och spela nu"
 
 #: devices/deviceview.cpp:218 globalsearch/globalsearchwidget.cpp:106
-#: internet/internetservice.cpp:63 library/libraryview.cpp:245
+#: internet/internetservice.cpp:63 library/libraryview.cpp:246
 #: widgets/fileviewlist.cpp:34
 msgid "Replace current playlist"
 msgstr "Ersätt den aktuella spellistan"
 
-#: ../bin/src/ui_behavioursettingspage.h:202
+#: ../bin/src/ui_behavioursettingspage.h:194
 msgid "Replace the playlist"
 msgstr "Ersätt spellistan"
 
@@ -3513,15 +3526,19 @@ msgstr "Välj alla"
 msgid "Select None"
 msgstr "Välj ingen"
 
-#: ../bin/src/ui_appearancesettingspage.h:125
+#: ../bin/src/ui_appearancesettingspage.h:185
 msgid "Select background color:"
+msgstr ""
+
+#: ui/appearancesettingspage.cpp:187
+msgid "Select background image"
 msgstr ""
 
 #: ../bin/src/ui_trackselectiondialog.h:207
 msgid "Select best possible match"
 msgstr "Välj bästa möjliga matchning"
 
-#: ../bin/src/ui_appearancesettingspage.h:123
+#: ../bin/src/ui_appearancesettingspage.h:183
 msgid "Select foreground color:"
 msgstr ""
 
@@ -3537,7 +3554,7 @@ msgstr "Välj visualiseringar..."
 msgid "Serial number"
 msgstr "Serienummer"
 
-#: internet/lastfmservice.cpp:439
+#: internet/lastfmservice.cpp:454
 msgid "Service offline"
 msgstr "Tjänst inte tillgänglig"
 
@@ -3633,12 +3650,12 @@ msgstr "Visa avdelare"
 msgid "Show fullsize..."
 msgstr "Visa full storlek..."
 
-#: library/libraryview.cpp:275 ui/mainwindow.cpp:530
+#: library/libraryview.cpp:276 ui/mainwindow.cpp:530
 #: widgets/fileviewlist.cpp:52
 msgid "Show in file browser..."
 msgstr "Visa i filhanterare..."
 
-#: library/libraryview.cpp:279
+#: library/libraryview.cpp:280
 msgid "Show in various artists"
 msgstr "Visa i diverse artister"
 
@@ -3662,7 +3679,7 @@ msgstr "Visa knapparna \"Älska\" och \"Blockera\""
 msgid "Show the scrobble button in the main window"
 msgstr "Visa skrobbelknappen i huvudfönstret"
 
-#: ../bin/src/ui_behavioursettingspage.h:177
+#: ../bin/src/ui_behavioursettingspage.h:170
 msgid "Show tray icon"
 msgstr "Visa notifieringsikon"
 
@@ -3933,7 +3950,7 @@ msgstr "Tagg"
 msgid "Tag fetcher"
 msgstr "Etiketthämtare"
 
-#: internet/lastfmservice.cpp:195
+#: internet/lastfmservice.cpp:210
 msgid "Tag radio"
 msgstr "Taggradio"
 
@@ -3986,6 +4003,10 @@ msgid ""
 "rescan because of the new features listed below:"
 msgstr "Den version av Clementine du precis uppdaterade till kräver en fullständig omsökning av biblioteket på grund av dessa nya funktioner:"
 
+#: library/libraryview.cpp:406
+msgid "There are other songs in this album"
+msgstr ""
+
 #: internet/magnatunedownloaddialog.cpp:157
 msgid "There was a problem fetching the metadata from Magnatune"
 msgstr "Ett fel uppstod vid hämtning av metadatan från Magnatune"
@@ -4002,7 +4023,7 @@ msgid ""
 "deleted:"
 msgstr "Fel uppstod vid borttagning av några låtar. Följande filer kunde inte kopieras:"
 
-#: library/libraryview.cpp:461 ui/mainwindow.cpp:1854 widgets/fileview.cpp:187
+#: library/libraryview.cpp:486 ui/mainwindow.cpp:1854 widgets/fileview.cpp:187
 msgid ""
 "These files will be deleted from disk, are you sure you want to continue?"
 msgstr "Filerna kommer att tas bort från disken, är du säker på att du vill fortsätta?"
@@ -4072,7 +4093,7 @@ msgid ""
 "want to continue?"
 msgstr "Den här spellistan kommer tas bort; åtgärden kan inte ångras. Vill du verkligen fortsätta?"
 
-#: internet/lastfmservice.cpp:440
+#: internet/lastfmservice.cpp:455
 msgid "This stream is for paid subscribers only"
 msgstr "Denna ström är endast för betalkunder"
 
@@ -4197,7 +4218,7 @@ msgstr "Det går inte att hämta %1 (%2)"
 msgid "Unknown"
 msgstr "Okänt"
 
-#: internet/digitallyimportedclient.cpp:68 internet/lastfmservice.cpp:453
+#: internet/digitallyimportedclient.cpp:68 internet/lastfmservice.cpp:468
 msgid "Unknown error"
 msgstr "Okänt fel"
 
@@ -4247,7 +4268,7 @@ msgstr "Använd Replay Gain-metadata om det finns tillgängligt"
 msgid "Use Wii Remote"
 msgstr "Använd Wii-kontroll"
 
-#: ../bin/src/ui_appearancesettingspage.h:122
+#: ../bin/src/ui_appearancesettingspage.h:182
 msgid "Use a custom color set"
 msgstr ""
 
@@ -4275,11 +4296,11 @@ msgstr "Använd notifieringar för rapportering av Wii-kontrollstatus"
 msgid "Use temporal noise shaping"
 msgstr "Använd tidsbaserad brusformning"
 
-#: ../bin/src/ui_behavioursettingspage.h:183
+#: ../bin/src/ui_behavioursettingspage.h:175
 msgid "Use the system default"
 msgstr "Använd systemets standard"
 
-#: ../bin/src/ui_appearancesettingspage.h:121
+#: ../bin/src/ui_appearancesettingspage.h:181
 msgid "Use the system default color set"
 msgstr ""
 
@@ -4311,7 +4332,7 @@ msgstr "Användargränssnitt"
 msgid "Username"
 msgstr "Användarnamn"
 
-#: ../bin/src/ui_behavioursettingspage.h:191
+#: ../bin/src/ui_behavioursettingspage.h:183
 msgid "Using the menu to add a song will..."
 msgstr "Använda menyn för att lägga till en låt kommer att ..."
 
@@ -4384,7 +4405,7 @@ msgstr "WAV"
 msgid "Weeks"
 msgstr "Veckor"
 
-#: ../bin/src/ui_behavioursettingspage.h:186
+#: ../bin/src/ui_behavioursettingspage.h:178
 msgid "When Clementine starts"
 msgstr "När Clementine startar"
 
@@ -4451,6 +4472,12 @@ msgstr ""
 #: core/song.cpp:332
 msgid "Windows Media audio"
 msgstr "Windows Media-ljud"
+
+#: library/libraryview.cpp:407
+msgid ""
+"Would you like to move the other songs in this album to Various Artists as "
+"well?"
+msgstr ""
 
 #: ui/mainwindow.cpp:2047
 msgid "Would you like to run a full rescan right now?"
@@ -4556,7 +4583,7 @@ msgid ""
 "shortcuts in Clementine."
 msgstr "Du behöver starta Systeminställningar och slå på \"<span style=\" font-style:italic;\">Aktivera åtkomst för assisterande enheter</span>\" för att använda globala snabbtangenter i Clementine."
 
-#: ../bin/src/ui_behavioursettingspage.h:185
+#: ../bin/src/ui_behavioursettingspage.h:177
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Du måste starta om Clementine om du ändrar språket."
 
@@ -4583,7 +4610,7 @@ msgstr "Dina Last.fm-uppgifter var felaktiga"
 msgid "Your Magnatune credentials were incorrect"
 msgstr "Dina uppgifter för Magnatune var felaktiga"
 
-#: library/libraryview.cpp:219
+#: library/libraryview.cpp:220
 msgid "Your library is empty!"
 msgstr "Ditt bibliotek är tomt!"
 
@@ -4642,7 +4669,7 @@ msgstr "mellan"
 msgid "biggest first"
 msgstr "största först"
 
-#: playlist/playlistview.cpp:164 ui/edittagdialog.cpp:454
+#: playlist/playlistview.cpp:174 ui/edittagdialog.cpp:454
 msgid "bpm"
 msgstr "bpm"
 
@@ -4685,7 +4712,7 @@ msgstr "som är större än"
 msgid "in the last"
 msgstr "de senaste"
 
-#: playlist/playlistview.cpp:166 ui/edittagdialog.cpp:456
+#: playlist/playlistview.cpp:176 ui/edittagdialog.cpp:456
 #: internet/spotifysettingspage.cpp:59 internet/spotifysettingspage.cpp:60
 #: internet/spotifysettingspage.cpp:61
 msgid "kbps"

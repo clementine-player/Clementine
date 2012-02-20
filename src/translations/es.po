@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-02-05 05:26+0000\n"
-"Last-Translator: Adrián Ramirez Escalante <buried.prophet@gmail.com>\n"
+"PO-Revision-Date: 2012-02-19 14:26+0000\n"
+"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: es\n"
@@ -456,7 +456,7 @@ msgstr "Añadir a otra lista de reproducción"
 msgid "Add to playlist"
 msgstr "Añadir a la lista de reproducción"
 
-#: ../bin/src/ui_behavioursettingspage.h:204
+#: ../bin/src/ui_behavioursettingspage.h:196
 msgid "Add to the queue"
 msgstr "Añadir a la cola"
 
@@ -573,16 +573,16 @@ msgstr "Permitir codificación mid/side"
 msgid "Alongside the originals"
 msgstr "Junto a los originales"
 
-#: ../bin/src/ui_behavioursettingspage.h:188
+#: ../bin/src/ui_behavioursettingspage.h:180
 msgid "Always hide the main window"
 msgstr "Siempre ocultar la ventana principal"
 
-#: ../bin/src/ui_behavioursettingspage.h:187
+#: ../bin/src/ui_behavioursettingspage.h:179
 msgid "Always show the main window"
 msgstr "Siempre mostrar la ventana principal"
 
-#: ../bin/src/ui_behavioursettingspage.h:196
-#: ../bin/src/ui_behavioursettingspage.h:210
+#: ../bin/src/ui_behavioursettingspage.h:188
+#: ../bin/src/ui_behavioursettingspage.h:202
 msgid "Always start playing"
 msgstr "Siempre empezar a reproducir"
 
@@ -609,7 +609,7 @@ msgstr "Se produjo un error al cargar la base de datos de iTunes"
 msgid "An error occurred writing metadata to '%1'"
 msgstr "Se produjo un error al escribir los metadatos a «%1»"
 
-#: internet/lastfmservice.cpp:903
+#: internet/lastfmservice.cpp:918
 #, qt-format
 msgid "An unknown last.fm error occurred: %1"
 msgstr "Se produjo un error desconocido de Last.fm: %1"
@@ -619,7 +619,7 @@ msgid "And:"
 msgstr "Y:"
 
 #: ../bin/src/ui_songinfosettingspage.h:180
-#: ../bin/src/ui_appearancesettingspage.h:119
+#: ../bin/src/ui_appearancesettingspage.h:179
 msgid "Appearance"
 msgstr "Apariencia"
 
@@ -628,11 +628,11 @@ msgid "Append files/URLs to the playlist"
 msgstr "Añadir archivos/URLs a la lista de reproducción"
 
 #: devices/deviceview.cpp:216 internet/internetservice.cpp:53
-#: library/libraryview.cpp:243 widgets/fileviewlist.cpp:32
+#: library/libraryview.cpp:244 widgets/fileviewlist.cpp:32
 msgid "Append to current playlist"
 msgstr "Agregar a la lista de reproducción actual"
 
-#: ../bin/src/ui_behavioursettingspage.h:201
+#: ../bin/src/ui_behavioursettingspage.h:193
 msgid "Append to the playlist"
 msgstr "Agregar a la lista de reproducción"
 
@@ -667,7 +667,7 @@ msgstr "Artista"
 msgid "Artist info"
 msgstr "Info del artista"
 
-#: internet/lastfmservice.cpp:191
+#: internet/lastfmservice.cpp:206
 msgid "Artist radio"
 msgstr "Radio del artista"
 
@@ -688,7 +688,7 @@ msgid "Authenticating..."
 msgstr "Autenticando..."
 
 #: internet/digitallyimportedsettingspage.cpp:82
-#: internet/magnatunesettingspage.cpp:113 internet/lastfmservice.cpp:432
+#: internet/magnatunesettingspage.cpp:113 internet/lastfmservice.cpp:447
 #: internet/lastfmsettingspage.cpp:78 remote/remotesettingspage.cpp:113
 msgid "Authentication failed"
 msgstr "Falló la autenticación"
@@ -734,6 +734,10 @@ msgstr "Flujos de fondo"
 msgid "Background color"
 msgstr "Color de fondo"
 
+#: ../bin/src/ui_appearancesettingspage.h:187
+msgid "Background image"
+msgstr ""
+
 #: ../bin/src/ui_notificationssettingspage.h:424
 msgid "Background opacity"
 msgstr "Opacidad de fondo"
@@ -754,7 +758,7 @@ msgstr "Azul básico"
 msgid "Basic audio type"
 msgstr "Audio basico"
 
-#: ../bin/src/ui_behavioursettingspage.h:176
+#: ../bin/src/ui_behavioursettingspage.h:169
 msgid "Behavior"
 msgstr "Comportamiento"
 
@@ -799,6 +803,7 @@ msgid "Boom analyzer"
 msgstr "Analizador de Boom"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:146
+#: ../bin/src/ui_appearancesettingspage.h:191
 msgid "Browse..."
 msgstr "Explorar..."
 
@@ -951,7 +956,7 @@ msgstr "Visor de imágenes de Clementine"
 msgid "Clementine was unable to find results for this file"
 msgstr "Clementine no encontró resultados para este archivo"
 
-#: library/libraryview.cpp:225
+#: library/libraryview.cpp:226
 msgid "Click here to add some music"
 msgstr "Haz clic aquí para añadir música"
 
@@ -983,7 +988,7 @@ msgstr "Club"
 msgid "Color"
 msgstr "Color"
 
-#: ../bin/src/ui_appearancesettingspage.h:120
+#: ../bin/src/ui_appearancesettingspage.h:180
 msgid "Colors"
 msgstr "Colores"
 
@@ -1018,7 +1023,7 @@ msgstr "Compositor"
 msgid "Configure Grooveshark..."
 msgstr "Configurar Grooveshark..."
 
-#: internet/lastfmservice.cpp:111
+#: internet/lastfmservice.cpp:126
 msgid "Configure Last.fm..."
 msgstr "Configurar Last.fm..."
 
@@ -1071,7 +1076,7 @@ msgstr "Convertir cualquier música que el dispositivo no pueda reproducir"
 msgid "Copy to clipboard"
 msgstr "Copiar al portapapeles"
 
-#: library/libraryview.cpp:265 ui/mainwindow.cpp:528
+#: library/libraryview.cpp:266 ui/mainwindow.cpp:528
 #: widgets/fileviewlist.cpp:44
 msgid "Copy to device..."
 msgstr "Copiar al dispositivo..."
@@ -1106,7 +1111,7 @@ msgid ""
 "plugins installed"
 msgstr "No se ha podido encontrar un codificador (encoder) para %1, compruebe que tiene instalados los complementos (plugins) correctos de GStreamer."
 
-#: internet/lastfmservice.cpp:900
+#: internet/lastfmservice.cpp:915
 msgid "Couldn't load the last.fm radio station"
 msgstr "No se pudo cargar la estación de radio de Last.fm"
 
@@ -1235,11 +1240,15 @@ msgstr "Ctrl+Up"
 msgid "Custom"
 msgstr "Personalizado"
 
+#: ../bin/src/ui_appearancesettingspage.h:190
+msgid "Custom image:"
+msgstr ""
+
 #: ../bin/src/ui_notificationssettingspage.h:416
 msgid "Custom message settings"
 msgstr "Opciones de mensaje personalizado"
 
-#: internet/lastfmservice.cpp:199
+#: internet/lastfmservice.cpp:214
 msgid "Custom radio"
 msgstr "Radio personalizada"
 
@@ -1279,6 +1288,10 @@ msgstr "Reducir el volumen en 4%"
 msgid "Decrease volume"
 msgstr "Disminuir volumen"
 
+#: ../bin/src/ui_appearancesettingspage.h:188
+msgid "Default background image"
+msgstr ""
+
 #: ../bin/src/ui_wiimotesettingspage.h:195
 msgid "Defaults"
 msgstr "Valores predefinidos"
@@ -1291,7 +1304,7 @@ msgstr "Retardo entre visualizaciones"
 msgid "Delete Grooveshark playlist"
 msgstr "Eliminar Grooveshark Lista de reproducción"
 
-#: devices/deviceview.cpp:393 library/libraryview.cpp:460
+#: devices/deviceview.cpp:393 library/libraryview.cpp:485
 #: ui/mainwindow.cpp:1853 widgets/fileview.cpp:186
 msgid "Delete files"
 msgstr "Borrar archivos"
@@ -1300,7 +1313,7 @@ msgstr "Borrar archivos"
 msgid "Delete from device..."
 msgstr "Eliminar del dispositivo..."
 
-#: library/libraryview.cpp:267 ui/mainwindow.cpp:529
+#: library/libraryview.cpp:268 ui/mainwindow.cpp:529
 #: widgets/fileviewlist.cpp:45
 msgid "Delete from disk..."
 msgstr "Eliminar del disco..."
@@ -1309,7 +1322,7 @@ msgstr "Eliminar del disco..."
 msgid "Delete preset"
 msgstr "Eliminar predefinición"
 
-#: library/libraryview.cpp:259
+#: library/libraryview.cpp:260
 msgid "Delete smart playlist"
 msgstr "Eliminar lista de reproducción inteligente"
 
@@ -1420,7 +1433,7 @@ msgstr "No convertir ninguna música"
 msgid "Don't repeat"
 msgstr "No repetir"
 
-#: library/libraryview.cpp:281
+#: library/libraryview.cpp:282
 msgid "Don't show in various artists"
 msgstr "No mostrar en Varios artistas"
 
@@ -1436,7 +1449,7 @@ msgstr "No detener!"
 msgid "Double click to open"
 msgstr "Doble click para abrir"
 
-#: ../bin/src/ui_behavioursettingspage.h:198
+#: ../bin/src/ui_behavioursettingspage.h:190
 msgid "Double clicking a song will..."
 msgstr "Al pulsar dos veces sobre una canción..."
 
@@ -1496,7 +1509,7 @@ msgstr "Modo dinámico encendido"
 msgid "Dynamic random mix"
 msgstr "Mezcla dinámica aleatoria"
 
-#: library/libraryview.cpp:257
+#: library/libraryview.cpp:258
 msgid "Edit smart playlist..."
 msgstr "Editar lista de reproducción inteligente..."
 
@@ -1517,12 +1530,12 @@ msgstr "Editar etiquetas"
 msgid "Edit track information"
 msgstr "Editar información de la pista"
 
-#: library/libraryview.cpp:271 widgets/fileviewlist.cpp:50
+#: library/libraryview.cpp:272 widgets/fileviewlist.cpp:50
 #: ../bin/src/ui_mainwindow.h:659
 msgid "Edit track information..."
 msgstr "Editar información de la pista..."
 
-#: library/libraryview.cpp:273
+#: library/libraryview.cpp:274
 msgid "Edit tracks information..."
 msgstr "Editar información de pistas"
 
@@ -1537,10 +1550,6 @@ msgstr "Habilitar soporte para Wiimote"
 #: ../bin/src/ui_equalizer.h:126
 msgid "Enable equalizer"
 msgstr "Habilitar el ecualizador"
-
-#: ../bin/src/ui_behavioursettingspage.h:179
-msgid "Enable playlist background image"
-msgstr "Activar imagen de fondo de lista de repr."
 
 #: ../bin/src/ui_wiimotesettingspage.h:187
 msgid "Enable shortcuts only when Clementine is focused"
@@ -1608,7 +1617,7 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "Equivalente a --log-levels*:3"
 
 #: internet/groovesharkservice.cpp:954
-#: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:454
+#: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:479
 #: ui/mainwindow.cpp:1805 ui/mainwindow.cpp:1926
 msgid "Error"
 msgstr "Error"
@@ -1861,7 +1870,7 @@ msgstr "Tasa de muestreo"
 msgid "Frames per buffer"
 msgstr "Cuadros por buffer"
 
-#: internet/lastfmservice.cpp:207
+#: internet/lastfmservice.cpp:222
 msgid "Friends"
 msgstr "Amigos"
 
@@ -1937,7 +1946,7 @@ msgstr "Nombre de usuario de Google"
 msgid "Got %1 covers out of %2 (%3 failed)"
 msgstr "Se obtuvieron %1 portadas de %2 (%3 fallaron)"
 
-#: ../bin/src/ui_behavioursettingspage.h:190
+#: ../bin/src/ui_behavioursettingspage.h:182
 msgid "Grey out non existent songs in my playlists"
 msgstr "Oscurecer canciones inexistentes de mis listas de reproducción"
 
@@ -2120,31 +2129,31 @@ msgstr "Internet"
 msgid "Internet providers"
 msgstr "Proveedores de Internet"
 
-#: internet/lastfmservice.cpp:438
+#: internet/lastfmservice.cpp:453
 msgid "Invalid API key"
 msgstr "Clave API inválida"
 
-#: internet/lastfmservice.cpp:433
+#: internet/lastfmservice.cpp:448
 msgid "Invalid format"
 msgstr "Formato inválido"
 
-#: internet/lastfmservice.cpp:431
+#: internet/lastfmservice.cpp:446
 msgid "Invalid method"
 msgstr "Metodo inválido"
 
-#: internet/lastfmservice.cpp:434
+#: internet/lastfmservice.cpp:449
 msgid "Invalid parameters"
 msgstr "Parámetros inválidos"
 
-#: internet/lastfmservice.cpp:435
+#: internet/lastfmservice.cpp:450
 msgid "Invalid resource specified"
 msgstr "Recurso especificado inválido"
 
-#: internet/lastfmservice.cpp:430
+#: internet/lastfmservice.cpp:445
 msgid "Invalid service"
 msgstr "Servicio inválido"
 
-#: internet/lastfmservice.cpp:437
+#: internet/lastfmservice.cpp:452
 msgid "Invalid session key"
 msgstr "Clave de sesión inválida"
 
@@ -2192,7 +2201,7 @@ msgstr "Presione los botones por %1 segundo..."
 msgid "Keep buttons for %1 seconds..."
 msgstr "Presione los botones por %1 segundo..."
 
-#: ../bin/src/ui_behavioursettingspage.h:178
+#: ../bin/src/ui_behavioursettingspage.h:171
 msgid "Keep running in the background when the window is closed"
 msgstr "Continuar ejecutando cuando la ventana sea cerrada"
 
@@ -2204,7 +2213,7 @@ msgstr "Mantener los archivos originales"
 msgid "Kittens"
 msgstr "Gatitos"
 
-#: ../bin/src/ui_behavioursettingspage.h:180
+#: ../bin/src/ui_behavioursettingspage.h:172
 msgid "Language"
 msgstr "Idioma"
 
@@ -2233,45 +2242,45 @@ msgstr "Último reproducido"
 msgid "Last.fm"
 msgstr "Last.fm"
 
-#: internet/lastfmservice.cpp:70
+#: internet/lastfmservice.cpp:85
 #, qt-format
 msgid "Last.fm Custom Radio: %1"
 msgstr "Radio personalizada de Last.fm: %1"
 
-#: internet/lastfmservice.cpp:238 internet/lastfmservice.cpp:694
-#: internet/lastfmservice.cpp:729
+#: internet/lastfmservice.cpp:253 internet/lastfmservice.cpp:709
+#: internet/lastfmservice.cpp:744
 #, qt-format
 msgid "Last.fm Library - %1"
 msgstr "Colección en Last.fm de %1"
 
-#: globalsearch/lastfmsearchprovider.cpp:75 internet/lastfmservice.cpp:240
-#: internet/lastfmservice.cpp:243
+#: globalsearch/lastfmsearchprovider.cpp:75 internet/lastfmservice.cpp:255
+#: internet/lastfmservice.cpp:258
 #, qt-format
 msgid "Last.fm Mix Radio - %1"
 msgstr "Radio Mix de Last.fm - %1"
 
-#: globalsearch/lastfmsearchprovider.cpp:77 internet/lastfmservice.cpp:245
-#: internet/lastfmservice.cpp:248
+#: globalsearch/lastfmsearchprovider.cpp:77 internet/lastfmservice.cpp:260
+#: internet/lastfmservice.cpp:263
 #, qt-format
 msgid "Last.fm Neighbor Radio - %1"
 msgstr "Radio de vecinos en Last.fm de %1"
 
-#: globalsearch/lastfmsearchprovider.cpp:73 internet/lastfmservice.cpp:235
+#: globalsearch/lastfmsearchprovider.cpp:73 internet/lastfmservice.cpp:250
 #, qt-format
 msgid "Last.fm Radio Station - %1"
 msgstr "Estación de radio en Last.fm de %1"
 
-#: internet/lastfmservice.cpp:68
+#: internet/lastfmservice.cpp:83
 #, qt-format
 msgid "Last.fm Similar Artists to %1"
 msgstr "Artistas en Last.fm similares a %1"
 
-#: internet/lastfmservice.cpp:69
+#: internet/lastfmservice.cpp:84
 #, qt-format
 msgid "Last.fm Tag Radio: %1"
 msgstr "Radio en Last.fm de la etiqueta %1"
 
-#: internet/lastfmservice.cpp:442
+#: internet/lastfmservice.cpp:457
 msgid "Last.fm is currently busy, please try again in a few minutes"
 msgstr "Last.fm está actualmente saturado, intente nuevamente en unos minutos"
 
@@ -2365,7 +2374,7 @@ msgstr "Cargar lista de reproducción"
 msgid "Load playlist..."
 msgstr "Cargar lista de reproducción"
 
-#: internet/lastfmservice.cpp:913
+#: internet/lastfmservice.cpp:928
 msgid "Loading Last.fm radio"
 msgstr "Cargando radio de Last.fm"
 
@@ -2498,7 +2507,7 @@ msgstr "¡Hazlo!"
 msgid "Make playlist available offline"
 msgstr "Hacer disponible la lista de reproducción fuera de línea"
 
-#: internet/lastfmservice.cpp:449
+#: internet/lastfmservice.cpp:464
 msgid "Malformed response"
 msgstr "Respuesta malformada"
 
@@ -2598,35 +2607,35 @@ msgstr "Colección de Música"
 msgid "Mute"
 msgstr "Silenciar"
 
-#: globalsearch/lastfmsearchprovider.cpp:51 internet/lastfmservice.cpp:178
+#: globalsearch/lastfmsearchprovider.cpp:51 internet/lastfmservice.cpp:193
 msgid "My Last.fm Library"
 msgstr "Mi colección de Last.fm"
 
-#: globalsearch/lastfmsearchprovider.cpp:53 internet/lastfmservice.cpp:183
+#: globalsearch/lastfmsearchprovider.cpp:53 internet/lastfmservice.cpp:198
 msgid "My Last.fm Mix Radio"
 msgstr "Mi radio mix de Last.fm"
 
-#: globalsearch/lastfmsearchprovider.cpp:55 internet/lastfmservice.cpp:188
+#: globalsearch/lastfmsearchprovider.cpp:55 internet/lastfmservice.cpp:203
 msgid "My Last.fm Neighborhood"
 msgstr "Mis vecinos de Last.fm"
 
-#: globalsearch/lastfmsearchprovider.cpp:49 internet/lastfmservice.cpp:173
+#: globalsearch/lastfmsearchprovider.cpp:49 internet/lastfmservice.cpp:188
 msgid "My Last.fm Recommended Radio"
 msgstr "Mi radio recomendada de Last.fm"
 
-#: internet/lastfmservice.cpp:180
+#: internet/lastfmservice.cpp:195
 msgid "My Mix Radio"
 msgstr "Mi Mix Radio"
 
-#: internet/lastfmservice.cpp:185
+#: internet/lastfmservice.cpp:200
 msgid "My Neighborhood"
 msgstr "Mi Vecindario"
 
-#: internet/lastfmservice.cpp:175
+#: internet/lastfmservice.cpp:190
 msgid "My Radio Station"
 msgstr "Mi Estación de Radio"
 
-#: internet/lastfmservice.cpp:170
+#: internet/lastfmservice.cpp:185
 msgid "My Recommendations"
 msgstr "Mis Recomendaciones"
 
@@ -2646,7 +2655,7 @@ msgstr "Opciones de nombrado"
 msgid "Narrow band (NB)"
 msgstr "Banda estrecha (NB)"
 
-#: internet/lastfmservice.cpp:212
+#: internet/lastfmservice.cpp:227
 msgid "Neighbors"
 msgstr "Vecinos"
 
@@ -2666,8 +2675,8 @@ msgstr "Nunca"
 msgid "Never played"
 msgstr "Nunca reproducidos"
 
-#: ../bin/src/ui_behavioursettingspage.h:194
-#: ../bin/src/ui_behavioursettingspage.h:208
+#: ../bin/src/ui_behavioursettingspage.h:186
+#: ../bin/src/ui_behavioursettingspage.h:200
 msgid "Never start playing"
 msgstr "Nunca empezar a reproducir"
 
@@ -2675,7 +2684,7 @@ msgstr "Nunca empezar a reproducir"
 msgid "New playlist"
 msgstr "Nueva lista de reproducción"
 
-#: library/libraryview.cpp:255
+#: library/libraryview.cpp:256
 msgid "New smart playlist..."
 msgstr "Nueva lista de reproducción inteligente..."
 
@@ -2704,6 +2713,10 @@ msgstr "Pista siguiente"
 msgid "No analyzer"
 msgstr "Sin Analizador"
 
+#: ../bin/src/ui_appearancesettingspage.h:189
+msgid "No background image"
+msgstr ""
+
 #: ../bin/src/ui_transcoderoptionsaac.h:146
 msgid "No long blocks"
 msgstr "Sin bloques largos"
@@ -2722,7 +2735,7 @@ msgstr "Sin bloques cortos"
 msgid "None"
 msgstr "Ninguno"
 
-#: library/libraryview.cpp:455 ui/mainwindow.cpp:1806 ui/mainwindow.cpp:1927
+#: library/libraryview.cpp:480 ui/mainwindow.cpp:1806 ui/mainwindow.cpp:1927
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Ninguna de las canciones seleccionadas fueron aptas para ser copiadas a un dispositivo"
 
@@ -2738,19 +2751,19 @@ msgstr "No disponible al utilizar una lista de reproducción dinámica"
 msgid "Not connected"
 msgstr "No conectado"
 
-#: internet/lastfmservice.cpp:444
+#: internet/lastfmservice.cpp:459
 msgid "Not enough content"
 msgstr "No hay suficiente contenido"
 
-#: internet/lastfmservice.cpp:446
+#: internet/lastfmservice.cpp:461
 msgid "Not enough fans"
 msgstr "No hay suficientes seguidores"
 
-#: internet/lastfmservice.cpp:445
+#: internet/lastfmservice.cpp:460
 msgid "Not enough members"
 msgstr "No hay suficientes miembros"
 
-#: internet/lastfmservice.cpp:447
+#: internet/lastfmservice.cpp:462
 msgid "Not enough neighbors"
 msgstr "No hay suficientes vecinos"
 
@@ -2820,8 +2833,8 @@ msgid "Open file..."
 msgstr "Abrir archivo..."
 
 #: devices/deviceview.cpp:220 internet/internetservice.cpp:73
-#: library/libraryview.cpp:247 widgets/fileviewlist.cpp:36
-#: ../bin/src/ui_behavioursettingspage.h:203
+#: library/libraryview.cpp:248 widgets/fileviewlist.cpp:36
+#: ../bin/src/ui_behavioursettingspage.h:195
 msgid "Open in new playlist"
 msgstr "Abrir en una lista de reproducción nueva"
 
@@ -2830,7 +2843,7 @@ msgstr "Abrir en una lista de reproducción nueva"
 msgid "Open..."
 msgstr "Abrir..."
 
-#: internet/lastfmservice.cpp:436
+#: internet/lastfmservice.cpp:451
 msgid "Operation failed"
 msgstr "Falló la operación"
 
@@ -2850,7 +2863,7 @@ msgstr "Opciones..."
 msgid "Organise Files"
 msgstr "Organizar archivos"
 
-#: library/libraryview.cpp:263 ui/mainwindow.cpp:527
+#: library/libraryview.cpp:264 ui/mainwindow.cpp:527
 msgid "Organise files..."
 msgstr "Organizar archivos"
 
@@ -2929,7 +2942,7 @@ msgstr "Reproducir"
 msgid "Play Artist or Tag"
 msgstr "Reproducir Artista o Etiqueta"
 
-#: internet/lastfmservice.cpp:103
+#: internet/lastfmservice.cpp:118
 msgid "Play artist radio..."
 msgstr "Reproducir radio del artista..."
 
@@ -2937,7 +2950,7 @@ msgstr "Reproducir radio del artista..."
 msgid "Play count"
 msgstr "Número de reproducciones"
 
-#: internet/lastfmservice.cpp:107
+#: internet/lastfmservice.cpp:122
 msgid "Play custom radio..."
 msgstr "Reproducir Radio Personalizada"
 
@@ -2945,12 +2958,12 @@ msgstr "Reproducir Radio Personalizada"
 msgid "Play if stopped, pause if playing"
 msgstr "Reproducir si está detenida, pausar si se está reproduciendo"
 
-#: ../bin/src/ui_behavioursettingspage.h:195
-#: ../bin/src/ui_behavioursettingspage.h:209
+#: ../bin/src/ui_behavioursettingspage.h:187
+#: ../bin/src/ui_behavioursettingspage.h:201
 msgid "Play if there is nothing already playing"
 msgstr "Reproducir si no hay nada en reproducción"
 
-#: internet/lastfmservice.cpp:105
+#: internet/lastfmservice.cpp:120
 msgid "Play tag radio..."
 msgstr "Reproducir radio de la etiqueta..."
 
@@ -3140,7 +3153,7 @@ msgstr "Gestor de la cola"
 msgid "Queue selected tracks"
 msgstr "Añadir las pistas seleccionadas a la cola de reproducción"
 
-#: globalsearch/globalsearchwidget.cpp:105 library/libraryview.cpp:251
+#: globalsearch/globalsearchwidget.cpp:105 library/libraryview.cpp:252
 #: ui/mainwindow.cpp:1337
 msgid "Queue track"
 msgstr "Añadir a la cola de reproducción"
@@ -3205,7 +3218,7 @@ msgstr "Actualizar catálogo"
 msgid "Refresh channels"
 msgstr "Actualizar canales"
 
-#: internet/lastfmservice.cpp:109
+#: internet/lastfmservice.cpp:124
 msgid "Refresh friends list"
 msgstr "Refrescar lista de amigos"
 
@@ -3225,7 +3238,7 @@ msgstr "Reggae"
 msgid "Remember Wii remote swing"
 msgstr "Recordar el movimiento del Wiimote"
 
-#: ../bin/src/ui_behavioursettingspage.h:189
+#: ../bin/src/ui_behavioursettingspage.h:181
 msgid "Remember from last time"
 msgstr "Recordar de la ultima vez"
 
@@ -3235,7 +3248,7 @@ msgstr "Control remoto"
 
 #: internet/savedradio.cpp:100 ../bin/src/ui_queuemanager.h:135
 #: ../bin/src/ui_searchtermwidget.h:282 ../bin/src/ui_transcodedialog.h:207
-#: internet/lastfmservice.cpp:100
+#: internet/lastfmservice.cpp:115
 msgid "Remove"
 msgstr "Quitar"
 
@@ -3305,12 +3318,12 @@ msgid "Replace and play now"
 msgstr "Reemplazar y reproducir ahora"
 
 #: devices/deviceview.cpp:218 globalsearch/globalsearchwidget.cpp:106
-#: internet/internetservice.cpp:63 library/libraryview.cpp:245
+#: internet/internetservice.cpp:63 library/libraryview.cpp:246
 #: widgets/fileviewlist.cpp:34
 msgid "Replace current playlist"
 msgstr "Reemplazar lista de reproducción actual"
 
-#: ../bin/src/ui_behavioursettingspage.h:202
+#: ../bin/src/ui_behavioursettingspage.h:194
 msgid "Replace the playlist"
 msgstr "Reemplazar la lista de reproducción"
 
@@ -3517,15 +3530,19 @@ msgstr "Seleccionar Todo"
 msgid "Select None"
 msgstr "No seleccionar nada"
 
-#: ../bin/src/ui_appearancesettingspage.h:125
+#: ../bin/src/ui_appearancesettingspage.h:185
 msgid "Select background color:"
 msgstr "Seleccione el color de fondo:"
+
+#: ui/appearancesettingspage.cpp:187
+msgid "Select background image"
+msgstr ""
 
 #: ../bin/src/ui_trackselectiondialog.h:207
 msgid "Select best possible match"
 msgstr "Seleccionar la mejor conincidencia posible"
 
-#: ../bin/src/ui_appearancesettingspage.h:123
+#: ../bin/src/ui_appearancesettingspage.h:183
 msgid "Select foreground color:"
 msgstr "Seleccione el color de frente:"
 
@@ -3541,7 +3558,7 @@ msgstr "Seleccionar visualizaciones..."
 msgid "Serial number"
 msgstr "Nº de serie"
 
-#: internet/lastfmservice.cpp:439
+#: internet/lastfmservice.cpp:454
 msgid "Service offline"
 msgstr "Servicio fuera de línea"
 
@@ -3637,12 +3654,12 @@ msgstr "Mostrar divisores"
 msgid "Show fullsize..."
 msgstr "Mostrar carátula..."
 
-#: library/libraryview.cpp:275 ui/mainwindow.cpp:530
+#: library/libraryview.cpp:276 ui/mainwindow.cpp:530
 #: widgets/fileviewlist.cpp:52
 msgid "Show in file browser..."
 msgstr "Mostrar en navegador de archivos..."
 
-#: library/libraryview.cpp:279
+#: library/libraryview.cpp:280
 msgid "Show in various artists"
 msgstr "Mostrar en Varios artistas"
 
@@ -3666,7 +3683,7 @@ msgstr "Mostrar los botones \"Me encanta\" y \"Prohibir\""
 msgid "Show the scrobble button in the main window"
 msgstr "Muestra el botón de compartir en la ventana principal"
 
-#: ../bin/src/ui_behavioursettingspage.h:177
+#: ../bin/src/ui_behavioursettingspage.h:170
 msgid "Show tray icon"
 msgstr "Mostrar icono en el área de notificación"
 
@@ -3937,7 +3954,7 @@ msgstr "Etiqueta"
 msgid "Tag fetcher"
 msgstr "Obtener etiquetas"
 
-#: internet/lastfmservice.cpp:195
+#: internet/lastfmservice.cpp:210
 msgid "Tag radio"
 msgstr "Radio de la etiqueta"
 
@@ -3990,6 +4007,10 @@ msgid ""
 "rescan because of the new features listed below:"
 msgstr "La versión de Clementina a la que se acaba de actualizar requiere un re-escaneo completo de la biblioteca debido a las nuevas características listadas a continuación:"
 
+#: library/libraryview.cpp:406
+msgid "There are other songs in this album"
+msgstr ""
+
 #: internet/magnatunedownloaddialog.cpp:157
 msgid "There was a problem fetching the metadata from Magnatune"
 msgstr "Hubo un problema obteniendo los metadatos desde Magnatune"
@@ -4006,7 +4027,7 @@ msgid ""
 "deleted:"
 msgstr "Hubo problemas al borrar algunas canciones. Los siguientes ficheros no se pudieron borrar:"
 
-#: library/libraryview.cpp:461 ui/mainwindow.cpp:1854 widgets/fileview.cpp:187
+#: library/libraryview.cpp:486 ui/mainwindow.cpp:1854 widgets/fileview.cpp:187
 msgid ""
 "These files will be deleted from disk, are you sure you want to continue?"
 msgstr "Estos ficheros serán borrados del disco, seguro que desea continuar?"
@@ -4076,7 +4097,7 @@ msgid ""
 "want to continue?"
 msgstr "Esta lista de reproducción será removida; la acción no puede deshacerse. ¿Está seguro que desea continuar?"
 
-#: internet/lastfmservice.cpp:440
+#: internet/lastfmservice.cpp:455
 msgid "This stream is for paid subscribers only"
 msgstr "Este flujo es solo para Suscriptores de Paga"
 
@@ -4201,7 +4222,7 @@ msgstr "Imposible descargar %1 (%2)"
 msgid "Unknown"
 msgstr "Desconocido"
 
-#: internet/digitallyimportedclient.cpp:68 internet/lastfmservice.cpp:453
+#: internet/digitallyimportedclient.cpp:68 internet/lastfmservice.cpp:468
 msgid "Unknown error"
 msgstr "Error desconocido"
 
@@ -4251,7 +4272,7 @@ msgstr "Usar metadatos de ganancia de repetición si están disponibles"
 msgid "Use Wii Remote"
 msgstr "Usar Wiimote"
 
-#: ../bin/src/ui_appearancesettingspage.h:122
+#: ../bin/src/ui_appearancesettingspage.h:182
 msgid "Use a custom color set"
 msgstr "Utilizar un color personalizado"
 
@@ -4279,11 +4300,11 @@ msgstr "Usar notificaciones para informar del estado del Wiimote"
 msgid "Use temporal noise shaping"
 msgstr "Usar noise shaping temporalmente"
 
-#: ../bin/src/ui_behavioursettingspage.h:183
+#: ../bin/src/ui_behavioursettingspage.h:175
 msgid "Use the system default"
 msgstr "Usar los ajustes por defecto del sistema"
 
-#: ../bin/src/ui_appearancesettingspage.h:121
+#: ../bin/src/ui_appearancesettingspage.h:181
 msgid "Use the system default color set"
 msgstr "Utilizar el juego de colores del sistema"
 
@@ -4315,7 +4336,7 @@ msgstr "Interfaz de usuario"
 msgid "Username"
 msgstr "Nombre de Usuario"
 
-#: ../bin/src/ui_behavioursettingspage.h:191
+#: ../bin/src/ui_behavioursettingspage.h:183
 msgid "Using the menu to add a song will..."
 msgstr "Al usar el menú para añadir una canción..."
 
@@ -4388,7 +4409,7 @@ msgstr "Wav"
 msgid "Weeks"
 msgstr "Semanas"
 
-#: ../bin/src/ui_behavioursettingspage.h:186
+#: ../bin/src/ui_behavioursettingspage.h:178
 msgid "When Clementine starts"
 msgstr "Cuando Clementine inicia"
 
@@ -4455,6 +4476,12 @@ msgstr "Windows Media 64k"
 #: core/song.cpp:332
 msgid "Windows Media audio"
 msgstr "Audio de Windows Media"
+
+#: library/libraryview.cpp:407
+msgid ""
+"Would you like to move the other songs in this album to Various Artists as "
+"well?"
+msgstr ""
 
 #: ui/mainwindow.cpp:2047
 msgid "Would you like to run a full rescan right now?"
@@ -4560,7 +4587,7 @@ msgid ""
 "shortcuts in Clementine."
 msgstr "Necesita ejecutar Sistema - Preferencias y activar \"<span style=\"font-style: italic;\">Activar acceso para dispositivos de asistencia</span>\" para utilizar los atajos de teclado globales en Clementine."
 
-#: ../bin/src/ui_behavioursettingspage.h:185
+#: ../bin/src/ui_behavioursettingspage.h:177
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Necesitaras reiniciar Clementine si cambias el idioma."
 
@@ -4587,7 +4614,7 @@ msgstr "Sus credenciales de Last.fm fueron incorrectas"
 msgid "Your Magnatune credentials were incorrect"
 msgstr "Sus credenciales de Magnatune son incorrectas"
 
-#: library/libraryview.cpp:219
+#: library/libraryview.cpp:220
 msgid "Your library is empty!"
 msgstr "Su colección está vacía."
 
@@ -4646,7 +4673,7 @@ msgstr "entre"
 msgid "biggest first"
 msgstr "más grande primero"
 
-#: playlist/playlistview.cpp:164 ui/edittagdialog.cpp:454
+#: playlist/playlistview.cpp:174 ui/edittagdialog.cpp:454
 msgid "bpm"
 msgstr "bpm"
 
@@ -4689,7 +4716,7 @@ msgstr "mayor que"
 msgid "in the last"
 msgstr "en los últimos"
 
-#: playlist/playlistview.cpp:166 ui/edittagdialog.cpp:456
+#: playlist/playlistview.cpp:176 ui/edittagdialog.cpp:456
 #: internet/spotifysettingspage.cpp:59 internet/spotifysettingspage.cpp:60
 #: internet/spotifysettingspage.cpp:61
 msgid "kbps"

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-02-02 20:06+0000\n"
+"PO-Revision-Date: 2012-02-19 14:26+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -451,7 +451,7 @@ msgstr "Pievienot citai dziesmu listei"
 msgid "Add to playlist"
 msgstr "Pievienot dziesmu listei"
 
-#: ../bin/src/ui_behavioursettingspage.h:204
+#: ../bin/src/ui_behavioursettingspage.h:196
 msgid "Add to the queue"
 msgstr "Pievienot rindai"
 
@@ -568,16 +568,16 @@ msgstr "Atļaut centrs/sāni kodēšanu"
 msgid "Alongside the originals"
 msgstr "Blakus oriģināliem"
 
-#: ../bin/src/ui_behavioursettingspage.h:188
+#: ../bin/src/ui_behavioursettingspage.h:180
 msgid "Always hide the main window"
 msgstr "Vienmēr slēpt galveno logu"
 
-#: ../bin/src/ui_behavioursettingspage.h:187
+#: ../bin/src/ui_behavioursettingspage.h:179
 msgid "Always show the main window"
 msgstr "Vienmēr rādīt galveno logu"
 
-#: ../bin/src/ui_behavioursettingspage.h:196
-#: ../bin/src/ui_behavioursettingspage.h:210
+#: ../bin/src/ui_behavioursettingspage.h:188
+#: ../bin/src/ui_behavioursettingspage.h:202
 msgid "Always start playing"
 msgstr "Vienmēr sākt atskaņošanu"
 
@@ -604,7 +604,7 @@ msgstr "Kļūda ielādējot iTunes datubāzi"
 msgid "An error occurred writing metadata to '%1'"
 msgstr "Kļūda ievadot matadatus '%1'"
 
-#: internet/lastfmservice.cpp:903
+#: internet/lastfmservice.cpp:918
 #, qt-format
 msgid "An unknown last.fm error occurred: %1"
 msgstr "Notika nezināma last.fm kļūda: %1"
@@ -614,7 +614,7 @@ msgid "And:"
 msgstr "Un:"
 
 #: ../bin/src/ui_songinfosettingspage.h:180
-#: ../bin/src/ui_appearancesettingspage.h:119
+#: ../bin/src/ui_appearancesettingspage.h:179
 msgid "Appearance"
 msgstr "Izskats"
 
@@ -623,11 +623,11 @@ msgid "Append files/URLs to the playlist"
 msgstr "Pievienot failus/saites dziesmu listei"
 
 #: devices/deviceview.cpp:216 internet/internetservice.cpp:53
-#: library/libraryview.cpp:243 widgets/fileviewlist.cpp:32
+#: library/libraryview.cpp:244 widgets/fileviewlist.cpp:32
 msgid "Append to current playlist"
 msgstr "Papildināt pašreizējo dziesmu listi"
 
-#: ../bin/src/ui_behavioursettingspage.h:201
+#: ../bin/src/ui_behavioursettingspage.h:193
 msgid "Append to the playlist"
 msgstr "Papildināt dziesmu listi"
 
@@ -662,7 +662,7 @@ msgstr "Izpildītājs"
 msgid "Artist info"
 msgstr "Izpildītāja info"
 
-#: internet/lastfmservice.cpp:191
+#: internet/lastfmservice.cpp:206
 msgid "Artist radio"
 msgstr "Izpildītāja radio"
 
@@ -683,7 +683,7 @@ msgid "Authenticating..."
 msgstr "Autentifikācija..."
 
 #: internet/digitallyimportedsettingspage.cpp:82
-#: internet/magnatunesettingspage.cpp:113 internet/lastfmservice.cpp:432
+#: internet/magnatunesettingspage.cpp:113 internet/lastfmservice.cpp:447
 #: internet/lastfmsettingspage.cpp:78 remote/remotesettingspage.cpp:113
 msgid "Authentication failed"
 msgstr "Autentifikācija neizdevās"
@@ -729,6 +729,10 @@ msgstr "Fona Straumes"
 msgid "Background color"
 msgstr "Fona krāsa"
 
+#: ../bin/src/ui_appearancesettingspage.h:187
+msgid "Background image"
+msgstr ""
+
 #: ../bin/src/ui_notificationssettingspage.h:424
 msgid "Background opacity"
 msgstr "Fona caurlaidība"
@@ -749,7 +753,7 @@ msgstr "Pamata zils"
 msgid "Basic audio type"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:176
+#: ../bin/src/ui_behavioursettingspage.h:169
 msgid "Behavior"
 msgstr "Uzvedība"
 
@@ -794,6 +798,7 @@ msgid "Boom analyzer"
 msgstr ""
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:146
+#: ../bin/src/ui_appearancesettingspage.h:191
 msgid "Browse..."
 msgstr "Pārlūkot..."
 
@@ -946,7 +951,7 @@ msgstr "Clementine attēlu atveidotājs"
 msgid "Clementine was unable to find results for this file"
 msgstr "Clementine nespēja atrast rezultātus šim failam"
 
-#: library/libraryview.cpp:225
+#: library/libraryview.cpp:226
 msgid "Click here to add some music"
 msgstr "Spiediet te lai pievienotu mūziku"
 
@@ -978,7 +983,7 @@ msgstr "Klubu mūzika"
 msgid "Color"
 msgstr "Krāsa"
 
-#: ../bin/src/ui_appearancesettingspage.h:120
+#: ../bin/src/ui_appearancesettingspage.h:180
 msgid "Colors"
 msgstr ""
 
@@ -1013,7 +1018,7 @@ msgstr "Komponists"
 msgid "Configure Grooveshark..."
 msgstr ""
 
-#: internet/lastfmservice.cpp:111
+#: internet/lastfmservice.cpp:126
 msgid "Configure Last.fm..."
 msgstr "Konfigurēt Last.fm..."
 
@@ -1066,7 +1071,7 @@ msgstr "Konvertēt mūziku, ko ierīce nespēj atskaņot"
 msgid "Copy to clipboard"
 msgstr ""
 
-#: library/libraryview.cpp:265 ui/mainwindow.cpp:528
+#: library/libraryview.cpp:266 ui/mainwindow.cpp:528
 #: widgets/fileviewlist.cpp:44
 msgid "Copy to device..."
 msgstr "Kopēt uz ierīci..."
@@ -1101,7 +1106,7 @@ msgid ""
 "plugins installed"
 msgstr "Nevar atrast kodeku priekš %1, pārbaudiet vai jums ir uzstādīti pareizi GStreamer spraudņi"
 
-#: internet/lastfmservice.cpp:900
+#: internet/lastfmservice.cpp:915
 msgid "Couldn't load the last.fm radio station"
 msgstr "Nevar atvērt last.fm radio staciju"
 
@@ -1230,11 +1235,15 @@ msgstr "Ctrl+Up"
 msgid "Custom"
 msgstr "Pielāgots"
 
+#: ../bin/src/ui_appearancesettingspage.h:190
+msgid "Custom image:"
+msgstr ""
+
 #: ../bin/src/ui_notificationssettingspage.h:416
 msgid "Custom message settings"
 msgstr ""
 
-#: internet/lastfmservice.cpp:199
+#: internet/lastfmservice.cpp:214
 msgid "Custom radio"
 msgstr "Pielāgots radio"
 
@@ -1274,6 +1283,10 @@ msgstr "Samazināt skaļumu par 4%"
 msgid "Decrease volume"
 msgstr "Samazināt skaļumu"
 
+#: ../bin/src/ui_appearancesettingspage.h:188
+msgid "Default background image"
+msgstr ""
+
 #: ../bin/src/ui_wiimotesettingspage.h:195
 msgid "Defaults"
 msgstr "Noklusētie"
@@ -1286,7 +1299,7 @@ msgstr "Aizture starp vizualizācijām"
 msgid "Delete Grooveshark playlist"
 msgstr ""
 
-#: devices/deviceview.cpp:393 library/libraryview.cpp:460
+#: devices/deviceview.cpp:393 library/libraryview.cpp:485
 #: ui/mainwindow.cpp:1853 widgets/fileview.cpp:186
 msgid "Delete files"
 msgstr "Dzēst failus"
@@ -1295,7 +1308,7 @@ msgstr "Dzēst failus"
 msgid "Delete from device..."
 msgstr "Dzēst no ierīces..."
 
-#: library/libraryview.cpp:267 ui/mainwindow.cpp:529
+#: library/libraryview.cpp:268 ui/mainwindow.cpp:529
 #: widgets/fileviewlist.cpp:45
 msgid "Delete from disk..."
 msgstr "Dzēst no diska..."
@@ -1304,7 +1317,7 @@ msgstr "Dzēst no diska..."
 msgid "Delete preset"
 msgstr "Dzēst uzstādījumu"
 
-#: library/libraryview.cpp:259
+#: library/libraryview.cpp:260
 msgid "Delete smart playlist"
 msgstr "Dzēst Smart Playlist"
 
@@ -1415,7 +1428,7 @@ msgstr "Nekonvertēt mūziku"
 msgid "Don't repeat"
 msgstr "Neatkārtot"
 
-#: library/libraryview.cpp:281
+#: library/libraryview.cpp:282
 msgid "Don't show in various artists"
 msgstr "Nerādīt pie dažādiem izpildītājiem"
 
@@ -1431,7 +1444,7 @@ msgstr "Neapstāties"
 msgid "Double click to open"
 msgstr "Dubultklikšķis lai atvērtu"
 
-#: ../bin/src/ui_behavioursettingspage.h:198
+#: ../bin/src/ui_behavioursettingspage.h:190
 msgid "Double clicking a song will..."
 msgstr "Dubultklikšķis uz dziesmas..."
 
@@ -1491,7 +1504,7 @@ msgstr "Dinamiskais režīms ieslēgts"
 msgid "Dynamic random mix"
 msgstr "Dinamisks nejaušs mikss"
 
-#: library/libraryview.cpp:257
+#: library/libraryview.cpp:258
 msgid "Edit smart playlist..."
 msgstr "Rediģēt gudro dziesmu listi..."
 
@@ -1512,12 +1525,12 @@ msgstr "Rediģēt birkas"
 msgid "Edit track information"
 msgstr "Rediģēt dziesmas informāciju"
 
-#: library/libraryview.cpp:271 widgets/fileviewlist.cpp:50
+#: library/libraryview.cpp:272 widgets/fileviewlist.cpp:50
 #: ../bin/src/ui_mainwindow.h:659
 msgid "Edit track information..."
 msgstr "Rediģēt dziesmas informāciju..."
 
-#: library/libraryview.cpp:273
+#: library/libraryview.cpp:274
 msgid "Edit tracks information..."
 msgstr "Rediģēt dziesmu informāciju..."
 
@@ -1532,10 +1545,6 @@ msgstr "Atļaut Wii tālvadības atbalstu"
 #: ../bin/src/ui_equalizer.h:126
 msgid "Enable equalizer"
 msgstr "Ieslēgt ekvalaizeru"
-
-#: ../bin/src/ui_behavioursettingspage.h:179
-msgid "Enable playlist background image"
-msgstr ""
 
 #: ../bin/src/ui_wiimotesettingspage.h:187
 msgid "Enable shortcuts only when Clementine is focused"
@@ -1603,7 +1612,7 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "Vienāds ar --log-levels *:3"
 
 #: internet/groovesharkservice.cpp:954
-#: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:454
+#: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:479
 #: ui/mainwindow.cpp:1805 ui/mainwindow.cpp:1926
 msgid "Error"
 msgstr "Kļūda"
@@ -1856,7 +1865,7 @@ msgstr "Kadrātrums"
 msgid "Frames per buffer"
 msgstr "Kadri buferī"
 
-#: internet/lastfmservice.cpp:207
+#: internet/lastfmservice.cpp:222
 msgid "Friends"
 msgstr "Draugi"
 
@@ -1932,7 +1941,7 @@ msgstr "Google lietotājvārds"
 msgid "Got %1 covers out of %2 (%3 failed)"
 msgstr "Iegūti %1 vāku attēli no %2 (%3 neizdevās)"
 
-#: ../bin/src/ui_behavioursettingspage.h:190
+#: ../bin/src/ui_behavioursettingspage.h:182
 msgid "Grey out non existent songs in my playlists"
 msgstr "Padarīt pelēkas neeksistējošās dziesmas manās dziesmu listēs"
 
@@ -2115,31 +2124,31 @@ msgstr "Internets"
 msgid "Internet providers"
 msgstr ""
 
-#: internet/lastfmservice.cpp:438
+#: internet/lastfmservice.cpp:453
 msgid "Invalid API key"
 msgstr "Nepareiza API atslēga"
 
-#: internet/lastfmservice.cpp:433
+#: internet/lastfmservice.cpp:448
 msgid "Invalid format"
 msgstr "Nepareizs formāts"
 
-#: internet/lastfmservice.cpp:431
+#: internet/lastfmservice.cpp:446
 msgid "Invalid method"
 msgstr "Nepareiza metode"
 
-#: internet/lastfmservice.cpp:434
+#: internet/lastfmservice.cpp:449
 msgid "Invalid parameters"
 msgstr "Nepareizi parametri"
 
-#: internet/lastfmservice.cpp:435
+#: internet/lastfmservice.cpp:450
 msgid "Invalid resource specified"
 msgstr ""
 
-#: internet/lastfmservice.cpp:430
+#: internet/lastfmservice.cpp:445
 msgid "Invalid service"
 msgstr "Nepareizs serviss"
 
-#: internet/lastfmservice.cpp:437
+#: internet/lastfmservice.cpp:452
 msgid "Invalid session key"
 msgstr "Nepareiza sesijas atslēga"
 
@@ -2187,7 +2196,7 @@ msgstr "Turiet pogas %1 sekundi..."
 msgid "Keep buttons for %1 seconds..."
 msgstr "Turiet pogas %1 sekundes..."
 
-#: ../bin/src/ui_behavioursettingspage.h:178
+#: ../bin/src/ui_behavioursettingspage.h:171
 msgid "Keep running in the background when the window is closed"
 msgstr "Darboties fonā, kad logs ir aizvērts"
 
@@ -2199,7 +2208,7 @@ msgstr "Atstāt oriģinālos failus"
 msgid "Kittens"
 msgstr "Kakēni"
 
-#: ../bin/src/ui_behavioursettingspage.h:180
+#: ../bin/src/ui_behavioursettingspage.h:172
 msgid "Language"
 msgstr "Valoda"
 
@@ -2228,45 +2237,45 @@ msgstr "Pēdējo reizi atskaņots"
 msgid "Last.fm"
 msgstr "Last.fm"
 
-#: internet/lastfmservice.cpp:70
+#: internet/lastfmservice.cpp:85
 #, qt-format
 msgid "Last.fm Custom Radio: %1"
 msgstr "Last.fm Pielāgotais Radio: %1"
 
-#: internet/lastfmservice.cpp:238 internet/lastfmservice.cpp:694
-#: internet/lastfmservice.cpp:729
+#: internet/lastfmservice.cpp:253 internet/lastfmservice.cpp:709
+#: internet/lastfmservice.cpp:744
 #, qt-format
 msgid "Last.fm Library - %1"
 msgstr "Last.fm Bibliotēka - %1"
 
-#: globalsearch/lastfmsearchprovider.cpp:75 internet/lastfmservice.cpp:240
-#: internet/lastfmservice.cpp:243
+#: globalsearch/lastfmsearchprovider.cpp:75 internet/lastfmservice.cpp:255
+#: internet/lastfmservice.cpp:258
 #, qt-format
 msgid "Last.fm Mix Radio - %1"
 msgstr "Last.fm Mix Radio - %1"
 
-#: globalsearch/lastfmsearchprovider.cpp:77 internet/lastfmservice.cpp:245
-#: internet/lastfmservice.cpp:248
+#: globalsearch/lastfmsearchprovider.cpp:77 internet/lastfmservice.cpp:260
+#: internet/lastfmservice.cpp:263
 #, qt-format
 msgid "Last.fm Neighbor Radio - %1"
 msgstr "Last.fm Kaimiņu Radio - %1"
 
-#: globalsearch/lastfmsearchprovider.cpp:73 internet/lastfmservice.cpp:235
+#: globalsearch/lastfmsearchprovider.cpp:73 internet/lastfmservice.cpp:250
 #, qt-format
 msgid "Last.fm Radio Station - %1"
 msgstr "Last.fm Radio Stacija - %1"
 
-#: internet/lastfmservice.cpp:68
+#: internet/lastfmservice.cpp:83
 #, qt-format
 msgid "Last.fm Similar Artists to %1"
 msgstr "Last.fm Līdzīgi Izpildītāji ar %1"
 
-#: internet/lastfmservice.cpp:69
+#: internet/lastfmservice.cpp:84
 #, qt-format
 msgid "Last.fm Tag Radio: %1"
 msgstr "Last.fm Birku Radio: %1"
 
-#: internet/lastfmservice.cpp:442
+#: internet/lastfmservice.cpp:457
 msgid "Last.fm is currently busy, please try again in a few minutes"
 msgstr "Last.fm šobrīd nespēj apstrādāt pieprasīju, pēc brītiņa mēģiniet vēlreiz"
 
@@ -2360,7 +2369,7 @@ msgstr "Ielādēt dziesmu listi"
 msgid "Load playlist..."
 msgstr "Ielādēt dziesmu listi..."
 
-#: internet/lastfmservice.cpp:913
+#: internet/lastfmservice.cpp:928
 msgid "Loading Last.fm radio"
 msgstr "Ialēdē Last.fm radio"
 
@@ -2493,7 +2502,7 @@ msgstr ""
 msgid "Make playlist available offline"
 msgstr ""
 
-#: internet/lastfmservice.cpp:449
+#: internet/lastfmservice.cpp:464
 msgid "Malformed response"
 msgstr "Izkropļota atbilde"
 
@@ -2593,35 +2602,35 @@ msgstr "Mūzikas bibliotēka"
 msgid "Mute"
 msgstr "Klusums"
 
-#: globalsearch/lastfmsearchprovider.cpp:51 internet/lastfmservice.cpp:178
+#: globalsearch/lastfmsearchprovider.cpp:51 internet/lastfmservice.cpp:193
 msgid "My Last.fm Library"
 msgstr "Mana Last.fm Bibliotēka"
 
-#: globalsearch/lastfmsearchprovider.cpp:53 internet/lastfmservice.cpp:183
+#: globalsearch/lastfmsearchprovider.cpp:53 internet/lastfmservice.cpp:198
 msgid "My Last.fm Mix Radio"
 msgstr "Mani Last.fm Mix Radio"
 
-#: globalsearch/lastfmsearchprovider.cpp:55 internet/lastfmservice.cpp:188
+#: globalsearch/lastfmsearchprovider.cpp:55 internet/lastfmservice.cpp:203
 msgid "My Last.fm Neighborhood"
 msgstr "Mani Last.fm Kaimiņi"
 
-#: globalsearch/lastfmsearchprovider.cpp:49 internet/lastfmservice.cpp:173
+#: globalsearch/lastfmsearchprovider.cpp:49 internet/lastfmservice.cpp:188
 msgid "My Last.fm Recommended Radio"
 msgstr "Mani Last.fm Ieteiktie Radio"
 
-#: internet/lastfmservice.cpp:180
+#: internet/lastfmservice.cpp:195
 msgid "My Mix Radio"
 msgstr "Mans Mix Radio"
 
-#: internet/lastfmservice.cpp:185
+#: internet/lastfmservice.cpp:200
 msgid "My Neighborhood"
 msgstr "Mani kaimiņi"
 
-#: internet/lastfmservice.cpp:175
+#: internet/lastfmservice.cpp:190
 msgid "My Radio Station"
 msgstr "Mana radio stacija"
 
-#: internet/lastfmservice.cpp:170
+#: internet/lastfmservice.cpp:185
 msgid "My Recommendations"
 msgstr "Mani ieteikumi"
 
@@ -2641,7 +2650,7 @@ msgstr "Nosaukšanas opcijas"
 msgid "Narrow band (NB)"
 msgstr "Šaura josla (NB)"
 
-#: internet/lastfmservice.cpp:212
+#: internet/lastfmservice.cpp:227
 msgid "Neighbors"
 msgstr "Kaimiņi"
 
@@ -2661,8 +2670,8 @@ msgstr "Nekad"
 msgid "Never played"
 msgstr "Nekad nav atskaņotas"
 
-#: ../bin/src/ui_behavioursettingspage.h:194
-#: ../bin/src/ui_behavioursettingspage.h:208
+#: ../bin/src/ui_behavioursettingspage.h:186
+#: ../bin/src/ui_behavioursettingspage.h:200
 msgid "Never start playing"
 msgstr "Nekad Nesākt atskaņot"
 
@@ -2670,7 +2679,7 @@ msgstr "Nekad Nesākt atskaņot"
 msgid "New playlist"
 msgstr "Jauna dziesmu liste"
 
-#: library/libraryview.cpp:255
+#: library/libraryview.cpp:256
 msgid "New smart playlist..."
 msgstr "Jauna gudrā dziesmu liste..."
 
@@ -2699,6 +2708,10 @@ msgstr "Nākamā"
 msgid "No analyzer"
 msgstr "Bez analizatora"
 
+#: ../bin/src/ui_appearancesettingspage.h:189
+msgid "No background image"
+msgstr ""
+
 #: ../bin/src/ui_transcoderoptionsaac.h:146
 msgid "No long blocks"
 msgstr "Bez gariem blokiem"
@@ -2717,7 +2730,7 @@ msgstr "Bez īsiem blokiem"
 msgid "None"
 msgstr "Nekas"
 
-#: library/libraryview.cpp:455 ui/mainwindow.cpp:1806 ui/mainwindow.cpp:1927
+#: library/libraryview.cpp:480 ui/mainwindow.cpp:1806 ui/mainwindow.cpp:1927
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Neviena no izvēlētajām dziesmām nav piemērota kopēšanai uz ierīci"
 
@@ -2733,19 +2746,19 @@ msgstr "Nav pieejams izmantojot dinamiskās dziesmu listes"
 msgid "Not connected"
 msgstr "Nav pieslēgts"
 
-#: internet/lastfmservice.cpp:444
+#: internet/lastfmservice.cpp:459
 msgid "Not enough content"
 msgstr "Nepietiekošs saturs"
 
-#: internet/lastfmservice.cpp:446
+#: internet/lastfmservice.cpp:461
 msgid "Not enough fans"
 msgstr "Nepietiek fanu"
 
-#: internet/lastfmservice.cpp:445
+#: internet/lastfmservice.cpp:460
 msgid "Not enough members"
 msgstr "Nepietiek dalībnieku"
 
-#: internet/lastfmservice.cpp:447
+#: internet/lastfmservice.cpp:462
 msgid "Not enough neighbors"
 msgstr "Nepietiek kaimiņu"
 
@@ -2815,8 +2828,8 @@ msgid "Open file..."
 msgstr ""
 
 #: devices/deviceview.cpp:220 internet/internetservice.cpp:73
-#: library/libraryview.cpp:247 widgets/fileviewlist.cpp:36
-#: ../bin/src/ui_behavioursettingspage.h:203
+#: library/libraryview.cpp:248 widgets/fileviewlist.cpp:36
+#: ../bin/src/ui_behavioursettingspage.h:195
 msgid "Open in new playlist"
 msgstr "Atvērt jaunā skaņsarakstā"
 
@@ -2825,7 +2838,7 @@ msgstr "Atvērt jaunā skaņsarakstā"
 msgid "Open..."
 msgstr "Atvērt..."
 
-#: internet/lastfmservice.cpp:436
+#: internet/lastfmservice.cpp:451
 msgid "Operation failed"
 msgstr "Darbība neizdevās"
 
@@ -2845,7 +2858,7 @@ msgstr "Opcijas..."
 msgid "Organise Files"
 msgstr "Organizēt Failus"
 
-#: library/libraryview.cpp:263 ui/mainwindow.cpp:527
+#: library/libraryview.cpp:264 ui/mainwindow.cpp:527
 msgid "Organise files..."
 msgstr "Organizēt failus..."
 
@@ -2924,7 +2937,7 @@ msgstr "Atskaņot"
 msgid "Play Artist or Tag"
 msgstr "Atskaņot Izpildītāju vai Birku"
 
-#: internet/lastfmservice.cpp:103
+#: internet/lastfmservice.cpp:118
 msgid "Play artist radio..."
 msgstr "Atskaņot izpildītāja radio..."
 
@@ -2932,7 +2945,7 @@ msgstr "Atskaņot izpildītāja radio..."
 msgid "Play count"
 msgstr "Atskaņošanu skaits"
 
-#: internet/lastfmservice.cpp:107
+#: internet/lastfmservice.cpp:122
 msgid "Play custom radio..."
 msgstr "Atskaņot pielāgoto radio..."
 
@@ -2940,12 +2953,12 @@ msgstr "Atskaņot pielāgoto radio..."
 msgid "Play if stopped, pause if playing"
 msgstr "Atskaņot, ja apturēts, pauzēt, ja atskaņo"
 
-#: ../bin/src/ui_behavioursettingspage.h:195
-#: ../bin/src/ui_behavioursettingspage.h:209
+#: ../bin/src/ui_behavioursettingspage.h:187
+#: ../bin/src/ui_behavioursettingspage.h:201
 msgid "Play if there is nothing already playing"
 msgstr "Atskaņot, ja nekas netiek atskaņots"
 
-#: internet/lastfmservice.cpp:105
+#: internet/lastfmservice.cpp:120
 msgid "Play tag radio..."
 msgstr "Atskaņot birku radio..."
 
@@ -3135,7 +3148,7 @@ msgstr "Rindas pārvaldnieks"
 msgid "Queue selected tracks"
 msgstr "Ierindot izvēlētās dziesmas"
 
-#: globalsearch/globalsearchwidget.cpp:105 library/libraryview.cpp:251
+#: globalsearch/globalsearchwidget.cpp:105 library/libraryview.cpp:252
 #: ui/mainwindow.cpp:1337
 msgid "Queue track"
 msgstr "Ierindot dziesmu"
@@ -3200,7 +3213,7 @@ msgstr "Atjaunot katalogu"
 msgid "Refresh channels"
 msgstr "Atjaunot kanālus"
 
-#: internet/lastfmservice.cpp:109
+#: internet/lastfmservice.cpp:124
 msgid "Refresh friends list"
 msgstr ""
 
@@ -3220,7 +3233,7 @@ msgstr "Regejs"
 msgid "Remember Wii remote swing"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:189
+#: ../bin/src/ui_behavioursettingspage.h:181
 msgid "Remember from last time"
 msgstr "Atcerēties no pēdējās reizes"
 
@@ -3230,7 +3243,7 @@ msgstr "Tālvadības pults"
 
 #: internet/savedradio.cpp:100 ../bin/src/ui_queuemanager.h:135
 #: ../bin/src/ui_searchtermwidget.h:282 ../bin/src/ui_transcodedialog.h:207
-#: internet/lastfmservice.cpp:100
+#: internet/lastfmservice.cpp:115
 msgid "Remove"
 msgstr "Izņemt"
 
@@ -3300,12 +3313,12 @@ msgid "Replace and play now"
 msgstr ""
 
 #: devices/deviceview.cpp:218 globalsearch/globalsearchwidget.cpp:106
-#: internet/internetservice.cpp:63 library/libraryview.cpp:245
+#: internet/internetservice.cpp:63 library/libraryview.cpp:246
 #: widgets/fileviewlist.cpp:34
 msgid "Replace current playlist"
 msgstr "Aizstāt pašreizējo dziesmu listi"
 
-#: ../bin/src/ui_behavioursettingspage.h:202
+#: ../bin/src/ui_behavioursettingspage.h:194
 msgid "Replace the playlist"
 msgstr "Aizstāt dziesmu listi"
 
@@ -3512,15 +3525,19 @@ msgstr "Iezīmēt visu"
 msgid "Select None"
 msgstr "Neiezīmēt neko"
 
-#: ../bin/src/ui_appearancesettingspage.h:125
+#: ../bin/src/ui_appearancesettingspage.h:185
 msgid "Select background color:"
+msgstr ""
+
+#: ui/appearancesettingspage.cpp:187
+msgid "Select background image"
 msgstr ""
 
 #: ../bin/src/ui_trackselectiondialog.h:207
 msgid "Select best possible match"
 msgstr "Izvēlēties labāko atbilstību"
 
-#: ../bin/src/ui_appearancesettingspage.h:123
+#: ../bin/src/ui_appearancesettingspage.h:183
 msgid "Select foreground color:"
 msgstr ""
 
@@ -3536,7 +3553,7 @@ msgstr "Izvēlēties vizualizācijas..."
 msgid "Serial number"
 msgstr "Sērijas numurs"
 
-#: internet/lastfmservice.cpp:439
+#: internet/lastfmservice.cpp:454
 msgid "Service offline"
 msgstr "Serviss atslēgts"
 
@@ -3632,12 +3649,12 @@ msgstr "Rādīt atdalītājus"
 msgid "Show fullsize..."
 msgstr "Radīt pa visu ekrānu..."
 
-#: library/libraryview.cpp:275 ui/mainwindow.cpp:530
+#: library/libraryview.cpp:276 ui/mainwindow.cpp:530
 #: widgets/fileviewlist.cpp:52
 msgid "Show in file browser..."
 msgstr "Rādīt failu pārlūkā..."
 
-#: library/libraryview.cpp:279
+#: library/libraryview.cpp:280
 msgid "Show in various artists"
 msgstr "Rādīt pie dažādiem izpildītājiem"
 
@@ -3661,7 +3678,7 @@ msgstr "Rādīt \"patīk\" un \"aizliegt\" pogas"
 msgid "Show the scrobble button in the main window"
 msgstr "Rādīt skroblēšanas pogu galvenajā logā"
 
-#: ../bin/src/ui_behavioursettingspage.h:177
+#: ../bin/src/ui_behavioursettingspage.h:170
 msgid "Show tray icon"
 msgstr "Rādīt paneļa ikonu"
 
@@ -3932,7 +3949,7 @@ msgstr "Birka"
 msgid "Tag fetcher"
 msgstr "Birku meklētājs"
 
-#: internet/lastfmservice.cpp:195
+#: internet/lastfmservice.cpp:210
 msgid "Tag radio"
 msgstr "Birku radio"
 
@@ -3985,6 +4002,10 @@ msgid ""
 "rescan because of the new features listed below:"
 msgstr "Jaunā Clementine versija pieprasa pilnu bibliotēkas skenēšanu šādu funkciju dēļ:"
 
+#: library/libraryview.cpp:406
+msgid "There are other songs in this album"
+msgstr ""
+
 #: internet/magnatunedownloaddialog.cpp:157
 msgid "There was a problem fetching the metadata from Magnatune"
 msgstr "Problēma meklējot metadatus iekš Magnatude"
@@ -4001,7 +4022,7 @@ msgid ""
 "deleted:"
 msgstr "Kļuda dzēšot dažas dziesmas. Nevar izdzēst sekojošos failus:"
 
-#: library/libraryview.cpp:461 ui/mainwindow.cpp:1854 widgets/fileview.cpp:187
+#: library/libraryview.cpp:486 ui/mainwindow.cpp:1854 widgets/fileview.cpp:187
 msgid ""
 "These files will be deleted from disk, are you sure you want to continue?"
 msgstr "Šie faili tiks dzēsti no diska. Vai jūs tiešām vēlaties turpināt?"
@@ -4071,7 +4092,7 @@ msgid ""
 "want to continue?"
 msgstr ""
 
-#: internet/lastfmservice.cpp:440
+#: internet/lastfmservice.cpp:455
 msgid "This stream is for paid subscribers only"
 msgstr "Šī straume ir pieejama tikai maksas lietotājiem"
 
@@ -4196,7 +4217,7 @@ msgstr "Nevar lejupielādēt %1 (%2)"
 msgid "Unknown"
 msgstr "Nezināms"
 
-#: internet/digitallyimportedclient.cpp:68 internet/lastfmservice.cpp:453
+#: internet/digitallyimportedclient.cpp:68 internet/lastfmservice.cpp:468
 msgid "Unknown error"
 msgstr "Nezināma kļūda"
 
@@ -4246,7 +4267,7 @@ msgstr "Izmantot atskaņošanas skaļuma datus, ja pieejami"
 msgid "Use Wii Remote"
 msgstr "Izmantot Wii Tālvadību"
 
-#: ../bin/src/ui_appearancesettingspage.h:122
+#: ../bin/src/ui_appearancesettingspage.h:182
 msgid "Use a custom color set"
 msgstr ""
 
@@ -4274,11 +4295,11 @@ msgstr "Izmantot paziņojumus Wii Tālvadības statusa atskaitēm"
 msgid "Use temporal noise shaping"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:183
+#: ../bin/src/ui_behavioursettingspage.h:175
 msgid "Use the system default"
 msgstr "Lietotot sistēmas uzstādījumus"
 
-#: ../bin/src/ui_appearancesettingspage.h:121
+#: ../bin/src/ui_appearancesettingspage.h:181
 msgid "Use the system default color set"
 msgstr ""
 
@@ -4310,7 +4331,7 @@ msgstr ""
 msgid "Username"
 msgstr "Lietotājvārds"
 
-#: ../bin/src/ui_behavioursettingspage.h:191
+#: ../bin/src/ui_behavioursettingspage.h:183
 msgid "Using the menu to add a song will..."
 msgstr "Izmantojot izvēlni lai pievienotu dziesmu..."
 
@@ -4383,7 +4404,7 @@ msgstr "Wav"
 msgid "Weeks"
 msgstr "Nedēļas"
 
-#: ../bin/src/ui_behavioursettingspage.h:186
+#: ../bin/src/ui_behavioursettingspage.h:178
 msgid "When Clementine starts"
 msgstr "Kad startējas Clementine"
 
@@ -4450,6 +4471,12 @@ msgstr ""
 #: core/song.cpp:332
 msgid "Windows Media audio"
 msgstr "Windows Media audio"
+
+#: library/libraryview.cpp:407
+msgid ""
+"Would you like to move the other songs in this album to Various Artists as "
+"well?"
+msgstr ""
 
 #: ui/mainwindow.cpp:2047
 msgid "Would you like to run a full rescan right now?"
@@ -4555,7 +4582,7 @@ msgid ""
 "shortcuts in Clementine."
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:185
+#: ../bin/src/ui_behavioursettingspage.h:177
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Ja jūs mainīsiet valodu, jums nāksies restartēt Clementine."
 
@@ -4582,7 +4609,7 @@ msgstr "Jūsu Last.fm dati ir nepareizi"
 msgid "Your Magnatune credentials were incorrect"
 msgstr "Jūsu Magnatude dati ir nepareizi"
 
-#: library/libraryview.cpp:219
+#: library/libraryview.cpp:220
 msgid "Your library is empty!"
 msgstr "Jūsu bibliotēka ir tukša!"
 
@@ -4641,7 +4668,7 @@ msgstr "starp"
 msgid "biggest first"
 msgstr "lielākais vispirms"
 
-#: playlist/playlistview.cpp:164 ui/edittagdialog.cpp:454
+#: playlist/playlistview.cpp:174 ui/edittagdialog.cpp:454
 msgid "bpm"
 msgstr "sitieni minūtē"
 
@@ -4684,7 +4711,7 @@ msgstr "lielāks par"
 msgid "in the last"
 msgstr "pēdējās"
 
-#: playlist/playlistview.cpp:166 ui/edittagdialog.cpp:456
+#: playlist/playlistview.cpp:176 ui/edittagdialog.cpp:456
 #: internet/spotifysettingspage.cpp:59 internet/spotifysettingspage.cpp:60
 #: internet/spotifysettingspage.cpp:61
 msgid "kbps"

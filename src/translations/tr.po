@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-02-02 20:06+0000\n"
+"PO-Revision-Date: 2012-02-19 14:26+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -455,7 +455,7 @@ msgstr "Başka bir çalma listesine ekle"
 msgid "Add to playlist"
 msgstr "Çalma listesine ekle"
 
-#: ../bin/src/ui_behavioursettingspage.h:204
+#: ../bin/src/ui_behavioursettingspage.h:196
 msgid "Add to the queue"
 msgstr "Kuyruğa ekle"
 
@@ -572,16 +572,16 @@ msgstr "Mid/side kodlamaya izin ver"
 msgid "Alongside the originals"
 msgstr "Orijinallerin yanına"
 
-#: ../bin/src/ui_behavioursettingspage.h:188
+#: ../bin/src/ui_behavioursettingspage.h:180
 msgid "Always hide the main window"
 msgstr "Ana pencereyi her zaman gizle"
 
-#: ../bin/src/ui_behavioursettingspage.h:187
+#: ../bin/src/ui_behavioursettingspage.h:179
 msgid "Always show the main window"
 msgstr "Ana pencereyi her zaman göster"
 
-#: ../bin/src/ui_behavioursettingspage.h:196
-#: ../bin/src/ui_behavioursettingspage.h:210
+#: ../bin/src/ui_behavioursettingspage.h:188
+#: ../bin/src/ui_behavioursettingspage.h:202
 msgid "Always start playing"
 msgstr "Her zaman çalarak başlat"
 
@@ -608,7 +608,7 @@ msgstr "iTunes veritabanı yüklenirken hata oluştu"
 msgid "An error occurred writing metadata to '%1'"
 msgstr "'%1' dosyasına metadata yazarken hata oluştu"
 
-#: internet/lastfmservice.cpp:903
+#: internet/lastfmservice.cpp:918
 #, qt-format
 msgid "An unknown last.fm error occurred: %1"
 msgstr "Bilinmeyen bir last.fm hatası oluştu: %1"
@@ -618,7 +618,7 @@ msgid "And:"
 msgstr "Ve:"
 
 #: ../bin/src/ui_songinfosettingspage.h:180
-#: ../bin/src/ui_appearancesettingspage.h:119
+#: ../bin/src/ui_appearancesettingspage.h:179
 msgid "Appearance"
 msgstr "Görünüm"
 
@@ -627,11 +627,11 @@ msgid "Append files/URLs to the playlist"
 msgstr "Çalma listesine dosya/URL ekle"
 
 #: devices/deviceview.cpp:216 internet/internetservice.cpp:53
-#: library/libraryview.cpp:243 widgets/fileviewlist.cpp:32
+#: library/libraryview.cpp:244 widgets/fileviewlist.cpp:32
 msgid "Append to current playlist"
 msgstr "Şu anki çalma listesine ekle"
 
-#: ../bin/src/ui_behavioursettingspage.h:201
+#: ../bin/src/ui_behavioursettingspage.h:193
 msgid "Append to the playlist"
 msgstr "Çalma listesine ekle"
 
@@ -666,7 +666,7 @@ msgstr "Sanatçı"
 msgid "Artist info"
 msgstr "Sanatçı bilgisi"
 
-#: internet/lastfmservice.cpp:191
+#: internet/lastfmservice.cpp:206
 msgid "Artist radio"
 msgstr "Sanatçı radyosu"
 
@@ -687,7 +687,7 @@ msgid "Authenticating..."
 msgstr "Kimlik doğrulaması yapılıyor..."
 
 #: internet/digitallyimportedsettingspage.cpp:82
-#: internet/magnatunesettingspage.cpp:113 internet/lastfmservice.cpp:432
+#: internet/magnatunesettingspage.cpp:113 internet/lastfmservice.cpp:447
 #: internet/lastfmsettingspage.cpp:78 remote/remotesettingspage.cpp:113
 msgid "Authentication failed"
 msgstr "Kimlik doğrulama başarısız"
@@ -733,6 +733,10 @@ msgstr "Arkaplan Akışları"
 msgid "Background color"
 msgstr "Arkaplan rengi"
 
+#: ../bin/src/ui_appearancesettingspage.h:187
+msgid "Background image"
+msgstr ""
+
 #: ../bin/src/ui_notificationssettingspage.h:424
 msgid "Background opacity"
 msgstr "Artalan saydamlığı"
@@ -753,7 +757,7 @@ msgstr "Temel Mavi"
 msgid "Basic audio type"
 msgstr "Temel ses tipi"
 
-#: ../bin/src/ui_behavioursettingspage.h:176
+#: ../bin/src/ui_behavioursettingspage.h:169
 msgid "Behavior"
 msgstr "Davranış"
 
@@ -798,6 +802,7 @@ msgid "Boom analyzer"
 msgstr "Boom çözümleyici"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:146
+#: ../bin/src/ui_appearancesettingspage.h:191
 msgid "Browse..."
 msgstr "Gözat..."
 
@@ -950,7 +955,7 @@ msgstr "Clementine resim görüntüleyici"
 msgid "Clementine was unable to find results for this file"
 msgstr "Clementine bu dosya için sonuç bulamadı"
 
-#: library/libraryview.cpp:225
+#: library/libraryview.cpp:226
 msgid "Click here to add some music"
 msgstr "Parça eklemek için buraya tıklayın"
 
@@ -982,7 +987,7 @@ msgstr "Kulüp"
 msgid "Color"
 msgstr "Renk"
 
-#: ../bin/src/ui_appearancesettingspage.h:120
+#: ../bin/src/ui_appearancesettingspage.h:180
 msgid "Colors"
 msgstr ""
 
@@ -1017,7 +1022,7 @@ msgstr "Besteci"
 msgid "Configure Grooveshark..."
 msgstr "Grooveshark'i ayarla"
 
-#: internet/lastfmservice.cpp:111
+#: internet/lastfmservice.cpp:126
 msgid "Configure Last.fm..."
 msgstr "Last.fm'i Yapılandır..."
 
@@ -1070,7 +1075,7 @@ msgstr "Aygıtın çalamadığı müzikleri dönüştür"
 msgid "Copy to clipboard"
 msgstr "Panoya kopyala"
 
-#: library/libraryview.cpp:265 ui/mainwindow.cpp:528
+#: library/libraryview.cpp:266 ui/mainwindow.cpp:528
 #: widgets/fileviewlist.cpp:44
 msgid "Copy to device..."
 msgstr "Aygıta kopyala..."
@@ -1105,7 +1110,7 @@ msgid ""
 "plugins installed"
 msgstr "%1 için kodlayıcı bulunamadı, gerekli GStreamer eklentilerinin yüklü olup olmadığını kontrol edin"
 
-#: internet/lastfmservice.cpp:900
+#: internet/lastfmservice.cpp:915
 msgid "Couldn't load the last.fm radio station"
 msgstr "Last.fm radyo istasyonu yüklenemedi"
 
@@ -1234,11 +1239,15 @@ msgstr "Ctrl+Up"
 msgid "Custom"
 msgstr "Özel"
 
+#: ../bin/src/ui_appearancesettingspage.h:190
+msgid "Custom image:"
+msgstr ""
+
 #: ../bin/src/ui_notificationssettingspage.h:416
 msgid "Custom message settings"
 msgstr "Mesaj ayarlarını özelleştir"
 
-#: internet/lastfmservice.cpp:199
+#: internet/lastfmservice.cpp:214
 msgid "Custom radio"
 msgstr "Özel radyo"
 
@@ -1278,6 +1287,10 @@ msgstr "Ses seviyesini 4% azalt"
 msgid "Decrease volume"
 msgstr "Sesi azalt"
 
+#: ../bin/src/ui_appearancesettingspage.h:188
+msgid "Default background image"
+msgstr ""
+
 #: ../bin/src/ui_wiimotesettingspage.h:195
 msgid "Defaults"
 msgstr "Öntanımlılar"
@@ -1290,7 +1303,7 @@ msgstr "Görselleştirmeler arasındaki gecikme"
 msgid "Delete Grooveshark playlist"
 msgstr "Grooveshark müzik listesini sil"
 
-#: devices/deviceview.cpp:393 library/libraryview.cpp:460
+#: devices/deviceview.cpp:393 library/libraryview.cpp:485
 #: ui/mainwindow.cpp:1853 widgets/fileview.cpp:186
 msgid "Delete files"
 msgstr "Dosyaları sil"
@@ -1299,7 +1312,7 @@ msgstr "Dosyaları sil"
 msgid "Delete from device..."
 msgstr "Aygıttan sil..."
 
-#: library/libraryview.cpp:267 ui/mainwindow.cpp:529
+#: library/libraryview.cpp:268 ui/mainwindow.cpp:529
 #: widgets/fileviewlist.cpp:45
 msgid "Delete from disk..."
 msgstr "Diskten sil..."
@@ -1308,7 +1321,7 @@ msgstr "Diskten sil..."
 msgid "Delete preset"
 msgstr "Ayarı sil"
 
-#: library/libraryview.cpp:259
+#: library/libraryview.cpp:260
 msgid "Delete smart playlist"
 msgstr "Akıllı çalma listesini silin"
 
@@ -1419,7 +1432,7 @@ msgstr "Hiç bir müziği dönüştürme"
 msgid "Don't repeat"
 msgstr "Tekrarlama"
 
-#: library/libraryview.cpp:281
+#: library/libraryview.cpp:282
 msgid "Don't show in various artists"
 msgstr "Çeşitli sanatçılarda gösterme"
 
@@ -1435,7 +1448,7 @@ msgstr "Durma!"
 msgid "Double click to open"
 msgstr "Açmak için çift tıkla"
 
-#: ../bin/src/ui_behavioursettingspage.h:198
+#: ../bin/src/ui_behavioursettingspage.h:190
 msgid "Double clicking a song will..."
 msgstr "Bir şarkıyı çift tıklamak..."
 
@@ -1495,7 +1508,7 @@ msgstr "Dinamik kip açık"
 msgid "Dynamic random mix"
 msgstr "Dinamik rastgele karışım"
 
-#: library/libraryview.cpp:257
+#: library/libraryview.cpp:258
 msgid "Edit smart playlist..."
 msgstr "Akıllı çalma listesini düzenleyin"
 
@@ -1516,12 +1529,12 @@ msgstr "Etiketleri düzenle"
 msgid "Edit track information"
 msgstr "Parça bilgisini düzenle"
 
-#: library/libraryview.cpp:271 widgets/fileviewlist.cpp:50
+#: library/libraryview.cpp:272 widgets/fileviewlist.cpp:50
 #: ../bin/src/ui_mainwindow.h:659
 msgid "Edit track information..."
 msgstr "Parça bilgisini düzenle..."
 
-#: library/libraryview.cpp:273
+#: library/libraryview.cpp:274
 msgid "Edit tracks information..."
 msgstr "Parça bilgilerini düzenle..."
 
@@ -1536,10 +1549,6 @@ msgstr "Wii kumanda desteğini etkinleştir"
 #: ../bin/src/ui_equalizer.h:126
 msgid "Enable equalizer"
 msgstr "Ekolayzırı etkinleştir"
-
-#: ../bin/src/ui_behavioursettingspage.h:179
-msgid "Enable playlist background image"
-msgstr "Çalma listesi arkaplan görüntüsünü etkinleştir"
 
 #: ../bin/src/ui_wiimotesettingspage.h:187
 msgid "Enable shortcuts only when Clementine is focused"
@@ -1607,7 +1616,7 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "--log-levels *:3'e eşdeğer"
 
 #: internet/groovesharkservice.cpp:954
-#: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:454
+#: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:479
 #: ui/mainwindow.cpp:1805 ui/mainwindow.cpp:1926
 msgid "Error"
 msgstr "Hata"
@@ -1860,7 +1869,7 @@ msgstr "Kare oranı"
 msgid "Frames per buffer"
 msgstr "Tambon başına kare"
 
-#: internet/lastfmservice.cpp:207
+#: internet/lastfmservice.cpp:222
 msgid "Friends"
 msgstr "Arkadaşlar"
 
@@ -1936,7 +1945,7 @@ msgstr "Google kullanıcı adı"
 msgid "Got %1 covers out of %2 (%3 failed)"
 msgstr "%2 kapaktan %1 tanesi alındı (%3 tanesi başarısız)"
 
-#: ../bin/src/ui_behavioursettingspage.h:190
+#: ../bin/src/ui_behavioursettingspage.h:182
 msgid "Grey out non existent songs in my playlists"
 msgstr "Çalma listemde olmayan şarkıları gri göster"
 
@@ -2119,31 +2128,31 @@ msgstr "Internet"
 msgid "Internet providers"
 msgstr "İnternet sağlayıcılar"
 
-#: internet/lastfmservice.cpp:438
+#: internet/lastfmservice.cpp:453
 msgid "Invalid API key"
 msgstr "Geçersiz API anahtarı"
 
-#: internet/lastfmservice.cpp:433
+#: internet/lastfmservice.cpp:448
 msgid "Invalid format"
 msgstr "Geçersiz biçim"
 
-#: internet/lastfmservice.cpp:431
+#: internet/lastfmservice.cpp:446
 msgid "Invalid method"
 msgstr "Geçersiz metod"
 
-#: internet/lastfmservice.cpp:434
+#: internet/lastfmservice.cpp:449
 msgid "Invalid parameters"
 msgstr "Geçersiz parametreler"
 
-#: internet/lastfmservice.cpp:435
+#: internet/lastfmservice.cpp:450
 msgid "Invalid resource specified"
 msgstr "Geçersiz kaynak belirtildi"
 
-#: internet/lastfmservice.cpp:430
+#: internet/lastfmservice.cpp:445
 msgid "Invalid service"
 msgstr "Geçersiz servis"
 
-#: internet/lastfmservice.cpp:437
+#: internet/lastfmservice.cpp:452
 msgid "Invalid session key"
 msgstr "Geçersiz oturum anahtarı"
 
@@ -2191,7 +2200,7 @@ msgstr "Düğmeleri %1 saniye tut..."
 msgid "Keep buttons for %1 seconds..."
 msgstr "Düğmeleri %1 saniye tut..."
 
-#: ../bin/src/ui_behavioursettingspage.h:178
+#: ../bin/src/ui_behavioursettingspage.h:171
 msgid "Keep running in the background when the window is closed"
 msgstr "Pencere kapandığında arkaplanda çalışmaya devam et"
 
@@ -2203,7 +2212,7 @@ msgstr "Orijinal dosyaları sakla"
 msgid "Kittens"
 msgstr "Kedicikler"
 
-#: ../bin/src/ui_behavioursettingspage.h:180
+#: ../bin/src/ui_behavioursettingspage.h:172
 msgid "Language"
 msgstr "Dil"
 
@@ -2232,45 +2241,45 @@ msgstr "Son çalınan"
 msgid "Last.fm"
 msgstr "Last.fm"
 
-#: internet/lastfmservice.cpp:70
+#: internet/lastfmservice.cpp:85
 #, qt-format
 msgid "Last.fm Custom Radio: %1"
 msgstr "Las.fm Kişisel Radyo: %1"
 
-#: internet/lastfmservice.cpp:238 internet/lastfmservice.cpp:694
-#: internet/lastfmservice.cpp:729
+#: internet/lastfmservice.cpp:253 internet/lastfmservice.cpp:709
+#: internet/lastfmservice.cpp:744
 #, qt-format
 msgid "Last.fm Library - %1"
 msgstr "Last.fm Kütüphanesi - %1"
 
-#: globalsearch/lastfmsearchprovider.cpp:75 internet/lastfmservice.cpp:240
-#: internet/lastfmservice.cpp:243
+#: globalsearch/lastfmsearchprovider.cpp:75 internet/lastfmservice.cpp:255
+#: internet/lastfmservice.cpp:258
 #, qt-format
 msgid "Last.fm Mix Radio - %1"
 msgstr "Last.fm Karışık Radyo - %1"
 
-#: globalsearch/lastfmsearchprovider.cpp:77 internet/lastfmservice.cpp:245
-#: internet/lastfmservice.cpp:248
+#: globalsearch/lastfmsearchprovider.cpp:77 internet/lastfmservice.cpp:260
+#: internet/lastfmservice.cpp:263
 #, qt-format
 msgid "Last.fm Neighbor Radio - %1"
 msgstr "Last.fm Komşu Radyo - %1"
 
-#: globalsearch/lastfmsearchprovider.cpp:73 internet/lastfmservice.cpp:235
+#: globalsearch/lastfmsearchprovider.cpp:73 internet/lastfmservice.cpp:250
 #, qt-format
 msgid "Last.fm Radio Station - %1"
 msgstr "Last.fm Radyo İstasyonu - %1"
 
-#: internet/lastfmservice.cpp:68
+#: internet/lastfmservice.cpp:83
 #, qt-format
 msgid "Last.fm Similar Artists to %1"
 msgstr "Last.fm %1 ile Benzer Sanatçılar"
 
-#: internet/lastfmservice.cpp:69
+#: internet/lastfmservice.cpp:84
 #, qt-format
 msgid "Last.fm Tag Radio: %1"
 msgstr "Last.fm Etiket Radyosu: %1"
 
-#: internet/lastfmservice.cpp:442
+#: internet/lastfmservice.cpp:457
 msgid "Last.fm is currently busy, please try again in a few minutes"
 msgstr "Last.fm şu anda meşgul, lütfen birkaç dakika içinde tekrar deneyin"
 
@@ -2364,7 +2373,7 @@ msgstr "Çalma listesini yükle"
 msgid "Load playlist..."
 msgstr "Çalma listesi yükle..."
 
-#: internet/lastfmservice.cpp:913
+#: internet/lastfmservice.cpp:928
 msgid "Loading Last.fm radio"
 msgstr "Last.fm radyosu yükleniyor"
 
@@ -2497,7 +2506,7 @@ msgstr ""
 msgid "Make playlist available offline"
 msgstr "Çalma listesini çevrim dışındayken kullanılabilir yap"
 
-#: internet/lastfmservice.cpp:449
+#: internet/lastfmservice.cpp:464
 msgid "Malformed response"
 msgstr "Bozuk yanıt"
 
@@ -2597,35 +2606,35 @@ msgstr "Müzik Kütüphanesi"
 msgid "Mute"
 msgstr "Sessiz"
 
-#: globalsearch/lastfmsearchprovider.cpp:51 internet/lastfmservice.cpp:178
+#: globalsearch/lastfmsearchprovider.cpp:51 internet/lastfmservice.cpp:193
 msgid "My Last.fm Library"
 msgstr "Last.fm Kütüphanem"
 
-#: globalsearch/lastfmsearchprovider.cpp:53 internet/lastfmservice.cpp:183
+#: globalsearch/lastfmsearchprovider.cpp:53 internet/lastfmservice.cpp:198
 msgid "My Last.fm Mix Radio"
 msgstr "Last.fm Karışık Radyom"
 
-#: globalsearch/lastfmsearchprovider.cpp:55 internet/lastfmservice.cpp:188
+#: globalsearch/lastfmsearchprovider.cpp:55 internet/lastfmservice.cpp:203
 msgid "My Last.fm Neighborhood"
 msgstr "Last.fm Komşularım"
 
-#: globalsearch/lastfmsearchprovider.cpp:49 internet/lastfmservice.cpp:173
+#: globalsearch/lastfmsearchprovider.cpp:49 internet/lastfmservice.cpp:188
 msgid "My Last.fm Recommended Radio"
 msgstr "Last.fm Önerilen Radyom"
 
-#: internet/lastfmservice.cpp:180
+#: internet/lastfmservice.cpp:195
 msgid "My Mix Radio"
 msgstr "Karışık Radyom"
 
-#: internet/lastfmservice.cpp:185
+#: internet/lastfmservice.cpp:200
 msgid "My Neighborhood"
 msgstr "Komşularım"
 
-#: internet/lastfmservice.cpp:175
+#: internet/lastfmservice.cpp:190
 msgid "My Radio Station"
 msgstr "Radyom"
 
-#: internet/lastfmservice.cpp:170
+#: internet/lastfmservice.cpp:185
 msgid "My Recommendations"
 msgstr "Önerdiklerim"
 
@@ -2645,7 +2654,7 @@ msgstr "İsimlendirme seçenekleri"
 msgid "Narrow band (NB)"
 msgstr "Dar band (NB)"
 
-#: internet/lastfmservice.cpp:212
+#: internet/lastfmservice.cpp:227
 msgid "Neighbors"
 msgstr "Komşular"
 
@@ -2665,8 +2674,8 @@ msgstr "Hiçbir zaman"
 msgid "Never played"
 msgstr "Hiç çalınmamış"
 
-#: ../bin/src/ui_behavioursettingspage.h:194
-#: ../bin/src/ui_behavioursettingspage.h:208
+#: ../bin/src/ui_behavioursettingspage.h:186
+#: ../bin/src/ui_behavioursettingspage.h:200
 msgid "Never start playing"
 msgstr "Asla çalarak başlama"
 
@@ -2674,7 +2683,7 @@ msgstr "Asla çalarak başlama"
 msgid "New playlist"
 msgstr "Yeni çalma listesi"
 
-#: library/libraryview.cpp:255
+#: library/libraryview.cpp:256
 msgid "New smart playlist..."
 msgstr "Yeni akıllı çalma listesi..."
 
@@ -2703,6 +2712,10 @@ msgstr "Sonraki parça"
 msgid "No analyzer"
 msgstr "Çözümleyici yok"
 
+#: ../bin/src/ui_appearancesettingspage.h:189
+msgid "No background image"
+msgstr ""
+
 #: ../bin/src/ui_transcoderoptionsaac.h:146
 msgid "No long blocks"
 msgstr "Uzun blok yok"
@@ -2721,7 +2734,7 @@ msgstr "Kısa blok yok"
 msgid "None"
 msgstr "Hiçbiri"
 
-#: library/libraryview.cpp:455 ui/mainwindow.cpp:1806 ui/mainwindow.cpp:1927
+#: library/libraryview.cpp:480 ui/mainwindow.cpp:1806 ui/mainwindow.cpp:1927
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Seçili şarkıların hiçbiri aygıta yüklemeye uygun değil"
 
@@ -2737,19 +2750,19 @@ msgstr "Dinamik şarkı listesi kullanırken geçerli değil"
 msgid "Not connected"
 msgstr "Bağlı Değil"
 
-#: internet/lastfmservice.cpp:444
+#: internet/lastfmservice.cpp:459
 msgid "Not enough content"
 msgstr "Yeterli içerik yok"
 
-#: internet/lastfmservice.cpp:446
+#: internet/lastfmservice.cpp:461
 msgid "Not enough fans"
 msgstr "Yeterli hayran yok"
 
-#: internet/lastfmservice.cpp:445
+#: internet/lastfmservice.cpp:460
 msgid "Not enough members"
 msgstr "Yeterli üye yok"
 
-#: internet/lastfmservice.cpp:447
+#: internet/lastfmservice.cpp:462
 msgid "Not enough neighbors"
 msgstr "Yeterli komşu yok"
 
@@ -2819,8 +2832,8 @@ msgid "Open file..."
 msgstr "Dosya aç..."
 
 #: devices/deviceview.cpp:220 internet/internetservice.cpp:73
-#: library/libraryview.cpp:247 widgets/fileviewlist.cpp:36
-#: ../bin/src/ui_behavioursettingspage.h:203
+#: library/libraryview.cpp:248 widgets/fileviewlist.cpp:36
+#: ../bin/src/ui_behavioursettingspage.h:195
 msgid "Open in new playlist"
 msgstr "Yeni çalma listesinde aç"
 
@@ -2829,7 +2842,7 @@ msgstr "Yeni çalma listesinde aç"
 msgid "Open..."
 msgstr "Aç..."
 
-#: internet/lastfmservice.cpp:436
+#: internet/lastfmservice.cpp:451
 msgid "Operation failed"
 msgstr "İşlem başarısız"
 
@@ -2849,7 +2862,7 @@ msgstr "Seçenekler..."
 msgid "Organise Files"
 msgstr "Dosyaları Düzenle"
 
-#: library/libraryview.cpp:263 ui/mainwindow.cpp:527
+#: library/libraryview.cpp:264 ui/mainwindow.cpp:527
 msgid "Organise files..."
 msgstr "Dosyaları düzenle..."
 
@@ -2928,7 +2941,7 @@ msgstr "Çal"
 msgid "Play Artist or Tag"
 msgstr "Sanatçı veya Etiket Çal"
 
-#: internet/lastfmservice.cpp:103
+#: internet/lastfmservice.cpp:118
 msgid "Play artist radio..."
 msgstr "Sanatçı radyosu çal..."
 
@@ -2936,7 +2949,7 @@ msgstr "Sanatçı radyosu çal..."
 msgid "Play count"
 msgstr "Çalma sayısı"
 
-#: internet/lastfmservice.cpp:107
+#: internet/lastfmservice.cpp:122
 msgid "Play custom radio..."
 msgstr "Özel radyo çal..."
 
@@ -2944,12 +2957,12 @@ msgstr "Özel radyo çal..."
 msgid "Play if stopped, pause if playing"
 msgstr "Duraklatılmışsa çal, çalıyorsa beklet"
 
-#: ../bin/src/ui_behavioursettingspage.h:195
-#: ../bin/src/ui_behavioursettingspage.h:209
+#: ../bin/src/ui_behavioursettingspage.h:187
+#: ../bin/src/ui_behavioursettingspage.h:201
 msgid "Play if there is nothing already playing"
 msgstr "Çalan birşey yoksa çal"
 
-#: internet/lastfmservice.cpp:105
+#: internet/lastfmservice.cpp:120
 msgid "Play tag radio..."
 msgstr "Etiket radyosu çal..."
 
@@ -3139,7 +3152,7 @@ msgstr "Kuyruk Yöneticisi"
 msgid "Queue selected tracks"
 msgstr "Seçili parçaları kuyruğa ekle"
 
-#: globalsearch/globalsearchwidget.cpp:105 library/libraryview.cpp:251
+#: globalsearch/globalsearchwidget.cpp:105 library/libraryview.cpp:252
 #: ui/mainwindow.cpp:1337
 msgid "Queue track"
 msgstr "Parçayı kuyruğa ekle"
@@ -3204,7 +3217,7 @@ msgstr "Kataloğu yenile"
 msgid "Refresh channels"
 msgstr "Kanalları yenile"
 
-#: internet/lastfmservice.cpp:109
+#: internet/lastfmservice.cpp:124
 msgid "Refresh friends list"
 msgstr "Arkadaş listesini yenile"
 
@@ -3224,7 +3237,7 @@ msgstr "Reggae"
 msgid "Remember Wii remote swing"
 msgstr "Wii kumanda sallamayı hatırla"
 
-#: ../bin/src/ui_behavioursettingspage.h:189
+#: ../bin/src/ui_behavioursettingspage.h:181
 msgid "Remember from last time"
 msgstr "Son seferkinden hatırla"
 
@@ -3234,7 +3247,7 @@ msgstr "Uzaktan Kontrol"
 
 #: internet/savedradio.cpp:100 ../bin/src/ui_queuemanager.h:135
 #: ../bin/src/ui_searchtermwidget.h:282 ../bin/src/ui_transcodedialog.h:207
-#: internet/lastfmservice.cpp:100
+#: internet/lastfmservice.cpp:115
 msgid "Remove"
 msgstr "Kaldır"
 
@@ -3304,12 +3317,12 @@ msgid "Replace and play now"
 msgstr "Değiştir ve oynat"
 
 #: devices/deviceview.cpp:218 globalsearch/globalsearchwidget.cpp:106
-#: internet/internetservice.cpp:63 library/libraryview.cpp:245
+#: internet/internetservice.cpp:63 library/libraryview.cpp:246
 #: widgets/fileviewlist.cpp:34
 msgid "Replace current playlist"
 msgstr "Şu anki çalma listesinin yerine geç"
 
-#: ../bin/src/ui_behavioursettingspage.h:202
+#: ../bin/src/ui_behavioursettingspage.h:194
 msgid "Replace the playlist"
 msgstr "Çalma listesinin yerine geç"
 
@@ -3516,15 +3529,19 @@ msgstr "Tümünü Seç"
 msgid "Select None"
 msgstr "Hiçbirini Seçme"
 
-#: ../bin/src/ui_appearancesettingspage.h:125
+#: ../bin/src/ui_appearancesettingspage.h:185
 msgid "Select background color:"
+msgstr ""
+
+#: ui/appearancesettingspage.cpp:187
+msgid "Select background image"
 msgstr ""
 
 #: ../bin/src/ui_trackselectiondialog.h:207
 msgid "Select best possible match"
 msgstr "En uygun eşleşmeyi seç"
 
-#: ../bin/src/ui_appearancesettingspage.h:123
+#: ../bin/src/ui_appearancesettingspage.h:183
 msgid "Select foreground color:"
 msgstr ""
 
@@ -3540,7 +3557,7 @@ msgstr "Görselleştirmeleri seç..."
 msgid "Serial number"
 msgstr "Seri numarası"
 
-#: internet/lastfmservice.cpp:439
+#: internet/lastfmservice.cpp:454
 msgid "Service offline"
 msgstr "Hizmet çevrim dışı"
 
@@ -3636,12 +3653,12 @@ msgstr "Ayırıcıları göster"
 msgid "Show fullsize..."
 msgstr "Tam boyutta göster"
 
-#: library/libraryview.cpp:275 ui/mainwindow.cpp:530
+#: library/libraryview.cpp:276 ui/mainwindow.cpp:530
 #: widgets/fileviewlist.cpp:52
 msgid "Show in file browser..."
 msgstr "Dosya gözatıcısında göster..."
 
-#: library/libraryview.cpp:279
+#: library/libraryview.cpp:280
 msgid "Show in various artists"
 msgstr "Çeşitli sanatçılarda göster"
 
@@ -3665,7 +3682,7 @@ msgstr "\"Beğen\" ve \"Yasakla\" tuşlarını göster"
 msgid "Show the scrobble button in the main window"
 msgstr "Ana pencerede skroplama düğmesini göster"
 
-#: ../bin/src/ui_behavioursettingspage.h:177
+#: ../bin/src/ui_behavioursettingspage.h:170
 msgid "Show tray icon"
 msgstr "Sistem çekmecesi simgesini göster"
 
@@ -3936,7 +3953,7 @@ msgstr "Etiket"
 msgid "Tag fetcher"
 msgstr "Etiket getirici"
 
-#: internet/lastfmservice.cpp:195
+#: internet/lastfmservice.cpp:210
 msgid "Tag radio"
 msgstr "Etiket radyosu"
 
@@ -3989,6 +4006,10 @@ msgid ""
 "rescan because of the new features listed below:"
 msgstr "Güncellediğiniz Clementine sürümü, aşağıda listelenen yeni özellikler nedeniyle kütüphanenizin baştan taranmasını gerektiriyor:"
 
+#: library/libraryview.cpp:406
+msgid "There are other songs in this album"
+msgstr ""
+
 #: internet/magnatunedownloaddialog.cpp:157
 msgid "There was a problem fetching the metadata from Magnatune"
 msgstr "Magnatude servisinden veri alınırken hata oluştu"
@@ -4005,7 +4026,7 @@ msgid ""
 "deleted:"
 msgstr "Bazı şarkılar silinirken hata oluştu. Şu dosyalar silinemedi:"
 
-#: library/libraryview.cpp:461 ui/mainwindow.cpp:1854 widgets/fileview.cpp:187
+#: library/libraryview.cpp:486 ui/mainwindow.cpp:1854 widgets/fileview.cpp:187
 msgid ""
 "These files will be deleted from disk, are you sure you want to continue?"
 msgstr "Bu dosyalar diskten silinecek, devam etmek istiyor musunuz?"
@@ -4075,7 +4096,7 @@ msgid ""
 "want to continue?"
 msgstr "Bu çalma listesi kaldırılacaktır; işbu eylem geri alınamaz. Devam etmek istediğinizden emin misiniz?"
 
-#: internet/lastfmservice.cpp:440
+#: internet/lastfmservice.cpp:455
 msgid "This stream is for paid subscribers only"
 msgstr "Bu yayın sadece abone olan kullanıcılar içindir"
 
@@ -4200,7 +4221,7 @@ msgstr "%1 indirilemedi (%2)"
 msgid "Unknown"
 msgstr "Bilinmeyen"
 
-#: internet/digitallyimportedclient.cpp:68 internet/lastfmservice.cpp:453
+#: internet/digitallyimportedclient.cpp:68 internet/lastfmservice.cpp:468
 msgid "Unknown error"
 msgstr "Bilinmeyen hata"
 
@@ -4250,7 +4271,7 @@ msgstr "Varsa Replay Gain verisini kullan"
 msgid "Use Wii Remote"
 msgstr "Wii kumandasını kullan"
 
-#: ../bin/src/ui_appearancesettingspage.h:122
+#: ../bin/src/ui_appearancesettingspage.h:182
 msgid "Use a custom color set"
 msgstr ""
 
@@ -4278,11 +4299,11 @@ msgstr "Wii kumanda durumunu raporlamak için bildirimleri kullan"
 msgid "Use temporal noise shaping"
 msgstr "Temporal noise shaping kullan"
 
-#: ../bin/src/ui_behavioursettingspage.h:183
+#: ../bin/src/ui_behavioursettingspage.h:175
 msgid "Use the system default"
 msgstr "Sistem öntanımlıyı kullan"
 
-#: ../bin/src/ui_appearancesettingspage.h:121
+#: ../bin/src/ui_appearancesettingspage.h:181
 msgid "Use the system default color set"
 msgstr ""
 
@@ -4314,7 +4335,7 @@ msgstr "Kullanıcı arayüzü"
 msgid "Username"
 msgstr "Kullanıcı Adı"
 
-#: ../bin/src/ui_behavioursettingspage.h:191
+#: ../bin/src/ui_behavioursettingspage.h:183
 msgid "Using the menu to add a song will..."
 msgstr "Menü kullanarak şarkı eklemek..."
 
@@ -4387,7 +4408,7 @@ msgstr "Wav"
 msgid "Weeks"
 msgstr "Haftalar"
 
-#: ../bin/src/ui_behavioursettingspage.h:186
+#: ../bin/src/ui_behavioursettingspage.h:178
 msgid "When Clementine starts"
 msgstr "Clementine başladığında"
 
@@ -4454,6 +4475,12 @@ msgstr "Windows Medya 64k"
 #: core/song.cpp:332
 msgid "Windows Media audio"
 msgstr "Windows Media audio"
+
+#: library/libraryview.cpp:407
+msgid ""
+"Would you like to move the other songs in this album to Various Artists as "
+"well?"
+msgstr ""
 
 #: ui/mainwindow.cpp:2047
 msgid "Would you like to run a full rescan right now?"
@@ -4559,7 +4586,7 @@ msgid ""
 "shortcuts in Clementine."
 msgstr "Clementine'da genel kısayolları kullanabilmek için Sistem Ayarlarına girin ve \"<span style=\" font-style:italic;\">Yardımcı aygıtlara erişimi etkinleştir</span>\" seçeneğini açın."
 
-#: ../bin/src/ui_behavioursettingspage.h:185
+#: ../bin/src/ui_behavioursettingspage.h:177
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Dili değiştirdiyseniz programı yeniden başlatmanız gerekmektedir."
 
@@ -4586,7 +4613,7 @@ msgstr "Last.fm giriş bilgileriniz doğru değil"
 msgid "Your Magnatune credentials were incorrect"
 msgstr "Magnatune kimlik bilgileriniz hatalı"
 
-#: library/libraryview.cpp:219
+#: library/libraryview.cpp:220
 msgid "Your library is empty!"
 msgstr "Kütüphaneniz boş!"
 
@@ -4645,7 +4672,7 @@ msgstr "arasında"
 msgid "biggest first"
 msgstr "ilk önce en büyüğü"
 
-#: playlist/playlistview.cpp:164 ui/edittagdialog.cpp:454
+#: playlist/playlistview.cpp:174 ui/edittagdialog.cpp:454
 msgid "bpm"
 msgstr "bpm"
 
@@ -4688,7 +4715,7 @@ msgstr "büyüktür"
 msgid "in the last"
 msgstr "Sonuncu"
 
-#: playlist/playlistview.cpp:166 ui/edittagdialog.cpp:456
+#: playlist/playlistview.cpp:176 ui/edittagdialog.cpp:456
 #: internet/spotifysettingspage.cpp:59 internet/spotifysettingspage.cpp:60
 #: internet/spotifysettingspage.cpp:61
 msgid "kbps"

@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-02-06 07:11+0000\n"
-"Last-Translator: Lê Trường An <truongan@linuxmail.org>\n"
+"PO-Revision-Date: 2012-02-19 14:26+0000\n"
+"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: vi\n"
@@ -453,7 +453,7 @@ msgstr "Thêm vào danh sách khác"
 msgid "Add to playlist"
 msgstr "Thêm vào danh sách"
 
-#: ../bin/src/ui_behavioursettingspage.h:204
+#: ../bin/src/ui_behavioursettingspage.h:196
 msgid "Add to the queue"
 msgstr "Thêm vào danh sách đợi"
 
@@ -570,16 +570,16 @@ msgstr "Cho phép mã hóa song song"
 msgid "Alongside the originals"
 msgstr "Thư mục chứa tập tin gốc"
 
-#: ../bin/src/ui_behavioursettingspage.h:188
+#: ../bin/src/ui_behavioursettingspage.h:180
 msgid "Always hide the main window"
 msgstr "Luôn ẩn cửa sổ chính"
 
-#: ../bin/src/ui_behavioursettingspage.h:187
+#: ../bin/src/ui_behavioursettingspage.h:179
 msgid "Always show the main window"
 msgstr "Luôn hiện cửa sổ chính"
 
-#: ../bin/src/ui_behavioursettingspage.h:196
-#: ../bin/src/ui_behavioursettingspage.h:210
+#: ../bin/src/ui_behavioursettingspage.h:188
+#: ../bin/src/ui_behavioursettingspage.h:202
 msgid "Always start playing"
 msgstr "Bắt đầu phát nhạc"
 
@@ -606,7 +606,7 @@ msgstr "Có lỗi khi nạp cơ sở dữ liệu iTunes"
 msgid "An error occurred writing metadata to '%1'"
 msgstr "Có lỗi khi ghi thông tin vào '%1'"
 
-#: internet/lastfmservice.cpp:903
+#: internet/lastfmservice.cpp:918
 #, qt-format
 msgid "An unknown last.fm error occurred: %1"
 msgstr "Lỗi không định danh được last.fm: %1"
@@ -616,7 +616,7 @@ msgid "And:"
 msgstr "Và:"
 
 #: ../bin/src/ui_songinfosettingspage.h:180
-#: ../bin/src/ui_appearancesettingspage.h:119
+#: ../bin/src/ui_appearancesettingspage.h:179
 msgid "Appearance"
 msgstr "Giao diện"
 
@@ -625,11 +625,11 @@ msgid "Append files/URLs to the playlist"
 msgstr "Thêm tập tin/URLs vào danh sách"
 
 #: devices/deviceview.cpp:216 internet/internetservice.cpp:53
-#: library/libraryview.cpp:243 widgets/fileviewlist.cpp:32
+#: library/libraryview.cpp:244 widgets/fileviewlist.cpp:32
 msgid "Append to current playlist"
 msgstr "Thêm vào danh sách hiện tại"
 
-#: ../bin/src/ui_behavioursettingspage.h:201
+#: ../bin/src/ui_behavioursettingspage.h:193
 msgid "Append to the playlist"
 msgstr "Thêm vào danh sách"
 
@@ -664,7 +664,7 @@ msgstr "Nghệ sĩ"
 msgid "Artist info"
 msgstr "Nghệ sĩ"
 
-#: internet/lastfmservice.cpp:191
+#: internet/lastfmservice.cpp:206
 msgid "Artist radio"
 msgstr "Kênh phát thanh nghệ sĩ"
 
@@ -685,7 +685,7 @@ msgid "Authenticating..."
 msgstr "Đang xác thực..."
 
 #: internet/digitallyimportedsettingspage.cpp:82
-#: internet/magnatunesettingspage.cpp:113 internet/lastfmservice.cpp:432
+#: internet/magnatunesettingspage.cpp:113 internet/lastfmservice.cpp:447
 #: internet/lastfmsettingspage.cpp:78 remote/remotesettingspage.cpp:113
 msgid "Authentication failed"
 msgstr "Xác thực thất bại"
@@ -731,6 +731,10 @@ msgstr "Âm thanh nền"
 msgid "Background color"
 msgstr "Màu nền"
 
+#: ../bin/src/ui_appearancesettingspage.h:187
+msgid "Background image"
+msgstr "Ảnh nền"
+
 #: ../bin/src/ui_notificationssettingspage.h:424
 msgid "Background opacity"
 msgstr "Độ mờ của khung nền"
@@ -751,7 +755,7 @@ msgstr "Xanh dương"
 msgid "Basic audio type"
 msgstr "Âm bình thường"
 
-#: ../bin/src/ui_behavioursettingspage.h:176
+#: ../bin/src/ui_behavioursettingspage.h:169
 msgid "Behavior"
 msgstr "Hành động"
 
@@ -796,6 +800,7 @@ msgid "Boom analyzer"
 msgstr "Phân tích theo dạng cây"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:146
+#: ../bin/src/ui_appearancesettingspage.h:191
 msgid "Browse..."
 msgstr "Duyệt tìm..."
 
@@ -948,7 +953,7 @@ msgstr "Clementine - Xem ảnh"
 msgid "Clementine was unable to find results for this file"
 msgstr "Clementine không tìm thấy kết quả cho tập tin này"
 
-#: library/libraryview.cpp:225
+#: library/libraryview.cpp:226
 msgid "Click here to add some music"
 msgstr "Nhấp vào đây để thêm nhạc"
 
@@ -980,7 +985,7 @@ msgstr "Hội"
 msgid "Color"
 msgstr "Màu sắc"
 
-#: ../bin/src/ui_appearancesettingspage.h:120
+#: ../bin/src/ui_appearancesettingspage.h:180
 msgid "Colors"
 msgstr "Màu"
 
@@ -1015,7 +1020,7 @@ msgstr "Soạn nhạc"
 msgid "Configure Grooveshark..."
 msgstr "Cấu hình Grooveshark..."
 
-#: internet/lastfmservice.cpp:111
+#: internet/lastfmservice.cpp:126
 msgid "Configure Last.fm..."
 msgstr "Cấu hình Last.fm..."
 
@@ -1068,7 +1073,7 @@ msgstr "Chuyển đổi bất kì bản nhạc nào mà thiết bị không th�
 msgid "Copy to clipboard"
 msgstr "Chép vào bộ đệm"
 
-#: library/libraryview.cpp:265 ui/mainwindow.cpp:528
+#: library/libraryview.cpp:266 ui/mainwindow.cpp:528
 #: widgets/fileviewlist.cpp:44
 msgid "Copy to device..."
 msgstr "Sao chép vào thiết bị..."
@@ -1103,7 +1108,7 @@ msgid ""
 "plugins installed"
 msgstr "Không tim thấy bộ mã hóa cho %1, hãy chắc chắn là bạn đã cài đặt đủ các phần bổ sung của GStreamer"
 
-#: internet/lastfmservice.cpp:900
+#: internet/lastfmservice.cpp:915
 msgid "Couldn't load the last.fm radio station"
 msgstr "Không thể nạp đài phát thanh last.fm"
 
@@ -1232,11 +1237,15 @@ msgstr "Ctrl+Up"
 msgid "Custom"
 msgstr "Tuỳ chọn"
 
+#: ../bin/src/ui_appearancesettingspage.h:190
+msgid "Custom image:"
+msgstr "Chọn ảnh:"
+
 #: ../bin/src/ui_notificationssettingspage.h:416
 msgid "Custom message settings"
 msgstr "Thiết lập tùy chọn tin nhắn"
 
-#: internet/lastfmservice.cpp:199
+#: internet/lastfmservice.cpp:214
 msgid "Custom radio"
 msgstr "Tùy chọn phát thanh"
 
@@ -1276,6 +1285,10 @@ msgstr "Giảm 4% âm lượng"
 msgid "Decrease volume"
 msgstr "Giảm âm lượng"
 
+#: ../bin/src/ui_appearancesettingspage.h:188
+msgid "Default background image"
+msgstr "Dùng ảnh nền mặc định"
+
 #: ../bin/src/ui_wiimotesettingspage.h:195
 msgid "Defaults"
 msgstr "Mặc định"
@@ -1288,7 +1301,7 @@ msgstr "Độ trễ giữa các hiệu ứng hình ảnh ảo"
 msgid "Delete Grooveshark playlist"
 msgstr "Xoá danh sách Grooveshark"
 
-#: devices/deviceview.cpp:393 library/libraryview.cpp:460
+#: devices/deviceview.cpp:393 library/libraryview.cpp:485
 #: ui/mainwindow.cpp:1853 widgets/fileview.cpp:186
 msgid "Delete files"
 msgstr "Xóa các tập tin"
@@ -1297,7 +1310,7 @@ msgstr "Xóa các tập tin"
 msgid "Delete from device..."
 msgstr "Xóa khỏi thiết bị..."
 
-#: library/libraryview.cpp:267 ui/mainwindow.cpp:529
+#: library/libraryview.cpp:268 ui/mainwindow.cpp:529
 #: widgets/fileviewlist.cpp:45
 msgid "Delete from disk..."
 msgstr "Xóa khỏi ổ cứng..."
@@ -1306,7 +1319,7 @@ msgstr "Xóa khỏi ổ cứng..."
 msgid "Delete preset"
 msgstr "Xoá thiết lập"
 
-#: library/libraryview.cpp:259
+#: library/libraryview.cpp:260
 msgid "Delete smart playlist"
 msgstr "Xóa danh sách thông minh"
 
@@ -1417,9 +1430,9 @@ msgstr "Không chuyển đổi bất kì bản nhạc nào"
 msgid "Don't repeat"
 msgstr "Không lặp lại"
 
-#: library/libraryview.cpp:281
+#: library/libraryview.cpp:282
 msgid "Don't show in various artists"
-msgstr "Không hiển thị trong mục nhiều nghệ sĩ"
+msgstr "Không hiện trong mục nhiều nghệ sĩ"
 
 #: widgets/osd.cpp:294 ../bin/src/ui_playlistsequence.h:107
 msgid "Don't shuffle"
@@ -1433,7 +1446,7 @@ msgstr "Không dừng lại!"
 msgid "Double click to open"
 msgstr "Nhấn đúp chuột để mở"
 
-#: ../bin/src/ui_behavioursettingspage.h:198
+#: ../bin/src/ui_behavioursettingspage.h:190
 msgid "Double clicking a song will..."
 msgstr "Nhấn đúp chuột vào một bài hát sẽ..."
 
@@ -1493,14 +1506,14 @@ msgstr "Chế độ năng động đã bật"
 msgid "Dynamic random mix"
 msgstr "Hòa trộn âm thanh động ngẫu nhiên"
 
-#: library/libraryview.cpp:257
+#: library/libraryview.cpp:258
 msgid "Edit smart playlist..."
 msgstr "Cập nhật danh sách thông minh..."
 
 #: ui/mainwindow.cpp:1368
 #, qt-format
 msgid "Edit tag \"%1\"..."
-msgstr "Cập nhật \"%1\"..."
+msgstr "Sửa \"%1\"..."
 
 #: ../bin/src/ui_mainwindow.h:663
 msgid "Edit tag..."
@@ -1512,14 +1525,14 @@ msgstr "Cập nhật thẻ"
 
 #: ../bin/src/ui_edittagdialog.h:632
 msgid "Edit track information"
-msgstr "Cập nhật thông tin bài hát"
+msgstr "Sửa thông tin bài hát"
 
-#: library/libraryview.cpp:271 widgets/fileviewlist.cpp:50
+#: library/libraryview.cpp:272 widgets/fileviewlist.cpp:50
 #: ../bin/src/ui_mainwindow.h:659
 msgid "Edit track information..."
 msgstr "Cập nhật thông tin bài hát..."
 
-#: library/libraryview.cpp:273
+#: library/libraryview.cpp:274
 msgid "Edit tracks information..."
 msgstr "Cập nhật thông tin bài hát..."
 
@@ -1534,10 +1547,6 @@ msgstr "Bật hỗ trợ tay cầm Wii"
 #: ../bin/src/ui_equalizer.h:126
 msgid "Enable equalizer"
 msgstr "Bật bộ cân chỉnh âm"
-
-#: ../bin/src/ui_behavioursettingspage.h:179
-msgid "Enable playlist background image"
-msgstr "Ảnh nền cho danh sách nhạc"
 
 #: ../bin/src/ui_wiimotesettingspage.h:187
 msgid "Enable shortcuts only when Clementine is focused"
@@ -1605,7 +1614,7 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "Tương đương với --log-levels *:3"
 
 #: internet/groovesharkservice.cpp:954
-#: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:454
+#: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:479
 #: ui/mainwindow.cpp:1805 ui/mainwindow.cpp:1926
 msgid "Error"
 msgstr "Lỗi"
@@ -1757,7 +1766,7 @@ msgstr "Dung lượng"
 #: ../bin/src/ui_groupbydialog.h:146 ../bin/src/ui_groupbydialog.h:159
 #: ../bin/src/ui_edittagdialog.h:646
 msgid "File type"
-msgstr "Kiểu tập tin"
+msgstr "Loại tập tin"
 
 #: ../bin/src/ui_transcodedialog.h:205
 msgid "Filename"
@@ -1858,7 +1867,7 @@ msgstr "Tần số khung hình"
 msgid "Frames per buffer"
 msgstr "Số khung mỗi lần tạo bộ đệm"
 
-#: internet/lastfmservice.cpp:207
+#: internet/lastfmservice.cpp:222
 msgid "Friends"
 msgstr "Bạn bè"
 
@@ -1934,7 +1943,7 @@ msgstr "Tên người dùng Google"
 msgid "Got %1 covers out of %2 (%3 failed)"
 msgstr "Đã tải %1 ảnh bìa trong số %2 (thất bại %3)"
 
-#: ../bin/src/ui_behavioursettingspage.h:190
+#: ../bin/src/ui_behavioursettingspage.h:182
 msgid "Grey out non existent songs in my playlists"
 msgstr "Loại bỏ những bài hát không tồn tại khỏi các danh sách"
 
@@ -2037,7 +2046,7 @@ msgstr "Biểu tượng"
 
 #: widgets/fancytabwidget.cpp:651
 msgid "Icons on top"
-msgstr "Biểu tượng ở trên cùng"
+msgstr "Biểu tượng trên cùng"
 
 #: musicbrainz/tagfetcher.cpp:86
 msgid "Identifying song"
@@ -2079,7 +2088,7 @@ msgstr "Hộp thư đến"
 
 #: ../bin/src/ui_notificationssettingspage.h:415
 msgid "Include album art in the notification"
-msgstr "Kèm theo ảnh bìa album trong thông báo"
+msgstr "Kèm theo ảnh bìa trong thông báo"
 
 #: ../bin/src/ui_querysearchpage.h:118
 msgid "Include all songs"
@@ -2117,31 +2126,31 @@ msgstr "Internet"
 msgid "Internet providers"
 msgstr "Dịch vụ"
 
-#: internet/lastfmservice.cpp:438
+#: internet/lastfmservice.cpp:453
 msgid "Invalid API key"
 msgstr "Khóa API không hợp lệ"
 
-#: internet/lastfmservice.cpp:433
+#: internet/lastfmservice.cpp:448
 msgid "Invalid format"
 msgstr "Định dạng không hợp lệ"
 
-#: internet/lastfmservice.cpp:431
+#: internet/lastfmservice.cpp:446
 msgid "Invalid method"
 msgstr "Phương thức không hợp lệ"
 
-#: internet/lastfmservice.cpp:434
+#: internet/lastfmservice.cpp:449
 msgid "Invalid parameters"
 msgstr "Tham số không hợp lệ"
 
-#: internet/lastfmservice.cpp:435
+#: internet/lastfmservice.cpp:450
 msgid "Invalid resource specified"
 msgstr "Nguồn được xác lập không hợp lệ"
 
-#: internet/lastfmservice.cpp:430
+#: internet/lastfmservice.cpp:445
 msgid "Invalid service"
 msgstr "Dịch vụ không hợp lệ"
 
-#: internet/lastfmservice.cpp:437
+#: internet/lastfmservice.cpp:452
 msgid "Invalid session key"
 msgstr "Khoá phiên chạy không hợp lệ"
 
@@ -2175,7 +2184,7 @@ msgstr "Cơ sở dữ liệu Jamendo"
 
 #: ../bin/src/ui_mainwindow.h:688
 msgid "Jump to the currently playing track"
-msgstr "Đến bài hát đang phát"
+msgstr "Chọn bài đang được phát"
 
 #: wiimotedev/wiimoteshortcutgrabber.cpp:72
 #, qt-format
@@ -2189,9 +2198,9 @@ msgstr "Giữ nút trong %1 giây..."
 msgid "Keep buttons for %1 seconds..."
 msgstr "Giữ nút trong %1 giây..."
 
-#: ../bin/src/ui_behavioursettingspage.h:178
+#: ../bin/src/ui_behavioursettingspage.h:171
 msgid "Keep running in the background when the window is closed"
-msgstr "Chạy ở chế độ nền khi đã đóng cửa sổ"
+msgstr "Chạy nền khi đã đóng cửa sổ chính"
 
 #: ../bin/src/ui_organisedialog.h:193
 msgid "Keep the original files"
@@ -2201,7 +2210,7 @@ msgstr "Giữ nguyên tập tin gốc"
 msgid "Kittens"
 msgstr "Kittens"
 
-#: ../bin/src/ui_behavioursettingspage.h:180
+#: ../bin/src/ui_behavioursettingspage.h:172
 msgid "Language"
 msgstr "Ngôn ngữ"
 
@@ -2215,7 +2224,7 @@ msgstr "Large Hall"
 
 #: widgets/nowplayingwidget.cpp:91
 msgid "Large album cover"
-msgstr "Bìa album cỡ lớn"
+msgstr "Ảnh bìa lớn"
 
 #: widgets/fancytabwidget.cpp:647
 msgid "Large sidebar"
@@ -2230,45 +2239,45 @@ msgstr "Lần phát cuối"
 msgid "Last.fm"
 msgstr "Last.fm"
 
-#: internet/lastfmservice.cpp:70
+#: internet/lastfmservice.cpp:85
 #, qt-format
 msgid "Last.fm Custom Radio: %1"
 msgstr "Tùy chọn phát thanh Last.fm: %1"
 
-#: internet/lastfmservice.cpp:238 internet/lastfmservice.cpp:694
-#: internet/lastfmservice.cpp:729
+#: internet/lastfmservice.cpp:253 internet/lastfmservice.cpp:709
+#: internet/lastfmservice.cpp:744
 #, qt-format
 msgid "Last.fm Library - %1"
 msgstr "Thư viện Last.fm - %1"
 
-#: globalsearch/lastfmsearchprovider.cpp:75 internet/lastfmservice.cpp:240
-#: internet/lastfmservice.cpp:243
+#: globalsearch/lastfmsearchprovider.cpp:75 internet/lastfmservice.cpp:255
+#: internet/lastfmservice.cpp:258
 #, qt-format
 msgid "Last.fm Mix Radio - %1"
 msgstr "Phát thanh Last.fm mix - %1"
 
-#: globalsearch/lastfmsearchprovider.cpp:77 internet/lastfmservice.cpp:245
-#: internet/lastfmservice.cpp:248
+#: globalsearch/lastfmsearchprovider.cpp:77 internet/lastfmservice.cpp:260
+#: internet/lastfmservice.cpp:263
 #, qt-format
 msgid "Last.fm Neighbor Radio - %1"
 msgstr "Kênh phát thanh Last.fm lân cận - %1"
 
-#: globalsearch/lastfmsearchprovider.cpp:73 internet/lastfmservice.cpp:235
+#: globalsearch/lastfmsearchprovider.cpp:73 internet/lastfmservice.cpp:250
 #, qt-format
 msgid "Last.fm Radio Station - %1"
 msgstr "Đài phát thanh Last.fm - %1"
 
-#: internet/lastfmservice.cpp:68
+#: internet/lastfmservice.cpp:83
 #, qt-format
 msgid "Last.fm Similar Artists to %1"
 msgstr "Nghệ sĩ tương tự trên Last.fm %1"
 
-#: internet/lastfmservice.cpp:69
+#: internet/lastfmservice.cpp:84
 #, qt-format
 msgid "Last.fm Tag Radio: %1"
 msgstr "Thẻ phát thanh Last.fm: %1"
 
-#: internet/lastfmservice.cpp:442
+#: internet/lastfmservice.cpp:457
 msgid "Last.fm is currently busy, please try again in a few minutes"
 msgstr "Last.fm hiện đang bận, vui lòng thử lại sau vài phút"
 
@@ -2362,7 +2371,7 @@ msgstr "Mở danh sách"
 msgid "Load playlist..."
 msgstr "Mở danh sách..."
 
-#: internet/lastfmservice.cpp:913
+#: internet/lastfmservice.cpp:928
 msgid "Loading Last.fm radio"
 msgstr "Đang nạp kênh phát thanh Last.fm"
 
@@ -2489,13 +2498,13 @@ msgstr "Hồ sơ chính (MAIN)"
 
 #: core/backgroundstreams.cpp:36 ../bin/src/ui_mainwindow.h:680
 msgid "Make it so!"
-msgstr "Tương tự"
+msgstr "Make it so!"
 
 #: internet/spotifyservice.cpp:496
 msgid "Make playlist available offline"
 msgstr "Danh sách sẵn sàng ngoại tuyến"
 
-#: internet/lastfmservice.cpp:449
+#: internet/lastfmservice.cpp:464
 msgid "Malformed response"
 msgstr "Phản hồi có vẻ xấu"
 
@@ -2509,11 +2518,11 @@ msgstr "Nhà sản xuất"
 
 #: ../bin/src/ui_querysearchpage.h:116
 msgid "Match every search term (AND)"
-msgstr "Tất cả các điều kiện đều phù hợp (AND)"
+msgstr "Tất cả các điều kiện đều khớp (AND)"
 
 #: ../bin/src/ui_querysearchpage.h:117
 msgid "Match one or more search terms (OR)"
-msgstr "Một hay nhiều điều kiện phù hợp (OR)"
+msgstr "Một hay nhiều điều kiện khớp (OR)"
 
 #: ../bin/src/ui_transcoderoptionsvorbis.h:209
 msgid "Maximum bitrate"
@@ -2595,35 +2604,35 @@ msgstr "Thư viện nhạc"
 msgid "Mute"
 msgstr "Tắt âm"
 
-#: globalsearch/lastfmsearchprovider.cpp:51 internet/lastfmservice.cpp:178
+#: globalsearch/lastfmsearchprovider.cpp:51 internet/lastfmservice.cpp:193
 msgid "My Last.fm Library"
 msgstr "Thư viện Last.fm của tôi"
 
-#: globalsearch/lastfmsearchprovider.cpp:53 internet/lastfmservice.cpp:183
+#: globalsearch/lastfmsearchprovider.cpp:53 internet/lastfmservice.cpp:198
 msgid "My Last.fm Mix Radio"
 msgstr "Kênh phát thanh Last.fm mix của tôi"
 
-#: globalsearch/lastfmsearchprovider.cpp:55 internet/lastfmservice.cpp:188
+#: globalsearch/lastfmsearchprovider.cpp:55 internet/lastfmservice.cpp:203
 msgid "My Last.fm Neighborhood"
 msgstr "Kênh Last.fm địa phương của tôi"
 
-#: globalsearch/lastfmsearchprovider.cpp:49 internet/lastfmservice.cpp:173
+#: globalsearch/lastfmsearchprovider.cpp:49 internet/lastfmservice.cpp:188
 msgid "My Last.fm Recommended Radio"
 msgstr "Kênh phát thanh Last.fm khuyến nghị của tôi"
 
-#: internet/lastfmservice.cpp:180
+#: internet/lastfmservice.cpp:195
 msgid "My Mix Radio"
 msgstr "Kênh phát thanh mix của tôi"
 
-#: internet/lastfmservice.cpp:185
+#: internet/lastfmservice.cpp:200
 msgid "My Neighborhood"
 msgstr "Địa phương của tôi"
 
-#: internet/lastfmservice.cpp:175
+#: internet/lastfmservice.cpp:190
 msgid "My Radio Station"
 msgstr "Đài phát thanh của tôi"
 
-#: internet/lastfmservice.cpp:170
+#: internet/lastfmservice.cpp:185
 msgid "My Recommendations"
 msgstr "Bài nên nghe"
 
@@ -2643,7 +2652,7 @@ msgstr "Tùy chọn đặt tên"
 msgid "Narrow band (NB)"
 msgstr "Băng hẹp (NB)"
 
-#: internet/lastfmservice.cpp:212
+#: internet/lastfmservice.cpp:227
 msgid "Neighbors"
 msgstr "Lân cận"
 
@@ -2663,8 +2672,8 @@ msgstr "Chưa bao giờ"
 msgid "Never played"
 msgstr "Chưa bao giờ phát"
 
-#: ../bin/src/ui_behavioursettingspage.h:194
-#: ../bin/src/ui_behavioursettingspage.h:208
+#: ../bin/src/ui_behavioursettingspage.h:186
+#: ../bin/src/ui_behavioursettingspage.h:200
 msgid "Never start playing"
 msgstr "Không phát nhạc"
 
@@ -2672,7 +2681,7 @@ msgstr "Không phát nhạc"
 msgid "New playlist"
 msgstr "Tạo danh sách mới"
 
-#: library/libraryview.cpp:255
+#: library/libraryview.cpp:256
 msgid "New smart playlist..."
 msgstr "Tạo danh sách thông minh..."
 
@@ -2701,6 +2710,10 @@ msgstr "Phát bài tiếp theo"
 msgid "No analyzer"
 msgstr "Không phân tích"
 
+#: ../bin/src/ui_appearancesettingspage.h:189
+msgid "No background image"
+msgstr "Không dùng ảnh nền"
+
 #: ../bin/src/ui_transcoderoptionsaac.h:146
 msgid "No long blocks"
 msgstr "Các khối không dài"
@@ -2719,7 +2732,7 @@ msgstr "Các khối ngắn"
 msgid "None"
 msgstr "Không"
 
-#: library/libraryview.cpp:455 ui/mainwindow.cpp:1806 ui/mainwindow.cpp:1927
+#: library/libraryview.cpp:480 ui/mainwindow.cpp:1806 ui/mainwindow.cpp:1927
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Không bài hát nào phù hợp để chép qua thiết bị"
 
@@ -2735,19 +2748,19 @@ msgstr "Không khả thi khi dùng danh sách năng động"
 msgid "Not connected"
 msgstr "Chưa kết nối"
 
-#: internet/lastfmservice.cpp:444
+#: internet/lastfmservice.cpp:459
 msgid "Not enough content"
 msgstr "Không đủ nội dung"
 
-#: internet/lastfmservice.cpp:446
+#: internet/lastfmservice.cpp:461
 msgid "Not enough fans"
 msgstr "Chưa đủ người hâm mộ"
 
-#: internet/lastfmservice.cpp:445
+#: internet/lastfmservice.cpp:460
 msgid "Not enough members"
 msgstr "Chưa đủ thành viên"
 
-#: internet/lastfmservice.cpp:447
+#: internet/lastfmservice.cpp:462
 msgid "Not enough neighbors"
 msgstr "Chưa đủ những người lân cận"
 
@@ -2817,8 +2830,8 @@ msgid "Open file..."
 msgstr "Mở tập tin..."
 
 #: devices/deviceview.cpp:220 internet/internetservice.cpp:73
-#: library/libraryview.cpp:247 widgets/fileviewlist.cpp:36
-#: ../bin/src/ui_behavioursettingspage.h:203
+#: library/libraryview.cpp:248 widgets/fileviewlist.cpp:36
+#: ../bin/src/ui_behavioursettingspage.h:195
 msgid "Open in new playlist"
 msgstr "Mở trong danh sách mới"
 
@@ -2827,7 +2840,7 @@ msgstr "Mở trong danh sách mới"
 msgid "Open..."
 msgstr "Mở..."
 
-#: internet/lastfmservice.cpp:436
+#: internet/lastfmservice.cpp:451
 msgid "Operation failed"
 msgstr "Thao tác thất bại"
 
@@ -2847,7 +2860,7 @@ msgstr "Tuỳ chọn..."
 msgid "Organise Files"
 msgstr "Tổ chức tập tin"
 
-#: library/libraryview.cpp:263 ui/mainwindow.cpp:527
+#: library/libraryview.cpp:264 ui/mainwindow.cpp:527
 msgid "Organise files..."
 msgstr "Tổ chức tập tin..."
 
@@ -2926,7 +2939,7 @@ msgstr "Phát"
 msgid "Play Artist or Tag"
 msgstr "Phát theo Nghệ sĩ hoặc theo Thẻ"
 
-#: internet/lastfmservice.cpp:103
+#: internet/lastfmservice.cpp:118
 msgid "Play artist radio..."
 msgstr "Phát kênh phát thanh nghệ sĩ..."
 
@@ -2934,7 +2947,7 @@ msgstr "Phát kênh phát thanh nghệ sĩ..."
 msgid "Play count"
 msgstr "Số lần phát"
 
-#: internet/lastfmservice.cpp:107
+#: internet/lastfmservice.cpp:122
 msgid "Play custom radio..."
 msgstr "Phát kênh phát thanh tùy chọn..."
 
@@ -2942,12 +2955,12 @@ msgstr "Phát kênh phát thanh tùy chọn..."
 msgid "Play if stopped, pause if playing"
 msgstr "Phát nếu như đang dừng, tạm dừng nếu như đang phát"
 
-#: ../bin/src/ui_behavioursettingspage.h:195
-#: ../bin/src/ui_behavioursettingspage.h:209
+#: ../bin/src/ui_behavioursettingspage.h:187
+#: ../bin/src/ui_behavioursettingspage.h:201
 msgid "Play if there is nothing already playing"
 msgstr "Phát nhạc nếu không có bài khác đang phát"
 
-#: internet/lastfmservice.cpp:105
+#: internet/lastfmservice.cpp:120
 msgid "Play tag radio..."
 msgstr "Phát thẻ phát thanh..."
 
@@ -3131,13 +3144,13 @@ msgstr "Truy vấn thiết bị..."
 
 #: ../bin/src/ui_queuemanager.h:125 ../bin/src/ui_mainwindow.h:700
 msgid "Queue Manager"
-msgstr "Trình quản lý danh sách chờ"
+msgstr "Quản lý danh sách chờ"
 
 #: ui/mainwindow.cpp:1339
 msgid "Queue selected tracks"
 msgstr "Chờ phát những bài đã chọn"
 
-#: globalsearch/globalsearchwidget.cpp:105 library/libraryview.cpp:251
+#: globalsearch/globalsearchwidget.cpp:105 library/libraryview.cpp:252
 #: ui/mainwindow.cpp:1337
 msgid "Queue track"
 msgstr "Chờ phát sau"
@@ -3152,7 +3165,7 @@ msgstr "Phát thanh"
 
 #: core/backgroundstreams.cpp:31 ../bin/src/ui_mainwindow.h:678
 msgid "Rain"
-msgstr "Mưa"
+msgstr "Rain"
 
 #: ../bin/src/ui_visualisationselector.h:112
 msgid "Random visualization"
@@ -3202,7 +3215,7 @@ msgstr "Cập nhật mục lục"
 msgid "Refresh channels"
 msgstr "Cập nhật kênh"
 
-#: internet/lastfmservice.cpp:109
+#: internet/lastfmservice.cpp:124
 msgid "Refresh friends list"
 msgstr "Cập nhật danh sách bạn"
 
@@ -3222,7 +3235,7 @@ msgstr "Reggae"
 msgid "Remember Wii remote swing"
 msgstr "Ghi nhớ dao động của tay cầm Wii"
 
-#: ../bin/src/ui_behavioursettingspage.h:189
+#: ../bin/src/ui_behavioursettingspage.h:181
 msgid "Remember from last time"
 msgstr "Nhớ từ lần trước"
 
@@ -3232,7 +3245,7 @@ msgstr "Điều khiển từ xa"
 
 #: internet/savedradio.cpp:100 ../bin/src/ui_queuemanager.h:135
 #: ../bin/src/ui_searchtermwidget.h:282 ../bin/src/ui_transcodedialog.h:207
-#: internet/lastfmservice.cpp:100
+#: internet/lastfmservice.cpp:115
 msgid "Remove"
 msgstr "Loại bỏ"
 
@@ -3302,12 +3315,12 @@ msgid "Replace and play now"
 msgstr "Thay thế và phát ngay"
 
 #: devices/deviceview.cpp:218 globalsearch/globalsearchwidget.cpp:106
-#: internet/internetservice.cpp:63 library/libraryview.cpp:245
+#: internet/internetservice.cpp:63 library/libraryview.cpp:246
 #: widgets/fileviewlist.cpp:34
 msgid "Replace current playlist"
 msgstr "Thay thế danh sách hiện tại"
 
-#: ../bin/src/ui_behavioursettingspage.h:202
+#: ../bin/src/ui_behavioursettingspage.h:194
 msgid "Replace the playlist"
 msgstr "Thay thế danh sách"
 
@@ -3514,15 +3527,19 @@ msgstr "Chọn Tất cả"
 msgid "Select None"
 msgstr "Bỏ chọn hết"
 
-#: ../bin/src/ui_appearancesettingspage.h:125
+#: ../bin/src/ui_appearancesettingspage.h:185
 msgid "Select background color:"
 msgstr "Chọn màu nền:"
+
+#: ui/appearancesettingspage.cpp:187
+msgid "Select background image"
+msgstr "Chọn ảnh nền"
 
 #: ../bin/src/ui_trackselectiondialog.h:207
 msgid "Select best possible match"
 msgstr "Chọn mục khớp nhiều nhất"
 
-#: ../bin/src/ui_appearancesettingspage.h:123
+#: ../bin/src/ui_appearancesettingspage.h:183
 msgid "Select foreground color:"
 msgstr "Chọn màu lớp trên:"
 
@@ -3538,7 +3555,7 @@ msgstr "Chọn hiệu ứng hình ảnh ảo..."
 msgid "Serial number"
 msgstr "Số sê-ri"
 
-#: internet/lastfmservice.cpp:439
+#: internet/lastfmservice.cpp:454
 msgid "Service offline"
 msgstr "Dịch vụ ngoại tuyến"
 
@@ -3634,14 +3651,14 @@ msgstr "Hiện đường phân cách"
 msgid "Show fullsize..."
 msgstr "Hiện với kích thước gốc..."
 
-#: library/libraryview.cpp:275 ui/mainwindow.cpp:530
+#: library/libraryview.cpp:276 ui/mainwindow.cpp:530
 #: widgets/fileviewlist.cpp:52
 msgid "Show in file browser..."
 msgstr "Mở thư mục lưu..."
 
-#: library/libraryview.cpp:279
+#: library/libraryview.cpp:280
 msgid "Show in various artists"
-msgstr "Hiện trong nhiều nghệ sĩ"
+msgstr "Hiện trong mục nhiều nghệ sĩ"
 
 #: ui/mainwindow.cpp:484
 msgid "Show only duplicates"
@@ -3663,7 +3680,7 @@ msgstr "Hiện các nút \"yêu thích\" và \"cấm\""
 msgid "Show the scrobble button in the main window"
 msgstr "Hiện nút chuyển thông tin trong cửa sổ chính"
 
-#: ../bin/src/ui_behavioursettingspage.h:177
+#: ../bin/src/ui_behavioursettingspage.h:170
 msgid "Show tray icon"
 msgstr "Hiện biểu tượng dưới khay hệ thống"
 
@@ -3924,7 +3941,7 @@ msgstr "Đang đồng bộ các bài hát được đánh dấu sao của Spotif
 
 #: widgets/fancytabwidget.cpp:650
 msgid "Tabs on top"
-msgstr "Các tab ở phía trên"
+msgstr "Các thẻ ở phía trên"
 
 #: ../bin/src/ui_lastfmstationdialog.h:97
 msgid "Tag"
@@ -3934,7 +3951,7 @@ msgstr "Thẻ"
 msgid "Tag fetcher"
 msgstr "Trình tải thẻ"
 
-#: internet/lastfmservice.cpp:195
+#: internet/lastfmservice.cpp:210
 msgid "Tag radio"
 msgstr "Thẻ phát thanh"
 
@@ -3987,6 +4004,10 @@ msgid ""
 "rescan because of the new features listed below:"
 msgstr "Phiên bản Clementine bạn vừa cập nhật yêu cầu quét thư viện bởi các tính năng mới được liệt kê bên dưới:"
 
+#: library/libraryview.cpp:406
+msgid "There are other songs in this album"
+msgstr ""
+
 #: internet/magnatunedownloaddialog.cpp:157
 msgid "There was a problem fetching the metadata from Magnatune"
 msgstr "Có vấn đề khi lấy thông tin từ Magnatune"
@@ -4003,7 +4024,7 @@ msgid ""
 "deleted:"
 msgstr "Có vấn đề khi xóa một số bài hát. Không thể xóa các tập tin sau đây:"
 
-#: library/libraryview.cpp:461 ui/mainwindow.cpp:1854 widgets/fileview.cpp:187
+#: library/libraryview.cpp:486 ui/mainwindow.cpp:1854 widgets/fileview.cpp:187
 msgid ""
 "These files will be deleted from disk, are you sure you want to continue?"
 msgstr "Các tập tin này sẽ bị xóa khỏi đĩa cứng, bạn có muốn tiếp tục?"
@@ -4073,7 +4094,7 @@ msgid ""
 "want to continue?"
 msgstr "Danh sách này sẽ bị loại bỏ và không thể lấy lại được. Bạn có chắc muốn tiếp tục không?"
 
-#: internet/lastfmservice.cpp:440
+#: internet/lastfmservice.cpp:455
 msgid "This stream is for paid subscribers only"
 msgstr "Luồng này chỉ dành cho người trả phí"
 
@@ -4198,7 +4219,7 @@ msgstr "Không thể tải về %1 (%2)"
 msgid "Unknown"
 msgstr "Chưa xác định"
 
-#: internet/digitallyimportedclient.cpp:68 internet/lastfmservice.cpp:453
+#: internet/digitallyimportedclient.cpp:68 internet/lastfmservice.cpp:468
 msgid "Unknown error"
 msgstr "Lỗi không xác định"
 
@@ -4248,7 +4269,7 @@ msgstr "Sử dụng thông tin để tăng âm lượng nếu có"
 msgid "Use Wii Remote"
 msgstr "Sử dụng tay cầm điều khiển Wii"
 
-#: ../bin/src/ui_appearancesettingspage.h:122
+#: ../bin/src/ui_appearancesettingspage.h:182
 msgid "Use a custom color set"
 msgstr "Chọn màu"
 
@@ -4276,11 +4297,11 @@ msgstr "Dùng thông báo để cập nhật trạng thái của tay cầm Wii"
 msgid "Use temporal noise shaping"
 msgstr "Tạo tiếng ồn tạm thời"
 
-#: ../bin/src/ui_behavioursettingspage.h:183
+#: ../bin/src/ui_behavioursettingspage.h:175
 msgid "Use the system default"
 msgstr "Mặc định của hệ thống"
 
-#: ../bin/src/ui_appearancesettingspage.h:121
+#: ../bin/src/ui_appearancesettingspage.h:181
 msgid "Use the system default color set"
 msgstr "Dùng thiết lập màu mặc định của hệ thống"
 
@@ -4312,7 +4333,7 @@ msgstr "Giao diện người dùng"
 msgid "Username"
 msgstr "Tên người dùng"
 
-#: ../bin/src/ui_behavioursettingspage.h:191
+#: ../bin/src/ui_behavioursettingspage.h:183
 msgid "Using the menu to add a song will..."
 msgstr "Sử dụng trình đơn để thêm một bài hát sẽ..."
 
@@ -4385,7 +4406,7 @@ msgstr "Wav"
 msgid "Weeks"
 msgstr "Tuần"
 
-#: ../bin/src/ui_behavioursettingspage.h:186
+#: ../bin/src/ui_behavioursettingspage.h:178
 msgid "When Clementine starts"
 msgstr "Khi Clementine khởi động"
 
@@ -4452,6 +4473,12 @@ msgstr "Windows Media 64k"
 #: core/song.cpp:332
 msgid "Windows Media audio"
 msgstr "Âm thanh Windows Media"
+
+#: library/libraryview.cpp:407
+msgid ""
+"Would you like to move the other songs in this album to Various Artists as "
+"well?"
+msgstr ""
 
 #: ui/mainwindow.cpp:2047
 msgid "Would you like to run a full rescan right now?"
@@ -4557,7 +4584,7 @@ msgid ""
 "shortcuts in Clementine."
 msgstr "Bạn cần mở Tùy chỉnh hệ thống và bật \"<span style=\" font-style:italic;\"> Cho phép truy cập vào thiết bị bổ trợ</span>\" để sử dụng toàn bộ phím tắt trong Clementine."
 
-#: ../bin/src/ui_behavioursettingspage.h:185
+#: ../bin/src/ui_behavioursettingspage.h:177
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Bạn cần khởi động lại Clementine khi thay đổi ngôn ngữ."
 
@@ -4584,7 +4611,7 @@ msgstr "Thông tin tài khoản Last.fm không đúng"
 msgid "Your Magnatune credentials were incorrect"
 msgstr "Thông tin tài khoản Magnatune không đúng"
 
-#: library/libraryview.cpp:219
+#: library/libraryview.cpp:220
 msgid "Your library is empty!"
 msgstr "Thư viện của bạn chưa có gì!"
 
@@ -4643,7 +4670,7 @@ msgstr "giữa"
 msgid "biggest first"
 msgstr "lớn nhất trước"
 
-#: playlist/playlistview.cpp:164 ui/edittagdialog.cpp:454
+#: playlist/playlistview.cpp:174 ui/edittagdialog.cpp:454
 msgid "bpm"
 msgstr "bpm"
 
@@ -4686,7 +4713,7 @@ msgstr "lớn hơn"
 msgid "in the last"
 msgstr "cuối"
 
-#: playlist/playlistview.cpp:166 ui/edittagdialog.cpp:456
+#: playlist/playlistview.cpp:176 ui/edittagdialog.cpp:456
 #: internet/spotifysettingspage.cpp:59 internet/spotifysettingspage.cpp:60
 #: internet/spotifysettingspage.cpp:61
 msgid "kbps"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-02-02 20:06+0000\n"
+"PO-Revision-Date: 2012-02-19 14:26+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -450,7 +450,7 @@ msgstr "افزودن به لیست پخش دیگر"
 msgid "Add to playlist"
 msgstr "افزودن به لیست پخش"
 
-#: ../bin/src/ui_behavioursettingspage.h:204
+#: ../bin/src/ui_behavioursettingspage.h:196
 msgid "Add to the queue"
 msgstr "افزودن به صف"
 
@@ -567,16 +567,16 @@ msgstr "کدگذاری میانه/کنار"
 msgid "Alongside the originals"
 msgstr "در کنار اصلی‌ها"
 
-#: ../bin/src/ui_behavioursettingspage.h:188
+#: ../bin/src/ui_behavioursettingspage.h:180
 msgid "Always hide the main window"
 msgstr "پنجره اصلی را همواره پنهان کن"
 
-#: ../bin/src/ui_behavioursettingspage.h:187
+#: ../bin/src/ui_behavioursettingspage.h:179
 msgid "Always show the main window"
 msgstr "پنجره اصلی را همواره نمایش بده"
 
-#: ../bin/src/ui_behavioursettingspage.h:196
-#: ../bin/src/ui_behavioursettingspage.h:210
+#: ../bin/src/ui_behavioursettingspage.h:188
+#: ../bin/src/ui_behavioursettingspage.h:202
 msgid "Always start playing"
 msgstr "همواره پخش را شروع کن"
 
@@ -603,7 +603,7 @@ msgstr "مشکلی هنگام  فراخوانی بانک اطلاعاتی آی�
 msgid "An error occurred writing metadata to '%1'"
 msgstr "مشکلی در نوشتن ابرداده در '%1' پیش آمد"
 
-#: internet/lastfmservice.cpp:903
+#: internet/lastfmservice.cpp:918
 #, qt-format
 msgid "An unknown last.fm error occurred: %1"
 msgstr "مشکل ناشناخته‌ای از last.fm پیش آمد: %1"
@@ -613,7 +613,7 @@ msgid "And:"
 msgstr "و:"
 
 #: ../bin/src/ui_songinfosettingspage.h:180
-#: ../bin/src/ui_appearancesettingspage.h:119
+#: ../bin/src/ui_appearancesettingspage.h:179
 msgid "Appearance"
 msgstr "شمایل"
 
@@ -622,11 +622,11 @@ msgid "Append files/URLs to the playlist"
 msgstr "پیوست پرونده/URL به لیست پخش"
 
 #: devices/deviceview.cpp:216 internet/internetservice.cpp:53
-#: library/libraryview.cpp:243 widgets/fileviewlist.cpp:32
+#: library/libraryview.cpp:244 widgets/fileviewlist.cpp:32
 msgid "Append to current playlist"
 msgstr "پیوست به لیست پخش جاری"
 
-#: ../bin/src/ui_behavioursettingspage.h:201
+#: ../bin/src/ui_behavioursettingspage.h:193
 msgid "Append to the playlist"
 msgstr "پیوست به لیست پخش"
 
@@ -661,7 +661,7 @@ msgstr "هنرمند"
 msgid "Artist info"
 msgstr "اطلاعات هنرمند"
 
-#: internet/lastfmservice.cpp:191
+#: internet/lastfmservice.cpp:206
 msgid "Artist radio"
 msgstr "رادیوی هنرمند"
 
@@ -682,7 +682,7 @@ msgid "Authenticating..."
 msgstr "در حال احراز هویت..."
 
 #: internet/digitallyimportedsettingspage.cpp:82
-#: internet/magnatunesettingspage.cpp:113 internet/lastfmservice.cpp:432
+#: internet/magnatunesettingspage.cpp:113 internet/lastfmservice.cpp:447
 #: internet/lastfmsettingspage.cpp:78 remote/remotesettingspage.cpp:113
 msgid "Authentication failed"
 msgstr "ناکامی در احراز هویت"
@@ -728,6 +728,10 @@ msgstr "جریان پس‌زمینه"
 msgid "Background color"
 msgstr "رنگ پس‌زمینه"
 
+#: ../bin/src/ui_appearancesettingspage.h:187
+msgid "Background image"
+msgstr ""
+
 #: ../bin/src/ui_notificationssettingspage.h:424
 msgid "Background opacity"
 msgstr "تاری پس‌زمینه"
@@ -748,7 +752,7 @@ msgstr "آبی ابتدایی"
 msgid "Basic audio type"
 msgstr ""
 
-#: ../bin/src/ui_behavioursettingspage.h:176
+#: ../bin/src/ui_behavioursettingspage.h:169
 msgid "Behavior"
 msgstr "رفتار"
 
@@ -793,6 +797,7 @@ msgid "Boom analyzer"
 msgstr "آنالیزور نرده‌ای"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:146
+#: ../bin/src/ui_appearancesettingspage.h:191
 msgid "Browse..."
 msgstr "مرور..."
 
@@ -945,7 +950,7 @@ msgstr "نمایشگر تصاویر کلمنتاین"
 msgid "Clementine was unable to find results for this file"
 msgstr "کلمنتاین نتوانست نتایج این پرونده را بیابد"
 
-#: library/libraryview.cpp:225
+#: library/libraryview.cpp:226
 msgid "Click here to add some music"
 msgstr "برای افزودن آهنگ‌ها، اینجا را فشار دهید"
 
@@ -977,7 +982,7 @@ msgstr "باشگاه"
 msgid "Color"
 msgstr "رنگ"
 
-#: ../bin/src/ui_appearancesettingspage.h:120
+#: ../bin/src/ui_appearancesettingspage.h:180
 msgid "Colors"
 msgstr ""
 
@@ -1012,7 +1017,7 @@ msgstr "تنظیم‌کننده"
 msgid "Configure Grooveshark..."
 msgstr ""
 
-#: internet/lastfmservice.cpp:111
+#: internet/lastfmservice.cpp:126
 msgid "Configure Last.fm..."
 msgstr "پیکربندی Last.fm..."
 
@@ -1065,7 +1070,7 @@ msgstr "برگردان تمام موسیقی‌هایی که دستگاه نمی
 msgid "Copy to clipboard"
 msgstr ""
 
-#: library/libraryview.cpp:265 ui/mainwindow.cpp:528
+#: library/libraryview.cpp:266 ui/mainwindow.cpp:528
 #: widgets/fileviewlist.cpp:44
 msgid "Copy to device..."
 msgstr "کپی‌کردن در دستگاه..."
@@ -1100,7 +1105,7 @@ msgid ""
 "plugins installed"
 msgstr "نمی‌توانم رمزگذاری برای %1 پیدا کنم، بررسی کنید که افزونهٔ مناسب GStream را نصب کرده‌اید"
 
-#: internet/lastfmservice.cpp:900
+#: internet/lastfmservice.cpp:915
 msgid "Couldn't load the last.fm radio station"
 msgstr "نمی‌توانم ایستگاه رادیویی last.fm را بارگیری کنم"
 
@@ -1229,11 +1234,15 @@ msgstr "Ctrl+Up"
 msgid "Custom"
 msgstr "سفارشی"
 
+#: ../bin/src/ui_appearancesettingspage.h:190
+msgid "Custom image:"
+msgstr ""
+
 #: ../bin/src/ui_notificationssettingspage.h:416
 msgid "Custom message settings"
 msgstr "تنظیم پیام سفارشی"
 
-#: internet/lastfmservice.cpp:199
+#: internet/lastfmservice.cpp:214
 msgid "Custom radio"
 msgstr "رادیوی سفارشی"
 
@@ -1273,6 +1282,10 @@ msgstr "کاهش صدا ۴٪"
 msgid "Decrease volume"
 msgstr "کاهش صدا"
 
+#: ../bin/src/ui_appearancesettingspage.h:188
+msgid "Default background image"
+msgstr ""
+
 #: ../bin/src/ui_wiimotesettingspage.h:195
 msgid "Defaults"
 msgstr "پیش‌فرضها"
@@ -1285,7 +1298,7 @@ msgstr "تأخیر بین تصویرسازیها"
 msgid "Delete Grooveshark playlist"
 msgstr ""
 
-#: devices/deviceview.cpp:393 library/libraryview.cpp:460
+#: devices/deviceview.cpp:393 library/libraryview.cpp:485
 #: ui/mainwindow.cpp:1853 widgets/fileview.cpp:186
 msgid "Delete files"
 msgstr "پاک کردن پرونده‌ها"
@@ -1294,7 +1307,7 @@ msgstr "پاک کردن پرونده‌ها"
 msgid "Delete from device..."
 msgstr "پاک کردن از دستگاه..."
 
-#: library/libraryview.cpp:267 ui/mainwindow.cpp:529
+#: library/libraryview.cpp:268 ui/mainwindow.cpp:529
 #: widgets/fileviewlist.cpp:45
 msgid "Delete from disk..."
 msgstr "پاک کردن از دیسک..."
@@ -1303,7 +1316,7 @@ msgstr "پاک کردن از دیسک..."
 msgid "Delete preset"
 msgstr "پاک کردن پیش‌نشانده"
 
-#: library/libraryview.cpp:259
+#: library/libraryview.cpp:260
 msgid "Delete smart playlist"
 msgstr "پاک کردن لیست‌پخش هوشمند"
 
@@ -1414,7 +1427,7 @@ msgstr "هیچ موسیقی را تبدیل نکن"
 msgid "Don't repeat"
 msgstr "تکرار نکن"
 
-#: library/libraryview.cpp:281
+#: library/libraryview.cpp:282
 msgid "Don't show in various artists"
 msgstr "در هنرمندان گوناگون نشان نده"
 
@@ -1430,7 +1443,7 @@ msgstr "توقف نکن!"
 msgid "Double click to open"
 msgstr "برای گشودن دو بار کلیک کنید"
 
-#: ../bin/src/ui_behavioursettingspage.h:198
+#: ../bin/src/ui_behavioursettingspage.h:190
 msgid "Double clicking a song will..."
 msgstr "دو بار کلیک یک آهنگ باعث..."
 
@@ -1490,7 +1503,7 @@ msgstr "حالت دینامیک روشن است"
 msgid "Dynamic random mix"
 msgstr "درهم‌ریختن تصادفی دینامیک"
 
-#: library/libraryview.cpp:257
+#: library/libraryview.cpp:258
 msgid "Edit smart playlist..."
 msgstr "ویرایش لیست‌پخش هوشمند..."
 
@@ -1511,12 +1524,12 @@ msgstr "ویرایش برچسب‌ها"
 msgid "Edit track information"
 msgstr "ویرایش اطلاعات قطعه"
 
-#: library/libraryview.cpp:271 widgets/fileviewlist.cpp:50
+#: library/libraryview.cpp:272 widgets/fileviewlist.cpp:50
 #: ../bin/src/ui_mainwindow.h:659
 msgid "Edit track information..."
 msgstr "ویرایش اطلاعات قطعه..."
 
-#: library/libraryview.cpp:273
+#: library/libraryview.cpp:274
 msgid "Edit tracks information..."
 msgstr "ویرایش اطلاعات قطعه‌ها..."
 
@@ -1531,10 +1544,6 @@ msgstr "فعال‌سازی پشتیبانی کنترل Wii"
 #: ../bin/src/ui_equalizer.h:126
 msgid "Enable equalizer"
 msgstr "توانا ساختن برابرساز"
-
-#: ../bin/src/ui_behavioursettingspage.h:179
-msgid "Enable playlist background image"
-msgstr "توانا ساختن تصویر پس‌زمینهٔ لیست‌پخش"
 
 #: ../bin/src/ui_wiimotesettingspage.h:187
 msgid "Enable shortcuts only when Clementine is focused"
@@ -1602,7 +1611,7 @@ msgid "Equivalent to --log-levels *:3"
 msgstr "برابر است با --log-levels *:3"
 
 #: internet/groovesharkservice.cpp:954
-#: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:454
+#: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:479
 #: ui/mainwindow.cpp:1805 ui/mainwindow.cpp:1926
 msgid "Error"
 msgstr "خطا"
@@ -1855,7 +1864,7 @@ msgstr "آهنگ فریم"
 msgid "Frames per buffer"
 msgstr "فریم در هر بافر"
 
-#: internet/lastfmservice.cpp:207
+#: internet/lastfmservice.cpp:222
 msgid "Friends"
 msgstr "دوستان"
 
@@ -1931,7 +1940,7 @@ msgstr "حساب کاربری گوگل"
 msgid "Got %1 covers out of %2 (%3 failed)"
 msgstr "%1 از %2 جلدها دریافت شد (%3 ناموفق)"
 
-#: ../bin/src/ui_behavioursettingspage.h:190
+#: ../bin/src/ui_behavioursettingspage.h:182
 msgid "Grey out non existent songs in my playlists"
 msgstr "آهنگ‌های ناموجود لیست‌پخش‌های من را خاکستری کن"
 
@@ -2114,31 +2123,31 @@ msgstr "اینترنت"
 msgid "Internet providers"
 msgstr ""
 
-#: internet/lastfmservice.cpp:438
+#: internet/lastfmservice.cpp:453
 msgid "Invalid API key"
 msgstr "کلید API نامعتبر"
 
-#: internet/lastfmservice.cpp:433
+#: internet/lastfmservice.cpp:448
 msgid "Invalid format"
 msgstr "قالب نامعتبر"
 
-#: internet/lastfmservice.cpp:431
+#: internet/lastfmservice.cpp:446
 msgid "Invalid method"
 msgstr "روش نامعتبر"
 
-#: internet/lastfmservice.cpp:434
+#: internet/lastfmservice.cpp:449
 msgid "Invalid parameters"
 msgstr "پارامترهای نامعتبر"
 
-#: internet/lastfmservice.cpp:435
+#: internet/lastfmservice.cpp:450
 msgid "Invalid resource specified"
 msgstr "منابع مشخص‌شده نامعتبرند"
 
-#: internet/lastfmservice.cpp:430
+#: internet/lastfmservice.cpp:445
 msgid "Invalid service"
 msgstr "سرویس نامعتبر"
 
-#: internet/lastfmservice.cpp:437
+#: internet/lastfmservice.cpp:452
 msgid "Invalid session key"
 msgstr "کلید جلسهٔ نامعتبر"
 
@@ -2186,7 +2195,7 @@ msgstr "دکمه‌ها را %1 ثانیه نگه دار..."
 msgid "Keep buttons for %1 seconds..."
 msgstr "دکمه‌ها را %1 ثانیه نگه دار..."
 
-#: ../bin/src/ui_behavioursettingspage.h:178
+#: ../bin/src/ui_behavioursettingspage.h:171
 msgid "Keep running in the background when the window is closed"
 msgstr "پخش را در پس‌زمینه ادامه بده وقتی که پنجره بسته می‌شود"
 
@@ -2198,7 +2207,7 @@ msgstr "اصل پرونده‌ها را نگه دار"
 msgid "Kittens"
 msgstr "توله گربه‌ها"
 
-#: ../bin/src/ui_behavioursettingspage.h:180
+#: ../bin/src/ui_behavioursettingspage.h:172
 msgid "Language"
 msgstr "زبان"
 
@@ -2227,45 +2236,45 @@ msgstr "آخرین پخش"
 msgid "Last.fm"
 msgstr "Last.fm"
 
-#: internet/lastfmservice.cpp:70
+#: internet/lastfmservice.cpp:85
 #, qt-format
 msgid "Last.fm Custom Radio: %1"
 msgstr "رادیوی سفارشی Last.fm: %1"
 
-#: internet/lastfmservice.cpp:238 internet/lastfmservice.cpp:694
-#: internet/lastfmservice.cpp:729
+#: internet/lastfmservice.cpp:253 internet/lastfmservice.cpp:709
+#: internet/lastfmservice.cpp:744
 #, qt-format
 msgid "Last.fm Library - %1"
 msgstr "کتابخانه Last.fm- %1"
 
-#: globalsearch/lastfmsearchprovider.cpp:75 internet/lastfmservice.cpp:240
-#: internet/lastfmservice.cpp:243
+#: globalsearch/lastfmsearchprovider.cpp:75 internet/lastfmservice.cpp:255
+#: internet/lastfmservice.cpp:258
 #, qt-format
 msgid "Last.fm Mix Radio - %1"
 msgstr "رادیوی مختلط  Last.fm- %1"
 
-#: globalsearch/lastfmsearchprovider.cpp:77 internet/lastfmservice.cpp:245
-#: internet/lastfmservice.cpp:248
+#: globalsearch/lastfmsearchprovider.cpp:77 internet/lastfmservice.cpp:260
+#: internet/lastfmservice.cpp:263
 #, qt-format
 msgid "Last.fm Neighbor Radio - %1"
 msgstr "رادیوی همسایه Last.fm- %1"
 
-#: globalsearch/lastfmsearchprovider.cpp:73 internet/lastfmservice.cpp:235
+#: globalsearch/lastfmsearchprovider.cpp:73 internet/lastfmservice.cpp:250
 #, qt-format
 msgid "Last.fm Radio Station - %1"
 msgstr "ایستگاه رادیویی Last.fm- %1"
 
-#: internet/lastfmservice.cpp:68
+#: internet/lastfmservice.cpp:83
 #, qt-format
 msgid "Last.fm Similar Artists to %1"
 msgstr "هنرمندهایی مشابه %1 در Last.fm"
 
-#: internet/lastfmservice.cpp:69
+#: internet/lastfmservice.cpp:84
 #, qt-format
 msgid "Last.fm Tag Radio: %1"
 msgstr "برچسب رادیویی Last.fm: %1"
 
-#: internet/lastfmservice.cpp:442
+#: internet/lastfmservice.cpp:457
 msgid "Last.fm is currently busy, please try again in a few minutes"
 msgstr "Last.fm در حال پخش است، چند دقیقه بعد دوباره تلاش کنید"
 
@@ -2359,7 +2368,7 @@ msgstr "بارگیری لیست‌پخش"
 msgid "Load playlist..."
 msgstr "بارگیری لیست‌پخش..."
 
-#: internet/lastfmservice.cpp:913
+#: internet/lastfmservice.cpp:928
 msgid "Loading Last.fm radio"
 msgstr "بارگیری رادیوی Last.fm"
 
@@ -2492,7 +2501,7 @@ msgstr ""
 msgid "Make playlist available offline"
 msgstr "لیست‌پخش را بیرون‌خط در دسترس بگذار"
 
-#: internet/lastfmservice.cpp:449
+#: internet/lastfmservice.cpp:464
 msgid "Malformed response"
 msgstr "پاسخ ناهنجار"
 
@@ -2592,35 +2601,35 @@ msgstr "کتابخانهٔ موسیقی"
 msgid "Mute"
 msgstr "بی‌صدا"
 
-#: globalsearch/lastfmsearchprovider.cpp:51 internet/lastfmservice.cpp:178
+#: globalsearch/lastfmsearchprovider.cpp:51 internet/lastfmservice.cpp:193
 msgid "My Last.fm Library"
 msgstr "کتابخانهٔ Last.fm من"
 
-#: globalsearch/lastfmsearchprovider.cpp:53 internet/lastfmservice.cpp:183
+#: globalsearch/lastfmsearchprovider.cpp:53 internet/lastfmservice.cpp:198
 msgid "My Last.fm Mix Radio"
 msgstr "رادیوی مختلط Last.fm من"
 
-#: globalsearch/lastfmsearchprovider.cpp:55 internet/lastfmservice.cpp:188
+#: globalsearch/lastfmsearchprovider.cpp:55 internet/lastfmservice.cpp:203
 msgid "My Last.fm Neighborhood"
 msgstr "همسایهٔ Last.fm من"
 
-#: globalsearch/lastfmsearchprovider.cpp:49 internet/lastfmservice.cpp:173
+#: globalsearch/lastfmsearchprovider.cpp:49 internet/lastfmservice.cpp:188
 msgid "My Last.fm Recommended Radio"
 msgstr "رادیوهای پیشنهادی Last.fm من"
 
-#: internet/lastfmservice.cpp:180
+#: internet/lastfmservice.cpp:195
 msgid "My Mix Radio"
 msgstr "رادیوی مختلط من"
 
-#: internet/lastfmservice.cpp:185
+#: internet/lastfmservice.cpp:200
 msgid "My Neighborhood"
 msgstr "همسایهٔ من"
 
-#: internet/lastfmservice.cpp:175
+#: internet/lastfmservice.cpp:190
 msgid "My Radio Station"
 msgstr "ایستگاه رادیویی من"
 
-#: internet/lastfmservice.cpp:170
+#: internet/lastfmservice.cpp:185
 msgid "My Recommendations"
 msgstr "پیشنهادهای من"
 
@@ -2640,7 +2649,7 @@ msgstr "گزینه‌های نام‌گذاری"
 msgid "Narrow band (NB)"
 msgstr "نوار باریک (NB)"
 
-#: internet/lastfmservice.cpp:212
+#: internet/lastfmservice.cpp:227
 msgid "Neighbors"
 msgstr "همسایه‌ها"
 
@@ -2660,8 +2669,8 @@ msgstr "هرگز"
 msgid "Never played"
 msgstr "هرگز پخش‌نشده"
 
-#: ../bin/src/ui_behavioursettingspage.h:194
-#: ../bin/src/ui_behavioursettingspage.h:208
+#: ../bin/src/ui_behavioursettingspage.h:186
+#: ../bin/src/ui_behavioursettingspage.h:200
 msgid "Never start playing"
 msgstr "هرگز شروع به پخش نشده"
 
@@ -2669,7 +2678,7 @@ msgstr "هرگز شروع به پخش نشده"
 msgid "New playlist"
 msgstr "لیست‌پخش تازه"
 
-#: library/libraryview.cpp:255
+#: library/libraryview.cpp:256
 msgid "New smart playlist..."
 msgstr "لیست‌پخش هوشمند تازه..."
 
@@ -2698,6 +2707,10 @@ msgstr "قطعهٔ بعد"
 msgid "No analyzer"
 msgstr "بدون آنالیزور"
 
+#: ../bin/src/ui_appearancesettingspage.h:189
+msgid "No background image"
+msgstr ""
+
 #: ../bin/src/ui_transcoderoptionsaac.h:146
 msgid "No long blocks"
 msgstr "بدون بلوک‌های بلند"
@@ -2716,7 +2729,7 @@ msgstr "بدون بلوک‌های کوتاه"
 msgid "None"
 msgstr "هیچ‌کدام"
 
-#: library/libraryview.cpp:455 ui/mainwindow.cpp:1806 ui/mainwindow.cpp:1927
+#: library/libraryview.cpp:480 ui/mainwindow.cpp:1806 ui/mainwindow.cpp:1927
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "هیچ‌کدام از آهنگ‌های انتخابی مناسب کپی کردن در دستگاه نیستند"
 
@@ -2732,19 +2745,19 @@ msgstr "مهیا نیست وقتی که از یک لیست‌پخش دینامی
 msgid "Not connected"
 msgstr "متصل نیست"
 
-#: internet/lastfmservice.cpp:444
+#: internet/lastfmservice.cpp:459
 msgid "Not enough content"
 msgstr "بدون محتوای کافی"
 
-#: internet/lastfmservice.cpp:446
+#: internet/lastfmservice.cpp:461
 msgid "Not enough fans"
 msgstr "بدون هوادار کافی"
 
-#: internet/lastfmservice.cpp:445
+#: internet/lastfmservice.cpp:460
 msgid "Not enough members"
 msgstr "بدون عضو کافی"
 
-#: internet/lastfmservice.cpp:447
+#: internet/lastfmservice.cpp:462
 msgid "Not enough neighbors"
 msgstr "بدون همسایهٔ کافی"
 
@@ -2814,8 +2827,8 @@ msgid "Open file..."
 msgstr ""
 
 #: devices/deviceview.cpp:220 internet/internetservice.cpp:73
-#: library/libraryview.cpp:247 widgets/fileviewlist.cpp:36
-#: ../bin/src/ui_behavioursettingspage.h:203
+#: library/libraryview.cpp:248 widgets/fileviewlist.cpp:36
+#: ../bin/src/ui_behavioursettingspage.h:195
 msgid "Open in new playlist"
 msgstr "گشودن در لیست‌پخش تازه"
 
@@ -2824,7 +2837,7 @@ msgstr "گشودن در لیست‌پخش تازه"
 msgid "Open..."
 msgstr "گشودن..."
 
-#: internet/lastfmservice.cpp:436
+#: internet/lastfmservice.cpp:451
 msgid "Operation failed"
 msgstr "شکست عملیات"
 
@@ -2844,7 +2857,7 @@ msgstr "گزینه‌ها..."
 msgid "Organise Files"
 msgstr "سازماندهی پرونده‌ها"
 
-#: library/libraryview.cpp:263 ui/mainwindow.cpp:527
+#: library/libraryview.cpp:264 ui/mainwindow.cpp:527
 msgid "Organise files..."
 msgstr "سازماندهی پرونده‌ها..."
 
@@ -2923,7 +2936,7 @@ msgstr "پخش"
 msgid "Play Artist or Tag"
 msgstr "پخش هنرمند یا برچسب"
 
-#: internet/lastfmservice.cpp:103
+#: internet/lastfmservice.cpp:118
 msgid "Play artist radio..."
 msgstr "پخش رادیوی هنرمند..."
 
@@ -2931,7 +2944,7 @@ msgstr "پخش رادیوی هنرمند..."
 msgid "Play count"
 msgstr "شمار پخش"
 
-#: internet/lastfmservice.cpp:107
+#: internet/lastfmservice.cpp:122
 msgid "Play custom radio..."
 msgstr "پخش رادیوی دلخواه..."
 
@@ -2939,12 +2952,12 @@ msgstr "پخش رادیوی دلخواه..."
 msgid "Play if stopped, pause if playing"
 msgstr "پخش در صورت توقف، توقف در صورت پخش"
 
-#: ../bin/src/ui_behavioursettingspage.h:195
-#: ../bin/src/ui_behavioursettingspage.h:209
+#: ../bin/src/ui_behavioursettingspage.h:187
+#: ../bin/src/ui_behavioursettingspage.h:201
 msgid "Play if there is nothing already playing"
 msgstr "پخش شود اگر چیزی در حال پخش نیست"
 
-#: internet/lastfmservice.cpp:105
+#: internet/lastfmservice.cpp:120
 msgid "Play tag radio..."
 msgstr "پخش رادیوی برچسب..."
 
@@ -3134,7 +3147,7 @@ msgstr "مدیر به‌خط‌ کردن"
 msgid "Queue selected tracks"
 msgstr "به‌خط کردن قطعه‌های منتخب"
 
-#: globalsearch/globalsearchwidget.cpp:105 library/libraryview.cpp:251
+#: globalsearch/globalsearchwidget.cpp:105 library/libraryview.cpp:252
 #: ui/mainwindow.cpp:1337
 msgid "Queue track"
 msgstr "به‌خط کردن قطعه"
@@ -3199,7 +3212,7 @@ msgstr "بازخوانی کاتالوگ"
 msgid "Refresh channels"
 msgstr "بازخوانی کانالها"
 
-#: internet/lastfmservice.cpp:109
+#: internet/lastfmservice.cpp:124
 msgid "Refresh friends list"
 msgstr ""
 
@@ -3219,7 +3232,7 @@ msgstr "رگه"
 msgid "Remember Wii remote swing"
 msgstr "دورکنترل تابی Wii را به‌یاد بیاور"
 
-#: ../bin/src/ui_behavioursettingspage.h:189
+#: ../bin/src/ui_behavioursettingspage.h:181
 msgid "Remember from last time"
 msgstr "از بار آخر به‌یاد بیاور"
 
@@ -3229,7 +3242,7 @@ msgstr "دورکنترل"
 
 #: internet/savedradio.cpp:100 ../bin/src/ui_queuemanager.h:135
 #: ../bin/src/ui_searchtermwidget.h:282 ../bin/src/ui_transcodedialog.h:207
-#: internet/lastfmservice.cpp:100
+#: internet/lastfmservice.cpp:115
 msgid "Remove"
 msgstr "پاک کردن"
 
@@ -3299,12 +3312,12 @@ msgid "Replace and play now"
 msgstr ""
 
 #: devices/deviceview.cpp:218 globalsearch/globalsearchwidget.cpp:106
-#: internet/internetservice.cpp:63 library/libraryview.cpp:245
+#: internet/internetservice.cpp:63 library/libraryview.cpp:246
 #: widgets/fileviewlist.cpp:34
 msgid "Replace current playlist"
 msgstr "دوباره جانشانی لیست‌پخش جاری"
 
-#: ../bin/src/ui_behavioursettingspage.h:202
+#: ../bin/src/ui_behavioursettingspage.h:194
 msgid "Replace the playlist"
 msgstr "دوباره جانشانی لیست‌پخش"
 
@@ -3511,15 +3524,19 @@ msgstr "برگزیدن همه"
 msgid "Select None"
 msgstr "برگزیدن هیچ‌کدام"
 
-#: ../bin/src/ui_appearancesettingspage.h:125
+#: ../bin/src/ui_appearancesettingspage.h:185
 msgid "Select background color:"
+msgstr ""
+
+#: ui/appearancesettingspage.cpp:187
+msgid "Select background image"
 msgstr ""
 
 #: ../bin/src/ui_trackselectiondialog.h:207
 msgid "Select best possible match"
 msgstr "انتخاب بهترین تطبیق ممکن"
 
-#: ../bin/src/ui_appearancesettingspage.h:123
+#: ../bin/src/ui_appearancesettingspage.h:183
 msgid "Select foreground color:"
 msgstr ""
 
@@ -3535,7 +3552,7 @@ msgstr "انتخاب تصویرسازها..."
 msgid "Serial number"
 msgstr "شماره سریال"
 
-#: internet/lastfmservice.cpp:439
+#: internet/lastfmservice.cpp:454
 msgid "Service offline"
 msgstr "سرویس برون‌خط"
 
@@ -3631,12 +3648,12 @@ msgstr "نمایش جداسازها"
 msgid "Show fullsize..."
 msgstr "نمایش اندازهٔ کامل..."
 
-#: library/libraryview.cpp:275 ui/mainwindow.cpp:530
+#: library/libraryview.cpp:276 ui/mainwindow.cpp:530
 #: widgets/fileviewlist.cpp:52
 msgid "Show in file browser..."
 msgstr "نمایش در مرورگر پرونده..."
 
-#: library/libraryview.cpp:279
+#: library/libraryview.cpp:280
 msgid "Show in various artists"
 msgstr "نمایش در هنرمندان گوناگون"
 
@@ -3660,7 +3677,7 @@ msgstr "نمایش دکمه‌های «عشق» و «تحریم»"
 msgid "Show the scrobble button in the main window"
 msgstr "نمایش  دکمهٔ واکشی در پنجره اصلی"
 
-#: ../bin/src/ui_behavioursettingspage.h:177
+#: ../bin/src/ui_behavioursettingspage.h:170
 msgid "Show tray icon"
 msgstr "نمایش آیکون سینی"
 
@@ -3931,7 +3948,7 @@ msgstr "برچسب"
 msgid "Tag fetcher"
 msgstr "واکش برچسب‌ها"
 
-#: internet/lastfmservice.cpp:195
+#: internet/lastfmservice.cpp:210
 msgid "Tag radio"
 msgstr "برچسب رادیو"
 
@@ -3984,6 +4001,10 @@ msgid ""
 "rescan because of the new features listed below:"
 msgstr "نسخه‌ای زا کلمنتاین که هم‌اکنون به‌روز کردید، به خاطر ویژگیهای زیر، نیاز به بررسی کامل کتابخانه دارد:"
 
+#: library/libraryview.cpp:406
+msgid "There are other songs in this album"
+msgstr ""
+
 #: internet/magnatunedownloaddialog.cpp:157
 msgid "There was a problem fetching the metadata from Magnatune"
 msgstr "مشکلی در واکشی ابرداده‌ها از مگناتیون پیش آمد"
@@ -4000,7 +4021,7 @@ msgid ""
 "deleted:"
 msgstr "مشکلی در پاک کردن تعدادی از آهنگ‌ها وجود داشت. پرونده‌های زیر پاک نشدند:"
 
-#: library/libraryview.cpp:461 ui/mainwindow.cpp:1854 widgets/fileview.cpp:187
+#: library/libraryview.cpp:486 ui/mainwindow.cpp:1854 widgets/fileview.cpp:187
 msgid ""
 "These files will be deleted from disk, are you sure you want to continue?"
 msgstr "این پرونده‌ها از دیسک پاک خواهند شد، آیا مطمئنید که می‌خواهید ادامه دهید؟"
@@ -4070,7 +4091,7 @@ msgid ""
 "want to continue?"
 msgstr "این لیست‌پخش پاک خواهد شد؛ و عمل برگشت‌ناپذیر است. آیا مطمئنید می‌خواهید ادامه دهید؟"
 
-#: internet/lastfmservice.cpp:440
+#: internet/lastfmservice.cpp:455
 msgid "This stream is for paid subscribers only"
 msgstr "این جریان تنها برای مشترکان پولی است"
 
@@ -4195,7 +4216,7 @@ msgstr "ناکام در باگیری %1 (%2)"
 msgid "Unknown"
 msgstr "ناشناخته"
 
-#: internet/digitallyimportedclient.cpp:68 internet/lastfmservice.cpp:453
+#: internet/digitallyimportedclient.cpp:68 internet/lastfmservice.cpp:468
 msgid "Unknown error"
 msgstr "خطای ناشناخته"
 
@@ -4245,7 +4266,7 @@ msgstr "در صورت وجود، از ابردادهٔ  Replay Gain استفاد
 msgid "Use Wii Remote"
 msgstr "بکار بردن دورکنترل Wii"
 
-#: ../bin/src/ui_appearancesettingspage.h:122
+#: ../bin/src/ui_appearancesettingspage.h:182
 msgid "Use a custom color set"
 msgstr ""
 
@@ -4273,11 +4294,11 @@ msgstr "بکاربردن آگاه‌سازی برای گزارش وضعیت دو
 msgid "Use temporal noise shaping"
 msgstr "بکاربردن شکل زمانی پارازیت"
 
-#: ../bin/src/ui_behavioursettingspage.h:183
+#: ../bin/src/ui_behavioursettingspage.h:175
 msgid "Use the system default"
 msgstr "بکاربردن پیش‌فرض‌های سیستم"
 
-#: ../bin/src/ui_appearancesettingspage.h:121
+#: ../bin/src/ui_appearancesettingspage.h:181
 msgid "Use the system default color set"
 msgstr ""
 
@@ -4309,7 +4330,7 @@ msgstr ""
 msgid "Username"
 msgstr "شناسه"
 
-#: ../bin/src/ui_behavioursettingspage.h:191
+#: ../bin/src/ui_behavioursettingspage.h:183
 msgid "Using the menu to add a song will..."
 msgstr "بکاربردن منو برای افزودن آهنگ باعث..."
 
@@ -4382,7 +4403,7 @@ msgstr "Wav"
 msgid "Weeks"
 msgstr "هفته"
 
-#: ../bin/src/ui_behavioursettingspage.h:186
+#: ../bin/src/ui_behavioursettingspage.h:178
 msgid "When Clementine starts"
 msgstr "وقتی کلمنتاین شروع می‌شود"
 
@@ -4449,6 +4470,12 @@ msgstr ""
 #: core/song.cpp:332
 msgid "Windows Media audio"
 msgstr "فرمت صوتی مدیای ویندوز"
+
+#: library/libraryview.cpp:407
+msgid ""
+"Would you like to move the other songs in this album to Various Artists as "
+"well?"
+msgstr ""
 
 #: ui/mainwindow.cpp:2047
 msgid "Would you like to run a full rescan right now?"
@@ -4554,7 +4581,7 @@ msgid ""
 "shortcuts in Clementine."
 msgstr "نیاز است که تنظیمات سیستم را راه‌اندازی کنید و   \"<span style=\" font-style:italic;\">Enable access for assistive devices</span>\" را فعال کنید تا بتوانید از میان‌برهای جامع در کلمنتاین استفاده کنید."
 
-#: ../bin/src/ui_behavioursettingspage.h:185
+#: ../bin/src/ui_behavioursettingspage.h:177
 msgid "You will need to restart Clementine if you change the language."
 msgstr "اگر زبان را تغییر دهید باید کلمنتاین را دوباره بارگذاری کنید."
 
@@ -4581,7 +4608,7 @@ msgstr "اعتبار Last.fm شما نادرست بود"
 msgid "Your Magnatune credentials were incorrect"
 msgstr "اعتبار مگناتیون شما نادرست بود"
 
-#: library/libraryview.cpp:219
+#: library/libraryview.cpp:220
 msgid "Your library is empty!"
 msgstr "کتابخانهٔ شما خالی است!"
 
@@ -4640,7 +4667,7 @@ msgstr "بین"
 msgid "biggest first"
 msgstr "بزرگترین اول"
 
-#: playlist/playlistview.cpp:164 ui/edittagdialog.cpp:454
+#: playlist/playlistview.cpp:174 ui/edittagdialog.cpp:454
 msgid "bpm"
 msgstr "bpm"
 
@@ -4683,7 +4710,7 @@ msgstr "بزرگتر است از"
 msgid "in the last"
 msgstr "در آخرین"
 
-#: playlist/playlistview.cpp:166 ui/edittagdialog.cpp:456
+#: playlist/playlistview.cpp:176 ui/edittagdialog.cpp:456
 #: internet/spotifysettingspage.cpp:59 internet/spotifysettingspage.cpp:60
 #: internet/spotifysettingspage.cpp:61
 msgid "kbps"
