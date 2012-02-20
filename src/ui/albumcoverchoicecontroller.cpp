@@ -220,8 +220,8 @@ QString AlbumCoverChoiceController::SaveCoverInCache(
   hash.addData(artist.toLower().toUtf8().constData());
   hash.addData(album.toLower().toUtf8().constData());
 
-  QString filename = hash.result().toHex() + ".jpg";
-  QString path = AlbumCoverLoader::ImageCacheDir() + "/" + filename;
+  QString filename(hash.result().toHex() + ".jpg");
+  QString path(AlbumCoverLoader::ImageCacheDir() + "/" + filename);
 
   // Make sure this directory exists first
   QDir dir;
