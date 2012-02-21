@@ -232,11 +232,10 @@ CFTypeRef GetUSBRegistryEntry(io_object_t device, CFStringRef key) {
 QString GetUSBRegistryEntryString(io_object_t device, CFStringRef key) {
   ScopedCFTypeRef<CFStringRef> registry_string((CFStringRef)GetUSBRegistryEntry(device, key));
   if (registry_string) {
-    QString ret = QString::fromUtf8([(NSString*)registry_string.get() UTF8String]);
-    return ret;
+    return QString::fromUtf8([(NSString*)registry_string.get() UTF8String]);
   }
 
-  return NULL;
+  return QString();
 }
 
 quint64 GetUSBRegistryEntryInt64(io_object_t device, CFStringRef key) {
@@ -306,7 +305,7 @@ QString GetIconForDevice(io_object_t device) {
 
     QString path = QString::fromUtf8([[bundle_url path] UTF8String]);
     path += "/Contents/Resources/";
-    path += [file UTF8String];
+    path += QString::fromUtf8([file UTF8String]);
     return path;
   }
 
@@ -324,7 +323,7 @@ QString GetSerialForDevice(io_object_t device) {
 QString GetSerialForMTPDevice(io_object_t device) {
   scoped_nsobject<NSString> serial((NSString*)
       GetPropertyForDevice(device, CFSTR(kUSBSerialNumberString)));
-  return QString(QString("MTP/") + [serial UTF8String]);
+  return QString(QString("MTP/") + QString::fromUtf8([serial UTF8String]));
 }
 
 QString FindDeviceProperty(const QString& bsd_name, CFStringRef property) {
@@ -737,7 +736,7 @@ QList<QUrl> MacDeviceLister::MakeDeviceUrls(const QString& serial) {
   scoped_nsobject<NSURL> volume_path(
       [[properties objectForKey:(NSString*)kDADiskDescriptionVolumePathKey] copy]);
 
-  QString path = [[volume_path path] UTF8String];
+  QString path = QString::fromUtf8([[volume_path path] UTF8String]);
   QUrl ret = MakeUrlFromLocalPath(path);
 
   return QList<QUrl>() << ret;
