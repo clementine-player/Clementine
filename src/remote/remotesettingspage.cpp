@@ -71,12 +71,12 @@ void RemoteSettingsPage::Login() {
 // http://code.google.com/apis/accounts/docs/AuthForInstalledApps.html#ClientLogin
 void RemoteSettingsPage::ValidateGoogleAccount(const QString& username, const QString& password) {
   QNetworkRequest request = QNetworkRequest(QUrl(kClientLoginUrl));
-  QString post_data =
+  QString post_data(
       "accountType=HOSTED_OR_GOOGLE&"
       "service=mail&"
       "source=" + QUrl::toPercentEncoding(QCoreApplication::applicationName()) + "&"
       "Email=" + QUrl::toPercentEncoding(username) + "&"
-      "Passwd=" + QUrl::toPercentEncoding(password);
+      "Passwd=" + QUrl::toPercentEncoding(password));
   QNetworkReply* reply = network_->post(request, post_data.toUtf8());
   connect(reply, SIGNAL(finished()), SLOT(LoginFinished()));
 }
