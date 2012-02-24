@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-02-19 14:26+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2012-02-22 23:11+0000\n"
+"Last-Translator: El_Zorro_Loco <the.crazy.zorro@googlemail.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: de\n"
@@ -390,11 +390,11 @@ msgstr "Tag \"Album\" hinzufügen"
 
 #: ../bin/src/ui_notificationssettingspage.h:370
 msgid "Add song albumartist tag"
-msgstr "Tag \"Album-Künstler\" hinzufügen"
+msgstr "Tag \"Album-Interpret\" hinzufügen"
 
 #: ../bin/src/ui_notificationssettingspage.h:361
 msgid "Add song artist tag"
-msgstr "Tag \"Künstler\" hinzufügen"
+msgstr "Tag \"Interpret\" hinzufügen"
 
 #: ../bin/src/ui_notificationssettingspage.h:376
 msgid "Add song composer tag"
@@ -519,7 +519,7 @@ msgstr "Album (idealer Pegel für alle Stücke)"
 #: ../bin/src/ui_groupbydialog.h:131 ../bin/src/ui_groupbydialog.h:144
 #: ../bin/src/ui_groupbydialog.h:157 ../bin/src/ui_edittagdialog.h:658
 msgid "Album artist"
-msgstr "Album-Künstler"
+msgstr "Album-Interpret"
 
 #: internet/jamendoservice.cpp:411
 msgid "Album info on jamendo.com..."
@@ -547,7 +547,7 @@ msgstr "Alle Alben"
 
 #: ui/albumcovermanager.cpp:263
 msgid "All artists"
-msgstr "Alle Künstler"
+msgstr "Alle Interpreten"
 
 #: ui/albumcoverchoicecontroller.cpp:45
 msgid "All files (*)"
@@ -662,11 +662,11 @@ msgstr "Wollen Sie die Statistiken dieses Titels wirklich zurücksetzen?"
 #: ../bin/src/ui_trackselectiondialog.h:210
 #: ../bin/src/ui_lastfmstationdialog.h:96
 msgid "Artist"
-msgstr "Künstler"
+msgstr "Interpret"
 
 #: ui/mainwindow.cpp:258
 msgid "Artist info"
-msgstr "Künstlerinfo"
+msgstr "Infos zum Interpreten"
 
 #: internet/lastfmservice.cpp:206
 msgid "Artist radio"
@@ -674,11 +674,11 @@ msgstr "Künstler-Radio"
 
 #: songinfo/echonesttags.cpp:59
 msgid "Artist tags"
-msgstr "Künstlertags"
+msgstr "Stichworte zum Interpreten"
 
 #: ui/organisedialog.cpp:57
 msgid "Artist's initial"
-msgstr "Initialen des Künstlers"
+msgstr "Initialen des Interpreten"
 
 #: ../bin/src/ui_transcodedialog.h:209
 msgid "Audio format"
@@ -737,7 +737,7 @@ msgstr "Hintergrundfarbe"
 
 #: ../bin/src/ui_appearancesettingspage.h:187
 msgid "Background image"
-msgstr ""
+msgstr "Hintergrundbild"
 
 #: ../bin/src/ui_notificationssettingspage.h:424
 msgid "Background opacity"
@@ -1243,7 +1243,7 @@ msgstr "Benutzerdefiniert"
 
 #: ../bin/src/ui_appearancesettingspage.h:190
 msgid "Custom image:"
-msgstr ""
+msgstr "Benutzerdefiniertes Bild:"
 
 #: ../bin/src/ui_notificationssettingspage.h:416
 msgid "Custom message settings"
@@ -1291,7 +1291,7 @@ msgstr "Lautstärke verringern"
 
 #: ../bin/src/ui_appearancesettingspage.h:188
 msgid "Default background image"
-msgstr ""
+msgstr "Standard Hintergrundbild"
 
 #: ../bin/src/ui_wiimotesettingspage.h:195
 msgid "Defaults"
@@ -1590,7 +1590,7 @@ msgstr "Neuer Name für diese Wiedergabeliste"
 #: ../bin/src/ui_lastfmstationdialog.h:93
 msgid ""
 "Enter an <b>artist</b> or <b>tag</b> to start listening to Last.fm radio."
-msgstr "Geben Sie einen <b>Künstler</b> oder ein <b>Stichwort</b> ein, um Last.fm Radio zu hören."
+msgstr "Geben Sie einen <b>Interpreten</b> oder ein <b>Stichwort</b> ein, um Last.fm Radio zu hören."
 
 #: ../bin/src/ui_libraryfilterwidget.h:131
 #: ../bin/src/ui_albumcovermanager.h:153
@@ -1915,7 +1915,7 @@ msgstr "Empfange \"Beliebte Titel\" von Grooveshark"
 
 #: internet/somafmservice.cpp:95
 msgid "Getting channels"
-msgstr "Channels laden"
+msgstr "Kanäle laden"
 
 #: internet/digitallyimportedservicebase.cpp:106
 msgid "Getting streams"
@@ -1981,15 +1981,15 @@ msgstr "Album"
 
 #: ../bin/src/ui_libraryfilterwidget.h:124
 msgid "Group by Artist"
-msgstr "Künstler"
+msgstr "Nach Interpreten Sortieren"
 
 #: ../bin/src/ui_libraryfilterwidget.h:125
 msgid "Group by Artist/Album"
-msgstr "Künstler/Album"
+msgstr "Interpret/Album"
 
 #: ../bin/src/ui_libraryfilterwidget.h:126
 msgid "Group by Artist/Year - Album"
-msgstr "Künstler/Jahr"
+msgstr "Interpret/Jahr"
 
 #: ../bin/src/ui_libraryfilterwidget.h:128
 msgid "Group by Genre/Album"
@@ -1997,7 +1997,7 @@ msgstr "Genre/Album"
 
 #: ../bin/src/ui_libraryfilterwidget.h:129
 msgid "Group by Genre/Artist/Album"
-msgstr "Genre/Künstler/Album"
+msgstr "Genre/Interpret/Album"
 
 #: ../bin/src/ui_networkproxysettingspage.h:163
 msgid "HTTP proxy"
@@ -2070,7 +2070,7 @@ msgstr "Wenn sie die Fernbedienung mit mehr als einem Computer verwenden, kann i
 
 #: ../bin/src/ui_organisedialog.h:204
 msgid "Ignore \"The\" in artist names"
-msgstr "Ignoriere \"The\" in Künstlernamen"
+msgstr "Ignoriere \"The\" in den Künstlernamen"
 
 #: ui/albumcoverchoicecontroller.cpp:41
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
@@ -2274,7 +2274,7 @@ msgstr "Last.fm Radio Station %1"
 #: internet/lastfmservice.cpp:83
 #, qt-format
 msgid "Last.fm Similar Artists to %1"
-msgstr "Last.fm Ähnliche Künstler wie %1"
+msgstr "Last.fm Ähnliche Interpreten wie %1"
 
 #: internet/lastfmservice.cpp:84
 #, qt-format
@@ -2716,7 +2716,7 @@ msgstr "Keine Visualisierung"
 
 #: ../bin/src/ui_appearancesettingspage.h:189
 msgid "No background image"
-msgstr ""
+msgstr "Kein Hintergrundbild"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:146
 msgid "No long blocks"
@@ -2941,7 +2941,7 @@ msgstr "Wiedergabe"
 
 #: ../bin/src/ui_lastfmstationdialog.h:92
 msgid "Play Artist or Tag"
-msgstr "Spiele Künstler oder Stichwort"
+msgstr "Wiedergabe nach Interpret oder Stichwort"
 
 #: internet/lastfmservice.cpp:118
 msgid "Play artist radio..."
@@ -3217,7 +3217,7 @@ msgstr "Katalog neu laden"
 
 #: internet/somafmservice.cpp:86
 msgid "Refresh channels"
-msgstr "Channels neu laden"
+msgstr "Kanäle aktualisieren"
 
 #: internet/lastfmservice.cpp:124
 msgid "Refresh friends list"
@@ -3225,7 +3225,7 @@ msgstr "Freundesliste aktualisieren"
 
 #: internet/icecastservice.cpp:300
 msgid "Refresh station list"
-msgstr "Aktualisiere Senderliste"
+msgstr "Senderliste aktualisieren"
 
 #: internet/digitallyimportedservicebase.cpp:181
 msgid "Refresh streams"
@@ -3537,7 +3537,7 @@ msgstr "Hintergrundfarbe:"
 
 #: ui/appearancesettingspage.cpp:187
 msgid "Select background image"
-msgstr ""
+msgstr "Hintergrundbild wählen"
 
 #: ../bin/src/ui_trackselectiondialog.h:207
 msgid "Select best possible match"
@@ -3605,7 +3605,7 @@ msgstr "Benachrichtigung anzeigen"
 
 #: ../bin/src/ui_playbacksettingspage.h:258
 msgid "Show a glowing animation on the current track"
-msgstr "Das aktuelle Stück mit einem animierten Glühen umranden"
+msgstr "Das aktuelle Stück mit einem animierten Glühen hervorheben"
 
 #: ../bin/src/ui_notificationssettingspage.h:406
 msgid "Show a native desktop notification"
@@ -3722,7 +3722,7 @@ msgstr "Anmelden..."
 
 #: songinfo/echonestsimilarartists.cpp:57
 msgid "Similar artists"
-msgstr "Ähnliche Künstler"
+msgstr "Ähnliche Interpreten"
 
 #: ui/equalizer.cpp:123
 msgid "Ska"
@@ -4010,7 +4010,7 @@ msgstr "Die Clementine Version, auf die Sie gerade aktualisiert haben, erfordert
 
 #: library/libraryview.cpp:406
 msgid "There are other songs in this album"
-msgstr ""
+msgstr "Dieses Album enthält auch andere Titel"
 
 #: internet/magnatunedownloaddialog.cpp:157
 msgid "There was a problem fetching the metadata from Magnatune"
@@ -4482,11 +4482,11 @@ msgstr "Windows Media Audio"
 msgid ""
 "Would you like to move the other songs in this album to Various Artists as "
 "well?"
-msgstr ""
+msgstr "Möchten Sie die anderen Titel dieses Albums ebenfalls unter \"Verschiedene Interpreten\" anzeigen?"
 
 #: ui/mainwindow.cpp:2047
 msgid "Would you like to run a full rescan right now?"
-msgstr "Wollen Sie jetzt ihre Musiksammlung erneut einlesen?"
+msgstr "Möchten Sie jetzt ihre Musiksammlung erneut einlesen?"
 
 #: playlist/playlist.cpp:1120 ui/organisedialog.cpp:63
 #: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:148
