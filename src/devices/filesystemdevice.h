@@ -19,7 +19,6 @@
 #define FILESYSTEMDEVICE_H
 
 #include "connecteddevice.h"
-#include "core/backgroundthread.h"
 #include "core/filesystemmusicstorage.h"
 
 class DeviceManager;
@@ -41,7 +40,8 @@ public:
   static QStringList url_schemes() { return QStringList() << "file"; }
 
 private:
-  BackgroundThread<LibraryWatcher>* watcher_;
+  LibraryWatcher* watcher_;
+  QThread* watcher_thread_;
 };
 
 #endif // FILESYSTEMDEVICE_H

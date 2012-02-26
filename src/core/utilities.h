@@ -100,6 +100,23 @@ namespace Utilities {
 
   // Returns the minor version of OS X (ie. 6 for Snow Leopard, 7 for Lion).
   qint32 GetMacVersion();
+
+  // Borrowed from schedutils
+  enum IoPriority {
+    IOPRIO_CLASS_NONE = 0,
+    IOPRIO_CLASS_RT,
+    IOPRIO_CLASS_BE,
+    IOPRIO_CLASS_IDLE,
+  };
+  enum {
+    IOPRIO_WHO_PROCESS = 1,
+    IOPRIO_WHO_PGRP,
+    IOPRIO_WHO_USER,
+  };
+  static const int IOPRIO_CLASS_SHIFT = 13;
+
+  int SetThreadIOPriority(IoPriority priority);
+  int GetThreadId();
 }
 
 class ScopedWCharArray {

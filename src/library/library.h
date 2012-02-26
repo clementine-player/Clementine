@@ -18,8 +18,7 @@
 #ifndef LIBRARY_H
 #define LIBRARY_H
 
-#include "core/backgroundthread.h"
-
+#include <QHash>
 #include <QObject>
 
 #include <boost/scoped_ptr.hpp>
@@ -36,14 +35,12 @@ class Library : public QObject {
 
  public:
   Library(Application* app, QObject* parent);
+  ~Library();
 
   static const char* kSongsTable;
   static const char* kDirsTable;
   static const char* kSubdirsTable;
   static const char* kFtsTable;
-
-  // Useful for tests.  The library takes ownership.
-  void set_watcher_factory(BackgroundThreadFactory<LibraryWatcher>* factory);
 
   void Init();
   void StartThreads();
@@ -63,15 +60,14 @@ class Library : public QObject {
 
  private slots:
   void IncrementalScan();
-  void WatcherInitialised();
 
  private:
   Application* app_;
   LibraryBackend* backend_;
   LibraryModel* model_;
 
-  boost::scoped_ptr<BackgroundThreadFactory<LibraryWatcher> > watcher_factory_;
-  BackgroundThread<LibraryWatcher>* watcher_;
+  LibraryWatcher* watcher_;
+  QThread* watcher_thread_;
 
   // DB schema versions which should trigger a full library rescan (each of those with
   // a short reason why).

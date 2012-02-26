@@ -22,6 +22,7 @@
 #include "core/logging.h"
 #include "core/tagreaderclient.h"
 #include "core/taskmanager.h"
+#include "core/utilities.h"
 #include "playlistparsers/cueparser.h"
 
 #include <QDateTime>
@@ -59,6 +60,8 @@ LibraryWatcher::LibraryWatcher(QObject* parent)
     total_watches_(0),
     cue_parser_(new CueParser(backend_, this))
 {
+  Utilities::SetThreadIOPriority(Utilities::IOPRIO_CLASS_IDLE);
+
   rescan_timer_->setInterval(1000);
   rescan_timer_->setSingleShot(true);
 

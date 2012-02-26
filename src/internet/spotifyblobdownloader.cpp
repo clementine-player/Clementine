@@ -22,6 +22,7 @@
 #include "core/network.h"
 #include "core/utilities.h"
 
+#include <QCoreApplication>
 #include <QDir>
 #include <QMessageBox>
 #include <QNetworkReply>

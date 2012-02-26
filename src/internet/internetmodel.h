@@ -18,7 +18,6 @@
 #ifndef INTERNETMODEL_H
 #define INTERNETMODEL_H
 
-#include "core/backgroundthread.h"
 #include "core/song.h"
 #include "library/librarymodel.h"
 #include "playlist/playlistitem.h"

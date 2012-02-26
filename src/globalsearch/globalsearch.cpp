@@ -24,6 +24,7 @@
 
 #include <QSettings>
 #include <QStringBuilder>
+#include <QTimerEvent>
 #include <QUrl>
 
 const int GlobalSearch::kDelayedSearchTimeoutMs = 200;

@@ -43,6 +43,13 @@
 #  include <windows.h>
 #endif
 
+#ifdef Q_OS_LINUX
+#  include <sys/syscall.h>
+#endif
+#ifdef Q_OS_DARWIN
+#  include <sys/resource.h>
+#endif
+
 #ifdef Q_OS_DARWIN
 #  include "core/mac_startup.h"
 #  include "CoreServices/CoreServices.h"
@@ -405,6 +412,26 @@ const char* EnumToString(const QMetaObject& meta, const char* name, int value) {
   if (result == 0)
     return "[UnknownEnumValue]";
   return result;
+}
+
+int SetThreadIOPriority(IoPriority priority) {
+#ifdef Q_OS_LINUX
+  return syscall(SYS_ioprio_set, IOPRIO_WHO_PROCESS, GetThreadId(),
+                 4 | priority << IOPRIO_CLASS_SHIFT);
+#elif defined(Q_OS_DARWIN)
+  return setpriority(PRIO_DARWIN_THREAD, 0,
+                     priority == IOPRIO_CLASS_IDLE ? PRIO_DARWIN_BG : 0);
+#else
+  return 0;
+#endif
+}
+
+int GetThreadId() {
+#ifdef Q_OS_LINUX
+  return syscall(SYS_gettid);
+#else
+  return 0;
+#endif
 }
 
 }  // namespace Utilities

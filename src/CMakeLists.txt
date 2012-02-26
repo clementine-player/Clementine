@@ -74,7 +74,6 @@ set(SOURCES
   core/appearance.cpp
   core/application.cpp
   core/backgroundstreams.cpp
-  core/backgroundthread.cpp
   core/commandlineoptions.cpp
   core/crashreporting.cpp
   core/database.cpp
@@ -344,7 +343,6 @@ set(HEADERS
 
   core/application.h
   core/backgroundstreams.h
-  core/backgroundthread.h
   core/crashreporting.h
   core/database.h
   core/deletefiles.h

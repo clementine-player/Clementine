@@ -19,7 +19,6 @@
 #define ALBUMCOVERLOADER_H
 
 #include "albumcoverloaderoptions.h"
-#include "core/backgroundthread.h"
 #include "core/song.h"
 
 #include <QImage>

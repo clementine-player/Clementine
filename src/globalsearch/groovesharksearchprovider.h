@@ -19,7 +19,6 @@
 #define GROOVESHARKSEARCHPROVIDER_H
 
 #include "searchprovider.h"
-#include "core/backgroundthread.h"
 #include "covers/albumcoverloaderoptions.h"
 
 class AlbumCoverLoader;
