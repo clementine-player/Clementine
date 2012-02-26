@@ -40,13 +40,12 @@ class GroovesharkSearchProvider : public SearchProvider {
 
  private slots:
   void SearchDone(int id, const SongList& songs);
-  void AlbumSearchResult(int id, const SongList& songs);
+  void AlbumSearchResult(int id, const QList<SongList>& songs);
   void AlbumArtLoaded(quint64 id, const QImage& image);
   void AlbumSongsLoaded(int id, const SongList& songs);
 
  private:
   void MaybeSearchFinished(int id);
-  void FetchAlbum(int id, const Result& result);
 
   GroovesharkService* service_;
   QMap<int, PendingState> pending_searches_;

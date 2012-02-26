@@ -39,8 +39,8 @@ void GroovesharkSearchProvider::Init(GroovesharkService* service) {
 
   connect(service_, SIGNAL(SimpleSearchResults(int, SongList)),
           SLOT(SearchDone(int, SongList)));
-  connect(service_, SIGNAL(AlbumSearchResult(int, SongList)),
-          SLOT(AlbumSearchResult(int, SongList)));
+  connect(service_, SIGNAL(AlbumSearchResult(int, QList<SongList>)),
+          SLOT(AlbumSearchResult(int, QList<SongList>)));
   connect(service_, SIGNAL(AlbumSongsLoaded(int, SongList)),
           SLOT(AlbumSongsLoaded(int, SongList)));
 
@@ -83,19 +83,28 @@ void GroovesharkSearchProvider::SearchDone(int id, const SongList& songs) {
   MaybeSearchFinished(global_search_id);
 }
 
-void GroovesharkSearchProvider::AlbumSearchResult(int id, const SongList& songs) {
+void GroovesharkSearchProvider::AlbumSearchResult(int id, const QList<SongList>& albums) {
   // Map back to the original id.
   const PendingState state = pending_searches_.take(id);
   const int global_search_id = state.orig_id_;
 
   ResultList ret;
-  foreach (const Song& s, songs) {
+  foreach (const SongList& a, albums) {
+    if (a.isEmpty())
+      continue;
     Result result(this);
     result.type_ = globalsearch::Type_Album;
-    result.metadata_ = s;
+    const QString& artist = a.last().artist();
+    const QString& album  = a.last().album();
+    result.metadata_.set_album(album);
+    result.metadata_.set_artist(artist);
+    result.metadata_.set_art_automatic(a.last().art_automatic());
     result.match_quality_ =
-        qMin(MatchQuality(state.tokens_, s.album()),
-             MatchQuality(state.tokens_, s.artist()));
+        qMin(MatchQuality(state.tokens_, album),
+             MatchQuality(state.tokens_, artist));
+    foreach (const Song& s, a) {
+      result.album_songs_ << s;
+    }
 
     ret << result;
   }
@@ -140,9 +149,12 @@ void GroovesharkSearchProvider::LoadTracksAsync(int id, const Result& result) {
       break;
     }
 
-    case globalsearch::Type_Album:
-      FetchAlbum(id, result);
+    case globalsearch::Type_Album: {
+      InternetSongMimeData* mime_data = new InternetSongMimeData(service_);
+      mime_data->songs = result.album_songs_;
+      emit TracksLoaded(id, mime_data);
       break;
+    }
 
     default:
       Q_ASSERT(0);
@@ -156,10 +168,6 @@ bool GroovesharkSearchProvider::IsLoggedIn() {
 
 void GroovesharkSearchProvider::ShowConfig() {
   service_->ShowConfig();
-}
-
-void GroovesharkSearchProvider::FetchAlbum(int id, const Result& result) {
-  service_->FetchSongsForAlbum(id, result.metadata_.url());
 }
 
 void GroovesharkSearchProvider::AlbumSongsLoaded(int id, const SongList& songs) {

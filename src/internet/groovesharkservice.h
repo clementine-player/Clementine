@@ -113,8 +113,7 @@ class GroovesharkService : public InternetService {
 
   int SimpleSearch(const QString& query);
   int SearchAlbums(const QString& query);
-  void FetchSongsForAlbum(int id, const QUrl& url);
-  void FetchSongsForAlbum(int id, quint64 album_id);
+  SongList GetAlbumSongs(quint64 album_id);
 
   static const char* kServiceName;
   static const char* kSettingsGroup;
@@ -122,7 +121,7 @@ class GroovesharkService : public InternetService {
  signals:
   void LoginFinished(bool success);
   void SimpleSearchResults(int id, SongList songs);
-  void AlbumSearchResult(int id, SongList songs);
+  void AlbumSearchResult(int id, QList<SongList> albums);
   void AlbumSongsLoaded(int id, SongList songs);
 
  public slots:
@@ -151,7 +150,6 @@ class GroovesharkService : public InternetService {
   void SearchSongsFinished();
   void SimpleSearchFinished();
   void SearchAlbumsFinished(QNetworkReply* reply, int id);
-  void GetAlbumSongsFinished(QNetworkReply* reply, int id);
   void Authenticated();
   void UserPlaylistsRetrieved();
   void UserFavoritesRetrieved(QNetworkReply* reply, int task_id);

@@ -228,7 +228,7 @@ void GroovesharkService::SearchAlbumsFinished(QNetworkReply* reply, int id) {
   QVariantMap result = ExtractResult(reply);
   QVariantList albums = result["albums"].toList();
 
-  SongList ret;
+  QList<SongList> ret;
   foreach (const QVariant& v, albums) {
     QVariantMap album = v.toMap();
     quint64 album_id = album["AlbumID"].toULongLong();
@@ -237,45 +237,22 @@ void GroovesharkService::SearchAlbumsFinished(QNetworkReply* reply, int id) {
     QString cover_art = album["CoverArtFilename"].toString();
 
     qLog(Debug) << "Found:" << album_name << artist_name;
-    Song song;
-    song.Init(QString::null, album_name, artist_name, 0);
-    song.set_art_automatic(QString(kUrlCover) + cover_art);
-    QUrl url;
-    url.setScheme("grooveshark");
-    url.setPath(QString("album/%1").arg(album_id));
-    song.set_url(url);
 
-    ret << song;
+    ret << GetAlbumSongs(album_id);
   }
 
   emit AlbumSearchResult(id, ret);
 }
 
-void GroovesharkService::FetchSongsForAlbum(int id, const QUrl& url) {
-  QStringList split = url.path().split('/');
-  Q_ASSERT(split.length() == 2);
-  FetchSongsForAlbum(id, split[1].toULongLong());
-}
-
-void GroovesharkService::FetchSongsForAlbum(int id, quint64 album_id) {
+SongList GroovesharkService::GetAlbumSongs(quint64 album_id) {
   QList<Param> parameters;
   parameters << Param("albumID", album_id)
              << Param("country", "");
-
   QNetworkReply* reply = CreateRequest("getAlbumSongs", parameters);
-  NewClosure(reply, SIGNAL(finished()),
-             this, SLOT(GetAlbumSongsFinished(QNetworkReply*,int)),
-             reply, id);
-}
-
-void GroovesharkService::GetAlbumSongsFinished(
-    QNetworkReply* reply, int id) {
-  reply->deleteLater();
-
+  if (!WaitForReply(reply))
+    return SongList();
   QVariantMap result = ExtractResult(reply);
-  SongList songs = ExtractSongs(result);
-
-  emit AlbumSongsLoaded(id, songs);
+  return ExtractSongs(result);
 }
 
 void GroovesharkService::DoSearch() {
