@@ -595,6 +595,7 @@ boost::shared_ptr<ConnectedDevice> DeviceManager::Connect(int row) {
   QObject* instance = meta_object.newInstance(
       Q_ARG(QUrl, device_url), Q_ARG(DeviceLister*, info.BestBackend()->lister_),
       Q_ARG(QString, info.BestBackend()->unique_id_), Q_ARG(DeviceManager*, this),
+      Q_ARG(Application*, app_),
       Q_ARG(int, info.database_id_), Q_ARG(bool, first_time));
   ret.reset(static_cast<ConnectedDevice*>(instance));
 

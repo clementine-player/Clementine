@@ -35,6 +35,7 @@ class WmdmDevice : public ConnectedDevice {
 public:
   Q_INVOKABLE WmdmDevice(const QUrl& url, DeviceLister* lister,
                          const QString& unique_id, DeviceManager* manager,
+                         Application* app,
                          int database_id, bool first_time);
   ~WmdmDevice();
 

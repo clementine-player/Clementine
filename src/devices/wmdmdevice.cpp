@@ -21,6 +21,7 @@
 #include "wmdmloader.h"
 #include "wmdmprogress.h"
 #include "wmdmthread.h"
+#include "core/application.h"
 #include "core/logging.h"
 #include "core/utilities.h"
 #include "library/librarybackend.h"
@@ -35,8 +36,9 @@
 
 WmdmDevice::WmdmDevice(const QUrl& url, DeviceLister* lister,
                        const QString& unique_id, DeviceManager* manager,
+                       Application* app,
                        int database_id, bool first_time)
-    : ConnectedDevice(url, lister, unique_id, manager, database_id, first_time),
+    : ConnectedDevice(url, lister, unique_id, manager, app, database_id, first_time),
       loader_thread_(new QThread(this)),
       loader_(NULL)
 {
@@ -49,7 +51,7 @@ void WmdmDevice::Init() {
   InitBackendDirectory("/", first_time_, false);
   model_->Init();
 
-  loader_ = new WmdmLoader(manager_->task_manager(), backend_, shared_from_this());
+  loader_ = new WmdmLoader(app_->task_manager(), backend_, shared_from_this());
   loader_->moveToThread(loader_thread_);
 
   connect(loader_, SIGNAL(Error(QString)), SIGNAL(Error(QString)));
