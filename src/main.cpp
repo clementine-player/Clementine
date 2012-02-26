@@ -41,6 +41,7 @@
 #include "covers/discogscoverprovider.h"
 #include "covers/coverproviders.h"
 #include "engines/enginebase.h"
+#include "globalsearch/searchprovider.h"
 #include "internet/digitallyimportedclient.h"
 #include "internet/somafmservice.h"
 #include "library/directory.h"
