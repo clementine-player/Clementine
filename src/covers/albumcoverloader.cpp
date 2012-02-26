@@ -37,7 +37,7 @@
 AlbumCoverLoader::AlbumCoverLoader(QObject* parent)
   : QObject(parent),
     stop_requested_(false),
-    next_id_(0),
+    next_id_(1),
     network_(new NetworkAccessManager(this)),
     connected_spotify_(false)
 {
