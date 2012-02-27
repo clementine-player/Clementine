@@ -28,6 +28,7 @@
 #include "core/commandlineoptions.h"
 #include "core/crashreporting.h"
 #include "core/encoding.h"
+#include "core/database.h"
 #include "core/logging.h"
 #include "core/mac_startup.h"
 #include "core/network.h"
