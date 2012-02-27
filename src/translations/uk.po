@@ -47,17 +47,17 @@ msgstr " секунд"
 msgid " songs"
 msgstr " композицій"
 
-#: widgets/osd.cpp:209
+#: widgets/osd.cpp:188
 #, qt-format
 msgid "%1 albums"
 msgstr "%1 альбом(ів)"
 
-#: core/utilities.cpp:92
+#: core/utilities.cpp:99
 #, qt-format
 msgid "%1 days"
 msgstr "%1 д."
 
-#: core/utilities.cpp:113
+#: core/utilities.cpp:120
 #, qt-format
 msgid "%1 days ago"
 msgstr "%1 день тому"
@@ -67,17 +67,17 @@ msgstr "%1 день тому"
 msgid "%1 playlists (%2)"
 msgstr "%1 списків відтворення (%2)"
 
-#: playlist/playlistmanager.cpp:302
+#: playlist/playlistmanager.cpp:308
 #, qt-format
 msgid "%1 selected of"
 msgstr "вибрано з %1"
 
-#: devices/deviceview.cpp:122
+#: devices/deviceview.cpp:123
 #, qt-format
 msgid "%1 song"
 msgstr "%1 композиція"
 
-#: devices/deviceview.cpp:124
+#: devices/deviceview.cpp:125
 #, qt-format
 msgid "%1 songs"
 msgstr "%1 пісень"
@@ -92,18 +92,18 @@ msgstr "Знайдено %1 пісень"
 msgid "%1 songs found (showing %2)"
 msgstr "Знайдено %1 пісень (показано %2)"
 
-#: playlist/playlistmanager.cpp:308
+#: playlist/playlistmanager.cpp:314
 #, qt-format
 msgid "%1 tracks"
 msgstr "%1 доріжок"
 
-#: ui/albumcovermanager.cpp:437
+#: ui/albumcovermanager.cpp:430
 #, qt-format
 msgid "%1 transferred"
 msgstr "%1 передано"
 
-#: widgets/osd.cpp:259 widgets/osd.cpp:264 widgets/osd.cpp:269
-#: widgets/osd.cpp:274 widgets/osd.cpp:279 widgets/osd.cpp:284
+#: widgets/osd.cpp:238 widgets/osd.cpp:243 widgets/osd.cpp:248
+#: widgets/osd.cpp:253 widgets/osd.cpp:258 widgets/osd.cpp:263
 #, qt-format
 msgid "%1: Wiimotedev module"
 msgstr "%1: Модуль Wiimotedev"
@@ -206,7 +206,7 @@ msgstr "Розтягнути стовпчики відповідно вміст�
 msgid "&Tools"
 msgstr "&Інструменти"
 
-#: ui/edittagdialog.cpp:47
+#: ui/edittagdialog.cpp:48
 msgid "(different across multiple songs)"
 msgstr "(відрізняється поміж багатьма піснями)"
 
@@ -218,11 +218,11 @@ msgstr "…та всім розробникам Amarok"
 msgid "0:00:00"
 msgstr "0:00:00"
 
-#: core/utilities.cpp:92
+#: core/utilities.cpp:99
 msgid "1 day"
 msgstr "1 день"
 
-#: playlist/playlistmanager.cpp:308
+#: playlist/playlistmanager.cpp:314
 msgid "1 track"
 msgstr "1 доріжка"
 
@@ -231,7 +231,7 @@ msgstr "1 доріжка"
 msgid "128k MP3"
 msgstr "128k MP3"
 
-#: library/library.cpp:56
+#: library/library.cpp:58
 msgid "50 random tracks"
 msgstr "50 випадкових доріжок"
 
@@ -343,7 +343,7 @@ msgstr "Додати дію"
 msgid "Add and play now"
 msgstr "Додати і відтворити зараз"
 
-#: internet/savedradio.cpp:103
+#: internet/savedradio.cpp:104
 msgid "Add another stream..."
 msgstr "Додати інший потік…"
 
@@ -351,7 +351,7 @@ msgstr "Додати інший потік…"
 msgid "Add directory..."
 msgstr "Додати теку…"
 
-#: ui/mainwindow.cpp:1574
+#: ui/mainwindow.cpp:1522
 msgid "Add file"
 msgstr "Додати файл"
 
@@ -363,7 +363,7 @@ msgstr "Додати файл…"
 msgid "Add files to transcode"
 msgstr "Додати файли для перекодування"
 
-#: ui/mainwindow.cpp:1602
+#: ui/mainwindow.cpp:1550
 msgid "Add folder"
 msgstr "Додати теку"
 
@@ -435,15 +435,15 @@ msgstr "Додати мітку року пісні"
 msgid "Add stream..."
 msgstr "Додати потік…"
 
-#: internet/groovesharkservice.cpp:1018
+#: internet/groovesharkservice.cpp:996
 msgid "Add to Grooveshark favorites"
 msgstr "Додати до улюблених на Grooveshark"
 
-#: internet/groovesharkservice.cpp:1024
+#: internet/groovesharkservice.cpp:1002
 msgid "Add to Grooveshark playlists"
 msgstr "Додати до списків відтворення Grooveshark"
 
-#: ui/mainwindow.cpp:1399
+#: ui/mainwindow.cpp:1347
 msgid "Add to another playlist"
 msgstr "Додати до іншого списку відтворення"
 
@@ -485,7 +485,7 @@ msgstr "Додано сьогодні"
 msgid "Added within three months"
 msgstr "Додано за три місяці"
 
-#: internet/groovesharkservice.cpp:1270
+#: internet/groovesharkservice.cpp:1248
 msgid "Adding song to favorites"
 msgstr "Додавання пісні до улюблених"
 
@@ -520,11 +520,11 @@ msgstr "Виконавець альбому"
 msgid "Album info on jamendo.com..."
 msgstr "Дані про альбом на jamendo.com…"
 
-#: ui/albumcovermanager.cpp:119
+#: ui/albumcovermanager.cpp:121
 msgid "Albums with covers"
 msgstr "Альбоми з обкладинками"
 
-#: ui/albumcovermanager.cpp:120
+#: ui/albumcovermanager.cpp:122
 msgid "Albums without covers"
 msgstr "Альбоми без обкладинок"
 
@@ -536,15 +536,15 @@ msgstr "Всі файли (*)"
 msgid "All Glory to the Hypnotoad!"
 msgstr "Вся слава Гіпножабі!"
 
-#: ui/albumcovermanager.cpp:118
+#: ui/albumcovermanager.cpp:120
 msgid "All albums"
 msgstr "Всі альбоми"
 
-#: ui/albumcovermanager.cpp:263
+#: ui/albumcovermanager.cpp:257
 msgid "All artists"
 msgstr "Всі виконавці"
 
-#: ui/albumcoverchoicecontroller.cpp:45
+#: ui/albumcoverchoicecontroller.cpp:47
 msgid "All files (*)"
 msgstr "Всі файли (*)"
 
@@ -557,7 +557,7 @@ msgstr "Всі списки відтворення (%1)"
 msgid "All the translators"
 msgstr "Всім перекладачам"
 
-#: library/library.cpp:80
+#: library/library.cpp:82
 msgid "All tracks"
 msgstr "Всі доріжки"
 
@@ -582,17 +582,17 @@ msgstr "Завжди показувати головне вікно"
 msgid "Always start playing"
 msgstr "Завжди починати відтворення"
 
-#: internet/spotifyblobdownloader.cpp:59
+#: internet/spotifyblobdownloader.cpp:60
 msgid ""
 "An additional plugin is required to use Spotify in Clementine.  Would you "
 "like to download and install it now?"
 msgstr "Для користування Spotify в Clementine, потрібний додатковий модуль. Завантажити і встановити його зараз?"
 
-#: devices/afcdevice.cpp:62
+#: devices/afcdevice.cpp:63
 msgid "An error occurred copying the iTunes database from the device"
 msgstr "Виникла помилка копіювання бази даних iTunes з пристрою"
 
-#: devices/afcdevice.cpp:156
+#: devices/afcdevice.cpp:157
 msgid "An error occurred copying the iTunes database onto the device"
 msgstr "Виникла помилка копіювання бази даних iTunes на пристрій"
 
@@ -600,12 +600,12 @@ msgstr "Виникла помилка копіювання бази даних i
 msgid "An error occurred loading the iTunes database"
 msgstr "Виникла помилка завантаження бази даних iTunes"
 
-#: ui/edittagdialog.cpp:658
+#: ui/edittagdialog.cpp:655
 #, qt-format
 msgid "An error occurred writing metadata to '%1'"
 msgstr "Трапилася помилка під час запису метаданих до '%1'"
 
-#: internet/lastfmservice.cpp:918
+#: internet/lastfmservice.cpp:919
 #, qt-format
 msgid "An unknown last.fm error occurred: %1"
 msgstr "Виникла невідома помилка last.fm: %1"
@@ -623,8 +623,8 @@ msgstr "Вигляд"
 msgid "Append files/URLs to the playlist"
 msgstr "Додати файли/адреси до списку відтворення"
 
-#: devices/deviceview.cpp:216 internet/internetservice.cpp:53
-#: library/libraryview.cpp:244 widgets/fileviewlist.cpp:32
+#: devices/deviceview.cpp:211 internet/internetservice.cpp:55
+#: library/libraryview.cpp:230 widgets/fileviewlist.cpp:32
 msgid "Append to current playlist"
 msgstr "Додати до списку відтворення"
 
@@ -641,11 +641,11 @@ msgstr "Застосувати стиснення для запобігання 
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "Ви дійсно хочете вилучити задане \"%1\"?"
 
-#: internet/groovesharkservice.cpp:1193
+#: internet/groovesharkservice.cpp:1171
 msgid "Are you sure you want to delete this playlist?"
 msgstr "Ви справді хочете вилучити цей список відтворення?"
 
-#: ui/edittagdialog.cpp:764
+#: ui/edittagdialog.cpp:761
 msgid "Are you sure you want to reset this song's statistics?"
 msgstr "Впевнені, що бажаєте скинути статистику цієї композиції?"
 
@@ -659,11 +659,11 @@ msgstr "Впевнені, що бажаєте скинути статистик�
 msgid "Artist"
 msgstr "Виконавець"
 
-#: ui/mainwindow.cpp:258
+#: ui/mainwindow.cpp:229
 msgid "Artist info"
 msgstr "Про виконавця"
 
-#: internet/lastfmservice.cpp:206
+#: internet/lastfmservice.cpp:207
 msgid "Artist radio"
 msgstr "Радіо виконавця"
 
@@ -684,7 +684,7 @@ msgid "Authenticating..."
 msgstr "Автентифікація…"
 
 #: internet/digitallyimportedsettingspage.cpp:82
-#: internet/magnatunesettingspage.cpp:113 internet/lastfmservice.cpp:447
+#: internet/magnatunesettingspage.cpp:113 internet/lastfmservice.cpp:448
 #: internet/lastfmsettingspage.cpp:78 remote/remotesettingspage.cpp:113
 msgid "Authentication failed"
 msgstr "Помилка автентификації"
@@ -819,11 +819,11 @@ msgstr "Кнопки"
 msgid "CDDA"
 msgstr "CDDA"
 
-#: library/library.cpp:96
+#: library/library.cpp:98
 msgid "CUE sheet support"
 msgstr "Підтримка листів CUE"
 
-#: internet/spotifyblobdownloader.cpp:43
+#: internet/spotifyblobdownloader.cpp:44
 msgid "Cancel"
 msgstr "Скасувати"
 
@@ -851,7 +851,7 @@ msgstr "Змінити режим перемішування"
 msgid "Change the language"
 msgstr "Змінити мову"
 
-#: ui/mainwindow.cpp:601
+#: ui/mainwindow.cpp:560
 msgid "Check for updates..."
 msgstr "Перевірити оновлення…"
 
@@ -952,7 +952,7 @@ msgstr "Переглядач зображень Clementine"
 msgid "Clementine was unable to find results for this file"
 msgstr "Clementine не зміг здобути результатів для цього файлу"
 
-#: library/libraryview.cpp:226
+#: library/libraryview.cpp:212
 msgid "Click here to add some music"
 msgstr "Клацніть тут, щоб додати музику"
 
@@ -972,7 +972,7 @@ msgstr "Закрити візуалізацію"
 msgid "Closing this window will cancel the download."
 msgstr "Закриття цього вікна скасує завантаження."
 
-#: ui/albumcovermanager.cpp:213
+#: ui/albumcovermanager.cpp:211
 msgid "Closing this window will stop searching for album covers."
 msgstr "Закриття цього вікна зупинить пошук обкладинок альбомів."
 
@@ -1015,15 +1015,15 @@ msgstr "Заповнити мітки автоматично…"
 msgid "Composer"
 msgstr "Композитор"
 
-#: internet/groovesharkservice.cpp:517
+#: internet/groovesharkservice.cpp:495
 msgid "Configure Grooveshark..."
 msgstr "Налаштувати Grooveshark…"
 
-#: internet/lastfmservice.cpp:126
+#: internet/lastfmservice.cpp:127
 msgid "Configure Last.fm..."
 msgstr "Налаштування Last.fm…"
 
-#: internet/magnatuneservice.cpp:277
+#: internet/magnatuneservice.cpp:278
 msgid "Configure Magnatune..."
 msgstr "Налаштувати Magnatune…"
 
@@ -1031,15 +1031,15 @@ msgstr "Налаштувати Magnatune…"
 msgid "Configure Shortcuts"
 msgstr "Налаштування комбінацій клавіш"
 
-#: internet/spotifyservice.cpp:491
+#: internet/spotifyservice.cpp:492
 msgid "Configure Spotify..."
 msgstr "Налаштування Spotify…"
 
-#: ui/mainwindow.cpp:495
+#: ui/mainwindow.cpp:454
 msgid "Configure library..."
 msgstr "Налаштувати фонотеку"
 
-#: internet/digitallyimportedservicebase.cpp:185
+#: internet/digitallyimportedservicebase.cpp:187
 #: ../bin/src/ui_globalsearchsettingspage.h:174
 msgid "Configure..."
 msgstr "Налаштувати…"
@@ -1052,7 +1052,7 @@ msgstr "Під’єднати Wii Remotes через дію активувати
 msgid "Connect device"
 msgstr "З’єднати пристрій"
 
-#: internet/spotifyservice.cpp:246
+#: internet/spotifyservice.cpp:247
 msgid "Connecting to Spotify"
 msgstr "З'єднання зі Spotify"
 
@@ -1068,16 +1068,16 @@ msgstr "Конвертувати всю музику"
 msgid "Convert any music that the device can't play"
 msgstr "Конвертувати всю музику, яку не може відтворити пристрій"
 
-#: internet/groovesharkservice.cpp:1071
+#: internet/groovesharkservice.cpp:1049
 msgid "Copy to clipboard"
 msgstr "Копіювати до буфера"
 
-#: library/libraryview.cpp:266 ui/mainwindow.cpp:528
+#: library/libraryview.cpp:252 ui/mainwindow.cpp:487
 #: widgets/fileviewlist.cpp:44
 msgid "Copy to device..."
 msgstr "Копіювати до пристрою…"
 
-#: devices/deviceview.cpp:223 ui/mainwindow.cpp:525
+#: devices/deviceview.cpp:218 ui/mainwindow.cpp:484
 #: widgets/fileviewlist.cpp:39
 msgid "Copy to library..."
 msgstr "Скопіювати до фонотеки…"
@@ -1107,7 +1107,7 @@ msgid ""
 "plugins installed"
 msgstr "Не вдалось знайти кодер для %1, перевірте чи правильно встановлений модуль GStreamer"
 
-#: internet/lastfmservice.cpp:915
+#: internet/lastfmservice.cpp:916
 msgid "Couldn't load the last.fm radio station"
 msgstr "Не вдалось завантажити радіостанцію last.fm"
 
@@ -1121,34 +1121,34 @@ msgstr "Не вдалось відкрити вихідний файл %1"
 msgid "Cover Manager"
 msgstr "Менеджер обкладинок"
 
-#: ui/edittagdialog.cpp:439
+#: ui/edittagdialog.cpp:435
 msgid "Cover art from embedded image"
 msgstr "Обкладинка з вбудованого малюнка"
 
-#: ui/edittagdialog.cpp:441
+#: ui/edittagdialog.cpp:437
 #, qt-format
 msgid "Cover art loaded automatically from %1"
 msgstr "Обкладинку завантажено з %1"
 
-#: ui/edittagdialog.cpp:434
+#: ui/edittagdialog.cpp:430
 msgid "Cover art manually unset"
 msgstr "Обкладинку прибрано вручну"
 
-#: ui/edittagdialog.cpp:443
+#: ui/edittagdialog.cpp:439
 msgid "Cover art not set"
 msgstr "Обкладинку не встановлено"
 
-#: ui/edittagdialog.cpp:437
+#: ui/edittagdialog.cpp:433
 #, qt-format
 msgid "Cover art set from %1"
 msgstr "Обкладинку встановлено з %1"
 
-#: covers/coversearchstatisticsdialog.cpp:60 ui/albumcoversearcher.cpp:104
+#: covers/coversearchstatisticsdialog.cpp:60 ui/albumcoversearcher.cpp:106
 #, qt-format
 msgid "Covers from %1"
 msgstr "Обкладинки з %1"
 
-#: internet/groovesharkservice.cpp:496 internet/groovesharkservice.cpp:1144
+#: internet/groovesharkservice.cpp:474 internet/groovesharkservice.cpp:1122
 msgid "Create a new Grooveshark playlist"
 msgstr "Створити список відтворення Grooveshark"
 
@@ -1244,7 +1244,7 @@ msgstr "Нетипове зображення:"
 msgid "Custom message settings"
 msgstr "Власні налаштування повідомлень"
 
-#: internet/lastfmservice.cpp:214
+#: internet/lastfmservice.cpp:215
 msgid "Custom radio"
 msgstr "Інша радіостанція"
 
@@ -1296,20 +1296,20 @@ msgstr "Типові значення"
 msgid "Delay between visualizations"
 msgstr "Затримка між візуалізаціями"
 
-#: internet/groovesharkservice.cpp:499 internet/groovesharkservice.cpp:1192
+#: internet/groovesharkservice.cpp:477 internet/groovesharkservice.cpp:1170
 msgid "Delete Grooveshark playlist"
 msgstr "Вилучити список відтворення Grooveshark"
 
-#: devices/deviceview.cpp:393 library/libraryview.cpp:485
-#: ui/mainwindow.cpp:1853 widgets/fileview.cpp:186
+#: devices/deviceview.cpp:388 library/libraryview.cpp:471
+#: ui/mainwindow.cpp:1799 widgets/fileview.cpp:186
 msgid "Delete files"
 msgstr "Вилучити файли"
 
-#: devices/deviceview.cpp:225
+#: devices/deviceview.cpp:220
 msgid "Delete from device..."
 msgstr "Вилучити з пристрою…"
 
-#: library/libraryview.cpp:268 ui/mainwindow.cpp:529
+#: library/libraryview.cpp:254 ui/mainwindow.cpp:488
 #: widgets/fileviewlist.cpp:45
 msgid "Delete from disk..."
 msgstr "Вилучити з диска…"
@@ -1318,7 +1318,7 @@ msgstr "Вилучити з диска…"
 msgid "Delete preset"
 msgstr "Скинути налаштування"
 
-#: library/libraryview.cpp:260
+#: library/libraryview.cpp:246
 msgid "Delete smart playlist"
 msgstr "Видалити розумний список відтворення"
 
@@ -1330,11 +1330,11 @@ msgstr "Вилучити оригінальні файли"
 msgid "Deleting files"
 msgstr "Вилучення файлів"
 
-#: ui/mainwindow.cpp:1335
+#: ui/mainwindow.cpp:1283
 msgid "Dequeue selected tracks"
 msgstr "Вилучити з черги вибрані доріжки"
 
-#: ui/mainwindow.cpp:1333
+#: ui/mainwindow.cpp:1281
 msgid "Dequeue track"
 msgstr "Вилучити з черги доріжки"
 
@@ -1358,11 +1358,11 @@ msgstr "Налаштування пристрою"
 msgid "Device name"
 msgstr "Назва пристрою"
 
-#: devices/deviceview.cpp:212
+#: devices/deviceview.cpp:207
 msgid "Device properties..."
 msgstr "Налаштування пристрою…"
 
-#: ui/mainwindow.cpp:255
+#: ui/mainwindow.cpp:226
 msgid "Devices"
 msgstr "Пристрої"
 
@@ -1425,23 +1425,23 @@ msgstr "Повторити повне сканування фонотеки"
 msgid "Do not convert any music"
 msgstr "Не конвертувати ніяку музику"
 
-#: widgets/osd.cpp:307 ../bin/src/ui_playlistsequence.h:103
+#: widgets/osd.cpp:286 ../bin/src/ui_playlistsequence.h:103
 msgid "Don't repeat"
 msgstr "Не повторювати"
 
-#: library/libraryview.cpp:282
+#: library/libraryview.cpp:268
 msgid "Don't show in various artists"
 msgstr "Не показувати в «різних виконавцях»"
 
-#: widgets/osd.cpp:294 ../bin/src/ui_playlistsequence.h:107
+#: widgets/osd.cpp:273 ../bin/src/ui_playlistsequence.h:107
 msgid "Don't shuffle"
 msgstr "Не перемішувати"
 
-#: internet/magnatunedownloaddialog.cpp:282 ui/albumcovermanager.cpp:215
+#: internet/magnatunedownloaddialog.cpp:282 ui/albumcovermanager.cpp:213
 msgid "Don't stop!"
 msgstr "Не зупиняти!"
 
-#: devices/deviceview.cpp:114
+#: devices/deviceview.cpp:115
 msgid "Double click to open"
 msgstr "Подвійне клацання, щоб відкрити"
 
@@ -1457,7 +1457,7 @@ msgstr "Тека завантаження"
 msgid "Download membership"
 msgstr "Завантажити членство"
 
-#: internet/magnatuneservice.cpp:273
+#: internet/magnatuneservice.cpp:274
 msgid "Download this album"
 msgstr "Завантажити цей альбом"
 
@@ -1469,7 +1469,7 @@ msgstr "Завантажити цей альбом…"
 msgid "Download..."
 msgstr "Звантажити…"
 
-#: internet/icecastservice.cpp:97
+#: internet/icecastservice.cpp:99
 msgid "Downloading Icecast directory"
 msgstr "Завантажую каталог Icecast"
 
@@ -1477,11 +1477,11 @@ msgstr "Завантажую каталог Icecast"
 msgid "Downloading Jamendo catalogue"
 msgstr "Завантажую каталог Jamendo"
 
-#: internet/magnatuneservice.cpp:156
+#: internet/magnatuneservice.cpp:157
 msgid "Downloading Magnatune catalogue"
 msgstr "Завантаження каталогу Magnatune"
 
-#: internet/spotifyblobdownloader.cpp:43
+#: internet/spotifyblobdownloader.cpp:44
 msgid "Downloading Spotify plugin"
 msgstr "Завантаження модуля Spotify"
 
@@ -1501,15 +1501,15 @@ msgstr "Літера диска"
 msgid "Dynamic mode is on"
 msgstr "Динамічний режим увімкнено"
 
-#: internet/jamendoservice.cpp:111 library/library.cpp:89
+#: internet/jamendoservice.cpp:112 library/library.cpp:91
 msgid "Dynamic random mix"
 msgstr "Динамічний випадковий мікс"
 
-#: library/libraryview.cpp:258
+#: library/libraryview.cpp:244
 msgid "Edit smart playlist..."
 msgstr "Редагувати розумний список відтворення…"
 
-#: ui/mainwindow.cpp:1368
+#: ui/mainwindow.cpp:1316
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "Редагувати мітку \"%1\""
@@ -1526,16 +1526,16 @@ msgstr "Редагувати мітки"
 msgid "Edit track information"
 msgstr "Редагувати дані доріжки"
 
-#: library/libraryview.cpp:272 widgets/fileviewlist.cpp:50
+#: library/libraryview.cpp:258 widgets/fileviewlist.cpp:50
 #: ../bin/src/ui_mainwindow.h:659
 msgid "Edit track information..."
 msgstr "Редагувати дані про доріжку…"
 
-#: library/libraryview.cpp:274
+#: library/libraryview.cpp:260
 msgid "Edit tracks information..."
 msgstr "Редагувати дані про доріжки…"
 
-#: internet/savedradio.cpp:101
+#: internet/savedradio.cpp:102
 msgid "Edit..."
 msgstr "Змінити…"
 
@@ -1612,9 +1612,9 @@ msgstr "Відповідає --log-levels *:1"
 msgid "Equivalent to --log-levels *:3"
 msgstr "Відповідає --log-levels *:3"
 
-#: internet/groovesharkservice.cpp:954
-#: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:479
-#: ui/mainwindow.cpp:1805 ui/mainwindow.cpp:1926
+#: internet/groovesharkservice.cpp:932
+#: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:465
+#: ui/mainwindow.cpp:1751 ui/mainwindow.cpp:1872
 msgid "Error"
 msgstr "Помилка"
 
@@ -1630,7 +1630,7 @@ msgstr "Помилка копіювання композицій"
 msgid "Error deleting songs"
 msgstr "Помилка вилучення композицій"
 
-#: internet/spotifyblobdownloader.cpp:214
+#: internet/spotifyblobdownloader.cpp:215
 msgid "Error downloading Spotify plugin"
 msgstr "Помилка завантаження модуля Spotify"
 
@@ -1639,8 +1639,8 @@ msgstr "Помилка завантаження модуля Spotify"
 msgid "Error loading %1"
 msgstr "Помилка завантаження %1"
 
-#: internet/digitallyimportedservicebase.cpp:207
-#: internet/digitallyimportedurlhandler.cpp:82
+#: internet/digitallyimportedservicebase.cpp:209
+#: internet/digitallyimportedurlhandler.cpp:85
 msgid "Error loading di.fm playlist"
 msgstr "Помилка завантаження списку відтворення di.fm"
 
@@ -1653,7 +1653,7 @@ msgstr "Помилка обробляння %1: %2"
 msgid "Error while loading audio CD"
 msgstr "Помилка завантаження аудіо CD"
 
-#: library/library.cpp:59
+#: library/library.cpp:61
 msgid "Ever played"
 msgstr "Будь-коли відтворений"
 
@@ -1717,11 +1717,11 @@ msgstr "Тривалість згасання"
 msgid "Fast"
 msgstr "Швидко"
 
-#: internet/groovesharkservice.cpp:575
+#: internet/groovesharkservice.cpp:553
 msgid "Favorites"
 msgstr "Улюблені"
 
-#: library/library.cpp:73
+#: library/library.cpp:75
 msgid "Favourite tracks"
 msgstr "Улюблені композиції"
 
@@ -1771,7 +1771,7 @@ msgstr "Тип файлу"
 msgid "Filename"
 msgstr "Назва файлу"
 
-#: ui/mainwindow.cpp:253
+#: ui/mainwindow.cpp:224
 msgid "Files"
 msgstr "Файли"
 
@@ -1823,12 +1823,12 @@ msgstr "З підстав ліцензування, для підтримки Sp
 msgid "Force mono encoding"
 msgstr "Примусове моно-кодування"
 
-#: devices/deviceview.cpp:209 devices/deviceview.cpp:315
-#: devices/deviceview.cpp:319
+#: devices/deviceview.cpp:204 devices/deviceview.cpp:310
+#: devices/deviceview.cpp:314
 msgid "Forget device"
 msgstr "Забути пристрій"
 
-#: devices/deviceview.cpp:316
+#: devices/deviceview.cpp:311
 msgid ""
 "Forgetting a device will remove it from this list and Clementine will have "
 "to rescan all the songs again next time you connect it."
@@ -1866,7 +1866,7 @@ msgstr "Частота кадрів"
 msgid "Frames per buffer"
 msgstr "Кадрів на буфер"
 
-#: internet/lastfmservice.cpp:222
+#: internet/lastfmservice.cpp:223
 msgid "Friends"
 msgstr "Друзі"
 
@@ -1900,19 +1900,19 @@ msgstr "Загальні налаштування"
 msgid "Genre"
 msgstr "Жанр"
 
-#: internet/groovesharkservice.cpp:1035
+#: internet/groovesharkservice.cpp:1013
 msgid "Get an URL to share this Grooveshark song"
 msgstr "Отримати адресу для оприлюднення цієї пісні на Grooveshark"
 
-#: internet/groovesharkservice.cpp:722
+#: internet/groovesharkservice.cpp:700
 msgid "Getting Grooveshark popular songs"
 msgstr "Отримання популярних пісень з Grooveshark"
 
-#: internet/somafmservice.cpp:95
+#: internet/somafmservice.cpp:96
 msgid "Getting channels"
 msgstr "Отримання каналів"
 
-#: internet/digitallyimportedservicebase.cpp:106
+#: internet/digitallyimportedservicebase.cpp:108
 msgid "Getting streams"
 msgstr "Отримання потоків"
 
@@ -1936,7 +1936,7 @@ msgstr "Пароль Google"
 msgid "Google username"
 msgstr "Ім’я користувача Google"
 
-#: covers/coversearchstatisticsdialog.cpp:54 ui/albumcovermanager.cpp:431
+#: covers/coversearchstatisticsdialog.cpp:54 ui/albumcovermanager.cpp:424
 #: ../bin/src/ui_coversearchstatisticsdialog.h:76
 #, qt-format
 msgid "Got %1 covers out of %2 (%3 failed)"
@@ -1950,15 +1950,15 @@ msgstr "Позначати сірим пісні у списках відтво�
 msgid "Grooveshark"
 msgstr "Grooveshark"
 
-#: internet/groovesharkservice.cpp:413
+#: internet/groovesharkservice.cpp:391
 msgid "Grooveshark login error"
 msgstr "Помилка під час спроби увійти до Grooveshark"
 
-#: internet/groovesharkservice.cpp:566
+#: internet/groovesharkservice.cpp:544
 msgid "Grooveshark radio"
 msgstr "Радіо Grooveshark"
 
-#: internet/groovesharkservice.cpp:1067
+#: internet/groovesharkservice.cpp:1045
 msgid "Grooveshark song's URL"
 msgstr "Адреса пісні у Grooveshark"
 
@@ -2067,11 +2067,11 @@ msgstr "Якщо ви використовуєте віддалене керув
 msgid "Ignore \"The\" in artist names"
 msgstr "Ігнорувати «The» в іменах виконавців"
 
-#: ui/albumcoverchoicecontroller.cpp:41
+#: ui/albumcoverchoicecontroller.cpp:43
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
 msgstr "Зображення (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
 
-#: ui/albumcoverchoicecontroller.cpp:43
+#: ui/albumcoverchoicecontroller.cpp:45
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgstr "Зображення (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 
@@ -2081,7 +2081,7 @@ msgid ""
 "time a song finishes."
 msgstr "У динамічному режимі нові доріжку буде обрано та додано до списку відтворення кожного разу як завершується пісня."
 
-#: internet/spotifyservice.cpp:347
+#: internet/spotifyservice.cpp:348
 msgid "Inbox"
 msgstr "Вхідні"
 
@@ -2117,7 +2117,7 @@ msgstr "Вставити…"
 msgid "Installed"
 msgstr "Встановлено"
 
-#: ui/mainwindow.cpp:254
+#: ui/mainwindow.cpp:225
 msgid "Internet"
 msgstr "Інтернет"
 
@@ -2125,55 +2125,55 @@ msgstr "Інтернет"
 msgid "Internet providers"
 msgstr "Інтернет-джерела"
 
-#: internet/lastfmservice.cpp:453
+#: internet/lastfmservice.cpp:454
 msgid "Invalid API key"
 msgstr "Неправильний ключ API"
 
-#: internet/lastfmservice.cpp:448
+#: internet/lastfmservice.cpp:449
 msgid "Invalid format"
 msgstr "Не чинний формат"
 
-#: internet/lastfmservice.cpp:446
+#: internet/lastfmservice.cpp:447
 msgid "Invalid method"
 msgstr "Неправильний метод"
 
-#: internet/lastfmservice.cpp:449
+#: internet/lastfmservice.cpp:450
 msgid "Invalid parameters"
 msgstr "Неправильні параметри"
 
-#: internet/lastfmservice.cpp:450
+#: internet/lastfmservice.cpp:451
 msgid "Invalid resource specified"
 msgstr "Неправильно вказане джерело"
 
-#: internet/lastfmservice.cpp:445
+#: internet/lastfmservice.cpp:446
 msgid "Invalid service"
 msgstr "Нечинна служба"
 
-#: internet/lastfmservice.cpp:452
+#: internet/lastfmservice.cpp:453
 msgid "Invalid session key"
 msgstr "Неправильний ключ сеансу"
 
-#: internet/groovesharkservice.cpp:406
+#: internet/groovesharkservice.cpp:384
 msgid "Invalid username and/or password"
 msgstr "Некоректне ім’я користувача і/або пароль"
 
-#: internet/jamendoservice.cpp:124
+#: internet/jamendoservice.cpp:125
 msgid "Jamendo"
 msgstr "Jamendo"
 
-#: internet/jamendoservice.cpp:107
+#: internet/jamendoservice.cpp:108
 msgid "Jamendo Most Listened Tracks"
 msgstr "Композиції Jamendo, що прослуховувалися найбільше"
 
-#: internet/jamendoservice.cpp:105
+#: internet/jamendoservice.cpp:106
 msgid "Jamendo Top Tracks"
 msgstr "Найпопулярніші композиції Jamendo"
 
-#: internet/jamendoservice.cpp:101
+#: internet/jamendoservice.cpp:102
 msgid "Jamendo Top Tracks of the Month"
 msgstr "Найпопулярніші композиції місяця в Jamendo"
 
-#: internet/jamendoservice.cpp:103
+#: internet/jamendoservice.cpp:104
 msgid "Jamendo Top Tracks of the Week"
 msgstr "Найпопулярніші композиції тижня в Jamendo"
 
@@ -2229,7 +2229,7 @@ msgstr "Велика обкладинка альбому"
 msgid "Large sidebar"
 msgstr "Велика бічна панель"
 
-#: library/library.cpp:67 playlist/playlist.cpp:1128
+#: library/library.cpp:69 playlist/playlist.cpp:1128
 #: ../bin/src/ui_edittagdialog.h:641
 msgid "Last played"
 msgstr "Востаннє відтворено"
@@ -2238,45 +2238,45 @@ msgstr "Востаннє відтворено"
 msgid "Last.fm"
 msgstr "Last.fm"
 
-#: internet/lastfmservice.cpp:85
+#: internet/lastfmservice.cpp:86
 #, qt-format
 msgid "Last.fm Custom Radio: %1"
 msgstr "Last.fm Custom Radio: %1"
 
-#: internet/lastfmservice.cpp:253 internet/lastfmservice.cpp:709
-#: internet/lastfmservice.cpp:744
+#: internet/lastfmservice.cpp:254 internet/lastfmservice.cpp:710
+#: internet/lastfmservice.cpp:745
 #, qt-format
 msgid "Last.fm Library - %1"
 msgstr "Збірка Last.fm - %1"
 
-#: globalsearch/lastfmsearchprovider.cpp:75 internet/lastfmservice.cpp:255
-#: internet/lastfmservice.cpp:258
+#: globalsearch/lastfmsearchprovider.cpp:76 internet/lastfmservice.cpp:256
+#: internet/lastfmservice.cpp:259
 #, qt-format
 msgid "Last.fm Mix Radio - %1"
 msgstr "Last.fm Mix Radio - %1"
 
-#: globalsearch/lastfmsearchprovider.cpp:77 internet/lastfmservice.cpp:260
-#: internet/lastfmservice.cpp:263
+#: globalsearch/lastfmsearchprovider.cpp:78 internet/lastfmservice.cpp:261
+#: internet/lastfmservice.cpp:264
 #, qt-format
 msgid "Last.fm Neighbor Radio - %1"
 msgstr "Радіо сусідів Last.fm - %1"
 
-#: globalsearch/lastfmsearchprovider.cpp:73 internet/lastfmservice.cpp:250
+#: globalsearch/lastfmsearchprovider.cpp:74 internet/lastfmservice.cpp:251
 #, qt-format
 msgid "Last.fm Radio Station - %1"
 msgstr "Радіостанція Last.fm - %1"
 
-#: internet/lastfmservice.cpp:83
+#: internet/lastfmservice.cpp:84
 #, qt-format
 msgid "Last.fm Similar Artists to %1"
 msgstr "Подібні виконавці Last.fm на %1"
 
-#: internet/lastfmservice.cpp:84
+#: internet/lastfmservice.cpp:85
 #, qt-format
 msgid "Last.fm Tag Radio: %1"
 msgstr "Радіо мітки Last.fm: %1"
 
-#: internet/lastfmservice.cpp:457
+#: internet/lastfmservice.cpp:458
 msgid "Last.fm is currently busy, please try again in a few minutes"
 msgstr "На цей час Last.fm зайнятий, спробуйте через кілька хвилин"
 
@@ -2300,7 +2300,7 @@ msgstr "Користувач Last.fm"
 msgid "Last.fm wiki"
 msgstr "Вікі Last.fm"
 
-#: library/library.cpp:83
+#: library/library.cpp:85
 msgid "Least favourite tracks"
 msgstr "Найменш улюблені композиції"
 
@@ -2313,7 +2313,7 @@ msgstr "Типово, залишити порожнім.  Наприклад: \"
 msgid "Length"
 msgstr "Тривалість"
 
-#: ui/mainwindow.cpp:242 ui/mainwindow.cpp:252
+#: ui/mainwindow.cpp:213 ui/mainwindow.cpp:223
 msgid "Library"
 msgstr "Фонотека"
 
@@ -2321,7 +2321,7 @@ msgstr "Фонотека"
 msgid "Library advanced grouping"
 msgstr "Розширене групування фонотеки"
 
-#: ui/mainwindow.cpp:2049
+#: ui/mainwindow.cpp:1993
 msgid "Library rescan notice"
 msgstr "Повідомлення про повторне сканування фонотеки"
 
@@ -2333,7 +2333,7 @@ msgstr "Пошук у фонотеці"
 msgid "Limits"
 msgstr "Обмеження"
 
-#: internet/groovesharkservice.cpp:567
+#: internet/groovesharkservice.cpp:545
 msgid ""
 "Listen to Grooveshark songs based on what you've listened to previously"
 msgstr "Слухати пісні з Grooveshark на основі того, що ви слухали раніше"
@@ -2350,15 +2350,15 @@ msgstr "Завантажити"
 msgid "Load cover from URL"
 msgstr "Завантажити обкладинку з нетрів"
 
-#: ui/albumcoverchoicecontroller.cpp:60
+#: ui/albumcoverchoicecontroller.cpp:61
 msgid "Load cover from URL..."
 msgstr "Завантажити обкладинку з нетрів…"
 
-#: ui/albumcoverchoicecontroller.cpp:92
+#: ui/albumcoverchoicecontroller.cpp:91
 msgid "Load cover from disk"
 msgstr "Завантажити обкладинку з диска"
 
-#: ui/albumcoverchoicecontroller.cpp:58
+#: ui/albumcoverchoicecontroller.cpp:59
 msgid "Load cover from disk..."
 msgstr "Завантажити обкладинку з диска"
 
@@ -2370,7 +2370,7 @@ msgstr "Завантажити список відтворення"
 msgid "Load playlist..."
 msgstr "Завантажити список відтворення…"
 
-#: internet/lastfmservice.cpp:928
+#: internet/lastfmservice.cpp:929
 msgid "Loading Last.fm radio"
 msgstr "Завантаження радіо Last.fm"
 
@@ -2390,16 +2390,16 @@ msgstr "Завантаження бази даних iPod"
 msgid "Loading smart playlist"
 msgstr "Завантаження «розумного» списку відтворення"
 
-#: library/librarymodel.cpp:135
+#: library/librarymodel.cpp:134
 msgid "Loading songs"
 msgstr "Завантаження пісень"
 
-#: internet/digitallyimportedurlhandler.cpp:60
-#: internet/somafmurlhandler.cpp:45
+#: internet/digitallyimportedurlhandler.cpp:63
+#: internet/somafmurlhandler.cpp:48
 msgid "Loading stream"
 msgstr "Завантаження потоку"
 
-#: playlist/songloaderinserter.cpp:79 ui/edittagdialog.cpp:222
+#: playlist/songloaderinserter.cpp:79 ui/edittagdialog.cpp:229
 msgid "Loading tracks"
 msgstr "Завантаження доріжок"
 
@@ -2407,7 +2407,7 @@ msgstr "Завантаження доріжок"
 msgid "Loading tracks info"
 msgstr "Завантажую дані доріжок"
 
-#: library/librarymodel.cpp:130 widgets/prettyimage.cpp:168
+#: library/librarymodel.cpp:129 widgets/prettyimage.cpp:168
 #: widgets/widgetfadehelper.cpp:93 ../bin/src/ui_searchpreview.h:106
 msgid "Loading..."
 msgstr "Завантаження…"
@@ -2479,7 +2479,7 @@ msgstr "MP4 AAC"
 msgid "MPC"
 msgstr "MPC"
 
-#: internet/magnatuneservice.cpp:100 ../bin/src/ui_magnatunesettingspage.h:154
+#: internet/magnatuneservice.cpp:102 ../bin/src/ui_magnatunesettingspage.h:154
 msgid "Magnatune"
 msgstr "Magnatune"
 
@@ -2487,7 +2487,7 @@ msgstr "Magnatune"
 msgid "Magnatune Download"
 msgstr "Завантаження з Magnatune"
 
-#: widgets/osd.cpp:211
+#: widgets/osd.cpp:190
 msgid "Magnatune download finished"
 msgstr "Завантаження з Magnatune завершено"
 
@@ -2499,11 +2499,11 @@ msgstr "Основний профіль (MAIN)"
 msgid "Make it so!"
 msgstr "Гаразд!"
 
-#: internet/spotifyservice.cpp:496
+#: internet/spotifyservice.cpp:497
 msgid "Make playlist available offline"
 msgstr "Зробити список відтворення доступним онлайн"
 
-#: internet/lastfmservice.cpp:464
+#: internet/lastfmservice.cpp:465
 msgid "Malformed response"
 msgstr "Спотворений відгук"
 
@@ -2564,7 +2564,7 @@ msgstr "Стежити за змінами у фонотеці"
 msgid "Months"
 msgstr "Місяців"
 
-#: library/library.cpp:70
+#: library/library.cpp:72
 msgid "Most played"
 msgstr "Найчастіше відтворювані"
 
@@ -2581,7 +2581,7 @@ msgstr "Точки монтування"
 msgid "Move down"
 msgstr "Перемістити вниз"
 
-#: ui/mainwindow.cpp:526 widgets/fileviewlist.cpp:41
+#: ui/mainwindow.cpp:485 widgets/fileviewlist.cpp:41
 msgid "Move to library..."
 msgstr "Перемістити до фонотеки…"
 
@@ -2590,7 +2590,7 @@ msgstr "Перемістити до фонотеки…"
 msgid "Move up"
 msgstr "Перемістити вгору"
 
-#: transcoder/transcodedialog.cpp:213 ui/mainwindow.cpp:1576
+#: transcoder/transcodedialog.cpp:213 ui/mainwindow.cpp:1524
 msgid "Music"
 msgstr "Музика"
 
@@ -2603,39 +2603,39 @@ msgstr "Фонотека"
 msgid "Mute"
 msgstr "Вимкнути звук"
 
-#: globalsearch/lastfmsearchprovider.cpp:51 internet/lastfmservice.cpp:193
+#: globalsearch/lastfmsearchprovider.cpp:52 internet/lastfmservice.cpp:194
 msgid "My Last.fm Library"
 msgstr "Моя бібліотека на Last.fm"
 
-#: globalsearch/lastfmsearchprovider.cpp:53 internet/lastfmservice.cpp:198
+#: globalsearch/lastfmsearchprovider.cpp:54 internet/lastfmservice.cpp:199
 msgid "My Last.fm Mix Radio"
 msgstr "Моє Mix Radio на Last.fm"
 
-#: globalsearch/lastfmsearchprovider.cpp:55 internet/lastfmservice.cpp:203
+#: globalsearch/lastfmsearchprovider.cpp:56 internet/lastfmservice.cpp:204
 msgid "My Last.fm Neighborhood"
 msgstr "Мої сусіди на Last.fm"
 
-#: globalsearch/lastfmsearchprovider.cpp:49 internet/lastfmservice.cpp:188
+#: globalsearch/lastfmsearchprovider.cpp:50 internet/lastfmservice.cpp:189
 msgid "My Last.fm Recommended Radio"
 msgstr "Моє Recommended Radio на Last.fm"
 
-#: internet/lastfmservice.cpp:195
+#: internet/lastfmservice.cpp:196
 msgid "My Mix Radio"
 msgstr "Моє Mix Radio"
 
-#: internet/lastfmservice.cpp:200
+#: internet/lastfmservice.cpp:201
 msgid "My Neighborhood"
 msgstr "Моє сусідство"
 
-#: internet/lastfmservice.cpp:190
+#: internet/lastfmservice.cpp:191
 msgid "My Radio Station"
 msgstr "Моя радіостанція"
 
-#: internet/lastfmservice.cpp:185
+#: internet/lastfmservice.cpp:186
 msgid "My Recommendations"
 msgstr "Мої рекомендації"
 
-#: internet/groovesharkservice.cpp:1145 internet/groovesharkservice.cpp:1237
+#: internet/groovesharkservice.cpp:1123 internet/groovesharkservice.cpp:1215
 #: ui/equalizer.cpp:172 ../bin/src/ui_deviceproperties.h:369
 #: ../bin/src/ui_magnatunedownloaddialog.h:135
 #: ../bin/src/ui_wizardfinishpage.h:84
@@ -2651,7 +2651,7 @@ msgstr "Налаштування найменування"
 msgid "Narrow band (NB)"
 msgstr "Вузька смуга (NB)"
 
-#: internet/lastfmservice.cpp:227
+#: internet/lastfmservice.cpp:228
 msgid "Neighbors"
 msgstr "Сусіди"
 
@@ -2663,11 +2663,11 @@ msgstr "Мережа"
 msgid "Network Proxy"
 msgstr "Проксі мережі"
 
-#: playlist/playlistdelegates.cpp:299 ui/edittagdialog.cpp:482
+#: playlist/playlistdelegates.cpp:299 ui/edittagdialog.cpp:479
 msgid "Never"
 msgstr "Ніколи"
 
-#: library/library.cpp:63
+#: library/library.cpp:65
 msgid "Never played"
 msgstr "Ніколи не відтворені"
 
@@ -2676,11 +2676,11 @@ msgstr "Ніколи не відтворені"
 msgid "Never start playing"
 msgstr "Ніколи не починати відтворення"
 
-#: ui/mainwindow.cpp:1416 ../bin/src/ui_mainwindow.h:690
+#: ui/mainwindow.cpp:1364 ../bin/src/ui_mainwindow.h:690
 msgid "New playlist"
 msgstr "Новий список відтворення"
 
-#: library/libraryview.cpp:256
+#: library/libraryview.cpp:242
 msgid "New smart playlist..."
 msgstr "Новий «розумний» список відтворення"
 
@@ -2692,11 +2692,11 @@ msgstr "Нові композиції"
 msgid "New tracks will be added automatically."
 msgstr "Нові композиції буде додано автоматично"
 
-#: library/library.cpp:76
+#: library/library.cpp:78
 msgid "Newest tracks"
 msgstr "Найновіші доріжки"
 
-#: ui/edittagdialog.cpp:160 ui/trackselectiondialog.cpp:49
+#: ui/edittagdialog.cpp:161 ui/trackselectiondialog.cpp:49
 msgid "Next"
 msgstr "Наступна"
 
@@ -2731,7 +2731,7 @@ msgstr "Без коротких блоків"
 msgid "None"
 msgstr "Немає"
 
-#: library/libraryview.cpp:480 ui/mainwindow.cpp:1806 ui/mainwindow.cpp:1927
+#: library/libraryview.cpp:466 ui/mainwindow.cpp:1752 ui/mainwindow.cpp:1873
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Жодна з вибраних композицій не придатна для копіювання на пристрій"
 
@@ -2743,23 +2743,23 @@ msgstr "Нормальний тип блоку"
 msgid "Not available while using a dynamic playlist"
 msgstr "Недоступно при використанні динамічних списків відтворення"
 
-#: devices/deviceview.cpp:106
+#: devices/deviceview.cpp:107
 msgid "Not connected"
 msgstr "Не з’єднано"
 
-#: internet/lastfmservice.cpp:459
+#: internet/lastfmservice.cpp:460
 msgid "Not enough content"
 msgstr "Не достатньо вмісту"
 
-#: internet/lastfmservice.cpp:461
+#: internet/lastfmservice.cpp:462
 msgid "Not enough fans"
 msgstr "Недостатньо фанів"
 
-#: internet/lastfmservice.cpp:460
+#: internet/lastfmservice.cpp:461
 msgid "Not enough members"
 msgstr "Не достатньо учасників"
 
-#: internet/lastfmservice.cpp:462
+#: internet/lastfmservice.cpp:463
 msgid "Not enough neighbors"
 msgstr "Недостатньо сусідів"
 
@@ -2771,7 +2771,7 @@ msgstr "Не встановлено"
 msgid "Not logged in"
 msgstr "Вхід не здійснено"
 
-#: devices/deviceview.cpp:110
+#: devices/deviceview.cpp:111
 msgid "Not mounted - double click to mount"
 msgstr "Не змонтовано — двічі клацніть, щоб змонтувати"
 
@@ -2808,10 +2808,10 @@ msgstr "Ogg Vorbis"
 msgid "Only show the first"
 msgstr "Показувати лише перший"
 
-#: internet/digitallyimportedservicebase.cpp:178
-#: internet/groovesharkservice.cpp:514 internet/icecastservice.cpp:299
-#: internet/jamendoservice.cpp:415 internet/magnatuneservice.cpp:275
-#: internet/somafmservice.cpp:85
+#: internet/digitallyimportedservicebase.cpp:180
+#: internet/groovesharkservice.cpp:492 internet/icecastservice.cpp:301
+#: internet/jamendoservice.cpp:415 internet/magnatuneservice.cpp:276
+#: internet/somafmservice.cpp:86
 #, qt-format
 msgid "Open %1 in browser"
 msgstr "Відкрити %1 у переглядачі"
@@ -2828,8 +2828,8 @@ msgstr "Відкрити пристрій"
 msgid "Open file..."
 msgstr "Відкрити файл…"
 
-#: devices/deviceview.cpp:220 internet/internetservice.cpp:73
-#: library/libraryview.cpp:248 widgets/fileviewlist.cpp:36
+#: devices/deviceview.cpp:215 internet/internetservice.cpp:75
+#: library/libraryview.cpp:234 widgets/fileviewlist.cpp:36
 #: ../bin/src/ui_behavioursettingspage.h:195
 msgid "Open in new playlist"
 msgstr "Відкрити у новому списку відтворення"
@@ -2839,7 +2839,7 @@ msgstr "Відкрити у новому списку відтворення"
 msgid "Open..."
 msgstr "Відкрити…"
 
-#: internet/lastfmservice.cpp:451
+#: internet/lastfmservice.cpp:452
 msgid "Operation failed"
 msgstr "Помилка виконання операції"
 
@@ -2859,7 +2859,7 @@ msgstr "Налаштування…"
 msgid "Organise Files"
 msgstr "Упорядкування файлів"
 
-#: library/libraryview.cpp:264 ui/mainwindow.cpp:527
+#: library/libraryview.cpp:250 ui/mainwindow.cpp:486
 msgid "Organise files..."
 msgstr "Упорядкування файлів…"
 
@@ -2910,7 +2910,7 @@ msgstr "Пароль"
 msgid "Password Protected"
 msgstr "Пароль захищено"
 
-#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:872 ui/mainwindow.cpp:1258
+#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:820 ui/mainwindow.cpp:1206
 #: ui/qtsystemtrayicon.cpp:178 wiimotedev/wiimotesettingspage.cpp:106
 msgid "Pause"
 msgstr "Призупинити"
@@ -2919,7 +2919,7 @@ msgstr "Призупинити"
 msgid "Pause playback"
 msgstr "Призупинити відтворення"
 
-#: widgets/osd.cpp:177
+#: widgets/osd.cpp:156
 msgid "Paused"
 msgstr "Призупинено"
 
@@ -2927,8 +2927,8 @@ msgstr "Призупинено"
 msgid "Plain sidebar"
 msgstr "Звичайна бічна панель"
 
-#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:510 ui/mainwindow.cpp:840
-#: ui/mainwindow.cpp:859 ui/mainwindow.cpp:1261 ui/qtsystemtrayicon.cpp:166
+#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:469 ui/mainwindow.cpp:788
+#: ui/mainwindow.cpp:807 ui/mainwindow.cpp:1209 ui/qtsystemtrayicon.cpp:166
 #: ui/qtsystemtrayicon.cpp:192 ../bin/src/ui_mainwindow.h:640
 #: wiimotedev/wiimotesettingspage.cpp:101
 msgid "Play"
@@ -2938,7 +2938,7 @@ msgstr "Відтворити"
 msgid "Play Artist or Tag"
 msgstr "Відтворити «Виконавця» або «Мітку»"
 
-#: internet/lastfmservice.cpp:118
+#: internet/lastfmservice.cpp:119
 msgid "Play artist radio..."
 msgstr "Відтворити радіо виконавця…"
 
@@ -2946,7 +2946,7 @@ msgstr "Відтворити радіо виконавця…"
 msgid "Play count"
 msgstr "Кількість відтворень"
 
-#: internet/lastfmservice.cpp:122
+#: internet/lastfmservice.cpp:123
 msgid "Play custom radio..."
 msgstr "Слухати іншу радіостанцію…"
 
@@ -2959,7 +2959,7 @@ msgstr "Відтворити, якщо зупинено; призупинити,
 msgid "Play if there is nothing already playing"
 msgstr "Відтворювати, якщо зараз нічого не відтворюється"
 
-#: internet/lastfmservice.cpp:120
+#: internet/lastfmservice.cpp:121
 msgid "Play tag radio..."
 msgstr "Відтворювати радіо за міткою…"
 
@@ -2983,12 +2983,12 @@ msgstr "Ім’я програвача"
 msgid "Player options"
 msgstr "Налаштування програвача"
 
-#: playlist/playlistcontainer.cpp:297 playlist/playlistmanager.cpp:78
-#: playlist/playlistmanager.cpp:373 playlist/playlisttabbar.cpp:292
+#: playlist/playlistcontainer.cpp:297 playlist/playlistmanager.cpp:83
+#: playlist/playlistmanager.cpp:379 playlist/playlisttabbar.cpp:292
 msgid "Playlist"
 msgstr "Список відтворення"
 
-#: widgets/osd.cpp:194
+#: widgets/osd.cpp:173
 msgid "Playlist finished"
 msgstr "Список відтворення завершився"
 
@@ -3004,7 +3004,7 @@ msgstr "Пошук у списку відтворення"
 msgid "Playlist type"
 msgstr "Тип списку відтворення"
 
-#: internet/groovesharkservice.cpp:571
+#: internet/groovesharkservice.cpp:549
 msgid "Playlists"
 msgstr "Списки відтворення"
 
@@ -3016,15 +3016,15 @@ msgstr "Статус модуля:"
 msgid "Pop"
 msgstr "Поп"
 
-#: internet/groovesharkservice.cpp:539
+#: internet/groovesharkservice.cpp:517
 msgid "Popular songs"
 msgstr "Популярні пісні"
 
-#: internet/groovesharkservice.cpp:543
+#: internet/groovesharkservice.cpp:521
 msgid "Popular songs of the Month"
 msgstr "Популярні пісні за місяць"
 
-#: internet/groovesharkservice.cpp:550
+#: internet/groovesharkservice.cpp:528
 msgid "Popular songs today"
 msgstr "Популярні пісні за день"
 
@@ -3098,7 +3098,7 @@ msgstr "Налаштування OSD"
 msgid "Preview"
 msgstr "Перегляд"
 
-#: ui/edittagdialog.cpp:159 ui/trackselectiondialog.cpp:48
+#: ui/edittagdialog.cpp:160 ui/trackselectiondialog.cpp:48
 msgid "Previous"
 msgstr "Попередня"
 
@@ -3145,12 +3145,12 @@ msgstr "Опитування пристрою…"
 msgid "Queue Manager"
 msgstr "Керування чергою"
 
-#: ui/mainwindow.cpp:1339
+#: ui/mainwindow.cpp:1287
 msgid "Queue selected tracks"
 msgstr "Поставити в чергу вибрані доріжки"
 
-#: globalsearch/globalsearchwidget.cpp:105 library/libraryview.cpp:252
-#: ui/mainwindow.cpp:1337
+#: globalsearch/globalsearchwidget.cpp:105 library/libraryview.cpp:238
+#: ui/mainwindow.cpp:1285
 msgid "Queue track"
 msgstr "Поставити в чергу доріжки"
 
@@ -3158,7 +3158,7 @@ msgstr "Поставити в чергу доріжки"
 msgid "Radio (equal loudness for all tracks)"
 msgstr "Радіо (однакова гучність всіх композицій)"
 
-#: internet/groovesharkservice.cpp:557
+#: internet/groovesharkservice.cpp:535
 msgid "Radios"
 msgstr "Радіо"
 
@@ -3198,31 +3198,31 @@ msgstr "Поставити поточній композиції п’ять з�
 msgid "Rating"
 msgstr "Оцінка"
 
-#: internet/magnatunedownloaddialog.cpp:279 ui/albumcovermanager.cpp:212
+#: internet/magnatunedownloaddialog.cpp:279 ui/albumcovermanager.cpp:210
 msgid "Really cancel?"
 msgstr "Дійсно скасувати?"
 
-#: internet/groovesharkservice.cpp:515
+#: internet/groovesharkservice.cpp:493
 msgid "Refresh"
 msgstr "Оновити"
 
-#: internet/jamendoservice.cpp:416 internet/magnatuneservice.cpp:276
+#: internet/jamendoservice.cpp:416 internet/magnatuneservice.cpp:277
 msgid "Refresh catalogue"
 msgstr "Оновити каталог"
 
-#: internet/somafmservice.cpp:86
+#: internet/somafmservice.cpp:87
 msgid "Refresh channels"
 msgstr "Оновити канали"
 
-#: internet/lastfmservice.cpp:124
+#: internet/lastfmservice.cpp:125
 msgid "Refresh friends list"
 msgstr "Оновити список друзів"
 
-#: internet/icecastservice.cpp:300
+#: internet/icecastservice.cpp:302
 msgid "Refresh station list"
 msgstr "Оновити список станцій"
 
-#: internet/digitallyimportedservicebase.cpp:181
+#: internet/digitallyimportedservicebase.cpp:183
 msgid "Refresh streams"
 msgstr "Оновити потоки"
 
@@ -3242,9 +3242,9 @@ msgstr "Пам'ятати з минулого разу"
 msgid "Remote Control"
 msgstr "Дистанційне керування"
 
-#: internet/savedradio.cpp:100 ../bin/src/ui_queuemanager.h:135
+#: internet/savedradio.cpp:101 ../bin/src/ui_queuemanager.h:135
 #: ../bin/src/ui_searchtermwidget.h:282 ../bin/src/ui_transcodedialog.h:207
-#: internet/lastfmservice.cpp:115
+#: internet/lastfmservice.cpp:116
 msgid "Remove"
 msgstr "Вилучити"
 
@@ -3256,11 +3256,11 @@ msgstr "Вилучити дію"
 msgid "Remove folder"
 msgstr "Вилучити теку"
 
-#: internet/groovesharkservice.cpp:509
+#: internet/groovesharkservice.cpp:487
 msgid "Remove from favorites"
 msgstr "Вилучити з улюблених"
 
-#: internet/groovesharkservice.cpp:506 ../bin/src/ui_mainwindow.h:684
+#: internet/groovesharkservice.cpp:484 ../bin/src/ui_mainwindow.h:684
 msgid "Remove from playlist"
 msgstr "Вилучити зі списку відтворення"
 
@@ -3268,16 +3268,16 @@ msgstr "Вилучити зі списку відтворення"
 msgid "Remove playlist"
 msgstr "Вилучити список відтворення"
 
-#: internet/groovesharkservice.cpp:1328
+#: internet/groovesharkservice.cpp:1306
 msgid "Removing song from favorites"
 msgstr "Вилучення пісні з улюблених"
 
-#: internet/groovesharkservice.cpp:1236
+#: internet/groovesharkservice.cpp:1214
 #, qt-format
 msgid "Rename \"%1\" playlist"
 msgstr "Перейменувати список відтворення \"%1\""
 
-#: internet/groovesharkservice.cpp:502
+#: internet/groovesharkservice.cpp:480
 msgid "Rename Grooveshark playlist"
 msgstr "Перейменувати список відтворення Grooveshark"
 
@@ -3297,15 +3297,15 @@ msgstr "Пронумерувати доріжки в такому порядку
 msgid "Repeat"
 msgstr "Повторювати"
 
-#: widgets/osd.cpp:309 ../bin/src/ui_playlistsequence.h:105
+#: widgets/osd.cpp:288 ../bin/src/ui_playlistsequence.h:105
 msgid "Repeat album"
 msgstr "Повторювати альбом"
 
-#: widgets/osd.cpp:310 ../bin/src/ui_playlistsequence.h:106
+#: widgets/osd.cpp:289 ../bin/src/ui_playlistsequence.h:106
 msgid "Repeat playlist"
 msgstr "Повторювати список відтворення"
 
-#: widgets/osd.cpp:308 ../bin/src/ui_playlistsequence.h:104
+#: widgets/osd.cpp:287 ../bin/src/ui_playlistsequence.h:104
 msgid "Repeat track"
 msgstr "Повторювати композицію"
 
@@ -3313,8 +3313,8 @@ msgstr "Повторювати композицію"
 msgid "Replace and play now"
 msgstr "Замінити і відтворити зараз"
 
-#: devices/deviceview.cpp:218 globalsearch/globalsearchwidget.cpp:106
-#: internet/internetservice.cpp:63 library/libraryview.cpp:246
+#: devices/deviceview.cpp:213 globalsearch/globalsearchwidget.cpp:106
+#: internet/internetservice.cpp:65 library/libraryview.cpp:232
 #: widgets/fileviewlist.cpp:34
 msgid "Replace current playlist"
 msgstr "Замінити список відтворення"
@@ -3343,7 +3343,7 @@ msgstr "Знов наповнити"
 msgid "Reset"
 msgstr "Скинути"
 
-#: ui/edittagdialog.cpp:763 ../bin/src/ui_edittagdialog.h:635
+#: ui/edittagdialog.cpp:760 ../bin/src/ui_edittagdialog.h:635
 msgid "Reset play counts"
 msgstr "Скинути лічильник відтворень"
 
@@ -3355,11 +3355,11 @@ msgstr "Обмежитись символами ASCII"
 msgid "Results"
 msgstr "Результати"
 
-#: internet/groovesharkservice.cpp:693
+#: internet/groovesharkservice.cpp:671
 msgid "Retrieving Grooveshark favorites songs"
 msgstr "Отримання улюблених пісень з Grooveshark"
 
-#: internet/groovesharkservice.cpp:618
+#: internet/groovesharkservice.cpp:596
 msgid "Retrieving Grooveshark playlists"
 msgstr "Отримання списків відтворення з Grooveshark"
 
@@ -3371,7 +3371,7 @@ msgstr "Рок"
 msgid "SOCKS proxy"
 msgstr "SOCKS проксі"
 
-#: devices/deviceview.cpp:207
+#: devices/deviceview.cpp:202
 msgid "Safely remove device"
 msgstr "Безпечно вилучити пристрій"
 
@@ -3387,11 +3387,11 @@ msgstr "Частота вибірки"
 msgid "Samplerate"
 msgstr "Частота вибірки"
 
-#: ui/albumcoverchoicecontroller.cpp:115
+#: ui/albumcoverchoicecontroller.cpp:114
 msgid "Save album cover"
 msgstr "Зберегти обкладинку"
 
-#: ui/albumcoverchoicecontroller.cpp:59
+#: ui/albumcoverchoicecontroller.cpp:60
 msgid "Save cover to disk..."
 msgstr "Зберегти обкладинку на диск…"
 
@@ -3415,7 +3415,7 @@ msgstr "Зберегти налаштування"
 msgid "Save this stream in the Internet tab"
 msgstr "Зберегти цей потік на вкладці «Інтернет»"
 
-#: ui/edittagdialog.cpp:665 ui/trackselectiondialog.cpp:253
+#: ui/edittagdialog.cpp:662 ui/trackselectiondialog.cpp:253
 msgid "Saving tracks"
 msgstr "Зберігаю доріжки"
 
@@ -3437,11 +3437,11 @@ msgid "Search"
 msgstr "Пошук"
 
 #: internet/groovesharksearchplaylisttype.cpp:32
-#: internet/groovesharkservice.cpp:932
+#: internet/groovesharkservice.cpp:910
 msgid "Search Grooveshark"
 msgstr "Шукати у Grooveshark"
 
-#: internet/groovesharkservice.cpp:512 internet/groovesharkservice.cpp:533
+#: internet/groovesharkservice.cpp:490 internet/groovesharkservice.cpp:511
 msgid "Search Grooveshark (opens a new tab)"
 msgstr "Шукати у Grooveshark (відкриває нову вкладку)"
 
@@ -3453,19 +3453,19 @@ msgstr "Шукати станції Icecast"
 msgid "Search Jamendo"
 msgstr "Шукати на Jamendo"
 
-#: internet/magnatuneservice.cpp:282
+#: internet/magnatuneservice.cpp:283
 msgid "Search Magnatune"
 msgstr "Пошук на Magnatune"
 
-#: internet/spotifysearchplaylisttype.cpp:32 internet/spotifyservice.cpp:604
+#: internet/spotifysearchplaylisttype.cpp:32 internet/spotifyservice.cpp:605
 msgid "Search Spotify"
 msgstr "Пошук в Spotify"
 
-#: internet/spotifyservice.cpp:338
+#: internet/spotifyservice.cpp:339
 msgid "Search Spotify (opens a new tab)"
 msgstr "Пошук в Spotify (у новій вкладці)"
 
-#: internet/spotifyservice.cpp:489
+#: internet/spotifyservice.cpp:490
 msgid "Search Spotify (opens a new tab)..."
 msgstr "Пошук в Spotify (у новій вкладці)…"
 
@@ -3473,7 +3473,7 @@ msgstr "Пошук в Spotify (у новій вкладці)…"
 msgid "Search around all your sources (library, internet services, ...)"
 msgstr "Шукати у всіх джерелах даних (бібліотеці, на службах інтернету тощо)"
 
-#: ui/albumcoverchoicecontroller.cpp:61
+#: ui/albumcoverchoicecontroller.cpp:62
 msgid "Search for album covers..."
 msgstr "Пошук обкладинок альбомів…"
 
@@ -3494,7 +3494,7 @@ msgstr "Налаштування пошуку"
 msgid "Search terms"
 msgstr "Умови пошуку"
 
-#: internet/groovesharkservice.cpp:282
+#: internet/groovesharkservice.cpp:260
 msgid "Searching on Grooveshark"
 msgstr "Пошук на Grooveshark"
 
@@ -3554,11 +3554,11 @@ msgstr "Вибрати візуалізації…"
 msgid "Serial number"
 msgstr "Серійний номер"
 
-#: internet/lastfmservice.cpp:454
+#: internet/lastfmservice.cpp:455
 msgid "Service offline"
 msgstr "Служба вимкнена"
 
-#: ui/mainwindow.cpp:1366
+#: ui/mainwindow.cpp:1314
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "Встановити %1 до \"%2\"…"
@@ -3630,7 +3630,7 @@ msgstr "Показувати підказку з додатковими дани
 msgid "Show above status bar"
 msgstr "Показати вище, в рядку стану"
 
-#: ui/mainwindow.cpp:483
+#: ui/mainwindow.cpp:442
 msgid "Show all songs"
 msgstr "Показати всі композиції"
 
@@ -3646,24 +3646,24 @@ msgstr "Показувати обкладинки у фонотеці"
 msgid "Show dividers"
 msgstr "Показати розділювачі"
 
-#: ui/albumcoverchoicecontroller.cpp:63 widgets/prettyimage.cpp:183
+#: ui/albumcoverchoicecontroller.cpp:64 widgets/prettyimage.cpp:183
 msgid "Show fullsize..."
 msgstr "Показати на повний розмір…"
 
-#: library/libraryview.cpp:276 ui/mainwindow.cpp:530
+#: library/libraryview.cpp:262 ui/mainwindow.cpp:489
 #: widgets/fileviewlist.cpp:52
 msgid "Show in file browser..."
 msgstr "Показати в оглядачі файлів…"
 
-#: library/libraryview.cpp:280
+#: library/libraryview.cpp:266
 msgid "Show in various artists"
 msgstr "Показувати в різних виконавцях"
 
-#: ui/mainwindow.cpp:484
+#: ui/mainwindow.cpp:443
 msgid "Show only duplicates"
 msgstr "Показати тільки дублікати"
 
-#: ui/mainwindow.cpp:485
+#: ui/mainwindow.cpp:444
 msgid "Show only untagged"
 msgstr "Показати тільки без міток"
 
@@ -3691,11 +3691,11 @@ msgstr "Показати/приховати"
 msgid "Shuffle"
 msgstr "Режим перемішування"
 
-#: widgets/osd.cpp:297 ../bin/src/ui_playlistsequence.h:110
+#: widgets/osd.cpp:276 ../bin/src/ui_playlistsequence.h:110
 msgid "Shuffle albums"
 msgstr "Перемішати альбоми"
 
-#: widgets/osd.cpp:295 ../bin/src/ui_playlistsequence.h:109
+#: widgets/osd.cpp:274 ../bin/src/ui_playlistsequence.h:109
 msgid "Shuffle all"
 msgstr "Перемішати все"
 
@@ -3703,7 +3703,7 @@ msgstr "Перемішати все"
 msgid "Shuffle playlist"
 msgstr "Перемішати список відтворення"
 
-#: widgets/osd.cpp:296 ../bin/src/ui_playlistsequence.h:108
+#: widgets/osd.cpp:275 ../bin/src/ui_playlistsequence.h:108
 msgid "Shuffle tracks in this album"
 msgstr "Перемішати поточний альбом"
 
@@ -3763,7 +3763,7 @@ msgstr "Легкий рок"
 msgid "Song Information"
 msgstr "Про композицію"
 
-#: ui/mainwindow.cpp:257
+#: ui/mainwindow.cpp:228
 msgid "Song info"
 msgstr "Про композицію"
 
@@ -3811,7 +3811,7 @@ msgstr "Speex"
 msgid "Spotify"
 msgstr "Spotify"
 
-#: internet/spotifyservice.cpp:179
+#: internet/spotifyservice.cpp:180
 msgid "Spotify login error"
 msgstr "Помилка входу до Spotify"
 
@@ -3819,7 +3819,7 @@ msgstr "Помилка входу до Spotify"
 msgid "Spotify plugin"
 msgstr "Модуль Spotify"
 
-#: internet/spotifyblobdownloader.cpp:58
+#: internet/spotifyblobdownloader.cpp:59
 msgid "Spotify plugin not installed"
 msgstr "Модуль Spotify не встановлено"
 
@@ -3827,7 +3827,7 @@ msgstr "Модуль Spotify не встановлено"
 msgid "Standard"
 msgstr "Типово"
 
-#: internet/spotifyservice.cpp:343
+#: internet/spotifyservice.cpp:344
 msgid "Starred"
 msgstr "Оцінені"
 
@@ -3854,7 +3854,7 @@ msgstr "Запуск %1"
 msgid "Starting..."
 msgstr "Запуск…"
 
-#: internet/groovesharkservice.cpp:561
+#: internet/groovesharkservice.cpp:539
 msgid "Stations"
 msgstr "Станції"
 
@@ -3867,7 +3867,7 @@ msgstr "Зупинити"
 msgid "Stop after"
 msgstr "Зупинити після"
 
-#: ui/mainwindow.cpp:512 ../bin/src/ui_mainwindow.h:648
+#: ui/mainwindow.cpp:471 ../bin/src/ui_mainwindow.h:648
 msgid "Stop after this track"
 msgstr "Зупинити після цієї доріжки"
 
@@ -3879,7 +3879,7 @@ msgstr "Зупинити відтворення"
 msgid "Stop playing after current track"
 msgstr "Зупинити відтворення після цієї доріжки"
 
-#: widgets/osd.cpp:187
+#: widgets/osd.cpp:166
 msgid "Stopped"
 msgstr "Зупинено"
 
@@ -3891,7 +3891,7 @@ msgstr "Потік"
 msgid "Streaming membership"
 msgstr "Потокове членство"
 
-#: internet/groovesharkservice.cpp:584
+#: internet/groovesharkservice.cpp:562
 msgid "Subscribed playlists"
 msgstr "Підписки на списки відтворення"
 
@@ -3926,15 +3926,15 @@ msgstr "Підтримувані формати"
 msgid "Switch provider"
 msgstr "Перемкнути джерело"
 
-#: internet/spotifyservice.cpp:515
+#: internet/spotifyservice.cpp:516
 msgid "Syncing Spotify inbox"
 msgstr "Синхронізація вхідних Spotify"
 
-#: internet/spotifyservice.cpp:510
+#: internet/spotifyservice.cpp:511
 msgid "Syncing Spotify playlist"
 msgstr "Синхронізація списку відтворення Spotify"
 
-#: internet/spotifyservice.cpp:519
+#: internet/spotifyservice.cpp:520
 msgid "Syncing Spotify starred tracks"
 msgstr "Синхронізація оцінених доріжок Spotify"
 
@@ -3950,7 +3950,7 @@ msgstr "Мітка"
 msgid "Tag fetcher"
 msgstr "Упорядник міток"
 
-#: internet/lastfmservice.cpp:210
+#: internet/lastfmservice.cpp:211
 msgid "Tag radio"
 msgstr "Радіо мітки"
 
@@ -3980,7 +3980,7 @@ msgstr "Команда \"%1\" не може бути виконана"
 msgid "The directory %1 is not valid"
 msgstr "Тека %1 не чинна"
 
-#: playlist/playlistmanager.cpp:151 playlist/playlistmanager.cpp:169
+#: playlist/playlistmanager.cpp:157 playlist/playlistmanager.cpp:175
 #, qt-format
 msgid "The playlist '%1' was empty or could not be loaded."
 msgstr "Список відтворення '%1' порожній або не може бути завантажений."
@@ -3997,13 +3997,13 @@ msgstr "Вказана вами адреса не існує!"
 msgid "The site you requested is not an image!"
 msgstr "Вказана вами адреса не є малюнком!"
 
-#: ui/mainwindow.cpp:2042
+#: ui/mainwindow.cpp:1986
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
 msgstr "Версія Clementine, яку ви щойно встановили, вимагає повного сканування фонотеки задля використання наступних нових можливостей:"
 
-#: library/libraryview.cpp:406
+#: library/libraryview.cpp:392
 msgid "There are other songs in this album"
 msgstr "У цьому альбомі є інші композиції"
 
@@ -4023,12 +4023,12 @@ msgid ""
 "deleted:"
 msgstr "Виникли проблеми вилучення деяких композицій.  Не вдалось вилучити такі:"
 
-#: library/libraryview.cpp:486 ui/mainwindow.cpp:1854 widgets/fileview.cpp:187
+#: library/libraryview.cpp:472 ui/mainwindow.cpp:1800 widgets/fileview.cpp:187
 msgid ""
 "These files will be deleted from disk, are you sure you want to continue?"
 msgstr "Ці файли будуть вилучені з диска. Ви впевнені? Вилучити їх?"
 
-#: devices/deviceview.cpp:394
+#: devices/deviceview.cpp:389
 msgid ""
 "These files will be deleted from the device, are you sure you want to "
 "continue?"
@@ -4093,7 +4093,7 @@ msgid ""
 "want to continue?"
 msgstr "Цей список відтворення буде вилучено, цю дію не можна скасувати. Ви впевнені, що бажаєте продовжити?"
 
-#: internet/lastfmservice.cpp:455
+#: internet/lastfmservice.cpp:456
 msgid "This stream is for paid subscribers only"
 msgstr "Цей потік лише для платних передплатників"
 
@@ -4116,13 +4116,13 @@ msgstr "Часовий пояс"
 msgid "Title"
 msgstr "Назва"
 
-#: internet/groovesharkservice.cpp:955
+#: internet/groovesharkservice.cpp:933
 msgid ""
 "To start Grooveshark radio, you should first listen to a few other "
 "Grooveshark songs"
 msgstr "Щоб започаткувати Grooveshark радіо, вам варто спочатку прослухати кілька пісень на Grooveshark."
 
-#: core/utilities.cpp:109
+#: core/utilities.cpp:116
 msgid "Today"
 msgstr "Сьогодні"
 
@@ -4134,7 +4134,7 @@ msgstr "Змінити режим приємних OSD"
 msgid "Toggle fullscreen"
 msgstr "Повноекранний режим"
 
-#: ui/mainwindow.cpp:1341
+#: ui/mainwindow.cpp:1289
 msgid "Toggle queue status"
 msgstr "Перемикнути статус черги"
 
@@ -4210,23 +4210,23 @@ msgid "Unable to download %1 (%2)"
 msgstr "Не вдалось завантажити %1 (%2)"
 
 #: core/song.cpp:349 globalsearch/globalsearchitemdelegate.cpp:166
-#: globalsearch/globalsearchitemdelegate.cpp:173 library/librarymodel.cpp:297
-#: library/librarymodel.cpp:302 library/librarymodel.cpp:926
-#: playlist/playlistdelegates.cpp:309 playlist/playlistmanager.cpp:381
-#: playlist/playlistmanager.cpp:384 ui/albumcoverchoicecontroller.cpp:111
-#: ui/edittagdialog.cpp:420 ui/edittagdialog.cpp:461
+#: globalsearch/globalsearchitemdelegate.cpp:173 library/librarymodel.cpp:296
+#: library/librarymodel.cpp:301 library/librarymodel.cpp:926
+#: playlist/playlistdelegates.cpp:309 playlist/playlistmanager.cpp:387
+#: playlist/playlistmanager.cpp:390 ui/albumcoverchoicecontroller.cpp:110
+#: ui/edittagdialog.cpp:416 ui/edittagdialog.cpp:457
 msgid "Unknown"
 msgstr "Невідомо"
 
-#: internet/digitallyimportedclient.cpp:68 internet/lastfmservice.cpp:468
+#: internet/digitallyimportedclient.cpp:68 internet/lastfmservice.cpp:469
 msgid "Unknown error"
 msgstr "Невідома помилка"
 
-#: ui/albumcoverchoicecontroller.cpp:62
+#: ui/albumcoverchoicecontroller.cpp:63
 msgid "Unset cover"
 msgstr "Вилучити обкладинку"
 
-#: internet/groovesharkservice.cpp:1099
+#: internet/groovesharkservice.cpp:1077
 msgid "Update Grooveshark playlist"
 msgstr "Оновити список відтворення на Grooveshark"
 
@@ -4238,17 +4238,17 @@ msgstr "Оновити змінені теки у фонотеці"
 msgid "Update the library when Clementine starts"
 msgstr "Оновлювати фонотеку під час запуску Clementine"
 
-#: library/librarywatcher.cpp:89
+#: library/librarywatcher.cpp:92
 #, qt-format
 msgid "Updating %1"
 msgstr "Оновлення %1"
 
-#: devices/deviceview.cpp:102
+#: devices/deviceview.cpp:103
 #, qt-format
 msgid "Updating %1%..."
 msgstr "Оновлення %1%…"
 
-#: library/librarywatcher.cpp:87
+#: library/librarywatcher.cpp:90
 msgid "Updating library"
 msgstr "Оновлення фонотеки"
 
@@ -4316,7 +4316,7 @@ msgstr "Використати нормалізацію гучності"
 msgid "Used"
 msgstr "Використано"
 
-#: internet/groovesharkservice.cpp:409
+#: internet/groovesharkservice.cpp:387
 #, qt-format
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr "У користувача %1 немає облікового запису Grooveshark Anywhere"
@@ -4345,8 +4345,8 @@ msgstr "VBR MP3"
 msgid "Variable bit rate"
 msgstr "Змінна бітова швидкість"
 
-#: globalsearch/globalsearchitemdelegate.cpp:162 library/librarymodel.cpp:234
-#: playlist/playlistmanager.cpp:396 ui/albumcovermanager.cpp:264
+#: globalsearch/globalsearchitemdelegate.cpp:162 library/librarymodel.cpp:233
+#: playlist/playlistmanager.cpp:402 ui/albumcovermanager.cpp:258
 msgid "Various artists"
 msgstr "Різні виконавці"
 
@@ -4375,7 +4375,7 @@ msgstr "Налаштування візуалізацій"
 msgid "Voice activity detection"
 msgstr "Визначення голосової активності"
 
-#: widgets/osd.cpp:201
+#: widgets/osd.cpp:180
 #, qt-format
 msgid "Volume %1%"
 msgstr "Гучність %1%"
@@ -4423,32 +4423,32 @@ msgstr "Адреса WiFi MAC"
 msgid "Wide band (WB)"
 msgstr "Широка смуга (WB)"
 
-#: widgets/osd.cpp:260
+#: widgets/osd.cpp:239
 #, qt-format
 msgid "Wii Remote %1: actived"
 msgstr "Wii Remote %1: активовано"
 
-#: widgets/osd.cpp:270
+#: widgets/osd.cpp:249
 #, qt-format
 msgid "Wii Remote %1: connected"
 msgstr "Wii Remote %1: під’єднано"
 
-#: widgets/osd.cpp:285
+#: widgets/osd.cpp:264
 #, qt-format
 msgid "Wii Remote %1: critical battery (%2%) "
 msgstr "Wii Remote %1:  критичний розряд батареї (%2%) "
 
-#: widgets/osd.cpp:265
+#: widgets/osd.cpp:244
 #, qt-format
 msgid "Wii Remote %1: disactived"
 msgstr "Wii Remote %1: деактивовано"
 
-#: widgets/osd.cpp:275
+#: widgets/osd.cpp:254
 #, qt-format
 msgid "Wii Remote %1: disconnected"
 msgstr "Wii Remote %1: від’єднано"
 
-#: widgets/osd.cpp:280
+#: widgets/osd.cpp:259
 #, qt-format
 msgid "Wii Remote %1: low battery (%2%)"
 msgstr "Wii Remote %1: низький заряд батареї (%2%)"
@@ -4473,13 +4473,13 @@ msgstr "Windows Media, 64 кб"
 msgid "Windows Media audio"
 msgstr "Windows Media audio"
 
-#: library/libraryview.cpp:407
+#: library/libraryview.cpp:393
 msgid ""
 "Would you like to move the other songs in this album to Various Artists as "
 "well?"
 msgstr "Хочете пересунути всі ініші композиції цього альбому до розділу «Різні виконавці»?"
 
-#: ui/mainwindow.cpp:2047
+#: ui/mainwindow.cpp:1991
 msgid "Would you like to run a full rescan right now?"
 msgstr "Бажаєте зараз виконати повторне сканування фонотеки?"
 
@@ -4499,7 +4499,7 @@ msgstr "Рік - Альбом"
 msgid "Years"
 msgstr "Років"
 
-#: core/utilities.cpp:111
+#: core/utilities.cpp:118
 msgid "Yesterday"
 msgstr "Вчора"
 
@@ -4562,7 +4562,7 @@ msgstr "У вас немає облікового запису Grooveshark Anywh
 msgid "You do not have a Spotify Premium account."
 msgstr "У вас немає облікового запису Spotify Premium."
 
-#: internet/spotifyservice.cpp:165
+#: internet/spotifyservice.cpp:166
 msgid ""
 "You have been logged out of Spotify, please re-enter your password in the "
 "Settings dialog."
@@ -4610,11 +4610,11 @@ msgstr "Ваші облікові дані Last.fm неправильні"
 msgid "Your Magnatune credentials were incorrect"
 msgstr "Введені дані облікового запису Magnatune некоректні"
 
-#: library/libraryview.cpp:220
+#: library/libraryview.cpp:206
 msgid "Your library is empty!"
 msgstr "Ваша фонотека порожня!"
 
-#: globalsearch/savedradiosearchprovider.cpp:27 internet/savedradio.cpp:48
+#: globalsearch/savedradiosearchprovider.cpp:28 internet/savedradio.cpp:49
 msgid "Your radio streams"
 msgstr "Ваші радіо-потоки"
 
@@ -4669,7 +4669,7 @@ msgstr "між"
 msgid "biggest first"
 msgstr "спочатку найбільші"
 
-#: playlist/playlistview.cpp:174 ui/edittagdialog.cpp:454
+#: playlist/playlistview.cpp:174 ui/edittagdialog.cpp:450
 msgid "bpm"
 msgstr "такт/хв."
 
@@ -4683,7 +4683,7 @@ msgstr "містить"
 msgid "disabled"
 msgstr "вимкнено"
 
-#: widgets/osd.cpp:112
+#: widgets/osd.cpp:114
 #, qt-format
 msgid "disc %1"
 msgstr "диск %1"
@@ -4712,7 +4712,7 @@ msgstr "більше ніж"
 msgid "in the last"
 msgstr "за останні"
 
-#: playlist/playlistview.cpp:176 ui/edittagdialog.cpp:456
+#: playlist/playlistview.cpp:176 ui/edittagdialog.cpp:452
 #: internet/spotifysettingspage.cpp:59 internet/spotifysettingspage.cpp:60
 #: internet/spotifysettingspage.cpp:61
 msgid "kbps"
@@ -4783,7 +4783,7 @@ msgstr "починається з"
 msgid "stop"
 msgstr "зупинити"
 
-#: globalsearch/globalsearchitemdelegate.cpp:150 widgets/osd.cpp:114
+#: globalsearch/globalsearchitemdelegate.cpp:150 widgets/osd.cpp:116
 #, qt-format
 msgid "track %1"
 msgstr "доріжка %1"
