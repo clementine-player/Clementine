@@ -51,6 +51,7 @@
 #include "core/scopedtransaction.h"
 #include "core/song.h"
 #include "core/taskmanager.h"
+#include "core/timeconstants.h"
 #include "core/utilities.h"
 #include "globalsearch/globalsearch.h"
 #include "globalsearch/groovesharksearchprovider.h"
@@ -1437,8 +1438,17 @@ Song GroovesharkService::ExtractSong(const QVariantMap& result_song) {
     int album_id = result_song["AlbumID"].toInt();
     QString album_name = result_song["AlbumName"].toString();
     QString cover = result_song["CoverArtFilename"].toString();
-    song.Init(song_name, artist_name, album_name, 0);
+    qint64 duration = result_song["EstimateDuration"].toInt() * kNsecPerSec;
+    song.Init(song_name, artist_name, album_name, duration);
     song.set_art_automatic(QString(kUrlCover) + cover);
+    QVariant track_number = result_song["TrackNum"];
+    if (track_number.isValid()) {
+      song.set_track(track_number.toInt());
+    }
+    QVariant year = result_song["Year"];
+    if (year.isValid()) {
+      song.set_year(year.toInt());
+    }
     // Special kind of URL: because we need to request a stream key for each
     // play, we generate a fake URL for now, and we will create a real streaming
     // URL when user will actually play the song (through url handler)
