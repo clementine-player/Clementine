@@ -105,6 +105,7 @@ void GroovesharkSearchProvider::AlbumSearchResult(int id, const QList<SongList>&
     foreach (const Song& s, a) {
       result.album_songs_ << s;
     }
+    result.album_size_ = result.album_songs_.size();
 
     ret << result;
   }
