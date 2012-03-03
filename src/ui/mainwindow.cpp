@@ -251,7 +251,7 @@ MainWindow::MainWindow(Application* app,
 
   connect(ui_->playlist, SIGNAL(ViewSelectionModelChanged()), SLOT(PlaylistViewSelectionModelChanged()));
   ui_->playlist->SetManager(app_->playlist_manager());
-  ui_->playlist->view()->SetPlayer(app_->player());
+  ui_->playlist->view()->SetApplication(app_);
 
   library_view_->view()->setModel(library_sort_model_);
   library_view_->view()->SetApplication(app_);

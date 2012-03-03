@@ -28,9 +28,9 @@
 
 class QCleanlooksStyle;
 
+class Application;
 class DynamicPlaylistControls;
 class LibraryBackend;
-class Player;
 class PlaylistHeader;
 class RadioLoadingIndicator;
 class RatingItemDelegate;
@@ -63,6 +63,7 @@ class PlaylistView : public QTreeView {
     Default,
     None,
     Custom,
+    AlbumCover
   };
 
   PlaylistView(QWidget* parent = 0);
@@ -74,12 +75,12 @@ class PlaylistView : public QTreeView {
 
   static ColumnAlignmentMap DefaultColumnAlignment();
 
+  void SetApplication(Application* app);
   void SetItemDelegates(LibraryBackend* backend);
   void SetPlaylist(Playlist* playlist);
   void RemoveSelected();
 
   void SetReadOnlySettings(bool read_only) { read_only_settings_ = read_only; }
-  void SetPlayer(Player* player) { player_ = player; }
 
   Playlist* playlist() const { return playlist_; }
   BackgroundImageType background_image_type() const { return background_image_type_; }
@@ -101,6 +102,7 @@ class PlaylistView : public QTreeView {
   void SetColumnAlignment(int section, Qt::Alignment alignment);
 
   void CopyCurrentSongToClipboard() const;
+  void CurrentSongChanged(const Song& new_song, const QString& uri, const QImage& cover_art);
 
  signals:
   void PlayItem(const QModelIndex& index);
@@ -171,6 +173,7 @@ class PlaylistView : public QTreeView {
 
   void RepositionDynamicControls();
   
+  Application* app_;
   PlaylistProxyStyle* style_;
   Playlist* playlist_;
   PlaylistHeader* header_;
@@ -181,6 +184,7 @@ class PlaylistView : public QTreeView {
 
   BackgroundImageType background_image_type_;
   QPixmap background_image_;
+  QPixmap current_song_cover_art_;
   QPixmap cached_scaled_background_image_;
   int last_height_;
   int last_width_;
@@ -218,7 +222,6 @@ class PlaylistView : public QTreeView {
   DynamicPlaylistControls* dynamic_controls_;
 
   ColumnAlignmentMap column_alignment_;
-  Player* player_;
 };
 
 #endif // PLAYLISTVIEW_H

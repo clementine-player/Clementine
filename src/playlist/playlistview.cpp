@@ -20,6 +20,8 @@
 #include "playlistdelegates.h"
 #include "playlistheader.h"
 #include "playlistview.h"
+#include "core/application.h"
+#include "covers/currentartloader.h"
 #include "core/logging.h"
 
 #include <QCleanlooksStyle>
@@ -90,6 +92,7 @@ void PlaylistProxyStyle::drawPrimitive(PrimitiveElement element, const QStyleOpt
 
 PlaylistView::PlaylistView(QWidget *parent)
   : QTreeView(parent),
+    app_(NULL),
     style_(new PlaylistProxyStyle(style())),
     playlist_(NULL),
     header_(new PlaylistHeader(Qt::Horizontal, this, this)),
@@ -114,8 +117,7 @@ PlaylistView::PlaylistView(QWidget *parent)
     cached_current_row_row_(-1),
     drop_indicator_row_(-1),
     drag_over_(false),
-    dynamic_controls_(new DynamicPlaylistControls(this)),
-    player_(NULL)
+    dynamic_controls_(new DynamicPlaylistControls(this))
 {
   setHeader(header_);
   header_->setMovable(true);
@@ -151,6 +153,14 @@ PlaylistView::PlaylistView(QWidget *parent)
 #endif
 }
 
+void PlaylistView::SetApplication(Application *app) {
+  Q_ASSERT(app);
+  app_ = app;
+  connect(app_->current_art_loader(),
+          SIGNAL(ArtLoaded(const Song&, const QString&, const QImage&)),
+          SLOT(CurrentSongChanged(const Song&, const QString&, const QImage&)));
+}
+
 void PlaylistView::SetItemDelegates(LibraryBackend* backend) {
   rating_delegate_ = new RatingItemDelegate(this);
 
@@ -178,8 +188,8 @@ void PlaylistView::SetItemDelegates(LibraryBackend* backend) {
   setItemDelegateForColumn(Playlist::Column_Rating, rating_delegate_);
   setItemDelegateForColumn(Playlist::Column_LastPlayed, new LastPlayedItemDelegate(this));
   
-  if (player_) {
-    setItemDelegateForColumn(Playlist::Column_Source, new SongSourceDelegate(this, player_));
+  if (app_ && app_->player()) {
+    setItemDelegateForColumn(Playlist::Column_Source, new SongSourceDelegate(this, app_->player()));
   } else {
     header_->HideSection(Playlist::Column_Source);
   }
@@ -794,7 +804,7 @@ void PlaylistView::paintEvent(QPaintEvent* event) {
   // dragLeaveEvent, dropEvent and scrollContentsBy.
 
   // Draw background
-  if (background_image_type_ == Custom) {
+  if (background_image_type_ == Custom || background_image_type_ == AlbumCover) {
     if (!background_image_.isNull()) {
       QPainter background_painter(viewport());
       if (height() != last_height_ || width() != last_width_
@@ -810,7 +820,7 @@ void PlaylistView::paintEvent(QPaintEvent* event) {
         p.setCompositionMode(QPainter::CompositionMode_Source);
         p.drawPixmap(0, 0, cached_scaled_background_image_);
         p.setCompositionMode(QPainter::CompositionMode_DestinationIn);
-        p.fillRect(temp.rect(), QColor(0, 0, 0, 255*kBackgroundOpacity));
+        p.fillRect(temp.rect(), QColor(0, 0, 0, 255 * kBackgroundOpacity));
         p.end();
 
         cached_scaled_background_image_ = temp;
@@ -972,10 +982,12 @@ void PlaylistView::ReloadSettings() {
   }
 
   QString background_image_filename = s.value(kSettingBackgroundImageFilename).toString();
-  if (!background_image_filename.isEmpty()) {
+  if (!background_image_filename.isEmpty() && background_image_type_ == Custom) {
     background_image_ = QPixmap(background_image_filename);
-    force_background_redraw_ = true;
+  } else if (background_image_type_ == AlbumCover) {
+    background_image_ = current_song_cover_art_;
   }
+  force_background_redraw_ = true;
 
   emit ColumnAlignmentChanged(column_alignment_);
 }
@@ -1095,4 +1107,14 @@ void PlaylistView::CopyCurrentSongToClipboard() const {
   mime_data->setText(columns.join(" - "));
 
   QApplication::clipboard()->setMimeData(mime_data);
+}
+
+void PlaylistView::CurrentSongChanged(const Song& song,
+                                      const QString& uri,
+                                      const QImage& song_art) {
+  current_song_cover_art_ = QPixmap::fromImage(song_art);
+  if (background_image_type_ == AlbumCover) {
+    background_image_ = current_song_cover_art_;
+    force_background_redraw_ = true;
+  }
 }

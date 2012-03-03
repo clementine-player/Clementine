@@ -59,6 +59,9 @@ AppearanceSettingsPage::AppearanceSettingsPage(SettingsDialog* dialog)
     case PlaylistView::None:
       ui_->use_no_background->setChecked(true);
       break;
+    case PlaylistView::AlbumCover:
+      ui_->use_album_cover_background->setChecked(true);
+      break;
     case PlaylistView::Custom:
       ui_->use_custom_background_image->setChecked(true);
       break;
@@ -118,6 +121,8 @@ void AppearanceSettingsPage::Save() {
   playlist_view_background_image_filename_ = ui_->background_image_filename->text();
   if (ui_->use_no_background->isChecked()) {
     playlist_view_background_image_type_ = PlaylistView::None;
+  } else if (ui_->use_album_cover_background->isChecked()) {
+    playlist_view_background_image_type_ = PlaylistView::AlbumCover;
   } else if (ui_->use_default_background->isChecked()) {
     playlist_view_background_image_type_ = PlaylistView::Default;
   } else if (ui_->use_custom_background_image->isChecked()) {
