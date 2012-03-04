@@ -53,7 +53,6 @@ EditTagDialog::EditTagDialog(Application* app, QWidget* parent)
     ui_(new Ui_EditTagDialog),
     app_(app),
     album_cover_choice_controller_(new AlbumCoverChoiceController(this)),
-    backend_(NULL),
     loading_(false),
     ignore_edits_(false),
     tag_fetcher_(new TagFetcher(this)),
@@ -746,7 +745,7 @@ void EditTagDialog::SongRated(float rating) {
     return;
 
   song->set_rating(rating);
-  backend_->UpdateSongRatingAsync(song->id(), rating);
+  app_->library_backend()->UpdateSongRatingAsync(song->id(), rating);
 }
 
 void EditTagDialog::ResetPlayCounts() {
@@ -767,7 +766,7 @@ void EditTagDialog::ResetPlayCounts() {
   song->set_skipcount(0);
   song->set_lastplayed(-1);
   song->set_score(0);
-  backend_->ResetStatisticsAsync(song->id());
+  app_->library_backend()->ResetStatisticsAsync(song->id());
   UpdateStatisticsTab(*song);
 }
 

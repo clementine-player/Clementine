@@ -139,8 +139,6 @@ private:
   Application* app_;
   AlbumCoverChoiceController* album_cover_choice_controller_;
 
-  LibraryBackend* backend_;
-
   bool loading_;
 
   PlaylistItemList playlist_items_;
