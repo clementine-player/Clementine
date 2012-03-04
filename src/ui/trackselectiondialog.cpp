@@ -243,6 +243,7 @@ void TrackSelectionDialog::SaveData(const QList<Data>& data) {
     copy.set_artist(new_metadata.artist());
     copy.set_album(new_metadata.album());
     copy.set_track(new_metadata.track());
+    copy.set_year(new_metadata.year());
 
     TagReaderClient::Instance()->SaveFileBlocking(copy.url().toLocalFile(), copy);
   }

@@ -809,11 +809,13 @@ void EditTagDialog::FetchTagSongChosen(const Song& original_song, const Song& ne
       ui_->artist->set_text(new_metadata.artist());
       ui_->album->set_text(new_metadata.album());
       ui_->track->setValue(new_metadata.track());
+      ui_->year->setValue(new_metadata.year());
     } else {
       data->current_.set_title(new_metadata.title());
       data->current_.set_artist(new_metadata.artist());
       data->current_.set_album(new_metadata.album());
       data->current_.set_track(new_metadata.track());
+      data->current_.set_year(new_metadata.year());
     }
 
     break;
