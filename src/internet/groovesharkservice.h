@@ -113,7 +113,7 @@ class GroovesharkService : public InternetService {
 
   int SimpleSearch(const QString& query);
   int SearchAlbums(const QString& query);
-  SongList GetAlbumSongs(quint64 album_id);
+  void GetAlbumSongs(quint64 album_id);
 
   static const char* kServiceName;
   static const char* kSettingsGroup;
@@ -121,8 +121,11 @@ class GroovesharkService : public InternetService {
  signals:
   void LoginFinished(bool success);
   void SimpleSearchResults(int id, SongList songs);
-  void AlbumSearchResult(int id, QList<SongList> albums);
-  void AlbumSongsLoaded(int id, SongList songs);
+  // AlbumSearchResult emits the search id and the Grooveshark ids of the
+  // albums found. Albums' songs will be loaded asynchronously and
+  // AlbumSongsLoaded will be emitted, containing the actual Albums' songs.
+  void AlbumSearchResult(int id, QList<quint64> albums_ids);
+  void AlbumSongsLoaded(quint64 id, SongList songs);
 
  public slots:
   void ShowConfig();
@@ -150,6 +153,7 @@ class GroovesharkService : public InternetService {
   void SearchSongsFinished();
   void SimpleSearchFinished();
   void SearchAlbumsFinished(QNetworkReply* reply, int id);
+  void GetAlbumSongsFinished(QNetworkReply* reply, quint64 album_id);
   void Authenticated();
   void UserPlaylistsRetrieved();
   void UserFavoritesRetrieved(QNetworkReply* reply, int task_id);

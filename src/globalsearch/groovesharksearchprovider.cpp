@@ -39,10 +39,10 @@ void GroovesharkSearchProvider::Init(GroovesharkService* service) {
 
   connect(service_, SIGNAL(SimpleSearchResults(int, SongList)),
           SLOT(SearchDone(int, SongList)));
-  connect(service_, SIGNAL(AlbumSearchResult(int, QList<SongList>)),
-          SLOT(AlbumSearchResult(int, QList<SongList>)));
-  connect(service_, SIGNAL(AlbumSongsLoaded(int, SongList)),
-          SLOT(AlbumSongsLoaded(int, SongList)));
+  connect(service_, SIGNAL(AlbumSearchResult(int, QList<quint64>)),
+          SLOT(AlbumSearchResult(int, QList<quint64>)));
+  connect(service_, SIGNAL(AlbumSongsLoaded(quint64, SongList)),
+          SLOT(AlbumSongsLoaded(quint64, SongList)));
 
   cover_loader_options_.desired_height_ = kArtHeight;
   cover_loader_options_.pad_output_image_ = true;
@@ -83,35 +83,18 @@ void GroovesharkSearchProvider::SearchDone(int id, const SongList& songs) {
   MaybeSearchFinished(global_search_id);
 }
 
-void GroovesharkSearchProvider::AlbumSearchResult(int id, const QList<SongList>& albums) {
+void GroovesharkSearchProvider::AlbumSearchResult(int id, const QList<quint64>& albums_ids) {
   // Map back to the original id.
   const PendingState state = pending_searches_.take(id);
   const int global_search_id = state.orig_id_;
-
-  ResultList ret;
-  foreach (const SongList& a, albums) {
-    if (a.isEmpty())
-      continue;
-    Result result(this);
-    result.type_ = globalsearch::Type_Album;
-    const QString& artist = a.last().artist();
-    const QString& album  = a.last().album();
-    result.metadata_.set_album(album);
-    result.metadata_.set_artist(artist);
-    result.metadata_.set_art_automatic(a.last().art_automatic());
-    result.match_quality_ =
-        qMin(MatchQuality(state.tokens_, album),
-             MatchQuality(state.tokens_, artist));
-    foreach (const Song& s, a) {
-      result.album_songs_ << s;
-    }
-    result.album_size_ = result.album_songs_.size();
-
-    ret << result;
+  if (albums_ids.isEmpty()) {
+    MaybeSearchFinished(global_search_id);
+    return;
+  }
+  foreach (const quint64 album_id, albums_ids) {
+    pending_searches_[album_id] = PendingState(global_search_id, QStringList());
   }
 
-  emit ResultsAvailable(global_search_id, ret);
-  MaybeSearchFinished(global_search_id);
 }
 
 void GroovesharkSearchProvider::MaybeSearchFinished(int id) {
@@ -171,10 +154,28 @@ void GroovesharkSearchProvider::ShowConfig() {
   service_->ShowConfig();
 }
 
-void GroovesharkSearchProvider::AlbumSongsLoaded(int id, const SongList& songs) {
-  InternetSongMimeData* mime_data = new InternetSongMimeData(service_);
-  mime_data->songs = songs;
-  SortSongs(&mime_data->songs);
+void GroovesharkSearchProvider::AlbumSongsLoaded(quint64 id, const SongList& songs) {
+  const PendingState state = pending_searches_.take(id);
+  const int global_search_id = state.orig_id_;
+  ResultList ret;
+  if (!songs.isEmpty()) {
+    Result result(this);
+    result.type_ = globalsearch::Type_Album;
+    const QString& artist = songs.last().artist();
+    const QString& album  = songs.last().album();
+    result.metadata_.set_album(album);
+    result.metadata_.set_artist(artist);
+    result.metadata_.set_art_automatic(songs.last().art_automatic());
+    result.match_quality_ =
+        qMin(MatchQuality(state.tokens_, album),
+             MatchQuality(state.tokens_, artist));
+    foreach (const Song& s, songs) {
+      result.album_songs_ << s;
+    }
+    result.album_size_ = result.album_songs_.size();
 
-  emit TracksLoaded(id, mime_data);
+    ret << result;
+  }
+  emit ResultsAvailable(global_search_id, ret);
+  MaybeSearchFinished(global_search_id);
 }

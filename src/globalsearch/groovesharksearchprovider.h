@@ -40,9 +40,9 @@ class GroovesharkSearchProvider : public SearchProvider {
 
  private slots:
   void SearchDone(int id, const SongList& songs);
-  void AlbumSearchResult(int id, const QList<SongList>& songs);
+  void AlbumSearchResult(int id, const QList<quint64>& albums_ids);
   void AlbumArtLoaded(quint64 id, const QImage& image);
-  void AlbumSongsLoaded(int id, const SongList& songs);
+  void AlbumSongsLoaded(quint64 id, const SongList& songs);
 
  private:
   void MaybeSearchFinished(int id);
