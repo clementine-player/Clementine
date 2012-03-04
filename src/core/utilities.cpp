@@ -403,6 +403,28 @@ void ConsumeCurrentElement(QXmlStreamReader* reader) {
   }
 }
 
+bool ParseUntilElement(QXmlStreamReader* reader, const QString& name) {
+  while (!reader->atEnd()) {
+    QXmlStreamReader::TokenType type = reader->readNext();
+    switch (type) {
+      case QXmlStreamReader::StartElement:
+        if (reader->name() == name) {
+          return true;
+        }
+        break;
+      default:
+        break;
+    }
+  }
+  return false;
+}
+
+QDateTime ParseRFC822DateTime(const QString& text) {
+  static const char kFormat[] = "ddd, dd MMM yyyy hh:mm:ss";
+
+  return QDateTime::fromString(text.left(sizeof(kFormat)), kFormat);
+}
+
 const char* EnumToString(const QMetaObject& meta, const char* name, int value) {
   int index = meta.indexOfEnumerator(name);
   if (index == -1)
@@ -412,6 +434,20 @@ const char* EnumToString(const QMetaObject& meta, const char* name, int value) {
   if (result == 0)
     return "[UnknownEnumValue]";
   return result;
+}
+
+QStringList Prepend(const QString& text, const QStringList& list) {
+  QStringList ret(list);
+  for (int i=0 ; i<ret.count() ; ++i)
+    ret[i].prepend(text);
+  return ret;
+}
+
+QStringList Updateify(const QStringList& list) {
+  QStringList ret(list);
+  for (int i=0 ; i<ret.count() ; ++i)
+    ret[i].prepend(ret[i] + " = :");
+  return ret;
 }
 
 int SetThreadIOPriority(IoPriority priority) {

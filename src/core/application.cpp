@@ -31,6 +31,7 @@
 #include "library/librarybackend.h"
 #include "playlist/playlistbackend.h"
 #include "playlist/playlistmanager.h"
+#include "podcasts/podcastbackend.h"
 
 Application::Application(QObject* parent)
   : QObject(parent),
@@ -47,7 +48,8 @@ Application::Application(QObject* parent)
     internet_model_(NULL),
     library_(NULL),
     playlist_backend_(NULL),
-    device_manager_(NULL)
+    device_manager_(NULL),
+    podcast_backend_(NULL)
 {
   tag_reader_client_ = new TagReaderClient(this);
   MoveToNewThread(tag_reader_client_);
@@ -74,6 +76,9 @@ Application::Application(QObject* parent)
   MoveToThread(playlist_backend_, database_->thread());
 
   device_manager_ = new DeviceManager(this, this);
+
+  podcast_backend_ = new PodcastBackend(this, this);
+  MoveToThread(podcast_backend_, database_->thread());
 
   library_->Init();
   library_->StartThreads();

@@ -34,6 +34,7 @@ class LibraryModel;
 class Player;
 class PlaylistBackend;
 class PlaylistManager;
+class PodcastBackend;
 class TagReaderClient;
 class TaskManager;
 
@@ -60,6 +61,7 @@ public:
   Library* library() const { return library_; }
   PlaylistBackend* playlist_backend() const { return playlist_backend_; }
   DeviceManager* device_manager() const { return device_manager_; }
+  PodcastBackend* podcast_backend() const { return podcast_backend_; }
 
   LibraryBackend* library_backend() const;
   LibraryModel* library_model() const;
@@ -89,6 +91,7 @@ private:
   Library* library_;
   PlaylistBackend* playlist_backend_;
   DeviceManager* device_manager_;
+  PodcastBackend* podcast_backend_;
 
   QList<QObject*> objects_in_threads_;
   QList<QThread*> threads_;

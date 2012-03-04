@@ -227,6 +227,11 @@ set(SOURCES
   playlistparsers/xmlparser.cpp
   playlistparsers/xspfparser.cpp
 
+  podcasts/podcast.cpp
+  podcasts/podcastbackend.cpp
+  podcasts/podcastepisode.cpp
+  podcasts/podcastparser.cpp
+
   smartplaylists/generator.cpp
   smartplaylists/generatorinserter.cpp
   smartplaylists/querygenerator.cpp
@@ -461,6 +466,8 @@ set(HEADERS
   playlistparsers/playlistparser.h
   playlistparsers/plsparser.h
   playlistparsers/xspfparser.h
+
+  podcasts/podcastbackend.h
 
   smartplaylists/generator.h
   smartplaylists/generatorinserter.h
