@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-02-19 14:26+0000\n"
+"PO-Revision-Date: 2012-03-03 01:06+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -438,11 +438,11 @@ msgstr "Agregar etiqueta de año a la canción"
 msgid "Add stream..."
 msgstr "Agregar streaming..."
 
-#: internet/groovesharkservice.cpp:996
+#: internet/groovesharkservice.cpp:997
 msgid "Add to Grooveshark favorites"
 msgstr "Agregar a mis favoritos en Grooveshark"
 
-#: internet/groovesharkservice.cpp:1002
+#: internet/groovesharkservice.cpp:1003
 msgid "Add to Grooveshark playlists"
 msgstr "Agregar a listas de reproducción de Grooveshark"
 
@@ -488,7 +488,7 @@ msgstr "Agregado hoy"
 msgid "Added within three months"
 msgstr "Agregado en los últimos tres meses"
 
-#: internet/groovesharkservice.cpp:1248
+#: internet/groovesharkservice.cpp:1249
 msgid "Adding song to favorites"
 msgstr "Añadiendo canción a favoritas"
 
@@ -518,6 +518,10 @@ msgstr "Álbum (ganancia ideal para todas las pistas)"
 #: ../bin/src/ui_groupbydialog.h:157 ../bin/src/ui_edittagdialog.h:658
 msgid "Album artist"
 msgstr "Artista del álbum"
+
+#: ../bin/src/ui_appearancesettingspage.h:204
+msgid "Album cover"
+msgstr ""
 
 #: internet/jamendoservice.cpp:411
 msgid "Album info on jamendo.com..."
@@ -618,7 +622,7 @@ msgid "And:"
 msgstr "Y:"
 
 #: ../bin/src/ui_songinfosettingspage.h:180
-#: ../bin/src/ui_appearancesettingspage.h:179
+#: ../bin/src/ui_appearancesettingspage.h:191
 msgid "Appearance"
 msgstr "Aspecto"
 
@@ -644,7 +648,7 @@ msgstr "Aplicar compresión para evitar cortes"
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "¿Estás seguro/a de que quiere eliminar la predefinición «%1»?"
 
-#: internet/groovesharkservice.cpp:1171
+#: internet/groovesharkservice.cpp:1172
 msgid "Are you sure you want to delete this playlist?"
 msgstr "¿Estás seguro que querés borrar esta lista de reproducción?"
 
@@ -733,7 +737,7 @@ msgstr "Flujos de fondo"
 msgid "Background color"
 msgstr "Color de fondo"
 
-#: ../bin/src/ui_appearancesettingspage.h:187
+#: ../bin/src/ui_appearancesettingspage.h:199
 msgid "Background image"
 msgstr ""
 
@@ -802,7 +806,7 @@ msgid "Boom analyzer"
 msgstr "Analizador de Boom"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:146
-#: ../bin/src/ui_appearancesettingspage.h:191
+#: ../bin/src/ui_appearancesettingspage.h:207
 msgid "Browse..."
 msgstr "Explorar..."
 
@@ -987,7 +991,7 @@ msgstr "Club"
 msgid "Color"
 msgstr "Color"
 
-#: ../bin/src/ui_appearancesettingspage.h:180
+#: ../bin/src/ui_appearancesettingspage.h:192
 msgid "Colors"
 msgstr "Colores"
 
@@ -1018,7 +1022,7 @@ msgstr "Completar etiquetas automáticamente..."
 msgid "Composer"
 msgstr "Compositor"
 
-#: internet/groovesharkservice.cpp:495
+#: internet/groovesharkservice.cpp:496
 msgid "Configure Grooveshark..."
 msgstr "Configurá Grooveshark..."
 
@@ -1071,7 +1075,7 @@ msgstr "Convertir toda la música"
 msgid "Convert any music that the device can't play"
 msgstr "Convertí cualquier música que el dispositivo no pueda reproducir"
 
-#: internet/groovesharkservice.cpp:1049
+#: internet/groovesharkservice.cpp:1050
 msgid "Copy to clipboard"
 msgstr "Copiar al portapapeles"
 
@@ -1151,7 +1155,7 @@ msgstr "Portada establecida desde %1"
 msgid "Covers from %1"
 msgstr "Portadas de %1"
 
-#: internet/groovesharkservice.cpp:474 internet/groovesharkservice.cpp:1122
+#: internet/groovesharkservice.cpp:475 internet/groovesharkservice.cpp:1123
 msgid "Create a new Grooveshark playlist"
 msgstr "Creá una lista de reproducción nueva en Grooveshark "
 
@@ -1239,7 +1243,7 @@ msgstr "Ctrl+Up"
 msgid "Custom"
 msgstr "Personalizado"
 
-#: ../bin/src/ui_appearancesettingspage.h:190
+#: ../bin/src/ui_appearancesettingspage.h:206
 msgid "Custom image:"
 msgstr ""
 
@@ -1287,7 +1291,7 @@ msgstr "Reducir el volumen en 4%"
 msgid "Decrease volume"
 msgstr "Disminuir volumen"
 
-#: ../bin/src/ui_appearancesettingspage.h:188
+#: ../bin/src/ui_appearancesettingspage.h:200
 msgid "Default background image"
 msgstr ""
 
@@ -1299,7 +1303,7 @@ msgstr "Valores por defecto"
 msgid "Delay between visualizations"
 msgstr "Retardo entre visualizaciones"
 
-#: internet/groovesharkservice.cpp:477 internet/groovesharkservice.cpp:1170
+#: internet/groovesharkservice.cpp:478 internet/groovesharkservice.cpp:1171
 msgid "Delete Grooveshark playlist"
 msgstr "Eliminá la lista de reproducción de Grooveshark "
 
@@ -1615,7 +1619,7 @@ msgstr "Equivalente a --log-levels*:1"
 msgid "Equivalent to --log-levels *:3"
 msgstr "Equivalente a --log-levels*:3"
 
-#: internet/groovesharkservice.cpp:932
+#: internet/groovesharkservice.cpp:933
 #: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:465
 #: ui/mainwindow.cpp:1751 ui/mainwindow.cpp:1872
 msgid "Error"
@@ -1720,7 +1724,7 @@ msgstr "Duración de disolución"
 msgid "Fast"
 msgstr "Rápida"
 
-#: internet/groovesharkservice.cpp:553
+#: internet/groovesharkservice.cpp:554
 msgid "Favorites"
 msgstr "Favoritos"
 
@@ -1903,11 +1907,11 @@ msgstr "Preferencias generales"
 msgid "Genre"
 msgstr "Género"
 
-#: internet/groovesharkservice.cpp:1013
+#: internet/groovesharkservice.cpp:1014
 msgid "Get an URL to share this Grooveshark song"
 msgstr "Obtener una dirección URL para compartir esta canción de Grooveshark"
 
-#: internet/groovesharkservice.cpp:700
+#: internet/groovesharkservice.cpp:701
 msgid "Getting Grooveshark popular songs"
 msgstr "Obteniendo canciones populares de Grooveshark"
 
@@ -1953,15 +1957,15 @@ msgstr "Oscurecer canciones inexistentes de mis listas de reproducción"
 msgid "Grooveshark"
 msgstr "Grooveshark"
 
-#: internet/groovesharkservice.cpp:391
+#: internet/groovesharkservice.cpp:392
 msgid "Grooveshark login error"
 msgstr "Error de inicio de sesión en Grooveshark"
 
-#: internet/groovesharkservice.cpp:544
+#: internet/groovesharkservice.cpp:545
 msgid "Grooveshark radio"
 msgstr "Grooveshark radio"
 
-#: internet/groovesharkservice.cpp:1045
+#: internet/groovesharkservice.cpp:1046
 msgid "Grooveshark song's URL"
 msgstr "Dirección Url de la canción de Grooveshark"
 
@@ -2156,7 +2160,7 @@ msgstr "Servicio inválido"
 msgid "Invalid session key"
 msgstr "Clave de sesión inválida"
 
-#: internet/groovesharkservice.cpp:384
+#: internet/groovesharkservice.cpp:385
 msgid "Invalid username and/or password"
 msgstr "Nombre de usuario y/o contraseña inválida"
 
@@ -2336,7 +2340,7 @@ msgstr "Búsqueda en Colección"
 msgid "Limits"
 msgstr "Limites"
 
-#: internet/groovesharkservice.cpp:545
+#: internet/groovesharkservice.cpp:546
 msgid ""
 "Listen to Grooveshark songs based on what you've listened to previously"
 msgstr "Escucha canciones en Grooveshark con base en las que has escuchado previamente."
@@ -2638,7 +2642,7 @@ msgstr "Mi Estación de Radio"
 msgid "My Recommendations"
 msgstr "Mis Recomendaciones"
 
-#: internet/groovesharkservice.cpp:1123 internet/groovesharkservice.cpp:1215
+#: internet/groovesharkservice.cpp:1124 internet/groovesharkservice.cpp:1216
 #: ui/equalizer.cpp:172 ../bin/src/ui_deviceproperties.h:369
 #: ../bin/src/ui_magnatunedownloaddialog.h:135
 #: ../bin/src/ui_wizardfinishpage.h:84
@@ -2712,7 +2716,7 @@ msgstr "Pista siguiente"
 msgid "No analyzer"
 msgstr "Sin Analizador"
 
-#: ../bin/src/ui_appearancesettingspage.h:189
+#: ../bin/src/ui_appearancesettingspage.h:205
 msgid "No background image"
 msgstr ""
 
@@ -2812,7 +2816,7 @@ msgid "Only show the first"
 msgstr "Solo mostrar el primero"
 
 #: internet/digitallyimportedservicebase.cpp:180
-#: internet/groovesharkservice.cpp:492 internet/icecastservice.cpp:301
+#: internet/groovesharkservice.cpp:493 internet/icecastservice.cpp:301
 #: internet/jamendoservice.cpp:415 internet/magnatuneservice.cpp:276
 #: internet/somafmservice.cpp:86
 #, qt-format
@@ -3007,7 +3011,7 @@ msgstr "Búsqueda en la lista"
 msgid "Playlist type"
 msgstr "Tipo de lista de reproducción"
 
-#: internet/groovesharkservice.cpp:549
+#: internet/groovesharkservice.cpp:550
 msgid "Playlists"
 msgstr "Listas de reproducción"
 
@@ -3019,15 +3023,15 @@ msgstr "Estado del complemento:"
 msgid "Pop"
 msgstr "Pop"
 
-#: internet/groovesharkservice.cpp:517
+#: internet/groovesharkservice.cpp:518
 msgid "Popular songs"
 msgstr "Canciones populares"
 
-#: internet/groovesharkservice.cpp:521
+#: internet/groovesharkservice.cpp:522
 msgid "Popular songs of the Month"
 msgstr "Canciones populares del mes"
 
-#: internet/groovesharkservice.cpp:528
+#: internet/groovesharkservice.cpp:529
 msgid "Popular songs today"
 msgstr "Canciones populares de hoy"
 
@@ -3161,7 +3165,7 @@ msgstr "Añadir a la cola de reproducción"
 msgid "Radio (equal loudness for all tracks)"
 msgstr "Radio (volumen igual para todas las pistas)"
 
-#: internet/groovesharkservice.cpp:535
+#: internet/groovesharkservice.cpp:536
 msgid "Radios"
 msgstr "Radios"
 
@@ -3205,7 +3209,7 @@ msgstr "Valoración"
 msgid "Really cancel?"
 msgstr "¿Realmente querés cancelar?"
 
-#: internet/groovesharkservice.cpp:493
+#: internet/groovesharkservice.cpp:494
 msgid "Refresh"
 msgstr "Refrescar"
 
@@ -3259,11 +3263,11 @@ msgstr "Eliminar acción"
 msgid "Remove folder"
 msgstr "Remover carpeta"
 
-#: internet/groovesharkservice.cpp:487
+#: internet/groovesharkservice.cpp:488
 msgid "Remove from favorites"
 msgstr "Sacar de favoritos"
 
-#: internet/groovesharkservice.cpp:484 ../bin/src/ui_mainwindow.h:684
+#: internet/groovesharkservice.cpp:485 ../bin/src/ui_mainwindow.h:684
 msgid "Remove from playlist"
 msgstr "Eliminar de la lista de reproducción"
 
@@ -3271,16 +3275,16 @@ msgstr "Eliminar de la lista de reproducción"
 msgid "Remove playlist"
 msgstr "Quitar lista de reproducción"
 
-#: internet/groovesharkservice.cpp:1306
+#: internet/groovesharkservice.cpp:1307
 msgid "Removing song from favorites"
 msgstr "Eliminando canción de favoritas"
 
-#: internet/groovesharkservice.cpp:1214
+#: internet/groovesharkservice.cpp:1215
 #, qt-format
 msgid "Rename \"%1\" playlist"
 msgstr "Renombrar \"%1\" lista de reproducción"
 
-#: internet/groovesharkservice.cpp:480
+#: internet/groovesharkservice.cpp:481
 msgid "Rename Grooveshark playlist"
 msgstr "Renombrar lista de reproducción de Grooveshark"
 
@@ -3358,11 +3362,11 @@ msgstr "Restringir a caracteres ASCII"
 msgid "Results"
 msgstr "Resultados"
 
-#: internet/groovesharkservice.cpp:671
+#: internet/groovesharkservice.cpp:672
 msgid "Retrieving Grooveshark favorites songs"
 msgstr "Recuperando canciones favoritas de Grooveshark"
 
-#: internet/groovesharkservice.cpp:596
+#: internet/groovesharkservice.cpp:597
 msgid "Retrieving Grooveshark playlists"
 msgstr "Recuperando listas de reproducción de Grooveshark"
 
@@ -3440,11 +3444,11 @@ msgid "Search"
 msgstr "Buscar"
 
 #: internet/groovesharksearchplaylisttype.cpp:32
-#: internet/groovesharkservice.cpp:910
+#: internet/groovesharkservice.cpp:911
 msgid "Search Grooveshark"
 msgstr "Buscar en Grooveshark"
 
-#: internet/groovesharkservice.cpp:490 internet/groovesharkservice.cpp:511
+#: internet/groovesharkservice.cpp:491 internet/groovesharkservice.cpp:512
 msgid "Search Grooveshark (opens a new tab)"
 msgstr "Buscar en Grooveshark (abrir nueva pestaña)"
 
@@ -3497,7 +3501,7 @@ msgstr "Opciones de búsqueda"
 msgid "Search terms"
 msgstr "Términos de Búsqueda"
 
-#: internet/groovesharkservice.cpp:260
+#: internet/groovesharkservice.cpp:261
 msgid "Searching on Grooveshark"
 msgstr "Buscando en Grooveshark"
 
@@ -3529,11 +3533,11 @@ msgstr "Seleccionar Todo"
 msgid "Select None"
 msgstr "No seleccionar nada"
 
-#: ../bin/src/ui_appearancesettingspage.h:185
+#: ../bin/src/ui_appearancesettingspage.h:197
 msgid "Select background color:"
 msgstr "Elegí el color de fondo:"
 
-#: ui/appearancesettingspage.cpp:187
+#: ui/appearancesettingspage.cpp:192
 msgid "Select background image"
 msgstr ""
 
@@ -3541,7 +3545,7 @@ msgstr ""
 msgid "Select best possible match"
 msgstr "Seleccionar la mejor conincidencia posible"
 
-#: ../bin/src/ui_appearancesettingspage.h:183
+#: ../bin/src/ui_appearancesettingspage.h:195
 msgid "Select foreground color:"
 msgstr "Elegí el color de primer plano:"
 
@@ -3857,7 +3861,7 @@ msgstr "Iniciando %1"
 msgid "Starting..."
 msgstr "Iniciando..."
 
-#: internet/groovesharkservice.cpp:539
+#: internet/groovesharkservice.cpp:540
 msgid "Stations"
 msgstr "Estaciones"
 
@@ -3894,7 +3898,7 @@ msgstr "Transmisión"
 msgid "Streaming membership"
 msgstr "Membrecía de streaming"
 
-#: internet/groovesharkservice.cpp:562
+#: internet/groovesharkservice.cpp:563
 msgid "Subscribed playlists"
 msgstr "Listas de reproducción suscritas"
 
@@ -3977,6 +3981,10 @@ msgstr "Gracias a"
 #, qt-format
 msgid "The \"%1\" command could not be started."
 msgstr "El comando \"%1\" no pudo iniciarse."
+
+#: ../bin/src/ui_appearancesettingspage.h:202
+msgid "The album cover of the currently playing song"
+msgstr ""
 
 #: internet/magnatunedownloaddialog.cpp:89
 #, qt-format
@@ -4119,7 +4127,7 @@ msgstr "Zona horaria"
 msgid "Title"
 msgstr "Título"
 
-#: internet/groovesharkservice.cpp:933
+#: internet/groovesharkservice.cpp:934
 msgid ""
 "To start Grooveshark radio, you should first listen to a few other "
 "Grooveshark songs"
@@ -4229,7 +4237,7 @@ msgstr "Error desconocido"
 msgid "Unset cover"
 msgstr "Quitar portada"
 
-#: internet/groovesharkservice.cpp:1077
+#: internet/groovesharkservice.cpp:1078
 msgid "Update Grooveshark playlist"
 msgstr "Actualizar lista de reproducción de Grooveshark"
 
@@ -4271,7 +4279,7 @@ msgstr "Usar metadatos de ganancia de repetición si están disponibles"
 msgid "Use Wii Remote"
 msgstr "Usar Wiimote"
 
-#: ../bin/src/ui_appearancesettingspage.h:182
+#: ../bin/src/ui_appearancesettingspage.h:194
 msgid "Use a custom color set"
 msgstr "Usá un juego de colores a tu gusto"
 
@@ -4303,7 +4311,7 @@ msgstr "Usar noise shaping temporalmente"
 msgid "Use the system default"
 msgstr "Usar los ajustes por defecto del sistema"
 
-#: ../bin/src/ui_appearancesettingspage.h:181
+#: ../bin/src/ui_appearancesettingspage.h:193
 msgid "Use the system default color set"
 msgstr "Usá el juego de colores del sistema"
 
@@ -4319,7 +4327,7 @@ msgstr "Usar normalización de volumen"
 msgid "Used"
 msgstr "Usado"
 
-#: internet/groovesharkservice.cpp:387
+#: internet/groovesharkservice.cpp:388
 #, qt-format
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr "El usuario %1 no tiene una cuenta Grooveshark Anywhere"
@@ -4672,7 +4680,7 @@ msgstr "entre"
 msgid "biggest first"
 msgstr "más grande primero"
 
-#: playlist/playlistview.cpp:174 ui/edittagdialog.cpp:450
+#: playlist/playlistview.cpp:184 ui/edittagdialog.cpp:450
 msgid "bpm"
 msgstr "bpm"
 
@@ -4715,7 +4723,7 @@ msgstr "mayor que"
 msgid "in the last"
 msgstr "en los últimos"
 
-#: playlist/playlistview.cpp:176 ui/edittagdialog.cpp:452
+#: playlist/playlistview.cpp:186 ui/edittagdialog.cpp:452
 #: internet/spotifysettingspage.cpp:59 internet/spotifysettingspage.cpp:60
 #: internet/spotifysettingspage.cpp:61
 msgid "kbps"

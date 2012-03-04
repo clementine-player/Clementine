@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-02-19 14:26+0000\n"
+"PO-Revision-Date: 2012-03-03 01:05+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -433,11 +433,11 @@ msgstr "添加歌曲年份标签"
 msgid "Add stream..."
 msgstr "添加流媒体..."
 
-#: internet/groovesharkservice.cpp:996
+#: internet/groovesharkservice.cpp:997
 msgid "Add to Grooveshark favorites"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:1002
+#: internet/groovesharkservice.cpp:1003
 msgid "Add to Grooveshark playlists"
 msgstr ""
 
@@ -483,7 +483,7 @@ msgstr "今日加入"
 msgid "Added within three months"
 msgstr "于三个月内加入"
 
-#: internet/groovesharkservice.cpp:1248
+#: internet/groovesharkservice.cpp:1249
 msgid "Adding song to favorites"
 msgstr ""
 
@@ -513,6 +513,10 @@ msgstr "专辑(所有音轨采用一个合适的音量)"
 #: ../bin/src/ui_groupbydialog.h:157 ../bin/src/ui_edittagdialog.h:658
 msgid "Album artist"
 msgstr "专辑艺人"
+
+#: ../bin/src/ui_appearancesettingspage.h:204
+msgid "Album cover"
+msgstr ""
 
 #: internet/jamendoservice.cpp:411
 msgid "Album info on jamendo.com..."
@@ -613,7 +617,7 @@ msgid "And:"
 msgstr "和："
 
 #: ../bin/src/ui_songinfosettingspage.h:180
-#: ../bin/src/ui_appearancesettingspage.h:179
+#: ../bin/src/ui_appearancesettingspage.h:191
 msgid "Appearance"
 msgstr "外观"
 
@@ -639,7 +643,7 @@ msgstr "允许压缩以阻止剪切"
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "您确定要删除预设 %1 吗？"
 
-#: internet/groovesharkservice.cpp:1171
+#: internet/groovesharkservice.cpp:1172
 msgid "Are you sure you want to delete this playlist?"
 msgstr ""
 
@@ -728,7 +732,7 @@ msgstr "背景流媒体"
 msgid "Background color"
 msgstr "背景颜色"
 
-#: ../bin/src/ui_appearancesettingspage.h:187
+#: ../bin/src/ui_appearancesettingspage.h:199
 msgid "Background image"
 msgstr ""
 
@@ -797,7 +801,7 @@ msgid "Boom analyzer"
 msgstr ""
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:146
-#: ../bin/src/ui_appearancesettingspage.h:191
+#: ../bin/src/ui_appearancesettingspage.h:207
 msgid "Browse..."
 msgstr "浏览..."
 
@@ -982,7 +986,7 @@ msgstr "俱乐部"
 msgid "Color"
 msgstr "颜色"
 
-#: ../bin/src/ui_appearancesettingspage.h:180
+#: ../bin/src/ui_appearancesettingspage.h:192
 msgid "Colors"
 msgstr ""
 
@@ -1013,7 +1017,7 @@ msgstr "自动关闭标签"
 msgid "Composer"
 msgstr "作曲"
 
-#: internet/groovesharkservice.cpp:495
+#: internet/groovesharkservice.cpp:496
 msgid "Configure Grooveshark..."
 msgstr ""
 
@@ -1066,7 +1070,7 @@ msgstr "转换全部音乐"
 msgid "Convert any music that the device can't play"
 msgstr "转换设备不能播放的音乐"
 
-#: internet/groovesharkservice.cpp:1049
+#: internet/groovesharkservice.cpp:1050
 msgid "Copy to clipboard"
 msgstr ""
 
@@ -1146,7 +1150,7 @@ msgstr "从 %1 中设置封面"
 msgid "Covers from %1"
 msgstr "来自%1的封面"
 
-#: internet/groovesharkservice.cpp:474 internet/groovesharkservice.cpp:1122
+#: internet/groovesharkservice.cpp:475 internet/groovesharkservice.cpp:1123
 msgid "Create a new Grooveshark playlist"
 msgstr ""
 
@@ -1234,7 +1238,7 @@ msgstr "Ctrl+Up"
 msgid "Custom"
 msgstr "自定义"
 
-#: ../bin/src/ui_appearancesettingspage.h:190
+#: ../bin/src/ui_appearancesettingspage.h:206
 msgid "Custom image:"
 msgstr ""
 
@@ -1282,7 +1286,7 @@ msgstr "音量减少百分之四"
 msgid "Decrease volume"
 msgstr "降低音量"
 
-#: ../bin/src/ui_appearancesettingspage.h:188
+#: ../bin/src/ui_appearancesettingspage.h:200
 msgid "Default background image"
 msgstr ""
 
@@ -1294,7 +1298,7 @@ msgstr "默认"
 msgid "Delay between visualizations"
 msgstr "在两个视觉化效果间延迟切换"
 
-#: internet/groovesharkservice.cpp:477 internet/groovesharkservice.cpp:1170
+#: internet/groovesharkservice.cpp:478 internet/groovesharkservice.cpp:1171
 msgid "Delete Grooveshark playlist"
 msgstr ""
 
@@ -1610,7 +1614,7 @@ msgstr ""
 msgid "Equivalent to --log-levels *:3"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:932
+#: internet/groovesharkservice.cpp:933
 #: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:465
 #: ui/mainwindow.cpp:1751 ui/mainwindow.cpp:1872
 msgid "Error"
@@ -1715,7 +1719,7 @@ msgstr "淡出时长"
 msgid "Fast"
 msgstr "快速"
 
-#: internet/groovesharkservice.cpp:553
+#: internet/groovesharkservice.cpp:554
 msgid "Favorites"
 msgstr ""
 
@@ -1898,11 +1902,11 @@ msgstr "常规设置"
 msgid "Genre"
 msgstr "流派"
 
-#: internet/groovesharkservice.cpp:1013
+#: internet/groovesharkservice.cpp:1014
 msgid "Get an URL to share this Grooveshark song"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:700
+#: internet/groovesharkservice.cpp:701
 msgid "Getting Grooveshark popular songs"
 msgstr ""
 
@@ -1948,15 +1952,15 @@ msgstr "灰色显示播放列表中不存在的歌曲"
 msgid "Grooveshark"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:391
+#: internet/groovesharkservice.cpp:392
 msgid "Grooveshark login error"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:544
+#: internet/groovesharkservice.cpp:545
 msgid "Grooveshark radio"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:1045
+#: internet/groovesharkservice.cpp:1046
 msgid "Grooveshark song's URL"
 msgstr ""
 
@@ -2151,7 +2155,7 @@ msgstr "服务无效"
 msgid "Invalid session key"
 msgstr "会话钥匙无效"
 
-#: internet/groovesharkservice.cpp:384
+#: internet/groovesharkservice.cpp:385
 msgid "Invalid username and/or password"
 msgstr ""
 
@@ -2331,7 +2335,7 @@ msgstr "音乐库搜索"
 msgid "Limits"
 msgstr "限制"
 
-#: internet/groovesharkservice.cpp:545
+#: internet/groovesharkservice.cpp:546
 msgid ""
 "Listen to Grooveshark songs based on what you've listened to previously"
 msgstr ""
@@ -2633,7 +2637,7 @@ msgstr "我的电台"
 msgid "My Recommendations"
 msgstr "我的推荐"
 
-#: internet/groovesharkservice.cpp:1123 internet/groovesharkservice.cpp:1215
+#: internet/groovesharkservice.cpp:1124 internet/groovesharkservice.cpp:1216
 #: ui/equalizer.cpp:172 ../bin/src/ui_deviceproperties.h:369
 #: ../bin/src/ui_magnatunedownloaddialog.h:135
 #: ../bin/src/ui_wizardfinishpage.h:84
@@ -2707,7 +2711,7 @@ msgstr "下一音轨"
 msgid "No analyzer"
 msgstr "无均衡器"
 
-#: ../bin/src/ui_appearancesettingspage.h:189
+#: ../bin/src/ui_appearancesettingspage.h:205
 msgid "No background image"
 msgstr ""
 
@@ -2807,7 +2811,7 @@ msgid "Only show the first"
 msgstr ""
 
 #: internet/digitallyimportedservicebase.cpp:180
-#: internet/groovesharkservice.cpp:492 internet/icecastservice.cpp:301
+#: internet/groovesharkservice.cpp:493 internet/icecastservice.cpp:301
 #: internet/jamendoservice.cpp:415 internet/magnatuneservice.cpp:276
 #: internet/somafmservice.cpp:86
 #, qt-format
@@ -3002,7 +3006,7 @@ msgstr "播放列表搜索"
 msgid "Playlist type"
 msgstr "播放列表类型"
 
-#: internet/groovesharkservice.cpp:549
+#: internet/groovesharkservice.cpp:550
 msgid "Playlists"
 msgstr ""
 
@@ -3014,15 +3018,15 @@ msgstr "插件状态:"
 msgid "Pop"
 msgstr "流行"
 
-#: internet/groovesharkservice.cpp:517
+#: internet/groovesharkservice.cpp:518
 msgid "Popular songs"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:521
+#: internet/groovesharkservice.cpp:522
 msgid "Popular songs of the Month"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:528
+#: internet/groovesharkservice.cpp:529
 msgid "Popular songs today"
 msgstr ""
 
@@ -3156,7 +3160,7 @@ msgstr "加入队列"
 msgid "Radio (equal loudness for all tracks)"
 msgstr "电台(所有音轨采用相同的音量)"
 
-#: internet/groovesharkservice.cpp:535
+#: internet/groovesharkservice.cpp:536
 msgid "Radios"
 msgstr ""
 
@@ -3200,7 +3204,7 @@ msgstr "评级"
 msgid "Really cancel?"
 msgstr "确实取消？"
 
-#: internet/groovesharkservice.cpp:493
+#: internet/groovesharkservice.cpp:494
 msgid "Refresh"
 msgstr ""
 
@@ -3254,11 +3258,11 @@ msgstr "删除操作"
 msgid "Remove folder"
 msgstr "删除文件夹"
 
-#: internet/groovesharkservice.cpp:487
+#: internet/groovesharkservice.cpp:488
 msgid "Remove from favorites"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:484 ../bin/src/ui_mainwindow.h:684
+#: internet/groovesharkservice.cpp:485 ../bin/src/ui_mainwindow.h:684
 msgid "Remove from playlist"
 msgstr ""
 
@@ -3266,16 +3270,16 @@ msgstr ""
 msgid "Remove playlist"
 msgstr "删除播放列表"
 
-#: internet/groovesharkservice.cpp:1306
+#: internet/groovesharkservice.cpp:1307
 msgid "Removing song from favorites"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:1214
+#: internet/groovesharkservice.cpp:1215
 #, qt-format
 msgid "Rename \"%1\" playlist"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:480
+#: internet/groovesharkservice.cpp:481
 msgid "Rename Grooveshark playlist"
 msgstr ""
 
@@ -3353,11 +3357,11 @@ msgstr "仅使用 ASCII 字符"
 msgid "Results"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:671
+#: internet/groovesharkservice.cpp:672
 msgid "Retrieving Grooveshark favorites songs"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:596
+#: internet/groovesharkservice.cpp:597
 msgid "Retrieving Grooveshark playlists"
 msgstr ""
 
@@ -3435,11 +3439,11 @@ msgid "Search"
 msgstr "搜索"
 
 #: internet/groovesharksearchplaylisttype.cpp:32
-#: internet/groovesharkservice.cpp:910
+#: internet/groovesharkservice.cpp:911
 msgid "Search Grooveshark"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:490 internet/groovesharkservice.cpp:511
+#: internet/groovesharkservice.cpp:491 internet/groovesharkservice.cpp:512
 msgid "Search Grooveshark (opens a new tab)"
 msgstr ""
 
@@ -3492,7 +3496,7 @@ msgstr "搜索选项"
 msgid "Search terms"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:260
+#: internet/groovesharkservice.cpp:261
 msgid "Searching on Grooveshark"
 msgstr ""
 
@@ -3524,11 +3528,11 @@ msgstr "选择全部"
 msgid "Select None"
 msgstr "不选择"
 
-#: ../bin/src/ui_appearancesettingspage.h:185
+#: ../bin/src/ui_appearancesettingspage.h:197
 msgid "Select background color:"
 msgstr ""
 
-#: ui/appearancesettingspage.cpp:187
+#: ui/appearancesettingspage.cpp:192
 msgid "Select background image"
 msgstr ""
 
@@ -3536,7 +3540,7 @@ msgstr ""
 msgid "Select best possible match"
 msgstr ""
 
-#: ../bin/src/ui_appearancesettingspage.h:183
+#: ../bin/src/ui_appearancesettingspage.h:195
 msgid "Select foreground color:"
 msgstr ""
 
@@ -3852,7 +3856,7 @@ msgstr "正在开始 %1"
 msgid "Starting..."
 msgstr "正在开始..."
 
-#: internet/groovesharkservice.cpp:539
+#: internet/groovesharkservice.cpp:540
 msgid "Stations"
 msgstr ""
 
@@ -3889,7 +3893,7 @@ msgstr "流媒体"
 msgid "Streaming membership"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:562
+#: internet/groovesharkservice.cpp:563
 msgid "Subscribed playlists"
 msgstr ""
 
@@ -3972,6 +3976,10 @@ msgstr ""
 #, qt-format
 msgid "The \"%1\" command could not be started."
 msgstr "命令\"%1\"无法执行."
+
+#: ../bin/src/ui_appearancesettingspage.h:202
+msgid "The album cover of the currently playing song"
+msgstr ""
 
 #: internet/magnatunedownloaddialog.cpp:89
 #, qt-format
@@ -4114,7 +4122,7 @@ msgstr "时区"
 msgid "Title"
 msgstr "标题"
 
-#: internet/groovesharkservice.cpp:933
+#: internet/groovesharkservice.cpp:934
 msgid ""
 "To start Grooveshark radio, you should first listen to a few other "
 "Grooveshark songs"
@@ -4224,7 +4232,7 @@ msgstr "未知错误"
 msgid "Unset cover"
 msgstr "撤销封面"
 
-#: internet/groovesharkservice.cpp:1077
+#: internet/groovesharkservice.cpp:1078
 msgid "Update Grooveshark playlist"
 msgstr ""
 
@@ -4266,7 +4274,7 @@ msgstr "使用播放增益元数据(如果可用)"
 msgid "Use Wii Remote"
 msgstr ""
 
-#: ../bin/src/ui_appearancesettingspage.h:182
+#: ../bin/src/ui_appearancesettingspage.h:194
 msgid "Use a custom color set"
 msgstr ""
 
@@ -4298,7 +4306,7 @@ msgstr ""
 msgid "Use the system default"
 msgstr "使用系统默认"
 
-#: ../bin/src/ui_appearancesettingspage.h:181
+#: ../bin/src/ui_appearancesettingspage.h:193
 msgid "Use the system default color set"
 msgstr ""
 
@@ -4314,7 +4322,7 @@ msgstr ""
 msgid "Used"
 msgstr "已使用"
 
-#: internet/groovesharkservice.cpp:387
+#: internet/groovesharkservice.cpp:388
 #, qt-format
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr ""
@@ -4667,7 +4675,7 @@ msgstr ""
 msgid "biggest first"
 msgstr ""
 
-#: playlist/playlistview.cpp:174 ui/edittagdialog.cpp:450
+#: playlist/playlistview.cpp:184 ui/edittagdialog.cpp:450
 msgid "bpm"
 msgstr "bpm"
 
@@ -4710,7 +4718,7 @@ msgstr "大于"
 msgid "in the last"
 msgstr ""
 
-#: playlist/playlistview.cpp:176 ui/edittagdialog.cpp:452
+#: playlist/playlistview.cpp:186 ui/edittagdialog.cpp:452
 #: internet/spotifysettingspage.cpp:59 internet/spotifysettingspage.cpp:60
 #: internet/spotifysettingspage.cpp:61
 msgid "kbps"
