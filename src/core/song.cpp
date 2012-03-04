@@ -400,7 +400,6 @@ void Song::InitFromProtobuf(const pb::tagreader::SongMetadata& pb) {
   d->genre_ = QStringFromStdString(pb.genre());
   d->comment_ = QStringFromStdString(pb.comment());
   d->compilation_ = pb.compilation();
-  d->rating_ = pb.rating();
   d->playcount_ = pb.playcount();
   d->skipcount_ = pb.skipcount();
   d->lastplayed_ = pb.lastplayed();
@@ -416,6 +415,10 @@ void Song::InitFromProtobuf(const pb::tagreader::SongMetadata& pb) {
   d->suspicious_tags_ = pb.suspicious_tags();
   d->art_automatic_ = QStringFromStdString(pb.art_automatic());
   d->filetype_ = static_cast<FileType>(pb.type());
+
+  if (pb.has_rating()) {
+    d->rating_ = pb.rating();
+  }
 }
 
 void Song::ToProtobuf(pb::tagreader::SongMetadata* pb) const {

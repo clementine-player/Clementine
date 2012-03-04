@@ -295,7 +295,6 @@ void TagReaderWorker::ReadFile(const QString& filename,
   SetDefault(bitrate);
   SetDefault(samplerate);
   SetDefault(lastplayed);
-  SetDefault(rating);
   #undef SetDefault
 }
 
