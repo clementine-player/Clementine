@@ -461,6 +461,8 @@ QPixmap SongSourceDelegate::LookupPixmap(const QUrl& url, const QSize& size) con
       icon = QIcon(":icons/22x22/spotify.png");
     } else if (url.scheme() == "file") {
       icon = IconLoader::Load("folder-sound");
+    } else if (url.host() == "api.jamendo.com") {
+      icon = QIcon(":/providers/jamendo.png");
     }
   }
   pixmap = icon.pixmap(size.height());
