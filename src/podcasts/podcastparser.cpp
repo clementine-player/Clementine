@@ -25,20 +25,31 @@ const char* PodcastParser::kAtomNamespace = "http://www.w3.org/2005/Atom";
 const char* PodcastParser::kItunesNamespace = "http://www.itunes.com/dtds/podcast-1.0.dtd";
 
 PodcastParser::PodcastParser() {
+  supported_mime_types_ << "application/rss+xml"
+                        << "application/xml"
+                        << "text/xml";
 }
 
-Podcast PodcastParser::Load(QIODevice* device, const QUrl& url) const {
-  Podcast ret;
-  ret.set_url(url);
+bool PodcastParser::SupportsContentType(const QString& content_type) const {
+  foreach (const QString& mime_type, supported_mime_types()) {
+    if (content_type.contains(mime_type)) {
+      return true;
+    }
+  }
+  return false;
+}
+
+bool PodcastParser::Load(QIODevice* device, const QUrl& url, Podcast* ret) const {
+  ret->set_url(url);
 
   QXmlStreamReader reader(device);
   if (!Utilities::ParseUntilElement(&reader, "rss") ||
       !Utilities::ParseUntilElement(&reader, "channel")) {
-    return ret;
+    return false;
   }
 
-  ParseChannel(&reader, &ret);
-  return ret;
+  ParseChannel(&reader, ret);
+  return true;
 }
 
 void PodcastParser::ParseChannel(QXmlStreamReader* reader, Podcast* ret) const {

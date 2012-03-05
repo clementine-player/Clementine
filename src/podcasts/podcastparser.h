@@ -18,6 +18,8 @@
 #ifndef PODCASTPARSER_H
 #define PODCASTPARSER_H
 
+#include <QStringList>
+
 #include "podcast.h"
 
 class QXmlStreamReader;
@@ -30,13 +32,19 @@ public:
   static const char* kAtomNamespace;
   static const char* kItunesNamespace;
 
-  Podcast Load(QIODevice* device, const QUrl& url) const;
+  const QStringList& supported_mime_types() const { return supported_mime_types_; }
+  bool SupportsContentType(const QString& content_type) const;
+
+  bool Load(QIODevice* device, const QUrl& url, Podcast* ret) const;
 
 private:
   void ParseChannel(QXmlStreamReader* reader, Podcast* ret) const;
   void ParseImage(QXmlStreamReader* reader, Podcast* ret) const;
   void ParseItunesOwner(QXmlStreamReader* reader, Podcast* ret) const;
   void ParseItem(QXmlStreamReader* reader, Podcast* ret) const;
+
+private:
+  QStringList supported_mime_types_;
 };
 
 #endif // PODCASTPARSER_H

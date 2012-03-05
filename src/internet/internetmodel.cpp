@@ -27,6 +27,7 @@
 #include "groovesharkservice.h"
 #include "core/logging.h"
 #include "core/mergedproxymodel.h"
+#include "podcasts/podcastservice.h"
 #include "smartplaylists/generatormimedata.h"
 
 #ifdef HAVE_LIBLASTFM
@@ -65,6 +66,7 @@ InternetModel::InternetModel(Application* app, QObject* parent)
 #endif
   AddService(new GroovesharkService(app, this));
   AddService(new MagnatuneService(app, this));
+  AddService(new PodcastService(app, this));
   AddService(new SavedRadio(app, this));
   AddService(new SkyFmService(app, this));
   AddService(new SomaFMService(app, this));

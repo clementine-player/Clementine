@@ -450,6 +450,16 @@ QStringList Updateify(const QStringList& list) {
   return ret;
 }
 
+QString DecodeHtmlEntities(const QString& text) {
+  QString copy(text);
+  copy.replace("&amp;", "&");
+  copy.replace("&quot;", "\"");
+  copy.replace("&apos;", "'");
+  copy.replace("&lt;", "<");
+  copy.replace("&gt;", ">");
+  return copy;
+}
+
 int SetThreadIOPriority(IoPriority priority) {
 #ifdef Q_OS_LINUX
   return syscall(SYS_ioprio_set, IOPRIO_WHO_PROCESS, GetThreadId(),

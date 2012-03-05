@@ -227,10 +227,17 @@ set(SOURCES
   playlistparsers/xmlparser.cpp
   playlistparsers/xspfparser.cpp
 
+  podcasts/addpodcastbyurl.cpp
+  podcasts/addpodcastdialog.cpp
+  podcasts/addpodcastpage.cpp
   podcasts/podcast.cpp
   podcasts/podcastbackend.cpp
+  podcasts/podcastdiscoverymodel.cpp
   podcasts/podcastepisode.cpp
+  podcasts/podcastinfowidget.cpp
+  podcasts/podcastservice.cpp
   podcasts/podcastparser.cpp
+  podcasts/podcasturlloader.cpp
 
   smartplaylists/generator.cpp
   smartplaylists/generatorinserter.cpp
@@ -467,7 +474,14 @@ set(HEADERS
   playlistparsers/plsparser.h
   playlistparsers/xspfparser.h
 
+  podcasts/addpodcastbyurl.h
+  podcasts/addpodcastdialog.h
+  podcasts/addpodcastpage.h
   podcasts/podcastbackend.h
+  podcasts/podcastdiscoverymodel.h
+  podcasts/podcastinfowidget.h
+  podcasts/podcastservice.h
+  podcasts/podcasturlloader.h
 
   smartplaylists/generator.h
   smartplaylists/generatorinserter.h
@@ -585,6 +599,10 @@ set(UI
   playlist/playlistcontainer.ui
   playlist/playlistsequence.ui
   playlist/queuemanager.ui
+
+  podcasts/addpodcastbyurl.ui
+  podcasts/addpodcastdialog.ui
+  podcasts/podcastinfowidget.ui
 
   remote/remotesettingspage.ui
 

@@ -89,6 +89,9 @@ namespace Utilities {
   // Parses a string containing an RFC822 time and date.
   QDateTime ParseRFC822DateTime(const QString& text);
 
+  // Replaces some HTML entities with their normal characters.
+  QString DecodeHtmlEntities(const QString& text);
+
   // Shortcut for getting a Qt-aware enum value as a string.
   // Pass in the QMetaObject of the class that owns the enum, the string name of
   // the enum and a valid value from that enum.
