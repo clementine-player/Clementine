@@ -498,8 +498,8 @@ msgstr "پس از کپی‌کردن"
 #: playlist/playlist.cpp:1116 ui/organisedialog.cpp:55
 #: ui/qtsystemtrayicon.cpp:252 ../bin/src/ui_groupbydialog.h:129
 #: ../bin/src/ui_groupbydialog.h:142 ../bin/src/ui_groupbydialog.h:155
-#: ../bin/src/ui_albumcoversearcher.h:110
-#: ../bin/src/ui_albumcoversearcher.h:112 ../bin/src/ui_edittagdialog.h:656
+#: ../bin/src/ui_albumcoversearcher.h:111
+#: ../bin/src/ui_albumcoversearcher.h:113 ../bin/src/ui_edittagdialog.h:656
 #: ../bin/src/ui_trackselectiondialog.h:209
 msgid "Album"
 msgstr "آلبوم"
@@ -602,7 +602,7 @@ msgstr "مشکلی هنگام  کپی‌کردن بانک اطلاعاتی آی�
 msgid "An error occurred loading the iTunes database"
 msgstr "مشکلی هنگام  فراخوانی بانک اطلاعاتی آی‌تیون پیش آمد"
 
-#: ui/edittagdialog.cpp:655
+#: ui/edittagdialog.cpp:654
 #, qt-format
 msgid "An error occurred writing metadata to '%1'"
 msgstr "مشکلی در نوشتن ابرداده در '%1' پیش آمد"
@@ -647,15 +647,15 @@ msgstr "آیا مطمئنید که می‌خواهید پیش‌نشاندهٔ \
 msgid "Are you sure you want to delete this playlist?"
 msgstr ""
 
-#: ui/edittagdialog.cpp:761
+#: ui/edittagdialog.cpp:760
 msgid "Are you sure you want to reset this song's statistics?"
 msgstr "آیا مطمئنید که می‌خواهید آمارهٔ این آهنگ را  پاک کنید؟"
 
 #: playlist/playlist.cpp:1115 ui/organisedialog.cpp:56
 #: ui/qtsystemtrayicon.cpp:250 ../bin/src/ui_groupbydialog.h:130
 #: ../bin/src/ui_groupbydialog.h:143 ../bin/src/ui_groupbydialog.h:156
-#: ../bin/src/ui_albumcoversearcher.h:106
-#: ../bin/src/ui_albumcoversearcher.h:108 ../bin/src/ui_edittagdialog.h:654
+#: ../bin/src/ui_albumcoversearcher.h:107
+#: ../bin/src/ui_albumcoversearcher.h:109 ../bin/src/ui_edittagdialog.h:654
 #: ../bin/src/ui_trackselectiondialog.h:210
 #: ../bin/src/ui_lastfmstationdialog.h:96
 msgid "Artist"
@@ -1119,28 +1119,28 @@ msgid "Couldn't open output file %1"
 msgstr "نمی‌توانم پروندهٔ خروجی %1 را باز کنم"
 
 #: ../bin/src/ui_albumcovermanager.h:149
-#: ../bin/src/ui_albumcoversearcher.h:104 ../bin/src/ui_mainwindow.h:677
+#: ../bin/src/ui_albumcoversearcher.h:105 ../bin/src/ui_mainwindow.h:677
 msgid "Cover Manager"
 msgstr "مدیریت جلد"
 
-#: ui/edittagdialog.cpp:435
+#: ui/edittagdialog.cpp:434
 msgid "Cover art from embedded image"
 msgstr "جلد هنری را از عکس نشانده شده بردار"
 
-#: ui/edittagdialog.cpp:437
+#: ui/edittagdialog.cpp:436
 #, qt-format
 msgid "Cover art loaded automatically from %1"
 msgstr "جلد هنری از %1 اتوماتیک فراخوانی شد"
 
-#: ui/edittagdialog.cpp:430
+#: ui/edittagdialog.cpp:429
 msgid "Cover art manually unset"
 msgstr "جلد هنری دستی بازنشانده شد"
 
-#: ui/edittagdialog.cpp:439
+#: ui/edittagdialog.cpp:438
 msgid "Cover art not set"
 msgstr "جلد هنری نشانده نشد"
 
-#: ui/edittagdialog.cpp:433
+#: ui/edittagdialog.cpp:432
 #, qt-format
 msgid "Cover art set from %1"
 msgstr "جلد هنری از %1 نشانده شد"
@@ -2401,7 +2401,7 @@ msgstr "بارگیری آهنگ‌ها"
 msgid "Loading stream"
 msgstr "بارگیری جریان"
 
-#: playlist/songloaderinserter.cpp:79 ui/edittagdialog.cpp:229
+#: playlist/songloaderinserter.cpp:79 ui/edittagdialog.cpp:228
 msgid "Loading tracks"
 msgstr "بارگیری قطعه"
 
@@ -2665,7 +2665,7 @@ msgstr "شبکه"
 msgid "Network Proxy"
 msgstr "پیشکار پراکسی"
 
-#: playlist/playlistdelegates.cpp:299 ui/edittagdialog.cpp:479
+#: playlist/playlistdelegates.cpp:299 ui/edittagdialog.cpp:478
 msgid "Never"
 msgstr "هرگز"
 
@@ -2698,7 +2698,7 @@ msgstr "قطعه‌های تازه اتوماتیک اضافه می‌شوند."
 msgid "Newest tracks"
 msgstr "تازه‌ترین قطعه‌ها"
 
-#: ui/edittagdialog.cpp:161 ui/trackselectiondialog.cpp:49
+#: ui/edittagdialog.cpp:160 ui/trackselectiondialog.cpp:49
 msgid "Next"
 msgstr "بعدی"
 
@@ -3100,7 +3100,7 @@ msgstr "گزینه‌های زیبای OSD"
 msgid "Preview"
 msgstr "پيش‌نمايش"
 
-#: ui/edittagdialog.cpp:160 ui/trackselectiondialog.cpp:48
+#: ui/edittagdialog.cpp:159 ui/trackselectiondialog.cpp:48
 msgid "Previous"
 msgstr "قبلی"
 
@@ -3345,7 +3345,7 @@ msgstr "ساکن شدن دوباره"
 msgid "Reset"
 msgstr "بازنشانی"
 
-#: ui/edittagdialog.cpp:760 ../bin/src/ui_edittagdialog.h:635
+#: ui/edittagdialog.cpp:759 ../bin/src/ui_edittagdialog.h:635
 msgid "Reset play counts"
 msgstr "بازنشانی شمار پخش"
 
@@ -3417,7 +3417,7 @@ msgstr "ذخیرهٔ بازنشانده"
 msgid "Save this stream in the Internet tab"
 msgstr "ذخیرهٔ این جریان در باریکهٔ اینترنت"
 
-#: ui/edittagdialog.cpp:662 ui/trackselectiondialog.cpp:253
+#: ui/edittagdialog.cpp:661 ui/trackselectiondialog.cpp:254
 msgid "Saving tracks"
 msgstr "ذخیرهٔ قطعه‌ها"
 
@@ -3434,7 +3434,7 @@ msgid "Scrobble tracks that I listen to"
 msgstr "وارانی قطعه‌هایی که گوش می‌دهم"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:166
-#: ../bin/src/ui_albumcoversearcher.h:113
+#: ../bin/src/ui_albumcoversearcher.h:114
 msgid "Search"
 msgstr "جستجو"
 
@@ -4220,7 +4220,7 @@ msgstr "ناکام در باگیری %1 (%2)"
 #: library/librarymodel.cpp:301 library/librarymodel.cpp:926
 #: playlist/playlistdelegates.cpp:309 playlist/playlistmanager.cpp:387
 #: playlist/playlistmanager.cpp:390 ui/albumcoverchoicecontroller.cpp:110
-#: ui/edittagdialog.cpp:416 ui/edittagdialog.cpp:457
+#: ui/edittagdialog.cpp:415 ui/edittagdialog.cpp:456
 msgid "Unknown"
 msgstr "ناشناخته"
 
@@ -4675,7 +4675,7 @@ msgstr "بین"
 msgid "biggest first"
 msgstr "بزرگترین اول"
 
-#: playlist/playlistview.cpp:184 ui/edittagdialog.cpp:450
+#: playlist/playlistview.cpp:184 ui/edittagdialog.cpp:449
 msgid "bpm"
 msgstr "bpm"
 
@@ -4718,7 +4718,7 @@ msgstr "بزرگتر است از"
 msgid "in the last"
 msgstr "در آخرین"
 
-#: playlist/playlistview.cpp:186 ui/edittagdialog.cpp:452
+#: playlist/playlistview.cpp:186 ui/edittagdialog.cpp:451
 #: internet/spotifysettingspage.cpp:59 internet/spotifysettingspage.cpp:60
 #: internet/spotifysettingspage.cpp:61
 msgid "kbps"

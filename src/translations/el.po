@@ -499,8 +499,8 @@ msgstr "Μετά την αντιγραφή..."
 #: playlist/playlist.cpp:1116 ui/organisedialog.cpp:55
 #: ui/qtsystemtrayicon.cpp:252 ../bin/src/ui_groupbydialog.h:129
 #: ../bin/src/ui_groupbydialog.h:142 ../bin/src/ui_groupbydialog.h:155
-#: ../bin/src/ui_albumcoversearcher.h:110
-#: ../bin/src/ui_albumcoversearcher.h:112 ../bin/src/ui_edittagdialog.h:656
+#: ../bin/src/ui_albumcoversearcher.h:111
+#: ../bin/src/ui_albumcoversearcher.h:113 ../bin/src/ui_edittagdialog.h:656
 #: ../bin/src/ui_trackselectiondialog.h:209
 msgid "Album"
 msgstr "Άλμπουμ"
@@ -603,7 +603,7 @@ msgstr "Προέκυψε σφάλμα στην αντιγραφή της βάσ�
 msgid "An error occurred loading the iTunes database"
 msgstr "Προέκυψε σφάλμα στην φόρτωση της βάσης δεδομένων iTunes"
 
-#: ui/edittagdialog.cpp:655
+#: ui/edittagdialog.cpp:654
 #, qt-format
 msgid "An error occurred writing metadata to '%1'"
 msgstr "Προέκυψε σφάλμα κατά την εγγραφή μεταδεδομένων στο '%1'"
@@ -648,15 +648,15 @@ msgstr "Είστε σίγουροι πως θέλετε να διαγράψετ�
 msgid "Are you sure you want to delete this playlist?"
 msgstr "Είστε σίγουρος πως θέλετε να διαγράψετε αυτή την λίστα αναπαραγωγής;"
 
-#: ui/edittagdialog.cpp:761
+#: ui/edittagdialog.cpp:760
 msgid "Are you sure you want to reset this song's statistics?"
 msgstr "Είστε σίγουροι πως θέλετε να επαναφέρετε τα στατιστικά του τραγουδιού;"
 
 #: playlist/playlist.cpp:1115 ui/organisedialog.cpp:56
 #: ui/qtsystemtrayicon.cpp:250 ../bin/src/ui_groupbydialog.h:130
 #: ../bin/src/ui_groupbydialog.h:143 ../bin/src/ui_groupbydialog.h:156
-#: ../bin/src/ui_albumcoversearcher.h:106
-#: ../bin/src/ui_albumcoversearcher.h:108 ../bin/src/ui_edittagdialog.h:654
+#: ../bin/src/ui_albumcoversearcher.h:107
+#: ../bin/src/ui_albumcoversearcher.h:109 ../bin/src/ui_edittagdialog.h:654
 #: ../bin/src/ui_trackselectiondialog.h:210
 #: ../bin/src/ui_lastfmstationdialog.h:96
 msgid "Artist"
@@ -1120,28 +1120,28 @@ msgid "Couldn't open output file %1"
 msgstr "Δεν μπορεί να ανοίξει το αρχείο εξόδου %1"
 
 #: ../bin/src/ui_albumcovermanager.h:149
-#: ../bin/src/ui_albumcoversearcher.h:104 ../bin/src/ui_mainwindow.h:677
+#: ../bin/src/ui_albumcoversearcher.h:105 ../bin/src/ui_mainwindow.h:677
 msgid "Cover Manager"
 msgstr "Διαχείριση εξώφυλλων"
 
-#: ui/edittagdialog.cpp:435
+#: ui/edittagdialog.cpp:434
 msgid "Cover art from embedded image"
 msgstr "Εξώφυλλο από ενσωματωμένη εικόνα"
 
-#: ui/edittagdialog.cpp:437
+#: ui/edittagdialog.cpp:436
 #, qt-format
 msgid "Cover art loaded automatically from %1"
 msgstr "Το εξώφυλλο φορτώθηκε αυτόματα από %1"
 
-#: ui/edittagdialog.cpp:430
+#: ui/edittagdialog.cpp:429
 msgid "Cover art manually unset"
 msgstr "Το εξώφυλλο αφαιρέθηκε χειροκίνητα"
 
-#: ui/edittagdialog.cpp:439
+#: ui/edittagdialog.cpp:438
 msgid "Cover art not set"
 msgstr "Δεν έχει οριστεί εξώφυλλο"
 
-#: ui/edittagdialog.cpp:433
+#: ui/edittagdialog.cpp:432
 #, qt-format
 msgid "Cover art set from %1"
 msgstr "Το εξώφυλλο ορίστηκε από %1"
@@ -2402,7 +2402,7 @@ msgstr "Φόρτωση τραγουδιού"
 msgid "Loading stream"
 msgstr "Φόρτωμα ροής (stream)"
 
-#: playlist/songloaderinserter.cpp:79 ui/edittagdialog.cpp:229
+#: playlist/songloaderinserter.cpp:79 ui/edittagdialog.cpp:228
 msgid "Loading tracks"
 msgstr "Φόρτωση κομματιών"
 
@@ -2666,7 +2666,7 @@ msgstr "Δίκτυο"
 msgid "Network Proxy"
 msgstr "Διαμεσολαβητής Δικτύου"
 
-#: playlist/playlistdelegates.cpp:299 ui/edittagdialog.cpp:479
+#: playlist/playlistdelegates.cpp:299 ui/edittagdialog.cpp:478
 msgid "Never"
 msgstr "Ποτέ"
 
@@ -2699,7 +2699,7 @@ msgstr "Νέα κομμάτια θα προστίθενται αυτόματα."
 msgid "Newest tracks"
 msgstr "Νεότερα κομμάτια"
 
-#: ui/edittagdialog.cpp:161 ui/trackselectiondialog.cpp:49
+#: ui/edittagdialog.cpp:160 ui/trackselectiondialog.cpp:49
 msgid "Next"
 msgstr "Επόμενο"
 
@@ -3101,7 +3101,7 @@ msgstr "Επιλογές Όμορφου OSD"
 msgid "Preview"
 msgstr "Προεπισκόπηση"
 
-#: ui/edittagdialog.cpp:160 ui/trackselectiondialog.cpp:48
+#: ui/edittagdialog.cpp:159 ui/trackselectiondialog.cpp:48
 msgid "Previous"
 msgstr "Προηγούμενο"
 
@@ -3346,7 +3346,7 @@ msgstr "Επανασυμπλήρωση"
 msgid "Reset"
 msgstr "Επαναφορά"
 
-#: ui/edittagdialog.cpp:760 ../bin/src/ui_edittagdialog.h:635
+#: ui/edittagdialog.cpp:759 ../bin/src/ui_edittagdialog.h:635
 msgid "Reset play counts"
 msgstr "Επαναφορά μετρητή εκτελέσεων"
 
@@ -3418,7 +3418,7 @@ msgstr "Αποθήκευση ρύθμισης"
 msgid "Save this stream in the Internet tab"
 msgstr "Αποθήκευση της ροής στην καρτέλα Internet"
 
-#: ui/edittagdialog.cpp:662 ui/trackselectiondialog.cpp:253
+#: ui/edittagdialog.cpp:661 ui/trackselectiondialog.cpp:254
 msgid "Saving tracks"
 msgstr "Αποθήκευση κομματιών"
 
@@ -3435,7 +3435,7 @@ msgid "Scrobble tracks that I listen to"
 msgstr "Κάνε \"srobble\" τα κομμάτια που ακούω"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:166
-#: ../bin/src/ui_albumcoversearcher.h:113
+#: ../bin/src/ui_albumcoversearcher.h:114
 msgid "Search"
 msgstr "Αναζήτηση"
 
@@ -4221,7 +4221,7 @@ msgstr "Αδυναμία \"κατεβάσματος\" του %1 (%2)"
 #: library/librarymodel.cpp:301 library/librarymodel.cpp:926
 #: playlist/playlistdelegates.cpp:309 playlist/playlistmanager.cpp:387
 #: playlist/playlistmanager.cpp:390 ui/albumcoverchoicecontroller.cpp:110
-#: ui/edittagdialog.cpp:416 ui/edittagdialog.cpp:457
+#: ui/edittagdialog.cpp:415 ui/edittagdialog.cpp:456
 msgid "Unknown"
 msgstr "Άγνωστο"
 
@@ -4676,7 +4676,7 @@ msgstr "μεταξύ"
 msgid "biggest first"
 msgstr "το μεγαλύτερο πρώτα"
 
-#: playlist/playlistview.cpp:184 ui/edittagdialog.cpp:450
+#: playlist/playlistview.cpp:184 ui/edittagdialog.cpp:449
 msgid "bpm"
 msgstr "bpm"
 
@@ -4719,7 +4719,7 @@ msgstr "μεγαλύτερο από"
 msgid "in the last"
 msgstr "εντός των τελευταίων"
 
-#: playlist/playlistview.cpp:186 ui/edittagdialog.cpp:452
+#: playlist/playlistview.cpp:186 ui/edittagdialog.cpp:451
 #: internet/spotifysettingspage.cpp:59 internet/spotifysettingspage.cpp:60
 #: internet/spotifysettingspage.cpp:61
 msgid "kbps"
