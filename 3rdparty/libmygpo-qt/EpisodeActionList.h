@@ -20,8 +20,8 @@
 * USA                                                                      *
 ***************************************************************************/
 
-#ifndef EPISODEACTIONLIST_H
-#define EPISODEACTIONLIST_H
+#ifndef LIBMYGPO_QT_EPISODEACTIONLIST_H
+#define LIBMYGPO_QT_EPISODEACTIONLIST_H
 
 #include "EpisodeAction.h"
 #include "mygpo_export.h"
@@ -68,4 +68,4 @@ typedef QSharedPointer<EpisodeActionList> EpisodeActionListPtr;
 
 Q_DECLARE_METATYPE( mygpo::EpisodeActionListPtr );
 
-#endif // EPISODEACTIONLIST_H
+#endif // LIBMYGPO_QT_EPISODEACTIONLIST_H

@@ -20,8 +20,8 @@
 * USA                                                                      *
 ***************************************************************************/
 
-#ifndef PODCAST_H
-#define PODCAST_H
+#ifndef LIBMYGPO_QT_PODCAST_H
+#define LIBMYGPO_QT_PODCAST_H
 
 #include <QUrl>
 #include <QString>
@@ -81,4 +81,4 @@ typedef QSharedPointer<Podcast> PodcastPtr;
 
 Q_DECLARE_METATYPE( mygpo::PodcastPtr );
 
-#endif // PODCAST_H
+#endif // LIBMYGPO_QT_PODCAST_H

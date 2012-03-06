@@ -20,8 +20,8 @@
 * USA                                                                      *
 ***************************************************************************/
 
-#ifndef JSONPARSER_H
-#define JSONPARSER_H
+#ifndef LIBMYGPO_QT_JSONPARSER_H
+#define LIBMYGPO_QT_JSONPARSER_H
 
 #include <QByteArray>
 #include <QVariant>
@@ -53,4 +53,4 @@ private:
 
 }
 
-#endif // JSONPARSER_H
+#endif // LIBMYGPO_QT_JSONPARSER_H

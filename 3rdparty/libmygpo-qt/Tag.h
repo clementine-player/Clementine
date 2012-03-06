@@ -20,8 +20,8 @@
 * USA                                                                      *
 ***************************************************************************/
 
-#ifndef TAG_H
-#define TAG_H
+#ifndef LIBMYGPO_QT_TAG_H
+#define LIBMYGPO_QT_TAG_H
 
 #include "mygpo_export.h"
 
@@ -56,4 +56,4 @@ typedef QSharedPointer<Tag> TagPtr;
 
 Q_DECLARE_METATYPE( mygpo::TagPtr );
 
-#endif // TAG_H
+#endif // LIBMYGPO_QT_TAG_H

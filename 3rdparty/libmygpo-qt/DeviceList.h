@@ -20,8 +20,8 @@
 * USA                                                                      *
 ***************************************************************************/
 
-#ifndef DEVICELIST_H
-#define DEVICELIST_H
+#ifndef LIBMYGPO_QT_DEVICELIST_H
+#define LIBMYGPO_QT_DEVICELIST_H
 
 #include <QNetworkReply>
 #include <QSharedPointer>
@@ -65,4 +65,4 @@ typedef QSharedPointer<DeviceList> DeviceListPtr;
 
 Q_DECLARE_METATYPE( mygpo::DeviceListPtr );
 
-#endif //DEVICELIST_H
+#endif //LIBMYGPO_QT_DEVICELIST_H

@@ -20,8 +20,8 @@
 * USA                                                                      *
 ***************************************************************************/
 
-#ifndef ADDREMOVERESULT_H
-#define ADDREMOVERESULT_H
+#ifndef LIBMYGPO_QT_ADDREMOVERESULT_H
+#define LIBMYGPO_QT_ADDREMOVERESULT_H
 
 #include <QList>
 #include <QVariant>
@@ -67,4 +67,4 @@ typedef QSharedPointer<AddRemoveResult> AddRemoveResultPtr;
 
 Q_DECLARE_METATYPE( mygpo::AddRemoveResultPtr );
 
-#endif // ADDREMOVERESULT_H
+#endif // LIBMYGPO_QT_ADDREMOVERESULT_H

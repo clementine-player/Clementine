@@ -20,8 +20,8 @@
 * USA                                                                      *
 ***************************************************************************/
 
-#ifndef EPISODELIST_H
-#define EPISODELIST_H
+#ifndef LIBMYGPO_QT_EPISODELIST_H
+#define LIBMYGPO_QT_EPISODELIST_H
 
 #include "mygpo_export.h"
 #include "Episode.h"
@@ -63,4 +63,4 @@ typedef QSharedPointer<EpisodeList> EpisodeListPtr;
 
 }
 
-#endif // EPISODELIST_H
+#endif // LIBMYGPO_QT_EPISODELIST_H

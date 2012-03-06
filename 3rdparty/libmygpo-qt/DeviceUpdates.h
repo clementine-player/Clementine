@@ -20,8 +20,8 @@
 * USA                                                                      *
 ***************************************************************************/
 
-#ifndef DEVICEUPDATES_H
-#define DEVICEUPDATES_H
+#ifndef LIBMYGPO_QT_DEVICEUPDATES_H
+#define LIBMYGPO_QT_DEVICEUPDATES_H
 
 #include <QNetworkReply>
 #include <QUrl>
@@ -69,4 +69,4 @@ typedef QSharedPointer<DeviceUpdates> DeviceUpdatesPtr;
 
 }
 
-#endif // DEVICEUPDATES_H
+#endif // LIBMYGPO_QT_DEVICEUPDATES_H

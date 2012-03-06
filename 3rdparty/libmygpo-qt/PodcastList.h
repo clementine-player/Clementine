@@ -20,8 +20,8 @@
 * USA                                                                      *
 ***************************************************************************/
 
-#ifndef PODCASTLIST_H
-#define PODCASTLIST_H
+#ifndef LIBMYGPO_QT_PODCASTLIST_H
+#define LIBMYGPO_QT_PODCASTLIST_H
 
 #include "Podcast.h"
 #include "mygpo_export.h"
@@ -64,4 +64,4 @@ typedef QSharedPointer<PodcastList> PodcastListPtr;
 
 }
 
-#endif // PODCASTLIST_H
+#endif // LIBMYGPO_QT_PODCASTLIST_H

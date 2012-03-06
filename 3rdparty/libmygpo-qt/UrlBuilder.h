@@ -20,8 +20,8 @@
 * USA                                                                      *
 ***************************************************************************/
 
-#ifndef URLBUILDER_H
-#define URLBUILDER_H
+#ifndef LIBMYGPO_QT_URLBUILDER_H
+#define LIBMYGPO_QT_URLBUILDER_H
 
 #include <QString>
 
@@ -143,4 +143,4 @@ private:
 };
 }
 
-#endif // URLBUILDER_H
+#endif // LIBMYGPO_QT_URLBUILDER_H

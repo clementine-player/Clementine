@@ -20,8 +20,8 @@
 * USA                                                                      *
 ***************************************************************************/
 
-#ifndef DEVICE_H
-#define DEVICE_H
+#ifndef LIBMYGPO_QT_DEVICE_H
+#define LIBMYGPO_QT_DEVICE_H
 
 #include "mygpo_export.h"
 
@@ -68,4 +68,4 @@ typedef QSharedPointer<Device> DevicePtr;
 
 Q_DECLARE_METATYPE( mygpo::DevicePtr );
 
-#endif //DEVICE_H
+#endif //LIBMYGPO_QT_DEVICE_H

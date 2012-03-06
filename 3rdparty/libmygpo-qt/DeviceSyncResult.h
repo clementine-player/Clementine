@@ -18,8 +18,8 @@
 * USA                                                                      *
 ***************************************************************************/
 
-#ifndef DEVICESYNCRESULT_H
-#define DEVICESYNCRESULT_H
+#ifndef LIBMYGPO_QT_DEVICESYNCRESULT_H
+#define LIBMYGPO_QT_DEVICESYNCRESULT_H
 
 #include <QNetworkReply>
 #include <QObject>
@@ -63,4 +63,4 @@ typedef QSharedPointer<DeviceSyncResult> DeviceSyncResultPtr;
 
 }
 
-#endif // DEVICESYNCRESULT_H
+#endif // LIBMYGPO_QT_DEVICESYNCRESULT_H

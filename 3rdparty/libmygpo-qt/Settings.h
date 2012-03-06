@@ -20,8 +20,8 @@
 * USA                                                                      *
 ***************************************************************************/
 
-#ifndef SETTINGS_H
-#define SETTINGS_H
+#ifndef LIBMYGPO_QT_SETTINGS_H
+#define LIBMYGPO_QT_SETTINGS_H
 
 #include <QSharedPointer>
 #include <QMap>
@@ -63,4 +63,4 @@ typedef QSharedPointer<Settings> SettingsPtr;
 
 }
 
-#endif // SETTINGS_H
+#endif // LIBMYGPO_QT_SETTINGS_H

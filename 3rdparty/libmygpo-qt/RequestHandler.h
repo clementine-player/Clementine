@@ -20,8 +20,8 @@
 * USA                                                                      *
 ***************************************************************************/
 
-#ifndef REQUESTHANDLER_H_
-#define REQUESTHANDLER_H_
+#ifndef LIBMYGPO_QT_REQUESTHANDLER_H_
+#define LIBMYGPO_QT_REQUESTHANDLER_H_
 
 #include "mygpo_export.h"
 
@@ -82,4 +82,4 @@ private:
 
 }
 
-#endif /* REQUESTHANDLER_H_ */
+#endif /* LIBMYGPO_QT_REQUESTHANDLER_H_ */

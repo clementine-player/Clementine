@@ -20,8 +20,8 @@
 * USA                                                                      *
 ***************************************************************************/
 
-#ifndef EPISODE_H
-#define EPISODE_H
+#ifndef LIBMYGPO_QT_EPISODE_H
+#define LIBMYGPO_QT_EPISODE_H
 
 #include <QObject>
 #include <QUrl>
@@ -93,4 +93,4 @@ typedef QSharedPointer<Episode> EpisodePtr;
 
 Q_DECLARE_METATYPE( mygpo::EpisodePtr );
 
-#endif // EPISODE_H
+#endif // LIBMYGPO_QT_EPISODE_H
