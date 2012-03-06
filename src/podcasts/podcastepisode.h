@@ -31,6 +31,7 @@ public:
 
   static const QStringList kColumns;
   static const QString kColumnSpec;
+  static const QString kJoinSpec;
   static const QString kBindSpec;
   static const QString kUpdateSpec;
 

@@ -92,6 +92,7 @@ void PodcastInfoWidget::SetPodcast(const Podcast& podcast) {
   SetText(podcast.author(), ui_->author, ui_->author_label);
   SetText(podcast.owner_name(), ui_->owner, ui_->owner_label);
   SetText(podcast.link().toString(), ui_->website, ui_->website_label);
+  SetText(podcast.extra("gpodder:subscribers").toString(), ui_->subscribers, ui_->subscribers_label);
 
   if (!image_id_) {
     emit LoadingFinished();

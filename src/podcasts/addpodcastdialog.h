@@ -18,6 +18,8 @@
 #ifndef ADDPODCASTDIALOG_H
 #define ADDPODCASTDIALOG_H
 
+#include "podcast.h"
+
 #include <QDialog>
 
 class AddPodcastPage;
@@ -45,6 +47,8 @@ private:
   void AddPage(AddPodcastPage* page);
   
 private:
+  Application* app_;
+
   Ui_AddPodcastDialog* ui_;
   QPushButton* add_button_;
 
@@ -52,6 +56,8 @@ private:
   QList<bool> page_is_busy_;
 
   WidgetFadeHelper* fader_;
+
+  Podcast current_podcast_;
 };
 
 #endif // ADDPODCASTDIALOG_H

@@ -24,9 +24,10 @@
 
 const QStringList Podcast::kColumns = QStringList()
     << "url" << "title" << "description" << "copyright" << "link"
-    << "image_url" << "author" << "owner_name" << "author_email" << "extra";
+    << "image_url" << "author" << "owner_name" << "owner_email" << "extra";
 
 const QString Podcast::kColumnSpec = Podcast::kColumns.join(", ");
+const QString Podcast::kJoinSpec = Utilities::Prepend("p.", Podcast::kColumns).join(", ");
 const QString Podcast::kBindSpec = Utilities::Prepend(":", Podcast::kColumns).join(", ");
 const QString Podcast::kUpdateSpec = Utilities::Updateify(Podcast::kColumns).join(", ");
 

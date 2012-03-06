@@ -48,7 +48,7 @@ void PodcastBackend::Subscribe(Podcast* podcast) {
 
   // Insert the podcast.
   QSqlQuery q("INSERT INTO podcasts (" + Podcast::kColumnSpec + ")"
-              " VALUES " + Podcast::kBindSpec, db);
+              " VALUES (" + Podcast::kBindSpec + ")", db);
   podcast->BindToQuery(&q);
 
   q.exec();
@@ -67,11 +67,13 @@ void PodcastBackend::Subscribe(Podcast* podcast) {
 
   // Add those episodes to the database.
   AddEpisodes(episodes, &db);
+
+  t.Commit();
 }
 
 void PodcastBackend::AddEpisodes(PodcastEpisodeList* episodes, QSqlDatabase* db) {
   QSqlQuery q("INSERT INTO podcast_episodes (" + PodcastEpisode::kColumnSpec + ")"
-              " VALUES " + PodcastEpisode::kBindSpec, *db);
+              " VALUES (" + PodcastEpisode::kBindSpec + ")", *db);
 
   for (PodcastEpisodeList::iterator it = episodes->begin() ; it != episodes->end() ; ++it) {
     it->BindToQuery(&q);
@@ -84,22 +86,46 @@ void PodcastBackend::AddEpisodes(PodcastEpisodeList* episodes, QSqlDatabase* db)
   }
 }
 
+#define SELECT_PODCAST_QUERY(where_clauses) \
+  "SELECT p.ROWID, " + Podcast::kJoinSpec + "," \
+  "       COUNT(e.ROWID), SUM(e.listened)" \
+  " FROM podcasts AS p" \
+  "   LEFT JOIN podcast_episodes AS e" \
+  "   ON p.ROWID = e.podcast_id" \
+  " " where_clauses \
+  " GROUP BY p.ROWID" \
+  " ORDER BY p.title"
+
+namespace {
+  void AddAggregatePodcastFields(const QSqlQuery& q, int column_count, Podcast* podcast) {
+    const int episode_count = q.value(column_count + 1).toInt();
+    const int listened_count = q.value(column_count + 2).toInt();
+
+    podcast->set_extra("db:episode_count", episode_count);
+    podcast->set_extra("db:unlistened_count", episode_count - listened_count);
+  }
+}
+
 PodcastList PodcastBackend::GetAllSubscriptions() {
   PodcastList ret;
 
   QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
 
-  QSqlQuery q("SELECT ROWID, " + Podcast::kColumnSpec +
-              " FROM podcasts", db);
+  QSqlQuery q(SELECT_PODCAST_QUERY(""), db);
 
   q.exec();
   if (db_->CheckErrors(q))
     return ret;
 
+  static const int kPodcastColumnCount = Podcast::kColumns.count();
+
   while (q.next()) {
     Podcast podcast;
     podcast.InitFromQuery(q);
+
+    AddAggregatePodcastFields(q, kPodcastColumnCount, &podcast);
+
     ret << podcast;
   }
 
@@ -112,14 +138,12 @@ Podcast PodcastBackend::GetSubscriptionById(int id) {
   QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
 
-  QSqlQuery q("SELECT ROWID, " + Podcast::kColumnSpec +
-              " FROM podcasts"
-              " WHERE ROWID = :id", db);
-
+  QSqlQuery q(SELECT_PODCAST_QUERY("WHERE ROWID = :id"), db);
   q.bindValue(":id", id);
   q.exec();
   if (!db_->CheckErrors(q) && q.next()) {
     ret.InitFromQuery(q);
+    AddAggregatePodcastFields(q, Podcast::kColumns.count(), &ret);
   }
 
   return ret;
@@ -131,14 +155,12 @@ Podcast PodcastBackend::GetSubscriptionByUrl(const QUrl& url) {
   QMutexLocker l(db_->Mutex());
   QSqlDatabase db(db_->Connect());
 
-  QSqlQuery q("SELECT ROWID, " + Podcast::kColumnSpec +
-              " FROM podcasts"
-              " WHERE url = :url", db);
-
+  QSqlQuery q(SELECT_PODCAST_QUERY("WHERE p.url = :url"), db);
   q.bindValue(":url", url.toEncoded());
   q.exec();
   if (!db_->CheckErrors(q) && q.next()) {
     ret.InitFromQuery(q);
+    AddAggregatePodcastFields(q, Podcast::kColumns.count(), &ret);
   }
 
   return ret;

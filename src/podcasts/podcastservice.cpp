@@ -16,7 +16,9 @@
 */
 
 #include "addpodcastdialog.h"
+#include "podcastbackend.h"
 #include "podcastservice.h"
+#include "core/application.h"
 #include "internet/internetmodel.h"
 #include "ui/iconloader.h"
 
@@ -28,7 +30,8 @@ const char* PodcastService::kSettingsGroup = "Podcasts";
 PodcastService::PodcastService(Application* app, InternetModel* parent)
   : InternetService(kServiceName, app, parent, parent),
     context_menu_(NULL),
-    root_(NULL)
+    root_(NULL),
+    backend_(app->podcast_backend())
 {
 }
 
@@ -37,10 +40,39 @@ PodcastService::~PodcastService() {
 
 QStandardItem* PodcastService::CreateRootItem() {
   root_ = new QStandardItem(QIcon(":providers/podcast16.png"), tr("Podcasts"));
+  root_->setData(true, InternetModel::Role_CanLazyLoad);
   return root_;
 }
 
 void PodcastService::LazyPopulate(QStandardItem* parent) {
+  switch (parent->data(InternetModel::Role_Type).toInt()) {
+  case InternetModel::Type_Service:
+    PopulatePodcastList(parent);
+    break;
+  }
+}
+
+void PodcastService::PopulatePodcastList(QStandardItem* parent) {
+  foreach (const Podcast& podcast, backend_->GetAllSubscriptions()) {
+    const int unlistened_count = podcast.extra("db:unlistened_count").toInt();
+    QString title = podcast.title();
+
+    QStandardItem* item = new QStandardItem;
+
+    if (unlistened_count > 0) {
+      // Add the number of new episodes after the title.
+      title.append(QString(" (%1)").arg(unlistened_count));
+
+      // Set a bold font
+      QFont font(item->font());
+      font.setBold(true);
+      item->setFont(font);
+    }
+
+    item->setText(podcast.title());
+
+    parent->appendRow(item);
+  }
 }
 
 void PodcastService::ShowContextMenu(const QModelIndex& index,

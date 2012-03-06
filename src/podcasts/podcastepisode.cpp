@@ -27,6 +27,7 @@ const QStringList PodcastEpisode::kColumns = QStringList()
     << "downloaded" << "local_url" << "extra";
 
 const QString PodcastEpisode::kColumnSpec = PodcastEpisode::kColumns.join(", ");
+const QString PodcastEpisode::kJoinSpec = Utilities::Prepend("e.", PodcastEpisode::kColumns).join(", ");
 const QString PodcastEpisode::kBindSpec = Utilities::Prepend(":", PodcastEpisode::kColumns).join(", ");
 const QString PodcastEpisode::kUpdateSpec = Utilities::Updateify(PodcastEpisode::kColumns).join(", ");
 

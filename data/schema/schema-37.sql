@@ -31,6 +31,6 @@ CREATE TABLE podcast_episodes (
 
 CREATE INDEX podcast_idx_url ON podcasts(url);
 
-CREATE INDEX podcast_episodes_idx_podcast_id ON podcast_episodes(podcast_id);
+CREATE INDEX podcast_episodes_idx_aggregate ON podcast_episodes(podcast_id, listened);
 
 UPDATE schema_version SET version=37;

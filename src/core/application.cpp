@@ -38,6 +38,8 @@ Application::Application(QObject* parent)
     tag_reader_client_(NULL),
     database_(NULL),
     album_cover_loader_(NULL),
+    playlist_backend_(NULL),
+    podcast_backend_(NULL),
     appearance_(NULL),
     cover_providers_(NULL),
     task_manager_(NULL),
@@ -47,9 +49,7 @@ Application::Application(QObject* parent)
     global_search_(NULL),
     internet_model_(NULL),
     library_(NULL),
-    playlist_backend_(NULL),
-    device_manager_(NULL),
-    podcast_backend_(NULL)
+    device_manager_(NULL)
 {
   tag_reader_client_ = new TagReaderClient(this);
   MoveToNewThread(tag_reader_client_);
@@ -60,6 +60,12 @@ Application::Application(QObject* parent)
 
   album_cover_loader_ = new AlbumCoverLoader(this);
   MoveToNewThread(album_cover_loader_);
+
+  playlist_backend_ = new PlaylistBackend(this, this);
+  MoveToThread(playlist_backend_, database_->thread());
+
+  podcast_backend_ = new PodcastBackend(this, this);
+  MoveToThread(podcast_backend_, database_->thread());
 
   appearance_ = new Appearance(this);
   cover_providers_ = new CoverProviders(this);
@@ -72,13 +78,8 @@ Application::Application(QObject* parent)
 
   library_ = new Library(this, this);
 
-  playlist_backend_ = new PlaylistBackend(this, this);
-  MoveToThread(playlist_backend_, database_->thread());
-
   device_manager_ = new DeviceManager(this, this);
 
-  podcast_backend_ = new PodcastBackend(this, this);
-  MoveToThread(podcast_backend_, database_->thread());
 
   library_->Init();
   library_->StartThreads();

@@ -18,6 +18,7 @@
 #include "addpodcastdialog.h"
 #include "addpodcastbyurl.h"
 #include "gpoddertoptagspage.h"
+#include "podcastbackend.h"
 #include "podcastdiscoverymodel.h"
 #include "ui_addpodcastdialog.h"
 #include "core/application.h"
@@ -28,6 +29,7 @@
 
 AddPodcastDialog::AddPodcastDialog(Application* app, QWidget* parent)
   : QDialog(parent),
+    app_(app),
     ui_(new Ui_AddPodcastDialog)
 {
   ui_->setupUi(this);
@@ -100,7 +102,10 @@ void AddPodcastDialog::ChangePodcast(const QModelIndex& current) {
     ui_->details_scroll_area->show();
   }
 
-  ui_->details->SetPodcast(current.data(PodcastDiscoveryModel::Role_Podcast).value<Podcast>());
+  current_podcast_ = current.data(PodcastDiscoveryModel::Role_Podcast).value<Podcast>();
+  ui_->details->SetPodcast(current_podcast_);
+
+  add_button_->setEnabled(current_podcast_.url().isValid());
 }
 
 void AddPodcastDialog::PageBusyChanged(bool busy) {
@@ -116,4 +121,5 @@ void AddPodcastDialog::PageBusyChanged(bool busy) {
 }
 
 void AddPodcastDialog::AddPodcast() {
+  app_->podcast_backend()->Subscribe(&current_podcast_);
 }

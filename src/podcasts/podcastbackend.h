@@ -41,6 +41,11 @@ public:
   // episodes associated with this podcast.
   void Unsubscribe(const Podcast& podcast);
 
+  // Returns a list of all the subscribed podcasts.  For efficiency the Podcast
+  // objects returned won't contain any PodcastEpisode objects, but they will
+  // contain aggregate information about total number of episodes and number of
+  // unlistened episodes, in the extra fields "db:episode_count" and
+  // "db:unlistened_count".
   PodcastList GetAllSubscriptions();
   Podcast GetSubscriptionById(int id);
   Podcast GetSubscriptionByUrl(const QUrl& url);

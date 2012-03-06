@@ -18,12 +18,13 @@
 #ifndef PODCASTSERVICE_H
 #define PODCASTSERVICE_H
 
+#include "internet/internetmodel.h"
 #include "internet/internetservice.h"
 
 #include <QScopedPointer>
 
 class AddPodcastDialog;
-
+class PodcastBackend;
 
 class PodcastService : public InternetService {
   Q_OBJECT
@@ -34,6 +35,12 @@ public:
 
   static const char* kServiceName;
   static const char* kSettingsGroup;
+
+  enum Type {
+    Type_AddPodcast = InternetModel::TypeCount,
+    Type_Podcast,
+    Type_Episode
+  };
 
   QStandardItem* CreateRootItem();
   void LazyPopulate(QStandardItem* parent);
@@ -47,8 +54,13 @@ private slots:
   void AddPodcast();
 
 private:
+  void PopulatePodcastList(QStandardItem* parent);
+
+private:
   QMenu* context_menu_;
   QStandardItem* root_;
+
+  PodcastBackend* backend_;
 
   QScopedPointer<AddPodcastDialog> add_podcast_dialog_;
 };
