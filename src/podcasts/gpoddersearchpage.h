@@ -15,50 +15,38 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ADDPODCASTDIALOG_H
-#define ADDPODCASTDIALOG_H
+#ifndef GPODDERSEARCHPAGE_H
+#define GPODDERSEARCHPAGE_H
 
-#include "podcast.h"
+#include "addpodcastpage.h"
 
-#include <QDialog>
+class QNetworkAccessManager;
 
-class AddPodcastPage;
-class Application;
-class WidgetFadeHelper;
-class Ui_AddPodcastDialog;
+class Ui_GPodderSearchPage;
 
-class QModelIndex;
+namespace mygpo {
+  class ApiRequest;
+  class PodcastList;
+}
 
-class AddPodcastDialog : public QDialog {
+class GPodderSearchPage : public AddPodcastPage {
   Q_OBJECT
-  
+
 public:
-  AddPodcastDialog(Application* app, QWidget* parent = 0);
-  ~AddPodcastDialog();
+  GPodderSearchPage(Application* app, QWidget* parent = 0);
+  ~GPodderSearchPage();
 
 private slots:
-  void AddPodcast();
-  void ChangePage(int index);
-  void ChangePodcast(const QModelIndex& current);
-
-  void PageBusyChanged(bool busy);
-  void CurrentPageBusyChanged(bool busy);
+  void SearchClicked();
+  void SearchFinished(mygpo::PodcastList* list);
+  void SearchFailed(mygpo::PodcastList* list);
 
 private:
-  void AddPage(AddPodcastPage* page);
-  
-private:
-  Application* app_;
+  Ui_GPodderSearchPage* ui_;
 
-  Ui_AddPodcastDialog* ui_;
-  QPushButton* add_button_;
+  QNetworkAccessManager* network_;
+  mygpo::ApiRequest* api_;
 
-  QList<AddPodcastPage*> pages_;
-  QList<bool> page_is_busy_;
-
-  WidgetFadeHelper* fader_;
-
-  Podcast current_podcast_;
 };
 
-#endif // ADDPODCASTDIALOG_H
+#endif // GPODDERSEARCHPAGE_H

@@ -17,6 +17,7 @@
 
 #include "addpodcastdialog.h"
 #include "addpodcastbyurl.h"
+#include "gpoddersearchpage.h"
 #include "gpoddertoptagspage.h"
 #include "podcastbackend.h"
 #include "podcastdiscoverymodel.h"
@@ -46,11 +47,12 @@ AddPodcastDialog::AddPodcastDialog(Application* app, QWidget* parent)
   add_button_ = new QPushButton(IconLoader::Load("list-add"), tr("Add Podcast"), this);
   add_button_->setEnabled(false);
   connect(add_button_, SIGNAL(clicked()), SLOT(AddPodcast()));
-  ui_->button_box->addButton(add_button_, QDialogButtonBox::AcceptRole);
+  ui_->button_box->addButton(add_button_, QDialogButtonBox::ActionRole);
 
   // Add providers
   AddPage(new AddPodcastByUrl(app, this));
   AddPage(new GPodderTopTagsPage(app, this));
+  AddPage(new GPodderSearchPage(app, this));
 
   ui_->provider_list->setCurrentRow(0);
 }
@@ -83,7 +85,7 @@ void AddPodcastDialog::ChangePage(int index) {
   connect(ui_->results->selectionModel(), SIGNAL(currentRowChanged(QModelIndex,QModelIndex)),
           SLOT(ChangePodcast(QModelIndex)));
   ChangePodcast(QModelIndex());
-  PageBusyChanged(page_is_busy_[index]);
+  CurrentPageBusyChanged(page_is_busy_[index]);
 
   page->Show();
 }
@@ -116,8 +118,13 @@ void AddPodcastDialog::PageBusyChanged(bool busy) {
   page_is_busy_[index] = busy;
 
   if (index == ui_->provider_list->currentRow()) {
-    ui_->results_stack->setCurrentWidget(busy ? ui_->busy_page : ui_->results_page);
+    CurrentPageBusyChanged(busy);
   }
+}
+
+void AddPodcastDialog::CurrentPageBusyChanged(bool busy) {
+  ui_->results_stack->setCurrentWidget(busy ? ui_->busy_page : ui_->results_page);
+  ui_->stack->setDisabled(busy);
 }
 
 void AddPodcastDialog::AddPodcast() {

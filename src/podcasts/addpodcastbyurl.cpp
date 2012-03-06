@@ -40,8 +40,6 @@ AddPodcastByUrl::~AddPodcastByUrl() {
 void AddPodcastByUrl::GoClicked() {
   emit Busy(true);
   model()->clear();
-  ui_->go->setEnabled(false);
-  ui_->url->setEnabled(false);
 
   PodcastUrlLoaderReply* reply = loader_->Load(ui_->url->text());
   ui_->url->setText(reply->url().toString());
@@ -55,8 +53,6 @@ void AddPodcastByUrl::RequestFinished(PodcastUrlLoaderReply* reply) {
   reply->deleteLater();
 
   emit Busy(false);
-  ui_->go->setEnabled(true);
-  ui_->url->setEnabled(true);
 
   if (!reply->is_success()) {
     QMessageBox::warning(this, tr("Failed to load podcast"),

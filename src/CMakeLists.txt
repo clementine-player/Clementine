@@ -231,6 +231,7 @@ set(SOURCES
   podcasts/addpodcastbyurl.cpp
   podcasts/addpodcastdialog.cpp
   podcasts/addpodcastpage.cpp
+  podcasts/gpoddersearchpage.cpp
   podcasts/gpoddertoptagsmodel.cpp
   podcasts/gpoddertoptagspage.cpp
   podcasts/podcast.cpp
@@ -481,6 +482,7 @@ set(HEADERS
   podcasts/addpodcastbyurl.h
   podcasts/addpodcastdialog.h
   podcasts/addpodcastpage.h
+  podcasts/gpoddersearchpage.h
   podcasts/gpoddertoptagsmodel.h
   podcasts/gpoddertoptagspage.h
   podcasts/podcastbackend.h
@@ -609,6 +611,7 @@ set(UI
 
   podcasts/addpodcastbyurl.ui
   podcasts/addpodcastdialog.ui
+  podcasts/gpoddersearchpage.ui
   podcasts/podcastinfowidget.ui
 
   remote/remotesettingspage.ui
