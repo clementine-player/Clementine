@@ -794,13 +794,6 @@ void PlaylistView::JumpToLastPlayedTrack() {
   currently_autoscrolling_ = false;
 }
 
-namespace {
-uchar clamp(int x, int low, int high) {
-  // ಠ__ಠ
-  return x < low ? low : x > high ? high : x;
-}
-}  // namespace
-
 void PlaylistView::paintEvent(QPaintEvent* event) {
   // Reimplemented to draw the background image.
   // Reimplemented also to draw the drop indicator
@@ -820,7 +813,10 @@ void PlaylistView::paintEvent(QPaintEvent* event) {
         QImage background_image(background_image_);
         uchar* bits = background_image.bits();
         for (int i = 0; i < background_image.height() * background_image.bytesPerLine(); ++i) {
-          bits[i] = clamp(bits[i] + kBackgroundOpacity * 255, 0, 255);
+          bits[i] = qBound(
+              0,
+              static_cast<int>(bits[i] + kBackgroundOpacity * 255),
+              255);
         }
 
         cached_scaled_background_image_ = QPixmap::fromImage(
