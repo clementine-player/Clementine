@@ -33,12 +33,14 @@ public:
 
   enum Type {
     Type_Folder,
-    Type_Podcast
+    Type_Podcast,
+    Type_LoadingIndicator
   };
 
   enum Role {
     Role_Podcast = Qt::UserRole,
     Role_Type,
+    Role_StartedLoadingImage,
 
     RoleCount
   };
@@ -48,10 +50,16 @@ public:
 
   QStandardItem* CreatePodcastItem(const Podcast& podcast);
   QStandardItem* CreateFolder(const QString& name);
+  QStandardItem* CreateLoadingIndicator();
+
+  QVariant data(const QModelIndex& index, int role) const;
 
 private slots:
   void CancelPendingImages();
   void ImageLoaded(quint64 id, const QImage& image);
+
+private:
+  void LazyLoadImage(const QModelIndex& index);
   
 private:
   Application* app_;

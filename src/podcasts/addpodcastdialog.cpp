@@ -32,6 +32,7 @@ AddPodcastDialog::AddPodcastDialog(Application* app, QWidget* parent)
 {
   ui_->setupUi(this);
   ui_->details->SetApplication(app);
+  ui_->results->SetExpandOnReset(false);
   ui_->results_stack->setCurrentWidget(ui_->results_page);
 
   fader_ = new WidgetFadeHelper(ui_->details_scroll_area);

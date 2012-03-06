@@ -44,6 +44,7 @@ public:
 
 private slots:
   void PodcastsOfTagFinished(const QModelIndex& parent, mygpo::PodcastList* list);
+  void PodcastsOfTagFailed(const QModelIndex& parent, mygpo::PodcastList* list);
 
 private:
   mygpo::ApiRequest* api_;

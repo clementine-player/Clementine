@@ -37,20 +37,23 @@ PodcastDiscoveryModel::PodcastDiscoveryModel(Application* app, QObject* parent)
   connect(this, SIGNAL(modelAboutToBeReset()), SLOT(CancelPendingImages()));
 }
 
+QVariant PodcastDiscoveryModel::data(const QModelIndex& index, int role) const {
+  if (index.isValid() &&
+      role == Qt::DecorationRole &&
+      QStandardItemModel::data(index, Role_Type).toInt() == Type_Podcast &&
+      QStandardItemModel::data(index, Role_StartedLoadingImage).toBool() == false) {
+    const_cast<PodcastDiscoveryModel*>(this)->LazyLoadImage(index);
+  }
+
+  return QStandardItemModel::data(index, role);
+}
+
 QStandardItem* PodcastDiscoveryModel::CreatePodcastItem(const Podcast& podcast) {
   QStandardItem* item = new QStandardItem;
   item->setIcon(default_icon_);
   item->setText(podcast.title());
   item->setData(QVariant::fromValue(podcast), Role_Podcast);
   item->setData(Type_Podcast, Role_Type);
-
-  if (podcast.image_url().isValid()) {
-    // Start loading an image for this item.
-    quint64 id = app_->album_cover_loader()->LoadImageAsync(
-          cover_options_, podcast.image_url().toString(), QString());
-    pending_covers_[id] = item;
-  }
-
   return item;
 }
 
@@ -66,15 +69,37 @@ QStandardItem* PodcastDiscoveryModel::CreateFolder(const QString& name) {
   return item;
 }
 
+void PodcastDiscoveryModel::LazyLoadImage(const QModelIndex& index) {
+  QStandardItem* item = itemFromIndex(index);
+  item->setData(true, Role_StartedLoadingImage);
+
+  Podcast podcast = index.data(Role_Podcast).value<Podcast>();
+
+  if (podcast.image_url().isValid()) {
+    quint64 id = app_->album_cover_loader()->LoadImageAsync(
+          cover_options_, podcast.image_url().toString(), QString());
+    pending_covers_[id] = item;
+  }
+}
+
 void PodcastDiscoveryModel::ImageLoaded(quint64 id, const QImage& image) {
   QStandardItem* item = pending_covers_.take(id);
   if (!item)
     return;
 
-  item->setIcon(QIcon(QPixmap::fromImage(image)));
+  if (!image.isNull()) {
+    item->setIcon(QIcon(QPixmap::fromImage(image)));
+  }
 }
 
 void PodcastDiscoveryModel::CancelPendingImages() {
   app_->album_cover_loader()->CancelTasks(QSet<quint64>::fromList(pending_covers_.keys()));
   pending_covers_.clear();
+}
+
+QStandardItem* PodcastDiscoveryModel::CreateLoadingIndicator() {
+  QStandardItem* item = new QStandardItem;
+  item->setText(tr("Loading..."));
+  item->setData(Type_LoadingIndicator, Role_Type);
+  return item;
 }

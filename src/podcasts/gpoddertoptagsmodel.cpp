@@ -22,6 +22,8 @@
 
 #include <ApiRequest.h>
 
+#include <QMessageBox>
+
 GPodderTopTagsModel::GPodderTopTagsModel(mygpo::ApiRequest* api, Application* app,
                                          QObject* parent)
   : PodcastDiscoveryModel(app, parent),
@@ -57,23 +59,35 @@ void GPodderTopTagsModel::fetchMore(const QModelIndex& parent) {
   }
   setData(parent, true, Role_HasLazyLoaded);
 
-  qLog(Debug) << "Fetching podcasts for" << parent.data().toString();
+  // Create a little Loading... item.
+  itemFromIndex(parent)->appendRow(CreateLoadingIndicator());
+
   mygpo::PodcastList* list =
       api_->podcastsOfTag(GPodderTopTagsPage::kMaxTagCount, parent.data().toString());
 
   NewClosure(list, SIGNAL(finished()),
              this, SLOT(PodcastsOfTagFinished(QModelIndex,mygpo::PodcastList*)),
              parent, list);
+  NewClosure(list, SIGNAL(parseError()),
+             this, SLOT(PodcastsOfTagFailed(QModelIndex,mygpo::PodcastList*)),
+             parent, list);
+  NewClosure(list, SIGNAL(requestError(QNetworkReply::NetworkError)),
+             this, SLOT(PodcastsOfTagFailed(QModelIndex,mygpo::PodcastList*)),
+             parent, list);
 }
 
 void GPodderTopTagsModel::PodcastsOfTagFinished(const QModelIndex& parent,
                                                 mygpo::PodcastList* list) {
   list->deleteLater();
-  qLog(Debug) << "Tag list finished";
 
   QStandardItem* parent_item = itemFromIndex(parent);
   if (!parent_item)
     return;
+
+  // Remove the Loading... item.
+  while (parent_item->hasChildren()) {
+    parent_item->removeRow(0);
+  }
 
   foreach (mygpo::PodcastPtr gpo_podcast, list->list()) {
     Podcast podcast;
@@ -81,4 +95,30 @@ void GPodderTopTagsModel::PodcastsOfTagFinished(const QModelIndex& parent,
 
     parent_item->appendRow(CreatePodcastItem(podcast));
   }
+}
+
+void GPodderTopTagsModel::PodcastsOfTagFailed(const QModelIndex& parent,
+                                              mygpo::PodcastList* list) {
+  list->deleteLater();
+
+  QStandardItem* parent_item = itemFromIndex(parent);
+  if (!parent_item)
+    return;
+
+  // Remove the Loading... item.
+  while (parent_item->hasChildren()) {
+    parent_item->removeRow(0);
+  }
+
+  if (QMessageBox::warning(
+        NULL, tr("Failed to fetch podcasts"),
+        tr("There was a problem communicating with gpodder.net"),
+        QMessageBox::Retry | QMessageBox::Close,
+        QMessageBox::Retry) != QMessageBox::Retry) {
+    return;
+  }
+
+  // Try fetching the list again.
+  setData(parent, false, Role_HasLazyLoaded);
+  fetchMore(parent);
 }
