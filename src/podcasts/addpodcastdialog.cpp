@@ -17,6 +17,7 @@
 
 #include "addpodcastdialog.h"
 #include "addpodcastbyurl.h"
+#include "gpoddertoptagspage.h"
 #include "podcastdiscoverymodel.h"
 #include "ui_addpodcastdialog.h"
 #include "core/application.h"
@@ -42,6 +43,7 @@ AddPodcastDialog::AddPodcastDialog(Application* app, QWidget* parent)
 
   // Add providers
   AddPage(new AddPodcastByUrl(app, this));
+  AddPage(new GPodderTopTagsPage(app, this));
 
   ui_->provider_list->setCurrentRow(0);
 }

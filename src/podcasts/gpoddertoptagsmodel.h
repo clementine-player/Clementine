@@ -15,30 +15,18 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ADDPODCASTPAGE_H
-#define ADDPODCASTPAGE_H
+#ifndef GPODDERTOPTAGSMODEL_H
+#define GPODDERTOPTAGSMODEL_H
 
-#include <QWidget>
+#include "podcastdiscoverymodel.h"
 
-class Application;
-class PodcastDiscoveryModel;
-
-class AddPodcastPage : public QWidget {
+class GPodderTopTagsModel : public PodcastDiscoveryModel {
   Q_OBJECT
 
 public:
-  AddPodcastPage(Application* app, QWidget* parent = 0);
+  GPodderTopTagsModel(Application* app, QObject* parent = 0);
 
-  PodcastDiscoveryModel* model() const { return model_; }
-
-signals:
-  void Busy(bool busy);
-
-protected:
-  void SetModel(PodcastDiscoveryModel* model);
-
-private:
-  PodcastDiscoveryModel* model_;
+  bool hasChildren(const QModelIndex& parent) const;
 };
 
-#endif // ADDPODCASTPAGE_H
+#endif // GPODDERTOPTAGSMODEL_H

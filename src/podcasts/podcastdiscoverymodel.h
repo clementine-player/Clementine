@@ -45,6 +45,7 @@ public:
   void set_is_tree(bool v) { is_tree_ = v; }
 
   QStandardItem* CreatePodcastItem(const Podcast& podcast);
+  QStandardItem* CreateFolder(const QString& name);
 
 private slots:
   void CancelPendingImages();
@@ -57,6 +58,7 @@ private:
 
   AlbumCoverLoaderOptions cover_options_;
   QIcon default_icon_;
+  QIcon folder_icon_;
   QMap<quint64, QStandardItem*> pending_covers_;
 };
 

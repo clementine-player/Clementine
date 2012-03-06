@@ -23,3 +23,8 @@ AddPodcastPage::AddPodcastPage(Application* app, QWidget* parent)
     model_(new PodcastDiscoveryModel(app, this))
 {
 }
+
+void AddPodcastPage::SetModel(PodcastDiscoveryModel* model) {
+  delete model_;
+  model_ = model;
+}

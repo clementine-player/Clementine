@@ -19,6 +19,7 @@
 #include "podcastdiscoverymodel.h"
 #include "core/application.h"
 #include "covers/albumcoverloader.h"
+#include "ui/iconloader.h"
 
 #include <QIcon>
 #include <QSet>
@@ -50,6 +51,18 @@ QStandardItem* PodcastDiscoveryModel::CreatePodcastItem(const Podcast& podcast) 
     pending_covers_[id] = item;
   }
 
+  return item;
+}
+
+QStandardItem* PodcastDiscoveryModel::CreateFolder(const QString& name) {
+  if (folder_icon_.isNull()) {
+    folder_icon_ = IconLoader::Load("folder");
+  }
+
+  QStandardItem* item = new QStandardItem;
+  item->setIcon(folder_icon_);
+  item->setText(name);
+  item->setData(Type_Folder, Role_Type);
   return item;
 }
 

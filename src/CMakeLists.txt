@@ -36,6 +36,7 @@ include_directories(${QXT_INCLUDE_DIRS})
 include_directories(${ECHONEST_INCLUDE_DIRS})
 include_directories(${SHA2_INCLUDE_DIRS})
 include_directories(${CHROMAPRINT_INCLUDE_DIRS})
+include_directories(${MYGPOQT_INCLUDE_DIRS})
 
 find_package(OpenGL)
 include_directories(${OPENGL_INCLUDE_DIR})
@@ -230,6 +231,8 @@ set(SOURCES
   podcasts/addpodcastbyurl.cpp
   podcasts/addpodcastdialog.cpp
   podcasts/addpodcastpage.cpp
+  podcasts/gpoddertoptagsmodel.cpp
+  podcasts/gpoddertoptagspage.cpp
   podcasts/podcast.cpp
   podcasts/podcastbackend.cpp
   podcasts/podcastdiscoverymodel.cpp
@@ -477,6 +480,8 @@ set(HEADERS
   podcasts/addpodcastbyurl.h
   podcasts/addpodcastdialog.h
   podcasts/addpodcastpage.h
+  podcasts/gpoddertoptagsmodel.h
+  podcasts/gpoddertoptagspage.h
   podcasts/podcastbackend.h
   podcasts/podcastdiscoverymodel.h
   podcasts/podcastinfowidget.h
@@ -1009,6 +1014,7 @@ target_link_libraries(clementine_lib
   libclementine-tagreader
   ${SHA2_LIBRARIES}
   ${TAGLIB_LIBRARIES}
+  ${MYGPOQT_LIBRARIES}
   ${CHROMAPRINT_LIBRARIES}
   ${ECHONEST_LIBRARIES}
   ${GOBJECT_LIBRARIES}

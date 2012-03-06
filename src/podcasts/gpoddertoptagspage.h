@@ -15,30 +15,40 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ADDPODCASTPAGE_H
-#define ADDPODCASTPAGE_H
+#ifndef GPODDERTOPTAGSPAGE_H
+#define GPODDERTOPTAGSPAGE_H
 
-#include <QWidget>
+#include <QScopedPointer>
 
-class Application;
-class PodcastDiscoveryModel;
+#include "addpodcastpage.h"
 
-class AddPodcastPage : public QWidget {
+class QNetworkAccessManager;
+
+namespace mygpo {
+  class ApiRequest;
+  class TagList;
+}
+
+class GPodderTopTagsPage : public AddPodcastPage {
   Q_OBJECT
 
 public:
-  AddPodcastPage(Application* app, QWidget* parent = 0);
+  GPodderTopTagsPage(Application* app, QWidget* parent = 0);
+  ~GPodderTopTagsPage();
 
-  PodcastDiscoveryModel* model() const { return model_; }
-
-signals:
-  void Busy(bool busy);
-
-protected:
-  void SetModel(PodcastDiscoveryModel* model);
+  static const int kMaxTagCount;
 
 private:
-  PodcastDiscoveryModel* model_;
+  void showEvent(QShowEvent* e);
+
+private slots:
+  void TagListLoaded(mygpo::TagList* tag_list);
+
+private:
+  QNetworkAccessManager* network_;
+  mygpo::ApiRequest* api_;
+
+  bool done_initial_load_;
 };
 
-#endif // ADDPODCASTPAGE_H
+#endif // GPODDERTOPTAGSPAGE_H
