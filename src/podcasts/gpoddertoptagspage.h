@@ -38,8 +38,8 @@ public:
 
   static const int kMaxTagCount;
 
-private:
-  void showEvent(QShowEvent* e);
+  virtual bool has_visible_widget() const { return false; }
+  virtual void Show();
 
 private slots:
   void TagListLoaded(mygpo::TagList* tag_list);

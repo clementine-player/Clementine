@@ -25,6 +25,10 @@
 #include <QUrl>
 #include <QVariantMap>
 
+namespace mygpo {
+  class Podcast;
+}
+
 class Podcast {
 public:
   Podcast();
@@ -37,6 +41,8 @@ public:
   static const QString kUpdateSpec;
 
   void InitFromQuery(const QSqlQuery& query);
+  void InitFromGpo(const mygpo::Podcast* podcast);
+
   void BindToQuery(QSqlQuery* query) const;
 
   bool is_valid() const { return database_id() != -1; }

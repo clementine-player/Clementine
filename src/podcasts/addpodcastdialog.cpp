@@ -66,6 +66,7 @@ void AddPodcastDialog::ChangePage(int index) {
   AddPodcastPage* page = pages_[index];
 
   ui_->stack->setCurrentIndex(index);
+  ui_->stack->setVisible(page->has_visible_widget());
   ui_->results->setModel(page->model());
   ui_->results->setRootIsDecorated(page->model()->is_tree());
 
@@ -76,10 +77,14 @@ void AddPodcastDialog::ChangePage(int index) {
           SLOT(ChangePodcast(QModelIndex)));
   ChangePodcast(QModelIndex());
   PageBusyChanged(page_is_busy_[index]);
+
+  page->Show();
 }
 
 void AddPodcastDialog::ChangePodcast(const QModelIndex& current) {
-  if (!current.isValid()) {
+  if (!current.isValid() ||
+      current.data(PodcastDiscoveryModel::Role_Type).toInt() !=
+          PodcastDiscoveryModel::Type_Podcast) {
     ui_->details->hide();
     return;
   }

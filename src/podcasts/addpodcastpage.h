@@ -31,6 +31,9 @@ public:
 
   PodcastDiscoveryModel* model() const { return model_; }
 
+  virtual bool has_visible_widget() const { return true; }
+  virtual void Show() {}
+
 signals:
   void Busy(bool busy);
 

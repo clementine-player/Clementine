@@ -53,7 +53,7 @@
        <item>
         <widget class="QStackedWidget" name="results_stack">
          <property name="currentIndex">
-          <number>1</number>
+          <number>0</number>
          </property>
          <widget class="QWidget" name="results_page">
           <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -65,6 +65,12 @@
            </property>
            <item>
             <widget class="QTreeView" name="results">
+             <property name="editTriggers">
+              <set>QAbstractItemView::NoEditTriggers</set>
+             </property>
+             <property name="uniformRowHeights">
+              <bool>true</bool>
+             </property>
              <attribute name="headerVisible">
               <bool>false</bool>
              </attribute>

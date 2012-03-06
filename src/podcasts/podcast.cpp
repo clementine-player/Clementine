@@ -20,6 +20,8 @@
 
 #include <QDataStream>
 
+#include <Podcast.h>
+
 const QStringList Podcast::kColumns = QStringList()
     << "url" << "title" << "description" << "copyright" << "link"
     << "image_url" << "author" << "owner_name" << "author_email" << "extra";
@@ -139,4 +141,16 @@ void Podcast::BindToQuery(QSqlQuery* query) const {
   extra_stream << d->extra_;
 
   query->bindValue(":extra", extra);
+}
+
+void Podcast::InitFromGpo(const mygpo::Podcast* podcast) {
+  d->url_ = podcast->url();
+  d->title_ = podcast->title();
+  d->description_ = podcast->description();
+  d->link_ = podcast->website();
+  d->image_url_ = podcast->logoUrl();
+
+  set_extra("gpodder:subscribers", podcast->subscribers());
+  set_extra("gpodder:subscribers_last_week", podcast->subscribersLastWeek());
+  set_extra("gpodder:page", podcast->mygpoUrl());
 }

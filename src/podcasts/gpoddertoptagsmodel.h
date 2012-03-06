@@ -20,13 +20,33 @@
 
 #include "podcastdiscoverymodel.h"
 
+namespace mygpo {
+  class ApiRequest;
+  class PodcastList;
+}
+
 class GPodderTopTagsModel : public PodcastDiscoveryModel {
   Q_OBJECT
 
 public:
-  GPodderTopTagsModel(Application* app, QObject* parent = 0);
+  GPodderTopTagsModel(mygpo::ApiRequest* api, Application* app,
+                      QObject* parent = 0);
+
+  enum Role {
+    Role_HasLazyLoaded = PodcastDiscoveryModel::RoleCount,
+
+    RoleCount
+  };
 
   bool hasChildren(const QModelIndex& parent) const;
+  bool canFetchMore(const QModelIndex& parent) const;
+  void fetchMore(const QModelIndex& parent);
+
+private slots:
+  void PodcastsOfTagFinished(const QModelIndex& parent, mygpo::PodcastList* list);
+
+private:
+  mygpo::ApiRequest* api_;
 };
 
 #endif // GPODDERTOPTAGSMODEL_H

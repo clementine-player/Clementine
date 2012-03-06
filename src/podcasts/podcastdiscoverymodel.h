@@ -38,7 +38,9 @@ public:
 
   enum Role {
     Role_Podcast = Qt::UserRole,
-    Role_Type
+    Role_Type,
+
+    RoleCount
   };
 
   bool is_tree() const { return is_tree_; }

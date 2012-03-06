@@ -34,16 +34,14 @@ GPodderTopTagsPage::GPodderTopTagsPage(Application* app, QWidget* parent)
   setWindowTitle(tr("Browse gpodder.net"));
   setWindowIcon(QIcon(":providers/mygpo32.png"));
 
-  SetModel(new GPodderTopTagsModel(app, this));
+  SetModel(new GPodderTopTagsModel(api_, app, this));
 }
 
 GPodderTopTagsPage::~GPodderTopTagsPage() {
   delete api_;
 }
 
-void GPodderTopTagsPage::showEvent(QShowEvent* e) {
-  QWidget::showEvent(e);
-
+void GPodderTopTagsPage::Show() {
   if (!done_initial_load_) {
     // Start the request for list of top-level tags
     emit Busy(true);
