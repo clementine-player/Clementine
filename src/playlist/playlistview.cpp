@@ -794,6 +794,13 @@ void PlaylistView::JumpToLastPlayedTrack() {
   currently_autoscrolling_ = false;
 }
 
+namespace {
+uchar clamp(int x, int low, int high) {
+  // ಠ__ಠ
+  return x < low ? low : x > high ? high : x;
+}
+}  // namespace
+
 void PlaylistView::paintEvent(QPaintEvent* event) {
   // Reimplemented to draw the background image.
   // Reimplemented also to draw the drop indicator
@@ -809,21 +816,18 @@ void PlaylistView::paintEvent(QPaintEvent* event) {
       QPainter background_painter(viewport());
       if (height() != last_height_ || width() != last_width_
           || force_background_redraw_) {
-        cached_scaled_background_image_ = background_image_.scaled(
-                                              width(), height(),
-                                              Qt::KeepAspectRatioByExpanding,
-                                              Qt::SmoothTransformation);
-        QPixmap temp(cached_scaled_background_image_.size());
-        temp.fill(Qt::transparent);
 
-        QPainter p(&temp);
-        p.setCompositionMode(QPainter::CompositionMode_Source);
-        p.drawPixmap(0, 0, cached_scaled_background_image_);
-        p.setCompositionMode(QPainter::CompositionMode_DestinationIn);
-        p.fillRect(temp.rect(), QColor(0, 0, 0, 255 * kBackgroundOpacity));
-        p.end();
+        QImage background_image(background_image_);
+        uchar* bits = background_image.bits();
+        for (int i = 0; i < background_image.height() * background_image.bytesPerLine(); ++i) {
+          bits[i] = clamp(bits[i] + kBackgroundOpacity * 255, 0, 255);
+        }
 
-        cached_scaled_background_image_ = temp;
+        cached_scaled_background_image_ = QPixmap::fromImage(
+            background_image.scaled(
+                  width(), height(),
+                  Qt::KeepAspectRatioByExpanding,
+                  Qt::SmoothTransformation));
 
         last_height_  = height();
         last_width_   = width();
@@ -962,13 +966,13 @@ void PlaylistView::ReloadSettings() {
 
   setProperty("default_background_enabled", background_image_type_ == Default);
   emit BackgroundPropertyChanged();
-  
+
   if (setting_initial_header_layout_) {
     header_->SetColumnWidth(Playlist::Column_Length, 0.06);
     header_->SetColumnWidth(Playlist::Column_Track, 0.05);
     setting_initial_header_layout_ = false;
   }
-  
+
   if (upgrading_from_version_ != -1) {
     if (upgrading_from_version_ < 4) {
       header_->SetColumnWidth(Playlist::Column_Source, 0.05);
@@ -983,7 +987,7 @@ void PlaylistView::ReloadSettings() {
 
   QString background_image_filename = s.value(kSettingBackgroundImageFilename).toString();
   if (!background_image_filename.isEmpty() && background_image_type_ == Custom) {
-    background_image_ = QPixmap(background_image_filename);
+    background_image_ = QImage(background_image_filename);
   } else if (background_image_type_ == AlbumCover) {
     background_image_ = current_song_cover_art_;
   }
@@ -1112,9 +1116,10 @@ void PlaylistView::CopyCurrentSongToClipboard() const {
 void PlaylistView::CurrentSongChanged(const Song& song,
                                       const QString& uri,
                                       const QImage& song_art) {
-  current_song_cover_art_ = QPixmap::fromImage(song_art);
+  current_song_cover_art_ = song_art;
   if (background_image_type_ == AlbumCover) {
     background_image_ = current_song_cover_art_;
     force_background_redraw_ = true;
+    update();
   }
 }

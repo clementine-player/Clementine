@@ -172,7 +172,7 @@ class PlaylistView : public QTreeView {
   QModelIndex PrevEditableIndex(const QModelIndex& current);
 
   void RepositionDynamicControls();
-  
+
   Application* app_;
   PlaylistProxyStyle* style_;
   Playlist* playlist_;
@@ -183,8 +183,8 @@ class PlaylistView : public QTreeView {
   int upgrading_from_version_;
 
   BackgroundImageType background_image_type_;
-  QPixmap background_image_;
-  QPixmap current_song_cover_art_;
+  QImage background_image_;
+  QImage current_song_cover_art_;
   QPixmap cached_scaled_background_image_;
   int last_height_;
   int last_width_;
