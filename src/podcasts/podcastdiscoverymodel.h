@@ -24,6 +24,7 @@
 
 class Application;
 class Podcast;
+class StandardItemIconLoader;
 
 class PodcastDiscoveryModel : public QStandardItemModel {
   Q_OBJECT
@@ -54,22 +55,17 @@ public:
 
   QVariant data(const QModelIndex& index, int role) const;
 
-private slots:
-  void CancelPendingImages();
-  void ImageLoaded(quint64 id, const QImage& image);
-
 private:
   void LazyLoadImage(const QModelIndex& index);
   
 private:
   Application* app_;
+  StandardItemIconLoader* icon_loader_;
 
   bool is_tree_;
 
-  AlbumCoverLoaderOptions cover_options_;
   QIcon default_icon_;
   QIcon folder_icon_;
-  QMap<quint64, QStandardItem*> pending_covers_;
 };
 
 #endif // PODCASTDISCOVERYMODEL_H

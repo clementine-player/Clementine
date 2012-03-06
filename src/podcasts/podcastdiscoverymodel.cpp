@@ -18,8 +18,8 @@
 #include "podcast.h"
 #include "podcastdiscoverymodel.h"
 #include "core/application.h"
-#include "covers/albumcoverloader.h"
 #include "ui/iconloader.h"
+#include "ui/standarditemiconloader.h"
 
 #include <QIcon>
 #include <QSet>
@@ -27,14 +27,11 @@
 PodcastDiscoveryModel::PodcastDiscoveryModel(Application* app, QObject* parent)
   : QStandardItemModel(parent),
     app_(app),
+    icon_loader_(new StandardItemIconLoader(app->album_cover_loader(), this)),
     is_tree_(false),
-    default_icon_(":providers/podcast32.png")
+    default_icon_(":providers/podcast16.png")
 {
-  cover_options_.desired_height_ = 32;
-
-  connect(app_->album_cover_loader(), SIGNAL(ImageLoaded(quint64,QImage)),
-          SLOT(ImageLoaded(quint64,QImage)));
-  connect(this, SIGNAL(modelAboutToBeReset()), SLOT(CancelPendingImages()));
+  icon_loader_->SetModel(this);
 }
 
 QVariant PodcastDiscoveryModel::data(const QModelIndex& index, int role) const {
@@ -76,25 +73,8 @@ void PodcastDiscoveryModel::LazyLoadImage(const QModelIndex& index) {
   Podcast podcast = index.data(Role_Podcast).value<Podcast>();
 
   if (podcast.image_url().isValid()) {
-    quint64 id = app_->album_cover_loader()->LoadImageAsync(
-          cover_options_, podcast.image_url().toString(), QString());
-    pending_covers_[id] = item;
+    icon_loader_->LoadIcon(podcast.image_url().toString(), QString(), item);
   }
-}
-
-void PodcastDiscoveryModel::ImageLoaded(quint64 id, const QImage& image) {
-  QStandardItem* item = pending_covers_.take(id);
-  if (!item)
-    return;
-
-  if (!image.isNull()) {
-    item->setIcon(QIcon(QPixmap::fromImage(image)));
-  }
-}
-
-void PodcastDiscoveryModel::CancelPendingImages() {
-  app_->album_cover_loader()->CancelTasks(QSet<quint64>::fromList(pending_covers_.keys()));
-  pending_covers_.clear();
 }
 
 QStandardItem* PodcastDiscoveryModel::CreateLoadingIndicator() {

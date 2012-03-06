@@ -19,8 +19,11 @@
 #include "podcastbackend.h"
 #include "podcastservice.h"
 #include "core/application.h"
+#include "core/logging.h"
 #include "internet/internetmodel.h"
+#include "library/libraryview.h"
 #include "ui/iconloader.h"
+#include "ui/standarditemiconloader.h"
 
 #include <QMenu>
 
@@ -29,10 +32,13 @@ const char* PodcastService::kSettingsGroup = "Podcasts";
 
 PodcastService::PodcastService(Application* app, InternetModel* parent)
   : InternetService(kServiceName, app, parent, parent),
+    use_pretty_covers_(true),
+    icon_loader_(new StandardItemIconLoader(app->album_cover_loader(), this)),
     context_menu_(NULL),
     root_(NULL),
     backend_(app->podcast_backend())
 {
+  icon_loader_->SetModel(model());
 }
 
 PodcastService::~PodcastService() {
@@ -53,6 +59,10 @@ void PodcastService::LazyPopulate(QStandardItem* parent) {
 }
 
 void PodcastService::PopulatePodcastList(QStandardItem* parent) {
+  if (default_icon_.isNull()) {
+    default_icon_ = QIcon(":providers/podcast16.png");
+  }
+
   foreach (const Podcast& podcast, backend_->GetAllSubscriptions()) {
     const int unlistened_count = podcast.extra("db:unlistened_count").toInt();
     QString title = podcast.title();
@@ -70,6 +80,12 @@ void PodcastService::PopulatePodcastList(QStandardItem* parent) {
     }
 
     item->setText(podcast.title());
+    item->setIcon(default_icon_);
+
+    // Load the podcast's image if it has one
+    if (podcast.image_url().isValid()) {
+      icon_loader_->LoadIcon(podcast.image_url().toString(), QString(), item);
+    }
 
     parent->appendRow(item);
   }
@@ -84,6 +100,14 @@ void PodcastService::ShowContextMenu(const QModelIndex& index,
   }
 
   context_menu_->popup(global_pos);
+}
+
+void PodcastService::ReloadSettings() {
+  QSettings s;
+  s.beginGroup(LibraryView::kSettingsGroup);
+
+  use_pretty_covers_ = s.value("pretty_covers", true).toBool();
+  // TODO: reload the podcast icons that are already loaded?
 }
 
 QModelIndex PodcastService::GetCurrentIndex() {

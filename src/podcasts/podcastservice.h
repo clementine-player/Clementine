@@ -25,6 +25,7 @@
 
 class AddPodcastDialog;
 class PodcastBackend;
+class StandardItemIconLoader;
 
 class PodcastService : public InternetService {
   Q_OBJECT
@@ -46,6 +47,7 @@ public:
   void LazyPopulate(QStandardItem* parent);
 
   void ShowContextMenu(const QModelIndex& index, const QPoint& global_pos);
+  void ReloadSettings();
 
 protected:
   QModelIndex GetCurrentIndex();
@@ -57,6 +59,10 @@ private:
   void PopulatePodcastList(QStandardItem* parent);
 
 private:
+  bool use_pretty_covers_;
+  QIcon default_icon_;
+  StandardItemIconLoader* icon_loader_;
+
   QMenu* context_menu_;
   QStandardItem* root_;
 
