@@ -22,6 +22,7 @@
 #include "ui_addpodcastdialog.h"
 #include "core/application.h"
 #include "ui/iconloader.h"
+#include "widgets/widgetfadehelper.h"
 
 #include <QPushButton>
 
@@ -33,7 +34,10 @@ AddPodcastDialog::AddPodcastDialog(Application* app, QWidget* parent)
   ui_->details->SetApplication(app);
   ui_->results_stack->setCurrentWidget(ui_->results_page);
 
+  fader_ = new WidgetFadeHelper(ui_->details_scroll_area);
+
   connect(ui_->provider_list, SIGNAL(currentRowChanged(int)), SLOT(ChangePage(int)));
+  connect(ui_->details, SIGNAL(LoadingFinished()), fader_, SLOT(StartFade()));
 
   // Create an Add Podcast button
   add_button_ = new QPushButton(IconLoader::Load("list-add"), tr("Add Podcast"), this);
@@ -85,11 +89,16 @@ void AddPodcastDialog::ChangePodcast(const QModelIndex& current) {
   if (!current.isValid() ||
       current.data(PodcastDiscoveryModel::Role_Type).toInt() !=
           PodcastDiscoveryModel::Type_Podcast) {
-    ui_->details->hide();
+    ui_->details_scroll_area->hide();
     return;
   }
 
-  ui_->details->show();
+  if (ui_->details_scroll_area->isVisible()) {
+    fader_->StartBlur();
+  } else {
+    ui_->details_scroll_area->show();
+  }
+
   ui_->details->SetPodcast(current.data(PodcastDiscoveryModel::Role_Podcast).value<Podcast>());
 }
 

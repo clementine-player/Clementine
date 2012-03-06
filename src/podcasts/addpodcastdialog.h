@@ -22,6 +22,7 @@
 
 class AddPodcastPage;
 class Application;
+class WidgetFadeHelper;
 class Ui_AddPodcastDialog;
 
 class QModelIndex;
@@ -49,6 +50,8 @@ private:
 
   QList<AddPodcastPage*> pages_;
   QList<bool> page_is_busy_;
+
+  WidgetFadeHelper* fader_;
 };
 
 #endif // ADDPODCASTDIALOG_H

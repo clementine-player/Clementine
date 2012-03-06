@@ -57,6 +57,7 @@ void GPodderTopTagsModel::fetchMore(const QModelIndex& parent) {
   }
   setData(parent, true, Role_HasLazyLoaded);
 
+  qLog(Debug) << "Fetching podcasts for" << parent.data().toString();
   mygpo::PodcastList* list =
       api_->podcastsOfTag(GPodderTopTagsPage::kMaxTagCount, parent.data().toString());
 
@@ -68,6 +69,7 @@ void GPodderTopTagsModel::fetchMore(const QModelIndex& parent) {
 void GPodderTopTagsModel::PodcastsOfTagFinished(const QModelIndex& parent,
                                                 mygpo::PodcastList* list) {
   list->deleteLater();
+  qLog(Debug) << "Tag list finished";
 
   QStandardItem* parent_item = itemFromIndex(parent);
   if (!parent_item)

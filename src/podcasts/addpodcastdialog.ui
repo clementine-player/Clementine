@@ -6,14 +6,14 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>887</width>
-    <height>447</height>
+    <width>941</width>
+    <height>473</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout_2">
+  <layout class="QVBoxLayout" name="verticalLayout_3">
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
@@ -56,7 +56,7 @@
           <number>0</number>
          </property>
          <widget class="QWidget" name="results_page">
-          <layout class="QVBoxLayout" name="verticalLayout_3">
+          <layout class="QVBoxLayout" name="verticalLayout_2">
            <property name="spacing">
             <number>0</number>
            </property>
@@ -110,13 +110,35 @@
       </layout>
      </item>
      <item>
-      <widget class="PodcastInfoWidget" name="details">
-       <property name="frameShape">
-        <enum>QFrame::StyledPanel</enum>
+      <widget class="QScrollArea" name="details_scroll_area">
+       <property name="minimumSize">
+        <size>
+         <width>250</width>
+         <height>0</height>
+        </size>
        </property>
-       <property name="frameShadow">
-        <enum>QFrame::Raised</enum>
+       <property name="maximumSize">
+        <size>
+         <width>250</width>
+         <height>16777215</height>
+        </size>
        </property>
+       <property name="horizontalScrollBarPolicy">
+        <enum>Qt::ScrollBarAlwaysOff</enum>
+       </property>
+       <property name="widgetResizable">
+        <bool>true</bool>
+       </property>
+       <widget class="PodcastInfoWidget" name="details">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>248</width>
+          <height>418</height>
+         </rect>
+        </property>
+       </widget>
       </widget>
      </item>
     </layout>
@@ -142,7 +164,7 @@
   </customwidget>
   <customwidget>
    <class>PodcastInfoWidget</class>
-   <extends>QFrame</extends>
+   <extends>QWidget</extends>
    <header>podcasts/podcastinfowidget.h</header>
    <container>1</container>
   </customwidget>

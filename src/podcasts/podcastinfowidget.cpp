@@ -21,17 +21,14 @@
 #include "covers/albumcoverloader.h"
 
 PodcastInfoWidget::PodcastInfoWidget(QWidget* parent)
-  : QFrame(parent),
+  : QWidget(parent),
     ui_(new Ui_PodcastInfoWidget),
     app_(NULL),
     image_id_(0)
 {
   ui_->setupUi(this);
 
-  setFrameShape(QFrame::StyledPanel);
-
-  setMaximumWidth(220);
-  cover_options_.desired_height_ = 200;
+  cover_options_.desired_height_ = 180;
   ui_->image->setFixedSize(cover_options_.desired_height_,
                            cover_options_.desired_height_);
 
@@ -57,9 +54,26 @@ void PodcastInfoWidget::SetApplication(Application* app) {
           SLOT(ImageLoaded(quint64,QImage)));
 }
 
+namespace {
+  template <typename T>
+  void SetText(const QString& value, T* label, QLabel* buddy_label = NULL) {
+    const bool visible = !value.isEmpty();
+
+    label->setVisible(visible);
+    if (buddy_label) {
+      buddy_label->setVisible(visible);
+    }
+
+    if (visible) {
+      label->setText(value);
+    }
+  }
+}
+
 void PodcastInfoWidget::SetPodcast(const Podcast& podcast) {
-  if (image_id_ != 0) {
+  if (image_id_) {
     app_->album_cover_loader()->CancelTask(image_id_);
+    image_id_ = 0;
   }
 
   podcast_ = podcast;
@@ -78,18 +92,9 @@ void PodcastInfoWidget::SetPodcast(const Podcast& podcast) {
   SetText(podcast.author(), ui_->author, ui_->author_label);
   SetText(podcast.owner_name(), ui_->owner, ui_->owner_label);
   SetText(podcast.link().toString(), ui_->website, ui_->website_label);
-}
 
-void PodcastInfoWidget::SetText(const QString& value, QLabel* label, QLabel* buddy_label) {
-  const bool visible = !value.isEmpty();
-
-  label->setVisible(visible);
-  if (buddy_label) {
-    buddy_label->setVisible(visible);
-  }
-
-  if (visible) {
-    label->setText(value);
+  if (!image_id_) {
+    emit LoadingFinished();
   }
 }
 
@@ -103,4 +108,6 @@ void PodcastInfoWidget::ImageLoaded(quint64 id, const QImage& image) {
     ui_->image->setPixmap(QPixmap::fromImage(image));
     ui_->image->show();
   }
+
+  emit LoadingFinished();
 }

@@ -143,6 +143,7 @@ void WidgetFadeHelper::paintEvent(QPaintEvent* ) {
 
   if (fade_timeline_->state() != QTimeLine::Running) {
     // We're fading in the blur
+    p.drawPixmap(0, 0, original_pixmap_);
     p.setOpacity(blur_timeline_->currentValue());
   } else {
     // Fading out the blur into the new image

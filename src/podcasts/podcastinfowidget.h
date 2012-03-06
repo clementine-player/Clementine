@@ -28,7 +28,7 @@ class Ui_PodcastInfoWidget;
 
 class QLabel;
 
-class PodcastInfoWidget : public QFrame {
+class PodcastInfoWidget : public QWidget {
   Q_OBJECT
 
 public:
@@ -39,11 +39,11 @@ public:
 
   void SetPodcast(const Podcast& podcast);
 
+signals:
+  void LoadingFinished();
+
 private slots:
   void ImageLoaded(quint64 id, const QImage& image);
-
-private:
-  void SetText(const QString& value, QLabel* label, QLabel* buddy_label = NULL);
 
 private:
   Ui_PodcastInfoWidget* ui_;
