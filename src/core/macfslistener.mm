@@ -28,6 +28,9 @@ MacFSListener::MacFSListener(QObject* parent)
     : FileSystemWatcherInterface(parent),
       run_loop_(NULL),
       stream_(NULL) {
+  update_timer_.setSingleShot(true);
+  update_timer_.setInterval(2000);
+  connect(&update_timer_, SIGNAL(timeout()), SLOT(UpdateStream()));
 }
 
 void MacFSListener::Init() {
@@ -56,18 +59,22 @@ void MacFSListener::EventStreamCallback(
 void MacFSListener::AddPath(const QString& path) {
   Q_ASSERT(run_loop_);
   paths_.insert(path);
-  UpdateStream();
+  UpdateStreamAsync();
 }
 
 void MacFSListener::RemovePath(const QString& path) {
   Q_ASSERT(run_loop_);
   paths_.remove(path);
-  UpdateStream();
+  UpdateStreamAsync();
 }
 
 void MacFSListener::Clear() {
   paths_.clear();
-  UpdateStream();
+  UpdateStreamAsync();
+}
+
+void MacFSListener::UpdateStreamAsync() {
+  update_timer_.start();
 }
 
 void MacFSListener::UpdateStream() {

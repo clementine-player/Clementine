@@ -22,6 +22,7 @@
 
 #include <QObject>
 #include <QSet>
+#include <QTimer>
 
 #include "filesystemwatcherinterface.h"
 
@@ -38,8 +39,11 @@ class MacFSListener : public FileSystemWatcherInterface {
  signals:
   void PathChanged(const QString& path);
 
- private:
+ private slots:
   void UpdateStream();
+
+ private:
+  void UpdateStreamAsync();
 
   static void EventStreamCallback(
       ConstFSEventStreamRef stream,
@@ -53,6 +57,7 @@ class MacFSListener : public FileSystemWatcherInterface {
   FSEventStreamRef stream_;
 
   QSet<QString> paths_;
+  QTimer update_timer_;
 };
 
 #endif
