@@ -15,6 +15,7 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "opmlcontainer.h"
 #include "podcastparser.h"
 #include "core/utilities.h"
 
@@ -27,6 +28,7 @@ const char* PodcastParser::kItunesNamespace = "http://www.itunes.com/dtds/podcas
 PodcastParser::PodcastParser() {
   supported_mime_types_ << "application/rss+xml"
                         << "application/xml"
+                        << "text/x-opml"
                         << "text/xml";
 }
 
@@ -39,16 +41,47 @@ bool PodcastParser::SupportsContentType(const QString& content_type) const {
   return false;
 }
 
-bool PodcastParser::Load(QIODevice* device, const QUrl& url, Podcast* ret) const {
-  ret->set_url(url);
-
+QVariant PodcastParser::Load(QIODevice* device, const QUrl& url) const {
   QXmlStreamReader reader(device);
-  if (!Utilities::ParseUntilElement(&reader, "rss") ||
-      !Utilities::ParseUntilElement(&reader, "channel")) {
+
+  while (!reader.atEnd()) {
+    switch (reader.readNext()) {
+    case QXmlStreamReader::StartElement: {
+      const QStringRef name = reader.name();
+      if (name == "rss") {
+        Podcast podcast;
+        if (!ParseRss(&reader, &podcast)) {
+          return QVariant();
+        } else {
+          podcast.set_url(url);
+          return QVariant::fromValue(podcast);
+        }
+      } else if (name == "opml") {
+        OpmlContainer container;
+        if (!ParseOpml(&reader, &container)) {
+          return QVariant();
+        } else {
+          return QVariant::fromValue(container);
+        }
+      }
+
+      return QVariant();
+    }
+
+    default:
+      break;
+    }
+  }
+
+  return QVariant();
+}
+
+bool PodcastParser::ParseRss(QXmlStreamReader* reader, Podcast* ret) const {
+  if (!Utilities::ParseUntilElement(reader, "channel")) {
     return false;
   }
 
-  ParseChannel(&reader, ret);
+  ParseChannel(reader, ret);
   return true;
 }
 
@@ -178,6 +211,73 @@ void PodcastParser::ParseItem(QXmlStreamReader* reader, Podcast* ret) const {
       if (!episode.url().isEmpty()) {
         ret->add_episode(episode);
       }
+      return;
+
+    default:
+      break;
+    }
+  }
+}
+
+bool PodcastParser::ParseOpml(QXmlStreamReader* reader, OpmlContainer* ret) const {
+  if (!Utilities::ParseUntilElement(reader, "body")) {
+    return false;
+  }
+
+  ParseOutline(reader, ret);
+
+  // OPML files sometimes consist of a single top level container.
+  while (ret->feeds.count() == 0 &&
+         ret->containers.count() == 1) {
+    *ret = ret->containers[0];
+  }
+
+  return true;
+}
+
+void PodcastParser::ParseOutline(QXmlStreamReader* reader, OpmlContainer* ret) const {
+  while (!reader->atEnd()) {
+    QXmlStreamReader::TokenType type = reader->readNext();
+    switch (type) {
+    case QXmlStreamReader::StartElement: {
+      const QStringRef name = reader->name();
+      if (name != "outline") {
+        Utilities::ConsumeCurrentElement(reader);
+        continue;
+      }
+
+      QXmlStreamAttributes attributes = reader->attributes();
+
+      if (attributes.value("type").toString() == "rss") {
+        // Parse the feed and add it to this container
+        Podcast podcast;
+        podcast.set_description(attributes.value("description").toString());
+        podcast.set_title(attributes.value("text").toString());
+        podcast.set_image_url_large(QUrl(attributes.value("imageHref").toString()));
+        podcast.set_url(QUrl(attributes.value("xmlUrl").toString()));
+        ret->feeds.append(podcast);
+
+        // Consume any children and the EndElement.
+        Utilities::ConsumeCurrentElement(reader);
+      } else {
+        // Create a new child container
+        OpmlContainer child;
+
+        // Take the name from the fullname attribute first if it exists.
+        child.name = attributes.value("fullname").toString();
+        if (child.name.isEmpty()) {
+          child.name = attributes.value("text").toString();
+        }
+
+        // Parse its contents and add it to this container
+        ParseOutline(reader, &child);
+        ret->containers.append(child);
+      }
+
+      break;
+    }
+
+    case QXmlStreamReader::EndElement:
       return;
 
     default:

@@ -15,6 +15,7 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "opmlcontainer.h"
 #include "podcast.h"
 #include "podcastdiscoverymodel.h"
 #include "core/application.h"
@@ -28,18 +29,18 @@ PodcastDiscoveryModel::PodcastDiscoveryModel(Application* app, QObject* parent)
   : QStandardItemModel(parent),
     app_(app),
     icon_loader_(new StandardItemIconLoader(app->album_cover_loader(), this)),
-    is_tree_(false),
     default_icon_(":providers/podcast16.png")
 {
   icon_loader_->SetModel(this);
 }
 
 QVariant PodcastDiscoveryModel::data(const QModelIndex& index, int role) const {
-  if (index.isValid() &&
-      role == Qt::DecorationRole &&
-      QStandardItemModel::data(index, Role_Type).toInt() == Type_Podcast &&
+  if (index.isValid() && role == Qt::DecorationRole &&
       QStandardItemModel::data(index, Role_StartedLoadingImage).toBool() == false) {
-    const_cast<PodcastDiscoveryModel*>(this)->LazyLoadImage(index);
+    const QUrl image_url = QStandardItemModel::data(index, Role_ImageUrl).toUrl();
+    if (image_url.isValid()) {
+      const_cast<PodcastDiscoveryModel*>(this)->LazyLoadImage(image_url, index);
+    }
   }
 
   return QStandardItemModel::data(index, role);
@@ -51,6 +52,7 @@ QStandardItem* PodcastDiscoveryModel::CreatePodcastItem(const Podcast& podcast) 
   item->setText(podcast.title());
   item->setData(QVariant::fromValue(podcast), Role_Podcast);
   item->setData(Type_Podcast, Role_Type);
+  item->setData(podcast.ImageUrlSmall(), Role_ImageUrl);
   return item;
 }
 
@@ -66,15 +68,28 @@ QStandardItem* PodcastDiscoveryModel::CreateFolder(const QString& name) {
   return item;
 }
 
-void PodcastDiscoveryModel::LazyLoadImage(const QModelIndex& index) {
+QStandardItem* PodcastDiscoveryModel::CreateOpmlContainerItem(const OpmlContainer& container) {
+  QStandardItem* item = CreateFolder(container.name);
+  CreateOpmlContainerItems(container, item);
+  return item;
+}
+
+void PodcastDiscoveryModel::CreateOpmlContainerItems(const OpmlContainer& container, QStandardItem* parent) {
+  foreach (const OpmlContainer& child, container.containers) {
+    QStandardItem* child_item = CreateOpmlContainerItem(child);
+    parent->appendRow(child_item);
+  }
+
+  foreach (const Podcast& child, container.feeds) {
+    QStandardItem* child_item = CreatePodcastItem(child);
+    parent->appendRow(child_item);
+  }
+}
+
+void PodcastDiscoveryModel::LazyLoadImage(const QUrl& url, const QModelIndex& index) {
   QStandardItem* item = itemFromIndex(index);
   item->setData(true, Role_StartedLoadingImage);
-
-  Podcast podcast = index.data(Role_Podcast).value<Podcast>();
-
-  if (podcast.ImageUrlSmall().isValid()) {
-    icon_loader_->LoadIcon(podcast.ImageUrlSmall().toString(), QString(), item);
-  }
+  icon_loader_->LoadIcon(url.toString(), QString(), item);
 }
 
 QStandardItem* PodcastDiscoveryModel::CreateLoadingIndicator() {

@@ -23,6 +23,8 @@
 #include <QStandardItemModel>
 
 class Application;
+class OpmlContainer;
+class OpmlFeed;
 class Podcast;
 class StandardItemIconLoader;
 
@@ -41,14 +43,14 @@ public:
   enum Role {
     Role_Podcast = Qt::UserRole,
     Role_Type,
+    Role_ImageUrl,
     Role_StartedLoadingImage,
 
     RoleCount
   };
 
-  bool is_tree() const { return is_tree_; }
-  void set_is_tree(bool v) { is_tree_ = v; }
-
+  void CreateOpmlContainerItems(const OpmlContainer& container, QStandardItem* parent);
+  QStandardItem* CreateOpmlContainerItem(const OpmlContainer& container);
   QStandardItem* CreatePodcastItem(const Podcast& podcast);
   QStandardItem* CreateFolder(const QString& name);
   QStandardItem* CreateLoadingIndicator();
@@ -56,13 +58,11 @@ public:
   QVariant data(const QModelIndex& index, int role) const;
 
 private:
-  void LazyLoadImage(const QModelIndex& index);
+  void LazyLoadImage(const QUrl& url, const QModelIndex& index);
   
 private:
   Application* app_;
   StandardItemIconLoader* icon_loader_;
-
-  bool is_tree_;
 
   QIcon default_icon_;
   QIcon folder_icon_;

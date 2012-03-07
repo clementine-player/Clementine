@@ -29,7 +29,6 @@ GPodderTopTagsModel::GPodderTopTagsModel(mygpo::ApiRequest* api, Application* ap
   : PodcastDiscoveryModel(app, parent),
     api_(api)
 {
-  set_is_tree(true);
 }
 
 bool GPodderTopTagsModel::hasChildren(const QModelIndex& parent) const {

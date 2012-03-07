@@ -21,6 +21,7 @@
 #include <QObject>
 #include <QRegExp>
 
+#include "opmlcontainer.h"
 #include "podcast.h"
 
 class PodcastParser;
@@ -34,14 +35,23 @@ class PodcastUrlLoaderReply : public QObject {
 public:
   PodcastUrlLoaderReply(const QUrl& url, QObject* parent);
 
+  enum ResultType {
+    Type_Podcast,
+    Type_Opml
+  };
+
   const QUrl& url() const { return url_; }
   bool is_finished() const { return finished_; }
   bool is_success() const { return error_text_.isEmpty(); }
   const QString& error_text() const { return error_text_; }
-  const PodcastList& results() const { return results_; }
+
+  ResultType result_type() const { return result_type_; }
+  const PodcastList& podcast_results() const { return podcast_results_; }
+  const OpmlContainer& opml_results() const { return opml_results_; }
 
   void SetFinished(const QString& error_text);
   void SetFinished(const PodcastList& results);
+  void SetFinished(const OpmlContainer& results);
 
 signals:
   void Finished(bool success);
@@ -50,7 +60,10 @@ private:
   QUrl url_;
   bool finished_;
   QString error_text_;
-  PodcastList results_;
+
+  ResultType result_type_;
+  PodcastList podcast_results_;
+  OpmlContainer opml_results_;
 };
 
 

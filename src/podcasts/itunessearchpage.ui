@@ -47,5 +47,22 @@
  <resources>
   <include location="../../data/data.qrc"/>
  </resources>
- <connections/>
+ <connections>
+  <connection>
+   <sender>query</sender>
+   <signal>returnPressed()</signal>
+   <receiver>search</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>237</x>
+     <y>52</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>461</x>
+     <y>55</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

@@ -60,7 +60,15 @@ void AddPodcastByUrl::RequestFinished(PodcastUrlLoaderReply* reply) {
     return;
   }
 
-  foreach (const Podcast& podcast, reply->results()) {
-    model()->appendRow(model()->CreatePodcastItem(podcast));
+  switch (reply->result_type()) {
+  case PodcastUrlLoaderReply::Type_Podcast:
+    foreach (const Podcast& podcast, reply->podcast_results()) {
+      model()->appendRow(model()->CreatePodcastItem(podcast));
+    }
+    break;
+
+  case PodcastUrlLoaderReply::Type_Opml:
+    model()->CreateOpmlContainerItems(reply->opml_results(), model()->invisibleRootItem());
+    break;
   }
 }

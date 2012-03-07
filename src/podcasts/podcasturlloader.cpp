@@ -145,13 +145,17 @@ void PodcastUrlLoader::RequestFinished(RequestState* state, QNetworkReply* reply
   // Check the mime type.
   const QString content_type = reply->header(QNetworkRequest::ContentTypeHeader).toString();
   if (parser_->SupportsContentType(content_type)) {
-    Podcast podcast;
-    if (!parser_->Load(reply, reply->url(), &podcast)) {
+    const QVariant ret = parser_->Load(reply, reply->url());
+
+    if (ret.canConvert<Podcast>()) {
+      state->reply_->SetFinished(PodcastList() << ret.value<Podcast>());
+    } else if (ret.canConvert<OpmlContainer>()) {
+      state->reply_->SetFinished(ret.value<OpmlContainer>());
+    } else {
       SendErrorAndDelete(tr("Failed to parse the XML for this RSS feed"), state);
       return;
     }
 
-    state->reply_->SetFinished(PodcastList() << podcast);
     delete state;
     return;
   } else if (content_type.contains("text/html")) {
@@ -192,7 +196,15 @@ PodcastUrlLoaderReply::PodcastUrlLoaderReply(const QUrl& url, QObject* parent)
 }
 
 void PodcastUrlLoaderReply::SetFinished(const PodcastList& results) {
-  results_ = results;
+  result_type_ = Type_Podcast;
+  podcast_results_ = results;
+  finished_ = true;
+  emit Finished(true);
+}
+
+void PodcastUrlLoaderReply::SetFinished(const OpmlContainer& results) {
+  result_type_ = Type_Opml;
+  opml_results_ = results;
   finished_ = true;
   emit Finished(true);
 }

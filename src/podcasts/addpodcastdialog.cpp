@@ -84,7 +84,6 @@ void AddPodcastDialog::ChangePage(int index) {
   ui_->stack->setCurrentIndex(index);
   ui_->stack->setVisible(page->has_visible_widget());
   ui_->results->setModel(page->model());
-  ui_->results->setRootIsDecorated(page->model()->is_tree());
 
   ui_->results_stack->setCurrentWidget(
         page_is_busy_[index] ? ui_->busy_page : ui_->results_page);
@@ -98,25 +97,17 @@ void AddPodcastDialog::ChangePage(int index) {
 }
 
 void AddPodcastDialog::ChangePodcast(const QModelIndex& current) {
+  QVariant podcast_variant = current.data(PodcastDiscoveryModel::Role_Podcast);
+
   // If the selected item is invalid or not a podcast, hide the details pane.
-  if (!current.isValid() ||
-      current.data(PodcastDiscoveryModel::Role_Type).toInt() !=
-          PodcastDiscoveryModel::Type_Podcast) {
+  if (podcast_variant.isNull()) {
     ui_->details_scroll_area->hide();
     add_button_->setEnabled(false);
     remove_button_->setEnabled(false);
     return;
   }
 
-  current_podcast_ = current.data(PodcastDiscoveryModel::Role_Podcast).value<Podcast>();
-
-  // Also hide the details pane if this podcast isn't valid.
-  if (!current_podcast_.url().isValid()) {
-    ui_->details_scroll_area->hide();
-    add_button_->setEnabled(false);
-    remove_button_->setEnabled(false);
-    return;
-  }
+  current_podcast_ = podcast_variant.value<Podcast>();
 
   // Start the blur+fade if there's already a podcast in the details pane.
   if (ui_->details_scroll_area->isVisible()) {

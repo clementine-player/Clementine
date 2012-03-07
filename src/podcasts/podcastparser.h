@@ -22,9 +22,13 @@
 
 #include "podcast.h"
 
+class OpmlContainer;
+
 class QXmlStreamReader;
 
-// Reads XML data from a QIODevice and returns a Podcast.
+// Reads XML data from a QIODevice.
+// Returns either a Podcast or an OpmlContainer depending on what was inside
+// the XML document.
 class PodcastParser {
 public:
   PodcastParser();
@@ -35,13 +39,20 @@ public:
   const QStringList& supported_mime_types() const { return supported_mime_types_; }
   bool SupportsContentType(const QString& content_type) const;
 
-  bool Load(QIODevice* device, const QUrl& url, Podcast* ret) const;
+  // You should check the type of the returned QVariant to see whether it
+  // contains a Podcast or an OpmlContainer.  If the QVariant isNull then an
+  // error occurred parsing the XML.
+  QVariant Load(QIODevice* device, const QUrl& url) const;
 
 private:
+  bool ParseRss(QXmlStreamReader* reader, Podcast* ret) const;
   void ParseChannel(QXmlStreamReader* reader, Podcast* ret) const;
   void ParseImage(QXmlStreamReader* reader, Podcast* ret) const;
   void ParseItunesOwner(QXmlStreamReader* reader, Podcast* ret) const;
   void ParseItem(QXmlStreamReader* reader, Podcast* ret) const;
+
+  bool ParseOpml(QXmlStreamReader* reader, OpmlContainer* ret) const;
+  void ParseOutline(QXmlStreamReader* reader, OpmlContainer* ret) const;
 
 private:
   QStringList supported_mime_types_;
