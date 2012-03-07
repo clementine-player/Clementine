@@ -135,7 +135,14 @@ QVariantMap JsonCreator::episodeActionToQVariantMap( const EpisodeActionPtr epis
         map.insert( QLatin1String( "action" ), QLatin1String( "download" ) );
 
     if( episodeAction->timestamp() != 0 ) {
-    	QDateTime dateTime = QDateTime::fromMSecsSinceEpoch(episodeAction->timestamp() );
+#if QT_VERSION >= 0x040700
+        QDateTime dateTime = QDateTime::fromMSecsSinceEpoch(episodeAction->timestamp() );
+#else
+        QDateTime dateTime = QDateTime::fromTime_t(episodeAction->timestamp() / 1000 );
+        QTime time = dateTime.time();
+        time.addMSecs(episodeAction->timestamp() % 1000 );
+        dateTime.setTime(time);
+#endif
         map.insert( QLatin1String( "timestamp" ), dateTime.toString(Qt::ISODate) );
     }
     if( episodeAction->started() != 0 )
