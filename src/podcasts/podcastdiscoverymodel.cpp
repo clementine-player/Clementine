@@ -72,8 +72,8 @@ void PodcastDiscoveryModel::LazyLoadImage(const QModelIndex& index) {
 
   Podcast podcast = index.data(Role_Podcast).value<Podcast>();
 
-  if (podcast.image_url().isValid()) {
-    icon_loader_->LoadIcon(podcast.image_url().toString(), QString(), item);
+  if (podcast.ImageUrlSmall().isValid()) {
+    icon_loader_->LoadIcon(podcast.ImageUrlSmall().toString(), QString(), item);
   }
 }
 

@@ -96,7 +96,7 @@ void PodcastParser::ParseImage(QXmlStreamReader* reader, Podcast* ret) const {
     case QXmlStreamReader::StartElement: {
       const QStringRef name = reader->name();
       if (name == "url") {
-        ret->set_image_url(QUrl(reader->readElementText()));
+        ret->set_image_url_large(QUrl(reader->readElementText()));
       } else {
         Utilities::ConsumeCurrentElement(reader);
       }

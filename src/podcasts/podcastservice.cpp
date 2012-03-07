@@ -100,8 +100,8 @@ QStandardItem* PodcastService::CreatePodcastItem(const Podcast& podcast) {
   item->setData(QVariant::fromValue(podcast), Role_Podcast);
 
   // Load the podcast's image if it has one
-  if (podcast.image_url().isValid()) {
-    icon_loader_->LoadIcon(podcast.image_url().toString(), QString(), item);
+  if (podcast.ImageUrlSmall().isValid()) {
+    icon_loader_->LoadIcon(podcast.ImageUrlSmall().toString(), QString(), item);
   }
 
   return item;

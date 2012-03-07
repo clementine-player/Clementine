@@ -78,10 +78,10 @@ void PodcastInfoWidget::SetPodcast(const Podcast& podcast) {
 
   podcast_ = podcast;
 
-  if (podcast.image_url().isValid()) {
+  if (podcast.ImageUrlLarge().isValid()) {
     // Start loading an image for this item.
     image_id_ = app_->album_cover_loader()->LoadImageAsync(
-          cover_options_, podcast.image_url().toString(), QString());
+          cover_options_, podcast.ImageUrlLarge().toString(), QString());
   }
 
   ui_->image->hide();

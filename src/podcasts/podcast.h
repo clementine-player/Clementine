@@ -54,7 +54,8 @@ public:
   const QString& description() const;
   const QString& copyright() const;
   const QUrl& link() const;
-  const QUrl& image_url() const;
+  const QUrl& image_url_large() const;
+  const QUrl& image_url_small() const;
   const QString& author() const;
   const QString& owner_name() const;
   const QString& owner_email() const;
@@ -67,12 +68,18 @@ public:
   void set_description(const QString& v);
   void set_copyright(const QString& v);
   void set_link(const QUrl& v);
-  void set_image_url(const QUrl& v);
+  void set_image_url_large(const QUrl& v);
+  void set_image_url_small(const QUrl& v);
   void set_author(const QString& v);
   void set_owner_name(const QString& v);
   void set_owner_email(const QString& v);
   void set_extra(const QVariantMap& v);
   void set_extra(const QString& key, const QVariant& value);
+
+  // Small images are suitable for 16x16 icons in lists.  Large images are
+  // used in detailed information displays.
+  const QUrl& ImageUrlLarge() const { return image_url_large().isValid() ? image_url_large() : image_url_small(); }
+  const QUrl& ImageUrlSmall() const { return image_url_small().isValid() ? image_url_small() : image_url_large(); }
 
   // These are stored in a different database table, and aren't loaded or
   // persisted by InitFromQuery or BindToQuery.

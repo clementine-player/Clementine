@@ -24,7 +24,8 @@
 
 const QStringList Podcast::kColumns = QStringList()
     << "url" << "title" << "description" << "copyright" << "link"
-    << "image_url" << "author" << "owner_name" << "owner_email" << "extra";
+    << "image_url_large" << "image_url_small" << "author" << "owner_name"
+    << "owner_email" << "extra";
 
 const QString Podcast::kColumnSpec = Podcast::kColumns.join(", ");
 const QString Podcast::kJoinSpec = Utilities::Prepend("p.", Podcast::kColumns).join(", ");
@@ -42,7 +43,8 @@ struct Podcast::Private : public QSharedData {
   QString description_;
   QString copyright_;
   QUrl link_;
-  QUrl image_url_;
+  QUrl image_url_large_;
+  QUrl image_url_small_;
 
   // iTunes extensions
   QString author_;
@@ -85,7 +87,8 @@ const QString& Podcast::title() const { return d->title_; }
 const QString& Podcast::description() const { return d->description_; }
 const QString& Podcast::copyright() const { return d->copyright_; }
 const QUrl& Podcast::link() const { return d->link_; }
-const QUrl& Podcast::image_url() const { return d->image_url_; }
+const QUrl& Podcast::image_url_large() const { return d->image_url_large_; }
+const QUrl& Podcast::image_url_small() const { return d->image_url_small_; }
 const QString& Podcast::author() const { return d->author_; }
 const QString& Podcast::owner_name() const { return d->owner_name_; }
 const QString& Podcast::owner_email() const { return d->owner_email_; }
@@ -98,7 +101,8 @@ void Podcast::set_title(const QString& v) { d->title_ = v; }
 void Podcast::set_description(const QString& v) { d->description_ = v; }
 void Podcast::set_copyright(const QString& v) { d->copyright_ = v; }
 void Podcast::set_link(const QUrl& v) { d->link_ = v; }
-void Podcast::set_image_url(const QUrl& v) { d->image_url_ = v; }
+void Podcast::set_image_url_large(const QUrl& v) { d->image_url_large_ = v; }
+void Podcast::set_image_url_small(const QUrl& v) { d->image_url_small_ = v; }
 void Podcast::set_author(const QString& v) { d->author_ = v; }
 void Podcast::set_owner_name(const QString& v) { d->owner_name_ = v; }
 void Podcast::set_owner_email(const QString& v) { d->owner_email_ = v; }
@@ -117,12 +121,13 @@ void Podcast::InitFromQuery(const QSqlQuery& query) {
   d->description_ = query.value(3).toString();
   d->copyright_ = query.value(4).toString();
   d->link_ = QUrl::fromEncoded(query.value(5).toByteArray());
-  d->image_url_ = QUrl::fromEncoded(query.value(6).toByteArray());
-  d->author_ = query.value(7).toString();
-  d->owner_name_ = query.value(8).toString();
-  d->owner_email_ = query.value(9).toString();
+  d->image_url_large_ = QUrl::fromEncoded(query.value(6).toByteArray());
+  d->image_url_small_ = QUrl::fromEncoded(query.value(7).toByteArray());
+  d->author_ = query.value(8).toString();
+  d->owner_name_ = query.value(9).toString();
+  d->owner_email_ = query.value(10).toString();
 
-  QDataStream extra_stream(query.value(10).toByteArray());
+  QDataStream extra_stream(query.value(11).toByteArray());
   extra_stream >> d->extra_;
 }
 
@@ -132,7 +137,8 @@ void Podcast::BindToQuery(QSqlQuery* query) const {
   query->bindValue(":description", d->description_);
   query->bindValue(":copyright", d->copyright_);
   query->bindValue(":link", d->link_.toEncoded());
-  query->bindValue(":image_url", d->image_url_.toEncoded());
+  query->bindValue(":image_url_large", d->image_url_large_.toEncoded());
+  query->bindValue(":image_url_small", d->image_url_small_.toEncoded());
   query->bindValue(":author", d->author_);
   query->bindValue(":owner_name", d->owner_name_);
   query->bindValue(":owner_email", d->owner_email_);
@@ -149,7 +155,7 @@ void Podcast::InitFromGpo(const mygpo::Podcast* podcast) {
   d->title_ = podcast->title();
   d->description_ = podcast->description();
   d->link_ = podcast->website();
-  d->image_url_ = podcast->logoUrl();
+  d->image_url_large_ = podcast->logoUrl();
 
   set_extra("gpodder:subscribers", podcast->subscribers());
   set_extra("gpodder:subscribers_last_week", podcast->subscribersLastWeek());
