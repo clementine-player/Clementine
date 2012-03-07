@@ -46,6 +46,10 @@ public:
     Type_Episode
   };
 
+  enum Role {
+    Role_Podcast = InternetModel::RoleCount
+  };
+
   QStandardItem* CreateRootItem();
   void LazyPopulate(QStandardItem* parent);
 

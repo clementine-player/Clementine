@@ -38,6 +38,7 @@ public:
 
 private slots:
   void AddPodcast();
+  void RemovePodcast();
   void ChangePage(int index);
   void ChangePodcast(const QModelIndex& current);
 
@@ -52,6 +53,7 @@ private:
 
   Ui_AddPodcastDialog* ui_;
   QPushButton* add_button_;
+  QPushButton* remove_button_;
 
   QList<AddPodcastPage*> pages_;
   QList<bool> page_is_busy_;

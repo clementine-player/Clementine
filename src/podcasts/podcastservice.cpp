@@ -97,6 +97,7 @@ QStandardItem* PodcastService::CreatePodcastItem(const Podcast& podcast) {
 
   item->setText(podcast.title());
   item->setIcon(default_icon_);
+  item->setData(QVariant::fromValue(podcast), Role_Podcast);
 
   // Load the podcast's image if it has one
   if (podcast.image_url().isValid()) {
@@ -147,4 +148,12 @@ void PodcastService::SubscriptionAdded(const Podcast& podcast) {
 }
 
 void PodcastService::SubscriptionRemoved(const Podcast& podcast) {
+  // Find the item in the model that matches this podcast.
+  for (int i=0 ; i<model_->rowCount() ; ++i) {
+    Podcast item_podcast(model_->item(i)->data(Role_Podcast).value<Podcast>());
+    if (podcast.database_id() == item_podcast.database_id()) {
+      model_->removeRow(i);
+      return;
+    }
+  }
 }

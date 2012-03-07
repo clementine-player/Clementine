@@ -73,6 +73,35 @@ void PodcastBackend::Subscribe(Podcast* podcast) {
   emit SubscriptionAdded(*podcast);
 }
 
+void PodcastBackend::Unsubscribe(const Podcast& podcast) {
+  // If this podcast is not already in the database, do nothing
+  if (!podcast.is_valid()) {
+    return;
+  }
+
+  QMutexLocker l(db_->Mutex());
+  QSqlDatabase db(db_->Connect());
+  ScopedTransaction t(&db);
+
+  // Remove the podcast.
+  QSqlQuery q("DELETE FROM podcasts WHERE ROWID = :id", db);
+  q.bindValue(":id", podcast.database_id());
+  q.exec();
+  if (db_->CheckErrors(q))
+    return;
+
+  // Remove all episodes in the podcast
+  q = QSqlQuery("DELETE FROM podcast_episodes WHERE podcast_id = :id", db);
+  q.bindValue(":id", podcast.database_id());
+  q.exec();
+  if (db_->CheckErrors(q))
+    return;
+
+  t.Commit();
+
+  emit SubscriptionRemoved(podcast);
+}
+
 void PodcastBackend::AddEpisodes(PodcastEpisodeList* episodes, QSqlDatabase* db) {
   QSqlQuery q("INSERT INTO podcast_episodes (" + PodcastEpisode::kColumnSpec + ")"
               " VALUES (" + PodcastEpisode::kBindSpec + ")", *db);

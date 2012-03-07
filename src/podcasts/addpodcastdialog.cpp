@@ -43,11 +43,16 @@ AddPodcastDialog::AddPodcastDialog(Application* app, QWidget* parent)
   connect(ui_->provider_list, SIGNAL(currentRowChanged(int)), SLOT(ChangePage(int)));
   connect(ui_->details, SIGNAL(LoadingFinished()), fader_, SLOT(StartFade()));
 
-  // Create an Add Podcast button
+  // Create Add and Remove Podcast buttons
   add_button_ = new QPushButton(IconLoader::Load("list-add"), tr("Add Podcast"), this);
   add_button_->setEnabled(false);
   connect(add_button_, SIGNAL(clicked()), SLOT(AddPodcast()));
   ui_->button_box->addButton(add_button_, QDialogButtonBox::ActionRole);
+
+  remove_button_ = new QPushButton(IconLoader::Load("list-remove"), tr("Unsubscribe"), this);
+  remove_button_->setEnabled(false);
+  connect(remove_button_, SIGNAL(clicked()), SLOT(RemovePodcast()));
+  ui_->button_box->addButton(remove_button_, QDialogButtonBox::ActionRole);
 
   // Add providers
   AddPage(new AddPodcastByUrl(app, this));
@@ -91,23 +96,48 @@ void AddPodcastDialog::ChangePage(int index) {
 }
 
 void AddPodcastDialog::ChangePodcast(const QModelIndex& current) {
+  // If the selected item is invalid or not a podcast, hide the details pane.
   if (!current.isValid() ||
       current.data(PodcastDiscoveryModel::Role_Type).toInt() !=
           PodcastDiscoveryModel::Type_Podcast) {
     ui_->details_scroll_area->hide();
+    add_button_->setEnabled(false);
+    remove_button_->setEnabled(false);
     return;
   }
 
+  current_podcast_ = current.data(PodcastDiscoveryModel::Role_Podcast).value<Podcast>();
+
+  // Also hide the details pane if this podcast isn't valid.
+  if (!current_podcast_.url().isValid()) {
+    ui_->details_scroll_area->hide();
+    add_button_->setEnabled(false);
+    remove_button_->setEnabled(false);
+    return;
+  }
+
+  // Start the blur+fade if there's already a podcast in the details pane.
   if (ui_->details_scroll_area->isVisible()) {
     fader_->StartBlur();
   } else {
     ui_->details_scroll_area->show();
   }
 
-  current_podcast_ = current.data(PodcastDiscoveryModel::Role_Podcast).value<Podcast>();
+  // Update the details pane
   ui_->details->SetPodcast(current_podcast_);
 
-  add_button_->setEnabled(current_podcast_.url().isValid());
+  // Is the user already subscribed to this podcast?
+  Podcast subscribed_podcast =
+      app_->podcast_backend()->GetSubscriptionByUrl(current_podcast_.url());
+  const bool is_subscribed = subscribed_podcast.url().isValid();
+
+  if (is_subscribed) {
+    // Use the one from the database which will contain the ID.
+    current_podcast_ = subscribed_podcast;
+  }
+
+  add_button_->setEnabled(!is_subscribed);
+  remove_button_->setEnabled(is_subscribed);
 }
 
 void AddPodcastDialog::PageBusyChanged(bool busy) {
@@ -129,4 +159,12 @@ void AddPodcastDialog::CurrentPageBusyChanged(bool busy) {
 
 void AddPodcastDialog::AddPodcast() {
   app_->podcast_backend()->Subscribe(&current_podcast_);
+  add_button_->setEnabled(false);
+  remove_button_->setEnabled(true);
+}
+
+void AddPodcastDialog::RemovePodcast() {
+  app_->podcast_backend()->Unsubscribe(current_podcast_);
+  add_button_->setEnabled(true);
+  remove_button_->setEnabled(false);
 }
