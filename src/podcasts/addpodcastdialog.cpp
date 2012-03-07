@@ -17,6 +17,7 @@
 
 #include "addpodcastdialog.h"
 #include "addpodcastbyurl.h"
+#include "fixedopmlpage.h"
 #include "gpoddersearchpage.h"
 #include "gpoddertoptagspage.h"
 #include "itunessearchpage.h"
@@ -28,6 +29,8 @@
 #include "widgets/widgetfadehelper.h"
 
 #include <QPushButton>
+
+const char* AddPodcastDialog::kBbcOpmlUrl = "http://www.bbc.co.uk/podcasts.opml";
 
 AddPodcastDialog::AddPodcastDialog(Application* app, QWidget* parent)
   : QDialog(parent),
@@ -57,6 +60,8 @@ AddPodcastDialog::AddPodcastDialog(Application* app, QWidget* parent)
 
   // Add providers
   AddPage(new AddPodcastByUrl(app, this));
+  AddPage(new FixedOpmlPage(QUrl(kBbcOpmlUrl), tr("BBC Podcasts"),
+                            QIcon(":providers/bbc.png"), app, this));
   AddPage(new GPodderTopTagsPage(app, this));
   AddPage(new GPodderSearchPage(app, this));
   AddPage(new ITunesSearchPage(app, this));

@@ -231,6 +231,7 @@ set(SOURCES
   podcasts/addpodcastbyurl.cpp
   podcasts/addpodcastdialog.cpp
   podcasts/addpodcastpage.cpp
+  podcasts/fixedopmlpage.cpp
   podcasts/gpoddersearchpage.cpp
   podcasts/gpoddertoptagsmodel.cpp
   podcasts/gpoddertoptagspage.cpp
@@ -483,6 +484,7 @@ set(HEADERS
   podcasts/addpodcastbyurl.h
   podcasts/addpodcastdialog.h
   podcasts/addpodcastpage.h
+  podcasts/fixedopmlpage.h
   podcasts/gpoddersearchpage.h
   podcasts/gpoddertoptagsmodel.h
   podcasts/gpoddertoptagspage.h

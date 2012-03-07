@@ -36,6 +36,8 @@ public:
   AddPodcastDialog(Application* app, QWidget* parent = 0);
   ~AddPodcastDialog();
 
+  static const char* kBbcOpmlUrl;
+
 private slots:
   void AddPodcast();
   void RemovePodcast();

@@ -77,6 +77,7 @@ public:
   static const int kMaxRedirects;
 
   PodcastUrlLoaderReply* Load(const QString& url_text);
+  PodcastUrlLoaderReply* Load(const QUrl& url);
 
 private:
   struct RequestState {

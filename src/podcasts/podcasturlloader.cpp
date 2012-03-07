@@ -79,8 +79,10 @@ QUrl PodcastUrlLoader::FixPodcastUrl(const QString& url_text) const {
 }
 
 PodcastUrlLoaderReply* PodcastUrlLoader::Load(const QString& url_text) {
-  QUrl url(FixPodcastUrl(url_text));
+  return Load(FixPodcastUrl(url_text));
+}
 
+PodcastUrlLoaderReply* PodcastUrlLoader::Load(const QUrl& url) {
   // Create a reply
   PodcastUrlLoaderReply* reply = new PodcastUrlLoaderReply(url, this);
 
