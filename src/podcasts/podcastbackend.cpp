@@ -69,6 +69,8 @@ void PodcastBackend::Subscribe(Podcast* podcast) {
   AddEpisodes(episodes, &db);
 
   t.Commit();
+
+  emit SubscriptionAdded(*podcast);
 }
 
 void PodcastBackend::AddEpisodes(PodcastEpisodeList* episodes, QSqlDatabase* db) {
@@ -93,8 +95,7 @@ void PodcastBackend::AddEpisodes(PodcastEpisodeList* episodes, QSqlDatabase* db)
   "   LEFT JOIN podcast_episodes AS e" \
   "   ON p.ROWID = e.podcast_id" \
   " " where_clauses \
-  " GROUP BY p.ROWID" \
-  " ORDER BY p.title"
+  " GROUP BY p.ROWID"
 
 namespace {
   void AddAggregatePodcastFields(const QSqlQuery& q, int column_count, Podcast* podcast) {

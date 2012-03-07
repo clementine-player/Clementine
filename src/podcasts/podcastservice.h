@@ -24,8 +24,11 @@
 #include <QScopedPointer>
 
 class AddPodcastDialog;
+class Podcast;
 class PodcastBackend;
 class StandardItemIconLoader;
+
+class QSortFilterProxyModel;
 
 class PodcastService : public InternetService {
   Q_OBJECT
@@ -54,19 +57,24 @@ protected:
 
 private slots:
   void AddPodcast();
+  void SubscriptionAdded(const Podcast& podcast);
+  void SubscriptionRemoved(const Podcast& podcast);
 
 private:
   void PopulatePodcastList(QStandardItem* parent);
+  QStandardItem* CreatePodcastItem(const Podcast& podcast);
 
 private:
   bool use_pretty_covers_;
   QIcon default_icon_;
   StandardItemIconLoader* icon_loader_;
 
+  PodcastBackend* backend_;
+  QStandardItemModel* model_;
+  QSortFilterProxyModel* proxy_;
+
   QMenu* context_menu_;
   QStandardItem* root_;
-
-  PodcastBackend* backend_;
 
   QScopedPointer<AddPodcastDialog> add_podcast_dialog_;
 };

@@ -20,12 +20,14 @@
 #include "podcastservice.h"
 #include "core/application.h"
 #include "core/logging.h"
+#include "core/mergedproxymodel.h"
 #include "internet/internetmodel.h"
 #include "library/libraryview.h"
 #include "ui/iconloader.h"
 #include "ui/standarditemiconloader.h"
 
 #include <QMenu>
+#include <QSortFilterProxyModel>
 
 const char* PodcastService::kServiceName = "Podcasts";
 const char* PodcastService::kSettingsGroup = "Podcasts";
@@ -34,11 +36,19 @@ PodcastService::PodcastService(Application* app, InternetModel* parent)
   : InternetService(kServiceName, app, parent, parent),
     use_pretty_covers_(true),
     icon_loader_(new StandardItemIconLoader(app->album_cover_loader(), this)),
+    backend_(app->podcast_backend()),
+    model_(new QStandardItemModel(this)),
+    proxy_(new QSortFilterProxyModel(this)),
     context_menu_(NULL),
-    root_(NULL),
-    backend_(app->podcast_backend())
+    root_(NULL)
 {
-  icon_loader_->SetModel(model());
+  icon_loader_->SetModel(model_);
+  proxy_->setSourceModel(model_);
+  proxy_->setDynamicSortFilter(true);
+  proxy_->sort(0);
+
+  connect(backend_, SIGNAL(SubscriptionAdded(Podcast)), SLOT(SubscriptionAdded(Podcast)));
+  connect(backend_, SIGNAL(SubscriptionRemoved(Podcast)), SLOT(SubscriptionRemoved(Podcast)));
 }
 
 PodcastService::~PodcastService() {
@@ -53,7 +63,8 @@ QStandardItem* PodcastService::CreateRootItem() {
 void PodcastService::LazyPopulate(QStandardItem* parent) {
   switch (parent->data(InternetModel::Role_Type).toInt()) {
   case InternetModel::Type_Service:
-    PopulatePodcastList(parent);
+    PopulatePodcastList(model_->invisibleRootItem());
+    model()->merged_model()->AddSubModel(parent->index(), proxy_);
     break;
   }
 }
@@ -64,31 +75,35 @@ void PodcastService::PopulatePodcastList(QStandardItem* parent) {
   }
 
   foreach (const Podcast& podcast, backend_->GetAllSubscriptions()) {
-    const int unlistened_count = podcast.extra("db:unlistened_count").toInt();
-    QString title = podcast.title();
-
-    QStandardItem* item = new QStandardItem;
-
-    if (unlistened_count > 0) {
-      // Add the number of new episodes after the title.
-      title.append(QString(" (%1)").arg(unlistened_count));
-
-      // Set a bold font
-      QFont font(item->font());
-      font.setBold(true);
-      item->setFont(font);
-    }
-
-    item->setText(podcast.title());
-    item->setIcon(default_icon_);
-
-    // Load the podcast's image if it has one
-    if (podcast.image_url().isValid()) {
-      icon_loader_->LoadIcon(podcast.image_url().toString(), QString(), item);
-    }
-
-    parent->appendRow(item);
+    parent->appendRow(CreatePodcastItem(podcast));
   }
+}
+
+QStandardItem* PodcastService::CreatePodcastItem(const Podcast& podcast) {
+  const int unlistened_count = podcast.extra("db:unlistened_count").toInt();
+  QString title = podcast.title();
+
+  QStandardItem* item = new QStandardItem;
+
+  if (unlistened_count > 0) {
+    // Add the number of new episodes after the title.
+    title.append(QString(" (%1)").arg(unlistened_count));
+
+    // Set a bold font
+    QFont font(item->font());
+    font.setBold(true);
+    item->setFont(font);
+  }
+
+  item->setText(podcast.title());
+  item->setIcon(default_icon_);
+
+  // Load the podcast's image if it has one
+  if (podcast.image_url().isValid()) {
+    icon_loader_->LoadIcon(podcast.image_url().toString(), QString(), item);
+  }
+
+  return item;
 }
 
 void PodcastService::ShowContextMenu(const QModelIndex& index,
@@ -120,4 +135,16 @@ void PodcastService::AddPodcast() {
   }
 
   add_podcast_dialog_->show();
+}
+
+void PodcastService::SubscriptionAdded(const Podcast& podcast) {
+  // If the user hasn't expanded the root node yet we don't need to do anything
+  if (root_->data(InternetModel::Role_CanLazyLoad).toBool()) {
+    return;
+  }
+
+  model_->appendRow(CreatePodcastItem(podcast));
+}
+
+void PodcastService::SubscriptionRemoved(const Podcast& podcast) {
 }
