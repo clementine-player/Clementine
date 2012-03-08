@@ -159,6 +159,10 @@ class PlaylistView : public QTreeView {
                                     const QModelIndex& index);
 
   void set_background_image_type(BackgroundImageType bg) { background_image_type_ = bg; emit BackgroundPropertyChanged(); }
+  // Precompute background_image_ (opacity + scaling) and store the result in
+  // cached_scaled_background_image_, which is the image actually displayed as
+  // background
+  void PrecomputeBackgroundImage();
 
  private:
   static const int kGlowIntensitySteps;

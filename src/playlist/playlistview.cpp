@@ -811,41 +811,7 @@ void PlaylistView::paintEvent(QPaintEvent* event) {
       // Check if we should recompute the background image
       if (height() != last_height_ || width() != last_width_
           || force_background_redraw_) {
-
-        QImage background_image(background_image_);
-        bool background_image_has_been_scaled = false;
-        // If the background image is bigger than playlistview, scale it first,
-        // before applying opacity filter, to reduce CPU usage
-        if (background_image.height() > height()) {
-          background_image = background_image.scaled(
-              width(), height(),
-              Qt::KeepAspectRatioByExpanding,
-              Qt::SmoothTransformation);
-          background_image_has_been_scaled = true;
-        }
-
-        // Apply opacity filter
-        uchar* bits = background_image.bits();
-        for (int i = 0; i < background_image.height() * background_image.bytesPerLine(); ++i) {
-          bits[i] = qBound(
-              0,
-              static_cast<int>(bits[i] + kBackgroundOpacity * 255),
-              255);
-        }
-        
-        // Scale image if this wasn't done before
-        if (!background_image_has_been_scaled) {
-          background_image = background_image.scaled(
-              width(), height(),
-              Qt::KeepAspectRatioByExpanding,
-              Qt::SmoothTransformation);
-        }
-
-        cached_scaled_background_image_ = QPixmap::fromImage(background_image);
-
-        last_height_  = height();
-        last_width_   = width();
-        force_background_redraw_ = false;
+        PrecomputeBackgroundImage();
       }
 
       // Actually draw the background image
@@ -1139,3 +1105,41 @@ void PlaylistView::CurrentSongChanged(const Song& song,
     update();
   }
 }
+
+void PlaylistView::PrecomputeBackgroundImage() {
+  QImage background_image(background_image_);
+  bool background_image_has_been_scaled = false;
+  // If the background image is bigger than playlistview, scale it first,
+  // before applying opacity filter, to reduce CPU usage
+  if (background_image.height() > height()) {
+    background_image = background_image.scaled(
+        width(), height(),
+        Qt::KeepAspectRatioByExpanding,
+        Qt::SmoothTransformation);
+    background_image_has_been_scaled = true;
+  }
+
+  // Apply opacity filter
+  uchar* bits = background_image.bits();
+  for (int i = 0; i < background_image.height() * background_image.bytesPerLine(); ++i) {
+    bits[i] = qBound(
+        0,
+        static_cast<int>(bits[i] + kBackgroundOpacity * 255),
+        255);
+  }
+  
+  // Scale image if this wasn't done before
+  if (!background_image_has_been_scaled) {
+    background_image = background_image.scaled(
+        width(), height(),
+        Qt::KeepAspectRatioByExpanding,
+        Qt::SmoothTransformation);
+  }
+
+  cached_scaled_background_image_ = QPixmap::fromImage(background_image);
+
+  last_height_  = height();
+  last_width_   = width();
+  force_background_redraw_ = false;
+}
+
