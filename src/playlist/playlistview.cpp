@@ -807,10 +807,24 @@ void PlaylistView::paintEvent(QPaintEvent* event) {
   if (background_image_type_ == Custom || background_image_type_ == AlbumCover) {
     if (!background_image_.isNull()) {
       QPainter background_painter(viewport());
+
+      // Check if we should recompute the background image
       if (height() != last_height_ || width() != last_width_
           || force_background_redraw_) {
 
         QImage background_image(background_image_);
+        bool background_image_has_been_scaled = false;
+        // If the background image is bigger than playlistview, scale it first,
+        // before applying opacity filter, to reduce CPU usage
+        if (background_image.height() > height()) {
+          background_image = background_image.scaled(
+              width(), height(),
+              Qt::KeepAspectRatioByExpanding,
+              Qt::SmoothTransformation);
+          background_image_has_been_scaled = true;
+        }
+
+        // Apply opacity filter
         uchar* bits = background_image.bits();
         for (int i = 0; i < background_image.height() * background_image.bytesPerLine(); ++i) {
           bits[i] = qBound(
@@ -818,17 +832,23 @@ void PlaylistView::paintEvent(QPaintEvent* event) {
               static_cast<int>(bits[i] + kBackgroundOpacity * 255),
               255);
         }
+        
+        // Scale image if this wasn't done before
+        if (!background_image_has_been_scaled) {
+          background_image = background_image.scaled(
+              width(), height(),
+              Qt::KeepAspectRatioByExpanding,
+              Qt::SmoothTransformation);
+        }
 
-        cached_scaled_background_image_ = QPixmap::fromImage(
-            background_image.scaled(
-                  width(), height(),
-                  Qt::KeepAspectRatioByExpanding,
-                  Qt::SmoothTransformation));
+        cached_scaled_background_image_ = QPixmap::fromImage(background_image);
 
         last_height_  = height();
         last_width_   = width();
         force_background_redraw_ = false;
       }
+
+      // Actually draw the background image
       background_painter.drawPixmap((width() - cached_scaled_background_image_.width()) / 2,
                                     (height() - cached_scaled_background_image_.height()) / 2,
                                     cached_scaled_background_image_);
