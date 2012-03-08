@@ -1452,10 +1452,12 @@ Song GroovesharkService::ExtractSong(const QVariantMap& result_song) {
     QString artist_name = result_song["ArtistName"].toString();
     int album_id = result_song["AlbumID"].toInt();
     QString album_name = result_song["AlbumName"].toString();
-    QString cover = result_song["CoverArtFilename"].toString();
     qint64 duration = result_song["EstimateDuration"].toInt() * kNsecPerSec;
     song.Init(song_name, artist_name, album_name, duration);
-    song.set_art_automatic(QString(kUrlCover) + cover);
+    QVariant cover = result_song["CoverArtFilename"];
+    if (cover.isValid()) {
+      song.set_art_automatic(QString(kUrlCover) + cover.toString());
+    }
     QVariant track_number = result_song["TrackNum"];
     if (track_number.isValid()) {
       song.set_track(track_number.toInt());
