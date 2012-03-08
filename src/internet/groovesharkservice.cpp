@@ -292,10 +292,10 @@ void GroovesharkService::InitCountry() {
     return;
   // Get country info
   QNetworkReply *reply_country = CreateRequest("getCountry", QList<Param>());
-  if (!WaitForReply(reply_country))
-    return;
-
-  country_ = ExtractResult(reply_country);
+  if (WaitForReply(reply_country)) {
+    country_ = ExtractResult(reply_country);
+  }
+  reply_country->deleteLater();
 }
 
 QUrl GroovesharkService::GetStreamingUrlFromSongId(const QString& song_id, const QString& artist_id,
@@ -306,8 +306,13 @@ QUrl GroovesharkService::GetStreamingUrlFromSongId(const QString& song_id, const
   parameters  << Param("songID", song_id)
               << Param("country", country_);
   QNetworkReply* reply = CreateRequest("getSubscriberStreamKey", parameters);
-  if (!WaitForReply(reply))
+
+  // Wait for the reply
+  bool reply_has_timeouted = !WaitForReply(reply);
+  reply->deleteLater();
+  if (reply_has_timeouted)
     return QUrl();
+
   QVariantMap result = ExtractResult(reply);
   server_id->clear();
   server_id->append(result["StreamServerID"].toString());
@@ -821,9 +826,12 @@ Song GroovesharkService::StartAutoplayTag(int tag_id, QVariantMap& autoplay_stat
   QList<Param> parameters;
   parameters << Param("tagID", tag_id);
   QNetworkReply* reply = CreateRequest("startAutoplayTag", parameters);
-  if (!WaitForReply(reply))
-    return Song();
+
+  bool reply_has_timeouted = !WaitForReply(reply);
   reply->deleteLater();
+  if (reply_has_timeouted)
+    return Song();
+
   QVariantMap result = ExtractResult(reply);
   autoplay_state = result["autoplayState"].toMap();
   return ExtractSong(result["nextSong"].toMap());
@@ -842,9 +850,12 @@ Song GroovesharkService::StartAutoplay(QVariantMap& autoplay_state) {
   parameters  << Param("artistIDs", artists_ids_qvariant)
               << Param("songIDs", songs_ids_qvariant);
   QNetworkReply* reply = CreateRequest("startAutoplay", parameters);
-  if (!WaitForReply(reply))
-    return Song();
+
+  bool reply_has_timeouted = !WaitForReply(reply);
   reply->deleteLater();
+  if (reply_has_timeouted)
+    return Song();
+
   QVariantMap result = ExtractResult(reply);
   autoplay_state = result["autoplayState"].toMap();
   return ExtractSong(result["nextSong"].toMap());
@@ -854,9 +865,12 @@ Song GroovesharkService::GetAutoplaySong(QVariantMap& autoplay_state) {
   QList<Param> parameters;
   parameters << Param("autoplayState", autoplay_state);
   QNetworkReply* reply = CreateRequest("getAutoplaySong", parameters);
-  if (!WaitForReply(reply))
-    return Song();
+
+  bool reply_has_timeouted = !WaitForReply(reply);
   reply->deleteLater();
+  if (reply_has_timeouted)
+    return Song();
+
   QVariantMap result = ExtractResult(reply);
   autoplay_state = result["autoplayState"].toMap();
   return ExtractSong(result["nextSong"].toMap());
