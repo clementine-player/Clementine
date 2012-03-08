@@ -1100,7 +1100,11 @@ void PlaylistView::CurrentSongChanged(const Song& song,
                                       const QImage& song_art) {
   current_song_cover_art_ = song_art;
   if (background_image_type_ == AlbumCover) {
-    background_image_ = current_song_cover_art_;
+    if (song.art_automatic().isEmpty() && song.art_manual().isEmpty()) {
+      background_image_ = QImage();
+    } else {
+      background_image_ = current_song_cover_art_;
+    }
     force_background_redraw_ = true;
     update();
   }
@@ -1128,7 +1132,7 @@ void PlaylistView::PrecomputeBackgroundImage() {
         255);
   }
   
-  // Scale image if this wasn't done before
+  // Scale image if it hasn't been done before
   if (!background_image_has_been_scaled) {
     background_image = background_image.scaled(
         width(), height(),
