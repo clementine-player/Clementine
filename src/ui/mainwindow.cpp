@@ -1901,13 +1901,9 @@ void MainWindow::EnsureSettingsDialogCreated() {
   if (settings_dialog_)
     return;
 
-  settings_dialog_.reset(new SettingsDialog(background_streams_));
-  settings_dialog_->SetLibraryDirectoryModel(app_->library_model()->directory_model());
-  settings_dialog_->SetGstEngine(qobject_cast<GstEngine*>(app_->player()->engine()));
+  settings_dialog_.reset(new SettingsDialog(app_, background_streams_));
   settings_dialog_->SetGlobalShortcutManager(global_shortcuts_);
-  settings_dialog_->SetGlobalSearch(app_->global_search());
   settings_dialog_->SetSongInfoView(song_info_view_);
-  settings_dialog_->SetAppearance(app_->appearance());
 
   // Settings
   connect(settings_dialog_.get(), SIGNAL(accepted()), SLOT(ReloadAllSettings()));

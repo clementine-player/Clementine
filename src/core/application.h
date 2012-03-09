@@ -27,6 +27,7 @@ class CurrentArtLoader;
 class Database;
 class DeviceManager;
 class GlobalSearch;
+class GPodderSync;
 class InternetModel;
 class Library;
 class LibraryBackend;
@@ -63,6 +64,7 @@ public:
   Library* library() const { return library_; }
   DeviceManager* device_manager() const { return device_manager_; }
   PodcastUpdater* podcast_updater() const { return podcast_updater_; }
+  GPodderSync* gpodder_sync() const { return gpodder_sync_; }
 
   LibraryBackend* library_backend() const;
   LibraryModel* library_model() const;
@@ -95,6 +97,7 @@ private:
   Library* library_;
   DeviceManager* device_manager_;
   PodcastUpdater* podcast_updater_;
+  GPodderSync* gpodder_sync_;
 
   QList<QObject*> objects_in_threads_;
   QList<QThread*> threads_;

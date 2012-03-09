@@ -53,7 +53,7 @@ class SettingsDialog : public QDialog {
   Q_OBJECT
 
 public:
-  SettingsDialog(BackgroundStreams* streams, QWidget* parent = 0);
+  SettingsDialog(Application* app, BackgroundStreams* streams, QWidget* parent = 0);
   ~SettingsDialog();
 
   enum Page {
@@ -75,21 +75,19 @@ public:
     Page_Transcoding,
     Page_Remote,
     Page_Wiimotedev,
+    Page_Podcasts,
   };
 
   enum Role {
     Role_IsSeparator = Qt::UserRole
   };
 
-  void SetLibraryDirectoryModel(LibraryDirectoryModel* model) { model_ = model; }
   void SetGlobalShortcutManager(GlobalShortcuts* manager) { manager_ = manager; }
-  void SetGstEngine(const GstEngine* engine) { gst_engine_ = engine; }
   void SetSongInfoView(SongInfoView* view) { song_info_view_ = view; }
-  void SetGlobalSearch(GlobalSearch* global_search) { global_search_ = global_search; }
-  void SetAppearance(Appearance* appearance) { appearance_ = appearance; }
 
   bool is_loading_settings() const { return loading_settings_; }
 
+  Application* app() const { return app_; }
   LibraryDirectoryModel* library_directory_model() const { return model_; }
   GlobalShortcuts* global_shortcuts_manager() const { return manager_; }
   const GstEngine* gst_engine() const { return gst_engine_; }
@@ -125,6 +123,7 @@ private:
   void AddPage(Page id, SettingsPage* page, QTreeWidgetItem* parent = NULL);
 
 private:
+  Application* app_;
   LibraryDirectoryModel* model_;
   GlobalShortcuts* manager_;
   const GstEngine* gst_engine_;

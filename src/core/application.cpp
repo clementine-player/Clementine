@@ -31,6 +31,7 @@
 #include "library/librarybackend.h"
 #include "playlist/playlistbackend.h"
 #include "playlist/playlistmanager.h"
+#include "podcasts/gpoddersync.h"
 #include "podcasts/podcastbackend.h"
 #include "podcasts/podcastupdater.h"
 
@@ -51,7 +52,8 @@ Application::Application(QObject* parent)
     internet_model_(NULL),
     library_(NULL),
     device_manager_(NULL),
-    podcast_updater_(NULL)
+    podcast_updater_(NULL),
+    gpodder_sync_(NULL)
 {
   tag_reader_client_ = new TagReaderClient(this);
   MoveToNewThread(tag_reader_client_);
@@ -80,7 +82,7 @@ Application::Application(QObject* parent)
   library_ = new Library(this, this);
   device_manager_ = new DeviceManager(this, this);
   podcast_updater_ = new PodcastUpdater(this, this);
-
+  gpodder_sync_ = new GPodderSync(this, this);
 
   library_->Init();
   library_->StartThreads();

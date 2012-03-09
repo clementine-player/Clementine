@@ -480,6 +480,26 @@ int GetThreadId() {
 #endif
 }
 
+bool IsLaptop() {
+#ifdef Q_OS_WIN
+  LPSYSTEM_POWER_STATUS status;
+  if (!GetSystemPowerStatus(&status)) {
+    return false;
+  }
+
+  return !(status.BatteryFlag & 128); // 128 = no system battery
+#endif
+
+#ifdef Q_OS_LINUX
+  return !QDir("/proc/acpi/battery").entryList(QDir::Dirs | QDir::NoDotAndDotDot).isEmpty();
+#endif
+
+#ifdef Q_OS_MAC
+  Q_ASSERT("Fixit John" == 0);
+  return false;
+#endif
+}
+
 }  // namespace Utilities
 
 

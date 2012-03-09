@@ -233,6 +233,7 @@ set(SOURCES
   podcasts/addpodcastpage.cpp
   podcasts/fixedopmlpage.cpp
   podcasts/gpoddersearchpage.cpp
+  podcasts/gpoddersync.cpp
   podcasts/gpoddertoptagsmodel.cpp
   podcasts/gpoddertoptagspage.cpp
   podcasts/itunessearchpage.cpp
@@ -242,6 +243,7 @@ set(SOURCES
   podcasts/podcastepisode.cpp
   podcasts/podcastinfowidget.cpp
   podcasts/podcastservice.cpp
+  podcasts/podcastsettingspage.cpp
   podcasts/podcastparser.cpp
   podcasts/podcastupdater.cpp
   podcasts/podcasturlloader.cpp
@@ -341,7 +343,6 @@ set(SOURCES
   widgets/ratingwidget.cpp
   widgets/renametablineedit.cpp
   widgets/sliderwidget.cpp
-  widgets/spinbox.cpp
   widgets/stickyslider.cpp
   widgets/stretchheaderview.cpp
   widgets/stylehelper.cpp
@@ -487,6 +488,7 @@ set(HEADERS
   podcasts/addpodcastpage.h
   podcasts/fixedopmlpage.h
   podcasts/gpoddersearchpage.h
+  podcasts/gpoddersync.h
   podcasts/gpoddertoptagsmodel.h
   podcasts/gpoddertoptagspage.h
   podcasts/itunessearchpage.h
@@ -494,6 +496,7 @@ set(HEADERS
   podcasts/podcastdiscoverymodel.h
   podcasts/podcastinfowidget.h
   podcasts/podcastservice.h
+  podcasts/podcastsettingspage.h
   podcasts/podcastupdater.h
   podcasts/podcasturlloader.h
 
@@ -580,7 +583,6 @@ set(HEADERS
   widgets/ratingwidget.h
   widgets/renametablineedit.h
   widgets/sliderwidget.h
-  widgets/spinbox.h
   widgets/stickyslider.h
   widgets/stretchheaderview.h
   widgets/trackslider.h
@@ -620,6 +622,7 @@ set(UI
   podcasts/gpoddersearchpage.ui
   podcasts/itunessearchpage.ui
   podcasts/podcastinfowidget.ui
+  podcasts/podcastsettingspage.ui
 
   remote/remotesettingspage.ui
 

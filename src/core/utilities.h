@@ -130,6 +130,9 @@ namespace Utilities {
 
   int SetThreadIOPriority(IoPriority priority);
   int GetThreadId();
+
+  // Returns true if this machine has a battery.
+  bool IsLaptop();
 }
 
 class ScopedWCharArray {
