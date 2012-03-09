@@ -51,7 +51,7 @@ PodcastUrlLoader::~PodcastUrlLoader() {
 }
 
 QUrl PodcastUrlLoader::FixPodcastUrl(const QString& url_text) const {
-  QString url_text_copy(url_text);
+  QString url_text_copy(url_text.trimmed());
 
   // Check if it matches one of the quick prefixes.
   for (QuickPrefixList::const_iterator it = quick_prefixes_.constBegin() ;
