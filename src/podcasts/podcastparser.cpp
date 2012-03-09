@@ -104,10 +104,9 @@ void PodcastParser::ParseChannel(QXmlStreamReader* reader, Podcast* ret) const {
         ParseImage(reader, ret);
       } else if (name == "copyright") {
         ret->set_copyright(reader->readElementText());
-      } else if (name == "link" && reader->namespaceUri() == kAtomNamespace) {
-        if (ret->url().isEmpty() && reader->attributes().value("rel") == "self") {
-          ret->set_url(QUrl(reader->readElementText()));
-        }
+      } else if (name == "link" && reader->namespaceUri() == kAtomNamespace &&
+                 ret->url().isEmpty() && reader->attributes().value("rel") == "self") {
+        ret->set_url(QUrl(reader->readElementText()));
       } else if (name == "item") {
         ParseItem(reader, ret);
       } else {
