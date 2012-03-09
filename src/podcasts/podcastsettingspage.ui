@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>Podcasts</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="../../data/data.qrc">
+    <normaloff>:/providers/podcast32.png</normaloff>:/providers/podcast32.png</iconset>
+  </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
     <widget class="QGroupBox" name="groupBox">
@@ -97,13 +101,13 @@
       <item row="0" column="1">
        <widget class="QSpinBox" name="delete_after">
         <property name="specialValueText">
-         <string>manually</string>
+         <string>Manually</string>
         </property>
         <property name="suffix">
          <string> days</string>
         </property>
         <property name="prefix">
-         <string>after </string>
+         <string>After </string>
         </property>
         <property name="maximum">
          <number>30</number>
@@ -132,9 +136,12 @@
       <item>
        <widget class="QLabel" name="label_3">
         <property name="text">
-         <string>Clementine can synchronize your subscription list with your other computers and podcast applications.  &lt;a href=&quot;https://gpodder.net/register/&quot;&gt;Create an account&lt;/a&gt;</string>
+         <string>Clementine can synchronize your subscription list with your other computers and podcast applications.  &lt;a href=&quot;https://gpodder.net/register/&quot;&gt;Create an account&lt;/a&gt;.</string>
         </property>
         <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+        <property name="openExternalLinks">
          <bool>true</bool>
         </property>
        </widget>
@@ -207,7 +214,7 @@
      <property name="sizeHint" stdset="0">
       <size>
        <width>20</width>
-       <height>217</height>
+       <height>0</height>
       </size>
      </property>
     </spacer>
@@ -232,6 +239,8 @@
   <tabstop>device_name</tabstop>
   <tabstop>login</tabstop>
  </tabstops>
- <resources/>
+ <resources>
+  <include location="../../data/data.qrc"/>
+ </resources>
  <connections/>
 </ui>

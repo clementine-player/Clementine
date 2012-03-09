@@ -37,8 +37,8 @@ PodcastSettingsPage::PodcastSettingsPage(SettingsDialog* dialog)
   connect(ui_->login_state, SIGNAL(LogoutClicked()), SLOT(LogoutClicked()));
 
   ui_->login_state->AddCredentialField(ui_->username);
-  ui_->login_state->AddCredentialField(ui_->password);
   ui_->login_state->AddCredentialField(ui_->device_name);
+  ui_->login_state->AddCredentialField(ui_->password);
   ui_->login_state->AddCredentialGroup(ui_->login_group);
 
   ui_->check_interval->setItemData(0, 0); // manually
@@ -98,6 +98,12 @@ void PodcastSettingsPage::LoginFinished(QNetworkReply* reply) {
   ui_->login_state->SetLoggedIn(success ? LoginStateWidget::LoggedIn
                                         : LoginStateWidget::LoggedOut,
                                 ui_->username->text());
+
+  ui_->login_state->SetAccountTypeVisible(!success);
+  if (!success) {
+    ui_->login_state->SetAccountTypeText(tr("Login failed") + ": " +
+                                         reply->errorString());
+  }
 }
 
 void PodcastSettingsPage::LogoutClicked() {
