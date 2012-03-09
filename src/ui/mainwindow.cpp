@@ -758,6 +758,7 @@ void MainWindow::ReloadAllSettings() {
   ReloadSettings();
 
   // Other settings
+  app_->ReloadSettings();
   app_->global_search()->ReloadSettings();
   ui_->global_search->ReloadSettings();
   app_->library()->ReloadSettings();

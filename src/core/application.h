@@ -35,6 +35,7 @@ class Player;
 class PlaylistBackend;
 class PlaylistManager;
 class PodcastBackend;
+class PodcastUpdater;
 class TagReaderClient;
 class TaskManager;
 
@@ -61,6 +62,7 @@ public:
   InternetModel* internet_model() const { return internet_model_; }
   Library* library() const { return library_; }
   DeviceManager* device_manager() const { return device_manager_; }
+  PodcastUpdater* podcast_updater() const { return podcast_updater_; }
 
   LibraryBackend* library_backend() const;
   LibraryModel* library_model() const;
@@ -70,9 +72,11 @@ public:
 
 public slots:
   void AddError(const QString& message);
+  void ReloadSettings();
 
 signals:
   void ErrorAdded(const QString& message);
+  void SettingsChanged();
 
 private:
   TagReaderClient* tag_reader_client_;
@@ -90,6 +94,7 @@ private:
   InternetModel* internet_model_;
   Library* library_;
   DeviceManager* device_manager_;
+  PodcastUpdater* podcast_updater_;
 
   QList<QObject*> objects_in_threads_;
   QList<QThread*> threads_;

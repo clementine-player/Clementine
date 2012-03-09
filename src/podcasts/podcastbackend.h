@@ -42,17 +42,25 @@ public:
   void Unsubscribe(const Podcast& podcast);
 
   // Returns a list of all the subscribed podcasts.  For efficiency the Podcast
-  // objects returned won't contain any PodcastEpisode objects, but they will
-  // contain aggregate information about total number of episodes and number of
-  // unlistened episodes, in the extra fields "db:episode_count" and
-  // "db:unlistened_count".
+  // objects returned won't contain any PodcastEpisode objects - get them
+  // separately if you want them.
   PodcastList GetAllSubscriptions();
   Podcast GetSubscriptionById(int id);
   Podcast GetSubscriptionByUrl(const QUrl& url);
+
+  // Returns a list of the episodes in the podcast with the given ID.
+  PodcastEpisodeList GetEpisodes(int podcast_id);
+
+  // Adds episodes to the database.  Every episode must have a valid
+  // podcast_database_id set already.
+  void AddEpisodes(PodcastEpisodeList* episodes);
   
 signals:
   void SubscriptionAdded(const Podcast& podcast);
   void SubscriptionRemoved(const Podcast& podcast);
+
+  // Emitted when episodes are added to a subscription that *already exists*.
+  void EpisodesAdded(const QList<PodcastEpisode>& episodes);
 
 private:
   // Adds each episode to the database, setting their IDs after inserting each

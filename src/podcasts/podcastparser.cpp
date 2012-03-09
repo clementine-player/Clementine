@@ -17,6 +17,7 @@
 
 #include "opmlcontainer.h"
 #include "podcastparser.h"
+#include "core/logging.h"
 #include "core/utilities.h"
 
 #include <QDateTime>
@@ -107,6 +108,8 @@ void PodcastParser::ParseChannel(QXmlStreamReader* reader, Podcast* ret) const {
         if (ret->url().isEmpty() && reader->attributes().value("rel") == "self") {
           ret->set_url(QUrl(reader->readElementText()));
         }
+      } else if (name == "item") {
+        ParseItem(reader, ret);
       } else {
         Utilities::ConsumeCurrentElement(reader);
       }
@@ -197,8 +200,9 @@ void PodcastParser::ParseItem(QXmlStreamReader* reader, Podcast* ret) const {
         }
       } else if (name == "enclosure") {
         if (reader->attributes().value("type").toString().startsWith("audio/")) {
-          episode.set_url(QUrl(reader->attributes().value("href").toString()));
+          episode.set_url(QUrl(reader->attributes().value("url").toString()));
         }
+        Utilities::ConsumeCurrentElement(reader);
       } else if (name == "author" && reader->namespaceUri() == kItunesNamespace) {
         episode.set_author(reader->readElementText());
       } else {

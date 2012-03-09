@@ -26,6 +26,7 @@
 class AddPodcastDialog;
 class Podcast;
 class PodcastBackend;
+class PodcastEpisode;
 class StandardItemIconLoader;
 
 class QSortFilterProxyModel;
@@ -47,7 +48,8 @@ public:
   };
 
   enum Role {
-    Role_Podcast = InternetModel::RoleCount
+    Role_Podcast = InternetModel::RoleCount,
+    Role_Episode
   };
 
   QStandardItem* CreateRootItem();
@@ -61,12 +63,18 @@ protected:
 
 private slots:
   void AddPodcast();
+  void UpdateSelectedPodcast();
+
   void SubscriptionAdded(const Podcast& podcast);
   void SubscriptionRemoved(const Podcast& podcast);
+  void EpisodesAdded(const QList<PodcastEpisode>& episodes);
 
 private:
   void PopulatePodcastList(QStandardItem* parent);
+  void UpdatePodcastText(QStandardItem* item, int unlistened_count) const;
+
   QStandardItem* CreatePodcastItem(const Podcast& podcast);
+  QStandardItem* CreatePodcastEpisodeItem(const PodcastEpisode& episode);
 
 private:
   bool use_pretty_covers_;
@@ -78,7 +86,13 @@ private:
   QSortFilterProxyModel* proxy_;
 
   QMenu* context_menu_;
+  QAction* update_selected_action_;
   QStandardItem* root_;
+
+  QModelIndex current_index_;
+  QModelIndex current_podcast_index_;
+
+  QMap<int, QStandardItem*> podcasts_by_database_id_;
 
   QScopedPointer<AddPodcastDialog> add_podcast_dialog_;
 };

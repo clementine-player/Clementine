@@ -22,7 +22,7 @@
 #include <QDateTime>
 
 const QStringList PodcastEpisode::kColumns = QStringList()
-    << "podcast_database_id" << "title" << "description" << "author"
+    << "podcast_id" << "title" << "description" << "author"
     << "publication_date" << "duration_secs" << "url" << "listened"
     << "downloaded" << "local_url" << "extra";
 
@@ -125,7 +125,7 @@ void PodcastEpisode::InitFromQuery(const QSqlQuery& query) {
 }
 
 void PodcastEpisode::BindToQuery(QSqlQuery* query) const {
-  query->bindValue(":podcast_database_id", d->podcast_database_id_);
+  query->bindValue(":podcast_id", d->podcast_database_id_);
   query->bindValue(":title", d->title_);
   query->bindValue(":description", d->description_);
   query->bindValue(":author", d->author_);

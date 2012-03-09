@@ -10,6 +10,9 @@ CREATE TABLE podcasts (
   owner_name TEXT,
   owner_email TEXT,
 
+  last_updated INTEGER,
+  last_update_error TEXT,
+
   extra BLOB
 );
 
@@ -32,6 +35,6 @@ CREATE TABLE podcast_episodes (
 
 CREATE INDEX podcast_idx_url ON podcasts(url);
 
-CREATE INDEX podcast_episodes_idx_aggregate ON podcast_episodes(podcast_id, listened);
+CREATE INDEX podcast_episodes_idx_podcast_id ON podcast_episodes(podcast_id);
 
 UPDATE schema_version SET version=37;

@@ -243,6 +243,7 @@ set(SOURCES
   podcasts/podcastinfowidget.cpp
   podcasts/podcastservice.cpp
   podcasts/podcastparser.cpp
+  podcasts/podcastupdater.cpp
   podcasts/podcasturlloader.cpp
 
   smartplaylists/generator.cpp
@@ -493,6 +494,7 @@ set(HEADERS
   podcasts/podcastdiscoverymodel.h
   podcasts/podcastinfowidget.h
   podcasts/podcastservice.h
+  podcasts/podcastupdater.h
   podcasts/podcasturlloader.h
 
   smartplaylists/generator.h

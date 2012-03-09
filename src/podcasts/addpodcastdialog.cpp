@@ -163,6 +163,7 @@ void AddPodcastDialog::AddPodcast() {
 
 void AddPodcastDialog::RemovePodcast() {
   app_->podcast_backend()->Unsubscribe(current_podcast_);
+  current_podcast_.set_database_id(-1);
   add_button_->setEnabled(true);
   remove_button_->setEnabled(false);
 }

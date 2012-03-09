@@ -32,6 +32,7 @@
 #include "playlist/playlistbackend.h"
 #include "playlist/playlistmanager.h"
 #include "podcasts/podcastbackend.h"
+#include "podcasts/podcastupdater.h"
 
 Application::Application(QObject* parent)
   : QObject(parent),
@@ -49,7 +50,8 @@ Application::Application(QObject* parent)
     global_search_(NULL),
     internet_model_(NULL),
     library_(NULL),
-    device_manager_(NULL)
+    device_manager_(NULL),
+    podcast_updater_(NULL)
 {
   tag_reader_client_ = new TagReaderClient(this);
   MoveToNewThread(tag_reader_client_);
@@ -75,10 +77,9 @@ Application::Application(QObject* parent)
   current_art_loader_ = new CurrentArtLoader(this, this);
   global_search_ = new GlobalSearch(this, this);
   internet_model_ = new InternetModel(this, this);
-
   library_ = new Library(this, this);
-
   device_manager_ = new DeviceManager(this, this);
+  podcast_updater_ = new PodcastUpdater(this, this);
 
 
   library_->Init();
@@ -129,4 +130,8 @@ LibraryBackend* Application::library_backend() const {
 
 LibraryModel* Application::library_model() const {
   return library()->model();
+}
+
+void Application::ReloadSettings() {
+  emit SettingsChanged();
 }

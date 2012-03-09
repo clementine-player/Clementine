@@ -59,6 +59,8 @@ public:
   const QString& author() const;
   const QString& owner_name() const;
   const QString& owner_email() const;
+  const QDateTime& last_updated() const;
+  const QString& last_update_error() const;
   const QVariantMap& extra() const;
   QVariant extra(const QString& key) const;
 
@@ -73,6 +75,8 @@ public:
   void set_author(const QString& v);
   void set_owner_name(const QString& v);
   void set_owner_email(const QString& v);
+  void set_last_updated(const QDateTime& v);
+  void set_last_update_error(const QString& v);
   void set_extra(const QVariantMap& v);
   void set_extra(const QString& key, const QVariant& value);
 

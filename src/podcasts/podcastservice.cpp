@@ -18,6 +18,7 @@
 #include "addpodcastdialog.h"
 #include "podcastbackend.h"
 #include "podcastservice.h"
+#include "podcastupdater.h"
 #include "core/application.h"
 #include "core/logging.h"
 #include "core/mergedproxymodel.h"
@@ -32,13 +33,23 @@
 const char* PodcastService::kServiceName = "Podcasts";
 const char* PodcastService::kSettingsGroup = "Podcasts";
 
+
+class PodcastSortProxyModel : public QSortFilterProxyModel {
+public:
+  PodcastSortProxyModel(QObject* parent = NULL);
+
+protected:
+  bool lessThan(const QModelIndex& left, const QModelIndex& right) const;
+};
+
+
 PodcastService::PodcastService(Application* app, InternetModel* parent)
   : InternetService(kServiceName, app, parent, parent),
     use_pretty_covers_(true),
     icon_loader_(new StandardItemIconLoader(app->album_cover_loader(), this)),
     backend_(app->podcast_backend()),
     model_(new QStandardItemModel(this)),
-    proxy_(new QSortFilterProxyModel(this)),
+    proxy_(new PodcastSortProxyModel(this)),
     context_menu_(NULL),
     root_(NULL)
 {
@@ -49,9 +60,44 @@ PodcastService::PodcastService(Application* app, InternetModel* parent)
 
   connect(backend_, SIGNAL(SubscriptionAdded(Podcast)), SLOT(SubscriptionAdded(Podcast)));
   connect(backend_, SIGNAL(SubscriptionRemoved(Podcast)), SLOT(SubscriptionRemoved(Podcast)));
+  connect(backend_, SIGNAL(EpisodesAdded(QList<PodcastEpisode>)), SLOT(EpisodesAdded(QList<PodcastEpisode>)));
 }
 
 PodcastService::~PodcastService() {
+}
+
+PodcastSortProxyModel::PodcastSortProxyModel(QObject* parent)
+  : QSortFilterProxyModel(parent) {
+}
+
+bool PodcastSortProxyModel::lessThan(const QModelIndex& left, const QModelIndex& right) const {
+  const int left_type  = left.data(InternetModel::Role_Type).toInt();
+  const int right_type = right.data(InternetModel::Role_Type).toInt();
+
+  // The special Add Podcast item comes first
+  if (left_type == PodcastService::Type_AddPodcast)
+    return true;
+  else if (right_type == PodcastService::Type_AddPodcast)
+    return false;
+
+  // Otherwise we only compare identical typed items.
+  if (left_type != right_type)
+    return QSortFilterProxyModel::lessThan(left, right);
+
+  switch (left_type) {
+  case PodcastService::Type_Podcast:
+    return left.data().toString().localeAwareCompare(right.data().toString()) < 0;
+
+  case PodcastService::Type_Episode: {
+    const PodcastEpisode left_episode  = left.data(PodcastService::Type_Episode).value<PodcastEpisode>();
+    const PodcastEpisode right_episode = right.data(PodcastService::Type_Episode).value<PodcastEpisode>();
+
+    return left_episode.publication_date() > right_episode.publication_date();
+  }
+
+  default:
+    return QSortFilterProxyModel::lessThan(left, right);
+  }
 }
 
 QStandardItem* PodcastService::CreateRootItem() {
@@ -79,29 +125,62 @@ void PodcastService::PopulatePodcastList(QStandardItem* parent) {
   }
 }
 
-QStandardItem* PodcastService::CreatePodcastItem(const Podcast& podcast) {
-  const int unlistened_count = podcast.extra("db:unlistened_count").toInt();
-  QString title = podcast.title();
+void PodcastService::UpdatePodcastText(QStandardItem* item, int unlistened_count) const {
+  const Podcast podcast = item->data(Role_Podcast).value<Podcast>();
 
-  QStandardItem* item = new QStandardItem;
+  QString title = podcast.title();
+  QFont font;
 
   if (unlistened_count > 0) {
     // Add the number of new episodes after the title.
     title.append(QString(" (%1)").arg(unlistened_count));
 
     // Set a bold font
-    QFont font(item->font());
-    font.setBold(true);
-    item->setFont(font);
+    font.setWeight(QFont::DemiBold);
   }
 
-  item->setText(podcast.title());
+  item->setFont(font);
+  item->setText(title);
+}
+
+QStandardItem* PodcastService::CreatePodcastItem(const Podcast& podcast) {
+  QStandardItem* item = new QStandardItem;
+
+  // Add the episodes in this podcast and gather aggregate stats.
+  int unlistened_count = 0;
+  foreach (const PodcastEpisode& episode, backend_->GetEpisodes(podcast.database_id())) {
+    if (!episode.listened()) {
+      unlistened_count ++;
+    }
+
+    item->appendRow(CreatePodcastEpisodeItem(episode));
+  }
+
   item->setIcon(default_icon_);
+  item->setData(Type_Podcast, InternetModel::Role_Type);
   item->setData(QVariant::fromValue(podcast), Role_Podcast);
+  UpdatePodcastText(item, unlistened_count);
 
   // Load the podcast's image if it has one
   if (podcast.ImageUrlSmall().isValid()) {
     icon_loader_->LoadIcon(podcast.ImageUrlSmall().toString(), QString(), item);
+  }
+
+  podcasts_by_database_id_[podcast.database_id()] = item;
+
+  return item;
+}
+
+QStandardItem* PodcastService::CreatePodcastEpisodeItem(const PodcastEpisode& episode) {
+  QStandardItem* item = new QStandardItem;
+  item->setText(episode.title());
+  item->setData(Type_Episode, InternetModel::Role_Type);
+  item->setData(QVariant::fromValue(episode), Role_Episode);
+
+  if (!episode.listened()) {
+    QFont font(item->font());
+    font.setBold(true);
+    item->setFont(font);
   }
 
   return item;
@@ -113,9 +192,40 @@ void PodcastService::ShowContextMenu(const QModelIndex& index,
     context_menu_ = new QMenu;
     context_menu_->addAction(IconLoader::Load("list-add"), tr("Add podcast..."),
                              this, SLOT(AddPodcast()));
+    context_menu_->addSeparator();
+    context_menu_->addAction(IconLoader::Load("view-refresh"), tr("Update all podcasts"),
+                             app_->podcast_updater(), SLOT(UpdateAllPodcastsNow()));
+    update_selected_action_ = context_menu_->addAction(IconLoader::Load("view-refresh"),
+                                                       tr("Update this podcast"),
+                                                       this, SLOT(UpdateSelectedPodcast()));
   }
 
+  current_index_ = index;
+
+  switch (index.data(InternetModel::Role_Type).toInt()) {
+  case Type_Podcast:
+    current_podcast_index_ = index;
+    break;
+
+  case Type_Episode:
+    current_podcast_index_ = index.parent();
+    break;
+
+  default:
+    current_podcast_index_ = QModelIndex();
+    break;
+  }
+
+  update_selected_action_->setVisible(current_podcast_index_.isValid());
   context_menu_->popup(global_pos);
+}
+
+void PodcastService::UpdateSelectedPodcast() {
+  if (!current_podcast_index_.isValid())
+    return;
+
+  app_->podcast_updater()->UpdatePodcastNow(
+        current_podcast_index_.data(Role_Podcast).value<Podcast>());
 }
 
 void PodcastService::ReloadSettings() {
@@ -127,7 +237,7 @@ void PodcastService::ReloadSettings() {
 }
 
 QModelIndex PodcastService::GetCurrentIndex() {
-  return QModelIndex();
+  return current_index_;
 }
 
 void PodcastService::AddPodcast() {
@@ -148,12 +258,34 @@ void PodcastService::SubscriptionAdded(const Podcast& podcast) {
 }
 
 void PodcastService::SubscriptionRemoved(const Podcast& podcast) {
-  // Find the item in the model that matches this podcast.
-  for (int i=0 ; i<model_->rowCount() ; ++i) {
-    Podcast item_podcast(model_->item(i)->data(Role_Podcast).value<Podcast>());
-    if (podcast.database_id() == item_podcast.database_id()) {
-      model_->removeRow(i);
-      return;
+  QStandardItem* item = podcasts_by_database_id_.take(podcast.database_id());
+  if (item) {
+    item->parent()->removeRow(item->row());
+  }
+}
+
+void PodcastService::EpisodesAdded(const QList<PodcastEpisode>& episodes) {
+  QSet<int> seen_podcast_ids;
+
+  foreach (const PodcastEpisode& episode, episodes) {
+    const int database_id = episode.podcast_database_id();
+    QStandardItem* parent = podcasts_by_database_id_[database_id];
+    if (!parent)
+      continue;
+
+    parent->appendRow(CreatePodcastEpisodeItem(episode));
+
+    if (!seen_podcast_ids.contains(database_id)) {
+      // Update the unlistened count text once for each podcast
+      int unlistened_count = 0;
+      foreach (const PodcastEpisode& episode, backend_->GetEpisodes(database_id)) {
+        if (!episode.listened()) {
+          unlistened_count ++;
+        }
+      }
+
+      UpdatePodcastText(parent, unlistened_count);
+      seen_podcast_ids.insert(database_id);
     }
   }
 }

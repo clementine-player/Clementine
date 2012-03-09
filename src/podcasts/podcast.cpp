@@ -19,13 +19,14 @@
 #include "core/utilities.h"
 
 #include <QDataStream>
+#include <QDateTime>
 
 #include <Podcast.h>
 
 const QStringList Podcast::kColumns = QStringList()
     << "url" << "title" << "description" << "copyright" << "link"
     << "image_url_large" << "image_url_small" << "author" << "owner_name"
-    << "owner_email" << "extra";
+    << "owner_email" << "last_updated" << "last_update_error" << "extra";
 
 const QString Podcast::kColumnSpec = Podcast::kColumns.join(", ");
 const QString Podcast::kJoinSpec = Utilities::Prepend("p.", Podcast::kColumns).join(", ");
@@ -50,6 +51,9 @@ struct Podcast::Private : public QSharedData {
   QString author_;
   QString owner_name_;
   QString owner_email_;
+
+  QDateTime last_updated_;
+  QString last_update_error_;
 
   QVariantMap extra_;
 
@@ -92,6 +96,8 @@ const QUrl& Podcast::image_url_small() const { return d->image_url_small_; }
 const QString& Podcast::author() const { return d->author_; }
 const QString& Podcast::owner_name() const { return d->owner_name_; }
 const QString& Podcast::owner_email() const { return d->owner_email_; }
+const QDateTime& Podcast::last_updated() const { return d->last_updated_; }
+const QString& Podcast::last_update_error() const { return d->last_update_error_; }
 const QVariantMap& Podcast::extra() const { return d->extra_; }
 QVariant Podcast::extra(const QString& key) const { return d->extra_[key]; }
 
@@ -106,6 +112,8 @@ void Podcast::set_image_url_small(const QUrl& v) { d->image_url_small_ = v; }
 void Podcast::set_author(const QString& v) { d->author_ = v; }
 void Podcast::set_owner_name(const QString& v) { d->owner_name_ = v; }
 void Podcast::set_owner_email(const QString& v) { d->owner_email_ = v; }
+void Podcast::set_last_updated(const QDateTime& v) { d->last_updated_ = v; }
+void Podcast::set_last_update_error(const QString& v) { d->last_update_error_ = v; }
 void Podcast::set_extra(const QVariantMap& v) { d->extra_ = v; }
 void Podcast::set_extra(const QString& key, const QVariant& value) { d->extra_[key] = value; }
 
@@ -126,8 +134,10 @@ void Podcast::InitFromQuery(const QSqlQuery& query) {
   d->author_ = query.value(8).toString();
   d->owner_name_ = query.value(9).toString();
   d->owner_email_ = query.value(10).toString();
+  d->last_updated_ = QDateTime::fromTime_t(query.value(11).toUInt());
+  d->last_update_error_ = query.value(12).toString();
 
-  QDataStream extra_stream(query.value(11).toByteArray());
+  QDataStream extra_stream(query.value(13).toByteArray());
   extra_stream >> d->extra_;
 }
 
@@ -142,6 +152,8 @@ void Podcast::BindToQuery(QSqlQuery* query) const {
   query->bindValue(":author", d->author_);
   query->bindValue(":owner_name", d->owner_name_);
   query->bindValue(":owner_email", d->owner_email_);
+  query->bindValue(":last_updated", d->last_updated_.toTime_t());
+  query->bindValue(":last_update_error", d->last_update_error_);
 
   QByteArray extra;
   QDataStream extra_stream(&extra, QIODevice::WriteOnly);
