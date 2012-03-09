@@ -260,7 +260,7 @@ void PodcastService::SubscriptionAdded(const Podcast& podcast) {
 void PodcastService::SubscriptionRemoved(const Podcast& podcast) {
   QStandardItem* item = podcasts_by_database_id_.take(podcast.database_id());
   if (item) {
-    item->parent()->removeRow(item->row());
+    model_->removeRow(item->row());
   }
 }
 
