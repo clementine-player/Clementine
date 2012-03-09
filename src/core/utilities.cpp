@@ -486,7 +486,7 @@ int GetThreadId() {
 
 bool IsLaptop() {
 #ifdef Q_OS_WIN
-  LPSYSTEM_POWER_STATUS status;
+  SYSTEM_POWER_STATUS status;
   if (!GetSystemPowerStatus(&status)) {
     return false;
   }
