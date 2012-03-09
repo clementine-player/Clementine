@@ -54,6 +54,10 @@ public:
   // Adds episodes to the database.  Every episode must have a valid
   // podcast_database_id set already.
   void AddEpisodes(PodcastEpisodeList* episodes);
+
+  // Updates the editable fields (listened, downloaded, and local_url) on
+  // episodes that must already exist in the database.
+  void UpdateEpisodes(const PodcastEpisodeList& episodes);
   
 signals:
   void SubscriptionAdded(const Podcast& podcast);
@@ -61,6 +65,9 @@ signals:
 
   // Emitted when episodes are added to a subscription that *already exists*.
   void EpisodesAdded(const QList<PodcastEpisode>& episodes);
+
+  // Emitted when existing episodes are updated.
+  void EpisodesUpdated(const QList<PodcastEpisode>& episodes);
 
 private:
   // Adds each episode to the database, setting their IDs after inserting each

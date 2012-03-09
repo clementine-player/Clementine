@@ -39,7 +39,7 @@ PodcastUpdater::PodcastUpdater(Application* app, QObject* parent)
   connect(app_, SIGNAL(SettingsChanged()), SLOT(ReloadSettings()));
   connect(update_timer_, SIGNAL(timeout()), SLOT(UpdateAllPodcastsNow()));
   connect(app_->podcast_backend(), SIGNAL(SubscriptionAdded(Podcast)),
-          SLOT(UpdatePodcastNow(Podcast)));
+          SLOT(SubscriptionAdded(Podcast)));
 
   update_timer_->setSingleShot(true);
 
@@ -77,6 +77,15 @@ void PodcastUpdater::RestartTimer() {
         update_timer_->start(secs_until_next_update * kMsecPerSec);
       }
     }
+  }
+}
+
+void PodcastUpdater::SubscriptionAdded(const Podcast& podcast) {
+  // Only update a new podcast immediately if it doesn't have an episode list.
+  // We assume that the episode list has already been fetched recently
+  // otherwise.
+  if (podcast.episodes().isEmpty()) {
+    UpdatePodcastNow(podcast);
   }
 }
 

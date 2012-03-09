@@ -18,16 +18,30 @@
 #ifndef GPODDERSYNC_H
 #define GPODDERSYNC_H
 
+#include "podcastepisode.h"
+
+#include <QDateTime>
 #include <QObject>
 #include <QScopedPointer>
+#include <QSet>
+#include <QSharedPointer>
+#include <QUrl>
 
 class Application;
+class Podcast;
+class PodcastBackend;
+class PodcastUrlLoader;
+class PodcastUrlLoaderReply;
 
 class QNetworkAccessManager;
 class QNetworkReply;
+class QTimer;
 
 namespace mygpo {
+  class AddRemoveResult;
   class ApiRequest;
+  class DeviceUpdates;
+  class Episode;
 }
 
 class GPodderSync : public QObject {
@@ -38,6 +52,7 @@ public:
   ~GPodderSync();
 
   static const char* kSettingsGroup;
+  static const int kFlushUpdateQueueDelay;
 
   static QString DefaultDeviceName();
   static QString DeviceId();
@@ -54,18 +69,53 @@ public:
   // Clears any saved username and password from QSettings.
   void Logout();
 
+public slots:
+  void GetUpdatesNow();
+
 private slots:
   void ReloadSettings();
   void LoginFinished(QNetworkReply* reply,
                      const QString& username, const QString& password);
+
+  void DeviceUpdatesFinished(mygpo::DeviceUpdates* reply);
+  void DeviceUpdatesFailed(mygpo::DeviceUpdates* reply);
+
+  void NewPodcastLoaded(PodcastUrlLoaderReply* reply, const QUrl& url,
+                        const QList<QSharedPointer<mygpo::Episode> >& actions);
+
+  void ApplyActions(const QList<QSharedPointer<mygpo::Episode> >& actions,
+                    PodcastEpisodeList* episodes);
+
+  void SubscriptionAdded(const Podcast& podcast);
+  void SubscriptionRemoved(const Podcast& podcast);
+  void FlushUpdateQueue();
+
+  void AddRemoveFinished(mygpo::AddRemoveResult* reply,
+                         const QList<QUrl>& affected_urls);
+  void AddRemoveFailed(mygpo::AddRemoveResult* reply);
+
+private:
+  void LoadQueue();
+  void SaveQueue();
+
+  void DoInitialSync();
 
 private:
   Application* app_;
   QNetworkAccessManager* network_;
   QScopedPointer<mygpo::ApiRequest> api_;
 
+  PodcastBackend* backend_;
+  PodcastUrlLoader* loader_;
+
   QString username_;
   QString password_;
+  QDateTime last_successful_get_;
+
+  QTimer* flush_queue_timer_;
+  QSet<QUrl> queued_add_subscriptions_;
+  QSet<QUrl> queued_remove_subscriptions_;
+  bool flushing_queue_;
 };
 
 #endif // GPODDERSYNC_H

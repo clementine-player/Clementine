@@ -16,9 +16,13 @@
 */
 
 #include "gpoddersync.h"
+#include "podcastbackend.h"
+#include "podcasturlloader.h"
 #include "core/application.h"
 #include "core/closure.h"
+#include "core/logging.h"
 #include "core/network.h"
+#include "core/timeconstants.h"
 #include "core/utilities.h"
 
 #include <ApiRequest.h>
@@ -27,16 +31,35 @@
 #include <QHostInfo>
 #include <QNetworkAccessManager>
 #include <QSettings>
+#include <QTimer>
 
 const char* GPodderSync::kSettingsGroup = "Podcasts";
+const int GPodderSync::kFlushUpdateQueueDelay = 5 * kMsecPerSec;
 
 GPodderSync::GPodderSync(Application* app, QObject* parent)
   : QObject(parent),
     app_(app),
-    network_(new NetworkAccessManager(this))
+    network_(new NetworkAccessManager(this)),
+    backend_(app_->podcast_backend()),
+    loader_(new PodcastUrlLoader(this)),
+    flush_queue_timer_(new QTimer(this)),
+    flushing_queue_(false)
 {
   ReloadSettings();
+  LoadQueue();
+
   connect(app_, SIGNAL(SettingsChanged()), SLOT(ReloadSettings()));
+  connect(backend_, SIGNAL(SubscriptionAdded(Podcast)), SLOT(SubscriptionAdded(Podcast)));
+  connect(backend_, SIGNAL(SubscriptionRemoved(Podcast)), SLOT(SubscriptionRemoved(Podcast)));
+
+  flush_queue_timer_->setInterval(kFlushUpdateQueueDelay);
+  flush_queue_timer_->setSingleShot(true);
+  connect(flush_queue_timer_, SIGNAL(timeout()), SLOT(FlushUpdateQueue()));
+
+  if (is_logged_in()) {
+    GetUpdatesNow();
+    flush_queue_timer_->start();
+  }
 }
 
 GPodderSync::~GPodderSync() {
@@ -62,6 +85,7 @@ void GPodderSync::ReloadSettings() {
 
   username_ = s.value("gpodder_username").toString();
   password_ = s.value("gpodder_password").toString();
+  last_successful_get_ = s.value("gpodder_last_get").toDateTime();
 
   if (!username_.isEmpty() && !password_.isEmpty()) {
     api_.reset(new mygpo::ApiRequest(username_, password_, network_));
@@ -94,6 +118,8 @@ void GPodderSync::LoginFinished(QNetworkReply* reply,
     s.beginGroup(kSettingsGroup);
     s.setValue("gpodder_username", username);
     s.setValue("gpodder_password", password);
+
+    DoInitialSync();
   } else {
     api_.reset();
   }
@@ -104,6 +130,262 @@ void GPodderSync::Logout() {
   s.beginGroup(kSettingsGroup);
   s.remove("gpodder_username");
   s.remove("gpodder_password");
+  s.remove("gpodder_last_get");
 
   api_.reset();
+}
+
+void GPodderSync::GetUpdatesNow() {
+  if (!is_logged_in())
+    return;
+
+  qlonglong timestamp = 0;
+  if (last_successful_get_.isValid()) {
+#if QT_VERSION >= 0x040700
+    timestamp = last_successful_get_.toMSecsSinceEpoch();
+#else
+    timestamp = qlonglong(last_successful_get_.toTime_t()) * kMsecPerSec +
+                last_successful_get_.time().msec();
+#endif
+  }
+
+  mygpo::DeviceUpdates* reply = api_->deviceUpdates(username_, DeviceId(), timestamp);
+  NewClosure(reply, SIGNAL(finished()),
+             this, SLOT(DeviceUpdatesFinished(mygpo::DeviceUpdates*)),
+             reply);
+  NewClosure(reply, SIGNAL(parseError()),
+             this, SLOT(DeviceUpdatesFailed(mygpo::DeviceUpdates*)),
+             reply);
+  NewClosure(reply, SIGNAL(requestError(QNetworkReply::NetworkError)),
+             this, SLOT(DeviceUpdatesFailed(mygpo::DeviceUpdates*)),
+             reply);
+}
+
+void GPodderSync::DeviceUpdatesFailed(mygpo::DeviceUpdates* reply) {
+  reply->deleteLater();
+  qLog(Warning) << "Failed to get gpodder.net device updates";
+}
+
+void GPodderSync::DeviceUpdatesFinished(mygpo::DeviceUpdates* reply) {
+  reply->deleteLater();
+
+  // Remember episode actions for each podcast, so when we add a new podcast
+  // we can apply the actions immediately.
+  QMap<QUrl, QList<mygpo::EpisodePtr> > episodes_by_podcast;
+  foreach (mygpo::EpisodePtr episode, reply->updateList()) {
+    episodes_by_podcast[episode->podcastUrl()].append(episode);
+  }
+
+  foreach (mygpo::PodcastPtr podcast, reply->addList()) {
+    const QUrl url(podcast->url());
+
+    // Are we subscribed to this podcast already?
+    Podcast existing_podcast = backend_->GetSubscriptionByUrl(url);
+    if (existing_podcast.is_valid()) {
+      // Just apply actions to this existing podcast
+      ApplyActions(episodes_by_podcast[url], existing_podcast.mutable_episodes());
+      backend_->UpdateEpisodes(existing_podcast.episodes());
+      continue;
+    }
+
+    // Start loading the podcast.  Remember actions and apply them after we
+    // have a list of the episodes.
+    PodcastUrlLoaderReply* loader_reply = loader_->Load(url);
+    NewClosure(loader_reply, SIGNAL(Finished(bool)),
+               this, SLOT(NewPodcastLoaded(PodcastUrlLoaderReply*,QUrl,QList<QSharedPointer<mygpo::Episode> >)),
+               loader_reply, url, episodes_by_podcast[url]);
+  }
+
+  // Unsubscribe from podcasts that were removed.
+  foreach (const QUrl& url, reply->removeList()) {
+    backend_->Unsubscribe(backend_->GetSubscriptionByUrl(url));
+  }
+
+  last_successful_get_ = QDateTime::currentDateTime();
+
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+  s.setValue("gpodder_last_get", last_successful_get_);
+}
+
+void GPodderSync::NewPodcastLoaded(PodcastUrlLoaderReply* reply, const QUrl& url,
+                                   const QList<mygpo::EpisodePtr>& actions) {
+  reply->deleteLater();
+
+  if (!reply->is_success()) {
+    qLog(Warning) << "Error fetching podcast at" << url << ":"
+                  << reply->error_text();
+    return;
+  }
+
+  if (reply->result_type() != PodcastUrlLoaderReply::Type_Podcast) {
+    qLog(Warning) << "The URL" << url << "no longer contains a podcast";
+    return;
+  }
+
+  // Apply the actions to the episodes in the podcast.
+  foreach (Podcast podcast, reply->podcast_results()) {
+    ApplyActions(actions, podcast.mutable_episodes());
+
+    // Add the subscription
+    backend_->Subscribe(&podcast);
+  }
+}
+
+void GPodderSync::ApplyActions(const QList<QSharedPointer<mygpo::Episode> >& actions,
+                               PodcastEpisodeList* episodes) {
+  for (PodcastEpisodeList::iterator it = episodes->begin() ;
+       it != episodes->end() ; ++it) {
+    // Find an action for this episode
+    foreach (mygpo::EpisodePtr action, actions) {
+      if (action->url() != it->url())
+        continue;
+
+      switch (action->status()) {
+      case mygpo::Episode::PLAY:
+      case mygpo::Episode::DOWNLOAD:
+        it->set_listened(true);
+        break;
+
+      default:
+        break;
+      }
+      break;
+    }
+  }
+}
+
+void GPodderSync::SubscriptionAdded(const Podcast& podcast) {
+  if (!is_logged_in())
+    return;
+
+  const QUrl& url = podcast.url();
+
+  queued_remove_subscriptions_.remove(url);
+  queued_add_subscriptions_.insert(url);
+
+  SaveQueue();
+  flush_queue_timer_->start();
+}
+
+void GPodderSync::SubscriptionRemoved(const Podcast& podcast) {
+  if (!is_logged_in())
+    return;
+
+  const QUrl& url = podcast.url();
+
+  queued_remove_subscriptions_.insert(url);
+  queued_add_subscriptions_.remove(url);
+
+  SaveQueue();
+  flush_queue_timer_->start();
+}
+
+namespace {
+  template <typename T>
+  void WriteContainer(const T& container, QSettings* s, const char* array_name,
+                      const char* item_name) {
+    s->beginWriteArray(array_name, container.count());
+    int index = 0;
+    foreach (const typename T::value_type& item, container) {
+      s->setArrayIndex(index ++);
+      s->setValue(item_name, item);
+    }
+    s->endArray();
+  }
+
+  template <typename T>
+  void ReadContainer(T* container, QSettings* s, const char* array_name,
+                     const char* item_name) {
+    container->clear();
+    const int count = s->beginReadArray(array_name);
+    for (int i=0 ; i<count ; ++i) {
+      s->setArrayIndex(i);
+      *container << s->value(item_name).value<typename T::value_type>();
+    }
+    s->endArray();
+  }
+}
+
+void GPodderSync::SaveQueue() {
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+
+  WriteContainer(queued_add_subscriptions_, &s, "gpodder_queued_add_subscriptions", "url");
+  WriteContainer(queued_remove_subscriptions_, &s, "gpodder_queued_remove_subscriptions", "url");
+}
+
+void GPodderSync::LoadQueue() {
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+
+  ReadContainer(&queued_add_subscriptions_, &s, "gpodder_queued_add_subscriptions", "url");
+  ReadContainer(&queued_remove_subscriptions_, &s, "gpodder_queued_remove_subscriptions", "url");
+}
+
+void GPodderSync::FlushUpdateQueue() {
+  if (!is_logged_in() || flushing_queue_)
+    return;
+
+  QSet<QUrl> all_urls = queued_add_subscriptions_ + queued_remove_subscriptions_;
+  if (all_urls.isEmpty())
+    return;
+
+  flushing_queue_ = true;
+  mygpo::AddRemoveResult* reply =
+      api_->addRemoveSubscriptions(username_, DeviceId(),
+                                   queued_add_subscriptions_.toList(),
+                                   queued_remove_subscriptions_.toList());
+
+  qLog(Info) << "Sending" << all_urls.count() << "changes to gpodder.net";
+
+  NewClosure(reply, SIGNAL(finished()),
+             this, SLOT(AddRemoveFinished(mygpo::AddRemoveResult*,QList<QUrl>)),
+             reply, all_urls.toList());
+  NewClosure(reply, SIGNAL(parseError()),
+             this, SLOT(AddRemoveFailed(mygpo::AddRemoveResult*)),
+             reply);
+  NewClosure(reply, SIGNAL(requestError(QNetworkReply::NetworkError)),
+             this, SLOT(AddRemoveFailed(mygpo::AddRemoveResult*)),
+             reply);
+}
+
+void GPodderSync::AddRemoveFailed(mygpo::AddRemoveResult* reply) {
+  flushing_queue_ = false;
+  reply->deleteLater();
+  qLog(Warning) << "Failed to update gpodder.net subscriptions";
+}
+
+void GPodderSync::AddRemoveFinished(mygpo::AddRemoveResult* reply,
+                                    const QList<QUrl>& affected_urls) {
+  flushing_queue_ = false;
+  reply->deleteLater();
+
+  // Remove the URLs from the queue.
+  foreach (const QUrl& url, affected_urls) {
+    queued_add_subscriptions_.remove(url);
+    queued_remove_subscriptions_.remove(url);
+  }
+
+  SaveQueue();
+
+  // Did more change in the mean time?
+  if (!queued_add_subscriptions_.isEmpty() || !queued_remove_subscriptions_.isEmpty()) {
+    flush_queue_timer_->start();
+  }
+}
+
+void GPodderSync::DoInitialSync() {
+  // Get updates from the server
+  GetUpdatesNow();
+
+  // Send our complete list of subscriptions
+  queued_remove_subscriptions_.clear();
+  queued_add_subscriptions_.clear();
+  foreach (const Podcast& podcast, backend_->GetAllSubscriptions()) {
+    queued_add_subscriptions_.insert(podcast.url());
+  }
+
+  SaveQueue();
+  FlushUpdateQueue();
 }

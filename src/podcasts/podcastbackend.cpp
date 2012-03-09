@@ -111,7 +111,7 @@ void PodcastBackend::AddEpisodes(PodcastEpisodeList* episodes, QSqlDatabase* db)
     it->BindToQuery(&q);
     q.exec();
     if (db_->CheckErrors(q))
-      return;
+      continue;
 
     const int database_id = q.lastInsertId().toInt();
     it->set_database_id(database_id);
@@ -127,6 +127,31 @@ void PodcastBackend::AddEpisodes(PodcastEpisodeList* episodes) {
   t.Commit();
 
   emit EpisodesAdded(*episodes);
+}
+
+void PodcastBackend::UpdateEpisodes(const PodcastEpisodeList& episodes) {
+  QMutexLocker l(db_->Mutex());
+  QSqlDatabase db(db_->Connect());
+  ScopedTransaction t(&db);
+
+  QSqlQuery q("UPDATE podcast_episodes"
+              " SET listened = :listened,"
+              "     downloaded = :downloaded,"
+              "     local_url = :local_url"
+              " WHERE ROWID = :id", db);
+
+  foreach (const PodcastEpisode& episode, episodes) {
+    q.bindValue(":listened", episode.listened());
+    q.bindValue(":downloaded", episode.downloaded());
+    q.bindValue(":local_url", episode.local_url());
+    q.bindValue(":id", episode.database_id());
+    q.exec();
+    db_->CheckErrors(q);
+  }
+
+  t.Commit();
+
+  emit EpisodesUpdated(episodes);
 }
 
 PodcastList PodcastBackend::GetAllSubscriptions() {

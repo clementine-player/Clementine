@@ -45,6 +45,7 @@ public slots:
 private slots:
   void ReloadSettings();
 
+  void SubscriptionAdded(const Podcast& podcast);
   void PodcastLoaded(PodcastUrlLoaderReply* reply, const Podcast& podcast,
                      bool one_of_many);
 
