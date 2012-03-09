@@ -441,4 +441,9 @@ QKeySequence KeySequenceFromNSEvent(NSEvent* event) {
   return QKeySequence(key);
 }
 
+void DumpDictionary(CFDictionaryRef dict) {
+  NSDictionary* d = (NSDictionary*)dict;
+  NSLog(@"%@", d);
+}
+
 }  // namespace mac

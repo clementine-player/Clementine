@@ -52,7 +52,11 @@
 
 #ifdef Q_OS_DARWIN
 #  include "core/mac_startup.h"
+#  include "core/mac_utilities.h"
+#  include "core/scoped_cftyperef.h"
 #  include "CoreServices/CoreServices.h"
+#  include "IOKit/ps/IOPowerSources.h"
+#  include "IOKit/ps/IOPSKeys.h"
 #endif
 
 #include <boost/scoped_array.hpp>
@@ -495,7 +499,18 @@ bool IsLaptop() {
 #endif
 
 #ifdef Q_OS_MAC
-  Q_ASSERT("Fixit John" == 0);
+  ScopedCFTypeRef<CFTypeRef> power_sources(IOPSCopyPowerSourcesInfo());
+  ScopedCFTypeRef<CFArrayRef> power_source_list(
+      IOPSCopyPowerSourcesList(power_sources.get()));
+  for (CFIndex i = 0; i < CFArrayGetCount(power_source_list.get()); ++i) {
+    CFTypeRef ps = CFArrayGetValueAtIndex(power_source_list.get(), i);
+    CFDictionaryRef description = IOPSGetPowerSourceDescription(
+        power_sources.get(), ps);
+
+    if (CFDictionaryContainsKey(description, CFSTR(kIOPSBatteryHealthKey))) {
+      return true;
+    }
+  }
   return false;
 #endif
 }
