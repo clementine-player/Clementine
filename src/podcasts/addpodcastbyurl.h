@@ -32,6 +32,8 @@ public:
   AddPodcastByUrl(Application* app, QWidget* parent = 0);
   ~AddPodcastByUrl();
 
+  void Show();
+
 private slots:
   void GoClicked();
   void RequestFinished(PodcastUrlLoaderReply* reply);

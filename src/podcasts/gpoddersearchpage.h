@@ -36,6 +36,8 @@ public:
   GPodderSearchPage(Application* app, QWidget* parent = 0);
   ~GPodderSearchPage();
 
+  void Show();
+
 private slots:
   void SearchClicked();
   void SearchFinished(mygpo::PodcastList* list);

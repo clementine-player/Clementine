@@ -29,6 +29,7 @@
 #include "widgets/widgetfadehelper.h"
 
 #include <QPushButton>
+#include <QTimer>
 
 const char* AddPodcastDialog::kBbcOpmlUrl = "http://www.bbc.co.uk/podcasts.opml";
 
@@ -153,6 +154,17 @@ void AddPodcastDialog::PageBusyChanged(bool busy) {
 void AddPodcastDialog::CurrentPageBusyChanged(bool busy) {
   ui_->results_stack->setCurrentWidget(busy ? ui_->busy_page : ui_->results_page);
   ui_->stack->setDisabled(busy);
+
+  QTimer::singleShot(0, this, SLOT(SelectFirstPodcast()));
+}
+
+void AddPodcastDialog::SelectFirstPodcast() {
+  // Select the first item if there was one.
+  const PodcastDiscoveryModel* model = pages_[ui_->provider_list->currentRow()]->model();
+  if (model->rowCount() > 0) {
+    ui_->results->selectionModel()->setCurrentIndex(
+          model->index(0, 0), QItemSelectionModel::ClearAndSelect);
+  }
 }
 
 void AddPodcastDialog::AddPodcast() {

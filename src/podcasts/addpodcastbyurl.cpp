@@ -21,6 +21,7 @@
 #include "ui_addpodcastbyurl.h"
 #include "core/closure.h"
 
+#include <QClipboard>
 #include <QNetworkReply>
 #include <QMessageBox>
 
@@ -70,5 +71,21 @@ void AddPodcastByUrl::RequestFinished(PodcastUrlLoaderReply* reply) {
   case PodcastUrlLoaderReply::Type_Opml:
     model()->CreateOpmlContainerItems(reply->opml_results(), model()->invisibleRootItem());
     break;
+  }
+}
+
+void AddPodcastByUrl::Show() {
+  ui_->url->setFocus();
+  if (!ui_->url->text().isEmpty()) {
+    return;
+  }
+
+  const QClipboard* clipboard = QApplication::clipboard();
+  foreach (const QString& contents, QStringList() << clipboard->text(QClipboard::Clipboard)
+                                                  << clipboard->text(QClipboard::Selection)) {
+    if (contents.contains("://")) {
+      ui_->url->setText(contents);
+      return;
+    }
   }
 }

@@ -101,3 +101,7 @@ void ITunesSearchPage::SearchFinished(QNetworkReply* reply) {
     model()->appendRow(model()->CreatePodcastItem(podcast));
   }
 }
+
+void ITunesSearchPage::Show() {
+  ui_->query->setFocus();
+}

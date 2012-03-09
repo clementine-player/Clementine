@@ -87,3 +87,7 @@ void GPodderSearchPage::SearchFailed(mygpo::PodcastList* list) {
   // Try doing the search again.
   SearchClicked();
 }
+
+void GPodderSearchPage::Show() {
+  ui_->query->setFocus();
+}

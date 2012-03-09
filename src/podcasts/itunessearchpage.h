@@ -32,6 +32,8 @@ public:
   ITunesSearchPage(Application* app, QWidget* parent);
   ~ITunesSearchPage();
 
+  void Show();
+
   static const char* kUrlBase;
 
 private slots:

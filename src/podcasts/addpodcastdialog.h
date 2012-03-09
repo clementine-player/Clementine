@@ -47,6 +47,8 @@ private slots:
   void PageBusyChanged(bool busy);
   void CurrentPageBusyChanged(bool busy);
 
+  void SelectFirstPodcast();
+
 private:
   void AddPage(AddPodcastPage* page);
   
