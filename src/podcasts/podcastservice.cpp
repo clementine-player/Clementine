@@ -192,12 +192,16 @@ void PodcastService::ShowContextMenu(const QModelIndex& index,
     context_menu_ = new QMenu;
     context_menu_->addAction(IconLoader::Load("list-add"), tr("Add podcast..."),
                              this, SLOT(AddPodcast()));
-    context_menu_->addSeparator();
     context_menu_->addAction(IconLoader::Load("view-refresh"), tr("Update all podcasts"),
                              app_->podcast_updater(), SLOT(UpdateAllPodcastsNow()));
+
+    context_menu_->addSeparator();
     update_selected_action_ = context_menu_->addAction(IconLoader::Load("view-refresh"),
                                                        tr("Update this podcast"),
                                                        this, SLOT(UpdateSelectedPodcast()));
+    remove_selected_action_ = context_menu_->addAction(IconLoader::Load("list-remove"),
+                                                       tr("Unsubscribe"),
+                                                       this, SLOT(RemoveSelectedPodcast()));
   }
 
   current_index_ = index;
@@ -217,6 +221,7 @@ void PodcastService::ShowContextMenu(const QModelIndex& index,
   }
 
   update_selected_action_->setVisible(current_podcast_index_.isValid());
+  remove_selected_action_->setVisible(current_podcast_index_.isValid());
   context_menu_->popup(global_pos);
 }
 
@@ -226,6 +231,13 @@ void PodcastService::UpdateSelectedPodcast() {
 
   app_->podcast_updater()->UpdatePodcastNow(
         current_podcast_index_.data(Role_Podcast).value<Podcast>());
+}
+
+void PodcastService::RemoveSelectedPodcast() {
+  if (!current_podcast_index_.isValid())
+    return;
+
+  backend_->Unsubscribe(current_podcast_index_.data(Role_Podcast).value<Podcast>());
 }
 
 void PodcastService::ReloadSettings() {

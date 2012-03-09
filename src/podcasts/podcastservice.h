@@ -64,6 +64,7 @@ protected:
 private slots:
   void AddPodcast();
   void UpdateSelectedPodcast();
+  void RemoveSelectedPodcast();
 
   void SubscriptionAdded(const Podcast& podcast);
   void SubscriptionRemoved(const Podcast& podcast);
@@ -87,6 +88,7 @@ private:
 
   QMenu* context_menu_;
   QAction* update_selected_action_;
+  QAction* remove_selected_action_;
   QStandardItem* root_;
 
   QModelIndex current_index_;
