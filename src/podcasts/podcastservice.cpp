@@ -17,6 +17,7 @@
 
 #include "addpodcastdialog.h"
 #include "podcastbackend.h"
+#include "podcastdownloader.h"
 #include "podcastservice.h"
 #include "podcastupdater.h"
 #include "core/application.h"
@@ -202,9 +203,13 @@ void PodcastService::ShowContextMenu(const QModelIndex& index,
     remove_selected_action_ = context_menu_->addAction(IconLoader::Load("list-remove"),
                                                        tr("Unsubscribe"),
                                                        this, SLOT(RemoveSelectedPodcast()));
+    download_selected_action_ = context_menu_->addAction(IconLoader::Load("download"),
+                                                         tr("Download this episode"),
+                                                         this, SLOT(DownloadSelectedEpisode()));
   }
 
   current_index_ = index;
+  bool is_episode = false;
 
   switch (index.data(InternetModel::Role_Type).toInt()) {
   case Type_Podcast:
@@ -213,6 +218,7 @@ void PodcastService::ShowContextMenu(const QModelIndex& index,
 
   case Type_Episode:
     current_podcast_index_ = index.parent();
+    is_episode = true;
     break;
 
   default:
@@ -222,6 +228,7 @@ void PodcastService::ShowContextMenu(const QModelIndex& index,
 
   update_selected_action_->setVisible(current_podcast_index_.isValid());
   remove_selected_action_->setVisible(current_podcast_index_.isValid());
+  download_selected_action_->setVisible(is_episode);
   context_menu_->popup(global_pos);
 }
 
@@ -300,4 +307,9 @@ void PodcastService::EpisodesAdded(const QList<PodcastEpisode>& episodes) {
       seen_podcast_ids.insert(database_id);
     }
   }
+}
+
+void PodcastService::DownloadSelectedEpisode() {
+  app_->podcast_downloader()->DownloadEpisode(
+        current_index_.data(Role_Episode).value<PodcastEpisode>());
 }

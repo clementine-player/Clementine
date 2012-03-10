@@ -34,6 +34,7 @@ class LibraryBackend;
 class LibraryModel;
 class Player;
 class PlaylistBackend;
+class PodcastDownloader;
 class PlaylistManager;
 class PodcastBackend;
 class PodcastUpdater;
@@ -64,6 +65,7 @@ public:
   Library* library() const { return library_; }
   DeviceManager* device_manager() const { return device_manager_; }
   PodcastUpdater* podcast_updater() const { return podcast_updater_; }
+  PodcastDownloader* podcast_downloader() const { return podcast_downloader_; }
   GPodderSync* gpodder_sync() const { return gpodder_sync_; }
 
   LibraryBackend* library_backend() const;
@@ -97,6 +99,7 @@ private:
   Library* library_;
   DeviceManager* device_manager_;
   PodcastUpdater* podcast_updater_;
+  PodcastDownloader* podcast_downloader_;
   GPodderSync* gpodder_sync_;
 
   QList<QObject*> objects_in_threads_;

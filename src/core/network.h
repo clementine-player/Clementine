@@ -21,6 +21,7 @@
 #include <QAbstractNetworkCache>
 #include <QMutex>
 #include <QNetworkAccessManager>
+#include <QNetworkReply>
 
 class QNetworkDiskCache;
 
@@ -43,6 +44,7 @@ private:
   static QNetworkDiskCache* sCache;
 };
 
+
 class NetworkAccessManager : public QNetworkAccessManager {
   Q_OBJECT
 
@@ -53,6 +55,7 @@ protected:
   QNetworkReply* createRequest(Operation op, const QNetworkRequest& request,
                                QIODevice* outgoingData);
 };
+
 
 class NetworkTimeouts : public QObject {
   Q_OBJECT
@@ -72,6 +75,43 @@ private slots:
 private:
   int timeout_msec_;
   QMap<QNetworkReply*, int> timers_;
+};
+
+
+class RedirectFollower : public QObject {
+  Q_OBJECT
+
+public:
+  RedirectFollower(QNetworkReply* first_reply, int max_redirects = 5);
+
+  bool hit_redirect_limit() const { return redirects_remaining_ < 0; }
+  QNetworkReply* reply() const { return current_reply_; }
+
+  // These are all forwarded to the current reply.
+  QNetworkReply::NetworkError error() const { return current_reply_->error(); }
+  QString errorString() const { return current_reply_->errorString(); }
+  QVariant attribute(QNetworkRequest::Attribute code) const { return current_reply_->attribute(code); }
+  QVariant header(QNetworkRequest::KnownHeaders header) const { return current_reply_->header(header); }
+
+signals:
+  // These are all forwarded from the current reply.
+  void readyRead();
+  void error(QNetworkReply::NetworkError);
+  void uploadProgress(qint64 bytesSent, qint64 bytesTotal);
+  void downloadProgress(qint64 bytesReceived, qint64 bytesTotal);
+
+  // This is NOT emitted when a request that has a redirect finishes.
+  void finished();
+
+private slots:
+  void ReplyFinished();
+
+private:
+  void ConnectReply(QNetworkReply* reply);
+
+private:
+  QNetworkReply* current_reply_;
+  int redirects_remaining_;
 };
 
 #endif // NETWORK_H

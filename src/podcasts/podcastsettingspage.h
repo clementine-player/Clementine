@@ -41,6 +41,8 @@ private slots:
   void LoginFinished(QNetworkReply* reply);
   void LogoutClicked();
 
+  void DownloadDirBrowse();
+
 private:
   Ui_PodcastSettingsPage* ui_;
 };

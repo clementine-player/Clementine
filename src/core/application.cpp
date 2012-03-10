@@ -33,6 +33,7 @@
 #include "playlist/playlistmanager.h"
 #include "podcasts/gpoddersync.h"
 #include "podcasts/podcastbackend.h"
+#include "podcasts/podcastdownloader.h"
 #include "podcasts/podcastupdater.h"
 
 Application::Application(QObject* parent)
@@ -53,6 +54,7 @@ Application::Application(QObject* parent)
     library_(NULL),
     device_manager_(NULL),
     podcast_updater_(NULL),
+    podcast_downloader_(NULL),
     gpodder_sync_(NULL)
 {
   tag_reader_client_ = new TagReaderClient(this);
@@ -82,6 +84,7 @@ Application::Application(QObject* parent)
   library_ = new Library(this, this);
   device_manager_ = new DeviceManager(this, this);
   podcast_updater_ = new PodcastUpdater(this, this);
+  podcast_downloader_ = new PodcastDownloader(this, this);
   gpodder_sync_ = new GPodderSync(this, this);
 
   library_->Init();

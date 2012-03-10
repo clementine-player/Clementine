@@ -75,12 +75,33 @@
         </item>
        </widget>
       </item>
-      <item row="1" column="0" colspan="2">
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_4">
+        <property name="text">
+         <string>Download episodes to</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0" colspan="2">
        <widget class="QCheckBox" name="auto_download">
         <property name="text">
          <string>Download new episodes automatically</string>
         </property>
        </widget>
+      </item>
+      <item row="1" column="1">
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <item>
+         <widget class="QLineEdit" name="download_dir"/>
+        </item>
+        <item>
+         <widget class="QPushButton" name="download_dir_browse">
+          <property name="text">
+           <string>Browse...</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </item>
      </layout>
     </widget>
@@ -231,6 +252,8 @@
  </customwidgets>
  <tabstops>
   <tabstop>check_interval</tabstop>
+  <tabstop>download_dir</tabstop>
+  <tabstop>download_dir_browse</tabstop>
   <tabstop>auto_download</tabstop>
   <tabstop>delete_after</tabstop>
   <tabstop>delete_unplayed</tabstop>

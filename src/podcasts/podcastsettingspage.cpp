@@ -16,12 +16,16 @@
 */
 
 #include "gpoddersync.h"
+#include "podcastdownloader.h"
 #include "podcastsettingspage.h"
 #include "ui_podcastsettingspage.h"
 #include "core/application.h"
 #include "core/closure.h"
+#include "library/librarydirectorymodel.h"
+#include "library/librarymodel.h"
 #include "ui/settingsdialog.h"
 
+#include <QFileDialog>
 #include <QNetworkReply>
 #include <QSettings>
 
@@ -35,6 +39,7 @@ PodcastSettingsPage::PodcastSettingsPage(SettingsDialog* dialog)
   connect(ui_->login, SIGNAL(clicked()), SLOT(LoginClicked()));
   connect(ui_->login_state, SIGNAL(LoginClicked()), SLOT(LoginClicked()));
   connect(ui_->login_state, SIGNAL(LogoutClicked()), SLOT(LogoutClicked()));
+  connect(ui_->download_dir_browse, SIGNAL(clicked()), SLOT(DownloadDirBrowse()));
 
   ui_->login_state->AddCredentialField(ui_->username);
   ui_->login_state->AddCredentialField(ui_->device_name);
@@ -62,12 +67,18 @@ void PodcastSettingsPage::Load() {
   const int update_interval = s.value("update_interval_secs", 0).toInt();
   ui_->check_interval->setCurrentIndex(ui_->check_interval->findData(update_interval));
 
+  const QString default_download_dir =
+      dialog()->app()->podcast_downloader()->DefaultDownloadDir();
+  ui_->download_dir->setText(QDir::toNativeSeparators(
+      s.value("download_dir", default_download_dir).toString()));
+
   ui_->auto_download->setChecked(s.value("auto_download", false).toBool());
   ui_->delete_after->setValue(s.value("delete_after", 0).toInt() / (24*60*60));
   ui_->delete_unplayed->setChecked(s.value("delete_unplayed", false).toBool());
   ui_->username->setText(s.value("gpodder_username").toString());
 
   ui_->device_name->setText(s.value("gpodder_device_name", GPodderSync::DefaultDeviceName()).toString());
+
 }
 
 void PodcastSettingsPage::Save() {
@@ -76,6 +87,7 @@ void PodcastSettingsPage::Save() {
 
   s.setValue("update_interval_secs",
              ui_->check_interval->itemData(ui_->check_interval->currentIndex()));
+  s.setValue("download_dir", QDir::fromNativeSeparators(ui_->download_dir->text()));
   s.setValue("auto_download", ui_->auto_download->isChecked());
   s.setValue("delete_after", ui_->delete_after->value());
   s.setValue("delete_unplayed", ui_->delete_unplayed->isChecked());
@@ -110,4 +122,13 @@ void PodcastSettingsPage::LogoutClicked() {
   ui_->login_state->SetLoggedIn(LoginStateWidget::LoggedOut);
   ui_->password->clear();
   dialog()->app()->gpodder_sync()->Logout();
+}
+
+void PodcastSettingsPage::DownloadDirBrowse() {
+  QString directory = QFileDialog::getExistingDirectory(
+        this, tr("Choose podcast download directory"), ui_->download_dir->text());
+  if (directory.isEmpty())
+    return;
+
+  ui_->download_dir->setText(QDir::toNativeSeparators(directory));
 }

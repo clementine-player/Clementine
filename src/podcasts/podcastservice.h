@@ -66,6 +66,8 @@ private slots:
   void UpdateSelectedPodcast();
   void RemoveSelectedPodcast();
 
+  void DownloadSelectedEpisode();
+
   void SubscriptionAdded(const Podcast& podcast);
   void SubscriptionRemoved(const Podcast& podcast);
   void EpisodesAdded(const QList<PodcastEpisode>& episodes);
@@ -89,6 +91,7 @@ private:
   QMenu* context_menu_;
   QAction* update_selected_action_;
   QAction* remove_selected_action_;
+  QAction* download_selected_action_;
   QStandardItem* root_;
 
   QModelIndex current_index_;
