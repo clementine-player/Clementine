@@ -34,7 +34,8 @@
 #include <QTimer>
 
 const char* GPodderSync::kSettingsGroup = "Podcasts";
-const int GPodderSync::kFlushUpdateQueueDelay = 5 * kMsecPerSec;
+const int GPodderSync::kFlushUpdateQueueDelay = 30 * kMsecPerSec; // 30 seconds
+const int GPodderSync::kGetUpdatesInterval = 30*60 * kMsecPerSec; // 30 minutes
 
 GPodderSync::GPodderSync(Application* app, QObject* parent)
   : QObject(parent),
@@ -42,6 +43,7 @@ GPodderSync::GPodderSync(Application* app, QObject* parent)
     network_(new NetworkAccessManager(this)),
     backend_(app_->podcast_backend()),
     loader_(new PodcastUrlLoader(this)),
+    get_updates_timer_(new QTimer(this)),
     flush_queue_timer_(new QTimer(this)),
     flushing_queue_(false)
 {
@@ -52,6 +54,9 @@ GPodderSync::GPodderSync(Application* app, QObject* parent)
   connect(backend_, SIGNAL(SubscriptionAdded(Podcast)), SLOT(SubscriptionAdded(Podcast)));
   connect(backend_, SIGNAL(SubscriptionRemoved(Podcast)), SLOT(SubscriptionRemoved(Podcast)));
 
+  get_updates_timer_->setInterval(kGetUpdatesInterval);
+  connect(get_updates_timer_, SIGNAL(timeout()), SLOT(GetUpdatesNow()));
+
   flush_queue_timer_->setInterval(kFlushUpdateQueueDelay);
   flush_queue_timer_->setSingleShot(true);
   connect(flush_queue_timer_, SIGNAL(timeout()), SLOT(FlushUpdateQueue()));
@@ -59,6 +64,7 @@ GPodderSync::GPodderSync(Application* app, QObject* parent)
   if (is_logged_in()) {
     GetUpdatesNow();
     flush_queue_timer_->start();
+    get_updates_timer_->start();
   }
 }
 
@@ -141,12 +147,7 @@ void GPodderSync::GetUpdatesNow() {
 
   qlonglong timestamp = 0;
   if (last_successful_get_.isValid()) {
-#if QT_VERSION >= 0x040700
-    timestamp = last_successful_get_.toMSecsSinceEpoch();
-#else
-    timestamp = qlonglong(last_successful_get_.toTime_t()) * kMsecPerSec +
-                last_successful_get_.time().msec();
-#endif
+    timestamp = last_successful_get_.toTime_t();
   }
 
   mygpo::DeviceUpdates* reply = api_->deviceUpdates(username_, DeviceId(), timestamp);
@@ -378,6 +379,7 @@ void GPodderSync::AddRemoveFinished(mygpo::AddRemoveResult* reply,
 void GPodderSync::DoInitialSync() {
   // Get updates from the server
   GetUpdatesNow();
+  get_updates_timer_->start();
 
   // Send our complete list of subscriptions
   queued_remove_subscriptions_.clear();

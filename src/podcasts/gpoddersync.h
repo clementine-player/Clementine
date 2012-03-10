@@ -53,6 +53,7 @@ public:
 
   static const char* kSettingsGroup;
   static const int kFlushUpdateQueueDelay;
+  static const int kGetUpdatesInterval;
 
   static QString DefaultDeviceName();
   static QString DeviceId();
@@ -111,6 +112,7 @@ private:
   QString username_;
   QString password_;
   QDateTime last_successful_get_;
+  QTimer* get_updates_timer_;
 
   QTimer* flush_queue_timer_;
   QSet<QUrl> queued_add_subscriptions_;
