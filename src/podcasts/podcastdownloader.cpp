@@ -75,10 +75,15 @@ void PodcastDownloader::ReloadSettings() {
   QSettings s;
   s.beginGroup(kSettingsGroup);
 
+  auto_download_ = s.value("auto_download", false).toBool();
   download_dir_ = s.value("download_dir", DefaultDownloadDir()).toString();
 }
 
 void PodcastDownloader::DownloadEpisode(const PodcastEpisode& episode) {
+  if (downloading_episode_ids_.contains(episode.database_id()))
+    return;
+  downloading_episode_ids_.insert(episode.database_id());
+
   Task* task = new Task;
   task->episode = episode;
 
@@ -92,6 +97,15 @@ void PodcastDownloader::DownloadEpisode(const PodcastEpisode& episode) {
   }
 }
 
+void PodcastDownloader::FinishAndDelete(Task* task) {
+  downloading_episode_ids_.remove(task->episode.database_id());
+  emit ProgressChanged(task->episode, Finished, 0);
+
+  delete task;
+
+  NextTask();
+}
+
 void PodcastDownloader::StartDownloading(Task* task) {
   current_task_ = task;
 
@@ -101,9 +115,7 @@ void PodcastDownloader::StartDownloading(Task* task) {
   if (!podcast.is_valid()) {
     qLog(Warning) << "The podcast that contains episode" << task->episode.url()
                   << "doesn't exist any more";
-    emit ProgressChanged(task->episode, Finished, 0);
-    delete task;
-    NextTask();
+    FinishAndDelete(task);
     return;
   }
 
@@ -119,9 +131,7 @@ void PodcastDownloader::StartDownloading(Task* task) {
   task->file = new QFile(filepath);
   if (!task->file->open(QIODevice::WriteOnly)) {
     qLog(Warning) << "Could not open the file" << filepath << "for writing";
-    emit ProgressChanged(task->episode, Finished, 0);
-    delete task;
-    NextTask();
+    FinishAndDelete(task);
     return;
   }
 
@@ -186,14 +196,11 @@ void PodcastDownloader::ReplyFinished() {
     // Delete the file
     current_task_->file->remove();
 
-    emit ProgressChanged(current_task_->episode, Finished, 0);
-    delete current_task_;
-    NextTask();
+    FinishAndDelete(current_task_);
     return;
   }
 
   qLog(Info) << "Download of" << current_task_->file->fileName() << "finished";
-  emit ProgressChanged(current_task_->episode, Finished, 100);
 
   // Tell the database the episode has been updated.  Get it from the DB again
   // in case the listened field changed in the mean time.
@@ -202,8 +209,7 @@ void PodcastDownloader::ReplyFinished() {
   episode.set_local_url(QUrl::fromLocalFile(current_task_->file->fileName()));
   backend_->UpdateEpisodes(PodcastEpisodeList() << episode);
 
-  delete current_task_;
-  NextTask();
+  FinishAndDelete(current_task_);
 }
 
 QString PodcastDownloader::SanitiseFilenameComponent(const QString& text) const {
@@ -211,9 +217,13 @@ QString PodcastDownloader::SanitiseFilenameComponent(const QString& text) const 
 }
 
 void PodcastDownloader::SubscriptionAdded(const Podcast& podcast) {
-  // TODO
+  EpisodesAdded(podcast.episodes());
 }
 
 void PodcastDownloader::EpisodesAdded(const QList<PodcastEpisode>& episodes) {
-  // TOOD
+  if (auto_download_) {
+    foreach (const PodcastEpisode& episode, episodes) {
+      DownloadEpisode(episode);
+    }
+  }
 }

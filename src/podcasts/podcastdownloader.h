@@ -25,6 +25,7 @@
 #include <QObject>
 #include <QQueue>
 #include <QRegExp>
+#include <QSet>
 
 class Application;
 class PodcastBackend;
@@ -71,6 +72,7 @@ private:
 
   void StartDownloading(Task* task);
   void NextTask();
+  void FinishAndDelete(Task* task);
 
   QString FilenameForEpisode(const PodcastEpisode& episode) const;
   QString SanitiseFilenameComponent(const QString& text) const;
@@ -82,10 +84,12 @@ private:
 
   QRegExp disallowed_filename_characters_;
 
+  bool auto_download_;
   QString download_dir_;
 
   Task* current_task_;
   QQueue<Task*> queued_tasks_;
+  QSet<int> downloading_episode_ids_;
 
   time_t last_progress_signal_;
 };
