@@ -811,7 +811,15 @@ void PlaylistView::paintEvent(QPaintEvent* event) {
       // Check if we should recompute the background image
       if (height() != last_height_ || width() != last_width_
           || force_background_redraw_) {
-        PrecomputeBackgroundImage();
+
+        cached_scaled_background_image_ = QPixmap::fromImage(background_image_.scaled(
+            width(), height(),
+            Qt::KeepAspectRatioByExpanding,
+            Qt::SmoothTransformation));
+
+        last_height_ = height();
+        last_width_  = width();
+        force_background_redraw_ = false;
       }
 
       // Actually draw the background image
@@ -969,9 +977,9 @@ void PlaylistView::ReloadSettings() {
 
   QString background_image_filename = s.value(kSettingBackgroundImageFilename).toString();
   if (!background_image_filename.isEmpty() && background_image_type_ == Custom) {
-    background_image_ = QImage(background_image_filename);
+    set_background_image(QImage(background_image_filename));
   } else if (background_image_type_ == AlbumCover) {
-    background_image_ = current_song_cover_art_;
+    set_background_image(current_song_cover_art_);
   }
   force_background_redraw_ = true;
 
@@ -1101,49 +1109,24 @@ void PlaylistView::CurrentSongChanged(const Song& song,
   current_song_cover_art_ = song_art;
   if (background_image_type_ == AlbumCover) {
     if (song.art_automatic().isEmpty() && song.art_manual().isEmpty()) {
-      background_image_ = QImage();
+      set_background_image(QImage());
     } else {
-      background_image_ = current_song_cover_art_;
+      set_background_image(current_song_cover_art_);
     }
     force_background_redraw_ = true;
     update();
   }
 }
 
-void PlaylistView::PrecomputeBackgroundImage() {
-  QImage background_image(background_image_);
-  bool background_image_has_been_scaled = false;
-  // If the background image is bigger than playlistview, scale it first,
-  // before applying opacity filter, to reduce CPU usage
-  if (background_image.height() > height()) {
-    background_image = background_image.scaled(
-        width(), height(),
-        Qt::KeepAspectRatioByExpanding,
-        Qt::SmoothTransformation);
-    background_image_has_been_scaled = true;
-  }
-
+void PlaylistView::set_background_image(const QImage& image) {
+  if (!(image.format() == QImage::Format_ARGB32))
+    background_image_ = image.convertToFormat(QImage::Format_ARGB32);
+  else
+    background_image_ = image;
   // Apply opacity filter
-  uchar* bits = background_image.bits();
-  for (int i = 0; i < background_image.height() * background_image.bytesPerLine(); ++i) {
-    bits[i] = qBound(
-        0,
-        static_cast<int>(bits[i] + kBackgroundOpacity * 255),
-        255);
+  uchar* bits = background_image_.bits();
+  for (int i = 0; i < background_image_.height() * background_image_.bytesPerLine(); i+=4) {
+    bits[i+3] = kBackgroundOpacity * 255;
   }
-  
-  // Scale image if it hasn't been done before
-  if (!background_image_has_been_scaled) {
-    background_image = background_image.scaled(
-        width(), height(),
-        Qt::KeepAspectRatioByExpanding,
-        Qt::SmoothTransformation);
-  }
-
-  cached_scaled_background_image_ = QPixmap::fromImage(background_image);
-
-  last_height_  = height();
-  last_width_   = width();
-  force_background_redraw_ = false;
 }
 

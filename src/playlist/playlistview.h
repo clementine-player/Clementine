@@ -159,10 +159,9 @@ class PlaylistView : public QTreeView {
                                     const QModelIndex& index);
 
   void set_background_image_type(BackgroundImageType bg) { background_image_type_ = bg; emit BackgroundPropertyChanged(); }
-  // Precompute background_image_ (opacity + scaling) and store the result in
-  // cached_scaled_background_image_, which is the image actually displayed as
-  // background
-  void PrecomputeBackgroundImage();
+  // Save image as the background_image_ after applying some modifications (opacity, ...).
+  // Should be used instead of modifying background_image_ directly
+  void set_background_image(const QImage& image);
 
  private:
   static const int kGlowIntensitySteps;
@@ -187,6 +186,9 @@ class PlaylistView : public QTreeView {
   int upgrading_from_version_;
 
   BackgroundImageType background_image_type_;
+  // Stores the background image to be displayed. As we want this image to be
+  // particular (in terms of format, opacity), you should probably use
+  // set_background_image_type instead of modifying background_image_ directly
   QImage background_image_;
   QImage current_song_cover_art_;
   QPixmap cached_scaled_background_image_;
