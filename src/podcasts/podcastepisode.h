@@ -18,10 +18,14 @@
 #ifndef PODCASTEPISODE_H
 #define PODCASTEPISODE_H
 
+#include "core/song.h"
+
 #include <QSharedDataPointer>
 #include <QSqlQuery>
 #include <QUrl>
 #include <QVariantMap>
+
+class Podcast;
 
 class PodcastEpisode {
 public:
@@ -37,6 +41,8 @@ public:
 
   void InitFromQuery(const QSqlQuery& query);
   void BindToQuery(QSqlQuery* query) const;
+
+  Song ToSong(const Podcast& podcast) const;
 
   int database_id() const;
   int podcast_database_id() const;

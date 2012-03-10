@@ -19,6 +19,7 @@
 #include "podcastbackend.h"
 #include "podcastdownloader.h"
 #include "podcastservice.h"
+#include "podcastservicemodel.h"
 #include "podcastupdater.h"
 #include "core/application.h"
 #include "core/logging.h"
@@ -49,7 +50,7 @@ PodcastService::PodcastService(Application* app, InternetModel* parent)
     use_pretty_covers_(true),
     icon_loader_(new StandardItemIconLoader(app->album_cover_loader(), this)),
     backend_(app->podcast_backend()),
-    model_(new QStandardItemModel(this)),
+    model_(new PodcastServiceModel(this)),
     proxy_(new PodcastSortProxyModel(this)),
     context_menu_(NULL),
     root_(NULL)
@@ -160,10 +161,12 @@ void PodcastService::UpdateEpisodeText(QStandardItem* item,
   QFont font;
   QIcon icon;
 
+  // Unlistened episodes are bold
   if (!episode.listened()) {
     font.setBold(true);
   }
 
+  // Downloaded episodes get an icon
   if (episode.downloaded()) {
     if (downloaded_icon_.isNull()) {
       downloaded_icon_ = IconLoader::Load("document-save");
@@ -171,6 +174,7 @@ void PodcastService::UpdateEpisodeText(QStandardItem* item,
     icon = downloaded_icon_;
   }
 
+  // Queued or downloading episodes get icons, tooltips, and maybe a title.
   switch (state) {
   case PodcastDownloader::Queued:
     if (queued_icon_.isNull()) {
@@ -186,7 +190,7 @@ void PodcastService::UpdateEpisodeText(QStandardItem* item,
     }
     icon    = downloading_icon_;
     tooltip = tr("Downloading (%1%)...").arg(percent);
-    title   = QString("[ %1% ]  %2").arg(QString::number(percent), episode.title());
+    title   = QString("[ %1% ] %2").arg(QString::number(percent), episode.title());
     break;
 
   case PodcastDownloader::Finished:
@@ -215,6 +219,7 @@ QStandardItem* PodcastService::CreatePodcastItem(const Podcast& podcast) {
   item->setIcon(default_icon_);
   item->setData(Type_Podcast, InternetModel::Role_Type);
   item->setData(QVariant::fromValue(podcast), Role_Podcast);
+  item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsDragEnabled | Qt::ItemIsSelectable);
   UpdatePodcastText(item, unlistened_count);
 
   // Load the podcast's image if it has one
@@ -232,6 +237,8 @@ QStandardItem* PodcastService::CreatePodcastEpisodeItem(const PodcastEpisode& ep
   item->setText(episode.title());
   item->setData(Type_Episode, InternetModel::Role_Type);
   item->setData(QVariant::fromValue(episode), Role_Episode);
+  item->setData(InternetModel::PlayBehaviour_UseSongLoader, InternetModel::Role_PlayBehaviour);
+  item->setFlags(Qt::ItemIsEnabled | Qt::ItemIsDragEnabled | Qt::ItemIsSelectable);
 
   UpdateEpisodeText(item);
 

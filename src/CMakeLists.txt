@@ -244,6 +244,7 @@ set(SOURCES
   podcasts/podcastepisode.cpp
   podcasts/podcastinfowidget.cpp
   podcasts/podcastservice.cpp
+  podcasts/podcastservicemodel.cpp
   podcasts/podcastsettingspage.cpp
   podcasts/podcastparser.cpp
   podcasts/podcastupdater.cpp
@@ -498,6 +499,7 @@ set(HEADERS
   podcasts/podcastdownloader.h
   podcasts/podcastinfowidget.h
   podcasts/podcastservice.h
+  podcasts/podcastservicemodel.h
   podcasts/podcastsettingspage.h
   podcasts/podcastupdater.h
   podcasts/podcasturlloader.h

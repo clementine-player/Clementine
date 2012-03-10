@@ -15,12 +15,16 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "podcast.h"
 #include "podcastepisode.h"
 #include "core/logging.h"
+#include "core/timeconstants.h"
 #include "core/utilities.h"
 
 #include <QDataStream>
 #include <QDateTime>
+#include <QFile>
+#include <QFileInfo>
 
 const QStringList PodcastEpisode::kColumns = QStringList()
     << "podcast_id" << "title" << "description" << "author"
@@ -142,4 +146,30 @@ void PodcastEpisode::BindToQuery(QSqlQuery* query) const {
   extra_stream << d->extra_;
 
   query->bindValue(":extra", extra);
+}
+
+Song PodcastEpisode::ToSong(const Podcast& podcast) const {
+  Song ret;
+  ret.set_valid(true);
+  ret.set_title(title());
+  ret.set_artist(author());
+  ret.set_length_nanosec(kNsecPerSec * duration_secs());
+  ret.set_year(publication_date().date().year());
+  ret.set_comment(description());
+
+  if (downloaded() && QFile::exists(local_url().toLocalFile())) {
+    ret.set_url(local_url());
+  } else {
+    ret.set_url(url());
+  }
+
+  ret.set_basefilename(QFileInfo(ret.url().path()).fileName());
+
+  // Use information from the podcast if it's set
+  if (podcast.is_valid()) {
+    ret.set_album(podcast.title());
+    ret.set_art_automatic(podcast.ImageUrlLarge().toString());
+  }
+
+  return ret;
 }
