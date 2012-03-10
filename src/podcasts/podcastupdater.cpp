@@ -56,9 +56,20 @@ void PodcastUpdater::ReloadSettings() {
   RestartTimer();
 }
 
+void PodcastUpdater::SaveSettings() {
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+  s.setValue("last_full_update", last_full_update_);
+}
+
 void PodcastUpdater::RestartTimer() {
   // Stop any existing timer
   update_timer_->stop();
+
+  if (pending_replies_ > 0) {
+    // We're still waiting for replies from the last update - don't do anything.
+    return;
+  }
 
   if (update_interval_secs_ > 0) {
     if (!last_full_update_.isValid()) {
@@ -113,6 +124,10 @@ void PodcastUpdater::PodcastLoaded(PodcastUrlLoaderReply* reply, const Podcast& 
 
   if (one_of_many) {
     if (--pending_replies_ == 0) {
+      // This was the last reply we were waiting for.  Save this time as being
+      // the last sucessful update and restart the timer.
+      last_full_update_ = QDateTime::currentDateTime();
+      SaveSettings();
       RestartTimer();
     }
   }

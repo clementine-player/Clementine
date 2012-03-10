@@ -51,6 +51,7 @@ private slots:
 
 private:
   void RestartTimer();
+  void SaveSettings();
 
 private:
   Application* app_;
