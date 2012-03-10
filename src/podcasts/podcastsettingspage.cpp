@@ -76,9 +76,13 @@ void PodcastSettingsPage::Load() {
   ui_->delete_after->setValue(s.value("delete_after", 0).toInt() / (24*60*60));
   ui_->delete_unplayed->setChecked(s.value("delete_unplayed", false).toBool());
   ui_->username->setText(s.value("gpodder_username").toString());
-
   ui_->device_name->setText(s.value("gpodder_device_name", GPodderSync::DefaultDeviceName()).toString());
 
+  if (dialog()->app()->gpodder_sync()->is_logged_in()) {
+    ui_->login_state->SetLoggedIn(LoginStateWidget::LoggedIn, ui_->username->text());
+  } else {
+    ui_->login_state->SetLoggedIn(LoginStateWidget::LoggedOut);
+  }
 }
 
 void PodcastSettingsPage::Save() {
