@@ -41,12 +41,14 @@ AddPodcastDialog::AddPodcastDialog(Application* app, QWidget* parent)
   ui_->setupUi(this);
   ui_->details->SetApplication(app);
   ui_->results->SetExpandOnReset(false);
+  ui_->results->SetAddOnDoubleClick(false);
   ui_->results_stack->setCurrentWidget(ui_->results_page);
 
   fader_ = new WidgetFadeHelper(ui_->details_scroll_area);
 
   connect(ui_->provider_list, SIGNAL(currentRowChanged(int)), SLOT(ChangePage(int)));
   connect(ui_->details, SIGNAL(LoadingFinished()), fader_, SLOT(StartFade()));
+  connect(ui_->results, SIGNAL(doubleClicked(QModelIndex)), SLOT(PodcastDoubleClicked(QModelIndex)));
 
   // Create Add and Remove Podcast buttons
   add_button_ = new QPushButton(IconLoader::Load("list-add"), tr("Add Podcast"), this);
@@ -176,6 +178,16 @@ void AddPodcastDialog::AddPodcast() {
   app_->podcast_backend()->Subscribe(&current_podcast_);
   add_button_->setEnabled(false);
   remove_button_->setEnabled(true);
+}
+
+void AddPodcastDialog::PodcastDoubleClicked(const QModelIndex& index) {
+  QVariant podcast_variant = index.data(PodcastDiscoveryModel::Role_Podcast);
+  if (podcast_variant.isNull()) {
+    return;
+  }
+
+  Podcast podcast = podcast_variant.value<Podcast>();
+  app_->podcast_backend()->Subscribe(&podcast);
 }
 
 void AddPodcastDialog::RemovePodcast() {

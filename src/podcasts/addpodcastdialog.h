@@ -41,6 +41,7 @@ public:
 private slots:
   void OpenSettingsPage();
   void AddPodcast();
+  void PodcastDoubleClicked(const QModelIndex& index);
   void RemovePodcast();
   void ChangePage(int index);
   void ChangePodcast(const QModelIndex& current);
