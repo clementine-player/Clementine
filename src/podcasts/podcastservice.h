@@ -18,6 +18,7 @@
 #ifndef PODCASTSERVICE_H
 #define PODCASTSERVICE_H
 
+#include "podcastdownloader.h"
 #include "internet/internetmodel.h"
 #include "internet/internetservice.h"
 
@@ -71,18 +72,33 @@ private slots:
   void SubscriptionAdded(const Podcast& podcast);
   void SubscriptionRemoved(const Podcast& podcast);
   void EpisodesAdded(const QList<PodcastEpisode>& episodes);
+  void EpisodesUpdated(const QList<PodcastEpisode>& episodes);
+
+  void DownloadProgressChanged(const PodcastEpisode& episode,
+                               PodcastDownloader::State state,
+                               int percent);
 
 private:
   void PopulatePodcastList(QStandardItem* parent);
   void UpdatePodcastText(QStandardItem* item, int unlistened_count) const;
+  void UpdateEpisodeText(QStandardItem* item,
+                         PodcastDownloader::State state = PodcastDownloader::NotDownloading,
+                         int percent = 0);
 
   QStandardItem* CreatePodcastItem(const Podcast& podcast);
   QStandardItem* CreatePodcastEpisodeItem(const PodcastEpisode& episode);
 
 private:
   bool use_pretty_covers_;
-  QIcon default_icon_;
   StandardItemIconLoader* icon_loader_;
+
+  // The podcast icon
+  QIcon default_icon_;
+
+  // Episodes get different icons depending on their state
+  QIcon queued_icon_;
+  QIcon downloading_icon_;
+  QIcon downloaded_icon_;
 
   PodcastBackend* backend_;
   QStandardItemModel* model_;
@@ -98,6 +114,7 @@ private:
   QModelIndex current_podcast_index_;
 
   QMap<int, QStandardItem*> podcasts_by_database_id_;
+  QMap<int, QStandardItem*> episodes_by_database_id_;
 
   QScopedPointer<AddPodcastDialog> add_podcast_dialog_;
 };

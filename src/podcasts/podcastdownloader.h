@@ -27,6 +27,7 @@
 #include <QRegExp>
 
 class Application;
+class PodcastBackend;
 
 class QNetworkAccessManager;
 
@@ -37,6 +38,7 @@ public:
   PodcastDownloader(Application* app, QObject* parent = 0);
 
   enum State {
+    NotDownloading,
     Queued,
     Downloading,
     Finished
@@ -51,7 +53,8 @@ public slots:
   void DownloadEpisode(const PodcastEpisode& episode);
 
 signals:
-  void ProgressChanged(const PodcastEpisode& episode, State state, int percent);
+  void ProgressChanged(const PodcastEpisode& episode,
+                       PodcastDownloader::State state, int percent);
 
 private slots:
   void ReloadSettings();
@@ -74,6 +77,7 @@ private:
 
 private:
   Application* app_;
+  PodcastBackend* backend_;
   QNetworkAccessManager* network_;
 
   QRegExp disallowed_filename_characters_;

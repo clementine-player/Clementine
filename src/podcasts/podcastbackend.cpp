@@ -232,3 +232,39 @@ PodcastEpisodeList PodcastBackend::GetEpisodes(int podcast_id) {
 
   return ret;
 }
+
+PodcastEpisode PodcastBackend::GetEpisodeById(int id) {
+  PodcastEpisode ret;
+
+  QMutexLocker l(db_->Mutex());
+  QSqlDatabase db(db_->Connect());
+
+  QSqlQuery q("SELECT ROWID, " + PodcastEpisode::kColumnSpec +
+              " FROM podcast_episodes"
+              " WHERE ROWID = :id", db);
+  q.bindValue(":db", id);
+  q.exec();
+  if (!db_->CheckErrors(q) && q.next()) {
+    ret.InitFromQuery(q);
+  }
+
+  return ret;
+}
+
+PodcastEpisode PodcastBackend::GetEpisodeByUrl(const QUrl& url) {
+  PodcastEpisode ret;
+
+  QMutexLocker l(db_->Mutex());
+  QSqlDatabase db(db_->Connect());
+
+  QSqlQuery q("SELECT ROWID, " + PodcastEpisode::kColumnSpec +
+              " FROM podcast_episodes"
+              " WHERE url = :url", db);
+  q.bindValue(":url", url);
+  q.exec();
+  if (!db_->CheckErrors(q) && q.next()) {
+    ret.InitFromQuery(q);
+  }
+
+  return ret;
+}

@@ -44,14 +44,15 @@ struct PodcastDownloader::Task {
 PodcastDownloader::PodcastDownloader(Application* app, QObject* parent)
   : QObject(parent),
     app_(app),
+    backend_(app_->podcast_backend()),
     network_(new NetworkAccessManager(this)),
     disallowed_filename_characters_("[^a-zA-Z0-9_~ -]"),
     current_task_(NULL),
     last_progress_signal_(0)
 {
-  connect(app_->podcast_backend(), SIGNAL(EpisodesAdded(QList<PodcastEpisode>)),
+  connect(backend_, SIGNAL(EpisodesAdded(QList<PodcastEpisode>)),
           SLOT(EpisodesAdded(QList<PodcastEpisode>)));
-  connect(app_->podcast_backend(), SIGNAL(SubscriptionAdded(Podcast)),
+  connect(backend_, SIGNAL(SubscriptionAdded(Podcast)),
           SLOT(SubscriptionAdded(Podcast)));
   connect(app_, SIGNAL(SettingsChanged()), SLOT(ReloadSettings()));
 
@@ -96,7 +97,7 @@ void PodcastDownloader::StartDownloading(Task* task) {
 
   // Need to get the name of the podcast to use in the directory name.
   Podcast podcast =
-      app_->podcast_backend()->GetSubscriptionById(task->episode.podcast_database_id());
+      backend_->GetSubscriptionById(task->episode.podcast_database_id());
   if (!podcast.is_valid()) {
     qLog(Warning) << "The podcast that contains episode" << task->episode.url()
                   << "doesn't exist any more";
@@ -160,7 +161,7 @@ void PodcastDownloader::ReplyReadyRead() {
 }
 
 void PodcastDownloader::ReplyDownloadProgress(qint64 received, qint64 total) {
-  if (!current_task_ || !current_task_->file)
+  if (!current_task_ || !current_task_->file || total < 1024)
     return;
 
   const time_t current_time = QDateTime::currentDateTime().toTime_t();
@@ -193,6 +194,13 @@ void PodcastDownloader::ReplyFinished() {
 
   qLog(Info) << "Download of" << current_task_->file->fileName() << "finished";
   emit ProgressChanged(current_task_->episode, Finished, 100);
+
+  // Tell the database the episode has been updated.  Get it from the DB again
+  // in case the listened field changed in the mean time.
+  PodcastEpisode episode = backend_->GetEpisodeById(current_task_->episode.database_id());
+  episode.set_downloaded(true);
+  episode.set_local_url(QUrl::fromLocalFile(current_task_->file->fileName()));
+  backend_->UpdateEpisodes(PodcastEpisodeList() << episode);
 
   delete current_task_;
   NextTask();

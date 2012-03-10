@@ -16,9 +16,9 @@
 */
 
 #include "mergedproxymodel.h"
+#include "core/logging.h"
 
 #include <QStringList>
-#include <QtDebug>
 
 #include <limits>
 
@@ -55,6 +55,8 @@ void MergedProxyModel::AddSubModel(const QModelIndex& source_parent,
           this, SLOT(RowsInserted(QModelIndex,int,int)));
   connect(submodel, SIGNAL(rowsRemoved(QModelIndex,int,int)),
           this, SLOT(RowsRemoved(QModelIndex,int,int)));
+  connect(submodel, SIGNAL(dataChanged(QModelIndex,QModelIndex)),
+          this, SLOT(DataChanged(QModelIndex,QModelIndex)));
 
   QModelIndex proxy_parent = mapFromSource(source_parent);
   const int rows = submodel->rowCount();

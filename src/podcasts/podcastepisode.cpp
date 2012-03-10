@@ -16,6 +16,7 @@
 */
 
 #include "podcastepisode.h"
+#include "core/logging.h"
 #include "core/utilities.h"
 
 #include <QDataStream>
@@ -113,7 +114,7 @@ void PodcastEpisode::InitFromQuery(const QSqlQuery& query) {
   d->title_ = query.value(2).toString();
   d->description_ = query.value(3).toString();
   d->author_ = query.value(4).toString();
-  d->publication_date_ = QDateTime::fromTime_t(query.value(5).toInt());
+  d->publication_date_ = QDateTime::fromTime_t(query.value(5).toUInt());
   d->duration_secs_ = query.value(6).toInt();
   d->url_ = QUrl::fromEncoded(query.value(7).toByteArray());
   d->listened_ = query.value(8).toBool();

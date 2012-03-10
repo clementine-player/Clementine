@@ -62,6 +62,7 @@ PodcastService::PodcastService(Application* app, InternetModel* parent)
   connect(backend_, SIGNAL(SubscriptionAdded(Podcast)), SLOT(SubscriptionAdded(Podcast)));
   connect(backend_, SIGNAL(SubscriptionRemoved(Podcast)), SLOT(SubscriptionRemoved(Podcast)));
   connect(backend_, SIGNAL(EpisodesAdded(QList<PodcastEpisode>)), SLOT(EpisodesAdded(QList<PodcastEpisode>)));
+  connect(backend_, SIGNAL(EpisodesUpdated(QList<PodcastEpisode>)), SLOT(EpisodesUpdated(QList<PodcastEpisode>)));
 }
 
 PodcastService::~PodcastService() {
@@ -90,8 +91,8 @@ bool PodcastSortProxyModel::lessThan(const QModelIndex& left, const QModelIndex&
     return left.data().toString().localeAwareCompare(right.data().toString()) < 0;
 
   case PodcastService::Type_Episode: {
-    const PodcastEpisode left_episode  = left.data(PodcastService::Type_Episode).value<PodcastEpisode>();
-    const PodcastEpisode right_episode = right.data(PodcastService::Type_Episode).value<PodcastEpisode>();
+    const PodcastEpisode left_episode  = left.data(PodcastService::Role_Episode).value<PodcastEpisode>();
+    const PodcastEpisode right_episode = right.data(PodcastService::Role_Episode).value<PodcastEpisode>();
 
     return left_episode.publication_date() > right_episode.publication_date();
   }
@@ -117,6 +118,11 @@ void PodcastService::LazyPopulate(QStandardItem* parent) {
 }
 
 void PodcastService::PopulatePodcastList(QStandardItem* parent) {
+  // Do this here since the downloader won't be created yet in the ctor.
+  connect(app_->podcast_downloader(),
+          SIGNAL(ProgressChanged(PodcastEpisode,PodcastDownloader::State,int)),
+          SLOT(DownloadProgressChanged(PodcastEpisode,PodcastDownloader::State,int)));
+
   if (default_icon_.isNull()) {
     default_icon_ = QIcon(":providers/podcast16.png");
   }
@@ -137,11 +143,60 @@ void PodcastService::UpdatePodcastText(QStandardItem* item, int unlistened_count
     title.append(QString(" (%1)").arg(unlistened_count));
 
     // Set a bold font
-    font.setWeight(QFont::DemiBold);
+    font.setBold(true);
   }
 
   item->setFont(font);
   item->setText(title);
+}
+
+void PodcastService::UpdateEpisodeText(QStandardItem* item,
+                                       PodcastDownloader::State state,
+                                       int percent) {
+  const PodcastEpisode episode = item->data(Role_Episode).value<PodcastEpisode>();
+
+  QString title = episode.title();
+  QString tooltip;
+  QFont font;
+  QIcon icon;
+
+  if (!episode.listened()) {
+    font.setBold(true);
+  }
+
+  if (episode.downloaded()) {
+    if (downloaded_icon_.isNull()) {
+      downloaded_icon_ = IconLoader::Load("document-save");
+    }
+    icon = downloaded_icon_;
+  }
+
+  switch (state) {
+  case PodcastDownloader::Queued:
+    if (queued_icon_.isNull()) {
+      queued_icon_ = QIcon(":icons/22x22/user-away.png");
+    }
+    icon    = queued_icon_;
+    tooltip = tr("Download queued");
+    break;
+
+  case PodcastDownloader::Downloading:
+    if (downloading_icon_.isNull()) {
+      downloading_icon_ = IconLoader::Load("go-down");
+    }
+    icon    = downloading_icon_;
+    tooltip = tr("Downloading (%1%)...").arg(percent);
+    title   = QString("[ %1% ]  %2").arg(QString::number(percent), episode.title());
+    break;
+
+  case PodcastDownloader::Finished:
+  case PodcastDownloader::NotDownloading:
+    break;
+  }
+
+  item->setFont(font);
+  item->setText(title);
+  item->setIcon(icon);
 }
 
 QStandardItem* PodcastService::CreatePodcastItem(const Podcast& podcast) {
@@ -178,11 +233,9 @@ QStandardItem* PodcastService::CreatePodcastEpisodeItem(const PodcastEpisode& ep
   item->setData(Type_Episode, InternetModel::Role_Type);
   item->setData(QVariant::fromValue(episode), Role_Episode);
 
-  if (!episode.listened()) {
-    QFont font(item->font());
-    font.setBold(true);
-    item->setFont(font);
-  }
+  UpdateEpisodeText(item);
+
+  episodes_by_database_id_[episode.database_id()] = item;
 
   return item;
 }
@@ -279,6 +332,16 @@ void PodcastService::SubscriptionAdded(const Podcast& podcast) {
 void PodcastService::SubscriptionRemoved(const Podcast& podcast) {
   QStandardItem* item = podcasts_by_database_id_.take(podcast.database_id());
   if (item) {
+    // Remove any episode ID -> item mappings for the episodes in this podcast.
+    for (int i=0 ; i<item->rowCount() ; ++i) {
+      QStandardItem* episode_item = item->child(i);
+      const int episode_id =
+          episode_item->data(Role_Episode).value<PodcastEpisode>().database_id();
+
+      episodes_by_database_id_.remove(episode_id);
+    }
+
+    // Remove this episode's row
     model_->removeRow(item->row());
   }
 }
@@ -309,7 +372,47 @@ void PodcastService::EpisodesAdded(const QList<PodcastEpisode>& episodes) {
   }
 }
 
+void PodcastService::EpisodesUpdated(const QList<PodcastEpisode>& episodes) {
+  QSet<int> seen_podcast_ids;
+
+  foreach (const PodcastEpisode& episode, episodes) {
+    const int podcast_database_id = episode.podcast_database_id();
+    QStandardItem* item = episodes_by_database_id_[episode.database_id()];
+    QStandardItem* parent = podcasts_by_database_id_[podcast_database_id];
+    if (!item || !parent)
+      continue;
+
+    // Update the episode data on the item, and update the item's text.
+    item->setData(QVariant::fromValue(episode), Role_Episode);
+    UpdateEpisodeText(item);
+
+    // Update the parent podcast's text too.
+    if (!seen_podcast_ids.contains(podcast_database_id)) {
+      // Update the unlistened count text once for each podcast
+      int unlistened_count = 0;
+      foreach (const PodcastEpisode& episode, backend_->GetEpisodes(podcast_database_id)) {
+        if (!episode.listened()) {
+          unlistened_count ++;
+        }
+      }
+
+      UpdatePodcastText(parent, unlistened_count);
+      seen_podcast_ids.insert(podcast_database_id);
+    }
+  }
+}
+
 void PodcastService::DownloadSelectedEpisode() {
   app_->podcast_downloader()->DownloadEpisode(
         current_index_.data(Role_Episode).value<PodcastEpisode>());
+}
+
+void PodcastService::DownloadProgressChanged(const PodcastEpisode& episode,
+                                             PodcastDownloader::State state,
+                                             int percent) {
+  QStandardItem* item = episodes_by_database_id_[episode.database_id()];
+  if (!item)
+    return;
+
+  UpdateEpisodeText(item, state, percent);
 }

@@ -424,9 +424,16 @@ bool ParseUntilElement(QXmlStreamReader* reader, const QString& name) {
 }
 
 QDateTime ParseRFC822DateTime(const QString& text) {
-  static const char kFormat[] = "ddd, dd MMM yyyy hh:mm:ss";
+  // This sucks but we need it because some podcasts don't quite follow the
+  // spec properly - they might have 1-digit hour numbers for example.
 
-  return QDateTime::fromString(text.left(sizeof(kFormat)), kFormat);
+  QRegExp re("([a-zA-Z]{3}),? (\\d{1,2}) ([a-zA-Z]{3}) (\\d{4}) (\\d{1,2}):(\\d{1,2}):(\\d{1,2})");
+  if (re.indexIn(text) == -1)
+    return QDateTime();
+
+  return QDateTime(
+    QDate::fromString(QString("%1 %2 %3 %4").arg(re.cap(1), re.cap(3), re.cap(2), re.cap(4)), Qt::TextDate),
+    QTime(re.cap(5).toInt(), re.cap(6).toInt(), re.cap(7).toInt()));
 }
 
 const char* EnumToString(const QMetaObject& meta, const char* name, int value) {
