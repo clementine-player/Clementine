@@ -151,7 +151,6 @@ public:
 signals:
   void StreamError(const QString& message);
   void StreamMetadataFound(const QUrl& original_url, const Song& song);
-  void OpenSettingsAtPage(SettingsDialog::Page);
 
   void AddToPlaylist(QMimeData* data);
 

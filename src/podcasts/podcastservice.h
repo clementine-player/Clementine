@@ -66,8 +66,8 @@ private slots:
   void AddPodcast();
   void UpdateSelectedPodcast();
   void RemoveSelectedPodcast();
-
   void DownloadSelectedEpisode();
+  void ShowConfig();
 
   void SubscriptionAdded(const Podcast& podcast);
   void SubscriptionRemoved(const Podcast& podcast);

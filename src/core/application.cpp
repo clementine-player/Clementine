@@ -140,3 +140,7 @@ LibraryModel* Application::library_model() const {
 void Application::ReloadSettings() {
   emit SettingsChanged();
 }
+
+void Application::OpenSettingsDialogAtPage(SettingsDialog::Page page) {
+  emit SettingsDialogRequested(page);
+}

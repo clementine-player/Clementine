@@ -213,7 +213,7 @@ void DigitallyImportedServiceBase::LoadPlaylistFinished() {
 }
 
 void DigitallyImportedServiceBase::ShowSettingsDialog() {
-  emit OpenSettingsAtPage(SettingsDialog::Page_DigitallyImported);
+  app_->OpenSettingsDialogAtPage(SettingsDialog::Page_DigitallyImported);
 }
 
 DigitallyImportedClient::ChannelList DigitallyImportedServiceBase::Channels() {

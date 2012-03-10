@@ -244,21 +244,28 @@ void PodcastService::ShowContextMenu(const QModelIndex& index,
                                      const QPoint& global_pos) {
   if (!context_menu_) {
     context_menu_ = new QMenu;
-    context_menu_->addAction(IconLoader::Load("list-add"), tr("Add podcast..."),
-                             this, SLOT(AddPodcast()));
-    context_menu_->addAction(IconLoader::Load("view-refresh"), tr("Update all podcasts"),
-                             app_->podcast_updater(), SLOT(UpdateAllPodcastsNow()));
+    context_menu_->addAction(
+          IconLoader::Load("list-add"), tr("Add podcast..."),
+          this, SLOT(AddPodcast()));
+    context_menu_->addAction(
+          IconLoader::Load("view-refresh"), tr("Update all podcasts"),
+          app_->podcast_updater(), SLOT(UpdateAllPodcastsNow()));
 
     context_menu_->addSeparator();
-    update_selected_action_ = context_menu_->addAction(IconLoader::Load("view-refresh"),
-                                                       tr("Update this podcast"),
-                                                       this, SLOT(UpdateSelectedPodcast()));
-    remove_selected_action_ = context_menu_->addAction(IconLoader::Load("list-remove"),
-                                                       tr("Unsubscribe"),
-                                                       this, SLOT(RemoveSelectedPodcast()));
-    download_selected_action_ = context_menu_->addAction(IconLoader::Load("download"),
-                                                         tr("Download this episode"),
-                                                         this, SLOT(DownloadSelectedEpisode()));
+    update_selected_action_ = context_menu_->addAction(
+          IconLoader::Load("view-refresh"), tr("Update this podcast"),
+          this, SLOT(UpdateSelectedPodcast()));
+    remove_selected_action_ = context_menu_->addAction(
+          IconLoader::Load("list-remove"), tr("Unsubscribe"),
+          this, SLOT(RemoveSelectedPodcast()));
+    download_selected_action_ = context_menu_->addAction(
+          IconLoader::Load("download"), tr("Download this episode"),
+          this, SLOT(DownloadSelectedEpisode()));
+
+    context_menu_->addSeparator();
+    context_menu_->addAction(
+          IconLoader::Load("configure"), tr("Configure podcasts..."),
+          this, SLOT(ShowConfig()));
   }
 
   current_index_ = index;
@@ -415,4 +422,8 @@ void PodcastService::DownloadProgressChanged(const PodcastEpisode& episode,
     return;
 
   UpdateEpisodeText(item, state, percent);
+}
+
+void PodcastService::ShowConfig() {
+  app_->OpenSettingsDialogAtPage(SettingsDialog::Page_Podcasts);
 }

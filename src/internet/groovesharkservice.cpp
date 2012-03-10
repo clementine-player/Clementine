@@ -156,7 +156,7 @@ void GroovesharkService::LazyPopulate(QStandardItem* item) {
 }
 
 void GroovesharkService::ShowConfig() {
-  emit OpenSettingsAtPage(SettingsDialog::Page_Grooveshark);
+  app_->OpenSettingsDialogAtPage(SettingsDialog::Page_Grooveshark);
 }
 
 void GroovesharkService::Search(const QString& text, Playlist* playlist, bool now) {

@@ -39,6 +39,7 @@ public:
   static const char* kBbcOpmlUrl;
 
 private slots:
+  void OpenSettingsPage();
   void AddPodcast();
   void RemovePodcast();
   void ChangePage(int index);

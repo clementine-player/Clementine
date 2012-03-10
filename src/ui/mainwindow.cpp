@@ -189,8 +189,9 @@ MainWindow::MainWindow(Application* app,
 {
   qLog(Debug) << "Starting";
 
-  // Database connections
   connect(app, SIGNAL(ErrorAdded(QString)), SLOT(ShowErrorDialog(QString)));
+  connect(app, SIGNAL(SettingsDialogRequested(SettingsDialog::Page)),
+          SLOT(OpenSettingsDialogAtPage(SettingsDialog::Page)));
 
   // Initialise the UI
   ui_->setupUi(this);
@@ -509,7 +510,6 @@ MainWindow::MainWindow(Application* app,
   // Internet connections
   connect(app_->internet_model(), SIGNAL(StreamError(QString)), SLOT(ShowErrorDialog(QString)));
   connect(app_->internet_model(), SIGNAL(StreamMetadataFound(QUrl,Song)), app_->playlist_manager(), SLOT(SetActiveStreamMetadata(QUrl,Song)));
-  connect(app_->internet_model(), SIGNAL(OpenSettingsAtPage(SettingsDialog::Page)), SLOT(OpenSettingsDialogAtPage(SettingsDialog::Page)));
   connect(app_->internet_model(), SIGNAL(AddToPlaylist(QMimeData*)), SLOT(AddToPlaylist(QMimeData*)));
 #ifdef HAVE_LIBLASTFM
   LastFMService* lastfm_service = InternetModel::Service<LastFMService>();

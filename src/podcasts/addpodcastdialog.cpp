@@ -59,6 +59,11 @@ AddPodcastDialog::AddPodcastDialog(Application* app, QWidget* parent)
   connect(remove_button_, SIGNAL(clicked()), SLOT(RemovePodcast()));
   ui_->button_box->addButton(remove_button_, QDialogButtonBox::ActionRole);
 
+  QPushButton* settings_button = new QPushButton(
+        IconLoader::Load("configure"), tr("Configure podcasts..."), this);
+  connect(settings_button, SIGNAL(clicked()), SLOT(OpenSettingsPage()));
+  ui_->button_box->addButton(settings_button, QDialogButtonBox::ResetRole);
+
   // Add providers
   AddPage(new AddPodcastByUrl(app, this));
   AddPage(new FixedOpmlPage(QUrl(kBbcOpmlUrl), tr("BBC Podcasts"),
@@ -178,4 +183,8 @@ void AddPodcastDialog::RemovePodcast() {
   current_podcast_.set_database_id(-1);
   add_button_->setEnabled(true);
   remove_button_->setEnabled(false);
+}
+
+void AddPodcastDialog::OpenSettingsPage() {
+  app_->OpenSettingsDialogAtPage(SettingsDialog::Page_Podcasts);
 }

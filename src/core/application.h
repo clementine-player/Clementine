@@ -18,6 +18,8 @@
 #ifndef APPLICATION_H
 #define APPLICATION_H
 
+#include "ui/settingsdialog.h"
+
 #include <QObject>
 
 class AlbumCoverLoader;
@@ -77,10 +79,12 @@ public:
 public slots:
   void AddError(const QString& message);
   void ReloadSettings();
+  void OpenSettingsDialogAtPage(SettingsDialog::Page page);
 
 signals:
   void ErrorAdded(const QString& message);
   void SettingsChanged();
+  void SettingsDialogRequested(SettingsDialog::Page page);
 
 private:
   TagReaderClient* tag_reader_client_;
