@@ -21,6 +21,9 @@
 #include "podcast.h"
 
 struct OpmlContainer {
+  // Only set for the top-level container
+  QUrl url;
+
   QString name;
   QList<OpmlContainer> containers;
   PodcastList feeds;

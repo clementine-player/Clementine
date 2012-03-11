@@ -21,9 +21,12 @@
 #include "addpodcastpage.h"
 
 class AddPodcastPage;
+class OpmlContainer;
 class PodcastUrlLoader;
 class PodcastUrlLoaderReply;
 class Ui_AddPodcastByUrl;
+
+class QUrl;
 
 class AddPodcastByUrl : public AddPodcastPage {
   Q_OBJECT
@@ -33,6 +36,9 @@ public:
   ~AddPodcastByUrl();
 
   void Show();
+
+  void SetOpml(const OpmlContainer& opml);
+  void SetUrlAndGo(const QUrl& url);
 
 private slots:
   void GoClicked();

@@ -44,6 +44,10 @@ public:
   // error occurred parsing the XML.
   QVariant Load(QIODevice* device, const QUrl& url) const;
 
+  // Really quick test to see if some data might be supported.  Load() might
+  // still return a null QVariant.
+  bool TryMagic(const QByteArray& data) const;
+
 private:
   bool ParseRss(QXmlStreamReader* reader, Podcast* ret) const;
   void ParseChannel(QXmlStreamReader* reader, Podcast* ret) const;

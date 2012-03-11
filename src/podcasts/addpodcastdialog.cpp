@@ -67,7 +67,8 @@ AddPodcastDialog::AddPodcastDialog(Application* app, QWidget* parent)
   ui_->button_box->addButton(settings_button, QDialogButtonBox::ResetRole);
 
   // Add providers
-  AddPage(new AddPodcastByUrl(app, this));
+  by_url_page_ = new AddPodcastByUrl(app, this);
+  AddPage(by_url_page_);
   AddPage(new FixedOpmlPage(QUrl(kBbcOpmlUrl), tr("BBC Podcasts"),
                             QIcon(":providers/bbc.png"), app, this));
   AddPage(new GPodderTopTagsPage(app, this));
@@ -79,6 +80,18 @@ AddPodcastDialog::AddPodcastDialog(Application* app, QWidget* parent)
 
 AddPodcastDialog::~AddPodcastDialog() {
   delete ui_;
+}
+
+void AddPodcastDialog::ShowWithUrl(const QUrl& url) {
+  by_url_page_->SetUrlAndGo(url);
+  ui_->provider_list->setCurrentRow(0);
+  show();
+}
+
+void AddPodcastDialog::ShowWithOpml(const OpmlContainer& opml) {
+  by_url_page_->SetOpml(opml);
+  ui_->provider_list->setCurrentRow(0);
+  show();
 }
 
 void AddPodcastDialog::AddPage(AddPodcastPage* page) {

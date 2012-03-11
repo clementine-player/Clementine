@@ -22,8 +22,10 @@
 
 #include <QDialog>
 
+class AddPodcastByUrl;
 class AddPodcastPage;
 class Application;
+class OpmlContainer;
 class WidgetFadeHelper;
 class Ui_AddPodcastDialog;
 
@@ -37,6 +39,12 @@ public:
   ~AddPodcastDialog();
 
   static const char* kBbcOpmlUrl;
+
+  // Convenience methods that open the dialog at the Add By Url page and fill
+  // it with either a URL (which is then fetched), or a pre-fetched OPML
+  // container.
+  void ShowWithUrl(const QUrl& url);
+  void ShowWithOpml(const OpmlContainer& opml);
 
 private slots:
   void OpenSettingsPage();
@@ -63,6 +71,7 @@ private:
 
   QList<AddPodcastPage*> pages_;
   QList<bool> page_is_busy_;
+  AddPodcastByUrl* by_url_page_;
 
   WidgetFadeHelper* fader_;
 

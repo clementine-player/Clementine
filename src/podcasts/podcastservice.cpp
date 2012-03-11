@@ -16,6 +16,7 @@
 */
 
 #include "addpodcastdialog.h"
+#include "opmlcontainer.h"
 #include "podcastbackend.h"
 #include "podcastdownloader.h"
 #include "podcastservice.h"
@@ -249,16 +250,6 @@ QStandardItem* PodcastService::CreatePodcastEpisodeItem(const PodcastEpisode& ep
   return item;
 }
 
-QModelIndexList PodcastService::FilterByType(int type, const QModelIndexList& list) const {
-  QModelIndexList ret;
-  foreach (const QModelIndex& index, list) {
-    if (index.data(InternetModel::Role_Type).toInt() == type) {
-      ret.append(index);
-    }
-  }
-  return ret;
-}
-
 void PodcastService::ShowContextMenu(const QPoint& global_pos) {
   if (!context_menu_) {
     context_menu_ = new QMenu;
@@ -377,11 +368,14 @@ void PodcastService::ReloadSettings() {
   // TODO: reload the podcast icons that are already loaded?
 }
 
-void PodcastService::AddPodcast() {
+void PodcastService::EnsureAddPodcastDialogCreated() {
   if (!add_podcast_dialog_) {
     add_podcast_dialog_.reset(new AddPodcastDialog(app_));
   }
+}
 
+void PodcastService::AddPodcast() {
+  EnsureAddPodcastDialogCreated();
   add_podcast_dialog_->show();
 }
 
@@ -391,7 +385,12 @@ void PodcastService::SubscriptionAdded(const Podcast& podcast) {
     return;
   }
 
-  model_->appendRow(CreatePodcastItem(podcast));
+  QStandardItem* item = CreatePodcastItem(podcast);
+  model_->appendRow(item);
+
+  if (scroll_to_database_id_.remove(podcast.database_id())) {
+    emit ScrollToIndex(MapToMergedModel(item->index()));
+  }
 }
 
 void PodcastService::SubscriptionRemoved(const Podcast& podcast) {
@@ -526,4 +525,35 @@ void PodcastService::SetListened(const QModelIndexList& indexes, bool listened) 
   }
 
   backend_->UpdateEpisodes(episodes);
+}
+
+QModelIndex PodcastService::MapToMergedModel(const QModelIndex& index) const {
+  return model()->merged_model()->mapFromSource(proxy_->mapFromSource(index));
+}
+
+void PodcastService::SubscribeAndShow(const QVariant& podcast_or_opml) {
+  if (podcast_or_opml.canConvert<Podcast>()) {
+    Podcast podcast(podcast_or_opml.value<Podcast>());
+    backend_->Subscribe(&podcast);
+
+    // Lazy load the root item if it hasn't been already
+    if (root_->data(InternetModel::Role_CanLazyLoad).toBool()) {
+      root_->setData(false, InternetModel::Role_CanLazyLoad);
+      LazyPopulate(root_);
+    }
+
+    QStandardItem* item = podcasts_by_database_id_[podcast.database_id()];
+    if (item) {
+      // There will be an item already if this podcast was already there.
+      emit ScrollToIndex(MapToMergedModel(item->index()));
+    } else {
+      // Otherwise we can remember the podcast ID and scroll to it when the
+      // item is created.
+      scroll_to_database_id_.insert(podcast.database_id());
+    }
+  } else if (podcast_or_opml.canConvert<OpmlContainer>()) {
+    EnsureAddPodcastDialogCreated();
+
+    add_podcast_dialog_->ShowWithOpml(podcast_or_opml.value<OpmlContainer>());
+  }
 }

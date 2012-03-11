@@ -70,6 +70,7 @@ signals:
   void StreamMetadataFound(const QUrl& original_url, const Song& song);
 
   void AddToPlaylistSignal(QMimeData* data);
+  void ScrollToIndex(const QModelIndex& index);
 
 private slots:
   void AppendToPlaylist();

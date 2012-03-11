@@ -511,6 +511,7 @@ MainWindow::MainWindow(Application* app,
   connect(app_->internet_model(), SIGNAL(StreamError(QString)), SLOT(ShowErrorDialog(QString)));
   connect(app_->internet_model(), SIGNAL(StreamMetadataFound(QUrl,Song)), app_->playlist_manager(), SLOT(SetActiveStreamMetadata(QUrl,Song)));
   connect(app_->internet_model(), SIGNAL(AddToPlaylist(QMimeData*)), SLOT(AddToPlaylist(QMimeData*)));
+  connect(app_->internet_model(), SIGNAL(ScrollToIndex(QModelIndex)), SLOT(ScrollToInternetIndex(QModelIndex)));
 #ifdef HAVE_LIBLASTFM
   LastFMService* lastfm_service = InternetModel::Service<LastFMService>();
   connect(lastfm_service, SIGNAL(ButtonVisibilityChanged(bool)), SLOT(LastFMButtonVisibilityChanged(bool)));
@@ -2228,4 +2229,9 @@ void MainWindow::HandleNotificationPreview(OSD::Behaviour type, QString line1, Q
 
     osd_->ShowPreview(type, line1, line2, fake);
   }
+}
+
+void MainWindow::ScrollToInternetIndex(const QModelIndex& index) {
+  internet_view_->ScrollToIndex(index);
+  ui_->tabs->SetCurrentWidget(internet_view_);
 }

@@ -42,6 +42,12 @@ bool PodcastParser::SupportsContentType(const QString& content_type) const {
   return false;
 }
 
+bool PodcastParser::TryMagic(const QByteArray& data) const {
+  QString str(QString::fromUtf8(data));
+  return str.contains(QRegExp("<rss\\b")) ||
+         str.contains(QRegExp("<opml\\b"));
+}
+
 QVariant PodcastParser::Load(QIODevice* device, const QUrl& url) const {
   QXmlStreamReader reader(device);
 
@@ -62,6 +68,7 @@ QVariant PodcastParser::Load(QIODevice* device, const QUrl& url) const {
         if (!ParseOpml(&reader, &container)) {
           return QVariant();
         } else {
+          container.url = url;
           return QVariant::fromValue(container);
         }
       }

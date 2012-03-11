@@ -38,6 +38,17 @@ AddPodcastByUrl::~AddPodcastByUrl() {
   delete ui_;
 }
 
+void AddPodcastByUrl::SetUrlAndGo(const QUrl& url) {
+  ui_->url->setText(url.toString());
+  GoClicked();
+}
+
+void AddPodcastByUrl::SetOpml(const OpmlContainer& opml) {
+  ui_->url->setText(opml.url.toString());
+  model()->clear();
+  model()->CreateOpmlContainerItems(opml, model()->invisibleRootItem());
+}
+
 void AddPodcastByUrl::GoClicked() {
   emit Busy(true);
   model()->clear();

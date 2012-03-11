@@ -59,6 +59,11 @@ public:
   void ShowContextMenu(const QPoint& global_pos);
   void ReloadSettings();
 
+  // Called by SongLoader when the user adds a Podcast URL directly.  Adds a
+  // subscription to the podcast and displays it in the UI.  If the QVariant
+  // contains an OPML file then this displays it in the Add Podcast dialog.
+  void SubscribeAndShow(const QVariant& podcast_or_opml);
+
 private slots:
   void AddPodcast();
   void UpdateSelectedPodcast();
@@ -81,6 +86,8 @@ private slots:
   void CurrentSongChanged(const Song& metadata);
 
 private:
+  void EnsureAddPodcastDialogCreated();
+
   void PopulatePodcastList(QStandardItem* parent);
   void UpdatePodcastText(QStandardItem* item, int unlistened_count) const;
   void UpdateEpisodeText(QStandardItem* item,
@@ -90,7 +97,7 @@ private:
   QStandardItem* CreatePodcastItem(const Podcast& podcast);
   QStandardItem* CreatePodcastEpisodeItem(const PodcastEpisode& episode);
 
-  QModelIndexList FilterByType(int type, const QModelIndexList& list) const;
+  QModelIndex MapToMergedModel(const QModelIndex& index) const;
 
   void SetListened(const QModelIndexList& indexes, bool listened);
 
@@ -124,6 +131,8 @@ private:
 
   QMap<int, QStandardItem*> podcasts_by_database_id_;
   QMap<int, QStandardItem*> episodes_by_database_id_;
+
+  QSet<int> scroll_to_database_id_;
 
   QScopedPointer<AddPodcastDialog> add_podcast_dialog_;
 };
