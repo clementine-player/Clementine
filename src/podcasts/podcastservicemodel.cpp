@@ -29,25 +29,62 @@ QMimeData* PodcastServiceModel::mimeData(const QModelIndexList& indexes) const {
   QList<QUrl> urls;
 
   foreach (const QModelIndex& index, indexes) {
-    QVariant episode_variant = index.data(PodcastService::Role_Episode);
-    if (!episode_variant.isValid())
-      continue;
+    switch (index.data(InternetModel::Role_Type).toInt()) {
+    case PodcastService::Type_Episode:
+      MimeDataForEpisode(index, data, &urls);
+      break;
 
-    PodcastEpisode episode(episode_variant.value<PodcastEpisode>());
-
-    // Get the podcast from the index's parent
-    Podcast podcast;
-    QVariant podcast_variant = index.parent().data(PodcastService::Role_Podcast);
-    if (podcast_variant.isValid()) {
-      podcast = podcast_variant.value<Podcast>();
+    case PodcastService::Type_Podcast:
+      MimeDataForPodcast(index, data, &urls);
+      break;
     }
-
-    Song song = episode.ToSong(podcast);
-
-    data->songs << song;
-    urls << song.url();
   }
 
   data->setUrls(urls);
   return data;
+}
+
+void PodcastServiceModel::MimeDataForEpisode(const QModelIndex& index,
+                                             SongMimeData* data, QList<QUrl>* urls) const {
+  QVariant episode_variant = index.data(PodcastService::Role_Episode);
+  if (!episode_variant.isValid())
+    return;
+
+  PodcastEpisode episode(episode_variant.value<PodcastEpisode>());
+
+  // Get the podcast from the index's parent
+  Podcast podcast;
+  QVariant podcast_variant = index.parent().data(PodcastService::Role_Podcast);
+  if (podcast_variant.isValid()) {
+    podcast = podcast_variant.value<Podcast>();
+  }
+
+  Song song = episode.ToSong(podcast);
+
+  data->songs << song;
+  *urls << song.url();
+}
+
+void PodcastServiceModel::MimeDataForPodcast(const QModelIndex& index,
+                                             SongMimeData* data, QList<QUrl>* urls) const {
+  // Get the podcast
+  Podcast podcast;
+  QVariant podcast_variant = index.data(PodcastService::Role_Podcast);
+  if (podcast_variant.isValid()) {
+    podcast = podcast_variant.value<Podcast>();
+  }
+
+  // Add each child episode
+  const int children = index.model()->rowCount(index);
+  for (int i=0 ; i<children ; ++i) {
+    QVariant episode_variant = index.child(i, 0).data(PodcastService::Role_Episode);
+    if (!episode_variant.isValid())
+      continue;
+
+    PodcastEpisode episode(episode_variant.value<PodcastEpisode>());
+    Song song = episode.ToSong(podcast);
+
+    data->songs << song;
+    *urls << song.url();
+  }
 }

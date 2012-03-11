@@ -20,6 +20,8 @@
 
 #include <QStandardItemModel>
 
+class SongMimeData;
+
 class PodcastServiceModel : public QStandardItemModel {
   Q_OBJECT
 
@@ -27,6 +29,12 @@ public:
   PodcastServiceModel(QObject* parent = 0);
   
   QMimeData* mimeData(const QModelIndexList& indexes) const;
+
+private:
+  void MimeDataForPodcast(const QModelIndex& index,
+                          SongMimeData* data, QList<QUrl>* urls) const;
+  void MimeDataForEpisode(const QModelIndex& index,
+                          SongMimeData* data, QList<QUrl>* urls) const;
 };
 
 #endif // PODCASTSERVICEMODEL_H
