@@ -37,25 +37,26 @@ PodcastUrlLoader::PodcastUrlLoader(QObject* parent)
 {
   html_link_re_.setMinimal(true);
   html_link_re_.setCaseSensitivity(Qt::CaseInsensitive);
-
-  // Thanks gpodder!
-  quick_prefixes_ << QuickPrefix("fb:", "http://feeds.feedburner.com/%1")
-                  << QuickPrefix("yt:", "http://www.youtube.com/rss/user/%1/videos.rss")
-                  << QuickPrefix("sc:", "http://soundcloud.com/%1")
-                  << QuickPrefix("fm4od:", "http://onapp1.orf.at/webcam/fm4/fod/%1.xspf")
-                  << QuickPrefix("ytpl:", "http://gdata.youtube.com/feeds/api/playlists/%1");
 }
 
 PodcastUrlLoader::~PodcastUrlLoader() {
   delete parser_;
 }
 
-QUrl PodcastUrlLoader::FixPodcastUrl(const QString& url_text) const {
+QUrl PodcastUrlLoader::FixPodcastUrl(const QString& url_text) {
   QString url_text_copy(url_text.trimmed());
 
+  // Thanks gpodder!
+  static QuickPrefixList quick_prefixes = QuickPrefixList()
+      << QuickPrefix("fb:", "http://feeds.feedburner.com/%1")
+      << QuickPrefix("yt:", "http://www.youtube.com/rss/user/%1/videos.rss")
+      << QuickPrefix("sc:", "http://soundcloud.com/%1")
+      << QuickPrefix("fm4od:", "http://onapp1.orf.at/webcam/fm4/fod/%1.xspf")
+      << QuickPrefix("ytpl:", "http://gdata.youtube.com/feeds/api/playlists/%1");
+
   // Check if it matches one of the quick prefixes.
-  for (QuickPrefixList::const_iterator it = quick_prefixes_.constBegin() ;
-       it != quick_prefixes_.constEnd() ; ++it) {
+  for (QuickPrefixList::const_iterator it = quick_prefixes.constBegin() ;
+       it != quick_prefixes.constEnd() ; ++it) {
     if (url_text_copy.startsWith(it->first)) {
       url_text_copy = it->second.arg(url_text_copy.mid(it->first.length()));
     }
@@ -65,8 +66,13 @@ QUrl PodcastUrlLoader::FixPodcastUrl(const QString& url_text) const {
     url_text_copy.prepend("http://");
   }
 
+  return FixPodcastUrl(QUrl(url_text_copy));
+}
+
+QUrl PodcastUrlLoader::FixPodcastUrl(const QUrl& url_orig) {
+  QUrl url(url_orig);
+
   // Replace schemes
-  QUrl url(url_text_copy);
   if (url.scheme().isEmpty() || url.scheme() == "feed" ||
       url.scheme() == "itpc" || url.scheme() == "itms") {
     url.setScheme("http");

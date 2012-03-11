@@ -79,6 +79,13 @@ public:
   PodcastUrlLoaderReply* Load(const QString& url_text);
   PodcastUrlLoaderReply* Load(const QUrl& url);
 
+  // Both the FixPodcastUrl functions replace common podcatcher URL schemes
+  // like itpc:// or zune:// with their http:// equivalents.  The QString
+  // overload also cleans up user-entered text a bit - stripping whitespace and
+  // applying shortcuts like sc:tag.
+  static QUrl FixPodcastUrl(const QString& url_text);
+  static QUrl FixPodcastUrl(const QUrl& url);
+
 private:
   struct RequestState {
     int redirects_remaining_;
@@ -92,15 +99,12 @@ private slots:
   void RequestFinished(RequestState* state, QNetworkReply* reply);
 
 private:
-  QUrl FixPodcastUrl(const QString& url_text) const;
   void SendErrorAndDelete(const QString& error_text, RequestState* state);
   void NextRequest(const QUrl& url, RequestState* state);
 
 private:
   QNetworkAccessManager* network_;
   PodcastParser* parser_;
-
-  QuickPrefixList quick_prefixes_;
 
   QRegExp html_link_re_;
   QRegExp whitespace_re_;

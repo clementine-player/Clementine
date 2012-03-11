@@ -30,6 +30,7 @@
 #include "playlistparsers/playlistparser.h"
 #include "podcasts/podcastparser.h"
 #include "podcasts/podcastservice.h"
+#include "podcasts/podcasturlloader.h"
 
 #include <QBuffer>
 #include <QDirIterator>
@@ -94,6 +95,8 @@ SongLoader::Result SongLoader::Load(const QUrl& url) {
     AddAsRawStream();
     return Success;
   }
+
+  url_ = PodcastUrlLoader::FixPodcastUrl(url_);
 
   timeout_timer_->start(timeout_);
   return LoadRemote();
