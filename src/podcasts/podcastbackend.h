@@ -52,6 +52,7 @@ public:
   PodcastEpisodeList GetEpisodes(int podcast_id);
   PodcastEpisode GetEpisodeById(int id);
   PodcastEpisode GetEpisodeByUrl(const QUrl& url);
+  PodcastEpisode GetEpisodeByUrlOrLocalUrl(const QUrl& url);
 
   // Adds episodes to the database.  Every episode must have a valid
   // podcast_database_id set already.

@@ -37,4 +37,8 @@ CREATE INDEX podcast_idx_url ON podcasts(url);
 
 CREATE INDEX podcast_episodes_idx_podcast_id ON podcast_episodes(podcast_id);
 
+CREATE INDEX podcast_episodes_idx_url ON podcast_episodes(url);
+
+CREATE INDEX podcast_episodes_idx_local_url ON podcast_episodes(local_url);
+
 UPDATE schema_version SET version=37;

@@ -143,7 +143,7 @@ void PodcastBackend::UpdateEpisodes(const PodcastEpisodeList& episodes) {
   foreach (const PodcastEpisode& episode, episodes) {
     q.bindValue(":listened", episode.listened());
     q.bindValue(":downloaded", episode.downloaded());
-    q.bindValue(":local_url", episode.local_url());
+    q.bindValue(":local_url", episode.local_url().toEncoded());
     q.bindValue(":id", episode.database_id());
     q.exec();
     db_->CheckErrors(q);
@@ -260,7 +260,26 @@ PodcastEpisode PodcastBackend::GetEpisodeByUrl(const QUrl& url) {
   QSqlQuery q("SELECT ROWID, " + PodcastEpisode::kColumnSpec +
               " FROM podcast_episodes"
               " WHERE url = :url", db);
-  q.bindValue(":url", url);
+  q.bindValue(":url", url.toEncoded());
+  q.exec();
+  if (!db_->CheckErrors(q) && q.next()) {
+    ret.InitFromQuery(q);
+  }
+
+  return ret;
+}
+
+PodcastEpisode PodcastBackend::GetEpisodeByUrlOrLocalUrl(const QUrl& url) {
+  PodcastEpisode ret;
+
+  QMutexLocker l(db_->Mutex());
+  QSqlDatabase db(db_->Connect());
+
+  QSqlQuery q("SELECT ROWID, " + PodcastEpisode::kColumnSpec +
+              " FROM podcast_episodes"
+              " WHERE url = :url"
+              "    OR local_url = :url", db);
+  q.bindValue(":url", url.toEncoded());
   q.exec();
   if (!db_->CheckErrors(q) && q.next()) {
     ret.InitFromQuery(q);

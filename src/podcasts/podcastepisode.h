@@ -44,6 +44,8 @@ public:
 
   Song ToSong(const Podcast& podcast) const;
 
+  bool is_valid() const { return database_id() != -1; }
+
   int database_id() const;
   int podcast_database_id() const;
   const QString& title() const;

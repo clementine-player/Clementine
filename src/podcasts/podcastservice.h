@@ -78,6 +78,8 @@ private slots:
                                PodcastDownloader::State state,
                                int percent);
 
+  void CurrentSongChanged(const Song& metadata);
+
 private:
   void PopulatePodcastList(QStandardItem* parent);
   void UpdatePodcastText(QStandardItem* item, int unlistened_count) const;

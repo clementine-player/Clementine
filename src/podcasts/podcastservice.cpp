@@ -64,6 +64,8 @@ PodcastService::PodcastService(Application* app, InternetModel* parent)
   connect(backend_, SIGNAL(SubscriptionRemoved(Podcast)), SLOT(SubscriptionRemoved(Podcast)));
   connect(backend_, SIGNAL(EpisodesAdded(QList<PodcastEpisode>)), SLOT(EpisodesAdded(QList<PodcastEpisode>)));
   connect(backend_, SIGNAL(EpisodesUpdated(QList<PodcastEpisode>)), SLOT(EpisodesUpdated(QList<PodcastEpisode>)));
+
+  connect(app_->playlist_manager(), SIGNAL(CurrentSongChanged(Song)), SLOT(CurrentSongChanged(Song)));
 }
 
 PodcastService::~PodcastService() {
@@ -433,4 +435,17 @@ void PodcastService::DownloadProgressChanged(const PodcastEpisode& episode,
 
 void PodcastService::ShowConfig() {
   app_->OpenSettingsDialogAtPage(SettingsDialog::Page_Podcasts);
+}
+
+void PodcastService::CurrentSongChanged(const Song& metadata) {
+  // Check whether this song is one of our podcast episodes.
+  PodcastEpisode episode = backend_->GetEpisodeByUrlOrLocalUrl(metadata.url());
+  if (!episode.is_valid())
+    return;
+
+  // Mark it as listened if it's not already
+  if (!episode.listened()) {
+    episode.set_listened(true);
+    backend_->UpdateEpisodes(PodcastEpisodeList() << episode);
+  }
 }
