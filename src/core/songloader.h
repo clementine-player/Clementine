@@ -95,7 +95,7 @@ private:
 
   // GStreamer callbacks
   static void TypeFound(GstElement* typefind, uint probability, GstCaps* caps, void* self);
-  static void DataReady(GstPad*, GstBuffer* buf, void* self);
+  static gboolean DataReady(GstPad*, GstBuffer* buf, void* self);
   static GstBusSyncReply BusCallbackSync(GstBus*, GstMessage*, gpointer);
   static gboolean BusCallback(GstBus*, GstMessage*, gpointer);
 

@@ -473,11 +473,11 @@ void SongLoader::TypeFound(GstElement*, uint, GstCaps* caps, void* self) {
   instance->StopTypefindAsync(true);
 }
 
-void SongLoader::DataReady(GstPad*, GstBuffer* buf, void* self) {
+gboolean SongLoader::DataReady(GstPad*, GstBuffer* buf, void* self) {
   SongLoader* instance = static_cast<SongLoader*>(self);
 
   if (instance->state_ == Finished)
-    return;
+    return true;
 
   // Append the data to the buffer
   instance->buffer_.append(reinterpret_cast<const char*>(GST_BUFFER_DATA(buf)),
@@ -490,6 +490,8 @@ void SongLoader::DataReady(GstPad*, GstBuffer* buf, void* self) {
     // Got enough that we can test the magic
     instance->MagicReady();
   }
+
+  return true;
 }
 
 gboolean SongLoader::BusCallback(GstBus*, GstMessage* msg, gpointer self) {
@@ -504,11 +506,12 @@ gboolean SongLoader::BusCallback(GstBus*, GstMessage* msg, gpointer self) {
       break;
   }
 
-  return FALSE;
+  return TRUE;
 }
 
 GstBusSyncReply SongLoader::BusCallbackSync(GstBus*, GstMessage* msg, gpointer self) {
   SongLoader* instance = reinterpret_cast<SongLoader*>(self);
+
   switch (GST_MESSAGE_TYPE(msg)) {
     case GST_MESSAGE_EOS:
       instance->EndOfStreamReached();
@@ -605,9 +608,15 @@ void SongLoader::MagicReady() {
 }
 
 bool SongLoader::IsPipelinePlaying() {
-  GstState pipeline_state;
-  gst_element_get_state(pipeline_.get(), &pipeline_state, NULL, GST_MSECOND);
-  return pipeline_state == GST_STATE_PLAYING;
+  GstState state = GST_STATE_NULL;
+  GstState pending_state = GST_STATE_NULL;
+  GstStateChangeReturn ret = gst_element_get_state(pipeline_.get(), &state, &pending_state, GST_SECOND);
+
+  if (ret == GST_STATE_CHANGE_ASYNC && pending_state == GST_STATE_PLAYING) {
+    // We're still on the way to playing
+    return true;
+  }
+  return state == GST_STATE_PLAYING;
 }
 
 void SongLoader::StopTypefindAsync(bool success) {
