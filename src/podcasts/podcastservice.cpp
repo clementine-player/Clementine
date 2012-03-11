@@ -249,8 +249,7 @@ QStandardItem* PodcastService::CreatePodcastEpisodeItem(const PodcastEpisode& ep
   return item;
 }
 
-void PodcastService::ShowContextMenu(const QModelIndex& index,
-                                     const QPoint& global_pos) {
+void PodcastService::ShowContextMenu(const QPoint& global_pos) {
   if (!context_menu_) {
     context_menu_ = new QMenu;
     context_menu_->addAction(
@@ -277,16 +276,16 @@ void PodcastService::ShowContextMenu(const QModelIndex& index,
           this, SLOT(ShowConfig()));
   }
 
-  current_index_ = index;
+  current_index_ = model()->current_index();
   bool is_episode = false;
 
-  switch (index.data(InternetModel::Role_Type).toInt()) {
+  switch (current_index_.data(InternetModel::Role_Type).toInt()) {
   case Type_Podcast:
-    current_podcast_index_ = index;
+    current_podcast_index_ = current_index_;
     break;
 
   case Type_Episode:
-    current_podcast_index_ = index.parent();
+    current_podcast_index_ = current_index_.parent();
     is_episode = true;
     break;
 
@@ -322,10 +321,6 @@ void PodcastService::ReloadSettings() {
 
   use_pretty_covers_ = s.value("pretty_covers", true).toBool();
   // TODO: reload the podcast icons that are already loaded?
-}
-
-QModelIndex PodcastService::GetCurrentIndex() {
-  return current_index_;
 }
 
 void PodcastService::AddPodcast() {

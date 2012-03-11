@@ -56,11 +56,8 @@ public:
   QStandardItem* CreateRootItem();
   void LazyPopulate(QStandardItem* parent);
 
-  void ShowContextMenu(const QModelIndex& index, const QPoint& global_pos);
+  void ShowContextMenu(const QPoint& global_pos);
   void ReloadSettings();
-
-protected:
-  QModelIndex GetCurrentIndex();
 
 private slots:
   void AddPodcast();

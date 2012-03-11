@@ -56,7 +56,6 @@ DigitallyImportedServiceBase::DigitallyImportedServiceBase(
     basic_audio_type_(1),
     premium_audio_type_(2),
     root_(NULL),
-    context_item_(NULL),
     saved_channels_(kSettingsGroup, api_service_name, kStreamsCacheDurationSecs),
     api_client_(new DigitallyImportedClient(api_service_name, this))
 {
@@ -171,8 +170,7 @@ void DigitallyImportedServiceBase::ReloadSettings() {
   saved_channels_.Load();
 }
 
-void DigitallyImportedServiceBase::ShowContextMenu(
-    const QModelIndex& index, const QPoint& global_pos) {
+void DigitallyImportedServiceBase::ShowContextMenu(const QPoint& global_pos) {
   if (!context_menu_) {
     context_menu_.reset(new QMenu);
     context_menu_->addActions(GetPlaylistActions());
@@ -188,7 +186,6 @@ void DigitallyImportedServiceBase::ShowContextMenu(
                              this, SLOT(ShowSettingsDialog()));
   }
 
-  context_item_ = model()->itemFromIndex(index);
   context_menu_->popup(global_pos);
 }
 
@@ -242,10 +239,6 @@ void DigitallyImportedServiceBase::LoadStation(const QString& key) {
 
   QNetworkReply* reply = network_->get(QNetworkRequest(playlist_url));
   connect(reply, SIGNAL(finished()), SLOT(LoadPlaylistFinished()));
-}
-
-QModelIndex DigitallyImportedServiceBase::GetCurrentIndex() {
-  return context_item_->index();
 }
 
 

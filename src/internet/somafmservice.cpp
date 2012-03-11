@@ -79,7 +79,7 @@ void SomaFMService::LazyPopulate(QStandardItem* item) {
   }
 }
 
-void SomaFMService::ShowContextMenu(const QModelIndex& index, const QPoint& global_pos) {
+void SomaFMService::ShowContextMenu(const QPoint& global_pos) {
   if (!context_menu_) {
     context_menu_ = new QMenu;
     context_menu_->addActions(GetPlaylistActions());
@@ -87,7 +87,6 @@ void SomaFMService::ShowContextMenu(const QModelIndex& index, const QPoint& glob
     context_menu_->addAction(IconLoader::Load("view-refresh"), tr("Refresh channels"), this, SLOT(RefreshStreams()));
   }
 
-  context_item_ = model()->itemFromIndex(index);
   context_menu_->popup(global_pos);
 }
 
@@ -174,10 +173,6 @@ Song SomaFMService::Stream::ToSong() const {
 
 void SomaFMService::Homepage() {
   QDesktopServices::openUrl(QUrl(kHomepage));
-}
-
-QModelIndex SomaFMService::GetCurrentIndex() {
-  return context_item_->index();
 }
 
 PlaylistItem::Options SomaFMService::playlistitem_options() const {

@@ -255,11 +255,19 @@ bool InternetModel::dropMimeData(const QMimeData* data, Qt::DropAction action, i
   return true;
 }
 
-void InternetModel::ShowContextMenu(const QModelIndex& merged_model_index,
-                                 const QPoint& global_pos) {
-  InternetService* service = ServiceForIndex(merged_model_index);
+void InternetModel::ShowContextMenu(const QModelIndexList& selected_merged_model_indexes,
+                                    const QModelIndex& current_merged_model_index,
+                                    const QPoint& global_pos) {
+  current_index_ = merged_model_->mapToSource(current_merged_model_index);
+
+  selected_indexes_.clear();
+  foreach (const QModelIndex& index, selected_merged_model_indexes) {
+    selected_indexes_ << merged_model_->mapToSource(index);
+  }
+
+  InternetService* service = ServiceForIndex(current_merged_model_index);
   if (service)
-    service->ShowContextMenu(merged_model_->mapToSource(merged_model_index), global_pos);
+    service->ShowContextMenu(global_pos);
 }
 
 void InternetModel::ReloadSettings() {

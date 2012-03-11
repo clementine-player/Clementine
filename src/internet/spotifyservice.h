@@ -52,7 +52,7 @@ public:
 
   QStandardItem* CreateRootItem();
   void LazyPopulate(QStandardItem* parent);
-  void ShowContextMenu(const QModelIndex& index, const QPoint& global_pos);
+  void ShowContextMenu(const QPoint& global_pos);
   void ItemDoubleClicked(QStandardItem* item);
   void DropMimeData(const QMimeData* data, const QModelIndex& index);
   PlaylistItem::Options playlistitem_options() const;
@@ -80,9 +80,6 @@ signals:
 
 public slots:
   void ShowConfig();
-
-protected:
-  virtual QModelIndex GetCurrentIndex();
 
 private:
   void StartBlobProcess();
@@ -132,7 +129,6 @@ private:
   QMenu* context_menu_;
   QMenu* playlist_context_menu_;
   QAction* playlist_sync_action_;
-  QModelIndex context_item_;
 
   QTimer* search_delay_;
 

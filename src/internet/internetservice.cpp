@@ -94,13 +94,13 @@ void InternetService::AddItemsToPlaylist(const QModelIndexList& indexes, AddMode
 }
 
 void InternetService::AppendToPlaylist() {
-  AddItemToPlaylist(GetCurrentIndex(), AddMode_Append);
+  AddItemsToPlaylist(model()->selected_indexes(), AddMode_Append);
 }
 
 void InternetService::ReplacePlaylist() {
-  AddItemToPlaylist(GetCurrentIndex(), AddMode_Replace);
+  AddItemsToPlaylist(model()->selected_indexes(), AddMode_Replace);
 }
 
 void InternetService::OpenInNewPlaylist() {
-  AddItemToPlaylist(GetCurrentIndex(), AddMode_OpenInNew);
+  AddItemsToPlaylist(model()->selected_indexes(), AddMode_OpenInNew);
 }

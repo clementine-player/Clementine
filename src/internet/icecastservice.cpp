@@ -273,17 +273,12 @@ QWidget* IcecastService::HeaderWidget() const {
   return filter_;
 }
 
-void IcecastService::ShowContextMenu(const QModelIndex& index,
-                                     const QPoint& global_pos) {
+void IcecastService::ShowContextMenu(const QPoint& global_pos) {
   EnsureMenuCreated();
 
-  if (index.model() == model_)
-    context_item_ = index;
-  else
-    context_item_ = QModelIndex();
-
-  const bool can_play = context_item_.isValid() &&
-                        model_->GetSong(context_item_).is_valid();
+  const bool can_play = model()->current_index().isValid() &&
+                        model()->current_index().model() == model_ &&
+                        model_->GetSong(model()->current_index()).is_valid();
 
   GetAppendToPlaylistAction()->setEnabled(can_play);
   GetReplacePlaylistAction()->setEnabled(can_play);
@@ -307,8 +302,4 @@ void IcecastService::EnsureMenuCreated() {
 
 void IcecastService::Homepage() {
   QDesktopServices::openUrl(QUrl(kHomepage));
-}
-
-QModelIndex IcecastService::GetCurrentIndex() {
-  return context_item_;
 }

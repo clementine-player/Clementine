@@ -41,7 +41,7 @@ class JamendoService : public InternetService {
   QStandardItem* CreateRootItem();
   void LazyPopulate(QStandardItem* item);
 
-  void ShowContextMenu(const QModelIndex& index, const QPoint& global_pos);
+  void ShowContextMenu(const QPoint& global_pos);
 
   QWidget* HeaderWidget() const;
 
@@ -65,9 +65,6 @@ class JamendoService : public InternetService {
 
   static const int kBatchSize;
   static const int kApproxDatabaseSize;
-
- protected:
-  QModelIndex GetCurrentIndex();
 
  private:
   void ParseDirectory(QIODevice* device) const;
@@ -102,7 +99,6 @@ class JamendoService : public InternetService {
   NetworkAccessManager* network_;
 
   QMenu* context_menu_;
-  QModelIndex context_item_;
 
   QAction* album_info_;
   QAction* download_album_;

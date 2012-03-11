@@ -288,23 +288,16 @@ void MagnatuneService::EnsureMenuCreated() {
   context_menu_->addMenu(library_filter_->menu());
 }
 
-void MagnatuneService::ShowContextMenu(const QModelIndex& index, const QPoint& global_pos) {
+void MagnatuneService::ShowContextMenu(const QPoint& global_pos) {
   EnsureMenuCreated();
 
-  if (index.model() == library_sort_model_)
-    context_item_ = index;
-  else
-    context_item_ = QModelIndex();
+  const bool is_valid = model()->current_index().model() == library_sort_model_;
 
-  GetAppendToPlaylistAction()->setEnabled(context_item_.isValid());
-  GetReplacePlaylistAction()->setEnabled(context_item_.isValid());
-  GetOpenInNewPlaylistAction()->setEnabled(context_item_.isValid());
-  download_->setEnabled(context_item_.isValid() && membership_ == Membership_Download);
+  GetAppendToPlaylistAction()->setEnabled(is_valid);
+  GetReplacePlaylistAction()->setEnabled(is_valid);
+  GetOpenInNewPlaylistAction()->setEnabled(is_valid);
+  download_->setEnabled(is_valid && membership_ == Membership_Download);
   context_menu_->popup(global_pos);
-}
-
-QModelIndex MagnatuneService::GetCurrentIndex() {
-  return context_item_;
 }
 
 void MagnatuneService::Homepage() {
@@ -345,7 +338,7 @@ void MagnatuneService::ShowConfig() {
 }
 
 void MagnatuneService::Download() {
-  QModelIndex index = library_sort_model_->mapToSource(context_item_);
+  QModelIndex index = library_sort_model_->mapToSource(model()->current_index());
   SongList songs = library_model_->GetChildSongs(index);
 
   MagnatuneDownloadDialog* dialog = new MagnatuneDownloadDialog(this, 0);

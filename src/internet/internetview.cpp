@@ -39,7 +39,8 @@ void InternetView::contextMenuEvent(QContextMenuEvent* e) {
   MergedProxyModel* merged_model = static_cast<MergedProxyModel*>(model());
   InternetModel* internet_model = static_cast<InternetModel*>(merged_model->sourceModel());
 
-  internet_model->ShowContextMenu(index, e->globalPos());
+  internet_model->ShowContextMenu(selectionModel()->selectedRows(), index,
+                                  e->globalPos());
 }
 
 void InternetView::currentChanged(const QModelIndex &current, const QModelIndex&) {

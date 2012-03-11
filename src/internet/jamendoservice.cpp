@@ -427,16 +427,11 @@ void JamendoService::EnsureMenuCreated() {
   }
 }
 
-void JamendoService::ShowContextMenu(const QModelIndex& index, const QPoint& global_pos) {
+void JamendoService::ShowContextMenu(const QPoint& global_pos) {
   EnsureMenuCreated();
 
-  if (index.model() == library_sort_model_) {
-    context_item_ = index;
-  } else {
-    context_item_ = QModelIndex();
-  }
-
-  const bool enabled = accepted_download_ && context_item_.isValid();
+  const bool enabled = accepted_download_ &&
+                       model()->current_index().model() == library_sort_model_;
 
   //make menu items visible and enabled only when needed
   GetAppendToPlaylistAction()->setVisible(accepted_download_);
@@ -458,13 +453,9 @@ QWidget* JamendoService::HeaderWidget() const {
   return library_filter_;
 }
 
-QModelIndex JamendoService::GetCurrentIndex() {
-  return context_item_;
-}
-
 void JamendoService::AlbumInfo() {
   SongList songs(library_model_->GetChildSongs(
-      library_sort_model_->mapToSource(context_item_)));
+      library_sort_model_->mapToSource(model()->current_index())));
   if (songs.isEmpty())
     return;
 
@@ -478,7 +469,7 @@ void JamendoService::AlbumInfo() {
 
 void JamendoService::DownloadAlbum() {
   SongList songs(library_model_->GetChildSongs(
-      library_sort_model_->mapToSource(context_item_)));
+      library_sort_model_->mapToSource(model()->current_index())));
   if (songs.isEmpty())
     return;
 

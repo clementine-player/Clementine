@@ -428,13 +428,15 @@ void GroovesharkService::ResetSessionId() {
   s.setValue("sessionid", session_id_);
 }
 
-void GroovesharkService::ShowContextMenu(const QModelIndex& index, const QPoint& global_pos) {
+void GroovesharkService::ShowContextMenu(const QPoint& global_pos) {
   EnsureMenuCreated();
 
   // Check if we should display actions
   bool  display_delete_playlist_action = false,
         display_remove_from_playlist_action = false,
         display_remove_from_favorites_action = false;
+
+  QModelIndex index(model()->current_index());
 
   if (index.data(InternetModel::Role_Type).toInt() == InternetModel::Type_UserPlaylist &&
       index.data(Role_PlaylistType).toInt() == UserPlaylist) {
@@ -457,11 +459,6 @@ void GroovesharkService::ShowContextMenu(const QModelIndex& index, const QPoint&
   remove_from_favorites_->setVisible(display_remove_from_favorites_action);
 
   context_menu_->popup(global_pos);
-  context_item_ = index;
-}
-
-QModelIndex GroovesharkService::GetCurrentIndex() {
-  return context_item_;
 }
 
 void GroovesharkService::UpdateTotalSongCount(int count) {
@@ -1153,12 +1150,12 @@ void GroovesharkService::NewPlaylistCreated(QNetworkReply* reply, const QString&
 }
 
 void GroovesharkService::DeleteCurrentPlaylist() {
-  if (context_item_.data(InternetModel::Role_Type).toInt() !=
+  if (model()->current_index().data(InternetModel::Role_Type).toInt() !=
       InternetModel::Type_UserPlaylist) {
     return;
   }
 
-  int playlist_id = context_item_.data(Role_UserPlaylistId).toInt();
+  int playlist_id = model()->current_index().data(Role_UserPlaylistId).toInt();
   DeletePlaylist(playlist_id);
 }
 
@@ -1197,12 +1194,14 @@ void GroovesharkService::PlaylistDeleted(QNetworkReply* reply, int playlist_id) 
 }
 
 void GroovesharkService::RenameCurrentPlaylist() {
-  if (context_item_.data(InternetModel::Role_Type).toInt() != InternetModel::Type_UserPlaylist
-      || context_item_.data(Role_PlaylistType).toInt() != UserPlaylist) {
+  const QModelIndex& index(model()->current_index());
+
+  if (index.data(InternetModel::Role_Type).toInt() != InternetModel::Type_UserPlaylist
+      || index.data(Role_PlaylistType).toInt() != UserPlaylist) {
     return;
   }
 
-  int playlist_id = context_item_.data(Role_UserPlaylistId).toInt();
+  const int playlist_id = index.data(Role_UserPlaylistId).toInt();
   RenamePlaylist(playlist_id);
 }
 
@@ -1269,13 +1268,15 @@ void GroovesharkService::UserFavoriteSongAdded(QNetworkReply* reply, int task_id
 }
 
 void GroovesharkService::RemoveCurrentFromPlaylist() {
-  if (context_item_.parent().data(InternetModel::Role_Type).toInt() !=
+  const QModelIndex& index(model()->current_index());
+
+  if (index.parent().data(InternetModel::Role_Type).toInt() !=
       InternetModel::Type_UserPlaylist) {
     return;
   }
 
-  int playlist_id = context_item_.data(Role_UserPlaylistId).toInt();
-  int song_id = ExtractSongId(context_item_.data(InternetModel::Role_Url).toUrl());
+  int playlist_id = index.data(Role_UserPlaylistId).toInt();
+  int song_id = ExtractSongId(index.data(InternetModel::Role_Url).toUrl());
   if (song_id) {
     RemoveFromPlaylist(playlist_id, song_id);
   }
@@ -1293,11 +1294,13 @@ void GroovesharkService::RemoveFromPlaylist(int playlist_id, int song_id) {
 }
 
 void GroovesharkService::RemoveCurrentFromFavorites() {
-  if (context_item_.parent().data(Role_PlaylistType).toInt() != UserFavorites) {
+  const QModelIndex& index(model()->current_index());
+
+  if (index.parent().data(Role_PlaylistType).toInt() != UserFavorites) {
     return;
   }
 
-  int song_id = ExtractSongId(context_item_.data(InternetModel::Role_Url).toUrl());
+  int song_id = ExtractSongId(index.data(InternetModel::Role_Url).toUrl());
   if (song_id) {
     RemoveFromFavorites(song_id);
   }

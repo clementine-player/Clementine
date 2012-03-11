@@ -126,10 +126,6 @@ void SpotifyService::LazyPopulate(QStandardItem* item) {
   return;
 }
 
-QModelIndex SpotifyService::GetCurrentIndex() {
-  return QModelIndex();
-}
-
 void SpotifyService::Login(const QString& username, const QString& password) {
   Logout();
   EnsureServerCreated(username, password);
@@ -584,9 +580,9 @@ SpotifyServer* SpotifyService::server() const {
   return server_;
 }
 
-void SpotifyService::ShowContextMenu(const QModelIndex& index, const QPoint& global_pos) {
+void SpotifyService::ShowContextMenu(const QPoint& global_pos) {
   EnsureMenuCreated();
-  QStandardItem* item = model()->itemFromIndex(index);
+  QStandardItem* item = model()->itemFromIndex(model()->current_index());
   if (item) {
     int type = item->data(InternetModel::Role_Type).toInt();
     if (type == Type_InboxPlaylist ||
