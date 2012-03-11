@@ -47,7 +47,7 @@ QUrl PodcastUrlLoader::FixPodcastUrl(const QString& url_text) {
   QString url_text_copy(url_text.trimmed());
 
   // Thanks gpodder!
-  static QuickPrefixList quick_prefixes = QuickPrefixList()
+  QuickPrefixList quick_prefixes = QuickPrefixList()
       << QuickPrefix("fb:", "http://feeds.feedburner.com/%1")
       << QuickPrefix("yt:", "http://www.youtube.com/rss/user/%1/videos.rss")
       << QuickPrefix("sc:", "http://soundcloud.com/%1")
