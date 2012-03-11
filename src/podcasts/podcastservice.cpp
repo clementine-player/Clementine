@@ -249,6 +249,16 @@ QStandardItem* PodcastService::CreatePodcastEpisodeItem(const PodcastEpisode& ep
   return item;
 }
 
+QModelIndexList PodcastService::FilterByType(int type, const QModelIndexList& list) const {
+  QModelIndexList ret;
+  foreach (const QModelIndex& index, list) {
+    if (index.data(InternetModel::Role_Type).toInt() == type) {
+      ret.append(index);
+    }
+  }
+  return ret;
+}
+
 void PodcastService::ShowContextMenu(const QPoint& global_pos) {
   if (!context_menu_) {
     context_menu_ = new QMenu;
@@ -263,12 +273,21 @@ void PodcastService::ShowContextMenu(const QPoint& global_pos) {
     update_selected_action_ = context_menu_->addAction(
           IconLoader::Load("view-refresh"), tr("Update this podcast"),
           this, SLOT(UpdateSelectedPodcast()));
+    download_selected_action_ = context_menu_->addAction(
+          IconLoader::Load("download"), "",
+          this, SLOT(DownloadSelectedEpisode()));
+    delete_downloaded_action_ = context_menu_->addAction(
+          IconLoader::Load("edit-delete"), tr("Delete downloaded data"),
+          this, SLOT(DeleteDownloadedData()));
     remove_selected_action_ = context_menu_->addAction(
           IconLoader::Load("list-remove"), tr("Unsubscribe"),
           this, SLOT(RemoveSelectedPodcast()));
-    download_selected_action_ = context_menu_->addAction(
-          IconLoader::Load("download"), tr("Download this episode"),
-          this, SLOT(DownloadSelectedEpisode()));
+
+    context_menu_->addSeparator();
+    set_new_action_ = context_menu_->addAction(
+          tr("Mark as new"), this, SLOT(SetNew()));
+    set_listened_action_ = context_menu_->addAction(
+          tr("Mark as listened"), this, SLOT(SetListened()));
 
     context_menu_->addSeparator();
     context_menu_->addAction(
@@ -276,43 +295,78 @@ void PodcastService::ShowContextMenu(const QPoint& global_pos) {
           this, SLOT(ShowConfig()));
   }
 
-  current_index_ = model()->current_index();
-  bool is_episode = false;
+  selected_episodes_.clear();
+  selected_podcasts_.clear();
+  QSet<int> podcast_ids;
 
-  switch (current_index_.data(InternetModel::Role_Type).toInt()) {
-  case Type_Podcast:
-    current_podcast_index_ = current_index_;
-    break;
+  foreach (const QModelIndex& index, model()->selected_indexes()) {
+    switch (index.data(InternetModel::Role_Type).toInt()) {
+    case Type_Podcast: {
+      const int id = index.data(Role_Podcast).value<Podcast>().database_id();
+      if (!podcast_ids.contains(id)) {
+        selected_podcasts_.append(index);
+        podcast_ids.insert(id);
+      }
+      break;
+    }
 
-  case Type_Episode:
-    current_podcast_index_ = current_index_.parent();
-    is_episode = true;
-    break;
+    case Type_Episode: {
+      selected_episodes_.append(index);
 
-  default:
-    current_podcast_index_ = QModelIndex();
-    break;
+      // Add the parent podcast as well.
+      const QModelIndex parent = index.parent();
+      const int id = parent.data(Role_Podcast).value<Podcast>().database_id();
+      if (!podcast_ids.contains(id)) {
+        selected_podcasts_.append(parent);
+        podcast_ids.insert(id);
+      }
+      break;
+    }
+    }
   }
 
-  update_selected_action_->setVisible(current_podcast_index_.isValid());
-  remove_selected_action_->setVisible(current_podcast_index_.isValid());
-  download_selected_action_->setVisible(is_episode);
+  const bool episodes = !selected_episodes_.isEmpty();
+  const bool podcasts = !selected_podcasts_.isEmpty();
+
+  update_selected_action_->setEnabled(podcasts);
+  remove_selected_action_->setEnabled(podcasts);
+
+  if (selected_episodes_.count() == 1) {
+    const PodcastEpisode episode = selected_episodes_[0].data(Role_Episode).value<PodcastEpisode>();
+    const bool downloaded = episode.downloaded();
+    const bool listened = episode.listened();
+
+    download_selected_action_->setEnabled(!downloaded);
+    delete_downloaded_action_->setEnabled(downloaded);
+    set_new_action_->setEnabled(listened);
+    set_listened_action_->setEnabled(!listened);
+  } else {
+    download_selected_action_->setEnabled(episodes);
+    delete_downloaded_action_->setEnabled(episodes);
+    set_new_action_->setEnabled(episodes);
+    set_listened_action_->setEnabled(episodes);
+  }
+
+  if (selected_episodes_.count() > 1) {
+    download_selected_action_->setText(tr("Download %n episodes", "", selected_episodes_.count()));
+  } else {
+    download_selected_action_->setText(tr("Download this episode"));
+  }
+
   context_menu_->popup(global_pos);
 }
 
 void PodcastService::UpdateSelectedPodcast() {
-  if (!current_podcast_index_.isValid())
-    return;
-
-  app_->podcast_updater()->UpdatePodcastNow(
-        current_podcast_index_.data(Role_Podcast).value<Podcast>());
+  foreach (const QModelIndex& index, selected_podcasts_) {
+    app_->podcast_updater()->UpdatePodcastNow(
+          index.data(Role_Podcast).value<Podcast>());
+  }
 }
 
 void PodcastService::RemoveSelectedPodcast() {
-  if (!current_podcast_index_.isValid())
-    return;
-
-  backend_->Unsubscribe(current_podcast_index_.data(Role_Podcast).value<Podcast>());
+  foreach (const QModelIndex& index, selected_podcasts_) {
+    backend_->Unsubscribe(index.data(Role_Podcast).value<Podcast>());
+  }
 }
 
 void PodcastService::ReloadSettings() {
@@ -414,8 +468,17 @@ void PodcastService::EpisodesUpdated(const QList<PodcastEpisode>& episodes) {
 }
 
 void PodcastService::DownloadSelectedEpisode() {
-  app_->podcast_downloader()->DownloadEpisode(
-        current_index_.data(Role_Episode).value<PodcastEpisode>());
+  foreach (const QModelIndex& index, selected_episodes_) {
+    app_->podcast_downloader()->DownloadEpisode(
+          index.data(Role_Episode).value<PodcastEpisode>());
+  }
+}
+
+void PodcastService::DeleteDownloadedData() {
+  foreach (const QModelIndex& index, selected_episodes_) {
+    app_->podcast_downloader()->DeleteEpisode(
+          index.data(Role_Episode).value<PodcastEpisode>());
+  }
 }
 
 void PodcastService::DownloadProgressChanged(const PodcastEpisode& episode,
@@ -443,4 +506,24 @@ void PodcastService::CurrentSongChanged(const Song& metadata) {
     episode.set_listened(true);
     backend_->UpdateEpisodes(PodcastEpisodeList() << episode);
   }
+}
+
+void PodcastService::SetNew() {
+  SetListened(selected_episodes_, false);
+}
+
+void PodcastService::SetListened() {
+  SetListened(selected_episodes_, true);
+}
+
+void PodcastService::SetListened(const QModelIndexList& indexes, bool listened) {
+  PodcastEpisodeList episodes;
+
+  foreach (const QModelIndex& index, indexes) {
+    PodcastEpisode episode = index.data(Role_Episode).value<PodcastEpisode>();
+    episode.set_listened(listened);
+    episodes << episode;
+  }
+
+  backend_->UpdateEpisodes(episodes);
 }

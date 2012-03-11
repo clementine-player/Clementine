@@ -64,6 +64,9 @@ private slots:
   void UpdateSelectedPodcast();
   void RemoveSelectedPodcast();
   void DownloadSelectedEpisode();
+  void DeleteDownloadedData();
+  void SetNew();
+  void SetListened();
   void ShowConfig();
 
   void SubscriptionAdded(const Podcast& podcast);
@@ -87,6 +90,10 @@ private:
   QStandardItem* CreatePodcastItem(const Podcast& podcast);
   QStandardItem* CreatePodcastEpisodeItem(const PodcastEpisode& episode);
 
+  QModelIndexList FilterByType(int type, const QModelIndexList& list) const;
+
+  void SetListened(const QModelIndexList& indexes, bool listened);
+
 private:
   bool use_pretty_covers_;
   StandardItemIconLoader* icon_loader_;
@@ -107,10 +114,13 @@ private:
   QAction* update_selected_action_;
   QAction* remove_selected_action_;
   QAction* download_selected_action_;
+  QAction* delete_downloaded_action_;
+  QAction* set_new_action_;
+  QAction* set_listened_action_;
   QStandardItem* root_;
 
-  QModelIndex current_index_;
-  QModelIndex current_podcast_index_;
+  QModelIndexList selected_podcasts_;
+  QModelIndexList selected_episodes_;
 
   QMap<int, QStandardItem*> podcasts_by_database_id_;
   QMap<int, QStandardItem*> episodes_by_database_id_;

@@ -97,6 +97,23 @@ void PodcastDownloader::DownloadEpisode(const PodcastEpisode& episode) {
   }
 }
 
+void PodcastDownloader::DeleteEpisode(const PodcastEpisode& episode) {
+  if (!episode.downloaded() || downloading_episode_ids_.contains(episode.database_id()))
+    return;
+
+  // Delete the local file
+  if (!QFile::remove(episode.local_url().toLocalFile())) {
+    qLog(Warning) << "The local file" << episode.local_url().toLocalFile()
+                  << "could not be removed";
+  }
+
+  // Update the episode in the DB
+  PodcastEpisode episode_copy(episode);
+  episode_copy.set_downloaded(false);
+  episode_copy.set_local_url(QUrl());
+  backend_->UpdateEpisodes(PodcastEpisodeList() << episode_copy);
+}
+
 void PodcastDownloader::FinishAndDelete(Task* task) {
   downloading_episode_ids_.remove(task->episode.database_id());
   emit ProgressChanged(task->episode, Finished, 0);

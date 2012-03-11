@@ -53,6 +53,9 @@ public slots:
   // Adds the episode to the download queue
   void DownloadEpisode(const PodcastEpisode& episode);
 
+  // Deletes downloaded data for this episode
+  void DeleteEpisode(const PodcastEpisode& episode);
+
 signals:
   void ProgressChanged(const PodcastEpisode& episode,
                        PodcastDownloader::State state, int percent);
