@@ -60,6 +60,12 @@
 
 #include <QtDebug>
 
+QDebug operator <<(QDebug dbg, NSObject* object) {
+  QString ns_format = [[NSString stringWithFormat: @"%@", object] UTF8String];
+  dbg.nospace() << ns_format;
+  return dbg.space();
+}
+
 // Capture global media keys on Mac (Cocoa only!)
 // See: http://www.rogueamoeba.com/utm/2007/09/29/apple-keyboard-media-key-event-handling/
 
@@ -165,8 +171,7 @@ static BreakpadRef InitBreakpad() {
 }
 
 - (void) application: (NSApplication*)app openFiles:(NSArray*)filenames {
-  qLog(Debug) << "Wants to open:";
-  NSLog(@"%@", filenames);
+  qLog(Debug) << "Wants to open:" << filenames;
   [filenames enumerateObjectsUsingBlock:^(id object, NSUInteger idx, BOOL* stop) {
     [self application:app openFile:(NSString*)object];
   }];
