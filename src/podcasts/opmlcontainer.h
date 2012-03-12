@@ -20,7 +20,8 @@
 
 #include "podcast.h"
 
-struct OpmlContainer {
+class OpmlContainer {
+public:
   // Only set for the top-level container
   QUrl url;
 
