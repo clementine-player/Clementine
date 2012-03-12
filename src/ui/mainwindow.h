@@ -208,6 +208,7 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   void AddStream();
   void AddStreamAccepted();
   void AddCDTracks();
+  void AddPodcast();
 
   void CommandlineOptionsReceived(const QByteArray& serialized_options);
 

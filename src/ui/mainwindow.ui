@@ -418,7 +418,7 @@
      <x>0</x>
      <y>0</y>
      <width>1131</width>
-     <height>22</height>
+     <height>23</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_music">
@@ -427,6 +427,7 @@
     </property>
     <addaction name="action_open_media"/>
     <addaction name="action_open_cd"/>
+    <addaction name="action_add_podcast"/>
     <addaction name="separator"/>
     <addaction name="action_previous_track"/>
     <addaction name="action_play_pause"/>
@@ -839,6 +840,15 @@
   <action name="action_toggle_scrobbling">
    <property name="text">
     <string>Toggle scrobbling</string>
+   </property>
+  </action>
+  <action name="action_add_podcast">
+   <property name="icon">
+    <iconset resource="../../data/data.qrc">
+     <normaloff>:/providers/podcast16.png</normaloff>:/providers/podcast16.png</iconset>
+   </property>
+   <property name="text">
+    <string>Add podcast...</string>
    </property>
   </action>
  </widget>

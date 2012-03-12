@@ -199,8 +199,11 @@ void AddPodcastDialog::PodcastDoubleClicked(const QModelIndex& index) {
     return;
   }
 
-  Podcast podcast = podcast_variant.value<Podcast>();
-  app_->podcast_backend()->Subscribe(&podcast);
+  current_podcast_ = podcast_variant.value<Podcast>();
+  app_->podcast_backend()->Subscribe(&current_podcast_);
+  
+  add_button_->setEnabled(false);
+  remove_button_->setEnabled(true);
 }
 
 void AddPodcastDialog::RemovePodcast() {

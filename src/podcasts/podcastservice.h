@@ -52,7 +52,7 @@ public:
     Role_Podcast = InternetModel::RoleCount,
     Role_Episode
   };
-
+  
   QStandardItem* CreateRootItem();
   void LazyPopulate(QStandardItem* parent);
 
@@ -63,9 +63,11 @@ public:
   // subscription to the podcast and displays it in the UI.  If the QVariant
   // contains an OPML file then this displays it in the Add Podcast dialog.
   void SubscribeAndShow(const QVariant& podcast_or_opml);
+  
+public slots:
+  void AddPodcast();
 
 private slots:
-  void AddPodcast();
   void UpdateSelectedPodcast();
   void RemoveSelectedPodcast();
   void DownloadSelectedEpisode();
@@ -100,6 +102,8 @@ private:
   QModelIndex MapToMergedModel(const QModelIndex& index) const;
 
   void SetListened(const QModelIndexList& indexes, bool listened);
+  
+  void LazyLoadRoot();
 
 private:
   bool use_pretty_covers_;
@@ -131,8 +135,6 @@ private:
 
   QMap<int, QStandardItem*> podcasts_by_database_id_;
   QMap<int, QStandardItem*> episodes_by_database_id_;
-
-  QSet<int> scroll_to_database_id_;
 
   QScopedPointer<AddPodcastDialog> add_podcast_dialog_;
 };

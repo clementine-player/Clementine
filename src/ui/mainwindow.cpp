@@ -65,6 +65,7 @@
 #include "playlist/queuemanager.h"
 #include "playlist/songplaylistitem.h"
 #include "playlistparsers/playlistparser.h"
+#include "podcasts/podcastservice.h"
 #include "smartplaylists/generator.h"
 #include "smartplaylists/generatormimedata.h"
 #include "songinfo/artistinfoview.h"
@@ -330,6 +331,7 @@ MainWindow::MainWindow(Application* app,
   connect(ui_->action_add_file, SIGNAL(triggered()), SLOT(AddFile()));
   connect(ui_->action_add_folder, SIGNAL(triggered()), SLOT(AddFolder()));
   connect(ui_->action_add_stream, SIGNAL(triggered()), SLOT(AddStream()));
+  connect(ui_->action_add_podcast, SIGNAL(triggered()), SLOT(AddPodcast()));
   connect(ui_->action_cover_manager, SIGNAL(triggered()), SLOT(ShowCoverManager()));
   connect(ui_->action_equalizer, SIGNAL(triggered()), equalizer_.get(), SLOT(show()));
   connect(ui_->action_transcode, SIGNAL(triggered()), SLOT(ShowTranscodeDialog()));
@@ -2234,4 +2236,8 @@ void MainWindow::HandleNotificationPreview(OSD::Behaviour type, QString line1, Q
 void MainWindow::ScrollToInternetIndex(const QModelIndex& index) {
   internet_view_->ScrollToIndex(index);
   ui_->tabs->SetCurrentWidget(internet_view_);
+}
+
+void MainWindow::AddPodcast() {
+  app_->internet_model()->Service<PodcastService>()->AddPodcast();
 }

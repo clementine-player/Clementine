@@ -380,17 +380,18 @@ void PodcastService::AddPodcast() {
 }
 
 void PodcastService::SubscriptionAdded(const Podcast& podcast) {
-  // If the user hasn't expanded the root node yet we don't need to do anything
-  if (root_->data(InternetModel::Role_CanLazyLoad).toBool()) {
-    return;
+  // Ensure the root item is lazy loaded already
+  LazyLoadRoot();
+  
+  // The podcast might already be in the list - maybe the LazyLoadRoot() above
+  // added it.
+  QStandardItem* item = podcasts_by_database_id_[podcast.database_id()];
+  if (!item) {
+    item = CreatePodcastItem(podcast);
+    model_->appendRow(item);
   }
 
-  QStandardItem* item = CreatePodcastItem(podcast);
-  model_->appendRow(item);
-
-  if (scroll_to_database_id_.remove(podcast.database_id())) {
-    emit ScrollToIndex(MapToMergedModel(item->index()));
-  }
+  emit ScrollToIndex(MapToMergedModel(item->index()));
 }
 
 void PodcastService::SubscriptionRemoved(const Podcast& podcast) {
@@ -531,25 +532,26 @@ QModelIndex PodcastService::MapToMergedModel(const QModelIndex& index) const {
   return model()->merged_model()->mapFromSource(proxy_->mapFromSource(index));
 }
 
+void PodcastService::LazyLoadRoot() {
+  if (root_->data(InternetModel::Role_CanLazyLoad).toBool()) {
+    root_->setData(false, InternetModel::Role_CanLazyLoad);
+    LazyPopulate(root_);
+  }
+}
+
 void PodcastService::SubscribeAndShow(const QVariant& podcast_or_opml) {
   if (podcast_or_opml.canConvert<Podcast>()) {
     Podcast podcast(podcast_or_opml.value<Podcast>());
     backend_->Subscribe(&podcast);
 
     // Lazy load the root item if it hasn't been already
-    if (root_->data(InternetModel::Role_CanLazyLoad).toBool()) {
-      root_->setData(false, InternetModel::Role_CanLazyLoad);
-      LazyPopulate(root_);
-    }
+    LazyLoadRoot();
 
     QStandardItem* item = podcasts_by_database_id_[podcast.database_id()];
     if (item) {
-      // There will be an item already if this podcast was already there.
+      // There will be an item already if this podcast was already there,
+      // otherwise it'll be scrolled to when the item is created.
       emit ScrollToIndex(MapToMergedModel(item->index()));
-    } else {
-      // Otherwise we can remember the podcast ID and scroll to it when the
-      // item is created.
-      scroll_to_database_id_.insert(podcast.database_id());
     }
   } else if (podcast_or_opml.canConvert<OpmlContainer>()) {
     EnsureAddPodcastDialogCreated();
