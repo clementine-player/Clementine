@@ -50,6 +50,12 @@ bool WidgetFadeHelper::eventFilter(QObject* obj, QEvent* event) {
   if (!isVisible())
     return false;
 
+  QResizeEvent* re = static_cast<QResizeEvent*>(event);
+  if (re->oldSize() == re->size()) {
+    // Ignore phoney resize events
+    return false;
+  }
+
   // Get a new capture of the parent
   hide();
   CaptureParent();
