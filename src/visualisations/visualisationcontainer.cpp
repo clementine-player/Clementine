@@ -29,6 +29,7 @@
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QMenu>
+#include <QMessageBox>
 #include <QSettings>
 #include <QShortcut>
 #include <QSignalMapper>
@@ -138,6 +139,13 @@ void VisualisationContainer::SetEngine(GstEngine* engine) {
 
 void VisualisationContainer::showEvent(QShowEvent* e) {
   if (!initialised_) {
+    if (!QGLFormat::hasOpenGL()) {
+      hide();
+      QMessageBox::warning(this, tr("Clementine Visualization"),
+          tr("Your system is missing OpenGL support, visualizations are unavailable."),
+          QMessageBox::Close);
+      return;
+    }
     Init();
     initialised_ = true;
   }
