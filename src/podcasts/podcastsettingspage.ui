@@ -112,6 +112,9 @@
       <string>Cleaning up</string>
      </property>
      <layout class="QFormLayout" name="formLayout_2">
+      <property name="fieldGrowthPolicy">
+       <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+      </property>
       <item row="0" column="0">
        <widget class="QLabel" name="label_2">
         <property name="text">
@@ -135,13 +138,6 @@
         </property>
         <property name="empty_text" stdset="0">
          <string/>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="0" colspan="2">
-       <widget class="QCheckBox" name="delete_unplayed">
-        <property name="text">
-         <string>Also delete unplayed episodes</string>
         </property>
        </widget>
       </item>
@@ -256,7 +252,6 @@
   <tabstop>download_dir_browse</tabstop>
   <tabstop>auto_download</tabstop>
   <tabstop>delete_after</tabstop>
-  <tabstop>delete_unplayed</tabstop>
   <tabstop>username</tabstop>
   <tabstop>password</tabstop>
   <tabstop>device_name</tabstop>

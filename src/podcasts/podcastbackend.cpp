@@ -136,12 +136,14 @@ void PodcastBackend::UpdateEpisodes(const PodcastEpisodeList& episodes) {
 
   QSqlQuery q("UPDATE podcast_episodes"
               " SET listened = :listened,"
+              "     listened_date = :listened_date,"
               "     downloaded = :downloaded,"
               "     local_url = :local_url"
               " WHERE ROWID = :id", db);
 
   foreach (const PodcastEpisode& episode, episodes) {
     q.bindValue(":listened", episode.listened());
+    q.bindValue(":listened_date", episode.listened_date().toTime_t());
     q.bindValue(":downloaded", episode.downloaded());
     q.bindValue(":local_url", episode.local_url().toEncoded());
     q.bindValue(":id", episode.database_id());
@@ -283,6 +285,30 @@ PodcastEpisode PodcastBackend::GetEpisodeByUrlOrLocalUrl(const QUrl& url) {
   q.exec();
   if (!db_->CheckErrors(q) && q.next()) {
     ret.InitFromQuery(q);
+  }
+
+  return ret;
+}
+
+PodcastEpisodeList PodcastBackend::GetOldDownloadedEpisodes(const QDateTime& max_listened_date) {
+  PodcastEpisodeList ret;
+
+  QMutexLocker l(db_->Mutex());
+  QSqlDatabase db(db_->Connect());
+
+  QSqlQuery q("SELECT ROWID, " + PodcastEpisode::kColumnSpec +
+              " FROM podcast_episodes"
+              " WHERE downloaded = 'true'"
+              "   AND listened_date <= :max_listened_date", db);
+  q.bindValue(":max_listened_date", max_listened_date.toTime_t());
+  q.exec();
+  if (db_->CheckErrors(q))
+    return ret;
+
+  while (q.next()) {
+    PodcastEpisode episode;
+    episode.InitFromQuery(q);
+    ret << episode;
   }
 
   return ret;

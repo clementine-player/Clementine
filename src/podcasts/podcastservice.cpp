@@ -511,6 +511,7 @@ void PodcastService::CurrentSongChanged(const Song& metadata) {
   // Mark it as listened if it's not already
   if (!episode.listened()) {
     episode.set_listened(true);
+    episode.set_listened_date(QDateTime::currentDateTime());
     backend_->UpdateEpisodes(PodcastEpisodeList() << episode);
   }
 }
@@ -526,9 +527,14 @@ void PodcastService::SetListened() {
 void PodcastService::SetListened(const QModelIndexList& indexes, bool listened) {
   PodcastEpisodeList episodes;
 
+  QDateTime current_date_time = QDateTime::currentDateTime();
+
   foreach (const QModelIndex& index, indexes) {
     PodcastEpisode episode = index.data(Role_Episode).value<PodcastEpisode>();
     episode.set_listened(listened);
+    if (listened) {
+      episode.set_listened_date(current_date_time);
+    }
     episodes << episode;
   }
 

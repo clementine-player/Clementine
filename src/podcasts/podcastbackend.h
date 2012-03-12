@@ -48,18 +48,24 @@ public:
   Podcast GetSubscriptionById(int id);
   Podcast GetSubscriptionByUrl(const QUrl& url);
 
-  // Returns a list of the episodes in the podcast with the given ID.
+  // Returns podcast episodes that match various keys.  All these queries are
+  // indexed.
   PodcastEpisodeList GetEpisodes(int podcast_id);
   PodcastEpisode GetEpisodeById(int id);
   PodcastEpisode GetEpisodeByUrl(const QUrl& url);
   PodcastEpisode GetEpisodeByUrlOrLocalUrl(const QUrl& url);
 
+  // Returns a list of episodes that have local data (downloaded=true) but were
+  // last listened to before the given QDateTime.  This query is NOT indexed so
+  // it involves a full search of the table.
+  PodcastEpisodeList GetOldDownloadedEpisodes(const QDateTime& max_listened_date);
+
   // Adds episodes to the database.  Every episode must have a valid
   // podcast_database_id set already.
   void AddEpisodes(PodcastEpisodeList* episodes);
 
-  // Updates the editable fields (listened, downloaded, and local_url) on
-  // episodes that must already exist in the database.
+  // Updates the editable fields (listened, listened_date, downloaded, and
+  // local_url) on episodes that must already exist in the database.
   void UpdateEpisodes(const PodcastEpisodeList& episodes);
   
 signals:

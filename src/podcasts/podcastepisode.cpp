@@ -29,7 +29,7 @@
 const QStringList PodcastEpisode::kColumns = QStringList()
     << "podcast_id" << "title" << "description" << "author"
     << "publication_date" << "duration_secs" << "url" << "listened"
-    << "downloaded" << "local_url" << "extra";
+    << "listened_date" << "downloaded" << "local_url" << "extra";
 
 const QString PodcastEpisode::kColumnSpec = PodcastEpisode::kColumns.join(", ");
 const QString PodcastEpisode::kJoinSpec = Utilities::Prepend("e.", PodcastEpisode::kColumns).join(", ");
@@ -50,8 +50,9 @@ struct PodcastEpisode::Private : public QSharedData {
   QUrl url_;
 
   bool listened_;
-  bool downloaded_;
+  QDateTime listened_date_;
 
+  bool downloaded_;
   QUrl local_url_;
 
   QVariantMap extra_;
@@ -93,6 +94,7 @@ const QDateTime& PodcastEpisode::publication_date() const { return d->publicatio
 int PodcastEpisode::duration_secs() const { return d->duration_secs_; }
 const QUrl& PodcastEpisode::url() const { return d->url_; }
 bool PodcastEpisode::listened() const { return d->listened_; }
+const QDateTime& PodcastEpisode::listened_date() const { return d->listened_date_; }
 bool PodcastEpisode::downloaded() const { return d->downloaded_; }
 const QUrl& PodcastEpisode::local_url() const { return d->local_url_; }
 const QVariantMap& PodcastEpisode::extra() const { return d->extra_; }
@@ -107,6 +109,7 @@ void PodcastEpisode::set_publication_date(const QDateTime& v) { d->publication_d
 void PodcastEpisode::set_duration_secs(int v) { d->duration_secs_ = v; }
 void PodcastEpisode::set_url(const QUrl& v) { d->url_ = v; }
 void PodcastEpisode::set_listened(bool v) { d->listened_ = v; }
+void PodcastEpisode::set_listened_date(const QDateTime& v) { d->listened_date_ = v; }
 void PodcastEpisode::set_downloaded(bool v) { d->downloaded_ = v; }
 void PodcastEpisode::set_local_url(const QUrl& v) { d->local_url_ = v; }
 void PodcastEpisode::set_extra(const QVariantMap& v) { d->extra_ = v; }
@@ -122,10 +125,11 @@ void PodcastEpisode::InitFromQuery(const QSqlQuery& query) {
   d->duration_secs_ = query.value(6).toInt();
   d->url_ = QUrl::fromEncoded(query.value(7).toByteArray());
   d->listened_ = query.value(8).toBool();
-  d->downloaded_ = query.value(9).toBool();
-  d->local_url_ = QUrl::fromEncoded(query.value(10).toByteArray());
+  d->listened_date_ = QDateTime::fromTime_t(query.value(9).toUInt());
+  d->downloaded_ = query.value(10).toBool();
+  d->local_url_ = QUrl::fromEncoded(query.value(11).toByteArray());
 
-  QDataStream extra_stream(query.value(11).toByteArray());
+  QDataStream extra_stream(query.value(12).toByteArray());
   extra_stream >> d->extra_;
 }
 
@@ -138,6 +142,7 @@ void PodcastEpisode::BindToQuery(QSqlQuery* query) const {
   query->bindValue(":duration_secs", d->duration_secs_);
   query->bindValue(":url", d->url_.toEncoded());
   query->bindValue(":listened", d->listened_);
+  query->bindValue(":listened_date", d->listened_date_.toTime_t());
   query->bindValue(":downloaded", d->downloaded_);
   query->bindValue(":local_url", d->local_url_.toEncoded());
 

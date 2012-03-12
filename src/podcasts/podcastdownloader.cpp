@@ -20,6 +20,7 @@
 #include "core/application.h"
 #include "core/logging.h"
 #include "core/network.h"
+#include "core/timeconstants.h"
 #include "core/utilities.h"
 #include "library/librarydirectorymodel.h"
 #include "library/librarymodel.h"
@@ -29,9 +30,10 @@
 #include <QFile>
 #include <QNetworkReply>
 #include <QSettings>
+#include <QTimer>
 
 const char* PodcastDownloader::kSettingsGroup = "Podcasts";
-
+const int PodcastDownloader::kAutoDeleteCheckIntervalMsec = 15 * 60 * kMsecPerSec; // 15 minutes
 
 struct PodcastDownloader::Task {
   Task() : file(NULL) {}
@@ -47,14 +49,21 @@ PodcastDownloader::PodcastDownloader(Application* app, QObject* parent)
     backend_(app_->podcast_backend()),
     network_(new NetworkAccessManager(this)),
     disallowed_filename_characters_("[^a-zA-Z0-9_~ -]"),
+    auto_download_(false),
+    delete_after_secs_(0),
     current_task_(NULL),
-    last_progress_signal_(0)
+    last_progress_signal_(0),
+    auto_delete_timer_(new QTimer(this))
 {
   connect(backend_, SIGNAL(EpisodesAdded(QList<PodcastEpisode>)),
           SLOT(EpisodesAdded(QList<PodcastEpisode>)));
   connect(backend_, SIGNAL(SubscriptionAdded(Podcast)),
           SLOT(SubscriptionAdded(Podcast)));
   connect(app_, SIGNAL(SettingsChanged()), SLOT(ReloadSettings()));
+  connect(auto_delete_timer_, SIGNAL(timeout()), SLOT(AutoDelete()));
+
+  auto_delete_timer_->setInterval(kAutoDeleteCheckIntervalMsec);
+  auto_delete_timer_->start();
 
   ReloadSettings();
 }
@@ -77,6 +86,7 @@ void PodcastDownloader::ReloadSettings() {
 
   auto_download_ = s.value("auto_download", false).toBool();
   download_dir_ = s.value("download_dir", DefaultDownloadDir()).toString();
+  delete_after_secs_ = s.value("delete_after", 0).toInt();
 }
 
 void PodcastDownloader::DownloadEpisode(const PodcastEpisode& episode) {
@@ -242,5 +252,27 @@ void PodcastDownloader::EpisodesAdded(const QList<PodcastEpisode>& episodes) {
     foreach (const PodcastEpisode& episode, episodes) {
       DownloadEpisode(episode);
     }
+  }
+}
+
+void PodcastDownloader::AutoDelete() {
+  if (delete_after_secs_ <= 0) {
+    return;
+  }
+
+  QDateTime max_date = QDateTime::currentDateTime();
+  max_date.addSecs(-delete_after_secs_);
+
+  PodcastEpisodeList old_episodes = backend_->GetOldDownloadedEpisodes(max_date);
+  if (old_episodes.isEmpty())
+    return;
+
+  qLog(Info) << "Deleting" << old_episodes.count()
+             << "episodes because they were last listened to"
+             << (delete_after_secs_ / kSecsPerDay)
+             << "days ago";
+
+  foreach (const PodcastEpisode& episode, old_episodes) {
+    DeleteEpisode(episode);
   }
 }

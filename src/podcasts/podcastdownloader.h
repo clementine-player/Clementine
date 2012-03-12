@@ -46,6 +46,7 @@ public:
   };
 
   static const char* kSettingsGroup;
+  static const int kAutoDeleteCheckIntervalMsec;
 
   QString DefaultDownloadDir() const;
 
@@ -70,6 +71,8 @@ private slots:
   void ReplyFinished();
   void ReplyDownloadProgress(qint64 received, qint64 total);
 
+  void AutoDelete();
+
 private:
   struct Task;
 
@@ -89,12 +92,15 @@ private:
 
   bool auto_download_;
   QString download_dir_;
+  int delete_after_secs_;
 
   Task* current_task_;
   QQueue<Task*> queued_tasks_;
   QSet<int> downloading_episode_ids_;
 
   time_t last_progress_signal_;
+
+  QTimer* auto_delete_timer_;
 };
 
 #endif // PODCASTDOWNLOADER_H

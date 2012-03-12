@@ -27,6 +27,7 @@ CREATE TABLE podcast_episodes (
   url TEXT,
 
   listened BOOLEAN,
+  listened_date INTEGER,
   downloaded BOOLEAN,
   local_url TEXT,
 

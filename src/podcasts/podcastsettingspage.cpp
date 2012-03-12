@@ -21,6 +21,7 @@
 #include "ui_podcastsettingspage.h"
 #include "core/application.h"
 #include "core/closure.h"
+#include "core/timeconstants.h"
 #include "library/librarydirectorymodel.h"
 #include "library/librarymodel.h"
 #include "ui/settingsdialog.h"
@@ -73,8 +74,7 @@ void PodcastSettingsPage::Load() {
       s.value("download_dir", default_download_dir).toString()));
 
   ui_->auto_download->setChecked(s.value("auto_download", false).toBool());
-  ui_->delete_after->setValue(s.value("delete_after", 0).toInt() / (24*60*60));
-  ui_->delete_unplayed->setChecked(s.value("delete_unplayed", false).toBool());
+  ui_->delete_after->setValue(s.value("delete_after", 0).toInt() / kSecsPerDay);
   ui_->username->setText(s.value("gpodder_username").toString());
   ui_->device_name->setText(s.value("gpodder_device_name", GPodderSync::DefaultDeviceName()).toString());
 
@@ -93,8 +93,7 @@ void PodcastSettingsPage::Save() {
              ui_->check_interval->itemData(ui_->check_interval->currentIndex()));
   s.setValue("download_dir", QDir::fromNativeSeparators(ui_->download_dir->text()));
   s.setValue("auto_download", ui_->auto_download->isChecked());
-  s.setValue("delete_after", ui_->delete_after->value());
-  s.setValue("delete_unplayed", ui_->delete_unplayed->isChecked());
+  s.setValue("delete_after", ui_->delete_after->value() * kSecsPerDay);
   s.setValue("gpodder_device_name", ui_->device_name->text());
 }
 

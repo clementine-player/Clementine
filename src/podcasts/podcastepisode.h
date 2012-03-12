@@ -55,6 +55,7 @@ public:
   int duration_secs() const;
   const QUrl& url() const;
   bool listened() const;
+  const QDateTime& listened_date() const;
   bool downloaded() const;
   const QUrl& local_url() const;
   const QVariantMap& extra() const;
@@ -69,6 +70,7 @@ public:
   void set_duration_secs(int v);
   void set_url(const QUrl& v);
   void set_listened(bool v);
+  void set_listened_date(const QDateTime& v);
   void set_downloaded(bool v);
   void set_local_url(const QUrl& v);
   void set_extra(const QVariantMap& v);
