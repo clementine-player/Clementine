@@ -23,7 +23,6 @@
 #include "songinfofetcher.h"
 
 class PrettyImageView;
-class WidgetFadeHelper;
 
 class QScrollArea;
 class QTimeLine;

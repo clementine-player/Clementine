@@ -30,6 +30,7 @@ public:
 
   void SetAutoOpen(bool v) { auto_open_ = v; }
   void SetExpandOnReset(bool v) { expand_on_reset_ = v; }
+  void SetAddOnDoubleClick(bool v) { add_on_double_click_ = v; }
 
 public slots:
   void RecursivelyExpand(const QModelIndex &index);
@@ -61,6 +62,7 @@ private:
 private:
   bool auto_open_;
   bool expand_on_reset_;
+  bool add_on_double_click_;
 
   bool ignore_next_click_;
 };

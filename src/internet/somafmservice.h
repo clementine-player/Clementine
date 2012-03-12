@@ -57,7 +57,7 @@ public:
 
   QStandardItem* CreateRootItem();
   void LazyPopulate(QStandardItem* item);
-  void ShowContextMenu(const QModelIndex& index, const QPoint& global_pos);
+  void ShowContextMenu(const QPoint& global_pos);
 
   PlaylistItem::Options playlistitem_options() const;
   QNetworkAccessManager* network() const { return network_; }
@@ -69,9 +69,6 @@ public:
 
 signals:
   void StreamsChanged();
-
-protected:
-  QModelIndex GetCurrentIndex();
 
 private slots:
   void ForceRefreshStreams();
@@ -89,7 +86,6 @@ private:
 
   QStandardItem* root_;
   QMenu* context_menu_;
-  QStandardItem* context_item_;
 
   QNetworkAccessManager* network_;
 

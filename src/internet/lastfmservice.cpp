@@ -159,7 +159,7 @@ void LastFMService::ReloadSettings() {
 }
 
 void LastFMService::ShowConfig() {
-  emit OpenSettingsAtPage(SettingsDialog::Page_Lastfm);
+  app_->OpenSettingsDialogAtPage(SettingsDialog::Page_Lastfm);
 }
 
 bool LastFMService::IsAuthenticated() const {
@@ -581,10 +581,8 @@ void LastFMService::Ban() {
   app_->player()->Next();
 }
 
-void LastFMService::ShowContextMenu(const QModelIndex& index, const QPoint &global_pos) {
-  context_item_ = model()->itemFromIndex(index);
-
-  switch (index.parent().data(InternetModel::Role_Type).toInt()) {
+void LastFMService::ShowContextMenu(const QPoint& global_pos) {
+  switch (model()->current_index().parent().data(InternetModel::Role_Type).toInt()) {
     case Type_Artists:
     case Type_Tags:
     case Type_Custom:
@@ -596,7 +594,7 @@ void LastFMService::ShowContextMenu(const QModelIndex& index, const QPoint &glob
       break;
   }
 
-  const bool playable = model()->IsPlayable(index);
+  const bool playable = model()->IsPlayable(model()->current_index());
   GetAppendToPlaylistAction()->setEnabled(playable);
   GetReplacePlaylistAction()->setEnabled(playable);
   GetOpenInNewPlaylistAction()->setEnabled(playable);
@@ -753,10 +751,6 @@ void LastFMService::RefreshNeighboursFinished() {
   }
 }
 
-QModelIndex LastFMService::GetCurrentIndex() {
-  return context_item_->index();
-}
-
 void LastFMService::AddArtistRadio() {
   AddArtistOrTag("artists", LastFMStationDialog::Artist,
                  kUrlArtist, tr(kTitleArtist),
@@ -855,9 +849,10 @@ void LastFMService::RestoreList(const QString& name,
 }
 
 void LastFMService::Remove() {
-  int type = context_item_->parent()->data(InternetModel::Role_Type).toInt();
+  QStandardItem* context_item = model()->itemFromIndex(model()->current_index());
+  int type = context_item->parent()->data(InternetModel::Role_Type).toInt();
 
-  context_item_->parent()->removeRow(context_item_->row());
+  context_item->parent()->removeRow(context_item->row());
 
   if (type == Type_Artists)
     SaveList("artists", artist_list_);

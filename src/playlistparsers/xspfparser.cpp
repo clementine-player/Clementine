@@ -17,6 +17,7 @@
 
 #include "xspfparser.h"
 #include "core/timeconstants.h"
+#include "core/utilities.h"
 
 #include <QDomDocument>
 #include <QFile>
@@ -35,12 +36,12 @@ SongList XSPFParser::Load(QIODevice *device, const QString& playlist_path,
   SongList ret;
 
   QXmlStreamReader reader(device);
-  if (!ParseUntilElement(&reader, "playlist") ||
-      !ParseUntilElement(&reader, "trackList")) {
+  if (!Utilities::ParseUntilElement(&reader, "playlist") ||
+      !Utilities::ParseUntilElement(&reader, "trackList")) {
     return ret;
   }
 
-  while (!reader.atEnd() && ParseUntilElement(&reader, "track")) {
+  while (!reader.atEnd() && Utilities::ParseUntilElement(&reader, "track")) {
     Song song = ParseTrack(&reader, dir);
     if (song.is_valid()) {
       ret << song;

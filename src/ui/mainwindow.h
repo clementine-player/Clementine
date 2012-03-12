@@ -208,6 +208,7 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   void AddStream();
   void AddStreamAccepted();
   void AddCDTracks();
+  void AddPodcast();
 
   void CommandlineOptionsReceived(const QByteArray& serialized_options);
 
@@ -244,6 +245,8 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   void Exit();
 
   void HandleNotificationPreview(OSD::Behaviour type, QString line1, QString line2);
+
+  void ScrollToInternetIndex(const QModelIndex& index);
 
  private:
   void ConnectInfoView(SongInfoBase* view);

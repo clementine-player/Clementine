@@ -87,7 +87,7 @@ class LastFMService : public InternetService {
   QStandardItem* CreateRootItem();
   void LazyPopulate(QStandardItem* parent);
 
-  void ShowContextMenu(const QModelIndex& index, const QPoint &global_pos);
+  void ShowContextMenu(const QPoint &global_pos);
 
   PlaylistItem::Options playlistitem_options() const;
 
@@ -137,9 +137,6 @@ class LastFMService : public InternetService {
   void ScrobbledRadioStream();
 
   void SavedItemsChanged();
-
- protected:
-  QModelIndex GetCurrentIndex();
 
  private slots:
   void AuthenticateReplyFinished();
@@ -207,7 +204,6 @@ class LastFMService : public InternetService {
   QAction* add_tag_action_;
   QAction* add_custom_action_;
   QAction* refresh_friends_action_;
-  QStandardItem* context_item_;
 
   QUrl last_url_;
   bool initial_tune_;

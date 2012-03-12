@@ -55,7 +55,7 @@ class SavedRadio : public InternetService {
   QStandardItem* CreateRootItem();
   void LazyPopulate(QStandardItem* item);
 
-  void ShowContextMenu(const QModelIndex& index, const QPoint& global_pos);
+  void ShowContextMenu(const QPoint& global_pos);
 
   void Add(const QUrl& url, const QString& name = QString());
 
@@ -64,9 +64,6 @@ class SavedRadio : public InternetService {
  signals:
   void ShowAddStreamDialog();
   void StreamsChanged();
-
- protected:
-  QModelIndex GetCurrentIndex();
 
  private slots:
   void Remove();
@@ -79,7 +76,6 @@ class SavedRadio : public InternetService {
 
  private:
   QMenu* context_menu_;
-  QStandardItem* context_item_;
   QStandardItem* root_;
 
   QAction* remove_action_;

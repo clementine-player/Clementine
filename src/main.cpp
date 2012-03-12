@@ -47,6 +47,8 @@
 #include "internet/somafmservice.h"
 #include "library/directory.h"
 #include "playlist/playlist.h"
+#include "podcasts/podcast.h"
+#include "podcasts/podcastepisode.h"
 #include "smartplaylists/generator.h"
 #include "ui/equalizer.h"
 #include "ui/iconloader.h"
@@ -251,6 +253,10 @@ int main(int argc, char *argv[]) {
   qRegisterMetaType<SomaFMService::Stream>("SomaFMService::Stream");
   qRegisterMetaTypeStreamOperators<DigitallyImportedClient::Channel>("DigitallyImportedClient::Channel");
   qRegisterMetaTypeStreamOperators<SomaFMService::Stream>("SomaFMService::Stream");
+  qRegisterMetaType<QList<Podcast> >("QList<Podcast>");
+  qRegisterMetaType<QList<PodcastEpisode> >("QList<PodcastEpisode>");
+  qRegisterMetaType<PodcastList>("PodcastList");
+  qRegisterMetaType<PodcastEpisodeList>("PodcastEpisodeList");
 
   qRegisterMetaType<GstBuffer*>("GstBuffer*");
   qRegisterMetaType<GstElement*>("GstElement*");

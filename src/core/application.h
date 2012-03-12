@@ -18,6 +18,8 @@
 #ifndef APPLICATION_H
 #define APPLICATION_H
 
+#include "ui/settingsdialog.h"
+
 #include <QObject>
 
 class AlbumCoverLoader;
@@ -27,13 +29,17 @@ class CurrentArtLoader;
 class Database;
 class DeviceManager;
 class GlobalSearch;
+class GPodderSync;
 class InternetModel;
 class Library;
 class LibraryBackend;
 class LibraryModel;
 class Player;
 class PlaylistBackend;
+class PodcastDownloader;
 class PlaylistManager;
+class PodcastBackend;
+class PodcastUpdater;
 class TagReaderClient;
 class TaskManager;
 
@@ -48,6 +54,8 @@ public:
   TagReaderClient* tag_reader_client() const { return tag_reader_client_; }
   Database* database() const { return database_; }
   AlbumCoverLoader* album_cover_loader() const { return album_cover_loader_; }
+  PlaylistBackend* playlist_backend() const { return playlist_backend_; }
+  PodcastBackend* podcast_backend() const { return podcast_backend_; }
   Appearance* appearance() const { return appearance_; }
   CoverProviders* cover_providers() const { return cover_providers_; }
   TaskManager* task_manager() const { return task_manager_; }
@@ -56,10 +64,11 @@ public:
   CurrentArtLoader* current_art_loader() const { return current_art_loader_; }
   GlobalSearch* global_search() const { return global_search_; }
   InternetModel* internet_model() const { return internet_model_; }
-
   Library* library() const { return library_; }
-  PlaylistBackend* playlist_backend() const { return playlist_backend_; }
   DeviceManager* device_manager() const { return device_manager_; }
+  PodcastUpdater* podcast_updater() const { return podcast_updater_; }
+  PodcastDownloader* podcast_downloader() const { return podcast_downloader_; }
+  GPodderSync* gpodder_sync() const { return gpodder_sync_; }
 
   LibraryBackend* library_backend() const;
   LibraryModel* library_model() const;
@@ -69,14 +78,20 @@ public:
 
 public slots:
   void AddError(const QString& message);
+  void ReloadSettings();
+  void OpenSettingsDialogAtPage(SettingsDialog::Page page);
 
 signals:
   void ErrorAdded(const QString& message);
+  void SettingsChanged();
+  void SettingsDialogRequested(SettingsDialog::Page page);
 
 private:
   TagReaderClient* tag_reader_client_;
   Database* database_;
   AlbumCoverLoader* album_cover_loader_;
+  PlaylistBackend* playlist_backend_;
+  PodcastBackend* podcast_backend_;
   Appearance* appearance_;
   CoverProviders* cover_providers_;
   TaskManager* task_manager_;
@@ -85,10 +100,11 @@ private:
   CurrentArtLoader* current_art_loader_;
   GlobalSearch* global_search_;
   InternetModel* internet_model_;
-
   Library* library_;
-  PlaylistBackend* playlist_backend_;
   DeviceManager* device_manager_;
+  PodcastUpdater* podcast_updater_;
+  PodcastDownloader* podcast_downloader_;
+  GPodderSync* gpodder_sync_;
 
   QList<QObject*> objects_in_threads_;
   QList<QThread*> threads_;

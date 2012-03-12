@@ -50,7 +50,7 @@ public:
 
   QStandardItem* CreateRootItem();
   void LazyPopulate(QStandardItem* parent);
-  void ShowContextMenu(const QModelIndex& index, const QPoint& global_pos);
+  void ShowContextMenu(const QPoint& global_pos);
 
   void ReloadSettings();
 
@@ -71,9 +71,6 @@ public slots:
 
 signals:
   void StreamsChanged();
-
-protected:
-  QModelIndex GetCurrentIndex();
 
 private slots:
   void LoadPlaylistFinished();

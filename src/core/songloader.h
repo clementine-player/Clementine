@@ -32,6 +32,7 @@ class CueParser;
 class LibraryBackendInterface;
 class ParserBase;
 class PlaylistParser;
+class PodcastParser;
 
 class SongLoader : public QObject {
   Q_OBJECT
@@ -95,7 +96,7 @@ private:
 
   // GStreamer callbacks
   static void TypeFound(GstElement* typefind, uint probability, GstCaps* caps, void* self);
-  static void DataReady(GstPad*, GstBuffer* buf, void* self);
+  static gboolean DataReady(GstPad*, GstBuffer* buf, void* self);
   static GstBusSyncReply BusCallbackSync(GstBus*, GstMessage*, gpointer);
   static gboolean BusCallback(GstBus*, GstMessage*, gpointer);
 
@@ -113,6 +114,7 @@ private:
 
   QTimer* timeout_timer_;
   PlaylistParser* playlist_parser_;
+  PodcastParser* podcast_parser_;
   CueParser* cue_parser_;
 
   // For async loads
@@ -121,6 +123,7 @@ private:
   bool success_;
   ParserBase* parser_;
   QString mime_type_;
+  bool is_podcast_;
   QByteArray buffer_;
   LibraryBackendInterface* library_;
 

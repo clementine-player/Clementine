@@ -34,7 +34,7 @@
 #include <QVariant>
 
 const char* Database::kDatabaseFilename = "clementine.db";
-const int Database::kSchemaVersion = 36;
+const int Database::kSchemaVersion = 37;
 const char* Database::kMagicAllSongsTables = "%allsongstables";
 
 int Database::sNextConnectionId = 1;

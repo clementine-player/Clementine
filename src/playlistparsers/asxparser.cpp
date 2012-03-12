@@ -16,6 +16,7 @@
 */
 
 #include "asxparser.h"
+#include "core/utilities.h"
 
 #include <QBuffer>
 #include <QDomDocument>
@@ -66,11 +67,11 @@ SongList ASXParser::Load(QIODevice *device, const QString& playlist_path,
   SongList ret;
 
   QXmlStreamReader reader(&buffer);
-  if (!ParseUntilElement(&reader, "asx")) {
+  if (!Utilities::ParseUntilElement(&reader, "asx")) {
     return ret;
   }
 
-  while (!reader.atEnd() && ParseUntilElement(&reader, "entry")) {
+  while (!reader.atEnd() && Utilities::ParseUntilElement(&reader, "entry")) {
     Song song = ParseTrack(&reader, dir);
     if (song.is_valid()) {
       ret << song;

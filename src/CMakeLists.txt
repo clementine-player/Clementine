@@ -36,6 +36,7 @@ include_directories(${QXT_INCLUDE_DIRS})
 include_directories(${ECHONEST_INCLUDE_DIRS})
 include_directories(${SHA2_INCLUDE_DIRS})
 include_directories(${CHROMAPRINT_INCLUDE_DIRS})
+include_directories(${MYGPOQT_INCLUDE_DIRS})
 
 find_package(OpenGL)
 include_directories(${OPENGL_INCLUDE_DIR})
@@ -227,6 +228,28 @@ set(SOURCES
   playlistparsers/xmlparser.cpp
   playlistparsers/xspfparser.cpp
 
+  podcasts/addpodcastbyurl.cpp
+  podcasts/addpodcastdialog.cpp
+  podcasts/addpodcastpage.cpp
+  podcasts/fixedopmlpage.cpp
+  podcasts/gpoddersearchpage.cpp
+  podcasts/gpoddersync.cpp
+  podcasts/gpoddertoptagsmodel.cpp
+  podcasts/gpoddertoptagspage.cpp
+  podcasts/itunessearchpage.cpp
+  podcasts/podcast.cpp
+  podcasts/podcastbackend.cpp
+  podcasts/podcastdiscoverymodel.cpp
+  podcasts/podcastdownloader.cpp
+  podcasts/podcastepisode.cpp
+  podcasts/podcastinfowidget.cpp
+  podcasts/podcastservice.cpp
+  podcasts/podcastservicemodel.cpp
+  podcasts/podcastsettingspage.cpp
+  podcasts/podcastparser.cpp
+  podcasts/podcastupdater.cpp
+  podcasts/podcasturlloader.cpp
+
   smartplaylists/generator.cpp
   smartplaylists/generatorinserter.cpp
   smartplaylists/querygenerator.cpp
@@ -290,6 +313,7 @@ set(SOURCES
   ui/screensaver.cpp
   ui/settingsdialog.cpp
   ui/settingspage.cpp
+  ui/standarditemiconloader.cpp
   ui/systemtrayicon.cpp
   ui/trackselectiondialog.cpp
   ui/windows7thumbbar.cpp
@@ -321,7 +345,6 @@ set(SOURCES
   widgets/ratingwidget.cpp
   widgets/renametablineedit.cpp
   widgets/sliderwidget.cpp
-  widgets/spinbox.cpp
   widgets/stickyslider.cpp
   widgets/stretchheaderview.cpp
   widgets/stylehelper.cpp
@@ -462,6 +485,25 @@ set(HEADERS
   playlistparsers/plsparser.h
   playlistparsers/xspfparser.h
 
+  podcasts/addpodcastbyurl.h
+  podcasts/addpodcastdialog.h
+  podcasts/addpodcastpage.h
+  podcasts/fixedopmlpage.h
+  podcasts/gpoddersearchpage.h
+  podcasts/gpoddersync.h
+  podcasts/gpoddertoptagsmodel.h
+  podcasts/gpoddertoptagspage.h
+  podcasts/itunessearchpage.h
+  podcasts/podcastbackend.h
+  podcasts/podcastdiscoverymodel.h
+  podcasts/podcastdownloader.h
+  podcasts/podcastinfowidget.h
+  podcasts/podcastservice.h
+  podcasts/podcastservicemodel.h
+  podcasts/podcastsettingspage.h
+  podcasts/podcastupdater.h
+  podcasts/podcasturlloader.h
+
   smartplaylists/generator.h
   smartplaylists/generatorinserter.h
   smartplaylists/generatormimedata.h
@@ -515,6 +557,7 @@ set(HEADERS
   ui/qtsystemtrayicon.h
   ui/settingsdialog.h
   ui/settingspage.h
+  ui/standarditemiconloader.h
   ui/systemtrayicon.h
   ui/trackselectiondialog.h
   ui/windows7thumbbar.h
@@ -544,7 +587,6 @@ set(HEADERS
   widgets/ratingwidget.h
   widgets/renametablineedit.h
   widgets/sliderwidget.h
-  widgets/spinbox.h
   widgets/stickyslider.h
   widgets/stretchheaderview.h
   widgets/trackslider.h
@@ -578,6 +620,13 @@ set(UI
   playlist/playlistcontainer.ui
   playlist/playlistsequence.ui
   playlist/queuemanager.ui
+
+  podcasts/addpodcastbyurl.ui
+  podcasts/addpodcastdialog.ui
+  podcasts/gpoddersearchpage.ui
+  podcasts/itunessearchpage.ui
+  podcasts/podcastinfowidget.ui
+  podcasts/podcastsettingspage.ui
 
   remote/remotesettingspage.ui
 
@@ -984,6 +1033,7 @@ target_link_libraries(clementine_lib
   libclementine-tagreader
   ${SHA2_LIBRARIES}
   ${TAGLIB_LIBRARIES}
+  ${MYGPOQT_LIBRARIES}
   ${CHROMAPRINT_LIBRARIES}
   ${ECHONEST_LIBRARIES}
   ${GOBJECT_LIBRARIES}

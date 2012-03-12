@@ -48,12 +48,9 @@ public:
   QStandardItem* CreateRootItem();
   void LazyPopulate(QStandardItem* item);
 
-  void ShowContextMenu(const QModelIndex& index, const QPoint& global_pos);
+  void ShowContextMenu(const QPoint& global_pos);
 
   QWidget* HeaderWidget() const;
-
-protected:
-  QModelIndex GetCurrentIndex();
 
 private slots:
   void LoadDirectory();
@@ -70,7 +67,6 @@ private:
   QStandardItem* root_;
   NetworkAccessManager* network_;
   QMenu* context_menu_;
-  QModelIndex context_item_;
 
   IcecastBackend* backend_;
   IcecastModel* model_;

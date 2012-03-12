@@ -67,25 +67,6 @@ using boost::scoped_ptr;
 #include "widgets/trackslider.h"
 
 
-namespace {
-
-QStringList Prepend(const QString& text, const QStringList& list) {
-  QStringList ret(list);
-  for (int i=0 ; i<ret.count() ; ++i)
-    ret[i].prepend(text);
-  return ret;
-}
-
-QStringList Updateify(const QStringList& list) {
-  QStringList ret(list);
-  for (int i=0 ; i<ret.count() ; ++i)
-    ret[i].prepend(ret[i] + " = :");
-  return ret;
-}
-
-} // namespace
-
-
 const QStringList Song::kColumns = QStringList()
     << "title" << "album" << "artist" << "albumartist" << "composer" << "track"
     << "disc" << "bpm" << "year" << "genre" << "comment" << "compilation"
@@ -97,8 +78,8 @@ const QStringList Song::kColumns = QStringList()
     << "cue_path" << "unavailable" << "effective_albumartist";
 
 const QString Song::kColumnSpec = Song::kColumns.join(", ");
-const QString Song::kBindSpec = Prepend(":", Song::kColumns).join(", ");
-const QString Song::kUpdateSpec = Updateify(Song::kColumns).join(", ");
+const QString Song::kBindSpec = Utilities::Prepend(":", Song::kColumns).join(", ");
+const QString Song::kUpdateSpec = Utilities::Updateify(Song::kColumns).join(", ");
 
 
 const QStringList Song::kFtsColumns = QStringList()
@@ -106,8 +87,8 @@ const QStringList Song::kFtsColumns = QStringList()
     << "ftscomposer" << "ftsgenre" << "ftscomment";
 
 const QString Song::kFtsColumnSpec = Song::kFtsColumns.join(", ");
-const QString Song::kFtsBindSpec = Prepend(":", Song::kFtsColumns).join(", ");
-const QString Song::kFtsUpdateSpec = Updateify(Song::kFtsColumns).join(", ");
+const QString Song::kFtsBindSpec = Utilities::Prepend(":", Song::kFtsColumns).join(", ");
+const QString Song::kFtsUpdateSpec = Utilities::Updateify(Song::kFtsColumns).join(", ");
 
 const QString Song::kManuallyUnsetCover = "(unset)";
 const QString Song::kEmbeddedCover = "(embedded)";
@@ -324,7 +305,7 @@ void Song::set_basefilename(const QString& v) { d->basefilename_ = v; }
 void Song::set_directory_id(int v) { d->directory_id_ = v; }
 
 QString Song::JoinSpec(const QString& table) {
-  return Prepend(table + ".", kColumns).join(", ");
+  return Utilities::Prepend(table + ".", kColumns).join(", ");
 }
 
 QString Song::TextForFiletype(FileType type) {

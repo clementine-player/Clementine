@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>AddPodcastByUrl</class>
+ <widget class="QWidget" name="AddPodcastByUrl">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>431</width>
+    <height>51</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Enter a URL</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="../../data/data.qrc">
+    <normaloff>:/providers/podcast32.png</normaloff>:/providers/podcast32.png</iconset>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="margin">
+    <number>0</number>
+   </property>
+   <item>
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string>If you know the URL of a podcast, enter it below and press Go.</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QLineEdit" name="url"/>
+     </item>
+     <item>
+      <widget class="QPushButton" name="go">
+       <property name="text">
+        <string>Go</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="../../data/data.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>url</sender>
+   <signal>returnPressed()</signal>
+   <receiver>go</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>109</x>
+     <y>24</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>429</x>
+     <y>49</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

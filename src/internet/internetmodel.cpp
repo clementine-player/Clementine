@@ -27,6 +27,7 @@
 #include "groovesharkservice.h"
 #include "core/logging.h"
 #include "core/mergedproxymodel.h"
+#include "podcasts/podcastservice.h"
 #include "smartplaylists/generatormimedata.h"
 
 #ifdef HAVE_LIBLASTFM
@@ -65,6 +66,7 @@ InternetModel::InternetModel(Application* app, QObject* parent)
 #endif
   AddService(new GroovesharkService(app, this));
   AddService(new MagnatuneService(app, this));
+  AddService(new PodcastService(app, this));
   AddService(new SavedRadio(app, this));
   AddService(new SkyFmService(app, this));
   AddService(new SomaFMService(app, this));
@@ -89,8 +91,8 @@ void InternetModel::AddService(InternetService *service) {
 
   connect(service, SIGNAL(StreamError(QString)), SIGNAL(StreamError(QString)));
   connect(service, SIGNAL(StreamMetadataFound(QUrl,Song)), SIGNAL(StreamMetadataFound(QUrl,Song)));
-  connect(service, SIGNAL(OpenSettingsAtPage(SettingsDialog::Page)), SIGNAL(OpenSettingsAtPage(SettingsDialog::Page)));
   connect(service, SIGNAL(AddToPlaylistSignal(QMimeData*)), SIGNAL(AddToPlaylist(QMimeData*)));
+  connect(service, SIGNAL(ScrollToIndex(QModelIndex)), SIGNAL(ScrollToIndex(QModelIndex)));
   connect(service, SIGNAL(destroyed()), SLOT(ServiceDeleted()));
 
   service->ReloadSettings();
@@ -254,11 +256,19 @@ bool InternetModel::dropMimeData(const QMimeData* data, Qt::DropAction action, i
   return true;
 }
 
-void InternetModel::ShowContextMenu(const QModelIndex& merged_model_index,
-                                 const QPoint& global_pos) {
-  InternetService* service = ServiceForIndex(merged_model_index);
+void InternetModel::ShowContextMenu(const QModelIndexList& selected_merged_model_indexes,
+                                    const QModelIndex& current_merged_model_index,
+                                    const QPoint& global_pos) {
+  current_index_ = merged_model_->mapToSource(current_merged_model_index);
+
+  selected_indexes_.clear();
+  foreach (const QModelIndex& index, selected_merged_model_indexes) {
+    selected_indexes_ << merged_model_->mapToSource(index);
+  }
+
+  InternetService* service = ServiceForIndex(current_merged_model_index);
   if (service)
-    service->ShowContextMenu(merged_model_->mapToSource(merged_model_index), global_pos);
+    service->ShowContextMenu(global_pos);
 }
 
 void InternetModel::ReloadSettings() {

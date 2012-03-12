@@ -43,6 +43,9 @@ class InternetViewContainer : public QWidget {
 
   InternetView* tree() const;
 
+ public slots:
+  void ScrollToIndex(const QModelIndex& index);
+
  private slots:
   void Collapsed(const QModelIndex& index);
   void Expanded(const QModelIndex& index);

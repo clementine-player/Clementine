@@ -184,6 +184,7 @@ public:
 
 public slots:
   void SetCurrentIndex(int index);
+  void SetCurrentWidget(QWidget* widget);
   void SetMode(Mode mode);
   void SetMode(int mode) { SetMode(Mode(mode)); }
 

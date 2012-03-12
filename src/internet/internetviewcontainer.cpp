@@ -146,3 +146,9 @@ void InternetViewContainer::SetHeaderHeight(int height) {
   if (header)
     header->setMaximumHeight(height);
 }
+
+void InternetViewContainer::ScrollToIndex(const QModelIndex& index) {
+  tree()->scrollTo(index, QTreeView::PositionAtCenter);
+  tree()->setCurrentIndex(index);
+  tree()->expand(index);
+}

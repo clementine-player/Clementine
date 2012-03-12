@@ -65,6 +65,7 @@
 #include "playlist/queuemanager.h"
 #include "playlist/songplaylistitem.h"
 #include "playlistparsers/playlistparser.h"
+#include "podcasts/podcastservice.h"
 #include "smartplaylists/generator.h"
 #include "smartplaylists/generatormimedata.h"
 #include "songinfo/artistinfoview.h"
@@ -189,8 +190,9 @@ MainWindow::MainWindow(Application* app,
 {
   qLog(Debug) << "Starting";
 
-  // Database connections
   connect(app, SIGNAL(ErrorAdded(QString)), SLOT(ShowErrorDialog(QString)));
+  connect(app, SIGNAL(SettingsDialogRequested(SettingsDialog::Page)),
+          SLOT(OpenSettingsDialogAtPage(SettingsDialog::Page)));
 
   // Initialise the UI
   ui_->setupUi(this);
@@ -329,6 +331,7 @@ MainWindow::MainWindow(Application* app,
   connect(ui_->action_add_file, SIGNAL(triggered()), SLOT(AddFile()));
   connect(ui_->action_add_folder, SIGNAL(triggered()), SLOT(AddFolder()));
   connect(ui_->action_add_stream, SIGNAL(triggered()), SLOT(AddStream()));
+  connect(ui_->action_add_podcast, SIGNAL(triggered()), SLOT(AddPodcast()));
   connect(ui_->action_cover_manager, SIGNAL(triggered()), SLOT(ShowCoverManager()));
   connect(ui_->action_equalizer, SIGNAL(triggered()), equalizer_.get(), SLOT(show()));
   connect(ui_->action_transcode, SIGNAL(triggered()), SLOT(ShowTranscodeDialog()));
@@ -509,8 +512,8 @@ MainWindow::MainWindow(Application* app,
   // Internet connections
   connect(app_->internet_model(), SIGNAL(StreamError(QString)), SLOT(ShowErrorDialog(QString)));
   connect(app_->internet_model(), SIGNAL(StreamMetadataFound(QUrl,Song)), app_->playlist_manager(), SLOT(SetActiveStreamMetadata(QUrl,Song)));
-  connect(app_->internet_model(), SIGNAL(OpenSettingsAtPage(SettingsDialog::Page)), SLOT(OpenSettingsDialogAtPage(SettingsDialog::Page)));
   connect(app_->internet_model(), SIGNAL(AddToPlaylist(QMimeData*)), SLOT(AddToPlaylist(QMimeData*)));
+  connect(app_->internet_model(), SIGNAL(ScrollToIndex(QModelIndex)), SLOT(ScrollToInternetIndex(QModelIndex)));
 #ifdef HAVE_LIBLASTFM
   LastFMService* lastfm_service = InternetModel::Service<LastFMService>();
   connect(lastfm_service, SIGNAL(ButtonVisibilityChanged(bool)), SLOT(LastFMButtonVisibilityChanged(bool)));
@@ -758,6 +761,7 @@ void MainWindow::ReloadAllSettings() {
   ReloadSettings();
 
   // Other settings
+  app_->ReloadSettings();
   app_->global_search()->ReloadSettings();
   ui_->global_search->ReloadSettings();
   app_->library()->ReloadSettings();
@@ -1900,13 +1904,9 @@ void MainWindow::EnsureSettingsDialogCreated() {
   if (settings_dialog_)
     return;
 
-  settings_dialog_.reset(new SettingsDialog(background_streams_));
-  settings_dialog_->SetLibraryDirectoryModel(app_->library_model()->directory_model());
-  settings_dialog_->SetGstEngine(qobject_cast<GstEngine*>(app_->player()->engine()));
+  settings_dialog_.reset(new SettingsDialog(app_, background_streams_));
   settings_dialog_->SetGlobalShortcutManager(global_shortcuts_);
-  settings_dialog_->SetGlobalSearch(app_->global_search());
   settings_dialog_->SetSongInfoView(song_info_view_);
-  settings_dialog_->SetAppearance(app_->appearance());
 
   // Settings
   connect(settings_dialog_.get(), SIGNAL(accepted()), SLOT(ReloadAllSettings()));
@@ -2231,4 +2231,13 @@ void MainWindow::HandleNotificationPreview(OSD::Behaviour type, QString line1, Q
 
     osd_->ShowPreview(type, line1, line2, fake);
   }
+}
+
+void MainWindow::ScrollToInternetIndex(const QModelIndex& index) {
+  internet_view_->ScrollToIndex(index);
+  ui_->tabs->SetCurrentWidget(internet_view_);
+}
+
+void MainWindow::AddPodcast() {
+  app_->internet_model()->Service<PodcastService>()->AddPodcast();
 }

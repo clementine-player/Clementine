@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>GPodderSearchPage</class>
+ <widget class="QWidget" name="GPodderSearchPage">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>538</width>
+    <height>69</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Search gpodder.net</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="../../data/data.qrc">
+    <normaloff>:/providers/mygpo32.png</normaloff>:/providers/mygpo32.png</iconset>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="margin">
+    <number>0</number>
+   </property>
+   <item>
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string>Enter search terms below to find podcasts on gpodder.net</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QLineEdit" name="query"/>
+     </item>
+     <item>
+      <widget class="QPushButton" name="search">
+       <property name="text">
+        <string>Search</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="../../data/data.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>query</sender>
+   <signal>returnPressed()</signal>
+   <receiver>search</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>130</x>
+     <y>45</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>198</x>
+     <y>46</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

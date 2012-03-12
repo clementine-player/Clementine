@@ -32,8 +32,6 @@ class XMLParser : public ParserBase {
  protected:
   XMLParser(LibraryBackendInterface* library, QObject* parent);
 
-  bool ParseUntilElement(QXmlStreamReader* reader, const QString& element) const;
-
   class StreamElement : public boost::noncopyable {
    public:
     StreamElement(const QString& name, QXmlStreamWriter* stream) : stream_(stream) {

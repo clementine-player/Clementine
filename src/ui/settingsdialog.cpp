@@ -26,9 +26,11 @@
 #include "notificationssettingspage.h"
 #include "mainwindow.h"
 #include "settingsdialog.h"
+#include "core/application.h"
 #include "core/backgroundstreams.h"
 #include "core/logging.h"
 #include "core/networkproxyfactory.h"
+#include "core/player.h"
 #include "engines/enginebase.h"
 #include "engines/gstengine.h"
 #include "globalsearch/globalsearchsettingspage.h"
@@ -37,6 +39,7 @@
 #include "internet/magnatunesettingspage.h"
 #include "library/librarysettingspage.h"
 #include "playlist/playlistview.h"
+#include "podcasts/podcastsettingspage.h"
 #include "songinfo/songinfosettingspage.h"
 #include "transcoder/transcodersettingspage.h"
 #include "widgets/groupediconview.h"
@@ -96,13 +99,15 @@ void SettingsItemDelegate::paint(QPainter* painter, const QStyleOptionViewItem& 
 }
 
 
-SettingsDialog::SettingsDialog(BackgroundStreams* streams, QWidget* parent)
+SettingsDialog::SettingsDialog(Application* app, BackgroundStreams* streams, QWidget* parent)
   : QDialog(parent),
-    model_(NULL),
-    gst_engine_(NULL),
+    app_(app),
+    model_(app_->library_model()->directory_model()),
+    gst_engine_(qobject_cast<GstEngine*>(app_->player()->engine())),
     song_info_view_(NULL),
     streams_(streams),
-    global_search_(NULL),
+    global_search_(app_->global_search()),
+    appearance_(app_->appearance()),
     ui_(new Ui_SettingsDialog),
     loading_settings_(false)
 {
@@ -149,6 +154,7 @@ SettingsDialog::SettingsDialog(BackgroundStreams* streams, QWidget* parent)
   AddPage(Page_Magnatune, new MagnatuneSettingsPage(this), providers);
   AddPage(Page_DigitallyImported, new DigitallyImportedSettingsPage(this), providers);
   AddPage(Page_BackgroundStreams, new BackgroundStreamsSettingsPage(this), providers);
+  AddPage(Page_Podcasts, new PodcastSettingsPage(this), providers);
 
   // List box
   connect(ui_->list, SIGNAL(currentItemChanged(QTreeWidgetItem*,QTreeWidgetItem*)),

@@ -40,6 +40,10 @@ if (NOT APPLE)
     DESTINATION share/applications
   )
 
+  install(FILES itms.protocol itpc.protocol feed.protocol zune.protocol
+    DESTINATION share/kde4/services
+  )
+
   if(INSTALL_UBUNTU_ICONS)
     foreach(icon clementine-panel.png clementine-panel-grey.png)
       foreach(theme ubuntu-mono-dark ubuntu-mono-light)

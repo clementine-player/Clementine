@@ -141,19 +141,23 @@ public:
   bool hasChildren(const QModelIndex& parent) const;
   int rowCount(const QModelIndex& parent) const;
 
-  void ShowContextMenu(const QModelIndex& merged_model_index,
+  void ShowContextMenu(const QModelIndexList& selected_merged_model_indexes,
+                       const QModelIndex& current_merged_model_index,
                        const QPoint& global_pos);
   void ReloadSettings();
 
   Application* app() const { return app_; }
   MergedProxyModel* merged_model() const { return merged_model_; }
 
+  const QModelIndex& current_index() const { return current_index_; }
+  const QModelIndexList& selected_indexes() const { return selected_indexes_; }
+
 signals:
   void StreamError(const QString& message);
   void StreamMetadataFound(const QUrl& original_url, const Song& song);
-  void OpenSettingsAtPage(SettingsDialog::Page);
 
   void AddToPlaylist(QMimeData* data);
+  void ScrollToIndex(const QModelIndex& index);
 
 private slots:
   void ServiceDeleted();
@@ -163,6 +167,11 @@ private:
 
   Application* app_;
   MergedProxyModel* merged_model_;
+
+  // Set when a context menu is requested, can be accessed by context menu
+  // actions to do things to the current item.
+  QModelIndexList selected_indexes_;
+  QModelIndex current_index_;
 };
 
 #endif // INTERNETMODEL_H

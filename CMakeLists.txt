@@ -379,6 +379,11 @@ if(NOT CHROMAPRINT_FOUND)
   endif(WIN32)
 endif(NOT CHROMAPRINT_FOUND)
 
+# We have to use our own libmygpo-qt for now
+add_subdirectory(3rdparty/libmygpo-qt)
+set(MYGPOQT_LIBRARIES mygpo-qt)
+set(MYGPOQT_INCLUDE_DIRS ${CMAKE_SOURCE_DIR}/3rdparty/libmygpo-qt/)
+
 # Subdirectories
 add_subdirectory(src)
 if (WIN32)

@@ -134,3 +134,42 @@ void NetworkTimeouts::timerEvent(QTimerEvent* e) {
     reply->abort();
   }
 }
+
+
+RedirectFollower::RedirectFollower(QNetworkReply* first_reply, int max_redirects)
+  : QObject(NULL),
+    current_reply_(first_reply),
+    redirects_remaining_(max_redirects) {
+  ConnectReply(first_reply);
+}
+
+void RedirectFollower::ConnectReply(QNetworkReply* reply) {
+  connect(reply, SIGNAL(readyRead()), SIGNAL(readyRead()));
+  connect(reply, SIGNAL(error(QNetworkReply::NetworkError)), SIGNAL(error(QNetworkReply::NetworkError)));
+  connect(reply, SIGNAL(downloadProgress(qint64,qint64)), SIGNAL(downloadProgress(qint64,qint64)));
+  connect(reply, SIGNAL(uploadProgress(qint64,qint64)), SIGNAL(uploadProgress(qint64,qint64)));
+  connect(reply, SIGNAL(finished()), SLOT(ReplyFinished()));
+}
+
+void RedirectFollower::ReplyFinished() {
+  current_reply_->deleteLater();
+
+  if (current_reply_->attribute(QNetworkRequest::RedirectionTargetAttribute).isValid()) {
+    if (redirects_remaining_-- == 0) {
+      emit finished();
+      return;
+    }
+
+    const QUrl next_url = current_reply_->url().resolved(
+          current_reply_->attribute(QNetworkRequest::RedirectionTargetAttribute).toUrl());
+
+    QNetworkRequest req(current_reply_->request());
+    req.setUrl(next_url);
+
+    current_reply_ = current_reply_->manager()->get(req);
+    ConnectReply(current_reply_);
+    return;
+  }
+
+  emit finished();
+}

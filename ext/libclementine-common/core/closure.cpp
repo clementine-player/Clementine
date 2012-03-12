@@ -25,12 +25,14 @@ Closure::Closure(QObject* sender,
                  const char* slot,
                  const ClosureArgumentWrapper* val0,
                  const ClosureArgumentWrapper* val1,
-                 const ClosureArgumentWrapper* val2)
+                 const ClosureArgumentWrapper* val2,
+                 const ClosureArgumentWrapper* val3)
     : QObject(receiver),
       callback_(NULL),
       val0_(val0),
       val1_(val1),
-      val2_(val2) {
+      val2_(val2),
+      val3_(val3) {
   const QMetaObject* meta_receiver = receiver->metaObject();
 
   QByteArray normalised_slot = QMetaObject::normalizedSignature(slot + 1);
@@ -64,7 +66,8 @@ void Closure::Invoked() {
         parent(),
         val0_ ? val0_->arg() : QGenericArgument(),
         val1_ ? val1_->arg() : QGenericArgument(),
-        val2_ ? val2_->arg() : QGenericArgument());
+        val2_ ? val2_->arg() : QGenericArgument(),
+        val3_ ? val3_->arg() : QGenericArgument());
   }
   deleteLater();
 }

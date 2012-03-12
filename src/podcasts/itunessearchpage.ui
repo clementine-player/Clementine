@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ITunesSearchPage</class>
+ <widget class="QWidget" name="ITunesSearchPage">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>516</width>
+    <height>69</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Search iTunes</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="../../data/data.qrc">
+    <normaloff>:/providers/itunes.png</normaloff>:/providers/itunes.png</iconset>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="margin">
+    <number>0</number>
+   </property>
+   <item>
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string>Enter search terms below to find podcasts in the iTunes Store</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QLineEdit" name="query"/>
+     </item>
+     <item>
+      <widget class="QPushButton" name="search">
+       <property name="text">
+        <string>Search</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="../../data/data.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>query</sender>
+   <signal>returnPressed()</signal>
+   <receiver>search</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>237</x>
+     <y>52</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>461</x>
+     <y>55</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

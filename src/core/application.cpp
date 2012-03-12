@@ -31,12 +31,18 @@
 #include "library/librarybackend.h"
 #include "playlist/playlistbackend.h"
 #include "playlist/playlistmanager.h"
+#include "podcasts/gpoddersync.h"
+#include "podcasts/podcastbackend.h"
+#include "podcasts/podcastdownloader.h"
+#include "podcasts/podcastupdater.h"
 
 Application::Application(QObject* parent)
   : QObject(parent),
     tag_reader_client_(NULL),
     database_(NULL),
     album_cover_loader_(NULL),
+    playlist_backend_(NULL),
+    podcast_backend_(NULL),
     appearance_(NULL),
     cover_providers_(NULL),
     task_manager_(NULL),
@@ -46,8 +52,10 @@ Application::Application(QObject* parent)
     global_search_(NULL),
     internet_model_(NULL),
     library_(NULL),
-    playlist_backend_(NULL),
-    device_manager_(NULL)
+    device_manager_(NULL),
+    podcast_updater_(NULL),
+    podcast_downloader_(NULL),
+    gpodder_sync_(NULL)
 {
   tag_reader_client_ = new TagReaderClient(this);
   MoveToNewThread(tag_reader_client_);
@@ -59,6 +67,12 @@ Application::Application(QObject* parent)
   album_cover_loader_ = new AlbumCoverLoader(this);
   MoveToNewThread(album_cover_loader_);
 
+  playlist_backend_ = new PlaylistBackend(this, this);
+  MoveToThread(playlist_backend_, database_->thread());
+
+  podcast_backend_ = new PodcastBackend(this, this);
+  MoveToThread(podcast_backend_, database_->thread());
+
   appearance_ = new Appearance(this);
   cover_providers_ = new CoverProviders(this);
   task_manager_ = new TaskManager(this);
@@ -67,13 +81,11 @@ Application::Application(QObject* parent)
   current_art_loader_ = new CurrentArtLoader(this, this);
   global_search_ = new GlobalSearch(this, this);
   internet_model_ = new InternetModel(this, this);
-
   library_ = new Library(this, this);
-
-  playlist_backend_ = new PlaylistBackend(this, this);
-  MoveToThread(playlist_backend_, database_->thread());
-
   device_manager_ = new DeviceManager(this, this);
+  podcast_updater_ = new PodcastUpdater(this, this);
+  podcast_downloader_ = new PodcastDownloader(this, this);
+  gpodder_sync_ = new GPodderSync(this, this);
 
   library_->Init();
   library_->StartThreads();
@@ -123,4 +135,12 @@ LibraryBackend* Application::library_backend() const {
 
 LibraryModel* Application::library_model() const {
   return library()->model();
+}
+
+void Application::ReloadSettings() {
+  emit SettingsChanged();
+}
+
+void Application::OpenSettingsDialogAtPage(SettingsDialog::Page page) {
+  emit SettingsDialogRequested(page);
 }
