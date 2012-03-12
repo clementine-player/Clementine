@@ -161,7 +161,7 @@ static BreakpadRef InitBreakpad() {
 }
 
 - (BOOL) application: (NSApplication*)app openFile:(NSString*)filename {
-  qDebug() << "Wants to open:" << [filename UTF8String];
+  qLog(Debug) << "Wants to open:" << [filename UTF8String];
 
   if (application_handler_->LoadUrl(QString::fromUtf8([filename UTF8String]))) {
     return YES;
@@ -327,8 +327,8 @@ bool MigrateLegacyConfigFiles() {
     // Create ~/Library/Application Support which should already exist anyway.
     QDir::root().mkpath(GetApplicationSupportPath());
 
-    qDebug() << "Move from:" << old_config_dir
-             << "to:" << new_config_dir;
+    qLog(Debug) << "Move from:" << old_config_dir
+                << "to:" << new_config_dir;
 
     NSFileManager* file_manager = [[NSFileManager alloc] init];
     NSError* error;
