@@ -259,6 +259,9 @@ void PodcastService::ShowContextMenu(const QPoint& global_pos) {
     context_menu_->addAction(
           IconLoader::Load("view-refresh"), tr("Update all podcasts"),
           app_->podcast_updater(), SLOT(UpdateAllPodcastsNow()));
+    
+    context_menu_->addSeparator();
+    context_menu_->addActions(GetPlaylistActions());
 
     context_menu_->addSeparator();
     update_selected_action_ = context_menu_->addAction(
@@ -343,6 +346,10 @@ void PodcastService::ShowContextMenu(const QPoint& global_pos) {
   } else {
     download_selected_action_->setText(tr("Download this episode"));
   }
+  
+  GetAppendToPlaylistAction()->setEnabled(episodes || podcasts);
+  GetReplacePlaylistAction()->setEnabled(episodes || podcasts);
+  GetOpenInNewPlaylistAction()->setEnabled(episodes || podcasts);
 
   context_menu_->popup(global_pos);
 }
