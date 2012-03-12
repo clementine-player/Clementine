@@ -153,6 +153,7 @@ static BreakpadRef InitBreakpad() {
     qLog(Warning)<<"Media key monitoring disabled";
 
 }
+
 - (BOOL) application: (NSApplication*)app openFile:(NSString*)filename {
   qDebug() << "Wants to open:" << [filename UTF8String];
 
@@ -161,6 +162,14 @@ static BreakpadRef InitBreakpad() {
   }
 
   return NO;
+}
+
+- (void) application: (NSApplication*)app openFiles:(NSArray*)filenames {
+  qLog(Debug) << "Wants to open:";
+  NSLog(@"%@", filenames);
+  [filenames enumerateObjectsUsingBlock:^(id object, NSUInteger idx, BOOL* stop) {
+    [self application:app openFile:(NSString*)object];
+  }];
 }
 
 - (void) mediaKeyTap: (SPMediaKeyTap*)keyTap receivedMediaKeyEvent:(NSEvent*)event {
