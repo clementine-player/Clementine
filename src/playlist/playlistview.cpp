@@ -21,8 +21,9 @@
 #include "playlistheader.h"
 #include "playlistview.h"
 #include "core/application.h"
-#include "covers/currentartloader.h"
 #include "core/logging.h"
+#include "core/player.h"
+#include "covers/currentartloader.h"
 
 #include <QCleanlooksStyle>
 #include <QClipboard>
@@ -159,6 +160,9 @@ void PlaylistView::SetApplication(Application *app) {
   connect(app_->current_art_loader(),
           SIGNAL(ArtLoaded(const Song&, const QString&, const QImage&)),
           SLOT(CurrentSongChanged(const Song&, const QString&, const QImage&)));
+  connect(app_->player(), SIGNAL(Paused()), SLOT(StopGlowing()));
+  connect(app_->player(), SIGNAL(Playing()), SLOT(StartGlowing()));
+  connect(app_->player(), SIGNAL(Stopped()), SLOT(StopGlowing()));
 }
 
 void PlaylistView::SetItemDelegates(LibraryBackend* backend) {
@@ -1119,7 +1123,7 @@ void PlaylistView::CurrentSongChanged(const Song& song,
 }
 
 void PlaylistView::set_background_image(const QImage& image) {
-  if (!(image.format() == QImage::Format_ARGB32))
+  if (image.format() != QImage::Format_ARGB32)
     background_image_ = image.convertToFormat(QImage::Format_ARGB32);
   else
     background_image_ = image;

@@ -399,9 +399,6 @@ MainWindow::MainWindow(Application* app,
   connect(app_->player(), SIGNAL(TrackSkipped(PlaylistItemPtr)), SLOT(TrackSkipped(PlaylistItemPtr)));
   connect(app_->player(), SIGNAL(VolumeChanged(int)), SLOT(VolumeChanged(int)));
 
-  connect(app_->player(), SIGNAL(Paused()), ui_->playlist->view(), SLOT(StopGlowing()));
-  connect(app_->player(), SIGNAL(Playing()), ui_->playlist->view(), SLOT(StartGlowing()));
-  connect(app_->player(), SIGNAL(Stopped()), ui_->playlist->view(), SLOT(StopGlowing()));
   connect(app_->player(), SIGNAL(Paused()), ui_->playlist, SLOT(ActivePaused()));
   connect(app_->player(), SIGNAL(Playing()), ui_->playlist, SLOT(ActivePlaying()));
   connect(app_->player(), SIGNAL(Stopped()), ui_->playlist, SLOT(ActiveStopped()));
