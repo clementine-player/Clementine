@@ -21,6 +21,7 @@
 #include "utilities.h"
 #include "core/application.h"
 #include "core/logging.h"
+#include "core/taskmanager.h"
 
 #include <QCoreApplication>
 #include <QDir>
@@ -633,4 +634,45 @@ bool Database::CheckErrors(const QSqlQuery& query) {
   }
 
   return false;
+}
+
+bool Database::IntegrityCheck(QSqlDatabase db) {
+  int task_id = app_->task_manager()->StartTask(tr("Integrity check"));
+
+  bool ok = false;
+  bool error_reported = false;
+  // Ask for 10 error messages at most.
+  QSqlQuery q(QString("PRAGMA integrity_check(10)"), db);
+  while (q.next()) {
+    QString message = q.value(0).toString();
+
+    // If no errors are found, a single row with the value "ok" is returned
+    if (message == "ok") {
+      ok = true;
+      break;
+    } else {
+      if (!error_reported) {
+        app_->AddError(tr("Database corruption detected. Please read "
+            "https://code.google.com/p/clementine-player/wiki/DatabaseCorruption "
+            "for instructions on how to recover your database"));
+      }
+      app_->AddError("Database: " + message);
+      error_reported = true;
+    }
+  }
+
+  app_->task_manager()->SetTaskFinished(task_id);
+
+  return ok;
+}
+
+void Database::DoBackup() {
+  QSqlDatabase db(this->Connect());
+
+  // Before we overwrite anything, make sure the database is not corrupt
+  const bool ok = IntegrityCheck(db);
+
+  if (ok) {
+    // TODO: Run database backup...
+  }
 }

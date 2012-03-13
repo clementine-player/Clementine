@@ -64,12 +64,16 @@ class Database : public QObject {
  signals:
   void Error(const QString& message);
 
+ private slots:
+  void DoBackup();
+
  private:
   void UpdateMainSchema(QSqlDatabase* db);
 
   void UpdateDatabaseSchema(int version, QSqlDatabase& db);
   void UrlEncodeFilenameColumn(const QString& table, QSqlDatabase& db);
   QStringList SongsTables(QSqlDatabase& db, int schema_version) const;
+  bool IntegrityCheck(QSqlDatabase db);
 
   struct AttachedDatabase {
     AttachedDatabase() {}
