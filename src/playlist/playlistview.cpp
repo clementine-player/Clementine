@@ -163,6 +163,7 @@ void PlaylistView::SetApplication(Application *app) {
   connect(app_->player(), SIGNAL(Paused()), SLOT(StopGlowing()));
   connect(app_->player(), SIGNAL(Playing()), SLOT(StartGlowing()));
   connect(app_->player(), SIGNAL(Stopped()), SLOT(StopGlowing()));
+  connect(app_->player(), SIGNAL(Stopped()), SLOT(PlayerStopped()));
 }
 
 void PlaylistView::SetItemDelegates(LibraryBackend* backend) {
@@ -1134,3 +1135,6 @@ void PlaylistView::set_background_image(const QImage& image) {
   }
 }
 
+void PlaylistView::PlayerStopped() {
+  CurrentSongChanged(Song(), QString(), QImage());
+}

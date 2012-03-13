@@ -103,6 +103,7 @@ class PlaylistView : public QTreeView {
 
   void CopyCurrentSongToClipboard() const;
   void CurrentSongChanged(const Song& new_song, const QString& uri, const QImage& cover_art);
+  void PlayerStopped();
 
  signals:
   void PlayItem(const QModelIndex& index);
