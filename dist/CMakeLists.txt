@@ -40,7 +40,10 @@ if (NOT APPLE)
     DESTINATION share/applications
   )
 
-  install(FILES itms.protocol itpc.protocol feed.protocol zune.protocol
+  install(FILES clementine-itms.protocol
+                clementine-itpc.protocol
+                clementine-feed.protocol
+                clementine-zune.protocol
     DESTINATION share/kde4/services
   )
 

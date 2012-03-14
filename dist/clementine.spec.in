@@ -79,9 +79,13 @@ make clean
 %{_bindir}/clementine
 %{_bindir}/clementine-tagreader
 %{_datadir}/applications/clementine.desktop
+%{_datadir}/clementine/projectm-presets
+%{_datadir}/kde4/services/clementine-itms.protocol
+%{_datadir}/kde4/services/clementine-itpc.protocol
+%{_datadir}/kde4/services/clementine-feed.protocol
+%{_datadir}/kde4/services/clementine-zune.protocol
 %{_datadir}/icons/hicolor/64x64/apps/application-x-clementine.png
 %{_datadir}/icons/hicolor/scalable/apps/application-x-clementine.svg
-%{_datadir}/clementine/projectm-presets
 
 %changelog
 * @RPM_DATE@ David Sansome <me@davidsansome.com> - @CLEMENTINE_VERSION_RPM_V@
