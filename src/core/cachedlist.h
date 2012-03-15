@@ -79,6 +79,10 @@ public:
            last_updated_.secsTo(QDateTime::currentDateTime()) > cache_duration_secs_;
   }
 
+  void Sort() {
+    qSort(data_);
+  }
+
   const ListType& Data() const { return data_; }
   operator ListType() const { return data_; }
 

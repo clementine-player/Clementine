@@ -44,6 +44,11 @@ const char* SomaFMService::kHomepage = "http://somafm.com";
 const int SomaFMService::kStreamsCacheDurationSecs =
     60 * 60 * 24 * 28; // 4 weeks
 
+bool operator <(const SomaFMService::Stream& a,
+                const SomaFMService::Stream& b) {
+  return a.title_.compare(b.title_, Qt::CaseInsensitive) < 0;
+}
+
 SomaFMService::SomaFMService(Application* app, InternetModel* parent)
   : InternetService(kServiceName, app, parent, parent),
     url_handler_(new SomaFMUrlHandler(app, this, this)),
@@ -122,6 +127,7 @@ void SomaFMService::RefreshStreamsFinished(QNetworkReply* reply, int task_id) {
   }
 
   streams_.Update(list);
+  streams_.Sort();
 
   // Only update the item's children if it's already been populated
   if (!root_->data(InternetModel::Role_CanLazyLoad).toBool())
@@ -224,4 +230,5 @@ QDataStream& operator>>(QDataStream& in, SomaFMService::Stream& stream) {
 
 void SomaFMService::ReloadSettings() {
   streams_.Load();
+  streams_.Sort();
 }
