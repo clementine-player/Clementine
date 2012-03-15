@@ -102,7 +102,7 @@ void PodcastParser::ParseChannel(QXmlStreamReader* reader, Podcast* ret) const {
       if (name == "title") {
         ret->set_title(reader->readElementText());
       } else if (name == "link" && reader->namespaceUri().isEmpty()) {
-        ret->set_link(QUrl(reader->readElementText()));
+        ret->set_link(QUrl::fromEncoded(reader->readElementText().toAscii()));
       } else if (name == "description") {
         ret->set_description(reader->readElementText());
       } else if (name == "owner" && reader->namespaceUri() == kItunesNamespace) {
@@ -113,7 +113,7 @@ void PodcastParser::ParseChannel(QXmlStreamReader* reader, Podcast* ret) const {
         ret->set_copyright(reader->readElementText());
       } else if (name == "link" && reader->namespaceUri() == kAtomNamespace &&
                  ret->url().isEmpty() && reader->attributes().value("rel") == "self") {
-        ret->set_url(QUrl(reader->readElementText()));
+        ret->set_url(QUrl::fromEncoded(reader->readElementText().toAscii()));
       } else if (name == "item") {
         ParseItem(reader, ret);
       } else {
@@ -138,7 +138,7 @@ void PodcastParser::ParseImage(QXmlStreamReader* reader, Podcast* ret) const {
     case QXmlStreamReader::StartElement: {
       const QStringRef name = reader->name();
       if (name == "url") {
-        ret->set_image_url_large(QUrl(reader->readElementText()));
+        ret->set_image_url_large(QUrl::fromEncoded(reader->readElementText().toAscii()));
       } else {
         Utilities::ConsumeCurrentElement(reader);
       }
@@ -206,7 +206,7 @@ void PodcastParser::ParseItem(QXmlStreamReader* reader, Podcast* ret) const {
         }
       } else if (name == "enclosure") {
         if (reader->attributes().value("type").toString().startsWith("audio/")) {
-          episode.set_url(QUrl(reader->attributes().value("url").toString()));
+          episode.set_url(QUrl::fromEncoded(reader->attributes().value("url").toString().toAscii()));
         }
         Utilities::ConsumeCurrentElement(reader);
       } else if (name == "author" && reader->namespaceUri() == kItunesNamespace) {
@@ -263,8 +263,8 @@ void PodcastParser::ParseOutline(QXmlStreamReader* reader, OpmlContainer* ret) c
         Podcast podcast;
         podcast.set_description(attributes.value("description").toString());
         podcast.set_title(attributes.value("text").toString());
-        podcast.set_image_url_large(QUrl(attributes.value("imageHref").toString()));
-        podcast.set_url(QUrl(attributes.value("xmlUrl").toString()));
+        podcast.set_image_url_large(QUrl::fromEncoded(attributes.value("imageHref").toString().toAscii()));
+        podcast.set_url(QUrl::fromEncoded(attributes.value("xmlUrl").toString().toAscii()));
         ret->feeds.append(podcast);
 
         // Consume any children and the EndElement.
