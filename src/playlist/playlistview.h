@@ -34,6 +34,7 @@ class LibraryBackend;
 class PlaylistHeader;
 class RadioLoadingIndicator;
 class RatingItemDelegate;
+class QTimeLine;
 
 
 // This proxy style works around a bug/feature introduced in Qt 4.7's QGtkStyle
@@ -153,6 +154,8 @@ class PlaylistView : public QTreeView {
   void RatingHoverIn(const QModelIndex& index, const QPoint& pos);
   void RatingHoverOut();
 
+  void FadePreviousBackgroundImage(qreal value);
+
  private:
   void ReloadBarPixmaps();
   QList<QPixmap> LoadBarPixmap(const QString& filename);
@@ -191,8 +194,17 @@ class PlaylistView : public QTreeView {
   // particular (in terms of format, opacity), you should probably use
   // set_background_image_type instead of modifying background_image_ directly
   QImage background_image_;
+  // Used if background image is a filemane
+  QString background_image_filename_;
   QImage current_song_cover_art_;
   QPixmap cached_scaled_background_image_;
+  
+  // For fading when image change
+  QPixmap previous_background_image_;
+  qreal previous_background_image_opacity_;
+  QTimeLine* fade_animation_;
+  
+  // To know if we should redraw the background or not
   int last_height_;
   int last_width_;
   bool force_background_redraw_;

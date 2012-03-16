@@ -36,6 +36,7 @@
 #include <QApplication>
 #include <QSortFilterProxyModel>
 #include <QScrollBar>
+#include <QTimeLine>
 
 #include <math.h>
 
@@ -102,6 +103,8 @@ PlaylistView::PlaylistView(QWidget *parent)
     read_only_settings_(true),
     upgrading_from_version_(-1),
     background_image_type_(Default),
+    previous_background_image_opacity_(0.0),
+    fade_animation_(new QTimeLine(1000, this)),
     last_height_(-1),
     last_width_(-1),
     force_background_redraw_(false),
@@ -152,6 +155,9 @@ PlaylistView::PlaylistView(QWidget *parent)
 #ifdef Q_OS_DARWIN
   setVerticalScrollMode(QAbstractItemView::ScrollPerPixel);
 #endif
+  // For fading
+  connect(fade_animation_, SIGNAL(valueChanged(qreal)), SLOT(FadePreviousBackgroundImage(qreal)));
+  fade_animation_->setDirection(QTimeLine::Backward); // 1.0 -> 0.0
 }
 
 void PlaylistView::SetApplication(Application *app) {
@@ -828,9 +834,14 @@ void PlaylistView::paintEvent(QPaintEvent* event) {
       }
 
       // Actually draw the background image
-      background_painter.drawPixmap((width() - cached_scaled_background_image_.width()) / 2,
-                                    (height() - cached_scaled_background_image_.height()) / 2,
-                                    cached_scaled_background_image_);
+      int x = (width() - cached_scaled_background_image_.width()) / 2;
+      int y = (height() - cached_scaled_background_image_.height()) / 2;
+      background_painter.drawPixmap(x, y, cached_scaled_background_image_);
+      // Draw the previous background image if we're fading
+      if (!previous_background_image_.isNull()) {
+        background_painter.setOpacity(previous_background_image_opacity_);
+        background_painter.drawPixmap(x, y, previous_background_image_);
+      }
     }
   }
 
@@ -935,20 +946,6 @@ void PlaylistView::ReloadSettings() {
   s.beginGroup(Playlist::kSettingsGroup);
   glow_enabled_ = s.value("glow_effect", true).toBool();
 
-  QVariant playlistview_background_type = s.value(kSettingBackgroundImageType);
-  // bg_enabled should also be checked for backward compatibility (in releases
-  // <= 1.0, there was just a boolean to activate/deactivate the background)
-  QVariant bg_enabled = s.value("bg_enabled");
-  if (playlistview_background_type.isValid()) {
-    background_image_type_ = static_cast<BackgroundImageType>(playlistview_background_type.toInt());
-  } else if (bg_enabled.isValid()) {
-    if (bg_enabled.toBool()) {
-      background_image_type_ = Default;
-    } else {
-      background_image_type_ = None;
-    }
-  }
-
   if (setting_initial_header_layout_ || upgrading_from_qheaderview_) {
     header_->SetStretchEnabled(s.value("stretch", true).toBool());
     upgrading_from_qheaderview_ = false;
@@ -958,9 +955,6 @@ void PlaylistView::ReloadSettings() {
     StartGlowing();
   if (!glow_enabled_)
     StopGlowing();
-
-  setProperty("default_background_enabled", background_image_type_ == Default);
-  emit BackgroundPropertyChanged();
 
   if (setting_initial_header_layout_) {
     header_->SetColumnWidth(Playlist::Column_Length, 0.06);
@@ -980,15 +974,43 @@ void PlaylistView::ReloadSettings() {
     column_alignment_ = DefaultColumnAlignment();
   }
 
-  QString background_image_filename = s.value(kSettingBackgroundImageFilename).toString();
-  if (!background_image_filename.isEmpty() && background_image_type_ == Custom) {
-    set_background_image(QImage(background_image_filename));
-  } else if (background_image_type_ == AlbumCover) {
-    set_background_image(current_song_cover_art_);
-  }
-  force_background_redraw_ = true;
-
   emit ColumnAlignmentChanged(column_alignment_);
+
+  // Background:
+  QVariant q_playlistview_background_type = s.value(kSettingBackgroundImageType);
+  BackgroundImageType background_type;
+  // bg_enabled should also be checked for backward compatibility (in releases
+  // <= 1.0, there was just a boolean to activate/deactivate the background)
+  QVariant bg_enabled = s.value("bg_enabled");
+  if (q_playlistview_background_type.isValid()) {
+    background_type = static_cast<BackgroundImageType>(q_playlistview_background_type.toInt());
+  } else if (bg_enabled.isValid()) {
+    if (bg_enabled.toBool()) {
+      background_type = Default;
+    } else {
+      background_type = None;
+    }
+  }
+  QString background_image_filename = s.value(kSettingBackgroundImageFilename).toString();
+  // Check if background properties have changed.
+  // We change properties only if they have actually changed, to avoid to call
+  // set_background_image when it is not needed, as this will cause the fading
+  // animation to start again. This also avoid to do useless
+  // "force_background_redraw".
+  if (background_image_filename != background_image_filename_
+      || background_type != background_image_type_) {
+    // Store background properties
+    background_image_type_ = background_type;
+    background_image_filename_ = background_image_filename;
+    if (background_image_type_ == Custom) {
+      set_background_image(QImage(background_image_filename));
+    } else if (background_image_type_ == AlbumCover) {
+      set_background_image(current_song_cover_art_);
+    }
+    setProperty("default_background_enabled", background_image_type_ == Default);
+    emit BackgroundPropertyChanged();
+    force_background_redraw_ = true;
+  }
 }
 
 void PlaylistView::SaveSettings() {
@@ -1111,6 +1133,9 @@ void PlaylistView::CopyCurrentSongToClipboard() const {
 void PlaylistView::CurrentSongChanged(const Song& song,
                                       const QString& uri,
                                       const QImage& song_art) {
+  if (current_song_cover_art_ == song_art)
+    return;
+
   current_song_cover_art_ = song_art;
   if (background_image_type_ == AlbumCover) {
     if (song.art_automatic().isEmpty() && song.art_manual().isEmpty()) {
@@ -1124,15 +1149,42 @@ void PlaylistView::CurrentSongChanged(const Song& song,
 }
 
 void PlaylistView::set_background_image(const QImage& image) {
+  if (image.isNull()) {
+    // Reset only if image is empty. Otherwise it is not needed as it will be
+    // recomputed soon in paintEvent
+    cached_scaled_background_image_ = QPixmap();
+  }
+  
+  bool is_visible = isVisible();
+  if (is_visible) {
+    // Save previous image, for fading
+    previous_background_image_ = cached_scaled_background_image_;
+    previous_background_image_opacity_ = 1.0;
+  }
+
   if (image.format() != QImage::Format_ARGB32)
     background_image_ = image.convertToFormat(QImage::Format_ARGB32);
   else
     background_image_ = image;
+
   // Apply opacity filter
   uchar* bits = background_image_.bits();
   for (int i = 0; i < background_image_.height() * background_image_.bytesPerLine(); i+=4) {
     bits[i+3] = kBackgroundOpacity * 255;
   }
+
+  if (is_visible) {
+    fade_animation_->start();
+  }
+}
+
+void PlaylistView::FadePreviousBackgroundImage(qreal value) {
+  previous_background_image_opacity_ = value;
+  if (qFuzzyCompare(previous_background_image_opacity_, qreal(0.0))) {
+    previous_background_image_ = QPixmap();
+  }
+
+  update();
 }
 
 void PlaylistView::PlayerStopped() {
