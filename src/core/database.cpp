@@ -730,10 +730,12 @@ bool Database::OpenDatabase(const QString& filename, sqlite3** connection) const
   if (ret != 0) {
     if (*connection) {
       const char* error_message = _sqlite3_errmsg(*connection);
-      qLog(Error) << "Failed to open source database for backup:"
+      qLog(Error) << "Failed to open database for backup:"
+                  << filename
                   << error_message;
     } else {
-      qLog(Error) << "Failed to open source database for backup";
+      qLog(Error) << "Failed to open database for backup:"
+                  << filename;
     }
     return false;
   }
