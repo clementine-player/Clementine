@@ -74,6 +74,8 @@ class Database : public QObject {
   void UrlEncodeFilenameColumn(const QString& table, QSqlDatabase& db);
   QStringList SongsTables(QSqlDatabase& db, int schema_version) const;
   bool IntegrityCheck(QSqlDatabase db);
+  void BackupFile(const QString& filename);
+  bool OpenDatabase(const QString& filename, sqlite3** connection) const;
 
   struct AttachedDatabase {
     AttachedDatabase() {}
@@ -142,6 +144,17 @@ class Database : public QObject {
   static const uchar* (*_sqlite3_value_text) (sqlite3_value*);
   static void (*_sqlite3_result_int64) (sqlite3_context*, sqlite_int64);
   static void* (*_sqlite3_user_data) (sqlite3_context*);
+
+  // These are necessary for SQLite backups.
+  static int (*_sqlite3_open) (const char*, sqlite3**);
+  static const char* (*_sqlite3_errmsg) (sqlite3*);
+  static int (*_sqlite3_close) (sqlite3*);
+  static sqlite3_backup* (*_sqlite3_backup_init) (
+      sqlite3*, const char*, sqlite3*, const char*);
+  static int (*_sqlite3_backup_step) (sqlite3_backup*, int);
+  static int (*_sqlite3_backup_finish) (sqlite3_backup*);
+  static int (*_sqlite3_backup_pagecount) (sqlite3_backup*);
+  static int (*_sqlite3_backup_remaining) (sqlite3_backup*);
 
   static bool sStaticInitDone;
   static bool sLoadedSqliteSymbols;
