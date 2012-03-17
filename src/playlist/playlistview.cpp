@@ -978,7 +978,7 @@ void PlaylistView::ReloadSettings() {
 
   // Background:
   QVariant q_playlistview_background_type = s.value(kSettingBackgroundImageType);
-  BackgroundImageType background_type;
+  BackgroundImageType background_type(Default);
   // bg_enabled should also be checked for backward compatibility (in releases
   // <= 1.0, there was just a boolean to activate/deactivate the background)
   QVariant bg_enabled = s.value("bg_enabled");
