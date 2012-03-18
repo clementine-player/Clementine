@@ -816,7 +816,7 @@ void PlaylistView::paintEvent(QPaintEvent* event) {
 
   // Draw background
   if (background_image_type_ == Custom || background_image_type_ == AlbumCover) {
-    if (!background_image_.isNull()) {
+    if (!background_image_.isNull() || !previous_background_image_.isNull()) {
       QPainter background_painter(viewport());
 
       // Check if we should recompute the background image
@@ -834,13 +834,21 @@ void PlaylistView::paintEvent(QPaintEvent* event) {
       }
 
       // Actually draw the background image
-      int x = (width() - cached_scaled_background_image_.width()) / 2;
-      int y = (height() - cached_scaled_background_image_.height()) / 2;
-      background_painter.drawPixmap(x, y, cached_scaled_background_image_);
+      if (!cached_scaled_background_image_.isNull()) {
+        // Set opactiy only if needed, as this deactivate hardware acceleration
+        if (!qFuzzyCompare(previous_background_image_opacity_, qreal(0.0))) {
+          background_painter.setOpacity(1.0 - previous_background_image_opacity_);
+        }
+        background_painter.drawPixmap((width() - cached_scaled_background_image_.width()) / 2,
+                                      (height() - cached_scaled_background_image_.height()) / 2,
+                                      cached_scaled_background_image_);
+      }
       // Draw the previous background image if we're fading
       if (!previous_background_image_.isNull()) {
         background_painter.setOpacity(previous_background_image_opacity_);
-        background_painter.drawPixmap(x, y, previous_background_image_);
+        background_painter.drawPixmap((width() - previous_background_image_.width()) / 2,
+                                      (height() - previous_background_image_.height()) / 2,
+                                      previous_background_image_);
       }
     }
   }
@@ -1006,6 +1014,14 @@ void PlaylistView::ReloadSettings() {
       set_background_image(QImage(background_image_filename));
     } else if (background_image_type_ == AlbumCover) {
       set_background_image(current_song_cover_art_);
+    } else {
+      // User changed background image type to something that will not be
+      // painted through paintEvent: reset all background images.
+      // This avoid to use old (deprecated) images for fading when selecting
+      // AlbumCover or Custom background image type later.
+      set_background_image(QImage());
+      cached_scaled_background_image_ = QPixmap();
+      previous_background_image_ = QPixmap();
     }
     setProperty("default_background_enabled", background_image_type_ == Default);
     emit BackgroundPropertyChanged();
@@ -1149,12 +1165,6 @@ void PlaylistView::CurrentSongChanged(const Song& song,
 }
 
 void PlaylistView::set_background_image(const QImage& image) {
-  if (image.isNull()) {
-    // Reset only if image is empty. Otherwise it is not needed as it will be
-    // recomputed soon in paintEvent
-    cached_scaled_background_image_ = QPixmap();
-  }
-  
   bool is_visible = isVisible();
   if (is_visible) {
     // Save previous image, for fading
@@ -1182,6 +1192,7 @@ void PlaylistView::FadePreviousBackgroundImage(qreal value) {
   previous_background_image_opacity_ = value;
   if (qFuzzyCompare(previous_background_image_opacity_, qreal(0.0))) {
     previous_background_image_ = QPixmap();
+    previous_background_image_opacity_ = 0.0;
   }
 
   update();
