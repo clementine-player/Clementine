@@ -280,7 +280,7 @@ void Database::StaticInit() {
   _sqlite3_user_data = reinterpret_cast<void* (*) (sqlite3_context*)>(
       library.resolve("sqlite3_user_data"));
 
-  _sqlite3_open = reinterpret_cast<int (*) (const char*, sqlite3*)>(
+  _sqlite3_open = reinterpret_cast<int (*) (const char*, sqlite3**)>(
       library.resolve("sqlite3_open"));
   _sqlite3_errmsg = reinterpret_cast<const char* (*) (sqlite3*)>(
       library.resolve("sqlite3_errmsg"));
