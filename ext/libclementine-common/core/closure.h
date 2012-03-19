@@ -84,7 +84,7 @@ class Closure : public QObject, boost::noncopyable {
 class SharedPointerWrapper {
  public:
   virtual ~SharedPointerWrapper() {}
-  virtual void* data() const = 0;
+  virtual QObject* data() const = 0;
 };
 
 template<typename T>
@@ -93,9 +93,11 @@ class SharedPointer : public SharedPointerWrapper {
   SharedPointer(QSharedPointer<T> ptr)
       : ptr_(ptr) {
   }
-  void* data() const {
+
+  QObject* data() const {
     return ptr_.data();
   }
+
  private:
   QSharedPointer<T> ptr_;
 };
@@ -111,7 +113,7 @@ class SharedClosure : public Closure {
                 const ClosureArgumentWrapper* val1 = 0,
                 const ClosureArgumentWrapper* val2 = 0,
                 const ClosureArgumentWrapper* val3 = 0)
-      : Closure(reinterpret_cast<QObject*>(sender->data()), signal,
+      : Closure(sender->data(), signal,
                 receiver, slot,
                 val0, val1, val2, val3),
         shared_sender_(sender) {
