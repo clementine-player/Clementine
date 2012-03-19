@@ -65,3 +65,16 @@ TemporaryResource::TemporaryResource(const QString& filename) {
 
   reset();
 }
+
+TestQObject::TestQObject(QObject* parent)
+  : QObject(parent),
+    invoked_(0) {
+}
+
+void TestQObject::Emit() {
+  emit Emitted();
+}
+
+void TestQObject::Invoke() {
+  ++invoked_;
+}

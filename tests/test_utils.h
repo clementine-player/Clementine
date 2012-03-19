@@ -62,4 +62,23 @@ public:
   TemporaryResource(const QString& filename);
 };
 
+class TestQObject : public QObject {
+  Q_OBJECT
+ public:
+  TestQObject(QObject* parent = 0);
+
+  void Emit();
+
+  int invoked() const { return invoked_; }
+
+ signals:
+  void Emitted();
+
+ public slots:
+  void Invoke();
+
+ private:
+  int invoked_;
+};
+
 #endif  // TEST_UTILS_H

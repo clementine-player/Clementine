@@ -63,6 +63,7 @@ set(TESTUTILS-SOURCES
 
 set(TESTUTILS-MOC-HEADERS
   mock_networkaccessmanager.h
+  test_utils.h
   testobjectdecorators.h
 )
 
@@ -138,6 +139,7 @@ add_test_file(song_test.cpp false)
 add_test_file(translations_test.cpp false)
 add_test_file(utilities_test.cpp false)
 #add_test_file(xspfparser_test.cpp false)
+add_test_file(closure_test.cpp false)
 
 #if(LINUX AND HAVE_DBUS)
 #  add_test_file(mpris1_test.cpp true)
