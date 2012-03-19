@@ -191,7 +191,6 @@ Closure* NewClosure(
     const char* signal,
     QObject* receiver,
     const char* slot) {
-  Q_ASSERT(sender.data()->metaObject());  // Static check for something QObject-like.
   return new SharedClosure(new SharedPointer<TP>(sender), signal, receiver, slot);
 }
 
@@ -202,7 +201,6 @@ Closure* NewClosure(
     QObject* receiver,
     const char* slot,
     const T0& val0) {
-  Q_ASSERT(sender.data()->metaObject());  // Static check for something QObject-like.
   return new SharedClosure(
         new SharedPointer<TP>(sender), signal, receiver, slot,
         C_ARG(T0, val0));
@@ -216,7 +214,6 @@ Closure* NewClosure(
     const char* slot,
     const T0& val0,
     const T1& val1) {
-  Q_ASSERT(sender.data()->metaObject());  // Static check for something QObject-like.
   return new SharedClosure(
         new SharedPointer<TP>(sender), signal, receiver, slot,
         C_ARG(T0, val0), C_ARG(T1, val1));
