@@ -43,6 +43,7 @@ public:
 
 private slots:
   void TagListLoaded(mygpo::TagList* tag_list);
+  void TagListFailed(mygpo::TagList* tag_list);
 
 private:
   QNetworkAccessManager* network_;

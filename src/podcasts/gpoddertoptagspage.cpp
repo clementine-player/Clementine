@@ -22,6 +22,8 @@
 
 #include <ApiRequest.h>
 
+#include <QMessageBox>
+
 const int GPodderTopTagsPage::kMaxTagCount = 100;
 
 
@@ -47,19 +49,39 @@ void GPodderTopTagsPage::Show() {
     emit Busy(true);
     done_initial_load_ = true;
 
-    mygpo::TagList* tag_list = api_->topTags(kMaxTagCount);
+    mygpo::TagListPtr tag_list(api_->topTags(kMaxTagCount));
     NewClosure(tag_list, SIGNAL(finished()),
                this, SLOT(TagListLoaded(mygpo::TagList*)),
-               tag_list);
+               tag_list.data());
+    NewClosure(tag_list, SIGNAL(parseError()),
+               this, SLOT(TagListFailed(mygpo::TagList*)),
+               tag_list.data());
+    NewClosure(tag_list, SIGNAL(requestError(QNetworkReply::NetworkError)),
+               this, SLOT(TagListFailed(mygpo::TagList*)),
+               tag_list.data());
   }
 }
 
 void GPodderTopTagsPage::TagListLoaded(mygpo::TagList* tag_list) {
-  tag_list->deleteLater();
-
   emit Busy(false);
 
   foreach (mygpo::TagPtr tag, tag_list->list()) {
     model()->appendRow(model()->CreateFolder(tag->tag()));
   }
+}
+
+void GPodderTopTagsPage::TagListFailed(mygpo::TagList* list) {
+  emit Busy(false);
+  done_initial_load_ = false;
+
+  if (QMessageBox::warning(
+        NULL, tr("Failed to fetch directory"),
+        tr("There was a problem communicating with gpodder.net"),
+        QMessageBox::Retry | QMessageBox::Close,
+        QMessageBox::Retry) != QMessageBox::Retry) {
+    return;
+  }
+
+  // Try doing the search again.
+  Show();
 }

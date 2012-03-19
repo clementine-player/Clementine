@@ -151,26 +151,23 @@ void GPodderSync::GetUpdatesNow() {
     timestamp = last_successful_get_.toTime_t();
   }
 
-  mygpo::DeviceUpdates* reply = api_->deviceUpdates(username_, DeviceId(), timestamp);
+  mygpo::DeviceUpdatesPtr reply(api_->deviceUpdates(username_, DeviceId(), timestamp));
   NewClosure(reply, SIGNAL(finished()),
              this, SLOT(DeviceUpdatesFinished(mygpo::DeviceUpdates*)),
-             reply);
+             reply.data());
   NewClosure(reply, SIGNAL(parseError()),
              this, SLOT(DeviceUpdatesFailed(mygpo::DeviceUpdates*)),
-             reply);
+             reply.data());
   NewClosure(reply, SIGNAL(requestError(QNetworkReply::NetworkError)),
              this, SLOT(DeviceUpdatesFailed(mygpo::DeviceUpdates*)),
-             reply);
+             reply.data());
 }
 
 void GPodderSync::DeviceUpdatesFailed(mygpo::DeviceUpdates* reply) {
-  reply->deleteLater();
   qLog(Warning) << "Failed to get gpodder.net device updates";
 }
 
 void GPodderSync::DeviceUpdatesFinished(mygpo::DeviceUpdates* reply) {
-  reply->deleteLater();
-
   // Remember episode actions for each podcast, so when we add a new podcast
   // we can apply the actions immediately.
   QMap<QUrl, QList<mygpo::EpisodePtr> > episodes_by_podcast;
@@ -334,34 +331,32 @@ void GPodderSync::FlushUpdateQueue() {
     return;
 
   flushing_queue_ = true;
-  mygpo::AddRemoveResult* reply =
+  mygpo::AddRemoveResultPtr reply(
       api_->addRemoveSubscriptions(username_, DeviceId(),
                                    queued_add_subscriptions_.toList(),
-                                   queued_remove_subscriptions_.toList());
+                                   queued_remove_subscriptions_.toList()));
 
   qLog(Info) << "Sending" << all_urls.count() << "changes to gpodder.net";
 
   NewClosure(reply, SIGNAL(finished()),
              this, SLOT(AddRemoveFinished(mygpo::AddRemoveResult*,QList<QUrl>)),
-             reply, all_urls.toList());
+             reply.data(), all_urls.toList());
   NewClosure(reply, SIGNAL(parseError()),
              this, SLOT(AddRemoveFailed(mygpo::AddRemoveResult*)),
-             reply);
+             reply.data());
   NewClosure(reply, SIGNAL(requestError(QNetworkReply::NetworkError)),
              this, SLOT(AddRemoveFailed(mygpo::AddRemoveResult*)),
-             reply);
+             reply.data());
 }
 
 void GPodderSync::AddRemoveFailed(mygpo::AddRemoveResult* reply) {
   flushing_queue_ = false;
-  reply->deleteLater();
   qLog(Warning) << "Failed to update gpodder.net subscriptions";
 }
 
 void GPodderSync::AddRemoveFinished(mygpo::AddRemoveResult* reply,
                                     const QList<QUrl>& affected_urls) {
   flushing_queue_ = false;
-  reply->deleteLater();
 
   // Remove the URLs from the queue.
   foreach (const QUrl& url, affected_urls) {

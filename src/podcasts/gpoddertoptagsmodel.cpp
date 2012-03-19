@@ -61,24 +61,22 @@ void GPodderTopTagsModel::fetchMore(const QModelIndex& parent) {
   // Create a little Loading... item.
   itemFromIndex(parent)->appendRow(CreateLoadingIndicator());
 
-  mygpo::PodcastList* list =
-      api_->podcastsOfTag(GPodderTopTagsPage::kMaxTagCount, parent.data().toString());
+  mygpo::PodcastListPtr list(
+      api_->podcastsOfTag(GPodderTopTagsPage::kMaxTagCount, parent.data().toString()));
 
   NewClosure(list, SIGNAL(finished()),
              this, SLOT(PodcastsOfTagFinished(QModelIndex,mygpo::PodcastList*)),
-             parent, list);
+             parent, list.data());
   NewClosure(list, SIGNAL(parseError()),
              this, SLOT(PodcastsOfTagFailed(QModelIndex,mygpo::PodcastList*)),
-             parent, list);
+             parent, list.data());
   NewClosure(list, SIGNAL(requestError(QNetworkReply::NetworkError)),
              this, SLOT(PodcastsOfTagFailed(QModelIndex,mygpo::PodcastList*)),
-             parent, list);
+             parent, list.data());
 }
 
 void GPodderTopTagsModel::PodcastsOfTagFinished(const QModelIndex& parent,
                                                 mygpo::PodcastList* list) {
-  list->deleteLater();
-
   QStandardItem* parent_item = itemFromIndex(parent);
   if (!parent_item)
     return;
@@ -98,8 +96,6 @@ void GPodderTopTagsModel::PodcastsOfTagFinished(const QModelIndex& parent,
 
 void GPodderTopTagsModel::PodcastsOfTagFailed(const QModelIndex& parent,
                                               mygpo::PodcastList* list) {
-  list->deleteLater();
-
   QStandardItem* parent_item = itemFromIndex(parent);
   if (!parent_item)
     return;

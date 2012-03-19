@@ -139,7 +139,7 @@ public:
      * @return List of Podcast Objects containing the Data from gPodder
      *
      */
-    PodcastList* toplist( uint count );
+    PodcastListPtr toplist( uint count );
 
     /**
      * Returns the Result for the Simple API Call "Searching for Podcasts"
@@ -147,7 +147,7 @@ public:
      * @return List of Podcast Objects containing the Data from gPodder
      *
      */
-    PodcastList* search( const QString& query );
+    PodcastListPtr search( const QString& query );
 
     /**
      * Returns the Result for the Simple API Call "Downloading podcast suggestions"
@@ -156,7 +156,7 @@ public:
      * @return List of Podcast Objects containing the Data from gPodder
      *
      */
-    PodcastList* suggestions( uint count );
+    PodcastListPtr suggestions( uint count );
     
     QNetworkReply* downloadSubscriptionsJson( const QString& username, const QString& device );
     
@@ -169,7 +169,7 @@ public:
      * @return List of Podcast Objects containing the Data from gPodder
      *
      */
-    PodcastList* podcastsOfTag( uint count, const QString& tag );
+    PodcastListPtr podcastsOfTag( uint count, const QString& tag );
 
     /**
      * Returns the Result for the Advanced API Call "Retrieving Podcast Data"
@@ -177,7 +177,7 @@ public:
      * @return Podcast Object containing the Data from gPodder
      *
      */
-    Podcast* podcastData( const QUrl& podcasturl );
+    PodcastPtr podcastData( const QUrl& podcasturl );
 
     /**
      * Returns the Result for the Advanced API Call "Retrieving Episode Data"
@@ -186,7 +186,7 @@ public:
      * @return Episode Object containing the Data from gPodder
      *
      */
-    Episode* episodeData( const QUrl& podcasturl, const QUrl& episodeurl );
+    EpisodePtr episodeData( const QUrl& podcasturl, const QUrl& episodeurl );
 
     /**
      * Returns the Result for the Advanced API Call "Listing Favorite Episodes"
@@ -194,7 +194,7 @@ public:
      * @return List of Episode Objects containing the Data from gPodder
      *
      */
-    EpisodeList* favoriteEpisodes( const QString& username );
+    EpisodeListPtr favoriteEpisodes( const QString& username );
 
     /**
      * Returns the Result for the Advanced API Call "Retrieving Top Tags"
@@ -202,7 +202,7 @@ public:
      * @return List of Tag Objects containing the Data from gPodder
      *
      */
-    TagList* topTags( uint count );
+    TagListPtr topTags( uint count );
 
     /**
      * Uploads Data & returns the Result for the Advanced API Call "Add/remove subscriptions"
@@ -213,7 +213,7 @@ public:
      * @param remove URLs of Podcasts that should be removed from the Subscriptions of the User
      *
      */
-    AddRemoveResult* addRemoveSubscriptions( const QString& username, const QString& device, const QList< QUrl >& add, const QList< QUrl >& remove );
+    AddRemoveResultPtr addRemoveSubscriptions( const QString& username, const QString& device, const QList< QUrl >& add, const QList< QUrl >& remove );
 
     /**
      * Retrieve settings which are attached to an account.
@@ -221,7 +221,7 @@ public:
      * @return Received settings as key-value-pairs
      *
      */
-    Settings* accountSettings( const QString& username );
+    SettingsPtr accountSettings( const QString& username );
 
     /**
      * Retrieve settings which are attached to a device.
@@ -230,7 +230,7 @@ public:
      * @return Received settings as key-value-pairs
      *
      */
-    Settings* deviceSettings( const QString& username, const QString& device );
+    SettingsPtr deviceSettings( const QString& username, const QString& device );
 
     /**
      * Retrieve settings which are attached to a podcast.
@@ -239,7 +239,7 @@ public:
      * @return Received settings as key-value-pairs
      *
      */
-    Settings* podcastSettings( const QString& username, const QString& podcastUrl );
+    SettingsPtr podcastSettings( const QString& username, const QString& podcastUrl );
 
     /**
      * Retrieve settings which are attached to an episode.
@@ -249,7 +249,7 @@ public:
      * @return Received settings as key-value-pairs
      *
      */
-    Settings* episodeSettings( const QString& username, const QString& podcastUrl, const QString& episodeUrl );
+    SettingsPtr episodeSettings( const QString& username, const QString& podcastUrl, const QString& episodeUrl );
 
     /**
      * Set and or remove settings which are attached to an account.
@@ -259,7 +259,7 @@ public:
      * @return All settings as key-value-pairs which are stored after the update
      *
      */
-    Settings* setAccountSettings( const QString& username, QMap<QString, QVariant >& set, const QList<QString>& remove );
+    SettingsPtr setAccountSettings( const QString& username, QMap<QString, QVariant >& set, const QList<QString>& remove );
 
     /**
      * Set and or remove settings which are attached to a device.
@@ -270,7 +270,7 @@ public:
      * @return All settings as key-value-pairs which are stored after the update
      *
      */
-    Settings* setDeviceSettings( const QString& username, const QString& device, QMap<QString, QVariant >& set, const QList<QString>& remove );
+    SettingsPtr setDeviceSettings( const QString& username, const QString& device, QMap<QString, QVariant >& set, const QList<QString>& remove );
 
     /**
      * Set and or remove settings which are attached to a podcast.
@@ -281,7 +281,7 @@ public:
      * @return All settings as key-value-pairs which are stored after the update
      *
      */
-    Settings* setPodcastSettings( const QString& username, const QString& podcastUrl, QMap<QString, QVariant >& set, const QList<QString>& remove );
+    SettingsPtr setPodcastSettings( const QString& username, const QString& podcastUrl, QMap<QString, QVariant >& set, const QList<QString>& remove );
 
     /**
      * Set and or remove settings which are attached to an episode.
@@ -293,20 +293,20 @@ public:
      * @return All settings as key-value-pairs which are stored after the update
      *
      */
-    Settings* setEpisodeSettings( const QString& username, const QString& podcastUrl, const QString& episodeUrl, QMap<QString, QVariant >& set, const QList<QString>& remove );
+    SettingsPtr setEpisodeSettings( const QString& username, const QString& podcastUrl, const QString& episodeUrl, QMap<QString, QVariant >& set, const QList<QString>& remove );
 
     /**
      * Retrieve episode and subscription updates for a given device.
      * @param username Username of the account which owns the device
      * @param deviceId Id of the targeted device
      * @param timestamp A date in milliseconds, All changes since this timestamp will be retrieved
-     * @return A DeviceUpdates* which accesses:
+     * @return A DeviceUpdatesPtr which accesses:
      *    - a list of subscriptions to be added, with URL, title and descriptions
      *    - a list of URLs to be unsubscribed
      *    - a list of updated episodes
      *
      */
-    DeviceUpdates* deviceUpdates( const QString& username, const QString& deviceId, qlonglong timestamp );
+    DeviceUpdatesPtr deviceUpdates( const QString& username, const QString& deviceId, qlonglong timestamp );
 
     /**
      * Sets a new name and type for a device identified by a given ID
@@ -325,7 +325,7 @@ public:
      * @return List of devices
      *
      */
-    DeviceList* listDevices( const QString& username );
+    DeviceListPtr listDevices( const QString& username );
 
     /**
      * Download episode actions for a given username.
@@ -334,7 +334,7 @@ public:
      * @return List of all episode actions of the user
      *
      */
-    EpisodeActionList* episodeActions( const QString& username, const bool aggregated = false );
+    EpisodeActionListPtr episodeActions( const QString& username, const bool aggregated = false );
 
     /**
      * Download episode actions for a given podcast.
@@ -344,7 +344,7 @@ public:
      * @return List of all episode actions for the given podcast
      *
      */
-    EpisodeActionList* episodeActionsByPodcast( const QString& username, const QString& podcastUrl, const bool aggregated = false );
+    EpisodeActionListPtr episodeActionsByPodcast( const QString& username, const QString& podcastUrl, const bool aggregated = false );
 
     /**
      * Download episode actions for a given device.
@@ -354,7 +354,7 @@ public:
      * @return List of all episode actions for the given device
      *
      */
-    EpisodeActionList* episodeActionsByDevice( const QString& username, const QString& deviceId, const bool aggregated = false );
+    EpisodeActionListPtr episodeActionsByDevice( const QString& username, const QString& deviceId, const bool aggregated = false );
 
     /**
      * Download episode actions for a given username since a given timestamp.
@@ -363,7 +363,7 @@ public:
      * @return List of all new episode actions since the given timestamp
      *
      */
-    EpisodeActionList* episodeActionsByTimestamp( const QString& username, const qulonglong since );
+    EpisodeActionListPtr episodeActionsByTimestamp( const QString& username, const qulonglong since );
 
     /**
      * Download episode actions for a given podcast since a given timestamp.
@@ -373,7 +373,7 @@ public:
      * @return List of all new episode actions since the given timestamp
      *
      */
-    EpisodeActionList* episodeActionsByPodcastAndTimestamp( const QString& username, const QString& podcastUrl, const qulonglong since );
+    EpisodeActionListPtr episodeActionsByPodcastAndTimestamp( const QString& username, const QString& podcastUrl, const qulonglong since );
 
     /**
      * Download episode actions for a given device since a given timestamp.
@@ -383,17 +383,17 @@ public:
      * @return List of all new episode actions since the given timestamp
      *
      */
-    EpisodeActionList* episodeActionsByDeviceAndTimestamp( const QString& username, const QString& deviceId, const qulonglong since );
+    EpisodeActionListPtr episodeActionsByDeviceAndTimestamp( const QString& username, const QString& deviceId, const qulonglong since );
 
     /**
      * Upload episode actions
      * @param episodeActions The list of episode actions which shall be uploaded
-     * @return An AddRemoveResult* which contains information about the updated Urls
+     * @return An AddRemoveResultPtr which contains information about the updated Urls
      *
      */
-    AddRemoveResult* uploadEpisodeActions( const QString& username, const QList<EpisodeActionPtr>& episodeActions );
+    AddRemoveResultPtr uploadEpisodeActions( const QString& username, const QList<EpisodeActionPtr>& episodeActions );
 
-    DeviceSyncResult* deviceSynchronizationStatus( const QString& username );
+    DeviceSyncResultPtr deviceSynchronizationStatus( const QString& username );
 
 private:
     ApiRequestPrivate* const d;

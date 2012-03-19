@@ -44,20 +44,19 @@ GPodderSearchPage::~GPodderSearchPage() {
 void GPodderSearchPage::SearchClicked() {
   emit Busy(true);
 
-  mygpo::PodcastList* list = api_->search(ui_->query->text());
+  mygpo::PodcastListPtr list(api_->search(ui_->query->text()));
   NewClosure(list, SIGNAL(finished()),
              this, SLOT(SearchFinished(mygpo::PodcastList*)),
-             list);
+             list.data());
   NewClosure(list, SIGNAL(parseError()),
              this, SLOT(SearchFailed(mygpo::PodcastList*)),
-             list);
+             list.data());
   NewClosure(list, SIGNAL(requestError(QNetworkReply::NetworkError)),
              this, SLOT(SearchFailed(mygpo::PodcastList*)),
-             list);
+             list.data());
 }
 
 void GPodderSearchPage::SearchFinished(mygpo::PodcastList* list) {
-  list->deleteLater();
   emit Busy(false);
 
   model()->clear();
@@ -71,7 +70,6 @@ void GPodderSearchPage::SearchFinished(mygpo::PodcastList* list) {
 }
 
 void GPodderSearchPage::SearchFailed(mygpo::PodcastList* list) {
-  list->deleteLater();
   emit Busy(false);
 
   model()->clear();

@@ -104,29 +104,32 @@ QNetworkReply* ApiRequestPrivate::searchXml( const QString& query )
     return m_requestHandler.getRequest( requestUrl );
 }
 
-PodcastList* ApiRequestPrivate::toplist( uint count )
+PodcastListPtr ApiRequestPrivate::toplist( uint count )
 {
     QString requestUrl = UrlBuilder::getToplistUrl( count );
     QNetworkReply *reply;
     reply = m_requestHandler.getRequest( requestUrl );
-    return new PodcastList( reply );
+    PodcastListPtr podcastList( new PodcastList( reply ) );
+    return podcastList;
 }
 
-PodcastList* ApiRequestPrivate::search( const QString& query )
+PodcastListPtr ApiRequestPrivate::search( const QString& query )
 {
     QString requestUrl = UrlBuilder::getPodcastSearchUrl( query );
     QNetworkReply *reply;
     reply = m_requestHandler.getRequest( requestUrl );
 
-    return new PodcastList( reply );
+    PodcastListPtr podcastList( new PodcastList( reply ) );
+    return podcastList;
 }
 
-PodcastList* ApiRequestPrivate::suggestions( uint count )
+PodcastListPtr ApiRequestPrivate::suggestions( uint count )
 {
     QString requestUrl = UrlBuilder::getSuggestionsUrl( count );
     QNetworkReply *reply;
     reply = m_requestHandler.authGetRequest( requestUrl );
-    return new PodcastList( reply );
+    PodcastListPtr podcastList( new PodcastList( reply ) );
+    return podcastList;
 }
 
 QNetworkReply* ApiRequestPrivate::downloadSubscriptionsJson(const QString& username, const QString& device)
@@ -135,190 +138,212 @@ QNetworkReply* ApiRequestPrivate::downloadSubscriptionsJson(const QString& usern
     return m_requestHandler.authGetRequest( requestUrl );
 }
 
-Episode* ApiRequestPrivate::episodeData( const QUrl& podcasturl, const QUrl& episodeurl )
+EpisodePtr ApiRequestPrivate::episodeData( const QUrl& podcasturl, const QUrl& episodeurl )
 {
     QString requestUrl = UrlBuilder::getEpisodeDataUrl( podcasturl.toString(), episodeurl.toString() );
     QNetworkReply *reply;
     reply = m_requestHandler.getRequest( requestUrl );
 
-    return new Episode( reply );
+    EpisodePtr episode( new Episode( reply ) );
+    return episode;
 }
 
-EpisodeList* ApiRequestPrivate::favoriteEpisodes( const QString& username )
+EpisodeListPtr ApiRequestPrivate::favoriteEpisodes( const QString& username )
 {
     QString requestUrl = UrlBuilder::getFavEpisodesUrl( username );
     QNetworkReply *reply;
     reply = m_requestHandler.authGetRequest( requestUrl );
-    return new EpisodeList( reply );
+    EpisodeListPtr episodeList( new EpisodeList( reply ) );
+    return episodeList;
 }
 
-Podcast* ApiRequestPrivate::podcastData( const QUrl& podcasturl )
+PodcastPtr ApiRequestPrivate::podcastData( const QUrl& podcasturl )
 {
     QString requestUrl = UrlBuilder::getPodcastDataUrl( podcasturl.toString() );
     QNetworkReply *reply;
     reply = m_requestHandler.getRequest( requestUrl );
 
-    return new Podcast( reply );
+    PodcastPtr podcast( new Podcast( reply ) );
+    return podcast;
 }
 
-PodcastList* ApiRequestPrivate::podcastsOfTag( uint count, const QString& tag )
+PodcastListPtr ApiRequestPrivate::podcastsOfTag( uint count, const QString& tag )
 {
     QString requestUrl = UrlBuilder::getPodcastsOfTagUrl( tag, count );
     QNetworkReply *reply;
     reply = m_requestHandler.getRequest( requestUrl );
 
-    return new PodcastList( reply );
+    PodcastListPtr podcastList( new PodcastList( reply ) );
+    return podcastList;
 }
 
-TagList* ApiRequestPrivate::topTags( uint count )
+TagListPtr ApiRequestPrivate::topTags( uint count )
 {
     QString requestUrl = UrlBuilder::getTopTagsUrl( count );
     QNetworkReply *reply;
     reply = m_requestHandler.getRequest( requestUrl );
 
-    return new TagList( reply );
+    TagListPtr tagList( new TagList( reply ) );
+    return tagList;
 }
 
-AddRemoveResult* ApiRequestPrivate::addRemoveSubscriptions( const QString& username, const QString& device, const QList< QUrl >& add, const QList< QUrl >& remove )
+AddRemoveResultPtr ApiRequestPrivate::addRemoveSubscriptions( const QString& username, const QString& device, const QList< QUrl >& add, const QList< QUrl >& remove )
 {
     QString requestUrl = UrlBuilder::getAddRemoveSubUrl( username, device );
     QByteArray data = JsonCreator::addRemoveSubsToJSON( add, remove );
     QNetworkReply *reply;
     reply = m_requestHandler.postRequest( data, requestUrl );
-    return new AddRemoveResult( reply );
+    AddRemoveResultPtr addRemoveResult( new AddRemoveResult( reply ) );
+    return addRemoveResult;
 }
 
-Settings* ApiRequestPrivate::accountSettings( const QString& username )
+SettingsPtr ApiRequestPrivate::accountSettings( const QString& username )
 {
     QString requestUrl = UrlBuilder::getAccountSettingsUrl( username );
     QNetworkReply *reply;
     reply = m_requestHandler.authGetRequest( requestUrl );
-    return new Settings( reply );
+    SettingsPtr settings( new Settings( reply ) );
+    return settings;
 }
 
-Settings* ApiRequestPrivate::deviceSettings( const QString& username, const QString& device )
+SettingsPtr ApiRequestPrivate::deviceSettings( const QString& username, const QString& device )
 {
     QString requestUrl = UrlBuilder::getDeviceSettingsUrl( username, device );
     QNetworkReply *reply;
     reply = m_requestHandler.authGetRequest( requestUrl );
-    return new Settings( reply );
+    SettingsPtr settings( new Settings( reply ) );
+    return settings;
 }
 
-Settings* ApiRequestPrivate::podcastSettings( const QString& username, const QString& podcastUrl )
+SettingsPtr ApiRequestPrivate::podcastSettings( const QString& username, const QString& podcastUrl )
 {
     QString requestUrl = UrlBuilder::getPodcastSettingsUrl( username, podcastUrl );
     QNetworkReply *reply;
     reply = m_requestHandler.authGetRequest( requestUrl );
-    return new Settings( reply );
+    SettingsPtr settings( new Settings( reply ) );
+    return settings;
 }
 
-Settings* ApiRequestPrivate::episodeSettings( const QString& username, const QString& podcastUrl, const QString& episodeUrl )
+SettingsPtr ApiRequestPrivate::episodeSettings( const QString& username, const QString& podcastUrl, const QString& episodeUrl )
 {
     QString requestUrl = UrlBuilder::getEpisodeSettingsUrl( username, podcastUrl, episodeUrl );
     QNetworkReply *reply;
     reply = m_requestHandler.authGetRequest( requestUrl );
-    return new Settings( reply );
+    SettingsPtr settings( new Settings( reply ) );
+    return settings;
 }
 
-Settings* ApiRequestPrivate::setAccountSettings( const QString& username, QMap<QString, QVariant >& set, const QList< QString >& remove )
+SettingsPtr ApiRequestPrivate::setAccountSettings( const QString& username, QMap<QString, QVariant >& set, const QList< QString >& remove )
 {
     QString requestUrl = UrlBuilder::getAccountSettingsUrl( username );
     QNetworkReply *reply;
     QByteArray postData = JsonCreator::saveSettingsToJSON( set, remove );
     reply = m_requestHandler.postRequest( postData, requestUrl );
-    return new Settings( reply );
+    SettingsPtr settings( new Settings( reply ) );
+    return settings;
 }
 
-Settings* ApiRequestPrivate::setDeviceSettings( const QString& username, const QString& device, QMap<QString, QVariant >& set, const QList< QString >& remove )
+SettingsPtr ApiRequestPrivate::setDeviceSettings( const QString& username, const QString& device, QMap<QString, QVariant >& set, const QList< QString >& remove )
 {
     QString requestUrl = UrlBuilder::getDeviceSettingsUrl( username, device );
     QNetworkReply *reply;
     QByteArray postData = JsonCreator::saveSettingsToJSON( set, remove );
     reply = m_requestHandler.postRequest( postData, requestUrl );
-    return new Settings( reply );
+    SettingsPtr settings( new Settings( reply ) );
+    return settings;
 }
 
-Settings* ApiRequestPrivate::setPodcastSettings( const QString& username, const QString& podcastUrl, QMap<QString, QVariant >& set, const QList< QString >& remove )
+SettingsPtr ApiRequestPrivate::setPodcastSettings( const QString& username, const QString& podcastUrl, QMap<QString, QVariant >& set, const QList< QString >& remove )
 {
     QString requestUrl = UrlBuilder::getPodcastSettingsUrl( username, podcastUrl );
     QNetworkReply *reply;
     QByteArray postData = JsonCreator::saveSettingsToJSON( set, remove );
     reply = m_requestHandler.postRequest( postData, requestUrl );
-    return new Settings( reply );
+    SettingsPtr settings( new Settings( reply ) );
+    return settings;
 }
 
-Settings* ApiRequestPrivate::setEpisodeSettings( const QString& username, const QString& podcastUrl, const QString& episodeUrl, QMap<QString, QVariant >& set, const QList< QString >& remove )
+SettingsPtr ApiRequestPrivate::setEpisodeSettings( const QString& username, const QString& podcastUrl, const QString& episodeUrl, QMap<QString, QVariant >& set, const QList< QString >& remove )
 {
     QString requestUrl = UrlBuilder::getEpisodeSettingsUrl( username, podcastUrl, episodeUrl );
     QNetworkReply *reply;
     QByteArray postData = JsonCreator::saveSettingsToJSON( set, remove );
     reply = m_requestHandler.postRequest( postData, requestUrl );
-    return new Settings( reply );
+    SettingsPtr settings( new Settings( reply ) );
+    return settings;
 }
 
-DeviceUpdates* ApiRequestPrivate::deviceUpdates( const QString& username, const QString& deviceId, qlonglong timestamp )
+DeviceUpdatesPtr ApiRequestPrivate::deviceUpdates( const QString& username, const QString& deviceId, qlonglong timestamp )
 {
     QString requestUrl = UrlBuilder::getDeviceUpdatesUrl( username, deviceId, timestamp );
     QNetworkReply* reply;
     reply = m_requestHandler.authGetRequest( requestUrl );
-    return new DeviceUpdates( reply );
+    DeviceUpdatesPtr updates( new DeviceUpdates( reply ) );
+    return updates;
 }
 
-EpisodeActionList* ApiRequestPrivate::episodeActions( const QString& username, const bool aggregated )
+EpisodeActionListPtr ApiRequestPrivate::episodeActions( const QString& username, const bool aggregated )
 {
     QString requestUrl = UrlBuilder::getEpisodeActionsUrl( username, aggregated );
     QNetworkReply* reply;
     reply = m_requestHandler.authGetRequest( requestUrl );
-    return new EpisodeActionList( reply );
+    EpisodeActionListPtr episodeActions( new EpisodeActionList( reply ) );
+    return episodeActions;
 }
 
-EpisodeActionList* ApiRequestPrivate::episodeActionsByPodcast( const QString& username, const QString& podcastUrl, const bool aggregated )
+EpisodeActionListPtr ApiRequestPrivate::episodeActionsByPodcast( const QString& username, const QString& podcastUrl, const bool aggregated )
 {
     QString requestUrl = UrlBuilder::getEpisodeActionsUrlByPodcast( username, podcastUrl, aggregated );
     QNetworkReply* reply;
     reply = m_requestHandler.authGetRequest( requestUrl );
-    return new EpisodeActionList( reply );
+    EpisodeActionListPtr episodeActions( new EpisodeActionList( reply ) );
+    return episodeActions;
 }
 
-EpisodeActionList* ApiRequestPrivate::episodeActionsByDevice( const QString& username, const QString& deviceId, const bool aggregated )
+EpisodeActionListPtr ApiRequestPrivate::episodeActionsByDevice( const QString& username, const QString& deviceId, const bool aggregated )
 {
     QString requestUrl = UrlBuilder::getEpisodeActionsUrlByDevice( username, deviceId, aggregated );
     QNetworkReply* reply;
     reply = m_requestHandler.authGetRequest( requestUrl );
-    return new EpisodeActionList( reply );
+    EpisodeActionListPtr episodeActions( new EpisodeActionList( reply ) );
+    return episodeActions;
 }
 
-EpisodeActionList* ApiRequestPrivate::episodeActionsByTimestamp( const QString& username, const qulonglong since )
+EpisodeActionListPtr ApiRequestPrivate::episodeActionsByTimestamp( const QString& username, const qulonglong since )
 {
     QString requestUrl = UrlBuilder::getEpisodeActionsUrlByTimestamp( username, since );
     QNetworkReply* reply;
     reply = m_requestHandler.authGetRequest( requestUrl );
-    return new EpisodeActionList( reply );
+    EpisodeActionListPtr episodeActions( new EpisodeActionList( reply ) );
+    return episodeActions;
 }
 
-EpisodeActionList* ApiRequestPrivate::episodeActionsByPodcastAndTimestamp( const QString& username, const QString& podcastUrl, const qulonglong since )
+EpisodeActionListPtr ApiRequestPrivate::episodeActionsByPodcastAndTimestamp( const QString& username, const QString& podcastUrl, const qulonglong since )
 {
     QString requestUrl = UrlBuilder::getEpisodeActionsUrlByPodcastAndTimestamp( username, podcastUrl, since );
     QNetworkReply* reply;
     reply = m_requestHandler.authGetRequest( requestUrl );
-    return new EpisodeActionList( reply );
+    EpisodeActionListPtr episodeActions( new EpisodeActionList( reply ) );
+    return episodeActions;
 }
 
-EpisodeActionList* ApiRequestPrivate::episodeActionsByDeviceAndTimestamp( const QString& username, const QString& deviceId, const qulonglong since )
+EpisodeActionListPtr ApiRequestPrivate::episodeActionsByDeviceAndTimestamp( const QString& username, const QString& deviceId, const qulonglong since )
 {
     QString requestUrl = UrlBuilder::getEpisodeActionsUrlByDeviceAndTimestamp( username, deviceId, since );
     QNetworkReply* reply;
     reply = m_requestHandler.authGetRequest( requestUrl );
-    return new EpisodeActionList( reply );
+    EpisodeActionListPtr episodeActions( new EpisodeActionList( reply ) );
+    return episodeActions;
 }
 
-AddRemoveResult* ApiRequestPrivate::uploadEpisodeActions( const QString& username, const QList<EpisodeActionPtr>& episodeActions )
+AddRemoveResultPtr ApiRequestPrivate::uploadEpisodeActions( const QString& username, const QList<EpisodeActionPtr>& episodeActions )
 {
     QString requestUrl = UrlBuilder::getEpisodeActionsUrl( username, false );
     QNetworkReply *reply;
     QByteArray postData = JsonCreator::episodeActionListToJSON( episodeActions );
     reply = m_requestHandler.postRequest( postData, requestUrl );
-    return new AddRemoveResult( reply );
+    AddRemoveResultPtr addRemoveResult( new AddRemoveResult( reply ) );
+    return addRemoveResult;
 }
 
 QNetworkReply* ApiRequestPrivate::renameDevice( const QString& username , const QString& deviceId , const QString& caption, Device::Type type )
@@ -348,20 +373,22 @@ QNetworkReply* ApiRequestPrivate::renameDevice( const QString& username , const 
     return reply;
 }
 
-DeviceList* ApiRequestPrivate::listDevices( const QString& username )
+DeviceListPtr ApiRequestPrivate::listDevices( const QString& username )
 {
     QString requestUrl = UrlBuilder::getDeviceListUrl( username );
     QNetworkReply* reply;
     reply = m_requestHandler.authGetRequest( requestUrl );
-    return new DeviceList( reply );
+    DeviceListPtr list( new DeviceList( reply ) );
+    return list;
 }
 
-DeviceSyncResult* ApiRequestPrivate::deviceSynchronizationStatus ( const QString& username )
+DeviceSyncResultPtr ApiRequestPrivate::deviceSynchronizationStatus ( const QString& username )
 {
     QString requestUrl = UrlBuilder::getDeviceSynchronizationStatusUrl( username );
     QNetworkReply* reply;
     reply = m_requestHandler.authGetRequest( requestUrl );
-    return new DeviceSyncResult( reply );
+    DeviceSyncResultPtr result( new DeviceSyncResult( reply ) );
+    return result;
 }
 
 ApiRequest::ApiRequest( const QString& username, const QString& password, QNetworkAccessManager* nam ) : d( new ApiRequestPrivate( username, password, nam ) )
@@ -427,17 +454,17 @@ QNetworkReply* ApiRequest::searchXml ( const QString& query )
     return d->searchXml( query );
 }
 
-PodcastList* ApiRequest::toplist( uint count )
+PodcastListPtr ApiRequest::toplist( uint count )
 {
     return d->toplist( count );
 }
 
-PodcastList* ApiRequest::search( const QString& query )
+PodcastListPtr ApiRequest::search( const QString& query )
 {
     return d->search( query );
 }
 
-PodcastList* ApiRequest::suggestions( uint count )
+PodcastListPtr ApiRequest::suggestions( uint count )
 {
     return d->suggestions( count );
 }
@@ -447,112 +474,112 @@ QNetworkReply* ApiRequest::downloadSubscriptionsJson(const QString& username, co
     return d->downloadSubscriptionsJson( username, device );
 }
 
-PodcastList* ApiRequest::podcastsOfTag( uint count, const QString& tag )
+PodcastListPtr ApiRequest::podcastsOfTag( uint count, const QString& tag )
 {
     return d->podcastsOfTag( count, tag );
 }
 
-Podcast* ApiRequest::podcastData( const QUrl& podcasturl )
+PodcastPtr ApiRequest::podcastData( const QUrl& podcasturl )
 {
     return d->podcastData( podcasturl );
 }
 
-Episode* ApiRequest::episodeData( const QUrl& podcasturl, const QUrl& episodeurl )
+EpisodePtr ApiRequest::episodeData( const QUrl& podcasturl, const QUrl& episodeurl )
 {
     return d->episodeData( podcasturl, episodeurl );
 }
 
-EpisodeList* ApiRequest::favoriteEpisodes( const QString& username )
+EpisodeListPtr ApiRequest::favoriteEpisodes( const QString& username )
 {
     return d->favoriteEpisodes( username );
 }
 
-TagList* ApiRequest::topTags( uint count )
+TagListPtr ApiRequest::topTags( uint count )
 {
     return d->topTags( count );
 }
 
-AddRemoveResult* ApiRequest::addRemoveSubscriptions( const QString& username, const QString& device, const QList< QUrl >& add, const QList< QUrl >& remove )
+AddRemoveResultPtr ApiRequest::addRemoveSubscriptions( const QString& username, const QString& device, const QList< QUrl >& add, const QList< QUrl >& remove )
 {
     return d->addRemoveSubscriptions( username, device, add, remove );
 }
 
-Settings* ApiRequest::accountSettings( const QString& username )
+SettingsPtr ApiRequest::accountSettings( const QString& username )
 {
     return d->accountSettings( username );
 }
 
-Settings* ApiRequest::deviceSettings( const QString& username, const QString& device )
+SettingsPtr ApiRequest::deviceSettings( const QString& username, const QString& device )
 {
     return d->deviceSettings( username, device );
 }
 
-Settings* ApiRequest::podcastSettings( const QString& username, const QString& podcastUrl )
+SettingsPtr ApiRequest::podcastSettings( const QString& username, const QString& podcastUrl )
 {
     return d->podcastSettings( username, podcastUrl );
 }
 
-Settings* ApiRequest::episodeSettings( const QString& username, const QString& podcastUrl, const QString& episodeUrl )
+SettingsPtr ApiRequest::episodeSettings( const QString& username, const QString& podcastUrl, const QString& episodeUrl )
 {
     return d->episodeSettings( username, podcastUrl, episodeUrl );
 }
 
-Settings* ApiRequest::setAccountSettings( const QString& username, QMap<QString, QVariant >& set, const QList< QString >& remove )
+SettingsPtr ApiRequest::setAccountSettings( const QString& username, QMap<QString, QVariant >& set, const QList< QString >& remove )
 {
     return d->setAccountSettings( username, set, remove );
 }
 
-Settings* ApiRequest::setDeviceSettings( const QString& username, const QString& device, QMap<QString, QVariant >& set, const QList< QString >& remove )
+SettingsPtr ApiRequest::setDeviceSettings( const QString& username, const QString& device, QMap<QString, QVariant >& set, const QList< QString >& remove )
 {
     return d->setDeviceSettings( username, device, set, remove );
 }
 
-Settings* ApiRequest::setPodcastSettings( const QString& username, const QString& podcastUrl, QMap<QString, QVariant >& set, const QList< QString >& remove )
+SettingsPtr ApiRequest::setPodcastSettings( const QString& username, const QString& podcastUrl, QMap<QString, QVariant >& set, const QList< QString >& remove )
 {
     return d->setPodcastSettings( username, podcastUrl, set, remove );
 }
 
-Settings* ApiRequest::setEpisodeSettings( const QString& username, const QString& podcastUrl, const QString& episodeUrl, QMap<QString, QVariant >& set, const QList< QString >& remove )
+SettingsPtr ApiRequest::setEpisodeSettings( const QString& username, const QString& podcastUrl, const QString& episodeUrl, QMap<QString, QVariant >& set, const QList< QString >& remove )
 {
     return d->setEpisodeSettings( username, podcastUrl, episodeUrl, set, remove );
 }
 
-DeviceUpdates* ApiRequest::deviceUpdates( const QString& username, const QString& deviceId, qlonglong timestamp )
+DeviceUpdatesPtr ApiRequest::deviceUpdates( const QString& username, const QString& deviceId, qlonglong timestamp )
 {
     return d->deviceUpdates( username, deviceId, timestamp );
 }
 
-EpisodeActionList* ApiRequest::episodeActions( const QString& username, const bool aggregated )
+EpisodeActionListPtr ApiRequest::episodeActions( const QString& username, const bool aggregated )
 {
     return d->episodeActions( username, aggregated );
 }
 
-EpisodeActionList* ApiRequest::episodeActionsByPodcast( const QString& username, const QString& podcastUrl, const bool aggregated )
+EpisodeActionListPtr ApiRequest::episodeActionsByPodcast( const QString& username, const QString& podcastUrl, const bool aggregated )
 {
     return d->episodeActionsByPodcast( username, podcastUrl, aggregated );
 }
 
-EpisodeActionList* ApiRequest::episodeActionsByDevice( const QString& username, const QString& deviceId, const bool aggregated )
+EpisodeActionListPtr ApiRequest::episodeActionsByDevice( const QString& username, const QString& deviceId, const bool aggregated )
 {
     return d->episodeActionsByDevice( username, deviceId, aggregated );
 }
 
-EpisodeActionList* ApiRequest::episodeActionsByTimestamp( const QString& username, const qulonglong since )
+EpisodeActionListPtr ApiRequest::episodeActionsByTimestamp( const QString& username, const qulonglong since )
 {
     return d->episodeActionsByTimestamp( username, since );
 }
 
-EpisodeActionList* ApiRequest::episodeActionsByPodcastAndTimestamp( const QString& username, const QString& podcastUrl, const qulonglong since )
+EpisodeActionListPtr ApiRequest::episodeActionsByPodcastAndTimestamp( const QString& username, const QString& podcastUrl, const qulonglong since )
 {
     return d->episodeActionsByPodcastAndTimestamp( username, podcastUrl, since );
 }
 
-EpisodeActionList* ApiRequest::episodeActionsByDeviceAndTimestamp( const QString& username, const QString& deviceId, const qulonglong since )
+EpisodeActionListPtr ApiRequest::episodeActionsByDeviceAndTimestamp( const QString& username, const QString& deviceId, const qulonglong since )
 {
     return d->episodeActionsByDeviceAndTimestamp( username, deviceId, since );
 }
 
-AddRemoveResult* ApiRequest::uploadEpisodeActions( const QString& username, const QList<EpisodeActionPtr>& episodeActions )
+AddRemoveResultPtr ApiRequest::uploadEpisodeActions( const QString& username, const QList<EpisodeActionPtr>& episodeActions )
 {
     return d->uploadEpisodeActions( username, episodeActions );
 }
@@ -562,12 +589,12 @@ QNetworkReply* ApiRequest::renameDevice( const QString& username , const QString
     return d->renameDevice( username, deviceId, caption, type );
 }
 
-DeviceList* ApiRequest::listDevices( const QString& username )
+DeviceListPtr ApiRequest::listDevices( const QString& username )
 {
     return d->listDevices( username );
 }
 
-DeviceSyncResult* ApiRequest::deviceSynchronizationStatus ( const QString& username )
+DeviceSyncResultPtr ApiRequest::deviceSynchronizationStatus ( const QString& username )
 {
     return d->deviceSynchronizationStatus( username );
 }
