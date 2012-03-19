@@ -131,16 +131,6 @@ Closure* NewClosure(
 
 template <typename T>
 Closure* NewClosure(
-    QSharedPointer<T> sender,
-    const char* signal,
-    QObject* receiver,
-    const char* slot) {
-  Q_ASSERT(sender.data()->metaObject());  // Static check for something QObject-like.
-  return new SharedClosure(new SharedPointer<T>(sender), signal, receiver, slot);
-}
-
-template <typename T>
-Closure* NewClosure(
     QObject* sender,
     const char* signal,
     QObject* receiver,
@@ -191,6 +181,43 @@ Closure* NewClosure(
   return new Closure(
       sender, signal, receiver, slot,
       C_ARG(T0, val0), C_ARG(T1, val1), C_ARG(T2, val2), C_ARG(T3, val3));
+}
+
+template <typename TP>
+Closure* NewClosure(
+    QSharedPointer<TP> sender,
+    const char* signal,
+    QObject* receiver,
+    const char* slot) {
+  Q_ASSERT(sender.data()->metaObject());  // Static check for something QObject-like.
+  return new SharedClosure(new SharedPointer<TP>(sender), signal, receiver, slot);
+}
+
+template <typename TP, typename T0>
+Closure* NewClosure(
+    QSharedPointer<TP> sender,
+    const char* signal,
+    QObject* receiver,
+    const char* slot,
+    const T0& val0) {
+  Q_ASSERT(sender.data()->metaObject());  // Static check for something QObject-like.
+  return new SharedClosure(
+        new SharedPointer<TP>(sender), signal, receiver, slot,
+        C_ARG(T0, val0));
+}
+
+template <typename TP, typename T0, typename T1>
+Closure* NewClosure(
+    QSharedPointer<TP> sender,
+    const char* signal,
+    QObject* receiver,
+    const char* slot,
+    const T0& val0,
+    const T1& val1) {
+  Q_ASSERT(sender.data()->metaObject());  // Static check for something QObject-like.
+  return new SharedClosure(
+        new SharedPointer<TP>(sender), signal, receiver, slot,
+        C_ARG(T0, val0), C_ARG(T1, val1));
 }
 
 #endif  // CLOSURE_H
