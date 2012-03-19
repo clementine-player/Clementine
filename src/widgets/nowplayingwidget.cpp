@@ -364,7 +364,7 @@ void NowPlayingWidget::SetMode(int mode) {
 }
 
 void NowPlayingWidget::resizeEvent(QResizeEvent* e) {
-  if (visible_ && mode_ == LargeSongDetails && e->oldSize().width() != e->size().width()) {
+  if (visible_ && mode_ == LargeSongDetails && e->oldSize() != e->size()) {
     UpdateHeight();
     UpdateDetailsText();
   }
