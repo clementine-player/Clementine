@@ -42,9 +42,6 @@ AppearanceSettingsPage::AppearanceSettingsPage(SettingsDialog* dialog)
 
   Load();
 
-  ui_->use_system_color_set->setChecked(!original_use_a_custom_color_set_);
-  ui_->use_a_custom_color_set->setChecked(original_use_a_custom_color_set_);
-
   connect(ui_->select_foreground_color, SIGNAL(pressed()), SLOT(SelectForegroundColor()));
   connect(ui_->select_background_color, SIGNAL(pressed()), SLOT(SelectBackgroundColor()));
   connect(ui_->use_a_custom_color_set, SIGNAL(toggled(bool)), SLOT(UseCustomColorSetOptionChanged(bool)));
@@ -54,22 +51,6 @@ AppearanceSettingsPage::AppearanceSettingsPage(SettingsDialog* dialog)
       ui_->background_image_filename, SLOT(setEnabled(bool)));
   connect(ui_->use_custom_background_image, SIGNAL(toggled(bool)),
       ui_->select_background_image_filename_button, SLOT(setEnabled(bool)));
-
-  switch (playlist_view_background_image_type_) {
-    case PlaylistView::None:
-      ui_->use_no_background->setChecked(true);
-      break;
-    case PlaylistView::AlbumCover:
-      ui_->use_album_cover_background->setChecked(true);
-      break;
-    case PlaylistView::Custom:
-      ui_->use_custom_background_image->setChecked(true);
-      break;
-    case PlaylistView::Default:
-    default:
-      ui_->use_default_background->setChecked(true);
-  }
-  ui_->background_image_filename->setText(playlist_view_background_image_filename_);
 }
 
 AppearanceSettingsPage::~AppearanceSettingsPage() {
@@ -102,6 +83,25 @@ void AppearanceSettingsPage::Load() {
           playlist_settings.value(PlaylistView::kSettingBackgroundImageType).toInt());
   playlist_view_background_image_filename_  =
       playlist_settings.value(PlaylistView::kSettingBackgroundImageFilename).toString();
+
+  ui_->use_system_color_set->setChecked(!original_use_a_custom_color_set_);
+  ui_->use_a_custom_color_set->setChecked(original_use_a_custom_color_set_);
+
+  switch (playlist_view_background_image_type_) {
+    case PlaylistView::None:
+      ui_->use_no_background->setChecked(true);
+      break;
+    case PlaylistView::AlbumCover:
+      ui_->use_album_cover_background->setChecked(true);
+      break;
+    case PlaylistView::Custom:
+      ui_->use_custom_background_image->setChecked(true);
+      break;
+    case PlaylistView::Default:
+    default:
+      ui_->use_default_background->setChecked(true);
+  }
+  ui_->background_image_filename->setText(playlist_view_background_image_filename_);
 }
 
 void AppearanceSettingsPage::Save() {
