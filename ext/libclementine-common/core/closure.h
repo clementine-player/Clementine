@@ -22,6 +22,7 @@
 
 #include <QMetaMethod>
 #include <QObject>
+#include <QSharedPointer>
 
 #include <boost/noncopyable.hpp>
 #include <boost/scoped_ptr.hpp>
@@ -62,6 +63,8 @@ class Closure : public QObject, boost::noncopyable {
   Closure(QObject* sender, const char* signal,
           std::tr1::function<void()> callback);
 
+  virtual ~Closure();
+
  private slots:
   void Invoked();
   void Cleanup();
@@ -78,6 +81,46 @@ class Closure : public QObject, boost::noncopyable {
   boost::scoped_ptr<const ClosureArgumentWrapper> val3_;
 };
 
+class SharedPointerWrapper {
+ public:
+  virtual ~SharedPointerWrapper() {}
+  virtual void* data() const = 0;
+};
+
+template<typename T>
+class SharedPointer : public SharedPointerWrapper {
+ public:
+  SharedPointer(QSharedPointer<T> ptr)
+      : ptr_(ptr) {
+  }
+  void* data() const {
+    return ptr_.data();
+  }
+ private:
+  QSharedPointer<T> ptr_;
+};
+
+// For use with a QSharedPointer as a sender.
+class SharedClosure : public Closure {
+  Q_OBJECT
+
+ public:
+  SharedClosure(SharedPointerWrapper* sender, const char* signal,
+                QObject* receiver, const char* slot,
+                const ClosureArgumentWrapper* val0 = 0,
+                const ClosureArgumentWrapper* val1 = 0,
+                const ClosureArgumentWrapper* val2 = 0,
+                const ClosureArgumentWrapper* val3 = 0)
+      : Closure(reinterpret_cast<QObject*>(sender->data()), signal,
+                receiver, slot,
+                val0, val1, val2, val3),
+        shared_sender_(sender) {
+  }
+
+ private:
+  boost::scoped_ptr<SharedPointerWrapper> shared_sender_;
+};
+
 #define C_ARG(type, data) new ClosureArgument<type>(data)
 
 Closure* NewClosure(
@@ -85,6 +128,16 @@ Closure* NewClosure(
     const char* signal,
     QObject* receiver,
     const char* slot);
+
+template <typename T>
+Closure* NewClosure(
+    QSharedPointer<T> sender,
+    const char* signal,
+    QObject* receiver,
+    const char* slot) {
+  Q_ASSERT(sender.data()->metaObject());  // Static check for something QObject-like.
+  return new SharedClosure(new SharedPointer<T>(sender), signal, receiver, slot);
+}
 
 template <typename T>
 Closure* NewClosure(
