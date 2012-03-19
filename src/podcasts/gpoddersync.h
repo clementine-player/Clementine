@@ -27,6 +27,8 @@
 #include <QSharedPointer>
 #include <QUrl>
 
+#include <ApiRequest.h>
+
 class Application;
 class Podcast;
 class PodcastBackend;
@@ -36,13 +38,6 @@ class PodcastUrlLoaderReply;
 class QNetworkAccessManager;
 class QNetworkReply;
 class QTimer;
-
-namespace mygpo {
-  class AddRemoveResult;
-  class ApiRequest;
-  class DeviceUpdates;
-  class Episode;
-}
 
 class GPodderSync : public QObject {
   Q_OBJECT
@@ -78,22 +73,22 @@ private slots:
   void LoginFinished(QNetworkReply* reply,
                      const QString& username, const QString& password);
 
-  void DeviceUpdatesFinished(mygpo::DeviceUpdates* reply);
-  void DeviceUpdatesFailed(mygpo::DeviceUpdates* reply);
+  void DeviceUpdatesFinished(mygpo::DeviceUpdatesPtr reply);
+  void DeviceUpdatesFailed(mygpo::DeviceUpdatesPtr reply);
 
   void NewPodcastLoaded(PodcastUrlLoaderReply* reply, const QUrl& url,
-                        const QList<QSharedPointer<mygpo::Episode> >& actions);
+                        const QList<mygpo::EpisodePtr>& actions);
 
-  void ApplyActions(const QList<QSharedPointer<mygpo::Episode> >& actions,
+  void ApplyActions(const QList<mygpo::EpisodePtr>& actions,
                     PodcastEpisodeList* episodes);
 
   void SubscriptionAdded(const Podcast& podcast);
   void SubscriptionRemoved(const Podcast& podcast);
   void FlushUpdateQueue();
 
-  void AddRemoveFinished(mygpo::AddRemoveResult* reply,
+  void AddRemoveFinished(mygpo::AddRemoveResultPtr reply,
                          const QList<QUrl>& affected_urls);
-  void AddRemoveFailed(mygpo::AddRemoveResult* reply);
+  void AddRemoveFailed(mygpo::AddRemoveResultPtr reply);
 
 private:
   void LoadQueue();

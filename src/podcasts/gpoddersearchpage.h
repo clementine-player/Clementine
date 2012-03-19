@@ -20,14 +20,11 @@
 
 #include "addpodcastpage.h"
 
+#include <ApiRequest.h>
+
 class QNetworkAccessManager;
 
 class Ui_GPodderSearchPage;
-
-namespace mygpo {
-  class ApiRequest;
-  class PodcastList;
-}
 
 class GPodderSearchPage : public AddPodcastPage {
   Q_OBJECT
@@ -40,8 +37,8 @@ public:
 
 private slots:
   void SearchClicked();
-  void SearchFinished(mygpo::PodcastList* list);
-  void SearchFailed(mygpo::PodcastList* list);
+  void SearchFinished(mygpo::PodcastListPtr list);
+  void SearchFailed(mygpo::PodcastListPtr list);
 
 private:
   Ui_GPodderSearchPage* ui_;

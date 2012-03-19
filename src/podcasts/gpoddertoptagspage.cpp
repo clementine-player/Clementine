@@ -20,8 +20,6 @@
 #include "core/closure.h"
 #include "core/network.h"
 
-#include <ApiRequest.h>
-
 #include <QMessageBox>
 
 const int GPodderTopTagsPage::kMaxTagCount = 100;
@@ -51,18 +49,18 @@ void GPodderTopTagsPage::Show() {
 
     mygpo::TagListPtr tag_list(api_->topTags(kMaxTagCount));
     NewClosure(tag_list, SIGNAL(finished()),
-               this, SLOT(TagListLoaded(mygpo::TagList*)),
-               tag_list.data());
+               this, SLOT(TagListLoaded(mygpo::TagListPtr)),
+               tag_list);
     NewClosure(tag_list, SIGNAL(parseError()),
-               this, SLOT(TagListFailed(mygpo::TagList*)),
-               tag_list.data());
+               this, SLOT(TagListFailed(mygpo::TagListPtr)),
+               tag_list);
     NewClosure(tag_list, SIGNAL(requestError(QNetworkReply::NetworkError)),
-               this, SLOT(TagListFailed(mygpo::TagList*)),
-               tag_list.data());
+               this, SLOT(TagListFailed(mygpo::TagListPtr)),
+               tag_list);
   }
 }
 
-void GPodderTopTagsPage::TagListLoaded(mygpo::TagList* tag_list) {
+void GPodderTopTagsPage::TagListLoaded(mygpo::TagListPtr tag_list) {
   emit Busy(false);
 
   foreach (mygpo::TagPtr tag, tag_list->list()) {
@@ -70,7 +68,7 @@ void GPodderTopTagsPage::TagListLoaded(mygpo::TagList* tag_list) {
   }
 }
 
-void GPodderTopTagsPage::TagListFailed(mygpo::TagList* list) {
+void GPodderTopTagsPage::TagListFailed(mygpo::TagListPtr list) {
   emit Busy(false);
   done_initial_load_ = false;
 

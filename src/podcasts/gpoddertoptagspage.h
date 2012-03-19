@@ -20,14 +20,11 @@
 
 #include <QScopedPointer>
 
+#include <ApiRequest.h>
+
 #include "addpodcastpage.h"
 
 class QNetworkAccessManager;
-
-namespace mygpo {
-  class ApiRequest;
-  class TagList;
-}
 
 class GPodderTopTagsPage : public AddPodcastPage {
   Q_OBJECT
@@ -42,8 +39,8 @@ public:
   virtual void Show();
 
 private slots:
-  void TagListLoaded(mygpo::TagList* tag_list);
-  void TagListFailed(mygpo::TagList* tag_list);
+  void TagListLoaded(mygpo::TagListPtr tag_list);
+  void TagListFailed(mygpo::TagListPtr tag_list);
 
 private:
   QNetworkAccessManager* network_;

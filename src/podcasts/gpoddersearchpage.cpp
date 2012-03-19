@@ -22,8 +22,6 @@
 #include "core/closure.h"
 #include "core/network.h"
 
-#include <ApiRequest.h>
-
 #include <QMessageBox>
 
 GPodderSearchPage::GPodderSearchPage(Application* app, QWidget* parent)
@@ -46,17 +44,17 @@ void GPodderSearchPage::SearchClicked() {
 
   mygpo::PodcastListPtr list(api_->search(ui_->query->text()));
   NewClosure(list, SIGNAL(finished()),
-             this, SLOT(SearchFinished(mygpo::PodcastList*)),
-             list.data());
+             this, SLOT(SearchFinished(mygpo::PodcastListPtr)),
+             list);
   NewClosure(list, SIGNAL(parseError()),
-             this, SLOT(SearchFailed(mygpo::PodcastList*)),
-             list.data());
+             this, SLOT(SearchFailed(mygpo::PodcastListPtr)),
+             list);
   NewClosure(list, SIGNAL(requestError(QNetworkReply::NetworkError)),
-             this, SLOT(SearchFailed(mygpo::PodcastList*)),
-             list.data());
+             this, SLOT(SearchFailed(mygpo::PodcastListPtr)),
+             list);
 }
 
-void GPodderSearchPage::SearchFinished(mygpo::PodcastList* list) {
+void GPodderSearchPage::SearchFinished(mygpo::PodcastListPtr list) {
   emit Busy(false);
 
   model()->clear();
@@ -69,7 +67,7 @@ void GPodderSearchPage::SearchFinished(mygpo::PodcastList* list) {
   }
 }
 
-void GPodderSearchPage::SearchFailed(mygpo::PodcastList* list) {
+void GPodderSearchPage::SearchFailed(mygpo::PodcastListPtr list) {
   emit Busy(false);
 
   model()->clear();
