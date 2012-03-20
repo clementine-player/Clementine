@@ -111,6 +111,7 @@ void VisualisationContainer::Init() {
   AddMenuItem(tr("Low (256x256)"), 256, size_, quality_group, quality_mapper);
   AddMenuItem(tr("Medium (512x512)"), 512, size_, quality_group, quality_mapper);
   AddMenuItem(tr("High (1024x1024)"), 1024, size_, quality_group, quality_mapper);
+  AddMenuItem(tr("Ultra (2048x2048)"), 2048, size_, quality_group, quality_mapper);
   quality_menu->addActions(quality_group->actions());
   connect(quality_mapper, SIGNAL(mapped(int)), SLOT(SetQuality(int)));
 
