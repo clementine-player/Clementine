@@ -19,6 +19,8 @@
 
 #include "core/logging.h"
 
+namespace _detail {
+
 Closure::Closure(QObject* sender,
                  const char* signal,
                  QObject* receiver,
@@ -80,8 +82,10 @@ void Closure::Cleanup() {
   deleteLater();
 }
 
-Closure* NewClosure(
+}  // namespace _detail
+
+_detail::Closure* NewClosure(
     QObject* sender, const char* signal,
     QObject* receiver, const char* slot) {
-  return new Closure(sender, signal, receiver, slot);
+  return new _detail::Closure(sender, signal, receiver, slot);
 }

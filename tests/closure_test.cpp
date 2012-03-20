@@ -15,7 +15,7 @@ class ClosureTest : public ::testing::Test {
 TEST_F(ClosureTest, ClosureInvokesReceiver) {
   TestQObject sender;
   TestQObject receiver;
-  Closure* closure = NewClosure(
+  _detail::Closure* closure = NewClosure(
       &sender, SIGNAL(Emitted()),
       &receiver, SLOT(Invoke()));
   EXPECT_EQ(0, receiver.invoked());
@@ -26,7 +26,7 @@ TEST_F(ClosureTest, ClosureInvokesReceiver) {
 TEST_F(ClosureTest, ClosureDeletesSelf) {
   TestQObject sender;
   TestQObject receiver;
-  Closure* closure = NewClosure(
+  _detail::Closure* closure = NewClosure(
       &sender, SIGNAL(Emitted()),
       &receiver, SLOT(Invoke()));
   QSignalSpy spy(closure, SIGNAL(destroyed()));
@@ -45,11 +45,11 @@ TEST_F(ClosureTest, ClosureDoesNotCrashWithSharedPointerSender) {
   TestQObject receiver;
   TestQObject* sender;
   boost::scoped_ptr<QSignalSpy> spy;
-  QPointer<Closure> closure;
+  QPointer<_detail::Closure> closure;
   {
     QSharedPointer<TestQObject> sender_shared(new TestQObject);
     sender = sender_shared.data();
-    closure = QPointer<Closure>(NewClosure(
+    closure = QPointer<_detail::Closure>(NewClosure(
         sender_shared, SIGNAL(Emitted()),
         &receiver, SLOT(Invoke())));
     spy.reset(new QSignalSpy(sender, SIGNAL(destroyed())));

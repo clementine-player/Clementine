@@ -29,6 +29,8 @@
 
 #include "core/logging.h"
 
+namespace _detail {
+
 class ClosureArgumentWrapper {
  public:
   virtual ~ClosureArgumentWrapper() {}
@@ -39,7 +41,7 @@ class ClosureArgumentWrapper {
 template<typename T>
 class ClosureArgument : public ClosureArgumentWrapper {
  public:
-  ClosureArgument(const T& data) : data_(data) {}
+  explicit ClosureArgument(const T& data) : data_(data) {}
 
   virtual QGenericArgument arg() const {
     return Q_ARG(T, data_);
@@ -90,7 +92,7 @@ class SharedPointerWrapper {
 template<typename T>
 class SharedPointer : public SharedPointerWrapper {
  public:
-  SharedPointer(QSharedPointer<T> ptr)
+  explicit SharedPointer(QSharedPointer<T> ptr)
       : ptr_(ptr) {
   }
 
@@ -123,41 +125,43 @@ class SharedClosure : public Closure {
   boost::scoped_ptr<SharedPointerWrapper> shared_sender_;
 };
 
-#define C_ARG(type, data) new ClosureArgument<type>(data)
+}  // namespace _detail
 
-Closure* NewClosure(
+#define C_ARG(type, data) new _detail::ClosureArgument<type>(data)
+
+_detail::Closure* NewClosure(
     QObject* sender,
     const char* signal,
     QObject* receiver,
     const char* slot);
 
 template <typename T>
-Closure* NewClosure(
+_detail::Closure* NewClosure(
     QObject* sender,
     const char* signal,
     QObject* receiver,
     const char* slot,
     const T& val0) {
-  return new Closure(
+  return new _detail::Closure(
       sender, signal, receiver, slot,
       C_ARG(T, val0));
 }
 
 template <typename T0, typename T1>
-Closure* NewClosure(
+_detail::Closure* NewClosure(
     QObject* sender,
     const char* signal,
     QObject* receiver,
     const char* slot,
     const T0& val0,
     const T1& val1) {
-  return new Closure(
+  return new _detail::Closure(
       sender, signal, receiver, slot,
       C_ARG(T0, val0), C_ARG(T1, val1));
 }
 
 template <typename T0, typename T1, typename T2>
-Closure* NewClosure(
+_detail::Closure* NewClosure(
     QObject* sender,
     const char* signal,
     QObject* receiver,
@@ -165,13 +169,13 @@ Closure* NewClosure(
     const T0& val0,
     const T1& val1,
     const T2& val2) {
-  return new Closure(
+  return new _detail::Closure(
       sender, signal, receiver, slot,
       C_ARG(T0, val0), C_ARG(T1, val1), C_ARG(T2, val2));
 }
 
 template <typename T0, typename T1, typename T2, typename T3>
-Closure* NewClosure(
+_detail::Closure* NewClosure(
     QObject* sender,
     const char* signal,
     QObject* receiver,
@@ -180,42 +184,43 @@ Closure* NewClosure(
     const T1& val1,
     const T2& val2,
     const T3& val3) {
-  return new Closure(
+  return new _detail::Closure(
       sender, signal, receiver, slot,
       C_ARG(T0, val0), C_ARG(T1, val1), C_ARG(T2, val2), C_ARG(T3, val3));
 }
 
 template <typename TP>
-Closure* NewClosure(
+_detail::Closure* NewClosure(
     QSharedPointer<TP> sender,
     const char* signal,
     QObject* receiver,
     const char* slot) {
-  return new SharedClosure(new SharedPointer<TP>(sender), signal, receiver, slot);
+  return new _detail::SharedClosure(
+      new _detail::SharedPointer<TP>(sender), signal, receiver, slot);
 }
 
 template <typename TP, typename T0>
-Closure* NewClosure(
+_detail::Closure* NewClosure(
     QSharedPointer<TP> sender,
     const char* signal,
     QObject* receiver,
     const char* slot,
     const T0& val0) {
-  return new SharedClosure(
-        new SharedPointer<TP>(sender), signal, receiver, slot,
+  return new _detail::SharedClosure(
+        new _detail::SharedPointer<TP>(sender), signal, receiver, slot,
         C_ARG(T0, val0));
 }
 
 template <typename TP, typename T0, typename T1>
-Closure* NewClosure(
+_detail::Closure* NewClosure(
     QSharedPointer<TP> sender,
     const char* signal,
     QObject* receiver,
     const char* slot,
     const T0& val0,
     const T1& val1) {
-  return new SharedClosure(
-        new SharedPointer<TP>(sender), signal, receiver, slot,
+  return new _detail::SharedClosure(
+        new _detail::SharedPointer<TP>(sender), signal, receiver, slot,
         C_ARG(T0, val0), C_ARG(T1, val1));
 }
 
