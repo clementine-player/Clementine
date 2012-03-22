@@ -48,6 +48,11 @@ private slots:
   void ShowPopupMenu();
 
 private:
+  static const int kLowFramerate;
+  static const int kMediumFramerate;
+  static const int kHighFramerate;
+  static const int kSuperHighFramerate;
+
   void Load();
   void Save();
   void SaveFramerate(int framerate);
