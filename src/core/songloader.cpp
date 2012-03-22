@@ -65,7 +65,7 @@ SongLoader::SongLoader(LibraryBackendInterface* library, QObject *parent)
 {
   if (sRawUriSchemes.isEmpty()) {
     sRawUriSchemes << "udp" << "mms" << "mmsh" << "mmst" << "mmsu" << "rtsp"
-                   << "rtspu" << "rtspt" << "rtsph";
+                   << "rtspu" << "rtspt" << "rtsph" << "spotify";
   }
 
   timeout_timer_->setSingleShot(true);
