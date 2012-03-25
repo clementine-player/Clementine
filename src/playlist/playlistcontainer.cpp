@@ -431,7 +431,7 @@ void PlaylistContainer::resizeEvent(QResizeEvent* e) {
 }
 
 void PlaylistContainer::FocusOnFilter(QKeyEvent *event) {
-  ui_->filter->setFocus(Qt::OtherFocusReason);
+  ui_->filter->set_focus();
   QApplication::sendEvent(ui_->filter, event);
 }
 
