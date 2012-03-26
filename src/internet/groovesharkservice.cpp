@@ -101,6 +101,7 @@ GroovesharkService::GroovesharkService(Application* app, InternetModel *parent)
     rename_playlist_(NULL),
     remove_from_playlist_(NULL),
     remove_from_favorites_(NULL),
+    get_url_to_share_song_(NULL),
     search_delay_(new QTimer(this)),
     last_search_reply_(NULL),
     api_key_(QByteArray::fromBase64(kApiSecret)),
@@ -440,7 +441,8 @@ void GroovesharkService::ShowContextMenu(const QPoint& global_pos) {
   // Check if we should display actions
   bool  display_delete_playlist_action = false,
         display_remove_from_playlist_action = false,
-        display_remove_from_favorites_action = false;
+        display_remove_from_favorites_action = false,
+        display_share_song_url = false;
 
   QModelIndex index(model()->current_index());
 
@@ -463,6 +465,12 @@ void GroovesharkService::ShowContextMenu(const QPoint& global_pos) {
   rename_playlist_->setVisible(display_delete_playlist_action);
   remove_from_playlist_->setVisible(display_remove_from_playlist_action);
   remove_from_favorites_->setVisible(display_remove_from_favorites_action);
+
+  if (index.data(InternetModel::Role_Type).toInt() == Type_Track) {
+    display_share_song_url = true;
+    current_song_id_ = ExtractSongId(index.data(InternetModel::Role_Url).toUrl());
+  }
+  get_url_to_share_song_->setVisible(display_share_song_url);
 
   context_menu_->popup(global_pos);
 }
@@ -490,13 +498,23 @@ void GroovesharkService::EnsureMenuCreated() {
     remove_from_favorites_ = context_menu_->addAction(
         IconLoader::Load("list-remove"), tr("Remove from favorites"),
         this, SLOT(RemoveCurrentFromFavorites()));
+    get_url_to_share_song_ = context_menu_->addAction(
+        tr("Get an URL to share this Grooveshark song"),
+        this, SLOT(GetCurrentSongUrlToShare()));
     context_menu_->addSeparator();
-    context_menu_->addAction(IconLoader::Load("edit-find"), tr("Search Grooveshark (opens a new tab)") + "...", this, SLOT(OpenSearchTab()));
+    context_menu_->addAction(IconLoader::Load("edit-find"),
+                             tr("Search Grooveshark (opens a new tab)") + "...",
+                             this, SLOT(OpenSearchTab()));
     context_menu_->addSeparator();
-    context_menu_->addAction(IconLoader::Load("download"), tr("Open %1 in browser").arg("grooveshark.com"), this, SLOT(Homepage()));
-    context_menu_->addAction(IconLoader::Load("view-refresh"), tr("Refresh"), this, SLOT(RefreshItems()));
+    context_menu_->addAction(IconLoader::Load("download"),
+                             tr("Open %1 in browser").arg("grooveshark.com"),
+                             this, SLOT(Homepage()));
+    context_menu_->addAction(IconLoader::Load("view-refresh"),
+                             tr("Refresh"), this, SLOT(RefreshItems()));
     context_menu_->addSeparator();
-    context_menu_->addAction(IconLoader::Load("configure"), tr("Configure Grooveshark..."), this, SLOT(ShowConfig()));
+    context_menu_->addAction(IconLoader::Load("configure"),
+                             tr("Configure Grooveshark..."),
+                             this, SLOT(ShowConfig()));
   }
 }
 

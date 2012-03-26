@@ -254,6 +254,7 @@ class GroovesharkService : public InternetService {
   QAction* rename_playlist_;
   QAction* remove_from_playlist_;
   QAction* remove_from_favorites_;
+  QAction* get_url_to_share_song_;
   QList<QAction*> playlistitem_actions_;
 
   QTimer* search_delay_;
