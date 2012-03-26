@@ -1056,6 +1056,7 @@ void GroovesharkService::SongUrlToShareReceived(QNetworkReply* reply) {
 
   QMessageBox url_box;
   url_box.setWindowTitle(tr("Grooveshark song's URL"));
+  url_box.setWindowIcon(QIcon(":/icon.png"));
   url_box.setText(url);
   url_box.setStandardButtons(QMessageBox::Ok);
   QPushButton* copy_to_clipboard_button =
