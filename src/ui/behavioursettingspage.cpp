@@ -152,4 +152,6 @@ void BehaviourSettingsPage::ShowTrayIconToggled(bool on) {
   ui_->b_always_hide_->setEnabled(on);
   if (!on && ui_->b_always_hide_->isChecked())
     ui_->b_remember_->setChecked(true);
+  ui_->b_keep_running_->setEnabled(on);
+  ui_->b_keep_running_->setChecked(on);
 }
