@@ -98,6 +98,7 @@ class GroovesharkService : public InternetService {
   void AddUserFavoriteSong(int song_id);
   void RemoveFromFavorites(int song_id);
   void GetSongUrlToShare(int song_id);
+  void GetPlaylistUrlToShare(int playlist_id);
   // Start autoplay for the given tag_id, fill the autoplay_state, returns a
   // first song to play
   Song StartAutoplayTag(int tag_id, QVariantMap& autoplay_state);
@@ -172,6 +173,8 @@ class GroovesharkService : public InternetService {
   void UserFavoriteSongAdded(QNetworkReply* reply, int task_id);
   void GetCurrentSongUrlToShare();
   void SongUrlToShareReceived(QNetworkReply* reply);
+  void GetCurrentPlaylistUrlToShare();
+  void PlaylistUrlToShareReceived(QNetworkReply* reply);
   void RemoveCurrentFromPlaylist();
   void RemoveCurrentFromFavorites();
   void SongRemovedFromFavorites(QNetworkReply* reply, int task_id);
@@ -205,6 +208,7 @@ class GroovesharkService : public InternetService {
   // Convenient function which block until 'reply' replies, or timeout after 10
   // seconds. Returns false if reply has timeouted
   bool WaitForReply(QNetworkReply* reply);
+  void ShowUrlBox(const QString& title, const QString& url);
   // Convenient function for extracting result from reply
   QVariantMap ExtractResult(QNetworkReply* reply);
   // Convenient function for extracting songs from grooveshark result. result
@@ -247,7 +251,10 @@ class GroovesharkService : public InternetService {
   NetworkAccessManager* network_;
 
   QMenu* context_menu_;
+  // IDs kept when showing menu, to know what the user has clicked on, to be
+  // able to perform actions on corresponding items
   int current_song_id_;
+  int current_playlist_id_;
 
   QAction* create_playlist_;
   QAction* delete_playlist_;
@@ -255,6 +262,7 @@ class GroovesharkService : public InternetService {
   QAction* remove_from_playlist_;
   QAction* remove_from_favorites_;
   QAction* get_url_to_share_song_;
+  QAction* get_url_to_share_playlist_;
   QList<QAction*> playlistitem_actions_;
 
   QTimer* search_delay_;

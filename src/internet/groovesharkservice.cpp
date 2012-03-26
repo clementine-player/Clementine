@@ -102,6 +102,7 @@ GroovesharkService::GroovesharkService(Application* app, InternetModel *parent)
     remove_from_playlist_(NULL),
     remove_from_favorites_(NULL),
     get_url_to_share_song_(NULL),
+    get_url_to_share_playlist_(NULL),
     search_delay_(new QTimer(this)),
     last_search_reply_(NULL),
     api_key_(QByteArray::fromBase64(kApiSecret)),
@@ -442,7 +443,8 @@ void GroovesharkService::ShowContextMenu(const QPoint& global_pos) {
   bool  display_delete_playlist_action = false,
         display_remove_from_playlist_action = false,
         display_remove_from_favorites_action = false,
-        display_share_song_url = false;
+        display_share_song_url = false,
+        display_share_playlist_url = false;
 
   QModelIndex index(model()->current_index());
 
@@ -466,11 +468,25 @@ void GroovesharkService::ShowContextMenu(const QPoint& global_pos) {
   remove_from_playlist_->setVisible(display_remove_from_playlist_action);
   remove_from_favorites_->setVisible(display_remove_from_favorites_action);
 
+  // Check if we can display actions to get URL for sharing songs/playlists:
+  // - share song
   if (index.data(InternetModel::Role_Type).toInt() == Type_Track) {
     display_share_song_url = true;
     current_song_id_ = ExtractSongId(index.data(InternetModel::Role_Url).toUrl());
   }
   get_url_to_share_song_->setVisible(display_share_song_url);
+
+  // - share playlist
+  if (index.data(InternetModel::Role_Type).toInt() == InternetModel::Type_UserPlaylist
+      && index.data(Role_UserPlaylistId).isValid()) {
+    display_share_playlist_url = true;
+    current_playlist_id_ = index.data(Role_UserPlaylistId).toInt();
+  } else if (parent_type == InternetModel::Type_UserPlaylist
+      && index.parent().data(Role_UserPlaylistId).isValid()) {
+    display_share_playlist_url = true;
+    current_playlist_id_ = index.parent().data(Role_UserPlaylistId).toInt();
+  }
+  get_url_to_share_playlist_->setVisible(display_share_playlist_url);
 
   context_menu_->popup(global_pos);
 }
@@ -501,6 +517,9 @@ void GroovesharkService::EnsureMenuCreated() {
     get_url_to_share_song_ = context_menu_->addAction(
         tr("Get an URL to share this Grooveshark song"),
         this, SLOT(GetCurrentSongUrlToShare()));
+    get_url_to_share_playlist_ = context_menu_->addAction(
+        tr("Get an URL to share this Grooveshark playlist"),
+        this, SLOT(GetCurrentPlaylistUrlToShare()));
     context_menu_->addSeparator();
     context_menu_->addAction(IconLoader::Load("edit-find"),
                              tr("Search Grooveshark (opens a new tab)") + "...",
@@ -1071,9 +1090,34 @@ void GroovesharkService::SongUrlToShareReceived(QNetworkReply* reply) {
   if (!result["url"].isValid())
     return;
   QString url = result["url"].toString();
+  ShowUrlBox(tr("Grooveshark song's URL"), url);
+}
 
+void GroovesharkService::GetCurrentPlaylistUrlToShare() {
+  GetPlaylistUrlToShare(current_playlist_id_);
+}
+
+void GroovesharkService::GetPlaylistUrlToShare(int playlist_id) {
+  QList<Param> parameters;
+  parameters << Param("playlistID", playlist_id);
+  QNetworkReply* reply = CreateRequest("getPlaylistURLFromPlaylistID", parameters);
+
+  NewClosure(reply, SIGNAL(finished()), this,
+             SLOT(PlaylistUrlToShareReceived(QNetworkReply*)), reply);
+}
+
+void GroovesharkService::PlaylistUrlToShareReceived(QNetworkReply* reply) {
+  reply->deleteLater();
+  QVariantMap result = ExtractResult(reply);
+  if (!result["url"].isValid())
+    return;
+  QString url = result["url"].toString();
+  ShowUrlBox(tr("Grooveshark playlist's URL"), url);
+}
+
+void GroovesharkService::ShowUrlBox(const QString& title, const QString& url) {
   QMessageBox url_box;
-  url_box.setWindowTitle(tr("Grooveshark song's URL"));
+  url_box.setWindowTitle(title);
   url_box.setWindowIcon(QIcon(":/icon.png"));
   url_box.setText(url);
   url_box.setStandardButtons(QMessageBox::Ok);
