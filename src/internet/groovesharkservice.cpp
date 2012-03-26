@@ -515,10 +515,10 @@ void GroovesharkService::EnsureMenuCreated() {
         IconLoader::Load("list-remove"), tr("Remove from favorites"),
         this, SLOT(RemoveCurrentFromFavorites()));
     get_url_to_share_song_ = context_menu_->addAction(
-        tr("Get an URL to share this Grooveshark song"),
+        tr("Get a URL to share this Grooveshark song"),
         this, SLOT(GetCurrentSongUrlToShare()));
     get_url_to_share_playlist_ = context_menu_->addAction(
-        tr("Get an URL to share this Grooveshark playlist"),
+        tr("Get a URL to share this Grooveshark playlist"),
         this, SLOT(GetCurrentPlaylistUrlToShare()));
     context_menu_->addSeparator();
     context_menu_->addAction(IconLoader::Load("edit-find"),
@@ -1060,7 +1060,7 @@ QList<QAction*> GroovesharkService::playlistitem_actions(const Song& song) {
   add_to_playlists->setMenu(playlists_menu);
   playlistitem_actions_.append(add_to_playlists);
 
-  QAction* share_song = new QAction(tr("Get an URL to share this Grooveshark song"), this);
+  QAction* share_song = new QAction(tr("Get a URL to share this Grooveshark song"), this);
   connect(share_song, SIGNAL(triggered()), SLOT(GetCurrentSongUrlToShare()));
   playlistitem_actions_.append(share_song);
 
