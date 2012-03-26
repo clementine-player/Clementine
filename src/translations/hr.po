@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-03-18 23:46+0000\n"
+"PO-Revision-Date: 2012-03-23 23:51+0000\n"
 "Last-Translator: gogo <trebelnik2@gmail.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -66,7 +66,7 @@ msgstr "%1 dana"
 msgid "%1 days ago"
 msgstr "%1 dana prije"
 
-#: podcasts/gpoddersync.cpp:81
+#: podcasts/gpoddersync.cpp:79
 #, qt-format
 msgid "%1 on %2"
 msgstr "%1 na %2"
@@ -338,7 +338,7 @@ msgstr "Aktiviraj/deaktiviraj Wii Daljinski Upravljač"
 
 #: podcasts/addpodcastdialog.cpp:54
 msgid "Add Podcast"
-msgstr "Dodaj podcast"
+msgstr "Dodajte podcast"
 
 #: ../bin/src/ui_addstreamdialog.h:113
 msgid "Add Stream"
@@ -390,11 +390,11 @@ msgstr "Dodajte novu mapu"
 
 #: ../bin/src/ui_addpodcastdialog.h:179
 msgid "Add podcast"
-msgstr "Dodaj podcast"
+msgstr "Dodajte podcast"
 
 #: podcasts/podcastservice.cpp:257 ../bin/src/ui_mainwindow.h:715
 msgid "Add podcast..."
-msgstr "Dodaj podcast..."
+msgstr "Dodajte podcast..."
 
 #: smartplaylists/searchtermwidget.cpp:333
 msgid "Add search term"
@@ -940,7 +940,7 @@ msgstr "Klasičan"
 
 #: ../bin/src/ui_podcastsettingspage.h:243
 msgid "Cleaning up"
-msgstr "Čistim"
+msgstr "Brisanje"
 
 #: widgets/lineedit.cpp:41 ../bin/src/ui_queuemanager.h:139
 msgid "Clear"
@@ -951,7 +951,7 @@ msgid "Clear playlist"
 msgstr "Ispraznite popis izvođenja"
 
 #: smartplaylists/searchtermwidget.cpp:321 ../bin/src/ui_mainwindow.h:644
-#: visualisations/visualisationcontainer.cpp:204
+#: visualisations/visualisationcontainer.cpp:211
 #: ../bin/src/ui_visualisationoverlay.h:179
 msgid "Clementine"
 msgstr "Clementine"
@@ -964,8 +964,8 @@ msgstr "Clementine greška"
 msgid "Clementine Orange"
 msgstr "Clementine narančasto"
 
-#: visualisations/visualisationcontainer.cpp:71
-#: visualisations/visualisationcontainer.cpp:144
+#: visualisations/visualisationcontainer.cpp:77
+#: visualisations/visualisationcontainer.cpp:151
 msgid "Clementine Visualization"
 msgstr "Clementine vizualizacija"
 
@@ -1026,7 +1026,7 @@ msgstr "Kliknite za odabir između preostalog vremena reprodukcije i ukupnog vre
 msgid "Close"
 msgstr "Zatvori"
 
-#: visualisations/visualisationcontainer.cpp:120
+#: visualisations/visualisationcontainer.cpp:127
 msgid "Close visualization"
 msgstr "Zatvorite vizualizaciju"
 
@@ -1103,7 +1103,7 @@ msgstr "Podesi zbirku..."
 
 #: podcasts/addpodcastdialog.cpp:65 podcasts/podcastservice.cpp:288
 msgid "Configure podcasts..."
-msgstr "Podesi podcaste..."
+msgstr "Podesite podcaste..."
 
 #: internet/digitallyimportedservicebase.cpp:185
 #: ../bin/src/ui_globalsearchsettingspage.h:174
@@ -1863,7 +1863,11 @@ msgstr "Utišavanje"
 msgid "Fading duration"
 msgstr "Trajanje utišavanja"
 
-#: podcasts/gpoddersearchpage.cpp:80 podcasts/gpoddertoptagsmodel.cpp:113
+#: podcasts/gpoddertoptagspage.cpp:76
+msgid "Failed to fetch directory"
+msgstr "Neuspjelo dohvaćanje direktorija"
+
+#: podcasts/gpoddersearchpage.cpp:76 podcasts/gpoddertoptagsmodel.cpp:109
 #: podcasts/itunessearchpage.cpp:66 podcasts/itunessearchpage.cpp:75
 #: podcasts/itunessearchpage.cpp:82
 msgid "Failed to fetch podcasts"
@@ -2024,7 +2028,7 @@ msgid "Format"
 msgstr "Format"
 
 #: analyzers/analyzercontainer.cpp:46
-#: visualisations/visualisationcontainer.cpp:98
+#: visualisations/visualisationcontainer.cpp:104
 msgid "Framerate"
 msgstr "Broj sličica"
 
@@ -2189,17 +2193,14 @@ msgid "High"
 msgstr "Najbrže"
 
 #: analyzers/analyzercontainer.cpp:64
+#: visualisations/visualisationcontainer.cpp:109
 #, qt-format
 msgid "High (%1 fps)"
 msgstr "Puno (%1 fps)"
 
-#: visualisations/visualisationcontainer.cpp:113
+#: visualisations/visualisationcontainer.cpp:119
 msgid "High (1024x1024)"
 msgstr "Visoka (1024x1024)"
-
-#: visualisations/visualisationcontainer.cpp:103
-msgid "High (35 fps)"
-msgstr "Puno (35 fps)"
 
 #: smartplaylists/searchterm.cpp:300
 msgid "Hours"
@@ -2233,7 +2234,7 @@ msgstr "Ako nastavite, ovaj uređaj će raditi sporo i pjesme kopirane na njega 
 
 #: ../bin/src/ui_addpodcastbyurl.h:77
 msgid "If you know the URL of a podcast, enter it below and press Go."
-msgstr "Ako znate URL podcasta, upišite ga ispod i pritisnite Idi."
+msgstr "Ako vam je poznat URL podcasta, upišite ga ispod i pritisnite Idi."
 
 #: ../bin/src/ui_remotesettingspage.h:209
 msgid ""
@@ -2621,15 +2622,12 @@ msgid "Love"
 msgstr "Sviđa mi se"
 
 #: analyzers/analyzercontainer.cpp:62
+#: visualisations/visualisationcontainer.cpp:107
 #, qt-format
 msgid "Low (%1 fps)"
 msgstr "Malo (%1 fps)"
 
-#: visualisations/visualisationcontainer.cpp:101
-msgid "Low (15 fps)"
-msgstr "Malo (15 fps)"
-
-#: visualisations/visualisationcontainer.cpp:111
+#: visualisations/visualisationcontainer.cpp:117
 msgid "Low (256x256)"
 msgstr "Niska (256x256)"
 
@@ -2728,15 +2726,12 @@ msgid "Maximum bitrate"
 msgstr "Maksimalna brzina prijenosa"
 
 #: analyzers/analyzercontainer.cpp:63
+#: visualisations/visualisationcontainer.cpp:108
 #, qt-format
 msgid "Medium (%1 fps)"
 msgstr "Srednje (%1 fps)"
 
-#: visualisations/visualisationcontainer.cpp:102
-msgid "Medium (25 fps)"
-msgstr "Srednje (25 fps)"
-
-#: visualisations/visualisationcontainer.cpp:112
+#: visualisations/visualisationcontainer.cpp:118
 msgid "Medium (512x512)"
 msgstr "Srednja (512x512)"
 
@@ -3342,7 +3337,7 @@ msgstr "Stavi pjesmu u naizmjenični red"
 #: ../bin/src/ui_transcoderoptionsmp3.h:192
 #: ../bin/src/ui_transcoderoptionsspeex.h:217
 #: ../bin/src/ui_transcoderoptionsvorbis.h:202
-#: visualisations/visualisationcontainer.cpp:108
+#: visualisations/visualisationcontainer.cpp:114
 msgid "Quality"
 msgstr "Kvaliteta"
 
@@ -3764,7 +3759,7 @@ msgstr "Odaberite boju slova:"
 msgid "Select visualizations"
 msgstr "Odaberite vizualizaciju"
 
-#: visualisations/visualisationcontainer.cpp:117
+#: visualisations/visualisationcontainer.cpp:124
 msgid "Select visualizations..."
 msgstr "Odaberite vizualizaciju..."
 
@@ -4136,13 +4131,14 @@ msgid "Summary"
 msgstr "Sažetak"
 
 #: analyzers/analyzercontainer.cpp:65
+#: visualisations/visualisationcontainer.cpp:110
 #, qt-format
 msgid "Super high (%1 fps)"
 msgstr "Super visoko (%1 fps)"
 
-#: visualisations/visualisationcontainer.cpp:104
-msgid "Super high (60 fps)"
-msgstr "Super visoko (60 fps)"
+#: visualisations/visualisationcontainer.cpp:120
+msgid "Super high (2048x2048)"
+msgstr "Super visoka (2048x2048)"
 
 #: ../bin/src/ui_deviceproperties.h:374
 msgid "Supported formats"
@@ -4237,7 +4233,8 @@ msgstr "Inačica Clementinea koju ste upravo ažurirali zahtijeva ponovnu pretra
 msgid "There are other songs in this album"
 msgstr "Postoje i druge pjesme u ovom albumu"
 
-#: podcasts/gpoddersearchpage.cpp:81 podcasts/gpoddertoptagsmodel.cpp:114
+#: podcasts/gpoddersearchpage.cpp:77 podcasts/gpoddertoptagsmodel.cpp:110
+#: podcasts/gpoddertoptagspage.cpp:77
 msgid "There was a problem communicating with gpodder.net"
 msgstr "Dogodio se problem u komunikaciji sa gpodder.net"
 
@@ -4274,7 +4271,7 @@ msgstr "Ove datoteke bit će obrisane sa uređaja, sigurno želite nastaviti?"
 
 #: ../bin/src/ui_librarysettingspage.h:158
 msgid "These folders will be scanned for music to make up your library"
-msgstr "Ove mape će biti pretražene, pronađena glazba će biti dodana zbirci"
+msgstr "Ove mape će biti pretražene, pronađena glazba će biti dodana zbirci!"
 
 #: ../bin/src/ui_transcodersettingspage.h:158
 msgid ""
@@ -4368,7 +4365,7 @@ msgstr "Danas"
 msgid "Toggle Pretty OSD"
 msgstr "Uključi/Isključi ljepši OSD"
 
-#: visualisations/visualisationcontainer.cpp:95
+#: visualisations/visualisationcontainer.cpp:101
 msgid "Toggle fullscreen"
 msgstr "Prikaži preko cijelog zaslona"
 
@@ -4819,7 +4816,7 @@ msgid ""
 "You can use your Wii Remote as a remote control for Clementine.  <a "
 "href=\"http://www.clementine-player.org/wiimote\">See the page on the "
 "Clementine wiki</a> for more information.\n"
-msgstr "Možete koristiti vaš Wii Daljinski Upravljač za daljinsko upravljanje sa Clementine. <a href=\"http://www.clementine-player.org/wiimote\">Za više informacija pogledajte Clementine wiki</a> stranicu.\n"
+msgstr "Možete koristiti vaš Wii Daljinski Upravljač za daljinsko upravljanje Clementinea. <a href=\"http://www.clementine-player.org/wiimote\">Za više informacija pogledajte Clementine wiki</a> stranicu.\n"
 
 #: internet/groovesharksettingspage.cpp:103
 msgid "You do not have a Grooveshark Anywhere account."
@@ -4890,7 +4887,7 @@ msgstr "Vaši radio streamovi"
 msgid "Your scrobbles: %1"
 msgstr "Vaši scrobbles: %1"
 
-#: visualisations/visualisationcontainer.cpp:145
+#: visualisations/visualisationcontainer.cpp:152
 msgid "Your system is missing OpenGL support, visualizations are unavailable."
 msgstr "Vašem sustavu nedostaje OpenGL podrška, vizualizacija je nedostupna."
 

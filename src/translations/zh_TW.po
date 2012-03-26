@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-03-16 14:30+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2012-03-25 03:17+0000\n"
+"Last-Translator: Cheng-Hong Wu <stu2731652@gmail.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: zh_TW\n"
@@ -66,7 +66,7 @@ msgstr "%1 日"
 msgid "%1 days ago"
 msgstr "%1 天前"
 
-#: podcasts/gpoddersync.cpp:81
+#: podcasts/gpoddersync.cpp:79
 #, qt-format
 msgid "%1 on %2"
 msgstr ""
@@ -246,7 +246,7 @@ msgstr "50 隨機歌曲"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:165
 msgid "<a href=\"http://www.di.fm/premium/\">Upgrade to Premium now</a>"
-msgstr ""
+msgstr "<a href=\"http://www.di.fm/premium/\">現在就升級至進階</a>"
 
 #: ../bin/src/ui_organisedialog.h:199
 msgid ""
@@ -615,7 +615,7 @@ msgstr "總是開始播放"
 msgid ""
 "An additional plugin is required to use Spotify in Clementine.  Would you "
 "like to download and install it now?"
-msgstr ""
+msgstr "在Clementine使用Spotify需要額外的外掛。 \n您想要下載並安裝此外掛嗎?"
 
 #: devices/afcdevice.cpp:63
 msgid "An error occurred copying the iTunes database from the device"
@@ -863,7 +863,7 @@ msgstr ""
 
 #: library/library.cpp:98
 msgid "CUE sheet support"
-msgstr ""
+msgstr "CUE表單支援"
 
 #: internet/spotifyblobdownloader.cpp:44
 msgid "Cancel"
@@ -951,7 +951,7 @@ msgid "Clear playlist"
 msgstr "清除播放清單"
 
 #: smartplaylists/searchtermwidget.cpp:321 ../bin/src/ui_mainwindow.h:644
-#: visualisations/visualisationcontainer.cpp:204
+#: visualisations/visualisationcontainer.cpp:211
 #: ../bin/src/ui_visualisationoverlay.h:179
 msgid "Clementine"
 msgstr "Clementine"
@@ -964,8 +964,8 @@ msgstr "Clementine 錯誤"
 msgid "Clementine Orange"
 msgstr "Clementine 的橘黃色"
 
-#: visualisations/visualisationcontainer.cpp:71
-#: visualisations/visualisationcontainer.cpp:144
+#: visualisations/visualisationcontainer.cpp:77
+#: visualisations/visualisationcontainer.cpp:151
 msgid "Clementine Visualization"
 msgstr "Clementine的視覺化效果"
 
@@ -980,7 +980,7 @@ msgid ""
 "Clementine can be controlled remotely by an Android phone.  To enable this "
 "feature log in with the same Google account that is configured on your "
 "phone."
-msgstr ""
+msgstr "Android手機可以藉由應用程式遙控Clementine。\n想要使用此功能的話必須登入手機所登入的Google帳號。"
 
 #: ../bin/src/ui_notificationssettingspage.h:403
 msgid "Clementine can show a message when the track changes."
@@ -997,14 +997,14 @@ msgstr ""
 msgid ""
 "Clementine could not load any projectM visualisations.  Check that you have "
 "installed Clementine properly."
-msgstr ""
+msgstr "Clementine無法載入任何ProjectM視覺化工具。\n請檢查是否正確安裝Clementine。"
 
 #: internet/lastfmsettingspage.cpp:103
 msgid ""
 "Clementine couldn't fetch your subscription status since there are problems "
 "with your connection. Played tracks will be cached and sent later to "
 "Last.fm."
-msgstr ""
+msgstr "Clementine無法擷取的訂閱情形自從連結問題出現。被播放的音軌將會被保留快取並稍後送至Last.fm。"
 
 #: widgets/prettyimage.cpp:201
 msgid "Clementine image viewer"
@@ -1020,13 +1020,13 @@ msgstr "點擊此處加入一些音樂"
 
 #: ../bin/src/ui_trackslider.h:72
 msgid "Click to toggle between remaining time and total time"
-msgstr ""
+msgstr "點擊以切換剩餘時間/全部時間"
 
 #: widgets/didyoumean.cpp:35
 msgid "Close"
 msgstr "關閉"
 
-#: visualisations/visualisationcontainer.cpp:120
+#: visualisations/visualisationcontainer.cpp:127
 msgid "Close visualization"
 msgstr "關閉視覺化效果"
 
@@ -1056,7 +1056,7 @@ msgstr ""
 
 #: core/commandlineoptions.cpp:166
 msgid "Comma separated list of class:level, level is 0-3"
-msgstr ""
+msgstr "用逗號化分類別清單:等級為0-3"
 
 #: playlist/playlist.cpp:1141 smartplaylists/searchterm.cpp:279
 #: ui/organisedialog.cpp:65 ../bin/src/ui_edittagdialog.h:661
@@ -1124,7 +1124,7 @@ msgstr "連接置Spotify"
 
 #: ../bin/src/ui_transcoderoptionsmp3.h:196
 msgid "Constant bitrate"
-msgstr ""
+msgstr "恆定碼率"
 
 #: ../bin/src/ui_deviceproperties.h:379
 msgid "Convert all music"
@@ -1161,21 +1161,21 @@ msgstr ""
 msgid ""
 "Could not create the GStreamer element \"%1\" - make sure you have all the "
 "required GStreamer plugins installed"
-msgstr ""
+msgstr "無法創建GStreamer元素\"%1\"-請確認您安裝了所有需要的GStreamer外掛。"
 
 #: transcoder/transcoder.cpp:425
 #, qt-format
 msgid ""
 "Couldn't find a muxer for %1, check you have the correct GStreamer plugins "
 "installed"
-msgstr ""
+msgstr "無法為%1找到混合器，請確認已正確安裝GStreamer外掛。"
 
 #: transcoder/transcoder.cpp:419
 #, qt-format
 msgid ""
 "Couldn't find an encoder for %1, check you have the correct GStreamer "
 "plugins installed"
-msgstr ""
+msgstr "無法找到%1的解碼器，請確認已正確安裝GStreamer外掛。"
 
 #: internet/lastfmservice.cpp:911
 msgid "Couldn't load the last.fm radio station"
@@ -1184,7 +1184,7 @@ msgstr "無法載入 last.fm 電台"
 #: internet/magnatunedownloaddialog.cpp:203
 #, qt-format
 msgid "Couldn't open output file %1"
-msgstr ""
+msgstr "無法輸出檔案%1"
 
 #: ../bin/src/ui_albumcovermanager.h:149
 #: ../bin/src/ui_albumcoversearcher.h:105 ../bin/src/ui_mainwindow.h:684
@@ -1198,25 +1198,25 @@ msgstr "從遷入影像取得封面圖片"
 #: ui/edittagdialog.cpp:436
 #, qt-format
 msgid "Cover art loaded automatically from %1"
-msgstr ""
+msgstr "封面圖片從%1自動讀取"
 
 #: ui/edittagdialog.cpp:429
 msgid "Cover art manually unset"
-msgstr ""
+msgstr "手動清除封面圖片"
 
 #: ui/edittagdialog.cpp:438
 msgid "Cover art not set"
-msgstr ""
+msgstr "未設置封面圖片"
 
 #: ui/edittagdialog.cpp:432
 #, qt-format
 msgid "Cover art set from %1"
-msgstr ""
+msgstr "從%1取得封面圖片"
 
 #: covers/coversearchstatisticsdialog.cpp:60 ui/albumcoversearcher.cpp:106
 #, qt-format
 msgid "Covers from %1"
-msgstr ""
+msgstr "來自%1的封面"
 
 #: internet/groovesharkservice.cpp:478 internet/groovesharkservice.cpp:1135
 msgid "Create a new Grooveshark playlist"
@@ -1324,7 +1324,7 @@ msgstr "自訂..."
 
 #: devices/devicekitlister.cpp:123
 msgid "DBus path"
-msgstr ""
+msgstr "DBus路徑"
 
 #: ui/equalizer.cpp:111
 msgid "Dance"
@@ -1347,7 +1347,7 @@ msgstr "修改的日期"
 
 #: smartplaylists/searchterm.cpp:301
 msgid "Days"
-msgstr ""
+msgstr "天"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:177
 msgid "De&fault"
@@ -1384,11 +1384,11 @@ msgstr ""
 #: devices/deviceview.cpp:388 library/libraryview.cpp:471
 #: ui/mainwindow.cpp:1800 widgets/fileview.cpp:186
 msgid "Delete files"
-msgstr ""
+msgstr "刪除檔案"
 
 #: devices/deviceview.cpp:220
 msgid "Delete from device..."
-msgstr ""
+msgstr "從裝置上刪除..."
 
 #: library/libraryview.cpp:254 ui/mainwindow.cpp:488
 #: widgets/fileviewlist.cpp:45
@@ -1413,7 +1413,7 @@ msgstr "刪除原本的檔案"
 
 #: core/deletefiles.cpp:50
 msgid "Deleting files"
-msgstr ""
+msgstr "檔案刪除中"
 
 #: ui/mainwindow.cpp:1284
 msgid "Dequeue selected tracks"
@@ -1433,19 +1433,19 @@ msgstr "詳情..."
 
 #: devices/devicekitlister.cpp:126 devices/giolister.cpp:158
 msgid "Device"
-msgstr ""
+msgstr "裝置"
 
 #: ../bin/src/ui_deviceproperties.h:368
 msgid "Device Properties"
-msgstr ""
+msgstr "裝置屬性"
 
 #: ../bin/src/ui_podcastsettingspage.h:254 devices/wmdmlister.cpp:368
 msgid "Device name"
-msgstr ""
+msgstr "裝置名稱"
 
 #: devices/deviceview.cpp:207
 msgid "Device properties..."
-msgstr ""
+msgstr "裝置屬性..."
 
 #: ui/mainwindow.cpp:228
 msgid "Devices"
@@ -1453,19 +1453,19 @@ msgstr "裝置"
 
 #: widgets/didyoumean.cpp:128
 msgid "Did you mean"
-msgstr ""
+msgstr "您的意思是"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:160
 msgid "Digitally Imported"
-msgstr ""
+msgstr "Digitally Imported"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:164
 msgid "Digitally Imported password"
-msgstr ""
+msgstr "Digitally Imported密碼"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:162
 msgid "Digitally Imported username"
-msgstr ""
+msgstr "Digitally Imported帳號"
 
 #: ../bin/src/ui_networkproxysettingspage.h:159
 msgid "Direct internet connection"
@@ -1491,7 +1491,7 @@ msgstr "唱片"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:234
 msgid "Discontinuous transmission"
-msgstr ""
+msgstr "已中斷傳輸"
 
 #: internet/icecastfilterwidget.cpp:33 library/libraryfilterwidget.cpp:109
 #: ../bin/src/ui_librarysettingspage.h:169
@@ -1508,7 +1508,7 @@ msgstr "做一個完整的音樂庫重新掃描"
 
 #: ../bin/src/ui_deviceproperties.h:377
 msgid "Do not convert any music"
-msgstr ""
+msgstr "沒有轉換任何音樂"
 
 #: widgets/osd.cpp:286 ../bin/src/ui_playlistsequence.h:103
 msgid "Don't repeat"
@@ -1565,7 +1565,7 @@ msgstr "下載此專輯"
 
 #: internet/jamendoservice.cpp:413
 msgid "Download this album..."
-msgstr ""
+msgstr "下載此專輯..."
 
 #: podcasts/podcastservice.cpp:347
 msgid "Download this episode"
@@ -1573,7 +1573,7 @@ msgstr ""
 
 #: ../bin/src/ui_spotifysettingspage.h:216
 msgid "Download..."
-msgstr ""
+msgstr "下載..."
 
 #: podcasts/podcastservice.cpp:195
 #, qt-format
@@ -1582,7 +1582,7 @@ msgstr ""
 
 #: internet/icecastservice.cpp:99
 msgid "Downloading Icecast directory"
-msgstr ""
+msgstr "Icecast目錄下載中"
 
 #: internet/jamendoservice.cpp:183
 msgid "Downloading Jamendo catalogue"
@@ -1863,7 +1863,11 @@ msgstr "淡出"
 msgid "Fading duration"
 msgstr "淡出持續時間"
 
-#: podcasts/gpoddersearchpage.cpp:80 podcasts/gpoddertoptagsmodel.cpp:113
+#: podcasts/gpoddertoptagspage.cpp:76
+msgid "Failed to fetch directory"
+msgstr ""
+
+#: podcasts/gpoddersearchpage.cpp:76 podcasts/gpoddertoptagsmodel.cpp:109
 #: podcasts/itunessearchpage.cpp:66 podcasts/itunessearchpage.cpp:75
 #: podcasts/itunessearchpage.cpp:82
 msgid "Failed to fetch podcasts"
@@ -2024,7 +2028,7 @@ msgid "Format"
 msgstr "格式"
 
 #: analyzers/analyzercontainer.cpp:46
-#: visualisations/visualisationcontainer.cpp:98
+#: visualisations/visualisationcontainer.cpp:104
 msgid "Framerate"
 msgstr "畫面更新頻率"
 
@@ -2189,17 +2193,14 @@ msgid "High"
 msgstr ""
 
 #: analyzers/analyzercontainer.cpp:64
+#: visualisations/visualisationcontainer.cpp:109
 #, qt-format
 msgid "High (%1 fps)"
 msgstr ""
 
-#: visualisations/visualisationcontainer.cpp:113
+#: visualisations/visualisationcontainer.cpp:119
 msgid "High (1024x1024)"
 msgstr "高 (1024x1024)"
-
-#: visualisations/visualisationcontainer.cpp:103
-msgid "High (35 fps)"
-msgstr "高 (35 fps)"
 
 #: smartplaylists/searchterm.cpp:300
 msgid "Hours"
@@ -2621,15 +2622,12 @@ msgid "Love"
 msgstr "喜愛"
 
 #: analyzers/analyzercontainer.cpp:62
+#: visualisations/visualisationcontainer.cpp:107
 #, qt-format
 msgid "Low (%1 fps)"
 msgstr ""
 
-#: visualisations/visualisationcontainer.cpp:101
-msgid "Low (15 fps)"
-msgstr "低 (15 fps)"
-
-#: visualisations/visualisationcontainer.cpp:111
+#: visualisations/visualisationcontainer.cpp:117
 msgid "Low (256x256)"
 msgstr "低 (256x256)"
 
@@ -2728,15 +2726,12 @@ msgid "Maximum bitrate"
 msgstr ""
 
 #: analyzers/analyzercontainer.cpp:63
+#: visualisations/visualisationcontainer.cpp:108
 #, qt-format
 msgid "Medium (%1 fps)"
 msgstr ""
 
-#: visualisations/visualisationcontainer.cpp:102
-msgid "Medium (25 fps)"
-msgstr "中 (25 fps)"
-
-#: visualisations/visualisationcontainer.cpp:112
+#: visualisations/visualisationcontainer.cpp:118
 msgid "Medium (512x512)"
 msgstr "中 (512x512)"
 
@@ -3342,7 +3337,7 @@ msgstr ""
 #: ../bin/src/ui_transcoderoptionsmp3.h:192
 #: ../bin/src/ui_transcoderoptionsspeex.h:217
 #: ../bin/src/ui_transcoderoptionsvorbis.h:202
-#: visualisations/visualisationcontainer.cpp:108
+#: visualisations/visualisationcontainer.cpp:114
 msgid "Quality"
 msgstr "品質"
 
@@ -3764,7 +3759,7 @@ msgstr ""
 msgid "Select visualizations"
 msgstr "選取視覺化"
 
-#: visualisations/visualisationcontainer.cpp:117
+#: visualisations/visualisationcontainer.cpp:124
 msgid "Select visualizations..."
 msgstr "選取視覺化..."
 
@@ -4136,13 +4131,14 @@ msgid "Summary"
 msgstr ""
 
 #: analyzers/analyzercontainer.cpp:65
+#: visualisations/visualisationcontainer.cpp:110
 #, qt-format
 msgid "Super high (%1 fps)"
 msgstr ""
 
-#: visualisations/visualisationcontainer.cpp:104
-msgid "Super high (60 fps)"
-msgstr "超高 (60 fps)"
+#: visualisations/visualisationcontainer.cpp:120
+msgid "Super high (2048x2048)"
+msgstr ""
 
 #: ../bin/src/ui_deviceproperties.h:374
 msgid "Supported formats"
@@ -4237,7 +4233,8 @@ msgstr ""
 msgid "There are other songs in this album"
 msgstr ""
 
-#: podcasts/gpoddersearchpage.cpp:81 podcasts/gpoddertoptagsmodel.cpp:114
+#: podcasts/gpoddersearchpage.cpp:77 podcasts/gpoddertoptagsmodel.cpp:110
+#: podcasts/gpoddertoptagspage.cpp:77
 msgid "There was a problem communicating with gpodder.net"
 msgstr ""
 
@@ -4368,7 +4365,7 @@ msgstr ""
 msgid "Toggle Pretty OSD"
 msgstr ""
 
-#: visualisations/visualisationcontainer.cpp:95
+#: visualisations/visualisationcontainer.cpp:101
 msgid "Toggle fullscreen"
 msgstr "切換全螢幕模式"
 
@@ -4890,7 +4887,7 @@ msgstr "你的電台"
 msgid "Your scrobbles: %1"
 msgstr ""
 
-#: visualisations/visualisationcontainer.cpp:145
+#: visualisations/visualisationcontainer.cpp:152
 msgid "Your system is missing OpenGL support, visualizations are unavailable."
 msgstr ""
 

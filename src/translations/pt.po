@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-03-16 14:30+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2012-03-23 16:38+0000\n"
+"Last-Translator: Sérgio Marques <smarquespt@gmail.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: pt\n"
@@ -19,7 +19,7 @@ msgstr ""
 
 #: ../bin/src/ui_podcastsettingspage.h:246
 msgid " days"
-msgstr ""
+msgstr " dias"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:130
 #: ../bin/src/ui_transcoderoptionsmp3.h:195
@@ -66,10 +66,10 @@ msgstr "%1 dias"
 msgid "%1 days ago"
 msgstr "%1 dias atrás"
 
-#: podcasts/gpoddersync.cpp:81
+#: podcasts/gpoddersync.cpp:79
 #, qt-format
 msgid "%1 on %2"
-msgstr ""
+msgstr "%1 em %2"
 
 #: playlistparsers/playlistparser.cpp:74
 #, qt-format
@@ -253,7 +253,7 @@ msgid ""
 "<p>Tokens start with %, for example: %artist %album %title </p>\n"
 "\n"
 "<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
-msgstr "<p>Os \"tokens\" iniciam com %, por exemplo: %artist %album %title </p>\n\n<p>Ao colocar parênteses entre as secções de texto que contêm \"tokens\", essa secção será ocultada se o \"token\" estiver vazio.</p>"
+msgstr "<p>Os \"tokens\" iniciam com %, por exemplo: %artist %album %title </p>\n\n<p>Ao colocar parênteses entre as secções de texto que contêm \"tokens\", essa secção será ocultada se o \"token\" estiver vazio</p>"
 
 #: internet/groovesharksettingspage.cpp:111
 msgid "A Grooveshark Anywhere account is required."
@@ -338,7 +338,7 @@ msgstr "Ativar/desativar Wiiremote"
 
 #: podcasts/addpodcastdialog.cpp:54
 msgid "Add Podcast"
-msgstr ""
+msgstr "Adicionar podcast"
 
 #: ../bin/src/ui_addstreamdialog.h:113
 msgid "Add Stream"
@@ -390,11 +390,11 @@ msgstr "Adicionar nova pasta..."
 
 #: ../bin/src/ui_addpodcastdialog.h:179
 msgid "Add podcast"
-msgstr ""
+msgstr "Adicionar podcast"
 
 #: podcasts/podcastservice.cpp:257 ../bin/src/ui_mainwindow.h:715
 msgid "Add podcast..."
-msgstr ""
+msgstr "Adicionar podcast..."
 
 #: smartplaylists/searchtermwidget.cpp:333
 msgid "Add search term"
@@ -462,7 +462,7 @@ msgstr "Adicionar aos favoritos Grooveshark"
 
 #: internet/groovesharkservice.cpp:1015
 msgid "Add to Grooveshark playlists"
-msgstr "Adicionar a listas de reprodução Grooveshark"
+msgstr "Adicionar às listas de reprodução Grooveshark"
 
 #: ui/mainwindow.cpp:1348
 msgid "Add to another playlist"
@@ -516,7 +516,7 @@ msgstr "Agrupamento avançado..."
 
 #: ../bin/src/ui_podcastsettingspage.h:247
 msgid "After "
-msgstr ""
+msgstr "Após "
 
 #: ../bin/src/ui_organisedialog.h:190
 msgid "After copying..."
@@ -672,7 +672,7 @@ msgstr "Tem a certeza de que quer eliminar \"%1\"?"
 
 #: internet/groovesharkservice.cpp:1184
 msgid "Are you sure you want to delete this playlist?"
-msgstr "Tem a certeza de que pretende eliminar esta lista de reprodução?"
+msgstr "Tem a certeza de que quer eliminar esta lista de reprodução?"
 
 #: ui/edittagdialog.cpp:760
 msgid "Are you sure you want to reset this song's statistics?"
@@ -720,7 +720,7 @@ msgstr "Falha ao autenticar"
 
 #: ../bin/src/ui_podcastinfowidget.h:192
 msgid "Author"
-msgstr ""
+msgstr "Autor"
 
 #: ui/about.cpp:64
 msgid "Authors"
@@ -752,7 +752,7 @@ msgstr "Tamanho médio"
 
 #: podcasts/addpodcastdialog.cpp:72
 msgid "BBC Podcasts"
-msgstr ""
+msgstr "Podcasts BBC"
 
 #: playlist/playlist.cpp:1131 ui/organisedialog.cpp:62
 #: ../bin/src/ui_edittagdialog.h:638
@@ -777,7 +777,7 @@ msgstr "Opacidade do fundo"
 
 #: core/database.cpp:747
 msgid "Backing up database"
-msgstr ""
+msgstr "A copiar a base de dados"
 
 #: ../bin/src/ui_mainwindow.h:659
 msgid "Ban"
@@ -895,7 +895,7 @@ msgstr "Alterar o idioma"
 
 #: ../bin/src/ui_podcastsettingspage.h:228
 msgid "Check for new episodes"
-msgstr ""
+msgstr "Procurar novos episódios"
 
 #: ui/mainwindow.cpp:560
 msgid "Check for updates..."
@@ -903,7 +903,7 @@ msgstr "Verificar atualizações..."
 
 #: smartplaylists/wizard.cpp:80
 msgid "Choose a name for your smart playlist"
-msgstr "Escolha o nome da lista inteligente"
+msgstr "Escolha o nome da lista de reprodução inteligente"
 
 #: ../bin/src/ui_playbacksettingspage.h:280
 msgid "Choose automatically"
@@ -923,16 +923,16 @@ msgstr "Escolher da lista"
 
 #: smartplaylists/querywizardplugin.cpp:152
 msgid "Choose how the playlist is sorted and how many songs it will contain."
-msgstr "Escolha o método de organização da lista e o número de faixas a incluir"
+msgstr "Escolha o tipo de organização da lista e o número de faixas a incluir"
 
 #: podcasts/podcastsettingspage.cpp:132
 msgid "Choose podcast download directory"
-msgstr ""
+msgstr "Escolha o diretório para guardar os podcasts"
 
 #: ../bin/src/ui_songinfosettingspage.h:188
 msgid ""
 "Choose the websites you want Clementine to use when searching for lyrics."
-msgstr "Escolha os sítios web que o Clementine vai utilizar para procurar as letras das faixas"
+msgstr "Escolha os sítios web em que o Clementine deve procurar as letras das faixas"
 
 #: ui/equalizer.cpp:109
 msgid "Classical"
@@ -940,7 +940,7 @@ msgstr "Clássica"
 
 #: ../bin/src/ui_podcastsettingspage.h:243
 msgid "Cleaning up"
-msgstr ""
+msgstr "A limpar"
 
 #: widgets/lineedit.cpp:41 ../bin/src/ui_queuemanager.h:139
 msgid "Clear"
@@ -951,7 +951,7 @@ msgid "Clear playlist"
 msgstr "Apagar lista de reprodução"
 
 #: smartplaylists/searchtermwidget.cpp:321 ../bin/src/ui_mainwindow.h:644
-#: visualisations/visualisationcontainer.cpp:204
+#: visualisations/visualisationcontainer.cpp:211
 #: ../bin/src/ui_visualisationoverlay.h:179
 msgid "Clementine"
 msgstr "Clementine"
@@ -964,8 +964,8 @@ msgstr "Erro do Clementine"
 msgid "Clementine Orange"
 msgstr "Clementine laranja"
 
-#: visualisations/visualisationcontainer.cpp:71
-#: visualisations/visualisationcontainer.cpp:144
+#: visualisations/visualisationcontainer.cpp:77
+#: visualisations/visualisationcontainer.cpp:151
 msgid "Clementine Visualization"
 msgstr "Visualização Clementine"
 
@@ -991,7 +991,7 @@ msgid ""
 "Clementine can synchronize your subscription list with your other computers "
 "and podcast applications.  <a href=\"https://gpodder.net/register/\">Create "
 "an account</a>."
-msgstr ""
+msgstr "O Clementine pode sincronizar a sua lista de subscrições existentes noutro computador ou aplicações.<a href=\"https://gpodder.net/register/\">Criar uma conta</a>"
 
 #: visualisations/projectmvisualisation.cpp:128
 msgid ""
@@ -1026,7 +1026,7 @@ msgstr "Clique para alternar entre tempo restante e tempo total"
 msgid "Close"
 msgstr "Fechar"
 
-#: visualisations/visualisationcontainer.cpp:120
+#: visualisations/visualisationcontainer.cpp:127
 msgid "Close visualization"
 msgstr "Fechar visualização"
 
@@ -1103,7 +1103,7 @@ msgstr "Configurar coleção..."
 
 #: podcasts/addpodcastdialog.cpp:65 podcasts/podcastservice.cpp:288
 msgid "Configure podcasts..."
-msgstr ""
+msgstr "Configurar podcasts..."
 
 #: internet/digitallyimportedservicebase.cpp:185
 #: ../bin/src/ui_globalsearchsettingspage.h:174
@@ -1154,7 +1154,7 @@ msgstr "A copiar base de dados do iPod"
 
 #: ../bin/src/ui_podcastinfowidget.h:194
 msgid "Copyright"
-msgstr ""
+msgstr "Direitos de autor"
 
 #: transcoder/transcoder.cpp:62
 #, qt-format
@@ -1335,7 +1335,7 @@ msgid ""
 "Database corruption detected. Please read https://code.google.com/p"
 "/clementine-player/wiki/DatabaseCorruption for instructions on how to "
 "recover your database"
-msgstr ""
+msgstr "Foram detetados erros na sua base de dados. Por favor, consulte https://code.google.com/p/clementine-player/wiki/DatabaseCorruption para obter as informações sobre a recuperação das bases de dados"
 
 #: playlist/playlist.cpp:1139 ../bin/src/ui_edittagdialog.h:649
 msgid "Date created"
@@ -1379,7 +1379,7 @@ msgstr "Eliminar lista de reprodução Grooveshark"
 
 #: podcasts/podcastservice.cpp:274
 msgid "Delete downloaded data"
-msgstr ""
+msgstr "Eliminar dados transferidos"
 
 #: devices/deviceview.cpp:388 library/libraryview.cpp:471
 #: ui/mainwindow.cpp:1800 widgets/fileview.cpp:186
@@ -1397,7 +1397,7 @@ msgstr "Eliminar ficheiros do disco..."
 
 #: ../bin/src/ui_podcastsettingspage.h:244
 msgid "Delete played episodes"
-msgstr ""
+msgstr "Eliminar episódios reproduzidos"
 
 #: ui/equalizer.cpp:190 ../bin/src/ui_equalizer.h:124
 msgid "Delete preset"
@@ -1405,7 +1405,7 @@ msgstr "Eliminar pré-ajustes"
 
 #: library/libraryview.cpp:246
 msgid "Delete smart playlist"
-msgstr "Eliminar lista inteligente"
+msgstr "Eliminar lista de reprodução inteligente"
 
 #: ../bin/src/ui_organisedialog.h:194
 msgid "Delete the original files"
@@ -1537,7 +1537,7 @@ msgstr "Ao clicar duas vezes numa faixa..."
 #: podcasts/podcastservice.cpp:345
 #, c-format
 msgid "Download %n episodes"
-msgstr ""
+msgstr "Transferir %n episódios"
 
 #: internet/magnatunedownloaddialog.cpp:252
 msgid "Download directory"
@@ -1545,7 +1545,7 @@ msgstr "Diretório de transferências"
 
 #: ../bin/src/ui_podcastsettingspage.h:240
 msgid "Download episodes to"
-msgstr ""
+msgstr "Transferir episódios para"
 
 #: ../bin/src/ui_magnatunesettingspage.h:161
 msgid "Download membership"
@@ -1553,11 +1553,11 @@ msgstr "Transferência"
 
 #: ../bin/src/ui_podcastsettingspage.h:241
 msgid "Download new episodes automatically"
-msgstr ""
+msgstr "Transferir novos episódios automaticamente"
 
 #: podcasts/podcastservice.cpp:187
 msgid "Download queued"
-msgstr ""
+msgstr "Transferência colocada na fila"
 
 #: internet/magnatuneservice.cpp:274
 msgid "Download this album"
@@ -1569,7 +1569,7 @@ msgstr "Transferir este álbum..."
 
 #: podcasts/podcastservice.cpp:347
 msgid "Download this episode"
-msgstr ""
+msgstr "Transferir este episódio"
 
 #: ../bin/src/ui_spotifysettingspage.h:216
 msgid "Download..."
@@ -1578,7 +1578,7 @@ msgstr "Transferir..."
 #: podcasts/podcastservice.cpp:195
 #, qt-format
 msgid "Downloading (%1%)..."
-msgstr ""
+msgstr "A transferir (%1%)..."
 
 #: internet/icecastservice.cpp:99
 msgid "Downloading Icecast directory"
@@ -1618,7 +1618,7 @@ msgstr "Combinação aleatória dinâmica"
 
 #: library/libraryview.cpp:244
 msgid "Edit smart playlist..."
-msgstr "Editar lista inteligente..."
+msgstr "Editar lista de reprodução inteligente..."
 
 #: ui/mainwindow.cpp:1317
 #, qt-format
@@ -1671,7 +1671,7 @@ msgstr "Ative as fontes que pretende incluir na procura global. Se forem encontr
 
 #: core/globalshortcuts.cpp:62
 msgid "Enable/disable Last.fm scrobbling"
-msgstr "Ativar/inativar o envio last.fm"
+msgstr "Ativar/desativar o envio last.fm"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:235
 msgid "Encoding complexity"
@@ -1687,7 +1687,7 @@ msgstr "Tipo de codificação"
 
 #: ../bin/src/ui_addpodcastbyurl.h:76
 msgid "Enter a URL"
-msgstr ""
+msgstr "Indique o URL"
 
 #: ../bin/src/ui_coverfromurldialog.h:103
 msgid "Enter a URL to download a cover from the Internet:"
@@ -1704,11 +1704,11 @@ msgstr "Indique um <b>artista</b> ou <b>\"tag\"</b> para ouvir a rádio last.fm"
 
 #: ../bin/src/ui_itunessearchpage.h:77
 msgid "Enter search terms below to find podcasts in the iTunes Store"
-msgstr ""
+msgstr "Indique os termos de pesquisa para procurar os podcasts na loja iTunes"
 
 #: ../bin/src/ui_gpoddersearchpage.h:77
 msgid "Enter search terms below to find podcasts on gpodder.net"
-msgstr ""
+msgstr "Indique os termos de pesquisa para procurar os podcasts no gpodder.net"
 
 #: ../bin/src/ui_libraryfilterwidget.h:131
 #: ../bin/src/ui_albumcovermanager.h:153
@@ -1782,31 +1782,31 @@ msgstr "Reproduzida alguma vez"
 
 #: ../bin/src/ui_podcastsettingspage.h:232
 msgid "Every 10 minutes"
-msgstr ""
+msgstr "A cada 10 minutos"
 
 #: ../bin/src/ui_podcastsettingspage.h:238
 msgid "Every 12 hours"
-msgstr ""
+msgstr "A cada 12 horas"
 
 #: ../bin/src/ui_podcastsettingspage.h:236
 msgid "Every 2 hours"
-msgstr ""
+msgstr "A cada 2 horas"
 
 #: ../bin/src/ui_podcastsettingspage.h:233
 msgid "Every 20 minutes"
-msgstr ""
+msgstr "A cada 20 minutos"
 
 #: ../bin/src/ui_podcastsettingspage.h:234
 msgid "Every 30 minutes"
-msgstr ""
+msgstr "A cada 30 minutos"
 
 #: ../bin/src/ui_podcastsettingspage.h:237
 msgid "Every 6 hours"
-msgstr ""
+msgstr "A cada 6 horas"
 
 #: ../bin/src/ui_podcastsettingspage.h:235
 msgid "Every hour"
-msgstr ""
+msgstr "Todas as horas"
 
 #: ../bin/src/ui_playbacksettingspage.h:263
 msgid "Except between tracks on the same album or in the same CUE sheet"
@@ -1863,19 +1863,23 @@ msgstr "Desvanecimento"
 msgid "Fading duration"
 msgstr "Duração"
 
-#: podcasts/gpoddersearchpage.cpp:80 podcasts/gpoddertoptagsmodel.cpp:113
+#: podcasts/gpoddertoptagspage.cpp:76
+msgid "Failed to fetch directory"
+msgstr "Ocorreu um erro ao obter o diretório"
+
+#: podcasts/gpoddersearchpage.cpp:76 podcasts/gpoddertoptagsmodel.cpp:109
 #: podcasts/itunessearchpage.cpp:66 podcasts/itunessearchpage.cpp:75
 #: podcasts/itunessearchpage.cpp:82
 msgid "Failed to fetch podcasts"
-msgstr ""
+msgstr "Ocorreu um erro ao obter os podcasts"
 
 #: podcasts/addpodcastbyurl.cpp:70 podcasts/fixedopmlpage.cpp:54
 msgid "Failed to load podcast"
-msgstr ""
+msgstr "Ocorreu um erro ao carregar o podcast"
 
 #: podcasts/podcasturlloader.cpp:163
 msgid "Failed to parse the XML for this RSS feed"
-msgstr ""
+msgstr "Ocorreu um erro ao processar o XML desta fonte RSS"
 
 #: ../bin/src/ui_transcoderoptionsflac.h:82
 #: ../bin/src/ui_transcoderoptionsmp3.h:200
@@ -1958,7 +1962,7 @@ msgstr "Tipo de sistema de ficheiros"
 
 #: smartplaylists/querywizardplugin.cpp:89
 msgid "Find songs in your library that match the criteria you specify."
-msgstr "Descobrir faixas da coleção que coincidem com os critérios indicados"
+msgstr "Procurar faixas da coleção que coincidem com os critérios indicados"
 
 #: musicbrainz/tagfetcher.cpp:55
 msgid "Fingerprinting song"
@@ -2024,7 +2028,7 @@ msgid "Format"
 msgstr "Formato"
 
 #: analyzers/analyzercontainer.cpp:46
-#: visualisations/visualisationcontainer.cpp:98
+#: visualisations/visualisationcontainer.cpp:104
 msgid "Framerate"
 msgstr "Taxa de imagens"
 
@@ -2088,7 +2092,7 @@ msgstr "Dar um nome:"
 
 #: ../bin/src/ui_addpodcastbyurl.h:78
 msgid "Go"
-msgstr ""
+msgstr "Procurar"
 
 #: ../bin/src/ui_mainwindow.h:703
 msgid "Go to next playlist tab"
@@ -2166,7 +2170,7 @@ msgstr "Agrupar por género/artista/álbum"
 
 #: podcasts/podcasturlloader.cpp:192
 msgid "HTML page did not contain any RSS feeds"
-msgstr ""
+msgstr "A página HTML não possui fontes RSS"
 
 #: ../bin/src/ui_networkproxysettingspage.h:163
 msgid "HTTP proxy"
@@ -2189,17 +2193,14 @@ msgid "High"
 msgstr "Alta"
 
 #: analyzers/analyzercontainer.cpp:64
+#: visualisations/visualisationcontainer.cpp:109
 #, qt-format
 msgid "High (%1 fps)"
 msgstr "Alta (%1 ips)"
 
-#: visualisations/visualisationcontainer.cpp:113
+#: visualisations/visualisationcontainer.cpp:119
 msgid "High (1024x1024)"
 msgstr "Alta (1024x1024)"
-
-#: visualisations/visualisationcontainer.cpp:103
-msgid "High (35 fps)"
-msgstr "Alta (35 ips)"
 
 #: smartplaylists/searchterm.cpp:300
 msgid "Hours"
@@ -2233,7 +2234,7 @@ msgstr "Se continuar, o dispositivo irá funcionar lentamente e as faixas copiad
 
 #: ../bin/src/ui_addpodcastbyurl.h:77
 msgid "If you know the URL of a podcast, enter it below and press Go."
-msgstr ""
+msgstr "Se souber o URL do podcst, indique-o em baixo e prima Procurar"
 
 #: ../bin/src/ui_remotesettingspage.h:209
 msgid ""
@@ -2257,7 +2258,7 @@ msgstr "Imagens (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgid ""
 "In dynamic mode new tracks will be chosen and added to the playlist every "
 "time a song finishes."
-msgstr "No modo dinâmico, as faixas são escolhidas e adicionadas à lista de reprodução assim que uma música termine"
+msgstr "No modo dinâmico, as faixas são escolhidas e adicionadas à lista de reprodução assim que uma faixa termine"
 
 #: internet/spotifyservice.cpp:344
 msgid "Inbox"
@@ -2297,7 +2298,7 @@ msgstr "Instalado"
 
 #: core/database.cpp:688
 msgid "Integrity check"
-msgstr ""
+msgstr "Verificação de integridade"
 
 #: ui/mainwindow.cpp:227
 msgid "Internet"
@@ -2460,7 +2461,7 @@ msgstr "\"Tag\" da rádio last.fm: %1"
 
 #: internet/lastfmservice.cpp:458
 msgid "Last.fm is currently busy, please try again in a few minutes"
-msgstr "Neste momento, a last.fm está ocupada. Tente mais tarde."
+msgstr "Neste momento, a last.fm está ocupada. Tente mais tarde"
 
 #: ../bin/src/ui_lastfmsettingspage.h:148
 msgid "Last.fm password"
@@ -2488,7 +2489,7 @@ msgstr "Faixas favoritas (mas pouco)"
 
 #: ../bin/src/ui_playbacksettingspage.h:282
 msgid "Leave blank for the default.  Examples: \"/dev/dsp\", \"front\", etc."
-msgstr "Deixar em branco para as predefinições. Exemplos: \"/dev/dsp\", \"front\", etc"
+msgstr "Deixar em branco para as predefinições. Exemplos: \"/dev/dsp\", \"front\", etc..."
 
 #: playlist/playlist.cpp:1117 ui/organisedialog.cpp:66
 #: ui/qtsystemtrayicon.cpp:255 ../bin/src/ui_edittagdialog.h:636
@@ -2597,7 +2598,7 @@ msgstr "A carregar..."
 
 #: core/commandlineoptions.cpp:158
 msgid "Loads files/URLs, replacing current playlist"
-msgstr "Carregar ficheiros/URLs, substituindo a lista atual"
+msgstr "Carregar ficheiros/URLs, substituindo a lista de reprodução atual"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:163
 #: ../bin/src/ui_groovesharksettingspage.h:116
@@ -2610,7 +2611,7 @@ msgstr "Iniciar sessão"
 
 #: podcasts/podcastsettingspage.cpp:119
 msgid "Login failed"
-msgstr ""
+msgstr "Falha ao iniciar sessão"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:137
 msgid "Long term prediction profile (LTP)"
@@ -2621,15 +2622,12 @@ msgid "Love"
 msgstr "Gosto"
 
 #: analyzers/analyzercontainer.cpp:62
+#: visualisations/visualisationcontainer.cpp:107
 #, qt-format
 msgid "Low (%1 fps)"
 msgstr "Baixa (%1 ips)"
 
-#: visualisations/visualisationcontainer.cpp:101
-msgid "Low (15 fps)"
-msgstr "Baixa (15 ips)"
-
-#: visualisations/visualisationcontainer.cpp:111
+#: visualisations/visualisationcontainer.cpp:117
 msgid "Low (256x256)"
 msgstr "Baixa (256x256)"
 
@@ -2701,7 +2699,7 @@ msgstr "Configuração manual de proxy"
 #: ../bin/src/ui_podcastsettingspage.h:231
 #: ../bin/src/ui_podcastsettingspage.h:245
 msgid "Manually"
-msgstr ""
+msgstr "Manualmente"
 
 #: devices/deviceproperties.cpp:153
 msgid "Manufacturer"
@@ -2709,11 +2707,11 @@ msgstr "Fabricante"
 
 #: podcasts/podcastservice.cpp:284
 msgid "Mark as listened"
-msgstr ""
+msgstr "Marcar como reproduzido"
 
 #: podcasts/podcastservice.cpp:282
 msgid "Mark as new"
-msgstr ""
+msgstr "Marcar como novo"
 
 #: ../bin/src/ui_querysearchpage.h:116
 msgid "Match every search term (AND)"
@@ -2728,15 +2726,12 @@ msgid "Maximum bitrate"
 msgstr "Taxa de dados máxima"
 
 #: analyzers/analyzercontainer.cpp:63
+#: visualisations/visualisationcontainer.cpp:108
 #, qt-format
 msgid "Medium (%1 fps)"
 msgstr "Média (%1 fps)"
 
-#: visualisations/visualisationcontainer.cpp:102
-msgid "Medium (25 fps)"
-msgstr "Média (25 ips)"
-
-#: visualisations/visualisationcontainer.cpp:112
+#: visualisations/visualisationcontainer.cpp:118
 msgid "Medium (512x512)"
 msgstr "Média (512x512)"
 
@@ -2941,7 +2936,7 @@ msgstr "Bloco normal"
 
 #: playlist/playlistsequence.cpp:170
 msgid "Not available while using a dynamic playlist"
-msgstr "Não disponível, se estiver a utilizar uma lista dinâmica"
+msgstr "Não disponível, se estiver a utilizar uma lista de reprodução dinâmica"
 
 #: devices/deviceview.cpp:107
 msgid "Not connected"
@@ -2973,7 +2968,7 @@ msgstr "Sessão não iniciada"
 
 #: devices/deviceview.cpp:111
 msgid "Not mounted - double click to mount"
-msgstr "Não montado. Duplo clique para montar"
+msgstr "Não montado. Clique duas vezes para montar"
 
 #: ../bin/src/ui_notificationssettingspage.h:404
 msgid "Notification type"
@@ -3093,7 +3088,7 @@ msgstr "Substituir ficheiros existentes"
 
 #: ../bin/src/ui_podcastinfowidget.h:195
 msgid "Owner"
-msgstr ""
+msgstr "Proprietário"
 
 #: internet/jamendoservice.cpp:210
 msgid "Parsing Jamendo catalogue"
@@ -3219,7 +3214,7 @@ msgstr "Estado:"
 
 #: podcasts/podcastservice.cpp:110 ../bin/src/ui_podcastsettingspage.h:226
 msgid "Podcasts"
-msgstr ""
+msgstr "Podcasts"
 
 #: ui/equalizer.cpp:119
 msgid "Pop"
@@ -3342,7 +3337,7 @@ msgstr "Colocar faixas aleatoriamente"
 #: ../bin/src/ui_transcoderoptionsmp3.h:192
 #: ../bin/src/ui_transcoderoptionsspeex.h:217
 #: ../bin/src/ui_transcoderoptionsvorbis.h:202
-#: visualisations/visualisationcontainer.cpp:108
+#: visualisations/visualisationcontainer.cpp:114
 msgid "Quality"
 msgstr "Qualidade"
 
@@ -3693,11 +3688,11 @@ msgstr "Procurar algo"
 
 #: ../bin/src/ui_gpoddersearchpage.h:76
 msgid "Search gpodder.net"
-msgstr ""
+msgstr "Procurar no gpodder.net"
 
 #: ../bin/src/ui_itunessearchpage.h:76
 msgid "Search iTunes"
-msgstr ""
+msgstr "Procurar no iTunes"
 
 #: ../bin/src/ui_querysearchpage.h:113
 msgid "Search mode"
@@ -3764,7 +3759,7 @@ msgstr "Escolha a cor dos textos:"
 msgid "Select visualizations"
 msgstr "Selecione as visualizações"
 
-#: visualisations/visualisationcontainer.cpp:117
+#: visualisations/visualisationcontainer.cpp:124
 msgid "Select visualizations..."
 msgstr "Selecione as visualizações..."
 
@@ -3927,7 +3922,7 @@ msgstr "Desordenar faixas deste álbum"
 
 #: ../bin/src/ui_podcastsettingspage.h:252
 msgid "Sign in"
-msgstr ""
+msgstr "Iniciar sessão"
 
 #: ../bin/src/ui_remotesettingspage.h:202 ../bin/src/ui_loginstatewidget.h:173
 msgid "Sign out"
@@ -4119,7 +4114,7 @@ msgstr "Listas de reprodução subscritas"
 
 #: ../bin/src/ui_podcastinfowidget.h:196
 msgid "Subscribers"
-msgstr ""
+msgstr "Subscritores"
 
 #: transcoder/transcoder.cpp:198
 #, qt-format
@@ -4136,13 +4131,14 @@ msgid "Summary"
 msgstr "Resumo"
 
 #: analyzers/analyzercontainer.cpp:65
+#: visualisations/visualisationcontainer.cpp:110
 #, qt-format
 msgid "Super high (%1 fps)"
 msgstr "Ultra (%1 ips)"
 
-#: visualisations/visualisationcontainer.cpp:104
-msgid "Super high (60 fps)"
-msgstr "Elevada (60 ips)"
+#: visualisations/visualisationcontainer.cpp:120
+msgid "Super high (2048x2048)"
+msgstr "Muito alta (2048x2048)"
 
 #: ../bin/src/ui_deviceproperties.h:374
 msgid "Supported formats"
@@ -4237,9 +4233,10 @@ msgstr "Em virtude das funcionalidades abaixo indicadas, o Clementine precisa de
 msgid "There are other songs in this album"
 msgstr "Existem outras faixas neste álbum"
 
-#: podcasts/gpoddersearchpage.cpp:81 podcasts/gpoddertoptagsmodel.cpp:114
+#: podcasts/gpoddersearchpage.cpp:77 podcasts/gpoddertoptagsmodel.cpp:110
+#: podcasts/gpoddertoptagspage.cpp:77
 msgid "There was a problem communicating with gpodder.net"
-msgstr ""
+msgstr "Ocorreu um erro ao ligar ao gpodder.net"
 
 #: internet/magnatunedownloaddialog.cpp:158
 msgid "There was a problem fetching the metadata from Magnatune"
@@ -4247,7 +4244,7 @@ msgstr "Ocorreu um problema ao obter os metadados Magnatune"
 
 #: podcasts/itunessearchpage.cpp:76
 msgid "There was a problem parsing the response from the iTunes Store"
-msgstr ""
+msgstr "Ocorreu um erro ao processar a resposta da loja iTunes"
 
 #: ui/organiseerrordialog.cpp:56
 msgid ""
@@ -4290,7 +4287,7 @@ msgstr "Terceiro nível"
 msgid ""
 "This action will create a database which could be as big as 150 MB.\n"
 "Do you want to continue anyway?"
-msgstr "Com esta opção, vai criar uma base de dados que pode atingir os 150 MB.\nPretende continuar?"
+msgstr "Com esta opção, vai criar uma base de dados que pode atingir os 150 MB.\nTem a certeza de que quer continuar?"
 
 #: internet/magnatunedownloaddialog.cpp:175
 msgid "This album is not available in the requested format"
@@ -4323,7 +4320,7 @@ msgstr "Este é um dispositivo iPod, mas você compilou o Clementine sem suporte
 msgid ""
 "This is the first time you have connected this device.  Clementine will now "
 "scan the device to find music files - this may take some time."
-msgstr "Está a ligar este dispositivo pela 1.ª vez. O Clementine vai procurar a existência de faixas no dispositivo. Pode levar algum tempo"
+msgstr "Deixar em branco para as predefinições. Exemplos: \"/dev/dsp\", \"front\", etc..."
 
 #: playlist/playlisttabbar.cpp:159
 msgid ""
@@ -4368,7 +4365,7 @@ msgstr "Hoje"
 msgid "Toggle Pretty OSD"
 msgstr "Alternar notificação"
 
-#: visualisations/visualisationcontainer.cpp:95
+#: visualisations/visualisationcontainer.cpp:101
 msgid "Toggle fullscreen"
 msgstr "Trocar para ecrã completo"
 
@@ -4386,7 +4383,7 @@ msgstr "Alternar a visibilidade da notificação"
 
 #: podcasts/podcasturlloader.cpp:114
 msgid "Too many redirects"
-msgstr ""
+msgstr "Demasiados reencaminhamentos"
 
 #: covers/coversearchstatisticsdialog.cpp:71
 msgid "Total bytes transferred"
@@ -4462,7 +4459,7 @@ msgstr "Desconhecido"
 
 #: podcasts/podcasturlloader.cpp:194
 msgid "Unknown content-type"
-msgstr ""
+msgstr "Conteúdo desconhecido"
 
 #: internet/digitallyimportedclient.cpp:68 internet/lastfmservice.cpp:469
 msgid "Unknown error"
@@ -4474,7 +4471,7 @@ msgstr "Sem capa"
 
 #: podcasts/addpodcastdialog.cpp:59 podcasts/podcastservice.cpp:277
 msgid "Unsubscribe"
-msgstr ""
+msgstr "Remover subscrição"
 
 #: internet/groovesharkservice.cpp:1090
 msgid "Update Grooveshark playlist"
@@ -4482,7 +4479,7 @@ msgstr "Atualizar listas de reprodução Grooveshark"
 
 #: podcasts/podcastservice.cpp:260
 msgid "Update all podcasts"
-msgstr ""
+msgstr "Atualizar todos os podcasts"
 
 #: ../bin/src/ui_mainwindow.h:705
 msgid "Update changed library folders"
@@ -4494,11 +4491,11 @@ msgstr "Atualizar coleção ao iniciar o Clementine"
 
 #: podcasts/podcastservice.cpp:268
 msgid "Update this podcast"
-msgstr ""
+msgstr "Atualizar este podcast"
 
 #: ../bin/src/ui_podcastsettingspage.h:227
 msgid "Updating"
-msgstr ""
+msgstr "A atualizar..."
 
 #: library/librarywatcher.cpp:92
 #, qt-format
@@ -4666,7 +4663,7 @@ msgstr "Wav"
 
 #: ../bin/src/ui_podcastinfowidget.h:193
 msgid "Website"
-msgstr ""
+msgstr "Sítio web"
 
 #: smartplaylists/searchterm.cpp:302
 msgid "Weeks"
@@ -4680,7 +4677,7 @@ msgstr "Ao iniciar o Clementine"
 msgid ""
 "When looking for album art Clementine will first look for picture files that contain one of these words.\n"
 "If there are no matches then it will use the largest image in the directory."
-msgstr "Ao procurar pelas capas dos álbuns, o Clementine irá procurar as imagens que contenham uma destas palavras.\nSe não existirem ocorrências, o Clementine utilizará a maior imagem do diretório"
+msgstr "Ao procurar pelas capas dos álbuns, o Clementine irá procurar as imagens que contenham uma destas palavras\nSe não existirem ocorrências, o Clementine utilizará a maior imagem do diretório"
 
 #: devices/ilister.cpp:99
 msgid "WiFi MAC Address"
@@ -4795,7 +4792,7 @@ msgstr "Pode modificar o modo de organização das músicas na coleção"
 msgid ""
 "You can listen for free without an account, but Premium members can listen "
 "to higher quality streams without advertisements."
-msgstr "Pode ouvir músicas gratuitamente, mas só os membros Premium podem escutar as emissões com a melhor qualidade e sem anúncios"
+msgstr "Pode ouvir músicas gratuitamente, mas só os membros Premium podem escutar as emissões com uma qualidade superior e sem anúncios"
 
 #: internet/magnatunesettingspage.cpp:53
 msgid ""
@@ -4890,9 +4887,9 @@ msgstr "As suas emissões de rádio"
 msgid "Your scrobbles: %1"
 msgstr "Os seus envios: %1"
 
-#: visualisations/visualisationcontainer.cpp:145
+#: visualisations/visualisationcontainer.cpp:152
 msgid "Your system is missing OpenGL support, visualizations are unavailable."
-msgstr ""
+msgstr "O seu sistema não possui suporte a OpenGL e as visualização não estão disponíveis"
 
 #: internet/groovesharksettingspage.cpp:107
 #: internet/spotifysettingspage.cpp:153
@@ -4977,11 +4974,11 @@ msgstr "igual a"
 
 #: ../bin/src/ui_podcastsettingspage.h:249
 msgid "gpodder.net"
-msgstr ""
+msgstr "gpodder.net"
 
 #: podcasts/gpoddertoptagspage.cpp:34
 msgid "gpodder.net directory"
-msgstr ""
+msgstr "diretório gpodder.net"
 
 #: smartplaylists/searchterm.cpp:216
 msgid "greater than"

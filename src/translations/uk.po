@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-03-16 14:34+0000\n"
+"PO-Revision-Date: 2012-03-22 19:44+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -66,7 +66,7 @@ msgstr "%1 д."
 msgid "%1 days ago"
 msgstr "%1 день тому"
 
-#: podcasts/gpoddersync.cpp:81
+#: podcasts/gpoddersync.cpp:79
 #, qt-format
 msgid "%1 on %2"
 msgstr "%1 на %2"
@@ -951,7 +951,7 @@ msgid "Clear playlist"
 msgstr "Очистити список відтворення"
 
 #: smartplaylists/searchtermwidget.cpp:321 ../bin/src/ui_mainwindow.h:644
-#: visualisations/visualisationcontainer.cpp:204
+#: visualisations/visualisationcontainer.cpp:211
 #: ../bin/src/ui_visualisationoverlay.h:179
 msgid "Clementine"
 msgstr "Clementine"
@@ -964,8 +964,8 @@ msgstr "Помилка Clementine"
 msgid "Clementine Orange"
 msgstr "Помаранчевий Clementine"
 
-#: visualisations/visualisationcontainer.cpp:71
-#: visualisations/visualisationcontainer.cpp:144
+#: visualisations/visualisationcontainer.cpp:77
+#: visualisations/visualisationcontainer.cpp:151
 msgid "Clementine Visualization"
 msgstr "Візуалізація Clementine"
 
@@ -1026,7 +1026,7 @@ msgstr "Клацніть аби перемкнутися між часом, що
 msgid "Close"
 msgstr "Закрити"
 
-#: visualisations/visualisationcontainer.cpp:120
+#: visualisations/visualisationcontainer.cpp:127
 msgid "Close visualization"
 msgstr "Закрити візуалізацію"
 
@@ -1863,7 +1863,11 @@ msgstr "Згасання"
 msgid "Fading duration"
 msgstr "Тривалість згасання"
 
-#: podcasts/gpoddersearchpage.cpp:80 podcasts/gpoddertoptagsmodel.cpp:113
+#: podcasts/gpoddertoptagspage.cpp:76
+msgid "Failed to fetch directory"
+msgstr "Не вдалося отримати каталог"
+
+#: podcasts/gpoddersearchpage.cpp:76 podcasts/gpoddertoptagsmodel.cpp:109
 #: podcasts/itunessearchpage.cpp:66 podcasts/itunessearchpage.cpp:75
 #: podcasts/itunessearchpage.cpp:82
 msgid "Failed to fetch podcasts"
@@ -2024,7 +2028,7 @@ msgid "Format"
 msgstr "Формат"
 
 #: analyzers/analyzercontainer.cpp:46
-#: visualisations/visualisationcontainer.cpp:98
+#: visualisations/visualisationcontainer.cpp:104
 msgid "Framerate"
 msgstr "Частота кадрів"
 
@@ -2189,17 +2193,14 @@ msgid "High"
 msgstr "Високий"
 
 #: analyzers/analyzercontainer.cpp:64
+#: visualisations/visualisationcontainer.cpp:109
 #, qt-format
 msgid "High (%1 fps)"
 msgstr "Висока (%1 к/с)"
 
-#: visualisations/visualisationcontainer.cpp:113
+#: visualisations/visualisationcontainer.cpp:119
 msgid "High (1024x1024)"
 msgstr "Висока (1024x1024)"
-
-#: visualisations/visualisationcontainer.cpp:103
-msgid "High (35 fps)"
-msgstr "Висока (35 к/с)"
 
 #: smartplaylists/searchterm.cpp:300
 msgid "Hours"
@@ -2621,15 +2622,12 @@ msgid "Love"
 msgstr "Додати до улюблених"
 
 #: analyzers/analyzercontainer.cpp:62
+#: visualisations/visualisationcontainer.cpp:107
 #, qt-format
 msgid "Low (%1 fps)"
 msgstr "Низька  (%1 к/с)"
 
-#: visualisations/visualisationcontainer.cpp:101
-msgid "Low (15 fps)"
-msgstr "Низька (15 к/с)"
-
-#: visualisations/visualisationcontainer.cpp:111
+#: visualisations/visualisationcontainer.cpp:117
 msgid "Low (256x256)"
 msgstr "Низька (256x256)"
 
@@ -2728,15 +2726,12 @@ msgid "Maximum bitrate"
 msgstr "Найбільша бітова швидкість"
 
 #: analyzers/analyzercontainer.cpp:63
+#: visualisations/visualisationcontainer.cpp:108
 #, qt-format
 msgid "Medium (%1 fps)"
 msgstr "Середня  (%1 к/с)"
 
-#: visualisations/visualisationcontainer.cpp:102
-msgid "Medium (25 fps)"
-msgstr "Середня (25 к/с)"
-
-#: visualisations/visualisationcontainer.cpp:112
+#: visualisations/visualisationcontainer.cpp:118
 msgid "Medium (512x512)"
 msgstr "Середня (512x512)"
 
@@ -3342,7 +3337,7 @@ msgstr "Виводити композиції у випадковому поря
 #: ../bin/src/ui_transcoderoptionsmp3.h:192
 #: ../bin/src/ui_transcoderoptionsspeex.h:217
 #: ../bin/src/ui_transcoderoptionsvorbis.h:202
-#: visualisations/visualisationcontainer.cpp:108
+#: visualisations/visualisationcontainer.cpp:114
 msgid "Quality"
 msgstr "Якість"
 
@@ -3764,7 +3759,7 @@ msgstr "Оберіть колір переднього плану:"
 msgid "Select visualizations"
 msgstr "Вибрати візуалізації"
 
-#: visualisations/visualisationcontainer.cpp:117
+#: visualisations/visualisationcontainer.cpp:124
 msgid "Select visualizations..."
 msgstr "Вибрати візуалізації…"
 
@@ -4136,13 +4131,14 @@ msgid "Summary"
 msgstr "Зведення"
 
 #: analyzers/analyzercontainer.cpp:65
+#: visualisations/visualisationcontainer.cpp:110
 #, qt-format
 msgid "Super high (%1 fps)"
 msgstr "Найвища  (%1 к/с)"
 
-#: visualisations/visualisationcontainer.cpp:104
-msgid "Super high (60 fps)"
-msgstr "Найвища (60 к/с)"
+#: visualisations/visualisationcontainer.cpp:120
+msgid "Super high (2048x2048)"
+msgstr "Надвисока (2048x2048)"
 
 #: ../bin/src/ui_deviceproperties.h:374
 msgid "Supported formats"
@@ -4237,7 +4233,8 @@ msgstr "Версія Clementine, яку ви щойно встановили, в
 msgid "There are other songs in this album"
 msgstr "У цьому альбомі є інші композиції"
 
-#: podcasts/gpoddersearchpage.cpp:81 podcasts/gpoddertoptagsmodel.cpp:114
+#: podcasts/gpoddersearchpage.cpp:77 podcasts/gpoddertoptagsmodel.cpp:110
+#: podcasts/gpoddertoptagspage.cpp:77
 msgid "There was a problem communicating with gpodder.net"
 msgstr "Виникла проблема зв’язку з gpodder.net"
 
@@ -4368,7 +4365,7 @@ msgstr "Сьогодні"
 msgid "Toggle Pretty OSD"
 msgstr "Змінити режим приємних OSD"
 
-#: visualisations/visualisationcontainer.cpp:95
+#: visualisations/visualisationcontainer.cpp:101
 msgid "Toggle fullscreen"
 msgstr "Повноекранний режим"
 
@@ -4890,7 +4887,7 @@ msgstr "Ваші радіо-потоки"
 msgid "Your scrobbles: %1"
 msgstr "%1 відтворень у вас"
 
-#: visualisations/visualisationcontainer.cpp:145
+#: visualisations/visualisationcontainer.cpp:152
 msgid "Your system is missing OpenGL support, visualizations are unavailable."
 msgstr "У вашій системі не передбачено підтримки OpenGL, отже візуалізаціями не можна буде скористатися."
 

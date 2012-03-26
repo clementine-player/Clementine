@@ -8,6 +8,7 @@
 # Just a baka  <justabaka@gmail.com>, 2012.
 #   <karlsson169@gmail.com>, 2012.
 #   <kolyadas89@gmail.com>, 2011.
+#   <kontaktmoj@yandex.ru>, 2012.
 #   <loki13gm@gmail.com>, 2012.
 # Nikita Putko <admi136@mail.ru>, 2011.
 # Oleg Sevostyanov <oleg.sev@gmail.com>, 2011.
@@ -17,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-03-16 14:30+0000\n"
+"PO-Revision-Date: 2012-03-22 19:40+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -52,7 +53,7 @@ msgstr " пунктов"
 #: ../bin/src/ui_notificationssettingspage.h:411
 #: ../bin/src/ui_visualisationselector.h:116
 msgid " seconds"
-msgstr " с"
+msgstr "с"
 
 #: ../bin/src/ui_querysortpage.h:143
 msgid " songs"
@@ -73,7 +74,7 @@ msgstr "%1 дней"
 msgid "%1 days ago"
 msgstr "%1 дней назад"
 
-#: podcasts/gpoddersync.cpp:81
+#: podcasts/gpoddersync.cpp:79
 #, qt-format
 msgid "%1 on %2"
 msgstr ""
@@ -958,7 +959,7 @@ msgid "Clear playlist"
 msgstr "Очистить список воспроизведения"
 
 #: smartplaylists/searchtermwidget.cpp:321 ../bin/src/ui_mainwindow.h:644
-#: visualisations/visualisationcontainer.cpp:204
+#: visualisations/visualisationcontainer.cpp:211
 #: ../bin/src/ui_visualisationoverlay.h:179
 msgid "Clementine"
 msgstr "Clementine"
@@ -971,8 +972,8 @@ msgstr "Ошибка Clementine"
 msgid "Clementine Orange"
 msgstr "Оранжевый Clementine"
 
-#: visualisations/visualisationcontainer.cpp:71
-#: visualisations/visualisationcontainer.cpp:144
+#: visualisations/visualisationcontainer.cpp:77
+#: visualisations/visualisationcontainer.cpp:151
 msgid "Clementine Visualization"
 msgstr "Визуализация Clementine"
 
@@ -1033,7 +1034,7 @@ msgstr "Нажмите для переключения между остающи
 msgid "Close"
 msgstr "Закрыть"
 
-#: visualisations/visualisationcontainer.cpp:120
+#: visualisations/visualisationcontainer.cpp:127
 msgid "Close visualization"
 msgstr "Закрыть визуализацию"
 
@@ -1870,7 +1871,11 @@ msgstr "Затухание"
 msgid "Fading duration"
 msgstr "Длительность затухания"
 
-#: podcasts/gpoddersearchpage.cpp:80 podcasts/gpoddertoptagsmodel.cpp:113
+#: podcasts/gpoddertoptagspage.cpp:76
+msgid "Failed to fetch directory"
+msgstr ""
+
+#: podcasts/gpoddersearchpage.cpp:76 podcasts/gpoddertoptagsmodel.cpp:109
 #: podcasts/itunessearchpage.cpp:66 podcasts/itunessearchpage.cpp:75
 #: podcasts/itunessearchpage.cpp:82
 msgid "Failed to fetch podcasts"
@@ -2031,7 +2036,7 @@ msgid "Format"
 msgstr "Формат"
 
 #: analyzers/analyzercontainer.cpp:46
-#: visualisations/visualisationcontainer.cpp:98
+#: visualisations/visualisationcontainer.cpp:104
 msgid "Framerate"
 msgstr "Частота кадров"
 
@@ -2196,17 +2201,14 @@ msgid "High"
 msgstr "Высокий"
 
 #: analyzers/analyzercontainer.cpp:64
+#: visualisations/visualisationcontainer.cpp:109
 #, qt-format
 msgid "High (%1 fps)"
 msgstr "Высокий (%1 fps)"
 
-#: visualisations/visualisationcontainer.cpp:113
+#: visualisations/visualisationcontainer.cpp:119
 msgid "High (1024x1024)"
 msgstr "Высокое (1024x1024)"
-
-#: visualisations/visualisationcontainer.cpp:103
-msgid "High (35 fps)"
-msgstr "Высокая (35 fps)"
 
 #: smartplaylists/searchterm.cpp:300
 msgid "Hours"
@@ -2628,15 +2630,12 @@ msgid "Love"
 msgstr "Избранное"
 
 #: analyzers/analyzercontainer.cpp:62
+#: visualisations/visualisationcontainer.cpp:107
 #, qt-format
 msgid "Low (%1 fps)"
 msgstr "Низкий (%1 fps)"
 
-#: visualisations/visualisationcontainer.cpp:101
-msgid "Low (15 fps)"
-msgstr "Низкая (15 fps)"
-
-#: visualisations/visualisationcontainer.cpp:111
+#: visualisations/visualisationcontainer.cpp:117
 msgid "Low (256x256)"
 msgstr "Низкое (256x256)"
 
@@ -2735,15 +2734,12 @@ msgid "Maximum bitrate"
 msgstr "Максимальный битрейт"
 
 #: analyzers/analyzercontainer.cpp:63
+#: visualisations/visualisationcontainer.cpp:108
 #, qt-format
 msgid "Medium (%1 fps)"
 msgstr "Средний (%1 fps)"
 
-#: visualisations/visualisationcontainer.cpp:102
-msgid "Medium (25 fps)"
-msgstr "Средняя (25 fps)"
-
-#: visualisations/visualisationcontainer.cpp:112
+#: visualisations/visualisationcontainer.cpp:118
 msgid "Medium (512x512)"
 msgstr "Среднее (512x512)"
 
@@ -3349,7 +3345,7 @@ msgstr "Разбросать композиции в случайном поря
 #: ../bin/src/ui_transcoderoptionsmp3.h:192
 #: ../bin/src/ui_transcoderoptionsspeex.h:217
 #: ../bin/src/ui_transcoderoptionsvorbis.h:202
-#: visualisations/visualisationcontainer.cpp:108
+#: visualisations/visualisationcontainer.cpp:114
 msgid "Quality"
 msgstr "Качество"
 
@@ -3771,7 +3767,7 @@ msgstr "Выберите цвет:"
 msgid "Select visualizations"
 msgstr "Выбрать визуализации"
 
-#: visualisations/visualisationcontainer.cpp:117
+#: visualisations/visualisationcontainer.cpp:124
 msgid "Select visualizations..."
 msgstr "Выбрать визуализации..."
 
@@ -4143,13 +4139,14 @@ msgid "Summary"
 msgstr "Сводка"
 
 #: analyzers/analyzercontainer.cpp:65
+#: visualisations/visualisationcontainer.cpp:110
 #, qt-format
 msgid "Super high (%1 fps)"
 msgstr "Сверхвысокий (%1 fps)"
 
-#: visualisations/visualisationcontainer.cpp:104
-msgid "Super high (60 fps)"
-msgstr "Очень высокая (60 fps)"
+#: visualisations/visualisationcontainer.cpp:120
+msgid "Super high (2048x2048)"
+msgstr ""
 
 #: ../bin/src/ui_deviceproperties.h:374
 msgid "Supported formats"
@@ -4244,7 +4241,8 @@ msgstr "Обновленная версия Clementine требует повто
 msgid "There are other songs in this album"
 msgstr ""
 
-#: podcasts/gpoddersearchpage.cpp:81 podcasts/gpoddertoptagsmodel.cpp:114
+#: podcasts/gpoddersearchpage.cpp:77 podcasts/gpoddertoptagsmodel.cpp:110
+#: podcasts/gpoddertoptagspage.cpp:77
 msgid "There was a problem communicating with gpodder.net"
 msgstr ""
 
@@ -4375,7 +4373,7 @@ msgstr "Сегодня"
 msgid "Toggle Pretty OSD"
 msgstr "Включить"
 
-#: visualisations/visualisationcontainer.cpp:95
+#: visualisations/visualisationcontainer.cpp:101
 msgid "Toggle fullscreen"
 msgstr "Переключение в полноэкранный режим"
 
@@ -4897,7 +4895,7 @@ msgstr "Ваши потоки радио"
 msgid "Your scrobbles: %1"
 msgstr "Ваш скробблинг: %1"
 
-#: visualisations/visualisationcontainer.cpp:145
+#: visualisations/visualisationcontainer.cpp:152
 msgid "Your system is missing OpenGL support, visualizations are unavailable."
 msgstr ""
 

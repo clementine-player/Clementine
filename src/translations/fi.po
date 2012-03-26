@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-03-16 14:30+0000\n"
+"PO-Revision-Date: 2012-03-22 19:40+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,7 +19,7 @@ msgstr ""
 
 #: ../bin/src/ui_podcastsettingspage.h:246
 msgid " days"
-msgstr ""
+msgstr " päivää"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:130
 #: ../bin/src/ui_transcoderoptionsmp3.h:195
@@ -66,7 +66,7 @@ msgstr "%1 päivää"
 msgid "%1 days ago"
 msgstr "%1 päivää sitten"
 
-#: podcasts/gpoddersync.cpp:81
+#: podcasts/gpoddersync.cpp:79
 #, qt-format
 msgid "%1 on %2"
 msgstr ""
@@ -338,7 +338,7 @@ msgstr "Ota käyttöön / poista käytöstä Wiiremote"
 
 #: podcasts/addpodcastdialog.cpp:54
 msgid "Add Podcast"
-msgstr ""
+msgstr "Lisää podcast"
 
 #: ../bin/src/ui_addstreamdialog.h:113
 msgid "Add Stream"
@@ -390,11 +390,11 @@ msgstr "Lisää uusi kansio..."
 
 #: ../bin/src/ui_addpodcastdialog.h:179
 msgid "Add podcast"
-msgstr ""
+msgstr "Lisää podcast"
 
 #: podcasts/podcastservice.cpp:257 ../bin/src/ui_mainwindow.h:715
 msgid "Add podcast..."
-msgstr ""
+msgstr "Lisää podcast..."
 
 #: smartplaylists/searchtermwidget.cpp:333
 msgid "Add search term"
@@ -752,7 +752,7 @@ msgstr "Kuvatiedoston koko keskimäärin"
 
 #: podcasts/addpodcastdialog.cpp:72
 msgid "BBC Podcasts"
-msgstr ""
+msgstr "BBC-podcastit"
 
 #: playlist/playlist.cpp:1131 ui/organisedialog.cpp:62
 #: ../bin/src/ui_edittagdialog.h:638
@@ -777,7 +777,7 @@ msgstr "Taustan läpinäkyvyys"
 
 #: core/database.cpp:747
 msgid "Backing up database"
-msgstr ""
+msgstr "Varmuuskopioidaan tietokantaa"
 
 #: ../bin/src/ui_mainwindow.h:659
 msgid "Ban"
@@ -895,7 +895,7 @@ msgstr "Vaihda kieltä"
 
 #: ../bin/src/ui_podcastsettingspage.h:228
 msgid "Check for new episodes"
-msgstr ""
+msgstr "Tarkista uudet jaksot"
 
 #: ui/mainwindow.cpp:560
 msgid "Check for updates..."
@@ -927,7 +927,7 @@ msgstr "Valitse kuinka soittolista lajitellaan ja kuinka monta kappaletta se sis
 
 #: podcasts/podcastsettingspage.cpp:132
 msgid "Choose podcast download directory"
-msgstr ""
+msgstr "Valitse podcastien latauskansio"
 
 #: ../bin/src/ui_songinfosettingspage.h:188
 msgid ""
@@ -940,7 +940,7 @@ msgstr "Classical"
 
 #: ../bin/src/ui_podcastsettingspage.h:243
 msgid "Cleaning up"
-msgstr ""
+msgstr "Siivotaan"
 
 #: widgets/lineedit.cpp:41 ../bin/src/ui_queuemanager.h:139
 msgid "Clear"
@@ -951,7 +951,7 @@ msgid "Clear playlist"
 msgstr "Tyhjennä soittolista"
 
 #: smartplaylists/searchtermwidget.cpp:321 ../bin/src/ui_mainwindow.h:644
-#: visualisations/visualisationcontainer.cpp:204
+#: visualisations/visualisationcontainer.cpp:211
 #: ../bin/src/ui_visualisationoverlay.h:179
 msgid "Clementine"
 msgstr "Clementine"
@@ -964,8 +964,8 @@ msgstr "Clementine-virhe"
 msgid "Clementine Orange"
 msgstr "Klementiinin oranssi"
 
-#: visualisations/visualisationcontainer.cpp:71
-#: visualisations/visualisationcontainer.cpp:144
+#: visualisations/visualisationcontainer.cpp:77
+#: visualisations/visualisationcontainer.cpp:151
 msgid "Clementine Visualization"
 msgstr "Clementinen visualisointi"
 
@@ -991,7 +991,7 @@ msgid ""
 "Clementine can synchronize your subscription list with your other computers "
 "and podcast applications.  <a href=\"https://gpodder.net/register/\">Create "
 "an account</a>."
-msgstr ""
+msgstr "Clementine voi synkronoida tilauksesi muiden tietokoneiden ja podcast-sovellusten kanssa.  <a href=\"https://gpodder.net/register/\">Luo tunnus</a>."
 
 #: visualisations/projectmvisualisation.cpp:128
 msgid ""
@@ -1026,7 +1026,7 @@ msgstr "Napsauta vaihtaaksesi näkymää: aikaa jäljellä / kokonaisaika"
 msgid "Close"
 msgstr "Sulje"
 
-#: visualisations/visualisationcontainer.cpp:120
+#: visualisations/visualisationcontainer.cpp:127
 msgid "Close visualization"
 msgstr "Sulje visualisointi"
 
@@ -1103,7 +1103,7 @@ msgstr "Kirjaston asetukset..."
 
 #: podcasts/addpodcastdialog.cpp:65 podcasts/podcastservice.cpp:288
 msgid "Configure podcasts..."
-msgstr ""
+msgstr "Muokkaa podcasteja..."
 
 #: internet/digitallyimportedservicebase.cpp:185
 #: ../bin/src/ui_globalsearchsettingspage.h:174
@@ -1154,7 +1154,7 @@ msgstr "Kopioidaan iPod-tietokantaa"
 
 #: ../bin/src/ui_podcastinfowidget.h:194
 msgid "Copyright"
-msgstr ""
+msgstr "Tekijänoikeus"
 
 #: transcoder/transcoder.cpp:62
 #, qt-format
@@ -1335,7 +1335,7 @@ msgid ""
 "Database corruption detected. Please read https://code.google.com/p"
 "/clementine-player/wiki/DatabaseCorruption for instructions on how to "
 "recover your database"
-msgstr ""
+msgstr "Tietokannan korruptio havaittu. Lue https://code.google.com/p/clementine-player/wiki/DatabaseCorruption saadaksesi ohjeet tietokannan palauttamiseksi."
 
 #: playlist/playlist.cpp:1139 ../bin/src/ui_edittagdialog.h:649
 msgid "Date created"
@@ -1397,7 +1397,7 @@ msgstr "Poista levyltä..."
 
 #: ../bin/src/ui_podcastsettingspage.h:244
 msgid "Delete played episodes"
-msgstr ""
+msgstr "Poista soitetut jaksot"
 
 #: ui/equalizer.cpp:190 ../bin/src/ui_equalizer.h:124
 msgid "Delete preset"
@@ -1553,7 +1553,7 @@ msgstr "Latausjäsenyys"
 
 #: ../bin/src/ui_podcastsettingspage.h:241
 msgid "Download new episodes automatically"
-msgstr ""
+msgstr "Lataa uudet jaksot automaattisesti"
 
 #: podcasts/podcastservice.cpp:187
 msgid "Download queued"
@@ -1578,7 +1578,7 @@ msgstr "Lataa..."
 #: podcasts/podcastservice.cpp:195
 #, qt-format
 msgid "Downloading (%1%)..."
-msgstr ""
+msgstr "Ladataan (%1%)..."
 
 #: internet/icecastservice.cpp:99
 msgid "Downloading Icecast directory"
@@ -1687,7 +1687,7 @@ msgstr "Koodaustila"
 
 #: ../bin/src/ui_addpodcastbyurl.h:76
 msgid "Enter a URL"
-msgstr ""
+msgstr "Anna verkko-osoite"
 
 #: ../bin/src/ui_coverfromurldialog.h:103
 msgid "Enter a URL to download a cover from the Internet:"
@@ -1782,31 +1782,31 @@ msgstr ""
 
 #: ../bin/src/ui_podcastsettingspage.h:232
 msgid "Every 10 minutes"
-msgstr ""
+msgstr "10 minuutin välein"
 
 #: ../bin/src/ui_podcastsettingspage.h:238
 msgid "Every 12 hours"
-msgstr ""
+msgstr "12 tunnin välein"
 
 #: ../bin/src/ui_podcastsettingspage.h:236
 msgid "Every 2 hours"
-msgstr ""
+msgstr "2 tunnin välein"
 
 #: ../bin/src/ui_podcastsettingspage.h:233
 msgid "Every 20 minutes"
-msgstr ""
+msgstr "20 minuutin välein"
 
 #: ../bin/src/ui_podcastsettingspage.h:234
 msgid "Every 30 minutes"
-msgstr ""
+msgstr "30 minuutin välein"
 
 #: ../bin/src/ui_podcastsettingspage.h:237
 msgid "Every 6 hours"
-msgstr ""
+msgstr "6 tunnin välein"
 
 #: ../bin/src/ui_podcastsettingspage.h:235
 msgid "Every hour"
-msgstr ""
+msgstr "Joka tunti"
 
 #: ../bin/src/ui_playbacksettingspage.h:263
 msgid "Except between tracks on the same album or in the same CUE sheet"
@@ -1819,7 +1819,7 @@ msgstr "Laajenna"
 #: widgets/loginstatewidget.cpp:142
 #, qt-format
 msgid "Expires on %1"
-msgstr ""
+msgstr "Vanhenee %1"
 
 #: ../bin/src/ui_mainwindow.h:675
 msgid "F1"
@@ -1863,19 +1863,23 @@ msgstr "Häivytys"
 msgid "Fading duration"
 msgstr "Häivytyksen kesto"
 
-#: podcasts/gpoddersearchpage.cpp:80 podcasts/gpoddertoptagsmodel.cpp:113
+#: podcasts/gpoddertoptagspage.cpp:76
+msgid "Failed to fetch directory"
+msgstr ""
+
+#: podcasts/gpoddersearchpage.cpp:76 podcasts/gpoddertoptagsmodel.cpp:109
 #: podcasts/itunessearchpage.cpp:66 podcasts/itunessearchpage.cpp:75
 #: podcasts/itunessearchpage.cpp:82
 msgid "Failed to fetch podcasts"
-msgstr ""
+msgstr "Podcastien nouto epäonnistui"
 
 #: podcasts/addpodcastbyurl.cpp:70 podcasts/fixedopmlpage.cpp:54
 msgid "Failed to load podcast"
-msgstr ""
+msgstr "Podcastin lataus epäonnistui"
 
 #: podcasts/podcasturlloader.cpp:163
 msgid "Failed to parse the XML for this RSS feed"
-msgstr ""
+msgstr "Tämän RSS-syötteen XML:n jäsennys epäonnistui"
 
 #: ../bin/src/ui_transcoderoptionsflac.h:82
 #: ../bin/src/ui_transcoderoptionsmp3.h:200
@@ -2024,7 +2028,7 @@ msgid "Format"
 msgstr "Muoto"
 
 #: analyzers/analyzercontainer.cpp:46
-#: visualisations/visualisationcontainer.cpp:98
+#: visualisations/visualisationcontainer.cpp:104
 msgid "Framerate"
 msgstr "Kuvanopeus"
 
@@ -2068,7 +2072,7 @@ msgstr "Tyylilaji"
 
 #: internet/groovesharkservice.cpp:1026
 msgid "Get an URL to share this Grooveshark song"
-msgstr ""
+msgstr "Hanki tämän Grooveshark-kappaleen verkko-osoite jakamista varten"
 
 #: internet/groovesharkservice.cpp:704
 msgid "Getting Grooveshark popular songs"
@@ -2088,7 +2092,7 @@ msgstr "Anna nimi:"
 
 #: ../bin/src/ui_addpodcastbyurl.h:78
 msgid "Go"
-msgstr ""
+msgstr "Mene"
 
 #: ../bin/src/ui_mainwindow.h:703
 msgid "Go to next playlist tab"
@@ -2166,7 +2170,7 @@ msgstr "Järjestä tyylin/esittäjän/levyn mukaan"
 
 #: podcasts/podcasturlloader.cpp:192
 msgid "HTML page did not contain any RSS feeds"
-msgstr ""
+msgstr "HTML-sivu ei sisältänyt minkäänlaista RSS-syötettä"
 
 #: ../bin/src/ui_networkproxysettingspage.h:163
 msgid "HTTP proxy"
@@ -2189,17 +2193,14 @@ msgid "High"
 msgstr "Korkea"
 
 #: analyzers/analyzercontainer.cpp:64
+#: visualisations/visualisationcontainer.cpp:109
 #, qt-format
 msgid "High (%1 fps)"
 msgstr "Nopea (%1 fps)"
 
-#: visualisations/visualisationcontainer.cpp:113
+#: visualisations/visualisationcontainer.cpp:119
 msgid "High (1024x1024)"
 msgstr "Korkea (1024x1024)"
-
-#: visualisations/visualisationcontainer.cpp:103
-msgid "High (35 fps)"
-msgstr "Nopea (35 fps)"
 
 #: smartplaylists/searchterm.cpp:300
 msgid "Hours"
@@ -2233,7 +2234,7 @@ msgstr "Jos jatkat, laite toimii hitaasti ja sille kopioidut kappaleet eivät v�
 
 #: ../bin/src/ui_addpodcastbyurl.h:77
 msgid "If you know the URL of a podcast, enter it below and press Go."
-msgstr ""
+msgstr "Jos tiedät podcastin verkko-osoitteen, kirjoita se alle ja napsauta Mene."
 
 #: ../bin/src/ui_remotesettingspage.h:209
 msgid ""
@@ -2297,7 +2298,7 @@ msgstr "Asennettu"
 
 #: core/database.cpp:688
 msgid "Integrity check"
-msgstr ""
+msgstr "Eheystarkistus"
 
 #: ui/mainwindow.cpp:227
 msgid "Internet"
@@ -2610,7 +2611,7 @@ msgstr "Kirjaudu sisään"
 
 #: podcasts/podcastsettingspage.cpp:119
 msgid "Login failed"
-msgstr ""
+msgstr "Kirjautuminen epäonnistui"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:137
 msgid "Long term prediction profile (LTP)"
@@ -2621,15 +2622,12 @@ msgid "Love"
 msgstr "Tykkää"
 
 #: analyzers/analyzercontainer.cpp:62
+#: visualisations/visualisationcontainer.cpp:107
 #, qt-format
 msgid "Low (%1 fps)"
 msgstr "Hidas (%1 fps)"
 
-#: visualisations/visualisationcontainer.cpp:101
-msgid "Low (15 fps)"
-msgstr "Hidas (15 fps)"
-
-#: visualisations/visualisationcontainer.cpp:111
+#: visualisations/visualisationcontainer.cpp:117
 msgid "Low (256x256)"
 msgstr "Matala (256x256)"
 
@@ -2701,7 +2699,7 @@ msgstr "Määritä välityspalvelin itse"
 #: ../bin/src/ui_podcastsettingspage.h:231
 #: ../bin/src/ui_podcastsettingspage.h:245
 msgid "Manually"
-msgstr ""
+msgstr "Käsin"
 
 #: devices/deviceproperties.cpp:153
 msgid "Manufacturer"
@@ -2709,11 +2707,11 @@ msgstr "Valmistaja"
 
 #: podcasts/podcastservice.cpp:284
 msgid "Mark as listened"
-msgstr ""
+msgstr "Merkitse kuunnelluksi"
 
 #: podcasts/podcastservice.cpp:282
 msgid "Mark as new"
-msgstr ""
+msgstr "Merkitse uudeksi"
 
 #: ../bin/src/ui_querysearchpage.h:116
 msgid "Match every search term (AND)"
@@ -2728,15 +2726,12 @@ msgid "Maximum bitrate"
 msgstr "Suurin bittinopeus"
 
 #: analyzers/analyzercontainer.cpp:63
+#: visualisations/visualisationcontainer.cpp:108
 #, qt-format
 msgid "Medium (%1 fps)"
 msgstr "Keskitaso (%1 fps)"
 
-#: visualisations/visualisationcontainer.cpp:102
-msgid "Medium (25 fps)"
-msgstr "Keskitaso (25 fps)"
-
-#: visualisations/visualisationcontainer.cpp:112
+#: visualisations/visualisationcontainer.cpp:118
 msgid "Medium (512x512)"
 msgstr ""
 
@@ -3093,7 +3088,7 @@ msgstr "Korvaa olemassa olevat tiedostot"
 
 #: ../bin/src/ui_podcastinfowidget.h:195
 msgid "Owner"
-msgstr ""
+msgstr "Omistaja"
 
 #: internet/jamendoservice.cpp:210
 msgid "Parsing Jamendo catalogue"
@@ -3219,7 +3214,7 @@ msgstr "Liitännäisen tila:"
 
 #: podcasts/podcastservice.cpp:110 ../bin/src/ui_podcastsettingspage.h:226
 msgid "Podcasts"
-msgstr ""
+msgstr "Podcastit"
 
 #: ui/equalizer.cpp:119
 msgid "Pop"
@@ -3342,7 +3337,7 @@ msgstr "Aseta kappaleet satunnaiseen järjestykseen"
 #: ../bin/src/ui_transcoderoptionsmp3.h:192
 #: ../bin/src/ui_transcoderoptionsspeex.h:217
 #: ../bin/src/ui_transcoderoptionsvorbis.h:202
-#: visualisations/visualisationcontainer.cpp:108
+#: visualisations/visualisationcontainer.cpp:114
 msgid "Quality"
 msgstr "Laatu"
 
@@ -3693,11 +3688,11 @@ msgstr "Etsi mitä tahansa"
 
 #: ../bin/src/ui_gpoddersearchpage.h:76
 msgid "Search gpodder.net"
-msgstr ""
+msgstr "Etsi gpodder.netistä"
 
 #: ../bin/src/ui_itunessearchpage.h:76
 msgid "Search iTunes"
-msgstr ""
+msgstr "Etsi iTunesista"
 
 #: ../bin/src/ui_querysearchpage.h:113
 msgid "Search mode"
@@ -3764,7 +3759,7 @@ msgstr ""
 msgid "Select visualizations"
 msgstr "Valitse visualisoinnit"
 
-#: visualisations/visualisationcontainer.cpp:117
+#: visualisations/visualisationcontainer.cpp:124
 msgid "Select visualizations..."
 msgstr "Valitse visualisoinnit..."
 
@@ -3927,7 +3922,7 @@ msgstr "Sekoita tämän levyn kappaleet"
 
 #: ../bin/src/ui_podcastsettingspage.h:252
 msgid "Sign in"
-msgstr ""
+msgstr "Kirjaudu"
 
 #: ../bin/src/ui_remotesettingspage.h:202 ../bin/src/ui_loginstatewidget.h:173
 msgid "Sign out"
@@ -4115,11 +4110,11 @@ msgstr "Suoratoistojäsenyys"
 
 #: internet/groovesharkservice.cpp:566
 msgid "Subscribed playlists"
-msgstr ""
+msgstr "Tilatut soittolistat"
 
 #: ../bin/src/ui_podcastinfowidget.h:196
 msgid "Subscribers"
-msgstr ""
+msgstr "Tilaajat"
 
 #: transcoder/transcoder.cpp:198
 #, qt-format
@@ -4136,13 +4131,14 @@ msgid "Summary"
 msgstr "Yhteenveto"
 
 #: analyzers/analyzercontainer.cpp:65
+#: visualisations/visualisationcontainer.cpp:110
 #, qt-format
 msgid "Super high (%1 fps)"
 msgstr "Erittäin nopea (%1 fps)"
 
-#: visualisations/visualisationcontainer.cpp:104
-msgid "Super high (60 fps)"
-msgstr "Erittäin nopea (60 fps)"
+#: visualisations/visualisationcontainer.cpp:120
+msgid "Super high (2048x2048)"
+msgstr ""
 
 #: ../bin/src/ui_deviceproperties.h:374
 msgid "Supported formats"
@@ -4237,7 +4233,8 @@ msgstr "Versio, johon juuri päivitit Clementinen, vaatii kirjaston täydellisen
 msgid "There are other songs in this album"
 msgstr "Albumilla on muita kappaleita"
 
-#: podcasts/gpoddersearchpage.cpp:81 podcasts/gpoddertoptagsmodel.cpp:114
+#: podcasts/gpoddersearchpage.cpp:77 podcasts/gpoddertoptagsmodel.cpp:110
+#: podcasts/gpoddertoptagspage.cpp:77
 msgid "There was a problem communicating with gpodder.net"
 msgstr ""
 
@@ -4368,7 +4365,7 @@ msgstr "Tänään"
 msgid "Toggle Pretty OSD"
 msgstr "Kuvaruutunäyttö päälle / pois"
 
-#: visualisations/visualisationcontainer.cpp:95
+#: visualisations/visualisationcontainer.cpp:101
 msgid "Toggle fullscreen"
 msgstr "Koko näytön tila"
 
@@ -4386,7 +4383,7 @@ msgstr "Kuvaruutunäyttö päälle / pois"
 
 #: podcasts/podcasturlloader.cpp:114
 msgid "Too many redirects"
-msgstr ""
+msgstr "Liian monta uudelleenohjausta"
 
 #: covers/coversearchstatisticsdialog.cpp:71
 msgid "Total bytes transferred"
@@ -4462,7 +4459,7 @@ msgstr "Tuntematon"
 
 #: podcasts/podcasturlloader.cpp:194
 msgid "Unknown content-type"
-msgstr ""
+msgstr "Tuntematon sisältötyyppi"
 
 #: internet/digitallyimportedclient.cpp:68 internet/lastfmservice.cpp:469
 msgid "Unknown error"
@@ -4474,7 +4471,7 @@ msgstr "Poista kansikuva"
 
 #: podcasts/addpodcastdialog.cpp:59 podcasts/podcastservice.cpp:277
 msgid "Unsubscribe"
-msgstr ""
+msgstr "Poista tilaus"
 
 #: internet/groovesharkservice.cpp:1090
 msgid "Update Grooveshark playlist"
@@ -4482,7 +4479,7 @@ msgstr "Päivitä Grooveshark-soittolista"
 
 #: podcasts/podcastservice.cpp:260
 msgid "Update all podcasts"
-msgstr ""
+msgstr "Päivitä kaikki podcastit"
 
 #: ../bin/src/ui_mainwindow.h:705
 msgid "Update changed library folders"
@@ -4494,11 +4491,11 @@ msgstr "Päivitä kirjasto Clementine käynnistyessä"
 
 #: podcasts/podcastservice.cpp:268
 msgid "Update this podcast"
-msgstr ""
+msgstr "Päivitä tämä podcast"
 
 #: ../bin/src/ui_podcastsettingspage.h:227
 msgid "Updating"
-msgstr ""
+msgstr "Päivitetään"
 
 #: library/librarywatcher.cpp:92
 #, qt-format
@@ -4666,7 +4663,7 @@ msgstr "Wav"
 
 #: ../bin/src/ui_podcastinfowidget.h:193
 msgid "Website"
-msgstr ""
+msgstr "Verkkosivu"
 
 #: smartplaylists/searchterm.cpp:302
 msgid "Weeks"
@@ -4890,9 +4887,9 @@ msgstr "Omat radioasemat"
 msgid "Your scrobbles: %1"
 msgstr "Lähetyksesi: %1"
 
-#: visualisations/visualisationcontainer.cpp:145
+#: visualisations/visualisationcontainer.cpp:152
 msgid "Your system is missing OpenGL support, visualizations are unavailable."
-msgstr ""
+msgstr "Järjestelmästäsi puuttuu OpenGL-tuki, joten visualisoinnit eivät ole käytettävissä."
 
 #: internet/groovesharksettingspage.cpp:107
 #: internet/spotifysettingspage.cpp:153
@@ -4977,7 +4974,7 @@ msgstr "yhtä kuin"
 
 #: ../bin/src/ui_podcastsettingspage.h:249
 msgid "gpodder.net"
-msgstr ""
+msgstr "gpodder.net"
 
 #: podcasts/gpoddertoptagspage.cpp:34
 msgid "gpodder.net directory"

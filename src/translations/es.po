@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-03-16 14:30+0000\n"
+"PO-Revision-Date: 2012-03-22 19:40+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -71,7 +71,7 @@ msgstr "%1 días"
 msgid "%1 days ago"
 msgstr "hace %1 días"
 
-#: podcasts/gpoddersync.cpp:81
+#: podcasts/gpoddersync.cpp:79
 #, qt-format
 msgid "%1 on %2"
 msgstr ""
@@ -956,7 +956,7 @@ msgid "Clear playlist"
 msgstr "Limpiar lista de reproducción"
 
 #: smartplaylists/searchtermwidget.cpp:321 ../bin/src/ui_mainwindow.h:644
-#: visualisations/visualisationcontainer.cpp:204
+#: visualisations/visualisationcontainer.cpp:211
 #: ../bin/src/ui_visualisationoverlay.h:179
 msgid "Clementine"
 msgstr "Clementine"
@@ -969,8 +969,8 @@ msgstr "Error de Clementine"
 msgid "Clementine Orange"
 msgstr "Naranja Clementine"
 
-#: visualisations/visualisationcontainer.cpp:71
-#: visualisations/visualisationcontainer.cpp:144
+#: visualisations/visualisationcontainer.cpp:77
+#: visualisations/visualisationcontainer.cpp:151
 msgid "Clementine Visualization"
 msgstr "Visualización de Clementine"
 
@@ -1031,7 +1031,7 @@ msgstr "Pulse para cambiar entre tiempo restante y tiempo total"
 msgid "Close"
 msgstr "Cerrar"
 
-#: visualisations/visualisationcontainer.cpp:120
+#: visualisations/visualisationcontainer.cpp:127
 msgid "Close visualization"
 msgstr "Cerrar visualización"
 
@@ -1868,7 +1868,11 @@ msgstr "Disolver"
 msgid "Fading duration"
 msgstr "Duración de disolución"
 
-#: podcasts/gpoddersearchpage.cpp:80 podcasts/gpoddertoptagsmodel.cpp:113
+#: podcasts/gpoddertoptagspage.cpp:76
+msgid "Failed to fetch directory"
+msgstr ""
+
+#: podcasts/gpoddersearchpage.cpp:76 podcasts/gpoddertoptagsmodel.cpp:109
 #: podcasts/itunessearchpage.cpp:66 podcasts/itunessearchpage.cpp:75
 #: podcasts/itunessearchpage.cpp:82
 msgid "Failed to fetch podcasts"
@@ -2029,7 +2033,7 @@ msgid "Format"
 msgstr "Formato"
 
 #: analyzers/analyzercontainer.cpp:46
-#: visualisations/visualisationcontainer.cpp:98
+#: visualisations/visualisationcontainer.cpp:104
 msgid "Framerate"
 msgstr "Tasa de muestreo"
 
@@ -2194,17 +2198,14 @@ msgid "High"
 msgstr "Alto"
 
 #: analyzers/analyzercontainer.cpp:64
+#: visualisations/visualisationcontainer.cpp:109
 #, qt-format
 msgid "High (%1 fps)"
 msgstr "Alto (%1 fps)"
 
-#: visualisations/visualisationcontainer.cpp:113
+#: visualisations/visualisationcontainer.cpp:119
 msgid "High (1024x1024)"
 msgstr "Alta (1024x1024)"
-
-#: visualisations/visualisationcontainer.cpp:103
-msgid "High (35 fps)"
-msgstr "Alta (35 fps)"
 
 #: smartplaylists/searchterm.cpp:300
 msgid "Hours"
@@ -2626,15 +2627,12 @@ msgid "Love"
 msgstr "Me encanta"
 
 #: analyzers/analyzercontainer.cpp:62
+#: visualisations/visualisationcontainer.cpp:107
 #, qt-format
 msgid "Low (%1 fps)"
 msgstr "Bajo (%1 fps)"
 
-#: visualisations/visualisationcontainer.cpp:101
-msgid "Low (15 fps)"
-msgstr "Baja (15 fps)"
-
-#: visualisations/visualisationcontainer.cpp:111
+#: visualisations/visualisationcontainer.cpp:117
 msgid "Low (256x256)"
 msgstr "Bajo (256x256)"
 
@@ -2733,15 +2731,12 @@ msgid "Maximum bitrate"
 msgstr "Tasa de bits máxima"
 
 #: analyzers/analyzercontainer.cpp:63
+#: visualisations/visualisationcontainer.cpp:108
 #, qt-format
 msgid "Medium (%1 fps)"
 msgstr "Medio (%1 fps)"
 
-#: visualisations/visualisationcontainer.cpp:102
-msgid "Medium (25 fps)"
-msgstr "Mediana (25 fps)"
-
-#: visualisations/visualisationcontainer.cpp:112
+#: visualisations/visualisationcontainer.cpp:118
 msgid "Medium (512x512)"
 msgstr "Mediana (512x512)"
 
@@ -3347,7 +3342,7 @@ msgstr "Poner canciones en un orden aleatorio"
 #: ../bin/src/ui_transcoderoptionsmp3.h:192
 #: ../bin/src/ui_transcoderoptionsspeex.h:217
 #: ../bin/src/ui_transcoderoptionsvorbis.h:202
-#: visualisations/visualisationcontainer.cpp:108
+#: visualisations/visualisationcontainer.cpp:114
 msgid "Quality"
 msgstr "Calidad"
 
@@ -3769,7 +3764,7 @@ msgstr "Elija el color de frente:"
 msgid "Select visualizations"
 msgstr "Elegir visualizaciones"
 
-#: visualisations/visualisationcontainer.cpp:117
+#: visualisations/visualisationcontainer.cpp:124
 msgid "Select visualizations..."
 msgstr "Elegir visualizaciones..."
 
@@ -4141,13 +4136,14 @@ msgid "Summary"
 msgstr "Resumen"
 
 #: analyzers/analyzercontainer.cpp:65
+#: visualisations/visualisationcontainer.cpp:110
 #, qt-format
 msgid "Super high (%1 fps)"
 msgstr "Muy alto (%1 fps)"
 
-#: visualisations/visualisationcontainer.cpp:104
-msgid "Super high (60 fps)"
-msgstr "Super alta (60 fps)"
+#: visualisations/visualisationcontainer.cpp:120
+msgid "Super high (2048x2048)"
+msgstr ""
 
 #: ../bin/src/ui_deviceproperties.h:374
 msgid "Supported formats"
@@ -4242,7 +4238,8 @@ msgstr "La versión de Clementine a la que se acaba de actualizar necesita volve
 msgid "There are other songs in this album"
 msgstr "Hay otras canciones en este álbum"
 
-#: podcasts/gpoddersearchpage.cpp:81 podcasts/gpoddertoptagsmodel.cpp:114
+#: podcasts/gpoddersearchpage.cpp:77 podcasts/gpoddertoptagsmodel.cpp:110
+#: podcasts/gpoddertoptagspage.cpp:77
 msgid "There was a problem communicating with gpodder.net"
 msgstr ""
 
@@ -4373,7 +4370,7 @@ msgstr "Hoy"
 msgid "Toggle Pretty OSD"
 msgstr "Cambiar a OSD Estético"
 
-#: visualisations/visualisationcontainer.cpp:95
+#: visualisations/visualisationcontainer.cpp:101
 msgid "Toggle fullscreen"
 msgstr "Pantalla completa"
 
@@ -4895,7 +4892,7 @@ msgstr "Sus flujos de radio"
 msgid "Your scrobbles: %1"
 msgstr "Sus scrobbles: %1"
 
-#: visualisations/visualisationcontainer.cpp:145
+#: visualisations/visualisationcontainer.cpp:152
 msgid "Your system is missing OpenGL support, visualizations are unavailable."
 msgstr ""
 
