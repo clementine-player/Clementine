@@ -140,6 +140,7 @@ void SpotifyClient::LoggedInCallback(sp_session* session, sp_error error) {
     sp_playlistcontainer_add_callbacks(
           sp_session_playlistcontainer(session),
           &me->playlistcontainer_callbacks_, me);
+    sp_session_flush_caches(me->session_);
   }
 }
 
@@ -164,6 +165,8 @@ void SpotifyClient::Search(const pb::spotify::SearchRequest& req) {
         0, req.limit(),
         0, req.limit_album(),
         0, 0, // artists
+        0, 0, // playlists
+        SP_SEARCH_STANDARD,
         &SearchCompleteCallback, this);
 
   pending_searches_[search] = req;
@@ -322,7 +325,8 @@ void SpotifyClient::Login(const pb::spotify::LoginRequest& req) {
     sp_session_login(session_,
                      req.username().c_str(),
                      req.password().c_str(),
-                     true);  // Remember the password.
+                     true,   // Remember the password.
+                     NULL);
   }
 }
 
