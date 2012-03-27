@@ -1165,12 +1165,8 @@ void PlaylistView::CurrentSongChanged(const Song& song,
 }
 
 void PlaylistView::set_background_image(const QImage& image) {
-  bool is_visible = isVisible();
-  if (is_visible) {
-    // Save previous image, for fading
-    previous_background_image_ = cached_scaled_background_image_;
-    previous_background_image_opacity_ = 1.0;
-  }
+  // Save previous image, for fading
+  previous_background_image_ = cached_scaled_background_image_;
 
   if (image.format() != QImage::Format_ARGB32)
     background_image_ = image.convertToFormat(QImage::Format_ARGB32);
@@ -1183,7 +1179,8 @@ void PlaylistView::set_background_image(const QImage& image) {
     bits[i+3] = kBackgroundOpacity * 255;
   }
 
-  if (is_visible) {
+  if (isVisible()) {
+    previous_background_image_opacity_ = 1.0;
     fade_animation_->start();
   }
 }
