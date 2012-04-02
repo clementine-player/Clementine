@@ -5,12 +5,13 @@
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
 # Liudas Ališauskas <liudas.alisauskas@gmail.com>, 2012.
+#   <pencininkas4@gmail.com>, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-03-22 19:40+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2012-03-29 18:35+0000\n"
+"Last-Translator: pencininkas4 <pencininkas4@gmail.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: lt\n"
@@ -18,7 +19,7 @@ msgstr ""
 
 #: ../bin/src/ui_podcastsettingspage.h:246
 msgid " days"
-msgstr ""
+msgstr "dienos"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:130
 #: ../bin/src/ui_transcoderoptionsmp3.h:195
@@ -128,7 +129,7 @@ msgstr "%L1 viso perklausymų"
 
 #: ../bin/src/ui_notificationssettingspage.h:399
 msgid "%filename%"
-msgstr ""
+msgstr "%failovardas%"
 
 #: transcoder/transcodedialog.cpp:199
 #, c-format
@@ -337,7 +338,7 @@ msgstr "Aktyvuoti/Deaktyvuoti Wii pultą"
 
 #: podcasts/addpodcastdialog.cpp:54
 msgid "Add Podcast"
-msgstr ""
+msgstr "Pridėti srautą"
 
 #: ../bin/src/ui_addstreamdialog.h:113
 msgid "Add Stream"
@@ -389,11 +390,11 @@ msgstr "Pridėti naują aplankalą..."
 
 #: ../bin/src/ui_addpodcastdialog.h:179
 msgid "Add podcast"
-msgstr ""
+msgstr "Pridėti srautą"
 
 #: podcasts/podcastservice.cpp:257 ../bin/src/ui_mainwindow.h:715
 msgid "Add podcast..."
-msgstr ""
+msgstr "Pridėti srautą..."
 
 #: smartplaylists/searchtermwidget.cpp:333
 msgid "Add search term"
@@ -421,7 +422,7 @@ msgstr "Pridėti žymę kūrinio diskui"
 
 #: ../bin/src/ui_notificationssettingspage.h:401
 msgid "Add song filename"
-msgstr ""
+msgstr "Pridėti dainai failo vardą"
 
 #: ../bin/src/ui_notificationssettingspage.h:385
 msgid "Add song genre tag"
@@ -455,11 +456,11 @@ msgstr "Pridėti žymę kūrionio metams"
 msgid "Add stream..."
 msgstr "Pridėti srautą..."
 
-#: internet/groovesharkservice.cpp:1009
+#: internet/groovesharkservice.cpp:1046
 msgid "Add to Grooveshark favorites"
 msgstr "Pridėti į Grooveshark mėgstamiausius"
 
-#: internet/groovesharkservice.cpp:1015
+#: internet/groovesharkservice.cpp:1052
 msgid "Add to Grooveshark playlists"
 msgstr "Pridėti į Grooveshark grojaraščius"
 
@@ -505,7 +506,7 @@ msgstr "Pridėta šiandien"
 msgid "Added within three months"
 msgstr "Pridėta tryjų mėnesių tarpe"
 
-#: internet/groovesharkservice.cpp:1263
+#: internet/groovesharkservice.cpp:1326
 msgid "Adding song to favorites"
 msgstr "Daina pridedama į mėgstamiausius"
 
@@ -515,7 +516,7 @@ msgstr "Platesnis grupavimas..."
 
 #: ../bin/src/ui_podcastsettingspage.h:247
 msgid "After "
-msgstr ""
+msgstr "Po"
 
 #: ../bin/src/ui_organisedialog.h:190
 msgid "After copying..."
@@ -542,7 +543,7 @@ msgstr "Albumo atlikėjas"
 
 #: ../bin/src/ui_appearancesettingspage.h:204
 msgid "Album cover"
-msgstr ""
+msgstr "Albumo viršelis"
 
 #: internet/jamendoservice.cpp:411
 msgid "Album info on jamendo.com..."
@@ -669,7 +670,7 @@ msgstr "Pritaikyti suspaudimą, kad išvengti nukirtimų"
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "Ar tikrai norite ištrinti \"%1\" šabloną?"
 
-#: internet/groovesharkservice.cpp:1184
+#: internet/groovesharkservice.cpp:1247
 msgid "Are you sure you want to delete this playlist?"
 msgstr "Ar tikrai norite pašalinti šį grojaraštį?"
 
@@ -719,7 +720,7 @@ msgstr "Autorizacija nepavyko"
 
 #: ../bin/src/ui_podcastinfowidget.h:192
 msgid "Author"
-msgstr ""
+msgstr "Autorius"
 
 #: ui/about.cpp:64
 msgid "Authors"
@@ -751,7 +752,7 @@ msgstr "Vidutinis paveikslo dydis"
 
 #: podcasts/addpodcastdialog.cpp:72
 msgid "BBC Podcasts"
-msgstr ""
+msgstr "BBC srautas"
 
 #: playlist/playlist.cpp:1131 ui/organisedialog.cpp:62
 #: ../bin/src/ui_edittagdialog.h:638
@@ -768,7 +769,7 @@ msgstr "Fono spalva"
 
 #: ../bin/src/ui_appearancesettingspage.h:199
 msgid "Background image"
-msgstr ""
+msgstr "Fono pavaikslėlis"
 
 #: ../bin/src/ui_notificationssettingspage.h:424
 msgid "Background opacity"
@@ -826,7 +827,7 @@ msgstr "Blokograma"
 msgid "Block type"
 msgstr "Bloko tipas"
 
-#: devices/ilister.cpp:100
+#: devices/ilister.cpp:122
 msgid "Bluetooth MAC Address"
 msgstr "Bluetooth MAC adresas"
 
@@ -894,7 +895,7 @@ msgstr "Keisti kalbą"
 
 #: ../bin/src/ui_podcastsettingspage.h:228
 msgid "Check for new episodes"
-msgstr ""
+msgstr "Tikrinti, ar nėra naujų epizodų"
 
 #: ui/mainwindow.cpp:560
 msgid "Check for updates..."
@@ -926,7 +927,7 @@ msgstr "Pasirinkite kaip grojaraštis bus rikiuojamas ir kiek dainų turės"
 
 #: podcasts/podcastsettingspage.cpp:132
 msgid "Choose podcast download directory"
-msgstr ""
+msgstr "Pasirinkite srauto siutimo vietą"
 
 #: ../bin/src/ui_songinfosettingspage.h:188
 msgid ""
@@ -939,7 +940,7 @@ msgstr "Klasika"
 
 #: ../bin/src/ui_podcastsettingspage.h:243
 msgid "Cleaning up"
-msgstr ""
+msgstr "Valoma"
 
 #: widgets/lineedit.cpp:41 ../bin/src/ui_queuemanager.h:139
 msgid "Clear"
@@ -990,7 +991,7 @@ msgid ""
 "Clementine can synchronize your subscription list with your other computers "
 "and podcast applications.  <a href=\"https://gpodder.net/register/\">Create "
 "an account</a>."
-msgstr ""
+msgstr "Clementine gali sinchronizuoti jūsų fonoteką su kitais jūsų kompiuteriais ir srauto aplikacijomis. <a href=\"https://gpodder.net/register/\">Sukurti sąskaitą</a>."
 
 #: visualisations/projectmvisualisation.cpp:128
 msgid ""
@@ -1041,7 +1042,7 @@ msgstr "Uždarant šį langą bus sustabdyta albumo viršelių paieška."
 msgid "Club"
 msgstr "Klubinė"
 
-#: devices/ilister.cpp:95
+#: devices/ilister.cpp:117
 msgid "Color"
 msgstr "Spalva"
 
@@ -1076,7 +1077,7 @@ msgstr "Pabaigti žymes automatiškai..."
 msgid "Composer"
 msgstr "Kompozitorius"
 
-#: internet/groovesharkservice.cpp:499
+#: internet/groovesharkservice.cpp:535
 msgid "Configure Grooveshark..."
 msgstr "Konfigūruoti Grooveshark..."
 
@@ -1102,7 +1103,7 @@ msgstr "Konfigūruoti fonoteką..."
 
 #: podcasts/addpodcastdialog.cpp:65 podcasts/podcastservice.cpp:288
 msgid "Configure podcasts..."
-msgstr ""
+msgstr "Konfigūruojamas srautas... "
 
 #: internet/digitallyimportedservicebase.cpp:185
 #: ../bin/src/ui_globalsearchsettingspage.h:174
@@ -1133,7 +1134,7 @@ msgstr "Konvertuoti visą muziką"
 msgid "Convert any music that the device can't play"
 msgstr "Konvertuoti visą įrenginio nepalaikomą muziką"
 
-#: internet/groovesharkservice.cpp:1062
+#: internet/groovesharkservice.cpp:1125
 msgid "Copy to clipboard"
 msgstr "Kopijuoti į atmintinę"
 
@@ -1153,7 +1154,7 @@ msgstr "Kopijuojama „iPod“ duomenų bazė..."
 
 #: ../bin/src/ui_podcastinfowidget.h:194
 msgid "Copyright"
-msgstr ""
+msgstr "Teisės"
 
 #: transcoder/transcoder.cpp:62
 #, qt-format
@@ -1217,7 +1218,7 @@ msgstr "Viršelio paveikslėlis nustatytas iš %1"
 msgid "Covers from %1"
 msgstr "Viršeliai iš %1"
 
-#: internet/groovesharkservice.cpp:478 internet/groovesharkservice.cpp:1135
+#: internet/groovesharkservice.cpp:502 internet/groovesharkservice.cpp:1198
 msgid "Create a new Grooveshark playlist"
 msgstr "Kurti naują Grooveshark grojaraštį"
 
@@ -1307,7 +1308,7 @@ msgstr "Pasirinktinis"
 
 #: ../bin/src/ui_appearancesettingspage.h:206
 msgid "Custom image:"
-msgstr ""
+msgstr "Pasirinktinis paveikslėlis"
 
 #: ../bin/src/ui_notificationssettingspage.h:416
 msgid "Custom message settings"
@@ -1362,7 +1363,7 @@ msgstr "Sumažinti garsą"
 
 #: ../bin/src/ui_appearancesettingspage.h:200
 msgid "Default background image"
-msgstr ""
+msgstr "Numatytasis fono paveikslėlis"
 
 #: ../bin/src/ui_wiimotesettingspage.h:195
 msgid "Defaults"
@@ -1372,13 +1373,13 @@ msgstr "Numatyti"
 msgid "Delay between visualizations"
 msgstr "Delsa tarp vizualizacijų"
 
-#: internet/groovesharkservice.cpp:481 internet/groovesharkservice.cpp:1183
+#: internet/groovesharkservice.cpp:505 internet/groovesharkservice.cpp:1246
 msgid "Delete Grooveshark playlist"
 msgstr "Šalinti Grooveshark grojaraštį"
 
 #: podcasts/podcastservice.cpp:274
 msgid "Delete downloaded data"
-msgstr ""
+msgstr "Naikinti atsiųstus duomenis"
 
 #: devices/deviceview.cpp:388 library/libraryview.cpp:471
 #: ui/mainwindow.cpp:1800 widgets/fileview.cpp:186
@@ -1396,7 +1397,7 @@ msgstr "Ištrinti iš disko..."
 
 #: ../bin/src/ui_podcastsettingspage.h:244
 msgid "Delete played episodes"
-msgstr ""
+msgstr "Ištrinti atliktus epizodus"
 
 #: ui/equalizer.cpp:190 ../bin/src/ui_equalizer.h:124
 msgid "Delete preset"
@@ -1536,7 +1537,7 @@ msgstr "Du kartus spūstelėjus dainą..."
 #: podcasts/podcastservice.cpp:345
 #, c-format
 msgid "Download %n episodes"
-msgstr ""
+msgstr "Atsiųsti %n epizodus"
 
 #: internet/magnatunedownloaddialog.cpp:252
 msgid "Download directory"
@@ -1544,7 +1545,7 @@ msgstr "Atsisiuntimų aplankas"
 
 #: ../bin/src/ui_podcastsettingspage.h:240
 msgid "Download episodes to"
-msgstr ""
+msgstr "Atsiųsti epizodus į"
 
 #: ../bin/src/ui_magnatunesettingspage.h:161
 msgid "Download membership"
@@ -1734,7 +1735,7 @@ msgstr "Tai atitinka --log-levels *:1"
 msgid "Equivalent to --log-levels *:3"
 msgstr "Tai atitinka --log-levels *:3"
 
-#: internet/groovesharkservice.cpp:945
+#: internet/groovesharkservice.cpp:982
 #: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:465
 #: ui/mainwindow.cpp:1752 ui/mainwindow.cpp:1873
 msgid "Error"
@@ -1885,7 +1886,7 @@ msgstr ""
 msgid "Fast"
 msgstr "Greitai"
 
-#: internet/groovesharkservice.cpp:557
+#: internet/groovesharkservice.cpp:594
 msgid "Favorites"
 msgstr "Mėgstamiausi"
 
@@ -2069,11 +2070,15 @@ msgstr "Pagrindiniai nustatymai"
 msgid "Genre"
 msgstr "Žanras"
 
-#: internet/groovesharkservice.cpp:1026
-msgid "Get an URL to share this Grooveshark song"
-msgstr "Gauti URL šios Grooveshark dainos bendrinimui"
+#: internet/groovesharkservice.cpp:521
+msgid "Get a URL to share this Grooveshark playlist"
+msgstr ""
 
-#: internet/groovesharkservice.cpp:704
+#: internet/groovesharkservice.cpp:518 internet/groovesharkservice.cpp:1063
+msgid "Get a URL to share this Grooveshark song"
+msgstr ""
+
+#: internet/groovesharkservice.cpp:741
 msgid "Getting Grooveshark popular songs"
 msgstr "Gaunamos Grooveshark populiarios dainos"
 
@@ -2123,15 +2128,19 @@ msgstr "Pažymėti pilkai neegzistuojančias dainas mano grojaraštyje"
 msgid "Grooveshark"
 msgstr "Grooveshark"
 
-#: internet/groovesharkservice.cpp:398
+#: internet/groovesharkservice.cpp:400
 msgid "Grooveshark login error"
 msgstr "Grooveshark prisijungimo klaida"
 
-#: internet/groovesharkservice.cpp:548
+#: internet/groovesharkservice.cpp:1115
+msgid "Grooveshark playlist's URL"
+msgstr ""
+
+#: internet/groovesharkservice.cpp:585
 msgid "Grooveshark radio"
 msgstr "Grooveshark radijas"
 
-#: internet/groovesharkservice.cpp:1058
+#: internet/groovesharkservice.cpp:1093
 msgid "Grooveshark song's URL"
 msgstr "Grooveshark dainos URL"
 
@@ -2335,7 +2344,7 @@ msgstr "Netinkama paslauga"
 msgid "Invalid session key"
 msgstr "Netinkamas sesijos raktas"
 
-#: internet/groovesharkservice.cpp:391
+#: internet/groovesharkservice.cpp:393
 msgid "Invalid username and/or password"
 msgstr "Neteisingas naudotojo vardas ir/arba slaptažodis"
 
@@ -2515,7 +2524,7 @@ msgstr "Fonotekos paieška"
 msgid "Limits"
 msgstr "Apribojimai"
 
-#: internet/groovesharkservice.cpp:549
+#: internet/groovesharkservice.cpp:586
 msgid ""
 "Listen to Grooveshark songs based on what you've listened to previously"
 msgstr "Klausyti Grooveshark dainų pagal jūsų anksčiau klausytas dainas"
@@ -2829,7 +2838,7 @@ msgstr "Mano radijo stotis"
 msgid "My Recommendations"
 msgstr "Mano rekomendacijos"
 
-#: internet/groovesharkservice.cpp:1136 internet/groovesharkservice.cpp:1230
+#: internet/groovesharkservice.cpp:1199 internet/groovesharkservice.cpp:1293
 #: ui/equalizer.cpp:172 ../bin/src/ui_deviceproperties.h:369
 #: ../bin/src/ui_magnatunedownloaddialog.h:135
 #: ../bin/src/ui_wizardfinishpage.h:84
@@ -2905,7 +2914,7 @@ msgstr "Jokio analizatoriaus"
 
 #: ../bin/src/ui_appearancesettingspage.h:205
 msgid "No background image"
-msgstr ""
+msgstr "Išjungti fono paveikslėlį"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:146
 msgid "No long blocks"
@@ -3003,7 +3012,7 @@ msgid "Only show the first"
 msgstr "Rodyti tik pirmą"
 
 #: internet/digitallyimportedservicebase.cpp:178
-#: internet/groovesharkservice.cpp:496 internet/icecastservice.cpp:296
+#: internet/groovesharkservice.cpp:529 internet/icecastservice.cpp:296
 #: internet/jamendoservice.cpp:415 internet/magnatuneservice.cpp:276
 #: internet/somafmservice.cpp:91
 #, qt-format
@@ -3105,7 +3114,7 @@ msgstr "Vakarėlis"
 msgid "Password"
 msgstr "Slaptažodis"
 
-#: devices/ilister.cpp:97
+#: devices/ilister.cpp:119
 msgid "Password Protected"
 msgstr "Apsaugota slaptažodžiu"
 
@@ -3203,7 +3212,7 @@ msgstr "Ieškoti grojaraštyje"
 msgid "Playlist type"
 msgstr "Grojaraščio tipas"
 
-#: internet/groovesharkservice.cpp:553
+#: internet/groovesharkservice.cpp:590
 msgid "Playlists"
 msgstr "Grojaraščiai"
 
@@ -3219,15 +3228,15 @@ msgstr ""
 msgid "Pop"
 msgstr "Pop"
 
-#: internet/groovesharkservice.cpp:521
+#: internet/groovesharkservice.cpp:558
 msgid "Popular songs"
 msgstr "Populiarios dainos"
 
-#: internet/groovesharkservice.cpp:525
+#: internet/groovesharkservice.cpp:562
 msgid "Popular songs of the Month"
 msgstr "Populiarios mėnesio dainos"
 
-#: internet/groovesharkservice.cpp:532
+#: internet/groovesharkservice.cpp:569
 msgid "Popular songs today"
 msgstr "Populiarios šiandienos dainos"
 
@@ -3361,7 +3370,7 @@ msgstr "į eilę takelį"
 msgid "Radio (equal loudness for all tracks)"
 msgstr "Radijas (vienodas garsumas visiems takeliams)"
 
-#: internet/groovesharkservice.cpp:539
+#: internet/groovesharkservice.cpp:576
 msgid "Radios"
 msgstr "Radijai"
 
@@ -3405,7 +3414,7 @@ msgstr "Įvertinimas"
 msgid "Really cancel?"
 msgstr "Tikrai atšaukti?"
 
-#: internet/groovesharkservice.cpp:497
+#: internet/groovesharkservice.cpp:532
 msgid "Refresh"
 msgstr "Atnaujinti"
 
@@ -3459,11 +3468,11 @@ msgstr "Pašalinti veiksmą"
 msgid "Remove folder"
 msgstr "Pašalinti aplanką"
 
-#: internet/groovesharkservice.cpp:491
+#: internet/groovesharkservice.cpp:515
 msgid "Remove from favorites"
 msgstr "Pašalinti iš mėgstamiausių"
 
-#: internet/groovesharkservice.cpp:488 ../bin/src/ui_mainwindow.h:691
+#: internet/groovesharkservice.cpp:512 ../bin/src/ui_mainwindow.h:691
 msgid "Remove from playlist"
 msgstr "Ištrinti iš grojaraščio"
 
@@ -3471,16 +3480,16 @@ msgstr "Ištrinti iš grojaraščio"
 msgid "Remove playlist"
 msgstr "Pašalinti grojaraštį"
 
-#: internet/groovesharkservice.cpp:1325
+#: internet/groovesharkservice.cpp:1388
 msgid "Removing song from favorites"
 msgstr "Šalinamos dainos iš mėgstamiausių"
 
-#: internet/groovesharkservice.cpp:1229
+#: internet/groovesharkservice.cpp:1292
 #, qt-format
 msgid "Rename \"%1\" playlist"
 msgstr "Pervardinti %1 grojaraštį"
 
-#: internet/groovesharkservice.cpp:484
+#: internet/groovesharkservice.cpp:508
 msgid "Rename Grooveshark playlist"
 msgstr "Pervardinti Grooveshark grojaraštį"
 
@@ -3558,11 +3567,11 @@ msgstr "Naudoti tik SCII simbolius"
 msgid "Results"
 msgstr "Rezultatai"
 
-#: internet/groovesharkservice.cpp:675
+#: internet/groovesharkservice.cpp:712
 msgid "Retrieving Grooveshark favorites songs"
 msgstr "Gaunamos Grooveshark mėgstamiausios dainos"
 
-#: internet/groovesharkservice.cpp:600
+#: internet/groovesharkservice.cpp:637
 msgid "Retrieving Grooveshark playlists"
 msgstr "Gaunami Grooveshark grojaraščiai"
 
@@ -3641,11 +3650,11 @@ msgid "Search"
 msgstr "Ieškoti"
 
 #: internet/groovesharksearchplaylisttype.cpp:32
-#: internet/groovesharkservice.cpp:923
+#: internet/groovesharkservice.cpp:960
 msgid "Search Grooveshark"
 msgstr "Ieškoti Grooveshark"
 
-#: internet/groovesharkservice.cpp:494 internet/groovesharkservice.cpp:515
+#: internet/groovesharkservice.cpp:525 internet/groovesharkservice.cpp:552
 msgid "Search Grooveshark (opens a new tab)"
 msgstr "Ieškoti Grooveshark (atveria naują kortelę)"
 
@@ -3706,7 +3715,7 @@ msgstr "Paieškos parinktys"
 msgid "Search terms"
 msgstr "Paieškos terminai"
 
-#: internet/groovesharkservice.cpp:262
+#: internet/groovesharkservice.cpp:264
 msgid "Searching on Grooveshark"
 msgstr "Ieškoti Grooveshark"
 
@@ -3744,7 +3753,7 @@ msgstr "Pasirinkite fono spalvą:"
 
 #: ui/appearancesettingspage.cpp:192
 msgid "Select background image"
-msgstr ""
+msgstr "Pasirinkti fono paveikslėlį"
 
 #: ../bin/src/ui_trackselectiondialog.h:207
 msgid "Select best possible match"
@@ -4070,7 +4079,7 @@ msgstr "Paleidžiama %1"
 msgid "Starting..."
 msgstr "Pradedama..."
 
-#: internet/groovesharkservice.cpp:543
+#: internet/groovesharkservice.cpp:580
 msgid "Stations"
 msgstr "Stotys"
 
@@ -4107,7 +4116,7 @@ msgstr "Srautas"
 msgid "Streaming membership"
 msgstr "Transliavimo narystė"
 
-#: internet/groovesharkservice.cpp:566
+#: internet/groovesharkservice.cpp:603
 msgid "Subscribed playlists"
 msgstr "Prenumeruoti grojaraščiai"
 
@@ -4198,7 +4207,7 @@ msgstr "Komanda \"%1\" negalėjo būti paleista."
 
 #: ../bin/src/ui_appearancesettingspage.h:202
 msgid "The album cover of the currently playing song"
-msgstr ""
+msgstr "Viršelis iš šiuo metu atliekamos dainos albumo"
 
 #: internet/magnatunedownloaddialog.cpp:90
 #, qt-format
@@ -4230,7 +4239,7 @@ msgstr "Clementine versija, į kurią atsinaujinote reikalauja pilno fonotekos p
 
 #: library/libraryview.cpp:392
 msgid "There are other songs in this album"
-msgstr ""
+msgstr "Čia yra kitų dainų iš šio albumo"
 
 #: podcasts/gpoddersearchpage.cpp:77 podcasts/gpoddertoptagsmodel.cpp:110
 #: podcasts/gpoddertoptagspage.cpp:77
@@ -4340,7 +4349,7 @@ msgstr "Šio tipo įrenginys yra nepalaikomas: %1"
 msgid "Timeout"
 msgstr "Pertrauka"
 
-#: devices/ilister.cpp:98
+#: devices/ilister.cpp:120
 msgid "Timezone"
 msgstr "Laiko juosta"
 
@@ -4350,7 +4359,7 @@ msgstr "Laiko juosta"
 msgid "Title"
 msgstr "Pavadinimas"
 
-#: internet/groovesharkservice.cpp:946
+#: internet/groovesharkservice.cpp:983
 msgid ""
 "To start Grooveshark radio, you should first listen to a few other "
 "Grooveshark songs"
@@ -4472,7 +4481,7 @@ msgstr "Pašalinti viršelį"
 msgid "Unsubscribe"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:1090
+#: internet/groovesharkservice.cpp:1153
 msgid "Update Grooveshark playlist"
 msgstr "Atnaujinti Grooveshark grojaraštį"
 
@@ -4574,7 +4583,7 @@ msgstr "Naudoti garso normalizavimą"
 msgid "Used"
 msgstr "Panaudota"
 
-#: internet/groovesharkservice.cpp:394
+#: internet/groovesharkservice.cpp:396
 #, qt-format
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr "Naudotojas %1 neturi Grooveshark Bet kur paskyros"
@@ -4678,7 +4687,7 @@ msgid ""
 "If there are no matches then it will use the largest image in the directory."
 msgstr "Ieškant albumo viršelių Clementine pirmiausia ieško paveikslėlių failų, kuriuose yra vienas iš šių žodžių.\nJei nėra atitikmens tada bus naudojamas didžiausias paveikslas kataloge."
 
-#: devices/ilister.cpp:99
+#: devices/ilister.cpp:121
 msgid "WiFi MAC Address"
 msgstr "WiFi MAC Adresas"
 
@@ -4740,7 +4749,7 @@ msgstr "Windows Media Audio"
 msgid ""
 "Would you like to move the other songs in this album to Various Artists as "
 "well?"
-msgstr ""
+msgstr "Ar norėtumėte perkelti kitas dainas į šio atlikėjo albumą?"
 
 #: ui/mainwindow.cpp:1988
 msgid "Would you like to run a full rescan right now?"

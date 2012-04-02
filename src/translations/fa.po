@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-03-22 19:40+0000\n"
+"PO-Revision-Date: 2012-03-27 21:40+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -454,11 +454,11 @@ msgstr "افزودن برچسب سال آهنگ"
 msgid "Add stream..."
 msgstr "افزودن جریان..."
 
-#: internet/groovesharkservice.cpp:1009
+#: internet/groovesharkservice.cpp:1046
 msgid "Add to Grooveshark favorites"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:1015
+#: internet/groovesharkservice.cpp:1052
 msgid "Add to Grooveshark playlists"
 msgstr ""
 
@@ -504,7 +504,7 @@ msgstr "افزوده شده در امروز"
 msgid "Added within three months"
 msgstr "افزوده شده در سه ماه گذشته"
 
-#: internet/groovesharkservice.cpp:1263
+#: internet/groovesharkservice.cpp:1326
 msgid "Adding song to favorites"
 msgstr ""
 
@@ -668,7 +668,7 @@ msgstr "فشرده‌سازی برای چیده نشدن"
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "آیا مطمئنید که می‌خواهید پیش‌نشاندهٔ \"%1\" را پاک کنید؟"
 
-#: internet/groovesharkservice.cpp:1184
+#: internet/groovesharkservice.cpp:1247
 msgid "Are you sure you want to delete this playlist?"
 msgstr ""
 
@@ -825,7 +825,7 @@ msgstr "آنالیزور بلوکی"
 msgid "Block type"
 msgstr "نوع بلوک"
 
-#: devices/ilister.cpp:100
+#: devices/ilister.cpp:122
 msgid "Bluetooth MAC Address"
 msgstr "آدرس ماک بلوتوث"
 
@@ -1040,7 +1040,7 @@ msgstr "بستن این پنجره، جستجوی جلد آلبوم‌ها را 
 msgid "Club"
 msgstr "باشگاه"
 
-#: devices/ilister.cpp:95
+#: devices/ilister.cpp:117
 msgid "Color"
 msgstr "رنگ"
 
@@ -1075,7 +1075,7 @@ msgstr "تکمیل اتوماتیک برچسب‌ها..."
 msgid "Composer"
 msgstr "تنظیم‌کننده"
 
-#: internet/groovesharkservice.cpp:499
+#: internet/groovesharkservice.cpp:535
 msgid "Configure Grooveshark..."
 msgstr ""
 
@@ -1132,7 +1132,7 @@ msgstr "برگرداندن تمام موسیقی"
 msgid "Convert any music that the device can't play"
 msgstr "برگردان تمام موسیقی‌هایی که دستگاه نمی‌تواند پخش کند"
 
-#: internet/groovesharkservice.cpp:1062
+#: internet/groovesharkservice.cpp:1125
 msgid "Copy to clipboard"
 msgstr ""
 
@@ -1216,7 +1216,7 @@ msgstr "جلد هنری از %1 نشانده شد"
 msgid "Covers from %1"
 msgstr "جلدها از %1"
 
-#: internet/groovesharkservice.cpp:478 internet/groovesharkservice.cpp:1135
+#: internet/groovesharkservice.cpp:502 internet/groovesharkservice.cpp:1198
 msgid "Create a new Grooveshark playlist"
 msgstr ""
 
@@ -1371,7 +1371,7 @@ msgstr "پیش‌فرضها"
 msgid "Delay between visualizations"
 msgstr "تأخیر بین تصویرسازیها"
 
-#: internet/groovesharkservice.cpp:481 internet/groovesharkservice.cpp:1183
+#: internet/groovesharkservice.cpp:505 internet/groovesharkservice.cpp:1246
 msgid "Delete Grooveshark playlist"
 msgstr ""
 
@@ -1733,7 +1733,7 @@ msgstr "برابر است با --log-levels *:1"
 msgid "Equivalent to --log-levels *:3"
 msgstr "برابر است با --log-levels *:3"
 
-#: internet/groovesharkservice.cpp:945
+#: internet/groovesharkservice.cpp:982
 #: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:465
 #: ui/mainwindow.cpp:1752 ui/mainwindow.cpp:1873
 msgid "Error"
@@ -1884,7 +1884,7 @@ msgstr ""
 msgid "Fast"
 msgstr "تند"
 
-#: internet/groovesharkservice.cpp:557
+#: internet/groovesharkservice.cpp:594
 msgid "Favorites"
 msgstr ""
 
@@ -2068,11 +2068,15 @@ msgstr "تنظیمات عمومی"
 msgid "Genre"
 msgstr "ژانر"
 
-#: internet/groovesharkservice.cpp:1026
-msgid "Get an URL to share this Grooveshark song"
+#: internet/groovesharkservice.cpp:521
+msgid "Get a URL to share this Grooveshark playlist"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:704
+#: internet/groovesharkservice.cpp:518 internet/groovesharkservice.cpp:1063
+msgid "Get a URL to share this Grooveshark song"
+msgstr ""
+
+#: internet/groovesharkservice.cpp:741
 msgid "Getting Grooveshark popular songs"
 msgstr ""
 
@@ -2122,15 +2126,19 @@ msgstr "آهنگ‌های ناموجود لیست‌پخش‌های من را خ
 msgid "Grooveshark"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:398
+#: internet/groovesharkservice.cpp:400
 msgid "Grooveshark login error"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:548
+#: internet/groovesharkservice.cpp:1115
+msgid "Grooveshark playlist's URL"
+msgstr ""
+
+#: internet/groovesharkservice.cpp:585
 msgid "Grooveshark radio"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:1058
+#: internet/groovesharkservice.cpp:1093
 msgid "Grooveshark song's URL"
 msgstr ""
 
@@ -2334,7 +2342,7 @@ msgstr "سرویس نامعتبر"
 msgid "Invalid session key"
 msgstr "کلید جلسهٔ نامعتبر"
 
-#: internet/groovesharkservice.cpp:391
+#: internet/groovesharkservice.cpp:393
 msgid "Invalid username and/or password"
 msgstr ""
 
@@ -2514,7 +2522,7 @@ msgstr "جستجوی کتابخانه"
 msgid "Limits"
 msgstr "محدودیت‌ها"
 
-#: internet/groovesharkservice.cpp:549
+#: internet/groovesharkservice.cpp:586
 msgid ""
 "Listen to Grooveshark songs based on what you've listened to previously"
 msgstr ""
@@ -2828,7 +2836,7 @@ msgstr "ایستگاه رادیویی من"
 msgid "My Recommendations"
 msgstr "پیشنهادهای من"
 
-#: internet/groovesharkservice.cpp:1136 internet/groovesharkservice.cpp:1230
+#: internet/groovesharkservice.cpp:1199 internet/groovesharkservice.cpp:1293
 #: ui/equalizer.cpp:172 ../bin/src/ui_deviceproperties.h:369
 #: ../bin/src/ui_magnatunedownloaddialog.h:135
 #: ../bin/src/ui_wizardfinishpage.h:84
@@ -3002,7 +3010,7 @@ msgid "Only show the first"
 msgstr "تنها ابتدا را نمایش بده"
 
 #: internet/digitallyimportedservicebase.cpp:178
-#: internet/groovesharkservice.cpp:496 internet/icecastservice.cpp:296
+#: internet/groovesharkservice.cpp:529 internet/icecastservice.cpp:296
 #: internet/jamendoservice.cpp:415 internet/magnatuneservice.cpp:276
 #: internet/somafmservice.cpp:91
 #, qt-format
@@ -3104,7 +3112,7 @@ msgstr "مهمانی"
 msgid "Password"
 msgstr "کلمهٔ عبور"
 
-#: devices/ilister.cpp:97
+#: devices/ilister.cpp:119
 msgid "Password Protected"
 msgstr "نگهبانی کلمهٔ عبور"
 
@@ -3202,7 +3210,7 @@ msgstr "جستجوی لیست‌پخش"
 msgid "Playlist type"
 msgstr "نوع لیست‌پخش"
 
-#: internet/groovesharkservice.cpp:553
+#: internet/groovesharkservice.cpp:590
 msgid "Playlists"
 msgstr ""
 
@@ -3218,15 +3226,15 @@ msgstr ""
 msgid "Pop"
 msgstr "پاپ"
 
-#: internet/groovesharkservice.cpp:521
+#: internet/groovesharkservice.cpp:558
 msgid "Popular songs"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:525
+#: internet/groovesharkservice.cpp:562
 msgid "Popular songs of the Month"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:532
+#: internet/groovesharkservice.cpp:569
 msgid "Popular songs today"
 msgstr ""
 
@@ -3360,7 +3368,7 @@ msgstr "به‌خط کردن قطعه"
 msgid "Radio (equal loudness for all tracks)"
 msgstr "رادیو (بلندی یکسان برای همهٔ قطعه‌ها)"
 
-#: internet/groovesharkservice.cpp:539
+#: internet/groovesharkservice.cpp:576
 msgid "Radios"
 msgstr ""
 
@@ -3404,7 +3412,7 @@ msgstr "رتبه‌بندی"
 msgid "Really cancel?"
 msgstr "واقعا لغو شود؟"
 
-#: internet/groovesharkservice.cpp:497
+#: internet/groovesharkservice.cpp:532
 msgid "Refresh"
 msgstr ""
 
@@ -3458,11 +3466,11 @@ msgstr "پاک کردن عملیات"
 msgid "Remove folder"
 msgstr "پاک کردن پوشه"
 
-#: internet/groovesharkservice.cpp:491
+#: internet/groovesharkservice.cpp:515
 msgid "Remove from favorites"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:488 ../bin/src/ui_mainwindow.h:691
+#: internet/groovesharkservice.cpp:512 ../bin/src/ui_mainwindow.h:691
 msgid "Remove from playlist"
 msgstr "از لیست‌پخش پاک کن"
 
@@ -3470,16 +3478,16 @@ msgstr "از لیست‌پخش پاک کن"
 msgid "Remove playlist"
 msgstr "لیست پخش را پاک کن"
 
-#: internet/groovesharkservice.cpp:1325
+#: internet/groovesharkservice.cpp:1388
 msgid "Removing song from favorites"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:1229
+#: internet/groovesharkservice.cpp:1292
 #, qt-format
 msgid "Rename \"%1\" playlist"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:484
+#: internet/groovesharkservice.cpp:508
 msgid "Rename Grooveshark playlist"
 msgstr ""
 
@@ -3557,11 +3565,11 @@ msgstr "محدود به حروف اَسکی کن"
 msgid "Results"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:675
+#: internet/groovesharkservice.cpp:712
 msgid "Retrieving Grooveshark favorites songs"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:600
+#: internet/groovesharkservice.cpp:637
 msgid "Retrieving Grooveshark playlists"
 msgstr ""
 
@@ -3640,11 +3648,11 @@ msgid "Search"
 msgstr "جستجو"
 
 #: internet/groovesharksearchplaylisttype.cpp:32
-#: internet/groovesharkservice.cpp:923
+#: internet/groovesharkservice.cpp:960
 msgid "Search Grooveshark"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:494 internet/groovesharkservice.cpp:515
+#: internet/groovesharkservice.cpp:525 internet/groovesharkservice.cpp:552
 msgid "Search Grooveshark (opens a new tab)"
 msgstr ""
 
@@ -3705,7 +3713,7 @@ msgstr "گزینه های جستجو"
 msgid "Search terms"
 msgstr "عبارات جستجو"
 
-#: internet/groovesharkservice.cpp:262
+#: internet/groovesharkservice.cpp:264
 msgid "Searching on Grooveshark"
 msgstr ""
 
@@ -4069,7 +4077,7 @@ msgstr "شروع %1"
 msgid "Starting..."
 msgstr "شروع..."
 
-#: internet/groovesharkservice.cpp:543
+#: internet/groovesharkservice.cpp:580
 msgid "Stations"
 msgstr ""
 
@@ -4106,7 +4114,7 @@ msgstr "جریان"
 msgid "Streaming membership"
 msgstr "عضویت جریان"
 
-#: internet/groovesharkservice.cpp:566
+#: internet/groovesharkservice.cpp:603
 msgid "Subscribed playlists"
 msgstr ""
 
@@ -4339,7 +4347,7 @@ msgstr "این نوع از دستگاه پشتیبانی نمی‌شود: %1"
 msgid "Timeout"
 msgstr "میانگاه"
 
-#: devices/ilister.cpp:98
+#: devices/ilister.cpp:120
 msgid "Timezone"
 msgstr "منطقهٔ زمانی"
 
@@ -4349,7 +4357,7 @@ msgstr "منطقهٔ زمانی"
 msgid "Title"
 msgstr "عنوان"
 
-#: internet/groovesharkservice.cpp:946
+#: internet/groovesharkservice.cpp:983
 msgid ""
 "To start Grooveshark radio, you should first listen to a few other "
 "Grooveshark songs"
@@ -4471,7 +4479,7 @@ msgstr "قرار ندادن جلد"
 msgid "Unsubscribe"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:1090
+#: internet/groovesharkservice.cpp:1153
 msgid "Update Grooveshark playlist"
 msgstr ""
 
@@ -4573,7 +4581,7 @@ msgstr ""
 msgid "Used"
 msgstr "استفاده‌شده"
 
-#: internet/groovesharkservice.cpp:394
+#: internet/groovesharkservice.cpp:396
 #, qt-format
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr ""
@@ -4677,7 +4685,7 @@ msgid ""
 "If there are no matches then it will use the largest image in the directory."
 msgstr "وقتی که کلمنتاین بدنبال آلبوم هنری می‌گردد، ابتدا بدنبال پرونده‌های تصویری می‌گردد که شامل یکی از کلمات زیر باشد.\nاگر چیزی پیدا نشد، آنگاه بزرگترین تصویر در پوشه را بکار می‌برد."
 
-#: devices/ilister.cpp:99
+#: devices/ilister.cpp:121
 msgid "WiFi MAC Address"
 msgstr "آدرس ماک وای‌فای"
 

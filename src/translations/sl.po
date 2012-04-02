@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-03-25 18:13+0000\n"
-"Last-Translator: R33D3M33R <yellllow_m@yahoo.com>\n"
+"PO-Revision-Date: 2012-03-27 21:40+0000\n"
+"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: sl\n"
@@ -455,11 +455,11 @@ msgstr "Dodaj oznako: leto"
 msgid "Add stream..."
 msgstr "Dodaj pretok ..."
 
-#: internet/groovesharkservice.cpp:1009
+#: internet/groovesharkservice.cpp:1046
 msgid "Add to Grooveshark favorites"
 msgstr "Dodaj med priljubljene v Grooveshark"
 
-#: internet/groovesharkservice.cpp:1015
+#: internet/groovesharkservice.cpp:1052
 msgid "Add to Grooveshark playlists"
 msgstr "Dodaj v sezname predvajanja Grooveshark"
 
@@ -505,7 +505,7 @@ msgstr "Dodano danes"
 msgid "Added within three months"
 msgstr "Dodano v zadnjih treh mesecih"
 
-#: internet/groovesharkservice.cpp:1263
+#: internet/groovesharkservice.cpp:1326
 msgid "Adding song to favorites"
 msgstr "Dodajanje skladbe med priljubljene"
 
@@ -669,7 +669,7 @@ msgstr "Uporabi stiskanje za preprečitev odrezanja"
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "Ali resnično želite izbrisati prednastavitev \"%1\"?"
 
-#: internet/groovesharkservice.cpp:1184
+#: internet/groovesharkservice.cpp:1247
 msgid "Are you sure you want to delete this playlist?"
 msgstr "Ali ste prepričani, da želite izbrisati ta seznam predvajanja?"
 
@@ -826,7 +826,7 @@ msgstr "Blokovni preučevalnik"
 msgid "Block type"
 msgstr "Vrsta bloka"
 
-#: devices/ilister.cpp:100
+#: devices/ilister.cpp:122
 msgid "Bluetooth MAC Address"
 msgstr "Bluetooth naslov MAC"
 
@@ -1041,7 +1041,7 @@ msgstr "Zaprtje tega okna bo prekinilo iskanje ovitkov albumov."
 msgid "Club"
 msgstr "Klubska"
 
-#: devices/ilister.cpp:95
+#: devices/ilister.cpp:117
 msgid "Color"
 msgstr "Barva"
 
@@ -1076,7 +1076,7 @@ msgstr "Samodejno dopolni oznake ..."
 msgid "Composer"
 msgstr "Skladatelj"
 
-#: internet/groovesharkservice.cpp:499
+#: internet/groovesharkservice.cpp:535
 msgid "Configure Grooveshark..."
 msgstr "Nastavi Grooveshark ..."
 
@@ -1133,7 +1133,7 @@ msgstr "Pretvori vso glasbo"
 msgid "Convert any music that the device can't play"
 msgstr "Pretvori vso glasbo, ki je naprava ne more predvajati"
 
-#: internet/groovesharkservice.cpp:1062
+#: internet/groovesharkservice.cpp:1125
 msgid "Copy to clipboard"
 msgstr "Kopiraj v odložišče"
 
@@ -1217,7 +1217,7 @@ msgstr "Ovitek albuma je nastavljen iz %1"
 msgid "Covers from %1"
 msgstr "Ovitki iz %1"
 
-#: internet/groovesharkservice.cpp:478 internet/groovesharkservice.cpp:1135
+#: internet/groovesharkservice.cpp:502 internet/groovesharkservice.cpp:1198
 msgid "Create a new Grooveshark playlist"
 msgstr "Ustvari nov seznam prevajanja Grooveshark"
 
@@ -1372,7 +1372,7 @@ msgstr "Privzete vrednosti"
 msgid "Delay between visualizations"
 msgstr "Zamik med predočenji"
 
-#: internet/groovesharkservice.cpp:481 internet/groovesharkservice.cpp:1183
+#: internet/groovesharkservice.cpp:505 internet/groovesharkservice.cpp:1246
 msgid "Delete Grooveshark playlist"
 msgstr "Izbriši seznam predvajanja Grooveshark"
 
@@ -1734,7 +1734,7 @@ msgstr "Enakovredno --log-levels *:1"
 msgid "Equivalent to --log-levels *:3"
 msgstr "Enakovredno --log-levels *:3"
 
-#: internet/groovesharkservice.cpp:945
+#: internet/groovesharkservice.cpp:982
 #: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:465
 #: ui/mainwindow.cpp:1752 ui/mainwindow.cpp:1873
 msgid "Error"
@@ -1885,7 +1885,7 @@ msgstr "XML-ja za ta vir RSS ni bilo mogoče razčleniti"
 msgid "Fast"
 msgstr "Hitro"
 
-#: internet/groovesharkservice.cpp:557
+#: internet/groovesharkservice.cpp:594
 msgid "Favorites"
 msgstr "Priljubljene"
 
@@ -2069,11 +2069,15 @@ msgstr "Splošne nastavitve"
 msgid "Genre"
 msgstr "Zvrst"
 
-#: internet/groovesharkservice.cpp:1026
-msgid "Get an URL to share this Grooveshark song"
-msgstr "Pridobi spletni naslov za deljenje te skladbe Grooveshark"
+#: internet/groovesharkservice.cpp:521
+msgid "Get a URL to share this Grooveshark playlist"
+msgstr ""
 
-#: internet/groovesharkservice.cpp:704
+#: internet/groovesharkservice.cpp:518 internet/groovesharkservice.cpp:1063
+msgid "Get a URL to share this Grooveshark song"
+msgstr ""
+
+#: internet/groovesharkservice.cpp:741
 msgid "Getting Grooveshark popular songs"
 msgstr "Pridobivanje seznama prijlubljenih skladb iz Grooveshark"
 
@@ -2123,15 +2127,19 @@ msgstr "Označi s sivo skladbe, ki so na seznamih predvajanja in ne obstajajo ve
 msgid "Grooveshark"
 msgstr "Grooveshark"
 
-#: internet/groovesharkservice.cpp:398
+#: internet/groovesharkservice.cpp:400
 msgid "Grooveshark login error"
 msgstr "Napaka med prijavo v Grooveshark"
 
-#: internet/groovesharkservice.cpp:548
+#: internet/groovesharkservice.cpp:1115
+msgid "Grooveshark playlist's URL"
+msgstr ""
+
+#: internet/groovesharkservice.cpp:585
 msgid "Grooveshark radio"
 msgstr "Radio Grooveshark"
 
-#: internet/groovesharkservice.cpp:1058
+#: internet/groovesharkservice.cpp:1093
 msgid "Grooveshark song's URL"
 msgstr "Spletni naslov skladbe Grooveshark"
 
@@ -2335,7 +2343,7 @@ msgstr "Neveljavna storitev"
 msgid "Invalid session key"
 msgstr "Neveljavni ključ seje"
 
-#: internet/groovesharkservice.cpp:391
+#: internet/groovesharkservice.cpp:393
 msgid "Invalid username and/or password"
 msgstr "Neveljavno uporabniško ime in/ali geslo"
 
@@ -2515,7 +2523,7 @@ msgstr "Iskanje po knjižnici"
 msgid "Limits"
 msgstr "Omejitve"
 
-#: internet/groovesharkservice.cpp:549
+#: internet/groovesharkservice.cpp:586
 msgid ""
 "Listen to Grooveshark songs based on what you've listened to previously"
 msgstr "Poslušajte skladbe iz Grooveshark glede na tiste, ki ste jih že poslušali"
@@ -2829,7 +2837,7 @@ msgstr "Moja radijska postaja"
 msgid "My Recommendations"
 msgstr "Moja priporočila"
 
-#: internet/groovesharkservice.cpp:1136 internet/groovesharkservice.cpp:1230
+#: internet/groovesharkservice.cpp:1199 internet/groovesharkservice.cpp:1293
 #: ui/equalizer.cpp:172 ../bin/src/ui_deviceproperties.h:369
 #: ../bin/src/ui_magnatunedownloaddialog.h:135
 #: ../bin/src/ui_wizardfinishpage.h:84
@@ -3003,7 +3011,7 @@ msgid "Only show the first"
 msgstr "Pokaži le prve"
 
 #: internet/digitallyimportedservicebase.cpp:178
-#: internet/groovesharkservice.cpp:496 internet/icecastservice.cpp:296
+#: internet/groovesharkservice.cpp:529 internet/icecastservice.cpp:296
 #: internet/jamendoservice.cpp:415 internet/magnatuneservice.cpp:276
 #: internet/somafmservice.cpp:91
 #, qt-format
@@ -3105,7 +3113,7 @@ msgstr "Zabava"
 msgid "Password"
 msgstr "Geslo"
 
-#: devices/ilister.cpp:97
+#: devices/ilister.cpp:119
 msgid "Password Protected"
 msgstr "Zaščiteno z geslom"
 
@@ -3203,7 +3211,7 @@ msgstr "Iskanje po seznamu predvajanja"
 msgid "Playlist type"
 msgstr "Vrsta seznama predvajanja"
 
-#: internet/groovesharkservice.cpp:553
+#: internet/groovesharkservice.cpp:590
 msgid "Playlists"
 msgstr "Seznami predvajanja"
 
@@ -3219,15 +3227,15 @@ msgstr "Podcasti"
 msgid "Pop"
 msgstr "Pop"
 
-#: internet/groovesharkservice.cpp:521
+#: internet/groovesharkservice.cpp:558
 msgid "Popular songs"
 msgstr "Priljubljene skladbe"
 
-#: internet/groovesharkservice.cpp:525
+#: internet/groovesharkservice.cpp:562
 msgid "Popular songs of the Month"
 msgstr "Priljubljene skladbe meseca"
 
-#: internet/groovesharkservice.cpp:532
+#: internet/groovesharkservice.cpp:569
 msgid "Popular songs today"
 msgstr "Priljubljene skladbe danes"
 
@@ -3361,7 +3369,7 @@ msgstr "Postavi skladbo v vrsto"
 msgid "Radio (equal loudness for all tracks)"
 msgstr "Radio (enaka glasnost za vse skladbe)"
 
-#: internet/groovesharkservice.cpp:539
+#: internet/groovesharkservice.cpp:576
 msgid "Radios"
 msgstr "Radio"
 
@@ -3405,7 +3413,7 @@ msgstr "Ocena"
 msgid "Really cancel?"
 msgstr "Ali naj bo dejanje resnično preklicano?"
 
-#: internet/groovesharkservice.cpp:497
+#: internet/groovesharkservice.cpp:532
 msgid "Refresh"
 msgstr "Osveži"
 
@@ -3459,11 +3467,11 @@ msgstr "Odstrani dejanji"
 msgid "Remove folder"
 msgstr "Odstrani mapo"
 
-#: internet/groovesharkservice.cpp:491
+#: internet/groovesharkservice.cpp:515
 msgid "Remove from favorites"
 msgstr "Odstrani iz priljubljenih"
 
-#: internet/groovesharkservice.cpp:488 ../bin/src/ui_mainwindow.h:691
+#: internet/groovesharkservice.cpp:512 ../bin/src/ui_mainwindow.h:691
 msgid "Remove from playlist"
 msgstr "Odstrani iz seznama predvajanja"
 
@@ -3471,16 +3479,16 @@ msgstr "Odstrani iz seznama predvajanja"
 msgid "Remove playlist"
 msgstr "Odstrani seznam predvajanja"
 
-#: internet/groovesharkservice.cpp:1325
+#: internet/groovesharkservice.cpp:1388
 msgid "Removing song from favorites"
 msgstr "Odstranjevanje skladbe iz priljubljenih"
 
-#: internet/groovesharkservice.cpp:1229
+#: internet/groovesharkservice.cpp:1292
 #, qt-format
 msgid "Rename \"%1\" playlist"
 msgstr "Preimenuj seznam predvajanja \"%1\""
 
-#: internet/groovesharkservice.cpp:484
+#: internet/groovesharkservice.cpp:508
 msgid "Rename Grooveshark playlist"
 msgstr "Preimenuj seznam predvajanja Grooveshark"
 
@@ -3558,11 +3566,11 @@ msgstr "Omeji na znake ASCII"
 msgid "Results"
 msgstr "Rezultati"
 
-#: internet/groovesharkservice.cpp:675
+#: internet/groovesharkservice.cpp:712
 msgid "Retrieving Grooveshark favorites songs"
 msgstr "Pridobivanje priljubljenih skladb Grooveshark"
 
-#: internet/groovesharkservice.cpp:600
+#: internet/groovesharkservice.cpp:637
 msgid "Retrieving Grooveshark playlists"
 msgstr "Pridobivanje seznamov predvajanja Grooveshark"
 
@@ -3641,11 +3649,11 @@ msgid "Search"
 msgstr "Išči"
 
 #: internet/groovesharksearchplaylisttype.cpp:32
-#: internet/groovesharkservice.cpp:923
+#: internet/groovesharkservice.cpp:960
 msgid "Search Grooveshark"
 msgstr "Išči po Grooveshark-u"
 
-#: internet/groovesharkservice.cpp:494 internet/groovesharkservice.cpp:515
+#: internet/groovesharkservice.cpp:525 internet/groovesharkservice.cpp:552
 msgid "Search Grooveshark (opens a new tab)"
 msgstr "Išči po Grooveshark-u (odpre nov zavihek)"
 
@@ -3706,7 +3714,7 @@ msgstr "Možnosti iskanja"
 msgid "Search terms"
 msgstr "Iskalni pojmi"
 
-#: internet/groovesharkservice.cpp:262
+#: internet/groovesharkservice.cpp:264
 msgid "Searching on Grooveshark"
 msgstr "Iskanje na Grooveshark"
 
@@ -4070,7 +4078,7 @@ msgstr "Začenjanje %1"
 msgid "Starting..."
 msgstr "Začenjanje ..."
 
-#: internet/groovesharkservice.cpp:543
+#: internet/groovesharkservice.cpp:580
 msgid "Stations"
 msgstr "Postaje"
 
@@ -4107,7 +4115,7 @@ msgstr "Pretok"
 msgid "Streaming membership"
 msgstr "Članstvo pretakanja"
 
-#: internet/groovesharkservice.cpp:566
+#: internet/groovesharkservice.cpp:603
 msgid "Subscribed playlists"
 msgstr "Naročeni seznami predvajanja"
 
@@ -4340,7 +4348,7 @@ msgstr "Ta vrsta naprave ni podprta: %1"
 msgid "Timeout"
 msgstr "Zakasnitev"
 
-#: devices/ilister.cpp:98
+#: devices/ilister.cpp:120
 msgid "Timezone"
 msgstr "Časovni pas"
 
@@ -4350,7 +4358,7 @@ msgstr "Časovni pas"
 msgid "Title"
 msgstr "Naslov"
 
-#: internet/groovesharkservice.cpp:946
+#: internet/groovesharkservice.cpp:983
 msgid ""
 "To start Grooveshark radio, you should first listen to a few other "
 "Grooveshark songs"
@@ -4472,7 +4480,7 @@ msgstr "Odstrani ovitek"
 msgid "Unsubscribe"
 msgstr "Ukini naročnino"
 
-#: internet/groovesharkservice.cpp:1090
+#: internet/groovesharkservice.cpp:1153
 msgid "Update Grooveshark playlist"
 msgstr "Posodobi seznam predvajanja Grooveshark"
 
@@ -4574,7 +4582,7 @@ msgstr "Uporabi izenačevanje glasnosti"
 msgid "Used"
 msgstr "Uporabljeno"
 
-#: internet/groovesharkservice.cpp:394
+#: internet/groovesharkservice.cpp:396
 #, qt-format
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr "Uporabnik %1 nima računa Grooveshark Anywhere"
@@ -4678,7 +4686,7 @@ msgid ""
 "If there are no matches then it will use the largest image in the directory."
 msgstr "Med iskanjem ovitkov albumov bo Clementine najprej poiskal datoteke s slikami, ki vsebujejo te besede. \nČe ne bo ujemanj, bo uporabil največjo sliko v mapi"
 
-#: devices/ilister.cpp:99
+#: devices/ilister.cpp:121
 msgid "WiFi MAC Address"
 msgstr "WiFi naslov MAC"
 
