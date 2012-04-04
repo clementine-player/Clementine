@@ -755,6 +755,8 @@ void GroovesharkService::PopularSongsMonthRetrieved(QNetworkReply* reply) {
   reply->deleteLater();
   QVariantMap result = ExtractResult(reply);
   SongList songs = ExtractSongs(result);
+  if (!popular_month_)
+    return;
   foreach (const Song& song, songs) {
     QStandardItem* child = new QStandardItem(song.PrettyTitleWithArtist());
     child->setData(Type_Track, InternetModel::Role_Type);
@@ -783,6 +785,8 @@ void GroovesharkService::PopularSongsTodayRetrieved(QNetworkReply* reply) {
   reply->deleteLater();
   QVariantMap result = ExtractResult(reply);
   SongList songs = ExtractSongs(result);
+  if (!popular_today_)
+    return;
   foreach (const Song& song, songs) {
     QStandardItem* child = new QStandardItem(song.PrettyTitleWithArtist());
     child->setData(Type_Track, InternetModel::Role_Type);
@@ -840,6 +844,8 @@ void GroovesharkService::AutoplayTagsRetrieved(QNetworkReply* reply) {
   reply->deleteLater();
   QVariantMap result = ExtractResult(reply);
   QVariantMap::const_iterator it;
+  if (!stations_)
+    return;
   for (it = result.constBegin(); it != result.constEnd(); ++it) {
     int id = it.key().toInt();
     QString name = it.value().toString().toLower();
