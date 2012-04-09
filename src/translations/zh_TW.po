@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-03-27 21:40+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2012-04-04 12:56+0000\n"
+"Last-Translator: Cheng-Hong Wu <stu2731652@gmail.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: zh_TW\n"
@@ -456,11 +456,11 @@ msgstr "新增歌曲年份標籤"
 msgid "Add stream..."
 msgstr "加入網路串流..."
 
-#: internet/groovesharkservice.cpp:1046
+#: internet/groovesharkservice.cpp:1052
 msgid "Add to Grooveshark favorites"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:1052
+#: internet/groovesharkservice.cpp:1058
 msgid "Add to Grooveshark playlists"
 msgstr ""
 
@@ -506,7 +506,7 @@ msgstr "今天加入"
 msgid "Added within three months"
 msgstr "在三個月內加入"
 
-#: internet/groovesharkservice.cpp:1326
+#: internet/groovesharkservice.cpp:1332
 msgid "Adding song to favorites"
 msgstr "將歌曲新增至最愛"
 
@@ -670,7 +670,7 @@ msgstr "使用壓縮，以防止截波失真"
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "您確定要刪除現有的\"%1\"嗎?"
 
-#: internet/groovesharkservice.cpp:1247
+#: internet/groovesharkservice.cpp:1253
 msgid "Are you sure you want to delete this playlist?"
 msgstr "您確定要刪除這個播放清單？"
 
@@ -1134,7 +1134,7 @@ msgstr "轉換所有音樂"
 msgid "Convert any music that the device can't play"
 msgstr "轉換任何裝置無法播放的音樂"
 
-#: internet/groovesharkservice.cpp:1125
+#: internet/groovesharkservice.cpp:1131
 msgid "Copy to clipboard"
 msgstr ""
 
@@ -1218,7 +1218,7 @@ msgstr "從%1取得封面圖片"
 msgid "Covers from %1"
 msgstr "來自%1的封面"
 
-#: internet/groovesharkservice.cpp:502 internet/groovesharkservice.cpp:1198
+#: internet/groovesharkservice.cpp:502 internet/groovesharkservice.cpp:1204
 msgid "Create a new Grooveshark playlist"
 msgstr ""
 
@@ -1373,7 +1373,7 @@ msgstr "預設"
 msgid "Delay between visualizations"
 msgstr "在兩個視覺化效果間延遲切換"
 
-#: internet/groovesharkservice.cpp:505 internet/groovesharkservice.cpp:1246
+#: internet/groovesharkservice.cpp:505 internet/groovesharkservice.cpp:1252
 msgid "Delete Grooveshark playlist"
 msgstr ""
 
@@ -1586,7 +1586,7 @@ msgstr "Icecast目錄下載中"
 
 #: internet/jamendoservice.cpp:183
 msgid "Downloading Jamendo catalogue"
-msgstr ""
+msgstr "下載Jamendo目錄中"
 
 #: internet/magnatuneservice.cpp:157
 msgid "Downloading Magnatune catalogue"
@@ -1594,7 +1594,7 @@ msgstr "下載 Magnatune目錄"
 
 #: internet/spotifyblobdownloader.cpp:44
 msgid "Downloading Spotify plugin"
-msgstr ""
+msgstr "下載Spotify外掛中"
 
 #: musicbrainz/tagfetcher.cpp:102
 msgid "Downloading metadata"
@@ -1606,15 +1606,15 @@ msgstr "拖曳以重新定位"
 
 #: devices/wmdmlister.cpp:365
 msgid "Drive letter"
-msgstr ""
+msgstr "驅動函件"
 
 #: ../bin/src/ui_dynamicplaylistcontrols.h:109
 msgid "Dynamic mode is on"
-msgstr ""
+msgstr "動態模式開啟"
 
 #: internet/jamendoservice.cpp:112 library/library.cpp:91
 msgid "Dynamic random mix"
-msgstr ""
+msgstr "動態隨機混合"
 
 #: library/libraryview.cpp:244
 msgid "Edit smart playlist..."
@@ -1631,7 +1631,7 @@ msgstr "編輯標籤 ..."
 
 #: ../bin/src/ui_edittagdialog.h:663
 msgid "Edit tags"
-msgstr ""
+msgstr "編輯標籤"
 
 #: ../bin/src/ui_edittagdialog.h:632
 msgid "Edit track information"
@@ -1644,7 +1644,7 @@ msgstr "編輯歌曲資訊..."
 
 #: library/libraryview.cpp:260
 msgid "Edit tracks information..."
-msgstr ""
+msgstr "編輯音軌資訊..."
 
 #: internet/savedradio.cpp:101
 msgid "Edit..."
@@ -1660,7 +1660,7 @@ msgstr "啟用等化器"
 
 #: ../bin/src/ui_wiimotesettingspage.h:187
 msgid "Enable shortcuts only when Clementine is focused"
-msgstr ""
+msgstr "只在Clemetine被聚焦時才允許快捷鍵"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:171
 msgid ""
@@ -1671,19 +1671,19 @@ msgstr ""
 
 #: core/globalshortcuts.cpp:62
 msgid "Enable/disable Last.fm scrobbling"
-msgstr ""
+msgstr "允許/不允許Last.fm歌曲記錄"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:235
 msgid "Encoding complexity"
-msgstr ""
+msgstr "複雜性編碼"
 
 #: ../bin/src/ui_transcoderoptionsmp3.h:197
 msgid "Encoding engine quality"
-msgstr ""
+msgstr "編碼引擎品質"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:224
 msgid "Encoding mode"
-msgstr ""
+msgstr "編碼模式"
 
 #: ../bin/src/ui_addpodcastbyurl.h:76
 msgid "Enter a URL"
@@ -1691,7 +1691,7 @@ msgstr ""
 
 #: ../bin/src/ui_coverfromurldialog.h:103
 msgid "Enter a URL to download a cover from the Internet:"
-msgstr ""
+msgstr "輸入URL以從網路中取得封面"
 
 #: playlist/playlisttabbar.cpp:131
 msgid "Enter a new name for this playlist"
@@ -1735,27 +1735,27 @@ msgstr ""
 msgid "Equivalent to --log-levels *:3"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:982
+#: internet/groovesharkservice.cpp:988
 #: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:465
 #: ui/mainwindow.cpp:1752 ui/mainwindow.cpp:1873
 msgid "Error"
-msgstr ""
+msgstr "錯誤"
 
 #: devices/mtploader.cpp:56
 msgid "Error connecting MTP device"
-msgstr ""
+msgstr "連接MTP裝置錯誤"
 
 #: ui/organiseerrordialog.cpp:55
 msgid "Error copying songs"
-msgstr ""
+msgstr "複製歌曲錯誤"
 
 #: ui/organiseerrordialog.cpp:60
 msgid "Error deleting songs"
-msgstr ""
+msgstr "刪除歌曲錯誤"
 
 #: internet/spotifyblobdownloader.cpp:215
 msgid "Error downloading Spotify plugin"
-msgstr ""
+msgstr "下載"
 
 #: playlist/songloaderinserter.cpp:71 playlist/songloaderinserter.cpp:133
 #, qt-format
@@ -2074,7 +2074,7 @@ msgstr "風格"
 msgid "Get a URL to share this Grooveshark playlist"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:518 internet/groovesharkservice.cpp:1063
+#: internet/groovesharkservice.cpp:518 internet/groovesharkservice.cpp:1069
 msgid "Get a URL to share this Grooveshark song"
 msgstr ""
 
@@ -2132,7 +2132,7 @@ msgstr ""
 msgid "Grooveshark login error"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:1115
+#: internet/groovesharkservice.cpp:1121
 msgid "Grooveshark playlist's URL"
 msgstr ""
 
@@ -2140,7 +2140,7 @@ msgstr ""
 msgid "Grooveshark radio"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:1093
+#: internet/groovesharkservice.cpp:1099
 msgid "Grooveshark song's URL"
 msgstr ""
 
@@ -2838,7 +2838,7 @@ msgstr "我的廣播站"
 msgid "My Recommendations"
 msgstr "我推薦的電台"
 
-#: internet/groovesharkservice.cpp:1199 internet/groovesharkservice.cpp:1293
+#: internet/groovesharkservice.cpp:1205 internet/groovesharkservice.cpp:1299
 #: ui/equalizer.cpp:172 ../bin/src/ui_deviceproperties.h:369
 #: ../bin/src/ui_magnatunedownloaddialog.h:135
 #: ../bin/src/ui_wizardfinishpage.h:84
@@ -3480,11 +3480,11 @@ msgstr "從撥放清單移除"
 msgid "Remove playlist"
 msgstr "移除撥放清單"
 
-#: internet/groovesharkservice.cpp:1388
+#: internet/groovesharkservice.cpp:1394
 msgid "Removing song from favorites"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:1292
+#: internet/groovesharkservice.cpp:1298
 #, qt-format
 msgid "Rename \"%1\" playlist"
 msgstr ""
@@ -3650,7 +3650,7 @@ msgid "Search"
 msgstr "搜尋"
 
 #: internet/groovesharksearchplaylisttype.cpp:32
-#: internet/groovesharkservice.cpp:960
+#: internet/groovesharkservice.cpp:966
 msgid "Search Grooveshark"
 msgstr ""
 
@@ -4359,7 +4359,7 @@ msgstr ""
 msgid "Title"
 msgstr "標題"
 
-#: internet/groovesharkservice.cpp:983
+#: internet/groovesharkservice.cpp:989
 msgid ""
 "To start Grooveshark radio, you should first listen to a few other "
 "Grooveshark songs"
@@ -4481,7 +4481,7 @@ msgstr "未設置覆蓋"
 msgid "Unsubscribe"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:1153
+#: internet/groovesharkservice.cpp:1159
 msgid "Update Grooveshark playlist"
 msgstr ""
 

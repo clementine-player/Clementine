@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-03-31 10:50+0000\n"
+"PO-Revision-Date: 2012-04-04 20:24+0000\n"
 "Last-Translator: Peter Jespersen <flywheeldk@gmail.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -368,7 +368,7 @@ msgstr "Tilføj mappe..."
 
 #: ui/mainwindow.cpp:1523
 msgid "Add file"
-msgstr ""
+msgstr "Tilføj fil"
 
 #: ../bin/src/ui_mainwindow.h:678
 msgid "Add file..."
@@ -458,13 +458,13 @@ msgstr "Tilføj sangår-mærke"
 msgid "Add stream..."
 msgstr "Genopfrisk streams"
 
-#: internet/groovesharkservice.cpp:1046
-msgid "Add to Grooveshark favorites"
-msgstr ""
-
 #: internet/groovesharkservice.cpp:1052
+msgid "Add to Grooveshark favorites"
+msgstr "Føj til Grooveshark favoritter"
+
+#: internet/groovesharkservice.cpp:1058
 msgid "Add to Grooveshark playlists"
-msgstr ""
+msgstr "Føj til Grooveshark afspilningsliste"
 
 #: ui/mainwindow.cpp:1348
 msgid "Add to another playlist"
@@ -508,7 +508,7 @@ msgstr "Tilføjet i dag"
 msgid "Added within three months"
 msgstr "Tilføjet indenfor de seneste tre måneder"
 
-#: internet/groovesharkservice.cpp:1326
+#: internet/groovesharkservice.cpp:1332
 msgid "Adding song to favorites"
 msgstr ""
 
@@ -672,7 +672,7 @@ msgstr "Påfør kompression for at undgå klipping"
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "Vil du slettet \"%1\"-forudindstilling?"
 
-#: internet/groovesharkservice.cpp:1247
+#: internet/groovesharkservice.cpp:1253
 msgid "Are you sure you want to delete this playlist?"
 msgstr ""
 
@@ -754,7 +754,7 @@ msgstr "Gns. billedstørrelse"
 
 #: podcasts/addpodcastdialog.cpp:72
 msgid "BBC Podcasts"
-msgstr ""
+msgstr "BBC Podcasts"
 
 #: playlist/playlist.cpp:1131 ui/organisedialog.cpp:62
 #: ../bin/src/ui_edittagdialog.h:638
@@ -1136,7 +1136,7 @@ msgstr "Konverter al musik"
 msgid "Convert any music that the device can't play"
 msgstr "Konverter musik som enheden ikke kan afspille"
 
-#: internet/groovesharkservice.cpp:1125
+#: internet/groovesharkservice.cpp:1131
 msgid "Copy to clipboard"
 msgstr ""
 
@@ -1220,9 +1220,9 @@ msgstr "Omslag angivet fra %1"
 msgid "Covers from %1"
 msgstr "Omslag fra %1"
 
-#: internet/groovesharkservice.cpp:502 internet/groovesharkservice.cpp:1198
+#: internet/groovesharkservice.cpp:502 internet/groovesharkservice.cpp:1204
 msgid "Create a new Grooveshark playlist"
-msgstr ""
+msgstr "Opret ny Grooveshark afspilningsliste"
 
 #: ../bin/src/ui_playbacksettingspage.h:262
 msgid "Cross-fade when changing tracks automatically"
@@ -1375,13 +1375,13 @@ msgstr "Standarder"
 msgid "Delay between visualizations"
 msgstr "Pause mellem visualiseringer"
 
-#: internet/groovesharkservice.cpp:505 internet/groovesharkservice.cpp:1246
+#: internet/groovesharkservice.cpp:505 internet/groovesharkservice.cpp:1252
 msgid "Delete Grooveshark playlist"
-msgstr ""
+msgstr "Slet Grooveshark afspilningsliste"
 
 #: podcasts/podcastservice.cpp:274
 msgid "Delete downloaded data"
-msgstr ""
+msgstr "Sletter hentet data"
 
 #: devices/deviceview.cpp:388 library/libraryview.cpp:471
 #: ui/mainwindow.cpp:1800 widgets/fileview.cpp:186
@@ -1737,7 +1737,7 @@ msgstr "Svarende til --log-levels *:1"
 msgid "Equivalent to --log-levels *:3"
 msgstr "Svarende til --log-levels *:3"
 
-#: internet/groovesharkservice.cpp:982
+#: internet/groovesharkservice.cpp:988
 #: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:465
 #: ui/mainwindow.cpp:1752 ui/mainwindow.cpp:1873
 msgid "Error"
@@ -1784,31 +1784,31 @@ msgstr "Nogensinde afspillet"
 
 #: ../bin/src/ui_podcastsettingspage.h:232
 msgid "Every 10 minutes"
-msgstr ""
+msgstr "Hver 10 minut"
 
 #: ../bin/src/ui_podcastsettingspage.h:238
 msgid "Every 12 hours"
-msgstr ""
+msgstr "Hver 12 time"
 
 #: ../bin/src/ui_podcastsettingspage.h:236
 msgid "Every 2 hours"
-msgstr ""
+msgstr "Hver 2 time"
 
 #: ../bin/src/ui_podcastsettingspage.h:233
 msgid "Every 20 minutes"
-msgstr ""
+msgstr "Hver 20 minut"
 
 #: ../bin/src/ui_podcastsettingspage.h:234
 msgid "Every 30 minutes"
-msgstr ""
+msgstr "Hver 30 minut"
 
 #: ../bin/src/ui_podcastsettingspage.h:237
 msgid "Every 6 hours"
-msgstr ""
+msgstr "Hver 6 time"
 
 #: ../bin/src/ui_podcastsettingspage.h:235
 msgid "Every hour"
-msgstr ""
+msgstr "Hver time"
 
 #: ../bin/src/ui_playbacksettingspage.h:263
 msgid "Except between tracks on the same album or in the same CUE sheet"
@@ -1821,7 +1821,7 @@ msgstr ""
 #: widgets/loginstatewidget.cpp:142
 #, qt-format
 msgid "Expires on %1"
-msgstr ""
+msgstr "Udløber den %1"
 
 #: ../bin/src/ui_mainwindow.h:675
 msgid "F1"
@@ -1890,7 +1890,7 @@ msgstr "Hurtig"
 
 #: internet/groovesharkservice.cpp:594
 msgid "Favorites"
-msgstr ""
+msgstr "Favoritter"
 
 #: library/library.cpp:75
 msgid "Favourite tracks"
@@ -2060,7 +2060,7 @@ msgstr "GStreamer lydmotor"
 
 #: ui/settingsdialog.cpp:117
 msgid "General"
-msgstr ""
+msgstr "Generelt"
 
 #: ../bin/src/ui_notificationssettingspage.h:409
 msgid "General settings"
@@ -2076,7 +2076,7 @@ msgstr "Genre"
 msgid "Get a URL to share this Grooveshark playlist"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:518 internet/groovesharkservice.cpp:1063
+#: internet/groovesharkservice.cpp:518 internet/groovesharkservice.cpp:1069
 msgid "Get a URL to share this Grooveshark song"
 msgstr ""
 
@@ -2134,7 +2134,7 @@ msgstr "Grooveshark"
 msgid "Grooveshark login error"
 msgstr "Kunne ikke logge ind på Grooveshark"
 
-#: internet/groovesharkservice.cpp:1115
+#: internet/groovesharkservice.cpp:1121
 msgid "Grooveshark playlist's URL"
 msgstr ""
 
@@ -2142,7 +2142,7 @@ msgstr ""
 msgid "Grooveshark radio"
 msgstr "Grooveshark radio"
 
-#: internet/groovesharkservice.cpp:1093
+#: internet/groovesharkservice.cpp:1099
 msgid "Grooveshark song's URL"
 msgstr ""
 
@@ -2840,7 +2840,7 @@ msgstr "Min radiokanal"
 msgid "My Recommendations"
 msgstr "Mine anbefalinger"
 
-#: internet/groovesharkservice.cpp:1199 internet/groovesharkservice.cpp:1293
+#: internet/groovesharkservice.cpp:1205 internet/groovesharkservice.cpp:1299
 #: ui/equalizer.cpp:172 ../bin/src/ui_deviceproperties.h:369
 #: ../bin/src/ui_magnatunedownloaddialog.h:135
 #: ../bin/src/ui_wizardfinishpage.h:84
@@ -2974,7 +2974,7 @@ msgstr "Ikke installeret"
 
 #: globalsearch/globalsearchsettingspage.cpp:123
 msgid "Not logged in"
-msgstr ""
+msgstr "Ikke logget ind"
 
 #: devices/deviceview.cpp:111
 msgid "Not mounted - double click to mount"
@@ -3031,7 +3031,7 @@ msgstr "Åbn enhed"
 
 #: ../bin/src/ui_mainwindow.h:682
 msgid "Open file..."
-msgstr ""
+msgstr "Åben fil..."
 
 #: devices/deviceview.cpp:215 internet/internetservice.cpp:75
 #: library/libraryview.cpp:234 widgets/fileviewlist.cpp:36
@@ -3224,7 +3224,7 @@ msgstr "Status for udvidelsesmodulen"
 
 #: podcasts/podcastservice.cpp:110 ../bin/src/ui_podcastsettingspage.h:226
 msgid "Podcasts"
-msgstr ""
+msgstr "Podcasts"
 
 #: ui/equalizer.cpp:119
 msgid "Pop"
@@ -3482,11 +3482,11 @@ msgstr "Fjern fra spilleliste"
 msgid "Remove playlist"
 msgstr "Fjern spilleliste"
 
-#: internet/groovesharkservice.cpp:1388
+#: internet/groovesharkservice.cpp:1394
 msgid "Removing song from favorites"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:1292
+#: internet/groovesharkservice.cpp:1298
 #, qt-format
 msgid "Rename \"%1\" playlist"
 msgstr ""
@@ -3567,7 +3567,7 @@ msgstr "Begræns til ASCII-tegn"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:175
 msgid "Results"
-msgstr ""
+msgstr "Resultater"
 
 #: internet/groovesharkservice.cpp:712
 msgid "Retrieving Grooveshark favorites songs"
@@ -3652,7 +3652,7 @@ msgid "Search"
 msgstr "Søg"
 
 #: internet/groovesharksearchplaylisttype.cpp:32
-#: internet/groovesharkservice.cpp:960
+#: internet/groovesharkservice.cpp:966
 msgid "Search Grooveshark"
 msgstr "Søg på Grooveshark"
 
@@ -3884,7 +3884,7 @@ msgstr "Vis under Diverse kunstnere"
 
 #: ui/mainwindow.cpp:443
 msgid "Show only duplicates"
-msgstr ""
+msgstr "Vis kun dubletter"
 
 #: ui/mainwindow.cpp:444
 msgid "Show only untagged"
@@ -3932,7 +3932,7 @@ msgstr "Bland spor i dette album"
 
 #: ../bin/src/ui_podcastsettingspage.h:252
 msgid "Sign in"
-msgstr ""
+msgstr "Log ind"
 
 #: ../bin/src/ui_remotesettingspage.h:202 ../bin/src/ui_loginstatewidget.h:173
 msgid "Sign out"
@@ -3940,7 +3940,7 @@ msgstr "Log ud"
 
 #: ../bin/src/ui_loginstatewidget.h:175
 msgid "Signing in..."
-msgstr ""
+msgstr "Logger på..."
 
 #: songinfo/echonestsimilarartists.cpp:57
 msgid "Similar artists"
@@ -4028,7 +4028,7 @@ msgstr ""
 
 #: ../bin/src/ui_globalsearchsettingspage.h:169
 msgid "Sources"
-msgstr ""
+msgstr "Kilder"
 
 #: ../bin/src/ui_transcodersettingspage.h:162
 msgid "Speex"
@@ -4124,7 +4124,7 @@ msgstr ""
 
 #: ../bin/src/ui_podcastinfowidget.h:196
 msgid "Subscribers"
-msgstr ""
+msgstr "Abonnenter"
 
 #: transcoder/transcoder.cpp:198
 #, qt-format
@@ -4156,15 +4156,15 @@ msgstr "Understøttede formater"
 
 #: globalsearch/globalsearchtooltip.cpp:53
 msgid "Switch provider"
-msgstr ""
+msgstr "Skift udbyder"
 
 #: internet/spotifyservice.cpp:512
 msgid "Syncing Spotify inbox"
-msgstr ""
+msgstr "Synkroniserer Spotify indbox"
 
 #: internet/spotifyservice.cpp:507
 msgid "Syncing Spotify playlist"
-msgstr ""
+msgstr "Synkroniser Spotify afspilningsliste"
 
 #: internet/spotifyservice.cpp:516
 msgid "Syncing Spotify starred tracks"
@@ -4172,7 +4172,7 @@ msgstr ""
 
 #: widgets/fancytabwidget.cpp:654
 msgid "Tabs on top"
-msgstr ""
+msgstr "Faneblade i toppen"
 
 #: ../bin/src/ui_lastfmstationdialog.h:97
 msgid "Tag"
@@ -4196,7 +4196,7 @@ msgstr "Techno"
 
 #: ../bin/src/ui_notificationssettingspage.h:432
 msgid "Text options"
-msgstr ""
+msgstr "Tekst indstillinger"
 
 #: ui/about.cpp:69
 msgid "Thanks to"
@@ -4223,7 +4223,7 @@ msgstr ""
 
 #: smartplaylists/searchtermwidget.cpp:322
 msgid "The second value must be greater than the first one!"
-msgstr ""
+msgstr "Værdi nummer to skal være større end værdi nummer et!"
 
 #: ui/coverfromurldialog.cpp:71
 msgid "The site you requested does not exist!"
@@ -4250,7 +4250,7 @@ msgstr ""
 
 #: internet/magnatunedownloaddialog.cpp:158
 msgid "There was a problem fetching the metadata from Magnatune"
-msgstr ""
+msgstr "Kunne ikke hente metadata fra Magnatune"
 
 #: podcasts/itunessearchpage.cpp:76
 msgid "There was a problem parsing the response from the iTunes Store"
@@ -4260,24 +4260,24 @@ msgstr ""
 msgid ""
 "There were problems copying some songs.  The following files could not be "
 "copied:"
-msgstr ""
+msgstr "Der var et problem ved at kopiere nogle sange.  Følgende filer kunne ikke kopieres:"
 
 #: ui/organiseerrordialog.cpp:61
 msgid ""
 "There were problems deleting some songs.  The following files could not be "
 "deleted:"
-msgstr ""
+msgstr "Der var et problem ved at kopiere nogle sange.  Følgende filer kunne ikke kopieres:"
 
 #: library/libraryview.cpp:472 ui/mainwindow.cpp:1801 widgets/fileview.cpp:187
 msgid ""
 "These files will be deleted from disk, are you sure you want to continue?"
-msgstr ""
+msgstr "Disse filer vil blive slettet fra disken, er du sikker på at du vil fortsætte?"
 
 #: devices/deviceview.cpp:389
 msgid ""
 "These files will be deleted from the device, are you sure you want to "
 "continue?"
-msgstr ""
+msgstr "Disse filer vil blive slettet fra disken, er du sikker på at du vil fortsætte?"
 
 #: ../bin/src/ui_librarysettingspage.h:158
 msgid "These folders will be scanned for music to make up your library"
@@ -4297,7 +4297,7 @@ msgstr "Tredje niveau"
 msgid ""
 "This action will create a database which could be as big as 150 MB.\n"
 "Do you want to continue anyway?"
-msgstr ""
+msgstr "Denne handling vil oprette en database der kan blive optil 150 MB.\nVil du stadig fortsætte?"
 
 #: internet/magnatunedownloaddialog.cpp:175
 msgid "This album is not available in the requested format"
@@ -4349,7 +4349,7 @@ msgstr ""
 
 #: ../bin/src/ui_songinfosettingspage.h:185
 msgid "Timeout"
-msgstr ""
+msgstr "Tidsudløb"
 
 #: devices/ilister.cpp:120
 msgid "Timezone"
@@ -4361,7 +4361,7 @@ msgstr "Tidszone"
 msgid "Title"
 msgstr "Titel"
 
-#: internet/groovesharkservice.cpp:983
+#: internet/groovesharkservice.cpp:989
 msgid ""
 "To start Grooveshark radio, you should first listen to a few other "
 "Grooveshark songs"
@@ -4483,7 +4483,7 @@ msgstr "Fravælg omslag"
 msgid "Unsubscribe"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:1153
+#: internet/groovesharkservice.cpp:1159
 msgid "Update Grooveshark playlist"
 msgstr ""
 
@@ -4609,7 +4609,7 @@ msgstr ""
 #: ../bin/src/ui_magnatunedownloaddialog.h:142
 #: ../bin/src/ui_magnatunesettingspage.h:173
 msgid "VBR MP3"
-msgstr ""
+msgstr "VBR MP3"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:232
 msgid "Variable bit rate"
@@ -4741,7 +4741,7 @@ msgstr "Windows Media 40k"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:180
 msgid "Windows Media 64k"
-msgstr ""
+msgstr "Windows Media 64k"
 
 #: core/song.cpp:313
 msgid "Windows Media audio"
@@ -4792,7 +4792,7 @@ msgstr ""
 
 #: widgets/loginstatewidget.cpp:73
 msgid "You are signed in."
-msgstr ""
+msgstr "Du er logget ind."
 
 #: ../bin/src/ui_groupbydialog.h:123
 msgid "You can change the way the songs in the library are organised."
@@ -4870,7 +4870,7 @@ msgstr "Da du ikke er en Last.fm-abonnent, kan du ikke høre Last.fm-radiokanale
 #: remote/remotesettingspage.cpp:126
 #, qt-format
 msgid "You're logged in as <b>%1</b>"
-msgstr ""
+msgstr "Du er logget ind som <b>%1</b>"
 
 #: remote/remotesettingspage.cpp:113
 msgid "Your Google credentials were incorrect"
@@ -4984,7 +4984,7 @@ msgstr ""
 
 #: ../bin/src/ui_podcastsettingspage.h:249
 msgid "gpodder.net"
-msgstr ""
+msgstr "gpodder.net"
 
 #: podcasts/gpoddertoptagspage.cpp:34
 msgid "gpodder.net directory"
@@ -4992,7 +4992,7 @@ msgstr ""
 
 #: smartplaylists/searchterm.cpp:216
 msgid "greater than"
-msgstr ""
+msgstr "større end"
 
 #: smartplaylists/searchterm.cpp:204
 msgid "in the last"
@@ -5006,7 +5006,7 @@ msgstr ""
 
 #: smartplaylists/searchterm.cpp:217
 msgid "less than"
-msgstr ""
+msgstr "mindre end"
 
 #: smartplaylists/searchterm.cpp:290
 msgid "longest first"
@@ -5067,7 +5067,7 @@ msgstr ""
 
 #: playlist/playlistdelegates.cpp:180
 msgid "stop"
-msgstr ""
+msgstr "stop"
 
 #: globalsearch/globalsearchitemdelegate.cpp:150 widgets/osd.cpp:116
 #, qt-format
