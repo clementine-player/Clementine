@@ -138,10 +138,6 @@ void LoadTranslation(const QString& prefix, const QString& path,
   QTextCodec::setCodecForTr(QTextCodec::codecForLocale());
 }
 
-#ifdef HAVE_REMOTE
-#include <xrme/connection.h>
-#endif
-
 void IncreaseFDLimit() {
 #ifdef Q_OS_DARWIN
   // Bump the soft limit for the number of file descriptors from the default of 256 to
@@ -261,10 +257,6 @@ int main(int argc, char *argv[]) {
   qRegisterMetaType<GstBuffer*>("GstBuffer*");
   qRegisterMetaType<GstElement*>("GstElement*");
   qRegisterMetaType<GstEnginePipeline*>("GstEnginePipeline*");
-
-#ifdef HAVE_REMOTE
-  qRegisterMetaType<xrme::SIPInfo>("xrme::SIPInfo");
-#endif
 
 #ifdef HAVE_LIBLASTFM
   lastfm::ws::ApiKey = LastFMService::kApiKey;

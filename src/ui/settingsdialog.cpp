@@ -55,10 +55,6 @@
 # include "wiimotedev/wiimotesettingspage.h"
 #endif
 
-#ifdef HAVE_REMOTE
-# include "remote/remotesettingspage.h"
-#endif
-
 #ifdef HAVE_SPOTIFY
 # include "internet/spotifysettingspage.h"
 #endif
@@ -121,10 +117,6 @@ SettingsDialog::SettingsDialog(Application* app, BackgroundStreams* streams, QWi
   AddPage(Page_Library, new LibrarySettingsPage(this), general);
   AddPage(Page_Proxy, new NetworkProxySettingsPage(this), general);
   AddPage(Page_Transcoding, new TranscoderSettingsPage(this), general);
-
-#ifdef HAVE_REMOTE
-  AddPage(Page_Remote, new RemoteSettingsPage(this), general);
-#endif
 
 #ifdef HAVE_WIIMOTEDEV
   AddPage(Page_Wiimotedev, new WiimoteSettingsPage(this), general);

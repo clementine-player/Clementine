@@ -632,8 +632,6 @@ set(UI
   podcasts/podcastinfowidget.ui
   podcasts/podcastsettingspage.ui
 
-  remote/remotesettingspage.ui
-
   smartplaylists/querysearchpage.ui
   smartplaylists/querysortpage.ui
   smartplaylists/searchpreview.ui
@@ -980,19 +978,6 @@ optional_source(HAVE_SAC
     devices/wmdmloader.h
 )
 
-optional_source(HAVE_REMOTE
-  SOURCES
-    remote/portforwarder.cpp
-    remote/remote.cpp
-    remote/remotesettingspage.cpp
-    remote/streampipeline.cpp
-  HEADERS
-    remote/portforwarder.h
-    remote/remote.h
-    remote/remotesettingspage.h
-    remote/streampipeline.h
-)
-
 # Hack to add Clementine to the Unity system tray whitelist
 optional_source(LINUX
   SOURCES core/ubuntuunityhack.cpp
@@ -1094,13 +1079,6 @@ endif(HAVE_LIBMTP)
 if(HAVE_LIBINDICATE)
   target_link_libraries(clementine_lib ${INDICATEQT_LIBRARIES})
 endif(HAVE_LIBINDICATE)
-
-if(HAVE_REMOTE)
-  target_link_libraries(clementine_lib ${GLOOX_LIBRARIES})
-  link_directories(${GLOOX_LIBRARY_DIRS})
-  target_link_libraries(clementine_lib xrme)
-  target_link_libraries(clementine_lib portfwd)
-endif(HAVE_REMOTE)
 
 if(HAVE_BREAKPAD)
   if (LINUX)

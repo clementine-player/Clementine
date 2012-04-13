@@ -108,10 +108,6 @@
 # include "visualisations/visualisationcontainer.h"
 #endif
 
-#ifdef HAVE_REMOTE
-# include "remote/remote.h"
-#endif
-
 #include <QCloseEvent>
 #include <QDir>
 #include <QFileDialog>
@@ -593,15 +589,6 @@ MainWindow::MainWindow(Application* app,
 
   connect(global_shortcuts_, SIGNAL(RateCurrentSong(int)), app_->playlist_manager(), SLOT(RateCurrentSong(int)));
 
-  // XMPP Remote control
-#ifdef HAVE_REMOTE
-  qLog(Debug) << "Creating remote control";
-  remote_ = new Remote(app_->player(), this);
-  connect(remote_, SIGNAL(Error(QString)), SLOT(ShowErrorDialog(QString)));
-  connect(art_loader, SIGNAL(ArtLoaded(Song,QString,QImage)),
-          remote_,      SLOT(ArtLoaded(Song,QString,QImage)));
-#endif
-
   // Fancy tabs
   connect(ui_->tabs, SIGNAL(ModeChanged(FancyTabWidget::Mode)), SLOT(SaveGeometry()));
   connect(ui_->tabs, SIGNAL(CurrentChanged(int)), SLOT(SaveGeometry()));
@@ -771,9 +758,6 @@ void MainWindow::ReloadAllSettings() {
   app_->internet_model()->ReloadSettings();
 #ifdef HAVE_WIIMOTEDEV
   wiimotedev_shortcuts_->ReloadSettings();
-#endif
-#ifdef HAVE_REMOTE
-  remote_->ReloadSettings();
 #endif
 }
 
