@@ -303,6 +303,12 @@ int main(int argc, char *argv[]) {
   logging::SetLevels(options.log_levels());
   g_log_set_default_handler(reinterpret_cast<GLogFunc>(&logging::GLog), NULL);
 
+  // Seed the random number generator
+  time_t t = time(NULL);
+  srand(time(NULL));
+  qDebug() << "Seeding with:" << t;
+  qsrand(t);
+
   IncreaseFDLimit();
 
   QtSingleApplication a(argc, argv);
@@ -386,9 +392,6 @@ int main(int argc, char *argv[]) {
   // Network proxy
   QNetworkProxyFactory::setApplicationProxyFactory(
       NetworkProxyFactory::Instance());
-
-  // Seed the random number generator
-  srand(time(NULL));
 
   // Initialize the repository of cover providers.  Last.fm registers itself
   // when its service is created.

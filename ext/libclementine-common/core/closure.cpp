@@ -18,6 +18,7 @@
 #include "closure.h"
 
 #include "core/logging.h"
+#include "core/timeconstants.h"
 
 namespace _detail {
 
@@ -88,4 +89,13 @@ _detail::Closure* NewClosure(
     QObject* sender, const char* signal,
     QObject* receiver, const char* slot) {
   return new _detail::Closure(sender, signal, receiver, slot);
+}
+
+void DoAfter(QObject* receiver, const char* slot, int msec) {
+  QTimer::singleShot(msec, receiver, slot);
+}
+
+void DoInAMinuteOrSo(QObject* receiver, const char* slot) {
+  int msec = (60 + (qrand() % 60)) * kMsecPerSec;
+  DoAfter(receiver, slot, msec);
 }

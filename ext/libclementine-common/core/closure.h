@@ -23,6 +23,7 @@
 #include <QMetaMethod>
 #include <QObject>
 #include <QSharedPointer>
+#include <QTimer>
 
 #include <boost/noncopyable.hpp>
 #include <boost/scoped_ptr.hpp>
@@ -223,5 +224,8 @@ _detail::Closure* NewClosure(
         new _detail::SharedPointer<TP>(sender), signal, receiver, slot,
         C_ARG(T0, val0), C_ARG(T1, val1));
 }
+
+void DoAfter(QObject* receiver, const char* slot, int msec);
+void DoInAMinuteOrSo(QObject* receiver, const char* slot);
 
 #endif  // CLOSURE_H

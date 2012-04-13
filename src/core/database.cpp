@@ -685,6 +685,7 @@ bool Database::CheckErrors(const QSqlQuery& query) {
 }
 
 bool Database::IntegrityCheck(QSqlDatabase db) {
+  qLog(Debug) << "Starting database integrity check";
   int task_id = app_->task_manager()->StartTask(tr("Integrity check"));
 
   bool ok = false;
@@ -743,6 +744,7 @@ bool Database::OpenDatabase(const QString& filename, sqlite3** connection) const
 }
 
 void Database::BackupFile(const QString& filename) {
+  qLog(Debug) << "Starting database backup";
   QString dest_filename = QString("%1.bak").arg(filename);
   const int task_id = app_->task_manager()->StartTask(tr("Backing up database"));
 

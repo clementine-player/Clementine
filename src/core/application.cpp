@@ -90,7 +90,7 @@ Application::Application(QObject* parent)
   library_->Init();
   library_->StartThreads();
 
-  QMetaObject::invokeMethod(database_, "DoBackup", Qt::QueuedConnection);
+  DoInAMinuteOrSo(database_, SLOT(DoBackup()));
 }
 
 Application::~Application() {

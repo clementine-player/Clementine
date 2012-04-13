@@ -64,7 +64,7 @@ class Database : public QObject {
  signals:
   void Error(const QString& message);
 
- private slots:
+ public slots:
   void DoBackup();
 
  private:
