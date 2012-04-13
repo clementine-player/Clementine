@@ -50,7 +50,7 @@ OSD::OSD(SystemTrayIcon* tray_icon, Application* app, QObject* parent)
     ignore_next_stopped_(false),
     pretty_popup_(new OSDPretty(OSDPretty::Mode_Popup))
 {
-  connect(app_->current_art_loader(), SIGNAL(ArtLoaded(Song,QString,QImage)),
+  connect(app_->current_art_loader(), SIGNAL(ThumbnailLoaded(Song,QString,QImage)),
           SLOT(AlbumArtLoaded(Song,QString,QImage)));
 
   ReloadSettings();
