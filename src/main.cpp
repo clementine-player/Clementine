@@ -303,10 +303,9 @@ int main(int argc, char *argv[]) {
   logging::SetLevels(options.log_levels());
   g_log_set_default_handler(reinterpret_cast<GLogFunc>(&logging::GLog), NULL);
 
-  // Seed the random number generator
+  // Seed the random number generators.
   time_t t = time(NULL);
-  srand(time(NULL));
-  qDebug() << "Seeding with:" << t;
+  srand(t);
   qsrand(t);
 
   IncreaseFDLimit();

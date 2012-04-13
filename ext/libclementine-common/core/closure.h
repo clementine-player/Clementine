@@ -23,7 +23,6 @@
 #include <QMetaMethod>
 #include <QObject>
 #include <QSharedPointer>
-#include <QTimer>
 
 #include <boost/noncopyable.hpp>
 #include <boost/scoped_ptr.hpp>

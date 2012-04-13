@@ -17,6 +17,8 @@
 
 #include "closure.h"
 
+#include <QTimer>
+
 #include "core/logging.h"
 #include "core/timeconstants.h"
 
