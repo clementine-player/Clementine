@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-03-27 21:40+0000\n"
+"PO-Revision-Date: 2012-04-13 15:48+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -317,7 +317,6 @@ msgstr "دربارهٔ QT..."
 #: ../bin/src/ui_groovesharksettingspage.h:113
 #: ../bin/src/ui_magnatunesettingspage.h:155
 #: ../bin/src/ui_spotifysettingspage.h:209
-#: ../bin/src/ui_remotesettingspage.h:203
 #: ../bin/src/ui_lastfmsettingspage.h:145
 msgid "Account details"
 msgstr "مشخصات حساب کاربری"
@@ -362,7 +361,7 @@ msgstr "افزودن جریان دیگر..."
 msgid "Add directory..."
 msgstr "افزودن پوشه..."
 
-#: ui/mainwindow.cpp:1523
+#: ui/mainwindow.cpp:1507
 msgid "Add file"
 msgstr ""
 
@@ -374,7 +373,7 @@ msgstr "افزودن پرونده..."
 msgid "Add files to transcode"
 msgstr "افزودن پرونده‌ها به تراکد"
 
-#: ui/mainwindow.cpp:1551
+#: ui/mainwindow.cpp:1535
 msgid "Add folder"
 msgstr "افزودن پوشه"
 
@@ -462,7 +461,7 @@ msgstr ""
 msgid "Add to Grooveshark playlists"
 msgstr ""
 
-#: ui/mainwindow.cpp:1348
+#: ui/mainwindow.cpp:1332
 msgid "Add to another playlist"
 msgstr "افزودن به لیست پخش دیگر"
 
@@ -555,7 +554,7 @@ msgstr "آلبوم‌های با جلد"
 msgid "Albums without covers"
 msgstr "آلبوم‌های بدون جلد"
 
-#: ui/mainwindow.cpp:150
+#: ui/mainwindow.cpp:146
 msgid "All Files (*)"
 msgstr "همۀ پرونده‌ها(*)"
 
@@ -686,7 +685,7 @@ msgstr "آیا مطمئنید که می‌خواهید آمارهٔ این آه�
 msgid "Artist"
 msgstr "هنرمند"
 
-#: ui/mainwindow.cpp:231
+#: ui/mainwindow.cpp:227
 msgid "Artist info"
 msgstr "اطلاعات هنرمند"
 
@@ -706,13 +705,9 @@ msgstr "حرف اول هنرمند"
 msgid "Audio format"
 msgstr "نوع صوت"
 
-#: ../bin/src/ui_remotesettingspage.h:210
-msgid "Authenticating..."
-msgstr "در حال احراز هویت..."
-
 #: internet/digitallyimportedsettingspage.cpp:82
 #: internet/magnatunesettingspage.cpp:113 internet/lastfmservice.cpp:448
-#: internet/lastfmsettingspage.cpp:78 remote/remotesettingspage.cpp:113
+#: internet/lastfmsettingspage.cpp:78
 msgid "Authentication failed"
 msgstr "ناکامی در احراز هویت"
 
@@ -773,7 +768,7 @@ msgstr ""
 msgid "Background opacity"
 msgstr "تاری پس‌زمینه"
 
-#: core/database.cpp:747
+#: core/database.cpp:749
 msgid "Backing up database"
 msgstr ""
 
@@ -895,7 +890,7 @@ msgstr "تغییر زبان"
 msgid "Check for new episodes"
 msgstr ""
 
-#: ui/mainwindow.cpp:560
+#: ui/mainwindow.cpp:556
 msgid "Check for updates..."
 msgstr "بررسی به‌روز رسانی..."
 
@@ -972,13 +967,6 @@ msgid ""
 "Clementine can automatically convert the music you copy to this device into "
 "a format that it can play."
 msgstr "کلمنتاین می‌تواند اتوماتیک‌وار موسیقی‌هایی را که روی این دستگاه ذخیره می‌کنید به سبکی قابل پخش در دستگاه تبدیل کند."
-
-#: ../bin/src/ui_remotesettingspage.h:200 remote/remotesettingspage.cpp:152
-msgid ""
-"Clementine can be controlled remotely by an Android phone.  To enable this "
-"feature log in with the same Google account that is configured on your "
-"phone."
-msgstr "کلمنتاین را می‌توان با تلفن آندرویدی کنترل کرد. برای فعال‌سازی این ویژگی، با حساب گوگل تنظیمی تلفن وارد شوید."
 
 #: ../bin/src/ui_notificationssettingspage.h:403
 msgid "Clementine can show a message when the track changes."
@@ -1095,7 +1083,7 @@ msgstr "پیکربندی میان‌برها"
 msgid "Configure Spotify..."
 msgstr "پیکربندی Spotify..."
 
-#: ui/mainwindow.cpp:454
+#: ui/mainwindow.cpp:450
 msgid "Configure library..."
 msgstr "پیکربندی کتابخانه..."
 
@@ -1136,12 +1124,12 @@ msgstr "برگردان تمام موسیقی‌هایی که دستگاه نمی
 msgid "Copy to clipboard"
 msgstr ""
 
-#: library/libraryview.cpp:252 ui/mainwindow.cpp:487
+#: library/libraryview.cpp:252 ui/mainwindow.cpp:483
 #: widgets/fileviewlist.cpp:44
 msgid "Copy to device..."
 msgstr "کپی‌کردن در دستگاه..."
 
-#: devices/deviceview.cpp:218 ui/mainwindow.cpp:484
+#: devices/deviceview.cpp:218 ui/mainwindow.cpp:480
 #: widgets/fileviewlist.cpp:39
 msgid "Copy to library..."
 msgstr "کپی‌کردن در کتابخانه..."
@@ -1328,7 +1316,7 @@ msgstr "مسیر DBus"
 msgid "Dance"
 msgstr "رقص"
 
-#: core/database.cpp:703
+#: core/database.cpp:704
 msgid ""
 "Database corruption detected. Please read https://code.google.com/p"
 "/clementine-player/wiki/DatabaseCorruption for instructions on how to "
@@ -1380,7 +1368,7 @@ msgid "Delete downloaded data"
 msgstr ""
 
 #: devices/deviceview.cpp:388 library/libraryview.cpp:471
-#: ui/mainwindow.cpp:1800 widgets/fileview.cpp:186
+#: ui/mainwindow.cpp:1784 widgets/fileview.cpp:186
 msgid "Delete files"
 msgstr "پاک کردن پرونده‌ها"
 
@@ -1388,7 +1376,7 @@ msgstr "پاک کردن پرونده‌ها"
 msgid "Delete from device..."
 msgstr "پاک کردن از دستگاه..."
 
-#: library/libraryview.cpp:254 ui/mainwindow.cpp:488
+#: library/libraryview.cpp:254 ui/mainwindow.cpp:484
 #: widgets/fileviewlist.cpp:45
 msgid "Delete from disk..."
 msgstr "پاک کردن از دیسک..."
@@ -1413,11 +1401,11 @@ msgstr "پاک کردن اصل پرونده‌ها"
 msgid "Deleting files"
 msgstr "پاک کردن پرونده‌ها"
 
-#: ui/mainwindow.cpp:1284
+#: ui/mainwindow.cpp:1268
 msgid "Dequeue selected tracks"
 msgstr "صف‌بندی دوبارهٔ قطعه‌های انتخاب شده"
 
-#: ui/mainwindow.cpp:1282
+#: ui/mainwindow.cpp:1266
 msgid "Dequeue track"
 msgstr "صف‌بندی دوبارهٔ قطعه"
 
@@ -1445,7 +1433,7 @@ msgstr "نام دستگاه"
 msgid "Device properties..."
 msgstr "ویژگیهای دستگاه..."
 
-#: ui/mainwindow.cpp:228
+#: ui/mainwindow.cpp:224
 msgid "Devices"
 msgstr "‌دستگاه‌ها"
 
@@ -1618,7 +1606,7 @@ msgstr "درهم‌ریختن تصادفی دینامیک"
 msgid "Edit smart playlist..."
 msgstr "ویرایش لیست‌پخش هوشمند..."
 
-#: ui/mainwindow.cpp:1317
+#: ui/mainwindow.cpp:1301
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "ویرایش برچسب \"%1\"..."
@@ -1735,7 +1723,7 @@ msgstr "برابر است با --log-levels *:3"
 
 #: internet/groovesharkservice.cpp:988
 #: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:465
-#: ui/mainwindow.cpp:1752 ui/mainwindow.cpp:1873
+#: ui/mainwindow.cpp:1736 ui/mainwindow.cpp:1857
 msgid "Error"
 msgstr "خطا"
 
@@ -1938,7 +1926,7 @@ msgstr "نوع پرونده"
 msgid "Filename"
 msgstr "نام‌پرونده"
 
-#: ui/mainwindow.cpp:226
+#: ui/mainwindow.cpp:222
 msgid "Files"
 msgstr "پرونده‌ها"
 
@@ -2016,7 +2004,7 @@ msgstr "انصراف یک دستگاه آن را از این لیست حذف م�
 #: ../bin/src/ui_transcoderoptionsspeex.h:216
 #: ../bin/src/ui_transcoderoptionsvorbis.h:201
 #: ../bin/src/ui_transcoderoptionswma.h:78 ../bin/src/ui_equalizerslider.h:82
-#: ../bin/src/ui_fileview.h:106 ../bin/src/ui_loginstatewidget.h:171
+#: ../bin/src/ui_fileview.h:107 ../bin/src/ui_loginstatewidget.h:171
 #: ../bin/src/ui_trackslider.h:69 ../bin/src/ui_visualisationoverlay.h:178
 msgid "Form"
 msgstr "فرم"
@@ -2054,7 +2042,7 @@ msgstr "لرزش کامل"
 msgid "GStreamer audio engine"
 msgstr "موتور صوتی GStreamer"
 
-#: ui/settingsdialog.cpp:117
+#: ui/settingsdialog.cpp:113
 msgid "General"
 msgstr ""
 
@@ -2103,14 +2091,6 @@ msgstr "برو به نوار بعدی لیست‌پخش"
 #: ../bin/src/ui_mainwindow.h:704
 msgid "Go to previous playlist tab"
 msgstr "برو به نوار قبلی لیست‌پخش"
-
-#: ../bin/src/ui_remotesettingspage.h:206
-msgid "Google password"
-msgstr "کلمهٔ عبور گوگل"
-
-#: ../bin/src/ui_remotesettingspage.h:204
-msgid "Google username"
-msgstr "حساب کاربری گوگل"
 
 #: covers/coversearchstatisticsdialog.cpp:54 ui/albumcovermanager.cpp:424
 #: ../bin/src/ui_coversearchstatisticsdialog.h:76
@@ -2242,12 +2222,6 @@ msgstr "اگر ادامه دهید، این دستگاه آهسته کار خو�
 msgid "If you know the URL of a podcast, enter it below and press Go."
 msgstr ""
 
-#: ../bin/src/ui_remotesettingspage.h:209
-msgid ""
-"If you use the remote on more than one computer, this name will help you "
-"choose which one to connect to on your phone."
-msgstr "اگر از کنترل برای چندین کامپیوتر استفاده می‌کنید، این نام به شما کمک می‌کند که معین کنید کدامیک به تلفن شما وصل شود."
-
 #: ../bin/src/ui_organisedialog.h:204
 msgid "Ignore \"The\" in artist names"
 msgstr "صرف نظر از \"The\"‌ در نام هنرمندان"
@@ -2302,15 +2276,15 @@ msgstr "قرار دادن..."
 msgid "Installed"
 msgstr "نصب شد"
 
-#: core/database.cpp:688
+#: core/database.cpp:689
 msgid "Integrity check"
 msgstr ""
 
-#: ui/mainwindow.cpp:227
+#: ui/mainwindow.cpp:223
 msgid "Internet"
 msgstr "اینترنت"
 
-#: ui/settingsdialog.cpp:142
+#: ui/settingsdialog.cpp:134
 msgid "Internet providers"
 msgstr ""
 
@@ -2502,7 +2476,7 @@ msgstr "برای پیش‌فرض، خالی رها کنید. مثال:   \"/dev/
 msgid "Length"
 msgstr "طول"
 
-#: ui/mainwindow.cpp:215 ui/mainwindow.cpp:225
+#: ui/mainwindow.cpp:211 ui/mainwindow.cpp:221
 msgid "Library"
 msgstr "کتابخانه"
 
@@ -2510,7 +2484,7 @@ msgstr "کتابخانه"
 msgid "Library advanced grouping"
 msgstr "گروه‌بندی پیشرفتهٔ کتابخانه"
 
-#: ui/mainwindow.cpp:1990
+#: ui/mainwindow.cpp:1974
 msgid "Library rescan notice"
 msgstr "آگاه‌سازی پویش دوبارهٔ کتابخانه"
 
@@ -2610,7 +2584,6 @@ msgstr "بارگیری پرونده‌ها/URLها، جانشانی دوباره
 #: ../bin/src/ui_groovesharksettingspage.h:116
 #: ../bin/src/ui_magnatunesettingspage.h:164
 #: ../bin/src/ui_spotifysettingspage.h:212
-#: ../bin/src/ui_remotesettingspage.h:205
 #: ../bin/src/ui_lastfmsettingspage.h:147
 msgid "Login"
 msgstr "ورود به سیستم"
@@ -2782,7 +2755,7 @@ msgstr "نقطه‌های سوارکردن"
 msgid "Move down"
 msgstr "پایین بردن"
 
-#: ui/mainwindow.cpp:485 widgets/fileviewlist.cpp:41
+#: ui/mainwindow.cpp:481 widgets/fileviewlist.cpp:41
 msgid "Move to library..."
 msgstr "جابه‌جایی به کتابخانه..."
 
@@ -2791,7 +2764,7 @@ msgstr "جابه‌جایی به کتابخانه..."
 msgid "Move up"
 msgstr "بالا بردن"
 
-#: transcoder/transcodedialog.cpp:213 ui/mainwindow.cpp:1525
+#: transcoder/transcodedialog.cpp:213 ui/mainwindow.cpp:1509
 msgid "Music"
 msgstr ""
 
@@ -2877,7 +2850,7 @@ msgstr "هرگز پخش‌نشده"
 msgid "Never start playing"
 msgstr "هرگز شروع به پخش نشده"
 
-#: ui/mainwindow.cpp:1365 ../bin/src/ui_mainwindow.h:697
+#: ui/mainwindow.cpp:1349 ../bin/src/ui_mainwindow.h:697
 msgid "New playlist"
 msgstr "لیست‌پخش تازه"
 
@@ -2932,7 +2905,7 @@ msgstr "بدون بلوک‌های کوتاه"
 msgid "None"
 msgstr "هیچ‌کدام"
 
-#: library/libraryview.cpp:466 ui/mainwindow.cpp:1753 ui/mainwindow.cpp:1874
+#: library/libraryview.cpp:466 ui/mainwindow.cpp:1737 ui/mainwindow.cpp:1858
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "هیچ‌کدام از آهنگ‌های انتخابی مناسب کپی کردن در دستگاه نیستند"
 
@@ -3060,7 +3033,7 @@ msgstr "گزینه‌ها..."
 msgid "Organise Files"
 msgstr "سازماندهی پرونده‌ها"
 
-#: library/libraryview.cpp:250 ui/mainwindow.cpp:486
+#: library/libraryview.cpp:250 ui/mainwindow.cpp:482
 msgid "Organise files..."
 msgstr "سازماندهی پرونده‌ها..."
 
@@ -3116,7 +3089,7 @@ msgstr "کلمهٔ عبور"
 msgid "Password Protected"
 msgstr "نگهبانی کلمهٔ عبور"
 
-#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:821 ui/mainwindow.cpp:1207
+#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:805 ui/mainwindow.cpp:1191
 #: ui/qtsystemtrayicon.cpp:178 wiimotedev/wiimotesettingspage.cpp:106
 msgid "Pause"
 msgstr "توقف"
@@ -3133,8 +3106,8 @@ msgstr "متوقف"
 msgid "Plain sidebar"
 msgstr "میله‌کنار ساده"
 
-#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:469 ui/mainwindow.cpp:789
-#: ui/mainwindow.cpp:808 ui/mainwindow.cpp:1210 ui/qtsystemtrayicon.cpp:166
+#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:465 ui/mainwindow.cpp:773
+#: ui/mainwindow.cpp:792 ui/mainwindow.cpp:1194 ui/qtsystemtrayicon.cpp:166
 #: ui/qtsystemtrayicon.cpp:192 ../bin/src/ui_mainwindow.h:647
 #: wiimotedev/wiimotesettingspage.cpp:101
 msgid "Play"
@@ -3180,10 +3153,6 @@ msgstr "پخش/توقف"
 #: ../bin/src/ui_playbacksettingspage.h:257
 msgid "Playback"
 msgstr "بازپخش"
-
-#: ../bin/src/ui_remotesettingspage.h:208
-msgid "Player name"
-msgstr "نام پخش‌کننده"
 
 #: core/commandlineoptions.cpp:144
 msgid "Player options"
@@ -3355,12 +3324,12 @@ msgstr "جستجوی دستگاه..."
 msgid "Queue Manager"
 msgstr "مدیر به‌خط‌ کردن"
 
-#: ui/mainwindow.cpp:1288
+#: ui/mainwindow.cpp:1272
 msgid "Queue selected tracks"
 msgstr "به‌خط کردن قطعه‌های منتخب"
 
 #: globalsearch/globalsearchwidget.cpp:105 library/libraryview.cpp:238
-#: ui/mainwindow.cpp:1286
+#: ui/mainwindow.cpp:1270
 msgid "Queue track"
 msgstr "به‌خط کردن قطعه"
 
@@ -3447,10 +3416,6 @@ msgstr "دورکنترل تابی Wii را به‌یاد بیاور"
 #: ../bin/src/ui_behavioursettingspage.h:181
 msgid "Remember from last time"
 msgstr "از بار آخر به‌یاد بیاور"
-
-#: ../bin/src/ui_remotesettingspage.h:199
-msgid "Remote Control"
-msgstr "دورکنترل"
 
 #: internet/savedradio.cpp:100 ../bin/src/ui_queuemanager.h:135
 #: ../bin/src/ui_searchtermwidget.h:282 ../bin/src/ui_transcodedialog.h:207
@@ -3777,7 +3742,7 @@ msgstr "شماره سریال"
 msgid "Service offline"
 msgstr "سرویس برون‌خط"
 
-#: ui/mainwindow.cpp:1315
+#: ui/mainwindow.cpp:1299
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "%1 را برابر \"%2‌\"قرار بده..."
@@ -3789,10 +3754,6 @@ msgstr "بلندی صدا را برابر <value> درصد قرار بده"
 #: ../bin/src/ui_mainwindow.h:669
 msgid "Set value for all selected tracks..."
 msgstr "این مقدار را برای همهٔ قطعه‌های انتخابی قرار بده..."
-
-#: ../bin/src/ui_remotesettingspage.h:207
-msgid "Settings"
-msgstr "تنظیمات‌"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:173
 msgid "Shortcut"
@@ -3849,7 +3810,7 @@ msgstr ""
 msgid "Show above status bar"
 msgstr "نمایش در بالای میلهٔ وضعیت"
 
-#: ui/mainwindow.cpp:442
+#: ui/mainwindow.cpp:438
 msgid "Show all songs"
 msgstr "نمایش همهٔ آهنگ‌ها"
 
@@ -3869,7 +3830,7 @@ msgstr "نمایش جداسازها"
 msgid "Show fullsize..."
 msgstr "نمایش اندازهٔ کامل..."
 
-#: library/libraryview.cpp:262 ui/mainwindow.cpp:489
+#: library/libraryview.cpp:262 ui/mainwindow.cpp:485
 #: widgets/fileviewlist.cpp:52
 msgid "Show in file browser..."
 msgstr "نمایش در مرورگر پرونده..."
@@ -3878,11 +3839,11 @@ msgstr "نمایش در مرورگر پرونده..."
 msgid "Show in various artists"
 msgstr "نمایش در هنرمندان گوناگون"
 
-#: ui/mainwindow.cpp:443
+#: ui/mainwindow.cpp:439
 msgid "Show only duplicates"
 msgstr "نمایش تنها دوگانه‌ها"
 
-#: ui/mainwindow.cpp:444
+#: ui/mainwindow.cpp:440
 msgid "Show only untagged"
 msgstr "نمایش تنها بی‌برچسب‌ها"
 
@@ -3930,7 +3891,7 @@ msgstr ""
 msgid "Sign in"
 msgstr ""
 
-#: ../bin/src/ui_remotesettingspage.h:202 ../bin/src/ui_loginstatewidget.h:173
+#: ../bin/src/ui_loginstatewidget.h:173
 msgid "Sign out"
 msgstr "خروج از سیستم"
 
@@ -3986,7 +3947,7 @@ msgstr "راک ملایم"
 msgid "Song Information"
 msgstr "اطلاعات آهنگ"
 
-#: ui/mainwindow.cpp:230
+#: ui/mainwindow.cpp:226
 msgid "Song info"
 msgstr "اطلاعات آهنگ"
 
@@ -4090,7 +4051,7 @@ msgstr "توقف"
 msgid "Stop after"
 msgstr "توقف بعد از"
 
-#: ui/mainwindow.cpp:471 ../bin/src/ui_mainwindow.h:655
+#: ui/mainwindow.cpp:467 ../bin/src/ui_mainwindow.h:655
 msgid "Stop after this track"
 msgstr "توقف بعد از این آهنگ"
 
@@ -4229,7 +4190,7 @@ msgstr "پایگاه درخواستی وجود ندارد!"
 msgid "The site you requested is not an image!"
 msgstr "پایگاه درخواستی تصویر نیست!"
 
-#: ui/mainwindow.cpp:1983
+#: ui/mainwindow.cpp:1967
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -4264,7 +4225,7 @@ msgid ""
 "deleted:"
 msgstr "مشکلی در پاک کردن تعدادی از آهنگ‌ها وجود داشت. پرونده‌های زیر پاک نشدند:"
 
-#: library/libraryview.cpp:472 ui/mainwindow.cpp:1801 widgets/fileview.cpp:187
+#: library/libraryview.cpp:472 ui/mainwindow.cpp:1785 widgets/fileview.cpp:187
 msgid ""
 "These files will be deleted from disk, are you sure you want to continue?"
 msgstr "این پرونده‌ها از دیسک پاک خواهند شد، آیا مطمئنید که می‌خواهید ادامه دهید؟"
@@ -4375,7 +4336,7 @@ msgstr "تبدیل به OSD زیبا"
 msgid "Toggle fullscreen"
 msgstr "تبدیل به تمام‌صفحه"
 
-#: ui/mainwindow.cpp:1290
+#: ui/mainwindow.cpp:1274
 msgid "Toggle queue status"
 msgstr "تبدیل به وضعیت صف"
 
@@ -4586,7 +4547,7 @@ msgstr "استفاده‌شده"
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr ""
 
-#: ui/settingsdialog.cpp:134
+#: ui/settingsdialog.cpp:126
 msgid "User interface"
 msgstr ""
 
@@ -4749,7 +4710,7 @@ msgid ""
 "well?"
 msgstr ""
 
-#: ui/mainwindow.cpp:1988
+#: ui/mainwindow.cpp:1972
 msgid "Would you like to run a full rescan right now?"
 msgstr "آیا مایل هستید که الان بازبینی کامل انجام دهید؟"
 
@@ -4862,15 +4823,6 @@ msgid ""
 "You will not be able to play Last.fm radio stations as you are not a Last.fm"
 " subscriber."
 msgstr "شما نمی‌توانید ایستگاه رادیویی Last.fm را پخش کنید زیرا شما عضو Last.fm نیستید."
-
-#: remote/remotesettingspage.cpp:126
-#, qt-format
-msgid "You're logged in as <b>%1</b>"
-msgstr "شما به عنوان <b>%1</b> وارد شده‌اید"
-
-#: remote/remotesettingspage.cpp:113
-msgid "Your Google credentials were incorrect"
-msgstr "اعتبار گوگل شما نادرست بود"
 
 #: internet/lastfmsettingspage.cpp:78
 msgid "Your Last.fm credentials were incorrect"
