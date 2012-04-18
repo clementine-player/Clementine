@@ -8,11 +8,7 @@
 #include "core/closure.h"
 #include "test_utils.h"
 
-class ClosureTest : public ::testing::Test {
-
-};
-
-TEST_F(ClosureTest, ClosureInvokesReceiver) {
+TEST(ClosureTest, ClosureInvokesReceiver) {
   TestQObject sender;
   TestQObject receiver;
   _detail::Closure* closure = NewClosure(
@@ -23,7 +19,7 @@ TEST_F(ClosureTest, ClosureInvokesReceiver) {
   EXPECT_EQ(1, receiver.invoked());
 }
 
-TEST_F(ClosureTest, ClosureDeletesSelf) {
+TEST(ClosureTest, ClosureDeletesSelf) {
   TestQObject sender;
   TestQObject receiver;
   _detail::Closure* closure = NewClosure(
@@ -41,7 +37,7 @@ TEST_F(ClosureTest, ClosureDeletesSelf) {
   EXPECT_EQ(1, spy.count());
 }
 
-TEST_F(ClosureTest, ClosureDoesNotCrashWithSharedPointerSender) {
+TEST(ClosureTest, ClosureDoesNotCrashWithSharedPointerSender) {
   TestQObject receiver;
   TestQObject* sender;
   boost::scoped_ptr<QSignalSpy> spy;

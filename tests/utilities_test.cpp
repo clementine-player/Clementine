@@ -25,11 +25,7 @@
 
 #include <QtDebug>
 
-class UtilitiesTest : public ::testing::Test {
-};
-
-
-TEST_F(UtilitiesTest, HmacFunctions) {
+TEST(UtilitiesTest, HmacFunctions) {
   QString key("key");
   QString data("The quick brown fox jumps over the lazy dog");
   // Test Hmac Md5
