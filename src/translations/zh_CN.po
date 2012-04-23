@@ -4,14 +4,15 @@
 # 
 # Translators:
 # Aron Xu <aronxu@gnome.org>, 2011.
+#   <cxiaojian@gmail.com>, 2012.
 # Xinkai Chen <yeled.nova@gmail.com>, 2012.
 #   <yeled.nova@gmail.com>, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-04-13 15:48+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2012-04-20 23:55+0000\n"
+"Last-Translator: xaojan <cxiaojian@gmail.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: zh_CN\n"
@@ -69,7 +70,7 @@ msgstr "%1 天前"
 #: podcasts/gpoddersync.cpp:79
 #, qt-format
 msgid "%1 on %2"
-msgstr ""
+msgstr "%1 在 %2"
 
 #: playlistparsers/playlistparser.cpp:74
 #, qt-format
@@ -125,11 +126,11 @@ msgstr "%L1 位收听者"
 #: songinfo/lastfmtrackinfoprovider.cpp:100
 #, qt-format
 msgid "%L1 total plays"
-msgstr ""
+msgstr "%L1 合计播放"
 
 #: ../bin/src/ui_notificationssettingspage.h:399
 msgid "%filename%"
-msgstr ""
+msgstr "%filename%"
 
 #: transcoder/transcodedialog.cpp:199
 #, c-format
@@ -205,7 +206,7 @@ msgstr "右(&R)"
 
 #: ../bin/src/ui_mainwindow.h:689
 msgid "&Shuffle mode"
-msgstr ""
+msgstr "随机播放模式&S"
 
 #: playlist/playlistheader.cpp:34
 msgid "&Stretch columns to fit window"
@@ -246,7 +247,7 @@ msgstr "50 个随机音轨"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:165
 msgid "<a href=\"http://www.di.fm/premium/\">Upgrade to Premium now</a>"
-msgstr ""
+msgstr "<a href=\"http://www.di.fm/premium/\">立即升级至豪华版</a>"
 
 #: ../bin/src/ui_organisedialog.h:199
 msgid ""
@@ -257,7 +258,7 @@ msgstr ""
 
 #: internet/groovesharksettingspage.cpp:111
 msgid "A Grooveshark Anywhere account is required."
-msgstr ""
+msgstr "需要一个 Grooveshark Anywhere 帐户。"
 
 #: internet/spotifysettingspage.cpp:161
 msgid "A Spotify Premium account is required."
@@ -293,7 +294,7 @@ msgstr "AAC 32k"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:178
 msgid "AAC 64k"
-msgstr ""
+msgstr "AAC 64k"
 
 #: core/song.cpp:321
 msgid "AIFF"
@@ -337,7 +338,7 @@ msgstr "启用/禁用 Wii 遥控器"
 
 #: podcasts/addpodcastdialog.cpp:54
 msgid "Add Podcast"
-msgstr ""
+msgstr "添加播客"
 
 #: ../bin/src/ui_addstreamdialog.h:113
 msgid "Add Stream"
@@ -345,7 +346,7 @@ msgstr "添加流媒体"
 
 #: ../bin/src/ui_notificationssettingspage.h:397
 msgid "Add a new line if supported by the notification type"
-msgstr ""
+msgstr "如果消息提示支持的话则添加一个新行"
 
 #: ../bin/src/ui_wiimotesettingspage.h:193
 msgid "Add action"
@@ -389,11 +390,11 @@ msgstr "添加新文件夹..."
 
 #: ../bin/src/ui_addpodcastdialog.h:179
 msgid "Add podcast"
-msgstr ""
+msgstr "添加播客"
 
 #: podcasts/podcastservice.cpp:257 ../bin/src/ui_mainwindow.h:715
 msgid "Add podcast..."
-msgstr ""
+msgstr "添加播客..."
 
 #: smartplaylists/searchtermwidget.cpp:333
 msgid "Add search term"
@@ -421,7 +422,7 @@ msgstr "添加歌曲盘片标签"
 
 #: ../bin/src/ui_notificationssettingspage.h:401
 msgid "Add song filename"
-msgstr ""
+msgstr "添加音乐文件"
 
 #: ../bin/src/ui_notificationssettingspage.h:385
 msgid "Add song genre tag"
@@ -433,11 +434,11 @@ msgstr "添加歌曲长度标签"
 
 #: ../bin/src/ui_notificationssettingspage.h:391
 msgid "Add song play count"
-msgstr ""
+msgstr "统计音乐播放次数"
 
 #: ../bin/src/ui_notificationssettingspage.h:394
 msgid "Add song skip count"
-msgstr ""
+msgstr "统计跳过歌曲的次数"
 
 #: ../bin/src/ui_notificationssettingspage.h:367
 msgid "Add song title tag"
@@ -457,11 +458,11 @@ msgstr "添加流媒体..."
 
 #: internet/groovesharkservice.cpp:1052
 msgid "Add to Grooveshark favorites"
-msgstr ""
+msgstr "添加到 Grooveshark 最爱"
 
 #: internet/groovesharkservice.cpp:1058
 msgid "Add to Grooveshark playlists"
-msgstr ""
+msgstr "添加到 Grooveshark 播放列表"
 
 #: ui/mainwindow.cpp:1332
 msgid "Add to another playlist"
@@ -515,7 +516,7 @@ msgstr "高级分组..."
 
 #: ../bin/src/ui_podcastsettingspage.h:247
 msgid "After "
-msgstr ""
+msgstr "之后 "
 
 #: ../bin/src/ui_organisedialog.h:190
 msgid "After copying..."
@@ -731,7 +732,7 @@ msgstr "自动更新"
 
 #: ../bin/src/ui_librarysettingspage.h:170
 msgid "Automatically open single categories in the library tree"
-msgstr "自动打开音乐库树重的单个分类"
+msgstr "自动打开媒体库树重的单个分类"
 
 #: widgets/freespacebar.cpp:45
 msgid "Available"
@@ -747,7 +748,7 @@ msgstr "图片平均大小"
 
 #: podcasts/addpodcastdialog.cpp:72
 msgid "BBC Podcasts"
-msgstr ""
+msgstr "BBC 播客"
 
 #: playlist/playlist.cpp:1131 ui/organisedialog.cpp:62
 #: ../bin/src/ui_edittagdialog.h:638
@@ -764,7 +765,7 @@ msgstr "背景颜色"
 
 #: ../bin/src/ui_appearancesettingspage.h:199
 msgid "Background image"
-msgstr ""
+msgstr "背景图片"
 
 #: ../bin/src/ui_notificationssettingspage.h:424
 msgid "Background opacity"
@@ -788,7 +789,7 @@ msgstr "基础蓝"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:167
 msgid "Basic audio type"
-msgstr ""
+msgstr "基本音频类型"
 
 #: ../bin/src/ui_behavioursettingspage.h:169
 msgid "Behavior"
@@ -846,7 +847,7 @@ msgstr "缓冲时长"
 
 #: engines/gstengine.cpp:849
 msgid "Buffering"
-msgstr ""
+msgstr "缓冲中"
 
 #: ../bin/src/ui_wiimotesettingspage.h:192
 msgid "Buttons"
@@ -854,7 +855,7 @@ msgstr "按钮"
 
 #: core/song.cpp:324
 msgid "CDDA"
-msgstr ""
+msgstr "CDDA"
 
 #: library/library.cpp:98
 msgid "CUE sheet support"
@@ -890,7 +891,7 @@ msgstr "更改语言"
 
 #: ../bin/src/ui_podcastsettingspage.h:228
 msgid "Check for new episodes"
-msgstr ""
+msgstr "检测新节目"
 
 #: ui/mainwindow.cpp:556
 msgid "Check for updates..."
@@ -922,7 +923,7 @@ msgstr "选择播放列表的排序方式和包含歌曲数量。"
 
 #: podcasts/podcastsettingspage.cpp:132
 msgid "Choose podcast download directory"
-msgstr ""
+msgstr "选择播客下载目录"
 
 #: ../bin/src/ui_songinfosettingspage.h:188
 msgid ""
@@ -979,7 +980,7 @@ msgid ""
 "Clementine can synchronize your subscription list with your other computers "
 "and podcast applications.  <a href=\"https://gpodder.net/register/\">Create "
 "an account</a>."
-msgstr ""
+msgstr "Clementine 能够同步您在不同计算机和播客程序订阅的博客。  <a href=\"https://gpodder.net/register/\">创建新帐户</a>."
 
 #: visualisations/projectmvisualisation.cpp:128
 msgid ""
@@ -1040,7 +1041,7 @@ msgstr "颜色"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:170
 msgid "Combine identical results from different sources"
-msgstr ""
+msgstr "整合不同来源的相同结果"
 
 #: core/commandlineoptions.cpp:166
 msgid "Comma separated list of class:level, level is 0-3"
@@ -1067,7 +1068,7 @@ msgstr "作曲"
 
 #: internet/groovesharkservice.cpp:535
 msgid "Configure Grooveshark..."
-msgstr ""
+msgstr "正在配置 Grooveshark..."
 
 #: internet/lastfmservice.cpp:127
 msgid "Configure Last.fm..."
@@ -1087,11 +1088,11 @@ msgstr "配置Spotify..."
 
 #: ui/mainwindow.cpp:450
 msgid "Configure library..."
-msgstr "配置音乐库..."
+msgstr "配置媒体库..."
 
 #: podcasts/addpodcastdialog.cpp:65 podcasts/podcastservice.cpp:288
 msgid "Configure podcasts..."
-msgstr ""
+msgstr "正在设置播客..."
 
 #: internet/digitallyimportedservicebase.cpp:185
 #: ../bin/src/ui_globalsearchsettingspage.h:174
@@ -1100,7 +1101,7 @@ msgstr "配置..."
 
 #: ../bin/src/ui_wiimotesettingspage.h:186
 msgid "Connect Wii Remotes using active/deactive action"
-msgstr ""
+msgstr "连接 Wii 遥控器"
 
 #: devices/devicemanager.cpp:326 devices/devicemanager.cpp:330
 msgid "Connect device"
@@ -1134,7 +1135,7 @@ msgstr "复制到设备..."
 #: devices/deviceview.cpp:218 ui/mainwindow.cpp:480
 #: widgets/fileviewlist.cpp:39
 msgid "Copy to library..."
-msgstr "复制到音乐库..."
+msgstr "复制到媒体库..."
 
 #: devices/afctransfer.cpp:50
 msgid "Copying iPod database"
@@ -1142,7 +1143,7 @@ msgstr "正在复制 iPod 数据库"
 
 #: ../bin/src/ui_podcastinfowidget.h:194
 msgid "Copyright"
-msgstr ""
+msgstr "版权所有"
 
 #: transcoder/transcoder.cpp:62
 #, qt-format
@@ -1208,7 +1209,7 @@ msgstr "来自%1的封面"
 
 #: internet/groovesharkservice.cpp:502 internet/groovesharkservice.cpp:1204
 msgid "Create a new Grooveshark playlist"
-msgstr ""
+msgstr "创建一个新的 Grooveshark 播放列表"
 
 #: ../bin/src/ui_playbacksettingspage.h:262
 msgid "Cross-fade when changing tracks automatically"
@@ -1323,7 +1324,7 @@ msgid ""
 "Database corruption detected. Please read https://code.google.com/p"
 "/clementine-player/wiki/DatabaseCorruption for instructions on how to "
 "recover your database"
-msgstr ""
+msgstr "检测到数据库损坏，请查阅 https://code.google.com/p/clementine-player/wiki/DatabaseCorruption 获取恢复数据库的方法"
 
 #: playlist/playlist.cpp:1139 ../bin/src/ui_edittagdialog.h:649
 msgid "Date created"
@@ -1363,7 +1364,7 @@ msgstr "在两个视觉化效果间延迟切换"
 
 #: internet/groovesharkservice.cpp:505 internet/groovesharkservice.cpp:1252
 msgid "Delete Grooveshark playlist"
-msgstr ""
+msgstr "删除 Grooveshark 播放列表"
 
 #: podcasts/podcastservice.cpp:274
 msgid "Delete downloaded data"
@@ -1385,7 +1386,7 @@ msgstr "从硬盘删除..."
 
 #: ../bin/src/ui_podcastsettingspage.h:244
 msgid "Delete played episodes"
-msgstr ""
+msgstr "删除收听过的节目"
 
 #: ui/equalizer.cpp:190 ../bin/src/ui_equalizer.h:124
 msgid "Delete preset"
@@ -1445,15 +1446,15 @@ msgstr "您是想搜索"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:160
 msgid "Digitally Imported"
-msgstr ""
+msgstr "Digitally Imported"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:164
 msgid "Digitally Imported password"
-msgstr ""
+msgstr "Digitally Imported 密码"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:162
 msgid "Digitally Imported username"
-msgstr ""
+msgstr "Digitally Imported 用户名"
 
 #: ../bin/src/ui_networkproxysettingspage.h:159
 msgid "Direct internet connection"
@@ -1466,7 +1467,7 @@ msgstr "目录"
 
 #: ../bin/src/ui_notificationssettingspage.h:412
 msgid "Disable duration"
-msgstr ""
+msgstr "关闭时长"
 
 #: ../bin/src/ui_notificationssettingspage.h:405
 msgid "Disabled"
@@ -1479,7 +1480,7 @@ msgstr "盘片"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:234
 msgid "Discontinuous transmission"
-msgstr ""
+msgstr "断续传输"
 
 #: internet/icecastfilterwidget.cpp:33 library/libraryfilterwidget.cpp:109
 #: ../bin/src/ui_librarysettingspage.h:169
@@ -1525,7 +1526,7 @@ msgstr "双击歌曲将..."
 #: podcasts/podcastservice.cpp:345
 #, c-format
 msgid "Download %n episodes"
-msgstr ""
+msgstr "已经下载了 %n 个节目"
 
 #: internet/magnatunedownloaddialog.cpp:252
 msgid "Download directory"
@@ -1533,7 +1534,7 @@ msgstr "下载目录"
 
 #: ../bin/src/ui_podcastsettingspage.h:240
 msgid "Download episodes to"
-msgstr ""
+msgstr "下载节目到"
 
 #: ../bin/src/ui_magnatunesettingspage.h:161
 msgid "Download membership"
@@ -1541,11 +1542,11 @@ msgstr "下载会员"
 
 #: ../bin/src/ui_podcastsettingspage.h:241
 msgid "Download new episodes automatically"
-msgstr ""
+msgstr "自动下载新的节目"
 
 #: podcasts/podcastservice.cpp:187
 msgid "Download queued"
-msgstr ""
+msgstr "下载队列"
 
 #: internet/magnatuneservice.cpp:274
 msgid "Download this album"
@@ -1557,7 +1558,7 @@ msgstr "下载此专辑..."
 
 #: podcasts/podcastservice.cpp:347
 msgid "Download this episode"
-msgstr ""
+msgstr "下载此节目"
 
 #: ../bin/src/ui_spotifysettingspage.h:216
 msgid "Download..."
@@ -1566,7 +1567,7 @@ msgstr "下载..."
 #: podcasts/podcastservice.cpp:195
 #, qt-format
 msgid "Downloading (%1%)..."
-msgstr ""
+msgstr "下载中 (%1%)..."
 
 #: internet/icecastservice.cpp:99
 msgid "Downloading Icecast directory"
@@ -1659,7 +1660,7 @@ msgstr ""
 
 #: core/globalshortcuts.cpp:62
 msgid "Enable/disable Last.fm scrobbling"
-msgstr ""
+msgstr "启用/禁用 Last.fm 的音乐记录"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:235
 msgid "Encoding complexity"
@@ -1692,11 +1693,11 @@ msgstr "输入一个 <b>艺人</b> 或 <b>标签</b> 来开始收听 Last.fm 电
 
 #: ../bin/src/ui_itunessearchpage.h:77
 msgid "Enter search terms below to find podcasts in the iTunes Store"
-msgstr ""
+msgstr "使用下方输入的内容在 iTunes商店 上搜索播客"
 
 #: ../bin/src/ui_gpoddersearchpage.h:77
 msgid "Enter search terms below to find podcasts on gpodder.net"
-msgstr ""
+msgstr "使用下方输入的内容在 gpodder.net 上搜索播客"
 
 #: ../bin/src/ui_libraryfilterwidget.h:131
 #: ../bin/src/ui_albumcovermanager.h:153
@@ -1802,7 +1803,7 @@ msgstr "同一专辑歌曲或者同一CUE sheet不淡出"
 
 #: ../bin/src/ui_dynamicplaylistcontrols.h:111
 msgid "Expand"
-msgstr ""
+msgstr "扩展"
 
 #: widgets/loginstatewidget.cpp:142
 #, qt-format
@@ -1853,21 +1854,21 @@ msgstr "淡出时长"
 
 #: podcasts/gpoddertoptagspage.cpp:76
 msgid "Failed to fetch directory"
-msgstr ""
+msgstr "无法获取目录"
 
 #: podcasts/gpoddersearchpage.cpp:76 podcasts/gpoddertoptagsmodel.cpp:109
 #: podcasts/itunessearchpage.cpp:66 podcasts/itunessearchpage.cpp:75
 #: podcasts/itunessearchpage.cpp:82
 msgid "Failed to fetch podcasts"
-msgstr ""
+msgstr "无法获取播客"
 
 #: podcasts/addpodcastbyurl.cpp:70 podcasts/fixedopmlpage.cpp:54
 msgid "Failed to load podcast"
-msgstr ""
+msgstr "无法读取播客"
 
 #: podcasts/podcasturlloader.cpp:163
 msgid "Failed to parse the XML for this RSS feed"
-msgstr ""
+msgstr "无法解析此 RSS 种子的XML"
 
 #: ../bin/src/ui_transcoderoptionsflac.h:82
 #: ../bin/src/ui_transcoderoptionsmp3.h:200
@@ -1876,7 +1877,7 @@ msgstr "快速"
 
 #: internet/groovesharkservice.cpp:594
 msgid "Favorites"
-msgstr ""
+msgstr "喜爱"
 
 #: library/library.cpp:75
 msgid "Favourite tracks"
@@ -1950,11 +1951,11 @@ msgstr "文件系统类型"
 
 #: smartplaylists/querywizardplugin.cpp:89
 msgid "Find songs in your library that match the criteria you specify."
-msgstr "在你的音乐库里查找符合条件的歌曲"
+msgstr "在你的媒体库里查找符合条件的歌曲"
 
 #: musicbrainz/tagfetcher.cpp:55
 msgid "Fingerprinting song"
-msgstr ""
+msgstr "识别音乐"
 
 #: smartplaylists/wizard.cpp:79
 msgid "Finish"
@@ -2022,7 +2023,7 @@ msgstr "帧速率"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:236
 msgid "Frames per buffer"
-msgstr ""
+msgstr "每帧缓冲"
 
 #: internet/lastfmservice.cpp:223
 msgid "Friends"
@@ -2046,7 +2047,7 @@ msgstr "GStreamer 音频引擎"
 
 #: ui/settingsdialog.cpp:113
 msgid "General"
-msgstr ""
+msgstr "一般"
 
 #: ../bin/src/ui_notificationssettingspage.h:409
 msgid "General settings"
@@ -2060,15 +2061,15 @@ msgstr "流派"
 
 #: internet/groovesharkservice.cpp:521
 msgid "Get a URL to share this Grooveshark playlist"
-msgstr ""
+msgstr "获取一个分享该 Grooveshark 播放列表的地址"
 
 #: internet/groovesharkservice.cpp:518 internet/groovesharkservice.cpp:1069
 msgid "Get a URL to share this Grooveshark song"
-msgstr ""
+msgstr "获取一个分享该 Grooveshark 音乐的地址"
 
 #: internet/groovesharkservice.cpp:741
 msgid "Getting Grooveshark popular songs"
-msgstr ""
+msgstr "正在获取 Grooveshark 的流行榜单"
 
 #: internet/somafmservice.cpp:100
 msgid "Getting channels"
@@ -2076,7 +2077,7 @@ msgstr "获得频道"
 
 #: internet/digitallyimportedservicebase.cpp:107
 msgid "Getting streams"
-msgstr ""
+msgstr "获取流"
 
 #: ../bin/src/ui_addstreamdialog.h:116
 msgid "Give it a name:"
@@ -2084,7 +2085,7 @@ msgstr "给它起个名字"
 
 #: ../bin/src/ui_addpodcastbyurl.h:78
 msgid "Go"
-msgstr ""
+msgstr "Go"
 
 #: ../bin/src/ui_mainwindow.h:703
 msgid "Go to next playlist tab"
@@ -2106,27 +2107,27 @@ msgstr "灰色显示播放列表中不存在的歌曲"
 
 #: ../bin/src/ui_groovesharksettingspage.h:112
 msgid "Grooveshark"
-msgstr ""
+msgstr "Grooveshark"
 
 #: internet/groovesharkservice.cpp:400
 msgid "Grooveshark login error"
-msgstr ""
+msgstr "Grooveshark 登录错误"
 
 #: internet/groovesharkservice.cpp:1121
 msgid "Grooveshark playlist's URL"
-msgstr ""
+msgstr "Grooveshark 的播放列表地址"
 
 #: internet/groovesharkservice.cpp:585
 msgid "Grooveshark radio"
-msgstr ""
+msgstr "Grooveshark 电台"
 
 #: internet/groovesharkservice.cpp:1099
 msgid "Grooveshark song's URL"
-msgstr ""
+msgstr "Grooveshark 歌曲地址"
 
 #: ../bin/src/ui_groupbydialog.h:124
 msgid "Group Library by..."
-msgstr "音乐库分组"
+msgstr "媒体库分组"
 
 #: library/libraryfilterwidget.cpp:103
 msgid "Group by"
@@ -2158,7 +2159,7 @@ msgstr "按流派/艺人/专辑分组"
 
 #: podcasts/podcasturlloader.cpp:192
 msgid "HTML page did not contain any RSS feeds"
-msgstr ""
+msgstr "HTML页面没有包含任何 RSS 种子"
 
 #: ../bin/src/ui_networkproxysettingspage.h:163
 msgid "HTTP proxy"
@@ -2174,7 +2175,7 @@ msgstr "硬件信息仅在设备连接上后可用。"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:168
 msgid "Hide all other search boxes"
-msgstr ""
+msgstr "隐藏所有搜索框"
 
 #: ../bin/src/ui_transcoderoptionsmp3.h:202
 msgid "High"
@@ -2222,7 +2223,7 @@ msgstr "如果您选择继续,设备运行将会变慢并且复制歌曲工作�
 
 #: ../bin/src/ui_addpodcastbyurl.h:77
 msgid "If you know the URL of a podcast, enter it below and press Go."
-msgstr ""
+msgstr "如果您知道播客地址，请在下面填入地址并且点击 Go"
 
 #: ../bin/src/ui_organisedialog.h:204
 msgid "Ignore \"The\" in artist names"
@@ -2256,7 +2257,7 @@ msgstr "包含所有的歌曲"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:177
 msgid "Include keyboard shortcut help in the tooltip"
-msgstr ""
+msgstr "提示中包含快捷键帮助"
 
 #: core/commandlineoptions.cpp:152
 msgid "Increase the volume by 4%"
@@ -2280,7 +2281,7 @@ msgstr "已安装"
 
 #: core/database.cpp:689
 msgid "Integrity check"
-msgstr ""
+msgstr "完整性检验"
 
 #: ui/mainwindow.cpp:223
 msgid "Internet"
@@ -2288,7 +2289,7 @@ msgstr "互联网"
 
 #: ui/settingsdialog.cpp:134
 msgid "Internet providers"
-msgstr ""
+msgstr "互联网提供商"
 
 #: internet/lastfmservice.cpp:454
 msgid "Invalid API key"
@@ -2320,11 +2321,11 @@ msgstr "会话钥匙无效"
 
 #: internet/groovesharkservice.cpp:393
 msgid "Invalid username and/or password"
-msgstr ""
+msgstr "用户名/密码无效"
 
 #: internet/jamendoservice.cpp:125
 msgid "Jamendo"
-msgstr ""
+msgstr "Jamendo"
 
 #: internet/jamendoservice.cpp:108
 msgid "Jamendo Most Listened Tracks"
@@ -2372,7 +2373,7 @@ msgstr "保留原始文件"
 
 #: ../bin/src/ui_mainwindow.h:688
 msgid "Kittens"
-msgstr ""
+msgstr "猫咪"
 
 #: ../bin/src/ui_behavioursettingspage.h:172
 msgid "Language"
@@ -2480,19 +2481,19 @@ msgstr "长度"
 
 #: ui/mainwindow.cpp:211 ui/mainwindow.cpp:221
 msgid "Library"
-msgstr "音乐库"
+msgstr "媒体库"
 
 #: ../bin/src/ui_groupbydialog.h:122
 msgid "Library advanced grouping"
-msgstr "音乐库高级分组"
+msgstr "媒体库高级分组"
 
 #: ui/mainwindow.cpp:1974
 msgid "Library rescan notice"
-msgstr "重新扫描音乐库提示"
+msgstr "重新扫描媒体库提示"
 
 #: smartplaylists/querywizardplugin.cpp:85
 msgid "Library search"
-msgstr "音乐库搜索"
+msgstr "媒体库搜索"
 
 #: ../bin/src/ui_querysortpage.h:140
 msgid "Limits"
@@ -2501,7 +2502,7 @@ msgstr "限制"
 #: internet/groovesharkservice.cpp:586
 msgid ""
 "Listen to Grooveshark songs based on what you've listened to previously"
-msgstr ""
+msgstr "以您之前收听过的音乐为基础来收听 Grooveshark 的歌曲"
 
 #: ui/equalizer.cpp:117
 msgid "Live"
@@ -2659,7 +2660,7 @@ msgstr "Magnatune 下载完成"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:134
 msgid "Main profile (MAIN)"
-msgstr ""
+msgstr "主要档案(MAIN)"
 
 #: core/backgroundstreams.cpp:36 ../bin/src/ui_mainwindow.h:687
 msgid "Make it so!"
@@ -2726,7 +2727,7 @@ msgstr "最小位速率"
 
 #: visualisations/projectmvisualisation.cpp:127
 msgid "Missing projectM presets"
-msgstr ""
+msgstr "projectM 设置缺失"
 
 #: devices/deviceproperties.cpp:152
 msgid "Model"
@@ -2734,7 +2735,7 @@ msgstr "型号"
 
 #: ../bin/src/ui_librarysettingspage.h:163
 msgid "Monitor the library for changes"
-msgstr "监控音乐库的更改"
+msgstr "监控媒体库的更改"
 
 #: smartplaylists/searchterm.cpp:303
 msgid "Months"
@@ -2759,7 +2760,7 @@ msgstr "下移"
 
 #: ui/mainwindow.cpp:481 widgets/fileviewlist.cpp:41
 msgid "Move to library..."
-msgstr "移动至音乐库..."
+msgstr "移动至媒体库..."
 
 #: ../bin/src/ui_globalsearchsettingspage.h:172
 #: ../bin/src/ui_queuemanager.h:127 ../bin/src/ui_songinfosettingspage.h:189
@@ -2768,11 +2769,11 @@ msgstr "上移"
 
 #: transcoder/transcodedialog.cpp:213 ui/mainwindow.cpp:1509
 msgid "Music"
-msgstr ""
+msgstr "音乐"
 
 #: ../bin/src/ui_librarysettingspage.h:157
 msgid "Music Library"
-msgstr "音乐库"
+msgstr "媒体库"
 
 #: core/globalshortcuts.cpp:54 ../bin/src/ui_mainwindow.h:709
 #: wiimotedev/wiimotesettingspage.cpp:105
@@ -2781,11 +2782,11 @@ msgstr "静音"
 
 #: globalsearch/lastfmsearchprovider.cpp:52 internet/lastfmservice.cpp:194
 msgid "My Last.fm Library"
-msgstr "我的 Last.fm 音乐库"
+msgstr "我的 Last.fm 媒体库"
 
 #: globalsearch/lastfmsearchprovider.cpp:54 internet/lastfmservice.cpp:199
 msgid "My Last.fm Mix Radio"
-msgstr ""
+msgstr "我的 Last.fm Mix Radio"
 
 #: globalsearch/lastfmsearchprovider.cpp:56 internet/lastfmservice.cpp:204
 msgid "My Last.fm Neighborhood"
@@ -2945,7 +2946,7 @@ msgstr "未安装"
 
 #: globalsearch/globalsearchsettingspage.cpp:123
 msgid "Not logged in"
-msgstr ""
+msgstr "未登录"
 
 #: devices/deviceview.cpp:111
 msgid "Not mounted - double click to mount"
@@ -3069,7 +3070,7 @@ msgstr "覆盖已存在的文件"
 
 #: ../bin/src/ui_podcastinfowidget.h:195
 msgid "Owner"
-msgstr ""
+msgstr "所有者"
 
 #: internet/jamendoservice.cpp:210
 msgid "Parsing Jamendo catalogue"
@@ -3191,7 +3192,7 @@ msgstr "插件状态:"
 
 #: podcasts/podcastservice.cpp:110 ../bin/src/ui_podcastsettingspage.h:226
 msgid "Podcasts"
-msgstr ""
+msgstr "播客"
 
 #: ui/equalizer.cpp:119
 msgid "Pop"
@@ -3199,15 +3200,15 @@ msgstr "流行"
 
 #: internet/groovesharkservice.cpp:558
 msgid "Popular songs"
-msgstr ""
+msgstr "流行音乐"
 
 #: internet/groovesharkservice.cpp:562
 msgid "Popular songs of the Month"
-msgstr ""
+msgstr "每月最热歌曲"
 
 #: internet/groovesharkservice.cpp:569
 msgid "Popular songs today"
-msgstr ""
+msgstr "今日最热歌曲"
 
 #: ../bin/src/ui_notificationssettingspage.h:410
 msgid "Popup duration"
@@ -3250,7 +3251,7 @@ msgstr "首选格式"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:174
 msgid "Premium audio type"
-msgstr ""
+msgstr "高级音频类型"
 
 #: ../bin/src/ui_equalizer.h:119
 msgid "Preset:"
@@ -3258,7 +3259,7 @@ msgstr "预设："
 
 #: ../bin/src/ui_wiimoteshortcutgrabber.h:124
 msgid "Press a button combination to use for"
-msgstr ""
+msgstr "按下组合键定义为"
 
 #: ../bin/src/ui_globalshortcutgrabber.h:73
 msgid "Press a key"
@@ -3267,7 +3268,7 @@ msgstr "按一个键"
 #: ui/globalshortcutgrabber.cpp:39 ../bin/src/ui_globalshortcutgrabber.h:74
 #, qt-format
 msgid "Press a key combination to use for %1..."
-msgstr ""
+msgstr "请为 %1 按下新的组合键..."
 
 #: ../bin/src/ui_notificationssettingspage.h:423
 msgid "Pretty OSD options"
@@ -3290,11 +3291,11 @@ msgstr "上一音轨"
 
 #: core/commandlineoptions.cpp:167
 msgid "Print out version information"
-msgstr ""
+msgstr "输出版本信息"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:131
 msgid "Profile"
-msgstr ""
+msgstr "档案"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:134
 #: ../bin/src/ui_transcodedialog.h:216
@@ -3304,7 +3305,7 @@ msgstr "进度"
 #: ../bin/src/ui_wiimoteshortcutgrabber.h:125
 #: wiimotedev/wiimotesettingspage.cpp:227
 msgid "Push Wiiremote button"
-msgstr ""
+msgstr "按下 Wii遥控器 按钮"
 
 #: ../bin/src/ui_querysortpage.h:138
 msgid "Put songs in a random order"
@@ -3341,7 +3342,7 @@ msgstr "电台(所有音轨采用相同的音量)"
 
 #: internet/groovesharkservice.cpp:576
 msgid "Radios"
-msgstr ""
+msgstr "电台"
 
 #: core/backgroundstreams.cpp:31 ../bin/src/ui_mainwindow.h:685
 msgid "Rain"
@@ -3397,7 +3398,7 @@ msgstr "刷新频道"
 
 #: internet/lastfmservice.cpp:125
 msgid "Refresh friends list"
-msgstr ""
+msgstr "刷新好友列表"
 
 #: internet/icecastservice.cpp:297
 msgid "Refresh station list"
@@ -3405,15 +3406,15 @@ msgstr "刷新电台列表"
 
 #: internet/digitallyimportedservicebase.cpp:181
 msgid "Refresh streams"
-msgstr ""
+msgstr "刷新流"
 
 #: ui/equalizer.cpp:120
 msgid "Reggae"
-msgstr ""
+msgstr "Reggae"
 
 #: ../bin/src/ui_wiimoteshortcutgrabber.h:126
 msgid "Remember Wii remote swing"
-msgstr ""
+msgstr "记住 Wii遥控器 节奏"
 
 #: ../bin/src/ui_behavioursettingspage.h:181
 msgid "Remember from last time"
@@ -3439,7 +3440,7 @@ msgstr "从最喜爱的中删除"
 
 #: internet/groovesharkservice.cpp:512 ../bin/src/ui_mainwindow.h:691
 msgid "Remove from playlist"
-msgstr ""
+msgstr "从播放列表中移除"
 
 #: playlist/playlisttabbar.cpp:48 playlist/playlisttabbar.cpp:158
 msgid "Remove playlist"
@@ -3452,11 +3453,11 @@ msgstr "从最喜爱的中删除歌曲"
 #: internet/groovesharkservice.cpp:1298
 #, qt-format
 msgid "Rename \"%1\" playlist"
-msgstr ""
+msgstr "重命名 \"%1\" 播放列表"
 
 #: internet/groovesharkservice.cpp:508
 msgid "Rename Grooveshark playlist"
-msgstr ""
+msgstr "重命名 Grooveshark 播放列表"
 
 #: playlist/playlisttabbar.cpp:131
 msgid "Rename playlist"
@@ -3530,15 +3531,15 @@ msgstr "仅使用 ASCII 字符"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:175
 msgid "Results"
-msgstr ""
+msgstr "结果"
 
 #: internet/groovesharkservice.cpp:712
 msgid "Retrieving Grooveshark favorites songs"
-msgstr ""
+msgstr "正在检索 Grooveshark 的喜爱歌曲"
 
 #: internet/groovesharkservice.cpp:637
 msgid "Retrieving Grooveshark playlists"
-msgstr ""
+msgstr "正在检索 Grooveshark 播放列表"
 
 #: ui/equalizer.cpp:121
 msgid "Rock"
@@ -3590,7 +3591,7 @@ msgstr "保存预设"
 
 #: ../bin/src/ui_addstreamdialog.h:115
 msgid "Save this stream in the Internet tab"
-msgstr ""
+msgstr "在网络标签中收藏此媒体流"
 
 #: ui/edittagdialog.cpp:661 ui/trackselectiondialog.cpp:254
 msgid "Saving tracks"
@@ -3617,15 +3618,15 @@ msgstr "搜索"
 #: internet/groovesharksearchplaylisttype.cpp:32
 #: internet/groovesharkservice.cpp:966
 msgid "Search Grooveshark"
-msgstr ""
+msgstr "搜索 Grooveshark"
 
 #: internet/groovesharkservice.cpp:525 internet/groovesharkservice.cpp:552
 msgid "Search Grooveshark (opens a new tab)"
-msgstr ""
+msgstr "搜索 Grooveshark (在新标签中打开)"
 
 #: ../bin/src/ui_icecastfilterwidget.h:78
 msgid "Search Icecast stations"
-msgstr ""
+msgstr "搜索 Icecast 电台"
 
 #: internet/jamendoservice.cpp:422
 msgid "Search Jamendo"
@@ -3649,7 +3650,7 @@ msgstr "在新标签栏中查找Spotify..."
 
 #: ../bin/src/ui_globalsearchwidget.h:61
 msgid "Search around all your sources (library, internet services, ...)"
-msgstr ""
+msgstr "在您的数据源里搜索(媒体库、网络服务，...)"
 
 #: ui/albumcoverchoicecontroller.cpp:62
 msgid "Search for album covers..."
@@ -3657,11 +3658,11 @@ msgstr "搜索专辑封面..."
 
 #: ../bin/src/ui_globalsearchwidget.h:63
 msgid "Search for anything"
-msgstr ""
+msgstr "搜索一切"
 
 #: ../bin/src/ui_gpoddersearchpage.h:76
 msgid "Search gpodder.net"
-msgstr ""
+msgstr "搜索 gpodder.net"
 
 #: ../bin/src/ui_itunessearchpage.h:76
 msgid "Search iTunes"
@@ -3682,11 +3683,11 @@ msgstr ""
 
 #: internet/groovesharkservice.cpp:264
 msgid "Searching on Grooveshark"
-msgstr ""
+msgstr "在 Grooveshark 搜索"
 
 #: ../bin/src/ui_groupbydialog.h:138
 msgid "Second level"
-msgstr ""
+msgstr "第二阶段"
 
 #: core/globalshortcuts.cpp:56 wiimotedev/wiimotesettingspage.cpp:108
 msgid "Seek backward"
@@ -3702,7 +3703,7 @@ msgstr ""
 
 #: core/commandlineoptions.cpp:154
 msgid "Seek the currently playing track to an absolute position"
-msgstr ""
+msgstr "在指定位置寻找目前正在播放的音轨"
 
 #: visualisations/visualisationselector.cpp:40
 msgid "Select All"
@@ -3738,7 +3739,7 @@ msgstr "选择视觉效果..."
 
 #: devices/devicekitlister.cpp:124
 msgid "Serial number"
-msgstr ""
+msgstr "序列号"
 
 #: internet/lastfmservice.cpp:455
 msgid "Service offline"
@@ -3790,7 +3791,7 @@ msgstr "使用原生桌面提示"
 
 #: ../bin/src/ui_notificationssettingspage.h:414
 msgid "Show a notification when I change the repeat/shuffle mode"
-msgstr ""
+msgstr "在我更改了循环播放模式时弹出提示"
 
 #: ../bin/src/ui_notificationssettingspage.h:413
 msgid "Show a notification when I change the volume"
@@ -3806,7 +3807,7 @@ msgstr "显示漂亮的 OSD"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:176
 msgid "Show a tooltip with more information about each result"
-msgstr ""
+msgstr "每个结果显示更多的提示"
 
 #: widgets/nowplayingwidget.cpp:113
 msgid "Show above status bar"
@@ -3822,11 +3823,11 @@ msgstr "显示全部曲目"
 
 #: ../bin/src/ui_librarysettingspage.h:171
 msgid "Show cover art in library"
-msgstr "在音乐库中显示封面"
+msgstr "在媒体库中显示封面"
 
 #: ../bin/src/ui_librarysettingspage.h:172
 msgid "Show dividers"
-msgstr ""
+msgstr "显示分频器"
 
 #: ui/albumcoverchoicecontroller.cpp:64 widgets/prettyimage.cpp:183
 msgid "Show fullsize..."
@@ -3847,11 +3848,11 @@ msgstr "只显示重复"
 
 #: ui/mainwindow.cpp:440
 msgid "Show only untagged"
-msgstr ""
+msgstr "只显示未加标签的"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:167
 msgid "Show the \"Search for anything\" box above the sidebar"
-msgstr ""
+msgstr "在侧边栏上方显示“搜索一切”框"
 
 #: ../bin/src/ui_lastfmsettingspage.h:151
 msgid "Show the \"love\" and \"ban\" buttons"
@@ -3887,7 +3888,7 @@ msgstr "随机播放列表"
 
 #: widgets/osd.cpp:275 ../bin/src/ui_playlistsequence.h:108
 msgid "Shuffle tracks in this album"
-msgstr ""
+msgstr "此专辑的音轨乱序播放"
 
 #: ../bin/src/ui_podcastsettingspage.h:252
 msgid "Sign in"
@@ -3907,7 +3908,7 @@ msgstr "相似艺人"
 
 #: ui/equalizer.cpp:123
 msgid "Ska"
-msgstr ""
+msgstr "Ska"
 
 #: core/commandlineoptions.cpp:149
 msgid "Skip backwards in playlist"
@@ -3939,11 +3940,11 @@ msgstr "智能播放列表"
 
 #: ui/equalizer.cpp:122
 msgid "Soft"
-msgstr ""
+msgstr "Soft"
 
 #: ui/equalizer.cpp:124
 msgid "Soft Rock"
-msgstr ""
+msgstr "Soft Rock"
 
 #: ../bin/src/ui_songinfosettingspage.h:179
 msgid "Song Information"
@@ -3955,11 +3956,11 @@ msgstr "曲目信息"
 
 #: analyzers/sonogram.cpp:18
 msgid "Sonogram"
-msgstr ""
+msgstr "声波图"
 
 #: ../bin/src/ui_trackselectiondialog.h:205
 msgid "Sorry"
-msgstr ""
+msgstr "抱歉"
 
 #: ../bin/src/ui_icecastfilterwidget.h:75
 msgid "Sort by genre (alphabetically)"
@@ -3971,7 +3972,7 @@ msgstr "按流派排序(流行度)"
 
 #: ../bin/src/ui_icecastfilterwidget.h:77
 msgid "Sort by station name"
-msgstr ""
+msgstr "通过电台名排序"
 
 #: ../bin/src/ui_querysortpage.h:139
 msgid "Sort songs by"
@@ -3983,15 +3984,15 @@ msgstr "正在排序"
 
 #: playlist/playlist.cpp:1142
 msgid "Source"
-msgstr ""
+msgstr "来源"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:169
 msgid "Sources"
-msgstr ""
+msgstr "来源"
 
 #: ../bin/src/ui_transcodersettingspage.h:162
 msgid "Speex"
-msgstr ""
+msgstr "Speex"
 
 #: ../bin/src/ui_spotifysettingspage.h:208
 msgid "Spotify"
@@ -3999,7 +4000,7 @@ msgstr "Spotify"
 
 #: internet/spotifyservice.cpp:176
 msgid "Spotify login error"
-msgstr ""
+msgstr "Spotify 登录失败"
 
 #: ../bin/src/ui_spotifysettingspage.h:213
 msgid "Spotify plugin"
@@ -4011,15 +4012,15 @@ msgstr "potify 插件未安装"
 
 #: ../bin/src/ui_transcoderoptionsmp3.h:201
 msgid "Standard"
-msgstr ""
+msgstr "标准"
 
 #: internet/spotifyservice.cpp:340
 msgid "Starred"
-msgstr ""
+msgstr "用星号标记"
 
 #: core/commandlineoptions.cpp:145
 msgid "Start the playlist currently playing"
-msgstr ""
+msgstr "开始播放当前播放列表"
 
 #: transcoder/transcodedialog.cpp:85
 msgid "Start transcoding"
@@ -4029,7 +4030,7 @@ msgstr "开始转换"
 #: internet/spotifysearchplaylisttype.cpp:36
 #, qt-format
 msgid "Start typing in the search box above to find music on %1."
-msgstr ""
+msgstr "在开始输入的时候便在下方搜索 %1。"
 
 #: transcoder/transcoder.cpp:399
 #, qt-format
@@ -4042,7 +4043,7 @@ msgstr "正在开始..."
 
 #: internet/groovesharkservice.cpp:580
 msgid "Stations"
-msgstr ""
+msgstr "工作站"
 
 #: core/globalshortcuts.cpp:48 ../bin/src/ui_mainwindow.h:649
 #: wiimotedev/wiimotesettingspage.cpp:102
@@ -4051,11 +4052,11 @@ msgstr "停止"
 
 #: wiimotedev/wiimotesettingspage.cpp:110
 msgid "Stop after"
-msgstr ""
+msgstr "后停止"
 
 #: ui/mainwindow.cpp:467 ../bin/src/ui_mainwindow.h:655
 msgid "Stop after this track"
-msgstr ""
+msgstr "在此音轨后停止"
 
 #: core/commandlineoptions.cpp:148
 msgid "Stop playback"
@@ -4075,15 +4076,15 @@ msgstr "流媒体"
 
 #: ../bin/src/ui_magnatunesettingspage.h:160
 msgid "Streaming membership"
-msgstr ""
+msgstr "流媒体成员"
 
 #: internet/groovesharkservice.cpp:603
 msgid "Subscribed playlists"
-msgstr ""
+msgstr "订阅的播放列表"
 
 #: ../bin/src/ui_podcastinfowidget.h:196
 msgid "Subscribers"
-msgstr ""
+msgstr "订阅"
 
 #: transcoder/transcoder.cpp:198
 #, qt-format
@@ -4092,12 +4093,12 @@ msgstr "成功写入 %1"
 
 #: ui/trackselectiondialog.cpp:171
 msgid "Suggested tags"
-msgstr ""
+msgstr "推荐标签"
 
 #: ../bin/src/ui_edittagdialog.h:651
 #: ../bin/src/ui_notificationssettingspage.h:420
 msgid "Summary"
-msgstr ""
+msgstr "总览"
 
 #: analyzers/analyzercontainer.cpp:65
 #: visualisations/visualisationcontainer.cpp:110
@@ -4107,7 +4108,7 @@ msgstr "很高(%1 fps)"
 
 #: visualisations/visualisationcontainer.cpp:120
 msgid "Super high (2048x2048)"
-msgstr ""
+msgstr "超高质 (2048x2048)"
 
 #: ../bin/src/ui_deviceproperties.h:374
 msgid "Supported formats"
@@ -4115,19 +4116,19 @@ msgstr "支持的格式"
 
 #: globalsearch/globalsearchtooltip.cpp:53
 msgid "Switch provider"
-msgstr ""
+msgstr "切换提供者"
 
 #: internet/spotifyservice.cpp:512
 msgid "Syncing Spotify inbox"
-msgstr ""
+msgstr "同步 Spotify 收件箱"
 
 #: internet/spotifyservice.cpp:507
 msgid "Syncing Spotify playlist"
-msgstr ""
+msgstr "同步 Spotify 播放列表"
 
 #: internet/spotifyservice.cpp:516
 msgid "Syncing Spotify starred tracks"
-msgstr ""
+msgstr "同步 Spotify 星号标记的音轨"
 
 #: widgets/fancytabwidget.cpp:654
 msgid "Tabs on top"
@@ -4139,7 +4140,7 @@ msgstr "标签"
 
 #: ../bin/src/ui_trackselectiondialog.h:204
 msgid "Tag fetcher"
-msgstr ""
+msgstr "标签提取程序"
 
 #: internet/lastfmservice.cpp:211
 msgid "Tag radio"
@@ -4151,11 +4152,11 @@ msgstr "目标位速率"
 
 #: ui/equalizer.cpp:125
 msgid "Techno"
-msgstr ""
+msgstr "Techno"
 
 #: ../bin/src/ui_notificationssettingspage.h:432
 msgid "Text options"
-msgstr ""
+msgstr "文本设置"
 
 #: ui/about.cpp:69
 msgid "Thanks to"
@@ -4168,7 +4169,7 @@ msgstr "命令\"%1\"无法执行."
 
 #: ../bin/src/ui_appearancesettingspage.h:202
 msgid "The album cover of the currently playing song"
-msgstr ""
+msgstr "目前正在播放的音乐的专辑封面"
 
 #: internet/magnatunedownloaddialog.cpp:90
 #, qt-format
@@ -4182,7 +4183,7 @@ msgstr "播放列表 '%1' 为空或者无法加载"
 
 #: smartplaylists/searchtermwidget.cpp:322
 msgid "The second value must be greater than the first one!"
-msgstr ""
+msgstr "第二音量应该比第一音量还大！"
 
 #: ui/coverfromurldialog.cpp:71
 msgid "The site you requested does not exist!"
@@ -4196,16 +4197,16 @@ msgstr "您请求的站点并不是一个图片。"
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
-msgstr "已更新Clementine.由于添加了如下特性,您需要更新您的收藏:"
+msgstr "已更新Clementine，由于添加了如下特性，您需要更新您的收藏："
 
 #: library/libraryview.cpp:392
 msgid "There are other songs in this album"
-msgstr ""
+msgstr "此专辑中还有其它歌曲"
 
 #: podcasts/gpoddersearchpage.cpp:77 podcasts/gpoddertoptagsmodel.cpp:110
 #: podcasts/gpoddertoptagspage.cpp:77
 msgid "There was a problem communicating with gpodder.net"
-msgstr ""
+msgstr "与 gpodder.net 通讯时出现了问题"
 
 #: internet/magnatunedownloaddialog.cpp:158
 msgid "There was a problem fetching the metadata from Magnatune"
@@ -4213,7 +4214,7 @@ msgstr "从Magnatune获取元数据出错"
 
 #: podcasts/itunessearchpage.cpp:76
 msgid "There was a problem parsing the response from the iTunes Store"
-msgstr ""
+msgstr "在解析 iTunes 商店的回馈信息出现了问题"
 
 #: ui/organiseerrordialog.cpp:56
 msgid ""
@@ -4240,7 +4241,7 @@ msgstr "将从设备中删除这些文件.确定删除吗?"
 
 #: ../bin/src/ui_librarysettingspage.h:158
 msgid "These folders will be scanned for music to make up your library"
-msgstr ""
+msgstr "这些文件夹将被扫描然后收录进您的媒体库"
 
 #: ../bin/src/ui_transcodersettingspage.h:158
 msgid ""
@@ -4250,23 +4251,23 @@ msgstr ""
 
 #: ../bin/src/ui_groupbydialog.h:151
 msgid "Third level"
-msgstr ""
+msgstr "第三阶段"
 
 #: internet/jamendoservice.cpp:167
 msgid ""
 "This action will create a database which could be as big as 150 MB.\n"
 "Do you want to continue anyway?"
-msgstr ""
+msgstr "将会创建一个超过 150 MB 的数据库，\n您无论如何也要继续吗？"
 
 #: internet/magnatunedownloaddialog.cpp:175
 msgid "This album is not available in the requested format"
-msgstr ""
+msgstr "这张专辑不是有效的格式"
 
 #: ../bin/src/ui_deviceproperties.h:381
 msgid ""
 "This device must be connected and opened before Clementine can see what file"
 " formats it supports."
-msgstr ""
+msgstr "此设备必须在连接并打开之前，Clementine可以检测它支持什么文件格式。"
 
 #: ../bin/src/ui_deviceproperties.h:375
 msgid "This device supports the following file formats:"
@@ -4279,7 +4280,7 @@ msgstr "这个设备将不会正常工作"
 #: devices/devicemanager.cpp:570
 msgid ""
 "This is an MTP device, but you compiled Clementine without libmtp support."
-msgstr ""
+msgstr "这个一部 MTP 设备，但是您可以通过 Clementine 来编辑而无需 libmtp 的支持。"
 
 #: devices/devicemanager.cpp:578
 msgid "This is an iPod, but you compiled Clementine without libgpod support."
@@ -4295,7 +4296,7 @@ msgstr "这是您第一次连接该设备.Clementine将扫描设备上的音乐�
 msgid ""
 "This playlist will be removed; the action can't be undone. Are you sure you "
 "want to continue?"
-msgstr ""
+msgstr "此播放列表将会被永久删除，而且无法恢复。您确认要继续？"
 
 #: internet/lastfmservice.cpp:456
 msgid "This stream is for paid subscribers only"
@@ -4324,7 +4325,7 @@ msgstr "标题"
 msgid ""
 "To start Grooveshark radio, you should first listen to a few other "
 "Grooveshark songs"
-msgstr ""
+msgstr "在开始收听 Grooveshark 电台之前，您需要收听几首 Grooveshark 的歌曲。"
 
 #: core/utilities.cpp:120
 msgid "Today"
@@ -4332,7 +4333,7 @@ msgstr "今日"
 
 #: core/globalshortcuts.cpp:59
 msgid "Toggle Pretty OSD"
-msgstr ""
+msgstr "切换漂亮的 OSD"
 
 #: visualisations/visualisationcontainer.cpp:101
 msgid "Toggle fullscreen"
@@ -4344,7 +4345,7 @@ msgstr "切换队列状态"
 
 #: ../bin/src/ui_mainwindow.h:714
 msgid "Toggle scrobbling"
-msgstr ""
+msgstr "切换歌曲记录"
 
 #: core/commandlineoptions.cpp:162
 msgid "Toggle visibility for the pretty on-screen-display"
@@ -4377,24 +4378,24 @@ msgstr "转换日志"
 
 #: ../bin/src/ui_transcodersettingspage.h:157
 msgid "Transcoding"
-msgstr ""
+msgstr "转码"
 
 #: transcoder/transcoder.cpp:307
 #, qt-format
 msgid "Transcoding %1 files using %2 threads"
-msgstr ""
+msgstr "正在使用 %2 线程来转码 %1 个文件"
 
 #: ../bin/src/ui_transcoderoptionsdialog.h:54
 msgid "Transcoding options"
-msgstr ""
+msgstr "转码设置"
 
 #: core/song.cpp:323
 msgid "TrueAudio"
-msgstr ""
+msgstr "TrueAudio"
 
 #: analyzers/turbine.cpp:15
 msgid "Turbine"
-msgstr ""
+msgstr "Turbine"
 
 #: ../bin/src/ui_dynamicplaylistcontrols.h:113
 msgid "Turn off"
@@ -4410,7 +4411,7 @@ msgstr "URL"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:228
 msgid "Ultra wide band (UWB)"
-msgstr ""
+msgstr "超宽带 (UWB)"
 
 #: internet/magnatunedownloaddialog.cpp:144
 #, qt-format
@@ -4444,23 +4445,23 @@ msgstr "取消订阅"
 
 #: internet/groovesharkservice.cpp:1159
 msgid "Update Grooveshark playlist"
-msgstr ""
+msgstr "更新 Grooveshark 播放列表"
 
 #: podcasts/podcastservice.cpp:260
 msgid "Update all podcasts"
-msgstr ""
+msgstr "更新所有播客"
 
 #: ../bin/src/ui_mainwindow.h:705
 msgid "Update changed library folders"
-msgstr ""
+msgstr "更新改变的媒体库文件夹"
 
 #: ../bin/src/ui_librarysettingspage.h:162
 msgid "Update the library when Clementine starts"
-msgstr "Clementine 启动时更新音乐库"
+msgstr "Clementine 启动时更新媒体库"
 
 #: podcasts/podcastservice.cpp:268
 msgid "Update this podcast"
-msgstr ""
+msgstr "更新此播客"
 
 #: ../bin/src/ui_podcastsettingspage.h:227
 msgid "Updating"
@@ -4478,7 +4479,7 @@ msgstr "正在更新 %1%..."
 
 #: library/librarywatcher.cpp:90
 msgid "Updating library"
-msgstr "正在更新音乐库"
+msgstr "正在更新媒体库"
 
 #: core/commandlineoptions.cpp:144
 msgid "Usage"
@@ -4502,7 +4503,7 @@ msgstr "使用自定义颜色集"
 
 #: ../bin/src/ui_notificationssettingspage.h:417
 msgid "Use a custom message for notifications"
-msgstr ""
+msgstr "自定义提示信息"
 
 #: ../bin/src/ui_networkproxysettingspage.h:167
 msgid "Use authentication"
@@ -4522,7 +4523,7 @@ msgstr "使用提示显示Wii状态"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:139
 msgid "Use temporal noise shaping"
-msgstr ""
+msgstr "使用瞬时降噪"
 
 #: ../bin/src/ui_behavioursettingspage.h:175
 msgid "Use the system default"
@@ -4547,7 +4548,7 @@ msgstr "已使用"
 #: internet/groovesharkservice.cpp:396
 #, qt-format
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
-msgstr ""
+msgstr "用户 %1 没有 Grooveshark Anywhere 帐户"
 
 #: ui/settingsdialog.cpp:126
 msgid "User interface"
@@ -4602,7 +4603,7 @@ msgstr "视觉效果设置"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:233
 msgid "Voice activity detection"
-msgstr ""
+msgstr "语音活动检测"
 
 #: widgets/osd.cpp:180
 #, qt-format
@@ -4615,7 +4616,7 @@ msgstr "卷名称"
 
 #: ../bin/src/ui_transcodersettingspage.h:160
 msgid "Vorbis"
-msgstr ""
+msgstr "Vorbis"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:141
 #: ../bin/src/ui_magnatunesettingspage.h:172
@@ -4654,7 +4655,7 @@ msgstr "WiFi MAC 地址"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:229
 msgid "Wide band (WB)"
-msgstr ""
+msgstr "宽带 (WB)"
 
 #: widgets/osd.cpp:239
 #, qt-format
@@ -4688,7 +4689,7 @@ msgstr "Wii 遥控器 %1：电池电量低(%2%)"
 
 #: ../bin/src/ui_wiimotesettingspage.h:182
 msgid "Wiimotedev"
-msgstr ""
+msgstr "Wiimotedev"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:181
 msgid "Windows Media 128k"
@@ -4710,11 +4711,11 @@ msgstr "Windows Media 音频"
 msgid ""
 "Would you like to move the other songs in this album to Various Artists as "
 "well?"
-msgstr ""
+msgstr "您想要把此专辑的其它歌曲移动到 群星 ？"
 
 #: ui/mainwindow.cpp:1972
 msgid "Would you like to run a full rescan right now?"
-msgstr ""
+msgstr "您要立即做个全部重新扫描？"
 
 #: playlist/playlist.cpp:1120 ui/organisedialog.cpp:63
 #: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:148
@@ -4742,7 +4743,7 @@ msgstr "您即将下载以下专辑"
 
 #: ../bin/src/ui_loginstatewidget.h:172
 msgid "You are not signed in."
-msgstr ""
+msgstr "您未登录。"
 
 #: widgets/loginstatewidget.cpp:75
 #, qt-format
@@ -4755,19 +4756,19 @@ msgstr "您已经登录。"
 
 #: ../bin/src/ui_groupbydialog.h:123
 msgid "You can change the way the songs in the library are organised."
-msgstr ""
+msgstr "您可以更改媒体库中音乐的组织形式。"
 
 #: internet/digitallyimportedsettingspage.cpp:46
 msgid ""
 "You can listen for free without an account, but Premium members can listen "
 "to higher quality streams without advertisements."
-msgstr ""
+msgstr "您无需注册即可免费收听音乐，但是高级会员可以收听无广告的高音质内容。"
 
 #: internet/magnatunesettingspage.cpp:53
 msgid ""
 "You can listen to Magnatune songs for free without an account.  Purchasing a"
 " membership removes the messages at the end of each track."
-msgstr ""
+msgstr "您无需注册帐户即可收听 Magnatune 的音乐。  订购会员即可移除每个音轨结尾的内容。"
 
 #: ../bin/src/ui_backgroundstreamssettingspage.h:57
 msgid "You can listen to background streams at the same time as other music."
@@ -4785,11 +4786,11 @@ msgid ""
 "You can use your Wii Remote as a remote control for Clementine.  <a "
 "href=\"http://www.clementine-player.org/wiimote\">See the page on the "
 "Clementine wiki</a> for more information.\n"
-msgstr ""
+msgstr "您可以使用Wii遥控器来控制 Clementine。  <a href=\"http://www.clementine-player.org/wiimote\">参见 Clementine Wiki</a> for more information.\n"
 
 #: internet/groovesharksettingspage.cpp:103
 msgid "You do not have a Grooveshark Anywhere account."
-msgstr ""
+msgstr "您没有 Grooveshark Anywhere 帐户。"
 
 #: internet/spotifysettingspage.cpp:148
 msgid "You do not have a Spotify Premium account."
@@ -4799,11 +4800,11 @@ msgstr "您没有Spotify付费账户。"
 msgid ""
 "You have been logged out of Spotify, please re-enter your password in the "
 "Settings dialog."
-msgstr ""
+msgstr "您已经登出了 Spotify，请在设置对话框中重新输入您的密码。"
 
 #: internet/spotifysettingspage.cpp:157
 msgid "You have been logged out of Spotify, please re-enter your password."
-msgstr ""
+msgstr "您已经登出了 Spotify，请重新输入您的密码。"
 
 #: songinfo/lastfmtrackinfoprovider.cpp:95
 msgid "You love this track"
@@ -4836,7 +4837,7 @@ msgstr "你的Magnatune帐号信息有误"
 
 #: library/libraryview.cpp:206
 msgid "Your library is empty!"
-msgstr "您的音乐库是空的！"
+msgstr "您的媒体库是空的！"
 
 #: globalsearch/savedradiosearchprovider.cpp:28 internet/savedradio.cpp:49
 msgid "Your radio streams"
@@ -4871,31 +4872,31 @@ msgstr "添加 %n 首曲目"
 
 #: smartplaylists/searchterm.cpp:200
 msgid "after"
-msgstr ""
+msgstr "之后"
 
 #: ../bin/src/ui_searchtermwidget.h:281
 msgid "ago"
-msgstr ""
+msgstr "以前"
 
 #: ../bin/src/ui_searchtermwidget.h:280
 msgid "and"
-msgstr ""
+msgstr "和"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:219
 msgid "automatic"
-msgstr ""
+msgstr "自动"
 
 #: smartplaylists/searchterm.cpp:201
 msgid "before"
-msgstr ""
+msgstr "之前"
 
 #: smartplaylists/searchterm.cpp:206
 msgid "between"
-msgstr ""
+msgstr "之间"
 
 #: smartplaylists/searchterm.cpp:292
 msgid "biggest first"
-msgstr ""
+msgstr "体积大的优先"
 
 #: playlist/playlistview.cpp:195 ui/edittagdialog.cpp:449
 msgid "bpm"
@@ -4909,7 +4910,7 @@ msgstr "包含"
 #: ../bin/src/ui_transcoderoptionsvorbis.h:207
 #: ../bin/src/ui_transcoderoptionsvorbis.h:210
 msgid "disabled"
-msgstr ""
+msgstr "关闭"
 
 #: widgets/osd.cpp:114
 #, qt-format
@@ -4926,7 +4927,7 @@ msgstr "例如，"
 
 #: smartplaylists/searchterm.cpp:215
 msgid "ends with"
-msgstr ""
+msgstr "结尾为"
 
 #: smartplaylists/searchterm.cpp:218
 msgid "equals"
@@ -4934,11 +4935,11 @@ msgstr "等于"
 
 #: ../bin/src/ui_podcastsettingspage.h:249
 msgid "gpodder.net"
-msgstr ""
+msgstr "gpodder.net"
 
 #: podcasts/gpoddertoptagspage.cpp:34
 msgid "gpodder.net directory"
-msgstr ""
+msgstr "gpodder.net 目录"
 
 #: smartplaylists/searchterm.cpp:216
 msgid "greater than"
@@ -4946,7 +4947,7 @@ msgstr "大于"
 
 #: smartplaylists/searchterm.cpp:204
 msgid "in the last"
-msgstr ""
+msgstr "最后"
 
 #: playlist/playlistview.cpp:197 ui/edittagdialog.cpp:451
 #: internet/spotifysettingspage.cpp:59 internet/spotifysettingspage.cpp:60
@@ -4972,11 +4973,11 @@ msgstr "最新优先"
 
 #: smartplaylists/searchterm.cpp:219
 msgid "not equals"
-msgstr ""
+msgstr "不等于"
 
 #: smartplaylists/searchterm.cpp:205
 msgid "not in the last"
-msgstr ""
+msgstr "不在最后"
 
 #: smartplaylists/searchterm.cpp:203
 msgid "not on"
