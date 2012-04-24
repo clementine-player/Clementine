@@ -1,6 +1,5 @@
 #include "gtest/gtest.h"
 
-#include <QtGlobal>
 #include <QEventLoop>
 #include <QFutureWatcher>
 #include <QThreadPool>
