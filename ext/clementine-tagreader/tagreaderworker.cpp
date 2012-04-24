@@ -143,6 +143,7 @@ void TagReaderWorker::ReadFile(const QString& filename,
 
   scoped_ptr<TagLib::FileRef> fileref(factory_->GetFileRef(filename));
   if(fileref->isNull()) {
+    qLog(Info) << "TagLib hasn't been able to read " << filename << " file";
     return;
   }
 
