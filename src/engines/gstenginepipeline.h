@@ -22,6 +22,7 @@
 #include <QFuture>
 #include <QMutex>
 #include <QObject>
+#include <QThreadPool>
 #include <QTimeLine>
 #include <QUrl>
 
@@ -259,6 +260,8 @@ class GstEnginePipeline : public QObject {
   GstElement* audiosink_;
 
   uint bus_cb_id_;
+
+  QThreadPool set_state_threadpool_;
 };
 
 #endif // GSTENGINEPIPELINE_H

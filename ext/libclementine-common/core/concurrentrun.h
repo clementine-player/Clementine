@@ -26,19 +26,21 @@
 
 /*
   The aim of ThreadFunctor classes and ConcurrentRun::Run() functions is to
-  complete QtConcurrentRun, which lack support of using a particular
+  complete QtConcurrentRun, which lack support for using a particular
   QThreadPool, as it always uses QThreadPool::globalInstance().
 
   This is problematic when we do not want to share the same thread pool over
   all the application, but want to keep the convenient QtConcurrent::run()
-  functor syntax: time critical changes are performed in their own pool, which
-  is not empty by other actions, like when using QtConcurrentRun::run()
+  functor syntax.
+  With ConcurrentRun::Run(), time critical changes are performed in their own
+  pool, which is not empty by other actions (as it happens when using
+  QtConcurrentRun::run())
 
   ThreadFunctor classes are used to store a functor and its arguments, and
   Run() functions are used for convenience: to directly create a new
   ThreadFunctor object and start it.
 
-  Currently, only functions with two arguments and a return value are
+  Currently, only functions with one or two arguments and a return value are
   supported, but other might be added easily for X arguments by defining a new
   ThreadFunctorBasX class, and add new Run() function.
 */

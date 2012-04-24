@@ -22,6 +22,7 @@
 #include "gstelementdeleter.h"
 #include "gstengine.h"
 #include "gstenginepipeline.h"
+#include "core/concurrentrun.h"
 #include "core/logging.h"
 #include "core/utilities.h"
 #include "internet/internetmodel.h"
@@ -781,7 +782,8 @@ GstState GstEnginePipeline::state() const {
 }
 
 QFuture<GstStateChangeReturn> GstEnginePipeline::SetState(GstState state) {
-  return QtConcurrent::run(&gst_element_set_state, pipeline_, state);
+  return ConcurrentRun::Run<GstStateChangeReturn, GstElement*, GstState>(
+      &set_state_threadpool_, &gst_element_set_state, pipeline_, state);
 }
 
 bool GstEnginePipeline::Seek(qint64 nanosec) {
