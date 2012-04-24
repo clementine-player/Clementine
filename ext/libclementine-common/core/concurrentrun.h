@@ -15,8 +15,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef THREADFUNCTION_H
-#define THREADFUNCTION_H
+#ifndef CONCURRENTRUN_H
+#define CONCURRENTRUN_H
 
 #include <tr1/functional>
 
@@ -32,9 +32,9 @@
   This is problematic when we do not want to share the same thread pool over
   all the application, but want to keep the convenient QtConcurrent::run()
   functor syntax.
-  With ConcurrentRun::Run(), time critical changes are performed in their own
-  pool, which is not empty by other actions (as it happens when using
-  QtConcurrentRun::run())
+  With ConcurrentRun::Run(), time critical changes can be performed in their
+  own pool, which is not empty by other actions (as it happens when using
+  QtConcurrentRun::run()).
 
   ThreadFunctor classes are used to store a functor and its arguments, and
   Run() functions are used for convenience: to directly create a new
@@ -133,4 +133,4 @@ namespace ConcurrentRun {
   }
 }
 
-#endif // THREADFUNCTION_H
+#endif // CONCURRENTRUN_H
