@@ -49,6 +49,7 @@
 
 #include <QApplication>
 #include <QBuffer>
+#include <QCoreApplication>
 #include <QDirIterator>
 #include <QFileInfo>
 #include <QLinkedList>
@@ -661,16 +662,24 @@ bool Playlist::dropMimeData(const QMimeData* data, Qt::DropAction action, int ro
     // Get the list of rows that were moved
     QList<int> source_rows;
     Playlist* source_playlist = NULL;
+    qint64 pid = 0;
+    qint64 own_pid = QCoreApplication::applicationPid();
 
     QDataStream stream(data->data(kRowsMimetype));
     stream.readRawData(reinterpret_cast<char*>(&source_playlist), sizeof(source_playlist));
     stream >> source_rows;
+    if (!stream.atEnd()) {
+        stream.readRawData((char*)&pid, sizeof(pid));
+    } else {
+        pid = ! own_pid;
+    }
+
     qStableSort(source_rows); // Make sure we take them in order
 
     if (source_playlist == this) {
       // Dragged from this playlist - rearrange the items
       undo_stack_->push(new PlaylistUndoCommands::MoveItems(this, source_rows, row));
-    } else {
+    } else if (pid == own_pid) {
       // Drag from a different playlist
       PlaylistItemList items;
       foreach (int row, source_rows)
@@ -1051,8 +1060,11 @@ QMimeData* Playlist::mimeData(const QModelIndexList& indexes) const {
   QDataStream stream(&buf);
 
   const Playlist* self = this;
+  const qint64 pid = QCoreApplication::applicationPid();
+
   stream.writeRawData(reinterpret_cast<char*>(&self), sizeof(self));
   stream << rows;
+  stream.writeRawData((char*)&pid, sizeof(pid));
   buf.close();
 
   data->setUrls(urls);
