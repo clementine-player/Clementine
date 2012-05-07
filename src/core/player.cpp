@@ -294,7 +294,9 @@ void Player::PlayAt(int index, Engine::TrackChangeFlags change, bool reshuffle) 
     }
   }
 
-  if (current_item_ && current_item_->Metadata().IsOnSameAlbum(
+  if (current_item_ &&
+      app_->playlist_manager()->active()->has_item_at(index) &&
+      current_item_->Metadata().IsOnSameAlbum(
         app_->playlist_manager()->active()->item_at(index)->Metadata())) {
     change |= Engine::SameAlbum;
   }
