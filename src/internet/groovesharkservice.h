@@ -90,7 +90,7 @@ class GroovesharkService : public InternetService {
   void RetrieveSubscribedPlaylists();
   void RetrieveAutoplayTags();
   void SetPlaylistSongs(int playlist_id, const QList<int>& songs_ids);
-  void RemoveFromPlaylist(int playlist_id, int song_id);
+  void RemoveFromPlaylist(int playlist_id, const QList<int>& songs_ids_to_remove);
   // Refresh playlist_id playlist , or create it if it doesn't exist
   void RefreshPlaylist(int playlist_id);
   void DeletePlaylist(int playlist_id);

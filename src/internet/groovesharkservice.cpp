@@ -1352,27 +1352,39 @@ void GroovesharkService::UserFavoriteSongAdded(QNetworkReply* reply, int task_id
 }
 
 void GroovesharkService::RemoveCurrentFromPlaylist() {
-  const QModelIndex& index(model()->current_index());
+  const QModelIndexList& indexes(model()->selected_indexes());
+  QMap<int, QList<int> > playlists_songs_ids;
+  foreach (const QModelIndex& index, indexes) {
 
-  if (index.parent().data(InternetModel::Role_Type).toInt() !=
-      InternetModel::Type_UserPlaylist) {
-    return;
+    if (index.parent().data(InternetModel::Role_Type).toInt() !=
+        InternetModel::Type_UserPlaylist) {
+      continue;
+    }
+
+    int playlist_id = index.data(Role_UserPlaylistId).toInt();
+    int song_id = ExtractSongId(index.data(InternetModel::Role_Url).toUrl());
+    if (song_id) {
+      playlists_songs_ids[playlist_id] << song_id;
+    }
   }
 
-  int playlist_id = index.data(Role_UserPlaylistId).toInt();
-  int song_id = ExtractSongId(index.data(InternetModel::Role_Url).toUrl());
-  if (song_id) {
-    RemoveFromPlaylist(playlist_id, song_id);
+  for (QMap<int, QList<int> >::const_iterator it = playlists_songs_ids.constBegin();
+       it != playlists_songs_ids.constEnd();
+       ++it) {
+    RemoveFromPlaylist(it.key(), it.value());
   }
 }
 
-void GroovesharkService::RemoveFromPlaylist(int playlist_id, int song_id) {
+void GroovesharkService::RemoveFromPlaylist(int playlist_id,
+                                            const QList<int>& songs_ids_to_remove) {
   if (!playlists_.contains(playlist_id)) {
     return;
   }
 
   QList<int> songs_ids = playlists_[playlist_id].songs_ids_;
-  songs_ids.removeOne(song_id);
+  foreach (const int song_id, songs_ids_to_remove) {
+    songs_ids.removeOne(song_id);
+  }
 
   SetPlaylistSongs(playlist_id, songs_ids);
 }
