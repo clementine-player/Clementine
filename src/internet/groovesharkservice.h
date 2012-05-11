@@ -96,7 +96,7 @@ class GroovesharkService : public InternetService {
   void DeletePlaylist(int playlist_id);
   void RenamePlaylist(int playlist_id);
   void AddUserFavoriteSong(int song_id);
-  void RemoveFromFavorites(int song_id);
+  void RemoveFromFavorites(const QList<int>& songs_ids_to_remove);
   void GetSongUrlToShare(int song_id);
   void GetPlaylistUrlToShare(int playlist_id);
   // Start autoplay for the given tag_id, fill the autoplay_state, returns a

@@ -1390,22 +1390,37 @@ void GroovesharkService::RemoveFromPlaylist(int playlist_id,
 }
 
 void GroovesharkService::RemoveCurrentFromFavorites() {
-  const QModelIndex& index(model()->current_index());
+  const QModelIndexList& indexes(model()->selected_indexes());
+  QList<int> songs_ids;
+  foreach (const QModelIndex& index, indexes) {
 
-  if (index.parent().data(Role_PlaylistType).toInt() != UserFavorites) {
-    return;
-  }
+    if (index.parent().data(Role_PlaylistType).toInt() != UserFavorites) {
+      continue;
+    }
 
-  int song_id = ExtractSongId(index.data(InternetModel::Role_Url).toUrl());
-  if (song_id) {
-    RemoveFromFavorites(song_id);
+    int song_id = ExtractSongId(index.data(InternetModel::Role_Url).toUrl());
+    if (song_id) {
+      songs_ids << song_id;
+    }
   }
+  
+  RemoveFromFavorites(songs_ids);
 }
 
-void GroovesharkService::RemoveFromFavorites(int song_id) {
+void GroovesharkService::RemoveFromFavorites(const QList<int>& songs_ids_to_remove) {
+  if (songs_ids_to_remove.isEmpty())
+    return;
+
   int task_id = app_->task_manager()->StartTask(tr("Removing song from favorites"));
   QList<Param> parameters;
-  parameters << Param("songIDs", QVariantList() << QVariant(song_id));
+
+  // Convert song ids to QVariant
+  QVariantList songs_ids_qvariant;
+  foreach (const int song_id, songs_ids_to_remove) {
+    songs_ids_qvariant << QVariant(song_id);
+  }
+
+  parameters << Param("songIDs", songs_ids_qvariant);
   QNetworkReply* reply = CreateRequest("removeUserFavoriteSongs", parameters);
   NewClosure(reply, SIGNAL(finished()), this,
     SLOT(SongRemovedFromFavorites(QNetworkReply*, int)), reply, task_id);
