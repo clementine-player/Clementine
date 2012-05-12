@@ -1330,7 +1330,7 @@ void MainWindow::PlaylistRightClick(const QPoint& global_pos, const QModelIndex&
 
   //create the playlist submenu
   QMenu* add_to_another_menu = new QMenu(tr("Add to another playlist"), this);
-  add_to_another_menu->setIcon((IconLoader::Load("add")));
+  add_to_another_menu->setIcon(IconLoader::Load("list-add"));
 
   PlaylistBackend::Playlist playlist;
   foreach (playlist, app_->playlist_backend()->GetAllPlaylists()) {
