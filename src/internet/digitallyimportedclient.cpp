@@ -16,6 +16,7 @@
 */
 
 #include "digitallyimportedclient.h"
+#include "core/logging.h"
 #include "core/network.h"
 
 #include <qjson/parser.h>
@@ -31,7 +32,7 @@ const char* DigitallyImportedClient::kApiUsername = "ephemeron";
 const char* DigitallyImportedClient::kApiPassword = "dayeiph0ne@pp";
 
 const char* DigitallyImportedClient::kAuthUrl =
-    "http://api.audioaddict.com/%1/premium/auth";
+    "http://api.audioaddict.com/v1/%1/members/authenticate";
 
 const char* DigitallyImportedClient::kChannelListUrl =
     "http://api.v2.audioaddict.com/v1/%1/mobile/batch_update?asset_group_key=mobile_icons&stream_set_key=";
@@ -67,27 +68,39 @@ DigitallyImportedClient::ParseAuthReply(QNetworkReply* reply) const {
   ret.success_ = false;
   ret.error_reason_ = tr("Unknown error");
 
-  QJson::Parser parser;
-  QVariantMap data = parser.parse(reply).toMap();
-
-  if (data.value("status", QString()).toString() != "OK" ||
-      !data.contains("user")) {
-    ret.error_reason_ = data.value("reason", ret.error_reason_).toString();
+  const int http_status = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
+  if (http_status == 403) {
+    ret.error_reason_ = reply->readAll();
+    return ret;
+  } else if (http_status != 200) {
     return ret;
   }
 
-  QVariantMap user = data["user"].toMap();
-  if (!user.contains("first_name") ||
-      !user.contains("last_name") ||
-      !user.contains("expires") ||
-      !user.contains("listen_hash"))
+  QJson::Parser parser;
+  QVariantMap data = parser.parse(reply).toMap();
+
+  if (!data.contains("subscriptions")) {
+    return ret;
+  }
+
+  QVariantList subscriptions = data.value("subscriptions", QVariantList()).toList();
+  if (subscriptions.isEmpty() ||
+      subscriptions[0].toMap().value("status").toString() != "active") {
+    ret.error_reason_ = tr("You do not have an active subscription");
+    return ret;
+  }
+
+  if (!data.contains("first_name") ||
+      !data.contains("last_name") ||
+      !subscriptions[0].toMap().contains("expires_on") ||
+      !data.contains("listen_key"))
     return ret;
 
   ret.success_ = true;
-  ret.first_name_ = user["first_name"].toString();
-  ret.last_name_ = user["last_name"].toString();
-  ret.expires_ = QDateTime::fromString(user["expires"].toString(), Qt::ISODate);
-  ret.listen_hash_ = user["listen_hash"].toString();
+  ret.first_name_ = data["first_name"].toString();
+  ret.last_name_ = data["last_name"].toString();
+  ret.expires_ = QDateTime::fromString(subscriptions[0].toMap()["expires_on"].toString(), Qt::ISODate);
+  ret.listen_hash_ = data["listen_key"].toString();
   return ret;
 }
 
