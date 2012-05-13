@@ -149,6 +149,7 @@ void LastFMService::ReloadSettings() {
   scrobbling_enabled_ = settings.value("ScrobblingEnabled", true).toBool();
   buttons_visible_ = settings.value("ShowLoveBanButtons", true).toBool();
   scrobble_button_visible_ = settings.value("ShowScrobbleButton", true).toBool();
+  prefer_albumartist_ = settings.value("PreferAlbumArtist", false).toBool();
   friend_names_.Load();
 
   //avoid emitting signal if it's not changed
@@ -156,6 +157,7 @@ void LastFMService::ReloadSettings() {
     emit ScrobblingEnabledChanged(scrobbling_enabled_);
   emit ButtonVisibilityChanged(buttons_visible_);
   emit ScrobbleButtonVisibilityChanged(scrobble_button_visible_);
+  emit PreferAlbumArtistChanged(prefer_albumartist_);
 }
 
 void LastFMService::ShowConfig() {
@@ -496,7 +498,7 @@ lastfm::Track LastFMService::TrackFromSong(const Song &song) const {
     return last_track_;
 
   lastfm::Track ret;
-  song.ToLastFM(&ret);
+  song.ToLastFM(&ret, PreferAlbumArtist());
   return ret;
 
 }

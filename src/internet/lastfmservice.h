@@ -101,6 +101,7 @@ class LastFMService : public InternetService {
   bool IsScrobblingEnabled() const { return scrobbling_enabled_; }
   bool AreButtonsVisible() const { return buttons_visible_; }
   bool IsScrobbleButtonVisible() const { return scrobble_button_visible_; }
+  bool PreferAlbumArtist() const { return prefer_albumartist_; }
   bool HasConnectionProblems() const { return connection_problems_; }
 
   void Authenticate(const QString& username, const QString& password);
@@ -132,6 +133,7 @@ class LastFMService : public InternetService {
   void ScrobblingEnabledChanged(bool value);
   void ButtonVisibilityChanged(bool value);
   void ScrobbleButtonVisibilityChanged(bool value);
+  void PreferAlbumArtistChanged(bool value);
   void ScrobblerStatus(int value);
   void UpdatedSubscriberStatus(bool is_subscriber);
   void ScrobbledRadioStream();
@@ -212,6 +214,7 @@ class LastFMService : public InternetService {
   bool scrobbling_enabled_;
   bool buttons_visible_;
   bool scrobble_button_visible_;
+  bool prefer_albumartist_;
 
   QStandardItem* root_item_;
   QStandardItem* artist_list_;

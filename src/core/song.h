@@ -128,7 +128,7 @@ class Song {
   void BindToQuery(QSqlQuery* query) const;
   void BindToFtsQuery(QSqlQuery* query) const;
 #ifdef HAVE_LIBLASTFM
-  void ToLastFM(lastfm::Track* track) const;
+  void ToLastFM(lastfm::Track* track, bool prefer_album_artist) const;
 #endif
   void ToXesam(QVariantMap* map) const;
   void ToProtobuf(pb::tagreader::SongMetadata* pb) const;

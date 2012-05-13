@@ -1001,10 +1001,14 @@ void Song::BindToFtsQuery(QSqlQuery *query) const {
 }
 
 #ifdef HAVE_LIBLASTFM
-void Song::ToLastFM(lastfm::Track* track) const {
+void Song::ToLastFM(lastfm::Track* track, bool prefer_album_artist) const {
   lastfm::MutableTrack mtrack(*track);
 
-  mtrack.setArtist(d->artist_);
+  if (prefer_album_artist && !d->albumartist_.isEmpty()) {
+    mtrack.setArtist(d->albumartist_);
+  } else {
+    mtrack.setArtist(d->artist_);
+  }
   mtrack.setAlbum(d->album_);
   mtrack.setTitle(d->title_);
   mtrack.setDuration(length_nanosec() / kNsecPerSec);
