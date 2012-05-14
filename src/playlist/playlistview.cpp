@@ -409,7 +409,7 @@ void PlaylistView::drawRow(QPainter* painter, const QStyleOptionViewItem& option
                         is_paused ? currenttrack_pause_ : currenttrack_play_);
 
     // Set the font
-    opt.palette.setColor(QPalette::Text, opt.palette.color(QPalette::HighlightedText));
+    opt.palette.setColor(QPalette::Text, QApplication::palette().color(QPalette::HighlightedText));
     opt.palette.setColor(QPalette::Highlight, Qt::transparent);
     opt.palette.setColor(QPalette::AlternateBase, Qt::transparent);
     opt.font.setItalic(true);
