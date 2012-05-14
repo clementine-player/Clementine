@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-04-13 15:48+0000\n"
+"PO-Revision-Date: 2012-05-13 16:03+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -319,7 +319,7 @@ msgstr "Despre Qt..."
 #: ../bin/src/ui_groovesharksettingspage.h:113
 #: ../bin/src/ui_magnatunesettingspage.h:155
 #: ../bin/src/ui_spotifysettingspage.h:209
-#: ../bin/src/ui_lastfmsettingspage.h:145
+#: ../bin/src/ui_lastfmsettingspage.h:151
 msgid "Account details"
 msgstr "Detalii cont"
 
@@ -633,7 +633,7 @@ msgstr "A apărut o eroare la încărcarea bazei de date iTunes"
 msgid "An error occurred writing metadata to '%1'"
 msgstr "A apărut o eroare la scrierea metadata '%1'"
 
-#: internet/lastfmservice.cpp:914
+#: internet/lastfmservice.cpp:916
 #, qt-format
 msgid "An unknown last.fm error occurred: %1"
 msgstr "A apărut o eroare necunoscută last.fm: %1"
@@ -691,7 +691,7 @@ msgstr "Artist"
 msgid "Artist info"
 msgstr "Info artist"
 
-#: internet/lastfmservice.cpp:207
+#: internet/lastfmservice.cpp:209
 msgid "Artist radio"
 msgstr "Radioul artistului"
 
@@ -708,7 +708,7 @@ msgid "Audio format"
 msgstr "Format audio"
 
 #: internet/digitallyimportedsettingspage.cpp:82
-#: internet/magnatunesettingspage.cpp:113 internet/lastfmservice.cpp:448
+#: internet/magnatunesettingspage.cpp:113 internet/lastfmservice.cpp:450
 #: internet/lastfmsettingspage.cpp:78
 msgid "Authentication failed"
 msgstr "Autentificarea a eșuat"
@@ -947,7 +947,7 @@ msgstr "Golește lista de redare"
 
 #: smartplaylists/searchtermwidget.cpp:321 ../bin/src/ui_mainwindow.h:644
 #: visualisations/visualisationcontainer.cpp:211
-#: ../bin/src/ui_visualisationoverlay.h:179
+#: ../bin/src/ui_visualisationoverlay.h:183
 msgid "Clementine"
 msgstr "Clementine"
 
@@ -987,7 +987,7 @@ msgid ""
 "installed Clementine properly."
 msgstr "Clementine nu a putut încărca nici un projectM vizualizări. Verificaţi dacă aţi instalat corect Clementine."
 
-#: internet/lastfmsettingspage.cpp:103
+#: internet/lastfmsettingspage.cpp:104
 msgid ""
 "Clementine couldn't fetch your subscription status since there are problems "
 "with your connection. Played tracks will be cached and sent later to "
@@ -1165,7 +1165,7 @@ msgid ""
 "plugins installed"
 msgstr "Nu s-a putut găsi un encoder pentru %1, verifică dacă ai instalat plugin-uri corecte GStreamer"
 
-#: internet/lastfmservice.cpp:911
+#: internet/lastfmservice.cpp:913
 msgid "Couldn't load the last.fm radio station"
 msgstr "Nu s-a putut încărca postul de radio last.fm"
 
@@ -1302,7 +1302,7 @@ msgstr ""
 msgid "Custom message settings"
 msgstr "Setări mesaj personalizat"
 
-#: internet/lastfmservice.cpp:215
+#: internet/lastfmservice.cpp:217
 msgid "Custom radio"
 msgstr "Radio personalizat"
 
@@ -2007,7 +2007,7 @@ msgstr ""
 #: ../bin/src/ui_transcoderoptionsvorbis.h:201
 #: ../bin/src/ui_transcoderoptionswma.h:78 ../bin/src/ui_equalizerslider.h:82
 #: ../bin/src/ui_fileview.h:107 ../bin/src/ui_loginstatewidget.h:171
-#: ../bin/src/ui_trackslider.h:69 ../bin/src/ui_visualisationoverlay.h:178
+#: ../bin/src/ui_trackslider.h:69 ../bin/src/ui_visualisationoverlay.h:182
 msgid "Form"
 msgstr ""
 
@@ -2024,7 +2024,7 @@ msgstr "Rată de cadre"
 msgid "Frames per buffer"
 msgstr ""
 
-#: internet/lastfmservice.cpp:223
+#: internet/lastfmservice.cpp:225
 msgid "Friends"
 msgstr "Prieteni"
 
@@ -2290,31 +2290,31 @@ msgstr "Internet"
 msgid "Internet providers"
 msgstr ""
 
-#: internet/lastfmservice.cpp:454
+#: internet/lastfmservice.cpp:456
 msgid "Invalid API key"
 msgstr "Cheie API invalidă"
 
-#: internet/lastfmservice.cpp:449
+#: internet/lastfmservice.cpp:451
 msgid "Invalid format"
 msgstr "Format invalid"
 
-#: internet/lastfmservice.cpp:447
+#: internet/lastfmservice.cpp:449
 msgid "Invalid method"
 msgstr "Metodă invalidă"
 
-#: internet/lastfmservice.cpp:450
+#: internet/lastfmservice.cpp:452
 msgid "Invalid parameters"
 msgstr "Parametri invalizi"
 
-#: internet/lastfmservice.cpp:451
+#: internet/lastfmservice.cpp:453
 msgid "Invalid resource specified"
 msgstr "Resursă specificată este nevalidă"
 
-#: internet/lastfmservice.cpp:446
+#: internet/lastfmservice.cpp:448
 msgid "Invalid service"
 msgstr "Serviciu invalid"
 
-#: internet/lastfmservice.cpp:453
+#: internet/lastfmservice.cpp:455
 msgid "Invalid session key"
 msgstr "Cheie de sesiune invalidă"
 
@@ -2399,7 +2399,7 @@ msgstr "Bară laterală mare"
 msgid "Last played"
 msgstr "Ultimele redate"
 
-#: ../bin/src/ui_lastfmsettingspage.h:144
+#: ../bin/src/ui_lastfmsettingspage.h:150
 msgid "Last.fm"
 msgstr "Last.fm"
 
@@ -2408,25 +2408,25 @@ msgstr "Last.fm"
 msgid "Last.fm Custom Radio: %1"
 msgstr "Radio Last.fm personalizat: %1"
 
-#: internet/lastfmservice.cpp:254 internet/lastfmservice.cpp:708
-#: internet/lastfmservice.cpp:743
+#: internet/lastfmservice.cpp:256 internet/lastfmservice.cpp:710
+#: internet/lastfmservice.cpp:745
 #, qt-format
 msgid "Last.fm Library - %1"
 msgstr "Bibliotecă Last.fm - %1"
 
-#: globalsearch/lastfmsearchprovider.cpp:76 internet/lastfmservice.cpp:256
-#: internet/lastfmservice.cpp:259
+#: globalsearch/lastfmsearchprovider.cpp:76 internet/lastfmservice.cpp:258
+#: internet/lastfmservice.cpp:261
 #, qt-format
 msgid "Last.fm Mix Radio - %1"
 msgstr "Radio Last.fm mix - %1"
 
-#: globalsearch/lastfmsearchprovider.cpp:78 internet/lastfmservice.cpp:261
-#: internet/lastfmservice.cpp:264
+#: globalsearch/lastfmsearchprovider.cpp:78 internet/lastfmservice.cpp:263
+#: internet/lastfmservice.cpp:266
 #, qt-format
 msgid "Last.fm Neighbor Radio - %1"
 msgstr "Radio vecin Last.fm - %1"
 
-#: globalsearch/lastfmsearchprovider.cpp:74 internet/lastfmservice.cpp:251
+#: globalsearch/lastfmsearchprovider.cpp:74 internet/lastfmservice.cpp:253
 #, qt-format
 msgid "Last.fm Radio Station - %1"
 msgstr "Post de radio Last.fm - %1"
@@ -2441,11 +2441,11 @@ msgstr "Artiști Last.fm similari cu %1"
 msgid "Last.fm Tag Radio: %1"
 msgstr "Radio Last.fm etichetat: %1"
 
-#: internet/lastfmservice.cpp:458
+#: internet/lastfmservice.cpp:460
 msgid "Last.fm is currently busy, please try again in a few minutes"
 msgstr "Last.fm este momentan ocupat, încercați din nou peste câteva minute"
 
-#: ../bin/src/ui_lastfmsettingspage.h:148
+#: ../bin/src/ui_lastfmsettingspage.h:154
 msgid "Last.fm password"
 msgstr "Parolă Last.fm"
 
@@ -2457,7 +2457,7 @@ msgstr "Număr de redări Last.fm"
 msgid "Last.fm tags"
 msgstr "Etichete Last.fm"
 
-#: ../bin/src/ui_lastfmsettingspage.h:146
+#: ../bin/src/ui_lastfmsettingspage.h:152
 msgid "Last.fm username"
 msgstr "Nume utilizator Last.fm"
 
@@ -2535,7 +2535,7 @@ msgstr "Încarcă listă de redare"
 msgid "Load playlist..."
 msgstr "Încarcă listă de redare..."
 
-#: internet/lastfmservice.cpp:924
+#: internet/lastfmservice.cpp:926
 msgid "Loading Last.fm radio"
 msgstr "Se încarcă radio Last.fm"
 
@@ -2586,7 +2586,7 @@ msgstr "Încarcă fișiere/URL-uri, înlocuind lista de redare curentă"
 #: ../bin/src/ui_groovesharksettingspage.h:116
 #: ../bin/src/ui_magnatunesettingspage.h:164
 #: ../bin/src/ui_spotifysettingspage.h:212
-#: ../bin/src/ui_lastfmsettingspage.h:147
+#: ../bin/src/ui_lastfmsettingspage.h:153
 msgid "Login"
 msgstr "Logare"
 
@@ -2669,7 +2669,7 @@ msgstr ""
 msgid "Make playlist available offline"
 msgstr ""
 
-#: internet/lastfmservice.cpp:465
+#: internet/lastfmservice.cpp:467
 msgid "Malformed response"
 msgstr ""
 
@@ -2779,35 +2779,35 @@ msgstr "Biblioteca audio"
 msgid "Mute"
 msgstr "Mut"
 
-#: globalsearch/lastfmsearchprovider.cpp:52 internet/lastfmservice.cpp:194
+#: globalsearch/lastfmsearchprovider.cpp:52 internet/lastfmservice.cpp:196
 msgid "My Last.fm Library"
 msgstr ""
 
-#: globalsearch/lastfmsearchprovider.cpp:54 internet/lastfmservice.cpp:199
+#: globalsearch/lastfmsearchprovider.cpp:54 internet/lastfmservice.cpp:201
 msgid "My Last.fm Mix Radio"
 msgstr ""
 
-#: globalsearch/lastfmsearchprovider.cpp:56 internet/lastfmservice.cpp:204
+#: globalsearch/lastfmsearchprovider.cpp:56 internet/lastfmservice.cpp:206
 msgid "My Last.fm Neighborhood"
 msgstr ""
 
-#: globalsearch/lastfmsearchprovider.cpp:50 internet/lastfmservice.cpp:189
+#: globalsearch/lastfmsearchprovider.cpp:50 internet/lastfmservice.cpp:191
 msgid "My Last.fm Recommended Radio"
 msgstr ""
 
-#: internet/lastfmservice.cpp:196
+#: internet/lastfmservice.cpp:198
 msgid "My Mix Radio"
 msgstr ""
 
-#: internet/lastfmservice.cpp:201
+#: internet/lastfmservice.cpp:203
 msgid "My Neighborhood"
 msgstr "Vecinătatea mea"
 
-#: internet/lastfmservice.cpp:191
+#: internet/lastfmservice.cpp:193
 msgid "My Radio Station"
 msgstr "Postul meu de radio"
 
-#: internet/lastfmservice.cpp:186
+#: internet/lastfmservice.cpp:188
 msgid "My Recommendations"
 msgstr "Recomandările mele"
 
@@ -2827,7 +2827,7 @@ msgstr "Opțiuni de numire"
 msgid "Narrow band (NB)"
 msgstr "Bandă îngustă (NB)"
 
-#: internet/lastfmservice.cpp:228
+#: internet/lastfmservice.cpp:230
 msgid "Neighbors"
 msgstr "Vecini"
 
@@ -2923,19 +2923,19 @@ msgstr "Indisponibil în timpul folosirii unei liste de redare dinamice"
 msgid "Not connected"
 msgstr "Neconectat"
 
-#: internet/lastfmservice.cpp:460
+#: internet/lastfmservice.cpp:462
 msgid "Not enough content"
 msgstr "Nu este destul conținut"
 
-#: internet/lastfmservice.cpp:462
+#: internet/lastfmservice.cpp:464
 msgid "Not enough fans"
 msgstr "Nu sunt destui fani"
 
-#: internet/lastfmservice.cpp:461
+#: internet/lastfmservice.cpp:463
 msgid "Not enough members"
 msgstr "Nu sunt destui membri"
 
-#: internet/lastfmservice.cpp:463
+#: internet/lastfmservice.cpp:465
 msgid "Not enough neighbors"
 msgstr "Nu sunt destui vecini"
 
@@ -3015,7 +3015,7 @@ msgstr "Deschide în listă de redare nouă"
 msgid "Open..."
 msgstr "Deschide..."
 
-#: internet/lastfmservice.cpp:452
+#: internet/lastfmservice.cpp:454
 msgid "Operation failed"
 msgstr "Operația a eșuat"
 
@@ -3224,7 +3224,7 @@ msgstr "Preamplificare"
 #: ../bin/src/ui_digitallyimportedsettingspage.h:166
 #: ../bin/src/ui_magnatunesettingspage.h:166
 #: ../bin/src/ui_spotifysettingspage.h:217 ../bin/src/ui_settingsdialog.h:115
-#: ../bin/src/ui_lastfmsettingspage.h:149
+#: ../bin/src/ui_lastfmsettingspage.h:155
 msgid "Preferences"
 msgstr "Preferinţe"
 
@@ -3445,7 +3445,7 @@ msgstr "Elimină din lista de redare"
 msgid "Remove playlist"
 msgstr "Șterge listă de redare"
 
-#: internet/groovesharkservice.cpp:1394
+#: internet/groovesharkservice.cpp:1414
 msgid "Removing song from favorites"
 msgstr "Scoatere melodie din favorite"
 
@@ -3604,7 +3604,7 @@ msgstr ""
 msgid "Score"
 msgstr "Scor"
 
-#: ../bin/src/ui_lastfmsettingspage.h:150
+#: ../bin/src/ui_lastfmsettingspage.h:156
 msgid "Scrobble tracks that I listen to"
 msgstr ""
 
@@ -3740,7 +3740,7 @@ msgstr "Selectează vizualizări..."
 msgid "Serial number"
 msgstr ""
 
-#: internet/lastfmservice.cpp:455
+#: internet/lastfmservice.cpp:457
 msgid "Service offline"
 msgstr "Serviciu offline"
 
@@ -3853,11 +3853,11 @@ msgstr "Arată numai fără taguri"
 msgid "Show the \"Search for anything\" box above the sidebar"
 msgstr ""
 
-#: ../bin/src/ui_lastfmsettingspage.h:151
+#: ../bin/src/ui_lastfmsettingspage.h:157
 msgid "Show the \"love\" and \"ban\" buttons"
 msgstr ""
 
-#: ../bin/src/ui_lastfmsettingspage.h:152
+#: ../bin/src/ui_lastfmsettingspage.h:158
 msgid "Show the scrobble button in the main window"
 msgstr ""
 
@@ -4141,7 +4141,7 @@ msgstr "Tag"
 msgid "Tag fetcher"
 msgstr ""
 
-#: internet/lastfmservice.cpp:211
+#: internet/lastfmservice.cpp:213
 msgid "Tag radio"
 msgstr ""
 
@@ -4297,7 +4297,7 @@ msgid ""
 "want to continue?"
 msgstr ""
 
-#: internet/lastfmservice.cpp:456
+#: internet/lastfmservice.cpp:458
 msgid "This stream is for paid subscribers only"
 msgstr ""
 
@@ -4430,7 +4430,7 @@ msgstr "Necunoscut"
 msgid "Unknown content-type"
 msgstr ""
 
-#: internet/digitallyimportedclient.cpp:68 internet/lastfmservice.cpp:469
+#: internet/digitallyimportedclient.cpp:69 internet/lastfmservice.cpp:471
 msgid "Unknown error"
 msgstr "Eroare necunoscută"
 
@@ -4483,6 +4483,10 @@ msgstr "Se actualizează biblioteca"
 #: core/commandlineoptions.cpp:144
 msgid "Usage"
 msgstr "Utilizare"
+
+#: ../bin/src/ui_lastfmsettingspage.h:159
+msgid "Use Album Artist tag when available"
+msgstr ""
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:168
 msgid "Use Gnome's shortcut keys"
@@ -4596,7 +4600,7 @@ msgstr ""
 msgid "Visualizations"
 msgstr "Vizualizări"
 
-#: ../bin/src/ui_visualisationoverlay.h:181
+#: ../bin/src/ui_visualisationoverlay.h:185
 msgid "Visualizations Settings"
 msgstr "Setări vizualizări"
 
@@ -4773,7 +4777,7 @@ msgstr ""
 msgid "You can listen to background streams at the same time as other music."
 msgstr ""
 
-#: internet/lastfmsettingspage.cpp:140
+#: internet/lastfmsettingspage.cpp:142
 msgid ""
 "You can scrobble tracks for free, but only <span style=\" font-"
 "weight:600;\">paid subscribers</span> can stream Last.fm radio from "
@@ -4794,6 +4798,10 @@ msgstr ""
 #: internet/spotifysettingspage.cpp:148
 msgid "You do not have a Spotify Premium account."
 msgstr "Nu aveți un cont Spotify Premium."
+
+#: internet/digitallyimportedclient.cpp:89
+msgid "You do not have an active subscription"
+msgstr ""
 
 #: internet/spotifyservice.cpp:162
 msgid ""
@@ -4820,7 +4828,7 @@ msgstr ""
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Vei fi nevoit să restartezi Clementine dacă schimbi limba."
 
-#: internet/lastfmsettingspage.cpp:107
+#: internet/lastfmsettingspage.cpp:108
 msgid ""
 "You will not be able to play Last.fm radio stations as you are not a Last.fm"
 " subscriber."

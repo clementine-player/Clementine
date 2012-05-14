@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-04-13 15:48+0000\n"
+"PO-Revision-Date: 2012-05-13 16:03+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -325,7 +325,7 @@ msgstr "Qt Hakkında..."
 #: ../bin/src/ui_groovesharksettingspage.h:113
 #: ../bin/src/ui_magnatunesettingspage.h:155
 #: ../bin/src/ui_spotifysettingspage.h:209
-#: ../bin/src/ui_lastfmsettingspage.h:145
+#: ../bin/src/ui_lastfmsettingspage.h:151
 msgid "Account details"
 msgstr "Hesap ayrıntıları"
 
@@ -639,7 +639,7 @@ msgstr "iTunes veritabanı yüklenirken hata oluştu"
 msgid "An error occurred writing metadata to '%1'"
 msgstr "'%1' dosyasına metadata yazarken hata oluştu"
 
-#: internet/lastfmservice.cpp:914
+#: internet/lastfmservice.cpp:916
 #, qt-format
 msgid "An unknown last.fm error occurred: %1"
 msgstr "Bilinmeyen bir last.fm hatası oluştu: %1"
@@ -697,7 +697,7 @@ msgstr "Sanatçı"
 msgid "Artist info"
 msgstr "Sanatçı bilgisi"
 
-#: internet/lastfmservice.cpp:207
+#: internet/lastfmservice.cpp:209
 msgid "Artist radio"
 msgstr "Sanatçı radyosu"
 
@@ -714,7 +714,7 @@ msgid "Audio format"
 msgstr "Ses biçimi"
 
 #: internet/digitallyimportedsettingspage.cpp:82
-#: internet/magnatunesettingspage.cpp:113 internet/lastfmservice.cpp:448
+#: internet/magnatunesettingspage.cpp:113 internet/lastfmservice.cpp:450
 #: internet/lastfmsettingspage.cpp:78
 msgid "Authentication failed"
 msgstr "Kimlik doğrulama başarısız"
@@ -953,7 +953,7 @@ msgstr "Çalma listesini temizle"
 
 #: smartplaylists/searchtermwidget.cpp:321 ../bin/src/ui_mainwindow.h:644
 #: visualisations/visualisationcontainer.cpp:211
-#: ../bin/src/ui_visualisationoverlay.h:179
+#: ../bin/src/ui_visualisationoverlay.h:183
 msgid "Clementine"
 msgstr "Clementine"
 
@@ -993,7 +993,7 @@ msgid ""
 "installed Clementine properly."
 msgstr "Clementine projectM görsellerini yükleyemedi. Clementine programını düzgün yüklediğinizi kontrol edin."
 
-#: internet/lastfmsettingspage.cpp:103
+#: internet/lastfmsettingspage.cpp:104
 msgid ""
 "Clementine couldn't fetch your subscription status since there are problems "
 "with your connection. Played tracks will be cached and sent later to "
@@ -1171,7 +1171,7 @@ msgid ""
 "plugins installed"
 msgstr "%1 için kodlayıcı bulunamadı, gerekli GStreamer eklentilerinin yüklü olup olmadığını kontrol edin"
 
-#: internet/lastfmservice.cpp:911
+#: internet/lastfmservice.cpp:913
 msgid "Couldn't load the last.fm radio station"
 msgstr "Last.fm radyo istasyonu yüklenemedi"
 
@@ -1308,7 +1308,7 @@ msgstr "Özel resim:"
 msgid "Custom message settings"
 msgstr "Mesaj ayarlarını özelleştir"
 
-#: internet/lastfmservice.cpp:215
+#: internet/lastfmservice.cpp:217
 msgid "Custom radio"
 msgstr "Özel radyo"
 
@@ -2013,7 +2013,7 @@ msgstr "Bir aygıtı unuttuğunuzda listeden silinecek ve bu aygıtı tekrar ba�
 #: ../bin/src/ui_transcoderoptionsvorbis.h:201
 #: ../bin/src/ui_transcoderoptionswma.h:78 ../bin/src/ui_equalizerslider.h:82
 #: ../bin/src/ui_fileview.h:107 ../bin/src/ui_loginstatewidget.h:171
-#: ../bin/src/ui_trackslider.h:69 ../bin/src/ui_visualisationoverlay.h:178
+#: ../bin/src/ui_trackslider.h:69 ../bin/src/ui_visualisationoverlay.h:182
 msgid "Form"
 msgstr "Biçim"
 
@@ -2030,7 +2030,7 @@ msgstr "Kare oranı"
 msgid "Frames per buffer"
 msgstr "Tambon başına kare"
 
-#: internet/lastfmservice.cpp:223
+#: internet/lastfmservice.cpp:225
 msgid "Friends"
 msgstr "Arkadaşlar"
 
@@ -2296,31 +2296,31 @@ msgstr "Internet"
 msgid "Internet providers"
 msgstr "İnternet sağlayıcılar"
 
-#: internet/lastfmservice.cpp:454
+#: internet/lastfmservice.cpp:456
 msgid "Invalid API key"
 msgstr "Geçersiz API anahtarı"
 
-#: internet/lastfmservice.cpp:449
+#: internet/lastfmservice.cpp:451
 msgid "Invalid format"
 msgstr "Geçersiz biçim"
 
-#: internet/lastfmservice.cpp:447
+#: internet/lastfmservice.cpp:449
 msgid "Invalid method"
 msgstr "Geçersiz metod"
 
-#: internet/lastfmservice.cpp:450
+#: internet/lastfmservice.cpp:452
 msgid "Invalid parameters"
 msgstr "Geçersiz parametreler"
 
-#: internet/lastfmservice.cpp:451
+#: internet/lastfmservice.cpp:453
 msgid "Invalid resource specified"
 msgstr "Geçersiz kaynak belirtildi"
 
-#: internet/lastfmservice.cpp:446
+#: internet/lastfmservice.cpp:448
 msgid "Invalid service"
 msgstr "Geçersiz servis"
 
-#: internet/lastfmservice.cpp:453
+#: internet/lastfmservice.cpp:455
 msgid "Invalid session key"
 msgstr "Geçersiz oturum anahtarı"
 
@@ -2405,7 +2405,7 @@ msgstr "Büyük kenar çubuğu"
 msgid "Last played"
 msgstr "Son çalınan"
 
-#: ../bin/src/ui_lastfmsettingspage.h:144
+#: ../bin/src/ui_lastfmsettingspage.h:150
 msgid "Last.fm"
 msgstr "Last.fm"
 
@@ -2414,25 +2414,25 @@ msgstr "Last.fm"
 msgid "Last.fm Custom Radio: %1"
 msgstr "Las.fm Kişisel Radyo: %1"
 
-#: internet/lastfmservice.cpp:254 internet/lastfmservice.cpp:708
-#: internet/lastfmservice.cpp:743
+#: internet/lastfmservice.cpp:256 internet/lastfmservice.cpp:710
+#: internet/lastfmservice.cpp:745
 #, qt-format
 msgid "Last.fm Library - %1"
 msgstr "Last.fm Kütüphanesi - %1"
 
-#: globalsearch/lastfmsearchprovider.cpp:76 internet/lastfmservice.cpp:256
-#: internet/lastfmservice.cpp:259
+#: globalsearch/lastfmsearchprovider.cpp:76 internet/lastfmservice.cpp:258
+#: internet/lastfmservice.cpp:261
 #, qt-format
 msgid "Last.fm Mix Radio - %1"
 msgstr "Last.fm Karışık Radyo - %1"
 
-#: globalsearch/lastfmsearchprovider.cpp:78 internet/lastfmservice.cpp:261
-#: internet/lastfmservice.cpp:264
+#: globalsearch/lastfmsearchprovider.cpp:78 internet/lastfmservice.cpp:263
+#: internet/lastfmservice.cpp:266
 #, qt-format
 msgid "Last.fm Neighbor Radio - %1"
 msgstr "Last.fm Komşu Radyo - %1"
 
-#: globalsearch/lastfmsearchprovider.cpp:74 internet/lastfmservice.cpp:251
+#: globalsearch/lastfmsearchprovider.cpp:74 internet/lastfmservice.cpp:253
 #, qt-format
 msgid "Last.fm Radio Station - %1"
 msgstr "Last.fm Radyo İstasyonu - %1"
@@ -2447,11 +2447,11 @@ msgstr "Last.fm %1 ile Benzer Sanatçılar"
 msgid "Last.fm Tag Radio: %1"
 msgstr "Last.fm Etiket Radyosu: %1"
 
-#: internet/lastfmservice.cpp:458
+#: internet/lastfmservice.cpp:460
 msgid "Last.fm is currently busy, please try again in a few minutes"
 msgstr "Last.fm şu anda meşgul, lütfen birkaç dakika içinde tekrar deneyin"
 
-#: ../bin/src/ui_lastfmsettingspage.h:148
+#: ../bin/src/ui_lastfmsettingspage.h:154
 msgid "Last.fm password"
 msgstr "Last.fm parolası"
 
@@ -2463,7 +2463,7 @@ msgstr "Last.fm çalma sayısı"
 msgid "Last.fm tags"
 msgstr "Last.fm etiketleri"
 
-#: ../bin/src/ui_lastfmsettingspage.h:146
+#: ../bin/src/ui_lastfmsettingspage.h:152
 msgid "Last.fm username"
 msgstr "Last.fm kullanıcı adı"
 
@@ -2541,7 +2541,7 @@ msgstr "Çalma listesini yükle"
 msgid "Load playlist..."
 msgstr "Çalma listesi yükle..."
 
-#: internet/lastfmservice.cpp:924
+#: internet/lastfmservice.cpp:926
 msgid "Loading Last.fm radio"
 msgstr "Last.fm radyosu yükleniyor"
 
@@ -2592,7 +2592,7 @@ msgstr "Dosyaları/URLleri yükler, mevcut çalma listesinin yerine koyar"
 #: ../bin/src/ui_groovesharksettingspage.h:116
 #: ../bin/src/ui_magnatunesettingspage.h:164
 #: ../bin/src/ui_spotifysettingspage.h:212
-#: ../bin/src/ui_lastfmsettingspage.h:147
+#: ../bin/src/ui_lastfmsettingspage.h:153
 msgid "Login"
 msgstr "Oturum aç"
 
@@ -2675,7 +2675,7 @@ msgstr "Make it so!"
 msgid "Make playlist available offline"
 msgstr "Çalma listesini çevrim dışındayken kullanılabilir yap"
 
-#: internet/lastfmservice.cpp:465
+#: internet/lastfmservice.cpp:467
 msgid "Malformed response"
 msgstr "Bozuk yanıt"
 
@@ -2785,35 +2785,35 @@ msgstr "Müzik Kütüphanesi"
 msgid "Mute"
 msgstr "Sessiz"
 
-#: globalsearch/lastfmsearchprovider.cpp:52 internet/lastfmservice.cpp:194
+#: globalsearch/lastfmsearchprovider.cpp:52 internet/lastfmservice.cpp:196
 msgid "My Last.fm Library"
 msgstr "Last.fm Kütüphanem"
 
-#: globalsearch/lastfmsearchprovider.cpp:54 internet/lastfmservice.cpp:199
+#: globalsearch/lastfmsearchprovider.cpp:54 internet/lastfmservice.cpp:201
 msgid "My Last.fm Mix Radio"
 msgstr "Last.fm Karışık Radyom"
 
-#: globalsearch/lastfmsearchprovider.cpp:56 internet/lastfmservice.cpp:204
+#: globalsearch/lastfmsearchprovider.cpp:56 internet/lastfmservice.cpp:206
 msgid "My Last.fm Neighborhood"
 msgstr "Last.fm Komşularım"
 
-#: globalsearch/lastfmsearchprovider.cpp:50 internet/lastfmservice.cpp:189
+#: globalsearch/lastfmsearchprovider.cpp:50 internet/lastfmservice.cpp:191
 msgid "My Last.fm Recommended Radio"
 msgstr "Last.fm Önerilen Radyom"
 
-#: internet/lastfmservice.cpp:196
+#: internet/lastfmservice.cpp:198
 msgid "My Mix Radio"
 msgstr "Karışık Radyom"
 
-#: internet/lastfmservice.cpp:201
+#: internet/lastfmservice.cpp:203
 msgid "My Neighborhood"
 msgstr "Komşularım"
 
-#: internet/lastfmservice.cpp:191
+#: internet/lastfmservice.cpp:193
 msgid "My Radio Station"
 msgstr "Radyom"
 
-#: internet/lastfmservice.cpp:186
+#: internet/lastfmservice.cpp:188
 msgid "My Recommendations"
 msgstr "Önerdiklerim"
 
@@ -2833,7 +2833,7 @@ msgstr "İsimlendirme seçenekleri"
 msgid "Narrow band (NB)"
 msgstr "Dar band (NB)"
 
-#: internet/lastfmservice.cpp:228
+#: internet/lastfmservice.cpp:230
 msgid "Neighbors"
 msgstr "Komşular"
 
@@ -2929,19 +2929,19 @@ msgstr "Dinamik şarkı listesi kullanırken geçerli değil"
 msgid "Not connected"
 msgstr "Bağlı Değil"
 
-#: internet/lastfmservice.cpp:460
+#: internet/lastfmservice.cpp:462
 msgid "Not enough content"
 msgstr "Yeterli içerik yok"
 
-#: internet/lastfmservice.cpp:462
+#: internet/lastfmservice.cpp:464
 msgid "Not enough fans"
 msgstr "Yeterli hayran yok"
 
-#: internet/lastfmservice.cpp:461
+#: internet/lastfmservice.cpp:463
 msgid "Not enough members"
 msgstr "Yeterli üye yok"
 
-#: internet/lastfmservice.cpp:463
+#: internet/lastfmservice.cpp:465
 msgid "Not enough neighbors"
 msgstr "Yeterli komşu yok"
 
@@ -3021,7 +3021,7 @@ msgstr "Yeni çalma listesinde aç"
 msgid "Open..."
 msgstr "Aç..."
 
-#: internet/lastfmservice.cpp:452
+#: internet/lastfmservice.cpp:454
 msgid "Operation failed"
 msgstr "İşlem başarısız"
 
@@ -3230,7 +3230,7 @@ msgstr "Ön yükseltici"
 #: ../bin/src/ui_digitallyimportedsettingspage.h:166
 #: ../bin/src/ui_magnatunesettingspage.h:166
 #: ../bin/src/ui_spotifysettingspage.h:217 ../bin/src/ui_settingsdialog.h:115
-#: ../bin/src/ui_lastfmsettingspage.h:149
+#: ../bin/src/ui_lastfmsettingspage.h:155
 msgid "Preferences"
 msgstr "Tercihler"
 
@@ -3451,7 +3451,7 @@ msgstr "Çalma listesinden kaldır"
 msgid "Remove playlist"
 msgstr "Çalma listesini kaldır"
 
-#: internet/groovesharkservice.cpp:1394
+#: internet/groovesharkservice.cpp:1414
 msgid "Removing song from favorites"
 msgstr "Şarkı favorilerden kaldırılıyor"
 
@@ -3610,7 +3610,7 @@ msgstr "Ölçeklenebilir örnekleme oranı profili (SSR)"
 msgid "Score"
 msgstr "Puan"
 
-#: ../bin/src/ui_lastfmsettingspage.h:150
+#: ../bin/src/ui_lastfmsettingspage.h:156
 msgid "Scrobble tracks that I listen to"
 msgstr "Dinlediğim parçaları skropla"
 
@@ -3746,7 +3746,7 @@ msgstr "Görselleştirmeleri seç..."
 msgid "Serial number"
 msgstr "Seri numarası"
 
-#: internet/lastfmservice.cpp:455
+#: internet/lastfmservice.cpp:457
 msgid "Service offline"
 msgstr "Hizmet çevrim dışı"
 
@@ -3859,11 +3859,11 @@ msgstr "Sadece etiketi olmayanları göster"
 msgid "Show the \"Search for anything\" box above the sidebar"
 msgstr "\"Herhangi birşey ara\" kutusunu yan çubuğun üzerinde göster"
 
-#: ../bin/src/ui_lastfmsettingspage.h:151
+#: ../bin/src/ui_lastfmsettingspage.h:157
 msgid "Show the \"love\" and \"ban\" buttons"
 msgstr "\"Beğen\" ve \"Yasakla\" tuşlarını göster"
 
-#: ../bin/src/ui_lastfmsettingspage.h:152
+#: ../bin/src/ui_lastfmsettingspage.h:158
 msgid "Show the scrobble button in the main window"
 msgstr "Ana pencerede skroplama düğmesini göster"
 
@@ -4147,7 +4147,7 @@ msgstr "Etiket"
 msgid "Tag fetcher"
 msgstr "Etiket getirici"
 
-#: internet/lastfmservice.cpp:211
+#: internet/lastfmservice.cpp:213
 msgid "Tag radio"
 msgstr "Etiket radyosu"
 
@@ -4303,7 +4303,7 @@ msgid ""
 "want to continue?"
 msgstr "Bu çalma listesi kaldırılacaktır; işbu eylem geri alınamaz. Devam etmek istediğinizden emin misiniz?"
 
-#: internet/lastfmservice.cpp:456
+#: internet/lastfmservice.cpp:458
 msgid "This stream is for paid subscribers only"
 msgstr "Bu yayın sadece abone olan kullanıcılar içindir"
 
@@ -4436,7 +4436,7 @@ msgstr "Bilinmeyen"
 msgid "Unknown content-type"
 msgstr "Bilinmeyen içerik türü"
 
-#: internet/digitallyimportedclient.cpp:68 internet/lastfmservice.cpp:469
+#: internet/digitallyimportedclient.cpp:69 internet/lastfmservice.cpp:471
 msgid "Unknown error"
 msgstr "Bilinmeyen hata"
 
@@ -4489,6 +4489,10 @@ msgstr "Kütüphane güncelleniyor"
 #: core/commandlineoptions.cpp:144
 msgid "Usage"
 msgstr "Kullanım"
+
+#: ../bin/src/ui_lastfmsettingspage.h:159
+msgid "Use Album Artist tag when available"
+msgstr ""
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:168
 msgid "Use Gnome's shortcut keys"
@@ -4602,7 +4606,7 @@ msgstr "Görüntüleme kipi"
 msgid "Visualizations"
 msgstr "Görseller"
 
-#: ../bin/src/ui_visualisationoverlay.h:181
+#: ../bin/src/ui_visualisationoverlay.h:185
 msgid "Visualizations Settings"
 msgstr "Görüntüleme Ayarları"
 
@@ -4779,7 +4783,7 @@ msgstr "Bir hesabınız olmadan ücretsiz olarak Magnatude'dan şarkı dinleyebi
 msgid "You can listen to background streams at the same time as other music."
 msgstr "Arkaplan akışlarını diğer müzikler gibi aynı anda dinleyebilirsiniz."
 
-#: internet/lastfmsettingspage.cpp:140
+#: internet/lastfmsettingspage.cpp:142
 msgid ""
 "You can scrobble tracks for free, but only <span style=\" font-"
 "weight:600;\">paid subscribers</span> can stream Last.fm radio from "
@@ -4800,6 +4804,10 @@ msgstr "Bir Grooveshark Anywhere hesabınız yok"
 #: internet/spotifysettingspage.cpp:148
 msgid "You do not have a Spotify Premium account."
 msgstr "Spotify Premium hesabınız yok."
+
+#: internet/digitallyimportedclient.cpp:89
+msgid "You do not have an active subscription"
+msgstr ""
 
 #: internet/spotifyservice.cpp:162
 msgid ""
@@ -4826,7 +4834,7 @@ msgstr "Clementine'da genel kısayolları kullanabilmek için Sistem Ayarlarına
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Dili değiştirdiyseniz programı yeniden başlatmanız gerekmektedir."
 
-#: internet/lastfmsettingspage.cpp:107
+#: internet/lastfmsettingspage.cpp:108
 msgid ""
 "You will not be able to play Last.fm radio stations as you are not a Last.fm"
 " subscriber."

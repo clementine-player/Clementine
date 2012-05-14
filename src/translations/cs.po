@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-04-13 15:48+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2012-05-13 21:00+0000\n"
+"Last-Translator: fri <pavelfric@seznam.cz>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: cs\n"
@@ -323,7 +323,7 @@ msgstr "O Qt..."
 #: ../bin/src/ui_groovesharksettingspage.h:113
 #: ../bin/src/ui_magnatunesettingspage.h:155
 #: ../bin/src/ui_spotifysettingspage.h:209
-#: ../bin/src/ui_lastfmsettingspage.h:145
+#: ../bin/src/ui_lastfmsettingspage.h:151
 msgid "Account details"
 msgstr "Podrobnosti o účtu"
 
@@ -637,7 +637,7 @@ msgstr "Při nahrávání databáze iTunes nastala chyba"
 msgid "An error occurred writing metadata to '%1'"
 msgstr "Při zápisu údajů do '%1' se vyskytla chyba"
 
-#: internet/lastfmservice.cpp:914
+#: internet/lastfmservice.cpp:916
 #, qt-format
 msgid "An unknown last.fm error occurred: %1"
 msgstr "Vyskytla se neznámá chyba služby last.fm: %1"
@@ -695,7 +695,7 @@ msgstr "Umělec"
 msgid "Artist info"
 msgstr "Informace o umělci"
 
-#: internet/lastfmservice.cpp:207
+#: internet/lastfmservice.cpp:209
 msgid "Artist radio"
 msgstr "Rádio umělce"
 
@@ -712,7 +712,7 @@ msgid "Audio format"
 msgstr "Zvukový formát"
 
 #: internet/digitallyimportedsettingspage.cpp:82
-#: internet/magnatunesettingspage.cpp:113 internet/lastfmservice.cpp:448
+#: internet/magnatunesettingspage.cpp:113 internet/lastfmservice.cpp:450
 #: internet/lastfmsettingspage.cpp:78
 msgid "Authentication failed"
 msgstr "Ověření selhalo"
@@ -951,7 +951,7 @@ msgstr "Vyprázdnit seznam skladeb"
 
 #: smartplaylists/searchtermwidget.cpp:321 ../bin/src/ui_mainwindow.h:644
 #: visualisations/visualisationcontainer.cpp:211
-#: ../bin/src/ui_visualisationoverlay.h:179
+#: ../bin/src/ui_visualisationoverlay.h:183
 msgid "Clementine"
 msgstr "Clementine"
 
@@ -991,7 +991,7 @@ msgid ""
 "installed Clementine properly."
 msgstr "Clementine se nepodařilo nahrát žádné vizualizace z projectM. Ověřte, že jste Clementine nainstalovali správně."
 
-#: internet/lastfmsettingspage.cpp:103
+#: internet/lastfmsettingspage.cpp:104
 msgid ""
 "Clementine couldn't fetch your subscription status since there are problems "
 "with your connection. Played tracks will be cached and sent later to "
@@ -1169,7 +1169,7 @@ msgid ""
 "plugins installed"
 msgstr "Nepodařilo se najít kodér \"%1\" - ujistěte se, že máte nainstalovány správné přídavné moduly GStreamer"
 
-#: internet/lastfmservice.cpp:911
+#: internet/lastfmservice.cpp:913
 msgid "Couldn't load the last.fm radio station"
 msgstr "Rádio last.fm se nepodařilo načíst"
 
@@ -1306,7 +1306,7 @@ msgstr "Vlastní obrázek:"
 msgid "Custom message settings"
 msgstr "Nastavení vlastní zprávy"
 
-#: internet/lastfmservice.cpp:215
+#: internet/lastfmservice.cpp:217
 msgid "Custom radio"
 msgstr "Vlastní rádio"
 
@@ -2011,7 +2011,7 @@ msgstr "Zařízení bude odstraněno z tohoto seznamu. Po opětovném připojen�
 #: ../bin/src/ui_transcoderoptionsvorbis.h:201
 #: ../bin/src/ui_transcoderoptionswma.h:78 ../bin/src/ui_equalizerslider.h:82
 #: ../bin/src/ui_fileview.h:107 ../bin/src/ui_loginstatewidget.h:171
-#: ../bin/src/ui_trackslider.h:69 ../bin/src/ui_visualisationoverlay.h:178
+#: ../bin/src/ui_trackslider.h:69 ../bin/src/ui_visualisationoverlay.h:182
 msgid "Form"
 msgstr "Formulář"
 
@@ -2028,7 +2028,7 @@ msgstr "Počet snímků"
 msgid "Frames per buffer"
 msgstr "Snímků na vyrovnávací paměť"
 
-#: internet/lastfmservice.cpp:223
+#: internet/lastfmservice.cpp:225
 msgid "Friends"
 msgstr "Přátelé"
 
@@ -2294,31 +2294,31 @@ msgstr "Internet"
 msgid "Internet providers"
 msgstr "Poskytovatelé internetu"
 
-#: internet/lastfmservice.cpp:454
+#: internet/lastfmservice.cpp:456
 msgid "Invalid API key"
 msgstr "Neplatný klíč API"
 
-#: internet/lastfmservice.cpp:449
+#: internet/lastfmservice.cpp:451
 msgid "Invalid format"
 msgstr "Neplatný formát"
 
-#: internet/lastfmservice.cpp:447
+#: internet/lastfmservice.cpp:449
 msgid "Invalid method"
 msgstr "Neplatná metoda"
 
-#: internet/lastfmservice.cpp:450
+#: internet/lastfmservice.cpp:452
 msgid "Invalid parameters"
 msgstr "Neplatné parametry"
 
-#: internet/lastfmservice.cpp:451
+#: internet/lastfmservice.cpp:453
 msgid "Invalid resource specified"
 msgstr "Zadán neplatný zdroj"
 
-#: internet/lastfmservice.cpp:446
+#: internet/lastfmservice.cpp:448
 msgid "Invalid service"
 msgstr "Neplatná služba"
 
-#: internet/lastfmservice.cpp:453
+#: internet/lastfmservice.cpp:455
 msgid "Invalid session key"
 msgstr "Neplatný klíč sezení"
 
@@ -2403,7 +2403,7 @@ msgstr "Velký postranní panel"
 msgid "Last played"
 msgstr "Naposledy hrané"
 
-#: ../bin/src/ui_lastfmsettingspage.h:144
+#: ../bin/src/ui_lastfmsettingspage.h:150
 msgid "Last.fm"
 msgstr "Last.fm"
 
@@ -2412,25 +2412,25 @@ msgstr "Last.fm"
 msgid "Last.fm Custom Radio: %1"
 msgstr "Vlastní rádio Last.fm: %1"
 
-#: internet/lastfmservice.cpp:254 internet/lastfmservice.cpp:708
-#: internet/lastfmservice.cpp:743
+#: internet/lastfmservice.cpp:256 internet/lastfmservice.cpp:710
+#: internet/lastfmservice.cpp:745
 #, qt-format
 msgid "Last.fm Library - %1"
 msgstr "Hudební sbírka Last.fm - %1"
 
-#: globalsearch/lastfmsearchprovider.cpp:76 internet/lastfmservice.cpp:256
-#: internet/lastfmservice.cpp:259
+#: globalsearch/lastfmsearchprovider.cpp:76 internet/lastfmservice.cpp:258
+#: internet/lastfmservice.cpp:261
 #, qt-format
 msgid "Last.fm Mix Radio - %1"
 msgstr "Rádio Mix Last.fm - %1"
 
-#: globalsearch/lastfmsearchprovider.cpp:78 internet/lastfmservice.cpp:261
-#: internet/lastfmservice.cpp:264
+#: globalsearch/lastfmsearchprovider.cpp:78 internet/lastfmservice.cpp:263
+#: internet/lastfmservice.cpp:266
 #, qt-format
 msgid "Last.fm Neighbor Radio - %1"
 msgstr "Rádio sousedů na Last.fm - %1"
 
-#: globalsearch/lastfmsearchprovider.cpp:74 internet/lastfmservice.cpp:251
+#: globalsearch/lastfmsearchprovider.cpp:74 internet/lastfmservice.cpp:253
 #, qt-format
 msgid "Last.fm Radio Station - %1"
 msgstr "Rádio Last.fm - %1"
@@ -2445,11 +2445,11 @@ msgstr "Podobný umělec Last.fm jako %1"
 msgid "Last.fm Tag Radio: %1"
 msgstr "Rádio na Last.fm označené: %1"
 
-#: internet/lastfmservice.cpp:458
+#: internet/lastfmservice.cpp:460
 msgid "Last.fm is currently busy, please try again in a few minutes"
 msgstr "Last.fm je nyní zaneprázdněno, prosím, zkuste to za pár minut znovu"
 
-#: ../bin/src/ui_lastfmsettingspage.h:148
+#: ../bin/src/ui_lastfmsettingspage.h:154
 msgid "Last.fm password"
 msgstr "Heslo k Last.fm"
 
@@ -2461,7 +2461,7 @@ msgstr "Počty přehrání na Last.fm"
 msgid "Last.fm tags"
 msgstr "Štítky Last.fm"
 
-#: ../bin/src/ui_lastfmsettingspage.h:146
+#: ../bin/src/ui_lastfmsettingspage.h:152
 msgid "Last.fm username"
 msgstr "Uživatelské jméno k Last.fm"
 
@@ -2539,7 +2539,7 @@ msgstr "Nahrát seznam skladeb"
 msgid "Load playlist..."
 msgstr "Nahrát seznam skladeb..."
 
-#: internet/lastfmservice.cpp:924
+#: internet/lastfmservice.cpp:926
 msgid "Loading Last.fm radio"
 msgstr "Nahrává se rádio Last.fm"
 
@@ -2590,7 +2590,7 @@ msgstr "Nahraje soubory/adresy (URL), nahradí současný seznam skladeb"
 #: ../bin/src/ui_groovesharksettingspage.h:116
 #: ../bin/src/ui_magnatunesettingspage.h:164
 #: ../bin/src/ui_spotifysettingspage.h:212
-#: ../bin/src/ui_lastfmsettingspage.h:147
+#: ../bin/src/ui_lastfmsettingspage.h:153
 msgid "Login"
 msgstr "Přihlášení"
 
@@ -2673,7 +2673,7 @@ msgstr "Udělej to tak!"
 msgid "Make playlist available offline"
 msgstr "Zajistit, že seznam skladeb bude dostupný, i když počítač nebude připojen k internetu"
 
-#: internet/lastfmservice.cpp:465
+#: internet/lastfmservice.cpp:467
 msgid "Malformed response"
 msgstr "Poškozená odpověď"
 
@@ -2783,35 +2783,35 @@ msgstr "Hudební sbírka"
 msgid "Mute"
 msgstr "Ztlumit"
 
-#: globalsearch/lastfmsearchprovider.cpp:52 internet/lastfmservice.cpp:194
+#: globalsearch/lastfmsearchprovider.cpp:52 internet/lastfmservice.cpp:196
 msgid "My Last.fm Library"
 msgstr "Moje sbírka Last.fm"
 
-#: globalsearch/lastfmsearchprovider.cpp:54 internet/lastfmservice.cpp:199
+#: globalsearch/lastfmsearchprovider.cpp:54 internet/lastfmservice.cpp:201
 msgid "My Last.fm Mix Radio"
 msgstr "Moje rádio Mix Last.fm"
 
-#: globalsearch/lastfmsearchprovider.cpp:56 internet/lastfmservice.cpp:204
+#: globalsearch/lastfmsearchprovider.cpp:56 internet/lastfmservice.cpp:206
 msgid "My Last.fm Neighborhood"
 msgstr "Moje okolí Last.fm"
 
-#: globalsearch/lastfmsearchprovider.cpp:50 internet/lastfmservice.cpp:189
+#: globalsearch/lastfmsearchprovider.cpp:50 internet/lastfmservice.cpp:191
 msgid "My Last.fm Recommended Radio"
 msgstr "Moje doporučované rádio Last.fm"
 
-#: internet/lastfmservice.cpp:196
+#: internet/lastfmservice.cpp:198
 msgid "My Mix Radio"
 msgstr "Moje rádio Mix"
 
-#: internet/lastfmservice.cpp:201
+#: internet/lastfmservice.cpp:203
 msgid "My Neighborhood"
 msgstr "Moje okolí"
 
-#: internet/lastfmservice.cpp:191
+#: internet/lastfmservice.cpp:193
 msgid "My Radio Station"
 msgstr "Mé rádio"
 
-#: internet/lastfmservice.cpp:186
+#: internet/lastfmservice.cpp:188
 msgid "My Recommendations"
 msgstr "Má doporučení"
 
@@ -2831,7 +2831,7 @@ msgstr "Volby pro pojmenování"
 msgid "Narrow band (NB)"
 msgstr "Úzké pásmo"
 
-#: internet/lastfmservice.cpp:228
+#: internet/lastfmservice.cpp:230
 msgid "Neighbors"
 msgstr "Sousedé"
 
@@ -2927,19 +2927,19 @@ msgstr "Není dostupné během používání dynamického seznamu skladeb"
 msgid "Not connected"
 msgstr "Nepřipojeno"
 
-#: internet/lastfmservice.cpp:460
+#: internet/lastfmservice.cpp:462
 msgid "Not enough content"
 msgstr "Nedostatek obsahu"
 
-#: internet/lastfmservice.cpp:462
+#: internet/lastfmservice.cpp:464
 msgid "Not enough fans"
 msgstr "Nedostatek nadšených obdivovatelů"
 
-#: internet/lastfmservice.cpp:461
+#: internet/lastfmservice.cpp:463
 msgid "Not enough members"
 msgstr "Nedostatek členů"
 
-#: internet/lastfmservice.cpp:463
+#: internet/lastfmservice.cpp:465
 msgid "Not enough neighbors"
 msgstr "Nedostatek sousedů"
 
@@ -3019,7 +3019,7 @@ msgstr "Otevřít v novém seznamu skladeb"
 msgid "Open..."
 msgstr "Otevřít..."
 
-#: internet/lastfmservice.cpp:452
+#: internet/lastfmservice.cpp:454
 msgid "Operation failed"
 msgstr "Operace se nezdařila"
 
@@ -3228,7 +3228,7 @@ msgstr "Předzesílení"
 #: ../bin/src/ui_digitallyimportedsettingspage.h:166
 #: ../bin/src/ui_magnatunesettingspage.h:166
 #: ../bin/src/ui_spotifysettingspage.h:217 ../bin/src/ui_settingsdialog.h:115
-#: ../bin/src/ui_lastfmsettingspage.h:149
+#: ../bin/src/ui_lastfmsettingspage.h:155
 msgid "Preferences"
 msgstr "Nastavení"
 
@@ -3449,7 +3449,7 @@ msgstr "Odstranit ze seznamu skladeb"
 msgid "Remove playlist"
 msgstr "Odstranit seznam skladeb"
 
-#: internet/groovesharkservice.cpp:1394
+#: internet/groovesharkservice.cpp:1414
 msgid "Removing song from favorites"
 msgstr "Odstraňuje se píseň z oblíbených"
 
@@ -3608,7 +3608,7 @@ msgstr "Profil škálovatelného vzorkovacího kmitočtu"
 msgid "Score"
 msgstr "Výsledek"
 
-#: ../bin/src/ui_lastfmsettingspage.h:150
+#: ../bin/src/ui_lastfmsettingspage.h:156
 msgid "Scrobble tracks that I listen to"
 msgstr "Odesílat informace o přehrávaných skladbách."
 
@@ -3744,7 +3744,7 @@ msgstr "Vybrat vizualizace..."
 msgid "Serial number"
 msgstr "Sériové číslo"
 
-#: internet/lastfmservice.cpp:455
+#: internet/lastfmservice.cpp:457
 msgid "Service offline"
 msgstr "Služba není dostupná"
 
@@ -3857,11 +3857,11 @@ msgstr "Ukázat pouze bez štítku"
 msgid "Show the \"Search for anything\" box above the sidebar"
 msgstr "Ukázat pole \"Hledat vše\" nad posuvníkem"
 
-#: ../bin/src/ui_lastfmsettingspage.h:151
+#: ../bin/src/ui_lastfmsettingspage.h:157
 msgid "Show the \"love\" and \"ban\" buttons"
 msgstr "Ukazovat tlačítka \"Oblíbit\" a \"Zakázat\""
 
-#: ../bin/src/ui_lastfmsettingspage.h:152
+#: ../bin/src/ui_lastfmsettingspage.h:158
 msgid "Show the scrobble button in the main window"
 msgstr "Ukazovat v hlavním okně tlačítko pro odesílání informací o přehrávání"
 
@@ -4145,7 +4145,7 @@ msgstr "Štítek"
 msgid "Tag fetcher"
 msgstr "Stahování štítků"
 
-#: internet/lastfmservice.cpp:211
+#: internet/lastfmservice.cpp:213
 msgid "Tag radio"
 msgstr "Rádio se štítkem"
 
@@ -4301,7 +4301,7 @@ msgid ""
 "want to continue?"
 msgstr "Tento seznam skladeb bude nenávratně odstraněn. Opravdu chcete pokračovat?"
 
-#: internet/lastfmservice.cpp:456
+#: internet/lastfmservice.cpp:458
 msgid "This stream is for paid subscribers only"
 msgstr "Tento proud je pouze pro předplatitele"
 
@@ -4434,7 +4434,7 @@ msgstr "Neznámý"
 msgid "Unknown content-type"
 msgstr "Neznámý typ obsahu"
 
-#: internet/digitallyimportedclient.cpp:68 internet/lastfmservice.cpp:469
+#: internet/digitallyimportedclient.cpp:69 internet/lastfmservice.cpp:471
 msgid "Unknown error"
 msgstr "Neznámá chyba"
 
@@ -4487,6 +4487,10 @@ msgstr "Obnovuje se hudební sbírka"
 #: core/commandlineoptions.cpp:144
 msgid "Usage"
 msgstr "Zacházení"
+
+#: ../bin/src/ui_lastfmsettingspage.h:159
+msgid "Use Album Artist tag when available"
+msgstr "Použíz značku Umělec alba, když je dostupná"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:168
 msgid "Use Gnome's shortcut keys"
@@ -4600,7 +4604,7 @@ msgstr "Režim vizualizací"
 msgid "Visualizations"
 msgstr "Vizualizace"
 
-#: ../bin/src/ui_visualisationoverlay.h:181
+#: ../bin/src/ui_visualisationoverlay.h:185
 msgid "Visualizations Settings"
 msgstr "Nastavení vizualizací"
 
@@ -4777,7 +4781,7 @@ msgstr "Poslouchat hudbu z Magnatune lze zdarma bez uživatelského účtu. Odst
 msgid "You can listen to background streams at the same time as other music."
 msgstr "Proudy na pozadí můžete poslouchat současně s jinou hudbou."
 
-#: internet/lastfmsettingspage.cpp:140
+#: internet/lastfmsettingspage.cpp:142
 msgid ""
 "You can scrobble tracks for free, but only <span style=\" font-"
 "weight:600;\">paid subscribers</span> can stream Last.fm radio from "
@@ -4798,6 +4802,10 @@ msgstr "Nemáte účet Grooveshark Anywhere."
 #: internet/spotifysettingspage.cpp:148
 msgid "You do not have a Spotify Premium account."
 msgstr "Nemáte účet Spotify Premium."
+
+#: internet/digitallyimportedclient.cpp:89
+msgid "You do not have an active subscription"
+msgstr "Nemáte aktivní předplatné"
 
 #: internet/spotifyservice.cpp:162
 msgid ""
@@ -4824,7 +4832,7 @@ msgstr "Aby bylo možné v Clementine používat globální klávesové zkratky,
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Pokud změníte jazyk, budete muset Clementine spustit znovu."
 
-#: internet/lastfmsettingspage.cpp:107
+#: internet/lastfmsettingspage.cpp:108
 msgid ""
 "You will not be able to play Last.fm radio stations as you are not a Last.fm"
 " subscriber."

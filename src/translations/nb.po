@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-04-13 15:48+0000\n"
+"PO-Revision-Date: 2012-05-13 16:03+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -319,7 +319,7 @@ msgstr "Om Qt..."
 #: ../bin/src/ui_groovesharksettingspage.h:113
 #: ../bin/src/ui_magnatunesettingspage.h:155
 #: ../bin/src/ui_spotifysettingspage.h:209
-#: ../bin/src/ui_lastfmsettingspage.h:145
+#: ../bin/src/ui_lastfmsettingspage.h:151
 msgid "Account details"
 msgstr "Kontodetaljer"
 
@@ -633,7 +633,7 @@ msgstr "En feil oppsto med lasting av iTunes databasen"
 msgid "An error occurred writing metadata to '%1'"
 msgstr "Det oppstod en feil når metadata skulle skrives til '%1'"
 
-#: internet/lastfmservice.cpp:914
+#: internet/lastfmservice.cpp:916
 #, qt-format
 msgid "An unknown last.fm error occurred: %1"
 msgstr "En ukjent feil med Last.fm oppstod: %1"
@@ -691,7 +691,7 @@ msgstr "Artist"
 msgid "Artist info"
 msgstr "Artist info"
 
-#: internet/lastfmservice.cpp:207
+#: internet/lastfmservice.cpp:209
 msgid "Artist radio"
 msgstr "Artistradio"
 
@@ -708,7 +708,7 @@ msgid "Audio format"
 msgstr "Lydformat"
 
 #: internet/digitallyimportedsettingspage.cpp:82
-#: internet/magnatunesettingspage.cpp:113 internet/lastfmservice.cpp:448
+#: internet/magnatunesettingspage.cpp:113 internet/lastfmservice.cpp:450
 #: internet/lastfmsettingspage.cpp:78
 msgid "Authentication failed"
 msgstr "Autentiseringen feilet"
@@ -947,7 +947,7 @@ msgstr "Tøm spillelisten"
 
 #: smartplaylists/searchtermwidget.cpp:321 ../bin/src/ui_mainwindow.h:644
 #: visualisations/visualisationcontainer.cpp:211
-#: ../bin/src/ui_visualisationoverlay.h:179
+#: ../bin/src/ui_visualisationoverlay.h:183
 msgid "Clementine"
 msgstr "Clementine"
 
@@ -987,7 +987,7 @@ msgid ""
 "installed Clementine properly."
 msgstr "Clementine klarte ikke å laste projectM visualiseringer. Sjekk at Clementine er korrekt installert."
 
-#: internet/lastfmsettingspage.cpp:103
+#: internet/lastfmsettingspage.cpp:104
 msgid ""
 "Clementine couldn't fetch your subscription status since there are problems "
 "with your connection. Played tracks will be cached and sent later to "
@@ -1165,7 +1165,7 @@ msgid ""
 "plugins installed"
 msgstr "Kunne ikke finne noen koder for %1, kontrollér at du har de riktige GStreamer-modulene installert"
 
-#: internet/lastfmservice.cpp:911
+#: internet/lastfmservice.cpp:913
 msgid "Couldn't load the last.fm radio station"
 msgstr "Kunne ikke laste inn Last.fm-radiostasjon"
 
@@ -1302,7 +1302,7 @@ msgstr ""
 msgid "Custom message settings"
 msgstr "Egendefinerte meldingsinnstillinger"
 
-#: internet/lastfmservice.cpp:215
+#: internet/lastfmservice.cpp:217
 msgid "Custom radio"
 msgstr "Egendefinert radio"
 
@@ -2007,7 +2007,7 @@ msgstr "Hvis du glemmer enheten, forsvinner den fra denne listen, og Clementine 
 #: ../bin/src/ui_transcoderoptionsvorbis.h:201
 #: ../bin/src/ui_transcoderoptionswma.h:78 ../bin/src/ui_equalizerslider.h:82
 #: ../bin/src/ui_fileview.h:107 ../bin/src/ui_loginstatewidget.h:171
-#: ../bin/src/ui_trackslider.h:69 ../bin/src/ui_visualisationoverlay.h:178
+#: ../bin/src/ui_trackslider.h:69 ../bin/src/ui_visualisationoverlay.h:182
 msgid "Form"
 msgstr "Skjema"
 
@@ -2024,7 +2024,7 @@ msgstr "Bilder/sekund"
 msgid "Frames per buffer"
 msgstr "Bilder per buffer"
 
-#: internet/lastfmservice.cpp:223
+#: internet/lastfmservice.cpp:225
 msgid "Friends"
 msgstr "Venner"
 
@@ -2290,31 +2290,31 @@ msgstr "Internett"
 msgid "Internet providers"
 msgstr "Internettilbydere"
 
-#: internet/lastfmservice.cpp:454
+#: internet/lastfmservice.cpp:456
 msgid "Invalid API key"
 msgstr "Ugyldig API-nøkkel"
 
-#: internet/lastfmservice.cpp:449
+#: internet/lastfmservice.cpp:451
 msgid "Invalid format"
 msgstr "Ugyldig format"
 
-#: internet/lastfmservice.cpp:447
+#: internet/lastfmservice.cpp:449
 msgid "Invalid method"
 msgstr "Ukjent metode"
 
-#: internet/lastfmservice.cpp:450
+#: internet/lastfmservice.cpp:452
 msgid "Invalid parameters"
 msgstr "Ugyldige parametere"
 
-#: internet/lastfmservice.cpp:451
+#: internet/lastfmservice.cpp:453
 msgid "Invalid resource specified"
 msgstr "Ugjyldig ressurs"
 
-#: internet/lastfmservice.cpp:446
+#: internet/lastfmservice.cpp:448
 msgid "Invalid service"
 msgstr "Ukjent tjeneste"
 
-#: internet/lastfmservice.cpp:453
+#: internet/lastfmservice.cpp:455
 msgid "Invalid session key"
 msgstr "Ugyldig sesjonsnøkkel"
 
@@ -2399,7 +2399,7 @@ msgstr "Stort sidefelt"
 msgid "Last played"
 msgstr "Sist spilt"
 
-#: ../bin/src/ui_lastfmsettingspage.h:144
+#: ../bin/src/ui_lastfmsettingspage.h:150
 msgid "Last.fm"
 msgstr "Last.fm"
 
@@ -2408,25 +2408,25 @@ msgstr "Last.fm"
 msgid "Last.fm Custom Radio: %1"
 msgstr "Egendefinert radio på Last.fm: %1"
 
-#: internet/lastfmservice.cpp:254 internet/lastfmservice.cpp:708
-#: internet/lastfmservice.cpp:743
+#: internet/lastfmservice.cpp:256 internet/lastfmservice.cpp:710
+#: internet/lastfmservice.cpp:745
 #, qt-format
 msgid "Last.fm Library - %1"
 msgstr "Last.fm-bibliotek: %1"
 
-#: globalsearch/lastfmsearchprovider.cpp:76 internet/lastfmservice.cpp:256
-#: internet/lastfmservice.cpp:259
+#: globalsearch/lastfmsearchprovider.cpp:76 internet/lastfmservice.cpp:258
+#: internet/lastfmservice.cpp:261
 #, qt-format
 msgid "Last.fm Mix Radio - %1"
 msgstr "Last.fm-miksradio: %1"
 
-#: globalsearch/lastfmsearchprovider.cpp:78 internet/lastfmservice.cpp:261
-#: internet/lastfmservice.cpp:264
+#: globalsearch/lastfmsearchprovider.cpp:78 internet/lastfmservice.cpp:263
+#: internet/lastfmservice.cpp:266
 #, qt-format
 msgid "Last.fm Neighbor Radio - %1"
 msgstr "Last.fm-lokalradio: %1"
 
-#: globalsearch/lastfmsearchprovider.cpp:74 internet/lastfmservice.cpp:251
+#: globalsearch/lastfmsearchprovider.cpp:74 internet/lastfmservice.cpp:253
 #, qt-format
 msgid "Last.fm Radio Station - %1"
 msgstr "Last.fm-radio: %1"
@@ -2441,11 +2441,11 @@ msgstr "Artister liknende %1 fra Last.fm"
 msgid "Last.fm Tag Radio: %1"
 msgstr "Last.fm-taggradio: %1"
 
-#: internet/lastfmservice.cpp:458
+#: internet/lastfmservice.cpp:460
 msgid "Last.fm is currently busy, please try again in a few minutes"
 msgstr "Last.fm er opptatt, vennligst prøv igjen om et par minutter"
 
-#: ../bin/src/ui_lastfmsettingspage.h:148
+#: ../bin/src/ui_lastfmsettingspage.h:154
 msgid "Last.fm password"
 msgstr "Last.fm-passord"
 
@@ -2457,7 +2457,7 @@ msgstr "Antall avspillinger fra Last.fm"
 msgid "Last.fm tags"
 msgstr "Tagger fra Last.fm"
 
-#: ../bin/src/ui_lastfmsettingspage.h:146
+#: ../bin/src/ui_lastfmsettingspage.h:152
 msgid "Last.fm username"
 msgstr "Last.fm-brukernavn"
 
@@ -2535,7 +2535,7 @@ msgstr "Åpne spilleliste"
 msgid "Load playlist..."
 msgstr "Åpne spilleliste..."
 
-#: internet/lastfmservice.cpp:924
+#: internet/lastfmservice.cpp:926
 msgid "Loading Last.fm radio"
 msgstr "Laster inn Last.fm-radio"
 
@@ -2586,7 +2586,7 @@ msgstr "Åpne filer/URLer; erstatt gjeldende spilleliste"
 #: ../bin/src/ui_groovesharksettingspage.h:116
 #: ../bin/src/ui_magnatunesettingspage.h:164
 #: ../bin/src/ui_spotifysettingspage.h:212
-#: ../bin/src/ui_lastfmsettingspage.h:147
+#: ../bin/src/ui_lastfmsettingspage.h:153
 msgid "Login"
 msgstr "Innlogging"
 
@@ -2669,7 +2669,7 @@ msgstr "Kjør på!"
 msgid "Make playlist available offline"
 msgstr "Gjør spillelista tilgjengelig online"
 
-#: internet/lastfmservice.cpp:465
+#: internet/lastfmservice.cpp:467
 msgid "Malformed response"
 msgstr "Ugyldig svar"
 
@@ -2779,35 +2779,35 @@ msgstr "Musikkbibliotek"
 msgid "Mute"
 msgstr "Demp"
 
-#: globalsearch/lastfmsearchprovider.cpp:52 internet/lastfmservice.cpp:194
+#: globalsearch/lastfmsearchprovider.cpp:52 internet/lastfmservice.cpp:196
 msgid "My Last.fm Library"
 msgstr "Mitt Last.fm-bibliotek"
 
-#: globalsearch/lastfmsearchprovider.cpp:54 internet/lastfmservice.cpp:199
+#: globalsearch/lastfmsearchprovider.cpp:54 internet/lastfmservice.cpp:201
 msgid "My Last.fm Mix Radio"
 msgstr "Min Last.fm-miksradio"
 
-#: globalsearch/lastfmsearchprovider.cpp:56 internet/lastfmservice.cpp:204
+#: globalsearch/lastfmsearchprovider.cpp:56 internet/lastfmservice.cpp:206
 msgid "My Last.fm Neighborhood"
 msgstr "Mitt Last.fm-nabolag"
 
-#: globalsearch/lastfmsearchprovider.cpp:50 internet/lastfmservice.cpp:189
+#: globalsearch/lastfmsearchprovider.cpp:50 internet/lastfmservice.cpp:191
 msgid "My Last.fm Recommended Radio"
 msgstr "Min anbefalt radio på Last.fm"
 
-#: internet/lastfmservice.cpp:196
+#: internet/lastfmservice.cpp:198
 msgid "My Mix Radio"
 msgstr "Min miksradio"
 
-#: internet/lastfmservice.cpp:201
+#: internet/lastfmservice.cpp:203
 msgid "My Neighborhood"
 msgstr "Mitt nabolag"
 
-#: internet/lastfmservice.cpp:191
+#: internet/lastfmservice.cpp:193
 msgid "My Radio Station"
 msgstr "Min radiostasjon"
 
-#: internet/lastfmservice.cpp:186
+#: internet/lastfmservice.cpp:188
 msgid "My Recommendations"
 msgstr "Mine anbefalinger"
 
@@ -2827,7 +2827,7 @@ msgstr "Navnevalg"
 msgid "Narrow band (NB)"
 msgstr "Smalbånd (SB)"
 
-#: internet/lastfmservice.cpp:228
+#: internet/lastfmservice.cpp:230
 msgid "Neighbors"
 msgstr "Naboer"
 
@@ -2923,19 +2923,19 @@ msgstr "Ikke tilgjengelig sammen med dynamiske spillelister"
 msgid "Not connected"
 msgstr "Ikke tilkoblet"
 
-#: internet/lastfmservice.cpp:460
+#: internet/lastfmservice.cpp:462
 msgid "Not enough content"
 msgstr "Ikke nok innhold"
 
-#: internet/lastfmservice.cpp:462
+#: internet/lastfmservice.cpp:464
 msgid "Not enough fans"
 msgstr "Ikke nok tilhengere"
 
-#: internet/lastfmservice.cpp:461
+#: internet/lastfmservice.cpp:463
 msgid "Not enough members"
 msgstr "Ikke nok medlemmer"
 
-#: internet/lastfmservice.cpp:463
+#: internet/lastfmservice.cpp:465
 msgid "Not enough neighbors"
 msgstr "Ikke nok naboer"
 
@@ -3015,7 +3015,7 @@ msgstr "Åpne i ny spilleliste"
 msgid "Open..."
 msgstr "Åpne..."
 
-#: internet/lastfmservice.cpp:452
+#: internet/lastfmservice.cpp:454
 msgid "Operation failed"
 msgstr "Operasjonen feilet"
 
@@ -3224,7 +3224,7 @@ msgstr "Lydforsterkning"
 #: ../bin/src/ui_digitallyimportedsettingspage.h:166
 #: ../bin/src/ui_magnatunesettingspage.h:166
 #: ../bin/src/ui_spotifysettingspage.h:217 ../bin/src/ui_settingsdialog.h:115
-#: ../bin/src/ui_lastfmsettingspage.h:149
+#: ../bin/src/ui_lastfmsettingspage.h:155
 msgid "Preferences"
 msgstr "Innstillinger"
 
@@ -3445,7 +3445,7 @@ msgstr "Fjern fra spillelisten"
 msgid "Remove playlist"
 msgstr "Fjern spilleliste"
 
-#: internet/groovesharkservice.cpp:1394
+#: internet/groovesharkservice.cpp:1414
 msgid "Removing song from favorites"
 msgstr "Fjerner sang fra favoritte"
 
@@ -3604,7 +3604,7 @@ msgstr "Skalerbar samplingrate-profil (SSR)"
 msgid "Score"
 msgstr "Karakte"
 
-#: ../bin/src/ui_lastfmsettingspage.h:150
+#: ../bin/src/ui_lastfmsettingspage.h:156
 msgid "Scrobble tracks that I listen to"
 msgstr "Fortell last.fm om (\"scrobble\") sangene jeg har lyttet til"
 
@@ -3740,7 +3740,7 @@ msgstr "Velg visualiseringer..."
 msgid "Serial number"
 msgstr "Serienummer"
 
-#: internet/lastfmservice.cpp:455
+#: internet/lastfmservice.cpp:457
 msgid "Service offline"
 msgstr "Tjenesten er utilgjengelig"
 
@@ -3853,11 +3853,11 @@ msgstr "Vis bare filer uten tagger"
 msgid "Show the \"Search for anything\" box above the sidebar"
 msgstr "Vis \"Søk etter hva som helst\"-feltet over sidefeltet"
 
-#: ../bin/src/ui_lastfmsettingspage.h:151
+#: ../bin/src/ui_lastfmsettingspage.h:157
 msgid "Show the \"love\" and \"ban\" buttons"
 msgstr "Vis \"Elsk\" og \"Bannlys\" knappene"
 
-#: ../bin/src/ui_lastfmsettingspage.h:152
+#: ../bin/src/ui_lastfmsettingspage.h:158
 msgid "Show the scrobble button in the main window"
 msgstr "Vis scrobble-knappen i hovedvinduet"
 
@@ -4141,7 +4141,7 @@ msgstr "Merkelapp"
 msgid "Tag fetcher"
 msgstr "Tagg-henter"
 
-#: internet/lastfmservice.cpp:211
+#: internet/lastfmservice.cpp:213
 msgid "Tag radio"
 msgstr "Merkelappradio"
 
@@ -4297,7 +4297,7 @@ msgid ""
 "want to continue?"
 msgstr "Spillelista slettes for alltid. Er du sikker?"
 
-#: internet/lastfmservice.cpp:456
+#: internet/lastfmservice.cpp:458
 msgid "This stream is for paid subscribers only"
 msgstr "Denne tjenesten er kun for betalende kunder"
 
@@ -4430,7 +4430,7 @@ msgstr "Ukjent"
 msgid "Unknown content-type"
 msgstr ""
 
-#: internet/digitallyimportedclient.cpp:68 internet/lastfmservice.cpp:469
+#: internet/digitallyimportedclient.cpp:69 internet/lastfmservice.cpp:471
 msgid "Unknown error"
 msgstr "Ukjent feil"
 
@@ -4483,6 +4483,10 @@ msgstr "Oppdaterer bibliotek"
 #: core/commandlineoptions.cpp:144
 msgid "Usage"
 msgstr "Bruk"
+
+#: ../bin/src/ui_lastfmsettingspage.h:159
+msgid "Use Album Artist tag when available"
+msgstr ""
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:168
 msgid "Use Gnome's shortcut keys"
@@ -4596,7 +4600,7 @@ msgstr "Visualiseringsmodus"
 msgid "Visualizations"
 msgstr "Visualiseringer"
 
-#: ../bin/src/ui_visualisationoverlay.h:181
+#: ../bin/src/ui_visualisationoverlay.h:185
 msgid "Visualizations Settings"
 msgstr "Innstillinger for visualisering"
 
@@ -4773,7 +4777,7 @@ msgstr "Du kan lytte til Magnatune-sanger gratis, uten konto.  Hvis du kjøper m
 msgid "You can listen to background streams at the same time as other music."
 msgstr "Du kan lytte til bakgrunnsstrømmer samtidig med annen musikk."
 
-#: internet/lastfmsettingspage.cpp:140
+#: internet/lastfmsettingspage.cpp:142
 msgid ""
 "You can scrobble tracks for free, but only <span style=\" font-"
 "weight:600;\">paid subscribers</span> can stream Last.fm radio from "
@@ -4794,6 +4798,10 @@ msgstr "Du har ikke noen Grooveshark Anywhare-konto."
 #: internet/spotifysettingspage.cpp:148
 msgid "You do not have a Spotify Premium account."
 msgstr "Du har ikke noen Spotify Premium-konto."
+
+#: internet/digitallyimportedclient.cpp:89
+msgid "You do not have an active subscription"
+msgstr ""
 
 #: internet/spotifyservice.cpp:162
 msgid ""
@@ -4820,7 +4828,7 @@ msgstr "Du må gå til Systeminnstillinger og slå på \"<span style=\" font-sty
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Du må starte Clementine på nytt for å bytte språk."
 
-#: internet/lastfmsettingspage.cpp:107
+#: internet/lastfmsettingspage.cpp:108
 msgid ""
 "You will not be able to play Last.fm radio stations as you are not a Last.fm"
 " subscriber."

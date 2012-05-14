@@ -8,6 +8,7 @@
 #   <daschuer@gmx.de>, 2012.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
 #   <gerold.mittelstaedt@googlemail.com>, 2012.
+#   <janlaymann@googlemail.com>, 2012.
 # Martin Herkt <lachs0r@hong-mailing.de>, 2011.
 # Martin Herkt <luck3r@phicode.de>, 2010.
 #   <robertbeckmann@fastmail.fm>, 2012.
@@ -18,8 +19,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-04-13 15:48+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2012-05-13 20:16+0000\n"
+"Last-Translator: janlaymann <janlaymann@googlemail.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: de\n"
@@ -327,7 +328,7 @@ msgstr "Über Qt…"
 #: ../bin/src/ui_groovesharksettingspage.h:113
 #: ../bin/src/ui_magnatunesettingspage.h:155
 #: ../bin/src/ui_spotifysettingspage.h:209
-#: ../bin/src/ui_lastfmsettingspage.h:145
+#: ../bin/src/ui_lastfmsettingspage.h:151
 msgid "Account details"
 msgstr "Benutzerkonto"
 
@@ -641,7 +642,7 @@ msgstr "Beim Laden der iTunes Datenbank ist ein Fehler aufgetreten"
 msgid "An error occurred writing metadata to '%1'"
 msgstr "Beim Schreiben der Metadaten für '%1' trat ein Fehler auf"
 
-#: internet/lastfmservice.cpp:914
+#: internet/lastfmservice.cpp:916
 #, qt-format
 msgid "An unknown last.fm error occurred: %1"
 msgstr "Unbekannter Last.fm Fehler: %1"
@@ -699,7 +700,7 @@ msgstr "Interpret"
 msgid "Artist info"
 msgstr "Infos zum Interpreten"
 
-#: internet/lastfmservice.cpp:207
+#: internet/lastfmservice.cpp:209
 msgid "Artist radio"
 msgstr "Künstler-Radio"
 
@@ -716,7 +717,7 @@ msgid "Audio format"
 msgstr "Audioformat"
 
 #: internet/digitallyimportedsettingspage.cpp:82
-#: internet/magnatunesettingspage.cpp:113 internet/lastfmservice.cpp:448
+#: internet/magnatunesettingspage.cpp:113 internet/lastfmservice.cpp:450
 #: internet/lastfmsettingspage.cpp:78
 msgid "Authentication failed"
 msgstr "Authentifizierung fehlgeschlagen"
@@ -955,7 +956,7 @@ msgstr "Wiedergabeliste leeren"
 
 #: smartplaylists/searchtermwidget.cpp:321 ../bin/src/ui_mainwindow.h:644
 #: visualisations/visualisationcontainer.cpp:211
-#: ../bin/src/ui_visualisationoverlay.h:179
+#: ../bin/src/ui_visualisationoverlay.h:183
 msgid "Clementine"
 msgstr "Clementine"
 
@@ -995,7 +996,7 @@ msgid ""
 "installed Clementine properly."
 msgstr "Clementine konnte keine projectM-Visualisierungen laden. Überprüfen Sie Ihre Installation."
 
-#: internet/lastfmsettingspage.cpp:103
+#: internet/lastfmsettingspage.cpp:104
 msgid ""
 "Clementine couldn't fetch your subscription status since there are problems "
 "with your connection. Played tracks will be cached and sent later to "
@@ -1173,7 +1174,7 @@ msgid ""
 "plugins installed"
 msgstr "Es konnte kein Encoder für %1 gefunden werden. Prüfen Sie ob die erforderlichen GStreamer-Plugins installiert sind."
 
-#: internet/lastfmservice.cpp:911
+#: internet/lastfmservice.cpp:913
 msgid "Couldn't load the last.fm radio station"
 msgstr "Konnte die last.fm Radiostation nicht laden."
 
@@ -1310,7 +1311,7 @@ msgstr "Benutzerdefiniertes Bild:"
 msgid "Custom message settings"
 msgstr "Benutzerdefinierte Benachrichtigungseinstellungen"
 
-#: internet/lastfmservice.cpp:215
+#: internet/lastfmservice.cpp:217
 msgid "Custom radio"
 msgstr "Benutzerdefiniertes Radio"
 
@@ -2015,7 +2016,7 @@ msgstr "Das Vergessen eines Geräts wird es aus dieser Liste entfernen und Cleme
 #: ../bin/src/ui_transcoderoptionsvorbis.h:201
 #: ../bin/src/ui_transcoderoptionswma.h:78 ../bin/src/ui_equalizerslider.h:82
 #: ../bin/src/ui_fileview.h:107 ../bin/src/ui_loginstatewidget.h:171
-#: ../bin/src/ui_trackslider.h:69 ../bin/src/ui_visualisationoverlay.h:178
+#: ../bin/src/ui_trackslider.h:69 ../bin/src/ui_visualisationoverlay.h:182
 msgid "Form"
 msgstr "Formular"
 
@@ -2032,7 +2033,7 @@ msgstr "Bildwiederholrate"
 msgid "Frames per buffer"
 msgstr "Frames pro Puffer"
 
-#: internet/lastfmservice.cpp:223
+#: internet/lastfmservice.cpp:225
 msgid "Friends"
 msgstr "Freunde"
 
@@ -2072,7 +2073,7 @@ msgstr "Erstelle eine URL um diese Wiedergabeliste auf Grooveshark zu teilen."
 
 #: internet/groovesharkservice.cpp:518 internet/groovesharkservice.cpp:1069
 msgid "Get a URL to share this Grooveshark song"
-msgstr ""
+msgstr "Erstelle eine URL um diesen Titel auf Grooveshark zu teilen."
 
 #: internet/groovesharkservice.cpp:741
 msgid "Getting Grooveshark popular songs"
@@ -2122,7 +2123,7 @@ msgstr "Grooveshark Anmeldefehler"
 
 #: internet/groovesharkservice.cpp:1121
 msgid "Grooveshark playlist's URL"
-msgstr ""
+msgstr "Grooveshark Wiedergabelisten URL"
 
 #: internet/groovesharkservice.cpp:585
 msgid "Grooveshark radio"
@@ -2298,31 +2299,31 @@ msgstr "Internet"
 msgid "Internet providers"
 msgstr "Internetdienstanbieter"
 
-#: internet/lastfmservice.cpp:454
+#: internet/lastfmservice.cpp:456
 msgid "Invalid API key"
 msgstr "Ungültiger API-Schlüssel"
 
-#: internet/lastfmservice.cpp:449
+#: internet/lastfmservice.cpp:451
 msgid "Invalid format"
 msgstr "Ungültiges Format"
 
-#: internet/lastfmservice.cpp:447
+#: internet/lastfmservice.cpp:449
 msgid "Invalid method"
 msgstr "Ungültige Methode"
 
-#: internet/lastfmservice.cpp:450
+#: internet/lastfmservice.cpp:452
 msgid "Invalid parameters"
 msgstr "Ungültige Parameter"
 
-#: internet/lastfmservice.cpp:451
+#: internet/lastfmservice.cpp:453
 msgid "Invalid resource specified"
 msgstr "Ungültige Quelle angegeben"
 
-#: internet/lastfmservice.cpp:446
+#: internet/lastfmservice.cpp:448
 msgid "Invalid service"
 msgstr "Ungültiger Dienst"
 
-#: internet/lastfmservice.cpp:453
+#: internet/lastfmservice.cpp:455
 msgid "Invalid session key"
 msgstr "Ungültiger Sitzungsschlüssel"
 
@@ -2407,7 +2408,7 @@ msgstr "große Seitenleiste"
 msgid "Last played"
 msgstr "Zuletzt gespielt"
 
-#: ../bin/src/ui_lastfmsettingspage.h:144
+#: ../bin/src/ui_lastfmsettingspage.h:150
 msgid "Last.fm"
 msgstr "Last.fm"
 
@@ -2416,25 +2417,25 @@ msgstr "Last.fm"
 msgid "Last.fm Custom Radio: %1"
 msgstr "Benutzerdefiniertes Radio auf Last.fm: %1"
 
-#: internet/lastfmservice.cpp:254 internet/lastfmservice.cpp:708
-#: internet/lastfmservice.cpp:743
+#: internet/lastfmservice.cpp:256 internet/lastfmservice.cpp:710
+#: internet/lastfmservice.cpp:745
 #, qt-format
 msgid "Last.fm Library - %1"
 msgstr "Last.fm Sammlung - %1"
 
-#: globalsearch/lastfmsearchprovider.cpp:76 internet/lastfmservice.cpp:256
-#: internet/lastfmservice.cpp:259
+#: globalsearch/lastfmsearchprovider.cpp:76 internet/lastfmservice.cpp:258
+#: internet/lastfmservice.cpp:261
 #, qt-format
 msgid "Last.fm Mix Radio - %1"
 msgstr "Last.fm Mix Radio - %1"
 
-#: globalsearch/lastfmsearchprovider.cpp:78 internet/lastfmservice.cpp:261
-#: internet/lastfmservice.cpp:264
+#: globalsearch/lastfmsearchprovider.cpp:78 internet/lastfmservice.cpp:263
+#: internet/lastfmservice.cpp:266
 #, qt-format
 msgid "Last.fm Neighbor Radio - %1"
 msgstr "Last.fm Nachbarschaft - %1"
 
-#: globalsearch/lastfmsearchprovider.cpp:74 internet/lastfmservice.cpp:251
+#: globalsearch/lastfmsearchprovider.cpp:74 internet/lastfmservice.cpp:253
 #, qt-format
 msgid "Last.fm Radio Station - %1"
 msgstr "Last.fm Radio Station %1"
@@ -2449,11 +2450,11 @@ msgstr "Last.fm Ähnliche Interpreten wie %1"
 msgid "Last.fm Tag Radio: %1"
 msgstr "Last.fm Tag Radio: %1"
 
-#: internet/lastfmservice.cpp:458
+#: internet/lastfmservice.cpp:460
 msgid "Last.fm is currently busy, please try again in a few minutes"
 msgstr "Last.fm ist zurzeit überlastet. Versuchen Sie es später noch einmal."
 
-#: ../bin/src/ui_lastfmsettingspage.h:148
+#: ../bin/src/ui_lastfmsettingspage.h:154
 msgid "Last.fm password"
 msgstr "Passwort:"
 
@@ -2465,7 +2466,7 @@ msgstr "Last.fm Abspielzähler"
 msgid "Last.fm tags"
 msgstr "Last.fm tags"
 
-#: ../bin/src/ui_lastfmsettingspage.h:146
+#: ../bin/src/ui_lastfmsettingspage.h:152
 msgid "Last.fm username"
 msgstr "Benutzername:"
 
@@ -2543,7 +2544,7 @@ msgstr "Wiedergabeliste laden"
 msgid "Load playlist..."
 msgstr "Wiedergabeliste laden..."
 
-#: internet/lastfmservice.cpp:924
+#: internet/lastfmservice.cpp:926
 msgid "Loading Last.fm radio"
 msgstr "Last.fm Radio wird geladen"
 
@@ -2594,7 +2595,7 @@ msgstr "Öffne Dateien/URLs und ersetze die Wiedergabeliste"
 #: ../bin/src/ui_groovesharksettingspage.h:116
 #: ../bin/src/ui_magnatunesettingspage.h:164
 #: ../bin/src/ui_spotifysettingspage.h:212
-#: ../bin/src/ui_lastfmsettingspage.h:147
+#: ../bin/src/ui_lastfmsettingspage.h:153
 msgid "Login"
 msgstr "Anmelden"
 
@@ -2677,7 +2678,7 @@ msgstr "Make it so!"
 msgid "Make playlist available offline"
 msgstr "Wiedergabeliste für die Offlinebenutzung verfügbar machen"
 
-#: internet/lastfmservice.cpp:465
+#: internet/lastfmservice.cpp:467
 msgid "Malformed response"
 msgstr "Ungültige Antwort"
 
@@ -2787,35 +2788,35 @@ msgstr "Musiksammlung"
 msgid "Mute"
 msgstr "Stumm"
 
-#: globalsearch/lastfmsearchprovider.cpp:52 internet/lastfmservice.cpp:194
+#: globalsearch/lastfmsearchprovider.cpp:52 internet/lastfmservice.cpp:196
 msgid "My Last.fm Library"
 msgstr "Meine Last.fm Musiksammlung"
 
-#: globalsearch/lastfmsearchprovider.cpp:54 internet/lastfmservice.cpp:199
+#: globalsearch/lastfmsearchprovider.cpp:54 internet/lastfmservice.cpp:201
 msgid "My Last.fm Mix Radio"
 msgstr "Mein Last.fm Mix Radio"
 
-#: globalsearch/lastfmsearchprovider.cpp:56 internet/lastfmservice.cpp:204
+#: globalsearch/lastfmsearchprovider.cpp:56 internet/lastfmservice.cpp:206
 msgid "My Last.fm Neighborhood"
 msgstr "Meine Last.fm Nachbarn"
 
-#: globalsearch/lastfmsearchprovider.cpp:50 internet/lastfmservice.cpp:189
+#: globalsearch/lastfmsearchprovider.cpp:50 internet/lastfmservice.cpp:191
 msgid "My Last.fm Recommended Radio"
 msgstr "Meine Last.fm Empfehlungen"
 
-#: internet/lastfmservice.cpp:196
+#: internet/lastfmservice.cpp:198
 msgid "My Mix Radio"
 msgstr "Mein Mix-Radio"
 
-#: internet/lastfmservice.cpp:201
+#: internet/lastfmservice.cpp:203
 msgid "My Neighborhood"
 msgstr "Meine Nachbarn"
 
-#: internet/lastfmservice.cpp:191
+#: internet/lastfmservice.cpp:193
 msgid "My Radio Station"
 msgstr "Meine Radiostation"
 
-#: internet/lastfmservice.cpp:186
+#: internet/lastfmservice.cpp:188
 msgid "My Recommendations"
 msgstr "Meine Empfehlungen"
 
@@ -2835,7 +2836,7 @@ msgstr "Benennungsoptionen"
 msgid "Narrow band (NB)"
 msgstr "Schmal-Band (NB)"
 
-#: internet/lastfmservice.cpp:228
+#: internet/lastfmservice.cpp:230
 msgid "Neighbors"
 msgstr "Nachbarn"
 
@@ -2931,19 +2932,19 @@ msgstr "Nicht verfügbar während eine dynamische Wiedergabeliste benutzt wird"
 msgid "Not connected"
 msgstr "Nicht verbunden"
 
-#: internet/lastfmservice.cpp:460
+#: internet/lastfmservice.cpp:462
 msgid "Not enough content"
 msgstr "Nicht genug Inhalt"
 
-#: internet/lastfmservice.cpp:462
+#: internet/lastfmservice.cpp:464
 msgid "Not enough fans"
 msgstr "Nicht genug Fans"
 
-#: internet/lastfmservice.cpp:461
+#: internet/lastfmservice.cpp:463
 msgid "Not enough members"
 msgstr "Nicht genug Mitglieder"
 
-#: internet/lastfmservice.cpp:463
+#: internet/lastfmservice.cpp:465
 msgid "Not enough neighbors"
 msgstr "Nicht genug Nachbarn"
 
@@ -3023,7 +3024,7 @@ msgstr "In einer neuen Wiedergabeliste öffnen"
 msgid "Open..."
 msgstr "Öffnen..."
 
-#: internet/lastfmservice.cpp:452
+#: internet/lastfmservice.cpp:454
 msgid "Operation failed"
 msgstr "Aktion fehlgeschlagen"
 
@@ -3232,7 +3233,7 @@ msgstr "Vorverstärkung:"
 #: ../bin/src/ui_digitallyimportedsettingspage.h:166
 #: ../bin/src/ui_magnatunesettingspage.h:166
 #: ../bin/src/ui_spotifysettingspage.h:217 ../bin/src/ui_settingsdialog.h:115
-#: ../bin/src/ui_lastfmsettingspage.h:149
+#: ../bin/src/ui_lastfmsettingspage.h:155
 msgid "Preferences"
 msgstr "Einstellungen"
 
@@ -3453,7 +3454,7 @@ msgstr "Aus der Wiedergabeliste entfernen"
 msgid "Remove playlist"
 msgstr "Wiedergabeliste entfernen"
 
-#: internet/groovesharkservice.cpp:1394
+#: internet/groovesharkservice.cpp:1414
 msgid "Removing song from favorites"
 msgstr "Titel aus den Favoriten entfernen"
 
@@ -3610,9 +3611,9 @@ msgstr "Scalable Sampling Rate - Profil (SSR)"
 
 #: playlist/playlist.cpp:1141 ../bin/src/ui_edittagdialog.h:643
 msgid "Score"
-msgstr "Bewertung"
+msgstr "Rating"
 
-#: ../bin/src/ui_lastfmsettingspage.h:150
+#: ../bin/src/ui_lastfmsettingspage.h:156
 msgid "Scrobble tracks that I listen to"
 msgstr "Stücke die ich höre \"scrobbeln\""
 
@@ -3748,7 +3749,7 @@ msgstr "Visualisierungen auswählen..."
 msgid "Serial number"
 msgstr "Seriennummer"
 
-#: internet/lastfmservice.cpp:455
+#: internet/lastfmservice.cpp:457
 msgid "Service offline"
 msgstr "Dienst nicht verfügbar"
 
@@ -3861,11 +3862,11 @@ msgstr "Nur Stücke ohne Metadaten zeigen"
 msgid "Show the \"Search for anything\" box above the sidebar"
 msgstr "Das \"Suche in allen Quellen\"-Feld über der Seitenleiste zeigen"
 
-#: ../bin/src/ui_lastfmsettingspage.h:151
+#: ../bin/src/ui_lastfmsettingspage.h:157
 msgid "Show the \"love\" and \"ban\" buttons"
 msgstr "\"Lieben\" und \"Bannen\" Knöpfe anzeigen"
 
-#: ../bin/src/ui_lastfmsettingspage.h:152
+#: ../bin/src/ui_lastfmsettingspage.h:158
 msgid "Show the scrobble button in the main window"
 msgstr "Das Scrobble-Zeichen im Hauptfenster zeigen"
 
@@ -4149,7 +4150,7 @@ msgstr "Stichwort"
 msgid "Tag fetcher"
 msgstr "Tag-Sammler"
 
-#: internet/lastfmservice.cpp:211
+#: internet/lastfmservice.cpp:213
 msgid "Tag radio"
 msgstr "Tag-Radio"
 
@@ -4305,7 +4306,7 @@ msgid ""
 "want to continue?"
 msgstr "Die Wiedergabeliste wird gelöscht. Diese Aktion kann nicht rückgängig gemacht werden. Möchten Sie wirklich fortfahren?"
 
-#: internet/lastfmservice.cpp:456
+#: internet/lastfmservice.cpp:458
 msgid "This stream is for paid subscribers only"
 msgstr "Dieser Stream ist nur für zahlende Kunden verfügbar"
 
@@ -4438,7 +4439,7 @@ msgstr "Unbekannt"
 msgid "Unknown content-type"
 msgstr "Unbekannter Inhalt"
 
-#: internet/digitallyimportedclient.cpp:68 internet/lastfmservice.cpp:469
+#: internet/digitallyimportedclient.cpp:69 internet/lastfmservice.cpp:471
 msgid "Unknown error"
 msgstr "Unbekannter Fehler"
 
@@ -4491,6 +4492,10 @@ msgstr "Aktualisiere Musiksammlung"
 #: core/commandlineoptions.cpp:144
 msgid "Usage"
 msgstr "Benutzung"
+
+#: ../bin/src/ui_lastfmsettingspage.h:159
+msgid "Use Album Artist tag when available"
+msgstr "Wenn verfügbar Album-Interpret benutzen"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:168
 msgid "Use Gnome's shortcut keys"
@@ -4604,7 +4609,7 @@ msgstr "Art der Visualisierung"
 msgid "Visualizations"
 msgstr "Visualisierungen"
 
-#: ../bin/src/ui_visualisationoverlay.h:181
+#: ../bin/src/ui_visualisationoverlay.h:185
 msgid "Visualizations Settings"
 msgstr "Visualisierungs-Einstellungen"
 
@@ -4781,7 +4786,7 @@ msgstr "Sie können ohne Benutzerkonto Musik von Magnatune hören. Um die Hinwei
 msgid "You can listen to background streams at the same time as other music."
 msgstr "Sie können zur gleichen Zeit Hintergrundstreams und andere Musik hören."
 
-#: internet/lastfmsettingspage.cpp:140
+#: internet/lastfmsettingspage.cpp:142
 msgid ""
 "You can scrobble tracks for free, but only <span style=\" font-"
 "weight:600;\">paid subscribers</span> can stream Last.fm radio from "
@@ -4802,6 +4807,10 @@ msgstr "Sie haben kein Grooveshark Anywhere-Konto."
 #: internet/spotifysettingspage.cpp:148
 msgid "You do not have a Spotify Premium account."
 msgstr "Sie haben kein Spotify Premium-Konto."
+
+#: internet/digitallyimportedclient.cpp:89
+msgid "You do not have an active subscription"
+msgstr "Sie haben kein aktives Abonnement."
 
 #: internet/spotifyservice.cpp:162
 msgid ""
@@ -4828,7 +4837,7 @@ msgstr "Öffnen Sie die Systemeinstellungen und aktivieren Sie \"<span style=\" 
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Sie müssen Clementine nach dem Ändern der Sprache neustarten."
 
-#: internet/lastfmsettingspage.cpp:107
+#: internet/lastfmsettingspage.cpp:108
 msgid ""
 "You will not be able to play Last.fm radio stations as you are not a Last.fm"
 " subscriber."
