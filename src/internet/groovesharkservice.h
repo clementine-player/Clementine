@@ -134,8 +134,12 @@ class GroovesharkService : public InternetService {
  protected:
   struct PlaylistInfo {
     PlaylistInfo() {}
-    PlaylistInfo(int id, QString name, QStandardItem* item)
+    PlaylistInfo(int id, QString name, QStandardItem* item = NULL)
       : id_(id), name_(name), item_(item) {}
+
+    bool operator< (const PlaylistInfo other) const {
+      return name_.compare(other.name_, Qt::CaseInsensitive) < 0;
+    }
 
     int id_;
     QString name_;
@@ -222,6 +226,9 @@ class GroovesharkService : public InternetService {
   QList<int> ExtractSongsIds(const QVariantMap& result);
   QList<int> ExtractSongsIds(const QList<QUrl>& urls);
   int ExtractSongId(const QUrl& url); // Returns 0 if url is not a Grooveshark url
+  // Convenient function for extracting basic playlist info (only 'id' and
+  // 'name': QStandardItem still need to be created), and sort them by name
+  QList<PlaylistInfo> ExtractPlaylistInfo(const QVariantMap& result);
 
   void ResetSessionId();
 

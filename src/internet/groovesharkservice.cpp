@@ -648,14 +648,11 @@ void GroovesharkService::UserPlaylistsRetrieved() {
   reply->deleteLater();
 
   QVariantMap result = ExtractResult(reply);
-  QVariantList playlists = result["playlists"].toList();
+  QList<PlaylistInfo> playlists = ExtractPlaylistInfo(result);
 
-  foreach (const QVariant& playlist_variant, playlists) {
-    // Get playlist info
-    QVariantMap playlist = playlist_variant.toMap();
-    int playlist_id = playlist["PlaylistID"].toInt();
-    QString playlist_name = playlist["PlaylistName"].toString();
-
+  foreach(const PlaylistInfo& playlist_info, playlists) {
+    int playlist_id = playlist_info.id_;
+    const QString& playlist_name = playlist_info.name_;
     QStandardItem* playlist_item =
         CreatePlaylistItem(playlist_name, playlist_id);
     // Insert this new item just below the favorites list
@@ -811,14 +808,13 @@ void GroovesharkService::RetrieveSubscribedPlaylists() {
 
 void GroovesharkService::SubscribedPlaylistsRetrieved(QNetworkReply* reply) {
   reply->deleteLater();
+
   QVariantMap result = ExtractResult(reply);
-  QVariantList playlists = result["playlists"].toList();
-  QVariantList::iterator it;
-  for (it = playlists.begin(); it != playlists.end(); ++it) {
-    // Get playlist info
-    QVariantMap playlist = (*it).toMap();
-    int playlist_id = playlist["PlaylistID"].toInt();
-    QString playlist_name = playlist["PlaylistName"].toString();
+  QList<PlaylistInfo> playlists = ExtractPlaylistInfo(result);
+
+  foreach(const PlaylistInfo& playlist_info, playlists) {
+    int playlist_id = playlist_info.id_;
+    const QString& playlist_name = playlist_info.name_;
 
     QStandardItem* playlist_item = CreatePlaylistItem(playlist_name, playlist_id);
     // Refine some playlist properties that should be different for subscribed
@@ -1604,4 +1600,24 @@ int GroovesharkService::ExtractSongId(const QUrl& url) {
       return ids[2].toInt();
   }
   return 0;
+}
+
+QList<GroovesharkService::PlaylistInfo> GroovesharkService::ExtractPlaylistInfo(const QVariantMap& result) {
+  QVariantList playlists_qvariant = result["playlists"].toList();
+
+  QList<PlaylistInfo> playlists;
+
+  // Get playlists info
+  foreach (const QVariant& playlist_qvariant, playlists_qvariant) {
+    QVariantMap playlist = playlist_qvariant.toMap();
+    int playlist_id = playlist["PlaylistID"].toInt();
+    QString playlist_name = playlist["PlaylistName"].toString();
+
+    playlists << PlaylistInfo(playlist_id, playlist_name);
+  }
+
+  // Sort playlists by name
+  qSort(playlists.begin(), playlists.end(), qGreater<PlaylistInfo>());
+
+  return playlists;
 }
