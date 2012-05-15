@@ -1528,6 +1528,10 @@ QVariantMap GroovesharkService::ExtractResult(QNetworkReply* reply) {
   return result["result"].toMap();
 }
 
+int CompareSongsName(const Song& song1, const Song& song2) {
+  return song1.PrettyTitleWithArtist().compare(song2.PrettyTitleWithArtist(), Qt::CaseInsensitive) < 0;
+}
+
 SongList GroovesharkService::ExtractSongs(const QVariantMap& result) {
   QVariantList result_songs = result["songs"].toList();
   SongList songs;
@@ -1535,6 +1539,7 @@ SongList GroovesharkService::ExtractSongs(const QVariantMap& result) {
     QVariantMap result_song = result_songs[i].toMap();
     songs << ExtractSong(result_song);
   }
+  qSort(songs.begin(), songs.end(), CompareSongsName);
   return songs;
 }
 
