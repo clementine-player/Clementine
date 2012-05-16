@@ -138,7 +138,7 @@ class GroovesharkService : public InternetService {
       : id_(id), name_(name), item_(item) {}
 
     bool operator< (const PlaylistInfo other) const {
-      return name_.compare(other.name_, Qt::CaseInsensitive) < 0;
+      return name_.localeAwareCompare(other.name_) < 0;
     }
 
     int id_;

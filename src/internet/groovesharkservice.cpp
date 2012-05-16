@@ -1530,7 +1530,7 @@ QVariantMap GroovesharkService::ExtractResult(QNetworkReply* reply) {
 }
 
 int CompareSongsName(const Song& song1, const Song& song2) {
-  return song1.PrettyTitleWithArtist().compare(song2.PrettyTitleWithArtist(), Qt::CaseInsensitive) < 0;
+  return song1.PrettyTitleWithArtist().localeAwareCompare(song2.PrettyTitleWithArtist()) < 0;
 }
 
 SongList GroovesharkService::ExtractSongs(const QVariantMap& result) {
