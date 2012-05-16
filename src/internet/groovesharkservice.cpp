@@ -821,8 +821,9 @@ void GroovesharkService::SubscribedPlaylistsRetrieved(QNetworkReply* reply) {
     // playlists
     playlist_item->setData(SubscribedPlaylist, Role_PlaylistType);
     playlist_item->setData(false, InternetModel::Role_CanBeModified);
-    PlaylistInfo playlist_info(playlist_id, playlist_name, playlist_item);
-    subscribed_playlists_.insert(playlist_id, playlist_info);
+    
+    subscribed_playlists_.insert(playlist_id,
+                                 PlaylistInfo(playlist_id, playlist_name, playlist_item));
     root_->insertRow(subscribed_playlists_divider_->row() + 1, playlist_item);
 
     // Request playlist's songs
