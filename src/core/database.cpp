@@ -719,6 +719,7 @@ void Database::DoBackup() {
   QSqlDatabase db(this->Connect());
 
   // Before we overwrite anything, make sure the database is not corrupt
+  QMutexLocker l(&mutex_);
   const bool ok = IntegrityCheck(db);
 
   if (ok) {
