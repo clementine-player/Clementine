@@ -62,6 +62,7 @@ GstEnginePipeline::GstEnginePipeline(GstEngine* engine)
     rg_compression_(true),
     buffer_duration_nanosec_(1 * kNsecPerSec),
     buffering_(false),
+    mono_playback_(false),
     end_offset_nanosec_(-1),
     next_beginning_offset_nanosec_(-1),
     next_end_offset_nanosec_(-1),
@@ -109,6 +110,10 @@ void GstEnginePipeline::set_replaygain(bool enabled, int mode, float preamp,
 
 void GstEnginePipeline::set_buffer_duration_nanosec(qint64 buffer_duration_nanosec) {
   buffer_duration_nanosec_ = buffer_duration_nanosec;
+}
+
+void GstEnginePipeline::set_mono_playback(bool enabled) {
+  mono_playback_ = enabled;
 }
 
 bool GstEnginePipeline::ReplaceDecodeBin(GstElement* new_bin) {
@@ -328,6 +333,7 @@ bool GstEnginePipeline::Init() {
       NULL);
   GstCaps* caps32 = gst_caps_new_simple ("audio/x-raw-float",
       "width", G_TYPE_INT, 32,
+      !mono_playback_ ? NULL : "channels", G_TYPE_INT, 1,
       NULL);
 
   // Link the elements with special caps
