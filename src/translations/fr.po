@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-05-13 16:03+0000\n"
+"PO-Revision-Date: 2012-05-20 21:44+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: French (http://www.transifex.net/projects/p/clementine/language/fr/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -38,8 +38,8 @@ msgid " kbps"
 msgstr " kbps"
 
 #: ../bin/src/ui_songinfosettingspage.h:186
-#: ../bin/src/ui_playbacksettingspage.h:265
-#: ../bin/src/ui_playbacksettingspage.h:285
+#: ../bin/src/ui_playbacksettingspage.h:272
+#: ../bin/src/ui_playbacksettingspage.h:292
 msgid " ms"
 msgstr " ms"
 
@@ -460,11 +460,11 @@ msgstr "Ajouter le tag année du morceau"
 msgid "Add stream..."
 msgstr "Ajouter un flux..."
 
-#: internet/groovesharkservice.cpp:1052
+#: internet/groovesharkservice.cpp:1049
 msgid "Add to Grooveshark favorites"
 msgstr "Ajouter aux favoris Grooveshark"
 
-#: internet/groovesharkservice.cpp:1058
+#: internet/groovesharkservice.cpp:1055
 msgid "Add to Grooveshark playlists"
 msgstr "Ajouter aux listes de lectures Grooveshark"
 
@@ -510,7 +510,7 @@ msgstr "Ajouté aujourd'hui"
 msgid "Added within three months"
 msgstr "Ajouté au cours des 3 derniers mois"
 
-#: internet/groovesharkservice.cpp:1332
+#: internet/groovesharkservice.cpp:1329
 msgid "Adding song to favorites"
 msgstr "Ajout du morceau aux favoris"
 
@@ -535,7 +535,7 @@ msgstr "Après avoir copié..."
 msgid "Album"
 msgstr "Album"
 
-#: ../bin/src/ui_playbacksettingspage.h:272
+#: ../bin/src/ui_playbacksettingspage.h:279
 msgid "Album (ideal loudness for all tracks)"
 msgstr "Album (volume idéal pour toutes les pistes)"
 
@@ -665,7 +665,7 @@ msgstr "Ajouter à la liste de lecture actuelle"
 msgid "Append to the playlist"
 msgstr "Ajouter à la liste de lecture"
 
-#: ../bin/src/ui_playbacksettingspage.h:275
+#: ../bin/src/ui_playbacksettingspage.h:282
 msgid "Apply compression to prevent clipping"
 msgstr "Appliquer une compression pour prévenir les coupures"
 
@@ -674,7 +674,7 @@ msgstr "Appliquer une compression pour prévenir les coupures"
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "Êtes-vous sûr de vouloir supprimer la valeur prédéfinie « %1 »"
 
-#: internet/groovesharkservice.cpp:1253
+#: internet/groovesharkservice.cpp:1250
 msgid "Are you sure you want to delete this playlist?"
 msgstr "Êtes-vous sur de vouloir supprimer cette liste de lecture ?"
 
@@ -775,7 +775,7 @@ msgstr "Image d'arrière-plan"
 msgid "Background opacity"
 msgstr "Opacité de l'arrière-plan"
 
-#: core/database.cpp:749
+#: core/database.cpp:750
 msgid "Backing up database"
 msgstr "Sauvegarde de la base de données"
 
@@ -845,11 +845,11 @@ msgstr "Spectrogramme « Boom »"
 msgid "Browse..."
 msgstr "Parcourir..."
 
-#: ../bin/src/ui_playbacksettingspage.h:284
+#: ../bin/src/ui_playbacksettingspage.h:291
 msgid "Buffer duration"
 msgstr "Durée du tampon"
 
-#: engines/gstengine.cpp:849
+#: engines/gstengine.cpp:853
 msgid "Buffering"
 msgstr "Mise en mémoire tampon"
 
@@ -905,7 +905,7 @@ msgstr "Vérifier les mises à jour"
 msgid "Choose a name for your smart playlist"
 msgstr "Choisissez un nom pour votre liste de lecture intelligente"
 
-#: ../bin/src/ui_playbacksettingspage.h:280
+#: ../bin/src/ui_playbacksettingspage.h:287
 msgid "Choose automatically"
 msgstr "Choisir automatiquement"
 
@@ -1127,7 +1127,7 @@ msgstr "Convertir toutes les musiques"
 msgid "Convert any music that the device can't play"
 msgstr "Convertir la musique que le périphérique ne peut pas lire"
 
-#: internet/groovesharkservice.cpp:1131
+#: internet/groovesharkservice.cpp:1128
 msgid "Copy to clipboard"
 msgstr "Copier dans le presse papier"
 
@@ -1211,15 +1211,15 @@ msgstr "Pochette définie depuis %1"
 msgid "Covers from %1"
 msgstr "Pochettes depuis %1"
 
-#: internet/groovesharkservice.cpp:502 internet/groovesharkservice.cpp:1204
+#: internet/groovesharkservice.cpp:502 internet/groovesharkservice.cpp:1201
 msgid "Create a new Grooveshark playlist"
 msgstr "Créer une nouvelle liste de lecture Grooveshark"
 
-#: ../bin/src/ui_playbacksettingspage.h:262
+#: ../bin/src/ui_playbacksettingspage.h:269
 msgid "Cross-fade when changing tracks automatically"
 msgstr "Appliquer un fondu lors des changements de piste automatiques"
 
-#: ../bin/src/ui_playbacksettingspage.h:261
+#: ../bin/src/ui_playbacksettingspage.h:268
 msgid "Cross-fade when changing tracks manually"
 msgstr "Appliquer un fondu lors des changements de piste manuels"
 
@@ -1366,7 +1366,7 @@ msgstr "Par défaut"
 msgid "Delay between visualizations"
 msgstr "Délai entre les visualisations"
 
-#: internet/groovesharkservice.cpp:505 internet/groovesharkservice.cpp:1252
+#: internet/groovesharkservice.cpp:505 internet/groovesharkservice.cpp:1249
 msgid "Delete Grooveshark playlist"
 msgstr "Supprimer la liste de lecture Grooveshark"
 
@@ -1728,7 +1728,7 @@ msgstr "Equivalent à --log-levels *:1"
 msgid "Equivalent to --log-levels *:3"
 msgstr "Equivalent à --log-levels *:3"
 
-#: internet/groovesharkservice.cpp:988
+#: internet/groovesharkservice.cpp:985
 #: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:465
 #: ui/mainwindow.cpp:1736 ui/mainwindow.cpp:1857
 msgid "Error"
@@ -1801,7 +1801,7 @@ msgstr "Toutes les 6 heures"
 msgid "Every hour"
 msgstr "Toutes les heures"
 
-#: ../bin/src/ui_playbacksettingspage.h:263
+#: ../bin/src/ui_playbacksettingspage.h:270
 msgid "Except between tracks on the same album or in the same CUE sheet"
 msgstr "Excepté entre les pistes d'un même album ou d'une même CUE sheet"
 
@@ -1844,15 +1844,15 @@ msgstr "F8"
 msgid "FLAC"
 msgstr "FLAC"
 
-#: ../bin/src/ui_playbacksettingspage.h:260
+#: ../bin/src/ui_playbacksettingspage.h:267
 msgid "Fade out when stopping a track"
 msgstr "Terminer par un fondu quand une piste s'arrête"
 
-#: ../bin/src/ui_playbacksettingspage.h:259
+#: ../bin/src/ui_playbacksettingspage.h:266
 msgid "Fading"
 msgstr "Fondu"
 
-#: ../bin/src/ui_playbacksettingspage.h:264
+#: ../bin/src/ui_playbacksettingspage.h:271
 msgid "Fading duration"
 msgstr "Durée du fondu"
 
@@ -2045,7 +2045,7 @@ msgstr "Graves + Aigus Max."
 msgid "Full Treble"
 msgstr "Aigus Max."
 
-#: ../bin/src/ui_playbacksettingspage.h:276
+#: ../bin/src/ui_playbacksettingspage.h:283
 msgid "GStreamer audio engine"
 msgstr "Moteur audio GStreamer"
 
@@ -2067,11 +2067,11 @@ msgstr "Genre"
 msgid "Get a URL to share this Grooveshark playlist"
 msgstr "Obtenir une URL pour partager cette liste de lecture Grooveshark"
 
-#: internet/groovesharkservice.cpp:518 internet/groovesharkservice.cpp:1069
+#: internet/groovesharkservice.cpp:518 internet/groovesharkservice.cpp:1066
 msgid "Get a URL to share this Grooveshark song"
 msgstr "Obtenir une URL pour partager ce morceau Grooveshark"
 
-#: internet/groovesharkservice.cpp:741
+#: internet/groovesharkservice.cpp:738
 msgid "Getting Grooveshark popular songs"
 msgstr "Récupération des morceaux populaires Grooveshark"
 
@@ -2117,7 +2117,7 @@ msgstr "Grooveshark"
 msgid "Grooveshark login error"
 msgstr "Erreur lors de la connexion à Grooveshark"
 
-#: internet/groovesharkservice.cpp:1121
+#: internet/groovesharkservice.cpp:1118
 msgid "Grooveshark playlist's URL"
 msgstr "URL de la liste de lecture Grooveshark"
 
@@ -2125,7 +2125,7 @@ msgstr "URL de la liste de lecture Grooveshark"
 msgid "Grooveshark radio"
 msgstr "Radio Grooveshark"
 
-#: internet/groovesharkservice.cpp:1099
+#: internet/groovesharkservice.cpp:1096
 msgid "Grooveshark song's URL"
 msgstr "URL du morceau Grooveshark"
 
@@ -2474,7 +2474,7 @@ msgstr "Wiki Last.fm"
 msgid "Least favourite tracks"
 msgstr "Pistes les moins aimées"
 
-#: ../bin/src/ui_playbacksettingspage.h:282
+#: ../bin/src/ui_playbacksettingspage.h:290
 msgid "Leave blank for the default.  Examples: \"/dev/dsp\", \"front\", etc."
 msgstr "Laisser vide pour les paramètres par défaut. Exemples : \"/dev/dsp\", \"front\", etc."
 
@@ -2741,6 +2741,10 @@ msgstr "Modèle"
 msgid "Monitor the library for changes"
 msgstr "Surveiller les modifications de la bibliothèque"
 
+#: ../bin/src/ui_playbacksettingspage.h:293
+msgid "Mono playback"
+msgstr ""
+
 #: smartplaylists/searchterm.cpp:303
 msgid "Months"
 msgstr "Mois"
@@ -2816,7 +2820,7 @@ msgstr "Ma station de radio"
 msgid "My Recommendations"
 msgstr "Mes suggestions"
 
-#: internet/groovesharkservice.cpp:1205 internet/groovesharkservice.cpp:1299
+#: internet/groovesharkservice.cpp:1202 internet/groovesharkservice.cpp:1296
 #: ui/equalizer.cpp:172 ../bin/src/ui_deviceproperties.h:369
 #: ../bin/src/ui_magnatunedownloaddialog.h:135
 #: ../bin/src/ui_wizardfinishpage.h:84
@@ -3056,7 +3060,7 @@ msgstr "Tags originaux"
 msgid "Other options"
 msgstr "Autres options"
 
-#: ../bin/src/ui_playbacksettingspage.h:283
+#: ../bin/src/ui_playbacksettingspage.h:289
 msgid "Output device"
 msgstr "Périphérique de sortie"
 
@@ -3064,7 +3068,7 @@ msgstr "Périphérique de sortie"
 msgid "Output options"
 msgstr "Options de sortie"
 
-#: ../bin/src/ui_playbacksettingspage.h:277
+#: ../bin/src/ui_playbacksettingspage.h:284
 msgid "Output plugin"
 msgstr "Module de sortie"
 
@@ -3157,7 +3161,7 @@ msgstr "Jouer la <n>ème piste de la liste de lecture"
 msgid "Play/Pause"
 msgstr "Lecture/Pause"
 
-#: ../bin/src/ui_playbacksettingspage.h:257
+#: ../bin/src/ui_playbacksettingspage.h:264
 msgid "Playback"
 msgstr "Lecture sonore"
 
@@ -3222,7 +3226,7 @@ msgstr "Durée d'affichage de la fenêtre"
 msgid "Port"
 msgstr "Port"
 
-#: ui/equalizer.cpp:46 ../bin/src/ui_playbacksettingspage.h:274
+#: ui/equalizer.cpp:46 ../bin/src/ui_playbacksettingspage.h:281
 msgid "Pre-amp"
 msgstr "Pré-ampli"
 
@@ -3340,7 +3344,7 @@ msgstr "Mettre les pistes sélectionnées en liste d'attente"
 msgid "Queue track"
 msgstr "Mettre cette piste en liste d'attente"
 
-#: ../bin/src/ui_playbacksettingspage.h:271
+#: ../bin/src/ui_playbacksettingspage.h:278
 msgid "Radio (equal loudness for all tracks)"
 msgstr "Radio (volume égalisé pour toutes les pistes)"
 
@@ -3450,11 +3454,11 @@ msgstr "Supprimer de la liste de lecture"
 msgid "Remove playlist"
 msgstr "Supprimer la liste de lecture"
 
-#: internet/groovesharkservice.cpp:1414
+#: internet/groovesharkservice.cpp:1411
 msgid "Removing song from favorites"
 msgstr "Suppression du morceau des favoris"
 
-#: internet/groovesharkservice.cpp:1298
+#: internet/groovesharkservice.cpp:1295
 #, qt-format
 msgid "Rename \"%1\" playlist"
 msgstr "Renommer la liste de lecture « %1 »"
@@ -3509,11 +3513,11 @@ msgstr "Remplacer la liste de lecture"
 msgid "Replaces spaces with underscores"
 msgstr "Remplace les espaces par des tirets bas"
 
-#: ../bin/src/ui_playbacksettingspage.h:266
+#: ../bin/src/ui_playbacksettingspage.h:273
 msgid "Replay Gain"
 msgstr "Replay Gain"
 
-#: ../bin/src/ui_playbacksettingspage.h:268
+#: ../bin/src/ui_playbacksettingspage.h:275
 msgid "Replay Gain mode"
 msgstr "Mode du Replay Gain"
 
@@ -3537,7 +3541,7 @@ msgstr "Limiter aux caractères ASCII"
 msgid "Results"
 msgstr "Résultats"
 
-#: internet/groovesharkservice.cpp:712
+#: internet/groovesharkservice.cpp:709
 msgid "Retrieving Grooveshark favorites songs"
 msgstr "Récupération des morceaux Grooveshark favoris"
 
@@ -3620,7 +3624,7 @@ msgid "Search"
 msgstr "Recherche"
 
 #: internet/groovesharksearchplaylisttype.cpp:32
-#: internet/groovesharkservice.cpp:966
+#: internet/groovesharkservice.cpp:963
 msgid "Search Grooveshark"
 msgstr "Chercher sur Grooveshark"
 
@@ -3785,7 +3789,7 @@ msgstr "Afficher"
 msgid "Show OSD"
 msgstr "Afficher l'OSD"
 
-#: ../bin/src/ui_playbacksettingspage.h:258
+#: ../bin/src/ui_playbacksettingspage.h:265
 msgid "Show a glowing animation on the current track"
 msgstr "Mettre en surbrillance la piste en lecture"
 
@@ -4325,7 +4329,7 @@ msgstr "Fuseau horaire"
 msgid "Title"
 msgstr "Titre"
 
-#: internet/groovesharkservice.cpp:989
+#: internet/groovesharkservice.cpp:986
 msgid ""
 "To start Grooveshark radio, you should first listen to a few other "
 "Grooveshark songs"
@@ -4447,7 +4451,7 @@ msgstr "Enlever cette pochette"
 msgid "Unsubscribe"
 msgstr "Se désinscrire"
 
-#: internet/groovesharkservice.cpp:1159
+#: internet/groovesharkservice.cpp:1156
 msgid "Update Grooveshark playlist"
 msgstr "Mise à jour de la liste de lecture Grooveshark"
 
@@ -4491,13 +4495,13 @@ msgstr "Usage"
 
 #: ../bin/src/ui_lastfmsettingspage.h:159
 msgid "Use Album Artist tag when available"
-msgstr ""
+msgstr "Utiliser le tag Album Artist lorsqu'il est disponible"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:168
 msgid "Use Gnome's shortcut keys"
 msgstr "Utiliser les raccourcis de touches de Gnome"
 
-#: ../bin/src/ui_playbacksettingspage.h:267
+#: ../bin/src/ui_playbacksettingspage.h:274
 msgid "Use Replay Gain metadata if it is available"
 msgstr "Utiliser la métadonnée Replay Gain si disponible"
 
@@ -4806,7 +4810,7 @@ msgstr "Vous n'avez pas de compte Spotify Premium."
 
 #: internet/digitallyimportedclient.cpp:89
 msgid "You do not have an active subscription"
-msgstr ""
+msgstr "Vous n'avez pas d'abonnement actif"
 
 #: internet/spotifyservice.cpp:162
 msgid ""
