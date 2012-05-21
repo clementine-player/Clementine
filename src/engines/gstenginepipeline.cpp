@@ -333,8 +333,10 @@ bool GstEnginePipeline::Init() {
       NULL);
   GstCaps* caps32 = gst_caps_new_simple ("audio/x-raw-float",
       "width", G_TYPE_INT, 32,
-      !mono_playback_ ? NULL : "channels", G_TYPE_INT, 1,
       NULL);
+  if (mono_playback_) {
+    gst_caps_set_simple(caps32, "channels", G_TYPE_INT, 1, NULL);
+  }
 
   // Link the elements with special caps
   gst_element_link_filtered(probe_converter, probe_sink, caps16);
