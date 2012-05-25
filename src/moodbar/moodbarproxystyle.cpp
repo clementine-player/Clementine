@@ -26,6 +26,10 @@
 #include <QTimeLine>
 
 const int MoodbarProxyStyle::kNumHues = 12;
+const int MoodbarProxyStyle::kMarginSize = 3;
+const int MoodbarProxyStyle::kBorderSize = 1;
+const int MoodbarProxyStyle::kArrowWidth = 17;
+const int MoodbarProxyStyle::kArrowHeight = 13;
 
 MoodbarProxyStyle::MoodbarProxyStyle(QSlider* slider)
   : QProxyStyle(slider->style()),
@@ -130,7 +134,7 @@ void MoodbarProxyStyle::Render(
     if (fade_source_.isNull()) {
       // Draw the normal slider into the fade source pixmap.
       fade_source_ = QPixmap(option->rect.size());
-      fade_source_.fill(option->palette.color(QPalette::Background));
+      fade_source_.fill(option->palette.color(QPalette::Active, QPalette::Background));
 
       QPainter p(&fade_source_);
       QStyleOptionSlider opt_copy(*option);
@@ -163,6 +167,7 @@ void MoodbarProxyStyle::Render(
   case MoodbarOn:
     EnsureMoodbarRendered();
     painter->drawPixmap(option->rect, moodbar_pixmap_);
+    DrawArrow(option, painter);
     break;
   }
 }
@@ -175,7 +180,7 @@ void MoodbarProxyStyle::EnsureMoodbarRendered() {
   }
 
   if (moodbar_pixmap_dirty_) {
-    moodbar_pixmap_ = MoodbarPixmap(moodbar_colors_, slider_->size());
+    moodbar_pixmap_ = MoodbarPixmap(moodbar_colors_, slider_->size(), slider_->palette());
     moodbar_pixmap_dirty_ = false;
   }
 }
@@ -192,7 +197,7 @@ MoodbarProxyStyle::ColorList MoodbarProxyStyle::MoodbarColors(
     case Style_Happy:  properties = StyleProperties(samples / 360 * 2, 0,   359, 150, 250); break;
     case Style_SystemDefault:
     default: {
-      const QColor highlight_color(palette.color(QPalette::Highlight));
+      const QColor highlight_color(palette.color(QPalette::Active, QPalette::Highlight));
 
       properties.threshold_   = samples / 360 * 3;
       properties.range_start_ = (highlight_color.hsvHue() - 20 + 360) % 360;
@@ -251,16 +256,26 @@ MoodbarProxyStyle::ColorList MoodbarProxyStyle::MoodbarColors(
   return colors;
 }
 
-QPixmap MoodbarProxyStyle::MoodbarPixmap(const ColorList& colors, const QSize& size) {
+QPixmap MoodbarProxyStyle::MoodbarPixmap(const ColorList& colors, const QSize& size,
+                                         const QPalette& palette) {
+  QRect rect(QPoint(0, 0), size);
+  QRect border_rect(rect);
+  border_rect.adjust(kMarginSize, kMarginSize, -kMarginSize, -kMarginSize);
+
+  QRect inner_rect(border_rect);
+  inner_rect.adjust(kBorderSize, kBorderSize, -kBorderSize, -kBorderSize);
+
+  const QSize inner_size(inner_rect.size());
+
   // Sample the colors and map them to screen pixels.
   ColorList screen_colors;
-  for (int x=0; x<size.width(); ++x) {
+  for (int x=0; x<inner_size.width(); ++x) {
     int r = 0;
     int g = 0;
     int b = 0;
 
-    uint start = x       * colors.size() / size.width();
-    uint end   = (x + 1) * colors.size() / size.width();
+    uint start = x       * colors.size() / inner_size.width();
+    uint end   = (x + 1) * colors.size() / inner_size.width();
 
     if (start == end)
       end = start + 1;
@@ -278,12 +293,13 @@ QPixmap MoodbarProxyStyle::MoodbarPixmap(const ColorList& colors, const QSize& s
   QPixmap ret(size);
   QPainter p(&ret);
 
-  for (int x=0; x<size.width(); x++) {
+  // Draw the actual moodbar.
+  for (int x=0; x<inner_size.width(); x++) {
     int h, s, v;
     screen_colors[x].getHsv( &h, &s, &v );
 
-    for (int y=0; y<=size.height()/2; y++) {
-      float coeff = float(y) / float(size.height()/2);
+    for (int y=0; y<=inner_size.height()/2; y++) {
+      float coeff = float(y) / float(inner_size.height()/2);
       float coeff2 = 1.0f - ((1.0f - coeff) * (1.0f - coeff));
       coeff = 1.0f - (1.0f - coeff) / 2.0f;
       coeff2 = 1.f - (1.f - coeff2) / 2.0f;
@@ -293,12 +309,81 @@ QPixmap MoodbarProxyStyle::MoodbarPixmap(const ColorList& colors, const QSize& s
           qBound(0, int(float(s) * coeff), 255),
           qBound(0, int(255.f - (255.f - float(v)) * coeff2), 255)));
 
-      p.drawPoint(x, y);
-      p.drawPoint(x, size.height() - 1 - y);
+      p.drawPoint(inner_rect.left() + x, inner_rect.top() + y);
+      p.drawPoint(inner_rect.left() + x, inner_rect.top() + inner_size.height() - 1 - y);
     }
   }
+
+  // Draw the border
+  p.setPen(QPen(palette.brush(QPalette::Active, QPalette::Highlight),
+                kBorderSize, Qt::SolidLine, Qt::FlatCap, Qt::MiterJoin));
+  p.drawRect(border_rect.adjusted(0, 0, -1, -1));
+
+  // Draw the outer bit
+  p.setPen(QPen(palette.brush(QPalette::Active, QPalette::Background),
+                kMarginSize, Qt::SolidLine, Qt::FlatCap, Qt::MiterJoin));
+  p.drawRect(rect.adjusted(1, 1, -2, -2));
 
   p.end();
 
   return ret;
+}
+
+QRect MoodbarProxyStyle::subControlRect(
+    ComplexControl cc, const QStyleOptionComplex* opt,
+    SubControl sc, const QWidget* widget) const {
+  if (cc != QStyle::CC_Slider || widget != slider_) {
+    return QProxyStyle::subControlRect(cc, opt, sc, widget);
+  }
+
+  switch (state_) {
+    case MoodbarOff:
+    case FadingToOff:
+      break;
+
+    case MoodbarOn:
+    case FadingToOn:
+      switch (sc) {
+        case SC_SliderGroove:
+          return opt->rect.adjusted(kMarginSize, kMarginSize, -kMarginSize, kMarginSize);
+
+        case SC_SliderHandle: {
+          const QStyleOptionSlider* slider_opt =
+              qstyleoption_cast<const QStyleOptionSlider*>(opt);
+
+          const int x =
+              (slider_opt->sliderValue - slider_opt->minimum) * (opt->rect.width() - kArrowWidth) /
+              (slider_opt->maximum - slider_opt->minimum);
+
+          return QRect(QPoint(opt->rect.left() + x, opt->rect.top()),
+                       QSize(kArrowWidth, kArrowHeight));
+        }
+
+        default:
+          break;
+      }
+  }
+
+  return QProxyStyle::subControlRect(cc, opt, sc, widget);
+}
+
+void MoodbarProxyStyle::DrawArrow(const QStyleOptionSlider* option,
+                                  QPainter* painter) const {
+  // Get the dimensions of the arrow
+  const QRect rect = subControlRect(CC_Slider, option, SC_SliderHandle, slider_);
+
+  // Make a polygon
+  QPolygon poly;
+  poly << rect.topLeft()
+       << rect.topRight()
+       << QPoint(rect.center().x(), rect.bottom());
+
+  // Draw it
+  painter->save();
+  painter->setRenderHint(QPainter::Antialiasing);
+  painter->translate(0.5, 0.5);
+  painter->setPen(slider_->palette().color(QPalette::Active, QPalette::Highlight));
+  painter->setBrush(slider_->palette().brush(QPalette::Active, QPalette::Base));
+  painter->drawPolygon(poly);
+  painter->restore();
 }

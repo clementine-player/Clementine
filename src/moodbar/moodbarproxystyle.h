@@ -40,6 +40,8 @@ public:
   // QProxyStyle
   void drawComplexControl(ComplexControl control, const QStyleOptionComplex* option,
                           QPainter* painter, const QWidget* widget) const;
+  QRect subControlRect(ComplexControl cc, const QStyleOptionComplex* opt,
+                       SubControl sc, const QWidget* widget) const;
 
   // QObject
   bool eventFilter(QObject* object, QEvent* event);
@@ -53,6 +55,10 @@ public slots:
 
 private:
   static const int kNumHues;
+  static const int kMarginSize;
+  static const int kBorderSize;
+  static const int kArrowWidth;
+  static const int kArrowHeight;
 
   enum State {
     MoodbarOn,
@@ -82,10 +88,12 @@ private:
   void Render(ComplexControl control, const QStyleOptionSlider* option,
               QPainter* painter, const QWidget* widget);
   void EnsureMoodbarRendered();
+  void DrawArrow(const QStyleOptionSlider* option, QPainter* painter) const;
 
   static ColorList MoodbarColors(const QByteArray& data, MoodbarStyle style,
                                  const QPalette& palette);
-  static QPixmap MoodbarPixmap(const ColorList& colors, const QSize& size);
+  static QPixmap MoodbarPixmap(const ColorList& colors, const QSize& size,
+                               const QPalette& palette);
 
 private slots:
   void FaderValueChanged(qreal value);
