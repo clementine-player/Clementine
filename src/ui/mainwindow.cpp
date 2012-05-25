@@ -55,6 +55,8 @@
 #include "library/librarydirectorymodel.h"
 #include "library/libraryfilterwidget.h"
 #include "library/libraryviewcontainer.h"
+#include "moodbar/moodbarcontroller.h"
+#include "moodbar/moodbarproxystyle.h"
 #include "musicbrainz/tagfetcher.h"
 #include "playlist/playlistbackend.h"
 #include "playlist/playlist.h"
@@ -615,6 +617,10 @@ MainWindow::MainWindow(Application* app,
   ui_->playlist_summary->setMinimumWidth(QFontMetrics(font()).width("WW selected of WW tracks - [ WW:WW ]"));
   ui_->status_bar_stack->setCurrentWidget(ui_->playlist_summary_page);
   connect(ui_->multi_loading_indicator, SIGNAL(TaskCountChange(int)), SLOT(TaskCountChanged(int)));
+
+  // Moodbar connections
+  connect(app_->moodbar_controller(), SIGNAL(CurrentMoodbarDataChanged(QByteArray)),
+          ui_->track_slider->moodbar_style(), SLOT(SetMoodbarData(QByteArray)));
 
   // Now playing widget
   qLog(Debug) << "Creating now playing widget";

@@ -201,6 +201,7 @@ set(SOURCES
   moodbar/moodbarcontroller.cpp
   moodbar/moodbarloader.cpp
   moodbar/moodbarpipeline.cpp
+  moodbar/moodbarproxystyle.cpp
 
   musicbrainz/acoustidclient.cpp
   musicbrainz/chromaprinter.cpp
@@ -466,6 +467,7 @@ set(HEADERS
   moodbar/moodbarcontroller.h
   moodbar/moodbarloader.h
   moodbar/moodbarpipeline.h
+  moodbar/moodbarproxystyle.h
 
   musicbrainz/acoustidclient.h
   musicbrainz/musicbrainzclient.h

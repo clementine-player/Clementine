@@ -18,6 +18,7 @@
 #include "trackslider.h"
 #include "ui_trackslider.h"
 #include "core/utilities.h"
+#include "moodbar/moodbarproxystyle.h"
 
 #include <QSettings>
 
@@ -26,11 +27,13 @@ const char* TrackSlider::kSettingsGroup = "MainWindow";
 TrackSlider::TrackSlider(QWidget* parent)
   : QWidget(parent),
     ui_(new Ui_TrackSlider),
+    moodbar_style_(NULL),
     setting_value_(false),
     show_remaining_time_(true),
     slider_maximum_value_(0)
 {
   ui_->setupUi(this);
+  moodbar_style_ = new MoodbarProxyStyle(ui_->slider);
 
   QFont font("Courier");
   ui_->elapsed->setFont(font);

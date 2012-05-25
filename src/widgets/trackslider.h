@@ -22,6 +22,7 @@
 
 class QLabel;
 
+class MoodbarProxyStyle;
 class Ui_TrackSlider;
 
 class TrackSlider : public QWidget {
@@ -36,6 +37,8 @@ class TrackSlider : public QWidget {
 
   // QObject
   bool event(QEvent *);
+
+  MoodbarProxyStyle* moodbar_style() const { return moodbar_style_; }
 
   static const char* kSettingsGroup;
 
@@ -59,6 +62,8 @@ class TrackSlider : public QWidget {
 
  private:
   Ui_TrackSlider* ui_;
+
+  MoodbarProxyStyle* moodbar_style_;
 
   bool setting_value_;
   bool show_remaining_time_;

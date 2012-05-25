@@ -21,16 +21,24 @@
 #include <QObject>
 
 class Application;
+class MoodbarPipeline;
 class Song;
+
+class QUrl;
 
 class MoodbarController : public QObject {
   Q_OBJECT
   
 public:
   MoodbarController(Application* app, QObject* parent = 0);
+
+signals:
+  void CurrentMoodbarDataChanged(const QByteArray& data);
   
 private slots:
   void CurrentSongChanged(const Song& song);
+  void PlaybackStopped();
+  void AsyncLoadComplete(MoodbarPipeline* pipeline, const QUrl& url);
   
 private:
   Application* app_;

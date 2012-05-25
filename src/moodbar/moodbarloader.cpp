@@ -29,13 +29,27 @@
 
 MoodbarLoader::MoodbarLoader(QObject* parent)
   : QObject(parent),
-    cache_(new QNetworkDiskCache(this))
+    cache_(new QNetworkDiskCache(this)),
+    save_alongside_originals_(true)
 {
   cache_->setCacheDirectory(Utilities::GetConfigPath(Utilities::Path_MoodbarCache));
   cache_->setMaximumCacheSize(1024 * 1024); // 1MB - enough for 333 moodbars
 }
 
 MoodbarLoader::~MoodbarLoader() {
+}
+
+QStringList MoodbarLoader::MoodFilenames(const QString& song_filename) {
+  const QFileInfo file_info(song_filename);
+  const QString dir_path(file_info.dir().path());
+
+  QStringList parts(file_info.fileName().split('.'));
+  parts.removeLast();
+  parts.append("mood");
+  const QString mood_filename(parts.join("."));
+
+  return QStringList() << dir_path + "/." + mood_filename
+                       << dir_path + "/" + mood_filename;
 }
 
 MoodbarLoader::Result MoodbarLoader::Load(
@@ -52,19 +66,8 @@ MoodbarLoader::Result MoodbarLoader::Load(
   
   // Check if a mood file exists for this file already
   const QString filename(url.toLocalFile());
-  const QFileInfo file_info(filename);
-  const QString dir_path(file_info.dir().path());
   
-  QStringList parts(file_info.fileName().split('.'));
-  parts.removeLast();
-  parts.append("mood");
-  const QString mood_filename(parts.join("."));
-  
-  QStringList possible_mood_files;
-  possible_mood_files << dir_path + "/." + mood_filename
-                      << dir_path + "/" + mood_filename;
-  
-  foreach (const QString& possible_mood_file, possible_mood_files) {
+  foreach (const QString& possible_mood_file, MoodFilenames(filename)) {
     QFile f(possible_mood_file);
     if (f.open(QIODevice::ReadOnly)) {
       qLog(Info) << "Loading moodbar data from" << possible_mood_file;
@@ -110,6 +113,17 @@ void MoodbarLoader::RequestFinished(MoodbarPipeline* request, const QUrl& url) {
     QIODevice* cache_file = cache_->prepare(metadata);
     cache_file->write(request->data());
     cache_->insert(cache_file);
+
+    // Save the data alongside the original as well if we're configured to.
+    if (save_alongside_originals_) {
+      const QString mood_filename(MoodFilenames(url.toLocalFile())[0]);
+      QFile mood_file(mood_filename);
+      if (mood_file.open(QIODevice::WriteOnly)) {
+        mood_file.write(request->data());
+      } else {
+        qLog(Warning) << "Error opening mood file for writing" << mood_filename;
+      }
+    }
   }
   
   // Remove the request from the active list and delete it

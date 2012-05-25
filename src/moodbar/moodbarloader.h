@@ -50,11 +50,16 @@ public:
 
 private slots:
   void RequestFinished(MoodbarPipeline* request, const QUrl& filename);
+
+private:
+  static QStringList MoodFilenames(const QString& song_filename);
   
 private:
   QNetworkDiskCache* cache_;
   
   QMap<QUrl, MoodbarPipeline*> active_requests_;
+
+  bool save_alongside_originals_;
 };
 
 #endif // MOODBARLOADER_H
