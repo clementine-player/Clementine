@@ -25,6 +25,8 @@
 #include <QNetworkDiskCache>
 #include <QUrl>
 
+#include <boost/scoped_ptr.hpp>
+
 MoodbarLoader::MoodbarLoader(QObject* parent)
   : QObject(parent),
     cache_(new QNetworkDiskCache(this))
@@ -72,11 +74,10 @@ MoodbarLoader::Result MoodbarLoader::Load(
   }
   
   // Maybe it exists in the cache?
-  QIODevice* cache_device = cache_->data(url);
+  boost::scoped_ptr<QIODevice> cache_device(cache_->data(url));
   if (cache_device) {
     qLog(Info) << "Loading cached moodbar data for" << filename;
     *data = cache_device->readAll();
-    delete cache_device;
     return Loaded;
   }
   
