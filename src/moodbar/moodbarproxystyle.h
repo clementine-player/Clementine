@@ -18,6 +18,8 @@
 #ifndef MOODBARPROXYSTYLE_H
 #define MOODBARPROXYSTYLE_H
 
+#include "moodbarrenderer.h"
+
 #include <QProxyStyle>
 
 class QSlider;
@@ -29,13 +31,6 @@ class MoodbarProxyStyle : public QProxyStyle {
 
 public:
   MoodbarProxyStyle(QSlider* slider);
-
-  enum MoodbarStyle {
-    Style_Angry,
-    Style_Frozen,
-    Style_Happy,
-    Style_SystemDefault
-  };
 
   // QProxyStyle
   void drawComplexControl(ComplexControl control, const QStyleOptionComplex* option,
@@ -54,7 +49,6 @@ public slots:
   void SetMoodbarEnabled(bool enabled);
 
 private:
-  static const int kNumHues;
   static const int kMarginSize;
   static const int kBorderSize;
   static const int kArrowWidth;
@@ -67,21 +61,6 @@ private:
     FadingToOff
   };
 
-  struct StyleProperties {
-    StyleProperties(int threshold = 0, int range_start = 0, int range_delta = 0,
-                    int sat = 0, int val = 0)
-      : threshold_(threshold), range_start_(range_start), range_delta_(range_delta),
-        sat_(sat), val_(val) {}
-
-    int threshold_;
-    int range_start_;
-    int range_delta_;
-    int sat_;
-    int val_;
-  };
-
-  typedef QVector<QColor> ColorList;
-
 private:
   void NextState();
 
@@ -90,10 +69,8 @@ private:
   void EnsureMoodbarRendered();
   void DrawArrow(const QStyleOptionSlider* option, QPainter* painter) const;
 
-  static ColorList MoodbarColors(const QByteArray& data, MoodbarStyle style,
-                                 const QPalette& palette);
-  static QPixmap MoodbarPixmap(const ColorList& colors, const QSize& size,
-                               const QPalette& palette);
+  static QPixmap MoodbarPixmap(const MoodbarRenderer::ColorList& colors,
+                               const QSize& size, const QPalette& palette);
 
 private slots:
   void FaderValueChanged(qreal value);
@@ -103,7 +80,7 @@ private:
 
   bool enabled_;
   QByteArray data_;
-  MoodbarStyle moodbar_style_;
+  MoodbarRenderer::MoodbarStyle moodbar_style_;
 
   State state_;
   QTimeLine* fade_timeline_;
@@ -113,7 +90,7 @@ private:
 
   bool moodbar_colors_dirty_;
   bool moodbar_pixmap_dirty_;
-  ColorList moodbar_colors_;
+  MoodbarRenderer::ColorList moodbar_colors_;
   QPixmap moodbar_pixmap_;
 };
 

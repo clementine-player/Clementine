@@ -202,6 +202,7 @@ set(SOURCES
   moodbar/moodbarloader.cpp
   moodbar/moodbarpipeline.cpp
   moodbar/moodbarproxystyle.cpp
+  moodbar/moodbarrenderer.cpp
 
   musicbrainz/acoustidclient.cpp
   musicbrainz/chromaprinter.cpp

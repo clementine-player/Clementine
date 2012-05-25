@@ -25,7 +25,6 @@
 #include <QStyleOptionSlider>
 #include <QTimeLine>
 
-const int MoodbarProxyStyle::kNumHues = 12;
 const int MoodbarProxyStyle::kMarginSize = 3;
 const int MoodbarProxyStyle::kBorderSize = 1;
 const int MoodbarProxyStyle::kArrowWidth = 17;
@@ -35,7 +34,7 @@ MoodbarProxyStyle::MoodbarProxyStyle(QSlider* slider)
   : QProxyStyle(slider->style()),
     slider_(slider),
     enabled_(true),
-    moodbar_style_(Style_SystemDefault),
+    moodbar_style_(MoodbarRenderer::Style_SystemDefault),
     state_(MoodbarOff),
     fade_timeline_(new QTimeLine(1000, this)),
     moodbar_colors_dirty_(true),
@@ -174,7 +173,7 @@ void MoodbarProxyStyle::Render(
 
 void MoodbarProxyStyle::EnsureMoodbarRendered() {
   if (moodbar_colors_dirty_) {
-    moodbar_colors_ = MoodbarColors(data_, moodbar_style_, slider_->palette());
+    moodbar_colors_ = MoodbarRenderer::Colors(data_, moodbar_style_, slider_->palette());
     moodbar_colors_dirty_ = false;
     moodbar_pixmap_dirty_ = true;
   }
@@ -183,150 +182,6 @@ void MoodbarProxyStyle::EnsureMoodbarRendered() {
     moodbar_pixmap_ = MoodbarPixmap(moodbar_colors_, slider_->size(), slider_->palette());
     moodbar_pixmap_dirty_ = false;
   }
-}
-
-MoodbarProxyStyle::ColorList MoodbarProxyStyle::MoodbarColors(
-    const QByteArray& data, MoodbarStyle style, const QPalette& palette) {
-  const int samples = data.size() / 3;
-
-  // Set some parameters based on the moodbar style
-  StyleProperties properties;
-  switch(style) {
-    case Style_Angry:  properties = StyleProperties(samples / 360 * 9, 45,  -45, 200, 100); break;
-    case Style_Frozen: properties = StyleProperties(samples / 360 * 1, 140, 160, 50,  100); break;
-    case Style_Happy:  properties = StyleProperties(samples / 360 * 2, 0,   359, 150, 250); break;
-    case Style_SystemDefault:
-    default: {
-      const QColor highlight_color(palette.color(QPalette::Active, QPalette::Highlight));
-
-      properties.threshold_   = samples / 360 * 3;
-      properties.range_start_ = (highlight_color.hsvHue() - 20 + 360) % 360;
-      properties.range_delta_ = 20;
-      properties.sat_         = highlight_color.hsvSaturation();
-      properties.val_         = highlight_color.value() / 2;
-    }
-  }
-
-  const unsigned char* data_p =
-      reinterpret_cast<const unsigned char*>(data.constData());
-
-  int hue_distribution[360];
-  int total = 0;
-
-  memset(hue_distribution, 0, sizeof(hue_distribution));
-
-  ColorList colors;
-
-  // Read the colors, keeping track of some histograms
-  for (int i=0; i<samples; ++i) {
-    QColor color;
-    color.setRed(int(*data_p++));
-    color.setGreen(int(*data_p++));
-    color.setBlue(int(*data_p++));
-
-    colors << color;
-
-    const int hue = qMax(0, color.hue());
-    if (hue_distribution[hue]++ == properties.threshold_) {
-      total ++;
-    }
-  }
-
-  // Remap the hue values to be between rangeStart and
-  // rangeStart + rangeDelta.  Every time we see an input hue
-  // above the threshold, increment the output hue by
-  // (1/total) * rangeDelta.
-  for (int i=0, n=0 ; i<360; i++) {
-    hue_distribution[i] =
-        ((hue_distribution[i] > properties.threshold_ ? n++ : n )
-          * properties.range_delta_ / total + properties.range_start_) % 360;
-  }
-
-  // Now huedist is a hue mapper: huedist[h] is the new hue value
-  // for a bar with hue h
-  for (ColorList::iterator it = colors.begin() ; it != colors.end() ; ++it) {
-    const int hue = qMax(0, it->hue());
-
-    *it = QColor::fromHsv(
-          qBound(0, hue_distribution[hue], 359),
-          qBound(0, it->saturation() * properties.sat_ / 100, 255),
-          qBound(0, it->value() * properties.val_ / 100, 255));
-  }
-
-  return colors;
-}
-
-QPixmap MoodbarProxyStyle::MoodbarPixmap(const ColorList& colors, const QSize& size,
-                                         const QPalette& palette) {
-  QRect rect(QPoint(0, 0), size);
-  QRect border_rect(rect);
-  border_rect.adjust(kMarginSize, kMarginSize, -kMarginSize, -kMarginSize);
-
-  QRect inner_rect(border_rect);
-  inner_rect.adjust(kBorderSize, kBorderSize, -kBorderSize, -kBorderSize);
-
-  const QSize inner_size(inner_rect.size());
-
-  // Sample the colors and map them to screen pixels.
-  ColorList screen_colors;
-  for (int x=0; x<inner_size.width(); ++x) {
-    int r = 0;
-    int g = 0;
-    int b = 0;
-
-    uint start = x       * colors.size() / inner_size.width();
-    uint end   = (x + 1) * colors.size() / inner_size.width();
-
-    if (start == end)
-      end = start + 1;
-
-    for (uint j=start; j<end; j++) {
-      r += colors[j].red();
-      g += colors[j].green();
-      b += colors[j].blue();
-    }
-
-    const uint n = end - start;
-    screen_colors.append(QColor(r/n, g/n, b/n));
-  }
-
-  QPixmap ret(size);
-  QPainter p(&ret);
-
-  // Draw the actual moodbar.
-  for (int x=0; x<inner_size.width(); x++) {
-    int h, s, v;
-    screen_colors[x].getHsv( &h, &s, &v );
-
-    for (int y=0; y<=inner_size.height()/2; y++) {
-      float coeff = float(y) / float(inner_size.height()/2);
-      float coeff2 = 1.0f - ((1.0f - coeff) * (1.0f - coeff));
-      coeff = 1.0f - (1.0f - coeff) / 2.0f;
-      coeff2 = 1.f - (1.f - coeff2) / 2.0f;
-
-      p.setPen(QColor::fromHsv(
-          h,
-          qBound(0, int(float(s) * coeff), 255),
-          qBound(0, int(255.f - (255.f - float(v)) * coeff2), 255)));
-
-      p.drawPoint(inner_rect.left() + x, inner_rect.top() + y);
-      p.drawPoint(inner_rect.left() + x, inner_rect.top() + inner_size.height() - 1 - y);
-    }
-  }
-
-  // Draw the border
-  p.setPen(QPen(palette.brush(QPalette::Active, QPalette::Highlight),
-                kBorderSize, Qt::SolidLine, Qt::FlatCap, Qt::MiterJoin));
-  p.drawRect(border_rect.adjusted(0, 0, -1, -1));
-
-  // Draw the outer bit
-  p.setPen(QPen(palette.brush(QPalette::Active, QPalette::Background),
-                kMarginSize, Qt::SolidLine, Qt::FlatCap, Qt::MiterJoin));
-  p.drawRect(rect.adjusted(1, 1, -2, -2));
-
-  p.end();
-
-  return ret;
 }
 
 QRect MoodbarProxyStyle::subControlRect(
@@ -345,7 +200,8 @@ QRect MoodbarProxyStyle::subControlRect(
     case FadingToOn:
       switch (sc) {
         case SC_SliderGroove:
-          return opt->rect.adjusted(kMarginSize, kMarginSize, -kMarginSize, kMarginSize);
+          return opt->rect.adjusted(kMarginSize, kMarginSize,
+                                    -kMarginSize, -kMarginSize);
 
         case SC_SliderHandle: {
           const QStyleOptionSlider* slider_opt =
@@ -386,4 +242,35 @@ void MoodbarProxyStyle::DrawArrow(const QStyleOptionSlider* option,
   painter->setBrush(slider_->palette().brush(QPalette::Active, QPalette::Base));
   painter->drawPolygon(poly);
   painter->restore();
+}
+
+QPixmap MoodbarProxyStyle::MoodbarPixmap(
+    const MoodbarRenderer::ColorList& colors, const QSize& size,
+    const QPalette& palette) {
+  QRect rect(QPoint(0, 0), size);
+  QRect border_rect(rect);
+  border_rect.adjust(kMarginSize, kMarginSize, -kMarginSize, -kMarginSize);
+
+  QRect inner_rect(border_rect);
+  inner_rect.adjust(kBorderSize, kBorderSize, -kBorderSize, -kBorderSize);
+
+  QPixmap ret(size);
+  QPainter p(&ret);
+
+  // Draw the moodbar
+  MoodbarRenderer::Render(colors, &p, inner_rect);
+
+  // Draw the border
+  p.setPen(QPen(palette.brush(QPalette::Active, QPalette::Highlight),
+                kBorderSize, Qt::SolidLine, Qt::FlatCap, Qt::MiterJoin));
+  p.drawRect(border_rect.adjusted(0, 0, -1, -1));
+
+  // Draw the outer bit
+  p.setPen(QPen(palette.brush(QPalette::Active, QPalette::Background),
+                kMarginSize, Qt::SolidLine, Qt::FlatCap, Qt::MiterJoin));
+  p.drawRect(rect.adjusted(1, 1, -2, -2));
+
+  p.end();
+
+  return ret;
 }
