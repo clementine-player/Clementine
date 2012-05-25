@@ -198,6 +198,10 @@ set(SOURCES
   library/librarywatcher.cpp
   library/sqlrow.cpp
 
+  moodbar/moodbarcontroller.cpp
+  moodbar/moodbarloader.cpp
+  moodbar/moodbarpipeline.cpp
+
   musicbrainz/acoustidclient.cpp
   musicbrainz/chromaprinter.cpp
   musicbrainz/musicbrainzclient.cpp
@@ -458,6 +462,10 @@ set(HEADERS
   library/libraryview.h
   library/libraryviewcontainer.h
   library/librarywatcher.h
+
+  moodbar/moodbarcontroller.h
+  moodbar/moodbarloader.h
+  moodbar/moodbarpipeline.h
 
   musicbrainz/acoustidclient.h
   musicbrainz/musicbrainzclient.h

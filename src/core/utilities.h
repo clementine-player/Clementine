@@ -108,6 +108,7 @@ namespace Utilities {
     Path_GstreamerRegistry,
     Path_DefaultMusicLibrary,
     Path_LocalSpotifyBlob,
+    Path_MoodbarCache,
   };
   QString GetConfigPath(ConfigPath config);
 

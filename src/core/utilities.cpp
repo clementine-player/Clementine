@@ -277,6 +277,9 @@ QString GetConfigPath(ConfigPath config) {
 
     case Path_NetworkCache:
       return GetConfigPath(Path_Root) + "/networkcache";
+      
+    case Path_MoodbarCache:
+      return GetConfigPath(Path_Root) + "/moodbarcache";
 
     case Path_GstreamerRegistry:
       return GetConfigPath(Path_Root) +

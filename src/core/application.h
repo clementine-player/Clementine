@@ -34,6 +34,8 @@ class InternetModel;
 class Library;
 class LibraryBackend;
 class LibraryModel;
+class MoodbarController;
+class MoodbarLoader;
 class Player;
 class PlaylistBackend;
 class PodcastDownloader;
@@ -69,6 +71,8 @@ public:
   PodcastUpdater* podcast_updater() const { return podcast_updater_; }
   PodcastDownloader* podcast_downloader() const { return podcast_downloader_; }
   GPodderSync* gpodder_sync() const { return gpodder_sync_; }
+  MoodbarLoader* moodbar_loader() const { return moodbar_loader_; }
+  MoodbarController* moodbar_controller() const { return moodbar_controller_; }
 
   LibraryBackend* library_backend() const;
   LibraryModel* library_model() const;
@@ -105,6 +109,8 @@ private:
   PodcastUpdater* podcast_updater_;
   PodcastDownloader* podcast_downloader_;
   GPodderSync* gpodder_sync_;
+  MoodbarLoader* moodbar_loader_;
+  MoodbarController* moodbar_controller_;
 
   QList<QObject*> objects_in_threads_;
   QList<QThread*> threads_;

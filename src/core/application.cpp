@@ -29,6 +29,8 @@
 #include "globalsearch/globalsearch.h"
 #include "library/library.h"
 #include "library/librarybackend.h"
+#include "moodbar/moodbarcontroller.h"
+#include "moodbar/moodbarloader.h"
 #include "playlist/playlistbackend.h"
 #include "playlist/playlistmanager.h"
 #include "podcasts/gpoddersync.h"
@@ -55,7 +57,9 @@ Application::Application(QObject* parent)
     device_manager_(NULL),
     podcast_updater_(NULL),
     podcast_downloader_(NULL),
-    gpodder_sync_(NULL)
+    gpodder_sync_(NULL),
+    moodbar_loader_(NULL),
+    moodbar_controller_(NULL)
 {
   tag_reader_client_ = new TagReaderClient(this);
   MoveToNewThread(tag_reader_client_);
@@ -86,6 +90,8 @@ Application::Application(QObject* parent)
   podcast_updater_ = new PodcastUpdater(this, this);
   podcast_downloader_ = new PodcastDownloader(this, this);
   gpodder_sync_ = new GPodderSync(this, this);
+  moodbar_loader_ = new MoodbarLoader(this);
+  moodbar_controller_ = new MoodbarController(this, this);
 
   library_->Init();
   library_->StartThreads();
