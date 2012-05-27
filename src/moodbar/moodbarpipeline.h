@@ -35,10 +35,11 @@ public:
   
   static bool IsAvailable();
   
-  bool Start();
-  
   bool success() const { return success_; }
   const QByteArray& data() const { return data_; }
+
+public slots:
+  void Start();
 
 signals:
   void Finished(bool success);

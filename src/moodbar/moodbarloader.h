@@ -19,7 +19,6 @@
 #define MOODBARLOADER_H
 
 #include <QMap>
-#include <QMutex>
 #include <QObject>
 #include <QSet>
 
@@ -59,10 +58,10 @@ private:
   
 private:
   QNetworkDiskCache* cache_;
+  QThread* thread_;
 
   const int kMaxActiveRequests;
   
-  QMutex mutex_;
   QMap<QUrl, MoodbarPipeline*> requests_;
   QList<QUrl> queued_requests_;
   QSet<QUrl> active_requests_;

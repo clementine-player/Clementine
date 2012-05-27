@@ -20,6 +20,7 @@
 #include "core/closure.h"
 #include "core/utilities.h"
 
+#include <QCoreApplication>
 #include <QDir>
 #include <QFileInfo>
 #include <QNetworkDiskCache>
@@ -32,6 +33,7 @@
 MoodbarLoader::MoodbarLoader(QObject* parent)
   : QObject(parent),
     cache_(new QNetworkDiskCache(this)),
+    thread_(new QThread(this)),
     kMaxActiveRequests(QThread::idealThreadCount() / 2 + 1),
     save_alongside_originals_(false)
 {
@@ -62,12 +64,9 @@ MoodbarLoader::Result MoodbarLoader::Load(
   }
   
   // Are we in the middle of loading this moodbar already?
-  {
-    QMutexLocker l(&mutex_);
-    if (requests_.contains(url)) {
-      *async_pipeline = requests_[url];
-      return WillLoadAsync;
-    }
+  if (requests_.contains(url)) {
+    *async_pipeline = requests_[url];
+    return WillLoadAsync;
   }
   
   // Check if a mood file exists for this file already
@@ -89,27 +88,29 @@ MoodbarLoader::Result MoodbarLoader::Load(
     *data = cache_device->readAll();
     return Loaded;
   }
+
+  if (!thread_->isRunning())
+    thread_->start();
   
   // There was no existing file, analyze the audio file and create one.
   MoodbarPipeline* pipeline = new MoodbarPipeline(filename);
+  pipeline->moveToThread(thread_);
   NewClosure(pipeline, SIGNAL(Finished(bool)),
              this, SLOT(RequestFinished(MoodbarPipeline*,QUrl)),
              pipeline, url);
 
-  {
-    QMutexLocker l(&mutex_);
-    requests_[url] = pipeline;
-    queued_requests_ << url;
-  }
+  requests_[url] = pipeline;
+  queued_requests_ << url;
 
-  QMetaObject::invokeMethod(this, "MaybeTakeNextRequest", Qt::QueuedConnection);
+  MaybeTakeNextRequest();
 
   *async_pipeline = pipeline;
   return WillLoadAsync;
 }
 
 void MoodbarLoader::MaybeTakeNextRequest() {
-  QMutexLocker l(&mutex_);
+  Q_ASSERT(QThread::currentThread() == qApp->thread());
+
   if (active_requests_.count() > kMaxActiveRequests ||
       queued_requests_.isEmpty()) {
     return;
@@ -119,10 +120,12 @@ void MoodbarLoader::MaybeTakeNextRequest() {
   active_requests_ << url;
 
   qLog(Info) << "Creating moodbar data for" << url.toLocalFile();
-  requests_[url]->Start();
+  QMetaObject::invokeMethod(requests_[url], "Start", Qt::QueuedConnection);
 }
 
 void MoodbarLoader::RequestFinished(MoodbarPipeline* request, const QUrl& url) {
+  Q_ASSERT(QThread::currentThread() == qApp->thread());
+
   if (request->success()) {
     qLog(Info) << "Moodbar data generated successfully for" << url.toLocalFile();
     
@@ -149,12 +152,10 @@ void MoodbarLoader::RequestFinished(MoodbarPipeline* request, const QUrl& url) {
   qLog(Debug) << "Deleting" << request;
 
   // Remove the request from the active list and delete it
-  {
-    QMutexLocker l(&mutex_);
-    requests_.remove(url);
-    active_requests_.remove(url);
-  }
+  requests_.remove(url);
+  active_requests_.remove(url);
+
   QTimer::singleShot(10, request, SLOT(deleteLater()));
 
-  QMetaObject::invokeMethod(this, "MaybeTakeNextRequest", Qt::QueuedConnection);
+  MaybeTakeNextRequest();
 }

@@ -18,6 +18,9 @@
 #include "moodbarpipeline.h"
 #include "core/logging.h"
 
+#include <QCoreApplication>
+#include <QThread>
+
 bool MoodbarPipeline::sIsAvailable = false;
 QMutex MoodbarPipeline::sFftwMutex;
 
@@ -67,9 +70,11 @@ GstElement* MoodbarPipeline::CreateElement(const QString& factory_name) {
   return ret;
 }
 
-bool MoodbarPipeline::Start() {
+void MoodbarPipeline::Start() {
+  Q_ASSERT(QThread::currentThread() != qApp->thread());
+
   if (pipeline_) {
-    return false;
+    return;
   }
   
   pipeline_ = gst_pipeline_new("moodbar-pipeline");
@@ -84,7 +89,7 @@ bool MoodbarPipeline::Start() {
   if (!filesrc || !convert_element_ || !fftwspectrum || !moodbar || !appsink) {
     pipeline_ = NULL;
     emit Finished(false);
-    return false;
+    return;
   }
 
   QMutexLocker l(&sFftwMutex);
@@ -115,8 +120,6 @@ bool MoodbarPipeline::Start() {
   
   // Start playing
   gst_element_set_state(pipeline_, GST_STATE_PLAYING);
-  
-  return true;
 }
 
 void MoodbarPipeline::ReportError(GstMessage* msg) {
