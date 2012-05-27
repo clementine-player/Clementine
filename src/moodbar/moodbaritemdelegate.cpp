@@ -44,8 +44,11 @@ void MoodbarItemDelegate::paint(
     const QModelIndex& index) const {
   QPixmap pixmap = const_cast<MoodbarItemDelegate*>(this)->PixmapForIndex(
         index, option.rect.size());
+
   if (!pixmap.isNull()) {
     painter->drawPixmap(option.rect, pixmap);
+  } else {
+    drawBackground(painter, option, index);
   }
 }
 
