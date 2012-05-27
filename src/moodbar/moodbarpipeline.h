@@ -64,8 +64,6 @@ private:
   GstElement* pipeline_;
   GstElement* convert_element_;
   
-  guint bus_callback_id_;
-  
   bool success_;
   QByteArray data_;
 };

@@ -35,7 +35,7 @@ MoodbarLoader::MoodbarLoader(QObject* parent)
   : QObject(parent),
     cache_(new QNetworkDiskCache(this)),
     thread_(new QThread(this)),
-    kMaxActiveRequests(QThread::idealThreadCount() / 2 + 1),
+    kMaxActiveRequests(qMax(1, QThread::idealThreadCount() / 2)),
     save_alongside_originals_(false)
 {
   cache_->setCacheDirectory(Utilities::GetConfigPath(Utilities::Path_MoodbarCache));
@@ -43,6 +43,8 @@ MoodbarLoader::MoodbarLoader(QObject* parent)
 }
 
 MoodbarLoader::~MoodbarLoader() {
+  thread_->quit();
+  thread_->wait(1000);
 }
 
 QStringList MoodbarLoader::MoodFilenames(const QString& song_filename) {
@@ -87,7 +89,9 @@ MoodbarLoader::Result MoodbarLoader::Load(
   if (cache_device) {
     qLog(Info) << "Loading cached moodbar data for" << filename;
     *data = cache_device->readAll();
-    return Loaded;
+    if (!data->isEmpty()) {
+      return Loaded;
+    }
   }
 
   if (!thread_->isRunning())
@@ -112,7 +116,7 @@ MoodbarLoader::Result MoodbarLoader::Load(
 void MoodbarLoader::MaybeTakeNextRequest() {
   Q_ASSERT(QThread::currentThread() == qApp->thread());
 
-  if (active_requests_.count() > kMaxActiveRequests ||
+  if (active_requests_.count() >= kMaxActiveRequests ||
       queued_requests_.isEmpty()) {
     return;
   }
@@ -156,7 +160,7 @@ void MoodbarLoader::RequestFinished(MoodbarPipeline* request, const QUrl& url) {
   requests_.remove(url);
   active_requests_.remove(url);
 
-  QTimer::singleShot(10, request, SLOT(deleteLater()));
+  QTimer::singleShot(1000, request, SLOT(deleteLater()));
 
   MaybeTakeNextRequest();
 }

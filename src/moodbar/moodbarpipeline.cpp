@@ -29,7 +29,6 @@ MoodbarPipeline::MoodbarPipeline(const QString& local_filename)
     local_filename_(local_filename),
     pipeline_(NULL),
     convert_element_(NULL),
-    bus_callback_id_(0),
     success_(false)
 {
 }
@@ -109,7 +108,6 @@ void MoodbarPipeline::Start() {
   // Connect signals
   g_signal_connect(decodebin, "new-decoded-pad", G_CALLBACK(NewPadCallback), this);
   gst_bus_set_sync_handler(gst_pipeline_get_bus(GST_PIPELINE(pipeline_)), BusCallbackSync, this);
-  bus_callback_id_ = gst_bus_add_watch(gst_pipeline_get_bus(GST_PIPELINE(pipeline_)), BusCallback, this);
   
   // Set appsink callbacks
   GstAppSinkCallbacks callbacks;
@@ -158,21 +156,6 @@ GstFlowReturn MoodbarPipeline::NewBufferCallback(GstAppSink* app_sink, gpointer 
   return GST_FLOW_OK;
 }
 
-gboolean MoodbarPipeline::BusCallback(GstBus*, GstMessage* msg, gpointer data) {
-  MoodbarPipeline* self = reinterpret_cast<MoodbarPipeline*>(data);
-
-  switch (GST_MESSAGE_TYPE(msg)) {
-    case GST_MESSAGE_ERROR:
-      self->ReportError(msg);
-      self->Stop(false);
-      break;
-
-    default:
-      break;
-  }
-  return GST_BUS_DROP;
-}
-
 GstBusSyncReply MoodbarPipeline::BusCallbackSync(GstBus*, GstMessage* msg, gpointer data) {
   MoodbarPipeline* self = reinterpret_cast<MoodbarPipeline*>(data);
 
@@ -198,9 +181,11 @@ void MoodbarPipeline::Stop(bool success) {
 }
 
 void MoodbarPipeline::Cleanup() {
+  Q_ASSERT(QThread::currentThread() == thread());
+  Q_ASSERT(QThread::currentThread() != qApp->thread());
+
   if (pipeline_) {
     gst_bus_set_sync_handler(gst_pipeline_get_bus(GST_PIPELINE(pipeline_)), NULL, NULL);
-    g_source_remove(bus_callback_id_);
     gst_element_set_state(pipeline_, GST_STATE_NULL);
     gst_object_unref(pipeline_);
     pipeline_ = NULL;
