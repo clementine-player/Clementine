@@ -36,7 +36,7 @@ MoodbarLoader::MoodbarLoader(QObject* parent)
     save_alongside_originals_(false)
 {
   cache_->setCacheDirectory(Utilities::GetConfigPath(Utilities::Path_MoodbarCache));
-  cache_->setMaximumCacheSize(1024 * 1024); // 1MB - enough for 333 moodbars
+  cache_->setMaximumCacheSize(10 * 1024 * 1024); // 10MB - enough for 3333 moodbars
 }
 
 MoodbarLoader::~MoodbarLoader() {

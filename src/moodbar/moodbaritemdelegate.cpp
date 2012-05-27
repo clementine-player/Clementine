@@ -108,9 +108,24 @@ QPixmap MoodbarItemDelegate::PixmapForIndex(
   return QPixmap();
 }
 
+bool MoodbarItemDelegate::RemoveFromCacheIfIndexesInvalid(const QUrl& url, Data* data) {
+  foreach (const QPersistentModelIndex& index, data->indexes_) {
+    if (index.isValid()) {
+      return false;
+    }
+  }
+
+  data_.remove(url);
+  return true;
+}
+
 void MoodbarItemDelegate::DataLoaded( const QUrl& url, MoodbarPipeline* pipeline) {
   Data* data = data_[url];
   if (!data) {
+    return;
+  }
+
+  if (RemoveFromCacheIfIndexesInvalid(url, data)) {
     return;
   }
 
@@ -146,6 +161,10 @@ void MoodbarItemDelegate::ColorsLoaded(
     return;
   }
 
+  if (RemoveFromCacheIfIndexesInvalid(url, data)) {
+    return;
+  }
+
   data->colors_ = watcher->result();
 
   // Load the image next.
@@ -170,6 +189,10 @@ void MoodbarItemDelegate::ImageLoaded(const QUrl& url, QFutureWatcher<QImage>* w
 
   Data* data = data_[url];
   if (!data) {
+    return;
+  }
+
+  if (RemoveFromCacheIfIndexesInvalid(url, data)) {
     return;
   }
 

@@ -70,6 +70,8 @@ private:
   void StartLoadingColors(const QUrl& url, const QByteArray& bytes, Data* data);
   void StartLoadingImage(const QUrl& url, Data* data);
 
+  bool RemoveFromCacheIfIndexesInvalid(const QUrl& url, Data* data);
+
 private:
   Application* app_;
   QCache<QUrl, Data> data_;
