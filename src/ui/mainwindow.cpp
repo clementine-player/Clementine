@@ -55,8 +55,6 @@
 #include "library/librarydirectorymodel.h"
 #include "library/libraryfilterwidget.h"
 #include "library/libraryviewcontainer.h"
-#include "moodbar/moodbarcontroller.h"
-#include "moodbar/moodbarproxystyle.h"
 #include "musicbrainz/tagfetcher.h"
 #include "playlist/playlistbackend.h"
 #include "playlist/playlist.h"
@@ -108,6 +106,11 @@
 
 #ifdef ENABLE_VISUALISATIONS
 # include "visualisations/visualisationcontainer.h"
+#endif
+
+#ifdef HAVE_MOODBAR
+# include "moodbar/moodbarcontroller.h"
+# include "moodbar/moodbarproxystyle.h"
 #endif
 
 #include <QCloseEvent>
@@ -618,9 +621,11 @@ MainWindow::MainWindow(Application* app,
   ui_->status_bar_stack->setCurrentWidget(ui_->playlist_summary_page);
   connect(ui_->multi_loading_indicator, SIGNAL(TaskCountChange(int)), SLOT(TaskCountChanged(int)));
 
+#ifdef HAVE_MOODBAR
   // Moodbar connections
   connect(app_->moodbar_controller(), SIGNAL(CurrentMoodbarDataChanged(QByteArray)),
           ui_->track_slider->moodbar_style(), SLOT(SetMoodbarData(QByteArray)));
+#endif
 
   // Now playing widget
   qLog(Debug) << "Creating now playing widget";

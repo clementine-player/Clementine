@@ -15,6 +15,7 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "config.h"
 #include "dynamicplaylistcontrols.h"
 #include "playlist.h"
 #include "playlistdelegates.h"
@@ -24,7 +25,6 @@
 #include "core/logging.h"
 #include "core/player.h"
 #include "covers/currentartloader.h"
-#include "moodbar/moodbaritemdelegate.h"
 
 #include <QCleanlooksStyle>
 #include <QClipboard>
@@ -41,7 +41,11 @@
 
 #include <math.h>
 
-const int PlaylistView::kStateVersion = 4;
+#ifdef HAVE_MOODBAR
+# include "moodbar/moodbaritemdelegate.h"
+#endif
+
+const int PlaylistView::kStateVersion = 5;
 const int PlaylistView::kGlowIntensitySteps = 24;
 const int PlaylistView::kAutoscrollGraceTimeout = 60; // seconds
 const int PlaylistView::kDropIndicatorWidth = 2;
@@ -199,7 +203,10 @@ void PlaylistView::SetItemDelegates(LibraryBackend* backend) {
   setItemDelegateForColumn(Playlist::Column_Filename, new NativeSeparatorsDelegate(this));
   setItemDelegateForColumn(Playlist::Column_Rating, rating_delegate_);
   setItemDelegateForColumn(Playlist::Column_LastPlayed, new LastPlayedItemDelegate(this));
+
+#ifdef HAVE_MOODBAR
   setItemDelegateForColumn(Playlist::Column_Mood, new MoodbarItemDelegate(app_, this));
+#endif
   
   if (app_ && app_->player()) {
     setItemDelegateForColumn(Playlist::Column_Source, new SongSourceDelegate(this, app_->player()));
@@ -307,6 +314,11 @@ void PlaylistView::LoadGeometry() {
   }
   if (state_version < 3) {
     header_->HideSection(Playlist::Column_Comment);
+  }
+  if (state_version < 5) {
+#ifndef HAVE_MOODBAR
+    header_->HideSection(Playlist::Column_Mood);
+#endif
   }
 
   // Make sure at least one column is visible

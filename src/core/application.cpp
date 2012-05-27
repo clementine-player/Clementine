@@ -17,6 +17,7 @@
 
 #include "application.h"
 #include "appearance.h"
+#include "config.h"
 #include "database.h"
 #include "player.h"
 #include "tagreaderclient.h"
@@ -29,14 +30,17 @@
 #include "globalsearch/globalsearch.h"
 #include "library/library.h"
 #include "library/librarybackend.h"
-#include "moodbar/moodbarcontroller.h"
-#include "moodbar/moodbarloader.h"
 #include "playlist/playlistbackend.h"
 #include "playlist/playlistmanager.h"
 #include "podcasts/gpoddersync.h"
 #include "podcasts/podcastbackend.h"
 #include "podcasts/podcastdownloader.h"
 #include "podcasts/podcastupdater.h"
+
+#ifdef HAVE_MOODBAR
+# include "moodbar/moodbarcontroller.h"
+# include "moodbar/moodbarloader.h"
+#endif
 
 Application::Application(QObject* parent)
   : QObject(parent),
@@ -90,8 +94,11 @@ Application::Application(QObject* parent)
   podcast_updater_ = new PodcastUpdater(this, this);
   podcast_downloader_ = new PodcastDownloader(this, this);
   gpodder_sync_ = new GPodderSync(this, this);
+
+#ifdef HAVE_MOODBAR
   moodbar_loader_ = new MoodbarLoader(this);
   moodbar_controller_ = new MoodbarController(this, this);
+#endif
 
   library_->Init();
   library_->StartThreads();

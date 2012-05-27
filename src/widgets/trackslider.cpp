@@ -15,12 +15,16 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "config.h"
 #include "trackslider.h"
 #include "ui_trackslider.h"
 #include "core/utilities.h"
-#include "moodbar/moodbarproxystyle.h"
 
 #include <QSettings>
+
+#ifdef HAVE_MOODBAR
+# include "moodbar/moodbarproxystyle.h"
+#endif
 
 const char* TrackSlider::kSettingsGroup = "MainWindow";
 
@@ -33,7 +37,10 @@ TrackSlider::TrackSlider(QWidget* parent)
     slider_maximum_value_(0)
 {
   ui_->setupUi(this);
+
+#ifdef HAVE_MOODBAR
   moodbar_style_ = new MoodbarProxyStyle(ui_->slider);
+#endif
 
   QFont font("Courier");
   ui_->elapsed->setFont(font);

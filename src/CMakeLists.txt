@@ -198,13 +198,6 @@ set(SOURCES
   library/librarywatcher.cpp
   library/sqlrow.cpp
 
-  moodbar/moodbarcontroller.cpp
-  moodbar/moodbaritemdelegate.cpp
-  moodbar/moodbarloader.cpp
-  moodbar/moodbarpipeline.cpp
-  moodbar/moodbarproxystyle.cpp
-  moodbar/moodbarrenderer.cpp
-
   musicbrainz/acoustidclient.cpp
   musicbrainz/chromaprinter.cpp
   musicbrainz/musicbrainzclient.cpp
@@ -465,12 +458,6 @@ set(HEADERS
   library/libraryview.h
   library/libraryviewcontainer.h
   library/librarywatcher.h
-
-  moodbar/moodbarcontroller.h
-  moodbar/moodbaritemdelegate.h
-  moodbar/moodbarloader.h
-  moodbar/moodbarpipeline.h
-  moodbar/moodbarproxystyle.h
 
   musicbrainz/acoustidclient.h
   musicbrainz/musicbrainzclient.h
@@ -989,6 +976,23 @@ optional_source(HAVE_SAC
     devices/wmdmdevice.h
     devices/wmdmlister.h
     devices/wmdmloader.h
+)
+
+# Moodbar support
+optional_source(HAVE_MOODBAR
+  SOURCES
+    moodbar/moodbarcontroller.cpp
+    moodbar/moodbaritemdelegate.cpp
+    moodbar/moodbarloader.cpp
+    moodbar/moodbarpipeline.cpp
+    moodbar/moodbarproxystyle.cpp
+    moodbar/moodbarrenderer.cpp
+  HEADERS
+    moodbar/moodbarcontroller.h
+    moodbar/moodbaritemdelegate.h
+    moodbar/moodbarloader.h
+    moodbar/moodbarpipeline.h
+    moodbar/moodbarproxystyle.h
 )
 
 # Hack to add Clementine to the Unity system tray whitelist
