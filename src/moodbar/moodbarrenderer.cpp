@@ -139,3 +139,11 @@ void MoodbarRenderer::Render(const ColorVector& colors, QPainter* p, const QRect
     }
   }
 }
+
+QImage MoodbarRenderer::RenderToImage(const ColorVector& colors, const QSize& size) {
+  QImage image(size, QImage::Format_ARGB32_Premultiplied);
+  QPainter p(&image);
+  Render(colors, &p, image.rect());
+  p.end();
+  return image;
+}

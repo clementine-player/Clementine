@@ -32,7 +32,7 @@
 MoodbarLoader::MoodbarLoader(QObject* parent)
   : QObject(parent),
     cache_(new QNetworkDiskCache(this)),
-    kMaxActiveRequests(QThread::idealThreadCount()),
+    kMaxActiveRequests(QThread::idealThreadCount() / 2 + 1),
     save_alongside_originals_(false)
 {
   cache_->setCacheDirectory(Utilities::GetConfigPath(Utilities::Path_MoodbarCache));
@@ -62,9 +62,12 @@ MoodbarLoader::Result MoodbarLoader::Load(
   }
   
   // Are we in the middle of loading this moodbar already?
-  if (active_requests_.contains(url)) {
-    *async_pipeline = active_requests_[url];
-    return WillLoadAsync;
+  {
+    QMutexLocker l(&mutex_);
+    if (requests_.contains(url)) {
+      *async_pipeline = requests_[url];
+      return WillLoadAsync;
+    }
   }
   
   // Check if a mood file exists for this file already
@@ -93,29 +96,30 @@ MoodbarLoader::Result MoodbarLoader::Load(
              this, SLOT(RequestFinished(MoodbarPipeline*,QUrl)),
              pipeline, url);
 
-  active_requests_[url] = pipeline;
-
-  if (active_requests_.count() > kMaxActiveRequests) {
-    // Just queue this request now, start it later when another request
-    // finishes.
+  {
+    QMutexLocker l(&mutex_);
+    requests_[url] = pipeline;
     queued_requests_ << url;
-  } else if (!StartQueuedRequest(url)) {
-    return CannotLoad;
   }
+
+  QMetaObject::invokeMethod(this, "MaybeTakeNextRequest", Qt::QueuedConnection);
 
   *async_pipeline = pipeline;
   return WillLoadAsync;
 }
 
-bool MoodbarLoader::StartQueuedRequest(const QUrl& url) {
-  if (!active_requests_[url]->Start()) {
-    delete active_requests_.take(url);
-    return false;
+void MoodbarLoader::MaybeTakeNextRequest() {
+  QMutexLocker l(&mutex_);
+  if (active_requests_.count() > kMaxActiveRequests ||
+      queued_requests_.isEmpty()) {
+    return;
   }
 
-  qLog(Info) << "Creating moodbar data for" << url.toLocalFile();
+  const QUrl url = queued_requests_.takeFirst();
+  active_requests_ << url;
 
-  return true;
+  qLog(Info) << "Creating moodbar data for" << url.toLocalFile();
+  requests_[url]->Start();
 }
 
 void MoodbarLoader::RequestFinished(MoodbarPipeline* request, const QUrl& url) {
@@ -145,10 +149,12 @@ void MoodbarLoader::RequestFinished(MoodbarPipeline* request, const QUrl& url) {
   qLog(Debug) << "Deleting" << request;
 
   // Remove the request from the active list and delete it
-  active_requests_.take(url);
+  {
+    QMutexLocker l(&mutex_);
+    requests_.remove(url);
+    active_requests_.remove(url);
+  }
   QTimer::singleShot(10, request, SLOT(deleteLater()));
 
-  if (!queued_requests_.isEmpty()) {
-    StartQueuedRequest(queued_requests_.takeFirst());
-  }
+  QMetaObject::invokeMethod(this, "MaybeTakeNextRequest", Qt::QueuedConnection);
 }

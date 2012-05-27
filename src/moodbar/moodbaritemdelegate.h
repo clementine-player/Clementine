@@ -18,7 +18,12 @@
 #ifndef MOODBARITEMDELEGATE_H
 #define MOODBARITEMDELEGATE_H
 
+#include "moodbarrenderer.h"
+
+#include <QCache>
 #include <QItemDelegate>
+#include <QFutureWatcher>
+#include <QUrl>
 
 class Application;
 class MoodbarPipeline;
@@ -35,15 +40,39 @@ public:
              const QModelIndex& index) const;
 
 private slots:
-  void RequestFinished(MoodbarPipeline* pipeline, const QModelIndex& index,
-                       const QUrl& url);
+  void DataLoaded(const QUrl& url, MoodbarPipeline* pipeline);
+  void ColorsLoaded(const QUrl& url, QFutureWatcher<ColorVector>* watcher);
+  void ImageLoaded(const QUrl& url, QFutureWatcher<QImage>* watcher);
 
 private:
-  QPixmap PixmapForIndex(const QModelIndex& index, const QSize& size,
-                         const QPalette& palette);
+  struct Data {
+    Data();
+
+    enum State {
+      State_None,
+      State_CannotLoad,
+      State_LoadingData,
+      State_LoadingColors,
+      State_LoadingImage,
+      State_Loaded
+    };
+
+    QSet<QPersistentModelIndex> indexes_;
+
+    State state_;
+    ColorVector colors_;
+    QSize desired_size_;
+    QPixmap pixmap_;
+  };
+
+private:
+  QPixmap PixmapForIndex(const QModelIndex& index, const QSize& size);
+  void StartLoadingColors(const QUrl& url, const QByteArray& bytes, Data* data);
+  void StartLoadingImage(const QUrl& url, Data* data);
 
 private:
   Application* app_;
+  QCache<QUrl, Data> data_;
 };
 
 #endif // MOODBARITEMDELEGATE_H

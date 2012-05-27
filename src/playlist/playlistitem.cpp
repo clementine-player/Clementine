@@ -33,7 +33,6 @@
 
 
 PlaylistItem::~PlaylistItem() {
-  delete moodbar_pixmap_;
 }
 
 PlaylistItem* PlaylistItem::NewFromType(const QString& type) {
@@ -123,18 +122,4 @@ QColor PlaylistItem::GetCurrentForegroundColor() const {
 }
 bool PlaylistItem::HasCurrentForegroundColor() const {
   return !foreground_colors_.isEmpty();
-}
-
-QPixmap PlaylistItem::MoodbarPixmap() const {
-  if (!moodbar_pixmap_) {
-    return QPixmap();
-  }
-  return *moodbar_pixmap_;
-}
-
-void PlaylistItem::SetMoodbarPixmap(const QPixmap& pixmap) {
-  if (!moodbar_pixmap_) {
-    moodbar_pixmap_ = new QPixmap;
-  }
-  *moodbar_pixmap_ = pixmap;
 }

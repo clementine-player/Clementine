@@ -33,8 +33,7 @@ class SqlRow;
 class PlaylistItem : public boost::enable_shared_from_this<PlaylistItem> {
  public:
   PlaylistItem(const QString& type)
-    : type_(type),
-      moodbar_pixmap_(NULL) {}
+    : type_(type) {}
   virtual ~PlaylistItem();
 
   static PlaylistItem* NewFromType(const QString& type);
@@ -93,12 +92,6 @@ class PlaylistItem : public boost::enable_shared_from_this<PlaylistItem> {
   // before actually using it.
   virtual bool IsLocalLibraryItem() const { return false; }
 
-  // Moodbar accessors.  These are lazy-loaded by MoodbarItemDelegate.
-  const QVector<QColor>& MoodbarColors() const { return moodbar_colors_; }
-  void SetMoodbarColors(const QVector<QColor>& colors) { moodbar_colors_ = colors; }
-  QPixmap MoodbarPixmap() const;
-  void SetMoodbarPixmap(const QPixmap& pixmap);
-
  protected:
   enum DatabaseColumn {
     Column_LibraryId,
@@ -115,10 +108,6 @@ class PlaylistItem : public boost::enable_shared_from_this<PlaylistItem> {
 
   QMap<short, QColor> background_colors_;
   QMap<short, QColor> foreground_colors_;
-
-private:
-  QVector<QColor> moodbar_colors_;
-  QPixmap* moodbar_pixmap_;
 };
 typedef boost::shared_ptr<PlaylistItem> PlaylistItemPtr;
 typedef QList<PlaylistItemPtr> PlaylistItemList;

@@ -25,6 +25,12 @@
 
 #include <QApplication>
 #include <QPainter>
+#include <QtConcurrentRun>
+
+MoodbarItemDelegate::Data::Data()
+  : state_(State_None)
+{
+}
 
 MoodbarItemDelegate::MoodbarItemDelegate(Application* app, QObject* parent)
   : QItemDelegate(parent),
@@ -36,73 +42,154 @@ void MoodbarItemDelegate::paint(
     QPainter* painter, const QStyleOptionViewItem& option,
     const QModelIndex& index) const {
   QPixmap pixmap = const_cast<MoodbarItemDelegate*>(this)->PixmapForIndex(
-        index, option.rect.size(), option.palette);
+        index, option.rect.size());
   if (!pixmap.isNull()) {
     painter->drawPixmap(option.rect, pixmap);
   }
 }
 
 QPixmap MoodbarItemDelegate::PixmapForIndex(
-    const QModelIndex& index, const QSize& size, const QPalette& palette) {
-  // Do we have a pixmap already that's the right size?
-  QPixmap pixmap = index.data(Playlist::Role_MoodbarPixmap).value<QPixmap>();
-  if (!pixmap.isNull() && pixmap.size() == size) {
-    return pixmap;
+    const QModelIndex& index, const QSize& size) {
+  // Pixmaps are keyed off URL.
+  const QUrl url(index.sibling(index.row(), Playlist::Column_Filename).data().toUrl());
+
+  Data* data = data_[url];
+  if (!data) {
+    data = new Data;
+    data_.insert(url, data);
   }
 
-  // Do we have colors?
-  ColorVector colors = index.data(Playlist::Role_MoodbarColors).value<ColorVector>();
-  if (colors.isEmpty()) {
-    // Nope - we need to load a mood file for this song and generate some colors
-    // from it.
-    const QUrl url(index.sibling(index.row(), Playlist::Column_Filename).data().toUrl());
+  data->indexes_.insert(index);
+  data->desired_size_ = size;
 
-    QByteArray data;
-    MoodbarPipeline* pipeline = NULL;
-    switch (app_->moodbar_loader()->Load(url, &data, &pipeline)) {
-    case MoodbarLoader::CannotLoad:
-      return QPixmap();
+  switch (data->state_) {
+  case Data::State_CannotLoad:
+  case Data::State_LoadingData:
+  case Data::State_LoadingColors:
+  case Data::State_LoadingImage:
+    return data->pixmap_;
 
-    case MoodbarLoader::Loaded:
-      // Aww yeah
-      colors = MoodbarRenderer::Colors(data, MoodbarRenderer::Style_Normal, palette);
-      break;
-
-    case MoodbarLoader::WillLoadAsync:
-      // Maybe in a little while.
-      qLog(Debug) << "Loading" << pipeline;
-      NewClosure(pipeline, SIGNAL(Finished(bool)),
-                 this, SLOT(RequestFinished(MoodbarPipeline*,QModelIndex,QUrl)),
-                 pipeline, index, url);
-      return QPixmap();
+  case Data::State_Loaded:
+    // Is the pixmap the right size?
+    if (data->pixmap_.size() != size) {
+      StartLoadingImage(url, data);
     }
+
+    return data->pixmap_;
+
+  case Data::State_None:
+    break;
   }
 
-  // We've got colors, let's make a pixmap.
-  pixmap = QPixmap(size);
-  QPainter p(&pixmap);
-  MoodbarRenderer::Render(colors, &p, QRect(QPoint(0, 0), size));
-  p.end();
+  // We have to start loading the data from scratch.
+  data->state_ = Data::State_LoadingData;
 
-  // Set these on the item so we don't have to look them up again.
-  QAbstractItemModel* model = const_cast<QAbstractItemModel*>(index.model());
-  model->setData(index, QVariant::fromValue(colors), Playlist::Role_MoodbarColors);
-  model->setData(index, pixmap, Playlist::Role_MoodbarPixmap);
+  // Load a mood file for this song and generate some colors from it
+  QByteArray bytes;
+  MoodbarPipeline* pipeline = NULL;
+  switch (app_->moodbar_loader()->Load(url, &bytes, &pipeline)) {
+  case MoodbarLoader::CannotLoad:
+    data->state_ = Data::State_CannotLoad;
+    break;
 
-  return pixmap;
+  case MoodbarLoader::Loaded:
+    // We got the data immediately.
+    StartLoadingColors(url, bytes, data);
+    break;
+
+  case MoodbarLoader::WillLoadAsync:
+    // Maybe in a little while.
+    NewClosure(pipeline, SIGNAL(Finished(bool)),
+               this, SLOT(DataLoaded(QUrl,MoodbarPipeline*)),
+               url, pipeline);
+    break;
+  }
+
+  return QPixmap();
 }
 
-void MoodbarItemDelegate::RequestFinished(
-    MoodbarPipeline* pipeline, const QModelIndex& index, const QUrl& url) {
-  qLog(Debug) << "Finished" << pipeline;
-  // Is this index still valid, and does it still point to the same URL?
-  if (!index.isValid() || index.sibling(index.row(), Playlist::Column_Filename).data().toUrl() != url) {
+void MoodbarItemDelegate::DataLoaded( const QUrl& url, MoodbarPipeline* pipeline) {
+  Data* data = data_[url];
+  if (!data) {
     return;
   }
 
-  // It's good.  Create the color list and set them on the item.
-  ColorVector colors = MoodbarRenderer::Colors(
-        pipeline->data(), MoodbarRenderer::Style_Normal, qApp->palette());
-  QAbstractItemModel* model = const_cast<QAbstractItemModel*>(index.model());
-  model->setData(index, QVariant::fromValue(colors), Playlist::Role_MoodbarColors);
+  if (!pipeline->success()) {
+    data->state_ = Data::State_CannotLoad;
+    return;
+  }
+
+  // Load the colors next.
+  StartLoadingColors(url, pipeline->data(), data);
+}
+
+void MoodbarItemDelegate::StartLoadingColors(
+    const QUrl& url, const QByteArray& bytes, Data* data) {
+  data->state_ = Data::State_LoadingColors;
+
+  QFutureWatcher<ColorVector>* watcher = new QFutureWatcher<ColorVector>();
+  NewClosure(watcher, SIGNAL(finished()),
+             this, SLOT(ColorsLoaded(QUrl,QFutureWatcher<ColorVector>*)),
+             url, watcher);
+
+  QFuture<ColorVector> future = QtConcurrent::run(MoodbarRenderer::Colors,
+      bytes, MoodbarRenderer::Style_Normal, qApp->palette());
+  watcher->setFuture(future);
+}
+
+void MoodbarItemDelegate::ColorsLoaded(
+    const QUrl& url, QFutureWatcher<ColorVector>* watcher) {
+  watcher->deleteLater();
+
+  Data* data = data_[url];
+  if (!data) {
+    return;
+  }
+
+  data->colors_ = watcher->result();
+
+  // Load the image next.
+  StartLoadingImage(url, data);
+}
+
+void MoodbarItemDelegate::StartLoadingImage(const QUrl& url, Data* data) {
+  data->state_ = Data::State_LoadingImage;
+
+  QFutureWatcher<QImage>* watcher = new QFutureWatcher<QImage>();
+  NewClosure(watcher, SIGNAL(finished()),
+             this, SLOT(ImageLoaded(QUrl,QFutureWatcher<QImage>*)),
+             url, watcher);
+
+  QFuture<QImage> future = QtConcurrent::run(MoodbarRenderer::RenderToImage,
+      data->colors_, data->desired_size_);
+  watcher->setFuture(future);
+}
+
+void MoodbarItemDelegate::ImageLoaded(const QUrl& url, QFutureWatcher<QImage>* watcher) {
+  watcher->deleteLater();
+
+  Data* data = data_[url];
+  if (!data) {
+    return;
+  }
+
+  QImage image(watcher->result());
+
+  // If the desired size changed then don't even bother converting the image
+  // to a pixmap, just reload it at the new size.
+  if (!image.isNull() && data->desired_size_ != image.size()) {
+    StartLoadingImage(url, data);
+    return;
+  }
+
+  data->pixmap_ = QPixmap::fromImage(image);
+  data->state_ = Data::State_Loaded;
+
+  // Update all the indices with the new pixmap.
+  foreach (const QPersistentModelIndex& index, data->indexes_) {
+    if (index.isValid() && index.sibling(index.row(), Playlist::Column_Filename).data().toUrl() == url) {
+      const_cast<Playlist*>(reinterpret_cast<const Playlist*>(index.model()))
+          ->MoodbarUpdated(index);
+    }
+  }
 }

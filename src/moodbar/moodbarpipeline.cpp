@@ -32,7 +32,6 @@ MoodbarPipeline::MoodbarPipeline(const QString& local_filename)
 }
 
 MoodbarPipeline::~MoodbarPipeline() {
-  qLog(Debug) << "Actually deleting" << this;
   Cleanup();
 }
 
@@ -84,6 +83,7 @@ bool MoodbarPipeline::Start() {
   
   if (!filesrc || !convert_element_ || !fftwspectrum || !moodbar || !appsink) {
     pipeline_ = NULL;
+    emit Finished(false);
     return false;
   }
 

@@ -19,8 +19,9 @@
 #define MOODBARLOADER_H
 
 #include <QMap>
+#include <QMutex>
 #include <QObject>
-#include <QPair>
+#include <QSet>
 
 class QNetworkDiskCache;
 class QUrl;
@@ -51,18 +52,20 @@ public:
 
 private slots:
   void RequestFinished(MoodbarPipeline* request, const QUrl& filename);
+  void MaybeTakeNextRequest();
 
 private:
   static QStringList MoodFilenames(const QString& song_filename);
-  bool StartQueuedRequest(const QUrl& url);
   
 private:
   QNetworkDiskCache* cache_;
 
   const int kMaxActiveRequests;
   
-  QMap<QUrl, MoodbarPipeline*> active_requests_;
+  QMutex mutex_;
+  QMap<QUrl, MoodbarPipeline*> requests_;
   QList<QUrl> queued_requests_;
+  QSet<QUrl> active_requests_;
 
   bool save_alongside_originals_;
 };

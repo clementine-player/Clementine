@@ -122,8 +122,6 @@ class Playlist : public QAbstractListModel {
     Role_StopAfter,
     Role_QueuePosition,
     Role_CanSetRating,
-    Role_MoodbarColors,
-    Role_MoodbarPixmap,
   };
 
   enum LastFMStatus {
@@ -245,6 +243,9 @@ class Playlist : public QAbstractListModel {
   void AddSongInsertVetoListener(SongInsertVetoListener* listener);
   // Unregisters a SongInsertVetoListener object.
   void RemoveSongInsertVetoListener(SongInsertVetoListener* listener);
+
+  // Just emits the dataChanged() signal so the mood column is repainted.
+  void MoodbarUpdated(const QModelIndex& index);
 
   // QAbstractListModel
   int rowCount(const QModelIndex& = QModelIndex()) const { return items_.count(); }
