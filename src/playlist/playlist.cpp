@@ -151,15 +151,15 @@ QVariant Playlist::headerData(int section, Qt::Orientation, int role) const {
   if (role != Qt::DisplayRole && role != Qt::ToolTipRole)
     return QVariant();
 
-  QString name = column_name((Playlist::Column)section);
-  if(name.size())
+  const QString name = column_name((Playlist::Column) section);
+  if (!name.isEmpty())
     return name;
 
   return QVariant();
 }
 
 bool Playlist::column_is_editable(Playlist::Column column) {
-  switch(column) {
+  switch (column) {
     case Column_Title:
     case Column_Artist:
     case Column_Album:
@@ -287,6 +287,8 @@ QVariant Playlist::data(const QModelIndex& index, int role) const {
         case Column_Source:
           return item->Url();
       }
+
+      return QVariant();
     }
 
     case Qt::TextAlignmentRole:
