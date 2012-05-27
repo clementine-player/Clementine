@@ -44,10 +44,15 @@ private slots:
   void SelectBackgroundImage();
 
 private:
+  static const int kMoodbarPreviewWidth;
+  static const int kMoodbarPreviewHeight;
+
   // Set the widget's background to new_color
   void UpdateColorSelectorColor(QWidget* color_selector, const QColor& new_color);
   // Init (or refresh) the colorSelectors colors
   void InitColorSelectorsColors();
+
+  void InitMoodbarPreviews();
 
   Ui_AppearanceSettingsPage* ui_;
   bool original_use_a_custom_color_set_;
@@ -57,6 +62,8 @@ private:
   QColor current_background_color_;
   PlaylistView::BackgroundImageType playlist_view_background_image_type_;
   QString playlist_view_background_image_filename_;
+
+  bool initialised_moodbar_previews_;
 };
 
 #endif // APPEARANCESETTINGSPAGE_H

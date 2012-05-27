@@ -33,7 +33,7 @@ ColorVector MoodbarRenderer::Colors(
     case Style_Frozen: properties = StyleProperties(samples / 360 * 1, 140, 160, 50,  100); break;
     case Style_Happy:  properties = StyleProperties(samples / 360 * 2, 0,   359, 150, 250); break;
     case Style_Normal: properties = StyleProperties(samples / 360 * 3, 0,   359, 100, 100); break;
-    case Style_SystemDefault:
+    case Style_SystemPalette:
     default: {
       const QColor highlight_color(palette.color(QPalette::Active, QPalette::Highlight));
 

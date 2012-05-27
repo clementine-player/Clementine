@@ -22,6 +22,8 @@
 
 #include <QProxyStyle>
 
+class Application;
+
 class QSlider;
 class QStyleOptionSlider;
 class QTimeLine;
@@ -30,7 +32,7 @@ class MoodbarProxyStyle : public QProxyStyle {
   Q_OBJECT
 
 public:
-  MoodbarProxyStyle(QSlider* slider);
+  MoodbarProxyStyle(Application* app, QSlider* slider);
 
   // QProxyStyle
   void drawComplexControl(ComplexControl control, const QStyleOptionComplex* option,
@@ -73,6 +75,7 @@ private:
                                const QSize& size, const QPalette& palette);
 
 private slots:
+  void ReloadSettings();
   void FaderValueChanged(qreal value);
 
 private:

@@ -28,12 +28,14 @@ typedef QVector<QColor> ColorVector;
 
 class MoodbarRenderer {
 public:
+  // These values are persisted.  Remember to change appearancesettingspage.ui
+  // when changing them.
   enum MoodbarStyle {
+    Style_Normal = 0,
     Style_Angry,
     Style_Frozen,
     Style_Happy,
-    Style_Normal,
-    Style_SystemDefault
+    Style_SystemPalette
   };
 
   static const int kNumHues;

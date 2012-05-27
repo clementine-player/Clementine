@@ -25,13 +25,14 @@
 class QNetworkDiskCache;
 class QUrl;
 
+class Application;
 class MoodbarPipeline;
 
 class MoodbarLoader : public QObject {
   Q_OBJECT
     
 public:
-  MoodbarLoader(QObject* parent = 0);
+  MoodbarLoader(Application* app, QObject* parent = 0);
   ~MoodbarLoader();
   
   enum Result {
@@ -50,6 +51,8 @@ public:
   Result Load(const QUrl& url, QByteArray* data, MoodbarPipeline** async_pipeline);
 
 private slots:
+  void ReloadSettings();
+
   void RequestFinished(MoodbarPipeline* request, const QUrl& filename);
   void MaybeTakeNextRequest();
 

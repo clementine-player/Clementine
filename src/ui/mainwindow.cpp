@@ -621,6 +621,7 @@ MainWindow::MainWindow(Application* app,
   ui_->status_bar_stack->setCurrentWidget(ui_->playlist_summary_page);
   connect(ui_->multi_loading_indicator, SIGNAL(TaskCountChange(int)), SLOT(TaskCountChanged(int)));
 
+  ui_->track_slider->SetApplication(app);
 #ifdef HAVE_MOODBAR
   // Moodbar connections
   connect(app_->moodbar_controller(), SIGNAL(CurrentMoodbarDataChanged(QByteArray)),

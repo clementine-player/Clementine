@@ -17,6 +17,7 @@
 
 #include "moodbarloader.h"
 #include "moodbarpipeline.h"
+#include "core/application.h"
 #include "core/closure.h"
 #include "core/qhash_qurl.h"
 #include "core/utilities.h"
@@ -31,7 +32,7 @@
 
 #include <boost/scoped_ptr.hpp>
 
-MoodbarLoader::MoodbarLoader(QObject* parent)
+MoodbarLoader::MoodbarLoader(Application* app, QObject* parent)
   : QObject(parent),
     cache_(new QNetworkDiskCache(this)),
     thread_(new QThread(this)),
@@ -40,11 +41,20 @@ MoodbarLoader::MoodbarLoader(QObject* parent)
 {
   cache_->setCacheDirectory(Utilities::GetConfigPath(Utilities::Path_MoodbarCache));
   cache_->setMaximumCacheSize(10 * 1024 * 1024); // 10MB - enough for 3333 moodbars
+
+  connect(app, SIGNAL(SettingsChanged()), SLOT(ReloadSettings()));
+  ReloadSettings();
 }
 
 MoodbarLoader::~MoodbarLoader() {
   thread_->quit();
   thread_->wait(1000);
+}
+
+void MoodbarLoader::ReloadSettings() {
+  QSettings s;
+  s.beginGroup("Moodbar");
+  save_alongside_originals_ = s.value("save_alongside_originals", false).toBool();
 }
 
 QStringList MoodbarLoader::MoodFilenames(const QString& song_filename) {

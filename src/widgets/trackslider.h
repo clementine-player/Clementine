@@ -22,6 +22,7 @@
 
 class QLabel;
 
+class Application;
 class MoodbarProxyStyle;
 class Ui_TrackSlider;
 
@@ -31,6 +32,8 @@ class TrackSlider : public QWidget {
  public:
   TrackSlider(QWidget* parent = 0);
   ~TrackSlider();
+
+  void SetApplication(Application* app);
 
   // QWidget
   QSize sizeHint() const;

@@ -7,13 +7,13 @@
     <x>0</x>
     <y>0</y>
     <width>596</width>
-    <height>397</height>
+    <height>566</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Appearance</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout_2">
+  <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <widget class="QGroupBox" name="groupBox">
      <property name="title">
@@ -155,21 +155,80 @@
         </item>
        </layout>
       </item>
-      <item>
-       <spacer name="verticalSpacer">
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="moodbar_group">
+     <property name="title">
+      <string>Moodbars</string>
+     </property>
+     <layout class="QFormLayout" name="formLayout">
+      <item row="0" column="0" colspan="2">
+       <widget class="QCheckBox" name="moodbar_show">
+        <property name="text">
+         <string>Show a moodbar in the track progress bar</string>
         </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>20</width>
-          <height>40</height>
-         </size>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>Moodbar style:</string>
         </property>
-       </spacer>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QComboBox" name="moodbar_style">
+        <item>
+         <property name="text">
+          <string>Normal</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Angry</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Frozen</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Happy</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>System colors</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item row="2" column="0" colspan="2">
+       <widget class="QCheckBox" name="moodbar_save">
+        <property name="text">
+         <string>Save .mood files in your music library</string>
+        </property>
+       </widget>
       </item>
      </layout>
     </widget>
+   </item>
+   <item>
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
    </item>
   </layout>
  </widget>

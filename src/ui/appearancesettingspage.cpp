@@ -20,22 +20,33 @@
 #include <QApplication>
 #include <QColorDialog>
 #include <QFileDialog>
+#include <QPainter>
 #include <QSettings>
 
+#include "config.h"
 #include "iconloader.h"
 #include "mainwindow.h"
 #include "settingsdialog.h"
 #include "ui_appearancesettingspage.h"
 #include "core/appearance.h"
+#include "core/application.h"
 #include "core/logging.h"
 #include "playlist/playlistview.h"
 #include "ui/albumcoverchoicecontroller.h"
+
+#ifdef HAVE_MOODBAR
+# include "moodbar/moodbarrenderer.h"
+#endif
+
+const int AppearanceSettingsPage::kMoodbarPreviewWidth = 150;
+const int AppearanceSettingsPage::kMoodbarPreviewHeight = 18;
 
 AppearanceSettingsPage::AppearanceSettingsPage(SettingsDialog* dialog)
   : SettingsPage(dialog),
     ui_(new Ui_AppearanceSettingsPage),
     original_use_a_custom_color_set_(false),
-    playlist_view_background_image_type_(PlaylistView::Default)
+    playlist_view_background_image_type_(PlaylistView::Default),
+    initialised_moodbar_previews_(false)
 {
   ui_->setupUi(this);
   setWindowIcon(IconLoader::Load("view-media-visualization"));
@@ -75,14 +86,15 @@ void AppearanceSettingsPage::Load() {
   current_background_color_   = original_background_color_;
 
   InitColorSelectorsColors();
+  s.endGroup();
 
-  QSettings playlist_settings;
-  playlist_settings.beginGroup(Playlist::kSettingsGroup);
+  // Playlist settings
+  s.beginGroup(Playlist::kSettingsGroup);
   playlist_view_background_image_type_ =
       static_cast<PlaylistView::BackgroundImageType>(
-          playlist_settings.value(PlaylistView::kSettingBackgroundImageType).toInt());
+          s.value(PlaylistView::kSettingBackgroundImageType).toInt());
   playlist_view_background_image_filename_  =
-      playlist_settings.value(PlaylistView::kSettingBackgroundImageFilename).toString();
+      s.value(PlaylistView::kSettingBackgroundImageFilename).toString();
 
   ui_->use_system_color_set->setChecked(!original_use_a_custom_color_set_);
   ui_->use_a_custom_color_set->setChecked(original_use_a_custom_color_set_);
@@ -102,6 +114,16 @@ void AppearanceSettingsPage::Load() {
       ui_->use_default_background->setChecked(true);
   }
   ui_->background_image_filename->setText(playlist_view_background_image_filename_);
+  s.endGroup();
+
+  // Moodbar settings
+  s.beginGroup("Moodbar");
+  ui_->moodbar_show->setChecked(s.value("show", true).toBool());
+  ui_->moodbar_style->setCurrentIndex(s.value("style", 0).toInt());
+  ui_->moodbar_save->setChecked(s.value("save_alongside_originals", false).toBool());
+  s.endGroup();
+
+  InitMoodbarPreviews();
 }
 
 void AppearanceSettingsPage::Save() {
@@ -115,9 +137,10 @@ void AppearanceSettingsPage::Save() {
   } else {
     dialog()->appearance()->ResetToSystemDefaultTheme();
   }
+  s.endGroup();
 
-  QSettings playlist_settings;
-  playlist_settings.beginGroup(Playlist::kSettingsGroup);
+  // Playlist settings
+  s.beginGroup(Playlist::kSettingsGroup);
   playlist_view_background_image_filename_ = ui_->background_image_filename->text();
   if (ui_->use_no_background->isChecked()) {
     playlist_view_background_image_type_ = PlaylistView::None;
@@ -127,11 +150,19 @@ void AppearanceSettingsPage::Save() {
     playlist_view_background_image_type_ = PlaylistView::Default;
   } else if (ui_->use_custom_background_image->isChecked()) {
     playlist_view_background_image_type_ = PlaylistView::Custom;
-    playlist_settings.setValue(PlaylistView::kSettingBackgroundImageFilename,
+    s.setValue(PlaylistView::kSettingBackgroundImageFilename,
         playlist_view_background_image_filename_);
   }
-  playlist_settings.setValue(PlaylistView::kSettingBackgroundImageType,
+  s.setValue(PlaylistView::kSettingBackgroundImageType,
       playlist_view_background_image_type_);
+  s.endGroup();
+
+  // Moodbar settings
+  s.beginGroup("Moodbar");
+  s.setValue("show", ui_->moodbar_show->isChecked());
+  s.setValue("style", ui_->moodbar_style->currentIndex());
+  s.setValue("save_alongside_originals", ui_->moodbar_save->isChecked());
+  s.endGroup();
 }
 
 void AppearanceSettingsPage::Cancel() {
@@ -197,4 +228,38 @@ void AppearanceSettingsPage::SelectBackgroundImage() {
     return;
   playlist_view_background_image_filename_ = selected_filename;
   ui_->background_image_filename->setText(playlist_view_background_image_filename_);
+}
+
+void AppearanceSettingsPage::InitMoodbarPreviews() {
+#ifdef HAVE_MOODBAR
+  if (initialised_moodbar_previews_)
+    return;
+  initialised_moodbar_previews_ = true;
+
+  const QSize preview_size(kMoodbarPreviewWidth, kMoodbarPreviewHeight);
+  ui_->moodbar_style->setIconSize(preview_size);
+
+  // Read the sample data
+  QFile file(":sample.mood");
+  if (!file.open(QIODevice::ReadOnly)) {
+    qLog(Warning) << "Unable to open moodbar sample file";
+    return;
+  }
+  QByteArray data(file.readAll());
+
+  // Render and set each preview
+  for (int i=0 ; i<ui_->moodbar_style->count() ; ++i) {
+    const ColorVector colors =
+        MoodbarRenderer::Colors(data, MoodbarRenderer::MoodbarStyle(i), palette());
+
+    QPixmap pixmap(preview_size);
+    QPainter p(&pixmap);
+    MoodbarRenderer::Render(colors, &p, pixmap.rect());
+    p.end();
+
+    ui_->moodbar_style->setItemData(i, pixmap, Qt::DecorationRole);
+  }
+#else
+  ui_->moodbar_group->hide();
+#endif
 }

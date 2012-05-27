@@ -38,10 +38,6 @@ TrackSlider::TrackSlider(QWidget* parent)
 {
   ui_->setupUi(this);
 
-#ifdef HAVE_MOODBAR
-  moodbar_style_ = new MoodbarProxyStyle(ui_->slider);
-#endif
-
   QFont font("Courier");
   ui_->elapsed->setFont(font);
   ui_->remaining->setFont(font);
@@ -60,6 +56,12 @@ TrackSlider::TrackSlider(QWidget* parent)
 
 TrackSlider::~TrackSlider() {
   delete ui_;
+}
+
+void TrackSlider::SetApplication(Application* app) {
+#ifdef HAVE_MOODBAR
+  moodbar_style_ = new MoodbarProxyStyle(app, ui_->slider);
+#endif
 }
 
 void TrackSlider::UpdateLabelWidth() {

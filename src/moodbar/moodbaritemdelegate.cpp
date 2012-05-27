@@ -26,6 +26,7 @@
 
 #include <QApplication>
 #include <QPainter>
+#include <QSettings>
 #include <QtConcurrentRun>
 
 MoodbarItemDelegate::Data::Data()
@@ -35,8 +36,24 @@ MoodbarItemDelegate::Data::Data()
 
 MoodbarItemDelegate::MoodbarItemDelegate(Application* app, QObject* parent)
   : QItemDelegate(parent),
-    app_(app)
+    app_(app),
+    style_(MoodbarRenderer::Style_Normal)
 {
+  connect(app_, SIGNAL(SettingsChanged()), SLOT(ReloadSettings()));
+  ReloadSettings();
+}
+
+void MoodbarItemDelegate::ReloadSettings() {
+  QSettings s;
+  s.beginGroup("Moodbar");
+  MoodbarRenderer::MoodbarStyle new_style =
+      static_cast<MoodbarRenderer::MoodbarStyle>(
+        s.value("style", MoodbarRenderer::Style_Normal).toInt());
+
+  if (new_style != style_) {
+    style_ = new_style;
+    ReloadAllColors();
+  }
 }
 
 void MoodbarItemDelegate::paint(
@@ -86,6 +103,12 @@ QPixmap MoodbarItemDelegate::PixmapForIndex(
   }
 
   // We have to start loading the data from scratch.
+  StartLoadingData(url, data);
+
+  return QPixmap();
+}
+
+void MoodbarItemDelegate::StartLoadingData(const QUrl& url, Data* data) {
   data->state_ = Data::State_LoadingData;
 
   // Load a mood file for this song and generate some colors from it
@@ -108,8 +131,6 @@ QPixmap MoodbarItemDelegate::PixmapForIndex(
                url, pipeline);
     break;
   }
-
-  return QPixmap();
 }
 
 bool MoodbarItemDelegate::RemoveFromCacheIfIndexesInvalid(const QUrl& url, Data* data) {
@@ -121,6 +142,16 @@ bool MoodbarItemDelegate::RemoveFromCacheIfIndexesInvalid(const QUrl& url, Data*
 
   data_.remove(url);
   return true;
+}
+
+void MoodbarItemDelegate::ReloadAllColors() {
+  foreach (const QUrl& url, data_.keys()) {
+    Data* data = data_[url];
+
+    if (data->state_ == Data::State_Loaded) {
+      StartLoadingData(url, data);
+    }
+  }
 }
 
 void MoodbarItemDelegate::DataLoaded( const QUrl& url, MoodbarPipeline* pipeline) {
@@ -152,7 +183,7 @@ void MoodbarItemDelegate::StartLoadingColors(
              url, watcher);
 
   QFuture<ColorVector> future = QtConcurrent::run(MoodbarRenderer::Colors,
-      bytes, MoodbarRenderer::Style_Normal, qApp->palette());
+      bytes, style_, qApp->palette());
   watcher->setFuture(future);
 }
 

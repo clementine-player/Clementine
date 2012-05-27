@@ -96,7 +96,7 @@ Application::Application(QObject* parent)
   gpodder_sync_ = new GPodderSync(this, this);
 
 #ifdef HAVE_MOODBAR
-  moodbar_loader_ = new MoodbarLoader(this);
+  moodbar_loader_ = new MoodbarLoader(this, this);
   moodbar_controller_ = new MoodbarController(this, this);
 #endif
 

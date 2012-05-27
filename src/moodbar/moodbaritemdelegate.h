@@ -40,6 +40,8 @@ public:
              const QModelIndex& index) const;
 
 private slots:
+  void ReloadSettings();
+
   void DataLoaded(const QUrl& url, MoodbarPipeline* pipeline);
   void ColorsLoaded(const QUrl& url, QFutureWatcher<ColorVector>* watcher);
   void ImageLoaded(const QUrl& url, QFutureWatcher<QImage>* watcher);
@@ -67,14 +69,19 @@ private:
 
 private:
   QPixmap PixmapForIndex(const QModelIndex& index, const QSize& size);
+  void StartLoadingData(const QUrl& url, Data* data);
   void StartLoadingColors(const QUrl& url, const QByteArray& bytes, Data* data);
   void StartLoadingImage(const QUrl& url, Data* data);
 
   bool RemoveFromCacheIfIndexesInvalid(const QUrl& url, Data* data);
 
+  void ReloadAllColors();
+
 private:
   Application* app_;
   QCache<QUrl, Data> data_;
+
+  MoodbarRenderer::MoodbarStyle style_;
 };
 
 #endif // MOODBARITEMDELEGATE_H

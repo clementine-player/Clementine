@@ -16,10 +16,12 @@
 */
 
 #include "moodbarproxystyle.h"
+#include "core/application.h"
 #include "core/logging.h"
 
 #include <QEvent>
 #include <QPainter>
+#include <QSettings>
 #include <QSlider>
 #include <QStyleOptionComplex>
 #include <QStyleOptionSlider>
@@ -30,7 +32,7 @@ const int MoodbarProxyStyle::kBorderSize = 1;
 const int MoodbarProxyStyle::kArrowWidth = 17;
 const int MoodbarProxyStyle::kArrowHeight = 13;
 
-MoodbarProxyStyle::MoodbarProxyStyle(QSlider* slider)
+MoodbarProxyStyle::MoodbarProxyStyle(Application* app, QSlider* slider)
   : QProxyStyle(slider->style()),
     slider_(slider),
     enabled_(true),
@@ -44,6 +46,30 @@ MoodbarProxyStyle::MoodbarProxyStyle(QSlider* slider)
   slider->installEventFilter(this);
 
   connect(fade_timeline_, SIGNAL(valueChanged(qreal)), SLOT(FaderValueChanged(qreal)));
+
+  connect(app, SIGNAL(SettingsChanged()), SLOT(ReloadSettings()));
+  ReloadSettings();
+}
+
+void MoodbarProxyStyle::ReloadSettings() {
+  QSettings s;
+  s.beginGroup("Moodbar");
+
+  // Get the enabled/disabled setting, and start the timelines if there's a
+  // change.
+  enabled_ = s.value("show", true).toBool();
+  NextState();
+
+  // Get the style, and redraw if there's a change.
+  MoodbarRenderer::MoodbarStyle new_style =
+      static_cast<MoodbarRenderer::MoodbarStyle>(
+        s.value("style", MoodbarRenderer::Style_Normal).toInt());
+
+  if (new_style != moodbar_style_) {
+    moodbar_style_ = new_style;
+    moodbar_colors_dirty_ = true;
+    slider_->update();
+  }
 }
 
 void MoodbarProxyStyle::SetMoodbarData(const QByteArray& data) {
