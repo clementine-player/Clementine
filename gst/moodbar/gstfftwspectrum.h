@@ -41,15 +41,15 @@ struct _GstFFTWSpectrum
   gint rate, size, step;
 
   /* Actual queued (incoming) stream */
-  gfloat       *samples;
+  gdouble      *samples;
   gint          numsamples;
   GstClockTime  timestamp;  /* Timestamp of the first sample */
   guint64       offset;     /* Offset of the first sample */
 
   /* State data for fftw */
-  float      *fftw_in;
-  float      *fftw_out;
-  fftwf_plan  fftw_plan;
+  double     *fftw_in;
+  double     *fftw_out;
+  fftw_plan   fftw_plan;
 
   /* Properties */
   gint32   def_size, def_step;

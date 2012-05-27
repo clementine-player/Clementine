@@ -107,7 +107,7 @@ static GstStateChangeReturn gst_fftwspectrum_change_state (GstElement *element,
     GstStateChange transition);
 
 
-#define OUTPUT_SIZE(conv) (((conv)->size/2+1)*sizeof(fftwf_complex))
+#define OUTPUT_SIZE(conv) (((conv)->size/2+1)*sizeof(fftw_complex))
 
 
 /***************************************************************/
@@ -275,11 +275,11 @@ static void
 free_fftw_data (GstFFTWSpectrum *conv)
 {
   if(conv->fftw_plan != NULL)
-    fftwf_destroy_plan (conv->fftw_plan);
+    fftw_destroy_plan (conv->fftw_plan);
   if(conv->fftw_in != NULL)
-    fftwf_free (conv->fftw_in);
+    fftw_free (conv->fftw_in);
   if(conv->fftw_out != NULL)
-    fftwf_free (conv->fftw_out);
+    fftw_free (conv->fftw_out);
 
   conv->fftw_in   = NULL;
   conv->fftw_out  = NULL;
@@ -294,8 +294,8 @@ alloc_fftw_data (GstFFTWSpectrum *conv)
   GST_DEBUG ("Allocating data for size = %d and step = %d",
 	     conv->size, conv->step);
 
-  conv->fftw_in  = (float *) fftwf_malloc (sizeof(float) * conv->size);
-  conv->fftw_out = (float *) fftwf_malloc (OUTPUT_SIZE (conv));
+  conv->fftw_in  = (double *) fftw_malloc (sizeof(double) * conv->size);
+  conv->fftw_out = (double *) fftw_malloc (OUTPUT_SIZE (conv));
   
   /* We use the simplest real-to-complex algorithm, which takes n real
    * inputs and returns floor(n/2) + 1 complex outputs (the other n/2
@@ -306,8 +306,8 @@ alloc_fftw_data (GstFFTWSpectrum *conv)
   static GStaticMutex mutex = G_STATIC_MUTEX_INIT;
   g_static_mutex_lock(&mutex);
   conv->fftw_plan 
-    = fftwf_plan_dft_r2c_1d(conv->size, conv->fftw_in, 
-			    (fftwf_complex *) conv->fftw_out, 
+    = fftw_plan_dft_r2c_1d(conv->size, conv->fftw_in,
+          (fftw_complex *) conv->fftw_out,
 			    conv->hi_q ? FFTW_MEASURE : FFTW_ESTIMATE);
   g_static_mutex_unlock(&mutex);
 }
@@ -504,7 +504,7 @@ gst_fftwspectrum_change_state (GstElement * element,
       alloc_fftw_data (conv);
       break;
     case GST_STATE_CHANGE_READY_TO_PAUSED:
-      conv->samples    = (gfloat *) g_malloc (sizeof(gfloat));
+      conv->samples    = (gdouble *) g_malloc (sizeof(gdouble));
       conv->numsamples = 0;
       conv->timestamp  = 0;
       conv->offset     = 0;
@@ -545,13 +545,13 @@ gst_fftwspectrum_change_state (GstElement * element,
 static void 
 push_samples (GstFFTWSpectrum *conv, GstBuffer *buf)
 {
-  gint newsamples = GST_BUFFER_SIZE (buf) / sizeof (gfloat);
+  gint newsamples = GST_BUFFER_SIZE (buf) / sizeof (gdouble);
   gint oldsamples = conv->numsamples;
 
   conv->numsamples += newsamples;
-  conv->samples = g_realloc (conv->samples, conv->numsamples * sizeof (gfloat));
+  conv->samples = g_realloc (conv->samples, conv->numsamples * sizeof (gdouble));
   memcpy (&conv->samples[oldsamples], GST_BUFFER_DATA (buf), 
-	  newsamples * sizeof (gfloat));
+    newsamples * sizeof (gdouble));
   
   /* GST_LOG ("Added %d samples", newsamples); */
 }
@@ -562,12 +562,12 @@ push_samples (GstFFTWSpectrum *conv, GstBuffer *buf)
 static void
 shift_samples (GstFFTWSpectrum *conv, gint toshift)
 {
-  gfloat *oldsamples = conv->samples;
+  gdouble *oldsamples = conv->samples;
 
   conv->numsamples -= toshift;
-  conv->samples = g_malloc (MAX (conv->numsamples, 1) * sizeof (float));
+  conv->samples = g_malloc (MAX (conv->numsamples, 1) * sizeof (double));
   memcpy (conv->samples, &oldsamples[toshift], 
-	  conv->numsamples * sizeof (gfloat));
+    conv->numsamples * sizeof (gdouble));
   g_free (oldsamples);
 
   /* Fix the timestamp and offset */
@@ -613,8 +613,8 @@ gst_fftwspectrum_chain (GstPad * pad, GstBuffer * buf)
 	= gst_util_uint64_scale_int (GST_SECOND, conv->step, conv->rate);
       
       /* Do the Fourier transform */
-      memcpy (conv->fftw_in, conv->samples, conv->size * sizeof (float));
-      fftwf_execute (conv->fftw_plan);
+      memcpy (conv->fftw_in, conv->samples, conv->size * sizeof (double));
+      fftw_execute (conv->fftw_plan);
       { /* Normalize */
 	gint i;
 	gfloat root = sqrtf (conv->size);

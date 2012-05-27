@@ -43,7 +43,7 @@ struct _GstMoodbar
   guint *barkband_table;
 
   /* Queued moodbar data */
-  gfloat *r, *g, *b;
+  gdouble *r, *g, *b;
   guint numframes;
 
   /* Property */

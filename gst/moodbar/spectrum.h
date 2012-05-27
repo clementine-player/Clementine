@@ -22,7 +22,7 @@
 			       "rate = (int) [ 1, MAX ], " \
 			       "channels = (int) 1, " \
 			       "endianness = (int) BYTE_ORDER, " \
-			       "width = (int) 32, " \
+             "width = (int) 64, " \
 			       "signed = (boolean) true"
 
 /* audio/x-spectrum-complex-float is an array of complex floats. A
@@ -44,7 +44,7 @@
 #define SPECTRUM_FREQ_CAPS "audio/x-spectrum-complex-float, " \
 			     "rate = (int) [ 1, MAX ], " \
 			     "endianness = (int) BYTE_ORDER, " \
-			     "width = (int) 32, " \
+           "width = (int) 64, " \
 			     "size = (int) [ 1, MAX ], " \
 			     "step = (int) [ 1, MAX ]"
 

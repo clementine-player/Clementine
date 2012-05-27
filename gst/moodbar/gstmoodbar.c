@@ -386,9 +386,9 @@ gst_moodbar_change_state (GstElement *element, GstStateChange transition)
       calc_barkband_table (mood);
       break;
     case GST_STATE_CHANGE_READY_TO_PAUSED:
-      mood->r = (gfloat *) g_malloc (FRAME_CHUNK * sizeof(gfloat));
-      mood->g = (gfloat *) g_malloc (FRAME_CHUNK * sizeof(gfloat));
-      mood->b = (gfloat *) g_malloc (FRAME_CHUNK * sizeof(gfloat));
+      mood->r = (gdouble *) g_malloc (FRAME_CHUNK * sizeof(gdouble));
+      mood->g = (gdouble *) g_malloc (FRAME_CHUNK * sizeof(gdouble));
+      mood->b = (gdouble *) g_malloc (FRAME_CHUNK * sizeof(gdouble));
       mood->numframes = 0;
       break;
     case GST_STATE_CHANGE_PAUSED_TO_PLAYING:
@@ -438,11 +438,11 @@ allocate_another_frame (GstMoodbar *mood)
 
   if(mood->numframes % FRAME_CHUNK == 0)
     {
-      guint size = (mood->numframes + FRAME_CHUNK) * sizeof (gfloat);
+      guint size = (mood->numframes + FRAME_CHUNK) * sizeof (gdouble);
 
-      mood->r = (gfloat *) g_realloc (mood->r, size);
-      mood->g = (gfloat *) g_realloc (mood->g, size);
-      mood->b = (gfloat *) g_realloc (mood->b, size);
+      mood->r = (gdouble *) g_realloc (mood->r, size);
+      mood->g = (gdouble *) g_realloc (mood->g, size);
+      mood->b = (gdouble *) g_realloc (mood->b, size);
 
       if (mood->r == NULL || mood->g == NULL || mood->b == NULL)
 	return FALSE;
@@ -461,17 +461,17 @@ gst_moodbar_chain (GstPad *pad, GstBuffer *buf)
 {
   GstMoodbar *mood = GST_MOODBAR (gst_pad_get_parent (pad));
   guint i;
-  gfloat amplitudes[24], rgb[3] = {0.f, 0.f, 0.f};
-  gfloat *out, real, imag;
+  gdouble amplitudes[24], rgb[3] = {0.f, 0.f, 0.f};
+  gdouble *out, real, imag;
   guint numfreqs = NUMFREQS (mood);
 
-  if (GST_BUFFER_SIZE (buf) != numfreqs * sizeof (gfloat) * 2)
+  if (GST_BUFFER_SIZE (buf) != numfreqs * sizeof (gdouble) * 2)
     {
       gst_object_unref (mood);
       return GST_FLOW_ERROR;
     }
 
-  out = (gfloat *) GST_BUFFER_DATA (buf);
+  out = (gdouble *) GST_BUFFER_DATA (buf);
 
   if (!allocate_another_frame (mood))
     return GST_FLOW_ERROR;
@@ -512,11 +512,11 @@ gst_moodbar_chain (GstPad *pad, GstBuffer *buf)
  * library, normalise.cpp
  */
 static void
-normalize (gfloat *vals, guint numvals)
+normalize (gdouble *vals, guint numvals)
 {
-  gfloat mini, maxi, tu = 0.f, tb = 0.f;
-  gfloat avgu = 0.f, avgb = 0.f, delta, avg = 0.f;
-  gfloat avguu = 0.f, avgbb = 0.f;
+  gdouble mini, maxi, tu = 0.f, tb = 0.f;
+  gdouble avgu = 0.f, avgb = 0.f, delta, avg = 0.f;
+  gdouble avguu = 0.f, avgbb = 0.f;
   guint i;
   gint t = 0;
 
@@ -537,7 +537,7 @@ normalize (gfloat *vals, guint numvals)
     {
       if(vals[i] != mini && vals[i] != maxi)
 	{
-	  avg += vals[i] / ((gfloat) numvals); 
+    avg += vals[i] / ((gdouble) numvals);
 	  t++; 
 	}
     }
@@ -559,8 +559,8 @@ normalize (gfloat *vals, guint numvals)
 	}
     }
 
-  avgu /= (gfloat) tu;
-  avgb /= (gfloat) tb;
+  avgu /= (gdouble) tu;
+  avgb /= (gdouble) tb;
 
   tu = 0.f; 
   tb = 0.f;
@@ -582,8 +582,8 @@ normalize (gfloat *vals, guint numvals)
 	}
     }
 
-  avguu /= (gfloat) tu;
-  avgbb /= (gfloat) tb;
+  avguu /= (gdouble) tu;
+  avgbb /= (gdouble) tb;
 
   mini = MAX (avg + (avgb - avg) * 2.f, avgbb);
   maxi = MIN (avg + (avgu - avg) * 2.f, avguu);
@@ -628,7 +628,7 @@ gst_moodbar_finish (GstMoodbar *mood)
   GST_BUFFER_OFFSET (buf) = 0;
   data = (guchar *) GST_BUFFER_DATA (buf);
 
-  gfloat r, g, b;
+  gdouble r, g, b;
   guint i, j, n;
   guint start, end;
   for (line = 0; line < mood->height; ++line)
@@ -650,9 +650,9 @@ gst_moodbar_finish (GstMoodbar *mood)
 
 	  n = end - start;
 
-	  *(data++) = (guchar) (r / ((gfloat) n));
-	  *(data++) = (guchar) (g / ((gfloat) n));
-	  *(data++) = (guchar) (b / ((gfloat) n));
+    *(data++) = (guchar) (r / ((gdouble) n));
+    *(data++) = (guchar) (g / ((gdouble) n));
+    *(data++) = (guchar) (b / ((gdouble) n));
 	}
     }
 
