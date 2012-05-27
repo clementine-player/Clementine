@@ -32,6 +32,10 @@
 # include "gst/afcsrc/gstafcsrc.h"
 #endif
 
+#ifdef HAVE_MOODBAR
+# include "gst/moodbar/spectrum.h"
+#endif
+
 #include <math.h>
 #include <unistd.h>
 #include <vector>
@@ -153,6 +157,10 @@ void GstEngine::InitialiseGstreamer() {
 
 #ifdef HAVE_IMOBILEDEVICE
   afcsrc_register_static();
+#endif
+
+#ifdef HAVE_MOODBAR
+  gstmoodbar_register_static();
 #endif
 }
 

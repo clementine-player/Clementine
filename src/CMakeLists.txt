@@ -1085,6 +1085,10 @@ if(HAVE_IMOBILEDEVICE)
   link_directories(${USBMUXD_LIBRARY_DIRS})
 endif(HAVE_IMOBILEDEVICE)
 
+if(HAVE_MOODBAR)
+  target_link_libraries(clementine_lib gstmoodbar)
+endif()
+
 if(HAVE_LIBMTP)
   target_link_libraries(clementine_lib ${LIBMTP_LIBRARIES})
 endif(HAVE_LIBMTP)

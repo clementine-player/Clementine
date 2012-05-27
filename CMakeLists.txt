@@ -8,6 +8,7 @@ include(cmake/Deb.cmake)
 include(cmake/Rpm.cmake)
 include(cmake/SpotifyVersion.cmake)
 include(cmake/OptionalSource.cmake)
+set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
 
 if (UNIX AND NOT APPLE)
   set(LINUX 1)
@@ -48,6 +49,7 @@ find_package(Boost REQUIRED)
 find_package(Gettext REQUIRED)
 find_package(PkgConfig REQUIRED)
 find_package(Protobuf REQUIRED)
+find_package(FFTW3)
 
 pkg_check_modules(TAGLIB REQUIRED taglib>=1.6)
 pkg_check_modules(QJSON REQUIRED QJson)
@@ -193,6 +195,7 @@ option(ENABLE_BREAKPAD "Enable crash reporting" OFF)
 option(ENABLE_SPOTIFY_BLOB "Build the spotify non-GPL binary" ON)
 option(ENABLE_SPOTIFY "Enable spotify support" ON)
 option(ENABLE_PLASMARUNNER "Enable plasma krunner global search" OFF)
+option(ENABLE_MOODBAR "Enable moodbar" ON)
 
 if(WIN32)
   option(ENABLE_WIN32_CONSOLE "Show the windows console even outside Debug mode" OFF)
@@ -254,6 +257,10 @@ endif((NOT HAVE_SPOTIFY_BLOB) AND (NOT QCA_FOUND))
 if(QCA_FOUND AND HAVE_SPOTIFY)
   set(HAVE_QCA ON)
 endif(QCA_FOUND AND HAVE_SPOTIFY)
+
+if(ENABLE_MOODBAR AND FFTW3_FOUND)
+  set(HAVE_MOODBAR ON)
+endif()
 
 
 if(ENABLE_VISUALISATIONS)
@@ -402,6 +409,10 @@ if(HAVE_SPOTIFY_BLOB)
   add_subdirectory(ext/clementine-spotifyblob)
 endif(HAVE_SPOTIFY_BLOB)
 
+if(HAVE_MOODBAR)
+  add_subdirectory(gst/moodbar)
+endif()
+
 # This goes after everything else because KDE fucks everything else up with its
 # cmake includes.
 find_package(KDE4 4.3.60)
@@ -433,6 +444,7 @@ summary_add("Devices: MTP support" HAVE_LIBMTP)
 summary_add("Devices: GIO backend" HAVE_GIO)
 summary_add("Gnome sound menu integration" HAVE_LIBINDICATE)
 summary_add("Last.fm support" HAVE_LIBLASTFM)
+summary_add("Moodbar support" HAVE_MOODBAR)
 summary_add("Spotify support: core code" HAVE_SPOTIFY)
 summary_add("Spotify support: non-GPL binary helper" HAVE_SPOTIFY_BLOB)
 summary_add("Visualisations" ENABLE_VISUALISATIONS)

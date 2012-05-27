@@ -64,14 +64,14 @@ FIND_LIBRARY(FFTW3_FFTW_LIBRARY
 #MESSAGE("DBG FFTW3_FFTW_LIBRARY=${FFTW3_FFTW_LIBRARY}")
 
 FIND_LIBRARY(FFTW3_FFTWF_LIBRARY
-  NAMES fftwf3 fftwf libfftwf libfftwf3 libfftw3f-3
+  NAMES fftwf3 fftw3f fftwf libfftwf libfftwf3 libfftw3f-3
   PATHS 
   ${FFTW3_POSSIBLE_LIBRARY_PATH}
   )
 #MESSAGE("DBG FFTW3_FFTWF_LIBRARY=${FFTW3_FFTWF_LIBRARY}")
 
 FIND_LIBRARY(FFTW3_FFTWL_LIBRARY
-  NAMES fftwl3 fftwl libfftwl libfftwl3 libfftw3l-3
+  NAMES fftwl3 fftw3l fftwl libfftwl libfftwl3 libfftw3l-3
   PATHS 
   ${FFTW3_POSSIBLE_LIBRARY_PATH}
   )

@@ -1,0 +1,31 @@
+From 0b62ebc38d1cc0202c6f57c4e096fa0b68a41baf Mon Sep 17 00:00:00 2001
+From: David Sansome <me@davidsansome.com>
+Date: Sun, 27 May 2012 17:00:32 +0100
+Subject: [PATCH] Protect calls to fftwf_plan_dft_r2c_1d with a mutex
+
+---
+ plugin/gstfftwspectrum.c |    4 ++++
+ 1 files changed, 4 insertions(+), 0 deletions(-)
+
+diff --git a/plugin/gstfftwspectrum.c b/plugin/gstfftwspectrum.c
+index 147e606..f6e2427 100644
+--- a/plugin/gstfftwspectrum.c
++++ b/plugin/gstfftwspectrum.c
+@@ -302,10 +302,14 @@ alloc_fftw_data (GstFFTWSpectrum *conv)
+    * outputs are the hermetian conjugates).  This should be optimal for
+    * implementing filters.
+    */
++
++  static GStaticMutex mutex = G_STATIC_MUTEX_INIT;
++  g_static_mutex_lock(&mutex);
+   conv->fftw_plan 
+     = fftwf_plan_dft_r2c_1d(conv->size, conv->fftw_in, 
+ 			    (fftwf_complex *) conv->fftw_out, 
+ 			    conv->hi_q ? FFTW_MEASURE : FFTW_ESTIMATE);
++  g_static_mutex_unlock(&mutex);
+ }
+ 
+ 
+-- 
+1.7.5.4
+
