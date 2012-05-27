@@ -21,6 +21,7 @@
 #include "moodbarrenderer.h"
 #include "core/application.h"
 #include "core/closure.h"
+#include "core/qhash_qurl.h"
 #include "playlist/playlist.h"
 
 #include <QApplication>

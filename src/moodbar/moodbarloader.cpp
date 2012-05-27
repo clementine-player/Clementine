@@ -18,6 +18,7 @@
 #include "moodbarloader.h"
 #include "moodbarpipeline.h"
 #include "core/closure.h"
+#include "core/qhash_qurl.h"
 #include "core/utilities.h"
 
 #include <QCoreApplication>
