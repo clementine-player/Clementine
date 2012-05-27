@@ -22,7 +22,7 @@
 
 const int MoodbarRenderer::kNumHues = 12;
 
-MoodbarRenderer::ColorList MoodbarRenderer::Colors(
+ColorVector MoodbarRenderer::Colors(
     const QByteArray& data, MoodbarStyle style, const QPalette& palette) {
   const int samples = data.size() / 3;
 
@@ -32,6 +32,7 @@ MoodbarRenderer::ColorList MoodbarRenderer::Colors(
     case Style_Angry:  properties = StyleProperties(samples / 360 * 9, 45,  -45, 200, 100); break;
     case Style_Frozen: properties = StyleProperties(samples / 360 * 1, 140, 160, 50,  100); break;
     case Style_Happy:  properties = StyleProperties(samples / 360 * 2, 0,   359, 150, 250); break;
+    case Style_Normal: properties = StyleProperties(samples / 360 * 3, 0,   359, 100, 100); break;
     case Style_SystemDefault:
     default: {
       const QColor highlight_color(palette.color(QPalette::Active, QPalette::Highlight));
@@ -52,7 +53,7 @@ MoodbarRenderer::ColorList MoodbarRenderer::Colors(
 
   memset(hue_distribution, 0, sizeof(hue_distribution));
 
-  ColorList colors;
+  ColorVector colors;
 
   // Read the colors, keeping track of some histograms
   for (int i=0; i<samples; ++i) {
@@ -81,7 +82,7 @@ MoodbarRenderer::ColorList MoodbarRenderer::Colors(
 
   // Now huedist is a hue mapper: huedist[h] is the new hue value
   // for a bar with hue h
-  for (ColorList::iterator it = colors.begin() ; it != colors.end() ; ++it) {
+  for (ColorVector::iterator it = colors.begin() ; it != colors.end() ; ++it) {
     const int hue = qMax(0, it->hue());
 
     *it = QColor::fromHsv(
@@ -93,9 +94,9 @@ MoodbarRenderer::ColorList MoodbarRenderer::Colors(
   return colors;
 }
 
-void MoodbarRenderer::Render(const ColorList& colors, QPainter* p, const QRect& rect) {
+void MoodbarRenderer::Render(const ColorVector& colors, QPainter* p, const QRect& rect) {
   // Sample the colors and map them to screen pixels.
-  ColorList screen_colors;
+  ColorVector screen_colors;
   for (int x=0; x<rect.width(); ++x) {
     int r = 0;
     int g = 0;

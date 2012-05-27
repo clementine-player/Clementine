@@ -20,26 +20,27 @@
 
 #include <QColor>
 #include <QPixmap>
+#include <QMetaType>
 #include <QVector>
 
 class QPalette;
+typedef QVector<QColor> ColorVector;
 
 class MoodbarRenderer {
 public:
-  typedef QVector<QColor> ColorList;
-
   enum MoodbarStyle {
     Style_Angry,
     Style_Frozen,
     Style_Happy,
+    Style_Normal,
     Style_SystemDefault
   };
 
   static const int kNumHues;
 
-  static ColorList Colors(const QByteArray& data, MoodbarStyle style,
-                          const QPalette& palette);
-  static void Render(const ColorList& colors, QPainter* p, const QRect& rect);
+  static ColorVector Colors(const QByteArray& data, MoodbarStyle style,
+                            const QPalette& palette);
+  static void Render(const ColorVector& colors, QPainter* p, const QRect& rect);
 
 private:
   MoodbarRenderer();
@@ -57,5 +58,7 @@ private:
     int val_;
   };
 };
+
+Q_DECLARE_METATYPE(QVector<QColor>)
 
 #endif // MOODBARRENDERER_H

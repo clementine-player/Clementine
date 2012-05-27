@@ -199,6 +199,7 @@ set(SOURCES
   library/sqlrow.cpp
 
   moodbar/moodbarcontroller.cpp
+  moodbar/moodbaritemdelegate.cpp
   moodbar/moodbarloader.cpp
   moodbar/moodbarpipeline.cpp
   moodbar/moodbarproxystyle.cpp
@@ -466,6 +467,7 @@ set(HEADERS
   library/librarywatcher.h
 
   moodbar/moodbarcontroller.h
+  moodbar/moodbaritemdelegate.h
   moodbar/moodbarloader.h
   moodbar/moodbarpipeline.h
   moodbar/moodbarproxystyle.h

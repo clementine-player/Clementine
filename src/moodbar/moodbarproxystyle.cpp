@@ -34,7 +34,7 @@ MoodbarProxyStyle::MoodbarProxyStyle(QSlider* slider)
   : QProxyStyle(slider->style()),
     slider_(slider),
     enabled_(true),
-    moodbar_style_(MoodbarRenderer::Style_SystemDefault),
+    moodbar_style_(MoodbarRenderer::Style_Normal),
     state_(MoodbarOff),
     fade_timeline_(new QTimeLine(1000, this)),
     moodbar_colors_dirty_(true),
@@ -238,15 +238,14 @@ void MoodbarProxyStyle::DrawArrow(const QStyleOptionSlider* option,
   painter->save();
   painter->setRenderHint(QPainter::Antialiasing);
   painter->translate(0.5, 0.5);
-  painter->setPen(slider_->palette().color(QPalette::Active, QPalette::Highlight));
+  painter->setPen(Qt::black);
   painter->setBrush(slider_->palette().brush(QPalette::Active, QPalette::Base));
   painter->drawPolygon(poly);
   painter->restore();
 }
 
-QPixmap MoodbarProxyStyle::MoodbarPixmap(
-    const MoodbarRenderer::ColorList& colors, const QSize& size,
-    const QPalette& palette) {
+QPixmap MoodbarProxyStyle::MoodbarPixmap(const ColorVector& colors,
+                                         const QSize& size, const QPalette& palette) {
   QRect rect(QPoint(0, 0), size);
   QRect border_rect(rect);
   border_rect.adjust(kMarginSize, kMarginSize, -kMarginSize, -kMarginSize);
@@ -261,7 +260,7 @@ QPixmap MoodbarProxyStyle::MoodbarPixmap(
   MoodbarRenderer::Render(colors, &p, inner_rect);
 
   // Draw the border
-  p.setPen(QPen(palette.brush(QPalette::Active, QPalette::Highlight),
+  p.setPen(QPen(Qt::black,
                 kBorderSize, Qt::SolidLine, Qt::FlatCap, Qt::MiterJoin));
   p.drawRect(border_rect.adjusted(0, 0, -1, -1));
 

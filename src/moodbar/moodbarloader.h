@@ -20,6 +20,7 @@
 
 #include <QMap>
 #include <QObject>
+#include <QPair>
 
 class QNetworkDiskCache;
 class QUrl;
@@ -53,11 +54,15 @@ private slots:
 
 private:
   static QStringList MoodFilenames(const QString& song_filename);
+  bool StartQueuedRequest(const QUrl& url);
   
 private:
   QNetworkDiskCache* cache_;
+
+  const int kMaxActiveRequests;
   
   QMap<QUrl, MoodbarPipeline*> active_requests_;
+  QList<QUrl> queued_requests_;
 
   bool save_alongside_originals_;
 };

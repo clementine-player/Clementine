@@ -19,6 +19,7 @@
 #define MOODBARPIPELINE_H
 
 #include <QBuffer>
+#include <QMutex>
 #include <QObject>
 
 #include <gst/gst.h>
@@ -56,6 +57,7 @@ private:
   
 private:
   static bool sIsAvailable;
+  static QMutex sFftwMutex;
   
   QString local_filename_;
   GstElement* pipeline_;

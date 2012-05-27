@@ -23,6 +23,8 @@
 #include <QDir>
 #include <QFileInfo>
 #include <QNetworkDiskCache>
+#include <QTimer>
+#include <QThread>
 #include <QUrl>
 
 #include <boost/scoped_ptr.hpp>
@@ -30,7 +32,8 @@
 MoodbarLoader::MoodbarLoader(QObject* parent)
   : QObject(parent),
     cache_(new QNetworkDiskCache(this)),
-    save_alongside_originals_(true)
+    kMaxActiveRequests(QThread::idealThreadCount()),
+    save_alongside_originals_(false)
 {
   cache_->setCacheDirectory(Utilities::GetConfigPath(Utilities::Path_MoodbarCache));
   cache_->setMaximumCacheSize(1024 * 1024); // 1MB - enough for 333 moodbars
@@ -86,20 +89,33 @@ MoodbarLoader::Result MoodbarLoader::Load(
   
   // There was no existing file, analyze the audio file and create one.
   MoodbarPipeline* pipeline = new MoodbarPipeline(filename);
-  if (!pipeline->Start()) {
-    delete pipeline;
-    return CannotLoad;
-  }
-  
-  qLog(Info) << "Creating moodbar data for" << filename;
-  
-  active_requests_[filename] = pipeline;
   NewClosure(pipeline, SIGNAL(Finished(bool)),
              this, SLOT(RequestFinished(MoodbarPipeline*,QUrl)),
              pipeline, url);
-  
+
+  active_requests_[url] = pipeline;
+
+  if (active_requests_.count() > kMaxActiveRequests) {
+    // Just queue this request now, start it later when another request
+    // finishes.
+    queued_requests_ << url;
+  } else if (!StartQueuedRequest(url)) {
+    return CannotLoad;
+  }
+
   *async_pipeline = pipeline;
   return WillLoadAsync;
+}
+
+bool MoodbarLoader::StartQueuedRequest(const QUrl& url) {
+  if (!active_requests_[url]->Start()) {
+    delete active_requests_.take(url);
+    return false;
+  }
+
+  qLog(Info) << "Creating moodbar data for" << url.toLocalFile();
+
+  return true;
 }
 
 void MoodbarLoader::RequestFinished(MoodbarPipeline* request, const QUrl& url) {
@@ -125,8 +141,14 @@ void MoodbarLoader::RequestFinished(MoodbarPipeline* request, const QUrl& url) {
       }
     }
   }
-  
+
+  qLog(Debug) << "Deleting" << request;
+
   // Remove the request from the active list and delete it
   active_requests_.take(url);
-  request->deleteLater();
+  QTimer::singleShot(10, request, SLOT(deleteLater()));
+
+  if (!queued_requests_.isEmpty()) {
+    StartQueuedRequest(queued_requests_.takeFirst());
+  }
 }

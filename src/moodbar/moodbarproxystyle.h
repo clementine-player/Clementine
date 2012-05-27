@@ -69,7 +69,7 @@ private:
   void EnsureMoodbarRendered();
   void DrawArrow(const QStyleOptionSlider* option, QPainter* painter) const;
 
-  static QPixmap MoodbarPixmap(const MoodbarRenderer::ColorList& colors,
+  static QPixmap MoodbarPixmap(const ColorVector& colors,
                                const QSize& size, const QPalette& palette);
 
 private slots:
@@ -90,7 +90,7 @@ private:
 
   bool moodbar_colors_dirty_;
   bool moodbar_pixmap_dirty_;
-  MoodbarRenderer::ColorList moodbar_colors_;
+  ColorVector moodbar_colors_;
   QPixmap moodbar_pixmap_;
 };
 

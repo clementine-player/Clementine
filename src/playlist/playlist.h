@@ -111,6 +111,7 @@ class Playlist : public QAbstractListModel {
     Column_Comment,
 
     Column_Source,
+    Column_Mood,
 
     ColumnCount
   };
@@ -121,6 +122,8 @@ class Playlist : public QAbstractListModel {
     Role_StopAfter,
     Role_QueuePosition,
     Role_CanSetRating,
+    Role_MoodbarColors,
+    Role_MoodbarPixmap,
   };
 
   enum LastFMStatus {

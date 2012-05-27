@@ -24,6 +24,7 @@
 #include "core/logging.h"
 #include "core/player.h"
 #include "covers/currentartloader.h"
+#include "moodbar/moodbaritemdelegate.h"
 
 #include <QCleanlooksStyle>
 #include <QClipboard>
@@ -198,6 +199,7 @@ void PlaylistView::SetItemDelegates(LibraryBackend* backend) {
   setItemDelegateForColumn(Playlist::Column_Filename, new NativeSeparatorsDelegate(this));
   setItemDelegateForColumn(Playlist::Column_Rating, rating_delegate_);
   setItemDelegateForColumn(Playlist::Column_LastPlayed, new LastPlayedItemDelegate(this));
+  setItemDelegateForColumn(Playlist::Column_Mood, new MoodbarItemDelegate(app_, this));
   
   if (app_ && app_->player()) {
     setItemDelegateForColumn(Playlist::Column_Source, new SongSourceDelegate(this, app_->player()));

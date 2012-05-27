@@ -19,6 +19,7 @@
 #include "core/logging.h"
 
 bool MoodbarPipeline::sIsAvailable = false;
+QMutex MoodbarPipeline::sFftwMutex;
 
 MoodbarPipeline::MoodbarPipeline(const QString& local_filename)
   : QObject(NULL),
@@ -31,6 +32,7 @@ MoodbarPipeline::MoodbarPipeline(const QString& local_filename)
 }
 
 MoodbarPipeline::~MoodbarPipeline() {
+  qLog(Debug) << "Actually deleting" << this;
   Cleanup();
 }
 
@@ -84,6 +86,8 @@ bool MoodbarPipeline::Start() {
     pipeline_ = NULL;
     return false;
   }
+
+  QMutexLocker l(&sFftwMutex);
   
   // Join them together
   gst_element_link(filesrc, decodebin);
@@ -188,14 +192,13 @@ GstBusSyncReply MoodbarPipeline::BusCallbackSync(GstBus*, GstMessage* msg, gpoin
 void MoodbarPipeline::Stop(bool success) {
   success_ = success;
   emit Finished(success);
-  
-  Cleanup();
 }
 
 void MoodbarPipeline::Cleanup() {
   if (pipeline_) {
     gst_bus_set_sync_handler(gst_pipeline_get_bus(GST_PIPELINE(pipeline_)), NULL, NULL);
     g_source_remove(bus_callback_id_);
+    gst_element_set_state(pipeline_, GST_STATE_NULL);
     gst_object_unref(pipeline_);
     pipeline_ = NULL;
   }

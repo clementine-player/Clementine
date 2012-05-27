@@ -43,6 +43,7 @@
 #include "library/librarybackend.h"
 #include "library/librarymodel.h"
 #include "library/libraryplaylistitem.h"
+#include "moodbar/moodbarrenderer.h"
 #include "smartplaylists/generator.h"
 #include "smartplaylists/generatorinserter.h"
 #include "smartplaylists/generatormimedata.h"
@@ -243,6 +244,12 @@ QVariant Playlist::data(const QModelIndex& index, int role) const {
              items_[index.row()]->IsLocalLibraryItem() &&
              items_[index.row()]->Metadata().id() != -1;
 
+    case Role_MoodbarColors:
+      return QVariant::fromValue(items_[index.row()]->MoodbarColors());
+
+    case Role_MoodbarPixmap:
+      return items_[index.row()]->MoodbarPixmap();
+
     case Qt::EditRole:
     case Qt::ToolTipRole:
     case Qt::DisplayRole: {
@@ -309,9 +316,20 @@ QVariant Playlist::data(const QModelIndex& index, int role) const {
   }
 }
 
-bool Playlist::setData(const QModelIndex &index, const QVariant &value, int) {
+bool Playlist::setData(const QModelIndex& index, const QVariant& value, int role) {
   int row = index.row();
-  Song song = item_at(row)->Metadata();
+  PlaylistItemPtr item = item_at(row);
+  Song song = item->Metadata();
+
+  if (role == Role_MoodbarColors) {
+    item->SetMoodbarColors(value.value<QVector<QColor> >());
+    emit dataChanged(index.sibling(index.row(), Column_Mood),
+                     index.sibling(index.row(), Column_Mood));
+    return true;
+  } else if (role == Role_MoodbarPixmap) {
+    item->SetMoodbarPixmap(value.value<QPixmap>());
+    return true;
+  }
 
   if (index.data() == value)
     return false;
@@ -1152,6 +1170,7 @@ QString Playlist::column_name(Column column) {
 
     case Column_Comment:      return tr("Comment");
     case Column_Source:       return tr("Source");
+    case Column_Mood:         return tr("Mood");
     default: return QString();
   }
   return "";
