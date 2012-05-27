@@ -154,8 +154,6 @@ void MoodbarLoader::RequestFinished(MoodbarPipeline* request, const QUrl& url) {
     }
   }
 
-  qLog(Debug) << "Deleting" << request;
-
   // Remove the request from the active list and delete it
   requests_.remove(url);
   active_requests_.remove(url);

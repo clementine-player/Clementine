@@ -149,6 +149,9 @@ void MoodbarProxyStyle::Render(
         EnsureMoodbarRendered();
       }
       fade_target_ = moodbar_pixmap_;
+      QPainter p(&fade_target_);
+      DrawArrow(option, &p);
+      p.end();
     }
 
     // Blend the pixmaps into each other
