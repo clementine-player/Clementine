@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-05-20 21:43+0000\n"
+"PO-Revision-Date: 2012-05-28 00:18+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -362,7 +362,7 @@ msgstr "Προσθήκη άλλης ροής..."
 msgid "Add directory..."
 msgstr "Προσθήκη καταλόγου..."
 
-#: ui/mainwindow.cpp:1507
+#: ui/mainwindow.cpp:1519
 msgid "Add file"
 msgstr "Προσθήκη αρχείου"
 
@@ -374,7 +374,7 @@ msgstr "Προσθήκη αρχείου..."
 msgid "Add files to transcode"
 msgstr "Προσθήκη αρχείων για επανακωδικοποίηση"
 
-#: ui/mainwindow.cpp:1535
+#: ui/mainwindow.cpp:1547
 msgid "Add folder"
 msgstr "Προσθήκη φακέλου"
 
@@ -462,7 +462,7 @@ msgstr "Προσθήκη στα αγαπημένα του "
 msgid "Add to Grooveshark playlists"
 msgstr "Προσθήκη στη λίστα του "
 
-#: ui/mainwindow.cpp:1332
+#: ui/mainwindow.cpp:1344
 msgid "Add to another playlist"
 msgstr "Προσθήκη σε άλλη λίστα"
 
@@ -520,7 +520,7 @@ msgstr "Μετά "
 msgid "After copying..."
 msgstr "Μετά την αντιγραφή..."
 
-#: playlist/playlist.cpp:1128 ui/organisedialog.cpp:55
+#: playlist/playlist.cpp:1136 ui/organisedialog.cpp:55
 #: ui/qtsystemtrayicon.cpp:252 ../bin/src/ui_groupbydialog.h:129
 #: ../bin/src/ui_groupbydialog.h:142 ../bin/src/ui_groupbydialog.h:155
 #: ../bin/src/ui_albumcoversearcher.h:111
@@ -533,13 +533,13 @@ msgstr "Άλμπουμ"
 msgid "Album (ideal loudness for all tracks)"
 msgstr "Άλμπουμ (ιδανική ένταση για όλα τα κομμάτια)"
 
-#: playlist/playlist.cpp:1134 ui/organisedialog.cpp:58
+#: playlist/playlist.cpp:1142 ui/organisedialog.cpp:58
 #: ../bin/src/ui_groupbydialog.h:131 ../bin/src/ui_groupbydialog.h:144
 #: ../bin/src/ui_groupbydialog.h:157 ../bin/src/ui_edittagdialog.h:658
 msgid "Album artist"
 msgstr "Καλλιτέχνης άλμπουμ"
 
-#: ../bin/src/ui_appearancesettingspage.h:204
+#: ../bin/src/ui_appearancesettingspage.h:240
 msgid "Album cover"
 msgstr "Εξώφυλλο άλμπουμ"
 
@@ -555,7 +555,7 @@ msgstr "Άλμπουμ με εξώφυλλα"
 msgid "Albums without covers"
 msgstr "Άλμπουμ χωρίς εξώφυλλα"
 
-#: ui/mainwindow.cpp:146
+#: ui/mainwindow.cpp:151
 msgid "All Files (*)"
 msgstr "Όλα τα αρχεία (*)"
 
@@ -641,8 +641,12 @@ msgstr "Προέκυψε ένα άγνωστο σφάλμα  στο last.fm: %1"
 msgid "And:"
 msgstr "Και:"
 
+#: ../bin/src/ui_appearancesettingspage.h:250
+msgid "Angry"
+msgstr ""
+
 #: ../bin/src/ui_songinfosettingspage.h:180
-#: ../bin/src/ui_appearancesettingspage.h:191
+#: ../bin/src/ui_appearancesettingspage.h:227
 msgid "Appearance"
 msgstr "Εμφάνιση"
 
@@ -676,7 +680,7 @@ msgstr "Είστε σίγουρος πως θέλετε να διαγράψετ�
 msgid "Are you sure you want to reset this song's statistics?"
 msgstr "Είστε σίγουροι πως θέλετε να επαναφέρετε τα στατιστικά του τραγουδιού;"
 
-#: playlist/playlist.cpp:1127 ui/organisedialog.cpp:56
+#: playlist/playlist.cpp:1135 ui/organisedialog.cpp:56
 #: ui/qtsystemtrayicon.cpp:250 ../bin/src/ui_groupbydialog.h:130
 #: ../bin/src/ui_groupbydialog.h:143 ../bin/src/ui_groupbydialog.h:156
 #: ../bin/src/ui_albumcoversearcher.h:107
@@ -686,7 +690,7 @@ msgstr "Είστε σίγουροι πως θέλετε να επαναφέρε�
 msgid "Artist"
 msgstr "Καλλιτέχνης"
 
-#: ui/mainwindow.cpp:227
+#: ui/mainwindow.cpp:232
 msgid "Artist info"
 msgstr "Πληρ. καλλιτέχνη"
 
@@ -748,7 +752,7 @@ msgstr "Μέσο μέγεθος εικόνας"
 msgid "BBC Podcasts"
 msgstr "BBC Podcasts"
 
-#: playlist/playlist.cpp:1143 ui/organisedialog.cpp:62
+#: playlist/playlist.cpp:1151 ui/organisedialog.cpp:62
 #: ../bin/src/ui_edittagdialog.h:638
 msgid "BPM"
 msgstr "BPM"
@@ -761,7 +765,7 @@ msgstr "Ροές Παρασκηνίου"
 msgid "Background color"
 msgstr "Χρώμα φόντου"
 
-#: ../bin/src/ui_appearancesettingspage.h:199
+#: ../bin/src/ui_appearancesettingspage.h:235
 msgid "Background image"
 msgstr "Εικόνα φόντου"
 
@@ -802,7 +806,7 @@ msgstr "Βέλτιστος"
 msgid "Biography from %1"
 msgstr "Βιογραφία από %1"
 
-#: playlist/playlist.cpp:1144 ../bin/src/ui_edittagdialog.h:640
+#: playlist/playlist.cpp:1152 ../bin/src/ui_edittagdialog.h:640
 msgid "Bit rate"
 msgstr "Ρυθμός bit"
 
@@ -835,7 +839,7 @@ msgstr "Boom"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:146
 #: ../bin/src/ui_podcastsettingspage.h:242
-#: ../bin/src/ui_appearancesettingspage.h:207
+#: ../bin/src/ui_appearancesettingspage.h:243
 msgid "Browse..."
 msgstr "Αναζήτηση..."
 
@@ -843,7 +847,7 @@ msgstr "Αναζήτηση..."
 msgid "Buffer duration"
 msgstr "Διάρκεια του απομονωτή (buffer)"
 
-#: engines/gstengine.cpp:853
+#: engines/gstengine.cpp:861
 msgid "Buffering"
 msgstr "Αποθήκευση"
 
@@ -891,7 +895,7 @@ msgstr "Αλλαγή γλώσσας"
 msgid "Check for new episodes"
 msgstr "Έλεγχος για νέα επεισόδια"
 
-#: ui/mainwindow.cpp:556
+#: ui/mainwindow.cpp:561
 msgid "Check for updates..."
 msgstr "Έλεγχος για ενημερώσεις"
 
@@ -1033,7 +1037,7 @@ msgstr "Club"
 msgid "Color"
 msgstr "Χρώμα"
 
-#: ../bin/src/ui_appearancesettingspage.h:192
+#: ../bin/src/ui_appearancesettingspage.h:228
 msgid "Colors"
 msgstr "Χρώματα"
 
@@ -1045,7 +1049,7 @@ msgstr "Συνδυασμός πανομοιότυπων αποτελεσμάτω
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Λίστα χωρισμένη με κόμμα από class:level, το level είναι 0-3"
 
-#: playlist/playlist.cpp:1153 smartplaylists/searchterm.cpp:279
+#: playlist/playlist.cpp:1161 smartplaylists/searchterm.cpp:279
 #: ui/organisedialog.cpp:65 ../bin/src/ui_edittagdialog.h:661
 msgid "Comment"
 msgstr "Σχόλια"
@@ -1058,7 +1062,7 @@ msgstr "Συμπλήρωση των ετικετών αυτόματα"
 msgid "Complete tags automatically..."
 msgstr "Συμπλήρωση των ετικετών αυτόματα..."
 
-#: playlist/playlist.cpp:1135 ui/organisedialog.cpp:59
+#: playlist/playlist.cpp:1143 ui/organisedialog.cpp:59
 #: ../bin/src/ui_groupbydialog.h:132 ../bin/src/ui_groupbydialog.h:145
 #: ../bin/src/ui_groupbydialog.h:158 ../bin/src/ui_edittagdialog.h:659
 msgid "Composer"
@@ -1084,7 +1088,7 @@ msgstr "Ρύθμιση συντομεύσεων"
 msgid "Configure Spotify..."
 msgstr "Ρύθμιση του Spotify..."
 
-#: ui/mainwindow.cpp:450
+#: ui/mainwindow.cpp:455
 msgid "Configure library..."
 msgstr "Παραμετροποίηση της βιβλιοθήκης"
 
@@ -1125,12 +1129,12 @@ msgstr "Μετατροπή κάθε μουσικής που η συσκευή δ
 msgid "Copy to clipboard"
 msgstr "Αντιγραφή στο πρόχειρο"
 
-#: library/libraryview.cpp:252 ui/mainwindow.cpp:483
+#: library/libraryview.cpp:252 ui/mainwindow.cpp:488
 #: widgets/fileviewlist.cpp:44
 msgid "Copy to device..."
 msgstr "Αντιγραφή στην συσκευή..."
 
-#: devices/deviceview.cpp:218 ui/mainwindow.cpp:480
+#: devices/deviceview.cpp:218 ui/mainwindow.cpp:485
 #: widgets/fileviewlist.cpp:39
 msgid "Copy to library..."
 msgstr "Αντιγραφή στην βιβλιοθήκη..."
@@ -1293,7 +1297,7 @@ msgstr "Ctrl+Up"
 msgid "Custom"
 msgstr "Προσαρμοσμένο"
 
-#: ../bin/src/ui_appearancesettingspage.h:206
+#: ../bin/src/ui_appearancesettingspage.h:242
 msgid "Custom image:"
 msgstr "Προσωπική εικόνα:"
 
@@ -1324,11 +1328,11 @@ msgid ""
 "recover your database"
 msgstr "Εντοπίστηκε κατακερματισμός στην βάση δεδομένων. Παρακαλώ διαβάστε το https://code.google.com/p/clementine-player/wiki/DatabaseCorruption για οδηγίες ανάκτησης της βάσης δεδομένων"
 
-#: playlist/playlist.cpp:1151 ../bin/src/ui_edittagdialog.h:649
+#: playlist/playlist.cpp:1159 ../bin/src/ui_edittagdialog.h:649
 msgid "Date created"
 msgstr "Ημερομηνία δημιουργίας"
 
-#: playlist/playlist.cpp:1150 ../bin/src/ui_edittagdialog.h:648
+#: playlist/playlist.cpp:1158 ../bin/src/ui_edittagdialog.h:648
 msgid "Date modified"
 msgstr "Ημερομηνία τροποποίησης"
 
@@ -1348,7 +1352,7 @@ msgstr "Μείωση της έντασης ήχου κατά 4%"
 msgid "Decrease volume"
 msgstr "Μείωση έντασης"
 
-#: ../bin/src/ui_appearancesettingspage.h:200
+#: ../bin/src/ui_appearancesettingspage.h:236
 msgid "Default background image"
 msgstr "Προεπιλεγμένη εικόνα φόντου"
 
@@ -1369,7 +1373,7 @@ msgid "Delete downloaded data"
 msgstr "Διαγραφή δεδομένων που έχουν \"κατέβει\""
 
 #: devices/deviceview.cpp:388 library/libraryview.cpp:471
-#: ui/mainwindow.cpp:1784 widgets/fileview.cpp:186
+#: ui/mainwindow.cpp:1796 widgets/fileview.cpp:186
 msgid "Delete files"
 msgstr "Διαγραφή αρχείων"
 
@@ -1377,7 +1381,7 @@ msgstr "Διαγραφή αρχείων"
 msgid "Delete from device..."
 msgstr "Διαγραφή από την συσκευή..."
 
-#: library/libraryview.cpp:254 ui/mainwindow.cpp:484
+#: library/libraryview.cpp:254 ui/mainwindow.cpp:489
 #: widgets/fileviewlist.cpp:45
 msgid "Delete from disk..."
 msgstr "Διαγραφή από τον δίσκο..."
@@ -1402,11 +1406,11 @@ msgstr "Διαγραφή των αρχικών αρχείων"
 msgid "Deleting files"
 msgstr "Γίνεται διαγραφή αρχείων"
 
-#: ui/mainwindow.cpp:1268
+#: ui/mainwindow.cpp:1280
 msgid "Dequeue selected tracks"
 msgstr "Αφαίρεση των επιλεγμένων κομματιών από την λίστα αναμονής"
 
-#: ui/mainwindow.cpp:1266
+#: ui/mainwindow.cpp:1278
 msgid "Dequeue track"
 msgstr "Αφαίρεση του κομματιού από την λίστα αναμονής"
 
@@ -1434,7 +1438,7 @@ msgstr "Όνομα συσκευής"
 msgid "Device properties..."
 msgstr "Ιδιότητες συσκευής..."
 
-#: ui/mainwindow.cpp:224
+#: ui/mainwindow.cpp:229
 msgid "Devices"
 msgstr "Συσκευές"
 
@@ -1471,7 +1475,7 @@ msgstr "Απενεργοποίηση διάρκειας"
 msgid "Disabled"
 msgstr "Απενεργοποιημένο"
 
-#: playlist/playlist.cpp:1131 ui/organisedialog.cpp:61
+#: playlist/playlist.cpp:1139 ui/organisedialog.cpp:61
 #: ../bin/src/ui_edittagdialog.h:655
 msgid "Disc"
 msgstr "Δίσκος"
@@ -1607,7 +1611,7 @@ msgstr "Δυναμική τυχαία ανάμιξη"
 msgid "Edit smart playlist..."
 msgstr "Τροποποίηση έξυπνης λίστας αναπαραγωγής"
 
-#: ui/mainwindow.cpp:1301
+#: ui/mainwindow.cpp:1313
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "Τροποποίηση ετικέτας \"%1\"..."
@@ -1724,7 +1728,7 @@ msgstr "Ισοδύναμο με --log-levels *:3"
 
 #: internet/groovesharkservice.cpp:985
 #: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:465
-#: ui/mainwindow.cpp:1736 ui/mainwindow.cpp:1857
+#: ui/mainwindow.cpp:1748 ui/mainwindow.cpp:1869
 msgid "Error"
 msgstr "Σφάλμα"
 
@@ -1905,19 +1909,19 @@ msgstr "Επέκταση αρχείου"
 msgid "File formats"
 msgstr "Μορφή αρχείων"
 
-#: playlist/playlist.cpp:1146 ../bin/src/ui_edittagdialog.h:650
+#: playlist/playlist.cpp:1154 ../bin/src/ui_edittagdialog.h:650
 msgid "File name"
 msgstr "Όνομα αρχείου"
 
-#: playlist/playlist.cpp:1147
+#: playlist/playlist.cpp:1155
 msgid "File name (without path)"
 msgstr "Όνομα αρχείου (χωρίς διαδρομή)"
 
-#: playlist/playlist.cpp:1148 ../bin/src/ui_edittagdialog.h:644
+#: playlist/playlist.cpp:1156 ../bin/src/ui_edittagdialog.h:644
 msgid "File size"
 msgstr "Μέγεθος αρχείου"
 
-#: playlist/playlist.cpp:1149 ../bin/src/ui_groupbydialog.h:133
+#: playlist/playlist.cpp:1157 ../bin/src/ui_groupbydialog.h:133
 #: ../bin/src/ui_groupbydialog.h:146 ../bin/src/ui_groupbydialog.h:159
 #: ../bin/src/ui_edittagdialog.h:646
 msgid "File type"
@@ -1927,7 +1931,7 @@ msgstr "Τύπος αρχείου"
 msgid "Filename"
 msgstr "Όνομα αρχείου"
 
-#: ui/mainwindow.cpp:222
+#: ui/mainwindow.cpp:227
 msgid "Files"
 msgstr "Αρχεία"
 
@@ -2027,6 +2031,10 @@ msgstr "Πλαίσια ανά απομονωτή (buffer)"
 msgid "Friends"
 msgstr "Φίλοι"
 
+#: ../bin/src/ui_appearancesettingspage.h:251
+msgid "Frozen"
+msgstr ""
+
 #: ui/equalizer.cpp:112
 msgid "Full Bass"
 msgstr "Πλήρως μπάσα"
@@ -2051,7 +2059,7 @@ msgstr "Γενικά"
 msgid "General settings"
 msgstr "Γενικές ρυθμίσεις"
 
-#: playlist/playlist.cpp:1133 ui/organisedialog.cpp:64
+#: playlist/playlist.cpp:1141 ui/organisedialog.cpp:64
 #: ../bin/src/ui_groupbydialog.h:134 ../bin/src/ui_groupbydialog.h:147
 #: ../bin/src/ui_groupbydialog.h:160 ../bin/src/ui_edittagdialog.h:660
 msgid "Genre"
@@ -2162,6 +2170,10 @@ msgstr "Η σελίδα HTML δεν περιέχει RSS"
 #: ../bin/src/ui_networkproxysettingspage.h:163
 msgid "HTTP proxy"
 msgstr "Διαμεσολαβητής HTTP"
+
+#: ../bin/src/ui_appearancesettingspage.h:252
+msgid "Happy"
+msgstr ""
 
 #: ../bin/src/ui_deviceproperties.h:371
 msgid "Hardware information"
@@ -2281,7 +2293,7 @@ msgstr "Εγκατεστημένο"
 msgid "Integrity check"
 msgstr "έλεγχος ακεραιότητας"
 
-#: ui/mainwindow.cpp:223
+#: ui/mainwindow.cpp:228
 msgid "Internet"
 msgstr "Διαδίκτυο"
 
@@ -2393,7 +2405,7 @@ msgstr "Μεγάλο εξώφυλλο άλμπουμ"
 msgid "Large sidebar"
 msgstr "Μεγάλη πλευρική μπάρα"
 
-#: library/library.cpp:69 playlist/playlist.cpp:1140
+#: library/library.cpp:69 playlist/playlist.cpp:1148
 #: ../bin/src/ui_edittagdialog.h:641
 msgid "Last played"
 msgstr "Τελευταία εκτέλεση"
@@ -2472,12 +2484,12 @@ msgstr "Λιγότερο αγαπημένα κομμάτια"
 msgid "Leave blank for the default.  Examples: \"/dev/dsp\", \"front\", etc."
 msgstr "Κενό για τα προεπιλεγμένα.  Π.χ. \"/dev/dsp\", \"front\", κ.τ.λ."
 
-#: playlist/playlist.cpp:1129 ui/organisedialog.cpp:66
+#: playlist/playlist.cpp:1137 ui/organisedialog.cpp:66
 #: ui/qtsystemtrayicon.cpp:255 ../bin/src/ui_edittagdialog.h:636
 msgid "Length"
 msgstr "Διάρκεια"
 
-#: ui/mainwindow.cpp:211 ui/mainwindow.cpp:221
+#: ui/mainwindow.cpp:216 ui/mainwindow.cpp:226
 msgid "Library"
 msgstr "Βιβλιοθήκη"
 
@@ -2485,7 +2497,7 @@ msgstr "Βιβλιοθήκη"
 msgid "Library advanced grouping"
 msgstr "Προχωρημένη ομαδοποίηση βιβλιοθήκης"
 
-#: ui/mainwindow.cpp:1974
+#: ui/mainwindow.cpp:1986
 msgid "Library rescan notice"
 msgstr "Ειδοποίηση σάρωσης βιβλιοθήκης"
 
@@ -2737,11 +2749,23 @@ msgstr "Έλεγχος της βιβλιοθήκης για αλλαγές"
 
 #: ../bin/src/ui_playbacksettingspage.h:293
 msgid "Mono playback"
-msgstr ""
+msgstr "Αναπαραγωγή Mono"
 
 #: smartplaylists/searchterm.cpp:303
 msgid "Months"
 msgstr "Μήνες"
+
+#: playlist/playlist.cpp:1163
+msgid "Mood"
+msgstr ""
+
+#: ../bin/src/ui_appearancesettingspage.h:246
+msgid "Moodbar style:"
+msgstr ""
+
+#: ../bin/src/ui_appearancesettingspage.h:244
+msgid "Moodbars"
+msgstr ""
 
 #: library/library.cpp:72
 msgid "Most played"
@@ -2760,7 +2784,7 @@ msgstr "Σημεία φόρτωσης (mount points)"
 msgid "Move down"
 msgstr "Μετακίνηση κάτω"
 
-#: ui/mainwindow.cpp:481 widgets/fileviewlist.cpp:41
+#: ui/mainwindow.cpp:486 widgets/fileviewlist.cpp:41
 msgid "Move to library..."
 msgstr "Μετακίνηση στην βιβλιοθήκη..."
 
@@ -2769,7 +2793,7 @@ msgstr "Μετακίνηση στην βιβλιοθήκη..."
 msgid "Move up"
 msgstr "Μετακίνηση πάνω"
 
-#: transcoder/transcodedialog.cpp:213 ui/mainwindow.cpp:1509
+#: transcoder/transcodedialog.cpp:213 ui/mainwindow.cpp:1521
 msgid "Music"
 msgstr "Μουσική"
 
@@ -2855,7 +2879,7 @@ msgstr "Ποτέ δεν έπαιξαν"
 msgid "Never start playing"
 msgstr "Ποτέ μην ξεκινά η αναπαραγωγή"
 
-#: ui/mainwindow.cpp:1349 ../bin/src/ui_mainwindow.h:697
+#: ui/mainwindow.cpp:1361 ../bin/src/ui_mainwindow.h:697
 msgid "New playlist"
 msgstr "Νέα λίστα"
 
@@ -2888,7 +2912,7 @@ msgstr "Επόμενο κομμάτι"
 msgid "No analyzer"
 msgstr "Χωρίς αναλυτή"
 
-#: ../bin/src/ui_appearancesettingspage.h:205
+#: ../bin/src/ui_appearancesettingspage.h:241
 msgid "No background image"
 msgstr "Χωρίς εικόνα φόντου"
 
@@ -2910,9 +2934,13 @@ msgstr "Όχι βραχαία μπλοκς"
 msgid "None"
 msgstr "Κανένα"
 
-#: library/libraryview.cpp:466 ui/mainwindow.cpp:1737 ui/mainwindow.cpp:1858
+#: library/libraryview.cpp:466 ui/mainwindow.cpp:1749 ui/mainwindow.cpp:1870
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Κανένα από τα επιλεγμένα τραγούδια δεν ήταν κατάλληλο για αντιγραφή σε μία συσκευή"
+
+#: ../bin/src/ui_appearancesettingspage.h:249
+msgid "Normal"
+msgstr ""
 
 #: ../bin/src/ui_transcoderoptionsaac.h:144
 msgid "Normal block type"
@@ -3038,7 +3066,7 @@ msgstr "Επιλογές..."
 msgid "Organise Files"
 msgstr "Οργάνωση Αρχείων"
 
-#: library/libraryview.cpp:250 ui/mainwindow.cpp:482
+#: library/libraryview.cpp:250 ui/mainwindow.cpp:487
 msgid "Organise files..."
 msgstr "Οργάνωση αρχείων..."
 
@@ -3094,7 +3122,7 @@ msgstr "Συνθηματικό"
 msgid "Password Protected"
 msgstr "Προστασία Κωδικού"
 
-#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:805 ui/mainwindow.cpp:1191
+#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:817 ui/mainwindow.cpp:1203
 #: ui/qtsystemtrayicon.cpp:178 wiimotedev/wiimotesettingspage.cpp:106
 msgid "Pause"
 msgstr "Παύση"
@@ -3111,8 +3139,8 @@ msgstr "Σταματημένο"
 msgid "Plain sidebar"
 msgstr "Απλή πλευρική μπάρα"
 
-#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:465 ui/mainwindow.cpp:773
-#: ui/mainwindow.cpp:792 ui/mainwindow.cpp:1194 ui/qtsystemtrayicon.cpp:166
+#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:470 ui/mainwindow.cpp:785
+#: ui/mainwindow.cpp:804 ui/mainwindow.cpp:1206 ui/qtsystemtrayicon.cpp:166
 #: ui/qtsystemtrayicon.cpp:192 ../bin/src/ui_mainwindow.h:647
 #: wiimotedev/wiimotesettingspage.cpp:101
 msgid "Play"
@@ -3126,7 +3154,7 @@ msgstr "Αναπαραγωγή καλλιτέχνη ή ετικέτας"
 msgid "Play artist radio..."
 msgstr "Αναπαραγωγή ραδιοφώνου καλλιτέχνη..."
 
-#: playlist/playlist.cpp:1138 ../bin/src/ui_edittagdialog.h:637
+#: playlist/playlist.cpp:1146 ../bin/src/ui_edittagdialog.h:637
 msgid "Play count"
 msgstr "Μετρητής εκτελέσεων"
 
@@ -3329,12 +3357,12 @@ msgstr "Ερώτηση συσκευής..."
 msgid "Queue Manager"
 msgstr "Διαχειριστής λίστας αναμονής"
 
-#: ui/mainwindow.cpp:1272
+#: ui/mainwindow.cpp:1284
 msgid "Queue selected tracks"
 msgstr "Τοποθέτηση στη λίστας αναμονής τα επιλεγμένα κομμάτια"
 
 #: globalsearch/globalsearchwidget.cpp:105 library/libraryview.cpp:238
-#: ui/mainwindow.cpp:1270
+#: ui/mainwindow.cpp:1282
 msgid "Queue track"
 msgstr "Τοποθέτηση στη λίστας αναμονής του κομματιού"
 
@@ -3378,7 +3406,7 @@ msgstr "Βαθμολογία τρέχοντος τραγουδιού με 4 ασ
 msgid "Rate the current song 5 stars"
 msgstr "Βαθμολογία τρέχοντος τραγουδιού με 5 αστέρια"
 
-#: playlist/playlist.cpp:1137 ../bin/src/ui_edittagdialog.h:645
+#: playlist/playlist.cpp:1145 ../bin/src/ui_edittagdialog.h:645
 msgid "Rating"
 msgstr "Βαθμολόγηση"
 
@@ -3559,13 +3587,17 @@ msgstr "Ασφαλής αφαίρεση συσκευής"
 msgid "Safely remove the device after copying"
 msgstr "Ασφαλής αφαίρεση συσκευής μετά την αντιγραφή"
 
-#: playlist/playlist.cpp:1145 ../bin/src/ui_edittagdialog.h:642
+#: playlist/playlist.cpp:1153 ../bin/src/ui_edittagdialog.h:642
 msgid "Sample rate"
 msgstr "Ρυθμός δειγματοληψίας"
 
 #: ui/organisedialog.cpp:68
 msgid "Samplerate"
 msgstr "Δειγματοληψία"
+
+#: ../bin/src/ui_appearancesettingspage.h:255
+msgid "Save .mood files in your music library"
+msgstr ""
 
 #: ui/albumcoverchoicecontroller.cpp:114
 msgid "Save album cover"
@@ -3603,7 +3635,7 @@ msgstr "Αποθήκευση κομματιών"
 msgid "Scalable sampling rate profile (SSR)"
 msgstr "Προφίλ κλιμακούμενου ρυθμού δειγματοληψίας (SSR)"
 
-#: playlist/playlist.cpp:1141 ../bin/src/ui_edittagdialog.h:643
+#: playlist/playlist.cpp:1149 ../bin/src/ui_edittagdialog.h:643
 msgid "Score"
 msgstr "Σκορ"
 
@@ -3715,11 +3747,11 @@ msgstr "Επιλογή όλων"
 msgid "Select None"
 msgstr "Επιλογή κανενός"
 
-#: ../bin/src/ui_appearancesettingspage.h:197
+#: ../bin/src/ui_appearancesettingspage.h:233
 msgid "Select background color:"
 msgstr "Επιλογή χρώματος φόντου:"
 
-#: ui/appearancesettingspage.cpp:192
+#: ui/appearancesettingspage.cpp:223
 msgid "Select background image"
 msgstr "Επιλογή εικόνας φόντου"
 
@@ -3727,7 +3759,7 @@ msgstr "Επιλογή εικόνας φόντου"
 msgid "Select best possible match"
 msgstr "Επιλέξτε το ποιο ταιριαστό"
 
-#: ../bin/src/ui_appearancesettingspage.h:195
+#: ../bin/src/ui_appearancesettingspage.h:231
 msgid "Select foreground color:"
 msgstr "Επιλογή χρώματος προσκήνιου:"
 
@@ -3747,7 +3779,7 @@ msgstr "Σειριακός αριθμός"
 msgid "Service offline"
 msgstr "Υπηρεσία εκτός σύνδεσης"
 
-#: ui/mainwindow.cpp:1299
+#: ui/mainwindow.cpp:1311
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "Δώσε %1 στο \"%2\"..."
@@ -3787,6 +3819,10 @@ msgstr "Εμφάνιση OSD"
 msgid "Show a glowing animation on the current track"
 msgstr "Εμφάνιση ενός φωτεινού σχεδίου στο τρέχον κομμάτι"
 
+#: ../bin/src/ui_appearancesettingspage.h:245
+msgid "Show a moodbar in the track progress bar"
+msgstr ""
+
 #: ../bin/src/ui_notificationssettingspage.h:406
 msgid "Show a native desktop notification"
 msgstr "Εμφάνισε εγγενείς ειδοποιήσεις"
@@ -3815,7 +3851,7 @@ msgstr "Εμφάνιση ενός βοηθητικού μηνύματος (tooti
 msgid "Show above status bar"
 msgstr "Εμφάνιση πάνω από την μπάρα κατάστασης"
 
-#: ui/mainwindow.cpp:438
+#: ui/mainwindow.cpp:443
 msgid "Show all songs"
 msgstr "Εμφάνιση όλων των τραγουδιών"
 
@@ -3835,7 +3871,7 @@ msgstr "Εμφάνιση διαχωριστών"
 msgid "Show fullsize..."
 msgstr "Εμφάνισε σε πλήρες μέγεθος..."
 
-#: library/libraryview.cpp:262 ui/mainwindow.cpp:485
+#: library/libraryview.cpp:262 ui/mainwindow.cpp:490
 #: widgets/fileviewlist.cpp:52
 msgid "Show in file browser..."
 msgstr "Εμφάνιση στον περιηγητή αρχείων..."
@@ -3844,11 +3880,11 @@ msgstr "Εμφάνιση στον περιηγητή αρχείων..."
 msgid "Show in various artists"
 msgstr "Εμφάνιση στους διάφορους καλλιτέχνες"
 
-#: ui/mainwindow.cpp:439
+#: ui/mainwindow.cpp:444
 msgid "Show only duplicates"
 msgstr "Εμφάνιση μόνο διπλότυπων"
 
-#: ui/mainwindow.cpp:440
+#: ui/mainwindow.cpp:445
 msgid "Show only untagged"
 msgstr "Εμφάνιση μόνο μη επισημασμένων"
 
@@ -3916,7 +3952,7 @@ msgstr "Ska"
 msgid "Skip backwards in playlist"
 msgstr "Παράλειψη προς τα πίσω στη λίστα"
 
-#: playlist/playlist.cpp:1139 ../bin/src/ui_edittagdialog.h:639
+#: playlist/playlist.cpp:1147 ../bin/src/ui_edittagdialog.h:639
 msgid "Skip count"
 msgstr "Μετρητής παραλήψεων"
 
@@ -3952,7 +3988,7 @@ msgstr "Απαλή Rock"
 msgid "Song Information"
 msgstr "Πληρ. τραγουδιού"
 
-#: ui/mainwindow.cpp:226
+#: ui/mainwindow.cpp:231
 msgid "Song info"
 msgstr "Πληρ. τραγουδιού"
 
@@ -3984,7 +4020,7 @@ msgstr "Ταξινόμηση τραγουδιών κατά"
 msgid "Sorting"
 msgstr "Ταξινόμηση"
 
-#: playlist/playlist.cpp:1154
+#: playlist/playlist.cpp:1162
 msgid "Source"
 msgstr "Πηγή"
 
@@ -4056,7 +4092,7 @@ msgstr "Σταμάτημα"
 msgid "Stop after"
 msgstr "Στοπ μετά"
 
-#: ui/mainwindow.cpp:467 ../bin/src/ui_mainwindow.h:655
+#: ui/mainwindow.cpp:472 ../bin/src/ui_mainwindow.h:655
 msgid "Stop after this track"
 msgstr "Σταμάτημα μετά από αυτό το κομμάτι"
 
@@ -4132,6 +4168,10 @@ msgstr "Συγχρονισμός λίστας του Spotify"
 msgid "Syncing Spotify starred tracks"
 msgstr "Συγχρονισμός κομματιών επισημασμένων με αστέρι του Spotify"
 
+#: ../bin/src/ui_appearancesettingspage.h:253
+msgid "System colors"
+msgstr ""
+
 #: widgets/fancytabwidget.cpp:654
 msgid "Tabs on top"
 msgstr "Καρτέλες στην κορυφή"
@@ -4169,7 +4209,7 @@ msgstr "Ευχαριστίες σε"
 msgid "The \"%1\" command could not be started."
 msgstr "Η εντολή \"%1\" δεν μπόρεσε να ξεκινήσει"
 
-#: ../bin/src/ui_appearancesettingspage.h:202
+#: ../bin/src/ui_appearancesettingspage.h:238
 msgid "The album cover of the currently playing song"
 msgstr "Το εξώφυλλο του άλμπουμ του τραγουδιού που παίζει"
 
@@ -4195,7 +4235,7 @@ msgstr "Η διεύθυνση που ζητήσατε δεν υπάρχει!"
 msgid "The site you requested is not an image!"
 msgstr "Η διεύθυνση που ζητήσατε δεν είναι εικόνα!"
 
-#: ui/mainwindow.cpp:1967
+#: ui/mainwindow.cpp:1979
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -4230,7 +4270,7 @@ msgid ""
 "deleted:"
 msgstr "Υπήρξαν προβλήματα κατά την διαγραφή κάποιων τραγουδιών. Τα ακόλουθα αρχεία δεν μπόρεσαν να διαγραφούν:"
 
-#: library/libraryview.cpp:472 ui/mainwindow.cpp:1785 widgets/fileview.cpp:187
+#: library/libraryview.cpp:472 ui/mainwindow.cpp:1797 widgets/fileview.cpp:187
 msgid ""
 "These files will be deleted from disk, are you sure you want to continue?"
 msgstr "Αυτά τα αρχεία θα διαγραφούν από τον δίσκο, θέλετε σίγουρα να συνεχίσετε;"
@@ -4317,7 +4357,7 @@ msgstr "Λήξη χρονικού ορίου"
 msgid "Timezone"
 msgstr "Ζώνη ώρας"
 
-#: playlist/playlist.cpp:1126 ui/organisedialog.cpp:54
+#: playlist/playlist.cpp:1134 ui/organisedialog.cpp:54
 #: ui/qtsystemtrayicon.cpp:248 ../bin/src/ui_about.h:142
 #: ../bin/src/ui_edittagdialog.h:652 ../bin/src/ui_trackselectiondialog.h:211
 msgid "Title"
@@ -4341,7 +4381,7 @@ msgstr "Εναλλαγή Όμορφου OSD"
 msgid "Toggle fullscreen"
 msgstr "Εναλλαγή πλήρης οθόνης"
 
-#: ui/mainwindow.cpp:1274
+#: ui/mainwindow.cpp:1286
 msgid "Toggle queue status"
 msgstr "Εναλλαγή της κατάστασης της λίστας αναμονής"
 
@@ -4365,7 +4405,7 @@ msgstr "Συνολικά bytes που μεταφέρθηκαν"
 msgid "Total network requests made"
 msgstr "Συνολικές αιτήσεις δικτύου που πραγματοποιήθηκαν"
 
-#: playlist/playlist.cpp:1130 ui/organisedialog.cpp:60
+#: playlist/playlist.cpp:1138 ui/organisedialog.cpp:60
 #: ../bin/src/ui_edittagdialog.h:653 ../bin/src/ui_trackselectiondialog.h:213
 msgid "Track"
 msgstr "Κομμάτι"
@@ -4503,7 +4543,7 @@ msgstr "Χρήση των μετα δεδομένων Replay Gain αν είνα�
 msgid "Use Wii Remote"
 msgstr "Χρήση χειριστηρίου Wii"
 
-#: ../bin/src/ui_appearancesettingspage.h:194
+#: ../bin/src/ui_appearancesettingspage.h:230
 msgid "Use a custom color set"
 msgstr "Χρήση τροποποιημένου χρώματος"
 
@@ -4535,7 +4575,7 @@ msgstr "Χρήση προσωρινής διαμόρφωση θορύβου"
 msgid "Use the system default"
 msgstr "Χρήση προκαθορισμένου του συστήματος"
 
-#: ../bin/src/ui_appearancesettingspage.h:193
+#: ../bin/src/ui_appearancesettingspage.h:229
 msgid "Use the system default color set"
 msgstr "Χρήση χρώματος του συστήματος"
 
@@ -4719,11 +4759,11 @@ msgid ""
 "well?"
 msgstr "Θα θέλατε να μετακινήσετε και τα άλλα τραγούδια σε αυτό το άλμπουμ στο Διάφοροι Καλλιτέχνες;"
 
-#: ui/mainwindow.cpp:1972
+#: ui/mainwindow.cpp:1984
 msgid "Would you like to run a full rescan right now?"
 msgstr "Θέλετε να εκτελέσετε μία πλήρη επανασάρωση αμέσως τώρα;"
 
-#: playlist/playlist.cpp:1132 ui/organisedialog.cpp:63
+#: playlist/playlist.cpp:1140 ui/organisedialog.cpp:63
 #: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:148
 #: ../bin/src/ui_groupbydialog.h:161 ../bin/src/ui_edittagdialog.h:657
 #: ../bin/src/ui_trackselectiondialog.h:212
@@ -4908,7 +4948,7 @@ msgstr "μεταξύ"
 msgid "biggest first"
 msgstr "το μεγαλύτερο πρώτα"
 
-#: playlist/playlistview.cpp:195 ui/edittagdialog.cpp:449
+#: playlist/playlistview.cpp:200 ui/edittagdialog.cpp:449
 msgid "bpm"
 msgstr "bpm"
 
@@ -4959,7 +4999,7 @@ msgstr "μεγαλύτερο από"
 msgid "in the last"
 msgstr "εντός των τελευταίων"
 
-#: playlist/playlistview.cpp:197 ui/edittagdialog.cpp:451
+#: playlist/playlistview.cpp:202 ui/edittagdialog.cpp:451
 #: internet/spotifysettingspage.cpp:59 internet/spotifysettingspage.cpp:60
 #: internet/spotifysettingspage.cpp:61
 msgid "kbps"

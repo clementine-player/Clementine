@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-05-20 21:44+0000\n"
+"PO-Revision-Date: 2012-05-28 00:18+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -361,7 +361,7 @@ msgstr ""
 msgid "Add directory..."
 msgstr ""
 
-#: ui/mainwindow.cpp:1507
+#: ui/mainwindow.cpp:1519
 msgid "Add file"
 msgstr ""
 
@@ -373,7 +373,7 @@ msgstr ""
 msgid "Add files to transcode"
 msgstr ""
 
-#: ui/mainwindow.cpp:1535
+#: ui/mainwindow.cpp:1547
 msgid "Add folder"
 msgstr ""
 
@@ -461,7 +461,7 @@ msgstr ""
 msgid "Add to Grooveshark playlists"
 msgstr ""
 
-#: ui/mainwindow.cpp:1332
+#: ui/mainwindow.cpp:1344
 msgid "Add to another playlist"
 msgstr ""
 
@@ -519,7 +519,7 @@ msgstr ""
 msgid "After copying..."
 msgstr ""
 
-#: playlist/playlist.cpp:1128 ui/organisedialog.cpp:55
+#: playlist/playlist.cpp:1136 ui/organisedialog.cpp:55
 #: ui/qtsystemtrayicon.cpp:252 ../bin/src/ui_groupbydialog.h:129
 #: ../bin/src/ui_groupbydialog.h:142 ../bin/src/ui_groupbydialog.h:155
 #: ../bin/src/ui_albumcoversearcher.h:111
@@ -532,13 +532,13 @@ msgstr "Альбом"
 msgid "Album (ideal loudness for all tracks)"
 msgstr ""
 
-#: playlist/playlist.cpp:1134 ui/organisedialog.cpp:58
+#: playlist/playlist.cpp:1142 ui/organisedialog.cpp:58
 #: ../bin/src/ui_groupbydialog.h:131 ../bin/src/ui_groupbydialog.h:144
 #: ../bin/src/ui_groupbydialog.h:157 ../bin/src/ui_edittagdialog.h:658
 msgid "Album artist"
 msgstr ""
 
-#: ../bin/src/ui_appearancesettingspage.h:204
+#: ../bin/src/ui_appearancesettingspage.h:240
 msgid "Album cover"
 msgstr ""
 
@@ -554,7 +554,7 @@ msgstr ""
 msgid "Albums without covers"
 msgstr ""
 
-#: ui/mainwindow.cpp:146
+#: ui/mainwindow.cpp:151
 msgid "All Files (*)"
 msgstr ""
 
@@ -640,8 +640,12 @@ msgstr ""
 msgid "And:"
 msgstr ""
 
+#: ../bin/src/ui_appearancesettingspage.h:250
+msgid "Angry"
+msgstr ""
+
 #: ../bin/src/ui_songinfosettingspage.h:180
-#: ../bin/src/ui_appearancesettingspage.h:191
+#: ../bin/src/ui_appearancesettingspage.h:227
 msgid "Appearance"
 msgstr ""
 
@@ -675,7 +679,7 @@ msgstr ""
 msgid "Are you sure you want to reset this song's statistics?"
 msgstr ""
 
-#: playlist/playlist.cpp:1127 ui/organisedialog.cpp:56
+#: playlist/playlist.cpp:1135 ui/organisedialog.cpp:56
 #: ui/qtsystemtrayicon.cpp:250 ../bin/src/ui_groupbydialog.h:130
 #: ../bin/src/ui_groupbydialog.h:143 ../bin/src/ui_groupbydialog.h:156
 #: ../bin/src/ui_albumcoversearcher.h:107
@@ -685,7 +689,7 @@ msgstr ""
 msgid "Artist"
 msgstr "Орындайтын"
 
-#: ui/mainwindow.cpp:227
+#: ui/mainwindow.cpp:232
 msgid "Artist info"
 msgstr ""
 
@@ -747,7 +751,7 @@ msgstr ""
 msgid "BBC Podcasts"
 msgstr ""
 
-#: playlist/playlist.cpp:1143 ui/organisedialog.cpp:62
+#: playlist/playlist.cpp:1151 ui/organisedialog.cpp:62
 #: ../bin/src/ui_edittagdialog.h:638
 msgid "BPM"
 msgstr "BPM"
@@ -760,7 +764,7 @@ msgstr ""
 msgid "Background color"
 msgstr ""
 
-#: ../bin/src/ui_appearancesettingspage.h:199
+#: ../bin/src/ui_appearancesettingspage.h:235
 msgid "Background image"
 msgstr ""
 
@@ -801,7 +805,7 @@ msgstr ""
 msgid "Biography from %1"
 msgstr ""
 
-#: playlist/playlist.cpp:1144 ../bin/src/ui_edittagdialog.h:640
+#: playlist/playlist.cpp:1152 ../bin/src/ui_edittagdialog.h:640
 msgid "Bit rate"
 msgstr ""
 
@@ -834,7 +838,7 @@ msgstr ""
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:146
 #: ../bin/src/ui_podcastsettingspage.h:242
-#: ../bin/src/ui_appearancesettingspage.h:207
+#: ../bin/src/ui_appearancesettingspage.h:243
 msgid "Browse..."
 msgstr ""
 
@@ -842,7 +846,7 @@ msgstr ""
 msgid "Buffer duration"
 msgstr ""
 
-#: engines/gstengine.cpp:853
+#: engines/gstengine.cpp:861
 msgid "Buffering"
 msgstr ""
 
@@ -890,7 +894,7 @@ msgstr ""
 msgid "Check for new episodes"
 msgstr ""
 
-#: ui/mainwindow.cpp:556
+#: ui/mainwindow.cpp:561
 msgid "Check for updates..."
 msgstr ""
 
@@ -1032,7 +1036,7 @@ msgstr "Клубтық"
 msgid "Color"
 msgstr ""
 
-#: ../bin/src/ui_appearancesettingspage.h:192
+#: ../bin/src/ui_appearancesettingspage.h:228
 msgid "Colors"
 msgstr ""
 
@@ -1044,7 +1048,7 @@ msgstr ""
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr ""
 
-#: playlist/playlist.cpp:1153 smartplaylists/searchterm.cpp:279
+#: playlist/playlist.cpp:1161 smartplaylists/searchterm.cpp:279
 #: ui/organisedialog.cpp:65 ../bin/src/ui_edittagdialog.h:661
 msgid "Comment"
 msgstr ""
@@ -1057,7 +1061,7 @@ msgstr ""
 msgid "Complete tags automatically..."
 msgstr ""
 
-#: playlist/playlist.cpp:1135 ui/organisedialog.cpp:59
+#: playlist/playlist.cpp:1143 ui/organisedialog.cpp:59
 #: ../bin/src/ui_groupbydialog.h:132 ../bin/src/ui_groupbydialog.h:145
 #: ../bin/src/ui_groupbydialog.h:158 ../bin/src/ui_edittagdialog.h:659
 msgid "Composer"
@@ -1083,7 +1087,7 @@ msgstr ""
 msgid "Configure Spotify..."
 msgstr ""
 
-#: ui/mainwindow.cpp:450
+#: ui/mainwindow.cpp:455
 msgid "Configure library..."
 msgstr ""
 
@@ -1124,12 +1128,12 @@ msgstr ""
 msgid "Copy to clipboard"
 msgstr ""
 
-#: library/libraryview.cpp:252 ui/mainwindow.cpp:483
+#: library/libraryview.cpp:252 ui/mainwindow.cpp:488
 #: widgets/fileviewlist.cpp:44
 msgid "Copy to device..."
 msgstr ""
 
-#: devices/deviceview.cpp:218 ui/mainwindow.cpp:480
+#: devices/deviceview.cpp:218 ui/mainwindow.cpp:485
 #: widgets/fileviewlist.cpp:39
 msgid "Copy to library..."
 msgstr ""
@@ -1292,7 +1296,7 @@ msgstr "Ctrl+Up"
 msgid "Custom"
 msgstr ""
 
-#: ../bin/src/ui_appearancesettingspage.h:206
+#: ../bin/src/ui_appearancesettingspage.h:242
 msgid "Custom image:"
 msgstr ""
 
@@ -1323,11 +1327,11 @@ msgid ""
 "recover your database"
 msgstr ""
 
-#: playlist/playlist.cpp:1151 ../bin/src/ui_edittagdialog.h:649
+#: playlist/playlist.cpp:1159 ../bin/src/ui_edittagdialog.h:649
 msgid "Date created"
 msgstr ""
 
-#: playlist/playlist.cpp:1150 ../bin/src/ui_edittagdialog.h:648
+#: playlist/playlist.cpp:1158 ../bin/src/ui_edittagdialog.h:648
 msgid "Date modified"
 msgstr ""
 
@@ -1347,7 +1351,7 @@ msgstr ""
 msgid "Decrease volume"
 msgstr ""
 
-#: ../bin/src/ui_appearancesettingspage.h:200
+#: ../bin/src/ui_appearancesettingspage.h:236
 msgid "Default background image"
 msgstr ""
 
@@ -1368,7 +1372,7 @@ msgid "Delete downloaded data"
 msgstr ""
 
 #: devices/deviceview.cpp:388 library/libraryview.cpp:471
-#: ui/mainwindow.cpp:1784 widgets/fileview.cpp:186
+#: ui/mainwindow.cpp:1796 widgets/fileview.cpp:186
 msgid "Delete files"
 msgstr ""
 
@@ -1376,7 +1380,7 @@ msgstr ""
 msgid "Delete from device..."
 msgstr ""
 
-#: library/libraryview.cpp:254 ui/mainwindow.cpp:484
+#: library/libraryview.cpp:254 ui/mainwindow.cpp:489
 #: widgets/fileviewlist.cpp:45
 msgid "Delete from disk..."
 msgstr ""
@@ -1401,11 +1405,11 @@ msgstr ""
 msgid "Deleting files"
 msgstr ""
 
-#: ui/mainwindow.cpp:1268
+#: ui/mainwindow.cpp:1280
 msgid "Dequeue selected tracks"
 msgstr ""
 
-#: ui/mainwindow.cpp:1266
+#: ui/mainwindow.cpp:1278
 msgid "Dequeue track"
 msgstr ""
 
@@ -1433,7 +1437,7 @@ msgstr ""
 msgid "Device properties..."
 msgstr ""
 
-#: ui/mainwindow.cpp:224
+#: ui/mainwindow.cpp:229
 msgid "Devices"
 msgstr ""
 
@@ -1470,7 +1474,7 @@ msgstr ""
 msgid "Disabled"
 msgstr ""
 
-#: playlist/playlist.cpp:1131 ui/organisedialog.cpp:61
+#: playlist/playlist.cpp:1139 ui/organisedialog.cpp:61
 #: ../bin/src/ui_edittagdialog.h:655
 msgid "Disc"
 msgstr "Диск"
@@ -1606,7 +1610,7 @@ msgstr ""
 msgid "Edit smart playlist..."
 msgstr ""
 
-#: ui/mainwindow.cpp:1301
+#: ui/mainwindow.cpp:1313
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr ""
@@ -1723,7 +1727,7 @@ msgstr ""
 
 #: internet/groovesharkservice.cpp:985
 #: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:465
-#: ui/mainwindow.cpp:1736 ui/mainwindow.cpp:1857
+#: ui/mainwindow.cpp:1748 ui/mainwindow.cpp:1869
 msgid "Error"
 msgstr ""
 
@@ -1904,19 +1908,19 @@ msgstr ""
 msgid "File formats"
 msgstr ""
 
-#: playlist/playlist.cpp:1146 ../bin/src/ui_edittagdialog.h:650
+#: playlist/playlist.cpp:1154 ../bin/src/ui_edittagdialog.h:650
 msgid "File name"
 msgstr "Файл аты"
 
-#: playlist/playlist.cpp:1147
+#: playlist/playlist.cpp:1155
 msgid "File name (without path)"
 msgstr ""
 
-#: playlist/playlist.cpp:1148 ../bin/src/ui_edittagdialog.h:644
+#: playlist/playlist.cpp:1156 ../bin/src/ui_edittagdialog.h:644
 msgid "File size"
 msgstr "Файл өлшемі"
 
-#: playlist/playlist.cpp:1149 ../bin/src/ui_groupbydialog.h:133
+#: playlist/playlist.cpp:1157 ../bin/src/ui_groupbydialog.h:133
 #: ../bin/src/ui_groupbydialog.h:146 ../bin/src/ui_groupbydialog.h:159
 #: ../bin/src/ui_edittagdialog.h:646
 msgid "File type"
@@ -1926,7 +1930,7 @@ msgstr ""
 msgid "Filename"
 msgstr ""
 
-#: ui/mainwindow.cpp:222
+#: ui/mainwindow.cpp:227
 msgid "Files"
 msgstr ""
 
@@ -2026,6 +2030,10 @@ msgstr ""
 msgid "Friends"
 msgstr "Достар"
 
+#: ../bin/src/ui_appearancesettingspage.h:251
+msgid "Frozen"
+msgstr ""
+
 #: ui/equalizer.cpp:112
 msgid "Full Bass"
 msgstr ""
@@ -2050,7 +2058,7 @@ msgstr ""
 msgid "General settings"
 msgstr ""
 
-#: playlist/playlist.cpp:1133 ui/organisedialog.cpp:64
+#: playlist/playlist.cpp:1141 ui/organisedialog.cpp:64
 #: ../bin/src/ui_groupbydialog.h:134 ../bin/src/ui_groupbydialog.h:147
 #: ../bin/src/ui_groupbydialog.h:160 ../bin/src/ui_edittagdialog.h:660
 msgid "Genre"
@@ -2160,6 +2168,10 @@ msgstr ""
 
 #: ../bin/src/ui_networkproxysettingspage.h:163
 msgid "HTTP proxy"
+msgstr ""
+
+#: ../bin/src/ui_appearancesettingspage.h:252
+msgid "Happy"
 msgstr ""
 
 #: ../bin/src/ui_deviceproperties.h:371
@@ -2280,7 +2292,7 @@ msgstr ""
 msgid "Integrity check"
 msgstr ""
 
-#: ui/mainwindow.cpp:223
+#: ui/mainwindow.cpp:228
 msgid "Internet"
 msgstr ""
 
@@ -2392,7 +2404,7 @@ msgstr ""
 msgid "Large sidebar"
 msgstr ""
 
-#: library/library.cpp:69 playlist/playlist.cpp:1140
+#: library/library.cpp:69 playlist/playlist.cpp:1148
 #: ../bin/src/ui_edittagdialog.h:641
 msgid "Last played"
 msgstr ""
@@ -2471,12 +2483,12 @@ msgstr ""
 msgid "Leave blank for the default.  Examples: \"/dev/dsp\", \"front\", etc."
 msgstr ""
 
-#: playlist/playlist.cpp:1129 ui/organisedialog.cpp:66
+#: playlist/playlist.cpp:1137 ui/organisedialog.cpp:66
 #: ui/qtsystemtrayicon.cpp:255 ../bin/src/ui_edittagdialog.h:636
 msgid "Length"
 msgstr "Ұзындығы"
 
-#: ui/mainwindow.cpp:211 ui/mainwindow.cpp:221
+#: ui/mainwindow.cpp:216 ui/mainwindow.cpp:226
 msgid "Library"
 msgstr ""
 
@@ -2484,7 +2496,7 @@ msgstr ""
 msgid "Library advanced grouping"
 msgstr ""
 
-#: ui/mainwindow.cpp:1974
+#: ui/mainwindow.cpp:1986
 msgid "Library rescan notice"
 msgstr ""
 
@@ -2742,6 +2754,18 @@ msgstr ""
 msgid "Months"
 msgstr ""
 
+#: playlist/playlist.cpp:1163
+msgid "Mood"
+msgstr ""
+
+#: ../bin/src/ui_appearancesettingspage.h:246
+msgid "Moodbar style:"
+msgstr ""
+
+#: ../bin/src/ui_appearancesettingspage.h:244
+msgid "Moodbars"
+msgstr ""
+
 #: library/library.cpp:72
 msgid "Most played"
 msgstr ""
@@ -2759,7 +2783,7 @@ msgstr ""
 msgid "Move down"
 msgstr ""
 
-#: ui/mainwindow.cpp:481 widgets/fileviewlist.cpp:41
+#: ui/mainwindow.cpp:486 widgets/fileviewlist.cpp:41
 msgid "Move to library..."
 msgstr ""
 
@@ -2768,7 +2792,7 @@ msgstr ""
 msgid "Move up"
 msgstr ""
 
-#: transcoder/transcodedialog.cpp:213 ui/mainwindow.cpp:1509
+#: transcoder/transcodedialog.cpp:213 ui/mainwindow.cpp:1521
 msgid "Music"
 msgstr ""
 
@@ -2854,7 +2878,7 @@ msgstr ""
 msgid "Never start playing"
 msgstr ""
 
-#: ui/mainwindow.cpp:1349 ../bin/src/ui_mainwindow.h:697
+#: ui/mainwindow.cpp:1361 ../bin/src/ui_mainwindow.h:697
 msgid "New playlist"
 msgstr ""
 
@@ -2887,7 +2911,7 @@ msgstr ""
 msgid "No analyzer"
 msgstr ""
 
-#: ../bin/src/ui_appearancesettingspage.h:205
+#: ../bin/src/ui_appearancesettingspage.h:241
 msgid "No background image"
 msgstr ""
 
@@ -2909,8 +2933,12 @@ msgstr ""
 msgid "None"
 msgstr ""
 
-#: library/libraryview.cpp:466 ui/mainwindow.cpp:1737 ui/mainwindow.cpp:1858
+#: library/libraryview.cpp:466 ui/mainwindow.cpp:1749 ui/mainwindow.cpp:1870
 msgid "None of the selected songs were suitable for copying to a device"
+msgstr ""
+
+#: ../bin/src/ui_appearancesettingspage.h:249
+msgid "Normal"
 msgstr ""
 
 #: ../bin/src/ui_transcoderoptionsaac.h:144
@@ -3037,7 +3065,7 @@ msgstr ""
 msgid "Organise Files"
 msgstr ""
 
-#: library/libraryview.cpp:250 ui/mainwindow.cpp:482
+#: library/libraryview.cpp:250 ui/mainwindow.cpp:487
 msgid "Organise files..."
 msgstr ""
 
@@ -3093,7 +3121,7 @@ msgstr ""
 msgid "Password Protected"
 msgstr ""
 
-#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:805 ui/mainwindow.cpp:1191
+#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:817 ui/mainwindow.cpp:1203
 #: ui/qtsystemtrayicon.cpp:178 wiimotedev/wiimotesettingspage.cpp:106
 msgid "Pause"
 msgstr "Аялдату"
@@ -3110,8 +3138,8 @@ msgstr "Аялдатылған"
 msgid "Plain sidebar"
 msgstr ""
 
-#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:465 ui/mainwindow.cpp:773
-#: ui/mainwindow.cpp:792 ui/mainwindow.cpp:1194 ui/qtsystemtrayicon.cpp:166
+#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:470 ui/mainwindow.cpp:785
+#: ui/mainwindow.cpp:804 ui/mainwindow.cpp:1206 ui/qtsystemtrayicon.cpp:166
 #: ui/qtsystemtrayicon.cpp:192 ../bin/src/ui_mainwindow.h:647
 #: wiimotedev/wiimotesettingspage.cpp:101
 msgid "Play"
@@ -3125,7 +3153,7 @@ msgstr ""
 msgid "Play artist radio..."
 msgstr ""
 
-#: playlist/playlist.cpp:1138 ../bin/src/ui_edittagdialog.h:637
+#: playlist/playlist.cpp:1146 ../bin/src/ui_edittagdialog.h:637
 msgid "Play count"
 msgstr ""
 
@@ -3328,12 +3356,12 @@ msgstr ""
 msgid "Queue Manager"
 msgstr ""
 
-#: ui/mainwindow.cpp:1272
+#: ui/mainwindow.cpp:1284
 msgid "Queue selected tracks"
 msgstr ""
 
 #: globalsearch/globalsearchwidget.cpp:105 library/libraryview.cpp:238
-#: ui/mainwindow.cpp:1270
+#: ui/mainwindow.cpp:1282
 msgid "Queue track"
 msgstr ""
 
@@ -3377,7 +3405,7 @@ msgstr ""
 msgid "Rate the current song 5 stars"
 msgstr ""
 
-#: playlist/playlist.cpp:1137 ../bin/src/ui_edittagdialog.h:645
+#: playlist/playlist.cpp:1145 ../bin/src/ui_edittagdialog.h:645
 msgid "Rating"
 msgstr ""
 
@@ -3558,12 +3586,16 @@ msgstr ""
 msgid "Safely remove the device after copying"
 msgstr ""
 
-#: playlist/playlist.cpp:1145 ../bin/src/ui_edittagdialog.h:642
+#: playlist/playlist.cpp:1153 ../bin/src/ui_edittagdialog.h:642
 msgid "Sample rate"
 msgstr ""
 
 #: ui/organisedialog.cpp:68
 msgid "Samplerate"
+msgstr ""
+
+#: ../bin/src/ui_appearancesettingspage.h:255
+msgid "Save .mood files in your music library"
 msgstr ""
 
 #: ui/albumcoverchoicecontroller.cpp:114
@@ -3602,7 +3634,7 @@ msgstr ""
 msgid "Scalable sampling rate profile (SSR)"
 msgstr ""
 
-#: playlist/playlist.cpp:1141 ../bin/src/ui_edittagdialog.h:643
+#: playlist/playlist.cpp:1149 ../bin/src/ui_edittagdialog.h:643
 msgid "Score"
 msgstr ""
 
@@ -3714,11 +3746,11 @@ msgstr ""
 msgid "Select None"
 msgstr ""
 
-#: ../bin/src/ui_appearancesettingspage.h:197
+#: ../bin/src/ui_appearancesettingspage.h:233
 msgid "Select background color:"
 msgstr ""
 
-#: ui/appearancesettingspage.cpp:192
+#: ui/appearancesettingspage.cpp:223
 msgid "Select background image"
 msgstr ""
 
@@ -3726,7 +3758,7 @@ msgstr ""
 msgid "Select best possible match"
 msgstr ""
 
-#: ../bin/src/ui_appearancesettingspage.h:195
+#: ../bin/src/ui_appearancesettingspage.h:231
 msgid "Select foreground color:"
 msgstr ""
 
@@ -3746,7 +3778,7 @@ msgstr ""
 msgid "Service offline"
 msgstr ""
 
-#: ui/mainwindow.cpp:1299
+#: ui/mainwindow.cpp:1311
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr ""
@@ -3786,6 +3818,10 @@ msgstr ""
 msgid "Show a glowing animation on the current track"
 msgstr ""
 
+#: ../bin/src/ui_appearancesettingspage.h:245
+msgid "Show a moodbar in the track progress bar"
+msgstr ""
+
 #: ../bin/src/ui_notificationssettingspage.h:406
 msgid "Show a native desktop notification"
 msgstr ""
@@ -3814,7 +3850,7 @@ msgstr ""
 msgid "Show above status bar"
 msgstr ""
 
-#: ui/mainwindow.cpp:438
+#: ui/mainwindow.cpp:443
 msgid "Show all songs"
 msgstr ""
 
@@ -3834,7 +3870,7 @@ msgstr ""
 msgid "Show fullsize..."
 msgstr ""
 
-#: library/libraryview.cpp:262 ui/mainwindow.cpp:485
+#: library/libraryview.cpp:262 ui/mainwindow.cpp:490
 #: widgets/fileviewlist.cpp:52
 msgid "Show in file browser..."
 msgstr ""
@@ -3843,11 +3879,11 @@ msgstr ""
 msgid "Show in various artists"
 msgstr ""
 
-#: ui/mainwindow.cpp:439
+#: ui/mainwindow.cpp:444
 msgid "Show only duplicates"
 msgstr ""
 
-#: ui/mainwindow.cpp:440
+#: ui/mainwindow.cpp:445
 msgid "Show only untagged"
 msgstr ""
 
@@ -3915,7 +3951,7 @@ msgstr "Ска"
 msgid "Skip backwards in playlist"
 msgstr ""
 
-#: playlist/playlist.cpp:1139 ../bin/src/ui_edittagdialog.h:639
+#: playlist/playlist.cpp:1147 ../bin/src/ui_edittagdialog.h:639
 msgid "Skip count"
 msgstr ""
 
@@ -3951,7 +3987,7 @@ msgstr ""
 msgid "Song Information"
 msgstr ""
 
-#: ui/mainwindow.cpp:226
+#: ui/mainwindow.cpp:231
 msgid "Song info"
 msgstr ""
 
@@ -3983,7 +4019,7 @@ msgstr ""
 msgid "Sorting"
 msgstr ""
 
-#: playlist/playlist.cpp:1154
+#: playlist/playlist.cpp:1162
 msgid "Source"
 msgstr ""
 
@@ -4055,7 +4091,7 @@ msgstr "Тоқтату"
 msgid "Stop after"
 msgstr ""
 
-#: ui/mainwindow.cpp:467 ../bin/src/ui_mainwindow.h:655
+#: ui/mainwindow.cpp:472 ../bin/src/ui_mainwindow.h:655
 msgid "Stop after this track"
 msgstr ""
 
@@ -4131,6 +4167,10 @@ msgstr ""
 msgid "Syncing Spotify starred tracks"
 msgstr ""
 
+#: ../bin/src/ui_appearancesettingspage.h:253
+msgid "System colors"
+msgstr ""
+
 #: widgets/fancytabwidget.cpp:654
 msgid "Tabs on top"
 msgstr ""
@@ -4168,7 +4208,7 @@ msgstr ""
 msgid "The \"%1\" command could not be started."
 msgstr ""
 
-#: ../bin/src/ui_appearancesettingspage.h:202
+#: ../bin/src/ui_appearancesettingspage.h:238
 msgid "The album cover of the currently playing song"
 msgstr ""
 
@@ -4194,7 +4234,7 @@ msgstr ""
 msgid "The site you requested is not an image!"
 msgstr ""
 
-#: ui/mainwindow.cpp:1967
+#: ui/mainwindow.cpp:1979
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -4229,7 +4269,7 @@ msgid ""
 "deleted:"
 msgstr ""
 
-#: library/libraryview.cpp:472 ui/mainwindow.cpp:1785 widgets/fileview.cpp:187
+#: library/libraryview.cpp:472 ui/mainwindow.cpp:1797 widgets/fileview.cpp:187
 msgid ""
 "These files will be deleted from disk, are you sure you want to continue?"
 msgstr ""
@@ -4316,7 +4356,7 @@ msgstr ""
 msgid "Timezone"
 msgstr ""
 
-#: playlist/playlist.cpp:1126 ui/organisedialog.cpp:54
+#: playlist/playlist.cpp:1134 ui/organisedialog.cpp:54
 #: ui/qtsystemtrayicon.cpp:248 ../bin/src/ui_about.h:142
 #: ../bin/src/ui_edittagdialog.h:652 ../bin/src/ui_trackselectiondialog.h:211
 msgid "Title"
@@ -4340,7 +4380,7 @@ msgstr ""
 msgid "Toggle fullscreen"
 msgstr ""
 
-#: ui/mainwindow.cpp:1274
+#: ui/mainwindow.cpp:1286
 msgid "Toggle queue status"
 msgstr ""
 
@@ -4364,7 +4404,7 @@ msgstr ""
 msgid "Total network requests made"
 msgstr ""
 
-#: playlist/playlist.cpp:1130 ui/organisedialog.cpp:60
+#: playlist/playlist.cpp:1138 ui/organisedialog.cpp:60
 #: ../bin/src/ui_edittagdialog.h:653 ../bin/src/ui_trackselectiondialog.h:213
 msgid "Track"
 msgstr "Трек"
@@ -4502,7 +4542,7 @@ msgstr ""
 msgid "Use Wii Remote"
 msgstr ""
 
-#: ../bin/src/ui_appearancesettingspage.h:194
+#: ../bin/src/ui_appearancesettingspage.h:230
 msgid "Use a custom color set"
 msgstr ""
 
@@ -4534,7 +4574,7 @@ msgstr ""
 msgid "Use the system default"
 msgstr ""
 
-#: ../bin/src/ui_appearancesettingspage.h:193
+#: ../bin/src/ui_appearancesettingspage.h:229
 msgid "Use the system default color set"
 msgstr ""
 
@@ -4718,11 +4758,11 @@ msgid ""
 "well?"
 msgstr ""
 
-#: ui/mainwindow.cpp:1972
+#: ui/mainwindow.cpp:1984
 msgid "Would you like to run a full rescan right now?"
 msgstr ""
 
-#: playlist/playlist.cpp:1132 ui/organisedialog.cpp:63
+#: playlist/playlist.cpp:1140 ui/organisedialog.cpp:63
 #: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:148
 #: ../bin/src/ui_groupbydialog.h:161 ../bin/src/ui_edittagdialog.h:657
 #: ../bin/src/ui_trackselectiondialog.h:212
@@ -4907,7 +4947,7 @@ msgstr ""
 msgid "biggest first"
 msgstr ""
 
-#: playlist/playlistview.cpp:195 ui/edittagdialog.cpp:449
+#: playlist/playlistview.cpp:200 ui/edittagdialog.cpp:449
 msgid "bpm"
 msgstr ""
 
@@ -4958,7 +4998,7 @@ msgstr ""
 msgid "in the last"
 msgstr ""
 
-#: playlist/playlistview.cpp:197 ui/edittagdialog.cpp:451
+#: playlist/playlistview.cpp:202 ui/edittagdialog.cpp:451
 #: internet/spotifysettingspage.cpp:59 internet/spotifysettingspage.cpp:60
 #: internet/spotifysettingspage.cpp:61
 msgid "kbps"
