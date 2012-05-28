@@ -24,7 +24,7 @@
 
 bool MoodbarPipeline::sIsAvailable = false;
 
-MoodbarPipeline::MoodbarPipeline(const QString& local_filename)
+MoodbarPipeline::MoodbarPipeline(const QUrl& local_filename)
   : QObject(NULL),
     local_filename_(local_filename),
     pipeline_(NULL),
@@ -93,9 +93,8 @@ void MoodbarPipeline::Start() {
   // Join them together
   gst_element_link_many(convert_element_, fftwspectrum, moodbar, appsink, NULL);
 
-  QUrl local_url = QUrl::fromLocalFile(local_filename_);
   // Set properties
-  g_object_set(decodebin, "uri", local_url.toEncoded().constData(), NULL);
+  g_object_set(decodebin, "uri", local_filename_.toEncoded().constData(), NULL);
   g_object_set(fftwspectrum, "def-size", 2048,
                              "def-step", 1024,
                              "hiquality", true, NULL);

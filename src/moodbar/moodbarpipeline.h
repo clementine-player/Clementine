@@ -19,6 +19,7 @@
 #define MOODBARPIPELINE_H
 
 #include <QObject>
+#include <QUrl>
 
 #include <gst/gst.h>
 #include <gst/app/gstappsink.h>
@@ -28,7 +29,7 @@ class MoodbarPipeline : public QObject {
   Q_OBJECT
 
 public:
-  MoodbarPipeline(const QString& local_filename);
+  MoodbarPipeline(const QUrl& local_filename);
   ~MoodbarPipeline();
 
   static bool IsAvailable();
@@ -57,7 +58,7 @@ private:
 private:
   static bool sIsAvailable;
 
-  QString local_filename_;
+  QUrl local_filename_;
   GstElement* pipeline_;
   GstElement* convert_element_;
 

@@ -81,10 +81,10 @@ MoodbarLoader::Result MoodbarLoader::Load(
     *async_pipeline = requests_[url];
     return WillLoadAsync;
   }
-  
+
   // Check if a mood file exists for this file already
   const QString filename(url.toLocalFile());
-  
+
   foreach (const QString& possible_mood_file, MoodFilenames(filename)) {
     QFile f(possible_mood_file);
     if (f.open(QIODevice::ReadOnly)) {
@@ -93,7 +93,7 @@ MoodbarLoader::Result MoodbarLoader::Load(
       return Loaded;
     }
   }
-  
+
   // Maybe it exists in the cache?
   boost::scoped_ptr<QIODevice> cache_device(cache_->data(url));
   if (cache_device) {
@@ -106,9 +106,9 @@ MoodbarLoader::Result MoodbarLoader::Load(
 
   if (!thread_->isRunning())
     thread_->start();
-  
+
   // There was no existing file, analyze the audio file and create one.
-  MoodbarPipeline* pipeline = new MoodbarPipeline(filename);
+  MoodbarPipeline* pipeline = new MoodbarPipeline(url);
   pipeline->moveToThread(thread_);
   NewClosure(pipeline, SIGNAL(Finished(bool)),
              this, SLOT(RequestFinished(MoodbarPipeline*,QUrl)),
