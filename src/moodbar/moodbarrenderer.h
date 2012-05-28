@@ -35,10 +35,14 @@ public:
     Style_Angry,
     Style_Frozen,
     Style_Happy,
-    Style_SystemPalette
+    Style_SystemPalette,
+
+    StyleCount
   };
 
   static const int kNumHues;
+
+  static QString StyleName(MoodbarStyle style);
 
   static ColorVector Colors(const QByteArray& data, MoodbarStyle style,
                             const QPalette& palette);

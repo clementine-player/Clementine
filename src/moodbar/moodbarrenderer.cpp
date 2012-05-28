@@ -147,3 +147,15 @@ QImage MoodbarRenderer::RenderToImage(const ColorVector& colors, const QSize& si
   p.end();
   return image;
 }
+
+QString MoodbarRenderer::StyleName(MoodbarStyle style) {
+  switch (style) {
+    case Style_Normal:        return QObject::tr("Normal");
+    case Style_Angry:         return QObject::tr("Angry");
+    case Style_Frozen:        return QObject::tr("Frozen");
+    case Style_Happy:         return QObject::tr("Happy");
+    case Style_SystemPalette: return QObject::tr("System colors");
+
+    default:                  return QString();
+  }
+}

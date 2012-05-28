@@ -19,7 +19,9 @@
 #include "core/application.h"
 #include "core/logging.h"
 
+#include <QContextMenuEvent>
 #include <QEvent>
+#include <QMenu>
 #include <QPainter>
 #include <QSettings>
 #include <QSlider>
@@ -34,13 +36,17 @@ const int MoodbarProxyStyle::kArrowHeight = 13;
 
 MoodbarProxyStyle::MoodbarProxyStyle(Application* app, QSlider* slider)
   : QProxyStyle(slider->style()),
+    app_(app),
     slider_(slider),
     enabled_(true),
     moodbar_style_(MoodbarRenderer::Style_Normal),
     state_(MoodbarOff),
     fade_timeline_(new QTimeLine(1000, this)),
     moodbar_colors_dirty_(true),
-    moodbar_pixmap_dirty_(true)
+    moodbar_pixmap_dirty_(true),
+    context_menu_(NULL),
+    show_moodbar_action_(NULL),
+    style_action_group_(NULL)
 {
   slider->setStyle(this);
   slider->installEventFilter(this);
@@ -80,11 +86,21 @@ void MoodbarProxyStyle::SetMoodbarData(const QByteArray& data) {
 
 void MoodbarProxyStyle::SetMoodbarEnabled(bool enabled) {
   enabled_ = enabled;
-  NextState();
+
+  // Save the enabled setting.
+  QSettings s;
+  s.beginGroup("Moodbar");
+  s.setValue("show", enabled);
+
+  app_->ReloadSettings();
 }
 
 void MoodbarProxyStyle::NextState() {
   const bool visible = enabled_ && !data_.isEmpty();
+
+  if (show_moodbar_action_) {
+    show_moodbar_action_->setChecked(enabled_);
+  }
 
   if ((visible  && (state_ == MoodbarOn  || state_ == FadingToOn)) ||
       (!visible && (state_ == MoodbarOff || state_ == FadingToOff))) {
@@ -117,9 +133,20 @@ void MoodbarProxyStyle::FaderValueChanged(qreal value) {
 }
 
 bool MoodbarProxyStyle::eventFilter(QObject* object, QEvent* event) {
-  if (object == slider_ && event->type() == QEvent::Resize) {
-    // The widget was resized, we've got to render a new pixmap.
-    moodbar_pixmap_dirty_ = true;
+  if (object == slider_) {
+    switch (event->type()) {
+    case QEvent::Resize:
+      // The widget was resized, we've got to render a new pixmap.
+      moodbar_pixmap_dirty_ = true;
+      break;
+
+    case QEvent::ContextMenu:
+      ShowContextMenu(static_cast<QContextMenuEvent*>(event)->globalPos());
+      return true;
+
+    default:
+      break;
+    }
   }
 
   return QProxyStyle::eventFilter(object, event);
@@ -301,4 +328,49 @@ QPixmap MoodbarProxyStyle::MoodbarPixmap(const ColorVector& colors,
   p.end();
 
   return ret;
+}
+
+void MoodbarProxyStyle::ShowContextMenu(const QPoint& pos) {
+  if (!context_menu_) {
+    context_menu_ = new QMenu(slider_);
+    show_moodbar_action_ = context_menu_->addAction(
+          tr("Show moodbar"), this, SLOT(SetMoodbarEnabled(bool)));
+
+    show_moodbar_action_->setCheckable(true);
+    show_moodbar_action_->setChecked(enabled_);
+
+    QMenu* styles_menu = context_menu_->addMenu(tr("Moodbar style"));
+    style_action_group_ = new QActionGroup(styles_menu);
+
+    for (int i=0 ; i<MoodbarRenderer::StyleCount ; ++i) {
+      const MoodbarRenderer::MoodbarStyle style =
+          MoodbarRenderer::MoodbarStyle(i);
+
+      QAction* action = style_action_group_->addAction(MoodbarRenderer::StyleName(style));
+      action->setCheckable(true);
+      action->setData(i);
+    }
+
+    styles_menu->addActions(style_action_group_->actions());
+
+    connect(styles_menu, SIGNAL(triggered(QAction*)), SLOT(ChangeStyle(QAction*)));
+  }
+
+  // Update the currently selected style
+  foreach (QAction* action, style_action_group_->actions()) {
+    if (MoodbarRenderer::MoodbarStyle(action->data().toInt()) == moodbar_style_) {
+      action->setChecked(true);
+      break;
+    }
+  }
+
+  context_menu_->popup(pos);
+}
+
+void MoodbarProxyStyle::ChangeStyle(QAction* action) {
+  QSettings s;
+  s.beginGroup("Moodbar");
+  s.setValue("style", action->data().toInt());
+
+  app_->ReloadSettings();
 }

@@ -24,6 +24,8 @@
 
 class Application;
 
+class QActionGroup;
+class QMenu;
 class QSlider;
 class QStyleOptionSlider;
 class QTimeLine;
@@ -70,6 +72,7 @@ private:
               QPainter* painter, const QWidget* widget);
   void EnsureMoodbarRendered();
   void DrawArrow(const QStyleOptionSlider* option, QPainter* painter) const;
+  void ShowContextMenu(const QPoint& pos);
 
   static QPixmap MoodbarPixmap(const ColorVector& colors,
                                const QSize& size, const QPalette& palette);
@@ -77,8 +80,10 @@ private:
 private slots:
   void ReloadSettings();
   void FaderValueChanged(qreal value);
+  void ChangeStyle(QAction* action);
 
 private:
+  Application* app_;
   QSlider* slider_;
 
   bool enabled_;
@@ -95,6 +100,10 @@ private:
   bool moodbar_pixmap_dirty_;
   ColorVector moodbar_colors_;
   QPixmap moodbar_pixmap_;
+
+  QMenu* context_menu_;
+  QAction* show_moodbar_action_;
+  QActionGroup* style_action_group_;
 };
 
 #endif // MOODBARPROXYSTYLE_H

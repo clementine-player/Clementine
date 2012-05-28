@@ -248,15 +248,17 @@ void AppearanceSettingsPage::InitMoodbarPreviews() {
   QByteArray data(file.readAll());
 
   // Render and set each preview
-  for (int i=0 ; i<ui_->moodbar_style->count() ; ++i) {
-    const ColorVector colors =
-        MoodbarRenderer::Colors(data, MoodbarRenderer::MoodbarStyle(i), palette());
+  for (int i=0 ; i<MoodbarRenderer::StyleCount ; ++i) {
+    const MoodbarRenderer::MoodbarStyle style =
+        MoodbarRenderer::MoodbarStyle(i);
+    const ColorVector colors = MoodbarRenderer::Colors(data, style, palette());
 
     QPixmap pixmap(preview_size);
     QPainter p(&pixmap);
     MoodbarRenderer::Render(colors, &p, pixmap.rect());
     p.end();
 
+    ui_->moodbar_style->addItem(MoodbarRenderer::StyleName(style));
     ui_->moodbar_style->setItemData(i, pixmap, Qt::DecorationRole);
   }
 #else
