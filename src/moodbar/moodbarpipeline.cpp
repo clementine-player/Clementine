@@ -20,9 +20,9 @@
 
 #include <QCoreApplication>
 #include <QThread>
+#include <QUrl>
 
 bool MoodbarPipeline::sIsAvailable = false;
-QMutex MoodbarPipeline::sFftwMutex;
 
 MoodbarPipeline::MoodbarPipeline(const QString& local_filename)
   : QObject(NULL),
@@ -44,22 +44,22 @@ bool MoodbarPipeline::IsAvailable() {
       return false;
     }
     gst_object_unref(factory);
-    
+
     factory = gst_element_factory_find("moodbar");
     if (!factory) {
       return false;
     }
     gst_object_unref(factory);
-    
+
     sIsAvailable = true;
   }
-  
+
   return sIsAvailable;
 }
 
 GstElement* MoodbarPipeline::CreateElement(const QString& factory_name) {
   GstElement* ret = gst_element_factory_make(factory_name.toAscii().constData(), NULL);
-  
+
   if (ret) {
     gst_bin_add(GST_BIN(pipeline_), ret);
   } else {
@@ -75,47 +75,44 @@ void MoodbarPipeline::Start() {
   if (pipeline_) {
     return;
   }
-  
+
   pipeline_ = gst_pipeline_new("moodbar-pipeline");
-  
-  GstElement* filesrc      = CreateElement("filesrc");
-  GstElement* decodebin    = CreateElement("decodebin");
+
+  GstElement* decodebin    = CreateElement("uridecodebin");
   convert_element_         = CreateElement("audioconvert");
   GstElement* fftwspectrum = CreateElement("fftwspectrum");
   GstElement* moodbar      = CreateElement("moodbar");
   GstElement* appsink      = CreateElement("appsink");
-  
-  if (!filesrc || !convert_element_ || !fftwspectrum || !moodbar || !appsink) {
+
+  if (!decodebin || !convert_element_ || !fftwspectrum || !moodbar || !appsink) {
     pipeline_ = NULL;
     emit Finished(false);
     return;
   }
 
-  QMutexLocker l(&sFftwMutex);
-  
   // Join them together
-  gst_element_link(filesrc, decodebin);
   gst_element_link_many(convert_element_, fftwspectrum, moodbar, appsink, NULL);
-  
+
+  QUrl local_url = QUrl::fromLocalFile(local_filename_);
   // Set properties
-  g_object_set(filesrc, "location", local_filename_.toUtf8().constData(), NULL);
+  g_object_set(decodebin, "uri", local_url.toEncoded().constData(), NULL);
   g_object_set(fftwspectrum, "def-size", 2048,
                              "def-step", 1024,
                              "hiquality", true, NULL);
   g_object_set(moodbar, "height", 1,
                         "max-width", 1000, NULL);
-  
+
   // Connect signals
-  g_signal_connect(decodebin, "new-decoded-pad", G_CALLBACK(NewPadCallback), this);
+  g_signal_connect(decodebin, "pad-added", G_CALLBACK(NewPadCallback), this);
   gst_bus_set_sync_handler(gst_pipeline_get_bus(GST_PIPELINE(pipeline_)), BusCallbackSync, this);
-  
+
   // Set appsink callbacks
   GstAppSinkCallbacks callbacks;
   memset(&callbacks, 0, sizeof(callbacks));
   callbacks.new_buffer = NewBufferCallback;
-  
+
   gst_app_sink_set_callbacks(reinterpret_cast<GstAppSink*>(appsink), &callbacks, this, NULL);
-  
+
   // Start playing
   gst_element_set_state(pipeline_, GST_STATE_PLAYING);
 }
@@ -133,7 +130,7 @@ void MoodbarPipeline::ReportError(GstMessage* msg) {
   qLog(Error) << "Error processing" << local_filename_ << ":" << message;
 }
 
-void MoodbarPipeline::NewPadCallback(GstElement*, GstPad* pad, gboolean, gpointer data) {
+void MoodbarPipeline::NewPadCallback(GstElement*, GstPad* pad, gpointer data) {
   MoodbarPipeline* self = reinterpret_cast<MoodbarPipeline*>(data);
   GstPad* const audiopad = gst_element_get_pad(self->convert_element_, "sink");
 

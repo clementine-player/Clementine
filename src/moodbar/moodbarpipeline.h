@@ -18,8 +18,6 @@
 #ifndef MOODBARPIPELINE_H
 #define MOODBARPIPELINE_H
 
-#include <QBuffer>
-#include <QMutex>
 #include <QObject>
 
 #include <gst/gst.h>
@@ -28,13 +26,13 @@
 // Creates moodbar data for a single local music file.
 class MoodbarPipeline : public QObject {
   Q_OBJECT
-  
+
 public:
   MoodbarPipeline(const QString& local_filename);
   ~MoodbarPipeline();
-  
+
   static bool IsAvailable();
-  
+
   bool success() const { return success_; }
   const QByteArray& data() const { return data_; }
 
@@ -43,27 +41,26 @@ public slots:
 
 signals:
   void Finished(bool success);
-  
+
 private:
   GstElement* CreateElement(const QString& factory_name);
-  
+
   void ReportError(GstMessage* message);
   void Stop(bool success);
   void Cleanup();
-  
-  static void NewPadCallback(GstElement*, GstPad* pad, gboolean, gpointer data);
+
+  static void NewPadCallback(GstElement*, GstPad* pad, gpointer data);
   static GstFlowReturn NewBufferCallback(GstAppSink* app_sink, gpointer self);
   static gboolean BusCallback(GstBus*, GstMessage* msg, gpointer data);
   static GstBusSyncReply BusCallbackSync(GstBus*, GstMessage* msg, gpointer data);
-  
+
 private:
   static bool sIsAvailable;
-  static QMutex sFftwMutex;
-  
+
   QString local_filename_;
   GstElement* pipeline_;
   GstElement* convert_element_;
-  
+
   bool success_;
   QByteArray data_;
 };
