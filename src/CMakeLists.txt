@@ -276,6 +276,7 @@ set(SOURCES
   songinfo/songinfosettingspage.cpp
   songinfo/songinfotextview.cpp
   songinfo/songinfoview.cpp
+  songinfo/songkickconcerts.cpp
   songinfo/songplaystats.cpp
   songinfo/ultimatelyricsprovider.cpp
   songinfo/ultimatelyricsreader.cpp
@@ -528,6 +529,7 @@ set(HEADERS
   songinfo/songinfosettingspage.h
   songinfo/songinfotextview.h
   songinfo/songinfoview.h
+  songinfo/songkickconcerts.h
   songinfo/songplaystats.h
   songinfo/ultimatelyricsprovider.h
   songinfo/ultimatelyricsreader.h
