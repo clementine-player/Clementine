@@ -20,6 +20,8 @@
 
 #include "songinfoprovider.h"
 
+#include "core/network.h"
+
 class QNetworkReply;
 
 class SongkickConcerts : public SongInfoProvider {
@@ -31,10 +33,12 @@ class SongkickConcerts : public SongInfoProvider {
 
  private slots:
   void ArtistSearchFinished(QNetworkReply* reply, int id);
-  void CalendarRequestFinished();
+  void CalendarRequestFinished(QNetworkReply* reply, int id);
 
  private:
   void FetchSongkickCalendar(const QString& artist_id, int id);
+
+  NetworkAccessManager network_;
 
   static const char* kSongkickArtistBucket;
   static const char* kSongkickArtistCalendarUrl;

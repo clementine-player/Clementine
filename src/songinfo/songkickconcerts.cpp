@@ -22,7 +22,9 @@
 
 const char* SongkickConcerts::kSongkickArtistBucket = "id:songkick";
 const char* SongkickConcerts::kSongkickArtistCalendarUrl =
-    "http://api.songkick.com/api/3.0/artists/%1/calendar.json?apikey=";
+    "http://api.songkick.com/api/3.0/artists/%1/calendar.json?"
+    "per_page=5&"
+    "apikey=8rgKfy1WU6IlJFfN";
 
 SongkickConcerts::SongkickConcerts() {
 
@@ -62,7 +64,13 @@ void SongkickConcerts::ArtistSearchFinished(QNetworkReply* reply, int id) {
       return;
     }
 
-    FetchSongkickCalendar(songkick_id, id);
+    QStringList split = songkick_id.split(':');
+    if (split.count() != 3) {
+      qLog(Error) << "Weird songkick id";
+      return;
+    }
+
+    FetchSongkickCalendar(split[2], id);
   } catch (Echonest::ParseError& e) {
     qLog(Error) << "Error parsing echonest reply:" << e.errorType() << e.what();
   }
@@ -70,9 +78,11 @@ void SongkickConcerts::ArtistSearchFinished(QNetworkReply* reply, int id) {
 
 void SongkickConcerts::FetchSongkickCalendar(const QString& artist_id, int id) {
   QUrl url(QString(kSongkickArtistCalendarUrl).arg(artist_id));
-  qLog(Debug) << "Would send request to:" << url;
+  qLog(Debug) << url;
+  QNetworkReply* reply = network_.get(QNetworkRequest(url));
+  NewClosure(reply, SIGNAL(finished()), this, SLOT(CalendarRequestFinished(QNetworkReply*, int)), reply, id);
 }
 
-void SongkickConcerts::CalendarRequestFinished() {
-
+void SongkickConcerts::CalendarRequestFinished(QNetworkReply* reply, int id) {
+  qLog(Debug) << reply->readAll();
 }
