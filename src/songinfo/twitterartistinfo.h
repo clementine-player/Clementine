@@ -39,6 +39,8 @@ class TwitterArtistInfo : public SongInfoProvider {
 
   NetworkAccessManager network_;
 
+  QString stylesheet_;
+
   static const char* kTwitterBucket;
   static const char* kTwitterTimelineUrl;
 };

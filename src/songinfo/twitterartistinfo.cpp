@@ -17,6 +17,7 @@
 
 #include "twitterartistinfo.h"
 
+#include <QFile>
 #include <QIcon>
 #include <QXmlStreamWriter>
 
@@ -34,6 +35,9 @@ const char* TwitterArtistInfo::kTwitterTimelineUrl =
 
 TwitterArtistInfo::TwitterArtistInfo()
     : network_(this) {
+  QFile file(":twitter.css");
+  file.open(QIODevice::ReadOnly);
+  stylesheet_ = file.readAll();
 }
 
 void TwitterArtistInfo::FetchInfo(int id, const Song& metadata) {
@@ -136,9 +140,13 @@ Entity ParseMentionEntity(const QVariant& m) {
   return entity;
 }
 
+static const char* kTweetClass = "tweet";
+static const char* kAlternateClass = "tweet alternate";
+
 QString GenerateHtmlForTweetStream(const QVariantList& tweets) {
   QString html;
   QXmlStreamWriter writer(&html);
+  bool alt = true;
   foreach (const QVariant& v, tweets) {
     QVariantMap tweet = v.toMap();
     QString text = tweet["text"].toString();
@@ -165,6 +173,11 @@ QString GenerateHtmlForTweetStream(const QVariantList& tweets) {
     qSort(entities);
 
     writer.writeStartElement("div");
+    if ((alt = !alt)) {
+      writer.writeAttribute("class", kAlternateClass);
+    } else {
+      writer.writeAttribute("class", kTweetClass);
+    }
 
     int offset = 0;
     foreach (const Entity& e, entities) {
@@ -183,7 +196,6 @@ QString GenerateHtmlForTweetStream(const QVariantList& tweets) {
     writer.writeCharacters(text.mid(offset));
 
     writer.writeEndElement();
-    writer.writeEmptyElement("br");
   }
   return html;
 }
@@ -210,6 +222,7 @@ void TwitterArtistInfo::UserTimelineRequestFinished(
   QString html = GenerateHtmlForTweetStream(result.toList());
 
   SongInfoTextView* text_view = new SongInfoTextView;
+  text_view->document()->setDefaultStyleSheet(stylesheet_);
   text_view->SetHtml(html);
   data.contents_ = text_view;
 
