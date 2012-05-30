@@ -99,6 +99,7 @@ void TwitterArtistInfo::UserTimelineRequestFinished(QNetworkReply* reply, const 
   data.title_ = QString("Twitter (%1)").arg(twitter_id);
 
   QString html;
+  QXmlStreamWriter writer(&html);
   QVariantList tweets = result.toList();
   foreach (const QVariant& v, tweets) {
     QVariantMap tweet = v.toMap();
@@ -106,6 +107,9 @@ void TwitterArtistInfo::UserTimelineRequestFinished(QNetworkReply* reply, const 
 
     QVariantMap entities = tweet["entities"].toMap();
     QVariantList urls = entities["urls"].toList();
+
+    writer.writeStartElement("div");
+
     int offset = 0;
     foreach (const QVariant& u, urls) {
       QVariantMap url = u.toMap();
@@ -113,20 +117,17 @@ void TwitterArtistInfo::UserTimelineRequestFinished(QNetworkReply* reply, const 
       int start_index = indices[0].toInt();
       int end_index = indices[1].toInt();
 
-      QString replacement;
-      QXmlStreamWriter writer(&replacement);
+      writer.writeCharacters(text.mid(offset, start_index));
+      offset = end_index;
+
       writer.writeStartElement("a");
       writer.writeAttribute("href", url["expanded_url"].toString());
       writer.writeCharacters(url["display_url"].toString());
       writer.writeEndElement();
-
-      text.replace(start_index + offset, end_index - start_index, replacement);
-      offset += replacement.size();
     }
+    writer.writeCharacters(text.mid(offset));
 
-    html += "<div>";
-    html += text;
-    html += "</div>";
+    writer.writeEndElement();
   }
 
   SongInfoTextView* text_view = new SongInfoTextView;
