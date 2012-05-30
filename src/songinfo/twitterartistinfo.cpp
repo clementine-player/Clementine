@@ -168,9 +168,13 @@ QString GenerateHtmlForTweetStream(const QVariantList& tweets) {
 
     int offset = 0;
     foreach (const Entity& e, entities) {
+      // Write all the plain text up to this entity.
       writer.writeCharacters(text.mid(offset, e.start_index - offset));
+      // Set the next starting position for reading more plain text.
       offset = e.end_index;
 
+      // Write the entity (eg. a URL, a link to a hashtag search or a link to a
+      // user's stream from a @mention.
       writer.writeStartElement("a");
       writer.writeAttribute("href", e.url.toEncoded());
       writer.writeCharacters(e.text);
