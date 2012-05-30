@@ -1,5 +1,7 @@
 #include "twitterartistinfo.h"
 
+#include <QXmlStreamWriter>
+
 #include <echonest/Artist.h>
 
 #include <qjson/parser.h>
@@ -9,7 +11,8 @@
 
 const char* TwitterArtistInfo::kTwitterBucket = "id:twitter";
 const char* TwitterArtistInfo::kTwitterTimelineUrl =
-    "https://api.twitter.com/1/statuses/user_timeline.json?include_rts=1&count=10&screen_name=%1";
+    "https://api.twitter.com/1/statuses/user_timeline.json?"
+    "include_rts=true&count=10&include_entities=true&screen_name=%1";
 
 TwitterArtistInfo::TwitterArtistInfo()
     : network_(this) {
@@ -83,8 +86,29 @@ void TwitterArtistInfo::UserTimelineRequestFinished(QNetworkReply* reply, const 
   foreach (const QVariant& v, tweets) {
     QVariantMap tweet = v.toMap();
     QString text = tweet["text"].toString();
+
+    QVariantMap entities = tweet["entities"].toMap();
+    QVariantList urls = entities["urls"].toList();
+    int offset = 0;
+    foreach (const QVariant& u, urls) {
+      QVariantMap url = u.toMap();
+      QVariantList indices = url["indices"].toList();
+      int start_index = indices[0].toInt();
+      int end_index = indices[1].toInt();
+
+      QString replacement;
+      QXmlStreamWriter writer(&replacement);
+      writer.writeStartElement("a");
+      writer.writeAttribute("href", url["expanded_url"].toString());
+      writer.writeCharacters(url["display_url"].toString());
+      writer.writeEndElement();
+
+      text.replace(start_index + offset, end_index - start_index, replacement);
+      offset += replacement.size();
+    }
+
     html += "<div>";
-    html += Qt::escape(text);
+    html += text;
     html += "</div>";
   }
 
