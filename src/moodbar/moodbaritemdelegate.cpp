@@ -23,10 +23,12 @@
 #include "core/closure.h"
 #include "core/qhash_qurl.h"
 #include "playlist/playlist.h"
+#include "playlist/playlistview.h"
 
 #include <QApplication>
 #include <QPainter>
 #include <QSettings>
+#include <QSortFilterProxyModel>
 #include <QtConcurrentRun>
 
 MoodbarItemDelegate::Data::Data()
@@ -34,9 +36,11 @@ MoodbarItemDelegate::Data::Data()
 {
 }
 
-MoodbarItemDelegate::MoodbarItemDelegate(Application* app, QObject* parent)
+MoodbarItemDelegate::MoodbarItemDelegate(Application* app, PlaylistView* view,
+                                         QObject* parent)
   : QItemDelegate(parent),
     app_(app),
+    view_(view),
     style_(MoodbarRenderer::Style_Normal)
 {
   connect(app_, SIGNAL(SettingsChanged()), SLOT(ReloadSettings()));
@@ -244,12 +248,19 @@ void MoodbarItemDelegate::ImageLoaded(const QUrl& url, QFutureWatcher<QImage>* w
 
   data->pixmap_ = QPixmap::fromImage(image);
   data->state_ = Data::State_Loaded;
+  
+  Playlist* playlist = view_->playlist();
+  const QSortFilterProxyModel* filter = playlist->proxy();
 
   // Update all the indices with the new pixmap.
   foreach (const QPersistentModelIndex& index, data->indexes_) {
     if (index.isValid() && index.sibling(index.row(), Playlist::Column_Filename).data().toUrl() == url) {
-      const_cast<Playlist*>(reinterpret_cast<const Playlist*>(index.model()))
-          ->MoodbarUpdated(index);
+      Q_ASSERT(index.model() == filter);
+      QModelIndex source_index(filter->mapToSource(index));
+      
+      Q_ASSERT(source_index.model() == playlist);
+      
+      playlist->MoodbarUpdated(source_index);
     }
   }
 }

@@ -27,6 +27,7 @@
 
 class Application;
 class MoodbarPipeline;
+class PlaylistView;
 
 class QModelIndex;
 
@@ -34,7 +35,7 @@ class MoodbarItemDelegate : public QItemDelegate {
   Q_OBJECT
 
 public:
-  MoodbarItemDelegate(Application* app, QObject* parent = 0);
+  MoodbarItemDelegate(Application* app, PlaylistView* view, QObject* parent = 0);
 
   void paint(QPainter* painter, const QStyleOptionViewItem& option,
              const QModelIndex& index) const;
@@ -79,6 +80,7 @@ private:
 
 private:
   Application* app_;
+  PlaylistView* view_;
   QCache<QUrl, Data> data_;
 
   MoodbarRenderer::MoodbarStyle style_;

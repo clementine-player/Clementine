@@ -205,7 +205,7 @@ void PlaylistView::SetItemDelegates(LibraryBackend* backend) {
   setItemDelegateForColumn(Playlist::Column_LastPlayed, new LastPlayedItemDelegate(this));
 
 #ifdef HAVE_MOODBAR
-  setItemDelegateForColumn(Playlist::Column_Mood, new MoodbarItemDelegate(app_, this));
+  setItemDelegateForColumn(Playlist::Column_Mood, new MoodbarItemDelegate(app_, this, this));
 #endif
   
   if (app_ && app_->player()) {
