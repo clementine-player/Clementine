@@ -531,7 +531,7 @@ void LibraryView::FilterReturnPressed() {
 }
 
 void LibraryView::NewSmartPlaylist() {
-  Wizard* wizard = new Wizard(app_->library_backend(), this);
+  Wizard* wizard = new Wizard(app_, app_->library_backend(), this);
   wizard->setAttribute(Qt::WA_DeleteOnClose);
   connect(wizard, SIGNAL(accepted()), SLOT(NewSmartPlaylistFinished()));
 
@@ -539,7 +539,7 @@ void LibraryView::NewSmartPlaylist() {
 }
 
 void LibraryView::EditSmartPlaylist() {
-  Wizard* wizard = new Wizard(app_->library_backend(), this);
+  Wizard* wizard = new Wizard(app_, app_->library_backend(), this);
   wizard->setAttribute(Qt::WA_DeleteOnClose);
   connect(wizard, SIGNAL(accepted()), SLOT(EditSmartPlaylistFinished()));
 

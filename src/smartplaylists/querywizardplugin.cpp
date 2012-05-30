@@ -71,8 +71,8 @@ public:
 };
 
 
-QueryWizardPlugin::QueryWizardPlugin(LibraryBackend* library, QObject* parent)
-  : WizardPlugin(library, parent),
+QueryWizardPlugin::QueryWizardPlugin(Application* app, LibraryBackend* library, QObject* parent)
+  : WizardPlugin(app, library, parent),
     search_page_(NULL),
     previous_scrollarea_max_(0)
 {
@@ -118,6 +118,7 @@ int QueryWizardPlugin::CreatePages(QWizard* wizard, int finish_page_id) {
   QVBoxLayout* terms_page_layout = static_cast<QVBoxLayout*>(search_page_->layout());
   terms_page_layout->addStretch();
   search_page_->preview_ = new SearchPreview(search_page_);
+  search_page_->preview_->set_application(app_);
   search_page_->preview_->set_library(library_);
   terms_page_layout->addWidget(search_page_->preview_);
 
@@ -136,6 +137,7 @@ int QueryWizardPlugin::CreatePages(QWizard* wizard, int finish_page_id) {
   sort_ui_->limit_none->setChecked(true);
 
   // Set up the preview widget that's already at the bottom of the sort page
+  sort_ui_->preview->set_application(app_);
   sort_ui_->preview->set_library(library_);
   connect(sort_ui_->field, SIGNAL(toggled(bool)), SLOT(UpdateSortPreview()));
   connect(sort_ui_->field_value, SIGNAL(currentIndexChanged(int)), SLOT(UpdateSortPreview()));

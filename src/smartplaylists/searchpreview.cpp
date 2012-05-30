@@ -49,6 +49,10 @@ SearchPreview::~SearchPreview() {
   delete ui_;
 }
 
+void SearchPreview::set_application(Application* app) {
+  ui_->tree->SetApplication(app);
+}
+
 void SearchPreview::set_library(LibraryBackend* backend) {
   backend_ = backend;
 

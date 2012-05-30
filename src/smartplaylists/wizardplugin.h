@@ -22,6 +22,7 @@
 
 #include "generator_fwd.h"
 
+class Application;
 class LibraryBackend;
 
 class QWizard;
@@ -32,7 +33,7 @@ class WizardPlugin : public QObject {
   Q_OBJECT
 
 public:
-  WizardPlugin(LibraryBackend* library, QObject* parent);
+  WizardPlugin(Application* app, LibraryBackend* library, QObject* parent);
 
   virtual QString type() const = 0;
   virtual QString name() const = 0;
@@ -48,6 +49,7 @@ public:
 protected:
   virtual int CreatePages(QWizard* wizard, int finish_page_id) = 0;
 
+  Application* app_;
   LibraryBackend* library_;
 
 private:

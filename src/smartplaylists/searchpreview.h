@@ -23,6 +23,7 @@
 
 #include <QWidget>
 
+class Application;
 class LibraryBackend;
 class Playlist;
 class Ui_SmartPlaylistSearchPreview;
@@ -36,6 +37,7 @@ public:
   SearchPreview(QWidget *parent = 0);
   ~SearchPreview();
 
+  void set_application(Application* app);
   void set_library(LibraryBackend* backend);
 
   void Update(const Search& search);
