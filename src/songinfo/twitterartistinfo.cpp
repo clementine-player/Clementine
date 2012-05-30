@@ -17,6 +17,7 @@
 
 #include "twitterartistinfo.h"
 
+#include <QIcon>
 #include <QXmlStreamWriter>
 
 #include <echonest/Artist.h>
@@ -198,6 +199,7 @@ void TwitterArtistInfo::UserTimelineRequestFinished(
   data.type_ = CollapsibleInfoPane::Data::Type_Biography;
   data.id_ = "twitter/" + twitter_id;
   data.title_ = QString("Twitter (%1)").arg(twitter_id);
+  data.icon_ = QIcon(":providers/twitter.png");
 
   QString html = GenerateHtmlForTweetStream(result.toList());
 
