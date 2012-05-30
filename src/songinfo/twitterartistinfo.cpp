@@ -85,7 +85,108 @@ void TwitterArtistInfo::FetchUserTimeline(const QString& twitter_id, int id) {
              SLOT(UserTimelineRequestFinished(QNetworkReply*, QString, int)), reply, twitter_id, id);
 }
 
-void TwitterArtistInfo::UserTimelineRequestFinished(QNetworkReply* reply, const QString& twitter_id, int id) {
+namespace {
+
+struct Entity {
+  int start_index;
+  int end_index;
+  QString text;
+  QUrl url;
+
+  bool operator <(const Entity& b) const {
+    return start_index < b.start_index;
+  }
+};
+
+Entity ParseUrlEntity(const QVariant& u) {
+  QVariantMap url = u.toMap();
+  QVariantList indices = url["indices"].toList();
+  Entity entity;
+  entity.start_index = indices[0].toInt();
+  entity.end_index = indices[1].toInt();
+  entity.text = url["display_url"].toString();
+  entity.url = QUrl(url["expanded_url"].toString());
+  return entity;
+}
+
+Entity ParseHashtagEntity(const QVariant& h) {
+  static const char* kTwitterSearchUrl = "https://twitter.com/search/%1";
+  QVariantMap hashtag = h.toMap();
+  QVariantList indices = hashtag["indices"].toList();
+  Entity entity;
+  entity.start_index = indices[0].toInt();
+  entity.end_index = indices[1].toInt();
+  entity.text += "#";
+  entity.text += hashtag["text"].toString();
+  entity.url = QUrl(QString(kTwitterSearchUrl).arg(hashtag["text"].toString()));
+  return entity;
+}
+
+Entity ParseMentionEntity(const QVariant& m) {
+  static const char* kTwitterUserUrl = "https://twitter.com/%1";
+  QVariantMap mention = m.toMap();
+  QVariantList indices = mention["indices"].toList();
+  Entity entity;
+  entity.start_index = indices[0].toInt();
+  entity.end_index = indices[1].toInt();
+  entity.text += "@";
+  entity.text += mention["screen_name"].toString();
+  entity.url = QUrl(QString(kTwitterUserUrl).arg(mention["screen_name"].toString()));
+  return entity;
+}
+
+QString GenerateHtmlForTweetStream(const QVariantList& tweets) {
+  QString html;
+  QXmlStreamWriter writer(&html);
+  foreach (const QVariant& v, tweets) {
+    QVariantMap tweet = v.toMap();
+    QString text = tweet["text"].toString();
+
+    QVariantMap es = tweet["entities"].toMap();
+
+    QVector<Entity> entities;
+
+    QVariantList urls = es["urls"].toList();
+    foreach (const QVariant& u, urls) {
+      entities.push_back(ParseUrlEntity(u));
+    }
+
+    QVariantList hashtags = es["hashtags"].toList();
+    foreach (const QVariant& h, hashtags) {
+      entities.push_back(ParseHashtagEntity(h));
+    }
+
+    QVariantList mentions = es["user_mentions"].toList();
+    foreach (const QVariant& m, mentions) {
+      entities.push_back(ParseMentionEntity(m));
+    }
+
+    qSort(entities);
+
+    writer.writeStartElement("div");
+
+    int offset = 0;
+    foreach (const Entity& e, entities) {
+      writer.writeCharacters(text.mid(offset, e.start_index - offset));
+      offset = e.end_index;
+
+      writer.writeStartElement("a");
+      writer.writeAttribute("href", e.url.toEncoded());
+      writer.writeCharacters(e.text);
+      writer.writeEndElement();
+    }
+    writer.writeCharacters(text.mid(offset));
+
+    writer.writeEndElement();
+    writer.writeEmptyElement("br");
+  }
+  return html;
+}
+
+}
+
+void TwitterArtistInfo::UserTimelineRequestFinished(
+    QNetworkReply* reply, const QString& twitter_id, int id) {
   QJson::Parser parser;
   bool ok = false;
   QVariant result = parser.parse(reply, &ok);
@@ -98,37 +199,7 @@ void TwitterArtistInfo::UserTimelineRequestFinished(QNetworkReply* reply, const 
   data.id_ = "twitter/" + twitter_id;
   data.title_ = QString("Twitter (%1)").arg(twitter_id);
 
-  QString html;
-  QXmlStreamWriter writer(&html);
-  QVariantList tweets = result.toList();
-  foreach (const QVariant& v, tweets) {
-    QVariantMap tweet = v.toMap();
-    QString text = tweet["text"].toString();
-
-    QVariantMap entities = tweet["entities"].toMap();
-    QVariantList urls = entities["urls"].toList();
-
-    writer.writeStartElement("div");
-
-    int offset = 0;
-    foreach (const QVariant& u, urls) {
-      QVariantMap url = u.toMap();
-      QVariantList indices = url["indices"].toList();
-      int start_index = indices[0].toInt();
-      int end_index = indices[1].toInt();
-
-      writer.writeCharacters(text.mid(offset, start_index));
-      offset = end_index;
-
-      writer.writeStartElement("a");
-      writer.writeAttribute("href", url["expanded_url"].toString());
-      writer.writeCharacters(url["display_url"].toString());
-      writer.writeEndElement();
-    }
-    writer.writeCharacters(text.mid(offset));
-
-    writer.writeEndElement();
-  }
+  QString html = GenerateHtmlForTweetStream(result.toList());
 
   SongInfoTextView* text_view = new SongInfoTextView;
   text_view->SetHtml(html);
