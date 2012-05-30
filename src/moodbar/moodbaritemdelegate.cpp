@@ -62,10 +62,12 @@ void MoodbarItemDelegate::paint(
   QPixmap pixmap = const_cast<MoodbarItemDelegate*>(this)->PixmapForIndex(
         index, option.rect.size());
 
+  drawBackground(painter, option, index);
+  
   if (!pixmap.isNull()) {
-    painter->drawPixmap(option.rect, pixmap);
-  } else {
-    drawBackground(painter, option, index);
+    // Make a little border for the moodbar
+    const QRect moodbar_rect(option.rect.adjusted(1, 1, -1, -1));
+    painter->drawPixmap(moodbar_rect, pixmap);
   }
 }
 
