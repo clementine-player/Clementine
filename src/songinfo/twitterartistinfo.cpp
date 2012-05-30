@@ -188,6 +188,8 @@ QString GenerateHtmlForTweetStream(const QVariantList& tweets) {
 
 void TwitterArtistInfo::UserTimelineRequestFinished(
     QNetworkReply* reply, const QString& twitter_id, int id) {
+  reply->deleteLater();
+
   QJson::Parser parser;
   bool ok = false;
   QVariant result = parser.parse(reply, &ok);
