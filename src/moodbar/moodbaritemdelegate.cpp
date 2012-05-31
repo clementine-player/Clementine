@@ -255,11 +255,12 @@ void MoodbarItemDelegate::ImageLoaded(const QUrl& url, QFutureWatcher<QImage>* w
   // Update all the indices with the new pixmap.
   foreach (const QPersistentModelIndex& index, data->indexes_) {
     if (index.isValid() && index.sibling(index.row(), Playlist::Column_Filename).data().toUrl() == url) {
-      Q_ASSERT(index.model() == filter);
-      QModelIndex source_index(filter->mapToSource(index));
+      QModelIndex source_index = index;
+      if (index.model() == filter) {
+        source_index = filter->mapToSource(source_index);
+      }
       
       Q_ASSERT(source_index.model() == playlist);
-      
       playlist->MoodbarUpdated(source_index);
     }
   }
