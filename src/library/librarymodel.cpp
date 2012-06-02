@@ -35,6 +35,7 @@
 #include <QFuture>
 #include <QFutureWatcher>
 #include <QMetaEnum>
+#include <QPixmapCache>
 #include <QSettings>
 #include <QStringList>
 #include <QUrl>
@@ -91,7 +92,7 @@ LibraryModel::LibraryModel(LibraryBackend* backend, Application* app,
           SIGNAL(ImageLoaded(quint64,QImage)),
           SLOT(AlbumArtLoaded(quint64,QImage)));
 
-  no_cover_icon_pretty_ = QImage(":nocover.png").scaled(
+  no_cover_icon_pretty_ = QPixmap(":nocover.png").scaled(
         kPrettyCoverSize, kPrettyCoverSize,
         Qt::KeepAspectRatio, Qt::SmoothTransformation);
 }
@@ -390,35 +391,62 @@ void LibraryModel::SongsDeleted(const SongList& songs) {
   }
 }
 
+QString LibraryModel::AlbumIconPixmapCacheKey(const QModelIndex& index) const {
+  QStringList path;
+  QModelIndex index_copy(index);
+  while (index_copy.isValid()) {
+    path.prepend(index_copy.data().toString());
+    index_copy = index_copy.parent();
+  }
+
+  return "libraryart:" + path.join("/");
+}
+
 QVariant LibraryModel::AlbumIcon(const QModelIndex& index) {
-  // Cache the art in the item's metadata field
   LibraryItem* item = IndexToItem(index);
   if (!item)
     return no_cover_icon_pretty_;
-  if (!item->metadata.image().isNull())
-    return item->metadata.image();
 
-  // No art is cached - load art for the first Song in the album.
+  // Check the cache for a pixmap we already loaded.
+  const QString cache_key = AlbumIconPixmapCacheKey(index);
+  QPixmap cached_pixmap;
+  if (QPixmapCache::find(cache_key, &cached_pixmap)) {
+    return cached_pixmap;
+  }
+
+  // Maybe we're loading a pixmap already?
+  if (pending_cache_keys_.contains(cache_key)) {
+    return no_cover_icon_pretty_;
+  }
+
+  // No art is cached and we're not loading it already.  Load art for the first
+  // Song in the album.
   SongList songs = GetChildSongs(index);
   if (!songs.isEmpty()) {
     const quint64 id = app_->album_cover_loader()->LoadImageAsync(
           cover_loader_options_, songs.first());
-    pending_art_[id] = item;
+    pending_art_[id] = ItemAndCacheKey(item, cache_key);
+    pending_cache_keys_.insert(cache_key);
   }
 
   return no_cover_icon_pretty_;
 }
 
 void LibraryModel::AlbumArtLoaded(quint64 id, const QImage& image) {
-  LibraryItem* item = pending_art_.take(id);
+  ItemAndCacheKey item_and_cache_key = pending_art_.take(id);
+  LibraryItem* item = item_and_cache_key.first;
+  const QString& cache_key = item_and_cache_key.second;
   if (!item)
     return;
 
+  pending_cache_keys_.remove(cache_key);
+
+  // Insert this image in the cache.
   if (image.isNull()) {
     // Set the no_cover image so we don't continually try to load art.
-    item->metadata.set_image(no_cover_icon_pretty_);
+    QPixmapCache::insert(cache_key, no_cover_icon_pretty_);
   } else {
-    item->metadata.set_image(image);
+    QPixmapCache::insert(cache_key, QPixmap::fromImage(image));
   }
 
   const QModelIndex index = ItemToIndex(item);

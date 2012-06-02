@@ -223,6 +223,7 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
   QString DividerDisplayText(GroupBy type, const QString& key) const;
 
   // Helpers
+  QString AlbumIconPixmapCacheKey(const QModelIndex& index) const;
   QVariant AlbumIcon(const QModelIndex& index);
   QVariant data(const LibraryItem* item, int role) const;
   bool CompareItems(const LibraryItem* a, const LibraryItem* b) const;
@@ -259,7 +260,7 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
   QIcon album_icon_;
   // used as a generic icon to show when no cover art is found,
   // fixed to the same size as the artwork (32x32)
-  QImage no_cover_icon_pretty_;
+  QPixmap no_cover_icon_pretty_;
   QIcon no_cover_icon_;
   QIcon playlists_dir_icon_;
   QIcon playlist_icon_;
@@ -270,7 +271,10 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
   bool show_dividers_;
 
   AlbumCoverLoaderOptions cover_loader_options_;
-  QMap<quint64, LibraryItem*> pending_art_;
+
+  typedef QPair<LibraryItem*, QString> ItemAndCacheKey;
+  QMap<quint64, ItemAndCacheKey> pending_art_;
+  QSet<QString> pending_cache_keys_;
 };
 
 Q_DECLARE_METATYPE(LibraryModel::Grouping);
