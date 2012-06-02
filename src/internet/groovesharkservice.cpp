@@ -716,6 +716,11 @@ void GroovesharkService::RetrieveUserFavorites() {
 void GroovesharkService::UserFavoritesRetrieved(QNetworkReply* reply, int task_id) {
   reply->deleteLater();
 
+  if (!favorites_) {
+    // The use probably logged out before the response arrived.
+    return;
+  }
+
   favorites_->removeRows(0, favorites_->rowCount());
 
   QVariantMap result = ExtractResult(reply);
@@ -752,8 +757,15 @@ void GroovesharkService::PopularSongsMonthRetrieved(QNetworkReply* reply) {
   reply->deleteLater();
   QVariantMap result = ExtractResult(reply);
   SongList songs = ExtractSongs(result);
+
+  app_->task_manager()->IncreaseTaskProgress(task_popular_id_, 50, 100);
+  if (app_->task_manager()->GetTaskProgress(task_popular_id_) >= 100) {
+    app_->task_manager()->SetTaskFinished(task_popular_id_);
+  }
+
   if (!popular_month_)
     return;
+
   foreach (const Song& song, songs) {
     QStandardItem* child = new QStandardItem(song.PrettyTitleWithArtist());
     child->setData(Type_Track, InternetModel::Role_Type);
@@ -762,11 +774,6 @@ void GroovesharkService::PopularSongsMonthRetrieved(QNetworkReply* reply) {
     child->setData(song.url(), InternetModel::Role_Url);
 
     popular_month_->appendRow(child);
-  }
-
-  app_->task_manager()->IncreaseTaskProgress(task_popular_id_, 50, 100);
-  if (app_->task_manager()->GetTaskProgress(task_popular_id_) >= 100) {
-    app_->task_manager()->SetTaskFinished(task_popular_id_);
   }
 }
 
@@ -782,8 +789,15 @@ void GroovesharkService::PopularSongsTodayRetrieved(QNetworkReply* reply) {
   reply->deleteLater();
   QVariantMap result = ExtractResult(reply);
   SongList songs = ExtractSongs(result);
+
+  app_->task_manager()->IncreaseTaskProgress(task_popular_id_, 50, 100);
+  if (app_->task_manager()->GetTaskProgress(task_popular_id_) >= 100) {
+    app_->task_manager()->SetTaskFinished(task_popular_id_);
+  }
+
   if (!popular_today_)
     return;
+
   foreach (const Song& song, songs) {
     QStandardItem* child = new QStandardItem(song.PrettyTitleWithArtist());
     child->setData(Type_Track, InternetModel::Role_Type);
@@ -792,11 +806,6 @@ void GroovesharkService::PopularSongsTodayRetrieved(QNetworkReply* reply) {
     child->setData(song.url(), InternetModel::Role_Url);
 
     popular_today_->appendRow(child);
-  }
-
-  app_->task_manager()->IncreaseTaskProgress(task_popular_id_, 50, 100);
-  if (app_->task_manager()->GetTaskProgress(task_popular_id_) >= 100) {
-    app_->task_manager()->SetTaskFinished(task_popular_id_);
   }
 }
 
