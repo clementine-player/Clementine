@@ -23,6 +23,7 @@
 #include "core/network.h"
 
 class QNetworkReply;
+class SongInfoTextView;
 
 class SongkickConcerts : public SongInfoProvider {
   Q_OBJECT
@@ -34,6 +35,7 @@ class SongkickConcerts : public SongInfoProvider {
  private slots:
   void ArtistSearchFinished(QNetworkReply* reply, int id);
   void CalendarRequestFinished(QNetworkReply* reply, int id);
+  void InjectImage(QNetworkReply* reply, SongInfoTextView* text_view);
 
  private:
   void FetchSongkickCalendar(const QString& artist_id, int id);

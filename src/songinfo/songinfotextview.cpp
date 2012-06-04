@@ -23,12 +23,15 @@
 #include <QWheelEvent>
 #include <QtDebug>
 
+#include "core/logging.h"
+
 const qreal SongInfoTextView::kDefaultFontSize = 8.5;
 const char* SongInfoTextView::kSettingsGroup = "SongInfo";
 
 SongInfoTextView::SongInfoTextView(QWidget* parent)
   : QTextBrowser(parent),
-    last_width_(-1)
+    last_width_(-1),
+    recursion_filter_(false)
 {
   setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -87,4 +90,20 @@ void SongInfoTextView::SetHtml(const QString& html) {
   copy.replace(QRegExp("((<\\s*br\\s*/?\\s*>)|(<\\s*/?\\s*p\\s*/?\\s*>))+$"), "");
 
   setHtml(copy);
+}
+
+// Prevents QTextDocument from trying to load remote images before they are
+// ready.
+QVariant SongInfoTextView::loadResource(int type, const QUrl& name) {
+  if (recursion_filter_) {
+    recursion_filter_ = false;
+    return QVariant();
+  }
+  recursion_filter_ = true;
+  if (type == QTextDocument::ImageResource && name.scheme() == "http") {
+    if (document()->resource(type, name).isNull()) {
+      return QVariant();
+    }
+  }
+  return QTextBrowser::loadResource(type, name);
 }

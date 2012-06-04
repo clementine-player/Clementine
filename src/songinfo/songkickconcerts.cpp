@@ -17,6 +17,7 @@
 
 #include "songkickconcerts.h"
 
+#include <QImage>
 #include <QXmlStreamWriter>
 
 #include <echonest/Artist.h>
@@ -110,6 +111,7 @@ void SongkickConcerts::CalendarRequestFinished(QNetworkReply* reply, int id) {
 
   QString html;
   QXmlStreamWriter writer(&html);
+  SongInfoTextView* text_view = new SongInfoTextView;
 
   QVariantMap root = result.toMap();
   QVariantMap results_page = root["resultsPage"].toMap();
@@ -126,14 +128,21 @@ void SongkickConcerts::CalendarRequestFinished(QNetworkReply* reply, int id) {
         writer.writeEndElement();
       }
       QVariantMap venue = event["venue"].toMap();
-      if (venue.contains("lng") && venue.contains("lat")) {
+      if (venue["lng"].isValid() && venue["lat"].isValid()) {
         writer.writeStartElement("img");
         QString maps_url = QString(kStaticMapUrl).arg(
             venue["lat"].toString(),
             venue["lng"].toString());
         writer.writeAttribute("src", maps_url);
         writer.writeEndElement();
-        qLog(Debug) << maps_url;
+
+        // QTextDocument does not support loading remote images, so we load
+        // them here and then inject them into the document later.
+        QNetworkRequest request(maps_url);
+        QNetworkReply* reply = network_.get(request);
+        NewClosure(reply, SIGNAL(finished()), this,
+                   SLOT(InjectImage(QNetworkReply*, SongInfoTextView*)),
+                   reply, text_view);
       }
       writer.writeEndElement();
     }
@@ -143,12 +152,21 @@ void SongkickConcerts::CalendarRequestFinished(QNetworkReply* reply, int id) {
   data.type_ = CollapsibleInfoPane::Data::Type_Biography;
   data.id_ = QString("songkick/%1").arg(id);
   data.title_ = tr("Upcoming Concerts");
-  data.icon_ = QIcon();
+  data.icon_ = QIcon(":providers/songkick.png");
 
-  SongInfoTextView* text_view = new SongInfoTextView;
   text_view->SetHtml(html);
   data.contents_ = text_view;
 
   emit InfoReady(id, data);
   emit Finished(id);
+}
+
+void SongkickConcerts::InjectImage(
+    QNetworkReply* reply, SongInfoTextView* text_view) {
+  QImage image;
+  image.load(reply, "png");
+  text_view->document()->addResource(
+      QTextDocument::ImageResource,
+      reply->request().url(),
+      QVariant(image));
 }
