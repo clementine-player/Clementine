@@ -276,6 +276,7 @@ set(SOURCES
   songinfo/songinfosettingspage.cpp
   songinfo/songinfotextview.cpp
   songinfo/songinfoview.cpp
+  songinfo/songkickconcerts.cpp
   songinfo/songplaystats.cpp
   songinfo/twitterartistinfo.cpp
   songinfo/ultimatelyricsprovider.cpp
@@ -529,6 +530,7 @@ set(HEADERS
   songinfo/songinfosettingspage.h
   songinfo/songinfotextview.h
   songinfo/songinfoview.h
+  songinfo/songkickconcerts.h
   songinfo/songplaystats.h
   songinfo/twitterartistinfo.h
   songinfo/ultimatelyricsprovider.h
