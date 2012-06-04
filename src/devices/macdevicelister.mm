@@ -64,7 +64,7 @@
 // hence the lack of templating here.
 class ScopedIOObject {
  public:
-  explicit ScopedIOObject(io_object_t object = NULL)
+  explicit ScopedIOObject(io_object_t object = 0)
       : object_(object) {
   }
 
@@ -236,21 +236,6 @@ QString GetUSBRegistryEntryString(io_object_t device, CFStringRef key) {
   }
 
   return QString();
-}
-
-quint64 GetUSBRegistryEntryInt64(io_object_t device, CFStringRef key) {
-  ScopedCFTypeRef<CFNumberRef> registry_num((CFNumberRef)GetUSBRegistryEntry(device, key));
-  if (registry_num) {
-    qint64 ret = -1;
-    Boolean result = CFNumberGetValue(registry_num.get(), kCFNumberLongLongType, &ret);
-    if (!result || ret < 0) {
-      return 0;
-    } else {
-      return ret;
-    }
-  }
-
-  return 0;
 }
 
 NSObject* GetPropertyForDevice(io_object_t device, CFStringRef key) {
