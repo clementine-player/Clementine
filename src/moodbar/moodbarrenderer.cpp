@@ -70,6 +70,8 @@ ColorVector MoodbarRenderer::Colors(
     }
   }
 
+  total = qMax(total, 1);
+
   // Remap the hue values to be between rangeStart and
   // rangeStart + rangeDelta.  Every time we see an input hue
   // above the threshold, increment the output hue by
