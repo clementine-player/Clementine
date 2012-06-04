@@ -154,12 +154,11 @@ DeviceKitLister::DeviceData DeviceKitLister::ReadDeviceData(
     return ret;
   }
 
-  // Don't do anything with internal drives, hidden drives, or things that
-  // aren't partitions
+  // Don't do anything with internal drives, hidden drives, or partition tables
   if (device.deviceIsSystemInternal() ||
       device.devicePresentationHide() ||
       device.deviceMountPaths().isEmpty() ||
-      !device.deviceIsPartition()) {
+      device.deviceIsPartitionTable()) {
     return ret;
   }
 
