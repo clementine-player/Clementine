@@ -23,7 +23,6 @@
 #include <QObject>
 
 #include "core/song.h"
-#include "globalsearch/common.h"
 
 class Application;
 class MimeData;
@@ -39,23 +38,19 @@ public:
 
   struct Result {
     Result(SearchProvider* provider = 0)
-      : provider_(provider), album_size_(0) {}
+      : provider_(provider), group_automatically_(true) {}
 
     // This must be set by the provider using the constructor.
     SearchProvider* provider_;
 
-    // These must be set explicitly by the provider.
-    globalsearch::Type type_;
-    globalsearch::MatchQuality match_quality_;
+    // If this is set to true, the view will group this result into
+    // artist/album categories as appropriate.
+    bool group_automatically_;
+
+    // Must be set by the provider.
     Song metadata_;
 
-    // How many songs in the album - valid only if type == Type_Album.
-    int album_size_;
-
-    // Songs in the album - valid only if type == Type_Album.  This is only
-    // used for display in the tooltip, so it's fine not to provide it.
-    SongList album_songs_;
-
+    // This is set and used by the GlobalSearch engine itself.
     QString pixmap_cache_key_;
   };
   typedef QList<Result> ResultList;
@@ -85,7 +80,7 @@ public:
     ArtIsInSongMetadata = 0x08,
 
     // Indicates this provider has a config dialog that can be shown by calling
-    // CanShowConfig.  If this is not set then the button will be greyed out
+    // ShowConfig.  If this is not set then the button will be greyed out
     // in the GUI.
     CanShowConfig = 0x10,
 
@@ -151,10 +146,7 @@ protected:
   // useful for figuring out whether you got a result because it matched in
   // the song title or the artist/album name.
   static QStringList TokenizeQuery(const QString& query);
-  static globalsearch::MatchQuality MatchQuality(const QStringList& tokens, const QString& string);
-
-  // Sorts a list of songs by disc, then by track.
-  static void SortSongs(SongList* list);
+  static bool Matches(const QStringList& tokens, const QString& string);
 
   // Subclasses must call this from their constructors.
   void Init(const QString& name, const QString& id, const QIcon& icon,

@@ -140,8 +140,8 @@ void GlobalSearch::timerEvent(QTimerEvent* e) {
 }
 
 QString GlobalSearch::PixmapCacheKey(const SearchProvider::Result& result) const {
-  return QString::number(qulonglong(result.provider_))
-       % "," % QString::number(int(result.type_))
+  return "globalsearch:"
+       % QString::number(qulonglong(result.provider_))
        % "," % result.metadata_.url().toString();
 }
 

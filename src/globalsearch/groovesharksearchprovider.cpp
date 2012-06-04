@@ -66,15 +66,10 @@ void GroovesharkSearchProvider::SearchDone(int id, const SongList& songs) {
   const PendingState state = pending_searches_.take(id);
   const int global_search_id = state.orig_id_;
 
-  SongList songs_copy(songs);
-  SortSongs(&songs_copy);
-
   ResultList ret;
-  foreach (const Song& song, songs_copy) {
+  foreach (const Song& song, songs) {
     Result result(this);
-    result.type_ = globalsearch::Type_Track;
     result.metadata_ = song;
-    result.match_quality_ = MatchQuality(state.tokens_, song.title());
 
     ret << result;
   }
@@ -119,31 +114,10 @@ void GroovesharkSearchProvider::AlbumArtLoaded(quint64 id, const QImage& image) 
 }
 
 void GroovesharkSearchProvider::LoadTracksAsync(int id, const Result& result) {
-  SongList ret;
+  InternetSongMimeData* mime_data = new InternetSongMimeData(service_);
+  mime_data->songs << result.metadata_;
 
-  switch (result.type_) {
-    case globalsearch::Type_Track: {
-      ret << result.metadata_;
-      SortSongs(&ret);
-
-      InternetSongMimeData* mime_data = new InternetSongMimeData(service_);
-      mime_data->songs = ret;
-
-      emit TracksLoaded(id, mime_data);
-      break;
-    }
-
-    case globalsearch::Type_Album: {
-      InternetSongMimeData* mime_data = new InternetSongMimeData(service_);
-      mime_data->songs = result.album_songs_;
-      emit TracksLoaded(id, mime_data);
-      break;
-    }
-
-    default:
-      Q_ASSERT(0);
-  }
-
+  emit TracksLoaded(id, mime_data);
 }
 
 bool GroovesharkSearchProvider::IsLoggedIn() {
@@ -158,24 +132,12 @@ void GroovesharkSearchProvider::AlbumSongsLoaded(quint64 id, const SongList& son
   const PendingState state = pending_searches_.take(id);
   const int global_search_id = state.orig_id_;
   ResultList ret;
-  if (!songs.isEmpty()) {
+  foreach (const Song& s, songs) {
     Result result(this);
-    result.type_ = globalsearch::Type_Album;
-    const QString& artist = songs.last().artist();
-    const QString& album  = songs.last().album();
-    result.metadata_.set_album(album);
-    result.metadata_.set_artist(artist);
-    result.metadata_.set_art_automatic(songs.last().art_automatic());
-    result.match_quality_ =
-        qMin(MatchQuality(state.tokens_, album),
-             MatchQuality(state.tokens_, artist));
-    foreach (const Song& s, songs) {
-      result.album_songs_ << s;
-    }
-    result.album_size_ = result.album_songs_.size();
-
+    result.metadata_ = s;
     ret << result;
   }
+
   emit ResultsAvailable(global_search_id, ret);
   MaybeSearchFinished(global_search_id);
 }

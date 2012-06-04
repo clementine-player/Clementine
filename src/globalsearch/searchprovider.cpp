@@ -57,20 +57,14 @@ QStringList SearchProvider::TokenizeQuery(const QString& query) {
   return tokens;
 }
 
-globalsearch::MatchQuality SearchProvider::MatchQuality(
-    const QStringList& tokens, const QString& string) {
-  globalsearch::MatchQuality ret = globalsearch::Quality_None;
-
+bool SearchProvider::Matches(const QStringList& tokens, const QString& string) {
   foreach (const QString& token, tokens) {
-    const int index = string.indexOf(token, 0, Qt::CaseInsensitive);
-    if (index == 0) {
-      return globalsearch::Quality_AtStart;
-    } else if (index != -1) {
-      ret = globalsearch::Quality_Middle;
+    if (!string.contains(token, Qt::CaseInsensitive)) {
+      return false;
     }
   }
 
-  return ret;
+  return true;
 }
 
 BlockingSearchProvider::BlockingSearchProvider(Application* app, QObject* parent)
@@ -123,21 +117,6 @@ QImage SearchProvider::ScaleAndPad(const QImage& image) {
   p.end();
 
   return padded_image;
-}
-
-namespace {
-  bool SortSongsCompare(const Song& left, const Song& right) {
-    if (left.disc() < right.disc())
-      return true;
-    if (left.disc() > right.disc())
-      return false;
-
-    return left.track() < right.track();
-  }
-}
-
-void SearchProvider::SortSongs(SongList* list) {
-  qStableSort(list->begin(), list->end(), SortSongsCompare);
 }
 
 void SearchProvider::LoadArtAsync(int id, const Result& result) {

@@ -42,6 +42,7 @@
 #include "engines/enginebase.h"
 #include "engines/gstengine.h"
 #include "globalsearch/globalsearch.h"
+#include "globalsearch/globalsearchview.h"
 #include "globalsearch/librarysearchprovider.h"
 #include "internet/jamendoservice.h"
 #include "internet/magnatuneservice.h"
@@ -162,6 +163,7 @@ MainWindow::MainWindow(Application* app,
     osd_(osd),
     global_shortcuts_(new GlobalShortcuts(this)),
     remote_(NULL),
+    global_search_view_(new GlobalSearchView(app_, this)),
     library_view_(new LibraryViewContainer(this)),
     file_view_(new FileView(this)),
     internet_view_(new InternetViewContainer(this)),
@@ -218,11 +220,11 @@ MainWindow::MainWindow(Application* app,
 
   app_->global_search()->ReloadSettings();
 
-  ui_->global_search->Init(app_->global_search());
-  connect(ui_->global_search, SIGNAL(AddToPlaylist(QMimeData*)), SLOT(AddToPlaylist(QMimeData*)));
-  connect(ui_->global_search, SIGNAL(OpenSettingsAtPage(SettingsDialog::Page)), SLOT(OpenSettingsDialogAtPage(SettingsDialog::Page)));
+  connect(global_search_view_, SIGNAL(AddToPlaylist(QMimeData*)), SLOT(AddToPlaylist(QMimeData*)));
+  connect(global_search_view_, SIGNAL(OpenSettingsAtPage(SettingsDialog::Page)), SLOT(OpenSettingsDialogAtPage(SettingsDialog::Page)));
 
   // Add tabs to the fancy tab widget
+  ui_->tabs->AddTab(global_search_view_, IconLoader::Load("search"), tr("Search"));
   ui_->tabs->AddTab(library_view_, IconLoader::Load("folder-sound"), tr("Library"));
   ui_->tabs->AddTab(file_view_, IconLoader::Load("document-open"), tr("Files"));
   ui_->tabs->AddTab(internet_view_, IconLoader::Load("applications-internet"), tr("Internet"));
@@ -759,7 +761,6 @@ void MainWindow::ReloadAllSettings() {
   // Other settings
   app_->ReloadSettings();
   app_->global_search()->ReloadSettings();
-  ui_->global_search->ReloadSettings();
   app_->library()->ReloadSettings();
   app_->player()->ReloadSettings();
   osd_->ReloadSettings();
@@ -2023,7 +2024,7 @@ void MainWindow::ConnectInfoView(SongInfoBase* view) {
 
   connect(view, SIGNAL(ShowSettingsDialog()), SLOT(ShowSongInfoConfig()));
   connect(view, SIGNAL(DoGlobalSearch(QString)),
-          ui_->global_search, SLOT(StartSearch(QString)));
+          global_search_view_, SLOT(StartSearch(QString)));
 }
 
 void MainWindow::AddSongInfoGenerator(smart_playlists::GeneratorPtr gen) {

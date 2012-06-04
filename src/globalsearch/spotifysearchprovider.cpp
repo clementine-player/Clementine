@@ -88,9 +88,7 @@ void SpotifySearchProvider::SearchFinishedSlot(const pb::spotify::SearchResponse
     const pb::spotify::Track& track = response.result(i);
 
     Result result(this);
-    result.type_ = globalsearch::Type_Track;
     SpotifyService::SongFromProtobuf(track, &result.metadata_);
-    result.match_quality_ = MatchQuality(state.tokens_, result.metadata_.title());
 
     ret << result;
   }
@@ -98,21 +96,11 @@ void SpotifySearchProvider::SearchFinishedSlot(const pb::spotify::SearchResponse
   for (int i=0 ; i<response.album_size() ; ++i) {
     const pb::spotify::Album& album = response.album(i);
 
-    Result result(this);
-    result.type_ = globalsearch::Type_Album;
-    SpotifyService::SongFromProtobuf(album.metadata(), &result.metadata_);
-    result.match_quality_ =
-        qMin(MatchQuality(state.tokens_, result.metadata_.album()),
-             MatchQuality(state.tokens_, result.metadata_.artist()));
-    result.album_size_ = album.metadata().track();
-
     for (int j=0; j < album.track_size() ; ++j) {
-      Song track_song;
-      SpotifyService::SongFromProtobuf(album.track(j), &track_song);
-      result.album_songs_ << track_song;
+      Result result(this);
+      SpotifyService::SongFromProtobuf(album.track(j), &result.metadata_);
+      ret << result;
     }
-
-    ret << result;
   }
 
   emit ResultsAvailable(state.orig_id_, ret);
@@ -146,31 +134,9 @@ void SpotifySearchProvider::ArtLoadedSlot(const QString& id, const QImage& image
 }
 
 void SpotifySearchProvider::LoadTracksAsync(int id, const Result& result) {
-  switch (result.type_) {
-  case globalsearch::Type_Track: {
-    SongMimeData* mime_data = new SongMimeData;
-    mime_data->songs = SongList() << result.metadata_;
-    emit TracksLoaded(id, mime_data);
-    break;
-  }
-
-  case globalsearch::Type_Album: {
-    SpotifyServer* s = server();
-    if (!s) {
-      emit TracksLoaded(id, NULL);
-      return;
-    }
-
-    QString uri = result.metadata_.url().toString();
-
-    pending_tracks_[uri] = id;
-    s->AlbumBrowse(uri);
-    break;
-  }
-
-  default:
-    break;
-  }
+  SongMimeData* mime_data = new SongMimeData;
+  mime_data->songs << result.metadata_;
+  emit TracksLoaded(id, mime_data);
 }
 
 void SpotifySearchProvider::AlbumBrowseResponse(const pb::spotify::BrowseAlbumResponse& response) {

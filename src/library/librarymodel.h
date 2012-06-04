@@ -140,6 +140,14 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
   //Whether or not to show letters heading in the library view
   void set_show_dividers(bool show_dividers);
 
+  // Utility functions for manipulating text
+  static QString TextOrUnknown(const QString& text);
+  static QString PrettyYearAlbum(int year, const QString& album);
+  static QString SortText(QString text);
+  static QString SortTextForArtist(QString artist);
+  static QString SortTextForYear(int year);
+  static QString SortTextForSong(const Song& song);
+
  signals:
   void TotalSongCountUpdated(int count);
   void GroupingChanged(const LibraryModel::Grouping& g);
@@ -209,15 +217,6 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
                         int container_level);
   void FinishItem(GroupBy type, bool signal, bool create_divider,
                   LibraryItem* parent, LibraryItem* item);
-
-  // Functions for manipulating text
-  QString TextOrUnknown(const QString& text) const;
-  QString PrettyYearAlbum(int year, const QString& album) const;
-
-  QString SortText(QString text) const;
-  QString SortTextForArtist(QString artist) const;
-  QString SortTextForYear(int year) const;
-  QString SortTextForSong(const Song& song) const;
 
   QString DividerKey(GroupBy type, LibraryItem* item) const;
   QString DividerDisplayText(GroupBy type, const QString& key) const;

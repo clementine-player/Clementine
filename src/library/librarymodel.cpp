@@ -949,20 +949,20 @@ void LibraryModel::FinishItem(GroupBy type,
   }
 }
 
-QString LibraryModel::TextOrUnknown(const QString& text) const {
+QString LibraryModel::TextOrUnknown(const QString& text) {
   if (text.isEmpty()) {
     return tr("Unknown");
   }
   return text;
 }
 
-QString LibraryModel::PrettyYearAlbum(int year, const QString& album) const {
+QString LibraryModel::PrettyYearAlbum(int year, const QString& album) {
   if (year <= 0)
     return TextOrUnknown(album);
   return QString::number(year) + " - " + TextOrUnknown(album);
 }
 
-QString LibraryModel::SortText(QString text) const {
+QString LibraryModel::SortText(QString text) {
   if (text.isEmpty()) {
     text = " unknown";
   } else {
@@ -973,7 +973,7 @@ QString LibraryModel::SortText(QString text) const {
   return text;
 }
 
-QString LibraryModel::SortTextForArtist(QString artist) const {
+QString LibraryModel::SortTextForArtist(QString artist) {
   artist = SortText(artist);
 
   if (artist.startsWith("the ")) {
@@ -983,12 +983,12 @@ QString LibraryModel::SortTextForArtist(QString artist) const {
   return artist;
 }
 
-QString LibraryModel::SortTextForYear(int year) const {
+QString LibraryModel::SortTextForYear(int year) {
   QString str = QString::number(year);
   return QString("0").repeated(qMax(0, 4 - str.length())) + str;
 }
 
-QString LibraryModel::SortTextForSong(const Song& song) const {
+QString LibraryModel::SortTextForSong(const Song& song) {
   QString ret = QString::number(qMax(0, song.disc()) * 1000 + qMax(0, song.track()));
   ret.prepend(QString("0").repeated(6 - ret.length()));
   ret.append(song.url().toString());

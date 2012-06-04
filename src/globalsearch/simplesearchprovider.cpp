@@ -68,37 +68,18 @@ SearchProvider::ResultList SimpleSearchProvider::Search(int id, const QString& q
   QMutexLocker l(&items_mutex_);
   foreach (const Item& item, items_) {
     Result result(this);
-    result.type_ = globalsearch::Type_Stream;
-    result.match_quality_ = globalsearch::Quality_None;
 
+    bool matched = true;
     foreach (const QString& token, tokens) {
-      if (item.keyword_.startsWith(token, Qt::CaseInsensitive)) {
-        result.match_quality_ = globalsearch::Quality_AtStart;
-        continue;
-      }
-
-      if (!item.metadata_.title().contains(token, Qt::CaseInsensitive)) {
-        bool matched_safe_word = false;
-        foreach (const QString& safe_word, safe_words_) {
-          if (safe_word.startsWith(token, Qt::CaseInsensitive)) {
-            matched_safe_word = true;
-            break;
-          }
-        }
-
-        if (matched_safe_word)
-          continue;
-        result.match_quality_ = globalsearch::Quality_None;
+      if (!item.keyword_.contains(token, Qt::CaseInsensitive) &&
+          !safe_words_.contains(token, Qt::CaseInsensitive)) {
+        matched = false;
         break;
       }
-
-      result.match_quality_ = qMin(result.match_quality_, globalsearch::Quality_Middle);
     }
 
-    if (result.match_quality_ == globalsearch::Quality_Middle) {
-      result.match_quality_ = MatchQuality(tokens, item.metadata_.title());
-    }
-    if (result.match_quality_ != globalsearch::Quality_None) {
+    if (matched) {
+      result.group_automatically_ = false;
       result.metadata_ = item.metadata_;
       ret << result;
     }

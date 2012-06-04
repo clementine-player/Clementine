@@ -36,8 +36,7 @@ UrlSearchProvider::UrlSearchProvider(Application* app, QObject* parent)
 
 void UrlSearchProvider::SearchAsync(int id, const QString& query) {
   Result result(this);
-  result.match_quality_ = globalsearch::Quality_AtStart;
-  result.type_ = globalsearch::Type_Stream;
+  result.group_automatically_ = false;
   result.metadata_.set_url(QUrl::fromUserInput(query));
   result.metadata_.set_filetype(Song::Type_Stream);
 

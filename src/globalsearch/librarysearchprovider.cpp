@@ -23,6 +23,8 @@
 #include "library/sqlrow.h"
 #include "playlist/songmimedata.h"
 
+#include <QStack>
+
 
 LibrarySearchProvider::LibrarySearchProvider(LibraryBackendInterface* backend,
                                              const QString& name,
@@ -55,58 +57,11 @@ SearchProvider::ResultList LibrarySearchProvider::Search(int id, const QString& 
     return ResultList();
   }
 
-  const QStringList tokens = TokenizeQuery(query);
-
-  QMultiMap<QString, Song> albums;
-  QSet<QString> albums_with_non_track_matches;
-
+  // Build the result list
   ResultList ret;
-
   while (q.Next()) {
-    Song song;
-    song.InitFromQuery(q, true);
-
-    QString album_key = song.album();
-    if (song.is_compilation() && !song.albumartist().isEmpty()) {
-      album_key.prepend(song.albumartist() + " - ");
-    } else if (!song.is_compilation()) {
-      album_key.prepend(song.artist());
-    }
-
-    globalsearch::MatchQuality quality = MatchQuality(tokens, song.title());
-
-    if (quality != globalsearch::Quality_None) {
-      // If the query matched in the song title then we're interested in this
-      // as an individual song.
-      Result result(this);
-      result.type_ = globalsearch::Type_Track;
-      result.metadata_ = song;
-      result.match_quality_ = quality;
-      ret << result;
-    } else {
-      // Otherwise we record this as being an interesting album.
-      albums_with_non_track_matches.insert(album_key);
-    }
-
-    albums.insertMulti(album_key, song);
-  }
-
-  // Add any albums that contained least one song that wasn't matched on the
-  // song title.
-  foreach (const QString& key, albums_with_non_track_matches) {
     Result result(this);
-    result.type_ = globalsearch::Type_Album;
-    result.metadata_ = albums.value(key);
-    result.album_size_ = albums.count(key);
-    result.match_quality_ =
-        qMin(
-          MatchQuality(tokens, result.metadata_.albumartist()),
-          qMin(MatchQuality(tokens, result.metadata_.artist()),
-               MatchQuality(tokens, result.metadata_.album())));
-
-    result.album_songs_ = albums.values(key);
-    SortSongs(&result.album_songs_);
-
+    result.metadata_.InitFromQuery(q, true);
     ret << result;
   }
 
@@ -114,44 +69,9 @@ SearchProvider::ResultList LibrarySearchProvider::Search(int id, const QString& 
 }
 
 void LibrarySearchProvider::LoadTracksAsync(int id, const Result& result) {
-  SongList ret;
-
-  switch (result.type_) {
-  case globalsearch::Type_Track:
-    // This is really easy - we just emit the track again.
-    ret << result.metadata_;
-    break;
-
-  case globalsearch::Type_Album: {
-    // Find all the songs in this album.
-    LibraryQuery query;
-    query.SetColumnSpec("ROWID, " + Song::kColumnSpec);
-    query.AddCompilationRequirement(result.metadata_.is_compilation());
-    query.AddWhere("album", result.metadata_.album());
-
-    if (!result.metadata_.is_compilation())
-      query.AddWhere("artist", result.metadata_.artist());
-
-    if (!backend_->ExecQuery(&query)) {
-      break;
-    }
-
-    while (query.Next()) {
-      Song song;
-      song.InitFromQuery(query, true);
-      ret << song;
-    }
-  }
-
-  default:
-    break;
-  }
-
-  SortSongs(&ret);
-
   SongMimeData* mime_data = new SongMimeData;
   mime_data->backend = backend_;
-  mime_data->songs = ret;
+  mime_data->songs = SongList() << result.metadata_;
 
   emit TracksLoaded(id, mime_data);
 }

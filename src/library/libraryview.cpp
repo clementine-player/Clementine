@@ -62,12 +62,40 @@ void LibraryItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &o
 
     painter->save();
 
+    QRect text_rect(opt.rect);
+
+    // Does this item have an icon?
+    QPixmap pixmap;
+    QVariant decoration = index.data(Qt::DecorationRole);
+    if (!decoration.isNull()) {
+      if (decoration.canConvert<QPixmap>()) {
+        pixmap = decoration.value<QPixmap>();
+      } else if (decoration.canConvert<QIcon>()) {
+        pixmap = decoration.value<QIcon>().pixmap(opt.decorationSize);
+      }
+    }
+
+    // Draw the icon at the left of the text rectangle
+    if (!pixmap.isNull()) {
+      text_rect.setLeft(text_rect.left() + 15);
+
+      QRect icon_rect(text_rect.topLeft(), opt.decorationSize);
+      const int padding = (text_rect.height() - icon_rect.height()) / 2;
+      icon_rect.adjust(padding, padding, padding, padding);
+      text_rect.moveLeft(icon_rect.right() + padding + 6);
+
+      if (pixmap.size() != opt.decorationSize) {
+        pixmap = pixmap.scaled(opt.decorationSize, Qt::KeepAspectRatio);
+      }
+
+      painter->drawPixmap(icon_rect, pixmap);
+    } else {
+      text_rect.setLeft(text_rect.left() + 30);
+    }
+
     // Draw the text
     QFont bold_font(opt.font);
     bold_font.setBold(true);
-
-    QRect text_rect(opt.rect);
-    text_rect.setLeft(text_rect.left() + 30);
 
     painter->setPen(opt.palette.color(QPalette::Text));
     painter->setFont(bold_font);
