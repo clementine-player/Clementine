@@ -259,8 +259,13 @@ void MoodbarItemDelegate::ImageLoaded(const QUrl& url, QFutureWatcher<QImage>* w
       if (index.model() == filter) {
         source_index = filter->mapToSource(source_index);
       }
-      
-      Q_ASSERT(source_index.model() == playlist);
+
+      if (source_index.model() != playlist) {
+        // The pixmap was for an index in a different playlist, maybe the user
+        // switched to a different one.
+        continue;
+      }
+
       playlist->MoodbarUpdated(source_index);
     }
   }
