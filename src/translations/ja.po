@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-05-28 00:18+0000\n"
+"PO-Revision-Date: 2012-05-28 23:29+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -91,12 +91,12 @@ msgstr "%1 曲"
 msgid "%1 songs"
 msgstr "%1 曲"
 
-#: smartplaylists/searchpreview.cpp:129
+#: smartplaylists/searchpreview.cpp:133
 #, qt-format
 msgid "%1 songs found"
 msgstr "%1 曲見つかりました"
 
-#: smartplaylists/searchpreview.cpp:126
+#: smartplaylists/searchpreview.cpp:130
 #, qt-format
 msgid "%1 songs found (showing %2)"
 msgstr "%1 曲見つかりました (%2 曲を表示中)"
@@ -263,14 +263,14 @@ msgstr "Grooveshark Anywhere のアカウントが必要です。"
 msgid "A Spotify Premium account is required."
 msgstr "Spotify のプレミアムアカウントが必要です。"
 
-#: smartplaylists/wizard.cpp:72
+#: smartplaylists/wizard.cpp:73
 msgid ""
 "A smart playlist is a dynamic list of songs that come from your library.  "
 "There are different types of smart playlist that offer different ways of "
 "selecting songs."
 msgstr "スマートプレイリストは、ライブラリから一定の条件に従って抽出されるプレイリストです。さまざまな選曲方法を提供する、さまざまなスマートプレイリストがあります。"
 
-#: smartplaylists/querywizardplugin.cpp:150
+#: smartplaylists/querywizardplugin.cpp:152
 msgid ""
 "A song will be included in the playlist if it matches these conditions."
 msgstr "曲がこれらの条件に一致する場合はプレイリストに含まれます。"
@@ -455,11 +455,11 @@ msgstr ""
 msgid "Add stream..."
 msgstr "ストリームを追加..."
 
-#: internet/groovesharkservice.cpp:1049
+#: internet/groovesharkservice.cpp:1058
 msgid "Add to Grooveshark favorites"
 msgstr "Grooveshark のお気に入りに追加"
 
-#: internet/groovesharkservice.cpp:1055
+#: internet/groovesharkservice.cpp:1064
 msgid "Add to Grooveshark playlists"
 msgstr "Grooveshark のプレイリストに追加"
 
@@ -505,7 +505,7 @@ msgstr "今日追加されました"
 msgid "Added within three months"
 msgstr "3 ヶ月以内に追加されました"
 
-#: internet/groovesharkservice.cpp:1329
+#: internet/groovesharkservice.cpp:1338
 msgid "Adding song to favorites"
 msgstr "曲をお気に入りに追加中"
 
@@ -642,7 +642,7 @@ msgstr "不明な last.fm エラーが発生しました: %1"
 msgid "And:"
 msgstr "そして:"
 
-#: ../bin/src/ui_appearancesettingspage.h:250
+#: moodbar/moodbarrenderer.cpp:154
 msgid "Angry"
 msgstr ""
 
@@ -673,7 +673,7 @@ msgstr "クリップ防止のために音量を制限する"
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "プリセット \"%1\" を削除してもよろしいですか?"
 
-#: internet/groovesharkservice.cpp:1250
+#: internet/groovesharkservice.cpp:1259
 msgid "Are you sure you want to delete this playlist?"
 msgstr "本当にこのプレイリストを削除しますか?"
 
@@ -900,7 +900,7 @@ msgstr ""
 msgid "Check for updates..."
 msgstr "更新のチェック..."
 
-#: smartplaylists/wizard.cpp:80
+#: smartplaylists/wizard.cpp:81
 msgid "Choose a name for your smart playlist"
 msgstr "スマートプレイリストの名前を選択してください"
 
@@ -920,7 +920,7 @@ msgstr "フォントの選択..."
 msgid "Choose from the list"
 msgstr "一覧から選択する"
 
-#: smartplaylists/querywizardplugin.cpp:152
+#: smartplaylists/querywizardplugin.cpp:154
 msgid "Choose how the playlist is sorted and how many songs it will contain."
 msgstr "プレイリストの並び順と、プレイリスト内に何曲含めるかを選択してください。"
 
@@ -1126,7 +1126,7 @@ msgstr "すべての曲を変換する"
 msgid "Convert any music that the device can't play"
 msgstr "デバイスが再生できないすべての曲を変換する"
 
-#: internet/groovesharkservice.cpp:1128
+#: internet/groovesharkservice.cpp:1137
 msgid "Copy to clipboard"
 msgstr "クリップボードにコピー"
 
@@ -1210,7 +1210,7 @@ msgstr "%1 からのカバーアートセット"
 msgid "Covers from %1"
 msgstr "%1 からのカバー"
 
-#: internet/groovesharkservice.cpp:502 internet/groovesharkservice.cpp:1201
+#: internet/groovesharkservice.cpp:502 internet/groovesharkservice.cpp:1210
 msgid "Create a new Grooveshark playlist"
 msgstr "新規 Grooveshark プレイリストの作成"
 
@@ -1365,7 +1365,7 @@ msgstr "既定"
 msgid "Delay between visualizations"
 msgstr "ビジュアライゼーションの間の遅延"
 
-#: internet/groovesharkservice.cpp:505 internet/groovesharkservice.cpp:1249
+#: internet/groovesharkservice.cpp:505 internet/groovesharkservice.cpp:1258
 msgid "Delete Grooveshark playlist"
 msgstr "Grooveshark プレイリストの削除"
 
@@ -1727,7 +1727,7 @@ msgstr "--log-levels *:1 と同じ"
 msgid "Equivalent to --log-levels *:3"
 msgstr "--log-levels *:3 と同じ"
 
-#: internet/groovesharkservice.cpp:985
+#: internet/groovesharkservice.cpp:994
 #: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:465
 #: ui/mainwindow.cpp:1748 ui/mainwindow.cpp:1869
 msgid "Error"
@@ -1960,7 +1960,7 @@ msgstr "指定する条件に一致するライブラリから曲を検索しま
 msgid "Fingerprinting song"
 msgstr ""
 
-#: smartplaylists/wizard.cpp:79
+#: smartplaylists/wizard.cpp:80
 msgid "Finish"
 msgstr "完了"
 
@@ -2032,7 +2032,7 @@ msgstr ""
 msgid "Friends"
 msgstr ""
 
-#: ../bin/src/ui_appearancesettingspage.h:251
+#: moodbar/moodbarrenderer.cpp:155
 msgid "Frozen"
 msgstr ""
 
@@ -2070,11 +2070,11 @@ msgstr "ジャンル"
 msgid "Get a URL to share this Grooveshark playlist"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:518 internet/groovesharkservice.cpp:1066
+#: internet/groovesharkservice.cpp:518 internet/groovesharkservice.cpp:1075
 msgid "Get a URL to share this Grooveshark song"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:738
+#: internet/groovesharkservice.cpp:743
 msgid "Getting Grooveshark popular songs"
 msgstr "Grooveshark で人気の曲を取得中"
 
@@ -2120,7 +2120,7 @@ msgstr "Grooveshark"
 msgid "Grooveshark login error"
 msgstr "Grooveshark ログインエラー"
 
-#: internet/groovesharkservice.cpp:1118
+#: internet/groovesharkservice.cpp:1127
 msgid "Grooveshark playlist's URL"
 msgstr ""
 
@@ -2128,7 +2128,7 @@ msgstr ""
 msgid "Grooveshark radio"
 msgstr "Grooveshark ラジオ"
 
-#: internet/groovesharkservice.cpp:1096
+#: internet/groovesharkservice.cpp:1105
 msgid "Grooveshark song's URL"
 msgstr "Grooveshark の曲の URL"
 
@@ -2172,7 +2172,7 @@ msgstr ""
 msgid "HTTP proxy"
 msgstr "HTTP プロキシ"
 
-#: ../bin/src/ui_appearancesettingspage.h:252
+#: moodbar/moodbarrenderer.cpp:156
 msgid "Happy"
 msgstr ""
 
@@ -2761,7 +2761,8 @@ msgid "Mood"
 msgstr ""
 
 #: ../bin/src/ui_appearancesettingspage.h:246
-msgid "Moodbar style:"
+#: moodbar/moodbarproxystyle.cpp:342
+msgid "Moodbar style"
 msgstr ""
 
 #: ../bin/src/ui_appearancesettingspage.h:244
@@ -2839,7 +2840,7 @@ msgstr "ラジオ局"
 msgid "My Recommendations"
 msgstr "おすすめ"
 
-#: internet/groovesharkservice.cpp:1202 internet/groovesharkservice.cpp:1296
+#: internet/groovesharkservice.cpp:1211 internet/groovesharkservice.cpp:1305
 #: ui/equalizer.cpp:172 ../bin/src/ui_deviceproperties.h:369
 #: ../bin/src/ui_magnatunedownloaddialog.h:135
 #: ../bin/src/ui_wizardfinishpage.h:84
@@ -2939,7 +2940,7 @@ msgstr "なし"
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "デバイスへのコピーに適切な曲が選択されていません"
 
-#: ../bin/src/ui_appearancesettingspage.h:249
+#: moodbar/moodbarrenderer.cpp:153
 msgid "Normal"
 msgstr ""
 
@@ -3209,7 +3210,7 @@ msgstr "プレイリストのオプション"
 msgid "Playlist search"
 msgstr "プレイリスト検索"
 
-#: smartplaylists/wizard.cpp:71
+#: smartplaylists/wizard.cpp:72
 msgid "Playlist type"
 msgstr "プレイリストの種類"
 
@@ -3477,11 +3478,11 @@ msgstr "プレイリストから削除"
 msgid "Remove playlist"
 msgstr "プレイリストの削除"
 
-#: internet/groovesharkservice.cpp:1411
+#: internet/groovesharkservice.cpp:1420
 msgid "Removing song from favorites"
 msgstr "曲をお気に入りから削除中"
 
-#: internet/groovesharkservice.cpp:1295
+#: internet/groovesharkservice.cpp:1304
 #, qt-format
 msgid "Rename \"%1\" playlist"
 msgstr "\"%1\" プレイリストの名前を変更"
@@ -3596,7 +3597,7 @@ msgstr "サンプルレート"
 msgid "Samplerate"
 msgstr "サンプルレート"
 
-#: ../bin/src/ui_appearancesettingspage.h:255
+#: ../bin/src/ui_appearancesettingspage.h:247
 msgid "Save .mood files in your music library"
 msgstr ""
 
@@ -3651,7 +3652,7 @@ msgid "Search"
 msgstr "検索"
 
 #: internet/groovesharksearchplaylisttype.cpp:32
-#: internet/groovesharkservice.cpp:963
+#: internet/groovesharkservice.cpp:972
 msgid "Search Grooveshark"
 msgstr "Grooveshark を検索"
 
@@ -3707,11 +3708,11 @@ msgstr ""
 msgid "Search mode"
 msgstr "検索モード"
 
-#: smartplaylists/querywizardplugin.cpp:151
+#: smartplaylists/querywizardplugin.cpp:153
 msgid "Search options"
 msgstr "検索オプション"
 
-#: smartplaylists/querywizardplugin.cpp:149
+#: smartplaylists/querywizardplugin.cpp:151
 #: ../bin/src/ui_querysearchpage.h:120
 msgid "Search terms"
 msgstr "検索条件"
@@ -3881,6 +3882,10 @@ msgstr "ファイルブラウザで表示..."
 msgid "Show in various artists"
 msgstr "さまざまなアーティストに表示する"
 
+#: moodbar/moodbarproxystyle.cpp:337
+msgid "Show moodbar"
+msgstr ""
+
 #: ui/mainwindow.cpp:444
 msgid "Show only duplicates"
 msgstr "重複するものだけ表示する"
@@ -3969,7 +3974,7 @@ msgstr "小さいアルバムカバー"
 msgid "Small sidebar"
 msgstr "小さいサイドバー"
 
-#: smartplaylists/wizard.cpp:67
+#: smartplaylists/wizard.cpp:68
 msgid "Smart playlist"
 msgstr "スマートプレイリスト"
 
@@ -4169,7 +4174,7 @@ msgstr ""
 msgid "Syncing Spotify starred tracks"
 msgstr ""
 
-#: ../bin/src/ui_appearancesettingspage.h:253
+#: moodbar/moodbarrenderer.cpp:157
 msgid "System colors"
 msgstr ""
 
@@ -4364,7 +4369,7 @@ msgstr "タイムゾーン"
 msgid "Title"
 msgstr "タイトル"
 
-#: internet/groovesharkservice.cpp:986
+#: internet/groovesharkservice.cpp:995
 msgid ""
 "To start Grooveshark radio, you should first listen to a few other "
 "Grooveshark songs"
@@ -4486,7 +4491,7 @@ msgstr "未設定のカバー"
 msgid "Unsubscribe"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:1156
+#: internet/groovesharkservice.cpp:1165
 msgid "Update Grooveshark playlist"
 msgstr "Grooveshark のプレイリストを更新"
 

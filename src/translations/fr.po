@@ -8,14 +8,16 @@
 # Gabriel Cossette <gabriel.cossette@gmail.com>, 2012.
 #   <gilleshabran@gmail.com>, 2011.
 #   <glasbarg@gmail.com>, 2011.
+#   <mathieu@evangeneer.net>, 2012.
 #   <matlantin@gmail.com>, 2012.
+#   <m.berta@laposte.net>, 2012.
 #   <mmarcottulio@gmail.com>, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-05-28 00:18+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2012-05-30 17:45+0000\n"
+"Last-Translator: evangeneer <mathieu@evangeneer.net>\n"
 "Language-Team: French (http://www.transifex.net/projects/p/clementine/language/fr/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -96,12 +98,12 @@ msgstr "%1 morceau"
 msgid "%1 songs"
 msgstr "%1 morceaux"
 
-#: smartplaylists/searchpreview.cpp:129
+#: smartplaylists/searchpreview.cpp:133
 #, qt-format
 msgid "%1 songs found"
 msgstr "%1 morceaux trouvés"
 
-#: smartplaylists/searchpreview.cpp:126
+#: smartplaylists/searchpreview.cpp:130
 #, qt-format
 msgid "%1 songs found (showing %2)"
 msgstr "%1 morceaux trouvés (%2 affichés)"
@@ -268,14 +270,14 @@ msgstr "Un compte Grooveshark Anywhere est nécessaire."
 msgid "A Spotify Premium account is required."
 msgstr "Un compte Spotify Premium est nécessaire."
 
-#: smartplaylists/wizard.cpp:72
+#: smartplaylists/wizard.cpp:73
 msgid ""
 "A smart playlist is a dynamic list of songs that come from your library.  "
 "There are different types of smart playlist that offer different ways of "
 "selecting songs."
 msgstr "Une liste de lecture intelligente est une liste dynamique de morceaux provenants de votre bibliothèque. Il y a différents types de listes de lecture intelligentes, offrant différentes façons de sélectionner des morceaux."
 
-#: smartplaylists/querywizardplugin.cpp:150
+#: smartplaylists/querywizardplugin.cpp:152
 msgid ""
 "A song will be included in the playlist if it matches these conditions."
 msgstr "Un morceau sera inclus dans la liste de lecture s'il correspond à ces conditions."
@@ -460,11 +462,11 @@ msgstr "Ajouter le tag année du morceau"
 msgid "Add stream..."
 msgstr "Ajouter un flux..."
 
-#: internet/groovesharkservice.cpp:1049
+#: internet/groovesharkservice.cpp:1058
 msgid "Add to Grooveshark favorites"
 msgstr "Ajouter aux favoris Grooveshark"
 
-#: internet/groovesharkservice.cpp:1055
+#: internet/groovesharkservice.cpp:1064
 msgid "Add to Grooveshark playlists"
 msgstr "Ajouter aux listes de lectures Grooveshark"
 
@@ -510,7 +512,7 @@ msgstr "Ajouté aujourd'hui"
 msgid "Added within three months"
 msgstr "Ajouté au cours des 3 derniers mois"
 
-#: internet/groovesharkservice.cpp:1329
+#: internet/groovesharkservice.cpp:1338
 msgid "Adding song to favorites"
 msgstr "Ajout du morceau aux favoris"
 
@@ -647,9 +649,9 @@ msgstr "Une erreur inconnue de last.fm est survenue : %1"
 msgid "And:"
 msgstr "Et :"
 
-#: ../bin/src/ui_appearancesettingspage.h:250
+#: moodbar/moodbarrenderer.cpp:154
 msgid "Angry"
-msgstr ""
+msgstr "En colère"
 
 #: ../bin/src/ui_songinfosettingspage.h:180
 #: ../bin/src/ui_appearancesettingspage.h:227
@@ -678,7 +680,7 @@ msgstr "Appliquer une compression pour prévenir les coupures"
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "Êtes-vous sûr de vouloir supprimer la valeur prédéfinie « %1 »"
 
-#: internet/groovesharkservice.cpp:1250
+#: internet/groovesharkservice.cpp:1259
 msgid "Are you sure you want to delete this playlist?"
 msgstr "Êtes-vous sur de vouloir supprimer cette liste de lecture ?"
 
@@ -905,7 +907,7 @@ msgstr "Chercher de nouveaux épisodes"
 msgid "Check for updates..."
 msgstr "Vérifier les mises à jour"
 
-#: smartplaylists/wizard.cpp:80
+#: smartplaylists/wizard.cpp:81
 msgid "Choose a name for your smart playlist"
 msgstr "Choisissez un nom pour votre liste de lecture intelligente"
 
@@ -925,7 +927,7 @@ msgstr "Choisir une police de caractères..."
 msgid "Choose from the list"
 msgstr "Choisir depuis la liste"
 
-#: smartplaylists/querywizardplugin.cpp:152
+#: smartplaylists/querywizardplugin.cpp:154
 msgid "Choose how the playlist is sorted and how many songs it will contain."
 msgstr "Choisissez comment la liste de lecture est triée et combien de morceaux elle contient."
 
@@ -1131,7 +1133,7 @@ msgstr "Convertir toutes les musiques"
 msgid "Convert any music that the device can't play"
 msgstr "Convertir la musique que le périphérique ne peut pas lire"
 
-#: internet/groovesharkservice.cpp:1128
+#: internet/groovesharkservice.cpp:1137
 msgid "Copy to clipboard"
 msgstr "Copier dans le presse papier"
 
@@ -1215,7 +1217,7 @@ msgstr "Pochette définie depuis %1"
 msgid "Covers from %1"
 msgstr "Pochettes depuis %1"
 
-#: internet/groovesharkservice.cpp:502 internet/groovesharkservice.cpp:1201
+#: internet/groovesharkservice.cpp:502 internet/groovesharkservice.cpp:1210
 msgid "Create a new Grooveshark playlist"
 msgstr "Créer une nouvelle liste de lecture Grooveshark"
 
@@ -1370,7 +1372,7 @@ msgstr "Par défaut"
 msgid "Delay between visualizations"
 msgstr "Délai entre les visualisations"
 
-#: internet/groovesharkservice.cpp:505 internet/groovesharkservice.cpp:1249
+#: internet/groovesharkservice.cpp:505 internet/groovesharkservice.cpp:1258
 msgid "Delete Grooveshark playlist"
 msgstr "Supprimer la liste de lecture Grooveshark"
 
@@ -1732,7 +1734,7 @@ msgstr "Equivalent à --log-levels *:1"
 msgid "Equivalent to --log-levels *:3"
 msgstr "Equivalent à --log-levels *:3"
 
-#: internet/groovesharkservice.cpp:985
+#: internet/groovesharkservice.cpp:994
 #: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:465
 #: ui/mainwindow.cpp:1748 ui/mainwindow.cpp:1869
 msgid "Error"
@@ -1965,7 +1967,7 @@ msgstr "Trouve les morceaux dans votre bibliothèque qui correspondent aux crit�
 msgid "Fingerprinting song"
 msgstr "Génération de l'empreinte audio"
 
-#: smartplaylists/wizard.cpp:79
+#: smartplaylists/wizard.cpp:80
 msgid "Finish"
 msgstr "Terminé"
 
@@ -2037,9 +2039,9 @@ msgstr "Images par buffer"
 msgid "Friends"
 msgstr "Amis"
 
-#: ../bin/src/ui_appearancesettingspage.h:251
+#: moodbar/moodbarrenderer.cpp:155
 msgid "Frozen"
-msgstr ""
+msgstr "Gelé"
 
 #: ui/equalizer.cpp:112
 msgid "Full Bass"
@@ -2075,11 +2077,11 @@ msgstr "Genre"
 msgid "Get a URL to share this Grooveshark playlist"
 msgstr "Obtenir une URL pour partager cette liste de lecture Grooveshark"
 
-#: internet/groovesharkservice.cpp:518 internet/groovesharkservice.cpp:1066
+#: internet/groovesharkservice.cpp:518 internet/groovesharkservice.cpp:1075
 msgid "Get a URL to share this Grooveshark song"
 msgstr "Obtenir une URL pour partager ce morceau Grooveshark"
 
-#: internet/groovesharkservice.cpp:738
+#: internet/groovesharkservice.cpp:743
 msgid "Getting Grooveshark popular songs"
 msgstr "Récupération des morceaux populaires Grooveshark"
 
@@ -2125,7 +2127,7 @@ msgstr "Grooveshark"
 msgid "Grooveshark login error"
 msgstr "Erreur lors de la connexion à Grooveshark"
 
-#: internet/groovesharkservice.cpp:1118
+#: internet/groovesharkservice.cpp:1127
 msgid "Grooveshark playlist's URL"
 msgstr "URL de la liste de lecture Grooveshark"
 
@@ -2133,7 +2135,7 @@ msgstr "URL de la liste de lecture Grooveshark"
 msgid "Grooveshark radio"
 msgstr "Radio Grooveshark"
 
-#: internet/groovesharkservice.cpp:1096
+#: internet/groovesharkservice.cpp:1105
 msgid "Grooveshark song's URL"
 msgstr "URL du morceau Grooveshark"
 
@@ -2177,9 +2179,9 @@ msgstr "La page HTML ne contenait pas de flux RSS"
 msgid "HTTP proxy"
 msgstr "Serveur mandataire HTTP"
 
-#: ../bin/src/ui_appearancesettingspage.h:252
+#: moodbar/moodbarrenderer.cpp:156
 msgid "Happy"
-msgstr ""
+msgstr "Heureux"
 
 #: ../bin/src/ui_deviceproperties.h:371
 msgid "Hardware information"
@@ -2763,15 +2765,16 @@ msgstr "Mois"
 
 #: playlist/playlist.cpp:1163
 msgid "Mood"
-msgstr ""
+msgstr "Humeur"
 
 #: ../bin/src/ui_appearancesettingspage.h:246
-msgid "Moodbar style:"
+#: moodbar/moodbarproxystyle.cpp:342
+msgid "Moodbar style"
 msgstr ""
 
 #: ../bin/src/ui_appearancesettingspage.h:244
 msgid "Moodbars"
-msgstr ""
+msgstr "Barre d'humeur"
 
 #: library/library.cpp:72
 msgid "Most played"
@@ -2844,7 +2847,7 @@ msgstr "Ma station de radio"
 msgid "My Recommendations"
 msgstr "Mes suggestions"
 
-#: internet/groovesharkservice.cpp:1202 internet/groovesharkservice.cpp:1296
+#: internet/groovesharkservice.cpp:1211 internet/groovesharkservice.cpp:1305
 #: ui/equalizer.cpp:172 ../bin/src/ui_deviceproperties.h:369
 #: ../bin/src/ui_magnatunedownloaddialog.h:135
 #: ../bin/src/ui_wizardfinishpage.h:84
@@ -2944,9 +2947,9 @@ msgstr "Aucun"
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Aucun des morceaux sélectionnés n'était valide pour la copie vers un périphérique"
 
-#: ../bin/src/ui_appearancesettingspage.h:249
+#: moodbar/moodbarrenderer.cpp:153
 msgid "Normal"
-msgstr ""
+msgstr "Normal"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:144
 msgid "Normal block type"
@@ -3214,7 +3217,7 @@ msgstr "Options de la liste de lecture"
 msgid "Playlist search"
 msgstr "Rechercher dans la liste de lecture"
 
-#: smartplaylists/wizard.cpp:71
+#: smartplaylists/wizard.cpp:72
 msgid "Playlist type"
 msgstr "Type de liste de lecture"
 
@@ -3482,11 +3485,11 @@ msgstr "Supprimer de la liste de lecture"
 msgid "Remove playlist"
 msgstr "Supprimer la liste de lecture"
 
-#: internet/groovesharkservice.cpp:1411
+#: internet/groovesharkservice.cpp:1420
 msgid "Removing song from favorites"
 msgstr "Suppression du morceau des favoris"
 
-#: internet/groovesharkservice.cpp:1295
+#: internet/groovesharkservice.cpp:1304
 #, qt-format
 msgid "Rename \"%1\" playlist"
 msgstr "Renommer la liste de lecture « %1 »"
@@ -3601,9 +3604,9 @@ msgstr "Échantillonnage"
 msgid "Samplerate"
 msgstr "Échantillonnage"
 
-#: ../bin/src/ui_appearancesettingspage.h:255
+#: ../bin/src/ui_appearancesettingspage.h:247
 msgid "Save .mood files in your music library"
-msgstr ""
+msgstr "Enregistrez vos fichier .mood dans votre bibliothèque"
 
 #: ui/albumcoverchoicecontroller.cpp:114
 msgid "Save album cover"
@@ -3656,7 +3659,7 @@ msgid "Search"
 msgstr "Recherche"
 
 #: internet/groovesharksearchplaylisttype.cpp:32
-#: internet/groovesharkservice.cpp:963
+#: internet/groovesharkservice.cpp:972
 msgid "Search Grooveshark"
 msgstr "Chercher sur Grooveshark"
 
@@ -3712,11 +3715,11 @@ msgstr "Rechercher iTunes"
 msgid "Search mode"
 msgstr "Mode de recherche"
 
-#: smartplaylists/querywizardplugin.cpp:151
+#: smartplaylists/querywizardplugin.cpp:153
 msgid "Search options"
 msgstr "Options de recherche"
 
-#: smartplaylists/querywizardplugin.cpp:149
+#: smartplaylists/querywizardplugin.cpp:151
 #: ../bin/src/ui_querysearchpage.h:120
 msgid "Search terms"
 msgstr "Termes de recherche"
@@ -3827,7 +3830,7 @@ msgstr "Mettre en surbrillance la piste en lecture"
 
 #: ../bin/src/ui_appearancesettingspage.h:245
 msgid "Show a moodbar in the track progress bar"
-msgstr ""
+msgstr "Afficher une barre d'humeur dans la barre de progression"
 
 #: ../bin/src/ui_notificationssettingspage.h:406
 msgid "Show a native desktop notification"
@@ -3885,6 +3888,10 @@ msgstr "Afficher dans le navigateur de fichiers"
 #: library/libraryview.cpp:266
 msgid "Show in various artists"
 msgstr "Classer dans la catégorie « Compilations d'artistes »"
+
+#: moodbar/moodbarproxystyle.cpp:337
+msgid "Show moodbar"
+msgstr ""
 
 #: ui/mainwindow.cpp:444
 msgid "Show only duplicates"
@@ -3974,7 +3981,7 @@ msgstr "Petite pochette d'album"
 msgid "Small sidebar"
 msgstr "Petite barre latérale"
 
-#: smartplaylists/wizard.cpp:67
+#: smartplaylists/wizard.cpp:68
 msgid "Smart playlist"
 msgstr "Liste de lecture intelligente"
 
@@ -4174,9 +4181,9 @@ msgstr "Synchronisation de la liste de lecture Spotify"
 msgid "Syncing Spotify starred tracks"
 msgstr "Synchronisation des morceaux Spotify préférés"
 
-#: ../bin/src/ui_appearancesettingspage.h:253
+#: moodbar/moodbarrenderer.cpp:157
 msgid "System colors"
-msgstr ""
+msgstr "Couleurs du système"
 
 #: widgets/fancytabwidget.cpp:654
 msgid "Tabs on top"
@@ -4369,7 +4376,7 @@ msgstr "Fuseau horaire"
 msgid "Title"
 msgstr "Titre"
 
-#: internet/groovesharkservice.cpp:986
+#: internet/groovesharkservice.cpp:995
 msgid ""
 "To start Grooveshark radio, you should first listen to a few other "
 "Grooveshark songs"
@@ -4491,7 +4498,7 @@ msgstr "Enlever cette pochette"
 msgid "Unsubscribe"
 msgstr "Se désinscrire"
 
-#: internet/groovesharkservice.cpp:1156
+#: internet/groovesharkservice.cpp:1165
 msgid "Update Grooveshark playlist"
 msgstr "Mise à jour de la liste de lecture Grooveshark"
 

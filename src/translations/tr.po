@@ -10,14 +10,15 @@
 # Irfan YAZICI <irfanyazici@gmail.com>, 2011.
 # Murat Ikilik <>, 2012.
 # Murat Sahin <martinamca@gmail.com>, 2012.
+# Ömer Faruk Uzun  <farukuzun@mail.com>, 2012.
 #   <sunder67@hotmail.com>, 2012.
 #   <yusufbesir1@gmail.com>, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-05-28 00:18+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2012-05-31 23:12+0000\n"
+"Last-Translator: Faruk Uzun <>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: tr\n"
@@ -97,12 +98,12 @@ msgstr "%1 şarkı"
 msgid "%1 songs"
 msgstr "%1 şarkı"
 
-#: smartplaylists/searchpreview.cpp:129
+#: smartplaylists/searchpreview.cpp:133
 #, qt-format
 msgid "%1 songs found"
 msgstr "%1 şarkı bulundu"
 
-#: smartplaylists/searchpreview.cpp:126
+#: smartplaylists/searchpreview.cpp:130
 #, qt-format
 msgid "%1 songs found (showing %2)"
 msgstr "%1 şarkı bulundu (%2 tanesi gösteriliyor)"
@@ -269,14 +270,14 @@ msgstr "Bir Grooveshark Anywhere hesabı gereklidir."
 msgid "A Spotify Premium account is required."
 msgstr "Bir Spotify Premium hesabı gereklidir."
 
-#: smartplaylists/wizard.cpp:72
+#: smartplaylists/wizard.cpp:73
 msgid ""
 "A smart playlist is a dynamic list of songs that come from your library.  "
 "There are different types of smart playlist that offer different ways of "
 "selecting songs."
 msgstr "Akıllı çalma listesi, kütüphanenizden gelen şarkıların dinamik bir listesidir. Şarkı seçmenin farklı yollarını sunan farklı akıllı şarkı listesi türleri vardır."
 
-#: smartplaylists/querywizardplugin.cpp:150
+#: smartplaylists/querywizardplugin.cpp:152
 msgid ""
 "A song will be included in the playlist if it matches these conditions."
 msgstr "Bir şarkı, eğer bu koşullara uyarsa çalma listesine eklenecektir."
@@ -461,11 +462,11 @@ msgstr "Yıl etiketi ekle"
 msgid "Add stream..."
 msgstr "Yayın ekle..."
 
-#: internet/groovesharkservice.cpp:1049
+#: internet/groovesharkservice.cpp:1058
 msgid "Add to Grooveshark favorites"
 msgstr "Grooveshark'i favorilere ekle"
 
-#: internet/groovesharkservice.cpp:1055
+#: internet/groovesharkservice.cpp:1064
 msgid "Add to Grooveshark playlists"
 msgstr "Grooveshark'i müzik listelerine ekle"
 
@@ -511,7 +512,7 @@ msgstr "Bugün eklenenler"
 msgid "Added within three months"
 msgstr "Son üç ay içinde eklenenler"
 
-#: internet/groovesharkservice.cpp:1329
+#: internet/groovesharkservice.cpp:1338
 msgid "Adding song to favorites"
 msgstr "Şarkı favorilere ekleniyor"
 
@@ -648,9 +649,9 @@ msgstr "Bilinmeyen bir last.fm hatası oluştu: %1"
 msgid "And:"
 msgstr "Ve:"
 
-#: ../bin/src/ui_appearancesettingspage.h:250
+#: moodbar/moodbarrenderer.cpp:154
 msgid "Angry"
-msgstr ""
+msgstr "Öfkeli"
 
 #: ../bin/src/ui_songinfosettingspage.h:180
 #: ../bin/src/ui_appearancesettingspage.h:227
@@ -679,7 +680,7 @@ msgstr "Kesintiyi engellemek için sıkıştırma uygula"
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "\"%1\" ayarını silmek istediğinizden emin misiniz?"
 
-#: internet/groovesharkservice.cpp:1250
+#: internet/groovesharkservice.cpp:1259
 msgid "Are you sure you want to delete this playlist?"
 msgstr "Bu çalan listeyi silmek istediğinizden emin misiniz?"
 
@@ -906,7 +907,7 @@ msgstr "Yeni bölümler için kontrol et"
 msgid "Check for updates..."
 msgstr "Güncellemeleri denetle..."
 
-#: smartplaylists/wizard.cpp:80
+#: smartplaylists/wizard.cpp:81
 msgid "Choose a name for your smart playlist"
 msgstr "Akıllı çalma listesi için isim seçin"
 
@@ -926,7 +927,7 @@ msgstr "Yazı tipi seç..."
 msgid "Choose from the list"
 msgstr "Listeden seç"
 
-#: smartplaylists/querywizardplugin.cpp:152
+#: smartplaylists/querywizardplugin.cpp:154
 msgid "Choose how the playlist is sorted and how many songs it will contain."
 msgstr "Çalma listesinin nasıl dizildiğini ve kaç şarkı içereceğini seçin."
 
@@ -1132,7 +1133,7 @@ msgstr "Tüm müzikleri dönüştür"
 msgid "Convert any music that the device can't play"
 msgstr "Aygıtın çalamadığı müzikleri dönüştür"
 
-#: internet/groovesharkservice.cpp:1128
+#: internet/groovesharkservice.cpp:1137
 msgid "Copy to clipboard"
 msgstr "Panoya kopyala"
 
@@ -1216,7 +1217,7 @@ msgstr "Kapak resmi %1 adresinden ayarlandı"
 msgid "Covers from %1"
 msgstr "%1 adresindeki kapak resimleri"
 
-#: internet/groovesharkservice.cpp:502 internet/groovesharkservice.cpp:1201
+#: internet/groovesharkservice.cpp:502 internet/groovesharkservice.cpp:1210
 msgid "Create a new Grooveshark playlist"
 msgstr "Yeni bir Grooveshark müzik listesi oluşturun"
 
@@ -1371,7 +1372,7 @@ msgstr "Öntanımlılar"
 msgid "Delay between visualizations"
 msgstr "Görselleştirmeler arasındaki gecikme"
 
-#: internet/groovesharkservice.cpp:505 internet/groovesharkservice.cpp:1249
+#: internet/groovesharkservice.cpp:505 internet/groovesharkservice.cpp:1258
 msgid "Delete Grooveshark playlist"
 msgstr "Grooveshark müzik listesini sil"
 
@@ -1733,7 +1734,7 @@ msgstr "--log-levels *:1'e eşdeğer"
 msgid "Equivalent to --log-levels *:3"
 msgstr "--log-levels *:3'e eşdeğer"
 
-#: internet/groovesharkservice.cpp:985
+#: internet/groovesharkservice.cpp:994
 #: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:465
 #: ui/mainwindow.cpp:1748 ui/mainwindow.cpp:1869
 msgid "Error"
@@ -1966,7 +1967,7 @@ msgstr "Kütüphanenizde belirttiğiniz kriterlerle eşleşen şarkıları bulun
 msgid "Fingerprinting song"
 msgstr "Şarkının parmak izi çıkartılıyor"
 
-#: smartplaylists/wizard.cpp:79
+#: smartplaylists/wizard.cpp:80
 msgid "Finish"
 msgstr "Bitir"
 
@@ -2038,9 +2039,9 @@ msgstr "Tambon başına kare"
 msgid "Friends"
 msgstr "Arkadaşlar"
 
-#: ../bin/src/ui_appearancesettingspage.h:251
+#: moodbar/moodbarrenderer.cpp:155
 msgid "Frozen"
-msgstr ""
+msgstr "Soğuk"
 
 #: ui/equalizer.cpp:112
 msgid "Full Bass"
@@ -2076,11 +2077,11 @@ msgstr "Tür"
 msgid "Get a URL to share this Grooveshark playlist"
 msgstr "Bu Grooveshark çalma listesini paylaşmak için bir URL al"
 
-#: internet/groovesharkservice.cpp:518 internet/groovesharkservice.cpp:1066
+#: internet/groovesharkservice.cpp:518 internet/groovesharkservice.cpp:1075
 msgid "Get a URL to share this Grooveshark song"
 msgstr "Bu Grooveshark şarkısını paylaşmak için bir URL al"
 
-#: internet/groovesharkservice.cpp:738
+#: internet/groovesharkservice.cpp:743
 msgid "Getting Grooveshark popular songs"
 msgstr "Grooveshark popüler şarkılar alınıyor"
 
@@ -2126,7 +2127,7 @@ msgstr "Grooveshark"
 msgid "Grooveshark login error"
 msgstr "Grooveshark giriş hatası"
 
-#: internet/groovesharkservice.cpp:1118
+#: internet/groovesharkservice.cpp:1127
 msgid "Grooveshark playlist's URL"
 msgstr "Grooveshark çalma listesinin URL adresi"
 
@@ -2134,7 +2135,7 @@ msgstr "Grooveshark çalma listesinin URL adresi"
 msgid "Grooveshark radio"
 msgstr "Grooveshark radyo"
 
-#: internet/groovesharkservice.cpp:1096
+#: internet/groovesharkservice.cpp:1105
 msgid "Grooveshark song's URL"
 msgstr "Grooveshark şarkısının adresi"
 
@@ -2178,9 +2179,9 @@ msgstr "HTML sayfası herhangi bir RSS beslemesi içermiyor"
 msgid "HTTP proxy"
 msgstr "HTTP vekil sunucu"
 
-#: ../bin/src/ui_appearancesettingspage.h:252
+#: moodbar/moodbarrenderer.cpp:156
 msgid "Happy"
-msgstr ""
+msgstr "Mutlu"
 
 #: ../bin/src/ui_deviceproperties.h:371
 msgid "Hardware information"
@@ -2756,7 +2757,7 @@ msgstr "Kütüphanede olacak değişiklikleri izle"
 
 #: ../bin/src/ui_playbacksettingspage.h:293
 msgid "Mono playback"
-msgstr ""
+msgstr "Tekli oynat"
 
 #: smartplaylists/searchterm.cpp:303
 msgid "Months"
@@ -2764,15 +2765,16 @@ msgstr "Ay"
 
 #: playlist/playlist.cpp:1163
 msgid "Mood"
-msgstr ""
+msgstr "Atmosfer"
 
 #: ../bin/src/ui_appearancesettingspage.h:246
-msgid "Moodbar style:"
-msgstr ""
+#: moodbar/moodbarproxystyle.cpp:342
+msgid "Moodbar style"
+msgstr "Atmosfer çubuğu tasarımı"
 
 #: ../bin/src/ui_appearancesettingspage.h:244
 msgid "Moodbars"
-msgstr ""
+msgstr "Atmosfer çubukları"
 
 #: library/library.cpp:72
 msgid "Most played"
@@ -2845,7 +2847,7 @@ msgstr "Radyom"
 msgid "My Recommendations"
 msgstr "Önerdiklerim"
 
-#: internet/groovesharkservice.cpp:1202 internet/groovesharkservice.cpp:1296
+#: internet/groovesharkservice.cpp:1211 internet/groovesharkservice.cpp:1305
 #: ui/equalizer.cpp:172 ../bin/src/ui_deviceproperties.h:369
 #: ../bin/src/ui_magnatunedownloaddialog.h:135
 #: ../bin/src/ui_wizardfinishpage.h:84
@@ -2945,9 +2947,9 @@ msgstr "Hiçbiri"
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Seçili şarkıların hiçbiri aygıta yüklemeye uygun değil"
 
-#: ../bin/src/ui_appearancesettingspage.h:249
+#: moodbar/moodbarrenderer.cpp:153
 msgid "Normal"
-msgstr ""
+msgstr "Normal"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:144
 msgid "Normal block type"
@@ -3215,7 +3217,7 @@ msgstr "Çalma listesi seçenekleri"
 msgid "Playlist search"
 msgstr "Çalma listesinde ara"
 
-#: smartplaylists/wizard.cpp:71
+#: smartplaylists/wizard.cpp:72
 msgid "Playlist type"
 msgstr "Çalma listesi türü"
 
@@ -3483,11 +3485,11 @@ msgstr "Çalma listesinden kaldır"
 msgid "Remove playlist"
 msgstr "Çalma listesini kaldır"
 
-#: internet/groovesharkservice.cpp:1411
+#: internet/groovesharkservice.cpp:1420
 msgid "Removing song from favorites"
 msgstr "Şarkı favorilerden kaldırılıyor"
 
-#: internet/groovesharkservice.cpp:1295
+#: internet/groovesharkservice.cpp:1304
 #, qt-format
 msgid "Rename \"%1\" playlist"
 msgstr "\"%1\" çalma listesini yeniden adlandır"
@@ -3602,9 +3604,9 @@ msgstr "Örnekleme oranı"
 msgid "Samplerate"
 msgstr "Örneklemeoranı"
 
-#: ../bin/src/ui_appearancesettingspage.h:255
+#: ../bin/src/ui_appearancesettingspage.h:247
 msgid "Save .mood files in your music library"
-msgstr ""
+msgstr ".mood dosyalarını müzik kütüphaneme kaydet"
 
 #: ui/albumcoverchoicecontroller.cpp:114
 msgid "Save album cover"
@@ -3657,7 +3659,7 @@ msgid "Search"
 msgstr "Ara"
 
 #: internet/groovesharksearchplaylisttype.cpp:32
-#: internet/groovesharkservice.cpp:963
+#: internet/groovesharkservice.cpp:972
 msgid "Search Grooveshark"
 msgstr "Grooveshark de ara"
 
@@ -3713,11 +3715,11 @@ msgstr "iTunes'u ara"
 msgid "Search mode"
 msgstr "Arama kipi"
 
-#: smartplaylists/querywizardplugin.cpp:151
+#: smartplaylists/querywizardplugin.cpp:153
 msgid "Search options"
 msgstr "Arama seçenekleri"
 
-#: smartplaylists/querywizardplugin.cpp:149
+#: smartplaylists/querywizardplugin.cpp:151
 #: ../bin/src/ui_querysearchpage.h:120
 msgid "Search terms"
 msgstr "Arama terimleri"
@@ -3828,7 +3830,7 @@ msgstr "Mevcut parçada parlayan bir animasyon göster"
 
 #: ../bin/src/ui_appearancesettingspage.h:245
 msgid "Show a moodbar in the track progress bar"
-msgstr ""
+msgstr "Parça ilerleme çubuğunda bir atmosfer çubuğu göster."
 
 #: ../bin/src/ui_notificationssettingspage.h:406
 msgid "Show a native desktop notification"
@@ -3886,6 +3888,10 @@ msgstr "Dosya gözatıcısında göster..."
 #: library/libraryview.cpp:266
 msgid "Show in various artists"
 msgstr "Çeşitli sanatçılarda göster"
+
+#: moodbar/moodbarproxystyle.cpp:337
+msgid "Show moodbar"
+msgstr "Atmosfer çubuğunu göster"
 
 #: ui/mainwindow.cpp:444
 msgid "Show only duplicates"
@@ -3975,7 +3981,7 @@ msgstr "Küçük albüm kapağı"
 msgid "Small sidebar"
 msgstr "Küçük kenar çubuğu"
 
-#: smartplaylists/wizard.cpp:67
+#: smartplaylists/wizard.cpp:68
 msgid "Smart playlist"
 msgstr "Akıllı çalma listesi"
 
@@ -4175,9 +4181,9 @@ msgstr "Spotify çalma listesi eşleniyor"
 msgid "Syncing Spotify starred tracks"
 msgstr "Spotify yıldızlı şarkılar eşleniyor"
 
-#: ../bin/src/ui_appearancesettingspage.h:253
+#: moodbar/moodbarrenderer.cpp:157
 msgid "System colors"
-msgstr ""
+msgstr "Sistem renkleri"
 
 #: widgets/fancytabwidget.cpp:654
 msgid "Tabs on top"
@@ -4370,7 +4376,7 @@ msgstr "Zaman dilimi"
 msgid "Title"
 msgstr "Başlık"
 
-#: internet/groovesharkservice.cpp:986
+#: internet/groovesharkservice.cpp:995
 msgid ""
 "To start Grooveshark radio, you should first listen to a few other "
 "Grooveshark songs"
@@ -4492,7 +4498,7 @@ msgstr "Albüm kapağını çıkar"
 msgid "Unsubscribe"
 msgstr "Abonelikten çık"
 
-#: internet/groovesharkservice.cpp:1156
+#: internet/groovesharkservice.cpp:1165
 msgid "Update Grooveshark playlist"
 msgstr "Grooveshark çalma listesini güncelle"
 
@@ -4536,7 +4542,7 @@ msgstr "Kullanım"
 
 #: ../bin/src/ui_lastfmsettingspage.h:159
 msgid "Use Album Artist tag when available"
-msgstr ""
+msgstr "Varsa Albüm sanatçısı etiketini kullan"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:168
 msgid "Use Gnome's shortcut keys"
@@ -4851,7 +4857,7 @@ msgstr "Spotify Premium hesabınız yok."
 
 #: internet/digitallyimportedclient.cpp:89
 msgid "You do not have an active subscription"
-msgstr ""
+msgstr "Aktif bir aboneliğiniz yok"
 
 #: internet/spotifyservice.cpp:162
 msgid ""

@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-05-28 00:18+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2012-05-29 17:13+0000\n"
+"Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: uk\n"
@@ -91,12 +91,12 @@ msgstr "%1 композиція"
 msgid "%1 songs"
 msgstr "%1 пісень"
 
-#: smartplaylists/searchpreview.cpp:129
+#: smartplaylists/searchpreview.cpp:133
 #, qt-format
 msgid "%1 songs found"
 msgstr "Знайдено %1 пісень"
 
-#: smartplaylists/searchpreview.cpp:126
+#: smartplaylists/searchpreview.cpp:130
 #, qt-format
 msgid "%1 songs found (showing %2)"
 msgstr "Знайдено %1 пісень (показано %2)"
@@ -263,14 +263,14 @@ msgstr "Потрібен обліковий запис Grooveshark Anywhere."
 msgid "A Spotify Premium account is required."
 msgstr "Потрібен обліковий запис Spotify Premium."
 
-#: smartplaylists/wizard.cpp:72
+#: smartplaylists/wizard.cpp:73
 msgid ""
 "A smart playlist is a dynamic list of songs that come from your library.  "
 "There are different types of smart playlist that offer different ways of "
 "selecting songs."
 msgstr "«Розумний» список відтворення — це динамічний список композицій з вашої фонотеки. Існують різні типи таких списків з різними способами вибору композицій."
 
-#: smartplaylists/querywizardplugin.cpp:150
+#: smartplaylists/querywizardplugin.cpp:152
 msgid ""
 "A song will be included in the playlist if it matches these conditions."
 msgstr "Пісню буде включено до списку відтворення якщо вона відповідає наступним умовам."
@@ -455,11 +455,11 @@ msgstr "Додати мітку року пісні"
 msgid "Add stream..."
 msgstr "Додати потік…"
 
-#: internet/groovesharkservice.cpp:1049
+#: internet/groovesharkservice.cpp:1058
 msgid "Add to Grooveshark favorites"
 msgstr "Додати до улюблених на Grooveshark"
 
-#: internet/groovesharkservice.cpp:1055
+#: internet/groovesharkservice.cpp:1064
 msgid "Add to Grooveshark playlists"
 msgstr "Додати до списків відтворення Grooveshark"
 
@@ -505,7 +505,7 @@ msgstr "Додано сьогодні"
 msgid "Added within three months"
 msgstr "Додано за три місяці"
 
-#: internet/groovesharkservice.cpp:1329
+#: internet/groovesharkservice.cpp:1338
 msgid "Adding song to favorites"
 msgstr "Додавання пісні до улюблених"
 
@@ -642,9 +642,9 @@ msgstr "Виникла невідома помилка last.fm: %1"
 msgid "And:"
 msgstr "Та:"
 
-#: ../bin/src/ui_appearancesettingspage.h:250
+#: moodbar/moodbarrenderer.cpp:154
 msgid "Angry"
-msgstr ""
+msgstr "Злість"
 
 #: ../bin/src/ui_songinfosettingspage.h:180
 #: ../bin/src/ui_appearancesettingspage.h:227
@@ -673,7 +673,7 @@ msgstr "Застосувати стиснення для запобігання 
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "Ви дійсно хочете вилучити задане \"%1\"?"
 
-#: internet/groovesharkservice.cpp:1250
+#: internet/groovesharkservice.cpp:1259
 msgid "Are you sure you want to delete this playlist?"
 msgstr "Ви справді хочете вилучити цей список відтворення?"
 
@@ -900,7 +900,7 @@ msgstr "Перевіряти наявність нових випусків"
 msgid "Check for updates..."
 msgstr "Перевірити оновлення…"
 
-#: smartplaylists/wizard.cpp:80
+#: smartplaylists/wizard.cpp:81
 msgid "Choose a name for your smart playlist"
 msgstr "Оберіть ім’я для вашого розумного списку відтворення"
 
@@ -920,7 +920,7 @@ msgstr "Вибрати шрифт…"
 msgid "Choose from the list"
 msgstr "Вибрати зі списку"
 
-#: smartplaylists/querywizardplugin.cpp:152
+#: smartplaylists/querywizardplugin.cpp:154
 msgid "Choose how the playlist is sorted and how many songs it will contain."
 msgstr "Вибрати спосіб сортування списку та кількість композицій в ньому."
 
@@ -1126,7 +1126,7 @@ msgstr "Конвертувати всю музику"
 msgid "Convert any music that the device can't play"
 msgstr "Конвертувати всю музику, яку не може відтворити пристрій"
 
-#: internet/groovesharkservice.cpp:1128
+#: internet/groovesharkservice.cpp:1137
 msgid "Copy to clipboard"
 msgstr "Копіювати до буфера"
 
@@ -1210,7 +1210,7 @@ msgstr "Обкладинку встановлено з %1"
 msgid "Covers from %1"
 msgstr "Обкладинки з %1"
 
-#: internet/groovesharkservice.cpp:502 internet/groovesharkservice.cpp:1201
+#: internet/groovesharkservice.cpp:502 internet/groovesharkservice.cpp:1210
 msgid "Create a new Grooveshark playlist"
 msgstr "Створити список відтворення Grooveshark"
 
@@ -1365,7 +1365,7 @@ msgstr "Типові значення"
 msgid "Delay between visualizations"
 msgstr "Затримка між візуалізаціями"
 
-#: internet/groovesharkservice.cpp:505 internet/groovesharkservice.cpp:1249
+#: internet/groovesharkservice.cpp:505 internet/groovesharkservice.cpp:1258
 msgid "Delete Grooveshark playlist"
 msgstr "Вилучити список відтворення Grooveshark"
 
@@ -1727,7 +1727,7 @@ msgstr "Відповідає --log-levels *:1"
 msgid "Equivalent to --log-levels *:3"
 msgstr "Відповідає --log-levels *:3"
 
-#: internet/groovesharkservice.cpp:985
+#: internet/groovesharkservice.cpp:994
 #: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:465
 #: ui/mainwindow.cpp:1748 ui/mainwindow.cpp:1869
 msgid "Error"
@@ -1960,7 +1960,7 @@ msgstr "Знайти композиції у фонотеці, що відпов
 msgid "Fingerprinting song"
 msgstr "Роблю відбиток пісні"
 
-#: smartplaylists/wizard.cpp:79
+#: smartplaylists/wizard.cpp:80
 msgid "Finish"
 msgstr "Готово"
 
@@ -2032,9 +2032,9 @@ msgstr "Кадрів на буфер"
 msgid "Friends"
 msgstr "Друзі"
 
-#: ../bin/src/ui_appearancesettingspage.h:251
+#: moodbar/moodbarrenderer.cpp:155
 msgid "Frozen"
-msgstr ""
+msgstr "Холодність"
 
 #: ui/equalizer.cpp:112
 msgid "Full Bass"
@@ -2070,11 +2070,11 @@ msgstr "Жанр"
 msgid "Get a URL to share this Grooveshark playlist"
 msgstr "Отримати адресу цього списку Grooveshark для оприлюднення"
 
-#: internet/groovesharkservice.cpp:518 internet/groovesharkservice.cpp:1066
+#: internet/groovesharkservice.cpp:518 internet/groovesharkservice.cpp:1075
 msgid "Get a URL to share this Grooveshark song"
 msgstr "Отримати адресу цієї композиції Grooveshark для оприлюднення"
 
-#: internet/groovesharkservice.cpp:738
+#: internet/groovesharkservice.cpp:743
 msgid "Getting Grooveshark popular songs"
 msgstr "Отримання популярних пісень з Grooveshark"
 
@@ -2120,7 +2120,7 @@ msgstr "Grooveshark"
 msgid "Grooveshark login error"
 msgstr "Помилка під час спроби увійти до Grooveshark"
 
-#: internet/groovesharkservice.cpp:1118
+#: internet/groovesharkservice.cpp:1127
 msgid "Grooveshark playlist's URL"
 msgstr "Адреса списку відтворення Grooveshark"
 
@@ -2128,7 +2128,7 @@ msgstr "Адреса списку відтворення Grooveshark"
 msgid "Grooveshark radio"
 msgstr "Радіо Grooveshark"
 
-#: internet/groovesharkservice.cpp:1096
+#: internet/groovesharkservice.cpp:1105
 msgid "Grooveshark song's URL"
 msgstr "Адреса пісні у Grooveshark"
 
@@ -2172,9 +2172,9 @@ msgstr "HTML сторінка не містить жодних RSS стрічо�
 msgid "HTTP proxy"
 msgstr "HTTP проксі"
 
-#: ../bin/src/ui_appearancesettingspage.h:252
+#: moodbar/moodbarrenderer.cpp:156
 msgid "Happy"
-msgstr ""
+msgstr "Щастя"
 
 #: ../bin/src/ui_deviceproperties.h:371
 msgid "Hardware information"
@@ -2758,15 +2758,16 @@ msgstr "Місяців"
 
 #: playlist/playlist.cpp:1163
 msgid "Mood"
-msgstr ""
+msgstr "Настрій"
 
 #: ../bin/src/ui_appearancesettingspage.h:246
-msgid "Moodbar style:"
-msgstr ""
+#: moodbar/moodbarproxystyle.cpp:342
+msgid "Moodbar style"
+msgstr "Стиль смужки настрою"
 
 #: ../bin/src/ui_appearancesettingspage.h:244
 msgid "Moodbars"
-msgstr ""
+msgstr "Смужки настрою"
 
 #: library/library.cpp:72
 msgid "Most played"
@@ -2839,7 +2840,7 @@ msgstr "Моя радіостанція"
 msgid "My Recommendations"
 msgstr "Мої рекомендації"
 
-#: internet/groovesharkservice.cpp:1202 internet/groovesharkservice.cpp:1296
+#: internet/groovesharkservice.cpp:1211 internet/groovesharkservice.cpp:1305
 #: ui/equalizer.cpp:172 ../bin/src/ui_deviceproperties.h:369
 #: ../bin/src/ui_magnatunedownloaddialog.h:135
 #: ../bin/src/ui_wizardfinishpage.h:84
@@ -2939,9 +2940,9 @@ msgstr "Немає"
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Жодна з вибраних композицій не придатна для копіювання на пристрій"
 
-#: ../bin/src/ui_appearancesettingspage.h:249
+#: moodbar/moodbarrenderer.cpp:153
 msgid "Normal"
-msgstr ""
+msgstr "Звичайний"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:144
 msgid "Normal block type"
@@ -3209,7 +3210,7 @@ msgstr "Налаштування списку відтворення"
 msgid "Playlist search"
 msgstr "Пошук у списку відтворення"
 
-#: smartplaylists/wizard.cpp:71
+#: smartplaylists/wizard.cpp:72
 msgid "Playlist type"
 msgstr "Тип списку відтворення"
 
@@ -3477,11 +3478,11 @@ msgstr "Вилучити зі списку відтворення"
 msgid "Remove playlist"
 msgstr "Вилучити список відтворення"
 
-#: internet/groovesharkservice.cpp:1411
+#: internet/groovesharkservice.cpp:1420
 msgid "Removing song from favorites"
 msgstr "Вилучення пісні з улюблених"
 
-#: internet/groovesharkservice.cpp:1295
+#: internet/groovesharkservice.cpp:1304
 #, qt-format
 msgid "Rename \"%1\" playlist"
 msgstr "Перейменувати список відтворення \"%1\""
@@ -3596,9 +3597,9 @@ msgstr "Частота вибірки"
 msgid "Samplerate"
 msgstr "Частота вибірки"
 
-#: ../bin/src/ui_appearancesettingspage.h:255
+#: ../bin/src/ui_appearancesettingspage.h:247
 msgid "Save .mood files in your music library"
-msgstr ""
+msgstr "Зберегти файли .mood до вашої музичної бібліотеки"
 
 #: ui/albumcoverchoicecontroller.cpp:114
 msgid "Save album cover"
@@ -3651,7 +3652,7 @@ msgid "Search"
 msgstr "Пошук"
 
 #: internet/groovesharksearchplaylisttype.cpp:32
-#: internet/groovesharkservice.cpp:963
+#: internet/groovesharkservice.cpp:972
 msgid "Search Grooveshark"
 msgstr "Шукати у Grooveshark"
 
@@ -3707,11 +3708,11 @@ msgstr "Пошук по iTunes"
 msgid "Search mode"
 msgstr "Режим пошуку"
 
-#: smartplaylists/querywizardplugin.cpp:151
+#: smartplaylists/querywizardplugin.cpp:153
 msgid "Search options"
 msgstr "Налаштування пошуку"
 
-#: smartplaylists/querywizardplugin.cpp:149
+#: smartplaylists/querywizardplugin.cpp:151
 #: ../bin/src/ui_querysearchpage.h:120
 msgid "Search terms"
 msgstr "Умови пошуку"
@@ -3822,7 +3823,7 @@ msgstr "Показувати для поточної доріжки блимаю
 
 #: ../bin/src/ui_appearancesettingspage.h:245
 msgid "Show a moodbar in the track progress bar"
-msgstr ""
+msgstr "Показувати смужку настрою на панелі поступу композиції"
 
 #: ../bin/src/ui_notificationssettingspage.h:406
 msgid "Show a native desktop notification"
@@ -3880,6 +3881,10 @@ msgstr "Показати в оглядачі файлів…"
 #: library/libraryview.cpp:266
 msgid "Show in various artists"
 msgstr "Показувати в різних виконавцях"
+
+#: moodbar/moodbarproxystyle.cpp:337
+msgid "Show moodbar"
+msgstr "Показувати смужку настрою"
 
 #: ui/mainwindow.cpp:444
 msgid "Show only duplicates"
@@ -3969,7 +3974,7 @@ msgstr "Маленька обкладинка альбому"
 msgid "Small sidebar"
 msgstr "Маленька бічна панель"
 
-#: smartplaylists/wizard.cpp:67
+#: smartplaylists/wizard.cpp:68
 msgid "Smart playlist"
 msgstr "«Розумний» список відтворення"
 
@@ -4169,9 +4174,9 @@ msgstr "Синхронізація списку відтворення Spotify"
 msgid "Syncing Spotify starred tracks"
 msgstr "Синхронізація оцінених доріжок Spotify"
 
-#: ../bin/src/ui_appearancesettingspage.h:253
+#: moodbar/moodbarrenderer.cpp:157
 msgid "System colors"
-msgstr ""
+msgstr "Кольори системи"
 
 #: widgets/fancytabwidget.cpp:654
 msgid "Tabs on top"
@@ -4364,7 +4369,7 @@ msgstr "Часовий пояс"
 msgid "Title"
 msgstr "Назва"
 
-#: internet/groovesharkservice.cpp:986
+#: internet/groovesharkservice.cpp:995
 msgid ""
 "To start Grooveshark radio, you should first listen to a few other "
 "Grooveshark songs"
@@ -4486,7 +4491,7 @@ msgstr "Вилучити обкладинку"
 msgid "Unsubscribe"
 msgstr "Відписатися"
 
-#: internet/groovesharkservice.cpp:1156
+#: internet/groovesharkservice.cpp:1165
 msgid "Update Grooveshark playlist"
 msgstr "Оновити список відтворення на Grooveshark"
 
