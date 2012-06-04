@@ -17,8 +17,14 @@
 
 #include "songkickconcerts.h"
 
+#include <QXmlStreamWriter>
+
 #include <echonest/Artist.h>
+
+#include <qjson/parser.h>
+
 #include "core/closure.h"
+#include "songinfotextview.h"
 
 const char* SongkickConcerts::kSongkickArtistBucket = "id:songkick";
 const char* SongkickConcerts::kSongkickArtistCalendarUrl =
@@ -84,5 +90,65 @@ void SongkickConcerts::FetchSongkickCalendar(const QString& artist_id, int id) {
 }
 
 void SongkickConcerts::CalendarRequestFinished(QNetworkReply* reply, int id) {
-  qLog(Debug) << reply->readAll();
+  static const char* kStaticMapUrl =
+      "http://maps.googleapis.com/maps/api/staticmap"
+      "?key=AIzaSyDDJqmLOeE1mY_EBONhnQmdXbKtasgCtqg"
+      "&sensor=false"
+      "&size=100x100"
+      "&zoom=12"
+      "&center=%1,%2"
+      "&markers=%1,%2";
+
+  QJson::Parser parser;
+  bool ok = false;
+  QVariant result = parser.parse(reply, &ok);
+
+  if (!ok) {
+    qLog(Error) << "Error parsing Songkick reply";
+    return;
+  }
+
+  QString html;
+  QXmlStreamWriter writer(&html);
+
+  QVariantMap root = result.toMap();
+  QVariantMap results_page = root["resultsPage"].toMap();
+  QVariantMap results = results_page["results"].toMap();
+  QVariantList events = results["event"].toList();
+  foreach (const QVariant& v, events) {
+    QVariantMap event = v.toMap();
+    {
+      writer.writeStartElement("div");
+      {
+        writer.writeStartElement("a");
+        writer.writeAttribute("href", event["uri"].toString());
+        writer.writeCharacters(event["displayName"].toString());
+        writer.writeEndElement();
+      }
+      QVariantMap venue = event["venue"].toMap();
+      if (venue.contains("lng") && venue.contains("lat")) {
+        writer.writeStartElement("img");
+        QString maps_url = QString(kStaticMapUrl).arg(
+            venue["lat"].toString(),
+            venue["lng"].toString());
+        writer.writeAttribute("src", maps_url);
+        writer.writeEndElement();
+        qLog(Debug) << maps_url;
+      }
+      writer.writeEndElement();
+    }
+  }
+
+  CollapsibleInfoPane::Data data;
+  data.type_ = CollapsibleInfoPane::Data::Type_Biography;
+  data.id_ = QString("songkick/%1").arg(id);
+  data.title_ = tr("Upcoming Concerts");
+  data.icon_ = QIcon();
+
+  SongInfoTextView* text_view = new SongInfoTextView;
+  text_view->SetHtml(html);
+  data.contents_ = text_view;
+
+  emit InfoReady(id, data);
+  emit Finished(id);
 }
