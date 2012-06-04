@@ -163,6 +163,7 @@ void SongkickConcerts::CalendarRequestFinished(QNetworkReply* reply, int id) {
 
 void SongkickConcerts::InjectImage(
     QNetworkReply* reply, SongInfoTextView* text_view) {
+  reply->deleteLater();
   QImage image;
   image.load(reply, "png");
   text_view->document()->addResource(
