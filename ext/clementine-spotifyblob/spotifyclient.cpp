@@ -575,7 +575,8 @@ void SpotifyClient::ConvertTrack(sp_track* track, pb::spotify::Track* pb) {
 
   // Album art
   const QByteArray art_id(
-        reinterpret_cast<const char*>(sp_album_cover(sp_track_album(track))),
+        reinterpret_cast<const char*>(
+            sp_album_cover(sp_track_album(track), SP_IMAGE_SIZE_LARGE)),
         kSpotifyImageIDSize);
   const QString art_id_b64 = QString::fromAscii(art_id.toBase64());
   pb->set_album_art_id(DataCommaSizeFromQString(art_id_b64));
@@ -610,7 +611,7 @@ void SpotifyClient::ConvertAlbum(sp_album* album, pb::spotify::Track* pb) {
 
   // Album art
   const QByteArray art_id(
-        reinterpret_cast<const char*>(sp_album_cover(album)),
+        reinterpret_cast<const char*>(sp_album_cover(album, SP_IMAGE_SIZE_LARGE)),
         kSpotifyImageIDSize);
   const QString art_id_b64 = QString::fromAscii(art_id.toBase64());
   pb->set_album_art_id(DataCommaSizeFromQString(art_id_b64));
