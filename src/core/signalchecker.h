@@ -20,44 +20,10 @@
 
 #include <glib-object.h>
 
-#include <boost/config.hpp>
+#include <boost/function_types/function_arity.hpp>
+#include <boost/typeof/typeof.hpp>
 
-#ifdef BOOST_NO_VARIADIC_TEMPLATES
-
-template <typename R>
-int GetFunctionParamCount(R (*func)()) {
-  return 0;
-}
-
-template <typename R, typename P0>
-int GetFunctionParamCount(R (*func)(P0)) {
-  return 1;
-}
-
-template <typename R, typename P0, typename P1>
-int GetFunctionParamCount(R (*func)(P0, P1)) {
-  return 2;
-}
-
-template <typename R, typename P0, typename P1, typename P2>
-int GetFunctionParamCount(R (*func)(P0, P1, P2)) {
-  return 3;
-}
-
-template <typename R, typename P0, typename P1, typename P2, typename P3>
-int GetFunctionParamCount(R (*func)(P0, P1, P2, P3)) {
-  return 4;
-}
-
-#else  // BOOST_NO_VARIADIC_TEMPLATES
-
-template <typename R, typename... Params>
-int GetFunctionParamCount(R (*func)(Params...)) {
-  return sizeof...(Params);
-}
-
-#endif  // BOOST_NO_VARIADIC_TEMPLATES
-
+// Do not call this directly, use CHECKED_GCONNECT instead.
 bool CheckedGConnect(
     gpointer source,
     const char* signal,
@@ -65,31 +31,9 @@ bool CheckedGConnect(
     gpointer data,
     const int callback_param_count);
 
-#ifdef BOOST_NO_VARIADIC_TEMPLATES
+#define FUNCTION_ARITY(callback) boost::function_types::function_arity<BOOST_TYPEOF(callback)>::value
 
-template <typename R, typename P0, typename P1, typename P2>
-bool CheckedGConnect(
-    gpointer source, const char* signal, R (*callback)(P0, P1, P2), gpointer data) {
-  return CheckedGConnect(
-      source, signal, G_CALLBACK(callback), data, GetFunctionParamCount(callback));
-}
-
-template <typename R, typename P0, typename P1, typename P2, typename P3>
-bool CheckedGConnect(
-    gpointer source, const char* signal, R (*callback)(P0, P1, P2, P3), gpointer data) {
-  return CheckedGConnect(
-      source, signal, G_CALLBACK(callback), data, GetFunctionParamCount(callback));
-}
-
-#else
-
-template <typename R, typename... Params>
-bool CheckedGConnect(
-    gpointer source, const char* signal, R (*callback)(Params...), gpointer data) {
-  return CheckedGConnect(
-      source, signal, G_CALLBACK(callback), data, GetFunctionParamCount(callback));
-}
-
-#endif  // BOOST_NO_VARIADIC_TEMPLATES
+#define CHECKED_GCONNECT(source, signal, callback, data) \
+    CheckedGConnect(source, signal, G_CALLBACK(callback), data, FUNCTION_ARITY(callback));
 
 #endif  // SIGNALCHECKER_H
