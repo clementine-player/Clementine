@@ -101,6 +101,7 @@ set(SOURCES
   core/qxtglobalshortcutbackend.cpp
   core/scopedtransaction.cpp
   core/settingsprovider.cpp
+  core/signalchecker.cpp
   core/song.cpp
   core/songloader.cpp
   core/stylesheetloader.cpp

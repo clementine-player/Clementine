@@ -16,11 +16,13 @@
 */
 
 #include "moodbarpipeline.h"
-#include "core/logging.h"
 
 #include <QCoreApplication>
 #include <QThread>
 #include <QUrl>
+
+#include "core/logging.h"
+#include "core/signalchecker.h"
 
 bool MoodbarPipeline::sIsAvailable = false;
 
@@ -102,7 +104,8 @@ void MoodbarPipeline::Start() {
                         "max-width", 1000, NULL);
 
   // Connect signals
-  g_signal_connect(decodebin, "pad-added", G_CALLBACK(NewPadCallback), this);
+  CheckedGConnect(
+      decodebin, "pad-added", &NewPadCallback, this);
   gst_bus_set_sync_handler(gst_pipeline_get_bus(GST_PIPELINE(pipeline_)), BusCallbackSync, this);
 
   // Set appsink callbacks
