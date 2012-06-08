@@ -44,6 +44,11 @@ int GetFunctionParamCount(R (*func)(P0, P1, P2)) {
   return 3;
 }
 
+template <typename R, typename P0, typename P1, typename P2, typename P3>
+int GetFunctionParamCount(R (*func)(P0, P1, P2, P3)) {
+  return 4;
+}
+
 #else  // BOOST_NO_VARIADIC_TEMPLATES
 
 template <typename R, typename... Params>
@@ -65,6 +70,13 @@ bool CheckedGConnect(
 template <typename R, typename P0, typename P1, typename P2>
 bool CheckedGConnect(
     gpointer source, const char* signal, R (*callback)(P0, P1, P2), gpointer data) {
+  return CheckedGConnect(
+      source, signal, G_CALLBACK(callback), data, GetFunctionParamCount(callback));
+}
+
+template <typename R, typename P0, typename P1, typename P2, typename P3>
+bool CheckedGConnect(
+    gpointer source, const char* signal, R (*callback)(P0, P1, P2, P3), gpointer data) {
   return CheckedGConnect(
       source, signal, G_CALLBACK(callback), data, GetFunctionParamCount(callback));
 }
