@@ -19,6 +19,7 @@
 #include "songloader.h"
 #include "core/logging.h"
 #include "core/song.h"
+#include "core/signalchecker.h"
 #include "core/tagreaderclient.h"
 #include "core/timeconstants.h"
 #include "internet/fixlastfm.h"
@@ -460,7 +461,7 @@ SongLoader::Result SongLoader::LoadRemote() {
 
   // Connect callbacks
   GstBus* bus = gst_pipeline_get_bus(GST_PIPELINE(pipeline.get()));
-  g_signal_connect(typefind, "have-type", G_CALLBACK(TypeFound), this);
+  CHECKED_GCONNECT(typefind, "have-type", &TypeFound, this);
   gst_bus_set_sync_handler(bus, BusCallbackSync, this);
   gst_bus_add_watch(bus, BusCallback, this);
 

@@ -27,6 +27,7 @@
 #include <chromaprint.h>
 
 #include "core/logging.h"
+#include "core/signalchecker.h"
 #include "core/timeconstants.h"
 
 static const int kDecodeRate = 11025;
@@ -105,7 +106,7 @@ QString Chromaprinter::CreateFingerprint() {
   g_object_set(src, "location", filename_.toLocal8Bit().constData(), NULL);
 
   // Connect signals
-  g_signal_connect(decode, "new-decoded-pad", G_CALLBACK(NewPadCallback), this);
+  CHECKED_GCONNECT(decode, "new-decoded-pad", &NewPadCallback, this);
   gst_bus_set_sync_handler(gst_pipeline_get_bus(GST_PIPELINE(pipeline_)), BusCallbackSync, this);
   guint bus_callback_id = gst_bus_add_watch(gst_pipeline_get_bus(GST_PIPELINE(pipeline_)), BusCallback, this);
 

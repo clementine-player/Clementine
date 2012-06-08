@@ -16,7 +16,6 @@
 */
 
 #include "transcoder.h"
-#include "core/logging.h"
 
 #include <QCoreApplication>
 #include <QDir>
@@ -26,6 +25,9 @@
 #include <QtDebug>
 
 #include <boost/bind.hpp>
+
+#include "core/logging.h"
+#include "core/signalchecker.h"
 
 using boost::shared_ptr;
 
@@ -443,7 +445,7 @@ bool Transcoder::StartJob(const Job &job) {
   // Set callbacks
   state->convert_element_ = convert;
 
-  g_signal_connect(decode, "new-decoded-pad", G_CALLBACK(NewPadCallback), state.get());
+  CHECKED_GCONNECT(decode, "new-decoded-pad", &NewPadCallback, state.get());
   gst_bus_set_sync_handler(gst_pipeline_get_bus(GST_PIPELINE(state->pipeline_)), BusCallbackSync, state.get());
   state->bus_callback_id_ = gst_bus_add_watch(gst_pipeline_get_bus(GST_PIPELINE(state->pipeline_)), BusCallback, state.get());
 

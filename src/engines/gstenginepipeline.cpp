@@ -24,6 +24,7 @@
 #include "gstenginepipeline.h"
 #include "core/concurrentrun.h"
 #include "core/logging.h"
+#include "core/signalchecker.h"
 #include "core/utilities.h"
 #include "internet/internetmodel.h"
 
@@ -170,9 +171,9 @@ bool GstEnginePipeline::ReplaceDecodeBin(const QUrl& url) {
   } else {
     new_bin = engine_->CreateElement("uridecodebin");
     g_object_set(G_OBJECT(new_bin), "uri", url.toEncoded().constData(), NULL);
-    g_signal_connect(G_OBJECT(new_bin), "drained", G_CALLBACK(SourceDrainedCallback), this);
-    g_signal_connect(G_OBJECT(new_bin), "pad-added", G_CALLBACK(NewPadCallback), this);
-    g_signal_connect(G_OBJECT(new_bin), "notify::source", G_CALLBACK(SourceSetupCallback), this);
+    CHECKED_GCONNECT(G_OBJECT(new_bin), "drained", &SourceDrainedCallback, this);
+    CHECKED_GCONNECT(G_OBJECT(new_bin), "pad-added", &NewPadCallback, this);
+    CHECKED_GCONNECT(G_OBJECT(new_bin), "notify::source", &SourceSetupCallback, this);
   }
 
   return ReplaceDecodeBin(new_bin);
