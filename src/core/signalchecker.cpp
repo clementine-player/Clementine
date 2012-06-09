@@ -25,10 +25,11 @@ bool CheckedGConnect(
     GCallback callback,
     gpointer data,
     const int callback_param_count) {
-  guint signal_id = g_signal_lookup(signal, G_OBJECT_TYPE(source));
-  if (signal_id == 0) {
-    qLog(Error) << "Connecting to invalid signal:" << signal;
-    Q_ASSERT(0);
+  guint signal_id = 0;
+  GQuark detail = 0;
+
+  if (!g_signal_parse_name(signal, G_OBJECT_TYPE(source), &signal_id, &detail, false)) {
+    qFatal("Connecting to invalid signal: %s", signal);
     return false;
   }
 
@@ -38,8 +39,7 @@ bool CheckedGConnect(
   // return_type callback(gpointer data1, params..., gpointer data2);
   int signal_params = query.n_params + 2;
   if (signal_params != callback_param_count) {
-    qLog(Error) << "Connecting callback to signal with different parameters counts";
-    Q_ASSERT(0);
+    qFatal("Connecting callback to signal with different parameters counts");
     return false;
   }
 
