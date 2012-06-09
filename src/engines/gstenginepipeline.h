@@ -195,6 +195,7 @@ class GstEnginePipeline : public QObject {
   float rg_preamp_;
   bool rg_compression_;
 
+  // Buffering
   quint64 buffer_duration_nanosec_;
   bool buffering_;
 

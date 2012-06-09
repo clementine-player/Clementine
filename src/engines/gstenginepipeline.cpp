@@ -585,7 +585,7 @@ void GstEnginePipeline::StateChangedMessageReceived(GstMessage* msg) {
 
 void GstEnginePipeline::BufferingMessageReceived(GstMessage* msg) {
   // Only handle buffering messages from the queue2 element in audiobin - not
-  // the one that's created automatically by uridecidebin.
+  // the one that's created automatically by uridecodebin.
   if (GST_ELEMENT(GST_MESSAGE_SRC(msg)) != queue_) {
     return;
   }
