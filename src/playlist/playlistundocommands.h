@@ -91,6 +91,33 @@ namespace PlaylistUndoCommands {
     QList<int> source_rows_;
     int pos_;
   };
+
+  class ReOrderItems : public Base {
+   public:
+    ReOrderItems(Playlist* playlist, const PlaylistItemList& new_items);
+
+    void undo();
+    void redo();
+
+   private:
+    PlaylistItemList old_items_;
+    PlaylistItemList new_items_;
+  };
+
+  class SortItems : public ReOrderItems {
+   public:
+    SortItems(Playlist* playlist, int column, Qt::SortOrder order, 
+              const PlaylistItemList& new_items);
+
+   private:
+    int column_;
+    Qt::SortOrder order_;
+  };
+  
+  class ShuffleItems : public ReOrderItems {
+   public:
+    ShuffleItems(Playlist* playlist, const PlaylistItemList& new_items);
+  };
 } //namespace
 
 #endif // PLAYLISTUNDOCOMMANDS_H

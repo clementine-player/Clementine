@@ -44,6 +44,9 @@ namespace PlaylistUndoCommands {
   class InsertItems;
   class RemoveItems;
   class MoveItems;
+  class ReOrderItems;
+  class SortItems;
+  class ShuffleItems;
 }
 
 typedef QMap<int, Qt::Alignment> ColumnAlignmentMap;
@@ -69,6 +72,7 @@ class Playlist : public QAbstractListModel {
   friend class PlaylistUndoCommands::InsertItems;
   friend class PlaylistUndoCommands::RemoveItems;
   friend class PlaylistUndoCommands::MoveItems;
+  friend class PlaylistUndoCommands::ReOrderItems;
 
  public:
   Playlist(PlaylistBackend* backend,
@@ -176,6 +180,7 @@ class Playlist : public QAbstractListModel {
 
   bool stop_after_current() const;
   bool is_dynamic() const { return dynamic_playlist_; }
+  int dynamic_history_length() const;
 
   QString special_type() const { return special_type_; }
   void set_special_type(const QString& v) { special_type_ = v; }
@@ -183,7 +188,7 @@ class Playlist : public QAbstractListModel {
   const PlaylistItemPtr& item_at(int index) const { return items_[index]; }
   const bool has_item_at(int index) const { return index >= 0 && index < rowCount(); }
 
-  PlaylistItemPtr current_item() const { return current_item_; }
+  PlaylistItemPtr current_item() const;
 
   PlaylistItem::Options current_item_options() const;
   Song current_item_metadata() const;
@@ -217,7 +222,8 @@ class Playlist : public QAbstractListModel {
                                  const SongList& songs,             int pos = -1, bool play_now = false, bool enqueue = false);
   // Removes items with given indices from the playlist. This operation is not undoable.
   void RemoveItemsWithoutUndo   (const QList<int>& indices);
-
+  void ReshuffleIndices();
+  
   // If this playlist contains the current item, this method will apply the "valid" flag on it.
   // If the "valid" flag is false, the song will be greyed out. Otherwise the grey color will
   // be undone.
@@ -300,7 +306,6 @@ class Playlist : public QAbstractListModel {
  private:
   void SetCurrentIsPaused(bool paused);
   void UpdateScrobblePoint();
-  void ReshuffleIndices();
   int NextVirtualIndex(int i, bool ignore_repeat_track) const;
   int PreviousVirtualIndex(int i) const;
   bool FilterContainsVirtualIndex(int i) const;
@@ -321,7 +326,9 @@ class Playlist : public QAbstractListModel {
                               bool enqueue = false);
   PlaylistItemList RemoveItemsWithoutUndo(int pos, int count);
   void MoveItemsWithoutUndo(const QList<int>& source_rows, int pos);
+  void MoveItemWithoutUndo(int source, int dest);
   void MoveItemsWithoutUndo(int start, const QList<int>& dest_rows);
+  void ReOrderWithoutUndo(const PlaylistItemList& new_items);
 
   void RemoveItemsNotInQueue();
 
@@ -362,8 +369,6 @@ class Playlist : public QAbstractListModel {
   QPersistentModelIndex stop_after_;
   bool current_is_paused_;
   int current_virtual_index_;
-
-  PlaylistItemPtr current_item_;
 
   bool is_shuffled_;
 

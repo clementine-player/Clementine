@@ -302,7 +302,7 @@ void Player::PlayAt(int index, Engine::TrackChangeFlags change, bool reshuffle) 
   }
 
   if (reshuffle)
-    app_->playlist_manager()->active()->set_current_row(-1);
+    app_->playlist_manager()->active()->ReshuffleIndices();
   app_->playlist_manager()->active()->set_current_row(index);
 
   if (app_->playlist_manager()->active()->current_row() == -1) {
