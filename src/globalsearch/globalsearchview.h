@@ -63,10 +63,6 @@ private slots:
 
 private:
   MimeData* LoadSelectedTracks();
-
-  void GetChildResults(const QStandardItem* item,
-                       SearchProvider::ResultList* results,
-                       QSet<const QStandardItem*>* visited) const;
   
 private:
   Application* app_;

@@ -23,11 +23,13 @@
 
 #include <QStandardItemModel>
 
+class GlobalSearch;
+
 class GlobalSearchModel : public QStandardItemModel {
   Q_OBJECT
 
 public:
-  GlobalSearchModel(QObject* parent = 0);
+  GlobalSearchModel(GlobalSearch* engine, QObject* parent = 0);
 
   enum Role {
     Role_Result = LibraryModel::LastRole,
@@ -46,14 +48,25 @@ public:
 
   void Clear();
 
+  SearchProvider::ResultList GetChildResults(const QModelIndexList& indexes) const;
+  SearchProvider::ResultList GetChildResults(const QList<QStandardItem*>& items) const;
+
+  // QAbstractItemModel
+  QMimeData* mimeData(const QModelIndexList& indexes) const;
+
 public slots:
   void AddResults(const SearchProvider::ResultList& results);
 
 private:
   QStandardItem* BuildContainers(const Song& metadata, QStandardItem* parent,
                                  ContainerKey* key, int level = 0);
+  void GetChildResults(const QStandardItem* item,
+                       SearchProvider::ResultList* results,
+                       QSet<const QStandardItem*>* visited) const;
   
 private:
+  GlobalSearch* engine_;
+
   LibraryModel::Grouping group_by_;
 
   QMap<SearchProvider*, int> provider_sort_indices_;

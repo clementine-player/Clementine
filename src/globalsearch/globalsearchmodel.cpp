@@ -15,10 +15,13 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "globalsearch.h"
 #include "globalsearchmodel.h"
+#include "core/mimedata.h"
 
-GlobalSearchModel::GlobalSearchModel(QObject* parent)
+GlobalSearchModel::GlobalSearchModel(GlobalSearch* engine, QObject* parent)
   : QStandardItemModel(parent),
+    engine_(engine),
     use_pretty_covers_(true),
     artist_icon_(":/icons/22x22/x-clementine-artist.png"),
     album_icon_(":/icons/22x22/x-clementine-album.png")
@@ -155,4 +158,49 @@ void GlobalSearchModel::Clear() {
   containers_.clear();
   next_provider_sort_index_ = 1000;
   clear();
+}
+
+SearchProvider::ResultList GlobalSearchModel::GetChildResults(
+    const QModelIndexList& indexes) const {
+  QList<QStandardItem*> items;
+  foreach (const QModelIndex& index, indexes) {
+    items << itemFromIndex(index);
+  }
+  return GetChildResults(items);
+}
+
+SearchProvider::ResultList GlobalSearchModel::GetChildResults(
+    const QList<QStandardItem*>& items) const {
+  SearchProvider::ResultList results;
+  QSet<const QStandardItem*> visited;
+
+  foreach (QStandardItem* item, items) {
+    GetChildResults(item, &results, &visited);
+  }
+
+  return results;
+}
+
+void GlobalSearchModel::GetChildResults(const QStandardItem* item,
+                                        SearchProvider::ResultList* results,
+                                        QSet<const QStandardItem*>* visited) const {
+  if (visited->contains(item)) {
+    return;
+  }
+  visited->insert(item);
+
+  // Does this item have children?
+  if (item->rowCount()) {
+    // Yes - visit all the children
+    for (int i=0 ; i<item->rowCount() ; ++i) {
+      GetChildResults(item->child(i), results, visited);
+    }
+  } else {
+    // No - it's a song, add its result
+    results->append(item->data(Role_Result).value<SearchProvider::Result>());
+  }
+}
+
+QMimeData* GlobalSearchModel::mimeData(const QModelIndexList& indexes) const {
+  return engine_->LoadTracks(GetChildResults(indexes));
 }

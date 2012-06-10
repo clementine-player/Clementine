@@ -40,8 +40,8 @@ GlobalSearchView::GlobalSearchView(Application* app, QWidget* parent)
     engine_(app_->global_search()),
     ui_(new Ui_GlobalSearchView),
     last_search_id_(0),
-    front_model_(new GlobalSearchModel(this)),
-    back_model_(new GlobalSearchModel(this)),
+    front_model_(new GlobalSearchModel(engine_, this)),
+    back_model_(new GlobalSearchModel(engine_, this)),
     current_model_(front_model_),
     front_proxy_(new GlobalSearchSortModel(this)),
     back_proxy_(new GlobalSearchSortModel(this)),
@@ -250,26 +250,6 @@ void GlobalSearchView::ArtLoaded(int id, const QPixmap& pixmap) {
   }
 }
 
-void GlobalSearchView::GetChildResults(const QStandardItem* item,
-                                       SearchProvider::ResultList* results,
-                                       QSet<const QStandardItem*>* visited) const {
-  if (visited->contains(item)) {
-    return;
-  }
-  visited->insert(item);
-
-  // Does this item have children?
-  if (item->rowCount()) {
-    // Yes - visit all the children
-    for (int i=0 ; i<item->rowCount() ; ++i) {
-      GetChildResults(item->child(i), results, visited);
-    }
-  } else {
-    // No - it's a song, add its result
-    results->append(item->data(GlobalSearchModel::Role_Result).value<SearchProvider::Result>());
-  }
-}
-
 MimeData* GlobalSearchView::LoadSelectedTracks() {
   // Get all selected model indexes
   QModelIndexList indexes = ui_->results->selectionModel()->selectedRows();
@@ -290,14 +270,12 @@ MimeData* GlobalSearchView::LoadSelectedTracks() {
     return NULL;
   }
 
-  // Get all the results in these indexes
-  SearchProvider::ResultList results;
-  QSet<const QStandardItem*> visited;
+  // Get items for these indexes
+  QList<QStandardItem*> items;
   foreach (const QModelIndex& index, indexes) {
-    GetChildResults(front_model_->itemFromIndex(front_proxy_->mapToSource(index)),
-                    &results, &visited);
+    items << (front_model_->itemFromIndex(front_proxy_->mapToSource(index)));
   }
 
-  // Get a MimeData for these results
-  return engine_->LoadTracks(results);
+  // Get a MimeData for these items
+  return engine_->LoadTracks(front_model_->GetChildResults(items));
 }
