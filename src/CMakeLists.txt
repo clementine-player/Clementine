@@ -139,6 +139,7 @@ set(SOURCES
   globalsearch/digitallyimportedsearchprovider.cpp
   globalsearch/globalsearch.cpp
   globalsearch/globalsearchitemdelegate.cpp
+  globalsearch/globalsearchmodel.cpp
   globalsearch/globalsearchsettingspage.cpp
   globalsearch/globalsearchsortmodel.cpp
   globalsearch/globalsearchview.cpp
@@ -414,6 +415,7 @@ set(HEADERS
   engines/gstelementdeleter.h
 
   globalsearch/globalsearch.h
+  globalsearch/globalsearchmodel.h
   globalsearch/globalsearchsettingspage.h
   globalsearch/globalsearchview.h
   globalsearch/groovesharksearchprovider.h

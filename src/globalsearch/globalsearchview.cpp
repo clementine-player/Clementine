@@ -17,6 +17,7 @@
 
 #include "globalsearch.h"
 #include "globalsearchitemdelegate.h"
+#include "globalsearchmodel.h"
 #include "globalsearchsortmodel.h"
 #include "globalsearchview.h"
 #include "searchprovider.h"
@@ -39,15 +40,13 @@ GlobalSearchView::GlobalSearchView(Application* app, QWidget* parent)
     engine_(app_->global_search()),
     ui_(new Ui_GlobalSearchView),
     last_search_id_(0),
-    front_model_(new QStandardItemModel(this)),
-    back_model_(new QStandardItemModel(this)),
+    front_model_(new GlobalSearchModel(this)),
+    back_model_(new GlobalSearchModel(this)),
     current_model_(front_model_),
     front_proxy_(new GlobalSearchSortModel(this)),
     back_proxy_(new GlobalSearchSortModel(this)),
     current_proxy_(front_proxy_),
-    swap_models_timer_(new QTimer(this)),
-    artist_icon_(":/icons/22x22/x-clementine-artist.png"),
-    album_icon_(":/icons/22x22/x-clementine-album.png")
+    swap_models_timer_(new QTimer(this))
 {
   ui_->setupUi(this);
 
@@ -80,14 +79,6 @@ GlobalSearchView::GlobalSearchView(Application* app, QWidget* parent)
   QFont help_font = ui_->help_text->font();
   help_font.setBold(true);
   ui_->help_text->setFont(help_font);
-
-  group_by_[0] = LibraryModel::GroupBy_Artist;
-  group_by_[1] = LibraryModel::GroupBy_Album;
-  group_by_[2] = LibraryModel::GroupBy_None;
-
-  no_cover_icon_ = QPixmap(":nocover.png").scaled(
-        LibraryModel::kPrettyCoverSize, LibraryModel::kPrettyCoverSize,
-        Qt::KeepAspectRatio, Qt::SmoothTransformation);
 
   // Set up the sorting proxy model
   front_proxy_->setSourceModel(front_model_);
@@ -149,6 +140,11 @@ void GlobalSearchView::ReloadSettings() {
   }
 
   ui_->disabled_label->setVisible(any_disabled);
+
+  // Update models to use pretty covers.
+  const bool pretty = app_->library_model()->use_pretty_covers();
+  front_model_->set_use_pretty_covers(pretty);
+  back_model_->set_use_pretty_covers(pretty);
 }
 
 void GlobalSearchView::StartSearch(const QString& query) {
@@ -164,10 +160,7 @@ void GlobalSearchView::TextEdited(const QString& text) {
   const QString trimmed(text.trimmed());
 
   // Add results to the back model, switch models after some delay.
-  provider_sort_indices_.clear();
-  containers_.clear();
-  next_provider_sort_index_ = 1000;
-  back_model_->clear();
+  back_model_->Clear();
   current_model_ = back_model_;
   current_proxy_ = back_proxy_;
   swap_models_timer_->start();
@@ -186,121 +179,7 @@ void GlobalSearchView::AddResults(int id, const SearchProvider::ResultList& resu
   if (id != last_search_id_ || results.isEmpty())
     return;
 
-  int sort_index = 0;
-
-  // Create a divider for this provider if we haven't seen it before.
-  SearchProvider* provider = results.first().provider_;
-
-  if (!provider_sort_indices_.contains(provider)) {
-    // TODO: Check if the user has configured a sort order for this provider.
-    sort_index = next_provider_sort_index_ ++;
-
-    QStandardItem* divider = new QStandardItem(provider->icon(), provider->name());
-    divider->setData(true, LibraryModel::Role_IsDivider);
-    divider->setData(sort_index, Role_ProviderIndex);
-    divider->setFlags(Qt::ItemIsEnabled);
-    current_model_->appendRow(divider);
-
-    provider_sort_indices_[provider] = sort_index;
-  } else {
-    sort_index = provider_sort_indices_[provider];
-  }
-
-  foreach (const SearchProvider::Result& result, results) {
-    QStandardItem* parent = current_model_->invisibleRootItem();
-
-    // Find (or create) the container nodes for this result if we can.
-    if (result.group_automatically_) {
-      ContainerKey key;
-      key.provider_index_ = sort_index;
-
-      parent = BuildContainers(result.metadata_, parent, &key);
-    }
-
-    // Create the item
-    QStandardItem* item = new QStandardItem(result.metadata_.title());
-    item->setData(QVariant::fromValue(result), Role_Result);
-    item->setData(sort_index, Role_ProviderIndex);
-
-    parent->appendRow(item);
-  }
-}
-
-QStandardItem* GlobalSearchView::BuildContainers(
-    const Song& s, QStandardItem* parent, ContainerKey* key, int level) {
-  if (level >= 3) {
-    return parent;
-  }
-
-  bool has_artist_icon = false;
-  bool has_album_icon = false;
-  QString display_text;
-  QString sort_text;
-  int year = 0;
-
-  switch (group_by_[level]) {
-  case LibraryModel::GroupBy_Artist:
-    display_text = LibraryModel::TextOrUnknown(s.artist());
-    sort_text = LibraryModel::SortTextForArtist(s.artist());
-    has_artist_icon = true;
-    break;
-
-  case LibraryModel::GroupBy_YearAlbum:
-    year = qMax(0, s.year());
-    display_text = LibraryModel::PrettyYearAlbum(year, s.album());
-    sort_text = LibraryModel::SortTextForYear(year) + s.album();
-    has_album_icon = true;
-    break;
-
-  case LibraryModel::GroupBy_Year:
-    year = qMax(0, s.year());
-    display_text = QString::number(year);
-    sort_text = LibraryModel::SortTextForYear(year) + " ";
-    break;
-
-  case LibraryModel::GroupBy_Composer:                         display_text = s.composer();
-  case LibraryModel::GroupBy_Genre: if (display_text.isNull()) display_text = s.genre();
-  case LibraryModel::GroupBy_Album: if (display_text.isNull()) display_text = s.album();
-  case LibraryModel::GroupBy_AlbumArtist: if (display_text.isNull()) display_text = s.effective_albumartist();
-    display_text = LibraryModel::TextOrUnknown(display_text);
-    sort_text = LibraryModel::SortTextForArtist(display_text);
-    has_album_icon = true;
-    break;
-
-  case LibraryModel::GroupBy_FileType:
-    display_text = s.TextForFiletype();
-    sort_text = display_text;
-    break;
-
-  case LibraryModel::GroupBy_None:
-    return parent;
-  }
-
-  // Find a container for this level
-  key->group_[level] = display_text;
-  QStandardItem* container = containers_[*key];
-  if (!container) {
-    container = new QStandardItem(display_text);
-    container->setData(key->provider_index_, Role_ProviderIndex);
-    container->setData(sort_text, LibraryModel::Role_SortText);
-    container->setData(group_by_[level], LibraryModel::Role_ContainerType);
-
-    if (has_artist_icon) {
-      container->setIcon(artist_icon_);
-    } else if (has_album_icon) {
-      if (app_->library_model()->use_pretty_covers()) {
-        container->setData(no_cover_icon_, Qt::DecorationRole);
-      } else {
-        container->setIcon(album_icon_);
-      }
-    }
-
-    parent->appendRow(container);
-    containers_[*key] = container;
-  }
-
-  // Create the container for the next level.
-  return BuildContainers(s, container, key, level + 1);
+  current_model_->AddResults(results);
 }
 
 void GlobalSearchView::SwapModels() {
@@ -324,7 +203,7 @@ void GlobalSearchView::LazyLoadArt(const QModelIndex& proxy_index) {
   }
 
   // Already loading art for this item?
-  if (proxy_index.data(Role_LazyLoadingArt).isValid()) {
+  if (proxy_index.data(GlobalSearchModel::Role_LazyLoadingArt).isValid()) {
     return;
   }
 
@@ -345,7 +224,7 @@ void GlobalSearchView::LazyLoadArt(const QModelIndex& proxy_index) {
   // Mark the item as loading art
   const QModelIndex source_index = front_proxy_->mapToSource(proxy_index);
   QStandardItem* item = front_model_->itemFromIndex(source_index);
-  item->setData(true, Role_LazyLoadingArt);
+  item->setData(true, GlobalSearchModel::Role_LazyLoadingArt);
 
   // Walk down the item's children until we find a track
   while (item->rowCount()) {
@@ -354,7 +233,7 @@ void GlobalSearchView::LazyLoadArt(const QModelIndex& proxy_index) {
 
   // Get the track's Result
   const SearchProvider::Result result =
-      item->data(Role_Result).value<SearchProvider::Result>();
+      item->data(GlobalSearchModel::Role_Result).value<SearchProvider::Result>();
 
   // Load the art.
   int id = engine_->LoadArtAsync(result);
@@ -387,7 +266,7 @@ void GlobalSearchView::GetChildResults(const QStandardItem* item,
     }
   } else {
     // No - it's a song, add its result
-    results->append(item->data(Role_Result).value<SearchProvider::Result>());
+    results->append(item->data(GlobalSearchModel::Role_Result).value<SearchProvider::Result>());
   }
 }
 
@@ -408,7 +287,7 @@ MimeData* GlobalSearchView::LoadSelectedTracks() {
 
   // Still got nothing?  Give up.
   if (indexes.isEmpty()) {
-    return;
+    return NULL;
   }
 
   // Get all the results in these indexes

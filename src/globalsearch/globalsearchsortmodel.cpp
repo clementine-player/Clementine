@@ -15,8 +15,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "globalsearchmodel.h"
 #include "globalsearchsortmodel.h"
-#include "globalsearchview.h"
 #include "searchprovider.h"
 #include "core/logging.h"
 
@@ -27,8 +27,8 @@ GlobalSearchSortModel::GlobalSearchSortModel(QObject* parent)
 
 bool GlobalSearchSortModel::lessThan(const QModelIndex& left, const QModelIndex& right) const {
   // Compare the provider sort index first.
-  const int index_left  = left.data(GlobalSearchView::Role_ProviderIndex).toInt();
-  const int index_right = right.data(GlobalSearchView::Role_ProviderIndex).toInt();
+  const int index_left  = left.data(GlobalSearchModel::Role_ProviderIndex).toInt();
+  const int index_right = right.data(GlobalSearchModel::Role_ProviderIndex).toInt();
   if (index_left < index_right) return true;
   if (index_left > index_right) return false;
 
@@ -50,9 +50,9 @@ bool GlobalSearchSortModel::lessThan(const QModelIndex& left, const QModelIndex&
   }
 
   // Otherwise we're comparing songs.  Sort by disc, track, then title.
-  const SearchProvider::Result r1 = left.data(GlobalSearchView::Role_Result)
+  const SearchProvider::Result r1 = left.data(GlobalSearchModel::Role_Result)
       .value<SearchProvider::Result>();
-  const SearchProvider::Result r2 = right.data(GlobalSearchView::Role_Result)
+  const SearchProvider::Result r2 = right.data(GlobalSearchModel::Role_Result)
       .value<SearchProvider::Result>();
 
 #define CompareInt(field) \

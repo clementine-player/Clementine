@@ -25,6 +25,7 @@
 #include <QWidget>
 
 class Application;
+class GlobalSearchModel;
 class SearchProviderStatusWidget;
 class Ui_GlobalSearchView;
 
@@ -42,19 +43,6 @@ public:
 
   static const int kSwapModelsTimeoutMsec;
 
-  enum Role {
-    Role_Result = LibraryModel::LastRole,
-    Role_LazyLoadingArt,
-    Role_ProviderIndex,
-
-    LastRole
-  };
-
-  struct ContainerKey {
-    int provider_index_;
-    QString group_[3];
-  };
-
   // Called by the delegate
   void LazyLoadArt(const QModelIndex& index);
 
@@ -71,13 +59,10 @@ private slots:
   void SwapModels();
   void TextEdited(const QString& text);
   void AddResults(int id, const SearchProvider::ResultList& results);
-
   void ArtLoaded(int id, const QPixmap& pixmap);
 
 private:
   MimeData* LoadSelectedTracks();
-  QStandardItem* BuildContainers(const Song& metadata, QStandardItem* parent,
-                                 ContainerKey* key, int level = 0);
 
   void GetChildResults(const QStandardItem* item,
                        SearchProvider::ResultList* results,
@@ -94,52 +79,19 @@ private:
   // model and a back model - the front model is the one that's shown in the
   // UI and the back model is the one that lies in wait.  current_model_ will
   // point to either the front or the back model.
-  QStandardItemModel* front_model_;
-  QStandardItemModel* back_model_;
-  QStandardItemModel* current_model_;
+  GlobalSearchModel* front_model_;
+  GlobalSearchModel* back_model_;
+  GlobalSearchModel* current_model_;
 
   QSortFilterProxyModel* front_proxy_;
   QSortFilterProxyModel* back_proxy_;
   QSortFilterProxyModel* current_proxy_;
 
-  QTimer* swap_models_timer_;
-
-  LibraryModel::Grouping group_by_;
-
-  QMap<SearchProvider*, int> provider_sort_indices_;
-  int next_provider_sort_index_;
-  QMap<ContainerKey, QStandardItem*> containers_;
-
-  QMap<int, QAction*> track_requests_;
   QMap<int, QModelIndex> art_requests_;
 
-  QIcon artist_icon_;
-  QIcon album_icon_;
-  QPixmap no_cover_icon_;
+  QTimer* swap_models_timer_;
 
   QList<SearchProviderStatusWidget*> provider_status_widgets_;
 };
-
-inline uint qHash(const GlobalSearchView::ContainerKey& key) {
-  return qHash(key.provider_index_)
-       ^ qHash(key.group_[0])
-       ^ qHash(key.group_[1])
-       ^ qHash(key.group_[2]);
-}
-
-inline bool operator <(const GlobalSearchView::ContainerKey& left,
-                       const GlobalSearchView::ContainerKey& right) {
-  #define CMP(field) \
-    if (left.field < right.field) return true; \
-    if (left.field > right.field) return false
-
-  CMP(provider_index_);
-  CMP(group_[0]);
-  CMP(group_[1]);
-  CMP(group_[2]);
-  return false;
-
-  #undef CMP
-}
 
 #endif // GLOBALSEARCHVIEW_H
