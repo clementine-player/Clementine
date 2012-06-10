@@ -113,13 +113,6 @@ void GroovesharkSearchProvider::AlbumArtLoaded(quint64 id, const QImage& image) 
   emit ArtLoaded(original_id, image);
 }
 
-void GroovesharkSearchProvider::LoadTracksAsync(int id, const Result& result) {
-  InternetSongMimeData* mime_data = new InternetSongMimeData(service_);
-  mime_data->songs << result.metadata_;
-
-  emit TracksLoaded(id, mime_data);
-}
-
 bool GroovesharkSearchProvider::IsLoggedIn() {
   return (service_ && service_->IsLoggedIn());
 }

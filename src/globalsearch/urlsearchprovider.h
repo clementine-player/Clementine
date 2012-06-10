@@ -30,7 +30,6 @@ public:
 
   void SearchAsync(int id, const QString& query);
   void LoadArtAsync(int id, const Result& result);
-  void LoadTracksAsync(int id, const Result& result);
 
 private:
   static const char* kUrlRegex;

@@ -73,12 +73,15 @@ private slots:
   void AddResults(int id, const SearchProvider::ResultList& results);
 
   void ArtLoaded(int id, const QPixmap& pixmap);
-  void TracksLoaded(int id, MimeData* mime_data);
 
 private:
-  void LoadTracks();
+  MimeData* LoadSelectedTracks();
   QStandardItem* BuildContainers(const Song& metadata, QStandardItem* parent,
                                  ContainerKey* key, int level = 0);
+
+  void GetChildResults(const QStandardItem* item,
+                       SearchProvider::ResultList* results,
+                       QSet<const QStandardItem*>* visited) const;
   
 private:
   Application* app_;

@@ -47,8 +47,6 @@ SpotifyServer* SpotifySearchProvider::server() {
           SLOT(SearchFinishedSlot(pb::spotify::SearchResponse)));
   connect(server_, SIGNAL(ImageLoaded(QString,QImage)),
           SLOT(ArtLoadedSlot(QString,QImage)));
-  connect(server_, SIGNAL(AlbumBrowseResults(pb::spotify::BrowseAlbumResponse)),
-          SLOT(AlbumBrowseResponse(pb::spotify::BrowseAlbumResponse)));
   connect(server_, SIGNAL(destroyed()), SLOT(ServerDestroyed()));
 
   return server_;
@@ -131,32 +129,6 @@ void SpotifySearchProvider::ArtLoadedSlot(const QString& id, const QImage& image
   pending_art_.erase(it);
 
   emit ArtLoaded(orig_id, ScaleAndPad(image));
-}
-
-void SpotifySearchProvider::LoadTracksAsync(int id, const Result& result) {
-  SongMimeData* mime_data = new SongMimeData;
-  mime_data->songs << result.metadata_;
-  emit TracksLoaded(id, mime_data);
-}
-
-void SpotifySearchProvider::AlbumBrowseResponse(const pb::spotify::BrowseAlbumResponse& response) {
-  QString uri = QStringFromStdString(response.uri());
-  QMap<QString, int>::iterator it = pending_tracks_.find(uri);
-  if (it == pending_tracks_.end())
-    return;
-
-  const int orig_id = it.value();
-  pending_tracks_.erase(it);
-
-  SongMimeData* mime_data = new SongMimeData;
-
-  for (int i=0 ; i<response.track_size() ; ++i) {
-    Song song;
-    SpotifyService::SongFromProtobuf(response.track(i), &song);
-    mime_data->songs << song;
-  }
-
-  emit TracksLoaded(orig_id, mime_data);
 }
 
 bool SpotifySearchProvider::IsLoggedIn() {

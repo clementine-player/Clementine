@@ -109,8 +109,6 @@ GlobalSearchView::GlobalSearchView(Application* app, QWidget* parent)
           Qt::QueuedConnection);
   connect(engine_, SIGNAL(ArtLoaded(int,QPixmap)), SLOT(ArtLoaded(int,QPixmap)),
           Qt::QueuedConnection);
-  connect(engine_, SIGNAL(TracksLoaded(int,MimeData*)), SLOT(TracksLoaded(int,MimeData*)),
-          Qt::QueuedConnection);
 
   ReloadSettings();
 }
@@ -373,24 +371,54 @@ void GlobalSearchView::ArtLoaded(int id, const QPixmap& pixmap) {
   }
 }
 
-void GlobalSearchView::LoadTracks() {
-  QModelIndex index = ui_->results->currentIndex();
-  if (!index.isValid())
-    index = front_proxy_->index(0, 0);
-
-  if (!index.isValid())
+void GlobalSearchView::GetChildResults(const QStandardItem* item,
+                                       SearchProvider::ResultList* results,
+                                       QSet<const QStandardItem*>* visited) const {
+  if (visited->contains(item)) {
     return;
+  }
+  visited->insert(item);
 
-  const SearchProvider::Result result =
-      index.data(Role_Result).value<SearchProvider::Result>();
-
-  engine_->LoadTracksAsync(result);
+  // Does this item have children?
+  if (item->rowCount()) {
+    // Yes - visit all the children
+    for (int i=0 ; i<item->rowCount() ; ++i) {
+      GetChildResults(item->child(i), results, visited);
+    }
+  } else {
+    // No - it's a song, add its result
+    results->append(item->data(Role_Result).value<SearchProvider::Result>());
+  }
 }
 
-void GlobalSearchView::TracksLoaded(int id, MimeData* mime_data) {
-  if (!mime_data)
-    return;
+MimeData* GlobalSearchView::LoadSelectedTracks() {
+  // Get all selected model indexes
+  QModelIndexList indexes = ui_->results->selectionModel()->selectedRows();
+  if (indexes.isEmpty()) {
+    // There's nothing selected - take the first thing in the model that isn't
+    // a divider.
+    for (int i=0 ; i<front_proxy_->rowCount() ; ++i) {
+      QModelIndex index = front_proxy_->index(i, 0);
+      if (!index.data(LibraryModel::Role_IsDivider).toBool()) {
+        indexes << index;
+        break;
+      }
+    }
+  }
 
-  mime_data->from_doubleclick_ = true;
-  emit AddToPlaylist(mime_data);
+  // Still got nothing?  Give up.
+  if (indexes.isEmpty()) {
+    return;
+  }
+
+  // Get all the results in these indexes
+  SearchProvider::ResultList results;
+  QSet<const QStandardItem*> visited;
+  foreach (const QModelIndex& index, indexes) {
+    GetChildResults(front_model_->itemFromIndex(front_proxy_->mapToSource(index)),
+                    &results, &visited);
+  }
+
+  // Get a MimeData for these results
+  return engine_->LoadTracks(results);
 }

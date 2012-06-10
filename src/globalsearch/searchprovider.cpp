@@ -20,6 +20,7 @@
 #include "playlist/songmimedata.h"
 
 #include <QPainter>
+#include <QUrl>
 #include <QtConcurrentRun>
 
 const int SearchProvider::kArtHeight = 32;
@@ -123,9 +124,25 @@ void SearchProvider::LoadArtAsync(int id, const Result& result) {
   emit ArtLoaded(id, QImage());
 }
 
-void SearchProvider::LoadTracksAsync(int id, const Result& result) {
-  SongMimeData* mime_data = new SongMimeData;
-  mime_data->songs = SongList() << result.metadata_;
+MimeData* SearchProvider::LoadTracks(const ResultList& results) {
+  MimeData* mime_data = NULL;
 
-  emit TracksLoaded(id, mime_data);
+  if (mime_data_contains_urls_only()) {
+    mime_data = new MimeData;
+  } else {
+    SongMimeData* song_mime_data = new SongMimeData;
+    mime_data = song_mime_data;
+
+    foreach (const Result& result, results) {
+      song_mime_data->songs << result.metadata_;
+    }
+  }
+
+  QList<QUrl> urls;
+  foreach (const Result& result, results) {
+    urls << result.metadata_.url();
+  }
+  mime_data->setUrls(urls);
+
+  return mime_data;
 }

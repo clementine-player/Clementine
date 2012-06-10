@@ -26,8 +26,6 @@ class SavedRadioSearchProvider : public SimpleSearchProvider {
 public:
   SavedRadioSearchProvider(SavedRadio* service, Application* app, QObject* parent);
 
-  void LoadTracksAsync(int id, const Result& result);
-
 protected:
   void RecreateItems();
 

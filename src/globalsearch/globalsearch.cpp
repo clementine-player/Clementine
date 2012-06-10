@@ -56,8 +56,6 @@ void GlobalSearch::ConnectProvider(SearchProvider* provider) {
           SLOT(SearchFinishedSlot(int)));
   connect(provider, SIGNAL(ArtLoaded(int,QImage)),
           SLOT(ArtLoadedSlot(int,QImage)));
-  connect(provider, SIGNAL(TracksLoaded(int,MimeData*)),
-          SIGNAL(TracksLoaded(int,MimeData*)));
   connect(provider, SIGNAL(destroyed(QObject*)),
           SLOT(ProviderDestroyedSlot(QObject*)));
 }
@@ -278,12 +276,23 @@ bool GlobalSearch::FindCachedPixmap(const SearchProvider::Result& result,
   return pixmap_cache_.find(result.pixmap_cache_key_, pixmap);
 }
 
-int GlobalSearch::LoadTracksAsync(const SearchProvider::Result& result) {
-  const int id = next_id_ ++;
+MimeData* GlobalSearch::LoadTracks(const SearchProvider::ResultList& results) {
+  // Different providers might create MimeData in different ways, so it's not
+  // possible to combine different providers.  Just take the results from a
+  // single provider.
+  if (results.isEmpty()) {
+    return NULL;
+  }
 
-  result.provider_->LoadTracksAsync(id, result);
+  SearchProvider* first_provider = results[0].provider_;
+  SearchProvider::ResultList results_copy;
+  foreach (const SearchProvider::Result& result, results) {
+    if (result.provider_ == first_provider) {
+      results_copy << result;
+    }
+  }
 
-  return id;
+  return first_provider->LoadTracks(results);
 }
 
 bool GlobalSearch::SetProviderEnabled(const SearchProvider* const_provider,

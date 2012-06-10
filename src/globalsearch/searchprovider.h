@@ -91,7 +91,13 @@ public:
     // Normally providers get enabled unless the user chooses otherwise.
     // Setting this flag indicates that this provider is disabled by default
     // instead.
-    DisabledByDefault = 0x40
+    DisabledByDefault = 0x40,
+
+    // The default implementation of LoadTracksAsync normally creates a
+    // SongMimeData containing the entire metadata for each result being loaded.
+    // Setting this flag will cause a plain MimeData to be created containing
+    // only the URLs of the results.
+    MimeDataContainsUrlsOnly = 0x80
   };
   Q_DECLARE_FLAGS(Hints, Hint)
 
@@ -108,6 +114,7 @@ public:
   bool can_give_suggestions() const { return hints() & CanGiveSuggestions; }
   bool is_disabled_by_default() const { return hints() & DisabledByDefault; }
   bool is_enabled_by_default() const { return !is_disabled_by_default(); }
+  bool mime_data_contains_urls_only() const { return hints() & MimeDataContainsUrlsOnly; }
 
   // Starts a search.  Must emit ResultsAvailable zero or more times and then
   // SearchFinished exactly once, using this ID.
@@ -117,9 +124,10 @@ public:
   // ResultsAvailable.  Must emit ArtLoaded exactly once with this ID.
   virtual void LoadArtAsync(int id, const Result& result);
 
-  // Starts loading tracks for a result that was previously emitted by
-  // ResultsAvailable.  Must emit TracksLoaded exactly once with this ID.
-  virtual void LoadTracksAsync(int id, const Result& result);
+  // Loads tracks for results that were previously emitted by ResultsAvailable.
+  // The default implementation creates a SongMimeData with one Song for each
+  // Result, unless the MimeDataContainsUrlsOnly flag is set.
+  virtual MimeData* LoadTracks(const ResultList& results);
 
   // Returns an example search string to display in the UI.  The provider should
   // pick one of its items at random.  Remember to set the CanGiveSuggestions
@@ -138,8 +146,6 @@ signals:
   void SearchFinished(int id);
 
   void ArtLoaded(int id, const QImage& image);
-
-  void TracksLoaded(int id, MimeData* mime_data);
 
 protected:
   // These functions treat queries in the same way as LibraryQuery.  They're

@@ -68,12 +68,11 @@ SearchProvider::ResultList LibrarySearchProvider::Search(int id, const QString& 
   return ret;
 }
 
-void LibrarySearchProvider::LoadTracksAsync(int id, const Result& result) {
-  SongMimeData* mime_data = new SongMimeData;
-  mime_data->backend = backend_;
-  mime_data->songs = SongList() << result.metadata_;
+MimeData* LibrarySearchProvider::LoadTracks(const ResultList& results) {
+  MimeData* ret = SearchProvider::LoadTracks(results);
+  static_cast<SongMimeData*>(ret)->backend = backend_;
 
-  emit TracksLoaded(id, mime_data);
+  return ret;
 }
 
 QString LibrarySearchProvider::GetSuggestion() {

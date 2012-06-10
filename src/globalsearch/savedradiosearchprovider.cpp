@@ -25,7 +25,8 @@ SavedRadioSearchProvider::SavedRadioSearchProvider(SavedRadio* service,
   : SimpleSearchProvider(app, parent),
     service_(service)
 {
-  Init(tr("Your radio streams"), "savedradio", IconLoader::Load("document-open-remote"));
+  Init(tr("Your radio streams"), "savedradio", IconLoader::Load("document-open-remote"),
+       MimeDataContainsUrlsOnly);
 
   connect(service_, SIGNAL(StreamsChanged()), SLOT(MaybeRecreateItems()));
 
@@ -44,11 +45,4 @@ void SavedRadioSearchProvider::RecreateItems() {
   }
 
   SetItems(items);
-}
-
-void SavedRadioSearchProvider::LoadTracksAsync(int id, const Result& result) {
-  MimeData* mime_data = new MimeData;
-  mime_data->setUrls(QList<QUrl>() << result.metadata_.url());
-
-  emit TracksLoaded(id, mime_data);
 }

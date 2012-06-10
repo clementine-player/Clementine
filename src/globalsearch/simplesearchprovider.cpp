@@ -91,19 +91,12 @@ SearchProvider::ResultList SimpleSearchProvider::Search(int id, const QString& q
   return ret;
 }
 
-void SimpleSearchProvider::LoadTracksAsync(int id, const Result& result) {
-  Song metadata = result.metadata_;
-  metadata.set_filetype(Song::Type_Stream);
-
-  SongMimeData* mime_data = new SongMimeData;
-  mime_data->songs = SongList() << metadata;
-
-  emit TracksLoaded(id, mime_data);
-}
-
 void SimpleSearchProvider::SetItems(const ItemList& items) {
   QMutexLocker l(&items_mutex_);
   items_ = items;
+  for (ItemList::iterator it = items_.begin() ; it != items_.end() ; ++it) {
+    it->metadata_.set_filetype(Song::Type_Stream);
+  }
 }
 
 QString SimpleSearchProvider::GetSuggestion() {

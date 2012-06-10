@@ -32,7 +32,6 @@ public:
   ResultList Search(int id, const QString& query);
 
   // SearchProvider
-  void LoadTracksAsync(int id, const Result& result);
   QString GetSuggestion();
 
 protected slots:
