@@ -148,7 +148,9 @@ void GlobalSearchView::ReloadSettings() {
   ui_->disabled_label->setVisible(any_disabled);
 
   // Update models to use pretty covers.
-  const bool pretty = app_->library_model()->use_pretty_covers();
+  QSettings s;
+  s.beginGroup(LibraryView::kSettingsGroup);
+  const bool pretty = s.value("pretty_covers", true).toBool();
   front_model_->set_use_pretty_covers(pretty);
   back_model_->set_use_pretty_covers(pretty);
 }

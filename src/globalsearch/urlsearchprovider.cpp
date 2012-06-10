@@ -38,6 +38,7 @@ void UrlSearchProvider::SearchAsync(int id, const QString& query) {
   Result result(this);
   result.group_automatically_ = false;
   result.metadata_.set_url(QUrl::fromUserInput(query));
+  result.metadata_.set_title(result.metadata_.url().toString());
   result.metadata_.set_filetype(Song::Type_Stream);
 
   emit ResultsAvailable(id, ResultList() << result);
