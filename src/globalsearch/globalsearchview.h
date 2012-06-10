@@ -46,6 +46,9 @@ public:
   // Called by the delegate
   void LazyLoadArt(const QModelIndex& index);
 
+  // QObject
+  bool eventFilter(QObject* object, QEvent* event);
+
 public slots:
   void StartSearch(const QString& query);
 
@@ -61,13 +64,23 @@ private slots:
   void AddResults(int id, const SearchProvider::ResultList& results);
   void ArtLoaded(int id, const QPixmap& pixmap);
 
+  void AddSelectedToPlaylist();
+  void LoadSelected();
+  void OpenSelectedInNewPlaylist();
+  void AddSelectedToPlaylistEnqueue();
+
 private:
-  MimeData* LoadSelectedTracks();
+  MimeData* SelectedMimeData();
+
+  bool SearchKeyEvent(QKeyEvent* event);
+  bool ResultsContextMenuEvent(QContextMenuEvent* event);
   
 private:
   Application* app_;
   GlobalSearch* engine_;
   Ui_GlobalSearchView* ui_;
+
+  QMenu* context_menu_;
 
   int last_search_id_;
 

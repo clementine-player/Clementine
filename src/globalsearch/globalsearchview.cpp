@@ -28,6 +28,7 @@
 #include "core/mimedata.h"
 #include "library/librarymodel.h"
 
+#include <QMenu>
 #include <QSortFilterProxyModel>
 #include <QStandardItem>
 #include <QTimer>
@@ -39,6 +40,7 @@ GlobalSearchView::GlobalSearchView(Application* app, QWidget* parent)
     app_(app),
     engine_(app_->global_search()),
     ui_(new Ui_GlobalSearchView),
+    context_menu_(NULL),
     last_search_id_(0),
     front_model_(new GlobalSearchModel(engine_, this)),
     back_model_(new GlobalSearchModel(engine_, this)),
@@ -50,10 +52,14 @@ GlobalSearchView::GlobalSearchView(Application* app, QWidget* parent)
 {
   ui_->setupUi(this);
 
+  ui_->search->installEventFilter(this);
+  ui_->results->installEventFilter(this);
+
   // Must be a queued connection to ensure the GlobalSearch handles it first.
   connect(app_, SIGNAL(SettingsChanged()), SLOT(ReloadSettings()), Qt::QueuedConnection);
 
   connect(ui_->search, SIGNAL(textChanged(QString)), SLOT(TextEdited(QString)));
+  connect(ui_->results, SIGNAL(AddToPlaylistSignal(QMimeData*)), SIGNAL(AddToPlaylist(QMimeData*)));
 
   // Set the appearance of the results list
   ui_->results->setItemDelegate(new GlobalSearchItemDelegate(this));
@@ -250,7 +256,7 @@ void GlobalSearchView::ArtLoaded(int id, const QPixmap& pixmap) {
   }
 }
 
-MimeData* GlobalSearchView::LoadSelectedTracks() {
+MimeData* GlobalSearchView::SelectedMimeData() {
   // Get all selected model indexes
   QModelIndexList indexes = ui_->results->selectionModel()->selectedRows();
   if (indexes.isEmpty()) {
@@ -278,4 +284,82 @@ MimeData* GlobalSearchView::LoadSelectedTracks() {
 
   // Get a MimeData for these items
   return engine_->LoadTracks(front_model_->GetChildResults(items));
+}
+
+bool GlobalSearchView::eventFilter(QObject* object, QEvent* event) {
+  if (object == ui_->search && event->type() == QEvent::KeyRelease) {
+    if (SearchKeyEvent(static_cast<QKeyEvent*>(event))) {
+      return true;
+    }
+  } else if (object == ui_->results && event->type() == QEvent::ContextMenu) {
+    if (ResultsContextMenuEvent(static_cast<QContextMenuEvent*>(event))) {
+      return true;
+    }
+  }
+
+  return QWidget::eventFilter(object, event);
+}
+
+bool GlobalSearchView::SearchKeyEvent(QKeyEvent* event) {
+  switch (event->key()) {
+  case Qt::Key_Up:
+    ui_->results->UpAndFocus();
+    break;
+
+  case Qt::Key_Down:
+    ui_->results->DownAndFocus();
+    break;
+
+  case Qt::Key_Escape:
+    static_cast<LineEditInterface*>(ui_->search)->clear();
+    break;
+
+  default:
+    return false;
+  }
+
+  event->accept();
+  return true;
+}
+
+bool GlobalSearchView::ResultsContextMenuEvent(QContextMenuEvent* event) {
+  if (!context_menu_) {
+    context_menu_ = new QMenu(this);
+    context_menu_->addAction(IconLoader::Load("media-playback-start"),
+        tr("Append to current playlist"), this, SLOT(AddSelectedToPlaylist()));
+    context_menu_->addAction(IconLoader::Load("media-playback-start"),
+        tr("Replace current playlist"), this, SLOT(LoadSelected()));
+    context_menu_->addAction(IconLoader::Load("document-new"),
+        tr("Open in new playlist"), this, SLOT(OpenSelectedInNewPlaylist()));
+
+    context_menu_->addSeparator();
+    context_menu_->addAction(IconLoader::Load("go-next"),
+        tr("Queue track"), this, SLOT(AddSelectedToPlaylistEnqueue()));
+  }
+
+  context_menu_->popup(event->globalPos());
+
+  return true;
+}
+
+void GlobalSearchView::AddSelectedToPlaylist() {
+  emit AddToPlaylist(SelectedMimeData());
+}
+
+void GlobalSearchView::LoadSelected() {
+  MimeData* data = SelectedMimeData();
+  data->clear_first_ = true;
+  emit AddToPlaylist(data);
+}
+
+void GlobalSearchView::AddSelectedToPlaylistEnqueue() {
+  MimeData* data = SelectedMimeData();
+  data->enqueue_now_ = true;
+  emit AddToPlaylist(data);
+}
+
+void GlobalSearchView::OpenSelectedInNewPlaylist() {
+  MimeData* data = SelectedMimeData();
+  data->open_in_new_playlist_ = true;
+  emit AddToPlaylist(data);
 }
