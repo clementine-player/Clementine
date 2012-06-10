@@ -10,16 +10,6 @@
     <height>633</height>
    </rect>
   </property>
-  <property name="windowTitle">
-   <string>Form</string>
-  </property>
-  <property name="styleSheet">
-   <string notr="true">#help_text {
-  color: gray;
-  font-weight: bold;
-  margin: 1em 1em 4em 1em;
-}</string>
-  </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="spacing">
     <number>0</number>
@@ -89,16 +79,34 @@
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_2">
           <item>
-           <widget class="QLabel" name="help_text">
-            <property name="text">
-             <string>Enter search terms above to find music on your computer and on the internet</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-            <property name="wordWrap">
-             <bool>true</bool>
-            </property>
+           <widget class="QWidget" name="widget" native="true">
+            <layout class="QVBoxLayout" name="verticalLayout_4">
+             <property name="leftMargin">
+              <number>32</number>
+             </property>
+             <property name="topMargin">
+              <number>16</number>
+             </property>
+             <property name="rightMargin">
+              <number>32</number>
+             </property>
+             <property name="bottomMargin">
+              <number>64</number>
+             </property>
+             <item>
+              <widget class="QLabel" name="help_text">
+               <property name="text">
+                <string>Enter search terms above to find music on your computer and on the internet</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+               <property name="wordWrap">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+            </layout>
            </widget>
           </item>
           <item>
@@ -115,7 +123,7 @@
            <widget class="QWidget" name="enabled_list" native="true"/>
           </item>
           <item>
-           <widget class="QLabel" name="label_3">
+           <widget class="QLabel" name="disabled_label">
             <property name="text">
              <string>But these sources are disabled:</string>
             </property>

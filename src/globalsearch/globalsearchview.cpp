@@ -69,6 +69,18 @@ GlobalSearchView::GlobalSearchView(Application* app, QWidget* parent)
   enabled_layout->setContentsMargins(16, 0, 16, 6);
   disabled_layout->setContentsMargins(16, 0, 16, 6);
 
+  // Set the colour of the help text to the disabled text colour
+  QPalette help_palette = ui_->help_text->palette();
+  const QColor help_color = help_palette.color(QPalette::Disabled, QPalette::Text);
+  help_palette.setColor(QPalette::Normal, QPalette::Text, help_color);
+  help_palette.setColor(QPalette::Inactive, QPalette::Text, help_color);
+  ui_->help_text->setPalette(help_palette);
+
+  // Make it bold
+  QFont help_font = ui_->help_text->font();
+  help_font.setBold(true);
+  ui_->help_text->setFont(help_font);
+
   group_by_[0] = LibraryModel::GroupBy_Artist;
   group_by_[1] = LibraryModel::GroupBy_Album;
   group_by_[2] = LibraryModel::GroupBy_None;
@@ -114,16 +126,22 @@ namespace {
 }
 
 void GlobalSearchView::ReloadSettings() {
+  // Delete any old status widgets
   qDeleteAll(provider_status_widgets_);
   provider_status_widgets_.clear();
 
+  // Sort the list of providers alphabetically
   QList<SearchProvider*> providers = engine_->providers();
   qSort(providers.begin(), providers.end(), CompareProviderName);
 
+  bool any_disabled = false;
+
   foreach (SearchProvider* provider, providers) {
-    QWidget* parent = engine_->is_provider_usable(provider)
-        ? ui_->enabled_list
-        : ui_->disabled_list;
+    QWidget* parent = ui_->enabled_list;
+    if (!engine_->is_provider_usable(provider)) {
+      parent = ui_->disabled_list;
+      any_disabled = true;
+    }
 
     SearchProviderStatusWidget* widget =
         new SearchProviderStatusWidget(engine_, provider);
@@ -131,6 +149,8 @@ void GlobalSearchView::ReloadSettings() {
     parent->layout()->addWidget(widget);
     provider_status_widgets_ << widget;
   }
+
+  ui_->disabled_label->setVisible(any_disabled);
 }
 
 void GlobalSearchView::StartSearch(const QString& query) {
