@@ -138,6 +138,7 @@ set(SOURCES
 
   globalsearch/digitallyimportedsearchprovider.cpp
   globalsearch/globalsearch.cpp
+  globalsearch/globalsearchitemdelegate.cpp
   globalsearch/globalsearchsettingspage.cpp
   globalsearch/globalsearchsortmodel.cpp
   globalsearch/globalsearchview.cpp

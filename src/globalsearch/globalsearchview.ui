@@ -28,7 +28,7 @@
     </widget>
    </item>
    <item>
-    <widget class="QTreeView" name="results">
+    <widget class="AutoExpandingTreeView" name="results">
      <property name="editTriggers">
       <set>QAbstractItemView::NoEditTriggers</set>
      </property>
@@ -47,6 +47,11 @@
    <class>LineEdit</class>
    <extends>QLineEdit</extends>
    <header>widgets/lineedit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>AutoExpandingTreeView</class>
+   <extends>QTreeView</extends>
+   <header>widgets/autoexpandingtreeview.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

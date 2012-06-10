@@ -16,6 +16,7 @@
 */
 
 #include "globalsearch.h"
+#include "globalsearchitemdelegate.h"
 #include "globalsearchsortmodel.h"
 #include "globalsearchview.h"
 #include "searchprovider.h"
@@ -24,7 +25,6 @@
 #include "core/logging.h"
 #include "core/mimedata.h"
 #include "library/librarymodel.h"
-#include "library/libraryview.h"
 
 #include <QSortFilterProxyModel>
 #include <QStandardItem>
@@ -44,17 +44,23 @@ GlobalSearchView::GlobalSearchView(Application* app, QWidget* parent)
     front_proxy_(new GlobalSearchSortModel(this)),
     back_proxy_(new GlobalSearchSortModel(this)),
     current_proxy_(front_proxy_),
-    swap_models_timer_(new QTimer(this))
+    swap_models_timer_(new QTimer(this)),
+    artist_icon_(":/icons/22x22/x-clementine-artist.png"),
+    album_icon_(":/icons/22x22/x-clementine-album.png")
 {
   ui_->setupUi(this);
 
   connect(ui_->search, SIGNAL(textChanged(QString)), SLOT(TextEdited(QString)));
 
-  ui_->results->setItemDelegate(new LibraryItemDelegate(this));
+  ui_->results->setItemDelegate(new GlobalSearchItemDelegate(this));
 
   group_by_[0] = LibraryModel::GroupBy_Artist;
   group_by_[1] = LibraryModel::GroupBy_Album;
   group_by_[2] = LibraryModel::GroupBy_None;
+
+  no_cover_icon_ = QPixmap(":nocover.png").scaled(
+        LibraryModel::kPrettyCoverSize, LibraryModel::kPrettyCoverSize,
+        Qt::KeepAspectRatio, Qt::SmoothTransformation);
 
   // Set up the sorting proxy model
   front_proxy_->setSourceModel(front_model_);
@@ -164,6 +170,7 @@ QStandardItem* GlobalSearchView::BuildContainers(
     return parent;
   }
 
+  QIcon icon;
   QString display_text;
   QString sort_text;
   int year = 0;
@@ -172,12 +179,14 @@ QStandardItem* GlobalSearchView::BuildContainers(
   case LibraryModel::GroupBy_Artist:
     display_text = LibraryModel::TextOrUnknown(s.artist());
     sort_text = LibraryModel::SortTextForArtist(s.artist());
+    icon = artist_icon_;
     break;
 
   case LibraryModel::GroupBy_YearAlbum:
     year = qMax(0, s.year());
     display_text = LibraryModel::PrettyYearAlbum(year, s.album());
     sort_text = LibraryModel::SortTextForYear(year) + s.album();
+    icon = album_icon_;
     break;
 
   case LibraryModel::GroupBy_Year:
@@ -192,6 +201,7 @@ QStandardItem* GlobalSearchView::BuildContainers(
   case LibraryModel::GroupBy_AlbumArtist: if (display_text.isNull()) display_text = s.effective_albumartist();
     display_text = LibraryModel::TextOrUnknown(display_text);
     sort_text = LibraryModel::SortTextForArtist(display_text);
+    icon = album_icon_;
     break;
 
   case LibraryModel::GroupBy_FileType:
@@ -207,7 +217,7 @@ QStandardItem* GlobalSearchView::BuildContainers(
   key->group_[level] = display_text;
   QStandardItem* container = containers_[*key];
   if (!container) {
-    container = new QStandardItem(display_text);
+    container = new QStandardItem(icon, display_text);
     container->setData(key->provider_index_, Role_ProviderIndex);
     container->setData(sort_text, LibraryModel::Role_SortText);
     container->setData(group_by_[level], LibraryModel::Role_ContainerType);
@@ -237,12 +247,30 @@ void GlobalSearchView::LazyLoadArt(const QModelIndex& proxy_index) {
     return;
   }
 
+  // Only load art for albums
+  const LibraryModel::GroupBy container_type = LibraryModel::GroupBy(
+        proxy_index.data(LibraryModel::Role_ContainerType).toInt());
+  if (container_type != LibraryModel::GroupBy_Album &&
+      container_type != LibraryModel::GroupBy_AlbumArtist &&
+      container_type != LibraryModel::GroupBy_YearAlbum) {
+    return;
+  }
+
+  // Mark the item as loading art
   const QModelIndex source_index = front_proxy_->mapToSource(proxy_index);
-  front_model_->itemFromIndex(source_index)->setData(true, Role_LazyLoadingArt);
+  QStandardItem* item = front_model_->itemFromIndex(source_index);
+  item->setData(true, Role_LazyLoadingArt);
 
+  // Walk down the item's children until we find a track
+  while (item->rowCount()) {
+    item = item->child(0);
+  }
+
+  // Get the track's Result
   const SearchProvider::Result result =
-      source_index.data(Role_Result).value<SearchProvider::Result>();
+      item->data(Role_Result).value<SearchProvider::Result>();
 
+  // Load the art.
   int id = engine_->LoadArtAsync(result);
   art_requests_[id] = source_index;
 }

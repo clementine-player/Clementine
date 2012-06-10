@@ -71,7 +71,6 @@ LibraryModel::LibraryModel(LibraryBackend* backend, Application* app,
     total_song_count_(0),
     artist_icon_(":/icons/22x22/x-clementine-artist.png"),
     album_icon_(":/icons/22x22/x-clementine-album.png"),
-    no_cover_icon_(":nocover.png"),
     playlists_dir_icon_(IconLoader::Load("folder-sound")),
     playlist_icon_(":/icons/22x22/x-clementine-albums.png"),
     init_task_id_(-1),
@@ -92,7 +91,7 @@ LibraryModel::LibraryModel(LibraryBackend* backend, Application* app,
           SIGNAL(ImageLoaded(quint64,QImage)),
           SLOT(AlbumArtLoaded(quint64,QImage)));
 
-  no_cover_icon_pretty_ = QPixmap(":nocover.png").scaled(
+  no_cover_icon_ = QPixmap(":nocover.png").scaled(
         kPrettyCoverSize, kPrettyCoverSize,
         Qt::KeepAspectRatio, Qt::SmoothTransformation);
 }
@@ -405,7 +404,7 @@ QString LibraryModel::AlbumIconPixmapCacheKey(const QModelIndex& index) const {
 QVariant LibraryModel::AlbumIcon(const QModelIndex& index) {
   LibraryItem* item = IndexToItem(index);
   if (!item)
-    return no_cover_icon_pretty_;
+    return no_cover_icon_;
 
   // Check the cache for a pixmap we already loaded.
   const QString cache_key = AlbumIconPixmapCacheKey(index);
@@ -416,7 +415,7 @@ QVariant LibraryModel::AlbumIcon(const QModelIndex& index) {
 
   // Maybe we're loading a pixmap already?
   if (pending_cache_keys_.contains(cache_key)) {
-    return no_cover_icon_pretty_;
+    return no_cover_icon_;
   }
 
   // No art is cached and we're not loading it already.  Load art for the first
@@ -429,7 +428,7 @@ QVariant LibraryModel::AlbumIcon(const QModelIndex& index) {
     pending_cache_keys_.insert(cache_key);
   }
 
-  return no_cover_icon_pretty_;
+  return no_cover_icon_;
 }
 
 void LibraryModel::AlbumArtLoaded(quint64 id, const QImage& image) {
@@ -444,7 +443,7 @@ void LibraryModel::AlbumArtLoaded(quint64 id, const QImage& image) {
   // Insert this image in the cache.
   if (image.isNull()) {
     // Set the no_cover image so we don't continually try to load art.
-    QPixmapCache::insert(cache_key, no_cover_icon_pretty_);
+    QPixmapCache::insert(cache_key, no_cover_icon_);
   } else {
     QPixmapCache::insert(cache_key, QPixmap::fromImage(image));
   }

@@ -106,6 +106,10 @@ private:
 
   QMap<int, QAction*> track_requests_;
   QMap<int, QModelIndex> art_requests_;
+
+  QIcon artist_icon_;
+  QIcon album_icon_;
+  QPixmap no_cover_icon_;
 };
 
 inline uint qHash(const GlobalSearchView::ContainerKey& key) {
