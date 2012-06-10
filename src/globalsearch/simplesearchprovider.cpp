@@ -67,11 +67,10 @@ SearchProvider::ResultList SimpleSearchProvider::Search(int id, const QString& q
 
   QMutexLocker l(&items_mutex_);
   foreach (const Item& item, items_) {
-    Result result(this);
-
     bool matched = true;
     foreach (const QString& token, tokens) {
       if (!item.keyword_.contains(token, Qt::CaseInsensitive) &&
+          !item.metadata_.title().contains(token, Qt::CaseInsensitive) &&
           !safe_words_.contains(token, Qt::CaseInsensitive)) {
         matched = false;
         break;
@@ -79,6 +78,7 @@ SearchProvider::ResultList SimpleSearchProvider::Search(int id, const QString& q
     }
 
     if (matched) {
+      Result result(this);
       result.group_automatically_ = false;
       result.metadata_ = item.metadata_;
       ret << result;

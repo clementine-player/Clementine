@@ -137,6 +137,7 @@ void GlobalSearchView::AddResults(int id, const SearchProvider::ResultList& resu
     QStandardItem* divider = new QStandardItem(provider->icon(), provider->name());
     divider->setData(true, LibraryModel::Role_IsDivider);
     divider->setData(sort_index, Role_ProviderIndex);
+    divider->setFlags(Qt::ItemIsEnabled);
     current_model_->appendRow(divider);
 
     provider_sort_indices_[provider] = sort_index;
@@ -170,7 +171,8 @@ QStandardItem* GlobalSearchView::BuildContainers(
     return parent;
   }
 
-  QIcon icon;
+  bool has_artist_icon = false;
+  bool has_album_icon = false;
   QString display_text;
   QString sort_text;
   int year = 0;
@@ -179,14 +181,14 @@ QStandardItem* GlobalSearchView::BuildContainers(
   case LibraryModel::GroupBy_Artist:
     display_text = LibraryModel::TextOrUnknown(s.artist());
     sort_text = LibraryModel::SortTextForArtist(s.artist());
-    icon = artist_icon_;
+    has_artist_icon = true;
     break;
 
   case LibraryModel::GroupBy_YearAlbum:
     year = qMax(0, s.year());
     display_text = LibraryModel::PrettyYearAlbum(year, s.album());
     sort_text = LibraryModel::SortTextForYear(year) + s.album();
-    icon = album_icon_;
+    has_album_icon = true;
     break;
 
   case LibraryModel::GroupBy_Year:
@@ -201,7 +203,7 @@ QStandardItem* GlobalSearchView::BuildContainers(
   case LibraryModel::GroupBy_AlbumArtist: if (display_text.isNull()) display_text = s.effective_albumartist();
     display_text = LibraryModel::TextOrUnknown(display_text);
     sort_text = LibraryModel::SortTextForArtist(display_text);
-    icon = album_icon_;
+    has_album_icon = true;
     break;
 
   case LibraryModel::GroupBy_FileType:
@@ -217,10 +219,20 @@ QStandardItem* GlobalSearchView::BuildContainers(
   key->group_[level] = display_text;
   QStandardItem* container = containers_[*key];
   if (!container) {
-    container = new QStandardItem(icon, display_text);
+    container = new QStandardItem(display_text);
     container->setData(key->provider_index_, Role_ProviderIndex);
     container->setData(sort_text, LibraryModel::Role_SortText);
     container->setData(group_by_[level], LibraryModel::Role_ContainerType);
+
+    if (has_artist_icon) {
+      container->setIcon(artist_icon_);
+    } else if (has_album_icon) {
+      if (app_->library_model()->use_pretty_covers()) {
+        container->setData(no_cover_icon_, Qt::DecorationRole);
+      } else {
+        container->setIcon(album_icon_);
+      }
+    }
 
     parent->appendRow(container);
     containers_[*key] = container;
@@ -240,14 +252,21 @@ void GlobalSearchView::SwapModels() {
 }
 
 void GlobalSearchView::LazyLoadArt(const QModelIndex& proxy_index) {
-  if (!proxy_index.isValid() || proxy_index.data(Role_LazyLoadingArt).isValid()) {
-    return;
-  }
-  if (proxy_index.model() != front_proxy_) {
+  if (!proxy_index.isValid() || proxy_index.model() != front_proxy_) {
     return;
   }
 
-  // Only load art for albums
+  // Already loading art for this item?
+  if (proxy_index.data(Role_LazyLoadingArt).isValid()) {
+    return;
+  }
+
+  // Should we even load art at all?
+  if (!app_->library_model()->use_pretty_covers()) {
+    return;
+  }
+
+  // Is this an album?
   const LibraryModel::GroupBy container_type = LibraryModel::GroupBy(
         proxy_index.data(LibraryModel::Role_ContainerType).toInt());
   if (container_type != LibraryModel::GroupBy_Album &&
@@ -280,7 +299,9 @@ void GlobalSearchView::ArtLoaded(int id, const QPixmap& pixmap) {
     return;
   QModelIndex index = art_requests_.take(id);
 
-  front_model_->itemFromIndex(index)->setData(pixmap, Qt::DecorationRole);
+  if (!pixmap.isNull()) {
+    front_model_->itemFromIndex(index)->setData(pixmap, Qt::DecorationRole);
+  }
 }
 
 void GlobalSearchView::LoadTracks() {

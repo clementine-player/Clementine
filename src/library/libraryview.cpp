@@ -77,8 +77,6 @@ void LibraryItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &o
 
     // Draw the icon at the left of the text rectangle
     if (!pixmap.isNull()) {
-      text_rect.setLeft(text_rect.left() + 15);
-
       QRect icon_rect(text_rect.topLeft(), opt.decorationSize);
       const int padding = (text_rect.height() - icon_rect.height()) / 2;
       icon_rect.adjust(padding, padding, padding, padding);
