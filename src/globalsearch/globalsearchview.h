@@ -27,6 +27,7 @@
 class Application;
 class GlobalSearchModel;
 class SearchProviderStatusWidget;
+class SuggestionWidget;
 class Ui_GlobalSearchView;
 
 class QMimeData;
@@ -42,14 +43,21 @@ public:
   ~GlobalSearchView();
 
   static const int kSwapModelsTimeoutMsec;
+  static const int kMaxSuggestions;
+  static const int kUpdateSuggestionsTimeoutMsec;
 
   // Called by the delegate
   void LazyLoadArt(const QModelIndex& index);
+
+  // QWidget
+  void showEvent(QShowEvent* e);
+  void hideEvent(QHideEvent* e);
 
   // QObject
   bool eventFilter(QObject* object, QEvent* event);
 
 public slots:
+  void ReloadSettings();
   void StartSearch(const QString& query);
 
 signals:
@@ -57,7 +65,7 @@ signals:
   void OpenSettingsAtPage(SettingsDialog::Page page);
 
 private slots:
-  void ReloadSettings();
+  void UpdateSuggestions();
 
   void SwapModels();
   void TextEdited(const QString& text);
@@ -99,8 +107,13 @@ private:
   QMap<int, QModelIndex> art_requests_;
 
   QTimer* swap_models_timer_;
+  QTimer* update_suggestions_timer_;
 
   QList<SearchProviderStatusWidget*> provider_status_widgets_;
+  QList<SuggestionWidget*> suggestion_widgets_;
+
+  QIcon search_icon_;
+  QIcon warning_icon_;
 };
 
 #endif // GLOBALSEARCHVIEW_H

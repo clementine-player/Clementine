@@ -32,7 +32,7 @@ public:
   ResultList Search(int id, const QString& query);
 
   // SearchProvider
-  QString GetSuggestion();
+  QStringList GetSuggestions(int count);
 
 protected slots:
   // Calls RecreateItems now if the user has done a global search with this
@@ -54,6 +54,7 @@ protected:
 
   int result_limit() const { return result_limit_; }
   void set_result_limit(int result_limit) { result_limit_ = result_limit; }
+  void set_max_suggestion_count(int count) { max_suggestion_count_ = count; }
   QStringList safe_words() const { return safe_words_; }
   void set_safe_words(const QStringList& safe_words) { safe_words_ = safe_words; }
 
@@ -66,6 +67,7 @@ protected:
 private:
   int result_limit_;
   QStringList safe_words_;
+  int max_suggestion_count_;
 
   QMutex items_mutex_;
   ItemList items_;

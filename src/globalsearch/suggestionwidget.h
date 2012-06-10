@@ -15,29 +15,30 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef SEARCHPROVIDERSTATUSWIDGET_H
-#define SEARCHPROVIDERSTATUSWIDGET_H
+#ifndef SUGGESTIONWIDGET_H
+#define SUGGESTIONWIDGET_H
 
 #include <QWidget>
 
-class GlobalSearch;
-class SearchProvider;
-class Ui_SearchProviderStatusWidget;
+class Ui_SuggestionWidget;
 
-class SearchProviderStatusWidget : public QWidget {
+class SuggestionWidget : public QWidget {
+  Q_OBJECT
+
 public:
-  SearchProviderStatusWidget(const QIcon& warning_icon,
-                             GlobalSearch* engine, SearchProvider* provider,
-                             QWidget* parent = 0);
-  ~SearchProviderStatusWidget();
+  SuggestionWidget(const QIcon& search_icon, QWidget* parent = 0);
+  ~SuggestionWidget();
 
   bool eventFilter(QObject* object, QEvent* event);
+
+public slots:
+  void SetText(const QString& text);
+
+signals:
+  void SuggestionClicked(const QString& query);
   
 private:
-  Ui_SearchProviderStatusWidget* ui_;
-
-  GlobalSearch* engine_;
-  SearchProvider* provider_;
+  Ui_SuggestionWidget* ui_;
 };
 
-#endif // SEARCHPROVIDERSTATUSWIDGET_H
+#endif // SUGGESTIONWIDGET_H

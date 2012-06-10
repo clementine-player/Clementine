@@ -27,6 +27,8 @@
 #include <QTimerEvent>
 #include <QUrl>
 
+#include <algorithm>
+
 const int GlobalSearch::kDelayedSearchTimeoutMs = 200;
 const char* GlobalSearch::kSettingsGroup = "GlobalSearch";
 const int GlobalSearch::kMaxResultsPerEmission = 100;
@@ -357,22 +359,28 @@ void GlobalSearch::SaveProvidersSettings() {
   }
 }
 
-QStringList GlobalSearch::GetSuggestions(int max) {
+QStringList GlobalSearch::GetSuggestions(int count) {
   QStringList ret;
-  QList<SearchProvider*> eligible_providers;
 
+  // Get count suggestions from each provider
   foreach (SearchProvider* provider, providers_.keys()) {
     if (is_provider_enabled(provider) && provider->can_give_suggestions()) {
-      eligible_providers << provider;
+      foreach (QString suggestion, provider->GetSuggestions(count)) {
+        suggestion = suggestion.trimmed().toLower();
+
+        if (!suggestion.isEmpty()) {
+          ret << suggestion;
+        }
+      }
     }
   }
 
-  while (ret.count() < max && !eligible_providers.isEmpty()) {
-    SearchProvider* provider = eligible_providers.takeAt(qrand() % eligible_providers.count());
-    QString suggestion = provider->GetSuggestion().trimmed();
-    if (!suggestion.isEmpty())
-      ret << suggestion;
-  }
+  // Randomize the suggestions
+  std::random_shuffle(ret.begin(), ret.end());
 
+  // Only return the first count
+  while (ret.length() > count) {
+    ret.removeLast();
+  }
   return ret;
 }

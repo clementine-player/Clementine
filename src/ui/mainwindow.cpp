@@ -219,6 +219,7 @@ MainWindow::MainWindow(Application* app,
       IconLoader::Load("folder-sound"), true, app_, this));
 
   app_->global_search()->ReloadSettings();
+  global_search_view_->ReloadSettings();
 
   connect(global_search_view_, SIGNAL(AddToPlaylist(QMimeData*)), SLOT(AddToPlaylist(QMimeData*)));
   connect(global_search_view_, SIGNAL(OpenSettingsAtPage(SettingsDialog::Page)), SLOT(OpenSettingsDialogAtPage(SettingsDialog::Page)));

@@ -32,7 +32,7 @@ public:
 
   ResultList Search(int id, const QString& query);
   MimeData* LoadTracks(const ResultList& results);
-  QString GetSuggestion();
+  QStringList GetSuggestions(int count);
 
 private:
   LibraryBackendInterface* backend_;

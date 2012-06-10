@@ -22,10 +22,12 @@
 #include "globalsearchview.h"
 #include "searchprovider.h"
 #include "searchproviderstatuswidget.h"
+#include "suggestionwidget.h"
 #include "ui_globalsearchview.h"
 #include "core/application.h"
 #include "core/logging.h"
 #include "core/mimedata.h"
+#include "core/timeconstants.h"
 #include "library/librarymodel.h"
 
 #include <QMenu>
@@ -34,6 +36,8 @@
 #include <QTimer>
 
 const int GlobalSearchView::kSwapModelsTimeoutMsec = 250;
+const int GlobalSearchView::kMaxSuggestions = 10;
+const int GlobalSearchView::kUpdateSuggestionsTimeoutMsec = 60 * kMsecPerSec;
 
 GlobalSearchView::GlobalSearchView(Application* app, QWidget* parent)
   : QWidget(parent),
@@ -48,7 +52,10 @@ GlobalSearchView::GlobalSearchView(Application* app, QWidget* parent)
     front_proxy_(new GlobalSearchSortModel(this)),
     back_proxy_(new GlobalSearchSortModel(this)),
     current_proxy_(front_proxy_),
-    swap_models_timer_(new QTimer(this))
+    swap_models_timer_(new QTimer(this)),
+    update_suggestions_timer_(new QTimer(this)),
+    search_icon_(IconLoader::Load("search")),
+    warning_icon_(IconLoader::Load("dialog-warning"))
 {
   ui_->setupUi(this);
 
@@ -71,8 +78,10 @@ GlobalSearchView::GlobalSearchView(Application* app, QWidget* parent)
   ui_->help_frame->setBackgroundRole(QPalette::Base);
   QVBoxLayout* enabled_layout = new QVBoxLayout(ui_->enabled_list);
   QVBoxLayout* disabled_layout = new QVBoxLayout(ui_->disabled_list);
+  QVBoxLayout* suggestions_layout = new QVBoxLayout(ui_->suggestions_list);
   enabled_layout->setContentsMargins(16, 0, 16, 6);
-  disabled_layout->setContentsMargins(16, 0, 16, 6);
+  disabled_layout->setContentsMargins(16, 0, 16, 32);
+  suggestions_layout->setContentsMargins(16, 0, 16, 6);
 
   // Set the colour of the help text to the disabled text colour
   QPalette help_palette = ui_->help_text->palette();
@@ -80,6 +89,14 @@ GlobalSearchView::GlobalSearchView(Application* app, QWidget* parent)
   help_palette.setColor(QPalette::Normal, QPalette::Text, help_color);
   help_palette.setColor(QPalette::Inactive, QPalette::Text, help_color);
   ui_->help_text->setPalette(help_palette);
+
+  // Create suggestion widgets
+  for (int i=0 ; i<kMaxSuggestions ; ++i) {
+    SuggestionWidget* widget = new SuggestionWidget(search_icon_);
+    connect(widget, SIGNAL(SuggestionClicked(QString)), SLOT(StartSearch(QString)));
+    suggestions_layout->addWidget(widget);
+    suggestion_widgets_ << widget;
+  }
 
   // Make it bold
   QFont help_font = ui_->help_text->font();
@@ -99,6 +116,9 @@ GlobalSearchView::GlobalSearchView(Application* app, QWidget* parent)
   swap_models_timer_->setInterval(kSwapModelsTimeoutMsec);
   connect(swap_models_timer_, SIGNAL(timeout()), SLOT(SwapModels()));
 
+  update_suggestions_timer_->setInterval(kUpdateSuggestionsTimeoutMsec);
+  connect(update_suggestions_timer_, SIGNAL(timeout()), SLOT(UpdateSuggestions()));
+
   // These have to be queued connections because they may get emitted before
   // our call to Search() (or whatever) returns and we add the ID to the map.
   connect(engine_, SIGNAL(ResultsAvailable(int,SearchProvider::ResultList)),
@@ -106,8 +126,6 @@ GlobalSearchView::GlobalSearchView(Application* app, QWidget* parent)
           Qt::QueuedConnection);
   connect(engine_, SIGNAL(ArtLoaded(int,QPixmap)), SLOT(ArtLoaded(int,QPixmap)),
           Qt::QueuedConnection);
-
-  ReloadSettings();
 }
 
 GlobalSearchView::~GlobalSearchView() {
@@ -139,7 +157,7 @@ void GlobalSearchView::ReloadSettings() {
     }
 
     SearchProviderStatusWidget* widget =
-        new SearchProviderStatusWidget(engine_, provider);
+        new SearchProviderStatusWidget(warning_icon_, engine_, provider);
 
     parent->layout()->addWidget(widget);
     provider_status_widgets_ << widget;
@@ -153,6 +171,19 @@ void GlobalSearchView::ReloadSettings() {
   const bool pretty = s.value("pretty_covers", true).toBool();
   front_model_->set_use_pretty_covers(pretty);
   back_model_->set_use_pretty_covers(pretty);
+}
+
+void GlobalSearchView::UpdateSuggestions() {
+  const QStringList suggestions = engine_->GetSuggestions(kMaxSuggestions);
+
+  for (int i=0 ; i<suggestions.count() ; ++i) {
+    suggestion_widgets_[i]->SetText(suggestions[i]);
+    suggestion_widgets_[i]->show();
+  }
+
+  for (int i=suggestions.count() ; i<kMaxSuggestions ; ++i) {
+    suggestion_widgets_[i]->hide();
+  }
 }
 
 void GlobalSearchView::StartSearch(const QString& query) {
@@ -364,4 +395,15 @@ void GlobalSearchView::OpenSelectedInNewPlaylist() {
   MimeData* data = SelectedMimeData();
   data->open_in_new_playlist_ = true;
   emit AddToPlaylist(data);
+}
+
+void GlobalSearchView::showEvent(QShowEvent* e) {
+  UpdateSuggestions();
+  update_suggestions_timer_->start();
+  QWidget::showEvent(e);
+}
+
+void GlobalSearchView::hideEvent(QHideEvent* e) {
+  update_suggestions_timer_->stop();
+  QWidget::hideEvent(e);
 }

@@ -24,9 +24,10 @@
 
 #include <QMouseEvent>
 
-SearchProviderStatusWidget::SearchProviderStatusWidget(GlobalSearch* engine,
-                                                       SearchProvider* provider,
-                                                       QWidget* parent)
+SearchProviderStatusWidget::SearchProviderStatusWidget(
+    const QIcon& warning_icon,
+    GlobalSearch* engine, SearchProvider* provider,
+    QWidget* parent)
   : QWidget(parent),
     ui_(new Ui_SearchProviderStatusWidget),
     engine_(engine),
@@ -51,7 +52,7 @@ SearchProviderStatusWidget::SearchProviderStatusWidget(GlobalSearch* engine,
 
     ui_->disabled_reason->setMinimumWidth(disabled_width);
     ui_->disabled_reason->setText(logged_in ? disabled_text : not_logged_in_text);
-    ui_->disabled_icon->setPixmap(IconLoader::Load("dialog-warning").pixmap(16));
+    ui_->disabled_icon->setPixmap(warning_icon.pixmap(16));
 
     ui_->disabled_reason->installEventFilter(this);
   }

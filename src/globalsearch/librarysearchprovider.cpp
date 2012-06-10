@@ -75,7 +75,7 @@ MimeData* LibrarySearchProvider::LoadTracks(const ResultList& results) {
   return ret;
 }
 
-QString LibrarySearchProvider::GetSuggestion() {
+QStringList LibrarySearchProvider::GetSuggestions(int count) {
   // We'd like to use order by random(), but that's O(n) in sqlite, so instead
   // get the largest ROWID and pick a couple of random numbers within that
   // range.
@@ -86,13 +86,19 @@ QString LibrarySearchProvider::GetSuggestion() {
   q.SetIncludeUnavailable(true);
   q.SetLimit(1);
 
+  QStringList ret;
+
   if (!backend_->ExecQuery(&q) || !q.Next()) {
-    return QString();
+    return ret;
   }
 
   const int largest_rowid = q.Value(0).toInt();
 
-  for (int attempt=0 ; attempt<10 ; ++attempt) {
+  for (int attempt=0 ; attempt<count*5 ; ++attempt) {
+    if (ret.count() >= count) {
+      break;
+    }
+
     LibraryQuery q;
     q.SetColumnSpec("artist, album");
     q.SetIncludeUnavailable(true);
@@ -107,12 +113,12 @@ QString LibrarySearchProvider::GetSuggestion() {
     const QString album  = q.Value(1).toString();
 
     if (!artist.isEmpty() && !album.isEmpty())
-      return (qrand() % 2 == 0) ? artist : album;
+      ret << ((qrand() % 2 == 0) ? artist : album);
     else if (!artist.isEmpty())
-      return artist;
+      ret << artist;
     else if (!album.isEmpty())
-      return album;
+      ret << album;
   }
 
-  return QString();
+  return ret;
 }

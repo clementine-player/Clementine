@@ -39,6 +39,7 @@ SimpleSearchProvider::Item::Item(const Song& song, const QString& keyword)
 SimpleSearchProvider::SimpleSearchProvider(Application* app, QObject* parent)
   : BlockingSearchProvider(app, parent),
     result_limit_(kDefaultResultLimit),
+    max_suggestion_count_(-1),
     items_dirty_(true),
     has_searched_before_(false)
 {
@@ -99,19 +100,28 @@ void SimpleSearchProvider::SetItems(const ItemList& items) {
   }
 }
 
-QString SimpleSearchProvider::GetSuggestion() {
+QStringList SimpleSearchProvider::GetSuggestions(int count) {
+  if (max_suggestion_count_ != -1) {
+    count = qMin(max_suggestion_count_, count);
+  }
+
+  QStringList ret;
   QMutexLocker l(&items_mutex_);
 
   if (items_.isEmpty())
-    return QString();
+    return ret;
 
-  for (int attempt=0 ; attempt<10 ; ++attempt) {
+  for (int attempt=0 ; attempt<count*5 ; ++attempt) {
+    if (ret.count() >= count) {
+      break;
+    }
+
     const Item& item = items_[qrand() % items_.count()];
     if (!item.keyword_.isEmpty())
-      return item.keyword_;
+      ret << item.keyword_;
     if (!item.metadata_.title().isEmpty())
-      return item.metadata_.title();
+      ret << item.metadata_.title();
   }
 
-  return QString();
+  return ret;
 }

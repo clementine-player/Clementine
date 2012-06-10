@@ -48,7 +48,7 @@ public:
   int SearchAsync(const QString& query);
   int LoadArtAsync(const SearchProvider::Result& result);
   MimeData* LoadTracks(const SearchProvider::ResultList& results);
-  QStringList GetSuggestions(int max);
+  QStringList GetSuggestions(int count);
 
   void CancelSearch(int id);
   void CancelArt(int id);

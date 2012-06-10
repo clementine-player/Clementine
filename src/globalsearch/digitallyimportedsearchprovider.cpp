@@ -29,6 +29,7 @@ DigitallyImportedSearchProvider::DigitallyImportedSearchProvider(
 
   set_safe_words(QStringList() << "sky.fm" << "skyfm" << "di.fm" << "difm"
                                << "digitallyimported");
+  set_max_suggestion_count(5);
 
   connect(service_, SIGNAL(StreamsChanged()), SLOT(MaybeRecreateItems()));
 

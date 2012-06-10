@@ -151,6 +151,7 @@ set(SOURCES
   globalsearch/searchproviderstatuswidget.cpp
   globalsearch/simplesearchprovider.cpp
   globalsearch/somafmsearchprovider.cpp
+  globalsearch/suggestionwidget.cpp
   globalsearch/urlsearchprovider.cpp
 
   internet/digitallyimportedclient.cpp
@@ -421,6 +422,7 @@ set(HEADERS
   globalsearch/groovesharksearchprovider.h
   globalsearch/searchprovider.h
   globalsearch/simplesearchprovider.h
+  globalsearch/suggestionwidget.h
 
   internet/digitallyimportedclient.h
   internet/digitallyimportedservicebase.h
@@ -608,6 +610,7 @@ set(UI
   globalsearch/globalsearchsettingspage.ui
   globalsearch/globalsearchview.ui
   globalsearch/searchproviderstatuswidget.ui
+  globalsearch/suggestionwidget.ui
 
   internet/digitallyimportedsettingspage.ui
   internet/groovesharksettingspage.ui

@@ -28,6 +28,8 @@ SavedRadioSearchProvider::SavedRadioSearchProvider(SavedRadio* service,
   Init(tr("Your radio streams"), "savedradio", IconLoader::Load("document-open-remote"),
        MimeDataContainsUrlsOnly);
 
+  set_max_suggestion_count(3);
+
   connect(service_, SIGNAL(StreamsChanged()), SLOT(MaybeRecreateItems()));
 
   RecreateItems();

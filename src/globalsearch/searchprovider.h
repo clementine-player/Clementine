@@ -129,10 +129,10 @@ public:
   // Result, unless the MimeDataContainsUrlsOnly flag is set.
   virtual MimeData* LoadTracks(const ResultList& results);
 
-  // Returns an example search string to display in the UI.  The provider should
-  // pick one of its items at random.  Remember to set the CanGiveSuggestions
-  // hint.
-  virtual QString GetSuggestion() { return QString(); }
+  // Returns some example search strings to display in the UI.  The provider
+  // should pick some of its items at random and return between 0 and count
+  // strings.  Remember to set the CanGiveSuggestions hint.
+  virtual QStringList GetSuggestions(int count) { return QStringList(); }
 
   // If provider needs user login to search and play songs, this method should
   // be reimplemented
