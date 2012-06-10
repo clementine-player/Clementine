@@ -147,6 +147,7 @@ set(SOURCES
   globalsearch/librarysearchprovider.cpp
   globalsearch/savedradiosearchprovider.cpp
   globalsearch/searchprovider.cpp
+  globalsearch/searchproviderstatuswidget.cpp
   globalsearch/simplesearchprovider.cpp
   globalsearch/somafmsearchprovider.cpp
   globalsearch/urlsearchprovider.cpp
@@ -604,6 +605,7 @@ set(UI
 
   globalsearch/globalsearchsettingspage.ui
   globalsearch/globalsearchview.ui
+  globalsearch/searchproviderstatuswidget.ui
 
   internet/digitallyimportedsettingspage.ui
   internet/groovesharksettingspage.ui

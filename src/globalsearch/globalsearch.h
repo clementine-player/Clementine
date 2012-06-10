@@ -38,6 +38,8 @@ public:
   static const char* kSettingsGroup;
   static const int kMaxResultsPerEmission;
 
+  Application* application() const { return app_; }
+
   void AddProvider(SearchProvider* provider);
   // Try to change provider state. Returns false if we can't (e.g. we can't
   // enable a provider because it requires the user to be logged-in)

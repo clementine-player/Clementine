@@ -25,6 +25,7 @@
 #include <QWidget>
 
 class Application;
+class SearchProviderStatusWidget;
 class Ui_GlobalSearchView;
 
 class QMimeData;
@@ -65,6 +66,8 @@ signals:
   void OpenSettingsAtPage(SettingsDialog::Page page);
 
 private slots:
+  void ReloadSettings();
+
   void SwapModels();
   void TextEdited(const QString& text);
   void AddResults(int id, const SearchProvider::ResultList& results);
@@ -110,6 +113,8 @@ private:
   QIcon artist_icon_;
   QIcon album_icon_;
   QPixmap no_cover_icon_;
+
+  QList<SearchProviderStatusWidget*> provider_status_widgets_;
 };
 
 inline uint qHash(const GlobalSearchView::ContainerKey& key) {

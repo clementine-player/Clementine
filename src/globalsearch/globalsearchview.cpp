@@ -20,6 +20,7 @@
 #include "globalsearchsortmodel.h"
 #include "globalsearchview.h"
 #include "searchprovider.h"
+#include "searchproviderstatuswidget.h"
 #include "ui_globalsearchview.h"
 #include "core/application.h"
 #include "core/logging.h"
@@ -50,9 +51,23 @@ GlobalSearchView::GlobalSearchView(Application* app, QWidget* parent)
 {
   ui_->setupUi(this);
 
+  // Must be a queued connection to ensure the GlobalSearch handles it first.
+  connect(app_, SIGNAL(SettingsChanged()), SLOT(ReloadSettings()), Qt::QueuedConnection);
+
   connect(ui_->search, SIGNAL(textChanged(QString)), SLOT(TextEdited(QString)));
 
+  // Set the appearance of the results list
   ui_->results->setItemDelegate(new GlobalSearchItemDelegate(this));
+  ui_->results->setAttribute(Qt::WA_MacShowFocusRect, false);
+  ui_->results->setStyleSheet("QTreeView::item{padding-top:1px;}");
+
+  // Show the help page initially
+  ui_->stack->setCurrentWidget(ui_->help_page);
+  ui_->help_frame->setBackgroundRole(QPalette::Base);
+  QVBoxLayout* enabled_layout = new QVBoxLayout(ui_->enabled_list);
+  QVBoxLayout* disabled_layout = new QVBoxLayout(ui_->disabled_list);
+  enabled_layout->setContentsMargins(16, 0, 16, 6);
+  disabled_layout->setContentsMargins(16, 0, 16, 6);
 
   group_by_[0] = LibraryModel::GroupBy_Artist;
   group_by_[1] = LibraryModel::GroupBy_Album;
@@ -84,15 +99,43 @@ GlobalSearchView::GlobalSearchView(Application* app, QWidget* parent)
           Qt::QueuedConnection);
   connect(engine_, SIGNAL(TracksLoaded(int,MimeData*)), SLOT(TracksLoaded(int,MimeData*)),
           Qt::QueuedConnection);
+
+  ReloadSettings();
 }
 
 GlobalSearchView::~GlobalSearchView() {
   delete ui_;
 }
 
+namespace {
+  bool CompareProviderName(SearchProvider* left, SearchProvider* right) {
+    return left->name() < right->name();
+  }
+}
+
+void GlobalSearchView::ReloadSettings() {
+  qDeleteAll(provider_status_widgets_);
+  provider_status_widgets_.clear();
+
+  QList<SearchProvider*> providers = engine_->providers();
+  qSort(providers.begin(), providers.end(), CompareProviderName);
+
+  foreach (SearchProvider* provider, providers) {
+    QWidget* parent = engine_->is_provider_usable(provider)
+        ? ui_->enabled_list
+        : ui_->disabled_list;
+
+    SearchProviderStatusWidget* widget =
+        new SearchProviderStatusWidget(engine_, provider);
+
+    parent->layout()->addWidget(widget);
+    provider_status_widgets_ << widget;
+  }
+}
+
 void GlobalSearchView::StartSearch(const QString& query) {
   ui_->search->set_text(query);
-  TextEdited(query.trimmed());
+  TextEdited(query);
 
   // Swap models immediately
   swap_models_timer_->stop();
@@ -116,9 +159,9 @@ void GlobalSearchView::TextEdited(const QString& text) {
   // If text query is empty, don't start a new search
   if (trimmed.isEmpty()) {
     last_search_id_ = -1;
-    return;
+  } else {
+    last_search_id_ = engine_->SearchAsync(trimmed);
   }
-  last_search_id_ = engine_->SearchAsync(trimmed);
 }
 
 void GlobalSearchView::AddResults(int id, const SearchProvider::ResultList& results) {
@@ -249,6 +292,12 @@ void GlobalSearchView::SwapModels() {
   qSwap(front_proxy_, back_proxy_);
 
   ui_->results->setModel(front_proxy_);
+
+  if (ui_->search->text().trimmed().isEmpty()) {
+    ui_->stack->setCurrentWidget(ui_->help_page);
+  } else {
+    ui_->stack->setCurrentWidget(ui_->results_page);
+  }
 }
 
 void GlobalSearchView::LazyLoadArt(const QModelIndex& proxy_index) {
