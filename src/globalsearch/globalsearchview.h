@@ -114,6 +114,9 @@ private:
 
   QIcon search_icon_;
   QIcon warning_icon_;
+  
+  bool show_providers_;
+  bool show_suggestions_;
 };
 
 #endif // GLOBALSEARCHVIEW_H

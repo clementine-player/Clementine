@@ -19,42 +19,15 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_4">
    <item>
-    <widget class="QCheckBox" name="show_globalsearch">
-     <property name="text">
-      <string>Show the &quot;Search for anything&quot; box above the sidebar</string>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QCheckBox" name="hide_others">
-     <property name="enabled">
-      <bool>false</bool>
-     </property>
-     <property name="text">
-      <string>Hide all other search boxes</string>
-     </property>
-    </widget>
-   </item>
-   <item>
     <widget class="QGroupBox" name="sources_group">
-     <property name="enabled">
-      <bool>false</bool>
-     </property>
      <property name="title">
       <string>Sources</string>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_3">
       <item>
-       <widget class="QCheckBox" name="combine">
-        <property name="text">
-         <string>Combine identical results from different sources</string>
-        </property>
-       </widget>
-      </item>
-      <item>
        <widget class="QLabel" name="label">
         <property name="text">
-         <string>Enable sources below to include them in search results.  When identical results are available from more than one source, ones at the top will take priority.</string>
+         <string>Enable sources below to include them in search results.  Results will be displayed in this order.</string>
         </property>
         <property name="wordWrap">
          <bool>true</bool>
@@ -136,28 +109,22 @@
     </widget>
    </item>
    <item>
-    <widget class="QGroupBox" name="results_group">
-     <property name="enabled">
-      <bool>false</bool>
-     </property>
+    <widget class="QGroupBox" name="empty_list_group">
      <property name="title">
-      <string>Results</string>
+      <string>When the list is empty...</string>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
-       <widget class="QCheckBox" name="tooltip">
+       <widget class="QCheckBox" name="show_providers">
         <property name="text">
-         <string>Show a tooltip with more information about each result</string>
+         <string>Show which sources are enabled and disabled</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QCheckBox" name="tooltip_help">
-        <property name="enabled">
-         <bool>false</bool>
-        </property>
+       <widget class="QCheckBox" name="show_suggestions">
         <property name="text">
-         <string>Include keyboard shortcut help in the tooltip</string>
+         <string>Show search suggestions</string>
         </property>
        </widget>
       </item>
@@ -166,73 +133,16 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>sources</tabstop>
+  <tabstop>up</tabstop>
+  <tabstop>down</tabstop>
+  <tabstop>configure</tabstop>
+  <tabstop>show_providers</tabstop>
+  <tabstop>show_suggestions</tabstop>
+ </tabstops>
  <resources>
   <include location="../../data/data.qrc"/>
  </resources>
- <connections>
-  <connection>
-   <sender>show_globalsearch</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>hide_others</receiver>
-   <slot>setEnabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>86</x>
-     <y>23</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>88</x>
-     <y>53</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>show_globalsearch</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>sources_group</receiver>
-   <slot>setEnabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>171</x>
-     <y>25</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>165</x>
-     <y>77</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>show_globalsearch</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>results_group</receiver>
-   <slot>setEnabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>201</x>
-     <y>18</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>240</x>
-     <y>416</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>tooltip</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>tooltip_help</receiver>
-   <slot>setEnabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>121</x>
-     <y>447</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>123</x>
-     <y>469</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>

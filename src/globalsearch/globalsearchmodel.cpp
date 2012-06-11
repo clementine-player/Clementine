@@ -42,8 +42,13 @@ void GlobalSearchModel::AddResults(const SearchProvider::ResultList& results) {
   SearchProvider* provider = results.first().provider_;
 
   if (!provider_sort_indices_.contains(provider)) {
-    // TODO: Check if the user has configured a sort order for this provider.
-    sort_index = next_provider_sort_index_ ++;
+    // Use the user's preferred order if one was set
+    int configured_index = provider_order_.indexOf(provider->id());
+    if (configured_index != -1) {
+      sort_index = configured_index;
+    } else {
+      sort_index = next_provider_sort_index_ ++;
+    }
 
     QStandardItem* divider = new QStandardItem(provider->icon(), provider->name());
     divider->setData(true, LibraryModel::Role_IsDivider);

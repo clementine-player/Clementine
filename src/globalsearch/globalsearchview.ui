@@ -80,7 +80,7 @@
             <x>0</x>
             <y>0</y>
             <width>435</width>
-            <height>605</height>
+            <height>604</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -116,37 +116,55 @@
             </widget>
            </item>
            <item>
-            <widget class="QLabel" name="label_2">
-             <property name="text">
-              <string>Clementine will find music in:</string>
-             </property>
-             <property name="wordWrap">
-              <bool>true</bool>
-             </property>
+            <widget class="QWidget" name="providers_group" native="true">
+             <layout class="QVBoxLayout" name="verticalLayout_5">
+              <property name="margin">
+               <number>0</number>
+              </property>
+              <item>
+               <widget class="QLabel" name="label_2">
+                <property name="text">
+                 <string>Clementine will find music in:</string>
+                </property>
+                <property name="wordWrap">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QWidget" name="enabled_list" native="true"/>
+              </item>
+              <item>
+               <widget class="QLabel" name="disabled_label">
+                <property name="text">
+                 <string>But these sources are disabled:</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QWidget" name="disabled_list" native="true"/>
+              </item>
+             </layout>
             </widget>
            </item>
            <item>
-            <widget class="QWidget" name="enabled_list" native="true"/>
-           </item>
-           <item>
-            <widget class="QLabel" name="disabled_label">
-             <property name="text">
-              <string>But these sources are disabled:</string>
-             </property>
+            <widget class="QWidget" name="suggestions_group" native="true">
+             <layout class="QVBoxLayout" name="verticalLayout_7">
+              <property name="margin">
+               <number>0</number>
+              </property>
+              <item>
+               <widget class="QLabel" name="label">
+                <property name="text">
+                 <string>Why not try...</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QWidget" name="suggestions_list" native="true"/>
+              </item>
+             </layout>
             </widget>
-           </item>
-           <item>
-            <widget class="QWidget" name="disabled_list" native="true"/>
-           </item>
-           <item>
-            <widget class="QLabel" name="label">
-             <property name="text">
-              <string>Why not try...</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QWidget" name="suggestions_list" native="true"/>
            </item>
            <item>
             <spacer name="verticalSpacer">

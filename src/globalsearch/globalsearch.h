@@ -60,8 +60,6 @@ public:
   bool is_provider_enabled(const SearchProvider* provider) const;
   bool is_provider_usable(SearchProvider* provider) const;
 
-  static bool HideOtherSearchBoxes();
-
 public slots:
   void ReloadSettings();
 

@@ -108,9 +108,6 @@ void InternetViewContainer::SetHeaderVisible(QWidget* header, bool visible) {
   if (!header)
     return;
 
-  if (visible && GlobalSearch::HideOtherSearchBoxes())
-    return;
-
   HeaderData& d = headers_[header];
   if (d.visible_ == visible)
     return;

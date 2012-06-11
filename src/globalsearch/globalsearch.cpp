@@ -343,14 +343,6 @@ void GlobalSearch::ReloadSettings() {
   }
 }
 
-bool GlobalSearch::HideOtherSearchBoxes() {
-  QSettings s;
-  s.beginGroup(kSettingsGroup);
-
-  return s.value("show_globalsearch", true).toBool() &&
-         s.value("hide_others", false).toBool();
-}
-
 void GlobalSearch::SaveProvidersSettings() {
   QSettings s;
   s.beginGroup(kSettingsGroup);

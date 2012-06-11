@@ -45,6 +45,7 @@ public:
   };
 
   void set_use_pretty_covers(bool pretty) { use_pretty_covers_ = pretty; }
+  void set_provider_order(const QStringList& provider_order) { provider_order_ = provider_order; }
 
   void Clear();
 
@@ -73,6 +74,7 @@ private:
   int next_provider_sort_index_;
   QMap<ContainerKey, QStandardItem*> containers_;
 
+  QStringList provider_order_;
   bool use_pretty_covers_;
   QIcon artist_icon_;
   QIcon album_icon_;

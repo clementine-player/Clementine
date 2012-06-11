@@ -55,7 +55,9 @@ GlobalSearchView::GlobalSearchView(Application* app, QWidget* parent)
     swap_models_timer_(new QTimer(this)),
     update_suggestions_timer_(new QTimer(this)),
     search_icon_(IconLoader::Load("search")),
-    warning_icon_(IconLoader::Load("dialog-warning"))
+    warning_icon_(IconLoader::Load("dialog-warning")),
+    show_providers_(true),
+    show_suggestions_(true)
 {
   ui_->setupUi(this);
 
@@ -139,38 +141,60 @@ namespace {
 }
 
 void GlobalSearchView::ReloadSettings() {
-  // Delete any old status widgets
-  qDeleteAll(provider_status_widgets_);
-  provider_status_widgets_.clear();
-
-  // Sort the list of providers alphabetically
-  QList<SearchProvider*> providers = engine_->providers();
-  qSort(providers.begin(), providers.end(), CompareProviderName);
-
-  bool any_disabled = false;
-
-  foreach (SearchProvider* provider, providers) {
-    QWidget* parent = ui_->enabled_list;
-    if (!engine_->is_provider_usable(provider)) {
-      parent = ui_->disabled_list;
-      any_disabled = true;
-    }
-
-    SearchProviderStatusWidget* widget =
-        new SearchProviderStatusWidget(warning_icon_, engine_, provider);
-
-    parent->layout()->addWidget(widget);
-    provider_status_widgets_ << widget;
-  }
-
-  ui_->disabled_label->setVisible(any_disabled);
-
-  // Update models to use pretty covers.
   QSettings s;
+  
+  // Library settings
   s.beginGroup(LibraryView::kSettingsGroup);
   const bool pretty = s.value("pretty_covers", true).toBool();
   front_model_->set_use_pretty_covers(pretty);
   back_model_->set_use_pretty_covers(pretty);
+  s.endGroup();
+  
+  // Global search settings
+  s.beginGroup(GlobalSearch::kSettingsGroup);
+  const QStringList provider_order =
+      s.value("provider_order", QStringList() << "library").toStringList();
+  front_model_->set_provider_order(provider_order);
+  back_model_->set_provider_order(provider_order);
+  show_providers_ = s.value("show_providers", true).toBool();
+  show_suggestions_ = s.value("show_suggestions", true).toBool();
+  s.endGroup();
+  
+  // Delete any old status widgets
+  qDeleteAll(provider_status_widgets_);
+  provider_status_widgets_.clear();
+  
+  // Toggle visibility of the providers group
+  ui_->providers_group->setVisible(show_providers_);
+
+  if (show_providers_) {
+    // Sort the list of providers alphabetically
+    QList<SearchProvider*> providers = engine_->providers();
+    qSort(providers.begin(), providers.end(), CompareProviderName);
+  
+    bool any_disabled = false;
+  
+    foreach (SearchProvider* provider, providers) {
+      QWidget* parent = ui_->enabled_list;
+      if (!engine_->is_provider_usable(provider)) {
+        parent = ui_->disabled_list;
+        any_disabled = true;
+      }
+  
+      SearchProviderStatusWidget* widget =
+          new SearchProviderStatusWidget(warning_icon_, engine_, provider);
+  
+      parent->layout()->addWidget(widget);
+      provider_status_widgets_ << widget;
+    }
+  
+    ui_->disabled_label->setVisible(any_disabled);
+  }
+  
+  ui_->suggestions_group->setVisible(show_suggestions_);
+  if (!show_suggestions_) {
+    update_suggestions_timer_->stop();
+  }
 }
 
 void GlobalSearchView::UpdateSuggestions() {
@@ -398,8 +422,10 @@ void GlobalSearchView::OpenSelectedInNewPlaylist() {
 }
 
 void GlobalSearchView::showEvent(QShowEvent* e) {
-  UpdateSuggestions();
-  update_suggestions_timer_->start();
+  if (show_suggestions_) {
+    UpdateSuggestions();
+    update_suggestions_timer_->start();
+  }
   QWidget::showEvent(e);
 }
 
