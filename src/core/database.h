@@ -111,14 +111,6 @@ class Database : public QObject {
   // This is the schema version of Clementine's DB from the app's last run.
   int startup_schema_version_;
 
-  FRIEND_TEST(DatabaseTest, LikeWorksWithAllAscii);
-  FRIEND_TEST(DatabaseTest, LikeWorksWithUnicode);
-  FRIEND_TEST(DatabaseTest, LikeAsciiCaseInsensitive);
-  FRIEND_TEST(DatabaseTest, LikeUnicodeCaseInsensitive);
-  FRIEND_TEST(DatabaseTest, LikePerformance);
-  FRIEND_TEST(DatabaseTest, LikeCacheInvalidated);
-  FRIEND_TEST(DatabaseTest, LikeQuerySplit);
-  FRIEND_TEST(DatabaseTest, LikeDecomposes);
   FRIEND_TEST(DatabaseTest, FTSOpenParsesSimpleInput);
   FRIEND_TEST(DatabaseTest, FTSOpenParsesUTF8Input);
   FRIEND_TEST(DatabaseTest, FTSOpenParsesMultipleTokens);
@@ -128,9 +120,6 @@ class Database : public QObject {
   // Do static initialisation like loading sqlite functions.
   static void StaticInit();
 
-  // Custom LIKE() function for sqlite.
-  bool Like(const char* needle, const char* haystack);
-  static void SqliteLike(sqlite3_context* context, int argc, sqlite3_value** argv);
   typedef int (*Sqlite3CreateFunc) (
       sqlite3*, const char*, int, int, void*,
       void (*) (sqlite3_context*, int, sqlite3_value**),
@@ -138,7 +127,6 @@ class Database : public QObject {
       void (*) (sqlite3_context*));
 
   // Sqlite3 functions. These will be loaded from the sqlite3 plugin.
-  static Sqlite3CreateFunc _sqlite3_create_function;
   static int (*_sqlite3_value_type) (sqlite3_value*);
   static sqlite_int64 (*_sqlite3_value_int64) (sqlite3_value*);
   static const uchar* (*_sqlite3_value_text) (sqlite3_value*);

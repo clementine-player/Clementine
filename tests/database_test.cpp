@@ -35,48 +35,6 @@ class DatabaseTest : public ::testing::Test {
   boost::scoped_ptr<Database> database_;
 };
 
-#ifdef Q_OS_UNIX
-
-#include <sys/time.h>
-#include <time.h>
-
-struct PerfTimer {
-  PerfTimer(int iterations) : iterations_(iterations) {
-    gettimeofday(&start_time_, NULL);
-  }
-
-  ~PerfTimer() {
-    gettimeofday(&end_time_, NULL);
-
-    timeval elapsed_time;
-    timersub(&end_time_, &start_time_, &elapsed_time);
-    int elapsed_us = elapsed_time.tv_usec + elapsed_time.tv_sec * 1000000;
-
-    qDebug() << "Elapsed:" << elapsed_us << "us";
-    qDebug() << "Time per iteration:" << float(elapsed_us) / iterations_ << "us";
-  }
-
-  timeval start_time_;
-  timeval end_time_;
-  int iterations_;
-};
-
-TEST_F(DatabaseTest, LikePerformance) {
-  const int iterations = 1000000;
-
-  const char* needle = "foo";
-  const char* haystack = "foobarbaz foobarbaz";
-  qDebug() << "Simple query";
-  {
-    PerfTimer perf(iterations);
-    for (int i = 0; i < iterations; ++i) {
-      database_->Like(needle, haystack);
-    }
-  }
-}
-
-#endif
-
 TEST_F(DatabaseTest, DatabaseInitialises) {
   // Check that these tables exist
   QStringList tables = database_->Connect().tables();
@@ -93,44 +51,6 @@ TEST_F(DatabaseTest, DatabaseInitialises) {
   ASSERT_TRUE(q.next());
   EXPECT_EQ(Database::kSchemaVersion, q.value(0).toInt());
   EXPECT_FALSE(q.next());
-}
-
-TEST_F(DatabaseTest, LikeWorksWithAllAscii) {
-  EXPECT_TRUE(database_->Like("%ar%", "bar"));
-  EXPECT_FALSE(database_->Like("%ar%", "foo"));
-}
-
-TEST_F(DatabaseTest, LikeWorksWithUnicode) {
-  EXPECT_TRUE(database_->Like("%Снег%", "Снег"));
-  EXPECT_FALSE(database_->Like("%Снег%", "foo"));
-}
-
-TEST_F(DatabaseTest, LikeAsciiCaseInsensitive) {
-  EXPECT_TRUE(database_->Like("%ar%", "BAR"));
-  EXPECT_FALSE(database_->Like("%ar%", "FOO"));
-}
-
-TEST_F(DatabaseTest, LikeUnicodeCaseInsensitive) {
-  EXPECT_TRUE(database_->Like("%снег%", "Снег"));
-}
-
-TEST_F(DatabaseTest, LikeCacheInvalidated) {
-  EXPECT_TRUE(database_->Like("%foo%", "foobar"));
-  EXPECT_FALSE(database_->Like("%baz%", "foobar"));
-}
-
-TEST_F(DatabaseTest, LikeQuerySplit) {
-  EXPECT_TRUE(database_->Like("%foo bar%", "foobar"));
-  EXPECT_FALSE(database_->Like("%foo bar%", "barbaz"));
-  EXPECT_FALSE(database_->Like("%foo bar%", "foobaz"));
-  EXPECT_FALSE(database_->Like("%foo bar%", "baz"));
-}
-
-TEST_F(DatabaseTest, LikeDecomposes) {
-  EXPECT_TRUE(database_->Like("%Royksopp%", "Röyksopp"));
-  EXPECT_FALSE(database_->Like("%Ryksopp%", "Röyksopp"));
-  EXPECT_TRUE(database_->Like("%tiesto%", "DJ Tiësto"));
-  EXPECT_FALSE(database_->Like("%tisto%", "DJ Tiësto"));
 }
 
 TEST_F(DatabaseTest, FTSOpenParsesSimpleInput) {
