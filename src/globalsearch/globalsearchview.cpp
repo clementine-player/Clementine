@@ -69,6 +69,7 @@ GlobalSearchView::GlobalSearchView(Application* app, QWidget* parent)
 
   connect(ui_->search, SIGNAL(textChanged(QString)), SLOT(TextEdited(QString)));
   connect(ui_->results, SIGNAL(AddToPlaylistSignal(QMimeData*)), SIGNAL(AddToPlaylist(QMimeData*)));
+  connect(ui_->results, SIGNAL(FocusOnFilterSignal(QKeyEvent*)), SLOT(FocusOnFilter(QKeyEvent*)));
 
   // Set the appearance of the results list
   ui_->results->setItemDelegate(new GlobalSearchItemDelegate(this));
@@ -432,4 +433,9 @@ void GlobalSearchView::showEvent(QShowEvent* e) {
 void GlobalSearchView::hideEvent(QHideEvent* e) {
   update_suggestions_timer_->stop();
   QWidget::hideEvent(e);
+}
+
+void GlobalSearchView::FocusOnFilter(QKeyEvent* event) {
+  ui_->search->set_focus();
+  QApplication::sendEvent(ui_->search, event);
 }

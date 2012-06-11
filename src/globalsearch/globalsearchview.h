@@ -72,6 +72,8 @@ private slots:
   void AddResults(int id, const SearchProvider::ResultList& results);
   void ArtLoaded(int id, const QPixmap& pixmap);
 
+  void FocusOnFilter(QKeyEvent* event);
+
   void AddSelectedToPlaylist();
   void LoadSelected();
   void OpenSelectedInNewPlaylist();

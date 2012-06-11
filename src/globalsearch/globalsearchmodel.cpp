@@ -73,7 +73,8 @@ void GlobalSearchModel::AddResults(const SearchProvider::ResultList& results) {
     }
 
     // Create the item
-    QStandardItem* item = new QStandardItem(result.metadata_.title());
+    QStandardItem* item = new QStandardItem;
+    item->setText(result.metadata_.TitleWithCompilationArtist());
     item->setData(QVariant::fromValue(result), Role_Result);
     item->setData(sort_index, Role_ProviderIndex);
 
@@ -95,8 +96,13 @@ QStandardItem* GlobalSearchModel::BuildContainers(
 
   switch (group_by_[level]) {
   case LibraryModel::GroupBy_Artist:
-    display_text = LibraryModel::TextOrUnknown(s.artist());
-    sort_text = LibraryModel::SortTextForArtist(s.artist());
+    if (s.is_compilation()) {
+      display_text = tr("Various artists");
+      sort_text = "aaaaaa";
+    } else {
+      display_text = LibraryModel::TextOrUnknown(s.artist());
+      sort_text = LibraryModel::SortTextForArtist(s.artist());
+    }
     has_artist_icon = true;
     break;
 
