@@ -7,12 +7,13 @@
 # Michał G <saperr.pmi@gmail.com>, 2011.
 # Michał Ziąbkowski <mziab@o2.pl>, 2010.
 #   <patryk1303@gmail.com>, 2011.
+# Patryk Wychowaniec <>, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-05-29 20:55+0000\n"
-"Last-Translator: Kacper Banasik <mattrick@jabster.pl>\n"
+"PO-Revision-Date: 2012-06-10 20:28+0000\n"
+"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: pl\n"
@@ -522,7 +523,7 @@ msgstr "Po następującej ilości dni:"
 msgid "After copying..."
 msgstr "Po skopiowaniu..."
 
-#: playlist/playlist.cpp:1136 ui/organisedialog.cpp:55
+#: playlist/playlist.cpp:1166 ui/organisedialog.cpp:55
 #: ui/qtsystemtrayicon.cpp:252 ../bin/src/ui_groupbydialog.h:129
 #: ../bin/src/ui_groupbydialog.h:142 ../bin/src/ui_groupbydialog.h:155
 #: ../bin/src/ui_albumcoversearcher.h:111
@@ -535,7 +536,7 @@ msgstr "Album"
 msgid "Album (ideal loudness for all tracks)"
 msgstr "Według albumów (najlepsza głośność dla wszystkich ścieżek)"
 
-#: playlist/playlist.cpp:1142 ui/organisedialog.cpp:58
+#: playlist/playlist.cpp:1172 ui/organisedialog.cpp:58
 #: ../bin/src/ui_groupbydialog.h:131 ../bin/src/ui_groupbydialog.h:144
 #: ../bin/src/ui_groupbydialog.h:157 ../bin/src/ui_edittagdialog.h:658
 msgid "Album artist"
@@ -643,9 +644,9 @@ msgstr "Wystąpił nieznany błąd last.fm: %1"
 msgid "And:"
 msgstr "I:"
 
-#: moodbar/moodbarrenderer.cpp:154
+#: moodbar/moodbarrenderer.cpp:156
 msgid "Angry"
-msgstr ""
+msgstr "Zdenerwowany"
 
 #: ../bin/src/ui_songinfosettingspage.h:180
 #: ../bin/src/ui_appearancesettingspage.h:227
@@ -682,7 +683,7 @@ msgstr "Czy jesteś pewien, że chcesz usunąć tę listę odtwarzania?"
 msgid "Are you sure you want to reset this song's statistics?"
 msgstr "Na pewno wyzerować statystyki tego utworu?"
 
-#: playlist/playlist.cpp:1135 ui/organisedialog.cpp:56
+#: playlist/playlist.cpp:1165 ui/organisedialog.cpp:56
 #: ui/qtsystemtrayicon.cpp:250 ../bin/src/ui_groupbydialog.h:130
 #: ../bin/src/ui_groupbydialog.h:143 ../bin/src/ui_groupbydialog.h:156
 #: ../bin/src/ui_albumcoversearcher.h:107
@@ -754,7 +755,7 @@ msgstr "Przeciętny rozmiar grafiki"
 msgid "BBC Podcasts"
 msgstr "Podcasty BBC"
 
-#: playlist/playlist.cpp:1151 ui/organisedialog.cpp:62
+#: playlist/playlist.cpp:1181 ui/organisedialog.cpp:62
 #: ../bin/src/ui_edittagdialog.h:638
 msgid "BPM"
 msgstr "Uderzenia na minutę"
@@ -808,7 +809,7 @@ msgstr "Najlepsza"
 msgid "Biography from %1"
 msgstr "Biografia z %1"
 
-#: playlist/playlist.cpp:1152 ../bin/src/ui_edittagdialog.h:640
+#: playlist/playlist.cpp:1182 ../bin/src/ui_edittagdialog.h:640
 msgid "Bit rate"
 msgstr "Bitrate"
 
@@ -873,7 +874,7 @@ msgstr "Anuluj"
 msgid "Change cover art"
 msgstr "Zmień okładkę"
 
-#: songinfo/songinfotextview.cpp:74
+#: songinfo/songinfotextview.cpp:77
 msgid "Change font size..."
 msgstr "Zmień wielkość czcionki..."
 
@@ -892,6 +893,12 @@ msgstr "Zmień tryb losowania utworów"
 #: core/commandlineoptions.cpp:163
 msgid "Change the language"
 msgstr "Zmień język"
+
+#: ../bin/src/ui_playbacksettingspage.h:294
+msgid ""
+"Changing mono playback preference will be effective for the next playing "
+"songs"
+msgstr ""
 
 #: ../bin/src/ui_podcastsettingspage.h:228
 msgid "Check for new episodes"
@@ -1051,7 +1058,7 @@ msgstr "Połącz identyczne wyniki z różnych źródeł"
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Rozdzielona przecinkami lista klasa:poziom, gdzie poziom wynosi 0-3"
 
-#: playlist/playlist.cpp:1161 smartplaylists/searchterm.cpp:279
+#: playlist/playlist.cpp:1191 smartplaylists/searchterm.cpp:279
 #: ui/organisedialog.cpp:65 ../bin/src/ui_edittagdialog.h:661
 msgid "Comment"
 msgstr "Komentarz"
@@ -1064,7 +1071,7 @@ msgstr "Automatycznie uzupełnij znaczniki"
 msgid "Complete tags automatically..."
 msgstr "Automatycznie uzupełnij znaczniki..."
 
-#: playlist/playlist.cpp:1143 ui/organisedialog.cpp:59
+#: playlist/playlist.cpp:1173 ui/organisedialog.cpp:59
 #: ../bin/src/ui_groupbydialog.h:132 ../bin/src/ui_groupbydialog.h:145
 #: ../bin/src/ui_groupbydialog.h:158 ../bin/src/ui_edittagdialog.h:659
 msgid "Composer"
@@ -1149,21 +1156,21 @@ msgstr "Kopiowanie bazy danych iPoda"
 msgid "Copyright"
 msgstr "Prawa autorskie"
 
-#: transcoder/transcoder.cpp:62
+#: transcoder/transcoder.cpp:64
 #, qt-format
 msgid ""
 "Could not create the GStreamer element \"%1\" - make sure you have all the "
 "required GStreamer plugins installed"
 msgstr "Nie można utworzyć elementu \"%1\" GStreamera - upewnij się, czy są zainstalowane wszystkie wymagane wtyczki GStreamera"
 
-#: transcoder/transcoder.cpp:425
+#: transcoder/transcoder.cpp:427
 #, qt-format
 msgid ""
 "Couldn't find a muxer for %1, check you have the correct GStreamer plugins "
 "installed"
 msgstr "Nie można odnaleźć muxera dla %1. Sprawdź czy posiadasz zainstalowane prawidłowe wtyczki GStreamera"
 
-#: transcoder/transcoder.cpp:419
+#: transcoder/transcoder.cpp:421
 #, qt-format
 msgid ""
 "Couldn't find an encoder for %1, check you have the correct GStreamer "
@@ -1330,11 +1337,11 @@ msgid ""
 "recover your database"
 msgstr "Wykryto uszkodzenie bazy danych. Proszę, zapoznaj się z https://code.google.com/p/clementine-player/wiki/DatabaseCorruption, jeżeli potrzebujesz instrukcji jak naprawić ten błąd."
 
-#: playlist/playlist.cpp:1159 ../bin/src/ui_edittagdialog.h:649
+#: playlist/playlist.cpp:1189 ../bin/src/ui_edittagdialog.h:649
 msgid "Date created"
 msgstr "Data utworzenia"
 
-#: playlist/playlist.cpp:1158 ../bin/src/ui_edittagdialog.h:648
+#: playlist/playlist.cpp:1188 ../bin/src/ui_edittagdialog.h:648
 msgid "Date modified"
 msgstr "Data modyfikacji"
 
@@ -1424,7 +1431,7 @@ msgstr "Miejsce docelowe"
 msgid "Details..."
 msgstr "Szczegóły..."
 
-#: devices/devicekitlister.cpp:126 devices/giolister.cpp:158
+#: devices/devicekitlister.cpp:126 devices/giolister.cpp:160
 msgid "Device"
 msgstr "Urządzenie"
 
@@ -1477,7 +1484,7 @@ msgstr "Wyłącz czas"
 msgid "Disabled"
 msgstr "Wyłączone"
 
-#: playlist/playlist.cpp:1139 ui/organisedialog.cpp:61
+#: playlist/playlist.cpp:1169 ui/organisedialog.cpp:61
 #: ../bin/src/ui_edittagdialog.h:655
 msgid "Disc"
 msgstr "Płyta"
@@ -1760,7 +1767,7 @@ msgstr "Błąd wczytywania %1"
 msgid "Error loading di.fm playlist"
 msgstr "Problem podczas ładowania listy odtwarzania di.fm"
 
-#: transcoder/transcoder.cpp:393
+#: transcoder/transcoder.cpp:395
 #, qt-format
 msgid "Error processing %1: %2"
 msgstr "Błąd przetwarzania %1: %2"
@@ -1911,19 +1918,19 @@ msgstr "Rozszerzenie pliku"
 msgid "File formats"
 msgstr "Formaty pliku"
 
-#: playlist/playlist.cpp:1154 ../bin/src/ui_edittagdialog.h:650
+#: playlist/playlist.cpp:1184 ../bin/src/ui_edittagdialog.h:650
 msgid "File name"
 msgstr "Nazwa pliku"
 
-#: playlist/playlist.cpp:1155
+#: playlist/playlist.cpp:1185
 msgid "File name (without path)"
 msgstr "Nazwa pliku (bez ścieżki)"
 
-#: playlist/playlist.cpp:1156 ../bin/src/ui_edittagdialog.h:644
+#: playlist/playlist.cpp:1186 ../bin/src/ui_edittagdialog.h:644
 msgid "File size"
 msgstr "Wielkość pliku"
 
-#: playlist/playlist.cpp:1157 ../bin/src/ui_groupbydialog.h:133
+#: playlist/playlist.cpp:1187 ../bin/src/ui_groupbydialog.h:133
 #: ../bin/src/ui_groupbydialog.h:146 ../bin/src/ui_groupbydialog.h:159
 #: ../bin/src/ui_edittagdialog.h:646
 msgid "File type"
@@ -2033,9 +2040,9 @@ msgstr "Klatek na bufor"
 msgid "Friends"
 msgstr "Przyjaciele"
 
-#: moodbar/moodbarrenderer.cpp:155
+#: moodbar/moodbarrenderer.cpp:157
 msgid "Frozen"
-msgstr ""
+msgstr "Zamrożony"
 
 #: ui/equalizer.cpp:112
 msgid "Full Bass"
@@ -2061,7 +2068,7 @@ msgstr "Ogólne"
 msgid "General settings"
 msgstr "Podstawowe ustawienia"
 
-#: playlist/playlist.cpp:1141 ui/organisedialog.cpp:64
+#: playlist/playlist.cpp:1171 ui/organisedialog.cpp:64
 #: ../bin/src/ui_groupbydialog.h:134 ../bin/src/ui_groupbydialog.h:147
 #: ../bin/src/ui_groupbydialog.h:160 ../bin/src/ui_edittagdialog.h:660
 msgid "Genre"
@@ -2173,9 +2180,9 @@ msgstr "Strona HTML nie zawiera żadnego kanału RSS"
 msgid "HTTP proxy"
 msgstr "Pośrednik HTTP (proxy)"
 
-#: moodbar/moodbarrenderer.cpp:156
+#: moodbar/moodbarrenderer.cpp:158
 msgid "Happy"
-msgstr ""
+msgstr "Szczęśliwy"
 
 #: ../bin/src/ui_deviceproperties.h:371
 msgid "Hardware information"
@@ -2407,7 +2414,7 @@ msgstr "Duża okładka albumu"
 msgid "Large sidebar"
 msgstr "Duży pasek boczny"
 
-#: library/library.cpp:69 playlist/playlist.cpp:1148
+#: library/library.cpp:69 playlist/playlist.cpp:1178
 #: ../bin/src/ui_edittagdialog.h:641
 msgid "Last played"
 msgstr "Ostatnio odtwarzane"
@@ -2486,7 +2493,7 @@ msgstr "Najmniej lubiane ścieżki"
 msgid "Leave blank for the default.  Examples: \"/dev/dsp\", \"front\", etc."
 msgstr "Pozostaw puste, by użyć wartości domyślnej. Przykłady: \"/dev/dsp\", \"front\" itd."
 
-#: playlist/playlist.cpp:1137 ui/organisedialog.cpp:66
+#: playlist/playlist.cpp:1167 ui/organisedialog.cpp:66
 #: ui/qtsystemtrayicon.cpp:255 ../bin/src/ui_edittagdialog.h:636
 msgid "Length"
 msgstr "Długość"
@@ -2568,7 +2575,7 @@ msgstr "Wczytywanie bazy danych iPoda"
 msgid "Loading smart playlist"
 msgstr "Wczytywanie inteligentnej listy odtwarzania"
 
-#: library/librarymodel.cpp:134
+#: library/librarymodel.cpp:135
 msgid "Loading songs"
 msgstr "Wczytywanie utworów"
 
@@ -2585,7 +2592,7 @@ msgstr "Wczytywanie ścieżek"
 msgid "Loading tracks info"
 msgstr "Wczytywanie informacji o utworze"
 
-#: library/librarymodel.cpp:129 podcasts/podcastdiscoverymodel.cpp:97
+#: library/librarymodel.cpp:130 podcasts/podcastdiscoverymodel.cpp:97
 #: widgets/prettyimage.cpp:168 widgets/widgetfadehelper.cpp:99
 #: ../bin/src/ui_addpodcastdialog.h:180 ../bin/src/ui_searchpreview.h:106
 msgid "Loading..."
@@ -2749,7 +2756,7 @@ msgstr "Model"
 msgid "Monitor the library for changes"
 msgstr "Monitoruj zmiany biblioteki"
 
-#: ../bin/src/ui_playbacksettingspage.h:293
+#: ../bin/src/ui_playbacksettingspage.h:296
 msgid "Mono playback"
 msgstr "Odtwarzanie mono"
 
@@ -2757,24 +2764,24 @@ msgstr "Odtwarzanie mono"
 msgid "Months"
 msgstr "Miesięcy"
 
-#: playlist/playlist.cpp:1163
+#: playlist/playlist.cpp:1193
 msgid "Mood"
-msgstr ""
+msgstr "Humor"
 
 #: ../bin/src/ui_appearancesettingspage.h:246
 #: moodbar/moodbarproxystyle.cpp:342
 msgid "Moodbar style"
-msgstr ""
+msgstr "Styl paska humoru"
 
 #: ../bin/src/ui_appearancesettingspage.h:244
 msgid "Moodbars"
-msgstr ""
+msgstr "Paski humoru"
 
 #: library/library.cpp:72
 msgid "Most played"
 msgstr "Najczęściej odtwarzane"
 
-#: devices/giolister.cpp:157
+#: devices/giolister.cpp:159
 msgid "Mount point"
 msgstr "Punkt montowania"
 
@@ -2941,9 +2948,9 @@ msgstr "Brak"
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Żaden z zaznaczonych utworów nie był odpowiedni do skopiowania na urządzenie"
 
-#: moodbar/moodbarrenderer.cpp:153
+#: moodbar/moodbarrenderer.cpp:155
 msgid "Normal"
-msgstr ""
+msgstr "Neutralny"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:144
 msgid "Normal block type"
@@ -3157,7 +3164,7 @@ msgstr "Odtwarzaj Wykonawcę lub Znacznik"
 msgid "Play artist radio..."
 msgstr "Odtwarzaj radio wykonawcy..."
 
-#: playlist/playlist.cpp:1146 ../bin/src/ui_edittagdialog.h:637
+#: playlist/playlist.cpp:1176 ../bin/src/ui_edittagdialog.h:637
 msgid "Play count"
 msgstr "Ilość odtworzeń"
 
@@ -3409,7 +3416,7 @@ msgstr "Ocena utworu: 4"
 msgid "Rate the current song 5 stars"
 msgstr "Ocena utworu: 5"
 
-#: playlist/playlist.cpp:1145 ../bin/src/ui_edittagdialog.h:645
+#: playlist/playlist.cpp:1175 ../bin/src/ui_edittagdialog.h:645
 msgid "Rating"
 msgstr "Ocena"
 
@@ -3590,7 +3597,7 @@ msgstr "Bezpiecznie usuń urządzenie"
 msgid "Safely remove the device after copying"
 msgstr "Bezpiecznie usuń urządzenie po kopiowaniu"
 
-#: playlist/playlist.cpp:1153 ../bin/src/ui_edittagdialog.h:642
+#: playlist/playlist.cpp:1183 ../bin/src/ui_edittagdialog.h:642
 msgid "Sample rate"
 msgstr "Próbkowanie"
 
@@ -3600,7 +3607,7 @@ msgstr "Próbkowanie"
 
 #: ../bin/src/ui_appearancesettingspage.h:247
 msgid "Save .mood files in your music library"
-msgstr ""
+msgstr "Zapisz pliki .mood w swojej bibliotece"
 
 #: ui/albumcoverchoicecontroller.cpp:114
 msgid "Save album cover"
@@ -3638,7 +3645,7 @@ msgstr "Zapisywanie utworów"
 msgid "Scalable sampling rate profile (SSR)"
 msgstr "Profil skalowalnego próbkowania (SSR)"
 
-#: playlist/playlist.cpp:1149 ../bin/src/ui_edittagdialog.h:643
+#: playlist/playlist.cpp:1179 ../bin/src/ui_edittagdialog.h:643
 msgid "Score"
 msgstr "Wynik"
 
@@ -3824,7 +3831,7 @@ msgstr "Pokaż animację podświetlenia aktualnie odtwarzanej ścieżki"
 
 #: ../bin/src/ui_appearancesettingspage.h:245
 msgid "Show a moodbar in the track progress bar"
-msgstr ""
+msgstr "Pokaż pasek humoru na pasku statusu ścieżki"
 
 #: ../bin/src/ui_notificationssettingspage.h:406
 msgid "Show a native desktop notification"
@@ -3885,7 +3892,7 @@ msgstr "Pokaż w różni wykonawcy"
 
 #: moodbar/moodbarproxystyle.cpp:337
 msgid "Show moodbar"
-msgstr ""
+msgstr "Pokaż pasek humoru"
 
 #: ui/mainwindow.cpp:444
 msgid "Show only duplicates"
@@ -3959,7 +3966,7 @@ msgstr "Ska"
 msgid "Skip backwards in playlist"
 msgstr "Przeskocz wstecz w liście odtwarzania"
 
-#: playlist/playlist.cpp:1147 ../bin/src/ui_edittagdialog.h:639
+#: playlist/playlist.cpp:1177 ../bin/src/ui_edittagdialog.h:639
 msgid "Skip count"
 msgstr "Ilość przeskoczeń utworu"
 
@@ -3979,7 +3986,7 @@ msgstr "Mały pasek boczny"
 msgid "Smart playlist"
 msgstr "Inteligentna lista odtwarzania"
 
-#: library/librarymodel.cpp:1128
+#: library/librarymodel.cpp:1156
 msgid "Smart playlists"
 msgstr "Inteligentne listy odtwarzania"
 
@@ -4027,7 +4034,7 @@ msgstr "Sortuj według"
 msgid "Sorting"
 msgstr "Sortowanie"
 
-#: playlist/playlist.cpp:1162
+#: playlist/playlist.cpp:1192
 msgid "Source"
 msgstr "Źródło"
 
@@ -4077,7 +4084,7 @@ msgstr "Rozpocznij transkodowanie"
 msgid "Start typing in the search box above to find music on %1."
 msgstr "Zacznij wpisywać tekst w polu wyszukiwania powyżej aby wyszukać muzykę w %1"
 
-#: transcoder/transcoder.cpp:399
+#: transcoder/transcoder.cpp:401
 #, qt-format
 msgid "Starting %1"
 msgstr "Uruchamianie %1"
@@ -4131,7 +4138,7 @@ msgstr "Subskrybowane listy odtwarzania"
 msgid "Subscribers"
 msgstr "Subskrybenci"
 
-#: transcoder/transcoder.cpp:198
+#: transcoder/transcoder.cpp:200
 #, qt-format
 msgid "Successfully written %1"
 msgstr "Pomyślnie zapisano %1"
@@ -4175,9 +4182,9 @@ msgstr "Synchronizowanie playlisty Spotify"
 msgid "Syncing Spotify starred tracks"
 msgstr "Synchronizowanie utworów oznaczonych gwiazdką na Spotify"
 
-#: moodbar/moodbarrenderer.cpp:157
+#: moodbar/moodbarrenderer.cpp:159
 msgid "System colors"
-msgstr ""
+msgstr "Kolory systemowe"
 
 #: widgets/fancytabwidget.cpp:654
 msgid "Tabs on top"
@@ -4364,7 +4371,7 @@ msgstr "Przekroczony limit czasu"
 msgid "Timezone"
 msgstr "Strefa czasowa"
 
-#: playlist/playlist.cpp:1134 ui/organisedialog.cpp:54
+#: playlist/playlist.cpp:1164 ui/organisedialog.cpp:54
 #: ui/qtsystemtrayicon.cpp:248 ../bin/src/ui_about.h:142
 #: ../bin/src/ui_edittagdialog.h:652 ../bin/src/ui_trackselectiondialog.h:211
 msgid "Title"
@@ -4412,7 +4419,7 @@ msgstr "Całkowita ilość przesłanych w bajtach"
 msgid "Total network requests made"
 msgstr "Całkowita ilość zapytań sieciowych"
 
-#: playlist/playlist.cpp:1138 ui/organisedialog.cpp:60
+#: playlist/playlist.cpp:1168 ui/organisedialog.cpp:60
 #: ../bin/src/ui_edittagdialog.h:653 ../bin/src/ui_trackselectiondialog.h:213
 msgid "Track"
 msgstr "Utwór"
@@ -4429,7 +4436,7 @@ msgstr "Dziennik transkodera"
 msgid "Transcoding"
 msgstr "Konwersja"
 
-#: transcoder/transcoder.cpp:307
+#: transcoder/transcoder.cpp:309
 #, qt-format
 msgid "Transcoding %1 files using %2 threads"
 msgstr "Transkodowanie %1 plików za pomocą %2 wątków"
@@ -4450,7 +4457,7 @@ msgstr "Turbina"
 msgid "Turn off"
 msgstr "Wyłącz"
 
-#: devices/giolister.cpp:159
+#: devices/giolister.cpp:161
 msgid "URI"
 msgstr "URI"
 
@@ -4468,8 +4475,8 @@ msgid "Unable to download %1 (%2)"
 msgstr "Nie udało się pobrać %1 (%2)"
 
 #: core/song.cpp:330 globalsearch/globalsearchitemdelegate.cpp:166
-#: globalsearch/globalsearchitemdelegate.cpp:173 library/librarymodel.cpp:296
-#: library/librarymodel.cpp:301 library/librarymodel.cpp:926
+#: globalsearch/globalsearchitemdelegate.cpp:173 library/librarymodel.cpp:297
+#: library/librarymodel.cpp:302 library/librarymodel.cpp:954
 #: playlist/playlistdelegates.cpp:309 playlist/playlistmanager.cpp:387
 #: playlist/playlistmanager.cpp:390 ui/albumcoverchoicecontroller.cpp:110
 #: ui/edittagdialog.cpp:415 ui/edittagdialog.cpp:456
@@ -4491,6 +4498,10 @@ msgstr "Usuń okładkę"
 #: podcasts/addpodcastdialog.cpp:59 podcasts/podcastservice.cpp:277
 msgid "Unsubscribe"
 msgstr "Anuluj subskrypcję"
+
+#: songinfo/songkickconcerts.cpp:154
+msgid "Upcoming Concerts"
+msgstr "Nadchodzące koncerty"
 
 #: internet/groovesharkservice.cpp:1165
 msgid "Update Grooveshark playlist"
@@ -4628,7 +4639,7 @@ msgstr "VBR MP3"
 msgid "Variable bit rate"
 msgstr "Zmienny bitrate"
 
-#: globalsearch/globalsearchitemdelegate.cpp:162 library/librarymodel.cpp:233
+#: globalsearch/globalsearchitemdelegate.cpp:162 library/librarymodel.cpp:234
 #: playlist/playlistmanager.cpp:402 ui/albumcovermanager.cpp:258
 msgid "Various artists"
 msgstr "Różni wykonawcy"
@@ -4770,7 +4781,7 @@ msgstr "Czy chciałbyś przenieść także inny piosenki z tego albumu do Różn
 msgid "Would you like to run a full rescan right now?"
 msgstr "Czy chcesz teraz rozpocząć odświeżanie biblioteki?"
 
-#: playlist/playlist.cpp:1140 ui/organisedialog.cpp:63
+#: playlist/playlist.cpp:1170 ui/organisedialog.cpp:63
 #: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:148
 #: ../bin/src/ui_groupbydialog.h:161 ../bin/src/ui_edittagdialog.h:657
 #: ../bin/src/ui_trackselectiondialog.h:212
@@ -5021,8 +5032,9 @@ msgid "longest first"
 msgstr "najpierw najdłuższe"
 
 #: playlist/playlistundocommands.cpp:99
-msgid "move songs"
-msgstr "przenieś utwory"
+#, c-format
+msgid "move %n songs"
+msgstr ""
 
 #: smartplaylists/searchterm.cpp:289
 msgid "newest first"
@@ -5065,9 +5077,17 @@ msgstr "usuń %n utworów"
 msgid "shortest first"
 msgstr "najpierw najkrótsze"
 
+#: playlist/playlistundocommands.cpp:138
+msgid "shuffle songs"
+msgstr ""
+
 #: smartplaylists/searchterm.cpp:292
 msgid "smallest first"
 msgstr "najpierw najmniejsze"
+
+#: playlist/playlistundocommands.cpp:131
+msgid "sort songs"
+msgstr ""
 
 #: smartplaylists/searchterm.cpp:214
 msgid "starts with"

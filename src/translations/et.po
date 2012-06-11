@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-05-28 23:29+0000\n"
+"PO-Revision-Date: 2012-06-10 20:28+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Estonian (http://www.transifex.net/projects/p/clementine/language/et/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -521,7 +521,7 @@ msgstr ""
 msgid "After copying..."
 msgstr "Pärast kopeerimist..."
 
-#: playlist/playlist.cpp:1136 ui/organisedialog.cpp:55
+#: playlist/playlist.cpp:1166 ui/organisedialog.cpp:55
 #: ui/qtsystemtrayicon.cpp:252 ../bin/src/ui_groupbydialog.h:129
 #: ../bin/src/ui_groupbydialog.h:142 ../bin/src/ui_groupbydialog.h:155
 #: ../bin/src/ui_albumcoversearcher.h:111
@@ -534,7 +534,7 @@ msgstr "Album"
 msgid "Album (ideal loudness for all tracks)"
 msgstr "Album (kõigil radadel ideaalne valjus)"
 
-#: playlist/playlist.cpp:1142 ui/organisedialog.cpp:58
+#: playlist/playlist.cpp:1172 ui/organisedialog.cpp:58
 #: ../bin/src/ui_groupbydialog.h:131 ../bin/src/ui_groupbydialog.h:144
 #: ../bin/src/ui_groupbydialog.h:157 ../bin/src/ui_edittagdialog.h:658
 msgid "Album artist"
@@ -642,7 +642,7 @@ msgstr ""
 msgid "And:"
 msgstr ""
 
-#: moodbar/moodbarrenderer.cpp:154
+#: moodbar/moodbarrenderer.cpp:156
 msgid "Angry"
 msgstr ""
 
@@ -681,7 +681,7 @@ msgstr ""
 msgid "Are you sure you want to reset this song's statistics?"
 msgstr ""
 
-#: playlist/playlist.cpp:1135 ui/organisedialog.cpp:56
+#: playlist/playlist.cpp:1165 ui/organisedialog.cpp:56
 #: ui/qtsystemtrayicon.cpp:250 ../bin/src/ui_groupbydialog.h:130
 #: ../bin/src/ui_groupbydialog.h:143 ../bin/src/ui_groupbydialog.h:156
 #: ../bin/src/ui_albumcoversearcher.h:107
@@ -753,7 +753,7 @@ msgstr ""
 msgid "BBC Podcasts"
 msgstr ""
 
-#: playlist/playlist.cpp:1151 ui/organisedialog.cpp:62
+#: playlist/playlist.cpp:1181 ui/organisedialog.cpp:62
 #: ../bin/src/ui_edittagdialog.h:638
 msgid "BPM"
 msgstr "BPM"
@@ -807,7 +807,7 @@ msgstr "Parim"
 msgid "Biography from %1"
 msgstr ""
 
-#: playlist/playlist.cpp:1152 ../bin/src/ui_edittagdialog.h:640
+#: playlist/playlist.cpp:1182 ../bin/src/ui_edittagdialog.h:640
 msgid "Bit rate"
 msgstr "Bitikiirus"
 
@@ -872,7 +872,7 @@ msgstr "Loobu"
 msgid "Change cover art"
 msgstr ""
 
-#: songinfo/songinfotextview.cpp:74
+#: songinfo/songinfotextview.cpp:77
 msgid "Change font size..."
 msgstr "Muuda kirja suurust..."
 
@@ -891,6 +891,12 @@ msgstr ""
 #: core/commandlineoptions.cpp:163
 msgid "Change the language"
 msgstr "Muuda keelt"
+
+#: ../bin/src/ui_playbacksettingspage.h:294
+msgid ""
+"Changing mono playback preference will be effective for the next playing "
+"songs"
+msgstr ""
 
 #: ../bin/src/ui_podcastsettingspage.h:228
 msgid "Check for new episodes"
@@ -1050,7 +1056,7 @@ msgstr ""
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr ""
 
-#: playlist/playlist.cpp:1161 smartplaylists/searchterm.cpp:279
+#: playlist/playlist.cpp:1191 smartplaylists/searchterm.cpp:279
 #: ui/organisedialog.cpp:65 ../bin/src/ui_edittagdialog.h:661
 msgid "Comment"
 msgstr "Märkus"
@@ -1063,7 +1069,7 @@ msgstr ""
 msgid "Complete tags automatically..."
 msgstr ""
 
-#: playlist/playlist.cpp:1143 ui/organisedialog.cpp:59
+#: playlist/playlist.cpp:1173 ui/organisedialog.cpp:59
 #: ../bin/src/ui_groupbydialog.h:132 ../bin/src/ui_groupbydialog.h:145
 #: ../bin/src/ui_groupbydialog.h:158 ../bin/src/ui_edittagdialog.h:659
 msgid "Composer"
@@ -1148,21 +1154,21 @@ msgstr "Kopeerin iPod andebaasi"
 msgid "Copyright"
 msgstr ""
 
-#: transcoder/transcoder.cpp:62
+#: transcoder/transcoder.cpp:64
 #, qt-format
 msgid ""
 "Could not create the GStreamer element \"%1\" - make sure you have all the "
 "required GStreamer plugins installed"
 msgstr ""
 
-#: transcoder/transcoder.cpp:425
+#: transcoder/transcoder.cpp:427
 #, qt-format
 msgid ""
 "Couldn't find a muxer for %1, check you have the correct GStreamer plugins "
 "installed"
 msgstr ""
 
-#: transcoder/transcoder.cpp:419
+#: transcoder/transcoder.cpp:421
 #, qt-format
 msgid ""
 "Couldn't find an encoder for %1, check you have the correct GStreamer "
@@ -1329,11 +1335,11 @@ msgid ""
 "recover your database"
 msgstr ""
 
-#: playlist/playlist.cpp:1159 ../bin/src/ui_edittagdialog.h:649
+#: playlist/playlist.cpp:1189 ../bin/src/ui_edittagdialog.h:649
 msgid "Date created"
 msgstr "Loomise kuupäev"
 
-#: playlist/playlist.cpp:1158 ../bin/src/ui_edittagdialog.h:648
+#: playlist/playlist.cpp:1188 ../bin/src/ui_edittagdialog.h:648
 msgid "Date modified"
 msgstr "Muutmise kuupäev"
 
@@ -1423,7 +1429,7 @@ msgstr "Sihtkoht"
 msgid "Details..."
 msgstr "Üksikasjad..."
 
-#: devices/devicekitlister.cpp:126 devices/giolister.cpp:158
+#: devices/devicekitlister.cpp:126 devices/giolister.cpp:160
 msgid "Device"
 msgstr "Seade"
 
@@ -1476,7 +1482,7 @@ msgstr "Näita kestust"
 msgid "Disabled"
 msgstr "Keelatud"
 
-#: playlist/playlist.cpp:1139 ui/organisedialog.cpp:61
+#: playlist/playlist.cpp:1169 ui/organisedialog.cpp:61
 #: ../bin/src/ui_edittagdialog.h:655
 msgid "Disc"
 msgstr "Ketas"
@@ -1759,7 +1765,7 @@ msgstr ""
 msgid "Error loading di.fm playlist"
 msgstr ""
 
-#: transcoder/transcoder.cpp:393
+#: transcoder/transcoder.cpp:395
 #, qt-format
 msgid "Error processing %1: %2"
 msgstr ""
@@ -1910,19 +1916,19 @@ msgstr "Faililaiend"
 msgid "File formats"
 msgstr "Faili vormingud"
 
-#: playlist/playlist.cpp:1154 ../bin/src/ui_edittagdialog.h:650
+#: playlist/playlist.cpp:1184 ../bin/src/ui_edittagdialog.h:650
 msgid "File name"
 msgstr "Faili nimi"
 
-#: playlist/playlist.cpp:1155
+#: playlist/playlist.cpp:1185
 msgid "File name (without path)"
 msgstr ""
 
-#: playlist/playlist.cpp:1156 ../bin/src/ui_edittagdialog.h:644
+#: playlist/playlist.cpp:1186 ../bin/src/ui_edittagdialog.h:644
 msgid "File size"
 msgstr "Faili suurus"
 
-#: playlist/playlist.cpp:1157 ../bin/src/ui_groupbydialog.h:133
+#: playlist/playlist.cpp:1187 ../bin/src/ui_groupbydialog.h:133
 #: ../bin/src/ui_groupbydialog.h:146 ../bin/src/ui_groupbydialog.h:159
 #: ../bin/src/ui_edittagdialog.h:646
 msgid "File type"
@@ -2032,7 +2038,7 @@ msgstr ""
 msgid "Friends"
 msgstr "Sõbrad"
 
-#: moodbar/moodbarrenderer.cpp:155
+#: moodbar/moodbarrenderer.cpp:157
 msgid "Frozen"
 msgstr ""
 
@@ -2060,7 +2066,7 @@ msgstr ""
 msgid "General settings"
 msgstr "Üldised seadistused"
 
-#: playlist/playlist.cpp:1141 ui/organisedialog.cpp:64
+#: playlist/playlist.cpp:1171 ui/organisedialog.cpp:64
 #: ../bin/src/ui_groupbydialog.h:134 ../bin/src/ui_groupbydialog.h:147
 #: ../bin/src/ui_groupbydialog.h:160 ../bin/src/ui_edittagdialog.h:660
 msgid "Genre"
@@ -2172,7 +2178,7 @@ msgstr ""
 msgid "HTTP proxy"
 msgstr "HTTP-puhverserver"
 
-#: moodbar/moodbarrenderer.cpp:156
+#: moodbar/moodbarrenderer.cpp:158
 msgid "Happy"
 msgstr ""
 
@@ -2406,7 +2412,7 @@ msgstr "Suur albumi kaanepilt"
 msgid "Large sidebar"
 msgstr "Suur külgriba"
 
-#: library/library.cpp:69 playlist/playlist.cpp:1148
+#: library/library.cpp:69 playlist/playlist.cpp:1178
 #: ../bin/src/ui_edittagdialog.h:641
 msgid "Last played"
 msgstr "Viimati esitatud"
@@ -2485,7 +2491,7 @@ msgstr ""
 msgid "Leave blank for the default.  Examples: \"/dev/dsp\", \"front\", etc."
 msgstr ""
 
-#: playlist/playlist.cpp:1137 ui/organisedialog.cpp:66
+#: playlist/playlist.cpp:1167 ui/organisedialog.cpp:66
 #: ui/qtsystemtrayicon.cpp:255 ../bin/src/ui_edittagdialog.h:636
 msgid "Length"
 msgstr "Kestvus"
@@ -2567,7 +2573,7 @@ msgstr ""
 msgid "Loading smart playlist"
 msgstr ""
 
-#: library/librarymodel.cpp:134
+#: library/librarymodel.cpp:135
 msgid "Loading songs"
 msgstr ""
 
@@ -2584,7 +2590,7 @@ msgstr ""
 msgid "Loading tracks info"
 msgstr ""
 
-#: library/librarymodel.cpp:129 podcasts/podcastdiscoverymodel.cpp:97
+#: library/librarymodel.cpp:130 podcasts/podcastdiscoverymodel.cpp:97
 #: widgets/prettyimage.cpp:168 widgets/widgetfadehelper.cpp:99
 #: ../bin/src/ui_addpodcastdialog.h:180 ../bin/src/ui_searchpreview.h:106
 msgid "Loading..."
@@ -2748,7 +2754,7 @@ msgstr "Mudel"
 msgid "Monitor the library for changes"
 msgstr ""
 
-#: ../bin/src/ui_playbacksettingspage.h:293
+#: ../bin/src/ui_playbacksettingspage.h:296
 msgid "Mono playback"
 msgstr ""
 
@@ -2756,7 +2762,7 @@ msgstr ""
 msgid "Months"
 msgstr ""
 
-#: playlist/playlist.cpp:1163
+#: playlist/playlist.cpp:1193
 msgid "Mood"
 msgstr ""
 
@@ -2773,7 +2779,7 @@ msgstr ""
 msgid "Most played"
 msgstr ""
 
-#: devices/giolister.cpp:157
+#: devices/giolister.cpp:159
 msgid "Mount point"
 msgstr "Haakepunkt"
 
@@ -2940,7 +2946,7 @@ msgstr "Puudub"
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr ""
 
-#: moodbar/moodbarrenderer.cpp:153
+#: moodbar/moodbarrenderer.cpp:155
 msgid "Normal"
 msgstr ""
 
@@ -3156,7 +3162,7 @@ msgstr "Mängi Esitaja või Sildipilve"
 msgid "Play artist radio..."
 msgstr ""
 
-#: playlist/playlist.cpp:1146 ../bin/src/ui_edittagdialog.h:637
+#: playlist/playlist.cpp:1176 ../bin/src/ui_edittagdialog.h:637
 msgid "Play count"
 msgstr "Esitamiste arv"
 
@@ -3408,7 +3414,7 @@ msgstr ""
 msgid "Rate the current song 5 stars"
 msgstr ""
 
-#: playlist/playlist.cpp:1145 ../bin/src/ui_edittagdialog.h:645
+#: playlist/playlist.cpp:1175 ../bin/src/ui_edittagdialog.h:645
 msgid "Rating"
 msgstr "Hinnang"
 
@@ -3589,7 +3595,7 @@ msgstr ""
 msgid "Safely remove the device after copying"
 msgstr ""
 
-#: playlist/playlist.cpp:1153 ../bin/src/ui_edittagdialog.h:642
+#: playlist/playlist.cpp:1183 ../bin/src/ui_edittagdialog.h:642
 msgid "Sample rate"
 msgstr "Diskreetimissagedus"
 
@@ -3637,7 +3643,7 @@ msgstr ""
 msgid "Scalable sampling rate profile (SSR)"
 msgstr ""
 
-#: playlist/playlist.cpp:1149 ../bin/src/ui_edittagdialog.h:643
+#: playlist/playlist.cpp:1179 ../bin/src/ui_edittagdialog.h:643
 msgid "Score"
 msgstr ""
 
@@ -3958,7 +3964,7 @@ msgstr ""
 msgid "Skip backwards in playlist"
 msgstr "Lugude nimekirjas tagasi hüppamine"
 
-#: playlist/playlist.cpp:1147 ../bin/src/ui_edittagdialog.h:639
+#: playlist/playlist.cpp:1177 ../bin/src/ui_edittagdialog.h:639
 msgid "Skip count"
 msgstr ""
 
@@ -3978,7 +3984,7 @@ msgstr "Väike külgriba"
 msgid "Smart playlist"
 msgstr ""
 
-#: library/librarymodel.cpp:1128
+#: library/librarymodel.cpp:1156
 msgid "Smart playlists"
 msgstr ""
 
@@ -4026,7 +4032,7 @@ msgstr ""
 msgid "Sorting"
 msgstr "Sorteerimine"
 
-#: playlist/playlist.cpp:1162
+#: playlist/playlist.cpp:1192
 msgid "Source"
 msgstr ""
 
@@ -4076,7 +4082,7 @@ msgstr ""
 msgid "Start typing in the search box above to find music on %1."
 msgstr ""
 
-#: transcoder/transcoder.cpp:399
+#: transcoder/transcoder.cpp:401
 #, qt-format
 msgid "Starting %1"
 msgstr "Käivitatakse %1"
@@ -4130,7 +4136,7 @@ msgstr ""
 msgid "Subscribers"
 msgstr ""
 
-#: transcoder/transcoder.cpp:198
+#: transcoder/transcoder.cpp:200
 #, qt-format
 msgid "Successfully written %1"
 msgstr ""
@@ -4174,7 +4180,7 @@ msgstr ""
 msgid "Syncing Spotify starred tracks"
 msgstr ""
 
-#: moodbar/moodbarrenderer.cpp:157
+#: moodbar/moodbarrenderer.cpp:159
 msgid "System colors"
 msgstr ""
 
@@ -4363,7 +4369,7 @@ msgstr ""
 msgid "Timezone"
 msgstr "Ajavöönd"
 
-#: playlist/playlist.cpp:1134 ui/organisedialog.cpp:54
+#: playlist/playlist.cpp:1164 ui/organisedialog.cpp:54
 #: ui/qtsystemtrayicon.cpp:248 ../bin/src/ui_about.h:142
 #: ../bin/src/ui_edittagdialog.h:652 ../bin/src/ui_trackselectiondialog.h:211
 msgid "Title"
@@ -4411,7 +4417,7 @@ msgstr ""
 msgid "Total network requests made"
 msgstr ""
 
-#: playlist/playlist.cpp:1138 ui/organisedialog.cpp:60
+#: playlist/playlist.cpp:1168 ui/organisedialog.cpp:60
 #: ../bin/src/ui_edittagdialog.h:653 ../bin/src/ui_trackselectiondialog.h:213
 msgid "Track"
 msgstr "Rada"
@@ -4428,7 +4434,7 @@ msgstr "Transkodeerimis logi"
 msgid "Transcoding"
 msgstr ""
 
-#: transcoder/transcoder.cpp:307
+#: transcoder/transcoder.cpp:309
 #, qt-format
 msgid "Transcoding %1 files using %2 threads"
 msgstr ""
@@ -4449,7 +4455,7 @@ msgstr "Turbiin"
 msgid "Turn off"
 msgstr ""
 
-#: devices/giolister.cpp:159
+#: devices/giolister.cpp:161
 msgid "URI"
 msgstr "URI"
 
@@ -4467,8 +4473,8 @@ msgid "Unable to download %1 (%2)"
 msgstr ""
 
 #: core/song.cpp:330 globalsearch/globalsearchitemdelegate.cpp:166
-#: globalsearch/globalsearchitemdelegate.cpp:173 library/librarymodel.cpp:296
-#: library/librarymodel.cpp:301 library/librarymodel.cpp:926
+#: globalsearch/globalsearchitemdelegate.cpp:173 library/librarymodel.cpp:297
+#: library/librarymodel.cpp:302 library/librarymodel.cpp:954
 #: playlist/playlistdelegates.cpp:309 playlist/playlistmanager.cpp:387
 #: playlist/playlistmanager.cpp:390 ui/albumcoverchoicecontroller.cpp:110
 #: ui/edittagdialog.cpp:415 ui/edittagdialog.cpp:456
@@ -4489,6 +4495,10 @@ msgstr ""
 
 #: podcasts/addpodcastdialog.cpp:59 podcasts/podcastservice.cpp:277
 msgid "Unsubscribe"
+msgstr ""
+
+#: songinfo/songkickconcerts.cpp:154
+msgid "Upcoming Concerts"
 msgstr ""
 
 #: internet/groovesharkservice.cpp:1165
@@ -4627,7 +4637,7 @@ msgstr "VBR MP3"
 msgid "Variable bit rate"
 msgstr ""
 
-#: globalsearch/globalsearchitemdelegate.cpp:162 library/librarymodel.cpp:233
+#: globalsearch/globalsearchitemdelegate.cpp:162 library/librarymodel.cpp:234
 #: playlist/playlistmanager.cpp:402 ui/albumcovermanager.cpp:258
 msgid "Various artists"
 msgstr "Erinevad esitajad"
@@ -4769,7 +4779,7 @@ msgstr ""
 msgid "Would you like to run a full rescan right now?"
 msgstr ""
 
-#: playlist/playlist.cpp:1140 ui/organisedialog.cpp:63
+#: playlist/playlist.cpp:1170 ui/organisedialog.cpp:63
 #: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:148
 #: ../bin/src/ui_groupbydialog.h:161 ../bin/src/ui_edittagdialog.h:657
 #: ../bin/src/ui_trackselectiondialog.h:212
@@ -5020,7 +5030,8 @@ msgid "longest first"
 msgstr ""
 
 #: playlist/playlistundocommands.cpp:99
-msgid "move songs"
+#, c-format
+msgid "move %n songs"
 msgstr ""
 
 #: smartplaylists/searchterm.cpp:289
@@ -5064,8 +5075,16 @@ msgstr ""
 msgid "shortest first"
 msgstr ""
 
+#: playlist/playlistundocommands.cpp:138
+msgid "shuffle songs"
+msgstr ""
+
 #: smartplaylists/searchterm.cpp:292
 msgid "smallest first"
+msgstr ""
+
+#: playlist/playlistundocommands.cpp:131
+msgid "sort songs"
 msgstr ""
 
 #: smartplaylists/searchterm.cpp:214
