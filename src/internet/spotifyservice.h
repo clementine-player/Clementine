@@ -27,6 +27,7 @@ public:
     Type_StarredPlaylist,
     Type_InboxPlaylist,
     Type_Track,
+    Type_Toplist,
   };
 
   enum Role {
@@ -83,6 +84,9 @@ public slots:
 
 private:
   void StartBlobProcess();
+  void FillPlaylist(
+      QStandardItem* item,
+      const google::protobuf::RepeatedPtrField<pb::spotify::Track>& tracks);
   void FillPlaylist(QStandardItem* item, const pb::spotify::LoadPlaylistResponse& response);
   void EnsureMenuCreated();
 
@@ -101,6 +105,7 @@ private slots:
   void UserPlaylistLoaded(const pb::spotify::LoadPlaylistResponse& response);
   void SearchResults(const pb::spotify::SearchResponse& response);
   void SyncPlaylistProgress(const pb::spotify::SyncPlaylistProgress& progress);
+  void ToplistLoaded(const pb::spotify::BrowseToplistResponse& response);
 
   void OpenSearchTab();
   void DoSearch();
@@ -120,6 +125,7 @@ private:
   QStandardItem* search_;
   QStandardItem* starred_;
   QStandardItem* inbox_;
+  QStandardItem* toplist_;
   QList<QStandardItem*> playlists_;
 
   int login_task_id_;

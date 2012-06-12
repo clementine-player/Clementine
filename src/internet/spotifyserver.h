@@ -49,6 +49,7 @@ public:
   void LoadImage(const QString& id);
   void AlbumBrowse(const QString& uri);
   void SetPlaybackSettings(pb::spotify::Bitrate bitrate, bool volume_normalisation);
+  void LoadToplist();
 
   int server_port() const;
 
@@ -69,6 +70,7 @@ signals:
   void ImageLoaded(const QString& id, const QImage& image);
   void SyncPlaylistProgress(const pb::spotify::SyncPlaylistProgress& progress);
   void AlbumBrowseResults(const pb::spotify::BrowseAlbumResponse& response);
+  void ToplistBrowseResults(const pb::spotify::BrowseToplistResponse& response);
 
 protected:
   void MessageArrived(const pb::spotify::Message& message);

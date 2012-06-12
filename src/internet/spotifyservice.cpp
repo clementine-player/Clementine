@@ -45,6 +45,7 @@ SpotifyService::SpotifyService(Application* app, InternetModel* parent)
       search_(NULL),
       starred_(NULL),
       inbox_(NULL),
+      toplist_(NULL),
       login_task_id_(0),
       pending_search_playlist_(NULL),
       context_menu_(NULL),
@@ -117,6 +118,11 @@ void SpotifyService::LazyPopulate(QStandardItem* item) {
     case InternetModel::Type_UserPlaylist:
       EnsureServerCreated();
       server_->LoadUserPlaylist(item->data(Role_UserPlaylistIndex).toInt());
+      break;
+
+    case Type_Toplist:
+      EnsureServerCreated();
+      server_->LoadToplist();
       break;
 
     default:
@@ -237,6 +243,8 @@ void SpotifyService::EnsureServerCreated(const QString& username,
           SIGNAL(ImageLoaded(QString,QImage)));
   connect(server_, SIGNAL(SyncPlaylistProgress(pb::spotify::SyncPlaylistProgress)),
           SLOT(SyncPlaylistProgress(pb::spotify::SyncPlaylistProgress)));
+  connect(server_, SIGNAL(ToplistBrowseResults(pb::spotify::BrowseToplistResponse)),
+          SLOT(ToplistLoaded(pb::spotify::BrowseToplistResponse)));
 
   server_->Init();
 
@@ -345,7 +353,12 @@ void SpotifyService::PlaylistsUpdated(const pb::spotify::Playlists& response) {
     inbox_->setData(Type_InboxPlaylist, InternetModel::Role_Type);
     inbox_->setData(true, InternetModel::Role_CanLazyLoad);
 
+    toplist_ = new QStandardItem(QIcon(), tr("Top tracks"));
+    toplist_->setData(Type_Toplist, InternetModel::Role_Type);
+    toplist_->setData(true, InternetModel::Role_CanLazyLoad);
+
     root_->appendRow(search_);
+    root_->appendRow(toplist_);
     root_->appendRow(starred_);
     root_->appendRow(inbox_);
   }
@@ -408,6 +421,10 @@ void SpotifyService::StarredLoaded(const pb::spotify::LoadPlaylistResponse& resp
   FillPlaylist(starred_, response);
 }
 
+void SpotifyService::ToplistLoaded(const pb::spotify::BrowseToplistResponse& response) {
+  FillPlaylist(toplist_, response.track());
+}
+
 QStandardItem* SpotifyService::PlaylistBySpotifyIndex(int index) const {
   foreach (QStandardItem* item, playlists_) {
     if (item->data(Role_UserPlaylistIndex).toInt() == index) {
@@ -425,14 +442,15 @@ void SpotifyService::UserPlaylistLoaded(const pb::spotify::LoadPlaylistResponse&
   }
 }
 
-void SpotifyService::FillPlaylist(QStandardItem* item, const pb::spotify::LoadPlaylistResponse& response) {
-  qLog(Debug) << "Filling playlist:" << item->text();
+void SpotifyService::FillPlaylist(
+    QStandardItem* item,
+    const google::protobuf::RepeatedPtrField<pb::spotify::Track>& tracks) {
   if (item->hasChildren())
     item->removeRows(0, item->rowCount());
 
-  for (int i=0 ; i<response.track_size() ; ++i) {
+  for (int i=0 ; i < tracks.size() ; ++i) {
     Song song;
-    SongFromProtobuf(response.track(i), &song);
+    SongFromProtobuf(tracks.Get(i), &song);
 
     QStandardItem* child = new QStandardItem(song.PrettyTitleWithArtist());
     child->setData(Type_Track, InternetModel::Role_Type);
@@ -442,6 +460,11 @@ void SpotifyService::FillPlaylist(QStandardItem* item, const pb::spotify::LoadPl
 
     item->appendRow(child);
   }
+}
+
+void SpotifyService::FillPlaylist(QStandardItem* item, const pb::spotify::LoadPlaylistResponse& response) {
+  qLog(Debug) << "Filling playlist:" << item->text();
+  FillPlaylist(item, response.track());
 }
 
 void SpotifyService::SongFromProtobuf(const pb::spotify::Track& track, Song* song) {
