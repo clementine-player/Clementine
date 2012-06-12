@@ -285,6 +285,8 @@ void SpotifyClient::MessageArrived(const pb::spotify::Message& message) {
     BrowseAlbum(QStringFromStdString(message.browse_album_request().uri()));
   } else if (message.has_set_playback_settings_request()) {
     SetPlaybackSettings(message.set_playback_settings_request());
+  } else if (message.has_browse_toplist_request()) {
+    BrowseToplist(message.browse_toplist_request());
   }
 }
 
@@ -966,6 +968,43 @@ void SpotifyClient::AlbumBrowseComplete(sp_albumbrowse* result, void* userdata) 
 
   me->SendMessage(message);
   sp_albumbrowse_release(result);
+}
+
+void SpotifyClient::BrowseToplist(const pb::spotify::BrowseToplistRequest& req) {
+  sp_toplistbrowse* browse = sp_toplistbrowse_create(
+      session_,
+      SP_TOPLIST_TYPE_TRACKS,  // TODO: Support albums and artists.
+      SP_TOPLIST_REGION_EVERYWHERE,  // TODO: Support other regions.
+      NULL,
+      &ToplistBrowseComplete,
+      this);
+  pending_toplist_browses_[browse] = req;
+}
+
+void SpotifyClient::ToplistBrowseComplete(sp_toplistbrowse* result, void* userdata) {
+  SpotifyClient* me = reinterpret_cast<SpotifyClient*>(userdata);
+
+  qLog(Debug) << "Toplist browse request took:"
+              << sp_toplistbrowse_backend_request_duration(result)
+              << "ms";
+
+  if (!me->pending_toplist_browses_.contains(result)) {
+    return;
+  }
+
+  const pb::spotify::BrowseToplistRequest& request = me->pending_toplist_browses_.take(result);
+
+  pb::spotify::Message message;
+  pb::spotify::BrowseToplistResponse* msg = message.mutable_browse_toplist_response();
+  msg->mutable_request()->CopyFrom(request);
+
+  const int count = sp_toplistbrowse_num_tracks(result);
+  for (int i = 0; i < count; ++i) {
+    me->ConvertTrack(sp_toplistbrowse_track(result, i), msg->add_track());
+  }
+
+  me->SendMessage(message);
+  sp_toplistbrowse_release(result);
 }
 
 void SpotifyClient::DeviceClosed() {

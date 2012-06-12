@@ -147,6 +147,31 @@ message BrowseAlbumResponse {
   repeated Track track = 2;
 }
 
+message BrowseToplistRequest {
+  enum ToplistType {
+    Artists = 1;
+    Albums = 2;
+    Tracks = 3;
+  };
+
+  enum Region {
+    Everywhere = 1;
+    User = 2;
+  };
+
+  required ToplistType type = 1;
+  optional Region region = 2 [default=Everywhere];
+  // Username to use if region is User.
+  optional string username = 3;
+}
+
+message BrowseToplistResponse {
+  required BrowseToplistRequest request = 1;
+
+  repeated Track track = 2;
+  repeated Album album = 3;
+}
+
 message SeekRequest {
   optional int64 offset_bytes = 1;
 }
@@ -162,6 +187,7 @@ message PlaybackSettings {
   optional bool volume_normalisation = 2 [default = false];
 }
 
+// NEXT_ID: 21
 message Message {
   // Not currently used
   optional int32 id = 18;
@@ -183,4 +209,6 @@ message Message {
   optional BrowseAlbumResponse browse_album_response = 15;
   optional SeekRequest seek_request = 16;
   optional PlaybackSettings set_playback_settings_request = 17;
+  optional BrowseToplistRequest browse_toplist_request = 19;
+  optional BrowseToplistResponse browse_toplist_response = 20;
 }
