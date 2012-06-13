@@ -706,7 +706,7 @@ else (LINGUAS STREQUAL "All")
   if (NOT LINGUAS OR LINGUAS STREQUAL "None")
     set (LANGUAGES "")
   else (NOT LINGUAS OR LINGUAS STREQUAL "None")
-    string(REGEX MATCHALL [a-zA-Z_]+
+    string(REGEX MATCHALL [a-zA-Z_@]+
            LANGUAGES ${LINGUAS})
   endif (NOT LINGUAS OR LINGUAS STREQUAL "None")
 endif (LINGUAS STREQUAL "All")
