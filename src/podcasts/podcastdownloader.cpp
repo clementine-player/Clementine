@@ -133,6 +133,37 @@ void PodcastDownloader::FinishAndDelete(Task* task) {
   NextTask();
 }
 
+QString PodcastDownloader::FilenameForEpisode(const QString& directory,
+                                              const PodcastEpisode& episode) const {
+  const QString file_extension = QFileInfo(episode.url().path()).suffix();
+  int count = 0;
+  
+  // The file name contains the publication date and episode title
+  QString base_filename = 
+      episode.publication_date().date().toString(Qt::ISODate) + "-" +
+      SanitiseFilenameComponent(episode.title());
+  
+  // Add numbers on to the end of the filename until we find one that doesn't
+  // exist.
+  forever {
+    QString filename;
+    
+    if (count == 0) {
+      filename = QString("%1/%2.%3").arg(
+            directory, base_filename, file_extension);
+    } else {
+      filename = QString("%1/%2 (%3).%4").arg(
+            directory, base_filename, QString::number(count), file_extension);
+    }
+    
+    if (!QFile::exists(filename)) {
+      return filename;
+    }
+    
+    count ++;
+  }
+}
+
 void PodcastDownloader::StartDownloading(Task* task) {
   current_task_ = task;
 
@@ -146,12 +177,9 @@ void PodcastDownloader::StartDownloading(Task* task) {
     return;
   }
 
-  const QString file_extension = QFileInfo(task->episode.url().path()).suffix();
   const QString directory = download_dir_ + "/" +
       SanitiseFilenameComponent(podcast.title());
-  const QString filename =
-      SanitiseFilenameComponent(task->episode.title()) + "." + file_extension;
-  const QString filepath = directory + "/" + filename;
+  const QString filepath = FilenameForEpisode(directory, task->episode);
 
   // Open the output file
   QDir().mkpath(directory);

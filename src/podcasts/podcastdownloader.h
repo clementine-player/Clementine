@@ -80,7 +80,8 @@ private:
   void NextTask();
   void FinishAndDelete(Task* task);
 
-  QString FilenameForEpisode(const PodcastEpisode& episode) const;
+  QString FilenameForEpisode(const QString& directory,
+                             const PodcastEpisode& episode) const;
   QString SanitiseFilenameComponent(const QString& text) const;
 
 private:
