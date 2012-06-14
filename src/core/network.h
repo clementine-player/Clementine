@@ -104,6 +104,7 @@ signals:
   void finished();
 
 private slots:
+  void ReadyRead();
   void ReplyFinished();
 
 private:
