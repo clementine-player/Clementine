@@ -1081,12 +1081,19 @@ void Playlist::UpdateItems(const SongList& songs) {
 }
 
 QMimeData* Playlist::mimeData(const QModelIndexList& indexes) const {
+  if (indexes.isEmpty())
+    return NULL;
+  
+  // We only want one index per row, but we can't just take column 0 because
+  // the user might have hidden it.
+  const int first_column = indexes.first().column();
+  
   QMimeData* data = new QMimeData;
 
   QList<QUrl> urls;
   QList<int> rows;
   foreach (const QModelIndex& index, indexes) {
-    if (index.column() != 0)
+    if (index.column() != first_column)
       continue;
 
     urls << items_[index.row()]->Url();

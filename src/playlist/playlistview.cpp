@@ -883,9 +883,11 @@ void PlaylistView::paintEvent(QPaintEvent* event) {
     drawTree(&p, event->region());
     return;
   }
+  
+  const int first_column = header_->logicalIndex(0);
 
   // Find the y position of the drop indicator
-  QModelIndex drop_index = model()->index(drop_indicator_row_, 0);
+  QModelIndex drop_index = model()->index(drop_indicator_row_, first_column);
   int drop_pos = -1;
   switch (dropIndicatorPosition()) {
     case QAbstractItemView::OnItem:
@@ -903,7 +905,8 @@ void PlaylistView::paintEvent(QPaintEvent* event) {
       if (model()->rowCount() == 0)
         drop_pos = 1;
       else
-        drop_pos = visualRect(model()->index(model()->rowCount() - 1, 0)).bottom() + 1;
+        drop_pos = 1 + visualRect(
+              model()->index(model()->rowCount() - 1, first_column)).bottom();
       break;
   }
 
