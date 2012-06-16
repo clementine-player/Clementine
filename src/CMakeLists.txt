@@ -136,23 +136,22 @@ set(SOURCES
   engines/gstenginepipeline.cpp
   engines/gstelementdeleter.cpp
 
-  globalsearch/common.cpp
   globalsearch/digitallyimportedsearchprovider.cpp
   globalsearch/globalsearch.cpp
   globalsearch/globalsearchitemdelegate.cpp
+  globalsearch/globalsearchmodel.cpp
   globalsearch/globalsearchsettingspage.cpp
   globalsearch/globalsearchsortmodel.cpp
-  globalsearch/globalsearchtooltip.cpp
-  globalsearch/globalsearchwidget.cpp
+  globalsearch/globalsearchview.cpp
   globalsearch/groovesharksearchprovider.cpp
   globalsearch/icecastsearchprovider.cpp
   globalsearch/librarysearchprovider.cpp
   globalsearch/savedradiosearchprovider.cpp
   globalsearch/searchprovider.cpp
+  globalsearch/searchproviderstatuswidget.cpp
   globalsearch/simplesearchprovider.cpp
   globalsearch/somafmsearchprovider.cpp
-  globalsearch/tooltipactionwidget.cpp
-  globalsearch/tooltipresultwidget.cpp
+  globalsearch/suggestionwidget.cpp
   globalsearch/urlsearchprovider.cpp
 
   internet/digitallyimportedclient.cpp
@@ -417,14 +416,13 @@ set(HEADERS
   engines/gstelementdeleter.h
 
   globalsearch/globalsearch.h
+  globalsearch/globalsearchmodel.h
   globalsearch/globalsearchsettingspage.h
-  globalsearch/globalsearchtooltip.h
-  globalsearch/globalsearchwidget.h
+  globalsearch/globalsearchview.h
   globalsearch/groovesharksearchprovider.h
   globalsearch/searchprovider.h
   globalsearch/simplesearchprovider.h
-  globalsearch/tooltipactionwidget.h
-  globalsearch/tooltipresultwidget.h
+  globalsearch/suggestionwidget.h
 
   internet/digitallyimportedclient.h
   internet/digitallyimportedservicebase.h
@@ -610,7 +608,9 @@ set(UI
   devices/deviceproperties.ui
 
   globalsearch/globalsearchsettingspage.ui
-  globalsearch/globalsearchwidget.ui
+  globalsearch/globalsearchview.ui
+  globalsearch/searchproviderstatuswidget.ui
+  globalsearch/suggestionwidget.ui
 
   internet/digitallyimportedsettingspage.ui
   internet/groovesharksettingspage.ui
@@ -866,12 +866,6 @@ if(HAVE_DBUS)
         dbus/udisksdevice)
   endif(HAVE_DEVICEKIT)
 
-  # Global search interface
-  qt4_add_dbus_adaptor(SOURCES
-      dbus/org.clementineplayer.GlobalSearch.xml
-      globalsearch/globalsearchservice.h GlobalSearchService
-      globalsearch/globalsearchadaptor)
-
   # Wiimotedev interface classes
   if(ENABLE_WIIMOTEDEV)
     qt4_add_dbus_interface(SOURCES
@@ -885,13 +879,11 @@ optional_source(HAVE_DBUS
     core/mpris.cpp
     core/mpris1.cpp
     core/mpris2.cpp
-    globalsearch/globalsearchservice.cpp
     ui/dbusscreensaver.cpp
   HEADERS
     core/mpris.h
     core/mpris1.h
     core/mpris2.h
-    globalsearch/globalsearchservice.h
 )
 
 optional_source(HAVE_WIIMOTEDEV

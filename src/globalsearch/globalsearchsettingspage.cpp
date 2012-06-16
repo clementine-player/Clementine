@@ -79,11 +79,8 @@ void GlobalSearchSettingsPage::Load() {
     AddProviderItem(engine, provider);
   }
 
-  ui_->show_globalsearch->setChecked(s.value("show_globalsearch", true).toBool());
-  ui_->hide_others->setChecked(s.value("hide_others", false).toBool());
-  ui_->combine->setChecked(s.value("combine_identical_results", true).toBool());
-  ui_->tooltip->setChecked(s.value("tooltip", true).toBool());
-  ui_->tooltip_help->setChecked(s.value("tooltip_help", true).toBool());
+  ui_->show_providers->setChecked(s.value("show_providers", true).toBool());
+  ui_->show_suggestions->setChecked(s.value("show_suggestions", true).toBool());
 }
 
 void GlobalSearchSettingsPage::AddProviderItem(GlobalSearch* engine,
@@ -144,11 +141,8 @@ void GlobalSearchSettingsPage::Save() {
   }
 
   s.setValue("provider_order", provider_order);
-  s.setValue("show_globalsearch", ui_->show_globalsearch->isChecked());
-  s.setValue("hide_others", ui_->hide_others->isChecked() && ui_->show_globalsearch->isChecked());
-  s.setValue("combine_identical_results", ui_->combine->isChecked());
-  s.setValue("tooltip", ui_->tooltip->isChecked());
-  s.setValue("tooltip_help", ui_->tooltip_help->isChecked());
+  s.setValue("show_providers", ui_->show_providers->isChecked());
+  s.setValue("show_suggestions", ui_->show_suggestions->isChecked());
 }
 
 void GlobalSearchSettingsPage::MoveUp() {

@@ -99,7 +99,6 @@ using boost::scoped_ptr;
   #include "core/mpris.h"
   #include "core/mpris2.h"
   #include "dbus/metatypes.h"
-  #include "globalsearch/globalsearchservice.h"
   #include <QDBusArgument>
   #include <QDBusConnection>
   #include <QImage>
@@ -420,8 +419,6 @@ int main(int argc, char *argv[]) {
   qDBusRegisterMetaType<QList<QByteArray> >();
 
   mpris::Mpris mpris(&app);
-
-  GlobalSearchService global_search_service(app.global_search());
 #endif
 
   // Window

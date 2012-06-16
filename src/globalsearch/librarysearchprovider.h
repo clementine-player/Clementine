@@ -31,8 +31,8 @@ public:
                         Application* app, QObject* parent = 0);
 
   ResultList Search(int id, const QString& query);
-  void LoadTracksAsync(int id, const Result& result);
-  QString GetSuggestion();
+  MimeData* LoadTracks(const ResultList& results);
+  QStringList GetSuggestions(int count);
 
 private:
   LibraryBackendInterface* backend_;

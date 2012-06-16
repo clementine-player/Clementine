@@ -136,9 +136,18 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
 
   // Whether or not to use album cover art, if it exists, in the library view
   void set_pretty_covers(bool use_pretty_covers);
+  bool use_pretty_covers() const { return use_pretty_covers_; }
 
-  //Whether or not to show letters heading in the library view
+  // Whether or not to show letters heading in the library view
   void set_show_dividers(bool show_dividers);
+
+  // Utility functions for manipulating text
+  static QString TextOrUnknown(const QString& text);
+  static QString PrettyYearAlbum(int year, const QString& album);
+  static QString SortText(QString text);
+  static QString SortTextForArtist(QString artist);
+  static QString SortTextForYear(int year);
+  static QString SortTextForSong(const Song& song);
 
  signals:
   void TotalSongCountUpdated(int count);
@@ -210,15 +219,6 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
   void FinishItem(GroupBy type, bool signal, bool create_divider,
                   LibraryItem* parent, LibraryItem* item);
 
-  // Functions for manipulating text
-  QString TextOrUnknown(const QString& text) const;
-  QString PrettyYearAlbum(int year, const QString& album) const;
-
-  QString SortText(QString text) const;
-  QString SortTextForArtist(QString artist) const;
-  QString SortTextForYear(int year) const;
-  QString SortTextForSong(const Song& song) const;
-
   QString DividerKey(GroupBy type, LibraryItem* item) const;
   QString DividerDisplayText(GroupBy type, const QString& key) const;
 
@@ -260,8 +260,7 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
   QIcon album_icon_;
   // used as a generic icon to show when no cover art is found,
   // fixed to the same size as the artwork (32x32)
-  QPixmap no_cover_icon_pretty_;
-  QIcon no_cover_icon_;
+  QPixmap no_cover_icon_;
   QIcon playlists_dir_icon_;
   QIcon playlist_icon_;
 

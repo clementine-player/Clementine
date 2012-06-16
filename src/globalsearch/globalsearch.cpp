@@ -27,6 +27,8 @@
 #include <QTimerEvent>
 #include <QUrl>
 
+#include <algorithm>
+
 const int GlobalSearch::kDelayedSearchTimeoutMs = 200;
 const char* GlobalSearch::kSettingsGroup = "GlobalSearch";
 const int GlobalSearch::kMaxResultsPerEmission = 100;
@@ -56,8 +58,6 @@ void GlobalSearch::ConnectProvider(SearchProvider* provider) {
           SLOT(SearchFinishedSlot(int)));
   connect(provider, SIGNAL(ArtLoaded(int,QImage)),
           SLOT(ArtLoadedSlot(int,QImage)));
-  connect(provider, SIGNAL(TracksLoaded(int,MimeData*)),
-          SIGNAL(TracksLoaded(int,MimeData*)));
   connect(provider, SIGNAL(destroyed(QObject*)),
           SLOT(ProviderDestroyedSlot(QObject*)));
 }
@@ -140,8 +140,8 @@ void GlobalSearch::timerEvent(QTimerEvent* e) {
 }
 
 QString GlobalSearch::PixmapCacheKey(const SearchProvider::Result& result) const {
-  return QString::number(qulonglong(result.provider_))
-       % "," % QString::number(int(result.type_))
+  return "globalsearch:"
+       % QString::number(qulonglong(result.provider_))
        % "," % result.metadata_.url().toString();
 }
 
@@ -278,12 +278,23 @@ bool GlobalSearch::FindCachedPixmap(const SearchProvider::Result& result,
   return pixmap_cache_.find(result.pixmap_cache_key_, pixmap);
 }
 
-int GlobalSearch::LoadTracksAsync(const SearchProvider::Result& result) {
-  const int id = next_id_ ++;
+MimeData* GlobalSearch::LoadTracks(const SearchProvider::ResultList& results) {
+  // Different providers might create MimeData in different ways, so it's not
+  // possible to combine different providers.  Just take the results from a
+  // single provider.
+  if (results.isEmpty()) {
+    return NULL;
+  }
 
-  result.provider_->LoadTracksAsync(id, result);
+  SearchProvider* first_provider = results[0].provider_;
+  SearchProvider::ResultList results_copy;
+  foreach (const SearchProvider::Result& result, results) {
+    if (result.provider_ == first_provider) {
+      results_copy << result;
+    }
+  }
 
-  return id;
+  return first_provider->LoadTracks(results);
 }
 
 bool GlobalSearch::SetProviderEnabled(const SearchProvider* const_provider,
@@ -332,14 +343,6 @@ void GlobalSearch::ReloadSettings() {
   }
 }
 
-bool GlobalSearch::HideOtherSearchBoxes() {
-  QSettings s;
-  s.beginGroup(kSettingsGroup);
-
-  return s.value("show_globalsearch", true).toBool() &&
-         s.value("hide_others", false).toBool();
-}
-
 void GlobalSearch::SaveProvidersSettings() {
   QSettings s;
   s.beginGroup(kSettingsGroup);
@@ -348,22 +351,28 @@ void GlobalSearch::SaveProvidersSettings() {
   }
 }
 
-QStringList GlobalSearch::GetSuggestions(int max) {
+QStringList GlobalSearch::GetSuggestions(int count) {
   QStringList ret;
-  QList<SearchProvider*> eligible_providers;
 
+  // Get count suggestions from each provider
   foreach (SearchProvider* provider, providers_.keys()) {
     if (is_provider_enabled(provider) && provider->can_give_suggestions()) {
-      eligible_providers << provider;
+      foreach (QString suggestion, provider->GetSuggestions(count)) {
+        suggestion = suggestion.trimmed().toLower();
+
+        if (!suggestion.isEmpty()) {
+          ret << suggestion;
+        }
+      }
     }
   }
 
-  while (ret.count() < max && !eligible_providers.isEmpty()) {
-    SearchProvider* provider = eligible_providers.takeAt(qrand() % eligible_providers.count());
-    QString suggestion = provider->GetSuggestion().trimmed();
-    if (!suggestion.isEmpty())
-      ret << suggestion;
-  }
+  // Randomize the suggestions
+  std::random_shuffle(ret.begin(), ret.end());
 
+  // Only return the first count
+  while (ret.length() > count) {
+    ret.removeLast();
+  }
   return ret;
 }

@@ -31,14 +31,14 @@ UrlSearchProvider::UrlSearchProvider(Application* app, QObject* parent)
   QIcon icon = IconLoader::Load("applications-internet");
   image_ = ScaleAndPad(icon.pixmap(kArtHeight, kArtHeight).toImage());
 
-  Init("URL", "url", icon);
+  Init("URL", "url", icon, MimeDataContainsUrlsOnly);
 }
 
 void UrlSearchProvider::SearchAsync(int id, const QString& query) {
   Result result(this);
-  result.match_quality_ = globalsearch::Quality_AtStart;
-  result.type_ = globalsearch::Type_Stream;
+  result.group_automatically_ = false;
   result.metadata_.set_url(QUrl::fromUserInput(query));
+  result.metadata_.set_title(result.metadata_.url().toString());
   result.metadata_.set_filetype(Song::Type_Stream);
 
   emit ResultsAvailable(id, ResultList() << result);
@@ -46,13 +46,6 @@ void UrlSearchProvider::SearchAsync(int id, const QString& query) {
 
 void UrlSearchProvider::LoadArtAsync(int id, const Result&) {
   emit ArtLoaded(id, image_);
-}
-
-void UrlSearchProvider::LoadTracksAsync(int id, const Result& result) {
-  MimeData* mime_data = new MimeData;
-  mime_data->setUrls(QList<QUrl>() << result.metadata_.url());
-
-  emit TracksLoaded(id, mime_data);
 }
 
 bool UrlSearchProvider::LooksLikeUrl(const QString& query) const {

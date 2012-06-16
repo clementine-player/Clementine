@@ -36,9 +36,6 @@
          <number>0</number>
         </property>
         <item>
-         <widget class="GlobalSearchWidget" name="global_search" native="true"/>
-        </item>
-        <item>
          <widget class="FancyTabWidget" name="tabs" native="true"/>
         </item>
         <item>
@@ -418,7 +415,7 @@
      <x>0</x>
      <y>0</y>
      <width>1131</width>
-     <height>23</height>
+     <height>24</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_music">
@@ -899,12 +896,6 @@
    <class>FancyTabWidget</class>
    <extends>QWidget</extends>
    <header>widgets/fancytabwidget.h</header>
-  </customwidget>
-  <customwidget>
-   <class>GlobalSearchWidget</class>
-   <extends>QWidget</extends>
-   <header>globalsearch/globalsearchwidget.h</header>
-   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources>

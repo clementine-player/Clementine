@@ -30,16 +30,13 @@ SearchProvider::ResultList IcecastSearchProvider::Search(int id, const QString& 
   IcecastBackend::StationList stations = backend_->GetStations(query);
   ResultList ret;
 
-  const QStringList tokens = TokenizeQuery(query);
-
   foreach (const IcecastBackend::Station& station, stations) {
     if (ret.count() > 3)
       break;
 
     Result result(this);
-    result.type_ = globalsearch::Type_Stream;
+    result.group_automatically_ = false;
     result.metadata_ = station.ToSong();
-    result.match_quality_ = MatchQuality(tokens, station.name);
     ret << result;
   }
 

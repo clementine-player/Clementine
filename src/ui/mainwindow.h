@@ -49,6 +49,7 @@ class Equalizer;
 class ErrorDialog;
 class FileView;
 class GlobalSearch;
+class GlobalSearchView;
 class GlobalShortcuts;
 class GroupByDialog;
 class Library;
@@ -272,6 +273,7 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   GlobalShortcuts* global_shortcuts_;
   Remote* remote_;
 
+  GlobalSearchView* global_search_view_;
   LibraryViewContainer* library_view_;
   FileView* file_view_;
   InternetViewContainer* internet_view_;

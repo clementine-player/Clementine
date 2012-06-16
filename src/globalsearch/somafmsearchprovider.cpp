@@ -24,6 +24,7 @@ SomaFMSearchProvider::SomaFMSearchProvider(SomaFMService* service, Application* 
 {
   Init("SomaFM", "somafm", QIcon(":/providers/somafm.png"), CanGiveSuggestions);
   set_result_limit(3);
+  set_max_suggestion_count(3);
   icon_ = ScaleAndPad(QImage(":/providers/somafm.png"));
 
   connect(service, SIGNAL(StreamsChanged()), SLOT(MaybeRecreateItems()));

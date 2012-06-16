@@ -33,7 +33,6 @@ public:
 
   void SearchAsync(int id, const QString& query);
   void LoadArtAsync(int id, const Result& result);
-  void LoadTracksAsync(int id, const Result& result);
 
   bool IsLoggedIn();
   void ShowConfig();
@@ -42,8 +41,6 @@ private slots:
   void ServerDestroyed();
   void SearchFinishedSlot(const pb::spotify::SearchResponse& response);
   void ArtLoadedSlot(const QString& id, const QImage& image);
-
-  void AlbumBrowseResponse(const pb::spotify::BrowseAlbumResponse& response);
 
 private:
   SpotifyServer* server();

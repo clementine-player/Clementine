@@ -39,6 +39,7 @@ SimpleSearchProvider::Item::Item(const Song& song, const QString& keyword)
 SimpleSearchProvider::SimpleSearchProvider(Application* app, QObject* parent)
   : BlockingSearchProvider(app, parent),
     result_limit_(kDefaultResultLimit),
+    max_suggestion_count_(-1),
     items_dirty_(true),
     has_searched_before_(false)
 {
@@ -67,38 +68,19 @@ SearchProvider::ResultList SimpleSearchProvider::Search(int id, const QString& q
 
   QMutexLocker l(&items_mutex_);
   foreach (const Item& item, items_) {
-    Result result(this);
-    result.type_ = globalsearch::Type_Stream;
-    result.match_quality_ = globalsearch::Quality_None;
-
+    bool matched = true;
     foreach (const QString& token, tokens) {
-      if (item.keyword_.startsWith(token, Qt::CaseInsensitive)) {
-        result.match_quality_ = globalsearch::Quality_AtStart;
-        continue;
-      }
-
-      if (!item.metadata_.title().contains(token, Qt::CaseInsensitive)) {
-        bool matched_safe_word = false;
-        foreach (const QString& safe_word, safe_words_) {
-          if (safe_word.startsWith(token, Qt::CaseInsensitive)) {
-            matched_safe_word = true;
-            break;
-          }
-        }
-
-        if (matched_safe_word)
-          continue;
-        result.match_quality_ = globalsearch::Quality_None;
+      if (!item.keyword_.contains(token, Qt::CaseInsensitive) &&
+          !item.metadata_.title().contains(token, Qt::CaseInsensitive) &&
+          !safe_words_.contains(token, Qt::CaseInsensitive)) {
+        matched = false;
         break;
       }
-
-      result.match_quality_ = qMin(result.match_quality_, globalsearch::Quality_Middle);
     }
 
-    if (result.match_quality_ == globalsearch::Quality_Middle) {
-      result.match_quality_ = MatchQuality(tokens, item.metadata_.title());
-    }
-    if (result.match_quality_ != globalsearch::Quality_None) {
+    if (matched) {
+      Result result(this);
+      result.group_automatically_ = false;
       result.metadata_ = item.metadata_;
       ret << result;
     }
@@ -110,34 +92,36 @@ SearchProvider::ResultList SimpleSearchProvider::Search(int id, const QString& q
   return ret;
 }
 
-void SimpleSearchProvider::LoadTracksAsync(int id, const Result& result) {
-  Song metadata = result.metadata_;
-  metadata.set_filetype(Song::Type_Stream);
-
-  SongMimeData* mime_data = new SongMimeData;
-  mime_data->songs = SongList() << metadata;
-
-  emit TracksLoaded(id, mime_data);
-}
-
 void SimpleSearchProvider::SetItems(const ItemList& items) {
   QMutexLocker l(&items_mutex_);
   items_ = items;
+  for (ItemList::iterator it = items_.begin() ; it != items_.end() ; ++it) {
+    it->metadata_.set_filetype(Song::Type_Stream);
+  }
 }
 
-QString SimpleSearchProvider::GetSuggestion() {
+QStringList SimpleSearchProvider::GetSuggestions(int count) {
+  if (max_suggestion_count_ != -1) {
+    count = qMin(max_suggestion_count_, count);
+  }
+
+  QStringList ret;
   QMutexLocker l(&items_mutex_);
 
   if (items_.isEmpty())
-    return QString();
+    return ret;
 
-  for (int attempt=0 ; attempt<10 ; ++attempt) {
+  for (int attempt=0 ; attempt<count*5 ; ++attempt) {
+    if (ret.count() >= count) {
+      break;
+    }
+
     const Item& item = items_[qrand() % items_.count()];
     if (!item.keyword_.isEmpty())
-      return item.keyword_;
+      ret << item.keyword_;
     if (!item.metadata_.title().isEmpty())
-      return item.metadata_.title();
+      ret << item.metadata_.title();
   }
 
-  return QString();
+  return ret;
 }

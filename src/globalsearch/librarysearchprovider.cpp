@@ -23,6 +23,8 @@
 #include "library/sqlrow.h"
 #include "playlist/songmimedata.h"
 
+#include <QStack>
+
 
 LibrarySearchProvider::LibrarySearchProvider(LibraryBackendInterface* backend,
                                              const QString& name,
@@ -55,108 +57,25 @@ SearchProvider::ResultList LibrarySearchProvider::Search(int id, const QString& 
     return ResultList();
   }
 
-  const QStringList tokens = TokenizeQuery(query);
-
-  QMultiMap<QString, Song> albums;
-  QSet<QString> albums_with_non_track_matches;
-
+  // Build the result list
   ResultList ret;
-
   while (q.Next()) {
-    Song song;
-    song.InitFromQuery(q, true);
-
-    QString album_key = song.album();
-    if (song.is_compilation() && !song.albumartist().isEmpty()) {
-      album_key.prepend(song.albumartist() + " - ");
-    } else if (!song.is_compilation()) {
-      album_key.prepend(song.artist());
-    }
-
-    globalsearch::MatchQuality quality = MatchQuality(tokens, song.title());
-
-    if (quality != globalsearch::Quality_None) {
-      // If the query matched in the song title then we're interested in this
-      // as an individual song.
-      Result result(this);
-      result.type_ = globalsearch::Type_Track;
-      result.metadata_ = song;
-      result.match_quality_ = quality;
-      ret << result;
-    } else {
-      // Otherwise we record this as being an interesting album.
-      albums_with_non_track_matches.insert(album_key);
-    }
-
-    albums.insertMulti(album_key, song);
-  }
-
-  // Add any albums that contained least one song that wasn't matched on the
-  // song title.
-  foreach (const QString& key, albums_with_non_track_matches) {
     Result result(this);
-    result.type_ = globalsearch::Type_Album;
-    result.metadata_ = albums.value(key);
-    result.album_size_ = albums.count(key);
-    result.match_quality_ =
-        qMin(
-          MatchQuality(tokens, result.metadata_.albumartist()),
-          qMin(MatchQuality(tokens, result.metadata_.artist()),
-               MatchQuality(tokens, result.metadata_.album())));
-
-    result.album_songs_ = albums.values(key);
-    SortSongs(&result.album_songs_);
-
+    result.metadata_.InitFromQuery(q, true);
     ret << result;
   }
 
   return ret;
 }
 
-void LibrarySearchProvider::LoadTracksAsync(int id, const Result& result) {
-  SongList ret;
+MimeData* LibrarySearchProvider::LoadTracks(const ResultList& results) {
+  MimeData* ret = SearchProvider::LoadTracks(results);
+  static_cast<SongMimeData*>(ret)->backend = backend_;
 
-  switch (result.type_) {
-  case globalsearch::Type_Track:
-    // This is really easy - we just emit the track again.
-    ret << result.metadata_;
-    break;
-
-  case globalsearch::Type_Album: {
-    // Find all the songs in this album.
-    LibraryQuery query;
-    query.SetColumnSpec("ROWID, " + Song::kColumnSpec);
-    query.AddCompilationRequirement(result.metadata_.is_compilation());
-    query.AddWhere("album", result.metadata_.album());
-
-    if (!result.metadata_.is_compilation())
-      query.AddWhere("artist", result.metadata_.artist());
-
-    if (!backend_->ExecQuery(&query)) {
-      break;
-    }
-
-    while (query.Next()) {
-      Song song;
-      song.InitFromQuery(query, true);
-      ret << song;
-    }
-  }
-
-  default:
-    break;
-  }
-
-  SortSongs(&ret);
-
-  SongMimeData* mime_data = new SongMimeData;
-  mime_data->backend = backend_;
-  mime_data->songs = ret;
-
-  emit TracksLoaded(id, mime_data);
+  return ret;
 }
 
-QString LibrarySearchProvider::GetSuggestion() {
+QStringList LibrarySearchProvider::GetSuggestions(int count) {
   // We'd like to use order by random(), but that's O(n) in sqlite, so instead
   // get the largest ROWID and pick a couple of random numbers within that
   // range.
@@ -167,13 +86,19 @@ QString LibrarySearchProvider::GetSuggestion() {
   q.SetIncludeUnavailable(true);
   q.SetLimit(1);
 
+  QStringList ret;
+
   if (!backend_->ExecQuery(&q) || !q.Next()) {
-    return QString();
+    return ret;
   }
 
   const int largest_rowid = q.Value(0).toInt();
 
-  for (int attempt=0 ; attempt<10 ; ++attempt) {
+  for (int attempt=0 ; attempt<count*5 ; ++attempt) {
+    if (ret.count() >= count) {
+      break;
+    }
+
     LibraryQuery q;
     q.SetColumnSpec("artist, album");
     q.SetIncludeUnavailable(true);
@@ -188,12 +113,12 @@ QString LibrarySearchProvider::GetSuggestion() {
     const QString album  = q.Value(1).toString();
 
     if (!artist.isEmpty() && !album.isEmpty())
-      return (qrand() % 2 == 0) ? artist : album;
+      ret << ((qrand() % 2 == 0) ? artist : album);
     else if (!artist.isEmpty())
-      return artist;
+      ret << artist;
     else if (!album.isEmpty())
-      return album;
+      ret << album;
   }
 
-  return QString();
+  return ret;
 }

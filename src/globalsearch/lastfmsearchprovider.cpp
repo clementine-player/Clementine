@@ -29,6 +29,7 @@ LastFMSearchProvider::LastFMSearchProvider(LastFMService* service,
   icon_ = ScaleAndPad(QImage(":last.fm/as.png"));
 
   set_safe_words(QStringList() << "lastfm" << "last.fm");
+  set_max_suggestion_count(3);
 
   connect(service, SIGNAL(SavedItemsChanged()), SLOT(MaybeRecreateItems()));
 
