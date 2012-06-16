@@ -59,6 +59,8 @@ private slots:
 
   void SelectFirstPodcast();
 
+  void OpenOPMLFile();
+
 private:
   void AddPage(AddPodcastPage* page);
   
@@ -76,6 +78,8 @@ private:
   WidgetFadeHelper* fader_;
 
   Podcast current_podcast_;
+
+  QString last_opml_path_;
 };
 
 #endif // ADDPODCASTDIALOG_H

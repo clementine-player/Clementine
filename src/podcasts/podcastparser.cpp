@@ -34,6 +34,11 @@ PodcastParser::PodcastParser() {
 }
 
 bool PodcastParser::SupportsContentType(const QString& content_type) const {
+  if (content_type.isEmpty()) {
+    // Why not have a go.
+    return true;
+  }
+
   foreach (const QString& mime_type, supported_mime_types()) {
     if (content_type.contains(mime_type)) {
       return true;

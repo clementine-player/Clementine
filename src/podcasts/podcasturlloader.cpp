@@ -143,7 +143,9 @@ void PodcastUrlLoader::RequestFinished(RequestState* state, QNetworkReply* reply
     return;
   }
 
-  if (reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt() != 200) {
+  const QVariant http_status =
+      reply->attribute(QNetworkRequest::HttpStatusCodeAttribute);
+  if (http_status.isValid() && http_status.toInt() != 200) {
     SendErrorAndDelete(QString("HTTP %1: %2").arg(
         reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toString(),
         reply->attribute(QNetworkRequest::HttpReasonPhraseAttribute).toString()), state);

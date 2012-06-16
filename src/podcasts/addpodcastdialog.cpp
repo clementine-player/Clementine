@@ -28,6 +28,7 @@
 #include "ui/iconloader.h"
 #include "widgets/widgetfadehelper.h"
 
+#include <QFileDialog>
 #include <QPushButton>
 #include <QTimer>
 
@@ -36,7 +37,8 @@ const char* AddPodcastDialog::kBbcOpmlUrl = "http://www.bbc.co.uk/podcasts.opml"
 AddPodcastDialog::AddPodcastDialog(Application* app, QWidget* parent)
   : QDialog(parent),
     app_(app),
-    ui_(new Ui_AddPodcastDialog)
+    ui_(new Ui_AddPodcastDialog),
+    last_opml_path_(QDir::homePath())
 {
   ui_->setupUi(this);
   ui_->details->SetApplication(app);
@@ -65,6 +67,12 @@ AddPodcastDialog::AddPodcastDialog(Application* app, QWidget* parent)
         IconLoader::Load("configure"), tr("Configure podcasts..."), this);
   connect(settings_button, SIGNAL(clicked()), SLOT(OpenSettingsPage()));
   ui_->button_box->addButton(settings_button, QDialogButtonBox::ResetRole);
+
+  // Create an Open OPML file button
+  QPushButton* open_opml_button = new QPushButton(
+        IconLoader::Load("document-open"), tr("Open OPML file..."), this);
+  connect(open_opml_button, SIGNAL(clicked()), this, SLOT(OpenOPMLFile()));
+  ui_->button_box->addButton(open_opml_button, QDialogButtonBox::ResetRole);
 
   // Add providers
   by_url_page_ = new AddPodcastByUrl(app, this);
@@ -215,4 +223,18 @@ void AddPodcastDialog::RemovePodcast() {
 
 void AddPodcastDialog::OpenSettingsPage() {
   app_->OpenSettingsDialogAtPage(SettingsDialog::Page_Podcasts);
+}
+
+void AddPodcastDialog::OpenOPMLFile() {
+  const QString filename = QFileDialog::getOpenFileName(
+        this, tr("Open OPML file"), last_opml_path_, "OPML files (*.opml)");
+
+  if (filename.isEmpty()) {
+    return;
+  }
+
+  last_opml_path_ = filename;
+
+  by_url_page_->SetUrlAndGo(QUrl::fromLocalFile(last_opml_path_));
+  ChangePage(ui_->stack->indexOf(by_url_page_));
 }
