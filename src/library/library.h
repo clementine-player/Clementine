@@ -43,7 +43,6 @@ class Library : public QObject {
   static const char* kFtsTable;
 
   void Init();
-  void StartThreads();
 
   LibraryBackend* backend() const { return backend_; }
   LibraryModel* model() const { return model_; }

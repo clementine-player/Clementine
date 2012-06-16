@@ -135,12 +135,6 @@ void Library::Init() {
   backend_->LoadDirectoriesAsync();
 }
 
-void Library::StartThreads() {
-  Q_ASSERT(watcher_);
-
-  model_->Init();
-}
-
 void Library::IncrementalScan() {
   watcher_->IncrementalScanAsync();
 }

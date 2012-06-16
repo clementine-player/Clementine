@@ -95,6 +95,14 @@ LibraryModel::LibraryModel(LibraryBackend* backend, Application* app,
   no_cover_icon_pretty_ = QPixmap(":nocover.png").scaled(
         kPrettyCoverSize, kPrettyCoverSize,
         Qt::KeepAspectRatio, Qt::SmoothTransformation);
+
+  connect(backend_, SIGNAL(SongsDiscovered(SongList)), SLOT(SongsDiscovered(SongList)));
+  connect(backend_, SIGNAL(SongsDeleted(SongList)), SLOT(SongsDeleted(SongList)));
+  connect(backend_, SIGNAL(SongsStatisticsChanged(SongList)), SLOT(SongsStatisticsChanged(SongList)));
+  connect(backend_, SIGNAL(DatabaseReset()), SLOT(Reset()));
+  connect(backend_, SIGNAL(TotalSongCountUpdated(int)), SLOT(TotalSongCountUpdatedSlot(int)));
+
+  backend_->UpdateTotalSongCountAsync();
 }
 
 LibraryModel::~LibraryModel() {
@@ -116,14 +124,6 @@ void LibraryModel::set_show_dividers(bool show_dividers) {
 }
 
 void LibraryModel::Init(bool async) {
-  connect(backend_, SIGNAL(SongsDiscovered(SongList)), SLOT(SongsDiscovered(SongList)));
-  connect(backend_, SIGNAL(SongsDeleted(SongList)), SLOT(SongsDeleted(SongList)));
-  connect(backend_, SIGNAL(SongsStatisticsChanged(SongList)), SLOT(SongsStatisticsChanged(SongList)));
-  connect(backend_, SIGNAL(DatabaseReset()), SLOT(Reset()));
-  connect(backend_, SIGNAL(TotalSongCountUpdated(int)), SLOT(TotalSongCountUpdatedSlot(int)));
-
-  backend_->UpdateTotalSongCountAsync();
-
   if (async) {
     // Show a loading indicator in the model.
     LibraryItem* loading = new LibraryItem(LibraryItem::Type_LoadingIndicator, root_);

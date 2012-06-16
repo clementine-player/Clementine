@@ -101,7 +101,6 @@ Application::Application(QObject* parent)
 #endif
 
   library_->Init();
-  library_->StartThreads();
 
   DoInAMinuteOrSo(database_, SLOT(DoBackup()));
 }
