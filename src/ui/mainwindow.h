@@ -248,6 +248,8 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   void HandleNotificationPreview(OSD::Behaviour type, QString line1, QString line2);
 
   void ScrollToInternetIndex(const QModelIndex& index);
+  void FocusGlobalSearchField();
+  void DoGlobalSearch(const QString& query);
 
  private:
   void ConnectInfoView(SongInfoBase* view);

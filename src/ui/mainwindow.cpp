@@ -222,7 +222,6 @@ MainWindow::MainWindow(Application* app,
   global_search_view_->ReloadSettings();
 
   connect(global_search_view_, SIGNAL(AddToPlaylist(QMimeData*)), SLOT(AddToPlaylist(QMimeData*)));
-  connect(global_search_view_, SIGNAL(OpenSettingsAtPage(SettingsDialog::Page)), SLOT(OpenSettingsDialogAtPage(SettingsDialog::Page)));
 
   // Add tabs to the fancy tab widget
   ui_->tabs->AddTab(global_search_view_, IconLoader::Load("search"), tr("Search"));
@@ -509,6 +508,15 @@ MainWindow::MainWindow(Application* app,
   playlist_copy_to_device_->setDisabled(app_->device_manager()->connected_devices_model()->rowCount() == 0);
   connect(app_->device_manager()->connected_devices_model(), SIGNAL(IsEmptyChanged(bool)),
           playlist_copy_to_device_, SLOT(setDisabled(bool)));
+
+  // Global search shortcut
+  QAction* global_search_action = new QAction(this);
+  global_search_action->setShortcuts(QList<QKeySequence>()
+                                     << QKeySequence("Ctrl+F")
+                                     << QKeySequence("Ctrl+L"));
+  addAction(global_search_action);
+  connect(global_search_action, SIGNAL(triggered()),
+          SLOT(FocusGlobalSearchField()));
 
   // Internet connections
   connect(app_->internet_model(), SIGNAL(StreamError(QString)), SLOT(ShowErrorDialog(QString)));
@@ -2025,7 +2033,7 @@ void MainWindow::ConnectInfoView(SongInfoBase* view) {
 
   connect(view, SIGNAL(ShowSettingsDialog()), SLOT(ShowSongInfoConfig()));
   connect(view, SIGNAL(DoGlobalSearch(QString)),
-          global_search_view_, SLOT(StartSearch(QString)));
+          SLOT(DoGlobalSearch(QString)));
 }
 
 void MainWindow::AddSongInfoGenerator(smart_playlists::GeneratorPtr gen) {
@@ -2235,4 +2243,14 @@ void MainWindow::ScrollToInternetIndex(const QModelIndex& index) {
 
 void MainWindow::AddPodcast() {
   app_->internet_model()->Service<PodcastService>()->AddPodcast();
+}
+
+void MainWindow::FocusGlobalSearchField() {
+  ui_->tabs->SetCurrentWidget(global_search_view_);
+  global_search_view_->FocusSearchField();
+}
+
+void MainWindow::DoGlobalSearch(const QString& query) {
+  FocusGlobalSearchField();
+  global_search_view_->StartSearch(query);
 }

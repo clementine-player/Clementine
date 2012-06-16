@@ -62,7 +62,7 @@ GlobalSearchView::GlobalSearchView(Application* app, QWidget* parent)
   ui_->setupUi(this);
 
   ui_->search->installEventFilter(this);
-  ui_->results->installEventFilter(this);
+  ui_->results_stack->installEventFilter(this);
 
   // Must be a queued connection to ensure the GlobalSearch handles it first.
   connect(app_, SIGNAL(SettingsChanged()), SLOT(ReloadSettings()), Qt::QueuedConnection);
@@ -77,7 +77,7 @@ GlobalSearchView::GlobalSearchView(Application* app, QWidget* parent)
   ui_->results->setStyleSheet("QTreeView::item{padding-top:1px;}");
 
   // Show the help page initially
-  ui_->stack->setCurrentWidget(ui_->help_page);
+  ui_->results_stack->setCurrentWidget(ui_->help_page);
   ui_->help_frame->setBackgroundRole(QPalette::Base);
   QVBoxLayout* enabled_layout = new QVBoxLayout(ui_->enabled_list);
   QVBoxLayout* disabled_layout = new QVBoxLayout(ui_->disabled_list);
@@ -255,9 +255,9 @@ void GlobalSearchView::SwapModels() {
   ui_->results->setModel(front_proxy_);
 
   if (ui_->search->text().trimmed().isEmpty()) {
-    ui_->stack->setCurrentWidget(ui_->help_page);
+    ui_->results_stack->setCurrentWidget(ui_->help_page);
   } else {
-    ui_->stack->setCurrentWidget(ui_->results_page);
+    ui_->results_stack->setCurrentWidget(ui_->results_page);
   }
 }
 
@@ -315,6 +315,9 @@ void GlobalSearchView::ArtLoaded(int id, const QPixmap& pixmap) {
 }
 
 MimeData* GlobalSearchView::SelectedMimeData() {
+  if (!ui_->results->selectionModel())
+    return NULL;
+
   // Get all selected model indexes
   QModelIndexList indexes = ui_->results->selectionModel()->selectedRows();
   if (indexes.isEmpty()) {
@@ -349,7 +352,7 @@ bool GlobalSearchView::eventFilter(QObject* object, QEvent* event) {
     if (SearchKeyEvent(static_cast<QKeyEvent*>(event))) {
       return true;
     }
-  } else if (object == ui_->results && event->type() == QEvent::ContextMenu) {
+  } else if (object == ui_->results_stack && event->type() == QEvent::ContextMenu) {
     if (ResultsContextMenuEvent(static_cast<QContextMenuEvent*>(event))) {
       return true;
     }
@@ -383,16 +386,28 @@ bool GlobalSearchView::SearchKeyEvent(QKeyEvent* event) {
 bool GlobalSearchView::ResultsContextMenuEvent(QContextMenuEvent* event) {
   if (!context_menu_) {
     context_menu_ = new QMenu(this);
-    context_menu_->addAction(IconLoader::Load("media-playback-start"),
+    context_actions_ << context_menu_->addAction(IconLoader::Load("media-playback-start"),
         tr("Append to current playlist"), this, SLOT(AddSelectedToPlaylist()));
-    context_menu_->addAction(IconLoader::Load("media-playback-start"),
+    context_actions_ << context_menu_->addAction(IconLoader::Load("media-playback-start"),
         tr("Replace current playlist"), this, SLOT(LoadSelected()));
-    context_menu_->addAction(IconLoader::Load("document-new"),
+    context_actions_ << context_menu_->addAction(IconLoader::Load("document-new"),
         tr("Open in new playlist"), this, SLOT(OpenSelectedInNewPlaylist()));
 
     context_menu_->addSeparator();
-    context_menu_->addAction(IconLoader::Load("go-next"),
+    context_actions_ << context_menu_->addAction(IconLoader::Load("go-next"),
         tr("Queue track"), this, SLOT(AddSelectedToPlaylistEnqueue()));
+
+    context_menu_->addSeparator();
+    context_menu_->addAction(IconLoader::Load("configure"),
+        tr("Configure global search..."), this, SLOT(OpenSettingsDialog()));
+  }
+
+  const bool enable_context_actions =
+      ui_->results->selectionModel() &&
+      ui_->results->selectionModel()->hasSelection();
+
+  foreach (QAction* action, context_actions_) {
+    action->setEnabled(enable_context_actions);
   }
 
   context_menu_->popup(event->globalPos());
@@ -406,18 +421,27 @@ void GlobalSearchView::AddSelectedToPlaylist() {
 
 void GlobalSearchView::LoadSelected() {
   MimeData* data = SelectedMimeData();
+  if (!data)
+    return;
+
   data->clear_first_ = true;
   emit AddToPlaylist(data);
 }
 
 void GlobalSearchView::AddSelectedToPlaylistEnqueue() {
   MimeData* data = SelectedMimeData();
+  if (!data)
+    return;
+
   data->enqueue_now_ = true;
   emit AddToPlaylist(data);
 }
 
 void GlobalSearchView::OpenSelectedInNewPlaylist() {
   MimeData* data = SelectedMimeData();
+  if (!data)
+    return;
+
   data->open_in_new_playlist_ = true;
   emit AddToPlaylist(data);
 }
@@ -428,6 +452,13 @@ void GlobalSearchView::showEvent(QShowEvent* e) {
     update_suggestions_timer_->start();
   }
   QWidget::showEvent(e);
+
+  FocusSearchField();
+}
+
+void GlobalSearchView::FocusSearchField() {
+  ui_->search->set_focus();
+  ui_->search->selectAll();
 }
 
 void GlobalSearchView::hideEvent(QHideEvent* e) {
@@ -438,4 +469,8 @@ void GlobalSearchView::hideEvent(QHideEvent* e) {
 void GlobalSearchView::FocusOnFilter(QKeyEvent* event) {
   ui_->search->set_focus();
   QApplication::sendEvent(ui_->search, event);
+}
+
+void GlobalSearchView::OpenSettingsDialog() {
+  app_->OpenSettingsDialogAtPage(SettingsDialog::Page_GlobalSearch);
 }

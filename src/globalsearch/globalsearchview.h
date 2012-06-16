@@ -59,10 +59,11 @@ public:
 public slots:
   void ReloadSettings();
   void StartSearch(const QString& query);
+  void FocusSearchField();
+  void OpenSettingsDialog();
 
 signals:
   void AddToPlaylist(QMimeData* data);
-  void OpenSettingsAtPage(SettingsDialog::Page page);
 
 private slots:
   void UpdateSuggestions();
@@ -91,6 +92,7 @@ private:
   Ui_GlobalSearchView* ui_;
 
   QMenu* context_menu_;
+  QList<QAction*> context_actions_;
 
   int last_search_id_;
 
