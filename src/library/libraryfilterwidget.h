@@ -50,6 +50,8 @@ class LibraryFilterWidget : public QWidget {
     AlwaysDelayed,
   };
 
+  static QActionGroup* CreateGroupByActions(QObject* parent);
+
   void SetFilterHint(const QString& hint);
   void SetApplyFilterToLibrary(bool filter_applies_to_model) { filter_applies_to_model_ = filter_applies_to_model; }
   void SetDelayBehaviour(DelayBehaviour behaviour) { delay_behaviour_ = behaviour; }
@@ -81,6 +83,10 @@ class LibraryFilterWidget : public QWidget {
 
   void FilterTextChanged(const QString& text);
   void FilterDelayTimeout();
+
+ private:
+  static QAction* CreateGroupByAction(const QString& text, QObject* parent,
+                                      const LibraryModel::Grouping& grouping);
 
  private:
   Ui_LibraryFilterWidget* ui_;

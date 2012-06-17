@@ -99,6 +99,9 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
              second == other.second &&
              third == other.third;
     }
+    bool operator !=(const Grouping& other) const {
+      return ! (*this == other);
+    }
   };
 
   LibraryBackend* backend() const { return backend_; }

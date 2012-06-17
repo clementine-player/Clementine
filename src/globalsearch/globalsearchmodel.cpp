@@ -215,3 +215,37 @@ void GlobalSearchModel::GetChildResults(const QStandardItem* item,
 QMimeData* GlobalSearchModel::mimeData(const QModelIndexList& indexes) const {
   return engine_->LoadTracks(GetChildResults(indexes));
 }
+
+namespace {
+void GatherResults(const QStandardItem* parent,
+                   QMap<SearchProvider*, SearchProvider::ResultList>* results) {
+  QVariant result_variant = parent->data(GlobalSearchModel::Role_Result);
+  if (result_variant.isValid()) {
+    SearchProvider::Result result = result_variant.value<SearchProvider::Result>();
+    (*results)[result.provider_].append(result);
+  }
+
+  for (int i=0 ; i<parent->rowCount() ; ++i) {
+    GatherResults(parent->child(i), results);
+  }
+}
+}
+
+void GlobalSearchModel::SetGroupBy(const LibraryModel::Grouping& grouping,
+                                   bool regroup_now) {
+  const LibraryModel::Grouping old_group_by = group_by_;
+  group_by_ = grouping;
+
+  if (regroup_now && group_by_ != old_group_by) {
+    // Walk the tree gathering the results we have already
+    QMap<SearchProvider*, SearchProvider::ResultList> results;
+    GatherResults(invisibleRootItem(), &results);
+
+    // Reset the model and re-add all the results using the new grouping.
+    Clear();
+
+    foreach (const SearchProvider::ResultList& result_list, results) {
+      AddResults(result_list);
+    }
+  }
+}

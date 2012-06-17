@@ -18,16 +18,33 @@
     <number>0</number>
    </property>
    <item>
-    <widget class="LineEdit" name="search">
-     <property name="hint" stdset="0">
-      <string>Search for anything</string>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <property name="spacing">
+      <number>0</number>
      </property>
-    </widget>
+     <item>
+      <widget class="LineEdit" name="search">
+       <property name="hint" stdset="0">
+        <string>Search for anything</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QToolButton" name="settings">
+       <property name="popupMode">
+        <enum>QToolButton::InstantPopup</enum>
+       </property>
+       <property name="autoRaise">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
    <item>
     <widget class="QStackedWidget" name="results_stack">
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="results_page">
       <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -80,7 +97,7 @@
             <x>0</x>
             <y>0</y>
             <width>435</width>
-            <height>605</height>
+            <height>603</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_2">

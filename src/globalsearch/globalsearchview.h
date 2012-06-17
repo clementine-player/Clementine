@@ -26,10 +26,12 @@
 
 class Application;
 class GlobalSearchModel;
+class GroupByDialog;
 class SearchProviderStatusWidget;
 class SuggestionWidget;
 class Ui_GlobalSearchView;
 
+class QActionGroup;
 class QMimeData;
 class QSortFilterProxyModel;
 class QStandardItem;
@@ -80,6 +82,9 @@ private slots:
   void OpenSelectedInNewPlaylist();
   void AddSelectedToPlaylistEnqueue();
 
+  void GroupByClicked(QAction* action);
+  void SetGroupBy(const LibraryModel::Grouping& grouping);
+
 private:
   MimeData* SelectedMimeData();
 
@@ -90,9 +95,11 @@ private:
   Application* app_;
   GlobalSearch* engine_;
   Ui_GlobalSearchView* ui_;
+  QScopedPointer<GroupByDialog> group_by_dialog_;
 
   QMenu* context_menu_;
   QList<QAction*> context_actions_;
+  QActionGroup* group_by_actions_;
 
   int last_search_id_;
 

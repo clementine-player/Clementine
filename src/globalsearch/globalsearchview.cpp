@@ -28,7 +28,9 @@
 #include "core/logging.h"
 #include "core/mimedata.h"
 #include "core/timeconstants.h"
+#include "library/libraryfilterwidget.h"
 #include "library/librarymodel.h"
+#include "library/groupbydialog.h"
 
 #include <QMenu>
 #include <QSortFilterProxyModel>
@@ -63,6 +65,8 @@ GlobalSearchView::GlobalSearchView(Application* app, QWidget* parent)
 
   ui_->search->installEventFilter(this);
   ui_->results_stack->installEventFilter(this);
+
+  ui_->settings->setIcon(IconLoader::Load("configure"));
 
   // Must be a queued connection to ensure the GlobalSearch handles it first.
   connect(app_, SIGNAL(SettingsChanged()), SLOT(ReloadSettings()), Qt::QueuedConnection);
@@ -122,6 +126,17 @@ GlobalSearchView::GlobalSearchView(Application* app, QWidget* parent)
   update_suggestions_timer_->setInterval(kUpdateSuggestionsTimeoutMsec);
   connect(update_suggestions_timer_, SIGNAL(timeout()), SLOT(UpdateSuggestions()));
 
+  // Add actions to the settings menu
+  group_by_actions_ = LibraryFilterWidget::CreateGroupByActions(this);
+  QMenu* settings_menu = new QMenu(this);
+  settings_menu->addActions(group_by_actions_->actions());
+  settings_menu->addSeparator();
+  settings_menu->addAction(IconLoader::Load("configure"),
+      tr("Configure global search..."), this, SLOT(OpenSettingsDialog()));
+  ui_->settings->setMenu(settings_menu);
+
+  connect(group_by_actions_, SIGNAL(triggered(QAction*)), SLOT(GroupByClicked(QAction*)));
+
   // These have to be queued connections because they may get emitted before
   // our call to Search() (or whatever) returns and we add the ID to the map.
   connect(engine_, SIGNAL(ResultsAvailable(int,SearchProvider::ResultList)),
@@ -159,6 +174,10 @@ void GlobalSearchView::ReloadSettings() {
   back_model_->set_provider_order(provider_order);
   show_providers_ = s.value("show_providers", true).toBool();
   show_suggestions_ = s.value("show_suggestions", true).toBool();
+  SetGroupBy(LibraryModel::Grouping(
+      LibraryModel::GroupBy(s.value("group_by1", int(LibraryModel::GroupBy_Artist)).toInt()),
+      LibraryModel::GroupBy(s.value("group_by2", int(LibraryModel::GroupBy_Album)).toInt()),
+      LibraryModel::GroupBy(s.value("group_by3", int(LibraryModel::GroupBy_None)).toInt())));
   s.endGroup();
   
   // Delete any old status widgets
@@ -398,6 +417,7 @@ bool GlobalSearchView::ResultsContextMenuEvent(QContextMenuEvent* event) {
         tr("Queue track"), this, SLOT(AddSelectedToPlaylistEnqueue()));
 
     context_menu_->addSeparator();
+    context_menu_->addMenu(tr("Group by"))->addActions(group_by_actions_->actions());
     context_menu_->addAction(IconLoader::Load("configure"),
         tr("Configure global search..."), this, SLOT(OpenSettingsDialog()));
   }
@@ -473,4 +493,46 @@ void GlobalSearchView::FocusOnFilter(QKeyEvent* event) {
 
 void GlobalSearchView::OpenSettingsDialog() {
   app_->OpenSettingsDialogAtPage(SettingsDialog::Page_GlobalSearch);
+}
+
+void GlobalSearchView::GroupByClicked(QAction* action) {
+  if (action->property("group_by").isNull()) {
+    if (!group_by_dialog_) {
+      group_by_dialog_.reset(new GroupByDialog);
+      connect(group_by_dialog_.data(), SIGNAL(Accepted(LibraryModel::Grouping)),
+              SLOT(SetGroupBy(LibraryModel::Grouping)));
+    }
+
+    group_by_dialog_->show();
+    return;
+  }
+
+  SetGroupBy(action->property("group_by").value<LibraryModel::Grouping>());
+}
+
+void GlobalSearchView::SetGroupBy(const LibraryModel::Grouping& g) {
+  // Update the models
+  front_model_->SetGroupBy(g, true);
+  back_model_->SetGroupBy(g, false);
+
+  // Save the setting
+  QSettings s;
+  s.beginGroup(GlobalSearch::kSettingsGroup);
+  s.setValue("group_by1", int(g.first));
+  s.setValue("group_by2", int(g.second));
+  s.setValue("group_by3", int(g.third));
+
+  // Make sure the correct action is checked.
+  foreach (QAction* action, group_by_actions_->actions()) {
+    if (action->property("group_by").isNull())
+      continue;
+
+    if (g == action->property("group_by").value<LibraryModel::Grouping>()) {
+      action->setChecked(true);
+      return;
+    }
+  }
+
+  // Check the advanced action
+  group_by_actions_->actions().last()->setChecked(true);
 }
