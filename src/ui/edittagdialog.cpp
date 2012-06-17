@@ -60,7 +60,8 @@ EditTagDialog::EditTagDialog(Application* app, QWidget* parent)
     cover_art_is_set_(false),
     results_dialog_(new TrackSelectionDialog(this))
 {
-  cover_options_.default_output_image_ = QImage(":nocover.png");
+  cover_options_.default_output_image_ =
+      AlbumCoverLoader::ScaleAndPad(cover_options_, QImage(":nocover.png"));
 
   connect(app_->album_cover_loader(), SIGNAL(ImageLoaded(quint64,QImage,QImage)),
           SLOT(ArtLoaded(quint64,QImage,QImage)));
@@ -433,7 +434,7 @@ void EditTagDialog::UpdateSummaryTab(const Song& song) {
   } else if (song.has_embedded_cover()) {
     summary += Qt::escape(tr("Cover art from embedded image"));
   } else if (!song.art_automatic().isEmpty()) {
-    summary += Qt::escape(tr("Cover art loaded automatically from %1").arg(song.art_manual()));
+    summary += Qt::escape(tr("Cover art loaded automatically from %1").arg(song.art_automatic()));
   } else {
     summary += Qt::escape(tr("Cover art not set"));
     art_is_set = false;

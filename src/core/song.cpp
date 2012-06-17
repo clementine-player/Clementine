@@ -394,8 +394,11 @@ void Song::InitFromProtobuf(const pb::tagreader::SongMetadata& pb) {
   d->ctime_ = pb.ctime();
   d->filesize_ = pb.filesize();
   d->suspicious_tags_ = pb.suspicious_tags();
-  d->art_automatic_ = QStringFromStdString(pb.art_automatic());
   d->filetype_ = static_cast<FileType>(pb.type());
+
+  if (pb.has_art_automatic()) {
+    d->art_automatic_ = QStringFromStdString(pb.art_automatic());
+  }
 
   if (pb.has_rating()) {
     d->rating_ = pb.rating();
