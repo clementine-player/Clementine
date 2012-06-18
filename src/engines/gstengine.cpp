@@ -19,8 +19,6 @@
  *   51 Franklin Steet, Fifth Floor, Boston, MA  02111-1307, USA.          *
  ***************************************************************************/
 
-#define DEBUG_PREFIX "Gst-Engine"
-
 #include "config.h"
 #include "gstengine.h"
 #include "gstenginepipeline.h"
