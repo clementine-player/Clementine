@@ -26,6 +26,7 @@
 
 class Application;
 class MimeData;
+class InternetService;
 
 
 class SearchProvider : public QObject {
@@ -138,6 +139,9 @@ public:
   // be reimplemented
   virtual bool IsLoggedIn() { return true; }
   virtual void ShowConfig() { } // Remember to set the CanShowConfig hint
+  // Returns the Internet service in charge of this provider, or NULL if there
+  // is none
+  virtual InternetService* internet_service() { return NULL; }
 
   static QImage ScaleAndPad(const QImage& image);
 

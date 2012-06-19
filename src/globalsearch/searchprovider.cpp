@@ -17,6 +17,7 @@
 
 #include "searchprovider.h"
 #include "core/boundfuturewatcher.h"
+#include "internet/internetsongmimedata.h"
 #include "playlist/songmimedata.h"
 
 #include <QPainter>
@@ -130,11 +131,19 @@ MimeData* SearchProvider::LoadTracks(const ResultList& results) {
   if (mime_data_contains_urls_only()) {
     mime_data = new MimeData;
   } else {
-    SongMimeData* song_mime_data = new SongMimeData;
-    mime_data = song_mime_data;
-
+    SongList songs;
     foreach (const Result& result, results) {
-      song_mime_data->songs << result.metadata_;
+      songs << result.metadata_;
+    }
+
+    if (internet_service()) {
+      InternetSongMimeData* internet_song_mime_data = new InternetSongMimeData(internet_service());
+      internet_song_mime_data->songs = songs;
+      mime_data = internet_song_mime_data;
+    } else {
+      SongMimeData* song_mime_data = new SongMimeData;
+      song_mime_data->songs = songs;
+      mime_data = song_mime_data;
     }
   }
 

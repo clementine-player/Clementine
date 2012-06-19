@@ -20,9 +20,9 @@
 
 #include "searchprovider.h"
 #include "covers/albumcoverloaderoptions.h"
+#include "internet/groovesharkservice.h"
 
 class AlbumCoverLoader;
-class GroovesharkService;
 
 class GroovesharkSearchProvider : public SearchProvider {
   Q_OBJECT
@@ -36,6 +36,7 @@ class GroovesharkSearchProvider : public SearchProvider {
   void LoadArtAsync(int id, const Result& result);
   bool IsLoggedIn();
   void ShowConfig();
+  InternetService* internet_service() { return service_; }
 
  private slots:
   void SearchDone(int id, const SongList& songs);

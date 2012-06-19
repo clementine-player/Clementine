@@ -23,7 +23,6 @@
 #include "core/logging.h"
 #include "covers/albumcoverloader.h"
 #include "internet/groovesharkservice.h"
-#include "internet/internetsongmimedata.h"
 
 GroovesharkSearchProvider::GroovesharkSearchProvider(Application* app, QObject* parent)
     : SearchProvider(app, parent),
