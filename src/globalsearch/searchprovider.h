@@ -25,8 +25,8 @@
 #include "core/song.h"
 
 class Application;
-class MimeData;
 class InternetService;
+class MimeData;
 
 
 class SearchProvider : public QObject {
