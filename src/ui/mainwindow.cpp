@@ -44,7 +44,6 @@
 #include "globalsearch/globalsearch.h"
 #include "globalsearch/globalsearchview.h"
 #include "globalsearch/librarysearchprovider.h"
-#include "internet/jamendoservice.h"
 #include "internet/magnatuneservice.h"
 #include "internet/internetmodel.h"
 #include "internet/internetview.h"

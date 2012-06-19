@@ -311,6 +311,7 @@ bool GlobalSearch::SetProviderEnabled(const SearchProvider* const_provider,
       return false;
     } else {
       providers_[provider].enabled_ = enabled;
+      emit ProviderToggled(provider, enabled);
       SaveProvidersSettings();
       return true;
     }
@@ -338,8 +339,12 @@ void GlobalSearch::ReloadSettings() {
     QVariant value = s.value("enabled_" + provider->id());
     if (!value.isValid())
       continue;
+    const bool enabled = value.toBool();
 
-    providers_[provider].enabled_ = value.toBool();
+    if (enabled != providers_[provider].enabled_) {
+      providers_[provider].enabled_ = enabled;
+      emit ProviderToggled(provider, enabled);
+    }
   }
 }
 

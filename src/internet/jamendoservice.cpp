@@ -78,6 +78,7 @@ JamendoService::JamendoService(Application* app, InternetModel* parent)
       library_filter_(NULL),
       library_model_(NULL),
       library_sort_model_(new QSortFilterProxyModel(this)),
+      search_provider_(NULL),
       load_database_task_id_(0),
       total_song_count_(0),
       accepted_download_(false) {
@@ -120,12 +121,16 @@ JamendoService::JamendoService(Application* app, InternetModel* parent)
   library_sort_model_->setDynamicSortFilter(true);
   library_sort_model_->sort(0);
 
-  app_->global_search()->AddProvider(new LibrarySearchProvider(
+  search_provider_ = new LibrarySearchProvider(
       library_backend_,
       tr("Jamendo"),
       "jamendo",
       QIcon(":/providers/jamendo.png"),
-      false, app_, this));
+      false, app_, this);
+  app_->global_search()->AddProvider(search_provider_);
+  connect(app_->global_search(),
+          SIGNAL(ProviderToggled(const SearchProvider*,bool)),
+          SLOT(SearchProviderToggled(const SearchProvider*,bool)));
 }
 
 JamendoService::~JamendoService() {
@@ -140,7 +145,9 @@ QStandardItem* JamendoService::CreateRootItem() {
 void JamendoService::LazyPopulate(QStandardItem* item) {
   switch (item->data(InternetModel::Role_Type).toInt()) {
     case InternetModel::Type_Service: {
-      library_model_->Init();
+      if (total_song_count_ == 0 && !load_database_task_id_) {
+        DownloadDirectory();
+      }
       model()->merged_model()->AddSubModel(item->index(), library_sort_model_);
       break;
     }
@@ -151,11 +158,7 @@ void JamendoService::LazyPopulate(QStandardItem* item) {
 
 void JamendoService::UpdateTotalSongCount(int count) {
   total_song_count_ = count;
-  if (total_song_count_ == 0 && !load_database_task_id_) {
-    DownloadDirectory();
-  }
-  else {
-    //show smart playlist in song count if the db is loaded
+  if (total_song_count_ > 0) {
     library_model_->set_show_smart_playlists(true);
     accepted_download_ = true; //the user has previously accepted
   }
@@ -483,4 +486,13 @@ void JamendoService::DownloadAlbum() {
 
 void JamendoService::Homepage() {
   QDesktopServices::openUrl(QUrl(kHomepage));
+}
+
+void JamendoService::SearchProviderToggled(const SearchProvider* provider,
+                                           bool enabled) {
+  // If the use enabled our provider and he hasn't downloaded the directory yet,
+  // prompt him to do so now.
+  if (provider == search_provider_ && enabled && total_song_count_ == 0) {
+    DownloadDirectory();
+  }
 }

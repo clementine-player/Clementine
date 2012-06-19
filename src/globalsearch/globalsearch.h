@@ -72,6 +72,7 @@ signals:
 
   void ProviderAdded(const SearchProvider* provider);
   void ProviderRemoved(const SearchProvider* provider);
+  void ProviderToggled(const SearchProvider* provider, bool enabled);
 
 protected:
   void timerEvent(QTimerEvent* e);
