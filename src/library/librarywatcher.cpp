@@ -540,11 +540,16 @@ void LibraryWatcher::PreserveUserSetData(const QString& file, const QString& ima
 
 uint LibraryWatcher::GetMtimeForCue(const QString& cue_path) {
   // slight optimisation
-  if(cue_path.isEmpty()) {
+  if (cue_path.isEmpty()) {
     return 0;
   }
 
-  QDateTime cue_last_modified = QFileInfo(cue_path).lastModified();
+  const QFileInfo file_info(cue_path);
+  if (!file_info.exists()) {
+    return 0;
+  }
+
+  const QDateTime cue_last_modified = file_info.lastModified();
 
   return cue_last_modified.isValid()
              ? cue_last_modified.toTime_t()
