@@ -21,6 +21,7 @@
 #include "songinfoprovider.h"
 
 #include "core/network.h"
+#include "core/override.h"
 #include "internet/geolocator.h"
 
 class QNetworkReply;
@@ -31,7 +32,7 @@ class SongkickConcerts : public SongInfoProvider {
 
  public:
   SongkickConcerts();
-  void FetchInfo(int id, const Song& metadata);
+  void FetchInfo(int id, const Song& metadata) OVERRIDE;
 
  private slots:
   void ArtistSearchFinished(QNetworkReply* reply, int id);
