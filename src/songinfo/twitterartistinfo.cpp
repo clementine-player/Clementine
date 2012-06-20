@@ -26,6 +26,7 @@
 #include <qjson/parser.h>
 
 #include "core/closure.h"
+#include "core/utilities.h"
 #include "songinfotextview.h"
 
 const char* TwitterArtistInfo::kTwitterBucket = "id:twitter";
@@ -182,7 +183,8 @@ QString GenerateHtmlForTweetStream(const QVariantList& tweets) {
     int offset = 0;
     foreach (const Entity& e, entities) {
       // Write all the plain text up to this entity.
-      writer.writeCharacters(text.mid(offset, e.start_index - offset));
+      writer.writeCharacters(Utilities::DecodeHtmlEntities(
+          text.mid(offset, e.start_index - offset)));
       // Set the next starting position for reading more plain text.
       offset = e.end_index;
 
