@@ -158,6 +158,47 @@ void IncreaseFDLimit() {
 #endif
 }
 
+void SetEnv(const char *key, const QString &value) {
+#ifdef Q_OS_WIN32
+  putenv(QString("%1=%2").arg(key, value).toLocal8Bit().constData());
+#else
+  setenv(key, value.toLocal8Bit().constData(), 1);
+#endif
+}
+
+// This must be done early so that the spotify blob process also picks up
+// these environment variables.
+void SetGstreamerEnvironment() {
+  QString scanner_path;
+  QString plugin_path;
+  QString registry_filename;
+
+  // On windows and mac we bundle the gstreamer plugins with clementine
+#if defined(Q_OS_DARWIN)
+  scanner_path = QCoreApplication::applicationDirPath() + "/../PlugIns/gst-plugin-scanner";
+  plugin_path = QCoreApplication::applicationDirPath() + "/../PlugIns/gstreamer";
+#elif defined(Q_OS_WIN32)
+  plugin_path = QCoreApplication::applicationDirPath() + "/gstreamer-plugins";
+#endif
+
+#if defined(Q_OS_WIN32) || defined(Q_OS_DARWIN)
+  registry_filename = Utilities::GetConfigPath(Utilities::Path_GstreamerRegistry);
+#endif
+
+  if (!scanner_path.isEmpty())
+    SetEnv("GST_PLUGIN_SCANNER", scanner_path);
+
+  if (!plugin_path.isEmpty()) {
+    SetEnv("GST_PLUGIN_PATH", plugin_path);
+    // Never load plugins from anywhere else.
+    SetEnv("GST_PLUGIN_SYSTEM_PATH", plugin_path);
+  }
+
+  if (!registry_filename.isEmpty()) {
+    SetEnv("GST_REGISTRY", registry_filename);
+  }
+}
+
 #ifdef HAVE_GIO
 # undef signals // Clashes with GIO, and not needed in this file
 # include <gio/gio.h>
@@ -334,6 +375,8 @@ int main(int argc, char *argv[]) {
   // Fixes focus issue with NSSearchField, see QTBUG-11401
   QCoreApplication::setAttribute(Qt::AA_NativeWindows, true);
 #endif
+
+  SetGstreamerEnvironment();
 
   // Set the permissions on the config file on Unix - it can contain passwords
   // for internet services so it's important that other users can't read it.
