@@ -34,7 +34,10 @@ const char* SongkickConcerts::kSongkickArtistCalendarUrl =
     "apikey=8rgKfy1WU6IlJFfN";
 
 SongkickConcerts::SongkickConcerts() {
-
+  Geolocator* geolocator = new Geolocator;
+  geolocator->Geolocate();
+  connect(geolocator, SIGNAL(Finished(Geolocator::LatLng)), SLOT(GeolocateFinished(Geolocator::LatLng)));
+  NewClosure(geolocator, SIGNAL(Finished(Geolocator::LatLng)), geolocator, SLOT(deleteLater()));
 }
 
 void SongkickConcerts::FetchInfo(int id, const Song& metadata) {
@@ -120,15 +123,35 @@ void SongkickConcerts::CalendarRequestFinished(QNetworkReply* reply, int id) {
   foreach (const QVariant& v, events) {
     QVariantMap event = v.toMap();
     {
+      QString display_name = event["displayName"].toString();
+      QVariantMap venue = event["venue"].toMap();
+      const bool valid_latlng =
+          venue["lng"].isValid() && venue["lat"].isValid();
+
+      if (valid_latlng && latlng_.IsValid()) {
+        static const int kFilterDistanceMetres = 250 * 1e3;  // 250km
+        Geolocator::LatLng latlng(
+            venue["lat"].toString(), venue["lng"].toString());
+        if (latlng_.IsValid() && latlng.IsValid()) {
+          int distance_metres = latlng_.Distance(latlng);
+          if (distance_metres > kFilterDistanceMetres) {
+            qLog(Debug) << "Filtered concert:"
+                        << display_name
+                        << "as too far away:"
+                        << distance_metres;
+            continue;
+          }
+        }
+      }
+
       writer.writeStartElement("div");
       {
         writer.writeStartElement("a");
         writer.writeAttribute("href", event["uri"].toString());
-        writer.writeCharacters(event["displayName"].toString());
+        writer.writeCharacters(display_name);
         writer.writeEndElement();
       }
-      QVariantMap venue = event["venue"].toMap();
-      if (venue["lng"].isValid() && venue["lat"].isValid()) {
+      if (valid_latlng) {
         writer.writeStartElement("img");
         QString maps_url = QString(kStaticMapUrl).arg(
             venue["lat"].toString(),
@@ -170,4 +193,8 @@ void SongkickConcerts::InjectImage(
       QTextDocument::ImageResource,
       reply->request().url(),
       QVariant(image));
+}
+
+void SongkickConcerts::GeolocateFinished(Geolocator::LatLng latlng) {
+  latlng_ = latlng;
 }

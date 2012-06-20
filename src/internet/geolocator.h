@@ -16,19 +16,22 @@ class Geolocator : public QObject {
    public:
     LatLng();
     LatLng(int lat_e6, int lng_e6);
+    explicit LatLng(const QString& latlng);
+    LatLng(const QString& lat, const QString& lng);
 
     int lat_e6() const { return lat_e6_; }
     int lng_e6() const { return lng_e6_; }
 
     bool IsValid() const;
+    int Distance(const LatLng& other) const;
 
    private:
-    const int lat_e6_;
-    const int lng_e6_;
+    int lat_e6_;
+    int lng_e6_;
   };
 
  signals:
-  void Finished(LatLng latlng);
+  void Finished(Geolocator::LatLng latlng);
 
  private slots:
   void RequestFinished(QNetworkReply* reply);
@@ -38,5 +41,8 @@ class Geolocator : public QObject {
 
   static const char* kUrl;
 };
+
+QDebug operator<<(QDebug dbg, const Geolocator::LatLng& ll);
+Q_DECLARE_METATYPE(Geolocator::LatLng);
 
 #endif  // GEOLOCATOR_H

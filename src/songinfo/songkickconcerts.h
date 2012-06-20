@@ -21,6 +21,7 @@
 #include "songinfoprovider.h"
 
 #include "core/network.h"
+#include "internet/geolocator.h"
 
 class QNetworkReply;
 class SongInfoTextView;
@@ -36,11 +37,13 @@ class SongkickConcerts : public SongInfoProvider {
   void ArtistSearchFinished(QNetworkReply* reply, int id);
   void CalendarRequestFinished(QNetworkReply* reply, int id);
   void InjectImage(QNetworkReply* reply, SongInfoTextView* text_view);
+  void GeolocateFinished(Geolocator::LatLng latlng);
 
  private:
   void FetchSongkickCalendar(const QString& artist_id, int id);
 
   NetworkAccessManager network_;
+  Geolocator::LatLng latlng_;
 
   static const char* kSongkickArtistBucket;
   static const char* kSongkickArtistCalendarUrl;

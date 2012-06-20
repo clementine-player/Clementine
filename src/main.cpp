@@ -44,6 +44,7 @@
 #include "engines/enginebase.h"
 #include "globalsearch/searchprovider.h"
 #include "internet/digitallyimportedclient.h"
+#include "internet/geolocator.h"
 #include "internet/somafmservice.h"
 #include "library/directory.h"
 #include "playlist/playlist.h"
@@ -293,6 +294,7 @@ int main(int argc, char *argv[]) {
   qRegisterMetaType<QList<PodcastEpisode> >("QList<PodcastEpisode>");
   qRegisterMetaType<PodcastList>("PodcastList");
   qRegisterMetaType<PodcastEpisodeList>("PodcastEpisodeList");
+  qRegisterMetaType<Geolocator::LatLng>("Geolocator::LatLng");
 
   qRegisterMetaType<GstBuffer*>("GstBuffer*");
   qRegisterMetaType<GstElement*>("GstElement*");

@@ -1,5 +1,6 @@
 #include "geolocator.h"
 
+#include <cmath>
 #include <limits>
 
 #include <qjson/parser.h>
@@ -7,8 +8,9 @@
 #include <QStringList>
 
 #include "core/closure.h"
+#include "core/logging.h"
 
-const char* Geolocator::kUrl = "https://data.clementine-player.org/geolocate";
+const char* Geolocator::kUrl = "http://data.clementine-player.org/geolocate";
 
 using std::numeric_limits;
 
@@ -20,6 +22,43 @@ Geolocator::LatLng::LatLng()
 Geolocator::LatLng::LatLng(int lat_e6, int lng_e6)
   : lat_e6_(lat_e6),
     lng_e6_(lng_e6) {
+}
+
+Geolocator::LatLng::LatLng(const QString& latlng)
+  : lat_e6_(numeric_limits<int>::min()),
+    lng_e6_(numeric_limits<int>::min()) {
+  QStringList split = latlng.split(",");
+  if (split.length() != 2) {
+    return;
+  }
+
+  const double lat = split[0].toDouble();
+  const double lng = split[1].toDouble();
+  lat_e6_ = static_cast<int>(lat * 1e6);
+  lng_e6_ = static_cast<int>(lng * 1e6);
+}
+
+Geolocator::LatLng::LatLng(const QString& lat, const QString& lng) {
+  lat_e6_ = static_cast<int>(lat.toDouble() * 1e6);
+  lng_e6_ = static_cast<int>(lng.toDouble() * 1e6);
+}
+
+int Geolocator::LatLng::Distance(const Geolocator::LatLng& other) const {
+  static const int kEarthRadiusMetres = 6372800;
+
+  double lat_a = lat_e6() / 1000000.0 * (M_PI / 180.0);
+  double lng_a = lng_e6() / 1000000.0 * (M_PI / 180.0);
+
+  double lat_b = other.lat_e6() / 1000000.0 * (M_PI / 180.0);
+  double lng_b = other.lng_e6() / 1000000.0 * (M_PI / 180.0);
+
+  double delta_longitude = lng_b - lng_a;
+
+  double sines = sin(lat_a) * sin(lat_b);
+  double cosines = cos(lat_a) * cos(lat_b) * cos(delta_longitude);
+  double central_angle = acos(sines + cosines);
+  double distance_metres = kEarthRadiusMetres * central_angle;
+  return static_cast<int>(distance_metres);
 }
 
 bool Geolocator::LatLng::IsValid() const {
@@ -34,7 +73,7 @@ Geolocator::Geolocator(QObject* parent)
 void Geolocator::Geolocate() {
   QNetworkRequest req = QNetworkRequest(QUrl(kUrl));
   QNetworkReply* reply = network_.get(req);
-  NewClosure(reply, SIGNAL(finished()), this, SLOT(RequestFinished()));
+  NewClosure(reply, SIGNAL(finished()), this, SLOT(RequestFinished(QNetworkReply*)), reply);
 }
 
 void Geolocator::RequestFinished(QNetworkReply* reply) {
@@ -54,16 +93,13 @@ void Geolocator::RequestFinished(QNetworkReply* reply) {
 
   QVariantMap map = result.toMap();
   QString latlng = map["latlng"].toString();
-  QStringList split = latlng.split(",");
-  if (split.length() != 2) {
-    emit Finished(LatLng());
-    return;
-  }
 
-  double lat = split[0].toDouble();
-  double lng = split[1].toDouble();
+  LatLng ll(latlng);
+  qLog(Debug) << "Gelocated to:" << ll;
+  emit Finished(ll);
+}
 
-  emit Finished(
-      LatLng(static_cast<int>(lat * 1e6),
-             static_cast<int>(lng * 1e6)));
+QDebug operator<<(QDebug dbg, const Geolocator::LatLng& ll) {
+  dbg.nospace() << "(" << ll.lat_e6() << "," << ll.lng_e6() << ")";
+  return dbg.space();
 }
