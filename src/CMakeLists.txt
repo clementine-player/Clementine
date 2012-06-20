@@ -90,6 +90,7 @@ set(SOURCES
   core/globalshortcuts.cpp
   core/gnomeglobalshortcutbackend.cpp
   core/mergedproxymodel.cpp
+  core/metatypes.cpp
   core/multisortfilterproxy.cpp
   core/musicstorage.cpp
   core/network.cpp

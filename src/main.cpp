@@ -31,27 +31,18 @@
 #include "core/database.h"
 #include "core/logging.h"
 #include "core/mac_startup.h"
+#include "core/metatypes.h"
 #include "core/network.h"
 #include "core/networkproxyfactory.h"
 #include "core/potranslator.h"
 #include "core/song.h"
 #include "core/ubuntuunityhack.h"
 #include "core/utilities.h"
-#include "covers/albumcoverfetcher.h"
 #include "covers/amazoncoverprovider.h"
 #include "covers/discogscoverprovider.h"
 #include "covers/coverproviders.h"
 #include "engines/enginebase.h"
-#include "globalsearch/searchprovider.h"
-#include "internet/digitallyimportedclient.h"
-#include "internet/geolocator.h"
-#include "internet/somafmservice.h"
-#include "library/directory.h"
-#include "playlist/playlist.h"
-#include "podcasts/podcast.h"
-#include "podcasts/podcastepisode.h"
 #include "smartplaylists/generator.h"
-#include "ui/equalizer.h"
 #include "ui/iconloader.h"
 #include "ui/mainwindow.h"
 #include "ui/systemtrayicon.h"
@@ -63,7 +54,6 @@
 
 #include <QDir>
 #include <QLibraryInfo>
-#include <QNetworkCookie>
 #include <QNetworkProxyFactory>
 #include <QSslSocket>
 #include <QSqlDatabase>
@@ -99,16 +89,12 @@ using boost::scoped_ptr;
 #ifdef HAVE_DBUS
   #include "core/mpris.h"
   #include "core/mpris2.h"
-  #include "dbus/metatypes.h"
   #include <QDBusArgument>
-  #include <QDBusConnection>
   #include <QImage>
 
   QDBusArgument& operator<< (QDBusArgument& arg, const QImage& image);
   const QDBusArgument& operator>> (const QDBusArgument& arg, QImage& image);
 #endif
-
-class GstEnginePipeline;
 
 // Load sqlite plugin on windows and mac.
 #ifdef HAVE_STATIC_SQLITE
@@ -259,46 +245,7 @@ int main(int argc, char *argv[]) {
   g_type_init();
   g_set_application_name(QCoreApplication::applicationName().toLocal8Bit());
 
-  qRegisterMetaType<CoverSearchResult>("CoverSearchResult");
-  qRegisterMetaType<QList<CoverSearchResult> >("QList<CoverSearchResult>");
-  qRegisterMetaType<CoverSearchResults>("CoverSearchResults");
-  qRegisterMetaType<Directory>("Directory");
-  qRegisterMetaType<DirectoryList>("DirectoryList");
-  qRegisterMetaType<Subdirectory>("Subdirectory");
-  qRegisterMetaType<SubdirectoryList>("SubdirectoryList");
-  qRegisterMetaType<Song>("Song");
-  qRegisterMetaType<QList<Song> >("QList<Song>");
-  qRegisterMetaType<SongList>("SongList");
-  qRegisterMetaType<PlaylistItemPtr>("PlaylistItemPtr");
-  qRegisterMetaType<QList<PlaylistItemPtr> >("QList<PlaylistItemPtr>");
-  qRegisterMetaType<PlaylistItemList>("PlaylistItemList");
-  qRegisterMetaType<Engine::State>("Engine::State");
-  qRegisterMetaType<Engine::SimpleMetaBundle>("Engine::SimpleMetaBundle");
-  qRegisterMetaType<Equalizer::Params>("Equalizer::Params");
-  qRegisterMetaTypeStreamOperators<Equalizer::Params>("Equalizer::Params");
-  qRegisterMetaType<const char*>("const char*");
-  qRegisterMetaType<QNetworkReply*>("QNetworkReply*");
-  qRegisterMetaType<QNetworkReply**>("QNetworkReply**");
-  qRegisterMetaType<smart_playlists::GeneratorPtr>("smart_playlists::GeneratorPtr");
-  qRegisterMetaType<ColumnAlignmentMap>("ColumnAlignmentMap");
-  qRegisterMetaTypeStreamOperators<QMap<int, int> >("ColumnAlignmentMap");
-  qRegisterMetaType<QNetworkCookie>("QNetworkCookie");
-  qRegisterMetaType<QList<QNetworkCookie> >("QList<QNetworkCookie>");
-  qRegisterMetaType<SearchProvider::Result>("SearchProvider::Result");
-  qRegisterMetaType<SearchProvider::ResultList>("SearchProvider::ResultList");
-  qRegisterMetaType<DigitallyImportedClient::Channel>("DigitallyImportedClient::Channel");
-  qRegisterMetaType<SomaFMService::Stream>("SomaFMService::Stream");
-  qRegisterMetaTypeStreamOperators<DigitallyImportedClient::Channel>("DigitallyImportedClient::Channel");
-  qRegisterMetaTypeStreamOperators<SomaFMService::Stream>("SomaFMService::Stream");
-  qRegisterMetaType<QList<Podcast> >("QList<Podcast>");
-  qRegisterMetaType<QList<PodcastEpisode> >("QList<PodcastEpisode>");
-  qRegisterMetaType<PodcastList>("PodcastList");
-  qRegisterMetaType<PodcastEpisodeList>("PodcastEpisodeList");
-  qRegisterMetaType<Geolocator::LatLng>("Geolocator::LatLng");
-
-  qRegisterMetaType<GstBuffer*>("GstBuffer*");
-  qRegisterMetaType<GstElement*>("GstElement*");
-  qRegisterMetaType<GstEnginePipeline*>("GstEnginePipeline*");
+  RegisterMetaTypes();
 
 #ifdef HAVE_LIBLASTFM
   lastfm::ws::ApiKey = LastFMService::kApiKey;
@@ -458,11 +405,6 @@ int main(int argc, char *argv[]) {
   OSD osd(tray_icon.get(), &app);
 
 #ifdef HAVE_DBUS
-  qDBusRegisterMetaType<QImage>();
-  qDBusRegisterMetaType<TrackMetadata>();
-  qDBusRegisterMetaType<TrackIds>();
-  qDBusRegisterMetaType<QList<QByteArray> >();
-
   mpris::Mpris mpris(&app);
 #endif
 
