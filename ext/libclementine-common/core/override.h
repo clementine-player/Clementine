@@ -10,13 +10,8 @@
 
 #if __has_extension(cxx_override_control)  // Clang feature checking macro.
 #  define OVERRIDE override
-#elif defined(__GNUC__)  // Clang also defines this.
-#  include <features.h>
-#  if __GNUC_PREREQ(4,7)
-#    define OVERRIDE override
-#  else
-#    define OVERRIDE
-#  endif
+#else
+#  define OVERRIDE
 #endif
 
 #endif  // OVERRIDE_H
