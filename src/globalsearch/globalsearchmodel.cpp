@@ -19,9 +19,12 @@
 #include "globalsearchmodel.h"
 #include "core/mimedata.h"
 
+#include <QSortFilterProxyModel>
+
 GlobalSearchModel::GlobalSearchModel(GlobalSearch* engine, QObject* parent)
   : QStandardItemModel(parent),
     engine_(engine),
+    proxy_(NULL),
     use_pretty_covers_(true),
     artist_icon_(":/icons/22x22/x-clementine-artist.png"),
     album_icon_(":/icons/22x22/x-clementine-album.png")
@@ -202,9 +205,14 @@ void GlobalSearchModel::GetChildResults(const QStandardItem* item,
 
   // Does this item have children?
   if (item->rowCount()) {
-    // Yes - visit all the children
+    const QModelIndex parent_proxy_index = proxy_->mapFromSource(item->index());
+
+    // Yes - visit all the children, but do so through the proxy so we get them
+    // in the right order.
     for (int i=0 ; i<item->rowCount() ; ++i) {
-      GetChildResults(item->child(i), results, visited);
+      const QModelIndex proxy_index = parent_proxy_index.child(i, 0);
+      const QModelIndex index = proxy_->mapToSource(proxy_index);
+      GetChildResults(itemFromIndex(index), results, visited);
     }
   } else {
     // No - it's a song, add its result

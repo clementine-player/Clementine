@@ -25,6 +25,8 @@
 
 class GlobalSearch;
 
+class QSortFilterProxyModel;
+
 class GlobalSearchModel : public QStandardItemModel {
   Q_OBJECT
 
@@ -44,6 +46,7 @@ public:
     QString group_[3];
   };
 
+  void set_proxy(QSortFilterProxyModel* proxy) { proxy_ = proxy; }
   void set_use_pretty_covers(bool pretty) { use_pretty_covers_ = pretty; }
   void set_provider_order(const QStringList& provider_order) { provider_order_ = provider_order; }
   void SetGroupBy(const LibraryModel::Grouping& grouping, bool regroup_now);
@@ -68,6 +71,7 @@ private:
   
 private:
   GlobalSearch* engine_;
+  QSortFilterProxyModel* proxy_;
 
   LibraryModel::Grouping group_by_;
 

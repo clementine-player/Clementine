@@ -63,6 +63,9 @@ GlobalSearchView::GlobalSearchView(Application* app, QWidget* parent)
 {
   ui_->setupUi(this);
 
+  front_model_->set_proxy(front_proxy_);
+  back_model_->set_proxy(back_proxy_);
+
   ui_->search->installEventFilter(this);
   ui_->results_stack->installEventFilter(this);
 
