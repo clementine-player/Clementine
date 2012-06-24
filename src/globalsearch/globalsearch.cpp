@@ -31,7 +31,7 @@
 
 const int GlobalSearch::kDelayedSearchTimeoutMs = 200;
 const char* GlobalSearch::kSettingsGroup = "GlobalSearch";
-const int GlobalSearch::kMaxResultsPerEmission = 100;
+const int GlobalSearch::kMaxResultsPerEmission = 500;
 
 
 GlobalSearch::GlobalSearch(Application* app, QObject* parent)
