@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-06-16 23:42+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2012-06-18 12:04+0000\n"
+"Last-Translator: Sérgio Marques <smarquespt@gmail.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: pt\n"
@@ -359,7 +359,7 @@ msgstr "Adicionar outra emissão..."
 msgid "Add directory..."
 msgstr "Adicionar diretório..."
 
-#: ui/mainwindow.cpp:1529
+#: ui/mainwindow.cpp:1528
 msgid "Add file"
 msgstr "Adicionar ficheiro"
 
@@ -371,7 +371,7 @@ msgstr "Adicionar ficheiro..."
 msgid "Add files to transcode"
 msgstr "Adicionar ficheiros a converter"
 
-#: ui/mainwindow.cpp:1557
+#: ui/mainwindow.cpp:1556
 msgid "Add folder"
 msgstr "Adicionar pasta"
 
@@ -459,7 +459,7 @@ msgstr "Adicionar aos favoritos Grooveshark"
 msgid "Add to Grooveshark playlists"
 msgstr "Adicionar às listas de reprodução Grooveshark"
 
-#: ui/mainwindow.cpp:1354
+#: ui/mainwindow.cpp:1353
 msgid "Add to another playlist"
 msgstr "Adicionar noutra lista de reprodução"
 
@@ -539,7 +539,7 @@ msgstr "Artista do álbum"
 msgid "Album cover"
 msgstr "Capa do álbum"
 
-#: internet/jamendoservice.cpp:411
+#: internet/jamendoservice.cpp:414
 msgid "Album info on jamendo.com..."
 msgstr "Informações do álbum em jamendo.com..."
 
@@ -551,7 +551,7 @@ msgstr "Álbuns com capas"
 msgid "Albums without covers"
 msgstr "Álbuns sem capas"
 
-#: ui/mainwindow.cpp:152
+#: ui/mainwindow.cpp:151
 msgid "All Files (*)"
 msgstr "Todos os ficheiros (*)"
 
@@ -650,7 +650,7 @@ msgstr "Aspeto"
 msgid "Append files/URLs to the playlist"
 msgstr "Juntar ficheiros/URLs à lista de reprodução"
 
-#: devices/deviceview.cpp:211 globalsearch/globalsearchview.cpp:409
+#: devices/deviceview.cpp:211 globalsearch/globalsearchview.cpp:412
 #: internet/internetservice.cpp:55 library/libraryview.cpp:256
 #: widgets/fileviewlist.cpp:32
 msgid "Append to current playlist"
@@ -687,7 +687,7 @@ msgstr "Tem a certeza de que quer reiniciar as estatísticas desta faixa?"
 msgid "Artist"
 msgstr "Artista"
 
-#: ui/mainwindow.cpp:234
+#: ui/mainwindow.cpp:233
 msgid "Artist info"
 msgstr "Info do artista"
 
@@ -814,7 +814,7 @@ msgstr "Taxa de dados"
 msgid "Bitrate"
 msgstr "Taxa de dados"
 
-#: analyzers/blockanalyzer.cpp:24
+#: analyzers/blockanalyzer.cpp:22
 msgid "Block analyzer"
 msgstr "Analisador de blocos"
 
@@ -844,13 +844,13 @@ msgstr "Procurar..."
 msgid "Buffer duration"
 msgstr "Duração da memória"
 
-#: engines/gstengine.cpp:861
+#: engines/gstengine.cpp:821
 msgid "Buffering"
 msgstr "A colocar em memória..."
 
 #: ../bin/src/ui_globalsearchview.h:211
 msgid "But these sources are disabled:"
-msgstr ""
+msgstr "Mas estas fontes estão inativas:"
 
 #: ../bin/src/ui_wiimotesettingspage.h:192
 msgid "Buttons"
@@ -902,7 +902,7 @@ msgstr "A alteração a esta preferência produzirá efeito nas faixas seguintes
 msgid "Check for new episodes"
 msgstr "Procurar novos episódios"
 
-#: ui/mainwindow.cpp:572
+#: ui/mainwindow.cpp:571
 msgid "Check for updates..."
 msgstr "Verificar atualizações..."
 
@@ -1014,7 +1014,7 @@ msgstr "O Clementine não conseguiu encontrar resultados para este ficheiro"
 
 #: ../bin/src/ui_globalsearchview.h:210
 msgid "Clementine will find music in:"
-msgstr ""
+msgstr "O Clementine vai procurar as músicas em:"
 
 #: library/libraryview.cpp:238
 msgid "Click here to add some music"
@@ -1095,11 +1095,11 @@ msgstr "Configurar atalhos"
 msgid "Configure Spotify..."
 msgstr "Configurar Spotify..."
 
-#: globalsearch/globalsearchview.cpp:135 globalsearch/globalsearchview.cpp:422
+#: globalsearch/globalsearchview.cpp:138 globalsearch/globalsearchview.cpp:425
 msgid "Configure global search..."
-msgstr ""
+msgstr "Configurar a procura global..."
 
-#: ui/mainwindow.cpp:457
+#: ui/mainwindow.cpp:456
 msgid "Configure library..."
 msgstr "Configurar coleção..."
 
@@ -1140,12 +1140,12 @@ msgstr "Converter quaisquer faixas não reconhecidas pelo dispositivo"
 msgid "Copy to clipboard"
 msgstr "Copiar para a área de transferência"
 
-#: library/libraryview.cpp:278 ui/mainwindow.cpp:490
+#: library/libraryview.cpp:278 ui/mainwindow.cpp:489
 #: widgets/fileviewlist.cpp:44
 msgid "Copy to device..."
 msgstr "Copiar para o dispositivo..."
 
-#: devices/deviceview.cpp:218 ui/mainwindow.cpp:487
+#: devices/deviceview.cpp:218 ui/mainwindow.cpp:486
 #: widgets/fileviewlist.cpp:39
 msgid "Copy to library..."
 msgstr "Copiar para a coleção..."
@@ -1384,7 +1384,7 @@ msgid "Delete downloaded data"
 msgstr "Eliminar dados transferidos"
 
 #: devices/deviceview.cpp:388 library/libraryview.cpp:497
-#: ui/mainwindow.cpp:1806 widgets/fileview.cpp:186
+#: ui/mainwindow.cpp:1805 widgets/fileview.cpp:186
 msgid "Delete files"
 msgstr "Eliminar ficheiros"
 
@@ -1392,7 +1392,7 @@ msgstr "Eliminar ficheiros"
 msgid "Delete from device..."
 msgstr "Eliminar do dispositivo..."
 
-#: library/libraryview.cpp:280 ui/mainwindow.cpp:491
+#: library/libraryview.cpp:280 ui/mainwindow.cpp:490
 #: widgets/fileviewlist.cpp:45
 msgid "Delete from disk..."
 msgstr "Eliminar ficheiros do disco..."
@@ -1417,11 +1417,11 @@ msgstr "Eliminar ficheiros originais"
 msgid "Deleting files"
 msgstr "A eliminar ficheiros"
 
-#: ui/mainwindow.cpp:1290
+#: ui/mainwindow.cpp:1289
 msgid "Dequeue selected tracks"
 msgstr "Retirar da fila as faixas selecionadas"
 
-#: ui/mainwindow.cpp:1288
+#: ui/mainwindow.cpp:1287
 msgid "Dequeue track"
 msgstr "Retirar esta faixa da fila"
 
@@ -1449,7 +1449,7 @@ msgstr "Nome do dispositivo"
 msgid "Device properties..."
 msgstr "Propriedades do dispositivo..."
 
-#: ui/mainwindow.cpp:231
+#: ui/mainwindow.cpp:230
 msgid "Devices"
 msgstr "Dispositivos"
 
@@ -1566,7 +1566,7 @@ msgstr "Transferência colocada na fila"
 msgid "Download this album"
 msgstr "Transferir este álbum"
 
-#: internet/jamendoservice.cpp:413
+#: internet/jamendoservice.cpp:416
 msgid "Download this album..."
 msgstr "Transferir este álbum..."
 
@@ -1587,7 +1587,7 @@ msgstr "A transferir (%1%)..."
 msgid "Downloading Icecast directory"
 msgstr "A transferir o diretório Icecast"
 
-#: internet/jamendoservice.cpp:183
+#: internet/jamendoservice.cpp:186
 msgid "Downloading Jamendo catalogue"
 msgstr "A transferir o catálogo Jamendo"
 
@@ -1615,7 +1615,7 @@ msgstr "Letra da unidade"
 msgid "Dynamic mode is on"
 msgstr "O modo dinâmico está ativo"
 
-#: internet/jamendoservice.cpp:112 library/library.cpp:91
+#: internet/jamendoservice.cpp:113 library/library.cpp:91
 msgid "Dynamic random mix"
 msgstr "Combinação aleatória dinâmica"
 
@@ -1623,7 +1623,7 @@ msgstr "Combinação aleatória dinâmica"
 msgid "Edit smart playlist..."
 msgstr "Editar lista de reprodução inteligente..."
 
-#: ui/mainwindow.cpp:1323
+#: ui/mainwindow.cpp:1322
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "Editar \"%1\"..."
@@ -1669,7 +1669,7 @@ msgstr "Apenas ativar os atalhos se o Clementine estiver evidenciado"
 msgid ""
 "Enable sources below to include them in search results.  Results will be "
 "displayed in this order."
-msgstr ""
+msgstr "Ative as fontes para as incluir nos resultados da procura. Os resultados serão exibidos por esta ordem"
 
 #: core/globalshortcuts.cpp:62
 msgid "Enable/disable Last.fm scrobbling"
@@ -1707,7 +1707,7 @@ msgstr "Indique um <b>artista</b> ou <b>\"tag\"</b> para ouvir a rádio last.fm"
 #: ../bin/src/ui_globalsearchview.h:209
 msgid ""
 "Enter search terms above to find music on your computer and on the internet"
-msgstr ""
+msgstr "Indique os termos para procurar as músicas no computador e na internet"
 
 #: ../bin/src/ui_itunessearchpage.h:77
 msgid "Enter search terms below to find podcasts in the iTunes Store"
@@ -1744,7 +1744,7 @@ msgstr "Equivalente a --log-levels *:3"
 
 #: internet/groovesharkservice.cpp:994
 #: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:491
-#: ui/mainwindow.cpp:1758 ui/mainwindow.cpp:1879
+#: ui/mainwindow.cpp:1757 ui/mainwindow.cpp:1878
 msgid "Error"
 msgstr "Erro"
 
@@ -1947,7 +1947,7 @@ msgstr "Tipo de ficheiro"
 msgid "Filename"
 msgstr "Nome do ficheiro"
 
-#: ui/mainwindow.cpp:229
+#: ui/mainwindow.cpp:228
 msgid "Files"
 msgstr "Ficheiros"
 
@@ -2151,7 +2151,7 @@ msgstr "URL da música Grooveshark"
 msgid "Group Library by..."
 msgstr "Agrupar coleção por..."
 
-#: globalsearch/globalsearchview.cpp:420 library/libraryfilterwidget.cpp:83
+#: globalsearch/globalsearchview.cpp:423 library/libraryfilterwidget.cpp:83
 msgid "Group by"
 msgstr "Agrupar por"
 
@@ -2301,7 +2301,7 @@ msgstr "Instalado"
 msgid "Integrity check"
 msgstr "Verificação de integridade"
 
-#: ui/mainwindow.cpp:230
+#: ui/mainwindow.cpp:229
 msgid "Internet"
 msgstr "Internet"
 
@@ -2341,27 +2341,27 @@ msgstr "Chave de sessão inválida"
 msgid "Invalid username and/or password"
 msgstr "Senha e/ou utilizador inválido"
 
-#: internet/jamendoservice.cpp:125
+#: internet/jamendoservice.cpp:126
 msgid "Jamendo"
 msgstr "Jamendo"
 
-#: internet/jamendoservice.cpp:108
+#: internet/jamendoservice.cpp:109
 msgid "Jamendo Most Listened Tracks"
 msgstr "As faixas mais ouvidas no Jamendo"
 
-#: internet/jamendoservice.cpp:106
+#: internet/jamendoservice.cpp:107
 msgid "Jamendo Top Tracks"
 msgstr "As melhores faixas do Jamendo"
 
-#: internet/jamendoservice.cpp:102
+#: internet/jamendoservice.cpp:103
 msgid "Jamendo Top Tracks of the Month"
 msgstr "As melhores faixas do mês no Jamendo"
 
-#: internet/jamendoservice.cpp:104
+#: internet/jamendoservice.cpp:105
 msgid "Jamendo Top Tracks of the Week"
 msgstr "As melhores faixas da semana no Jamendo"
 
-#: internet/jamendoservice.cpp:167
+#: internet/jamendoservice.cpp:170
 msgid "Jamendo database"
 msgstr "Base de dados Jamendo"
 
@@ -2497,7 +2497,7 @@ msgstr "Deixar em branco para as predefinições. Exemplos: \"/dev/dsp\", \"fron
 msgid "Length"
 msgstr "Duração"
 
-#: ui/mainwindow.cpp:218 ui/mainwindow.cpp:228
+#: ui/mainwindow.cpp:217 ui/mainwindow.cpp:227
 msgid "Library"
 msgstr "Coleção"
 
@@ -2505,7 +2505,7 @@ msgstr "Coleção"
 msgid "Library advanced grouping"
 msgstr "Agrupamento avançado da coleção"
 
-#: ui/mainwindow.cpp:1996
+#: ui/mainwindow.cpp:1995
 msgid "Library rescan notice"
 msgstr "Aviso de análise da coleção"
 
@@ -2793,7 +2793,7 @@ msgstr "Pontos de montagem"
 msgid "Move down"
 msgstr "Mover para baixo"
 
-#: ui/mainwindow.cpp:488 widgets/fileviewlist.cpp:41
+#: ui/mainwindow.cpp:487 widgets/fileviewlist.cpp:41
 msgid "Move to library..."
 msgstr "Mover para a coleção..."
 
@@ -2802,7 +2802,7 @@ msgstr "Mover para a coleção..."
 msgid "Move up"
 msgstr "Mover para cima"
 
-#: transcoder/transcodedialog.cpp:213 ui/mainwindow.cpp:1531
+#: transcoder/transcodedialog.cpp:213 ui/mainwindow.cpp:1530
 msgid "Music"
 msgstr "Música"
 
@@ -2888,7 +2888,7 @@ msgstr "Nunca reproduzidas"
 msgid "Never start playing"
 msgstr "Nunca iniciar a reprodução"
 
-#: ui/mainwindow.cpp:1371 ../bin/src/ui_mainwindow.h:690
+#: ui/mainwindow.cpp:1370 ../bin/src/ui_mainwindow.h:690
 msgid "New playlist"
 msgstr "Nova lista de reprodução"
 
@@ -2943,7 +2943,7 @@ msgstr "Sem blocos curtos"
 msgid "None"
 msgstr "Nenhum"
 
-#: library/libraryview.cpp:492 ui/mainwindow.cpp:1759 ui/mainwindow.cpp:1880
+#: library/libraryview.cpp:492 ui/mainwindow.cpp:1758 ui/mainwindow.cpp:1879
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Nenhuma das faixas selecionadas eram adequadas à cópia para o dispositivo"
 
@@ -3027,7 +3027,7 @@ msgstr "Mostrar apenas as primeiras"
 
 #: internet/digitallyimportedservicebase.cpp:178
 #: internet/groovesharkservice.cpp:529 internet/icecastservice.cpp:296
-#: internet/jamendoservice.cpp:415 internet/magnatuneservice.cpp:276
+#: internet/jamendoservice.cpp:418 internet/magnatuneservice.cpp:276
 #: internet/somafmservice.cpp:91
 #, qt-format
 msgid "Open %1 in browser"
@@ -3039,11 +3039,11 @@ msgstr "&Abrir CD áudio"
 
 #: podcasts/addpodcastdialog.cpp:230
 msgid "Open OPML file"
-msgstr ""
+msgstr "Abrir um ficheiro OPML"
 
 #: podcasts/addpodcastdialog.cpp:73
 msgid "Open OPML file..."
-msgstr ""
+msgstr "Abrir um ficheiro OPML..."
 
 #: ../bin/src/ui_deviceproperties.h:382
 msgid "Open device"
@@ -3053,7 +3053,7 @@ msgstr "Abrir dispositivo"
 msgid "Open file..."
 msgstr "Abrir ficheiro..."
 
-#: devices/deviceview.cpp:215 globalsearch/globalsearchview.cpp:413
+#: devices/deviceview.cpp:215 globalsearch/globalsearchview.cpp:416
 #: internet/internetservice.cpp:75 library/libraryview.cpp:260
 #: widgets/fileviewlist.cpp:36 ../bin/src/ui_behavioursettingspage.h:195
 msgid "Open in new playlist"
@@ -3084,7 +3084,7 @@ msgstr "Opções..."
 msgid "Organise Files"
 msgstr "Organizar ficheiros"
 
-#: library/libraryview.cpp:276 ui/mainwindow.cpp:489
+#: library/libraryview.cpp:276 ui/mainwindow.cpp:488
 msgid "Organise files..."
 msgstr "Organizar ficheiros..."
 
@@ -3120,7 +3120,7 @@ msgstr "Substituir ficheiros existentes"
 msgid "Owner"
 msgstr "Proprietário"
 
-#: internet/jamendoservice.cpp:210
+#: internet/jamendoservice.cpp:213
 msgid "Parsing Jamendo catalogue"
 msgstr "Analisando o catálogo Jamendo"
 
@@ -3140,7 +3140,7 @@ msgstr "Senha"
 msgid "Password Protected"
 msgstr "Protegido por senha"
 
-#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:827 ui/mainwindow.cpp:1213
+#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:826 ui/mainwindow.cpp:1212
 #: ui/qtsystemtrayicon.cpp:178 wiimotedev/wiimotesettingspage.cpp:106
 msgid "Pause"
 msgstr "Pausa"
@@ -3157,8 +3157,8 @@ msgstr "Em pausa"
 msgid "Plain sidebar"
 msgstr "Barra lateral simples"
 
-#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:472 ui/mainwindow.cpp:795
-#: ui/mainwindow.cpp:814 ui/mainwindow.cpp:1216 ui/qtsystemtrayicon.cpp:166
+#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:471 ui/mainwindow.cpp:794
+#: ui/mainwindow.cpp:813 ui/mainwindow.cpp:1215 ui/qtsystemtrayicon.cpp:166
 #: ui/qtsystemtrayicon.cpp:192 ../bin/src/ui_mainwindow.h:640
 #: wiimotedev/wiimotesettingspage.cpp:101
 msgid "Play"
@@ -3375,12 +3375,12 @@ msgstr "A consultar dispositivo..."
 msgid "Queue Manager"
 msgstr "Gestor da fila"
 
-#: ui/mainwindow.cpp:1294
+#: ui/mainwindow.cpp:1293
 msgid "Queue selected tracks"
 msgstr "Colocar em fila as faixas selecionadas"
 
-#: globalsearch/globalsearchview.cpp:417 library/libraryview.cpp:264
-#: ui/mainwindow.cpp:1292
+#: globalsearch/globalsearchview.cpp:420 library/libraryview.cpp:264
+#: ui/mainwindow.cpp:1291
 msgid "Queue track"
 msgstr "Colocar esta faixa na fila"
 
@@ -3436,7 +3436,7 @@ msgstr "Realmente cancelar?"
 msgid "Refresh"
 msgstr "Atualizar"
 
-#: internet/jamendoservice.cpp:416 internet/magnatuneservice.cpp:277
+#: internet/jamendoservice.cpp:419 internet/magnatuneservice.cpp:277
 msgid "Refresh catalogue"
 msgstr "Atualizar catálogo"
 
@@ -3535,7 +3535,7 @@ msgstr "Repetir lista de reprodução"
 msgid "Repeat track"
 msgstr "Repetir faixa"
 
-#: devices/deviceview.cpp:213 globalsearch/globalsearchview.cpp:411
+#: devices/deviceview.cpp:213 globalsearch/globalsearchview.cpp:414
 #: internet/internetservice.cpp:65 library/libraryview.cpp:258
 #: widgets/fileviewlist.cpp:34
 msgid "Replace current playlist"
@@ -3653,7 +3653,7 @@ msgstr "Pontuação"
 msgid "Scrobble tracks that I listen to"
 msgstr "Enviar as faixas que eu oiço"
 
-#: ui/mainwindow.cpp:227 ../bin/src/ui_globalsearchsettingspage.h:145
+#: ui/mainwindow.cpp:226 ../bin/src/ui_globalsearchsettingspage.h:145
 #: ../bin/src/ui_gpoddersearchpage.h:78 ../bin/src/ui_itunessearchpage.h:78
 #: ../bin/src/ui_albumcoversearcher.h:114
 msgid "Search"
@@ -3672,7 +3672,7 @@ msgstr "Procurar no Grooveshark (abre um novo separador)"
 msgid "Search Icecast stations"
 msgstr "Procurar estações Icecast"
 
-#: internet/jamendoservice.cpp:422
+#: internet/jamendoservice.cpp:425
 msgid "Search Jamendo"
 msgstr "Procurar no Jamendo"
 
@@ -3785,7 +3785,7 @@ msgstr "Número de série"
 msgid "Service offline"
 msgstr "Serviço desligado"
 
-#: ui/mainwindow.cpp:1321
+#: ui/mainwindow.cpp:1320
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "Definir %1 para \"%2\"..."
@@ -3853,7 +3853,7 @@ msgstr "Mostrar notificação personalizada"
 msgid "Show above status bar"
 msgstr "Mostrar acima da barra de estado"
 
-#: ui/mainwindow.cpp:445
+#: ui/mainwindow.cpp:444
 msgid "Show all songs"
 msgstr "Mostrar todas as faixas"
 
@@ -3873,7 +3873,7 @@ msgstr "Mostrar separadores"
 msgid "Show fullsize..."
 msgstr "Ver imagem em ecrã completo..."
 
-#: library/libraryview.cpp:288 ui/mainwindow.cpp:492
+#: library/libraryview.cpp:288 ui/mainwindow.cpp:491
 #: widgets/fileviewlist.cpp:52
 msgid "Show in file browser..."
 msgstr "Mostrar no gestor de ficheiros..."
@@ -3886,17 +3886,17 @@ msgstr "Mostrar em vários artistas"
 msgid "Show moodbar"
 msgstr "Mostrar barra de estado de espírito"
 
-#: ui/mainwindow.cpp:446
+#: ui/mainwindow.cpp:445
 msgid "Show only duplicates"
 msgstr "Mostrar apenas as repetidas"
 
-#: ui/mainwindow.cpp:447
+#: ui/mainwindow.cpp:446
 msgid "Show only untagged"
 msgstr "Mostrar apenas músicas sem detalhes"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:153
 msgid "Show search suggestions"
-msgstr ""
+msgstr "Mostrar sugestões"
 
 #: ../bin/src/ui_lastfmsettingspage.h:157
 msgid "Show the \"love\" and \"ban\" buttons"
@@ -3912,7 +3912,7 @@ msgstr "Mostrar ícone na área de notificação"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:152
 msgid "Show which sources are enabled and disabled"
-msgstr ""
+msgstr "Mostrar o estado das fontes (ativas ou inativas)"
 
 #: core/globalshortcuts.cpp:57
 msgid "Show/Hide"
@@ -3998,7 +3998,7 @@ msgstr "Rock suave"
 msgid "Song Information"
 msgstr "Informações da faixa"
 
-#: ui/mainwindow.cpp:233
+#: ui/mainwindow.cpp:232
 msgid "Song info"
 msgstr "Info da faixa"
 
@@ -4102,7 +4102,7 @@ msgstr "Parar"
 msgid "Stop after"
 msgstr "Parar após"
 
-#: ui/mainwindow.cpp:474 ../bin/src/ui_mainwindow.h:648
+#: ui/mainwindow.cpp:473 ../bin/src/ui_mainwindow.h:648
 msgid "Stop after this track"
 msgstr "Parar após esta faixa"
 
@@ -4241,7 +4241,7 @@ msgstr "O sítio que indicou não existe!"
 msgid "The site you requested is not an image!"
 msgstr "O sítio que indicou não é uma imagem!"
 
-#: ui/mainwindow.cpp:1989
+#: ui/mainwindow.cpp:1988
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -4276,7 +4276,7 @@ msgid ""
 "deleted:"
 msgstr "Ocorreram alguns problemas ao eliminar as faixas. Os seguintes ficheiros não foram eliminados:"
 
-#: library/libraryview.cpp:498 ui/mainwindow.cpp:1807 widgets/fileview.cpp:187
+#: library/libraryview.cpp:498 ui/mainwindow.cpp:1806 widgets/fileview.cpp:187
 msgid ""
 "These files will be deleted from disk, are you sure you want to continue?"
 msgstr "Estes ficheiros vão ser eliminados do disco. Tem a certeza de que quer continuar?"
@@ -4301,7 +4301,7 @@ msgstr "Estas definições são utilizadas na \"Conversão de ficheiros\", no mo
 msgid "Third level"
 msgstr "Terceiro nível"
 
-#: internet/jamendoservice.cpp:167
+#: internet/jamendoservice.cpp:170
 msgid ""
 "This action will create a database which could be as big as 150 MB.\n"
 "Do you want to continue anyway?"
@@ -4387,7 +4387,7 @@ msgstr "Alternar notificação"
 msgid "Toggle fullscreen"
 msgstr "Trocar para ecrã completo"
 
-#: ui/mainwindow.cpp:1296
+#: ui/mainwindow.cpp:1295
 msgid "Toggle queue status"
 msgstr "Trocar o estado da fila"
 
@@ -4494,7 +4494,7 @@ msgstr "Sem capa"
 msgid "Unsubscribe"
 msgstr "Cancelar subscrição"
 
-#: songinfo/songkickconcerts.cpp:154
+#: songinfo/songkickconcerts.cpp:177
 msgid "Upcoming Concerts"
 msgstr "Próximos eventos"
 
@@ -4634,7 +4634,7 @@ msgstr "VBR MP3"
 msgid "Variable bit rate"
 msgstr "Taxa de dados variável"
 
-#: globalsearch/globalsearchmodel.cpp:100 library/librarymodel.cpp:233
+#: globalsearch/globalsearchmodel.cpp:103 library/librarymodel.cpp:233
 #: playlist/playlistmanager.cpp:402 ui/albumcovermanager.cpp:258
 msgid "Various artists"
 msgstr "Vários artistas"
@@ -4710,11 +4710,11 @@ msgstr "Ao procurar pelas capas dos álbuns, o Clementine irá procurar as image
 
 #: ../bin/src/ui_globalsearchsettingspage.h:151
 msgid "When the list is empty..."
-msgstr ""
+msgstr "Se a lista estiver vazia..."
 
 #: ../bin/src/ui_globalsearchview.h:212
 msgid "Why not try..."
-msgstr ""
+msgstr "Porque não tentar..."
 
 #: devices/ilister.cpp:121
 msgid "WiFi MAC Address"
@@ -4780,7 +4780,7 @@ msgid ""
 "well?"
 msgstr "Pretende mover as outras faixas deste álbum para Vários artistas?"
 
-#: ui/mainwindow.cpp:1994
+#: ui/mainwindow.cpp:1993
 msgid "Would you like to run a full rescan right now?"
 msgstr "Pretende executar a nova análise?"
 
