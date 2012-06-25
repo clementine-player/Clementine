@@ -22,7 +22,7 @@
 #include "playlist/playlistsequence.h"
 #ifdef HAVE_LIBLASTFM
 #include "internet/fixlastfm.h"
-#include <lastfm/Track>
+#include <lastfm/Track.h>
 #endif
 
 #include "gmock/gmock.h"

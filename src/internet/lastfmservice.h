@@ -27,7 +27,8 @@ class Track;
 uint qHash(const lastfm::Track& track);
 
 #include "fixlastfm.h"
-#include <lastfm/Track>
+#include <lastfm/Audioscrobbler.h>
+#include <lastfm/Track.h>
 #include <lastfm/ws.h>
 
 #include "internetmodel.h"
@@ -134,7 +135,8 @@ class LastFMService : public InternetService {
   void ButtonVisibilityChanged(bool value);
   void ScrobbleButtonVisibilityChanged(bool value);
   void PreferAlbumArtistChanged(bool value);
-  void ScrobblerStatus(int value);
+  void ScrobbleSubmitted();
+  void ScrobbleError(int value);
   void UpdatedSubscriberStatus(bool is_subscriber);
   void ScrobbledRadioStream();
 

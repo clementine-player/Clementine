@@ -668,7 +668,8 @@ MainWindow::MainWindow(Application* app,
   connect(app_->playlist_manager()->sequence(), SIGNAL(ShuffleModeChanged(PlaylistSequence::ShuffleMode)), osd_, SLOT(ShuffleModeChanged(PlaylistSequence::ShuffleMode)));
 
 #ifdef HAVE_LIBLASTFM
-  connect(InternetModel::Service<LastFMService>(), SIGNAL(ScrobblerStatus(int)), SLOT(ScrobblerStatus(int)));
+  connect(InternetModel::Service<LastFMService>(), SIGNAL(ScrobbleSubmitted()), SLOT(ScrobbleSubmitted()));
+  connect(InternetModel::Service<LastFMService>(), SIGNAL(ScrobbleError(int)), SLOT(ScrobbleError(int)));
 
   LastFMButtonVisibilityChanged(app_->internet_model()->InternetModel::Service<LastFMService>()->AreButtonsVisible());
   ScrobbleButtonVisibilityChanged(app_->internet_model()->InternetModel::Service<LastFMService>()->IsScrobbleButtonVisible());
@@ -2175,28 +2176,24 @@ void MainWindow::SetToggleScrobblingIcon(bool value) {
 }
 
 #ifdef HAVE_LIBLASTFM
-void MainWindow::ScrobblerStatus(int value) {
+void MainWindow::ScrobbleSubmitted() {
   const LastFMService* lastfm_service = InternetModel::Service<LastFMService>();
   const bool last_fm_enabled = ui_->action_toggle_scrobbling->isVisible() &&
                                lastfm_service->IsScrobblingEnabled() &&
                                lastfm_service->IsAuthenticated();
 
+  app_->playlist_manager()->active()->set_lastfm_status(Playlist::LastFM_Scrobbled);
+
+  // update the button icon
+  if (last_fm_enabled)
+    ui_->action_toggle_scrobbling->setIcon(QIcon(":/last.fm/as.png"));
+}
+
+void MainWindow::ScrobbleError(int value) {
   switch (value) {
     case -1:
       // custom error value got from initial validity check
       app_->playlist_manager()->active()->set_lastfm_status(Playlist::LastFM_Invalid);
-      break;
-
-    case 2:
-    case 3:
-      // we should get 3 for a correct scrobbling, but I just get 2 for
-      // mysterious reasons
-      // seems to scrobble fine though, so for now we accept it as correct
-      app_->playlist_manager()->active()->set_lastfm_status(Playlist::LastFM_Scrobbled);
-
-      // update the button icon
-      if (last_fm_enabled)
-        ui_->action_toggle_scrobbling->setIcon(QIcon(":/last.fm/as.png"));
       break;
 
     case 30:

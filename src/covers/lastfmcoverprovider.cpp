@@ -19,8 +19,8 @@
 #include "coverprovider.h"
 #include "lastfmcoverprovider.h"
 
-#include <lastfm/Artist>
-#include <lastfm/XmlQuery>
+#include <lastfm/Artist.h>
+#include <lastfm/XmlQuery.h>
 #include <lastfm/ws.h>
 
 #include <QNetworkReply>
@@ -52,14 +52,8 @@ void LastFmCoverProvider::QueryFinished() {
 
   CoverSearchResults results;
 
-  try {
-    lastfm::XmlQuery query(lastfm::ws::parse(reply));
-#ifdef Q_OS_WIN32
-    if (lastfm::ws::last_parse_error != lastfm::ws::NoError) {
-      throw std::runtime_error("");
-    }
-#endif
-
+  lastfm::XmlQuery query;
+  if (query.parse(reply->readAll())) {
     // parse the list of search results
     QList<lastfm::XmlQuery> elements = query["results"]["albummatches"].children("album");
 
@@ -69,7 +63,7 @@ void LastFmCoverProvider::QueryFinished() {
       result.image_url = element["image size=extralarge"].text();
       results << result;
     }
-  } catch(std::runtime_error&) {
+  } else {
     // Drop through and emit an empty list of results.
   }
 

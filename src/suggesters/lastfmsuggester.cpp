@@ -1,6 +1,6 @@
 #include "lastfmsuggester.h"
 
-#include <lastfm/XmlQuery>
+#include <lastfm/XmlQuery.h>
 
 #include "core/logging.h"
 #include "core/timeconstants.h"
@@ -39,13 +39,8 @@ void LastFMSuggester::RequestFinished() {
   int id = it.value();
   replies_.erase(it);
 
-  try {
-    lastfm::XmlQuery const lfm = lastfm::ws::parse(reply);
-#ifdef Q_OS_WIN32
-    if (lastfm::ws::last_parse_error != lastfm::ws::NoError)
-      throw std::runtime_error("");
-#endif
-
+  lastfm::XmlQuery lfm;
+  if (lfm.parse(reply->readAll())) {
     const QList<XmlQuery> tracks = lfm["similartracks"].children("track");
     SongList songs;
     foreach (const XmlQuery& q, tracks) {
@@ -59,8 +54,8 @@ void LastFMSuggester::RequestFinished() {
     }
     qLog(Debug) << songs.length() << "suggested songs from Last.fm";
     emit SuggestSongsFinished(id, songs);
-  } catch (std::runtime_error& e) {
-    qLog(Error) << e.what();
+  } else {
+    qLog(Error) << lfm.parseError().message();
     emit SuggestSongsFinished(id, SongList());
   }
 }

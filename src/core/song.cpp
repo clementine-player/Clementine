@@ -26,7 +26,7 @@
 
 #ifdef HAVE_LIBLASTFM
   #include "internet/fixlastfm.h"
-  #include <lastfm/Track>
+  #include <lastfm/Track.h>
 #endif
 
 #include <QFile>

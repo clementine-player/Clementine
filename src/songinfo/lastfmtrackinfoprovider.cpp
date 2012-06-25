@@ -22,7 +22,7 @@
 #include "ui/iconloader.h"
 
 #include <lastfm/ws.h>
-#include <lastfm/XmlQuery>
+#include <lastfm/XmlQuery.h>
 
 void LastfmTrackInfoProvider::FetchInfo(int id, const Song& metadata) {
   QMap<QString, QString> params;
@@ -50,18 +50,12 @@ void LastfmTrackInfoProvider::RequestFinished() {
     return;
   }
 
-  try {
-    lastfm::XmlQuery query = lastfm::ws::parse(reply);
-#ifdef Q_OS_WIN32
-    if (lastfm::ws::last_parse_error != lastfm::ws::NoError)
-      throw std::runtime_error("");
-#endif
-
+  lastfm::XmlQuery query;
+  if (query.parse(reply->readAll())) {
     GetPlayCounts(id, query);
     GetWiki(id, query);
     GetTags(id, query);
 
-  } catch (std::runtime_error&) {
   }
   emit Finished(id);
 }

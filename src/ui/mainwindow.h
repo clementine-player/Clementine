@@ -222,7 +222,8 @@ class MainWindow : public QMainWindow, public PlatformInterface {
 
   void ShowCoverManager();
 #ifdef HAVE_LIBLASTFM
-  void ScrobblerStatus(int value);
+  void ScrobbleSubmitted();
+  void ScrobbleError(int value);
 #endif
   void ShowAboutDialog();
   void ShowTranscodeDialog();
