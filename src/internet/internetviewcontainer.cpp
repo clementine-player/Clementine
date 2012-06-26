@@ -93,7 +93,8 @@ void InternetViewContainer::CurrentIndexChanged(const QModelIndex& index) {
 }
 
 void InternetViewContainer::Collapsed(const QModelIndex& index) {
-  if (app_->internet_model()->merged_model()->mapToSource(index).model() == app_->internet_model()) {
+  if (app_->internet_model()->merged_model()->mapToSource(index).model() == app_->internet_model()
+      && index.data(InternetModel::Role_Type) == InternetModel::Type_Service)  {
     SetHeaderVisible(current_header_, false);
     current_service_ = NULL;
     current_header_ = NULL;

@@ -72,6 +72,9 @@ signals:
   void AddToPlaylistSignal(QMimeData* data);
   void ScrollToIndex(const QModelIndex& index);
 
+public slots:
+  virtual void ShowConfig() {}
+
 private slots:
   void AppendToPlaylist();
   void ReplacePlaylist();

@@ -26,6 +26,7 @@
 class GroovesharkUrlHandler;
 class NetworkAccessManager;
 class Playlist;
+class SearchBoxWidget;
 
 class QMenu;
 class QNetworkReply;
@@ -73,8 +74,8 @@ class GroovesharkService : public InternetService {
   void DropMimeData(const QMimeData* data, const QModelIndex& index);
   QList<QAction*> playlistitem_actions(const Song& song);
   void ShowContextMenu(const QPoint& global_pos);
+  QWidget* HeaderWidget() const;
 
-  void Search(const QString& text, Playlist* playlist, bool now = false);
   // User should be logged in to be able to generate streaming urls
   QUrl GetStreamingUrlFromSongId(const QString& song_id, const QString& artist_id,
                                  QString* server_id, QString* stream_key,
@@ -129,6 +130,7 @@ class GroovesharkService : public InternetService {
   void AlbumSongsLoaded(quint64 id, SongList songs);
 
  public slots:
+  void Search(const QString& text, bool now = false);
   void ShowConfig();
 
  protected:
@@ -196,6 +198,7 @@ class GroovesharkService : public InternetService {
   void EnsureItemsCreated();
   void RemoveItems();
   void EnsureConnected();
+  void ClearSearchResults();
 
   // Create a playlist item, with data set as excepted. Doesn't fill the item
   // with songs rows.
@@ -236,7 +239,6 @@ class GroovesharkService : public InternetService {
   GroovesharkUrlHandler* url_handler_;
 
   QString pending_search_;
-  Playlist* pending_search_playlist_;
 
   int next_pending_search_id_;
   QMap<QNetworkReply*, int> pending_searches_;
@@ -253,7 +255,8 @@ class GroovesharkService : public InternetService {
   QStandardItem* stations_;
   QStandardItem* grooveshark_radio_;
   QStandardItem* favorites_;
-  QStandardItem* subscribed_playlists_divider_;
+  QStandardItem* playlists_parent_;
+  QStandardItem* subscribed_playlists_parent_;
 
   NetworkAccessManager* network_;
 
@@ -271,6 +274,8 @@ class GroovesharkService : public InternetService {
   QAction* get_url_to_share_song_;
   QAction* get_url_to_share_playlist_;
   QList<QAction*> playlistitem_actions_;
+
+  SearchBoxWidget* search_box_;
 
   QTimer* search_delay_;
   QNetworkReply* last_search_reply_;

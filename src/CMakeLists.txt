@@ -183,6 +183,7 @@ set(SOURCES
   internet/magnatuneservice.cpp
   internet/magnatuneurlhandler.cpp
   internet/savedradio.cpp
+  internet/searchboxwidget.cpp
   internet/somafmservice.cpp
   internet/somafmurlhandler.cpp
 
@@ -449,6 +450,7 @@ set(HEADERS
   internet/magnatunesettingspage.h
   internet/magnatuneservice.h
   internet/savedradio.h
+  internet/searchboxwidget.h
   internet/somafmservice.h
   internet/somafmurlhandler.h
 
@@ -621,6 +623,7 @@ set(UI
   internet/internetviewcontainer.ui
   internet/magnatunedownloaddialog.ui
   internet/magnatunesettingspage.ui
+  internet/searchboxwidget.ui
   internet/spotifysettingspage.ui
 
   library/groupbydialog.ui
