@@ -331,6 +331,15 @@ QString Song::TextForFiletype(FileType type) {
   }
 }
 
+int CompareSongsName(const Song& song1, const Song& song2) {
+  return song1.PrettyTitleWithArtist().localeAwareCompare(song2.PrettyTitleWithArtist()) < 0;
+}
+
+void Song::SortSongsListAlphabetically(SongList* songs) {
+  Q_ASSERT(songs);
+  qSort(songs->begin(), songs->end(), CompareSongsName);
+}
+
 void Song::Init(const QString& title, const QString& artist,
                 const QString& album, qint64 length_nanosec) {
   d->valid_ = true;

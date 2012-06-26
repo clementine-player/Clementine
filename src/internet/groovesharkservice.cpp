@@ -711,6 +711,8 @@ void GroovesharkService::PlaylistSongsRetrieved() {
 
   QVariantMap result = ExtractResult(reply);
   SongList songs = ExtractSongs(result);
+  Song::SortSongsListAlphabetically(&songs);
+
   foreach (const Song& song, songs) {
     QStandardItem* child = new QStandardItem(song.PrettyTitleWithArtist());
     child->setData(Type_Track, InternetModel::Role_Type);
@@ -752,6 +754,8 @@ void GroovesharkService::UserFavoritesRetrieved(QNetworkReply* reply, int task_i
 
   QVariantMap result = ExtractResult(reply);
   SongList songs = ExtractSongs(result);
+  Song::SortSongsListAlphabetically(&songs);
+
   foreach (const Song& song, songs) {
     QStandardItem* child = new QStandardItem(song.PrettyTitleWithArtist());
     child->setData(Type_Track, InternetModel::Role_Type);
@@ -784,6 +788,7 @@ void GroovesharkService::PopularSongsMonthRetrieved(QNetworkReply* reply) {
   reply->deleteLater();
   QVariantMap result = ExtractResult(reply);
   SongList songs = ExtractSongs(result);
+  Song::SortSongsListAlphabetically(&songs);
 
   app_->task_manager()->IncreaseTaskProgress(task_popular_id_, 50, 100);
   if (app_->task_manager()->GetTaskProgress(task_popular_id_) >= 100) {
@@ -816,6 +821,7 @@ void GroovesharkService::PopularSongsTodayRetrieved(QNetworkReply* reply) {
   reply->deleteLater();
   QVariantMap result = ExtractResult(reply);
   SongList songs = ExtractSongs(result);
+  Song::SortSongsListAlphabetically(&songs);
 
   app_->task_manager()->IncreaseTaskProgress(task_popular_id_, 50, 100);
   if (app_->task_manager()->GetTaskProgress(task_popular_id_) >= 100) {
@@ -1561,10 +1567,6 @@ QVariantMap GroovesharkService::ExtractResult(QNetworkReply* reply) {
   return result["result"].toMap();
 }
 
-int CompareSongsName(const Song& song1, const Song& song2) {
-  return song1.PrettyTitleWithArtist().localeAwareCompare(song2.PrettyTitleWithArtist()) < 0;
-}
-
 SongList GroovesharkService::ExtractSongs(const QVariantMap& result) {
   QVariantList result_songs = result["songs"].toList();
   SongList songs;
@@ -1572,7 +1574,6 @@ SongList GroovesharkService::ExtractSongs(const QVariantMap& result) {
     QVariantMap result_song = result_songs[i].toMap();
     songs << ExtractSong(result_song);
   }
-  qSort(songs.begin(), songs.end(), CompareSongsName);
   return songs;
 }
 
