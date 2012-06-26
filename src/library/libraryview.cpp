@@ -135,9 +135,15 @@ bool LibraryItemDelegate::helpEvent(QHelpEvent *event, QAbstractItemView *view,
       real_text = sizeHint(option, index);
       displayed_text = view->visualRect(index);
       is_elided = displayed_text.width() < real_text.width();
-      if(is_elided) {
+
+      if (is_elided) {
         QToolTip::showText(he->globalPos(), text, view);
-      } else { // in case that another text was previously displayed
+      } else if (index.data(Qt::ToolTipRole).isValid()) {
+        // If the item has a tooltip text, display it
+        QString tooltip_text = index.data(Qt::ToolTipRole).toString();
+        QToolTip::showText(he->globalPos(), tooltip_text, view);
+      } else {
+        // in case that another text was previously displayed
         QToolTip::hideText();
       }
       return true;
