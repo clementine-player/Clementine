@@ -584,7 +584,7 @@ void GroovesharkService::EnsureItemsCreated() {
     root_->appendRow(search_);
 
     QStandardItem* popular = new QStandardItem(QIcon(":/star-on.png"),
-                                                       tr("Popular songs"));
+                                               tr("Popular songs"));
     root_->appendRow(popular);
 
     popular_month_ = new QStandardItem(QIcon(":/star-on.png"), tr("Popular songs of the Month"));
