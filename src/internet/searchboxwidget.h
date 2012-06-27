@@ -15,8 +15,8 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef SEARCHFILTERWIDGET_H
-#define SEARCHFILTERWIDGET_H
+#ifndef SEARCHBOXWIDGET_H
+#define SEARCHBOXWIDGET_H
 
 #include <QWidget>
 
@@ -51,4 +51,4 @@ private:
   LineEditInterface* filter_;
 };
 
-#endif // SEARCHFILTERWIDGET_H
+#endif // SEARCHBOXWIDGET_H
