@@ -19,8 +19,8 @@
 #include "searchboxwidget.h"
 #include "ui_searchboxwidget.h"
 #include "ui/iconloader.h"
-#include "widgets/maclineedit.h"
 
+#include <QKeyEvent>
 #include <QMenu>
 
 SearchBoxWidget::SearchBoxWidget(InternetService* service)
@@ -41,17 +41,8 @@ SearchBoxWidget::SearchBoxWidget(InternetService* service)
                    tr("Configure %1...").arg(service_->name()),
                    service_, SLOT(ShowConfig()));
 
-#ifdef Q_OS_DARWIN
-  delete ui_->filter;
-  MacLineEdit* lineedit = new MacLineEdit(this);
-  ui_->horizontalLayout->insertWidget(1, lineedit);
-  filter_ = lineedit;
-#else
-  filter_ = ui_->filter;
-#endif
-
-  filter_->set_hint(QString("Search on %1").arg(service_->name()));
-  connect(filter_->widget(), SIGNAL(textChanged(QString)), SIGNAL(TextChanged(QString)));
+  //ui_->filter->setHint(QString("Search on %1").arg(service_->name()));
+  connect(ui_->filter, SIGNAL(textChanged(QString)), SIGNAL(TextChanged(QString)));
 }
 
 SearchBoxWidget::~SearchBoxWidget() {
@@ -66,7 +57,7 @@ void SearchBoxWidget::FocusOnFilter(QKeyEvent *event) {
 void SearchBoxWidget::keyReleaseEvent(QKeyEvent* e) {
   switch (e->key()) {
     case Qt::Key_Escape:
-      filter_->clear();
+      ui_->filter->clear();
       e->accept();
       break;
   }

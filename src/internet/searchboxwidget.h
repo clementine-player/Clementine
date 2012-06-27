@@ -21,7 +21,6 @@
 #include <QWidget>
 
 class InternetService;
-class LineEditInterface;
 class Ui_SearchBoxWidget;
 
 class QActionGroup;
@@ -47,8 +46,6 @@ private:
   InternetService* service_;
   Ui_SearchBoxWidget* ui_;
   QMenu* menu_;
-
-  LineEditInterface* filter_;
 };
 
 #endif // SEARCHBOXWIDGET_H
