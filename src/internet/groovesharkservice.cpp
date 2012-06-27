@@ -788,7 +788,6 @@ void GroovesharkService::PopularSongsMonthRetrieved(QNetworkReply* reply) {
   reply->deleteLater();
   QVariantMap result = ExtractResult(reply);
   SongList songs = ExtractSongs(result);
-  Song::SortSongsListAlphabetically(&songs);
 
   app_->task_manager()->IncreaseTaskProgress(task_popular_id_, 50, 100);
   if (app_->task_manager()->GetTaskProgress(task_popular_id_) >= 100) {
@@ -821,7 +820,6 @@ void GroovesharkService::PopularSongsTodayRetrieved(QNetworkReply* reply) {
   reply->deleteLater();
   QVariantMap result = ExtractResult(reply);
   SongList songs = ExtractSongs(result);
-  Song::SortSongsListAlphabetically(&songs);
 
   app_->task_manager()->IncreaseTaskProgress(task_popular_id_, 50, 100);
   if (app_->task_manager()->GetTaskProgress(task_popular_id_) >= 100) {
