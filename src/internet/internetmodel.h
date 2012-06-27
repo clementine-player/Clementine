@@ -85,6 +85,7 @@ public:
 
   enum Type {
     Type_Service = 1,
+    Type_Track,
     Type_UserPlaylist,
     Type_SmartPlaylist,
 

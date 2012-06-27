@@ -39,11 +39,6 @@ class GroovesharkService : public InternetService {
   GroovesharkService(Application* app, InternetModel *parent);
   ~GroovesharkService();
 
-  enum Type {
-    Type_SearchResults = InternetModel::TypeCount,
-    Type_Track
-  };
-
   enum Role {
     Role_UserPlaylistId = InternetModel::RoleCount,
     Role_PlaylistType

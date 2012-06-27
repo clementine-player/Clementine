@@ -23,6 +23,7 @@
 #include "ui/iconloader.h"
 
 #include <QMenu>
+#include <QStandardItem>
 
 InternetService::InternetService(const QString& name, Application* app,
                                  InternetModel* model, QObject* parent)
@@ -104,3 +105,14 @@ void InternetService::ReplacePlaylist() {
 void InternetService::OpenInNewPlaylist() {
   AddItemsToPlaylist(model()->selected_indexes(), AddMode_OpenInNew);
 }
+
+QStandardItem* InternetService::CreateSongItem(const Song& song) {
+    QStandardItem* item = new QStandardItem(song.PrettyTitleWithArtist());
+    item->setData(InternetModel::Type_Track, InternetModel::Role_Type);
+    item->setData(QVariant::fromValue(song), InternetModel::Role_SongMetadata);
+    item->setData(InternetModel::PlayBehaviour_SingleItem, InternetModel::Role_PlayBehaviour);
+    item->setData(song.url(), InternetModel::Role_Url);
+
+    return item;
+}
+

@@ -452,11 +452,7 @@ void SpotifyService::FillPlaylist(
     Song song;
     SongFromProtobuf(tracks.Get(i), &song);
 
-    QStandardItem* child = new QStandardItem(song.PrettyTitleWithArtist());
-    child->setData(Type_Track, InternetModel::Role_Type);
-    child->setData(QVariant::fromValue(song), InternetModel::Role_SongMetadata);
-    child->setData(InternetModel::PlayBehaviour_SingleItem, InternetModel::Role_PlayBehaviour);
-    child->setData(song.url(), InternetModel::Role_Url);
+    QStandardItem* child = CreateSongItem(song);
 
     item->appendRow(child);
   }

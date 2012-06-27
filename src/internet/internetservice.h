@@ -31,6 +31,7 @@
 class Application;
 class InternetModel;
 class LibraryFilterWidget;
+class QStandardItem;
 
 class InternetService : public QObject {
   Q_OBJECT
@@ -105,6 +106,10 @@ protected:
   void AddItemToPlaylist(const QModelIndex& index, AddMode add_mode);
   // Adds the 'indexes' elements to playlist using the 'add_mode' mode.
   void AddItemsToPlaylist(const QModelIndexList& indexes, AddMode add_mode);
+
+  // Convenient function for creating a item representing a song.
+  // Set some common properties (type=track, url, etc.)
+  QStandardItem* CreateSongItem(const Song& song);
 
 protected:
   Application* app_;

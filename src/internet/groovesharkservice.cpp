@@ -296,11 +296,7 @@ void GroovesharkService::SearchSongsFinished() {
 
   // Fill results list
   foreach (const Song& song, songs) {
-    QStandardItem* child = new QStandardItem(song.PrettyTitleWithArtist());
-    child->setData(Type_Track, InternetModel::Role_Type);
-    child->setData(QVariant::fromValue(song), InternetModel::Role_SongMetadata);
-    child->setData(InternetModel::PlayBehaviour_SingleItem, InternetModel::Role_PlayBehaviour);
-    child->setData(song.url(), InternetModel::Role_Url);
+    QStandardItem* child = CreateSongItem(song);
     search_->appendRow(child);
   }
 
@@ -496,7 +492,7 @@ void GroovesharkService::ShowContextMenu(const QPoint& global_pos) {
 
   // Check if we can display actions to get URL for sharing songs/playlists:
   // - share song
-  if (index.data(InternetModel::Role_Type).toInt() == Type_Track) {
+  if (index.data(InternetModel::Role_Type).toInt() == InternetModel::Type_Track) {
     display_share_song_url = true;
     current_song_id_ = ExtractSongId(index.data(InternetModel::Role_Url).toUrl());
   }
@@ -574,7 +570,6 @@ void GroovesharkService::EnsureItemsCreated() {
                                 tr("Search results"));
     search_->setToolTip(tr("Start typing something on the search box above to "
                            "fill this search results list"));
-    search_->setData(Type_SearchResults, InternetModel::Role_Type);
     search_->setData(InternetModel::PlayBehaviour_DoubleClickAction,
                      InternetModel::Role_PlayBehaviour);
     root_->appendRow(search_);
@@ -710,11 +705,7 @@ void GroovesharkService::PlaylistSongsRetrieved() {
   Song::SortSongsListAlphabetically(&songs);
 
   foreach (const Song& song, songs) {
-    QStandardItem* child = new QStandardItem(song.PrettyTitleWithArtist());
-    child->setData(Type_Track, InternetModel::Role_Type);
-    child->setData(QVariant::fromValue(song), InternetModel::Role_SongMetadata);
-    child->setData(InternetModel::PlayBehaviour_SingleItem, InternetModel::Role_PlayBehaviour);
-    child->setData(song.url(), InternetModel::Role_Url);
+    QStandardItem* child = CreateSongItem(song);
     child->setData(playlist_info.id_, Role_UserPlaylistId);
     child->setData(true, InternetModel::Role_CanBeModified);
 
@@ -753,11 +744,7 @@ void GroovesharkService::UserFavoritesRetrieved(QNetworkReply* reply, int task_i
   Song::SortSongsListAlphabetically(&songs);
 
   foreach (const Song& song, songs) {
-    QStandardItem* child = new QStandardItem(song.PrettyTitleWithArtist());
-    child->setData(Type_Track, InternetModel::Role_Type);
-    child->setData(QVariant::fromValue(song), InternetModel::Role_SongMetadata);
-    child->setData(InternetModel::PlayBehaviour_SingleItem, InternetModel::Role_PlayBehaviour);
-    child->setData(song.url(), InternetModel::Role_Url);
+    QStandardItem* child = CreateSongItem(song);
     child->setData(true, InternetModel::Role_CanBeModified);
 
     favorites_->appendRow(child);
@@ -794,12 +781,7 @@ void GroovesharkService::PopularSongsMonthRetrieved(QNetworkReply* reply) {
     return;
 
   foreach (const Song& song, songs) {
-    QStandardItem* child = new QStandardItem(song.PrettyTitleWithArtist());
-    child->setData(Type_Track, InternetModel::Role_Type);
-    child->setData(QVariant::fromValue(song), InternetModel::Role_SongMetadata);
-    child->setData(InternetModel::PlayBehaviour_SingleItem, InternetModel::Role_PlayBehaviour);
-    child->setData(song.url(), InternetModel::Role_Url);
-
+    QStandardItem* child = CreateSongItem(song);
     popular_month_->appendRow(child);
   }
 }
@@ -826,12 +808,7 @@ void GroovesharkService::PopularSongsTodayRetrieved(QNetworkReply* reply) {
     return;
 
   foreach (const Song& song, songs) {
-    QStandardItem* child = new QStandardItem(song.PrettyTitleWithArtist());
-    child->setData(Type_Track, InternetModel::Role_Type);
-    child->setData(QVariant::fromValue(song), InternetModel::Role_SongMetadata);
-    child->setData(InternetModel::PlayBehaviour_SingleItem, InternetModel::Role_PlayBehaviour);
-    child->setData(song.url(), InternetModel::Role_Url);
-
+    QStandardItem* child = CreateSongItem(song);
     popular_today_->appendRow(child);
   }
 }
