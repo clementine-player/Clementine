@@ -19,8 +19,8 @@
 #include "icecastfilterwidget.h"
 #include "ui_icecastfilterwidget.h"
 #include "ui/iconloader.h"
-#include "widgets/maclineedit.h"
 
+#include <QKeyEvent>
 #include <QMenu>
 #include <QSettings>
 #include <QSignalMapper>
@@ -50,15 +50,6 @@ IcecastFilterWidget::IcecastFilterWidget(QWidget *parent)
   ui_->options->setMenu(menu_);
 
   connect(sort_mode_mapper_, SIGNAL(mapped(int)), SLOT(SortModeChanged(int)));
-
-#ifdef Q_OS_DARWIN
-  delete ui_->filter;
-  MacLineEdit* lineedit = new MacLineEdit(this);
-  ui_->horizontalLayout->insertWidget(1, lineedit);
-  filter_ = lineedit;
-#else
-  filter_ = ui_->filter;
-#endif
 }
 
 void IcecastFilterWidget::AddAction(
@@ -79,7 +70,7 @@ void IcecastFilterWidget::FocusOnFilter(QKeyEvent *event) {
 
 void IcecastFilterWidget::SetIcecastModel(IcecastModel* model) {
   model_ = model;
-  connect(filter_->widget(), SIGNAL(textChanged(QString)),
+  connect(ui_->filter, SIGNAL(textChanged(QString)),
           model_, SLOT(SetFilterText(QString)));
 
   // Load settings
