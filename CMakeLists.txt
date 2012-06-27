@@ -375,6 +375,9 @@ add_subdirectory(3rdparty/libmygpo-qt)
 set(MYGPOQT_LIBRARIES mygpo-qt)
 set(MYGPOQT_INCLUDE_DIRS ${CMAKE_SOURCE_DIR}/3rdparty/libmygpo-qt/)
 
+# Qocoa
+add_subdirectory(3rdparty/qocoa)
+
 # Subdirectories
 add_subdirectory(src)
 if (WIN32)

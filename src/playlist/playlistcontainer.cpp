@@ -23,10 +23,10 @@
 #include "playlistparsers/playlistparser.h"
 #include "ui/iconloader.h"
 #include "widgets/didyoumean.h"
-#include "widgets/maclineedit.h"
 
 #include <QFileDialog>
 #include <QInputDialog>
+#include <QKeyEvent>
 #include <QLabel>
 #include <QMessageBox>
 #include <QSettings>
@@ -84,22 +84,11 @@ PlaylistContainer::PlaylistContainer(QWidget *parent)
   connect(ui_->tab_bar, SIGNAL(Save(int)), SLOT(SavePlaylist(int)));
 
   // Replace playlist search filter with native search box.
-#ifdef Q_OS_DARWIN
-  delete ui_->filter;
-  MacLineEdit* filter = new MacLineEdit(ui_->toolbar);
-  filter->setObjectName("filter");
-  ui_->horizontalLayout->addWidget(filter);
-  connect(filter, SIGNAL(textChanged(QString)), SLOT(UpdateFilter()));
-  filter->set_hint(tr("Playlist search"));
-  filter_ = filter;
-#else
-  filter_ = ui_->filter;
   connect(ui_->filter, SIGNAL(textChanged(QString)), SLOT(UpdateFilter()));
   connect(ui_->playlist, SIGNAL(FocusOnFilterSignal(QKeyEvent*)), SLOT(FocusOnFilter(QKeyEvent*)));
   ui_->filter->installEventFilter(this);
-#endif
 
-  did_you_mean_ = new DidYouMean(filter_->widget(), this);
+  did_you_mean_ = new DidYouMean(ui_->filter, this);
   connect(did_you_mean_, SIGNAL(Accepted(QString)), SLOT(DidYouMeanAccepted(QString)));
 }
 
@@ -187,7 +176,7 @@ void PlaylistContainer::SetViewModel(Playlist* playlist) {
   emit ViewSelectionModelChanged();
 
   // Update filter
-  filter_->set_text(playlist->proxy()->filterRegExp().pattern());
+  ui_->filter->setText(playlist->proxy()->filterRegExp().pattern());
 
   // Update the no matches label
   connect(playlist_->proxy(), SIGNAL(modelReset()), SLOT(UpdateNoMatchesLabel()));
@@ -220,8 +209,8 @@ void PlaylistContainer::SetViewModel(Playlist* playlist) {
   did_you_mean()->hide();
 
   // Implement special playlist behaviour
-  const SpecialPlaylistType* type = manager_->GetPlaylistType(playlist->special_type());
-  filter_->set_hint(type->search_hint_text(playlist));
+  //const SpecialPlaylistType* type = manager_->GetPlaylistType(playlist->special_type());
+  //ui_->filter->setHint(type->search_hint_text(playlist));
 }
 
 void PlaylistContainer::ActivePlaying() {
@@ -392,9 +381,9 @@ void PlaylistContainer::UpdateFilter() {
   did_you_mean()->hide();
 
   if (type->has_special_search_behaviour(playlist)) {
-    type->Search(filter_->text(), playlist);
+    type->Search(ui_->filter->text(), playlist);
   } else {
-    manager_->current()->proxy()->setFilterFixedString(filter_->text());
+    manager_->current()->proxy()->setFilterFixedString(ui_->filter->text());
     ui_->playlist->JumpToCurrentlyPlayingTrack();
   }
 
@@ -431,8 +420,8 @@ void PlaylistContainer::resizeEvent(QResizeEvent* e) {
 }
 
 void PlaylistContainer::FocusOnFilter(QKeyEvent *event) {
-  ui_->filter->set_focus();
-  QApplication::sendEvent(ui_->filter, event);
+  //ui_->filter->setFocus();
+  //QApplication::sendEvent(ui_->filter, event);
 }
 
 void PlaylistContainer::RepositionNoMatchesLabel(bool force) {
@@ -469,7 +458,7 @@ bool PlaylistContainer::eventFilter(QObject *objectWatched, QEvent *event) {
           QApplication::sendEvent(ui_->playlist, event);
           return true;
         case Qt::Key_Escape:
-          ui_->filter->LineEditInterface::clear();
+          ui_->filter->clear();
           return true;
         default:
           break;
@@ -480,7 +469,7 @@ bool PlaylistContainer::eventFilter(QObject *objectWatched, QEvent *event) {
 }
 
 void PlaylistContainer::DidYouMeanAccepted(const QString& text) {
-  filter_->set_text(text);
+  ui_->filter->setText(text);
 
   Playlist* playlist = manager_->current();
   SpecialPlaylistType* type = manager_->GetPlaylistType(playlist->special_type());

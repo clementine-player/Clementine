@@ -1058,6 +1058,7 @@ target_link_libraries(clementine_lib
   ${QTIOCOMPRESSOR_LIBRARIES}
   ${CMAKE_THREAD_LIBS_INIT}
   z
+  Qocoa
 )
 
 if(ENABLE_VISUALISATIONS)
