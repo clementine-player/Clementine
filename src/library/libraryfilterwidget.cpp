@@ -22,7 +22,6 @@
 #include "ui_libraryfilterwidget.h"
 #include "ui/iconloader.h"
 #include "ui/settingsdialog.h"
-#include "widgets/maclineedit.h"
 
 #include <QActionGroup>
 #include <QKeyEvent>
@@ -41,7 +40,7 @@ LibraryFilterWidget::LibraryFilterWidget(QWidget *parent)
     delay_behaviour_(DelayedOnLargeLibraries)
 {
   ui_->setupUi(this);
-  connect(ui_->filter, SIGNAL(returnPressed()), SIGNAL(ReturnPressed()));
+  //connect(ui_->filter, SIGNAL(returnPressed()), SIGNAL(ReturnPressed()));
   connect(filter_delay_, SIGNAL(timeout()), SLOT(FilterDelayTimeout()));
 
   filter_delay_->setInterval(kFilterDelay);
@@ -93,18 +92,7 @@ LibraryFilterWidget::LibraryFilterWidget(QWidget *parent)
   library_menu_->addSeparator();
   ui_->options->setMenu(library_menu_);
 
-#ifdef Q_OS_DARWIN
-  QString hint = ui_->filter->hint();
-  delete ui_->filter;
-  MacLineEdit* lineedit = new MacLineEdit(this);
-  ui_->horizontalLayout->insertWidget(1, lineedit);
-  filter_ = lineedit;
-  filter_->set_hint(hint);
-#else
-  filter_ = ui_->filter;
-#endif
-
-  connect(filter_->widget(), SIGNAL(textChanged(QString)), SLOT(FilterTextChanged(QString)));
+  connect(ui_->filter, SIGNAL(textChanged(QString)), SLOT(FilterTextChanged(QString)));
 }
 
 LibraryFilterWidget::~LibraryFilterWidget() {
@@ -144,7 +132,7 @@ QAction* LibraryFilterWidget::CreateGroupByAction(
 }
 
 void LibraryFilterWidget::FocusOnFilter(QKeyEvent *event) {
-  ui_->filter->set_focus();
+  ui_->filter->setFocus();
   QApplication::sendEvent(ui_->filter, event);
 }
 
@@ -214,12 +202,12 @@ void LibraryFilterWidget::GroupingChanged(const LibraryModel::Grouping& g) {
 }
 
 void LibraryFilterWidget::SetFilterHint(const QString& hint) {
-  filter_->set_hint(hint);
+  ui_->filter->setPlaceholderText(hint);
 }
 
 void LibraryFilterWidget::SetQueryMode(QueryOptions::QueryMode query_mode) {
-  filter_->clear();
-  filter_->set_enabled(query_mode == QueryOptions::QueryMode_All);
+  ui_->filter->clear();
+  ui_->filter->setEnabled(query_mode == QueryOptions::QueryMode_All);
 
   model_->SetFilterQueryMode(query_mode);
 }
@@ -249,7 +237,7 @@ void LibraryFilterWidget::keyReleaseEvent(QKeyEvent* e) {
       break;
 
     case Qt::Key_Escape:
-      filter_->clear();
+      ui_->filter->clear();
       e->accept();
       break;
   }
@@ -276,8 +264,8 @@ void LibraryFilterWidget::FilterTextChanged(const QString& text) {
 }
 
 void LibraryFilterWidget::FilterDelayTimeout() {
-  emit Filter(filter_->text());
+  emit Filter(ui_->filter->text());
   if (filter_applies_to_model_) {
-    model_->SetFilterText(filter_->text());
+    model_->SetFilterText(ui_->filter->text());
   }
 }

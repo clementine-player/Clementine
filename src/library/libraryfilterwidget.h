@@ -25,7 +25,6 @@
 #include "librarymodel.h"
 
 class GroupByDialog;
-class LineEditInterface;
 class SettingsDialog;
 class Ui_LibraryFilterWidget;
 
@@ -107,11 +106,6 @@ class LibraryFilterWidget : public QWidget {
   DelayBehaviour delay_behaviour_;
 
   QString settings_group_;
-
-  // Since on Mac ui_->filter is nonexistent and on other platforms
-  // filter_ == ui_->filter, make sure to always use this field and
-  // not the one in the ui_ object!
-  LineEditInterface* filter_;
 };
 
 #endif // LIBRARYFILTERWIDGET_H
