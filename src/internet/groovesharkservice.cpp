@@ -547,10 +547,6 @@ void GroovesharkService::EnsureMenuCreated() {
         tr("Get a URL to share this Grooveshark playlist"),
         this, SLOT(GetCurrentPlaylistUrlToShare()));
     context_menu_->addSeparator();
-    context_menu_->addAction(IconLoader::Load("edit-find"),
-                             tr("Search Grooveshark (opens a new tab)") + "...",
-                             this, SLOT(OpenSearchTab()));
-    context_menu_->addSeparator();
     context_menu_->addAction(IconLoader::Load("download"),
                              tr("Open %1 in browser").arg("grooveshark.com"),
                              this, SLOT(Homepage()));
@@ -997,11 +993,6 @@ void GroovesharkService::SongMarkedAsComplete() {
   if (!result["success"].toBool()) {
     qLog(Warning) << "Grooveshark markSongComplete failed";
   }
-}
-
-void GroovesharkService::OpenSearchTab() {
-  app_->playlist_manager()->New(tr("Search Grooveshark"), SongList(),
-                                          GroovesharkSearchPlaylistType::kName);
 }
 
 void GroovesharkService::ItemDoubleClicked(QStandardItem* item) {
