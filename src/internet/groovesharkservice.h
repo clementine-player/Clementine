@@ -153,7 +153,6 @@ class GroovesharkService : public InternetService {
   void UpdateTotalSongCount(int count);
 
   void SessionCreated();
-  void OpenSearchTab();
   void DoSearch();
   void SearchSongsFinished();
   void SimpleSearchFinished();
