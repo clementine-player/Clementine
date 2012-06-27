@@ -33,7 +33,6 @@ class AlbumCoverFetcher;
 class AlbumCoverSearcher;
 class Application;
 class LibraryBackend;
-class LineEditInterface;
 class SongMimeData;
 class Ui_CoverManager;
 
@@ -168,8 +167,6 @@ class AlbumCoverManager : public QMainWindow {
 
   QProgressBar* progress_bar_;
   int jobs_;
-
-  LineEditInterface* filter_;
 
   FRIEND_TEST(AlbumCoverManagerTest, HidesItemsWithCover);
   FRIEND_TEST(AlbumCoverManagerTest, HidesItemsWithoutCover);

@@ -31,7 +31,6 @@
 #include "library/sqlrow.h"
 #include "playlist/songmimedata.h"
 #include "widgets/forcescrollperpixel.h"
-#include "widgets/maclineedit.h"
 #include "ui/albumcoverchoicecontroller.h"
 
 #include <QActionGroup>
@@ -168,18 +167,6 @@ void AlbumCoverManager::Init() {
   connect(ui_->albums, SIGNAL(doubleClicked(QModelIndex)), SLOT(AlbumDoubleClicked(QModelIndex)));
   connect(ui_->action_add_to_playlist, SIGNAL(triggered()), SLOT(AddSelectedToPlaylist()));
   connect(ui_->action_load, SIGNAL(triggered()), SLOT(LoadSelectedToPlaylist()));
-
-  #ifdef Q_OS_DARWIN
-    MacLineEdit* lineedit = new MacLineEdit(ui_->filter->parentWidget());
-    lineedit->set_hint(ui_->filter->hint());
-    delete ui_->filter;
-    ui_->horizontalLayout->insertWidget(0, lineedit);
-    filter_ = lineedit;
-    connect(lineedit, SIGNAL(textChanged(QString)), SLOT(UpdateFilter()));
-    lineedit->show();
-  #else
-    filter_ = ui_->filter;
-  #endif
 
   // Restore settings
   QSettings s;
@@ -338,7 +325,7 @@ void AlbumCoverManager::CoverImageLoaded(quint64 id, const QImage &image) {
 }
 
 void AlbumCoverManager::UpdateFilter() {
-  const QString filter = filter_->text().toLower();
+  const QString filter = ui_->filter->text().toLower();
   const bool hide_with_covers = filter_without_covers_->isChecked();
   const bool hide_without_covers = filter_with_covers_->isChecked();
 

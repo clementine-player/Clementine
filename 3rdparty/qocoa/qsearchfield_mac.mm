@@ -116,6 +116,12 @@ void QSearchField::setPlaceholderText(const QString &text)
     [pool drain];
 }
 
+QString QSearchField::placeholderText() const {
+    Q_ASSERT(pimpl);
+    NSString* placeholder = [[pimpl->nsSearchField cell] placeholderString];
+    return toQString(placeholder);
+}
+
 void QSearchField::clear()
 {
     Q_ASSERT(pimpl);

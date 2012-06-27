@@ -12,6 +12,7 @@ public:
     explicit QSearchField(QWidget *parent);
 
     QString text() const;
+    QString placeholderText() const;
 
 public slots:
     void setText(const QString &text);
@@ -28,6 +29,8 @@ protected:
 private:
     friend class QSearchFieldPrivate;
     QPointer <QSearchFieldPrivate> pimpl;
+
+    Q_PROPERTY(QString placeholderText READ placeholderText WRITE setPlaceholderText);
 };
 
 #endif // QSEARCHFIELD_H

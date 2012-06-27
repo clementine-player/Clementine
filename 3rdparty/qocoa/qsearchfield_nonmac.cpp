@@ -102,6 +102,10 @@ void QSearchField::setPlaceholderText(const QString &text)
 #endif
 }
 
+void QSearchField::placeholderText() const {
+  return pimpl->lineEdit->placeholderText();
+}
+
 void QSearchField::clear()
 {
     Q_ASSERT(pimpl && pimpl->lineEdit);
