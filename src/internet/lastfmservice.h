@@ -26,10 +26,7 @@ class Track;
 #include <QtGlobal>
 uint qHash(const lastfm::Track& track);
 
-#include "fixlastfm.h"
-#include <lastfm/Audioscrobbler.h>
-#include <lastfm/Track.h>
-#include <lastfm/ws.h>
+#include "lastfmcompat.h"
 
 #include "internetmodel.h"
 #include "internetservice.h"
@@ -150,6 +147,7 @@ class LastFMService : public InternetService {
 
   void TunerTrackAvailable();
   void TunerError(lastfm::ws::Error error);
+  void ScrobblerStatus(int value);
 
   void AddArtistRadio();
   void AddTagRadio();

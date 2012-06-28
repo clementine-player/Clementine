@@ -744,6 +744,7 @@ optional_source(HAVE_LIBLASTFM
     covers/lastfmcoverprovider.cpp
     globalsearch/lastfmsearchprovider.cpp
     internet/fixlastfm.cpp
+    internet/lastfmcompat.cpp
     internet/lastfmservice.cpp
     internet/lastfmsettingspage.cpp
     internet/lastfmstationdialog.cpp
@@ -752,7 +753,6 @@ optional_source(HAVE_LIBLASTFM
     songinfo/echonesttags.cpp
     songinfo/lastfmtrackinfoprovider.cpp
     songinfo/tagwidget.cpp
-    suggesters/lastfmsuggester.cpp
   HEADERS
     covers/lastfmcoverprovider.h
     internet/lastfmservice.h
@@ -762,7 +762,6 @@ optional_source(HAVE_LIBLASTFM
     songinfo/echonesttags.h
     songinfo/lastfmtrackinfoprovider.h
     songinfo/tagwidget.h
-    suggesters/lastfmsuggester.h
   UI
     internet/lastfmsettingspage.ui
     internet/lastfmstationdialog.ui

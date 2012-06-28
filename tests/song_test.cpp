@@ -19,8 +19,7 @@
 #include "core/encoding.h"
 #include "core/song.h"
 #ifdef HAVE_LIBLASTFM
-#include "internet/fixlastfm.h"
-#include <lastfm/Track.h>
+  #include "internet/lastfmcompat.h"
 #endif
 
 #include "gmock/gmock.h"

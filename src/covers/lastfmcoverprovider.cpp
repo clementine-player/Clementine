@@ -18,10 +18,7 @@
 #include "albumcoverfetcher.h"
 #include "coverprovider.h"
 #include "lastfmcoverprovider.h"
-
-#include <lastfm/Artist.h>
-#include <lastfm/XmlQuery.h>
-#include <lastfm/ws.h>
+#include "internet/lastfmcompat.h"
 
 #include <QNetworkReply>
 
@@ -52,8 +49,8 @@ void LastFmCoverProvider::QueryFinished() {
 
   CoverSearchResults results;
 
-  lastfm::XmlQuery query;
-  if (query.parse(reply->readAll())) {
+  lastfm::XmlQuery query(lastfm::compat::EmptyXmlQuery());
+  if (lastfm::compat::ParseQuery(reply->readAll(), &query)) {
     // parse the list of search results
     QList<lastfm::XmlQuery> elements = query["results"]["albummatches"].children("album");
 

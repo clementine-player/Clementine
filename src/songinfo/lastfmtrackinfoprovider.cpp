@@ -19,10 +19,8 @@
 #include "songinfotextview.h"
 #include "songplaystats.h"
 #include "tagwidget.h"
+#include "internet/lastfmcompat.h"
 #include "ui/iconloader.h"
-
-#include <lastfm/ws.h>
-#include <lastfm/XmlQuery.h>
 
 void LastfmTrackInfoProvider::FetchInfo(int id, const Song& metadata) {
   QMap<QString, QString> params;
@@ -50,13 +48,13 @@ void LastfmTrackInfoProvider::RequestFinished() {
     return;
   }
 
-  lastfm::XmlQuery query;
-  if (query.parse(reply->readAll())) {
+  lastfm::XmlQuery query(lastfm::compat::EmptyXmlQuery());
+  if (lastfm::compat::ParseQuery(reply->readAll(), &query)) {
     GetPlayCounts(id, query);
     GetWiki(id, query);
     GetTags(id, query);
-
   }
+
   emit Finished(id);
 }
 

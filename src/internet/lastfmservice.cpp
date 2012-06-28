@@ -31,6 +31,8 @@
 #endif // QT_VERSION >= 0x040600
 
 #include "lastfmservice.h"
+
+#include "lastfmcompat.h"
 #include "lastfmstationdialog.h"
 #include "lastfmurlhandler.h"
 #include "internetmodel.h"
@@ -49,16 +51,14 @@
 
 #include <boost/scoped_ptr.hpp>
 
-#include <lastfm/Audioscrobbler.h>
-#include <lastfm/misc.h>
-#include <lastfm/RadioStation.h>
-#include <lastfm/ScrobbleCache.h>
-#include <lastfm/ScrobblePoint.h>
-#include <lastfm/ws.h>
-#include <lastfm/XmlQuery.h>
-
 #include <QMenu>
 #include <QSettings>
+
+#ifdef HAVE_LIBLASTFM1
+  #include <lastfm/RadioStation.h>
+#else
+  #include <lastfm/RadioStation>
+#endif
 
 using boost::scoped_ptr;
 using lastfm::XmlQuery;
@@ -316,8 +316,8 @@ void LastFMService::AuthenticateReplyFinished() {
   reply->deleteLater();
 
   // Parse the reply
-  lastfm::XmlQuery lfm;
-  if (lfm.parse(reply->readAll())) {
+  lastfm::XmlQuery lfm(lastfm::compat::EmptyXmlQuery());
+  if (lastfm::compat::ParseQuery(reply->readAll(), &lfm)) {
     lastfm::ws::Username = lfm["session"]["name"].text();
     lastfm::ws::SessionKey = lfm["session"]["key"].text();
     QString subscribed = lfm["session"]["subscriber"].text();
@@ -330,7 +330,6 @@ void LastFMService::AuthenticateReplyFinished() {
     settings.setValue("Session", lastfm::ws::SessionKey);
     settings.setValue("Subscriber", is_subscriber);
   } else {
-    qLog(Error) << lfm.parseError().message();
     emit AuthenticationComplete(false);
     return;
   }
@@ -358,9 +357,8 @@ void LastFMService::UpdateSubscriberStatusFinished() {
 
   bool is_subscriber = false;
 
-  lastfm::XmlQuery lfm;
-  if (lfm.parse(reply->readAll())) {
-    connection_problems_ = false;
+  lastfm::XmlQuery lfm(lastfm::compat::EmptyXmlQuery());
+  if (lastfm::compat::ParseQuery(reply->readAll(), &lfm, &connection_problems_)) {
     QString subscriber = lfm["user"]["subscriber"].text();
     is_subscriber = (subscriber.toInt() == 1);
 
@@ -368,9 +366,6 @@ void LastFMService::UpdateSubscriberStatusFinished() {
     settings.beginGroup(kSettingsGroup);
     settings.setValue("Subscriber", is_subscriber);
     qLog(Info) << lastfm::ws::Username << "Subscriber status:" << is_subscriber;
-  } else {
-    qLog(Error) << "Last.fm parse error: " << lfm.parseError().message();
-    connection_problems_ = lfm.parseError().enumValue() == lastfm::ws::MalformedResponse;
   }
 
   emit UpdatedSubscriberStatus(is_subscriber);
@@ -473,9 +468,26 @@ bool LastFMService::InitScrobbler() {
     scrobbler_ = new lastfm::Audioscrobbler(kAudioscrobblerClientId);
 
   //reemit the signal since the sender is private
+#ifdef HAVE_LIBLASTFM1
   connect(scrobbler_, SIGNAL(scrobblesSubmitted(QList<lastfm::Track>)), SIGNAL(ScrobbleSubmitted()));
   connect(scrobbler_, SIGNAL(nowPlayingError(int,QString)), SIGNAL(ScrobbleError(int)));
+#else
+  connect(scrobbler_, SIGNAL(status(int)), SIGNAL(ScrobblerStatus(int)));
+#endif
   return true;
+}
+
+void LastFMService::ScrobblerStatus(int value) {
+  switch (value) {
+  case 2:
+  case 3:
+    emit ScrobbleSubmitted();
+    break;
+
+  default:
+    emit ScrobbleError(value);
+    break;
+  }
 }
 
 lastfm::Track LastFMService::TrackFromSong(const Song &song) const {
@@ -502,7 +514,7 @@ void LastFMService::NowPlaying(const Song &song) {
   if (!last_track_.isNull() &&
       last_track_.source() == lastfm::Track::NonPersonalisedBroadcast) {
     const int duration_secs = last_track_.timestamp().secsTo(QDateTime::currentDateTime());
-    if (duration_secs >= lastfm::ScrobblePoint::scrobbleTimeMin()) {
+    if (duration_secs >= lastfm::compat::ScrobbleTimeMin()) {
       lastfm::MutableTrack mtrack(last_track_);
       mtrack.setDuration(duration_secs);
 
@@ -519,16 +531,18 @@ void LastFMService::NowPlaying(const Song &song) {
   already_scrobbled_ = false;
   last_track_ = mtrack;
 
-// TODO: validity was removed from liblastfm1 but might reappear, it should have
-// no impact as we get a different error when actually trying to scrobble.
-//   //check immediately if the song is valid
-//   Scrobble::Invalidity invalidity;
-//
-//   if (!lastfm::Scrobble(last_track_).isValid( &invalidity )) {
-//     //for now just notify this, we can also see the cause
-//     emit ScrobbleError(-1);
-//     return;
-//   }
+#ifndef HAVE_LIBLASTFM1
+  // Check immediately if the song is valid
+  Scrobble::Invalidity invalidity;
+  if (!lastfm::Scrobble(last_track_).isValid( &invalidity )) {
+    //for now just notify this, we can also see the cause
+    emit ScrobbleError(-1);
+    return;
+  }
+#else
+  // TODO: validity was removed from liblastfm1 but might reappear, it should have
+  // no impact as we get a different error when actually trying to scrobble.
+#endif
 
   scrobbler_->nowPlaying(mtrack);
 }
@@ -537,7 +551,7 @@ void LastFMService::Scrobble() {
   if (!InitScrobbler())
     return;
 
-  lastfm::ScrobbleCache cache(lastfm::ws::Username);
+  lastfm::compat::ScrobbleCache cache(lastfm::ws::Username);
   qLog(Debug) << "There are" << cache.tracks().count() << "tracks in the last.fm cache.";
   scrobbler_->cache(last_track_);
 
@@ -646,7 +660,7 @@ void LastFMService::RefreshFriends(bool force) {
     return;
   }
 
-  lastfm::User user;
+  lastfm::compat::AuthenticatedUser user;
   QNetworkReply* reply = user.getFriends();
   connect(reply, SIGNAL(finished()), SLOT(RefreshFriendsFinished()));
 }
@@ -655,7 +669,7 @@ void LastFMService::RefreshNeighbours() {
   if (!neighbours_list_ || !IsAuthenticated())
     return;
 
-  lastfm::User user;
+  lastfm::compat::AuthenticatedUser user;
   QNetworkReply* reply = user.getNeighbours();
   connect(reply, SIGNAL(finished()), SLOT(RefreshNeighboursFinished()));
 }
@@ -666,12 +680,7 @@ void LastFMService::RefreshFriendsFinished() {
     return;
 
   QList<lastfm::User> friends;
-
-  lastfm::XmlQuery lfm;
-  if (lfm.parse(reply->readAll())) {
-    friends = lastfm::UserList(lfm).users();
-  } else {
-    qLog(Error) << lfm.parseError().message();
+  if (!lastfm::compat::ParseUserList(reply, &friends)) {
     return;
   }
 
@@ -710,12 +719,7 @@ void LastFMService::RefreshNeighboursFinished() {
     return;
 
   QList<lastfm::User> neighbours;
-
-  lastfm::XmlQuery lfm;
-  if (lfm.parse(reply->readAll())) {
-    neighbours = lastfm::UserList(lfm).users();
-  } else {
-    qLog(Error) << lfm.parseError().message();
+  if (!lastfm::compat::ParseUserList(reply, &neighbours)) {
     return;
   }
 
@@ -866,8 +870,8 @@ void LastFMService::FetchMoreTracksFinished() {
   app_->task_manager()->SetTaskFinished(tune_task_id_);
   tune_task_id_ = 0;
 
-  XmlQuery query;
-  if (query.parse(reply->readAll())) {
+  lastfm::XmlQuery query(lastfm::compat::EmptyXmlQuery());
+  if (lastfm::compat::ParseQuery(reply->readAll(), &query)) {
     const XmlQuery& playlist = query["playlist"];
     foreach (const XmlQuery& q, playlist["trackList"].children("track")) {
       lastfm::MutableTrack t;
@@ -883,8 +887,7 @@ void LastFMService::FetchMoreTracksFinished() {
       playlist_ << t;
     }
   } else {
-      emit StreamError(tr("Couldn't load the last.fm radio station")
-                       .arg(query.parseError().message()));
+    emit StreamError(tr("Couldn't load the last.fm radio station"));
     return;
   }
 

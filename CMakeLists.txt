@@ -82,6 +82,11 @@ endif (WIN32)
 
 find_library(LASTFM_LIBRARIES lastfm)
 find_path(LASTFM_INCLUDE_DIRS lastfm/ws.h)
+find_path(LASTFM1_INCLUDE_DIRS lastfm/Track.h)
+
+if(LASTFM_INCLUDE_DIRS AND LASTFM1_INCLUDE_DIRS)
+  set(HAVE_LIBLASTFM1 ON)
+endif()
 
 if (APPLE)
   find_library(GROWL Growl)
