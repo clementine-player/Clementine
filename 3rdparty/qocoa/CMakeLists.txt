@@ -1,9 +1,3 @@
-project(Qocoa CXX)
-cmake_minimum_required(VERSION 2.8)
-
-find_package(Qt4 COMPONENTS QtMain QtCore QtGui REQUIRED)
-include(UseQt4)
-
 set(SOURCES)
 
 set(HEADERS
