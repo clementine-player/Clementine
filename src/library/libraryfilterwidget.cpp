@@ -40,7 +40,7 @@ LibraryFilterWidget::LibraryFilterWidget(QWidget *parent)
     delay_behaviour_(DelayedOnLargeLibraries)
 {
   ui_->setupUi(this);
-  //connect(ui_->filter, SIGNAL(returnPressed()), SIGNAL(ReturnPressed()));
+  connect(ui_->filter, SIGNAL(returnPressed()), SIGNAL(ReturnPressed()));
   connect(filter_delay_, SIGNAL(timeout()), SLOT(FilterDelayTimeout()));
 
   filter_delay_->setInterval(kFilterDelay);

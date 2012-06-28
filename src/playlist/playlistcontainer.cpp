@@ -209,8 +209,8 @@ void PlaylistContainer::SetViewModel(Playlist* playlist) {
   did_you_mean()->hide();
 
   // Implement special playlist behaviour
-  //const SpecialPlaylistType* type = manager_->GetPlaylistType(playlist->special_type());
-  //ui_->filter->setHint(type->search_hint_text(playlist));
+  const SpecialPlaylistType* type = manager_->GetPlaylistType(playlist->special_type());
+  ui_->filter->setPlaceholderText(type->search_hint_text(playlist));
 }
 
 void PlaylistContainer::ActivePlaying() {
@@ -420,8 +420,8 @@ void PlaylistContainer::resizeEvent(QResizeEvent* e) {
 }
 
 void PlaylistContainer::FocusOnFilter(QKeyEvent *event) {
-  //ui_->filter->setFocus();
-  //QApplication::sendEvent(ui_->filter, event);
+  ui_->filter->setFocus();
+  QApplication::sendEvent(ui_->filter, event);
 }
 
 void PlaylistContainer::RepositionNoMatchesLabel(bool force) {
