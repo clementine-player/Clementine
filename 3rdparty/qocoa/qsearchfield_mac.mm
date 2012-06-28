@@ -46,6 +46,12 @@ public:
             emit qSearchField->editingFinished();
     }
 
+    void returnPressed()
+    {
+        if (qSearchField)
+            emit qSearchField->returnPressed();
+    }
+
     QPointer<QSearchField> qSearchField;
     NSSearchField *nsSearchField;
 };
@@ -67,10 +73,12 @@ public:
 }
 
 -(void)controlTextDidEndEditing:(NSNotification*)notification {
-    Q_UNUSED(notification);
     // No Q_ASSERT here as it is called on destruction.
     if (pimpl)
         pimpl->textDidEndEditing();
+
+    if ([[[notification userInfo] objectForKey:@"NSTextMovement"] intValue] == NSReturnTextMovement)
+        pimpl->returnPressed();
 }
 @end
 

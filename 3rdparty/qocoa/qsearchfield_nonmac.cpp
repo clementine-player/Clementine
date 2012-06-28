@@ -55,6 +55,8 @@ QSearchField::QSearchField(QWidget *parent) : QWidget(parent)
             this, SIGNAL(textChanged(QString)));
     connect(lineEdit, SIGNAL(editingFinished()),
             this, SIGNAL(editingFinished()));
+    connect(lineEdit, SIGNAL(returnPressed()),
+            this, SIGNAL(returnPressed()));
     connect(lineEdit, SIGNAL(textChanged(QString)),
             this, SLOT(setText(QString)));
 
