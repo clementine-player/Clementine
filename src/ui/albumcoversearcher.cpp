@@ -137,7 +137,7 @@ void AlbumCoverSearcher::Init(AlbumCoverFetcher* fetcher) {
 QImage AlbumCoverSearcher::Exec(const QString& artist, const QString& album) {
   ui_->artist->setText(artist);
   ui_->album->setText(album);
-  ui_->artist->set_focus();
+  ui_->artist->setFocus();
 
   if(!artist.isEmpty() || !album.isEmpty()) {
     Search();

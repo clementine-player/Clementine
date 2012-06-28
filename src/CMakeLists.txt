@@ -804,7 +804,6 @@ optional_source(APPLE
     ui/globalshortcutgrabber.mm
     ui/macscreensaver.cpp
     ui/macsystemtrayicon.mm
-    widgets/maclineedit.mm
     widgets/osd_mac.mm
   HEADERS
     core/macfslistener.h
@@ -812,7 +811,6 @@ optional_source(APPLE
     devices/macdevicelister.h
     ui/macscreensaver.h
     ui/macsystemtrayicon.h
-    widgets/maclineedit.h
 )
 
 # Platform specific - Windows

@@ -23,8 +23,8 @@
       <number>0</number>
      </property>
      <item>
-      <widget class="LineEdit" name="search">
-       <property name="hint" stdset="0">
+      <widget class="QSearchField" name="search">
+       <property name="placeholderText" stdset="0">
         <string>Search for anything</string>
        </property>
       </widget>
@@ -208,9 +208,9 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>LineEdit</class>
-   <extends>QLineEdit</extends>
-   <header>widgets/lineedit.h</header>
+   <class>QSearchField</class>
+   <extends>QWidget</extends>
+   <header>3rdparty/qocoa/qsearchfield.h</header>
   </customwidget>
   <customwidget>
    <class>AutoExpandingTreeView</class>

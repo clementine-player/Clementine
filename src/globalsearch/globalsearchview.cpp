@@ -234,7 +234,7 @@ void GlobalSearchView::UpdateSuggestions() {
 }
 
 void GlobalSearchView::StartSearch(const QString& query) {
-  ui_->search->set_text(query);
+  ui_->search->setText(query);
   TextEdited(query);
 
   // Swap models immediately
@@ -394,7 +394,7 @@ bool GlobalSearchView::SearchKeyEvent(QKeyEvent* event) {
     break;
 
   case Qt::Key_Escape:
-    static_cast<LineEditInterface*>(ui_->search)->clear();
+    ui_->search->clear();
     break;
 
   default:
@@ -480,8 +480,8 @@ void GlobalSearchView::showEvent(QShowEvent* e) {
 }
 
 void GlobalSearchView::FocusSearchField() {
-  ui_->search->set_focus();
-  ui_->search->selectAll();
+  ui_->search->setFocus();
+  //ui_->search->selectAll();
 }
 
 void GlobalSearchView::hideEvent(QHideEvent* e) {
@@ -490,7 +490,7 @@ void GlobalSearchView::hideEvent(QHideEvent* e) {
 }
 
 void GlobalSearchView::FocusOnFilter(QKeyEvent* event) {
-  ui_->search->set_focus();
+  ui_->search->setFocus();
   QApplication::sendEvent(ui_->search, event);
 }
 

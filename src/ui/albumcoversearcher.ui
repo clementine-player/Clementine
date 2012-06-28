@@ -17,21 +17,21 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="LineEdit" name="artist">
+      <widget class="QSearchField" name="artist">
        <property name="toolTip">
         <string>Artist</string>
        </property>
-       <property name="hint" stdset="0">
+       <property name="placeholderText" stdset="0">
         <string>Artist</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="LineEdit" name="album">
+      <widget class="QSearchField" name="album">
        <property name="toolTip">
         <string>Album</string>
        </property>
-       <property name="hint" stdset="0">
+       <property name="placeholderText" stdset="0">
         <string>Album</string>
        </property>
       </widget>
@@ -81,9 +81,9 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>LineEdit</class>
-   <extends>QLineEdit</extends>
-   <header>widgets/lineedit.h</header>
+   <class>QSearchField</class>
+   <extends>QWidget</extends>
+   <header>3rdparty/qocoa/qsearchfield.h</header>
   </customwidget>
   <customwidget>
    <class>BusyIndicator</class>
