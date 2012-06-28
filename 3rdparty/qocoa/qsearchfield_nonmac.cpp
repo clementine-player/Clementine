@@ -127,7 +127,7 @@ void QSearchField::selectAll()
     if (!(pimpl && pimpl->lineEdit))
         return;
 
-    pimpl->lineEdit->clear();
+    pimpl->lineEdit->selectAll();
 }
 
 QString QSearchField::text() const
