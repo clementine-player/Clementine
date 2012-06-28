@@ -45,5 +45,7 @@ void SpotifySearchPlaylistType::Search(const QString& text, Playlist* playlist) 
 }
 
 void SpotifySearchPlaylistType::DidYouMeanClicked(const QString& text, Playlist* playlist) {
-  service_->Search(text, playlist, true);
+  // TODO Dead-code now: we will probably remove the entire class later, if the
+  // new search looks pretty enough for everyone
+  //service_->Search(text, playlist, true);
 }

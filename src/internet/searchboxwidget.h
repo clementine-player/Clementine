@@ -21,6 +21,7 @@
 #include <QWidget>
 
 class InternetService;
+class DidYouMean;
 class Ui_SearchBoxWidget;
 
 class QActionGroup;
@@ -32,6 +33,8 @@ class SearchBoxWidget : public QWidget {
 public:
   SearchBoxWidget(InternetService* service);
   ~SearchBoxWidget();
+
+  DidYouMean* did_you_mean() { return did_you_mean_; }
 
 signals:
   void TextChanged(const QString& text);
@@ -46,6 +49,7 @@ private:
   InternetService* service_;
   Ui_SearchBoxWidget* ui_;
   QMenu* menu_;
+  DidYouMean* did_you_mean_;
 };
 
 #endif // SEARCHBOXWIDGET_H

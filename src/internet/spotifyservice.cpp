@@ -8,6 +8,7 @@
 #include "core/application.h"
 #include "core/database.h"
 #include "core/logging.h"
+#include "core/mergedproxymodel.h"
 #include "core/player.h"
 #include "core/taskmanager.h"
 #include "core/timeconstants.h"
@@ -17,8 +18,10 @@
 #include "playlist/playlist.h"
 #include "playlist/playlistcontainer.h"
 #include "playlist/playlistmanager.h"
+#include "searchboxwidget.h"
 #include "widgets/didyoumean.h"
 #include "ui/iconloader.h"
+#include "widgets/didyoumean.h"
 
 #include <QCoreApplication>
 #include <QFile>
@@ -47,8 +50,8 @@ SpotifyService::SpotifyService(Application* app, InternetModel* parent)
       inbox_(NULL),
       toplist_(NULL),
       login_task_id_(0),
-      pending_search_playlist_(NULL),
       context_menu_(NULL),
+      search_box_(new SearchBoxWidget(this)),
       search_delay_(new QTimer(this)),
       login_state_(LoginState_OtherError),
       bitrate_(pb::spotify::Bitrate320k),
@@ -80,6 +83,7 @@ SpotifyService::SpotifyService(Application* app, InternetModel* parent)
   search_delay_->setInterval(kSearchDelayMsec);
   search_delay_->setSingleShot(true);
   connect(search_delay_, SIGNAL(timeout()), SLOT(DoSearch()));
+  connect(search_box_, SIGNAL(TextChanged(QString)), SLOT(Search(QString)));
 }
 
 SpotifyService::~SpotifyService() {
@@ -340,7 +344,9 @@ void SpotifyService::PlaylistsUpdated(const pb::spotify::Playlists& response) {
   // Create starred and inbox playlists if they're not here already
   if (!search_) {
     search_ = new QStandardItem(IconLoader::Load("edit-find"),
-                                tr("Search Spotify (opens a new tab)"));
+                                tr("Search results"));
+    search_->setToolTip(tr("Start typing something on the search box above to "
+                           "fill this search results list"));
     search_->setData(Type_SearchResults, InternetModel::Role_Type);
     search_->setData(InternetModel::PlayBehaviour_DoubleClickAction,
                              InternetModel::Role_PlayBehaviour);
@@ -494,6 +500,10 @@ PlaylistItem::Options SpotifyService::playlistitem_options() const {
   return PlaylistItem::PauseDisabled | PlaylistItem::SeekDisabled;
 }
 
+QWidget* SpotifyService::HeaderWidget() const {
+  return search_box_;
+}
+
 void SpotifyService::EnsureMenuCreated() {
   if (context_menu_)
     return;
@@ -501,8 +511,6 @@ void SpotifyService::EnsureMenuCreated() {
   context_menu_ = new QMenu;
 
   context_menu_->addActions(GetPlaylistActions());
-  context_menu_->addSeparator();
-  context_menu_->addAction(IconLoader::Load("edit-find"), tr("Search Spotify (opens a new tab)..."), this, SLOT(OpenSearchTab()));
   context_menu_->addSeparator();
   context_menu_->addAction(IconLoader::Load("configure"), tr("Configure Spotify..."), this, SLOT(ShowConfig()));
 
@@ -512,6 +520,11 @@ void SpotifyService::EnsureMenuCreated() {
       tr("Make playlist available offline"),
       this,
       SLOT(SyncPlaylist()));
+}
+
+void SpotifyService::ClearSearchResults() {
+  if (search_)
+    search_->removeRows(0, search_->rowCount());
 }
 
 void SpotifyService::SyncPlaylist() {
@@ -539,11 +552,18 @@ void SpotifyService::SyncPlaylist() {
   }
 }
 
-void SpotifyService::Search(const QString& text, Playlist* playlist, bool now) {
+void SpotifyService::Search(const QString& text, bool now) {
   EnsureServerCreated();
 
   pending_search_ = text;
-  pending_search_playlist_ = playlist;
+
+  // If there is no text (e.g. user cleared search box), we don't need to do a
+  // real query that will return nothing: we can clear the playlist now
+  if (text.isEmpty()) {
+    search_delay_->stop();
+    ClearSearchResults();
+    return;
+  }
 
   if (now) {
     search_delay_->stop();
@@ -577,13 +597,22 @@ void SpotifyService::SearchResults(const pb::spotify::SearchResponse& response) 
 
   qLog(Debug) << "Got" << songs.count() << "results";
 
-  pending_search_playlist_->Clear();
-  pending_search_playlist_->InsertSongs(songs);
+  ClearSearchResults();
 
-  const QString did_you_mean = QStringFromStdString(response.did_you_mean());
-  if (!did_you_mean.isEmpty()) {
-    app_->playlist_manager()->playlist_container()->did_you_mean()->Show(did_you_mean);
+  // Fill results list
+  foreach(const Song& song, songs) {
+    QStandardItem* child = CreateSongItem(song);
+    search_->appendRow(child);
   }
+
+  const QString did_you_mean_suggestion = QStringFromStdString(response.did_you_mean());
+  qLog(Debug) << "Did you mean suggestion: " << did_you_mean_suggestion;
+  if (!did_you_mean_suggestion.isEmpty()) {
+    search_box_->did_you_mean()->Show(did_you_mean_suggestion);
+  }
+
+  QModelIndex index = model()->merged_model()->mapFromSource(search_->index());
+  ScrollToIndex(index);
 }
 
 SpotifyServer* SpotifyService::server() const {
@@ -616,15 +645,7 @@ void SpotifyService::ShowContextMenu(const QPoint& global_pos) {
   context_menu_->popup(global_pos);
 }
 
-void SpotifyService::OpenSearchTab() {
-  app_->playlist_manager()->New(tr("Search Spotify"), SongList(),
-                                          SpotifySearchPlaylistType::kName);
-}
-
 void SpotifyService::ItemDoubleClicked(QStandardItem* item) {
-  if (item == search_) {
-    OpenSearchTab();
-  }
 }
 
 void SpotifyService::DropMimeData(const QMimeData* data, const QModelIndex& index) {

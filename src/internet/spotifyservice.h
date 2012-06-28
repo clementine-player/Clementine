@@ -10,7 +10,9 @@
 
 #include <boost/shared_ptr.hpp>
 
+class DidYouMean;
 class Playlist;
+class SearchBoxWidget;
 class SpotifyServer;
 
 class QMenu;
@@ -57,10 +59,10 @@ public:
   void ItemDoubleClicked(QStandardItem* item);
   void DropMimeData(const QMimeData* data, const QModelIndex& index);
   PlaylistItem::Options playlistitem_options() const;
+  QWidget* HeaderWidget() const;
 
   void Logout();
   void Login(const QString& username, const QString& password);
-  void Search(const QString& text, Playlist* playlist, bool now = false);
   Q_INVOKABLE void LoadImage(const QString& id);
 
   SpotifyServer* server() const;
@@ -80,6 +82,7 @@ signals:
   void ImageLoaded(const QString& id, const QImage& image);
 
 public slots:
+  void Search(const QString& text, bool now = false);
   void ShowConfig();
 
 private:
@@ -89,6 +92,7 @@ private:
       const google::protobuf::RepeatedPtrField<pb::spotify::Track>& tracks);
   void FillPlaylist(QStandardItem* item, const pb::spotify::LoadPlaylistResponse& response);
   void EnsureMenuCreated();
+  void ClearSearchResults();
 
   QStandardItem* PlaylistBySpotifyIndex(int index) const;
   bool DoPlaylistsDiffer(const pb::spotify::Playlists& response) const;
@@ -107,7 +111,6 @@ private slots:
   void SyncPlaylistProgress(const pb::spotify::SyncPlaylistProgress& progress);
   void ToplistLoaded(const pb::spotify::BrowseToplistResponse& response);
 
-  void OpenSearchTab();
   void DoSearch();
 
   void SyncPlaylist();
@@ -130,11 +133,12 @@ private:
 
   int login_task_id_;
   QString pending_search_;
-  Playlist* pending_search_playlist_;
 
   QMenu* context_menu_;
   QMenu* playlist_context_menu_;
   QAction* playlist_sync_action_;
+
+  SearchBoxWidget* search_box_;
 
   QTimer* search_delay_;
 
