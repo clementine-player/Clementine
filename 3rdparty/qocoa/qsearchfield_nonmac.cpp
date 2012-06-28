@@ -105,7 +105,11 @@ void QSearchField::setPlaceholderText(const QString &text)
 }
 
 QString QSearchField::placeholderText() const {
+#if QT_VERSION >= 0x040700
   return pimpl->lineEdit->placeholderText();
+#else
+  return QString();
+#endif
 }
 
 void QSearchField::clear()
