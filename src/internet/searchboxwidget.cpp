@@ -41,7 +41,7 @@ SearchBoxWidget::SearchBoxWidget(InternetService* service)
                    tr("Configure %1...").arg(service_->name()),
                    service_, SLOT(ShowConfig()));
 
-  //ui_->filter->setHint(QString("Search on %1").arg(service_->name()));
+  ui_->filter->setPlaceholderText(QString("Search on %1").arg(service_->name()));
   connect(ui_->filter, SIGNAL(textChanged(QString)), SIGNAL(TextChanged(QString)));
 }
 
