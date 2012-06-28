@@ -140,6 +140,15 @@ void QSearchField::clear()
     emit textChanged(QString());
 }
 
+void QSearchField::selectAll()
+{
+    Q_ASSERT(pimpl);
+    if (!pimpl)
+        return;
+
+    [pimpl->nsSearchField performSelector:@selector(selectText:)];
+}
+
 QString QSearchField::text() const
 {
     Q_ASSERT(pimpl);

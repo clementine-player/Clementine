@@ -481,7 +481,7 @@ void GlobalSearchView::showEvent(QShowEvent* e) {
 
 void GlobalSearchView::FocusSearchField() {
   ui_->search->setFocus();
-  //ui_->search->selectAll();
+  ui_->search->selectAll();
 }
 
 void GlobalSearchView::hideEvent(QHideEvent* e) {
