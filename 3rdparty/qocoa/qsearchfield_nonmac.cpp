@@ -104,7 +104,7 @@ void QSearchField::setPlaceholderText(const QString &text)
 #endif
 }
 
-void QSearchField::placeholderText() const {
+QString QSearchField::placeholderText() const {
   return pimpl->lineEdit->placeholderText();
 }
 
