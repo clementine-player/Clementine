@@ -58,6 +58,7 @@
 #  include "mtpdevice.h"
 #endif
 
+#include <QApplication>
 #include <QDir>
 #include <QIcon>
 #include <QMessageBox>
