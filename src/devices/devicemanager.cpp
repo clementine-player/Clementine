@@ -22,6 +22,7 @@
 #include "devicestatefiltermodel.h"
 #include "filesystemdevice.h"
 #include "core/application.h"
+#include "core/concurrentrun.h"
 #include "core/database.h"
 #include "core/logging.h"
 #include "core/musicstorage.h"
@@ -64,6 +65,9 @@
 #include <QPushButton>
 #include <QSortFilterProxyModel>
 #include <QUrl>
+
+#include <tr1/functional>
+using std::tr1::bind;
 
 const int DeviceManager::kDeviceIconSize = 32;
 const int DeviceManager::kDeviceIconOverlaySize = 16;
@@ -179,12 +183,9 @@ DeviceManager::DeviceManager(Application* app, QObject *parent)
   backend_->moveToThread(app_->database()->thread());
   backend_->Init(app_->database());
 
-  DeviceDatabaseBackend::DeviceList devices = backend_->GetAllDevices();
-  foreach (const DeviceDatabaseBackend::Device& device, devices) {
-    DeviceInfo info;
-    info.InitFromDb(device);
-    devices_ << info;
-  }
+  // This reads from the database and contends on the database mutex, which can
+  // be very slow on startup.
+  ConcurrentRun::Run(&thread_pool_, bind(&DeviceManager::LoadAllDevices, this));
 
   // This proxy model only shows connected devices
   connected_devices_model_ = new DeviceStateFilterModel(this);
@@ -234,6 +235,16 @@ DeviceManager::~DeviceManager() {
   }
 
   backend_->deleteLater();
+}
+
+void DeviceManager::LoadAllDevices() {
+  Q_ASSERT(QThread::currentThread() != qApp->thread());
+  DeviceDatabaseBackend::DeviceList devices = backend_->GetAllDevices();
+  foreach (const DeviceDatabaseBackend::Device& device, devices) {
+    DeviceInfo info;
+    info.InitFromDb(device);
+    devices_ << info;
+  }
 }
 
 int DeviceManager::rowCount(const QModelIndex&) const {

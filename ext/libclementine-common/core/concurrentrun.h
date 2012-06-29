@@ -72,6 +72,22 @@ class ThreadFunctorBase : public QFutureInterface<ReturnType>, public QRunnable 
   ReturnType result_;
 };
 
+// Use bool as a placeholder result.
+class ThreadFunctorVoid : public ThreadFunctorBase<bool> {
+ public:
+  ThreadFunctorVoid(std::tr1::function<void ()> function)
+    : function_(function)
+  { }
+
+  void run() {
+    function_();
+    ThreadFunctorBase<bool>::End();
+  }
+
+ private:
+  std::tr1::function<void ()> function_;
+};
+
 template<typename ReturnType, typename Arg>
 class ThreadFunctor1 : public ThreadFunctorBase<ReturnType> {
 public:
@@ -113,6 +129,9 @@ private:
 };
 
 namespace ConcurrentRun {
+  void Run(
+      QThreadPool* threadpool,
+      std::tr1::function<void ()> function);
 
   template<typename ReturnType, typename Arg>
   QFuture<ReturnType> Run(

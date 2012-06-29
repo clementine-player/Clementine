@@ -5,6 +5,7 @@ include_directories(${CMAKE_SOURCE_DIR}/src)
 
 set(SOURCES
   core/closure.cpp
+  core/concurrentrun.cpp
   core/encoding.cpp
   core/logging.cpp
   core/messagehandler.cpp

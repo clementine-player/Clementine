@@ -23,6 +23,7 @@
 
 #include <QAbstractListModel>
 #include <QIcon>
+#include <QThreadPool>
 
 #include <boost/shared_ptr.hpp>
 
@@ -104,6 +105,7 @@ private slots:
   void DeviceTaskStarted(int id);
   void TasksChanged();
   void DeviceSongCountUpdated(int count);
+  void LoadAllDevices();
 
 private:
   // Devices can be in three different states:
@@ -176,6 +178,8 @@ private:
 
   // Map of task ID to device index
   QMap<int, QPersistentModelIndex> active_tasks_;
+
+  QThreadPool thread_pool_;
 };
 
 
