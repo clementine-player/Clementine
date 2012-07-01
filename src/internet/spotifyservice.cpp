@@ -609,6 +609,9 @@ void SpotifyService::SearchResults(const pb::spotify::SearchResponse& response) 
   qLog(Debug) << "Did you mean suggestion: " << did_you_mean_suggestion;
   if (!did_you_mean_suggestion.isEmpty()) {
     search_box_->did_you_mean()->Show(did_you_mean_suggestion);
+  } else {
+    // In case something else was previously displayed
+    search_box_->did_you_mean()->hide();
   }
 
   QModelIndex index = model()->merged_model()->mapFromSource(search_->index());

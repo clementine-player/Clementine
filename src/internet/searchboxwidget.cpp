@@ -45,9 +45,6 @@ SearchBoxWidget::SearchBoxWidget(InternetService* service)
   ui_->filter->setPlaceholderText(QString("Search on %1").arg(service_->name()));
   connect(ui_->filter, SIGNAL(textChanged(QString)), SIGNAL(TextChanged(QString)));
 
-  // FIXME: the "Did you mean" suggestion is displayed above the search box,
-  // but below the internet services tree, which makes it fairly unusuable for
-  // now :(
   did_you_mean_ = new DidYouMean(ui_->filter, this);
   connect(did_you_mean_, SIGNAL(Accepted(QString)),
           ui_->filter, SLOT(setText(QString)));
