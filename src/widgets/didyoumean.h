@@ -59,7 +59,7 @@ private:
   QString did_you_mean_;
   QString press_enter_;
 
-  // Size of the text to display, according to QFont above
+  // Size of the text to display, according to QFonts above.
   // Stored here to avoid to recompute them each time
   int did_you_mean_size_;
   int press_enter_size_;

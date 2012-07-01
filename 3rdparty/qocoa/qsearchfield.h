@@ -27,6 +27,7 @@ signals:
 
 protected:
     void resizeEvent(QResizeEvent*);
+    bool eventFilter(QObject*, QEvent*);
 
 private:
     friend class QSearchFieldPrivate;

@@ -22,6 +22,8 @@ THE SOFTWARE.
 
 #include "qsearchfield.h"
 
+#include <QApplication>
+#include <QEvent>
 #include <QLineEdit>
 #include <QVBoxLayout>
 #include <QToolButton>
@@ -79,6 +81,8 @@ QSearchField::QSearchField(QWidget *parent) : QWidget(parent)
     QVBoxLayout *layout = new QVBoxLayout(this);
     layout->setMargin(0);
     layout->addWidget(lineEdit);
+
+    lineEdit->installEventFilter(this);
 }
 
 void QSearchField::setText(const QString &text)
@@ -149,4 +153,19 @@ void QSearchField::resizeEvent(QResizeEvent *resizeEvent)
     const int x = width() - pimpl->clearButtonPaddedWidth();
     const int y = (height() - pimpl->clearButton->height())/2;
     pimpl->clearButton->move(x, y);
+}
+
+bool QSearchField::eventFilter(QObject *o, QEvent *e)
+{
+    if (pimpl && pimpl->lineEdit && o == pimpl->lineEdit) {
+        // Forward some lineEdit events to QSearchField (only those we need for
+        // now, but some might be added later if needed)
+        switch (e->type()) {
+            case QEvent::FocusIn:
+            case QEvent::FocusOut:
+                QApplication::sendEvent(this, e);
+            break;
+        }
+    }
+    QWidget::eventFilter(o, e);
 }

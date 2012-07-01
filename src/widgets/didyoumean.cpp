@@ -93,8 +93,6 @@ bool DidYouMean::eventFilter(QObject* object, QEvent* event) {
 
       break;
 
-    // FIXME: FocusOut doesn't work with QSearchField, which is used as buddy
-    // in Spotify Service :(
     case QEvent::FocusOut:
     case QEvent::WindowDeactivate:
       hide();
