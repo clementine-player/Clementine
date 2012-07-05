@@ -199,7 +199,6 @@ option(ENABLE_LIBLASTFM "Use liblastfm for fetching song info, scrobbling and ra
 option(ENABLE_BREAKPAD "Enable crash reporting" OFF)
 option(ENABLE_SPOTIFY_BLOB "Build the spotify non-GPL binary" ON)
 option(ENABLE_SPOTIFY "Enable spotify support" ON)
-option(ENABLE_PLASMARUNNER "Enable plasma krunner global search" OFF)
 option(ENABLE_MOODBAR "Enable moodbar" ON)
 
 if(WIN32)
@@ -421,17 +420,6 @@ if(HAVE_MOODBAR)
   add_subdirectory(gst/moodbar)
 endif()
 
-# This goes after everything else because KDE fucks everything else up with its
-# cmake includes.
-find_package(KDE4 4.3.60)
-if(KDE4_PLASMA_LIBS AND ENABLE_PLASMARUNNER)
-  set(HAVE_PLASMARUNNER ON)
-endif(KDE4_PLASMA_LIBS AND ENABLE_PLASMARUNNER)
-
-if(HAVE_PLASMARUNNER)
-  add_subdirectory(plasmarunner)
-endif(HAVE_PLASMARUNNER)
-
 # Uninstall support
 configure_file(
   "${CMAKE_CURRENT_SOURCE_DIR}/cmake_uninstall.cmake.in"
@@ -457,6 +445,5 @@ summary_add("Spotify support: core code" HAVE_SPOTIFY)
 summary_add("Spotify support: non-GPL binary helper" HAVE_SPOTIFY_BLOB)
 summary_add("Visualisations" ENABLE_VISUALISATIONS)
 summary_add("Wiimote support" HAVE_WIIMOTEDEV)
-summary_add("(KDE) Plasma global search" HAVE_PLASMARUNNER)
 summary_add("(Mac OS X) Sparkle integration" HAVE_SPARKLE)
 summary_show()
