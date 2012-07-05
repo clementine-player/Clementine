@@ -257,6 +257,10 @@ void PlaylistManager::ShuffleCurrent() {
   current()->Shuffle();
 }
 
+void PlaylistManager::RemoveDuplicatesCurrent() {
+  current()->RemoveDuplicateSongs();
+}
+
 void PlaylistManager::SetActivePlaying() {
   active()->Playing();
 }

@@ -280,6 +280,7 @@ class Playlist : public QAbstractListModel {
   void UpdateItems(const SongList& songs);
 
   void Clear();
+  void RemoveDuplicateSongs();
   void Shuffle();
 
   void ShuffleModeChanged(PlaylistSequence::ShuffleMode mode);

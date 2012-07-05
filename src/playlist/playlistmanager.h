@@ -96,6 +96,7 @@ public slots:
   // Convenience slots that defer to either current() or active()
   virtual void ClearCurrent() = 0;
   virtual void ShuffleCurrent() = 0;
+  virtual void RemoveDuplicatesCurrent() = 0;
   virtual void SetActivePlaying() = 0;
   virtual void SetActivePaused() = 0;
   virtual void SetActiveStopped() = 0;
@@ -191,6 +192,7 @@ public slots:
   // Convenience slots that defer to either current() or active()
   void ClearCurrent();
   void ShuffleCurrent();
+  void RemoveDuplicatesCurrent();
   void SetActiveStreamMetadata(const QUrl& url, const Song& song);
   // Rate current song using 0.0 - 1.0 scale.
   void RateCurrentSong(double rating);

@@ -1906,6 +1906,25 @@ void Playlist::RemoveDeletedSongs() {
   removeRows(rows_to_remove);
 }
 
+void Playlist::RemoveDuplicateSongs() {
+  QList<int> rows_to_remove;
+  QSet<QUrl> filenames;
+
+  for (int row = 0; row < items_.count(); ++row) {
+    PlaylistItemPtr item = items_[row];
+    Song song = item->Metadata();
+
+    if (filenames.contains(song.url())) {
+      rows_to_remove.append(row);
+    } else {
+      filenames.insert(song.url());
+    }
+  }
+
+  removeRows(rows_to_remove);
+}
+
+
 bool Playlist::ApplyValidityOnCurrentSong(const QUrl& url, bool valid) {
   PlaylistItemPtr current = current_item();
 

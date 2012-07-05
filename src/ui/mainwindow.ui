@@ -457,6 +457,7 @@
     <addaction name="action_clear_playlist"/>
     <addaction name="action_shuffle"/>
     <addaction name="separator"/>
+    <addaction name="action_remove_duplicates"/>
    </widget>
    <widget class="QMenu" name="menu_help">
     <property name="title">
@@ -846,6 +847,11 @@
    </property>
    <property name="text">
     <string>Add podcast...</string>
+   </property>
+  </action>
+  <action name="action_remove_duplicates">
+   <property name="text">
+    <string>Remove duplicates</string>
    </property>
   </action>
  </widget>
