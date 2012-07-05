@@ -167,5 +167,5 @@ bool QSearchField::eventFilter(QObject *o, QEvent *e)
             break;
         }
     }
-    QWidget::eventFilter(o, e);
+    return QWidget::eventFilter(o, e);
 }

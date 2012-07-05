@@ -162,3 +162,8 @@ void QSearchField::resizeEvent(QResizeEvent *resizeEvent)
 {
     QWidget::resizeEvent(resizeEvent);
 }
+
+bool QSearchField::eventFilter(QObject *o, QEvent *e)
+{
+    return QWidget::eventFilter(o, e);
+}
