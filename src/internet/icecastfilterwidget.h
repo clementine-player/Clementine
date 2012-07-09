@@ -22,6 +22,8 @@
 
 #include <QWidget>
 
+#include "widgets/lineedit.h"
+
 class LineEditInterface;
 class Ui_IcecastFilterWidget;
 

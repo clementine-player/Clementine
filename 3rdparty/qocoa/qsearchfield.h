@@ -3,6 +3,18 @@
 
 #include <QWidget>
 #include <QPointer>
+#include <QtGlobal>
+
+#ifndef Q_OS_MAC
+
+// Currently the old LineEdit is better than the current qsearchfield_nonmac
+// IMHO: add this (ugly) hack to force non Mac systems to use the old LineEdit.
+// TODO: Fix this in a better way (improve qsearchfield_nonmac definitely?)
+
+class LineEdit;
+typedef LineEdit QSearchField;
+
+#else // Q_OS_MAC
 
 class QSearchFieldPrivate;
 class QSearchField : public QWidget
@@ -35,5 +47,7 @@ private:
 
     Q_PROPERTY(QString placeholderText READ placeholderText WRITE setPlaceholderText);
 };
+
+#endif // Q_OS_MAC
 
 #endif // QSEARCHFIELD_H

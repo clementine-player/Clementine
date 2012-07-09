@@ -20,6 +20,8 @@
 
 #include <QWidget>
 
+#include "widgets/lineedit.h"
+
 class InternetService;
 class DidYouMean;
 class Ui_SearchBoxWidget;

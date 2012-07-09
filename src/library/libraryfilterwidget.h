@@ -23,6 +23,7 @@
 #include <boost/scoped_ptr.hpp>
 
 #include "librarymodel.h"
+#include "widgets/lineedit.h"
 
 class GroupByDialog;
 class SettingsDialog;
