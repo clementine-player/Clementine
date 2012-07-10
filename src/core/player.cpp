@@ -345,8 +345,16 @@ void Player::CurrentMetadataChanged(const Song& metadata) {
 }
 
 void Player::SeekTo(int seconds) {
-  qint64 nanosec = qBound(0ll, qint64(seconds) * kNsecPerSec,
-                          engine_->length_nanosec());
+  const qint64 length_nanosec = engine_->length_nanosec();
+  
+  // If the length is 0 then either there is no song playing, or the song isn't
+  // seekable.
+  if (length_nanosec == 0) {
+    return;
+  }
+  
+  const qint64 nanosec = qBound(0ll, qint64(seconds) * kNsecPerSec,
+                                length_nanosec);
   engine_->Seek(nanosec);
 
   // If we seek the track we don't want to submit it to last.fm
