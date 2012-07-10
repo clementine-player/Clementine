@@ -27,7 +27,6 @@
 #include "core/song.h"
 #include "covers/albumcoverloaderoptions.h"
 #include "covers/coversearchstatistics.h"
-#include "widgets/lineedit.h"
 
 class AlbumCoverChoiceController;
 class AlbumCoverFetcher;

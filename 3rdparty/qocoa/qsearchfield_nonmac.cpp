@@ -32,9 +32,6 @@ THE SOFTWARE.
 #include <QDir>
 #include <QDebug>
 
-#if 0
-// All the code below isn't used currently (see qsearchfield.h)
-
 class QSearchFieldPrivate : public QObject
 {
 public:
@@ -172,5 +169,3 @@ bool QSearchField::eventFilter(QObject *o, QEvent *e)
     }
     return QWidget::eventFilter(o, e);
 }
-
-#endif // 0
