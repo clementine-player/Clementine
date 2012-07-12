@@ -160,6 +160,7 @@ set(SOURCES
   internet/digitallyimportedsettingspage.cpp
   internet/digitallyimportedurlhandler.cpp
   internet/geolocator.cpp
+  internet/googledriveservice.cpp
   internet/groovesharkradio.cpp
   internet/groovesharksearchplaylisttype.cpp
   internet/groovesharkservice.cpp
@@ -182,6 +183,7 @@ set(SOURCES
   internet/magnatunesettingspage.cpp
   internet/magnatuneservice.cpp
   internet/magnatuneurlhandler.cpp
+  internet/oauthenticator.cpp
   internet/savedradio.cpp
   internet/searchboxwidget.cpp
   internet/somafmservice.cpp
@@ -431,6 +433,7 @@ set(HEADERS
   internet/digitallyimportedservicebase.h
   internet/digitallyimportedsettingspage.h
   internet/geolocator.h
+  internet/googledriveservice.h
   internet/groovesharkservice.h
   internet/groovesharksettingspage.h
   internet/groovesharkurlhandler.h
@@ -449,6 +452,7 @@ set(HEADERS
   internet/magnatunedownloaddialog.h
   internet/magnatunesettingspage.h
   internet/magnatuneservice.h
+  internet/oauthenticator.h
   internet/savedradio.h
   internet/searchboxwidget.h
   internet/somafmservice.h
