@@ -420,15 +420,21 @@ bool SpotifyService::DoPlaylistsDiffer(const pb::spotify::Playlists& response) c
 }
 
 void SpotifyService::InboxLoaded(const pb::spotify::LoadPlaylistResponse& response) {
-  FillPlaylist(inbox_, response);
+  if (inbox_) {
+    FillPlaylist(inbox_, response);
+  }
 }
 
 void SpotifyService::StarredLoaded(const pb::spotify::LoadPlaylistResponse& response) {
-  FillPlaylist(starred_, response);
+  if (starred_) {
+    FillPlaylist(starred_, response);
+  }
 }
 
 void SpotifyService::ToplistLoaded(const pb::spotify::BrowseToplistResponse& response) {
-  FillPlaylist(toplist_, response.track());
+  if (toplist_) {
+    FillPlaylist(toplist_, response.track());
+  }
 }
 
 QStandardItem* SpotifyService::PlaylistBySpotifyIndex(int index) const {

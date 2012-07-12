@@ -33,6 +33,7 @@ public:
 
   void SearchAsync(int id, const QString& query);
   void LoadArtAsync(int id, const Result& result);
+  QStringList GetSuggestions(int count);
 
   bool IsLoggedIn();
   void ShowConfig();
@@ -41,9 +42,15 @@ private slots:
   void ServerDestroyed();
   void SearchFinishedSlot(const pb::spotify::SearchResponse& response);
   void ArtLoadedSlot(const QString& id, const QImage& image);
+  void SuggestionsLoaded(const pb::spotify::LoadPlaylistResponse& response);
+  void SuggestionsLoaded(const pb::spotify::BrowseToplistResponse& response);
 
 private:
   SpotifyServer* server();
+
+  void LoadSuggestions();
+  void AddSuggestionFromTrack(const pb::spotify::Track& track);
+  void AddSuggestionFromAlbum(const pb::spotify::Album& album);
 
 private:
   SpotifyServer* server_;
@@ -52,6 +59,8 @@ private:
   QMap<QString, PendingState> queries_;
   QMap<QString, int> pending_art_;
   QMap<QString, int> pending_tracks_;
+
+  QSet<QString> suggestions_;
 };
 
 #endif // SPOTIFYSEARCHPROVIDER_H

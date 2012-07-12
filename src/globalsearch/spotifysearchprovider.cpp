@@ -16,6 +16,12 @@
 */
 
 #include "spotifysearchprovider.h"
+
+#include <ctime>
+
+#include <boost/random/mersenne_twister.hpp>
+#include <boost/random/uniform_int_distribution.hpp>
+
 #include "core/logging.h"
 #include "internet/internetmodel.h"
 #include "internet/spotifyserver.h"
@@ -29,7 +35,7 @@ SpotifySearchProvider::SpotifySearchProvider(Application* app, QObject* parent)
 {
   Init("Spotify", "spotify", QIcon(":icons/32x32/spotify.png"),
        WantsDelayedQueries | WantsSerialisedArtQueries | ArtIsProbablyRemote |
-       CanShowConfig);
+       CanShowConfig | CanGiveSuggestions);
 }
 
 SpotifyServer* SpotifySearchProvider::server() {
@@ -48,6 +54,10 @@ SpotifyServer* SpotifySearchProvider::server() {
   connect(server_, SIGNAL(ImageLoaded(QString,QImage)),
           SLOT(ArtLoadedSlot(QString,QImage)));
   connect(server_, SIGNAL(destroyed()), SLOT(ServerDestroyed()));
+  connect(server_, SIGNAL(StarredLoaded(pb::spotify::LoadPlaylistResponse)),
+          SLOT(SuggestionsLoaded(pb::spotify::LoadPlaylistResponse)));
+  connect(server_, SIGNAL(ToplistBrowseResults(pb::spotify::BrowseToplistResponse)),
+          SLOT(SuggestionsLoaded(pb::spotify::BrowseToplistResponse)));
 
   return server_;
 }
@@ -142,4 +152,73 @@ void SpotifySearchProvider::ShowConfig() {
   if (service_) {
     return service_->ShowConfig();
   }
+}
+
+void SpotifySearchProvider::AddSuggestionFromTrack(
+    const pb::spotify::Track& track) {
+  if (!track.title().empty()) {
+    suggestions_.insert(QString::fromUtf8(track.title().c_str()));
+  }
+  for (int j = 0; j < track.artist_size(); ++j) {
+    if (!track.artist(j).empty()) {
+      suggestions_.insert(QString::fromUtf8(track.artist(j).c_str()));
+    }
+  }
+  if (!track.album().empty()) {
+    suggestions_.insert(QString::fromUtf8(track.album().c_str()));
+  }
+}
+
+void SpotifySearchProvider::AddSuggestionFromAlbum(
+    const pb::spotify::Album& album) {
+  AddSuggestionFromTrack(album.metadata());
+  for (int i = 0; i < album.track_size(); ++i) {
+    AddSuggestionFromTrack(album.track(i));
+  }
+}
+
+void SpotifySearchProvider::SuggestionsLoaded(
+    const pb::spotify::LoadPlaylistResponse& playlist) {
+  for (int i = 0; i < playlist.track_size(); ++i) {
+    AddSuggestionFromTrack(playlist.track(i));
+  }
+}
+
+void SpotifySearchProvider::SuggestionsLoaded(
+    const pb::spotify::BrowseToplistResponse& response) {
+  for (int i = 0; i < response.track_size(); ++i) {
+    AddSuggestionFromTrack(response.track(i));
+  }
+  for (int i = 0; i < response.album_size(); ++i) {
+    AddSuggestionFromAlbum(response.album(i));
+  }
+}
+
+void SpotifySearchProvider::LoadSuggestions() {
+  if (!server()) {
+    return;
+  }
+  server()->LoadStarred();
+  server()->LoadToplist();
+}
+
+QStringList SpotifySearchProvider::GetSuggestions(int count) {
+  if (suggestions_.empty()) {
+    LoadSuggestions();
+    return QStringList();
+  }
+
+  QStringList all_suggestions = suggestions_.toList();
+
+  boost::random::mt19937 gen(std::time(0));
+  boost::random::uniform_int_distribution<> random(0, all_suggestions.size() - 1);
+
+  QSet<QString> candidates;
+
+  const int max = qMin(count, all_suggestions.size());
+  while (candidates.size() < max) {
+    const int index = random(gen);
+    candidates.insert(all_suggestions[index]);
+  }
+  return candidates.toList();
 }
