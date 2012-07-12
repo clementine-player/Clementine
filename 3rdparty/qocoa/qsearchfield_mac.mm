@@ -130,6 +130,20 @@ QString QSearchField::placeholderText() const {
     return toQString(placeholder);
 }
 
+void QSearchField::setFocus(Qt::FocusReason reason)
+{
+    Q_ASSERT(pimpl);
+    if (!pimpl)
+        return;
+
+    // TODO: become first responder.
+}
+
+void QSearchField::setFocus()
+{
+    setFocus(Qt::OtherFocusReason);
+}
+
 void QSearchField::clear()
 {
     Q_ASSERT(pimpl);
