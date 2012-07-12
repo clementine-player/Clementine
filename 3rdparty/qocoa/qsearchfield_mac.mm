@@ -136,7 +136,8 @@ void QSearchField::setFocus(Qt::FocusReason reason)
     if (!pimpl)
         return;
 
-    // TODO: become first responder.
+    if ([pimpl->nsSearchField acceptsFirstResponder])
+        [[pimpl->nsSearchField window] makeFirstResponder: pimpl->nsSearchField];
 }
 
 void QSearchField::setFocus()
