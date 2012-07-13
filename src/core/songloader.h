@@ -64,6 +64,7 @@ public:
   // playlist and replace the partially-loaded items by the new ones, fully
   // loaded.
   void EffectiveSongsLoad();
+  void EffectiveSongLoad(Song* song);
   Result LoadAudioCD();
 
 signals:
