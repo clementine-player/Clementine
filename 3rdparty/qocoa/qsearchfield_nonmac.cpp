@@ -68,12 +68,11 @@ QSearchField::QSearchField(QWidget *parent) : QWidget(parent)
     clearButton->setIconSize(clearIcon.size());
     clearButton->setFixedSize(clearIcon.size());
     clearButton->setStyleSheet("border: none;");
-    clearButton->hide();
     connect(clearButton, SIGNAL(clicked()), this, SLOT(clear()));
 
     pimpl = new QSearchFieldPrivate(this, lineEdit, clearButton);
 
-    lineEdit->setStyleSheet(QString("QLineEdit { padding-right: %1px; } ").arg(pimpl->clearButtonPaddedWidth()));
+    lineEdit->setStyleSheet(QString("QLineEdit { padding-left: %1px; } ").arg(clearButton->width()));
     const int width = qMax(lineEdit->minimumSizeHint().width(), pimpl->clearButtonPaddedWidth());
     const int height = qMax(lineEdit->minimumSizeHint().height(), pimpl->clearButtonPaddedHeight());
     lineEdit->setMinimumSize(width, height);
@@ -90,8 +89,6 @@ void QSearchField::setText(const QString &text)
     Q_ASSERT(pimpl && pimpl->clearButton && pimpl->lineEdit);
     if (!(pimpl && pimpl->clearButton && pimpl->lineEdit))
         return;
-
-    pimpl->clearButton->setVisible(!text.isEmpty());
 
     if (text != this->text())
         pimpl->lineEdit->setText(text);
@@ -162,7 +159,7 @@ void QSearchField::resizeEvent(QResizeEvent *resizeEvent)
         return;
 
     QWidget::resizeEvent(resizeEvent);
-    const int x = width() - pimpl->clearButtonPaddedWidth();
+    const int x = pimpl->lineEditFrameWidth();
     const int y = (height() - pimpl->clearButton->height())/2;
     pimpl->clearButton->move(x, y);
 }
