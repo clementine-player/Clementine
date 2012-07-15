@@ -69,10 +69,6 @@ OSDPretty::OSDPretty(Mode mode, QWidget *parent)
   Qt::WindowFlags flags = Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint |
                           Qt::X11BypassWindowManagerHint;
 
-#ifdef Q_OS_WIN32
-  flags |= Qt::ToolTip;
-#endif
-
   setWindowFlags(flags);
   setAttribute(Qt::WA_TranslucentBackground, true);
   setAttribute(Qt::WA_X11NetWmWindowTypeNotification, true);
