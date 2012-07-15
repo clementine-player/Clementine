@@ -707,9 +707,9 @@ bool Playlist::dropMimeData(const QMimeData* data, Qt::DropAction action, int ro
     stream.readRawData(reinterpret_cast<char*>(&source_playlist), sizeof(source_playlist));
     stream >> source_rows;
     if (!stream.atEnd()) {
-        stream.readRawData((char*)&pid, sizeof(pid));
+      stream.readRawData((char*)&pid, sizeof(pid));
     } else {
-        pid = ! own_pid;
+      pid = ! own_pid;
     }
 
     qStableSort(source_rows); // Make sure we take them in order
@@ -791,6 +791,10 @@ void Playlist::MoveItemsWithoutUndo(const QList<int>& source_rows, int pos) {
   layoutAboutToBeChanged();
   PlaylistItemList moved_items;
 
+  if (pos < 0) {
+    pos = items_.count();
+  }
+
   // Take the items out of the list first, keeping track of whether the
   // insertion point changes
   int offset = 0;
@@ -801,10 +805,6 @@ void Playlist::MoveItemsWithoutUndo(const QList<int>& source_rows, int pos) {
       start --;
     }
     offset++;
-  }
-
-  if (pos < 0) {
-    pos = items_.count();
   }
   
   // Put the items back in
