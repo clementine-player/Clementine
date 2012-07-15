@@ -161,7 +161,6 @@ set(SOURCES
   internet/digitallyimportedurlhandler.cpp
   internet/geolocator.cpp
   internet/groovesharkradio.cpp
-  internet/groovesharksearchplaylisttype.cpp
   internet/groovesharkservice.cpp
   internet/groovesharksettingspage.cpp
   internet/groovesharkurlhandler.cpp
@@ -772,7 +771,6 @@ optional_source(HAVE_SPOTIFY
   SOURCES
     globalsearch/spotifysearchprovider.cpp
     internet/spotifyblobdownloader.cpp
-    internet/spotifysearchplaylisttype.cpp
     internet/spotifyserver.cpp
     internet/spotifyservice.cpp
     internet/spotifysettingspage.cpp

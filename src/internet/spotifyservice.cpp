@@ -4,7 +4,6 @@
 #include "spotifyblobdownloader.h"
 #include "spotifyserver.h"
 #include "spotifyservice.h"
-#include "spotifysearchplaylisttype.h"
 #include "core/application.h"
 #include "core/database.h"
 #include "core/logging.h"
@@ -74,9 +73,6 @@ SpotifyService::SpotifyService(Application* app, InternetModel* parent)
 
   qLog(Debug) << "Spotify system blob path:" << system_blob_path_;
   qLog(Debug) << "Spotify local blob path:" << local_blob_path_;
-
-  app_->playlist_manager()->RegisterSpecialPlaylistType(
-        new SpotifySearchPlaylistType(this));
 
   app_->global_search()->AddProvider(new SpotifySearchProvider(app_, this));
 

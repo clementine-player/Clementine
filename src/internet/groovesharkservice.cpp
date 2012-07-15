@@ -38,7 +38,6 @@
 
 #include "internetmodel.h"
 #include "groovesharkradio.h"
-#include "groovesharksearchplaylisttype.h"
 #include "groovesharkurlhandler.h"
 #include "searchboxwidget.h"
 
@@ -114,7 +113,6 @@ GroovesharkService::GroovesharkService(Application* app, InternetModel *parent)
     task_search_id_(0) {
 
   app_->player()->RegisterUrlHandler(url_handler_);
-  app_->playlist_manager()->RegisterSpecialPlaylistType(new GroovesharkSearchPlaylistType(this));
 
   search_delay_->setInterval(kSearchDelayMsec);
   search_delay_->setSingleShot(true);
