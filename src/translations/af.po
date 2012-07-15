@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-06-24 22:54+0000\n"
+"PO-Revision-Date: 2012-07-09 22:43+0000\n"
 "Last-Translator: jpmeijers <jpmeijers@gmail.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -104,7 +104,7 @@ msgstr "%1 liedjies gevind (%2 word getoon)"
 msgid "%1 tracks"
 msgstr "%1 snitte"
 
-#: ui/albumcovermanager.cpp:430
+#: ui/albumcovermanager.cpp:417
 #, qt-format
 msgid "%1 transferred"
 msgstr "%1 oorgedra"
@@ -115,12 +115,12 @@ msgstr "%1 oorgedra"
 msgid "%1: Wiimotedev module"
 msgstr "%1: Wiimotedev module"
 
-#: songinfo/lastfmtrackinfoprovider.cpp:102
+#: songinfo/lastfmtrackinfoprovider.cpp:94
 #, qt-format
 msgid "%L1 other listeners"
 msgstr "%L1 ander luisteraars"
 
-#: songinfo/lastfmtrackinfoprovider.cpp:100
+#: songinfo/lastfmtrackinfoprovider.cpp:92
 #, qt-format
 msgid "%L1 total plays"
 msgstr "%L1 keer afgespeel"
@@ -158,7 +158,7 @@ msgstr "&Eie keuse"
 
 #: ../bin/src/ui_mainwindow.h:713
 msgid "&Extras"
-msgstr ""
+msgstr "&Ekstras"
 
 #: ../bin/src/ui_mainwindow.h:712
 msgid "&Help"
@@ -179,7 +179,7 @@ msgstr "&Links"
 
 #: ../bin/src/ui_mainwindow.h:710
 msgid "&Music"
-msgstr ""
+msgstr "&Musiek"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:176
 msgid "&None"
@@ -187,7 +187,7 @@ msgstr "&Geen"
 
 #: ../bin/src/ui_mainwindow.h:711
 msgid "&Playlist"
-msgstr ""
+msgstr "&Afspeellys"
 
 #: ../bin/src/ui_mainwindow.h:646
 msgid "&Quit"
@@ -195,7 +195,7 @@ msgstr "&Gee op"
 
 #: ../bin/src/ui_mainwindow.h:683
 msgid "&Repeat mode"
-msgstr ""
+msgstr "&Herhaal tipe"
 
 #: playlist/playlistheader.cpp:41
 msgid "&Right"
@@ -203,7 +203,7 @@ msgstr "&Regs"
 
 #: ../bin/src/ui_mainwindow.h:682
 msgid "&Shuffle mode"
-msgstr ""
+msgstr "&Skommel tipe"
 
 #: playlist/playlistheader.cpp:34
 msgid "&Stretch columns to fit window"
@@ -283,7 +283,7 @@ msgstr "AAC"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:179
 msgid "AAC 128k"
-msgstr ""
+msgstr "AAC 128k"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:171
 msgid "AAC 32k"
@@ -291,9 +291,9 @@ msgstr "AAC 32k"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:178
 msgid "AAC 64k"
-msgstr ""
+msgstr "AAC 64k"
 
-#: core/song.cpp:321
+#: core/song.cpp:325
 msgid "AIFF"
 msgstr "AIFF"
 
@@ -335,7 +335,7 @@ msgstr "Aktiveer/Deaktiveer Wii-afstandsbeheer"
 
 #: podcasts/addpodcastdialog.cpp:56
 msgid "Add Podcast"
-msgstr ""
+msgstr "Voeg potgooi by"
 
 #: ../bin/src/ui_addstreamdialog.h:113
 msgid "Add Stream"
@@ -357,9 +357,9 @@ msgstr "Voeg nog 'n stroom by..."
 msgid "Add directory..."
 msgstr "Voeg gids by..."
 
-#: ui/mainwindow.cpp:1528
+#: ui/mainwindow.cpp:1529
 msgid "Add file"
-msgstr ""
+msgstr "Voeg lêer by"
 
 #: ../bin/src/ui_mainwindow.h:671
 msgid "Add file..."
@@ -369,7 +369,7 @@ msgstr "Voeg lêer by..."
 msgid "Add files to transcode"
 msgstr "Voeg lêers by om te transkodeer"
 
-#: ui/mainwindow.cpp:1556
+#: ui/mainwindow.cpp:1557
 msgid "Add folder"
 msgstr "Voeg vouer by"
 
@@ -383,11 +383,11 @@ msgstr "Voeg nuwe vouer by..."
 
 #: ../bin/src/ui_addpodcastdialog.h:179
 msgid "Add podcast"
-msgstr ""
+msgstr "Voeg potgooi by"
 
 #: podcasts/podcastservice.cpp:257 ../bin/src/ui_mainwindow.h:708
 msgid "Add podcast..."
-msgstr ""
+msgstr "Voeg potgooi by..."
 
 #: smartplaylists/searchtermwidget.cpp:333
 msgid "Add search term"
@@ -449,15 +449,15 @@ msgstr "Voeg liedjie se jaar by as 'n etiket"
 msgid "Add stream..."
 msgstr "Voeg stroom by..."
 
-#: internet/groovesharkservice.cpp:1058
+#: internet/groovesharkservice.cpp:1054
 msgid "Add to Grooveshark favorites"
-msgstr ""
+msgstr "Voeg toe aan Grooveshark gunstelinge"
 
-#: internet/groovesharkservice.cpp:1064
+#: internet/groovesharkservice.cpp:1060
 msgid "Add to Grooveshark playlists"
-msgstr ""
+msgstr "Voeg toe aan Grooveshark afspeellys"
 
-#: ui/mainwindow.cpp:1353
+#: ui/mainwindow.cpp:1354
 msgid "Add to another playlist"
 msgstr "Voeg by 'n ander afspeellys by"
 
@@ -498,11 +498,11 @@ msgstr "Vandag bygevoeg"
 msgid "Added within three months"
 msgstr "Afgelope 3 maande bygevoeg"
 
-#: internet/groovesharkservice.cpp:1338
+#: internet/groovesharkservice.cpp:1333
 msgid "Adding song to favorites"
-msgstr ""
+msgstr "Word toegevoeg tot gunstelinge"
 
-#: library/libraryfilterwidget.cpp:128
+#: library/libraryfilterwidget.cpp:116
 msgid "Advanced grouping..."
 msgstr "Gevorderde groeperings"
 
@@ -541,11 +541,11 @@ msgstr ""
 msgid "Album info on jamendo.com..."
 msgstr "Album se inligting op jamendo.com..."
 
-#: ui/albumcovermanager.cpp:121
+#: ui/albumcovermanager.cpp:120
 msgid "Albums with covers"
 msgstr "Albums met omslagte"
 
-#: ui/albumcovermanager.cpp:122
+#: ui/albumcovermanager.cpp:121
 msgid "Albums without covers"
 msgstr "Albums sonder omslagte"
 
@@ -557,11 +557,11 @@ msgstr "Alle lêers (*)"
 msgid "All Glory to the Hypnotoad!"
 msgstr "Alle glorie aan die Hypnopadda!"
 
-#: ui/albumcovermanager.cpp:120
+#: ui/albumcovermanager.cpp:119
 msgid "All albums"
 msgstr "Alle albums"
 
-#: ui/albumcovermanager.cpp:257
+#: ui/albumcovermanager.cpp:244
 msgid "All artists"
 msgstr "Alle kunstenaars"
 
@@ -626,11 +626,6 @@ msgstr "'n Fout het plaasgevind tydens die laai van die iTunes-databasis"
 msgid "An error occurred writing metadata to '%1'"
 msgstr "'n Fout het plaasgevind tydens die skryf van metadata na '%1'"
 
-#: internet/lastfmservice.cpp:916
-#, qt-format
-msgid "An unknown last.fm error occurred: %1"
-msgstr "'n Onbekende last.fm fout het voorgekom: %1"
-
 #: ui/about.cpp:77
 msgid "And:"
 msgstr "En:"
@@ -649,7 +644,7 @@ msgid "Append files/URLs to the playlist"
 msgstr "Voeg lêers/URLs by die afspeellys by"
 
 #: devices/deviceview.cpp:211 globalsearch/globalsearchview.cpp:412
-#: internet/internetservice.cpp:55 library/libraryview.cpp:256
+#: internet/internetservice.cpp:56 library/libraryview.cpp:262
 #: widgets/fileviewlist.cpp:32
 msgid "Append to current playlist"
 msgstr "Voeg by huidige afspeellys by"
@@ -667,9 +662,9 @@ msgstr "Doen kompressie om afkapping te voorkom"
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "Is jy seker jy wil die \"%1\" opstellingspatroon verwyder?"
 
-#: internet/groovesharkservice.cpp:1259
+#: internet/groovesharkservice.cpp:1254
 msgid "Are you sure you want to delete this playlist?"
-msgstr ""
+msgstr "Is jy seker jy wil hierdie afspeellys verwyder?"
 
 #: ui/edittagdialog.cpp:761
 msgid "Are you sure you want to reset this song's statistics?"
@@ -687,15 +682,15 @@ msgstr "Kunstenaar"
 
 #: ui/mainwindow.cpp:233
 msgid "Artist info"
-msgstr "Kunstenaar se inligting"
+msgstr "Kunstenaar"
 
-#: internet/lastfmservice.cpp:209
+#: internet/lastfmservice.cpp:207
 msgid "Artist radio"
 msgstr "Kunstenaarsradio"
 
 #: songinfo/echonesttags.cpp:59
 msgid "Artist tags"
-msgstr "Kunstenaar etiket"
+msgstr "Kunstenaarsetikette"
 
 #: ui/organisedialog.cpp:57
 msgid "Artist's initial"
@@ -706,7 +701,7 @@ msgid "Audio format"
 msgstr "Oudioformaat"
 
 #: internet/digitallyimportedsettingspage.cpp:82
-#: internet/magnatunesettingspage.cpp:113 internet/lastfmservice.cpp:450
+#: internet/magnatunesettingspage.cpp:113 internet/lastfmservice.cpp:431
 #: internet/lastfmsettingspage.cpp:78
 msgid "Authentication failed"
 msgstr "Aanteken onsuksesvol"
@@ -745,7 +740,7 @@ msgstr "Gemiddelde beeldgrootte"
 
 #: podcasts/addpodcastdialog.cpp:80
 msgid "BBC Podcasts"
-msgstr ""
+msgstr "BBC potgooi"
 
 #: playlist/playlist.cpp:1188 ui/organisedialog.cpp:62
 #: ../bin/src/ui_edittagdialog.h:638
@@ -786,7 +781,7 @@ msgstr "Eenvoudig Blou"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:167
 msgid "Basic audio type"
-msgstr ""
+msgstr "Basies oudio tipe"
 
 #: ../bin/src/ui_behavioursettingspage.h:169
 msgid "Behavior"
@@ -799,7 +794,7 @@ msgstr "Beste"
 #: songinfo/echonestbiographies.cpp:83
 #, qt-format
 msgid "Biography from %1"
-msgstr "Biografie van %1"
+msgstr "Biografie vanaf %1"
 
 #: playlist/playlist.cpp:1189 ../bin/src/ui_edittagdialog.h:640
 msgid "Bit rate"
@@ -854,7 +849,7 @@ msgstr ""
 msgid "Buttons"
 msgstr "Knoppies"
 
-#: core/song.cpp:324
+#: core/song.cpp:328
 msgid "CDDA"
 msgstr "CDDA"
 
@@ -930,12 +925,12 @@ msgstr "Kies hoe die afspeellys gesorteer word en hoeveel liedjies dit moet beva
 
 #: podcasts/podcastsettingspage.cpp:132
 msgid "Choose podcast download directory"
-msgstr ""
+msgstr "Kies potgooi aflaaigids"
 
 #: ../bin/src/ui_songinfosettingspage.h:188
 msgid ""
 "Choose the websites you want Clementine to use when searching for lyrics."
-msgstr "Kies die webtuistes wat Clementine moet gebruik as dit vir lirieke soek."
+msgstr "Titel"
 
 #: ui/equalizer.cpp:109
 msgid "Classical"
@@ -953,9 +948,9 @@ msgstr "Wis"
 msgid "Clear playlist"
 msgstr "Wis afspeellys"
 
-#: smartplaylists/searchtermwidget.cpp:321 ../bin/src/ui_mainwindow.h:637
+#: smartplaylists/searchtermwidget.cpp:321
 #: visualisations/visualisationcontainer.cpp:211
-#: ../bin/src/ui_visualisationoverlay.h:183
+#: ../bin/src/ui_mainwindow.h:637 ../bin/src/ui_visualisationoverlay.h:183
 msgid "Clementine"
 msgstr "Clementine"
 
@@ -1014,7 +1009,7 @@ msgstr "Clementine kon nie enige resultate vir hierdie lêer vind nie."
 msgid "Clementine will find music in:"
 msgstr ""
 
-#: library/libraryview.cpp:238
+#: library/libraryview.cpp:244
 msgid "Click here to add some music"
 msgstr "Kliek hier om musiek by te voeg"
 
@@ -1022,7 +1017,7 @@ msgstr "Kliek hier om musiek by te voeg"
 msgid "Click to toggle between remaining time and total time"
 msgstr "Kliek hier om te wissel tussen oorblywende en totale tyd"
 
-#: widgets/didyoumean.cpp:35
+#: widgets/didyoumean.cpp:37
 msgid "Close"
 msgstr "Maak toe"
 
@@ -1034,7 +1029,7 @@ msgstr "Maak visualisasie toe"
 msgid "Closing this window will cancel the download."
 msgstr "Die aflaai sal stop as hierdie venster toegemaak word."
 
-#: ui/albumcovermanager.cpp:211
+#: ui/albumcovermanager.cpp:198
 msgid "Closing this window will stop searching for album covers."
 msgstr "Die soek vir album-omslae sal stop as hierdie venster toegemaak word."
 
@@ -1073,11 +1068,16 @@ msgstr "Voltooi etikette outomaties..."
 msgid "Composer"
 msgstr "Komponis"
 
-#: internet/groovesharkservice.cpp:535
+#: internet/searchboxwidget.cpp:42
+#, qt-format
+msgid "Configure %1..."
+msgstr ""
+
+#: internet/groovesharkservice.cpp:553
 msgid "Configure Grooveshark..."
 msgstr "Stel Grooveshark in..."
 
-#: internet/lastfmservice.cpp:127
+#: internet/lastfmservice.cpp:125
 msgid "Configure Last.fm..."
 msgstr "Stel Last.fm in..."
 
@@ -1089,7 +1089,7 @@ msgstr "Stel Magnatune in..."
 msgid "Configure Shortcuts"
 msgstr "Stel snelskakels in"
 
-#: internet/spotifyservice.cpp:511
+#: internet/spotifyservice.cpp:515
 msgid "Configure Spotify..."
 msgstr "Stel Spotify in..."
 
@@ -1114,11 +1114,11 @@ msgstr "Stel in"
 msgid "Connect Wii Remotes using active/deactive action"
 msgstr "Verbind Wii-afstandbedienings met aktiveer/deaktiveer aksie"
 
-#: devices/devicemanager.cpp:326 devices/devicemanager.cpp:330
+#: devices/devicemanager.cpp:339 devices/devicemanager.cpp:343
 msgid "Connect device"
 msgstr "Verbind toestel"
 
-#: internet/spotifyservice.cpp:251
+#: internet/spotifyservice.cpp:255
 msgid "Connecting to Spotify"
 msgstr "Verbind aan Spotify"
 
@@ -1134,11 +1134,11 @@ msgstr "Skakel alle musiek om"
 msgid "Convert any music that the device can't play"
 msgstr "Skakel alle musiek wat die toestel nie kan speel nie om"
 
-#: internet/groovesharkservice.cpp:1137
+#: internet/groovesharkservice.cpp:1133
 msgid "Copy to clipboard"
-msgstr ""
+msgstr "Kopiëer na knipbord"
 
-#: library/libraryview.cpp:278 ui/mainwindow.cpp:489
+#: library/libraryview.cpp:284 ui/mainwindow.cpp:489
 #: widgets/fileviewlist.cpp:44
 msgid "Copy to device..."
 msgstr "Kopiëer na die toestel..."
@@ -1177,7 +1177,7 @@ msgid ""
 "plugins installed"
 msgstr "Kan nie 'n enkodeerder vir %1 vind nie. Maak seker jy het die korrekte GStreamer uitbreidings installeer."
 
-#: internet/lastfmservice.cpp:913
+#: internet/lastfmservice.cpp:890
 msgid "Couldn't load the last.fm radio station"
 msgstr "Kan nie die last.fm radiostasie laai nie"
 
@@ -1218,9 +1218,9 @@ msgstr "Omslag gestel vanaf %1"
 msgid "Covers from %1"
 msgstr "Omslae vanaf %1"
 
-#: internet/groovesharkservice.cpp:502 internet/groovesharkservice.cpp:1210
+#: internet/groovesharkservice.cpp:524 internet/groovesharkservice.cpp:1206
 msgid "Create a new Grooveshark playlist"
-msgstr ""
+msgstr "Skep 'n nuwe Grooveshark afspeellys"
 
 #: ../bin/src/ui_playbacksettingspage.h:269
 msgid "Cross-fade when changing tracks automatically"
@@ -1314,7 +1314,7 @@ msgstr ""
 msgid "Custom message settings"
 msgstr "Eie gekose boodskap"
 
-#: internet/lastfmservice.cpp:217
+#: internet/lastfmservice.cpp:215
 msgid "Custom radio"
 msgstr "Eie gekose radio"
 
@@ -1351,7 +1351,7 @@ msgstr "Dae"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:177
 msgid "De&fault"
-msgstr "Standaard"
+msgstr "&Standaard"
 
 #: core/commandlineoptions.cpp:153
 msgid "Decrease the volume by 4%"
@@ -1373,16 +1373,16 @@ msgstr "Standaard instellings"
 msgid "Delay between visualizations"
 msgstr "Wagperiode tussen visualisasies"
 
-#: internet/groovesharkservice.cpp:505 internet/groovesharkservice.cpp:1258
+#: internet/groovesharkservice.cpp:527 internet/groovesharkservice.cpp:1253
 msgid "Delete Grooveshark playlist"
-msgstr ""
+msgstr "Verwyder Grooveshark afspeellys"
 
 #: podcasts/podcastservice.cpp:274
 msgid "Delete downloaded data"
 msgstr ""
 
-#: devices/deviceview.cpp:388 library/libraryview.cpp:497
-#: ui/mainwindow.cpp:1805 widgets/fileview.cpp:186
+#: devices/deviceview.cpp:388 library/libraryview.cpp:503
+#: ui/mainwindow.cpp:1806 widgets/fileview.cpp:186
 msgid "Delete files"
 msgstr "Skrap lêers"
 
@@ -1390,7 +1390,7 @@ msgstr "Skrap lêers"
 msgid "Delete from device..."
 msgstr "Skrap van toestel..."
 
-#: library/libraryview.cpp:280 ui/mainwindow.cpp:490
+#: library/libraryview.cpp:286 ui/mainwindow.cpp:490
 #: widgets/fileviewlist.cpp:45
 msgid "Delete from disk..."
 msgstr "Skrap van skyf..."
@@ -1403,7 +1403,7 @@ msgstr ""
 msgid "Delete preset"
 msgstr "Skrap voorafinstelling"
 
-#: library/libraryview.cpp:272
+#: library/libraryview.cpp:278
 msgid "Delete smart playlist"
 msgstr "Skrap slimspeellys"
 
@@ -1415,11 +1415,11 @@ msgstr "Skrap die oorspronklike lêers"
 msgid "Deleting files"
 msgstr "Lêers word geskrap"
 
-#: ui/mainwindow.cpp:1289
+#: ui/mainwindow.cpp:1290
 msgid "Dequeue selected tracks"
 msgstr "Verwyder gekose snitte uit die tou"
 
-#: ui/mainwindow.cpp:1287
+#: ui/mainwindow.cpp:1288
 msgid "Dequeue track"
 msgstr "Verwyder snit uit die tou"
 
@@ -1451,7 +1451,7 @@ msgstr "Toestelseienskappe..."
 msgid "Devices"
 msgstr "Toestelle"
 
-#: widgets/didyoumean.cpp:128
+#: widgets/didyoumean.cpp:55
 msgid "Did you mean"
 msgstr "Het jy bedoel"
 
@@ -1494,8 +1494,8 @@ msgstr "Skyf"
 msgid "Discontinuous transmission"
 msgstr "Uitsending met onderbrekings"
 
-#: internet/icecastfilterwidget.cpp:33 library/libraryfilterwidget.cpp:89
-#: ../bin/src/ui_librarysettingspage.h:169
+#: internet/icecastfilterwidget.cpp:33 internet/searchboxwidget.cpp:30
+#: library/libraryfilterwidget.cpp:88 ../bin/src/ui_librarysettingspage.h:169
 msgid "Display options"
 msgstr "Vertoon keuses"
 
@@ -1515,7 +1515,7 @@ msgstr "Moenie enige musiek omskakel nie"
 msgid "Don't repeat"
 msgstr "Moenie herhaal nie"
 
-#: library/libraryview.cpp:294
+#: library/libraryview.cpp:300
 msgid "Don't show in various artists"
 msgstr "Moenie onder verskeie kunstenaars wys nie"
 
@@ -1523,7 +1523,7 @@ msgstr "Moenie onder verskeie kunstenaars wys nie"
 msgid "Don't shuffle"
 msgstr "Moenie skommel nie"
 
-#: internet/magnatunedownloaddialog.cpp:282 ui/albumcovermanager.cpp:213
+#: internet/magnatunedownloaddialog.cpp:282 ui/albumcovermanager.cpp:200
 msgid "Don't stop!"
 msgstr "Moenie stop nie!"
 
@@ -1617,11 +1617,11 @@ msgstr "Tans in dinamiese modus"
 msgid "Dynamic random mix"
 msgstr "Dinamiese skommeling"
 
-#: library/libraryview.cpp:270
+#: library/libraryview.cpp:276
 msgid "Edit smart playlist..."
 msgstr "Verander slimspeellys"
 
-#: ui/mainwindow.cpp:1322
+#: ui/mainwindow.cpp:1323
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "Verander etiket \"%1\"..."
@@ -1638,12 +1638,12 @@ msgstr "Verander etikette"
 msgid "Edit track information"
 msgstr "Verander snit se inligting"
 
-#: library/libraryview.cpp:284 widgets/fileviewlist.cpp:50
+#: library/libraryview.cpp:290 widgets/fileviewlist.cpp:50
 #: ../bin/src/ui_mainwindow.h:659
 msgid "Edit track information..."
 msgstr "Verander snit se inligting"
 
-#: library/libraryview.cpp:286
+#: library/libraryview.cpp:292
 msgid "Edit tracks information..."
 msgstr "Verander snitte se inligting"
 
@@ -1740,9 +1740,9 @@ msgstr "Ekwivalent aan --log-levels *:1"
 msgid "Equivalent to --log-levels *:3"
 msgstr "Ekwivalent aan --log-levels *:3"
 
-#: internet/groovesharkservice.cpp:994
-#: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:491
-#: ui/mainwindow.cpp:1757 ui/mainwindow.cpp:1878
+#: internet/groovesharkservice.cpp:990
+#: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:497
+#: ui/mainwindow.cpp:1758 ui/mainwindow.cpp:1879
 msgid "Error"
 msgstr "Fout"
 
@@ -1819,12 +1819,12 @@ msgstr "Behalwe tussen snitte van die selfde album of CUE blad"
 
 #: ../bin/src/ui_dynamicplaylistcontrols.h:111
 msgid "Expand"
-msgstr ""
+msgstr "Meer..."
 
 #: widgets/loginstatewidget.cpp:142
 #, qt-format
 msgid "Expires on %1"
-msgstr ""
+msgstr "Verval op %1"
 
 #: ../bin/src/ui_mainwindow.h:668
 msgid "F1"
@@ -1876,11 +1876,11 @@ msgstr ""
 #: podcasts/itunessearchpage.cpp:66 podcasts/itunessearchpage.cpp:75
 #: podcasts/itunessearchpage.cpp:82
 msgid "Failed to fetch podcasts"
-msgstr ""
+msgstr "Kan nie die potgooi gaan haal nie"
 
 #: podcasts/addpodcastbyurl.cpp:70 podcasts/fixedopmlpage.cpp:54
 msgid "Failed to load podcast"
-msgstr ""
+msgstr "Die potgooi kan nie gelaai word nie"
 
 #: podcasts/podcasturlloader.cpp:165
 msgid "Failed to parse the XML for this RSS feed"
@@ -1891,9 +1891,9 @@ msgstr ""
 msgid "Fast"
 msgstr "Vinnig"
 
-#: internet/groovesharkservice.cpp:594
+#: internet/groovesharkservice.cpp:609
 msgid "Favorites"
-msgstr ""
+msgstr "Gunstelinge"
 
 #: library/library.cpp:75
 msgid "Favourite tracks"
@@ -1981,7 +1981,7 @@ msgstr "Maak klaar"
 msgid "First level"
 msgstr "Eerste vlak"
 
-#: core/song.cpp:314
+#: core/song.cpp:318
 msgid "Flac"
 msgstr "Flac"
 
@@ -2010,7 +2010,7 @@ msgstr "Deur van 'n toestel te vergeet sal dit uit hierdie lys verwyder word. Cl
 
 #: ../bin/src/ui_searchproviderstatuswidget.h:94
 #: ../bin/src/ui_suggestionwidget.h:70 ../bin/src/ui_icecastfilterwidget.h:74
-#: ../bin/src/ui_internetviewcontainer.h:71
+#: ../bin/src/ui_internetviewcontainer.h:71 ../bin/src/ui_searchboxwidget.h:62
 #: ../bin/src/ui_libraryfilterwidget.h:86
 #: ../bin/src/ui_libraryviewcontainer.h:59
 #: ../bin/src/ui_playlistcontainer.h:143 ../bin/src/ui_podcastinfowidget.h:191
@@ -2041,7 +2041,7 @@ msgstr "Beeldduur"
 msgid "Frames per buffer"
 msgstr "Beelde per buffer"
 
-#: internet/lastfmservice.cpp:225
+#: internet/lastfmservice.cpp:223
 msgid "Friends"
 msgstr "Vriende"
 
@@ -2067,7 +2067,7 @@ msgstr "GStreamer oudioenjin"
 
 #: ui/settingsdialog.cpp:113
 msgid "General"
-msgstr ""
+msgstr "Algemeen"
 
 #: ../bin/src/ui_notificationssettingspage.h:409
 msgid "General settings"
@@ -2079,17 +2079,17 @@ msgstr "Algemene instellings"
 msgid "Genre"
 msgstr "Genre"
 
-#: internet/groovesharkservice.cpp:521
+#: internet/groovesharkservice.cpp:543
 msgid "Get a URL to share this Grooveshark playlist"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:518 internet/groovesharkservice.cpp:1075
+#: internet/groovesharkservice.cpp:540 internet/groovesharkservice.cpp:1071
 msgid "Get a URL to share this Grooveshark song"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:743
+#: internet/groovesharkservice.cpp:757
 msgid "Getting Grooveshark popular songs"
-msgstr ""
+msgstr "Grooveshark populêre liedjies word verkry"
 
 #: internet/somafmservice.cpp:100
 msgid "Getting channels"
@@ -2105,7 +2105,7 @@ msgstr "Gee dit 'n naam:"
 
 #: ../bin/src/ui_addpodcastbyurl.h:78
 msgid "Go"
-msgstr ""
+msgstr "Gaan"
 
 #: ../bin/src/ui_mainwindow.h:696
 msgid "Go to next playlist tab"
@@ -2115,7 +2115,7 @@ msgstr "Gaan na volgende afspeellys oortjie"
 msgid "Go to previous playlist tab"
 msgstr "Gaan na vorige afspeellys oortjie"
 
-#: covers/coversearchstatisticsdialog.cpp:54 ui/albumcovermanager.cpp:424
+#: covers/coversearchstatisticsdialog.cpp:54 ui/albumcovermanager.cpp:411
 #: ../bin/src/ui_coversearchstatisticsdialog.h:76
 #, qt-format
 msgid "Got %1 covers out of %2 (%3 failed)"
@@ -2129,51 +2129,51 @@ msgstr "Maak onbestaande liedjies in my afspeellys grys"
 msgid "Grooveshark"
 msgstr "Grooveshark"
 
-#: internet/groovesharkservice.cpp:400
+#: internet/groovesharkservice.cpp:415
 msgid "Grooveshark login error"
 msgstr "Grooveshark aantekenfout"
 
-#: internet/groovesharkservice.cpp:1127
+#: internet/groovesharkservice.cpp:1123
 msgid "Grooveshark playlist's URL"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:585
+#: internet/groovesharkservice.cpp:604
 msgid "Grooveshark radio"
-msgstr ""
+msgstr "Grooveshark radio"
 
-#: internet/groovesharkservice.cpp:1105
+#: internet/groovesharkservice.cpp:1101
 msgid "Grooveshark song's URL"
-msgstr ""
+msgstr "Grooveshark liedjie se URL"
 
 #: ../bin/src/ui_groupbydialog.h:124
 msgid "Group Library by..."
 msgstr "Groeppeer versameling volgens..."
 
-#: globalsearch/globalsearchview.cpp:423 library/libraryfilterwidget.cpp:83
+#: globalsearch/globalsearchview.cpp:423 library/libraryfilterwidget.cpp:82
 msgid "Group by"
 msgstr "Groeppeer volgens"
 
-#: library/libraryfilterwidget.cpp:122
+#: library/libraryfilterwidget.cpp:110
 msgid "Group by Album"
 msgstr "Groeppeer volgens Album"
 
-#: library/libraryfilterwidget.cpp:116
+#: library/libraryfilterwidget.cpp:104
 msgid "Group by Artist"
 msgstr "Groeppeer volgens Kunstenaar"
 
-#: library/libraryfilterwidget.cpp:118
+#: library/libraryfilterwidget.cpp:106
 msgid "Group by Artist/Album"
 msgstr "Groeppeer volgens Kunstenaar/Album"
 
-#: library/libraryfilterwidget.cpp:120
+#: library/libraryfilterwidget.cpp:108
 msgid "Group by Artist/Year - Album"
 msgstr "Groeppeer volgens Kunstenaar/Jaar - Album"
 
-#: library/libraryfilterwidget.cpp:124
+#: library/libraryfilterwidget.cpp:112
 msgid "Group by Genre/Album"
 msgstr "Groeppeer volgens Genre/Album"
 
-#: library/libraryfilterwidget.cpp:126
+#: library/libraryfilterwidget.cpp:114
 msgid "Group by Genre/Artist/Album"
 msgstr "Groeppeer volgens Genre/Kunstenaar/Album"
 
@@ -2235,7 +2235,7 @@ msgstr "Ikone bo"
 msgid "Identifying song"
 msgstr "Liedjies word geïdentifiseer"
 
-#: devices/devicemanager.cpp:571 devices/devicemanager.cpp:579
+#: devices/devicemanager.cpp:584 devices/devicemanager.cpp:592
 msgid ""
 "If you continue, this device will work slowly and songs copied to it may not"
 " work."
@@ -2243,7 +2243,7 @@ msgstr "As jy voortgaan sal hierdie toestel stadig wees en liedjies wat daarheen
 
 #: ../bin/src/ui_addpodcastbyurl.h:77
 msgid "If you know the URL of a podcast, enter it below and press Go."
-msgstr ""
+msgstr "As jy die URL van 'n potgooi ken, tik dit hier onder in en druk dan op Gaan."
 
 #: ../bin/src/ui_organisedialog.h:204
 msgid "Ignore \"The\" in artist names"
@@ -2263,7 +2263,7 @@ msgid ""
 "time a song finishes."
 msgstr "In dinamiese modus sal nuwe snitte gekies en bygevoeg word by die afspeellys elke keer as 'n liedjie klaarmaak."
 
-#: internet/spotifyservice.cpp:352
+#: internet/spotifyservice.cpp:358
 msgid "Inbox"
 msgstr "Posbus"
 
@@ -2283,7 +2283,7 @@ msgstr "Verhoog die volume met 4%"
 msgid "Increase volume"
 msgstr "Verhoog die volume"
 
-#: ../bin/src/ui_deviceproperties.h:373 wiimotedev/wiimotesettingspage.cpp:124
+#: wiimotedev/wiimotesettingspage.cpp:124 ../bin/src/ui_deviceproperties.h:373
 msgid "Information"
 msgstr "Inligting"
 
@@ -2305,37 +2305,37 @@ msgstr "Internet"
 
 #: ui/settingsdialog.cpp:134
 msgid "Internet providers"
-msgstr ""
+msgstr "Insternet verskaffers"
 
-#: internet/lastfmservice.cpp:456
+#: internet/lastfmservice.cpp:437
 msgid "Invalid API key"
 msgstr "Ongeldige API sleutel"
 
-#: internet/lastfmservice.cpp:451
+#: internet/lastfmservice.cpp:432
 msgid "Invalid format"
 msgstr "Ongeldige formaat"
 
-#: internet/lastfmservice.cpp:449
+#: internet/lastfmservice.cpp:430
 msgid "Invalid method"
 msgstr "Ongeldige metode"
 
-#: internet/lastfmservice.cpp:452
+#: internet/lastfmservice.cpp:433
 msgid "Invalid parameters"
 msgstr "Ongeldige parameters"
 
-#: internet/lastfmservice.cpp:453
+#: internet/lastfmservice.cpp:434
 msgid "Invalid resource specified"
 msgstr "Ongeldige bron gespesifiseer"
 
-#: internet/lastfmservice.cpp:448
+#: internet/lastfmservice.cpp:429
 msgid "Invalid service"
 msgstr "Ongeldige diens"
 
-#: internet/lastfmservice.cpp:455
+#: internet/lastfmservice.cpp:436
 msgid "Invalid session key"
 msgstr "Ongeldige sessiesleutel"
 
-#: internet/groovesharkservice.cpp:393
+#: internet/groovesharkservice.cpp:408
 msgid "Invalid username and/or password"
 msgstr "Ongeldige gebruikersnaam en/of wagwoord"
 
@@ -2372,9 +2372,9 @@ msgstr "Spring na die snit wat tans speel"
 msgid "Keep buttons for %1 second..."
 msgstr "Hou knoppies vir %1 sekonde vas"
 
-#: ../bin/src/ui_wiimoteshortcutgrabber.h:127
 #: wiimotedev/wiimoteshortcutgrabber.cpp:73
 #: wiimotedev/wiimoteshortcutgrabber.cpp:117
+#: ../bin/src/ui_wiimoteshortcutgrabber.h:127
 #, qt-format
 msgid "Keep buttons for %1 seconds..."
 msgstr "Hou knoppies vir %1 sekondes vas"
@@ -2420,45 +2420,45 @@ msgstr "Laaste afgespeel"
 msgid "Last.fm"
 msgstr "Last.fm"
 
-#: internet/lastfmservice.cpp:86
+#: internet/lastfmservice.cpp:84
 #, qt-format
 msgid "Last.fm Custom Radio: %1"
 msgstr "Last.fm eie gekose radio: %1"
 
-#: internet/lastfmservice.cpp:256 internet/lastfmservice.cpp:710
-#: internet/lastfmservice.cpp:745
+#: internet/lastfmservice.cpp:254 internet/lastfmservice.cpp:705
+#: internet/lastfmservice.cpp:732
 #, qt-format
 msgid "Last.fm Library - %1"
 msgstr "Last.fm versameling - %1"
 
-#: globalsearch/lastfmsearchprovider.cpp:77 internet/lastfmservice.cpp:258
-#: internet/lastfmservice.cpp:261
+#: globalsearch/lastfmsearchprovider.cpp:77 internet/lastfmservice.cpp:256
+#: internet/lastfmservice.cpp:259
 #, qt-format
 msgid "Last.fm Mix Radio - %1"
 msgstr "Last.fm radiomengsel - %1"
 
-#: globalsearch/lastfmsearchprovider.cpp:79 internet/lastfmservice.cpp:263
-#: internet/lastfmservice.cpp:266
+#: globalsearch/lastfmsearchprovider.cpp:79 internet/lastfmservice.cpp:261
+#: internet/lastfmservice.cpp:264
 #, qt-format
 msgid "Last.fm Neighbor Radio - %1"
 msgstr "Last.fm buurradio - %1"
 
-#: globalsearch/lastfmsearchprovider.cpp:75 internet/lastfmservice.cpp:253
+#: globalsearch/lastfmsearchprovider.cpp:75 internet/lastfmservice.cpp:251
 #, qt-format
 msgid "Last.fm Radio Station - %1"
 msgstr "Last.fm radiostasie - %1"
 
-#: internet/lastfmservice.cpp:84
+#: internet/lastfmservice.cpp:82
 #, qt-format
 msgid "Last.fm Similar Artists to %1"
 msgstr "Last.fm kunstenaars soortgelyke aan %1"
 
-#: internet/lastfmservice.cpp:85
+#: internet/lastfmservice.cpp:83
 #, qt-format
 msgid "Last.fm Tag Radio: %1"
 msgstr "Last.fm etiket radio: %1"
 
-#: internet/lastfmservice.cpp:460
+#: internet/lastfmservice.cpp:441
 msgid "Last.fm is currently busy, please try again in a few minutes"
 msgstr "Last.fm is tans besig. Probeer asseblief later weer."
 
@@ -2466,11 +2466,11 @@ msgstr "Last.fm is tans besig. Probeer asseblief later weer."
 msgid "Last.fm password"
 msgstr "Last.fm wagwoord"
 
-#: songinfo/lastfmtrackinfoprovider.cpp:86
+#: songinfo/lastfmtrackinfoprovider.cpp:78
 msgid "Last.fm play counts"
-msgstr "Last.fm afspeeltelling"
+msgstr "Last.fm tellings"
 
-#: songinfo/lastfmtrackinfoprovider.cpp:139
+#: songinfo/lastfmtrackinfoprovider.cpp:131
 msgid "Last.fm tags"
 msgstr "Last.fm etikette"
 
@@ -2478,126 +2478,126 @@ msgstr "Last.fm etikette"
 msgid "Last.fm username"
 msgstr "Last.fm gebruikersnaam"
 
-#: songinfo/lastfmtrackinfoprovider.cpp:119
+#: songinfo/lastfmtrackinfoprovider.cpp:111
 msgid "Last.fm wiki"
-msgstr ""
+msgstr "Last.fm wiki"
 
 #: library/library.cpp:85
 msgid "Least favourite tracks"
-msgstr ""
+msgstr "Mins gunsteling snitte"
 
 #: ../bin/src/ui_playbacksettingspage.h:290
 msgid "Leave blank for the default.  Examples: \"/dev/dsp\", \"front\", etc."
-msgstr ""
+msgstr "Laat leeg vir standaardwaarde.  Voorbeelde: \"/dev/dsp\", \"front\", ens."
 
 #: playlist/playlist.cpp:1174 ui/organisedialog.cpp:66
 #: ui/qtsystemtrayicon.cpp:255 ../bin/src/ui_edittagdialog.h:636
 msgid "Length"
-msgstr ""
+msgstr "Lengte"
 
 #: ui/mainwindow.cpp:217 ui/mainwindow.cpp:227
 msgid "Library"
-msgstr ""
+msgstr "Versameling"
 
 #: ../bin/src/ui_groupbydialog.h:122
 msgid "Library advanced grouping"
-msgstr ""
+msgstr "Gevorderde groeppering van versameling"
 
-#: ui/mainwindow.cpp:1995
+#: ui/mainwindow.cpp:1996
 msgid "Library rescan notice"
-msgstr ""
+msgstr "Versameling hernagaan kennisgewing"
 
 #: smartplaylists/querywizardplugin.cpp:85
 msgid "Library search"
-msgstr ""
+msgstr "Soek deur versameling"
 
 #: ../bin/src/ui_querysortpage.h:140
 msgid "Limits"
-msgstr ""
+msgstr "Limiete"
 
-#: internet/groovesharkservice.cpp:586
+#: internet/groovesharkservice.cpp:605
 msgid ""
 "Listen to Grooveshark songs based on what you've listened to previously"
 msgstr ""
 
 #: ui/equalizer.cpp:117
 msgid "Live"
-msgstr ""
+msgstr "Regstreeks"
 
 #: ../bin/src/ui_albumcovermanager.h:151
 msgid "Load"
-msgstr ""
+msgstr "Laai"
 
 #: ../bin/src/ui_coverfromurldialog.h:102
 msgid "Load cover from URL"
-msgstr ""
+msgstr "Verkry omslag van URL"
 
 #: ui/albumcoverchoicecontroller.cpp:61
 msgid "Load cover from URL..."
-msgstr ""
+msgstr "Verkry omslag van URL..."
 
 #: ui/albumcoverchoicecontroller.cpp:91
 msgid "Load cover from disk"
-msgstr ""
+msgstr "Laai omslag vanaf skyf"
 
 #: ui/albumcoverchoicecontroller.cpp:59
 msgid "Load cover from disk..."
-msgstr ""
+msgstr "Verkry omslag van skyf..."
 
-#: playlist/playlistcontainer.cpp:303
+#: playlist/playlistcontainer.cpp:292
 msgid "Load playlist"
-msgstr ""
+msgstr "Laai afspeellys"
 
 #: ../bin/src/ui_mainwindow.h:694
 msgid "Load playlist..."
-msgstr ""
+msgstr "Laai afspeellys..."
 
-#: internet/lastfmservice.cpp:926
+#: internet/lastfmservice.cpp:899
 msgid "Loading Last.fm radio"
-msgstr ""
+msgstr "Last.fm radio word gelaai"
 
 #: devices/mtploader.cpp:42
 msgid "Loading MTP device"
-msgstr ""
+msgstr "MTP toestel word gelaai"
 
 #: devices/wmdmloader.cpp:47
 msgid "Loading Windows Media device"
-msgstr ""
+msgstr "Windows Media toestel word gelaai"
 
 #: devices/gpodloader.cpp:46
 msgid "Loading iPod database"
-msgstr ""
+msgstr "iPod databasis word gelaai"
 
 #: smartplaylists/generatorinserter.cpp:52
 msgid "Loading smart playlist"
-msgstr ""
+msgstr "Slimspeellys word gelaai"
 
 #: library/librarymodel.cpp:134
 msgid "Loading songs"
-msgstr ""
+msgstr "Liedjies word gelaai"
 
 #: internet/digitallyimportedurlhandler.cpp:63
 #: internet/somafmurlhandler.cpp:48
 msgid "Loading stream"
-msgstr ""
+msgstr "Stroom word gelaai"
 
 #: playlist/songloaderinserter.cpp:79 ui/edittagdialog.cpp:229
 msgid "Loading tracks"
-msgstr ""
+msgstr "Snitte word gelaai"
 
 #: playlist/songloaderinserter.cpp:139
 msgid "Loading tracks info"
-msgstr ""
+msgstr "Snitinligting word gelaai"
 
 #: library/librarymodel.cpp:129 podcasts/podcastdiscoverymodel.cpp:97
 #: widgets/prettyimage.cpp:168 widgets/widgetfadehelper.cpp:99
 #: ../bin/src/ui_addpodcastdialog.h:180 ../bin/src/ui_searchpreview.h:106
 msgid "Loading..."
-msgstr ""
+msgstr "Besig om te laai..."
 
 #: core/commandlineoptions.cpp:158
 msgid "Loads files/URLs, replacing current playlist"
-msgstr ""
+msgstr "Laai lêers/URLs en vervang huidige afspeellys"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:163
 #: ../bin/src/ui_groovesharksettingspage.h:116
@@ -2605,7 +2605,7 @@ msgstr ""
 #: ../bin/src/ui_spotifysettingspage.h:212
 #: ../bin/src/ui_lastfmsettingspage.h:153
 msgid "Login"
-msgstr ""
+msgstr "Teken aan"
 
 #: podcasts/podcastsettingspage.cpp:119
 msgid "Login failed"
@@ -2613,86 +2613,86 @@ msgstr ""
 
 #: ../bin/src/ui_transcoderoptionsaac.h:137
 msgid "Long term prediction profile (LTP)"
-msgstr ""
+msgstr "Langtermyn voorspellingsmodel (LTP)"
 
 #: ../bin/src/ui_mainwindow.h:650
 msgid "Love"
-msgstr ""
+msgstr "Luister graag"
 
 #: analyzers/analyzercontainer.cpp:62
 #: visualisations/visualisationcontainer.cpp:107
 #, qt-format
 msgid "Low (%1 fps)"
-msgstr ""
+msgstr "Laag (%1 fps)"
 
 #: visualisations/visualisationcontainer.cpp:117
 msgid "Low (256x256)"
-msgstr ""
+msgstr "Laag (256x256)"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:135
 msgid "Low complexity profile (LC)"
-msgstr ""
+msgstr "Lae kompleksitietsprofiel (LC)"
 
 #: ../bin/src/ui_songinfosettingspage.h:187
 msgid "Lyrics"
-msgstr ""
+msgstr "Lirieke"
 
 #: songinfo/ultimatelyricsprovider.cpp:136
 #, qt-format
 msgid "Lyrics from %1"
-msgstr ""
+msgstr "Lirieke vanaf %1"
 
-#: core/song.cpp:317 ../bin/src/ui_transcodersettingspage.h:159
+#: core/song.cpp:321 ../bin/src/ui_transcodersettingspage.h:159
 msgid "MP3"
-msgstr ""
+msgstr "MP3"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:177
 msgid "MP3 256k"
-msgstr ""
+msgstr "MP3 256k"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:170
 msgid "MP3 96k"
-msgstr ""
+msgstr "MP3 96k"
 
-#: core/song.cpp:315
+#: core/song.cpp:319
 msgid "MP4 AAC"
-msgstr ""
+msgstr "MP4 AAC"
 
-#: core/song.cpp:316
+#: core/song.cpp:320
 msgid "MPC"
-msgstr ""
+msgstr "MPC"
 
 #: internet/magnatuneservice.cpp:102 ../bin/src/ui_magnatunesettingspage.h:154
 msgid "Magnatune"
-msgstr ""
+msgstr "Magnatune"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:131
 msgid "Magnatune Download"
-msgstr ""
+msgstr "Magnatune aflaai"
 
 #: widgets/osd.cpp:190
 msgid "Magnatune download finished"
-msgstr ""
+msgstr "Klaar afgelaai vanaf Magnatune"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:134
 msgid "Main profile (MAIN)"
-msgstr ""
+msgstr "Hoofprofiel (MAIN)"
 
 #: core/backgroundstreams.cpp:36 ../bin/src/ui_mainwindow.h:680
 msgid "Make it so!"
-msgstr ""
+msgstr "Maak dit so!"
 
-#: internet/spotifyservice.cpp:516
+#: internet/spotifyservice.cpp:520
 msgid "Make playlist available offline"
-msgstr ""
+msgstr "Maak afspeellys aflyn beskikbaar"
 
-#: internet/lastfmservice.cpp:467
+#: internet/lastfmservice.cpp:448
 msgid "Malformed response"
-msgstr ""
+msgstr "Misvormde antwoord"
 
 #: ../bin/src/ui_networkproxysettingspage.h:160
 msgid "Manual proxy configuration"
-msgstr ""
+msgstr "Stel instaanbediener per hand in"
 
 #: ../bin/src/ui_podcastsettingspage.h:231
 #: ../bin/src/ui_podcastsettingspage.h:245
@@ -2701,7 +2701,7 @@ msgstr ""
 
 #: devices/deviceproperties.cpp:153
 msgid "Manufacturer"
-msgstr ""
+msgstr "Vervaardiger"
 
 #: podcasts/podcastservice.cpp:284
 msgid "Mark as listened"
@@ -2713,45 +2713,45 @@ msgstr ""
 
 #: ../bin/src/ui_querysearchpage.h:116
 msgid "Match every search term (AND)"
-msgstr ""
+msgstr "Voldoen aan alle soekterme (AND)"
 
 #: ../bin/src/ui_querysearchpage.h:117
 msgid "Match one or more search terms (OR)"
-msgstr ""
+msgstr "Voldoen aan een of meer soekterme (OR)"
 
 #: ../bin/src/ui_transcoderoptionsvorbis.h:209
 msgid "Maximum bitrate"
-msgstr ""
+msgstr "Maksimum bistempo"
 
 #: analyzers/analyzercontainer.cpp:63
 #: visualisations/visualisationcontainer.cpp:108
 #, qt-format
 msgid "Medium (%1 fps)"
-msgstr ""
+msgstr "Medium (%1 fps)"
 
 #: visualisations/visualisationcontainer.cpp:118
 msgid "Medium (512x512)"
-msgstr ""
+msgstr "Medium (512x512)"
 
 #: ../bin/src/ui_magnatunesettingspage.h:156
 msgid "Membership type"
-msgstr ""
+msgstr "Lidmaatskapstipe"
 
 #: ../bin/src/ui_transcoderoptionsvorbis.h:206
 msgid "Minimum bitrate"
-msgstr ""
+msgstr "Minimum bistempo"
 
 #: visualisations/projectmvisualisation.cpp:127
 msgid "Missing projectM presets"
-msgstr ""
+msgstr "projectM voorinstellings word vermis"
 
 #: devices/deviceproperties.cpp:152
 msgid "Model"
-msgstr ""
+msgstr "Model"
 
 #: ../bin/src/ui_librarysettingspage.h:163
 msgid "Monitor the library for changes"
-msgstr ""
+msgstr "Hou die versameling vir veranderings dop"
 
 #: ../bin/src/ui_playbacksettingspage.h:296
 msgid "Mono playback"
@@ -2759,14 +2759,14 @@ msgstr ""
 
 #: smartplaylists/searchterm.cpp:303
 msgid "Months"
-msgstr ""
+msgstr "Maande"
 
 #: playlist/playlist.cpp:1200
 msgid "Mood"
 msgstr ""
 
-#: ../bin/src/ui_appearancesettingspage.h:246
 #: moodbar/moodbarproxystyle.cpp:342
+#: ../bin/src/ui_appearancesettingspage.h:246
 msgid "Moodbar style"
 msgstr ""
 
@@ -2776,148 +2776,148 @@ msgstr ""
 
 #: library/library.cpp:72
 msgid "Most played"
-msgstr ""
+msgstr "Meeste gespeel"
 
 #: devices/giolister.cpp:159
 msgid "Mount point"
-msgstr ""
+msgstr "Monteringsadres"
 
 #: devices/devicekitlister.cpp:125
 msgid "Mount points"
-msgstr ""
+msgstr "Monteringsadresse"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:149
 #: ../bin/src/ui_queuemanager.h:131 ../bin/src/ui_songinfosettingspage.h:190
 msgid "Move down"
-msgstr ""
+msgstr "Skuid af"
 
 #: ui/mainwindow.cpp:487 widgets/fileviewlist.cpp:41
 msgid "Move to library..."
-msgstr ""
+msgstr "Skuid na versameling..."
 
 #: ../bin/src/ui_globalsearchsettingspage.h:148
 #: ../bin/src/ui_queuemanager.h:127 ../bin/src/ui_songinfosettingspage.h:189
 msgid "Move up"
-msgstr ""
+msgstr "Skuid op"
 
-#: transcoder/transcodedialog.cpp:213 ui/mainwindow.cpp:1530
+#: transcoder/transcodedialog.cpp:213 ui/mainwindow.cpp:1531
 msgid "Music"
 msgstr ""
 
 #: ../bin/src/ui_librarysettingspage.h:157
 msgid "Music Library"
-msgstr ""
+msgstr "Musiekversameling"
 
-#: core/globalshortcuts.cpp:54 ../bin/src/ui_mainwindow.h:702
-#: wiimotedev/wiimotesettingspage.cpp:105
+#: core/globalshortcuts.cpp:54 wiimotedev/wiimotesettingspage.cpp:105
+#: ../bin/src/ui_mainwindow.h:702
 msgid "Mute"
-msgstr ""
+msgstr "Maak stil"
 
-#: globalsearch/lastfmsearchprovider.cpp:53 internet/lastfmservice.cpp:196
+#: globalsearch/lastfmsearchprovider.cpp:53 internet/lastfmservice.cpp:194
 msgid "My Last.fm Library"
-msgstr ""
+msgstr "My Last.fm versameling"
 
-#: globalsearch/lastfmsearchprovider.cpp:55 internet/lastfmservice.cpp:201
+#: globalsearch/lastfmsearchprovider.cpp:55 internet/lastfmservice.cpp:199
 msgid "My Last.fm Mix Radio"
-msgstr ""
+msgstr "My Last.fm radio mengsel"
 
-#: globalsearch/lastfmsearchprovider.cpp:57 internet/lastfmservice.cpp:206
+#: globalsearch/lastfmsearchprovider.cpp:57 internet/lastfmservice.cpp:204
 msgid "My Last.fm Neighborhood"
-msgstr ""
+msgstr "My Last.fm buurt"
 
-#: globalsearch/lastfmsearchprovider.cpp:51 internet/lastfmservice.cpp:191
+#: globalsearch/lastfmsearchprovider.cpp:51 internet/lastfmservice.cpp:189
 msgid "My Last.fm Recommended Radio"
-msgstr ""
+msgstr "My Last.fm aanbevole radio"
 
-#: internet/lastfmservice.cpp:198
+#: internet/lastfmservice.cpp:196
 msgid "My Mix Radio"
-msgstr ""
+msgstr "My radio mengsel"
 
-#: internet/lastfmservice.cpp:203
+#: internet/lastfmservice.cpp:201
 msgid "My Neighborhood"
-msgstr ""
+msgstr "My buurt"
 
-#: internet/lastfmservice.cpp:193
+#: internet/lastfmservice.cpp:191
 msgid "My Radio Station"
-msgstr ""
+msgstr "My radiostasie"
 
-#: internet/lastfmservice.cpp:188
+#: internet/lastfmservice.cpp:186
 msgid "My Recommendations"
-msgstr ""
+msgstr "Aanbevelings"
 
-#: internet/groovesharkservice.cpp:1211 internet/groovesharkservice.cpp:1305
+#: internet/groovesharkservice.cpp:1207 internet/groovesharkservice.cpp:1300
 #: ui/equalizer.cpp:172 ../bin/src/ui_deviceproperties.h:369
 #: ../bin/src/ui_magnatunedownloaddialog.h:135
 #: ../bin/src/ui_wizardfinishpage.h:84
 #: ../bin/src/ui_globalshortcutssettingspage.h:174
 msgid "Name"
-msgstr ""
+msgstr "Naam"
 
 #: ../bin/src/ui_organisedialog.h:197
 msgid "Naming options"
-msgstr ""
+msgstr "Benamingsopsies"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:230
 msgid "Narrow band (NB)"
-msgstr ""
+msgstr "Nouband (NB)"
 
-#: internet/lastfmservice.cpp:230
+#: internet/lastfmservice.cpp:228
 msgid "Neighbors"
-msgstr ""
+msgstr "Bure"
 
 #: ../bin/src/ui_songinfosettingspage.h:184
 msgid "Network"
-msgstr ""
+msgstr "Netwerk"
 
 #: ../bin/src/ui_networkproxysettingspage.h:157
 msgid "Network Proxy"
-msgstr ""
+msgstr "Instaanbediener"
 
 #: playlist/playlistdelegates.cpp:299 ui/edittagdialog.cpp:479
 msgid "Never"
-msgstr ""
+msgstr "Nooit"
 
 #: library/library.cpp:65
 msgid "Never played"
-msgstr ""
+msgstr "Nooit deurgespeel"
 
 #: ../bin/src/ui_behavioursettingspage.h:186
 #: ../bin/src/ui_behavioursettingspage.h:200
 msgid "Never start playing"
-msgstr ""
+msgstr "Nooit begin afspeel"
 
-#: ui/mainwindow.cpp:1370 ../bin/src/ui_mainwindow.h:690
+#: ui/mainwindow.cpp:1371 ../bin/src/ui_mainwindow.h:690
 msgid "New playlist"
-msgstr ""
+msgstr "Nuwe afspeellys"
 
-#: library/libraryview.cpp:268
+#: library/libraryview.cpp:274
 msgid "New smart playlist..."
-msgstr ""
+msgstr "Nuwe slimspeellys"
 
 #: widgets/freespacebar.cpp:46
 msgid "New songs"
-msgstr ""
+msgstr "Nuwe liedjies"
 
 #: ../bin/src/ui_dynamicplaylistcontrols.h:110
 msgid "New tracks will be added automatically."
-msgstr ""
+msgstr "Nuwe snitte sal outomaties toegevoeg word."
 
 #: library/library.cpp:78
 msgid "Newest tracks"
-msgstr ""
+msgstr "Nuutste snitte"
 
 #: ui/edittagdialog.cpp:161 ui/trackselectiondialog.cpp:49
 msgid "Next"
-msgstr ""
+msgstr "Volgende"
 
-#: core/globalshortcuts.cpp:50 ../bin/src/ui_mainwindow.h:644
-#: wiimotedev/wiimotesettingspage.cpp:99
+#: core/globalshortcuts.cpp:50 wiimotedev/wiimotesettingspage.cpp:99
+#: ../bin/src/ui_mainwindow.h:644
 msgid "Next track"
-msgstr ""
+msgstr "Volgende snit"
 
 #: analyzers/analyzercontainer.cpp:80
 msgid "No analyzer"
-msgstr ""
+msgstr "Geen analiseerder"
 
 #: ../bin/src/ui_appearancesettingspage.h:241
 msgid "No background image"
@@ -2925,25 +2925,25 @@ msgstr ""
 
 #: ../bin/src/ui_transcoderoptionsaac.h:146
 msgid "No long blocks"
-msgstr ""
+msgstr "Geen lang blokke"
 
-#: playlist/playlistcontainer.cpp:416
+#: playlist/playlistcontainer.cpp:405
 msgid ""
 "No matches found.  Clear the search box to show the whole playlist again."
-msgstr ""
+msgstr "Geen gevind.  Vee soekveld uit om hele afspeellys te toon."
 
 #: ../bin/src/ui_transcoderoptionsaac.h:145
 msgid "No short blocks"
-msgstr ""
+msgstr "Geen kort blokke"
 
 #: ../bin/src/ui_groupbydialog.h:128 ../bin/src/ui_groupbydialog.h:141
 #: ../bin/src/ui_groupbydialog.h:154
 msgid "None"
-msgstr ""
+msgstr "Geen"
 
-#: library/libraryview.cpp:492 ui/mainwindow.cpp:1758 ui/mainwindow.cpp:1879
+#: library/libraryview.cpp:498 ui/mainwindow.cpp:1759 ui/mainwindow.cpp:1880
 msgid "None of the selected songs were suitable for copying to a device"
-msgstr ""
+msgstr "Geen van die gekose liedjies is geskik om na die toestel te kopiëer nie."
 
 #: moodbar/moodbarrenderer.cpp:155
 msgid "Normal"
@@ -2951,89 +2951,89 @@ msgstr ""
 
 #: ../bin/src/ui_transcoderoptionsaac.h:144
 msgid "Normal block type"
-msgstr ""
+msgstr "Normale blok tipe"
 
 #: playlist/playlistsequence.cpp:170
 msgid "Not available while using a dynamic playlist"
-msgstr ""
+msgstr "Onbeskikbaar in slimspeellyste"
 
 #: devices/deviceview.cpp:107
 msgid "Not connected"
-msgstr ""
+msgstr "Nie verbind"
 
-#: internet/lastfmservice.cpp:462
+#: internet/lastfmservice.cpp:443
 msgid "Not enough content"
-msgstr ""
+msgstr "Nie genoeg inhoud"
 
-#: internet/lastfmservice.cpp:464
+#: internet/lastfmservice.cpp:445
 msgid "Not enough fans"
-msgstr ""
+msgstr "Nie genoeg ondersteuners nie"
 
-#: internet/lastfmservice.cpp:463
+#: internet/lastfmservice.cpp:444
 msgid "Not enough members"
-msgstr ""
+msgstr "Nie genoeg lidmate nie"
 
-#: internet/lastfmservice.cpp:465
+#: internet/lastfmservice.cpp:446
 msgid "Not enough neighbors"
-msgstr ""
+msgstr "Nie genoeg bure nie"
 
 #: internet/spotifysettingspage.cpp:74
 msgid "Not installed"
-msgstr ""
+msgstr "Nie geïnstalleer"
 
 #: globalsearch/globalsearchsettingspage.cpp:120
 #: globalsearch/searchproviderstatuswidget.cpp:48
 msgid "Not logged in"
-msgstr ""
+msgstr "Nie aangeteken nie"
 
 #: devices/deviceview.cpp:111
 msgid "Not mounted - double click to mount"
-msgstr ""
+msgstr "Nie gemonteer - dubbelkliek om te monteer"
 
 #: ../bin/src/ui_notificationssettingspage.h:404
 msgid "Notification type"
-msgstr ""
+msgstr "Kennisgewing tipe"
 
 #: ../bin/src/ui_notificationssettingspage.h:359
 msgid "Notifications"
-msgstr ""
+msgstr "Kennisgewings"
 
 #: ui/macsystemtrayicon.mm:64
 msgid "Now Playing"
-msgstr ""
+msgstr "Aan die speel"
 
 #: ui/notificationssettingspage.cpp:37
 msgid "OSD Preview"
-msgstr ""
+msgstr "Skermbeeld voorskou"
 
-#: core/song.cpp:318
+#: core/song.cpp:322
 msgid "Ogg Flac"
-msgstr ""
+msgstr "Ogg Flac"
 
-#: core/song.cpp:319
+#: core/song.cpp:323
 msgid "Ogg Speex"
-msgstr ""
+msgstr "Ogg Speex"
 
-#: core/song.cpp:320 ../bin/src/ui_magnatunedownloaddialog.h:139
+#: core/song.cpp:324 ../bin/src/ui_magnatunedownloaddialog.h:139
 #: ../bin/src/ui_magnatunesettingspage.h:170
 msgid "Ogg Vorbis"
-msgstr ""
+msgstr "Ogg Vorbis"
 
 #: ../bin/src/ui_querysortpage.h:142
 msgid "Only show the first"
-msgstr ""
+msgstr "Toon slegs die eerste"
 
 #: internet/digitallyimportedservicebase.cpp:178
-#: internet/groovesharkservice.cpp:529 internet/icecastservice.cpp:296
+#: internet/groovesharkservice.cpp:547 internet/icecastservice.cpp:296
 #: internet/jamendoservice.cpp:418 internet/magnatuneservice.cpp:276
 #: internet/somafmservice.cpp:91
 #, qt-format
 msgid "Open %1 in browser"
-msgstr ""
+msgstr "Maak %1 in webblaaier oop"
 
 #: ../bin/src/ui_mainwindow.h:676
 msgid "Open &audio CD..."
-msgstr ""
+msgstr "Maak &oudio CD oop..."
 
 #: podcasts/addpodcastdialog.cpp:230
 msgid "Open OPML file"
@@ -3045,74 +3045,74 @@ msgstr ""
 
 #: ../bin/src/ui_deviceproperties.h:382
 msgid "Open device"
-msgstr ""
+msgstr "Open device"
 
 #: ../bin/src/ui_mainwindow.h:675
 msgid "Open file..."
-msgstr ""
+msgstr "Lêer..."
 
 #: devices/deviceview.cpp:215 globalsearch/globalsearchview.cpp:416
-#: internet/internetservice.cpp:75 library/libraryview.cpp:260
+#: internet/internetservice.cpp:76 library/libraryview.cpp:266
 #: widgets/fileviewlist.cpp:36 ../bin/src/ui_behavioursettingspage.h:195
 msgid "Open in new playlist"
-msgstr ""
+msgstr "Maak in nuwe afspeellys oop"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:169
 #: ../bin/src/ui_globalshortcutssettingspage.h:171
 msgid "Open..."
-msgstr ""
+msgstr "Maak oop..."
 
-#: internet/lastfmservice.cpp:454
+#: internet/lastfmservice.cpp:435
 msgid "Operation failed"
-msgstr ""
+msgstr "Aksie gestop"
 
 #: ../bin/src/ui_transcoderoptionsmp3.h:193
 msgid "Optimize for bitrate"
-msgstr ""
+msgstr "Fokus op bistempo"
 
 #: ../bin/src/ui_transcoderoptionsmp3.h:191
 msgid "Optimize for quality"
-msgstr ""
+msgstr "Fokus op kwaliteit"
 
 #: ../bin/src/ui_transcodedialog.h:210
 msgid "Options..."
-msgstr ""
+msgstr "Keuses..."
 
 #: ../bin/src/ui_organisedialog.h:188
 msgid "Organise Files"
-msgstr ""
+msgstr "Sorteer Lêers"
 
-#: library/libraryview.cpp:276 ui/mainwindow.cpp:488
+#: library/libraryview.cpp:282 ui/mainwindow.cpp:488
 msgid "Organise files..."
-msgstr ""
+msgstr "Sorteer Lêers..."
 
 #: core/organise.cpp:65
 msgid "Organising files"
-msgstr ""
+msgstr "Lêers word gesorteer"
 
 #: ui/trackselectiondialog.cpp:167
 msgid "Original tags"
-msgstr ""
+msgstr "Oorspronklike etikette"
 
 #: core/commandlineoptions.cpp:160
 msgid "Other options"
-msgstr ""
+msgstr "Ander keuses"
 
 #: ../bin/src/ui_playbacksettingspage.h:289
 msgid "Output device"
-msgstr ""
+msgstr "Uittree toestel"
 
 #: ../bin/src/ui_transcodedialog.h:208
 msgid "Output options"
-msgstr ""
+msgstr "Uittree keuses"
 
 #: ../bin/src/ui_playbacksettingspage.h:284
 msgid "Output plugin"
-msgstr ""
+msgstr "Uittree uitbreiding"
 
 #: ../bin/src/ui_organisedialog.h:207
 msgid "Overwrite existing files"
-msgstr ""
+msgstr "Oorskryf bestaande lêers"
 
 #: ../bin/src/ui_podcastinfowidget.h:195
 msgid "Owner"
@@ -3120,11 +3120,11 @@ msgstr ""
 
 #: internet/jamendoservice.cpp:213
 msgid "Parsing Jamendo catalogue"
-msgstr ""
+msgstr "Verwerk Jamendo katalogus"
 
 #: ui/equalizer.cpp:118
 msgid "Party"
-msgstr ""
+msgstr "Partytjie"
 
 #: ../bin/src/ui_groovesharksettingspage.h:115
 #: ../bin/src/ui_magnatunesettingspage.h:165
@@ -3132,476 +3132,476 @@ msgstr ""
 #: ../bin/src/ui_podcastsettingspage.h:253
 #: ../bin/src/ui_networkproxysettingspage.h:169
 msgid "Password"
-msgstr ""
+msgstr "Wagwoord"
 
 #: devices/ilister.cpp:119
 msgid "Password Protected"
-msgstr ""
+msgstr "Beskermd deur 'n wagwoord"
 
-#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:826 ui/mainwindow.cpp:1212
+#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:827 ui/mainwindow.cpp:1213
 #: ui/qtsystemtrayicon.cpp:178 wiimotedev/wiimotesettingspage.cpp:106
 msgid "Pause"
-msgstr ""
+msgstr "Pause"
 
 #: core/commandlineoptions.cpp:147
 msgid "Pause playback"
-msgstr ""
+msgstr "Afspeel is gepauseer"
 
 #: widgets/osd.cpp:156
 msgid "Paused"
-msgstr ""
+msgstr "Gepauseerd"
 
 #: widgets/fancytabwidget.cpp:653
 msgid "Plain sidebar"
-msgstr ""
+msgstr "Gewone sykieslys"
 
-#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:471 ui/mainwindow.cpp:794
-#: ui/mainwindow.cpp:813 ui/mainwindow.cpp:1215 ui/qtsystemtrayicon.cpp:166
-#: ui/qtsystemtrayicon.cpp:192 ../bin/src/ui_mainwindow.h:640
-#: wiimotedev/wiimotesettingspage.cpp:101
+#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:471 ui/mainwindow.cpp:795
+#: ui/mainwindow.cpp:814 ui/mainwindow.cpp:1216 ui/qtsystemtrayicon.cpp:166
+#: ui/qtsystemtrayicon.cpp:192 wiimotedev/wiimotesettingspage.cpp:101
+#: ../bin/src/ui_mainwindow.h:640
 msgid "Play"
-msgstr ""
+msgstr "Speel"
 
 #: ../bin/src/ui_lastfmstationdialog.h:92
 msgid "Play Artist or Tag"
-msgstr ""
+msgstr "Speel kunstenaar of etiket"
 
-#: internet/lastfmservice.cpp:119
+#: internet/lastfmservice.cpp:117
 msgid "Play artist radio..."
-msgstr ""
+msgstr "Speel kunstenaar radio..."
 
 #: playlist/playlist.cpp:1183 ../bin/src/ui_edittagdialog.h:637
 msgid "Play count"
-msgstr ""
+msgstr "Afspeeltelling"
 
-#: internet/lastfmservice.cpp:123
+#: internet/lastfmservice.cpp:121
 msgid "Play custom radio..."
-msgstr ""
+msgstr "Speel ander radio..."
 
 #: core/commandlineoptions.cpp:146
 msgid "Play if stopped, pause if playing"
-msgstr ""
+msgstr "Speel indien gepauseerd, pauseer indien speel"
 
 #: ../bin/src/ui_behavioursettingspage.h:187
 #: ../bin/src/ui_behavioursettingspage.h:201
 msgid "Play if there is nothing already playing"
-msgstr ""
+msgstr "Speel as daar niks anders tans speel nie"
 
-#: internet/lastfmservice.cpp:121
+#: internet/lastfmservice.cpp:119
 msgid "Play tag radio..."
-msgstr ""
+msgstr "Speel etiket radio..."
 
 #: core/commandlineoptions.cpp:159
 msgid "Play the <n>th track in the playlist"
-msgstr ""
+msgstr "Speel die <n>de snit in die afspeellys"
 
 #: core/globalshortcuts.cpp:47 wiimotedev/wiimotesettingspage.cpp:107
 msgid "Play/Pause"
-msgstr ""
+msgstr "Speel/Pause"
 
 #: ../bin/src/ui_playbacksettingspage.h:264
 msgid "Playback"
-msgstr ""
+msgstr "Afspeel"
 
 #: core/commandlineoptions.cpp:144
 msgid "Player options"
-msgstr ""
+msgstr "Afspeler keuses"
 
-#: playlist/playlistcontainer.cpp:297 playlist/playlistmanager.cpp:83
+#: playlist/playlistcontainer.cpp:286 playlist/playlistmanager.cpp:83
 #: playlist/playlistmanager.cpp:379 playlist/playlisttabbar.cpp:292
 msgid "Playlist"
-msgstr ""
+msgstr "Afspeellys"
 
 #: widgets/osd.cpp:173
 msgid "Playlist finished"
-msgstr ""
+msgstr "Afspeellys deurgewerk"
 
 #: core/commandlineoptions.cpp:156
 msgid "Playlist options"
-msgstr ""
+msgstr "Afspeellys keuses"
 
-#: playlist/playlistcontainer.cpp:93 playlist/specialplaylisttype.cpp:23
+#: playlist/specialplaylisttype.cpp:23
 msgid "Playlist search"
-msgstr ""
+msgstr "Soek deur afspeellys"
 
 #: smartplaylists/wizard.cpp:72
 msgid "Playlist type"
-msgstr ""
+msgstr "Afspeellys tipe"
 
-#: internet/groovesharkservice.cpp:590
+#: internet/groovesharkservice.cpp:618
 msgid "Playlists"
-msgstr ""
+msgstr "Afspeellys"
 
 #: ../bin/src/ui_spotifysettingspage.h:215
 msgid "Plugin status:"
-msgstr ""
+msgstr "Uitbreiding toestand:"
 
 #: podcasts/podcastservice.cpp:110 ../bin/src/ui_podcastsettingspage.h:226
 msgid "Podcasts"
-msgstr ""
+msgstr "Potgooie"
 
 #: ui/equalizer.cpp:119
 msgid "Pop"
-msgstr ""
+msgstr "Pop"
 
-#: internet/groovesharkservice.cpp:558
+#: internet/groovesharkservice.cpp:578
 msgid "Popular songs"
-msgstr ""
+msgstr "Populêre liedjies"
 
-#: internet/groovesharkservice.cpp:562
+#: internet/groovesharkservice.cpp:581
 msgid "Popular songs of the Month"
-msgstr ""
+msgstr "Populêre liedjies van die maand"
 
-#: internet/groovesharkservice.cpp:569
+#: internet/groovesharkservice.cpp:588
 msgid "Popular songs today"
-msgstr ""
+msgstr "Populêre liedjies van vandag"
 
 #: ../bin/src/ui_notificationssettingspage.h:410
 msgid "Popup duration"
-msgstr ""
+msgstr "Duur van opspringkennisgewing"
 
 #: ../bin/src/ui_networkproxysettingspage.h:166
 msgid "Port"
-msgstr ""
+msgstr "Poort"
 
 #: ui/equalizer.cpp:46 ../bin/src/ui_playbacksettingspage.h:281
 msgid "Pre-amp"
-msgstr ""
+msgstr "Voorversterker"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:166
 #: ../bin/src/ui_magnatunesettingspage.h:166
 #: ../bin/src/ui_spotifysettingspage.h:217 ../bin/src/ui_settingsdialog.h:115
 #: ../bin/src/ui_lastfmsettingspage.h:155
 msgid "Preferences"
-msgstr ""
+msgstr "Instellings"
 
 #: ../bin/src/ui_mainwindow.h:665
 msgid "Preferences..."
-msgstr ""
+msgstr "Instellings..."
 
 #: ../bin/src/ui_librarysettingspage.h:164
 msgid "Preferred album art filenames (comma separated)"
-msgstr ""
+msgstr "Voorkeur album omslag lêername (skei met 'n komma)"
 
 #: ../bin/src/ui_magnatunesettingspage.h:167
 msgid "Preferred audio format"
-msgstr ""
+msgstr "Voorkeur oudioformaat"
 
 #: ../bin/src/ui_spotifysettingspage.h:218
 msgid "Preferred bitrate"
-msgstr ""
+msgstr "Voorkeur bistempo"
 
 #: ../bin/src/ui_deviceproperties.h:380
 msgid "Preferred format"
-msgstr ""
+msgstr "Voorkeur formaat"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:174
 msgid "Premium audio type"
-msgstr ""
+msgstr "Premium oudio tipe"
 
 #: ../bin/src/ui_equalizer.h:119
 msgid "Preset:"
-msgstr ""
+msgstr "Voorinstelling:"
 
 #: ../bin/src/ui_wiimoteshortcutgrabber.h:124
 msgid "Press a button combination to use for"
-msgstr ""
+msgstr "Druk 'n sleutelsamestelling om te gebruik vir"
 
 #: ../bin/src/ui_globalshortcutgrabber.h:73
 msgid "Press a key"
-msgstr ""
+msgstr "Druk 'n knoppie"
 
 #: ui/globalshortcutgrabber.cpp:39 ../bin/src/ui_globalshortcutgrabber.h:74
 #, qt-format
 msgid "Press a key combination to use for %1..."
-msgstr ""
+msgstr "Druk 'n sleutelsametelling om te gebruik vir %1..."
 
 #: ../bin/src/ui_notificationssettingspage.h:423
 msgid "Pretty OSD options"
-msgstr ""
+msgstr "Mooi skermbeeld keuses"
 
 #: ../bin/src/ui_searchpreview.h:105 ../bin/src/ui_songinfosettingspage.h:183
 #: ../bin/src/ui_notificationssettingspage.h:418
 #: ../bin/src/ui_organisedialog.h:208
 msgid "Preview"
-msgstr ""
+msgstr "Voorskou"
 
 #: ui/edittagdialog.cpp:160 ui/trackselectiondialog.cpp:48
 msgid "Previous"
-msgstr ""
+msgstr "Vorige"
 
-#: core/globalshortcuts.cpp:51 ../bin/src/ui_mainwindow.h:638
-#: wiimotedev/wiimotesettingspage.cpp:100
+#: core/globalshortcuts.cpp:51 wiimotedev/wiimotesettingspage.cpp:100
+#: ../bin/src/ui_mainwindow.h:638
 msgid "Previous track"
-msgstr ""
+msgstr "Vorige snit"
 
 #: core/commandlineoptions.cpp:167
 msgid "Print out version information"
-msgstr ""
+msgstr "Toon weergawe inligting"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:131
 msgid "Profile"
-msgstr ""
+msgstr "Profiel"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:134
 #: ../bin/src/ui_transcodedialog.h:216
 msgid "Progress"
-msgstr ""
+msgstr "Vordering"
 
-#: ../bin/src/ui_wiimoteshortcutgrabber.h:125
 #: wiimotedev/wiimotesettingspage.cpp:227
+#: ../bin/src/ui_wiimoteshortcutgrabber.h:125
 msgid "Push Wiiremote button"
-msgstr ""
+msgstr "Druk 'n knoppie op die Wii-afstandsbeheer"
 
 #: ../bin/src/ui_querysortpage.h:138
 msgid "Put songs in a random order"
-msgstr ""
+msgstr "Skommel die liedjies"
 
+#: visualisations/visualisationcontainer.cpp:114
 #: ../bin/src/ui_transcoderoptionsflac.h:81
 #: ../bin/src/ui_transcoderoptionsmp3.h:192
 #: ../bin/src/ui_transcoderoptionsspeex.h:217
 #: ../bin/src/ui_transcoderoptionsvorbis.h:202
-#: visualisations/visualisationcontainer.cpp:114
 msgid "Quality"
-msgstr ""
+msgstr "Kwaliteit"
 
 #: ../bin/src/ui_deviceproperties.h:383
 msgid "Querying device..."
-msgstr ""
+msgstr "Toestel word ondervra..."
 
 #: ../bin/src/ui_queuemanager.h:125 ../bin/src/ui_mainwindow.h:700
 msgid "Queue Manager"
-msgstr ""
+msgstr "Tou bestuurder"
 
-#: ui/mainwindow.cpp:1293
+#: ui/mainwindow.cpp:1294
 msgid "Queue selected tracks"
-msgstr ""
+msgstr "Plaas geselekteerde snitte in die tou"
 
-#: globalsearch/globalsearchview.cpp:420 library/libraryview.cpp:264
-#: ui/mainwindow.cpp:1291
+#: globalsearch/globalsearchview.cpp:420 library/libraryview.cpp:270
+#: ui/mainwindow.cpp:1292
 msgid "Queue track"
-msgstr ""
+msgstr "Plaas snit in die tou"
 
 #: ../bin/src/ui_playbacksettingspage.h:278
 msgid "Radio (equal loudness for all tracks)"
-msgstr ""
+msgstr "Radio (selfde hardheid vir alle snitte)"
 
-#: internet/groovesharkservice.cpp:576
+#: internet/groovesharkservice.cpp:596
 msgid "Radios"
-msgstr ""
+msgstr "Radio's"
 
 #: core/backgroundstreams.cpp:31 ../bin/src/ui_mainwindow.h:678
 msgid "Rain"
-msgstr ""
+msgstr "Rëen"
 
 #: ../bin/src/ui_visualisationselector.h:112
 msgid "Random visualization"
-msgstr ""
+msgstr "Willekeurige visualisasie"
 
 #: core/globalshortcuts.cpp:64
 msgid "Rate the current song 0 stars"
-msgstr ""
+msgstr "Gee die huidige liedjie 0 sterre"
 
 #: core/globalshortcuts.cpp:65
 msgid "Rate the current song 1 star"
-msgstr ""
+msgstr "Gee die huidige liedjie 1 ster"
 
 #: core/globalshortcuts.cpp:66
 msgid "Rate the current song 2 stars"
-msgstr ""
+msgstr "Gee die huidige liedjie 2 sterre"
 
 #: core/globalshortcuts.cpp:67
 msgid "Rate the current song 3 stars"
-msgstr ""
+msgstr "Gee die huidige liedjie 3 sterre"
 
 #: core/globalshortcuts.cpp:68
 msgid "Rate the current song 4 stars"
-msgstr ""
+msgstr "Gee die huidige liedjie 4 sterre"
 
 #: core/globalshortcuts.cpp:69
 msgid "Rate the current song 5 stars"
-msgstr ""
+msgstr "Gee die huidige liedjie 5 sterre"
 
 #: playlist/playlist.cpp:1182 ../bin/src/ui_edittagdialog.h:645
 msgid "Rating"
-msgstr ""
+msgstr "Aantal sterre"
 
-#: internet/magnatunedownloaddialog.cpp:279 ui/albumcovermanager.cpp:210
+#: internet/magnatunedownloaddialog.cpp:279 ui/albumcovermanager.cpp:197
 msgid "Really cancel?"
-msgstr ""
+msgstr "Wil jy rêrig opgee?"
 
-#: internet/groovesharkservice.cpp:532
+#: internet/groovesharkservice.cpp:550
 msgid "Refresh"
 msgstr ""
 
 #: internet/jamendoservice.cpp:419 internet/magnatuneservice.cpp:277
 msgid "Refresh catalogue"
-msgstr ""
+msgstr "Verfris katalogus"
 
 #: internet/somafmservice.cpp:92
 msgid "Refresh channels"
-msgstr ""
+msgstr "Verfris kanale"
 
-#: internet/lastfmservice.cpp:125
+#: internet/lastfmservice.cpp:123
 msgid "Refresh friends list"
-msgstr ""
+msgstr "Verfris lys van vriende"
 
 #: internet/icecastservice.cpp:297
 msgid "Refresh station list"
-msgstr ""
+msgstr "Verfris lys van stasies"
 
 #: internet/digitallyimportedservicebase.cpp:181
 msgid "Refresh streams"
-msgstr ""
+msgstr "Verfris strome"
 
 #: ui/equalizer.cpp:120
 msgid "Reggae"
-msgstr ""
+msgstr "Reggae"
 
 #: ../bin/src/ui_wiimoteshortcutgrabber.h:126
 msgid "Remember Wii remote swing"
-msgstr ""
+msgstr "Onthou die Wii-afstandsbeheer se swaai"
 
 #: ../bin/src/ui_behavioursettingspage.h:181
 msgid "Remember from last time"
-msgstr ""
+msgstr "Herinner vorige keer s'n"
 
-#: internet/savedradio.cpp:100 ../bin/src/ui_queuemanager.h:135
-#: ../bin/src/ui_searchtermwidget.h:282 ../bin/src/ui_transcodedialog.h:207
-#: internet/lastfmservice.cpp:116
+#: internet/savedradio.cpp:100 internet/lastfmservice.cpp:114
+#: ../bin/src/ui_queuemanager.h:135 ../bin/src/ui_searchtermwidget.h:282
+#: ../bin/src/ui_transcodedialog.h:207
 msgid "Remove"
-msgstr ""
+msgstr "Verwyder"
 
 #: ../bin/src/ui_wiimotesettingspage.h:194
 msgid "Remove action"
-msgstr ""
+msgstr "Verwyder aksie"
 
 #: ../bin/src/ui_librarysettingspage.h:160
 msgid "Remove folder"
-msgstr ""
+msgstr "Verwyder vouer"
 
-#: internet/groovesharkservice.cpp:515
+#: internet/groovesharkservice.cpp:537
 msgid "Remove from favorites"
-msgstr ""
+msgstr "Verwyder van gunstelinge"
 
-#: internet/groovesharkservice.cpp:512 ../bin/src/ui_mainwindow.h:684
+#: internet/groovesharkservice.cpp:534 ../bin/src/ui_mainwindow.h:684
 msgid "Remove from playlist"
-msgstr ""
+msgstr "Verwyder vanuit afspeellys"
 
 #: playlist/playlisttabbar.cpp:48 playlist/playlisttabbar.cpp:158
 msgid "Remove playlist"
-msgstr ""
+msgstr "Verwyder afspeellys"
 
-#: internet/groovesharkservice.cpp:1420
+#: internet/groovesharkservice.cpp:1415
 msgid "Removing song from favorites"
-msgstr ""
+msgstr "Liedjies word uit gunsteling verwyder"
 
-#: internet/groovesharkservice.cpp:1304
+#: internet/groovesharkservice.cpp:1299
 #, qt-format
 msgid "Rename \"%1\" playlist"
-msgstr ""
+msgstr "Herbenoem \"%1\" afspeellys"
 
-#: internet/groovesharkservice.cpp:508
+#: internet/groovesharkservice.cpp:530
 msgid "Rename Grooveshark playlist"
-msgstr ""
+msgstr "Herbenoem Grooveshark afspeellys"
 
 #: playlist/playlisttabbar.cpp:131
 msgid "Rename playlist"
-msgstr ""
+msgstr "Herbenoem afspeellys"
 
 #: playlist/playlisttabbar.cpp:49
 msgid "Rename playlist..."
-msgstr ""
+msgstr "Herbenoem afspeellys..."
 
 #: ../bin/src/ui_mainwindow.h:661
 msgid "Renumber tracks in this order..."
-msgstr ""
+msgstr "Hernommer snitte in hierdie volgorde..."
 
 #: playlist/playlistsequence.cpp:174 ../bin/src/ui_playlistsequence.h:112
 msgid "Repeat"
-msgstr ""
+msgstr "Herhaal"
 
 #: widgets/osd.cpp:288 ../bin/src/ui_playlistsequence.h:105
 msgid "Repeat album"
-msgstr ""
+msgstr "Herhaal album"
 
 #: widgets/osd.cpp:289 ../bin/src/ui_playlistsequence.h:106
 msgid "Repeat playlist"
-msgstr ""
+msgstr "Herhaal afspeellys"
 
 #: widgets/osd.cpp:287 ../bin/src/ui_playlistsequence.h:104
 msgid "Repeat track"
-msgstr ""
+msgstr "Herhaal snit"
 
 #: devices/deviceview.cpp:213 globalsearch/globalsearchview.cpp:414
-#: internet/internetservice.cpp:65 library/libraryview.cpp:258
+#: internet/internetservice.cpp:66 library/libraryview.cpp:264
 #: widgets/fileviewlist.cpp:34
 msgid "Replace current playlist"
-msgstr ""
+msgstr "Vervang huidige afspeellys"
 
 #: ../bin/src/ui_behavioursettingspage.h:194
 msgid "Replace the playlist"
-msgstr ""
+msgstr "Vervang die afspeellys"
 
 #: ../bin/src/ui_organisedialog.h:205
 msgid "Replaces spaces with underscores"
-msgstr ""
+msgstr "Vervang spasies met onderstrepe"
 
 #: ../bin/src/ui_playbacksettingspage.h:273
 msgid "Replay Gain"
-msgstr ""
+msgstr "Afspeel wins"
 
 #: ../bin/src/ui_playbacksettingspage.h:275
 msgid "Replay Gain mode"
-msgstr ""
+msgstr "Afspeel wins modus"
 
 #: ../bin/src/ui_dynamicplaylistcontrols.h:112
 msgid "Repopulate"
-msgstr ""
+msgstr "Verfris"
 
 #: widgets/lineedit.cpp:51
 msgid "Reset"
-msgstr ""
+msgstr "Herstel"
 
 #: ui/edittagdialog.cpp:760 ../bin/src/ui_edittagdialog.h:635
 msgid "Reset play counts"
-msgstr ""
+msgstr "Herstel afspeeltelling"
 
 #: ../bin/src/ui_organisedialog.h:206
 msgid "Restrict to ASCII characters"
-msgstr ""
+msgstr "Beperk tot ASCII karakters"
 
-#: internet/groovesharkservice.cpp:709
+#: internet/groovesharkservice.cpp:725
 msgid "Retrieving Grooveshark favorites songs"
-msgstr ""
+msgstr "Grooveshark gunsteling liedjies word verkry"
 
-#: internet/groovesharkservice.cpp:637
+#: internet/groovesharkservice.cpp:654
 msgid "Retrieving Grooveshark playlists"
-msgstr ""
+msgstr "Grooveshark afspeellys word verkry"
 
 #: ui/equalizer.cpp:121
 msgid "Rock"
-msgstr ""
+msgstr "Rock"
 
 #: ../bin/src/ui_networkproxysettingspage.h:164
 msgid "SOCKS proxy"
-msgstr ""
+msgstr "SOCKS instaanbediener"
 
 #: devices/deviceview.cpp:202
 msgid "Safely remove device"
-msgstr ""
+msgstr "Veilige verwydering van toestel"
 
 #: ../bin/src/ui_organisedialog.h:196
 msgid "Safely remove the device after copying"
-msgstr ""
+msgstr "Verwyder toestel veilig na kopiëring"
 
 #: playlist/playlist.cpp:1190 ../bin/src/ui_edittagdialog.h:642
 msgid "Sample rate"
-msgstr ""
+msgstr "Monstertempo"
 
 #: ui/organisedialog.cpp:68
 msgid "Samplerate"
-msgstr ""
+msgstr "Monstertempo"
 
 #: ../bin/src/ui_appearancesettingspage.h:247
 msgid "Save .mood files in your music library"
@@ -3609,94 +3609,81 @@ msgstr ""
 
 #: ui/albumcoverchoicecontroller.cpp:114
 msgid "Save album cover"
-msgstr ""
+msgstr "Stoor albumomslag"
 
 #: ui/albumcoverchoicecontroller.cpp:60
 msgid "Save cover to disk..."
-msgstr ""
+msgstr "Stoor omslag op skyf"
 
 #: widgets/prettyimage.cpp:185 widgets/prettyimage.cpp:232
 msgid "Save image"
-msgstr ""
+msgstr "Stoor beeld"
 
-#: playlist/playlistcontainer.cpp:340
+#: playlist/playlistcontainer.cpp:329
 msgid "Save playlist"
-msgstr ""
+msgstr "Stoor afspeellys"
 
 #: playlist/playlisttabbar.cpp:50 ../bin/src/ui_mainwindow.h:692
 msgid "Save playlist..."
-msgstr ""
+msgstr "Stoor afspeellys"
 
 #: ui/equalizer.cpp:172 ../bin/src/ui_equalizer.h:121
 msgid "Save preset"
-msgstr ""
+msgstr "Stoor voorinstelling"
 
 #: ../bin/src/ui_addstreamdialog.h:115
 msgid "Save this stream in the Internet tab"
-msgstr ""
+msgstr "Stoor hierdie stroom in die internet oortjie"
 
 #: ui/edittagdialog.cpp:662 ui/trackselectiondialog.cpp:254
 msgid "Saving tracks"
-msgstr ""
+msgstr "Snitte word gestoor"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:136
 msgid "Scalable sampling rate profile (SSR)"
-msgstr ""
+msgstr "Skaleerbare monstertempo profiel (SSR)"
 
 #: playlist/playlist.cpp:1186 ../bin/src/ui_edittagdialog.h:643
 msgid "Score"
-msgstr ""
+msgstr "Telling"
 
 #: ../bin/src/ui_lastfmsettingspage.h:156
 msgid "Scrobble tracks that I listen to"
-msgstr ""
+msgstr "Noteer snitte wat ek na luister op"
 
 #: ui/mainwindow.cpp:226 ../bin/src/ui_globalsearchsettingspage.h:145
 #: ../bin/src/ui_gpoddersearchpage.h:78 ../bin/src/ui_itunessearchpage.h:78
 #: ../bin/src/ui_albumcoversearcher.h:114
 msgid "Search"
-msgstr ""
+msgstr "Soek"
 
 #: internet/groovesharksearchplaylisttype.cpp:32
-#: internet/groovesharkservice.cpp:972
 msgid "Search Grooveshark"
-msgstr ""
-
-#: internet/groovesharkservice.cpp:525 internet/groovesharkservice.cpp:552
-msgid "Search Grooveshark (opens a new tab)"
-msgstr ""
+msgstr "Soek deur Grooveshark"
 
 #: ../bin/src/ui_icecastfilterwidget.h:78
 msgid "Search Icecast stations"
-msgstr ""
+msgstr "Soek deur Icecast stasies"
 
 #: internet/jamendoservice.cpp:425
 msgid "Search Jamendo"
-msgstr ""
+msgstr "Soek deur Jamendo"
 
 #: internet/magnatuneservice.cpp:283
 msgid "Search Magnatune"
-msgstr ""
+msgstr "Soek deur Magnatune"
 
-#: internet/spotifysearchplaylisttype.cpp:32 internet/spotifyservice.cpp:624
+#: internet/spotifysearchplaylisttype.cpp:32
 msgid "Search Spotify"
-msgstr ""
-
-#: internet/spotifyservice.cpp:343
-msgid "Search Spotify (opens a new tab)"
-msgstr ""
-
-#: internet/spotifyservice.cpp:509
-msgid "Search Spotify (opens a new tab)..."
-msgstr ""
+msgstr "Soek deur Spotify"
 
 #: ui/albumcoverchoicecontroller.cpp:62
 msgid "Search for album covers..."
-msgstr ""
+msgstr "Soek vir album omslae..."
 
 #: ../bin/src/ui_globalsearchview.h:208
 msgid "Search for anything"
-msgstr ""
+msgstr "Soek vir enigiets"
 
 #: ../bin/src/ui_gpoddersearchpage.h:76
 msgid "Search gpodder.net"
@@ -3704,52 +3691,56 @@ msgstr ""
 
 #: ../bin/src/ui_itunessearchpage.h:76
 msgid "Search iTunes"
-msgstr ""
+msgstr "Soek deur iTunes"
 
 #: ../bin/src/ui_querysearchpage.h:113
 msgid "Search mode"
-msgstr ""
+msgstr "Soek modus"
 
 #: smartplaylists/querywizardplugin.cpp:153
 msgid "Search options"
+msgstr "Soek instellings"
+
+#: internet/groovesharkservice.cpp:570 internet/spotifyservice.cpp:347
+msgid "Search results"
 msgstr ""
 
 #: smartplaylists/querywizardplugin.cpp:151
 #: ../bin/src/ui_querysearchpage.h:120
 msgid "Search terms"
-msgstr ""
+msgstr "Soekterme"
 
-#: internet/groovesharkservice.cpp:264
+#: internet/groovesharkservice.cpp:271
 msgid "Searching on Grooveshark"
-msgstr ""
+msgstr "Grooveshark word deursoek"
 
 #: ../bin/src/ui_groupbydialog.h:138
 msgid "Second level"
-msgstr ""
+msgstr "Tweede vlak"
 
 #: core/globalshortcuts.cpp:56 wiimotedev/wiimotesettingspage.cpp:108
 msgid "Seek backward"
-msgstr ""
+msgstr "Streef terugwaarts"
 
 #: core/globalshortcuts.cpp:55 wiimotedev/wiimotesettingspage.cpp:109
 msgid "Seek forward"
-msgstr ""
+msgstr "Streef vorentoe"
 
 #: core/commandlineoptions.cpp:155
 msgid "Seek the currently playing track by a relative amount"
-msgstr ""
+msgstr "Streef 'n relatiewe hoeveelheid deur die huidige snit"
 
 #: core/commandlineoptions.cpp:154
 msgid "Seek the currently playing track to an absolute position"
-msgstr ""
+msgstr "Streef na 'n spesifieke posisie in die huidige snit"
 
 #: visualisations/visualisationselector.cpp:40
 msgid "Select All"
-msgstr ""
+msgstr "Kies Almal"
 
 #: visualisations/visualisationselector.cpp:42
 msgid "Select None"
-msgstr ""
+msgstr "Kies geen"
 
 #: ../bin/src/ui_appearancesettingspage.h:233
 msgid "Select background color:"
@@ -3761,7 +3752,7 @@ msgstr ""
 
 #: ../bin/src/ui_trackselectiondialog.h:207
 msgid "Select best possible match"
-msgstr ""
+msgstr "Kies een wat beste voldoen"
 
 #: ../bin/src/ui_appearancesettingspage.h:231
 msgid "Select foreground color:"
@@ -3769,59 +3760,59 @@ msgstr ""
 
 #: ../bin/src/ui_visualisationselector.h:108
 msgid "Select visualizations"
-msgstr ""
+msgstr "Kies visualisasie"
 
 #: visualisations/visualisationcontainer.cpp:124
 msgid "Select visualizations..."
-msgstr ""
+msgstr "Kies visualisasie..."
 
 #: devices/devicekitlister.cpp:124
 msgid "Serial number"
-msgstr ""
+msgstr "Reeksnommer"
 
-#: internet/lastfmservice.cpp:457
+#: internet/lastfmservice.cpp:438
 msgid "Service offline"
-msgstr ""
+msgstr "Diens aflyn"
 
-#: ui/mainwindow.cpp:1320
+#: ui/mainwindow.cpp:1321
 #, qt-format
 msgid "Set %1 to \"%2\"..."
-msgstr ""
+msgstr "Stel %1 na \"%2\"..."
 
 #: core/commandlineoptions.cpp:151
 msgid "Set the volume to <value> percent"
-msgstr ""
+msgstr "Stel die volume na <value> persent"
 
 #: ../bin/src/ui_mainwindow.h:662
 msgid "Set value for all selected tracks..."
-msgstr ""
+msgstr "Stel waarde vir alle geselekteerde snitte"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:173
 msgid "Shortcut"
-msgstr ""
+msgstr "Kortskakel"
 
 #: ui/globalshortcutssettingspage.cpp:133
 #: ../bin/src/ui_globalshortcutssettingspage.h:175
 #, qt-format
 msgid "Shortcut for %1"
-msgstr ""
+msgstr "Kortskakel vir %1"
 
 #: wiimotedev/wiimotesettingspage.cpp:124
 #, qt-format
 msgid "Shortcut for %1 already exists"
-msgstr ""
+msgstr "Kortskakel vir %1 bestaan reeds"
 
-#: library/libraryfilterwidget.cpp:62
+#: library/libraryfilterwidget.cpp:61
 msgid "Show"
-msgstr ""
+msgstr "Wys"
 
 #: core/globalshortcuts.cpp:58 wiimotedev/wiimotesettingspage.cpp:111
 msgid "Show OSD"
-msgstr ""
+msgstr "Wys skermbeeld"
 
 #: ../bin/src/ui_playbacksettingspage.h:265
 msgid "Show a glowing animation on the current track"
-msgstr ""
+msgstr "Maak die huidige snit gloei"
 
 #: ../bin/src/ui_appearancesettingspage.h:245
 msgid "Show a moodbar in the track progress bar"
@@ -3829,56 +3820,56 @@ msgstr ""
 
 #: ../bin/src/ui_notificationssettingspage.h:406
 msgid "Show a native desktop notification"
-msgstr ""
+msgstr "Gebruik die sisteem se eie kennisgewings"
 
 #: ../bin/src/ui_notificationssettingspage.h:414
 msgid "Show a notification when I change the repeat/shuffle mode"
-msgstr ""
+msgstr "Wys 'n kennisgewing as ek die hehaal/skommel modus verander"
 
 #: ../bin/src/ui_notificationssettingspage.h:413
 msgid "Show a notification when I change the volume"
-msgstr ""
+msgstr "Wys 'n kennisgewing as ek die volume verander"
 
 #: ../bin/src/ui_notificationssettingspage.h:408
 msgid "Show a popup from the system tray"
-msgstr ""
+msgstr "Wys 'n opwipkennisgewing vanaf die stelselbalk"
 
 #: ../bin/src/ui_notificationssettingspage.h:407
 msgid "Show a pretty OSD"
-msgstr ""
+msgstr "Wys 'n mooi skermbeeld"
 
 #: widgets/nowplayingwidget.cpp:113
 msgid "Show above status bar"
-msgstr ""
+msgstr "Wys bo toestandsbalk"
 
 #: ui/mainwindow.cpp:444
 msgid "Show all songs"
-msgstr ""
+msgstr "Wys alle liedjies"
 
 #: ../bin/src/ui_querysortpage.h:141
 msgid "Show all the songs"
-msgstr ""
+msgstr "Wys alle liedjies"
 
 #: ../bin/src/ui_librarysettingspage.h:171
 msgid "Show cover art in library"
-msgstr ""
+msgstr "Wys omslae in die versameling"
 
 #: ../bin/src/ui_librarysettingspage.h:172
 msgid "Show dividers"
-msgstr ""
+msgstr "Wys verdelers"
 
 #: ui/albumcoverchoicecontroller.cpp:64 widgets/prettyimage.cpp:183
 msgid "Show fullsize..."
-msgstr ""
+msgstr "Wys volgrootte..."
 
-#: library/libraryview.cpp:288 ui/mainwindow.cpp:491
+#: library/libraryview.cpp:294 ui/mainwindow.cpp:491
 #: widgets/fileviewlist.cpp:52
 msgid "Show in file browser..."
-msgstr ""
+msgstr "Wys in lêerblaaier..."
 
-#: library/libraryview.cpp:292
+#: library/libraryview.cpp:298
 msgid "Show in various artists"
-msgstr ""
+msgstr "Wys tussen verkeie kunstenaars"
 
 #: moodbar/moodbarproxystyle.cpp:337
 msgid "Show moodbar"
@@ -3886,11 +3877,11 @@ msgstr ""
 
 #: ui/mainwindow.cpp:445
 msgid "Show only duplicates"
-msgstr ""
+msgstr "Wys slegs duplikate"
 
 #: ui/mainwindow.cpp:446
 msgid "Show only untagged"
-msgstr ""
+msgstr "Wys slegs sonder etikette"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:153
 msgid "Show search suggestions"
@@ -3898,15 +3889,15 @@ msgstr ""
 
 #: ../bin/src/ui_lastfmsettingspage.h:157
 msgid "Show the \"love\" and \"ban\" buttons"
-msgstr ""
+msgstr "Wys die \"hou van\" en \"verbied\" knoppies"
 
 #: ../bin/src/ui_lastfmsettingspage.h:158
 msgid "Show the scrobble button in the main window"
-msgstr ""
+msgstr "Wys die noteer knoppie in die hoofvenster"
 
 #: ../bin/src/ui_behavioursettingspage.h:170
 msgid "Show tray icon"
-msgstr ""
+msgstr "Wys in stelselbalk"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:152
 msgid "Show which sources are enabled and disabled"
@@ -3914,27 +3905,27 @@ msgstr ""
 
 #: core/globalshortcuts.cpp:57
 msgid "Show/Hide"
-msgstr ""
+msgstr "Wys/Steek weg"
 
 #: playlist/playlistsequence.cpp:173 ../bin/src/ui_playlistsequence.h:115
 msgid "Shuffle"
-msgstr ""
+msgstr "Skommel"
 
 #: widgets/osd.cpp:276 ../bin/src/ui_playlistsequence.h:110
 msgid "Shuffle albums"
-msgstr ""
+msgstr "Skommel albums"
 
 #: widgets/osd.cpp:274 ../bin/src/ui_playlistsequence.h:109
 msgid "Shuffle all"
-msgstr ""
+msgstr "Skommel alles"
 
 #: ../bin/src/ui_mainwindow.h:669
 msgid "Shuffle playlist"
-msgstr ""
+msgstr "Skommel speellys"
 
 #: widgets/osd.cpp:275 ../bin/src/ui_playlistsequence.h:108
 msgid "Shuffle tracks in this album"
-msgstr ""
+msgstr "Skommel snitte in hierdie album"
 
 #: ../bin/src/ui_podcastsettingspage.h:252
 msgid "Sign in"
@@ -3942,91 +3933,91 @@ msgstr ""
 
 #: ../bin/src/ui_loginstatewidget.h:173
 msgid "Sign out"
-msgstr ""
+msgstr "Teken uit"
 
 #: ../bin/src/ui_loginstatewidget.h:175
 msgid "Signing in..."
-msgstr ""
+msgstr "Aan die aanteken..."
 
 #: songinfo/echonestsimilarartists.cpp:57
 msgid "Similar artists"
-msgstr ""
+msgstr "Soortgelyke kunstenaars"
 
 #: ui/equalizer.cpp:123
 msgid "Ska"
-msgstr ""
+msgstr "Ska"
 
 #: core/commandlineoptions.cpp:149
 msgid "Skip backwards in playlist"
-msgstr ""
+msgstr "Spring terugwaarts in afspeellys"
 
 #: playlist/playlist.cpp:1184 ../bin/src/ui_edittagdialog.h:639
 msgid "Skip count"
-msgstr ""
+msgstr "Aantal keer oorgeslaan"
 
 #: core/commandlineoptions.cpp:150
 msgid "Skip forwards in playlist"
-msgstr ""
+msgstr "Spring voorentoe in afspeellys"
 
 #: widgets/nowplayingwidget.cpp:90
 msgid "Small album cover"
-msgstr ""
+msgstr "Klein omslag"
 
 #: widgets/fancytabwidget.cpp:652
 msgid "Small sidebar"
-msgstr ""
+msgstr "Klein kantbalk"
 
 #: smartplaylists/wizard.cpp:68
 msgid "Smart playlist"
-msgstr ""
+msgstr "Slimspeellys"
 
 #: library/librarymodel.cpp:1155
 msgid "Smart playlists"
-msgstr ""
+msgstr "Slimspeellyste"
 
 #: ui/equalizer.cpp:122
 msgid "Soft"
-msgstr ""
+msgstr "Sag"
 
 #: ui/equalizer.cpp:124
 msgid "Soft Rock"
-msgstr ""
+msgstr "Sagte Rock"
 
 #: ../bin/src/ui_songinfosettingspage.h:179
 msgid "Song Information"
-msgstr ""
+msgstr "Liedjie Inligting"
 
 #: ui/mainwindow.cpp:232
 msgid "Song info"
-msgstr ""
+msgstr "Liedjie"
 
 #: analyzers/sonogram.cpp:18
 msgid "Sonogram"
-msgstr ""
+msgstr "Sonogram"
 
 #: ../bin/src/ui_trackselectiondialog.h:205
 msgid "Sorry"
-msgstr ""
+msgstr "Jammer"
 
 #: ../bin/src/ui_icecastfilterwidget.h:75
 msgid "Sort by genre (alphabetically)"
-msgstr ""
+msgstr "Sorteer volgens genre (alfabeties)"
 
 #: ../bin/src/ui_icecastfilterwidget.h:76
 msgid "Sort by genre (by popularity)"
-msgstr ""
+msgstr "Sorteer volgens genre (populariteit)"
 
 #: ../bin/src/ui_icecastfilterwidget.h:77
 msgid "Sort by station name"
-msgstr ""
+msgstr "Sorteer volgens stasienaam"
 
 #: ../bin/src/ui_querysortpage.h:139
 msgid "Sort songs by"
-msgstr ""
+msgstr "Sorteer liedjies volgens"
 
 #: ../bin/src/ui_querysortpage.h:137
 msgid "Sorting"
-msgstr ""
+msgstr "Sortering"
 
 #: playlist/playlist.cpp:1199
 msgid "Source"
@@ -4034,99 +4025,105 @@ msgstr ""
 
 #: ../bin/src/ui_globalsearchsettingspage.h:146
 msgid "Sources"
-msgstr ""
+msgstr "Bronne"
 
 #: ../bin/src/ui_transcodersettingspage.h:162
 msgid "Speex"
-msgstr ""
+msgstr "Speex"
 
 #: ../bin/src/ui_spotifysettingspage.h:208
 msgid "Spotify"
-msgstr ""
+msgstr "Spotify"
 
-#: internet/spotifyservice.cpp:182
+#: internet/spotifyservice.cpp:186
 msgid "Spotify login error"
-msgstr ""
+msgstr "Spotify aantekenfout"
 
 #: ../bin/src/ui_spotifysettingspage.h:213
 msgid "Spotify plugin"
-msgstr ""
+msgstr "Spotify uitbreiding"
 
 #: internet/spotifyblobdownloader.cpp:59
 msgid "Spotify plugin not installed"
-msgstr ""
+msgstr "Spotify uitbreiding is nie geïnstalleer nie"
 
 #: ../bin/src/ui_transcoderoptionsmp3.h:201
 msgid "Standard"
-msgstr ""
+msgstr "Standaard"
 
-#: internet/spotifyservice.cpp:348
+#: internet/spotifyservice.cpp:354
 msgid "Starred"
-msgstr ""
+msgstr "Gegradeer"
 
 #: core/commandlineoptions.cpp:145
 msgid "Start the playlist currently playing"
-msgstr ""
+msgstr "Begin die huidige afspeellys speel"
 
 #: transcoder/transcodedialog.cpp:85
 msgid "Start transcoding"
-msgstr ""
+msgstr "Begin transkodering"
 
 #: internet/groovesharksearchplaylisttype.cpp:36
 #: internet/spotifysearchplaylisttype.cpp:36
 #, qt-format
 msgid "Start typing in the search box above to find music on %1."
+msgstr "Tik in die balk hier bo om te begin soek deur %1."
+
+#: internet/groovesharkservice.cpp:571 internet/spotifyservice.cpp:348
+msgid ""
+"Start typing something on the search box above to fill this search results "
+"list"
 msgstr ""
 
 #: transcoder/transcoder.cpp:401
 #, qt-format
 msgid "Starting %1"
-msgstr ""
+msgstr "%1 word begin"
 
 #: internet/magnatunedownloaddialog.cpp:120
 msgid "Starting..."
-msgstr ""
+msgstr "In aanvang..."
 
-#: internet/groovesharkservice.cpp:580
+#: internet/groovesharkservice.cpp:599
 msgid "Stations"
-msgstr ""
+msgstr "Stasies"
 
-#: core/globalshortcuts.cpp:48 ../bin/src/ui_mainwindow.h:642
-#: wiimotedev/wiimotesettingspage.cpp:102
+#: core/globalshortcuts.cpp:48 wiimotedev/wiimotesettingspage.cpp:102
+#: ../bin/src/ui_mainwindow.h:642
 msgid "Stop"
-msgstr ""
+msgstr "Stop"
 
 #: wiimotedev/wiimotesettingspage.cpp:110
 msgid "Stop after"
-msgstr ""
+msgstr "Stop na"
 
 #: ui/mainwindow.cpp:473 ../bin/src/ui_mainwindow.h:648
 msgid "Stop after this track"
-msgstr ""
+msgstr "Hou op afspeel na hierdie snit"
 
 #: core/commandlineoptions.cpp:148
 msgid "Stop playback"
-msgstr ""
+msgstr "Hou op met afspeel"
 
 #: core/globalshortcuts.cpp:49
 msgid "Stop playing after current track"
-msgstr ""
+msgstr "Hou op afspeel na die huidige snit"
 
 #: widgets/osd.cpp:166
 msgid "Stopped"
-msgstr ""
+msgstr "Afspeel is gestop"
 
-#: core/song.cpp:326
+#: core/song.cpp:330
 msgid "Stream"
-msgstr ""
+msgstr "Stroom"
 
 #: ../bin/src/ui_magnatunesettingspage.h:160
 msgid "Streaming membership"
-msgstr ""
+msgstr "Stroomlidmaatskap"
 
-#: internet/groovesharkservice.cpp:603
+#: internet/groovesharkservice.cpp:621
 msgid "Subscribed playlists"
-msgstr ""
+msgstr "Ingetekende afspeellyste"
 
 #: ../bin/src/ui_podcastinfowidget.h:196
 msgid "Subscribers"
@@ -4135,22 +4132,22 @@ msgstr ""
 #: transcoder/transcoder.cpp:200
 #, qt-format
 msgid "Successfully written %1"
-msgstr ""
+msgstr "%1 suksesvol geskryf"
 
 #: ui/trackselectiondialog.cpp:171
 msgid "Suggested tags"
-msgstr ""
+msgstr "Voorgestelde etikette"
 
 #: ../bin/src/ui_edittagdialog.h:651
 #: ../bin/src/ui_notificationssettingspage.h:420
 msgid "Summary"
-msgstr ""
+msgstr "Opsomming"
 
 #: analyzers/analyzercontainer.cpp:65
 #: visualisations/visualisationcontainer.cpp:110
 #, qt-format
 msgid "Super high (%1 fps)"
-msgstr ""
+msgstr "Siper hoog (%1 fps)"
 
 #: visualisations/visualisationcontainer.cpp:120
 msgid "Super high (2048x2048)"
@@ -4158,19 +4155,19 @@ msgstr ""
 
 #: ../bin/src/ui_deviceproperties.h:374
 msgid "Supported formats"
-msgstr ""
+msgstr "Ondersteunde formate"
 
-#: internet/spotifyservice.cpp:535
+#: internet/spotifyservice.cpp:544
 msgid "Syncing Spotify inbox"
-msgstr ""
-
-#: internet/spotifyservice.cpp:530
-msgid "Syncing Spotify playlist"
-msgstr ""
+msgstr "Spotify inbox word gesinkroniseer"
 
 #: internet/spotifyservice.cpp:539
+msgid "Syncing Spotify playlist"
+msgstr "Spotify afspeellys word gesinkroniseer"
+
+#: internet/spotifyservice.cpp:548
 msgid "Syncing Spotify starred tracks"
-msgstr ""
+msgstr "Gegradeerde Spotify snitte word gesinkroniseer"
 
 #: moodbar/moodbarrenderer.cpp:159
 msgid "System colors"
@@ -4178,40 +4175,40 @@ msgstr ""
 
 #: widgets/fancytabwidget.cpp:654
 msgid "Tabs on top"
-msgstr ""
+msgstr "Oortjies bo"
 
 #: ../bin/src/ui_lastfmstationdialog.h:97
 msgid "Tag"
-msgstr ""
+msgstr "Etiket"
 
 #: ../bin/src/ui_trackselectiondialog.h:204
 msgid "Tag fetcher"
-msgstr ""
+msgstr "Etiketsoeker"
 
-#: internet/lastfmservice.cpp:213
+#: internet/lastfmservice.cpp:211
 msgid "Tag radio"
-msgstr ""
+msgstr "Etiketteer radio"
 
 #: ../bin/src/ui_transcoderoptionsvorbis.h:204
 msgid "Target bitrate"
-msgstr ""
+msgstr "Teiken bistempo"
 
 #: ui/equalizer.cpp:125
 msgid "Techno"
-msgstr ""
+msgstr "Techno"
 
 #: ../bin/src/ui_notificationssettingspage.h:432
 msgid "Text options"
-msgstr ""
+msgstr "Teksinstellings"
 
 #: ui/about.cpp:69
 msgid "Thanks to"
-msgstr ""
+msgstr "Dank aan"
 
 #: ui/globalshortcutssettingspage.cpp:175
 #, qt-format
 msgid "The \"%1\" command could not be started."
-msgstr ""
+msgstr "Die \"%1\" bevel kan nie begin word nie."
 
 #: ../bin/src/ui_appearancesettingspage.h:238
 msgid "The album cover of the currently playing song"
@@ -4220,32 +4217,32 @@ msgstr ""
 #: internet/magnatunedownloaddialog.cpp:90
 #, qt-format
 msgid "The directory %1 is not valid"
-msgstr ""
+msgstr "Die gids %1 is nie geldig nie"
 
 #: playlist/playlistmanager.cpp:157 playlist/playlistmanager.cpp:175
 #, qt-format
 msgid "The playlist '%1' was empty or could not be loaded."
-msgstr ""
+msgstr "Die afspeellys '%1' was leeg of kan nie gelaai word nie."
 
 #: smartplaylists/searchtermwidget.cpp:322
 msgid "The second value must be greater than the first one!"
-msgstr ""
+msgstr "Die tweede waarde moet groter wees as die eerste!"
 
 #: ui/coverfromurldialog.cpp:71
 msgid "The site you requested does not exist!"
-msgstr ""
+msgstr "Die blad wat jy aangevra het bestaan nie!"
 
 #: ui/coverfromurldialog.cpp:82
 msgid "The site you requested is not an image!"
-msgstr ""
+msgstr "Die blad wat hy aangevra het is nie 'n beeld nie!"
 
-#: ui/mainwindow.cpp:1988
+#: ui/mainwindow.cpp:1989
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
-msgstr ""
+msgstr "Die weergawe van Clementine waarheen jy sopas opgradeer het benodig 'n volle versameling herindeksering weens hierdie nuwe funksies:"
 
-#: library/libraryview.cpp:418
+#: library/libraryview.cpp:424
 msgid "There are other songs in this album"
 msgstr ""
 
@@ -4256,7 +4253,7 @@ msgstr ""
 
 #: internet/magnatunedownloaddialog.cpp:158
 msgid "There was a problem fetching the metadata from Magnatune"
-msgstr ""
+msgstr "Daar was 'n probleem met die haal van metadata vanaf Magnatune"
 
 #: podcasts/itunessearchpage.cpp:76
 msgid "There was a problem parsing the response from the iTunes Store"
@@ -4266,108 +4263,108 @@ msgstr ""
 msgid ""
 "There were problems copying some songs.  The following files could not be "
 "copied:"
-msgstr ""
+msgstr "Daar was 'n probleem met die kopiëring van liedjies.  Die volgende lêers kan nie gekopiëer word nie:"
 
 #: ui/organiseerrordialog.cpp:61
 msgid ""
 "There were problems deleting some songs.  The following files could not be "
 "deleted:"
-msgstr ""
+msgstr "Daar was 'n probleem met die verwydering van sommige liedjies.  Die volgende lêers kan nie verwyder word nie:"
 
-#: library/libraryview.cpp:498 ui/mainwindow.cpp:1806 widgets/fileview.cpp:187
+#: library/libraryview.cpp:504 ui/mainwindow.cpp:1807 widgets/fileview.cpp:187
 msgid ""
 "These files will be deleted from disk, are you sure you want to continue?"
-msgstr ""
+msgstr "Hierdie lêers sal vanaf die skyf verwyder word. Is jy seker jy wil voortgaan?"
 
 #: devices/deviceview.cpp:389
 msgid ""
 "These files will be deleted from the device, are you sure you want to "
 "continue?"
-msgstr ""
+msgstr "Hierdie lêers sal vanaf die toestel verwyder word. Is jy seker?"
 
 #: ../bin/src/ui_librarysettingspage.h:158
 msgid "These folders will be scanned for music to make up your library"
-msgstr ""
+msgstr "Hierdie vouers sal deursoek word vir musiek om in jou versameling te plaas"
 
 #: ../bin/src/ui_transcodersettingspage.h:158
 msgid ""
 "These settings are used in the \"Transcode Music\" dialog, and when "
 "converting music before copying it to a device."
-msgstr ""
+msgstr "Hierdie instellings word gebruik vir die transkodeer van musiek en ook wanneer musiek na 'n toestel gekopiëer word."
 
 #: ../bin/src/ui_groupbydialog.h:151
 msgid "Third level"
-msgstr ""
+msgstr "Derde vlak"
 
 #: internet/jamendoservice.cpp:170
 msgid ""
 "This action will create a database which could be as big as 150 MB.\n"
 "Do you want to continue anyway?"
-msgstr ""
+msgstr "Hierdie aksie skep 'n databasis wat so groot soos 150MB mag wees.\nIs jy seker jy wil voortgaan?"
 
 #: internet/magnatunedownloaddialog.cpp:175
 msgid "This album is not available in the requested format"
-msgstr ""
+msgstr "Hierdie album is nie tans in die aangevraagde formaat beskikbaar nie."
 
 #: ../bin/src/ui_deviceproperties.h:381
 msgid ""
 "This device must be connected and opened before Clementine can see what file"
 " formats it supports."
-msgstr ""
+msgstr "Hierdie toestel moet eers gekoppel en oopgemaak word voordat Clememntine kan sien watter lêer-tipes dit ondersteun."
 
 #: ../bin/src/ui_deviceproperties.h:375
 msgid "This device supports the following file formats:"
-msgstr ""
+msgstr "Die toestel ondersteun die volgende lêer formate:"
 
-#: devices/devicemanager.cpp:569 devices/devicemanager.cpp:577
+#: devices/devicemanager.cpp:582 devices/devicemanager.cpp:590
 msgid "This device will not work properly"
-msgstr ""
+msgstr "Hierdie toestel sal nie goed werk nie"
 
-#: devices/devicemanager.cpp:570
+#: devices/devicemanager.cpp:583
 msgid ""
 "This is an MTP device, but you compiled Clementine without libmtp support."
-msgstr ""
+msgstr "Hierdie is 'n MTP toestel, maar jy het Clementine sonder libmtp ondersteuning gekompileer."
 
-#: devices/devicemanager.cpp:578
+#: devices/devicemanager.cpp:591
 msgid "This is an iPod, but you compiled Clementine without libgpod support."
-msgstr ""
+msgstr "Hierdie is 'n iPos, maar jy het Clementine sonder libgpod ondersteuning gekompileer."
 
-#: devices/devicemanager.cpp:327
+#: devices/devicemanager.cpp:340
 msgid ""
 "This is the first time you have connected this device.  Clementine will now "
 "scan the device to find music files - this may take some time."
-msgstr ""
+msgstr "Dit is die eerste keer dat jy hierdie toestel verbind. Clementine gaan dit nou deursoek vir musiek. Dit mak dalk enkele oomblike duur."
 
 #: playlist/playlisttabbar.cpp:159
 msgid ""
 "This playlist will be removed; the action can't be undone. Are you sure you "
 "want to continue?"
-msgstr ""
+msgstr "Die afspeellys gaan verwyder word. Dit kan nie ontdoen word nie. Is jy seker jy wil voortgaan?"
 
-#: internet/lastfmservice.cpp:458
+#: internet/lastfmservice.cpp:439
 msgid "This stream is for paid subscribers only"
-msgstr ""
+msgstr "Hierdie stroom is slegs vir betalende lede."
 
-#: devices/devicemanager.cpp:590
+#: devices/devicemanager.cpp:603
 #, qt-format
 msgid "This type of device is not supported: %1"
-msgstr ""
+msgstr "Hierdie tipe toestel word nie ondersteun nie: %1"
 
 #: ../bin/src/ui_songinfosettingspage.h:185
 msgid "Timeout"
-msgstr ""
+msgstr "Te veel tyd het verloop"
 
 #: devices/ilister.cpp:120
 msgid "Timezone"
-msgstr ""
+msgstr "Tydsone"
 
 #: playlist/playlist.cpp:1171 ui/organisedialog.cpp:54
 #: ui/qtsystemtrayicon.cpp:248 ../bin/src/ui_about.h:142
 #: ../bin/src/ui_edittagdialog.h:652 ../bin/src/ui_trackselectiondialog.h:211
 msgid "Title"
-msgstr ""
+msgstr "Titel"
 
-#: internet/groovesharkservice.cpp:995
+#: internet/groovesharkservice.cpp:991
 msgid ""
 "To start Grooveshark radio, you should first listen to a few other "
 "Grooveshark songs"
@@ -4375,118 +4372,118 @@ msgstr ""
 
 #: core/utilities.cpp:120
 msgid "Today"
-msgstr ""
+msgstr "Vandag"
 
 #: core/globalshortcuts.cpp:59
 msgid "Toggle Pretty OSD"
-msgstr ""
+msgstr "Skakel mooi skermbeeld aan/af"
 
 #: visualisations/visualisationcontainer.cpp:101
 msgid "Toggle fullscreen"
-msgstr ""
+msgstr "Skakel volskerm aan/af"
 
-#: ui/mainwindow.cpp:1295
+#: ui/mainwindow.cpp:1296
 msgid "Toggle queue status"
-msgstr ""
+msgstr "Skakel tou-status aan/af"
 
 #: ../bin/src/ui_mainwindow.h:707
 msgid "Toggle scrobbling"
-msgstr ""
+msgstr "Skakel log van geluisterde musiek aanlyn aan/af"
 
 #: core/commandlineoptions.cpp:162
 msgid "Toggle visibility for the pretty on-screen-display"
-msgstr ""
+msgstr "Skakel mooi skermbeeld aan/af"
 
 #: podcasts/podcasturlloader.cpp:114
 msgid "Too many redirects"
 msgstr ""
 
-#: internet/spotifyservice.cpp:356
+#: internet/spotifyservice.cpp:362
 msgid "Top tracks"
 msgstr ""
 
 #: covers/coversearchstatisticsdialog.cpp:71
 msgid "Total bytes transferred"
-msgstr ""
+msgstr "Totale aantal grepe oorgedra"
 
 #: covers/coversearchstatisticsdialog.cpp:68
 msgid "Total network requests made"
-msgstr ""
+msgstr "Totale aantal versoeke oor die netwerk gemaak"
 
 #: playlist/playlist.cpp:1175 ui/organisedialog.cpp:60
 #: ../bin/src/ui_edittagdialog.h:653 ../bin/src/ui_trackselectiondialog.h:213
 msgid "Track"
-msgstr ""
+msgstr "Snit"
 
 #: ../bin/src/ui_transcodedialog.h:201 ../bin/src/ui_mainwindow.h:686
 msgid "Transcode Music"
-msgstr ""
+msgstr "Transkodeer musiek"
 
 #: ../bin/src/ui_transcodelogdialog.h:63
 msgid "Transcoder Log"
-msgstr ""
+msgstr "Transkodeerder log"
 
 #: ../bin/src/ui_transcodersettingspage.h:157
 msgid "Transcoding"
-msgstr ""
+msgstr "Besig met transkodering"
 
 #: transcoder/transcoder.cpp:309
 #, qt-format
 msgid "Transcoding %1 files using %2 threads"
-msgstr ""
+msgstr "Lêer %1 word met %2 prosesse getranskodeer"
 
 #: ../bin/src/ui_transcoderoptionsdialog.h:54
 msgid "Transcoding options"
-msgstr ""
+msgstr "Transkodering instellings"
 
-#: core/song.cpp:323
+#: core/song.cpp:327
 msgid "TrueAudio"
-msgstr ""
+msgstr "TrueAudio"
 
 #: analyzers/turbine.cpp:15
 msgid "Turbine"
-msgstr ""
+msgstr "Turbine"
 
 #: ../bin/src/ui_dynamicplaylistcontrols.h:113
 msgid "Turn off"
-msgstr ""
+msgstr "Skakel af"
 
 #: devices/giolister.cpp:161
 msgid "URI"
-msgstr ""
+msgstr "URI"
 
 #: core/commandlineoptions.cpp:144
 msgid "URL(s)"
-msgstr ""
+msgstr "URL(s)"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:228
 msgid "Ultra wide band (UWB)"
-msgstr ""
+msgstr "Ultra wyeband (UWB)"
 
 #: internet/magnatunedownloaddialog.cpp:144
 #, qt-format
 msgid "Unable to download %1 (%2)"
-msgstr ""
+msgstr "Kan nie %1 aflaai nie (%2)"
 
-#: core/song.cpp:330 library/librarymodel.cpp:296 library/librarymodel.cpp:301
+#: core/song.cpp:334 library/librarymodel.cpp:296 library/librarymodel.cpp:301
 #: library/librarymodel.cpp:953 playlist/playlistdelegates.cpp:309
 #: playlist/playlistmanager.cpp:387 playlist/playlistmanager.cpp:390
 #: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:416
 #: ui/edittagdialog.cpp:457
 msgid "Unknown"
-msgstr ""
+msgstr "Onbekend"
 
 #: podcasts/podcasturlloader.cpp:196
 msgid "Unknown content-type"
 msgstr ""
 
-#: internet/digitallyimportedclient.cpp:69 internet/lastfmservice.cpp:471
+#: internet/digitallyimportedclient.cpp:69 internet/lastfmservice.cpp:452
 msgid "Unknown error"
-msgstr ""
+msgstr "Onbekende fout"
 
 #: ui/albumcoverchoicecontroller.cpp:63
 msgid "Unset cover"
-msgstr ""
+msgstr "Verwyder omslag"
 
 #: podcasts/addpodcastdialog.cpp:61 podcasts/podcastservice.cpp:277
 msgid "Unsubscribe"
@@ -4496,25 +4493,25 @@ msgstr ""
 msgid "Upcoming Concerts"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:1165
+#: internet/groovesharkservice.cpp:1161
 msgid "Update Grooveshark playlist"
-msgstr ""
+msgstr "Dateer Grooveshark afspeellys op"
 
 #: podcasts/podcastservice.cpp:260
 msgid "Update all podcasts"
-msgstr ""
+msgstr "Dateer alle potgooie op"
 
 #: ../bin/src/ui_mainwindow.h:698
 msgid "Update changed library folders"
-msgstr ""
+msgstr "Gaan versameling na vir veranderinge"
 
 #: ../bin/src/ui_librarysettingspage.h:162
 msgid "Update the library when Clementine starts"
-msgstr ""
+msgstr "Gaan die versameling vir veranderings na elke keer as Clementine oopgemaak word"
 
 #: podcasts/podcastservice.cpp:268
 msgid "Update this podcast"
-msgstr ""
+msgstr "Dateer hierdie potgooi op"
 
 #: ../bin/src/ui_podcastsettingspage.h:227
 msgid "Updating"
@@ -4523,20 +4520,20 @@ msgstr ""
 #: library/librarywatcher.cpp:92
 #, qt-format
 msgid "Updating %1"
-msgstr ""
+msgstr "%1 word opgedateer"
 
 #: devices/deviceview.cpp:103
 #, qt-format
 msgid "Updating %1%..."
-msgstr ""
+msgstr "%1% word opgedateer..."
 
 #: library/librarywatcher.cpp:90
 msgid "Updating library"
-msgstr ""
+msgstr "Jou versameling word nagegaan"
 
 #: core/commandlineoptions.cpp:144
 msgid "Usage"
-msgstr ""
+msgstr "Gebruik"
 
 #: ../bin/src/ui_lastfmsettingspage.h:159
 msgid "Use Album Artist tag when available"
@@ -4544,15 +4541,15 @@ msgstr ""
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:168
 msgid "Use Gnome's shortcut keys"
-msgstr ""
+msgstr "Gebruik Gnome se kortskakel knoppies"
 
 #: ../bin/src/ui_playbacksettingspage.h:274
 msgid "Use Replay Gain metadata if it is available"
-msgstr ""
+msgstr "Gebruik afspeel-aanwins metadata as dit beskikbaar is"
 
 #: ../bin/src/ui_wiimotesettingspage.h:189
 msgid "Use Wii Remote"
-msgstr ""
+msgstr "Gebruik Wii Afstandsbeheer"
 
 #: ../bin/src/ui_appearancesettingspage.h:230
 msgid "Use a custom color set"
@@ -4560,31 +4557,31 @@ msgstr ""
 
 #: ../bin/src/ui_notificationssettingspage.h:417
 msgid "Use a custom message for notifications"
-msgstr ""
+msgstr "Gebruik 'n eie gekose boodskap vir kennisgewings"
 
 #: ../bin/src/ui_networkproxysettingspage.h:167
 msgid "Use authentication"
-msgstr ""
+msgstr "Teken aan"
 
 #: ../bin/src/ui_transcoderoptionsvorbis.h:203
 msgid "Use bitrate management engine"
-msgstr ""
+msgstr "Gebruik bistempo beheerstelsel"
 
 #: ../bin/src/ui_wizardfinishpage.h:85
 msgid "Use dynamic mode"
-msgstr ""
+msgstr "Gebruik dinamiese modus"
 
 #: ../bin/src/ui_wiimotesettingspage.h:188
 msgid "Use notifications to report Wii Remote status"
-msgstr ""
+msgstr "Gebruik kennisgewings om die Wii-afstandsbeheer se status te toon"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:139
 msgid "Use temporal noise shaping"
-msgstr ""
+msgstr "Gebruik tydgebasseerde ruis vervorming"
 
 #: ../bin/src/ui_behavioursettingspage.h:175
 msgid "Use the system default"
-msgstr ""
+msgstr "Gebruik die stelsel se standaard waarde"
 
 #: ../bin/src/ui_appearancesettingspage.h:229
 msgid "Use the system default color set"
@@ -4592,24 +4589,24 @@ msgstr ""
 
 #: ../bin/src/ui_networkproxysettingspage.h:158
 msgid "Use the system proxy settings"
-msgstr ""
+msgstr "Gebruik die stelsel se instaanbediener instellings"
 
 #: ../bin/src/ui_spotifysettingspage.h:219
 msgid "Use volume normalisation"
-msgstr ""
+msgstr "Gebruik volume normalisering"
 
 #: widgets/freespacebar.cpp:47
 msgid "Used"
-msgstr ""
+msgstr "Reeds gebruik"
 
-#: internet/groovesharkservice.cpp:396
+#: internet/groovesharkservice.cpp:411
 #, qt-format
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
-msgstr ""
+msgstr "Gebruiker %1 het nie Grooveshark Anywhere lidmaatskap nie"
 
 #: ui/settingsdialog.cpp:126
 msgid "User interface"
-msgstr ""
+msgstr "Gebruikerskoppelvlak"
 
 #: ../bin/src/ui_groovesharksettingspage.h:114
 #: ../bin/src/ui_magnatunesettingspage.h:163
@@ -4617,94 +4614,94 @@ msgstr ""
 #: ../bin/src/ui_podcastsettingspage.h:251
 #: ../bin/src/ui_networkproxysettingspage.h:168
 msgid "Username"
-msgstr ""
+msgstr "Gebruikersnaam"
 
 #: ../bin/src/ui_behavioursettingspage.h:183
 msgid "Using the menu to add a song will..."
-msgstr ""
+msgstr "Deur van die kieslys gebruik te maak om 'n liedjie by te voeg sal..."
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:142
 #: ../bin/src/ui_magnatunesettingspage.h:173
 msgid "VBR MP3"
-msgstr ""
+msgstr "VBR MP3"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:232
 msgid "Variable bit rate"
-msgstr ""
+msgstr "Wisselende bistempo"
 
 #: globalsearch/globalsearchmodel.cpp:103 library/librarymodel.cpp:233
-#: playlist/playlistmanager.cpp:402 ui/albumcovermanager.cpp:258
+#: playlist/playlistmanager.cpp:402 ui/albumcovermanager.cpp:245
 msgid "Various artists"
-msgstr ""
+msgstr "Verskeie kunstenaars"
 
 #: ui/about.cpp:34
 #, qt-format
 msgid "Version %1"
-msgstr ""
+msgstr "Weergawe %1"
 
 #: ../bin/src/ui_albumcovermanager.h:154
 msgid "View"
-msgstr ""
+msgstr "Bekyk"
 
 #: ../bin/src/ui_visualisationselector.h:109
 msgid "Visualization mode"
-msgstr ""
+msgstr "Visualisasie modus"
 
-#: ../bin/src/ui_mainwindow.h:699 ui/dbusscreensaver.cpp:35
+#: ui/dbusscreensaver.cpp:35 ../bin/src/ui_mainwindow.h:699
 msgid "Visualizations"
-msgstr ""
+msgstr "Visualisasies"
 
 #: ../bin/src/ui_visualisationoverlay.h:185
 msgid "Visualizations Settings"
-msgstr ""
+msgstr "Visualisasie instellings"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:233
 msgid "Voice activity detection"
-msgstr ""
+msgstr "Stem deteksie"
 
 #: widgets/osd.cpp:180
 #, qt-format
 msgid "Volume %1%"
-msgstr ""
+msgstr "Volume %1%"
 
 #: devices/wmdmlister.cpp:369
 msgid "Volume name"
-msgstr ""
+msgstr "Volume naam"
 
 #: ../bin/src/ui_transcodersettingspage.h:160
 msgid "Vorbis"
-msgstr ""
+msgstr "Vorbis"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:141
 #: ../bin/src/ui_magnatunesettingspage.h:172
 msgid "WAV"
-msgstr ""
+msgstr "WAV"
 
 #: ../bin/src/ui_transcodersettingspage.h:164
 msgid "WMA"
-msgstr ""
+msgstr "WMA"
 
-#: core/song.cpp:322
+#: core/song.cpp:326
 msgid "Wav"
-msgstr ""
+msgstr "Wav"
 
 #: ../bin/src/ui_podcastinfowidget.h:193
 msgid "Website"
-msgstr ""
+msgstr "Webtuiste"
 
 #: smartplaylists/searchterm.cpp:302
 msgid "Weeks"
-msgstr ""
+msgstr "Weke"
 
 #: ../bin/src/ui_behavioursettingspage.h:178
 msgid "When Clementine starts"
-msgstr ""
+msgstr "Wanneer Clementine oopgemaak word"
 
 #: ../bin/src/ui_librarysettingspage.h:166
 msgid ""
 "When looking for album art Clementine will first look for picture files that contain one of these words.\n"
 "If there are no matches then it will use the largest image in the directory."
-msgstr ""
+msgstr "Wanneer daar vir album omslae gesoek word, sal Clementine eers soek vir beelde met die volgende woorde in hulle name.\nAs daar niks gevind word nie word die grootste beeld gebruik."
 
 #: ../bin/src/ui_globalsearchsettingspage.h:151
 msgid "When the list is empty..."
@@ -4716,206 +4713,206 @@ msgstr ""
 
 #: devices/ilister.cpp:121
 msgid "WiFi MAC Address"
-msgstr ""
+msgstr "WiFi MAC adres"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:229
 msgid "Wide band (WB)"
-msgstr ""
+msgstr "Wyeband (WB)"
 
 #: widgets/osd.cpp:239
 #, qt-format
 msgid "Wii Remote %1: actived"
-msgstr ""
+msgstr "Wii afstandsbeheer %1: aktief"
 
 #: widgets/osd.cpp:249
 #, qt-format
 msgid "Wii Remote %1: connected"
-msgstr ""
+msgstr "Wii afstandsbeheer %1: verbind"
 
 #: widgets/osd.cpp:264
 #, qt-format
 msgid "Wii Remote %1: critical battery (%2%) "
-msgstr ""
+msgstr "Wii afstandsbeheer %1: battery krities laag (%2%)"
 
 #: widgets/osd.cpp:244
 #, qt-format
 msgid "Wii Remote %1: disactived"
-msgstr ""
+msgstr "Wii afstandsbeheer %1: deaktiveer"
 
 #: widgets/osd.cpp:254
 #, qt-format
 msgid "Wii Remote %1: disconnected"
-msgstr ""
+msgstr "Wii afstandsbeheer %1: ontkoppel"
 
 #: widgets/osd.cpp:259
 #, qt-format
 msgid "Wii Remote %1: low battery (%2%)"
-msgstr ""
+msgstr "Wii afstandsbeheer %1: lae battery (%2%)"
 
 #: ../bin/src/ui_wiimotesettingspage.h:182
 msgid "Wiimotedev"
-msgstr ""
+msgstr "Wiimotedev"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:181
 msgid "Windows Media 128k"
-msgstr ""
+msgstr "Windows Media 128k"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:172
 msgid "Windows Media 40k"
-msgstr ""
+msgstr "Windows Media 40k"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:180
 msgid "Windows Media 64k"
-msgstr ""
+msgstr "Windows Media 64k"
 
-#: core/song.cpp:313
+#: core/song.cpp:317
 msgid "Windows Media audio"
-msgstr ""
+msgstr "Windows Media oudio"
 
-#: library/libraryview.cpp:419
+#: library/libraryview.cpp:425
 msgid ""
 "Would you like to move the other songs in this album to Various Artists as "
 "well?"
 msgstr ""
 
-#: ui/mainwindow.cpp:1993
+#: ui/mainwindow.cpp:1994
 msgid "Would you like to run a full rescan right now?"
-msgstr ""
+msgstr "Wil jy alles van voor af deursoek?"
 
 #: playlist/playlist.cpp:1177 ui/organisedialog.cpp:63
 #: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:148
 #: ../bin/src/ui_groupbydialog.h:161 ../bin/src/ui_edittagdialog.h:657
 #: ../bin/src/ui_trackselectiondialog.h:212
 msgid "Year"
-msgstr ""
+msgstr "Jaar"
 
 #: ../bin/src/ui_groupbydialog.h:136 ../bin/src/ui_groupbydialog.h:149
 #: ../bin/src/ui_groupbydialog.h:162
 msgid "Year - Album"
-msgstr ""
+msgstr "Jaar -Album"
 
 #: smartplaylists/searchterm.cpp:304
 msgid "Years"
-msgstr ""
+msgstr "Jare"
 
 #: core/utilities.cpp:122
 msgid "Yesterday"
-msgstr ""
+msgstr "Gister"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:132
 msgid "You are about to download the following albums"
-msgstr ""
+msgstr "Jy is op die punt om die volgende albums af te laai"
 
 #: ../bin/src/ui_loginstatewidget.h:172
 msgid "You are not signed in."
-msgstr ""
+msgstr "Jy is nie aangeteken nie."
 
 #: widgets/loginstatewidget.cpp:75
 #, qt-format
 msgid "You are signed in as %1."
-msgstr ""
+msgstr "Jy is aangeteken as %1."
 
 #: widgets/loginstatewidget.cpp:73
 msgid "You are signed in."
-msgstr ""
+msgstr "Jy is aangeteken."
 
 #: ../bin/src/ui_groupbydialog.h:123
 msgid "You can change the way the songs in the library are organised."
-msgstr ""
+msgstr "Jy kan die manier waarop die liedjies in jou versameling georganiseer word verander."
 
 #: internet/digitallyimportedsettingspage.cpp:46
 msgid ""
 "You can listen for free without an account, but Premium members can listen "
 "to higher quality streams without advertisements."
-msgstr ""
+msgstr "Jy kan gratis sonder lidmaatskap luister, maar Premium lede kan hoër kwaliteit strome sonder advertensies kry."
 
 #: internet/magnatunesettingspage.cpp:53
 msgid ""
 "You can listen to Magnatune songs for free without an account.  Purchasing a"
 " membership removes the messages at the end of each track."
-msgstr ""
+msgstr "Jy kan gratis sonder lidmaatskap na Magnatune liedjies luister. Betalende lede kry nie die boodskap na elke liedjie nie."
 
 #: ../bin/src/ui_backgroundstreamssettingspage.h:57
 msgid "You can listen to background streams at the same time as other music."
-msgstr ""
+msgstr "Jy kan na agtergrond strome luister terwyl ander musiek speel."
 
 #: internet/lastfmsettingspage.cpp:142
 msgid ""
 "You can scrobble tracks for free, but only <span style=\" font-"
 "weight:600;\">paid subscribers</span> can stream Last.fm radio from "
 "Clementine."
-msgstr ""
+msgstr "Jy kan gratis jou belusiterde liedjies log, maar slegs <span style=\" font-weight:600;\">betalende lede</span> kan Last.fm radio vanuit Clementine luister."
 
 #: ../bin/src/ui_wiimotesettingspage.h:184
 msgid ""
 "You can use your Wii Remote as a remote control for Clementine.  <a "
 "href=\"http://www.clementine-player.org/wiimote\">See the page on the "
 "Clementine wiki</a> for more information.\n"
-msgstr ""
+msgstr "Jy kan 'n Wii-afstandsbeheer gebruik om Clementine te beheer.  <a href=\"http://www.clementine-player.org/wiimote\">Hierdie bladsy op die Clementine wiki</a> verduidelik in meer detail hoe.\n"
 
 #: internet/groovesharksettingspage.cpp:103
 msgid "You do not have a Grooveshark Anywhere account."
-msgstr ""
+msgstr "Jy het nie Grooveshark Anywhere lidmaatskap nie."
 
 #: internet/spotifysettingspage.cpp:148
 msgid "You do not have a Spotify Premium account."
-msgstr ""
+msgstr "Jy het nie Spotify Premium lidmaatskap nie."
 
 #: internet/digitallyimportedclient.cpp:89
 msgid "You do not have an active subscription"
 msgstr ""
 
-#: internet/spotifyservice.cpp:168
+#: internet/spotifyservice.cpp:172
 msgid ""
 "You have been logged out of Spotify, please re-enter your password in the "
 "Settings dialog."
-msgstr ""
+msgstr "Jy is uitgeteken vanuit Spotify. Tik weer jou wagwoord in in die Instellings skerm."
 
 #: internet/spotifysettingspage.cpp:157
 msgid "You have been logged out of Spotify, please re-enter your password."
-msgstr ""
+msgstr "Jy is uitgeteken uit Spotify. Tik asseblief weer jou wagwoord in."
 
-#: songinfo/lastfmtrackinfoprovider.cpp:95
+#: songinfo/lastfmtrackinfoprovider.cpp:87
 msgid "You love this track"
-msgstr ""
+msgstr "Jy hou van hierdie snit."
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:170
 msgid ""
 "You need to launch System Preferences and turn on \"<span style=\" font-"
 "style:italic;\">Enable access for assistive devices</span>\" to use global "
 "shortcuts in Clementine."
-msgstr ""
+msgstr "Jy moet toegang vir hulp toestelle aanskakel in jou stelsel se instellings sodat globale kortskakels sal werk."
 
 #: ../bin/src/ui_behavioursettingspage.h:177
 msgid "You will need to restart Clementine if you change the language."
-msgstr ""
+msgstr "Jy moet Clementine van voor af oopmaak om die taal te verander."
 
 #: internet/lastfmsettingspage.cpp:108
 msgid ""
 "You will not be able to play Last.fm radio stations as you are not a Last.fm"
 " subscriber."
-msgstr ""
+msgstr "Jy sal nie Last.fm radio kan luister nie aangesien jy nie lidmaatskap het nie."
 
 #: internet/lastfmsettingspage.cpp:78
 msgid "Your Last.fm credentials were incorrect"
-msgstr ""
+msgstr "Jou Last.fm aanteken details was verkeerd"
 
 #: internet/magnatunesettingspage.cpp:113
 msgid "Your Magnatune credentials were incorrect"
-msgstr ""
+msgstr "Jou Magnatune aanteken details was verkeerd"
 
-#: library/libraryview.cpp:232
+#: library/libraryview.cpp:238
 msgid "Your library is empty!"
-msgstr ""
+msgstr "Jou versameling is leeg!"
 
 #: globalsearch/savedradiosearchprovider.cpp:28 internet/savedradio.cpp:49
 msgid "Your radio streams"
-msgstr ""
+msgstr "Jou radiostasies"
 
-#: songinfo/lastfmtrackinfoprovider.cpp:96
+#: songinfo/lastfmtrackinfoprovider.cpp:88
 #, qt-format
 msgid "Your scrobbles: %1"
-msgstr ""
+msgstr "Jou aanlyn logs: %1"
 
 #: visualisations/visualisationcontainer.cpp:152
 msgid "Your system is missing OpenGL support, visualizations are unavailable."
@@ -4924,83 +4921,83 @@ msgstr ""
 #: internet/groovesharksettingspage.cpp:107
 #: internet/spotifysettingspage.cpp:153
 msgid "Your username or password was incorrect."
-msgstr ""
+msgstr "Jou gebruikersnaam of wagwoord was verkeerd."
 
 #: smartplaylists/searchterm.cpp:288
 msgid "Z-A"
-msgstr ""
+msgstr "Z-A"
 
 #: ui/equalizer.cpp:126
 msgid "Zero"
-msgstr ""
+msgstr "Zero"
 
 #: playlist/playlistundocommands.cpp:37
 #, c-format
 msgid "add %n songs"
-msgstr ""
+msgstr "voeg %n liedjies by"
 
 #: smartplaylists/searchterm.cpp:200
 msgid "after"
-msgstr ""
+msgstr "na"
 
 #: ../bin/src/ui_searchtermwidget.h:281
 msgid "ago"
-msgstr ""
+msgstr "gelede"
 
 #: ../bin/src/ui_searchtermwidget.h:280
 msgid "and"
-msgstr ""
+msgstr "en"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:219
 msgid "automatic"
-msgstr ""
+msgstr "outomaties"
 
 #: smartplaylists/searchterm.cpp:201
 msgid "before"
-msgstr ""
+msgstr "voor"
 
 #: smartplaylists/searchterm.cpp:206
 msgid "between"
-msgstr ""
+msgstr "tussen"
 
 #: smartplaylists/searchterm.cpp:292
 msgid "biggest first"
-msgstr ""
+msgstr "grootste eerste"
 
 #: playlist/playlistview.cpp:200 ui/edittagdialog.cpp:450
 msgid "bpm"
-msgstr ""
+msgstr "bpm"
 
 #: smartplaylists/searchterm.cpp:212
 msgid "contains"
-msgstr ""
+msgstr "bevat"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:222
 #: ../bin/src/ui_transcoderoptionsvorbis.h:207
 #: ../bin/src/ui_transcoderoptionsvorbis.h:210
 msgid "disabled"
-msgstr ""
+msgstr "skakel af"
 
 #: widgets/osd.cpp:114
 #, qt-format
 msgid "disc %1"
-msgstr ""
+msgstr "skyf %1"
 
 #: smartplaylists/searchterm.cpp:213
 msgid "does not contain"
-msgstr ""
+msgstr "bevat nie"
 
 #: smartplaylists/searchterm.cpp:215
 msgid "ends with"
-msgstr ""
+msgstr "eindig met"
 
 #: smartplaylists/searchterm.cpp:218
 msgid "equals"
-msgstr ""
+msgstr "gelyk aan"
 
 #: ../bin/src/ui_podcastsettingspage.h:249
 msgid "gpodder.net"
-msgstr ""
+msgstr "gpodder.net"
 
 #: podcasts/gpoddertoptagspage.cpp:34
 msgid "gpodder.net directory"
@@ -5008,25 +5005,25 @@ msgstr ""
 
 #: smartplaylists/searchterm.cpp:216
 msgid "greater than"
-msgstr ""
+msgstr "groter as"
 
 #: smartplaylists/searchterm.cpp:204
 msgid "in the last"
-msgstr ""
+msgstr "in die laaste"
 
 #: playlist/playlistview.cpp:202 ui/edittagdialog.cpp:452
 #: internet/spotifysettingspage.cpp:59 internet/spotifysettingspage.cpp:60
 #: internet/spotifysettingspage.cpp:61
 msgid "kbps"
-msgstr ""
+msgstr "kbps"
 
 #: smartplaylists/searchterm.cpp:217
 msgid "less than"
-msgstr ""
+msgstr "minder as"
 
 #: smartplaylists/searchterm.cpp:290
 msgid "longest first"
-msgstr ""
+msgstr "langste eerste"
 
 #: playlist/playlistundocommands.cpp:99
 #, c-format
@@ -5035,44 +5032,44 @@ msgstr ""
 
 #: smartplaylists/searchterm.cpp:289
 msgid "newest first"
-msgstr ""
+msgstr "nuutste eerste"
 
 #: smartplaylists/searchterm.cpp:219
 msgid "not equals"
-msgstr ""
+msgstr "nie gelyk aan"
 
 #: smartplaylists/searchterm.cpp:205
 msgid "not in the last"
-msgstr ""
+msgstr "nie in die laaste"
 
 #: smartplaylists/searchterm.cpp:203
 msgid "not on"
-msgstr ""
+msgstr "nie volgens"
 
 #: smartplaylists/searchterm.cpp:289
 msgid "oldest first"
-msgstr ""
+msgstr "oudste eerste"
 
 #: smartplaylists/searchterm.cpp:202
 msgid "on"
-msgstr ""
+msgstr "volgens"
 
 #: core/commandlineoptions.cpp:144
 msgid "options"
-msgstr ""
+msgstr "instellings"
 
-#: widgets/didyoumean.cpp:141
+#: widgets/didyoumean.cpp:56
 msgid "press enter"
-msgstr ""
+msgstr "druk Enter"
 
 #: playlist/playlistundocommands.cpp:65 playlist/playlistundocommands.cpp:88
 #, c-format
 msgid "remove %n songs"
-msgstr ""
+msgstr "verwyder %n liedjies"
 
 #: smartplaylists/searchterm.cpp:290
 msgid "shortest first"
-msgstr ""
+msgstr "korste eerste"
 
 #: playlist/playlistundocommands.cpp:138
 msgid "shuffle songs"
@@ -5080,7 +5077,7 @@ msgstr ""
 
 #: smartplaylists/searchterm.cpp:292
 msgid "smallest first"
-msgstr ""
+msgstr "kleinste eerste"
 
 #: playlist/playlistundocommands.cpp:131
 msgid "sort songs"
@@ -5088,13 +5085,13 @@ msgstr ""
 
 #: smartplaylists/searchterm.cpp:214
 msgid "starts with"
-msgstr ""
+msgstr "begin met"
 
 #: playlist/playlistdelegates.cpp:180
 msgid "stop"
-msgstr ""
+msgstr "stop"
 
 #: widgets/osd.cpp:116
 #, qt-format
 msgid "track %1"
-msgstr ""
+msgstr "snit %1"
