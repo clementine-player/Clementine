@@ -46,7 +46,7 @@
   Currently, only functions with zero, one, two or three arguments are
   supported, but other might be added easily for X arguments by defining a new
   ThreadFunctorX class (and eventually a second class for handling functions
-  which return void: see existing classes for exampels), and add new Run()
+  which return void: see existing classes for examples), and add new Run()
   function.
 */
 
