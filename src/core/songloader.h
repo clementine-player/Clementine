@@ -19,6 +19,7 @@
 #define SONGLOADER_H
 
 #include <QObject>
+#include <QThreadPool>
 #include <QUrl>
 
 #include "song.h"
@@ -129,6 +130,8 @@ private:
   LibraryBackendInterface* library_;
 
   boost::shared_ptr<GstElement> pipeline_;
+
+  QThreadPool thread_pool_;
 };
 
 #endif // SONGLOADER_H

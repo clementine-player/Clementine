@@ -17,6 +17,7 @@
 
 #include "config.h"
 #include "songloader.h"
+#include "core/concurrentrun.h"
 #include "core/logging.h"
 #include "core/song.h"
 #include "core/signalchecker.h"
@@ -38,7 +39,6 @@
 #include <QFileInfo>
 #include <QTimer>
 #include <QUrl>
-#include <QtConcurrentRun>
 #include <QtDebug>
 
 #include <boost/bind.hpp>
@@ -229,7 +229,8 @@ SongLoader::Result SongLoader::LoadLocal(const QString& filename, bool block,
   // inside right away.
   if (QFileInfo(filename).isDir()) {
     if (!block) {
-      QtConcurrent::run(this, &SongLoader::LoadLocalDirectoryAndEmit, filename);
+      ConcurrentRun::Run<void>(&thread_pool_,
+          boost::bind(&SongLoader::LoadLocalDirectoryAndEmit, this, filename));
       return WillLoadAsync;
     } else {
       LoadLocalDirectory(filename);
@@ -261,7 +262,8 @@ SongLoader::Result SongLoader::LoadLocal(const QString& filename, bool block,
 
     // It's a playlist!
     if (!block) {
-      QtConcurrent::run(this, &SongLoader::LoadPlaylistAndEmit, parser, filename);
+      ConcurrentRun::Run<void>(&thread_pool_,
+          boost::bind(&SongLoader::LoadPlaylistAndEmit, this, parser, filename));
       return WillLoadAsync;
     } else {
       LoadPlaylist(parser, filename);
