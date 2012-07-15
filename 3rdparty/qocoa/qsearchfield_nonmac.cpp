@@ -21,6 +21,7 @@ THE SOFTWARE.
 */
 
 #include "qsearchfield.h"
+#include "../../src/ui/iconloader.h"
 
 #include <QApplication>
 #include <QEvent>
@@ -62,19 +63,22 @@ QSearchField::QSearchField(QWidget *parent) : QWidget(parent)
     connect(lineEdit, SIGNAL(textChanged(QString)),
             this, SLOT(setText(QString)));
 
+    QIcon clearIcon(IconLoader::Load("edit-clear-locationbar-ltr"));
+
     QToolButton *clearButton = new QToolButton(this);
-    QPixmap clearIcon(QString(":/Qocoa/qsearchfield_nonmac.png"));
-    clearButton->setIcon(QIcon(clearIcon));
-    clearButton->setIconSize(clearIcon.size());
-    clearButton->setFixedSize(clearIcon.size());
-    clearButton->setStyleSheet("border: none;");
+    clearButton->setIcon(clearIcon);
+    clearButton->setIconSize(QSize(16, 16));
+    clearButton->setStyleSheet("border: none; padding: 0px;");
+    clearButton->resize(clearButton->sizeHint());
     connect(clearButton, SIGNAL(clicked()), this, SLOT(clear()));
 
     pimpl = new QSearchFieldPrivate(this, lineEdit, clearButton);
 
+    const int frame_width = lineEdit->style()->pixelMetric(QStyle::PM_DefaultFrameWidth);
+
     lineEdit->setStyleSheet(QString("QLineEdit { padding-left: %1px; } ").arg(clearButton->width()));
-    const int width = qMax(lineEdit->minimumSizeHint().width(), pimpl->clearButtonPaddedWidth());
-    const int height = qMax(lineEdit->minimumSizeHint().height(), pimpl->clearButtonPaddedHeight());
+    const int width = frame_width + qMax(lineEdit->minimumSizeHint().width(), pimpl->clearButtonPaddedWidth());
+    const int height = frame_width + qMax(lineEdit->minimumSizeHint().height(), pimpl->clearButtonPaddedHeight());
     lineEdit->setMinimumSize(width, height);
 
     QVBoxLayout *layout = new QVBoxLayout(this);
