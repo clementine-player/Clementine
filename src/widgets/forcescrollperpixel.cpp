@@ -32,7 +32,8 @@ ForceScrollPerPixel::ForceScrollPerPixel(QAbstractItemView* item_view, QObject* 
 bool ForceScrollPerPixel::eventFilter(QObject* object, QEvent* event) {
   if (object == item_view_ &&
       event->type() != QEvent::Destroy &&
-      event->type() != QEvent::WinIdChange) {
+      event->type() != QEvent::WinIdChange &&
+      event->type() != QEvent::AccessibilityPrepare) {
     item_view_->setVerticalScrollMode(QAbstractItemView::ScrollPerPixel);
     item_view_->verticalScrollBar()->setSingleStep(20);
   }
