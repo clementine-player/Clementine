@@ -749,6 +749,7 @@ void GroovesharkService::RetrieveUserFavorites() {
 
 void GroovesharkService::UserFavoritesRetrieved(QNetworkReply* reply, int task_id) {
   reply->deleteLater();
+  app_->task_manager()->SetTaskFinished(task_id);
 
   if (!favorites_) {
     // The use probably logged out before the response arrived.
@@ -767,7 +768,6 @@ void GroovesharkService::UserFavoritesRetrieved(QNetworkReply* reply, int task_i
 
     favorites_->appendRow(child);
   }
-  app_->task_manager()->SetTaskFinished(task_id);
 }
 
 void GroovesharkService::RetrieveUserLibrarySongs() {
@@ -781,6 +781,7 @@ void GroovesharkService::RetrieveUserLibrarySongs() {
 
 void GroovesharkService::UserLibrarySongsRetrieved(QNetworkReply* reply, int task_id) {
   reply->deleteLater();
+  app_->task_manager()->SetTaskFinished(task_id);
 
   if (!library_) {
     // The use probably logged out before the response arrived.
@@ -799,7 +800,6 @@ void GroovesharkService::UserLibrarySongsRetrieved(QNetworkReply* reply, int tas
 
     library_->appendRow(child);
   }
-  app_->task_manager()->SetTaskFinished(task_id);
 }
 
 void GroovesharkService::RetrievePopularSongs() {
