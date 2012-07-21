@@ -1416,7 +1416,7 @@ void GroovesharkService::UserFavoriteSongAdded(QNetworkReply* reply, int task_id
   RetrieveUserFavorites();
 }
 
-void GroovesharkService::AddUserLibrarySongs(QList<int>& songs_ids) {
+void GroovesharkService::AddUserLibrarySongs(const QList<int>& songs_ids) {
   int task_id = app_->task_manager()->StartTask(tr("Adding song to My Music"));
   QList<Param> parameters;
 

@@ -95,7 +95,7 @@ class GroovesharkService : public InternetService {
   void RenamePlaylist(int playlist_id);
   void AddUserFavoriteSong(int song_id);
   void RemoveFromFavorites(const QList<int>& songs_ids_to_remove);
-  void AddUserLibrarySongs(QList<int>& songs_ids);
+  void AddUserLibrarySongs(const QList<int>& songs_ids);
   void RemoveFromLibrary(const QList<int>& songs_ids_to_remove);
   void GetSongUrlToShare(int song_id);
   void GetPlaylistUrlToShare(int playlist_id);
