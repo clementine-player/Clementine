@@ -791,12 +791,10 @@ void GroovesharkService::UserLibrarySongsRetrieved(QNetworkReply* reply, int tas
 
   QVariantMap result = ExtractResult(reply);
   SongList songs = ExtractSongs(result);
+  Song::SortSongsListAlphabetically(&songs);
+
   foreach (const Song& song, songs) {
-    QStandardItem* child = new QStandardItem(song.PrettyTitleWithArtist());
-    child->setData(InternetModel::Type_Track, InternetModel::Role_Type);
-    child->setData(QVariant::fromValue(song), InternetModel::Role_SongMetadata);
-    child->setData(InternetModel::PlayBehaviour_SingleItem, InternetModel::Role_PlayBehaviour);
-    child->setData(song.url(), InternetModel::Role_Url);
+    QStandardItem* child = CreateSongItem(song);
     child->setData(true, InternetModel::Role_CanBeModified);
 
     library_->appendRow(child);
