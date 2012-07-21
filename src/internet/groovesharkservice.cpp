@@ -166,7 +166,9 @@ void GroovesharkService::ShowConfig() {
 }
 
 QWidget* GroovesharkService::HeaderWidget() const {
-  return search_box_;
+  if (IsLoggedIn())
+    return search_box_;
+  return NULL;
 }
 
 void GroovesharkService::Search(const QString& text, bool now) {

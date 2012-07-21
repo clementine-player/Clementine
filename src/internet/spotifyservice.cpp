@@ -503,7 +503,9 @@ PlaylistItem::Options SpotifyService::playlistitem_options() const {
 }
 
 QWidget* SpotifyService::HeaderWidget() const {
-  return search_box_;
+  if (IsLoggedIn())
+    return search_box_;
+  return NULL;
 }
 
 void SpotifyService::EnsureMenuCreated() {
