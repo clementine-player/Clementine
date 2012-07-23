@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-07-15 23:15+0000\n"
+"PO-Revision-Date: 2012-07-21 17:11+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -453,11 +453,11 @@ msgstr "Thêm thẻ năm của bài hát"
 msgid "Add stream..."
 msgstr "Thêm luồng dữ liệu..."
 
-#: internet/groovesharkservice.cpp:1052
+#: internet/groovesharkservice.cpp:1112
 msgid "Add to Grooveshark favorites"
 msgstr "Thêm vào yêu thích của Grooveshark"
 
-#: internet/groovesharkservice.cpp:1058
+#: internet/groovesharkservice.cpp:1124
 msgid "Add to Grooveshark playlists"
 msgstr "Thêm vào danh sách Grooveshark"
 
@@ -502,7 +502,11 @@ msgstr "Đã thêm vào ngày hôm nay"
 msgid "Added within three months"
 msgstr "Đã thêm vào trong ba tháng"
 
-#: internet/groovesharkservice.cpp:1331
+#: internet/groovesharkservice.cpp:1420
+msgid "Adding song to My Music"
+msgstr ""
+
+#: internet/groovesharkservice.cpp:1397
 msgid "Adding song to favorites"
 msgstr "Đang thêm bài hát vào yêu thích"
 
@@ -636,7 +640,7 @@ msgstr "Và:"
 
 #: moodbar/moodbarrenderer.cpp:156
 msgid "Angry"
-msgstr ""
+msgstr "Angry"
 
 #: ../bin/src/ui_songinfosettingspage.h:180
 #: ../bin/src/ui_appearancesettingspage.h:227
@@ -666,7 +670,7 @@ msgstr "Nén để chặn việc ngắt đoạn"
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "Bạn có chắc sẽ xóa thiết lập \"%1\"?"
 
-#: internet/groovesharkservice.cpp:1252
+#: internet/groovesharkservice.cpp:1318
 msgid "Are you sure you want to delete this playlist?"
 msgstr "Bạn có chắc muốn xóa danh sách này?"
 
@@ -893,7 +897,7 @@ msgstr "Đổi ngôn ngữ"
 msgid ""
 "Changing mono playback preference will be effective for the next playing "
 "songs"
-msgstr ""
+msgstr "Thay đổi tùy chỉnh phát đơn kênh sẽ ảnh hưởng đến bài kế tiếp"
 
 #: ../bin/src/ui_podcastsettingspage.h:228
 msgid "Check for new episodes"
@@ -1077,7 +1081,7 @@ msgstr "Soạn nhạc"
 msgid "Configure %1..."
 msgstr "Cấu hình %1..."
 
-#: internet/groovesharkservice.cpp:551
+#: internet/groovesharkservice.cpp:563
 msgid "Configure Grooveshark..."
 msgstr "Cấu hình Grooveshark..."
 
@@ -1093,7 +1097,7 @@ msgstr "Cấu hình Magnatune..."
 msgid "Configure Shortcuts"
 msgstr "Phím tắt"
 
-#: internet/spotifyservice.cpp:517
+#: internet/spotifyservice.cpp:519
 msgid "Configure Spotify..."
 msgstr "Cấu hình Spotify..."
 
@@ -1138,7 +1142,7 @@ msgstr "Chuyển đổi toàn bộ nhạc"
 msgid "Convert any music that the device can't play"
 msgstr "Chuyển đổi bất kì bản nhạc nào mà thiết bị không thể chơi"
 
-#: internet/groovesharkservice.cpp:1131
+#: internet/groovesharkservice.cpp:1197
 msgid "Copy to clipboard"
 msgstr "Chép vào bộ đệm"
 
@@ -1222,7 +1226,7 @@ msgstr "Ảnh bìa được thiết lập từ %1"
 msgid "Covers from %1"
 msgstr "Ảnh bìa từ %1"
 
-#: internet/groovesharkservice.cpp:522 internet/groovesharkservice.cpp:1204
+#: internet/groovesharkservice.cpp:531 internet/groovesharkservice.cpp:1270
 msgid "Create a new Grooveshark playlist"
 msgstr "Tạo danh sách Grooveshark mới"
 
@@ -1377,7 +1381,7 @@ msgstr "Mặc định"
 msgid "Delay between visualizations"
 msgstr "Độ trễ giữa các hiệu ứng hình ảnh ảo"
 
-#: internet/groovesharkservice.cpp:525 internet/groovesharkservice.cpp:1251
+#: internet/groovesharkservice.cpp:534 internet/groovesharkservice.cpp:1317
 msgid "Delete Grooveshark playlist"
 msgstr "Xoá danh sách Grooveshark"
 
@@ -1671,7 +1675,7 @@ msgstr "Bật các phím tắt chỉ khi cửa sổ Clementine đang được ch
 msgid ""
 "Enable sources below to include them in search results.  Results will be "
 "displayed in this order."
-msgstr ""
+msgstr "Bật những nguồn tương ứng để tìm nhạc.  Kết quả được hiển thị theo thứ tự này."
 
 #: core/globalshortcuts.cpp:62
 msgid "Enable/disable Last.fm scrobbling"
@@ -1709,7 +1713,7 @@ msgstr "Nhập tên một <b>nghệ sĩ</b> hoặc <b>thẻ</b> để bắt đ�
 #: ../bin/src/ui_globalsearchview.h:209
 msgid ""
 "Enter search terms above to find music on your computer and on the internet"
-msgstr ""
+msgstr "Nhập điều kiện tìm kiếm vào bên trên để tìm nhạc trong máy và trên mạng"
 
 #: ../bin/src/ui_itunessearchpage.h:77
 msgid "Enter search terms below to find podcasts in the iTunes Store"
@@ -1744,7 +1748,7 @@ msgstr "Tương đương với --log-levels *:1"
 msgid "Equivalent to --log-levels *:3"
 msgstr "Tương đương với --log-levels *:3"
 
-#: internet/groovesharkservice.cpp:988
+#: internet/groovesharkservice.cpp:1042
 #: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:497
 #: ui/mainwindow.cpp:1760 ui/mainwindow.cpp:1881
 msgid "Error"
@@ -1895,7 +1899,7 @@ msgstr "Lỗi phân tích XML cho nguồn tin RSS"
 msgid "Fast"
 msgstr "Nhanh"
 
-#: internet/groovesharkservice.cpp:607
+#: internet/groovesharkservice.cpp:628
 msgid "Favorites"
 msgstr "Yêu thích"
 
@@ -2051,7 +2055,7 @@ msgstr "Bạn bè"
 
 #: moodbar/moodbarrenderer.cpp:157
 msgid "Frozen"
-msgstr ""
+msgstr "Frozen"
 
 #: ui/equalizer.cpp:112
 msgid "Full Bass"
@@ -2083,15 +2087,15 @@ msgstr "Thiết lập chung"
 msgid "Genre"
 msgstr "Thể loại"
 
-#: internet/groovesharkservice.cpp:541
+#: internet/groovesharkservice.cpp:553
 msgid "Get a URL to share this Grooveshark playlist"
 msgstr "Lấy URL để chia sẻ danh sách Grooveshark này"
 
-#: internet/groovesharkservice.cpp:538 internet/groovesharkservice.cpp:1069
+#: internet/groovesharkservice.cpp:550 internet/groovesharkservice.cpp:1135
 msgid "Get a URL to share this Grooveshark song"
 msgstr "Lấy URL để chia sẻ bài này "
 
-#: internet/groovesharkservice.cpp:755
+#: internet/groovesharkservice.cpp:809
 msgid "Getting Grooveshark popular songs"
 msgstr "Đang lấy danh sách các bài hát phổ biến trên Grooveshark"
 
@@ -2133,19 +2137,19 @@ msgstr "Loại bỏ những bài hát không tồn tại khỏi các danh sách"
 msgid "Grooveshark"
 msgstr "Grooveshark"
 
-#: internet/groovesharkservice.cpp:413
+#: internet/groovesharkservice.cpp:417
 msgid "Grooveshark login error"
 msgstr "Lỗi đăng nhập Grooveshark"
 
-#: internet/groovesharkservice.cpp:1121
+#: internet/groovesharkservice.cpp:1187
 msgid "Grooveshark playlist's URL"
 msgstr "URL của danh sách Grooveshark"
 
-#: internet/groovesharkservice.cpp:602
+#: internet/groovesharkservice.cpp:614
 msgid "Grooveshark radio"
 msgstr "Phát thanh Grooveshark"
 
-#: internet/groovesharkservice.cpp:1099
+#: internet/groovesharkservice.cpp:1165
 msgid "Grooveshark song's URL"
 msgstr "URL của bài hát trên Grooveshark"
 
@@ -2191,7 +2195,7 @@ msgstr "Proxy HTTP"
 
 #: moodbar/moodbarrenderer.cpp:158
 msgid "Happy"
-msgstr ""
+msgstr "Happy"
 
 #: ../bin/src/ui_deviceproperties.h:371
 msgid "Hardware information"
@@ -2339,7 +2343,7 @@ msgstr "Dịch vụ không hợp lệ"
 msgid "Invalid session key"
 msgstr "Khoá phiên chạy không hợp lệ"
 
-#: internet/groovesharkservice.cpp:406
+#: internet/groovesharkservice.cpp:410
 msgid "Invalid username and/or password"
 msgstr "Vui lòng kiểm tra lại tên người dùng và mật khẩu"
 
@@ -2519,7 +2523,7 @@ msgstr "Tìm trong thư viện"
 msgid "Limits"
 msgstr "Giới hạn"
 
-#: internet/groovesharkservice.cpp:603
+#: internet/groovesharkservice.cpp:615
 msgid ""
 "Listen to Grooveshark songs based on what you've listened to previously"
 msgstr "Nghe nhạc từ Grooveshark dựa theo những gì bạn đã nghe trước đó"
@@ -2686,7 +2690,7 @@ msgstr "Hồ sơ chính (MAIN)"
 msgid "Make it so!"
 msgstr "Make it so!"
 
-#: internet/spotifyservice.cpp:522
+#: internet/spotifyservice.cpp:524
 msgid "Make playlist available offline"
 msgstr "Danh sách sẵn sàng ngoại tuyến"
 
@@ -2759,7 +2763,7 @@ msgstr "Giám sát các thay đổi trong thư viện"
 
 #: ../bin/src/ui_playbacksettingspage.h:296
 msgid "Mono playback"
-msgstr ""
+msgstr "Phát đơn kênh"
 
 #: smartplaylists/searchterm.cpp:303
 msgid "Months"
@@ -2837,6 +2841,10 @@ msgstr "Kênh phát thanh Last.fm khuyến nghị của tôi"
 msgid "My Mix Radio"
 msgstr "Kênh phát thanh mix của tôi"
 
+#: internet/groovesharkservice.cpp:619
+msgid "My Music"
+msgstr ""
+
 #: internet/lastfmservice.cpp:201
 msgid "My Neighborhood"
 msgstr "Địa phương của tôi"
@@ -2849,7 +2857,7 @@ msgstr "Đài phát thanh của tôi"
 msgid "My Recommendations"
 msgstr "Bài nên nghe"
 
-#: internet/groovesharkservice.cpp:1205 internet/groovesharkservice.cpp:1298
+#: internet/groovesharkservice.cpp:1271 internet/groovesharkservice.cpp:1364
 #: ui/equalizer.cpp:172 ../bin/src/ui_deviceproperties.h:369
 #: ../bin/src/ui_magnatunedownloaddialog.h:135
 #: ../bin/src/ui_wizardfinishpage.h:84
@@ -3028,7 +3036,7 @@ msgid "Only show the first"
 msgstr "Hiện số bài hát đầu tiên"
 
 #: internet/digitallyimportedservicebase.cpp:178
-#: internet/groovesharkservice.cpp:545 internet/icecastservice.cpp:296
+#: internet/groovesharkservice.cpp:557 internet/icecastservice.cpp:296
 #: internet/jamendoservice.cpp:418 internet/magnatuneservice.cpp:276
 #: internet/somafmservice.cpp:91
 #, qt-format
@@ -3232,7 +3240,7 @@ msgstr "Tìm trong danh sách"
 msgid "Playlist type"
 msgstr "Loại danh sách"
 
-#: internet/groovesharkservice.cpp:616
+#: internet/groovesharkservice.cpp:637
 msgid "Playlists"
 msgstr "Danh sách"
 
@@ -3248,15 +3256,15 @@ msgstr "Podcast"
 msgid "Pop"
 msgstr "Pop"
 
-#: internet/groovesharkservice.cpp:576
+#: internet/groovesharkservice.cpp:588
 msgid "Popular songs"
 msgstr "Những bài hát phổ biến"
 
-#: internet/groovesharkservice.cpp:579
+#: internet/groovesharkservice.cpp:591
 msgid "Popular songs of the Month"
 msgstr "Bài hát phổ biến trong tháng"
 
-#: internet/groovesharkservice.cpp:586
+#: internet/groovesharkservice.cpp:598
 msgid "Popular songs today"
 msgstr "Bài hát phổ biến hôm nay"
 
@@ -3390,7 +3398,7 @@ msgstr "Chờ phát sau"
 msgid "Radio (equal loudness for all tracks)"
 msgstr "Phát thanh (âm thanh bằng nhau cho mọi bài hát)"
 
-#: internet/groovesharkservice.cpp:594
+#: internet/groovesharkservice.cpp:606
 msgid "Radios"
 msgstr "Phát thanh"
 
@@ -3434,7 +3442,7 @@ msgstr "Đánh giá"
 msgid "Really cancel?"
 msgstr "Thực sự hủy bỏ?"
 
-#: internet/groovesharkservice.cpp:548
+#: internet/groovesharkservice.cpp:560
 msgid "Refresh"
 msgstr "Cập nhật"
 
@@ -3482,17 +3490,21 @@ msgstr "Loại bỏ hành động"
 
 #: ../bin/src/ui_mainwindow.h:713
 msgid "Remove duplicates"
-msgstr ""
+msgstr "Loại bỏ những bài trùng nhau"
 
 #: ../bin/src/ui_librarysettingspage.h:160
 msgid "Remove folder"
 msgstr "Loại bỏ thư mục"
 
-#: internet/groovesharkservice.cpp:535
+#: internet/groovesharkservice.cpp:547
+msgid "Remove from My Music"
+msgstr ""
+
+#: internet/groovesharkservice.cpp:544
 msgid "Remove from favorites"
 msgstr "Loại bỏ khỏi yêu thích"
 
-#: internet/groovesharkservice.cpp:532 ../bin/src/ui_mainwindow.h:688
+#: internet/groovesharkservice.cpp:541 ../bin/src/ui_mainwindow.h:688
 msgid "Remove from playlist"
 msgstr "Loại bỏ khỏi danh sách"
 
@@ -3500,16 +3512,20 @@ msgstr "Loại bỏ khỏi danh sách"
 msgid "Remove playlist"
 msgstr "Loại bỏ danh sách"
 
-#: internet/groovesharkservice.cpp:1413
-msgid "Removing song from favorites"
-msgstr "Đang loại bỏ bài hát khỏi yêu thích"
+#: internet/groovesharkservice.cpp:1565
+msgid "Removing songs from My Music"
+msgstr ""
 
-#: internet/groovesharkservice.cpp:1297
+#: internet/groovesharkservice.cpp:1515
+msgid "Removing songs from favorites"
+msgstr ""
+
+#: internet/groovesharkservice.cpp:1363
 #, qt-format
 msgid "Rename \"%1\" playlist"
 msgstr "Đổi tên danh sách \"%1\""
 
-#: internet/groovesharkservice.cpp:528
+#: internet/groovesharkservice.cpp:537
 msgid "Rename Grooveshark playlist"
 msgstr "Đổi tên danh sách Grooveshark"
 
@@ -3579,11 +3595,15 @@ msgstr "Thiết lập lại bộ đếm số lần phát"
 msgid "Restrict to ASCII characters"
 msgstr "Phải dùng kí tự mã ASCII"
 
-#: internet/groovesharkservice.cpp:723
+#: internet/groovesharkservice.cpp:777
+msgid "Retrieving Grooveshark My Music songs"
+msgstr ""
+
+#: internet/groovesharkservice.cpp:745
 msgid "Retrieving Grooveshark favorites songs"
 msgstr "Đang tải các bài hát yêu thích trên Grooveshark"
 
-#: internet/groovesharkservice.cpp:652
+#: internet/groovesharkservice.cpp:674
 msgid "Retrieving Grooveshark playlists"
 msgstr "Đang tải danh sách Grooveshark"
 
@@ -3701,7 +3721,7 @@ msgstr "Chế độ tìm kiếm"
 msgid "Search options"
 msgstr "Tùy chỉnh tìm kiếm"
 
-#: internet/groovesharkservice.cpp:568 internet/spotifyservice.cpp:343
+#: internet/groovesharkservice.cpp:580 internet/spotifyservice.cpp:343
 msgid "Search results"
 msgstr "Kết quả tìm kiếm"
 
@@ -3710,7 +3730,7 @@ msgstr "Kết quả tìm kiếm"
 msgid "Search terms"
 msgstr "Điều kiện tìm kiếm"
 
-#: internet/groovesharkservice.cpp:269
+#: internet/groovesharkservice.cpp:273
 msgid "Searching on Grooveshark"
 msgstr "Đang tìm trên Grooveshark"
 
@@ -3901,7 +3921,7 @@ msgstr "Hiện biểu tượng dưới khay hệ thống"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:152
 msgid "Show which sources are enabled and disabled"
-msgstr ""
+msgstr "Hiện những nguồn đã được bật và tắt"
 
 #: core/globalshortcuts.cpp:57
 msgid "Show/Hide"
@@ -4063,11 +4083,11 @@ msgstr "Bắt đầu danh sách đang phát"
 msgid "Start transcoding"
 msgstr "Bắt đầu chuyển mã"
 
-#: internet/groovesharkservice.cpp:569 internet/spotifyservice.cpp:344
+#: internet/groovesharkservice.cpp:581 internet/spotifyservice.cpp:344
 msgid ""
 "Start typing something on the search box above to fill this search results "
 "list"
-msgstr ""
+msgstr "Gõ gì đó vào ô tìm kiếm"
 
 #: transcoder/transcoder.cpp:401
 #, qt-format
@@ -4078,7 +4098,7 @@ msgstr "Bắt đầu %1"
 msgid "Starting..."
 msgstr "Đang bắt đầu..."
 
-#: internet/groovesharkservice.cpp:597
+#: internet/groovesharkservice.cpp:609
 msgid "Stations"
 msgstr "Đài"
 
@@ -4115,7 +4135,7 @@ msgstr "Truyền tải"
 msgid "Streaming membership"
 msgstr "Truyền tải thông tin thành viên"
 
-#: internet/groovesharkservice.cpp:619
+#: internet/groovesharkservice.cpp:640
 msgid "Subscribed playlists"
 msgstr "Danh sách đã đăng kí"
 
@@ -4151,15 +4171,15 @@ msgstr "Rất lớn (2048x2048)"
 msgid "Supported formats"
 msgstr "Các định dạng được hỗ trợ"
 
-#: internet/spotifyservice.cpp:546
+#: internet/spotifyservice.cpp:548
 msgid "Syncing Spotify inbox"
 msgstr "Đang đồng bộ hộp thư đến Spotify"
 
-#: internet/spotifyservice.cpp:541
+#: internet/spotifyservice.cpp:543
 msgid "Syncing Spotify playlist"
 msgstr "Đang đồng bộ danh sách Spotify"
 
-#: internet/spotifyservice.cpp:550
+#: internet/spotifyservice.cpp:552
 msgid "Syncing Spotify starred tracks"
 msgstr "Đang đồng bộ các bài hát được đánh dấu sao của Spotify"
 
@@ -4358,7 +4378,7 @@ msgstr "Múi giờ"
 msgid "Title"
 msgstr "Tên"
 
-#: internet/groovesharkservice.cpp:989
+#: internet/groovesharkservice.cpp:1043
 msgid ""
 "To start Grooveshark radio, you should first listen to a few other "
 "Grooveshark songs"
@@ -4485,9 +4505,9 @@ msgstr "Hủy đăng kí"
 
 #: songinfo/songkickconcerts.cpp:177
 msgid "Upcoming Concerts"
-msgstr ""
+msgstr "Các buổi hòa nhạc sắp diễn ra"
 
-#: internet/groovesharkservice.cpp:1159
+#: internet/groovesharkservice.cpp:1225
 msgid "Update Grooveshark playlist"
 msgstr "Cập nhật danh sách Grooveshark"
 
@@ -4593,7 +4613,7 @@ msgstr "Sử dụng cân bằng âm lượng"
 msgid "Used"
 msgstr "Đã dùng"
 
-#: internet/groovesharkservice.cpp:409
+#: internet/groovesharkservice.cpp:413
 #, qt-format
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr "Người dùng %1 không có tài khoản Grooveshark Anywhere"
@@ -5067,7 +5087,7 @@ msgstr "ngắn nhất trước"
 
 #: playlist/playlistundocommands.cpp:138
 msgid "shuffle songs"
-msgstr ""
+msgstr "phát ngẫu nhiên"
 
 #: smartplaylists/searchterm.cpp:292
 msgid "smallest first"

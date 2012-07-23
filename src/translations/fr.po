@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-07-15 23:15+0000\n"
+"PO-Revision-Date: 2012-07-21 17:11+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: French (http://www.transifex.com/projects/p/clementine/language/fr/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -459,11 +459,11 @@ msgstr "Ajouter le tag année du morceau"
 msgid "Add stream..."
 msgstr "Ajouter un flux..."
 
-#: internet/groovesharkservice.cpp:1052
+#: internet/groovesharkservice.cpp:1112
 msgid "Add to Grooveshark favorites"
 msgstr "Ajouter aux favoris Grooveshark"
 
-#: internet/groovesharkservice.cpp:1058
+#: internet/groovesharkservice.cpp:1124
 msgid "Add to Grooveshark playlists"
 msgstr "Ajouter aux listes de lectures Grooveshark"
 
@@ -508,7 +508,11 @@ msgstr "Ajouté aujourd'hui"
 msgid "Added within three months"
 msgstr "Ajouté au cours des 3 derniers mois"
 
-#: internet/groovesharkservice.cpp:1331
+#: internet/groovesharkservice.cpp:1420
+msgid "Adding song to My Music"
+msgstr ""
+
+#: internet/groovesharkservice.cpp:1397
 msgid "Adding song to favorites"
 msgstr "Ajout du morceau aux favoris"
 
@@ -672,7 +676,7 @@ msgstr "Appliquer une compression pour prévenir les coupures"
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "Êtes-vous sûr de vouloir supprimer la valeur prédéfinie « %1 »"
 
-#: internet/groovesharkservice.cpp:1252
+#: internet/groovesharkservice.cpp:1318
 msgid "Are you sure you want to delete this playlist?"
 msgstr "Êtes-vous sur de vouloir supprimer cette liste de lecture ?"
 
@@ -1083,7 +1087,7 @@ msgstr "Compositeur"
 msgid "Configure %1..."
 msgstr "Configurer %1..."
 
-#: internet/groovesharkservice.cpp:551
+#: internet/groovesharkservice.cpp:563
 msgid "Configure Grooveshark..."
 msgstr "Configurer Grooveshark..."
 
@@ -1099,7 +1103,7 @@ msgstr "Configurer Magnatune..."
 msgid "Configure Shortcuts"
 msgstr "Configurer les raccourcis clavier"
 
-#: internet/spotifyservice.cpp:517
+#: internet/spotifyservice.cpp:519
 msgid "Configure Spotify..."
 msgstr "Configurer Spotify…"
 
@@ -1144,7 +1148,7 @@ msgstr "Convertir toutes les musiques"
 msgid "Convert any music that the device can't play"
 msgstr "Convertir la musique que le périphérique ne peut pas lire"
 
-#: internet/groovesharkservice.cpp:1131
+#: internet/groovesharkservice.cpp:1197
 msgid "Copy to clipboard"
 msgstr "Copier dans le presse papier"
 
@@ -1228,7 +1232,7 @@ msgstr "Pochette définie depuis %1"
 msgid "Covers from %1"
 msgstr "Pochettes depuis %1"
 
-#: internet/groovesharkservice.cpp:522 internet/groovesharkservice.cpp:1204
+#: internet/groovesharkservice.cpp:531 internet/groovesharkservice.cpp:1270
 msgid "Create a new Grooveshark playlist"
 msgstr "Créer une nouvelle liste de lecture Grooveshark"
 
@@ -1383,7 +1387,7 @@ msgstr "Par défaut"
 msgid "Delay between visualizations"
 msgstr "Délai entre les visualisations"
 
-#: internet/groovesharkservice.cpp:525 internet/groovesharkservice.cpp:1251
+#: internet/groovesharkservice.cpp:534 internet/groovesharkservice.cpp:1317
 msgid "Delete Grooveshark playlist"
 msgstr "Supprimer la liste de lecture Grooveshark"
 
@@ -1750,7 +1754,7 @@ msgstr "Equivalent à --log-levels *:1"
 msgid "Equivalent to --log-levels *:3"
 msgstr "Equivalent à --log-levels *:3"
 
-#: internet/groovesharkservice.cpp:988
+#: internet/groovesharkservice.cpp:1042
 #: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:497
 #: ui/mainwindow.cpp:1760 ui/mainwindow.cpp:1881
 msgid "Error"
@@ -1901,7 +1905,7 @@ msgstr "La lecture du flux RSS a échoué"
 msgid "Fast"
 msgstr "Rapide"
 
-#: internet/groovesharkservice.cpp:607
+#: internet/groovesharkservice.cpp:628
 msgid "Favorites"
 msgstr "Favoris"
 
@@ -2089,15 +2093,15 @@ msgstr "Configuration générale"
 msgid "Genre"
 msgstr "Genre"
 
-#: internet/groovesharkservice.cpp:541
+#: internet/groovesharkservice.cpp:553
 msgid "Get a URL to share this Grooveshark playlist"
 msgstr "Obtenir une URL pour partager cette liste de lecture Grooveshark"
 
-#: internet/groovesharkservice.cpp:538 internet/groovesharkservice.cpp:1069
+#: internet/groovesharkservice.cpp:550 internet/groovesharkservice.cpp:1135
 msgid "Get a URL to share this Grooveshark song"
 msgstr "Obtenir une URL pour partager ce morceau Grooveshark"
 
-#: internet/groovesharkservice.cpp:755
+#: internet/groovesharkservice.cpp:809
 msgid "Getting Grooveshark popular songs"
 msgstr "Récupération des morceaux populaires Grooveshark"
 
@@ -2139,19 +2143,19 @@ msgstr "Griser les morceaux qui n'existent plus dans mes listes de lecture"
 msgid "Grooveshark"
 msgstr "Grooveshark"
 
-#: internet/groovesharkservice.cpp:413
+#: internet/groovesharkservice.cpp:417
 msgid "Grooveshark login error"
 msgstr "Erreur lors de la connexion à Grooveshark"
 
-#: internet/groovesharkservice.cpp:1121
+#: internet/groovesharkservice.cpp:1187
 msgid "Grooveshark playlist's URL"
 msgstr "URL de la liste de lecture Grooveshark"
 
-#: internet/groovesharkservice.cpp:602
+#: internet/groovesharkservice.cpp:614
 msgid "Grooveshark radio"
 msgstr "Radio Grooveshark"
 
-#: internet/groovesharkservice.cpp:1099
+#: internet/groovesharkservice.cpp:1165
 msgid "Grooveshark song's URL"
 msgstr "URL du morceau Grooveshark"
 
@@ -2345,7 +2349,7 @@ msgstr "Service invalide"
 msgid "Invalid session key"
 msgstr "Clé de session invalide"
 
-#: internet/groovesharkservice.cpp:406
+#: internet/groovesharkservice.cpp:410
 msgid "Invalid username and/or password"
 msgstr "Nom d'utilisateur et / ou mot de passe invalide"
 
@@ -2525,7 +2529,7 @@ msgstr "Rechercher dans la bibliothèque"
 msgid "Limits"
 msgstr "Limites"
 
-#: internet/groovesharkservice.cpp:603
+#: internet/groovesharkservice.cpp:615
 msgid ""
 "Listen to Grooveshark songs based on what you've listened to previously"
 msgstr "Écoutez des morceaux Grooveshark basé sur ce que vous avez écouté auparavant"
@@ -2692,7 +2696,7 @@ msgstr "Profil principal (MAIN)"
 msgid "Make it so!"
 msgstr "Voilà!"
 
-#: internet/spotifyservice.cpp:522
+#: internet/spotifyservice.cpp:524
 msgid "Make playlist available offline"
 msgstr "Rendre la liste de lecture accessible hors ligne"
 
@@ -2843,6 +2847,10 @@ msgstr "Ma radio de recommandations Last.fm"
 msgid "My Mix Radio"
 msgstr "Ma radio mix"
 
+#: internet/groovesharkservice.cpp:619
+msgid "My Music"
+msgstr ""
+
 #: internet/lastfmservice.cpp:201
 msgid "My Neighborhood"
 msgstr "Mon voisinage"
@@ -2855,7 +2863,7 @@ msgstr "Ma station de radio"
 msgid "My Recommendations"
 msgstr "Mes suggestions"
 
-#: internet/groovesharkservice.cpp:1205 internet/groovesharkservice.cpp:1298
+#: internet/groovesharkservice.cpp:1271 internet/groovesharkservice.cpp:1364
 #: ui/equalizer.cpp:172 ../bin/src/ui_deviceproperties.h:369
 #: ../bin/src/ui_magnatunedownloaddialog.h:135
 #: ../bin/src/ui_wizardfinishpage.h:84
@@ -3034,7 +3042,7 @@ msgid "Only show the first"
 msgstr "Afficher seulement le premier"
 
 #: internet/digitallyimportedservicebase.cpp:178
-#: internet/groovesharkservice.cpp:545 internet/icecastservice.cpp:296
+#: internet/groovesharkservice.cpp:557 internet/icecastservice.cpp:296
 #: internet/jamendoservice.cpp:418 internet/magnatuneservice.cpp:276
 #: internet/somafmservice.cpp:91
 #, qt-format
@@ -3238,7 +3246,7 @@ msgstr "Rechercher dans la liste de lecture"
 msgid "Playlist type"
 msgstr "Type de liste de lecture"
 
-#: internet/groovesharkservice.cpp:616
+#: internet/groovesharkservice.cpp:637
 msgid "Playlists"
 msgstr "Listes de lecture"
 
@@ -3254,15 +3262,15 @@ msgstr "Podcasts"
 msgid "Pop"
 msgstr "Pop"
 
-#: internet/groovesharkservice.cpp:576
+#: internet/groovesharkservice.cpp:588
 msgid "Popular songs"
 msgstr "Morceaux populaires"
 
-#: internet/groovesharkservice.cpp:579
+#: internet/groovesharkservice.cpp:591
 msgid "Popular songs of the Month"
 msgstr "Morceaux populaires ce mois-ci"
 
-#: internet/groovesharkservice.cpp:586
+#: internet/groovesharkservice.cpp:598
 msgid "Popular songs today"
 msgstr "Morceaux populaires aujourd'hui"
 
@@ -3396,7 +3404,7 @@ msgstr "Mettre cette piste en liste d'attente"
 msgid "Radio (equal loudness for all tracks)"
 msgstr "Radio (volume égalisé pour toutes les pistes)"
 
-#: internet/groovesharkservice.cpp:594
+#: internet/groovesharkservice.cpp:606
 msgid "Radios"
 msgstr "Radios"
 
@@ -3440,7 +3448,7 @@ msgstr "Note"
 msgid "Really cancel?"
 msgstr "Êtes-vous sûr de vouloir annuler ?"
 
-#: internet/groovesharkservice.cpp:548
+#: internet/groovesharkservice.cpp:560
 msgid "Refresh"
 msgstr "Mettre à jour"
 
@@ -3494,11 +3502,15 @@ msgstr ""
 msgid "Remove folder"
 msgstr "Supprimer un dossier"
 
-#: internet/groovesharkservice.cpp:535
+#: internet/groovesharkservice.cpp:547
+msgid "Remove from My Music"
+msgstr ""
+
+#: internet/groovesharkservice.cpp:544
 msgid "Remove from favorites"
 msgstr "Supprimer des favoris"
 
-#: internet/groovesharkservice.cpp:532 ../bin/src/ui_mainwindow.h:688
+#: internet/groovesharkservice.cpp:541 ../bin/src/ui_mainwindow.h:688
 msgid "Remove from playlist"
 msgstr "Supprimer de la liste de lecture"
 
@@ -3506,16 +3518,20 @@ msgstr "Supprimer de la liste de lecture"
 msgid "Remove playlist"
 msgstr "Supprimer la liste de lecture"
 
-#: internet/groovesharkservice.cpp:1413
-msgid "Removing song from favorites"
-msgstr "Suppression du morceau des favoris"
+#: internet/groovesharkservice.cpp:1565
+msgid "Removing songs from My Music"
+msgstr ""
 
-#: internet/groovesharkservice.cpp:1297
+#: internet/groovesharkservice.cpp:1515
+msgid "Removing songs from favorites"
+msgstr ""
+
+#: internet/groovesharkservice.cpp:1363
 #, qt-format
 msgid "Rename \"%1\" playlist"
 msgstr "Renommer la liste de lecture « %1 »"
 
-#: internet/groovesharkservice.cpp:528
+#: internet/groovesharkservice.cpp:537
 msgid "Rename Grooveshark playlist"
 msgstr "Renommer cette liste de lecture Grooveshark"
 
@@ -3585,11 +3601,15 @@ msgstr "Réinitialiser le compteur de lecture"
 msgid "Restrict to ASCII characters"
 msgstr "Limiter aux caractères ASCII"
 
-#: internet/groovesharkservice.cpp:723
+#: internet/groovesharkservice.cpp:777
+msgid "Retrieving Grooveshark My Music songs"
+msgstr ""
+
+#: internet/groovesharkservice.cpp:745
 msgid "Retrieving Grooveshark favorites songs"
 msgstr "Récupération des morceaux Grooveshark favoris"
 
-#: internet/groovesharkservice.cpp:652
+#: internet/groovesharkservice.cpp:674
 msgid "Retrieving Grooveshark playlists"
 msgstr "Récupération des listes de lecture Grooveshark"
 
@@ -3707,7 +3727,7 @@ msgstr "Mode de recherche"
 msgid "Search options"
 msgstr "Options de recherche"
 
-#: internet/groovesharkservice.cpp:568 internet/spotifyservice.cpp:343
+#: internet/groovesharkservice.cpp:580 internet/spotifyservice.cpp:343
 msgid "Search results"
 msgstr "Résultats de recherche"
 
@@ -3716,7 +3736,7 @@ msgstr "Résultats de recherche"
 msgid "Search terms"
 msgstr "Termes de recherche"
 
-#: internet/groovesharkservice.cpp:269
+#: internet/groovesharkservice.cpp:273
 msgid "Searching on Grooveshark"
 msgstr "Recherche sur Grooveshark"
 
@@ -4069,7 +4089,7 @@ msgstr "Commencer la liste de lecture jouée actuellement"
 msgid "Start transcoding"
 msgstr "Démarrer transcodage"
 
-#: internet/groovesharkservice.cpp:569 internet/spotifyservice.cpp:344
+#: internet/groovesharkservice.cpp:581 internet/spotifyservice.cpp:344
 msgid ""
 "Start typing something on the search box above to fill this search results "
 "list"
@@ -4084,7 +4104,7 @@ msgstr "Lancement de %1"
 msgid "Starting..."
 msgstr "Démarrage..."
 
-#: internet/groovesharkservice.cpp:597
+#: internet/groovesharkservice.cpp:609
 msgid "Stations"
 msgstr "Stations"
 
@@ -4121,7 +4141,7 @@ msgstr "Flux"
 msgid "Streaming membership"
 msgstr "Membres de streaming"
 
-#: internet/groovesharkservice.cpp:619
+#: internet/groovesharkservice.cpp:640
 msgid "Subscribed playlists"
 msgstr "Listes de lecture abonnées"
 
@@ -4157,15 +4177,15 @@ msgstr "Très élevé (2048x2048)"
 msgid "Supported formats"
 msgstr "Formats supportés"
 
-#: internet/spotifyservice.cpp:546
+#: internet/spotifyservice.cpp:548
 msgid "Syncing Spotify inbox"
 msgstr "Synchronisation de la boîte de réception Spotify"
 
-#: internet/spotifyservice.cpp:541
+#: internet/spotifyservice.cpp:543
 msgid "Syncing Spotify playlist"
 msgstr "Synchronisation de la liste de lecture Spotify"
 
-#: internet/spotifyservice.cpp:550
+#: internet/spotifyservice.cpp:552
 msgid "Syncing Spotify starred tracks"
 msgstr "Synchronisation des morceaux Spotify préférés"
 
@@ -4364,7 +4384,7 @@ msgstr "Fuseau horaire"
 msgid "Title"
 msgstr "Titre"
 
-#: internet/groovesharkservice.cpp:989
+#: internet/groovesharkservice.cpp:1043
 msgid ""
 "To start Grooveshark radio, you should first listen to a few other "
 "Grooveshark songs"
@@ -4493,7 +4513,7 @@ msgstr "Se désinscrire"
 msgid "Upcoming Concerts"
 msgstr "Concerts à venir"
 
-#: internet/groovesharkservice.cpp:1159
+#: internet/groovesharkservice.cpp:1225
 msgid "Update Grooveshark playlist"
 msgstr "Mise à jour de la liste de lecture Grooveshark"
 
@@ -4599,7 +4619,7 @@ msgstr "Utiliser la normalisation de volume"
 msgid "Used"
 msgstr "Utilisé"
 
-#: internet/groovesharkservice.cpp:409
+#: internet/groovesharkservice.cpp:413
 #, qt-format
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr "L'utilisateur %1 n'a pas de compte Grooveshark Anywhere"

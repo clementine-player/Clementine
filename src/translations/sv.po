@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-07-15 23:16+0000\n"
+"PO-Revision-Date: 2012-07-21 17:11+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -453,11 +453,11 @@ msgstr "Lägg till etikett för år"
 msgid "Add stream..."
 msgstr "Lägg till ström..."
 
-#: internet/groovesharkservice.cpp:1052
+#: internet/groovesharkservice.cpp:1112
 msgid "Add to Grooveshark favorites"
 msgstr "Lägg till i Grooveshark-favoriter"
 
-#: internet/groovesharkservice.cpp:1058
+#: internet/groovesharkservice.cpp:1124
 msgid "Add to Grooveshark playlists"
 msgstr "Lägg till i Grooveshark-spellistor"
 
@@ -502,7 +502,11 @@ msgstr "Tillagda idag"
 msgid "Added within three months"
 msgstr "Tillagda senaste tre månaderna"
 
-#: internet/groovesharkservice.cpp:1331
+#: internet/groovesharkservice.cpp:1420
+msgid "Adding song to My Music"
+msgstr ""
+
+#: internet/groovesharkservice.cpp:1397
 msgid "Adding song to favorites"
 msgstr "Lägg till låtar till favoriter"
 
@@ -666,7 +670,7 @@ msgstr "Tillämpa komprimering för att förhindra distorsion"
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "Är du säker på att du vill ta bort förinställningen \"%1\"?"
 
-#: internet/groovesharkservice.cpp:1252
+#: internet/groovesharkservice.cpp:1318
 msgid "Are you sure you want to delete this playlist?"
 msgstr "Är du säker på att du vill ta bort denna spellista?"
 
@@ -1077,7 +1081,7 @@ msgstr "Kompositör"
 msgid "Configure %1..."
 msgstr ""
 
-#: internet/groovesharkservice.cpp:551
+#: internet/groovesharkservice.cpp:563
 msgid "Configure Grooveshark..."
 msgstr "Konfigurera Grooveshark..."
 
@@ -1093,7 +1097,7 @@ msgstr "Konfigurera Magnatune..."
 msgid "Configure Shortcuts"
 msgstr "Konfigurera snabbtangenter"
 
-#: internet/spotifyservice.cpp:517
+#: internet/spotifyservice.cpp:519
 msgid "Configure Spotify..."
 msgstr "Anpassa Spotify..."
 
@@ -1138,7 +1142,7 @@ msgstr "Konvertera all musik"
 msgid "Convert any music that the device can't play"
 msgstr "Konvertera all musik som enheten inte kan spela upp"
 
-#: internet/groovesharkservice.cpp:1131
+#: internet/groovesharkservice.cpp:1197
 msgid "Copy to clipboard"
 msgstr "Kopiera till klippbordet"
 
@@ -1222,7 +1226,7 @@ msgstr "Omslagsbild angiven från %1"
 msgid "Covers from %1"
 msgstr "Omslagsbilder från %1"
 
-#: internet/groovesharkservice.cpp:522 internet/groovesharkservice.cpp:1204
+#: internet/groovesharkservice.cpp:531 internet/groovesharkservice.cpp:1270
 msgid "Create a new Grooveshark playlist"
 msgstr "Skapa ny Grooveshark spellista"
 
@@ -1377,7 +1381,7 @@ msgstr "Standardvärden"
 msgid "Delay between visualizations"
 msgstr "Fördröjning mellan visualiseringar"
 
-#: internet/groovesharkservice.cpp:525 internet/groovesharkservice.cpp:1251
+#: internet/groovesharkservice.cpp:534 internet/groovesharkservice.cpp:1317
 msgid "Delete Grooveshark playlist"
 msgstr "Ta bort Grooveshark spellista"
 
@@ -1744,7 +1748,7 @@ msgstr "Motsvarar --log-levels *:1"
 msgid "Equivalent to --log-levels *:3"
 msgstr "Motsvarar --log-levels *:3"
 
-#: internet/groovesharkservice.cpp:988
+#: internet/groovesharkservice.cpp:1042
 #: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:497
 #: ui/mainwindow.cpp:1760 ui/mainwindow.cpp:1881
 msgid "Error"
@@ -1895,7 +1899,7 @@ msgstr "Misslyckades att tolka XML för denna RSS-flöde"
 msgid "Fast"
 msgstr "Snabb"
 
-#: internet/groovesharkservice.cpp:607
+#: internet/groovesharkservice.cpp:628
 msgid "Favorites"
 msgstr "Favoriter"
 
@@ -2083,15 +2087,15 @@ msgstr "Allmänna inställningar"
 msgid "Genre"
 msgstr "Genre"
 
-#: internet/groovesharkservice.cpp:541
+#: internet/groovesharkservice.cpp:553
 msgid "Get a URL to share this Grooveshark playlist"
 msgstr "Hämta adress för att dela Groovesharkspellista"
 
-#: internet/groovesharkservice.cpp:538 internet/groovesharkservice.cpp:1069
+#: internet/groovesharkservice.cpp:550 internet/groovesharkservice.cpp:1135
 msgid "Get a URL to share this Grooveshark song"
 msgstr "Hämta adress för att dela Groovesharklåt"
 
-#: internet/groovesharkservice.cpp:755
+#: internet/groovesharkservice.cpp:809
 msgid "Getting Grooveshark popular songs"
 msgstr "Ladda populära Groovesharklåtar"
 
@@ -2133,19 +2137,19 @@ msgstr "Gråa ut icke-existerande låtar i mina spellistor"
 msgid "Grooveshark"
 msgstr "Grooveshark"
 
-#: internet/groovesharkservice.cpp:413
+#: internet/groovesharkservice.cpp:417
 msgid "Grooveshark login error"
 msgstr "Grooveshark login fel"
 
-#: internet/groovesharkservice.cpp:1121
+#: internet/groovesharkservice.cpp:1187
 msgid "Grooveshark playlist's URL"
 msgstr "Adress för Groovesharkspellista"
 
-#: internet/groovesharkservice.cpp:602
+#: internet/groovesharkservice.cpp:614
 msgid "Grooveshark radio"
 msgstr "Groovesharkradio"
 
-#: internet/groovesharkservice.cpp:1099
+#: internet/groovesharkservice.cpp:1165
 msgid "Grooveshark song's URL"
 msgstr "Adresser för Groovesharklåtar"
 
@@ -2339,7 +2343,7 @@ msgstr "Ogiltig tjänst"
 msgid "Invalid session key"
 msgstr "Felaktig sessionsnyckel"
 
-#: internet/groovesharkservice.cpp:406
+#: internet/groovesharkservice.cpp:410
 msgid "Invalid username and/or password"
 msgstr "Fel användarnamn och/eller lösenord"
 
@@ -2519,7 +2523,7 @@ msgstr "Bibliotekssökning"
 msgid "Limits"
 msgstr "Begränsningar"
 
-#: internet/groovesharkservice.cpp:603
+#: internet/groovesharkservice.cpp:615
 msgid ""
 "Listen to Grooveshark songs based on what you've listened to previously"
 msgstr "Lyssna på Groovesharklåtar som baseras efter vad du tidigare lyssnat på."
@@ -2686,7 +2690,7 @@ msgstr "Huvudprofil (MAIN)"
 msgid "Make it so!"
 msgstr "Gör så!"
 
-#: internet/spotifyservice.cpp:522
+#: internet/spotifyservice.cpp:524
 msgid "Make playlist available offline"
 msgstr "Gör spellista tillgänglig offline"
 
@@ -2837,6 +2841,10 @@ msgstr "Min Last.fm rekommenderade radio"
 msgid "My Mix Radio"
 msgstr "Min Blandade Radio"
 
+#: internet/groovesharkservice.cpp:619
+msgid "My Music"
+msgstr ""
+
 #: internet/lastfmservice.cpp:201
 msgid "My Neighborhood"
 msgstr "Mitt grannskap"
@@ -2849,7 +2857,7 @@ msgstr "Min radiostation"
 msgid "My Recommendations"
 msgstr "Mina rekommendationer"
 
-#: internet/groovesharkservice.cpp:1205 internet/groovesharkservice.cpp:1298
+#: internet/groovesharkservice.cpp:1271 internet/groovesharkservice.cpp:1364
 #: ui/equalizer.cpp:172 ../bin/src/ui_deviceproperties.h:369
 #: ../bin/src/ui_magnatunedownloaddialog.h:135
 #: ../bin/src/ui_wizardfinishpage.h:84
@@ -3028,7 +3036,7 @@ msgid "Only show the first"
 msgstr "Visa endast de första"
 
 #: internet/digitallyimportedservicebase.cpp:178
-#: internet/groovesharkservice.cpp:545 internet/icecastservice.cpp:296
+#: internet/groovesharkservice.cpp:557 internet/icecastservice.cpp:296
 #: internet/jamendoservice.cpp:418 internet/magnatuneservice.cpp:276
 #: internet/somafmservice.cpp:91
 #, qt-format
@@ -3232,7 +3240,7 @@ msgstr "Sök i spellistan"
 msgid "Playlist type"
 msgstr "Spellistetyp"
 
-#: internet/groovesharkservice.cpp:616
+#: internet/groovesharkservice.cpp:637
 msgid "Playlists"
 msgstr "Spellistor"
 
@@ -3248,15 +3256,15 @@ msgstr "Podsändning"
 msgid "Pop"
 msgstr "Pop"
 
-#: internet/groovesharkservice.cpp:576
+#: internet/groovesharkservice.cpp:588
 msgid "Popular songs"
 msgstr "Populära låtar"
 
-#: internet/groovesharkservice.cpp:579
+#: internet/groovesharkservice.cpp:591
 msgid "Popular songs of the Month"
 msgstr "Poplära låtar under månaden"
 
-#: internet/groovesharkservice.cpp:586
+#: internet/groovesharkservice.cpp:598
 msgid "Popular songs today"
 msgstr "Populära låtar idag"
 
@@ -3390,7 +3398,7 @@ msgstr "Kölägg spår"
 msgid "Radio (equal loudness for all tracks)"
 msgstr "Radio (likvärdig ljudstyrka för alla spår)"
 
-#: internet/groovesharkservice.cpp:594
+#: internet/groovesharkservice.cpp:606
 msgid "Radios"
 msgstr "Radio"
 
@@ -3434,7 +3442,7 @@ msgstr "Betyg"
 msgid "Really cancel?"
 msgstr "Verkligen avbryta?"
 
-#: internet/groovesharkservice.cpp:548
+#: internet/groovesharkservice.cpp:560
 msgid "Refresh"
 msgstr "Uppdatera"
 
@@ -3488,11 +3496,15 @@ msgstr ""
 msgid "Remove folder"
 msgstr "Ta bort mapp"
 
-#: internet/groovesharkservice.cpp:535
+#: internet/groovesharkservice.cpp:547
+msgid "Remove from My Music"
+msgstr ""
+
+#: internet/groovesharkservice.cpp:544
 msgid "Remove from favorites"
 msgstr "Ta bort från favoriter"
 
-#: internet/groovesharkservice.cpp:532 ../bin/src/ui_mainwindow.h:688
+#: internet/groovesharkservice.cpp:541 ../bin/src/ui_mainwindow.h:688
 msgid "Remove from playlist"
 msgstr "Ta bort från spellistan"
 
@@ -3500,16 +3512,20 @@ msgstr "Ta bort från spellistan"
 msgid "Remove playlist"
 msgstr "Ta bort spellistan"
 
-#: internet/groovesharkservice.cpp:1413
-msgid "Removing song from favorites"
-msgstr "Ta bort låt från favoriter"
+#: internet/groovesharkservice.cpp:1565
+msgid "Removing songs from My Music"
+msgstr ""
 
-#: internet/groovesharkservice.cpp:1297
+#: internet/groovesharkservice.cpp:1515
+msgid "Removing songs from favorites"
+msgstr ""
+
+#: internet/groovesharkservice.cpp:1363
 #, qt-format
 msgid "Rename \"%1\" playlist"
 msgstr "Byt namn på %1 spellista"
 
-#: internet/groovesharkservice.cpp:528
+#: internet/groovesharkservice.cpp:537
 msgid "Rename Grooveshark playlist"
 msgstr "Byt namn på Groovesharkspellista"
 
@@ -3579,11 +3595,15 @@ msgstr "Återställ låtstatistik"
 msgid "Restrict to ASCII characters"
 msgstr "Begränsa till ASCII-tecken"
 
-#: internet/groovesharkservice.cpp:723
+#: internet/groovesharkservice.cpp:777
+msgid "Retrieving Grooveshark My Music songs"
+msgstr ""
+
+#: internet/groovesharkservice.cpp:745
 msgid "Retrieving Grooveshark favorites songs"
 msgstr "Hämta favoritlåtar från Grooveshark"
 
-#: internet/groovesharkservice.cpp:652
+#: internet/groovesharkservice.cpp:674
 msgid "Retrieving Grooveshark playlists"
 msgstr "Hämta spellistor från Grooveshark"
 
@@ -3701,7 +3721,7 @@ msgstr "Sökläge"
 msgid "Search options"
 msgstr "Sökalternativ"
 
-#: internet/groovesharkservice.cpp:568 internet/spotifyservice.cpp:343
+#: internet/groovesharkservice.cpp:580 internet/spotifyservice.cpp:343
 msgid "Search results"
 msgstr ""
 
@@ -3710,7 +3730,7 @@ msgstr ""
 msgid "Search terms"
 msgstr "Söktermer"
 
-#: internet/groovesharkservice.cpp:269
+#: internet/groovesharkservice.cpp:273
 msgid "Searching on Grooveshark"
 msgstr "Söker på Grooveshark"
 
@@ -4063,7 +4083,7 @@ msgstr "Starta spellistan som spelas för närvarande"
 msgid "Start transcoding"
 msgstr "Starta omkodning"
 
-#: internet/groovesharkservice.cpp:569 internet/spotifyservice.cpp:344
+#: internet/groovesharkservice.cpp:581 internet/spotifyservice.cpp:344
 msgid ""
 "Start typing something on the search box above to fill this search results "
 "list"
@@ -4078,7 +4098,7 @@ msgstr "Startar %1"
 msgid "Starting..."
 msgstr "Startar..."
 
-#: internet/groovesharkservice.cpp:597
+#: internet/groovesharkservice.cpp:609
 msgid "Stations"
 msgstr "Stationer"
 
@@ -4115,7 +4135,7 @@ msgstr "Ström"
 msgid "Streaming membership"
 msgstr "Strömmningsmedlemskap"
 
-#: internet/groovesharkservice.cpp:619
+#: internet/groovesharkservice.cpp:640
 msgid "Subscribed playlists"
 msgstr "Bevakade spellistor"
 
@@ -4151,15 +4171,15 @@ msgstr "Super high (2048x2048)"
 msgid "Supported formats"
 msgstr "Stödda format"
 
-#: internet/spotifyservice.cpp:546
+#: internet/spotifyservice.cpp:548
 msgid "Syncing Spotify inbox"
 msgstr "Synkroniserar Spotify-inkorg"
 
-#: internet/spotifyservice.cpp:541
+#: internet/spotifyservice.cpp:543
 msgid "Syncing Spotify playlist"
 msgstr "Synkroniserar Spotify-spellista"
 
-#: internet/spotifyservice.cpp:550
+#: internet/spotifyservice.cpp:552
 msgid "Syncing Spotify starred tracks"
 msgstr "Synkroniserar stjärnmärkta spår i Spotify"
 
@@ -4358,7 +4378,7 @@ msgstr "Tidzon"
 msgid "Title"
 msgstr "Titel"
 
-#: internet/groovesharkservice.cpp:989
+#: internet/groovesharkservice.cpp:1043
 msgid ""
 "To start Grooveshark radio, you should first listen to a few other "
 "Grooveshark songs"
@@ -4487,7 +4507,7 @@ msgstr "Avprenumerera"
 msgid "Upcoming Concerts"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:1159
+#: internet/groovesharkservice.cpp:1225
 msgid "Update Grooveshark playlist"
 msgstr "Uppdatera Groovesharkspellista "
 
@@ -4593,7 +4613,7 @@ msgstr "Använd ljudnormalisering"
 msgid "Used"
 msgstr "Använd"
 
-#: internet/groovesharkservice.cpp:409
+#: internet/groovesharkservice.cpp:413
 #, qt-format
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr "Användaren %1 har inte ett Grooveshark Anywhere konto"
