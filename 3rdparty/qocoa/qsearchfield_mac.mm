@@ -28,6 +28,9 @@ THE SOFTWARE.
 #import "Foundation/NSNotification.h"
 #import "AppKit/NSSearchField.h"
 
+#include <QApplication>
+#include <QClipboard>
+
 class QSearchFieldPrivate : public QObject
 {
 public:
@@ -82,11 +85,59 @@ public:
 }
 @end
 
+namespace {
+
+static const unsigned short kKeycodeA = 0;
+static const unsigned short kKeycodeX = 7;
+static const unsigned short kKeycodeC = 8;
+static const unsigned short kKeycodeV = 9;
+
+}  // namespace
+
+@interface QocoaSearchField : NSSearchField
+-(BOOL)performKeyEquivalent:(NSEvent*)event;
+@end
+
+@implementation QocoaSearchField
+-(BOOL)performKeyEquivalent:(NSEvent*)event {
+    if ([event type] == NSKeyDown && [event modifierFlags] & NSCommandKeyMask)
+    {
+        const unsigned short keyCode = [event keyCode];
+        if (keyCode == kKeycodeA)  // Cmd+a
+        {
+            [self performSelector:@selector(selectText:)];
+            return YES;
+        }
+        else if (keyCode == kKeycodeC)  // Cmd+c
+        {
+            QClipboard* clipboard = QApplication::clipboard();
+            clipboard->setText(toQString([self stringValue]));
+            return YES;
+        }
+        else if (keyCode == kKeycodeV)  // Cmd+v
+        {
+            QClipboard* clipboard = QApplication::clipboard();
+            [self setStringValue:fromQString(clipboard->text())];
+            return YES;
+        }
+        else if (keyCode == kKeycodeX)  // Cmd+x
+        {
+            QClipboard* clipboard = QApplication::clipboard();
+            clipboard->setText(toQString([self stringValue]));
+            [self setStringValue:@""];
+            return YES;
+        }
+    }
+
+    return NO;
+}
+@end
+
 QSearchField::QSearchField(QWidget *parent) : QWidget(parent)
 {
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 
-    NSSearchField *search = [[NSSearchField alloc] init];
+    NSSearchField *search = [[QocoaSearchField alloc] init];
 
     QSearchFieldDelegate *delegate = [[QSearchFieldDelegate alloc] init];
     pimpl = delegate->pimpl = new QSearchFieldPrivate(this, search);
@@ -128,6 +179,21 @@ QString QSearchField::placeholderText() const {
     Q_ASSERT(pimpl);
     NSString* placeholder = [[pimpl->nsSearchField cell] placeholderString];
     return toQString(placeholder);
+}
+
+void QSearchField::setFocus(Qt::FocusReason reason)
+{
+    Q_ASSERT(pimpl);
+    if (!pimpl)
+        return;
+
+    if ([pimpl->nsSearchField acceptsFirstResponder])
+        [[pimpl->nsSearchField window] makeFirstResponder: pimpl->nsSearchField];
+}
+
+void QSearchField::setFocus()
+{
+    setFocus(Qt::OtherFocusReason);
 }
 
 void QSearchField::clear()

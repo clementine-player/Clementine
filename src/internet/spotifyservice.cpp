@@ -4,7 +4,6 @@
 #include "spotifyblobdownloader.h"
 #include "spotifyserver.h"
 #include "spotifyservice.h"
-#include "spotifysearchplaylisttype.h"
 #include "core/application.h"
 #include "core/database.h"
 #include "core/logging.h"
@@ -74,9 +73,6 @@ SpotifyService::SpotifyService(Application* app, InternetModel* parent)
 
   qLog(Debug) << "Spotify system blob path:" << system_blob_path_;
   qLog(Debug) << "Spotify local blob path:" << local_blob_path_;
-
-  app_->playlist_manager()->RegisterSpecialPlaylistType(
-        new SpotifySearchPlaylistType(this));
 
   app_->global_search()->AddProvider(new SpotifySearchProvider(app_, this));
 
@@ -420,15 +416,21 @@ bool SpotifyService::DoPlaylistsDiffer(const pb::spotify::Playlists& response) c
 }
 
 void SpotifyService::InboxLoaded(const pb::spotify::LoadPlaylistResponse& response) {
-  FillPlaylist(inbox_, response);
+  if (inbox_) {
+    FillPlaylist(inbox_, response);
+  }
 }
 
 void SpotifyService::StarredLoaded(const pb::spotify::LoadPlaylistResponse& response) {
-  FillPlaylist(starred_, response);
+  if (starred_) {
+    FillPlaylist(starred_, response);
+  }
 }
 
 void SpotifyService::ToplistLoaded(const pb::spotify::BrowseToplistResponse& response) {
-  FillPlaylist(toplist_, response.track());
+  if (toplist_) {
+    FillPlaylist(toplist_, response.track());
+  }
 }
 
 QStandardItem* SpotifyService::PlaylistBySpotifyIndex(int index) const {
@@ -501,7 +503,9 @@ PlaylistItem::Options SpotifyService::playlistitem_options() const {
 }
 
 QWidget* SpotifyService::HeaderWidget() const {
-  return search_box_;
+  if (IsLoggedIn())
+    return search_box_;
+  return NULL;
 }
 
 void SpotifyService::EnsureMenuCreated() {

@@ -104,8 +104,6 @@ public:
   QString text() const { return QLineEdit::text(); }
   void set_text(const QString& text) { QLineEdit::setText(text); }
   void set_enabled(bool enabled) { QLineEdit::setEnabled(enabled); }
-  void clear() { LineEditInterface::clear(); }
-  void setPlaceholderText(const QString& text) { set_hint(text); }
 
 protected:
   void paintEvent(QPaintEvent*);

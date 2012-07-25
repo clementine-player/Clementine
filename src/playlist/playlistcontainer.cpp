@@ -421,7 +421,11 @@ void PlaylistContainer::resizeEvent(QResizeEvent* e) {
 
 void PlaylistContainer::FocusOnFilter(QKeyEvent *event) {
   ui_->filter->setFocus();
-  QApplication::sendEvent(ui_->filter, event);
+  if (event->key() == Qt::Key_Escape) {
+    ui_->filter->clear();
+  } else {
+    ui_->filter->setText(ui_->filter->text() + event->text());
+  }
 }
 
 void PlaylistContainer::RepositionNoMatchesLabel(bool force) {

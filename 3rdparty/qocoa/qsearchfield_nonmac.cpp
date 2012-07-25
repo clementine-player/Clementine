@@ -21,6 +21,7 @@ THE SOFTWARE.
 */
 
 #include "qsearchfield.h"
+#include "../../src/ui/iconloader.h"
 
 #include <QApplication>
 #include <QEvent>
@@ -31,9 +32,6 @@ THE SOFTWARE.
 
 #include <QDir>
 #include <QDebug>
-
-#if 0
-// All the code below isn't used currently (see qsearchfield.h)
 
 class QSearchFieldPrivate : public QObject
 {
@@ -65,20 +63,22 @@ QSearchField::QSearchField(QWidget *parent) : QWidget(parent)
     connect(lineEdit, SIGNAL(textChanged(QString)),
             this, SLOT(setText(QString)));
 
+    QIcon clearIcon(IconLoader::Load("edit-clear-locationbar-ltr"));
+
     QToolButton *clearButton = new QToolButton(this);
-    QPixmap clearIcon(QString(":/Qocoa/qsearchfield_nonmac.png"));
-    clearButton->setIcon(QIcon(clearIcon));
-    clearButton->setIconSize(clearIcon.size());
-    clearButton->setFixedSize(clearIcon.size());
-    clearButton->setStyleSheet("border: none;");
-    clearButton->hide();
+    clearButton->setIcon(clearIcon);
+    clearButton->setIconSize(QSize(16, 16));
+    clearButton->setStyleSheet("border: none; padding: 0px;");
+    clearButton->resize(clearButton->sizeHint());
     connect(clearButton, SIGNAL(clicked()), this, SLOT(clear()));
 
     pimpl = new QSearchFieldPrivate(this, lineEdit, clearButton);
 
-    lineEdit->setStyleSheet(QString("QLineEdit { padding-right: %1px; } ").arg(pimpl->clearButtonPaddedWidth()));
-    const int width = qMax(lineEdit->minimumSizeHint().width(), pimpl->clearButtonPaddedWidth());
-    const int height = qMax(lineEdit->minimumSizeHint().height(), pimpl->clearButtonPaddedHeight());
+    const int frame_width = lineEdit->style()->pixelMetric(QStyle::PM_DefaultFrameWidth);
+
+    lineEdit->setStyleSheet(QString("QLineEdit { padding-left: %1px; } ").arg(clearButton->width()));
+    const int width = frame_width + qMax(lineEdit->minimumSizeHint().width(), pimpl->clearButtonPaddedWidth());
+    const int height = frame_width + qMax(lineEdit->minimumSizeHint().height(), pimpl->clearButtonPaddedHeight());
     lineEdit->setMinimumSize(width, height);
 
     QVBoxLayout *layout = new QVBoxLayout(this);
@@ -93,8 +93,6 @@ void QSearchField::setText(const QString &text)
     Q_ASSERT(pimpl && pimpl->clearButton && pimpl->lineEdit);
     if (!(pimpl && pimpl->clearButton && pimpl->lineEdit))
         return;
-
-    pimpl->clearButton->setVisible(!text.isEmpty());
 
     if (text != this->text())
         pimpl->lineEdit->setText(text);
@@ -117,6 +115,18 @@ QString QSearchField::placeholderText() const {
 #else
   return QString();
 #endif
+}
+
+void QSearchField::setFocus(Qt::FocusReason reason)
+{
+    Q_ASSERT(pimpl && pimpl->lineEdit);
+    if (pimpl && pimpl->lineEdit)
+        pimpl->lineEdit->setFocus(reason);
+}
+
+void QSearchField::setFocus()
+{
+    setFocus(Qt::OtherFocusReason);
 }
 
 void QSearchField::clear()
@@ -153,7 +163,7 @@ void QSearchField::resizeEvent(QResizeEvent *resizeEvent)
         return;
 
     QWidget::resizeEvent(resizeEvent);
-    const int x = width() - pimpl->clearButtonPaddedWidth();
+    const int x = pimpl->lineEditFrameWidth();
     const int y = (height() - pimpl->clearButton->height())/2;
     pimpl->clearButton->move(x, y);
 }
@@ -172,5 +182,3 @@ bool QSearchField::eventFilter(QObject *o, QEvent *e)
     }
     return QWidget::eventFilter(o, e);
 }
-
-#endif // 0

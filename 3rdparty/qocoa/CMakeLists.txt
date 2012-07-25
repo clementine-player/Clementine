@@ -21,7 +21,6 @@ else()
         qprogressindicatorspinning_nonmac.cpp
     )
     set(RESOURCES
-        qsearchfield_nonmac.qrc
         qprogressindicatorspinning_nonmac.qrc
     )
     qt4_add_resources(RESOURCES_SOURCES ${RESOURCES})

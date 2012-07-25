@@ -20,7 +20,6 @@
 
 #include "covers/albumcoverfetcher.h"
 #include "covers/albumcoverloaderoptions.h"
-#include "widgets/lineedit.h"
 
 #include <QDialog>
 #include <QIcon>

@@ -349,7 +349,7 @@ void Player::SeekTo(int seconds) {
   
   // If the length is 0 then either there is no song playing, or the song isn't
   // seekable.
-  if (length_nanosec == 0) {
+  if (length_nanosec <= 0) {
     return;
   }
   

@@ -187,7 +187,7 @@ DeviceManager::DeviceManager(Application* app, QObject *parent)
 
   // This reads from the database and contends on the database mutex, which can
   // be very slow on startup.
-  ConcurrentRun::Run(&thread_pool_, bind(&DeviceManager::LoadAllDevices, this));
+  ConcurrentRun::Run<void>(&thread_pool_, bind(&DeviceManager::LoadAllDevices, this));
 
   // This proxy model only shows connected devices
   connected_devices_model_ = new DeviceStateFilterModel(this);

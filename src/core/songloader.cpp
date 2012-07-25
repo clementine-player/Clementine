@@ -17,6 +17,7 @@
 
 #include "config.h"
 #include "songloader.h"
+#include "core/concurrentrun.h"
 #include "core/logging.h"
 #include "core/song.h"
 #include "core/signalchecker.h"
@@ -38,7 +39,6 @@
 #include <QFileInfo>
 #include <QTimer>
 #include <QUrl>
-#include <QtConcurrentRun>
 #include <QtDebug>
 
 #include <boost/bind.hpp>
@@ -229,7 +229,8 @@ SongLoader::Result SongLoader::LoadLocal(const QString& filename, bool block,
   // inside right away.
   if (QFileInfo(filename).isDir()) {
     if (!block) {
-      QtConcurrent::run(this, &SongLoader::LoadLocalDirectoryAndEmit, filename);
+      ConcurrentRun::Run<void>(&thread_pool_,
+          boost::bind(&SongLoader::LoadLocalDirectoryAndEmit, this, filename));
       return WillLoadAsync;
     } else {
       LoadLocalDirectory(filename);
@@ -261,7 +262,8 @@ SongLoader::Result SongLoader::LoadLocal(const QString& filename, bool block,
 
     // It's a playlist!
     if (!block) {
-      QtConcurrent::run(this, &SongLoader::LoadPlaylistAndEmit, parser, filename);
+      ConcurrentRun::Run<void>(&thread_pool_,
+          boost::bind(&SongLoader::LoadPlaylistAndEmit, this, parser, filename));
       return WillLoadAsync;
     } else {
       LoadPlaylist(parser, filename);
@@ -315,22 +317,27 @@ SongLoader::Result SongLoader::LoadLocal(const QString& filename, bool block,
 
 void SongLoader::EffectiveSongsLoad() {
   for (int i = 0; i < songs_.size(); i++) {
-    Song& song = songs_[i];
+    EffectiveSongLoad(&songs_[i]);
+  }
+}
 
-    if (song.filetype() != Song::Type_Unknown) {
-      // Maybe we loaded the metadata already, for example from a cuesheet.
-      continue;
-    }
+void SongLoader::EffectiveSongLoad(Song* song) {
+  if (!song)
+    return;
 
-    // First, try to get the song from the library
-    Song library_song = library_->GetSongByUrl(song.url());
-    if (library_song.is_valid()) {
-      song = library_song;
-    } else {
-      // it's a normal media file
-      QString filename = song.url().toLocalFile();
-      TagReaderClient::Instance()->ReadFileBlocking(filename, &song);
-    }
+  if (song->filetype() != Song::Type_Unknown) {
+    // Maybe we loaded the metadata already, for example from a cuesheet.
+    return;
+  }
+
+  // First, try to get the song from the library
+  Song library_song = library_->GetSongByUrl(song->url());
+  if (library_song.is_valid()) {
+    *song = library_song;
+  } else {
+    // it's a normal media file
+    QString filename = song->url().toLocalFile();
+    TagReaderClient::Instance()->ReadFileBlocking(filename, song);
   }
 }
 
@@ -372,6 +379,13 @@ void SongLoader::LoadLocalDirectory(const QString& filename) {
   }
 
   qStableSort(songs_.begin(), songs_.end(), CompareSongs);
+
+  // Load the first song: all songs will be loaded async, but we want the first
+  // one in our list to be fully loaded, so if the user has the "Start playing
+  // when adding to playlist" preference behaviour set, it can enjoy the first
+  // song being played (seek it, have moodbar, etc.)
+  if (!songs_.isEmpty())
+    EffectiveSongLoad(&(*songs_.begin()));
 }
 
 void SongLoader::AddAsRawStream() {

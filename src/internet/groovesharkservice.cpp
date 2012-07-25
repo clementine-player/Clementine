@@ -38,7 +38,6 @@
 
 #include "internetmodel.h"
 #include "groovesharkradio.h"
-#include "groovesharksearchplaylisttype.h"
 #include "groovesharkurlhandler.h"
 #include "searchboxwidget.h"
 
@@ -93,6 +92,7 @@ GroovesharkService::GroovesharkService(Application* app, InternetModel *parent)
     stations_(NULL),
     grooveshark_radio_(NULL),
     favorites_(NULL),
+    library_(NULL),
     playlists_parent_(NULL),
     subscribed_playlists_parent_(NULL),
     network_(new NetworkAccessManager(this)),
@@ -102,6 +102,7 @@ GroovesharkService::GroovesharkService(Application* app, InternetModel *parent)
     rename_playlist_(NULL),
     remove_from_playlist_(NULL),
     remove_from_favorites_(NULL),
+    remove_from_library_(NULL),
     get_url_to_share_song_(NULL),
     get_url_to_share_playlist_(NULL),
     search_box_(new SearchBoxWidget(this)),
@@ -114,7 +115,6 @@ GroovesharkService::GroovesharkService(Application* app, InternetModel *parent)
     task_search_id_(0) {
 
   app_->player()->RegisterUrlHandler(url_handler_);
-  app_->playlist_manager()->RegisterSpecialPlaylistType(new GroovesharkSearchPlaylistType(this));
 
   search_delay_->setInterval(kSearchDelayMsec);
   search_delay_->setSingleShot(true);
@@ -166,7 +166,9 @@ void GroovesharkService::ShowConfig() {
 }
 
 QWidget* GroovesharkService::HeaderWidget() const {
-  return search_box_;
+  if (IsLoggedIn())
+    return search_box_;
+  return NULL;
 }
 
 void GroovesharkService::Search(const QString& text, bool now) {
@@ -440,6 +442,7 @@ void GroovesharkService::RemoveItems() {
   search_ = NULL;
   popular_month_ = NULL;
   popular_today_ = NULL;
+  library_ = NULL;
   favorites_ = NULL;
   subscribed_playlists_parent_ = NULL;
   stations_ = NULL;
@@ -465,6 +468,7 @@ void GroovesharkService::ShowContextMenu(const QPoint& global_pos) {
   bool  display_delete_playlist_action = false,
         display_remove_from_playlist_action = false,
         display_remove_from_favorites_action = false,
+        display_remove_from_library_action = false,
         display_share_song_url = false,
         display_share_playlist_url = false;
 
@@ -481,6 +485,8 @@ void GroovesharkService::ShowContextMenu(const QPoint& global_pos) {
     int parent_playlist_type = index.parent().data(Role_PlaylistType).toInt();
     if (parent_playlist_type == UserFavorites)
       display_remove_from_favorites_action = true;
+    else if (parent_playlist_type == UserLibrary)
+      display_remove_from_library_action = true;
     else if (parent_playlist_type == UserPlaylist)
       display_remove_from_playlist_action = true;
   }
@@ -489,6 +495,7 @@ void GroovesharkService::ShowContextMenu(const QPoint& global_pos) {
   rename_playlist_->setVisible(display_delete_playlist_action);
   remove_from_playlist_->setVisible(display_remove_from_playlist_action);
   remove_from_favorites_->setVisible(display_remove_from_favorites_action);
+  remove_from_library_->setVisible(display_remove_from_library_action);
 
   // Check if we can display actions to get URL for sharing songs/playlists:
   // - share song
@@ -536,6 +543,9 @@ void GroovesharkService::EnsureMenuCreated() {
     remove_from_favorites_ = context_menu_->addAction(
         IconLoader::Load("list-remove"), tr("Remove from favorites"),
         this, SLOT(RemoveCurrentFromFavorites()));
+    remove_from_library_ = context_menu_->addAction(
+        IconLoader::Load("list-remove"), tr("Remove from My Music"),
+        this, SLOT(RemoveCurrentFromLibrary()));
     get_url_to_share_song_ = context_menu_->addAction(
         tr("Get a URL to share this Grooveshark song"),
         this, SLOT(GetCurrentSongUrlToShare()));
@@ -606,6 +616,15 @@ void GroovesharkService::EnsureItemsCreated() {
     grooveshark_radio_->setData(InternetModel::Type_SmartPlaylist, InternetModel::Role_Type);
     radios_divider->appendRow(grooveshark_radio_);
 
+    library_ = new QStandardItem(IconLoader::Load("folder-sound"), tr("My Music"));
+    library_->setData(InternetModel::Type_UserPlaylist, InternetModel::Role_Type);
+    library_->setData(UserLibrary, Role_PlaylistType);
+    library_->setData(true, InternetModel::Role_CanLazyLoad);
+    library_->setData(true, InternetModel::Role_CanBeModified);
+    library_->setData(InternetModel::PlayBehaviour_SingleItem,
+                      InternetModel::Role_PlayBehaviour);
+    root_->appendRow(library_);
+
     favorites_ = new QStandardItem(QIcon(":/last.fm/love.png"), tr("Favorites"));
     favorites_->setData(InternetModel::Type_UserPlaylist, InternetModel::Role_Type);
     favorites_->setData(UserFavorites, Role_PlaylistType);
@@ -622,6 +641,7 @@ void GroovesharkService::EnsureItemsCreated() {
     root_->appendRow(subscribed_playlists_parent_);
 
     RetrieveUserFavorites();
+    RetrieveUserLibrarySongs();
     RetrieveUserPlaylists();
     RetrieveSubscribedPlaylists();
     RetrieveAutoplayTags();
@@ -731,6 +751,7 @@ void GroovesharkService::RetrieveUserFavorites() {
 
 void GroovesharkService::UserFavoritesRetrieved(QNetworkReply* reply, int task_id) {
   reply->deleteLater();
+  app_->task_manager()->SetTaskFinished(task_id);
 
   if (!favorites_) {
     // The use probably logged out before the response arrived.
@@ -749,7 +770,38 @@ void GroovesharkService::UserFavoritesRetrieved(QNetworkReply* reply, int task_i
 
     favorites_->appendRow(child);
   }
+}
+
+void GroovesharkService::RetrieveUserLibrarySongs() {
+  int task_id =
+    app_->task_manager()->StartTask(tr("Retrieving Grooveshark My Music songs"));
+  QNetworkReply* reply = CreateRequest("getUserLibrarySongs", QList<Param>());
+
+  NewClosure(reply, SIGNAL(finished()),
+      this, SLOT(UserLibrarySongsRetrieved(QNetworkReply*, int)), reply, task_id);
+}
+
+void GroovesharkService::UserLibrarySongsRetrieved(QNetworkReply* reply, int task_id) {
+  reply->deleteLater();
   app_->task_manager()->SetTaskFinished(task_id);
+
+  if (!library_) {
+    // The use probably logged out before the response arrived.
+    return;
+  }
+
+  library_->removeRows(0, library_->rowCount());
+
+  QVariantMap result = ExtractResult(reply);
+  SongList songs = ExtractSongs(result);
+  Song::SortSongsListAlphabetically(&songs);
+
+  foreach (const Song& song, songs) {
+    QStandardItem* child = CreateSongItem(song);
+    child->setData(true, InternetModel::Role_CanBeModified);
+
+    library_->appendRow(child);
+  }
 }
 
 void GroovesharkService::RetrievePopularSongs() {
@@ -1023,6 +1075,12 @@ void GroovesharkService::DropMimeData(const QMimeData* data, const QModelIndex& 
       foreach (int song_id, data_songs_ids) {
         AddUserFavoriteSong(song_id);
       }
+    } else if (playlist_type == UserLibrary || parent_playlist_type == UserLibrary) {
+      // FIXME: Adding songs to user libray doesn't work atm, but the problem
+      // seems to be on Grooveshark server side, as it returns success=true
+      // when calling addUserLibrarySongs with a valid song id.
+      // So this code is deactivated for now to not mislead user
+      //AddUserLibrarySongs(data_songs_ids);
     } else { // Dropped on a normal playlist
       // Get the playlist
       int playlist_id = index.data(Role_UserPlaylistId).toInt();
@@ -1054,6 +1112,12 @@ QList<QAction*> GroovesharkService::playlistitem_actions(const Song& song) {
                                           tr("Add to Grooveshark favorites"), this);
   connect(add_to_favorites, SIGNAL(triggered()), SLOT(AddCurrentSongToUserFavorites()));
   playlistitem_actions_.append(add_to_favorites);
+
+  // FIXME: as explained above, adding songs to library doesn't work currently
+  //QAction* add_to_library = new QAction(IconLoader::Load("folder-sound"),
+  //                                      tr("Add to Grooveshark My Music"), this);
+  //connect(add_to_library, SIGNAL(triggered()), SLOT(AddCurrentSongToUserLibrary()));
+  //playlistitem_actions_.append(add_to_library);
 
   // Create a menu with 'add to playlist' actions for each Grooveshark playlist
   QAction* add_to_playlists = new QAction(IconLoader::Load("list-add"),
@@ -1352,6 +1416,42 @@ void GroovesharkService::UserFavoriteSongAdded(QNetworkReply* reply, int task_id
   RetrieveUserFavorites();
 }
 
+void GroovesharkService::AddUserLibrarySongs(const QList<int>& songs_ids) {
+  int task_id = app_->task_manager()->StartTask(tr("Adding song to My Music"));
+  QList<Param> parameters;
+
+  // Convert songs ids to QVariant
+  QVariantList songs_ids_qvariant;
+  foreach (int song_id, songs_ids) {
+    songs_ids_qvariant << QVariant(song_id);
+  }
+  QVariantList albums_ids_qvariant;
+  QVariantList artists_ids_qvariant;
+
+  parameters << Param("songIDs", songs_ids_qvariant);
+  // We do not support albums and artist parameters for now, but they are
+  // required
+  parameters << Param("albumIDs", albums_ids_qvariant);
+  parameters << Param("artistIDs", artists_ids_qvariant);
+  QNetworkReply* reply = CreateRequest("addUserLibrarySongs", parameters);
+  NewClosure(reply, SIGNAL(finished()),
+             this, SLOT(UserLibrarySongAdded(QNetworkReply*, int)),
+             reply, task_id);
+}
+
+void GroovesharkService::UserLibrarySongAdded(QNetworkReply* reply, int task_id) {
+  reply->deleteLater();
+  app_->task_manager()->SetTaskFinished(task_id);
+
+  QVariantMap result = ExtractResult(reply);
+  if (!result["success"].toBool()) {
+    qLog(Warning) << "Grooveshark addUserLibrarySongs failed";
+    return;
+  }
+  // Refresh user's library list
+  RetrieveUserLibrarySongs();
+}
+
 void GroovesharkService::RemoveCurrentFromPlaylist() {
   const QModelIndexList& indexes(model()->selected_indexes());
   QMap<int, QList<int> > playlists_songs_ids;
@@ -1412,7 +1512,7 @@ void GroovesharkService::RemoveFromFavorites(const QList<int>& songs_ids_to_remo
   if (songs_ids_to_remove.isEmpty())
     return;
 
-  int task_id = app_->task_manager()->StartTask(tr("Removing song from favorites"));
+  int task_id = app_->task_manager()->StartTask(tr("Removing songs from favorites"));
   QList<Param> parameters;
 
   // Convert song ids to QVariant
@@ -1424,10 +1524,10 @@ void GroovesharkService::RemoveFromFavorites(const QList<int>& songs_ids_to_remo
   parameters << Param("songIDs", songs_ids_qvariant);
   QNetworkReply* reply = CreateRequest("removeUserFavoriteSongs", parameters);
   NewClosure(reply, SIGNAL(finished()), this,
-    SLOT(SongRemovedFromFavorites(QNetworkReply*, int)), reply, task_id);
+    SLOT(SongsRemovedFromFavorites(QNetworkReply*, int)), reply, task_id);
 }
 
-void GroovesharkService::SongRemovedFromFavorites(QNetworkReply* reply, int task_id) {
+void GroovesharkService::SongsRemovedFromFavorites(QNetworkReply* reply, int task_id) {
   app_->task_manager()->SetTaskFinished(task_id);
   reply->deleteLater();
 
@@ -1439,8 +1539,68 @@ void GroovesharkService::SongRemovedFromFavorites(QNetworkReply* reply, int task
   RetrieveUserFavorites();
 }
 
-QNetworkReply* GroovesharkService::CreateRequest(const QString& method_name, QList<Param> params,
-                                                 bool use_https) {
+void GroovesharkService::RemoveCurrentFromLibrary() {
+  const QModelIndexList& indexes(model()->selected_indexes());
+  QList<int> songs_ids;
+
+  foreach (const QModelIndex& index, indexes) {
+
+    if (index.parent().data(Role_PlaylistType).toInt() != UserLibrary) {
+      continue;
+    }
+
+    int song_id = ExtractSongId(index.data(InternetModel::Role_Url).toUrl());
+    if (song_id) {
+      songs_ids << song_id;
+    }
+  }
+  
+  RemoveFromLibrary(songs_ids);
+}
+
+void GroovesharkService::RemoveFromLibrary(const QList<int>& songs_ids_to_remove) {
+  if (songs_ids_to_remove.isEmpty())
+    return;
+
+  int task_id = app_->task_manager()->StartTask(tr("Removing songs from My Music"));
+  QList<Param> parameters;
+
+  // Convert song ids to QVariant
+  QVariantList songs_ids_qvariant;
+  foreach (const int song_id, songs_ids_to_remove) {
+    songs_ids_qvariant << QVariant(song_id);
+  }
+  QVariantList albums_ids_qvariant;
+  QVariantList artists_ids_qvariant;
+
+  parameters << Param("songIDs", songs_ids_qvariant);
+  // We do not support albums and artist parameters for now, but they are
+  // required
+  parameters << Param("albumIDs", albums_ids_qvariant);
+  parameters << Param("artistIDs", artists_ids_qvariant);
+
+  QNetworkReply* reply = CreateRequest("removeUserLibrarySongs", parameters);
+  NewClosure(reply, SIGNAL(finished()), this,
+    SLOT(SongsRemovedFromLibrary(QNetworkReply*, int)), reply, task_id);
+}
+
+void GroovesharkService::SongsRemovedFromLibrary(QNetworkReply* reply, int task_id) {
+  app_->task_manager()->SetTaskFinished(task_id);
+  reply->deleteLater();
+
+  QVariantMap result = ExtractResult(reply);
+  if (!result["success"].toBool()) {
+    qLog(Warning) << "Grooveshark removeUserLibrarySongs failed";
+    return;
+  }
+  RetrieveUserLibrarySongs();
+}
+
+QNetworkReply* GroovesharkService::CreateRequest(
+    const QString& method_name,
+    const QList<Param>& params,
+    bool use_https) {
+
   QVariantMap request_params;
   request_params.insert("method", method_name);
 

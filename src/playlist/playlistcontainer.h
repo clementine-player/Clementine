@@ -21,8 +21,6 @@
 #include <QWidget>
 #include <QSettings>
 
-#include "widgets/lineedit.h"
-
 class Ui_PlaylistContainer;
 
 class DidYouMean;

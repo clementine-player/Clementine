@@ -19,6 +19,7 @@
 #define SONGLOADER_H
 
 #include <QObject>
+#include <QThreadPool>
 #include <QUrl>
 
 #include "song.h"
@@ -64,6 +65,7 @@ public:
   // playlist and replace the partially-loaded items by the new ones, fully
   // loaded.
   void EffectiveSongsLoad();
+  void EffectiveSongLoad(Song* song);
   Result LoadAudioCD();
 
 signals:
@@ -128,6 +130,8 @@ private:
   LibraryBackendInterface* library_;
 
   boost::shared_ptr<GstElement> pipeline_;
+
+  QThreadPool thread_pool_;
 };
 
 #endif // SONGLOADER_H

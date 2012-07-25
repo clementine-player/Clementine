@@ -33,8 +33,6 @@
 #  include "internet/spotifyservice.h"
 #endif
 
-#include <QtConcurrentRun>
-
 const int GstEnginePipeline::kGstStateTimeoutNanosecs = 10000000;
 const int GstEnginePipeline::kFaderFudgeMsec = 2000;
 
