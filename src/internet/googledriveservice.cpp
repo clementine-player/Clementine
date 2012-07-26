@@ -11,13 +11,17 @@
 #include <taglib/tiostream.h>
 using TagLib::ByteVector;
 
+#include "core/application.h"
 #include "core/closure.h"
+#include "core/player.h"
+#include "googledriveurlhandler.h"
 #include "internetmodel.h"
 #include "oauthenticator.h"
 
 namespace {
 
 static const char* kGoogleDriveFiles = "https://www.googleapis.com/drive/v2/files";
+static const char* kGoogleDriveFile = "https://www.googleapis.com/drive/v2/files/%1";
 
 }
 
@@ -186,6 +190,8 @@ GoogleDriveService::GoogleDriveService(Application* app, InternetModel* parent)
       root_(NULL),
       oauth_(new OAuthenticator(this)) {
   connect(oauth_, SIGNAL(AccessTokenAvailable(QString)), SLOT(AccessTokenAvailable(QString)));
+
+  app->player()->RegisterUrlHandler(new GoogleDriveUrlHandler(this, this));
 }
 
 QStandardItem* GoogleDriveService::CreateRootItem() {
@@ -253,12 +259,32 @@ void GoogleDriveService::ListFilesFinished(QNetworkReply* reply) {
       song.set_title(tag.tag()->title().toCString(true));
       song.set_artist(tag.tag()->artist().toCString(true));
       song.set_album(tag.tag()->album().toCString(true));
-      QString url = file["downloadUrl"].toString() + "#" + access_token_;
+
+      QString url = QString("googledrive:%1").arg(file["id"].toString());
       song.set_url(url);
+      qLog(Debug) << "Set url to:" << url;
+
       song.set_filesize(file["fileSize"].toInt());
       root_->appendRow(CreateSongItem(song));
     } else {
       qLog(Debug) << "Tagging failed";
     }
   }
+}
+
+QUrl GoogleDriveService::GetStreamingUrlFromSongId(const QString& id) {
+  QString url = QString(kGoogleDriveFile).arg(id);
+  QNetworkRequest request = QNetworkRequest(url);
+  request.setRawHeader(
+      "Authorization", QString("Bearer %1").arg(access_token_).toUtf8());
+  QNetworkReply* reply = network_.get(request);
+  QEventLoop loop;
+  connect(reply, SIGNAL(finished()), &loop, SLOT(quit()));
+  loop.exec();
+
+  QJson::Parser parser;
+  bool ok = false;
+  QVariantMap result = parser.parse(reply, &ok).toMap();
+  QString download_url = result["downloadUrl"].toString() + "#" + access_token_;
+  return QUrl(download_url);
 }

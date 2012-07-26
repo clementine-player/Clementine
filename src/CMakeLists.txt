@@ -161,6 +161,7 @@ set(SOURCES
   internet/digitallyimportedurlhandler.cpp
   internet/geolocator.cpp
   internet/googledriveservice.cpp
+  internet/googledriveurlhandler.cpp
   internet/groovesharkradio.cpp
   internet/groovesharkservice.cpp
   internet/groovesharksettingspage.cpp
@@ -433,6 +434,7 @@ set(HEADERS
   internet/digitallyimportedsettingspage.h
   internet/geolocator.h
   internet/googledriveservice.h
+  internet/googledriveurlhandler.h
   internet/groovesharkservice.h
   internet/groovesharksettingspage.h
   internet/groovesharkurlhandler.h

@@ -17,6 +17,8 @@ class GoogleDriveService : public InternetService {
   QStandardItem* CreateRootItem();
   void LazyPopulate(QStandardItem* item);
 
+  QUrl GetStreamingUrlFromSongId(const QString& file_id);
+
  private slots:
   void AccessTokenAvailable(const QString& token);
   void ListFilesFinished(QNetworkReply* reply);
