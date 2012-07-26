@@ -4,6 +4,8 @@
 
 #include <qjson/parser.h>
 
+#include <google/sparsetable>
+
 #include <taglib/id3v2framefactory.h>
 #include <taglib/mpegfile.h>
 #include <taglib/tiostream.h>
@@ -15,7 +17,7 @@ using TagLib::ByteVector;
 
 namespace {
 
-const char* kGoogleDriveFiles = "https://www.googleapis.com/drive/v2/files";
+static const char* kGoogleDriveFiles = "https://www.googleapis.com/drive/v2/files";
 
 }
 
@@ -33,7 +35,8 @@ class DriveStream : public TagLib::IOStream {
         length_(length),
         auth_(auth),
         cursor_(0),
-        network_(network) {
+        network_(network),
+        cache_(length) {
     qLog(Debug) << Q_FUNC_INFO
                 << url_
                 << filename_
@@ -45,40 +48,64 @@ class DriveStream : public TagLib::IOStream {
     return encoded_filename_.data();
   }
 
+  bool CheckCache(int start, int end) {
+    for (int i = start; i <= end; ++i) {
+      if (!cache_.test(i)) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  void FillCache(int start, TagLib::ByteVector data) {
+    for (int i = 0; i < data.size(); ++i) {
+      cache_.set(start + i, data[i]);
+    }
+  }
+
+  TagLib::ByteVector GetCached(int start, int end) {
+    const uint size = end - start + 1;
+    TagLib::ByteVector ret(size);
+    for (int i = 0; i < size; ++i) {
+      ret[i] = cache_.get(start + i);
+    }
+    return ret;
+  }
+
   virtual TagLib::ByteVector readBlock(ulong length) {
     qLog(Debug) << Q_FUNC_INFO;
+    const uint start = cursor_;
+    const uint end = qMin(cursor_ + length - 1, length_ - 1);
+
+    if (end <= start) {
+      return TagLib::ByteVector();
+    }
+
+    if (CheckCache(start, end)) {
+      qLog(Debug) << "Cache hit at:" << start << end;
+      TagLib::ByteVector cached = GetCached(start, end);
+      cursor_ += cached.size();
+      return cached;
+    }
+
     QNetworkRequest request = QNetworkRequest(url_);
     request.setRawHeader(
         "Authorization", QString("Bearer %1").arg(auth_).toUtf8());
-
-    const int start = cursor_;
-    const int end = cursor_ + length - 1;
     request.setRawHeader(
         "Range", QString("bytes=%1-%2").arg(start).arg(end).toUtf8());
-
-    qLog(Debug) << "Requesting:" << start << "-" << end << "from:" << url_;
-    qLog(Debug) << request.rawHeaderList();
-    qLog(Debug) << request.rawHeader("Range");
-
 
     QNetworkReply* reply = network_->get(request);
 
     QEventLoop loop;
     QObject::connect(reply, SIGNAL(finished()), &loop, SLOT(quit()));
-
-    qLog(Debug) << "Starting loop";
     loop.exec();
-    qLog(Debug) << "Finished loop";
     reply->deleteLater();
 
-    qLog(Debug) << reply->attribute(QNetworkRequest::HttpStatusCodeAttribute)
-                << reply->attribute(QNetworkRequest::HttpReasonPhraseAttribute)
-                << reply->error();
-
     QByteArray data = reply->readAll();
-    qLog(Debug) << "Read:" << data.size();
     TagLib::ByteVector bytes(data.data(), data.size());
     cursor_ += data.size();
+
+    FillCache(start, bytes);
     return bytes;
   }
 
@@ -112,11 +139,11 @@ class DriveStream : public TagLib::IOStream {
         break;
 
       case TagLib::IOStream::Current:
-        cursor_ = qMin(cursor_ + offset, length_);
+        cursor_ = qMin(ulong(cursor_ + offset), length_);
         break;
 
       case TagLib::IOStream::End:
-        cursor_ = qMax(0L, length_ - offset);
+        cursor_ = qMax(0UL, length_ - offset);
         break;
     }
   }
@@ -144,11 +171,13 @@ class DriveStream : public TagLib::IOStream {
   const QUrl url_;
   const QString filename_;
   const QByteArray encoded_filename_;
-  const long length_;
+  const ulong length_;
   const QString auth_;
 
   int cursor_;
   QNetworkAccessManager* network_;
+
+  google::sparsetable<char> cache_;
 };
 
 
