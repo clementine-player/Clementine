@@ -160,8 +160,6 @@ set(SOURCES
   internet/digitallyimportedsettingspage.cpp
   internet/digitallyimportedurlhandler.cpp
   internet/geolocator.cpp
-  internet/googledriveservice.cpp
-  internet/googledriveurlhandler.cpp
   internet/groovesharkradio.cpp
   internet/groovesharkservice.cpp
   internet/groovesharksettingspage.cpp
@@ -433,8 +431,6 @@ set(HEADERS
   internet/digitallyimportedservicebase.h
   internet/digitallyimportedsettingspage.h
   internet/geolocator.h
-  internet/googledriveservice.h
-  internet/googledriveurlhandler.h
   internet/groovesharkservice.h
   internet/groovesharksettingspage.h
   internet/groovesharkurlhandler.h
@@ -970,6 +966,7 @@ optional_source(HAVE_LIBMTP
 
 # Windows media lister
 optional_source(HAVE_SAC
+  INCLUDE_DIRECTORIES ${SPARSEHASH_INCLUDE_DIRS}
   SOURCES
     devices/wmdmdevice.cpp
     devices/wmdmlister.cpp
@@ -997,6 +994,16 @@ optional_source(HAVE_MOODBAR
     moodbar/moodbarloader.h
     moodbar/moodbarpipeline.h
     moodbar/moodbarproxystyle.h
+)
+
+# Google Drive support
+optional_source(HAVE_GOOGLE_DRIVE
+  SOURCES
+    internet/googledriveservice.cpp
+    internet/googledriveurlhandler.cpp
+  HEADERS
+    internet/googledriveservice.h
+    internet/googledriveurlhandler.h
 )
 
 # Hack to add Clementine to the Unity system tray whitelist

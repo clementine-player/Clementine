@@ -17,7 +17,6 @@
 
 #include "digitallyimportedservicebase.h"
 #include "icecastservice.h"
-#include "googledriveservice.h"
 #include "jamendoservice.h"
 #include "magnatuneservice.h"
 #include "internetmimedata.h"
@@ -36,6 +35,9 @@
 #endif
 #ifdef HAVE_SPOTIFY
   #include "spotifyservice.h"
+#endif
+#ifdef HAVE_GOOGLE_DRIVE
+  #include "googledriveservice.h"
 #endif
 
 #include <QMimeData>
@@ -65,7 +67,9 @@ InternetModel::InternetModel(Application* app, QObject* parent)
 #ifdef HAVE_LIBLASTFM
   AddService(new LastFMService(app, this));
 #endif
+#ifdef HAVE_GOOGLE_DRIVE
   AddService(new GoogleDriveService(app, this));
+#endif
   AddService(new GroovesharkService(app, this));
   AddService(new MagnatuneService(app, this));
   AddService(new PodcastService(app, this));
