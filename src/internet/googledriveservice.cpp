@@ -34,7 +34,10 @@ class DriveStream : public TagLib::IOStream {
         auth_(auth),
         cursor_(0),
         network_(network) {
-    qLog(Debug) << Q_FUNC_INFO;
+    qLog(Debug) << Q_FUNC_INFO
+                << url_
+                << filename_
+                << length_;
   }
 
   virtual TagLib::FileName name() const {
@@ -49,12 +52,13 @@ class DriveStream : public TagLib::IOStream {
         "Authorization", QString("Bearer %1").arg(auth_).toUtf8());
 
     const int start = cursor_;
-    const int end = cursor_ + length;
+    const int end = cursor_ + length - 1;
     request.setRawHeader(
-        "Range", QString("bytes=%1-%2").arg(start, end).toUtf8());
+        "Range", QString("bytes=%1-%2").arg(start).arg(end).toUtf8());
 
     qLog(Debug) << "Requesting:" << start << "-" << end << "from:" << url_;
     qLog(Debug) << request.rawHeaderList();
+    qLog(Debug) << request.rawHeader("Range");
 
 
     QNetworkReply* reply = network_->get(request);
@@ -67,8 +71,14 @@ class DriveStream : public TagLib::IOStream {
     qLog(Debug) << "Finished loop";
     reply->deleteLater();
 
+    qLog(Debug) << reply->attribute(QNetworkRequest::HttpStatusCodeAttribute)
+                << reply->attribute(QNetworkRequest::HttpReasonPhraseAttribute)
+                << reply->error();
+
     QByteArray data = reply->readAll();
+    qLog(Debug) << "Read:" << data.size();
     TagLib::ByteVector bytes(data.data(), data.size());
+    cursor_ += data.size();
     return bytes;
   }
 
@@ -195,15 +205,8 @@ void GoogleDriveService::ListFilesFinished(QNetworkReply* reply) {
   QVariantList items = result["items"].toList();
   foreach (const QVariant& v, items) {
     QVariantMap file = v.toMap();
-    Song song;
-    song.set_title(file["title"].toString());
-    QString url = file["downloadUrl"].toString() + "#" + access_token_;
-    song.set_url(url);
-    song.set_filesize(file["fileSize"].toInt());
-    root_->appendRow(CreateSongItem(song));
-
     qLog(Debug) << "Creating stream";
-    DriveStream stream(
+    DriveStream* stream = new DriveStream(
         file["downloadUrl"].toUrl(),
         file["title"].toString(),
         file["fileSize"].toUInt(),
@@ -211,10 +214,22 @@ void GoogleDriveService::ListFilesFinished(QNetworkReply* reply) {
         &network_);
     qLog(Debug) << "Creating tag";
     TagLib::MPEG::File tag(
-        &stream,
+        stream,  // Takes ownership.
         TagLib::ID3v2::FrameFactory::instance(),
         TagLib::AudioProperties::Fast);
     qLog(Debug) << "Tagging done";
-    qLog(Debug) << tag.tag()->artist().toCString();
+    if (tag.tag()) {
+      qLog(Debug) << tag.tag()->artist().toCString();
+      Song song;
+      song.set_title(tag.tag()->title().toCString(true));
+      song.set_artist(tag.tag()->artist().toCString(true));
+      song.set_album(tag.tag()->album().toCString(true));
+      QString url = file["downloadUrl"].toString() + "#" + access_token_;
+      song.set_url(url);
+      song.set_filesize(file["fileSize"].toInt());
+      root_->appendRow(CreateSongItem(song));
+    } else {
+      qLog(Debug) << "Tagging failed";
+    }
   }
 }
