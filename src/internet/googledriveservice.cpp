@@ -22,6 +22,7 @@ namespace {
 
 static const char* kGoogleDriveFiles = "https://www.googleapis.com/drive/v2/files";
 static const char* kGoogleDriveFile = "https://www.googleapis.com/drive/v2/files/%1";
+static const char* kSettingsGroup = "GoogleDrive";
 
 }
 
@@ -190,6 +191,7 @@ GoogleDriveService::GoogleDriveService(Application* app, InternetModel* parent)
       root_(NULL),
       oauth_(new OAuthenticator(this)) {
   connect(oauth_, SIGNAL(AccessTokenAvailable(QString)), SLOT(AccessTokenAvailable(QString)));
+  connect(oauth_, SIGNAL(RefreshTokenAvailable(QString)), SLOT(RefreshTokenAvailable(QString)));
 
   app->player()->RegisterUrlHandler(new GoogleDriveUrlHandler(this, this));
 }
@@ -211,7 +213,19 @@ void GoogleDriveService::LazyPopulate(QStandardItem* item) {
 }
 
 void GoogleDriveService::Connect() {
-  oauth_->StartAuthorisation();
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+
+  if (s.contains("refresh_token")) {
+    QString refresh_token = s.value("refresh_token").toString();
+    RefreshAuthorisation(refresh_token);
+  } else {
+    oauth_->StartAuthorisation();
+  }
+}
+
+void GoogleDriveService::RefreshAuthorisation(const QString& refresh_token) {
+  oauth_->RefreshAuthorisation(refresh_token);
 }
 
 void GoogleDriveService::AccessTokenAvailable(const QString& token) {
@@ -224,6 +238,12 @@ void GoogleDriveService::AccessTokenAvailable(const QString& token) {
       "Authorization", QString("Bearer %1").arg(token).toUtf8());
   QNetworkReply* reply = network_.get(request);
   NewClosure(reply, SIGNAL(finished()), this, SLOT(ListFilesFinished(QNetworkReply*)), reply);
+}
+
+void GoogleDriveService::RefreshTokenAvailable(const QString& token) {
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+  s.setValue("refresh_token", token);
 }
 
 void GoogleDriveService::ListFilesFinished(QNetworkReply* reply) {

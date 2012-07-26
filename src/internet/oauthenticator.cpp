@@ -14,7 +14,6 @@ namespace {
 const char* kGoogleOAuthEndpoint = "https://accounts.google.com/o/oauth2/auth";
 const char* kGoogleOAuthTokenEndpoint =
     "https://accounts.google.com/o/oauth2/token";
-const char* kGoogleDriveFiles = "https://www.googleapis.com/drive/v2/files";
 
 const char* kClientId = "679260893280.apps.googleusercontent.com";
 const char* kClientSecret = "l3cWb8efUZsrBI4wmY3uKl6i";
@@ -127,21 +126,39 @@ void OAuthenticator::FetchAccessTokenFinished(QNetworkReply* reply) {
   refresh_token_ = result["refresh_token"].toString();
 
   emit AccessTokenAvailable(access_token_);
+  emit RefreshTokenAvailable(refresh_token_);
 }
 
-void OAuthenticator::ListFiles(const QString& access_token) {
-  QUrl url = QUrl(kGoogleDriveFiles);
-  url.addQueryItem("q", "mimeType = 'audio/mpeg'");
-  QNetworkRequest request = QNetworkRequest(url);
-  request.setRawHeader(
-      "Authorization", QString("Bearer %1").arg(access_token).toUtf8());
-  qLog(Debug) << "Header:" << request.rawHeader("Authorization");
-  QNetworkReply* reply = network_.get(request);
-  NewClosure(reply, SIGNAL(finished()), this, SLOT(ListFilesResponse(QNetworkReply*)), reply);
+void OAuthenticator::RefreshAuthorisation(const QString& refresh_token) {
+  QUrl url = QUrl(kGoogleOAuthTokenEndpoint);
+
+  typedef QPair<QString, QString> Param;
+  QList<Param> parameters;
+  parameters << Param("client_id", kClientId)
+             << Param("client_secret", kClientSecret)
+             << Param("grant_type", "refresh_token")
+             << Param("refresh_token", refresh_token);
+  QStringList params;
+  foreach (const Param& p, parameters) {
+    params.append(QString("%1=%2").arg(p.first, QString(QUrl::toPercentEncoding(p.second))));
+  }
+  QString post_data = params.join("&");
+  qLog(Debug) << "Refresh post data:" << post_data;
+
+  QNetworkRequest request(url);
+  request.setHeader(QNetworkRequest::ContentTypeHeader,
+                    "application/x-www-form-urlencoded");
+  QNetworkReply* reply = network_.post(request, post_data.toUtf8());
+  NewClosure(reply, SIGNAL(finished()), this,
+             SLOT(RefreshAccessTokenFinished(QNetworkReply*)), reply);
 }
 
-void OAuthenticator::ListFilesResponse(QNetworkReply* reply) {
+void OAuthenticator::RefreshAccessTokenFinished(QNetworkReply* reply) {
   reply->deleteLater();
+  QJson::Parser parser;
+  bool ok = false;
 
-  qLog(Debug) << reply->readAll();
+  QVariantMap result = parser.parse(reply, &ok).toMap();
+  QString access_token = result["access_token"].toString();
+  emit AccessTokenAvailable(access_token);
 }

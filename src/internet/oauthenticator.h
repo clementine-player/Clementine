@@ -13,20 +13,23 @@ class OAuthenticator : public QObject {
  public:
   explicit OAuthenticator(QObject* parent = 0);
   void StartAuthorisation();
+  void RefreshAuthorisation(const QString& refresh_token);
 
  signals:
+  // Token to use now.
   void AccessTokenAvailable(QString token);
+  // Token to use to get a new access token when it expires.
+  void RefreshTokenAvailable(QString token);
 
  private slots:
   void NewConnection();
   void RedirectArrived(QTcpSocket* socket, QByteArray buffer);
   void FetchAccessTokenFinished(QNetworkReply* reply);
-  void ListFilesResponse(QNetworkReply* reply);
+  void RefreshAccessTokenFinished(QNetworkReply* reply);
 
  private:
   QByteArray ParseHttpRequest(const QByteArray& request) const;
   void RequestAccessToken(const QByteArray& code, quint16 port);
-  void ListFiles(const QString& access_token);
 
   QTcpServer server_;
   NetworkAccessManager network_;

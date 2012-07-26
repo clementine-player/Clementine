@@ -21,10 +21,12 @@ class GoogleDriveService : public InternetService {
 
  private slots:
   void AccessTokenAvailable(const QString& token);
+  void RefreshTokenAvailable(const QString& token);
   void ListFilesFinished(QNetworkReply* reply);
 
  private:
   void Connect();
+  void RefreshAuthorisation(const QString& refresh_token);
 
   QStandardItem* root_;
   OAuthenticator* oauth_;
