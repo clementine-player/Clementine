@@ -1026,6 +1026,7 @@ add_pot(POT
   ${CMAKE_CURRENT_SOURCE_DIR}/translations/header
   ${CMAKE_CURRENT_SOURCE_DIR}/translations/translations.pot
   ${SOURCES} ${MOC} ${UIC} ${OTHER_SOURCES}
+  ../data/oauthsuccess.html
 )
 add_po(PO clementine_
   LANGUAGES ${LANGUAGES}

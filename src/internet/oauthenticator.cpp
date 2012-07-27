@@ -1,7 +1,11 @@
 #include "oauthenticator.h"
 
+#include <QApplication>
+#include <QBuffer>
 #include <QDesktopServices>
+#include <QFile>
 #include <QStringList>
+#include <QStyle>
 #include <QTcpSocket>
 #include <QUrl>
 
@@ -48,8 +52,37 @@ void OAuthenticator::NewConnection() {
   NewClosure(socket, SIGNAL(readyRead()),
              this, SLOT(RedirectArrived(QTcpSocket*, QByteArray)), socket, buffer);
 
-  // Everything is bon.
+  // Everything is bon.  Prepare and display the success page.
+  QFile page_file(":oauthsuccess.html");
+  page_file.open(QIODevice::ReadOnly);
+  QString page_data = QString::fromLatin1(page_file.readAll());
+
+  // Translate the strings inside
+  QRegExp tr_regexp("tr\\(\"([^\"]+)\"\\)");
+  int offset = 0;
+  forever {
+    offset = tr_regexp.indexIn(page_data, offset);
+    if (offset == -1) {
+      break;
+    }
+
+    page_data.replace(offset, tr_regexp.matchedLength(),
+                      tr(tr_regexp.cap(1).toAscii()));
+    offset += tr_regexp.matchedLength();
+  }
+
+  // Add the tick image.
+  QBuffer image_buffer;
+  image_buffer.open(QIODevice::ReadWrite);
+  QApplication::style()->standardIcon(QStyle::SP_DialogOkButton)
+      .pixmap(16).toImage().save(&image_buffer, "PNG");
+
+  page_data.replace("@IMAGE_DATA@", image_buffer.data().toBase64());
+
   socket->write("HTTP/1.0 200 OK\r\n");
+  socket->write("Content-type: text/html;charset=UTF-8\r\n");
+  socket->write("\r\n\r\n");
+  socket->write(page_data.toUtf8());
   socket->flush();
 }
 

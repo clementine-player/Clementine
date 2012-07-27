@@ -17,9 +17,9 @@ class OAuthenticator : public QObject {
 
  signals:
   // Token to use now.
-  void AccessTokenAvailable(QString token);
+  void AccessTokenAvailable(const QString& token);
   // Token to use to get a new access token when it expires.
-  void RefreshTokenAvailable(QString token);
+  void RefreshTokenAvailable(const QString& token);
 
  private slots:
   void NewConnection();
