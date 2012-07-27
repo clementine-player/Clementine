@@ -187,6 +187,8 @@ class Song {
   const QString& art_automatic() const;
   const QString& art_manual() const;
 
+  const QString& etag() const;
+
   // Returns true if this Song had it's cover manually unset by user.
   bool has_manually_unset_cover() const;
   // This method represents an explicit request to unset this song's
@@ -250,6 +252,7 @@ class Song {
   void set_score(int v);
   void set_cue_path(const QString& v);
   void set_unavailable(bool v);
+  void set_etag(const QString& etag);
 
   // Setters that should only be used by tests
   void set_url(const QUrl& v);

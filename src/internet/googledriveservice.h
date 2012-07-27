@@ -7,7 +7,10 @@
 
 class QStandardItem;
 
+class LibraryBackend;
+class LibraryModel;
 class OAuthenticator;
+class QSortFilterProxyModel;
 
 class GoogleDriveService : public InternetService {
   Q_OBJECT
@@ -27,6 +30,7 @@ class GoogleDriveService : public InternetService {
  private:
   void Connect();
   void RefreshAuthorisation(const QString& refresh_token);
+  void MaybeAddFileToDatabase(const QVariantMap& file);
 
   QStandardItem* root_;
   OAuthenticator* oauth_;
@@ -34,6 +38,12 @@ class GoogleDriveService : public InternetService {
   QString access_token_;
 
   NetworkAccessManager network_;
+
+  LibraryBackend* library_backend_;
+  LibraryModel* library_model_;
+  QSortFilterProxyModel* library_sort_model_;
+
+  int indexing_task_id_;
 };
 
 #endif
