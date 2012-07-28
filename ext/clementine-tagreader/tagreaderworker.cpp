@@ -24,6 +24,7 @@
 #include <QCoreApplication>
 #include <QDateTime>
 #include <QFileInfo>
+#include <QNetworkAccessManager>
 #include <QTextCodec>
 #include <QUrl>
 
@@ -54,6 +55,10 @@
 // Taglib added support for FLAC pictures in 1.7.0
 #if (TAGLIB_MAJOR_VERSION > 1) || (TAGLIB_MAJOR_VERSION == 1 && TAGLIB_MINOR_VERSION >= 7)
 # define TAGLIB_HAS_FLAC_PICTURELIST
+#endif
+
+#ifdef HAVE_GOOGLE_DRIVE
+# include "googledrivestream.h"
 #endif
 
 
@@ -93,6 +98,7 @@ TagLib::String QStringToTaglibString(const QString& s) {
 TagReaderWorker::TagReaderWorker(QIODevice* socket, QObject* parent)
   : AbstractMessageHandler<pb::tagreader::Message>(socket, parent),
     factory_(new TagLibFileRefFactory),
+    network_(new QNetworkAccessManager),
     kEmbeddedCover("(embedded)")
 {
 }
@@ -123,6 +129,17 @@ void TagReaderWorker::MessageArrived(const pb::tagreader::Message& message) {
           QStringFromStdString(message.load_embedded_art_request().filename()));
     reply.mutable_load_embedded_art_response()->set_data(
           data.constData(), data.size());
+  } else if (message.has_read_google_drive_request()) {
+#ifdef HAVE_GOOGLE_DRIVE
+    const pb::tagreader::ReadGoogleDriveRequest& req =
+        message.read_google_drive_request();
+    ReadGoogleDrive(QUrl::fromEncoded(QByteArray(req.download_url().data(),
+                                                 req.download_url().size())),
+                    QStringFromStdString(req.title()),
+                    req.size(),
+                    QStringFromStdString(req.access_token()),
+                    reply.mutable_read_google_drive_response()->mutable_metadata());
+#endif
   }
 
   SendReply(message, &reply);
@@ -588,3 +605,32 @@ void TagReaderWorker::DeviceClosed() {
 
   qApp->exit();
 }
+
+#ifdef HAVE_GOOGLE_DRIVE
+void TagReaderWorker::ReadGoogleDrive(const QUrl& download_url,
+                                      const QString& title,
+                                      int size,
+                                      const QString& access_token,
+                                      pb::tagreader::SongMetadata* song) const {
+  qLog(Debug) << "Loading tags from" << title;
+
+  GoogleDriveStream* stream = new GoogleDriveStream(
+      download_url, title, size, access_token, network_);
+  TagLib::MPEG::File tag(
+      stream,  // Takes ownership.
+      TagLib::ID3v2::FrameFactory::instance(),
+      TagLib::AudioProperties::Fast);
+  if (tag.tag()) {
+    song->set_title(tag.tag()->title().toCString(true));
+    song->set_artist(tag.tag()->artist().toCString(true));
+    song->set_album(tag.tag()->album().toCString(true));
+    song->set_filesize(size);
+
+    song->set_type(pb::tagreader::SongMetadata_Type_STREAM);
+
+    if (tag.audioProperties()) {
+      song->set_length_nanosec(tag.audioProperties()->length() * kNsecPerSec);
+    }
+  }
+}
+#endif // HAVE_GOOGLE_DRIVE

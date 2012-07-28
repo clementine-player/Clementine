@@ -966,7 +966,6 @@ optional_source(HAVE_LIBMTP
 
 # Windows media lister
 optional_source(HAVE_SAC
-  INCLUDE_DIRECTORIES ${SPARSEHASH_INCLUDE_DIRS}
   SOURCES
     devices/wmdmdevice.cpp
     devices/wmdmlister.cpp

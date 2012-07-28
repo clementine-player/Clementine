@@ -42,6 +42,7 @@ public:
   QString id() const { return data_["id"].toString(); }
   QString etag() const { return data_["etag"].toString(); }
   QString title() const { return data_["title"].toString(); }
+  QString description() const { return data_["description"].toString(); }
   long size() const { return data_["fileSize"].toUInt(); }
   QUrl download_url() const { return data_["downloadUrl"].toUrl(); }
 

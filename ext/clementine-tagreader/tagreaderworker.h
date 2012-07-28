@@ -18,10 +18,15 @@
 #ifndef TAGREADERWORKER_H
 #define TAGREADERWORKER_H
 
+#include "config.h"
 #include "tagreadermessages.pb.h"
 #include "core/messagehandler.h"
 
 #include <taglib/xiphcomment.h>
+
+#include <QUrl>
+
+class QNetworkAccessManager;
 
 
 namespace TagLib {
@@ -49,6 +54,14 @@ private:
   bool IsMediaFile(const QString& filename) const;
   QByteArray LoadEmbeddedArt(const QString& filename) const;
 
+  #ifdef HAVE_GOOGLE_DRIVE
+  void ReadGoogleDrive(const QUrl& download_url,
+                       const QString& title,
+                       int size,
+                       const QString& access_token,
+                       pb::tagreader::SongMetadata* song) const;
+  #endif // HAVE_GOOGLE_DRIVE
+
   static void Decode(const TagLib::String& tag, const QTextCodec* codec,
                      std::string* output);
   static void Decode(const QString& tag, const QTextCodec* codec,
@@ -69,6 +82,7 @@ private:
 
 private:
   FileRefFactory* factory_;
+  QNetworkAccessManager* network_;
 
   const std::string kEmbeddedCover;
 };

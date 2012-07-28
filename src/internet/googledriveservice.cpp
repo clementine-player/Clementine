@@ -4,13 +4,6 @@
 #include <QScopedPointer>
 #include <QSortFilterProxyModel>
 
-#include <google/sparsetable>
-
-#include <taglib/id3v2framefactory.h>
-#include <taglib/mpegfile.h>
-#include <taglib/tiostream.h>
-using TagLib::ByteVector;
-
 #include "core/application.h"
 #include "core/closure.h"
 #include "core/database.h"
@@ -35,153 +28,6 @@ static const char* kFtsTable = "google_drive_songs_fts";
 }
 
 
-class DriveStream : public TagLib::IOStream {
- public:
-  DriveStream(const QUrl& url,
-              const QString& filename,
-              const long length,
-              const QString& auth,
-              QNetworkAccessManager* network)
-      : url_(url),
-        filename_(filename),
-        encoded_filename_(filename_.toUtf8()),
-        length_(length),
-        auth_(auth),
-        cursor_(0),
-        network_(network),
-        cache_(length) {
-  }
-
-  virtual TagLib::FileName name() const {
-    return encoded_filename_.data();
-  }
-
-  bool CheckCache(int start, int end) {
-    for (int i = start; i <= end; ++i) {
-      if (!cache_.test(i)) {
-        return false;
-      }
-    }
-    return true;
-  }
-
-  void FillCache(int start, TagLib::ByteVector data) {
-    for (int i = 0; i < data.size(); ++i) {
-      cache_.set(start + i, data[i]);
-    }
-  }
-
-  TagLib::ByteVector GetCached(int start, int end) {
-    const uint size = end - start + 1;
-    TagLib::ByteVector ret(size);
-    for (int i = 0; i < size; ++i) {
-      ret[i] = cache_.get(start + i);
-    }
-    return ret;
-  }
-
-  virtual TagLib::ByteVector readBlock(ulong length) {
-    const uint start = cursor_;
-    const uint end = qMin(cursor_ + length - 1, length_ - 1);
-
-    if (end <= start) {
-      return TagLib::ByteVector();
-    }
-
-    if (CheckCache(start, end)) {
-      TagLib::ByteVector cached = GetCached(start, end);
-      cursor_ += cached.size();
-      return cached;
-    }
-
-    QNetworkRequest request = QNetworkRequest(url_);
-    request.setRawHeader(
-        "Authorization", QString("Bearer %1").arg(auth_).toUtf8());
-    request.setRawHeader(
-        "Range", QString("bytes=%1-%2").arg(start).arg(end).toUtf8());
-
-    QNetworkReply* reply = network_->get(request);
-
-    QEventLoop loop;
-    QObject::connect(reply, SIGNAL(finished()), &loop, SLOT(quit()));
-    loop.exec();
-    reply->deleteLater();
-
-    QByteArray data = reply->readAll();
-    TagLib::ByteVector bytes(data.data(), data.size());
-    cursor_ += data.size();
-
-    FillCache(start, bytes);
-    return bytes;
-  }
-
-  virtual void writeBlock(const ByteVector&) {
-    qLog(Debug) << Q_FUNC_INFO << "not implemented";
-  }
-
-  virtual void insert(const ByteVector&, ulong, ulong) {
-    qLog(Debug) << Q_FUNC_INFO << "not implemented";
-  }
-
-  virtual void removeBlock(ulong, ulong) {
-    qLog(Debug) << Q_FUNC_INFO << "not implemented";
-  }
-
-  virtual bool readOnly() const {
-    qLog(Debug) << Q_FUNC_INFO;
-    return true;
-  }
-
-  virtual bool isOpen() const {
-    return true;
-  }
-
-  virtual void seek(long offset, TagLib::IOStream::Position p) {
-    switch (p) {
-      case TagLib::IOStream::Beginning:
-        cursor_ = offset;
-        break;
-
-      case TagLib::IOStream::Current:
-        cursor_ = qMin(ulong(cursor_ + offset), length_);
-        break;
-
-      case TagLib::IOStream::End:
-        cursor_ = qMax(0UL, length_ - offset);
-        break;
-    }
-  }
-
-  virtual void clear() {
-    cursor_ = 0;
-  }
-
-  virtual long tell() const {
-    return cursor_;
-  }
-
-  virtual long length() {
-    return length_;
-  }
-
-  virtual void truncate(long) {
-    qLog(Debug) << Q_FUNC_INFO << "not implemented";
-  }
-
- private:
-  const QUrl url_;
-  const QString filename_;
-  const QByteArray encoded_filename_;
-  const ulong length_;
-  const QString auth_;
-
-  int cursor_;
-  QNetworkAccessManager* network_;
-
-  google::sparsetable<char> cache_;
-};
-
-
 GoogleDriveService::GoogleDriveService(Application* app, InternetModel* parent)
     : InternetService("Google Drive", app, parent, parent),
       root_(NULL),
@@ -199,7 +45,7 @@ GoogleDriveService::GoogleDriveService(Application* app, InternetModel* parent)
   library_sort_model_->sort(0);
 
   app->player()->RegisterUrlHandler(new GoogleDriveUrlHandler(this, this));
-  app_->global_search()->AddProvider(new LibrarySearchProvider(
+  app->global_search()->AddProvider(new LibrarySearchProvider(
       library_backend_,
       tr("Google Drive"),
       "google_drive",
@@ -275,43 +121,49 @@ void GoogleDriveService::MaybeAddFileToDatabase(const google_drive::File& file) 
   }
 
   // Song not in index; tag and add.
-  DriveStream* stream = new DriveStream(
+  TagReaderClient::ReplyType* reply = app_->tag_reader_client()->ReadGoogleDrive(
       file.download_url(),
       file.title(),
       file.size(),
-      client_->access_token(),
-      &network_);
-  TagLib::MPEG::File tag(
-      stream,  // Takes ownership.
-      TagLib::ID3v2::FrameFactory::instance(),
-      TagLib::AudioProperties::Fast);
-  if (tag.tag()) {
-    Song song;
-    song.set_title(tag.tag()->title().toCString(true));
-    song.set_artist(tag.tag()->artist().toCString(true));
-    song.set_album(tag.tag()->album().toCString(true));
+      client_->access_token());
 
-    song.set_url(url);
-    song.set_filesize(file.size());
-    song.set_etag(file.etag().remove('"'));
+  NewClosure(reply, SIGNAL(Finished(bool)),
+             this, SLOT(ReadTagsFinished(TagReaderClient::ReplyType*,google_drive::File,QString)),
+             reply, file, url);
+}
 
-    song.set_mtime(file.modified_date().toTime_t());
-    song.set_ctime(file.created_date().toTime_t());
+void GoogleDriveService::ReadTagsFinished(TagReaderClient::ReplyType* reply,
+                                          const google_drive::File& metadata,
+                                          const QString& url) {
+  reply->deleteLater();
 
-    song.set_filetype(Song::Type_Stream);
-    song.set_directory_id(0);
-
-    if (tag.audioProperties()) {
-      song.set_length_nanosec(tag.audioProperties()->length() * kNsecPerSec);
-    }
-
-    SongList songs;
-    songs << song;
-    qLog(Debug) << "Adding song to db:" << song.title();
-    library_backend_->AddOrUpdateSongs(songs);
-  } else {
-    qLog(Debug) << "Failed to tag:" << url;
+  const pb::tagreader::ReadGoogleDriveResponse& msg =
+      reply->message().read_google_drive_response();
+  if (!msg.metadata().filesize()) {
+    qLog(Debug) << "Failed to tag:" << metadata.download_url();
+    return;
   }
+
+  // Read the Song metadata from the message.
+  Song song;
+  song.InitFromProtobuf(msg.metadata());
+
+  // Add some extra tags from the Google Drive metadata.
+  song.set_etag(metadata.etag().remove('"'));
+  song.set_mtime(metadata.modified_date().toTime_t());
+  song.set_ctime(metadata.created_date().toTime_t());
+  song.set_comment(metadata.description());
+  song.set_directory_id(0);
+  song.set_url(url);
+
+  // Use the Google Drive title if we couldn't read tags from the file.
+  if (song.title().isEmpty()) {
+    song.set_title(metadata.title());
+  }
+
+  // Add the song to the database
+  qLog(Debug) << "Adding song to db:" << song.title();
+  library_backend_->AddOrUpdateSongs(SongList() << song);
 }
 
 QUrl GoogleDriveService::GetStreamingUrlFromSongId(const QString& id) {

@@ -4,6 +4,7 @@
 #include "internetservice.h"
 
 #include "core/network.h"
+#include "core/tagreaderclient.h"
 
 class QStandardItem;
 
@@ -32,6 +33,9 @@ class GoogleDriveService : public InternetService {
   void ConnectFinished(google_drive::ConnectResponse* response);
   void FilesFound(const QList<google_drive::File>& files);
   void ListFilesFinished(google_drive::ListFilesResponse* response);
+  void ReadTagsFinished(TagReaderClient::ReplyType* reply,
+                        const google_drive::File& metadata,
+                        const QString& url);
 
  private:
   void Connect();
