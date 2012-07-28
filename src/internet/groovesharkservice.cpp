@@ -580,7 +580,7 @@ void GroovesharkService::EnsureItemsCreated() {
                                 tr("Search results"));
     search_->setToolTip(tr("Start typing something on the search box above to "
                            "fill this search results list"));
-    search_->setData(InternetModel::PlayBehaviour_DoubleClickAction,
+    search_->setData(InternetModel::PlayBehaviour_MultipleItems,
                      InternetModel::Role_PlayBehaviour);
     root_->appendRow(search_);
 
@@ -591,14 +591,14 @@ void GroovesharkService::EnsureItemsCreated() {
     popular_month_ = new QStandardItem(QIcon(":/star-on.png"), tr("Popular songs of the Month"));
     popular_month_->setData(InternetModel::Type_UserPlaylist, InternetModel::Role_Type);
     popular_month_->setData(true, InternetModel::Role_CanLazyLoad);
-    popular_month_->setData(InternetModel::PlayBehaviour_SingleItem,
+    popular_month_->setData(InternetModel::PlayBehaviour_MultipleItems,
                         InternetModel::Role_PlayBehaviour);
     popular->appendRow(popular_month_);
 
     popular_today_ = new QStandardItem(QIcon(":/star-on.png"), tr("Popular songs today"));
     popular_today_->setData(InternetModel::Type_UserPlaylist, InternetModel::Role_Type);
     popular_today_->setData(true, InternetModel::Role_CanLazyLoad);
-    popular_today_->setData(InternetModel::PlayBehaviour_SingleItem,
+    popular_today_->setData(InternetModel::PlayBehaviour_MultipleItems,
                         InternetModel::Role_PlayBehaviour);
     popular->appendRow(popular_today_);
 
@@ -621,7 +621,7 @@ void GroovesharkService::EnsureItemsCreated() {
     library_->setData(UserLibrary, Role_PlaylistType);
     library_->setData(true, InternetModel::Role_CanLazyLoad);
     library_->setData(true, InternetModel::Role_CanBeModified);
-    library_->setData(InternetModel::PlayBehaviour_SingleItem,
+    library_->setData(InternetModel::PlayBehaviour_MultipleItems,
                       InternetModel::Role_PlayBehaviour);
     root_->appendRow(library_);
 
@@ -630,7 +630,7 @@ void GroovesharkService::EnsureItemsCreated() {
     favorites_->setData(UserFavorites, Role_PlaylistType);
     favorites_->setData(true, InternetModel::Role_CanLazyLoad);
     favorites_->setData(true, InternetModel::Role_CanBeModified);
-    favorites_->setData(InternetModel::PlayBehaviour_SingleItem,
+    favorites_->setData(InternetModel::PlayBehaviour_MultipleItems,
                         InternetModel::Role_PlayBehaviour);
     root_->appendRow(favorites_);
 
@@ -664,7 +664,7 @@ QStandardItem* GroovesharkService::CreatePlaylistItem(const QString& playlist_na
   item->setData(UserPlaylist, Role_PlaylistType);
   item->setData(true, InternetModel::Role_CanLazyLoad);
   item->setData(true, InternetModel::Role_CanBeModified);
-  item->setData(InternetModel::PlayBehaviour_SingleItem, InternetModel::Role_PlayBehaviour);
+  item->setData(InternetModel::PlayBehaviour_MultipleItems, InternetModel::Role_PlayBehaviour);
   item->setData(playlist_id, Role_UserPlaylistId);
   return item;
 }
