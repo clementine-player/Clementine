@@ -726,6 +726,12 @@ void GstEnginePipeline::SourceSetupCallback(GstURIDecodeBin* bin, GParamSpec *ps
     g_object_set(element, "extra-headers", headers, NULL);
     gst_structure_free(headers);
   }
+  if (element &&
+      g_object_class_find_property(G_OBJECT_GET_CLASS(element), "accept-self-signed")) {
+    // Can't always rely on HTTPS streams to have a valid 3rd-party-signed
+    // certificate, so tell neonhttpsrc to accept self-signed certificates.
+    g_object_set(element, "accept-self-signed", true, NULL);
+  }
 }
 
 void GstEnginePipeline::TransitionToNext() {
