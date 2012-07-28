@@ -15,11 +15,14 @@ class OAuthenticator : public QObject {
   void StartAuthorisation();
   void RefreshAuthorisation(const QString& refresh_token);
 
- signals:
   // Token to use now.
-  void AccessTokenAvailable(const QString& token);
+  const QString& access_token() const { return access_token_; }
+
   // Token to use to get a new access token when it expires.
-  void RefreshTokenAvailable(const QString& token);
+  const QString& refresh_token() const { return refresh_token_; }
+
+ signals:
+  void Finished();
 
  private slots:
   void NewConnection();

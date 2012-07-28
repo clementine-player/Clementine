@@ -158,11 +158,12 @@ void OAuthenticator::FetchAccessTokenFinished(QNetworkReply* reply) {
   access_token_ = result["access_token"].toString();
   refresh_token_ = result["refresh_token"].toString();
 
-  emit AccessTokenAvailable(access_token_);
-  emit RefreshTokenAvailable(refresh_token_);
+  emit Finished();
 }
 
 void OAuthenticator::RefreshAuthorisation(const QString& refresh_token) {
+  refresh_token_ = refresh_token;
+
   QUrl url = QUrl(kGoogleOAuthTokenEndpoint);
 
   typedef QPair<QString, QString> Param;
@@ -192,6 +193,6 @@ void OAuthenticator::RefreshAccessTokenFinished(QNetworkReply* reply) {
   bool ok = false;
 
   QVariantMap result = parser.parse(reply, &ok).toMap();
-  QString access_token = result["access_token"].toString();
-  emit AccessTokenAvailable(access_token);
+  access_token_ = result["access_token"].toString();
+  emit Finished();
 }

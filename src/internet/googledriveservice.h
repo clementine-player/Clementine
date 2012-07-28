@@ -9,8 +9,14 @@ class QStandardItem;
 
 class LibraryBackend;
 class LibraryModel;
-class OAuthenticator;
 class QSortFilterProxyModel;
+
+namespace google_drive {
+  class Client;
+  class ConnectResponse;
+  class File;
+  class ListFilesResponse;
+}
 
 class GoogleDriveService : public InternetService {
   Q_OBJECT
@@ -23,19 +29,18 @@ class GoogleDriveService : public InternetService {
   QUrl GetStreamingUrlFromSongId(const QString& file_id);
 
  private slots:
-  void AccessTokenAvailable(const QString& token);
-  void RefreshTokenAvailable(const QString& token);
-  void ListFilesFinished(QNetworkReply* reply);
+  void ConnectFinished(google_drive::ConnectResponse* response);
+  void FilesFound(const QList<google_drive::File>& files);
+  void ListFilesFinished(google_drive::ListFilesResponse* response);
 
  private:
   void Connect();
   void RefreshAuthorisation(const QString& refresh_token);
-  void MaybeAddFileToDatabase(const QVariantMap& file);
+  void MaybeAddFileToDatabase(const google_drive::File& file);
 
   QStandardItem* root_;
-  OAuthenticator* oauth_;
 
-  QString access_token_;
+  google_drive::Client* client_;
 
   NetworkAccessManager network_;
 

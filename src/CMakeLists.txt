@@ -999,9 +999,11 @@ optional_source(HAVE_MOODBAR
 # Google Drive support
 optional_source(HAVE_GOOGLE_DRIVE
   SOURCES
+    internet/googledriveclient.cpp
     internet/googledriveservice.cpp
     internet/googledriveurlhandler.cpp
   HEADERS
+    internet/googledriveclient.h
     internet/googledriveservice.h
     internet/googledriveurlhandler.h
 )
