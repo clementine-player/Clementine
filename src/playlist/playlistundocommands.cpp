@@ -96,7 +96,7 @@ MoveItems::MoveItems(Playlist *playlist, const QList<int> &source_rows, int pos)
     source_rows_(source_rows),
     pos_(pos)
 {
-  setText(tr("move songs", "", source_rows.count()));
+  setText(tr("move %n songs", "", source_rows.count()));
 }
 
 void MoveItems::redo() {
@@ -105,6 +105,37 @@ void MoveItems::redo() {
 
 void MoveItems::undo() {
   playlist_->MoveItemsWithoutUndo(pos_, source_rows_);
+}
+
+
+ReOrderItems::ReOrderItems(Playlist* playlist, const PlaylistItemList& new_items)
+  : Base(playlist),
+    old_items_(playlist->items_),
+    new_items_(new_items) { }
+
+void ReOrderItems::undo() {
+  playlist_->ReOrderWithoutUndo(old_items_);
+}
+
+void ReOrderItems::redo() {
+  playlist_->ReOrderWithoutUndo(new_items_);
+}
+
+
+SortItems::SortItems(Playlist* playlist, int column, Qt::SortOrder order, 
+                     const PlaylistItemList& new_items)
+  : ReOrderItems(playlist, new_items),
+    column_(column),
+    order_(order)
+{
+  setText(tr("sort songs"));
+}
+
+
+ShuffleItems::ShuffleItems(Playlist* playlist, const PlaylistItemList& new_items)
+  : ReOrderItems(playlist, new_items)
+{
+  setText(tr("shuffle songs"));
 }
 
 } // namespace

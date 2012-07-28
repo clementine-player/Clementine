@@ -16,7 +16,9 @@
 */
 
 #include "config.h"
+#include "core/application.h"
 #include "core/logging.h"
+#include "covers/currentartloader.h"
 #include "osd.h"
 #include "osdpretty.h"
 #include "ui/systemtrayicon.h"
@@ -31,9 +33,10 @@
 
 const char* OSD::kSettingsGroup = "OSD";
 
-OSD::OSD(SystemTrayIcon* tray_icon, QObject* parent)
+OSD::OSD(SystemTrayIcon* tray_icon, Application* app, QObject* parent)
   : QObject(parent),
     tray_icon_(tray_icon),
+    app_(app),
     timeout_msec_(5000),
     behaviour_(Native),
     show_on_volume_change_(false),
@@ -45,12 +48,10 @@ OSD::OSD(SystemTrayIcon* tray_icon, QObject* parent)
     preview_mode_(false),
     force_show_next_(false),
     ignore_next_stopped_(false),
-    pretty_popup_(new OSDPretty(OSDPretty::Mode_Popup)),
-    cover_loader_(new BackgroundThreadImplementation<AlbumCoverLoader, AlbumCoverLoader>(this))
+    pretty_popup_(new OSDPretty(OSDPretty::Mode_Popup))
 {
-  cover_loader_->Start();
-
-  connect(cover_loader_, SIGNAL(Initialised()), SLOT(CoverLoaderInitialised()));
+  connect(app_->current_art_loader(), SIGNAL(ThumbnailLoaded(Song,QString,QImage)),
+          SLOT(AlbumArtLoaded(Song,QString,QImage)));
 
   ReloadSettings();
   Init();
@@ -58,13 +59,6 @@ OSD::OSD(SystemTrayIcon* tray_icon, QObject* parent)
 
 OSD::~OSD() {
   delete pretty_popup_;
-}
-
-void OSD::CoverLoaderInitialised() {
-  cover_loader_->Worker()->SetPadOutputImage(false);
-  cover_loader_->Worker()->SetDefaultOutputImage(QImage(":nocover.png"));
-  connect(cover_loader_->Worker().get(), SIGNAL(ImageLoaded(quint64,QImage)),
-          SLOT(AlbumArtLoaded(quint64,QImage)));
 }
 
 void OSD::ReloadSettings() {
@@ -93,12 +87,20 @@ void OSD::ReloadPrettyOSDSettings() {
   pretty_popup_->ReloadSettings();
 }
 
-void OSD::SongChanged(const Song &song) {
+void OSD::ReshowCurrentSong() {
+  force_show_next_ = true;
+  AlbumArtLoaded(last_song_, last_image_uri_, last_image_);
+}
+
+void OSD::AlbumArtLoaded(const Song& song, const QString& uri, const QImage& image) {
   // Don't change tray icon details if it's a preview
   if (!preview_mode_) {
-    // no cover art yet
-    tray_icon_->SetNowPlaying(song, NULL);
+    tray_icon_->SetNowPlaying(song, uri);
   }
+
+  last_song_ = song;
+  last_image_ = image;
+  last_image_uri_ = uri;
 
   QStringList message_parts;
   QString summary;
@@ -137,34 +139,11 @@ void OSD::SongChanged(const Song &song) {
     message_parts << message;
   }
 
-  WaitingForAlbumArt waiting;
-  waiting.icon = "notification-audio-play";
-  waiting.summary = summary;
-  waiting.message = message_parts.join(", ");
-
   if (show_art_) {
-    // Load the art in a background thread (maybe from a remote server),
-    // AlbumArtLoaded gets called when it's ready.
-    quint64 id = cover_loader_->Worker()->LoadImageAsync(song);
-    waiting_for_album_art_.insert(id, waiting);
+    ShowMessage(summary, message_parts.join(", "), "notification-audio-play", image);
   } else {
-    AlbumArtLoaded(waiting, QImage());
+    ShowMessage(summary, message_parts.join(", "), "notification-audio-play", QImage());
   }
-}
-
-void OSD::CoverArtPathReady(const Song& song, const QString& image_path) {
-  // Don't change tray icon details if it's a preview
-  if (!preview_mode_)
-    tray_icon_->SetNowPlaying(song, image_path);
-}
-
-void OSD::AlbumArtLoaded(quint64 id, const QImage& image) {
-  WaitingForAlbumArt info = waiting_for_album_art_.take(id);
-  AlbumArtLoaded(info, image);
-}
-
-void OSD::AlbumArtLoaded(const WaitingForAlbumArt info, const QImage& image) {
-  ShowMessage(info.summary, info.message, info.icon, image);
 
   // Reload the saved settings if they were changed for preview
   if (preview_mode_) {
@@ -339,6 +318,8 @@ QString OSD::ReplaceVariable(const QString& variable, const Song& song) {
     return return_value.setNum(song.playcount());
   } else if (variable == "%skipcount%") {
     return return_value.setNum(song.skipcount());
+  } else if (variable == "%filename%") {
+    return song.basefilename();
   } else if (variable == "%newline%") {
     // We need different strings depending on notification type
     switch (behaviour_) {
@@ -377,7 +358,7 @@ void OSD::ShowPreview(const Behaviour type, const QString& line1, const QString&
 
   // We want to reload the settings, but we can't do this here because the cover art loading is asynch
   preview_mode_ = true;
-  SongChanged(song);
+  AlbumArtLoaded(song, QString(), QImage());
 }
 
 void OSD::SetPrettyOSDToggleMode(bool toggle) {

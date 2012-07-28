@@ -111,7 +111,6 @@ private:
   QTimeLine* tab_bar_animation_;
 
   QLabel* no_matches_label_;
-  LineEditInterface* filter_;
 
   DidYouMean* did_you_mean_;
 };

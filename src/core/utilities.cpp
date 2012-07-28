@@ -43,9 +43,20 @@
 #  include <windows.h>
 #endif
 
+#ifdef Q_OS_LINUX
+#  include <sys/syscall.h>
+#endif
+#ifdef Q_OS_DARWIN
+#  include <sys/resource.h>
+#endif
+
 #ifdef Q_OS_DARWIN
 #  include "core/mac_startup.h"
+#  include "core/mac_utilities.h"
+#  include "core/scoped_cftyperef.h"
 #  include "CoreServices/CoreServices.h"
+#  include "IOKit/ps/IOPowerSources.h"
+#  include "IOKit/ps/IOPSKeys.h"
 #endif
 
 #include <boost/scoped_array.hpp>
@@ -266,6 +277,9 @@ QString GetConfigPath(ConfigPath config) {
 
     case Path_NetworkCache:
       return GetConfigPath(Path_Root) + "/networkcache";
+      
+    case Path_MoodbarCache:
+      return GetConfigPath(Path_Root) + "/moodbarcache";
 
     case Path_GstreamerRegistry:
       return GetConfigPath(Path_Root) +
@@ -396,6 +410,35 @@ void ConsumeCurrentElement(QXmlStreamReader* reader) {
   }
 }
 
+bool ParseUntilElement(QXmlStreamReader* reader, const QString& name) {
+  while (!reader->atEnd()) {
+    QXmlStreamReader::TokenType type = reader->readNext();
+    switch (type) {
+      case QXmlStreamReader::StartElement:
+        if (reader->name() == name) {
+          return true;
+        }
+        break;
+      default:
+        break;
+    }
+  }
+  return false;
+}
+
+QDateTime ParseRFC822DateTime(const QString& text) {
+  // This sucks but we need it because some podcasts don't quite follow the
+  // spec properly - they might have 1-digit hour numbers for example.
+
+  QRegExp re("([a-zA-Z]{3}),? (\\d{1,2}) ([a-zA-Z]{3}) (\\d{4}) (\\d{1,2}):(\\d{1,2}):(\\d{1,2})");
+  if (re.indexIn(text) == -1)
+    return QDateTime();
+
+  return QDateTime(
+    QDate::fromString(QString("%1 %2 %3 %4").arg(re.cap(1), re.cap(3), re.cap(2), re.cap(4)), Qt::TextDate),
+    QTime(re.cap(5).toInt(), re.cap(6).toInt(), re.cap(7).toInt()));
+}
+
 const char* EnumToString(const QMetaObject& meta, const char* name, int value) {
   int index = meta.indexOfEnumerator(name);
   if (index == -1)
@@ -405,6 +448,81 @@ const char* EnumToString(const QMetaObject& meta, const char* name, int value) {
   if (result == 0)
     return "[UnknownEnumValue]";
   return result;
+}
+
+QStringList Prepend(const QString& text, const QStringList& list) {
+  QStringList ret(list);
+  for (int i=0 ; i<ret.count() ; ++i)
+    ret[i].prepend(text);
+  return ret;
+}
+
+QStringList Updateify(const QStringList& list) {
+  QStringList ret(list);
+  for (int i=0 ; i<ret.count() ; ++i)
+    ret[i].prepend(ret[i] + " = :");
+  return ret;
+}
+
+QString DecodeHtmlEntities(const QString& text) {
+  QString copy(text);
+  copy.replace("&amp;", "&");
+  copy.replace("&quot;", "\"");
+  copy.replace("&apos;", "'");
+  copy.replace("&lt;", "<");
+  copy.replace("&gt;", ">");
+  return copy;
+}
+
+int SetThreadIOPriority(IoPriority priority) {
+#ifdef Q_OS_LINUX
+  return syscall(SYS_ioprio_set, IOPRIO_WHO_PROCESS, GetThreadId(),
+                 4 | priority << IOPRIO_CLASS_SHIFT);
+#elif defined(Q_OS_DARWIN)
+  return setpriority(PRIO_DARWIN_THREAD, 0,
+                     priority == IOPRIO_CLASS_IDLE ? PRIO_DARWIN_BG : 0);
+#else
+  return 0;
+#endif
+}
+
+int GetThreadId() {
+#ifdef Q_OS_LINUX
+  return syscall(SYS_gettid);
+#else
+  return 0;
+#endif
+}
+
+bool IsLaptop() {
+#ifdef Q_OS_WIN
+  SYSTEM_POWER_STATUS status;
+  if (!GetSystemPowerStatus(&status)) {
+    return false;
+  }
+
+  return !(status.BatteryFlag & 128); // 128 = no system battery
+#endif
+
+#ifdef Q_OS_LINUX
+  return !QDir("/proc/acpi/battery").entryList(QDir::Dirs | QDir::NoDotAndDotDot).isEmpty();
+#endif
+
+#ifdef Q_OS_MAC
+  ScopedCFTypeRef<CFTypeRef> power_sources(IOPSCopyPowerSourcesInfo());
+  ScopedCFTypeRef<CFArrayRef> power_source_list(
+      IOPSCopyPowerSourcesList(power_sources.get()));
+  for (CFIndex i = 0; i < CFArrayGetCount(power_source_list.get()); ++i) {
+    CFTypeRef ps = CFArrayGetValueAtIndex(power_source_list.get(), i);
+    CFDictionaryRef description = IOPSGetPowerSourceDescription(
+        power_sources.get(), ps);
+
+    if (CFDictionaryContainsKey(description, CFSTR(kIOPSBatteryHealthKey))) {
+      return true;
+    }
+  }
+  return false;
+#endif
 }
 
 }  // namespace Utilities

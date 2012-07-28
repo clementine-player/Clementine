@@ -19,6 +19,7 @@
 #include "mtpconnection.h"
 #include "mtpdevice.h"
 #include "mtploader.h"
+#include "core/application.h"
 #include "core/logging.h"
 #include "library/librarybackend.h"
 #include "library/librarymodel.h"
@@ -26,13 +27,15 @@
 #include <libmtp.h>
 
 #include <QFile>
+#include <QThread>
 
 bool MtpDevice::sInitialisedLibMTP = false;
 
 MtpDevice::MtpDevice(const QUrl& url, DeviceLister* lister,
                      const QString& unique_id, DeviceManager* manager,
+                     Application* app,
                      int database_id, bool first_time)
-  : ConnectedDevice(url, lister, unique_id, manager, database_id, first_time),
+  : ConnectedDevice(url, lister, unique_id, manager, app, database_id, first_time),
     loader_thread_(new QThread(this)),
     loader_(NULL)
 {
@@ -49,7 +52,7 @@ void MtpDevice::Init() {
   InitBackendDirectory("/", first_time_, false);
   model_->Init();
 
-  loader_ = new MtpLoader(url_, manager_->task_manager(), backend_,
+  loader_ = new MtpLoader(url_, app_->task_manager(), backend_,
                           shared_from_this());
   loader_->moveToThread(loader_thread_);
 

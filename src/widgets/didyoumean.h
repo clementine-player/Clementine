@@ -55,6 +55,14 @@ private:
   QFont normal_font_;
   QFont correction_font_;
   QFont press_enter_font_;
+
+  QString did_you_mean_;
+  QString press_enter_;
+
+  // Size of the text to display, according to QFonts above.
+  // Stored here to avoid to recompute them each time
+  int did_you_mean_size_;
+  int press_enter_size_;
 };
 
 #endif // DIDYOUMEAN_H

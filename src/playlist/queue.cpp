@@ -129,7 +129,7 @@ QVariant Queue::data(const QModelIndex& proxy_index, int role) const {
 
       if (artist.isEmpty())
         return title;
-      return artist + " - " + title;
+      return QString(artist + " - " + title);
     }
 
     default:

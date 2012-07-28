@@ -17,7 +17,12 @@
 
 #include "closure.h"
 
+#include <QTimer>
+
 #include "core/logging.h"
+#include "core/timeconstants.h"
+
+namespace _detail {
 
 Closure::Closure(QObject* sender,
                  const char* signal,
@@ -25,12 +30,14 @@ Closure::Closure(QObject* sender,
                  const char* slot,
                  const ClosureArgumentWrapper* val0,
                  const ClosureArgumentWrapper* val1,
-                 const ClosureArgumentWrapper* val2)
+                 const ClosureArgumentWrapper* val2,
+                 const ClosureArgumentWrapper* val3)
     : QObject(receiver),
       callback_(NULL),
       val0_(val0),
       val1_(val1),
-      val2_(val2) {
+      val2_(val2),
+      val3_(val3) {
   const QMetaObject* meta_receiver = receiver->metaObject();
 
   QByteArray normalised_slot = QMetaObject::normalizedSignature(slot + 1);
@@ -46,6 +53,9 @@ Closure::Closure(QObject* sender,
                  std::tr1::function<void()> callback)
     : callback_(callback) {
   Connect(sender, signal);
+}
+
+Closure::~Closure() {
 }
 
 void Closure::Connect(QObject* sender, const char* signal) {
@@ -64,7 +74,8 @@ void Closure::Invoked() {
         parent(),
         val0_ ? val0_->arg() : QGenericArgument(),
         val1_ ? val1_->arg() : QGenericArgument(),
-        val2_ ? val2_->arg() : QGenericArgument());
+        val2_ ? val2_->arg() : QGenericArgument(),
+        val3_ ? val3_->arg() : QGenericArgument());
   }
   deleteLater();
 }
@@ -74,8 +85,19 @@ void Closure::Cleanup() {
   deleteLater();
 }
 
-Closure* NewClosure(
+}  // namespace _detail
+
+_detail::Closure* NewClosure(
     QObject* sender, const char* signal,
     QObject* receiver, const char* slot) {
-  return new Closure(sender, signal, receiver, slot);
+  return new _detail::Closure(sender, signal, receiver, slot);
+}
+
+void DoAfter(QObject* receiver, const char* slot, int msec) {
+  QTimer::singleShot(msec, receiver, slot);
+}
+
+void DoInAMinuteOrSo(QObject* receiver, const char* slot) {
+  int msec = (60 + (qrand() % 60)) * kMsecPerSec;
+  DoAfter(receiver, slot, msec);
 }

@@ -11,6 +11,15 @@
       <item begin="[" end="]"/>
     </exclude>
   </provider>
+  <provider name="darklyrics.com" title ="{ARTIST} LYRICS - &quot;{title}&quot; ({year}) album"  charset="utf-8" url="http://www.darklyrics.com/lyrics/{artist2}/{album2}.html">
+    <extract>
+      <item begin="&lt;h3&gt;&lt;a name=&quot;{track}&quot;&gt;{track}. {Title2}&lt;/a&gt;&lt;/h3&gt;&lt;br /&gt;" end="&lt;h3&gt;"/>
+    </extract>
+    <extract>
+      <item begin="&lt;h3&gt;&lt;a name=&quot;{track}&quot;&gt;{track}. {Title2}&lt;/a&gt;&lt;/h3&gt;&lt;br /&gt;" end="&lt;div class=&quot;thanks&quot;&gt;"/>
+      </extract>
+    <invalidIndicator value="The page you requested was not found on DarkLyrics.com."/>
+  </provider>
   <provider name="directlyrics.com" title="{artist} - {title} lyrics" charset="iso-8859-1" url="http://www.directlyrics.com/{artist}-{title}-lyrics.html">
     <urlFormat replace=" _@,;&amp;\/'&quot;" with="-"/>
     <urlFormat replace="." with=""/>
@@ -195,7 +204,7 @@
       <item begin="&lt;div style=&quot;float:left&quot;" end="&gt;"/>
     </exclude>
   </provider>
-  <provider name="teksty.org" title="{artist} - {title} - tekst" charset="UTF-8" url="http://www.teksty.org/{Artist},{Title2}">
+  <provider name="teksty.org" title="{Artist} - {Title2} - tekst" charset="UTF-8" url="http://www.teksty.org/{artist},{title},tekst-piosenki">
     <urlFormat replace=" _@,;&amp;\/&quot;." with="_"/>
     <urlFormat replace="'" with=""/>
     <extract>

@@ -19,9 +19,11 @@
 #include "albumcoversearcher.h"
 #include "iconloader.h"
 #include "ui_albumcovermanager.h"
+#include "core/application.h"
 #include "core/logging.h"
 #include "core/utilities.h"
 #include "covers/albumcoverfetcher.h"
+#include "covers/albumcoverloader.h"
 #include "covers/coverproviders.h"
 #include "covers/coversearchstatisticsdialog.h"
 #include "library/librarybackend.h"
@@ -29,7 +31,6 @@
 #include "library/sqlrow.h"
 #include "playlist/songmimedata.h"
 #include "widgets/forcescrollperpixel.h"
-#include "widgets/maclineedit.h"
 #include "ui/albumcoverchoicecontroller.h"
 
 #include <QActionGroup>
@@ -49,17 +50,14 @@
 
 const char* AlbumCoverManager::kSettingsGroup = "CoverManager";
 
-AlbumCoverManager::AlbumCoverManager(LibraryBackend* backend,
-                                     CoverProviders* cover_providers,
+AlbumCoverManager::AlbumCoverManager(Application* app,
                                      QWidget* parent,
                                      QNetworkAccessManager* network)
   : QMainWindow(parent),
     ui_(new Ui_CoverManager),
-    cover_providers_(cover_providers),
+    app_(app),
     album_cover_choice_controller_(new AlbumCoverChoiceController(this)),
-    backend_(backend),
-    cover_loader_(new BackgroundThreadImplementation<AlbumCoverLoader, AlbumCoverLoader>(this)),
-    cover_fetcher_(new AlbumCoverFetcher(cover_providers_, this, network)),
+    cover_fetcher_(new AlbumCoverFetcher(app_->cover_providers(), this, network)),
     cover_searcher_(NULL),
     artist_icon_(IconLoader::Load("x-clementine-artist")),
     all_artists_icon_(IconLoader::Load("x-clementine-album")),
@@ -77,8 +75,7 @@ AlbumCoverManager::AlbumCoverManager(LibraryBackend* backend,
   ui_->action_add_to_playlist->setIcon(IconLoader::Load("media-playback-start"));
   ui_->action_load->setIcon(IconLoader::Load("media-playback-start"));
 
-  album_cover_choice_controller_->SetCoverProviders(cover_providers_);
-  album_cover_choice_controller_->SetLibrary(backend_);
+  album_cover_choice_controller_->SetApplication(app_);
 
   // Get a square version of nocover.png
   QImage nocover(":/nocover.png");
@@ -91,7 +88,7 @@ AlbumCoverManager::AlbumCoverManager(LibraryBackend* backend,
   p.end();
   no_cover_icon_ = QPixmap::fromImage(square_nocover);
 
-  cover_searcher_ = new AlbumCoverSearcher(no_cover_icon_, this);
+  cover_searcher_ = new AlbumCoverSearcher(no_cover_icon_, app_, this);
 
   // Set up the status bar
   statusBar()->addPermanentWidget(progress_bar_);
@@ -110,6 +107,10 @@ AlbumCoverManager::~AlbumCoverManager() {
   CancelRequests();
 
   delete ui_;
+}
+
+LibraryBackend* AlbumCoverManager::backend() const {
+  return app_->library_backend();
 }
 
 void AlbumCoverManager::Init() {
@@ -167,18 +168,6 @@ void AlbumCoverManager::Init() {
   connect(ui_->action_add_to_playlist, SIGNAL(triggered()), SLOT(AddSelectedToPlaylist()));
   connect(ui_->action_load, SIGNAL(triggered()), SLOT(LoadSelectedToPlaylist()));
 
-  #ifdef Q_OS_DARWIN
-    MacLineEdit* lineedit = new MacLineEdit(ui_->filter->parentWidget());
-    lineedit->set_hint(ui_->filter->hint());
-    delete ui_->filter;
-    ui_->horizontalLayout->insertWidget(0, lineedit);
-    filter_ = lineedit;
-    connect(lineedit, SIGNAL(textChanged(QString)), SLOT(UpdateFilter()));
-    lineedit->show();
-  #else
-    filter_ = ui_->filter;
-  #endif
-
   // Restore settings
   QSettings s;
   s.beginGroup(kSettingsGroup);
@@ -189,17 +178,13 @@ void AlbumCoverManager::Init() {
     ui_->splitter->setSizes(QList<int>() << 200 << width() - 200);
   }
 
-  cover_loader_->Start(true);
-  CoverLoaderInitialised();
+  connect(app_->album_cover_loader(),
+          SIGNAL(ImageLoaded(quint64,QImage)),
+          SLOT(CoverImageLoaded(quint64,QImage)));
+
   cover_searcher_->Init(cover_fetcher_);
 
   new ForceScrollPerPixel(ui_->albums, this);
-}
-
-void AlbumCoverManager::CoverLoaderInitialised() {
-  cover_loader_->Worker()->SetDefaultOutputImage(QImage());
-  connect(cover_loader_->Worker().get(), SIGNAL(ImageLoaded(quint64,QImage)),
-          SLOT(CoverImageLoaded(quint64,QImage)));
 }
 
 void AlbumCoverManager::showEvent(QShowEvent *) {
@@ -232,10 +217,9 @@ void AlbumCoverManager::closeEvent(QCloseEvent* e) {
 }
 
 void AlbumCoverManager::CancelRequests() {
+  app_->album_cover_loader()->CancelTasks(
+        QSet<quint64>::fromList(cover_loading_tasks_.keys()));
   cover_loading_tasks_.clear();
-  if (cover_loader_ && cover_loader_->Worker()) {
-    cover_loader_->Worker()->Clear();
-  }
 
   cover_fetching_tasks_.clear();
   cover_fetcher_->Clear();
@@ -256,14 +240,11 @@ static bool CompareAlbumNameNocase(const LibraryBackend::Album& left,
 void AlbumCoverManager::Reset() {
   ResetFetchCoversButton();
 
-  if (!backend_)
-    return;
-
   ui_->artists->clear();
   new QListWidgetItem(all_artists_icon_, tr("All artists"), ui_->artists, All_Artists);
   new QListWidgetItem(artist_icon_, tr("Various artists"), ui_->artists, Various_Artists);
 
-  QStringList artists(backend_->GetAllArtistsWithAlbums());
+  QStringList artists(app_->library_backend()->GetAllArtistsWithAlbums());
   qStableSort(artists.begin(), artists.end(), CompareNocase);
 
   foreach (const QString& artist, artists) {
@@ -275,12 +256,10 @@ void AlbumCoverManager::Reset() {
 }
 
 void AlbumCoverManager::ResetFetchCoversButton() {
-  ui_->fetch->setEnabled(cover_providers_->HasAnyProviders());
+  ui_->fetch->setEnabled(app_->cover_providers()->HasAnyProviders());
 }
 
 void AlbumCoverManager::ArtistChanged(QListWidgetItem* current) {
-  if (!backend_ || !cover_loader_->Worker())
-    return;
   if (!current)
     return;
 
@@ -296,10 +275,10 @@ void AlbumCoverManager::ArtistChanged(QListWidgetItem* current) {
   // selected in the artist list.
   LibraryBackend::AlbumList albums;
   switch (current->type()) {
-    case Various_Artists: albums = backend_->GetCompilationAlbums(); break;
-    case Specific_Artist: albums = backend_->GetAlbumsByArtist(current->text()); break;
+    case Various_Artists: albums = app_->library_backend()->GetCompilationAlbums(); break;
+    case Specific_Artist: albums = app_->library_backend()->GetAlbumsByArtist(current->text()); break;
     case All_Artists:
-    default:              albums = backend_->GetAllAlbums(); break;
+    default:              albums = app_->library_backend()->GetAllAlbums(); break;
   }
 
   // Sort by album name.  The list is already sorted by sqlite but it was done
@@ -320,7 +299,8 @@ void AlbumCoverManager::ArtistChanged(QListWidgetItem* current) {
     item->setToolTip(info.artist + " - " + info.album_name);
 
     if (!info.art_automatic.isEmpty() || !info.art_manual.isEmpty()) {
-      quint64 id = cover_loader_->Worker()->LoadImageAsync(
+      quint64 id = app_->album_cover_loader()->LoadImageAsync(
+          cover_loader_options_,
           info.art_automatic, info.art_manual, info.first_url.toLocalFile());
       item->setData(Role_PathAutomatic, info.art_automatic);
       item->setData(Role_PathManual, info.art_manual);
@@ -345,7 +325,7 @@ void AlbumCoverManager::CoverImageLoaded(quint64 id, const QImage &image) {
 }
 
 void AlbumCoverManager::UpdateFilter() {
-  const QString filter = filter_->text().toLower();
+  const QString filter = ui_->filter->text().toLower();
   const bool hide_with_covers = filter_without_covers_->isChecked();
   const bool hide_without_covers = filter_with_covers_->isChecked();
 
@@ -471,7 +451,7 @@ bool AlbumCoverManager::eventFilter(QObject *obj, QEvent *event) {
     album_cover_choice_controller_->cover_from_url_action()->setEnabled(context_menu_items_.size() == 1);
     album_cover_choice_controller_->show_cover_action()->setEnabled(some_with_covers && context_menu_items_.size() == 1);
     album_cover_choice_controller_->unset_cover_action()->setEnabled(some_with_covers);
-    album_cover_choice_controller_->search_for_cover_action()->setEnabled(cover_providers_->HasAnyProviders());
+    album_cover_choice_controller_->search_for_cover_action()->setEnabled(app_->cover_providers()->HasAnyProviders());
 
     QContextMenuEvent* e = static_cast<QContextMenuEvent*>(event);
     context_menu_->popup(e->globalPos());
@@ -539,7 +519,8 @@ void AlbumCoverManager::FetchSingleCover() {
 
 
 void AlbumCoverManager::UpdateCoverInList(QListWidgetItem* item, const QString& cover) {
-  quint64 id = cover_loader_->Worker()->LoadImageAsync(QString(), cover);
+  quint64 id = app_->album_cover_loader()->LoadImageAsync(
+        cover_loader_options_, QString(), cover);
   item->setData(Role_PathManual, cover);
   cover_loading_tasks_[id] = item;
 }
@@ -653,7 +634,7 @@ SongList AlbumCoverManager::GetSongsInAlbum(const QModelIndex& index) const {
   if (!artist.isEmpty())
     q.AddWhere("artist", artist);
 
-  if (!backend_->ExecQuery(&q))
+  if (!app_->library_backend()->ExecQuery(&q))
     return ret;
 
   while (q.Next()) {
@@ -678,7 +659,7 @@ SongMimeData* AlbumCoverManager::GetMimeDataForAlbums(const QModelIndexList& ind
     return NULL;
 
   SongMimeData* data = new SongMimeData;
-  data->backend = backend_;
+  data->backend = app_->library_backend();
   data->songs = songs;
   return data;
 }
@@ -710,10 +691,11 @@ void AlbumCoverManager::SaveAndSetCover(QListWidgetItem *item, const QImage &ima
   QString path = album_cover_choice_controller_->SaveCoverInCache(artist, album, image);
 
   // Save the image in the database
-  backend_->UpdateManualAlbumArtAsync(artist, album, path);
+  app_->library_backend()->UpdateManualAlbumArtAsync(artist, album, path);
 
   // Update the icon in our list
-  quint64 id = cover_loader_->Worker()->LoadImageAsync(QString(), path);
+  quint64 id = app_->album_cover_loader()->LoadImageAsync(
+        cover_loader_options_, QString(), path);
   item->setData(Role_PathManual, path);
   cover_loading_tasks_[id] = item;
 }

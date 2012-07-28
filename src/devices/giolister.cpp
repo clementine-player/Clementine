@@ -16,14 +16,16 @@
 */
 
 #include "config.h"
-#include "giolister.h"
-#include "core/logging.h"
 
 #include <QFile>
 #include <QStringList>
 #include <QtDebug>
 
 #include <boost/bind.hpp>
+
+#include "giolister.h"
+#include "core/logging.h"
+#include "core/signalchecker.h"
 
 QString GioLister::DeviceInfo::unique_id() const {
   if (mount)
@@ -91,11 +93,11 @@ void GioLister::Init() {
   g_list_free(mounts);
 
   // Connect signals from the monitor
-  g_signal_connect(monitor_, "volume-added", G_CALLBACK(VolumeAddedCallback), this);
-  g_signal_connect(monitor_, "volume-removed", G_CALLBACK(VolumeRemovedCallback), this);
-  g_signal_connect(monitor_, "mount-added", G_CALLBACK(MountAddedCallback), this);
-  g_signal_connect(monitor_, "mount-changed", G_CALLBACK(MountChangedCallback), this);
-  g_signal_connect(monitor_, "mount-removed", G_CALLBACK(MountRemovedCallback), this);
+  CHECKED_GCONNECT(monitor_, "volume-added", &VolumeAddedCallback, this);
+  CHECKED_GCONNECT(monitor_, "volume-removed", &VolumeRemovedCallback, this);
+  CHECKED_GCONNECT(monitor_, "mount-added", &MountAddedCallback, this);
+  CHECKED_GCONNECT(monitor_, "mount-changed", &MountChangedCallback, this);
+  CHECKED_GCONNECT(monitor_, "mount-removed", &MountRemovedCallback, this);
 }
 
 QStringList GioLister::DeviceUniqueIDs() {

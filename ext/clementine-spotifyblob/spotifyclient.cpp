@@ -140,6 +140,7 @@ void SpotifyClient::LoggedInCallback(sp_session* session, sp_error error) {
     sp_playlistcontainer_add_callbacks(
           sp_session_playlistcontainer(session),
           &me->playlistcontainer_callbacks_, me);
+    sp_session_flush_caches(me->session_);
   }
 }
 
@@ -164,6 +165,8 @@ void SpotifyClient::Search(const pb::spotify::SearchRequest& req) {
         0, req.limit(),
         0, req.limit_album(),
         0, 0, // artists
+        0, 0, // playlists
+        SP_SEARCH_STANDARD,
         &SearchCompleteCallback, this);
 
   pending_searches_[search] = req;
@@ -282,6 +285,8 @@ void SpotifyClient::MessageArrived(const pb::spotify::Message& message) {
     BrowseAlbum(QStringFromStdString(message.browse_album_request().uri()));
   } else if (message.has_set_playback_settings_request()) {
     SetPlaybackSettings(message.set_playback_settings_request());
+  } else if (message.has_browse_toplist_request()) {
+    BrowseToplist(message.browse_toplist_request());
   }
 }
 
@@ -322,7 +327,8 @@ void SpotifyClient::Login(const pb::spotify::LoginRequest& req) {
     sp_session_login(session_,
                      req.username().c_str(),
                      req.password().c_str(),
-                     true);  // Remember the password.
+                     true,   // Remember the password.
+                     NULL);
   }
 }
 
@@ -571,7 +577,8 @@ void SpotifyClient::ConvertTrack(sp_track* track, pb::spotify::Track* pb) {
 
   // Album art
   const QByteArray art_id(
-        reinterpret_cast<const char*>(sp_album_cover(sp_track_album(track))),
+        reinterpret_cast<const char*>(
+            sp_album_cover(sp_track_album(track), SP_IMAGE_SIZE_LARGE)),
         kSpotifyImageIDSize);
   const QString art_id_b64 = QString::fromAscii(art_id.toBase64());
   pb->set_album_art_id(DataCommaSizeFromQString(art_id_b64));
@@ -606,7 +613,7 @@ void SpotifyClient::ConvertAlbum(sp_album* album, pb::spotify::Track* pb) {
 
   // Album art
   const QByteArray art_id(
-        reinterpret_cast<const char*>(sp_album_cover(album)),
+        reinterpret_cast<const char*>(sp_album_cover(album, SP_IMAGE_SIZE_LARGE)),
         kSpotifyImageIDSize);
   const QString art_id_b64 = QString::fromAscii(art_id.toBase64());
   pb->set_album_art_id(DataCommaSizeFromQString(art_id_b64));
@@ -961,6 +968,43 @@ void SpotifyClient::AlbumBrowseComplete(sp_albumbrowse* result, void* userdata) 
 
   me->SendMessage(message);
   sp_albumbrowse_release(result);
+}
+
+void SpotifyClient::BrowseToplist(const pb::spotify::BrowseToplistRequest& req) {
+  sp_toplistbrowse* browse = sp_toplistbrowse_create(
+      session_,
+      SP_TOPLIST_TYPE_TRACKS,  // TODO: Support albums and artists.
+      SP_TOPLIST_REGION_EVERYWHERE,  // TODO: Support other regions.
+      NULL,
+      &ToplistBrowseComplete,
+      this);
+  pending_toplist_browses_[browse] = req;
+}
+
+void SpotifyClient::ToplistBrowseComplete(sp_toplistbrowse* result, void* userdata) {
+  SpotifyClient* me = reinterpret_cast<SpotifyClient*>(userdata);
+
+  qLog(Debug) << "Toplist browse request took:"
+              << sp_toplistbrowse_backend_request_duration(result)
+              << "ms";
+
+  if (!me->pending_toplist_browses_.contains(result)) {
+    return;
+  }
+
+  const pb::spotify::BrowseToplistRequest& request = me->pending_toplist_browses_.take(result);
+
+  pb::spotify::Message message;
+  pb::spotify::BrowseToplistResponse* msg = message.mutable_browse_toplist_response();
+  msg->mutable_request()->CopyFrom(request);
+
+  const int count = sp_toplistbrowse_num_tracks(result);
+  for (int i = 0; i < count; ++i) {
+    me->ConvertTrack(sp_toplistbrowse_track(result, i), msg->add_track());
+  }
+
+  me->SendMessage(message);
+  sp_toplistbrowse_release(result);
 }
 
 void SpotifyClient::DeviceClosed() {

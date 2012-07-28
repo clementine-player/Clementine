@@ -23,9 +23,12 @@
 #include "ui/iconloader.h"
 
 #include <QMenu>
+#include <QStandardItem>
 
-InternetService::InternetService(const QString& name, InternetModel* model, QObject* parent)
+InternetService::InternetService(const QString& name, Application* app,
+                                 InternetModel* model, QObject* parent)
   : QObject(parent),
+    app_(app),
     model_(model),
     name_(name),
     append_to_playlist_(NULL),
@@ -92,13 +95,24 @@ void InternetService::AddItemsToPlaylist(const QModelIndexList& indexes, AddMode
 }
 
 void InternetService::AppendToPlaylist() {
-  AddItemToPlaylist(GetCurrentIndex(), AddMode_Append);
+  AddItemsToPlaylist(model()->selected_indexes(), AddMode_Append);
 }
 
 void InternetService::ReplacePlaylist() {
-  AddItemToPlaylist(GetCurrentIndex(), AddMode_Replace);
+  AddItemsToPlaylist(model()->selected_indexes(), AddMode_Replace);
 }
 
 void InternetService::OpenInNewPlaylist() {
-  AddItemToPlaylist(GetCurrentIndex(), AddMode_OpenInNew);
+  AddItemsToPlaylist(model()->selected_indexes(), AddMode_OpenInNew);
 }
+
+QStandardItem* InternetService::CreateSongItem(const Song& song) {
+    QStandardItem* item = new QStandardItem(song.PrettyTitleWithArtist());
+    item->setData(InternetModel::Type_Track, InternetModel::Role_Type);
+    item->setData(QVariant::fromValue(song), InternetModel::Role_SongMetadata);
+    item->setData(InternetModel::PlayBehaviour_SingleItem, InternetModel::Role_PlayBehaviour);
+    item->setData(song.url(), InternetModel::Role_Url);
+
+    return item;
+}
+

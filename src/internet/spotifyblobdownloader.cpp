@@ -22,6 +22,7 @@
 #include "core/network.h"
 #include "core/utilities.h"
 
+#include <QCoreApplication>
 #include <QDir>
 #include <QMessageBox>
 #include <QNetworkReply>
@@ -68,8 +69,8 @@ void SpotifyBlobDownloader::Start() {
   const QStringList filenames = QStringList()
       << "blob"
       << "blob" + QString(kSignatureSuffix)
-      << "libspotify.so.10.1.16"
-      << "libspotify.so.10.1.16" + QString(kSignatureSuffix);
+      << "libspotify.so.12.1.45"
+      << "libspotify.so.12.1.45" + QString(kSignatureSuffix);
 
   foreach (const QString& filename, filenames) {
     const QUrl url(SpotifyService::kBlobDownloadUrl + version_ + "/" + filename);

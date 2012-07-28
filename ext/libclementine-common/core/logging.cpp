@@ -183,9 +183,7 @@ QDebug CreateLogger(Level level, const QString& class_name, int line) {
   return ret.space();
 }
 
-QString DemangleSymbol(const QString& symbol) {
-  QStringList split = symbol.split(' ', QString::SkipEmptyParts);
-  QString mangled_function = split[3];
+QString CXXDemangle(const QString& mangled_function) {
   int status;
   char* demangled_function = abi::__cxa_demangle(
       mangled_function.toAscii().constData(),
@@ -198,6 +196,31 @@ QString DemangleSymbol(const QString& symbol) {
     return ret;
   }
   return mangled_function;  // Probably not a C++ function.
+}
+
+QString DarwinDemangle(const QString& symbol) {
+  QStringList split = symbol.split(' ', QString::SkipEmptyParts);
+  QString mangled_function = split[3];
+  return CXXDemangle(mangled_function);
+}
+
+QString LinuxDemangle(const QString& symbol) {
+  QRegExp regex("\\(([^+]+)");
+  if (!symbol.contains(regex)) {
+    return symbol;
+  }
+  QString mangled_function = regex.cap(1);
+  return CXXDemangle(mangled_function);
+}
+
+QString DemangleSymbol(const QString& symbol) {
+#ifdef Q_OS_DARWIN
+  return DarwinDemangle(symbol);
+#elif defined(Q_OS_LINUX)
+  return LinuxDemangle(symbol);
+#else
+  return symbol;
+#endif
 }
 
 void DumpStackTrace() {

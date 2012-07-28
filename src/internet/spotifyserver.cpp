@@ -148,6 +148,8 @@ void SpotifyServer::MessageArrived(const pb::spotify::Message& message) {
     emit SyncPlaylistProgress(message.sync_playlist_progress());
   } else if (message.has_browse_album_response()) {
     emit AlbumBrowseResults(message.browse_album_response());
+  } else if (message.has_browse_toplist_response()) {
+    emit ToplistBrowseResults(message.browse_toplist_response());
   }
 }
 
@@ -252,5 +254,14 @@ void SpotifyServer::AlbumBrowse(const QString& uri) {
   pb::spotify::BrowseAlbumRequest* req = message.mutable_browse_album_request();
 
   req->set_uri(DataCommaSizeFromQString(uri));
+  SendOrQueueMessage(message);
+}
+
+void SpotifyServer::LoadToplist() {
+  pb::spotify::Message message;
+  pb::spotify::BrowseToplistRequest* req = message.mutable_browse_toplist_request();
+  req->set_type(pb::spotify::BrowseToplistRequest::Tracks);
+  req->set_region(pb::spotify::BrowseToplistRequest::Everywhere);
+
   SendOrQueueMessage(message);
 }

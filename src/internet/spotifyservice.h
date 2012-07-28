@@ -10,7 +10,9 @@
 
 #include <boost/shared_ptr.hpp>
 
+class DidYouMean;
 class Playlist;
+class SearchBoxWidget;
 class SpotifyServer;
 
 class QMenu;
@@ -19,7 +21,7 @@ class SpotifyService : public InternetService {
   Q_OBJECT
 
 public:
-  SpotifyService(InternetModel* parent);
+  SpotifyService(Application* app, InternetModel* parent);
   ~SpotifyService();
 
   enum Type {
@@ -27,6 +29,7 @@ public:
     Type_StarredPlaylist,
     Type_InboxPlaylist,
     Type_Track,
+    Type_Toplist,
   };
 
   enum Role {
@@ -52,14 +55,14 @@ public:
 
   QStandardItem* CreateRootItem();
   void LazyPopulate(QStandardItem* parent);
-  void ShowContextMenu(const QModelIndex& index, const QPoint& global_pos);
+  void ShowContextMenu(const QPoint& global_pos);
   void ItemDoubleClicked(QStandardItem* item);
   void DropMimeData(const QMimeData* data, const QModelIndex& index);
   PlaylistItem::Options playlistitem_options() const;
+  QWidget* HeaderWidget() const;
 
   void Logout();
   void Login(const QString& username, const QString& password);
-  void Search(const QString& text, Playlist* playlist, bool now = false);
   Q_INVOKABLE void LoadImage(const QString& id);
 
   SpotifyServer* server() const;
@@ -79,15 +82,17 @@ signals:
   void ImageLoaded(const QString& id, const QImage& image);
 
 public slots:
+  void Search(const QString& text, bool now = false);
   void ShowConfig();
-
-protected:
-  virtual QModelIndex GetCurrentIndex();
 
 private:
   void StartBlobProcess();
+  void FillPlaylist(
+      QStandardItem* item,
+      const google::protobuf::RepeatedPtrField<pb::spotify::Track>& tracks);
   void FillPlaylist(QStandardItem* item, const pb::spotify::LoadPlaylistResponse& response);
   void EnsureMenuCreated();
+  void ClearSearchResults();
 
   QStandardItem* PlaylistBySpotifyIndex(int index) const;
   bool DoPlaylistsDiffer(const pb::spotify::Playlists& response) const;
@@ -104,8 +109,8 @@ private slots:
   void UserPlaylistLoaded(const pb::spotify::LoadPlaylistResponse& response);
   void SearchResults(const pb::spotify::SearchResponse& response);
   void SyncPlaylistProgress(const pb::spotify::SyncPlaylistProgress& progress);
+  void ToplistLoaded(const pb::spotify::BrowseToplistResponse& response);
 
-  void OpenSearchTab();
   void DoSearch();
 
   void SyncPlaylist();
@@ -123,16 +128,17 @@ private:
   QStandardItem* search_;
   QStandardItem* starred_;
   QStandardItem* inbox_;
+  QStandardItem* toplist_;
   QList<QStandardItem*> playlists_;
 
   int login_task_id_;
   QString pending_search_;
-  Playlist* pending_search_playlist_;
 
   QMenu* context_menu_;
   QMenu* playlist_context_menu_;
   QAction* playlist_sync_action_;
-  QModelIndex context_item_;
+
+  SearchBoxWidget* search_box_;
 
   QTimer* search_delay_;
 

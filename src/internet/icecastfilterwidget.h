@@ -57,8 +57,6 @@ private:
   QMenu* menu_;
 
   QSignalMapper* sort_mode_mapper_;
-
-  LineEditInterface* filter_;
 };
 
 #endif // ICECASTFILTERWIDGET_H

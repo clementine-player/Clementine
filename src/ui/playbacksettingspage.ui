@@ -216,6 +216,9 @@
       <string>GStreamer audio engine</string>
      </property>
      <layout class="QFormLayout" name="formLayout_3">
+      <property name="fieldGrowthPolicy">
+       <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+      </property>
       <item row="0" column="0">
        <widget class="QLabel" name="label_7">
         <property name="text">
@@ -232,16 +235,6 @@
         </item>
        </widget>
       </item>
-      <item row="1" column="1">
-       <widget class="LineEdit" name="gst_device">
-        <property name="enabled">
-         <bool>false</bool>
-        </property>
-        <property name="hint" stdset="0">
-         <string>Leave blank for the default.  Examples: &quot;/dev/dsp&quot;, &quot;front&quot;, etc.</string>
-        </property>
-       </widget>
-      </item>
       <item row="1" column="0">
        <widget class="QLabel" name="gst_device_label">
         <property name="enabled">
@@ -249,6 +242,16 @@
         </property>
         <property name="text">
          <string>Output device</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="LineEdit" name="gst_device">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="hint" stdset="0">
+         <string>Leave blank for the default.  Examples: &quot;/dev/dsp&quot;, &quot;front&quot;, etc.</string>
         </property>
        </widget>
       </item>
@@ -269,6 +272,16 @@
         </property>
         <property name="singleStep">
          <number>100</number>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0" colspan="2">
+       <widget class="QCheckBox" name="mono_playback">
+        <property name="toolTip">
+         <string>Changing mono playback preference will be effective for the next playing songs</string>
+        </property>
+        <property name="text">
+         <string>Mono playback</string>
         </property>
        </widget>
       </item>

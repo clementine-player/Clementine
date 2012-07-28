@@ -21,6 +21,7 @@
 #include "ui_magnatunedownloaddialog.h"
 #include "core/logging.h"
 #include "core/network.h"
+#include "core/utilities.h"
 #include "widgets/progressitemdelegate.h"
 
 #include <QCloseEvent>
@@ -176,8 +177,7 @@ void MagnatuneDownloadDialog::MetadataFinished() {
   }
 
   // Munge the URL a bit
-  QString url_text = re.cap(1);
-  url_text.replace("&amp;", "&");
+  QString url_text = Utilities::DecodeHtmlEntities(re.cap(1));
 
   QUrl url = QUrl(url_text);
   url.setUserName(service_->username());

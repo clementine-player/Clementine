@@ -24,7 +24,7 @@ class LastFMService;
 
 class LastFMSearchProvider : public SimpleSearchProvider {
 public:
-  LastFMSearchProvider(LastFMService* service, QObject* parent);
+  LastFMSearchProvider(LastFMService* service, Application* app, QObject* parent);
 
   void LoadArtAsync(int id, const Result& result);
 

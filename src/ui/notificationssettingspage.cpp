@@ -54,6 +54,7 @@ NotificationsSettingsPage::NotificationsSettingsPage(SettingsDialog* dialog)
   menu->addAction(ui_->action_genre);
   menu->addAction(ui_->action_playcount);
   menu->addAction(ui_->action_skipcount);
+  menu->addAction(ui_->action_filename);
   menu->addSeparator();
   menu->addAction(ui_->action_newline);
   ui_->notifications_exp_chooser1->setMenu(menu);

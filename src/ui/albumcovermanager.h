@@ -24,17 +24,15 @@
 
 #include "gtest/gtest_prod.h"
 
-#include "core/backgroundthread.h"
 #include "core/song.h"
-#include "covers/albumcoverloader.h"
+#include "covers/albumcoverloaderoptions.h"
 #include "covers/coversearchstatistics.h"
 
 class AlbumCoverChoiceController;
 class AlbumCoverFetcher;
 class AlbumCoverSearcher;
-class CoverProviders;
+class Application;
 class LibraryBackend;
-class LineEditInterface;
 class SongMimeData;
 class Ui_CoverManager;
 
@@ -46,15 +44,14 @@ class QProgressBar;
 class AlbumCoverManager : public QMainWindow {
   Q_OBJECT
  public:
-  AlbumCoverManager(LibraryBackend* backend,
-                    CoverProviders* cover_providers,
-                    QWidget *parent = 0,
+  AlbumCoverManager(Application* app,
+                    QWidget* parent = 0,
                     QNetworkAccessManager* network = 0);
   ~AlbumCoverManager();
 
   static const char* kSettingsGroup;
 
-  LibraryBackend* backend() const { return backend_; }
+  LibraryBackend* backend() const;
   QIcon no_cover_icon() const { return no_cover_icon_; }
 
   void Reset();
@@ -78,7 +75,6 @@ class AlbumCoverManager : public QMainWindow {
 
  private slots:
   void ArtistChanged(QListWidgetItem* current);
-  void CoverLoaderInitialised();
   void CoverImageLoaded(quint64 id, const QImage& image);
   void UpdateFilter();
   void FetchAlbumCovers();
@@ -144,16 +140,15 @@ class AlbumCoverManager : public QMainWindow {
 
  private:
   Ui_CoverManager* ui_;
+  Application* app_;
 
-  CoverProviders* cover_providers_;
   AlbumCoverChoiceController* album_cover_choice_controller_;
-  LibraryBackend* backend_;
 
   QAction* filter_all_;
   QAction* filter_with_covers_;
   QAction* filter_without_covers_;
 
-  BackgroundThread<AlbumCoverLoader>* cover_loader_;
+  AlbumCoverLoaderOptions cover_loader_options_;
   QMap<quint64, QListWidgetItem*> cover_loading_tasks_;
 
   AlbumCoverFetcher* cover_fetcher_;
@@ -172,8 +167,6 @@ class AlbumCoverManager : public QMainWindow {
 
   QProgressBar* progress_bar_;
   int jobs_;
-
-  LineEditInterface* filter_;
 
   FRIEND_TEST(AlbumCoverManagerTest, HidesItemsWithCover);
   FRIEND_TEST(AlbumCoverManagerTest, HidesItemsWithoutCover);

@@ -85,6 +85,12 @@ void PlaylistHeader::contextMenuEvent(QContextMenuEvent* e) {
 }
 
 void PlaylistHeader::AddColumnAction(int index) {
+#ifndef HAVE_MOODBAR
+  if (index == Playlist::Column_Mood) {
+    return;
+  }
+#endif
+
   QString title(model()->headerData(index, Qt::Horizontal).toString());
 
   QAction* action = menu_->addAction(title, show_mapper_, SLOT(map()));

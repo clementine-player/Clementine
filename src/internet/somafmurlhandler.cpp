@@ -18,6 +18,7 @@
 #include "internetmodel.h"
 #include "somafmservice.h"
 #include "somafmurlhandler.h"
+#include "core/application.h"
 #include "core/logging.h"
 #include "core/taskmanager.h"
 
@@ -26,8 +27,10 @@
 #include <QSettings>
 #include <QTemporaryFile>
 
-SomaFMUrlHandler::SomaFMUrlHandler(SomaFMService* service, QObject* parent)
+SomaFMUrlHandler::SomaFMUrlHandler(Application* app, SomaFMService* service,
+                                   QObject* parent)
   : UrlHandler(parent),
+    app_(app),
     service_(service),
     task_id_(0)
 {
@@ -42,14 +45,14 @@ UrlHandler::LoadResult SomaFMUrlHandler::StartLoading(const QUrl& url) {
   connect(reply, SIGNAL(finished()), SLOT(LoadPlaylistFinished()));
 
   if (!task_id_)
-    task_id_ = service_->model()->task_manager()->StartTask(tr("Loading stream"));
+    task_id_ = app_->task_manager()->StartTask(tr("Loading stream"));
 
   return LoadResult(url, LoadResult::WillLoadAsynchronously);
 }
 
 void SomaFMUrlHandler::LoadPlaylistFinished() {
   QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
-  service_->model()->task_manager()->SetTaskFinished(task_id_);
+  app_->task_manager()->SetTaskFinished(task_id_);
   task_id_ = 0;
 
   QUrl original_url(reply->url());

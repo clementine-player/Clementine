@@ -22,7 +22,9 @@
 #include "gstelementdeleter.h"
 #include "gstengine.h"
 #include "gstenginepipeline.h"
+#include "core/concurrentrun.h"
 #include "core/logging.h"
+#include "core/signalchecker.h"
 #include "core/utilities.h"
 #include "internet/internetmodel.h"
 
@@ -30,8 +32,6 @@
 #  include "internet/spotifyserver.h"
 #  include "internet/spotifyservice.h"
 #endif
-
-#include <QtConcurrentRun>
 
 const int GstEnginePipeline::kGstStateTimeoutNanosecs = 10000000;
 const int GstEnginePipeline::kFaderFudgeMsec = 2000;
@@ -61,6 +61,7 @@ GstEnginePipeline::GstEnginePipeline(GstEngine* engine)
     rg_compression_(true),
     buffer_duration_nanosec_(1 * kNsecPerSec),
     buffering_(false),
+    mono_playback_(false),
     end_offset_nanosec_(-1),
     next_beginning_offset_nanosec_(-1),
     next_end_offset_nanosec_(-1),
@@ -108,6 +109,10 @@ void GstEnginePipeline::set_replaygain(bool enabled, int mode, float preamp,
 
 void GstEnginePipeline::set_buffer_duration_nanosec(qint64 buffer_duration_nanosec) {
   buffer_duration_nanosec_ = buffer_duration_nanosec;
+}
+
+void GstEnginePipeline::set_mono_playback(bool enabled) {
+  mono_playback_ = enabled;
 }
 
 bool GstEnginePipeline::ReplaceDecodeBin(GstElement* new_bin) {
@@ -164,9 +169,9 @@ bool GstEnginePipeline::ReplaceDecodeBin(const QUrl& url) {
   } else {
     new_bin = engine_->CreateElement("uridecodebin");
     g_object_set(G_OBJECT(new_bin), "uri", url.toEncoded().constData(), NULL);
-    g_signal_connect(G_OBJECT(new_bin), "drained", G_CALLBACK(SourceDrainedCallback), this);
-    g_signal_connect(G_OBJECT(new_bin), "pad-added", G_CALLBACK(NewPadCallback), this);
-    g_signal_connect(G_OBJECT(new_bin), "notify::source", G_CALLBACK(SourceSetupCallback), this);
+    CHECKED_GCONNECT(G_OBJECT(new_bin), "drained", &SourceDrainedCallback, this);
+    CHECKED_GCONNECT(G_OBJECT(new_bin), "pad-added", &NewPadCallback, this);
+    CHECKED_GCONNECT(G_OBJECT(new_bin), "notify::source", &SourceSetupCallback, this);
   }
 
   return ReplaceDecodeBin(new_bin);
@@ -328,6 +333,9 @@ bool GstEnginePipeline::Init() {
   GstCaps* caps32 = gst_caps_new_simple ("audio/x-raw-float",
       "width", G_TYPE_INT, 32,
       NULL);
+  if (mono_playback_) {
+    gst_caps_set_simple(caps32, "channels", G_TYPE_INT, 1, NULL);
+  }
 
   // Link the elements with special caps
   gst_element_link_filtered(probe_converter, probe_sink, caps16);
@@ -575,7 +583,7 @@ void GstEnginePipeline::StateChangedMessageReceived(GstMessage* msg) {
 
 void GstEnginePipeline::BufferingMessageReceived(GstMessage* msg) {
   // Only handle buffering messages from the queue2 element in audiobin - not
-  // the one that's created automatically by uridecidebin.
+  // the one that's created automatically by uridecodebin.
   if (GST_ELEMENT(GST_MESSAGE_SRC(msg)) != queue_) {
     return;
   }
@@ -589,12 +597,12 @@ void GstEnginePipeline::BufferingMessageReceived(GstMessage* msg) {
     buffering_ = true;
     emit BufferingStarted();
 
-    gst_element_set_state(pipeline_, GST_STATE_PAUSED);
+    SetState(GST_STATE_PAUSED);
   } else if (percent == 100 && buffering_) {
     buffering_ = false;
     emit BufferingFinished();
 
-    gst_element_set_state(pipeline_, GST_STATE_PLAYING);
+    SetState(GST_STATE_PLAYING);
   } else if (buffering_) {
     emit BufferingProgress(percent);
   }
@@ -787,7 +795,8 @@ GstState GstEnginePipeline::state() const {
 }
 
 QFuture<GstStateChangeReturn> GstEnginePipeline::SetState(GstState state) {
-  return QtConcurrent::run(&gst_element_set_state, pipeline_, state);
+  return ConcurrentRun::Run<GstStateChangeReturn, GstElement*, GstState>(
+      &set_state_threadpool_, &gst_element_set_state, pipeline_, state);
 }
 
 bool GstEnginePipeline::Seek(qint64 nanosec) {

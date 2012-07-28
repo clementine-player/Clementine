@@ -16,6 +16,7 @@
 */
 
 #include "playlistbackend.h"
+#include "core/application.h"
 #include "core/database.h"
 #include "core/scopedtransaction.h"
 #include "core/song.h"
@@ -40,14 +41,11 @@ using boost::shared_ptr;
 
 const int PlaylistBackend::kSongTableJoins = 4;
 
-PlaylistBackend::PlaylistBackend(QObject* parent)
+PlaylistBackend::PlaylistBackend(Application* app, QObject* parent)
   : QObject(parent),
-    library_(NULL)
+    app_(app),
+    db_(app_->database())
 {
-}
-
-void PlaylistBackend::SetLibrary(LibraryBackend* library) {
-  library_ = library;
 }
 
 PlaylistBackend::PlaylistList PlaylistBackend::GetAllPlaylists() {
@@ -162,10 +160,10 @@ PlaylistItemPtr PlaylistBackend::NewSongFromQuery(const SqlRow& row, boost::shar
 PlaylistItemPtr PlaylistBackend::RestoreCueData(PlaylistItemPtr item, boost::shared_ptr<NewSongFromQueryState> state) {
   // we need library to run a CueParser; also, this method applies only to
   // file-type PlaylistItems
-  if(!library_ || item->type() != "File") {
+  if(item->type() != "File") {
     return item;
   }
-  CueParser cue_parser(library_);
+  CueParser cue_parser(app_->library_backend());
 
   Song song = item->Metadata();
   // we're only interested in .cue songs here

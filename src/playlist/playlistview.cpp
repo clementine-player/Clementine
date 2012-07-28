@@ -15,12 +15,16 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "config.h"
 #include "dynamicplaylistcontrols.h"
 #include "playlist.h"
 #include "playlistdelegates.h"
 #include "playlistheader.h"
 #include "playlistview.h"
+#include "core/application.h"
 #include "core/logging.h"
+#include "core/player.h"
+#include "covers/currentartloader.h"
 
 #include <QCleanlooksStyle>
 #include <QClipboard>
@@ -33,14 +37,25 @@
 #include <QApplication>
 #include <QSortFilterProxyModel>
 #include <QScrollBar>
+#include <QTimeLine>
 
 #include <math.h>
 
-const int PlaylistView::kStateVersion = 4;
+#ifdef HAVE_MOODBAR
+# include "moodbar/moodbaritemdelegate.h"
+#endif
+
+const int PlaylistView::kStateVersion = 5;
 const int PlaylistView::kGlowIntensitySteps = 24;
 const int PlaylistView::kAutoscrollGraceTimeout = 60; // seconds
 const int PlaylistView::kDropIndicatorWidth = 2;
 const int PlaylistView::kDropIndicatorGradientWidth = 5;
+// Opacity value used by all background images but the default clementine one
+// (because it is already opaque and load through the mainwindow.css file)
+const qreal PlaylistView::kBackgroundOpacity = 0.4;
+
+const char* PlaylistView::kSettingBackgroundImageType = "playlistview_background_type";
+const char* PlaylistView::kSettingBackgroundImageFilename = "playlistview_background_image_file";
 
 
 PlaylistProxyStyle::PlaylistProxyStyle(QStyle* base)
@@ -84,6 +99,7 @@ void PlaylistProxyStyle::drawPrimitive(PrimitiveElement element, const QStyleOpt
 
 PlaylistView::PlaylistView(QWidget *parent)
   : QTreeView(parent),
+    app_(NULL),
     style_(new PlaylistProxyStyle(style())),
     playlist_(NULL),
     header_(new PlaylistHeader(Qt::Horizontal, this, this)),
@@ -91,6 +107,12 @@ PlaylistView::PlaylistView(QWidget *parent)
     upgrading_from_qheaderview_(false),
     read_only_settings_(true),
     upgrading_from_version_(-1),
+    background_image_type_(Default),
+    previous_background_image_opacity_(0.0),
+    fade_animation_(new QTimeLine(1000, this)),
+    last_height_(-1),
+    last_width_(-1),
+    force_background_redraw_(false),
     glow_enabled_(true),
     currently_glowing_(false),
     glow_intensity_step_(0),
@@ -104,8 +126,7 @@ PlaylistView::PlaylistView(QWidget *parent)
     cached_current_row_row_(-1),
     drop_indicator_row_(-1),
     drag_over_(false),
-    dynamic_controls_(new DynamicPlaylistControls(this)),
-    player_(NULL)
+    dynamic_controls_(new DynamicPlaylistControls(this))
 {
   setHeader(header_);
   header_->setMovable(true);
@@ -139,6 +160,21 @@ PlaylistView::PlaylistView(QWidget *parent)
 #ifdef Q_OS_DARWIN
   setVerticalScrollMode(QAbstractItemView::ScrollPerPixel);
 #endif
+  // For fading
+  connect(fade_animation_, SIGNAL(valueChanged(qreal)), SLOT(FadePreviousBackgroundImage(qreal)));
+  fade_animation_->setDirection(QTimeLine::Backward); // 1.0 -> 0.0
+}
+
+void PlaylistView::SetApplication(Application *app) {
+  Q_ASSERT(app);
+  app_ = app;
+  connect(app_->current_art_loader(),
+          SIGNAL(ArtLoaded(const Song&, const QString&, const QImage&)),
+          SLOT(CurrentSongChanged(const Song&, const QString&, const QImage&)));
+  connect(app_->player(), SIGNAL(Paused()), SLOT(StopGlowing()));
+  connect(app_->player(), SIGNAL(Playing()), SLOT(StartGlowing()));
+  connect(app_->player(), SIGNAL(Stopped()), SLOT(StopGlowing()));
+  connect(app_->player(), SIGNAL(Stopped()), SLOT(PlayerStopped()));
 }
 
 void PlaylistView::SetItemDelegates(LibraryBackend* backend) {
@@ -167,9 +203,13 @@ void PlaylistView::SetItemDelegates(LibraryBackend* backend) {
   setItemDelegateForColumn(Playlist::Column_Filename, new NativeSeparatorsDelegate(this));
   setItemDelegateForColumn(Playlist::Column_Rating, rating_delegate_);
   setItemDelegateForColumn(Playlist::Column_LastPlayed, new LastPlayedItemDelegate(this));
+
+#ifdef HAVE_MOODBAR
+  setItemDelegateForColumn(Playlist::Column_Mood, new MoodbarItemDelegate(app_, this, this));
+#endif
   
-  if (player_) {
-    setItemDelegateForColumn(Playlist::Column_Source, new SongSourceDelegate(this, player_));
+  if (app_ && app_->player()) {
+    setItemDelegateForColumn(Playlist::Column_Source, new SongSourceDelegate(this, app_->player()));
   } else {
     header_->HideSection(Playlist::Column_Source);
   }
@@ -275,6 +315,11 @@ void PlaylistView::LoadGeometry() {
   if (state_version < 3) {
     header_->HideSection(Playlist::Column_Comment);
   }
+  if (state_version < 5) {
+#ifndef HAVE_MOODBAR
+    header_->HideSection(Playlist::Column_Mood);
+#endif
+  }
 
   // Make sure at least one column is visible
   bool all_hidden = true;
@@ -378,8 +423,7 @@ void PlaylistView::drawRow(QPainter* painter, const QStyleOptionViewItem& option
                         is_paused ? currenttrack_pause_ : currenttrack_play_);
 
     // Set the font
-    opt.palette.setColor(QPalette::Text, Qt::white);
-    opt.palette.setColor(QPalette::HighlightedText, Qt::white);
+    opt.palette.setColor(QPalette::Text, QApplication::palette().color(QPalette::HighlightedText));
     opt.palette.setColor(QPalette::Highlight, Qt::transparent);
     opt.palette.setColor(QPalette::AlternateBase, Qt::transparent);
     opt.font.setItalic(true);
@@ -776,12 +820,52 @@ void PlaylistView::JumpToLastPlayedTrack() {
 }
 
 void PlaylistView::paintEvent(QPaintEvent* event) {
-  // Reimplemented to draw the drop indicator
+  // Reimplemented to draw the background image.
+  // Reimplemented also to draw the drop indicator
   // When the user is dragging some stuff over the playlist paintEvent gets
   // called for the entire viewport every time the user moves the mouse.
   // The drawTree is kinda expensive, so we cache the result and draw from the
   // cache while the user is dragging.  The cached pixmap gets invalidated in
   // dragLeaveEvent, dropEvent and scrollContentsBy.
+
+  // Draw background
+  if (background_image_type_ == Custom || background_image_type_ == AlbumCover) {
+    if (!background_image_.isNull() || !previous_background_image_.isNull()) {
+      QPainter background_painter(viewport());
+
+      // Check if we should recompute the background image
+      if (height() != last_height_ || width() != last_width_
+          || force_background_redraw_) {
+
+        cached_scaled_background_image_ = QPixmap::fromImage(background_image_.scaled(
+            width(), height(),
+            Qt::KeepAspectRatioByExpanding,
+            Qt::SmoothTransformation));
+
+        last_height_ = height();
+        last_width_  = width();
+        force_background_redraw_ = false;
+      }
+
+      // Actually draw the background image
+      if (!cached_scaled_background_image_.isNull()) {
+        // Set opactiy only if needed, as this deactivate hardware acceleration
+        if (!qFuzzyCompare(previous_background_image_opacity_, qreal(0.0))) {
+          background_painter.setOpacity(1.0 - previous_background_image_opacity_);
+        }
+        background_painter.drawPixmap((width() - cached_scaled_background_image_.width()) / 2,
+                                      (height() - cached_scaled_background_image_.height()) / 2,
+                                      cached_scaled_background_image_);
+      }
+      // Draw the previous background image if we're fading
+      if (!previous_background_image_.isNull()) {
+        background_painter.setOpacity(previous_background_image_opacity_);
+        background_painter.drawPixmap((width() - previous_background_image_.width()) / 2,
+                                      (height() - previous_background_image_.height()) / 2,
+                                      previous_background_image_);
+      }
+    }
+  }
 
   QPainter p(viewport());
 
@@ -799,9 +883,11 @@ void PlaylistView::paintEvent(QPaintEvent* event) {
     drawTree(&p, event->region());
     return;
   }
+  
+  const int first_column = header_->logicalIndex(0);
 
   // Find the y position of the drop indicator
-  QModelIndex drop_index = model()->index(drop_indicator_row_, 0);
+  QModelIndex drop_index = model()->index(drop_indicator_row_, first_column);
   int drop_pos = -1;
   switch (dropIndicatorPosition()) {
     case QAbstractItemView::OnItem:
@@ -819,7 +905,8 @@ void PlaylistView::paintEvent(QPaintEvent* event) {
       if (model()->rowCount() == 0)
         drop_pos = 1;
       else
-        drop_pos = visualRect(model()->index(model()->rowCount() - 1, 0)).bottom() + 1;
+        drop_pos = 1 + visualRect(
+              model()->index(model()->rowCount() - 1, first_column)).bottom();
       break;
   }
 
@@ -883,7 +970,6 @@ void PlaylistView::ReloadSettings() {
   QSettings s;
   s.beginGroup(Playlist::kSettingsGroup);
   glow_enabled_ = s.value("glow_effect", true).toBool();
-  background_enabled_ = s.value("bg_enabled", true).toBool();
 
   if (setting_initial_header_layout_ || upgrading_from_qheaderview_) {
     header_->SetStretchEnabled(s.value("stretch", true).toBool());
@@ -895,14 +981,12 @@ void PlaylistView::ReloadSettings() {
   if (!glow_enabled_)
     StopGlowing();
 
-  setProperty("background_enabled", background_enabled_);
-  
   if (setting_initial_header_layout_) {
     header_->SetColumnWidth(Playlist::Column_Length, 0.06);
     header_->SetColumnWidth(Playlist::Column_Track, 0.05);
     setting_initial_header_layout_ = false;
   }
-  
+
   if (upgrading_from_version_ != -1) {
     if (upgrading_from_version_ < 4) {
       header_->SetColumnWidth(Playlist::Column_Source, 0.05);
@@ -916,6 +1000,50 @@ void PlaylistView::ReloadSettings() {
   }
 
   emit ColumnAlignmentChanged(column_alignment_);
+
+  // Background:
+  QVariant q_playlistview_background_type = s.value(kSettingBackgroundImageType);
+  BackgroundImageType background_type(Default);
+  // bg_enabled should also be checked for backward compatibility (in releases
+  // <= 1.0, there was just a boolean to activate/deactivate the background)
+  QVariant bg_enabled = s.value("bg_enabled");
+  if (q_playlistview_background_type.isValid()) {
+    background_type = static_cast<BackgroundImageType>(q_playlistview_background_type.toInt());
+  } else if (bg_enabled.isValid()) {
+    if (bg_enabled.toBool()) {
+      background_type = Default;
+    } else {
+      background_type = None;
+    }
+  }
+  QString background_image_filename = s.value(kSettingBackgroundImageFilename).toString();
+  // Check if background properties have changed.
+  // We change properties only if they have actually changed, to avoid to call
+  // set_background_image when it is not needed, as this will cause the fading
+  // animation to start again. This also avoid to do useless
+  // "force_background_redraw".
+  if (background_image_filename != background_image_filename_
+      || background_type != background_image_type_) {
+    // Store background properties
+    background_image_type_ = background_type;
+    background_image_filename_ = background_image_filename;
+    if (background_image_type_ == Custom) {
+      set_background_image(QImage(background_image_filename));
+    } else if (background_image_type_ == AlbumCover) {
+      set_background_image(current_song_cover_art_);
+    } else {
+      // User changed background image type to something that will not be
+      // painted through paintEvent: reset all background images.
+      // This avoid to use old (deprecated) images for fading when selecting
+      // AlbumCover or Custom background image type later.
+      set_background_image(QImage());
+      cached_scaled_background_image_ = QPixmap();
+      previous_background_image_ = QPixmap();
+    }
+    setProperty("default_background_enabled", background_image_type_ == Default);
+    emit BackgroundPropertyChanged();
+    force_background_redraw_ = true;
+  }
 }
 
 void PlaylistView::SaveSettings() {
@@ -926,7 +1054,7 @@ void PlaylistView::SaveSettings() {
   s.beginGroup(Playlist::kSettingsGroup);
   s.setValue("glow_effect", glow_enabled_);
   s.setValue("column_alignments", QVariant::fromValue(column_alignment_));
-  s.setValue("bg_enabled", background_enabled_);
+  s.setValue(kSettingBackgroundImageType, background_image_type_);
 }
 
 void PlaylistView::StretchChanged(bool stretch) {
@@ -1033,4 +1161,57 @@ void PlaylistView::CopyCurrentSongToClipboard() const {
   mime_data->setText(columns.join(" - "));
 
   QApplication::clipboard()->setMimeData(mime_data);
+}
+
+void PlaylistView::CurrentSongChanged(const Song& song,
+                                      const QString& uri,
+                                      const QImage& song_art) {
+  if (current_song_cover_art_ == song_art)
+    return;
+
+  current_song_cover_art_ = song_art;
+  if (background_image_type_ == AlbumCover) {
+    if (song.art_automatic().isEmpty() && song.art_manual().isEmpty()) {
+      set_background_image(QImage());
+    } else {
+      set_background_image(current_song_cover_art_);
+    }
+    force_background_redraw_ = true;
+    update();
+  }
+}
+
+void PlaylistView::set_background_image(const QImage& image) {
+  // Save previous image, for fading
+  previous_background_image_ = cached_scaled_background_image_;
+
+  if (image.format() != QImage::Format_ARGB32)
+    background_image_ = image.convertToFormat(QImage::Format_ARGB32);
+  else
+    background_image_ = image;
+
+  // Apply opacity filter
+  uchar* bits = background_image_.bits();
+  for (int i = 0; i < background_image_.height() * background_image_.bytesPerLine(); i+=4) {
+    bits[i+3] = kBackgroundOpacity * 255;
+  }
+
+  if (isVisible()) {
+    previous_background_image_opacity_ = 1.0;
+    fade_animation_->start();
+  }
+}
+
+void PlaylistView::FadePreviousBackgroundImage(qreal value) {
+  previous_background_image_opacity_ = value;
+  if (qFuzzyCompare(previous_background_image_opacity_, qreal(0.0))) {
+    previous_background_image_ = QPixmap();
+    previous_background_image_opacity_ = 0.0;
+  }
+
+  update();
+}
+
+void PlaylistView::PlayerStopped() {
+  CurrentSongChanged(Song(), QString(), QImage());
 }

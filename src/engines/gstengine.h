@@ -189,6 +189,8 @@ class GstEngine : public Engine::Base, public BufferConsumer {
 
   qint64 buffer_duration_nanosec_;
 
+  bool mono_playback_;
+
   mutable bool can_decode_success_;
   mutable bool can_decode_last_;
 

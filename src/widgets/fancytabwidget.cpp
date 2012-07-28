@@ -570,6 +570,10 @@ void FancyTabWidget::SetCurrentIndex(int index) {
   }
 }
 
+void FancyTabWidget::SetCurrentWidget(QWidget* widget) {
+  SetCurrentIndex(stack_->indexOf(widget));
+}
+
 void FancyTabWidget::ShowWidget(int index) {
   stack_->setCurrentIndex(index);
   emit CurrentChanged(index);

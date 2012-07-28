@@ -30,7 +30,7 @@ DeviceDatabaseBackend::DeviceDatabaseBackend(QObject *parent)
 {
 }
 
-void DeviceDatabaseBackend::Init(boost::shared_ptr<Database> db) {
+void DeviceDatabaseBackend::Init(Database* db) {
   db_ = db;
 }
 

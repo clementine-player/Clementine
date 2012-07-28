@@ -21,6 +21,7 @@
 #include "librarydirectorymodel.h"
 #include "libraryview.h"
 #include "sqlrow.h"
+#include "core/application.h"
 #include "core/database.h"
 #include "core/logging.h"
 #include "core/taskmanager.h"
@@ -34,6 +35,7 @@
 #include <QFuture>
 #include <QFutureWatcher>
 #include <QMetaEnum>
+#include <QPixmapCache>
 #include <QSettings>
 #include <QStringList>
 #include <QUrl>
@@ -58,24 +60,22 @@ static bool IsArtistGroupBy(const LibraryModel::GroupBy by) {
   return by == LibraryModel::GroupBy_Artist || by == LibraryModel::GroupBy_AlbumArtist;
 }
 
-LibraryModel::LibraryModel(LibraryBackend* backend, TaskManager* task_manager,
+LibraryModel::LibraryModel(LibraryBackend* backend, Application* app,
                            QObject* parent)
   : SimpleTreeModel<LibraryItem>(new LibraryItem(this), parent),
     backend_(backend),
-    task_manager_(task_manager),
+    app_(app),
     dir_model_(new LibraryDirectoryModel(backend, this)),
     show_smart_playlists_(false),
     show_various_artists_(true),
     total_song_count_(0),
     artist_icon_(":/icons/22x22/x-clementine-artist.png"),
     album_icon_(":/icons/22x22/x-clementine-album.png"),
-    no_cover_icon_(":nocover.png"),
     playlists_dir_icon_(IconLoader::Load("folder-sound")),
     playlist_icon_(":/icons/22x22/x-clementine-albums.png"),
     init_task_id_(-1),
     use_pretty_covers_(false),
-    show_dividers_(true),
-    cover_loader_(new BackgroundThreadImplementation<AlbumCoverLoader, AlbumCoverLoader>(this))
+    show_dividers_(true)
 {
   root_->lazy_loaded = true;
 
@@ -83,18 +83,25 @@ LibraryModel::LibraryModel(LibraryBackend* backend, TaskManager* task_manager,
   group_by_[1] = GroupBy_Album;
   group_by_[2] = GroupBy_None;
 
-  cover_loader_->Start(true);
-  cover_loader_->Worker()->SetDesiredHeight(kPrettyCoverSize);
-  cover_loader_->Worker()->SetPadOutputImage(true);
-  cover_loader_->Worker()->SetScaleOutputImage(true);
+  cover_loader_options_.desired_height_ = kPrettyCoverSize;
+  cover_loader_options_.pad_output_image_ = true;
+  cover_loader_options_.scale_output_image_ = true;
 
-  connect(cover_loader_->Worker().get(),
+  connect(app_->album_cover_loader(),
           SIGNAL(ImageLoaded(quint64,QImage)),
           SLOT(AlbumArtLoaded(quint64,QImage)));
 
-  no_cover_icon_pretty_ = QImage(":nocover.png").scaled(
+  no_cover_icon_ = QPixmap(":nocover.png").scaled(
         kPrettyCoverSize, kPrettyCoverSize,
         Qt::KeepAspectRatio, Qt::SmoothTransformation);
+
+  connect(backend_, SIGNAL(SongsDiscovered(SongList)), SLOT(SongsDiscovered(SongList)));
+  connect(backend_, SIGNAL(SongsDeleted(SongList)), SLOT(SongsDeleted(SongList)));
+  connect(backend_, SIGNAL(SongsStatisticsChanged(SongList)), SLOT(SongsStatisticsChanged(SongList)));
+  connect(backend_, SIGNAL(DatabaseReset()), SLOT(Reset()));
+  connect(backend_, SIGNAL(TotalSongCountUpdated(int)), SLOT(TotalSongCountUpdatedSlot(int)));
+
+  backend_->UpdateTotalSongCountAsync();
 }
 
 LibraryModel::~LibraryModel() {
@@ -116,14 +123,6 @@ void LibraryModel::set_show_dividers(bool show_dividers) {
 }
 
 void LibraryModel::Init(bool async) {
-  connect(backend_, SIGNAL(SongsDiscovered(SongList)), SLOT(SongsDiscovered(SongList)));
-  connect(backend_, SIGNAL(SongsDeleted(SongList)), SLOT(SongsDeleted(SongList)));
-  connect(backend_, SIGNAL(SongsStatisticsChanged(SongList)), SLOT(SongsStatisticsChanged(SongList)));
-  connect(backend_, SIGNAL(DatabaseReset()), SLOT(Reset()));
-  connect(backend_, SIGNAL(TotalSongCountUpdated(int)), SLOT(TotalSongCountUpdatedSlot(int)));
-
-  backend_->UpdateTotalSongCountAsync();
-
   if (async) {
     // Show a loading indicator in the model.
     LibraryItem* loading = new LibraryItem(LibraryItem::Type_LoadingIndicator, root_);
@@ -132,7 +131,7 @@ void LibraryModel::Init(bool async) {
     reset();
 
     // Show a loading indicator in the status bar too.
-    init_task_id_ = task_manager_->StartTask(tr("Loading songs"));
+    init_task_id_ = app_->task_manager()->StartTask(tr("Loading songs"));
 
     ResetAsync();
   } else {
@@ -391,34 +390,62 @@ void LibraryModel::SongsDeleted(const SongList& songs) {
   }
 }
 
-QVariant LibraryModel::AlbumIcon(const QModelIndex& index) {
-  // Cache the art in the item's metadata field
-  LibraryItem* item = IndexToItem(index);
-  if (!item)
-    return no_cover_icon_pretty_;
-  if (!item->metadata.image().isNull())
-    return item->metadata.image();
-
-  // No art is cached - load art for the first Song in the album.
-  SongList songs = GetChildSongs(index);
-  if (!songs.isEmpty()) {
-    const quint64 id = cover_loader_->Worker()->LoadImageAsync(songs.first());
-    pending_art_[id] = item;
+QString LibraryModel::AlbumIconPixmapCacheKey(const QModelIndex& index) const {
+  QStringList path;
+  QModelIndex index_copy(index);
+  while (index_copy.isValid()) {
+    path.prepend(index_copy.data().toString());
+    index_copy = index_copy.parent();
   }
 
-  return no_cover_icon_pretty_;
+  return "libraryart:" + path.join("/");
+}
+
+QVariant LibraryModel::AlbumIcon(const QModelIndex& index) {
+  LibraryItem* item = IndexToItem(index);
+  if (!item)
+    return no_cover_icon_;
+
+  // Check the cache for a pixmap we already loaded.
+  const QString cache_key = AlbumIconPixmapCacheKey(index);
+  QPixmap cached_pixmap;
+  if (QPixmapCache::find(cache_key, &cached_pixmap)) {
+    return cached_pixmap;
+  }
+
+  // Maybe we're loading a pixmap already?
+  if (pending_cache_keys_.contains(cache_key)) {
+    return no_cover_icon_;
+  }
+
+  // No art is cached and we're not loading it already.  Load art for the first
+  // Song in the album.
+  SongList songs = GetChildSongs(index);
+  if (!songs.isEmpty()) {
+    const quint64 id = app_->album_cover_loader()->LoadImageAsync(
+          cover_loader_options_, songs.first());
+    pending_art_[id] = ItemAndCacheKey(item, cache_key);
+    pending_cache_keys_.insert(cache_key);
+  }
+
+  return no_cover_icon_;
 }
 
 void LibraryModel::AlbumArtLoaded(quint64 id, const QImage& image) {
-  LibraryItem* item = pending_art_.take(id);
+  ItemAndCacheKey item_and_cache_key = pending_art_.take(id);
+  LibraryItem* item = item_and_cache_key.first;
+  const QString& cache_key = item_and_cache_key.second;
   if (!item)
     return;
 
+  pending_cache_keys_.remove(cache_key);
+
+  // Insert this image in the cache.
   if (image.isNull()) {
     // Set the no_cover image so we don't continually try to load art.
-    item->metadata.set_image(no_cover_icon_pretty_);
+    QPixmapCache::insert(cache_key, no_cover_icon_);
   } else {
-    item->metadata.set_image(image);
+    QPixmapCache::insert(cache_key, QPixmap::fromImage(image));
   }
 
   const QModelIndex index = ItemToIndex(item);
@@ -640,7 +667,7 @@ void LibraryModel::ResetAsyncQueryFinished() {
   }
 
   if (init_task_id_ != -1) {
-    task_manager_->SetTaskFinished(init_task_id_);
+    app_->task_manager()->SetTaskFinished(init_task_id_);
     init_task_id_ = -1;
   }
 
@@ -921,20 +948,20 @@ void LibraryModel::FinishItem(GroupBy type,
   }
 }
 
-QString LibraryModel::TextOrUnknown(const QString& text) const {
+QString LibraryModel::TextOrUnknown(const QString& text) {
   if (text.isEmpty()) {
     return tr("Unknown");
   }
   return text;
 }
 
-QString LibraryModel::PrettyYearAlbum(int year, const QString& album) const {
+QString LibraryModel::PrettyYearAlbum(int year, const QString& album) {
   if (year <= 0)
     return TextOrUnknown(album);
   return QString::number(year) + " - " + TextOrUnknown(album);
 }
 
-QString LibraryModel::SortText(QString text) const {
+QString LibraryModel::SortText(QString text) {
   if (text.isEmpty()) {
     text = " unknown";
   } else {
@@ -945,7 +972,7 @@ QString LibraryModel::SortText(QString text) const {
   return text;
 }
 
-QString LibraryModel::SortTextForArtist(QString artist) const {
+QString LibraryModel::SortTextForArtist(QString artist) {
   artist = SortText(artist);
 
   if (artist.startsWith("the ")) {
@@ -955,12 +982,12 @@ QString LibraryModel::SortTextForArtist(QString artist) const {
   return artist;
 }
 
-QString LibraryModel::SortTextForYear(int year) const {
+QString LibraryModel::SortTextForYear(int year) {
   QString str = QString::number(year);
   return QString("0").repeated(qMax(0, 4 - str.length())) + str;
 }
 
-QString LibraryModel::SortTextForSong(const Song& song) const {
+QString LibraryModel::SortTextForSong(const Song& song) {
   QString ret = QString::number(qMax(0, song.disc()) * 1000 + qMax(0, song.track()));
   ret.prepend(QString("0").repeated(6 - ret.length()));
   ret.append(song.url().toString());

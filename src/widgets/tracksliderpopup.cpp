@@ -155,7 +155,7 @@ void TrackSliderPopup::UpdatePixmap() {
   p.drawPixmap(total_rect.topLeft(), background_cache_);
 
   // Text
-  p.setPen(palette().color(QPalette::Text));
+  p.setPen(palette().color(QPalette::HighlightedText));
   p.setFont(font_);
   p.drawText(text_rect1, Qt::AlignHCenter, text_);
 

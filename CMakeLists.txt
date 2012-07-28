@@ -8,6 +8,7 @@ include(cmake/Deb.cmake)
 include(cmake/Rpm.cmake)
 include(cmake/SpotifyVersion.cmake)
 include(cmake/OptionalSource.cmake)
+set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
 
 if (UNIX AND NOT APPLE)
   set(LINUX 1)
@@ -48,6 +49,7 @@ find_package(Boost REQUIRED)
 find_package(Gettext REQUIRED)
 find_package(PkgConfig REQUIRED)
 find_package(Protobuf REQUIRED)
+find_package(FFTW3)
 
 pkg_check_modules(TAGLIB REQUIRED taglib>=1.6)
 pkg_check_modules(QJSON REQUIRED QJson)
@@ -66,7 +68,7 @@ pkg_check_modules(PLIST libplist)
 pkg_check_modules(USBMUXD libusbmuxd)
 pkg_check_modules(LIBMTP libmtp>=1.0)
 pkg_check_modules(INDICATEQT indicate-qt)
-pkg_check_modules(SPOTIFY libspotify>=10.1.16)
+pkg_check_modules(SPOTIFY libspotify>=12.1.45)
 pkg_check_modules(CDIO libcdio)
 pkg_check_modules(QCA qca2)
 pkg_check_modules(CHROMAPRINT libchromaprint)
@@ -80,6 +82,11 @@ endif (WIN32)
 
 find_library(LASTFM_LIBRARIES lastfm)
 find_path(LASTFM_INCLUDE_DIRS lastfm/ws.h)
+find_path(LASTFM1_INCLUDE_DIRS lastfm/Track.h)
+
+if(LASTFM_INCLUDE_DIRS AND LASTFM1_INCLUDE_DIRS)
+  set(HAVE_LIBLASTFM1 ON)
+endif()
 
 if (APPLE)
   find_library(GROWL Growl)
@@ -189,11 +196,10 @@ option(ENABLE_VISUALISATIONS "Use libprojectm visualisations" ON)
 option(BUNDLE_PROJECTM_PRESETS "Install Clementine's own copies of libprojectm presets - disable this if you want to use a system package instead" ON)
 option(ENABLE_SOUNDMENU "Add Clementine to the Gnome sound menu" ON)
 option(ENABLE_LIBLASTFM "Use liblastfm for fetching song info, scrobbling and radio streams" ON)
-option(ENABLE_REMOTE "Enable support for using remote controls with Clementine" OFF)
 option(ENABLE_BREAKPAD "Enable crash reporting" OFF)
 option(ENABLE_SPOTIFY_BLOB "Build the spotify non-GPL binary" ON)
 option(ENABLE_SPOTIFY "Enable spotify support" ON)
-option(ENABLE_PLASMARUNNER "Enable plasma krunner global search" OFF)
+option(ENABLE_MOODBAR "Enable moodbar" ON)
 
 if(WIN32)
   option(ENABLE_WIN32_CONSOLE "Show the windows console even outside Debug mode" OFF)
@@ -256,6 +262,10 @@ if(QCA_FOUND AND HAVE_SPOTIFY)
   set(HAVE_QCA ON)
 endif(QCA_FOUND AND HAVE_SPOTIFY)
 
+if(ENABLE_MOODBAR AND FFTW3_FOUND)
+  set(HAVE_MOODBAR ON)
+endif()
+
 
 if(ENABLE_VISUALISATIONS)
   # When/if upstream accepts our patches then these options can be used to link
@@ -273,21 +283,6 @@ endif(ENABLE_VISUALISATIONS)
 # We compile our own qsqlite3 by default now, because in Qt 4.7 the symbols we
 # need from it are private.
 option(STATIC_SQLITE "Compile and use a static sqlite3 library" ON)
-
-pkg_check_modules(GNUTLS gnutls)
-if(GNUTLS_LIBRARIES)
-  set(HAVE_GNUTLS 1)
-endif(GNUTLS_LIBRARIES)
-
-if(ENABLE_REMOTE AND HAVE_GNUTLS)
-  set(HAVE_REMOTE ON)
-  add_subdirectory(3rdparty/gloox)
-  add_subdirectory(3rdparty/libxrme)
-  add_subdirectory(3rdparty/libportfwd)
-  include_directories(3rdparty)
-  include_directories(3rdparty/libxrme)
-  include_directories(3rdparty/libportfwd/include)
-endif(ENABLE_REMOTE AND HAVE_GNUTLS)
 
 set(HAVE_STATIC_SQLITE ${STATIC_SQLITE})
 if(STATIC_SQLITE)
@@ -379,6 +374,14 @@ if(NOT CHROMAPRINT_FOUND)
   endif(WIN32)
 endif(NOT CHROMAPRINT_FOUND)
 
+# We have to use our own libmygpo-qt for now
+add_subdirectory(3rdparty/libmygpo-qt)
+set(MYGPOQT_LIBRARIES mygpo-qt)
+set(MYGPOQT_INCLUDE_DIRS ${CMAKE_SOURCE_DIR}/3rdparty/libmygpo-qt/)
+
+# Qocoa
+add_subdirectory(3rdparty/qocoa)
+
 # Subdirectories
 add_subdirectory(src)
 if (WIN32)
@@ -413,16 +416,9 @@ if(HAVE_SPOTIFY_BLOB)
   add_subdirectory(ext/clementine-spotifyblob)
 endif(HAVE_SPOTIFY_BLOB)
 
-# This goes after everything else because KDE fucks everything else up with its
-# cmake includes.
-find_package(KDE4 4.3.60)
-if(KDE4_PLASMA_LIBS AND ENABLE_PLASMARUNNER)
-  set(HAVE_PLASMARUNNER ON)
-endif(KDE4_PLASMA_LIBS AND ENABLE_PLASMARUNNER)
-
-if(HAVE_PLASMARUNNER)
-  add_subdirectory(plasmarunner)
-endif(HAVE_PLASMARUNNER)
+if(HAVE_MOODBAR)
+  add_subdirectory(gst/moodbar)
+endif()
 
 # Uninstall support
 configure_file(
@@ -444,11 +440,10 @@ summary_add("Devices: MTP support" HAVE_LIBMTP)
 summary_add("Devices: GIO backend" HAVE_GIO)
 summary_add("Gnome sound menu integration" HAVE_LIBINDICATE)
 summary_add("Last.fm support" HAVE_LIBLASTFM)
+summary_add("Moodbar support" HAVE_MOODBAR)
 summary_add("Spotify support: core code" HAVE_SPOTIFY)
 summary_add("Spotify support: non-GPL binary helper" HAVE_SPOTIFY_BLOB)
 summary_add("Visualisations" ENABLE_VISUALISATIONS)
 summary_add("Wiimote support" HAVE_WIIMOTEDEV)
-summary_add("(KDE) Plasma global search" HAVE_PLASMARUNNER)
 summary_add("(Mac OS X) Sparkle integration" HAVE_SPARKLE)
-summary_add("(unstable) Remote control support" HAVE_REMOTE)
 summary_show()

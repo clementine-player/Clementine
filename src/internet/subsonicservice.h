@@ -17,7 +17,7 @@ class SubsonicService : public InternetService
   Q_ENUMS(ApiError)
 
  public:
-  SubsonicService(InternetModel *parent);
+  SubsonicService(Application* app, InternetModel *parent);
   ~SubsonicService();
 
   enum LoginState {

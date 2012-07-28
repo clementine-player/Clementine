@@ -19,8 +19,9 @@
 
 namespace smart_playlists {
 
-WizardPlugin::WizardPlugin(LibraryBackend* library, QObject* parent)
+WizardPlugin::WizardPlugin(Application* app, LibraryBackend* library, QObject* parent)
   : QObject(parent),
+    app_(app),
     library_(library),
     start_page_(-1)
 {

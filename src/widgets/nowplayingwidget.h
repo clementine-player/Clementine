@@ -18,18 +18,17 @@
 #ifndef NOWPLAYINGWIDGET_H
 #define NOWPLAYINGWIDGET_H
 
-#include "core/backgroundthread.h"
 #include "core/song.h"
+#include "covers/albumcoverloaderoptions.h"
 
 #include <QWidget>
 
 #include <boost/scoped_ptr.hpp>
 
 class AlbumCoverChoiceController;
-class AlbumCoverLoader;
-class CoverProviders;
+class Application;
 class FullscreenHypnotoad;
-class LibraryBackend;
+class KittenLoader;
 
 class QAction;
 class QActionGroup;
@@ -60,8 +59,7 @@ public:
     LargeSongDetails = 1,
   };
 
-  void SetLibraryBackend(LibraryBackend* backend);
-  void SetCoverProviders(CoverProviders* cover_providers);
+  void SetApplication(Application* app);
 
   void set_ideal_height(int height);
   bool show_above_status_bar() const;
@@ -72,7 +70,6 @@ signals:
   void ShowAboveStatusBarChanged(bool above);
 
 public slots:
-  void NowPlaying(const Song& metadata);
   void Stopped();
   void AllHail(bool hypnotoad);
   void EnableKittens(bool aww);
@@ -88,8 +85,8 @@ private slots:
   void SetMode(int mode);
   void ShowAboveStatusBar(bool above);
 
-  void CoverLoaderInitialised();
-  void AlbumArtLoaded(quint64 id, const QImage& scaled, const QImage& original);
+  void AlbumArtLoaded(const Song& metadata, const QString& uri, const QImage& image);
+  void KittenLoaded(quint64 id, const QImage& image);
 
   void SetVisible(bool visible);
   void SetHeight(int height);
@@ -109,15 +106,14 @@ private:
   void CreateModeAction(Mode mode, const QString& text, QActionGroup* group,
                         QSignalMapper* mapper);
   void UpdateDetailsText();
-  void UpdateHeight(AlbumCoverLoader* loader);
+  void UpdateHeight();
   void DrawContents(QPainter* p);
+  void SetImage(const QImage& image);
+  void ScaleCover();
 
 private:
-  CoverProviders* cover_providers_;
+  Application* app_;
   AlbumCoverChoiceController* album_cover_choice_controller_;
-
-  BackgroundThread<AlbumCoverLoader>* cover_loader_;
-  BackgroundThread<AlbumCoverLoader>* kitten_loader_;
 
   Mode mode_;
 
@@ -127,14 +123,13 @@ private:
 
   bool visible_;
   int small_ideal_height_;
-  int cover_height_;
+  AlbumCoverLoaderOptions cover_loader_options_;
   int total_height_;
   QTimeLine* show_hide_animation_;
   QTimeLine* fade_animation_;
 
   // Information about the current track
   Song metadata_;
-  quint64 load_cover_id_;
   QPixmap cover_;
   // A copy of the original, unscaled album cover.
   QImage original_;
@@ -150,6 +145,8 @@ private:
   boost::scoped_ptr<FullscreenHypnotoad> big_hypnotoad_;
 
   bool aww_;
+  KittenLoader* kittens_;
+  quint64 pending_kitten_;
 };
 
 #endif // NOWPLAYINGWIDGET_H

@@ -18,47 +18,49 @@
 #include "devicelister.h"
 #include "devicemanager.h"
 #include "filesystemdevice.h"
+#include "core/application.h"
 #include "library/librarybackend.h"
 #include "library/librarymodel.h"
 #include "library/librarywatcher.h"
 
+#include <QThread>
 #include <QtDebug>
 
 FilesystemDevice::FilesystemDevice(
     const QUrl& url, DeviceLister* lister,
     const QString& unique_id, DeviceManager* manager,
+    Application* app,
     int database_id, bool first_time)
       : FilesystemMusicStorage(url.toLocalFile()),
-        ConnectedDevice(url, lister, unique_id, manager, database_id, first_time),
-        watcher_(new BackgroundThreadImplementation<LibraryWatcher, LibraryWatcher>(this))
+        ConnectedDevice(url, lister, unique_id, manager, app, database_id, first_time),
+        watcher_(new LibraryWatcher),
+        watcher_thread_(new QThread(this))
 {
-  // Create the library watcher
-  watcher_->Start(true);
-  watcher_->Worker()->set_device_name(manager->data(manager->index(
-      manager->FindDeviceById(unique_id)), DeviceManager::Role_FriendlyName).toString());
-  watcher_->Worker()->set_backend(backend_);
-  watcher_->Worker()->set_task_manager(manager_->task_manager());
+  watcher_->moveToThread(watcher_thread_);
+  watcher_thread_->start(QThread::IdlePriority);
 
-  // To make the connections below less verbose
-  LibraryWatcher* watcher = watcher_->Worker().get();
+  watcher_->set_device_name(manager->data(manager->index(
+      manager->FindDeviceById(unique_id)), DeviceManager::Role_FriendlyName).toString());
+  watcher_->set_backend(backend_);
+  watcher_->set_task_manager(app_->task_manager());
 
   connect(backend_, SIGNAL(DirectoryDiscovered(Directory,SubdirectoryList)),
-          watcher,  SLOT(AddDirectory(Directory,SubdirectoryList)));
+          watcher_, SLOT(AddDirectory(Directory,SubdirectoryList)));
   connect(backend_, SIGNAL(DirectoryDeleted(Directory)),
-          watcher,  SLOT(RemoveDirectory(Directory)));
-  connect(watcher,  SIGNAL(NewOrUpdatedSongs(SongList)),
+          watcher_, SLOT(RemoveDirectory(Directory)));
+  connect(watcher_, SIGNAL(NewOrUpdatedSongs(SongList)),
           backend_, SLOT(AddOrUpdateSongs(SongList)));
-  connect(watcher,  SIGNAL(SongsMTimeUpdated(SongList)),
+  connect(watcher_, SIGNAL(SongsMTimeUpdated(SongList)),
           backend_, SLOT(UpdateMTimesOnly(SongList)));
-  connect(watcher,  SIGNAL(SongsDeleted(SongList)),
+  connect(watcher_, SIGNAL(SongsDeleted(SongList)),
           backend_, SLOT(DeleteSongs(SongList)));
-  connect(watcher,  SIGNAL(SubdirsDiscovered(SubdirectoryList)),
+  connect(watcher_, SIGNAL(SubdirsDiscovered(SubdirectoryList)),
           backend_, SLOT(AddOrUpdateSubdirs(SubdirectoryList)));
-  connect(watcher,  SIGNAL(SubdirsMTimeUpdated(SubdirectoryList)),
+  connect(watcher_, SIGNAL(SubdirsMTimeUpdated(SubdirectoryList)),
           backend_, SLOT(AddOrUpdateSubdirs(SubdirectoryList)));
-  connect(watcher,  SIGNAL(CompilationsNeedUpdating()),
+  connect(watcher_, SIGNAL(CompilationsNeedUpdating()),
           backend_, SLOT(UpdateCompilations()));
-  connect(watcher, SIGNAL(ScanStarted(int)), SIGNAL(TaskStarted(int)));
+  connect(watcher_, SIGNAL(ScanStarted(int)), SIGNAL(TaskStarted(int)));
 }
 
 void FilesystemDevice::Init() {
@@ -67,4 +69,7 @@ void FilesystemDevice::Init() {
 }
 
 FilesystemDevice::~FilesystemDevice() {
+  watcher_->deleteLater();
+  watcher_thread_->exit();
+  watcher_thread_->wait();
 }

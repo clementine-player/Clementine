@@ -20,6 +20,8 @@
 #include "icecastmodel.h"
 #include "icecastservice.h"
 #include "internetmodel.h"
+#include "core/application.h"
+#include "core/database.h"
 #include "core/mergedproxymodel.h"
 #include "core/network.h"
 #include "core/taskmanager.h"
@@ -45,8 +47,8 @@ const char* IcecastService::kServiceName = "Icecast";
 const char* IcecastService::kDirectoryUrl = "http://data.clementine-player.org/icecast-directory";
 const char* IcecastService::kHomepage = "http://dir.xiph.org/";
 
-IcecastService::IcecastService(InternetModel* parent)
-    : InternetService(kServiceName, parent, parent),
+IcecastService::IcecastService(Application* app, InternetModel* parent)
+    : InternetService(kServiceName, app, parent, parent),
       network_(new NetworkAccessManager(this)),
       context_menu_(NULL),
       backend_(NULL),
@@ -55,13 +57,13 @@ IcecastService::IcecastService(InternetModel* parent)
       load_directory_task_id_(0)
 {
   backend_ = new IcecastBackend;
-  backend_->moveToThread(parent->db_thread());
-  backend_->Init(parent->db_thread()->Worker());
+  backend_->moveToThread(app_->database()->thread());
+  backend_->Init(app_->database());
 
   model_ = new IcecastModel(backend_, this);
   filter_->SetIcecastModel(model_);
 
-  model()->global_search()->AddProvider(new IcecastSearchProvider(backend_, this));
+  app_->global_search()->AddProvider(new IcecastSearchProvider(backend_, app_, this));
 }
 
 IcecastService::~IcecastService() {
@@ -93,7 +95,7 @@ void IcecastService::LoadDirectory() {
   RequestDirectory(QUrl(kDirectoryUrl));
 
   if (!load_directory_task_id_) {
-    load_directory_task_id_ = model()->task_manager()->StartTask(
+    load_directory_task_id_ = app_->task_manager()->StartTask(
         tr("Downloading Icecast directory"));
   }
 }
@@ -219,7 +221,7 @@ void IcecastService::ParseDirectoryFinished() {
   backend_->ClearAndAddStations(all_stations);
   delete watcher;
 
-  model()->task_manager()->SetTaskFinished(load_directory_task_id_);
+  app_->task_manager()->SetTaskFinished(load_directory_task_id_);
   load_directory_task_id_ = 0;
 }
 
@@ -271,17 +273,12 @@ QWidget* IcecastService::HeaderWidget() const {
   return filter_;
 }
 
-void IcecastService::ShowContextMenu(const QModelIndex& index,
-                                     const QPoint& global_pos) {
+void IcecastService::ShowContextMenu(const QPoint& global_pos) {
   EnsureMenuCreated();
 
-  if (index.model() == model_)
-    context_item_ = index;
-  else
-    context_item_ = QModelIndex();
-
-  const bool can_play = context_item_.isValid() &&
-                        model_->GetSong(context_item_).is_valid();
+  const bool can_play = model()->current_index().isValid() &&
+                        model()->current_index().model() == model_ &&
+                        model_->GetSong(model()->current_index()).is_valid();
 
   GetAppendToPlaylistAction()->setEnabled(can_play);
   GetReplacePlaylistAction()->setEnabled(can_play);
@@ -305,8 +302,4 @@ void IcecastService::EnsureMenuCreated() {
 
 void IcecastService::Homepage() {
   QDesktopServices::openUrl(QUrl(kHomepage));
-}
-
-QModelIndex IcecastService::GetCurrentIndex() {
-  return context_item_;
 }

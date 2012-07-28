@@ -34,7 +34,7 @@ class MagnatuneService : public InternetService {
   Q_OBJECT
 
  public:
-  MagnatuneService(InternetModel* parent);
+  MagnatuneService(Application* app, InternetModel* parent);
   ~MagnatuneService();
 
   // Values are saved in QSettings and are indices into the combo box in
@@ -71,7 +71,7 @@ class MagnatuneService : public InternetService {
   QStandardItem* CreateRootItem();
   void LazyPopulate(QStandardItem* item);
 
-  void ShowContextMenu(const QModelIndex& index, const QPoint& global_pos);
+  void ShowContextMenu(const QPoint& global_pos);
 
   QWidget* HeaderWidget() const;
 
@@ -88,9 +88,6 @@ class MagnatuneService : public InternetService {
 
  signals:
   void DownloadFinished(const QStringList& albums);
-
- protected:
-  QModelIndex GetCurrentIndex();
 
  private slots:
   void UpdateTotalSongCount(int count);
@@ -110,7 +107,6 @@ class MagnatuneService : public InternetService {
   MagnatuneUrlHandler* url_handler_;
 
   QMenu* context_menu_;
-  QModelIndex context_item_;
   QStandardItem* root_;
 
   QAction* download_;

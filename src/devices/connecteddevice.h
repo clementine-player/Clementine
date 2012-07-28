@@ -27,6 +27,7 @@
 
 #include <boost/enable_shared_from_this.hpp>
 
+class Application;
 class Database;
 class DeviceLister;
 class DeviceManager;
@@ -40,6 +41,7 @@ class ConnectedDevice : public QObject, public virtual MusicStorage,
 public:
   ConnectedDevice(const QUrl& url, DeviceLister* lister,
                   const QString& unique_id, DeviceManager* manager,
+                  Application* app,
                   int database_id, bool first_time);
   ~ConnectedDevice();
 
@@ -64,13 +66,14 @@ public:
 
 signals:
   void TaskStarted(int id);
-  void Error(const QString& message);
   void SongCountUpdated(int count);
 
 protected:
   void InitBackendDirectory(const QString& mount_point, bool first_time, bool rewrite_path = true);
 
 protected:
+  Application* app_;
+
   QUrl url_;
   bool first_time_;
   DeviceLister* lister_;

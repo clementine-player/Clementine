@@ -20,6 +20,8 @@
 #include "magnatuneservice.h"
 #include "magnatuneurlhandler.h"
 #include "internetmodel.h"
+#include "core/application.h"
+#include "core/database.h"
 #include "core/logging.h"
 #include "core/mergedproxymodel.h"
 #include "core/network.h"
@@ -64,8 +66,8 @@ const char* MagnatuneService::kDownloadHostname = "download.magnatune.com";
 const char* MagnatuneService::kPartnerId = "clementine";
 const char* MagnatuneService::kDownloadUrl = "http://download.magnatune.com/buy/membership_free_dl_xml";
 
-MagnatuneService::MagnatuneService(InternetModel* parent)
-  : InternetService(kServiceName, parent, parent),
+MagnatuneService::MagnatuneService(Application* app, InternetModel* parent)
+  : InternetService(kServiceName, app, parent, parent),
     url_handler_(new MagnatuneUrlHandler(this, this)),
     context_menu_(NULL),
     root_(NULL),
@@ -81,10 +83,10 @@ MagnatuneService::MagnatuneService(InternetModel* parent)
 {
   // Create the library backend in the database thread
   library_backend_ = new LibraryBackend;
-  library_backend_->moveToThread(parent->db_thread());
-  library_backend_->Init(parent->db_thread()->Worker(), kSongsTable,
+  library_backend_->moveToThread(app_->database()->thread());
+  library_backend_->Init(app_->database(), kSongsTable,
                          QString::null, QString::null, kFtsTable);
-  library_model_ = new LibraryModel(library_backend_, parent->task_manager(), this);
+  library_model_ = new LibraryModel(library_backend_, app_, this);
 
   connect(library_backend_, SIGNAL(TotalSongCountUpdated(int)),
           SLOT(UpdateTotalSongCount(int)));
@@ -94,14 +96,13 @@ MagnatuneService::MagnatuneService(InternetModel* parent)
   library_sort_model_->setDynamicSortFilter(true);
   library_sort_model_->sort(0);
 
-  model()->player()->RegisterUrlHandler(url_handler_);
-  model()->global_search()->AddProvider(new LibrarySearchProvider(
+  app_->player()->RegisterUrlHandler(url_handler_);
+  app_->global_search()->AddProvider(new LibrarySearchProvider(
       library_backend_,
       tr("Magnatune"),
       "magnatune",
       QIcon(":/providers/magnatune.png"),
-      true,
-      this));
+      true, app_, this));
 }
 
 MagnatuneService::~MagnatuneService() {
@@ -152,14 +153,14 @@ void MagnatuneService::ReloadDatabase() {
   connect(reply, SIGNAL(finished()), SLOT(ReloadDatabaseFinished()));
   
   if (!load_database_task_id_)
-    load_database_task_id_ = model()->task_manager()->StartTask(
+    load_database_task_id_ = app_->task_manager()->StartTask(
         tr("Downloading Magnatune catalogue"));
 }
 
 void MagnatuneService::ReloadDatabaseFinished() {
   QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
 
-  model()->task_manager()->SetTaskFinished(load_database_task_id_);
+  app_->task_manager()->SetTaskFinished(load_database_task_id_);
   load_database_task_id_ = 0;
 
   if (reply->error() != QNetworkReply::NoError) {
@@ -287,23 +288,16 @@ void MagnatuneService::EnsureMenuCreated() {
   context_menu_->addMenu(library_filter_->menu());
 }
 
-void MagnatuneService::ShowContextMenu(const QModelIndex& index, const QPoint& global_pos) {
+void MagnatuneService::ShowContextMenu(const QPoint& global_pos) {
   EnsureMenuCreated();
 
-  if (index.model() == library_sort_model_)
-    context_item_ = index;
-  else
-    context_item_ = QModelIndex();
+  const bool is_valid = model()->current_index().model() == library_sort_model_;
 
-  GetAppendToPlaylistAction()->setEnabled(context_item_.isValid());
-  GetReplacePlaylistAction()->setEnabled(context_item_.isValid());
-  GetOpenInNewPlaylistAction()->setEnabled(context_item_.isValid());
-  download_->setEnabled(context_item_.isValid() && membership_ == Membership_Download);
+  GetAppendToPlaylistAction()->setEnabled(is_valid);
+  GetReplacePlaylistAction()->setEnabled(is_valid);
+  GetOpenInNewPlaylistAction()->setEnabled(is_valid);
+  download_->setEnabled(is_valid && membership_ == Membership_Download);
   context_menu_->popup(global_pos);
-}
-
-QModelIndex MagnatuneService::GetCurrentIndex() {
-  return context_item_;
 }
 
 void MagnatuneService::Homepage() {
@@ -340,11 +334,11 @@ QUrl MagnatuneService::ModifyUrl(const QUrl& url) const {
 }
 
 void MagnatuneService::ShowConfig() {
-  emit OpenSettingsAtPage(SettingsDialog::Page_Magnatune);
+  app_->OpenSettingsDialogAtPage(SettingsDialog::Page_Magnatune);
 }
 
 void MagnatuneService::Download() {
-  QModelIndex index = library_sort_model_->mapToSource(context_item_);
+  QModelIndex index = library_sort_model_->mapToSource(model()->current_index());
   SongList songs = library_model_->GetChildSongs(index);
 
   MagnatuneDownloadDialog* dialog = new MagnatuneDownloadDialog(this, 0);

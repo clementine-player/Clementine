@@ -23,6 +23,8 @@
 class DigitallyImportedClient;
 class Ui_DigitallyImportedSettingsPage;
 
+class QNetworkReply;
+
 class DigitallyImportedSettingsPage : public SettingsPage {
   Q_OBJECT
 

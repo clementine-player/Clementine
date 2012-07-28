@@ -36,9 +36,6 @@
          <number>0</number>
         </property>
         <item>
-         <widget class="GlobalSearchWidget" name="global_search" native="true"/>
-        </item>
-        <item>
          <widget class="FancyTabWidget" name="tabs" native="true"/>
         </item>
         <item>
@@ -418,7 +415,7 @@
      <x>0</x>
      <y>0</y>
      <width>1131</width>
-     <height>23</height>
+     <height>24</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_music">
@@ -427,6 +424,7 @@
     </property>
     <addaction name="action_open_media"/>
     <addaction name="action_open_cd"/>
+    <addaction name="action_add_podcast"/>
     <addaction name="separator"/>
     <addaction name="action_previous_track"/>
     <addaction name="action_play_pause"/>
@@ -459,6 +457,7 @@
     <addaction name="action_clear_playlist"/>
     <addaction name="action_shuffle"/>
     <addaction name="separator"/>
+    <addaction name="action_remove_duplicates"/>
    </widget>
    <widget class="QMenu" name="menu_help">
     <property name="title">
@@ -540,6 +539,9 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+Q</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::QuitRole</enum>
    </property>
   </action>
   <action name="action_stop_after_this_track">
@@ -624,6 +626,9 @@
    <property name="shortcut">
     <string>Ctrl+P</string>
    </property>
+   <property name="menuRole">
+    <enum>QAction::PreferencesRole</enum>
+   </property>
   </action>
   <action name="action_about">
    <property name="text">
@@ -631,6 +636,9 @@
    </property>
    <property name="shortcut">
     <string>F1</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::AboutRole</enum>
    </property>
   </action>
   <action name="action_shuffle">
@@ -795,6 +803,9 @@
    <property name="text">
     <string>About Qt...</string>
    </property>
+   <property name="menuRole">
+    <enum>QAction::AboutQtRole</enum>
+   </property>
   </action>
   <action name="action_mute">
    <property name="checkable">
@@ -827,6 +838,20 @@
   <action name="action_toggle_scrobbling">
    <property name="text">
     <string>Toggle scrobbling</string>
+   </property>
+  </action>
+  <action name="action_add_podcast">
+   <property name="icon">
+    <iconset resource="../../data/data.qrc">
+     <normaloff>:/providers/podcast16.png</normaloff>:/providers/podcast16.png</iconset>
+   </property>
+   <property name="text">
+    <string>Add podcast...</string>
+   </property>
+  </action>
+  <action name="action_remove_duplicates">
+   <property name="text">
+    <string>Remove duplicates</string>
    </property>
   </action>
  </widget>
@@ -877,12 +902,6 @@
    <class>FancyTabWidget</class>
    <extends>QWidget</extends>
    <header>widgets/fancytabwidget.h</header>
-  </customwidget>
-  <customwidget>
-   <class>GlobalSearchWidget</class>
-   <extends>QWidget</extends>
-   <header>globalsearch/globalsearchwidget.h</header>
-   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources>

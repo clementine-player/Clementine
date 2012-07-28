@@ -15,7 +15,7 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "globalsearchwidget.h"
+#include "globalsearchmodel.h"
 #include "globalsearchsortmodel.h"
 #include "searchprovider.h"
 #include "core/logging.h"
@@ -26,22 +26,38 @@ GlobalSearchSortModel::GlobalSearchSortModel(QObject* parent)
 }
 
 bool GlobalSearchSortModel::lessThan(const QModelIndex& left, const QModelIndex& right) const {
-  const SearchProvider::Result r1 = left.data(GlobalSearchWidget::Role_PrimaryResult)
-      .value<SearchProvider::Result>();
-  const SearchProvider::Result r2 = right.data(GlobalSearchWidget::Role_PrimaryResult)
-      .value<SearchProvider::Result>();
+  // Compare the provider sort index first.
+  const int index_left  = left.data(GlobalSearchModel::Role_ProviderIndex).toInt();
+  const int index_right = right.data(GlobalSearchModel::Role_ProviderIndex).toInt();
+  if (index_left < index_right) return true;
+  if (index_left > index_right) return false;
 
-  // Order results that arrived first first, so that the results don't jump
-  // around while the user is trying to navigate through them.
-  const int order_left  = left.data(GlobalSearchWidget::Role_OrderArrived).toInt();
-  const int order_right = right.data(GlobalSearchWidget::Role_OrderArrived).toInt();
+  // Dividers always go first
+  if (left.data(LibraryModel::Role_IsDivider).toBool())  return true;
+  if (right.data(LibraryModel::Role_IsDivider).toBool()) return false;
 
-  if (order_left < order_right) return true;
-  if (order_left > order_right) return false;
+  // Containers go before songs if they're at the same level
+  const bool left_is_container = left.data(LibraryModel::Role_ContainerType).isValid();
+  const bool right_is_container = right.data(LibraryModel::Role_ContainerType).isValid();
+  if (left_is_container && !right_is_container) return true;
+  if (right_is_container && !left_is_container) return false;
+
+  // Containers get sorted on their sort text.
+  if (left_is_container) {
+    return QString::localeAwareCompare(
+          left.data(LibraryModel::Role_SortText).toString(),
+          right.data(LibraryModel::Role_SortText).toString()) < 0;
+  }
+
+  // Otherwise we're comparing songs.  Sort by disc, track, then title.
+  const SearchProvider::Result r1 = left.data(GlobalSearchModel::Role_Result)
+      .value<SearchProvider::Result>();
+  const SearchProvider::Result r2 = right.data(GlobalSearchModel::Role_Result)
+      .value<SearchProvider::Result>();
 
 #define CompareInt(field) \
-  if (r1.field < r2.field) return true; \
-  if (r1.field > r2.field) return false
+  if (r1.metadata_.field() < r2.metadata_.field()) return true; \
+  if (r1.metadata_.field() > r2.metadata_.field()) return false
 
   int ret = 0;
 
@@ -50,21 +66,9 @@ bool GlobalSearchSortModel::lessThan(const QModelIndex& left, const QModelIndex&
   if (ret < 0) return true; \
   if (ret > 0) return false
 
-  // If they arrived at the same time then sort by quality and type.
-  CompareInt(match_quality_);
-  CompareInt(type_);
-
-  // Failing that, compare title, artist and album
-  switch (r1.type_) {
-  case globalsearch::Type_Track:
-  case globalsearch::Type_Stream:
-    CompareString(title);
-    // fallthrough
-  case globalsearch::Type_Album:
-    CompareString(artist);
-    CompareString(album);
-    break;
-  }
+  CompareInt(disc);
+  CompareInt(track);
+  CompareString(title);
 
   return false;
 

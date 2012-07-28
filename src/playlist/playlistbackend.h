@@ -27,17 +27,14 @@
 #include "playlistitem.h"
 #include "smartplaylists/generator_fwd.h"
 
-#include <boost/shared_ptr.hpp>
-
+class Application;
 class Database;
-class LibraryBackend;
 
 class PlaylistBackend : public QObject {
   Q_OBJECT
 
  public:
-  Q_INVOKABLE PlaylistBackend(QObject* parent = 0);
-  void SetDatabase(boost::shared_ptr<Database> db) { db_ = db; }
+  Q_INVOKABLE PlaylistBackend(Application* app, QObject* parent = 0);
 
   struct Playlist {
     int id;
@@ -68,8 +65,6 @@ class PlaylistBackend : public QObject {
   void RenamePlaylist(int id, const QString& new_name);
   void RemovePlaylist(int id);
 
-  void SetLibrary(LibraryBackend* library);
-
  public slots:
   void SavePlaylist(int playlist, const PlaylistItemList& items,
                     int last_played, smart_playlists::GeneratorPtr dynamic);
@@ -83,9 +78,8 @@ class PlaylistBackend : public QObject {
   PlaylistItemPtr NewSongFromQuery(const SqlRow& row, boost::shared_ptr<NewSongFromQueryState> state);
   PlaylistItemPtr RestoreCueData(PlaylistItemPtr item, boost::shared_ptr<NewSongFromQueryState> state);
 
-  LibraryBackend* library_;
-
-  boost::shared_ptr<Database> db_;
+  Application* app_;
+  Database* db_;
 };
 
 #endif // PLAYLISTBACKEND_H

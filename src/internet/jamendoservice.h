@@ -27,7 +27,10 @@
 class LibraryBackend;
 class LibraryFilterWidget;
 class LibraryModel;
+class LibrarySearchProvider;
 class NetworkAccessManager;
+class SearchProvider;
+
 class QIODevice;
 class QMenu;
 class QSortFilterProxyModel;
@@ -35,13 +38,13 @@ class QSortFilterProxyModel;
 class JamendoService : public InternetService {
   Q_OBJECT
  public:
-  JamendoService(InternetModel* parent);
+  JamendoService(Application* app, InternetModel* parent);
   ~JamendoService();
 
   QStandardItem* CreateRootItem();
   void LazyPopulate(QStandardItem* item);
 
-  void ShowContextMenu(const QModelIndex& index, const QPoint& global_pos);
+  void ShowContextMenu(const QPoint& global_pos);
 
   QWidget* HeaderWidget() const;
 
@@ -65,9 +68,6 @@ class JamendoService : public InternetService {
 
   static const int kBatchSize;
   static const int kApproxDatabaseSize;
-
- protected:
-  QModelIndex GetCurrentIndex();
 
  private:
   void ParseDirectory(QIODevice* device) const;
@@ -98,11 +98,12 @@ class JamendoService : public InternetService {
   void DownloadAlbum();
   void Homepage();
 
+  void SearchProviderToggled(const SearchProvider* provider, bool enabled);
+
  private:
   NetworkAccessManager* network_;
 
   QMenu* context_menu_;
-  QModelIndex context_item_;
 
   QAction* album_info_;
   QAction* download_album_;
@@ -111,6 +112,7 @@ class JamendoService : public InternetService {
   LibraryFilterWidget* library_filter_;
   LibraryModel* library_model_;
   QSortFilterProxyModel* library_sort_model_;
+  LibrarySearchProvider* search_provider_;
 
   int load_database_task_id_;
 

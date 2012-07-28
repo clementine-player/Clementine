@@ -21,10 +21,10 @@
 #include <QWidget>
 #include <QMap>
 
-class LibraryFilterWidget;
-class InternetModel;
+class Application;
 class InternetService;
 class InternetView;
+class LibraryFilterWidget;
 class Ui_InternetViewContainer;
 
 class QTimeLine;
@@ -39,9 +39,12 @@ class InternetViewContainer : public QWidget {
 
   static const int kAnimationDuration;
 
-  void SetModel(InternetModel* model);
+  void SetApplication(Application* app);
 
   InternetView* tree() const;
+
+ public slots:
+  void ScrollToIndex(const QModelIndex& index);
 
  private slots:
   void Collapsed(const QModelIndex& index);
@@ -57,7 +60,7 @@ class InternetViewContainer : public QWidget {
 
  private:
   Ui_InternetViewContainer* ui_;
-  InternetModel* model_;
+  Application* app_;
   InternetService* current_service_;
 
   QWidget* current_header_;

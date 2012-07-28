@@ -15,14 +15,19 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-// Only include this from Objective-C++ files
-
 #include <QKeySequence>
 
+#include <CoreFoundation/CFDictionary.h>
+
+#ifdef __OBJC__
 @class NSEvent;
+#else
+class NSEvent;
+#endif
 
 namespace mac {
 
 QKeySequence KeySequenceFromNSEvent(NSEvent* event);
+void DumpDictionary(CFDictionaryRef dict);
 
 }

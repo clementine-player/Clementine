@@ -16,13 +16,10 @@
 */
 
 #include "globalshortcutbackend.h"
+
 #include "globalshortcuts.h"
 
-#include <QFuture>
-#include <QFutureWatcher>
-#include <QtConcurrentRun>
-
-GlobalShortcutBackend::GlobalShortcutBackend(GlobalShortcuts *parent)
+GlobalShortcutBackend::GlobalShortcutBackend(GlobalShortcuts* parent)
   : QObject(parent),
     manager_(parent),
     active_(false)

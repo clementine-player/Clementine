@@ -111,7 +111,7 @@ void JamendoDynamicPlaylist::Fetch() {
 
   // We have to use QHttp here because there's no way to disable Keep-Alive
   // with QNetworkManager.
-  QHttpRequestHeader header("GET", url.encodedPath() + "?" + url.encodedQuery());
+  QHttpRequestHeader header("GET", QString(url.encodedPath() + "?" + url.encodedQuery()));
   header.setValue("Host", url.encodedHost());
 
   QHttp http(url.host());

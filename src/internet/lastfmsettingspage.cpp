@@ -86,6 +86,7 @@ void LastFMSettingsPage::Load() {
   ui_->scrobble->setChecked(service_->IsScrobblingEnabled());
   ui_->love_ban_->setChecked(service_->AreButtonsVisible());
   ui_->scrobble_button->setChecked(service_->IsScrobbleButtonVisible());
+  ui_->prefer_albumartist->setChecked(service_->PreferAlbumArtist());
 
   if (service_->IsAuthenticated()) {
     service_->UpdateSubscriberStatus();
@@ -116,6 +117,7 @@ void LastFMSettingsPage::Save() {
   s.setValue("ScrobblingEnabled", ui_->scrobble->isChecked());
   s.setValue("ShowLoveBanButtons", ui_->love_ban_->isChecked());
   s.setValue("ShowScrobbleButton", ui_->scrobble_button->isChecked());
+  s.setValue("PreferAlbumArtist", ui_->prefer_albumartist->isChecked());
   s.endGroup();
 
   service_->ReloadSettings();

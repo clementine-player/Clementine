@@ -26,9 +26,7 @@ class Track;
 #include <QtGlobal>
 uint qHash(const lastfm::Track& track);
 
-#include "fixlastfm.h"
-#include <lastfm/Track>
-#include <lastfm/ws.h>
+#include "lastfmcompat.h"
 
 #include "internetmodel.h"
 #include "internetservice.h"
@@ -54,7 +52,7 @@ class LastFMService : public InternetService {
   friend class LastFMUrlHandler;
 
  public:
-  LastFMService(InternetModel* parent);
+  LastFMService(Application* app, InternetModel* parent);
   ~LastFMService();
 
   static const char* kServiceName;
@@ -87,7 +85,7 @@ class LastFMService : public InternetService {
   QStandardItem* CreateRootItem();
   void LazyPopulate(QStandardItem* parent);
 
-  void ShowContextMenu(const QModelIndex& index, const QPoint &global_pos);
+  void ShowContextMenu(const QPoint &global_pos);
 
   PlaylistItem::Options playlistitem_options() const;
 
@@ -101,6 +99,7 @@ class LastFMService : public InternetService {
   bool IsScrobblingEnabled() const { return scrobbling_enabled_; }
   bool AreButtonsVisible() const { return buttons_visible_; }
   bool IsScrobbleButtonVisible() const { return scrobble_button_visible_; }
+  bool PreferAlbumArtist() const { return prefer_albumartist_; }
   bool HasConnectionProblems() const { return connection_problems_; }
 
   void Authenticate(const QString& username, const QString& password);
@@ -132,14 +131,13 @@ class LastFMService : public InternetService {
   void ScrobblingEnabledChanged(bool value);
   void ButtonVisibilityChanged(bool value);
   void ScrobbleButtonVisibilityChanged(bool value);
-  void ScrobblerStatus(int value);
+  void PreferAlbumArtistChanged(bool value);
+  void ScrobbleSubmitted();
+  void ScrobbleError(int value);
   void UpdatedSubscriberStatus(bool is_subscriber);
   void ScrobbledRadioStream();
 
   void SavedItemsChanged();
-
- protected:
-  QModelIndex GetCurrentIndex();
 
  private slots:
   void AuthenticateReplyFinished();
@@ -149,6 +147,7 @@ class LastFMService : public InternetService {
 
   void TunerTrackAvailable();
   void TunerError(lastfm::ws::Error error);
+  void ScrobblerStatus(int value);
 
   void AddArtistRadio();
   void AddTagRadio();
@@ -207,7 +206,6 @@ class LastFMService : public InternetService {
   QAction* add_tag_action_;
   QAction* add_custom_action_;
   QAction* refresh_friends_action_;
-  QStandardItem* context_item_;
 
   QUrl last_url_;
   bool initial_tune_;
@@ -216,6 +214,7 @@ class LastFMService : public InternetService {
   bool scrobbling_enabled_;
   bool buttons_visible_;
   bool scrobble_button_visible_;
+  bool prefer_albumartist_;
 
   QStandardItem* root_item_;
   QStandardItem* artist_list_;

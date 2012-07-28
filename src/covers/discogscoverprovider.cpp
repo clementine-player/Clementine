@@ -32,8 +32,24 @@ DiscogsCoverProvider::DiscogsCoverProvider(QObject* parent)
 {
 }
 
-// Send the search request using Discog's HTTP-based API.
 bool DiscogsCoverProvider::StartSearch(const QString& artist, const QString& album, int id) {
+  DiscogsCoverSearchContext* ctx = new DiscogsCoverSearchContext;
+  ctx->id = id;
+  ctx->artist = artist;
+  ctx->album = album;
+  ctx->state = DiscogsCoverSearchContext::State_Init;
+  pending_requests_.insert(id, ctx);
+  SendSearchRequest(ctx);
+  return true;
+}
+
+void DiscogsCoverProvider::CancelSearch(int id) {
+  qLog(Debug) << "Discogs: cancel search id:" << id;
+  delete pending_requests_.take(id);
+}
+
+// Send the search request using Discog's HTTP-based API.
+void DiscogsCoverProvider::SendSearchRequest(DiscogsCoverSearchContext* ctx) {
   typedef QPair<QString, QString> Arg;
   typedef QList<Arg> ArgList;
 
@@ -42,15 +58,30 @@ bool DiscogsCoverProvider::StartSearch(const QString& artist, const QString& alb
 
   QUrl url(kSearchUrl);
 
-  // For now, search only for the master release.  Most releases have a master, but not all...
-  // In order to handle other releases we either could search for all
-  // types and handle the master in SearchReply (then we'd have to handle paging), or search again
-  // if no master exists.  In both cases, we'd have to remember some data on the heap in order to send
-  // more requests.
-  ArgList args = ArgList()
-    << Arg("artist", artist.toLower())
-    << Arg("release_title", album.toLower())
-    << Arg("type", "master");
+  QString type;
+
+  switch (ctx->state) {
+  case DiscogsCoverSearchContext::State_Init:
+    type = "master";
+    ctx->state = DiscogsCoverSearchContext::State_MastersRequested;
+    break;
+  case DiscogsCoverSearchContext::State_MastersRequested:
+    type = "release";
+    ctx->state = DiscogsCoverSearchContext::State_ReleasesRequested;
+    break;
+  default:
+    EndSearch(ctx);
+    return;
+  }
+
+  ArgList args = ArgList();
+  if (!ctx->artist.isEmpty()) {
+    args.append(Arg("artist", ctx->artist.toLower()));
+  }
+  if (!ctx->album.isEmpty()) {
+    args.append(Arg("release_title", ctx->album.toLower()));
+  }
+  args.append(Arg("type", type));
 
   EncodedArgList encoded_args;
 
@@ -62,112 +93,74 @@ bool DiscogsCoverProvider::StartSearch(const QString& artist, const QString& alb
 
   url.setEncodedQueryItems(encoded_args);
 
+  qLog(Debug) << "Discogs: send search request for id:" << ctx->id << "url: " << url;
+
   QNetworkReply* reply = network_->get(QNetworkRequest(url));
   NewClosure(reply, SIGNAL(finished()),
-             this, SLOT(SearchReply(QNetworkReply*, int)),
-             reply, id);
-
-  return true;
+             this, SLOT(HandleSearchReply(QNetworkReply*, int)),
+             reply, ctx->id);
 }
 
-// Parse the reply from a search.  
-void DiscogsCoverProvider::SearchReply(QNetworkReply* reply, int id) {
+// Parse the reply from a search
+void DiscogsCoverProvider::HandleSearchReply(QNetworkReply* reply, int id) {
   reply->deleteLater();
+
+  DiscogsCoverSearchContext* ctx;
+  if (!pending_requests_.contains(id)) {
+    // the request was cancelled while we were waiting for the reply
+    qLog(Debug) << "Discogs: got reply for cancelled request" << id;
+    return;
+  }
+  ctx = pending_requests_.value(id);
 
   QJson::Parser parser;
   bool ok;
+  bool found = false;
   QVariantMap reply_map = parser.parse(reply, &ok).toMap();
 
   if (!ok || !reply_map.contains("results")) {
-    CoverSearchResults cover_results;
-    emit SearchFinished(id, cover_results);
+    // this is an error; either parse error or bad response from the server
+    EndSearch(ctx);
     return;
   }
 
   QVariantList results = reply_map["results"].toList();
-  FollowBestResult(reply, id, results);
-}
 
-void DiscogsCoverProvider::FollowBestResult(QNetworkReply* reply, int id, QVariantList results) {
-  
-  // first pass - check for the master(s)
   foreach (const QVariant& result, results) {
     QVariantMap result_map = result.toMap();
-    if (result_map.contains("type")
-        && result_map["type"].toString() == "master"
-        && result_map.contains("resource_url")) {
-      // follow the url
-      qLog(Debug) << "Discogs: master resoure_url" << result_map["resource_url"].toString();
-      results.removeOne(result);
-      QueryResource(result_map["resource_url"].toString(), id, results);
-      return;
+    // In order to use less round-trips, we cheat here.  Instead of
+    // following the "resource_url", and then scan all images in the
+    // resource, we go directly to the largest primary image by
+    // constructing the primary image's url from the thmub's url.
+    if (result_map.contains("thumb")) {
+      CoverSearchResult cover_result;
+      cover_result.image_url = result_map["thumb"].toString().replace("R-90-", "R-");
+      if (result_map.contains("title")) {
+        cover_result.description = result_map["title"].toString();
+      }
+      ctx->results.append(cover_result);
+      found = true;
     }
   }
-
-  // otherwise, no results.
-  qLog(Debug) << "Discogs: no results";
-  CoverSearchResults cover_results;
-  emit SearchFinished(id, cover_results);
-}
-
-// Send a new HTTP request for the selected resource.
-void DiscogsCoverProvider::QueryResource(const QString& resource_url, int id, const QVariantList& results) {
-  QUrl url(resource_url);
-  
-  QNetworkReply* reply = network_->get(QNetworkRequest(url));
-  NewClosure(reply, SIGNAL(finished()),
-             this, SLOT(QueryResourceReply(QNetworkReply*, int, const QVariantList&)),
-             reply, id, results);
-}
-
-// Parse the resource, look for images.
-void DiscogsCoverProvider::QueryResourceReply(QNetworkReply* reply, int id, const QVariantList& results) {
-  reply->deleteLater();
-
-  QJson::Parser parser;
-  bool ok;
-  bool primary_found = false;
-  QVariantMap reply_map = parser.parse(reply, &ok).toMap();
-
-  if (!ok || !reply_map.contains("images")) {
-    // try with the next result, if any
-    qLog(Debug) << "Discogs: no images found, trying with next result";
-    FollowBestResult(reply, id, results);
+  if (found) {
+    EndSearch(ctx);
     return;
   }
 
-  CoverSearchResults cover_results;
-
-  QVariantList images = reply_map["images"].toList();
-
-  // first pass, scan for primary images (there will typically be exactly one)
-  foreach (const QVariant& image, images) {
-    QVariantMap image_map = image.toMap();
-    if (image_map.contains("type")
-        && image_map["type"].toString() == "primary"
-        && image_map.contains("uri")) {
-      CoverSearchResult cover_result;
-      cover_result.image_url = image_map["uri"].toString();
-      qLog(Debug) << "Discogs: Found primary image" << cover_result.image_url;
-      cover_results.append(cover_result);
-      primary_found = true;
-    }
+  // otherwise, no results
+  switch (ctx->state) {
+    case DiscogsCoverSearchContext::State_MastersRequested:
+      // search again, this time for releases
+      SendSearchRequest(ctx);
+      break;
+    default:
+      EndSearch(ctx);
+      break;
   }
+}
 
-  if (primary_found) {
-    emit SearchFinished(id, cover_results);
-    return;
-  }
-  
-  // second pass, take what we've got (odd case - only secondary images)
-  foreach (const QVariant& image, images) {
-    QVariantMap image_map = image.toMap();
-    if (image_map.contains("uri")) {
-      CoverSearchResult cover_result;
-      cover_result.image_url = image_map["uri"].toString();
-      qLog(Debug) << "Discogs: Found other image" << cover_result.image_url;
-      cover_results.append(cover_result);
-    }
-  }
-  emit SearchFinished(id, cover_results);
+void DiscogsCoverProvider::EndSearch(DiscogsCoverSearchContext* ctx) {
+  (void) pending_requests_.remove(ctx->id);
+  emit SearchFinished(ctx->id, ctx->results);
+  delete ctx;
 }

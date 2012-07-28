@@ -60,6 +60,12 @@
 
 #include <QtDebug>
 
+QDebug operator <<(QDebug dbg, NSObject* object) {
+  QString ns_format = [[NSString stringWithFormat: @"%@", object] UTF8String];
+  dbg.nospace() << ns_format;
+  return dbg.space();
+}
+
 // Capture global media keys on Mac (Cocoa only!)
 // See: http://www.rogueamoeba.com/utm/2007/09/29/apple-keyboard-media-key-event-handling/
 
@@ -153,14 +159,22 @@ static BreakpadRef InitBreakpad() {
     qLog(Warning)<<"Media key monitoring disabled";
 
 }
+
 - (BOOL) application: (NSApplication*)app openFile:(NSString*)filename {
-  qDebug() << "Wants to open:" << [filename UTF8String];
+  qLog(Debug) << "Wants to open:" << [filename UTF8String];
 
   if (application_handler_->LoadUrl(QString::fromUtf8([filename UTF8String]))) {
     return YES;
   }
 
   return NO;
+}
+
+- (void) application: (NSApplication*)app openFiles:(NSArray*)filenames {
+  qLog(Debug) << "Wants to open:" << filenames;
+  [filenames enumerateObjectsUsingBlock:^(id object, NSUInteger idx, BOOL* stop) {
+    [self application:app openFile:(NSString*)object];
+  }];
 }
 
 - (void) mediaKeyTap: (SPMediaKeyTap*)keyTap receivedMediaKeyEvent:(NSEvent*)event {
@@ -313,8 +327,8 @@ bool MigrateLegacyConfigFiles() {
     // Create ~/Library/Application Support which should already exist anyway.
     QDir::root().mkpath(GetApplicationSupportPath());
 
-    qDebug() << "Move from:" << old_config_dir
-             << "to:" << new_config_dir;
+    qLog(Debug) << "Move from:" << old_config_dir
+                << "to:" << new_config_dir;
 
     NSFileManager* file_manager = [[NSFileManager alloc] init];
     NSError* error;
@@ -439,6 +453,11 @@ QKeySequence KeySequenceFromNSEvent(NSEvent* event) {
   }
 
   return QKeySequence(key);
+}
+
+void DumpDictionary(CFDictionaryRef dict) {
+  NSDictionary* d = (NSDictionary*)dict;
+  NSLog(@"%@", d);
 }
 
 }  // namespace mac

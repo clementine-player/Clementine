@@ -50,6 +50,12 @@ bool WidgetFadeHelper::eventFilter(QObject* obj, QEvent* event) {
   if (!isVisible())
     return false;
 
+  QResizeEvent* re = static_cast<QResizeEvent*>(event);
+  if (re->oldSize() == re->size()) {
+    // Ignore phoney resize events
+    return false;
+  }
+
   // Get a new capture of the parent
   hide();
   CaptureParent();
@@ -143,6 +149,7 @@ void WidgetFadeHelper::paintEvent(QPaintEvent* ) {
 
   if (fade_timeline_->state() != QTimeLine::Running) {
     // We're fading in the blur
+    p.drawPixmap(0, 0, original_pixmap_);
     p.setOpacity(blur_timeline_->currentValue());
   } else {
     // Fading out the blur into the new image

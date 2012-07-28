@@ -47,6 +47,5 @@ LibraryFilterWidget* LibraryViewContainer::filter() const {
 }
 
 void LibraryViewContainer::ReloadSettings() {
-  filter()->setVisible(!GlobalSearch::HideOtherSearchBoxes());
   view()->ReloadSettings();
 }

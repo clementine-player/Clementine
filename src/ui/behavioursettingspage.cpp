@@ -111,7 +111,6 @@ void BehaviourSettingsPage::Load() {
 
   s.beginGroup(Playlist::kSettingsGroup);
   ui_->b_grey_out_deleted_->setChecked(s.value("greyoutdeleted", false).toBool());
-  ui_->b_enable_background_img_->setChecked(s.value("bg_enabled", true).toBool());
   s.endGroup();
 }
 
@@ -146,7 +145,6 @@ void BehaviourSettingsPage::Save() {
 
   s.beginGroup(Playlist::kSettingsGroup);
   s.setValue("greyoutdeleted", ui_->b_grey_out_deleted_->isChecked());
-  s.setValue("bg_enabled", ui_->b_enable_background_img_->isChecked());
   s.endGroup();
 }
 
@@ -154,4 +152,6 @@ void BehaviourSettingsPage::ShowTrayIconToggled(bool on) {
   ui_->b_always_hide_->setEnabled(on);
   if (!on && ui_->b_always_hide_->isChecked())
     ui_->b_remember_->setChecked(true);
+  ui_->b_keep_running_->setEnabled(on);
+  ui_->b_keep_running_->setChecked(on);
 }

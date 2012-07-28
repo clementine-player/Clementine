@@ -12,7 +12,7 @@ darwin QMenu {
 
 }
 
-#playlist[background_enabled = "true"] {
+#playlist[default_background_enabled = "true"] {
   background-image: url(:logo.png);
   background-attachment: fixed;
   background-position: bottom right;
@@ -21,8 +21,9 @@ darwin QMenu {
 }
 
 QToolButton {
-  border: none;
-  padding: 2px;
+  border: 2px solid transparent;
+  border-radius: 3px;
+  padding: 1px;
 }
 
 QToolButton::menu-button {
@@ -37,8 +38,6 @@ QToolButton[popupMode="1"] {
 QToolButton:hover {
   border: 2px solid %palette-highlight;
   background-color: %palette-highlight-lighter;
-  border-radius: 3px;
-  padding: 1px;
 }
 
 QToolButton:hover[popupMode="1"] {
@@ -48,8 +47,6 @@ QToolButton:hover[popupMode="1"] {
 QToolButton:pressed {
   border: 2px solid %palette-highlight-darker;
   background-color: %palette-highlight-lighter;
-  border-radius: 3px;
-  padding: 1px;
 }
 
 QToolButton:pressed[popupMode="1"] {

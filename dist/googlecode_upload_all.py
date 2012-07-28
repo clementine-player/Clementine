@@ -28,6 +28,7 @@ LABELS = {
   "maverick": ["Distro-Ubuntu"],
   "natty":    ["Distro-Ubuntu"],
   "oneiric":  ["Distro-Ubuntu"],
+  "precise":  ["Distro-Ubuntu"],
   "squeeze":  ["Distro-Debian"],
 }
 
@@ -55,6 +56,7 @@ DESCRIPTIONS = {
   ("deb", "maverick"):  "for Ubuntu Maverick (10.10)",
   ("deb", "natty"):     "for Ubuntu Natty (11.04)",
   ("deb", "oneiric"):   "for Ubuntu Oneiric (11.10)",
+  ("deb", "precise"):   "for Ubuntu Precise (12.04)",
   ("deb", "squeeze"):   "for Debian Squeeze",
   ("rpm", "fc15"):      "for Fedora 15",
   ("rpm", "fc16"):      "for Fedora 16",
@@ -72,6 +74,8 @@ RELEASES = [
   ("deb", "natty", 64),
   ("deb", "oneiric", 32),
   ("deb", "oneiric", 64),
+  ("deb", "precise", 32),
+  ("deb", "precise", 64),
   ("deb", "squeeze", 32),
   ("deb", "squeeze", 64),
   ("rpm", "fc15", 32),

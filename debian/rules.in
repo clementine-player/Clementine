@@ -13,7 +13,7 @@ configure-stamp:
 	cd bin && cmake .. \
 	  -DCMAKE_INSTALL_PREFIX=$(CURDIR)/debian/clementine/usr \
 	  -DBUNDLE_PROJECTM_PRESETS=OFF \
-	  -DFORCE_GIT_REVISION=@GIT_REVISION@
+	  -DFORCE_GIT_REVISION=@GIT_REV@
 	touch configure-stamp
 
 build: build-stamp
@@ -48,6 +48,7 @@ binary-arch: install
 	dh_installchangelogs 
 	dh_installmenu
 	dh_installdocs
+	dh_gconf
 	dh_link
 	dh_strip
 	dh_compress

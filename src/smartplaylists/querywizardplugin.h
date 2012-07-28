@@ -39,7 +39,7 @@ class QueryWizardPlugin : public WizardPlugin {
   Q_OBJECT
 
 public:
-  QueryWizardPlugin(LibraryBackend* library, QObject* parent);
+  QueryWizardPlugin(Application* app, LibraryBackend* library, QObject* parent);
   ~QueryWizardPlugin();
 
   QString type() const { return "Query"; }

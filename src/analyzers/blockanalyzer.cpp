@@ -3,8 +3,6 @@
 // Copyright: See COPYING file that comes with this distribution
 //
 
-#define DEBUG_PREFIX "BlockAnalyzer"
-
 #include "blockanalyzer.h"
 
 #include <cmath>
@@ -400,4 +398,3 @@ BlockAnalyzer::drawBackground()
         for( int y = 0; (uint)y < m_rows; ++y )
             p.fillRect( x*(WIDTH+1), y*(HEIGHT+1) + m_y, WIDTH, HEIGHT, bgdark );
 }
-

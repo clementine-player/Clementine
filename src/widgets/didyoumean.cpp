@@ -17,6 +17,8 @@
 
 #include "didyoumean.h"
 
+#include "core/logging.h"
+
 #include <QEvent>
 #include <QKeyEvent>
 #include <QPainter>
@@ -25,7 +27,7 @@
 const int DidYouMean::kPadding = 3;
 
 DidYouMean::DidYouMean(QWidget* buddy, QWidget* parent)
-  : QWidget(parent),
+  : QWidget(parent, Qt::ToolTip),
     buddy_(buddy),
     close_(new QToolButton(this)),
     normal_font_(font()),
@@ -48,6 +50,14 @@ DidYouMean::DidYouMean(QWidget* buddy, QWidget* parent)
 
   hide();
   buddy_->installEventFilter(this);
+
+  // Texts
+  did_you_mean_ = tr("Did you mean") + ":  ";
+  press_enter_ = "(" + tr("press enter") + ")";
+
+  // Texts' sizes
+  did_you_mean_size_ = QFontMetrics(normal_font_).width(did_you_mean_);
+  press_enter_size_ = QFontMetrics(press_enter_font_).width(press_enter_);
 }
 
 bool DidYouMean::eventFilter(QObject* object, QEvent* event) {
@@ -84,6 +94,7 @@ bool DidYouMean::eventFilter(QObject* object, QEvent* event) {
       break;
 
     case QEvent::FocusOut:
+    case QEvent::WindowDeactivate:
       hide();
       break;
 
@@ -102,8 +113,16 @@ void DidYouMean::UpdateGeometry() {
   const int text_height = fontMetrics().height();
   const int height = text_height + kPadding * 2;
 
-  move(buddy_->mapTo(parentWidget(), buddy_->rect().bottomLeft()));
-  resize(QSize(buddy_->width(), height));
+  move(buddy_->mapToGlobal(buddy_->rect().bottomLeft()));
+  // Resize to len(text to display) + total number of padding added +
+  // size(close button), so the "Did you mean" widget is always fully displayed
+
+  resize(QSize(did_you_mean_size_ +
+                 QFontMetrics(correction_font_).width(correction_ + "  ") +
+                 press_enter_size_ +
+                 kPadding * 6 +
+                 close_->width(),
+               height));
 
   close_->move(kPadding, kPadding);
   close_->resize(text_height, text_height);
@@ -125,12 +144,11 @@ void DidYouMean::paintEvent(QPaintEvent*) {
                   kPadding,
                   rect().width() - kPadding,
                   rect().height() - kPadding);
-  const QString did_you_mean(tr("Did you mean") + ":  ");
 
   // Text
   p.setFont(normal_font_);
-  p.drawText(text_rect, Qt::AlignLeft | Qt::AlignVCenter, did_you_mean);
-  text_rect.setLeft(text_rect.left() + p.fontMetrics().width(did_you_mean));
+  p.drawText(text_rect, Qt::AlignLeft | Qt::AlignVCenter, did_you_mean_);
+  text_rect.setLeft(text_rect.left() + p.fontMetrics().width(did_you_mean_));
 
   p.setFont(correction_font_);
   p.drawText(text_rect, Qt::AlignLeft | Qt::AlignVCenter, correction_);
@@ -138,11 +156,12 @@ void DidYouMean::paintEvent(QPaintEvent*) {
 
   p.setPen(palette().color(QPalette::Disabled, QPalette::Text));
   p.setFont(press_enter_font_);
-  p.drawText(text_rect, Qt::AlignLeft | Qt::AlignVCenter, "(" + tr("press enter") + ")");
+  p.drawText(text_rect, Qt::AlignLeft | Qt::AlignVCenter, press_enter_);
 }
 
 void DidYouMean::SetCorrection(const QString& correction) {
   correction_ = correction;
+  UpdateGeometry();
   update();
 }
 

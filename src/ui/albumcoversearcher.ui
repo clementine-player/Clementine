@@ -17,21 +17,21 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="LineEdit" name="artist">
+      <widget class="QSearchField" name="artist">
        <property name="toolTip">
         <string>Artist</string>
        </property>
-       <property name="hint" stdset="0">
+       <property name="placeholderText" stdset="0">
         <string>Artist</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="LineEdit" name="album">
+      <widget class="QSearchField" name="album">
        <property name="toolTip">
         <string>Album</string>
        </property>
-       <property name="hint" stdset="0">
+       <property name="placeholderText" stdset="0">
         <string>Album</string>
        </property>
       </widget>
@@ -44,7 +44,7 @@
       </widget>
      </item>
      <item>
-      <widget class="BusyIndicator" name="busy"/>
+      <widget class="BusyIndicator" name="busy" native="true"/>
      </item>
     </layout>
    </item>
@@ -81,9 +81,9 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>LineEdit</class>
-   <extends>QLineEdit</extends>
-   <header>widgets/lineedit.h</header>
+   <class>QSearchField</class>
+   <extends>QWidget</extends>
+   <header>3rdparty/qocoa/qsearchfield.h</header>
   </customwidget>
   <customwidget>
    <class>BusyIndicator</class>
@@ -112,8 +112,8 @@
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>248</x>
-     <y>254</y>
+     <x>257</x>
+     <y>508</y>
     </hint>
     <hint type="destinationlabel">
      <x>157</x>
@@ -128,8 +128,8 @@
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>316</x>
-     <y>260</y>
+     <x>325</x>
+     <y>508</y>
     </hint>
     <hint type="destinationlabel">
      <x>286</x>
@@ -144,12 +144,28 @@
    <slot>click()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>347</x>
-     <y>50</y>
+     <x>357</x>
+     <y>35</y>
     </hint>
     <hint type="destinationlabel">
-     <x>575</x>
-     <y>50</y>
+     <x>812</x>
+     <y>36</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>album</sender>
+   <signal>returnPressed()</signal>
+   <receiver>search</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>580</x>
+     <y>22</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>779</x>
+     <y>21</y>
     </hint>
    </hints>
   </connection>

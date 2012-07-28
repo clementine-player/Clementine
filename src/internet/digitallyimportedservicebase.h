@@ -40,6 +40,7 @@ public:
                                const QUrl& homepage_url,
                                const QIcon& icon,
                                const QString& api_service_name,
+                               Application* app,
                                InternetModel* model,
                                QObject* parent = NULL);
   ~DigitallyImportedServiceBase();
@@ -49,7 +50,7 @@ public:
 
   QStandardItem* CreateRootItem();
   void LazyPopulate(QStandardItem* parent);
-  void ShowContextMenu(const QModelIndex& index, const QPoint& global_pos);
+  void ShowContextMenu(const QPoint& global_pos);
 
   void ReloadSettings();
 
@@ -70,9 +71,6 @@ public slots:
 
 signals:
   void StreamsChanged();
-
-protected:
-  QModelIndex GetCurrentIndex();
 
 private slots:
   void LoadPlaylistFinished();
@@ -116,12 +114,12 @@ private:
 
 class DigitallyImportedService : public DigitallyImportedServiceBase {
 public:
-  DigitallyImportedService(InternetModel* model, QObject* parent = NULL);
+  DigitallyImportedService(Application* app, InternetModel* model, QObject* parent = NULL);
 };
 
 class SkyFmService : public DigitallyImportedServiceBase {
 public:
-  SkyFmService(InternetModel* model, QObject* parent = NULL);
+  SkyFmService(Application* app, InternetModel* model, QObject* parent = NULL);
 };
 
 #endif // DIGITALLYIMPORTEDSERVICEBASE_H

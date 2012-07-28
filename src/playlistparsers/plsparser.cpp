@@ -78,6 +78,6 @@ void PLSParser::Save(const SongList &songs, QIODevice *device, const QDir &dir) 
   }
 }
 
-bool PLSParser::TryMagic(const QByteArray &data) const {
-  return data.contains("[playlist]");
+bool PLSParser::TryMagic(const QByteArray& data) const {
+  return data.toLower().contains("[playlist]");
 }

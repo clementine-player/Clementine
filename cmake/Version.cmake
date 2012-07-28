@@ -120,7 +120,8 @@ endif(CLEMENTINE_VERSION_PRERELEASE)
 
 # Add git revision
 if(FORCE_GIT_REVISION)
-  set(GIT_REVISION ${FORCE_GIT_REVISION})
+  set(GIT_REV ${FORCE_GIT_REVISION})
+  set(GIT_INFO_RESULT 0)
 else(FORCE_GIT_REVISION)
   find_program(GIT_EXECUTABLE git)
 
@@ -130,25 +131,25 @@ else(FORCE_GIT_REVISION)
         OUTPUT_VARIABLE GIT_REV
         ERROR_QUIET
         OUTPUT_STRIP_TRAILING_WHITESPACE)
+  endif()
+endif()
 
-    if(${GIT_INFO_RESULT} EQUAL 0)
-      string(REGEX REPLACE "^(.+)-([0-9]+)-(g[a-f0-9]+)$" "\\1;\\2;\\3"
-             GIT_PARTS ${GIT_REV})
+if(${GIT_INFO_RESULT} EQUAL 0)
+  string(REGEX REPLACE "^(.+)-([0-9]+)-(g[a-f0-9]+)$" "\\1;\\2;\\3"
+         GIT_PARTS ${GIT_REV})
 
-      if(NOT GIT_PARTS)
-        message(FATAL_ERROR "Failed to parse git revision string '${GIT_REV}'")
-      endif(NOT GIT_PARTS)
+  if(NOT GIT_PARTS)
+    message(FATAL_ERROR "Failed to parse git revision string '${GIT_REV}'")
+  endif(NOT GIT_PARTS)
 
-      list(LENGTH GIT_PARTS GIT_PARTS_LENGTH)
-      if(GIT_PARTS_LENGTH EQUAL 3)
-        list(GET GIT_PARTS 0 GIT_TAGNAME)
-        list(GET GIT_PARTS 1 GIT_COMMITCOUNT)
-        list(GET GIT_PARTS 2 GIT_SHA1)
-        set(HAS_GET_REVISION ON)
-      endif(GIT_PARTS_LENGTH EQUAL 3)
-    endif(${GIT_INFO_RESULT} EQUAL 0)
-  endif(NOT GIT_EXECUTABLE-NOTFOUND)
-endif(FORCE_GIT_REVISION)
+  list(LENGTH GIT_PARTS GIT_PARTS_LENGTH)
+  if(GIT_PARTS_LENGTH EQUAL 3)
+    list(GET GIT_PARTS 0 GIT_TAGNAME)
+    list(GET GIT_PARTS 1 GIT_COMMITCOUNT)
+    list(GET GIT_PARTS 2 GIT_SHA1)
+    set(HAS_GET_REVISION ON)
+  endif(GIT_PARTS_LENGTH EQUAL 3)
+endif(${GIT_INFO_RESULT} EQUAL 0)
 
 if(INCLUDE_GIT_REVISION AND HAS_GET_REVISION)
   set(CLEMENTINE_VERSION_DISPLAY "${GIT_REV}")

@@ -105,6 +105,9 @@ private:
   static void SP_CALLCONV SearchAlbumBrowseComplete(sp_albumbrowse* result, void* userdata);
   static void SP_CALLCONV AlbumBrowseComplete(sp_albumbrowse* result, void* userdata);
 
+  // Spotify toplist browse callbacks.
+  static void SP_CALLCONV ToplistBrowseComplete(sp_toplistbrowse* result, void* userdata);
+
   // Request handlers.
   void Login(const pb::spotify::LoginRequest& req);
   void Search(const pb::spotify::SearchRequest& req);
@@ -114,6 +117,7 @@ private:
   void Seek(qint64 offset_bytes);
   void LoadImage(const QString& id_b64);
   void BrowseAlbum(const QString& uri);
+  void BrowseToplist(const pb::spotify::BrowseToplistRequest& req);
   void SetPlaybackSettings(const pb::spotify::PlaybackSettings& req);
 
   void SendPlaylistList();
@@ -174,6 +178,7 @@ private:
   QMap<sp_image*, int> image_callbacks_registered_;
   QMap<sp_search*, pb::spotify::SearchRequest> pending_searches_;
   QMap<sp_albumbrowse*, QString> pending_album_browses_;
+  QMap<sp_toplistbrowse*, pb::spotify::BrowseToplistRequest> pending_toplist_browses_;
 
   QMap<sp_search*, QList<sp_albumbrowse*> > pending_search_album_browses_;
   QMap<sp_albumbrowse*, sp_search*> pending_search_album_browse_responses_;

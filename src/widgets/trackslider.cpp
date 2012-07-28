@@ -15,17 +15,23 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "config.h"
 #include "trackslider.h"
 #include "ui_trackslider.h"
 #include "core/utilities.h"
 
 #include <QSettings>
 
+#ifdef HAVE_MOODBAR
+# include "moodbar/moodbarproxystyle.h"
+#endif
+
 const char* TrackSlider::kSettingsGroup = "MainWindow";
 
 TrackSlider::TrackSlider(QWidget* parent)
   : QWidget(parent),
     ui_(new Ui_TrackSlider),
+    moodbar_style_(NULL),
     setting_value_(false),
     show_remaining_time_(true),
     slider_maximum_value_(0)
@@ -50,6 +56,12 @@ TrackSlider::TrackSlider(QWidget* parent)
 
 TrackSlider::~TrackSlider() {
   delete ui_;
+}
+
+void TrackSlider::SetApplication(Application* app) {
+#ifdef HAVE_MOODBAR
+  moodbar_style_ = new MoodbarProxyStyle(app, ui_->slider);
+#endif
 }
 
 void TrackSlider::UpdateLabelWidth() {

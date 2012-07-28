@@ -26,8 +26,6 @@
 #include "libraryquery.h"
 #include "core/song.h"
 
-#include <boost/shared_ptr.hpp>
-
 class Database;
 
 namespace smart_playlists { class Search; }
@@ -72,6 +70,7 @@ public:
 
   virtual QStringList GetAllArtists(const QueryOptions& opt = QueryOptions()) = 0;
   virtual QStringList GetAllArtistsWithAlbums(const QueryOptions& opt = QueryOptions()) = 0;
+  virtual SongList GetSongsByAlbum(const QString& album, const QueryOptions& opt = QueryOptions()) = 0;
   virtual SongList GetSongs(
       const QString& artist, const QString& album, const QueryOptions& opt = QueryOptions()) = 0;
 
@@ -106,11 +105,11 @@ class LibraryBackend : public LibraryBackendInterface {
 
  public:
   Q_INVOKABLE LibraryBackend(QObject* parent = 0);
-  void Init(boost::shared_ptr<Database> db, const QString& songs_table,
+  void Init(Database* db, const QString& songs_table,
             const QString& dirs_table, const QString& subdirs_table,
             const QString& fts_table);
 
-  boost::shared_ptr<Database> db() const { return db_; }
+  Database* db() const { return db_; }
 
   QString songs_table() const { return songs_table_; }
   QString dirs_table() const { return dirs_table_; }
@@ -130,6 +129,7 @@ class LibraryBackend : public LibraryBackendInterface {
   QStringList GetAll(const QString& column, const QueryOptions& opt = QueryOptions());
   QStringList GetAllArtists(const QueryOptions& opt = QueryOptions());
   QStringList GetAllArtistsWithAlbums(const QueryOptions& opt = QueryOptions());
+  SongList GetSongsByAlbum(const QString& album, const QueryOptions& opt = QueryOptions());
   SongList GetSongs(const QString& artist, const QString& album, const QueryOptions& opt = QueryOptions());
 
   bool HasCompilations(const QueryOptions& opt = QueryOptions());
@@ -155,6 +155,7 @@ class LibraryBackend : public LibraryBackendInterface {
   void RemoveDirectory(const Directory& dir);
 
   bool ExecQuery(LibraryQuery* q);
+  SongList ExecLibraryQuery(LibraryQuery* query);
   SongList FindSongs(const smart_playlists::Search& search);
 
   void IncrementPlayCountAsync(int id);
@@ -200,6 +201,7 @@ class LibraryBackend : public LibraryBackendInterface {
 
     bool has_samplers;
     bool has_not_samplers;
+
   };
 
   static const char* kNewScoreSql;
@@ -215,7 +217,7 @@ class LibraryBackend : public LibraryBackendInterface {
   SongList GetSongsById(const QStringList& ids, QSqlDatabase& db);
 
  private:
-  boost::shared_ptr<Database> db_;
+  Database* db_;
   QString songs_table_;
   QString dirs_table_;
   QString subdirs_table_;

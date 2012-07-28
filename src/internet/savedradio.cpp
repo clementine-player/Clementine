@@ -17,6 +17,7 @@
 
 #include "internetmodel.h"
 #include "savedradio.h"
+#include "core/application.h"
 #include "core/mimedata.h"
 #include "globalsearch/globalsearch.h"
 #include "globalsearch/savedradiosearchprovider.h"
@@ -29,14 +30,14 @@
 const char* SavedRadio::kServiceName = "SavedRadio";
 const char* SavedRadio::kSettingsGroup = "SavedRadio";
 
-SavedRadio::SavedRadio(InternetModel* parent)
-  : InternetService(kServiceName, parent, parent),
+SavedRadio::SavedRadio(Application* app, InternetModel* parent)
+  : InternetService(kServiceName, app, parent, parent),
     context_menu_(NULL),
     root_(NULL)
 {
   LoadStreams();
 
-  model()->global_search()->AddProvider(new SavedRadioSearchProvider(this, this));
+  app_->global_search()->AddProvider(new SavedRadioSearchProvider(this, app_, this));
 }
 
 SavedRadio::~SavedRadio() {
@@ -92,8 +93,7 @@ void SavedRadio::SaveStreams() {
   emit StreamsChanged();
 }
 
-void SavedRadio::ShowContextMenu(const QModelIndex& index,
-                                 const QPoint& global_pos) {
+void SavedRadio::ShowContextMenu(const QPoint& global_pos) {
   if (!context_menu_) {
     context_menu_ = new QMenu;
     context_menu_->addActions(GetPlaylistActions());
@@ -103,8 +103,9 @@ void SavedRadio::ShowContextMenu(const QModelIndex& index,
     context_menu_->addAction(IconLoader::Load("document-open-remote"), tr("Add another stream..."), this, SIGNAL(ShowAddStreamDialog()));
   }
 
-  context_item_ = model()->itemFromIndex(index);
-  const bool is_root = index.data(InternetModel::Role_Type).toInt() == InternetModel::Type_Service;
+  const bool is_root =
+      model()->current_index().data(InternetModel::Role_Type).toInt() ==
+      InternetModel::Type_Service;
 
   GetAppendToPlaylistAction()->setEnabled(!is_root);
   GetReplacePlaylistAction()->setEnabled(!is_root);
@@ -116,35 +117,35 @@ void SavedRadio::ShowContextMenu(const QModelIndex& index,
 }
 
 void SavedRadio::Remove() {
-  streams_.removeAll(Stream(QUrl(context_item_->data(InternetModel::Role_Url).toUrl())));
-  context_item_->parent()->removeRow(context_item_->row());
+  QStandardItem* context_item = model()->itemFromIndex(model()->current_index());
+
+  streams_.removeAll(Stream(QUrl(context_item->data(InternetModel::Role_Url).toUrl())));
+  context_item->parent()->removeRow(context_item->row());
   SaveStreams();
 }
 
 void SavedRadio::Edit() {
+  QStandardItem* context_item = model()->itemFromIndex(model()->current_index());
+
   if (!edit_dialog_) {
     edit_dialog_.reset(new AddStreamDialog);
     edit_dialog_->set_save_visible(false);
   }
 
-  edit_dialog_->set_name(context_item_->text());
-  edit_dialog_->set_url(context_item_->data(InternetModel::Role_Url).toUrl());
+  edit_dialog_->set_name(context_item->text());
+  edit_dialog_->set_url(context_item->data(InternetModel::Role_Url).toUrl());
   if (edit_dialog_->exec() == QDialog::Rejected)
     return;
 
-  int i = streams_.indexOf(Stream(QUrl(context_item_->data(InternetModel::Role_Url).toUrl())));
+  int i = streams_.indexOf(Stream(QUrl(context_item->data(InternetModel::Role_Url).toUrl())));
   Stream& stream = streams_[i];
   stream.name_ = edit_dialog_->name();
   stream.url_ = edit_dialog_->url();
 
-  context_item_->setText(stream.name_);
-  context_item_->setData(stream.url_, InternetModel::Role_Url);
+  context_item->setText(stream.name_);
+  context_item->setData(stream.url_, InternetModel::Role_Url);
 
   SaveStreams();
-}
-
-QModelIndex SavedRadio::GetCurrentIndex() {
-  return context_item_->index();
 }
 
 void SavedRadio::AddStreamToList(const Stream& stream, QStandardItem* parent) {

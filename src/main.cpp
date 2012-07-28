@@ -24,37 +24,25 @@
 #endif // Q_OS_WIN32
 
 #include "config.h"
-#include "core/appearance.h"
+#include "core/application.h"
 #include "core/commandlineoptions.h"
 #include "core/crashreporting.h"
-#include "core/database.h"
 #include "core/encoding.h"
+#include "core/database.h"
 #include "core/logging.h"
 #include "core/mac_startup.h"
+#include "core/metatypes.h"
 #include "core/network.h"
 #include "core/networkproxyfactory.h"
-#include "core/player.h"
 #include "core/potranslator.h"
 #include "core/song.h"
-#include "core/tagreaderclient.h"
-#include "core/taskmanager.h"
 #include "core/ubuntuunityhack.h"
 #include "core/utilities.h"
-#include "covers/albumcoverfetcher.h"
 #include "covers/amazoncoverprovider.h"
 #include "covers/discogscoverprovider.h"
-#include "covers/artloader.h"
 #include "covers/coverproviders.h"
 #include "engines/enginebase.h"
-#include "globalsearch/globalsearch.h"
-#include "internet/digitallyimportedclient.h"
-#include "internet/internetmodel.h"
-#include "internet/somafmservice.h"
-#include "library/directory.h"
-#include "playlist/playlist.h"
-#include "playlist/playlistmanager.h"
 #include "smartplaylists/generator.h"
-#include "ui/equalizer.h"
 #include "ui/iconloader.h"
 #include "ui/mainwindow.h"
 #include "ui/systemtrayicon.h"
@@ -66,7 +54,6 @@
 
 #include <QDir>
 #include <QLibraryInfo>
-#include <QNetworkCookie>
 #include <QNetworkProxyFactory>
 #include <QSslSocket>
 #include <QSqlDatabase>
@@ -102,17 +89,12 @@ using boost::scoped_ptr;
 #ifdef HAVE_DBUS
   #include "core/mpris.h"
   #include "core/mpris2.h"
-  #include "dbus/metatypes.h"
-  #include "globalsearch/globalsearchservice.h"
   #include <QDBusArgument>
-  #include <QDBusConnection>
   #include <QImage>
 
   QDBusArgument& operator<< (QDBusArgument& arg, const QImage& image);
   const QDBusArgument& operator>> (const QDBusArgument& arg, QImage& image);
 #endif
-
-class GstEnginePipeline;
 
 // Load sqlite plugin on windows and mac.
 #ifdef HAVE_STATIC_SQLITE
@@ -142,10 +124,6 @@ void LoadTranslation(const QString& prefix, const QString& path,
   QTextCodec::setCodecForTr(QTextCodec::codecForLocale());
 }
 
-#ifdef HAVE_REMOTE
-#include <xrme/connection.h>
-#endif
-
 void IncreaseFDLimit() {
 #ifdef Q_OS_DARWIN
   // Bump the soft limit for the number of file descriptors from the default of 256 to
@@ -165,6 +143,47 @@ void IncreaseFDLimit() {
     qLog(Debug) << "Max fd:" << max_fd;
   }
 #endif
+}
+
+void SetEnv(const char *key, const QString &value) {
+#ifdef Q_OS_WIN32
+  putenv(QString("%1=%2").arg(key, value).toLocal8Bit().constData());
+#else
+  setenv(key, value.toLocal8Bit().constData(), 1);
+#endif
+}
+
+// This must be done early so that the spotify blob process also picks up
+// these environment variables.
+void SetGstreamerEnvironment() {
+  QString scanner_path;
+  QString plugin_path;
+  QString registry_filename;
+
+  // On windows and mac we bundle the gstreamer plugins with clementine
+#if defined(Q_OS_DARWIN)
+  scanner_path = QCoreApplication::applicationDirPath() + "/../PlugIns/gst-plugin-scanner";
+  plugin_path = QCoreApplication::applicationDirPath() + "/../PlugIns/gstreamer";
+#elif defined(Q_OS_WIN32)
+  plugin_path = QCoreApplication::applicationDirPath() + "/gstreamer-plugins";
+#endif
+
+#if defined(Q_OS_WIN32) || defined(Q_OS_DARWIN)
+  registry_filename = Utilities::GetConfigPath(Utilities::Path_GstreamerRegistry);
+#endif
+
+  if (!scanner_path.isEmpty())
+    SetEnv("GST_PLUGIN_SCANNER", scanner_path);
+
+  if (!plugin_path.isEmpty()) {
+    SetEnv("GST_PLUGIN_PATH", plugin_path);
+    // Never load plugins from anywhere else.
+    SetEnv("GST_PLUGIN_SYSTEM_PATH", plugin_path);
+  }
+
+  if (!registry_filename.isEmpty()) {
+    SetEnv("GST_REGISTRY", registry_filename);
+  }
 }
 
 #ifdef HAVE_GIO
@@ -226,45 +245,7 @@ int main(int argc, char *argv[]) {
   g_type_init();
   g_set_application_name(QCoreApplication::applicationName().toLocal8Bit());
 
-  qRegisterMetaType<CoverSearchResult>("CoverSearchResult");
-  qRegisterMetaType<QList<CoverSearchResult> >("QList<CoverSearchResult>");
-  qRegisterMetaType<CoverSearchResults>("CoverSearchResults");
-  qRegisterMetaType<Directory>("Directory");
-  qRegisterMetaType<DirectoryList>("DirectoryList");
-  qRegisterMetaType<Subdirectory>("Subdirectory");
-  qRegisterMetaType<SubdirectoryList>("SubdirectoryList");
-  qRegisterMetaType<Song>("Song");
-  qRegisterMetaType<QList<Song> >("QList<Song>");
-  qRegisterMetaType<SongList>("SongList");
-  qRegisterMetaType<PlaylistItemPtr>("PlaylistItemPtr");
-  qRegisterMetaType<QList<PlaylistItemPtr> >("QList<PlaylistItemPtr>");
-  qRegisterMetaType<PlaylistItemList>("PlaylistItemList");
-  qRegisterMetaType<Engine::State>("Engine::State");
-  qRegisterMetaType<Engine::SimpleMetaBundle>("Engine::SimpleMetaBundle");
-  qRegisterMetaType<Equalizer::Params>("Equalizer::Params");
-  qRegisterMetaTypeStreamOperators<Equalizer::Params>("Equalizer::Params");
-  qRegisterMetaType<const char*>("const char*");
-  qRegisterMetaType<QNetworkReply*>("QNetworkReply*");
-  qRegisterMetaType<QNetworkReply**>("QNetworkReply**");
-  qRegisterMetaType<smart_playlists::GeneratorPtr>("smart_playlists::GeneratorPtr");
-  qRegisterMetaType<ColumnAlignmentMap>("ColumnAlignmentMap");
-  qRegisterMetaTypeStreamOperators<QMap<int, int> >("ColumnAlignmentMap");
-  qRegisterMetaType<QNetworkCookie>("QNetworkCookie");
-  qRegisterMetaType<QList<QNetworkCookie> >("QList<QNetworkCookie>");
-  qRegisterMetaType<SearchProvider::Result>("SearchProvider::Result");
-  qRegisterMetaType<SearchProvider::ResultList>("SearchProvider::ResultList");
-  qRegisterMetaType<DigitallyImportedClient::Channel>("DigitallyImportedClient::Channel");
-  qRegisterMetaType<SomaFMService::Stream>("SomaFMService::Stream");
-  qRegisterMetaTypeStreamOperators<DigitallyImportedClient::Channel>("DigitallyImportedClient::Channel");
-  qRegisterMetaTypeStreamOperators<SomaFMService::Stream>("SomaFMService::Stream");
-
-  qRegisterMetaType<GstBuffer*>("GstBuffer*");
-  qRegisterMetaType<GstElement*>("GstElement*");
-  qRegisterMetaType<GstEnginePipeline*>("GstEnginePipeline*");
-
-#ifdef HAVE_REMOTE
-  qRegisterMetaType<xrme::SIPInfo>("xrme::SIPInfo");
-#endif
+  RegisterMetaTypes();
 
 #ifdef HAVE_LIBLASTFM
   lastfm::ws::ApiKey = LastFMService::kApiKey;
@@ -298,21 +279,30 @@ int main(int argc, char *argv[]) {
     }
   }
 
-#ifdef Q_OS_LINUX
-  // Force Clementine's menu to be shown in the Clementine window and not in
-  // the Unity global menubar thing.  See:
-  // https://bugs.launchpad.net/unity/+bug/775278
-  setenv("QT_X11_NO_NATIVE_MENUBAR", "1", true);
-#endif
-
   // Initialise logging
   logging::Init();
   logging::SetLevels(options.log_levels());
   g_log_set_default_handler(reinterpret_cast<GLogFunc>(&logging::GLog), NULL);
 
+  // Seed the random number generators.
+  time_t t = time(NULL);
+  srand(t);
+  qsrand(t);
+
   IncreaseFDLimit();
 
   QtSingleApplication a(argc, argv);
+
+  // A bug in Qt means the wheel_scroll_lines setting gets ignored and replaced
+  // with the default value of 3 in QApplicationPrivate::initialize.
+  {
+    QSettings qt_settings(QSettings::UserScope, "Trolltech");
+    qt_settings.beginGroup("Qt");
+    QApplication::setWheelScrollLines(
+          qt_settings.value("wheelScrollLines",
+                            QApplication::wheelScrollLines()).toInt());
+  }
+
 #ifdef Q_OS_DARWIN
   QCoreApplication::setLibraryPaths(
       QStringList() << QCoreApplication::applicationDirPath() + "/../PlugIns");
@@ -331,7 +321,11 @@ int main(int argc, char *argv[]) {
   QCoreApplication::setAttribute(Qt::AA_DontShowIconsInMenus, false);
 #else
   QCoreApplication::setAttribute(Qt::AA_DontShowIconsInMenus, true);
+  // Fixes focus issue with NSSearchField, see QTBUG-11401
+  QCoreApplication::setAttribute(Qt::AA_NativeWindows, true);
 #endif
+
+  SetGstreamerEnvironment();
 
   // Set the permissions on the config file on Unix - it can contain passwords
   // for internet services so it's important that other users can't read it.
@@ -385,8 +379,7 @@ int main(int argc, char *argv[]) {
   // Icons
   IconLoader::Init();
 
-  // Appearance (UI costumization)
-  Appearance appearance;
+  Application app;
 
   Echonest::Config::instance()->setAPIKey("DFLFLJBUF4EGTXHIG");
   Echonest::Config::instance()->setNetworkAccessManager(new NetworkAccessManager);
@@ -395,33 +388,10 @@ int main(int argc, char *argv[]) {
   QNetworkProxyFactory::setApplicationProxyFactory(
       NetworkProxyFactory::Instance());
 
-  // Seed the random number generator
-  srand(time(NULL));
-
   // Initialize the repository of cover providers.  Last.fm registers itself
   // when its service is created.
-  CoverProviders cover_providers;
-  cover_providers.AddProvider(new AmazonCoverProvider);
-  cover_providers.AddProvider(new DiscogsCoverProvider);
-
-  // Create the tag loader on another thread.
-  TagReaderClient* tag_reader_client = new TagReaderClient;
-
-  QThread tag_reader_thread;
-  tag_reader_thread.start();
-  tag_reader_client->moveToThread(&tag_reader_thread);
-  tag_reader_client->Start();
-
-  // Create some key objects
-  scoped_ptr<BackgroundThread<Database> > database(
-      new BackgroundThreadImplementation<Database, Database>(NULL));
-  database->Start(true);
-  TaskManager task_manager;
-  PlaylistManager playlists(&task_manager, NULL);
-  Player player(&playlists, &task_manager);
-  GlobalSearch global_search;
-  InternetModel internet_model(database.get(), &task_manager, &player,
-                               &cover_providers, &global_search, NULL);
+  app.cover_providers()->AddProvider(new AmazonCoverProvider);
+  app.cover_providers()->AddProvider(new DiscogsCoverProvider);
 
 #ifdef Q_OS_LINUX
   // In 11.04 Ubuntu decided that the system tray should be reserved for certain
@@ -432,37 +402,14 @@ int main(int argc, char *argv[]) {
 
   // Create the tray icon and OSD
   scoped_ptr<SystemTrayIcon> tray_icon(SystemTrayIcon::CreateSystemTrayIcon());
-  OSD osd(tray_icon.get());
-
-  ArtLoader art_loader;
+  OSD osd(tray_icon.get(), &app);
 
 #ifdef HAVE_DBUS
-  qDBusRegisterMetaType<QImage>();
-  qDBusRegisterMetaType<TrackMetadata>();
-  qDBusRegisterMetaType<TrackIds>();
-  qDBusRegisterMetaType<QList<QByteArray> >();
-
-  mpris::Mpris mpris(&player, &art_loader);
-
-  QObject::connect(&playlists, SIGNAL(CurrentSongChanged(Song)), &art_loader, SLOT(LoadArt(Song)));
-  QObject::connect(&art_loader, SIGNAL(ThumbnailLoaded(Song, QString, QImage)),
-                   &osd, SLOT(CoverArtPathReady(Song, QString)));
-
-  GlobalSearchService global_search_service(&global_search);
+  mpris::Mpris mpris(&app);
 #endif
 
   // Window
-  MainWindow w(
-      database.get(),
-      &task_manager,
-      &playlists,
-      &internet_model,
-      &player,
-      tray_icon.get(),
-      &osd,
-      &art_loader,
-      &cover_providers,
-      &global_search);
+  MainWindow w(&app, tray_icon.get(), &osd);
 #ifdef HAVE_GIO
   ScanGIOModulePath();
 #endif
@@ -473,10 +420,6 @@ int main(int argc, char *argv[]) {
   w.CommandlineOptionsReceived(options);
 
   int ret = a.exec();
-
-  tag_reader_client->deleteLater();
-  tag_reader_thread.quit();
-  tag_reader_thread.wait();
 
 #ifdef Q_OS_LINUX
   // The nvidia driver would cause Clementine (or any application that used

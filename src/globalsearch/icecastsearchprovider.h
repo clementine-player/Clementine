@@ -25,7 +25,7 @@ class IcecastBackend;
 
 class IcecastSearchProvider : public BlockingSearchProvider {
 public:
-  IcecastSearchProvider(IcecastBackend* backend, QObject* parent);
+  IcecastSearchProvider(IcecastBackend* backend, Application* app, QObject* parent);
 
   ResultList Search(int id, const QString& query);
 

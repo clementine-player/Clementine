@@ -76,16 +76,29 @@ namespace Utilities {
   // Checks if the mouse event was inside the widget's rectangle.
   bool IsMouseEventInWidget(const QMouseEvent* e, const QWidget* widget);
 
-
   // Reads all children of the current element, and returns with the stream
   // reader either on the EndElement for the current element, or the end of the
   // file - whichever came first.
   void ConsumeCurrentElement(QXmlStreamReader* reader);
 
+  // Advances the stream reader until it finds an element with the given name.
+  // Returns false if the end of the document was reached before finding a
+  // matching element.
+  bool ParseUntilElement(QXmlStreamReader* reader, const QString& name);
+
+  // Parses a string containing an RFC822 time and date.
+  QDateTime ParseRFC822DateTime(const QString& text);
+
+  // Replaces some HTML entities with their normal characters.
+  QString DecodeHtmlEntities(const QString& text);
+
   // Shortcut for getting a Qt-aware enum value as a string.
   // Pass in the QMetaObject of the class that owns the enum, the string name of
   // the enum and a valid value from that enum.
   const char* EnumToString(const QMetaObject& meta, const char* name, int value);
+
+  QStringList Prepend(const QString& text, const QStringList& list);
+  QStringList Updateify(const QStringList& list);
 
 
   enum ConfigPath {
@@ -95,11 +108,32 @@ namespace Utilities {
     Path_GstreamerRegistry,
     Path_DefaultMusicLibrary,
     Path_LocalSpotifyBlob,
+    Path_MoodbarCache,
   };
   QString GetConfigPath(ConfigPath config);
 
   // Returns the minor version of OS X (ie. 6 for Snow Leopard, 7 for Lion).
   qint32 GetMacVersion();
+
+  // Borrowed from schedutils
+  enum IoPriority {
+    IOPRIO_CLASS_NONE = 0,
+    IOPRIO_CLASS_RT,
+    IOPRIO_CLASS_BE,
+    IOPRIO_CLASS_IDLE,
+  };
+  enum {
+    IOPRIO_WHO_PROCESS = 1,
+    IOPRIO_WHO_PGRP,
+    IOPRIO_WHO_USER,
+  };
+  static const int IOPRIO_CLASS_SHIFT = 13;
+
+  int SetThreadIOPriority(IoPriority priority);
+  int GetThreadId();
+
+  // Returns true if this machine has a battery.
+  bool IsLaptop();
 }
 
 class ScopedWCharArray {

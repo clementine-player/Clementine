@@ -26,7 +26,11 @@
 
 #ifdef HAVE_LIBLASTFM
   #include "internet/fixlastfm.h"
-  #include <lastfm/Track>
+  #ifdef HAVE_LIBLASTFM1
+    #include <lastfm/Track.h>
+  #else
+    #include <lastfm/Track>
+  #endif
 #endif
 
 #include <QFile>
@@ -67,25 +71,6 @@ using boost::scoped_ptr;
 #include "widgets/trackslider.h"
 
 
-namespace {
-
-QStringList Prepend(const QString& text, const QStringList& list) {
-  QStringList ret(list);
-  for (int i=0 ; i<ret.count() ; ++i)
-    ret[i].prepend(text);
-  return ret;
-}
-
-QStringList Updateify(const QStringList& list) {
-  QStringList ret(list);
-  for (int i=0 ; i<ret.count() ; ++i)
-    ret[i].prepend(ret[i] + " = :");
-  return ret;
-}
-
-} // namespace
-
-
 const QStringList Song::kColumns = QStringList()
     << "title" << "album" << "artist" << "albumartist" << "composer" << "track"
     << "disc" << "bpm" << "year" << "genre" << "comment" << "compilation"
@@ -97,8 +82,8 @@ const QStringList Song::kColumns = QStringList()
     << "cue_path" << "unavailable" << "effective_albumartist";
 
 const QString Song::kColumnSpec = Song::kColumns.join(", ");
-const QString Song::kBindSpec = Prepend(":", Song::kColumns).join(", ");
-const QString Song::kUpdateSpec = Updateify(Song::kColumns).join(", ");
+const QString Song::kBindSpec = Utilities::Prepend(":", Song::kColumns).join(", ");
+const QString Song::kUpdateSpec = Utilities::Updateify(Song::kColumns).join(", ");
 
 
 const QStringList Song::kFtsColumns = QStringList()
@@ -106,8 +91,8 @@ const QStringList Song::kFtsColumns = QStringList()
     << "ftscomposer" << "ftsgenre" << "ftscomment";
 
 const QString Song::kFtsColumnSpec = Song::kFtsColumns.join(", ");
-const QString Song::kFtsBindSpec = Prepend(":", Song::kFtsColumns).join(", ");
-const QString Song::kFtsUpdateSpec = Updateify(Song::kFtsColumns).join(", ");
+const QString Song::kFtsBindSpec = Utilities::Prepend(":", Song::kFtsColumns).join(", ");
+const QString Song::kFtsUpdateSpec = Utilities::Updateify(Song::kFtsColumns).join(", ");
 
 const QString Song::kManuallyUnsetCover = "(unset)";
 const QString Song::kEmbeddedCover = "(embedded)";
@@ -324,7 +309,7 @@ void Song::set_basefilename(const QString& v) { d->basefilename_ = v; }
 void Song::set_directory_id(int v) { d->directory_id_ = v; }
 
 QString Song::JoinSpec(const QString& table) {
-  return Prepend(table + ".", kColumns).join(", ");
+  return Utilities::Prepend(table + ".", kColumns).join(", ");
 }
 
 QString Song::TextForFiletype(FileType type) {
@@ -348,6 +333,15 @@ QString Song::TextForFiletype(FileType type) {
     default:
       return QObject::tr("Unknown");
   }
+}
+
+int CompareSongsName(const Song& song1, const Song& song2) {
+  return song1.PrettyTitleWithArtist().localeAwareCompare(song2.PrettyTitleWithArtist()) < 0;
+}
+
+void Song::SortSongsListAlphabetically(SongList* songs) {
+  Q_ASSERT(songs);
+  qSort(songs->begin(), songs->end(), CompareSongsName);
 }
 
 void Song::Init(const QString& title, const QString& artist,
@@ -400,7 +394,6 @@ void Song::InitFromProtobuf(const pb::tagreader::SongMetadata& pb) {
   d->genre_ = QStringFromStdString(pb.genre());
   d->comment_ = QStringFromStdString(pb.comment());
   d->compilation_ = pb.compilation();
-  d->rating_ = pb.rating();
   d->playcount_ = pb.playcount();
   d->skipcount_ = pb.skipcount();
   d->lastplayed_ = pb.lastplayed();
@@ -414,8 +407,15 @@ void Song::InitFromProtobuf(const pb::tagreader::SongMetadata& pb) {
   d->ctime_ = pb.ctime();
   d->filesize_ = pb.filesize();
   d->suspicious_tags_ = pb.suspicious_tags();
-  d->art_automatic_ = QStringFromStdString(pb.art_automatic());
   d->filetype_ = static_cast<FileType>(pb.type());
+
+  if (pb.has_art_automatic()) {
+    d->art_automatic_ = QStringFromStdString(pb.art_automatic());
+  }
+
+  if (pb.has_rating()) {
+    d->rating_ = pb.rating();
+  }
 }
 
 void Song::ToProtobuf(pb::tagreader::SongMetadata* pb) const {
@@ -1017,10 +1017,14 @@ void Song::BindToFtsQuery(QSqlQuery *query) const {
 }
 
 #ifdef HAVE_LIBLASTFM
-void Song::ToLastFM(lastfm::Track* track) const {
+void Song::ToLastFM(lastfm::Track* track, bool prefer_album_artist) const {
   lastfm::MutableTrack mtrack(*track);
 
-  mtrack.setArtist(d->artist_);
+  if (prefer_album_artist && !d->albumartist_.isEmpty()) {
+    mtrack.setArtist(d->albumartist_);
+  } else {
+    mtrack.setArtist(d->artist_);
+  }
   mtrack.setAlbum(d->album_);
   mtrack.setTitle(d->title_);
   mtrack.setDuration(length_nanosec() / kNsecPerSec);

@@ -26,8 +26,9 @@
 
 CddaDevice::CddaDevice(const QUrl& url, DeviceLister* lister,
     const QString& unique_id, DeviceManager* manager,
+    Application* app,
     int database_id, bool first_time)
-      : ConnectedDevice(url, lister, unique_id, manager, database_id, first_time),
+      : ConnectedDevice(url, lister, unique_id, manager, app, database_id, first_time),
         cdda_(NULL),
         cdio_(NULL)
 {

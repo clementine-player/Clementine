@@ -24,13 +24,12 @@
 
 class UrlSearchProvider : public SearchProvider {
 public:
-  UrlSearchProvider(QObject* parent);
+  UrlSearchProvider(Application* app, QObject* parent);
 
   bool LooksLikeUrl(const QString& query) const;
 
   void SearchAsync(int id, const QString& query);
   void LoadArtAsync(int id, const Result& result);
-  void LoadTracksAsync(int id, const Result& result);
 
 private:
   static const char* kUrlRegex;

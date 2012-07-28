@@ -63,6 +63,7 @@ set(TESTUTILS-SOURCES
 
 set(TESTUTILS-MOC-HEADERS
   mock_networkaccessmanager.h
+  test_utils.h
   testobjectdecorators.h
 )
 
@@ -117,19 +118,19 @@ endmacro (add_test_file)
 
 #add_test_file(albumcoverfetcher_test.cpp false)
 
-add_test_file(albumcovermanager_test.cpp true)
+#add_test_file(albumcovermanager_test.cpp true)
 add_test_file(asxparser_test.cpp false)
 add_test_file(asxiniparser_test.cpp false)
 #add_test_file(cueparser_test.cpp false)
-add_test_file(database_test.cpp false)
+#add_test_file(database_test.cpp false)
 #add_test_file(fileformats_test.cpp false)
 add_test_file(fmpsparser_test.cpp false)
-add_test_file(librarybackend_test.cpp false)
-add_test_file(librarymodel_test.cpp true)
+#add_test_file(librarybackend_test.cpp false)
+#add_test_file(librarymodel_test.cpp true)
 #add_test_file(m3uparser_test.cpp false)
 add_test_file(mergedproxymodel_test.cpp false)
 add_test_file(organiseformat_test.cpp false)
-add_test_file(playlist_test.cpp true)
+#add_test_file(playlist_test.cpp true)
 #add_test_file(plsparser_test.cpp false)
 add_test_file(scopedtransaction_test.cpp false)
 #add_test_file(songloader_test.cpp false)
@@ -138,14 +139,9 @@ add_test_file(song_test.cpp false)
 add_test_file(translations_test.cpp false)
 add_test_file(utilities_test.cpp false)
 #add_test_file(xspfparser_test.cpp false)
+add_test_file(closure_test.cpp false)
+add_test_file(concurrentrun_test.cpp false)
 
-if(LINUX AND HAVE_DBUS)
-  add_test_file(mpris1_test.cpp true)
-endif(LINUX AND HAVE_DBUS)
-
-if(HAVE_SCRIPTING_PYTHON)
-  include_directories(${PYTHON_INCLUDE_DIRS})
-  include_directories(${CMAKE_SOURCE_DIR}/3rdparty/pythonqt/generated_cpp)
-  include_directories(${CMAKE_SOURCE_DIR}/3rdparty/pythonqt/src)
-  add_test_file(python_test.cpp true)
-endif (HAVE_SCRIPTING_PYTHON)
+#if(LINUX AND HAVE_DBUS)
+#  add_test_file(mpris1_test.cpp true)
+#endif(LINUX AND HAVE_DBUS)

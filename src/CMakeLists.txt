@@ -16,6 +16,19 @@ if(WIN32)
   include_directories(../3rdparty/qtwin)
 endif(WIN32)
 
+# Activate fast QString concatenation
+if (QT_VERSION_MINOR GREATER 5)
+  if (QT_VERSION_MINOR GREATER 7)
+    add_definitions(-DQT_USE_QSTRINGBUILDER)
+  else(QT_VERSION_MINOR GREATER 7)
+    add_definitions(-DQT_USE_FAST_CONCATENATION -DQT_USE_FAST_OPERATOR_PLUS)
+  endif(QT_VERSION_MINOR GREATER 7)
+endif(QT_VERSION_MINOR GREATER 5)
+
+if(ENABLE_IMOBILEDEVICE AND IMOBILEDEVICE_VERSION VERSION_GREATER 1.1.1)
+  set(IMOBILEDEVICE_USES_UDIDS ON)
+endif()
+
 include_directories(${CMAKE_BINARY_DIR})
 include_directories(${GLIB_INCLUDE_DIRS})
 include_directories(${LIBXML_INCLUDE_DIRS})
@@ -27,6 +40,7 @@ include_directories(${QXT_INCLUDE_DIRS})
 include_directories(${ECHONEST_INCLUDE_DIRS})
 include_directories(${SHA2_INCLUDE_DIRS})
 include_directories(${CHROMAPRINT_INCLUDE_DIRS})
+include_directories(${MYGPOQT_INCLUDE_DIRS})
 
 find_package(OpenGL)
 include_directories(${OPENGL_INCLUDE_DIR})
@@ -63,8 +77,8 @@ set(SOURCES
   analyzers/turbine.cpp
 
   core/appearance.cpp
+  core/application.cpp
   core/backgroundstreams.cpp
-  core/backgroundthread.cpp
   core/commandlineoptions.cpp
   core/crashreporting.cpp
   core/database.cpp
@@ -76,6 +90,7 @@ set(SOURCES
   core/globalshortcuts.cpp
   core/gnomeglobalshortcutbackend.cpp
   core/mergedproxymodel.cpp
+  core/metatypes.cpp
   core/multisortfilterproxy.cpp
   core/musicstorage.cpp
   core/network.cpp
@@ -87,6 +102,7 @@ set(SOURCES
   core/qxtglobalshortcutbackend.cpp
   core/scopedtransaction.cpp
   core/settingsprovider.cpp
+  core/signalchecker.cpp
   core/song.cpp
   core/songloader.cpp
   core/stylesheetloader.cpp
@@ -99,11 +115,11 @@ set(SOURCES
   covers/albumcoverfetchersearch.cpp
   covers/albumcoverloader.cpp
   covers/amazoncoverprovider.cpp
-  covers/artloader.cpp
   covers/coverprovider.cpp
   covers/coverproviders.cpp
   covers/coversearchstatistics.cpp
   covers/coversearchstatisticsdialog.cpp
+  covers/currentartloader.cpp
   covers/discogscoverprovider.cpp
   covers/kittenloader.cpp
 
@@ -121,31 +137,30 @@ set(SOURCES
   engines/gstenginepipeline.cpp
   engines/gstelementdeleter.cpp
 
-  globalsearch/common.cpp
   globalsearch/digitallyimportedsearchprovider.cpp
   globalsearch/globalsearch.cpp
   globalsearch/globalsearchitemdelegate.cpp
+  globalsearch/globalsearchmodel.cpp
   globalsearch/globalsearchsettingspage.cpp
   globalsearch/globalsearchsortmodel.cpp
-  globalsearch/globalsearchtooltip.cpp
-  globalsearch/globalsearchwidget.cpp
+  globalsearch/globalsearchview.cpp
   globalsearch/groovesharksearchprovider.cpp
   globalsearch/icecastsearchprovider.cpp
   globalsearch/librarysearchprovider.cpp
   globalsearch/savedradiosearchprovider.cpp
   globalsearch/searchprovider.cpp
+  globalsearch/searchproviderstatuswidget.cpp
   globalsearch/simplesearchprovider.cpp
   globalsearch/somafmsearchprovider.cpp
-  globalsearch/tooltipactionwidget.cpp
-  globalsearch/tooltipresultwidget.cpp
+  globalsearch/suggestionwidget.cpp
   globalsearch/urlsearchprovider.cpp
 
   internet/digitallyimportedclient.cpp
   internet/digitallyimportedservicebase.cpp
   internet/digitallyimportedsettingspage.cpp
   internet/digitallyimportedurlhandler.cpp
+  internet/geolocator.cpp
   internet/groovesharkradio.cpp
-  internet/groovesharksearchplaylisttype.cpp
   internet/groovesharkservice.cpp
   internet/groovesharksettingspage.cpp
   internet/groovesharkurlhandler.cpp
@@ -167,6 +182,7 @@ set(SOURCES
   internet/magnatuneservice.cpp
   internet/magnatuneurlhandler.cpp
   internet/savedradio.cpp
+  internet/searchboxwidget.cpp
   internet/somafmservice.cpp
   internet/somafmurlhandler.cpp
   internet/subsonicservice.cpp
@@ -221,6 +237,28 @@ set(SOURCES
   playlistparsers/xmlparser.cpp
   playlistparsers/xspfparser.cpp
 
+  podcasts/addpodcastbyurl.cpp
+  podcasts/addpodcastdialog.cpp
+  podcasts/addpodcastpage.cpp
+  podcasts/fixedopmlpage.cpp
+  podcasts/gpoddersearchpage.cpp
+  podcasts/gpoddersync.cpp
+  podcasts/gpoddertoptagsmodel.cpp
+  podcasts/gpoddertoptagspage.cpp
+  podcasts/itunessearchpage.cpp
+  podcasts/podcast.cpp
+  podcasts/podcastbackend.cpp
+  podcasts/podcastdiscoverymodel.cpp
+  podcasts/podcastdownloader.cpp
+  podcasts/podcastepisode.cpp
+  podcasts/podcastinfowidget.cpp
+  podcasts/podcastservice.cpp
+  podcasts/podcastservicemodel.cpp
+  podcasts/podcastsettingspage.cpp
+  podcasts/podcastparser.cpp
+  podcasts/podcastupdater.cpp
+  podcasts/podcasturlloader.cpp
+
   smartplaylists/generator.cpp
   smartplaylists/generatorinserter.cpp
   smartplaylists/querygenerator.cpp
@@ -243,7 +281,9 @@ set(SOURCES
   songinfo/songinfosettingspage.cpp
   songinfo/songinfotextview.cpp
   songinfo/songinfoview.cpp
+  songinfo/songkickconcerts.cpp
   songinfo/songplaystats.cpp
+  songinfo/twitterartistinfo.cpp
   songinfo/ultimatelyricsprovider.cpp
   songinfo/ultimatelyricsreader.cpp
 
@@ -284,6 +324,7 @@ set(SOURCES
   ui/screensaver.cpp
   ui/settingsdialog.cpp
   ui/settingspage.cpp
+  ui/standarditemiconloader.cpp
   ui/systemtrayicon.cpp
   ui/trackselectiondialog.cpp
   ui/windows7thumbbar.cpp
@@ -315,7 +356,6 @@ set(SOURCES
   widgets/ratingwidget.cpp
   widgets/renametablineedit.cpp
   widgets/sliderwidget.cpp
-  widgets/spinbox.cpp
   widgets/stickyslider.cpp
   widgets/stretchheaderview.cpp
   widgets/stylehelper.cpp
@@ -335,8 +375,8 @@ set(HEADERS
   analyzers/sonogram.h
   analyzers/turbine.h
 
+  core/application.h
   core/backgroundstreams.h
-  core/backgroundthread.h
   core/crashreporting.h
   core/database.h
   core/deletefiles.h
@@ -359,10 +399,10 @@ set(HEADERS
   covers/albumcoverfetchersearch.h
   covers/albumcoverloader.h
   covers/amazoncoverprovider.h
-  covers/artloader.h
   covers/coverprovider.h
   covers/coverproviders.h
   covers/coversearchstatisticsdialog.h
+  covers/currentartloader.h
   covers/discogscoverprovider.h
   covers/kittenloader.h
 
@@ -381,18 +421,18 @@ set(HEADERS
   engines/gstelementdeleter.h
 
   globalsearch/globalsearch.h
+  globalsearch/globalsearchmodel.h
   globalsearch/globalsearchsettingspage.h
-  globalsearch/globalsearchtooltip.h
-  globalsearch/globalsearchwidget.h
+  globalsearch/globalsearchview.h
   globalsearch/groovesharksearchprovider.h
   globalsearch/searchprovider.h
   globalsearch/simplesearchprovider.h
-  globalsearch/tooltipactionwidget.h
-  globalsearch/tooltipresultwidget.h
+  globalsearch/suggestionwidget.h
 
   internet/digitallyimportedclient.h
   internet/digitallyimportedservicebase.h
   internet/digitallyimportedsettingspage.h
+  internet/geolocator.h
   internet/groovesharkservice.h
   internet/groovesharksettingspage.h
   internet/groovesharkurlhandler.h
@@ -412,6 +452,7 @@ set(HEADERS
   internet/magnatunesettingspage.h
   internet/magnatuneservice.h
   internet/savedradio.h
+  internet/searchboxwidget.h
   internet/somafmservice.h
   internet/somafmurlhandler.h
   internet/subsonicservice.h
@@ -459,6 +500,25 @@ set(HEADERS
   playlistparsers/plsparser.h
   playlistparsers/xspfparser.h
 
+  podcasts/addpodcastbyurl.h
+  podcasts/addpodcastdialog.h
+  podcasts/addpodcastpage.h
+  podcasts/fixedopmlpage.h
+  podcasts/gpoddersearchpage.h
+  podcasts/gpoddersync.h
+  podcasts/gpoddertoptagsmodel.h
+  podcasts/gpoddertoptagspage.h
+  podcasts/itunessearchpage.h
+  podcasts/podcastbackend.h
+  podcasts/podcastdiscoverymodel.h
+  podcasts/podcastdownloader.h
+  podcasts/podcastinfowidget.h
+  podcasts/podcastservice.h
+  podcasts/podcastservicemodel.h
+  podcasts/podcastsettingspage.h
+  podcasts/podcastupdater.h
+  podcasts/podcasturlloader.h
+
   smartplaylists/generator.h
   smartplaylists/generatorinserter.h
   smartplaylists/generatormimedata.h
@@ -479,7 +539,9 @@ set(HEADERS
   songinfo/songinfosettingspage.h
   songinfo/songinfotextview.h
   songinfo/songinfoview.h
+  songinfo/songkickconcerts.h
   songinfo/songplaystats.h
+  songinfo/twitterartistinfo.h
   songinfo/ultimatelyricsprovider.h
   songinfo/ultimatelyricsreader.h
 
@@ -512,6 +574,7 @@ set(HEADERS
   ui/qtsystemtrayicon.h
   ui/settingsdialog.h
   ui/settingspage.h
+  ui/standarditemiconloader.h
   ui/systemtrayicon.h
   ui/trackselectiondialog.h
   ui/windows7thumbbar.h
@@ -541,7 +604,6 @@ set(HEADERS
   widgets/ratingwidget.h
   widgets/renametablineedit.h
   widgets/sliderwidget.h
-  widgets/spinbox.h
   widgets/stickyslider.h
   widgets/stretchheaderview.h
   widgets/trackslider.h
@@ -556,7 +618,9 @@ set(UI
   devices/deviceproperties.ui
 
   globalsearch/globalsearchsettingspage.ui
-  globalsearch/globalsearchwidget.ui
+  globalsearch/globalsearchview.ui
+  globalsearch/searchproviderstatuswidget.ui
+  globalsearch/suggestionwidget.ui
 
   internet/digitallyimportedsettingspage.ui
   internet/groovesharksettingspage.ui
@@ -564,6 +628,7 @@ set(UI
   internet/internetviewcontainer.ui
   internet/magnatunedownloaddialog.ui
   internet/magnatunesettingspage.ui
+  internet/searchboxwidget.ui
   internet/spotifysettingspage.ui
   internet/subsonicsettingspage.ui
 
@@ -577,7 +642,12 @@ set(UI
   playlist/playlistsequence.ui
   playlist/queuemanager.ui
 
-  remote/remotesettingspage.ui
+  podcasts/addpodcastbyurl.ui
+  podcasts/addpodcastdialog.ui
+  podcasts/gpoddersearchpage.ui
+  podcasts/itunessearchpage.ui
+  podcasts/podcastinfowidget.ui
+  podcasts/podcastsettingspage.ui
 
   smartplaylists/querysearchpage.ui
   smartplaylists/querysortpage.ui
@@ -648,7 +718,7 @@ else (LINGUAS STREQUAL "All")
   if (NOT LINGUAS OR LINGUAS STREQUAL "None")
     set (LANGUAGES "")
   else (NOT LINGUAS OR LINGUAS STREQUAL "None")
-    string(REGEX MATCHALL [a-zA-Z_]+
+    string(REGEX MATCHALL [a-zA-Z_@]+
            LANGUAGES ${LINGUAS})
   endif (NOT LINGUAS OR LINGUAS STREQUAL "None")
 endif (LINGUAS STREQUAL "All")
@@ -680,6 +750,7 @@ optional_source(HAVE_LIBLASTFM
     covers/lastfmcoverprovider.cpp
     globalsearch/lastfmsearchprovider.cpp
     internet/fixlastfm.cpp
+    internet/lastfmcompat.cpp
     internet/lastfmservice.cpp
     internet/lastfmsettingspage.cpp
     internet/lastfmstationdialog.cpp
@@ -688,7 +759,6 @@ optional_source(HAVE_LIBLASTFM
     songinfo/echonesttags.cpp
     songinfo/lastfmtrackinfoprovider.cpp
     songinfo/tagwidget.cpp
-    suggesters/lastfmsuggester.cpp
   HEADERS
     covers/lastfmcoverprovider.h
     internet/lastfmservice.h
@@ -698,7 +768,6 @@ optional_source(HAVE_LIBLASTFM
     songinfo/echonesttags.h
     songinfo/lastfmtrackinfoprovider.h
     songinfo/tagwidget.h
-    suggesters/lastfmsuggester.h
   UI
     internet/lastfmsettingspage.ui
     internet/lastfmstationdialog.ui
@@ -709,7 +778,6 @@ optional_source(HAVE_SPOTIFY
   SOURCES
     globalsearch/spotifysearchprovider.cpp
     internet/spotifyblobdownloader.cpp
-    internet/spotifysearchplaylisttype.cpp
     internet/spotifyserver.cpp
     internet/spotifyservice.cpp
     internet/spotifysettingspage.cpp
@@ -740,7 +808,6 @@ optional_source(APPLE
     ui/globalshortcutgrabber.mm
     ui/macscreensaver.cpp
     ui/macsystemtrayicon.mm
-    widgets/maclineedit.mm
     widgets/osd_mac.mm
   HEADERS
     core/macfslistener.h
@@ -748,7 +815,6 @@ optional_source(APPLE
     devices/macdevicelister.h
     ui/macscreensaver.h
     ui/macsystemtrayicon.h
-    widgets/maclineedit.h
 )
 
 # Platform specific - Windows
@@ -808,12 +874,6 @@ if(HAVE_DBUS)
         dbus/udisksdevice)
   endif(HAVE_DEVICEKIT)
 
-  # Global search interface
-  qt4_add_dbus_adaptor(SOURCES
-      dbus/org.clementineplayer.GlobalSearch.xml
-      globalsearch/globalsearchservice.h GlobalSearchService
-      globalsearch/globalsearchadaptor)
-
   # Wiimotedev interface classes
   if(ENABLE_WIIMOTEDEV)
     qt4_add_dbus_interface(SOURCES
@@ -827,13 +887,11 @@ optional_source(HAVE_DBUS
     core/mpris.cpp
     core/mpris1.cpp
     core/mpris2.cpp
-    globalsearch/globalsearchservice.cpp
     ui/dbusscreensaver.cpp
   HEADERS
     core/mpris.h
     core/mpris1.h
     core/mpris2.h
-    globalsearch/globalsearchservice.h
 )
 
 optional_source(HAVE_WIIMOTEDEV
@@ -925,17 +983,21 @@ optional_source(HAVE_SAC
     devices/wmdmloader.h
 )
 
-optional_source(HAVE_REMOTE
+# Moodbar support
+optional_source(HAVE_MOODBAR
   SOURCES
-    remote/portforwarder.cpp
-    remote/remote.cpp
-    remote/remotesettingspage.cpp
-    remote/streampipeline.cpp
+    moodbar/moodbarcontroller.cpp
+    moodbar/moodbaritemdelegate.cpp
+    moodbar/moodbarloader.cpp
+    moodbar/moodbarpipeline.cpp
+    moodbar/moodbarproxystyle.cpp
+    moodbar/moodbarrenderer.cpp
   HEADERS
-    remote/portforwarder.h
-    remote/remote.h
-    remote/remotesettingspage.h
-    remote/streampipeline.h
+    moodbar/moodbarcontroller.h
+    moodbar/moodbaritemdelegate.h
+    moodbar/moodbarloader.h
+    moodbar/moodbarpipeline.h
+    moodbar/moodbarproxystyle.h
 )
 
 # Hack to add Clementine to the Unity system tray whitelist
@@ -982,6 +1044,7 @@ target_link_libraries(clementine_lib
   libclementine-tagreader
   ${SHA2_LIBRARIES}
   ${TAGLIB_LIBRARIES}
+  ${MYGPOQT_LIBRARIES}
   ${CHROMAPRINT_LIBRARIES}
   ${ECHONEST_LIBRARIES}
   ${GOBJECT_LIBRARIES}
@@ -997,6 +1060,7 @@ target_link_libraries(clementine_lib
   ${QTIOCOMPRESSOR_LIBRARIES}
   ${CMAKE_THREAD_LIBS_INIT}
   z
+  Qocoa
 )
 
 if(ENABLE_VISUALISATIONS)
@@ -1027,8 +1091,13 @@ if(HAVE_IMOBILEDEVICE)
     ${USBMUXD_LIBRARIES}
     gstafcsrc
   )
+  link_directories(${IMOBILEDEVICE_LIBRARY_DIRS})
   link_directories(${USBMUXD_LIBRARY_DIRS})
 endif(HAVE_IMOBILEDEVICE)
+
+if(HAVE_MOODBAR)
+  target_link_libraries(clementine_lib gstmoodbar)
+endif()
 
 if(HAVE_LIBMTP)
   target_link_libraries(clementine_lib ${LIBMTP_LIBRARIES})
@@ -1037,13 +1106,6 @@ endif(HAVE_LIBMTP)
 if(HAVE_LIBINDICATE)
   target_link_libraries(clementine_lib ${INDICATEQT_LIBRARIES})
 endif(HAVE_LIBINDICATE)
-
-if(HAVE_REMOTE)
-  target_link_libraries(clementine_lib ${GLOOX_LIBRARIES})
-  link_directories(${GLOOX_LIBRARY_DIRS})
-  target_link_libraries(clementine_lib xrme)
-  target_link_libraries(clementine_lib portfwd)
-endif(HAVE_REMOTE)
 
 if(HAVE_BREAKPAD)
   if (LINUX)

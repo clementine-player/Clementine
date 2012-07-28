@@ -1,6 +1,7 @@
 #include "subsonicurlhandler.h"
 #include "subsonicservice.h"
 #include "internetmodel.h"
+#include "core/application.h"
 #include "core/logging.h"
 #include "core/player.h"
 #include "core/utilities.h"
@@ -17,16 +18,16 @@ const char* SubsonicService::kSettingsGroup = "Subsonic";
 const char* SubsonicService::kApiVersion = "1.7.0";
 const char* SubsonicService::kApiClientName = "Clementine";
 
-SubsonicService::SubsonicService(InternetModel *parent)
-  : InternetService(kServiceName, parent, parent),
+SubsonicService::SubsonicService(Application* app, InternetModel *parent)
+  : InternetService(kServiceName, app, parent, parent),
     network_(new QNetworkAccessManager(this)),
     http_url_handler_(new SubsonicUrlHandler(this, this)),
     https_url_handler_(new SubsonicHttpsUrlHandler(this, this)),
     login_state_(LoginState_OtherError),
     item_lookup_()
 {
-  model()->player()->RegisterUrlHandler(http_url_handler_);
-  model()->player()->RegisterUrlHandler(https_url_handler_);
+  app_->player()->RegisterUrlHandler(http_url_handler_);
+  app_->player()->RegisterUrlHandler(https_url_handler_);
   connect(this, SIGNAL(LoginStateChanged(SubsonicService::LoginState)),
           SLOT(onLoginStateChanged(SubsonicService::LoginState)));
 }

@@ -58,8 +58,8 @@
            <number>0</number>
           </property>
           <item>
-           <widget class="LineEdit" name="filter">
-            <property name="hint" stdset="0">
+           <widget class="QSearchField" name="filter">
+            <property name="placeholderText" stdset="0">
              <string>Enter search terms here</string>
             </property>
            </widget>
@@ -169,9 +169,9 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>LineEdit</class>
-   <extends>QLineEdit</extends>
-   <header>widgets/lineedit.h</header>
+   <class>QSearchField</class>
+   <extends>QWidget</extends>
+   <header>3rdparty/qocoa/qsearchfield.h</header>
   </customwidget>
   <customwidget>
    <class>AlbumCoverManagerList</class>

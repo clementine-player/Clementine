@@ -21,7 +21,9 @@
 #include "libraryview.h"
 #include "libraryitem.h"
 #include "librarybackend.h"
+#include "core/application.h"
 #include "core/deletefiles.h"
+#include "core/logging.h"
 #include "core/mimedata.h"
 #include "core/musicstorage.h"
 #include "core/utilities.h"
@@ -60,12 +62,38 @@ void LibraryItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &o
 
     painter->save();
 
+    QRect text_rect(opt.rect);
+
+    // Does this item have an icon?
+    QPixmap pixmap;
+    QVariant decoration = index.data(Qt::DecorationRole);
+    if (!decoration.isNull()) {
+      if (decoration.canConvert<QPixmap>()) {
+        pixmap = decoration.value<QPixmap>();
+      } else if (decoration.canConvert<QIcon>()) {
+        pixmap = decoration.value<QIcon>().pixmap(opt.decorationSize);
+      }
+    }
+
+    // Draw the icon at the left of the text rectangle
+    if (!pixmap.isNull()) {
+      QRect icon_rect(text_rect.topLeft(), opt.decorationSize);
+      const int padding = (text_rect.height() - icon_rect.height()) / 2;
+      icon_rect.adjust(padding, padding, padding, padding);
+      text_rect.moveLeft(icon_rect.right() + padding + 6);
+
+      if (pixmap.size() != opt.decorationSize) {
+        pixmap = pixmap.scaled(opt.decorationSize, Qt::KeepAspectRatio);
+      }
+
+      painter->drawPixmap(icon_rect, pixmap);
+    } else {
+      text_rect.setLeft(text_rect.left() + 30);
+    }
+
     // Draw the text
     QFont bold_font(opt.font);
     bold_font.setBold(true);
-
-    QRect text_rect(opt.rect);
-    text_rect.setLeft(text_rect.left() + 30);
 
     painter->setPen(opt.palette.color(QPalette::Text));
     painter->setFont(bold_font);
@@ -107,9 +135,15 @@ bool LibraryItemDelegate::helpEvent(QHelpEvent *event, QAbstractItemView *view,
       real_text = sizeHint(option, index);
       displayed_text = view->visualRect(index);
       is_elided = displayed_text.width() < real_text.width();
-      if(is_elided) {
+
+      if (is_elided) {
         QToolTip::showText(he->globalPos(), text, view);
-      } else { // in case that another text was previously displayed
+      } else if (index.data(Qt::ToolTipRole).isValid()) {
+        // If the item has a tooltip text, display it
+        QString tooltip_text = index.data(Qt::ToolTipRole).toString();
+        QToolTip::showText(he->globalPos(), tooltip_text, view);
+      } else {
+        // in case that another text was previously displayed
         QToolTip::hideText();
       }
       return true;
@@ -130,10 +164,7 @@ bool LibraryItemDelegate::helpEvent(QHelpEvent *event, QAbstractItemView *view,
 
 LibraryView::LibraryView(QWidget* parent)
   : AutoExpandingTreeView(parent),
-    cover_providers_(NULL),
-    library_(NULL),
-    devices_(NULL),
-    task_manager_(NULL),
+    app_(NULL),
     filter_(NULL),
     total_song_count_(-1),
     nomusic_(":nomusic.png"),
@@ -159,27 +190,15 @@ void LibraryView::ReloadSettings() {
   s.beginGroup(kSettingsGroup);
 
   SetAutoOpen(s.value("auto_open", true).toBool());
-  if (library_ != NULL) {
-    library_->set_pretty_covers(s.value("pretty_covers", true).toBool());
-    library_->set_show_dividers(s.value("show_dividers", true).toBool());
+  if (app_ != NULL) {
+    app_->library_model()->set_pretty_covers(s.value("pretty_covers", true).toBool());
+    app_->library_model()->set_show_dividers(s.value("show_dividers", true).toBool());
   }
 }
 
-void LibraryView::SetCoverProviders(CoverProviders* cover_providers) {
-  cover_providers_ = cover_providers;
-}
-
-void LibraryView::SetTaskManager(TaskManager *task_manager) {
-  task_manager_ = task_manager;
-}
-
-void LibraryView::SetLibrary(LibraryModel* library) {
-  library_ = library;
+void LibraryView::SetApplication(Application* app) {
+  app_ = app;
   ReloadSettings();
-}
-
-void LibraryView::SetDeviceManager(DeviceManager* device_manager) {
-  devices_ = device_manager;
 }
 
 void LibraryView::SetFilter(LibraryFilterWidget* filter) {
@@ -284,8 +303,8 @@ void LibraryView::contextMenuEvent(QContextMenuEvent *e) {
 
     context_menu_->addMenu(filter_->menu());
 
-    copy_to_device_->setDisabled(devices_->connected_devices_model()->rowCount() == 0);
-    connect(devices_->connected_devices_model(), SIGNAL(IsEmptyChanged(bool)),
+    copy_to_device_->setDisabled(app_->device_manager()->connected_devices_model()->rowCount() == 0);
+    connect(app_->device_manager()->connected_devices_model(), SIGNAL(IsEmptyChanged(bool)),
             copy_to_device_, SLOT(setDisabled(bool)));
   }
 
@@ -310,7 +329,7 @@ void LibraryView::contextMenuEvent(QContextMenuEvent *e) {
   int regular_editable = 0;
 
   foreach(const QModelIndex& index, selected_indexes) {
-    int type = library_->data(index, LibraryModel::Role_Type).toInt();
+    int type = app_->library_model()->data(index, LibraryModel::Role_Type).toInt();
 
     if(type == LibraryItem::Type_SmartPlaylist) {
       smart_playlists++;
@@ -320,7 +339,7 @@ void LibraryView::contextMenuEvent(QContextMenuEvent *e) {
       regular_elements++;
     }
 
-    if(library_->data(index, LibraryModel::Role_Editable).toBool()) {
+    if(app_->library_model()->data(index, LibraryModel::Role_Editable).toBool()) {
       regular_editable++;
     }
   }
@@ -389,8 +408,32 @@ void LibraryView::ShowInVarious(bool on) {
       albums.insert( song.album(), song.artist() );
   }
 
+  // If we have only one album and we are putting it into Various Artists, check to see
+  // if there are other Artists in this album and prompt the user if they'd like them moved, too
+  if(on && albums.keys().count() == 1) {
+    const QString album = albums.keys().first();
+    QList<Song> all_of_album = app_->library_backend()->GetSongsByAlbum(album);
+    QSet<QString> other_artists;
+    foreach (const Song& s, all_of_album) {
+      if(!albums.contains(album, s.artist()) && !other_artists.contains(s.artist())) {
+        other_artists.insert(s.artist());
+      }
+    }
+    if (other_artists.count() > 0) {
+      if (QMessageBox::question(this,
+              tr("There are other songs in this album"),
+              tr("Would you like to move the other songs in this album to Various Artists as well?"),
+              QMessageBox::Yes | QMessageBox::No,
+              QMessageBox::Yes) == QMessageBox::Yes) {
+        foreach (const QString& s, other_artists) {
+          albums.insert(album, s);
+        }
+      }
+    }
+  }
+
   foreach (const QString& album, QSet<QString>::fromList(albums.keys())) {
-    library_->backend()->ForceCompilation(album, albums.values(album), on);
+    app_->library_backend()->ForceCompilation(album, albums.values(album), on);
   }
 }
 
@@ -439,14 +482,14 @@ SongList LibraryView::GetSelectedSongs() const {
   QModelIndexList selected_indexes =
       qobject_cast<QSortFilterProxyModel*>(model())->mapSelectionToSource(
           selectionModel()->selection()).indexes();
-  return library_->GetChildSongs(selected_indexes);
+  return app_->library_model()->GetChildSongs(selected_indexes);
 }
 
 void LibraryView::Organise() {
   if (!organise_dialog_)
-    organise_dialog_.reset(new OrganiseDialog(task_manager_));
+    organise_dialog_.reset(new OrganiseDialog(app_->task_manager()));
 
-  organise_dialog_->SetDestinationModel(library_->directory_model());
+  organise_dialog_->SetDestinationModel(app_->library_model()->directory_model());
   organise_dialog_->SetCopy(false);
   if (organise_dialog_->SetSongs(GetSelectedSongs()))
     organise_dialog_->show();
@@ -466,18 +509,17 @@ void LibraryView::Delete() {
   // they'll all be FilesystemMusicStorage in a library and deleting doesn't
   // check the actual directory.
   boost::shared_ptr<MusicStorage> storage =
-      library_->directory_model()->index(0, 0).data(MusicStorage::Role_Storage)
+      app_->library_model()->directory_model()->index(0, 0).data(MusicStorage::Role_Storage)
       .value<boost::shared_ptr<MusicStorage> >();
 
-  DeleteFiles* delete_files = new DeleteFiles(task_manager_, storage);
+  DeleteFiles* delete_files = new DeleteFiles(app_->task_manager(), storage);
   connect(delete_files, SIGNAL(Finished(SongList)), SLOT(DeleteFinished(SongList)));
   delete_files->Start(GetSelectedSongs());
 }
 
 void LibraryView::EditTracks() {
   if(!edit_tag_dialog_) {
-    edit_tag_dialog_.reset(new EditTagDialog(cover_providers_, this));
-    edit_tag_dialog_->SetTagCompleter(library_->backend());
+    edit_tag_dialog_.reset(new EditTagDialog(app_, this));
   }
   edit_tag_dialog_->SetSongs(GetSelectedSongs());
   edit_tag_dialog_->show();
@@ -485,9 +527,9 @@ void LibraryView::EditTracks() {
 
 void LibraryView::CopyToDevice() {
   if (!organise_dialog_)
-    organise_dialog_.reset(new OrganiseDialog(task_manager_));
+    organise_dialog_.reset(new OrganiseDialog(app_->task_manager()));
 
-  organise_dialog_->SetDestinationModel(devices_->connected_devices_model(), true);
+  organise_dialog_->SetDestinationModel(app_->device_manager()->connected_devices_model(), true);
   organise_dialog_->SetCopy(true);
   organise_dialog_->SetSongs(GetSelectedSongs());
   organise_dialog_->show();
@@ -521,7 +563,7 @@ void LibraryView::FilterReturnPressed() {
 }
 
 void LibraryView::NewSmartPlaylist() {
-  Wizard* wizard = new Wizard(library_->backend(), this);
+  Wizard* wizard = new Wizard(app_, app_->library_backend(), this);
   wizard->setAttribute(Qt::WA_DeleteOnClose);
   connect(wizard, SIGNAL(accepted()), SLOT(NewSmartPlaylistFinished()));
 
@@ -529,26 +571,26 @@ void LibraryView::NewSmartPlaylist() {
 }
 
 void LibraryView::EditSmartPlaylist() {
-  Wizard* wizard = new Wizard(library_->backend(), this);
+  Wizard* wizard = new Wizard(app_, app_->library_backend(), this);
   wizard->setAttribute(Qt::WA_DeleteOnClose);
   connect(wizard, SIGNAL(accepted()), SLOT(EditSmartPlaylistFinished()));
 
   wizard->show();
-  wizard->SetGenerator(library_->CreateGenerator(context_menu_index_));
+  wizard->SetGenerator(app_->library_model()->CreateGenerator(context_menu_index_));
 }
 
 void LibraryView::DeleteSmartPlaylist() {
-  library_->DeleteGenerator(context_menu_index_);
+  app_->library_model()->DeleteGenerator(context_menu_index_);
 }
 
 void LibraryView::NewSmartPlaylistFinished() {
   const Wizard* wizard = qobject_cast<Wizard*>(sender());
-  library_->AddGenerator(wizard->CreateGenerator());
+  app_->library_model()->AddGenerator(wizard->CreateGenerator());
 }
 
 void LibraryView::EditSmartPlaylistFinished() {
   const Wizard* wizard = qobject_cast<Wizard*>(sender());
-  library_->UpdateGenerator(context_menu_index_, wizard->CreateGenerator());
+  app_->library_model()->UpdateGenerator(context_menu_index_, wizard->CreateGenerator());
 }
 
 void LibraryView::ShowInBrowser() {

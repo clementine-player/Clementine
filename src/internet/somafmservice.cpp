@@ -18,6 +18,7 @@
 #include "somafmservice.h"
 #include "somafmurlhandler.h"
 #include "internetmodel.h"
+#include "core/application.h"
 #include "core/closure.h"
 #include "core/logging.h"
 #include "core/network.h"
@@ -43,9 +44,14 @@ const char* SomaFMService::kHomepage = "http://somafm.com";
 const int SomaFMService::kStreamsCacheDurationSecs =
     60 * 60 * 24 * 28; // 4 weeks
 
-SomaFMService::SomaFMService(InternetModel* parent)
-  : InternetService(kServiceName, parent, parent),
-    url_handler_(new SomaFMUrlHandler(this, this)),
+bool operator <(const SomaFMService::Stream& a,
+                const SomaFMService::Stream& b) {
+  return a.title_.compare(b.title_, Qt::CaseInsensitive) < 0;
+}
+
+SomaFMService::SomaFMService(Application* app, InternetModel* parent)
+  : InternetService(kServiceName, app, parent, parent),
+    url_handler_(new SomaFMUrlHandler(app, this, this)),
     root_(NULL),
     context_menu_(NULL),
     network_(new NetworkAccessManager(this)),
@@ -53,8 +59,8 @@ SomaFMService::SomaFMService(InternetModel* parent)
 {
   ReloadSettings();
 
-  model()->player()->RegisterUrlHandler(url_handler_);
-  model()->global_search()->AddProvider(new SomaFMSearchProvider(this, this));
+  app_->player()->RegisterUrlHandler(url_handler_);
+  app_->global_search()->AddProvider(new SomaFMSearchProvider(this, app_, this));
 }
 
 SomaFMService::~SomaFMService() {
@@ -78,7 +84,7 @@ void SomaFMService::LazyPopulate(QStandardItem* item) {
   }
 }
 
-void SomaFMService::ShowContextMenu(const QModelIndex& index, const QPoint& global_pos) {
+void SomaFMService::ShowContextMenu(const QPoint& global_pos) {
   if (!context_menu_) {
     context_menu_ = new QMenu;
     context_menu_->addActions(GetPlaylistActions());
@@ -86,13 +92,12 @@ void SomaFMService::ShowContextMenu(const QModelIndex& index, const QPoint& glob
     context_menu_->addAction(IconLoader::Load("view-refresh"), tr("Refresh channels"), this, SLOT(RefreshStreams()));
   }
 
-  context_item_ = model()->itemFromIndex(index);
   context_menu_->popup(global_pos);
 }
 
 void SomaFMService::ForceRefreshStreams() {
   QNetworkReply* reply = network_->get(QNetworkRequest(QUrl(kChannelListUrl)));
-  int task_id = model()->task_manager()->StartTask(tr("Getting channels"));
+  int task_id = app_->task_manager()->StartTask(tr("Getting channels"));
 
   NewClosure(reply, SIGNAL(finished()),
              this, SLOT(RefreshStreamsFinished(QNetworkReply*,int)),
@@ -100,7 +105,7 @@ void SomaFMService::ForceRefreshStreams() {
 }
 
 void SomaFMService::RefreshStreamsFinished(QNetworkReply* reply, int task_id) {
-  model()->task_manager()->SetTaskFinished(task_id);
+  app_->task_manager()->SetTaskFinished(task_id);
   reply->deleteLater();
 
   if (reply->error() != QNetworkReply::NoError) {
@@ -122,6 +127,7 @@ void SomaFMService::RefreshStreamsFinished(QNetworkReply* reply, int task_id) {
   }
 
   streams_.Update(list);
+  streams_.Sort();
 
   // Only update the item's children if it's already been populated
   if (!root_->data(InternetModel::Role_CanLazyLoad).toBool())
@@ -175,10 +181,6 @@ void SomaFMService::Homepage() {
   QDesktopServices::openUrl(QUrl(kHomepage));
 }
 
-QModelIndex SomaFMService::GetCurrentIndex() {
-  return context_item_->index();
-}
-
 PlaylistItem::Options SomaFMService::playlistitem_options() const {
   return PlaylistItem::PauseDisabled;
 }
@@ -228,4 +230,5 @@ QDataStream& operator>>(QDataStream& in, SomaFMService::Stream& stream) {
 
 void SomaFMService::ReloadSettings() {
   streams_.Load();
+  streams_.Sort();
 }

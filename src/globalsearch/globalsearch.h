@@ -22,21 +22,23 @@
 #include <QPixmapCache>
 
 #include "searchprovider.h"
-#include "core/backgroundthread.h"
-
+#include "covers/albumcoverloaderoptions.h"
 
 class AlbumCoverLoader;
+class Application;
 class UrlSearchProvider;
 
 class GlobalSearch : public QObject {
   Q_OBJECT
 
 public:
-  GlobalSearch(QObject* parent = 0);
+  GlobalSearch(Application* app, QObject* parent = 0);
 
   static const int kDelayedSearchTimeoutMs;
   static const char* kSettingsGroup;
   static const int kMaxResultsPerEmission;
+
+  Application* application() const { return app_; }
 
   void AddProvider(SearchProvider* provider);
   // Try to change provider state. Returns false if we can't (e.g. we can't
@@ -45,8 +47,8 @@ public:
 
   int SearchAsync(const QString& query);
   int LoadArtAsync(const SearchProvider::Result& result);
-  int LoadTracksAsync(const SearchProvider::Result& result);
-  QStringList GetSuggestions(int max);
+  MimeData* LoadTracks(const SearchProvider::ResultList& results);
+  QStringList GetSuggestions(int count);
 
   void CancelSearch(int id);
   void CancelArt(int id);
@@ -58,8 +60,6 @@ public:
   bool is_provider_enabled(const SearchProvider* provider) const;
   bool is_provider_usable(SearchProvider* provider) const;
 
-  static bool HideOtherSearchBoxes();
-
 public slots:
   void ReloadSettings();
 
@@ -70,10 +70,9 @@ signals:
 
   void ArtLoaded(int id, const QPixmap& pixmap);
 
-  void TracksLoaded(int id, MimeData* mime_data);
-
   void ProviderAdded(const SearchProvider* provider);
   void ProviderRemoved(const SearchProvider* provider);
+  void ProviderToggled(const SearchProvider* provider, bool enabled);
 
 protected:
   void timerEvent(QTimerEvent* e);
@@ -112,6 +111,8 @@ private:
     bool enabled_;
   };
 
+  Application* app_;
+
   QMap<SearchProvider*, ProviderData> providers_;
 
   QMap<int, DelayedSearch> delayed_searches_;
@@ -123,7 +124,7 @@ private:
   QMap<int, QString> pending_art_searches_;
 
   // Used for providers with ArtIsInSongMetadata set.
-  BackgroundThread<AlbumCoverLoader>* cover_loader_;
+  AlbumCoverLoaderOptions cover_loader_options_;
   QMap<quint64, int> cover_loader_tasks_;
 
   // Special search provider that's used for queries that look like URLs

@@ -32,6 +32,9 @@
 #include <QtDebug>
 
 
+PlaylistItem::~PlaylistItem() {
+}
+
 PlaylistItem* PlaylistItem::NewFromType(const QString& type) {
   if (type == "Library")
     return new LibraryPlaylistItem(type);

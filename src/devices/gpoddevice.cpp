@@ -19,11 +19,13 @@
 #include "gpoddevice.h"
 #include "gpodloader.h"
 #include "core/logging.h"
+#include "core/application.h"
 #include "library/librarybackend.h"
 #include "library/librarymodel.h"
 
 #include <QDir>
 #include <QFile>
+#include <QThread>
 #include <QtDebug>
 
 #include <gpod/itdb.h>
@@ -31,8 +33,9 @@
 GPodDevice::GPodDevice(
     const QUrl& url, DeviceLister* lister,
     const QString& unique_id, DeviceManager* manager,
+    Application* app,
     int database_id, bool first_time)
-      : ConnectedDevice(url, lister, unique_id, manager, database_id, first_time),
+      : ConnectedDevice(url, lister, unique_id, manager, app, database_id, first_time),
         loader_thread_(new QThread(this)),
         loader_(NULL),
         db_(NULL)
@@ -43,7 +46,7 @@ void GPodDevice::Init() {
   InitBackendDirectory(url_.path(), first_time_);
   model_->Init();
 
-  loader_ = new GPodLoader(url_.path(), manager_->task_manager(), backend_,
+  loader_ = new GPodLoader(url_.path(), app_->task_manager(), backend_,
                            shared_from_this());
   loader_->moveToThread(loader_thread_);
 
@@ -115,7 +118,7 @@ bool GPodDevice::CopyToStorage(const CopyJob& job) {
                         .toLocal8Bit().constData(), &error);
   if (error) {
     qLog(Error) << "copying failed:" << error->message;
-    emit Error(QString::fromUtf8(error->message));
+    app_->AddError(QString::fromUtf8(error->message));
     g_error_free(error);
 
     // Need to remove the track from the db again
@@ -140,7 +143,7 @@ void GPodDevice::WriteDatabase(bool success) {
     itdb_write(db_, &error);
     if (error) {
       qLog(Error) << "writing database failed:" << error->message;
-      emit Error(QString::fromUtf8(error->message));
+      app_->AddError(QString::fromUtf8(error->message));
       g_error_free(error);
     } else {
       FinaliseDatabase();

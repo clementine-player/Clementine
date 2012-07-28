@@ -34,10 +34,10 @@ const char* AnalyzerContainer::kSettingsGroup = "Analyzer";
 const char* AnalyzerContainer::kSettingsFramerate = "framerate";
 
 // Framerates
-const int kLowFramerate = 20;
-const int kMediumFramerate = 25;
-const int kHighFramerate = 30;
-const int kVeryHighFramerate = 60;
+const int AnalyzerContainer::kLowFramerate = 20;
+const int AnalyzerContainer::kMediumFramerate = 25;
+const int AnalyzerContainer::kHighFramerate = 30;
+const int AnalyzerContainer::kSuperHighFramerate = 60;
 
 AnalyzerContainer::AnalyzerContainer(QWidget *parent)
   : QWidget(parent),
@@ -62,7 +62,7 @@ AnalyzerContainer::AnalyzerContainer(QWidget *parent)
   AddFramerate(tr("Low (%1 fps)").arg(kLowFramerate), kLowFramerate);
   AddFramerate(tr("Medium (%1 fps)").arg(kMediumFramerate), kMediumFramerate);
   AddFramerate(tr("High (%1 fps)").arg(kHighFramerate), kHighFramerate);
-  AddFramerate(tr("Super high (%1 fps)").arg(kVeryHighFramerate), kVeryHighFramerate);
+  AddFramerate(tr("Super high (%1 fps)").arg(kSuperHighFramerate), kSuperHighFramerate);
   connect(mapper_framerate_, SIGNAL(mapped(int)), SLOT(ChangeFramerate(int)));
 
   context_menu_->addMenu(context_menu_framerate_);

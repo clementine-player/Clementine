@@ -4,9 +4,10 @@
 #include "spotifyblobdownloader.h"
 #include "spotifyserver.h"
 #include "spotifyservice.h"
-#include "spotifysearchplaylisttype.h"
+#include "core/application.h"
 #include "core/database.h"
 #include "core/logging.h"
+#include "core/mergedproxymodel.h"
 #include "core/player.h"
 #include "core/taskmanager.h"
 #include "core/timeconstants.h"
@@ -16,8 +17,10 @@
 #include "playlist/playlist.h"
 #include "playlist/playlistcontainer.h"
 #include "playlist/playlistmanager.h"
+#include "searchboxwidget.h"
 #include "widgets/didyoumean.h"
 #include "ui/iconloader.h"
+#include "widgets/didyoumean.h"
 
 #include <QCoreApplication>
 #include <QFile>
@@ -36,17 +39,18 @@ const char* SpotifyService::kSettingsGroup = "Spotify";
 const char* SpotifyService::kBlobDownloadUrl = "http://spotify.clementine-player.org/";
 const int SpotifyService::kSearchDelayMsec = 400;
 
-SpotifyService::SpotifyService(InternetModel* parent)
-    : InternetService(kServiceName, parent, parent),
+SpotifyService::SpotifyService(Application* app, InternetModel* parent)
+    : InternetService(kServiceName, app, parent, parent),
       server_(NULL),
       blob_process_(NULL),
       root_(NULL),
       search_(NULL),
       starred_(NULL),
       inbox_(NULL),
+      toplist_(NULL),
       login_task_id_(0),
-      pending_search_playlist_(NULL),
       context_menu_(NULL),
+      search_box_(new SearchBoxWidget(this)),
       search_delay_(new QTimer(this)),
       login_state_(LoginState_OtherError),
       bitrate_(pb::spotify::Bitrate320k),
@@ -70,14 +74,12 @@ SpotifyService::SpotifyService(InternetModel* parent)
   qLog(Debug) << "Spotify system blob path:" << system_blob_path_;
   qLog(Debug) << "Spotify local blob path:" << local_blob_path_;
 
-  model()->player()->playlists()->RegisterSpecialPlaylistType(
-        new SpotifySearchPlaylistType(this));
-
-  model()->global_search()->AddProvider(new SpotifySearchProvider(this));
+  app_->global_search()->AddProvider(new SpotifySearchProvider(app_, this));
 
   search_delay_->setInterval(kSearchDelayMsec);
   search_delay_->setSingleShot(true);
   connect(search_delay_, SIGNAL(timeout()), SLOT(DoSearch()));
+  connect(search_box_, SIGNAL(TextChanged(QString)), SLOT(Search(QString)));
 }
 
 SpotifyService::~SpotifyService() {
@@ -118,15 +120,16 @@ void SpotifyService::LazyPopulate(QStandardItem* item) {
       server_->LoadUserPlaylist(item->data(Role_UserPlaylistIndex).toInt());
       break;
 
+    case Type_Toplist:
+      EnsureServerCreated();
+      server_->LoadToplist();
+      break;
+
     default:
       break;
   }
 
   return;
-}
-
-QModelIndex SpotifyService::GetCurrentIndex() {
-  return QModelIndex();
 }
 
 void SpotifyService::Login(const QString& username, const QString& password) {
@@ -137,7 +140,7 @@ void SpotifyService::Login(const QString& username, const QString& password) {
 void SpotifyService::LoginCompleted(bool success, const QString& error,
                                     pb::spotify::LoginResponse_Error error_code) {
   if (login_task_id_) {
-    model()->task_manager()->SetTaskFinished(login_task_id_);
+    app_->task_manager()->SetTaskFinished(login_task_id_);
     login_task_id_ = 0;
   }
 
@@ -195,7 +198,7 @@ void SpotifyService::BlobProcessError(QProcess::ProcessError error) {
   blob_process_ = NULL;
 
   if (login_task_id_) {
-    model()->task_manager()->SetTaskFinished(login_task_id_);
+    app_->task_manager()->SetTaskFinished(login_task_id_);
   }
 }
 
@@ -240,10 +243,12 @@ void SpotifyService::EnsureServerCreated(const QString& username,
           SIGNAL(ImageLoaded(QString,QImage)));
   connect(server_, SIGNAL(SyncPlaylistProgress(pb::spotify::SyncPlaylistProgress)),
           SLOT(SyncPlaylistProgress(pb::spotify::SyncPlaylistProgress)));
+  connect(server_, SIGNAL(ToplistBrowseResults(pb::spotify::BrowseToplistResponse)),
+          SLOT(ToplistLoaded(pb::spotify::BrowseToplistResponse)));
 
   server_->Init();
 
-  login_task_id_ = model()->task_manager()->StartTask(tr("Connecting to Spotify"));
+  login_task_id_ = app_->task_manager()->StartTask(tr("Connecting to Spotify"));
 
   QString login_username = username;
   QString login_password = password;
@@ -282,7 +287,7 @@ void SpotifyService::StartBlobProcess() {
   if (blob_path.isEmpty()) {
     // If the blob still wasn't found then we'll prompt the user to download one
     if (login_task_id_) {
-      model()->task_manager()->SetTaskFinished(login_task_id_);
+      app_->task_manager()->SetTaskFinished(login_task_id_);
     }
 
     #ifdef Q_OS_LINUX
@@ -328,14 +333,16 @@ void SpotifyService::BlobDownloadFinished() {
 
 void SpotifyService::PlaylistsUpdated(const pb::spotify::Playlists& response) {
   if (login_task_id_) {
-    model()->task_manager()->SetTaskFinished(login_task_id_);
+    app_->task_manager()->SetTaskFinished(login_task_id_);
     login_task_id_ = 0;
   }
 
   // Create starred and inbox playlists if they're not here already
   if (!search_) {
     search_ = new QStandardItem(IconLoader::Load("edit-find"),
-                                tr("Search Spotify (opens a new tab)"));
+                                tr("Search results"));
+    search_->setToolTip(tr("Start typing something on the search box above to "
+                           "fill this search results list"));
     search_->setData(Type_SearchResults, InternetModel::Role_Type);
     search_->setData(InternetModel::PlayBehaviour_DoubleClickAction,
                              InternetModel::Role_PlayBehaviour);
@@ -348,7 +355,12 @@ void SpotifyService::PlaylistsUpdated(const pb::spotify::Playlists& response) {
     inbox_->setData(Type_InboxPlaylist, InternetModel::Role_Type);
     inbox_->setData(true, InternetModel::Role_CanLazyLoad);
 
+    toplist_ = new QStandardItem(QIcon(), tr("Top tracks"));
+    toplist_->setData(Type_Toplist, InternetModel::Role_Type);
+    toplist_->setData(true, InternetModel::Role_CanLazyLoad);
+
     root_->appendRow(search_);
+    root_->appendRow(toplist_);
     root_->appendRow(starred_);
     root_->appendRow(inbox_);
   }
@@ -404,11 +416,21 @@ bool SpotifyService::DoPlaylistsDiffer(const pb::spotify::Playlists& response) c
 }
 
 void SpotifyService::InboxLoaded(const pb::spotify::LoadPlaylistResponse& response) {
-  FillPlaylist(inbox_, response);
+  if (inbox_) {
+    FillPlaylist(inbox_, response);
+  }
 }
 
 void SpotifyService::StarredLoaded(const pb::spotify::LoadPlaylistResponse& response) {
-  FillPlaylist(starred_, response);
+  if (starred_) {
+    FillPlaylist(starred_, response);
+  }
+}
+
+void SpotifyService::ToplistLoaded(const pb::spotify::BrowseToplistResponse& response) {
+  if (toplist_) {
+    FillPlaylist(toplist_, response.track());
+  }
 }
 
 QStandardItem* SpotifyService::PlaylistBySpotifyIndex(int index) const {
@@ -428,23 +450,25 @@ void SpotifyService::UserPlaylistLoaded(const pb::spotify::LoadPlaylistResponse&
   }
 }
 
-void SpotifyService::FillPlaylist(QStandardItem* item, const pb::spotify::LoadPlaylistResponse& response) {
-  qLog(Debug) << "Filling playlist:" << item->text();
+void SpotifyService::FillPlaylist(
+    QStandardItem* item,
+    const google::protobuf::RepeatedPtrField<pb::spotify::Track>& tracks) {
   if (item->hasChildren())
     item->removeRows(0, item->rowCount());
 
-  for (int i=0 ; i<response.track_size() ; ++i) {
+  for (int i=0 ; i < tracks.size() ; ++i) {
     Song song;
-    SongFromProtobuf(response.track(i), &song);
+    SongFromProtobuf(tracks.Get(i), &song);
 
-    QStandardItem* child = new QStandardItem(song.PrettyTitleWithArtist());
-    child->setData(Type_Track, InternetModel::Role_Type);
-    child->setData(QVariant::fromValue(song), InternetModel::Role_SongMetadata);
-    child->setData(InternetModel::PlayBehaviour_SingleItem, InternetModel::Role_PlayBehaviour);
-    child->setData(song.url(), InternetModel::Role_Url);
+    QStandardItem* child = CreateSongItem(song);
 
     item->appendRow(child);
   }
+}
+
+void SpotifyService::FillPlaylist(QStandardItem* item, const pb::spotify::LoadPlaylistResponse& response) {
+  qLog(Debug) << "Filling playlist:" << item->text();
+  FillPlaylist(item, response.track());
 }
 
 void SpotifyService::SongFromProtobuf(const pb::spotify::Track& track, Song* song) {
@@ -478,6 +502,12 @@ PlaylistItem::Options SpotifyService::playlistitem_options() const {
   return PlaylistItem::PauseDisabled | PlaylistItem::SeekDisabled;
 }
 
+QWidget* SpotifyService::HeaderWidget() const {
+  if (IsLoggedIn())
+    return search_box_;
+  return NULL;
+}
+
 void SpotifyService::EnsureMenuCreated() {
   if (context_menu_)
     return;
@@ -485,8 +515,6 @@ void SpotifyService::EnsureMenuCreated() {
   context_menu_ = new QMenu;
 
   context_menu_->addActions(GetPlaylistActions());
-  context_menu_->addSeparator();
-  context_menu_->addAction(IconLoader::Load("edit-find"), tr("Search Spotify (opens a new tab)..."), this, SLOT(OpenSearchTab()));
   context_menu_->addSeparator();
   context_menu_->addAction(IconLoader::Load("configure"), tr("Configure Spotify..."), this, SLOT(ShowConfig()));
 
@@ -498,6 +526,11 @@ void SpotifyService::EnsureMenuCreated() {
       SLOT(SyncPlaylist()));
 }
 
+void SpotifyService::ClearSearchResults() {
+  if (search_)
+    search_->removeRows(0, search_->rowCount());
+}
+
 void SpotifyService::SyncPlaylist() {
   QStandardItem* item = playlist_sync_action_->data().value<QStandardItem*>();
   Q_ASSERT(item);
@@ -507,27 +540,34 @@ void SpotifyService::SyncPlaylist() {
       int index = item->data(Role_UserPlaylistIndex).toInt();
       server_->SyncUserPlaylist(index);
       playlist_sync_ids_[index] =
-          model()->task_manager()->StartTask(tr("Syncing Spotify playlist"));
+          app_->task_manager()->StartTask(tr("Syncing Spotify playlist"));
       break;
     }
     case Type_InboxPlaylist:
       server_->SyncInbox();
-      inbox_sync_id_ = model()->task_manager()->StartTask(tr("Syncing Spotify inbox"));
+      inbox_sync_id_ = app_->task_manager()->StartTask(tr("Syncing Spotify inbox"));
       break;
     case Type_StarredPlaylist:
       server_->SyncStarred();
-      starred_sync_id_ = model()->task_manager()->StartTask(tr("Syncing Spotify starred tracks"));
+      starred_sync_id_ = app_->task_manager()->StartTask(tr("Syncing Spotify starred tracks"));
       break;
     default:
       break;
   }
 }
 
-void SpotifyService::Search(const QString& text, Playlist* playlist, bool now) {
+void SpotifyService::Search(const QString& text, bool now) {
   EnsureServerCreated();
 
   pending_search_ = text;
-  pending_search_playlist_ = playlist;
+
+  // If there is no text (e.g. user cleared search box), we don't need to do a
+  // real query that will return nothing: we can clear the playlist now
+  if (text.isEmpty()) {
+    search_delay_->stop();
+    ClearSearchResults();
+    return;
+  }
 
   if (now) {
     search_delay_->stop();
@@ -561,13 +601,25 @@ void SpotifyService::SearchResults(const pb::spotify::SearchResponse& response) 
 
   qLog(Debug) << "Got" << songs.count() << "results";
 
-  pending_search_playlist_->Clear();
-  pending_search_playlist_->InsertSongs(songs);
+  ClearSearchResults();
 
-  const QString did_you_mean = QStringFromStdString(response.did_you_mean());
-  if (!did_you_mean.isEmpty()) {
-    model()->player()->playlists()->playlist_container()->did_you_mean()->Show(did_you_mean);
+  // Fill results list
+  foreach(const Song& song, songs) {
+    QStandardItem* child = CreateSongItem(song);
+    search_->appendRow(child);
   }
+
+  const QString did_you_mean_suggestion = QStringFromStdString(response.did_you_mean());
+  qLog(Debug) << "Did you mean suggestion: " << did_you_mean_suggestion;
+  if (!did_you_mean_suggestion.isEmpty()) {
+    search_box_->did_you_mean()->Show(did_you_mean_suggestion);
+  } else {
+    // In case something else was previously displayed
+    search_box_->did_you_mean()->hide();
+  }
+
+  QModelIndex index = model()->merged_model()->mapFromSource(search_->index());
+  ScrollToIndex(index);
 }
 
 SpotifyServer* SpotifyService::server() const {
@@ -583,9 +635,9 @@ SpotifyServer* SpotifyService::server() const {
   return server_;
 }
 
-void SpotifyService::ShowContextMenu(const QModelIndex& index, const QPoint& global_pos) {
+void SpotifyService::ShowContextMenu(const QPoint& global_pos) {
   EnsureMenuCreated();
-  QStandardItem* item = model()->itemFromIndex(index);
+  QStandardItem* item = model()->itemFromIndex(model()->current_index());
   if (item) {
     int type = item->data(InternetModel::Role_Type).toInt();
     if (type == Type_InboxPlaylist ||
@@ -600,15 +652,7 @@ void SpotifyService::ShowContextMenu(const QModelIndex& index, const QPoint& glo
   context_menu_->popup(global_pos);
 }
 
-void SpotifyService::OpenSearchTab() {
-  model()->player()->playlists()->New(tr("Search Spotify"), SongList(),
-                                      SpotifySearchPlaylistType::kName);
-}
-
 void SpotifyService::ItemDoubleClicked(QStandardItem* item) {
-  if (item == search_) {
-    OpenSearchTab();
-  }
 }
 
 void SpotifyService::DropMimeData(const QMimeData* data, const QModelIndex& index) {
@@ -646,9 +690,9 @@ void SpotifyService::SyncPlaylistProgress(
     qLog(Warning) << "Received sync progress for unknown playlist";
     return;
   }
-  model()->task_manager()->SetTaskProgress(task_id, progress.sync_progress(), 100);
+  app_->task_manager()->SetTaskProgress(task_id, progress.sync_progress(), 100);
   if (progress.sync_progress() == 100) {
-    model()->task_manager()->SetTaskFinished(task_id);
+    app_->task_manager()->SetTaskFinished(task_id);
     if (progress.request().type() == pb::spotify::UserPlaylist) {
       playlist_sync_ids_.remove(task_id);
     }
@@ -656,7 +700,7 @@ void SpotifyService::SyncPlaylistProgress(
 }
 
 void SpotifyService::ShowConfig() {
-  emit OpenSettingsAtPage(SettingsDialog::Page_Spotify);
+  app_->OpenSettingsDialogAtPage(SettingsDialog::Page_Spotify);
 }
 
 void SpotifyService::Logout() {

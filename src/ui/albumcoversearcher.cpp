@@ -17,6 +17,7 @@
 
 #include "albumcoversearcher.h"
 #include "ui_albumcoversearcher.h"
+#include "core/application.h"
 #include "core/logging.h"
 #include "core/utilities.h"
 #include "covers/albumcoverfetcher.h"
@@ -88,12 +89,13 @@ void SizeOverlayDelegate::paint(QPainter* painter,
 }
 
 
-AlbumCoverSearcher::AlbumCoverSearcher(const QIcon& no_cover_icon, QWidget* parent)
+AlbumCoverSearcher::AlbumCoverSearcher(const QIcon& no_cover_icon,
+                                       Application* app, QWidget* parent)
   : QDialog(parent),
     ui_(new Ui_AlbumCoverSearcher),
+    app_(app),
     model_(new QStandardItemModel(this)),
     no_cover_icon_(no_cover_icon),
-    loader_(new BackgroundThreadImplementation<AlbumCoverLoader, AlbumCoverLoader>(this)),
     fetcher_(NULL),
     id_(0)
 {
@@ -106,10 +108,11 @@ AlbumCoverSearcher::AlbumCoverSearcher(const QIcon& no_cover_icon, QWidget* pare
   ui_->covers->setItemDelegate(new SizeOverlayDelegate(this));
   ui_->covers->setModel(model_);
 
-  loader_->Start(true);
-  loader_->Worker()->SetScaleOutputImage(false);
-  loader_->Worker()->SetPadOutputImage(false);
-  connect(loader_->Worker().get(), SIGNAL(ImageLoaded(quint64,QImage)),
+  options_.scale_output_image_ = false;
+  options_.pad_output_image_ = false;
+
+  connect(app_->album_cover_loader(),
+          SIGNAL(ImageLoaded(quint64,QImage)),
           SLOT(ImageLoaded(quint64,QImage)));
 
   connect(ui_->search, SIGNAL(clicked()), SLOT(Search()));
@@ -181,7 +184,8 @@ void AlbumCoverSearcher::SearchFinished(quint64 id, const CoverSearchResults& re
     if (result.image_url.isEmpty())
       continue;
 
-    quint64 id = loader_->Worker()->LoadImageAsync(result.image_url, QString());
+    quint64 id = app_->album_cover_loader()->LoadImageAsync(
+          options_, result.image_url, QString());
 
     QStandardItem* item = new QStandardItem;
     item->setIcon(no_cover_icon_);

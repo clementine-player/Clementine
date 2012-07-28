@@ -36,8 +36,8 @@ class About;
 class AddStreamDialog;
 class AlbumCoverManager;
 class Appearance;
+class Application;
 class ArtistInfoView;
-class ArtLoader;
 class BackgroundStreams;
 class CommandlineOptions;
 class CoverProviders;
@@ -49,6 +49,7 @@ class Equalizer;
 class ErrorDialog;
 class FileView;
 class GlobalSearch;
+class GlobalSearchView;
 class GlobalShortcuts;
 class GroupByDialog;
 class Library;
@@ -84,16 +85,9 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   Q_OBJECT
 
  public:
-  MainWindow(BackgroundThread<Database>* database,
-             TaskManager* task_manager,
-             PlaylistManager* playlists,
-             InternetModel* internet_model,
-             Player* player,
+  MainWindow(Application* app,
              SystemTrayIcon* tray_icon,
              OSD* osd,
-             ArtLoader* art_loader,
-             CoverProviders* cover_providers,
-             GlobalSearch* global_search,
              QWidget *parent = 0);
   ~MainWindow();
 
@@ -215,6 +209,7 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   void AddStream();
   void AddStreamAccepted();
   void AddCDTracks();
+  void AddPodcast();
 
   void CommandlineOptionsReceived(const QByteArray& serialized_options);
 
@@ -227,7 +222,8 @@ class MainWindow : public QMainWindow, public PlatformInterface {
 
   void ShowCoverManager();
 #ifdef HAVE_LIBLASTFM
-  void ScrobblerStatus(int value);
+  void ScrobbleSubmitted();
+  void ScrobbleError(int value);
 #endif
   void ShowAboutDialog();
   void ShowTranscodeDialog();
@@ -252,6 +248,10 @@ class MainWindow : public QMainWindow, public PlatformInterface {
 
   void HandleNotificationPreview(OSD::Behaviour type, QString line1, QString line2);
 
+  void ScrollToInternetIndex(const QModelIndex& index);
+  void FocusGlobalSearchField();
+  void DoGlobalSearch(const QString& query);
+
  private:
   void ConnectInfoView(SongInfoBase* view);
 
@@ -267,26 +267,16 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   Ui_MainWindow* ui_;
   Windows7ThumbBar* thumbbar_;
 
-  Appearance* appearance_;
+  Application* app_;
   SystemTrayIcon* tray_icon_;
   OSD* osd_;
   boost::scoped_ptr<EditTagDialog> edit_tag_dialog_;
-  TaskManager* task_manager_;
   boost::scoped_ptr<About> about_dialog_;
 
-  BackgroundThread<Database>* database_;
-  CoverProviders* cover_providers_;
-  InternetModel* internet_model_;
-  PlaylistBackend* playlist_backend_;
-  PlaylistManager* playlists_;
-  Player* player_;
-  Library* library_;
   GlobalShortcuts* global_shortcuts_;
-  GlobalSearch* global_search_;
   Remote* remote_;
 
-  DeviceManager* devices_;
-
+  GlobalSearchView* global_search_view_;
   LibraryViewContainer* library_view_;
   FileView* file_view_;
   InternetViewContainer* internet_view_;

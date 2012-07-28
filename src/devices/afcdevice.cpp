@@ -21,14 +21,15 @@
 #include "devicemanager.h"
 #include "gpodloader.h"
 #include "imobiledeviceconnection.h"
+#include "core/application.h"
 #include "core/utilities.h"
 
 #include <QThread>
 
 AfcDevice::AfcDevice(
     const QUrl& url, DeviceLister* lister, const QString& unique_id,
-    DeviceManager* manager, int database_id, bool first_time)
-      : GPodDevice(url, lister, unique_id, manager, database_id, first_time),
+    DeviceManager* manager, Application* app, int database_id, bool first_time)
+      : GPodDevice(url, lister, unique_id, manager, app, database_id, first_time),
         transfer_(NULL)
 {
 }
@@ -44,7 +45,7 @@ void AfcDevice::Init() {
   InitBackendDirectory(local_path_, first_time_, false);
   model_->Init();
 
-  transfer_ = new AfcTransfer(url_.host(), local_path_, manager_->task_manager(),
+  transfer_ = new AfcTransfer(url_.host(), local_path_, app_->task_manager(),
                               shared_from_this());
   transfer_->moveToThread(loader_thread_);
 
@@ -59,12 +60,12 @@ void AfcDevice::CopyFinished(bool success) {
   transfer_ = NULL;
 
   if (!success) {
-    emit Error(tr("An error occurred copying the iTunes database from the device"));
+    app_->AddError(tr("An error occurred copying the iTunes database from the device"));
     return;
   }
 
   // Now load the songs from the local database
-  loader_ = new GPodLoader(local_path_, manager_->task_manager(), backend_,
+  loader_ = new GPodLoader(local_path_, app_->task_manager(), backend_,
                            shared_from_this());
   loader_->set_music_path_prefix("afc://" + url_.host());
   loader_->set_song_type(Song::Type_Stream);
@@ -153,7 +154,7 @@ void AfcDevice::FinaliseDatabase() {
   itdb_stop_sync(db_);
 
   if (!success) {
-    emit Error(tr("An error occurred copying the iTunes database onto the device"));
+    app_->AddError(tr("An error occurred copying the iTunes database onto the device"));
     return;
   }
 }

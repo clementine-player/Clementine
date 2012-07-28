@@ -37,17 +37,18 @@ struct sqlite3_tokenizer_module;
 
 }
 
+class Application;
+
 class Database : public QObject {
   Q_OBJECT
 
  public:
-  Database(QObject* parent = 0, const QString& database_name = QString());
+  Database(Application* app, QObject* parent = 0,
+           const QString& database_name = QString());
 
   static const int kSchemaVersion;
   static const char* kDatabaseFilename;
   static const char* kMagicAllSongsTables;
-
-  void Stop() {}
 
   QSqlDatabase Connect();
   bool CheckErrors(const QSqlQuery& query);
@@ -63,12 +64,18 @@ class Database : public QObject {
  signals:
   void Error(const QString& message);
 
+ public slots:
+  void DoBackup();
+
  private:
   void UpdateMainSchema(QSqlDatabase* db);
 
   void UpdateDatabaseSchema(int version, QSqlDatabase& db);
   void UrlEncodeFilenameColumn(const QString& table, QSqlDatabase& db);
   QStringList SongsTables(QSqlDatabase& db, int schema_version) const;
+  bool IntegrityCheck(QSqlDatabase db);
+  void BackupFile(const QString& filename);
+  bool OpenDatabase(const QString& filename, sqlite3** connection) const;
 
   struct AttachedDatabase {
     AttachedDatabase() {}
@@ -78,6 +85,8 @@ class Database : public QObject {
     QString filename_;
     QString schema_;
   };
+
+  Application* app_;
 
   // Alias -> filename
   QMap<QString, AttachedDatabase> attached_databases_;
@@ -102,14 +111,6 @@ class Database : public QObject {
   // This is the schema version of Clementine's DB from the app's last run.
   int startup_schema_version_;
 
-  FRIEND_TEST(DatabaseTest, LikeWorksWithAllAscii);
-  FRIEND_TEST(DatabaseTest, LikeWorksWithUnicode);
-  FRIEND_TEST(DatabaseTest, LikeAsciiCaseInsensitive);
-  FRIEND_TEST(DatabaseTest, LikeUnicodeCaseInsensitive);
-  FRIEND_TEST(DatabaseTest, LikePerformance);
-  FRIEND_TEST(DatabaseTest, LikeCacheInvalidated);
-  FRIEND_TEST(DatabaseTest, LikeQuerySplit);
-  FRIEND_TEST(DatabaseTest, LikeDecomposes);
   FRIEND_TEST(DatabaseTest, FTSOpenParsesSimpleInput);
   FRIEND_TEST(DatabaseTest, FTSOpenParsesUTF8Input);
   FRIEND_TEST(DatabaseTest, FTSOpenParsesMultipleTokens);
@@ -119,9 +120,6 @@ class Database : public QObject {
   // Do static initialisation like loading sqlite functions.
   static void StaticInit();
 
-  // Custom LIKE() function for sqlite.
-  bool Like(const char* needle, const char* haystack);
-  static void SqliteLike(sqlite3_context* context, int argc, sqlite3_value** argv);
   typedef int (*Sqlite3CreateFunc) (
       sqlite3*, const char*, int, int, void*,
       void (*) (sqlite3_context*, int, sqlite3_value**),
@@ -129,12 +127,22 @@ class Database : public QObject {
       void (*) (sqlite3_context*));
 
   // Sqlite3 functions. These will be loaded from the sqlite3 plugin.
-  static Sqlite3CreateFunc _sqlite3_create_function;
   static int (*_sqlite3_value_type) (sqlite3_value*);
   static sqlite_int64 (*_sqlite3_value_int64) (sqlite3_value*);
   static const uchar* (*_sqlite3_value_text) (sqlite3_value*);
   static void (*_sqlite3_result_int64) (sqlite3_context*, sqlite_int64);
   static void* (*_sqlite3_user_data) (sqlite3_context*);
+
+  // These are necessary for SQLite backups.
+  static int (*_sqlite3_open) (const char*, sqlite3**);
+  static const char* (*_sqlite3_errmsg) (sqlite3*);
+  static int (*_sqlite3_close) (sqlite3*);
+  static sqlite3_backup* (*_sqlite3_backup_init) (
+      sqlite3*, const char*, sqlite3*, const char*);
+  static int (*_sqlite3_backup_step) (sqlite3_backup*, int);
+  static int (*_sqlite3_backup_finish) (sqlite3_backup*);
+  static int (*_sqlite3_backup_pagecount) (sqlite3_backup*);
+  static int (*_sqlite3_backup_remaining) (sqlite3_backup*);
 
   static bool sStaticInitDone;
   static bool sLoadedSqliteSymbols;
@@ -177,7 +185,8 @@ class Database : public QObject {
 
 class MemoryDatabase : public Database {
  public:
-  MemoryDatabase(QObject* parent = 0) : Database(parent, ":memory:") {}
+  MemoryDatabase(Application* app, QObject* parent = 0)
+    : Database(app, parent, ":memory:") {}
   ~MemoryDatabase() {
     // Make sure Qt doesn't reuse the same database
     QSqlDatabase::removeDatabase(Connect().connectionName());

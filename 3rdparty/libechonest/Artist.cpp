@@ -581,6 +581,8 @@ QByteArray Echonest::Artist::searchParamToString(Echonest::Artist::SearchParam p
             return "sort";
         case Mood:
             return "mood";
+        case IdSpace:
+            return "bucket";
         default:
             return "";
     }
@@ -622,4 +624,3 @@ QDebug Echonest::operator<<(QDebug d, const Echonest::Artist& artist)
 {
     return d.maybeSpace() << QString::fromLatin1( "Artist(%1, %2)" ).arg( artist.name() ).arg( QString::fromLatin1(artist.id()) );
 }
-

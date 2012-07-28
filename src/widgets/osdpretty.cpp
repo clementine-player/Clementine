@@ -38,6 +38,7 @@
 
 #ifdef Q_OS_WIN32
 #  include "qtwin.h"
+#  include <windows.h>
 #endif
 
 const char* OSDPretty::kSettingsGroup = "OSDPretty";
@@ -69,14 +70,19 @@ OSDPretty::OSDPretty(Mode mode, QWidget *parent)
   Qt::WindowFlags flags = Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint |
                           Qt::X11BypassWindowManagerHint;
 
-#ifdef Q_OS_WIN32
-  flags |= Qt::ToolTip;
-#endif
-
   setWindowFlags(flags);
   setAttribute(Qt::WA_TranslucentBackground, true);
   setAttribute(Qt::WA_X11NetWmWindowTypeNotification, true);
+  setAttribute(Qt::WA_ShowWithoutActivating, true);
   ui_->setupUi(this);
+
+#ifdef Q_OS_WIN32
+  // Don't show the window in the taskbar.  Qt::ToolTip does this too, but it
+  // adds an extra ugly shadow.
+  int ex_style = GetWindowLong(winId(), GWL_EXSTYLE);
+  ex_style |= WS_EX_NOACTIVATE;
+  SetWindowLong(winId(), GWL_EXSTYLE, ex_style);
+#endif
 
   // Mode settings
   switch (mode_) {

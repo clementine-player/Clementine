@@ -22,6 +22,7 @@
 #include "core/logging.h"
 #include "core/tagreaderclient.h"
 #include "core/taskmanager.h"
+#include "core/utilities.h"
 #include "playlistparsers/cueparser.h"
 
 #include <QDateTime>
@@ -59,6 +60,8 @@ LibraryWatcher::LibraryWatcher(QObject* parent)
     total_watches_(0),
     cue_parser_(new CueParser(backend_, this))
 {
+  Utilities::SetThreadIOPriority(Utilities::IOPRIO_CLASS_IDLE);
+
   rescan_timer_->setInterval(1000);
   rescan_timer_->setSingleShot(true);
 
@@ -254,7 +257,7 @@ void LibraryWatcher::ScanSubdirectory(
   // First we "quickly" get a list of the files in the directory that we
   // think might be music.  While we're here, we also look for new subdirectories
   // and possible album artwork.
-  QDirIterator it(path, QDir::Dirs | QDir::Files | QDir::NoDotAndDotDot);
+  QDirIterator it(path, QDir::Dirs | QDir::Files | QDir::Hidden | QDir::NoDotAndDotDot);
   while (it.hasNext()) {
     if (stop_requested_) return;
 
@@ -262,7 +265,7 @@ void LibraryWatcher::ScanSubdirectory(
     QFileInfo child_info(child);
 
     if (child_info.isDir()) {
-      if (!t->HasSeenSubdir(child)) {
+      if (!child_info.isHidden() && !t->HasSeenSubdir(child)) {
         // We haven't seen this subdirectory before - add it to a list and
         // later we'll tell the backend about it and scan it.
         Subdirectory new_subdir;
@@ -277,7 +280,7 @@ void LibraryWatcher::ScanSubdirectory(
 
       if (sValidImages.contains(ext_part))
         album_art[dir_part] << child;
-      else
+      else if (!child_info.isHidden())
         files_on_disk << child;
     }
   }
@@ -537,11 +540,16 @@ void LibraryWatcher::PreserveUserSetData(const QString& file, const QString& ima
 
 uint LibraryWatcher::GetMtimeForCue(const QString& cue_path) {
   // slight optimisation
-  if(cue_path.isEmpty()) {
+  if (cue_path.isEmpty()) {
     return 0;
   }
 
-  QDateTime cue_last_modified = QFileInfo(cue_path).lastModified();
+  const QFileInfo file_info(cue_path);
+  if (!file_info.exists()) {
+    return 0;
+  }
+
+  const QDateTime cue_last_modified = file_info.lastModified();
 
   return cue_last_modified.isValid()
              ? cue_last_modified.toTime_t()

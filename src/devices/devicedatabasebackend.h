@@ -20,8 +20,6 @@
 
 #include <QObject>
 
-#include <boost/shared_ptr.hpp>
-
 #include "core/musicstorage.h"
 #include "core/song.h"
 
@@ -49,8 +47,8 @@ public:
 
   static const int kDeviceSchemaVersion;
 
-  void Init(boost::shared_ptr<Database> db);
-  boost::shared_ptr<Database> db() const { return db_; }
+  void Init(Database* db);
+  Database* db() const { return db_; }
 
   DeviceList GetAllDevices();
   int AddDevice(const Device& device);
@@ -61,7 +59,7 @@ public:
       MusicStorage::TranscodeMode mode, Song::FileType format);
 
 private:
-  boost::shared_ptr<Database> db_;
+  Database* db_;
 
 };
 

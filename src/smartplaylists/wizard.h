@@ -22,6 +22,7 @@
 
 #include <QWizard>
 
+class Application;
 class LibraryBackend;
 class Ui_SmartPlaylistWizardFinishPage;
 
@@ -35,7 +36,7 @@ class Wizard : public QWizard {
   Q_OBJECT
 
 public:
-  Wizard(LibraryBackend* library, QWidget* parent);
+  Wizard(Application* app, LibraryBackend* library, QWidget* parent);
   ~Wizard();
 
   void SetGenerator(GeneratorPtr gen);
@@ -54,6 +55,7 @@ private slots:
   void TypeChanged(int index);
 
 private:
+  Application* app_;
   LibraryBackend* library_;
   TypePage* type_page_;
   FinishPage* finish_page_;

@@ -46,19 +46,13 @@ void UltimateLyricsProvider::FetchInfo(int id, const Song& metadata) {
 
   // Fill in fields in the URL
   QString url_text(url_);
-  DoUrlReplace("{artist}", metadata.artist().toLower(),  &url_text);
-  DoUrlReplace("{album}",  metadata.album().toLower(),   &url_text);
-  DoUrlReplace("{title}",  metadata.title().toLower(),   &url_text);
-  DoUrlReplace("{Artist}", metadata.artist(),            &url_text);
-  DoUrlReplace("{Album}",  metadata.album(),             &url_text);
-  DoUrlReplace("{Title}",  metadata.title(),             &url_text);
-  DoUrlReplace("{Title2}", TitleCase(metadata.title()),  &url_text);
-  DoUrlReplace("{a}",      FirstChar(metadata.artist()), &url_text);
+  ReplaceFields(metadata, &url_text);
 
   QUrl url(url_text);
   qLog(Debug) << "Fetching lyrics from" << url;
 
   // Fetch the URL, follow redirects
+  metadata_ = metadata;
   redirect_count_ = 0;
   QNetworkReply* reply = network_->get(QNetworkRequest(url));
   requests_[reply] = id;
@@ -115,13 +109,20 @@ void UltimateLyricsProvider::LyricsFetched() {
 
   // Apply extract rules
   foreach (const Rule& rule, extract_rules_) {
+    // Modify the rule for this request's metadata
+    Rule rule_copy(rule);
+    for (Rule::iterator it = rule_copy.begin() ; it != rule_copy.end() ; ++it) {
+      ReplaceFields(metadata_, &it->first);
+    }
+
     QString content = original_content;
-    ApplyExtractRule(rule, &content);
+    ApplyExtractRule(rule_copy, &content);
+    qLog(Debug) << "Extract rule" << rule_copy << "matched" << content.length();
 
-    qLog(Debug) << "Extract rule" << rule << "matched" << content.length();
-
-    if (!content.isEmpty())
+    if (!content.isEmpty()) {
       lyrics = content;
+      break;
+    }
   }
 
   // Apply exclude rules
@@ -215,14 +216,25 @@ QString UltimateLyricsProvider::FirstChar(const QString& text) {
 QString UltimateLyricsProvider::TitleCase(const QString& text) {
   if (text.length() == 0)
     return QString();
-  if (text.length() == 1)
-    return text[0].toUpper();
-  return text[0].toUpper() + text.right(text.length() - 1).toLower();
+
+  QString ret = text;
+  bool last_was_space = true;
+
+  for (QString::iterator it = ret.begin() ; it != ret.end() ; ++it) {
+    if (last_was_space) {
+      *it = it->toUpper();
+      last_was_space = false;
+    } else if (it->isSpace()) {
+      last_was_space = true;
+    }
+  }
+  
+  return ret;
 }
 
-void UltimateLyricsProvider::DoUrlReplace(const QString& tag, const QString& value,
-                               QString* url) const {
-  if (!url->contains(tag))
+void UltimateLyricsProvider::ReplaceField(const QString& tag, const QString& value,
+                                          QString* text) const {
+  if (!text->contains(tag))
     return;
 
   // Apply URL character replacement
@@ -232,5 +244,27 @@ void UltimateLyricsProvider::DoUrlReplace(const QString& tag, const QString& val
     value_copy.replace(re, format.second);
   }
 
-  url->replace(tag, value_copy, Qt::CaseInsensitive);
+  text->replace(tag, value_copy, Qt::CaseInsensitive);
+}
+
+void UltimateLyricsProvider::ReplaceFields(const Song& metadata, QString* text) const {
+  ReplaceField("{artist}", metadata.artist().toLower(),          text);
+  ReplaceField("{artist2}",NoSpace(metadata.artist().toLower()), text);
+  ReplaceField("{album}",  metadata.album().toLower(),           text);
+  ReplaceField("{album2}", NoSpace(metadata.album().toLower()),  text);
+  ReplaceField("{title}",  metadata.title().toLower(),           text);
+  ReplaceField("{Artist}", metadata.artist(),                    text);
+  ReplaceField("{Album}",  metadata.album(),                     text);
+  ReplaceField("{ARTIST}", metadata.artist().toUpper(),          text);
+  ReplaceField("{year}",   metadata.PrettyYear(),                text);
+  ReplaceField("{Title}",  metadata.title(),                     text);
+  ReplaceField("{Title2}", TitleCase(metadata.title()),          text);
+  ReplaceField("{a}",      FirstChar(metadata.artist()),         text);
+  ReplaceField("{track}",  QString::number(metadata.track()),    text);
+}
+
+QString UltimateLyricsProvider::NoSpace(const QString& text) {
+  QString ret(text);
+  ret.remove(' ');
+  return ret;
 }

@@ -19,39 +19,38 @@
 #define GROOVESHARKSEARCHPROVIDER_H
 
 #include "searchprovider.h"
-#include "core/backgroundthread.h"
+#include "covers/albumcoverloaderoptions.h"
+#include "internet/groovesharkservice.h"
 
 class AlbumCoverLoader;
-class GroovesharkService;
 
 class GroovesharkSearchProvider : public SearchProvider {
   Q_OBJECT
 
  public:
-  explicit GroovesharkSearchProvider(QObject* parent = 0);
+  explicit GroovesharkSearchProvider(Application* app, QObject* parent = 0);
   void Init(GroovesharkService* service);
 
   // SearchProvider
   void SearchAsync(int id, const QString& query);
   void LoadArtAsync(int id, const Result& result);
-  void LoadTracksAsync(int id, const Result& result);
   bool IsLoggedIn();
   void ShowConfig();
+  InternetService* internet_service() { return service_; }
 
  private slots:
   void SearchDone(int id, const SongList& songs);
-  void AlbumSearchResult(int id, const SongList& songs);
+  void AlbumSearchResult(int id, const QList<quint64>& albums_ids);
   void AlbumArtLoaded(quint64 id, const QImage& image);
-  void AlbumSongsLoaded(int id, const SongList& songs);
+  void AlbumSongsLoaded(quint64 id, const SongList& songs);
 
  private:
   void MaybeSearchFinished(int id);
-  void FetchAlbum(int id, const Result& result);
 
   GroovesharkService* service_;
   QMap<int, PendingState> pending_searches_;
 
-  BackgroundThread<AlbumCoverLoader>* cover_loader_;
+  AlbumCoverLoaderOptions cover_loader_options_;
   QMap<quint64, int> cover_loader_tasks_;
 };
 

@@ -19,29 +19,31 @@
 
 #include "librarymodel.h"
 #include "librarybackend.h"
+#include "core/application.h"
 #include "core/database.h"
 #include "smartplaylists/generator.h"
 #include "smartplaylists/querygenerator.h"
 #include "smartplaylists/search.h"
+
+#include <QThread>
 
 const char* Library::kSongsTable = "songs";
 const char* Library::kDirsTable = "directories";
 const char* Library::kSubdirsTable = "subdirectories";
 const char* Library::kFtsTable = "songs_fts";
 
-Library::Library(BackgroundThread<Database>* db_thread, TaskManager* task_manager,
-                 QObject *parent)
+Library::Library(Application* app, QObject *parent)
   : QObject(parent),
-    task_manager_(task_manager),
+    app_(app),
     backend_(NULL),
     model_(NULL),
-    watcher_factory_(new BackgroundThreadFactoryImplementation<LibraryWatcher, LibraryWatcher>),
-    watcher_(NULL)
+    watcher_(NULL),
+    watcher_thread_(NULL)
 {
   backend_ = new LibraryBackend;
-  backend()->moveToThread(db_thread);
+  backend()->moveToThread(app->database()->thread());
 
-  backend_->Init(db_thread->Worker(), kSongsTable, kDirsTable, kSubdirsTable, kFtsTable);
+  backend_->Init(app->database(), kSongsTable, kDirsTable, kSubdirsTable, kFtsTable);
 
   using smart_playlists::Generator;
   using smart_playlists::GeneratorPtr;
@@ -49,7 +51,7 @@ Library::Library(BackgroundThread<Database>* db_thread, TaskManager* task_manage
   using smart_playlists::Search;
   using smart_playlists::SearchTerm;
 
-  model_ = new LibraryModel(backend_, task_manager_, this);
+  model_ = new LibraryModel(backend_, app_, this);
   model_->set_show_smart_playlists(true);
   model_->set_default_smart_playlists(LibraryModel::DefaultGenerators()
     << (LibraryModel::GeneratorList()
@@ -96,46 +98,37 @@ Library::Library(BackgroundThread<Database>* db_thread, TaskManager* task_manage
   full_rescan_revisions_[26] = tr("CUE sheet support");
 }
 
-void Library::set_watcher_factory(BackgroundThreadFactory<LibraryWatcher>* factory) {
-  watcher_factory_.reset(factory);
+Library::~Library() {
+  watcher_->deleteLater();
+  watcher_thread_->exit();
+  watcher_thread_->wait();
 }
 
 void Library::Init() {
-  watcher_ = watcher_factory_->GetThread(this);
-  connect(watcher_, SIGNAL(Initialised()), SLOT(WatcherInitialised()));
-}
+  watcher_ = new LibraryWatcher;
+  watcher_thread_ = new QThread(this);
 
-void Library::StartThreads() {
-  Q_ASSERT(watcher_);
+  watcher_->moveToThread(watcher_thread_);
+  watcher_thread_->start(QThread::IdlePriority);
 
-  watcher_->set_io_priority(BackgroundThreadBase::IOPRIO_CLASS_IDLE);
-  watcher_->set_cpu_priority(QThread::IdlePriority);
-  watcher_->Start();
-
-  model_->Init();
-}
-
-void Library::WatcherInitialised() {
-  LibraryWatcher* watcher = watcher_->Worker().get();
-
-  watcher->set_backend(backend_);
-  watcher->set_task_manager(task_manager_);
+  watcher_->set_backend(backend_);
+  watcher_->set_task_manager(app_->task_manager());
 
   connect(backend_, SIGNAL(DirectoryDiscovered(Directory,SubdirectoryList)),
-          watcher,  SLOT(AddDirectory(Directory,SubdirectoryList)));
+          watcher_, SLOT(AddDirectory(Directory,SubdirectoryList)));
   connect(backend_, SIGNAL(DirectoryDeleted(Directory)),
-          watcher,  SLOT(RemoveDirectory(Directory)));
-  connect(watcher,  SIGNAL(NewOrUpdatedSongs(SongList)),
+          watcher_, SLOT(RemoveDirectory(Directory)));
+  connect(watcher_, SIGNAL(NewOrUpdatedSongs(SongList)),
           backend_, SLOT(AddOrUpdateSongs(SongList)));
-  connect(watcher,  SIGNAL(SongsMTimeUpdated(SongList)),
+  connect(watcher_, SIGNAL(SongsMTimeUpdated(SongList)),
           backend_, SLOT(UpdateMTimesOnly(SongList)));
-  connect(watcher,  SIGNAL(SongsDeleted(SongList)),
+  connect(watcher_, SIGNAL(SongsDeleted(SongList)),
           backend_, SLOT(MarkSongsUnavailable(SongList)));
-  connect(watcher,  SIGNAL(SubdirsDiscovered(SubdirectoryList)),
+  connect(watcher_, SIGNAL(SubdirsDiscovered(SubdirectoryList)),
           backend_, SLOT(AddOrUpdateSubdirs(SubdirectoryList)));
-  connect(watcher,  SIGNAL(SubdirsMTimeUpdated(SubdirectoryList)),
+  connect(watcher_, SIGNAL(SubdirsMTimeUpdated(SubdirectoryList)),
           backend_, SLOT(AddOrUpdateSubdirs(SubdirectoryList)));
-  connect(watcher, SIGNAL(CompilationsNeedUpdating()),
+  connect(watcher_, SIGNAL(CompilationsNeedUpdating()),
           backend_, SLOT(UpdateCompilations()));
 
   // This will start the watcher checking for updates
@@ -143,36 +136,21 @@ void Library::WatcherInitialised() {
 }
 
 void Library::IncrementalScan() {
-  if (!watcher_->Worker())
-    return;
-
-  watcher_->Worker()->IncrementalScanAsync();
+  watcher_->IncrementalScanAsync();
 }
 
 void Library::FullScan() {
-  if (!watcher_->Worker())
-    return;
-
-  watcher_->Worker()->FullScanAsync();
+  watcher_->FullScanAsync();
 }
 
 void Library::PauseWatcher() {
-  if (!watcher_->Worker())
-    return;
-
-  watcher_->Worker()->SetRescanPausedAsync(true);
+  watcher_->SetRescanPausedAsync(true);
 }
 
 void Library::ResumeWatcher() {
-  if (!watcher_->Worker())
-    return;
-
-  watcher_->Worker()->SetRescanPausedAsync(false);
+  watcher_->SetRescanPausedAsync(false);
 }
 
 void Library::ReloadSettings() {
-  if (!watcher_->Worker())
-    return;
-
-  watcher_->Worker()->ReloadSettingsAsync();
+  watcher_->ReloadSettingsAsync();
 }

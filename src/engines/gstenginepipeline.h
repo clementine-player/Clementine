@@ -22,6 +22,7 @@
 #include <QFuture>
 #include <QMutex>
 #include <QObject>
+#include <QThreadPool>
 #include <QTimeLine>
 #include <QUrl>
 
@@ -51,6 +52,7 @@ class GstEnginePipeline : public QObject {
   void set_output_device(const QString& sink, const QString& device);
   void set_replaygain(bool enabled, int mode, float preamp, bool compression);
   void set_buffer_duration_nanosec(qint64 duration_nanosec);
+  void set_mono_playback(bool enabled);
 
   // Creates the pipeline, returns false on error
   bool InitFromUrl(const QUrl& url, qint64 end_nanosec);
@@ -193,8 +195,11 @@ class GstEnginePipeline : public QObject {
   float rg_preamp_;
   bool rg_compression_;
 
+  // Buffering
   quint64 buffer_duration_nanosec_;
   bool buffering_;
+
+  bool mono_playback_;
 
   // The URL that is currently playing, and the URL that is to be preloaded
   // when the current track is close to finishing.
@@ -259,6 +264,8 @@ class GstEnginePipeline : public QObject {
   GstElement* audiosink_;
 
   uint bus_cb_id_;
+
+  QThreadPool set_state_threadpool_;
 };
 
 #endif // GSTENGINEPIPELINE_H

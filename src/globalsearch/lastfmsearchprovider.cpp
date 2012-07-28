@@ -20,14 +20,16 @@
 #include "internet/lastfmservice.h"
 
 
-LastFMSearchProvider::LastFMSearchProvider(LastFMService* service, QObject* parent)
-  : SimpleSearchProvider(parent),
+LastFMSearchProvider::LastFMSearchProvider(LastFMService* service,
+                                           Application* app, QObject* parent)
+  : SimpleSearchProvider(app, parent),
     service_(service) {
   Init("Last.fm", "lastfm", QIcon(":last.fm/as.png"),
        CanShowConfig | CanGiveSuggestions);
   icon_ = ScaleAndPad(QImage(":last.fm/as.png"));
 
   set_safe_words(QStringList() << "lastfm" << "last.fm");
+  set_max_suggestion_count(3);
 
   connect(service, SIGNAL(SavedItemsChanged()), SLOT(MaybeRecreateItems()));
 

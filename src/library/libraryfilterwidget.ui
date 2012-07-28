@@ -21,8 +21,8 @@
     <number>0</number>
    </property>
    <item>
-    <widget class="LineEdit" name="filter">
-     <property name="hint" stdset="0">
+    <widget class="QSearchField" name="filter">
+     <property name="placeholderText" stdset="0">
       <string>Enter search terms here</string>
      </property>
     </widget>
@@ -95,68 +95,12 @@
     <string>Added this month</string>
    </property>
   </action>
-  <action name="group_by_artist">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>Group by Artist</string>
-   </property>
-  </action>
-  <action name="group_by_artist_album">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>Group by Artist/Album</string>
-   </property>
-  </action>
-  <action name="group_by_artist_yearalbum">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>Group by Artist/Year - Album</string>
-   </property>
-  </action>
-  <action name="group_by_album">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>Group by Album</string>
-   </property>
-  </action>
-  <action name="group_by_genre_album">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>Group by Genre/Album</string>
-   </property>
-  </action>
-  <action name="group_by_genre_artist_album">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>Group by Genre/Artist/Album</string>
-   </property>
-  </action>
-  <action name="group_by_advanced">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>Advanced grouping...</string>
-   </property>
-  </action>
  </widget>
  <customwidgets>
   <customwidget>
-   <class>LineEdit</class>
-   <extends>QLineEdit</extends>
-   <header>widgets/lineedit.h</header>
+   <class>QSearchField</class>
+   <extends>QWidget</extends>
+   <header>3rdparty/qocoa/qsearchfield.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

@@ -27,6 +27,7 @@ AutoExpandingTreeView::AutoExpandingTreeView(QWidget *parent)
   : QTreeView(parent),
     auto_open_(true),
     expand_on_reset_(true),
+    add_on_double_click_(true),
     ignore_next_click_(false)
 {
   setExpandsOnDoubleClick(false);
@@ -89,11 +90,13 @@ void AutoExpandingTreeView::ItemClicked(const QModelIndex& index) {
 void AutoExpandingTreeView::ItemDoubleClicked(const QModelIndex& index) {
   ignore_next_click_ = true;
 
-  QMimeData* data = model()->mimeData(QModelIndexList() << index);
-  if (MimeData* mime_data = qobject_cast<MimeData*>(data)) {
-    mime_data->from_doubleclick_ = true;
+  if (add_on_double_click_) {
+    QMimeData* data = model()->mimeData(QModelIndexList() << index);
+    if (MimeData* mime_data = qobject_cast<MimeData*>(data)) {
+      mime_data->from_doubleclick_ = true;
+    }
+    emit AddToPlaylistSignal(data);
   }
-  emit AddToPlaylistSignal(data);
 }
 
 void AutoExpandingTreeView::mousePressEvent(QMouseEvent* event) {

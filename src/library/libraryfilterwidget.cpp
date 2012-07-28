@@ -22,7 +22,6 @@
 #include "ui_libraryfilterwidget.h"
 #include "ui/iconloader.h"
 #include "ui/settingsdialog.h"
-#include "widgets/maclineedit.h"
 
 #include <QActionGroup>
 #include <QKeyEvent>
@@ -78,27 +77,7 @@ LibraryFilterWidget::LibraryFilterWidget(QWidget *parent)
   connect(ui_->filter_age_year, SIGNAL(triggered()), filter_age_mapper_, SLOT(map()));
 
   // "Group by ..."
-  ui_->group_by_artist->setProperty("group_by", QVariant::fromValue(
-      LibraryModel::Grouping(LibraryModel::GroupBy_Artist)));
-  ui_->group_by_artist_album->setProperty("group_by", QVariant::fromValue(
-      LibraryModel::Grouping(LibraryModel::GroupBy_Artist, LibraryModel::GroupBy_Album)));
-  ui_->group_by_artist_yearalbum->setProperty("group_by", QVariant::fromValue(
-      LibraryModel::Grouping(LibraryModel::GroupBy_Artist, LibraryModel::GroupBy_YearAlbum)));
-  ui_->group_by_album->setProperty("group_by", QVariant::fromValue(
-      LibraryModel::Grouping(LibraryModel::GroupBy_Album)));
-  ui_->group_by_genre_album->setProperty("group_by", QVariant::fromValue(
-      LibraryModel::Grouping(LibraryModel::GroupBy_Genre, LibraryModel::GroupBy_Album)));
-  ui_->group_by_genre_artist_album->setProperty("group_by", QVariant::fromValue(
-      LibraryModel::Grouping(LibraryModel::GroupBy_Genre, LibraryModel::GroupBy_Artist, LibraryModel::GroupBy_Album)));
-
-  group_by_group_ = new QActionGroup(this);
-  group_by_group_->addAction(ui_->group_by_artist);
-  group_by_group_->addAction(ui_->group_by_artist_album);
-  group_by_group_->addAction(ui_->group_by_artist_yearalbum);
-  group_by_group_->addAction(ui_->group_by_album);
-  group_by_group_->addAction(ui_->group_by_genre_album);
-  group_by_group_->addAction(ui_->group_by_genre_artist_album);
-  group_by_group_->addAction(ui_->group_by_advanced);
+  group_by_group_ = CreateGroupByActions(this);
 
   group_by_menu_ = new QMenu(tr("Group by"), this);
   group_by_menu_->addActions(group_by_group_->actions());
@@ -113,26 +92,47 @@ LibraryFilterWidget::LibraryFilterWidget(QWidget *parent)
   library_menu_->addSeparator();
   ui_->options->setMenu(library_menu_);
 
-#ifdef Q_OS_DARWIN
-  QString hint = ui_->filter->hint();
-  delete ui_->filter;
-  MacLineEdit* lineedit = new MacLineEdit(this);
-  ui_->horizontalLayout->insertWidget(1, lineedit);
-  filter_ = lineedit;
-  filter_->set_hint(hint);
-#else
-  filter_ = ui_->filter;
-#endif
-
-  connect(filter_->widget(), SIGNAL(textChanged(QString)), SLOT(FilterTextChanged(QString)));
+  connect(ui_->filter, SIGNAL(textChanged(QString)), SLOT(FilterTextChanged(QString)));
 }
 
 LibraryFilterWidget::~LibraryFilterWidget() {
   delete ui_;
 }
 
+QActionGroup* LibraryFilterWidget::CreateGroupByActions(QObject* parent) {
+  QActionGroup* ret = new QActionGroup(parent);
+  ret->addAction(CreateGroupByAction(tr("Group by Artist"), parent,
+      LibraryModel::Grouping(LibraryModel::GroupBy_Artist)));
+  ret->addAction(CreateGroupByAction(tr("Group by Artist/Album"), parent,
+      LibraryModel::Grouping(LibraryModel::GroupBy_Artist, LibraryModel::GroupBy_Album)));
+  ret->addAction(CreateGroupByAction(tr("Group by Artist/Year - Album"), parent,
+      LibraryModel::Grouping(LibraryModel::GroupBy_Artist, LibraryModel::GroupBy_YearAlbum)));
+  ret->addAction(CreateGroupByAction(tr("Group by Album"), parent,
+      LibraryModel::Grouping(LibraryModel::GroupBy_Album)));
+  ret->addAction(CreateGroupByAction(tr("Group by Genre/Album"), parent,
+      LibraryModel::Grouping(LibraryModel::GroupBy_Genre, LibraryModel::GroupBy_Album)));
+  ret->addAction(CreateGroupByAction(tr("Group by Genre/Artist/Album"), parent,
+      LibraryModel::Grouping(LibraryModel::GroupBy_Genre, LibraryModel::GroupBy_Artist, LibraryModel::GroupBy_Album)));
+  ret->addAction(CreateGroupByAction(tr("Advanced grouping..."), parent,
+      LibraryModel::Grouping()));
+
+  return ret;
+}
+
+QAction* LibraryFilterWidget::CreateGroupByAction(
+    const QString& text, QObject* parent, const LibraryModel::Grouping& grouping) {
+  QAction* ret = new QAction(text, parent);
+  ret->setCheckable(true);
+
+  if (grouping.first != LibraryModel::GroupBy_None) {
+    ret->setProperty("group_by", QVariant::fromValue(grouping));
+  }
+
+  return ret;
+}
+
 void LibraryFilterWidget::FocusOnFilter(QKeyEvent *event) {
-  ui_->filter->setFocus(Qt::OtherFocusReason);
+  ui_->filter->setFocus();
   QApplication::sendEvent(ui_->filter, event);
 }
 
@@ -196,16 +196,18 @@ void LibraryFilterWidget::GroupingChanged(const LibraryModel::Grouping& g) {
       return;
     }
   }
-  ui_->group_by_advanced->setChecked(true);
+
+  // Check the advanced action
+  group_by_group_->actions().last()->setChecked(true);
 }
 
 void LibraryFilterWidget::SetFilterHint(const QString& hint) {
-  filter_->set_hint(hint);
+  ui_->filter->setPlaceholderText(hint);
 }
 
 void LibraryFilterWidget::SetQueryMode(QueryOptions::QueryMode query_mode) {
-  filter_->clear();
-  filter_->set_enabled(query_mode == QueryOptions::QueryMode_All);
+  ui_->filter->clear();
+  ui_->filter->setEnabled(query_mode == QueryOptions::QueryMode_All);
 
   model_->SetFilterQueryMode(query_mode);
 }
@@ -235,7 +237,7 @@ void LibraryFilterWidget::keyReleaseEvent(QKeyEvent* e) {
       break;
 
     case Qt::Key_Escape:
-      filter_->clear();
+      ui_->filter->clear();
       e->accept();
       break;
   }
@@ -262,8 +264,8 @@ void LibraryFilterWidget::FilterTextChanged(const QString& text) {
 }
 
 void LibraryFilterWidget::FilterDelayTimeout() {
-  emit Filter(filter_->text());
+  emit Filter(ui_->filter->text());
   if (filter_applies_to_model_) {
-    model_->SetFilterText(filter_->text());
+    model_->SetFilterText(ui_->filter->text());
   }
 }

@@ -16,6 +16,7 @@
 */
 
 #include "asxparser.h"
+#include "core/utilities.h"
 
 #include <QBuffer>
 #include <QDomDocument>
@@ -55,7 +56,7 @@ SongList ASXParser::Load(QIODevice *device, const QString& playlist_path,
     QString url = ex.cap(2);
     url.replace(QRegExp("&(?!amp;|quot;|apos;|lt;|gt;)"), "&amp;");
 
-    QByteArray replacement = (ex.cap(1) + url + "\"").toLocal8Bit();
+    QByteArray replacement = QString(ex.cap(1) + url + "\"").toLocal8Bit();
     data.replace(ex.cap(0).toLocal8Bit(), replacement);
     index += replacement.length();
   }
@@ -66,11 +67,11 @@ SongList ASXParser::Load(QIODevice *device, const QString& playlist_path,
   SongList ret;
 
   QXmlStreamReader reader(&buffer);
-  if (!ParseUntilElement(&reader, "asx")) {
+  if (!Utilities::ParseUntilElement(&reader, "asx")) {
     return ret;
   }
 
-  while (!reader.atEnd() && ParseUntilElement(&reader, "entry")) {
+  while (!reader.atEnd() && Utilities::ParseUntilElement(&reader, "entry")) {
     Song song = ParseTrack(&reader, dir);
     if (song.is_valid()) {
       ret << song;

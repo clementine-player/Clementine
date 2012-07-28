@@ -37,6 +37,7 @@ class AfcDevice : public GPodDevice {
 public:
   Q_INVOKABLE AfcDevice(const QUrl& url, DeviceLister* lister,
                         const QString& unique_id, DeviceManager* manager,
+                        Application* app,
                         int database_id, bool first_time);
   ~AfcDevice();
 

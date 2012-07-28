@@ -17,8 +17,9 @@
 
 #include "mpris1.h"
 #include "mpris_common.h"
+#include "core/application.h"
 #include "core/logging.h"
-#include "covers/artloader.h"
+#include "covers/currentartloader.h"
 
 #include <QCoreApplication>
 #include <QDBusConnection>
@@ -36,7 +37,7 @@ namespace mpris {
 
 const char* Mpris1::kDefaultDbusServiceName = "org.mpris.clementine";
 
-Mpris1::Mpris1(PlayerInterface* player, ArtLoader* art_loader, QObject* parent,
+Mpris1::Mpris1(Application* app, QObject* parent,
                const QString& dbus_service_name)
   : QObject(parent),
     dbus_service_name_(dbus_service_name),
@@ -56,11 +57,11 @@ Mpris1::Mpris1(PlayerInterface* player, ArtLoader* art_loader, QObject* parent,
     return;
   }
 
-  root_ = new Mpris1Root(player, this);
-  player_ = new Mpris1Player(player, this);
-  tracklist_ = new Mpris1TrackList(player, this);
+  root_ = new Mpris1Root(app, this);
+  player_ = new Mpris1Player(app, this);
+  tracklist_ = new Mpris1TrackList(app, this);
 
-  connect(art_loader, SIGNAL(ArtLoaded(const Song&, const QString&, const QImage&)),
+  connect(app->current_art_loader(), SIGNAL(ArtLoaded(const Song&, const QString&, const QImage&)),
           player_, SLOT(CurrentSongChanged(const Song&, const QString&, const QImage&)));
 }
 
@@ -68,35 +69,37 @@ Mpris1::~Mpris1() {
   QDBusConnection::sessionBus().unregisterService(dbus_service_name_);
 }
 
-Mpris1Root::Mpris1Root(PlayerInterface* player, QObject* parent)
-    : QObject(parent), player_(player) {
+Mpris1Root::Mpris1Root(Application* app, QObject* parent)
+    : QObject(parent),
+      app_(app) {
   new MprisRoot(this);
   QDBusConnection::sessionBus().registerObject("/", this);
 }
 
-Mpris1Player::Mpris1Player(PlayerInterface* player, QObject* parent)
-    : QObject(parent), player_(player) {
+Mpris1Player::Mpris1Player(Application* app, QObject* parent)
+    : QObject(parent),
+      app_(app) {
   new MprisPlayer(this);
   QDBusConnection::sessionBus().registerObject("/Player", this);
 
-  connect(player->engine(), SIGNAL(StateChanged(Engine::State)), SLOT(EngineStateChanged(Engine::State)));
-  connect(player_->playlists(), SIGNAL(PlaylistManagerInitialized()), SLOT(PlaylistManagerInitialized()));
+  connect(app_->player()->engine(), SIGNAL(StateChanged(Engine::State)), SLOT(EngineStateChanged(Engine::State)));
+  connect(app_->playlist_manager(), SIGNAL(PlaylistManagerInitialized()), SLOT(PlaylistManagerInitialized()));
 }
 
 // when PlaylistManager gets it ready, we connect PlaylistSequence with this
 void Mpris1Player::PlaylistManagerInitialized() {
-  connect(player_->playlists()->sequence(), SIGNAL(ShuffleModeChanged(PlaylistSequence::ShuffleMode)),
+  connect(app_->playlist_manager()->sequence(), SIGNAL(ShuffleModeChanged(PlaylistSequence::ShuffleMode)),
           SLOT(ShuffleModeChanged()));
-  connect(player_->playlists()->sequence(), SIGNAL(RepeatModeChanged(PlaylistSequence::RepeatMode)),
+  connect(app_->playlist_manager()->sequence(), SIGNAL(RepeatModeChanged(PlaylistSequence::RepeatMode)),
           SLOT(RepeatModeChanged()));
 }
 
-Mpris1TrackList::Mpris1TrackList(PlayerInterface* player, QObject* parent)
-    : QObject(parent), player_(player) {
+Mpris1TrackList::Mpris1TrackList(Application* app, QObject* parent)
+    : QObject(parent), app_(app) {
   new MprisTrackList(this);
   QDBusConnection::sessionBus().registerObject("/TrackList", this);
 
-  connect(player->playlists(), SIGNAL(PlaylistChanged(Playlist*)), SLOT(PlaylistChanged(Playlist*)));
+  connect(app_->playlist_manager(), SIGNAL(PlaylistChanged(Playlist*)), SLOT(PlaylistChanged(Playlist*)));
 }
 
 void Mpris1TrackList::PlaylistChanged(Playlist* playlist) {
@@ -142,27 +145,27 @@ void Mpris1Root::Quit() {
 }
 
 void Mpris1Player::Pause() {
-  player_->PlayPause();
+  app_->player()->PlayPause();
 }
 
 void Mpris1Player::Stop() {
-  player_->Stop();
+  app_->player()->Stop();
 }
 
 void Mpris1Player::Prev() {
-  player_->Previous();
+  app_->player()->Previous();
 }
 
 void Mpris1Player::Play() {
-  player_->Play();
+  app_->player()->Play();
 }
 
 void Mpris1Player::Next() {
-  player_->Next();
+  app_->player()->Next();
 }
 
 void Mpris1Player::Repeat(bool repeat) {
-  player_->playlists()->sequence()->SetRepeatMode(
+  app_->playlist_manager()->sequence()->SetRepeatMode(
       repeat ? PlaylistSequence::Repeat_Track : PlaylistSequence::Repeat_Off);
 }
 
@@ -175,7 +178,7 @@ void Mpris1Player::RepeatModeChanged() {
 }
 
 DBusStatus Mpris1Player::GetStatus() const {
-  return GetStatus(player_->GetState());
+  return GetStatus(app_->player()->GetState());
 }
 
 DBusStatus Mpris1Player::GetStatus(Engine::State state) const {
@@ -194,7 +197,7 @@ DBusStatus Mpris1Player::GetStatus(Engine::State state) const {
       break;
   }
 
-  PlaylistManagerInterface* playlists_ = player_->playlists();
+  PlaylistManagerInterface* playlists_ = app_->playlist_manager();
   PlaylistSequence::RepeatMode repeat_mode = playlists_->sequence()->repeat_mode();
 
   status.random = playlists_->sequence()->shuffle_mode() == PlaylistSequence::Shuffle_Off ? 0 : 1;
@@ -207,19 +210,19 @@ DBusStatus Mpris1Player::GetStatus(Engine::State state) const {
 }
 
 void Mpris1Player::VolumeSet(int volume) {
-  player_->SetVolume(volume);
+  app_->player()->SetVolume(volume);
 }
 
 int Mpris1Player::VolumeGet() const {
-  return player_->GetVolume();
+  return app_->player()->GetVolume();
 }
 
 void Mpris1Player::PositionSet(int pos_msec) {
-  player_->SeekTo(pos_msec / kMsecPerSec);
+  app_->player()->SeekTo(pos_msec / kMsecPerSec);
 }
 
 int Mpris1Player::PositionGet() const {
-  return player_->engine()->position_nanosec() / kNsecPerMsec;
+  return app_->player()->engine()->position_nanosec() / kNsecPerMsec;
 }
 
 QVariantMap Mpris1Player::GetMetadata() const {
@@ -227,17 +230,17 @@ QVariantMap Mpris1Player::GetMetadata() const {
 }
 
 int Mpris1Player::GetCaps() const {
-  return GetCaps(player_->GetState());
+  return GetCaps(app_->player()->GetState());
 }
 
 int Mpris1Player::GetCaps(Engine::State state) const {
   int caps = CAN_HAS_TRACKLIST;
-  PlaylistItemPtr current_item = player_->GetCurrentItem();
-  PlaylistManagerInterface* playlists = player_->playlists();
+  PlaylistItemPtr current_item = app_->player()->GetCurrentItem();
+  PlaylistManagerInterface* playlists = app_->playlist_manager();
 
   // play is disabled when playlist is empty or when last.fm stream is already playing
   if (playlists->active()->rowCount() != 0
-      && !(state == Engine::Playing && (player_->GetCurrentItem()->options() & PlaylistItem::LastFMControls))) {
+      && !(state == Engine::Playing && (app_->player()->GetCurrentItem()->options() & PlaylistItem::LastFMControls))) {
     caps |= CAN_PLAY;
   }
 
@@ -270,33 +273,33 @@ void Mpris1Player::VolumeDown(int change) {
 }
 
 void Mpris1Player::Mute() {
-  player_->Mute();
+  app_->player()->Mute();
 }
 
 void Mpris1Player::ShowOSD() {
-  player_->ShowOSD();
+  app_->player()->ShowOSD();
 }
 
 int Mpris1TrackList::AddTrack(const QString& track, bool play) {
-  player_->playlists()->active()->InsertUrls(
+  app_->playlist_manager()->active()->InsertUrls(
         QList<QUrl>() << QUrl(track), -1, play);
   return 0;
 }
 
 void Mpris1TrackList::DelTrack(int index) {
-  player_->playlists()->active()->removeRows(index, 1);
+  app_->playlist_manager()->active()->removeRows(index, 1);
 }
 
 int Mpris1TrackList::GetCurrentTrack() const {
-  return player_->playlists()->active()->current_row();
+  return app_->playlist_manager()->active()->current_row();
 }
 
 int Mpris1TrackList::GetLength() const {
-  return player_->playlists()->active()->rowCount();
+  return app_->playlist_manager()->active()->rowCount();
 }
 
 QVariantMap Mpris1TrackList::GetMetadata(int pos) const {
-  PlaylistItemPtr item = player_->GetItemAt(pos);
+  PlaylistItemPtr item = app_->player()->GetItemAt(pos);
   if (!item)
     return QVariantMap();
 
@@ -304,17 +307,17 @@ QVariantMap Mpris1TrackList::GetMetadata(int pos) const {
 }
 
 void Mpris1TrackList::SetLoop(bool enable) {
-  player_->playlists()->active()->sequence()->SetRepeatMode(
+  app_->playlist_manager()->active()->sequence()->SetRepeatMode(
       enable ? PlaylistSequence::Repeat_Playlist : PlaylistSequence::Repeat_Off);
 }
 
 void Mpris1TrackList::SetRandom(bool enable) {
-  player_->playlists()->active()->sequence()->SetShuffleMode(
+  app_->playlist_manager()->active()->sequence()->SetShuffleMode(
       enable ? PlaylistSequence::Shuffle_All : PlaylistSequence::Shuffle_Off);
 }
 
 void Mpris1TrackList::PlayTrack(int index) {
-  player_->PlayAt(index, Engine::Manual, true);
+  app_->player()->PlayAt(index, Engine::Manual, true);
 }
 
 QVariantMap Mpris1::GetMetadata(const Song& song) {

@@ -143,6 +143,7 @@ void TagReaderWorker::ReadFile(const QString& filename,
 
   scoped_ptr<TagLib::FileRef> fileref(factory_->GetFileRef(filename));
   if(fileref->isNull()) {
+    qLog(Info) << "TagLib hasn't been able to read " << filename << " file";
     return;
   }
 
@@ -295,7 +296,6 @@ void TagReaderWorker::ReadFile(const QString& filename,
   SetDefault(bitrate);
   SetDefault(samplerate);
   SetDefault(lastplayed);
-  SetDefault(rating);
   #undef SetDefault
 }
 

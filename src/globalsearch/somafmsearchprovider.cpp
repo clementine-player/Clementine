@@ -18,12 +18,13 @@
 #include "somafmsearchprovider.h"
 #include "internet/somafmservice.h"
 
-SomaFMSearchProvider::SomaFMSearchProvider(SomaFMService* service, QObject* parent)
-  : SimpleSearchProvider(parent),
+SomaFMSearchProvider::SomaFMSearchProvider(SomaFMService* service, Application* app, QObject* parent)
+  : SimpleSearchProvider(app, parent),
     service_(service)
 {
   Init("SomaFM", "somafm", QIcon(":/providers/somafm.png"), CanGiveSuggestions);
   set_result_limit(3);
+  set_max_suggestion_count(3);
   icon_ = ScaleAndPad(QImage(":/providers/somafm.png"));
 
   connect(service, SIGNAL(StreamsChanged()), SLOT(MaybeRecreateItems()));

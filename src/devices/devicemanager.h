@@ -19,14 +19,15 @@
 #define DEVICEMANAGER_H
 
 #include "devicedatabasebackend.h"
-#include "core/backgroundthread.h"
 #include "library/librarymodel.h"
 
 #include <QAbstractListModel>
 #include <QIcon>
+#include <QThreadPool>
 
 #include <boost/shared_ptr.hpp>
 
+class Application;
 class ConnectedDevice;
 class Database;
 class DeviceLister;
@@ -37,8 +38,7 @@ class DeviceManager : public QAbstractListModel {
   Q_OBJECT
 
 public:
-  DeviceManager(BackgroundThread<Database>* database, TaskManager* task_manager,
-                QObject* parent = 0);
+  DeviceManager(Application* app, QObject* parent = 0);
   ~DeviceManager();
 
   enum Role {
@@ -66,9 +66,6 @@ public:
 
   static const int kDeviceIconSize;
   static const int kDeviceIconOverlaySize;
-
-  BackgroundThread<Database>* database() const { return database_; }
-  TaskManager* task_manager() const { return task_manager_; }
 
   DeviceStateFilterModel* connected_devices_model() const { return connected_devices_model_; }
 
@@ -100,7 +97,6 @@ public slots:
 signals:
   void DeviceConnected(int row);
   void DeviceDisconnected(int row);
-  void Error(const QString& message);
 
 private slots:
   void PhysicalDeviceAdded(const QString& id);
@@ -109,6 +105,7 @@ private slots:
   void DeviceTaskStarted(int id);
   void TasksChanged();
   void DeviceSongCountUpdated(int count);
+  void LoadAllDevices();
 
 private:
   // Devices can be in three different states:
@@ -167,9 +164,8 @@ private:
   DeviceDatabaseBackend::Device InfoToDatabaseDevice(const DeviceInfo& info) const;
 
 private:
-  BackgroundThread<Database>* database_;
+  Application* app_;
   DeviceDatabaseBackend* backend_;
-  TaskManager* task_manager_;
 
   DeviceStateFilterModel* connected_devices_model_;
 
@@ -182,6 +178,8 @@ private:
 
   // Map of task ID to device index
   QMap<int, QPersistentModelIndex> active_tasks_;
+
+  QThreadPool thread_pool_;
 };
 
 

@@ -20,8 +20,8 @@
 #include "internet/digitallyimportedservicebase.h"
 
 DigitallyImportedSearchProvider::DigitallyImportedSearchProvider(
-  DigitallyImportedServiceBase* service, QObject* parent)
-    : SimpleSearchProvider(parent),
+  DigitallyImportedServiceBase* service, Application* app, QObject* parent)
+    : SimpleSearchProvider(app, parent),
       service_(service)
 {
   Init(service_->name(), service->api_service_name(), service_->icon(),
@@ -29,6 +29,7 @@ DigitallyImportedSearchProvider::DigitallyImportedSearchProvider(
 
   set_safe_words(QStringList() << "sky.fm" << "skyfm" << "di.fm" << "difm"
                                << "digitallyimported");
+  set_max_suggestion_count(5);
 
   connect(service_, SIGNAL(StreamsChanged()), SLOT(MaybeRecreateItems()));
 

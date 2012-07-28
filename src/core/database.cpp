@@ -19,7 +19,11 @@
 #include "database.h"
 #include "scopedtransaction.h"
 #include "utilities.h"
+#include "core/application.h"
 #include "core/logging.h"
+#include "core/taskmanager.h"
+
+#include <boost/scope_exit.hpp>
 
 #include <QCoreApplication>
 #include <QDir>
@@ -33,7 +37,7 @@
 #include <QVariant>
 
 const char* Database::kDatabaseFilename = "clementine.db";
-const int Database::kSchemaVersion = 36;
+const int Database::kSchemaVersion = 37;
 const char* Database::kMagicAllSongsTables = "%allsongstables";
 
 int Database::sNextConnectionId = 1;
@@ -82,16 +86,21 @@ struct sqlite3_tokenizer_cursor {
   /* Tokenizer implementations will typically add additional fields */
 };
 
-int (*Database::_sqlite3_create_function) (
-    sqlite3*, const char*, int, int, void*,
-    void (*) (sqlite3_context*, int, sqlite3_value**),
-    void (*) (sqlite3_context*, int, sqlite3_value**),
-    void (*) (sqlite3_context*)) = NULL;
 int (*Database::_sqlite3_value_type) (sqlite3_value*) = NULL;
 sqlite_int64 (*Database::_sqlite3_value_int64) (sqlite3_value*) = NULL;
 const uchar* (*Database::_sqlite3_value_text) (sqlite3_value*) = NULL;
 void (*Database::_sqlite3_result_int64) (sqlite3_context*, sqlite_int64) = NULL;
 void* (*Database::_sqlite3_user_data) (sqlite3_context*) = NULL;
+
+int (*Database::_sqlite3_open) (const char*, sqlite3**) = NULL;
+const char* (*Database::_sqlite3_errmsg) (sqlite3*) = NULL;
+int (*Database::_sqlite3_close) (sqlite3*) = NULL;
+sqlite3_backup* (*Database::_sqlite3_backup_init) (
+    sqlite3*, const char*, sqlite3*, const char*) = NULL;
+int (*Database::_sqlite3_backup_step) (sqlite3_backup*, int) = NULL;
+int (*Database::_sqlite3_backup_finish) (sqlite3_backup*) = NULL;
+int (*Database::_sqlite3_backup_pagecount) (sqlite3_backup*) = NULL;
+int (*Database::_sqlite3_backup_remaining) (sqlite3_backup*) = NULL;
 
 bool Database::sStaticInitDone = false;
 bool Database::sLoadedSqliteSymbols = false;
@@ -225,12 +234,21 @@ void Database::StaticInit() {
 #ifdef HAVE_STATIC_SQLITE
   // We statically link libqsqlite.dll on windows and mac so these symbols are already
   // available
-  _sqlite3_create_function = sqlite3_create_function;
   _sqlite3_value_type = sqlite3_value_type;
   _sqlite3_value_int64 = sqlite3_value_int64;
   _sqlite3_value_text = sqlite3_value_text;
   _sqlite3_result_int64 = sqlite3_result_int64;
   _sqlite3_user_data = sqlite3_user_data;
+
+  _sqlite3_open = sqlite3_open;
+  _sqlite3_errmsg = sqlite3_errmsg;
+  _sqlite3_close = sqlite3_close;
+  _sqlite3_backup_init = sqlite3_backup_init;
+  _sqlite3_backup_step = sqlite3_backup_step;
+  _sqlite3_backup_finish = sqlite3_backup_finish;
+  _sqlite3_backup_pagecount = sqlite3_backup_pagecount;
+  _sqlite3_backup_remaining = sqlite3_backup_remaining;
+
   sLoadedSqliteSymbols = true;
   return;
 #else // HAVE_STATIC_SQLITE
@@ -243,8 +261,6 @@ void Database::StaticInit() {
     return;
   }
 
-  _sqlite3_create_function = reinterpret_cast<Sqlite3CreateFunc>(
-      library.resolve("sqlite3_create_function"));
   _sqlite3_value_type = reinterpret_cast<int (*) (sqlite3_value*)>(
       library.resolve("sqlite3_value_type"));
   _sqlite3_value_int64 = reinterpret_cast<sqlite_int64 (*) (sqlite3_value*)>(
@@ -256,12 +272,37 @@ void Database::StaticInit() {
   _sqlite3_user_data = reinterpret_cast<void* (*) (sqlite3_context*)>(
       library.resolve("sqlite3_user_data"));
 
-  if (!_sqlite3_create_function ||
-      !_sqlite3_value_type ||
+  _sqlite3_open = reinterpret_cast<int (*) (const char*, sqlite3**)>(
+      library.resolve("sqlite3_open"));
+  _sqlite3_errmsg = reinterpret_cast<const char* (*) (sqlite3*)>(
+      library.resolve("sqlite3_errmsg"));
+  _sqlite3_close = reinterpret_cast<int (*) (sqlite3*)>(
+      library.resolve("sqlite3_close"));
+  _sqlite3_backup_init = reinterpret_cast<
+      sqlite3_backup* (*) (sqlite3*, const char*, sqlite3*, const char*)>(
+          library.resolve("sqlite3_backup_init"));
+  _sqlite3_backup_step = reinterpret_cast<int (*) (sqlite3_backup*, int)>(
+      library.resolve("sqlite3_backup_step"));
+  _sqlite3_backup_finish = reinterpret_cast<int (*) (sqlite3_backup*)>(
+      library.resolve("sqlite3_backup_finish"));
+  _sqlite3_backup_pagecount = reinterpret_cast<int (*) (sqlite3_backup*)>(
+      library.resolve("sqlite3_backup_pagecount"));
+  _sqlite3_backup_remaining = reinterpret_cast<int (*) (sqlite3_backup*)>(
+      library.resolve("sqlite3_backup_remaining"));
+
+  if (!_sqlite3_value_type ||
       !_sqlite3_value_int64 ||
       !_sqlite3_value_text ||
       !_sqlite3_result_int64 ||
-      !_sqlite3_user_data) {
+      !_sqlite3_user_data ||
+      !_sqlite3_open ||
+      !_sqlite3_errmsg ||
+      !_sqlite3_close ||
+      !_sqlite3_backup_init ||
+      !_sqlite3_backup_step ||
+      !_sqlite3_backup_finish ||
+      !_sqlite3_backup_pagecount ||
+      !_sqlite3_backup_remaining) {
     qLog(Error) << "Couldn't resolve sqlite symbols";
     sLoadedSqliteSymbols = false;
   } else {
@@ -270,62 +311,9 @@ void Database::StaticInit() {
 #endif
 }
 
-bool Database::Like(const char* needle, const char* haystack) {
-  uint hash = qHash(needle);
-  if (!query_hash_ || hash != query_hash_) {
-    // New query, parse and cache.
-    query_cache_ = QString::fromUtf8(needle).section('%', 1, 1).split(' ');
-    query_hash_ = hash;
-  }
-
-  // In place decompose string as it's faster :-)
-  QString b = QString::fromUtf8(haystack);
-  QChar* data = b.data();
-  for (int i = 0; i < b.length(); ++i) {
-    if (data[i].decompositionTag() != QChar::NoDecomposition) {
-      data[i] = data[i].decomposition()[0];
-    }
-  }
-  foreach (const QString& query, query_cache_) {
-    if (!b.contains(query, Qt::CaseInsensitive)) {
-      return false;
-    }
-  }
-  return true;
-}
-
-// Custom LIKE(X, Y) function for sqlite3 that supports case insensitive unicode matching.
-void Database::SqliteLike(sqlite3_context* context, int argc, sqlite3_value** argv) {
-  Q_ASSERT(argc == 2 || argc == 3);
-
-  if (_sqlite3_value_type(argv[0]) == SQLITE_NULL ||
-      _sqlite3_value_type(argv[1]) == SQLITE_NULL) {
-    _sqlite3_result_int64(context, 0);
-    return;
-  }
-
-  Q_ASSERT(_sqlite3_value_type(argv[0]) == _sqlite3_value_type(argv[1]));
-
-  Database* library = reinterpret_cast<Database*>(_sqlite3_user_data(context));
-  Q_ASSERT(library);
-
-  switch (_sqlite3_value_type(argv[0])) {
-    case SQLITE_INTEGER: {
-      qint64 result = _sqlite3_value_int64(argv[0]) - _sqlite3_value_int64(argv[1]);
-      _sqlite3_result_int64(context, result ? 0 : 1);
-      break;
-    }
-    case SQLITE_TEXT: {
-      const char* data_a = reinterpret_cast<const char*>(_sqlite3_value_text(argv[0]));
-      const char* data_b = reinterpret_cast<const char*>(_sqlite3_value_text(argv[1]));
-      _sqlite3_result_int64(context, library->Like(data_a, data_b) ? 1 : 0);
-      break;
-    }
-  }
-}
-
-Database::Database(QObject* parent, const QString& database_name)
+Database::Database(Application* app, QObject* parent, const QString& database_name)
   : QObject(parent),
+    app_(app),
     mutex_(QMutex::Recursive),
     injected_database_name_(database_name),
     query_hash_(0),
@@ -374,7 +362,7 @@ QSqlDatabase Database::Connect() {
     db.setDatabaseName(directory_ + "/" + kDatabaseFilename);
 
   if (!db.open()) {
-    emit Error("Database: " + db.lastError().text());
+    app_->AddError("Database: " + db.lastError().text());
     return db;
   }
 
@@ -387,24 +375,6 @@ QSqlDatabase Database::Connect() {
       reinterpret_cast<const char*>(&sFTSTokenizer), sizeof(&sFTSTokenizer)));
   if (!set_fts_tokenizer.exec()) {
     qLog(Warning) << "Couldn't register FTS3 tokenizer";
-  }
-
-  // We want Unicode aware LIKE clauses and FTS if possible.
-  if (sLoadedSqliteSymbols) {
-    QVariant v = db.driver()->handle();
-    if (v.isValid() && qstrcmp(v.typeName(), "sqlite3*") == 0) {
-      sqlite3* handle = *static_cast<sqlite3**>(v.data());
-      if (handle) {
-        _sqlite3_create_function(
-            handle,       // Sqlite3 handle.
-            "LIKE",       // Function name (either override or new).
-            2,            // Number of args.
-            SQLITE_ANY,   // What types this function accepts.
-            this,         // Custom data available via sqlite3_user_data().
-            &Database::SqliteLike,  // Our function :-)
-            NULL, NULL);
-      }
-    }
   }
 
   if (db.tables().count() == 0) {
@@ -626,9 +596,118 @@ bool Database::CheckErrors(const QSqlQuery& query) {
     qLog(Error) << "faulty query: " << query.lastQuery();
     qLog(Error) << "bound values: " << query.boundValues();
 
-    emit Error("LibraryBackend: " + last_error.text());
+    app_->AddError("LibraryBackend: " + last_error.text());
     return true;
   }
 
   return false;
+}
+
+bool Database::IntegrityCheck(QSqlDatabase db) {
+  qLog(Debug) << "Starting database integrity check";
+  int task_id = app_->task_manager()->StartTask(tr("Integrity check"));
+
+  bool ok = false;
+  bool error_reported = false;
+  // Ask for 10 error messages at most.
+  QSqlQuery q(QString("PRAGMA integrity_check(10)"), db);
+  while (q.next()) {
+    QString message = q.value(0).toString();
+
+    // If no errors are found, a single row with the value "ok" is returned
+    if (message == "ok") {
+      ok = true;
+      break;
+    } else {
+      if (!error_reported) {
+        app_->AddError(tr("Database corruption detected. Please read "
+            "https://code.google.com/p/clementine-player/wiki/DatabaseCorruption "
+            "for instructions on how to recover your database"));
+      }
+      app_->AddError("Database: " + message);
+      error_reported = true;
+    }
+  }
+
+  app_->task_manager()->SetTaskFinished(task_id);
+
+  return ok;
+}
+
+void Database::DoBackup() {
+  QSqlDatabase db(this->Connect());
+
+  // Before we overwrite anything, make sure the database is not corrupt
+  QMutexLocker l(&mutex_);
+  const bool ok = IntegrityCheck(db);
+
+  if (ok) {
+    BackupFile(db.databaseName());
+  }
+}
+
+bool Database::OpenDatabase(const QString& filename, sqlite3** connection) const {
+  int ret = _sqlite3_open(filename.toUtf8(), connection);
+  if (ret != 0) {
+    if (*connection) {
+      const char* error_message = _sqlite3_errmsg(*connection);
+      qLog(Error) << "Failed to open database for backup:"
+                  << filename
+                  << error_message;
+    } else {
+      qLog(Error) << "Failed to open database for backup:"
+                  << filename;
+    }
+    return false;
+  }
+  return true;
+}
+
+void Database::BackupFile(const QString& filename) {
+  qLog(Debug) << "Starting database backup";
+  QString dest_filename = QString("%1.bak").arg(filename);
+  const int task_id = app_->task_manager()->StartTask(tr("Backing up database"));
+
+  sqlite3* source_connection = NULL;
+  sqlite3* dest_connection = NULL;
+
+  BOOST_SCOPE_EXIT((source_connection)(dest_connection)(task_id)(app_)) {
+    // Harmless to call sqlite3_close() with a NULL pointer.
+    _sqlite3_close(source_connection);
+    _sqlite3_close(dest_connection);
+    app_->task_manager()->SetTaskFinished(task_id);
+  } BOOST_SCOPE_EXIT_END
+
+  bool success = OpenDatabase(filename, &source_connection);
+  if (!success) {
+    return;
+  }
+
+  success = OpenDatabase(dest_filename, &dest_connection);
+  if (!success) {
+    return;
+  }
+
+  sqlite3_backup* backup = _sqlite3_backup_init(
+      dest_connection, "main",
+      source_connection, "main");
+  if (!backup) {
+    const char* error_message = _sqlite3_errmsg(dest_connection);
+    qLog(Error) << "Failed to start database backup:" << error_message;
+    return;
+  }
+
+  int ret = SQLITE_OK;
+  do {
+    ret = _sqlite3_backup_step(backup, 16);
+    const int page_count = _sqlite3_backup_pagecount(backup);
+    app_->task_manager()->SetTaskProgress(
+        task_id, page_count - _sqlite3_backup_remaining(backup), page_count);
+  } while (ret == SQLITE_OK);
+
+  if (ret != SQLITE_DONE) {
+    qLog(Error) << "Database backup failed";
+  }
+
+  _sqlite3_backup_finish(backup);
 }

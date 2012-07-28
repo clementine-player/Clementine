@@ -4,16 +4,22 @@
 # 
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
+#   <mikel@hamahiru.org>, 2012.
+# Mikel Iturbe Urretxa <mikel@hamahiru.org>, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-01-29 22:42+0000\n"
+"PO-Revision-Date: 2012-07-21 17:11+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: eu\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
+
+#: ../bin/src/ui_podcastsettingspage.h:246
+msgid " days"
+msgstr ""
 
 #: ../bin/src/ui_transcoderoptionsaac.h:130
 #: ../bin/src/ui_transcoderoptionsmp3.h:195
@@ -24,11 +30,11 @@ msgstr ""
 #: ../bin/src/ui_transcoderoptionsvorbis.h:211
 #: ../bin/src/ui_transcoderoptionswma.h:80
 msgid " kbps"
-msgstr ""
+msgstr " kbps"
 
 #: ../bin/src/ui_songinfosettingspage.h:186
-#: ../bin/src/ui_playbacksettingspage.h:265
-#: ../bin/src/ui_playbacksettingspage.h:285
+#: ../bin/src/ui_playbacksettingspage.h:272
+#: ../bin/src/ui_playbacksettingspage.h:292
 msgid " ms"
 msgstr " ms"
 
@@ -36,4719 +42,5068 @@ msgstr " ms"
 msgid " pt"
 msgstr " pt"
 
-#: ../bin/src/ui_notificationssettingspage.h:404
+#: ../bin/src/ui_notificationssettingspage.h:411
 #: ../bin/src/ui_visualisationselector.h:116
 msgid " seconds"
-msgstr " segundoak"
+msgstr " segundu"
 
 #: ../bin/src/ui_querysortpage.h:143
 msgid " songs"
-msgstr " abestiak"
+msgstr " abesti"
 
-#: widgets/osd.cpp:209
+#: widgets/osd.cpp:188
 #, qt-format
 msgid "%1 albums"
 msgstr "%1 album"
 
-#: core/utilities.cpp:92
+#: core/utilities.cpp:103
 #, qt-format
 msgid "%1 days"
 msgstr "%1 egun"
 
-#: core/utilities.cpp:113
+#: core/utilities.cpp:124
 #, qt-format
 msgid "%1 days ago"
 msgstr "duela %1 egun"
 
+#: podcasts/gpoddersync.cpp:79
+#, qt-format
+msgid "%1 on %2"
+msgstr ""
+
 #: playlistparsers/playlistparser.cpp:74
 #, qt-format
 msgid "%1 playlists (%2)"
-msgstr ""
+msgstr "%1 erreprodukzio-zerrenda (%2)"
 
-#: playlist/playlistmanager.cpp:302
+#: playlist/playlistmanager.cpp:312
 #, qt-format
 msgid "%1 selected of"
-msgstr ""
+msgstr "%1 aukeraturik"
 
-#: devices/deviceview.cpp:122
+#: devices/deviceview.cpp:123
 #, qt-format
 msgid "%1 song"
-msgstr ""
+msgstr "%1 abestia"
 
-#: devices/deviceview.cpp:124
+#: devices/deviceview.cpp:125
 #, qt-format
 msgid "%1 songs"
-msgstr ""
+msgstr "%1 abesti"
 
-#: smartplaylists/searchpreview.cpp:129
+#: smartplaylists/searchpreview.cpp:133
 #, qt-format
 msgid "%1 songs found"
-msgstr ""
+msgstr "%1 abesti aurkiturik"
 
-#: smartplaylists/searchpreview.cpp:126
+#: smartplaylists/searchpreview.cpp:130
 #, qt-format
 msgid "%1 songs found (showing %2)"
-msgstr ""
+msgstr "%1 abesti aurkiturik (%2 erakusten)"
 
-#: playlist/playlistmanager.cpp:308
+#: playlist/playlistmanager.cpp:318
 #, qt-format
 msgid "%1 tracks"
-msgstr ""
+msgstr "%1 pista"
 
-#: ui/albumcovermanager.cpp:437
+#: ui/albumcovermanager.cpp:417
 #, qt-format
 msgid "%1 transferred"
-msgstr ""
+msgstr "%1 transferitua"
 
-#: widgets/osd.cpp:259 widgets/osd.cpp:264 widgets/osd.cpp:269
-#: widgets/osd.cpp:274 widgets/osd.cpp:279 widgets/osd.cpp:284
+#: widgets/osd.cpp:238 widgets/osd.cpp:243 widgets/osd.cpp:248
+#: widgets/osd.cpp:253 widgets/osd.cpp:258 widgets/osd.cpp:263
 #, qt-format
 msgid "%1: Wiimotedev module"
-msgstr ""
+msgstr "%1: Wiimotedev modulua"
 
-#: songinfo/lastfmtrackinfoprovider.cpp:102
+#: songinfo/lastfmtrackinfoprovider.cpp:94
 #, qt-format
 msgid "%L1 other listeners"
-msgstr ""
+msgstr "%L1 gainontzeko entzule"
 
-#: songinfo/lastfmtrackinfoprovider.cpp:100
+#: songinfo/lastfmtrackinfoprovider.cpp:92
 #, qt-format
 msgid "%L1 total plays"
-msgstr ""
+msgstr "%L1 erreprodukzio guztira"
+
+#: ../bin/src/ui_notificationssettingspage.h:399
+msgid "%filename%"
+msgstr "%filename%"
 
 #: transcoder/transcodedialog.cpp:199
 #, c-format
 msgid "%n failed"
-msgstr ""
+msgstr "%n-(e)k huts egin du"
 
 #: transcoder/transcodedialog.cpp:194
 #, c-format
 msgid "%n finished"
-msgstr ""
+msgstr "%n amaituta"
 
 #: transcoder/transcodedialog.cpp:189
 #, c-format
 msgid "%n remaining"
-msgstr ""
+msgstr "%n egiteke"
 
 #: playlist/playlistheader.cpp:37
 msgid "&Align text"
-msgstr ""
+msgstr "&Alineatu testua"
 
 #: playlist/playlistheader.cpp:40
 msgid "&Center"
-msgstr ""
+msgstr "&Zentratu"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:178
 msgid "&Custom"
-msgstr ""
+msgstr "&Pertsonalizatua"
 
-#: ../bin/src/ui_mainwindow.h:708
+#: ../bin/src/ui_mainwindow.h:718
 msgid "&Extras"
-msgstr ""
+msgstr "&Gehigarriak"
 
-#: ../bin/src/ui_mainwindow.h:707
+#: ../bin/src/ui_mainwindow.h:717
 msgid "&Help"
-msgstr ""
+msgstr "&Laguntza"
 
 #: playlist/playlistheader.cpp:70
 #, qt-format
 msgid "&Hide %1"
-msgstr ""
+msgstr "&Ezkutatu %1"
 
 #: playlist/playlistheader.cpp:33
 msgid "&Hide..."
-msgstr ""
+msgstr "&Ezkutatu..."
 
 #: playlist/playlistheader.cpp:39
 msgid "&Left"
-msgstr ""
+msgstr "Ez&kerrera"
 
-#: ../bin/src/ui_mainwindow.h:705
+#: ../bin/src/ui_mainwindow.h:715
 msgid "&Music"
-msgstr ""
+msgstr "&Musika"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:176
 msgid "&None"
-msgstr ""
+msgstr "&Bat ere ez"
 
-#: ../bin/src/ui_mainwindow.h:706
+#: ../bin/src/ui_mainwindow.h:716
 msgid "&Playlist"
-msgstr ""
+msgstr "&Erreprodukzio-zerrenda"
 
-#: ../bin/src/ui_mainwindow.h:642
+#: ../bin/src/ui_mainwindow.h:650
 msgid "&Quit"
-msgstr ""
+msgstr "&Itxi"
 
-#: ../bin/src/ui_mainwindow.h:679
+#: ../bin/src/ui_mainwindow.h:687
 msgid "&Repeat mode"
-msgstr ""
+msgstr "E&rrepikatze-modua"
 
 #: playlist/playlistheader.cpp:41
 msgid "&Right"
-msgstr ""
+msgstr "E&skuinera"
 
-#: ../bin/src/ui_mainwindow.h:678
+#: ../bin/src/ui_mainwindow.h:686
 msgid "&Shuffle mode"
-msgstr ""
+msgstr "Au&sazko modua"
 
 #: playlist/playlistheader.cpp:34
 msgid "&Stretch columns to fit window"
-msgstr ""
+msgstr "&Tiratu zutabeak leihoan egokitzeko"
 
-#: ../bin/src/ui_mainwindow.h:709
+#: ../bin/src/ui_mainwindow.h:719
 msgid "&Tools"
-msgstr ""
+msgstr "&Tresnak"
 
-#: ui/edittagdialog.cpp:47
+#: ui/edittagdialog.cpp:48
 msgid "(different across multiple songs)"
-msgstr ""
+msgstr "(desberdinak zenbait abestien zehar)"
 
 #: ui/about.cpp:76
 msgid "...and all the Amarok contributors"
-msgstr ""
+msgstr "...eta Amarok-eko laguntzaile guztiei"
 
 #: ../bin/src/ui_trackslider.h:70 ../bin/src/ui_trackslider.h:74
 msgid "0:00:00"
-msgstr ""
+msgstr "0:00:00"
 
-#: core/utilities.cpp:92
+#: core/utilities.cpp:103
 msgid "1 day"
-msgstr ""
+msgstr "Egun 1"
 
-#: playlist/playlistmanager.cpp:308
+#: playlist/playlistmanager.cpp:318
 msgid "1 track"
-msgstr ""
+msgstr "Pista 1"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:143
 #: ../bin/src/ui_magnatunesettingspage.h:174
 msgid "128k MP3"
-msgstr ""
+msgstr "128k MP3"
 
-#: library/library.cpp:56
+#: library/library.cpp:58
 msgid "50 random tracks"
-msgstr ""
+msgstr "50 ausazko pista"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:165
 msgid "<a href=\"http://www.di.fm/premium/\">Upgrade to Premium now</a>"
-msgstr ""
+msgstr "<a href=\"http://www.di.fm/premium/\">Eguneratu Premium-era orain</a>"
 
 #: ../bin/src/ui_organisedialog.h:199
 msgid ""
 "<p>Tokens start with %, for example: %artist %album %title </p>\n"
 "\n"
 "<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
-msgstr ""
+msgstr "<p>Tokenak %-rekin hasten dira, adibidez: %artista %albuma %titulua</p>\n\n<p>Tokena duten testu zatiak giltzekin inguratzen badituzu, zati hori ezkutaturik egongo da tokena hutsik badago.</p>"
 
 #: internet/groovesharksettingspage.cpp:111
 msgid "A Grooveshark Anywhere account is required."
-msgstr ""
+msgstr "Beharrezkoa da Grooveshark Anywhere kontua izatea"
 
 #: internet/spotifysettingspage.cpp:161
 msgid "A Spotify Premium account is required."
-msgstr ""
+msgstr "Beharrezkoa da Spotify Premium kontua izatea."
 
-#: smartplaylists/wizard.cpp:72
+#: smartplaylists/wizard.cpp:73
 msgid ""
 "A smart playlist is a dynamic list of songs that come from your library.  "
 "There are different types of smart playlist that offer different ways of "
 "selecting songs."
-msgstr ""
+msgstr "Erreprodukzio-zerrenda adimenduna, zure bildumatik hartutako abestien zerrenda dinamikoa da. Erreprodukzio-zerrenda inteligenteen zenbait mota desberdin daude, abestiak aukeratzeko era desberdinak ematen dituztenak."
 
-#: smartplaylists/querywizardplugin.cpp:150
+#: smartplaylists/querywizardplugin.cpp:152
 msgid ""
 "A song will be included in the playlist if it matches these conditions."
-msgstr ""
+msgstr "Abestia zerrendan sartuko da baldintza hauek betetzen baditu."
 
 #: smartplaylists/searchterm.cpp:288
 msgid "A-Z"
-msgstr ""
+msgstr "A-Z"
 
 #: ../bin/src/ui_transcodersettingspage.h:163
 msgid "AAC"
-msgstr ""
+msgstr "AAC"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:179
 msgid "AAC 128k"
-msgstr ""
+msgstr "AAC 128k"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:171
 msgid "AAC 32k"
-msgstr ""
+msgstr "AAC 32k"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:178
 msgid "AAC 64k"
-msgstr ""
+msgstr "AAC 64K"
 
-#: core/song.cpp:340
+#: core/song.cpp:325
 msgid "AIFF"
-msgstr ""
+msgstr "AIFF"
 
 #: widgets/nowplayingwidget.cpp:119
 msgid "ALL GLORY TO THE HYPNOTOAD"
-msgstr ""
+msgstr "LORIA OSOA HIPNOAPOARENTZAT"
 
 #: ui/about.cpp:32
 #, qt-format
 msgid "About %1"
-msgstr ""
+msgstr "%1-(r)i buruz"
 
-#: ../bin/src/ui_mainwindow.h:663
+#: ../bin/src/ui_mainwindow.h:671
 msgid "About Clementine..."
-msgstr ""
+msgstr "Clementine-ri buruz..."
 
-#: ../bin/src/ui_mainwindow.h:697
+#: ../bin/src/ui_mainwindow.h:705
 msgid "About Qt..."
-msgstr ""
+msgstr "Qt-ri buruz..."
 
 #: ../bin/src/ui_groovesharksettingspage.h:113
 #: ../bin/src/ui_magnatunesettingspage.h:155
 #: ../bin/src/ui_spotifysettingspage.h:209
-#: ../bin/src/ui_remotesettingspage.h:203
-#: ../bin/src/ui_lastfmsettingspage.h:145
+#: ../bin/src/ui_lastfmsettingspage.h:151
 msgid "Account details"
-msgstr ""
+msgstr "Kontuaren xehetasunak"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:161
 msgid "Account details (Premium)"
-msgstr ""
+msgstr "Kontuaren xehetasunak (Premium)"
 
 #: ../bin/src/ui_wiimotesettingspage.h:191
 msgid "Action"
-msgstr ""
+msgstr "Ekintza"
 
 #: wiimotedev/wiimotesettingspage.cpp:98
 msgid "Active/deactive Wiiremote"
+msgstr "Wiiremote-a aktibatu/desaktibatu"
+
+#: podcasts/addpodcastdialog.cpp:56
+msgid "Add Podcast"
 msgstr ""
 
 #: ../bin/src/ui_addstreamdialog.h:113
 msgid "Add Stream"
-msgstr ""
+msgstr "Gehitu jarioa"
 
-#: ../bin/src/ui_notificationssettingspage.h:394
+#: ../bin/src/ui_notificationssettingspage.h:397
 msgid "Add a new line if supported by the notification type"
-msgstr ""
+msgstr "Lerro berria gehitu jakinarazpen motak onartzen badu"
 
 #: ../bin/src/ui_wiimotesettingspage.h:193
 msgid "Add action"
-msgstr ""
-
-#: globalsearch/globalsearchwidget.cpp:104
-msgid "Add and play now"
-msgstr ""
+msgstr "Gehitu ekintza"
 
 #: internet/savedradio.cpp:103
 msgid "Add another stream..."
-msgstr ""
+msgstr "Gehitu beste jario bat..."
 
 #: library/librarysettingspage.cpp:62
 msgid "Add directory..."
-msgstr ""
+msgstr "Gehitu direktorioa..."
 
-#: ui/mainwindow.cpp:1579
+#: ui/mainwindow.cpp:1531
 msgid "Add file"
-msgstr ""
+msgstr "Gehitu fitxategia"
 
-#: ../bin/src/ui_mainwindow.h:667
+#: ../bin/src/ui_mainwindow.h:675
 msgid "Add file..."
-msgstr ""
+msgstr "Gehitu fitxategia..."
 
 #: transcoder/transcodedialog.cpp:211
 msgid "Add files to transcode"
-msgstr ""
+msgstr "Gehitu transkodetzeko fitxategiak"
 
-#: ui/mainwindow.cpp:1607
+#: ui/mainwindow.cpp:1559
 msgid "Add folder"
-msgstr ""
+msgstr "Gehitu karpeta"
 
-#: ../bin/src/ui_mainwindow.h:683
+#: ../bin/src/ui_mainwindow.h:691
 msgid "Add folder..."
-msgstr ""
+msgstr "Gehitu karpeta..."
 
 #: ../bin/src/ui_librarysettingspage.h:159
 msgid "Add new folder..."
+msgstr "Gehitu karpeta berria..."
+
+#: ../bin/src/ui_addpodcastdialog.h:179
+msgid "Add podcast"
+msgstr ""
+
+#: podcasts/podcastservice.cpp:257 ../bin/src/ui_mainwindow.h:712
+msgid "Add podcast..."
 msgstr ""
 
 #: smartplaylists/searchtermwidget.cpp:333
 msgid "Add search term"
-msgstr ""
-
-#: ../bin/src/ui_notificationssettingspage.h:361
-msgid "Add song album tag"
-msgstr ""
-
-#: ../bin/src/ui_notificationssettingspage.h:367
-msgid "Add song albumartist tag"
-msgstr ""
-
-#: ../bin/src/ui_notificationssettingspage.h:358
-msgid "Add song artist tag"
-msgstr ""
-
-#: ../bin/src/ui_notificationssettingspage.h:373
-msgid "Add song composer tag"
-msgstr ""
-
-#: ../bin/src/ui_notificationssettingspage.h:376
-msgid "Add song disc tag"
-msgstr ""
-
-#: ../bin/src/ui_notificationssettingspage.h:382
-msgid "Add song genre tag"
-msgstr ""
-
-#: ../bin/src/ui_notificationssettingspage.h:385
-msgid "Add song length tag"
-msgstr ""
-
-#: ../bin/src/ui_notificationssettingspage.h:388
-msgid "Add song play count"
-msgstr ""
-
-#: ../bin/src/ui_notificationssettingspage.h:391
-msgid "Add song skip count"
-msgstr ""
+msgstr "Gehitu bilaketa-terminoa"
 
 #: ../bin/src/ui_notificationssettingspage.h:364
-msgid "Add song title tag"
-msgstr ""
-
-#: ../bin/src/ui_notificationssettingspage.h:379
-msgid "Add song track tag"
-msgstr ""
+msgid "Add song album tag"
+msgstr "Gehitu album etiketa abestiari"
 
 #: ../bin/src/ui_notificationssettingspage.h:370
+msgid "Add song albumartist tag"
+msgstr "Gehitu albumaren artista etiketa abestiari"
+
+#: ../bin/src/ui_notificationssettingspage.h:361
+msgid "Add song artist tag"
+msgstr "Gehitu artista etiketa abestiari"
+
+#: ../bin/src/ui_notificationssettingspage.h:376
+msgid "Add song composer tag"
+msgstr "Gehitu konpositore etiketa kantari"
+
+#: ../bin/src/ui_notificationssettingspage.h:379
+msgid "Add song disc tag"
+msgstr "Gehitu diska etiketa kantari"
+
+#: ../bin/src/ui_notificationssettingspage.h:401
+msgid "Add song filename"
+msgstr "Gehitu kantaren fitxategi-izena"
+
+#: ../bin/src/ui_notificationssettingspage.h:385
+msgid "Add song genre tag"
+msgstr "Gehitu generoa etiketa kantari"
+
+#: ../bin/src/ui_notificationssettingspage.h:388
+msgid "Add song length tag"
+msgstr "Gehitu iraupena etiketa kantari"
+
+#: ../bin/src/ui_notificationssettingspage.h:391
+msgid "Add song play count"
+msgstr "Gehitu kantaren erreprodukzio-kontagailua"
+
+#: ../bin/src/ui_notificationssettingspage.h:394
+msgid "Add song skip count"
+msgstr "Gehitu kantaren jauzi-kontagailua"
+
+#: ../bin/src/ui_notificationssettingspage.h:367
+msgid "Add song title tag"
+msgstr "Gehitu titulua etiketa kantari"
+
+#: ../bin/src/ui_notificationssettingspage.h:382
+msgid "Add song track tag"
+msgstr "Gehitu pista etiketa kantari"
+
+#: ../bin/src/ui_notificationssettingspage.h:373
 msgid "Add song year tag"
-msgstr ""
+msgstr "Gehitu urtea etiketa kantari"
 
-#: ../bin/src/ui_mainwindow.h:669
+#: ../bin/src/ui_mainwindow.h:677
 msgid "Add stream..."
-msgstr ""
+msgstr "Gehitu jarioa..."
 
-#: internet/groovesharkservice.cpp:1018
+#: internet/groovesharkservice.cpp:1112
 msgid "Add to Grooveshark favorites"
-msgstr ""
+msgstr "Gehitu Grooveshark-eko gogokoenetara"
 
-#: internet/groovesharkservice.cpp:1024
+#: internet/groovesharkservice.cpp:1124
 msgid "Add to Grooveshark playlists"
-msgstr ""
+msgstr "Gehitu Grooveshark-eko erreprodukzio-zerrendetara"
 
-#: ui/mainwindow.cpp:1404
+#: ui/mainwindow.cpp:1356
 msgid "Add to another playlist"
-msgstr ""
+msgstr "Gehitu beste erreprodukzio-zerrenda batera"
 
-#: globalsearch/globalsearchwidget.cpp:103
 #: ../bin/src/ui_albumcovermanager.h:152
 msgid "Add to playlist"
-msgstr ""
+msgstr "Gehitu erreprodukzio-zerrendara"
 
-#: ../bin/src/ui_behavioursettingspage.h:204
+#: ../bin/src/ui_behavioursettingspage.h:196
 msgid "Add to the queue"
-msgstr ""
+msgstr "Gehitu ilarara"
 
 #: ../bin/src/ui_wiimoteshortcutgrabber.h:123
 msgid "Add wiimotedev action"
-msgstr ""
+msgstr "Gehitu wiimotedev ekintza"
 
 #: ../bin/src/ui_transcodedialog.h:206
 msgid "Add..."
-msgstr ""
+msgstr "Gehitu..."
 
-#: ../bin/src/ui_libraryfilterwidget.h:123
+#: ../bin/src/ui_libraryfilterwidget.h:95
 msgid "Added this month"
-msgstr ""
+msgstr "Hilabete honetan gehitua"
 
-#: ../bin/src/ui_libraryfilterwidget.h:117
+#: ../bin/src/ui_libraryfilterwidget.h:89
 msgid "Added this week"
-msgstr ""
+msgstr "Aste honetan gehitua"
 
-#: ../bin/src/ui_libraryfilterwidget.h:122
+#: ../bin/src/ui_libraryfilterwidget.h:94
 msgid "Added this year"
-msgstr ""
+msgstr "Aurten gehitua"
 
-#: ../bin/src/ui_libraryfilterwidget.h:116
+#: ../bin/src/ui_libraryfilterwidget.h:88
 msgid "Added today"
-msgstr ""
+msgstr "Gaur gehitua"
 
-#: ../bin/src/ui_libraryfilterwidget.h:118
-#: ../bin/src/ui_libraryfilterwidget.h:120
+#: ../bin/src/ui_libraryfilterwidget.h:90
+#: ../bin/src/ui_libraryfilterwidget.h:92
 msgid "Added within three months"
+msgstr "Azken hiru hilabeteetan gehitua"
+
+#: internet/groovesharkservice.cpp:1420
+msgid "Adding song to My Music"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:1270
+#: internet/groovesharkservice.cpp:1397
 msgid "Adding song to favorites"
-msgstr ""
+msgstr "Abestia gogokoenetara gehitzen"
 
-#: ../bin/src/ui_libraryfilterwidget.h:130
+#: library/libraryfilterwidget.cpp:116
 msgid "Advanced grouping..."
+msgstr "Taldekatze aurreratua..."
+
+#: ../bin/src/ui_podcastsettingspage.h:247
+msgid "After "
 msgstr ""
 
 #: ../bin/src/ui_organisedialog.h:190
 msgid "After copying..."
-msgstr ""
+msgstr "Kopiatu ondoren..."
 
-#: playlist/playlist.cpp:1116 ui/organisedialog.cpp:55
+#: playlist/playlist.cpp:1186 ui/organisedialog.cpp:55
 #: ui/qtsystemtrayicon.cpp:252 ../bin/src/ui_groupbydialog.h:129
 #: ../bin/src/ui_groupbydialog.h:142 ../bin/src/ui_groupbydialog.h:155
-#: ../bin/src/ui_albumcoversearcher.h:110
-#: ../bin/src/ui_albumcoversearcher.h:112 ../bin/src/ui_edittagdialog.h:656
+#: ../bin/src/ui_albumcoversearcher.h:111
+#: ../bin/src/ui_albumcoversearcher.h:113 ../bin/src/ui_edittagdialog.h:656
 #: ../bin/src/ui_trackselectiondialog.h:209
 msgid "Album"
-msgstr ""
+msgstr "Albuma"
 
-#: ../bin/src/ui_playbacksettingspage.h:272
+#: ../bin/src/ui_playbacksettingspage.h:279
 msgid "Album (ideal loudness for all tracks)"
-msgstr ""
+msgstr "Albuma (pista guztientzako bolumen ideala)"
 
-#: playlist/playlist.cpp:1122 ui/organisedialog.cpp:58
+#: playlist/playlist.cpp:1192 ui/organisedialog.cpp:58
 #: ../bin/src/ui_groupbydialog.h:131 ../bin/src/ui_groupbydialog.h:144
 #: ../bin/src/ui_groupbydialog.h:157 ../bin/src/ui_edittagdialog.h:658
 msgid "Album artist"
-msgstr ""
+msgstr "Albumeko artista"
 
-#: internet/jamendoservice.cpp:411
+#: ../bin/src/ui_appearancesettingspage.h:240
+msgid "Album cover"
+msgstr "Albumeko azala"
+
+#: internet/jamendoservice.cpp:414
 msgid "Album info on jamendo.com..."
-msgstr ""
-
-#: ui/albumcovermanager.cpp:119
-msgid "Albums with covers"
-msgstr ""
+msgstr "Albumeko informazioa jamendo.com-en..."
 
 #: ui/albumcovermanager.cpp:120
+msgid "Albums with covers"
+msgstr "Azaldun albumak"
+
+#: ui/albumcovermanager.cpp:121
 msgid "Albums without covers"
-msgstr ""
+msgstr "Azal gabeko albumak"
 
-#: ui/mainwindow.cpp:149
+#: ui/mainwindow.cpp:151
 msgid "All Files (*)"
-msgstr ""
+msgstr "Fitxategi guztiak (*)"
 
-#: ../bin/src/ui_mainwindow.h:675
+#: ../bin/src/ui_mainwindow.h:683
 msgid "All Glory to the Hypnotoad!"
-msgstr ""
+msgstr "Loria osoa Hipnoapoarentzat!"
 
-#: ui/albumcovermanager.cpp:118
+#: ui/albumcovermanager.cpp:119
 msgid "All albums"
-msgstr ""
+msgstr "Album guztiak"
 
-#: ui/albumcovermanager.cpp:263
+#: ui/albumcovermanager.cpp:244
 msgid "All artists"
-msgstr ""
+msgstr "Artista guztiak"
 
-#: ui/albumcoverchoicecontroller.cpp:45
+#: ui/albumcoverchoicecontroller.cpp:47
 msgid "All files (*)"
-msgstr ""
+msgstr "Fitxategi guztiak (*)"
 
 #: playlistparsers/playlistparser.cpp:61
 #, qt-format
 msgid "All playlists (%1)"
-msgstr ""
+msgstr "Erreprodukzio-zerrenda guztiak (%1)"
 
 #: ui/about.cpp:73
 msgid "All the translators"
-msgstr ""
+msgstr "Itzultzaile guztiak"
 
-#: library/library.cpp:80
+#: library/library.cpp:82
 msgid "All tracks"
-msgstr ""
+msgstr "Pista guztiak"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:140
 msgid "Allow mid/side encoding"
-msgstr ""
+msgstr "Mid/side kodeketa baimendu"
 
 #: ../bin/src/ui_transcodedialog.h:214
 msgid "Alongside the originals"
-msgstr ""
+msgstr "Jatorrizkoekin batera"
+
+#: ../bin/src/ui_behavioursettingspage.h:180
+msgid "Always hide the main window"
+msgstr "Leiho nagusia beti ezkutatu"
+
+#: ../bin/src/ui_behavioursettingspage.h:179
+msgid "Always show the main window"
+msgstr "Leiho nagusia beti erakutsi"
 
 #: ../bin/src/ui_behavioursettingspage.h:188
-msgid "Always hide the main window"
-msgstr ""
-
-#: ../bin/src/ui_behavioursettingspage.h:187
-msgid "Always show the main window"
-msgstr ""
-
-#: ../bin/src/ui_behavioursettingspage.h:196
-#: ../bin/src/ui_behavioursettingspage.h:210
+#: ../bin/src/ui_behavioursettingspage.h:202
 msgid "Always start playing"
-msgstr ""
+msgstr "Beti hasi erreproduzitzen"
 
-#: internet/spotifyblobdownloader.cpp:59
+#: internet/spotifyblobdownloader.cpp:60
 msgid ""
 "An additional plugin is required to use Spotify in Clementine.  Would you "
 "like to download and install it now?"
-msgstr ""
+msgstr "Plugin gehigarri bat beharrezkoa da Spotify Clementine-en erabiltzeko. Orain deskargatu eta instalatzea nahi duzu?"
 
-#: devices/afcdevice.cpp:62
+#: devices/afcdevice.cpp:63
 msgid "An error occurred copying the iTunes database from the device"
-msgstr ""
+msgstr "Errorea gertatu da gailutik iTunes datu-basea kopiatzerakoan"
 
-#: devices/afcdevice.cpp:156
+#: devices/afcdevice.cpp:157
 msgid "An error occurred copying the iTunes database onto the device"
-msgstr ""
+msgstr "Errorea gertatu da gailura iTunes datu-basea kopiatzerakoan"
 
 #: devices/gpodloader.cpp:61
 msgid "An error occurred loading the iTunes database"
-msgstr ""
+msgstr "Errorea gertatu da iTunes datu-basea kargatzerakoan"
 
-#: ui/edittagdialog.cpp:658
+#: ui/edittagdialog.cpp:655
 #, qt-format
 msgid "An error occurred writing metadata to '%1'"
-msgstr ""
-
-#: internet/lastfmservice.cpp:903
-#, qt-format
-msgid "An unknown last.fm error occurred: %1"
-msgstr ""
+msgstr "Errorea gertatu da '%1'-(e)ra metadatuak idazterakoan"
 
 #: ui/about.cpp:77
 msgid "And:"
+msgstr "Eta:"
+
+#: moodbar/moodbarrenderer.cpp:156
+msgid "Angry"
 msgstr ""
 
 #: ../bin/src/ui_songinfosettingspage.h:180
-#: ../bin/src/ui_appearancesettingspage.h:119
+#: ../bin/src/ui_appearancesettingspage.h:227
 msgid "Appearance"
-msgstr ""
+msgstr "Itxura"
 
 #: core/commandlineoptions.cpp:157
 msgid "Append files/URLs to the playlist"
-msgstr ""
+msgstr "Erantsi Fitxategiak/URL-ak erreprodukzio-zerrendari"
 
-#: devices/deviceview.cpp:216 internet/internetservice.cpp:53
-#: library/libraryview.cpp:243 widgets/fileviewlist.cpp:32
+#: devices/deviceview.cpp:211 globalsearch/globalsearchview.cpp:412
+#: internet/internetservice.cpp:56 library/libraryview.cpp:262
+#: widgets/fileviewlist.cpp:32
 msgid "Append to current playlist"
-msgstr ""
+msgstr "Erantsi oraingo erreprodukzio-zerrendari"
 
-#: ../bin/src/ui_behavioursettingspage.h:201
+#: ../bin/src/ui_behavioursettingspage.h:193
 msgid "Append to the playlist"
-msgstr ""
+msgstr "Erantsi erreprodukzio-zerrendari"
 
-#: ../bin/src/ui_playbacksettingspage.h:275
+#: ../bin/src/ui_playbacksettingspage.h:282
 msgid "Apply compression to prevent clipping"
-msgstr ""
+msgstr "Konpresioa aplikatu laburketak ekiditeko"
 
 #: ui/equalizer.cpp:191
 #, qt-format
 msgid "Are you sure you want to delete the \"%1\" preset?"
-msgstr ""
+msgstr "\"%1\" aurrezarpena ezabatu?"
 
-#: internet/groovesharkservice.cpp:1193
+#: internet/groovesharkservice.cpp:1318
 msgid "Are you sure you want to delete this playlist?"
-msgstr ""
+msgstr "Erreprodukzio-zerrenda hau ezabatu?"
 
-#: ui/edittagdialog.cpp:764
+#: ui/edittagdialog.cpp:761
 msgid "Are you sure you want to reset this song's statistics?"
-msgstr ""
+msgstr "Abesti honen estatistikak berrezarri?"
 
-#: playlist/playlist.cpp:1115 ui/organisedialog.cpp:56
+#: playlist/playlist.cpp:1185 ui/organisedialog.cpp:56
 #: ui/qtsystemtrayicon.cpp:250 ../bin/src/ui_groupbydialog.h:130
 #: ../bin/src/ui_groupbydialog.h:143 ../bin/src/ui_groupbydialog.h:156
-#: ../bin/src/ui_albumcoversearcher.h:106
-#: ../bin/src/ui_albumcoversearcher.h:108 ../bin/src/ui_edittagdialog.h:654
+#: ../bin/src/ui_albumcoversearcher.h:107
+#: ../bin/src/ui_albumcoversearcher.h:109 ../bin/src/ui_edittagdialog.h:654
 #: ../bin/src/ui_trackselectiondialog.h:210
 #: ../bin/src/ui_lastfmstationdialog.h:96
 msgid "Artist"
-msgstr ""
+msgstr "Artista"
 
-#: ui/mainwindow.cpp:254
+#: ui/mainwindow.cpp:233
 msgid "Artist info"
-msgstr ""
+msgstr "Artis. infor."
 
-#: internet/lastfmservice.cpp:191
+#: internet/lastfmservice.cpp:207
 msgid "Artist radio"
-msgstr ""
+msgstr "Artistaren irratia"
 
 #: songinfo/echonesttags.cpp:59
 msgid "Artist tags"
-msgstr ""
+msgstr "Artistaren etiketak"
 
 #: ui/organisedialog.cpp:57
 msgid "Artist's initial"
-msgstr ""
+msgstr "Artistaren inizialak"
 
 #: ../bin/src/ui_transcodedialog.h:209
 msgid "Audio format"
-msgstr ""
-
-#: ../bin/src/ui_remotesettingspage.h:210
-msgid "Authenticating..."
-msgstr ""
+msgstr "Audio formatua"
 
 #: internet/digitallyimportedsettingspage.cpp:82
-#: internet/magnatunesettingspage.cpp:113 internet/lastfmservice.cpp:432
-#: internet/lastfmsettingspage.cpp:78 remote/remotesettingspage.cpp:113
+#: internet/magnatunesettingspage.cpp:113 internet/lastfmservice.cpp:431
+#: internet/lastfmsettingspage.cpp:78
 msgid "Authentication failed"
+msgstr "Autentifikazioak huts egin du..."
+
+#: ../bin/src/ui_podcastinfowidget.h:192
+msgid "Author"
 msgstr ""
 
 #: ui/about.cpp:64
 msgid "Authors"
-msgstr ""
+msgstr "Egileak"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:227
 msgid "Auto"
-msgstr ""
+msgstr "Automatikoa"
 
 #: ../bin/src/ui_librarysettingspage.h:161
 msgid "Automatic updating"
-msgstr ""
+msgstr "Eguneratze automatikoa"
 
 #: ../bin/src/ui_librarysettingspage.h:170
 msgid "Automatically open single categories in the library tree"
-msgstr ""
+msgstr "Bilduma-zuhaitzean automatikoki ireki banako kategoriak"
 
 #: widgets/freespacebar.cpp:45
 msgid "Available"
-msgstr ""
+msgstr "Eskuragarri"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:221
 msgid "Average bitrate"
-msgstr ""
+msgstr "Batez besteko bit-tasa"
 
 #: covers/coversearchstatisticsdialog.cpp:70
 msgid "Average image size"
+msgstr "Batez besteko irudi-tamaina"
+
+#: podcasts/addpodcastdialog.cpp:80
+msgid "BBC Podcasts"
 msgstr ""
 
-#: playlist/playlist.cpp:1131 ui/organisedialog.cpp:62
+#: playlist/playlist.cpp:1201 ui/organisedialog.cpp:62
 #: ../bin/src/ui_edittagdialog.h:638
 msgid "BPM"
-msgstr ""
+msgstr "BPM"
 
 #: ../bin/src/ui_backgroundstreamssettingspage.h:56
 msgid "Background Streams"
-msgstr ""
+msgstr "Hondo-jarioak"
 
-#: ../bin/src/ui_notificationssettingspage.h:418
+#: ../bin/src/ui_notificationssettingspage.h:425
 msgid "Background color"
-msgstr ""
+msgstr "Atzeko planoko kolorea"
 
-#: ../bin/src/ui_notificationssettingspage.h:417
+#: ../bin/src/ui_appearancesettingspage.h:235
+msgid "Background image"
+msgstr "Atzeko planoko irudia"
+
+#: ../bin/src/ui_notificationssettingspage.h:424
 msgid "Background opacity"
+msgstr "Atzeko planoko opakotasuna"
+
+#: core/database.cpp:669
+msgid "Backing up database"
 msgstr ""
 
-#: ../bin/src/ui_mainwindow.h:648
+#: ../bin/src/ui_mainwindow.h:656
 msgid "Ban"
-msgstr ""
+msgstr "Galarazi"
 
 #: analyzers/baranalyzer.cpp:19
 msgid "Bar analyzer"
-msgstr ""
+msgstr "Barra-analizatzailea"
 
-#: ../bin/src/ui_notificationssettingspage.h:421
+#: ../bin/src/ui_notificationssettingspage.h:428
 msgid "Basic Blue"
-msgstr ""
+msgstr "Oinarrizko urdina"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:167
 msgid "Basic audio type"
-msgstr ""
+msgstr "Oinarrizko audio mota"
 
-#: ../bin/src/ui_behavioursettingspage.h:176
+#: ../bin/src/ui_behavioursettingspage.h:169
 msgid "Behavior"
-msgstr ""
+msgstr "Portaera"
 
 #: ../bin/src/ui_transcoderoptionsflac.h:83
 msgid "Best"
-msgstr ""
+msgstr "Onena"
 
 #: songinfo/echonestbiographies.cpp:83
 #, qt-format
 msgid "Biography from %1"
-msgstr ""
+msgstr "%1-ko biografia"
 
-#: playlist/playlist.cpp:1132 ../bin/src/ui_edittagdialog.h:640
+#: playlist/playlist.cpp:1202 ../bin/src/ui_edittagdialog.h:640
 msgid "Bit rate"
-msgstr ""
+msgstr "Bit-tasa"
 
 #: ui/organisedialog.cpp:67 ../bin/src/ui_transcoderoptionsaac.h:129
 #: ../bin/src/ui_transcoderoptionsmp3.h:194
 #: ../bin/src/ui_transcoderoptionsspeex.h:218
 #: ../bin/src/ui_transcoderoptionswma.h:79
 msgid "Bitrate"
-msgstr ""
+msgstr "Bit-tasa"
 
-#: analyzers/blockanalyzer.cpp:24
+#: analyzers/blockanalyzer.cpp:22
 msgid "Block analyzer"
-msgstr ""
+msgstr "Bloke-analizatzailea"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:141
 msgid "Block type"
-msgstr ""
+msgstr "Bloke-mota"
 
-#: devices/ilister.cpp:100
+#: devices/ilister.cpp:122
 msgid "Bluetooth MAC Address"
-msgstr ""
+msgstr "Bluetooth MAC helbidea"
 
-#: ../bin/src/ui_notificationssettingspage.h:414
+#: ../bin/src/ui_notificationssettingspage.h:421
 msgid "Body"
-msgstr ""
+msgstr "Gorputza"
 
 #: analyzers/boomanalyzer.cpp:8
 msgid "Boom analyzer"
-msgstr ""
+msgstr "Boom analizatzailea"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:146
+#: ../bin/src/ui_podcastsettingspage.h:242
+#: ../bin/src/ui_appearancesettingspage.h:243
 msgid "Browse..."
-msgstr ""
+msgstr "Arakatu..."
 
-#: ../bin/src/ui_playbacksettingspage.h:284
+#: ../bin/src/ui_playbacksettingspage.h:291
 msgid "Buffer duration"
-msgstr ""
+msgstr "Bufferraren iraupena"
 
-#: engines/gstengine.cpp:849
+#: engines/gstengine.cpp:821
 msgid "Buffering"
+msgstr "Bufferra betetzen"
+
+#: ../bin/src/ui_globalsearchview.h:211
+msgid "But these sources are disabled:"
 msgstr ""
 
 #: ../bin/src/ui_wiimotesettingspage.h:192
 msgid "Buttons"
-msgstr ""
+msgstr "Botoiak"
 
-#: core/song.cpp:343
+#: core/song.cpp:328
 msgid "CDDA"
-msgstr ""
+msgstr "CDDA"
 
-#: library/library.cpp:96
+#: library/library.cpp:98
 msgid "CUE sheet support"
-msgstr ""
+msgstr "CUE orriaren euskarria"
 
-#: internet/spotifyblobdownloader.cpp:43
+#: internet/spotifyblobdownloader.cpp:44
 msgid "Cancel"
-msgstr ""
+msgstr "Utzi"
 
 #: ../bin/src/ui_edittagdialog.h:634
 msgid "Change cover art"
-msgstr ""
+msgstr "Aldatu azala"
 
-#: songinfo/songinfotextview.cpp:74
+#: songinfo/songinfotextview.cpp:77
 msgid "Change font size..."
-msgstr ""
+msgstr "Aldatu letra-tipo tamaina..."
 
 #: core/globalshortcuts.cpp:61
 msgid "Change repeat mode"
-msgstr ""
+msgstr "Aldatu errepikatze-modua"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:179
 msgid "Change shortcut..."
-msgstr ""
+msgstr "Aldatu laster-tekla..."
 
 #: core/globalshortcuts.cpp:60
 msgid "Change shuffle mode"
-msgstr ""
+msgstr "Aldatu ausazko modua"
 
 #: core/commandlineoptions.cpp:163
 msgid "Change the language"
+msgstr "Aldatu hizkuntza"
+
+#: ../bin/src/ui_playbacksettingspage.h:294
+msgid ""
+"Changing mono playback preference will be effective for the next playing "
+"songs"
 msgstr ""
 
-#: ui/mainwindow.cpp:597
+#: ../bin/src/ui_podcastsettingspage.h:228
+msgid "Check for new episodes"
+msgstr ""
+
+#: ui/mainwindow.cpp:573
 msgid "Check for updates..."
-msgstr ""
+msgstr "Eguneraketak bilatu..."
 
-#: smartplaylists/wizard.cpp:80
+#: smartplaylists/wizard.cpp:81
 msgid "Choose a name for your smart playlist"
-msgstr ""
+msgstr "Erreprodukzio-zerrenda adimendunaren izena hautatu"
 
-#: ../bin/src/ui_playbacksettingspage.h:280
+#: ../bin/src/ui_playbacksettingspage.h:287
 msgid "Choose automatically"
-msgstr ""
+msgstr "Automatikoki hautatu"
 
-#: ../bin/src/ui_notificationssettingspage.h:426
+#: ../bin/src/ui_notificationssettingspage.h:433
 msgid "Choose color..."
-msgstr ""
+msgstr "Hautatu kolorea..."
 
-#: ../bin/src/ui_notificationssettingspage.h:427
+#: ../bin/src/ui_notificationssettingspage.h:434
 msgid "Choose font..."
-msgstr ""
+msgstr "Hautatu letra-tipoa..."
 
 #: ../bin/src/ui_visualisationselector.h:113
 msgid "Choose from the list"
-msgstr ""
+msgstr "Hautatu zerrendatik"
 
-#: smartplaylists/querywizardplugin.cpp:152
+#: smartplaylists/querywizardplugin.cpp:154
 msgid "Choose how the playlist is sorted and how many songs it will contain."
+msgstr "Hautatu zerrendaren ordena eta izango duen abesti kopurua."
+
+#: podcasts/podcastsettingspage.cpp:132
+msgid "Choose podcast download directory"
 msgstr ""
 
 #: ../bin/src/ui_songinfosettingspage.h:188
 msgid ""
 "Choose the websites you want Clementine to use when searching for lyrics."
-msgstr ""
+msgstr "Hautatu Clementine-k abestien letrak bilatzeko erabiliko dituen webguneak"
 
 #: ui/equalizer.cpp:109
 msgid "Classical"
+msgstr "Klasikoa"
+
+#: ../bin/src/ui_podcastsettingspage.h:243
+msgid "Cleaning up"
 msgstr ""
 
 #: widgets/lineedit.cpp:41 ../bin/src/ui_queuemanager.h:139
 msgid "Clear"
-msgstr ""
+msgstr "Garbitu"
 
-#: ../bin/src/ui_mainwindow.h:650 ../bin/src/ui_mainwindow.h:652
+#: ../bin/src/ui_mainwindow.h:658 ../bin/src/ui_mainwindow.h:660
 msgid "Clear playlist"
-msgstr ""
+msgstr "Erreprodukzio-zerrenda garbitu"
 
-#: smartplaylists/searchtermwidget.cpp:321 ../bin/src/ui_mainwindow.h:633
-#: visualisations/visualisationcontainer.cpp:196
-#: ../bin/src/ui_visualisationoverlay.h:179
+#: smartplaylists/searchtermwidget.cpp:321 ../bin/src/ui_mainwindow.h:641
+#: visualisations/visualisationcontainer.cpp:211
+#: ../bin/src/ui_visualisationoverlay.h:183
 msgid "Clementine"
-msgstr ""
+msgstr "Clementine"
 
 #: ../bin/src/ui_errordialog.h:93
 msgid "Clementine Error"
-msgstr ""
+msgstr "Clementine-ren errorea"
 
-#: ../bin/src/ui_notificationssettingspage.h:422
+#: ../bin/src/ui_notificationssettingspage.h:429
 msgid "Clementine Orange"
-msgstr ""
+msgstr "Clementine laranja"
 
-#: visualisations/visualisationcontainer.cpp:70
+#: visualisations/visualisationcontainer.cpp:77
+#: visualisations/visualisationcontainer.cpp:151
 msgid "Clementine Visualization"
-msgstr ""
+msgstr "Clementine-ren bistaratzea"
 
 #: ../bin/src/ui_deviceproperties.h:376
 msgid ""
 "Clementine can automatically convert the music you copy to this device into "
 "a format that it can play."
-msgstr ""
+msgstr "Clementine-k automatikoki bihurtu dezake gailura kopiatzen den musika honek erreproduzitu ahal izango duen formatu batera"
 
-#: ../bin/src/ui_remotesettingspage.h:200 remote/remotesettingspage.cpp:152
-msgid ""
-"Clementine can be controlled remotely by an Android phone.  To enable this "
-"feature log in with the same Google account that is configured on your "
-"phone."
-msgstr ""
-
-#: ../bin/src/ui_notificationssettingspage.h:396
+#: ../bin/src/ui_notificationssettingspage.h:403
 msgid "Clementine can show a message when the track changes."
+msgstr "Clementine-k mezua erakutsi dezake pista aldatzen denean."
+
+#: ../bin/src/ui_podcastsettingspage.h:250
+msgid ""
+"Clementine can synchronize your subscription list with your other computers "
+"and podcast applications.  <a href=\"https://gpodder.net/register/\">Create "
+"an account</a>."
 msgstr ""
 
 #: visualisations/projectmvisualisation.cpp:128
 msgid ""
 "Clementine could not load any projectM visualisations.  Check that you have "
 "installed Clementine properly."
-msgstr ""
+msgstr "Clementine-k ezin izan du projectM bistaratzerik kargatu. Clementine ondo instalatuta dagoen begiratu."
 
-#: internet/lastfmsettingspage.cpp:103
+#: internet/lastfmsettingspage.cpp:104
 msgid ""
 "Clementine couldn't fetch your subscription status since there are problems "
 "with your connection. Played tracks will be cached and sent later to "
 "Last.fm."
-msgstr ""
+msgstr "Clementine-k ezin izan du zure harpidetza-egoera hartu, konexioarekin arazoak baitaude. Erreproduzituriko abestiak katxean gorde eta beranduago bidaliko dira Last.fm-ra"
 
 #: widgets/prettyimage.cpp:201
 msgid "Clementine image viewer"
-msgstr ""
+msgstr "Clementine irudi-ikustailea"
 
 #: ../bin/src/ui_trackselectiondialog.h:206
 msgid "Clementine was unable to find results for this file"
+msgstr "Clementine-k ezin izan du fitxategi honetarako emaitzak erakutsi"
+
+#: ../bin/src/ui_globalsearchview.h:210
+msgid "Clementine will find music in:"
 msgstr ""
 
-#: library/libraryview.cpp:225
+#: library/libraryview.cpp:244
 msgid "Click here to add some music"
-msgstr ""
+msgstr "Egin klik hemen musika gehitzeko"
 
 #: ../bin/src/ui_trackslider.h:72
 msgid "Click to toggle between remaining time and total time"
-msgstr ""
+msgstr "Egin klik geratzen den denbora eta denbora osoaren artean txandakatzeko"
 
-#: widgets/didyoumean.cpp:35
+#: widgets/didyoumean.cpp:37
 msgid "Close"
-msgstr ""
+msgstr "Itxi"
 
-#: visualisations/visualisationcontainer.cpp:119
+#: visualisations/visualisationcontainer.cpp:127
 msgid "Close visualization"
-msgstr ""
+msgstr "Itxi bistaratzea"
 
 #: internet/magnatunedownloaddialog.cpp:280
 msgid "Closing this window will cancel the download."
-msgstr ""
+msgstr "Leiho hau ixteak deskarga bertan-behera utziko du."
 
-#: ui/albumcovermanager.cpp:213
+#: ui/albumcovermanager.cpp:198
 msgid "Closing this window will stop searching for album covers."
-msgstr ""
+msgstr "Leiho hau ixteak albumen azalen bilaketa geldituko du."
 
 #: ui/equalizer.cpp:110
 msgid "Club"
-msgstr ""
+msgstr "Club-a"
 
-#: devices/ilister.cpp:95
+#: devices/ilister.cpp:117
 msgid "Color"
-msgstr ""
+msgstr "Kolorea"
 
-#: ../bin/src/ui_appearancesettingspage.h:120
+#: ../bin/src/ui_appearancesettingspage.h:228
 msgid "Colors"
-msgstr ""
-
-#: ../bin/src/ui_globalsearchsettingspage.h:170
-msgid "Combine identical results from different sources"
-msgstr ""
+msgstr "Koloreak"
 
 #: core/commandlineoptions.cpp:166
 msgid "Comma separated list of class:level, level is 0-3"
-msgstr ""
+msgstr "Komaz banaturiko klase-zerrenda:maila, maila 0-3 da"
 
-#: playlist/playlist.cpp:1141 smartplaylists/searchterm.cpp:279
+#: playlist/playlist.cpp:1211 smartplaylists/searchterm.cpp:279
 #: ui/organisedialog.cpp:65 ../bin/src/ui_edittagdialog.h:661
 msgid "Comment"
-msgstr ""
+msgstr "Iruzkina"
 
 #: ../bin/src/ui_edittagdialog.h:662
 msgid "Complete tags automatically"
-msgstr ""
+msgstr "Bete etiketak automatikoki"
 
-#: ../bin/src/ui_mainwindow.h:701
+#: ../bin/src/ui_mainwindow.h:709
 msgid "Complete tags automatically..."
-msgstr ""
+msgstr "Bete etiketak automatikoki..."
 
-#: playlist/playlist.cpp:1123 ui/organisedialog.cpp:59
+#: playlist/playlist.cpp:1193 ui/organisedialog.cpp:59
 #: ../bin/src/ui_groupbydialog.h:132 ../bin/src/ui_groupbydialog.h:145
 #: ../bin/src/ui_groupbydialog.h:158 ../bin/src/ui_edittagdialog.h:659
 msgid "Composer"
+msgstr "Konpositorea"
+
+#: internet/searchboxwidget.cpp:42
+#, qt-format
+msgid "Configure %1..."
 msgstr ""
 
-#: internet/groovesharkservice.cpp:517
+#: internet/groovesharkservice.cpp:563
 msgid "Configure Grooveshark..."
-msgstr ""
+msgstr "Konfiguratu Grooveshark..."
 
-#: internet/lastfmservice.cpp:111
+#: internet/lastfmservice.cpp:125
 msgid "Configure Last.fm..."
-msgstr ""
+msgstr "Konfiguratu Last.fm"
 
-#: internet/magnatuneservice.cpp:277
+#: internet/magnatuneservice.cpp:278
 msgid "Configure Magnatune..."
-msgstr ""
+msgstr "Konfiguratu Magnatune..."
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:167
 msgid "Configure Shortcuts"
-msgstr ""
+msgstr "Konfiguratu laster-teklak"
 
-#: internet/spotifyservice.cpp:491
+#: internet/spotifyservice.cpp:519
 msgid "Configure Spotify..."
+msgstr "Konfiguratu Spotify..."
+
+#: globalsearch/globalsearchview.cpp:138 globalsearch/globalsearchview.cpp:425
+msgid "Configure global search..."
 msgstr ""
 
-#: ui/mainwindow.cpp:491
+#: ui/mainwindow.cpp:457
 msgid "Configure library..."
+msgstr "Konfiguratu bilduma..."
+
+#: podcasts/addpodcastdialog.cpp:67 podcasts/podcastservice.cpp:288
+msgid "Configure podcasts..."
 msgstr ""
 
 #: internet/digitallyimportedservicebase.cpp:185
-#: ../bin/src/ui_globalsearchsettingspage.h:174
+#: ../bin/src/ui_globalsearchsettingspage.h:150
 msgid "Configure..."
-msgstr ""
+msgstr "Konfiguratu..."
 
 #: ../bin/src/ui_wiimotesettingspage.h:186
 msgid "Connect Wii Remotes using active/deactive action"
-msgstr ""
+msgstr "Konektatu Wii urruneko kontrola aktibatu/desaktibatu botoia erabiliz"
 
-#: devices/devicemanager.cpp:326 devices/devicemanager.cpp:330
+#: devices/devicemanager.cpp:339 devices/devicemanager.cpp:343
 msgid "Connect device"
-msgstr ""
+msgstr "Konektatu gailua"
 
-#: internet/spotifyservice.cpp:246
+#: internet/spotifyservice.cpp:251
 msgid "Connecting to Spotify"
-msgstr ""
+msgstr "Konektatu Spotify-ra"
 
 #: ../bin/src/ui_transcoderoptionsmp3.h:196
 msgid "Constant bitrate"
-msgstr ""
+msgstr "Bit-tasa konstantea"
 
 #: ../bin/src/ui_deviceproperties.h:379
 msgid "Convert all music"
-msgstr ""
+msgstr "Musika guztia bihurtu"
 
 #: ../bin/src/ui_deviceproperties.h:378
 msgid "Convert any music that the device can't play"
-msgstr ""
+msgstr "Gailuak erreproduzitu ezin dezakeen musika bihurtu"
 
-#: internet/groovesharkservice.cpp:1071
+#: internet/groovesharkservice.cpp:1197
 msgid "Copy to clipboard"
-msgstr ""
+msgstr "Kopiatu arbelean"
 
-#: library/libraryview.cpp:265 ui/mainwindow.cpp:524
+#: library/libraryview.cpp:284 ui/mainwindow.cpp:490
 #: widgets/fileviewlist.cpp:44
 msgid "Copy to device..."
-msgstr ""
+msgstr "Kopiatu gailura..."
 
-#: devices/deviceview.cpp:223 ui/mainwindow.cpp:521
+#: devices/deviceview.cpp:218 ui/mainwindow.cpp:487
 #: widgets/fileviewlist.cpp:39
 msgid "Copy to library..."
-msgstr ""
+msgstr "Kopiatu bildumara..."
 
 #: devices/afctransfer.cpp:50
 msgid "Copying iPod database"
+msgstr "iPod-aren datu-basea kopiatzen"
+
+#: ../bin/src/ui_podcastinfowidget.h:194
+msgid "Copyright"
 msgstr ""
 
-#: transcoder/transcoder.cpp:62
+#: transcoder/transcoder.cpp:64
 #, qt-format
 msgid ""
 "Could not create the GStreamer element \"%1\" - make sure you have all the "
 "required GStreamer plugins installed"
-msgstr ""
+msgstr "Ezin izan da GStreamer \"%1\" elementua sortu - beharrezko GStreamer plugin guztiak instalatuta dauden begiratu"
 
-#: transcoder/transcoder.cpp:425
+#: transcoder/transcoder.cpp:427
 #, qt-format
 msgid ""
 "Couldn't find a muxer for %1, check you have the correct GStreamer plugins "
 "installed"
-msgstr ""
+msgstr "Ezin izan da %1-(r)entzako multiplexadorea aurkitu, begiratu GStreamer plugin egokiak instalatuta dauden"
 
-#: transcoder/transcoder.cpp:419
+#: transcoder/transcoder.cpp:421
 #, qt-format
 msgid ""
 "Couldn't find an encoder for %1, check you have the correct GStreamer "
 "plugins installed"
-msgstr ""
+msgstr "Ezin izan da %1-(r)entzako kodetzailea aurkitu, begiratu GStreamer plugin egokiak instalatuta dauden"
 
-#: internet/lastfmservice.cpp:900
+#: internet/lastfmservice.cpp:890
 msgid "Couldn't load the last.fm radio station"
-msgstr ""
+msgstr "Ezin izan da last.fm-ko irratia kargatu"
 
 #: internet/magnatunedownloaddialog.cpp:203
 #, qt-format
 msgid "Couldn't open output file %1"
-msgstr ""
+msgstr "Ezin izan da %1 irteera-fitxategia ireki"
 
 #: ../bin/src/ui_albumcovermanager.h:149
-#: ../bin/src/ui_albumcoversearcher.h:104 ../bin/src/ui_mainwindow.h:673
+#: ../bin/src/ui_albumcoversearcher.h:105 ../bin/src/ui_mainwindow.h:681
 msgid "Cover Manager"
-msgstr ""
+msgstr "Azal-kudeatzailea"
 
-#: ui/edittagdialog.cpp:439
+#: ui/edittagdialog.cpp:435
 msgid "Cover art from embedded image"
-msgstr ""
-
-#: ui/edittagdialog.cpp:441
-#, qt-format
-msgid "Cover art loaded automatically from %1"
-msgstr ""
-
-#: ui/edittagdialog.cpp:434
-msgid "Cover art manually unset"
-msgstr ""
-
-#: ui/edittagdialog.cpp:443
-msgid "Cover art not set"
-msgstr ""
+msgstr "Irudi txertatu bateko azalak"
 
 #: ui/edittagdialog.cpp:437
 #, qt-format
-msgid "Cover art set from %1"
-msgstr ""
+msgid "Cover art loaded automatically from %1"
+msgstr "%1-(e)tik automatikoki kargaturiko azalak"
 
-#: covers/coversearchstatisticsdialog.cpp:60 ui/albumcoversearcher.cpp:104
+#: ui/edittagdialog.cpp:430
+msgid "Cover art manually unset"
+msgstr "Eskuz berrezarritako azalak"
+
+#: ui/edittagdialog.cpp:439
+msgid "Cover art not set"
+msgstr "Ezarri gabeko azalak"
+
+#: ui/edittagdialog.cpp:433
+#, qt-format
+msgid "Cover art set from %1"
+msgstr "%1-(e)tik ezarritako azalak"
+
+#: covers/coversearchstatisticsdialog.cpp:60 ui/albumcoversearcher.cpp:106
 #, qt-format
 msgid "Covers from %1"
-msgstr ""
+msgstr "%1-(e)ko azalak"
 
-#: internet/groovesharkservice.cpp:496 internet/groovesharkservice.cpp:1144
+#: internet/groovesharkservice.cpp:531 internet/groovesharkservice.cpp:1270
 msgid "Create a new Grooveshark playlist"
-msgstr ""
+msgstr "Grooveshark-eko erreprodukzio-zerrenda berria sortu"
 
-#: ../bin/src/ui_playbacksettingspage.h:262
+#: ../bin/src/ui_playbacksettingspage.h:269
 msgid "Cross-fade when changing tracks automatically"
-msgstr ""
+msgstr "Iraungi automatikoki kantak aldatzen direnean"
 
-#: ../bin/src/ui_playbacksettingspage.h:261
+#: ../bin/src/ui_playbacksettingspage.h:268
 msgid "Cross-fade when changing tracks manually"
-msgstr ""
+msgstr "Iraungi eskuz kantak aldatzen direnean"
 
-#: ../bin/src/ui_mainwindow.h:645
+#: ../bin/src/ui_mainwindow.h:653
 msgid "Ctrl+Alt+V"
 msgstr "Ctrl+Alt+V"
 
-#: ../bin/src/ui_mainwindow.h:649
+#: ../bin/src/ui_mainwindow.h:657
 msgid "Ctrl+B"
 msgstr "Ctrl+B"
 
 #: ../bin/src/ui_queuemanager.h:133
 msgid "Ctrl+Down"
-msgstr "Ctrl+Down"
+msgstr "Ctrl+Behera"
 
-#: ../bin/src/ui_mainwindow.h:656
+#: ../bin/src/ui_mainwindow.h:664
 msgid "Ctrl+E"
 msgstr "Ctrl+E"
 
-#: ../bin/src/ui_mainwindow.h:666
+#: ../bin/src/ui_mainwindow.h:674
 msgid "Ctrl+H"
 msgstr "Ctrl+H"
 
-#: ../bin/src/ui_mainwindow.h:685
+#: ../bin/src/ui_mainwindow.h:693
 msgid "Ctrl+J"
 msgstr "Ctrl+J"
 
-#: ../bin/src/ui_queuemanager.h:141 ../bin/src/ui_mainwindow.h:654
+#: ../bin/src/ui_queuemanager.h:141 ../bin/src/ui_mainwindow.h:662
 msgid "Ctrl+K"
 msgstr "Ctrl+K"
 
-#: ../bin/src/ui_mainwindow.h:647
+#: ../bin/src/ui_mainwindow.h:655
 msgid "Ctrl+L"
 msgstr "Ctrl+L"
 
-#: ../bin/src/ui_mainwindow.h:699
+#: ../bin/src/ui_mainwindow.h:707
 msgid "Ctrl+M"
 msgstr "Ctrl+M"
 
-#: ../bin/src/ui_mainwindow.h:687
+#: ../bin/src/ui_mainwindow.h:695
 msgid "Ctrl+N"
 msgstr "Ctrl+N"
 
-#: ../bin/src/ui_mainwindow.h:670
+#: ../bin/src/ui_mainwindow.h:678
 msgid "Ctrl+O"
 msgstr "Ctrl+O"
 
-#: ../bin/src/ui_mainwindow.h:662
+#: ../bin/src/ui_mainwindow.h:670
 msgid "Ctrl+P"
 msgstr "Ctrl+P"
 
-#: ../bin/src/ui_mainwindow.h:643
+#: ../bin/src/ui_mainwindow.h:651
 msgid "Ctrl+Q"
 msgstr "Ctrl+Q"
 
-#: ../bin/src/ui_mainwindow.h:689
+#: ../bin/src/ui_mainwindow.h:697
 msgid "Ctrl+S"
 msgstr "Ctrl+S"
 
-#: ../bin/src/ui_mainwindow.h:668
+#: ../bin/src/ui_mainwindow.h:676
 msgid "Ctrl+Shift+A"
-msgstr "Ctrl+Shift+A"
+msgstr "Ctrl+Maius+A"
 
-#: ../bin/src/ui_mainwindow.h:691
+#: ../bin/src/ui_mainwindow.h:699
 msgid "Ctrl+Shift+O"
-msgstr "Ctrl+Shift+O"
+msgstr "Ctrl+Maius+O"
 
-#: ../bin/src/ui_mainwindow.h:702
+#: ../bin/src/ui_mainwindow.h:710
 msgid "Ctrl+T"
 msgstr "Ctrl+T"
 
 #: ../bin/src/ui_queuemanager.h:129
 msgid "Ctrl+Up"
-msgstr "Ctrl+Up"
+msgstr "Ctrl+Gora"
 
 #: ui/equalizer.cpp:108 ../bin/src/ui_lastfmstationdialog.h:98
 msgid "Custom"
-msgstr ""
+msgstr "Pertsonalizatua"
 
-#: ../bin/src/ui_notificationssettingspage.h:409
+#: ../bin/src/ui_appearancesettingspage.h:242
+msgid "Custom image:"
+msgstr "Irudi pertsonalizatua:"
+
+#: ../bin/src/ui_notificationssettingspage.h:416
 msgid "Custom message settings"
-msgstr ""
+msgstr "Mezu-ezarpen pertsonalizatuak"
 
-#: internet/lastfmservice.cpp:199
+#: internet/lastfmservice.cpp:215
 msgid "Custom radio"
-msgstr ""
+msgstr "Irrati pertsonalizatua"
 
-#: ../bin/src/ui_notificationssettingspage.h:423
+#: ../bin/src/ui_notificationssettingspage.h:430
 msgid "Custom..."
-msgstr ""
+msgstr "Pertsonalizatua..."
 
 #: devices/devicekitlister.cpp:123
 msgid "DBus path"
-msgstr ""
+msgstr "DBus bide-izena"
 
 #: ui/equalizer.cpp:111
 msgid "Dance"
+msgstr "Dance"
+
+#: core/database.cpp:623
+msgid ""
+"Database corruption detected. Please read https://code.google.com/p"
+"/clementine-player/wiki/DatabaseCorruption for instructions on how to "
+"recover your database"
 msgstr ""
 
-#: playlist/playlist.cpp:1139 ../bin/src/ui_edittagdialog.h:649
+#: playlist/playlist.cpp:1209 ../bin/src/ui_edittagdialog.h:649
 msgid "Date created"
-msgstr ""
+msgstr "Sorrera-data"
 
-#: playlist/playlist.cpp:1138 ../bin/src/ui_edittagdialog.h:648
+#: playlist/playlist.cpp:1208 ../bin/src/ui_edittagdialog.h:648
 msgid "Date modified"
-msgstr ""
+msgstr "Aldatze-data"
 
 #: smartplaylists/searchterm.cpp:301
 msgid "Days"
-msgstr ""
+msgstr "Egun"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:177
 msgid "De&fault"
-msgstr ""
+msgstr "&Lehenetsia"
 
 #: core/commandlineoptions.cpp:153
 msgid "Decrease the volume by 4%"
-msgstr ""
+msgstr "Bolumena % 4 jaitsi"
 
 #: core/globalshortcuts.cpp:53 wiimotedev/wiimotesettingspage.cpp:104
 msgid "Decrease volume"
-msgstr ""
+msgstr "Bolumena jaitsi"
+
+#: ../bin/src/ui_appearancesettingspage.h:236
+msgid "Default background image"
+msgstr "Atzeko planoko irudi lehenetsia"
 
 #: ../bin/src/ui_wiimotesettingspage.h:195
 msgid "Defaults"
-msgstr ""
+msgstr "Lehenetsiak"
 
 #: ../bin/src/ui_visualisationselector.h:115
 msgid "Delay between visualizations"
-msgstr ""
+msgstr "Bistaratzeen arteko atzerapena"
 
-#: internet/groovesharkservice.cpp:499 internet/groovesharkservice.cpp:1192
+#: internet/groovesharkservice.cpp:534 internet/groovesharkservice.cpp:1317
 msgid "Delete Grooveshark playlist"
+msgstr "Ezabatu Grooveshark-eko erreprodukzio-zerrenda"
+
+#: podcasts/podcastservice.cpp:274
+msgid "Delete downloaded data"
 msgstr ""
 
-#: devices/deviceview.cpp:393 library/libraryview.cpp:460
-#: ui/mainwindow.cpp:1858 widgets/fileview.cpp:186
+#: devices/deviceview.cpp:388 library/libraryview.cpp:503
+#: ui/mainwindow.cpp:1808 widgets/fileview.cpp:186
 msgid "Delete files"
-msgstr ""
+msgstr "Ezabatu fitxategiak"
 
-#: devices/deviceview.cpp:225
+#: devices/deviceview.cpp:220
 msgid "Delete from device..."
-msgstr ""
+msgstr "Ezabatu gailutik..."
 
-#: library/libraryview.cpp:267 ui/mainwindow.cpp:525
+#: library/libraryview.cpp:286 ui/mainwindow.cpp:491
 #: widgets/fileviewlist.cpp:45
 msgid "Delete from disk..."
+msgstr "Ezabatu diskotik..."
+
+#: ../bin/src/ui_podcastsettingspage.h:244
+msgid "Delete played episodes"
 msgstr ""
 
 #: ui/equalizer.cpp:190 ../bin/src/ui_equalizer.h:124
 msgid "Delete preset"
-msgstr ""
+msgstr "Ezabatu aurre-ezarpena"
 
-#: library/libraryview.cpp:259
+#: library/libraryview.cpp:278
 msgid "Delete smart playlist"
-msgstr ""
+msgstr "Ezabatu erreprodukzio-zerrenda adimenduna"
 
 #: ../bin/src/ui_organisedialog.h:194
 msgid "Delete the original files"
-msgstr ""
+msgstr "Ezabatu jatorrizko fitxategiak"
 
 #: core/deletefiles.cpp:50
 msgid "Deleting files"
-msgstr ""
+msgstr "Fitxategiak ezabatzen"
 
-#: ui/mainwindow.cpp:1340
+#: ui/mainwindow.cpp:1292
 msgid "Dequeue selected tracks"
-msgstr ""
+msgstr "Atera aukeraturiko pistak ilaratik"
 
-#: ui/mainwindow.cpp:1338
+#: ui/mainwindow.cpp:1290
 msgid "Dequeue track"
-msgstr ""
+msgstr "Atera pista ilaratik"
 
 #: ../bin/src/ui_transcodedialog.h:211 ../bin/src/ui_organisedialog.h:189
 msgid "Destination"
-msgstr ""
+msgstr "Helmuga"
 
 #: ../bin/src/ui_transcodedialog.h:217
 msgid "Details..."
-msgstr ""
+msgstr "Xehetasunak..."
 
-#: devices/devicekitlister.cpp:126 devices/giolister.cpp:158
+#: devices/devicekitlister.cpp:126 devices/giolister.cpp:160
 msgid "Device"
-msgstr ""
+msgstr "Gailua"
 
 #: ../bin/src/ui_deviceproperties.h:368
 msgid "Device Properties"
-msgstr ""
+msgstr "Gailuaren propietateak"
 
-#: devices/wmdmlister.cpp:368
+#: ../bin/src/ui_podcastsettingspage.h:254 devices/wmdmlister.cpp:368
 msgid "Device name"
-msgstr ""
+msgstr "Gailuaren izena"
 
-#: devices/deviceview.cpp:212
+#: devices/deviceview.cpp:207
 msgid "Device properties..."
-msgstr ""
+msgstr "Gailuaren propietateak..."
 
-#: ui/mainwindow.cpp:251
+#: ui/mainwindow.cpp:230
 msgid "Devices"
-msgstr ""
+msgstr "Gailuak"
 
-#: widgets/didyoumean.cpp:128
+#: widgets/didyoumean.cpp:55
 msgid "Did you mean"
-msgstr ""
+msgstr "Esan nahi zenuen"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:160
 msgid "Digitally Imported"
-msgstr ""
+msgstr "Digitally Imported"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:164
 msgid "Digitally Imported password"
-msgstr ""
+msgstr "Digitally Imported-eko pasahitza"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:162
 msgid "Digitally Imported username"
-msgstr ""
+msgstr "Digitally Imported-eko erabiltzaile-izena"
 
 #: ../bin/src/ui_networkproxysettingspage.h:159
 msgid "Direct internet connection"
-msgstr ""
+msgstr "Internet-konexio zuzena"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:145
 #: ../bin/src/ui_transcodedialog.h:204
 msgid "Directory"
-msgstr ""
+msgstr "Direktorioa"
 
-#: ../bin/src/ui_notificationssettingspage.h:405
+#: ../bin/src/ui_notificationssettingspage.h:412
 msgid "Disable duration"
-msgstr ""
+msgstr "Iraupena desgaitu"
 
-#: ../bin/src/ui_notificationssettingspage.h:398
+#: globalsearch/searchproviderstatuswidget.cpp:47
+#: ../bin/src/ui_notificationssettingspage.h:405
 msgid "Disabled"
-msgstr ""
+msgstr "Desgaituta"
 
-#: playlist/playlist.cpp:1119 ui/organisedialog.cpp:61
+#: playlist/playlist.cpp:1189 ui/organisedialog.cpp:61
 #: ../bin/src/ui_edittagdialog.h:655
 msgid "Disc"
-msgstr ""
+msgstr "Diska"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:234
 msgid "Discontinuous transmission"
-msgstr ""
+msgstr "Transmisio ez-jarraitua"
 
-#: internet/icecastfilterwidget.cpp:33 library/libraryfilterwidget.cpp:109
-#: ../bin/src/ui_librarysettingspage.h:169
+#: internet/icecastfilterwidget.cpp:33 internet/searchboxwidget.cpp:30
+#: library/libraryfilterwidget.cpp:88 ../bin/src/ui_librarysettingspage.h:169
 msgid "Display options"
-msgstr ""
+msgstr "Erakutsi aukerak"
 
 #: core/commandlineoptions.cpp:161
 msgid "Display the on-screen-display"
-msgstr ""
+msgstr "Erakutsi pantailako bistaratzailea"
 
-#: ../bin/src/ui_mainwindow.h:700
+#: ../bin/src/ui_mainwindow.h:708
 msgid "Do a full library rescan"
-msgstr ""
+msgstr "Bildumaren berreskaneo osoa egin"
 
 #: ../bin/src/ui_deviceproperties.h:377
 msgid "Do not convert any music"
-msgstr ""
+msgstr "Ez bihurtu musikarik"
 
-#: widgets/osd.cpp:307 ../bin/src/ui_playlistsequence.h:103
+#: widgets/osd.cpp:286 ../bin/src/ui_playlistsequence.h:103
 msgid "Don't repeat"
-msgstr ""
+msgstr "Ez errepikatu"
 
-#: library/libraryview.cpp:281
+#: library/libraryview.cpp:300
 msgid "Don't show in various artists"
-msgstr ""
+msgstr "Ez erakutsi hainbat artista"
 
-#: widgets/osd.cpp:294 ../bin/src/ui_playlistsequence.h:107
+#: widgets/osd.cpp:273 ../bin/src/ui_playlistsequence.h:107
 msgid "Don't shuffle"
-msgstr ""
+msgstr "Ez nahastu"
 
-#: internet/magnatunedownloaddialog.cpp:282 ui/albumcovermanager.cpp:215
+#: internet/magnatunedownloaddialog.cpp:282 ui/albumcovermanager.cpp:200
 msgid "Don't stop!"
-msgstr ""
+msgstr "Ez gelditu!"
 
-#: devices/deviceview.cpp:114
+#: devices/deviceview.cpp:115
 msgid "Double click to open"
-msgstr ""
+msgstr "Klik bikoitza irekitzeko"
 
-#: ../bin/src/ui_behavioursettingspage.h:198
+#: ../bin/src/ui_behavioursettingspage.h:190
 msgid "Double clicking a song will..."
+msgstr "Abesti batean klik bikoitza eginez gero..."
+
+#: podcasts/podcastservice.cpp:345
+#, c-format
+msgid "Download %n episodes"
 msgstr ""
 
 #: internet/magnatunedownloaddialog.cpp:252
 msgid "Download directory"
+msgstr "Direktorioa deskargatu"
+
+#: ../bin/src/ui_podcastsettingspage.h:240
+msgid "Download episodes to"
 msgstr ""
 
 #: ../bin/src/ui_magnatunesettingspage.h:161
 msgid "Download membership"
+msgstr "Deskargarako bazkidetza"
+
+#: ../bin/src/ui_podcastsettingspage.h:241
+msgid "Download new episodes automatically"
 msgstr ""
 
-#: internet/magnatuneservice.cpp:273
+#: podcasts/podcastservice.cpp:187
+msgid "Download queued"
+msgstr ""
+
+#: internet/magnatuneservice.cpp:274
 msgid "Download this album"
-msgstr ""
+msgstr "Deskargatu album hau"
 
-#: internet/jamendoservice.cpp:413
+#: internet/jamendoservice.cpp:416
 msgid "Download this album..."
+msgstr "Deskargatu album hau..."
+
+#: podcasts/podcastservice.cpp:347
+msgid "Download this episode"
 msgstr ""
 
 #: ../bin/src/ui_spotifysettingspage.h:216
 msgid "Download..."
+msgstr "Deskargatu..."
+
+#: podcasts/podcastservice.cpp:195
+#, qt-format
+msgid "Downloading (%1%)..."
 msgstr ""
 
-#: internet/icecastservice.cpp:97
+#: internet/icecastservice.cpp:99
 msgid "Downloading Icecast directory"
-msgstr ""
+msgstr "Icecast direktorioa deskargatzen"
 
-#: internet/jamendoservice.cpp:183
+#: internet/jamendoservice.cpp:186
 msgid "Downloading Jamendo catalogue"
-msgstr ""
+msgstr "Jamendo katalogoa deskargatzen"
 
-#: internet/magnatuneservice.cpp:156
+#: internet/magnatuneservice.cpp:157
 msgid "Downloading Magnatune catalogue"
-msgstr ""
+msgstr "Magnatune katalogoa deskargatzen"
 
-#: internet/spotifyblobdownloader.cpp:43
+#: internet/spotifyblobdownloader.cpp:44
 msgid "Downloading Spotify plugin"
-msgstr ""
+msgstr "Spotify plugina deskargatzen"
 
 #: musicbrainz/tagfetcher.cpp:102
 msgid "Downloading metadata"
-msgstr ""
+msgstr "Metadatuak deskargatzen"
 
 #: ui/notificationssettingspage.cpp:37
 msgid "Drag to reposition"
-msgstr ""
+msgstr "Arrastatu birkokatzeko"
 
 #: devices/wmdmlister.cpp:365
 msgid "Drive letter"
-msgstr ""
+msgstr "Unitate-letra"
 
 #: ../bin/src/ui_dynamicplaylistcontrols.h:109
 msgid "Dynamic mode is on"
-msgstr ""
+msgstr "Modu dinamikoa aktibaturik"
 
-#: internet/jamendoservice.cpp:111 library/library.cpp:89
+#: internet/jamendoservice.cpp:113 library/library.cpp:91
 msgid "Dynamic random mix"
-msgstr ""
+msgstr "Ausazko nahasketa dinamikoa"
 
-#: library/libraryview.cpp:257
+#: library/libraryview.cpp:276
 msgid "Edit smart playlist..."
-msgstr ""
+msgstr "Editatu erreprodukzio-zerrenda adimenduna..."
 
-#: ui/mainwindow.cpp:1373
+#: ui/mainwindow.cpp:1325
 #, qt-format
 msgid "Edit tag \"%1\"..."
-msgstr ""
+msgstr "Editatu \"%1\" etiketa"
 
-#: ../bin/src/ui_mainwindow.h:659
+#: ../bin/src/ui_mainwindow.h:667
 msgid "Edit tag..."
-msgstr ""
+msgstr "Editatu etiketa..."
 
 #: ../bin/src/ui_edittagdialog.h:663
 msgid "Edit tags"
-msgstr ""
+msgstr "Editatu etiketak"
 
 #: ../bin/src/ui_edittagdialog.h:632
 msgid "Edit track information"
-msgstr ""
+msgstr "Editatu pistaren informazioa"
 
-#: library/libraryview.cpp:271 widgets/fileviewlist.cpp:50
-#: ../bin/src/ui_mainwindow.h:655
+#: library/libraryview.cpp:290 widgets/fileviewlist.cpp:50
+#: ../bin/src/ui_mainwindow.h:663
 msgid "Edit track information..."
-msgstr ""
+msgstr "Editatu pistaren informazioa..."
 
-#: library/libraryview.cpp:273
+#: library/libraryview.cpp:292
 msgid "Edit tracks information..."
-msgstr ""
+msgstr "Editatu pisten informazioa..."
 
 #: internet/savedradio.cpp:101
 msgid "Edit..."
-msgstr ""
+msgstr "Editatu..."
 
 #: ../bin/src/ui_wiimotesettingspage.h:183
 msgid "Enable Wii Remote support"
-msgstr ""
+msgstr "Gaitu Wii urruneko kontrolaren euskarria"
 
 #: ../bin/src/ui_equalizer.h:126
 msgid "Enable equalizer"
-msgstr ""
-
-#: ../bin/src/ui_behavioursettingspage.h:179
-msgid "Enable playlist background image"
-msgstr ""
+msgstr "Gaitu ekualizadorea"
 
 #: ../bin/src/ui_wiimotesettingspage.h:187
 msgid "Enable shortcuts only when Clementine is focused"
-msgstr ""
+msgstr "Gaitu lasterbideak Clementine fokaturik dagoenean bakarrik"
 
-#: ../bin/src/ui_globalsearchsettingspage.h:171
+#: ../bin/src/ui_globalsearchsettingspage.h:147
 msgid ""
-"Enable sources below to include them in search results.  When identical "
-"results are available from more than one source, ones at the top will take "
-"priority."
+"Enable sources below to include them in search results.  Results will be "
+"displayed in this order."
 msgstr ""
 
 #: core/globalshortcuts.cpp:62
 msgid "Enable/disable Last.fm scrobbling"
-msgstr ""
+msgstr "Gaitu/desgaitu Last.fm-ko partekatzea"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:235
 msgid "Encoding complexity"
-msgstr ""
+msgstr "Kodeketaren konplexutasuna"
 
 #: ../bin/src/ui_transcoderoptionsmp3.h:197
 msgid "Encoding engine quality"
-msgstr ""
+msgstr "Kodeketa-motorearen kalitatea"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:224
 msgid "Encoding mode"
+msgstr "Kodetze modua"
+
+#: ../bin/src/ui_addpodcastbyurl.h:76
+msgid "Enter a URL"
 msgstr ""
 
 #: ../bin/src/ui_coverfromurldialog.h:103
 msgid "Enter a URL to download a cover from the Internet:"
-msgstr ""
+msgstr "Sartu URL bat Internetetik azala jaisteko:"
 
 #: playlist/playlisttabbar.cpp:131
 msgid "Enter a new name for this playlist"
-msgstr ""
+msgstr "Sartu izen berria erreprodukzio-zerrenda honentzat"
 
 #: ../bin/src/ui_lastfmstationdialog.h:93
 msgid ""
 "Enter an <b>artist</b> or <b>tag</b> to start listening to Last.fm radio."
+msgstr "Sartu <b>artista</b> edo <b>etiketa</b> bat Last.fm irratia entzuten hasteko."
+
+#: ../bin/src/ui_globalsearchview.h:209
+msgid ""
+"Enter search terms above to find music on your computer and on the internet"
 msgstr ""
 
-#: ../bin/src/ui_libraryfilterwidget.h:131
+#: ../bin/src/ui_itunessearchpage.h:77
+msgid "Enter search terms below to find podcasts in the iTunes Store"
+msgstr ""
+
+#: ../bin/src/ui_gpoddersearchpage.h:77
+msgid "Enter search terms below to find podcasts on gpodder.net"
+msgstr ""
+
+#: ../bin/src/ui_libraryfilterwidget.h:96
 #: ../bin/src/ui_albumcovermanager.h:153
 msgid "Enter search terms here"
-msgstr ""
+msgstr "Sartu bilaketa-terminoak hemen"
 
 #: ../bin/src/ui_addstreamdialog.h:114
 msgid "Enter the URL of an internet radio stream:"
-msgstr ""
+msgstr "Sartu interneteko irratiko jarioaren URLa:"
 
-#: ../bin/src/ui_libraryfilterwidget.h:115
+#: ../bin/src/ui_libraryfilterwidget.h:87
 msgid "Entire collection"
-msgstr ""
+msgstr "Bilduma osoa"
 
-#: ../bin/src/ui_equalizer.h:118 ../bin/src/ui_mainwindow.h:681
+#: ../bin/src/ui_equalizer.h:118 ../bin/src/ui_mainwindow.h:689
 msgid "Equalizer"
-msgstr ""
+msgstr "Ekualizadorea"
 
 #: core/commandlineoptions.cpp:164
 msgid "Equivalent to --log-levels *:1"
-msgstr ""
+msgstr "--log-levels *:1-en baliokidea"
 
 #: core/commandlineoptions.cpp:165
 msgid "Equivalent to --log-levels *:3"
-msgstr ""
+msgstr "--log-levels *:3-en baliokidea"
 
-#: internet/groovesharkservice.cpp:954
-#: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:454
-#: ui/mainwindow.cpp:1810 ui/mainwindow.cpp:1931
+#: internet/groovesharkservice.cpp:1042
+#: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:497
+#: ui/mainwindow.cpp:1760 ui/mainwindow.cpp:1881
 msgid "Error"
-msgstr ""
+msgstr "Errorea"
 
 #: devices/mtploader.cpp:56
 msgid "Error connecting MTP device"
-msgstr ""
+msgstr "Errorea MTP gailua konektatzean"
 
 #: ui/organiseerrordialog.cpp:55
 msgid "Error copying songs"
-msgstr ""
+msgstr "Errorea abestiak kopiatzean"
 
 #: ui/organiseerrordialog.cpp:60
 msgid "Error deleting songs"
-msgstr ""
+msgstr "Errorea abestiak ezabatzean"
 
-#: internet/spotifyblobdownloader.cpp:214
+#: internet/spotifyblobdownloader.cpp:215
 msgid "Error downloading Spotify plugin"
-msgstr ""
+msgstr "Errorea Spotify plugin-a deskargatzean"
 
 #: playlist/songloaderinserter.cpp:71 playlist/songloaderinserter.cpp:133
 #, qt-format
 msgid "Error loading %1"
-msgstr ""
+msgstr "Errorea %1 kargatzean"
 
-#: internet/digitallyimportedservicebase.cpp:207
-#: internet/digitallyimportedurlhandler.cpp:82
+#: internet/digitallyimportedservicebase.cpp:206
+#: internet/digitallyimportedurlhandler.cpp:85
 msgid "Error loading di.fm playlist"
-msgstr ""
+msgstr "Errorea di.fm erreprodukzio-zerrenda kargatzean"
 
-#: transcoder/transcoder.cpp:393
+#: transcoder/transcoder.cpp:395
 #, qt-format
 msgid "Error processing %1: %2"
-msgstr ""
+msgstr "Errorea %1 prozesatzean: %2"
 
 #: playlist/songloaderinserter.cpp:100
 msgid "Error while loading audio CD"
-msgstr ""
+msgstr "Errorea audio CDa kargatzean"
 
-#: library/library.cpp:59
+#: library/library.cpp:61
 msgid "Ever played"
+msgstr "Inoiz erreproduzitutakoak"
+
+#: ../bin/src/ui_podcastsettingspage.h:232
+msgid "Every 10 minutes"
 msgstr ""
 
-#: ../bin/src/ui_playbacksettingspage.h:263
-msgid "Except between tracks on the same album or in the same CUE sheet"
+#: ../bin/src/ui_podcastsettingspage.h:238
+msgid "Every 12 hours"
 msgstr ""
+
+#: ../bin/src/ui_podcastsettingspage.h:236
+msgid "Every 2 hours"
+msgstr ""
+
+#: ../bin/src/ui_podcastsettingspage.h:233
+msgid "Every 20 minutes"
+msgstr ""
+
+#: ../bin/src/ui_podcastsettingspage.h:234
+msgid "Every 30 minutes"
+msgstr ""
+
+#: ../bin/src/ui_podcastsettingspage.h:237
+msgid "Every 6 hours"
+msgstr ""
+
+#: ../bin/src/ui_podcastsettingspage.h:235
+msgid "Every hour"
+msgstr ""
+
+#: ../bin/src/ui_playbacksettingspage.h:270
+msgid "Except between tracks on the same album or in the same CUE sheet"
+msgstr "Album edo CUE orri bereko pisten artean izan ezik"
 
 #: ../bin/src/ui_dynamicplaylistcontrols.h:111
 msgid "Expand"
-msgstr ""
+msgstr "Zabaldu"
 
 #: widgets/loginstatewidget.cpp:142
 #, qt-format
 msgid "Expires on %1"
-msgstr ""
+msgstr "%1-(e)an iraungitzen da"
 
-#: ../bin/src/ui_mainwindow.h:664
+#: ../bin/src/ui_mainwindow.h:672
 msgid "F1"
-msgstr ""
+msgstr "F1"
 
-#: ../bin/src/ui_mainwindow.h:660
+#: ../bin/src/ui_mainwindow.h:668
 msgid "F2"
-msgstr ""
+msgstr "F2"
 
-#: ../bin/src/ui_mainwindow.h:635
+#: ../bin/src/ui_mainwindow.h:643
 msgid "F5"
-msgstr ""
+msgstr "F5"
 
-#: ../bin/src/ui_mainwindow.h:637
+#: ../bin/src/ui_mainwindow.h:645
 msgid "F6"
-msgstr ""
+msgstr "F6"
 
-#: ../bin/src/ui_mainwindow.h:639
+#: ../bin/src/ui_mainwindow.h:647
 msgid "F7"
-msgstr ""
+msgstr "F7"
 
-#: ../bin/src/ui_mainwindow.h:641
+#: ../bin/src/ui_mainwindow.h:649
 msgid "F8"
-msgstr ""
+msgstr "F8"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:140
 #: ../bin/src/ui_magnatunesettingspage.h:171
 #: ../bin/src/ui_transcodersettingspage.h:161
 msgid "FLAC"
-msgstr ""
+msgstr "FLAC"
 
-#: ../bin/src/ui_playbacksettingspage.h:260
+#: ../bin/src/ui_playbacksettingspage.h:267
 msgid "Fade out when stopping a track"
-msgstr ""
+msgstr "Pista gelditzerakoan iraungitu"
 
-#: ../bin/src/ui_playbacksettingspage.h:259
+#: ../bin/src/ui_playbacksettingspage.h:266
 msgid "Fading"
+msgstr "Iraungitzea"
+
+#: ../bin/src/ui_playbacksettingspage.h:271
+msgid "Fading duration"
+msgstr "Iraungitzearen iraupena"
+
+#: podcasts/gpoddertoptagspage.cpp:76
+msgid "Failed to fetch directory"
 msgstr ""
 
-#: ../bin/src/ui_playbacksettingspage.h:264
-msgid "Fading duration"
+#: podcasts/gpoddersearchpage.cpp:76 podcasts/gpoddertoptagsmodel.cpp:109
+#: podcasts/itunessearchpage.cpp:66 podcasts/itunessearchpage.cpp:75
+#: podcasts/itunessearchpage.cpp:82
+msgid "Failed to fetch podcasts"
+msgstr ""
+
+#: podcasts/addpodcastbyurl.cpp:70 podcasts/fixedopmlpage.cpp:54
+msgid "Failed to load podcast"
+msgstr ""
+
+#: podcasts/podcasturlloader.cpp:165
+msgid "Failed to parse the XML for this RSS feed"
 msgstr ""
 
 #: ../bin/src/ui_transcoderoptionsflac.h:82
 #: ../bin/src/ui_transcoderoptionsmp3.h:200
 msgid "Fast"
-msgstr ""
+msgstr "Azkarra"
 
-#: internet/groovesharkservice.cpp:575
+#: internet/groovesharkservice.cpp:628
 msgid "Favorites"
-msgstr ""
+msgstr "Gogokoenak"
 
-#: library/library.cpp:73
+#: library/library.cpp:75
 msgid "Favourite tracks"
-msgstr ""
+msgstr "Pista gogokoenak"
 
 #: ../bin/src/ui_albumcovermanager.h:155
 msgid "Fetch Missing Covers"
-msgstr ""
+msgstr "Falta diren azalak eskuratu"
 
 #: ../bin/src/ui_albumcovermanager.h:150
 msgid "Fetch automatically"
-msgstr ""
+msgstr "Automatikoki eskuratu"
 
 #: ../bin/src/ui_coversearchstatisticsdialog.h:75
 msgid "Fetch completed"
-msgstr ""
+msgstr "Eskuraketa eginda"
 
 #: ui/coverfromurldialog.cpp:71 ui/coverfromurldialog.cpp:82
 msgid "Fetching cover error"
-msgstr ""
+msgstr "Errorea azalak eskuratzean"
 
 #: ui/organisedialog.cpp:69
 msgid "File extension"
-msgstr ""
+msgstr "Fitxategi-luzapena"
 
 #: ../bin/src/ui_deviceproperties.h:384
 msgid "File formats"
-msgstr ""
+msgstr "Fitxategi-formatuak"
 
-#: playlist/playlist.cpp:1134 ../bin/src/ui_edittagdialog.h:650
+#: playlist/playlist.cpp:1204 ../bin/src/ui_edittagdialog.h:650
 msgid "File name"
-msgstr ""
+msgstr "Fitxategi-izena"
 
-#: playlist/playlist.cpp:1135
+#: playlist/playlist.cpp:1205
 msgid "File name (without path)"
-msgstr ""
+msgstr "Fitx.-izena (bidea gabe)"
 
-#: playlist/playlist.cpp:1136 ../bin/src/ui_edittagdialog.h:644
+#: playlist/playlist.cpp:1206 ../bin/src/ui_edittagdialog.h:644
 msgid "File size"
-msgstr ""
+msgstr "Fitxategi-tamaina"
 
-#: playlist/playlist.cpp:1137 ../bin/src/ui_groupbydialog.h:133
+#: playlist/playlist.cpp:1207 ../bin/src/ui_groupbydialog.h:133
 #: ../bin/src/ui_groupbydialog.h:146 ../bin/src/ui_groupbydialog.h:159
 #: ../bin/src/ui_edittagdialog.h:646
 msgid "File type"
-msgstr ""
+msgstr "Fitxategi-mota"
 
 #: ../bin/src/ui_transcodedialog.h:205
 msgid "Filename"
-msgstr ""
+msgstr "Fitxategi-izena"
 
-#: ui/mainwindow.cpp:249
+#: ui/mainwindow.cpp:228
 msgid "Files"
-msgstr ""
+msgstr "Fitxategiak"
 
 #: ../bin/src/ui_transcodedialog.h:202
 msgid "Files to transcode"
-msgstr ""
+msgstr "Transkodetzeko fitxategiak"
 
 #: devices/wmdmlister.cpp:367
 msgid "Filesystem name"
-msgstr ""
+msgstr "Fitxategi-sistemaren izena"
 
 #: devices/wmdmlister.cpp:372
 msgid "Filesystem serial number"
-msgstr ""
+msgstr "Fitxategi-sistemaren serie-zenbakia"
 
 #: devices/wmdmlister.cpp:366
 msgid "Filesystem type"
-msgstr ""
+msgstr "Fitxategi-sistema mota"
 
 #: smartplaylists/querywizardplugin.cpp:89
 msgid "Find songs in your library that match the criteria you specify."
-msgstr ""
+msgstr "Ezarritako irizpideak betetzen dituzten bildumako abestiak bilatu."
 
 #: musicbrainz/tagfetcher.cpp:55
 msgid "Fingerprinting song"
-msgstr ""
+msgstr "Abestiaren hatz-marka eskuratzen"
 
-#: smartplaylists/wizard.cpp:79
+#: smartplaylists/wizard.cpp:80
 msgid "Finish"
-msgstr ""
+msgstr "Amaitu"
 
 #: ../bin/src/ui_groupbydialog.h:125
 msgid "First level"
-msgstr ""
+msgstr "Lehen maila"
 
-#: core/song.cpp:333
+#: core/song.cpp:318
 msgid "Flac"
-msgstr ""
+msgstr "Flac"
 
 #: ../bin/src/ui_songinfosettingspage.h:181
 msgid "Font size"
-msgstr ""
+msgstr "Letra-tipoaren tamaina"
 
 #: ../bin/src/ui_spotifysettingspage.h:214
 msgid "For licensing reasons Spotify support is in a separate plugin."
-msgstr ""
+msgstr "Lizentzia arrazoiengatik Spotify-ren euskarria aparteko plugin batean dago."
 
 #: ../bin/src/ui_transcoderoptionsmp3.h:204
 msgid "Force mono encoding"
-msgstr ""
+msgstr "Mono kodeketa behartu"
 
-#: devices/deviceview.cpp:209 devices/deviceview.cpp:315
-#: devices/deviceview.cpp:319
+#: devices/deviceview.cpp:204 devices/deviceview.cpp:310
+#: devices/deviceview.cpp:314
 msgid "Forget device"
-msgstr ""
+msgstr "Gailua ahaztu"
 
-#: devices/deviceview.cpp:316
+#: devices/deviceview.cpp:311
 msgid ""
 "Forgetting a device will remove it from this list and Clementine will have "
 "to rescan all the songs again next time you connect it."
-msgstr ""
+msgstr "Gailua ahazteak berau zerrenda honetatik ezabatuko du eta Clementine-k abesti guztiak berreskaneatu beharko ditu gailua konektatzen den hurrengoan"
 
-#: ../bin/src/ui_globalsearchwidget.h:59
-#: ../bin/src/ui_icecastfilterwidget.h:74
-#: ../bin/src/ui_internetviewcontainer.h:70
-#: ../bin/src/ui_libraryfilterwidget.h:114
+#: ../bin/src/ui_searchproviderstatuswidget.h:94
+#: ../bin/src/ui_suggestionwidget.h:70 ../bin/src/ui_icecastfilterwidget.h:74
+#: ../bin/src/ui_internetviewcontainer.h:71 ../bin/src/ui_searchboxwidget.h:62
+#: ../bin/src/ui_libraryfilterwidget.h:86
 #: ../bin/src/ui_libraryviewcontainer.h:59
-#: ../bin/src/ui_playlistcontainer.h:143 ../bin/src/ui_querysearchpage.h:112
-#: ../bin/src/ui_querysortpage.h:136 ../bin/src/ui_searchpreview.h:104
-#: ../bin/src/ui_searchtermwidget.h:279 ../bin/src/ui_wizardfinishpage.h:83
+#: ../bin/src/ui_playlistcontainer.h:143 ../bin/src/ui_podcastinfowidget.h:191
+#: ../bin/src/ui_querysearchpage.h:112 ../bin/src/ui_querysortpage.h:136
+#: ../bin/src/ui_searchpreview.h:104 ../bin/src/ui_searchtermwidget.h:279
+#: ../bin/src/ui_wizardfinishpage.h:83
 #: ../bin/src/ui_transcoderoptionsaac.h:128
 #: ../bin/src/ui_transcoderoptionsflac.h:80
 #: ../bin/src/ui_transcoderoptionsmp3.h:190
 #: ../bin/src/ui_transcoderoptionsspeex.h:216
 #: ../bin/src/ui_transcoderoptionsvorbis.h:201
 #: ../bin/src/ui_transcoderoptionswma.h:78 ../bin/src/ui_equalizerslider.h:82
-#: ../bin/src/ui_fileview.h:106 ../bin/src/ui_loginstatewidget.h:171
-#: ../bin/src/ui_trackslider.h:69 ../bin/src/ui_visualisationoverlay.h:178
+#: ../bin/src/ui_fileview.h:107 ../bin/src/ui_loginstatewidget.h:171
+#: ../bin/src/ui_trackslider.h:69 ../bin/src/ui_visualisationoverlay.h:182
 msgid "Form"
-msgstr ""
+msgstr "Inprimakia"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:136
 msgid "Format"
-msgstr ""
+msgstr "Formatua"
 
 #: analyzers/analyzercontainer.cpp:46
-#: visualisations/visualisationcontainer.cpp:97
+#: visualisations/visualisationcontainer.cpp:104
 msgid "Framerate"
-msgstr ""
+msgstr "Laginketa-abiadura"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:236
 msgid "Frames per buffer"
-msgstr ""
+msgstr "Koadroak buffer-eko"
 
-#: internet/lastfmservice.cpp:207
+#: internet/lastfmservice.cpp:223
 msgid "Friends"
+msgstr "Lagunak"
+
+#: moodbar/moodbarrenderer.cpp:157
+msgid "Frozen"
 msgstr ""
 
 #: ui/equalizer.cpp:112
 msgid "Full Bass"
-msgstr ""
+msgstr "Baxu osoak"
 
 #: ui/equalizer.cpp:114
 msgid "Full Bass + Treble"
-msgstr ""
+msgstr "Baxu osoak + Altua"
 
 #: ui/equalizer.cpp:113
 msgid "Full Treble"
-msgstr ""
+msgstr "Altu osoak"
 
-#: ../bin/src/ui_playbacksettingspage.h:276
+#: ../bin/src/ui_playbacksettingspage.h:283
 msgid "GStreamer audio engine"
-msgstr ""
+msgstr "GStreamer audio motorea"
 
-#: ui/settingsdialog.cpp:112
+#: ui/settingsdialog.cpp:113
 msgid "General"
-msgstr ""
+msgstr "Orokorra"
 
-#: ../bin/src/ui_notificationssettingspage.h:402
+#: ../bin/src/ui_notificationssettingspage.h:409
 msgid "General settings"
-msgstr ""
+msgstr "Ezarpen orokorrak"
 
-#: playlist/playlist.cpp:1121 ui/organisedialog.cpp:64
+#: playlist/playlist.cpp:1191 ui/organisedialog.cpp:64
 #: ../bin/src/ui_groupbydialog.h:134 ../bin/src/ui_groupbydialog.h:147
 #: ../bin/src/ui_groupbydialog.h:160 ../bin/src/ui_edittagdialog.h:660
 msgid "Genre"
+msgstr "Generoa"
+
+#: internet/groovesharkservice.cpp:553
+msgid "Get a URL to share this Grooveshark playlist"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:1035
-msgid "Get an URL to share this Grooveshark song"
+#: internet/groovesharkservice.cpp:550 internet/groovesharkservice.cpp:1135
+msgid "Get a URL to share this Grooveshark song"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:722
+#: internet/groovesharkservice.cpp:809
 msgid "Getting Grooveshark popular songs"
-msgstr ""
+msgstr "Grooveshark-eko abesti ezagunak eskuratzen"
 
-#: internet/somafmservice.cpp:95
+#: internet/somafmservice.cpp:100
 msgid "Getting channels"
-msgstr ""
+msgstr "Kateak eskuratzen"
 
-#: internet/digitallyimportedservicebase.cpp:106
+#: internet/digitallyimportedservicebase.cpp:107
 msgid "Getting streams"
-msgstr ""
+msgstr "Jarioak eskuratzen"
 
 #: ../bin/src/ui_addstreamdialog.h:116
 msgid "Give it a name:"
+msgstr "Izendatu:"
+
+#: ../bin/src/ui_addpodcastbyurl.h:78
+msgid "Go"
 msgstr ""
 
-#: ../bin/src/ui_mainwindow.h:692
+#: ../bin/src/ui_mainwindow.h:700
 msgid "Go to next playlist tab"
-msgstr ""
+msgstr "Hurrengo erreprodukzio-zerrendara joan"
 
-#: ../bin/src/ui_mainwindow.h:693
+#: ../bin/src/ui_mainwindow.h:701
 msgid "Go to previous playlist tab"
-msgstr ""
+msgstr "Aurreko erreprodukzio-zerrendara joan"
 
-#: ../bin/src/ui_remotesettingspage.h:206
-msgid "Google password"
-msgstr ""
-
-#: ../bin/src/ui_remotesettingspage.h:204
-msgid "Google username"
-msgstr ""
-
-#: covers/coversearchstatisticsdialog.cpp:54 ui/albumcovermanager.cpp:431
+#: covers/coversearchstatisticsdialog.cpp:54 ui/albumcovermanager.cpp:411
 #: ../bin/src/ui_coversearchstatisticsdialog.h:76
 #, qt-format
 msgid "Got %1 covers out of %2 (%3 failed)"
-msgstr ""
+msgstr "%2-(e)tik %1 azal eskuratu dira (%3-(e)k huts egin dute)"
 
-#: ../bin/src/ui_behavioursettingspage.h:190
+#: ../bin/src/ui_behavioursettingspage.h:182
 msgid "Grey out non existent songs in my playlists"
-msgstr ""
+msgstr "Existitzen ez diren abestiak ilundu erreprodukzio-zerrendetan"
 
 #: ../bin/src/ui_groovesharksettingspage.h:112
 msgid "Grooveshark"
-msgstr ""
+msgstr "Grooveshark"
 
-#: internet/groovesharkservice.cpp:413
+#: internet/groovesharkservice.cpp:417
 msgid "Grooveshark login error"
+msgstr "Grooveshark-eko saio-hasierak huts egin du"
+
+#: internet/groovesharkservice.cpp:1187
+msgid "Grooveshark playlist's URL"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:566
+#: internet/groovesharkservice.cpp:614
 msgid "Grooveshark radio"
-msgstr ""
+msgstr "Grooveshark irratia"
 
-#: internet/groovesharkservice.cpp:1067
+#: internet/groovesharkservice.cpp:1165
 msgid "Grooveshark song's URL"
-msgstr ""
+msgstr "Grooveshark-eko kantaren URLa"
 
 #: ../bin/src/ui_groupbydialog.h:124
 msgid "Group Library by..."
-msgstr ""
+msgstr "Bilduma taldekatu honela..."
 
-#: library/libraryfilterwidget.cpp:103
+#: globalsearch/globalsearchview.cpp:423 library/libraryfilterwidget.cpp:82
 msgid "Group by"
-msgstr ""
+msgstr "Taldekatu"
 
-#: ../bin/src/ui_libraryfilterwidget.h:127
+#: library/libraryfilterwidget.cpp:110
 msgid "Group by Album"
-msgstr ""
+msgstr "Taldekatu albumaren arabera"
 
-#: ../bin/src/ui_libraryfilterwidget.h:124
+#: library/libraryfilterwidget.cpp:104
 msgid "Group by Artist"
-msgstr ""
+msgstr "Taldekatu artistaren arabera"
 
-#: ../bin/src/ui_libraryfilterwidget.h:125
+#: library/libraryfilterwidget.cpp:106
 msgid "Group by Artist/Album"
-msgstr ""
+msgstr "Taldekatu artista/albumaren arabera"
 
-#: ../bin/src/ui_libraryfilterwidget.h:126
+#: library/libraryfilterwidget.cpp:108
 msgid "Group by Artist/Year - Album"
-msgstr ""
+msgstr "Taldekatu artista/urtea - albumaren arabera"
 
-#: ../bin/src/ui_libraryfilterwidget.h:128
+#: library/libraryfilterwidget.cpp:112
 msgid "Group by Genre/Album"
-msgstr ""
+msgstr "Taldekatu genero/albumaren arabera"
 
-#: ../bin/src/ui_libraryfilterwidget.h:129
+#: library/libraryfilterwidget.cpp:114
 msgid "Group by Genre/Artist/Album"
+msgstr "Taldekatu generoa/artista/albumaren arabera"
+
+#: podcasts/podcasturlloader.cpp:194
+msgid "HTML page did not contain any RSS feeds"
 msgstr ""
 
 #: ../bin/src/ui_networkproxysettingspage.h:163
 msgid "HTTP proxy"
+msgstr "HTTP proxy-a"
+
+#: moodbar/moodbarrenderer.cpp:158
+msgid "Happy"
 msgstr ""
 
 #: ../bin/src/ui_deviceproperties.h:371
 msgid "Hardware information"
-msgstr ""
+msgstr "Hardware-informazioa"
 
 #: ../bin/src/ui_deviceproperties.h:372
 msgid "Hardware information is only available while the device is connected."
-msgstr ""
-
-#: ../bin/src/ui_globalsearchsettingspage.h:168
-msgid "Hide all other search boxes"
-msgstr ""
+msgstr "Hardware-informazioa gailua konektaturik dagoenean bakarrik dago eskuragarri."
 
 #: ../bin/src/ui_transcoderoptionsmp3.h:202
 msgid "High"
-msgstr ""
+msgstr "Altua"
 
 #: analyzers/analyzercontainer.cpp:64
+#: visualisations/visualisationcontainer.cpp:109
 #, qt-format
 msgid "High (%1 fps)"
-msgstr ""
+msgstr "Altua (%1 fps)"
 
-#: visualisations/visualisationcontainer.cpp:112
+#: visualisations/visualisationcontainer.cpp:119
 msgid "High (1024x1024)"
-msgstr ""
-
-#: visualisations/visualisationcontainer.cpp:102
-msgid "High (35 fps)"
-msgstr ""
+msgstr "Altua (1024x1024)"
 
 #: smartplaylists/searchterm.cpp:300
 msgid "Hours"
-msgstr ""
+msgstr "Orduak"
 
 #: core/backgroundstreams.cpp:30
 msgid "Hypnotoad"
-msgstr ""
+msgstr "Hipnoapoa"
 
 #: ../bin/src/ui_magnatunesettingspage.h:159
 msgid "I don't have a Magnatune account"
-msgstr ""
+msgstr "Ez daukat Magnatune-ko konturik"
 
 #: ../bin/src/ui_deviceproperties.h:370
 msgid "Icon"
-msgstr ""
+msgstr "Ikonoa"
 
-#: widgets/fancytabwidget.cpp:651
+#: widgets/fancytabwidget.cpp:655
 msgid "Icons on top"
-msgstr ""
+msgstr "Ikonoak goian"
 
 #: musicbrainz/tagfetcher.cpp:86
 msgid "Identifying song"
-msgstr ""
+msgstr "Abestia identifikatzen"
 
-#: devices/devicemanager.cpp:571 devices/devicemanager.cpp:579
+#: devices/devicemanager.cpp:584 devices/devicemanager.cpp:592
 msgid ""
 "If you continue, this device will work slowly and songs copied to it may not"
 " work."
-msgstr ""
+msgstr "Aurrera jarraitzen bada, gailua astiro arituko da eta bertara kopiatutako abestiak baliteke ez erreproduzitzea"
 
-#: ../bin/src/ui_remotesettingspage.h:209
-msgid ""
-"If you use the remote on more than one computer, this name will help you "
-"choose which one to connect to on your phone."
+#: ../bin/src/ui_addpodcastbyurl.h:77
+msgid "If you know the URL of a podcast, enter it below and press Go."
 msgstr ""
 
 #: ../bin/src/ui_organisedialog.h:204
 msgid "Ignore \"The\" in artist names"
-msgstr ""
-
-#: ui/albumcoverchoicecontroller.cpp:41
-msgid "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
-msgstr ""
+msgstr "Artisten izenetako \"The\"-ak ezikusi"
 
 #: ui/albumcoverchoicecontroller.cpp:43
+msgid "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
+msgstr "Irudiak (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
+
+#: ui/albumcoverchoicecontroller.cpp:45
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
-msgstr ""
+msgstr "Irudiak (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 
 #: ../bin/src/ui_wizardfinishpage.h:86
 msgid ""
 "In dynamic mode new tracks will be chosen and added to the playlist every "
 "time a song finishes."
-msgstr ""
+msgstr "Modu dinamikoan pista berriak aukeratu eta gehituko dira erreprodukzio-zerrendara abesti bat amaitzen den bakoitzean."
 
-#: internet/spotifyservice.cpp:347
+#: internet/spotifyservice.cpp:354
 msgid "Inbox"
-msgstr ""
+msgstr "Sarrera-ontzia"
 
-#: ../bin/src/ui_notificationssettingspage.h:408
+#: ../bin/src/ui_notificationssettingspage.h:415
 msgid "Include album art in the notification"
-msgstr ""
+msgstr "Jakinarazpenean albumaren azala gehitu"
 
 #: ../bin/src/ui_querysearchpage.h:118
 msgid "Include all songs"
-msgstr ""
-
-#: ../bin/src/ui_globalsearchsettingspage.h:177
-msgid "Include keyboard shortcut help in the tooltip"
-msgstr ""
+msgstr "Kanta guztiak erantsi"
 
 #: core/commandlineoptions.cpp:152
 msgid "Increase the volume by 4%"
-msgstr ""
+msgstr "Bolumena % 4 igo"
 
 #: core/globalshortcuts.cpp:52 wiimotedev/wiimotesettingspage.cpp:103
 msgid "Increase volume"
-msgstr ""
+msgstr "Bolumena igo"
 
 #: ../bin/src/ui_deviceproperties.h:373 wiimotedev/wiimotesettingspage.cpp:124
 msgid "Information"
-msgstr ""
+msgstr "Informazioa"
 
 #: ../bin/src/ui_organisedialog.h:203
 msgid "Insert..."
-msgstr ""
+msgstr "Txertatu"
 
 #: internet/spotifysettingspage.cpp:74
 msgid "Installed"
+msgstr "Instalatuta"
+
+#: core/database.cpp:608
+msgid "Integrity check"
 msgstr ""
 
-#: ui/mainwindow.cpp:250
+#: ui/mainwindow.cpp:229
 msgid "Internet"
-msgstr ""
+msgstr "Internet"
 
-#: ui/settingsdialog.cpp:137
+#: ui/settingsdialog.cpp:134
 msgid "Internet providers"
-msgstr ""
-
-#: internet/lastfmservice.cpp:438
-msgid "Invalid API key"
-msgstr ""
-
-#: internet/lastfmservice.cpp:433
-msgid "Invalid format"
-msgstr ""
-
-#: internet/lastfmservice.cpp:431
-msgid "Invalid method"
-msgstr ""
-
-#: internet/lastfmservice.cpp:434
-msgid "Invalid parameters"
-msgstr ""
-
-#: internet/lastfmservice.cpp:435
-msgid "Invalid resource specified"
-msgstr ""
-
-#: internet/lastfmservice.cpp:430
-msgid "Invalid service"
-msgstr ""
+msgstr "Internet hornitzaileak"
 
 #: internet/lastfmservice.cpp:437
+msgid "Invalid API key"
+msgstr "API gako baliogabea"
+
+#: internet/lastfmservice.cpp:432
+msgid "Invalid format"
+msgstr "Formatu baliogabea"
+
+#: internet/lastfmservice.cpp:430
+msgid "Invalid method"
+msgstr "Metodo baliogabea"
+
+#: internet/lastfmservice.cpp:433
+msgid "Invalid parameters"
+msgstr "Parametro baliogabeak"
+
+#: internet/lastfmservice.cpp:434
+msgid "Invalid resource specified"
+msgstr "Baliabide baliogabea zehaztua"
+
+#: internet/lastfmservice.cpp:429
+msgid "Invalid service"
+msgstr "Zerbitzu baliogabea"
+
+#: internet/lastfmservice.cpp:436
 msgid "Invalid session key"
-msgstr ""
+msgstr "Sesio-gako baliogabea"
 
-#: internet/groovesharkservice.cpp:406
+#: internet/groovesharkservice.cpp:410
 msgid "Invalid username and/or password"
-msgstr ""
+msgstr "Erabiltzaile-izen edota pasahitz baliogabea"
 
-#: internet/jamendoservice.cpp:124
+#: internet/jamendoservice.cpp:126
 msgid "Jamendo"
-msgstr ""
+msgstr "Jamendo"
+
+#: internet/jamendoservice.cpp:109
+msgid "Jamendo Most Listened Tracks"
+msgstr "Jamendo-ko pista entzunenak"
 
 #: internet/jamendoservice.cpp:107
-msgid "Jamendo Most Listened Tracks"
-msgstr ""
-
-#: internet/jamendoservice.cpp:105
 msgid "Jamendo Top Tracks"
-msgstr ""
-
-#: internet/jamendoservice.cpp:101
-msgid "Jamendo Top Tracks of the Month"
-msgstr ""
+msgstr "Jamendo-ko kantarik onenak"
 
 #: internet/jamendoservice.cpp:103
+msgid "Jamendo Top Tracks of the Month"
+msgstr "Jamendo-ko hilabeteko kantarik onenak"
+
+#: internet/jamendoservice.cpp:105
 msgid "Jamendo Top Tracks of the Week"
-msgstr ""
+msgstr "Jamendo-ko asteko kantarik onenak"
 
-#: internet/jamendoservice.cpp:167
+#: internet/jamendoservice.cpp:170
 msgid "Jamendo database"
-msgstr ""
+msgstr "Jamendo datu-basea"
 
-#: ../bin/src/ui_mainwindow.h:684
+#: ../bin/src/ui_mainwindow.h:692
 msgid "Jump to the currently playing track"
-msgstr ""
+msgstr "Erreproduzitzen ari den pistara jauzi egin"
 
 #: wiimotedev/wiimoteshortcutgrabber.cpp:72
 #, qt-format
 msgid "Keep buttons for %1 second..."
-msgstr ""
+msgstr "Sakatu botoiak segundu %1-ez..."
 
 #: ../bin/src/ui_wiimoteshortcutgrabber.h:127
 #: wiimotedev/wiimoteshortcutgrabber.cpp:73
 #: wiimotedev/wiimoteshortcutgrabber.cpp:117
 #, qt-format
 msgid "Keep buttons for %1 seconds..."
-msgstr ""
+msgstr "Sakatu botoiak %1 segunduz..."
 
-#: ../bin/src/ui_behavioursettingspage.h:178
+#: ../bin/src/ui_behavioursettingspage.h:171
 msgid "Keep running in the background when the window is closed"
-msgstr ""
+msgstr "Jarraitu atzealdean exekutatzen leihoa ixten denean"
 
 #: ../bin/src/ui_organisedialog.h:193
 msgid "Keep the original files"
-msgstr ""
+msgstr "Jatorrizko fitxategiak mantendu"
 
-#: ../bin/src/ui_mainwindow.h:677
+#: ../bin/src/ui_mainwindow.h:685
 msgid "Kittens"
-msgstr ""
+msgstr "Katakumeak"
 
-#: ../bin/src/ui_behavioursettingspage.h:180
+#: ../bin/src/ui_behavioursettingspage.h:172
 msgid "Language"
-msgstr ""
+msgstr "Hizkuntza"
 
 #: ui/equalizer.cpp:115
 msgid "Laptop/Headphones"
-msgstr ""
+msgstr "Eramangarria/Aurikularrak"
 
 #: ui/equalizer.cpp:116
 msgid "Large Hall"
-msgstr ""
+msgstr "Areto handia"
 
 #: widgets/nowplayingwidget.cpp:91
 msgid "Large album cover"
-msgstr ""
+msgstr "Albumeko azal handia"
 
-#: widgets/fancytabwidget.cpp:647
+#: widgets/fancytabwidget.cpp:651
 msgid "Large sidebar"
-msgstr ""
+msgstr "Albo-barra handia"
 
-#: library/library.cpp:67 playlist/playlist.cpp:1128
+#: library/library.cpp:69 playlist/playlist.cpp:1198
 #: ../bin/src/ui_edittagdialog.h:641
 msgid "Last played"
-msgstr ""
+msgstr "Erreproduzitutako azkena"
 
-#: ../bin/src/ui_lastfmsettingspage.h:144
+#: ../bin/src/ui_lastfmsettingspage.h:150
 msgid "Last.fm"
-msgstr ""
+msgstr "Last.fm"
 
-#: internet/lastfmservice.cpp:70
+#: internet/lastfmservice.cpp:84
 #, qt-format
 msgid "Last.fm Custom Radio: %1"
-msgstr ""
+msgstr "Last.fm-ko irrati pertsonalizatua: %1"
 
-#: internet/lastfmservice.cpp:238 internet/lastfmservice.cpp:694
-#: internet/lastfmservice.cpp:729
+#: internet/lastfmservice.cpp:254 internet/lastfmservice.cpp:705
+#: internet/lastfmservice.cpp:732
 #, qt-format
 msgid "Last.fm Library - %1"
-msgstr ""
+msgstr "Last.fm-ko bilduma -%1"
 
-#: globalsearch/lastfmsearchprovider.cpp:75 internet/lastfmservice.cpp:240
-#: internet/lastfmservice.cpp:243
+#: globalsearch/lastfmsearchprovider.cpp:77 internet/lastfmservice.cpp:256
+#: internet/lastfmservice.cpp:259
 #, qt-format
 msgid "Last.fm Mix Radio - %1"
-msgstr ""
+msgstr "Last.fm Mix irratia - %1"
 
-#: globalsearch/lastfmsearchprovider.cpp:77 internet/lastfmservice.cpp:245
-#: internet/lastfmservice.cpp:248
+#: globalsearch/lastfmsearchprovider.cpp:79 internet/lastfmservice.cpp:261
+#: internet/lastfmservice.cpp:264
 #, qt-format
 msgid "Last.fm Neighbor Radio - %1"
-msgstr ""
+msgstr "Last.fm auzokoen irratia - %1"
 
-#: globalsearch/lastfmsearchprovider.cpp:73 internet/lastfmservice.cpp:235
+#: globalsearch/lastfmsearchprovider.cpp:75 internet/lastfmservice.cpp:251
 #, qt-format
 msgid "Last.fm Radio Station - %1"
-msgstr ""
+msgstr "Last.fm irratia - %1"
 
-#: internet/lastfmservice.cpp:68
+#: internet/lastfmservice.cpp:82
 #, qt-format
 msgid "Last.fm Similar Artists to %1"
-msgstr ""
+msgstr "Last.fm-ko %1-ren antzekoak diren artistak"
 
-#: internet/lastfmservice.cpp:69
+#: internet/lastfmservice.cpp:83
 #, qt-format
 msgid "Last.fm Tag Radio: %1"
-msgstr ""
+msgstr "Last.fm etiketaren irratia: %1"
 
-#: internet/lastfmservice.cpp:442
+#: internet/lastfmservice.cpp:441
 msgid "Last.fm is currently busy, please try again in a few minutes"
-msgstr ""
+msgstr "Last.fm lanpetuta dago, saiatu minutu batzuk barru"
 
-#: ../bin/src/ui_lastfmsettingspage.h:148
+#: ../bin/src/ui_lastfmsettingspage.h:154
 msgid "Last.fm password"
-msgstr ""
+msgstr "Last.fm-ko pasahitza"
 
-#: songinfo/lastfmtrackinfoprovider.cpp:86
+#: songinfo/lastfmtrackinfoprovider.cpp:78
 msgid "Last.fm play counts"
-msgstr ""
+msgstr "Last.fm erreprodukzio kontagailua"
 
-#: songinfo/lastfmtrackinfoprovider.cpp:139
+#: songinfo/lastfmtrackinfoprovider.cpp:131
 msgid "Last.fm tags"
-msgstr ""
+msgstr "Last.fm etiketak"
 
-#: ../bin/src/ui_lastfmsettingspage.h:146
+#: ../bin/src/ui_lastfmsettingspage.h:152
 msgid "Last.fm username"
-msgstr ""
+msgstr "Last.fm-ko erabiltzaile-izena"
 
-#: songinfo/lastfmtrackinfoprovider.cpp:119
+#: songinfo/lastfmtrackinfoprovider.cpp:111
 msgid "Last.fm wiki"
-msgstr ""
+msgstr "Last.fm-ko wikia"
 
-#: library/library.cpp:83
+#: library/library.cpp:85
 msgid "Least favourite tracks"
-msgstr ""
+msgstr "Gutxien gogoko diren pistak"
 
-#: ../bin/src/ui_playbacksettingspage.h:282
+#: ../bin/src/ui_playbacksettingspage.h:290
 msgid "Leave blank for the default.  Examples: \"/dev/dsp\", \"front\", etc."
-msgstr ""
+msgstr "Hutsik utzi lehenetsirako. Adibideak: \"/dev/dsp\", \"front\", e.a."
 
-#: playlist/playlist.cpp:1117 ui/organisedialog.cpp:66
+#: playlist/playlist.cpp:1187 ui/organisedialog.cpp:66
 #: ui/qtsystemtrayicon.cpp:255 ../bin/src/ui_edittagdialog.h:636
 msgid "Length"
-msgstr ""
+msgstr "Iraupena"
 
-#: ui/mainwindow.cpp:238 ui/mainwindow.cpp:248
+#: ui/mainwindow.cpp:217 ui/mainwindow.cpp:227
 msgid "Library"
-msgstr ""
+msgstr "Bilduma"
 
 #: ../bin/src/ui_groupbydialog.h:122
 msgid "Library advanced grouping"
-msgstr ""
+msgstr "Bildumaren taldekatze aurreratua"
 
-#: ui/mainwindow.cpp:2054
+#: ui/mainwindow.cpp:1998
 msgid "Library rescan notice"
-msgstr ""
+msgstr "Bildumaren berreskaneoaren abisua"
 
 #: smartplaylists/querywizardplugin.cpp:85
 msgid "Library search"
-msgstr ""
+msgstr "Bilatu bilduman"
 
 #: ../bin/src/ui_querysortpage.h:140
 msgid "Limits"
-msgstr ""
+msgstr "Limiteak"
 
-#: internet/groovesharkservice.cpp:567
+#: internet/groovesharkservice.cpp:615
 msgid ""
 "Listen to Grooveshark songs based on what you've listened to previously"
-msgstr ""
+msgstr "Entzun Grooveshark-eko abestiak aurretik entzun duzunean oinarrituz"
 
 #: ui/equalizer.cpp:117
 msgid "Live"
-msgstr ""
+msgstr "Zuzenean"
 
 #: ../bin/src/ui_albumcovermanager.h:151
 msgid "Load"
-msgstr ""
+msgstr "Kargatu"
 
 #: ../bin/src/ui_coverfromurldialog.h:102
 msgid "Load cover from URL"
-msgstr ""
+msgstr "Kargatu azala URLtik"
 
-#: ui/albumcoverchoicecontroller.cpp:60
+#: ui/albumcoverchoicecontroller.cpp:61
 msgid "Load cover from URL..."
-msgstr ""
+msgstr "Kargatu azala URLtik..."
 
-#: ui/albumcoverchoicecontroller.cpp:92
+#: ui/albumcoverchoicecontroller.cpp:91
 msgid "Load cover from disk"
-msgstr ""
+msgstr "Kargatu azala diskotik"
 
-#: ui/albumcoverchoicecontroller.cpp:58
+#: ui/albumcoverchoicecontroller.cpp:59
 msgid "Load cover from disk..."
-msgstr ""
+msgstr "Kargatu azala diskotik..."
 
-#: playlist/playlistcontainer.cpp:303
+#: playlist/playlistcontainer.cpp:292
 msgid "Load playlist"
-msgstr ""
+msgstr "Kargatu erreprodukzio-zerrenda"
 
-#: ../bin/src/ui_mainwindow.h:690
+#: ../bin/src/ui_mainwindow.h:698
 msgid "Load playlist..."
-msgstr ""
+msgstr "Kargatu erreprodukzio-zerrenda..."
 
-#: internet/lastfmservice.cpp:913
+#: internet/lastfmservice.cpp:899
 msgid "Loading Last.fm radio"
-msgstr ""
+msgstr "Last.fm irratia kargatzen"
 
 #: devices/mtploader.cpp:42
 msgid "Loading MTP device"
-msgstr ""
+msgstr "MTP gailua kargatzen"
 
 #: devices/wmdmloader.cpp:47
 msgid "Loading Windows Media device"
-msgstr ""
+msgstr "Windows Media gailua kargatzen"
 
 #: devices/gpodloader.cpp:46
 msgid "Loading iPod database"
-msgstr ""
+msgstr "iPod-eko datu-basea kargatzen"
 
 #: smartplaylists/generatorinserter.cpp:52
 msgid "Loading smart playlist"
-msgstr ""
+msgstr "Erreprodukzio-zerrenda adimenduna kargatzen"
 
-#: library/librarymodel.cpp:135
+#: library/librarymodel.cpp:134
 msgid "Loading songs"
-msgstr ""
+msgstr "Abestiak kargatzen"
 
-#: internet/digitallyimportedurlhandler.cpp:60
-#: internet/somafmurlhandler.cpp:45
+#: internet/digitallyimportedurlhandler.cpp:63
+#: internet/somafmurlhandler.cpp:48
 msgid "Loading stream"
-msgstr ""
+msgstr "Jarioa kargatzen"
 
-#: playlist/songloaderinserter.cpp:79 ui/edittagdialog.cpp:222
+#: playlist/songloaderinserter.cpp:79 ui/edittagdialog.cpp:229
 msgid "Loading tracks"
-msgstr ""
+msgstr "Pistak kargatzen"
 
 #: playlist/songloaderinserter.cpp:139
 msgid "Loading tracks info"
-msgstr ""
+msgstr "Pisten informazioa kargatzen"
 
-#: library/librarymodel.cpp:130 widgets/prettyimage.cpp:168
-#: widgets/widgetfadehelper.cpp:93 ../bin/src/ui_searchpreview.h:106
+#: library/librarymodel.cpp:129 podcasts/podcastdiscoverymodel.cpp:97
+#: widgets/prettyimage.cpp:168 widgets/widgetfadehelper.cpp:99
+#: ../bin/src/ui_addpodcastdialog.h:180 ../bin/src/ui_searchpreview.h:106
 msgid "Loading..."
-msgstr ""
+msgstr "Kargatzen..."
 
 #: core/commandlineoptions.cpp:158
 msgid "Loads files/URLs, replacing current playlist"
-msgstr ""
+msgstr "Fitxategiak/URLak kargatzen ditu, momentuko erreprodukzio-zerrenda ordezkatuz"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:163
 #: ../bin/src/ui_groovesharksettingspage.h:116
 #: ../bin/src/ui_magnatunesettingspage.h:164
 #: ../bin/src/ui_spotifysettingspage.h:212
-#: ../bin/src/ui_remotesettingspage.h:205
-#: ../bin/src/ui_lastfmsettingspage.h:147
+#: ../bin/src/ui_lastfmsettingspage.h:153
 msgid "Login"
+msgstr "Saio-hasiera"
+
+#: podcasts/podcastsettingspage.cpp:119
+msgid "Login failed"
 msgstr ""
 
 #: ../bin/src/ui_transcoderoptionsaac.h:137
 msgid "Long term prediction profile (LTP)"
-msgstr ""
+msgstr "Epe luzerako predikzio profila (LTP)"
 
-#: ../bin/src/ui_mainwindow.h:646
+#: ../bin/src/ui_mainwindow.h:654
 msgid "Love"
-msgstr ""
+msgstr "Oso gustukoa"
 
 #: analyzers/analyzercontainer.cpp:62
+#: visualisations/visualisationcontainer.cpp:107
 #, qt-format
 msgid "Low (%1 fps)"
-msgstr ""
+msgstr "Baxua (%1 fps)"
 
-#: visualisations/visualisationcontainer.cpp:100
-msgid "Low (15 fps)"
-msgstr ""
-
-#: visualisations/visualisationcontainer.cpp:110
+#: visualisations/visualisationcontainer.cpp:117
 msgid "Low (256x256)"
-msgstr ""
+msgstr "Baxua (256x256)"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:135
 msgid "Low complexity profile (LC)"
-msgstr ""
+msgstr "Konplexutasun baxuko profila (LC)"
 
 #: ../bin/src/ui_songinfosettingspage.h:187
 msgid "Lyrics"
-msgstr ""
+msgstr "Letrak"
 
-#: songinfo/ultimatelyricsprovider.cpp:135
+#: songinfo/ultimatelyricsprovider.cpp:136
 #, qt-format
 msgid "Lyrics from %1"
-msgstr ""
+msgstr "%1-eko letrak"
 
-#: core/song.cpp:336 ../bin/src/ui_transcodersettingspage.h:159
+#: core/song.cpp:321 ../bin/src/ui_transcodersettingspage.h:159
 msgid "MP3"
-msgstr ""
+msgstr "MP3"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:177
 msgid "MP3 256k"
-msgstr ""
+msgstr "MP3 256k"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:170
 msgid "MP3 96k"
-msgstr ""
+msgstr "MP3 96k"
 
-#: core/song.cpp:334
+#: core/song.cpp:319
 msgid "MP4 AAC"
-msgstr ""
+msgstr "MP4 AAC"
 
-#: core/song.cpp:335
+#: core/song.cpp:320
 msgid "MPC"
-msgstr ""
+msgstr "MPC"
 
-#: internet/magnatuneservice.cpp:100 ../bin/src/ui_magnatunesettingspage.h:154
+#: internet/magnatuneservice.cpp:102 ../bin/src/ui_magnatunesettingspage.h:154
 msgid "Magnatune"
-msgstr ""
+msgstr "Magnatune"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:131
 msgid "Magnatune Download"
-msgstr ""
+msgstr "Magnatune deskarga"
 
-#: widgets/osd.cpp:211
+#: widgets/osd.cpp:190
 msgid "Magnatune download finished"
-msgstr ""
+msgstr "Magnatune deskarga eginda"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:134
 msgid "Main profile (MAIN)"
-msgstr ""
+msgstr "Profil nagusia (MAIN)"
 
-#: core/backgroundstreams.cpp:36 ../bin/src/ui_mainwindow.h:676
+#: core/backgroundstreams.cpp:36 ../bin/src/ui_mainwindow.h:684
 msgid "Make it so!"
-msgstr ""
+msgstr "Egin ezazu!"
 
-#: internet/spotifyservice.cpp:496
+#: internet/spotifyservice.cpp:524
 msgid "Make playlist available offline"
-msgstr ""
+msgstr "Erreprodukzio-zerrenda eskuragarri egin lineaz-kanpo"
 
-#: internet/lastfmservice.cpp:449
+#: internet/lastfmservice.cpp:448
 msgid "Malformed response"
-msgstr ""
+msgstr "Gaizki eratutako erantzuna"
 
 #: ../bin/src/ui_networkproxysettingspage.h:160
 msgid "Manual proxy configuration"
+msgstr "Eskuzko proxy konfigurazioa"
+
+#: ../bin/src/ui_podcastsettingspage.h:231
+#: ../bin/src/ui_podcastsettingspage.h:245
+msgid "Manually"
 msgstr ""
 
 #: devices/deviceproperties.cpp:153
 msgid "Manufacturer"
+msgstr "Fabrikatzailea"
+
+#: podcasts/podcastservice.cpp:284
+msgid "Mark as listened"
+msgstr ""
+
+#: podcasts/podcastservice.cpp:282
+msgid "Mark as new"
 msgstr ""
 
 #: ../bin/src/ui_querysearchpage.h:116
 msgid "Match every search term (AND)"
-msgstr ""
+msgstr "Bilaketa-termino guztiak parekatu (AND)"
 
 #: ../bin/src/ui_querysearchpage.h:117
 msgid "Match one or more search terms (OR)"
-msgstr ""
+msgstr "Bilaketa-termin bat edo gehiago parekatu (OR)"
 
 #: ../bin/src/ui_transcoderoptionsvorbis.h:209
 msgid "Maximum bitrate"
-msgstr ""
+msgstr "Bit-tasa maximoa"
 
 #: analyzers/analyzercontainer.cpp:63
+#: visualisations/visualisationcontainer.cpp:108
 #, qt-format
 msgid "Medium (%1 fps)"
-msgstr ""
+msgstr "Ertaina (%1 fps)"
 
-#: visualisations/visualisationcontainer.cpp:101
-msgid "Medium (25 fps)"
-msgstr ""
-
-#: visualisations/visualisationcontainer.cpp:111
+#: visualisations/visualisationcontainer.cpp:118
 msgid "Medium (512x512)"
-msgstr ""
+msgstr "Ertaina (512x512)"
 
 #: ../bin/src/ui_magnatunesettingspage.h:156
 msgid "Membership type"
-msgstr ""
+msgstr "Bazkidetza mota"
 
 #: ../bin/src/ui_transcoderoptionsvorbis.h:206
 msgid "Minimum bitrate"
-msgstr ""
+msgstr "Bit-tasa minimoa"
 
 #: visualisations/projectmvisualisation.cpp:127
 msgid "Missing projectM presets"
-msgstr ""
+msgstr "projectM-ko aurre-ezarpenak falta dira"
 
 #: devices/deviceproperties.cpp:152
 msgid "Model"
-msgstr ""
+msgstr "Modeloa"
 
 #: ../bin/src/ui_librarysettingspage.h:163
 msgid "Monitor the library for changes"
+msgstr "Bildumako aldaketen segimendua egin"
+
+#: ../bin/src/ui_playbacksettingspage.h:296
+msgid "Mono playback"
 msgstr ""
 
 #: smartplaylists/searchterm.cpp:303
 msgid "Months"
+msgstr "Hilabete"
+
+#: playlist/playlist.cpp:1213
+msgid "Mood"
 msgstr ""
 
-#: library/library.cpp:70
+#: ../bin/src/ui_appearancesettingspage.h:246
+#: moodbar/moodbarproxystyle.cpp:342
+msgid "Moodbar style"
+msgstr ""
+
+#: ../bin/src/ui_appearancesettingspage.h:244
+msgid "Moodbars"
+msgstr ""
+
+#: library/library.cpp:72
 msgid "Most played"
-msgstr ""
+msgstr "Gehien erreproduzitutakoak"
 
-#: devices/giolister.cpp:157
+#: devices/giolister.cpp:159
 msgid "Mount point"
-msgstr ""
+msgstr "Muntatze-puntua"
 
 #: devices/devicekitlister.cpp:125
 msgid "Mount points"
-msgstr ""
+msgstr "Muntatze-puntuak"
 
-#: ../bin/src/ui_globalsearchsettingspage.h:173
+#: ../bin/src/ui_globalsearchsettingspage.h:149
 #: ../bin/src/ui_queuemanager.h:131 ../bin/src/ui_songinfosettingspage.h:190
 msgid "Move down"
-msgstr ""
+msgstr "Eraman behera"
 
-#: ui/mainwindow.cpp:522 widgets/fileviewlist.cpp:41
+#: ui/mainwindow.cpp:488 widgets/fileviewlist.cpp:41
 msgid "Move to library..."
-msgstr ""
+msgstr "Eraman bildumara..."
 
-#: ../bin/src/ui_globalsearchsettingspage.h:172
+#: ../bin/src/ui_globalsearchsettingspage.h:148
 #: ../bin/src/ui_queuemanager.h:127 ../bin/src/ui_songinfosettingspage.h:189
 msgid "Move up"
-msgstr ""
+msgstr "Eraman gora"
 
-#: transcoder/transcodedialog.cpp:213 ui/mainwindow.cpp:1581
+#: transcoder/transcodedialog.cpp:213 ui/mainwindow.cpp:1533
 msgid "Music"
-msgstr ""
+msgstr "Musika"
 
 #: ../bin/src/ui_librarysettingspage.h:157
 msgid "Music Library"
-msgstr ""
+msgstr "Musika-bilduma"
 
-#: core/globalshortcuts.cpp:54 ../bin/src/ui_mainwindow.h:698
+#: core/globalshortcuts.cpp:54 ../bin/src/ui_mainwindow.h:706
 #: wiimotedev/wiimotesettingspage.cpp:105
 msgid "Mute"
-msgstr ""
+msgstr "Mututu"
 
-#: globalsearch/lastfmsearchprovider.cpp:51 internet/lastfmservice.cpp:178
+#: globalsearch/lastfmsearchprovider.cpp:53 internet/lastfmservice.cpp:194
 msgid "My Last.fm Library"
-msgstr ""
+msgstr "Nire Last.fm bilduma"
 
-#: globalsearch/lastfmsearchprovider.cpp:53 internet/lastfmservice.cpp:183
+#: globalsearch/lastfmsearchprovider.cpp:55 internet/lastfmservice.cpp:199
 msgid "My Last.fm Mix Radio"
-msgstr ""
+msgstr "Nire Last.fm Mix irratia"
 
-#: globalsearch/lastfmsearchprovider.cpp:55 internet/lastfmservice.cpp:188
+#: globalsearch/lastfmsearchprovider.cpp:57 internet/lastfmservice.cpp:204
 msgid "My Last.fm Neighborhood"
-msgstr ""
+msgstr "Nire Last.fm-ko auzoa"
 
-#: globalsearch/lastfmsearchprovider.cpp:49 internet/lastfmservice.cpp:173
+#: globalsearch/lastfmsearchprovider.cpp:51 internet/lastfmservice.cpp:189
 msgid "My Last.fm Recommended Radio"
-msgstr ""
+msgstr "Nire Last.fm-ko irrati gomendatua"
 
-#: internet/lastfmservice.cpp:180
+#: internet/lastfmservice.cpp:196
 msgid "My Mix Radio"
+msgstr "Nire Mix irratia"
+
+#: internet/groovesharkservice.cpp:619
+msgid "My Music"
 msgstr ""
 
-#: internet/lastfmservice.cpp:185
+#: internet/lastfmservice.cpp:201
 msgid "My Neighborhood"
-msgstr ""
+msgstr "Nire auzoa"
 
-#: internet/lastfmservice.cpp:175
+#: internet/lastfmservice.cpp:191
 msgid "My Radio Station"
-msgstr ""
+msgstr "Nire irratia"
 
-#: internet/lastfmservice.cpp:170
+#: internet/lastfmservice.cpp:186
 msgid "My Recommendations"
-msgstr ""
+msgstr "Nire gomendioak"
 
-#: internet/groovesharkservice.cpp:1145 internet/groovesharkservice.cpp:1237
+#: internet/groovesharkservice.cpp:1271 internet/groovesharkservice.cpp:1364
 #: ui/equalizer.cpp:172 ../bin/src/ui_deviceproperties.h:369
 #: ../bin/src/ui_magnatunedownloaddialog.h:135
 #: ../bin/src/ui_wizardfinishpage.h:84
 #: ../bin/src/ui_globalshortcutssettingspage.h:174
 msgid "Name"
-msgstr ""
+msgstr "Izena"
 
 #: ../bin/src/ui_organisedialog.h:197
 msgid "Naming options"
-msgstr ""
+msgstr "Izendapen-aukerak"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:230
 msgid "Narrow band (NB)"
-msgstr ""
+msgstr "Banda estua (NB)"
 
-#: internet/lastfmservice.cpp:212
+#: internet/lastfmservice.cpp:228
 msgid "Neighbors"
-msgstr ""
+msgstr "Auzokoak"
 
 #: ../bin/src/ui_songinfosettingspage.h:184
 msgid "Network"
-msgstr ""
+msgstr "Sarea"
 
 #: ../bin/src/ui_networkproxysettingspage.h:157
 msgid "Network Proxy"
-msgstr ""
+msgstr "Sareko proxy-a"
 
-#: playlist/playlistdelegates.cpp:299 ui/edittagdialog.cpp:482
+#: playlist/playlistdelegates.cpp:299 ui/edittagdialog.cpp:479
 msgid "Never"
-msgstr ""
+msgstr "Inoiz ez"
 
-#: library/library.cpp:63
+#: library/library.cpp:65
 msgid "Never played"
-msgstr ""
+msgstr "Inoiz ez erreproduzituak"
 
-#: ../bin/src/ui_behavioursettingspage.h:194
-#: ../bin/src/ui_behavioursettingspage.h:208
+#: ../bin/src/ui_behavioursettingspage.h:186
+#: ../bin/src/ui_behavioursettingspage.h:200
 msgid "Never start playing"
-msgstr ""
+msgstr "Inoiz ez hasi erreproduzitzen"
 
-#: ui/mainwindow.cpp:1421 ../bin/src/ui_mainwindow.h:686
+#: ui/mainwindow.cpp:1373 ../bin/src/ui_mainwindow.h:694
 msgid "New playlist"
-msgstr ""
+msgstr "Erreprodukzio-zerrenda berria"
 
-#: library/libraryview.cpp:255
+#: library/libraryview.cpp:274
 msgid "New smart playlist..."
-msgstr ""
+msgstr "Adimendun erreprodukzio-zerrenda berria"
 
 #: widgets/freespacebar.cpp:46
 msgid "New songs"
-msgstr ""
+msgstr "Abesti berriak"
 
 #: ../bin/src/ui_dynamicplaylistcontrols.h:110
 msgid "New tracks will be added automatically."
-msgstr ""
+msgstr "Abesti berriak automatikoki gehituko dira."
 
-#: library/library.cpp:76
+#: library/library.cpp:78
 msgid "Newest tracks"
-msgstr ""
+msgstr "Pista berrienak"
 
-#: ui/edittagdialog.cpp:160 ui/trackselectiondialog.cpp:49
+#: ui/edittagdialog.cpp:161 ui/trackselectiondialog.cpp:49
 msgid "Next"
-msgstr ""
+msgstr "Hurrengoa"
 
-#: core/globalshortcuts.cpp:50 ../bin/src/ui_mainwindow.h:640
+#: core/globalshortcuts.cpp:50 ../bin/src/ui_mainwindow.h:648
 #: wiimotedev/wiimotesettingspage.cpp:99
 msgid "Next track"
-msgstr ""
+msgstr "Hurrengo pista"
 
 #: analyzers/analyzercontainer.cpp:80
 msgid "No analyzer"
-msgstr ""
+msgstr "Analizatzailerik ez"
+
+#: ../bin/src/ui_appearancesettingspage.h:241
+msgid "No background image"
+msgstr "Atzeko planoko irudirik ez"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:146
 msgid "No long blocks"
-msgstr ""
+msgstr "Bloke luzerik ez"
 
-#: playlist/playlistcontainer.cpp:416
+#: playlist/playlistcontainer.cpp:405
 msgid ""
 "No matches found.  Clear the search box to show the whole playlist again."
-msgstr ""
+msgstr "Ez da bat-etortzerik aurkitu. Garbitu bilaketa-laukia erreprodukzio-zerrenda osoa erakusteko berriro."
 
 #: ../bin/src/ui_transcoderoptionsaac.h:145
 msgid "No short blocks"
-msgstr ""
+msgstr "Bloke laburrik ez"
 
 #: ../bin/src/ui_groupbydialog.h:128 ../bin/src/ui_groupbydialog.h:141
 #: ../bin/src/ui_groupbydialog.h:154
 msgid "None"
-msgstr ""
+msgstr "Bat ere ez"
 
-#: library/libraryview.cpp:455 ui/mainwindow.cpp:1811 ui/mainwindow.cpp:1932
+#: library/libraryview.cpp:498 ui/mainwindow.cpp:1761 ui/mainwindow.cpp:1882
 msgid "None of the selected songs were suitable for copying to a device"
+msgstr "Aukeraturiko abestietako bat ere ez zen aproposa gailu batera kopiatzeko"
+
+#: moodbar/moodbarrenderer.cpp:155
+msgid "Normal"
 msgstr ""
 
 #: ../bin/src/ui_transcoderoptionsaac.h:144
 msgid "Normal block type"
-msgstr ""
+msgstr "Bloke-mota normala"
 
 #: playlist/playlistsequence.cpp:170
 msgid "Not available while using a dynamic playlist"
-msgstr ""
+msgstr "Ez dago eskuragarri erreprodukzio-zerrenda dinamikoa erabiltzean"
 
-#: devices/deviceview.cpp:106
+#: devices/deviceview.cpp:107
 msgid "Not connected"
-msgstr ""
+msgstr "Konektatu gabe"
 
-#: internet/lastfmservice.cpp:444
+#: internet/lastfmservice.cpp:443
 msgid "Not enough content"
-msgstr ""
-
-#: internet/lastfmservice.cpp:446
-msgid "Not enough fans"
-msgstr ""
+msgstr "Ez dago eduki nahikorik"
 
 #: internet/lastfmservice.cpp:445
-msgid "Not enough members"
-msgstr ""
+msgid "Not enough fans"
+msgstr "Zale nahikorik ez"
 
-#: internet/lastfmservice.cpp:447
+#: internet/lastfmservice.cpp:444
+msgid "Not enough members"
+msgstr "Kide nahikorik ez"
+
+#: internet/lastfmservice.cpp:446
 msgid "Not enough neighbors"
-msgstr ""
+msgstr "Auzokide nahikorik ez"
 
 #: internet/spotifysettingspage.cpp:74
 msgid "Not installed"
-msgstr ""
+msgstr "Ez dago instalatua"
 
-#: globalsearch/globalsearchsettingspage.cpp:123
+#: globalsearch/globalsearchsettingspage.cpp:120
+#: globalsearch/searchproviderstatuswidget.cpp:48
 msgid "Not logged in"
-msgstr ""
+msgstr "Saioa hasi gabe"
 
-#: devices/deviceview.cpp:110
+#: devices/deviceview.cpp:111
 msgid "Not mounted - double click to mount"
-msgstr ""
+msgstr "Muntatu gabe - klik bikoitza egin muntatzeko"
 
-#: ../bin/src/ui_notificationssettingspage.h:397
+#: ../bin/src/ui_notificationssettingspage.h:404
 msgid "Notification type"
-msgstr ""
+msgstr "Jakinarazpen mota"
 
-#: ../bin/src/ui_notificationssettingspage.h:356
+#: ../bin/src/ui_notificationssettingspage.h:359
 msgid "Notifications"
-msgstr ""
+msgstr "Jakinarazpenak"
 
 #: ui/macsystemtrayicon.mm:64
 msgid "Now Playing"
-msgstr ""
+msgstr "Orain erreproduzitzen"
 
 #: ui/notificationssettingspage.cpp:37
 msgid "OSD Preview"
-msgstr ""
+msgstr "OSD aurrebista"
 
-#: core/song.cpp:337
+#: core/song.cpp:322
 msgid "Ogg Flac"
-msgstr ""
+msgstr "Ogg Flac"
 
-#: core/song.cpp:338
+#: core/song.cpp:323
 msgid "Ogg Speex"
-msgstr ""
+msgstr "Ogg Speex"
 
-#: core/song.cpp:339 ../bin/src/ui_magnatunedownloaddialog.h:139
+#: core/song.cpp:324 ../bin/src/ui_magnatunedownloaddialog.h:139
 #: ../bin/src/ui_magnatunesettingspage.h:170
 msgid "Ogg Vorbis"
-msgstr ""
+msgstr "Ogg Vorbis"
 
 #: ../bin/src/ui_querysortpage.h:142
 msgid "Only show the first"
-msgstr ""
+msgstr "Lehena bakarrik erakutsi"
 
 #: internet/digitallyimportedservicebase.cpp:178
-#: internet/groovesharkservice.cpp:514 internet/icecastservice.cpp:299
-#: internet/jamendoservice.cpp:415 internet/magnatuneservice.cpp:275
-#: internet/somafmservice.cpp:85
+#: internet/groovesharkservice.cpp:557 internet/icecastservice.cpp:296
+#: internet/jamendoservice.cpp:418 internet/magnatuneservice.cpp:276
+#: internet/somafmservice.cpp:91
 #, qt-format
 msgid "Open %1 in browser"
+msgstr "%1 nabigatzailean ireki"
+
+#: ../bin/src/ui_mainwindow.h:680
+msgid "Open &audio CD..."
+msgstr "Ireki &audio CDa..."
+
+#: podcasts/addpodcastdialog.cpp:230
+msgid "Open OPML file"
 msgstr ""
 
-#: ../bin/src/ui_mainwindow.h:672
-msgid "Open &audio CD..."
+#: podcasts/addpodcastdialog.cpp:73
+msgid "Open OPML file..."
 msgstr ""
 
 #: ../bin/src/ui_deviceproperties.h:382
 msgid "Open device"
-msgstr ""
+msgstr "Ireki gailua"
 
-#: ../bin/src/ui_mainwindow.h:671
+#: ../bin/src/ui_mainwindow.h:679
 msgid "Open file..."
-msgstr ""
+msgstr "Ireki fitxategia..."
 
-#: devices/deviceview.cpp:220 internet/internetservice.cpp:73
-#: library/libraryview.cpp:247 widgets/fileviewlist.cpp:36
-#: ../bin/src/ui_behavioursettingspage.h:203
+#: devices/deviceview.cpp:215 globalsearch/globalsearchview.cpp:416
+#: internet/internetservice.cpp:76 library/libraryview.cpp:266
+#: widgets/fileviewlist.cpp:36 ../bin/src/ui_behavioursettingspage.h:195
 msgid "Open in new playlist"
-msgstr ""
+msgstr "Ireki erreprodukzio-zerrenda berrian"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:169
 #: ../bin/src/ui_globalshortcutssettingspage.h:171
 msgid "Open..."
-msgstr ""
+msgstr "Ireki..."
 
-#: internet/lastfmservice.cpp:436
+#: internet/lastfmservice.cpp:435
 msgid "Operation failed"
-msgstr ""
+msgstr "Eragiketak huts egin du"
 
 #: ../bin/src/ui_transcoderoptionsmp3.h:193
 msgid "Optimize for bitrate"
-msgstr ""
+msgstr "Bit-tasarako optimizatu"
 
 #: ../bin/src/ui_transcoderoptionsmp3.h:191
 msgid "Optimize for quality"
-msgstr ""
+msgstr "Kalitaterako optimizatu"
 
 #: ../bin/src/ui_transcodedialog.h:210
 msgid "Options..."
-msgstr ""
+msgstr "Aukerak..."
 
 #: ../bin/src/ui_organisedialog.h:188
 msgid "Organise Files"
-msgstr ""
+msgstr "Antolatu fitxategiak"
 
-#: library/libraryview.cpp:263 ui/mainwindow.cpp:523
+#: library/libraryview.cpp:282 ui/mainwindow.cpp:489
 msgid "Organise files..."
-msgstr ""
+msgstr "Antolatu fitxategiak..."
 
 #: core/organise.cpp:65
 msgid "Organising files"
-msgstr ""
+msgstr "Fitxategiak antolatzen"
 
 #: ui/trackselectiondialog.cpp:167
 msgid "Original tags"
-msgstr ""
+msgstr "Jatorrizko etiketak"
 
 #: core/commandlineoptions.cpp:160
 msgid "Other options"
-msgstr ""
+msgstr "Bestelako aukerak"
 
-#: ../bin/src/ui_playbacksettingspage.h:283
+#: ../bin/src/ui_playbacksettingspage.h:289
 msgid "Output device"
-msgstr ""
+msgstr "Irteera-gailua"
 
 #: ../bin/src/ui_transcodedialog.h:208
 msgid "Output options"
-msgstr ""
+msgstr "Irteerako aukerak"
 
-#: ../bin/src/ui_playbacksettingspage.h:277
+#: ../bin/src/ui_playbacksettingspage.h:284
 msgid "Output plugin"
-msgstr ""
+msgstr "Irteera-plugina"
 
 #: ../bin/src/ui_organisedialog.h:207
 msgid "Overwrite existing files"
+msgstr "Existitzen diren fitxategiak gainidatzi"
+
+#: ../bin/src/ui_podcastinfowidget.h:195
+msgid "Owner"
 msgstr ""
 
-#: internet/jamendoservice.cpp:210
+#: internet/jamendoservice.cpp:213
 msgid "Parsing Jamendo catalogue"
-msgstr ""
+msgstr "Jamendoko katalogoa analizatzen"
 
 #: ui/equalizer.cpp:118
 msgid "Party"
-msgstr ""
+msgstr "Jaia"
 
 #: ../bin/src/ui_groovesharksettingspage.h:115
 #: ../bin/src/ui_magnatunesettingspage.h:165
 #: ../bin/src/ui_spotifysettingspage.h:211
+#: ../bin/src/ui_podcastsettingspage.h:253
 #: ../bin/src/ui_networkproxysettingspage.h:169
 msgid "Password"
-msgstr ""
+msgstr "Pasahitza"
 
-#: devices/ilister.cpp:97
+#: devices/ilister.cpp:119
 msgid "Password Protected"
-msgstr ""
+msgstr "Pasahitza babestua"
 
-#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:877 ui/mainwindow.cpp:1263
+#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:829 ui/mainwindow.cpp:1215
 #: ui/qtsystemtrayicon.cpp:178 wiimotedev/wiimotesettingspage.cpp:106
 msgid "Pause"
-msgstr ""
+msgstr "Pausarazi"
 
 #: core/commandlineoptions.cpp:147
 msgid "Pause playback"
-msgstr ""
+msgstr "Erreprodukzioa pausatu"
 
-#: widgets/osd.cpp:177
+#: widgets/osd.cpp:156
 msgid "Paused"
-msgstr ""
+msgstr "Pausatua"
 
-#: widgets/fancytabwidget.cpp:649
+#: widgets/fancytabwidget.cpp:653
 msgid "Plain sidebar"
-msgstr ""
+msgstr "Albo-barra sinplea"
 
-#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:506 ui/mainwindow.cpp:845
-#: ui/mainwindow.cpp:864 ui/mainwindow.cpp:1266 ui/qtsystemtrayicon.cpp:166
-#: ui/qtsystemtrayicon.cpp:192 ../bin/src/ui_mainwindow.h:636
+#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:472 ui/mainwindow.cpp:797
+#: ui/mainwindow.cpp:816 ui/mainwindow.cpp:1218 ui/qtsystemtrayicon.cpp:166
+#: ui/qtsystemtrayicon.cpp:192 ../bin/src/ui_mainwindow.h:644
 #: wiimotedev/wiimotesettingspage.cpp:101
 msgid "Play"
-msgstr ""
+msgstr "Erreproduzitu"
 
 #: ../bin/src/ui_lastfmstationdialog.h:92
 msgid "Play Artist or Tag"
-msgstr ""
+msgstr "Erreproduzitu artista edo etiketa"
 
-#: internet/lastfmservice.cpp:103
+#: internet/lastfmservice.cpp:117
 msgid "Play artist radio..."
-msgstr ""
+msgstr "Erreproduzitu artistaren irratia..."
 
-#: playlist/playlist.cpp:1126 ../bin/src/ui_edittagdialog.h:637
+#: playlist/playlist.cpp:1196 ../bin/src/ui_edittagdialog.h:637
 msgid "Play count"
-msgstr ""
+msgstr "Erreprodukzio kopurua"
 
-#: internet/lastfmservice.cpp:107
+#: internet/lastfmservice.cpp:121
 msgid "Play custom radio..."
-msgstr ""
+msgstr "Erreproduzitu irrati pertsonalizatua..."
 
 #: core/commandlineoptions.cpp:146
 msgid "Play if stopped, pause if playing"
-msgstr ""
+msgstr "Erreproduzitu pausatua badago, pausarazi erreproduzitzen ari bada"
 
-#: ../bin/src/ui_behavioursettingspage.h:195
-#: ../bin/src/ui_behavioursettingspage.h:209
+#: ../bin/src/ui_behavioursettingspage.h:187
+#: ../bin/src/ui_behavioursettingspage.h:201
 msgid "Play if there is nothing already playing"
-msgstr ""
+msgstr "Erreproduzitu ez badago ezer aurretik erreproduzitzen"
 
-#: internet/lastfmservice.cpp:105
+#: internet/lastfmservice.cpp:119
 msgid "Play tag radio..."
-msgstr ""
+msgstr "Erreproduzitu etiketaren irratia..."
 
 #: core/commandlineoptions.cpp:159
 msgid "Play the <n>th track in the playlist"
-msgstr ""
+msgstr "Erreproduzitu erreprodukzio-zerrendako <n>. pista"
 
 #: core/globalshortcuts.cpp:47 wiimotedev/wiimotesettingspage.cpp:107
 msgid "Play/Pause"
-msgstr ""
+msgstr "Erreproduzitu/Pausarazi"
 
-#: ../bin/src/ui_playbacksettingspage.h:257
+#: ../bin/src/ui_playbacksettingspage.h:264
 msgid "Playback"
-msgstr ""
-
-#: ../bin/src/ui_remotesettingspage.h:208
-msgid "Player name"
-msgstr ""
+msgstr "Erreprodukzioa"
 
 #: core/commandlineoptions.cpp:144
 msgid "Player options"
-msgstr ""
+msgstr "Erreproduzitzailearen aukerak"
 
-#: playlist/playlistcontainer.cpp:297 playlist/playlistmanager.cpp:78
-#: playlist/playlistmanager.cpp:373 playlist/playlisttabbar.cpp:292
+#: playlist/playlistcontainer.cpp:286 playlist/playlistmanager.cpp:83
+#: playlist/playlistmanager.cpp:383 playlist/playlisttabbar.cpp:292
 msgid "Playlist"
-msgstr ""
+msgstr "Erreprodukzio-zerrenda"
 
-#: widgets/osd.cpp:194
+#: widgets/osd.cpp:173
 msgid "Playlist finished"
-msgstr ""
+msgstr "Erreprodukzio-zerrenda amaituta"
 
 #: core/commandlineoptions.cpp:156
 msgid "Playlist options"
-msgstr ""
+msgstr "Erreprodukzio-zerrendaren aukerak"
 
-#: playlist/playlistcontainer.cpp:93 playlist/specialplaylisttype.cpp:23
+#: playlist/specialplaylisttype.cpp:23
 msgid "Playlist search"
-msgstr ""
+msgstr "Bilatu erreprodukzio-zerrendan"
 
-#: smartplaylists/wizard.cpp:71
+#: smartplaylists/wizard.cpp:72
 msgid "Playlist type"
-msgstr ""
+msgstr "Erreprodukzio-zerrenda mota"
 
-#: internet/groovesharkservice.cpp:571
+#: internet/groovesharkservice.cpp:637
 msgid "Playlists"
-msgstr ""
+msgstr "Erreprodukzio-zerrendak"
 
 #: ../bin/src/ui_spotifysettingspage.h:215
 msgid "Plugin status:"
+msgstr "Pluginaren egoera:"
+
+#: podcasts/podcastservice.cpp:110 ../bin/src/ui_podcastsettingspage.h:226
+msgid "Podcasts"
 msgstr ""
 
 #: ui/equalizer.cpp:119
 msgid "Pop"
-msgstr ""
+msgstr "Pop"
 
-#: internet/groovesharkservice.cpp:539
+#: internet/groovesharkservice.cpp:588
 msgid "Popular songs"
-msgstr ""
+msgstr "Abesti ezagunak"
 
-#: internet/groovesharkservice.cpp:543
+#: internet/groovesharkservice.cpp:591
 msgid "Popular songs of the Month"
-msgstr ""
+msgstr "Hilabeteko abesti ezagunak"
 
-#: internet/groovesharkservice.cpp:550
+#: internet/groovesharkservice.cpp:598
 msgid "Popular songs today"
-msgstr ""
+msgstr "Abesti ezagunak gaur"
 
-#: ../bin/src/ui_notificationssettingspage.h:403
+#: ../bin/src/ui_notificationssettingspage.h:410
 msgid "Popup duration"
-msgstr ""
+msgstr "Laster-leihoaren iraupena"
 
 #: ../bin/src/ui_networkproxysettingspage.h:166
 msgid "Port"
-msgstr ""
+msgstr "Ataka"
 
-#: ui/equalizer.cpp:46 ../bin/src/ui_playbacksettingspage.h:274
+#: ui/equalizer.cpp:46 ../bin/src/ui_playbacksettingspage.h:281
 msgid "Pre-amp"
-msgstr ""
+msgstr "Aurre-anplifikadorea"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:166
 #: ../bin/src/ui_magnatunesettingspage.h:166
 #: ../bin/src/ui_spotifysettingspage.h:217 ../bin/src/ui_settingsdialog.h:115
-#: ../bin/src/ui_lastfmsettingspage.h:149
+#: ../bin/src/ui_lastfmsettingspage.h:155
 msgid "Preferences"
-msgstr ""
+msgstr "Hobespenak"
 
-#: ../bin/src/ui_mainwindow.h:661
+#: ../bin/src/ui_mainwindow.h:669
 msgid "Preferences..."
-msgstr ""
+msgstr "Hobespenak..."
 
 #: ../bin/src/ui_librarysettingspage.h:164
 msgid "Preferred album art filenames (comma separated)"
-msgstr ""
+msgstr "Hobetsitako album-azalen fitxategi-izenak (komaz bereizita)"
 
 #: ../bin/src/ui_magnatunesettingspage.h:167
 msgid "Preferred audio format"
-msgstr ""
+msgstr "Hobetsitako audio-formatua"
 
 #: ../bin/src/ui_spotifysettingspage.h:218
 msgid "Preferred bitrate"
-msgstr ""
+msgstr "Hobetsitako bit-tasa"
 
 #: ../bin/src/ui_deviceproperties.h:380
 msgid "Preferred format"
-msgstr ""
+msgstr "Hobetsitako formatua"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:174
 msgid "Premium audio type"
-msgstr ""
+msgstr "Audio-mota premium-a"
 
 #: ../bin/src/ui_equalizer.h:119
 msgid "Preset:"
-msgstr ""
+msgstr "Aurre-ezarpena:"
 
 #: ../bin/src/ui_wiimoteshortcutgrabber.h:124
 msgid "Press a button combination to use for"
-msgstr ""
+msgstr "Sakatu erabiliko den tekla-konbinazioa"
 
 #: ../bin/src/ui_globalshortcutgrabber.h:73
 msgid "Press a key"
-msgstr ""
+msgstr "Sakatu edozein tekla"
 
 #: ui/globalshortcutgrabber.cpp:39 ../bin/src/ui_globalshortcutgrabber.h:74
 #, qt-format
 msgid "Press a key combination to use for %1..."
-msgstr ""
+msgstr "Sakatu %1 egiteko erabiliko den tekla-konbinazioa..."
 
-#: ../bin/src/ui_notificationssettingspage.h:416
+#: ../bin/src/ui_notificationssettingspage.h:423
 msgid "Pretty OSD options"
-msgstr ""
+msgstr "OSD itxurosoaren aukerak"
 
 #: ../bin/src/ui_searchpreview.h:105 ../bin/src/ui_songinfosettingspage.h:183
-#: ../bin/src/ui_notificationssettingspage.h:411
+#: ../bin/src/ui_notificationssettingspage.h:418
 #: ../bin/src/ui_organisedialog.h:208
 msgid "Preview"
-msgstr ""
+msgstr "Aurrebista"
 
-#: ui/edittagdialog.cpp:159 ui/trackselectiondialog.cpp:48
+#: ui/edittagdialog.cpp:160 ui/trackselectiondialog.cpp:48
 msgid "Previous"
-msgstr ""
+msgstr "Aurrekoa"
 
-#: core/globalshortcuts.cpp:51 ../bin/src/ui_mainwindow.h:634
+#: core/globalshortcuts.cpp:51 ../bin/src/ui_mainwindow.h:642
 #: wiimotedev/wiimotesettingspage.cpp:100
 msgid "Previous track"
-msgstr ""
+msgstr "Aurreko pista"
 
 #: core/commandlineoptions.cpp:167
 msgid "Print out version information"
-msgstr ""
+msgstr "Bertsio-informazioa erakutsi"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:131
 msgid "Profile"
-msgstr ""
+msgstr "Profila"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:134
 #: ../bin/src/ui_transcodedialog.h:216
 msgid "Progress"
-msgstr ""
+msgstr "Aurrerapena"
 
 #: ../bin/src/ui_wiimoteshortcutgrabber.h:125
 #: wiimotedev/wiimotesettingspage.cpp:227
 msgid "Push Wiiremote button"
-msgstr ""
+msgstr "Wiiremote botoia sakatu"
 
 #: ../bin/src/ui_querysortpage.h:138
 msgid "Put songs in a random order"
-msgstr ""
+msgstr "Abestiak ausazko ordenan jarri"
 
 #: ../bin/src/ui_transcoderoptionsflac.h:81
 #: ../bin/src/ui_transcoderoptionsmp3.h:192
 #: ../bin/src/ui_transcoderoptionsspeex.h:217
 #: ../bin/src/ui_transcoderoptionsvorbis.h:202
-#: visualisations/visualisationcontainer.cpp:107
+#: visualisations/visualisationcontainer.cpp:114
 msgid "Quality"
-msgstr ""
+msgstr "Kalitatea"
 
 #: ../bin/src/ui_deviceproperties.h:383
 msgid "Querying device..."
-msgstr ""
+msgstr "Gailua galdekatzen..."
 
-#: ../bin/src/ui_queuemanager.h:125 ../bin/src/ui_mainwindow.h:696
+#: ../bin/src/ui_queuemanager.h:125 ../bin/src/ui_mainwindow.h:704
 msgid "Queue Manager"
-msgstr ""
+msgstr "Ilara-kudeatzailea"
 
-#: ui/mainwindow.cpp:1344
+#: ui/mainwindow.cpp:1296
 msgid "Queue selected tracks"
-msgstr ""
+msgstr "Aukeraturiko pistak ilaran jarri"
 
-#: globalsearch/globalsearchwidget.cpp:105 library/libraryview.cpp:251
-#: ui/mainwindow.cpp:1342
+#: globalsearch/globalsearchview.cpp:420 library/libraryview.cpp:270
+#: ui/mainwindow.cpp:1294
 msgid "Queue track"
-msgstr ""
+msgstr "Pista ilaran jarri"
 
-#: ../bin/src/ui_playbacksettingspage.h:271
+#: ../bin/src/ui_playbacksettingspage.h:278
 msgid "Radio (equal loudness for all tracks)"
-msgstr ""
+msgstr "Irratia (ozentasun berdina pista denentzat)"
 
-#: internet/groovesharkservice.cpp:557
+#: internet/groovesharkservice.cpp:606
 msgid "Radios"
-msgstr ""
+msgstr "Irratiak"
 
-#: core/backgroundstreams.cpp:31 ../bin/src/ui_mainwindow.h:674
+#: core/backgroundstreams.cpp:31 ../bin/src/ui_mainwindow.h:682
 msgid "Rain"
-msgstr ""
+msgstr "Euria"
 
 #: ../bin/src/ui_visualisationselector.h:112
 msgid "Random visualization"
-msgstr ""
+msgstr "Ausazko bistaratzea"
 
 #: core/globalshortcuts.cpp:64
 msgid "Rate the current song 0 stars"
-msgstr ""
+msgstr "Oraingo kantari 0 izarretako balioa eman"
 
 #: core/globalshortcuts.cpp:65
 msgid "Rate the current song 1 star"
-msgstr ""
+msgstr "Oraingo kantari izar 1eko balioa eman"
 
 #: core/globalshortcuts.cpp:66
 msgid "Rate the current song 2 stars"
-msgstr ""
+msgstr "Oraingo kantari 2 izarretako balioa eman"
 
 #: core/globalshortcuts.cpp:67
 msgid "Rate the current song 3 stars"
-msgstr ""
+msgstr "Oraingo kantari 3 izarretako balioa eman"
 
 #: core/globalshortcuts.cpp:68
 msgid "Rate the current song 4 stars"
-msgstr ""
+msgstr "Oraingo kantari 4 izarretako balioa eman"
 
 #: core/globalshortcuts.cpp:69
 msgid "Rate the current song 5 stars"
-msgstr ""
+msgstr "Oraingo kantari 5 izarretako balioa eman"
 
-#: playlist/playlist.cpp:1125 ../bin/src/ui_edittagdialog.h:645
+#: playlist/playlist.cpp:1195 ../bin/src/ui_edittagdialog.h:645
 msgid "Rating"
-msgstr ""
+msgstr "Balioztatzea"
 
-#: internet/magnatunedownloaddialog.cpp:279 ui/albumcovermanager.cpp:212
+#: internet/magnatunedownloaddialog.cpp:279 ui/albumcovermanager.cpp:197
 msgid "Really cancel?"
-msgstr ""
+msgstr "Benetan utzi?"
 
-#: internet/groovesharkservice.cpp:515
+#: internet/groovesharkservice.cpp:560
 msgid "Refresh"
-msgstr ""
+msgstr "Freskatu"
 
-#: internet/jamendoservice.cpp:416 internet/magnatuneservice.cpp:276
+#: internet/jamendoservice.cpp:419 internet/magnatuneservice.cpp:277
 msgid "Refresh catalogue"
-msgstr ""
+msgstr "Katalogoa freskatu"
 
-#: internet/somafmservice.cpp:86
+#: internet/somafmservice.cpp:92
 msgid "Refresh channels"
-msgstr ""
+msgstr "Kateak freskatu"
 
-#: internet/lastfmservice.cpp:109
+#: internet/lastfmservice.cpp:123
 msgid "Refresh friends list"
-msgstr ""
+msgstr "Lagun-zerrenda freskatu"
 
-#: internet/icecastservice.cpp:300
+#: internet/icecastservice.cpp:297
 msgid "Refresh station list"
-msgstr ""
+msgstr "Irrati-zerrenda freskatu"
 
 #: internet/digitallyimportedservicebase.cpp:181
 msgid "Refresh streams"
-msgstr ""
+msgstr "Jarioak freskatu"
 
 #: ui/equalizer.cpp:120
 msgid "Reggae"
-msgstr ""
+msgstr "Reggae"
 
 #: ../bin/src/ui_wiimoteshortcutgrabber.h:126
 msgid "Remember Wii remote swing"
-msgstr ""
+msgstr "Wiimote-aren mugimendua gogoratu"
 
-#: ../bin/src/ui_behavioursettingspage.h:189
+#: ../bin/src/ui_behavioursettingspage.h:181
 msgid "Remember from last time"
-msgstr ""
-
-#: ../bin/src/ui_remotesettingspage.h:199
-msgid "Remote Control"
-msgstr ""
+msgstr "Azken alditik gogoratu"
 
 #: internet/savedradio.cpp:100 ../bin/src/ui_queuemanager.h:135
 #: ../bin/src/ui_searchtermwidget.h:282 ../bin/src/ui_transcodedialog.h:207
-#: internet/lastfmservice.cpp:100
+#: internet/lastfmservice.cpp:114
 msgid "Remove"
-msgstr ""
+msgstr "Kendu"
 
 #: ../bin/src/ui_wiimotesettingspage.h:194
 msgid "Remove action"
+msgstr "Kendu ekintza"
+
+#: ../bin/src/ui_mainwindow.h:713
+msgid "Remove duplicates"
 msgstr ""
 
 #: ../bin/src/ui_librarysettingspage.h:160
 msgid "Remove folder"
+msgstr "Kendu karpeta"
+
+#: internet/groovesharkservice.cpp:547
+msgid "Remove from My Music"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:509
+#: internet/groovesharkservice.cpp:544
 msgid "Remove from favorites"
-msgstr ""
+msgstr "Kendu gogokoenetatik"
 
-#: internet/groovesharkservice.cpp:506 ../bin/src/ui_mainwindow.h:680
+#: internet/groovesharkservice.cpp:541 ../bin/src/ui_mainwindow.h:688
 msgid "Remove from playlist"
-msgstr ""
+msgstr "Kendu erreprodukzio-zerrendatik"
 
 #: playlist/playlisttabbar.cpp:48 playlist/playlisttabbar.cpp:158
 msgid "Remove playlist"
+msgstr "Kendu erreprodukzio-zerrenda"
+
+#: internet/groovesharkservice.cpp:1565
+msgid "Removing songs from My Music"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:1328
-msgid "Removing song from favorites"
+#: internet/groovesharkservice.cpp:1515
+msgid "Removing songs from favorites"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:1236
+#: internet/groovesharkservice.cpp:1363
 #, qt-format
 msgid "Rename \"%1\" playlist"
-msgstr ""
+msgstr "Berrizendatu \"%1\" erreprodukzio-zerrenda"
 
-#: internet/groovesharkservice.cpp:502
+#: internet/groovesharkservice.cpp:537
 msgid "Rename Grooveshark playlist"
-msgstr ""
+msgstr "Berrizendatu Grooveshark-eko erreprodukzio-zerrenda"
 
 #: playlist/playlisttabbar.cpp:131
 msgid "Rename playlist"
-msgstr ""
+msgstr "Berrizendatu erreprodukzio-zerrenda"
 
 #: playlist/playlisttabbar.cpp:49
 msgid "Rename playlist..."
-msgstr ""
+msgstr "Berrizendatu erreprodukzio-zerrenda..."
 
-#: ../bin/src/ui_mainwindow.h:657
+#: ../bin/src/ui_mainwindow.h:665
 msgid "Renumber tracks in this order..."
-msgstr ""
+msgstr "Zenbakitu berriro pistak ordena honetan..."
 
 #: playlist/playlistsequence.cpp:174 ../bin/src/ui_playlistsequence.h:112
 msgid "Repeat"
-msgstr ""
+msgstr "Errepikatu"
 
-#: widgets/osd.cpp:309 ../bin/src/ui_playlistsequence.h:105
+#: widgets/osd.cpp:288 ../bin/src/ui_playlistsequence.h:105
 msgid "Repeat album"
-msgstr ""
+msgstr "Errepikatu albuma"
 
-#: widgets/osd.cpp:310 ../bin/src/ui_playlistsequence.h:106
+#: widgets/osd.cpp:289 ../bin/src/ui_playlistsequence.h:106
 msgid "Repeat playlist"
-msgstr ""
+msgstr "Errepikatu erreprodukzio-zerrenda"
 
-#: widgets/osd.cpp:308 ../bin/src/ui_playlistsequence.h:104
+#: widgets/osd.cpp:287 ../bin/src/ui_playlistsequence.h:104
 msgid "Repeat track"
-msgstr ""
+msgstr "Errepikatu pista"
 
-#: globalsearch/globalsearchwidget.cpp:107
-msgid "Replace and play now"
-msgstr ""
-
-#: devices/deviceview.cpp:218 globalsearch/globalsearchwidget.cpp:106
-#: internet/internetservice.cpp:63 library/libraryview.cpp:245
+#: devices/deviceview.cpp:213 globalsearch/globalsearchview.cpp:414
+#: internet/internetservice.cpp:66 library/libraryview.cpp:264
 #: widgets/fileviewlist.cpp:34
 msgid "Replace current playlist"
-msgstr ""
+msgstr "Ordeztu oraingo erreprodukzio-zerrenda"
 
-#: ../bin/src/ui_behavioursettingspage.h:202
+#: ../bin/src/ui_behavioursettingspage.h:194
 msgid "Replace the playlist"
-msgstr ""
+msgstr "Ordeztu erreprodukzio-zerrenda"
 
 #: ../bin/src/ui_organisedialog.h:205
 msgid "Replaces spaces with underscores"
-msgstr ""
+msgstr "Zuriuneak azpimarrekin ordezten ditu"
 
-#: ../bin/src/ui_playbacksettingspage.h:266
+#: ../bin/src/ui_playbacksettingspage.h:273
 msgid "Replay Gain"
-msgstr ""
+msgstr "Errepikatze-irabazia"
 
-#: ../bin/src/ui_playbacksettingspage.h:268
+#: ../bin/src/ui_playbacksettingspage.h:275
 msgid "Replay Gain mode"
-msgstr ""
+msgstr "Errepikatze-irabaziaren modua"
 
 #: ../bin/src/ui_dynamicplaylistcontrols.h:112
 msgid "Repopulate"
-msgstr ""
+msgstr "Birpopulatu"
 
 #: widgets/lineedit.cpp:51
 msgid "Reset"
-msgstr ""
+msgstr "Berrezarri"
 
-#: ui/edittagdialog.cpp:763 ../bin/src/ui_edittagdialog.h:635
+#: ui/edittagdialog.cpp:760 ../bin/src/ui_edittagdialog.h:635
 msgid "Reset play counts"
-msgstr ""
+msgstr "Berrezarri erreprodukzio kopurua"
 
 #: ../bin/src/ui_organisedialog.h:206
 msgid "Restrict to ASCII characters"
+msgstr "Mugatu ASCII karaktereetara"
+
+#: internet/groovesharkservice.cpp:777
+msgid "Retrieving Grooveshark My Music songs"
 msgstr ""
 
-#: ../bin/src/ui_globalsearchsettingspage.h:175
-msgid "Results"
-msgstr ""
-
-#: internet/groovesharkservice.cpp:693
+#: internet/groovesharkservice.cpp:745
 msgid "Retrieving Grooveshark favorites songs"
-msgstr ""
+msgstr "Grooveshark-eko abesti gogokoenak eskuratzen"
 
-#: internet/groovesharkservice.cpp:618
+#: internet/groovesharkservice.cpp:674
 msgid "Retrieving Grooveshark playlists"
-msgstr ""
+msgstr "Grooveshark-eko erreprodukzio-zerrendak eskuratzen"
 
 #: ui/equalizer.cpp:121
 msgid "Rock"
-msgstr ""
+msgstr "Rock"
 
 #: ../bin/src/ui_networkproxysettingspage.h:164
 msgid "SOCKS proxy"
-msgstr ""
+msgstr "SOCKS proxy-a"
 
-#: devices/deviceview.cpp:207
+#: devices/deviceview.cpp:202
 msgid "Safely remove device"
-msgstr ""
+msgstr "Kendu gailua arriskurik gabe"
 
 #: ../bin/src/ui_organisedialog.h:196
 msgid "Safely remove the device after copying"
-msgstr ""
+msgstr "Kopiatu ondoren kendu gailua arriskurik gabe"
 
-#: playlist/playlist.cpp:1133 ../bin/src/ui_edittagdialog.h:642
+#: playlist/playlist.cpp:1203 ../bin/src/ui_edittagdialog.h:642
 msgid "Sample rate"
-msgstr ""
+msgstr "Lagintze-tasa"
 
 #: ui/organisedialog.cpp:68
 msgid "Samplerate"
+msgstr "Lagintze-tasa"
+
+#: ../bin/src/ui_appearancesettingspage.h:247
+msgid "Save .mood files in your music library"
 msgstr ""
 
-#: ui/albumcoverchoicecontroller.cpp:115
+#: ui/albumcoverchoicecontroller.cpp:114
 msgid "Save album cover"
-msgstr ""
+msgstr "Gorde albumeko azala"
 
-#: ui/albumcoverchoicecontroller.cpp:59
+#: ui/albumcoverchoicecontroller.cpp:60
 msgid "Save cover to disk..."
-msgstr ""
+msgstr "Gorde azala diskoan..."
 
 #: widgets/prettyimage.cpp:185 widgets/prettyimage.cpp:232
 msgid "Save image"
-msgstr ""
+msgstr "Gorde irudia"
 
-#: playlist/playlistcontainer.cpp:340
+#: playlist/playlistcontainer.cpp:329
 msgid "Save playlist"
-msgstr ""
+msgstr "Gorde erreprodukzio-zerrenda"
 
-#: playlist/playlisttabbar.cpp:50 ../bin/src/ui_mainwindow.h:688
+#: playlist/playlisttabbar.cpp:50 ../bin/src/ui_mainwindow.h:696
 msgid "Save playlist..."
-msgstr ""
+msgstr "Gorde erreprodukzio-zerrenda..."
 
 #: ui/equalizer.cpp:172 ../bin/src/ui_equalizer.h:121
 msgid "Save preset"
-msgstr ""
+msgstr "Gorde aurre-ezarpena"
 
 #: ../bin/src/ui_addstreamdialog.h:115
 msgid "Save this stream in the Internet tab"
-msgstr ""
+msgstr "Gorde jario hau Internet fitxan"
 
-#: ui/edittagdialog.cpp:665 ui/trackselectiondialog.cpp:253
+#: ui/edittagdialog.cpp:662 ui/trackselectiondialog.cpp:254
 msgid "Saving tracks"
-msgstr ""
+msgstr "Pistak gordetzen"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:136
 msgid "Scalable sampling rate profile (SSR)"
-msgstr ""
+msgstr "Lagintze-tasa eskalagarriaren profila (SSR)"
 
-#: playlist/playlist.cpp:1129 ../bin/src/ui_edittagdialog.h:643
+#: playlist/playlist.cpp:1199 ../bin/src/ui_edittagdialog.h:643
 msgid "Score"
-msgstr ""
+msgstr "Puntuazioa"
 
-#: ../bin/src/ui_lastfmsettingspage.h:150
+#: ../bin/src/ui_lastfmsettingspage.h:156
 msgid "Scrobble tracks that I listen to"
-msgstr ""
+msgstr "Entzuten ditudan pistak partekatu"
 
-#: ../bin/src/ui_globalsearchsettingspage.h:166
-#: ../bin/src/ui_albumcoversearcher.h:113
+#: ui/mainwindow.cpp:226 ../bin/src/ui_globalsearchsettingspage.h:145
+#: ../bin/src/ui_gpoddersearchpage.h:78 ../bin/src/ui_itunessearchpage.h:78
+#: ../bin/src/ui_albumcoversearcher.h:114
 msgid "Search"
-msgstr ""
-
-#: internet/groovesharksearchplaylisttype.cpp:32
-#: internet/groovesharkservice.cpp:932
-msgid "Search Grooveshark"
-msgstr ""
-
-#: internet/groovesharkservice.cpp:512 internet/groovesharkservice.cpp:533
-msgid "Search Grooveshark (opens a new tab)"
-msgstr ""
+msgstr "Bilatu"
 
 #: ../bin/src/ui_icecastfilterwidget.h:78
 msgid "Search Icecast stations"
-msgstr ""
+msgstr "Bilatu Icecast irratiak"
 
-#: internet/jamendoservice.cpp:422
+#: internet/jamendoservice.cpp:425
 msgid "Search Jamendo"
-msgstr ""
+msgstr "Bilatu Jamendo-n"
 
-#: internet/magnatuneservice.cpp:282
+#: internet/magnatuneservice.cpp:283
 msgid "Search Magnatune"
-msgstr ""
+msgstr "Bilatu Magnatune-n"
 
-#: internet/spotifysearchplaylisttype.cpp:32 internet/spotifyservice.cpp:604
-msgid "Search Spotify"
-msgstr ""
-
-#: internet/spotifyservice.cpp:338
-msgid "Search Spotify (opens a new tab)"
-msgstr ""
-
-#: internet/spotifyservice.cpp:489
-msgid "Search Spotify (opens a new tab)..."
-msgstr ""
-
-#: ../bin/src/ui_globalsearchwidget.h:61
-msgid "Search around all your sources (library, internet services, ...)"
-msgstr ""
-
-#: ui/albumcoverchoicecontroller.cpp:61
+#: ui/albumcoverchoicecontroller.cpp:62
 msgid "Search for album covers..."
+msgstr "Bilatu albumetako azalak"
+
+#: ../bin/src/ui_globalsearchview.h:208
+msgid "Search for anything"
+msgstr "Bilatu edozer"
+
+#: ../bin/src/ui_gpoddersearchpage.h:76
+msgid "Search gpodder.net"
 msgstr ""
 
-#: ../bin/src/ui_globalsearchwidget.h:63
-msgid "Search for anything"
+#: ../bin/src/ui_itunessearchpage.h:76
+msgid "Search iTunes"
 msgstr ""
 
 #: ../bin/src/ui_querysearchpage.h:113
 msgid "Search mode"
+msgstr "Bilaketa-modua"
+
+#: smartplaylists/querywizardplugin.cpp:153
+msgid "Search options"
+msgstr "Bilaketa-aukerak"
+
+#: internet/groovesharkservice.cpp:580 internet/spotifyservice.cpp:343
+msgid "Search results"
 msgstr ""
 
 #: smartplaylists/querywizardplugin.cpp:151
-msgid "Search options"
-msgstr ""
-
-#: smartplaylists/querywizardplugin.cpp:149
 #: ../bin/src/ui_querysearchpage.h:120
 msgid "Search terms"
-msgstr ""
+msgstr "Bilaketa terminoak"
 
-#: internet/groovesharkservice.cpp:282
+#: internet/groovesharkservice.cpp:273
 msgid "Searching on Grooveshark"
-msgstr ""
+msgstr "Grooveshark-en bilatzen"
 
 #: ../bin/src/ui_groupbydialog.h:138
 msgid "Second level"
-msgstr ""
+msgstr "Bigarren maila"
 
 #: core/globalshortcuts.cpp:56 wiimotedev/wiimotesettingspage.cpp:108
 msgid "Seek backward"
-msgstr ""
+msgstr "Atzera egin"
 
 #: core/globalshortcuts.cpp:55 wiimotedev/wiimotesettingspage.cpp:109
 msgid "Seek forward"
-msgstr ""
+msgstr "Aurrera egin"
 
 #: core/commandlineoptions.cpp:155
 msgid "Seek the currently playing track by a relative amount"
-msgstr ""
+msgstr "Oraingo pistan mugitu posizio erlatibo baten arabera"
 
 #: core/commandlineoptions.cpp:154
 msgid "Seek the currently playing track to an absolute position"
-msgstr ""
+msgstr "Oraingo pistan mugitu posizio absolutu baten arabera"
 
 #: visualisations/visualisationselector.cpp:40
 msgid "Select All"
-msgstr ""
+msgstr "Hautatu dena"
 
 #: visualisations/visualisationselector.cpp:42
 msgid "Select None"
-msgstr ""
+msgstr "Ez hautatu ezer"
 
-#: ../bin/src/ui_appearancesettingspage.h:125
+#: ../bin/src/ui_appearancesettingspage.h:233
 msgid "Select background color:"
-msgstr ""
+msgstr "Hautatu atzeko planoaren kolorea:"
+
+#: ui/appearancesettingspage.cpp:223
+msgid "Select background image"
+msgstr "Hautatu atzeko planoko irudia"
 
 #: ../bin/src/ui_trackselectiondialog.h:207
 msgid "Select best possible match"
-msgstr ""
+msgstr "Hautatu bat-etortze posiblerik onena"
 
-#: ../bin/src/ui_appearancesettingspage.h:123
+#: ../bin/src/ui_appearancesettingspage.h:231
 msgid "Select foreground color:"
-msgstr ""
+msgstr "Aukeratu aurreko planoaren kolorea:"
 
 #: ../bin/src/ui_visualisationselector.h:108
 msgid "Select visualizations"
-msgstr ""
+msgstr "Hautatu bistaratzeak"
 
-#: visualisations/visualisationcontainer.cpp:116
+#: visualisations/visualisationcontainer.cpp:124
 msgid "Select visualizations..."
-msgstr ""
+msgstr "Hautatu bistaratzeak..."
 
 #: devices/devicekitlister.cpp:124
 msgid "Serial number"
-msgstr ""
+msgstr "Serie-zenbakia"
 
-#: internet/lastfmservice.cpp:439
+#: internet/lastfmservice.cpp:438
 msgid "Service offline"
-msgstr ""
+msgstr "Zerbitzua lineaz kanpo"
 
-#: ui/mainwindow.cpp:1371
+#: ui/mainwindow.cpp:1323
 #, qt-format
 msgid "Set %1 to \"%2\"..."
-msgstr ""
+msgstr "Ezarri %1 \"%2\"-(e)ra..."
 
 #: core/commandlineoptions.cpp:151
 msgid "Set the volume to <value> percent"
-msgstr ""
+msgstr "Ezarri bolumena ehuneko <value>-ra"
 
-#: ../bin/src/ui_mainwindow.h:658
+#: ../bin/src/ui_mainwindow.h:666
 msgid "Set value for all selected tracks..."
-msgstr ""
-
-#: ../bin/src/ui_remotesettingspage.h:207
-msgid "Settings"
-msgstr ""
+msgstr "Ezarri balioa aukeratutako pista guztiei..."
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:173
 msgid "Shortcut"
-msgstr ""
+msgstr "Lasterbidea"
 
 #: ui/globalshortcutssettingspage.cpp:133
 #: ../bin/src/ui_globalshortcutssettingspage.h:175
 #, qt-format
 msgid "Shortcut for %1"
-msgstr ""
+msgstr "%1-(r)en laster-tekla"
 
 #: wiimotedev/wiimotesettingspage.cpp:124
 #, qt-format
 msgid "Shortcut for %1 already exists"
-msgstr ""
+msgstr "%1-(r)en laster-tekla existitzen da jada"
 
-#: library/libraryfilterwidget.cpp:62
+#: library/libraryfilterwidget.cpp:61
 msgid "Show"
-msgstr ""
+msgstr "Erakutsi"
 
 #: core/globalshortcuts.cpp:58 wiimotedev/wiimotesettingspage.cpp:111
 msgid "Show OSD"
-msgstr ""
+msgstr "Erakutsi OSD"
 
-#: ../bin/src/ui_playbacksettingspage.h:258
+#: ../bin/src/ui_playbacksettingspage.h:265
 msgid "Show a glowing animation on the current track"
-msgstr ""
+msgstr "Erakutsi oraingo pistaren animazio distiratsua"
 
-#: ../bin/src/ui_notificationssettingspage.h:399
-msgid "Show a native desktop notification"
-msgstr ""
-
-#: ../bin/src/ui_notificationssettingspage.h:407
-msgid "Show a notification when I change the repeat/shuffle mode"
+#: ../bin/src/ui_appearancesettingspage.h:245
+msgid "Show a moodbar in the track progress bar"
 msgstr ""
 
 #: ../bin/src/ui_notificationssettingspage.h:406
+msgid "Show a native desktop notification"
+msgstr "Erakutsi mahaigaineko jakinarazpen jatorrizkoa"
+
+#: ../bin/src/ui_notificationssettingspage.h:414
+msgid "Show a notification when I change the repeat/shuffle mode"
+msgstr "Erakutsi jakinarazpena errepikapen/ausazko modua aldatzean"
+
+#: ../bin/src/ui_notificationssettingspage.h:413
 msgid "Show a notification when I change the volume"
-msgstr ""
+msgstr "Erakutsi jakinarazpena bolumena aldatzean"
 
-#: ../bin/src/ui_notificationssettingspage.h:401
+#: ../bin/src/ui_notificationssettingspage.h:408
 msgid "Show a popup from the system tray"
-msgstr ""
+msgstr "Erakutsi laster-leihoa sistema-erretiluan"
 
-#: ../bin/src/ui_notificationssettingspage.h:400
+#: ../bin/src/ui_notificationssettingspage.h:407
 msgid "Show a pretty OSD"
-msgstr ""
-
-#: ../bin/src/ui_globalsearchsettingspage.h:176
-msgid "Show a tooltip with more information about each result"
-msgstr ""
+msgstr "Erakutsi OSD itxurosoa"
 
 #: widgets/nowplayingwidget.cpp:113
 msgid "Show above status bar"
-msgstr ""
+msgstr "Erakutsi egoera-barraren gainean"
 
-#: ui/mainwindow.cpp:479
+#: ui/mainwindow.cpp:445
 msgid "Show all songs"
-msgstr ""
+msgstr "Erakutsi abesti guztiak"
 
 #: ../bin/src/ui_querysortpage.h:141
 msgid "Show all the songs"
-msgstr ""
+msgstr "Erakutsi abesti guztia"
 
 #: ../bin/src/ui_librarysettingspage.h:171
 msgid "Show cover art in library"
-msgstr ""
+msgstr "Erakutsi azalak bilduman"
 
 #: ../bin/src/ui_librarysettingspage.h:172
 msgid "Show dividers"
-msgstr ""
+msgstr "Erakutsi zatitzaileak"
 
-#: ui/albumcoverchoicecontroller.cpp:63 widgets/prettyimage.cpp:183
+#: ui/albumcoverchoicecontroller.cpp:64 widgets/prettyimage.cpp:183
 msgid "Show fullsize..."
-msgstr ""
+msgstr "Erakutsi tamaina osoan..."
 
-#: library/libraryview.cpp:275 ui/mainwindow.cpp:526
+#: library/libraryview.cpp:294 ui/mainwindow.cpp:492
 #: widgets/fileviewlist.cpp:52
 msgid "Show in file browser..."
-msgstr ""
+msgstr "Erakutsi fitxategi arakatzailean..."
 
-#: library/libraryview.cpp:279
+#: library/libraryview.cpp:298
 msgid "Show in various artists"
+msgstr "Erakutsi hainbat artista"
+
+#: moodbar/moodbarproxystyle.cpp:337
+msgid "Show moodbar"
 msgstr ""
 
-#: ui/mainwindow.cpp:480
+#: ui/mainwindow.cpp:446
 msgid "Show only duplicates"
-msgstr ""
+msgstr "Erakutsi bakarrik errepikapenak"
 
-#: ui/mainwindow.cpp:481
+#: ui/mainwindow.cpp:447
 msgid "Show only untagged"
+msgstr "Erakutsi etiketa gabeak bakarrik"
+
+#: ../bin/src/ui_globalsearchsettingspage.h:153
+msgid "Show search suggestions"
 msgstr ""
 
-#: ../bin/src/ui_globalsearchsettingspage.h:167
-msgid "Show the \"Search for anything\" box above the sidebar"
-msgstr ""
-
-#: ../bin/src/ui_lastfmsettingspage.h:151
+#: ../bin/src/ui_lastfmsettingspage.h:157
 msgid "Show the \"love\" and \"ban\" buttons"
-msgstr ""
+msgstr "Erakutsi \"oso gustuko\" eta \"galarazi\" botoiak"
 
-#: ../bin/src/ui_lastfmsettingspage.h:152
+#: ../bin/src/ui_lastfmsettingspage.h:158
 msgid "Show the scrobble button in the main window"
-msgstr ""
+msgstr "Erakutsi partekatu botoia leiho nagusian"
 
-#: ../bin/src/ui_behavioursettingspage.h:177
+#: ../bin/src/ui_behavioursettingspage.h:170
 msgid "Show tray icon"
+msgstr "Erakutsi erretilu-ikonoa"
+
+#: ../bin/src/ui_globalsearchsettingspage.h:152
+msgid "Show which sources are enabled and disabled"
 msgstr ""
 
 #: core/globalshortcuts.cpp:57
 msgid "Show/Hide"
-msgstr ""
+msgstr "Erakutsi/Ezkutatu"
 
 #: playlist/playlistsequence.cpp:173 ../bin/src/ui_playlistsequence.h:115
 msgid "Shuffle"
-msgstr ""
+msgstr "Ausazkoa"
 
-#: widgets/osd.cpp:297 ../bin/src/ui_playlistsequence.h:110
+#: widgets/osd.cpp:276 ../bin/src/ui_playlistsequence.h:110
 msgid "Shuffle albums"
-msgstr ""
+msgstr "Albumak nahastu"
 
-#: widgets/osd.cpp:295 ../bin/src/ui_playlistsequence.h:109
+#: widgets/osd.cpp:274 ../bin/src/ui_playlistsequence.h:109
 msgid "Shuffle all"
-msgstr ""
+msgstr "Dena nahastu"
 
-#: ../bin/src/ui_mainwindow.h:665
+#: ../bin/src/ui_mainwindow.h:673
 msgid "Shuffle playlist"
-msgstr ""
+msgstr "Erreprodukzio-zerrenda nahastu"
 
-#: widgets/osd.cpp:296 ../bin/src/ui_playlistsequence.h:108
+#: widgets/osd.cpp:275 ../bin/src/ui_playlistsequence.h:108
 msgid "Shuffle tracks in this album"
+msgstr "Album honetako pistak nahastu"
+
+#: ../bin/src/ui_podcastsettingspage.h:252
+msgid "Sign in"
 msgstr ""
 
-#: ../bin/src/ui_remotesettingspage.h:202 ../bin/src/ui_loginstatewidget.h:173
+#: ../bin/src/ui_loginstatewidget.h:173
 msgid "Sign out"
-msgstr ""
+msgstr "Saioa itxi"
 
 #: ../bin/src/ui_loginstatewidget.h:175
 msgid "Signing in..."
-msgstr ""
+msgstr "Saioa hasten..."
 
 #: songinfo/echonestsimilarartists.cpp:57
 msgid "Similar artists"
-msgstr ""
+msgstr "Antzeko artistak"
 
 #: ui/equalizer.cpp:123
 msgid "Ska"
-msgstr ""
+msgstr "Ska"
 
 #: core/commandlineoptions.cpp:149
 msgid "Skip backwards in playlist"
-msgstr ""
+msgstr "Saltatu atzerantz erreprodukzio-zerrendan"
 
-#: playlist/playlist.cpp:1127 ../bin/src/ui_edittagdialog.h:639
+#: playlist/playlist.cpp:1197 ../bin/src/ui_edittagdialog.h:639
 msgid "Skip count"
-msgstr ""
+msgstr "Saltatu kontagailua"
 
 #: core/commandlineoptions.cpp:150
 msgid "Skip forwards in playlist"
-msgstr ""
+msgstr "Saltatu aurrerantz erreprodukzio-zerrendan"
 
 #: widgets/nowplayingwidget.cpp:90
 msgid "Small album cover"
-msgstr ""
+msgstr "Albumaren azal txikia"
 
-#: widgets/fancytabwidget.cpp:648
+#: widgets/fancytabwidget.cpp:652
 msgid "Small sidebar"
-msgstr ""
+msgstr "Albo-barra txikia"
 
-#: smartplaylists/wizard.cpp:67
+#: smartplaylists/wizard.cpp:68
 msgid "Smart playlist"
-msgstr ""
+msgstr "Erreprodukzio-zerrenda adimenduna"
 
-#: library/librarymodel.cpp:1128
+#: library/librarymodel.cpp:1155
 msgid "Smart playlists"
-msgstr ""
+msgstr "Erreprodukzio-zerrenda adimendunak"
 
 #: ui/equalizer.cpp:122
 msgid "Soft"
-msgstr ""
+msgstr "Soft"
 
 #: ui/equalizer.cpp:124
 msgid "Soft Rock"
-msgstr ""
+msgstr "Soft Rock"
 
 #: ../bin/src/ui_songinfosettingspage.h:179
 msgid "Song Information"
-msgstr ""
+msgstr "Abestiaren informazioa"
 
-#: ui/mainwindow.cpp:253
+#: ui/mainwindow.cpp:232
 msgid "Song info"
-msgstr ""
+msgstr "Abes. infor."
 
 #: analyzers/sonogram.cpp:18
 msgid "Sonogram"
-msgstr ""
+msgstr "Sonograma"
 
 #: ../bin/src/ui_trackselectiondialog.h:205
 msgid "Sorry"
-msgstr ""
+msgstr "Barkatu"
 
 #: ../bin/src/ui_icecastfilterwidget.h:75
 msgid "Sort by genre (alphabetically)"
-msgstr ""
+msgstr "Ordenatu generoaren arabera (alfabetikoki)"
 
 #: ../bin/src/ui_icecastfilterwidget.h:76
 msgid "Sort by genre (by popularity)"
-msgstr ""
+msgstr "Ordenatu generoaren arabera (ospearen arabera)"
 
 #: ../bin/src/ui_icecastfilterwidget.h:77
 msgid "Sort by station name"
-msgstr ""
+msgstr "Ordenatu irrati izenaren arabera"
 
 #: ../bin/src/ui_querysortpage.h:139
 msgid "Sort songs by"
-msgstr ""
+msgstr "Ordenatu abestiak honen arabera"
 
 #: ../bin/src/ui_querysortpage.h:137
 msgid "Sorting"
-msgstr ""
+msgstr "Ordenatzen"
 
-#: playlist/playlist.cpp:1142
+#: playlist/playlist.cpp:1212
 msgid "Source"
-msgstr ""
+msgstr "Iturria"
 
-#: ../bin/src/ui_globalsearchsettingspage.h:169
+#: ../bin/src/ui_globalsearchsettingspage.h:146
 msgid "Sources"
-msgstr ""
+msgstr "Iturriak"
 
 #: ../bin/src/ui_transcodersettingspage.h:162
 msgid "Speex"
-msgstr ""
+msgstr "Speex"
 
 #: ../bin/src/ui_spotifysettingspage.h:208
 msgid "Spotify"
-msgstr ""
+msgstr "Spotify"
 
-#: internet/spotifyservice.cpp:179
+#: internet/spotifyservice.cpp:182
 msgid "Spotify login error"
-msgstr ""
+msgstr "Spotify-ko saio-hasiera errorea"
 
 #: ../bin/src/ui_spotifysettingspage.h:213
 msgid "Spotify plugin"
-msgstr ""
+msgstr "Spotify plugina"
 
-#: internet/spotifyblobdownloader.cpp:58
+#: internet/spotifyblobdownloader.cpp:59
 msgid "Spotify plugin not installed"
-msgstr ""
+msgstr "Spotify plugina ez dago instalatuta"
 
 #: ../bin/src/ui_transcoderoptionsmp3.h:201
 msgid "Standard"
-msgstr ""
+msgstr "Estandarra"
 
-#: internet/spotifyservice.cpp:343
+#: internet/spotifyservice.cpp:350
 msgid "Starred"
-msgstr ""
+msgstr "Izarduna(k)"
 
 #: core/commandlineoptions.cpp:145
 msgid "Start the playlist currently playing"
-msgstr ""
+msgstr "Hasi oraingo erreprodukzio-zerrenda"
 
 #: transcoder/transcodedialog.cpp:85
 msgid "Start transcoding"
+msgstr "Hasi transkodetzen"
+
+#: internet/groovesharkservice.cpp:581 internet/spotifyservice.cpp:344
+msgid ""
+"Start typing something on the search box above to fill this search results "
+"list"
 msgstr ""
 
-#: internet/groovesharksearchplaylisttype.cpp:36
-#: internet/spotifysearchplaylisttype.cpp:36
-#, qt-format
-msgid "Start typing in the search box above to find music on %1."
-msgstr ""
-
-#: transcoder/transcoder.cpp:399
+#: transcoder/transcoder.cpp:401
 #, qt-format
 msgid "Starting %1"
-msgstr ""
+msgstr "%1 hasten"
 
-#: internet/magnatunedownloaddialog.cpp:119
+#: internet/magnatunedownloaddialog.cpp:120
 msgid "Starting..."
-msgstr ""
+msgstr "Hasten..."
 
-#: internet/groovesharkservice.cpp:561
+#: internet/groovesharkservice.cpp:609
 msgid "Stations"
-msgstr ""
+msgstr "Irratiak"
 
-#: core/globalshortcuts.cpp:48 ../bin/src/ui_mainwindow.h:638
+#: core/globalshortcuts.cpp:48 ../bin/src/ui_mainwindow.h:646
 #: wiimotedev/wiimotesettingspage.cpp:102
 msgid "Stop"
-msgstr ""
+msgstr "Gelditu"
 
 #: wiimotedev/wiimotesettingspage.cpp:110
 msgid "Stop after"
-msgstr ""
+msgstr "Ondoren gelditu"
 
-#: ui/mainwindow.cpp:508 ../bin/src/ui_mainwindow.h:644
+#: ui/mainwindow.cpp:474 ../bin/src/ui_mainwindow.h:652
 msgid "Stop after this track"
-msgstr ""
+msgstr "Gelditu pista honen ondoren"
 
 #: core/commandlineoptions.cpp:148
 msgid "Stop playback"
-msgstr ""
+msgstr "Gelditu erreprodukzioa"
 
 #: core/globalshortcuts.cpp:49
 msgid "Stop playing after current track"
-msgstr ""
+msgstr "Gelditu oraingo pistaren ondoren"
 
-#: widgets/osd.cpp:187
+#: widgets/osd.cpp:166
 msgid "Stopped"
-msgstr ""
+msgstr "Geldituta"
 
-#: core/song.cpp:345
+#: core/song.cpp:330
 msgid "Stream"
-msgstr ""
+msgstr "Jarioa"
 
 #: ../bin/src/ui_magnatunesettingspage.h:160
 msgid "Streaming membership"
-msgstr ""
+msgstr "Streaming bazkidetza"
 
-#: internet/groovesharkservice.cpp:584
+#: internet/groovesharkservice.cpp:640
 msgid "Subscribed playlists"
+msgstr "Harpidetutako erreprodukzio-zerrenda"
+
+#: ../bin/src/ui_podcastinfowidget.h:196
+msgid "Subscribers"
 msgstr ""
 
-#: transcoder/transcoder.cpp:198
+#: transcoder/transcoder.cpp:200
 #, qt-format
 msgid "Successfully written %1"
-msgstr ""
+msgstr "%1 ondo idatzi da"
 
 #: ui/trackselectiondialog.cpp:171
 msgid "Suggested tags"
-msgstr ""
+msgstr "Etiketa gomendatuak"
 
 #: ../bin/src/ui_edittagdialog.h:651
-#: ../bin/src/ui_notificationssettingspage.h:413
+#: ../bin/src/ui_notificationssettingspage.h:420
 msgid "Summary"
-msgstr ""
+msgstr "Laburpena"
 
 #: analyzers/analyzercontainer.cpp:65
+#: visualisations/visualisationcontainer.cpp:110
 #, qt-format
 msgid "Super high (%1 fps)"
-msgstr ""
+msgstr "Oso altua (%1 fps)"
 
-#: visualisations/visualisationcontainer.cpp:103
-msgid "Super high (60 fps)"
+#: visualisations/visualisationcontainer.cpp:120
+msgid "Super high (2048x2048)"
 msgstr ""
 
 #: ../bin/src/ui_deviceproperties.h:374
 msgid "Supported formats"
-msgstr ""
+msgstr "Onartutako formatuak"
 
-#: globalsearch/globalsearchtooltip.cpp:53
-msgid "Switch provider"
-msgstr ""
-
-#: internet/spotifyservice.cpp:515
+#: internet/spotifyservice.cpp:548
 msgid "Syncing Spotify inbox"
-msgstr ""
+msgstr "Spotify-ko sarrera-ontzia sinkronizatzen"
 
-#: internet/spotifyservice.cpp:510
+#: internet/spotifyservice.cpp:543
 msgid "Syncing Spotify playlist"
-msgstr ""
+msgstr "Spotify-ko erreprodukzio-zerrenda sinkronizatzen"
 
-#: internet/spotifyservice.cpp:519
+#: internet/spotifyservice.cpp:552
 msgid "Syncing Spotify starred tracks"
+msgstr "Spotify-ko pista izardunak sinkronizatzen"
+
+#: moodbar/moodbarrenderer.cpp:159
+msgid "System colors"
 msgstr ""
 
-#: widgets/fancytabwidget.cpp:650
+#: widgets/fancytabwidget.cpp:654
 msgid "Tabs on top"
-msgstr ""
+msgstr "Fitxak goian"
 
 #: ../bin/src/ui_lastfmstationdialog.h:97
 msgid "Tag"
-msgstr ""
+msgstr "Etiketa"
 
 #: ../bin/src/ui_trackselectiondialog.h:204
 msgid "Tag fetcher"
-msgstr ""
+msgstr "Etiketa eskuratzailea"
 
-#: internet/lastfmservice.cpp:195
+#: internet/lastfmservice.cpp:211
 msgid "Tag radio"
-msgstr ""
+msgstr "Etiketa-irratia"
 
 #: ../bin/src/ui_transcoderoptionsvorbis.h:204
 msgid "Target bitrate"
-msgstr ""
+msgstr "Helburu bit-tasa"
 
 #: ui/equalizer.cpp:125
 msgid "Techno"
-msgstr ""
+msgstr "Techno"
 
-#: ../bin/src/ui_notificationssettingspage.h:425
+#: ../bin/src/ui_notificationssettingspage.h:432
 msgid "Text options"
-msgstr ""
+msgstr "Testu-aukerak"
 
 #: ui/about.cpp:69
 msgid "Thanks to"
-msgstr ""
+msgstr "Eskerrak hauei"
 
 #: ui/globalshortcutssettingspage.cpp:175
 #, qt-format
 msgid "The \"%1\" command could not be started."
-msgstr ""
+msgstr "\"%1\" komandoa ezin izan da hasi."
 
-#: internet/magnatunedownloaddialog.cpp:89
+#: ../bin/src/ui_appearancesettingspage.h:238
+msgid "The album cover of the currently playing song"
+msgstr "Orain erreproduzitzen ari den kantaren albumaren azala"
+
+#: internet/magnatunedownloaddialog.cpp:90
 #, qt-format
 msgid "The directory %1 is not valid"
-msgstr ""
+msgstr "%1 direktorioa ez da baliagarria"
 
-#: playlist/playlistmanager.cpp:151 playlist/playlistmanager.cpp:169
+#: playlist/playlistmanager.cpp:157 playlist/playlistmanager.cpp:175
 #, qt-format
 msgid "The playlist '%1' was empty or could not be loaded."
-msgstr ""
+msgstr "'%1' erreprodukzio-zerrenda hutsik zegoen edo ezin izan da kargatu."
 
 #: smartplaylists/searchtermwidget.cpp:322
 msgid "The second value must be greater than the first one!"
-msgstr ""
+msgstr "Bigarren balioak lehenak baino handiagoa izan behar du!"
 
 #: ui/coverfromurldialog.cpp:71
 msgid "The site you requested does not exist!"
-msgstr ""
+msgstr "Adierazitako helbidea ez da existitzen!"
 
 #: ui/coverfromurldialog.cpp:82
 msgid "The site you requested is not an image!"
-msgstr ""
+msgstr "Adierazitako helbidea ez da irudi bat"
 
-#: ui/mainwindow.cpp:2047
+#: ui/mainwindow.cpp:1991
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
+msgstr "Clementine-ren bertsio berriak bildumaren berreskaneo osoa egin behar du, ondorengo ezaugarri berri hauek direla-eta"
+
+#: library/libraryview.cpp:424
+msgid "There are other songs in this album"
+msgstr "Album honetan beste abesti batzuk daude"
+
+#: podcasts/gpoddersearchpage.cpp:77 podcasts/gpoddertoptagsmodel.cpp:110
+#: podcasts/gpoddertoptagspage.cpp:77
+msgid "There was a problem communicating with gpodder.net"
 msgstr ""
 
-#: internet/magnatunedownloaddialog.cpp:157
+#: internet/magnatunedownloaddialog.cpp:158
 msgid "There was a problem fetching the metadata from Magnatune"
+msgstr "Arazo bat egon da Magnatune-ko metadatuak eskuratzean"
+
+#: podcasts/itunessearchpage.cpp:76
+msgid "There was a problem parsing the response from the iTunes Store"
 msgstr ""
 
 #: ui/organiseerrordialog.cpp:56
 msgid ""
 "There were problems copying some songs.  The following files could not be "
 "copied:"
-msgstr ""
+msgstr "Arazoak egon dira abesti batzuk kopiatzean. Hurrengo fitxategiak ezin izan dira kopiatu:"
 
 #: ui/organiseerrordialog.cpp:61
 msgid ""
 "There were problems deleting some songs.  The following files could not be "
 "deleted:"
-msgstr ""
+msgstr "Arazoak egon dira abesti batzuk ezabatzean. Hurrengo fitxategiak ezin izan dira ezabatu:"
 
-#: library/libraryview.cpp:461 ui/mainwindow.cpp:1859 widgets/fileview.cpp:187
+#: library/libraryview.cpp:504 ui/mainwindow.cpp:1809 widgets/fileview.cpp:187
 msgid ""
 "These files will be deleted from disk, are you sure you want to continue?"
-msgstr ""
+msgstr "Fitxategi hauek diskotik ezabatuko dira, jarraitu nahi duzu?"
 
-#: devices/deviceview.cpp:394
+#: devices/deviceview.cpp:389
 msgid ""
 "These files will be deleted from the device, are you sure you want to "
 "continue?"
-msgstr ""
+msgstr "Fitxategi hauek gailutik ezabatuko dira, jarraitu nahi duzu?"
 
 #: ../bin/src/ui_librarysettingspage.h:158
 msgid "These folders will be scanned for music to make up your library"
-msgstr ""
+msgstr "Karpeta hauetan bilatuko da musika zure bilduma osatzeko"
 
 #: ../bin/src/ui_transcodersettingspage.h:158
 msgid ""
 "These settings are used in the \"Transcode Music\" dialog, and when "
 "converting music before copying it to a device."
-msgstr ""
+msgstr "Ezarpen hauek \"Transkodetu musika\" elkarrizketan eta musika gailu batera kopiatu baino lehen bihurtzeko erabiltzen dira."
 
 #: ../bin/src/ui_groupbydialog.h:151
 msgid "Third level"
-msgstr ""
+msgstr "Hirugarren maila"
 
-#: internet/jamendoservice.cpp:167
+#: internet/jamendoservice.cpp:170
 msgid ""
 "This action will create a database which could be as big as 150 MB.\n"
 "Do you want to continue anyway?"
-msgstr ""
+msgstr "Ekintza honek 150 MB-erainokoa izan daitekeen datu-basea sortuko du. \n Jarraitu nahi duzu?"
 
-#: internet/magnatunedownloaddialog.cpp:174
+#: internet/magnatunedownloaddialog.cpp:175
 msgid "This album is not available in the requested format"
-msgstr ""
+msgstr "Album hau ez dago adierazitako formatuan"
 
 #: ../bin/src/ui_deviceproperties.h:381
 msgid ""
 "This device must be connected and opened before Clementine can see what file"
 " formats it supports."
-msgstr ""
+msgstr "Gailu hau konektatu eta ireki behar da zein fitxategi-formatu onartzen dituen ikusi ahal izateko"
 
 #: ../bin/src/ui_deviceproperties.h:375
 msgid "This device supports the following file formats:"
-msgstr ""
+msgstr "Gailu honek hurrengo fitxategi-formatuak onartzen ditu:"
 
-#: devices/devicemanager.cpp:569 devices/devicemanager.cpp:577
+#: devices/devicemanager.cpp:582 devices/devicemanager.cpp:590
 msgid "This device will not work properly"
-msgstr ""
+msgstr "Gailu hau ez da era egokian ibiliko"
 
-#: devices/devicemanager.cpp:570
+#: devices/devicemanager.cpp:583
 msgid ""
 "This is an MTP device, but you compiled Clementine without libmtp support."
-msgstr ""
+msgstr "Hau MTP gailua da, baina Clementine libmtp euskarri gabe konpilatua dago."
 
-#: devices/devicemanager.cpp:578
+#: devices/devicemanager.cpp:591
 msgid "This is an iPod, but you compiled Clementine without libgpod support."
-msgstr ""
+msgstr "Hau iPod bat da, baina Clementine libgpod euskarri gabe konpilatua dago."
 
-#: devices/devicemanager.cpp:327
+#: devices/devicemanager.cpp:340
 msgid ""
 "This is the first time you have connected this device.  Clementine will now "
 "scan the device to find music files - this may take some time."
-msgstr ""
+msgstr "Gailu hau konektatzen duzun lehen aldia da. Clementine-k gailua eskaneatuko du musika fitxategiak aurkitzeko - honek denbora pixka bat har dezake."
 
 #: playlist/playlisttabbar.cpp:159
 msgid ""
 "This playlist will be removed; the action can't be undone. Are you sure you "
 "want to continue?"
-msgstr ""
+msgstr "Erreprodukzio-zerrenda hau ezabatuko da; ekintza ezin da desegin. Jarraitu nahi duzu?"
 
-#: internet/lastfmservice.cpp:440
+#: internet/lastfmservice.cpp:439
 msgid "This stream is for paid subscribers only"
-msgstr ""
+msgstr "Jario hau ordainpeko harpidedunentzat da bakarrik"
 
-#: devices/devicemanager.cpp:590
+#: devices/devicemanager.cpp:603
 #, qt-format
 msgid "This type of device is not supported: %1"
-msgstr ""
+msgstr "Gailu mota hau ez da onartzen :%1"
 
 #: ../bin/src/ui_songinfosettingspage.h:185
 msgid "Timeout"
-msgstr ""
+msgstr "Denbora-muga"
 
-#: devices/ilister.cpp:98
+#: devices/ilister.cpp:120
 msgid "Timezone"
-msgstr ""
+msgstr "Ordu-zona"
 
-#: playlist/playlist.cpp:1114 ui/organisedialog.cpp:54
+#: playlist/playlist.cpp:1184 ui/organisedialog.cpp:54
 #: ui/qtsystemtrayicon.cpp:248 ../bin/src/ui_about.h:142
 #: ../bin/src/ui_edittagdialog.h:652 ../bin/src/ui_trackselectiondialog.h:211
 msgid "Title"
-msgstr ""
+msgstr "Izenburua"
 
-#: internet/groovesharkservice.cpp:955
+#: internet/groovesharkservice.cpp:1043
 msgid ""
 "To start Grooveshark radio, you should first listen to a few other "
 "Grooveshark songs"
-msgstr ""
+msgstr "Grooveshark irratia hasteko, aurretik beste Grooveshark abesti batzuk entzun behar dituzu"
 
-#: core/utilities.cpp:109
+#: core/utilities.cpp:120
 msgid "Today"
-msgstr ""
+msgstr "Gaur"
 
 #: core/globalshortcuts.cpp:59
 msgid "Toggle Pretty OSD"
-msgstr ""
+msgstr "Txandakatu OSD itxurosoa"
 
-#: visualisations/visualisationcontainer.cpp:94
+#: visualisations/visualisationcontainer.cpp:101
 msgid "Toggle fullscreen"
-msgstr ""
+msgstr "Txandakatu pantaila-osoa"
 
-#: ui/mainwindow.cpp:1346
+#: ui/mainwindow.cpp:1298
 msgid "Toggle queue status"
-msgstr ""
+msgstr "Txandakatu ilara-egoera"
 
-#: ../bin/src/ui_mainwindow.h:703
+#: ../bin/src/ui_mainwindow.h:711
 msgid "Toggle scrobbling"
-msgstr ""
+msgstr "Txandakatu partekatzea"
 
 #: core/commandlineoptions.cpp:162
 msgid "Toggle visibility for the pretty on-screen-display"
+msgstr "Txandakatu pantailako bistaratze itxurosoaren ikuspena"
+
+#: podcasts/podcasturlloader.cpp:114
+msgid "Too many redirects"
+msgstr ""
+
+#: internet/spotifyservice.cpp:358
+msgid "Top tracks"
 msgstr ""
 
 #: covers/coversearchstatisticsdialog.cpp:71
 msgid "Total bytes transferred"
-msgstr ""
+msgstr "Transferituriko byte-ak guztira"
 
 #: covers/coversearchstatisticsdialog.cpp:68
 msgid "Total network requests made"
-msgstr ""
+msgstr "Eginiko sareko eskaerak guztira"
 
-#: playlist/playlist.cpp:1118 ui/organisedialog.cpp:60
+#: playlist/playlist.cpp:1188 ui/organisedialog.cpp:60
 #: ../bin/src/ui_edittagdialog.h:653 ../bin/src/ui_trackselectiondialog.h:213
 msgid "Track"
-msgstr ""
+msgstr "Pista"
 
-#: ../bin/src/ui_transcodedialog.h:201 ../bin/src/ui_mainwindow.h:682
+#: ../bin/src/ui_transcodedialog.h:201 ../bin/src/ui_mainwindow.h:690
 msgid "Transcode Music"
-msgstr ""
+msgstr "Transkodetu musika"
 
 #: ../bin/src/ui_transcodelogdialog.h:63
 msgid "Transcoder Log"
-msgstr ""
+msgstr "Transkodetzearen loga"
 
 #: ../bin/src/ui_transcodersettingspage.h:157
 msgid "Transcoding"
-msgstr ""
+msgstr "Transkodeketa"
 
-#: transcoder/transcoder.cpp:307
+#: transcoder/transcoder.cpp:309
 #, qt-format
 msgid "Transcoding %1 files using %2 threads"
-msgstr ""
+msgstr "%1 fitxategi %2 hari erabiliz transkodetzen"
 
 #: ../bin/src/ui_transcoderoptionsdialog.h:54
 msgid "Transcoding options"
-msgstr ""
+msgstr "Transkodetze-aukerak"
 
-#: core/song.cpp:342
+#: core/song.cpp:327
 msgid "TrueAudio"
-msgstr ""
+msgstr "TrueAudio"
 
 #: analyzers/turbine.cpp:15
 msgid "Turbine"
-msgstr ""
+msgstr "Turbina"
 
 #: ../bin/src/ui_dynamicplaylistcontrols.h:113
 msgid "Turn off"
-msgstr ""
+msgstr "Itzali"
 
-#: devices/giolister.cpp:159
+#: devices/giolister.cpp:161
 msgid "URI"
-msgstr ""
+msgstr "URI"
 
 #: core/commandlineoptions.cpp:144
 msgid "URL(s)"
-msgstr ""
+msgstr "URLa(k)"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:228
 msgid "Ultra wide band (UWB)"
-msgstr ""
+msgstr "Banda ultra zabala (UWB)"
 
-#: internet/magnatunedownloaddialog.cpp:143
+#: internet/magnatunedownloaddialog.cpp:144
 #, qt-format
 msgid "Unable to download %1 (%2)"
-msgstr ""
+msgstr "Ezin izan da %1 deskargatu (%2)"
 
-#: core/song.cpp:349 globalsearch/globalsearchitemdelegate.cpp:166
-#: globalsearch/globalsearchitemdelegate.cpp:173 library/librarymodel.cpp:297
-#: library/librarymodel.cpp:302 library/librarymodel.cpp:926
-#: playlist/playlistdelegates.cpp:309 playlist/playlistmanager.cpp:381
-#: playlist/playlistmanager.cpp:384 ui/albumcoverchoicecontroller.cpp:111
-#: ui/edittagdialog.cpp:420 ui/edittagdialog.cpp:461
+#: core/song.cpp:334 library/librarymodel.cpp:296 library/librarymodel.cpp:301
+#: library/librarymodel.cpp:953 playlist/playlistdelegates.cpp:309
+#: playlist/playlistmanager.cpp:391 playlist/playlistmanager.cpp:394
+#: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:416
+#: ui/edittagdialog.cpp:457
 msgid "Unknown"
+msgstr "Ezezaguna"
+
+#: podcasts/podcasturlloader.cpp:196
+msgid "Unknown content-type"
 msgstr ""
 
-#: internet/digitallyimportedclient.cpp:68 internet/lastfmservice.cpp:453
+#: internet/digitallyimportedclient.cpp:69 internet/lastfmservice.cpp:452
 msgid "Unknown error"
-msgstr ""
+msgstr "Errore ezezaguna"
 
-#: ui/albumcoverchoicecontroller.cpp:62
+#: ui/albumcoverchoicecontroller.cpp:63
 msgid "Unset cover"
+msgstr "Ezarri gabeko azala"
+
+#: podcasts/addpodcastdialog.cpp:61 podcasts/podcastservice.cpp:277
+msgid "Unsubscribe"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:1099
+#: songinfo/songkickconcerts.cpp:177
+msgid "Upcoming Concerts"
+msgstr ""
+
+#: internet/groovesharkservice.cpp:1225
 msgid "Update Grooveshark playlist"
+msgstr "Grooveshark erreprodukzio-zerrenda eguneratu"
+
+#: podcasts/podcastservice.cpp:260
+msgid "Update all podcasts"
 msgstr ""
 
-#: ../bin/src/ui_mainwindow.h:694
+#: ../bin/src/ui_mainwindow.h:702
 msgid "Update changed library folders"
-msgstr ""
+msgstr "Eguneratu bildumako aldatutako karpetak"
 
 #: ../bin/src/ui_librarysettingspage.h:162
 msgid "Update the library when Clementine starts"
+msgstr "Eguneratu bilduma Clementine abiaraztean"
+
+#: podcasts/podcastservice.cpp:268
+msgid "Update this podcast"
 msgstr ""
 
-#: library/librarywatcher.cpp:89
+#: ../bin/src/ui_podcastsettingspage.h:227
+msgid "Updating"
+msgstr ""
+
+#: library/librarywatcher.cpp:92
 #, qt-format
 msgid "Updating %1"
-msgstr ""
+msgstr "%1 eguneratzen"
 
-#: devices/deviceview.cpp:102
+#: devices/deviceview.cpp:103
 #, qt-format
 msgid "Updating %1%..."
-msgstr ""
+msgstr "%1 eguneratzen..."
 
-#: library/librarywatcher.cpp:87
+#: library/librarywatcher.cpp:90
 msgid "Updating library"
-msgstr ""
+msgstr "Bilduma eguneratzen"
 
 #: core/commandlineoptions.cpp:144
 msgid "Usage"
+msgstr "Erabilera"
+
+#: ../bin/src/ui_lastfmsettingspage.h:159
+msgid "Use Album Artist tag when available"
 msgstr ""
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:168
 msgid "Use Gnome's shortcut keys"
-msgstr ""
+msgstr "Erabili Gnome-ren laster-teklak"
 
-#: ../bin/src/ui_playbacksettingspage.h:267
+#: ../bin/src/ui_playbacksettingspage.h:274
 msgid "Use Replay Gain metadata if it is available"
-msgstr ""
+msgstr "Erabili errepikatze-irabaziaren metadatuak eskuragarri daudenean"
 
 #: ../bin/src/ui_wiimotesettingspage.h:189
 msgid "Use Wii Remote"
-msgstr ""
+msgstr "Erabili Wii-aren urruneko kontrola"
 
-#: ../bin/src/ui_appearancesettingspage.h:122
+#: ../bin/src/ui_appearancesettingspage.h:230
 msgid "Use a custom color set"
-msgstr ""
+msgstr "Erabili kolore-multzo pertsonalizatua"
 
-#: ../bin/src/ui_notificationssettingspage.h:410
+#: ../bin/src/ui_notificationssettingspage.h:417
 msgid "Use a custom message for notifications"
-msgstr ""
+msgstr "Erabili mezu pertsonalizatua jakinarazpenetan"
 
 #: ../bin/src/ui_networkproxysettingspage.h:167
 msgid "Use authentication"
-msgstr ""
+msgstr "Erabili autentifikazioa"
 
 #: ../bin/src/ui_transcoderoptionsvorbis.h:203
 msgid "Use bitrate management engine"
-msgstr ""
+msgstr "Erabili bit-tasaren kudeaketa motorea"
 
 #: ../bin/src/ui_wizardfinishpage.h:85
 msgid "Use dynamic mode"
-msgstr ""
+msgstr "Erabili modu dinamikoa"
 
 #: ../bin/src/ui_wiimotesettingspage.h:188
 msgid "Use notifications to report Wii Remote status"
-msgstr ""
+msgstr "Erabili jakinarazpenak Wii-ko urruneko kontrolaren egoera jakinarazteko"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:139
 msgid "Use temporal noise shaping"
-msgstr ""
+msgstr "Erabili zarata karrakaketa behin-behinekoa"
 
-#: ../bin/src/ui_behavioursettingspage.h:183
+#: ../bin/src/ui_behavioursettingspage.h:175
 msgid "Use the system default"
-msgstr ""
+msgstr "Erabili sistemako lehenetsia"
 
-#: ../bin/src/ui_appearancesettingspage.h:121
+#: ../bin/src/ui_appearancesettingspage.h:229
 msgid "Use the system default color set"
-msgstr ""
+msgstr "Erabili sistemako kolore-multzo lehenetsia"
 
 #: ../bin/src/ui_networkproxysettingspage.h:158
 msgid "Use the system proxy settings"
-msgstr ""
+msgstr "Erabili sistemaren proxy-ezarpenak"
 
 #: ../bin/src/ui_spotifysettingspage.h:219
 msgid "Use volume normalisation"
-msgstr ""
+msgstr "Erabili bolumenaren normalizazioa"
 
 #: widgets/freespacebar.cpp:47
 msgid "Used"
-msgstr ""
+msgstr "Erabilia"
 
-#: internet/groovesharkservice.cpp:409
+#: internet/groovesharkservice.cpp:413
 #, qt-format
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
-msgstr ""
+msgstr "%1 erabiltzaileak ez du Grooveshark Anywhere konturik"
 
-#: ui/settingsdialog.cpp:129
+#: ui/settingsdialog.cpp:126
 msgid "User interface"
-msgstr ""
+msgstr "Erabiltzaile-interfazea"
 
 #: ../bin/src/ui_groovesharksettingspage.h:114
 #: ../bin/src/ui_magnatunesettingspage.h:163
 #: ../bin/src/ui_spotifysettingspage.h:210
+#: ../bin/src/ui_podcastsettingspage.h:251
 #: ../bin/src/ui_networkproxysettingspage.h:168
 msgid "Username"
-msgstr ""
+msgstr "Erabiltzaile-izena"
 
-#: ../bin/src/ui_behavioursettingspage.h:191
+#: ../bin/src/ui_behavioursettingspage.h:183
 msgid "Using the menu to add a song will..."
-msgstr ""
+msgstr "Abesti bat gehitzeko menua erabiltzeak ondorengoa egingo du..."
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:142
 #: ../bin/src/ui_magnatunesettingspage.h:173
 msgid "VBR MP3"
-msgstr ""
+msgstr "VBR MP3"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:232
 msgid "Variable bit rate"
-msgstr ""
+msgstr "Bit-tasa aldakorra"
 
-#: globalsearch/globalsearchitemdelegate.cpp:162 library/librarymodel.cpp:234
-#: playlist/playlistmanager.cpp:396 ui/albumcovermanager.cpp:264
+#: globalsearch/globalsearchmodel.cpp:103 library/librarymodel.cpp:233
+#: playlist/playlistmanager.cpp:406 ui/albumcovermanager.cpp:245
 msgid "Various artists"
-msgstr ""
+msgstr "Hainbat artista"
 
 #: ui/about.cpp:34
 #, qt-format
 msgid "Version %1"
-msgstr ""
+msgstr "%1 bertsioa"
 
 #: ../bin/src/ui_albumcovermanager.h:154
 msgid "View"
-msgstr ""
+msgstr "Ikusi"
 
 #: ../bin/src/ui_visualisationselector.h:109
 msgid "Visualization mode"
-msgstr ""
+msgstr "Bistaratze-modua"
 
-#: ../bin/src/ui_mainwindow.h:695 ui/dbusscreensaver.cpp:35
+#: ../bin/src/ui_mainwindow.h:703 ui/dbusscreensaver.cpp:35
 msgid "Visualizations"
-msgstr ""
+msgstr "Bistaratzeak"
 
-#: ../bin/src/ui_visualisationoverlay.h:181
+#: ../bin/src/ui_visualisationoverlay.h:185
 msgid "Visualizations Settings"
-msgstr ""
+msgstr "Bistarate-ezarpenak"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:233
 msgid "Voice activity detection"
-msgstr ""
+msgstr "Ahotsaren jardueraren detekzioa"
 
-#: widgets/osd.cpp:201
+#: widgets/osd.cpp:180
 #, qt-format
 msgid "Volume %1%"
-msgstr ""
+msgstr "%1 bolumena"
 
 #: devices/wmdmlister.cpp:369
 msgid "Volume name"
-msgstr ""
+msgstr "Bolumenaren izena"
 
 #: ../bin/src/ui_transcodersettingspage.h:160
 msgid "Vorbis"
-msgstr ""
+msgstr "Vorbis"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:141
 #: ../bin/src/ui_magnatunesettingspage.h:172
 msgid "WAV"
-msgstr ""
+msgstr "WAV"
 
 #: ../bin/src/ui_transcodersettingspage.h:164
 msgid "WMA"
-msgstr ""
+msgstr "WMA"
 
-#: core/song.cpp:341
+#: core/song.cpp:326
 msgid "Wav"
+msgstr "Wav"
+
+#: ../bin/src/ui_podcastinfowidget.h:193
+msgid "Website"
 msgstr ""
 
 #: smartplaylists/searchterm.cpp:302
 msgid "Weeks"
-msgstr ""
+msgstr "Aste"
 
-#: ../bin/src/ui_behavioursettingspage.h:186
+#: ../bin/src/ui_behavioursettingspage.h:178
 msgid "When Clementine starts"
-msgstr ""
+msgstr "Clementine abiaraztean"
 
 #: ../bin/src/ui_librarysettingspage.h:166
 msgid ""
 "When looking for album art Clementine will first look for picture files that contain one of these words.\n"
 "If there are no matches then it will use the largest image in the directory."
+msgstr "Albumetako azalen bilatzean, Clementine-k aurretik honako hitzetako bat duten irudi fitxategiak begiratuko ditu.\n Ez badago bat-etortzerik, direktorioko irudirik handiena erabiliko du orduan."
+
+#: ../bin/src/ui_globalsearchsettingspage.h:151
+msgid "When the list is empty..."
 msgstr ""
 
-#: devices/ilister.cpp:99
-msgid "WiFi MAC Address"
+#: ../bin/src/ui_globalsearchview.h:212
+msgid "Why not try..."
 msgstr ""
+
+#: devices/ilister.cpp:121
+msgid "WiFi MAC Address"
+msgstr "Wifi MAC helbidea"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:229
 msgid "Wide band (WB)"
-msgstr ""
+msgstr "Banda zabala (WB)"
 
-#: widgets/osd.cpp:260
+#: widgets/osd.cpp:239
 #, qt-format
 msgid "Wii Remote %1: actived"
-msgstr ""
+msgstr "%1 Wii urruneko kontrola: aktibaturik"
 
-#: widgets/osd.cpp:270
+#: widgets/osd.cpp:249
 #, qt-format
 msgid "Wii Remote %1: connected"
-msgstr ""
+msgstr "%1 Wii urruneko kontrola: konektaturik"
 
-#: widgets/osd.cpp:285
+#: widgets/osd.cpp:264
 #, qt-format
 msgid "Wii Remote %1: critical battery (%2%) "
-msgstr ""
+msgstr "%1 Wii urruneko kontrola: bateria oso gutxi (% %2) "
 
-#: widgets/osd.cpp:265
+#: widgets/osd.cpp:244
 #, qt-format
 msgid "Wii Remote %1: disactived"
-msgstr ""
+msgstr "%1 Wii urruneko kontrola: desaktibaturik"
 
-#: widgets/osd.cpp:275
+#: widgets/osd.cpp:254
 #, qt-format
 msgid "Wii Remote %1: disconnected"
-msgstr ""
+msgstr "%1 Wii urruneko kontrola: deskonektaturik"
 
-#: widgets/osd.cpp:280
+#: widgets/osd.cpp:259
 #, qt-format
 msgid "Wii Remote %1: low battery (%2%)"
-msgstr ""
+msgstr "%1 Wii urruneko kontrola: bateria gutxi (% %2)"
 
 #: ../bin/src/ui_wiimotesettingspage.h:182
 msgid "Wiimotedev"
-msgstr ""
+msgstr "Wiimotedev"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:181
 msgid "Windows Media 128k"
-msgstr ""
+msgstr "Windows Media 128k"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:172
 msgid "Windows Media 40k"
-msgstr ""
+msgstr "Windows Media 40k"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:180
 msgid "Windows Media 64k"
-msgstr ""
+msgstr "Windows Media 64k"
 
-#: core/song.cpp:332
+#: core/song.cpp:317
 msgid "Windows Media audio"
-msgstr ""
+msgstr "Windows Media audio"
 
-#: ui/mainwindow.cpp:2052
+#: library/libraryview.cpp:425
+msgid ""
+"Would you like to move the other songs in this album to Various Artists as "
+"well?"
+msgstr "Beste abestiak ere Hainbat artistara mugitzea nahi duzu?"
+
+#: ui/mainwindow.cpp:1996
 msgid "Would you like to run a full rescan right now?"
-msgstr ""
+msgstr "Berreskaneo osoa orain egitea nahi duzu?"
 
-#: playlist/playlist.cpp:1120 ui/organisedialog.cpp:63
+#: playlist/playlist.cpp:1190 ui/organisedialog.cpp:63
 #: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:148
 #: ../bin/src/ui_groupbydialog.h:161 ../bin/src/ui_edittagdialog.h:657
 #: ../bin/src/ui_trackselectiondialog.h:212
 msgid "Year"
-msgstr ""
+msgstr "Urtea"
 
 #: ../bin/src/ui_groupbydialog.h:136 ../bin/src/ui_groupbydialog.h:149
 #: ../bin/src/ui_groupbydialog.h:162
 msgid "Year - Album"
-msgstr ""
+msgstr "Urtea - Albuma"
 
 #: smartplaylists/searchterm.cpp:304
 msgid "Years"
-msgstr ""
+msgstr "Urte"
 
-#: core/utilities.cpp:111
+#: core/utilities.cpp:122
 msgid "Yesterday"
-msgstr ""
+msgstr "Atzo"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:132
 msgid "You are about to download the following albums"
-msgstr ""
+msgstr "Ondorengo albumak deskargatzekotan zaude"
 
 #: ../bin/src/ui_loginstatewidget.h:172
 msgid "You are not signed in."
-msgstr ""
+msgstr "Ez duzu saioa hasi"
 
 #: widgets/loginstatewidget.cpp:75
 #, qt-format
 msgid "You are signed in as %1."
-msgstr ""
+msgstr "%1 modura hasi duzu saioa"
 
 #: widgets/loginstatewidget.cpp:73
 msgid "You are signed in."
-msgstr ""
+msgstr "Saioa hasi duzu."
 
 #: ../bin/src/ui_groupbydialog.h:123
 msgid "You can change the way the songs in the library are organised."
-msgstr ""
+msgstr "Bildumako abestiak antolaturik dauden era alda dezakezu."
 
 #: internet/digitallyimportedsettingspage.cpp:46
 msgid ""
 "You can listen for free without an account, but Premium members can listen "
 "to higher quality streams without advertisements."
-msgstr ""
+msgstr "Doan entzun dezakezu kontua izan gabe, baina Premium bazkideek kalitate altuagoko jarioak entzun ditzakete iragarkirik gabe."
 
 #: internet/magnatunesettingspage.cpp:53
 msgid ""
 "You can listen to Magnatune songs for free without an account.  Purchasing a"
 " membership removes the messages at the end of each track."
-msgstr ""
+msgstr "Magnatune-ko abestiak doan entzun ditzakezu kontua izan gabe. Bazkidetza erosteak pista bakoitzaren ondoreko mezuak ezabatzen ditu."
 
 #: ../bin/src/ui_backgroundstreamssettingspage.h:57
 msgid "You can listen to background streams at the same time as other music."
-msgstr ""
+msgstr "Beste musikarekin batera hondoko-jarioak entzun ditzakezu."
 
-#: internet/lastfmsettingspage.cpp:140
+#: internet/lastfmsettingspage.cpp:142
 msgid ""
 "You can scrobble tracks for free, but only <span style=\" font-"
 "weight:600;\">paid subscribers</span> can stream Last.fm radio from "
 "Clementine."
-msgstr ""
+msgstr "Pistak doan partekatu ditzakezu baina <span style=\" font-weight:600;\">ordainpeko harpidedunek</span> bakarrik entzun dezakete Last.fm irratia Clementine-tik."
 
 #: ../bin/src/ui_wiimotesettingspage.h:184
 msgid ""
 "You can use your Wii Remote as a remote control for Clementine.  <a "
 "href=\"http://www.clementine-player.org/wiimote\">See the page on the "
 "Clementine wiki</a> for more information.\n"
-msgstr ""
+msgstr "Zure Wii urruneko kontrola erabili dezakezu Clementine kontrolatzeko. Ikus <a href=\"http://www.clementine-player.org/wiimote\">Clementine-ren wikiko orria</a> informazio gehiagorako. \n"
 
 #: internet/groovesharksettingspage.cpp:103
 msgid "You do not have a Grooveshark Anywhere account."
-msgstr ""
+msgstr "Ez daukazu Grooveshark Anywhere konturik."
 
 #: internet/spotifysettingspage.cpp:148
 msgid "You do not have a Spotify Premium account."
+msgstr "Ez daukazu Spotify Premium konturik."
+
+#: internet/digitallyimportedclient.cpp:89
+msgid "You do not have an active subscription"
 msgstr ""
 
-#: internet/spotifyservice.cpp:165
+#: internet/spotifyservice.cpp:168
 msgid ""
 "You have been logged out of Spotify, please re-enter your password in the "
 "Settings dialog."
-msgstr ""
+msgstr "Spotify-ko saioa itxi egin da, sar ezazu pasahitza berriro ezarpenetako elkarrizketan."
 
 #: internet/spotifysettingspage.cpp:157
 msgid "You have been logged out of Spotify, please re-enter your password."
-msgstr ""
+msgstr "Spotify-ko saioa itxi egin da, sar ezazu pasahitza berriro."
 
-#: songinfo/lastfmtrackinfoprovider.cpp:95
+#: songinfo/lastfmtrackinfoprovider.cpp:87
 msgid "You love this track"
-msgstr ""
+msgstr "Pista hau oso gustukoa duzu"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:170
 msgid ""
 "You need to launch System Preferences and turn on \"<span style=\" font-"
 "style:italic;\">Enable access for assistive devices</span>\" to use global "
 "shortcuts in Clementine."
-msgstr ""
+msgstr "Lasterbide globalak Clementinen erabiltzeko, sistemaren hobespenetan \"<span style=\"font-style:italic;\">laguntza-gailuen sarbidea baimendu</span>\" behar da."
 
-#: ../bin/src/ui_behavioursettingspage.h:185
+#: ../bin/src/ui_behavioursettingspage.h:177
 msgid "You will need to restart Clementine if you change the language."
-msgstr ""
+msgstr "Hizkuntzaz aldatuz gero, Clementine berrabiarazi behar da."
 
-#: internet/lastfmsettingspage.cpp:107
+#: internet/lastfmsettingspage.cpp:108
 msgid ""
 "You will not be able to play Last.fm radio stations as you are not a Last.fm"
 " subscriber."
-msgstr ""
-
-#: remote/remotesettingspage.cpp:126
-#, qt-format
-msgid "You're logged in as <b>%1</b>"
-msgstr ""
-
-#: remote/remotesettingspage.cpp:113
-msgid "Your Google credentials were incorrect"
-msgstr ""
+msgstr "Ezingo duzu Last.fm-ko irratirik entzun, ez baitzara Last.fm-ko harpideduna."
 
 #: internet/lastfmsettingspage.cpp:78
 msgid "Your Last.fm credentials were incorrect"
-msgstr ""
+msgstr "Last.fm-ko egiaztagiriak ez ziren egokiak"
 
 #: internet/magnatunesettingspage.cpp:113
 msgid "Your Magnatune credentials were incorrect"
-msgstr ""
+msgstr "Magnatuneko egiaztagiriak ez ziren egokiak"
 
-#: library/libraryview.cpp:219
+#: library/libraryview.cpp:238
 msgid "Your library is empty!"
-msgstr ""
+msgstr "Bilduma hutsik dago!"
 
-#: globalsearch/savedradiosearchprovider.cpp:27 internet/savedradio.cpp:48
+#: globalsearch/savedradiosearchprovider.cpp:28 internet/savedradio.cpp:49
 msgid "Your radio streams"
-msgstr ""
+msgstr "Irrati-jarioak"
 
-#: songinfo/lastfmtrackinfoprovider.cpp:96
+#: songinfo/lastfmtrackinfoprovider.cpp:88
 #, qt-format
 msgid "Your scrobbles: %1"
+msgstr "Partekatzeak: %1"
+
+#: visualisations/visualisationcontainer.cpp:152
+msgid "Your system is missing OpenGL support, visualizations are unavailable."
 msgstr ""
 
 #: internet/groovesharksettingspage.cpp:107
 #: internet/spotifysettingspage.cpp:153
 msgid "Your username or password was incorrect."
-msgstr ""
+msgstr "Erabiltzaile-izena edo pasahitza ez zen zuzena."
 
 #: smartplaylists/searchterm.cpp:288
 msgid "Z-A"
-msgstr ""
+msgstr "Z-A"
 
 #: ui/equalizer.cpp:126
 msgid "Zero"
-msgstr ""
+msgstr "Zero"
 
 #: playlist/playlistundocommands.cpp:37
 #, c-format
 msgid "add %n songs"
-msgstr ""
+msgstr "Gehitu %n abesti"
 
 #: smartplaylists/searchterm.cpp:200
 msgid "after"
-msgstr ""
+msgstr "ondoren"
 
 #: ../bin/src/ui_searchtermwidget.h:281
 msgid "ago"
-msgstr ""
+msgstr "orain dela"
 
 #: ../bin/src/ui_searchtermwidget.h:280
 msgid "and"
-msgstr ""
+msgstr "eta"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:219
 msgid "automatic"
-msgstr ""
+msgstr "automatikoa"
 
 #: smartplaylists/searchterm.cpp:201
 msgid "before"
-msgstr ""
+msgstr "aurretik"
 
 #: smartplaylists/searchterm.cpp:206
 msgid "between"
-msgstr ""
+msgstr "tartean"
 
 #: smartplaylists/searchterm.cpp:292
 msgid "biggest first"
-msgstr ""
+msgstr "handienak aurretik"
 
-#: playlist/playlistview.cpp:164 ui/edittagdialog.cpp:454
+#: playlist/playlistview.cpp:200 ui/edittagdialog.cpp:450
 msgid "bpm"
-msgstr ""
+msgstr "bpm"
 
 #: smartplaylists/searchterm.cpp:212
 msgid "contains"
-msgstr ""
+msgstr "honakoa du"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:222
 #: ../bin/src/ui_transcoderoptionsvorbis.h:207
 #: ../bin/src/ui_transcoderoptionsvorbis.h:210
 msgid "disabled"
-msgstr ""
+msgstr "desgaituta"
 
-#: widgets/osd.cpp:112
+#: widgets/osd.cpp:114
 #, qt-format
 msgid "disc %1"
-msgstr ""
+msgstr "%1 diskoa"
 
 #: smartplaylists/searchterm.cpp:213
 msgid "does not contain"
-msgstr ""
-
-#: globalsearch/globalsearchwidget.cpp:751
-msgid "e.g."
-msgstr ""
+msgstr "ez du honakoa"
 
 #: smartplaylists/searchterm.cpp:215
 msgid "ends with"
-msgstr ""
+msgstr "honakoarekin amaitzen da"
 
 #: smartplaylists/searchterm.cpp:218
 msgid "equals"
+msgstr "berdin"
+
+#: ../bin/src/ui_podcastsettingspage.h:249
+msgid "gpodder.net"
+msgstr ""
+
+#: podcasts/gpoddertoptagspage.cpp:34
+msgid "gpodder.net directory"
 msgstr ""
 
 #: smartplaylists/searchterm.cpp:216
 msgid "greater than"
-msgstr ""
+msgstr "handiagoa baino"
 
 #: smartplaylists/searchterm.cpp:204
 msgid "in the last"
-msgstr ""
+msgstr "azkenean"
 
-#: playlist/playlistview.cpp:166 ui/edittagdialog.cpp:456
+#: playlist/playlistview.cpp:202 ui/edittagdialog.cpp:452
 #: internet/spotifysettingspage.cpp:59 internet/spotifysettingspage.cpp:60
 #: internet/spotifysettingspage.cpp:61
 msgid "kbps"
-msgstr ""
+msgstr "kbps"
 
 #: smartplaylists/searchterm.cpp:217
 msgid "less than"
-msgstr ""
+msgstr "gutxiago baino"
 
 #: smartplaylists/searchterm.cpp:290
 msgid "longest first"
-msgstr ""
+msgstr "luzeenak arinago"
 
 #: playlist/playlistundocommands.cpp:99
-msgid "move songs"
+#, c-format
+msgid "move %n songs"
 msgstr ""
 
 #: smartplaylists/searchterm.cpp:289
 msgid "newest first"
-msgstr ""
+msgstr "berrienak arinago"
 
 #: smartplaylists/searchterm.cpp:219
 msgid "not equals"
-msgstr ""
+msgstr "ez berdin"
 
 #: smartplaylists/searchterm.cpp:205
 msgid "not in the last"
-msgstr ""
+msgstr "azkenean ez"
 
 #: smartplaylists/searchterm.cpp:203
 msgid "not on"
-msgstr ""
+msgstr "honetan ez"
 
 #: smartplaylists/searchterm.cpp:289
 msgid "oldest first"
-msgstr ""
+msgstr "zaharrenak arinago"
 
 #: smartplaylists/searchterm.cpp:202
 msgid "on"
-msgstr ""
+msgstr "honen barruan"
 
 #: core/commandlineoptions.cpp:144
 msgid "options"
-msgstr ""
+msgstr "aukerak"
 
-#: widgets/didyoumean.cpp:141
+#: widgets/didyoumean.cpp:56
 msgid "press enter"
-msgstr ""
+msgstr "enter sakatu"
 
 #: playlist/playlistundocommands.cpp:65 playlist/playlistundocommands.cpp:88
 #, c-format
 msgid "remove %n songs"
-msgstr ""
+msgstr "%n abesti ezabatu"
 
 #: smartplaylists/searchterm.cpp:290
 msgid "shortest first"
+msgstr "laburrenak arinago"
+
+#: playlist/playlistundocommands.cpp:138
+msgid "shuffle songs"
 msgstr ""
 
 #: smartplaylists/searchterm.cpp:292
 msgid "smallest first"
+msgstr "txikienak arinago"
+
+#: playlist/playlistundocommands.cpp:131
+msgid "sort songs"
 msgstr ""
 
 #: smartplaylists/searchterm.cpp:214
 msgid "starts with"
-msgstr ""
+msgstr "honekin hasten da"
 
 #: playlist/playlistdelegates.cpp:180
 msgid "stop"
-msgstr ""
+msgstr "gelditu"
 
-#: globalsearch/globalsearchitemdelegate.cpp:150 widgets/osd.cpp:114
+#: widgets/osd.cpp:116
 #, qt-format
 msgid "track %1"
-msgstr ""
-
-
+msgstr "%1 pista"

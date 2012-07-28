@@ -19,13 +19,14 @@
 #include "mpris_common.h"
 #include "mpris1.h"
 #include "mpris2.h"
+#include "core/application.h"
 #include "core/logging.h"
 #include "core/mpris2_player.h"
 #include "core/mpris2_root.h"
 #include "core/mpris2_tracklist.h"
 #include "core/player.h"
 #include "core/timeconstants.h"
-#include "covers/artloader.h"
+#include "covers/currentartloader.h"
 #include "engines/enginebase.h"
 #include "playlist/playlist.h"
 #include "playlist/playlistmanager.h"
@@ -46,10 +47,9 @@ const char* Mpris2::kMprisObjectPath = "/org/mpris/MediaPlayer2";
 const char* Mpris2::kServiceName = "org.mpris.MediaPlayer2.clementine";
 const char* Mpris2::kFreedesktopPath = "org.freedesktop.DBus.Properties";
 
-Mpris2::Mpris2(PlayerInterface* player, ArtLoader* art_loader,
-               Mpris1* mpris1, QObject* parent)
+Mpris2::Mpris2(Application* app, Mpris1* mpris1, QObject* parent)
   : QObject(parent),
-    player_(player),
+    app_(app),
     mpris1_(mpris1)
 {
   new Mpris2Root(this);
@@ -63,14 +63,14 @@ Mpris2::Mpris2(PlayerInterface* player, ArtLoader* art_loader,
 
   QDBusConnection::sessionBus().registerObject(kMprisObjectPath, this);
 
-  connect(art_loader, SIGNAL(ArtLoaded(Song,QString,QImage)), SLOT(ArtLoaded(Song,QString)));
+  connect(app_->current_art_loader(), SIGNAL(ArtLoaded(Song,QString,QImage)), SLOT(ArtLoaded(Song,QString)));
 
-  connect(player->engine(), SIGNAL(StateChanged(Engine::State)), SLOT(EngineStateChanged(Engine::State)));
-  connect(player, SIGNAL(VolumeChanged(int)), SLOT(VolumeChanged()));
-  connect(player, SIGNAL(Seeked(qlonglong)), SIGNAL(Seeked(qlonglong)));
+  connect(app_->player()->engine(), SIGNAL(StateChanged(Engine::State)), SLOT(EngineStateChanged(Engine::State)));
+  connect(app_->player(), SIGNAL(VolumeChanged(int)), SLOT(VolumeChanged()));
+  connect(app_->player(), SIGNAL(Seeked(qlonglong)), SIGNAL(Seeked(qlonglong)));
 
-  connect(player->playlists(), SIGNAL(PlaylistManagerInitialized()), SLOT(PlaylistManagerInitialized()));
-  connect(player->playlists(), SIGNAL(CurrentSongChanged(Song)), SLOT(CurrentSongChanged(Song)));
+  connect(app_->playlist_manager(), SIGNAL(PlaylistManagerInitialized()), SLOT(PlaylistManagerInitialized()));
+  connect(app_->playlist_manager(), SIGNAL(CurrentSongChanged(Song)), SLOT(CurrentSongChanged(Song)));
 }
 
 void Mpris2::InitLibIndicate() {
@@ -84,9 +84,9 @@ void Mpris2::InitLibIndicate() {
 
 // when PlaylistManager gets it ready, we connect PlaylistSequence with this
 void Mpris2::PlaylistManagerInitialized() {
-  connect(player_->playlists()->sequence(), SIGNAL(ShuffleModeChanged(PlaylistSequence::ShuffleMode)),
+  connect(app_->playlist_manager()->sequence(), SIGNAL(ShuffleModeChanged(PlaylistSequence::ShuffleMode)),
           SLOT(ShuffleModeChanged()));
-  connect(player_->playlists()->sequence(), SIGNAL(RepeatModeChanged(PlaylistSequence::RepeatMode)),
+  connect(app_->playlist_manager()->sequence(), SIGNAL(RepeatModeChanged(PlaylistSequence::RepeatMode)),
           SLOT(RepeatModeChanged()));
 }
 
@@ -222,7 +222,7 @@ void Mpris2::Quit() {
 }
 
 QString Mpris2::PlaybackStatus() const {
-  return PlaybackStatus(player_->GetState());
+  return PlaybackStatus(app_->player()->GetState());
 }
 
 QString Mpris2::PlaybackStatus(Engine::State state) const {
@@ -234,7 +234,7 @@ QString Mpris2::PlaybackStatus(Engine::State state) const {
 }
 
 QString Mpris2::LoopStatus() const {
-  switch (player_->playlists()->sequence()->repeat_mode()) {
+  switch (app_->playlist_manager()->sequence()->repeat_mode()) {
     case PlaylistSequence::Repeat_Album:
     case PlaylistSequence::Repeat_Playlist: return "Playlist";
     case PlaylistSequence::Repeat_Track:    return "Track";
@@ -253,7 +253,7 @@ void Mpris2::SetLoopStatus(const QString& value) {
     mode = PlaylistSequence::Repeat_Playlist;
   }
 
-  player_->playlists()->active()->sequence()->SetRepeatMode(mode);
+  app_->playlist_manager()->active()->sequence()->SetRepeatMode(mode);
 }
 
 double Mpris2::Rate() const {
@@ -328,11 +328,11 @@ double Mpris2::Volume() const {
 }
 
 void Mpris2::SetVolume(double value) {
-  player_->SetVolume(value * 100);
+  app_->player()->SetVolume(value * 100);
 }
 
 qlonglong Mpris2::Position() const {
-  return player_->engine()->position_nanosec() / kNsecPerUsec;
+  return app_->player()->engine()->position_nanosec() / kNsecPerUsec;
 }
 
 double Mpris2::MaximumRate() const {
@@ -389,41 +389,41 @@ bool Mpris2::CanControl() const {
 
 void Mpris2::Next() {
   if(CanGoNext()) {
-    player_->Next();
+    app_->player()->Next();
   }
 }
 
 void Mpris2::Previous() {
   if(CanGoPrevious()) {
-    player_->Previous();
+    app_->player()->Previous();
   }
 }
 
 void Mpris2::Pause() {
-  if(CanPause() && player_->GetState() != Engine::Paused) {
-    player_->Pause();
+  if(CanPause() && app_->player()->GetState() != Engine::Paused) {
+    app_->player()->Pause();
   }
 }
 
 void Mpris2::PlayPause() {
   if (CanPause()) {
-    player_->PlayPause();
+    app_->player()->PlayPause();
   }
 }
 
 void Mpris2::Stop() {
-  player_->Stop();
+  app_->player()->Stop();
 }
 
 void Mpris2::Play() {
   if(CanPlay()) {
-    player_->Play();
+    app_->player()->Play();
   }
 }
 
 void Mpris2::Seek(qlonglong offset) {
   if(CanSeek()) {
-    player_->SeekTo(player_->engine()->position_nanosec() / kNsecPerSec +
+    app_->player()->SeekTo(app_->player()->engine()->position_nanosec() / kNsecPerSec +
                     offset / kUsecPerSec);
   }
 }
@@ -432,8 +432,8 @@ void Mpris2::SetPosition(const QDBusObjectPath& trackId, qlonglong offset) {
   if (CanSeek() && trackId.path() == current_track_id() && offset >= 0) {
     offset *= kNsecPerUsec;
 
-    if(offset < player_->GetCurrentItem()->Metadata().length_nanosec()) {
-      player_->SeekTo(offset / kNsecPerSec);
+    if(offset < app_->player()->GetCurrentItem()->Metadata().length_nanosec()) {
+      app_->player()->SeekTo(offset / kNsecPerSec);
     }
   }
 }

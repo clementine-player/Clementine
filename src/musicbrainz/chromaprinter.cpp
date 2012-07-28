@@ -27,8 +27,11 @@
 #include <chromaprint.h>
 
 #include "core/logging.h"
+#include "core/signalchecker.h"
 #include "core/timeconstants.h"
 
+static const int kDecodeRate = 11025;
+static const int kDecodeChannels = 1;
 
 Chromaprinter::Chromaprinter(const QString& filename)
   : filename_(filename),
@@ -86,8 +89,8 @@ QString Chromaprinter::CreateFingerprint() {
   GstCaps* caps = gst_caps_new_simple(
       "audio/x-raw-int",
       "width", G_TYPE_INT, 16,
-      "channels", G_TYPE_INT, 1,
-      "rate", G_TYPE_INT, 11025,
+      "channels", G_TYPE_INT, kDecodeChannels,
+      "rate", G_TYPE_INT, kDecodeRate,
       NULL);
   gst_element_link_filtered(resample, sink, caps);
   gst_caps_unref(caps);
@@ -103,7 +106,7 @@ QString Chromaprinter::CreateFingerprint() {
   g_object_set(src, "location", filename_.toLocal8Bit().constData(), NULL);
 
   // Connect signals
-  g_signal_connect(decode, "new-decoded-pad", G_CALLBACK(NewPadCallback), this);
+  CHECKED_GCONNECT(decode, "new-decoded-pad", &NewPadCallback, this);
   gst_bus_set_sync_handler(gst_pipeline_get_bus(GST_PIPELINE(pipeline_)), BusCallbackSync, this);
   guint bus_callback_id = gst_bus_add_watch(gst_pipeline_get_bus(GST_PIPELINE(pipeline_)), BusCallback, this);
 
@@ -123,7 +126,7 @@ QString Chromaprinter::CreateFingerprint() {
   QByteArray data = buffer_.data();
 
   ChromaprintContext* chromaprint = chromaprint_new(CHROMAPRINT_ALGORITHM_DEFAULT);
-  chromaprint_start(chromaprint, 11025, 1);
+  chromaprint_start(chromaprint, kDecodeRate, kDecodeChannels);
   chromaprint_feed(chromaprint, reinterpret_cast<void*>(data.data()), data.size() / 2);
   chromaprint_finish(chromaprint);
 
@@ -142,6 +145,7 @@ QString Chromaprinter::CreateFingerprint() {
     chromaprint_dealloc(fprint);
     chromaprint_dealloc(encoded);
   }
+  chromaprint_free(chromaprint);
   int codegen_time = time.elapsed();
 
   qLog(Debug) << "Decode time:" << decode_time << "Codegen time:" << codegen_time;

@@ -52,7 +52,6 @@ set(TESTS_DIR ${CMAKE_CURRENT_SOURCE_DIR}/tests/)
 
 set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules)
 find_package(FFmpeg)
-find_package(FFTW3)
 if(APPLE)
 	find_library(ACCELERATE_LIBRARIES Accelerate)
 endif()

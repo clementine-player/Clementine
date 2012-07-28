@@ -19,8 +19,6 @@
  *   51 Franklin Steet, Fifth Floor, Boston, MA  02111-1307, USA.          *
  ***************************************************************************/
 
-#define DEBUG_PREFIX "Gst-Engine"
-
 #include "config.h"
 #include "gstengine.h"
 #include "gstenginepipeline.h"
@@ -30,6 +28,10 @@
 
 #ifdef HAVE_IMOBILEDEVICE
 # include "gst/afcsrc/gstafcsrc.h"
+#endif
+
+#ifdef HAVE_MOODBAR
+# include "gst/moodbar/spectrum.h"
 #endif
 
 #include <math.h>
@@ -80,6 +82,7 @@ GstEngine::GstEngine(TaskManager* task_manager)
     rg_preamp_(0.0),
     rg_compression_(true),
     buffer_duration_nanosec_(1 * kNsecPerSec), // 1s
+    mono_playback_(false),
     seek_timer_(new QTimer(this)),
     timer_id_(-1),
     next_element_id_(0)
@@ -104,46 +107,8 @@ GstEngine::~GstEngine() {
   gst_deinit();
 }
 
-void GstEngine::SetEnv(const char *key, const QString &value) {
-#ifdef Q_OS_WIN32
-  putenv(QString("%1=%2").arg(key, value).toLocal8Bit().constData());
-#else
-  setenv(key, value.toLocal8Bit().constData(), 1);
-#endif
-}
-
 bool GstEngine::Init() {
-  QString scanner_path;
-  QString plugin_path;
-  QString registry_filename;
-
-  // On windows and mac we bundle the gstreamer plugins with clementine
-#if defined(Q_OS_DARWIN)
-  scanner_path = QCoreApplication::applicationDirPath() + "/../PlugIns/gst-plugin-scanner";
-  plugin_path = QCoreApplication::applicationDirPath() + "/../PlugIns/gstreamer";
-#elif defined(Q_OS_WIN32)
-  plugin_path = QCoreApplication::applicationDirPath() + "/gstreamer-plugins";
-#endif
-
-#if defined(Q_OS_WIN32) || defined(Q_OS_DARWIN)
-  registry_filename = Utilities::GetConfigPath(Utilities::Path_GstreamerRegistry);
-#endif
-
-  if (!scanner_path.isEmpty())
-    SetEnv("GST_PLUGIN_SCANNER", scanner_path);
-
-  if (!plugin_path.isEmpty()) {
-    SetEnv("GST_PLUGIN_PATH", plugin_path);
-    // Never load plugins from anywhere else.
-    SetEnv("GST_PLUGIN_SYSTEM_PATH", plugin_path);
-  }
-
-  if (!registry_filename.isEmpty()) {
-    SetEnv("GST_REGISTRY", registry_filename);
-  }
-
   initialising_ = QtConcurrent::run(&GstEngine::InitialiseGstreamer);
-
   return true;
 }
 
@@ -152,6 +117,10 @@ void GstEngine::InitialiseGstreamer() {
 
 #ifdef HAVE_IMOBILEDEVICE
   afcsrc_register_static();
+#endif
+
+#ifdef HAVE_MOODBAR
+  gstmoodbar_register_static();
 #endif
 }
 
@@ -173,6 +142,8 @@ void GstEngine::ReloadSettings() {
   rg_compression_ = s.value("rgcompression", true).toBool();
 
   buffer_duration_nanosec_ = s.value("bufferduration", 4000).toLongLong() * kNsecPerMsec;
+
+  mono_playback_ = s.value("monoplayback", false).toBool();
 }
 
 
@@ -688,6 +659,7 @@ shared_ptr<GstEnginePipeline> GstEngine::CreatePipeline() {
   ret->set_output_device(sink_, device_);
   ret->set_replaygain(rg_enabled_, rg_mode_, rg_preamp_, rg_compression_);
   ret->set_buffer_duration_nanosec(buffer_duration_nanosec_);
+  ret->set_mono_playback(mono_playback_);
 
   ret->AddBufferConsumer(this);
   foreach (BufferConsumer* consumer, buffer_consumers_) {

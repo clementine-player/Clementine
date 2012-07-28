@@ -24,7 +24,7 @@ class SomaFMService;
 
 class SomaFMSearchProvider : public SimpleSearchProvider {
 public:
-  SomaFMSearchProvider(SomaFMService* service, QObject* parent);
+  SomaFMSearchProvider(SomaFMService* service, Application* app, QObject* parent);
 
   void LoadArtAsync(int id, const Result& result);
 

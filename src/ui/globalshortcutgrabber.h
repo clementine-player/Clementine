@@ -21,8 +21,13 @@
 #include <QDialog>
 
 class MacMonitorWrapper;
-class NSEvent;
 class Ui_GlobalShortcutGrabber;
+
+#ifdef __OBJC__
+@class NSEvent;
+#else
+class NSEvent;
+#endif
 
 class GlobalShortcutGrabber : public QDialog {
   Q_OBJECT

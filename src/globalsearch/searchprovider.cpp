@@ -17,16 +17,19 @@
 
 #include "searchprovider.h"
 #include "core/boundfuturewatcher.h"
+#include "internet/internetsongmimedata.h"
 #include "playlist/songmimedata.h"
 
 #include <QPainter>
+#include <QUrl>
 #include <QtConcurrentRun>
 
 const int SearchProvider::kArtHeight = 32;
 
 
-SearchProvider::SearchProvider(QObject* parent)
+SearchProvider::SearchProvider(Application* app, QObject* parent)
   : QObject(parent),
+    app_(app),
     hints_(0)
 {
 }
@@ -56,24 +59,18 @@ QStringList SearchProvider::TokenizeQuery(const QString& query) {
   return tokens;
 }
 
-globalsearch::MatchQuality SearchProvider::MatchQuality(
-    const QStringList& tokens, const QString& string) {
-  globalsearch::MatchQuality ret = globalsearch::Quality_None;
-
+bool SearchProvider::Matches(const QStringList& tokens, const QString& string) {
   foreach (const QString& token, tokens) {
-    const int index = string.indexOf(token, 0, Qt::CaseInsensitive);
-    if (index == 0) {
-      return globalsearch::Quality_AtStart;
-    } else if (index != -1) {
-      ret = globalsearch::Quality_Middle;
+    if (!string.contains(token, Qt::CaseInsensitive)) {
+      return false;
     }
   }
 
-  return ret;
+  return true;
 }
 
-BlockingSearchProvider::BlockingSearchProvider(QObject* parent)
-  : SearchProvider(parent) {
+BlockingSearchProvider::BlockingSearchProvider(Application* app, QObject* parent)
+  : SearchProvider(app, parent) {
 }
 
 void BlockingSearchProvider::SearchAsync(int id, const QString& query) {
@@ -124,28 +121,37 @@ QImage SearchProvider::ScaleAndPad(const QImage& image) {
   return padded_image;
 }
 
-namespace {
-  bool SortSongsCompare(const Song& left, const Song& right) {
-    if (left.disc() < right.disc())
-      return true;
-    if (left.disc() > right.disc())
-      return false;
-
-    return left.track() < right.track();
-  }
-}
-
-void SearchProvider::SortSongs(SongList* list) {
-  qStableSort(list->begin(), list->end(), SortSongsCompare);
-}
-
 void SearchProvider::LoadArtAsync(int id, const Result& result) {
   emit ArtLoaded(id, QImage());
 }
 
-void SearchProvider::LoadTracksAsync(int id, const Result& result) {
-  SongMimeData* mime_data = new SongMimeData;
-  mime_data->songs = SongList() << result.metadata_;
+MimeData* SearchProvider::LoadTracks(const ResultList& results) {
+  MimeData* mime_data = NULL;
 
-  emit TracksLoaded(id, mime_data);
+  if (mime_data_contains_urls_only()) {
+    mime_data = new MimeData;
+  } else {
+    SongList songs;
+    foreach (const Result& result, results) {
+      songs << result.metadata_;
+    }
+
+    if (internet_service()) {
+      InternetSongMimeData* internet_song_mime_data = new InternetSongMimeData(internet_service());
+      internet_song_mime_data->songs = songs;
+      mime_data = internet_song_mime_data;
+    } else {
+      SongMimeData* song_mime_data = new SongMimeData;
+      song_mime_data->songs = songs;
+      mime_data = song_mime_data;
+    }
+  }
+
+  QList<QUrl> urls;
+  foreach (const Result& result, results) {
+    urls << result.metadata_.url();
+  }
+  mime_data->setUrls(urls);
+
+  return mime_data;
 }

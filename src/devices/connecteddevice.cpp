@@ -18,6 +18,7 @@
 #include "connecteddevice.h"
 #include "devicelister.h"
 #include "devicemanager.h"
+#include "core/application.h"
 #include "core/database.h"
 #include "core/logging.h"
 #include "library/library.h"
@@ -28,8 +29,10 @@
 
 ConnectedDevice::ConnectedDevice(const QUrl& url, DeviceLister* lister,
                                  const QString& unique_id, DeviceManager* manager,
+                                 Application* app,
                                  int database_id, bool first_time)
   : QObject(manager),
+    app_(app),
     url_(url),
     first_time_(first_time),
     lister_(lister),
@@ -44,18 +47,18 @@ ConnectedDevice::ConnectedDevice(const QUrl& url, DeviceLister* lister,
 
   // Create the backend in the database thread.
   backend_ = new LibraryBackend();
-  backend_->moveToThread(manager->database());
+  backend_->moveToThread(app_->database()->thread());
 
   connect(backend_, SIGNAL(TotalSongCountUpdated(int)), SLOT(BackendTotalSongCountUpdated(int)));
 
-  backend_->Init(manager->database()->Worker(),
+  backend_->Init(app_->database(),
                  QString("device_%1_songs").arg(database_id),
                  QString("device_%1_directories").arg(database_id),
                  QString("device_%1_subdirectories").arg(database_id),
                  QString("device_%1_fts").arg(database_id));
 
   // Create the model
-  model_ = new LibraryModel(backend_, manager->task_manager(), this);
+  model_ = new LibraryModel(backend_, app_, this);
 }
 
 ConnectedDevice::~ConnectedDevice() {

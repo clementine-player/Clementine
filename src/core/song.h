@@ -95,6 +95,9 @@ class Song {
   static QString TextForFiletype(FileType type);
   QString TextForFiletype() const { return TextForFiletype(filetype()); }
 
+  // Sort songs alphabetically using their pretty title
+  static void SortSongsListAlphabetically(QList<Song>* songs);
+
   // Constructors
   void Init(const QString& title, const QString& artist, const QString& album, qint64 length_nanosec);
   void Init(const QString& title, const QString& artist, const QString& album, qint64 beginning, qint64 end);
@@ -128,7 +131,7 @@ class Song {
   void BindToQuery(QSqlQuery* query) const;
   void BindToFtsQuery(QSqlQuery* query) const;
 #ifdef HAVE_LIBLASTFM
-  void ToLastFM(lastfm::Track* track) const;
+  void ToLastFM(lastfm::Track* track, bool prefer_album_artist) const;
 #endif
   void ToXesam(QVariantMap* map) const;
   void ToProtobuf(pb::tagreader::SongMetadata* pb) const;

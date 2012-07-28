@@ -38,6 +38,11 @@ class VisualisationContainer : public QGraphicsView {
 public:
   VisualisationContainer(QWidget* parent = 0);
 
+  static const int kLowFramerate;
+  static const int kMediumFramerate;
+  static const int kHighFramerate;
+  static const int kSuperHighFramerate;
+
   static const char* kSettingsGroup;
   static const int kDefaultWidth;
   static const int kDefaultHeight;

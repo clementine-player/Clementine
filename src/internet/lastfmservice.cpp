@@ -15,13 +15,31 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+// StringBuilder is activated to speed-up QString concatenation. As explained here:
+// http://labs.qt.nokia.com/2011/06/13/string-concatenation-with-qstringbuilder/
+// this cause some compilation errors in some cases. As Lasfm library inlines
+// some functions in their includes files, which aren't compatible with
+// QStringBuilder, we undef it here
+#include <QtGlobal>
+#if QT_VERSION >= 0x040600
+  #if QT_VERSION >= 0x040800
+    #undef QT_USE_QSTRINGBUILDER
+  #else
+    #undef QT_USE_FAST_CONCATENATION
+    #undef QT_USE_FAST_OPERATOR_PLUS
+  #endif // QT_VERSION >= 0x040800
+#endif // QT_VERSION >= 0x040600
+
 #include "lastfmservice.h"
+
+#include "lastfmcompat.h"
 #include "lastfmstationdialog.h"
 #include "lastfmurlhandler.h"
 #include "internetmodel.h"
 #include "internetplaylistitem.h"
 #include "globalsearch/globalsearch.h"
 #include "globalsearch/lastfmsearchprovider.h"
+#include "core/application.h"
 #include "core/logging.h"
 #include "core/player.h"
 #include "core/song.h"
@@ -33,20 +51,16 @@
 
 #include <boost/scoped_ptr.hpp>
 
-#include <lastfm/Audioscrobbler>
-#include <lastfm/misc.h>
-#include <lastfm/RadioStation>
-#include <lastfm/Scrobble>
-#include <lastfm/ScrobbleCache>
-#include <lastfm/ScrobblePoint>
-#include <lastfm/ws.h>
-#include <lastfm/XmlQuery>
-
 #include <QMenu>
 #include <QSettings>
 
+#ifdef HAVE_LIBLASTFM1
+  #include <lastfm/RadioStation.h>
+#else
+  #include <lastfm/RadioStation>
+#endif
+
 using boost::scoped_ptr;
-using lastfm::Scrobble;
 using lastfm::XmlQuery;
 
 uint qHash(const lastfm::Track& track) {
@@ -71,8 +85,8 @@ const char* LastFMService::kTitleCustom = QT_TR_NOOP("Last.fm Custom Radio: %1")
 
 const int LastFMService::kFriendsCacheDurationSecs = 60 * 60 * 24; // 1 day
 
-LastFMService::LastFMService(InternetModel* parent)
-  : InternetService(kServiceName, parent, parent),
+LastFMService::LastFMService(Application* app, InternetModel* parent)
+  : InternetService(kServiceName, app, parent, parent),
     url_handler_(new LastFMUrlHandler(this, this)),
     scrobbler_(NULL),
     already_scrobbled_(false),
@@ -115,10 +129,10 @@ LastFMService::LastFMService(InternetModel* parent)
   add_tag_action_->setEnabled(false);
   add_custom_action_->setEnabled(false);
 
-  model()->player()->RegisterUrlHandler(url_handler_);
-  model()->cover_providers()->AddProvider(new LastFmCoverProvider(this));
+  app_->player()->RegisterUrlHandler(url_handler_);
+  app_->cover_providers()->AddProvider(new LastFmCoverProvider(this));
 
-  model()->global_search()->AddProvider(new LastFMSearchProvider(this, this));
+  app_->global_search()->AddProvider(new LastFMSearchProvider(this, app_, this));
 }
 
 LastFMService::~LastFMService() {
@@ -133,6 +147,7 @@ void LastFMService::ReloadSettings() {
   scrobbling_enabled_ = settings.value("ScrobblingEnabled", true).toBool();
   buttons_visible_ = settings.value("ShowLoveBanButtons", true).toBool();
   scrobble_button_visible_ = settings.value("ShowScrobbleButton", true).toBool();
+  prefer_albumartist_ = settings.value("PreferAlbumArtist", false).toBool();
   friend_names_.Load();
 
   //avoid emitting signal if it's not changed
@@ -140,10 +155,11 @@ void LastFMService::ReloadSettings() {
     emit ScrobblingEnabledChanged(scrobbling_enabled_);
   emit ButtonVisibilityChanged(buttons_visible_);
   emit ScrobbleButtonVisibilityChanged(scrobble_button_visible_);
+  emit PreferAlbumArtistChanged(prefer_albumartist_);
 }
 
 void LastFMService::ShowConfig() {
-  emit OpenSettingsAtPage(SettingsDialog::Page_Lastfm);
+  app_->OpenSettingsDialogAtPage(SettingsDialog::Page_Lastfm);
 }
 
 bool LastFMService::IsAuthenticated() const {
@@ -300,13 +316,8 @@ void LastFMService::AuthenticateReplyFinished() {
   reply->deleteLater();
 
   // Parse the reply
-  try {
-    lastfm::XmlQuery const lfm = lastfm::ws::parse(reply);
-#ifdef Q_OS_WIN32
-    if (lastfm::ws::last_parse_error != lastfm::ws::NoError)
-      throw std::runtime_error("");
-#endif
-
+  lastfm::XmlQuery lfm(lastfm::compat::EmptyXmlQuery());
+  if (lastfm::compat::ParseQuery(reply->readAll(), &lfm)) {
     lastfm::ws::Username = lfm["session"]["name"].text();
     lastfm::ws::SessionKey = lfm["session"]["key"].text();
     QString subscribed = lfm["session"]["subscriber"].text();
@@ -318,8 +329,7 @@ void LastFMService::AuthenticateReplyFinished() {
     settings.setValue("Username", lastfm::ws::Username);
     settings.setValue("Session", lastfm::ws::SessionKey);
     settings.setValue("Subscriber", is_subscriber);
-  } catch (std::runtime_error& e) {
-    qLog(Error) << e.what();
+  } else {
     emit AuthenticationComplete(false);
     return;
   }
@@ -347,14 +357,8 @@ void LastFMService::UpdateSubscriberStatusFinished() {
 
   bool is_subscriber = false;
 
-  try {
-    const lastfm::XmlQuery lfm = lastfm::ws::parse(reply);
-#ifdef Q_OS_WIN32
-    if (lastfm::ws::last_parse_error != lastfm::ws::NoError)
-      throw std::runtime_error("");
-#endif
-
-    connection_problems_ = false;
+  lastfm::XmlQuery lfm(lastfm::compat::EmptyXmlQuery());
+  if (lastfm::compat::ParseQuery(reply->readAll(), &lfm, &connection_problems_)) {
     QString subscriber = lfm["user"]["subscriber"].text();
     is_subscriber = (subscriber.toInt() == 1);
 
@@ -362,11 +366,6 @@ void LastFMService::UpdateSubscriberStatusFinished() {
     settings.beginGroup(kSettingsGroup);
     settings.setValue("Subscriber", is_subscriber);
     qLog(Info) << lastfm::ws::Username << "Subscriber status:" << is_subscriber;
-  } catch (lastfm::ws::ParseError e) {
-    qLog(Error) << "Last.fm parse error: " << e.enumValue();
-    connection_problems_ = e.enumValue() == lastfm::ws::MalformedResponse;
-  } catch (std::runtime_error& e) {
-    qLog(Error) << e.what();
   }
 
   emit UpdatedSubscriberStatus(is_subscriber);
@@ -414,7 +413,7 @@ void LastFMService::TunerError(lastfm::ws::Error error) {
   if (!initial_tune_)
     return;
 
-  model()->task_manager()->SetTaskFinished(tune_task_id_);
+  app_->task_manager()->SetTaskFinished(tune_task_id_);
   tune_task_id_ = 0;
 
   if (error == lastfm::ws::NotEnoughContent) {
@@ -469,8 +468,26 @@ bool LastFMService::InitScrobbler() {
     scrobbler_ = new lastfm::Audioscrobbler(kAudioscrobblerClientId);
 
   //reemit the signal since the sender is private
+#ifdef HAVE_LIBLASTFM1
+  connect(scrobbler_, SIGNAL(scrobblesSubmitted(QList<lastfm::Track>)), SIGNAL(ScrobbleSubmitted()));
+  connect(scrobbler_, SIGNAL(nowPlayingError(int,QString)), SIGNAL(ScrobbleError(int)));
+#else
   connect(scrobbler_, SIGNAL(status(int)), SIGNAL(ScrobblerStatus(int)));
+#endif
   return true;
+}
+
+void LastFMService::ScrobblerStatus(int value) {
+  switch (value) {
+  case 2:
+  case 3:
+    emit ScrobbleSubmitted();
+    break;
+
+  default:
+    emit ScrobbleError(value);
+    break;
+  }
 }
 
 lastfm::Track LastFMService::TrackFromSong(const Song &song) const {
@@ -480,7 +497,7 @@ lastfm::Track LastFMService::TrackFromSong(const Song &song) const {
     return last_track_;
 
   lastfm::Track ret;
-  song.ToLastFM(&ret);
+  song.ToLastFM(&ret, PreferAlbumArtist());
   return ret;
 
 }
@@ -497,7 +514,7 @@ void LastFMService::NowPlaying(const Song &song) {
   if (!last_track_.isNull() &&
       last_track_.source() == lastfm::Track::NonPersonalisedBroadcast) {
     const int duration_secs = last_track_.timestamp().secsTo(QDateTime::currentDateTime());
-    if (duration_secs >= ScrobblePoint::kScrobbleMinLength) {
+    if (duration_secs >= lastfm::compat::ScrobbleTimeMin()) {
       lastfm::MutableTrack mtrack(last_track_);
       mtrack.setDuration(duration_secs);
 
@@ -514,14 +531,18 @@ void LastFMService::NowPlaying(const Song &song) {
   already_scrobbled_ = false;
   last_track_ = mtrack;
 
-  //check immediately if the song is valid
+#ifndef HAVE_LIBLASTFM1
+  // Check immediately if the song is valid
   Scrobble::Invalidity invalidity;
-
   if (!lastfm::Scrobble(last_track_).isValid( &invalidity )) {
     //for now just notify this, we can also see the cause
-    emit ScrobblerStatus(-1);
+    emit ScrobbleError(-1);
     return;
   }
+#else
+  // TODO: validity was removed from liblastfm1 but might reappear, it should have
+  // no impact as we get a different error when actually trying to scrobble.
+#endif
 
   scrobbler_->nowPlaying(mtrack);
 }
@@ -530,12 +551,12 @@ void LastFMService::Scrobble() {
   if (!InitScrobbler())
     return;
 
-  ScrobbleCache cache(lastfm::ws::Username);
+  lastfm::compat::ScrobbleCache cache(lastfm::ws::Username);
   qLog(Debug) << "There are" << cache.tracks().count() << "tracks in the last.fm cache.";
   scrobbler_->cache(last_track_);
 
   // Let's mark a track as cached, useful when the connection is down
-  emit ScrobblerStatus(30);
+  emit ScrobbleError(30);
   scrobbler_->submit();
 
   already_scrobbled_ = true;
@@ -562,13 +583,11 @@ void LastFMService::Ban() {
   last_track_ = mtrack;
 
   Scrobble();
-  model()->player()->Next();
+  app_->player()->Next();
 }
 
-void LastFMService::ShowContextMenu(const QModelIndex& index, const QPoint &global_pos) {
-  context_item_ = model()->itemFromIndex(index);
-
-  switch (index.parent().data(InternetModel::Role_Type).toInt()) {
+void LastFMService::ShowContextMenu(const QPoint& global_pos) {
+  switch (model()->current_index().parent().data(InternetModel::Role_Type).toInt()) {
     case Type_Artists:
     case Type_Tags:
     case Type_Custom:
@@ -580,7 +599,7 @@ void LastFMService::ShowContextMenu(const QModelIndex& index, const QPoint &glob
       break;
   }
 
-  const bool playable = model()->IsPlayable(index);
+  const bool playable = model()->IsPlayable(model()->current_index());
   GetAppendToPlaylistAction()->setEnabled(playable);
   GetReplacePlaylistAction()->setEnabled(playable);
   GetOpenInNewPlaylistAction()->setEnabled(playable);
@@ -641,7 +660,7 @@ void LastFMService::RefreshFriends(bool force) {
     return;
   }
 
-  lastfm::AuthenticatedUser user;
+  lastfm::compat::AuthenticatedUser user;
   QNetworkReply* reply = user.getFriends();
   connect(reply, SIGNAL(finished()), SLOT(RefreshFriendsFinished()));
 }
@@ -650,7 +669,7 @@ void LastFMService::RefreshNeighbours() {
   if (!neighbours_list_ || !IsAuthenticated())
     return;
 
-  lastfm::AuthenticatedUser user;
+  lastfm::compat::AuthenticatedUser user;
   QNetworkReply* reply = user.getNeighbours();
   connect(reply, SIGNAL(finished()), SLOT(RefreshNeighboursFinished()));
 }
@@ -661,15 +680,7 @@ void LastFMService::RefreshFriendsFinished() {
     return;
 
   QList<lastfm::User> friends;
-
-  try {
-    friends = lastfm::User::list(reply);
-#ifdef Q_OS_WIN32
-    if (lastfm::ws::last_parse_error != lastfm::ws::NoError)
-      throw std::runtime_error("");
-#endif
-  } catch (std::runtime_error& e) {
-    qLog(Error) << e.what();
+  if (!lastfm::compat::ParseUserList(reply, &friends)) {
     return;
   }
 
@@ -708,15 +719,7 @@ void LastFMService::RefreshNeighboursFinished() {
     return;
 
   QList<lastfm::User> neighbours;
-
-  try {
-    neighbours = lastfm::User::list(reply);
-#ifdef Q_OS_WIN32
-    if (lastfm::ws::last_parse_error != lastfm::ws::NoError)
-      throw std::runtime_error("");
-#endif
-  } catch (std::runtime_error& e) {
-    qLog(Error) << e.what();
+  if (!lastfm::compat::ParseUserList(reply, &neighbours)) {
     return;
   }
 
@@ -735,10 +738,6 @@ void LastFMService::RefreshNeighboursFinished() {
     item->setData(InternetModel::PlayBehaviour_SingleItem, InternetModel::Role_PlayBehaviour);
     neighbours_list_->appendRow(item);
   }
-}
-
-QModelIndex LastFMService::GetCurrentIndex() {
-  return context_item_->index();
 }
 
 void LastFMService::AddArtistRadio() {
@@ -839,9 +838,10 @@ void LastFMService::RestoreList(const QString& name,
 }
 
 void LastFMService::Remove() {
-  int type = context_item_->parent()->data(InternetModel::Role_Type).toInt();
+  QStandardItem* context_item = model()->itemFromIndex(model()->current_index());
+  int type = context_item->parent()->data(InternetModel::Role_Type).toInt();
 
-  context_item_->parent()->removeRow(context_item_->row());
+  context_item->parent()->removeRow(context_item->row());
 
   if (type == Type_Artists)
     SaveList("artists", artist_list_);
@@ -867,16 +867,11 @@ void LastFMService::FetchMoreTracksFinished() {
     return;
   }
   reply->deleteLater();
-  model()->task_manager()->SetTaskFinished(tune_task_id_);
+  app_->task_manager()->SetTaskFinished(tune_task_id_);
   tune_task_id_ = 0;
 
-  try {
-    const XmlQuery& query = lastfm::ws::parse(reply);
-#ifdef Q_OS_WIN32
-    if (lastfm::ws::last_parse_error != lastfm::ws::NoError)
-      throw std::runtime_error("");
-#endif
-
+  lastfm::XmlQuery query(lastfm::compat::EmptyXmlQuery());
+  if (lastfm::compat::ParseQuery(reply->readAll(), &query)) {
     const XmlQuery& playlist = query["playlist"];
     foreach (const XmlQuery& q, playlist["trackList"].children("track")) {
       lastfm::MutableTrack t;
@@ -891,17 +886,8 @@ void LastFMService::FetchMoreTracksFinished() {
       art_urls_[t] = q["image"].text();
       playlist_ << t;
     }
-  } catch (std::runtime_error& e) {
-    // For some reason a catch block that takes a lastfm::ws::ParseError&
-    // doesn't get called, even when a lastfm::ws::ParseError is thrown...
-    // Hacks like this remind me of Java...
-    if (QString(typeid(e).name()).contains("ParseError")) {
-      // dynamic_cast throws a std::bad_cast ... *boggle*
-      emit StreamError(tr("Couldn't load the last.fm radio station")
-                       .arg(e.what()));
-    } else {
-      emit StreamError(tr("An unknown last.fm error occurred: %1").arg(e.what()));
-    }
+  } else {
+    emit StreamError(tr("Couldn't load the last.fm radio station"));
     return;
   }
 
@@ -910,11 +896,11 @@ void LastFMService::FetchMoreTracksFinished() {
 
 void LastFMService::Tune(const QUrl& url) {
   if (!tune_task_id_)
-    tune_task_id_ = model()->task_manager()->StartTask(tr("Loading Last.fm radio"));
+    tune_task_id_ = app_->task_manager()->StartTask(tr("Loading Last.fm radio"));
 
   last_url_ = url;
   initial_tune_ = true;
-  const lastfm::RadioStation station(FixupUrl(url));
+  const lastfm::RadioStation station(FixupUrl(url).toString());
 
   playlist_.clear();
 

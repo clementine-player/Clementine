@@ -25,19 +25,19 @@
     </method>
 
     <method name="DelTrack">
-        <arg type="i" />
+        <arg direction="in" type="i" />
     </method>
 
     <method name="SetLoop">
-        <arg type="b" />
+        <arg direction="in" type="b" />
     </method>
 
     <method name="SetRandom">
-        <arg type="b" />
+        <arg direction="in" type="b" />
     </method>
 
     <method name="PlayTrack">
-        <arg type="i" />
+        <arg direction="in" type="i" />
     </method>
 
     <signal name="TrackListChange">

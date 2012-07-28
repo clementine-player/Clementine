@@ -29,15 +29,22 @@
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QMenu>
+#include <QMessageBox>
 #include <QSettings>
 #include <QShortcut>
 #include <QSignalMapper>
 #include <QtDebug>
 
+// Framerates
+const int VisualisationContainer::kLowFramerate = 15;
+const int VisualisationContainer::kMediumFramerate = 25;
+const int VisualisationContainer::kHighFramerate = 35;
+const int VisualisationContainer::kSuperHighFramerate = 60;
+
 const char* VisualisationContainer::kSettingsGroup = "Visualisations";
 const int VisualisationContainer::kDefaultWidth = 828;
 const int VisualisationContainer::kDefaultHeight = 512;
-const int VisualisationContainer::kDefaultFps = 35;
+const int VisualisationContainer::kDefaultFps = kHighFramerate;
 const int VisualisationContainer::kDefaultTextureSize = 512;
 
 VisualisationContainer::VisualisationContainer(QWidget *parent)
@@ -97,10 +104,10 @@ void VisualisationContainer::Init() {
   QMenu* fps_menu = menu_->addMenu(tr("Framerate"));
   QSignalMapper* fps_mapper = new QSignalMapper(this);
   QActionGroup* fps_group = new QActionGroup(this);
-  AddMenuItem(tr("Low (15 fps)"), 15, fps_, fps_group, fps_mapper);
-  AddMenuItem(tr("Medium (25 fps)"), 25, fps_, fps_group, fps_mapper);
-  AddMenuItem(tr("High (35 fps)"), 35, fps_, fps_group, fps_mapper);
-  AddMenuItem(tr("Super high (60 fps)"), 60, fps_, fps_group, fps_mapper);
+  AddMenuItem(tr("Low (%1 fps)").arg(kLowFramerate), kLowFramerate, fps_, fps_group, fps_mapper);
+  AddMenuItem(tr("Medium (%1 fps)").arg(kMediumFramerate), kMediumFramerate, fps_, fps_group, fps_mapper);
+  AddMenuItem(tr("High (%1 fps)").arg(kHighFramerate), kHighFramerate, fps_, fps_group, fps_mapper);
+  AddMenuItem(tr("Super high (%1 fps)").arg(kSuperHighFramerate), kSuperHighFramerate, fps_, fps_group, fps_mapper);
   fps_menu->addActions(fps_group->actions());
   connect(fps_mapper, SIGNAL(mapped(int)), SLOT(SetFps(int)));
 
@@ -110,6 +117,7 @@ void VisualisationContainer::Init() {
   AddMenuItem(tr("Low (256x256)"), 256, size_, quality_group, quality_mapper);
   AddMenuItem(tr("Medium (512x512)"), 512, size_, quality_group, quality_mapper);
   AddMenuItem(tr("High (1024x1024)"), 1024, size_, quality_group, quality_mapper);
+  AddMenuItem(tr("Super high (2048x2048)"), 2048, size_, quality_group, quality_mapper);
   quality_menu->addActions(quality_group->actions());
   connect(quality_mapper, SIGNAL(mapped(int)), SLOT(SetQuality(int)));
 
@@ -138,6 +146,13 @@ void VisualisationContainer::SetEngine(GstEngine* engine) {
 
 void VisualisationContainer::showEvent(QShowEvent* e) {
   if (!initialised_) {
+    if (!QGLFormat::hasOpenGL()) {
+      hide();
+      QMessageBox::warning(this, tr("Clementine Visualization"),
+          tr("Your system is missing OpenGL support, visualizations are unavailable."),
+          QMessageBox::Close);
+      return;
+    }
     Init();
     initialised_ = true;
   }
