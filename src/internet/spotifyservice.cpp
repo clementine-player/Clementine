@@ -519,17 +519,20 @@ void SpotifyService::EnsureMenuCreated() {
     return;
 
   context_menu_ = new QMenu;
-
-  context_menu_->addActions(GetPlaylistActions());
-  context_menu_->addSeparator();
   context_menu_->addAction(IconLoader::Load("configure"), tr("Configure Spotify..."), this, SLOT(ShowConfig()));
 
   playlist_context_menu_ = new QMenu;
+  playlist_context_menu_->addActions(GetPlaylistActions());
+  playlist_context_menu_->addSeparator();
   playlist_sync_action_ = playlist_context_menu_->addAction(
       IconLoader::Load("view-refresh"),
       tr("Make playlist available offline"),
       this,
       SLOT(SyncPlaylist()));
+  playlist_context_menu_->addSeparator();
+  playlist_context_menu_->addAction(IconLoader::Load("configure"),
+                                     tr("Configure Spotify..."),
+                                     this, SLOT(ShowConfig()));
 }
 
 void SpotifyService::ClearSearchResults() {
