@@ -24,9 +24,27 @@
 
 using namespace google_drive;
 
+const char* File::kFolderMimeType = "application/vnd.google-apps.folder";
+
 namespace {
   static const char* kGoogleDriveFiles = "https://www.googleapis.com/drive/v2/files";
   static const char* kGoogleDriveFile = "https://www.googleapis.com/drive/v2/files/%1";
+}
+
+QStringList File::parent_ids() const {
+  QStringList ret;
+
+  foreach (const QVariant& var, data_["parents"].toList()) {
+    QVariantMap map(var.toMap());
+
+    if (map["isRoot"].toBool()) {
+      ret << QString();
+    } else {
+      ret << map["id"].toString();
+    }
+  }
+
+  return ret;
 }
 
 ConnectResponse::ConnectResponse(QObject* parent)
@@ -73,6 +91,8 @@ void Client::ConnectFinished(ConnectResponse* response, OAuthenticator* oauth) {
   access_token_ = oauth->access_token();
   response->refresh_token_ = oauth->refresh_token();
   emit response->Finished();
+
+  emit Authenticated();
 }
 
 void Client::AddAuthorizationHeader(QNetworkRequest* request) const {

@@ -24,6 +24,11 @@ class GoogleDriveService : public InternetService {
  public:
   GoogleDriveService(Application* app, InternetModel* parent);
 
+  static const char* kServiceName;
+  static const char* kSettingsGroup;
+
+  google_drive::Client* client() const { return client_; }
+
   QStandardItem* CreateRootItem();
   void LazyPopulate(QStandardItem* item);
 

@@ -76,6 +76,7 @@ public:
     Page_Remote,
     Page_Wiimotedev,
     Page_Podcasts,
+    Page_GoogleDrive,
   };
 
   enum Role {

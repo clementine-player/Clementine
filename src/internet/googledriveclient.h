@@ -21,6 +21,7 @@
 #include <QDateTime>
 #include <QList>
 #include <QObject>
+#include <QStringList>
 #include <QUrl>
 #include <QVariantMap>
 
@@ -39,9 +40,12 @@ class File {
 public:
   File(const QVariantMap& data = QVariantMap()) : data_(data) {}
 
+  static const char* kFolderMimeType;
+
   QString id() const { return data_["id"].toString(); }
   QString etag() const { return data_["etag"].toString(); }
   QString title() const { return data_["title"].toString(); }
+  QString mime_type() const { return data_["mimeType"].toString(); }
   QString description() const { return data_["description"].toString(); }
   long size() const { return data_["fileSize"].toUInt(); }
   QUrl download_url() const { return data_["downloadUrl"].toUrl(); }
@@ -53,6 +57,19 @@ public:
   QDateTime created_date() const {
     return QDateTime::fromString(data_["createdDate"].toString(), Qt::ISODate);
   }
+
+  bool is_folder() const { return mime_type() == kFolderMimeType; }
+  QStringList parent_ids() const;
+
+  bool has_label(const QString& name) const {
+    return data_["labels"].toMap()[name].toBool();
+  }
+
+  bool is_starred() const { return has_label("starred"); }
+  bool is_hidden() const { return has_label("hidden"); }
+  bool is_trashed() const { return has_label("trashed"); }
+  bool is_restricted() const { return has_label("restricted"); }
+  bool is_viewed() const { return has_label("viewed"); }
 
 private:
   QVariantMap data_;
@@ -124,6 +141,9 @@ public:
   ConnectResponse* Connect(const QString& refresh_token = QString());
   ListFilesResponse* ListFiles(const QString& query);
   GetFileResponse* GetFile(const QString& file_id);
+
+signals:
+  void Authenticated();
 
 private slots:
   void ConnectFinished(ConnectResponse* response, OAuthenticator* oauth);

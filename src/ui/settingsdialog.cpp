@@ -59,6 +59,10 @@
 # include "internet/spotifysettingspage.h"
 #endif
 
+#ifdef HAVE_GOOGLE_DRIVE
+# include "internet/googledrivesettingspage.h"
+#endif
+
 #include <QDesktopWidget>
 #include <QPainter>
 #include <QPushButton>
@@ -138,6 +142,10 @@ SettingsDialog::SettingsDialog(Application* app, BackgroundStreams* streams, QWi
 #endif
 
   AddPage(Page_Grooveshark, new GroovesharkSettingsPage(this), providers);
+
+#ifdef HAVE_GOOGLE_DRIVE
+  AddPage(Page_GoogleDrive, new GoogleDriveSettingsPage(this), providers);
+#endif
 
 #ifdef HAVE_SPOTIFY
   AddPage(Page_Spotify, new SpotifySettingsPage(this), providers);

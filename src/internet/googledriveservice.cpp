@@ -18,9 +18,10 @@
 #include "googledriveurlhandler.h"
 #include "internetmodel.h"
 
-namespace {
+const char* GoogleDriveService::kServiceName = "Google Drive";
+const char* GoogleDriveService::kSettingsGroup = "GoogleDrive";
 
-static const char* kSettingsGroup = "GoogleDrive";
+namespace {
 
 static const char* kSongsTable = "google_drive_songs";
 static const char* kFtsTable = "google_drive_songs_fts";
@@ -29,7 +30,7 @@ static const char* kFtsTable = "google_drive_songs_fts";
 
 
 GoogleDriveService::GoogleDriveService(Application* app, InternetModel* parent)
-    : InternetService("Google Drive", app, parent, parent),
+    : InternetService(kServiceName, app, parent, parent),
       root_(NULL),
       client_(new google_drive::Client(this)),
       library_sort_model_(new QSortFilterProxyModel(this)) {
