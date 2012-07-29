@@ -492,8 +492,8 @@ MainWindow::MainWindow(Application* app,
   playlist_open_in_browser_ = playlist_menu_->addAction(IconLoader::Load("document-open-folder"), tr("Show in file browser..."), this, SLOT(PlaylistOpenInBrowser()));
   playlist_menu_->addSeparator();
   playlist_menu_->addAction(ui_->action_clear_playlist);
-  playlist_menu_->addAction(ui_->action_remove_duplicates);
   playlist_menu_->addAction(ui_->action_shuffle);
+  playlist_menu_->addAction(ui_->action_remove_duplicates);
 
 #ifdef Q_OS_DARWIN
   ui_->action_shuffle->setShortcut(QKeySequence());
