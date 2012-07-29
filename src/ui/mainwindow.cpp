@@ -1342,8 +1342,13 @@ void MainWindow::PlaylistRightClick(const QPoint& global_pos, const QModelIndex&
     }
 
     // Get the new item actions, and add them
-    playlistitem_actions_ = item->actions();
-    playlist_menu_->insertActions(ui_->action_clear_playlist, playlistitem_actions_);
+    QList<QAction*> new_playlistitem_actions = item->actions();
+    if (!new_playlistitem_actions.isEmpty()) {
+      QAction* separator = playlist_menu_->insertSeparator(ui_->action_clear_playlist);
+      playlist_menu_->insertActions(separator, new_playlistitem_actions);
+      new_playlistitem_actions << separator;
+    }
+    playlistitem_actions_ = new_playlistitem_actions;
   }
 
   //if it isn't the first time we right click, we need to remove the menu previously created
