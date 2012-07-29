@@ -322,6 +322,7 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   QAction* playlist_queue_;
   QAction* playlist_add_to_another_;
   QList<QAction*> playlistitem_actions_;
+  QAction* playlistitem_actions_separator_;
   QModelIndex playlist_menu_index_;
 
   QSortFilterProxyModel* library_sort_model_;
