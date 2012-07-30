@@ -47,6 +47,17 @@ class GoogleDriveStream : public TagLib::IOStream {
   virtual long length();
   virtual void truncate(long);
 
+  google::sparsetable<char>::size_type cached_bytes() const {
+    return cache_.num_nonempty();
+  }
+
+  int num_requests() const {
+    return num_requests_;
+  }
+
+  // Use educated guess to request the bytes that TagLib will probably want.
+  void Precache();
+
  private:
   bool CheckCache(int start, int end);
   void FillCache(int start, TagLib::ByteVector data);
@@ -63,6 +74,7 @@ class GoogleDriveStream : public TagLib::IOStream {
   QNetworkAccessManager* network_;
 
   google::sparsetable<char> cache_;
+  int num_requests_;
 };
 
 #endif // GOOGLEDRIVESTREAM_H

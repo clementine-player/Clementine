@@ -1,16 +1,16 @@
 /* This file is part of Clementine.
    Copyright 2012, David Sansome <me@davidsansome.com>
-   
+
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
    the Free Software Foundation, either version 3 of the License, or
    (at your option) any later version.
-   
+
    Clementine is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
    GNU General Public License for more details.
-   
+
    You should have received a copy of the GNU General Public License
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
@@ -25,7 +25,11 @@
 
 #include <taglib/id3v2framefactory.h>
 #include <taglib/mpegfile.h>
-using TagLib::ByteVector;
+
+namespace {
+  static const int kTaglibPrefixCacheBytes = 64 * 1024;  // Should be enough.
+  static const int kTaglibSuffixCacheBytes = 2 * 1024;
+}
 
 GoogleDriveStream::GoogleDriveStream(
     const QUrl& url, const QString& filename, const long length,
@@ -37,7 +41,8 @@ GoogleDriveStream::GoogleDriveStream(
       auth_(auth),
       cursor_(0),
       network_(network),
-      cache_(length) {
+      cache_(length),
+      num_requests_(0) {
 }
 
 TagLib::FileName GoogleDriveStream::name() const {
@@ -68,6 +73,25 @@ TagLib::ByteVector GoogleDriveStream::GetCached(int start, int end) {
   return ret;
 }
 
+void GoogleDriveStream::Precache() {
+  // For reading the tags of an MP3, TagLib tends to request:
+  // 1. The first 1024 bytes
+  // 2. Somewhere between the first 2KB and first 60KB
+  // 3. The last KB or two.
+  // 4. Somewhere in the first 64KB again
+  //
+  // So, if we precache the first 64KB and the last 2KB we should be sorted :-)
+  // Ideally, we would use bytes=0-655364,-2048 but Google Drive does not seem
+  // to support multipart byte ranges yet so we have to make do with two
+  // requests.
+
+  seek(0, TagLib::IOStream::Beginning);
+  readBlock(kTaglibPrefixCacheBytes);
+  seek(kTaglibSuffixCacheBytes, TagLib::IOStream::End);
+  readBlock(kTaglibSuffixCacheBytes);
+  clear();
+}
+
 TagLib::ByteVector GoogleDriveStream::readBlock(ulong length) {
   const uint start = cursor_;
   const uint end = qMin(cursor_ + length - 1, length_ - 1);
@@ -89,6 +113,7 @@ TagLib::ByteVector GoogleDriveStream::readBlock(ulong length) {
       "Range", QString("bytes=%1-%2").arg(start).arg(end).toUtf8());
 
   QNetworkReply* reply = network_->get(request);
+  ++num_requests_;
 
   QEventLoop loop;
   QObject::connect(reply, SIGNAL(finished()), &loop, SLOT(quit()));
@@ -103,11 +128,11 @@ TagLib::ByteVector GoogleDriveStream::readBlock(ulong length) {
   return bytes;
 }
 
-void GoogleDriveStream::writeBlock(const ByteVector&) {
+void GoogleDriveStream::writeBlock(const TagLib::ByteVector&) {
   qLog(Debug) << Q_FUNC_INFO << "not implemented";
 }
 
-void GoogleDriveStream::insert(const ByteVector&, ulong, ulong) {
+void GoogleDriveStream::insert(const TagLib::ByteVector&, ulong, ulong) {
   qLog(Debug) << Q_FUNC_INFO << "not implemented";
 }
 

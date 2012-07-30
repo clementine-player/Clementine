@@ -616,10 +616,11 @@ void TagReaderWorker::ReadGoogleDrive(const QUrl& download_url,
 
   GoogleDriveStream* stream = new GoogleDriveStream(
       download_url, title, size, access_token, network_);
+  stream->Precache();
   TagLib::MPEG::File tag(
       stream,  // Takes ownership.
       TagLib::ID3v2::FrameFactory::instance(),
-      TagLib::AudioProperties::Fast);
+      TagLib::AudioProperties::Accurate);
   if (tag.tag()) {
     song->set_title(tag.tag()->title().toCString(true));
     song->set_artist(tag.tag()->artist().toCString(true));
@@ -631,6 +632,10 @@ void TagReaderWorker::ReadGoogleDrive(const QUrl& download_url,
     if (tag.audioProperties()) {
       song->set_length_nanosec(tag.audioProperties()->length() * kNsecPerSec);
     }
+    qLog(Debug) << "Google Drive Tagging Stats for:"
+                << song->title().c_str();
+    qLog(Debug) << "Downloaded bytes:" << stream->cached_bytes()
+                << "Number of requests:" << stream->num_requests();
   }
 }
 #endif // HAVE_GOOGLE_DRIVE
