@@ -184,6 +184,11 @@ void SetGstreamerEnvironment() {
   if (!registry_filename.isEmpty()) {
     SetEnv("GST_REGISTRY", registry_filename);
   }
+
+#ifdef Q_OS_DARWIN
+  SetEnv("GIO_EXTRA_MODULES",
+      QCoreApplication::applicationDirPath() + "/../PlugIns/gio-modules");
+#endif
 }
 
 #ifdef HAVE_GIO

@@ -106,6 +106,10 @@ QT_PLUGINS_SEARCH_PATH=[
     '/Developer/Applications/Qt/plugins',
 ]
 
+GIO_MODULES_SEARCH_PATH=[
+    '/target/lib/gio/modules',
+]
+
 
 class Error(Exception):
   pass
@@ -131,7 +135,7 @@ class CouldNotFindGstreamerPluginError(Error):
   pass
 
 
-class CouldNotFindScriptPluginError(Error):
+class CouldNotFindGioModuleError(Error):
   pass
 
 
@@ -360,12 +364,23 @@ def FindGstreamerPlugin(name):
   raise CouldNotFindGstreamerPluginError(name)
 
 
+def FindGioModule(name):
+  for path in GIO_MODULES_SEARCH_PATH:
+    if os.path.exists(path):
+      for dir, dirs, files in os.walk(path):
+        if name in files:
+          return os.path.join(dir, name)
+  raise CouldNotFindGioModuleError(name)
+
+
 FixBinary(binary)
 
 for plugin in GSTREAMER_PLUGINS:
   FixPlugin(FindGstreamerPlugin(plugin), 'gstreamer')
 
 FixPlugin(FindGstreamerPlugin('gst-plugin-scanner'), '.')
+FixPlugin(FindGioModule('libgiognutls.so'), 'gio-modules')
+FixPlugin(FindGioModule('libgiolibproxy.so'), 'gio-modules')
 
 try:
   FixPlugin('clementine-spotifyblob', '.')
