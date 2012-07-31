@@ -39,8 +39,9 @@ FolderModel::FolderModel(Client* client, QObject* parent)
 }
 
 void FolderModel::Refresh() {
-  ListFilesResponse* reply =
-      client_->ListFiles(QString("mimeType = '%1'").arg(File::kFolderMimeType));
+  ListFilesResponse* reply = client_->ListFiles(
+      QString("mimeType = '%1' and trashed = false and hidden = false")
+      .arg(File::kFolderMimeType));
   connect(reply, SIGNAL(FilesFound(QList<google_drive::File>)),
           this, SLOT(FilesFound(QList<google_drive::File>)));
   NewClosure(reply, SIGNAL(Finished()),
@@ -54,10 +55,6 @@ void FolderModel::FindFilesFinished(ListFilesResponse* reply) {
 
 void FolderModel::FilesFound(const QList<google_drive::File>& files) {
   foreach (const File& file, files) {
-    if (file.is_hidden() || file.is_trashed()) {
-      continue;
-    }
-
     const QString id(file.id());
 
     // Does this file exist in the model already?
