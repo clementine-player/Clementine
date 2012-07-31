@@ -87,6 +87,7 @@ TagReaderReply* TagReaderClient::LoadEmbeddedArt(const QString& filename) {
 TagReaderReply* TagReaderClient::ReadGoogleDrive(const QUrl& download_url,
                                                  const QString& title,
                                                  int size,
+                                                 const QString& mime_type,
                                                  const QString& access_token) {
   pb::tagreader::Message message;
   pb::tagreader::ReadGoogleDriveRequest* req =
@@ -96,6 +97,7 @@ TagReaderReply* TagReaderClient::ReadGoogleDrive(const QUrl& download_url,
   req->set_download_url(DataCommaSizeFromQString(url_string));
   req->set_title(DataCommaSizeFromQString(title));
   req->set_size(size);
+  req->set_mime_type(DataCommaSizeFromQString(mime_type));
   req->set_access_token(DataCommaSizeFromQString(access_token));
 
   return worker_pool_->SendMessageWithReply(&message);

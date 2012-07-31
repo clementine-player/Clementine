@@ -84,6 +84,16 @@ void GoogleDriveService::Connect() {
              response);
 }
 
+void GoogleDriveService::ListFilesForMimeType(const QString& mime_type) {
+  google_drive::ListFilesResponse* list_response = client_->ListFiles(
+      QString("mimeType = '%1' and trashed = false").arg(mime_type));
+  connect(list_response, SIGNAL(FilesFound(QList<google_drive::File>)),
+          this, SLOT(FilesFound(QList<google_drive::File>)));
+  NewClosure(list_response, SIGNAL(Finished()),
+             this, SLOT(ListFilesFinished(google_drive::ListFilesResponse*)),
+             list_response);
+}
+
 void GoogleDriveService::ConnectFinished(google_drive::ConnectResponse* response) {
   response->deleteLater();
 
@@ -93,13 +103,9 @@ void GoogleDriveService::ConnectFinished(google_drive::ConnectResponse* response
   s.setValue("refresh_token", response->refresh_token());
 
   // Find any music files
-  google_drive::ListFilesResponse* list_response =
-      client_->ListFiles("mimeType = 'audio/mpeg'");
-  connect(list_response, SIGNAL(FilesFound(QList<google_drive::File>)),
-          this, SLOT(FilesFound(QList<google_drive::File>)));
-
-  NewClosure(list_response, SIGNAL(Finished()),
-             this, SLOT(ListFilesFinished(google_drive::ListFilesResponse*)));
+  ListFilesForMimeType("audio/mpeg");          // MP3
+  ListFilesForMimeType("application/ogg");     // OGG
+  ListFilesForMimeType("application/x-flac");  // FLAC
 }
 
 void GoogleDriveService::FilesFound(const QList<google_drive::File>& files) {
@@ -126,6 +132,7 @@ void GoogleDriveService::MaybeAddFileToDatabase(const google_drive::File& file) 
       file.download_url(),
       file.title(),
       file.size(),
+      file.mime_type(),
       client_->access_token());
 
   NewClosure(reply, SIGNAL(Finished(bool)),
@@ -140,8 +147,8 @@ void GoogleDriveService::ReadTagsFinished(TagReaderClient::ReplyType* reply,
 
   const pb::tagreader::ReadGoogleDriveResponse& msg =
       reply->message().read_google_drive_response();
-  if (!msg.metadata().filesize()) {
-    qLog(Debug) << "Failed to tag:" << metadata.download_url();
+  if (!msg.has_metadata() || !msg.metadata().filesize()) {
+    qLog(Debug) << "Failed to tag:" << metadata.title();
     return;
   }
 

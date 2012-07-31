@@ -133,12 +133,16 @@ void TagReaderWorker::MessageArrived(const pb::tagreader::Message& message) {
 #ifdef HAVE_GOOGLE_DRIVE
     const pb::tagreader::ReadGoogleDriveRequest& req =
         message.read_google_drive_request();
-    ReadGoogleDrive(QUrl::fromEncoded(QByteArray(req.download_url().data(),
-                                                 req.download_url().size())),
-                    QStringFromStdString(req.title()),
-                    req.size(),
-                    QStringFromStdString(req.access_token()),
-                    reply.mutable_read_google_drive_response()->mutable_metadata());
+    if (!ReadGoogleDrive(
+        QUrl::fromEncoded(QByteArray(req.download_url().data(),
+                                     req.download_url().size())),
+        QStringFromStdString(req.title()),
+        req.size(),
+        QStringFromStdString(req.mime_type()),
+        QStringFromStdString(req.access_token()),
+        reply.mutable_read_google_drive_response()->mutable_metadata())) {
+      reply.mutable_read_google_drive_response()->clear_metadata();
+    }
 #endif
   }
 
@@ -607,9 +611,10 @@ void TagReaderWorker::DeviceClosed() {
 }
 
 #ifdef HAVE_GOOGLE_DRIVE
-void TagReaderWorker::ReadGoogleDrive(const QUrl& download_url,
+bool TagReaderWorker::ReadGoogleDrive(const QUrl& download_url,
                                       const QString& title,
                                       int size,
+                                      const QString& mime_type,
                                       const QString& access_token,
                                       pb::tagreader::SongMetadata* song) const {
   qLog(Debug) << "Loading tags from" << title;
@@ -617,25 +622,49 @@ void TagReaderWorker::ReadGoogleDrive(const QUrl& download_url,
   GoogleDriveStream* stream = new GoogleDriveStream(
       download_url, title, size, access_token, network_);
   stream->Precache();
-  TagLib::MPEG::File tag(
-      stream,  // Takes ownership.
-      TagLib::ID3v2::FrameFactory::instance(),
-      TagLib::AudioProperties::Accurate);
-  if (tag.tag()) {
-    song->set_title(tag.tag()->title().toCString(true));
-    song->set_artist(tag.tag()->artist().toCString(true));
-    song->set_album(tag.tag()->album().toCString(true));
+  scoped_ptr<TagLib::File> tag;
+  if (mime_type == "audio/mpeg") {
+    tag.reset(new TagLib::MPEG::File(
+        stream,  // Takes ownership.
+        TagLib::ID3v2::FrameFactory::instance(),
+        TagLib::AudioProperties::Accurate));
+  } else if (mime_type == "application/ogg") {
+    tag.reset(new TagLib::Ogg::Vorbis::File(
+        stream,
+        true,
+        TagLib::AudioProperties::Accurate));
+  } else if (mime_type == "application/x-flac") {
+    tag.reset(new TagLib::FLAC::File(
+        stream,
+        TagLib::ID3v2::FrameFactory::instance(),
+        true,
+        TagLib::AudioProperties::Accurate));
+  } else {
+    qLog(Debug) << "Unknown mime type for tagging:" << mime_type;
+    return false;
+  }
+
+  if (stream->num_requests() > 2) {
+    // Warn if pre-caching failed.
+    qLog(Warning) << "Total requests for file:" << title
+                  << stream->num_requests()
+                  << stream->cached_bytes();
+  }
+
+  if (tag->tag()) {
+    song->set_title(tag->tag()->title().toCString(true));
+    song->set_artist(tag->tag()->artist().toCString(true));
+    song->set_album(tag->tag()->album().toCString(true));
     song->set_filesize(size);
 
     song->set_type(pb::tagreader::SongMetadata_Type_STREAM);
 
-    if (tag.audioProperties()) {
-      song->set_length_nanosec(tag.audioProperties()->length() * kNsecPerSec);
+    if (tag->audioProperties()) {
+      song->set_length_nanosec(tag->audioProperties()->length() * kNsecPerSec);
     }
-    qLog(Debug) << "Google Drive Tagging Stats for:"
-                << song->title().c_str();
-    qLog(Debug) << "Downloaded bytes:" << stream->cached_bytes()
-                << "Number of requests:" << stream->num_requests();
+    return true;
   }
+
+  return false;
 }
 #endif // HAVE_GOOGLE_DRIVE

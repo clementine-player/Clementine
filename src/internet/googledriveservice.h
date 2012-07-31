@@ -46,6 +46,7 @@ class GoogleDriveService : public InternetService {
   void Connect();
   void RefreshAuthorisation(const QString& refresh_token);
   void MaybeAddFileToDatabase(const google_drive::File& file);
+  void ListFilesForMimeType(const QString& mime_type);
 
   QStandardItem* root_;
 

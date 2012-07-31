@@ -28,7 +28,7 @@
 
 namespace {
   static const int kTaglibPrefixCacheBytes = 64 * 1024;  // Should be enough.
-  static const int kTaglibSuffixCacheBytes = 2 * 1024;
+  static const int kTaglibSuffixCacheBytes = 8 * 1024;
 }
 
 GoogleDriveStream::GoogleDriveStream(
@@ -80,8 +80,10 @@ void GoogleDriveStream::Precache() {
   // 3. The last KB or two.
   // 4. Somewhere in the first 64KB again
   //
-  // So, if we precache the first 64KB and the last 2KB we should be sorted :-)
-  // Ideally, we would use bytes=0-655364,-2048 but Google Drive does not seem
+  // OGG Vorbis may read the last 4KB.
+  //
+  // So, if we precache the first 64KB and the last 8KB we should be sorted :-)
+  // Ideally, we would use bytes=0-655364,-8096 but Google Drive does not seem
   // to support multipart byte ranges yet so we have to make do with two
   // requests.
 
@@ -96,7 +98,7 @@ TagLib::ByteVector GoogleDriveStream::readBlock(ulong length) {
   const uint start = cursor_;
   const uint end = qMin(cursor_ + length - 1, length_ - 1);
 
-  if (end <= start) {
+  if (end < start) {
     return TagLib::ByteVector();
   }
 
@@ -160,7 +162,8 @@ void GoogleDriveStream::seek(long offset, TagLib::IOStream::Position p) {
       break;
 
     case TagLib::IOStream::End:
-      cursor_ = qMax(0UL, length_ - offset);
+      // This should really not have qAbs(), but OGG reading needs it.
+      cursor_ = qMax(0UL, length_ - qAbs(offset));
       break;
   }
 }

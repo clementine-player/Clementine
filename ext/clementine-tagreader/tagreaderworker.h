@@ -55,9 +55,10 @@ private:
   QByteArray LoadEmbeddedArt(const QString& filename) const;
 
   #ifdef HAVE_GOOGLE_DRIVE
-  void ReadGoogleDrive(const QUrl& download_url,
+  bool ReadGoogleDrive(const QUrl& download_url,
                        const QString& title,
                        int size,
+                       const QString& mime_type,
                        const QString& access_token,
                        pb::tagreader::SongMetadata* song) const;
   #endif // HAVE_GOOGLE_DRIVE
