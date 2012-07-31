@@ -623,10 +623,15 @@ bool TagReaderWorker::ReadGoogleDrive(const QUrl& download_url,
       download_url, title, size, access_token, network_);
   stream->Precache();
   scoped_ptr<TagLib::File> tag;
-  if (mime_type == "audio/mpeg") {
+  if (mime_type == "audio/mpeg" && title.endsWith(".mp3")) {
     tag.reset(new TagLib::MPEG::File(
         stream,  // Takes ownership.
         TagLib::ID3v2::FrameFactory::instance(),
+        TagLib::AudioProperties::Accurate));
+  } else if (mime_type == "audio/mpeg" && title.endsWith(".m4a")) {
+    tag.reset(new TagLib::MP4::File(
+        stream,
+        true,
         TagLib::AudioProperties::Accurate));
   } else if (mime_type == "application/ogg") {
     tag.reset(new TagLib::Ogg::Vorbis::File(
@@ -656,6 +661,13 @@ bool TagReaderWorker::ReadGoogleDrive(const QUrl& download_url,
     song->set_artist(tag->tag()->artist().toCString(true));
     song->set_album(tag->tag()->album().toCString(true));
     song->set_filesize(size);
+
+    if (tag->tag()->track() != 0) {
+      song->set_track(tag->tag()->track());
+    }
+    if (tag->tag()->year() != 0) {
+      song->set_year(tag->tag()->year());
+    }
 
     song->set_type(pb::tagreader::SongMetadata_Type_STREAM);
 

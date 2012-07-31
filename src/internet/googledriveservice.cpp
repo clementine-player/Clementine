@@ -103,7 +103,7 @@ void GoogleDriveService::ConnectFinished(google_drive::ConnectResponse* response
   s.setValue("refresh_token", response->refresh_token());
 
   // Find any music files
-  ListFilesForMimeType("audio/mpeg");          // MP3
+  ListFilesForMimeType("audio/mpeg");          // MP3/AAC
   ListFilesForMimeType("application/ogg");     // OGG
   ListFilesForMimeType("application/x-flac");  // FLAC
 }
