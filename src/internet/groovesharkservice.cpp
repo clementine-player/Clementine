@@ -520,9 +520,6 @@ void GroovesharkService::ShowContextMenu(const QPoint& global_pos) {
   context_menu_->popup(global_pos);
 }
 
-void GroovesharkService::UpdateTotalSongCount(int count) {
-}
-
 void GroovesharkService::EnsureMenuCreated() {
   if(!context_menu_) {
     context_menu_ = new QMenu;
