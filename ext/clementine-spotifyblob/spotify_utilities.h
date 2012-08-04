@@ -25,8 +25,9 @@
 
 namespace utilities {
 
-// Get the path to the current user's local cache for all apps.
-QString GetUserCacheDirectory();
+// Get the path to the current user's data directory for all apps.
+QString GetUserDataDirectory();
+
 // Get the path for Clementine's cache.
 QString GetCacheDirectory();
 

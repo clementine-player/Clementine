@@ -6,7 +6,7 @@
 
 namespace utilities {
 
-QString GetUserCacheDirectory() {
+QString GetUserDataDirectory() {
   NSAutoreleasePool* pool = [NSAutoreleasePool alloc];
   [pool init];
 
