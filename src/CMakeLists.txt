@@ -185,6 +185,7 @@ set(SOURCES
   internet/searchboxwidget.cpp
   internet/somafmservice.cpp
   internet/somafmurlhandler.cpp
+  internet/soundcloudservice.cpp
 
   library/groupbydialog.cpp
   library/library.cpp
@@ -452,6 +453,7 @@ set(HEADERS
   internet/searchboxwidget.h
   internet/somafmservice.h
   internet/somafmurlhandler.h
+  internet/soundcloudservice.h
 
   library/groupbydialog.h
   library/library.h

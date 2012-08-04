@@ -16,6 +16,7 @@
 */
 
 #include "digitallyimportedservicebase.h"
+#include "groovesharkservice.h"
 #include "icecastservice.h"
 #include "jamendoservice.h"
 #include "magnatuneservice.h"
@@ -24,7 +25,7 @@
 #include "internetservice.h"
 #include "savedradio.h"
 #include "somafmservice.h"
-#include "groovesharkservice.h"
+#include "soundcloudservice.h"
 #include "core/logging.h"
 #include "core/mergedproxymodel.h"
 #include "podcasts/podcastservice.h"
@@ -70,6 +71,7 @@ InternetModel::InternetModel(Application* app, QObject* parent)
   AddService(new SavedRadio(app, this));
   AddService(new SkyFmService(app, this));
   AddService(new SomaFMService(app, this));
+  AddService(new SoundCloudService(app, this));
 #ifdef HAVE_SPOTIFY
   AddService(new SpotifyService(app, this));
 #endif
