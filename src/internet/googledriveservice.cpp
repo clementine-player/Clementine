@@ -9,6 +9,7 @@
 #include "core/database.h"
 #include "core/mergedproxymodel.h"
 #include "core/player.h"
+#include "core/taskmanager.h"
 #include "core/timeconstants.h"
 #include "globalsearch/globalsearch.h"
 #include "globalsearch/librarysearchprovider.h"
@@ -33,6 +34,7 @@ GoogleDriveService::GoogleDriveService(Application* app, InternetModel* parent)
     : InternetService(kServiceName, app, parent, parent),
       root_(NULL),
       client_(new google_drive::Client(this)),
+      task_manager_(app->task_manager()),
       library_sort_model_(new QSortFilterProxyModel(this)) {
   library_backend_ = new LibraryBackend;
   library_backend_->moveToThread(app_->database()->thread());
@@ -127,6 +129,9 @@ void GoogleDriveService::MaybeAddFileToDatabase(const google_drive::File& file) 
     return;
   }
 
+  const int task_id = task_manager_->StartTask(
+      tr("Indexing %1").arg(file.title()));
+
   // Song not in index; tag and add.
   TagReaderClient::ReplyType* reply = app_->tag_reader_client()->ReadGoogleDrive(
       file.download_url(),
@@ -136,14 +141,17 @@ void GoogleDriveService::MaybeAddFileToDatabase(const google_drive::File& file) 
       client_->access_token());
 
   NewClosure(reply, SIGNAL(Finished(bool)),
-             this, SLOT(ReadTagsFinished(TagReaderClient::ReplyType*,google_drive::File,QString)),
-             reply, file, url);
+             this, SLOT(ReadTagsFinished(TagReaderClient::ReplyType*,google_drive::File,QString,int)),
+             reply, file, url, task_id);
 }
 
 void GoogleDriveService::ReadTagsFinished(TagReaderClient::ReplyType* reply,
                                           const google_drive::File& metadata,
-                                          const QString& url) {
+                                          const QString& url,
+                                          const int task_id) {
   reply->deleteLater();
+
+  TaskManager::ScopedTask(task_id, task_manager_);
 
   const pb::tagreader::ReadGoogleDriveResponse& msg =
       reply->message().read_google_drive_response();

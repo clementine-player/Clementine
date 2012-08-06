@@ -10,6 +10,7 @@ class QStandardItem;
 
 class LibraryBackend;
 class LibraryModel;
+class TaskManager;
 class QSortFilterProxyModel;
 
 namespace google_drive {
@@ -40,7 +41,8 @@ class GoogleDriveService : public InternetService {
   void ListFilesFinished(google_drive::ListFilesResponse* response);
   void ReadTagsFinished(TagReaderClient::ReplyType* reply,
                         const google_drive::File& metadata,
-                        const QString& url);
+                        const QString& url,
+                        const int task_id);
 
  private:
   void Connect();
@@ -53,6 +55,7 @@ class GoogleDriveService : public InternetService {
   google_drive::Client* client_;
 
   NetworkAccessManager network_;
+  TaskManager* task_manager_;
 
   LibraryBackend* library_backend_;
   LibraryModel* library_model_;
