@@ -187,7 +187,8 @@ bool InternetModel::IsPlayable(const QModelIndex& index) const {
     return false;
 
   PlayBehaviour pb = PlayBehaviour(behaviour.toInt());
-  return (pb == PlayBehaviour_SingleItem || PlayBehaviour_UseSongLoader);
+  return (pb == PlayBehaviour_MultipleItems || pb == PlayBehaviour_SingleItem ||
+          pb == PlayBehaviour_UseSongLoader);
 }
 
 QStringList InternetModel::mimeTypes() const {
@@ -224,7 +225,7 @@ QMimeData* InternetModel::mimeData(const QModelIndexList& indexes) const {
       continue;
 
     last_valid_index = index;
-    if (index.data(Role_Type).toInt() == Type_UserPlaylist) {
+    if (index.data(Role_PlayBehaviour).toInt() == PlayBehaviour_MultipleItems) {
       // Get children
       int row = 0;
       int column = 0;

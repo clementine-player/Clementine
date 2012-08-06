@@ -183,6 +183,7 @@ MainWindow::MainWindow(Application* app,
 #endif
     playlist_menu_(new QMenu(this)),
     playlist_add_to_another_(NULL),
+    playlistitem_actions_separator_(NULL),
     library_sort_model_(new QSortFilterProxyModel(this)),
     track_position_timer_(new QTimer(this)),
     was_maximized_(false),
@@ -491,9 +492,10 @@ MainWindow::MainWindow(Application* app,
   playlist_delete_ = playlist_menu_->addAction(IconLoader::Load("edit-delete"), tr("Delete from disk..."), this, SLOT(PlaylistDelete()));
   playlist_open_in_browser_ = playlist_menu_->addAction(IconLoader::Load("document-open-folder"), tr("Show in file browser..."), this, SLOT(PlaylistOpenInBrowser()));
   playlist_menu_->addSeparator();
+  playlistitem_actions_separator_ = playlist_menu_->addSeparator();
   playlist_menu_->addAction(ui_->action_clear_playlist);
-  playlist_menu_->addAction(ui_->action_remove_duplicates);
   playlist_menu_->addAction(ui_->action_shuffle);
+  playlist_menu_->addAction(ui_->action_remove_duplicates);
 
 #ifdef Q_OS_DARWIN
   ui_->action_shuffle->setShortcut(QKeySequence());
@@ -1343,7 +1345,8 @@ void MainWindow::PlaylistRightClick(const QPoint& global_pos, const QModelIndex&
 
     // Get the new item actions, and add them
     playlistitem_actions_ = item->actions();
-    playlist_menu_->insertActions(ui_->action_clear_playlist, playlistitem_actions_);
+    playlistitem_actions_separator_->setVisible(!playlistitem_actions_.isEmpty());
+    playlist_menu_->insertActions(playlistitem_actions_separator_, playlistitem_actions_);
   }
 
   //if it isn't the first time we right click, we need to remove the menu previously created

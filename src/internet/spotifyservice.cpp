@@ -344,20 +344,26 @@ void SpotifyService::PlaylistsUpdated(const pb::spotify::Playlists& response) {
     search_->setToolTip(tr("Start typing something on the search box above to "
                            "fill this search results list"));
     search_->setData(Type_SearchResults, InternetModel::Role_Type);
-    search_->setData(InternetModel::PlayBehaviour_DoubleClickAction,
+    search_->setData(InternetModel::PlayBehaviour_MultipleItems,
                              InternetModel::Role_PlayBehaviour);
 
     starred_ = new QStandardItem(QIcon(":/star-on.png"), tr("Starred"));
     starred_->setData(Type_StarredPlaylist, InternetModel::Role_Type);
     starred_->setData(true, InternetModel::Role_CanLazyLoad);
+    starred_->setData(InternetModel::PlayBehaviour_MultipleItems,
+                             InternetModel::Role_PlayBehaviour);
 
     inbox_ = new QStandardItem(IconLoader::Load("mail-message"), tr("Inbox"));
     inbox_->setData(Type_InboxPlaylist, InternetModel::Role_Type);
     inbox_->setData(true, InternetModel::Role_CanLazyLoad);
+    inbox_->setData(InternetModel::PlayBehaviour_MultipleItems,
+                             InternetModel::Role_PlayBehaviour);
 
     toplist_ = new QStandardItem(QIcon(), tr("Top tracks"));
     toplist_->setData(Type_Toplist, InternetModel::Role_Type);
     toplist_->setData(true, InternetModel::Role_CanLazyLoad);
+    toplist_->setData(InternetModel::PlayBehaviour_MultipleItems,
+                             InternetModel::Role_PlayBehaviour);
 
     root_->appendRow(search_);
     root_->appendRow(toplist_);
@@ -384,7 +390,7 @@ void SpotifyService::PlaylistsUpdated(const pb::spotify::Playlists& response) {
     item->setData(InternetModel::Type_UserPlaylist, InternetModel::Role_Type);
     item->setData(true, InternetModel::Role_CanLazyLoad);
     item->setData(msg.index(), Role_UserPlaylistIndex);
-    item->setData(InternetModel::PlayBehaviour_SingleItem, InternetModel::Role_PlayBehaviour);
+    item->setData(InternetModel::PlayBehaviour_MultipleItems, InternetModel::Role_PlayBehaviour);
 
     root_->appendRow(item);
     playlists_ << item;
@@ -513,17 +519,20 @@ void SpotifyService::EnsureMenuCreated() {
     return;
 
   context_menu_ = new QMenu;
-
-  context_menu_->addActions(GetPlaylistActions());
-  context_menu_->addSeparator();
   context_menu_->addAction(IconLoader::Load("configure"), tr("Configure Spotify..."), this, SLOT(ShowConfig()));
 
   playlist_context_menu_ = new QMenu;
+  playlist_context_menu_->addActions(GetPlaylistActions());
+  playlist_context_menu_->addSeparator();
   playlist_sync_action_ = playlist_context_menu_->addAction(
       IconLoader::Load("view-refresh"),
       tr("Make playlist available offline"),
       this,
       SLOT(SyncPlaylist()));
+  playlist_context_menu_->addSeparator();
+  playlist_context_menu_->addAction(IconLoader::Load("configure"),
+                                     tr("Configure Spotify..."),
+                                     this, SLOT(ShowConfig()));
 }
 
 void SpotifyService::ClearSearchResults() {
