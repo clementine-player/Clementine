@@ -133,17 +133,17 @@ msgstr "%L1 прослушвания общо"
 msgid "%filename%"
 msgstr "%filename%"
 
-#: transcoder/transcodedialog.cpp:199
+#: transcoder/transcodedialog.cpp:202
 #, c-format
 msgid "%n failed"
 msgstr "%n неуспешно"
 
-#: transcoder/transcodedialog.cpp:194
+#: transcoder/transcodedialog.cpp:197
 #, c-format
 msgid "%n finished"
 msgstr "%n завършено"
 
-#: transcoder/transcodedialog.cpp:189
+#: transcoder/transcodedialog.cpp:192
 #, c-format
 msgid "%n remaining"
 msgstr "%n оставащо"
@@ -369,7 +369,7 @@ msgstr "Добавяне на файл"
 msgid "Add file..."
 msgstr "Добавяне на файл..."
 
-#: transcoder/transcodedialog.cpp:211
+#: transcoder/transcodedialog.cpp:214
 msgid "Add files to transcode"
 msgstr "Добавяне на файлове за прекодиране"
 
@@ -453,11 +453,11 @@ msgstr "Добавяне на етикет за година на песен"
 msgid "Add stream..."
 msgstr "Добавяне на поток..."
 
-#: internet/groovesharkservice.cpp:1112
+#: internet/groovesharkservice.cpp:1109
 msgid "Add to Grooveshark favorites"
 msgstr "Добавяне към Grooveshark любими"
 
-#: internet/groovesharkservice.cpp:1124
+#: internet/groovesharkservice.cpp:1121
 msgid "Add to Grooveshark playlists"
 msgstr "Добавяне към Grooveshark списък с песни"
 
@@ -477,7 +477,7 @@ msgstr "Добави към опашката"
 msgid "Add wiimotedev action"
 msgstr "Добави Wiiremote действие"
 
-#: ../bin/src/ui_transcodedialog.h:206
+#: ../bin/src/ui_transcodedialog.h:207
 msgid "Add..."
 msgstr "Добавяне..."
 
@@ -502,11 +502,11 @@ msgstr "Добавени днес"
 msgid "Added within three months"
 msgstr "Добавени през последните три месеца"
 
-#: internet/groovesharkservice.cpp:1420
+#: internet/groovesharkservice.cpp:1417
 msgid "Adding song to My Music"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:1397
+#: internet/groovesharkservice.cpp:1394
 msgid "Adding song to favorites"
 msgstr "Добавяне на песен в любими"
 
@@ -594,7 +594,7 @@ msgstr "Всички песни"
 msgid "Allow mid/side encoding"
 msgstr "Позволи mid/side кодиране"
 
-#: ../bin/src/ui_transcodedialog.h:214
+#: ../bin/src/ui_transcodedialog.h:215
 msgid "Alongside the originals"
 msgstr "Заедно с оригиналите"
 
@@ -670,7 +670,7 @@ msgstr "Прилагане на компресия за да се предотв
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "Сигурни ли сте, че искате да изтриете \"%1\" настройката?"
 
-#: internet/groovesharkservice.cpp:1318
+#: internet/groovesharkservice.cpp:1315
 msgid "Are you sure you want to delete this playlist?"
 msgstr "Сигурни ли сте, че искате да изтриете този списък с песни?"
 
@@ -704,7 +704,7 @@ msgstr "Етикети за изпълнителя"
 msgid "Artist's initial"
 msgstr "Инициали на изпълнителя"
 
-#: ../bin/src/ui_transcodedialog.h:209
+#: ../bin/src/ui_transcodedialog.h:210
 msgid "Audio format"
 msgstr "Аудио формат"
 
@@ -948,7 +948,8 @@ msgstr "Класически"
 msgid "Cleaning up"
 msgstr "Почистване"
 
-#: widgets/lineedit.cpp:41 ../bin/src/ui_queuemanager.h:139
+#: transcoder/transcodedialog.cpp:60 widgets/lineedit.cpp:41
+#: ../bin/src/ui_queuemanager.h:139
 msgid "Clear"
 msgstr "Изчистване"
 
@@ -1081,7 +1082,7 @@ msgstr "Композитор"
 msgid "Configure %1..."
 msgstr ""
 
-#: internet/groovesharkservice.cpp:563
+#: internet/groovesharkservice.cpp:560
 msgid "Configure Grooveshark..."
 msgstr "Настройване на Grooveshark..."
 
@@ -1142,7 +1143,7 @@ msgstr "Конвертирай цялата музика"
 msgid "Convert any music that the device can't play"
 msgstr "Конвертиране само музиката, която това устройство не може да възпроизвежда"
 
-#: internet/groovesharkservice.cpp:1197
+#: internet/groovesharkservice.cpp:1194
 msgid "Copy to clipboard"
 msgstr "Копиране в буфера"
 
@@ -1226,7 +1227,7 @@ msgstr "Обложката е зададена от %1"
 msgid "Covers from %1"
 msgstr "Обложки от %1"
 
-#: internet/groovesharkservice.cpp:531 internet/groovesharkservice.cpp:1270
+#: internet/groovesharkservice.cpp:528 internet/groovesharkservice.cpp:1267
 msgid "Create a new Grooveshark playlist"
 msgstr "Направа на нов Grooveshark списък с песни"
 
@@ -1381,7 +1382,7 @@ msgstr "Стандартни настройки"
 msgid "Delay between visualizations"
 msgstr "Забавяне между визуализации"
 
-#: internet/groovesharkservice.cpp:534 internet/groovesharkservice.cpp:1317
+#: internet/groovesharkservice.cpp:531 internet/groovesharkservice.cpp:1314
 msgid "Delete Grooveshark playlist"
 msgstr "Изтриване на Grooveshark списък с песни"
 
@@ -1431,11 +1432,11 @@ msgstr "Махни от опашката избраните парчета"
 msgid "Dequeue track"
 msgstr "Махни от опашката парчето"
 
-#: ../bin/src/ui_transcodedialog.h:211 ../bin/src/ui_organisedialog.h:189
+#: ../bin/src/ui_transcodedialog.h:212 ../bin/src/ui_organisedialog.h:189
 msgid "Destination"
 msgstr "Местоположение"
 
-#: ../bin/src/ui_transcodedialog.h:217
+#: ../bin/src/ui_transcodedialog.h:218
 msgid "Details..."
 msgstr "Подробности..."
 
@@ -1480,7 +1481,7 @@ msgid "Direct internet connection"
 msgstr "Директна връзка към Интернет"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:145
-#: ../bin/src/ui_transcodedialog.h:204
+#: ../bin/src/ui_transcodedialog.h:205
 msgid "Directory"
 msgstr "Папка"
 
@@ -1748,7 +1749,7 @@ msgstr "Еквивалентно на --log-levels *:1"
 msgid "Equivalent to --log-levels *:3"
 msgstr "Еквивалентно на --log-levels *:3"
 
-#: internet/groovesharkservice.cpp:1042
+#: internet/groovesharkservice.cpp:1039
 #: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:497
 #: ui/mainwindow.cpp:1763 ui/mainwindow.cpp:1884
 msgid "Error"
@@ -1899,7 +1900,7 @@ msgstr "Неуспешен разбор на XML за тази RSS хранил�
 msgid "Fast"
 msgstr "Бързо"
 
-#: internet/groovesharkservice.cpp:628
+#: internet/groovesharkservice.cpp:625
 msgid "Favorites"
 msgstr "Любими"
 
@@ -1949,7 +1950,7 @@ msgstr "Размер на файла"
 msgid "File type"
 msgstr "Тип на файла"
 
-#: ../bin/src/ui_transcodedialog.h:205
+#: ../bin/src/ui_transcodedialog.h:206
 msgid "Filename"
 msgstr "Име на файл"
 
@@ -1957,7 +1958,7 @@ msgstr "Име на файл"
 msgid "Files"
 msgstr "Файлове"
 
-#: ../bin/src/ui_transcodedialog.h:202
+#: ../bin/src/ui_transcodedialog.h:203
 msgid "Files to transcode"
 msgstr "Файлове за прекодиране"
 
@@ -2087,15 +2088,15 @@ msgstr "Общи настройки"
 msgid "Genre"
 msgstr "Жанр"
 
-#: internet/groovesharkservice.cpp:553
+#: internet/groovesharkservice.cpp:550
 msgid "Get a URL to share this Grooveshark playlist"
 msgstr "Вземете линк за споделяне на този плейлист в Grooveshark"
 
-#: internet/groovesharkservice.cpp:550 internet/groovesharkservice.cpp:1135
+#: internet/groovesharkservice.cpp:547 internet/groovesharkservice.cpp:1132
 msgid "Get a URL to share this Grooveshark song"
 msgstr "Вземете линк за споделяне на тази песен в Grooveshark"
 
-#: internet/groovesharkservice.cpp:809
+#: internet/groovesharkservice.cpp:806
 msgid "Getting Grooveshark popular songs"
 msgstr "Извличане на Grooveshark популярни песни"
 
@@ -2141,15 +2142,15 @@ msgstr "Grooveshark"
 msgid "Grooveshark login error"
 msgstr "Грешка при логин в Grooveshark"
 
-#: internet/groovesharkservice.cpp:1187
+#: internet/groovesharkservice.cpp:1184
 msgid "Grooveshark playlist's URL"
 msgstr "URL на плейлист в Grooveshark"
 
-#: internet/groovesharkservice.cpp:614
+#: internet/groovesharkservice.cpp:611
 msgid "Grooveshark radio"
 msgstr "Grooveshark радио"
 
-#: internet/groovesharkservice.cpp:1165
+#: internet/groovesharkservice.cpp:1162
 msgid "Grooveshark song's URL"
 msgstr "Линк към песента в Grooveshark"
 
@@ -2523,7 +2524,7 @@ msgstr "Търсене в библиотеката"
 msgid "Limits"
 msgstr "Ограничения"
 
-#: internet/groovesharkservice.cpp:615
+#: internet/groovesharkservice.cpp:612
 msgid ""
 "Listen to Grooveshark songs based on what you've listened to previously"
 msgstr "Слушане на Grooveshark песни на базата на изслушаното от Вас"
@@ -2808,7 +2809,7 @@ msgstr "Преместване в библиотека..."
 msgid "Move up"
 msgstr "Преместване нагоре"
 
-#: transcoder/transcodedialog.cpp:213 ui/mainwindow.cpp:1536
+#: transcoder/transcodedialog.cpp:216 ui/mainwindow.cpp:1536
 msgid "Music"
 msgstr "Музика"
 
@@ -2841,7 +2842,7 @@ msgstr "Моето Last.fm Препоръчително Радио"
 msgid "My Mix Radio"
 msgstr "Мое радио микс"
 
-#: internet/groovesharkservice.cpp:619
+#: internet/groovesharkservice.cpp:616
 msgid "My Music"
 msgstr ""
 
@@ -2857,7 +2858,7 @@ msgstr "Моята Радио Станция"
 msgid "My Recommendations"
 msgstr "Моите Препоръки"
 
-#: internet/groovesharkservice.cpp:1271 internet/groovesharkservice.cpp:1364
+#: internet/groovesharkservice.cpp:1268 internet/groovesharkservice.cpp:1361
 #: ui/equalizer.cpp:172 ../bin/src/ui_deviceproperties.h:369
 #: ../bin/src/ui_magnatunedownloaddialog.h:135
 #: ../bin/src/ui_wizardfinishpage.h:84
@@ -3036,7 +3037,7 @@ msgid "Only show the first"
 msgstr "Покажи само първите"
 
 #: internet/digitallyimportedservicebase.cpp:178
-#: internet/groovesharkservice.cpp:557 internet/icecastservice.cpp:296
+#: internet/groovesharkservice.cpp:554 internet/icecastservice.cpp:296
 #: internet/jamendoservice.cpp:418 internet/magnatuneservice.cpp:276
 #: internet/somafmservice.cpp:91
 #, qt-format
@@ -3086,7 +3087,7 @@ msgstr "Оптимизиране на битов поток"
 msgid "Optimize for quality"
 msgstr "Оптимизиране за качество"
 
-#: ../bin/src/ui_transcodedialog.h:210
+#: ../bin/src/ui_transcodedialog.h:211
 msgid "Options..."
 msgstr "Настройки…"
 
@@ -3114,7 +3115,7 @@ msgstr "Други настройки"
 msgid "Output device"
 msgstr "Изходно устройство"
 
-#: ../bin/src/ui_transcodedialog.h:208
+#: ../bin/src/ui_transcodedialog.h:209
 msgid "Output options"
 msgstr "Изходни настройки"
 
@@ -3240,7 +3241,7 @@ msgstr "Търсене в списъка с песни"
 msgid "Playlist type"
 msgstr "Тип на списъка с песни"
 
-#: internet/groovesharkservice.cpp:637
+#: internet/groovesharkservice.cpp:634
 msgid "Playlists"
 msgstr "Списъци с песни"
 
@@ -3256,15 +3257,15 @@ msgstr "Подкасти"
 msgid "Pop"
 msgstr "Поп"
 
-#: internet/groovesharkservice.cpp:588
+#: internet/groovesharkservice.cpp:585
 msgid "Popular songs"
 msgstr "Популярни песни"
 
-#: internet/groovesharkservice.cpp:591
+#: internet/groovesharkservice.cpp:588
 msgid "Popular songs of the Month"
 msgstr "Популярните песни на месеца"
 
-#: internet/groovesharkservice.cpp:598
+#: internet/groovesharkservice.cpp:595
 msgid "Popular songs today"
 msgstr "Популярните песни днес"
 
@@ -3356,7 +3357,7 @@ msgid "Profile"
 msgstr "Профил"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:134
-#: ../bin/src/ui_transcodedialog.h:216
+#: ../bin/src/ui_transcodedialog.h:217
 msgid "Progress"
 msgstr "Напредък"
 
@@ -3398,7 +3399,7 @@ msgstr "Прати избрана песен на опашката"
 msgid "Radio (equal loudness for all tracks)"
 msgstr "Радио (еднаква сила на звука за всички песни)"
 
-#: internet/groovesharkservice.cpp:606
+#: internet/groovesharkservice.cpp:603
 msgid "Radios"
 msgstr "Радиа"
 
@@ -3442,7 +3443,7 @@ msgstr "Рейтинг"
 msgid "Really cancel?"
 msgstr "Наистина ли искаш да затвориш?"
 
-#: internet/groovesharkservice.cpp:560
+#: internet/groovesharkservice.cpp:557
 msgid "Refresh"
 msgstr "Опресняване"
 
@@ -3479,7 +3480,7 @@ msgid "Remember from last time"
 msgstr "Помни от предния път"
 
 #: internet/savedradio.cpp:100 ../bin/src/ui_queuemanager.h:135
-#: ../bin/src/ui_searchtermwidget.h:282 ../bin/src/ui_transcodedialog.h:207
+#: ../bin/src/ui_searchtermwidget.h:282 ../bin/src/ui_transcodedialog.h:208
 #: internet/lastfmservice.cpp:114
 msgid "Remove"
 msgstr "Премахване"
@@ -3496,15 +3497,15 @@ msgstr ""
 msgid "Remove folder"
 msgstr "Премахване на папката"
 
-#: internet/groovesharkservice.cpp:547
+#: internet/groovesharkservice.cpp:544
 msgid "Remove from My Music"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:544
+#: internet/groovesharkservice.cpp:541
 msgid "Remove from favorites"
 msgstr "Премахване от любими"
 
-#: internet/groovesharkservice.cpp:541 ../bin/src/ui_mainwindow.h:687
+#: internet/groovesharkservice.cpp:538 ../bin/src/ui_mainwindow.h:687
 msgid "Remove from playlist"
 msgstr "Премахване от списъка с песни"
 
@@ -3512,20 +3513,20 @@ msgstr "Премахване от списъка с песни"
 msgid "Remove playlist"
 msgstr "Премахване на списъка с песни"
 
-#: internet/groovesharkservice.cpp:1565
+#: internet/groovesharkservice.cpp:1562
 msgid "Removing songs from My Music"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:1515
+#: internet/groovesharkservice.cpp:1512
 msgid "Removing songs from favorites"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:1363
+#: internet/groovesharkservice.cpp:1360
 #, qt-format
 msgid "Rename \"%1\" playlist"
 msgstr "Преименуване на \"%1\" списък с песни"
 
-#: internet/groovesharkservice.cpp:537
+#: internet/groovesharkservice.cpp:534
 msgid "Rename Grooveshark playlist"
 msgstr "Преименуване на Grooveshark списък с песни"
 
@@ -3595,15 +3596,15 @@ msgstr "Изчистване на броя възпроизвеждания"
 msgid "Restrict to ASCII characters"
 msgstr "Само ASCII символи"
 
-#: internet/groovesharkservice.cpp:777
+#: internet/groovesharkservice.cpp:774
 msgid "Retrieving Grooveshark My Music songs"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:745
+#: internet/groovesharkservice.cpp:742
 msgid "Retrieving Grooveshark favorites songs"
 msgstr "Извличане на Grooveshark любими песни"
 
-#: internet/groovesharkservice.cpp:674
+#: internet/groovesharkservice.cpp:671
 msgid "Retrieving Grooveshark playlists"
 msgstr "Извличане на Grooveshark списъци с песни"
 
@@ -3721,7 +3722,7 @@ msgstr "Режим \"Търсене\""
 msgid "Search options"
 msgstr "Опции при търсене"
 
-#: internet/groovesharkservice.cpp:580 internet/spotifyservice.cpp:343
+#: internet/groovesharkservice.cpp:577 internet/spotifyservice.cpp:343
 msgid "Search results"
 msgstr ""
 
@@ -4079,11 +4080,11 @@ msgstr "Със звезда"
 msgid "Start the playlist currently playing"
 msgstr "Стартиране на текущо възпроизвеждания списък с песни"
 
-#: transcoder/transcodedialog.cpp:85
+#: transcoder/transcodedialog.cpp:88
 msgid "Start transcoding"
 msgstr "Начало на прекодирането"
 
-#: internet/groovesharkservice.cpp:581 internet/spotifyservice.cpp:344
+#: internet/groovesharkservice.cpp:578 internet/spotifyservice.cpp:344
 msgid ""
 "Start typing something on the search box above to fill this search results "
 "list"
@@ -4098,7 +4099,7 @@ msgstr "Стартиране на %1"
 msgid "Starting..."
 msgstr "Стартиране..."
 
-#: internet/groovesharkservice.cpp:609
+#: internet/groovesharkservice.cpp:606
 msgid "Stations"
 msgstr "Станции"
 
@@ -4135,7 +4136,7 @@ msgstr "Поток"
 msgid "Streaming membership"
 msgstr "Членство за слушане"
 
-#: internet/groovesharkservice.cpp:640
+#: internet/groovesharkservice.cpp:637
 msgid "Subscribed playlists"
 msgstr "Абонирани списъци с песни"
 
@@ -4378,7 +4379,7 @@ msgstr "Часови пояс"
 msgid "Title"
 msgstr "Заглавие"
 
-#: internet/groovesharkservice.cpp:1043
+#: internet/groovesharkservice.cpp:1040
 msgid ""
 "To start Grooveshark radio, you should first listen to a few other "
 "Grooveshark songs"
@@ -4429,7 +4430,7 @@ msgstr "Общ брой направени мрежови заявки"
 msgid "Track"
 msgstr "Песен"
 
-#: ../bin/src/ui_transcodedialog.h:201 ../bin/src/ui_mainwindow.h:689
+#: ../bin/src/ui_transcodedialog.h:202 ../bin/src/ui_mainwindow.h:689
 msgid "Transcode Music"
 msgstr "Прекодирай музиката"
 
@@ -4507,7 +4508,7 @@ msgstr "Премахване абонамент"
 msgid "Upcoming Concerts"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:1225
+#: internet/groovesharkservice.cpp:1222
 msgid "Update Grooveshark playlist"
 msgstr "Обновяване на Grooveshark списъците с песни"
 

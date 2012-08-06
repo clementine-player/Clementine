@@ -139,17 +139,17 @@ msgstr "%L1 écoutes au total"
 msgid "%filename%"
 msgstr "%filename%"
 
-#: transcoder/transcodedialog.cpp:199
+#: transcoder/transcodedialog.cpp:202
 #, c-format
 msgid "%n failed"
 msgstr "%n échoué"
 
-#: transcoder/transcodedialog.cpp:194
+#: transcoder/transcodedialog.cpp:197
 #, c-format
 msgid "%n finished"
 msgstr "%n terminé"
 
-#: transcoder/transcodedialog.cpp:189
+#: transcoder/transcodedialog.cpp:192
 #, c-format
 msgid "%n remaining"
 msgstr "%n manquant"
@@ -375,7 +375,7 @@ msgstr "Ajouter un fichier"
 msgid "Add file..."
 msgstr "Ajouter un fichier..."
 
-#: transcoder/transcodedialog.cpp:211
+#: transcoder/transcodedialog.cpp:214
 msgid "Add files to transcode"
 msgstr "Ajouter des fichiers à transcoder."
 
@@ -459,11 +459,11 @@ msgstr "Ajouter le tag année du morceau"
 msgid "Add stream..."
 msgstr "Ajouter un flux..."
 
-#: internet/groovesharkservice.cpp:1112
+#: internet/groovesharkservice.cpp:1109
 msgid "Add to Grooveshark favorites"
 msgstr "Ajouter aux favoris Grooveshark"
 
-#: internet/groovesharkservice.cpp:1124
+#: internet/groovesharkservice.cpp:1121
 msgid "Add to Grooveshark playlists"
 msgstr "Ajouter aux listes de lectures Grooveshark"
 
@@ -483,7 +483,7 @@ msgstr "Ajouter à la liste d'attente"
 msgid "Add wiimotedev action"
 msgstr "Ajouter des actions wiimote"
 
-#: ../bin/src/ui_transcodedialog.h:206
+#: ../bin/src/ui_transcodedialog.h:207
 msgid "Add..."
 msgstr "Ajouter..."
 
@@ -508,11 +508,11 @@ msgstr "Ajouté aujourd'hui"
 msgid "Added within three months"
 msgstr "Ajouté au cours des 3 derniers mois"
 
-#: internet/groovesharkservice.cpp:1420
+#: internet/groovesharkservice.cpp:1417
 msgid "Adding song to My Music"
 msgstr "Ajout du morceau dans ma musique"
 
-#: internet/groovesharkservice.cpp:1397
+#: internet/groovesharkservice.cpp:1394
 msgid "Adding song to favorites"
 msgstr "Ajout du morceau aux favoris"
 
@@ -600,7 +600,7 @@ msgstr "Toutes les pistes"
 msgid "Allow mid/side encoding"
 msgstr "Autoriser l'encodage mid/side"
 
-#: ../bin/src/ui_transcodedialog.h:214
+#: ../bin/src/ui_transcodedialog.h:215
 msgid "Alongside the originals"
 msgstr "A côté des originaux"
 
@@ -676,7 +676,7 @@ msgstr "Appliquer une compression pour prévenir les coupures"
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "Êtes-vous sûr de vouloir supprimer la valeur prédéfinie « %1 »"
 
-#: internet/groovesharkservice.cpp:1318
+#: internet/groovesharkservice.cpp:1315
 msgid "Are you sure you want to delete this playlist?"
 msgstr "Êtes-vous sur de vouloir supprimer cette liste de lecture ?"
 
@@ -710,7 +710,7 @@ msgstr "Mots-clés de l'artiste"
 msgid "Artist's initial"
 msgstr "Initiale de l'artiste"
 
-#: ../bin/src/ui_transcodedialog.h:209
+#: ../bin/src/ui_transcodedialog.h:210
 msgid "Audio format"
 msgstr "Format audio"
 
@@ -954,7 +954,8 @@ msgstr "Classique"
 msgid "Cleaning up"
 msgstr "Nettoyage en cours"
 
-#: widgets/lineedit.cpp:41 ../bin/src/ui_queuemanager.h:139
+#: transcoder/transcodedialog.cpp:60 widgets/lineedit.cpp:41
+#: ../bin/src/ui_queuemanager.h:139
 msgid "Clear"
 msgstr "Effacer"
 
@@ -1087,7 +1088,7 @@ msgstr "Compositeur"
 msgid "Configure %1..."
 msgstr "Configurer %1..."
 
-#: internet/groovesharkservice.cpp:563
+#: internet/groovesharkservice.cpp:560
 msgid "Configure Grooveshark..."
 msgstr "Configurer Grooveshark..."
 
@@ -1148,7 +1149,7 @@ msgstr "Convertir toutes les musiques"
 msgid "Convert any music that the device can't play"
 msgstr "Convertir la musique que le périphérique ne peut pas lire"
 
-#: internet/groovesharkservice.cpp:1197
+#: internet/groovesharkservice.cpp:1194
 msgid "Copy to clipboard"
 msgstr "Copier dans le presse papier"
 
@@ -1232,7 +1233,7 @@ msgstr "Pochette définie depuis %1"
 msgid "Covers from %1"
 msgstr "Pochettes depuis %1"
 
-#: internet/groovesharkservice.cpp:531 internet/groovesharkservice.cpp:1270
+#: internet/groovesharkservice.cpp:528 internet/groovesharkservice.cpp:1267
 msgid "Create a new Grooveshark playlist"
 msgstr "Créer une nouvelle liste de lecture Grooveshark"
 
@@ -1387,7 +1388,7 @@ msgstr "Par défaut"
 msgid "Delay between visualizations"
 msgstr "Délai entre les visualisations"
 
-#: internet/groovesharkservice.cpp:534 internet/groovesharkservice.cpp:1317
+#: internet/groovesharkservice.cpp:531 internet/groovesharkservice.cpp:1314
 msgid "Delete Grooveshark playlist"
 msgstr "Supprimer la liste de lecture Grooveshark"
 
@@ -1437,11 +1438,11 @@ msgstr "Enlever les pistes sélectionnées de la file d'attente"
 msgid "Dequeue track"
 msgstr "Enlever cette piste de la file d'attente"
 
-#: ../bin/src/ui_transcodedialog.h:211 ../bin/src/ui_organisedialog.h:189
+#: ../bin/src/ui_transcodedialog.h:212 ../bin/src/ui_organisedialog.h:189
 msgid "Destination"
 msgstr "Destination"
 
-#: ../bin/src/ui_transcodedialog.h:217
+#: ../bin/src/ui_transcodedialog.h:218
 msgid "Details..."
 msgstr "Détails..."
 
@@ -1486,7 +1487,7 @@ msgid "Direct internet connection"
 msgstr "Connexion directe à Internet"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:145
-#: ../bin/src/ui_transcodedialog.h:204
+#: ../bin/src/ui_transcodedialog.h:205
 msgid "Directory"
 msgstr "Dossier"
 
@@ -1754,7 +1755,7 @@ msgstr "Equivalent à --log-levels *:1"
 msgid "Equivalent to --log-levels *:3"
 msgstr "Equivalent à --log-levels *:3"
 
-#: internet/groovesharkservice.cpp:1042
+#: internet/groovesharkservice.cpp:1039
 #: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:497
 #: ui/mainwindow.cpp:1763 ui/mainwindow.cpp:1884
 msgid "Error"
@@ -1905,7 +1906,7 @@ msgstr "La lecture du flux RSS a échoué"
 msgid "Fast"
 msgstr "Rapide"
 
-#: internet/groovesharkservice.cpp:628
+#: internet/groovesharkservice.cpp:625
 msgid "Favorites"
 msgstr "Favoris"
 
@@ -1955,7 +1956,7 @@ msgstr "Taille du fichier"
 msgid "File type"
 msgstr "Type de fichier"
 
-#: ../bin/src/ui_transcodedialog.h:205
+#: ../bin/src/ui_transcodedialog.h:206
 msgid "Filename"
 msgstr "Nom du fichier"
 
@@ -1963,7 +1964,7 @@ msgstr "Nom du fichier"
 msgid "Files"
 msgstr "Fichiers"
 
-#: ../bin/src/ui_transcodedialog.h:202
+#: ../bin/src/ui_transcodedialog.h:203
 msgid "Files to transcode"
 msgstr "Fichiers à convertir"
 
@@ -2093,15 +2094,15 @@ msgstr "Configuration générale"
 msgid "Genre"
 msgstr "Genre"
 
-#: internet/groovesharkservice.cpp:553
+#: internet/groovesharkservice.cpp:550
 msgid "Get a URL to share this Grooveshark playlist"
 msgstr "Obtenir une URL pour partager cette liste de lecture Grooveshark"
 
-#: internet/groovesharkservice.cpp:550 internet/groovesharkservice.cpp:1135
+#: internet/groovesharkservice.cpp:547 internet/groovesharkservice.cpp:1132
 msgid "Get a URL to share this Grooveshark song"
 msgstr "Obtenir une URL pour partager ce morceau Grooveshark"
 
-#: internet/groovesharkservice.cpp:809
+#: internet/groovesharkservice.cpp:806
 msgid "Getting Grooveshark popular songs"
 msgstr "Récupération des morceaux populaires Grooveshark"
 
@@ -2147,15 +2148,15 @@ msgstr "Grooveshark"
 msgid "Grooveshark login error"
 msgstr "Erreur lors de la connexion à Grooveshark"
 
-#: internet/groovesharkservice.cpp:1187
+#: internet/groovesharkservice.cpp:1184
 msgid "Grooveshark playlist's URL"
 msgstr "URL de la liste de lecture Grooveshark"
 
-#: internet/groovesharkservice.cpp:614
+#: internet/groovesharkservice.cpp:611
 msgid "Grooveshark radio"
 msgstr "Radio Grooveshark"
 
-#: internet/groovesharkservice.cpp:1165
+#: internet/groovesharkservice.cpp:1162
 msgid "Grooveshark song's URL"
 msgstr "URL du morceau Grooveshark"
 
@@ -2529,7 +2530,7 @@ msgstr "Rechercher dans la bibliothèque"
 msgid "Limits"
 msgstr "Limites"
 
-#: internet/groovesharkservice.cpp:615
+#: internet/groovesharkservice.cpp:612
 msgid ""
 "Listen to Grooveshark songs based on what you've listened to previously"
 msgstr "Écoutez des morceaux Grooveshark basé sur ce que vous avez écouté auparavant"
@@ -2814,7 +2815,7 @@ msgstr "Déplacer vers la bibliothèque..."
 msgid "Move up"
 msgstr "Déplacer vers le haut"
 
-#: transcoder/transcodedialog.cpp:213 ui/mainwindow.cpp:1536
+#: transcoder/transcodedialog.cpp:216 ui/mainwindow.cpp:1536
 msgid "Music"
 msgstr "Musique"
 
@@ -2847,7 +2848,7 @@ msgstr "Ma radio de recommandations Last.fm"
 msgid "My Mix Radio"
 msgstr "Ma radio mix"
 
-#: internet/groovesharkservice.cpp:619
+#: internet/groovesharkservice.cpp:616
 msgid "My Music"
 msgstr "Ma musique"
 
@@ -2863,7 +2864,7 @@ msgstr "Ma station de radio"
 msgid "My Recommendations"
 msgstr "Mes suggestions"
 
-#: internet/groovesharkservice.cpp:1271 internet/groovesharkservice.cpp:1364
+#: internet/groovesharkservice.cpp:1268 internet/groovesharkservice.cpp:1361
 #: ui/equalizer.cpp:172 ../bin/src/ui_deviceproperties.h:369
 #: ../bin/src/ui_magnatunedownloaddialog.h:135
 #: ../bin/src/ui_wizardfinishpage.h:84
@@ -3042,7 +3043,7 @@ msgid "Only show the first"
 msgstr "Afficher seulement le premier"
 
 #: internet/digitallyimportedservicebase.cpp:178
-#: internet/groovesharkservice.cpp:557 internet/icecastservice.cpp:296
+#: internet/groovesharkservice.cpp:554 internet/icecastservice.cpp:296
 #: internet/jamendoservice.cpp:418 internet/magnatuneservice.cpp:276
 #: internet/somafmservice.cpp:91
 #, qt-format
@@ -3092,7 +3093,7 @@ msgstr "Optimisation du débit"
 msgid "Optimize for quality"
 msgstr "Optimisation de la qualité"
 
-#: ../bin/src/ui_transcodedialog.h:210
+#: ../bin/src/ui_transcodedialog.h:211
 msgid "Options..."
 msgstr "Options…"
 
@@ -3120,7 +3121,7 @@ msgstr "Autres options"
 msgid "Output device"
 msgstr "Périphérique de sortie"
 
-#: ../bin/src/ui_transcodedialog.h:208
+#: ../bin/src/ui_transcodedialog.h:209
 msgid "Output options"
 msgstr "Options de sortie"
 
@@ -3246,7 +3247,7 @@ msgstr "Rechercher dans la liste de lecture"
 msgid "Playlist type"
 msgstr "Type de liste de lecture"
 
-#: internet/groovesharkservice.cpp:637
+#: internet/groovesharkservice.cpp:634
 msgid "Playlists"
 msgstr "Listes de lecture"
 
@@ -3262,15 +3263,15 @@ msgstr "Podcasts"
 msgid "Pop"
 msgstr "Pop"
 
-#: internet/groovesharkservice.cpp:588
+#: internet/groovesharkservice.cpp:585
 msgid "Popular songs"
 msgstr "Morceaux populaires"
 
-#: internet/groovesharkservice.cpp:591
+#: internet/groovesharkservice.cpp:588
 msgid "Popular songs of the Month"
 msgstr "Morceaux populaires ce mois-ci"
 
-#: internet/groovesharkservice.cpp:598
+#: internet/groovesharkservice.cpp:595
 msgid "Popular songs today"
 msgstr "Morceaux populaires aujourd'hui"
 
@@ -3362,7 +3363,7 @@ msgid "Profile"
 msgstr "Profil"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:134
-#: ../bin/src/ui_transcodedialog.h:216
+#: ../bin/src/ui_transcodedialog.h:217
 msgid "Progress"
 msgstr "Progression"
 
@@ -3404,7 +3405,7 @@ msgstr "Mettre cette piste en liste d'attente"
 msgid "Radio (equal loudness for all tracks)"
 msgstr "Radio (volume égalisé pour toutes les pistes)"
 
-#: internet/groovesharkservice.cpp:606
+#: internet/groovesharkservice.cpp:603
 msgid "Radios"
 msgstr "Radios"
 
@@ -3448,7 +3449,7 @@ msgstr "Note"
 msgid "Really cancel?"
 msgstr "Êtes-vous sûr de vouloir annuler ?"
 
-#: internet/groovesharkservice.cpp:560
+#: internet/groovesharkservice.cpp:557
 msgid "Refresh"
 msgstr "Mettre à jour"
 
@@ -3485,7 +3486,7 @@ msgid "Remember from last time"
 msgstr "Se souvenir de la dernière fois"
 
 #: internet/savedradio.cpp:100 ../bin/src/ui_queuemanager.h:135
-#: ../bin/src/ui_searchtermwidget.h:282 ../bin/src/ui_transcodedialog.h:207
+#: ../bin/src/ui_searchtermwidget.h:282 ../bin/src/ui_transcodedialog.h:208
 #: internet/lastfmservice.cpp:114
 msgid "Remove"
 msgstr "Supprimer"
@@ -3502,15 +3503,15 @@ msgstr "Supprimer les doublons de la liste de lecture"
 msgid "Remove folder"
 msgstr "Supprimer un dossier"
 
-#: internet/groovesharkservice.cpp:547
+#: internet/groovesharkservice.cpp:544
 msgid "Remove from My Music"
 msgstr "Supprimer de ma musique"
 
-#: internet/groovesharkservice.cpp:544
+#: internet/groovesharkservice.cpp:541
 msgid "Remove from favorites"
 msgstr "Supprimer des favoris"
 
-#: internet/groovesharkservice.cpp:541 ../bin/src/ui_mainwindow.h:687
+#: internet/groovesharkservice.cpp:538 ../bin/src/ui_mainwindow.h:687
 msgid "Remove from playlist"
 msgstr "Supprimer de la liste de lecture"
 
@@ -3518,20 +3519,20 @@ msgstr "Supprimer de la liste de lecture"
 msgid "Remove playlist"
 msgstr "Supprimer la liste de lecture"
 
-#: internet/groovesharkservice.cpp:1565
+#: internet/groovesharkservice.cpp:1562
 msgid "Removing songs from My Music"
 msgstr "Suppression des morceaux de ma musique"
 
-#: internet/groovesharkservice.cpp:1515
+#: internet/groovesharkservice.cpp:1512
 msgid "Removing songs from favorites"
 msgstr "Suppression des morceaux des favoris"
 
-#: internet/groovesharkservice.cpp:1363
+#: internet/groovesharkservice.cpp:1360
 #, qt-format
 msgid "Rename \"%1\" playlist"
 msgstr "Renommer la liste de lecture « %1 »"
 
-#: internet/groovesharkservice.cpp:537
+#: internet/groovesharkservice.cpp:534
 msgid "Rename Grooveshark playlist"
 msgstr "Renommer cette liste de lecture Grooveshark"
 
@@ -3601,15 +3602,15 @@ msgstr "Réinitialiser le compteur de lecture"
 msgid "Restrict to ASCII characters"
 msgstr "Limiter aux caractères ASCII"
 
-#: internet/groovesharkservice.cpp:777
+#: internet/groovesharkservice.cpp:774
 msgid "Retrieving Grooveshark My Music songs"
 msgstr "Récupération des morceaux Grooveshark Ma musique"
 
-#: internet/groovesharkservice.cpp:745
+#: internet/groovesharkservice.cpp:742
 msgid "Retrieving Grooveshark favorites songs"
 msgstr "Récupération des morceaux Grooveshark favoris"
 
-#: internet/groovesharkservice.cpp:674
+#: internet/groovesharkservice.cpp:671
 msgid "Retrieving Grooveshark playlists"
 msgstr "Récupération des listes de lecture Grooveshark"
 
@@ -3727,7 +3728,7 @@ msgstr "Mode de recherche"
 msgid "Search options"
 msgstr "Options de recherche"
 
-#: internet/groovesharkservice.cpp:580 internet/spotifyservice.cpp:343
+#: internet/groovesharkservice.cpp:577 internet/spotifyservice.cpp:343
 msgid "Search results"
 msgstr "Résultats de recherche"
 
@@ -4085,11 +4086,11 @@ msgstr "Favoris"
 msgid "Start the playlist currently playing"
 msgstr "Commencer la liste de lecture jouée actuellement"
 
-#: transcoder/transcodedialog.cpp:85
+#: transcoder/transcodedialog.cpp:88
 msgid "Start transcoding"
 msgstr "Démarrer transcodage"
 
-#: internet/groovesharkservice.cpp:581 internet/spotifyservice.cpp:344
+#: internet/groovesharkservice.cpp:578 internet/spotifyservice.cpp:344
 msgid ""
 "Start typing something on the search box above to fill this search results "
 "list"
@@ -4104,7 +4105,7 @@ msgstr "Lancement de %1"
 msgid "Starting..."
 msgstr "Démarrage..."
 
-#: internet/groovesharkservice.cpp:609
+#: internet/groovesharkservice.cpp:606
 msgid "Stations"
 msgstr "Stations"
 
@@ -4141,7 +4142,7 @@ msgstr "Flux"
 msgid "Streaming membership"
 msgstr "Membres de streaming"
 
-#: internet/groovesharkservice.cpp:640
+#: internet/groovesharkservice.cpp:637
 msgid "Subscribed playlists"
 msgstr "Listes de lecture abonnées"
 
@@ -4384,7 +4385,7 @@ msgstr "Fuseau horaire"
 msgid "Title"
 msgstr "Titre"
 
-#: internet/groovesharkservice.cpp:1043
+#: internet/groovesharkservice.cpp:1040
 msgid ""
 "To start Grooveshark radio, you should first listen to a few other "
 "Grooveshark songs"
@@ -4435,7 +4436,7 @@ msgstr "Nombre total de requêtes réseau effectuées"
 msgid "Track"
 msgstr "Piste"
 
-#: ../bin/src/ui_transcodedialog.h:201 ../bin/src/ui_mainwindow.h:689
+#: ../bin/src/ui_transcodedialog.h:202 ../bin/src/ui_mainwindow.h:689
 msgid "Transcode Music"
 msgstr "Transcoder de la musique"
 
@@ -4513,7 +4514,7 @@ msgstr "Se désinscrire"
 msgid "Upcoming Concerts"
 msgstr "Concerts à venir"
 
-#: internet/groovesharkservice.cpp:1225
+#: internet/groovesharkservice.cpp:1222
 msgid "Update Grooveshark playlist"
 msgstr "Mise à jour de la liste de lecture Grooveshark"
 

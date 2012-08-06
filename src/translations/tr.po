@@ -138,17 +138,17 @@ msgstr "%L1 toplam çalma"
 msgid "%filename%"
 msgstr "%filename%"
 
-#: transcoder/transcodedialog.cpp:199
+#: transcoder/transcodedialog.cpp:202
 #, c-format
 msgid "%n failed"
 msgstr "%n başarısız"
 
-#: transcoder/transcodedialog.cpp:194
+#: transcoder/transcodedialog.cpp:197
 #, c-format
 msgid "%n finished"
 msgstr "%n tamamlandı"
 
-#: transcoder/transcodedialog.cpp:189
+#: transcoder/transcodedialog.cpp:192
 #, c-format
 msgid "%n remaining"
 msgstr "%n kaldı"
@@ -374,7 +374,7 @@ msgstr "Dosya ekle"
 msgid "Add file..."
 msgstr "Dosya ekle..."
 
-#: transcoder/transcodedialog.cpp:211
+#: transcoder/transcodedialog.cpp:214
 msgid "Add files to transcode"
 msgstr "Dönüştürülecek dosyaları ekle"
 
@@ -458,11 +458,11 @@ msgstr "Yıl etiketi ekle"
 msgid "Add stream..."
 msgstr "Yayın ekle..."
 
-#: internet/groovesharkservice.cpp:1112
+#: internet/groovesharkservice.cpp:1109
 msgid "Add to Grooveshark favorites"
 msgstr "Grooveshark'i favorilere ekle"
 
-#: internet/groovesharkservice.cpp:1124
+#: internet/groovesharkservice.cpp:1121
 msgid "Add to Grooveshark playlists"
 msgstr "Grooveshark'i müzik listelerine ekle"
 
@@ -482,7 +482,7 @@ msgstr "Kuyruğa ekle"
 msgid "Add wiimotedev action"
 msgstr "wiimotedev eylemi ekle"
 
-#: ../bin/src/ui_transcodedialog.h:206
+#: ../bin/src/ui_transcodedialog.h:207
 msgid "Add..."
 msgstr "Ekle..."
 
@@ -507,11 +507,11 @@ msgstr "Bugün eklenenler"
 msgid "Added within three months"
 msgstr "Son üç ay içinde eklenenler"
 
-#: internet/groovesharkservice.cpp:1420
+#: internet/groovesharkservice.cpp:1417
 msgid "Adding song to My Music"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:1397
+#: internet/groovesharkservice.cpp:1394
 msgid "Adding song to favorites"
 msgstr "Şarkı favorilere ekleniyor"
 
@@ -599,7 +599,7 @@ msgstr "Tüm parçalar"
 msgid "Allow mid/side encoding"
 msgstr "Mid/side kodlamaya izin ver"
 
-#: ../bin/src/ui_transcodedialog.h:214
+#: ../bin/src/ui_transcodedialog.h:215
 msgid "Alongside the originals"
 msgstr "Orijinallerin yanına"
 
@@ -675,7 +675,7 @@ msgstr "Kesintiyi engellemek için sıkıştırma uygula"
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "\"%1\" ayarını silmek istediğinizden emin misiniz?"
 
-#: internet/groovesharkservice.cpp:1318
+#: internet/groovesharkservice.cpp:1315
 msgid "Are you sure you want to delete this playlist?"
 msgstr "Bu çalan listeyi silmek istediğinizden emin misiniz?"
 
@@ -709,7 +709,7 @@ msgstr "Sanatçı etiketleri"
 msgid "Artist's initial"
 msgstr "Sanatçının kısaltması"
 
-#: ../bin/src/ui_transcodedialog.h:209
+#: ../bin/src/ui_transcodedialog.h:210
 msgid "Audio format"
 msgstr "Ses biçimi"
 
@@ -953,7 +953,8 @@ msgstr "Klasik"
 msgid "Cleaning up"
 msgstr "Temizliyor"
 
-#: widgets/lineedit.cpp:41 ../bin/src/ui_queuemanager.h:139
+#: transcoder/transcodedialog.cpp:60 widgets/lineedit.cpp:41
+#: ../bin/src/ui_queuemanager.h:139
 msgid "Clear"
 msgstr "Temizle"
 
@@ -1086,7 +1087,7 @@ msgstr "Besteci"
 msgid "Configure %1..."
 msgstr ""
 
-#: internet/groovesharkservice.cpp:563
+#: internet/groovesharkservice.cpp:560
 msgid "Configure Grooveshark..."
 msgstr "Grooveshark'i ayarla"
 
@@ -1147,7 +1148,7 @@ msgstr "Tüm müzikleri dönüştür"
 msgid "Convert any music that the device can't play"
 msgstr "Aygıtın çalamadığı müzikleri dönüştür"
 
-#: internet/groovesharkservice.cpp:1197
+#: internet/groovesharkservice.cpp:1194
 msgid "Copy to clipboard"
 msgstr "Panoya kopyala"
 
@@ -1231,7 +1232,7 @@ msgstr "Kapak resmi %1 adresinden ayarlandı"
 msgid "Covers from %1"
 msgstr "%1 adresindeki kapak resimleri"
 
-#: internet/groovesharkservice.cpp:531 internet/groovesharkservice.cpp:1270
+#: internet/groovesharkservice.cpp:528 internet/groovesharkservice.cpp:1267
 msgid "Create a new Grooveshark playlist"
 msgstr "Yeni bir Grooveshark müzik listesi oluşturun"
 
@@ -1386,7 +1387,7 @@ msgstr "Öntanımlılar"
 msgid "Delay between visualizations"
 msgstr "Görselleştirmeler arasındaki gecikme"
 
-#: internet/groovesharkservice.cpp:534 internet/groovesharkservice.cpp:1317
+#: internet/groovesharkservice.cpp:531 internet/groovesharkservice.cpp:1314
 msgid "Delete Grooveshark playlist"
 msgstr "Grooveshark müzik listesini sil"
 
@@ -1436,11 +1437,11 @@ msgstr "Seçili parçaları kuyruktan çıkar"
 msgid "Dequeue track"
 msgstr "Parçayı kuyruktan çıkar"
 
-#: ../bin/src/ui_transcodedialog.h:211 ../bin/src/ui_organisedialog.h:189
+#: ../bin/src/ui_transcodedialog.h:212 ../bin/src/ui_organisedialog.h:189
 msgid "Destination"
 msgstr "Hedef"
 
-#: ../bin/src/ui_transcodedialog.h:217
+#: ../bin/src/ui_transcodedialog.h:218
 msgid "Details..."
 msgstr "Detaylar..."
 
@@ -1485,7 +1486,7 @@ msgid "Direct internet connection"
 msgstr "Doğrudan internet bağlantısı"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:145
-#: ../bin/src/ui_transcodedialog.h:204
+#: ../bin/src/ui_transcodedialog.h:205
 msgid "Directory"
 msgstr "Dizin"
 
@@ -1753,7 +1754,7 @@ msgstr "--log-levels *:1'e eşdeğer"
 msgid "Equivalent to --log-levels *:3"
 msgstr "--log-levels *:3'e eşdeğer"
 
-#: internet/groovesharkservice.cpp:1042
+#: internet/groovesharkservice.cpp:1039
 #: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:497
 #: ui/mainwindow.cpp:1763 ui/mainwindow.cpp:1884
 msgid "Error"
@@ -1904,7 +1905,7 @@ msgstr "Bu RSS beslemesinin XML çözümlemesi başarısız oldu"
 msgid "Fast"
 msgstr "Hızlı"
 
-#: internet/groovesharkservice.cpp:628
+#: internet/groovesharkservice.cpp:625
 msgid "Favorites"
 msgstr "Favoriler"
 
@@ -1954,7 +1955,7 @@ msgstr "Dosya boyutu"
 msgid "File type"
 msgstr "Dosya türü"
 
-#: ../bin/src/ui_transcodedialog.h:205
+#: ../bin/src/ui_transcodedialog.h:206
 msgid "Filename"
 msgstr "Dosya adı"
 
@@ -1962,7 +1963,7 @@ msgstr "Dosya adı"
 msgid "Files"
 msgstr "Dosyalar"
 
-#: ../bin/src/ui_transcodedialog.h:202
+#: ../bin/src/ui_transcodedialog.h:203
 msgid "Files to transcode"
 msgstr "Dönüştürülecek dosyalar"
 
@@ -2092,15 +2093,15 @@ msgstr "Genel ayarlar"
 msgid "Genre"
 msgstr "Tür"
 
-#: internet/groovesharkservice.cpp:553
+#: internet/groovesharkservice.cpp:550
 msgid "Get a URL to share this Grooveshark playlist"
 msgstr "Bu Grooveshark çalma listesini paylaşmak için bir URL al"
 
-#: internet/groovesharkservice.cpp:550 internet/groovesharkservice.cpp:1135
+#: internet/groovesharkservice.cpp:547 internet/groovesharkservice.cpp:1132
 msgid "Get a URL to share this Grooveshark song"
 msgstr "Bu Grooveshark şarkısını paylaşmak için bir URL al"
 
-#: internet/groovesharkservice.cpp:809
+#: internet/groovesharkservice.cpp:806
 msgid "Getting Grooveshark popular songs"
 msgstr "Grooveshark popüler şarkılar alınıyor"
 
@@ -2146,15 +2147,15 @@ msgstr "Grooveshark"
 msgid "Grooveshark login error"
 msgstr "Grooveshark giriş hatası"
 
-#: internet/groovesharkservice.cpp:1187
+#: internet/groovesharkservice.cpp:1184
 msgid "Grooveshark playlist's URL"
 msgstr "Grooveshark çalma listesinin URL adresi"
 
-#: internet/groovesharkservice.cpp:614
+#: internet/groovesharkservice.cpp:611
 msgid "Grooveshark radio"
 msgstr "Grooveshark radyo"
 
-#: internet/groovesharkservice.cpp:1165
+#: internet/groovesharkservice.cpp:1162
 msgid "Grooveshark song's URL"
 msgstr "Grooveshark şarkısının adresi"
 
@@ -2528,7 +2529,7 @@ msgstr "Kütüphane araması"
 msgid "Limits"
 msgstr "Limitler"
 
-#: internet/groovesharkservice.cpp:615
+#: internet/groovesharkservice.cpp:612
 msgid ""
 "Listen to Grooveshark songs based on what you've listened to previously"
 msgstr "Daha önceden dinlediğiniz şarkılar temel alınarak Grooveshark şarkıları dinleyin"
@@ -2813,7 +2814,7 @@ msgstr "Kütüphaneye taşı..."
 msgid "Move up"
 msgstr "Yukarı taşı"
 
-#: transcoder/transcodedialog.cpp:213 ui/mainwindow.cpp:1536
+#: transcoder/transcodedialog.cpp:216 ui/mainwindow.cpp:1536
 msgid "Music"
 msgstr "Müzik"
 
@@ -2846,7 +2847,7 @@ msgstr "Last.fm Önerilen Radyom"
 msgid "My Mix Radio"
 msgstr "Karışık Radyom"
 
-#: internet/groovesharkservice.cpp:619
+#: internet/groovesharkservice.cpp:616
 msgid "My Music"
 msgstr ""
 
@@ -2862,7 +2863,7 @@ msgstr "Radyom"
 msgid "My Recommendations"
 msgstr "Önerdiklerim"
 
-#: internet/groovesharkservice.cpp:1271 internet/groovesharkservice.cpp:1364
+#: internet/groovesharkservice.cpp:1268 internet/groovesharkservice.cpp:1361
 #: ui/equalizer.cpp:172 ../bin/src/ui_deviceproperties.h:369
 #: ../bin/src/ui_magnatunedownloaddialog.h:135
 #: ../bin/src/ui_wizardfinishpage.h:84
@@ -3041,7 +3042,7 @@ msgid "Only show the first"
 msgstr "Sadece ilki göster"
 
 #: internet/digitallyimportedservicebase.cpp:178
-#: internet/groovesharkservice.cpp:557 internet/icecastservice.cpp:296
+#: internet/groovesharkservice.cpp:554 internet/icecastservice.cpp:296
 #: internet/jamendoservice.cpp:418 internet/magnatuneservice.cpp:276
 #: internet/somafmservice.cpp:91
 #, qt-format
@@ -3091,7 +3092,7 @@ msgstr "Bit oranı için optimize et"
 msgid "Optimize for quality"
 msgstr "Kalite için optimize et"
 
-#: ../bin/src/ui_transcodedialog.h:210
+#: ../bin/src/ui_transcodedialog.h:211
 msgid "Options..."
 msgstr "Seçenekler..."
 
@@ -3119,7 +3120,7 @@ msgstr "Diğer seçenekler"
 msgid "Output device"
 msgstr "Çıktı aygıtı"
 
-#: ../bin/src/ui_transcodedialog.h:208
+#: ../bin/src/ui_transcodedialog.h:209
 msgid "Output options"
 msgstr "Çıktı seçenekleri"
 
@@ -3245,7 +3246,7 @@ msgstr "Çalma listesinde ara"
 msgid "Playlist type"
 msgstr "Çalma listesi türü"
 
-#: internet/groovesharkservice.cpp:637
+#: internet/groovesharkservice.cpp:634
 msgid "Playlists"
 msgstr "Çalma listeleri"
 
@@ -3261,15 +3262,15 @@ msgstr "Podcastlar"
 msgid "Pop"
 msgstr "Pop"
 
-#: internet/groovesharkservice.cpp:588
+#: internet/groovesharkservice.cpp:585
 msgid "Popular songs"
 msgstr "Popüler şarkılar"
 
-#: internet/groovesharkservice.cpp:591
+#: internet/groovesharkservice.cpp:588
 msgid "Popular songs of the Month"
 msgstr "Bu ayın popüler şarkıları"
 
-#: internet/groovesharkservice.cpp:598
+#: internet/groovesharkservice.cpp:595
 msgid "Popular songs today"
 msgstr "Bugünün popüler şarkıları"
 
@@ -3361,7 +3362,7 @@ msgid "Profile"
 msgstr "Profil"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:134
-#: ../bin/src/ui_transcodedialog.h:216
+#: ../bin/src/ui_transcodedialog.h:217
 msgid "Progress"
 msgstr "İlerleme"
 
@@ -3403,7 +3404,7 @@ msgstr "Parçayı kuyruğa ekle"
 msgid "Radio (equal loudness for all tracks)"
 msgstr "Radyo (tüm parçalar için eşit ses seviyesi)"
 
-#: internet/groovesharkservice.cpp:606
+#: internet/groovesharkservice.cpp:603
 msgid "Radios"
 msgstr "Radyolar"
 
@@ -3447,7 +3448,7 @@ msgstr "Beğeni"
 msgid "Really cancel?"
 msgstr "Gerçekten iptal edeyim mi?"
 
-#: internet/groovesharkservice.cpp:560
+#: internet/groovesharkservice.cpp:557
 msgid "Refresh"
 msgstr "Yenile"
 
@@ -3484,7 +3485,7 @@ msgid "Remember from last time"
 msgstr "Son seferkinden hatırla"
 
 #: internet/savedradio.cpp:100 ../bin/src/ui_queuemanager.h:135
-#: ../bin/src/ui_searchtermwidget.h:282 ../bin/src/ui_transcodedialog.h:207
+#: ../bin/src/ui_searchtermwidget.h:282 ../bin/src/ui_transcodedialog.h:208
 #: internet/lastfmservice.cpp:114
 msgid "Remove"
 msgstr "Kaldır"
@@ -3501,15 +3502,15 @@ msgstr ""
 msgid "Remove folder"
 msgstr "Klasörü kaldır..."
 
-#: internet/groovesharkservice.cpp:547
+#: internet/groovesharkservice.cpp:544
 msgid "Remove from My Music"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:544
+#: internet/groovesharkservice.cpp:541
 msgid "Remove from favorites"
 msgstr "Favorilerden kaldır"
 
-#: internet/groovesharkservice.cpp:541 ../bin/src/ui_mainwindow.h:687
+#: internet/groovesharkservice.cpp:538 ../bin/src/ui_mainwindow.h:687
 msgid "Remove from playlist"
 msgstr "Çalma listesinden kaldır"
 
@@ -3517,20 +3518,20 @@ msgstr "Çalma listesinden kaldır"
 msgid "Remove playlist"
 msgstr "Çalma listesini kaldır"
 
-#: internet/groovesharkservice.cpp:1565
+#: internet/groovesharkservice.cpp:1562
 msgid "Removing songs from My Music"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:1515
+#: internet/groovesharkservice.cpp:1512
 msgid "Removing songs from favorites"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:1363
+#: internet/groovesharkservice.cpp:1360
 #, qt-format
 msgid "Rename \"%1\" playlist"
 msgstr "\"%1\" çalma listesini yeniden adlandır"
 
-#: internet/groovesharkservice.cpp:537
+#: internet/groovesharkservice.cpp:534
 msgid "Rename Grooveshark playlist"
 msgstr "Grooveshark çalma listesini yeniden adlandır"
 
@@ -3600,15 +3601,15 @@ msgstr "Çalma sayısını sıfırla"
 msgid "Restrict to ASCII characters"
 msgstr "ASCII karakterler olarak kısıtla"
 
-#: internet/groovesharkservice.cpp:777
+#: internet/groovesharkservice.cpp:774
 msgid "Retrieving Grooveshark My Music songs"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:745
+#: internet/groovesharkservice.cpp:742
 msgid "Retrieving Grooveshark favorites songs"
 msgstr "Grooveşark favori şarkılar alınıyor"
 
-#: internet/groovesharkservice.cpp:674
+#: internet/groovesharkservice.cpp:671
 msgid "Retrieving Grooveshark playlists"
 msgstr "Grooveshark çalma listeleri alınıyor"
 
@@ -3726,7 +3727,7 @@ msgstr "Arama kipi"
 msgid "Search options"
 msgstr "Arama seçenekleri"
 
-#: internet/groovesharkservice.cpp:580 internet/spotifyservice.cpp:343
+#: internet/groovesharkservice.cpp:577 internet/spotifyservice.cpp:343
 msgid "Search results"
 msgstr ""
 
@@ -4084,11 +4085,11 @@ msgstr "Yıldızlı"
 msgid "Start the playlist currently playing"
 msgstr "Çalma listesini mevcut çalınanla başlat"
 
-#: transcoder/transcodedialog.cpp:85
+#: transcoder/transcodedialog.cpp:88
 msgid "Start transcoding"
 msgstr "Dönüştürmeye başla"
 
-#: internet/groovesharkservice.cpp:581 internet/spotifyservice.cpp:344
+#: internet/groovesharkservice.cpp:578 internet/spotifyservice.cpp:344
 msgid ""
 "Start typing something on the search box above to fill this search results "
 "list"
@@ -4103,7 +4104,7 @@ msgstr "%1 Başlatılıyor"
 msgid "Starting..."
 msgstr "Başlatılıyor..."
 
-#: internet/groovesharkservice.cpp:609
+#: internet/groovesharkservice.cpp:606
 msgid "Stations"
 msgstr "İstasyonlar"
 
@@ -4140,7 +4141,7 @@ msgstr "Akış"
 msgid "Streaming membership"
 msgstr "Yayın akış üyeliği"
 
-#: internet/groovesharkservice.cpp:640
+#: internet/groovesharkservice.cpp:637
 msgid "Subscribed playlists"
 msgstr "Abone olunan çalma listeleri"
 
@@ -4383,7 +4384,7 @@ msgstr "Zaman dilimi"
 msgid "Title"
 msgstr "Başlık"
 
-#: internet/groovesharkservice.cpp:1043
+#: internet/groovesharkservice.cpp:1040
 msgid ""
 "To start Grooveshark radio, you should first listen to a few other "
 "Grooveshark songs"
@@ -4434,7 +4435,7 @@ msgstr "Yapılmış toplam ağ istemi"
 msgid "Track"
 msgstr "Parça"
 
-#: ../bin/src/ui_transcodedialog.h:201 ../bin/src/ui_mainwindow.h:689
+#: ../bin/src/ui_transcodedialog.h:202 ../bin/src/ui_mainwindow.h:689
 msgid "Transcode Music"
 msgstr "Müzik Dönüştür"
 
@@ -4512,7 +4513,7 @@ msgstr "Abonelikten çık"
 msgid "Upcoming Concerts"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:1225
+#: internet/groovesharkservice.cpp:1222
 msgid "Update Grooveshark playlist"
 msgstr "Grooveshark çalma listesini güncelle"
 
