@@ -233,6 +233,11 @@ Song SoundCloudService::ExtractSong(const QVariantMap& result_song) {
     stream_url.addQueryItem("client_id", kApiClientId);
     song.set_url(stream_url);
 
+    QString username = result_song["user"].toMap()["username"].toString();
+    // We don't have a real artist name, but username is the most similar thing
+    // we have
+    song.set_artist(username);
+
     QString title = result_song["title"].toString();
     song.set_title(title);
 
