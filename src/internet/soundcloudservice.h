@@ -39,7 +39,7 @@ class SoundCloudService : public InternetService {
 
   // TODO
   //QList<QAction*> playlistitem_actions(const Song& song);
-  //void ShowContextMenu(const QPoint& global_pos);
+  void ShowContextMenu(const QPoint& global_pos);
   QWidget* HeaderWidget() const;
 
   int SimpleSearch(const QString& query);
@@ -61,6 +61,7 @@ class SoundCloudService : public InternetService {
  private:
   void ClearSearchResults();
   void EnsureItemsCreated();
+  void EnsureMenuCreated();
   QNetworkReply* CreateRequest(const QString& ressource_name,
                                const QList<QPair<QString, QString> >& params);
   // Convenient function for extracting result from reply

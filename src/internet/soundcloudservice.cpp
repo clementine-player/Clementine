@@ -149,7 +149,8 @@ void SoundCloudService::DoSearch() {
 }
 
 void SoundCloudService::SearchFinished(QNetworkReply* reply, int task_id) {
-  qLog(Debug) << task_id;
+  reply->deleteLater();
+
   SongList songs = ExtractSongs(ExtractResult(reply));
   // Fill results list
   foreach (const Song& song, songs) {
@@ -178,8 +179,27 @@ int SoundCloudService::SimpleSearch(const QString& text) {
 }
 
 void SoundCloudService::SimpleSearchFinished(QNetworkReply* reply, int id) {
+  reply->deleteLater();
+
   SongList songs = ExtractSongs(ExtractResult(reply));
   emit SimpleSearchResults(id, songs);
+}
+
+void SoundCloudService::EnsureMenuCreated() {
+  if(!context_menu_) {
+    context_menu_ = new QMenu;
+    context_menu_->addActions(GetPlaylistActions());
+    context_menu_->addSeparator();
+    context_menu_->addAction(IconLoader::Load("download"),
+                             tr("Open %1 in browser").arg("soundcloud.com"),
+                             this, SLOT(Homepage()));
+  }
+}
+
+void SoundCloudService::ShowContextMenu(const QPoint& global_pos) {
+  EnsureMenuCreated();
+  
+  context_menu_->popup(global_pos);
 }
 
 QNetworkReply* SoundCloudService::CreateRequest(
