@@ -451,6 +451,7 @@ void GroovesharkService::RemoveItems() {
   playlists_.clear();
   subscribed_playlists_parent_ = NULL;
   subscribed_playlists_.clear();
+  pending_retrieve_playlists_.clear();
 }
 
 void GroovesharkService::ResetSessionId() {
@@ -712,6 +713,9 @@ void GroovesharkService::PlaylistSongsRetrieved() {
   reply->deleteLater();
 
   // Find corresponding playlist info
+  if (!pending_retrieve_playlists_.contains(reply)) {
+    return;
+  };
   int playlist_id = pending_retrieve_playlists_.take(reply);
   PlaylistInfo& playlist_info = subscribed_playlists_.contains(playlist_id) ?
       subscribed_playlists_[playlist_id] : playlists_[playlist_id];
