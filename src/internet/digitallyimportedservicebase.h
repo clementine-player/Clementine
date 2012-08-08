@@ -122,4 +122,9 @@ public:
   SkyFmService(Application* app, InternetModel* model, QObject* parent = NULL);
 };
 
+class JazzRadioService : public DigitallyImportedServiceBase {
+public:
+  JazzRadioService(Application* app, InternetModel* model, QObject* parent = NULL);
+};
+
 #endif // DIGITALLYIMPORTEDSERVICEBASE_H

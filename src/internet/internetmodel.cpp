@@ -65,6 +65,7 @@ InternetModel::InternetModel(Application* app, QObject* parent)
   AddService(new LastFMService(app, this));
 #endif
   AddService(new GroovesharkService(app, this));
+  AddService(new JazzRadioService(app, this));
   AddService(new MagnatuneService(app, this));
   AddService(new PodcastService(app, this));
   AddService(new SavedRadio(app, this));

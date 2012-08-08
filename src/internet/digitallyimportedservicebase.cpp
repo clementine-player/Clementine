@@ -263,3 +263,14 @@ SkyFmService::SkyFmService(
                                  app, model, parent)
 {
 }
+
+JazzRadioService::JazzRadioService(
+      Application* app, InternetModel* model, QObject* parent)
+  : DigitallyImportedServiceBase("JazzRadio",
+                                 "JAZZRADIO.com",
+                                 QUrl("http://www.jazzradio.com"),
+                                 QIcon(":/providers/jazzradio.png"),
+                                 "jazzradio",
+                                 app, model, parent)
+{
+}
