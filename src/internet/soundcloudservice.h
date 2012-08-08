@@ -42,13 +42,19 @@ class SoundCloudService : public InternetService {
   //void ShowContextMenu(const QPoint& global_pos);
   QWidget* HeaderWidget() const;
 
+  int SimpleSearch(const QString& query);
+
   static const char* kServiceName;
   static const char* kSettingsGroup;
+
+ signals:
+  void SimpleSearchResults(int id, SongList songs);
 
  private slots:
   void Search(const QString& text, bool now = false);
   void DoSearch();
   void SearchFinished(QNetworkReply* reply, int task);
+  void SimpleSearchFinished(QNetworkReply* reply, int id);
 
   void Homepage();
 

@@ -152,6 +152,7 @@ set(SOURCES
   globalsearch/searchproviderstatuswidget.cpp
   globalsearch/simplesearchprovider.cpp
   globalsearch/somafmsearchprovider.cpp
+  globalsearch/soundcloudsearchprovider.cpp
   globalsearch/suggestionwidget.cpp
   globalsearch/urlsearchprovider.cpp
 
@@ -425,6 +426,7 @@ set(HEADERS
   globalsearch/groovesharksearchprovider.h
   globalsearch/searchprovider.h
   globalsearch/simplesearchprovider.h
+  globalsearch/soundcloudsearchprovider.h
   globalsearch/suggestionwidget.h
 
   internet/digitallyimportedclient.h

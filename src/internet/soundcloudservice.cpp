@@ -38,6 +38,8 @@
 #include "core/taskmanager.h"
 #include "core/timeconstants.h"
 #include "core/utilities.h"
+#include "globalsearch/globalsearch.h"
+#include "globalsearch/soundcloudsearchprovider.h"
 #include "ui/iconloader.h"
 
 const char* SoundCloudService::kApiClientId = "2add0f709fcfae1fd7a198ec7573d2d4";
@@ -66,6 +68,10 @@ SoundCloudService::SoundCloudService(Application* app, InternetModel *parent)
   search_delay_->setInterval(kSearchDelayMsec);
   search_delay_->setSingleShot(true);
   connect(search_delay_, SIGNAL(timeout()), SLOT(DoSearch()));
+
+  SoundCloudSearchProvider* search_provider = new SoundCloudSearchProvider(app_, this);
+  search_provider->Init(this);
+  app_->global_search()->AddProvider(search_provider);
 
   connect(search_box_, SIGNAL(TextChanged(QString)), SLOT(Search(QString)));
 }
@@ -133,12 +139,10 @@ void SoundCloudService::Search(const QString& text, bool now) {
 void SoundCloudService::DoSearch() {
   ClearSearchResults();
 
-  qLog(Debug) << "Search";
-
   QList<Param> parameters;
   parameters  << Param("q", pending_search_);
   QNetworkReply* reply = CreateRequest("tracks", parameters);
-  int id = next_pending_search_id_++;
+  const int id = next_pending_search_id_++;
   NewClosure(reply, SIGNAL(finished()),
              this, SLOT(SearchFinished(QNetworkReply*,int)),
              reply, id);
@@ -160,6 +164,22 @@ void SoundCloudService::SearchFinished(QNetworkReply* reply, int task_id) {
 void SoundCloudService::ClearSearchResults() {
   if (search_)
     search_->removeRows(0, search_->rowCount());
+}
+
+int SoundCloudService::SimpleSearch(const QString& text) {
+  QList<Param> parameters;
+  parameters  << Param("q", pending_search_);
+  QNetworkReply* reply = CreateRequest("tracks", parameters);
+  const int id = next_pending_search_id_++;
+  NewClosure(reply, SIGNAL(finished()),
+             this, SLOT(SimpleSearchFinished(QNetworkReply*,int)),
+             reply, id);
+  return id;
+}
+
+void SoundCloudService::SimpleSearchFinished(QNetworkReply* reply, int id) {
+  SongList songs = ExtractSongs(ExtractResult(reply));
+  emit SimpleSearchResults(id, songs);
 }
 
 QNetworkReply* SoundCloudService::CreateRequest(
