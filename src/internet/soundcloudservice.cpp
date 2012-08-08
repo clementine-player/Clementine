@@ -168,7 +168,7 @@ void SoundCloudService::ClearSearchResults() {
 
 int SoundCloudService::SimpleSearch(const QString& text) {
   QList<Param> parameters;
-  parameters  << Param("q", pending_search_);
+  parameters  << Param("q", text);
   QNetworkReply* reply = CreateRequest("tracks", parameters);
   const int id = next_pending_search_id_++;
   NewClosure(reply, SIGNAL(finished()),
