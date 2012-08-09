@@ -131,17 +131,17 @@ msgstr "%L1總共播放"
 msgid "%filename%"
 msgstr "%檔案名稱%"
 
-#: transcoder/transcodedialog.cpp:199
+#: transcoder/transcodedialog.cpp:202
 #, c-format
 msgid "%n failed"
 msgstr "%n 失敗的"
 
-#: transcoder/transcodedialog.cpp:194
+#: transcoder/transcodedialog.cpp:197
 #, c-format
 msgid "%n finished"
 msgstr "%n 完成的"
 
-#: transcoder/transcodedialog.cpp:189
+#: transcoder/transcodedialog.cpp:192
 #, c-format
 msgid "%n remaining"
 msgstr "%n 剩餘的"
@@ -367,7 +367,7 @@ msgstr "加入檔案"
 msgid "Add file..."
 msgstr "加入檔案..."
 
-#: transcoder/transcodedialog.cpp:211
+#: transcoder/transcodedialog.cpp:214
 msgid "Add files to transcode"
 msgstr "加入檔案以轉碼"
 
@@ -451,11 +451,11 @@ msgstr "加入歌曲年份標籤"
 msgid "Add stream..."
 msgstr "加入網路串流..."
 
-#: internet/groovesharkservice.cpp:1112
+#: internet/groovesharkservice.cpp:1109
 msgid "Add to Grooveshark favorites"
 msgstr "加入到 Grooveshark 最愛"
 
-#: internet/groovesharkservice.cpp:1124
+#: internet/groovesharkservice.cpp:1121
 msgid "Add to Grooveshark playlists"
 msgstr "加入到 Grooveshark 播放清單"
 
@@ -475,7 +475,7 @@ msgstr "加入到佇列中"
 msgid "Add wiimotedev action"
 msgstr "加入 wiimotedev 功能"
 
-#: ../bin/src/ui_transcodedialog.h:206
+#: ../bin/src/ui_transcodedialog.h:207
 msgid "Add..."
 msgstr "加入..."
 
@@ -500,11 +500,11 @@ msgstr "今天加入"
 msgid "Added within three months"
 msgstr "在三個月內加入"
 
-#: internet/groovesharkservice.cpp:1420
+#: internet/groovesharkservice.cpp:1417
 msgid "Adding song to My Music"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:1397
+#: internet/groovesharkservice.cpp:1394
 msgid "Adding song to favorites"
 msgstr "將歌曲新增至最愛"
 
@@ -592,7 +592,7 @@ msgstr "所有曲目"
 msgid "Allow mid/side encoding"
 msgstr "允許 M/S (Mid/Side) 編碼技術"
 
-#: ../bin/src/ui_transcodedialog.h:214
+#: ../bin/src/ui_transcodedialog.h:215
 msgid "Alongside the originals"
 msgstr "與原本的一起"
 
@@ -668,7 +668,7 @@ msgstr "使用壓縮，以防止截波失真"
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "您確定您想要刪除預設的「%1」嗎?"
 
-#: internet/groovesharkservice.cpp:1318
+#: internet/groovesharkservice.cpp:1315
 msgid "Are you sure you want to delete this playlist?"
 msgstr "您確定要刪除這個播放清單？"
 
@@ -702,7 +702,7 @@ msgstr "演出者標籤"
 msgid "Artist's initial"
 msgstr "演唱者簽署"
 
-#: ../bin/src/ui_transcodedialog.h:209
+#: ../bin/src/ui_transcodedialog.h:210
 msgid "Audio format"
 msgstr "音頻格式"
 
@@ -946,7 +946,8 @@ msgstr "古典"
 msgid "Cleaning up"
 msgstr "清除"
 
-#: widgets/lineedit.cpp:41 ../bin/src/ui_queuemanager.h:139
+#: transcoder/transcodedialog.cpp:60 widgets/lineedit.cpp:41
+#: ../bin/src/ui_queuemanager.h:139
 msgid "Clear"
 msgstr "清除"
 
@@ -1079,7 +1080,7 @@ msgstr "作曲家"
 msgid "Configure %1..."
 msgstr ""
 
-#: internet/groovesharkservice.cpp:563
+#: internet/groovesharkservice.cpp:560
 msgid "Configure Grooveshark..."
 msgstr "設定 Grooveshark..."
 
@@ -1140,7 +1141,7 @@ msgstr "轉換所有音樂"
 msgid "Convert any music that the device can't play"
 msgstr "轉換任何裝置無法播放的音樂"
 
-#: internet/groovesharkservice.cpp:1197
+#: internet/groovesharkservice.cpp:1194
 msgid "Copy to clipboard"
 msgstr "複製到剪貼簿"
 
@@ -1224,7 +1225,7 @@ msgstr "從 %1 取得封面圖片"
 msgid "Covers from %1"
 msgstr "來自 %1 的封面"
 
-#: internet/groovesharkservice.cpp:531 internet/groovesharkservice.cpp:1270
+#: internet/groovesharkservice.cpp:528 internet/groovesharkservice.cpp:1267
 msgid "Create a new Grooveshark playlist"
 msgstr "建立一個新的 Grooveshark 播放清單"
 
@@ -1379,7 +1380,7 @@ msgstr "預設"
 msgid "Delay between visualizations"
 msgstr "在兩個視覺化效果間延遲切換"
 
-#: internet/groovesharkservice.cpp:534 internet/groovesharkservice.cpp:1317
+#: internet/groovesharkservice.cpp:531 internet/groovesharkservice.cpp:1314
 msgid "Delete Grooveshark playlist"
 msgstr "刪除 Grooveshark 播放清單"
 
@@ -1429,11 +1430,11 @@ msgstr "將選取的歌曲移出佇列中"
 msgid "Dequeue track"
 msgstr "將歌曲移出佇列中"
 
-#: ../bin/src/ui_transcodedialog.h:211 ../bin/src/ui_organisedialog.h:189
+#: ../bin/src/ui_transcodedialog.h:212 ../bin/src/ui_organisedialog.h:189
 msgid "Destination"
 msgstr "目的地"
 
-#: ../bin/src/ui_transcodedialog.h:217
+#: ../bin/src/ui_transcodedialog.h:218
 msgid "Details..."
 msgstr "詳情..."
 
@@ -1478,7 +1479,7 @@ msgid "Direct internet connection"
 msgstr "直接連接到網際網路"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:145
-#: ../bin/src/ui_transcodedialog.h:204
+#: ../bin/src/ui_transcodedialog.h:205
 msgid "Directory"
 msgstr "目錄"
 
@@ -1746,7 +1747,7 @@ msgstr ""
 msgid "Equivalent to --log-levels *:3"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:1042
+#: internet/groovesharkservice.cpp:1039
 #: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:497
 #: ui/mainwindow.cpp:1763 ui/mainwindow.cpp:1884
 msgid "Error"
@@ -1897,7 +1898,7 @@ msgstr ""
 msgid "Fast"
 msgstr "快速"
 
-#: internet/groovesharkservice.cpp:628
+#: internet/groovesharkservice.cpp:625
 msgid "Favorites"
 msgstr "我的最愛"
 
@@ -1947,7 +1948,7 @@ msgstr "檔案大小"
 msgid "File type"
 msgstr "檔案型態"
 
-#: ../bin/src/ui_transcodedialog.h:205
+#: ../bin/src/ui_transcodedialog.h:206
 msgid "Filename"
 msgstr "檔名"
 
@@ -1955,7 +1956,7 @@ msgstr "檔名"
 msgid "Files"
 msgstr "檔案"
 
-#: ../bin/src/ui_transcodedialog.h:202
+#: ../bin/src/ui_transcodedialog.h:203
 msgid "Files to transcode"
 msgstr "要轉碼的檔案"
 
@@ -2085,15 +2086,15 @@ msgstr "一般設定"
 msgid "Genre"
 msgstr "風格"
 
-#: internet/groovesharkservice.cpp:553
+#: internet/groovesharkservice.cpp:550
 msgid "Get a URL to share this Grooveshark playlist"
 msgstr "獲取一個網址以分享這個 Grooveshark 播放清單"
 
-#: internet/groovesharkservice.cpp:550 internet/groovesharkservice.cpp:1135
+#: internet/groovesharkservice.cpp:547 internet/groovesharkservice.cpp:1132
 msgid "Get a URL to share this Grooveshark song"
 msgstr "獲取一個網址以分享這個 Grooveshark 歌曲"
 
-#: internet/groovesharkservice.cpp:809
+#: internet/groovesharkservice.cpp:806
 msgid "Getting Grooveshark popular songs"
 msgstr "獲取 Grooveshark 熱門歌曲"
 
@@ -2139,15 +2140,15 @@ msgstr "Grooveshark"
 msgid "Grooveshark login error"
 msgstr "Grooveshark登入錯誤"
 
-#: internet/groovesharkservice.cpp:1187
+#: internet/groovesharkservice.cpp:1184
 msgid "Grooveshark playlist's URL"
 msgstr "Grooveshark 播放清單的網址"
 
-#: internet/groovesharkservice.cpp:614
+#: internet/groovesharkservice.cpp:611
 msgid "Grooveshark radio"
 msgstr "Grooveshark 電台"
 
-#: internet/groovesharkservice.cpp:1165
+#: internet/groovesharkservice.cpp:1162
 msgid "Grooveshark song's URL"
 msgstr "Grooveshark 歌曲的網址"
 
@@ -2521,7 +2522,7 @@ msgstr "音樂庫搜尋"
 msgid "Limits"
 msgstr "限制"
 
-#: internet/groovesharkservice.cpp:615
+#: internet/groovesharkservice.cpp:612
 msgid ""
 "Listen to Grooveshark songs based on what you've listened to previously"
 msgstr "聽取 Grooveshark 歌曲，根據您先前已經聽過的"
@@ -2806,7 +2807,7 @@ msgstr "移到音樂庫..."
 msgid "Move up"
 msgstr "上移"
 
-#: transcoder/transcodedialog.cpp:213 ui/mainwindow.cpp:1536
+#: transcoder/transcodedialog.cpp:216 ui/mainwindow.cpp:1536
 msgid "Music"
 msgstr "音樂"
 
@@ -2839,7 +2840,7 @@ msgstr "我的 Last.fm 推薦頻道"
 msgid "My Mix Radio"
 msgstr "我的混合頻道"
 
-#: internet/groovesharkservice.cpp:619
+#: internet/groovesharkservice.cpp:616
 msgid "My Music"
 msgstr ""
 
@@ -2855,7 +2856,7 @@ msgstr "我的廣播電台"
 msgid "My Recommendations"
 msgstr "我推薦的電台"
 
-#: internet/groovesharkservice.cpp:1271 internet/groovesharkservice.cpp:1364
+#: internet/groovesharkservice.cpp:1268 internet/groovesharkservice.cpp:1361
 #: ui/equalizer.cpp:172 ../bin/src/ui_deviceproperties.h:369
 #: ../bin/src/ui_magnatunedownloaddialog.h:135
 #: ../bin/src/ui_wizardfinishpage.h:84
@@ -3034,7 +3035,7 @@ msgid "Only show the first"
 msgstr "只顯示第一"
 
 #: internet/digitallyimportedservicebase.cpp:178
-#: internet/groovesharkservice.cpp:557 internet/icecastservice.cpp:296
+#: internet/groovesharkservice.cpp:554 internet/icecastservice.cpp:296
 #: internet/jamendoservice.cpp:418 internet/magnatuneservice.cpp:276
 #: internet/somafmservice.cpp:91
 #, qt-format
@@ -3084,7 +3085,7 @@ msgstr "最佳化位元率"
 msgid "Optimize for quality"
 msgstr "最佳化品質"
 
-#: ../bin/src/ui_transcodedialog.h:210
+#: ../bin/src/ui_transcodedialog.h:211
 msgid "Options..."
 msgstr "選擇..."
 
@@ -3112,7 +3113,7 @@ msgstr "其它選項"
 msgid "Output device"
 msgstr "輸出裝置"
 
-#: ../bin/src/ui_transcodedialog.h:208
+#: ../bin/src/ui_transcodedialog.h:209
 msgid "Output options"
 msgstr "輸出選項"
 
@@ -3238,7 +3239,7 @@ msgstr "播放清單搜尋"
 msgid "Playlist type"
 msgstr "播放清單類型"
 
-#: internet/groovesharkservice.cpp:637
+#: internet/groovesharkservice.cpp:634
 msgid "Playlists"
 msgstr "播放清單"
 
@@ -3254,15 +3255,15 @@ msgstr "Podcasts"
 msgid "Pop"
 msgstr "流行音樂"
 
-#: internet/groovesharkservice.cpp:588
+#: internet/groovesharkservice.cpp:585
 msgid "Popular songs"
 msgstr "熱門歌曲"
 
-#: internet/groovesharkservice.cpp:591
+#: internet/groovesharkservice.cpp:588
 msgid "Popular songs of the Month"
 msgstr "月份熱門歌曲"
 
-#: internet/groovesharkservice.cpp:598
+#: internet/groovesharkservice.cpp:595
 msgid "Popular songs today"
 msgstr "今日熱門歌曲"
 
@@ -3354,7 +3355,7 @@ msgid "Profile"
 msgstr "規格"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:134
-#: ../bin/src/ui_transcodedialog.h:216
+#: ../bin/src/ui_transcodedialog.h:217
 msgid "Progress"
 msgstr "進展"
 
@@ -3396,7 +3397,7 @@ msgstr "將歌曲加入佇列中"
 msgid "Radio (equal loudness for all tracks)"
 msgstr "廣播 (為所有歌曲取得相同音量)"
 
-#: internet/groovesharkservice.cpp:606
+#: internet/groovesharkservice.cpp:603
 msgid "Radios"
 msgstr ""
 
@@ -3440,7 +3441,7 @@ msgstr "評分"
 msgid "Really cancel?"
 msgstr "真的要取消？"
 
-#: internet/groovesharkservice.cpp:560
+#: internet/groovesharkservice.cpp:557
 msgid "Refresh"
 msgstr "重新整理"
 
@@ -3477,7 +3478,7 @@ msgid "Remember from last time"
 msgstr "記得上一次的狀態"
 
 #: internet/savedradio.cpp:100 ../bin/src/ui_queuemanager.h:135
-#: ../bin/src/ui_searchtermwidget.h:282 ../bin/src/ui_transcodedialog.h:207
+#: ../bin/src/ui_searchtermwidget.h:282 ../bin/src/ui_transcodedialog.h:208
 #: internet/lastfmservice.cpp:114
 msgid "Remove"
 msgstr "移除"
@@ -3494,15 +3495,15 @@ msgstr ""
 msgid "Remove folder"
 msgstr "移除資料夾"
 
-#: internet/groovesharkservice.cpp:547
+#: internet/groovesharkservice.cpp:544
 msgid "Remove from My Music"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:544
+#: internet/groovesharkservice.cpp:541
 msgid "Remove from favorites"
 msgstr "從我的最愛中刪除"
 
-#: internet/groovesharkservice.cpp:541 ../bin/src/ui_mainwindow.h:687
+#: internet/groovesharkservice.cpp:538 ../bin/src/ui_mainwindow.h:687
 msgid "Remove from playlist"
 msgstr "從播放清單移除"
 
@@ -3510,20 +3511,20 @@ msgstr "從播放清單移除"
 msgid "Remove playlist"
 msgstr "移除播放清單"
 
-#: internet/groovesharkservice.cpp:1565
+#: internet/groovesharkservice.cpp:1562
 msgid "Removing songs from My Music"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:1515
+#: internet/groovesharkservice.cpp:1512
 msgid "Removing songs from favorites"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:1363
+#: internet/groovesharkservice.cpp:1360
 #, qt-format
 msgid "Rename \"%1\" playlist"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:537
+#: internet/groovesharkservice.cpp:534
 msgid "Rename Grooveshark playlist"
 msgstr "重命名 Grooveshark 播放清單"
 
@@ -3593,15 +3594,15 @@ msgstr "重置播放計數"
 msgid "Restrict to ASCII characters"
 msgstr "限制為 ASCII 字符"
 
-#: internet/groovesharkservice.cpp:777
+#: internet/groovesharkservice.cpp:774
 msgid "Retrieving Grooveshark My Music songs"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:745
+#: internet/groovesharkservice.cpp:742
 msgid "Retrieving Grooveshark favorites songs"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:674
+#: internet/groovesharkservice.cpp:671
 msgid "Retrieving Grooveshark playlists"
 msgstr ""
 
@@ -3719,7 +3720,7 @@ msgstr "搜尋模式"
 msgid "Search options"
 msgstr "搜尋選項"
 
-#: internet/groovesharkservice.cpp:580 internet/spotifyservice.cpp:343
+#: internet/groovesharkservice.cpp:577 internet/spotifyservice.cpp:343
 msgid "Search results"
 msgstr ""
 
@@ -4077,11 +4078,11 @@ msgstr "已標記星號"
 msgid "Start the playlist currently playing"
 msgstr "開始播放目前播放清單"
 
-#: transcoder/transcodedialog.cpp:85
+#: transcoder/transcodedialog.cpp:88
 msgid "Start transcoding"
 msgstr "開始轉碼"
 
-#: internet/groovesharkservice.cpp:581 internet/spotifyservice.cpp:344
+#: internet/groovesharkservice.cpp:578 internet/spotifyservice.cpp:344
 msgid ""
 "Start typing something on the search box above to fill this search results "
 "list"
@@ -4096,7 +4097,7 @@ msgstr "標記星號 %1"
 msgid "Starting..."
 msgstr "開啟..."
 
-#: internet/groovesharkservice.cpp:609
+#: internet/groovesharkservice.cpp:606
 msgid "Stations"
 msgstr ""
 
@@ -4133,7 +4134,7 @@ msgstr "串流"
 msgid "Streaming membership"
 msgstr "串流成員"
 
-#: internet/groovesharkservice.cpp:640
+#: internet/groovesharkservice.cpp:637
 msgid "Subscribed playlists"
 msgstr ""
 
@@ -4376,7 +4377,7 @@ msgstr "時區"
 msgid "Title"
 msgstr "標題"
 
-#: internet/groovesharkservice.cpp:1043
+#: internet/groovesharkservice.cpp:1040
 msgid ""
 "To start Grooveshark radio, you should first listen to a few other "
 "Grooveshark songs"
@@ -4427,7 +4428,7 @@ msgstr ""
 msgid "Track"
 msgstr "歌曲"
 
-#: ../bin/src/ui_transcodedialog.h:201 ../bin/src/ui_mainwindow.h:689
+#: ../bin/src/ui_transcodedialog.h:202 ../bin/src/ui_mainwindow.h:689
 msgid "Transcode Music"
 msgstr "音樂轉碼"
 
@@ -4505,7 +4506,7 @@ msgstr ""
 msgid "Upcoming Concerts"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:1225
+#: internet/groovesharkservice.cpp:1222
 msgid "Update Grooveshark playlist"
 msgstr "更新 Grooveshark 播放清單"
 

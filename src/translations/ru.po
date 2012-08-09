@@ -15,14 +15,15 @@
 #   <loki13gm@gmail.com>, 2012.
 # Nikita Putko <admi136@mail.ru>, 2011.
 # Oleg Sevostyanov <oleg.sev@gmail.com>, 2011.
+#   <spontaliku@gmail.com>, 2012.
 # Vyacheslav Blinov <blinov.vyacheslav@gmail.com>, 2012.
 # Павел Малеев <rolland39@gmail.com>, 2010.
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-07-29 01:16+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2012-08-04 13:15+0000\n"
+"Last-Translator: KazimirSpontaliku <spontaliku@gmail.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: ru\n"
@@ -142,17 +143,17 @@ msgstr "всего %L1 прослушиваний"
 msgid "%filename%"
 msgstr "%filename%"
 
-#: transcoder/transcodedialog.cpp:199
+#: transcoder/transcodedialog.cpp:202
 #, c-format
 msgid "%n failed"
 msgstr "%n с ошибкой"
 
-#: transcoder/transcodedialog.cpp:194
+#: transcoder/transcodedialog.cpp:197
 #, c-format
 msgid "%n finished"
 msgstr "%n завершено"
 
-#: transcoder/transcodedialog.cpp:189
+#: transcoder/transcodedialog.cpp:192
 #, c-format
 msgid "%n remaining"
 msgstr "%n осталось"
@@ -378,7 +379,7 @@ msgstr "Добавить файл"
 msgid "Add file..."
 msgstr "Добавить файл..."
 
-#: transcoder/transcodedialog.cpp:211
+#: transcoder/transcodedialog.cpp:214
 msgid "Add files to transcode"
 msgstr "Добавить файлы для перекодирования"
 
@@ -462,11 +463,11 @@ msgstr "Добавить тег \"Год\""
 msgid "Add stream..."
 msgstr "Добавить поток..."
 
-#: internet/groovesharkservice.cpp:1112
+#: internet/groovesharkservice.cpp:1109
 msgid "Add to Grooveshark favorites"
 msgstr "Добавить в избранное Grooveshark"
 
-#: internet/groovesharkservice.cpp:1124
+#: internet/groovesharkservice.cpp:1121
 msgid "Add to Grooveshark playlists"
 msgstr "Добавить в списки воспроизведения Grooveshark"
 
@@ -486,7 +487,7 @@ msgstr "Добавить в очередь"
 msgid "Add wiimotedev action"
 msgstr "Добавить действие wiimotedev"
 
-#: ../bin/src/ui_transcodedialog.h:206
+#: ../bin/src/ui_transcodedialog.h:207
 msgid "Add..."
 msgstr "Добавить..."
 
@@ -511,11 +512,11 @@ msgstr "Добавлено сегодня"
 msgid "Added within three months"
 msgstr "Добавлено за три месяца"
 
-#: internet/groovesharkservice.cpp:1420
+#: internet/groovesharkservice.cpp:1417
 msgid "Adding song to My Music"
-msgstr ""
+msgstr "Добавляем композиции в Мою музыку"
 
-#: internet/groovesharkservice.cpp:1397
+#: internet/groovesharkservice.cpp:1394
 msgid "Adding song to favorites"
 msgstr "Добавляем песню в избранные"
 
@@ -603,7 +604,7 @@ msgstr "Все композиции"
 msgid "Allow mid/side encoding"
 msgstr "Разрешить mid/side кодирование"
 
-#: ../bin/src/ui_transcodedialog.h:214
+#: ../bin/src/ui_transcodedialog.h:215
 msgid "Alongside the originals"
 msgstr "Вместе с оригиналами"
 
@@ -679,7 +680,7 @@ msgstr "Применить сжатие для предотвращения ис
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "Вы действительно хотите удалить настройку \"%1\"?"
 
-#: internet/groovesharkservice.cpp:1318
+#: internet/groovesharkservice.cpp:1315
 msgid "Are you sure you want to delete this playlist?"
 msgstr "Вы действительно хотите удалить список воспроизведения"
 
@@ -713,7 +714,7 @@ msgstr "Тэги артиста"
 msgid "Artist's initial"
 msgstr "Инициалы исполнителя"
 
-#: ../bin/src/ui_transcodedialog.h:209
+#: ../bin/src/ui_transcodedialog.h:210
 msgid "Audio format"
 msgstr "Формат аудио"
 
@@ -860,7 +861,7 @@ msgstr "Буферизация"
 
 #: ../bin/src/ui_globalsearchview.h:211
 msgid "But these sources are disabled:"
-msgstr ""
+msgstr "Эти источники отключены:"
 
 #: ../bin/src/ui_wiimotesettingspage.h:192
 msgid "Buttons"
@@ -906,7 +907,7 @@ msgstr "Сменить язык"
 msgid ""
 "Changing mono playback preference will be effective for the next playing "
 "songs"
-msgstr ""
+msgstr "Изменение настроек воспроизведения моно подействует со следующей композиции"
 
 #: ../bin/src/ui_podcastsettingspage.h:228
 msgid "Check for new episodes"
@@ -957,7 +958,8 @@ msgstr "Классический"
 msgid "Cleaning up"
 msgstr "Очистка..."
 
-#: widgets/lineedit.cpp:41 ../bin/src/ui_queuemanager.h:139
+#: transcoder/transcodedialog.cpp:60 widgets/lineedit.cpp:41
+#: ../bin/src/ui_queuemanager.h:139
 msgid "Clear"
 msgstr "Очистить"
 
@@ -1024,7 +1026,7 @@ msgstr "Clementine не смог найти результаты по запро
 
 #: ../bin/src/ui_globalsearchview.h:210
 msgid "Clementine will find music in:"
-msgstr ""
+msgstr "Clementine будет искать здесь:"
 
 #: library/libraryview.cpp:244
 msgid "Click here to add some music"
@@ -1088,9 +1090,9 @@ msgstr "Композитор"
 #: internet/searchboxwidget.cpp:42
 #, qt-format
 msgid "Configure %1..."
-msgstr ""
+msgstr "Настроить %1 ..."
 
-#: internet/groovesharkservice.cpp:563
+#: internet/groovesharkservice.cpp:560
 msgid "Configure Grooveshark..."
 msgstr "Настроить Grooveshark ..."
 
@@ -1112,7 +1114,7 @@ msgstr "Настройка Spotify..."
 
 #: globalsearch/globalsearchview.cpp:138 globalsearch/globalsearchview.cpp:425
 msgid "Configure global search..."
-msgstr ""
+msgstr "Настроить глобальный поиск..."
 
 #: ui/mainwindow.cpp:458
 msgid "Configure library..."
@@ -1151,7 +1153,7 @@ msgstr "Конвертировать всю музыку"
 msgid "Convert any music that the device can't play"
 msgstr "Конвертировать всю музыку, которую может проигрывать устройство."
 
-#: internet/groovesharkservice.cpp:1197
+#: internet/groovesharkservice.cpp:1194
 msgid "Copy to clipboard"
 msgstr "Скопировать в буфер"
 
@@ -1235,7 +1237,7 @@ msgstr "Обложка задана из %1"
 msgid "Covers from %1"
 msgstr "Обложки из %1"
 
-#: internet/groovesharkservice.cpp:531 internet/groovesharkservice.cpp:1270
+#: internet/groovesharkservice.cpp:528 internet/groovesharkservice.cpp:1267
 msgid "Create a new Grooveshark playlist"
 msgstr "Создать новый список воспроизведения Grooveshark"
 
@@ -1390,7 +1392,7 @@ msgstr "По умолчанию"
 msgid "Delay between visualizations"
 msgstr "Задержка между визуализациями"
 
-#: internet/groovesharkservice.cpp:534 internet/groovesharkservice.cpp:1317
+#: internet/groovesharkservice.cpp:531 internet/groovesharkservice.cpp:1314
 msgid "Delete Grooveshark playlist"
 msgstr "Удалить список воспроизведения Grooveshark"
 
@@ -1440,11 +1442,11 @@ msgstr "Убрать из очереди выбранные композиции
 msgid "Dequeue track"
 msgstr "Убрать из очереди композицию"
 
-#: ../bin/src/ui_transcodedialog.h:211 ../bin/src/ui_organisedialog.h:189
+#: ../bin/src/ui_transcodedialog.h:212 ../bin/src/ui_organisedialog.h:189
 msgid "Destination"
 msgstr "Назначение"
 
-#: ../bin/src/ui_transcodedialog.h:217
+#: ../bin/src/ui_transcodedialog.h:218
 msgid "Details..."
 msgstr "Подробнее..."
 
@@ -1489,7 +1491,7 @@ msgid "Direct internet connection"
 msgstr "Прямое соединение с Интернетом"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:145
-#: ../bin/src/ui_transcodedialog.h:204
+#: ../bin/src/ui_transcodedialog.h:205
 msgid "Directory"
 msgstr "Каталог"
 
@@ -1684,7 +1686,7 @@ msgstr "Реагировать на комбинации клавиш тольк
 msgid ""
 "Enable sources below to include them in search results.  Results will be "
 "displayed in this order."
-msgstr ""
+msgstr "Включить нижеперечисленные источники, чтобы добавить их в результаты поиска. Если одинаковые результаты доступны в нескольких источниках, то результаты, находящиеся сверху, будут иметь приоритет."
 
 #: core/globalshortcuts.cpp:62
 msgid "Enable/disable Last.fm scrobbling"
@@ -1722,7 +1724,7 @@ msgstr "Укажите <b>исполнителя</b> или <b>тег</b> что
 #: ../bin/src/ui_globalsearchview.h:209
 msgid ""
 "Enter search terms above to find music on your computer and on the internet"
-msgstr ""
+msgstr "Введите ключевые слова для поиска музыки на компьютере и в интернете"
 
 #: ../bin/src/ui_itunessearchpage.h:77
 msgid "Enter search terms below to find podcasts in the iTunes Store"
@@ -1757,7 +1759,7 @@ msgstr "Аналогично --log-levels *:1"
 msgid "Equivalent to --log-levels *:3"
 msgstr "Аналогично --log-levels *:3"
 
-#: internet/groovesharkservice.cpp:1042
+#: internet/groovesharkservice.cpp:1039
 #: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:497
 #: ui/mainwindow.cpp:1763 ui/mainwindow.cpp:1884
 msgid "Error"
@@ -1908,7 +1910,7 @@ msgstr "Ошибка разбора XML в данной RSS подписке"
 msgid "Fast"
 msgstr "Быстро"
 
-#: internet/groovesharkservice.cpp:628
+#: internet/groovesharkservice.cpp:625
 msgid "Favorites"
 msgstr "Избранное"
 
@@ -1958,7 +1960,7 @@ msgstr "Размер файла"
 msgid "File type"
 msgstr "Тип Файла"
 
-#: ../bin/src/ui_transcodedialog.h:205
+#: ../bin/src/ui_transcodedialog.h:206
 msgid "Filename"
 msgstr "Имя файла"
 
@@ -1966,7 +1968,7 @@ msgstr "Имя файла"
 msgid "Files"
 msgstr "Файлы"
 
-#: ../bin/src/ui_transcodedialog.h:202
+#: ../bin/src/ui_transcodedialog.h:203
 msgid "Files to transcode"
 msgstr "Файлы для перекодирования"
 
@@ -2096,15 +2098,15 @@ msgstr "Общие настройки"
 msgid "Genre"
 msgstr "Жанр"
 
-#: internet/groovesharkservice.cpp:553
+#: internet/groovesharkservice.cpp:550
 msgid "Get a URL to share this Grooveshark playlist"
 msgstr "Получить URL на этот Grooveshark плейлист."
 
-#: internet/groovesharkservice.cpp:550 internet/groovesharkservice.cpp:1135
+#: internet/groovesharkservice.cpp:547 internet/groovesharkservice.cpp:1132
 msgid "Get a URL to share this Grooveshark song"
 msgstr "Получить URL на эту песню в Grooveshark."
 
-#: internet/groovesharkservice.cpp:809
+#: internet/groovesharkservice.cpp:806
 msgid "Getting Grooveshark popular songs"
 msgstr "Загружаем самые популярные песни на Grooveshark"
 
@@ -2150,15 +2152,15 @@ msgstr "Grooveshark"
 msgid "Grooveshark login error"
 msgstr "Ошибка при входе на сервис Grooveshark"
 
-#: internet/groovesharkservice.cpp:1187
+#: internet/groovesharkservice.cpp:1184
 msgid "Grooveshark playlist's URL"
 msgstr "Ссылки на плейлист Grooveshark"
 
-#: internet/groovesharkservice.cpp:614
+#: internet/groovesharkservice.cpp:611
 msgid "Grooveshark radio"
 msgstr "Радио Grooveshark"
 
-#: internet/groovesharkservice.cpp:1165
+#: internet/groovesharkservice.cpp:1162
 msgid "Grooveshark song's URL"
 msgstr "Ссылка песни на Grooveshark"
 
@@ -2532,7 +2534,7 @@ msgstr "Поиск по библиотеке"
 msgid "Limits"
 msgstr "Ограничения"
 
-#: internet/groovesharkservice.cpp:615
+#: internet/groovesharkservice.cpp:612
 msgid ""
 "Listen to Grooveshark songs based on what you've listened to previously"
 msgstr "Слушать музыку на сервисе Grooveshark, исходя из  прослушанных ранее композиций"
@@ -2772,7 +2774,7 @@ msgstr "Следить за изменениями библиотеки"
 
 #: ../bin/src/ui_playbacksettingspage.h:296
 msgid "Mono playback"
-msgstr ""
+msgstr "Воспроизведение моно"
 
 #: smartplaylists/searchterm.cpp:303
 msgid "Months"
@@ -2817,7 +2819,7 @@ msgstr "Переместить в коллекцию..."
 msgid "Move up"
 msgstr "Переместить вверх"
 
-#: transcoder/transcodedialog.cpp:213 ui/mainwindow.cpp:1536
+#: transcoder/transcodedialog.cpp:216 ui/mainwindow.cpp:1536
 msgid "Music"
 msgstr "Музыка"
 
@@ -2850,9 +2852,9 @@ msgstr "Мое радио рекомендаций на Last.fm"
 msgid "My Mix Radio"
 msgstr "Радио Мой Микс"
 
-#: internet/groovesharkservice.cpp:619
+#: internet/groovesharkservice.cpp:616
 msgid "My Music"
-msgstr ""
+msgstr "Моя музыка"
 
 #: internet/lastfmservice.cpp:201
 msgid "My Neighborhood"
@@ -2866,7 +2868,7 @@ msgstr "Моя радиостанция"
 msgid "My Recommendations"
 msgstr "Мои рекомендации"
 
-#: internet/groovesharkservice.cpp:1271 internet/groovesharkservice.cpp:1364
+#: internet/groovesharkservice.cpp:1268 internet/groovesharkservice.cpp:1361
 #: ui/equalizer.cpp:172 ../bin/src/ui_deviceproperties.h:369
 #: ../bin/src/ui_magnatunedownloaddialog.h:135
 #: ../bin/src/ui_wizardfinishpage.h:84
@@ -3045,7 +3047,7 @@ msgid "Only show the first"
 msgstr "Показывать только первый"
 
 #: internet/digitallyimportedservicebase.cpp:178
-#: internet/groovesharkservice.cpp:557 internet/icecastservice.cpp:296
+#: internet/groovesharkservice.cpp:554 internet/icecastservice.cpp:296
 #: internet/jamendoservice.cpp:418 internet/magnatuneservice.cpp:276
 #: internet/somafmservice.cpp:91
 #, qt-format
@@ -3058,11 +3060,11 @@ msgstr "Открыть аудио-&диск..."
 
 #: podcasts/addpodcastdialog.cpp:230
 msgid "Open OPML file"
-msgstr ""
+msgstr "Открыть файл OPML"
 
 #: podcasts/addpodcastdialog.cpp:73
 msgid "Open OPML file..."
-msgstr ""
+msgstr "Открыть файл OPML ..."
 
 #: ../bin/src/ui_deviceproperties.h:382
 msgid "Open device"
@@ -3095,7 +3097,7 @@ msgstr "Оптимизировать по битрейту"
 msgid "Optimize for quality"
 msgstr "Оптимизировать по качеству"
 
-#: ../bin/src/ui_transcodedialog.h:210
+#: ../bin/src/ui_transcodedialog.h:211
 msgid "Options..."
 msgstr "Настройки..."
 
@@ -3123,7 +3125,7 @@ msgstr "Другие настройки"
 msgid "Output device"
 msgstr "Устройство вывода"
 
-#: ../bin/src/ui_transcodedialog.h:208
+#: ../bin/src/ui_transcodedialog.h:209
 msgid "Output options"
 msgstr "Опции вывода"
 
@@ -3249,7 +3251,7 @@ msgstr "Поиск по списку воспроизведения"
 msgid "Playlist type"
 msgstr "Тип плейлиста"
 
-#: internet/groovesharkservice.cpp:637
+#: internet/groovesharkservice.cpp:634
 msgid "Playlists"
 msgstr "Списки воспроизведения"
 
@@ -3265,15 +3267,15 @@ msgstr "Подкасты"
 msgid "Pop"
 msgstr "Pop"
 
-#: internet/groovesharkservice.cpp:588
+#: internet/groovesharkservice.cpp:585
 msgid "Popular songs"
 msgstr "Популярные песни"
 
-#: internet/groovesharkservice.cpp:591
+#: internet/groovesharkservice.cpp:588
 msgid "Popular songs of the Month"
 msgstr "Самые популярные песни за месяц"
 
-#: internet/groovesharkservice.cpp:598
+#: internet/groovesharkservice.cpp:595
 msgid "Popular songs today"
 msgstr "Самые популярные песни на сегодня"
 
@@ -3365,7 +3367,7 @@ msgid "Profile"
 msgstr "Профиль"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:134
-#: ../bin/src/ui_transcodedialog.h:216
+#: ../bin/src/ui_transcodedialog.h:217
 msgid "Progress"
 msgstr "Ход выполнения"
 
@@ -3407,7 +3409,7 @@ msgstr "Добавить в очередь композицию"
 msgid "Radio (equal loudness for all tracks)"
 msgstr "Радио (одинаковая громкость для всех композиций)"
 
-#: internet/groovesharkservice.cpp:606
+#: internet/groovesharkservice.cpp:603
 msgid "Radios"
 msgstr "Радио"
 
@@ -3451,7 +3453,7 @@ msgstr "Рейтинг"
 msgid "Really cancel?"
 msgstr "Действительно отменить?"
 
-#: internet/groovesharkservice.cpp:560
+#: internet/groovesharkservice.cpp:557
 msgid "Refresh"
 msgstr "Обновить"
 
@@ -3488,7 +3490,7 @@ msgid "Remember from last time"
 msgstr "Запомнить последнее"
 
 #: internet/savedradio.cpp:100 ../bin/src/ui_queuemanager.h:135
-#: ../bin/src/ui_searchtermwidget.h:282 ../bin/src/ui_transcodedialog.h:207
+#: ../bin/src/ui_searchtermwidget.h:282 ../bin/src/ui_transcodedialog.h:208
 #: internet/lastfmservice.cpp:114
 msgid "Remove"
 msgstr "Удалить"
@@ -3499,21 +3501,21 @@ msgstr "Удалить действие"
 
 #: ../bin/src/ui_mainwindow.h:712
 msgid "Remove duplicates from playlist"
-msgstr ""
+msgstr "Убрать повторы из списка воспроизведения"
 
 #: ../bin/src/ui_librarysettingspage.h:160
 msgid "Remove folder"
 msgstr "Удалить каталог"
 
-#: internet/groovesharkservice.cpp:547
-msgid "Remove from My Music"
-msgstr ""
-
 #: internet/groovesharkservice.cpp:544
+msgid "Remove from My Music"
+msgstr "Убрать из Моей музыки"
+
+#: internet/groovesharkservice.cpp:541
 msgid "Remove from favorites"
 msgstr "Удалить из избранных"
 
-#: internet/groovesharkservice.cpp:541 ../bin/src/ui_mainwindow.h:687
+#: internet/groovesharkservice.cpp:538 ../bin/src/ui_mainwindow.h:687
 msgid "Remove from playlist"
 msgstr "Удалить из списка воспроизведения"
 
@@ -3521,20 +3523,20 @@ msgstr "Удалить из списка воспроизведения"
 msgid "Remove playlist"
 msgstr "Удалить список воспроизведения"
 
-#: internet/groovesharkservice.cpp:1565
+#: internet/groovesharkservice.cpp:1562
 msgid "Removing songs from My Music"
-msgstr ""
+msgstr "Убираем композиции из Моей музыки"
 
-#: internet/groovesharkservice.cpp:1515
+#: internet/groovesharkservice.cpp:1512
 msgid "Removing songs from favorites"
-msgstr ""
+msgstr "Убираем композицию из избранных"
 
-#: internet/groovesharkservice.cpp:1363
+#: internet/groovesharkservice.cpp:1360
 #, qt-format
 msgid "Rename \"%1\" playlist"
 msgstr "Переименовать список воспроизведения \\\"%1\\\""
 
-#: internet/groovesharkservice.cpp:537
+#: internet/groovesharkservice.cpp:534
 msgid "Rename Grooveshark playlist"
 msgstr "Переименовать список воспроизведения Grooveshark"
 
@@ -3604,15 +3606,15 @@ msgstr "Сбросить счётчики воспроизведения"
 msgid "Restrict to ASCII characters"
 msgstr "Ограничить только символами ASCII"
 
-#: internet/groovesharkservice.cpp:777
+#: internet/groovesharkservice.cpp:774
 msgid "Retrieving Grooveshark My Music songs"
-msgstr ""
+msgstr "Загружаем список избранных песен с Grooveshark  "
 
-#: internet/groovesharkservice.cpp:745
+#: internet/groovesharkservice.cpp:742
 msgid "Retrieving Grooveshark favorites songs"
 msgstr "Загружаем список избранных песен с Grooveshark  "
 
-#: internet/groovesharkservice.cpp:674
+#: internet/groovesharkservice.cpp:671
 msgid "Retrieving Grooveshark playlists"
 msgstr "Загружаем списки воспроизведения с Grooveshark  "
 
@@ -3642,7 +3644,7 @@ msgstr "Частота дискретизации"
 
 #: ../bin/src/ui_appearancesettingspage.h:247
 msgid "Save .mood files in your music library"
-msgstr ""
+msgstr "Сохранить файлы .mood в библиотеку музыки"
 
 #: ui/albumcoverchoicecontroller.cpp:114
 msgid "Save album cover"
@@ -3730,9 +3732,9 @@ msgstr "Режим поиска"
 msgid "Search options"
 msgstr "Параметры поиска"
 
-#: internet/groovesharkservice.cpp:580 internet/spotifyservice.cpp:343
+#: internet/groovesharkservice.cpp:577 internet/spotifyservice.cpp:343
 msgid "Search results"
-msgstr ""
+msgstr "Результаты поиска"
 
 #: smartplaylists/querywizardplugin.cpp:151
 #: ../bin/src/ui_querysearchpage.h:120
@@ -3914,7 +3916,7 @@ msgstr "Показывать только без тэгов"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:153
 msgid "Show search suggestions"
-msgstr ""
+msgstr "Показать поисковые подсказки"
 
 #: ../bin/src/ui_lastfmsettingspage.h:157
 msgid "Show the \"love\" and \"ban\" buttons"
@@ -3930,7 +3932,7 @@ msgstr "Показывать значок в системном лотке"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:152
 msgid "Show which sources are enabled and disabled"
-msgstr ""
+msgstr "Показать какие источники включены и отключены"
 
 #: core/globalshortcuts.cpp:57
 msgid "Show/Hide"
@@ -4088,15 +4090,15 @@ msgstr "Оцененные"
 msgid "Start the playlist currently playing"
 msgstr "Запустить список воспроизведения проигрываемый в данный момент"
 
-#: transcoder/transcodedialog.cpp:85
+#: transcoder/transcodedialog.cpp:88
 msgid "Start transcoding"
 msgstr "Начать перекодирование"
 
-#: internet/groovesharkservice.cpp:581 internet/spotifyservice.cpp:344
+#: internet/groovesharkservice.cpp:578 internet/spotifyservice.cpp:344
 msgid ""
 "Start typing something on the search box above to fill this search results "
 "list"
-msgstr ""
+msgstr "Начните печатать что-нибудь в поле для поиска"
 
 #: transcoder/transcoder.cpp:401
 #, qt-format
@@ -4107,7 +4109,7 @@ msgstr "Запуск %1"
 msgid "Starting..."
 msgstr "Запуск..."
 
-#: internet/groovesharkservice.cpp:609
+#: internet/groovesharkservice.cpp:606
 msgid "Stations"
 msgstr "Станции"
 
@@ -4144,7 +4146,7 @@ msgstr "Поток"
 msgid "Streaming membership"
 msgstr "\"Streaming\" подписка"
 
-#: internet/groovesharkservice.cpp:640
+#: internet/groovesharkservice.cpp:637
 msgid "Subscribed playlists"
 msgstr "Списки воспроизведения, на которые вы подписаны"
 
@@ -4194,7 +4196,7 @@ msgstr "Синхронизация рейтингованных треков Spo
 
 #: moodbar/moodbarrenderer.cpp:159
 msgid "System colors"
-msgstr ""
+msgstr "Системные цвета"
 
 #: widgets/fancytabwidget.cpp:654
 msgid "Tabs on top"
@@ -4387,7 +4389,7 @@ msgstr "Часовой пояс"
 msgid "Title"
 msgstr "Название"
 
-#: internet/groovesharkservice.cpp:1043
+#: internet/groovesharkservice.cpp:1040
 msgid ""
 "To start Grooveshark radio, you should first listen to a few other "
 "Grooveshark songs"
@@ -4423,7 +4425,7 @@ msgstr "Слишком много перенаправлений"
 
 #: internet/spotifyservice.cpp:362
 msgid "Top tracks"
-msgstr ""
+msgstr "Самые популярные"
 
 #: covers/coversearchstatisticsdialog.cpp:71
 msgid "Total bytes transferred"
@@ -4438,7 +4440,7 @@ msgstr "Всего выполнено сетевых запросов"
 msgid "Track"
 msgstr "Дорожка"
 
-#: ../bin/src/ui_transcodedialog.h:201 ../bin/src/ui_mainwindow.h:689
+#: ../bin/src/ui_transcodedialog.h:202 ../bin/src/ui_mainwindow.h:689
 msgid "Transcode Music"
 msgstr "Перекодировать композиции"
 
@@ -4514,9 +4516,9 @@ msgstr "Отписаться"
 
 #: songinfo/songkickconcerts.cpp:177
 msgid "Upcoming Concerts"
-msgstr ""
+msgstr "Предстоящие концерты"
 
-#: internet/groovesharkservice.cpp:1225
+#: internet/groovesharkservice.cpp:1222
 msgid "Update Grooveshark playlist"
 msgstr "Обновить список воспроизведения на Grooveshark"
 
@@ -4560,7 +4562,7 @@ msgstr "Использование"
 
 #: ../bin/src/ui_lastfmsettingspage.h:159
 msgid "Use Album Artist tag when available"
-msgstr ""
+msgstr "Использовать тег Исполнитель Альбома когда возможно"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:168
 msgid "Use Gnome's shortcut keys"
@@ -4728,11 +4730,11 @@ msgstr "При поиске обложек альбомов Clementine буде�
 
 #: ../bin/src/ui_globalsearchsettingspage.h:151
 msgid "When the list is empty..."
-msgstr ""
+msgstr "Когда список пуст..."
 
 #: ../bin/src/ui_globalsearchview.h:212
 msgid "Why not try..."
-msgstr ""
+msgstr "Почему бы не попробовать..."
 
 #: devices/ilister.cpp:121
 msgid "WiFi MAC Address"
@@ -4883,7 +4885,7 @@ msgstr "У вас нет учетной записи Spotify Premium"
 
 #: internet/digitallyimportedclient.cpp:89
 msgid "You do not have an active subscription"
-msgstr ""
+msgstr "У вас нет активной подписки"
 
 #: internet/spotifyservice.cpp:168
 msgid ""
@@ -5051,7 +5053,7 @@ msgstr "самые длинные сначала"
 #: playlist/playlistundocommands.cpp:99
 #, c-format
 msgid "move %n songs"
-msgstr ""
+msgstr "переместить %n композиций"
 
 #: smartplaylists/searchterm.cpp:289
 msgid "newest first"
@@ -5096,7 +5098,7 @@ msgstr "кратчайший первый"
 
 #: playlist/playlistundocommands.cpp:138
 msgid "shuffle songs"
-msgstr ""
+msgstr "Перемешать композиции"
 
 #: smartplaylists/searchterm.cpp:292
 msgid "smallest first"
@@ -5104,7 +5106,7 @@ msgstr "наименьший первый"
 
 #: playlist/playlistundocommands.cpp:131
 msgid "sort songs"
-msgstr ""
+msgstr "Сортировать композиции"
 
 #: smartplaylists/searchterm.cpp:214
 msgid "starts with"

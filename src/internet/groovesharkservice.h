@@ -149,8 +149,6 @@ class GroovesharkService : public InternetService {
   };
 
  private slots:
-  void UpdateTotalSongCount(int count);
-
   void SessionCreated();
   void DoSearch();
   void SearchSongsFinished();

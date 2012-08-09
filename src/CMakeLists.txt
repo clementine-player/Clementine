@@ -152,6 +152,7 @@ set(SOURCES
   globalsearch/searchproviderstatuswidget.cpp
   globalsearch/simplesearchprovider.cpp
   globalsearch/somafmsearchprovider.cpp
+  globalsearch/soundcloudsearchprovider.cpp
   globalsearch/suggestionwidget.cpp
   globalsearch/urlsearchprovider.cpp
 
@@ -186,6 +187,7 @@ set(SOURCES
   internet/searchboxwidget.cpp
   internet/somafmservice.cpp
   internet/somafmurlhandler.cpp
+  internet/soundcloudservice.cpp
 
   library/groupbydialog.cpp
   library/library.cpp
@@ -425,6 +427,7 @@ set(HEADERS
   globalsearch/groovesharksearchprovider.h
   globalsearch/searchprovider.h
   globalsearch/simplesearchprovider.h
+  globalsearch/soundcloudsearchprovider.h
   globalsearch/suggestionwidget.h
 
   internet/digitallyimportedclient.h
@@ -454,6 +457,7 @@ set(HEADERS
   internet/searchboxwidget.h
   internet/somafmservice.h
   internet/somafmurlhandler.h
+  internet/soundcloudservice.h
 
   library/groupbydialog.h
   library/library.h

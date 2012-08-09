@@ -451,6 +451,7 @@ void GroovesharkService::RemoveItems() {
   playlists_.clear();
   subscribed_playlists_parent_ = NULL;
   subscribed_playlists_.clear();
+  pending_retrieve_playlists_.clear();
 }
 
 void GroovesharkService::ResetSessionId() {
@@ -518,9 +519,6 @@ void GroovesharkService::ShowContextMenu(const QPoint& global_pos) {
   get_url_to_share_playlist_->setVisible(display_share_playlist_url);
 
   context_menu_->popup(global_pos);
-}
-
-void GroovesharkService::UpdateTotalSongCount(int count) {
 }
 
 void GroovesharkService::EnsureMenuCreated() {
@@ -715,6 +713,9 @@ void GroovesharkService::PlaylistSongsRetrieved() {
   reply->deleteLater();
 
   // Find corresponding playlist info
+  if (!pending_retrieve_playlists_.contains(reply)) {
+    return;
+  };
   int playlist_id = pending_retrieve_playlists_.take(reply);
   PlaylistInfo& playlist_info = subscribed_playlists_.contains(playlist_id) ?
       subscribed_playlists_[playlist_id] : playlists_[playlist_id];

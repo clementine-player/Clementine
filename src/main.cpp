@@ -96,6 +96,10 @@ using boost::scoped_ptr;
   const QDBusArgument& operator>> (const QDBusArgument& arg, QImage& image);
 #endif
 
+#ifdef Q_OS_WIN32
+# include <qtsparkle/Updater>
+#endif
+
 // Load sqlite plugin on windows and mac.
 #ifdef HAVE_STATIC_SQLITE
 # include <QtPlugin>
@@ -380,6 +384,11 @@ int main(int argc, char *argv[]) {
   LoadTranslation("clementine", ":/translations", language);
   LoadTranslation("clementine", a.applicationDirPath(), language);
   LoadTranslation("clementine", QDir::currentPath(), language);
+
+#ifdef Q_OS_WIN32
+  // Set the language for qtsparkle
+  qtsparkle::LoadTranslations(language);
+#endif
 
   // Icons
   IconLoader::Init();
