@@ -463,6 +463,8 @@ QPixmap SongSourceDelegate::LookupPixmap(const QUrl& url, const QSize& size) con
       icon = IconLoader::Load("folder-sound");
     } else if (url.host() == "api.jamendo.com") {
       icon = QIcon(":/providers/jamendo.png");
+    } else if (url.host() == "api.soundcloud.com") {
+      icon = QIcon(":/providers/soundcloud.png");
     }
   }
   pixmap = icon.pixmap(size.height());
