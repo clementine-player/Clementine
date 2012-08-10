@@ -65,7 +65,9 @@ QStandardItem* GoogleDriveService::CreateRootItem() {
 void GoogleDriveService::LazyPopulate(QStandardItem* item) {
   switch (item->data(InternetModel::Role_Type).toInt()) {
     case InternetModel::Type_Service:
-      Connect();
+      if (!client_->is_authenticated()) {
+        Connect();
+      }
       library_model_->Init();
       model()->merged_model()->AddSubModel(item->index(), library_sort_model_);
       break;
@@ -108,6 +110,17 @@ void GoogleDriveService::ConnectFinished(google_drive::ConnectResponse* response
   ListFilesForMimeType("audio/mpeg");          // MP3/AAC
   ListFilesForMimeType("application/ogg");     // OGG
   ListFilesForMimeType("application/x-flac");  // FLAC
+}
+
+void GoogleDriveService::EnsureConnected() {
+  if (client_->is_authenticated()) {
+    return;
+  }
+
+  QEventLoop loop;
+  connect(client_, SIGNAL(Authenticated()), &loop, SLOT(quit()));
+  Connect();
+  loop.exec();
 }
 
 void GoogleDriveService::FilesFound(const QList<google_drive::File>& files) {
@@ -183,6 +196,7 @@ void GoogleDriveService::ReadTagsFinished(TagReaderClient::ReplyType* reply,
 }
 
 QUrl GoogleDriveService::GetStreamingUrlFromSongId(const QString& id) {
+  EnsureConnected();
   QScopedPointer<google_drive::GetFileResponse> response(client_->GetFile(id));
 
   QEventLoop loop;
