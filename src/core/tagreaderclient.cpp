@@ -21,6 +21,7 @@
 #include <QFile>
 #include <QProcess>
 #include <QTcpServer>
+#include <QUrl>
 
 
 const char* TagReaderClient::kWorkerExecutableName = "clementine-tagreader";
@@ -79,6 +80,25 @@ TagReaderReply* TagReaderClient::LoadEmbeddedArt(const QString& filename) {
   pb::tagreader::LoadEmbeddedArtRequest* req = message.mutable_load_embedded_art_request();
 
   req->set_filename(DataCommaSizeFromQString(filename));
+
+  return worker_pool_->SendMessageWithReply(&message);
+}
+
+TagReaderReply* TagReaderClient::ReadGoogleDrive(const QUrl& download_url,
+                                                 const QString& title,
+                                                 int size,
+                                                 const QString& mime_type,
+                                                 const QString& access_token) {
+  pb::tagreader::Message message;
+  pb::tagreader::ReadGoogleDriveRequest* req =
+      message.mutable_read_google_drive_request();
+
+  const QString url_string = download_url.toEncoded();
+  req->set_download_url(DataCommaSizeFromQString(url_string));
+  req->set_title(DataCommaSizeFromQString(title));
+  req->set_size(size);
+  req->set_mime_type(DataCommaSizeFromQString(mime_type));
+  req->set_access_token(DataCommaSizeFromQString(access_token));
 
   return worker_pool_->SendMessageWithReply(&message);
 }

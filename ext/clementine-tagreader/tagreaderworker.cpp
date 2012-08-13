@@ -24,6 +24,7 @@
 #include <QCoreApplication>
 #include <QDateTime>
 #include <QFileInfo>
+#include <QNetworkAccessManager>
 #include <QTextCodec>
 #include <QUrl>
 
@@ -54,6 +55,10 @@
 // Taglib added support for FLAC pictures in 1.7.0
 #if (TAGLIB_MAJOR_VERSION > 1) || (TAGLIB_MAJOR_VERSION == 1 && TAGLIB_MINOR_VERSION >= 7)
 # define TAGLIB_HAS_FLAC_PICTURELIST
+#endif
+
+#ifdef HAVE_GOOGLE_DRIVE
+# include "googledrivestream.h"
 #endif
 
 
@@ -93,6 +98,7 @@ TagLib::String QStringToTaglibString(const QString& s) {
 TagReaderWorker::TagReaderWorker(QIODevice* socket, QObject* parent)
   : AbstractMessageHandler<pb::tagreader::Message>(socket, parent),
     factory_(new TagLibFileRefFactory),
+    network_(new QNetworkAccessManager),
     kEmbeddedCover("(embedded)")
 {
 }
@@ -123,6 +129,21 @@ void TagReaderWorker::MessageArrived(const pb::tagreader::Message& message) {
           QStringFromStdString(message.load_embedded_art_request().filename()));
     reply.mutable_load_embedded_art_response()->set_data(
           data.constData(), data.size());
+  } else if (message.has_read_google_drive_request()) {
+#ifdef HAVE_GOOGLE_DRIVE
+    const pb::tagreader::ReadGoogleDriveRequest& req =
+        message.read_google_drive_request();
+    if (!ReadGoogleDrive(
+        QUrl::fromEncoded(QByteArray(req.download_url().data(),
+                                     req.download_url().size())),
+        QStringFromStdString(req.title()),
+        req.size(),
+        QStringFromStdString(req.mime_type()),
+        QStringFromStdString(req.access_token()),
+        reply.mutable_read_google_drive_response()->mutable_metadata())) {
+      reply.mutable_read_google_drive_response()->clear_metadata();
+    }
+#endif
   }
 
   SendReply(message, &reply);
@@ -588,3 +609,74 @@ void TagReaderWorker::DeviceClosed() {
 
   qApp->exit();
 }
+
+#ifdef HAVE_GOOGLE_DRIVE
+bool TagReaderWorker::ReadGoogleDrive(const QUrl& download_url,
+                                      const QString& title,
+                                      int size,
+                                      const QString& mime_type,
+                                      const QString& access_token,
+                                      pb::tagreader::SongMetadata* song) const {
+  qLog(Debug) << "Loading tags from" << title;
+
+  GoogleDriveStream* stream = new GoogleDriveStream(
+      download_url, title, size, access_token, network_);
+  stream->Precache();
+  scoped_ptr<TagLib::File> tag;
+  if (mime_type == "audio/mpeg" && title.endsWith(".mp3")) {
+    tag.reset(new TagLib::MPEG::File(
+        stream,  // Takes ownership.
+        TagLib::ID3v2::FrameFactory::instance(),
+        TagLib::AudioProperties::Accurate));
+  } else if (mime_type == "audio/mpeg" && title.endsWith(".m4a")) {
+    tag.reset(new TagLib::MP4::File(
+        stream,
+        true,
+        TagLib::AudioProperties::Accurate));
+  } else if (mime_type == "application/ogg") {
+    tag.reset(new TagLib::Ogg::Vorbis::File(
+        stream,
+        true,
+        TagLib::AudioProperties::Accurate));
+  } else if (mime_type == "application/x-flac") {
+    tag.reset(new TagLib::FLAC::File(
+        stream,
+        TagLib::ID3v2::FrameFactory::instance(),
+        true,
+        TagLib::AudioProperties::Accurate));
+  } else {
+    qLog(Debug) << "Unknown mime type for tagging:" << mime_type;
+    return false;
+  }
+
+  if (stream->num_requests() > 2) {
+    // Warn if pre-caching failed.
+    qLog(Warning) << "Total requests for file:" << title
+                  << stream->num_requests()
+                  << stream->cached_bytes();
+  }
+
+  if (tag->tag()) {
+    song->set_title(tag->tag()->title().toCString(true));
+    song->set_artist(tag->tag()->artist().toCString(true));
+    song->set_album(tag->tag()->album().toCString(true));
+    song->set_filesize(size);
+
+    if (tag->tag()->track() != 0) {
+      song->set_track(tag->tag()->track());
+    }
+    if (tag->tag()->year() != 0) {
+      song->set_year(tag->tag()->year());
+    }
+
+    song->set_type(pb::tagreader::SongMetadata_Type_STREAM);
+
+    if (tag->audioProperties()) {
+      song->set_length_nanosec(tag->audioProperties()->length() * kNsecPerSec);
+    }
+    return true;
+  }
+
+  return false;
+}
+#endif // HAVE_GOOGLE_DRIVE

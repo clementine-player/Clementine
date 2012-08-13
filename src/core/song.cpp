@@ -79,7 +79,7 @@ const QStringList Song::kColumns = QStringList()
     << "art_manual" << "filetype" << "playcount" << "lastplayed" << "rating"
     << "forced_compilation_on" << "forced_compilation_off"
     << "effective_compilation" << "skipcount" << "score" << "beginning" << "length"
-    << "cue_path" << "unavailable" << "effective_albumartist";
+    << "cue_path" << "unavailable" << "effective_albumartist" << "etag";
 
 const QString Song::kColumnSpec = Song::kColumns.join(", ");
 const QString Song::kBindSpec = Utilities::Prepend(":", Song::kColumns).join(", ");
@@ -167,6 +167,8 @@ struct Song::Private : public QSharedData {
   // Whether the song does not exist on the file system anymore, but is still
   // stored in the database so as to remember the user's metadata.
   bool unavailable_;
+
+  QString etag_;
 };
 
 
@@ -263,6 +265,7 @@ bool Song::is_stream() const { return d->filetype_ == Type_Stream; }
 bool Song::is_cdda() const { return d->filetype_ == Type_Cdda; }
 const QString& Song::art_automatic() const { return d->art_automatic_; }
 const QString& Song::art_manual() const { return d->art_manual_; }
+const QString& Song::etag() const { return d->etag_; }
 bool Song::has_manually_unset_cover() const { return d->art_manual_ == kManuallyUnsetCover; }
 void Song::manually_unset_cover() { d->art_manual_ = kManuallyUnsetCover; }
 bool Song::has_embedded_cover() const { return d->art_automatic_ == kEmbeddedCover; }
@@ -304,6 +307,7 @@ void Song::set_lastplayed(int v) { d->lastplayed_ = v; }
 void Song::set_score(int v) { d->score_ = qBound(0, v, 100); }
 void Song::set_cue_path(const QString& v) { d->cue_path_ = v; }
 void Song::set_unavailable(bool v) { d->unavailable_ = v; }
+void Song::set_etag(const QString& etag) { d->etag_ = etag; }
 void Song::set_url(const QUrl& v) { d->url_ = v; }
 void Song::set_basefilename(const QString& v) { d->basefilename_ = v; }
 void Song::set_directory_id(int v) { d->directory_id_ = v; }
@@ -1002,8 +1006,11 @@ void Song::BindToQuery(QSqlQuery *query) const {
   query->bindValue(":unavailable", d->unavailable_ ? 1 : 0);
   query->bindValue(":effective_albumartist", this->effective_albumartist());
 
+  query->bindValue(":etag", strval(d->etag_));
+
   #undef intval
   #undef notnullintval
+  #undef strval
 }
 
 void Song::BindToFtsQuery(QSqlQuery *query) const {

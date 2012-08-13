@@ -182,6 +182,7 @@ set(SOURCES
   internet/magnatunesettingspage.cpp
   internet/magnatuneservice.cpp
   internet/magnatuneurlhandler.cpp
+  internet/oauthenticator.cpp
   internet/savedradio.cpp
   internet/searchboxwidget.cpp
   internet/somafmservice.cpp
@@ -451,6 +452,7 @@ set(HEADERS
   internet/magnatunedownloaddialog.h
   internet/magnatunesettingspage.h
   internet/magnatuneservice.h
+  internet/oauthenticator.h
   internet/savedradio.h
   internet/searchboxwidget.h
   internet/somafmservice.h
@@ -997,6 +999,24 @@ optional_source(HAVE_MOODBAR
     moodbar/moodbarproxystyle.h
 )
 
+# Google Drive support
+optional_source(HAVE_GOOGLE_DRIVE
+  SOURCES
+    internet/googledriveclient.cpp
+    internet/googledrivefoldermodel.cpp
+    internet/googledriveservice.cpp
+    internet/googledrivesettingspage.cpp
+    internet/googledriveurlhandler.cpp
+  HEADERS
+    internet/googledriveclient.h
+    internet/googledrivefoldermodel.h
+    internet/googledriveservice.h
+    internet/googledrivesettingspage.h
+    internet/googledriveurlhandler.h
+  UI
+    internet/googledrivesettingspage.ui
+)
+
 # Hack to add Clementine to the Unity system tray whitelist
 optional_source(LINUX
   SOURCES core/ubuntuunityhack.cpp
@@ -1017,6 +1037,7 @@ add_pot(POT
   ${CMAKE_CURRENT_SOURCE_DIR}/translations/header
   ${CMAKE_CURRENT_SOURCE_DIR}/translations/translations.pot
   ${SOURCES} ${MOC} ${UIC} ${OTHER_SOURCES}
+  ../data/oauthsuccess.html
 )
 add_po(PO clementine_
   LANGUAGES ${LANGUAGES}

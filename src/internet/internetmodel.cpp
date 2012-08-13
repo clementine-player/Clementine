@@ -37,6 +37,9 @@
 #ifdef HAVE_SPOTIFY
   #include "spotifyservice.h"
 #endif
+#ifdef HAVE_GOOGLE_DRIVE
+  #include "googledriveservice.h"
+#endif
 
 #include <QMimeData>
 #include <QtDebug>
@@ -64,6 +67,9 @@ InternetModel::InternetModel(Application* app, QObject* parent)
   AddService(new JamendoService(app, this));
 #ifdef HAVE_LIBLASTFM
   AddService(new LastFMService(app, this));
+#endif
+#ifdef HAVE_GOOGLE_DRIVE
+  AddService(new GoogleDriveService(app, this));
 #endif
   AddService(new GroovesharkService(app, this));
   AddService(new JazzRadioService(app, this));

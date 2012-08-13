@@ -84,6 +84,8 @@ find_library(LASTFM_LIBRARIES lastfm)
 find_path(LASTFM_INCLUDE_DIRS lastfm/ws.h)
 find_path(LASTFM1_INCLUDE_DIRS lastfm/Track.h)
 
+find_path(SPARSEHASH_INCLUDE_DIRS google/sparsetable)
+
 if(LASTFM_INCLUDE_DIRS AND LASTFM1_INCLUDE_DIRS)
   set(HAVE_LIBLASTFM1 ON)
 endif()
@@ -200,6 +202,7 @@ option(ENABLE_BREAKPAD "Enable crash reporting" OFF)
 option(ENABLE_SPOTIFY_BLOB "Build the spotify non-GPL binary" ON)
 option(ENABLE_SPOTIFY "Enable spotify support" ON)
 option(ENABLE_MOODBAR "Enable moodbar" ON)
+option(ENABLE_GOOGLE_DRIVE "Enable Google Drive support" ON)
 
 if(WIN32)
   option(ENABLE_WIN32_CONSOLE "Show the windows console even outside Debug mode" OFF)
@@ -264,6 +267,10 @@ endif(QCA_FOUND AND HAVE_SPOTIFY)
 
 if(ENABLE_MOODBAR AND FFTW3_FOUND)
   set(HAVE_MOODBAR ON)
+endif()
+
+if(ENABLE_GOOGLE_DRIVE AND SPARSEHASH_INCLUDE_DIRS AND TAGLIB_VERSION VERSION_GREATER 1.7.999)
+  set(HAVE_GOOGLE_DRIVE ON)
 endif()
 
 
@@ -439,6 +446,7 @@ summary_add("Devices: iPod Touch, iPhone, iPad support" HAVE_IMOBILEDEVICE)
 summary_add("Devices: MTP support" HAVE_LIBMTP)
 summary_add("Devices: GIO backend" HAVE_GIO)
 summary_add("Gnome sound menu integration" HAVE_LIBINDICATE)
+summary_add("Google Drive support" HAVE_GOOGLE_DRIVE)
 summary_add("Last.fm support" HAVE_LIBLASTFM)
 summary_add("Moodbar support" HAVE_MOODBAR)
 summary_add("Spotify support: core code" HAVE_SPOTIFY)
