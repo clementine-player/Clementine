@@ -18,7 +18,11 @@ namespace {
 const char* kGoogleOAuthEndpoint = "https://accounts.google.com/o/oauth2/auth";
 const char* kGoogleOAuthTokenEndpoint =
     "https://accounts.google.com/o/oauth2/token";
-const char* kGoogleOAuthScope = "https://www.googleapis.com/auth/drive.readonly";
+const char* kGoogleOAuthScope =
+    "https://www.googleapis.com/auth/drive.readonly "
+    "https://www.googleapis.com/auth/userinfo.email";
+const char* kGoogleOAuthUserInfoEndpoint =
+    "https://www.googleapis.com/oauth2/v1/userinfo";
 
 const char* kClientId = "679260893280.apps.googleusercontent.com";
 const char* kClientSecret = "l3cWb8efUZsrBI4wmY3uKl6i";
@@ -159,6 +163,37 @@ void OAuthenticator::FetchAccessTokenFinished(QNetworkReply* reply) {
   access_token_ = result["access_token"].toString();
   refresh_token_ = result["refresh_token"].toString();
   SetExpiryTime(result["expires_in"].toInt());
+
+  // Fetch some basic user information
+  QUrl url = QUrl(kGoogleOAuthUserInfoEndpoint);
+  QNetworkRequest request(url);
+  request.setRawHeader(
+      "Authorization", QString("Bearer %1").arg(access_token_).toUtf8());
+
+  QNetworkReply* user_info_reply = network_.get(request);
+  NewClosure(user_info_reply, SIGNAL(finished()), this,
+             SLOT(FetchUserInfoFinished(QNetworkReply*)), user_info_reply);
+}
+
+void OAuthenticator::FetchUserInfoFinished(QNetworkReply* reply) {
+  reply->deleteLater();
+
+  if (reply->attribute(QNetworkRequest::HttpStatusCodeAttribute) != 200) {
+    qLog(Warning) << "Failed to get user info" << reply->readAll();
+  } else {
+    QJson::Parser parser;
+    bool ok = false;
+    QVariantMap result = parser.parse(reply, &ok).toMap();
+    if (!ok) {
+      qLog(Error) << "Failed to parse user info reply";
+      return;
+    }
+
+    qLog(Debug) << result;
+
+    user_email_ = result["email"].toString();
+    qLog(Debug) << user_email_;
+  }
 
   emit Finished();
 }

@@ -23,6 +23,7 @@ class OAuthenticator : public QObject {
   const QString& refresh_token() const { return refresh_token_; }
 
   const QDateTime& expiry_time() const { return expiry_time_; }
+  const QString& user_email() const { return user_email_; }
 
  signals:
   void Finished();
@@ -32,6 +33,7 @@ class OAuthenticator : public QObject {
   void RedirectArrived(QTcpSocket* socket, QByteArray buffer);
   void FetchAccessTokenFinished(QNetworkReply* reply);
   void RefreshAccessTokenFinished(QNetworkReply* reply);
+  void FetchUserInfoFinished(QNetworkReply* reply);
 
  private:
   QByteArray ParseHttpRequest(const QByteArray& request) const;
@@ -44,6 +46,7 @@ class OAuthenticator : public QObject {
   QString access_token_;
   QString refresh_token_;
   QDateTime expiry_time_;
+  QString user_email_;
 };
 
 #endif

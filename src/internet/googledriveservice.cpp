@@ -88,6 +88,16 @@ void GoogleDriveService::Connect() {
              response);
 }
 
+void GoogleDriveService::ForgetCredentials() {
+  client_->ForgetCredentials();
+
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+
+  s.remove("refresh_token");
+  s.remove("user_email");
+}
+
 void GoogleDriveService::ListFilesForMimeType(const QString& mime_type) {
   google_drive::ListFilesResponse* list_response = client_->ListFiles(
       QString("mimeType = '%1' and trashed = false").arg(mime_type));
@@ -105,6 +115,9 @@ void GoogleDriveService::ConnectFinished(google_drive::ConnectResponse* response
   QSettings s;
   s.beginGroup(kSettingsGroup);
   s.setValue("refresh_token", response->refresh_token());
+  s.setValue("user_email", response->user_email());
+
+  emit Connected();
 
   // Find any music files
   ListFilesForMimeType("audio/mpeg");          // MP3/AAC

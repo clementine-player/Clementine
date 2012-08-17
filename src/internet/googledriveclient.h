@@ -84,6 +84,7 @@ class ConnectResponse : public QObject {
 
 public:
   const QString& refresh_token() const { return refresh_token_; }
+  const QString& user_email() const { return user_email_; }
 
 signals:
   void Finished();
@@ -91,6 +92,7 @@ signals:
 private:
   ConnectResponse(QObject* parent);
   QString refresh_token_;
+  QString user_email_;
 };
 
 
@@ -137,6 +139,8 @@ public:
 
   bool is_authenticated() const;
   const QString& access_token() const { return access_token_; }
+
+  void ForgetCredentials();
 
   ConnectResponse* Connect(const QString& refresh_token = QString());
   ListFilesResponse* ListFiles(const QString& query);

@@ -35,6 +35,13 @@ class GoogleDriveService : public InternetService {
 
   QUrl GetStreamingUrlFromSongId(const QString& file_id);
 
+ public slots:
+  void Connect();
+  void ForgetCredentials();
+
+ signals:
+  void Connected();
+
  private slots:
   void ConnectFinished(google_drive::ConnectResponse* response);
   void FilesFound(const QList<google_drive::File>& files);
@@ -45,7 +52,6 @@ class GoogleDriveService : public InternetService {
                         const int task_id);
 
  private:
-  void Connect();
   void EnsureConnected();
   void RefreshAuthorisation(const QString& refresh_token);
   void MaybeAddFileToDatabase(const google_drive::File& file);

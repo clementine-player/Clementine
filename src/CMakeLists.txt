@@ -1001,13 +1001,11 @@ optional_source(HAVE_MOODBAR
 optional_source(HAVE_GOOGLE_DRIVE
   SOURCES
     internet/googledriveclient.cpp
-    internet/googledrivefoldermodel.cpp
     internet/googledriveservice.cpp
     internet/googledrivesettingspage.cpp
     internet/googledriveurlhandler.cpp
   HEADERS
     internet/googledriveclient.h
-    internet/googledrivefoldermodel.h
     internet/googledriveservice.h
     internet/googledrivesettingspage.h
     internet/googledriveurlhandler.h

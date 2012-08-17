@@ -16,7 +16,6 @@
 */
 
 #include "googledriveclient.h"
-#include "googledrivefoldermodel.h"
 #include "googledriveservice.h"
 #include "googledrivesettingspage.h"
 #include "ui_googledrivesettingspage.h"
@@ -29,11 +28,14 @@
 GoogleDriveSettingsPage::GoogleDriveSettingsPage(SettingsDialog* parent)
   : SettingsPage(parent),
     ui_(new Ui::GoogleDriveSettingsPage),
-    model_(NULL),
-    proxy_model_(NULL),
-    item_needs_selecting_(false)
+    service_(dialog()->app()->internet_model()->Service<GoogleDriveService>())
 {
   ui_->setupUi(this);
+  ui_->login_state->AddCredentialGroup(ui_->login_container);
+
+  connect(ui_->login_button, SIGNAL(clicked()), SLOT(LoginClicked()));
+  connect(ui_->login_state, SIGNAL(LogoutClicked()), SLOT(LogoutClicked()));
+  connect(service_, SIGNAL(Connected()), SLOT(Connected()));
 }
 
 GoogleDriveSettingsPage::~GoogleDriveSettingsPage() {
@@ -44,47 +46,32 @@ void GoogleDriveSettingsPage::Load() {
   QSettings s;
   s.beginGroup(GoogleDriveService::kSettingsGroup);
 
-  destination_folder_id_ = s.value("destination_folder_id").toString();
-  item_needs_selecting_ = !destination_folder_id_.isEmpty();
+  const QString user_email = s.value("user_email").toString();
 
-  if (!model_) {
-    GoogleDriveService* service =
-        dialog()->app()->internet_model()->Service<GoogleDriveService>();
-    google_drive::Client* client = service->client();
-
-    model_ = new google_drive::FolderModel(client, this);
-    proxy_model_ = new QSortFilterProxyModel(this);
-    proxy_model_->setSourceModel(model_);
-    proxy_model_->setDynamicSortFilter(true);
-    proxy_model_->setSortCaseSensitivity(Qt::CaseInsensitive);
-    proxy_model_->sort(0);
-
-    ui_->upload_destination->setModel(proxy_model_);
-
-    connect(model_, SIGNAL(rowsInserted(QModelIndex,int,int)),
-            this, SLOT(DirectoryRowsInserted(QModelIndex)));
+  if (!user_email.isEmpty()) {
+    ui_->login_state->SetLoggedIn(LoginStateWidget::LoggedIn, user_email);
   }
 }
 
 void GoogleDriveSettingsPage::Save() {
   QSettings s;
   s.beginGroup(GoogleDriveService::kSettingsGroup);
-
-  s.setValue("destination_folder_id",
-      ui_->upload_destination->currentIndex().data(
-          google_drive::FolderModel::Role_Id).toString());
 }
 
-void GoogleDriveSettingsPage::DirectoryRowsInserted(const QModelIndex& parent) {
-  ui_->upload_destination->expand(proxy_model_->mapFromSource(parent));
+void GoogleDriveSettingsPage::LoginClicked() {
+  service_->Connect();
+}
 
-  if (item_needs_selecting_) {
-    QStandardItem* item = model_->ItemById(destination_folder_id_);
-    if (item) {
-      ui_->upload_destination->selectionModel()->select(
-            proxy_model_->mapFromSource(item->index()),
-            QItemSelectionModel::ClearAndSelect);
-      item_needs_selecting_ = false;
-    }
-  }
+void GoogleDriveSettingsPage::LogoutClicked() {
+  service_->ForgetCredentials();
+  ui_->login_state->SetLoggedIn(LoginStateWidget::LoggedOut);
+}
+
+void GoogleDriveSettingsPage::Connected() {
+  QSettings s;
+  s.beginGroup(GoogleDriveService::kSettingsGroup);
+
+  const QString user_email = s.value("user_email").toString();
+
+  ui_->login_state->SetLoggedIn(LoginStateWidget::LoggedIn, user_email);
 }

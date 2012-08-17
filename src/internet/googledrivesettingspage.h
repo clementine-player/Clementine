@@ -23,13 +23,10 @@
 #include <QModelIndex>
 #include <QWidget>
 
+class GoogleDriveService;
 class Ui_GoogleDriveSettingsPage;
 
 class QSortFilterProxyModel;
-
-namespace google_drive {
-  class FolderModel;
-}
 
 class GoogleDriveSettingsPage : public SettingsPage {
   Q_OBJECT
@@ -42,16 +39,14 @@ public:
   void Save();
 
 private slots:
-  void DirectoryRowsInserted(const QModelIndex& parent);
-  
+  void LoginClicked();
+  void LogoutClicked();
+  void Connected();
+
 private:
   Ui_GoogleDriveSettingsPage* ui_;
 
-  google_drive::FolderModel* model_;
-  QSortFilterProxyModel* proxy_model_;
-
-  QString destination_folder_id_;
-  bool item_needs_selecting_;
+  GoogleDriveService* service_;
 };
 
 #endif // GOOGLEDRIVESETTINGSPAGE_H
