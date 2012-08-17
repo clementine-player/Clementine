@@ -234,6 +234,10 @@ QString Mpris2::PlaybackStatus(Engine::State state) const {
 }
 
 QString Mpris2::LoopStatus() const {
+  if (!app_->playlist_manager()->sequence()) {
+    return "None";
+  }
+  
   switch (app_->playlist_manager()->sequence()->repeat_mode()) {
     case PlaylistSequence::Repeat_Album:
     case PlaylistSequence::Repeat_Playlist: return "Playlist";
