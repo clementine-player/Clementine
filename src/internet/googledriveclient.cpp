@@ -89,6 +89,7 @@ ConnectResponse* Client::Connect(const QString& refresh_token) {
 void Client::ConnectFinished(ConnectResponse* response, OAuthenticator* oauth) {
   oauth->deleteLater();
   access_token_ = oauth->access_token();
+  expiry_time_ = oauth->expiry_time();
   response->refresh_token_ = oauth->refresh_token();
   emit response->Finished();
 
@@ -185,4 +186,9 @@ void Client::GetFileFinished(GetFileResponse* response, QNetworkReply* reply) {
 
   response->file_ = File(result);
   emit response->Finished();
+}
+
+bool Client::is_authenticated() const {
+  return !access_token_.isEmpty() &&
+      QDateTime::currentDateTime().secsTo(expiry_time_) > 0;
 }

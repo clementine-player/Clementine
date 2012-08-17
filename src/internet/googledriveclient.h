@@ -135,7 +135,7 @@ class Client : public QObject {
 public:
   Client(QObject* parent = 0);
 
-  bool is_authenticated() const { return !access_token_.isEmpty(); }
+  bool is_authenticated() const;
   const QString& access_token() const { return access_token_; }
 
   ConnectResponse* Connect(const QString& refresh_token = QString());
@@ -154,11 +154,12 @@ private:
   void AddAuthorizationHeader(QNetworkRequest* request) const;
   void MakeListFilesRequest(ListFilesResponse* response,
                             const QString& page_token = QString());
-  
+
 private:
   QNetworkAccessManager* network_;
 
   QString access_token_;
+  QDateTime expiry_time_;
 };
 
 } // namespace

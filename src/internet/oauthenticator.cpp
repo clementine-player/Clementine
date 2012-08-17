@@ -18,6 +18,7 @@ namespace {
 const char* kGoogleOAuthEndpoint = "https://accounts.google.com/o/oauth2/auth";
 const char* kGoogleOAuthTokenEndpoint =
     "https://accounts.google.com/o/oauth2/token";
+const char* kGoogleOAuthScope = "https://www.googleapis.com/auth/drive.readonly";
 
 const char* kClientId = "679260893280.apps.googleusercontent.com";
 const char* kClientSecret = "l3cWb8efUZsrBI4wmY3uKl6i";
@@ -38,7 +39,7 @@ void OAuthenticator::StartAuthorisation() {
   url.addQueryItem("response_type", "code");
   url.addQueryItem("client_id", kClientId);
   url.addQueryItem("redirect_uri", QString("http://localhost:%1").arg(port));
-  url.addQueryItem("scope", "https://www.googleapis.com/auth/drive.readonly");
+  url.addQueryItem("scope", kGoogleOAuthScope);
 
   QDesktopServices::openUrl(url);
 }
@@ -157,6 +158,7 @@ void OAuthenticator::FetchAccessTokenFinished(QNetworkReply* reply) {
 
   access_token_ = result["access_token"].toString();
   refresh_token_ = result["refresh_token"].toString();
+  SetExpiryTime(result["expires_in"].toInt());
 
   emit Finished();
 }
@@ -187,6 +189,12 @@ void OAuthenticator::RefreshAuthorisation(const QString& refresh_token) {
              SLOT(RefreshAccessTokenFinished(QNetworkReply*)), reply);
 }
 
+void OAuthenticator::SetExpiryTime(int expires_in_seconds) {
+  // Set the expiry time with two minutes' grace.
+  expiry_time_ = QDateTime::currentDateTime().addSecs(expires_in_seconds - 120);
+  qLog(Debug) << "Current Google Drive token expires at:" << expiry_time_;
+}
+
 void OAuthenticator::RefreshAccessTokenFinished(QNetworkReply* reply) {
   reply->deleteLater();
   QJson::Parser parser;
@@ -194,5 +202,6 @@ void OAuthenticator::RefreshAccessTokenFinished(QNetworkReply* reply) {
 
   QVariantMap result = parser.parse(reply, &ok).toMap();
   access_token_ = result["access_token"].toString();
+  SetExpiryTime(result["expires_in"].toInt());
   emit Finished();
 }

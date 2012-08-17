@@ -1,6 +1,7 @@
 #ifndef OAUTHENTICATOR_H
 #define OAUTHENTICATOR_H
 
+#include <QDateTime>
 #include <QObject>
 #include <QTcpServer>
 
@@ -21,6 +22,8 @@ class OAuthenticator : public QObject {
   // Token to use to get a new access token when it expires.
   const QString& refresh_token() const { return refresh_token_; }
 
+  const QDateTime& expiry_time() const { return expiry_time_; }
+
  signals:
   void Finished();
 
@@ -33,12 +36,14 @@ class OAuthenticator : public QObject {
  private:
   QByteArray ParseHttpRequest(const QByteArray& request) const;
   void RequestAccessToken(const QByteArray& code, quint16 port);
+  void SetExpiryTime(int expires_in_seconds);
 
   QTcpServer server_;
   NetworkAccessManager network_;
 
   QString access_token_;
   QString refresh_token_;
+  QDateTime expiry_time_;
 };
 
 #endif
