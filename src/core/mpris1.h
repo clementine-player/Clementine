@@ -28,6 +28,13 @@ class Application;
 class Playlist;
 
 struct DBusStatus {    // From Amarok.
+  DBusStatus()
+    : play(Mpris_Stopped),
+      random(0),
+      repeat(0),
+      repeat_playlist(0)
+  {}
+  
   int play;            // Playing = 0, Paused = 1, Stopped = 2
   int random;          // Linearly = 0, Randomly = 1
   int repeat;          // Go_To_Next = 0, Repeat_Current = 1
