@@ -7,6 +7,7 @@
 # Andres Sanchez <>, 2012.
 # Carolina Pérez Garrido <carolinadelpilarperezgarrido@gmail.com>, 2011.
 #   <ceal105@gmail.com>, 2011.
+#   <drnoone@gmail.com>, 2012.
 #   <fyepo.j@gmail.com>, 2012.
 #   <legion1978@gmail.com>, 2012.
 #   <leontaveras@gmail.com>, 2011.
@@ -14,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-07-29 01:16+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2012-08-17 14:20+0000\n"
+"Last-Translator: drnoone <drnoone@gmail.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: es_AR\n"
@@ -299,7 +300,7 @@ msgstr "AAC 32k"
 msgid "AAC 64k"
 msgstr "AAC 64k"
 
-#: core/song.cpp:325
+#: core/song.cpp:329
 msgid "AIFF"
 msgstr "AIFF"
 
@@ -506,7 +507,7 @@ msgstr "Agregado en los últimos tres meses"
 
 #: internet/groovesharkservice.cpp:1421
 msgid "Adding song to My Music"
-msgstr ""
+msgstr "Agregando canción a Mi Música"
 
 #: internet/groovesharkservice.cpp:1398
 msgid "Adding song to favorites"
@@ -642,7 +643,7 @@ msgstr "Y:"
 
 #: moodbar/moodbarrenderer.cpp:156
 msgid "Angry"
-msgstr ""
+msgstr "Enojado"
 
 #: ../bin/src/ui_songinfosettingspage.h:180
 #: ../bin/src/ui_appearancesettingspage.h:227
@@ -775,7 +776,7 @@ msgstr "Opacidad de fondo"
 
 #: core/database.cpp:669
 msgid "Backing up database"
-msgstr ""
+msgstr "Realizando respaldo de la base de datos"
 
 #: ../bin/src/ui_mainwindow.h:655
 msgid "Ban"
@@ -853,13 +854,13 @@ msgstr "Guardando en caché"
 
 #: ../bin/src/ui_globalsearchview.h:211
 msgid "But these sources are disabled:"
-msgstr ""
+msgstr "Pero las siguientes fuentes están deshabilitadas:"
 
 #: ../bin/src/ui_wiimotesettingspage.h:192
 msgid "Buttons"
 msgstr "Botones"
 
-#: core/song.cpp:328
+#: core/song.cpp:332
 msgid "CDDA"
 msgstr "CDDA"
 
@@ -1082,7 +1083,7 @@ msgstr "Compositor"
 #: internet/searchboxwidget.cpp:42
 #, qt-format
 msgid "Configure %1..."
-msgstr ""
+msgstr "Configurar %1 ..."
 
 #: internet/groovesharkservice.cpp:561
 msgid "Configure Grooveshark..."
@@ -1106,7 +1107,7 @@ msgstr "Configurá Spotify..."
 
 #: globalsearch/globalsearchview.cpp:138 globalsearch/globalsearchview.cpp:425
 msgid "Configure global search..."
-msgstr ""
+msgstr "Configurar búsqueda global:"
 
 #: ui/mainwindow.cpp:458
 msgid "Configure library..."
@@ -1881,7 +1882,7 @@ msgstr "Duración de disolución"
 
 #: podcasts/gpoddertoptagspage.cpp:76
 msgid "Failed to fetch directory"
-msgstr ""
+msgstr "Error al acceder al directorio"
 
 #: podcasts/gpoddersearchpage.cpp:76 podcasts/gpoddertoptagsmodel.cpp:109
 #: podcasts/itunessearchpage.cpp:66 podcasts/itunessearchpage.cpp:75
@@ -1992,7 +1993,7 @@ msgstr "Finalizar"
 msgid "First level"
 msgstr "Primer nivel"
 
-#: core/song.cpp:318
+#: core/song.cpp:322
 msgid "Flac"
 msgstr "Flac"
 
@@ -2058,7 +2059,7 @@ msgstr "Amigos"
 
 #: moodbar/moodbarrenderer.cpp:157
 msgid "Frozen"
-msgstr ""
+msgstr "Congelado"
 
 #: ui/equalizer.cpp:112
 msgid "Full Bass"
@@ -2076,7 +2077,7 @@ msgstr "Agudos completos"
 msgid "GStreamer audio engine"
 msgstr "Motor de audio GStreamer"
 
-#: ui/settingsdialog.cpp:113
+#: ui/settingsdialog.cpp:117
 msgid "General"
 msgstr "General"
 
@@ -2092,7 +2093,7 @@ msgstr "Género"
 
 #: internet/groovesharkservice.cpp:551
 msgid "Get a URL to share this Grooveshark playlist"
-msgstr ""
+msgstr "Obtener una URL para compartir esta liste de reproducción de Grooveshark"
 
 #: internet/groovesharkservice.cpp:548 internet/groovesharkservice.cpp:1136
 msgid "Get a URL to share this Grooveshark song"
@@ -2125,6 +2126,11 @@ msgstr "Ir a la siguiente lista de reproducción"
 #: ../bin/src/ui_mainwindow.h:700
 msgid "Go to previous playlist tab"
 msgstr "Ir a la lista de reproducción anterior"
+
+#: internet/googledriveservice.cpp:53
+#: ../bin/src/ui_googledrivesettingspage.h:82
+msgid "Google Drive"
+msgstr ""
 
 #: covers/coversearchstatisticsdialog.cpp:54 ui/albumcovermanager.cpp:411
 #: ../bin/src/ui_coversearchstatisticsdialog.h:76
@@ -2190,7 +2196,7 @@ msgstr "Agrupar por Género/Artista/Álbum"
 
 #: podcasts/podcasturlloader.cpp:194
 msgid "HTML page did not contain any RSS feeds"
-msgstr ""
+msgstr "La página HTML no contiene ningún feed RSS"
 
 #: ../bin/src/ui_networkproxysettingspage.h:163
 msgid "HTTP proxy"
@@ -2198,7 +2204,7 @@ msgstr "Proxy HTTP"
 
 #: moodbar/moodbarrenderer.cpp:158
 msgid "Happy"
-msgstr ""
+msgstr "Feliz"
 
 #: ../bin/src/ui_deviceproperties.h:371
 msgid "Hardware information"
@@ -2294,6 +2300,11 @@ msgstr "Subir el volumen en 4%"
 msgid "Increase volume"
 msgstr "Subir volumen"
 
+#: internet/googledriveservice.cpp:146
+#, qt-format
+msgid "Indexing %1"
+msgstr ""
+
 #: ../bin/src/ui_deviceproperties.h:373 wiimotedev/wiimotesettingspage.cpp:124
 msgid "Information"
 msgstr "Información"
@@ -2308,13 +2319,13 @@ msgstr "Instalado"
 
 #: core/database.cpp:608
 msgid "Integrity check"
-msgstr ""
+msgstr "Comprobación de integridad"
 
 #: ui/mainwindow.cpp:230
 msgid "Internet"
 msgstr "Internet"
 
-#: ui/settingsdialog.cpp:134
+#: ui/settingsdialog.cpp:138
 msgid "Internet providers"
 msgstr "Proveedores de Internet"
 
@@ -2620,7 +2631,7 @@ msgstr "Iniciar sesión"
 
 #: podcasts/podcastsettingspage.cpp:119
 msgid "Login failed"
-msgstr ""
+msgstr "Falla de autenticación"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:137
 msgid "Long term prediction profile (LTP)"
@@ -2653,7 +2664,7 @@ msgstr "Letras"
 msgid "Lyrics from %1"
 msgstr "Letra de %1"
 
-#: core/song.cpp:321 ../bin/src/ui_transcodersettingspage.h:159
+#: core/song.cpp:325 ../bin/src/ui_transcodersettingspage.h:159
 msgid "MP3"
 msgstr "MP3"
 
@@ -2665,11 +2676,11 @@ msgstr "MP# 256k"
 msgid "MP3 96k"
 msgstr "MP3 96k"
 
-#: core/song.cpp:319
+#: core/song.cpp:323
 msgid "MP4 AAC"
 msgstr "MP4 AAC"
 
-#: core/song.cpp:320
+#: core/song.cpp:324
 msgid "MPC"
 msgstr "MPC"
 
@@ -2766,7 +2777,7 @@ msgstr "Seguir cambios en la colección"
 
 #: ../bin/src/ui_playbacksettingspage.h:296
 msgid "Mono playback"
-msgstr ""
+msgstr "Reproducción en mono"
 
 #: smartplaylists/searchterm.cpp:303
 msgid "Months"
@@ -2774,7 +2785,7 @@ msgstr "Meses"
 
 #: playlist/playlist.cpp:1213
 msgid "Mood"
-msgstr ""
+msgstr "Humor"
 
 #: ../bin/src/ui_appearancesettingspage.h:246
 #: moodbar/moodbarproxystyle.cpp:342
@@ -2823,6 +2834,10 @@ msgstr "Colección de Música"
 #: wiimotedev/wiimotesettingspage.cpp:105
 msgid "Mute"
 msgstr "Silenciar"
+
+#: internet/googledrivefoldermodel.cpp:31
+msgid "My Drive"
+msgstr ""
 
 #: globalsearch/lastfmsearchprovider.cpp:53 internet/lastfmservice.cpp:194
 msgid "My Last.fm Library"
@@ -2962,7 +2977,7 @@ msgstr "Ninguna de las canciones seleccionadas fueron aptas para ser copiadas a 
 
 #: moodbar/moodbarrenderer.cpp:155
 msgid "Normal"
-msgstr ""
+msgstr "Normal"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:144
 msgid "Normal block type"
@@ -3021,15 +3036,15 @@ msgstr "En reproducción"
 msgid "OSD Preview"
 msgstr "Previsualización del OSD"
 
-#: core/song.cpp:322
+#: core/song.cpp:326
 msgid "Ogg Flac"
 msgstr "Ogg Flac"
 
-#: core/song.cpp:323
+#: core/song.cpp:327
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
 
-#: core/song.cpp:324 ../bin/src/ui_magnatunedownloaddialog.h:139
+#: core/song.cpp:328 ../bin/src/ui_magnatunedownloaddialog.h:139
 #: ../bin/src/ui_magnatunesettingspage.h:170
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
@@ -3052,11 +3067,11 @@ msgstr "Abrir CD de &audio..."
 
 #: podcasts/addpodcastdialog.cpp:230
 msgid "Open OPML file"
-msgstr ""
+msgstr "Abrir archivo OPML"
 
 #: podcasts/addpodcastdialog.cpp:73
 msgid "Open OPML file..."
-msgstr ""
+msgstr "Abrir archivo OPML..."
 
 #: ../bin/src/ui_deviceproperties.h:382
 msgid "Open device"
@@ -3246,6 +3261,10 @@ msgstr "Tipo de lista de reproducción"
 #: internet/groovesharkservice.cpp:635
 msgid "Playlists"
 msgstr "Listas de reproducción"
+
+#: ../data/oauthsuccess.html:34
+msgid "Please close your browser and return to Clementine."
+msgstr ""
 
 #: ../bin/src/ui_spotifysettingspage.h:215
 msgid "Plugin status:"
@@ -3610,6 +3629,10 @@ msgstr "Recuperando canciones favoritas de Grooveshark"
 msgid "Retrieving Grooveshark playlists"
 msgstr "Recuperando listas de reproducción de Grooveshark"
 
+#: ../data/oauthsuccess.html:3
+msgid "Return to Clementine"
+msgstr ""
+
 #: ui/equalizer.cpp:121
 msgid "Rock"
 msgstr "Rock"
@@ -3636,7 +3659,7 @@ msgstr "Tasa de muestreo"
 
 #: ../bin/src/ui_appearancesettingspage.h:247
 msgid "Save .mood files in your music library"
-msgstr ""
+msgstr "Guardar archivos .mood en la biblioteca de música"
 
 #: ui/albumcoverchoicecontroller.cpp:114
 msgid "Save album cover"
@@ -3727,7 +3750,7 @@ msgstr "Opciones de búsqueda"
 #: internet/groovesharkservice.cpp:578 internet/soundcloudservice.cpp:104
 #: internet/spotifyservice.cpp:343
 msgid "Search results"
-msgstr ""
+msgstr "Resultados de búsqueda"
 
 #: smartplaylists/querywizardplugin.cpp:151
 #: ../bin/src/ui_querysearchpage.h:120
@@ -3909,7 +3932,7 @@ msgstr "Mostrar canciones sin etiquetar solamente"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:153
 msgid "Show search suggestions"
-msgstr ""
+msgstr "Mostrar sugerencias de bísqueda"
 
 #: ../bin/src/ui_lastfmsettingspage.h:157
 msgid "Show the \"love\" and \"ban\" buttons"
@@ -3925,7 +3948,7 @@ msgstr "Mostrar icono en el área de notificación"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:152
 msgid "Show which sources are enabled and disabled"
-msgstr ""
+msgstr "Mostrar qué fuentes están habilitadas y deshabiltadas"
 
 #: core/globalshortcuts.cpp:57
 msgid "Show/Hide"
@@ -4132,7 +4155,7 @@ msgstr "Detener la reproducción después de la pista actual"
 msgid "Stopped"
 msgstr "Reproducción Finalizada"
 
-#: core/song.cpp:330
+#: core/song.cpp:334
 msgid "Stream"
 msgstr "Transmisión"
 
@@ -4147,6 +4170,10 @@ msgstr "Listas de reproducción suscritas"
 #: ../bin/src/ui_podcastinfowidget.h:196
 msgid "Subscribers"
 msgstr "Abonados"
+
+#: ../data/oauthsuccess.html:32
+msgid "Success!"
+msgstr ""
 
 #: transcoder/transcoder.cpp:200
 #, qt-format
@@ -4170,7 +4197,7 @@ msgstr "Muy alto (%1 fps)"
 
 #: visualisations/visualisationcontainer.cpp:120
 msgid "Super high (2048x2048)"
-msgstr ""
+msgstr "Super alta (2048x2048)"
 
 #: ../bin/src/ui_deviceproperties.h:374
 msgid "Supported formats"
@@ -4190,7 +4217,7 @@ msgstr "Sincronizando canciones destacadas de Spotify"
 
 #: moodbar/moodbarrenderer.cpp:159
 msgid "System colors"
-msgstr ""
+msgstr "Colores del sistema"
 
 #: widgets/fancytabwidget.cpp:654
 msgid "Tabs on top"
@@ -4455,7 +4482,7 @@ msgstr "Codificando %1 archivo(s) usando %2 proceso(s)"
 msgid "Transcoding options"
 msgstr "Opciones de transcodificación"
 
-#: core/song.cpp:327
+#: core/song.cpp:331
 msgid "TrueAudio"
 msgstr "TrueAudio"
 
@@ -4484,7 +4511,7 @@ msgstr "Banda ultra ancha (UWB)"
 msgid "Unable to download %1 (%2)"
 msgstr "Imposible descargar %1 (%2)"
 
-#: core/song.cpp:334 library/librarymodel.cpp:296 library/librarymodel.cpp:301
+#: core/song.cpp:338 library/librarymodel.cpp:296 library/librarymodel.cpp:301
 #: library/librarymodel.cpp:953 playlist/playlistdelegates.cpp:309
 #: playlist/playlistmanager.cpp:391 playlist/playlistmanager.cpp:394
 #: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:416
@@ -4510,7 +4537,7 @@ msgstr "Desinscribirse"
 
 #: songinfo/songkickconcerts.cpp:177
 msgid "Upcoming Concerts"
-msgstr ""
+msgstr "Próximos Conciertos"
 
 #: internet/groovesharkservice.cpp:1226
 msgid "Update Grooveshark playlist"
@@ -4550,13 +4577,21 @@ msgstr "Actualizando %1%..."
 msgid "Updating library"
 msgstr "Actualizando colección"
 
+#: ../bin/src/ui_googledrivesettingspage.h:85
+msgid "Upload new songs to"
+msgstr ""
+
+#: ../bin/src/ui_googledrivesettingspage.h:83
+msgid "Uploads"
+msgstr ""
+
 #: core/commandlineoptions.cpp:144
 msgid "Usage"
 msgstr "Uso"
 
 #: ../bin/src/ui_lastfmsettingspage.h:159
 msgid "Use Album Artist tag when available"
-msgstr ""
+msgstr "Utilizar el tag \"Album Artist\" cuando se encuentre disponible"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:168
 msgid "Use Gnome's shortcut keys"
@@ -4623,7 +4658,7 @@ msgstr "Usado"
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr "El usuario %1 no tiene una cuenta Grooveshark Anywhere"
 
-#: ui/settingsdialog.cpp:126
+#: ui/settingsdialog.cpp:130
 msgid "User interface"
 msgstr "Interfaz de usuario"
 
@@ -4700,7 +4735,7 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
-#: core/song.cpp:326
+#: core/song.cpp:330
 msgid "Wav"
 msgstr "Wav"
 
@@ -4724,11 +4759,11 @@ msgstr "En la búsqueda de portadas de álbum Clementine primero buscará imáge
 
 #: ../bin/src/ui_globalsearchsettingspage.h:151
 msgid "When the list is empty..."
-msgstr ""
+msgstr "Cuando las lista está vacía..."
 
 #: ../bin/src/ui_globalsearchview.h:212
 msgid "Why not try..."
-msgstr ""
+msgstr "Por qué no intentar..."
 
 #: devices/ilister.cpp:121
 msgid "WiFi MAC Address"
@@ -4784,7 +4819,7 @@ msgstr "Windows Media 40k"
 msgid "Windows Media 64k"
 msgstr "Windows Media 64k"
 
-#: core/song.cpp:317
+#: core/song.cpp:321
 msgid "Windows Media audio"
 msgstr "Audio de Windows Media"
 
@@ -4862,6 +4897,12 @@ msgid ""
 "Clementine."
 msgstr "Podés enviar de forma gratuita la información de las canciones escuchadas, pero solo <span style=\" font-weight:600;\">los suscriptores de pago</span> pueden escuchar la radio de Last.fm desde Clementine."
 
+#: ../bin/src/ui_googledrivesettingspage.h:84
+msgid ""
+"You can upload songs to Google Drive by right clicking and using \"Copy to "
+"device\"."
+msgstr ""
+
 #: ../bin/src/ui_wiimotesettingspage.h:184
 msgid ""
 "You can use your Wii Remote as a remote control for Clementine.  <a "
@@ -4879,7 +4920,7 @@ msgstr "No tenés una cuenta Spotify Premium."
 
 #: internet/digitallyimportedclient.cpp:89
 msgid "You do not have an active subscription"
-msgstr ""
+msgstr "No tiene ninguna subscripción activa"
 
 #: internet/spotifyservice.cpp:168
 msgid ""
@@ -5047,7 +5088,7 @@ msgstr "más largo primero"
 #: playlist/playlistundocommands.cpp:99
 #, c-format
 msgid "move %n songs"
-msgstr ""
+msgstr "mover %n canciones"
 
 #: smartplaylists/searchterm.cpp:289
 msgid "newest first"
@@ -5100,7 +5141,7 @@ msgstr "más pequeño primero"
 
 #: playlist/playlistundocommands.cpp:131
 msgid "sort songs"
-msgstr ""
+msgstr "ordernar canciones"
 
 #: smartplaylists/searchterm.cpp:214
 msgid "starts with"

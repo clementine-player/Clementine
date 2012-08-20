@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-07-30 07:56+0000\n"
+"PO-Revision-Date: 2012-08-16 13:59+0000\n"
 "Last-Translator: arnaudbienner <arnaud.bienner@gmail.com>\n"
 "Language-Team: French (http://www.transifex.com/projects/p/clementine/language/fr/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -303,7 +303,7 @@ msgstr "AAC 32k"
 msgid "AAC 64k"
 msgstr "AAC 64k"
 
-#: core/song.cpp:325
+#: core/song.cpp:329
 msgid "AIFF"
 msgstr "AIFF"
 
@@ -863,7 +863,7 @@ msgstr "Mais ces sources sont désactivées :"
 msgid "Buttons"
 msgstr "Boutons"
 
-#: core/song.cpp:328
+#: core/song.cpp:332
 msgid "CDDA"
 msgstr "CDDA"
 
@@ -1996,7 +1996,7 @@ msgstr "Terminé"
 msgid "First level"
 msgstr "Premier niveau"
 
-#: core/song.cpp:318
+#: core/song.cpp:322
 msgid "Flac"
 msgstr "Flac"
 
@@ -2080,7 +2080,7 @@ msgstr "Aigus Max."
 msgid "GStreamer audio engine"
 msgstr "Moteur audio GStreamer"
 
-#: ui/settingsdialog.cpp:113
+#: ui/settingsdialog.cpp:117
 msgid "General"
 msgstr "Général"
 
@@ -2129,6 +2129,11 @@ msgstr "Aller à la liste de lecture suivante"
 #: ../bin/src/ui_mainwindow.h:700
 msgid "Go to previous playlist tab"
 msgstr "Aller à la liste de lecture précédente"
+
+#: internet/googledriveservice.cpp:53
+#: ../bin/src/ui_googledrivesettingspage.h:82
+msgid "Google Drive"
+msgstr "Google Drive"
 
 #: covers/coversearchstatisticsdialog.cpp:54 ui/albumcovermanager.cpp:411
 #: ../bin/src/ui_coversearchstatisticsdialog.h:76
@@ -2298,6 +2303,11 @@ msgstr "Augmenter le volume de 4%"
 msgid "Increase volume"
 msgstr "Augmenter le volume"
 
+#: internet/googledriveservice.cpp:146
+#, qt-format
+msgid "Indexing %1"
+msgstr "Indexation de %1"
+
 #: ../bin/src/ui_deviceproperties.h:373 wiimotedev/wiimotesettingspage.cpp:124
 msgid "Information"
 msgstr "Information"
@@ -2318,7 +2328,7 @@ msgstr "Vérification de l'intégrité"
 msgid "Internet"
 msgstr "Internet"
 
-#: ui/settingsdialog.cpp:134
+#: ui/settingsdialog.cpp:138
 msgid "Internet providers"
 msgstr "Services de musique"
 
@@ -2657,7 +2667,7 @@ msgstr "Paroles"
 msgid "Lyrics from %1"
 msgstr "Paroles récupérées depuis %1"
 
-#: core/song.cpp:321 ../bin/src/ui_transcodersettingspage.h:159
+#: core/song.cpp:325 ../bin/src/ui_transcodersettingspage.h:159
 msgid "MP3"
 msgstr "MP3"
 
@@ -2669,11 +2679,11 @@ msgstr "MP3 256k"
 msgid "MP3 96k"
 msgstr "MP3 96k"
 
-#: core/song.cpp:319
+#: core/song.cpp:323
 msgid "MP4 AAC"
 msgstr "MP4 AAC"
 
-#: core/song.cpp:320
+#: core/song.cpp:324
 msgid "MPC"
 msgstr "MPC"
 
@@ -2827,6 +2837,10 @@ msgstr "Bibliothèque musicale"
 #: wiimotedev/wiimotesettingspage.cpp:105
 msgid "Mute"
 msgstr "Sourdine"
+
+#: internet/googledrivefoldermodel.cpp:31
+msgid "My Drive"
+msgstr "Mon Drive"
 
 #: globalsearch/lastfmsearchprovider.cpp:53 internet/lastfmservice.cpp:194
 msgid "My Last.fm Library"
@@ -3025,15 +3039,15 @@ msgstr "Lecture en cours"
 msgid "OSD Preview"
 msgstr "Prévisualisation de l'affichage à l'écran (OSD)"
 
-#: core/song.cpp:322
+#: core/song.cpp:326
 msgid "Ogg Flac"
 msgstr "Ogg Flac"
 
-#: core/song.cpp:323
+#: core/song.cpp:327
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
 
-#: core/song.cpp:324 ../bin/src/ui_magnatunedownloaddialog.h:139
+#: core/song.cpp:328 ../bin/src/ui_magnatunedownloaddialog.h:139
 #: ../bin/src/ui_magnatunesettingspage.h:170
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
@@ -3250,6 +3264,10 @@ msgstr "Type de liste de lecture"
 #: internet/groovesharkservice.cpp:635
 msgid "Playlists"
 msgstr "Listes de lecture"
+
+#: ../data/oauthsuccess.html:34
+msgid "Please close your browser and return to Clementine."
+msgstr ""
 
 #: ../bin/src/ui_spotifysettingspage.h:215
 msgid "Plugin status:"
@@ -3613,6 +3631,10 @@ msgstr "Récupération des morceaux Grooveshark favoris"
 #: internet/groovesharkservice.cpp:672
 msgid "Retrieving Grooveshark playlists"
 msgstr "Récupération des listes de lecture Grooveshark"
+
+#: ../data/oauthsuccess.html:3
+msgid "Return to Clementine"
+msgstr ""
 
 #: ui/equalizer.cpp:121
 msgid "Rock"
@@ -4136,7 +4158,7 @@ msgstr "Arrêter la lecture après ce morceau"
 msgid "Stopped"
 msgstr "Interrompu"
 
-#: core/song.cpp:330
+#: core/song.cpp:334
 msgid "Stream"
 msgstr "Flux"
 
@@ -4151,6 +4173,10 @@ msgstr "Listes de lecture abonnées"
 #: ../bin/src/ui_podcastinfowidget.h:196
 msgid "Subscribers"
 msgstr "Abonnés"
+
+#: ../data/oauthsuccess.html:32
+msgid "Success!"
+msgstr ""
 
 #: transcoder/transcoder.cpp:200
 #, qt-format
@@ -4459,7 +4485,7 @@ msgstr "Transcodage de %1 fichiers en utilisant %2 threads"
 msgid "Transcoding options"
 msgstr "Option de transcodage"
 
-#: core/song.cpp:327
+#: core/song.cpp:331
 msgid "TrueAudio"
 msgstr "TrueAudio"
 
@@ -4488,7 +4514,7 @@ msgstr "Très large bande (UWB)"
 msgid "Unable to download %1 (%2)"
 msgstr "Impossible de télécharger %1 (%2)"
 
-#: core/song.cpp:334 library/librarymodel.cpp:296 library/librarymodel.cpp:301
+#: core/song.cpp:338 library/librarymodel.cpp:296 library/librarymodel.cpp:301
 #: library/librarymodel.cpp:953 playlist/playlistdelegates.cpp:309
 #: playlist/playlistmanager.cpp:391 playlist/playlistmanager.cpp:394
 #: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:416
@@ -4553,6 +4579,14 @@ msgstr "Mise à jour %1%..."
 #: library/librarywatcher.cpp:90
 msgid "Updating library"
 msgstr "Mise à jour de la bibliothèque"
+
+#: ../bin/src/ui_googledrivesettingspage.h:85
+msgid "Upload new songs to"
+msgstr "Envoyer de nouveaux morceaux vers"
+
+#: ../bin/src/ui_googledrivesettingspage.h:83
+msgid "Uploads"
+msgstr "Envois"
 
 #: core/commandlineoptions.cpp:144
 msgid "Usage"
@@ -4627,7 +4661,7 @@ msgstr "Utilisé"
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr "L'utilisateur %1 n'a pas de compte Grooveshark Anywhere"
 
-#: ui/settingsdialog.cpp:126
+#: ui/settingsdialog.cpp:130
 msgid "User interface"
 msgstr "Interface utilisateur"
 
@@ -4704,7 +4738,7 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
-#: core/song.cpp:326
+#: core/song.cpp:330
 msgid "Wav"
 msgstr "Wav"
 
@@ -4788,7 +4822,7 @@ msgstr "Windows Media 40k"
 msgid "Windows Media 64k"
 msgstr "Windows Media 64k"
 
-#: core/song.cpp:317
+#: core/song.cpp:321
 msgid "Windows Media audio"
 msgstr "audio Windows Media"
 
@@ -4865,6 +4899,12 @@ msgid ""
 "weight:600;\">paid subscribers</span> can stream Last.fm radio from "
 "Clementine."
 msgstr "Vous pouvez scrobbler des pistes gratuitement, mais seuls les <span style=\" font-weight:600;\">abonnements payants</span> peuvent écouter la radio Last.fm de Clementine."
+
+#: ../bin/src/ui_googledrivesettingspage.h:84
+msgid ""
+"You can upload songs to Google Drive by right clicking and using \"Copy to "
+"device\"."
+msgstr ""
 
 #: ../bin/src/ui_wiimotesettingspage.h:184
 msgid ""

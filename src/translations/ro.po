@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-07-29 01:16+0000\n"
+"PO-Revision-Date: 2012-08-14 20:19+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -295,7 +295,7 @@ msgstr "AAC 32k"
 msgid "AAC 64k"
 msgstr "AAC 64k"
 
-#: core/song.cpp:325
+#: core/song.cpp:329
 msgid "AIFF"
 msgstr "AIFF"
 
@@ -855,7 +855,7 @@ msgstr ""
 msgid "Buttons"
 msgstr "Butoane"
 
-#: core/song.cpp:328
+#: core/song.cpp:332
 msgid "CDDA"
 msgstr "CDDA"
 
@@ -1988,7 +1988,7 @@ msgstr "Sfârșit"
 msgid "First level"
 msgstr "Primul nivel"
 
-#: core/song.cpp:318
+#: core/song.cpp:322
 msgid "Flac"
 msgstr "Flac"
 
@@ -2072,7 +2072,7 @@ msgstr "Note înalte complete"
 msgid "GStreamer audio engine"
 msgstr "Motor audio GStreamer"
 
-#: ui/settingsdialog.cpp:113
+#: ui/settingsdialog.cpp:117
 msgid "General"
 msgstr ""
 
@@ -2121,6 +2121,11 @@ msgstr "Mergi la fila listei de redare următoare"
 #: ../bin/src/ui_mainwindow.h:700
 msgid "Go to previous playlist tab"
 msgstr "Mergi la fila listei de redare precedente"
+
+#: internet/googledriveservice.cpp:53
+#: ../bin/src/ui_googledrivesettingspage.h:82
+msgid "Google Drive"
+msgstr ""
 
 #: covers/coversearchstatisticsdialog.cpp:54 ui/albumcovermanager.cpp:411
 #: ../bin/src/ui_coversearchstatisticsdialog.h:76
@@ -2290,6 +2295,11 @@ msgstr "Crește volumul cu 4%"
 msgid "Increase volume"
 msgstr "Crește volumul"
 
+#: internet/googledriveservice.cpp:146
+#, qt-format
+msgid "Indexing %1"
+msgstr ""
+
 #: ../bin/src/ui_deviceproperties.h:373 wiimotedev/wiimotesettingspage.cpp:124
 msgid "Information"
 msgstr "Informații"
@@ -2310,7 +2320,7 @@ msgstr ""
 msgid "Internet"
 msgstr "Internet"
 
-#: ui/settingsdialog.cpp:134
+#: ui/settingsdialog.cpp:138
 msgid "Internet providers"
 msgstr ""
 
@@ -2649,7 +2659,7 @@ msgstr "Versuri"
 msgid "Lyrics from %1"
 msgstr "Versuri de pe %1"
 
-#: core/song.cpp:321 ../bin/src/ui_transcodersettingspage.h:159
+#: core/song.cpp:325 ../bin/src/ui_transcodersettingspage.h:159
 msgid "MP3"
 msgstr "MP3"
 
@@ -2661,11 +2671,11 @@ msgstr "MP3 256k"
 msgid "MP3 96k"
 msgstr "MP3 96k"
 
-#: core/song.cpp:319
+#: core/song.cpp:323
 msgid "MP4 AAC"
 msgstr "MP4 AAC"
 
-#: core/song.cpp:320
+#: core/song.cpp:324
 msgid "MPC"
 msgstr "MPC"
 
@@ -2819,6 +2829,10 @@ msgstr "Biblioteca audio"
 #: wiimotedev/wiimotesettingspage.cpp:105
 msgid "Mute"
 msgstr "Mut"
+
+#: internet/googledrivefoldermodel.cpp:31
+msgid "My Drive"
+msgstr ""
 
 #: globalsearch/lastfmsearchprovider.cpp:53 internet/lastfmservice.cpp:194
 msgid "My Last.fm Library"
@@ -3017,15 +3031,15 @@ msgstr "Ascultă Acum"
 msgid "OSD Preview"
 msgstr "Previzualizare OSD"
 
-#: core/song.cpp:322
+#: core/song.cpp:326
 msgid "Ogg Flac"
 msgstr "Ogg Flac"
 
-#: core/song.cpp:323
+#: core/song.cpp:327
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
 
-#: core/song.cpp:324 ../bin/src/ui_magnatunedownloaddialog.h:139
+#: core/song.cpp:328 ../bin/src/ui_magnatunedownloaddialog.h:139
 #: ../bin/src/ui_magnatunesettingspage.h:170
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
@@ -3242,6 +3256,10 @@ msgstr "Tipul listei de redare"
 #: internet/groovesharkservice.cpp:635
 msgid "Playlists"
 msgstr "Liste de redare"
+
+#: ../data/oauthsuccess.html:34
+msgid "Please close your browser and return to Clementine."
+msgstr ""
 
 #: ../bin/src/ui_spotifysettingspage.h:215
 msgid "Plugin status:"
@@ -3604,6 +3622,10 @@ msgstr "Obținere melodii favorite Grooveshark"
 
 #: internet/groovesharkservice.cpp:672
 msgid "Retrieving Grooveshark playlists"
+msgstr ""
+
+#: ../data/oauthsuccess.html:3
+msgid "Return to Clementine"
 msgstr ""
 
 #: ui/equalizer.cpp:121
@@ -4128,7 +4150,7 @@ msgstr "Oprește rularea după melodia curentă"
 msgid "Stopped"
 msgstr "Oprit"
 
-#: core/song.cpp:330
+#: core/song.cpp:334
 msgid "Stream"
 msgstr "Flux"
 
@@ -4142,6 +4164,10 @@ msgstr ""
 
 #: ../bin/src/ui_podcastinfowidget.h:196
 msgid "Subscribers"
+msgstr ""
+
+#: ../data/oauthsuccess.html:32
+msgid "Success!"
 msgstr ""
 
 #: transcoder/transcoder.cpp:200
@@ -4451,7 +4477,7 @@ msgstr ""
 msgid "Transcoding options"
 msgstr ""
 
-#: core/song.cpp:327
+#: core/song.cpp:331
 msgid "TrueAudio"
 msgstr "TrueAudio"
 
@@ -4480,7 +4506,7 @@ msgstr ""
 msgid "Unable to download %1 (%2)"
 msgstr ""
 
-#: core/song.cpp:334 library/librarymodel.cpp:296 library/librarymodel.cpp:301
+#: core/song.cpp:338 library/librarymodel.cpp:296 library/librarymodel.cpp:301
 #: library/librarymodel.cpp:953 playlist/playlistdelegates.cpp:309
 #: playlist/playlistmanager.cpp:391 playlist/playlistmanager.cpp:394
 #: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:416
@@ -4545,6 +4571,14 @@ msgstr "Actualizare %1%..."
 #: library/librarywatcher.cpp:90
 msgid "Updating library"
 msgstr "Se actualizează biblioteca"
+
+#: ../bin/src/ui_googledrivesettingspage.h:85
+msgid "Upload new songs to"
+msgstr ""
+
+#: ../bin/src/ui_googledrivesettingspage.h:83
+msgid "Uploads"
+msgstr ""
 
 #: core/commandlineoptions.cpp:144
 msgid "Usage"
@@ -4619,7 +4653,7 @@ msgstr ""
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr ""
 
-#: ui/settingsdialog.cpp:126
+#: ui/settingsdialog.cpp:130
 msgid "User interface"
 msgstr "Interfață utilizator "
 
@@ -4696,7 +4730,7 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
-#: core/song.cpp:326
+#: core/song.cpp:330
 msgid "Wav"
 msgstr "Wav"
 
@@ -4780,7 +4814,7 @@ msgstr ""
 msgid "Windows Media 64k"
 msgstr "Windows Media 64k"
 
-#: core/song.cpp:317
+#: core/song.cpp:321
 msgid "Windows Media audio"
 msgstr ""
 
@@ -4856,6 +4890,12 @@ msgid ""
 "You can scrobble tracks for free, but only <span style=\" font-"
 "weight:600;\">paid subscribers</span> can stream Last.fm radio from "
 "Clementine."
+msgstr ""
+
+#: ../bin/src/ui_googledrivesettingspage.h:84
+msgid ""
+"You can upload songs to Google Drive by right clicking and using \"Copy to "
+"device\"."
 msgstr ""
 
 #: ../bin/src/ui_wiimotesettingspage.h:184

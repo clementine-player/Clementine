@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-07-29 19:42+0000\n"
+"PO-Revision-Date: 2012-08-15 16:47+0000\n"
 "Last-Translator: fri <pavelfric@seznam.cz>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -299,7 +299,7 @@ msgstr "AAC 32k"
 msgid "AAC 64k"
 msgstr "AAC 64k"
 
-#: core/song.cpp:325
+#: core/song.cpp:329
 msgid "AIFF"
 msgstr "AIFF"
 
@@ -859,7 +859,7 @@ msgstr "Ale tyto zdroje jsou zakázány:"
 msgid "Buttons"
 msgstr "Tlačítka"
 
-#: core/song.cpp:328
+#: core/song.cpp:332
 msgid "CDDA"
 msgstr "CDDA"
 
@@ -1992,7 +1992,7 @@ msgstr "Dokončit"
 msgid "First level"
 msgstr "První úroveň"
 
-#: core/song.cpp:318
+#: core/song.cpp:322
 msgid "Flac"
 msgstr "FLAC"
 
@@ -2076,7 +2076,7 @@ msgstr "Plné výšky"
 msgid "GStreamer audio engine"
 msgstr "Zvukový systém GStreamer"
 
-#: ui/settingsdialog.cpp:113
+#: ui/settingsdialog.cpp:117
 msgid "General"
 msgstr "Obecné"
 
@@ -2125,6 +2125,11 @@ msgstr "Jít na další kartu seznamu skladeb"
 #: ../bin/src/ui_mainwindow.h:700
 msgid "Go to previous playlist tab"
 msgstr "Jít na předchozí kartu seznamu skladeb"
+
+#: internet/googledriveservice.cpp:53
+#: ../bin/src/ui_googledrivesettingspage.h:82
+msgid "Google Drive"
+msgstr "Google Drive"
 
 #: covers/coversearchstatisticsdialog.cpp:54 ui/albumcovermanager.cpp:411
 #: ../bin/src/ui_coversearchstatisticsdialog.h:76
@@ -2294,6 +2299,11 @@ msgstr "Zvýšit hlasitost o 4 %"
 msgid "Increase volume"
 msgstr "Zvýšit hlasitost"
 
+#: internet/googledriveservice.cpp:146
+#, qt-format
+msgid "Indexing %1"
+msgstr "Rejstříkování %1"
+
 #: ../bin/src/ui_deviceproperties.h:373 wiimotedev/wiimotesettingspage.cpp:124
 msgid "Information"
 msgstr "Informace"
@@ -2314,7 +2324,7 @@ msgstr "Ověření celistvosti"
 msgid "Internet"
 msgstr "Internet"
 
-#: ui/settingsdialog.cpp:134
+#: ui/settingsdialog.cpp:138
 msgid "Internet providers"
 msgstr "Poskytovatelé internetu"
 
@@ -2653,7 +2663,7 @@ msgstr "Texty písní"
 msgid "Lyrics from %1"
 msgstr "Texty písní z %1"
 
-#: core/song.cpp:321 ../bin/src/ui_transcodersettingspage.h:159
+#: core/song.cpp:325 ../bin/src/ui_transcodersettingspage.h:159
 msgid "MP3"
 msgstr "MP3"
 
@@ -2665,11 +2675,11 @@ msgstr "MP3 256k"
 msgid "MP3 96k"
 msgstr "MP3 96k"
 
-#: core/song.cpp:319
+#: core/song.cpp:323
 msgid "MP4 AAC"
 msgstr "MP4 AAC"
 
-#: core/song.cpp:320
+#: core/song.cpp:324
 msgid "MPC"
 msgstr "MPC"
 
@@ -2823,6 +2833,10 @@ msgstr "Hudební sbírka"
 #: wiimotedev/wiimotesettingspage.cpp:105
 msgid "Mute"
 msgstr "Ztlumit"
+
+#: internet/googledrivefoldermodel.cpp:31
+msgid "My Drive"
+msgstr "Moje jednotka"
 
 #: globalsearch/lastfmsearchprovider.cpp:53 internet/lastfmservice.cpp:194
 msgid "My Last.fm Library"
@@ -3021,15 +3035,15 @@ msgstr "Právě se přehrává"
 msgid "OSD Preview"
 msgstr "Náhled OSD"
 
-#: core/song.cpp:322
+#: core/song.cpp:326
 msgid "Ogg Flac"
 msgstr "Ogg FLAC"
 
-#: core/song.cpp:323
+#: core/song.cpp:327
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
 
-#: core/song.cpp:324 ../bin/src/ui_magnatunedownloaddialog.h:139
+#: core/song.cpp:328 ../bin/src/ui_magnatunedownloaddialog.h:139
 #: ../bin/src/ui_magnatunesettingspage.h:170
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
@@ -3246,6 +3260,10 @@ msgstr "Typ seznamu skladeb"
 #: internet/groovesharkservice.cpp:635
 msgid "Playlists"
 msgstr "Seznamy skladeb"
+
+#: ../data/oauthsuccess.html:34
+msgid "Please close your browser and return to Clementine."
+msgstr "Zavřete, prosím, svůj prohlížeč a vraťte se do Clementine."
 
 #: ../bin/src/ui_spotifysettingspage.h:215
 msgid "Plugin status:"
@@ -3609,6 +3627,10 @@ msgstr "Získávají se oblíbené písně z Grooveshark"
 #: internet/groovesharkservice.cpp:672
 msgid "Retrieving Grooveshark playlists"
 msgstr "Získávají se seznamy skladeb z Grooveshark"
+
+#: ../data/oauthsuccess.html:3
+msgid "Return to Clementine"
+msgstr "Návrat do Clementine"
 
 #: ui/equalizer.cpp:121
 msgid "Rock"
@@ -4132,7 +4154,7 @@ msgstr "Zastavit po současné skladbě"
 msgid "Stopped"
 msgstr "Zastaveno"
 
-#: core/song.cpp:330
+#: core/song.cpp:334
 msgid "Stream"
 msgstr "Proud"
 
@@ -4147,6 +4169,10 @@ msgstr "Odebírané seznamy skladeb"
 #: ../bin/src/ui_podcastinfowidget.h:196
 msgid "Subscribers"
 msgstr "Předplatitelé"
+
+#: ../data/oauthsuccess.html:32
+msgid "Success!"
+msgstr "Úspěch"
 
 #: transcoder/transcoder.cpp:200
 #, qt-format
@@ -4455,7 +4481,7 @@ msgstr "Převádí se %1 souborů s %2 procesy"
 msgid "Transcoding options"
 msgstr "Volby překódování"
 
-#: core/song.cpp:327
+#: core/song.cpp:331
 msgid "TrueAudio"
 msgstr "TrueAudio"
 
@@ -4484,7 +4510,7 @@ msgstr "Ultra široké pásmo"
 msgid "Unable to download %1 (%2)"
 msgstr "Nepodařilo se stáhnout %1 (%2)"
 
-#: core/song.cpp:334 library/librarymodel.cpp:296 library/librarymodel.cpp:301
+#: core/song.cpp:338 library/librarymodel.cpp:296 library/librarymodel.cpp:301
 #: library/librarymodel.cpp:953 playlist/playlistdelegates.cpp:309
 #: playlist/playlistmanager.cpp:391 playlist/playlistmanager.cpp:394
 #: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:416
@@ -4549,6 +4575,14 @@ msgstr "Obnovuje se %1%..."
 #: library/librarywatcher.cpp:90
 msgid "Updating library"
 msgstr "Obnovuje se hudební sbírka"
+
+#: ../bin/src/ui_googledrivesettingspage.h:85
+msgid "Upload new songs to"
+msgstr "Nahrát nové písně do"
+
+#: ../bin/src/ui_googledrivesettingspage.h:83
+msgid "Uploads"
+msgstr "Nahrání"
 
 #: core/commandlineoptions.cpp:144
 msgid "Usage"
@@ -4623,7 +4657,7 @@ msgstr "Použito"
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr "Uživatel %1 nemá účet Grooveshark Anywhere"
 
-#: ui/settingsdialog.cpp:126
+#: ui/settingsdialog.cpp:130
 msgid "User interface"
 msgstr "Uživatelské rozhraní"
 
@@ -4700,7 +4734,7 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
-#: core/song.cpp:326
+#: core/song.cpp:330
 msgid "Wav"
 msgstr "WAV"
 
@@ -4784,7 +4818,7 @@ msgstr "Windows Media 40k"
 msgid "Windows Media 64k"
 msgstr "Windows Media 64k"
 
-#: core/song.cpp:317
+#: core/song.cpp:321
 msgid "Windows Media audio"
 msgstr "Windows Media Audio"
 
@@ -4861,6 +4895,12 @@ msgid ""
 "weight:600;\">paid subscribers</span> can stream Last.fm radio from "
 "Clementine."
 msgstr "Statistické funkce Last.fm je možné používat zdarma. Poslouchání rádia je však přístupné pouze <span style=\" font-weight:600;\">předplatitelům</span>."
+
+#: ../bin/src/ui_googledrivesettingspage.h:84
+msgid ""
+"You can upload songs to Google Drive by right clicking and using \"Copy to "
+"device\"."
+msgstr "Můžete na Google Drive nahrát písně klepnutím pravým tlačítkem myši a použitím Zkopírovat do zařízení."
 
 #: ../bin/src/ui_wiimotesettingspage.h:184
 msgid ""

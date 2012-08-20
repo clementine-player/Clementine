@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-08-08 06:03+0000\n"
+"PO-Revision-Date: 2012-08-18 11:39+0000\n"
 "Last-Translator: Lê Trường An <truongan@linuxmail.org>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -297,7 +297,7 @@ msgstr "AAC 32k"
 msgid "AAC 64k"
 msgstr "AAC 64k"
 
-#: core/song.cpp:325
+#: core/song.cpp:329
 msgid "AIFF"
 msgstr "AIFF"
 
@@ -857,7 +857,7 @@ msgstr "Những nguồn này đã bị vô hiệu:"
 msgid "Buttons"
 msgstr "Nút"
 
-#: core/song.cpp:328
+#: core/song.cpp:332
 msgid "CDDA"
 msgstr "CDDA"
 
@@ -1150,12 +1150,12 @@ msgstr "Chép vào bộ đệm"
 #: library/libraryview.cpp:284 ui/mainwindow.cpp:491
 #: widgets/fileviewlist.cpp:44
 msgid "Copy to device..."
-msgstr "Sao chép vào thiết bị..."
+msgstr "Chép vào thiết bị..."
 
 #: devices/deviceview.cpp:218 ui/mainwindow.cpp:488
 #: widgets/fileviewlist.cpp:39
 msgid "Copy to library..."
-msgstr "Sao chép vào thư viện..."
+msgstr "Chép vào thư viện..."
 
 #: devices/afctransfer.cpp:50
 msgid "Copying iPod database"
@@ -1430,7 +1430,7 @@ msgstr "Loại các bài đã chọn khỏi danh sách chờ"
 
 #: ui/mainwindow.cpp:1292
 msgid "Dequeue track"
-msgstr "Loại bỏ bài hát"
+msgstr "Loại bài hát khỏi d.sách chờ"
 
 #: ../bin/src/ui_transcodedialog.h:212 ../bin/src/ui_organisedialog.h:189
 msgid "Destination"
@@ -1990,7 +1990,7 @@ msgstr "Hoàn tất"
 msgid "First level"
 msgstr "Mức độ đầu"
 
-#: core/song.cpp:318
+#: core/song.cpp:322
 msgid "Flac"
 msgstr "Flac"
 
@@ -2074,7 +2074,7 @@ msgstr "Full Treble"
 msgid "GStreamer audio engine"
 msgstr "Engine âm thanh GStreamer"
 
-#: ui/settingsdialog.cpp:113
+#: ui/settingsdialog.cpp:117
 msgid "General"
 msgstr "Tổng quát"
 
@@ -2123,6 +2123,11 @@ msgstr "Đến tab danh sách tiếp theo"
 #: ../bin/src/ui_mainwindow.h:700
 msgid "Go to previous playlist tab"
 msgstr "Trở về tab danh sách trước"
+
+#: internet/googledriveservice.cpp:53
+#: ../bin/src/ui_googledrivesettingspage.h:82
+msgid "Google Drive"
+msgstr "Google Drive"
 
 #: covers/coversearchstatisticsdialog.cpp:54 ui/albumcovermanager.cpp:411
 #: ../bin/src/ui_coversearchstatisticsdialog.h:76
@@ -2292,6 +2297,11 @@ msgstr "Tăng 4% âm lượng"
 msgid "Increase volume"
 msgstr "Tăng âm lượng"
 
+#: internet/googledriveservice.cpp:146
+#, qt-format
+msgid "Indexing %1"
+msgstr "Đang đánh chỉ mục %1"
+
 #: ../bin/src/ui_deviceproperties.h:373 wiimotedev/wiimotesettingspage.cpp:124
 msgid "Information"
 msgstr "Thông tin"
@@ -2312,7 +2322,7 @@ msgstr "Kiểm tra tính toàn vẹn"
 msgid "Internet"
 msgstr "Internet"
 
-#: ui/settingsdialog.cpp:134
+#: ui/settingsdialog.cpp:138
 msgid "Internet providers"
 msgstr "Dịch vụ"
 
@@ -2651,7 +2661,7 @@ msgstr "Lời bài hát"
 msgid "Lyrics from %1"
 msgstr "Lời bài hát từ %1"
 
-#: core/song.cpp:321 ../bin/src/ui_transcodersettingspage.h:159
+#: core/song.cpp:325 ../bin/src/ui_transcodersettingspage.h:159
 msgid "MP3"
 msgstr "MP3"
 
@@ -2663,11 +2673,11 @@ msgstr "MP3 256k"
 msgid "MP3 96k"
 msgstr "MP3 96k"
 
-#: core/song.cpp:319
+#: core/song.cpp:323
 msgid "MP4 AAC"
 msgstr "MP4 AAC"
 
-#: core/song.cpp:320
+#: core/song.cpp:324
 msgid "MPC"
 msgstr "MPC"
 
@@ -2821,6 +2831,10 @@ msgstr "Thư viện nhạc"
 #: wiimotedev/wiimotesettingspage.cpp:105
 msgid "Mute"
 msgstr "Tắt âm"
+
+#: internet/googledrivefoldermodel.cpp:31
+msgid "My Drive"
+msgstr "My Drive"
 
 #: globalsearch/lastfmsearchprovider.cpp:53 internet/lastfmservice.cpp:194
 msgid "My Last.fm Library"
@@ -3019,15 +3033,15 @@ msgstr "Đang phát"
 msgid "OSD Preview"
 msgstr "Xem trước hộp thông báo"
 
-#: core/song.cpp:322
+#: core/song.cpp:326
 msgid "Ogg Flac"
 msgstr "Ogg Flac"
 
-#: core/song.cpp:323
+#: core/song.cpp:327
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
 
-#: core/song.cpp:324 ../bin/src/ui_magnatunedownloaddialog.h:139
+#: core/song.cpp:328 ../bin/src/ui_magnatunedownloaddialog.h:139
 #: ../bin/src/ui_magnatunesettingspage.h:170
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
@@ -3244,6 +3258,10 @@ msgstr "Loại danh sách"
 #: internet/groovesharkservice.cpp:635
 msgid "Playlists"
 msgstr "Danh sách"
+
+#: ../data/oauthsuccess.html:34
+msgid "Please close your browser and return to Clementine."
+msgstr "Hãy đóng trình duyệt và trở lại Clementine."
 
 #: ../bin/src/ui_spotifysettingspage.h:215
 msgid "Plugin status:"
@@ -3515,11 +3533,11 @@ msgstr "Loại bỏ danh sách"
 
 #: internet/groovesharkservice.cpp:1566
 msgid "Removing songs from My Music"
-msgstr "Loại bỏ bài hát khỏi Nhạc của tôi"
+msgstr "Loại bài hát khỏi Nhạc của tôi"
 
 #: internet/groovesharkservice.cpp:1516
 msgid "Removing songs from favorites"
-msgstr "Loại bỏ bài hát khỏi yêu thích"
+msgstr "Loại bài hát khỏi yêu thích"
 
 #: internet/groovesharkservice.cpp:1364
 #, qt-format
@@ -3607,6 +3625,10 @@ msgstr "Đang tải các bài hát yêu thích trên Grooveshark"
 #: internet/groovesharkservice.cpp:672
 msgid "Retrieving Grooveshark playlists"
 msgstr "Đang tải danh sách Grooveshark"
+
+#: ../data/oauthsuccess.html:3
+msgid "Return to Clementine"
+msgstr "Trở lại Clementine"
 
 #: ui/equalizer.cpp:121
 msgid "Rock"
@@ -4130,7 +4152,7 @@ msgstr "Dừng khi phát xong bài hiện tại"
 msgid "Stopped"
 msgstr "Đã dừng"
 
-#: core/song.cpp:330
+#: core/song.cpp:334
 msgid "Stream"
 msgstr "Truyền tải"
 
@@ -4145,6 +4167,10 @@ msgstr "Danh sách đã đăng kí"
 #: ../bin/src/ui_podcastinfowidget.h:196
 msgid "Subscribers"
 msgstr "Người đăng kí"
+
+#: ../data/oauthsuccess.html:32
+msgid "Success!"
+msgstr "Thành công!"
 
 #: transcoder/transcoder.cpp:200
 #, qt-format
@@ -4453,7 +4479,7 @@ msgstr "Đang chuyển mã %1 tập tin sử dụng %2 luồng"
 msgid "Transcoding options"
 msgstr "Tùy chỉnh chuyển mã"
 
-#: core/song.cpp:327
+#: core/song.cpp:331
 msgid "TrueAudio"
 msgstr "TrueAudio"
 
@@ -4482,7 +4508,7 @@ msgstr "Băng siêu rộng (UWB)"
 msgid "Unable to download %1 (%2)"
 msgstr "Không thể tải về %1 (%2)"
 
-#: core/song.cpp:334 library/librarymodel.cpp:296 library/librarymodel.cpp:301
+#: core/song.cpp:338 library/librarymodel.cpp:296 library/librarymodel.cpp:301
 #: library/librarymodel.cpp:953 playlist/playlistdelegates.cpp:309
 #: playlist/playlistmanager.cpp:391 playlist/playlistmanager.cpp:394
 #: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:416
@@ -4547,6 +4573,14 @@ msgstr "Đang cập nhật %1%..."
 #: library/librarywatcher.cpp:90
 msgid "Updating library"
 msgstr "Đang cập nhật thư viện"
+
+#: ../bin/src/ui_googledrivesettingspage.h:85
+msgid "Upload new songs to"
+msgstr "Tải bài hát mới lên"
+
+#: ../bin/src/ui_googledrivesettingspage.h:83
+msgid "Uploads"
+msgstr "Tải lên"
 
 #: core/commandlineoptions.cpp:144
 msgid "Usage"
@@ -4621,7 +4655,7 @@ msgstr "Đã dùng"
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr "Người dùng %1 không có tài khoản Grooveshark Anywhere"
 
-#: ui/settingsdialog.cpp:126
+#: ui/settingsdialog.cpp:130
 msgid "User interface"
 msgstr "Giao diện người dùng"
 
@@ -4698,7 +4732,7 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
-#: core/song.cpp:326
+#: core/song.cpp:330
 msgid "Wav"
 msgstr "Wav"
 
@@ -4782,7 +4816,7 @@ msgstr "Windows Media 40k"
 msgid "Windows Media 64k"
 msgstr "Windows Media 64k"
 
-#: core/song.cpp:317
+#: core/song.cpp:321
 msgid "Windows Media audio"
 msgstr "Âm thanh Windows Media"
 
@@ -4859,6 +4893,12 @@ msgid ""
 "weight:600;\">paid subscribers</span> can stream Last.fm radio from "
 "Clementine."
 msgstr "Bạn có thể gửi thông tin các bài hát một cách miễn phí nhưng chỉ  <span style=\" font-weight:600;\">những thành viên đã thanh toán</span> mới có thể lấy dữ liệu của kênh phát thanh Last.fm từ Clementine."
+
+#: ../bin/src/ui_googledrivesettingspage.h:84
+msgid ""
+"You can upload songs to Google Drive by right clicking and using \"Copy to "
+"device\"."
+msgstr "Bạn có thể tải bài hát lên Google Drive bằng cách nhấn chuột phải và chọn \"Chép vào thiết bị\"."
 
 #: ../bin/src/ui_wiimotesettingspage.h:184
 msgid ""

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-07-29 04:41+0000\n"
+"PO-Revision-Date: 2012-08-14 20:23+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -295,7 +295,7 @@ msgstr "AAC, 32 кб"
 msgid "AAC 64k"
 msgstr "AAC, 64 кб"
 
-#: core/song.cpp:325
+#: core/song.cpp:329
 msgid "AIFF"
 msgstr "AIFF"
 
@@ -855,7 +855,7 @@ msgstr "Ці джерела вимкнено:"
 msgid "Buttons"
 msgstr "Кнопки"
 
-#: core/song.cpp:328
+#: core/song.cpp:332
 msgid "CDDA"
 msgstr "CDDA"
 
@@ -1988,7 +1988,7 @@ msgstr "Готово"
 msgid "First level"
 msgstr "Перший рівень"
 
-#: core/song.cpp:318
+#: core/song.cpp:322
 msgid "Flac"
 msgstr "Flac"
 
@@ -2072,7 +2072,7 @@ msgstr "Повні верхи"
 msgid "GStreamer audio engine"
 msgstr "Аудіо-рушій GStreamer"
 
-#: ui/settingsdialog.cpp:113
+#: ui/settingsdialog.cpp:117
 msgid "General"
 msgstr "Загальне"
 
@@ -2121,6 +2121,11 @@ msgstr "До наступної вкладки списку відтворенн
 #: ../bin/src/ui_mainwindow.h:700
 msgid "Go to previous playlist tab"
 msgstr "До попередньої вкладки списку відтворення"
+
+#: internet/googledriveservice.cpp:53
+#: ../bin/src/ui_googledrivesettingspage.h:82
+msgid "Google Drive"
+msgstr "Google Drive"
 
 #: covers/coversearchstatisticsdialog.cpp:54 ui/albumcovermanager.cpp:411
 #: ../bin/src/ui_coversearchstatisticsdialog.h:76
@@ -2290,6 +2295,11 @@ msgstr "Збільшити гучність на 4%"
 msgid "Increase volume"
 msgstr "Збільшити гучність"
 
+#: internet/googledriveservice.cpp:146
+#, qt-format
+msgid "Indexing %1"
+msgstr "Індексуємо %1"
+
 #: ../bin/src/ui_deviceproperties.h:373 wiimotedev/wiimotesettingspage.cpp:124
 msgid "Information"
 msgstr "Інформація"
@@ -2310,7 +2320,7 @@ msgstr "Перевірка цілісності даних"
 msgid "Internet"
 msgstr "Інтернет"
 
-#: ui/settingsdialog.cpp:134
+#: ui/settingsdialog.cpp:138
 msgid "Internet providers"
 msgstr "Інтернет-джерела"
 
@@ -2649,7 +2659,7 @@ msgstr "Тексти пісень"
 msgid "Lyrics from %1"
 msgstr "Текст пісні з %1"
 
-#: core/song.cpp:321 ../bin/src/ui_transcodersettingspage.h:159
+#: core/song.cpp:325 ../bin/src/ui_transcodersettingspage.h:159
 msgid "MP3"
 msgstr "MP3"
 
@@ -2661,11 +2671,11 @@ msgstr "MP3, 256 кб"
 msgid "MP3 96k"
 msgstr "MP3, 96 кб"
 
-#: core/song.cpp:319
+#: core/song.cpp:323
 msgid "MP4 AAC"
 msgstr "MP4 AAC"
 
-#: core/song.cpp:320
+#: core/song.cpp:324
 msgid "MPC"
 msgstr "MPC"
 
@@ -2819,6 +2829,10 @@ msgstr "Фонотека"
 #: wiimotedev/wiimotesettingspage.cpp:105
 msgid "Mute"
 msgstr "Вимкнути звук"
+
+#: internet/googledrivefoldermodel.cpp:31
+msgid "My Drive"
+msgstr "My Drive"
 
 #: globalsearch/lastfmsearchprovider.cpp:53 internet/lastfmservice.cpp:194
 msgid "My Last.fm Library"
@@ -3017,15 +3031,15 @@ msgstr "Зараз відтворюється"
 msgid "OSD Preview"
 msgstr "Повідомлення OSD"
 
-#: core/song.cpp:322
+#: core/song.cpp:326
 msgid "Ogg Flac"
 msgstr "Ogg Flac"
 
-#: core/song.cpp:323
+#: core/song.cpp:327
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
 
-#: core/song.cpp:324 ../bin/src/ui_magnatunedownloaddialog.h:139
+#: core/song.cpp:328 ../bin/src/ui_magnatunedownloaddialog.h:139
 #: ../bin/src/ui_magnatunesettingspage.h:170
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
@@ -3242,6 +3256,10 @@ msgstr "Тип списку відтворення"
 #: internet/groovesharkservice.cpp:635
 msgid "Playlists"
 msgstr "Списки відтворення"
+
+#: ../data/oauthsuccess.html:34
+msgid "Please close your browser and return to Clementine."
+msgstr "Будь ласка, закрийте вікно програми для перегляду інтернету і поверніться до роботи з Clementine."
 
 #: ../bin/src/ui_spotifysettingspage.h:215
 msgid "Plugin status:"
@@ -3605,6 +3623,10 @@ msgstr "Отримання улюблених пісень з Grooveshark"
 #: internet/groovesharkservice.cpp:672
 msgid "Retrieving Grooveshark playlists"
 msgstr "Отримання списків відтворення з Grooveshark"
+
+#: ../data/oauthsuccess.html:3
+msgid "Return to Clementine"
+msgstr "Повернутися до Clementine"
 
 #: ui/equalizer.cpp:121
 msgid "Rock"
@@ -4128,7 +4150,7 @@ msgstr "Зупинити відтворення після цієї доріжк
 msgid "Stopped"
 msgstr "Зупинено"
 
-#: core/song.cpp:330
+#: core/song.cpp:334
 msgid "Stream"
 msgstr "Потік"
 
@@ -4143,6 +4165,10 @@ msgstr "Підписки на списки відтворення"
 #: ../bin/src/ui_podcastinfowidget.h:196
 msgid "Subscribers"
 msgstr "Передплатники"
+
+#: ../data/oauthsuccess.html:32
+msgid "Success!"
+msgstr "Виконано!"
 
 #: transcoder/transcoder.cpp:200
 #, qt-format
@@ -4451,7 +4477,7 @@ msgstr "Перекодовано %1 файлів, використовуючи %
 msgid "Transcoding options"
 msgstr "Налаштування перекодування"
 
-#: core/song.cpp:327
+#: core/song.cpp:331
 msgid "TrueAudio"
 msgstr "TrueAudio"
 
@@ -4480,7 +4506,7 @@ msgstr "Надзвичайно широка смуга (UWB)"
 msgid "Unable to download %1 (%2)"
 msgstr "Не вдалось завантажити %1 (%2)"
 
-#: core/song.cpp:334 library/librarymodel.cpp:296 library/librarymodel.cpp:301
+#: core/song.cpp:338 library/librarymodel.cpp:296 library/librarymodel.cpp:301
 #: library/librarymodel.cpp:953 playlist/playlistdelegates.cpp:309
 #: playlist/playlistmanager.cpp:391 playlist/playlistmanager.cpp:394
 #: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:416
@@ -4545,6 +4571,14 @@ msgstr "Оновлення %1%…"
 #: library/librarywatcher.cpp:90
 msgid "Updating library"
 msgstr "Оновлення фонотеки"
+
+#: ../bin/src/ui_googledrivesettingspage.h:85
+msgid "Upload new songs to"
+msgstr "Вивантажити нові композиції на"
+
+#: ../bin/src/ui_googledrivesettingspage.h:83
+msgid "Uploads"
+msgstr "Вивантаження"
 
 #: core/commandlineoptions.cpp:144
 msgid "Usage"
@@ -4619,7 +4653,7 @@ msgstr "Використано"
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr "У користувача %1 немає облікового запису Grooveshark Anywhere"
 
-#: ui/settingsdialog.cpp:126
+#: ui/settingsdialog.cpp:130
 msgid "User interface"
 msgstr "Інтерфейс користувача"
 
@@ -4696,7 +4730,7 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
-#: core/song.cpp:326
+#: core/song.cpp:330
 msgid "Wav"
 msgstr "Wav"
 
@@ -4780,7 +4814,7 @@ msgstr "Windows Media, 40 кб"
 msgid "Windows Media 64k"
 msgstr "Windows Media, 64 кб"
 
-#: core/song.cpp:317
+#: core/song.cpp:321
 msgid "Windows Media audio"
 msgstr "Windows Media audio"
 
@@ -4857,6 +4891,12 @@ msgid ""
 "weight:600;\">paid subscribers</span> can stream Last.fm radio from "
 "Clementine."
 msgstr "Ви можете вільно скробблити доріжки, але лише <span style=\" font-weight:600;\">платні передплатники</span> можуть слухати потокове радіо Last.fm з Clementine."
+
+#: ../bin/src/ui_googledrivesettingspage.h:84
+msgid ""
+"You can upload songs to Google Drive by right clicking and using \"Copy to "
+"device\"."
+msgstr "Ви можете вивантажити композиції на Google Drive за допомогою клацання правою кнопкою миші на композиції з наступним вибором пункту «Копіювати на пристрій»."
 
 #: ../bin/src/ui_wiimotesettingspage.h:184
 msgid ""

@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-08-13 04:20+0000\n"
-"Last-Translator: Nisok Kosin <nikos.efthimiou@gmail.com>\n"
+"PO-Revision-Date: 2012-08-14 20:19+0000\n"
+"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: el\n"
@@ -296,7 +296,7 @@ msgstr "AAC 32k"
 msgid "AAC 64k"
 msgstr "AAC 64k"
 
-#: core/song.cpp:325
+#: core/song.cpp:329
 msgid "AIFF"
 msgstr "AIFF"
 
@@ -856,7 +856,7 @@ msgstr "Αλλά αυτές οι πηγές είναι απενεργοποιη�
 msgid "Buttons"
 msgstr "Κουμπιά"
 
-#: core/song.cpp:328
+#: core/song.cpp:332
 msgid "CDDA"
 msgstr "CDDA"
 
@@ -1989,7 +1989,7 @@ msgstr "Τέλος"
 msgid "First level"
 msgstr "Πρώτο επίπεδο"
 
-#: core/song.cpp:318
+#: core/song.cpp:322
 msgid "Flac"
 msgstr "Flac"
 
@@ -2073,7 +2073,7 @@ msgstr "Πλήρως πρίμα"
 msgid "GStreamer audio engine"
 msgstr "GStreamer, μηχανή ήχου"
 
-#: ui/settingsdialog.cpp:113
+#: ui/settingsdialog.cpp:117
 msgid "General"
 msgstr "Γενικά"
 
@@ -2122,6 +2122,11 @@ msgstr "Πήγαινε στην επόμενη πινακίδα της λίστ�
 #: ../bin/src/ui_mainwindow.h:700
 msgid "Go to previous playlist tab"
 msgstr "Πήγαινε στην προηγούμενη πινακίδα της λίστας"
+
+#: internet/googledriveservice.cpp:53
+#: ../bin/src/ui_googledrivesettingspage.h:82
+msgid "Google Drive"
+msgstr ""
 
 #: covers/coversearchstatisticsdialog.cpp:54 ui/albumcovermanager.cpp:411
 #: ../bin/src/ui_coversearchstatisticsdialog.h:76
@@ -2291,6 +2296,11 @@ msgstr "Αύξηση της έντασης ήχου κατά 4%"
 msgid "Increase volume"
 msgstr "Αύξηση έντασης"
 
+#: internet/googledriveservice.cpp:146
+#, qt-format
+msgid "Indexing %1"
+msgstr ""
+
 #: ../bin/src/ui_deviceproperties.h:373 wiimotedev/wiimotesettingspage.cpp:124
 msgid "Information"
 msgstr "Πληροφορία"
@@ -2311,7 +2321,7 @@ msgstr "έλεγχος ακεραιότητας"
 msgid "Internet"
 msgstr "Διαδίκτυο"
 
-#: ui/settingsdialog.cpp:134
+#: ui/settingsdialog.cpp:138
 msgid "Internet providers"
 msgstr "Παροχείς Internet"
 
@@ -2650,7 +2660,7 @@ msgstr "Στίχοι"
 msgid "Lyrics from %1"
 msgstr "Στίχοι από %1"
 
-#: core/song.cpp:321 ../bin/src/ui_transcodersettingspage.h:159
+#: core/song.cpp:325 ../bin/src/ui_transcodersettingspage.h:159
 msgid "MP3"
 msgstr "MP3"
 
@@ -2662,11 +2672,11 @@ msgstr "MP3 256k"
 msgid "MP3 96k"
 msgstr "MP3 96k"
 
-#: core/song.cpp:319
+#: core/song.cpp:323
 msgid "MP4 AAC"
 msgstr "MP4 AAC"
 
-#: core/song.cpp:320
+#: core/song.cpp:324
 msgid "MPC"
 msgstr "MPC"
 
@@ -2820,6 +2830,10 @@ msgstr "Μουσική βιβλιοθήκη"
 #: wiimotedev/wiimotesettingspage.cpp:105
 msgid "Mute"
 msgstr "Σίγαση"
+
+#: internet/googledrivefoldermodel.cpp:31
+msgid "My Drive"
+msgstr ""
 
 #: globalsearch/lastfmsearchprovider.cpp:53 internet/lastfmservice.cpp:194
 msgid "My Last.fm Library"
@@ -3018,15 +3032,15 @@ msgstr "Τρέχουσα αναπαραγωγή"
 msgid "OSD Preview"
 msgstr "Προ-επισκόπηση OSD"
 
-#: core/song.cpp:322
+#: core/song.cpp:326
 msgid "Ogg Flac"
 msgstr "Ogg Flac"
 
-#: core/song.cpp:323
+#: core/song.cpp:327
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
 
-#: core/song.cpp:324 ../bin/src/ui_magnatunedownloaddialog.h:139
+#: core/song.cpp:328 ../bin/src/ui_magnatunedownloaddialog.h:139
 #: ../bin/src/ui_magnatunesettingspage.h:170
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
@@ -3243,6 +3257,10 @@ msgstr "Τύπος λίστας αναπαραγωγής"
 #: internet/groovesharkservice.cpp:635
 msgid "Playlists"
 msgstr "Λίστες"
+
+#: ../data/oauthsuccess.html:34
+msgid "Please close your browser and return to Clementine."
+msgstr ""
 
 #: ../bin/src/ui_spotifysettingspage.h:215
 msgid "Plugin status:"
@@ -3606,6 +3624,10 @@ msgstr "Ανάκτηση αγαπημένων τραγουδιών από το G
 #: internet/groovesharkservice.cpp:672
 msgid "Retrieving Grooveshark playlists"
 msgstr "Ανάκτηση λιστών αναπαραγωγής από το Grooveshark"
+
+#: ../data/oauthsuccess.html:3
+msgid "Return to Clementine"
+msgstr ""
 
 #: ui/equalizer.cpp:121
 msgid "Rock"
@@ -4129,7 +4151,7 @@ msgstr "Παύση αναπαραγωγής μετά το τρέχον κομμ�
 msgid "Stopped"
 msgstr "Σταματημένο"
 
-#: core/song.cpp:330
+#: core/song.cpp:334
 msgid "Stream"
 msgstr "Stream"
 
@@ -4144,6 +4166,10 @@ msgstr "Λίστες συνδρομής"
 #: ../bin/src/ui_podcastinfowidget.h:196
 msgid "Subscribers"
 msgstr "Συνδομητές"
+
+#: ../data/oauthsuccess.html:32
+msgid "Success!"
+msgstr ""
 
 #: transcoder/transcoder.cpp:200
 #, qt-format
@@ -4452,7 +4478,7 @@ msgstr "Επανακωδικοποίηση %1 αρχείων χρησιμοπο�
 msgid "Transcoding options"
 msgstr "Επιλογές επανακωδικοποίησης"
 
-#: core/song.cpp:327
+#: core/song.cpp:331
 msgid "TrueAudio"
 msgstr "TrueAudio"
 
@@ -4481,7 +4507,7 @@ msgstr "Άκρα ευρεία ζώνη (UWB)"
 msgid "Unable to download %1 (%2)"
 msgstr "Αδυναμία \"κατεβάσματος\" του %1 (%2)"
 
-#: core/song.cpp:334 library/librarymodel.cpp:296 library/librarymodel.cpp:301
+#: core/song.cpp:338 library/librarymodel.cpp:296 library/librarymodel.cpp:301
 #: library/librarymodel.cpp:953 playlist/playlistdelegates.cpp:309
 #: playlist/playlistmanager.cpp:391 playlist/playlistmanager.cpp:394
 #: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:416
@@ -4546,6 +4572,14 @@ msgstr "Ενημέρωση %1%..."
 #: library/librarywatcher.cpp:90
 msgid "Updating library"
 msgstr "Ενημέρωση λίστας"
+
+#: ../bin/src/ui_googledrivesettingspage.h:85
+msgid "Upload new songs to"
+msgstr ""
+
+#: ../bin/src/ui_googledrivesettingspage.h:83
+msgid "Uploads"
+msgstr ""
 
 #: core/commandlineoptions.cpp:144
 msgid "Usage"
@@ -4620,7 +4654,7 @@ msgstr "Σε χρήση"
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr "Ο χρήστης %1 δεν διαθέτει έναν λογαριασμό στο GrooveShark Anywhere"
 
-#: ui/settingsdialog.cpp:126
+#: ui/settingsdialog.cpp:130
 msgid "User interface"
 msgstr "Διασύνδεση χρήστη"
 
@@ -4697,7 +4731,7 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
-#: core/song.cpp:326
+#: core/song.cpp:330
 msgid "Wav"
 msgstr "Wav"
 
@@ -4781,7 +4815,7 @@ msgstr "Windows Media 40k"
 msgid "Windows Media 64k"
 msgstr "Windows Media 64k"
 
-#: core/song.cpp:317
+#: core/song.cpp:321
 msgid "Windows Media audio"
 msgstr "Windows Media audio"
 
@@ -4858,6 +4892,12 @@ msgid ""
 "weight:600;\">paid subscribers</span> can stream Last.fm radio from "
 "Clementine."
 msgstr "Μπορείτε να κάνετε \"scroble\" δωρεάν, αλλά μόνο <span style=\" font-weight:600;\">οι συνδρομητές επί πληρωμή</span> μπορούν να έχουν ροή από το ραδιόφωνο Last.fm στον Clementine."
+
+#: ../bin/src/ui_googledrivesettingspage.h:84
+msgid ""
+"You can upload songs to Google Drive by right clicking and using \"Copy to "
+"device\"."
+msgstr ""
 
 #: ../bin/src/ui_wiimotesettingspage.h:184
 msgid ""
