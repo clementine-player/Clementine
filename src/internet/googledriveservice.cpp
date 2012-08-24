@@ -72,7 +72,9 @@ QStandardItem* GoogleDriveService::CreateRootItem() {
 void GoogleDriveService::LazyPopulate(QStandardItem* item) {
   switch (item->data(InternetModel::Role_Type).toInt()) {
     case InternetModel::Type_Service:
-      if (!client_->is_authenticated()) {
+      if (refresh_token().isEmpty()) {
+        ShowSettingsDialog();
+      } else if (!client_->is_authenticated()) {
         Connect();
       }
       library_model_->Init();
@@ -84,12 +86,15 @@ void GoogleDriveService::LazyPopulate(QStandardItem* item) {
   }
 }
 
-void GoogleDriveService::Connect() {
+QString GoogleDriveService::refresh_token() const {
   QSettings s;
   s.beginGroup(kSettingsGroup);
 
-  google_drive::ConnectResponse* response =
-      client_->Connect(s.value("refresh_token").toString());
+  return s.value("refresh_token").toString();
+}
+
+void GoogleDriveService::Connect() {
+  google_drive::ConnectResponse* response = client_->Connect(refresh_token());
   NewClosure(response, SIGNAL(Finished()),
              this, SLOT(ConnectFinished(google_drive::ConnectResponse*)),
              response);
@@ -122,7 +127,11 @@ void GoogleDriveService::ConnectFinished(google_drive::ConnectResponse* response
   QSettings s;
   s.beginGroup(kSettingsGroup);
   s.setValue("refresh_token", response->refresh_token());
-  s.setValue("user_email", response->user_email());
+
+  if (!response->user_email().isEmpty()) {
+    // We only fetch the user's email address the first time we authenticate.
+    s.setValue("user_email", response->user_email());
+  }
 
   emit Connected();
 

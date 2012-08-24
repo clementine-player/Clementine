@@ -30,6 +30,7 @@ class GoogleDriveService : public InternetService {
   static const char* kSettingsGroup;
 
   google_drive::Client* client() const { return client_; }
+  QString refresh_token() const;
 
   QStandardItem* CreateRootItem();
   void LazyPopulate(QStandardItem* item);
