@@ -38,6 +38,9 @@ public:
   void Load();
   void Save();
 
+  // QObject
+  bool eventFilter(QObject* object, QEvent* event);
+
 private slots:
   void LoginClicked();
   void LogoutClicked();

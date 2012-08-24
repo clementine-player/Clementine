@@ -36,6 +36,8 @@ GoogleDriveSettingsPage::GoogleDriveSettingsPage(SettingsDialog* parent)
   connect(ui_->login_button, SIGNAL(clicked()), SLOT(LoginClicked()));
   connect(ui_->login_state, SIGNAL(LogoutClicked()), SLOT(LogoutClicked()));
   connect(service_, SIGNAL(Connected()), SLOT(Connected()));
+
+  dialog()->installEventFilter(this);
 }
 
 GoogleDriveSettingsPage::~GoogleDriveSettingsPage() {
@@ -60,6 +62,16 @@ void GoogleDriveSettingsPage::Save() {
 
 void GoogleDriveSettingsPage::LoginClicked() {
   service_->Connect();
+  ui_->login_button->setEnabled(false);
+}
+
+bool GoogleDriveSettingsPage::eventFilter(QObject* object, QEvent* event) {
+  if (object == dialog() && event->type() == QEvent::Enter) {
+    ui_->login_button->setEnabled(true);
+    return false;
+  }
+
+  return SettingsPage::eventFilter(object, event);
 }
 
 void GoogleDriveSettingsPage::LogoutClicked() {
