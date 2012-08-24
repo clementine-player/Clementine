@@ -24,6 +24,7 @@ class GoogleDriveService : public InternetService {
   Q_OBJECT
  public:
   GoogleDriveService(Application* app, InternetModel* parent);
+  ~GoogleDriveService();
 
   static const char* kServiceName;
   static const char* kSettingsGroup;
@@ -32,6 +33,7 @@ class GoogleDriveService : public InternetService {
 
   QStandardItem* CreateRootItem();
   void LazyPopulate(QStandardItem* item);
+  void ShowContextMenu(const QPoint& global_pos);
 
   QUrl GetStreamingUrlFromSongId(const QString& file_id);
 
@@ -51,6 +53,9 @@ class GoogleDriveService : public InternetService {
                         const QString& url,
                         const int task_id);
 
+  void OpenWithDrive();
+  void ShowSettingsDialog();
+
  private:
   void EnsureConnected();
   void RefreshAuthorisation(const QString& refresh_token);
@@ -69,6 +74,9 @@ class GoogleDriveService : public InternetService {
   QSortFilterProxyModel* library_sort_model_;
 
   int indexing_task_id_;
+
+  boost::scoped_ptr<QMenu> context_menu_;
+  QAction* open_in_drive_action_;
 };
 
 #endif

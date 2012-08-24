@@ -1,6 +1,8 @@
 #include "googledriveservice.h"
 
+#include <QDesktopServices>
 #include <QEventLoop>
+#include <QMenu>
 #include <QScopedPointer>
 #include <QSortFilterProxyModel>
 
@@ -15,6 +17,7 @@
 #include "globalsearch/librarysearchprovider.h"
 #include "library/librarybackend.h"
 #include "library/librarymodel.h"
+#include "ui/iconloader.h"
 #include "googledriveclient.h"
 #include "googledriveurlhandler.h"
 #include "internetmodel.h"
@@ -26,6 +29,7 @@ namespace {
 
 static const char* kSongsTable = "google_drive_songs";
 static const char* kFtsTable = "google_drive_songs_fts";
+static const char* kDriveEditFileUrl = "https://docs.google.com/file/d/%1/edit";
 
 }
 
@@ -54,6 +58,9 @@ GoogleDriveService::GoogleDriveService(Application* app, InternetModel* parent)
       "google_drive",
       QIcon(":/providers/googledrive.png"),
       true, app_, this));
+}
+
+GoogleDriveService::~GoogleDriveService() {
 }
 
 QStandardItem* GoogleDriveService::CreateRootItem() {
@@ -219,4 +226,53 @@ QUrl GoogleDriveService::GetStreamingUrlFromSongId(const QString& id) {
   QUrl url(response->file().download_url());
   url.setFragment(client_->access_token());
   return url;
+}
+
+void GoogleDriveService::ShowContextMenu(const QPoint& global_pos) {
+  if (!context_menu_) {
+    context_menu_.reset(new QMenu);
+    context_menu_->addActions(GetPlaylistActions());
+    open_in_drive_action_ = context_menu_->addAction(
+          QIcon(":/providers/googledrive.png"), tr("Open in Google Drive"),
+          this, SLOT(OpenWithDrive()));
+    context_menu_->addSeparator();
+    context_menu_->addAction(IconLoader::Load("configure"),
+                             tr("Configure..."),
+                             this, SLOT(ShowSettingsDialog()));
+  }
+
+  // Only show some actions if there are real songs selected
+  bool songs_selected = false;
+  foreach (const QModelIndex& index, model()->selected_indexes()) {
+    const int type = index.data(LibraryModel::Role_Type).toInt();
+    if (type == LibraryItem::Type_Song ||
+        type == LibraryItem::Type_Container) {
+      songs_selected = true;
+      break;
+    }
+  }
+
+  open_in_drive_action_->setEnabled(songs_selected);
+
+  context_menu_->popup(global_pos);
+}
+
+void GoogleDriveService::OpenWithDrive() {
+  // Map indexes to the actual library model.
+  QModelIndexList library_indexes;
+  foreach (const QModelIndex& index, model()->selected_indexes()) {
+    if (index.model() == library_sort_model_) {
+      library_indexes << library_sort_model_->mapToSource(index);
+    }
+  }
+
+  // Ask the library for the songs for these indexes.
+  foreach (const Song& song, library_model_->GetChildSongs(library_indexes)) {
+    QDesktopServices::openUrl(
+          QUrl(QString(kDriveEditFileUrl).arg(song.url().path())));
+  }
+}
+
+void GoogleDriveService::ShowSettingsDialog() {
+  app_->OpenSettingsDialogAtPage(SettingsDialog::Page_GoogleDrive);
 }

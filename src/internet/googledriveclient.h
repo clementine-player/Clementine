@@ -49,6 +49,7 @@ public:
   QString description() const { return data_["description"].toString(); }
   long size() const { return data_["fileSize"].toUInt(); }
   QUrl download_url() const { return data_["downloadUrl"].toUrl(); }
+  QUrl alternate_link() const { return data_["alternateLink"].toUrl(); }
 
   QDateTime modified_date() const {
     return QDateTime::fromString(data_["modifiedDate"].toString(), Qt::ISODate);
