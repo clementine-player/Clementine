@@ -138,12 +138,12 @@ void SavedRadio::Edit() {
     return;
 
   int i = streams_.indexOf(Stream(QUrl(context_item->data(InternetModel::Role_Url).toUrl())));
-  Stream& stream = streams_[i];
-  stream.name_ = edit_dialog_->name();
-  stream.url_ = edit_dialog_->url();
+  Stream* stream = &streams_[i];
+  stream->name_ = edit_dialog_->name();
+  stream->url_ = edit_dialog_->url();
 
-  context_item->setText(stream.name_);
-  context_item->setData(stream.url_, InternetModel::Role_Url);
+  context_item->setText(stream->name_);
+  context_item->setData(stream->url_, InternetModel::Role_Url);
 
   SaveStreams();
 }
