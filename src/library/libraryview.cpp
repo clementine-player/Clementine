@@ -185,6 +185,111 @@ LibraryView::LibraryView(QWidget* parent)
 LibraryView::~LibraryView() {
 }
 
+void LibraryView::SaveFocus() {
+  QModelIndex current = currentIndex();
+  QVariant type = model()->data(current, LibraryModel::Role_Type);
+  if (!type.isValid() || !(type.toInt() == LibraryItem::Type_Song ||
+       type.toInt() == LibraryItem::Type_Container ||
+       type.toInt() == LibraryItem::Type_Divider)) {
+    return;
+  }
+
+  last_selected_path_.clear();
+  last_selected_song_ = Song();
+  last_selected_container_ = QString();
+
+  switch (type.toInt()) {
+    case LibraryItem::Type_Song: {
+      QModelIndex index = qobject_cast<QSortFilterProxyModel*>(model())
+          ->mapToSource(current);
+      SongList songs = app_->library_model()->GetChildSongs(index);
+      if (!songs.isEmpty()) {
+        last_selected_song_ = songs.last();
+      }
+      break;
+    }
+
+    case LibraryItem::Type_Container:
+    case LibraryItem::Type_Divider: {
+      QString text = model()->data(current, LibraryModel::Role_SortText).toString();
+      last_selected_container_ = text;
+      break;
+    }
+
+    default:
+      return;
+  }
+
+  SaveContainerPath(current);
+}
+
+void LibraryView::SaveContainerPath(const QModelIndex& child) {
+  QModelIndex current = model()->parent(child);
+  QVariant type = model()->data(current, LibraryModel::Role_Type);
+  if (!type.isValid() || !(type.toInt() == LibraryItem::Type_Container ||
+       type.toInt() == LibraryItem::Type_Divider)) {
+    return;
+  }
+
+  QString text = model()->data(current, LibraryModel::Role_SortText).toString();
+  last_selected_path_ << text;
+  SaveContainerPath(current);
+}
+
+void LibraryView::RestoreFocus() {
+  if (last_selected_container_.isEmpty() && last_selected_song_.url().isEmpty()) {
+    return;
+  }
+  RestoreLevelFocus();
+}
+
+bool LibraryView::RestoreLevelFocus(const QModelIndex& parent) {
+  if (model()->canFetchMore(parent)) {
+    model()->fetchMore(parent);
+  }
+  int rows = model()->rowCount(parent);
+  for (int i = 0; i < rows; i++) {
+    QModelIndex current = model()->index(i, 0, parent);
+    QVariant type = model()->data(current, LibraryModel::Role_Type);
+    switch (type.toInt()) {
+      case LibraryItem::Type_Song:
+        if (!last_selected_song_.url().isEmpty()) {
+          QModelIndex index = qobject_cast<QSortFilterProxyModel*>(model())
+                              ->mapToSource(current);
+          SongList songs = app_->library_model()->GetChildSongs(index);
+          foreach (const Song& song, songs) {
+            if (song == last_selected_song_) {
+              setCurrentIndex(current);
+              return true;
+            }
+          }
+        }
+        break;
+
+      case LibraryItem::Type_Container:
+      case LibraryItem::Type_Divider: {
+        QString text = model()->data(current, LibraryModel::Role_SortText).toString();
+        if (!last_selected_container_.isEmpty() && last_selected_container_ == text) {
+          emit expand(current);
+          setCurrentIndex(current);
+          return true;
+        } else if (last_selected_path_.contains(text)) {
+          emit expand(current);
+          // If a selected container or song were not found, we've got into a wrong subtree
+          //  (happens with "unknown" all the time)
+          if (!RestoreLevelFocus(current)) {
+            emit collapse(current);
+          } else {
+            return true;
+          }
+        }
+        break;
+      }
+    }
+  }
+  return false;
+}
+
 void LibraryView::ReloadSettings() {
   QSettings s;
   s.beginGroup(kSettingsGroup);

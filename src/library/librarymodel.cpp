@@ -671,10 +671,11 @@ void LibraryModel::ResetAsyncQueryFinished() {
     init_task_id_ = -1;
   }
 
-  reset();
+  endResetModel();
 }
 
 void LibraryModel::BeginReset() {
+  beginResetModel();
   delete root_;
   song_nodes_.clear();
   container_nodes_[0].clear();
@@ -706,7 +707,7 @@ void LibraryModel::Reset() {
   // Populate top level
   LazyPopulate(root_, false);
 
-  reset();
+  endResetModel();
 }
 
 void LibraryModel::InitQuery(GroupBy type, LibraryQuery* q) {

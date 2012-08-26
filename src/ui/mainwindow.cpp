@@ -433,6 +433,8 @@ MainWindow::MainWindow(Application* app,
   connect(library_view_->view(), SIGNAL(AddToPlaylistSignal(QMimeData*)), SLOT(AddToPlaylist(QMimeData*)));
   connect(library_view_->view(), SIGNAL(ShowConfigDialog()), SLOT(ShowLibraryConfig()));
   connect(app_->library_model(), SIGNAL(TotalSongCountUpdated(int)), library_view_->view(), SLOT(TotalSongCountUpdated(int)));
+  connect(app_->library_model(), SIGNAL(modelAboutToBeReset()), library_view_->view(), SLOT(SaveFocus()));
+  connect(app_->library_model(), SIGNAL(modelReset()), library_view_->view(), SLOT(RestoreFocus()));
 
   connect(app_->task_manager(), SIGNAL(PauseLibraryWatchers()), app_->library(), SLOT(PauseWatcher()));
   connect(app_->task_manager(), SIGNAL(ResumeLibraryWatchers()), app_->library(), SLOT(ResumeWatcher()));
