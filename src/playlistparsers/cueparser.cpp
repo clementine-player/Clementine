@@ -29,7 +29,7 @@
 #include <QtDebug>
 
 const char* CueParser::kFileLineRegExp = "(\\S+)\\s+(?:\"([^\"]+)\"|(\\S+))\\s*(?:\"([^\"]+)\"|(\\S+))?";
-const char* CueParser::kIndexRegExp = "(\\d{2}):(\\d{2}):(\\d{2})";
+const char* CueParser::kIndexRegExp = "(\\d{2,3}):(\\d{2}):(\\d{2})";
 
 const char* CueParser::kPerformer = "performer";
 const char* CueParser::kTitle = "title";
