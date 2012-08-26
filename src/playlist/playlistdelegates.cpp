@@ -426,15 +426,21 @@ QWidget* TagCompletionItemDelegate::createEditor(
 }
 
 QString NativeSeparatorsDelegate::displayText(const QVariant& value, const QLocale&) const {
-  const QString text = value.toString();
-  if (text.contains("://")) {
-    const QUrl url = QUrl::fromEncoded(text.toAscii());
-    if (url.scheme() == "file") {
-      return QDir::toNativeSeparators(url.toLocalFile());
-    }
-    return text;
+  const QString string_value = value.toString();
+
+  QUrl url;
+  if (value.type() == QVariant::Url) {
+    url = value.toUrl();
+  } else if (string_value.contains("://")) {
+    url = QUrl::fromEncoded(string_value.toAscii());
+  } else {
+    return QDir::toNativeSeparators(string_value);
   }
-  return QDir::toNativeSeparators(text);
+
+  if (url.scheme() == "file") {
+    return QDir::toNativeSeparators(url.toLocalFile());
+  }
+  return string_value;
 }
 
 SongSourceDelegate::SongSourceDelegate(QObject* parent, Player* player)
