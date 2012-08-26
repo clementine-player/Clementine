@@ -248,14 +248,20 @@ void Player::Stop() {
 }
 
 void Player::Previous() {
-  int i = app_->playlist_manager()->active()->previous_row();
+  PreviousItem(Engine::Manual);  
+}
+
+void Player::PreviousItem(Engine::TrackChangeFlags change) {
+  const bool ignore_repeat_track = change & Engine::Manual;
+
+  int i = app_->playlist_manager()->active()->previous_row(ignore_repeat_track);
   app_->playlist_manager()->active()->set_current_row(i);
   if (i == -1) {
     Stop();
     return;
   }
 
-  PlayAt(i, Engine::Manual, false);
+  PlayAt(i, change, false);
 }
 
 void Player::EngineStateChanged(Engine::State state) {

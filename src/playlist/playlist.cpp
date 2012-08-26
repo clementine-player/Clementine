@@ -443,14 +443,14 @@ int Playlist::NextVirtualIndex(int i, bool ignore_repeat_track) const {
   return virtual_items_.count();
 }
 
-int Playlist::PreviousVirtualIndex(int i) const {
+int Playlist::PreviousVirtualIndex(int i, bool ignore_repeat_track) const {
   PlaylistSequence::RepeatMode repeat_mode = playlist_sequence_->repeat_mode();
   PlaylistSequence::ShuffleMode shuffle_mode = playlist_sequence_->shuffle_mode();
   bool album_only = repeat_mode == PlaylistSequence::Repeat_Album ||
                     shuffle_mode == PlaylistSequence::Shuffle_InsideAlbum;
 
   // This one's easy - if we have to repeat the current track then just return i
-  if (repeat_mode == PlaylistSequence::Repeat_Track) {
+  if (repeat_mode == PlaylistSequence::Repeat_Track && !ignore_repeat_track) {
     if (!FilterContainsVirtualIndex(i))
       return -1;
     return i;
@@ -517,8 +517,8 @@ int Playlist::next_row(bool ignore_repeat_track) const {
   return virtual_items_[next_virtual_index];
 }
 
-int Playlist::previous_row() const {
-  int prev_virtual_index = PreviousVirtualIndex(current_virtual_index_);
+int Playlist::previous_row(bool ignore_repeat_track) const {
+  int prev_virtual_index = PreviousVirtualIndex(current_virtual_index_,ignore_repeat_track);
   if (prev_virtual_index < 0) {
     // We've gone off the beginning of the playlist.
 
@@ -530,7 +530,7 @@ int Playlist::previous_row() const {
         break;
 
       default:
-        prev_virtual_index = PreviousVirtualIndex(virtual_items_.count());
+        prev_virtual_index = PreviousVirtualIndex(virtual_items_.count(),ignore_repeat_track);
         break;
     }
   }

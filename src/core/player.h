@@ -152,6 +152,7 @@ public slots:
   // Play the next item on the playlist - disregarding radio stations like
   // last.fm that might have more tracks.
   void NextItem(Engine::TrackChangeFlags change);
+  void PreviousItem(Engine::TrackChangeFlags change);
 
   void NextInternal(Engine::TrackChangeFlags);
 
