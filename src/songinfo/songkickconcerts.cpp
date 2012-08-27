@@ -56,6 +56,7 @@ void SongkickConcerts::ArtistSearchFinished(QNetworkReply* reply, int id) {
     Echonest::Artists artists = Echonest::Artist::parseSearch(reply);
     if (artists.isEmpty()) {
       qLog(Debug) << "Failed to find artist in echonest";
+      emit Finished(id);
       return;
     }
 
@@ -71,18 +72,21 @@ void SongkickConcerts::ArtistSearchFinished(QNetworkReply* reply, int id) {
 
     if (songkick_id.isEmpty()) {
       qLog(Debug) << "Failed to fetch songkick foreign id for artist";
+      emit Finished(id);
       return;
     }
 
     QStringList split = songkick_id.split(':');
     if (split.count() != 3) {
       qLog(Error) << "Weird songkick id";
+      emit Finished(id);
       return;
     }
 
     FetchSongkickCalendar(split[2], id);
   } catch (Echonest::ParseError& e) {
     qLog(Error) << "Error parsing echonest reply:" << e.errorType() << e.what();
+    emit Finished(id);
   }
 }
 
@@ -109,6 +113,7 @@ void SongkickConcerts::CalendarRequestFinished(QNetworkReply* reply, int id) {
 
   if (!ok) {
     qLog(Error) << "Error parsing Songkick reply";
+    emit Finished(id);
     return;
   }
 
@@ -120,6 +125,12 @@ void SongkickConcerts::CalendarRequestFinished(QNetworkReply* reply, int id) {
   QVariantMap results_page = root["resultsPage"].toMap();
   QVariantMap results = results_page["results"].toMap();
   QVariantList events = results["event"].toList();
+
+  if (events.isEmpty()) {
+    emit Finished(id);
+    return;
+  }
+
   foreach (const QVariant& v, events) {
     QVariantMap event = v.toMap();
     {
