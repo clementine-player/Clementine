@@ -23,7 +23,7 @@
       <number>0</number>
      </property>
      <item>
-      <widget class="QSearchField" name="search">
+      <widget class="QSearchField" name="search" native="true">
        <property name="placeholderText" stdset="0">
         <string>Search for anything</string>
        </property>
@@ -44,7 +44,7 @@
    <item>
     <widget class="QStackedWidget" name="results_stack">
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="results_page">
       <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -97,7 +97,7 @@
             <x>0</x>
             <y>0</y>
             <width>435</width>
-            <height>603</height>
+            <height>605</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_2">

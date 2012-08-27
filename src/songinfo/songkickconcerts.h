@@ -37,7 +37,6 @@ class SongkickConcerts : public SongInfoProvider {
  private slots:
   void ArtistSearchFinished(QNetworkReply* reply, int id);
   void CalendarRequestFinished(QNetworkReply* reply, int id);
-  void InjectImage(QNetworkReply* reply, SongInfoTextView* text_view);
   void GeolocateFinished(Geolocator::LatLng latlng);
 
  private:

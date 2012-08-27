@@ -126,6 +126,24 @@ QString Ago(int seconds_since_epoch, const QLocale& locale) {
   return then.date().toString(locale.dateFormat());
 }
 
+QString PrettyFutureDate(const QDate& date) {
+  const QDate now = QDate::currentDate();
+  const int delta_days = now.daysTo(date);
+
+  if (delta_days < 0)
+    return QString();
+  if (delta_days == 0)
+    return tr("Today");
+  if (delta_days == 1)
+    return tr("Tomorrow");
+  if (delta_days <= 7)
+    return tr("In %1 days").arg(delta_days);
+  if (delta_days <= 14)
+    return tr("Next week");
+
+  return tr("In %1 weeks").arg(delta_days / 7);
+}
+
 QString PrettySize(quint64 bytes) {
   QString ret;
 

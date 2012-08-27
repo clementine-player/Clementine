@@ -29,6 +29,9 @@ public:
   static const qreal kDefaultFontSize;
   static const char* kSettingsGroup;
 
+  static qreal FontSize();
+  static QFont Font();
+
   QSize sizeHint() const;
 
 public slots:

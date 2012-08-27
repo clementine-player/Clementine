@@ -41,6 +41,7 @@ namespace Utilities {
   QString WordyTime(quint64 seconds);
   QString WordyTimeNanosec(qint64 nanoseconds);
   QString Ago(int seconds_since_epoch, const QLocale& locale);
+  QString PrettyFutureDate(const QDate& date);
 
   QString ColorToRgba(const QColor& color);
 

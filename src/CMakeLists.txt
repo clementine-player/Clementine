@@ -282,6 +282,7 @@ set(SOURCES
   songinfo/songinfotextview.cpp
   songinfo/songinfoview.cpp
   songinfo/songkickconcerts.cpp
+  songinfo/songkickconcertwidget.cpp
   songinfo/songplaystats.cpp
   songinfo/ultimatelyricsprovider.cpp
   songinfo/ultimatelyricsreader.cpp
@@ -539,6 +540,7 @@ set(HEADERS
   songinfo/songinfotextview.h
   songinfo/songinfoview.h
   songinfo/songkickconcerts.h
+  songinfo/songkickconcertwidget.h
   songinfo/songplaystats.h
   songinfo/ultimatelyricsprovider.h
   songinfo/ultimatelyricsreader.h
@@ -652,6 +654,7 @@ set(UI
   smartplaylists/searchtermwidget.ui
   smartplaylists/wizardfinishpage.ui
 
+  songinfo/songkickconcertwidget.ui
   songinfo/songinfosettingspage.ui
 
   transcoder/transcodedialog.ui
