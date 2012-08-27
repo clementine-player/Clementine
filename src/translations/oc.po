@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-08-14 20:19+0000\n"
+"PO-Revision-Date: 2012-08-24 19:35+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -357,7 +357,7 @@ msgstr ""
 msgid "Add directory..."
 msgstr ""
 
-#: ui/mainwindow.cpp:1534
+#: ui/mainwindow.cpp:1536
 msgid "Add file"
 msgstr ""
 
@@ -369,7 +369,7 @@ msgstr "Seleccionar un fichièr vidèo..."
 msgid "Add files to transcode"
 msgstr ""
 
-#: ui/mainwindow.cpp:1562
+#: ui/mainwindow.cpp:1564
 msgid "Add folder"
 msgstr "Apondre un dorsièr"
 
@@ -457,7 +457,7 @@ msgstr ""
 msgid "Add to Grooveshark playlists"
 msgstr ""
 
-#: ui/mainwindow.cpp:1359
+#: ui/mainwindow.cpp:1361
 msgid "Add to another playlist"
 msgstr ""
 
@@ -648,7 +648,7 @@ msgid "Append files/URLs to the playlist"
 msgstr ""
 
 #: devices/deviceview.cpp:211 globalsearch/globalsearchview.cpp:412
-#: internet/internetservice.cpp:56 library/libraryview.cpp:262
+#: internet/internetservice.cpp:56 library/libraryview.cpp:367
 #: widgets/fileviewlist.cpp:32
 msgid "Append to current playlist"
 msgstr ""
@@ -899,7 +899,7 @@ msgstr ""
 msgid "Check for new episodes"
 msgstr ""
 
-#: ui/mainwindow.cpp:575
+#: ui/mainwindow.cpp:577
 msgid "Check for updates..."
 msgstr ""
 
@@ -978,6 +978,10 @@ msgid ""
 "a format that it can play."
 msgstr ""
 
+#: ../bin/src/ui_googledrivesettingspage.h:104
+msgid "Clementine can play music that you have uploaded to Google Drive"
+msgstr ""
+
 #: ../bin/src/ui_notificationssettingspage.h:403
 msgid "Clementine can show a message when the track changes."
 msgstr ""
@@ -1014,12 +1018,18 @@ msgstr ""
 msgid "Clementine will find music in:"
 msgstr ""
 
-#: library/libraryview.cpp:244
+#: library/libraryview.cpp:349
 msgid "Click here to add some music"
 msgstr ""
 
 #: ../bin/src/ui_trackslider.h:72
 msgid "Click to toggle between remaining time and total time"
+msgstr ""
+
+#: ../bin/src/ui_googledrivesettingspage.h:106
+msgid ""
+"Clicking the Login button will open a web browser.  You should return to "
+"Clementine after you have logged in."
 msgstr ""
 
 #: widgets/didyoumean.cpp:37
@@ -1102,7 +1112,7 @@ msgstr ""
 msgid "Configure global search..."
 msgstr ""
 
-#: ui/mainwindow.cpp:458
+#: ui/mainwindow.cpp:460
 msgid "Configure library..."
 msgstr ""
 
@@ -1112,6 +1122,7 @@ msgstr ""
 
 #: internet/digitallyimportedservicebase.cpp:185
 #: ../bin/src/ui_globalsearchsettingspage.h:150
+#: internet/googledriveservice.cpp:249
 msgid "Configure..."
 msgstr ""
 
@@ -1143,12 +1154,12 @@ msgstr ""
 msgid "Copy to clipboard"
 msgstr ""
 
-#: library/libraryview.cpp:284 ui/mainwindow.cpp:491
+#: library/libraryview.cpp:389 ui/mainwindow.cpp:493
 #: widgets/fileviewlist.cpp:44
 msgid "Copy to device..."
 msgstr ""
 
-#: devices/deviceview.cpp:218 ui/mainwindow.cpp:488
+#: devices/deviceview.cpp:218 ui/mainwindow.cpp:490
 #: widgets/fileviewlist.cpp:39
 msgid "Copy to library..."
 msgstr ""
@@ -1386,8 +1397,8 @@ msgstr ""
 msgid "Delete downloaded data"
 msgstr ""
 
-#: devices/deviceview.cpp:388 library/libraryview.cpp:503
-#: ui/mainwindow.cpp:1811 widgets/fileview.cpp:186
+#: devices/deviceview.cpp:388 library/libraryview.cpp:608
+#: ui/mainwindow.cpp:1813 widgets/fileview.cpp:186
 msgid "Delete files"
 msgstr ""
 
@@ -1395,7 +1406,7 @@ msgstr ""
 msgid "Delete from device..."
 msgstr ""
 
-#: library/libraryview.cpp:286 ui/mainwindow.cpp:492
+#: library/libraryview.cpp:391 ui/mainwindow.cpp:494
 #: widgets/fileviewlist.cpp:45
 msgid "Delete from disk..."
 msgstr ""
@@ -1408,7 +1419,7 @@ msgstr ""
 msgid "Delete preset"
 msgstr "Escafar un prereglatge"
 
-#: library/libraryview.cpp:278
+#: library/libraryview.cpp:383
 msgid "Delete smart playlist"
 msgstr ""
 
@@ -1420,11 +1431,11 @@ msgstr ""
 msgid "Deleting files"
 msgstr ""
 
-#: ui/mainwindow.cpp:1294
+#: ui/mainwindow.cpp:1296
 msgid "Dequeue selected tracks"
 msgstr ""
 
-#: ui/mainwindow.cpp:1292
+#: ui/mainwindow.cpp:1294
 msgid "Dequeue track"
 msgstr ""
 
@@ -1520,7 +1531,7 @@ msgstr ""
 msgid "Don't repeat"
 msgstr ""
 
-#: library/libraryview.cpp:300
+#: library/libraryview.cpp:405
 msgid "Don't show in various artists"
 msgstr ""
 
@@ -1622,11 +1633,11 @@ msgstr ""
 msgid "Dynamic random mix"
 msgstr ""
 
-#: library/libraryview.cpp:276
+#: library/libraryview.cpp:381
 msgid "Edit smart playlist..."
 msgstr ""
 
-#: ui/mainwindow.cpp:1327
+#: ui/mainwindow.cpp:1329
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr ""
@@ -1643,12 +1654,12 @@ msgstr ""
 msgid "Edit track information"
 msgstr ""
 
-#: library/libraryview.cpp:290 widgets/fileviewlist.cpp:50
+#: library/libraryview.cpp:395 widgets/fileviewlist.cpp:50
 #: ../bin/src/ui_mainwindow.h:662
 msgid "Edit track information..."
 msgstr ""
 
-#: library/libraryview.cpp:292
+#: library/libraryview.cpp:397
 msgid "Edit tracks information..."
 msgstr ""
 
@@ -1746,8 +1757,8 @@ msgid "Equivalent to --log-levels *:3"
 msgstr ""
 
 #: internet/groovesharkservice.cpp:1043
-#: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:497
-#: ui/mainwindow.cpp:1763 ui/mainwindow.cpp:1884
+#: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:602
+#: ui/mainwindow.cpp:1765 ui/mainwindow.cpp:1886
 msgid "Error"
 msgstr ""
 
@@ -2120,8 +2131,8 @@ msgstr ""
 msgid "Go to previous playlist tab"
 msgstr ""
 
-#: internet/googledriveservice.cpp:53
-#: ../bin/src/ui_googledrivesettingspage.h:82
+#: internet/googledriveservice.cpp:57
+#: ../bin/src/ui_googledrivesettingspage.h:103
 msgid "Google Drive"
 msgstr ""
 
@@ -2293,7 +2304,7 @@ msgstr ""
 msgid "Increase volume"
 msgstr "Augmentar lo volum"
 
-#: internet/googledriveservice.cpp:146
+#: internet/googledriveservice.cpp:175
 #, qt-format
 msgid "Indexing %1"
 msgstr ""
@@ -2518,7 +2529,7 @@ msgstr "Bibliotèca"
 msgid "Library advanced grouping"
 msgstr ""
 
-#: ui/mainwindow.cpp:2001
+#: ui/mainwindow.cpp:2003
 msgid "Library rescan notice"
 msgstr ""
 
@@ -2619,6 +2630,7 @@ msgstr ""
 #: ../bin/src/ui_magnatunesettingspage.h:164
 #: ../bin/src/ui_spotifysettingspage.h:212
 #: ../bin/src/ui_lastfmsettingspage.h:153
+#: ../bin/src/ui_googledrivesettingspage.h:105
 msgid "Login"
 msgstr ""
 
@@ -2806,7 +2818,7 @@ msgstr ""
 msgid "Move down"
 msgstr ""
 
-#: ui/mainwindow.cpp:489 widgets/fileviewlist.cpp:41
+#: ui/mainwindow.cpp:491 widgets/fileviewlist.cpp:41
 msgid "Move to library..."
 msgstr ""
 
@@ -2815,7 +2827,7 @@ msgstr ""
 msgid "Move up"
 msgstr ""
 
-#: transcoder/transcodedialog.cpp:216 ui/mainwindow.cpp:1536
+#: transcoder/transcodedialog.cpp:216 ui/mainwindow.cpp:1538
 msgid "Music"
 msgstr ""
 
@@ -2827,10 +2839,6 @@ msgstr "Discotèca"
 #: wiimotedev/wiimotesettingspage.cpp:105
 msgid "Mute"
 msgstr "Mut"
-
-#: internet/googledrivefoldermodel.cpp:31
-msgid "My Drive"
-msgstr ""
 
 #: globalsearch/lastfmsearchprovider.cpp:53 internet/lastfmservice.cpp:194
 msgid "My Last.fm Library"
@@ -2909,11 +2917,11 @@ msgstr ""
 msgid "Never start playing"
 msgstr ""
 
-#: ui/mainwindow.cpp:1376 ../bin/src/ui_mainwindow.h:693
+#: ui/mainwindow.cpp:1378 ../bin/src/ui_mainwindow.h:693
 msgid "New playlist"
 msgstr ""
 
-#: library/libraryview.cpp:274
+#: library/libraryview.cpp:379
 msgid "New smart playlist..."
 msgstr ""
 
@@ -2964,7 +2972,7 @@ msgstr ""
 msgid "None"
 msgstr "Pas cap"
 
-#: library/libraryview.cpp:498 ui/mainwindow.cpp:1764 ui/mainwindow.cpp:1885
+#: library/libraryview.cpp:603 ui/mainwindow.cpp:1766 ui/mainwindow.cpp:1887
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr ""
 
@@ -3074,8 +3082,12 @@ msgstr ""
 msgid "Open file..."
 msgstr ""
 
+#: internet/googledriveservice.cpp:245
+msgid "Open in Google Drive"
+msgstr ""
+
 #: devices/deviceview.cpp:215 globalsearch/globalsearchview.cpp:416
-#: internet/internetservice.cpp:76 library/libraryview.cpp:266
+#: internet/internetservice.cpp:76 library/libraryview.cpp:371
 #: widgets/fileviewlist.cpp:36 ../bin/src/ui_behavioursettingspage.h:195
 msgid "Open in new playlist"
 msgstr ""
@@ -3105,7 +3117,7 @@ msgstr ""
 msgid "Organise Files"
 msgstr ""
 
-#: library/libraryview.cpp:282 ui/mainwindow.cpp:490
+#: library/libraryview.cpp:387 ui/mainwindow.cpp:492
 msgid "Organise files..."
 msgstr ""
 
@@ -3161,7 +3173,7 @@ msgstr ""
 msgid "Password Protected"
 msgstr ""
 
-#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:831 ui/mainwindow.cpp:1217
+#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:833 ui/mainwindow.cpp:1219
 #: ui/qtsystemtrayicon.cpp:178 wiimotedev/wiimotesettingspage.cpp:106
 msgid "Pause"
 msgstr "Pausa"
@@ -3178,8 +3190,8 @@ msgstr "En pausa"
 msgid "Plain sidebar"
 msgstr ""
 
-#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:473 ui/mainwindow.cpp:799
-#: ui/mainwindow.cpp:818 ui/mainwindow.cpp:1220 ui/qtsystemtrayicon.cpp:166
+#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:475 ui/mainwindow.cpp:801
+#: ui/mainwindow.cpp:820 ui/mainwindow.cpp:1222 ui/qtsystemtrayicon.cpp:166
 #: ui/qtsystemtrayicon.cpp:192 ../bin/src/ui_mainwindow.h:643
 #: wiimotedev/wiimotesettingspage.cpp:101
 msgid "Play"
@@ -3255,7 +3267,7 @@ msgstr ""
 msgid "Playlists"
 msgstr ""
 
-#: ../data/oauthsuccess.html:34
+#: ../data/oauthsuccess.html:36
 msgid "Please close your browser and return to Clementine."
 msgstr ""
 
@@ -3400,12 +3412,12 @@ msgstr ""
 msgid "Queue Manager"
 msgstr ""
 
-#: ui/mainwindow.cpp:1298
+#: ui/mainwindow.cpp:1300
 msgid "Queue selected tracks"
 msgstr ""
 
-#: globalsearch/globalsearchview.cpp:420 library/libraryview.cpp:270
-#: ui/mainwindow.cpp:1296
+#: globalsearch/globalsearchview.cpp:420 library/libraryview.cpp:375
+#: ui/mainwindow.cpp:1298
 msgid "Queue track"
 msgstr ""
 
@@ -3573,7 +3585,7 @@ msgid "Repeat track"
 msgstr ""
 
 #: devices/deviceview.cpp:213 globalsearch/globalsearchview.cpp:414
-#: internet/internetservice.cpp:66 library/libraryview.cpp:264
+#: internet/internetservice.cpp:66 library/libraryview.cpp:369
 #: widgets/fileviewlist.cpp:34
 msgid "Replace current playlist"
 msgstr ""
@@ -3814,7 +3826,7 @@ msgstr ""
 msgid "Service offline"
 msgstr ""
 
-#: ui/mainwindow.cpp:1325
+#: ui/mainwindow.cpp:1327
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr ""
@@ -3882,7 +3894,7 @@ msgstr ""
 msgid "Show above status bar"
 msgstr ""
 
-#: ui/mainwindow.cpp:446
+#: ui/mainwindow.cpp:448
 msgid "Show all songs"
 msgstr ""
 
@@ -3902,12 +3914,12 @@ msgstr ""
 msgid "Show fullsize..."
 msgstr ""
 
-#: library/libraryview.cpp:294 ui/mainwindow.cpp:493
+#: library/libraryview.cpp:399 ui/mainwindow.cpp:495
 #: widgets/fileviewlist.cpp:52
 msgid "Show in file browser..."
 msgstr ""
 
-#: library/libraryview.cpp:298
+#: library/libraryview.cpp:403
 msgid "Show in various artists"
 msgstr ""
 
@@ -3915,11 +3927,11 @@ msgstr ""
 msgid "Show moodbar"
 msgstr ""
 
-#: ui/mainwindow.cpp:447
+#: ui/mainwindow.cpp:449
 msgid "Show only duplicates"
 msgstr ""
 
-#: ui/mainwindow.cpp:448
+#: ui/mainwindow.cpp:450
 msgid "Show only untagged"
 msgstr ""
 
@@ -4011,7 +4023,7 @@ msgstr ""
 msgid "Smart playlist"
 msgstr ""
 
-#: library/librarymodel.cpp:1155
+#: library/librarymodel.cpp:1156
 msgid "Smart playlists"
 msgstr ""
 
@@ -4132,7 +4144,7 @@ msgstr "Arrestar"
 msgid "Stop after"
 msgstr ""
 
-#: ui/mainwindow.cpp:475 ../bin/src/ui_mainwindow.h:651
+#: ui/mainwindow.cpp:477 ../bin/src/ui_mainwindow.h:651
 msgid "Stop after this track"
 msgstr ""
 
@@ -4164,7 +4176,7 @@ msgstr ""
 msgid "Subscribers"
 msgstr ""
 
-#: ../data/oauthsuccess.html:32
+#: ../data/oauthsuccess.html:34
 msgid "Success!"
 msgstr ""
 
@@ -4275,13 +4287,13 @@ msgstr ""
 msgid "The site you requested is not an image!"
 msgstr ""
 
-#: ui/mainwindow.cpp:1994
+#: ui/mainwindow.cpp:1996
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
 msgstr ""
 
-#: library/libraryview.cpp:424
+#: library/libraryview.cpp:529
 msgid "There are other songs in this album"
 msgstr ""
 
@@ -4310,7 +4322,7 @@ msgid ""
 "deleted:"
 msgstr ""
 
-#: library/libraryview.cpp:504 ui/mainwindow.cpp:1812 widgets/fileview.cpp:187
+#: library/libraryview.cpp:609 ui/mainwindow.cpp:1814 widgets/fileview.cpp:187
 msgid ""
 "These files will be deleted from disk, are you sure you want to continue?"
 msgstr ""
@@ -4421,7 +4433,7 @@ msgstr ""
 msgid "Toggle fullscreen"
 msgstr ""
 
-#: ui/mainwindow.cpp:1300
+#: ui/mainwindow.cpp:1302
 msgid "Toggle queue status"
 msgstr ""
 
@@ -4505,7 +4517,7 @@ msgid "Unable to download %1 (%2)"
 msgstr ""
 
 #: core/song.cpp:338 library/librarymodel.cpp:296 library/librarymodel.cpp:301
-#: library/librarymodel.cpp:953 playlist/playlistdelegates.cpp:309
+#: library/librarymodel.cpp:954 playlist/playlistdelegates.cpp:309
 #: playlist/playlistmanager.cpp:391 playlist/playlistmanager.cpp:394
 #: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:416
 #: ui/edittagdialog.cpp:457
@@ -4568,14 +4580,6 @@ msgstr ""
 
 #: library/librarywatcher.cpp:90
 msgid "Updating library"
-msgstr ""
-
-#: ../bin/src/ui_googledrivesettingspage.h:85
-msgid "Upload new songs to"
-msgstr ""
-
-#: ../bin/src/ui_googledrivesettingspage.h:83
-msgid "Uploads"
 msgstr ""
 
 #: core/commandlineoptions.cpp:144
@@ -4816,13 +4820,13 @@ msgstr ""
 msgid "Windows Media audio"
 msgstr ""
 
-#: library/libraryview.cpp:425
+#: library/libraryview.cpp:530
 msgid ""
 "Would you like to move the other songs in this album to Various Artists as "
 "well?"
 msgstr ""
 
-#: ui/mainwindow.cpp:1999
+#: ui/mainwindow.cpp:2001
 msgid "Would you like to run a full rescan right now?"
 msgstr ""
 
@@ -4890,12 +4894,6 @@ msgid ""
 "Clementine."
 msgstr ""
 
-#: ../bin/src/ui_googledrivesettingspage.h:84
-msgid ""
-"You can upload songs to Google Drive by right clicking and using \"Copy to "
-"device\"."
-msgstr ""
-
 #: ../bin/src/ui_wiimotesettingspage.h:184
 msgid ""
 "You can use your Wii Remote as a remote control for Clementine.  <a "
@@ -4954,7 +4952,7 @@ msgstr ""
 msgid "Your Magnatune credentials were incorrect"
 msgstr ""
 
-#: library/libraryview.cpp:238
+#: library/libraryview.cpp:343
 msgid "Your library is empty!"
 msgstr ""
 

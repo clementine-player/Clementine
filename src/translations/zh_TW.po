@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-08-14 20:19+0000\n"
+"PO-Revision-Date: 2012-08-24 19:34+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -359,7 +359,7 @@ msgstr "加入其它的網路串流"
 msgid "Add directory..."
 msgstr "加入目錄..."
 
-#: ui/mainwindow.cpp:1534
+#: ui/mainwindow.cpp:1536
 msgid "Add file"
 msgstr "加入檔案"
 
@@ -371,7 +371,7 @@ msgstr "加入檔案..."
 msgid "Add files to transcode"
 msgstr "加入檔案以轉碼"
 
-#: ui/mainwindow.cpp:1562
+#: ui/mainwindow.cpp:1564
 msgid "Add folder"
 msgstr "加入資料夾"
 
@@ -459,7 +459,7 @@ msgstr "加入到 Grooveshark 最愛"
 msgid "Add to Grooveshark playlists"
 msgstr "加入到 Grooveshark 播放清單"
 
-#: ui/mainwindow.cpp:1359
+#: ui/mainwindow.cpp:1361
 msgid "Add to another playlist"
 msgstr "加入到其他播放清單"
 
@@ -650,7 +650,7 @@ msgid "Append files/URLs to the playlist"
 msgstr "附加檔案或網址到播放清單"
 
 #: devices/deviceview.cpp:211 globalsearch/globalsearchview.cpp:412
-#: internet/internetservice.cpp:56 library/libraryview.cpp:262
+#: internet/internetservice.cpp:56 library/libraryview.cpp:367
 #: widgets/fileviewlist.cpp:32
 msgid "Append to current playlist"
 msgstr "附加到目前的播放清單"
@@ -901,7 +901,7 @@ msgstr ""
 msgid "Check for new episodes"
 msgstr "檢查是否有新的片斷內容"
 
-#: ui/mainwindow.cpp:575
+#: ui/mainwindow.cpp:577
 msgid "Check for updates..."
 msgstr "檢查更新..."
 
@@ -980,6 +980,10 @@ msgid ""
 "a format that it can play."
 msgstr "Clementine 可以自動轉換您複製到這個裝置的音樂為它可以播放的格式。"
 
+#: ../bin/src/ui_googledrivesettingspage.h:104
+msgid "Clementine can play music that you have uploaded to Google Drive"
+msgstr ""
+
 #: ../bin/src/ui_notificationssettingspage.h:403
 msgid "Clementine can show a message when the track changes."
 msgstr "當曲目變更時，Clementine 可以顯示一個訊息。"
@@ -1016,13 +1020,19 @@ msgstr "Clementine 無法搜尋到任何符合此檔案的結果"
 msgid "Clementine will find music in:"
 msgstr ""
 
-#: library/libraryview.cpp:244
+#: library/libraryview.cpp:349
 msgid "Click here to add some music"
 msgstr "點擊此處加入一些音樂"
 
 #: ../bin/src/ui_trackslider.h:72
 msgid "Click to toggle between remaining time and total time"
 msgstr "點擊以切換剩餘時間/全部時間"
+
+#: ../bin/src/ui_googledrivesettingspage.h:106
+msgid ""
+"Clicking the Login button will open a web browser.  You should return to "
+"Clementine after you have logged in."
+msgstr ""
 
 #: widgets/didyoumean.cpp:37
 msgid "Close"
@@ -1104,7 +1114,7 @@ msgstr "設定 Spotify..."
 msgid "Configure global search..."
 msgstr ""
 
-#: ui/mainwindow.cpp:458
+#: ui/mainwindow.cpp:460
 msgid "Configure library..."
 msgstr "設定音樂庫"
 
@@ -1114,6 +1124,7 @@ msgstr "設定 podcasts..."
 
 #: internet/digitallyimportedservicebase.cpp:185
 #: ../bin/src/ui_globalsearchsettingspage.h:150
+#: internet/googledriveservice.cpp:249
 msgid "Configure..."
 msgstr "設定..."
 
@@ -1145,12 +1156,12 @@ msgstr "轉換任何裝置無法播放的音樂"
 msgid "Copy to clipboard"
 msgstr "複製到剪貼簿"
 
-#: library/libraryview.cpp:284 ui/mainwindow.cpp:491
+#: library/libraryview.cpp:389 ui/mainwindow.cpp:493
 #: widgets/fileviewlist.cpp:44
 msgid "Copy to device..."
 msgstr "複製到裝置..."
 
-#: devices/deviceview.cpp:218 ui/mainwindow.cpp:488
+#: devices/deviceview.cpp:218 ui/mainwindow.cpp:490
 #: widgets/fileviewlist.cpp:39
 msgid "Copy to library..."
 msgstr "複製到音樂庫"
@@ -1388,8 +1399,8 @@ msgstr "刪除 Grooveshark 播放清單"
 msgid "Delete downloaded data"
 msgstr "刪除下載的資料"
 
-#: devices/deviceview.cpp:388 library/libraryview.cpp:503
-#: ui/mainwindow.cpp:1811 widgets/fileview.cpp:186
+#: devices/deviceview.cpp:388 library/libraryview.cpp:608
+#: ui/mainwindow.cpp:1813 widgets/fileview.cpp:186
 msgid "Delete files"
 msgstr "刪除檔案"
 
@@ -1397,7 +1408,7 @@ msgstr "刪除檔案"
 msgid "Delete from device..."
 msgstr "從裝置中刪除..."
 
-#: library/libraryview.cpp:286 ui/mainwindow.cpp:492
+#: library/libraryview.cpp:391 ui/mainwindow.cpp:494
 #: widgets/fileviewlist.cpp:45
 msgid "Delete from disk..."
 msgstr "從硬碟中刪除 ..."
@@ -1410,7 +1421,7 @@ msgstr "刪除播放過的片斷內容"
 msgid "Delete preset"
 msgstr "刪除預設"
 
-#: library/libraryview.cpp:278
+#: library/libraryview.cpp:383
 msgid "Delete smart playlist"
 msgstr "刪除智慧型播放清單"
 
@@ -1422,11 +1433,11 @@ msgstr "刪除原本的檔案"
 msgid "Deleting files"
 msgstr "檔案刪除中"
 
-#: ui/mainwindow.cpp:1294
+#: ui/mainwindow.cpp:1296
 msgid "Dequeue selected tracks"
 msgstr "將選取的歌曲移出佇列中"
 
-#: ui/mainwindow.cpp:1292
+#: ui/mainwindow.cpp:1294
 msgid "Dequeue track"
 msgstr "將歌曲移出佇列中"
 
@@ -1522,7 +1533,7 @@ msgstr "沒有轉換任何音樂"
 msgid "Don't repeat"
 msgstr "不要循環播放"
 
-#: library/libraryview.cpp:300
+#: library/libraryview.cpp:405
 msgid "Don't show in various artists"
 msgstr "不要顯示不同的演出者"
 
@@ -1624,11 +1635,11 @@ msgstr "動態模式開啟"
 msgid "Dynamic random mix"
 msgstr "動態隨機混合"
 
-#: library/libraryview.cpp:276
+#: library/libraryview.cpp:381
 msgid "Edit smart playlist..."
 msgstr "編輯智慧型播放清單..."
 
-#: ui/mainwindow.cpp:1327
+#: ui/mainwindow.cpp:1329
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "編輯標籤「%1」..."
@@ -1645,12 +1656,12 @@ msgstr "編輯標籤"
 msgid "Edit track information"
 msgstr "編輯歌曲資訊"
 
-#: library/libraryview.cpp:290 widgets/fileviewlist.cpp:50
+#: library/libraryview.cpp:395 widgets/fileviewlist.cpp:50
 #: ../bin/src/ui_mainwindow.h:662
 msgid "Edit track information..."
 msgstr "編輯歌曲資訊..."
 
-#: library/libraryview.cpp:292
+#: library/libraryview.cpp:397
 msgid "Edit tracks information..."
 msgstr "編輯音軌資訊..."
 
@@ -1748,8 +1759,8 @@ msgid "Equivalent to --log-levels *:3"
 msgstr ""
 
 #: internet/groovesharkservice.cpp:1043
-#: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:497
-#: ui/mainwindow.cpp:1763 ui/mainwindow.cpp:1884
+#: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:602
+#: ui/mainwindow.cpp:1765 ui/mainwindow.cpp:1886
 msgid "Error"
 msgstr "錯誤"
 
@@ -2122,8 +2133,8 @@ msgstr "到下一個播放清單分頁"
 msgid "Go to previous playlist tab"
 msgstr "到前一個播放清單分頁"
 
-#: internet/googledriveservice.cpp:53
-#: ../bin/src/ui_googledrivesettingspage.h:82
+#: internet/googledriveservice.cpp:57
+#: ../bin/src/ui_googledrivesettingspage.h:103
 msgid "Google Drive"
 msgstr ""
 
@@ -2295,7 +2306,7 @@ msgstr "增加音量4％"
 msgid "Increase volume"
 msgstr "提高音量"
 
-#: internet/googledriveservice.cpp:146
+#: internet/googledriveservice.cpp:175
 #, qt-format
 msgid "Indexing %1"
 msgstr ""
@@ -2520,7 +2531,7 @@ msgstr "音樂庫"
 msgid "Library advanced grouping"
 msgstr "音樂庫進階的歸類"
 
-#: ui/mainwindow.cpp:2001
+#: ui/mainwindow.cpp:2003
 msgid "Library rescan notice"
 msgstr "音樂庫重新掃描提示"
 
@@ -2621,6 +2632,7 @@ msgstr "載入檔案/網址，取代目前的播放清單"
 #: ../bin/src/ui_magnatunesettingspage.h:164
 #: ../bin/src/ui_spotifysettingspage.h:212
 #: ../bin/src/ui_lastfmsettingspage.h:153
+#: ../bin/src/ui_googledrivesettingspage.h:105
 msgid "Login"
 msgstr "登錄"
 
@@ -2808,7 +2820,7 @@ msgstr "掛載點"
 msgid "Move down"
 msgstr "下移"
 
-#: ui/mainwindow.cpp:489 widgets/fileviewlist.cpp:41
+#: ui/mainwindow.cpp:491 widgets/fileviewlist.cpp:41
 msgid "Move to library..."
 msgstr "移到音樂庫..."
 
@@ -2817,7 +2829,7 @@ msgstr "移到音樂庫..."
 msgid "Move up"
 msgstr "上移"
 
-#: transcoder/transcodedialog.cpp:216 ui/mainwindow.cpp:1536
+#: transcoder/transcodedialog.cpp:216 ui/mainwindow.cpp:1538
 msgid "Music"
 msgstr "音樂"
 
@@ -2829,10 +2841,6 @@ msgstr "音樂庫"
 #: wiimotedev/wiimotesettingspage.cpp:105
 msgid "Mute"
 msgstr "静音"
-
-#: internet/googledrivefoldermodel.cpp:31
-msgid "My Drive"
-msgstr ""
 
 #: globalsearch/lastfmsearchprovider.cpp:53 internet/lastfmservice.cpp:194
 msgid "My Last.fm Library"
@@ -2911,11 +2919,11 @@ msgstr "從未播放"
 msgid "Never start playing"
 msgstr "永不開始播放"
 
-#: ui/mainwindow.cpp:1376 ../bin/src/ui_mainwindow.h:693
+#: ui/mainwindow.cpp:1378 ../bin/src/ui_mainwindow.h:693
 msgid "New playlist"
 msgstr "新增播放清單"
 
-#: library/libraryview.cpp:274
+#: library/libraryview.cpp:379
 msgid "New smart playlist..."
 msgstr "新增智慧型播放清單"
 
@@ -2966,7 +2974,7 @@ msgstr "無短區塊"
 msgid "None"
 msgstr "沒有"
 
-#: library/libraryview.cpp:498 ui/mainwindow.cpp:1764 ui/mainwindow.cpp:1885
+#: library/libraryview.cpp:603 ui/mainwindow.cpp:1766 ui/mainwindow.cpp:1887
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "所選歌曲沒有適合複製到裝置的"
 
@@ -3076,8 +3084,12 @@ msgstr "開啟裝置"
 msgid "Open file..."
 msgstr "開啟檔案..."
 
+#: internet/googledriveservice.cpp:245
+msgid "Open in Google Drive"
+msgstr ""
+
 #: devices/deviceview.cpp:215 globalsearch/globalsearchview.cpp:416
-#: internet/internetservice.cpp:76 library/libraryview.cpp:266
+#: internet/internetservice.cpp:76 library/libraryview.cpp:371
 #: widgets/fileviewlist.cpp:36 ../bin/src/ui_behavioursettingspage.h:195
 msgid "Open in new playlist"
 msgstr "開啟在新的播放清單"
@@ -3107,7 +3119,7 @@ msgstr "選擇..."
 msgid "Organise Files"
 msgstr "組織檔案"
 
-#: library/libraryview.cpp:282 ui/mainwindow.cpp:490
+#: library/libraryview.cpp:387 ui/mainwindow.cpp:492
 msgid "Organise files..."
 msgstr "組織檔案..."
 
@@ -3163,7 +3175,7 @@ msgstr "密碼"
 msgid "Password Protected"
 msgstr "密碼保護"
 
-#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:831 ui/mainwindow.cpp:1217
+#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:833 ui/mainwindow.cpp:1219
 #: ui/qtsystemtrayicon.cpp:178 wiimotedev/wiimotesettingspage.cpp:106
 msgid "Pause"
 msgstr "暫停"
@@ -3180,8 +3192,8 @@ msgstr "已暫停"
 msgid "Plain sidebar"
 msgstr "樸素的側邊欄"
 
-#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:473 ui/mainwindow.cpp:799
-#: ui/mainwindow.cpp:818 ui/mainwindow.cpp:1220 ui/qtsystemtrayicon.cpp:166
+#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:475 ui/mainwindow.cpp:801
+#: ui/mainwindow.cpp:820 ui/mainwindow.cpp:1222 ui/qtsystemtrayicon.cpp:166
 #: ui/qtsystemtrayicon.cpp:192 ../bin/src/ui_mainwindow.h:643
 #: wiimotedev/wiimotesettingspage.cpp:101
 msgid "Play"
@@ -3257,7 +3269,7 @@ msgstr "播放清單類型"
 msgid "Playlists"
 msgstr "播放清單"
 
-#: ../data/oauthsuccess.html:34
+#: ../data/oauthsuccess.html:36
 msgid "Please close your browser and return to Clementine."
 msgstr ""
 
@@ -3402,12 +3414,12 @@ msgstr "查詢裝置..."
 msgid "Queue Manager"
 msgstr "佇列管理員"
 
-#: ui/mainwindow.cpp:1298
+#: ui/mainwindow.cpp:1300
 msgid "Queue selected tracks"
 msgstr "將選取的歌曲加入佇列中"
 
-#: globalsearch/globalsearchview.cpp:420 library/libraryview.cpp:270
-#: ui/mainwindow.cpp:1296
+#: globalsearch/globalsearchview.cpp:420 library/libraryview.cpp:375
+#: ui/mainwindow.cpp:1298
 msgid "Queue track"
 msgstr "將歌曲加入佇列中"
 
@@ -3575,7 +3587,7 @@ msgid "Repeat track"
 msgstr "循環播放單曲"
 
 #: devices/deviceview.cpp:213 globalsearch/globalsearchview.cpp:414
-#: internet/internetservice.cpp:66 library/libraryview.cpp:264
+#: internet/internetservice.cpp:66 library/libraryview.cpp:369
 #: widgets/fileviewlist.cpp:34
 msgid "Replace current playlist"
 msgstr "取代目前播放清單"
@@ -3816,7 +3828,7 @@ msgstr "序號"
 msgid "Service offline"
 msgstr "服務離線"
 
-#: ui/mainwindow.cpp:1325
+#: ui/mainwindow.cpp:1327
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "設定 %1 到「%2」..."
@@ -3884,7 +3896,7 @@ msgstr "顯示一個漂亮的螢幕顯示"
 msgid "Show above status bar"
 msgstr "顯示在狀態欄上方"
 
-#: ui/mainwindow.cpp:446
+#: ui/mainwindow.cpp:448
 msgid "Show all songs"
 msgstr "顯示所有歌曲"
 
@@ -3904,12 +3916,12 @@ msgstr "顯示分隔線"
 msgid "Show fullsize..."
 msgstr "全螢幕..."
 
-#: library/libraryview.cpp:294 ui/mainwindow.cpp:493
+#: library/libraryview.cpp:399 ui/mainwindow.cpp:495
 #: widgets/fileviewlist.cpp:52
 msgid "Show in file browser..."
 msgstr "在檔案瀏覽器顯示..."
 
-#: library/libraryview.cpp:298
+#: library/libraryview.cpp:403
 msgid "Show in various artists"
 msgstr "顯示各演出者"
 
@@ -3917,11 +3929,11 @@ msgstr "顯示各演出者"
 msgid "Show moodbar"
 msgstr ""
 
-#: ui/mainwindow.cpp:447
+#: ui/mainwindow.cpp:449
 msgid "Show only duplicates"
 msgstr "只顯示重複的"
 
-#: ui/mainwindow.cpp:448
+#: ui/mainwindow.cpp:450
 msgid "Show only untagged"
 msgstr "只顯示未標記的"
 
@@ -4013,7 +4025,7 @@ msgstr "小型測邊欄"
 msgid "Smart playlist"
 msgstr "智慧型播放清單"
 
-#: library/librarymodel.cpp:1155
+#: library/librarymodel.cpp:1156
 msgid "Smart playlists"
 msgstr "智慧型播放清單"
 
@@ -4134,7 +4146,7 @@ msgstr "停止"
 msgid "Stop after"
 msgstr ""
 
-#: ui/mainwindow.cpp:475 ../bin/src/ui_mainwindow.h:651
+#: ui/mainwindow.cpp:477 ../bin/src/ui_mainwindow.h:651
 msgid "Stop after this track"
 msgstr "在這首歌之後停止"
 
@@ -4166,7 +4178,7 @@ msgstr ""
 msgid "Subscribers"
 msgstr ""
 
-#: ../data/oauthsuccess.html:32
+#: ../data/oauthsuccess.html:34
 msgid "Success!"
 msgstr ""
 
@@ -4277,13 +4289,13 @@ msgstr "您要求的網站不存在！"
 msgid "The site you requested is not an image!"
 msgstr "您要求的網址不是一個圖片！"
 
-#: ui/mainwindow.cpp:1994
+#: ui/mainwindow.cpp:1996
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
 msgstr ""
 
-#: library/libraryview.cpp:424
+#: library/libraryview.cpp:529
 msgid "There are other songs in this album"
 msgstr "有其他歌曲在這張專輯中"
 
@@ -4312,7 +4324,7 @@ msgid ""
 "deleted:"
 msgstr ""
 
-#: library/libraryview.cpp:504 ui/mainwindow.cpp:1812 widgets/fileview.cpp:187
+#: library/libraryview.cpp:609 ui/mainwindow.cpp:1814 widgets/fileview.cpp:187
 msgid ""
 "These files will be deleted from disk, are you sure you want to continue?"
 msgstr ""
@@ -4423,7 +4435,7 @@ msgstr ""
 msgid "Toggle fullscreen"
 msgstr "切換全螢幕模式"
 
-#: ui/mainwindow.cpp:1300
+#: ui/mainwindow.cpp:1302
 msgid "Toggle queue status"
 msgstr "切換佇列狀態"
 
@@ -4507,7 +4519,7 @@ msgid "Unable to download %1 (%2)"
 msgstr ""
 
 #: core/song.cpp:338 library/librarymodel.cpp:296 library/librarymodel.cpp:301
-#: library/librarymodel.cpp:953 playlist/playlistdelegates.cpp:309
+#: library/librarymodel.cpp:954 playlist/playlistdelegates.cpp:309
 #: playlist/playlistmanager.cpp:391 playlist/playlistmanager.cpp:394
 #: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:416
 #: ui/edittagdialog.cpp:457
@@ -4571,14 +4583,6 @@ msgstr "更新 %1%..."
 #: library/librarywatcher.cpp:90
 msgid "Updating library"
 msgstr "正在更新音樂庫"
-
-#: ../bin/src/ui_googledrivesettingspage.h:85
-msgid "Upload new songs to"
-msgstr ""
-
-#: ../bin/src/ui_googledrivesettingspage.h:83
-msgid "Uploads"
-msgstr ""
 
 #: core/commandlineoptions.cpp:144
 msgid "Usage"
@@ -4818,13 +4822,13 @@ msgstr ""
 msgid "Windows Media audio"
 msgstr ""
 
-#: library/libraryview.cpp:425
+#: library/libraryview.cpp:530
 msgid ""
 "Would you like to move the other songs in this album to Various Artists as "
 "well?"
 msgstr ""
 
-#: ui/mainwindow.cpp:1999
+#: ui/mainwindow.cpp:2001
 msgid "Would you like to run a full rescan right now?"
 msgstr ""
 
@@ -4892,12 +4896,6 @@ msgid ""
 "Clementine."
 msgstr "您可以免費 scrobble 曲目，但只有 <span style=\" font-weight:600;\">付費用戶</span> 可以透過 Clementine 串流 Last.fm 電台。"
 
-#: ../bin/src/ui_googledrivesettingspage.h:84
-msgid ""
-"You can upload songs to Google Drive by right clicking and using \"Copy to "
-"device\"."
-msgstr ""
-
 #: ../bin/src/ui_wiimotesettingspage.h:184
 msgid ""
 "You can use your Wii Remote as a remote control for Clementine.  <a "
@@ -4956,7 +4954,7 @@ msgstr ""
 msgid "Your Magnatune credentials were incorrect"
 msgstr "您的 Magnatune 的憑證是不正確的"
 
-#: library/libraryview.cpp:238
+#: library/libraryview.cpp:343
 msgid "Your library is empty!"
 msgstr "您的音樂庫是空的！"
 
