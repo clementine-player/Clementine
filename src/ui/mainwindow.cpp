@@ -693,7 +693,7 @@ MainWindow::MainWindow(Application* app,
   if (!ui_->splitter->restoreState(settings_.value("splitter_state").toByteArray())) {
     ui_->splitter->setSizes(QList<int>() << 300 << width() - 300);
   }
-  ui_->tabs->SetCurrentIndex(settings_.value("current_tab", 0).toInt());
+  ui_->tabs->SetCurrentIndex(settings_.value("current_tab", 1 /* Library tab */ ).toInt());
   FancyTabWidget::Mode default_mode = FancyTabWidget::Mode_LargeSidebar;
   ui_->tabs->SetMode(FancyTabWidget::Mode(settings_.value(
       "tab_mode", default_mode).toInt()));
