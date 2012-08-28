@@ -213,6 +213,7 @@ set(SOURCES
   playlist/playlistbackend.cpp
   playlist/playlistcontainer.cpp
   playlist/playlistdelegates.cpp
+  playlist/playlistfilterparser.cpp
   playlist/playlistfilter.cpp
   playlist/playlistheader.cpp
   playlist/playlistitem.cpp
