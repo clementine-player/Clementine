@@ -191,6 +191,10 @@ WorkerPool<HandlerType>::~WorkerPool() {
       }
     }
   }
+
+  foreach (ReplyType* reply, message_queue_) {
+    reply->Abort();
+  }
 }
 
 template <typename HandlerType>
