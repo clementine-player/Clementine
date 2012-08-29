@@ -183,13 +183,13 @@ class FilterColumnTerm : public FilterTree {
 class NotFilter : public FilterTree {
  public:
   explicit NotFilter(const FilterTree* inv) : child_(inv) {}
-  virtual ~NotFilter() { delete child_; }
+
   virtual bool accept(int row, const QModelIndex& parent, const QAbstractItemModel* const model) const {
     return !child_->accept(row, parent, model);
   }
   virtual FilterType type() { return Not; }
  private:
-  const FilterTree* child_;
+  QScopedPointer<const FilterTree> child_;
 };
 
 class OrFilter : public FilterTree  {
@@ -224,7 +224,7 @@ class AndFilter : public FilterTree {
   QList<FilterTree*> children_;
 };
 
-FilterParser::FilterParser(const QString& filter, const QMap< QString, int >& columns, QSet< int > exact_cols)
+FilterParser::FilterParser(const QString& filter, const QMap<QString, int>& columns, const QSet<int>& exact_cols)
     : filterstring_(filter), columns_(columns), exact_columns_(exact_cols)
 {
 }

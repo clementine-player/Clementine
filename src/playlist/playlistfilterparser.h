@@ -64,7 +64,7 @@ class NopFilter : public FilterTree {
 //     col       ::= "title" | "artist" | ...
 class FilterParser {
  public:
-  FilterParser(const QString& filter, const QMap<QString, int>& columns, QSet<int> exact_cols);
+  FilterParser(const QString& filter, const QMap<QString, int>& columns, const QSet<int>& exact_cols);
 
   FilterTree* parse();
 
