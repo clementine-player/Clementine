@@ -38,10 +38,6 @@ void SoundCloudSearchProvider::Init(SoundCloudService* service) {
 
   connect(service_, SIGNAL(SimpleSearchResults(int, SongList)),
           SLOT(SearchDone(int, SongList)));
-  connect(service_, SIGNAL(AlbumSearchResult(int, QList<quint64>)),
-          SLOT(AlbumSearchResult(int, QList<quint64>)));
-  connect(service_, SIGNAL(AlbumSongsLoaded(quint64, SongList)),
-          SLOT(AlbumSongsLoaded(quint64, SongList)));
 
   cover_loader_options_.desired_height_ = kArtHeight;
   cover_loader_options_.pad_output_image_ = true;
