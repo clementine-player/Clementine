@@ -397,6 +397,10 @@ bool GlobalSearchView::SearchKeyEvent(QKeyEvent* event) {
     ui_->search->clear();
     break;
 
+  case Qt::Key_Return:
+    AddSelectedToPlaylist();
+    break;
+
   default:
     return false;
   }
