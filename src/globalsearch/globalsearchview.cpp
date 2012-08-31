@@ -349,6 +349,7 @@ MimeData* GlobalSearchView::SelectedMimeData() {
       QModelIndex index = front_proxy_->index(i, 0);
       if (!index.data(LibraryModel::Role_IsDivider).toBool()) {
         indexes << index;
+        ui_->results->setCurrentIndex(index);
         break;
       }
     }
