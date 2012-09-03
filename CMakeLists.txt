@@ -229,17 +229,17 @@ optional_component(SPOTIFY_BLOB ON "Spotify support: non-GPL binary helper"
   DEPENDS "libspotify" SPOTIFY_FOUND
 )
 
-# If we're building the spotify blob then we don't need qca2 for the core code
-if(HAVE_SPOTIFY_BLOB)
-  set(QCA_FOUND ON)
-elseif(QCA_FOUND)
-  set(HAVE_QCA ON)
-endif()
-
 optional_component(SPOTIFY ON "Spotify support: core code"
   DEPENDS "protobuf" PROTOBUF_FOUND PROTOBUF_PROTOC_EXECUTABLE
   DEPENDS "qca2" QCA_FOUND
 )
+
+# If we're building the spotify blob then we don't need qca2 for the core code
+if(HAVE_SPOTIFY_BLOB)
+  set(QCA_FOUND ON)
+elseif(QCA_FOUND AND HAVE_SPOTIFY)
+  set(HAVE_QCA ON)
+endif()
 
 optional_component(MOODBAR ON "Moodbar support"
   DEPENDS "fftw3" FFTW3_FOUND
