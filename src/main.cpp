@@ -71,7 +71,7 @@ using boost::scoped_ptr;
 
 #include <echonest/Config.h>
 
-#ifdef HAVE_QCA
+#ifdef HAVE_SPOTIFY_DOWNLOADER
   #include <QtCrypto>
 #endif
 
@@ -354,7 +354,7 @@ int main(int argc, char *argv[]) {
   }
 #endif
 
-#ifdef HAVE_QCA
+#ifdef HAVE_SPOTIFY_DOWNLOADER
   QCA::Initializer qca_initializer;
 #endif
 
