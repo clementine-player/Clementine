@@ -11,12 +11,12 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-08-25 10:09+0000\n"
+"PO-Revision-Date: 2012-08-28 14:59+0000\n"
 "Last-Translator: Fiodar Maroźka <fyodormorozko95@gmail.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: be\n"
-"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: ../bin/src/ui_podcastsettingspage.h:246
 msgid " days"
@@ -105,7 +105,7 @@ msgstr "%1 кампазыцый знойдзена (паказана %2)"
 #: playlist/playlistmanager.cpp:318
 #, qt-format
 msgid "%1 tracks"
-msgstr "%1 кампазыцый"
+msgstr "%1 трэкаў"
 
 #: ui/albumcovermanager.cpp:417
 #, qt-format
@@ -214,11 +214,11 @@ msgstr "&Выраўнаць слупкі па памеры вакна"
 
 #: ../bin/src/ui_mainwindow.h:718
 msgid "&Tools"
-msgstr "&Прылады"
+msgstr "&Iнструмэнты"
 
 #: ui/edittagdialog.cpp:48
 msgid "(different across multiple songs)"
-msgstr "розны праз некалькі кампазыцый"
+msgstr "(розны праз некалькі кампазыцый)"
 
 #: ui/about.cpp:76
 msgid "...and all the Amarok contributors"
@@ -269,7 +269,7 @@ msgid ""
 "A smart playlist is a dynamic list of songs that come from your library.  "
 "There are different types of smart playlist that offer different ways of "
 "selecting songs."
-msgstr "Разумны плэйліст - гэта дынамічны сьпіс кампазыцый з Вашай бібліятэкі. Існуюць розныя тыпы разумных плэйлістоў, якія прапануюць розныя спосабы выбару кампазыцый"
+msgstr "Смарт-плэйліст - гэта дынамічны сьпіс кампазыцый з Вашай бібліятэкі. Існуюць розныя тыпы смарт-плэйлістоў, якія прапануюць розныя спосабы выбару кампазыцый"
 
 #: smartplaylists/querywizardplugin.cpp:152
 msgid ""
@@ -494,7 +494,7 @@ msgstr "Дададзена за год"
 
 #: ../bin/src/ui_libraryfilterwidget.h:88
 msgid "Added today"
-msgstr "Дададзена сёння"
+msgstr "Дададзена сёньня"
 
 #: ../bin/src/ui_libraryfilterwidget.h:90
 #: ../bin/src/ui_libraryfilterwidget.h:92
@@ -689,7 +689,7 @@ msgstr "Выканаўца"
 
 #: ui/mainwindow.cpp:234
 msgid "Artist info"
-msgstr "Інфармацыя аб выканаўцы"
+msgstr "Пра Артыста"
 
 #: internet/lastfmservice.cpp:207
 msgid "Artist radio"
@@ -796,7 +796,7 @@ msgstr "Паводзіны"
 
 #: ../bin/src/ui_transcoderoptionsflac.h:83
 msgid "Best"
-msgstr "Найлепшы"
+msgstr "Найлепшая"
 
 #: songinfo/echonestbiographies.cpp:83
 #, qt-format
@@ -872,7 +872,7 @@ msgstr "Адмена"
 msgid "Change cover art"
 msgstr "Абярыце вокладку"
 
-#: songinfo/songinfotextview.cpp:77
+#: songinfo/songinfotextview.cpp:83
 msgid "Change font size..."
 msgstr "Зьмяніць памер шрыфту..."
 
@@ -1798,7 +1798,7 @@ msgstr "Памылка пры апрацоўке %1: %2"
 
 #: playlist/songloaderinserter.cpp:100
 msgid "Error while loading audio CD"
-msgstr "Памылка пры загрузке Аудыё CD"
+msgstr "Памылка пры загрузке Аўдыё CD"
 
 #: library/library.cpp:61
 msgid "Ever played"
@@ -1920,7 +1920,7 @@ msgstr "Улюбёныя трэкі"
 
 #: ../bin/src/ui_albumcovermanager.h:155
 msgid "Fetch Missing Covers"
-msgstr "Абярыце прапушчаныя вокладкі"
+msgstr "Запоўнiць пустыя вокладкi"
 
 #: ../bin/src/ui_albumcovermanager.h:150
 msgid "Fetch automatically"
@@ -2036,6 +2036,7 @@ msgstr "Калі выбраць \"Забыць прыладу\", то яна б�
 #: ../bin/src/ui_querysearchpage.h:112 ../bin/src/ui_querysortpage.h:136
 #: ../bin/src/ui_searchpreview.h:104 ../bin/src/ui_searchtermwidget.h:279
 #: ../bin/src/ui_wizardfinishpage.h:83
+#: ../bin/src/ui_songkickconcertwidget.h:100
 #: ../bin/src/ui_transcoderoptionsaac.h:128
 #: ../bin/src/ui_transcoderoptionsflac.h:80
 #: ../bin/src/ui_transcoderoptionsmp3.h:190
@@ -2280,6 +2281,16 @@ msgstr "Выявы (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm
 #: ui/albumcoverchoicecontroller.cpp:45
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgstr "Выявы (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
+
+#: core/utilities.cpp:140
+#, qt-format
+msgid "In %1 days"
+msgstr "Праз %1 дзён (дні)"
+
+#: core/utilities.cpp:144
+#, qt-format
+msgid "In %1 weeks"
+msgstr "Праз %1 тыдняў (тыдні)"
 
 #: ../bin/src/ui_wizardfinishpage.h:86
 msgid ""
@@ -2949,6 +2960,10 @@ msgstr "Далей"
 msgid "Next track"
 msgstr "Наступны трэк"
 
+#: core/utilities.cpp:142
+msgid "Next week"
+msgstr "На наступным тыдні"
+
 #: analyzers/analyzercontainer.cpp:80
 msgid "No analyzer"
 msgstr "Без аналізатару"
@@ -3067,7 +3082,7 @@ msgstr "Адчыніць %1 у браўзэры"
 
 #: ../bin/src/ui_mainwindow.h:679
 msgid "Open &audio CD..."
-msgstr "Адкрыць аўдыё-%дыск..."
+msgstr "Адкрыць аўдыё CD..."
 
 #: podcasts/addpodcastdialog.cpp:230
 msgid "Open OPML file"
@@ -3422,7 +3437,7 @@ msgstr "Дадаць абраныя трэкі ў чаргу"
 #: globalsearch/globalsearchview.cpp:420 library/libraryview.cpp:375
 #: ui/mainwindow.cpp:1298
 msgid "Queue track"
-msgstr "Дадаць ў чаргу трэк"
+msgstr "Дадаць у чаргу"
 
 #: ../bin/src/ui_playbacksettingspage.h:278
 msgid "Radio (equal loudness for all tracks)"
@@ -3717,7 +3732,7 @@ msgstr "Скробліць трэкі, якія я слухаю"
 #: ../bin/src/ui_gpoddersearchpage.h:78 ../bin/src/ui_itunessearchpage.h:78
 #: ../bin/src/ui_albumcoversearcher.h:114
 msgid "Search"
-msgstr "Шукаць"
+msgstr "Пошук"
 
 #: ../bin/src/ui_icecastfilterwidget.h:78
 msgid "Search Icecast stations"
@@ -3920,7 +3935,7 @@ msgstr "Паказаць поўны памер..."
 #: library/libraryview.cpp:399 ui/mainwindow.cpp:495
 #: widgets/fileviewlist.cpp:52
 msgid "Show in file browser..."
-msgstr "Паказаць ў аглядальніку файлаў"
+msgstr "Паказаць ў аглядчыку файлаў"
 
 #: library/libraryview.cpp:403
 msgid "Show in various artists"
@@ -4044,7 +4059,7 @@ msgstr "Інфармацыя аб кампазыцыі"
 
 #: ui/mainwindow.cpp:233
 msgid "Song info"
-msgstr "Зьвесткі аб кампазыцыі"
+msgstr "Пра Песьню"
 
 #: analyzers/sonogram.cpp:18
 msgid "Sonogram"
@@ -4424,7 +4439,7 @@ msgid ""
 "Grooveshark songs"
 msgstr "Каб уключыць радыё Grooveshark, трэба спачатку праслухаць некалькі іншых песень на гэтым сэрвісе"
 
-#: core/utilities.cpp:120
+#: core/utilities.cpp:120 core/utilities.cpp:136
 msgid "Today"
 msgstr "Сёньня"
 
@@ -4447,6 +4462,10 @@ msgstr "Укл/Выкл скроблінг"
 #: core/commandlineoptions.cpp:162
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Паказаць/Скрыць экраннае апавяшчэньне"
+
+#: core/utilities.cpp:138
+msgid "Tomorrow"
+msgstr "Заўтра"
 
 #: podcasts/podcasturlloader.cpp:114
 msgid "Too many redirects"
@@ -4543,7 +4562,7 @@ msgstr "Выдаліць вокладку"
 msgid "Unsubscribe"
 msgstr "Адпісацца"
 
-#: songinfo/songkickconcerts.cpp:177
+#: songinfo/songkickconcerts.cpp:167
 msgid "Upcoming Concerts"
 msgstr "Канцэрты, якія маюць адбыцца"
 
@@ -4660,7 +4679,7 @@ msgstr "Карыстальнік %1 ня мае акаўнту Grooveshark Anywh
 
 #: ui/settingsdialog.cpp:130
 msgid "User interface"
-msgstr "Карыстальніцкі інтэрфэйс"
+msgstr "Інтэрфэйс"
 
 #: ../bin/src/ui_groovesharksettingspage.h:114
 #: ../bin/src/ui_magnatunesettingspage.h:163

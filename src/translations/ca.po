@@ -4,17 +4,17 @@
 # 
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
-# Roger Pueyo Centelles <transifex@rogerpueyo.com>, 2011, 2012.
+# Roger Pueyo Centelles <transifex@rogerpueyo.com>, 2011-2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-08-24 19:34+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2012-09-02 10:01+0000\n"
+"Last-Translator: Roger Pueyo Centelles <transifex@rogerpueyo.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: ca\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../bin/src/ui_podcastsettingspage.h:246
 msgid " days"
@@ -501,7 +501,7 @@ msgstr "Afegit els ultims tres messos"
 
 #: internet/groovesharkservice.cpp:1421
 msgid "Adding song to My Music"
-msgstr ""
+msgstr "S'està afegint la cançó a La meva música"
 
 #: internet/groovesharkservice.cpp:1398
 msgid "Adding song to favorites"
@@ -870,7 +870,7 @@ msgstr "Canceŀla"
 msgid "Change cover art"
 msgstr "Canviar la imatge de la portada"
 
-#: songinfo/songinfotextview.cpp:77
+#: songinfo/songinfotextview.cpp:83
 msgid "Change font size..."
 msgstr "Canvieu la mida de la font"
 
@@ -1017,7 +1017,7 @@ msgstr "El Clementine no ha trobat resultats per a aquest fitxer"
 
 #: ../bin/src/ui_globalsearchview.h:210
 msgid "Clementine will find music in:"
-msgstr ""
+msgstr "El Clementine trobarà música a:"
 
 #: library/libraryview.cpp:349
 msgid "Click here to add some music"
@@ -1087,7 +1087,7 @@ msgstr "Compositor"
 #: internet/searchboxwidget.cpp:42
 #, qt-format
 msgid "Configure %1..."
-msgstr ""
+msgstr "Configura %1"
 
 #: internet/groovesharkservice.cpp:561
 msgid "Configure Grooveshark..."
@@ -1111,7 +1111,7 @@ msgstr "Configura l'Spotify..."
 
 #: globalsearch/globalsearchview.cpp:138 globalsearch/globalsearchview.cpp:425
 msgid "Configure global search..."
-msgstr ""
+msgstr "Configura la cerca global:"
 
 #: ui/mainwindow.cpp:460
 msgid "Configure library..."
@@ -2034,6 +2034,7 @@ msgstr "Oblidar un dispositiu l'eliminarà de la llista i Clementine haurà de t
 #: ../bin/src/ui_querysearchpage.h:112 ../bin/src/ui_querysortpage.h:136
 #: ../bin/src/ui_searchpreview.h:104 ../bin/src/ui_searchtermwidget.h:279
 #: ../bin/src/ui_wizardfinishpage.h:83
+#: ../bin/src/ui_songkickconcertwidget.h:100
 #: ../bin/src/ui_transcoderoptionsaac.h:128
 #: ../bin/src/ui_transcoderoptionsflac.h:80
 #: ../bin/src/ui_transcoderoptionsmp3.h:190
@@ -2135,7 +2136,7 @@ msgstr "Vés a la pestanya de l'anterior llista de reproducció"
 #: internet/googledriveservice.cpp:57
 #: ../bin/src/ui_googledrivesettingspage.h:103
 msgid "Google Drive"
-msgstr ""
+msgstr "Google Drive"
 
 #: covers/coversearchstatisticsdialog.cpp:54 ui/albumcovermanager.cpp:411
 #: ../bin/src/ui_coversearchstatisticsdialog.h:76
@@ -2279,6 +2280,16 @@ msgstr "Imatges (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgstr "Imatges (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 
+#: core/utilities.cpp:140
+#, qt-format
+msgid "In %1 days"
+msgstr "D'aquí a %1 dies"
+
+#: core/utilities.cpp:144
+#, qt-format
+msgid "In %1 weeks"
+msgstr "D'aquí a %1 setmanes"
+
 #: ../bin/src/ui_wizardfinishpage.h:86
 msgid ""
 "In dynamic mode new tracks will be chosen and added to the playlist every "
@@ -2308,7 +2319,7 @@ msgstr "Incrementa el volum"
 #: internet/googledriveservice.cpp:175
 #, qt-format
 msgid "Indexing %1"
-msgstr ""
+msgstr "S'està indexant %1"
 
 #: ../bin/src/ui_deviceproperties.h:373 wiimotedev/wiimotesettingspage.cpp:124
 msgid "Information"
@@ -2863,7 +2874,7 @@ msgstr "La meva Ràdio Mix"
 
 #: internet/groovesharkservice.cpp:617
 msgid "My Music"
-msgstr ""
+msgstr "La meva música"
 
 #: internet/lastfmservice.cpp:201
 msgid "My Neighborhood"
@@ -2946,6 +2957,10 @@ msgstr "Següent"
 #: wiimotedev/wiimotesettingspage.cpp:99
 msgid "Next track"
 msgstr "Pista següent"
+
+#: core/utilities.cpp:142
+msgid "Next week"
+msgstr "La setmana vinent"
 
 #: analyzers/analyzercontainer.cpp:80
 msgid "No analyzer"
@@ -3069,11 +3084,11 @@ msgstr "Obre un CD d'$àudio"
 
 #: podcasts/addpodcastdialog.cpp:230
 msgid "Open OPML file"
-msgstr ""
+msgstr "Obrir un fitxer OPML"
 
 #: podcasts/addpodcastdialog.cpp:73
 msgid "Open OPML file..."
-msgstr ""
+msgstr "Obre el fitxer OPML..."
 
 #: ../bin/src/ui_deviceproperties.h:382
 msgid "Open device"
@@ -3270,7 +3285,7 @@ msgstr "Llistes de reproducció"
 
 #: ../data/oauthsuccess.html:36
 msgid "Please close your browser and return to Clementine."
-msgstr ""
+msgstr "Si us plau tanqueu el navegador i torneu a Clementine."
 
 #: ../bin/src/ui_spotifysettingspage.h:215
 msgid "Plugin status:"
@@ -3518,7 +3533,7 @@ msgstr "Elimina acció"
 
 #: ../bin/src/ui_mainwindow.h:712
 msgid "Remove duplicates from playlist"
-msgstr ""
+msgstr "Esborra els duplicats de la llista de reproducció"
 
 #: ../bin/src/ui_librarysettingspage.h:160
 msgid "Remove folder"
@@ -3526,7 +3541,7 @@ msgstr "Suprimeix carpeta"
 
 #: internet/groovesharkservice.cpp:545
 msgid "Remove from My Music"
-msgstr ""
+msgstr "Esborra-ho de La meva música"
 
 #: internet/groovesharkservice.cpp:542
 msgid "Remove from favorites"
@@ -3542,11 +3557,11 @@ msgstr "Suprimeix la llista de reproducció"
 
 #: internet/groovesharkservice.cpp:1566
 msgid "Removing songs from My Music"
-msgstr ""
+msgstr "S'estan esborrant cançons de La meva música"
 
 #: internet/groovesharkservice.cpp:1516
 msgid "Removing songs from favorites"
-msgstr ""
+msgstr "S'estan treient les cançons dels preferits"
 
 #: internet/groovesharkservice.cpp:1364
 #, qt-format
@@ -3625,7 +3640,7 @@ msgstr "Limitar als caràcters ASCII"
 
 #: internet/groovesharkservice.cpp:778
 msgid "Retrieving Grooveshark My Music songs"
-msgstr ""
+msgstr "S'estan obtenint les cançons de La meva música de Grooveshark"
 
 #: internet/groovesharkservice.cpp:746
 msgid "Retrieving Grooveshark favorites songs"
@@ -3637,7 +3652,7 @@ msgstr ""
 
 #: ../data/oauthsuccess.html:3
 msgid "Return to Clementine"
-msgstr ""
+msgstr "Torna a Clementine"
 
 #: ui/equalizer.cpp:121
 msgid "Rock"
@@ -3756,7 +3771,7 @@ msgstr "Opcions de cerca"
 #: internet/groovesharkservice.cpp:578 internet/soundcloudservice.cpp:104
 #: internet/spotifyservice.cpp:343
 msgid "Search results"
-msgstr ""
+msgstr "Resultats de la cerca"
 
 #: smartplaylists/querywizardplugin.cpp:151
 #: ../bin/src/ui_querysearchpage.h:120
@@ -3938,7 +3953,7 @@ msgstr "Mostra només les pistes sense etiquetar"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:153
 msgid "Show search suggestions"
-msgstr ""
+msgstr "Mostra suggeriments de cerca"
 
 #: ../bin/src/ui_lastfmsettingspage.h:157
 msgid "Show the \"love\" and \"ban\" buttons"
@@ -4121,7 +4136,7 @@ msgstr "Inicia transcodificació"
 msgid ""
 "Start typing something on the search box above to fill this search results "
 "list"
-msgstr ""
+msgstr "Comenceu a escriure quelcom al quadre de cerca de dalt per omplir-ne la llista de resultats"
 
 #: transcoder/transcoder.cpp:401
 #, qt-format
@@ -4179,7 +4194,7 @@ msgstr "Subscriptors"
 
 #: ../data/oauthsuccess.html:34
 msgid "Success!"
-msgstr ""
+msgstr "Correcte!"
 
 #: transcoder/transcoder.cpp:200
 #, qt-format
@@ -4422,7 +4437,7 @@ msgid ""
 "Grooveshark songs"
 msgstr "Per iniciar la ràdio de Grooveshark, hauríeu de reproduir abans unes quantes cançons de Grooveshark"
 
-#: core/utilities.cpp:120
+#: core/utilities.cpp:120 core/utilities.cpp:136
 msgid "Today"
 msgstr "Avui"
 
@@ -4445,6 +4460,10 @@ msgstr ""
 #: core/commandlineoptions.cpp:162
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr ""
+
+#: core/utilities.cpp:138
+msgid "Tomorrow"
+msgstr "Demà"
 
 #: podcasts/podcasturlloader.cpp:114
 msgid "Too many redirects"
@@ -4541,7 +4560,7 @@ msgstr "Esborra'n la portada"
 msgid "Unsubscribe"
 msgstr "Canceleu la subscripció"
 
-#: songinfo/songkickconcerts.cpp:177
+#: songinfo/songkickconcerts.cpp:167
 msgid "Upcoming Concerts"
 msgstr ""
 
@@ -4581,7 +4600,7 @@ msgstr "Actualitzant %1%..."
 
 #: library/librarywatcher.cpp:90
 msgid "Updating library"
-msgstr "Actualitzant llibreria"
+msgstr "S'està actualitzant la biblioteca"
 
 #: core/commandlineoptions.cpp:144
 msgid "Usage"
@@ -4757,11 +4776,11 @@ msgstr ""
 
 #: ../bin/src/ui_globalsearchsettingspage.h:151
 msgid "When the list is empty..."
-msgstr ""
+msgstr "Quan la llista sigui buida..."
 
 #: ../bin/src/ui_globalsearchview.h:212
 msgid "Why not try..."
-msgstr ""
+msgstr "Perquè no proveu..."
 
 #: devices/ilister.cpp:121
 msgid "WiFi MAC Address"
@@ -5133,7 +5152,7 @@ msgstr "els més petits primer"
 
 #: playlist/playlistundocommands.cpp:131
 msgid "sort songs"
-msgstr ""
+msgstr "ordena les cançons"
 
 #: smartplaylists/searchterm.cpp:214
 msgid "starts with"

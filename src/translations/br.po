@@ -10,12 +10,12 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-08-24 19:35+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2012-08-27 15:13+0000\n"
+"Last-Translator: Belvar <glasbarg@gmail.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: br\n"
-"Plural-Forms: nplurals=2; plural=(n > 1)\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: ../bin/src/ui_podcastsettingspage.h:246
 msgid " days"
@@ -853,7 +853,7 @@ msgstr "Ar mamennoù-se a zo diweredekaet :"
 
 #: ../bin/src/ui_wiimotesettingspage.h:192
 msgid "Buttons"
-msgstr "Nozelioù"
+msgstr "Boutonoù"
 
 #: core/song.cpp:332
 msgid "CDDA"
@@ -871,7 +871,7 @@ msgstr "Nullañ"
 msgid "Change cover art"
 msgstr "Kemmañ golo an albom"
 
-#: songinfo/songinfotextview.cpp:77
+#: songinfo/songinfotextview.cpp:83
 msgid "Change font size..."
 msgstr "Kemmañ ment ar font..."
 
@@ -982,7 +982,7 @@ msgstr "Clementine a c'hell amdreiñ ar sonerezh eilet ganeoc'h war an drobarzhe
 
 #: ../bin/src/ui_googledrivesettingspage.h:104
 msgid "Clementine can play music that you have uploaded to Google Drive"
-msgstr ""
+msgstr "Gouest eo Clementine da lenn sonerezh bet lakaet war Google Drive."
 
 #: ../bin/src/ui_notificationssettingspage.h:403
 msgid "Clementine can show a message when the track changes."
@@ -1032,7 +1032,7 @@ msgstr "Klikit evit kemmañ etre an amzer a chom hag an amzer total"
 msgid ""
 "Clicking the Login button will open a web browser.  You should return to "
 "Clementine after you have logged in."
-msgstr ""
+msgstr "Pouezhit war ar bouton Login evit digeriñ ur merdeer web. Ret e vo deoc'h distreiñ war Clementine ur wech kenasket."
 
 #: widgets/didyoumean.cpp:37
 msgid "Close"
@@ -2035,6 +2035,7 @@ msgstr "Disoñjal un drobarzhell a ziverk anezhi eus al listenn-mañ ha rediet e
 #: ../bin/src/ui_querysearchpage.h:112 ../bin/src/ui_querysortpage.h:136
 #: ../bin/src/ui_searchpreview.h:104 ../bin/src/ui_searchtermwidget.h:279
 #: ../bin/src/ui_wizardfinishpage.h:83
+#: ../bin/src/ui_songkickconcertwidget.h:100
 #: ../bin/src/ui_transcoderoptionsaac.h:128
 #: ../bin/src/ui_transcoderoptionsflac.h:80
 #: ../bin/src/ui_transcoderoptionsmp3.h:190
@@ -2136,7 +2137,7 @@ msgstr "Mont d'ar roll seniñ a-raok"
 #: internet/googledriveservice.cpp:57
 #: ../bin/src/ui_googledrivesettingspage.h:103
 msgid "Google Drive"
-msgstr ""
+msgstr "Google Drive"
 
 #: covers/coversearchstatisticsdialog.cpp:54 ui/albumcovermanager.cpp:411
 #: ../bin/src/ui_coversearchstatisticsdialog.h:76
@@ -2280,6 +2281,16 @@ msgstr "Skeudennoù (*.png, *.jpg, *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgstr "Skeudennoù (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 
+#: core/utilities.cpp:140
+#, qt-format
+msgid "In %1 days"
+msgstr "A-benn %1 deizh"
+
+#: core/utilities.cpp:144
+#, qt-format
+msgid "In %1 weeks"
+msgstr "A-benn %1 sizhun"
+
 #: ../bin/src/ui_wizardfinishpage.h:86
 msgid ""
 "In dynamic mode new tracks will be chosen and added to the playlist every "
@@ -2309,7 +2320,7 @@ msgstr "Uhelaat an ampled"
 #: internet/googledriveservice.cpp:175
 #, qt-format
 msgid "Indexing %1"
-msgstr ""
+msgstr "Menegeradur %1"
 
 #: ../bin/src/ui_deviceproperties.h:373 wiimotedev/wiimotesettingspage.cpp:124
 msgid "Information"
@@ -2398,14 +2409,14 @@ msgstr "Mont d'ar roud lennet bremañ"
 #: wiimotedev/wiimoteshortcutgrabber.cpp:72
 #, qt-format
 msgid "Keep buttons for %1 second..."
-msgstr "Pouezhit war ar boutoñs e-pad %1 eilenn..."
+msgstr "Pouezhit war ar bouton e-pad %1 eilenn..."
 
 #: ../bin/src/ui_wiimoteshortcutgrabber.h:127
 #: wiimotedev/wiimoteshortcutgrabber.cpp:73
 #: wiimotedev/wiimoteshortcutgrabber.cpp:117
 #, qt-format
 msgid "Keep buttons for %1 seconds..."
-msgstr "Pouezhit war ar boutoñs e-pad %1 eilenn..."
+msgstr "Pouezhit war ar boutoñn e-pad %1 eilenn..."
 
 #: ../bin/src/ui_behavioursettingspage.h:171
 msgid "Keep running in the background when the window is closed"
@@ -2948,6 +2959,10 @@ msgstr "Da-heul"
 msgid "Next track"
 msgstr "Roud o tont"
 
+#: core/utilities.cpp:142
+msgid "Next week"
+msgstr "Ar sizhun a-zeu"
+
 #: analyzers/analyzercontainer.cpp:80
 msgid "No analyzer"
 msgstr "Dezrannerez ebet"
@@ -3086,7 +3101,7 @@ msgstr "Digeriñ ur restr..."
 
 #: internet/googledriveservice.cpp:245
 msgid "Open in Google Drive"
-msgstr ""
+msgstr "Digeriñ e-barzh Google Drive"
 
 #: devices/deviceview.cpp:215 globalsearch/globalsearchview.cpp:416
 #: internet/internetservice.cpp:76 library/libraryview.cpp:371
@@ -3271,7 +3286,7 @@ msgstr "Rolloù seniñ"
 
 #: ../data/oauthsuccess.html:36
 msgid "Please close your browser and return to Clementine."
-msgstr ""
+msgstr "Klozit ho merdeer ha deuit en-dro war Clementine mar plij."
 
 #: ../bin/src/ui_spotifysettingspage.h:215
 msgid "Plugin status:"
@@ -3392,7 +3407,7 @@ msgstr "Enraog"
 #: ../bin/src/ui_wiimoteshortcutgrabber.h:125
 #: wiimotedev/wiimotesettingspage.cpp:227
 msgid "Push Wiiremote button"
-msgstr "Pouezit war afell ar Wiiremote"
+msgstr "Pouezit war bouton ar Wiiremote"
 
 #: ../bin/src/ui_querysortpage.h:138
 msgid "Put songs in a random order"
@@ -3638,7 +3653,7 @@ msgstr "O taspugnat rolloù seniñ Grooveshark"
 
 #: ../data/oauthsuccess.html:3
 msgid "Return to Clementine"
-msgstr ""
+msgstr "Distreiñ war Clementine"
 
 #: ui/equalizer.cpp:121
 msgid "Rock"
@@ -3943,7 +3958,7 @@ msgstr "Diskouez alioù enklask."
 
 #: ../bin/src/ui_lastfmsettingspage.h:157
 msgid "Show the \"love\" and \"ban\" buttons"
-msgstr "Diskouez ar boutonioù \"karout\" ha \"skarzhañ\""
+msgstr "Diskouez ar boutonoù \"karout\" ha \"skarzhañ\""
 
 #: ../bin/src/ui_lastfmsettingspage.h:158
 msgid "Show the scrobble button in the main window"
@@ -4180,7 +4195,7 @@ msgstr "Koumananterien"
 
 #: ../data/oauthsuccess.html:34
 msgid "Success!"
-msgstr ""
+msgstr "Berzh !"
 
 #: transcoder/transcoder.cpp:200
 #, qt-format
@@ -4423,7 +4438,7 @@ msgid ""
 "Grooveshark songs"
 msgstr "Evit kregiñ ur skingomz Grooveshark, gwelloc'h vefe deoc'h selaou ouzh un nebeud tonioù Grooveshark all"
 
-#: core/utilities.cpp:120
+#: core/utilities.cpp:120 core/utilities.cpp:136
 msgid "Today"
 msgstr "Hiziv"
 
@@ -4446,6 +4461,10 @@ msgstr "Cheñch ar scrobbling"
 #: core/commandlineoptions.cpp:162
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Gweredekaat/Diweredekaat an OSD brav"
+
+#: core/utilities.cpp:138
+msgid "Tomorrow"
+msgstr "Warc'hoaz"
 
 #: podcasts/podcasturlloader.cpp:114
 msgid "Too many redirects"
@@ -4542,7 +4561,7 @@ msgstr "Ar golo n'eo ket bet lakaet"
 msgid "Unsubscribe"
 msgstr "Digoumanantiñ"
 
-#: songinfo/songkickconcerts.cpp:177
+#: songinfo/songkickconcerts.cpp:167
 msgid "Upcoming Concerts"
 msgstr "Sonadegoù o-tont"
 

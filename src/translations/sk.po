@@ -9,12 +9,12 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-08-25 08:03+0000\n"
+"PO-Revision-Date: 2012-08-28 07:09+0000\n"
 "Last-Translator: Ján Ďanovský <dagsoftware@yahoo.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: sk\n"
-"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
 #: ../bin/src/ui_podcastsettingspage.h:246
 msgid " days"
@@ -870,7 +870,7 @@ msgstr "Zrušiť"
 msgid "Change cover art"
 msgstr "Zmeniť obal albumu"
 
-#: songinfo/songinfotextview.cpp:77
+#: songinfo/songinfotextview.cpp:83
 msgid "Change font size..."
 msgstr "Zmeniť veľkosť písma..."
 
@@ -2034,6 +2034,7 @@ msgstr "Zabudnutie zariadenia ho odstráni z tohto zoznamu a Clementine bude mus
 #: ../bin/src/ui_querysearchpage.h:112 ../bin/src/ui_querysortpage.h:136
 #: ../bin/src/ui_searchpreview.h:104 ../bin/src/ui_searchtermwidget.h:279
 #: ../bin/src/ui_wizardfinishpage.h:83
+#: ../bin/src/ui_songkickconcertwidget.h:100
 #: ../bin/src/ui_transcoderoptionsaac.h:128
 #: ../bin/src/ui_transcoderoptionsflac.h:80
 #: ../bin/src/ui_transcoderoptionsmp3.h:190
@@ -2278,6 +2279,16 @@ msgstr "Obrázky (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
 #: ui/albumcoverchoicecontroller.cpp:45
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgstr "Obrázky (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
+
+#: core/utilities.cpp:140
+#, qt-format
+msgid "In %1 days"
+msgstr "Za %1 dní"
+
+#: core/utilities.cpp:144
+#, qt-format
+msgid "In %1 weeks"
+msgstr "Za %1 týždňov"
 
 #: ../bin/src/ui_wizardfinishpage.h:86
 msgid ""
@@ -2946,6 +2957,10 @@ msgstr "Ďalšia"
 #: wiimotedev/wiimotesettingspage.cpp:99
 msgid "Next track"
 msgstr "Nasledujúca skladba"
+
+#: core/utilities.cpp:142
+msgid "Next week"
+msgstr "Budúci týždeň"
 
 #: analyzers/analyzercontainer.cpp:80
 msgid "No analyzer"
@@ -4422,7 +4437,7 @@ msgid ""
 "Grooveshark songs"
 msgstr "Pred spustením Grooveshark rádia, by ste si mali najprv vypočuť niekoľko ďalších Grooveshark piesní"
 
-#: core/utilities.cpp:120
+#: core/utilities.cpp:120 core/utilities.cpp:136
 msgid "Today"
 msgstr "Dnes"
 
@@ -4445,6 +4460,10 @@ msgstr "Prepnúť skroblovanie"
 #: core/commandlineoptions.cpp:162
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Prepnúť viditeľnosť Krásneho OSD"
+
+#: core/utilities.cpp:138
+msgid "Tomorrow"
+msgstr "Zajtra"
 
 #: podcasts/podcasturlloader.cpp:114
 msgid "Too many redirects"
@@ -4541,7 +4560,7 @@ msgstr "Nenastavený obal"
 msgid "Unsubscribe"
 msgstr "Zrušiť predplatné"
 
-#: songinfo/songkickconcerts.cpp:177
+#: songinfo/songkickconcerts.cpp:167
 msgid "Upcoming Concerts"
 msgstr "Pripravované koncerty"
 

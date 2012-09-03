@@ -21,12 +21,12 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-08-24 19:35+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2012-09-01 20:43+0000\n"
+"Last-Translator: janlaymann <janlaymann@googlemail.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: de\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../bin/src/ui_podcastsettingspage.h:246
 msgid " days"
@@ -882,7 +882,7 @@ msgstr "Abbrechen"
 msgid "Change cover art"
 msgstr "Cover ändern"
 
-#: songinfo/songinfotextview.cpp:77
+#: songinfo/songinfotextview.cpp:83
 msgid "Change font size..."
 msgstr "Schriftgröße ändern..."
 
@@ -993,7 +993,7 @@ msgstr "Clementine kann die Musik, die Sie auf dieses Gerät kopieren, automatis
 
 #: ../bin/src/ui_googledrivesettingspage.h:104
 msgid "Clementine can play music that you have uploaded to Google Drive"
-msgstr ""
+msgstr "Clementine kann Musik abspielen, die Sie auf Google Drive hochgeladen haben."
 
 #: ../bin/src/ui_notificationssettingspage.h:403
 msgid "Clementine can show a message when the track changes."
@@ -1043,7 +1043,7 @@ msgstr "Klicke um zwischen verbleibender und Gesamtzeit zu wechseln"
 msgid ""
 "Clicking the Login button will open a web browser.  You should return to "
 "Clementine after you have logged in."
-msgstr ""
+msgstr "Durch klicken auf die Schaltfläche wird ein Webbrowser geöffnet. Bitte kehren Sie nach dem einloggen zu Clementine zurück."
 
 #: widgets/didyoumean.cpp:37
 msgid "Close"
@@ -2046,6 +2046,7 @@ msgstr "Das Vergessen eines Geräts wird es aus dieser Liste entfernen und Cleme
 #: ../bin/src/ui_querysearchpage.h:112 ../bin/src/ui_querysortpage.h:136
 #: ../bin/src/ui_searchpreview.h:104 ../bin/src/ui_searchtermwidget.h:279
 #: ../bin/src/ui_wizardfinishpage.h:83
+#: ../bin/src/ui_songkickconcertwidget.h:100
 #: ../bin/src/ui_transcoderoptionsaac.h:128
 #: ../bin/src/ui_transcoderoptionsflac.h:80
 #: ../bin/src/ui_transcoderoptionsmp3.h:190
@@ -2147,7 +2148,7 @@ msgstr "Zum vorherigen Wiedergabeliste-Tab wechseln"
 #: internet/googledriveservice.cpp:57
 #: ../bin/src/ui_googledrivesettingspage.h:103
 msgid "Google Drive"
-msgstr ""
+msgstr "Google Drive"
 
 #: covers/coversearchstatisticsdialog.cpp:54 ui/albumcovermanager.cpp:411
 #: ../bin/src/ui_coversearchstatisticsdialog.h:76
@@ -2291,6 +2292,16 @@ msgstr "Bilder (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgstr "Bilder (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 
+#: core/utilities.cpp:140
+#, qt-format
+msgid "In %1 days"
+msgstr "In %1 Tagen"
+
+#: core/utilities.cpp:144
+#, qt-format
+msgid "In %1 weeks"
+msgstr "In %1 Wochen"
+
 #: ../bin/src/ui_wizardfinishpage.h:86
 msgid ""
 "In dynamic mode new tracks will be chosen and added to the playlist every "
@@ -2320,7 +2331,7 @@ msgstr "Lautstärke erhöhen"
 #: internet/googledriveservice.cpp:175
 #, qt-format
 msgid "Indexing %1"
-msgstr ""
+msgstr "Indizierung %1"
 
 #: ../bin/src/ui_deviceproperties.h:373 wiimotedev/wiimotesettingspage.cpp:124
 msgid "Information"
@@ -2959,6 +2970,10 @@ msgstr "Weiter"
 msgid "Next track"
 msgstr "Nächstes Stück"
 
+#: core/utilities.cpp:142
+msgid "Next week"
+msgstr "Nächste Woche"
+
 #: analyzers/analyzercontainer.cpp:80
 msgid "No analyzer"
 msgstr "Keine Visualisierung"
@@ -3097,7 +3112,7 @@ msgstr "Datei öffnen..."
 
 #: internet/googledriveservice.cpp:245
 msgid "Open in Google Drive"
-msgstr ""
+msgstr "In Google Drive öffnen"
 
 #: devices/deviceview.cpp:215 globalsearch/globalsearchview.cpp:416
 #: internet/internetservice.cpp:76 library/libraryview.cpp:371
@@ -3282,7 +3297,7 @@ msgstr "Wiedergabelisten"
 
 #: ../data/oauthsuccess.html:36
 msgid "Please close your browser and return to Clementine."
-msgstr ""
+msgstr "Bitte Browser schließen und zu Clementine zurück kehren"
 
 #: ../bin/src/ui_spotifysettingspage.h:215
 msgid "Plugin status:"
@@ -3530,7 +3545,7 @@ msgstr "Aktion entfernen"
 
 #: ../bin/src/ui_mainwindow.h:712
 msgid "Remove duplicates from playlist"
-msgstr ""
+msgstr "Duplikate aus der Wiedergabeliste entfernen"
 
 #: ../bin/src/ui_librarysettingspage.h:160
 msgid "Remove folder"
@@ -3649,7 +3664,7 @@ msgstr "Rufe Grooveshark-Wiedergabelisten ab"
 
 #: ../data/oauthsuccess.html:3
 msgid "Return to Clementine"
-msgstr ""
+msgstr "Zu Clementine zurückkehren"
 
 #: ui/equalizer.cpp:121
 msgid "Rock"
@@ -4191,7 +4206,7 @@ msgstr "Abonnenten"
 
 #: ../data/oauthsuccess.html:34
 msgid "Success!"
-msgstr ""
+msgstr "Erfolg!"
 
 #: transcoder/transcoder.cpp:200
 #, qt-format
@@ -4434,7 +4449,7 @@ msgid ""
 "Grooveshark songs"
 msgstr "Bevor Sie das Grooveshark-Radio verwenden, sollten Sie zuerst ein paar andere Titel auf Grooveshark hören."
 
-#: core/utilities.cpp:120
+#: core/utilities.cpp:120 core/utilities.cpp:136
 msgid "Today"
 msgstr "Heute"
 
@@ -4457,6 +4472,10 @@ msgstr "Scrobbeln ein- oder ausschalten"
 #: core/commandlineoptions.cpp:162
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Sichtbarkeit des Clementine-OSD anpassen"
+
+#: core/utilities.cpp:138
+msgid "Tomorrow"
+msgstr "Morgen"
 
 #: podcasts/podcasturlloader.cpp:114
 msgid "Too many redirects"
@@ -4553,7 +4572,7 @@ msgstr "Cover entfernen"
 msgid "Unsubscribe"
 msgstr "Abonnement kündigen"
 
-#: songinfo/songkickconcerts.cpp:177
+#: songinfo/songkickconcerts.cpp:167
 msgid "Upcoming Concerts"
 msgstr "Nächste Konzerte"
 

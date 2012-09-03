@@ -12,12 +12,12 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-08-24 20:02+0000\n"
+"PO-Revision-Date: 2012-08-27 12:16+0000\n"
 "Last-Translator: Vincenzo Reale <vinx.reale@gmail.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: it\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../bin/src/ui_podcastsettingspage.h:246
 msgid " days"
@@ -873,7 +873,7 @@ msgstr "Annulla"
 msgid "Change cover art"
 msgstr "Cambia copertina"
 
-#: songinfo/songinfotextview.cpp:77
+#: songinfo/songinfotextview.cpp:83
 msgid "Change font size..."
 msgstr "Cambia dimensione dei caratteri..."
 
@@ -2037,6 +2037,7 @@ msgstr "L'eliminazione di un dispositivo lo rimuoverà da questo elenco e Clemen
 #: ../bin/src/ui_querysearchpage.h:112 ../bin/src/ui_querysortpage.h:136
 #: ../bin/src/ui_searchpreview.h:104 ../bin/src/ui_searchtermwidget.h:279
 #: ../bin/src/ui_wizardfinishpage.h:83
+#: ../bin/src/ui_songkickconcertwidget.h:100
 #: ../bin/src/ui_transcoderoptionsaac.h:128
 #: ../bin/src/ui_transcoderoptionsflac.h:80
 #: ../bin/src/ui_transcoderoptionsmp3.h:190
@@ -2281,6 +2282,16 @@ msgstr "Immagini (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
 #: ui/albumcoverchoicecontroller.cpp:45
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgstr "Immagini (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
+
+#: core/utilities.cpp:140
+#, qt-format
+msgid "In %1 days"
+msgstr "Tra %1 giorni"
+
+#: core/utilities.cpp:144
+#, qt-format
+msgid "In %1 weeks"
+msgstr "Tra %1 settimane"
 
 #: ../bin/src/ui_wizardfinishpage.h:86
 msgid ""
@@ -2949,6 +2960,10 @@ msgstr "Successivo"
 #: wiimotedev/wiimotesettingspage.cpp:99
 msgid "Next track"
 msgstr "Traccia successiva"
+
+#: core/utilities.cpp:142
+msgid "Next week"
+msgstr "Settimana prossima"
 
 #: analyzers/analyzercontainer.cpp:80
 msgid "No analyzer"
@@ -4425,7 +4440,7 @@ msgid ""
 "Grooveshark songs"
 msgstr "Per avviare una radio di Grooveshark, devi prima ascoltare alcuni brani"
 
-#: core/utilities.cpp:120
+#: core/utilities.cpp:120 core/utilities.cpp:136
 msgid "Today"
 msgstr "Oggi"
 
@@ -4448,6 +4463,10 @@ msgstr "Commuta lo scrobbling"
 #: core/commandlineoptions.cpp:162
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Commuta la visibilità di Pretty OSD"
+
+#: core/utilities.cpp:138
+msgid "Tomorrow"
+msgstr "Domani"
 
 #: podcasts/podcasturlloader.cpp:114
 msgid "Too many redirects"
@@ -4544,7 +4563,7 @@ msgstr "Rimuovi copertina"
 msgid "Unsubscribe"
 msgstr "Rimuovi sottoscrizione"
 
-#: songinfo/songkickconcerts.cpp:177
+#: songinfo/songkickconcerts.cpp:167
 msgid "Upcoming Concerts"
 msgstr "Prossimi concerti"
 

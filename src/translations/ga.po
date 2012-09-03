@@ -8,12 +8,12 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-08-24 19:35+0000\n"
+"PO-Revision-Date: 2012-08-27 12:07+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: ga\n"
-"Plural-Forms: nplurals=5; plural=(n==1 ? 0 : n==2 ? 1 : n<7 ? 2 : n<11 ? 3 : 4)\n"
+"Plural-Forms: nplurals=5; plural=(n==1 ? 0 : n==2 ? 1 : n<7 ? 2 : n<11 ? 3 : 4);\n"
 
 #: ../bin/src/ui_podcastsettingspage.h:246
 msgid " days"
@@ -869,7 +869,7 @@ msgstr "Cealaigh"
 msgid "Change cover art"
 msgstr "Athraigh ealaíon an chlúdaigh"
 
-#: songinfo/songinfotextview.cpp:77
+#: songinfo/songinfotextview.cpp:83
 msgid "Change font size..."
 msgstr "Athraigh méid na clófhoirne"
 
@@ -2033,6 +2033,7 @@ msgstr ""
 #: ../bin/src/ui_querysearchpage.h:112 ../bin/src/ui_querysortpage.h:136
 #: ../bin/src/ui_searchpreview.h:104 ../bin/src/ui_searchtermwidget.h:279
 #: ../bin/src/ui_wizardfinishpage.h:83
+#: ../bin/src/ui_songkickconcertwidget.h:100
 #: ../bin/src/ui_transcoderoptionsaac.h:128
 #: ../bin/src/ui_transcoderoptionsflac.h:80
 #: ../bin/src/ui_transcoderoptionsmp3.h:190
@@ -2277,6 +2278,16 @@ msgstr "Íomhánna (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm
 #: ui/albumcoverchoicecontroller.cpp:45
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgstr "Íomhánna (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
+
+#: core/utilities.cpp:140
+#, qt-format
+msgid "In %1 days"
+msgstr ""
+
+#: core/utilities.cpp:144
+#, qt-format
+msgid "In %1 weeks"
+msgstr ""
 
 #: ../bin/src/ui_wizardfinishpage.h:86
 msgid ""
@@ -2945,6 +2956,10 @@ msgstr "Ar aghaidh"
 #: wiimotedev/wiimotesettingspage.cpp:99
 msgid "Next track"
 msgstr "Rian ar aghaidh"
+
+#: core/utilities.cpp:142
+msgid "Next week"
+msgstr ""
 
 #: analyzers/analyzercontainer.cpp:80
 msgid "No analyzer"
@@ -4421,7 +4436,7 @@ msgid ""
 "Grooveshark songs"
 msgstr "Chun craolachán Grooveshark a thosú, ba chóir duit éisteacht le roinnt amhráin eile ó Ghrooveshark"
 
-#: core/utilities.cpp:120
+#: core/utilities.cpp:120 core/utilities.cpp:136
 msgid "Today"
 msgstr "Inniu"
 
@@ -4443,6 +4458,10 @@ msgstr ""
 
 #: core/commandlineoptions.cpp:162
 msgid "Toggle visibility for the pretty on-screen-display"
+msgstr ""
+
+#: core/utilities.cpp:138
+msgid "Tomorrow"
 msgstr ""
 
 #: podcasts/podcasturlloader.cpp:114
@@ -4540,7 +4559,7 @@ msgstr "Díshocraigh an clúdach"
 msgid "Unsubscribe"
 msgstr ""
 
-#: songinfo/songkickconcerts.cpp:177
+#: songinfo/songkickconcerts.cpp:167
 msgid "Upcoming Concerts"
 msgstr ""
 

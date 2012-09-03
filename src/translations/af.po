@@ -8,12 +8,12 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-08-26 12:42+0000\n"
+"PO-Revision-Date: 2012-09-01 11:44+0000\n"
 "Last-Translator: jpmeijers <jpmeijers@gmail.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: af\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../bin/src/ui_podcastsettingspage.h:246
 msgid " days"
@@ -869,7 +869,7 @@ msgstr "Kanselleer"
 msgid "Change cover art"
 msgstr "Verander omslag"
 
-#: songinfo/songinfotextview.cpp:77
+#: songinfo/songinfotextview.cpp:83
 msgid "Change font size..."
 msgstr "Verander lettergrootte"
 
@@ -1162,7 +1162,7 @@ msgstr "Kopiëer na die toestel..."
 #: devices/deviceview.cpp:218 ui/mainwindow.cpp:490
 #: widgets/fileviewlist.cpp:39
 msgid "Copy to library..."
-msgstr "Kopiëer na jou versameling"
+msgstr "Kopiëer na my versameling"
 
 #: devices/afctransfer.cpp:50
 msgid "Copying iPod database"
@@ -1521,7 +1521,7 @@ msgstr "Toon skermbeeld"
 
 #: ../bin/src/ui_mainwindow.h:707
 msgid "Do a full library rescan"
-msgstr "Verfris hele versameling"
+msgstr "Gaan my hele versameling weer na"
 
 #: ../bin/src/ui_deviceproperties.h:377
 msgid "Do not convert any music"
@@ -2033,6 +2033,7 @@ msgstr "Deur van 'n toestel te vergeet sal dit uit hierdie lys verwyder word. Cl
 #: ../bin/src/ui_querysearchpage.h:112 ../bin/src/ui_querysortpage.h:136
 #: ../bin/src/ui_searchpreview.h:104 ../bin/src/ui_searchtermwidget.h:279
 #: ../bin/src/ui_wizardfinishpage.h:83
+#: ../bin/src/ui_songkickconcertwidget.h:100
 #: ../bin/src/ui_transcoderoptionsaac.h:128
 #: ../bin/src/ui_transcoderoptionsflac.h:80
 #: ../bin/src/ui_transcoderoptionsmp3.h:190
@@ -2277,6 +2278,16 @@ msgstr "Beelde (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
 #: ui/albumcoverchoicecontroller.cpp:45
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgstr "Beelde (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
+
+#: core/utilities.cpp:140
+#, qt-format
+msgid "In %1 days"
+msgstr "Oor %1 dae"
+
+#: core/utilities.cpp:144
+#, qt-format
+msgid "In %1 weeks"
+msgstr "Oor %1 weke"
 
 #: ../bin/src/ui_wizardfinishpage.h:86
 msgid ""
@@ -2535,7 +2546,7 @@ msgstr "Versameling hernagaan kennisgewing"
 
 #: smartplaylists/querywizardplugin.cpp:85
 msgid "Library search"
-msgstr "Soek deur versameling"
+msgstr "Soek deur my versameling"
 
 #: ../bin/src/ui_querysortpage.h:140
 msgid "Limits"
@@ -2778,7 +2789,7 @@ msgstr "Model"
 
 #: ../bin/src/ui_librarysettingspage.h:163
 msgid "Monitor the library for changes"
-msgstr "Hou die versameling vir veranderings dop"
+msgstr "Hou my versameling dop vir veranderings"
 
 #: ../bin/src/ui_playbacksettingspage.h:296
 msgid "Mono playback"
@@ -2820,7 +2831,7 @@ msgstr "Skuid af"
 
 #: ui/mainwindow.cpp:491 widgets/fileviewlist.cpp:41
 msgid "Move to library..."
-msgstr "Skuid na versameling..."
+msgstr "Skuif na my versameling..."
 
 #: ../bin/src/ui_globalsearchsettingspage.h:148
 #: ../bin/src/ui_queuemanager.h:127 ../bin/src/ui_songinfosettingspage.h:189
@@ -2945,6 +2956,10 @@ msgstr "Volgende"
 #: wiimotedev/wiimotesettingspage.cpp:99
 msgid "Next track"
 msgstr "Volgende snit"
+
+#: core/utilities.cpp:142
+msgid "Next week"
+msgstr "Volgende week"
 
 #: analyzers/analyzercontainer.cpp:80
 msgid "No analyzer"
@@ -4421,7 +4436,7 @@ msgid ""
 "Grooveshark songs"
 msgstr "Om Grooveshark radio te begin moet jy eers na 'n paar ander Grooveshark liedjies luister"
 
-#: core/utilities.cpp:120
+#: core/utilities.cpp:120 core/utilities.cpp:136
 msgid "Today"
 msgstr "Vandag"
 
@@ -4444,6 +4459,10 @@ msgstr "Skakel log van geluisterde musiek aanlyn aan/af"
 #: core/commandlineoptions.cpp:162
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Skakel mooi skermbeeld aan/af"
+
+#: core/utilities.cpp:138
+msgid "Tomorrow"
+msgstr "Môre"
 
 #: podcasts/podcasturlloader.cpp:114
 msgid "Too many redirects"
@@ -4540,7 +4559,7 @@ msgstr "Verwyder omslag"
 msgid "Unsubscribe"
 msgstr "Teken uit"
 
-#: songinfo/songkickconcerts.cpp:177
+#: songinfo/songkickconcerts.cpp:167
 msgid "Upcoming Concerts"
 msgstr "Komende opvoerings"
 

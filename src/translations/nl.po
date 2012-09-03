@@ -5,7 +5,7 @@
 # Translators:
 #   <arnaud.bienner@gmail.com>, 2011.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
-#   <rindertvonk@gmx.net>, 2011.
+#   <rindertvonk@gmx.net>, 2011-2012.
 #   <rubenvanos@gmail.com>, 2012.
 #   <transifex@navelpluis.nl>, 2012.
 #   <valorcurse@gmail.com>, 2012.
@@ -13,12 +13,12 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-08-24 19:34+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2012-09-02 13:23+0000\n"
+"Last-Translator: Sparkrin <rindertvonk@gmx.net>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: nl\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../bin/src/ui_podcastsettingspage.h:246
 msgid " days"
@@ -132,7 +132,7 @@ msgstr "In totaal %L1 keer afgespeeld"
 
 #: ../bin/src/ui_notificationssettingspage.h:399
 msgid "%filename%"
-msgstr ""
+msgstr "%filename%"
 
 #: transcoder/transcodedialog.cpp:202
 #, c-format
@@ -420,7 +420,7 @@ msgstr "‘disc’-label aan nummer toevoegen"
 
 #: ../bin/src/ui_notificationssettingspage.h:401
 msgid "Add song filename"
-msgstr ""
+msgstr "Bestandsnaam van nummer toevoegen"
 
 #: ../bin/src/ui_notificationssettingspage.h:385
 msgid "Add song genre tag"
@@ -544,7 +544,7 @@ msgstr "Albumartiest"
 
 #: ../bin/src/ui_appearancesettingspage.h:240
 msgid "Album cover"
-msgstr ""
+msgstr "Albumhoes"
 
 #: internet/jamendoservice.cpp:414
 msgid "Album info on jamendo.com..."
@@ -749,7 +749,7 @@ msgstr "Gemiddelde afbeeldinggrootte"
 
 #: podcasts/addpodcastdialog.cpp:80
 msgid "BBC Podcasts"
-msgstr ""
+msgstr "BBC Podcasts"
 
 #: playlist/playlist.cpp:1201 ui/organisedialog.cpp:62
 #: ../bin/src/ui_edittagdialog.h:638
@@ -848,7 +848,7 @@ msgstr "Tijd in buffer"
 
 #: engines/gstengine.cpp:821
 msgid "Buffering"
-msgstr ""
+msgstr "Bufferen"
 
 #: ../bin/src/ui_globalsearchview.h:211
 msgid "But these sources are disabled:"
@@ -874,7 +874,7 @@ msgstr "Annuleren"
 msgid "Change cover art"
 msgstr "Albumhoes wijzigen"
 
-#: songinfo/songinfotextview.cpp:77
+#: songinfo/songinfotextview.cpp:83
 msgid "Change font size..."
 msgstr "Lettergrootte wijzigen…"
 
@@ -934,7 +934,7 @@ msgstr "Kies hoe de afspeellijst gesorteerd wordt en hoeveel nummers de afspeell
 
 #: podcasts/podcastsettingspage.cpp:132
 msgid "Choose podcast download directory"
-msgstr ""
+msgstr "Kies map waarnaar podcasts gedownload worden"
 
 #: ../bin/src/ui_songinfosettingspage.h:188
 msgid ""
@@ -1080,7 +1080,7 @@ msgstr "Labels automatisch voltooien"
 
 #: ../bin/src/ui_mainwindow.h:708
 msgid "Complete tags automatically..."
-msgstr "mp3-tags automatisch invullen…"
+msgstr "Labels automatisch voltooien…"
 
 #: playlist/playlist.cpp:1193 ui/organisedialog.cpp:59
 #: ../bin/src/ui_groupbydialog.h:132 ../bin/src/ui_groupbydialog.h:145
@@ -1091,7 +1091,7 @@ msgstr "Componist"
 #: internet/searchboxwidget.cpp:42
 #, qt-format
 msgid "Configure %1..."
-msgstr ""
+msgstr "Configureren %1"
 
 #: internet/groovesharkservice.cpp:561
 msgid "Configure Grooveshark..."
@@ -1123,7 +1123,7 @@ msgstr "Bibliotheek configureren…"
 
 #: podcasts/addpodcastdialog.cpp:67 podcasts/podcastservice.cpp:288
 msgid "Configure podcasts..."
-msgstr ""
+msgstr "Podcasts configureren"
 
 #: internet/digitallyimportedservicebase.cpp:185
 #: ../bin/src/ui_globalsearchsettingspage.h:150
@@ -1897,11 +1897,11 @@ msgstr ""
 #: podcasts/itunessearchpage.cpp:66 podcasts/itunessearchpage.cpp:75
 #: podcasts/itunessearchpage.cpp:82
 msgid "Failed to fetch podcasts"
-msgstr ""
+msgstr "Ophalen van podcasts mislukt"
 
 #: podcasts/addpodcastbyurl.cpp:70 podcasts/fixedopmlpage.cpp:54
 msgid "Failed to load podcast"
-msgstr ""
+msgstr "Laden van podcast mislukt"
 
 #: podcasts/podcasturlloader.cpp:165
 msgid "Failed to parse the XML for this RSS feed"
@@ -2038,6 +2038,7 @@ msgstr "Het vergeten van een apparaat zal het uit deze lijst verwijderen en zodr
 #: ../bin/src/ui_querysearchpage.h:112 ../bin/src/ui_querysortpage.h:136
 #: ../bin/src/ui_searchpreview.h:104 ../bin/src/ui_searchtermwidget.h:279
 #: ../bin/src/ui_wizardfinishpage.h:83
+#: ../bin/src/ui_songkickconcertwidget.h:100
 #: ../bin/src/ui_transcoderoptionsaac.h:128
 #: ../bin/src/ui_transcoderoptionsflac.h:80
 #: ../bin/src/ui_transcoderoptionsmp3.h:190
@@ -2102,11 +2103,11 @@ msgstr "Genre"
 
 #: internet/groovesharkservice.cpp:551
 msgid "Get a URL to share this Grooveshark playlist"
-msgstr ""
+msgstr "Haal URL op van deze Grooveshark afspeellijst"
 
 #: internet/groovesharkservice.cpp:548 internet/groovesharkservice.cpp:1136
 msgid "Get a URL to share this Grooveshark song"
-msgstr ""
+msgstr "Haal URL op van dit Grooveshark nummer"
 
 #: internet/groovesharkservice.cpp:810
 msgid "Getting Grooveshark popular songs"
@@ -2205,7 +2206,7 @@ msgstr "Groeperen op genre/artiest/album"
 
 #: podcasts/podcasturlloader.cpp:194
 msgid "HTML page did not contain any RSS feeds"
-msgstr ""
+msgstr "HTML-pagina bevat geen RSS-feed"
 
 #: ../bin/src/ui_networkproxysettingspage.h:163
 msgid "HTTP proxy"
@@ -2269,7 +2270,7 @@ msgstr "Als u verder gaat zal dit apparaat traag zijn en de nummers die ernaar g
 
 #: ../bin/src/ui_addpodcastbyurl.h:77
 msgid "If you know the URL of a podcast, enter it below and press Go."
-msgstr ""
+msgstr "Als u de URL van een podcast weet, typ deze hieronder en klik op Ga"
 
 #: ../bin/src/ui_organisedialog.h:204
 msgid "Ignore \"The\" in artist names"
@@ -2282,6 +2283,16 @@ msgstr "Afbeeldingen (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.x
 #: ui/albumcoverchoicecontroller.cpp:45
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 msgstr "Afbeeldingen (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
+
+#: core/utilities.cpp:140
+#, qt-format
+msgid "In %1 days"
+msgstr "In %1 dagen"
+
+#: core/utilities.cpp:144
+#, qt-format
+msgid "In %1 weeks"
+msgstr "In %1 weken"
 
 #: ../bin/src/ui_wizardfinishpage.h:86
 msgid ""
@@ -2312,7 +2323,7 @@ msgstr "Volume verhogen"
 #: internet/googledriveservice.cpp:175
 #, qt-format
 msgid "Indexing %1"
-msgstr ""
+msgstr "Indexeren %1"
 
 #: ../bin/src/ui_deviceproperties.h:373 wiimotedev/wiimotesettingspage.cpp:124
 msgid "Information"
@@ -2951,6 +2962,10 @@ msgstr "Volgende"
 msgid "Next track"
 msgstr "Volgend nummer"
 
+#: core/utilities.cpp:142
+msgid "Next week"
+msgstr ""
+
 #: analyzers/analyzercontainer.cpp:80
 msgid "No analyzer"
 msgstr "Geen weergave"
@@ -3282,7 +3297,7 @@ msgstr "Plug-in status:"
 
 #: podcasts/podcastservice.cpp:110 ../bin/src/ui_podcastsettingspage.h:226
 msgid "Podcasts"
-msgstr ""
+msgstr "Podcasts"
 
 #: ui/equalizer.cpp:119
 msgid "Pop"
@@ -3986,7 +4001,7 @@ msgstr "Nummers van dit album willekeurig"
 
 #: ../bin/src/ui_podcastsettingspage.h:252
 msgid "Sign in"
-msgstr ""
+msgstr "Log in"
 
 #: ../bin/src/ui_loginstatewidget.h:173
 msgid "Sign out"
@@ -4268,7 +4283,7 @@ msgstr "Het commando \"%1\" kon niet worden gestart."
 
 #: ../bin/src/ui_appearancesettingspage.h:238
 msgid "The album cover of the currently playing song"
-msgstr ""
+msgstr "Albumhoes van het momenteel spelende nummer"
 
 #: internet/magnatunedownloaddialog.cpp:90
 #, qt-format
@@ -4426,7 +4441,7 @@ msgid ""
 "Grooveshark songs"
 msgstr "Om Grooveshark radio te starten moet je eerst naar andere Grooveshark nummers luisteren"
 
-#: core/utilities.cpp:120
+#: core/utilities.cpp:120 core/utilities.cpp:136
 msgid "Today"
 msgstr "Vandaag"
 
@@ -4449,6 +4464,10 @@ msgstr "Zet scrobbling aan/uit"
 #: core/commandlineoptions.cpp:162
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Zichtbaarheid voor het mooie infoschermvenster aan/uit"
+
+#: core/utilities.cpp:138
+msgid "Tomorrow"
+msgstr ""
 
 #: podcasts/podcasturlloader.cpp:114
 msgid "Too many redirects"
@@ -4545,7 +4564,7 @@ msgstr "Albumhoes wissen"
 msgid "Unsubscribe"
 msgstr ""
 
-#: songinfo/songkickconcerts.cpp:177
+#: songinfo/songkickconcerts.cpp:167
 msgid "Upcoming Concerts"
 msgstr ""
 
@@ -4829,7 +4848,7 @@ msgstr "Windows Media-audio"
 msgid ""
 "Would you like to move the other songs in this album to Various Artists as "
 "well?"
-msgstr ""
+msgstr "Wilt u de andere nummers van dit album ook verplaatsen naar Diverse Artiesten?"
 
 #: ui/mainwindow.cpp:2001
 msgid "Would you like to run a full rescan right now?"
@@ -5084,7 +5103,7 @@ msgstr "langste eerst"
 #: playlist/playlistundocommands.cpp:99
 #, c-format
 msgid "move %n songs"
-msgstr ""
+msgstr "Verplaats %n nummers"
 
 #: smartplaylists/searchterm.cpp:289
 msgid "newest first"
