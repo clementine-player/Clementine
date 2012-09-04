@@ -60,7 +60,7 @@ Features include:
 
 %build
 cd bin
-%{cmake} .. -DUSE_INSTALL_PREFIX=OFF -DBUNDLE_PROJECTM_PRESETS
+%{cmake} .. -DUSE_INSTALL_PREFIX=OFF -DBUNDLE_PROJECTM_PRESETS=ON
 make %{?_smp_mflags}
 
 %install
