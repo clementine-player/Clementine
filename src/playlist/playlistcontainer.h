@@ -30,6 +30,7 @@ class PlaylistManager;
 class PlaylistView;
 
 class QTimeLine;
+class QTimer;
 class QLabel;
 
 class PlaylistContainer : public QWidget {
@@ -86,6 +87,7 @@ private slots:
   void SetTabBarHeight(int height);
 
   void SelectionChanged();
+  void MaybeUpdateFilter();
   void UpdateFilter();
   void FocusOnFilter(QKeyEvent *event);
 
@@ -97,6 +99,9 @@ private:
   void RepositionNoMatchesLabel(bool force = false);
 
 private:
+  static const int kFilterDelayMs;
+  static const int kFilterDelayPlaylistSizeThreshold;
+
   Ui_PlaylistContainer* ui_;
 
   PlaylistManager* manager_;
@@ -113,6 +118,8 @@ private:
   QLabel* no_matches_label_;
 
   DidYouMean* did_you_mean_;
+
+  QTimer* filter_timer_;
 };
 
 #endif // PLAYLISTCONTAINER_H

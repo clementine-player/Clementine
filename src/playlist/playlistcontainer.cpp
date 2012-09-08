@@ -32,9 +32,12 @@
 #include <QSettings>
 #include <QSortFilterProxyModel>
 #include <QTimeLine>
+#include <QTimer>
 #include <QUndoStack>
 
 const char* PlaylistContainer::kSettingsGroup = "Playlist";
+const int PlaylistContainer::kFilterDelayMs = 100;
+const int PlaylistContainer::kFilterDelayPlaylistSizeThreshold = 5000;
 
 PlaylistContainer::PlaylistContainer(QWidget *parent)
   : QWidget(parent),
@@ -47,7 +50,8 @@ PlaylistContainer::PlaylistContainer(QWidget *parent)
     tab_bar_visible_(false),
     tab_bar_animation_(new QTimeLine(500, this)),
     no_matches_label_(NULL),
-    did_you_mean_(NULL)
+    did_you_mean_(NULL),
+    filter_timer_(new QTimer(this))
 {
   ui_->setupUi(this);
 
@@ -83,8 +87,13 @@ PlaylistContainer::PlaylistContainer(QWidget *parent)
   connect(ui_->tab_bar, SIGNAL(currentChanged(int)), SLOT(Save()));
   connect(ui_->tab_bar, SIGNAL(Save(int)), SLOT(SavePlaylist(int)));
 
+  // set up timer for delayed filter updates
+  filter_timer_->setSingleShot(true);
+  filter_timer_->setInterval(kFilterDelayMs);
+  connect(filter_timer_,SIGNAL(timeout()),this,SLOT(UpdateFilter()));
+
   // Replace playlist search filter with native search box.
-  connect(ui_->filter, SIGNAL(textChanged(QString)), SLOT(UpdateFilter()));
+  connect(ui_->filter, SIGNAL(textChanged(QString)), SLOT(MaybeUpdateFilter()));
   connect(ui_->playlist, SIGNAL(FocusOnFilterSignal(QKeyEvent*)), SLOT(FocusOnFilter(QKeyEvent*)));
   ui_->filter->installEventFilter(this);
 
@@ -372,6 +381,17 @@ void PlaylistContainer::SetTabBarVisible(bool visible) {
 
 void PlaylistContainer::SetTabBarHeight(int height) {
   ui_->tab_bar->setMaximumHeight(height);
+}
+
+void PlaylistContainer::MaybeUpdateFilter() {
+  // delaying the filter update on small playlists is undesirable
+  // and an empty filter applies very quickly, too
+  if (manager_->current()->rowCount() < kFilterDelayPlaylistSizeThreshold ||
+      ui_->filter->text().isEmpty()) {
+    UpdateFilter();
+  } else {
+    filter_timer_->start();
+  }
 }
 
 void PlaylistContainer::UpdateFilter() {
