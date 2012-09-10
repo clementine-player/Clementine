@@ -3,7 +3,7 @@
 # This file is distributed under the same license as the Clementine package.
 # 
 # Translators:
-#   <arnaud.bienner@gmail.com>, 2011, 2012.
+#   <arnaud.bienner@gmail.com>, 2011-2012.
 # Brice  <bmaron@gmail.com>, 2011.
 # Gabriel Cossette <gabriel.cossette@gmail.com>, 2012.
 #   <gilleshabran@gmail.com>, 2011.
@@ -17,8 +17,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-08-27 12:06+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2012-09-05 18:24+0000\n"
+"Last-Translator: arnaudbienner <arnaud.bienner@gmail.com>\n"
 "Language-Team: French (http://www.transifex.com/projects/p/clementine/language/fr/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -267,7 +267,7 @@ msgstr "<p>Les champs ont pour préfixe %. Exemples : %artist %album %title </p>
 msgid "A Grooveshark Anywhere account is required."
 msgstr "Un compte Grooveshark Anywhere est nécessaire."
 
-#: internet/spotifysettingspage.cpp:161
+#: internet/spotifysettingspage.cpp:162
 msgid "A Spotify Premium account is required."
 msgstr "Un compte Spotify Premium est nécessaire."
 
@@ -657,7 +657,7 @@ msgstr "Apparence"
 msgid "Append files/URLs to the playlist"
 msgstr "Ajouter des fichiers/URLs à la liste de lecture"
 
-#: devices/deviceview.cpp:211 globalsearch/globalsearchview.cpp:412
+#: devices/deviceview.cpp:211 globalsearch/globalsearchview.cpp:417
 #: internet/internetservice.cpp:56 library/libraryview.cpp:367
 #: widgets/fileviewlist.cpp:32
 msgid "Append to current playlist"
@@ -1114,11 +1114,11 @@ msgstr "Configurer Magnatune..."
 msgid "Configure Shortcuts"
 msgstr "Configurer les raccourcis clavier"
 
-#: internet/spotifyservice.cpp:522 internet/spotifyservice.cpp:534
+#: internet/spotifyservice.cpp:527 internet/spotifyservice.cpp:539
 msgid "Configure Spotify..."
 msgstr "Configurer Spotify…"
 
-#: globalsearch/globalsearchview.cpp:138 globalsearch/globalsearchview.cpp:425
+#: globalsearch/globalsearchview.cpp:138 globalsearch/globalsearchview.cpp:430
 msgid "Configure global search..."
 msgstr "Configurer la recherche globale..."
 
@@ -1144,7 +1144,7 @@ msgstr "Connecter Wii Remote en utilisant l'action activer/désactiver"
 msgid "Connect device"
 msgstr "Connexion du périphérique"
 
-#: internet/spotifyservice.cpp:251
+#: internet/spotifyservice.cpp:254
 msgid "Connecting to Spotify"
 msgstr "Connexion à Spotify"
 
@@ -2181,7 +2181,7 @@ msgstr "URL du morceau Grooveshark"
 msgid "Group Library by..."
 msgstr "Grouper la Bibliothèque par..."
 
-#: globalsearch/globalsearchview.cpp:423 library/libraryfilterwidget.cpp:82
+#: globalsearch/globalsearchview.cpp:428 library/libraryfilterwidget.cpp:82
 msgid "Group by"
 msgstr "Grouper par"
 
@@ -2292,12 +2292,12 @@ msgstr "Images (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 #: core/utilities.cpp:140
 #, qt-format
 msgid "In %1 days"
-msgstr ""
+msgstr "Dans %1 jours"
 
 #: core/utilities.cpp:144
 #, qt-format
 msgid "In %1 weeks"
-msgstr ""
+msgstr "Dans %1 semaines"
 
 #: ../bin/src/ui_wizardfinishpage.h:86
 msgid ""
@@ -2305,7 +2305,7 @@ msgid ""
 "time a song finishes."
 msgstr "En mode dynamique, de nouvelles pistes seront choisies et ajoutées à la fin de la liste de lecture chaque fois qu'un morceau se terminera."
 
-#: internet/spotifyservice.cpp:356
+#: internet/spotifyservice.cpp:361
 msgid "Inbox"
 msgstr "Boîte de réception"
 
@@ -2338,7 +2338,7 @@ msgstr "Information"
 msgid "Insert..."
 msgstr "Insérer..."
 
-#: internet/spotifysettingspage.cpp:74
+#: internet/spotifysettingspage.cpp:75
 msgid "Installed"
 msgstr "Installé"
 
@@ -2591,7 +2591,7 @@ msgstr "Charger la pochette depuis le disque"
 msgid "Load cover from disk..."
 msgstr "Charger la pochette depuis le disque..."
 
-#: playlist/playlistcontainer.cpp:292
+#: playlist/playlistcontainer.cpp:301
 msgid "Load playlist"
 msgstr "Charger une liste de lecture"
 
@@ -2730,7 +2730,7 @@ msgstr "Profil principal (MAIN)"
 msgid "Make it so!"
 msgstr "Voilà!"
 
-#: internet/spotifyservice.cpp:529
+#: internet/spotifyservice.cpp:534
 msgid "Make playlist available offline"
 msgstr "Rendre la liste de lecture accessible hors ligne"
 
@@ -2969,7 +2969,7 @@ msgstr "Piste suivante"
 
 #: core/utilities.cpp:142
 msgid "Next week"
-msgstr ""
+msgstr "La semaine prochaine"
 
 #: analyzers/analyzercontainer.cpp:80
 msgid "No analyzer"
@@ -2983,7 +2983,7 @@ msgstr "Pas d'image d'arrière-plan"
 msgid "No long blocks"
 msgstr "Pas de bloc long"
 
-#: playlist/playlistcontainer.cpp:405
+#: playlist/playlistcontainer.cpp:425
 msgid ""
 "No matches found.  Clear the search box to show the whole playlist again."
 msgstr "Aucune correspondance trouvée. Videz le champ de recherche pour afficher à nouveau la totalité de la liste de lecture."
@@ -3033,7 +3033,7 @@ msgstr "Pas assez de membres"
 msgid "Not enough neighbors"
 msgstr "Voisins insuffisants"
 
-#: internet/spotifysettingspage.cpp:74
+#: internet/spotifysettingspage.cpp:75
 msgid "Not installed"
 msgstr "Non installé"
 
@@ -3109,9 +3109,9 @@ msgstr "Ouvrir un fichier..."
 
 #: internet/googledriveservice.cpp:245
 msgid "Open in Google Drive"
-msgstr ""
+msgstr "Ouvrir dans Google Drive"
 
-#: devices/deviceview.cpp:215 globalsearch/globalsearchview.cpp:416
+#: devices/deviceview.cpp:215 globalsearch/globalsearchview.cpp:421
 #: internet/internetservice.cpp:76 library/libraryview.cpp:371
 #: widgets/fileviewlist.cpp:36 ../bin/src/ui_behavioursettingspage.h:195
 msgid "Open in new playlist"
@@ -3267,7 +3267,7 @@ msgstr "Lecture sonore"
 msgid "Player options"
 msgstr "Options du lecteur"
 
-#: playlist/playlistcontainer.cpp:286 playlist/playlistmanager.cpp:83
+#: playlist/playlistcontainer.cpp:295 playlist/playlistmanager.cpp:83
 #: playlist/playlistmanager.cpp:383 playlist/playlisttabbar.cpp:292
 msgid "Playlist"
 msgstr "Liste de lecture"
@@ -3441,7 +3441,7 @@ msgstr "Gestionnaire de file d'attente"
 msgid "Queue selected tracks"
 msgstr "Mettre les pistes sélectionnées en liste d'attente"
 
-#: globalsearch/globalsearchview.cpp:420 library/libraryview.cpp:375
+#: globalsearch/globalsearchview.cpp:425 library/libraryview.cpp:375
 #: ui/mainwindow.cpp:1298
 msgid "Queue track"
 msgstr "Mettre cette piste en liste d'attente"
@@ -3609,7 +3609,7 @@ msgstr "Répéter la liste de lecture"
 msgid "Repeat track"
 msgstr "Répéter la piste"
 
-#: devices/deviceview.cpp:213 globalsearch/globalsearchview.cpp:414
+#: devices/deviceview.cpp:213 globalsearch/globalsearchview.cpp:419
 #: internet/internetservice.cpp:66 library/libraryview.cpp:369
 #: widgets/fileviewlist.cpp:34
 msgid "Replace current playlist"
@@ -3703,7 +3703,7 @@ msgstr "Enregistrer la pochette sur le disque..."
 msgid "Save image"
 msgstr "Enregistrer l'image"
 
-#: playlist/playlistcontainer.cpp:329
+#: playlist/playlistcontainer.cpp:338
 msgid "Save playlist"
 msgstr "Enregistrer la liste de lecture"
 
@@ -3778,7 +3778,7 @@ msgid "Search options"
 msgstr "Options de recherche"
 
 #: internet/groovesharkservice.cpp:578 internet/soundcloudservice.cpp:104
-#: internet/spotifyservice.cpp:343
+#: internet/spotifyservice.cpp:348
 msgid "Search results"
 msgstr "Résultats de recherche"
 
@@ -4112,7 +4112,7 @@ msgstr "Speex"
 msgid "Spotify"
 msgstr "Spotify"
 
-#: internet/spotifyservice.cpp:182
+#: internet/spotifyservice.cpp:185
 msgid "Spotify login error"
 msgstr "Erreur lors de la connexion à Spotify"
 
@@ -4128,7 +4128,7 @@ msgstr "Le module externe de Spotify n'est pas installé"
 msgid "Standard"
 msgstr "Standard"
 
-#: internet/spotifyservice.cpp:350
+#: internet/spotifyservice.cpp:355
 msgid "Starred"
 msgstr "Favoris"
 
@@ -4141,7 +4141,7 @@ msgid "Start transcoding"
 msgstr "Démarrer transcodage"
 
 #: internet/groovesharkservice.cpp:579 internet/soundcloudservice.cpp:105
-#: internet/spotifyservice.cpp:344
+#: internet/spotifyservice.cpp:349
 msgid ""
 "Start typing something on the search box above to fill this search results "
 "list"
@@ -4203,7 +4203,7 @@ msgstr "Abonnés"
 
 #: ../data/oauthsuccess.html:34
 msgid "Success!"
-msgstr ""
+msgstr "Succès !"
 
 #: transcoder/transcoder.cpp:200
 #, qt-format
@@ -4233,15 +4233,15 @@ msgstr "Très élevé (2048x2048)"
 msgid "Supported formats"
 msgstr "Formats supportés"
 
-#: internet/spotifyservice.cpp:557
+#: internet/spotifyservice.cpp:562
 msgid "Syncing Spotify inbox"
 msgstr "Synchronisation de la boîte de réception Spotify"
 
-#: internet/spotifyservice.cpp:552
+#: internet/spotifyservice.cpp:557
 msgid "Syncing Spotify playlist"
 msgstr "Synchronisation de la liste de lecture Spotify"
 
-#: internet/spotifyservice.cpp:561
+#: internet/spotifyservice.cpp:566
 msgid "Syncing Spotify starred tracks"
 msgstr "Synchronisation des morceaux Spotify préférés"
 
@@ -4472,13 +4472,13 @@ msgstr "Passer l'OSD en mode joli"
 
 #: core/utilities.cpp:138
 msgid "Tomorrow"
-msgstr ""
+msgstr "Demain"
 
 #: podcasts/podcasturlloader.cpp:114
 msgid "Too many redirects"
 msgstr "Trop de redirections"
 
-#: internet/spotifyservice.cpp:362
+#: internet/spotifyservice.cpp:367
 msgid "Top tracks"
 msgstr "Top titres"
 
@@ -4934,7 +4934,7 @@ msgstr "Vous pouvez utiliser votre Wii Remote comme télécommande pour Clementi
 msgid "You do not have a Grooveshark Anywhere account."
 msgstr "Vous n'avez pas de compte Grooveshark Anywhere."
 
-#: internet/spotifysettingspage.cpp:148
+#: internet/spotifysettingspage.cpp:149
 msgid "You do not have a Spotify Premium account."
 msgstr "Vous n'avez pas de compte Spotify Premium."
 
@@ -4942,13 +4942,13 @@ msgstr "Vous n'avez pas de compte Spotify Premium."
 msgid "You do not have an active subscription"
 msgstr "Vous n'avez pas d'abonnement actif"
 
-#: internet/spotifyservice.cpp:168
+#: internet/spotifyservice.cpp:171
 msgid ""
 "You have been logged out of Spotify, please re-enter your password in the "
 "Settings dialog."
 msgstr "Vous avez été déconnecté de Spotify, merci de ressaisir votre mot de passe dans la fenêtre des préférences."
 
-#: internet/spotifysettingspage.cpp:157
+#: internet/spotifysettingspage.cpp:158
 msgid "You have been logged out of Spotify, please re-enter your password."
 msgstr "Vous avez été déconnecté de Spotify, merci de ressaisir votre mot de passe."
 
@@ -4999,7 +4999,7 @@ msgid "Your system is missing OpenGL support, visualizations are unavailable."
 msgstr "Votre système n'est pas compatinle avec OpenGL, les visualitions ne sont pas disponibles."
 
 #: internet/groovesharksettingspage.cpp:107
-#: internet/spotifysettingspage.cpp:153
+#: internet/spotifysettingspage.cpp:154
 msgid "Your username or password was incorrect."
 msgstr "Votre nom d'utilisateur ou mot de passe est incorrect."
 
@@ -5092,8 +5092,8 @@ msgid "in the last"
 msgstr "parmi les derniers"
 
 #: playlist/playlistview.cpp:202 ui/edittagdialog.cpp:452
-#: internet/spotifysettingspage.cpp:59 internet/spotifysettingspage.cpp:60
-#: internet/spotifysettingspage.cpp:61
+#: internet/spotifysettingspage.cpp:60 internet/spotifysettingspage.cpp:61
+#: internet/spotifysettingspage.cpp:62
 msgid "kbps"
 msgstr "kbps"
 

@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-08-27 12:06+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2012-09-06 14:34+0000\n"
+"Last-Translator: gogo <trebelnik2@gmail.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: hr\n"
@@ -259,7 +259,7 @@ msgstr "<p>Znakovi započeti s %, npr: %izvođač %album %pjesma </p>\n\n<p>Ako 
 msgid "A Grooveshark Anywhere account is required."
 msgstr "Grooveshark Anywhere račun je potreban."
 
-#: internet/spotifysettingspage.cpp:161
+#: internet/spotifysettingspage.cpp:162
 msgid "A Spotify Premium account is required."
 msgstr "Spotify Premium račun je obvezan."
 
@@ -649,7 +649,7 @@ msgstr "Izgled"
 msgid "Append files/URLs to the playlist"
 msgstr "Dodajte datoteku/URL u popis izvođenja"
 
-#: devices/deviceview.cpp:211 globalsearch/globalsearchview.cpp:412
+#: devices/deviceview.cpp:211 globalsearch/globalsearchview.cpp:417
 #: internet/internetservice.cpp:56 library/libraryview.cpp:367
 #: widgets/fileviewlist.cpp:32
 msgid "Append to current playlist"
@@ -1106,11 +1106,11 @@ msgstr "Podesi Magnatune..."
 msgid "Configure Shortcuts"
 msgstr "Podesi prečace"
 
-#: internet/spotifyservice.cpp:522 internet/spotifyservice.cpp:534
+#: internet/spotifyservice.cpp:527 internet/spotifyservice.cpp:539
 msgid "Configure Spotify..."
 msgstr "Podesite Spotify ..."
 
-#: globalsearch/globalsearchview.cpp:138 globalsearch/globalsearchview.cpp:425
+#: globalsearch/globalsearchview.cpp:138 globalsearch/globalsearchview.cpp:430
 msgid "Configure global search..."
 msgstr "Podesite globalno pretraživanje..."
 
@@ -1136,7 +1136,7 @@ msgstr "Spoji Wii Daljinski upravljač koristeći aktiviraj/deaktiviraj naredbu"
 msgid "Connect device"
 msgstr "Spoji uređaj"
 
-#: internet/spotifyservice.cpp:251
+#: internet/spotifyservice.cpp:254
 msgid "Connecting to Spotify"
 msgstr "Spajanje Spotify-a"
 
@@ -2173,7 +2173,7 @@ msgstr "URL Grooveshark pjesmi"
 msgid "Group Library by..."
 msgstr "Grupiraj zbirku po..."
 
-#: globalsearch/globalsearchview.cpp:423 library/libraryfilterwidget.cpp:82
+#: globalsearch/globalsearchview.cpp:428 library/libraryfilterwidget.cpp:82
 msgid "Group by"
 msgstr "Grupiraj po"
 
@@ -2284,12 +2284,12 @@ msgstr "Slike (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 #: core/utilities.cpp:140
 #, qt-format
 msgid "In %1 days"
-msgstr ""
+msgstr "Za %1 dana"
 
 #: core/utilities.cpp:144
 #, qt-format
 msgid "In %1 weeks"
-msgstr ""
+msgstr "Za %1 tjedna"
 
 #: ../bin/src/ui_wizardfinishpage.h:86
 msgid ""
@@ -2297,7 +2297,7 @@ msgid ""
 "time a song finishes."
 msgstr "U dinamičkom modu nove pjesme će biti izabrane i dodane u popis izvođenja svaki puta kada je pjesma odsvirana."
 
-#: internet/spotifyservice.cpp:356
+#: internet/spotifyservice.cpp:361
 msgid "Inbox"
 msgstr "Pristigle poruke"
 
@@ -2330,7 +2330,7 @@ msgstr "Informacije"
 msgid "Insert..."
 msgstr "Umetni..."
 
-#: internet/spotifysettingspage.cpp:74
+#: internet/spotifysettingspage.cpp:75
 msgid "Installed"
 msgstr "Instaliran"
 
@@ -2583,7 +2583,7 @@ msgstr "Učitaj omot sa diska"
 msgid "Load cover from disk..."
 msgstr "Učitajte omot sa diska..."
 
-#: playlist/playlistcontainer.cpp:292
+#: playlist/playlistcontainer.cpp:301
 msgid "Load playlist"
 msgstr "Otvorite popis izvođenja"
 
@@ -2722,7 +2722,7 @@ msgstr "Glavni profil (GLAVNI)"
 msgid "Make it so!"
 msgstr "Učinite tako!"
 
-#: internet/spotifyservice.cpp:529
+#: internet/spotifyservice.cpp:534
 msgid "Make playlist available offline"
 msgstr "Učini popis izvođenja dostupnim kada je veza prekinuta"
 
@@ -2961,7 +2961,7 @@ msgstr "Sljedeća pjesma"
 
 #: core/utilities.cpp:142
 msgid "Next week"
-msgstr ""
+msgstr "Sljedeći tjedan"
 
 #: analyzers/analyzercontainer.cpp:80
 msgid "No analyzer"
@@ -2975,7 +2975,7 @@ msgstr "Bez slike pozadine"
 msgid "No long blocks"
 msgstr "Bez dugih blokova"
 
-#: playlist/playlistcontainer.cpp:405
+#: playlist/playlistcontainer.cpp:425
 msgid ""
 "No matches found.  Clear the search box to show the whole playlist again."
 msgstr "Nema pronađenih podudaranja. Ispraznite okvir za pretraživanje da bi se ponovno pokazao popis izvođenja."
@@ -3025,7 +3025,7 @@ msgstr "Nema dovoljno članova"
 msgid "Not enough neighbors"
 msgstr "Nema dovoljno susjeda"
 
-#: internet/spotifysettingspage.cpp:74
+#: internet/spotifysettingspage.cpp:75
 msgid "Not installed"
 msgstr "Nije instaliran"
 
@@ -3103,7 +3103,7 @@ msgstr "Otvorite datoteku..."
 msgid "Open in Google Drive"
 msgstr "Otvori u Google disku"
 
-#: devices/deviceview.cpp:215 globalsearch/globalsearchview.cpp:416
+#: devices/deviceview.cpp:215 globalsearch/globalsearchview.cpp:421
 #: internet/internetservice.cpp:76 library/libraryview.cpp:371
 #: widgets/fileviewlist.cpp:36 ../bin/src/ui_behavioursettingspage.h:195
 msgid "Open in new playlist"
@@ -3259,7 +3259,7 @@ msgstr "Reprodukcija"
 msgid "Player options"
 msgstr "Mogućnosti preglednika"
 
-#: playlist/playlistcontainer.cpp:286 playlist/playlistmanager.cpp:83
+#: playlist/playlistcontainer.cpp:295 playlist/playlistmanager.cpp:83
 #: playlist/playlistmanager.cpp:383 playlist/playlisttabbar.cpp:292
 msgid "Playlist"
 msgstr "Popis izvođenja"
@@ -3433,7 +3433,7 @@ msgstr "Upravljanje odabranim pjesmama za reprodukciju"
 msgid "Queue selected tracks"
 msgstr "Odaberite označenu pjesmu za reprodukciju"
 
-#: globalsearch/globalsearchview.cpp:420 library/libraryview.cpp:375
+#: globalsearch/globalsearchview.cpp:425 library/libraryview.cpp:375
 #: ui/mainwindow.cpp:1298
 msgid "Queue track"
 msgstr "Odaberite pjesmu za reprodukciju"
@@ -3601,7 +3601,7 @@ msgstr "Ponovi popis izvođenja"
 msgid "Repeat track"
 msgstr "Ponovi pjesmu"
 
-#: devices/deviceview.cpp:213 globalsearch/globalsearchview.cpp:414
+#: devices/deviceview.cpp:213 globalsearch/globalsearchview.cpp:419
 #: internet/internetservice.cpp:66 library/libraryview.cpp:369
 #: widgets/fileviewlist.cpp:34
 msgid "Replace current playlist"
@@ -3695,7 +3695,7 @@ msgstr "Spremite omot na disk..."
 msgid "Save image"
 msgstr "Preuzmi sliku"
 
-#: playlist/playlistcontainer.cpp:329
+#: playlist/playlistcontainer.cpp:338
 msgid "Save playlist"
 msgstr "Spremite popis izvođenja"
 
@@ -3770,7 +3770,7 @@ msgid "Search options"
 msgstr "Mogućnosti pretraživanja"
 
 #: internet/groovesharkservice.cpp:578 internet/soundcloudservice.cpp:104
-#: internet/spotifyservice.cpp:343
+#: internet/spotifyservice.cpp:348
 msgid "Search results"
 msgstr "Rezultati pretrage"
 
@@ -4104,7 +4104,7 @@ msgstr "Speex"
 msgid "Spotify"
 msgstr "Spotify"
 
-#: internet/spotifyservice.cpp:182
+#: internet/spotifyservice.cpp:185
 msgid "Spotify login error"
 msgstr "Spotify greška kod prijave"
 
@@ -4120,7 +4120,7 @@ msgstr "Spotify dodatak nije instaliran"
 msgid "Standard"
 msgstr "Standardno"
 
-#: internet/spotifyservice.cpp:350
+#: internet/spotifyservice.cpp:355
 msgid "Starred"
 msgstr "Sa zvjezdicom"
 
@@ -4133,7 +4133,7 @@ msgid "Start transcoding"
 msgstr "Započni enkodiranje"
 
 #: internet/groovesharkservice.cpp:579 internet/soundcloudservice.cpp:105
-#: internet/spotifyservice.cpp:344
+#: internet/spotifyservice.cpp:349
 msgid ""
 "Start typing something on the search box above to fill this search results "
 "list"
@@ -4225,15 +4225,15 @@ msgstr "Super visoka (2048x2048)"
 msgid "Supported formats"
 msgstr "Podržani formati"
 
-#: internet/spotifyservice.cpp:557
+#: internet/spotifyservice.cpp:562
 msgid "Syncing Spotify inbox"
 msgstr "Sinkronizacija Spotify ulaznog spremnika"
 
-#: internet/spotifyservice.cpp:552
+#: internet/spotifyservice.cpp:557
 msgid "Syncing Spotify playlist"
 msgstr "Sinkroniziranje Spotify popisa izvođenja"
 
-#: internet/spotifyservice.cpp:561
+#: internet/spotifyservice.cpp:566
 msgid "Syncing Spotify starred tracks"
 msgstr "Sinkronizacija Spotify pjesama označenim zvjezdicama"
 
@@ -4464,13 +4464,13 @@ msgstr "Uključi/Isključi vidljivost za ljepši OSD"
 
 #: core/utilities.cpp:138
 msgid "Tomorrow"
-msgstr ""
+msgstr "Sutra"
 
 #: podcasts/podcasturlloader.cpp:114
 msgid "Too many redirects"
 msgstr "Previše preusmjeravanja"
 
-#: internet/spotifyservice.cpp:362
+#: internet/spotifyservice.cpp:367
 msgid "Top tracks"
 msgstr "Najpopularnije pjesme"
 
@@ -4926,7 +4926,7 @@ msgstr "Možete koristiti vaš Wii Daljinski Upravljač za daljinsko upravljanje
 msgid "You do not have a Grooveshark Anywhere account."
 msgstr "Nemate Grooveshark Anywhere račun."
 
-#: internet/spotifysettingspage.cpp:148
+#: internet/spotifysettingspage.cpp:149
 msgid "You do not have a Spotify Premium account."
 msgstr "Nemate Spotify Premium račun."
 
@@ -4934,13 +4934,13 @@ msgstr "Nemate Spotify Premium račun."
 msgid "You do not have an active subscription"
 msgstr "Nemate aktivnu pretplatu"
 
-#: internet/spotifyservice.cpp:168
+#: internet/spotifyservice.cpp:171
 msgid ""
 "You have been logged out of Spotify, please re-enter your password in the "
 "Settings dialog."
 msgstr "Odjavljeni ste iz Spotify-a, ponovno unesite vašu lozinku u mogućnostima."
 
-#: internet/spotifysettingspage.cpp:157
+#: internet/spotifysettingspage.cpp:158
 msgid "You have been logged out of Spotify, please re-enter your password."
 msgstr "Odjavljeni ste iz Spotify-a, ponovno unesite vašu lozinku."
 
@@ -4991,7 +4991,7 @@ msgid "Your system is missing OpenGL support, visualizations are unavailable."
 msgstr "Vašem sustavu nedostaje OpenGL podrška, vizualizacija je nedostupna."
 
 #: internet/groovesharksettingspage.cpp:107
-#: internet/spotifysettingspage.cpp:153
+#: internet/spotifysettingspage.cpp:154
 msgid "Your username or password was incorrect."
 msgstr "Vaše korisničko ime ili lozinka su neispravni."
 
@@ -5084,8 +5084,8 @@ msgid "in the last"
 msgstr "u posljednjih"
 
 #: playlist/playlistview.cpp:202 ui/edittagdialog.cpp:452
-#: internet/spotifysettingspage.cpp:59 internet/spotifysettingspage.cpp:60
-#: internet/spotifysettingspage.cpp:61
+#: internet/spotifysettingspage.cpp:60 internet/spotifysettingspage.cpp:61
+#: internet/spotifysettingspage.cpp:62
 msgid "kbps"
 msgstr "kbps"
 

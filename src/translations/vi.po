@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-08-28 12:52+0000\n"
+"PO-Revision-Date: 2012-09-09 06:42+0000\n"
 "Last-Translator: Lê Trường An <truongan@linuxmail.org>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -261,7 +261,7 @@ msgstr "<p>Các dấu bắt đầu là %, ví dụ: %artist %album %title </p>\n
 msgid "A Grooveshark Anywhere account is required."
 msgstr "Cần có tài khoản Grooveshark Anywhere."
 
-#: internet/spotifysettingspage.cpp:161
+#: internet/spotifysettingspage.cpp:162
 msgid "A Spotify Premium account is required."
 msgstr "Cần có tài khoản cao cấp của Spotify."
 
@@ -651,7 +651,7 @@ msgstr "Giao diện"
 msgid "Append files/URLs to the playlist"
 msgstr "Thêm tập tin/URLs vào danh sách"
 
-#: devices/deviceview.cpp:211 globalsearch/globalsearchview.cpp:412
+#: devices/deviceview.cpp:211 globalsearch/globalsearchview.cpp:417
 #: internet/internetservice.cpp:56 library/libraryview.cpp:367
 #: widgets/fileviewlist.cpp:32
 msgid "Append to current playlist"
@@ -1108,11 +1108,11 @@ msgstr "Cấu hình Magnatune..."
 msgid "Configure Shortcuts"
 msgstr "Phím tắt"
 
-#: internet/spotifyservice.cpp:522 internet/spotifyservice.cpp:534
+#: internet/spotifyservice.cpp:527 internet/spotifyservice.cpp:539
 msgid "Configure Spotify..."
 msgstr "Cấu hình Spotify..."
 
-#: globalsearch/globalsearchview.cpp:138 globalsearch/globalsearchview.cpp:425
+#: globalsearch/globalsearchview.cpp:138 globalsearch/globalsearchview.cpp:430
 msgid "Configure global search..."
 msgstr "Cấu hình tìm kiếm chung..."
 
@@ -1138,7 +1138,7 @@ msgstr "Kết nối tay cầm Wii sử dụng thao tác kích hoạt/vô hiệu"
 msgid "Connect device"
 msgstr "Kết nối thiết bị"
 
-#: internet/spotifyservice.cpp:251
+#: internet/spotifyservice.cpp:254
 msgid "Connecting to Spotify"
 msgstr "Kết nối đến Spotify"
 
@@ -2175,7 +2175,7 @@ msgstr "URL của bài hát trên Grooveshark"
 msgid "Group Library by..."
 msgstr "Nhóm Thư viện theo..."
 
-#: globalsearch/globalsearchview.cpp:423 library/libraryfilterwidget.cpp:82
+#: globalsearch/globalsearchview.cpp:428 library/libraryfilterwidget.cpp:82
 msgid "Group by"
 msgstr "Nhóm theo"
 
@@ -2299,7 +2299,7 @@ msgid ""
 "time a song finishes."
 msgstr "Trong chế độ năng động, các bài hát mới sẽ được chọn và thêm vào danh sách mỗi khi một bài hát được phát xong."
 
-#: internet/spotifyservice.cpp:356
+#: internet/spotifyservice.cpp:361
 msgid "Inbox"
 msgstr "Hộp thư đến"
 
@@ -2332,7 +2332,7 @@ msgstr "Thông tin"
 msgid "Insert..."
 msgstr "Nhập..."
 
-#: internet/spotifysettingspage.cpp:74
+#: internet/spotifysettingspage.cpp:75
 msgid "Installed"
 msgstr "Đã cài đặt"
 
@@ -2585,7 +2585,7 @@ msgstr "Nạp ảnh bìa từ đĩa"
 msgid "Load cover from disk..."
 msgstr "Nạp ảnh bìa từ đĩa..."
 
-#: playlist/playlistcontainer.cpp:292
+#: playlist/playlistcontainer.cpp:301
 msgid "Load playlist"
 msgstr "Mở danh sách"
 
@@ -2724,7 +2724,7 @@ msgstr "Hồ sơ chính (MAIN)"
 msgid "Make it so!"
 msgstr "Make it so!"
 
-#: internet/spotifyservice.cpp:529
+#: internet/spotifyservice.cpp:534
 msgid "Make playlist available offline"
 msgstr "Danh sách sẵn sàng ngoại tuyến"
 
@@ -2977,7 +2977,7 @@ msgstr "Không dùng ảnh nền"
 msgid "No long blocks"
 msgstr "Các khối không dài"
 
-#: playlist/playlistcontainer.cpp:405
+#: playlist/playlistcontainer.cpp:425
 msgid ""
 "No matches found.  Clear the search box to show the whole playlist again."
 msgstr "Không có kết quả nào trùng khớp. Xóa nội dung trong ô tìm kiếm để hiện danh sách trở lại."
@@ -3027,7 +3027,7 @@ msgstr "Chưa đủ thành viên"
 msgid "Not enough neighbors"
 msgstr "Chưa đủ những người lân cận"
 
-#: internet/spotifysettingspage.cpp:74
+#: internet/spotifysettingspage.cpp:75
 msgid "Not installed"
 msgstr "Chưa cài đặt"
 
@@ -3105,7 +3105,7 @@ msgstr "Mở tập tin..."
 msgid "Open in Google Drive"
 msgstr "Mở trong Google Drive"
 
-#: devices/deviceview.cpp:215 globalsearch/globalsearchview.cpp:416
+#: devices/deviceview.cpp:215 globalsearch/globalsearchview.cpp:421
 #: internet/internetservice.cpp:76 library/libraryview.cpp:371
 #: widgets/fileviewlist.cpp:36 ../bin/src/ui_behavioursettingspage.h:195
 msgid "Open in new playlist"
@@ -3134,11 +3134,11 @@ msgstr "Tuỳ chọn..."
 
 #: ../bin/src/ui_organisedialog.h:188
 msgid "Organise Files"
-msgstr "Tổ chức tập tin"
+msgstr "Sao chép tập tin"
 
 #: library/libraryview.cpp:387 ui/mainwindow.cpp:492
 msgid "Organise files..."
-msgstr "Tổ chức tập tin..."
+msgstr "Sao chép tập tin..."
 
 #: core/organise.cpp:65
 msgid "Organising files"
@@ -3261,7 +3261,7 @@ msgstr "Phát nhạc"
 msgid "Player options"
 msgstr "Tùy chỉnh phát nhạc"
 
-#: playlist/playlistcontainer.cpp:286 playlist/playlistmanager.cpp:83
+#: playlist/playlistcontainer.cpp:295 playlist/playlistmanager.cpp:83
 #: playlist/playlistmanager.cpp:383 playlist/playlisttabbar.cpp:292
 msgid "Playlist"
 msgstr "Danh sách"
@@ -3435,7 +3435,7 @@ msgstr "Quản lý danh sách chờ"
 msgid "Queue selected tracks"
 msgstr "Chờ phát những bài đã chọn"
 
-#: globalsearch/globalsearchview.cpp:420 library/libraryview.cpp:375
+#: globalsearch/globalsearchview.cpp:425 library/libraryview.cpp:375
 #: ui/mainwindow.cpp:1298
 msgid "Queue track"
 msgstr "Chờ phát sau"
@@ -3603,7 +3603,7 @@ msgstr "Lặp lại danh sách"
 msgid "Repeat track"
 msgstr "Lặp lại bài hát"
 
-#: devices/deviceview.cpp:213 globalsearch/globalsearchview.cpp:414
+#: devices/deviceview.cpp:213 globalsearch/globalsearchview.cpp:419
 #: internet/internetservice.cpp:66 library/libraryview.cpp:369
 #: widgets/fileviewlist.cpp:34
 msgid "Replace current playlist"
@@ -3697,7 +3697,7 @@ msgstr "Lưu lại ảnh bìa..."
 msgid "Save image"
 msgstr "Lưu ảnh"
 
-#: playlist/playlistcontainer.cpp:329
+#: playlist/playlistcontainer.cpp:338
 msgid "Save playlist"
 msgstr "Lưu danh sách"
 
@@ -3772,7 +3772,7 @@ msgid "Search options"
 msgstr "Tùy chỉnh tìm kiếm"
 
 #: internet/groovesharkservice.cpp:578 internet/soundcloudservice.cpp:104
-#: internet/spotifyservice.cpp:343
+#: internet/spotifyservice.cpp:348
 msgid "Search results"
 msgstr "Kết quả tìm kiếm"
 
@@ -4106,7 +4106,7 @@ msgstr "Speex"
 msgid "Spotify"
 msgstr "Spotify"
 
-#: internet/spotifyservice.cpp:182
+#: internet/spotifyservice.cpp:185
 msgid "Spotify login error"
 msgstr "Lỗi đăng nhập Spotify"
 
@@ -4122,7 +4122,7 @@ msgstr "Phần hỗ trợ Spotify chưa được cài đặt"
 msgid "Standard"
 msgstr "Chuẩn"
 
-#: internet/spotifyservice.cpp:350
+#: internet/spotifyservice.cpp:355
 msgid "Starred"
 msgstr "Đã đánh giá"
 
@@ -4135,7 +4135,7 @@ msgid "Start transcoding"
 msgstr "Bắt đầu chuyển mã"
 
 #: internet/groovesharkservice.cpp:579 internet/soundcloudservice.cpp:105
-#: internet/spotifyservice.cpp:344
+#: internet/spotifyservice.cpp:349
 msgid ""
 "Start typing something on the search box above to fill this search results "
 "list"
@@ -4227,15 +4227,15 @@ msgstr "Rất lớn (2048x2048)"
 msgid "Supported formats"
 msgstr "Các định dạng được hỗ trợ"
 
-#: internet/spotifyservice.cpp:557
+#: internet/spotifyservice.cpp:562
 msgid "Syncing Spotify inbox"
 msgstr "Đang đồng bộ hộp thư đến Spotify"
 
-#: internet/spotifyservice.cpp:552
+#: internet/spotifyservice.cpp:557
 msgid "Syncing Spotify playlist"
 msgstr "Đang đồng bộ danh sách Spotify"
 
-#: internet/spotifyservice.cpp:561
+#: internet/spotifyservice.cpp:566
 msgid "Syncing Spotify starred tracks"
 msgstr "Đang đồng bộ các bài hát được đánh dấu sao của Spotify"
 
@@ -4472,7 +4472,7 @@ msgstr "Ngày mai"
 msgid "Too many redirects"
 msgstr "Quá nhiều chuyển hướng"
 
-#: internet/spotifyservice.cpp:362
+#: internet/spotifyservice.cpp:367
 msgid "Top tracks"
 msgstr "Những bài đứng đầu"
 
@@ -4928,7 +4928,7 @@ msgstr "Bạn có thể điều khiển Clementine từ xa với tay cầm Wii. 
 msgid "You do not have a Grooveshark Anywhere account."
 msgstr "Bạn không có tài khoản Grooveshark Anywhere."
 
-#: internet/spotifysettingspage.cpp:148
+#: internet/spotifysettingspage.cpp:149
 msgid "You do not have a Spotify Premium account."
 msgstr "Bạn không có tài khoản cao cấp của Spotify."
 
@@ -4936,13 +4936,13 @@ msgstr "Bạn không có tài khoản cao cấp của Spotify."
 msgid "You do not have an active subscription"
 msgstr "Bạn không có một đăng kí được kích hoạt"
 
-#: internet/spotifyservice.cpp:168
+#: internet/spotifyservice.cpp:171
 msgid ""
 "You have been logged out of Spotify, please re-enter your password in the "
 "Settings dialog."
 msgstr "Bạn đã đăng xuất khỏi Spotify, hãy nhập lại mật khẩu trong hộp thoại Thiết lập."
 
-#: internet/spotifysettingspage.cpp:157
+#: internet/spotifysettingspage.cpp:158
 msgid "You have been logged out of Spotify, please re-enter your password."
 msgstr "Bạn đã đăng xuất khỏi Spotify, hãy nhập lại mật khẩu."
 
@@ -4993,7 +4993,7 @@ msgid "Your system is missing OpenGL support, visualizations are unavailable."
 msgstr "Hệ thống của bạn không hỗ trợ OpenGL, hiệu ứng hình ảnh ảo không chạy được."
 
 #: internet/groovesharksettingspage.cpp:107
-#: internet/spotifysettingspage.cpp:153
+#: internet/spotifysettingspage.cpp:154
 msgid "Your username or password was incorrect."
 msgstr "Tên người dùng hay mật khẩu không đúng."
 
@@ -5086,8 +5086,8 @@ msgid "in the last"
 msgstr "cuối"
 
 #: playlist/playlistview.cpp:202 ui/edittagdialog.cpp:452
-#: internet/spotifysettingspage.cpp:59 internet/spotifysettingspage.cpp:60
-#: internet/spotifysettingspage.cpp:61
+#: internet/spotifysettingspage.cpp:60 internet/spotifysettingspage.cpp:61
+#: internet/spotifysettingspage.cpp:62
 msgid "kbps"
 msgstr "kbps"
 
