@@ -1289,6 +1289,14 @@ if (APPLE)
   add_custom_target(clementine-breakpad
     DEPENDS ${PROJECT_BINARY_DIR}/clementine.breakpad)
 
+  if (APPLE_DEVELOPER_ID)
+    add_custom_command(TARGET clementine
+      POST_BUILD
+      COMMAND
+      codesign -s "${APPLE_DEVELOPER_ID}" -fv ${PROJECT_BINARY_DIR}/clementine.app
+    )
+  endif()
+
 
   add_custom_command(
     OUTPUT ${PROJECT_BINARY_DIR}/clementine-${CLEMENTINE_VERSION_SPARKLE}.dmg
