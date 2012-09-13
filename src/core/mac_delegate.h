@@ -23,14 +23,20 @@ class PlatformInterface;
 }
 
 - (id) initWithHandler: (PlatformInterface*)handler;
+
 // NSApplicationDelegate
 - (BOOL) applicationShouldHandleReopen: (NSApplication*)app hasVisibleWindows:(BOOL)flag;
 - (NSMenu*) applicationDockMenu: (NSApplication*)sender;
+- (void)applicationDidFinishLaunching:(NSNotification*)aNotification;
+- (NSApplicationTerminateReply) applicationShouldTerminate:(NSApplication*)sender;
+
+// NSUserNotificationCenterDelegate
+- (BOOL) userNotificationCenter: (id)center
+    shouldPresentNotification: (id)notification;
+
 - (void) setDockMenu: (NSMenu*)menu;
 - (MacGlobalShortcutBackend*) shortcut_handler;
 - (void) setShortcutHandler: (MacGlobalShortcutBackend*)backend;
-- (void)applicationDidFinishLaunching:(NSNotification*)aNotification;
-- (NSApplicationTerminateReply) applicationShouldTerminate:(NSApplication*)sender;
 - (void) mediaKeyTap: (SPMediaKeyTap*)keyTap receivedMediaKeyEvent:(NSEvent*)event;
 @end
 

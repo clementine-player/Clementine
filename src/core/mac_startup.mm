@@ -200,6 +200,12 @@ static BreakpadRef InitBreakpad() {
 #endif
   return NSTerminateNow;
 }
+
+- (BOOL) userNotificationCenter: (id)center shouldPresentNotification: (id)notification {
+  // Always show notifications, even if Clementine is in the foreground.
+  return YES;
+}
+
 @end
 
 @implementation MacApplication
@@ -232,12 +238,18 @@ static BreakpadRef InitBreakpad() {
   // this makes sure the delegate's shortcut_handler is set
   [delegate_ setShortcutHandler:shortcut_handler_];
   [self setDelegate:delegate_];
+
+  Class notification_center_class = NSClassFromString(@"NSUserNotificationCenter");
+  if (notification_center_class) {
+    id notification_center = [notification_center_class defaultUserNotificationCenter];
+    [notification_center setDelegate: delegate_];
+  }
 }
 
 -(void) sendEvent: (NSEvent*)event {
   // If event tap is not installed, handle events that reach the app instead
   BOOL shouldHandleMediaKeyEventLocally = ![SPMediaKeyTap usesGlobalMediaKeyTap];
-  
+
   if(shouldHandleMediaKeyEventLocally && [event type] == NSSystemDefined && [event subtype] == SPSystemDefinedEventMediaKeys) {
     [(id)[self delegate] mediaKeyTap: nil receivedMediaKeyEvent: event];
   }
