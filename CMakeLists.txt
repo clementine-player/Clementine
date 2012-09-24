@@ -281,6 +281,8 @@ if(ENABLE_VISUALISATIONS)
   endif(USE_SYSTEM_PROJECTM)
 endif(ENABLE_VISUALISATIONS)
 
+option(BUNDLE_PROJECTM_PRESETS "Install Clementine's own copies of libprojectm presets - disable this if you want to use a system package instead" ON)
+
 # We compile our own qsqlite3 by default now, because in Qt 4.7 the symbols we
 # need from it are private.
 option(STATIC_SQLITE "Compile and use a static sqlite3 library" ON)
