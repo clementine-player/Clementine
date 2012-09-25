@@ -90,17 +90,7 @@ if (APPLE)
 
   add_subdirectory(3rdparty/SPMediaKeyTap)
   set(SPMEDIAKEYTAP_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/SPMediaKeyTap)
-  set(SPMEDIAKEYTAP_LIBRARIES SPMediaKeyTap)  
-
-  # Uses Darwin kernel version.
-  # 9.8.0  -> 10.5/Leopard
-  # 10.4.0 -> 10.6/Snow Leopard
-  string(REGEX MATCH "[0-9]+" DARWIN_VERSION ${CMAKE_HOST_SYSTEM_VERSION})
-  if (DARWIN_VERSION GREATER 9)
-    SET(SNOW_LEOPARD 1)
-  elseif (DARWIN_VERSION GREATER 8)
-    SET(LEOPARD 1)
-  endif (DARWIN_VERSION GREATER 9)
+  set(SPMEDIAKEYTAP_LIBRARIES SPMediaKeyTap)
 endif (APPLE)
 
 find_package(Threads)
