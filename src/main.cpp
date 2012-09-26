@@ -117,8 +117,13 @@ void LoadTranslation(const QString& prefix, const QString& path,
     return;
 #endif
 
+#if QT_VERSION >= 0x040800
   QString system_language = QLocale::system().uiLanguages().empty() ?
       QLocale::system().name() : QLocale::system().uiLanguages()[0];
+#else
+  QString system_language = QLocale::system().name();
+#endif
+
   QString language = override_language.isEmpty() ?
                      system_language : override_language;
 
