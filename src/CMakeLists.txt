@@ -309,6 +309,7 @@ set(SOURCES
   ui/appearancesettingspage.cpp
   ui/backgroundstreamssettingspage.cpp
   ui/behavioursettingspage.cpp
+  ui/console.cpp
   ui/coverfromurldialog.cpp
   ui/edittagdialog.cpp
   ui/equalizer.cpp
@@ -562,6 +563,7 @@ set(HEADERS
   ui/appearancesettingspage.h
   ui/backgroundstreamssettingspage.h
   ui/behavioursettingspage.h
+  ui/console.h
   ui/coverfromurldialog.h
   ui/edittagdialog.h
   ui/equalizer.h
@@ -677,6 +679,7 @@ set(UI
   ui/appearancesettingspage.ui
   ui/backgroundstreamssettingspage.ui
   ui/behavioursettingspage.ui
+  ui/console.ui
   ui/coverfromurldialog.ui
   ui/edittagdialog.ui
   ui/equalizer.ui

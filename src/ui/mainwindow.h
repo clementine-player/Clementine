@@ -252,6 +252,8 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   void FocusGlobalSearchField();
   void DoGlobalSearch(const QString& query);
 
+  void ShowConsole();
+
  private:
   void ConnectInfoView(SongInfoBase* view);
 

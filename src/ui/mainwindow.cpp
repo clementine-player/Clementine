@@ -74,6 +74,7 @@
 #include "ui/about.h"
 #include "ui/addstreamdialog.h"
 #include "ui/albumcovermanager.h"
+#include "ui/console.h"
 #include "ui/edittagdialog.h"
 #include "ui/equalizer.h"
 #include "ui/iconloader.h"
@@ -653,6 +654,7 @@ MainWindow::MainWindow(Application* app,
           SLOT(NowPlayingWidgetPositionChanged(bool)));
   connect(ui_->action_hypnotoad, SIGNAL(toggled(bool)), ui_->now_playing, SLOT(AllHail(bool)));
   connect(ui_->action_kittens, SIGNAL(toggled(bool)), ui_->now_playing, SLOT(EnableKittens(bool)));
+  connect(ui_->action_console, SIGNAL(triggered()), SLOT(ShowConsole()));
   NowPlayingWidgetPositionChanged(ui_->now_playing->show_above_status_bar());
 
   // Load theme
@@ -2256,4 +2258,9 @@ void MainWindow::FocusGlobalSearchField() {
 void MainWindow::DoGlobalSearch(const QString& query) {
   FocusGlobalSearchField();
   global_search_view_->StartSearch(query);
+}
+
+void MainWindow::ShowConsole() {
+  Console* console = new Console(app_, this);
+  console->show();
 }
