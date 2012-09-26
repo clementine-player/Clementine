@@ -709,7 +709,7 @@ QList<QUrl> MacDeviceLister::MakeDeviceUrls(const QString& serial) {
   }
 
   if (IsCDDevice(serial)) {
-    return QList<QUrl>() << QString("cdda:///dev/r" + serial);
+    return QList<QUrl>() << QUrl(QString("cdda:///dev/r" + serial));
   }
 
   QString bsd_name = current_devices_[serial];
