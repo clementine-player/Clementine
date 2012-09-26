@@ -117,8 +117,10 @@ void LoadTranslation(const QString& prefix, const QString& path,
     return;
 #endif
 
+  QString system_language = QLocale::system().uiLanguages().empty() ?
+      QLocale::system().name() : QLocale::system().uiLanguages()[0];
   QString language = override_language.isEmpty() ?
-                     QLocale::system().name() : override_language;
+                     system_language : override_language;
 
   QTranslator* t = new PoTranslator;
   if (t->load(prefix + "_" + language, path))
