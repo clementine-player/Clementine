@@ -1,6 +1,7 @@
 #include "console.h"
 
 #include <QFont>
+#include <QScrollBar>
 #include <QSqlDatabase>
 #include <QSqlQuery>
 #include <QSqlRecord>
@@ -41,4 +42,7 @@ void Console::RunQuery() {
 
     query.next();
   }
+
+  ui_.output->verticalScrollBar()->setValue(
+      ui_.output->verticalScrollBar()->maximum());
 }
