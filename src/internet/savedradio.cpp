@@ -72,7 +72,7 @@ void SavedRadio::LoadStreams() {
   int count = s.beginReadArray("streams");
   for (int i=0 ; i<count ; ++i) {
     s.setArrayIndex(i);
-    streams_ << Stream(s.value("url").toString(), s.value("name").toString());
+    streams_ << Stream(QUrl(s.value("url").toString()), s.value("name").toString());
   }
   s.endArray();
 }

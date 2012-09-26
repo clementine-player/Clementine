@@ -875,7 +875,7 @@ void LastFMService::FetchMoreTracksFinished() {
     const XmlQuery& playlist = query["playlist"];
     foreach (const XmlQuery& q, playlist["trackList"].children("track")) {
       lastfm::MutableTrack t;
-      t.setUrl(q["location"].text());
+      t.setUrl(QUrl(q["location"].text()));
       t.setExtra("trackauth", q["extension"]["trackauth"].text());
       t.setTitle(q["title"].text());
       t.setArtist(q["creator"].text());

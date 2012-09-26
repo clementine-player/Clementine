@@ -1731,7 +1731,7 @@ Song GroovesharkService::ExtractSong(const QVariantMap& result_song) {
     // play, we generate a fake URL for now, and we will create a real streaming
     // URL when user will actually play the song (through url handler)
     // URL is grooveshark://artist_id/album_id/song_id
-    song.set_url(QString("grooveshark://%1/%2/%3").arg(artist_id).arg(album_id).arg(song_id));
+    song.set_url(QUrl(QString("grooveshark://%1/%2/%3").arg(artist_id).arg(album_id).arg(song_id)));
   }
   return song;
 }

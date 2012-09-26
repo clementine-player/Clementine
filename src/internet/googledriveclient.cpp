@@ -160,7 +160,7 @@ void Client::ListFilesFinished(ListFilesResponse* response, QNetworkReply* reply
 GetFileResponse* Client::GetFile(const QString& file_id) {
   GetFileResponse* ret = new GetFileResponse(file_id, this);
 
-  QString url = QString(kGoogleDriveFile).arg(file_id);
+  QUrl url(QString(kGoogleDriveFile).arg(file_id));
 
   QNetworkRequest request = QNetworkRequest(url);
   AddAuthorizationHeader(&request);

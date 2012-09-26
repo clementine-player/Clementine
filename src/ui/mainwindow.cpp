@@ -1843,7 +1843,7 @@ void MainWindow::PlaylistOpenInBrowser() {
 
   foreach (const QModelIndex& proxy_index, proxy_indexes) {
     const QModelIndex index = app_->playlist_manager()->current()->proxy()->mapToSource(proxy_index);
-    urls << index.sibling(index.row(), Playlist::Column_Filename).data().toString();
+    urls << QUrl(index.sibling(index.row(), Playlist::Column_Filename).data().toString());
   }
 
   Utilities::OpenInFileBrowser(urls);

@@ -224,7 +224,7 @@ bool CommandlineOptions::Parse() {
     if (file_info.exists())
       urls_ << QUrl::fromLocalFile(file_info.canonicalFilePath());
     else
-      urls_ << value;
+      urls_ << QUrl::fromUserInput(value);
   }
 
   return true;

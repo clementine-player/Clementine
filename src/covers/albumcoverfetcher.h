@@ -27,6 +27,7 @@
 #include <QNetworkAccessManager>
 #include <QObject>
 #include <QQueue>
+#include <QUrl>
 
 #include <boost/scoped_ptr.hpp>
 
@@ -63,7 +64,7 @@ struct CoverSearchResult {
   QString description;
 
   // an URL of a cover image described by this CoverSearchResult
-  QString image_url;
+  QUrl image_url;
 };
 Q_DECLARE_METATYPE(CoverSearchResult);
 

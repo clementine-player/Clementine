@@ -118,7 +118,7 @@ IcecastBackend::StationList IcecastBackend::GetStations(const QString& filter,
   while (q.next()) {
     Station station;
     station.name       = q.value(0).toString();
-    station.url        = q.value(1).toString();
+    station.url        = QUrl(q.value(1).toString());
     station.mime_type  = q.value(2).toString();
     station.bitrate    = q.value(3).toInt();
     station.channels   = q.value(4).toInt();

@@ -212,7 +212,7 @@ void GoogleDriveService::ReadTagsFinished(TagReaderClient::ReplyType* reply,
   song.set_ctime(metadata.created_date().toTime_t());
   song.set_comment(metadata.description());
   song.set_directory_id(0);
-  song.set_url(url);
+  song.set_url(QUrl(url));
 
   // Use the Google Drive title if we couldn't read tags from the file.
   if (song.title().isEmpty()) {

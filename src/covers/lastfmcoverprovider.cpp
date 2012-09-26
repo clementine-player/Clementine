@@ -57,7 +57,7 @@ void LastFmCoverProvider::QueryFinished() {
     foreach (const lastfm::XmlQuery& element, elements) {
       CoverSearchResult result;
       result.description = element["artist"].text() + " - " + element["name"].text();
-      result.image_url = element["image size=extralarge"].text();
+      result.image_url = QUrl(element["image size=extralarge"].text());
       results << result;
     }
   } else {

@@ -129,7 +129,7 @@ void AmazonCoverProvider::ReadLargeImage(QXmlStreamReader* reader, CoverSearchRe
     case QXmlStreamReader::StartElement:
       if (reader->name() == "URL") {
         CoverSearchResult result;
-        result.image_url = reader->readElementText();
+        result.image_url = QUrl(reader->readElementText());
         results->append(result);
       } else {
         reader->skipCurrentElement();

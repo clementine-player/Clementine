@@ -95,8 +95,8 @@ void ITunesSearchPage::SearchFinished(QNetworkReply* reply) {
     podcast.set_title(result["trackName"].toString());
     podcast.set_url(result["feedUrl"].toUrl());
     podcast.set_link(result["trackViewUrl"].toUrl());
-    podcast.set_image_url_small(result["artworkUrl30"].toString());
-    podcast.set_image_url_large(result["artworkUrl100"].toString());
+    podcast.set_image_url_small(QUrl(result["artworkUrl30"].toString()));
+    podcast.set_image_url_large(QUrl(result["artworkUrl100"].toString()));
 
     model()->appendRow(model()->CreatePodcastItem(podcast));
   }

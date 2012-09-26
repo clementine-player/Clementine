@@ -119,7 +119,7 @@ void MagnatuneDownloadDialog::DownloadNext() {
   QString sku = item->data(0, Qt::UserRole).toString();
   item->setData(1, Qt::DisplayRole, tr("Starting..."));
 
-  QUrl url = QString(MagnatuneService::kDownloadUrl);
+  QUrl url(MagnatuneService::kDownloadUrl);
   url.setUserName(service_->username());
   url.setPassword(service_->password());
   url.addQueryItem("id", MagnatuneService::kPartnerId);

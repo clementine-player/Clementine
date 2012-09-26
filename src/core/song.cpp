@@ -588,7 +588,7 @@ void Song::InitFromLastFM(const lastfm::Track& track) {
     filename.replace(':', '/');
 
     if (prefix.contains("://")) {
-      d->url_ = prefix + filename;
+      d->url_ = QUrl(prefix + filename);
     } else {
       d->url_ = QUrl::fromLocalFile(prefix + filename);
     }
