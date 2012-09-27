@@ -1627,8 +1627,6 @@ QNetworkReply* GroovesharkService::CreateRequest(
   QJson::Serializer serializer;
   QByteArray post_params = serializer.serialize(request_params);
 
-  qLog(Debug) << post_params;
-
   QUrl url(kUrl);
   if (use_https) {
     url.setScheme("https");
@@ -1676,7 +1674,6 @@ QVariantMap GroovesharkService::ExtractResult(QNetworkReply* reply) {
   if (!ok) {
     qLog(Error) << "Error while parsing Grooveshark result";
   }
-  qLog(Debug) << result;
   QVariantList errors = result["errors"].toList();
   QVariantList::iterator it;
   for (it = errors.begin(); it != errors.end(); ++it) {
