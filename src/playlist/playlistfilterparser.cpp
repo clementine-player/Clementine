@@ -47,6 +47,16 @@ class EqComparator : public SearchTermComparator {
   QString search_term_;
 };
 
+class NeComparator : public SearchTermComparator {
+ public:
+  explicit NeComparator(const QString& value) : search_term_(value) {}
+  virtual bool Matches(const QString& element) const {
+    return search_term_ != element;
+  }
+ private:
+  QString search_term_;
+};
+
 class LexicalGtComparator : public SearchTermComparator {
  public:
   explicit LexicalGtComparator(const QString& value) : search_term_(value) {}
@@ -362,29 +372,30 @@ FilterTree* FilterParser::parseSearchTerm() {
   bool inQuotes = false;
   for (; iter_ != end_; ++iter_) {
     if (inQuotes) {
-      if (*iter_ == QChar('"'))
+      if (*iter_ == '"')
         inQuotes = false;
       else
         buf_ += *iter_;
     } else {
-      if (*iter_ == QChar('"')) {
+      if (*iter_ == '"') {
         inQuotes = true;
-      } else if (col.isEmpty() && *iter_ == QChar(':')) {
+      } else if (col.isEmpty() && *iter_ == ':') {
         col = buf_.toLower();
         buf_.clear();
         prefix.clear();  // prefix isn't allowed here - let's ignore it
       } else if (iter_->isSpace() ||
-                  *iter_ == QChar('(') ||
-                  *iter_ == QChar(')') ||
-                  *iter_ == QChar('-')) {
+                  *iter_ == '(' ||
+                  *iter_ == ')' ||
+                  *iter_ == '-') {
           break;
       } else if (buf_.isEmpty()) {
         // we don't know whether there is a column part in this search term
         // thus we assume the latter and just try and read a prefix
         if (prefix.isEmpty() &&
-            (*iter_ == QChar('>') || *iter_ == QChar('<') || *iter_ == QChar('='))) {
+            (*iter_ == '>' || *iter_ == '<' || *iter_ == '=' ||
+             *iter_ == '!')) {
           prefix += *iter_;
-        } else if (prefix != QString("=") && *iter_ == QChar('=')) {
+        } else if (prefix != "=" && *iter_ == '=') {
           prefix += *iter_;
         } else {
           buf_ += *iter_;
@@ -416,34 +427,36 @@ FilterTree* FilterParser::createSearchTermTreeNode(const QString& col, const QSt
     // here comes a mess :/
     // well, not that much of a mess, but so many options -_-
     SearchTermComparator* cmp = NULL;
-    if (prefix == QString("=")) {
+    if (prefix == "=") {
       cmp = new EqComparator(search);
+    } else if (prefix == "!=" || prefix == "<>") {
+      cmp = new NeComparator(search);
     } else if (!col.isEmpty() && columns_.contains(col) && exact_columns_.contains(columns_[col])) {
       // the length column contains the time in seconds (nano seconds, actually -
       //  the "nano" part is handled by the DropTailComparatorDecorator,  though).
       QString _search = columns_[col] == Playlist::Column_Length ? parseTime(search) : search;
 
       // alright, back to deciding which comparator we'll use
-      if (prefix == QString(">")) {
+      if (prefix == ">") {
         cmp = new GtComparator(_search.toInt());
-      } else if (prefix == QString(">=")) {
+      } else if (prefix == ">=") {
         cmp = new GeComparator(_search.toInt());
-      } else if (prefix == QString("<")) {
+      } else if (prefix == "<") {
         cmp = new LtComparator(_search.toInt());
-      } else if (prefix == QString("<=")) {
+      } else if (prefix == "<=") {
         cmp = new LeComparator(_search.toInt());
       } else {
         // just to be sure :-)
         cmp = new EqComparator(_search);
       }
     } else {
-      if (prefix == QString(">")) {
+      if (prefix == ">") {
         cmp = new LexicalGtComparator(search);
-      } else if (prefix == QString(">=")) {
+      } else if (prefix == ">=") {
         cmp = new LexicalGeComparator(search);
-      } else if (prefix == QString("<")) {
+      } else if (prefix == "<") {
         cmp = new LexicalLtComparator(search);
-      } else if (prefix == QString("<=")) {
+      } else if (prefix == "<=") {
         cmp = new LexicalLeComparator(search);
       } else {
         // just to be sure :-)
