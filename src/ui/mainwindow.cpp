@@ -1902,7 +1902,7 @@ void MainWindow::ChangeLibraryQueryMode(QAction* action) {
 
 void MainWindow::ShowCoverManager() {
   if (!cover_manager_) {
-    cover_manager_.reset(new AlbumCoverManager(app_));
+    cover_manager_.reset(new AlbumCoverManager(app_, app_->library_backend()));
     cover_manager_->Init();
 
     // Cover manager connections

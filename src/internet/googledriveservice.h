@@ -8,8 +8,10 @@
 
 class QStandardItem;
 
+class AlbumCoverManager;
 class LibraryBackend;
 class LibraryModel;
+class PlaylistManager;
 class TaskManager;
 class QSortFilterProxyModel;
 
@@ -56,6 +58,8 @@ class GoogleDriveService : public InternetService {
 
   void OpenWithDrive();
   void ShowSettingsDialog();
+  void ShowCoverManager();
+  void AddToPlaylist(QMimeData* mime);
 
  private:
   void EnsureConnected();
@@ -73,11 +77,14 @@ class GoogleDriveService : public InternetService {
   LibraryBackend* library_backend_;
   LibraryModel* library_model_;
   QSortFilterProxyModel* library_sort_model_;
+  PlaylistManager* playlist_manager_;
 
   int indexing_task_id_;
 
   boost::scoped_ptr<QMenu> context_menu_;
   QAction* open_in_drive_action_;
+
+  boost::scoped_ptr<AlbumCoverManager> cover_manager_;
 };
 
 #endif

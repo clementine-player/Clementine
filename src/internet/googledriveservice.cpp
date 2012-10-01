@@ -13,10 +13,12 @@
 #include "core/player.h"
 #include "core/taskmanager.h"
 #include "core/timeconstants.h"
+#include "ui/albumcovermanager.h"
 #include "globalsearch/globalsearch.h"
 #include "globalsearch/librarysearchprovider.h"
 #include "library/librarybackend.h"
 #include "library/librarymodel.h"
+#include "playlist/playlist.h"
 #include "ui/iconloader.h"
 #include "googledriveclient.h"
 #include "googledriveurlhandler.h"
@@ -39,7 +41,8 @@ GoogleDriveService::GoogleDriveService(Application* app, InternetModel* parent)
       root_(NULL),
       client_(new google_drive::Client(this)),
       task_manager_(app->task_manager()),
-      library_sort_model_(new QSortFilterProxyModel(this)) {
+      library_sort_model_(new QSortFilterProxyModel(this)),
+      playlist_manager_(app->playlist_manager()) {
   library_backend_ = new LibraryBackend;
   library_backend_->moveToThread(app_->database()->thread());
   library_backend_->Init(app_->database(), kSongsTable,
@@ -245,6 +248,11 @@ void GoogleDriveService::ShowContextMenu(const QPoint& global_pos) {
           QIcon(":/providers/googledrive.png"), tr("Open in Google Drive"),
           this, SLOT(OpenWithDrive()));
     context_menu_->addSeparator();
+    context_menu_->addAction(
+        IconLoader::Load("download"),
+        tr("Cover Manager"),
+        this,
+        SLOT(ShowCoverManager()));
     context_menu_->addAction(IconLoader::Load("configure"),
                              tr("Configure..."),
                              this, SLOT(ShowSettingsDialog()));
@@ -284,4 +292,19 @@ void GoogleDriveService::OpenWithDrive() {
 
 void GoogleDriveService::ShowSettingsDialog() {
   app_->OpenSettingsDialogAtPage(SettingsDialog::Page_GoogleDrive);
+}
+
+void GoogleDriveService::ShowCoverManager() {
+  if (!cover_manager_) {
+    cover_manager_.reset(new AlbumCoverManager(app_, library_backend_));
+    cover_manager_->Init();
+    connect(cover_manager_.get(), SIGNAL(AddToPlaylist(QMimeData*)), SLOT(AddToPlaylist(QMimeData*)));
+  }
+
+  cover_manager_->show();
+}
+
+void GoogleDriveService::AddToPlaylist(QMimeData* mime) {
+  playlist_manager_->current()->dropMimeData(
+      mime, Qt::CopyAction, -1, 0, QModelIndex());
 }

@@ -51,6 +51,7 @@
 const char* AlbumCoverManager::kSettingsGroup = "CoverManager";
 
 AlbumCoverManager::AlbumCoverManager(Application* app,
+                                     LibraryBackend* library_backend,
                                      QWidget* parent,
                                      QNetworkAccessManager* network)
   : QMainWindow(parent),
@@ -63,7 +64,8 @@ AlbumCoverManager::AlbumCoverManager(Application* app,
     all_artists_icon_(IconLoader::Load("x-clementine-album")),
     context_menu_(new QMenu(this)),
     progress_bar_(new QProgressBar(this)),
-    jobs_(0)
+    jobs_(0),
+    library_backend_(library_backend)
 {
   ui_->setupUi(this);
   ui_->albums->set_cover_manager(this);
@@ -110,7 +112,7 @@ AlbumCoverManager::~AlbumCoverManager() {
 }
 
 LibraryBackend* AlbumCoverManager::backend() const {
-  return app_->library_backend();
+  return library_backend_;
 }
 
 void AlbumCoverManager::Init() {
@@ -244,7 +246,7 @@ void AlbumCoverManager::Reset() {
   new QListWidgetItem(all_artists_icon_, tr("All artists"), ui_->artists, All_Artists);
   new QListWidgetItem(artist_icon_, tr("Various artists"), ui_->artists, Various_Artists);
 
-  QStringList artists(app_->library_backend()->GetAllArtistsWithAlbums());
+  QStringList artists(library_backend_->GetAllArtistsWithAlbums());
   qStableSort(artists.begin(), artists.end(), CompareNocase);
 
   foreach (const QString& artist, artists) {
@@ -275,10 +277,10 @@ void AlbumCoverManager::ArtistChanged(QListWidgetItem* current) {
   // selected in the artist list.
   LibraryBackend::AlbumList albums;
   switch (current->type()) {
-    case Various_Artists: albums = app_->library_backend()->GetCompilationAlbums(); break;
-    case Specific_Artist: albums = app_->library_backend()->GetAlbumsByArtist(current->text()); break;
+    case Various_Artists: albums = library_backend_->GetCompilationAlbums(); break;
+    case Specific_Artist: albums = library_backend_->GetAlbumsByArtist(current->text()); break;
     case All_Artists:
-    default:              albums = app_->library_backend()->GetAllAlbums(); break;
+    default:              albums = library_backend_->GetAllAlbums(); break;
   }
 
   // Sort by album name.  The list is already sorted by sqlite but it was done
@@ -634,7 +636,7 @@ SongList AlbumCoverManager::GetSongsInAlbum(const QModelIndex& index) const {
   if (!artist.isEmpty())
     q.AddWhere("artist", artist);
 
-  if (!app_->library_backend()->ExecQuery(&q))
+  if (!library_backend_->ExecQuery(&q))
     return ret;
 
   while (q.Next()) {
@@ -659,7 +661,7 @@ SongMimeData* AlbumCoverManager::GetMimeDataForAlbums(const QModelIndexList& ind
     return NULL;
 
   SongMimeData* data = new SongMimeData;
-  data->backend = app_->library_backend();
+  data->backend = library_backend_;
   data->songs = songs;
   return data;
 }
@@ -691,7 +693,7 @@ void AlbumCoverManager::SaveAndSetCover(QListWidgetItem *item, const QImage &ima
   QString path = album_cover_choice_controller_->SaveCoverInCache(artist, album, image);
 
   // Save the image in the database
-  app_->library_backend()->UpdateManualAlbumArtAsync(artist, album, path);
+  library_backend_->UpdateManualAlbumArtAsync(artist, album, path);
 
   // Update the icon in our list
   quint64 id = app_->album_cover_loader()->LoadImageAsync(
