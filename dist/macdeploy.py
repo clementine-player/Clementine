@@ -78,6 +78,10 @@ GSTREAMER_PLUGINS=[
 
     # CD support
     'libgstcdio.so',
+
+    # RTSP streaming
+    'libgstrtp.so',
+    'libgstrtsp.so',
 ]
 
 GSTREAMER_SEARCH_PATH=[
