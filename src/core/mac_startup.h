@@ -5,6 +5,7 @@
 
 class MacGlobalShortcutBackend;
 class QObject;
+class QWidget;
 
 class PlatformInterface {
  public:
@@ -28,6 +29,7 @@ QString GetApplicationSupportPath();
 QString GetMusicDirectory();
 
 bool MigrateLegacyConfigFiles();
+void EnableFullScreen(const QWidget& main_window);
 
 }  // namespace mac
 

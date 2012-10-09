@@ -431,6 +431,9 @@ int main(int argc, char *argv[]) {
 
   // Window
   MainWindow w(&app, tray_icon.get(), &osd);
+#ifdef Q_OS_DARWIN
+  mac::EnableFullScreen(w);
+#endif  // Q_OS_DARWIN
 #ifdef HAVE_GIO
   ScanGIOModulePath();
 #endif
