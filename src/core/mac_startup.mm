@@ -52,11 +52,13 @@
 #import <Sparkle/SUUpdater.h>
 #endif
 
+#include <QApplication>
 #include <QCoreApplication>
 #include <QDir>
 #include <QEvent>
 #include <QFile>
 #include <QSettings>
+#include <QWidget>
 
 #include <QtDebug>
 
@@ -470,6 +472,19 @@ QKeySequence KeySequenceFromNSEvent(NSEvent* event) {
 void DumpDictionary(CFDictionaryRef dict) {
   NSDictionary* d = (NSDictionary*)dict;
   NSLog(@"%@", d);
+}
+
+// NSWindowCollectionBehaviorFullScreenPrimary
+static const NSUInteger kFullScreenPrimary = 1 << 7;
+
+void EnableFullScreen(const QWidget& main_window) {
+  if (QSysInfo::MacintoshVersion == QSysInfo::MV_SNOWLEOPARD) {
+    return;  // Unsupported on 10.6
+  }
+
+  NSView* view = reinterpret_cast<NSView*>(main_window.winId());
+  NSWindow* window = [view window];
+  [window setCollectionBehavior: kFullScreenPrimary];
 }
 
 }  // namespace mac
