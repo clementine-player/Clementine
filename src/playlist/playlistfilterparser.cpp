@@ -17,6 +17,7 @@
 
 #include "playlistfilterparser.h"
 #include "playlist.h"
+#include "core/logging.h"
 
 #include <QAbstractItemModel>
 
@@ -156,6 +157,17 @@ class DropTailComparatorDecorator : public SearchTermComparator {
   QScopedPointer<SearchTermComparator> cmp_;
 };
 
+class RatingComparatorDecorator : public SearchTermComparator {
+ public:
+  explicit RatingComparatorDecorator(SearchTermComparator* cmp) : cmp_(cmp) {}
+  virtual bool Matches(const QString& element) const {
+    return cmp_->Matches(
+        QString::number(static_cast<int>(element.toDouble() * 10.0 + 0.5)));
+  }
+ private:
+  QScopedPointer<SearchTermComparator> cmp_;
+};
+
 // filter that applies a SearchTermComparator to all fields of a playlist entry
 class FilterTerm : public FilterTree {
  public:
@@ -234,8 +246,8 @@ class AndFilter : public FilterTree {
   QList<FilterTree*> children_;
 };
 
-FilterParser::FilterParser(const QString& filter, const QMap<QString, int>& columns, const QSet<int>& exact_cols)
-    : filterstring_(filter), columns_(columns), exact_columns_(exact_cols)
+FilterParser::FilterParser(const QString& filter, const QMap<QString, int>& columns, const QSet<int>& numerical_cols)
+    : filterstring_(filter), columns_(columns), numerical_columns_(numerical_cols)
 {
 }
 
@@ -310,7 +322,7 @@ bool FilterParser::checkAnd() {
 
 bool FilterParser::checkOr(bool step_over) {
   if (!buf_.isEmpty()) {
-    if (buf_ == QString("OR")) {
+    if (buf_ == "OR") {
       if (step_over) {
         buf_.clear();
         advance();
@@ -319,13 +331,13 @@ bool FilterParser::checkOr(bool step_over) {
     }
   } else {
     if (iter_ != end_) {
-      if (*iter_ == QChar('O')) {
+      if (*iter_ == 'O') {
         buf_ += *iter_;
         iter_++;
-        if (iter_ != end_ && *iter_ == QChar('R')) {
+        if (iter_ != end_ && *iter_ == 'R') {
           buf_ += *iter_;
           iter_++;
-          if (iter_ != end_ && (iter_->isSpace() || *iter_ == QChar('-') || *iter_ == '(')) {
+          if (iter_ != end_ && (iter_->isSpace() || *iter_ == '-' || *iter_ == '(')) {
             if (step_over) {
               buf_.clear();
               advance();
@@ -343,18 +355,18 @@ FilterTree* FilterParser::parseSearchExpression() {
   advance();
   if (iter_ == end_)
     return new NopFilter;
-  if (*iter_ == QChar('(')) {
+  if (*iter_ == '(') {
     iter_++;
     advance();
     FilterTree* tree = parseOrGroup();
     advance();
     if (iter_ != end_) {
-      if (*iter_ == QChar(')')) {
+      if (*iter_ == ')') {
         ++iter_;
       }
     }
     return tree;
-  } else if (*iter_ == QChar('-')) {
+  } else if (*iter_ == '-') {
     ++iter_;
     FilterTree* tree = parseSearchExpression();
     if (tree->type() != FilterTree::Nop)
@@ -412,63 +424,66 @@ FilterTree* FilterParser::parseSearchTerm() {
   return createSearchTermTreeNode(col, prefix, search);
 }
 
-FilterTree* FilterParser::createSearchTermTreeNode(const QString& col, const QString& prefix, const QString& search) const {
-  if (search.isEmpty())
+FilterTree* FilterParser::createSearchTermTreeNode(
+    const QString& col, const QString& prefix, const QString& search) const {
+  if (search.isEmpty() && prefix != "=") {
     return new NopFilter;
-  if (prefix.isEmpty()) {
-    // easy case - no prefix :-)
-    if (!col.isEmpty() && columns_.contains(col))
-      return new FilterColumnTerm(columns_[col], exact_columns_.contains(columns_[col]) ?
-          static_cast<SearchTermComparator*>(new EqComparator(search)) :
-          static_cast<SearchTermComparator*>(new DefaultComparator(search)) );
-    else
-      return new FilterTerm(new DefaultComparator(search), columns_.values());
+  }
+  // here comes a mess :/
+  // well, not that much of a mess, but so many options -_-
+  SearchTermComparator* cmp = NULL;
+  if (prefix == "!=" || prefix == "<>") {
+    cmp = new NeComparator(search);
+  } else if (!col.isEmpty() && columns_.contains(col) &&
+             numerical_columns_.contains(columns_[col])) {
+    // the length column contains the time in seconds (nano seconds, actually -
+    //  the "nano" part is handled by the DropTailComparatorDecorator,  though).
+    int search_value;
+    if (columns_[col] == Playlist::Column_Length) {
+      search_value = parseTime(search);
+    } else if (columns_[col] == Playlist::Column_Rating) {
+      search_value = static_cast<int>(search.toDouble() * 2.0 + 0.5);
+    } else {
+      search_value = search.toInt();
+    }
+    // alright, back to deciding which comparator we'll use
+    if (prefix == ">") {
+      cmp = new GtComparator(search_value);
+    } else if (prefix == ">=") {
+      cmp = new GeComparator(search_value);
+    } else if (prefix == "<") {
+      cmp = new LtComparator(search_value);
+    } else if (prefix == "<=") {
+      cmp = new LeComparator(search_value);
+    } else {
+      // convert back because for time/rating
+      cmp = new EqComparator(QString::number(search_value));
+    }
   } else {
-    // here comes a mess :/
-    // well, not that much of a mess, but so many options -_-
-    SearchTermComparator* cmp = NULL;
     if (prefix == "=") {
       cmp = new EqComparator(search);
-    } else if (prefix == "!=" || prefix == "<>") {
-      cmp = new NeComparator(search);
-    } else if (!col.isEmpty() && columns_.contains(col) && exact_columns_.contains(columns_[col])) {
-      // the length column contains the time in seconds (nano seconds, actually -
-      //  the "nano" part is handled by the DropTailComparatorDecorator,  though).
-      QString _search = columns_[col] == Playlist::Column_Length ? parseTime(search) : search;
-
-      // alright, back to deciding which comparator we'll use
-      if (prefix == ">") {
-        cmp = new GtComparator(_search.toInt());
-      } else if (prefix == ">=") {
-        cmp = new GeComparator(_search.toInt());
-      } else if (prefix == "<") {
-        cmp = new LtComparator(_search.toInt());
-      } else if (prefix == "<=") {
-        cmp = new LeComparator(_search.toInt());
-      } else {
-        // just to be sure :-)
-        cmp = new EqComparator(_search);
-      }
+    } else if (prefix == ">") {
+      cmp = new LexicalGtComparator(search);
+    } else if (prefix == ">=") {
+      cmp = new LexicalGeComparator(search);
+    } else if (prefix == "<") {
+      cmp = new LexicalLtComparator(search);
+    } else if (prefix == "<=") {
+      cmp = new LexicalLeComparator(search);
     } else {
-      if (prefix == ">") {
-        cmp = new LexicalGtComparator(search);
-      } else if (prefix == ">=") {
-        cmp = new LexicalGeComparator(search);
-      } else if (prefix == "<") {
-        cmp = new LexicalLtComparator(search);
-      } else if (prefix == "<=") {
-        cmp = new LexicalLeComparator(search);
-      } else {
-        // just to be sure :-)
-        cmp = new DefaultComparator(search);
-      }
+      cmp = new DefaultComparator(search);
     }
-    if (columns_.contains(col) && columns_[col] == Playlist::Column_Length)
+  }
+  if (columns_.contains(col)) {
+    if (columns_[col] == Playlist::Column_Length) {
       cmp = new DropTailComparatorDecorator(cmp);
-    if (columns_.contains(col))
-      return new FilterColumnTerm(columns_[col], cmp);
-    else
-      return new FilterTerm(cmp, columns_.values());
+    } else if (columns_[col] == Playlist::Column_Rating) {
+      cmp = new RatingComparatorDecorator(cmp);
+    }
+    return new FilterColumnTerm(columns_[col], cmp);
+  }
+  else {
+    return new FilterTerm(cmp, columns_.values());
   }
 }
 
@@ -485,22 +500,24 @@ FilterTree* FilterParser::createSearchTermTreeNode(const QString& col, const QSt
 //  "225"      is parsed to "225" (srsly! ^.^)
 //  "2:3:4:5"  is parsed to "2:3:4:5"
 //  "25m"      is parsed to "25m"
-QString FilterParser::parseTime(const QString& timeStr) const {
-  int seconds = 0, accum = 0, colonCount = 0;
-  foreach (const QChar& c, timeStr) {
+int FilterParser::parseTime(const QString& time_str) const {
+  int seconds = 0;
+  int accum = 0;
+  int colon_count = 0;
+  foreach (const QChar& c, time_str) {
     if (c.isDigit()) {
-      accum = accum*10+c.digitValue();
+      accum = accum * 10 + c.digitValue();
     } else if (c == ':') {
-      seconds = seconds*60+accum;
+      seconds = seconds * 60 + accum;
       accum = 0;
-      ++colonCount;
-      if (colonCount>2)
-        return timeStr;
+      ++colon_count;
+      if (colon_count > 2) {
+        return 0;
+      }
     } else if (!c.isSpace()) {
-      return timeStr;
+      return 0;
     }
   }
-  seconds = seconds*60+accum;
-  return QString::number(seconds);
+  seconds = seconds * 60 + accum;
+  return seconds;
 }
-

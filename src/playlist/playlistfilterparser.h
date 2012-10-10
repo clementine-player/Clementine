@@ -64,7 +64,10 @@ class NopFilter : public FilterTree {
 //     col       ::= "title" | "artist" | ...
 class FilterParser {
  public:
-  FilterParser(const QString& filter, const QMap<QString, int>& columns, const QSet<int>& exact_cols);
+  FilterParser(
+      const QString& filter,
+      const QMap<QString, int>& columns,
+      const QSet<int>& numerical_cols);
 
   FilterTree* parse();
 
@@ -81,14 +84,16 @@ class FilterParser {
   FilterTree* parseSearchExpression();
   FilterTree* parseSearchTerm();
 
-  FilterTree* createSearchTermTreeNode(const QString& col, const QString& prefix, const QString& search) const;
-  QString parseTime(const QString& timeStr) const;
+  FilterTree* createSearchTermTreeNode(
+      const QString& col, const QString& prefix, const QString& search) const;
+  int parseTime(const QString& time_str) const;
 
-  QString::const_iterator iter_, end_;
+  QString::const_iterator iter_;
+  QString::const_iterator end_;
   QString buf_;
   const QString filterstring_;
   const QMap<QString, int> columns_;
-  const QSet<int> exact_columns_;
+  const QSet<int> numerical_columns_;
 };
 
 #endif  // PLAYLISTFILTERPARSER_H

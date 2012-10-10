@@ -45,13 +45,14 @@ PlaylistFilter::PlaylistFilter(QObject *parent)
   column_names_["filename"] = Playlist::Column_Filename;
   column_names_["rating"] = Playlist::Column_Rating;
 
-  exact_columns_ << Playlist::Column_Length
-                 << Playlist::Column_Track
-                 << Playlist::Column_Disc
-                 << Playlist::Column_Year
-                 << Playlist::Column_Score
-                 << Playlist::Column_BPM
-                 << Playlist::Column_Bitrate;
+  numerical_columns_ << Playlist::Column_Length
+                     << Playlist::Column_Track
+                     << Playlist::Column_Disc
+                     << Playlist::Column_Year
+                     << Playlist::Column_Score
+                     << Playlist::Column_BPM
+                     << Playlist::Column_Bitrate
+                     << Playlist::Column_Rating;
 }
 
 PlaylistFilter::~PlaylistFilter() {
@@ -68,7 +69,7 @@ bool PlaylistFilter::filterAcceptsRow(int row, const QModelIndex &parent) const 
   uint hash = qHash(filter);
   if (hash != query_hash_) {
     // Parse the query
-    FilterParser p(filter, column_names_, exact_columns_);
+    FilterParser p(filter, column_names_, numerical_columns_);
     filter_tree_.reset(p.parse());
 
     query_hash_ = hash;

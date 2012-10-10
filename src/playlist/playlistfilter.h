@@ -47,7 +47,7 @@ private:
   mutable uint query_hash_;
 
   QMap<QString, int> column_names_;
-  QSet<int> exact_columns_;
+  QSet<int> numerical_columns_;
 };
 
 #endif // PLAYLISTFILTER_H
