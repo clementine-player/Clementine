@@ -123,6 +123,7 @@ set(SOURCES
   covers/currentartloader.cpp
   covers/discogscoverprovider.cpp
   covers/kittenloader.cpp
+  covers/musicbrainzcoverprovider.cpp
 
   devices/connecteddevice.cpp
   devices/devicedatabasebackend.cpp
@@ -408,6 +409,7 @@ set(HEADERS
   covers/currentartloader.h
   covers/discogscoverprovider.h
   covers/kittenloader.h
+  covers/musicbrainzcoverprovider.h
 
   devices/connecteddevice.h
   devices/devicedatabasebackend.h

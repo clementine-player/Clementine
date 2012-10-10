@@ -26,8 +26,8 @@
 class CoverProvider;
 class CoverProviders;
 class NetworkTimeouts;
-class QNetworkAccessManager;
-class QNetworkReply;
+class NetworkAccessManager;
+class RedirectFollower;
 
 // This class encapsulates a single search for covers initiated by an
 // AlbumCoverFetcher. The search engages all of the known cover providers.
@@ -82,7 +82,7 @@ private:
   CoverSearchResults results_;
 
   QMap<int, CoverProvider*> pending_requests_;
-  QMap<QNetworkReply*, QString> pending_image_loads_;
+  QMap<RedirectFollower*, QString> pending_image_loads_;
   NetworkTimeouts* image_load_timeout_;
 
   // QMap is sorted by key (score).  Values are (provider_name, image)

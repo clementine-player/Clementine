@@ -53,7 +53,7 @@ struct CoverSearchRequest {
 };
 
 // This structure represents a single result of some album's cover search request.
-// It contains an URL that leads to a found cover plus it's description (usually
+// It contains an URL that leads to a found cover plus its description (usually
 // the "artist - album" string).
 struct CoverSearchResult {
   // used for grouping in the user interface.  This is set automatically - don't

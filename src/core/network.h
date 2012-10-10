@@ -57,27 +57,6 @@ protected:
 };
 
 
-class NetworkTimeouts : public QObject {
-  Q_OBJECT
-
-public:
-  NetworkTimeouts(int timeout_msec, QObject* parent = 0);
-
-  void AddReply(QNetworkReply* reply);
-  void SetTimeout(int msec) { timeout_msec_ = msec; }
-
-protected:
-  void timerEvent(QTimerEvent* e);
-
-private slots:
-  void ReplyFinished();
-
-private:
-  int timeout_msec_;
-  QMap<QNetworkReply*, int> timers_;
-};
-
-
 class RedirectFollower : public QObject {
   Q_OBJECT
 
@@ -92,6 +71,10 @@ public:
   QString errorString() const { return current_reply_->errorString(); }
   QVariant attribute(QNetworkRequest::Attribute code) const { return current_reply_->attribute(code); }
   QVariant header(QNetworkRequest::KnownHeaders header) const { return current_reply_->header(header); }
+  qint64 bytesAvailable() const { return current_reply_->bytesAvailable(); }
+  QUrl url() const { return current_reply_->url(); }
+  QByteArray readAll() { return current_reply_->readAll(); }
+  void abort() { current_reply_->abort(); }
 
 signals:
   // These are all forwarded from the current reply.
@@ -113,6 +96,31 @@ private:
 private:
   QNetworkReply* current_reply_;
   int redirects_remaining_;
+};
+
+
+class NetworkTimeouts : public QObject {
+  Q_OBJECT
+
+public:
+  NetworkTimeouts(int timeout_msec, QObject* parent = 0);
+
+  // TODO: Template this to avoid code duplication.
+  void AddReply(QNetworkReply* reply);
+  void AddReply(RedirectFollower* reply);
+  void SetTimeout(int msec) { timeout_msec_ = msec; }
+
+protected:
+  void timerEvent(QTimerEvent* e);
+
+private slots:
+  void ReplyFinished();
+  void RedirectFinished(RedirectFollower* redirect);
+
+private:
+  int timeout_msec_;
+  QMap<QNetworkReply*, int> timers_;
+  QMap<RedirectFollower*, int> redirect_timers_;
 };
 
 #endif // NETWORK_H
