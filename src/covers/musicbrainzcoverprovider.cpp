@@ -17,6 +17,8 @@
 
 #include "musicbrainzcoverprovider.h"
 
+#include <algorithm>
+
 #include <boost/bind.hpp>
 
 #include <QXmlStreamReader>
