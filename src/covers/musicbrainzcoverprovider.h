@@ -41,6 +41,7 @@ class MusicbrainzCoverProvider : public CoverProvider {
  private:
   QNetworkAccessManager* network_;
   QMultiMap<int, QNetworkReply*> image_checks_;
+  QMap<int, QString> cover_names_;
 };
 
 #endif  // MUSICBRAINZCOVERPROVIDER_H

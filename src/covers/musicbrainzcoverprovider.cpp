@@ -59,6 +59,8 @@ bool MusicbrainzCoverProvider::StartSearch(
       SLOT(ReleaseSearchFinished(QNetworkReply*, int)),
       reply,
       id);
+
+  cover_names_[id] = QString("%1 - %2").arg(artist, album);
   return true;
 }
 
@@ -99,12 +101,13 @@ void MusicbrainzCoverProvider::ImageCheckFinished(int id) {
       replies.constBegin(), replies.constEnd(),
       boost::bind(&QNetworkReply::isFinished, _1));
   if (finished_count == replies.size()) {
+    QString cover_name = cover_names_.take(id);
     QList<CoverSearchResult> results;
     foreach (QNetworkReply* reply, replies) {
       reply->deleteLater();
       if (reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt() < 400) {
         CoverSearchResult result;
-        result.description = "foobar";
+        result.description = cover_name;
         result.image_url = reply->url();
         results.append(result);
       }
