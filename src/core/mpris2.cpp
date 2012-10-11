@@ -15,13 +15,17 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "mpris2.h"
+
+#include <algorithm>
+
 #include "config.h"
 #include "mpris_common.h"
 #include "mpris1.h"
-#include "mpris2.h"
 #include "core/application.h"
 #include "core/logging.h"
 #include "core/mpris2_player.h"
+#include "core/mpris2_playlists.h"
 #include "core/mpris2_root.h"
 #include "core/mpris2_tracklist.h"
 #include "core/player.h"
@@ -37,9 +41,36 @@
 #include <QDBusConnection>
 #include <QtConcurrentRun>
 
-#ifdef HAVE_LIBINDICATE
-# include <qindicateserver.h>
-#endif
+QDBusArgument& operator<< (QDBusArgument& arg, const MprisPlaylist& playlist) {
+  arg.beginStructure();
+  arg << playlist.id << playlist.name << playlist.icon;
+  arg.endStructure();
+  return arg;
+}
+
+const QDBusArgument& operator>> (
+    const QDBusArgument& arg, MprisPlaylist& playlist) {
+  arg.beginStructure();
+  arg >> playlist.id >> playlist.name >> playlist.icon;
+  arg.endStructure();
+  return arg;
+}
+
+QDBusArgument& operator<< (QDBusArgument& arg, const MaybePlaylist& playlist) {
+  arg.beginStructure();
+  arg << playlist.valid;
+  arg << playlist.playlist;
+  arg.endStructure();
+  return arg;
+}
+
+const QDBusArgument& operator>> (
+    const QDBusArgument& arg, MaybePlaylist& playlist) {
+  arg.beginStructure();
+  arg >> playlist.valid >> playlist.playlist;
+  arg.endStructure();
+  return arg;
+}
 
 namespace mpris {
 
@@ -55,6 +86,7 @@ Mpris2::Mpris2(Application* app, Mpris1* mpris1, QObject* parent)
   new Mpris2Root(this);
   new Mpris2TrackList(this);
   new Mpris2Player(this);
+  new Mpris2Playlists(this);
 
   if (!QDBusConnection::sessionBus().registerService(kServiceName)) {
     qLog(Warning) << "Failed to register" << QString(kServiceName) << "on the session bus";
@@ -71,15 +103,7 @@ Mpris2::Mpris2(Application* app, Mpris1* mpris1, QObject* parent)
 
   connect(app_->playlist_manager(), SIGNAL(PlaylistManagerInitialized()), SLOT(PlaylistManagerInitialized()));
   connect(app_->playlist_manager(), SIGNAL(CurrentSongChanged(Song)), SLOT(CurrentSongChanged(Song)));
-}
-
-void Mpris2::InitLibIndicate() {
-#ifdef HAVE_LIBINDICATE
-  QIndicate::Server* indicate_server = QIndicate::Server::defaultInstance();
-  indicate_server->setType("music.clementine");
-  indicate_server->setDesktopFile(DesktopEntryAbsolutePath());
-  indicate_server->show();
-#endif
+  connect(app_->playlist_manager(), SIGNAL(PlaylistChanged(Playlist*)), SLOT(PlaylistChanged()));
 }
 
 // when PlaylistManager gets it ready, we connect PlaylistSequence with this
@@ -472,6 +496,77 @@ void Mpris2::RemoveTrack(const QDBusObjectPath &trackId) {
 
 void Mpris2::GoTo(const QDBusObjectPath &trackId) {
   //TODO
+}
+
+quint32 Mpris2::PlaylistCount() const {
+  return app_->playlist_manager()->GetAllPlaylists().size();
+}
+
+QStringList Mpris2::Orderings() const {
+  return QStringList() << "User";
+}
+
+namespace {
+
+QDBusObjectPath MakePlaylistPath(int id) {
+  return QDBusObjectPath(QString(
+      "/org/mpris/MediaPlayer2/Playlists/%1").arg(id));
+}
+
+}
+
+MaybePlaylist Mpris2::ActivePlaylist() const {
+  MaybePlaylist maybe_playlist;
+  Playlist* current_playlist = app_->playlist_manager()->current();
+  maybe_playlist.valid = current_playlist;
+  if (!current_playlist) {
+    return maybe_playlist;
+  }
+
+  maybe_playlist.playlist.id = MakePlaylistPath(current_playlist->id());
+  maybe_playlist.playlist.name =
+      app_->playlist_manager()->GetPlaylistName(current_playlist->id());
+  return maybe_playlist;
+}
+
+void Mpris2::ActivatePlaylist(const QDBusObjectPath& playlist_id) {
+  QStringList split_path = playlist_id.path().split('/');
+  qLog(Debug) << Q_FUNC_INFO << playlist_id.path() << split_path;
+  if (split_path.isEmpty()) {
+    return;
+  }
+  bool ok = false;
+  int p = split_path.last().toInt(&ok);
+  if (!ok) {
+    return;
+  }
+  app_->playlist_manager()->SetActivePlaylist(p);
+  app_->player()->Next();
+}
+
+// TODO: Support sort orders.
+MprisPlaylistList Mpris2::GetPlaylists(
+    quint32 index, quint32 max_count, const QString& order, bool reverse_order) {
+  MprisPlaylistList ret;
+  foreach (Playlist* p, app_->playlist_manager()->GetAllPlaylists()) {
+    MprisPlaylist mpris_playlist;
+    mpris_playlist.id = MakePlaylistPath(p->id());
+    mpris_playlist.name = app_->playlist_manager()->GetPlaylistName(p->id());
+    ret << mpris_playlist;
+  }
+
+  if (reverse_order) {
+    std::reverse(ret.begin(), ret.end());
+  }
+
+  return ret.mid(index, max_count);
+}
+
+void Mpris2::PlaylistChanged(Playlist* playlist) {
+  MprisPlaylist mpris_playlist;
+  mpris_playlist.id = MakePlaylistPath(playlist->id());
+  mpris_playlist.name = app_->playlist_manager()->GetPlaylistName(playlist->id());
+  emit PlaylistChanged(mpris_playlist);
 }
 
 } // namespace mpris

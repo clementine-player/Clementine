@@ -1,0 +1,28 @@
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN"
+"http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+
+<node>
+	<interface name='org.mpris.MediaPlayer2.Playlists'>
+		<property name='PlaylistCount' type='u' access='read' />
+		<property name='Orderings' type='as' access='read' />
+		<property name='ActivePlaylist' type='(b(oss))' access='read'>
+			<annotation name="com.trolltech.QtDBus.QtTypeName" value="MaybePlaylist"/>
+		</property>
+		<method name='ActivatePlaylist'>
+			<arg direction='in' name='PlaylistId' type='o' />
+		</method>
+		<method name='GetPlaylists'>
+			<arg direction='in' name='Index' type='u' />
+			<arg direction='in' name='MaxCount' type='u' />
+			<arg direction='in' name='Order' type='s' />
+			<arg direction='in' name='ReverseOrder' type='b' />
+			<arg direction='out' name='Playlists' type='a(oss)' />
+			<annotation name="com.trolltech.QtDBus.QtTypeName.Out0" value="MprisPlaylistList"/>
+		</method>
+		<signal name='PlaylistChanged'>
+			<arg name='Playlist' type='(oss)' />
+			<annotation name="com.trolltech.QtDBus.QtTypeName.In0" value="MprisPlaylist" />
+		</signal>
+		<annotation name="com.trolltech.QtDBus.QtTypeName" value="MaybePlaylist" />
+	</interface>
+</node>
