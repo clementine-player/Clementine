@@ -103,7 +103,7 @@ Mpris2::Mpris2(Application* app, Mpris1* mpris1, QObject* parent)
 
   connect(app_->playlist_manager(), SIGNAL(PlaylistManagerInitialized()), SLOT(PlaylistManagerInitialized()));
   connect(app_->playlist_manager(), SIGNAL(CurrentSongChanged(Song)), SLOT(CurrentSongChanged(Song)));
-  connect(app_->playlist_manager(), SIGNAL(PlaylistChanged(Playlist*)), SLOT(PlaylistChanged()));
+  connect(app_->playlist_manager(), SIGNAL(PlaylistChanged(Playlist*)), SLOT(PlaylistChanged(Playlist*)));
 }
 
 // when PlaylistManager gets it ready, we connect PlaylistSequence with this
