@@ -12,5 +12,7 @@
 		<property name='DesktopEntry' type='s' access='read'/>
 		<property name='SupportedUriSchemes' type='as' access='read'/>
 		<property name='SupportedMimeTypes' type='as' access='read'/>
+		<property name='Fullscreen' type='b' access='readwrite'/>
+		<property name='CanSetFullscreen' type='b' access='read'/>
 	</interface>
 </node>

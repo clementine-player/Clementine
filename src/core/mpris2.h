@@ -49,6 +49,10 @@ class Mpris2 : public QObject {
   Q_PROPERTY( QStringList SupportedUriSchemes READ SupportedUriSchemes )
   Q_PROPERTY( QStringList SupportedMimeTypes READ SupportedMimeTypes )
 
+  //org.mpris.MediaPlayer2 MPRIS 2.2 Root interface
+  Q_PROPERTY( bool CanSetFullscreen READ CanSetFullscreen )
+  Q_PROPERTY( bool Fullscreen READ Fullscreen WRITE SetFullscreen )
+
   //org.mpris.MediaPlayer2.Player MPRIS 2.0 Player interface
   Q_PROPERTY( QString PlaybackStatus READ PlaybackStatus )
   Q_PROPERTY( QString LoopStatus READ LoopStatus WRITE SetLoopStatus )
@@ -83,6 +87,11 @@ public:
   QString DesktopEntry() const;
   QStringList SupportedUriSchemes() const;
   QStringList SupportedMimeTypes() const;
+
+  // Root Properties added in MPRIS 2.2
+  bool CanSetFullscreen() const { return false; }
+  bool Fullscreen() const { return false; }
+  void SetFullscreen(bool) {}
 
   // Methods
   void Raise();
