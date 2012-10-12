@@ -103,6 +103,8 @@ void InternetModel::AddService(InternetService *service) {
   connect(service, SIGNAL(AddToPlaylistSignal(QMimeData*)), SIGNAL(AddToPlaylist(QMimeData*)));
   connect(service, SIGNAL(ScrollToIndex(QModelIndex)), SIGNAL(ScrollToIndex(QModelIndex)));
   connect(service, SIGNAL(destroyed()), SLOT(ServiceDeleted()));
+  NewClosure(service, SIGNAL(destroyed()), this,
+             SLOT(ServiceDeleted(InternetService*)), service);
 
   service->ReloadSettings();
 }
@@ -127,8 +129,7 @@ void InternetModel::RemoveService(InternetService* service) {
   disconnect(service, 0, this, 0);
 }
 
-void InternetModel::ServiceDeleted() {
-  InternetService* service = qobject_cast<InternetService*>(sender());
+void InternetModel::ServiceDeleted(InternetService* service) {
   if (service)
     RemoveService(service);
 }
