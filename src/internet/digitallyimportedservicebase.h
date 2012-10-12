@@ -18,11 +18,11 @@
 #ifndef DIGITALLYIMPORTEDSERVICEBASE_H
 #define DIGITALLYIMPORTEDSERVICEBASE_H
 
+#include <boost/scoped_ptr.hpp>
+
 #include "digitallyimportedclient.h"
 #include "internetservice.h"
 #include "core/cachedlist.h"
-
-#include <boost/scoped_ptr.hpp>
 
 class DigitallyImportedClient;
 class DigitallyImportedUrlHandler;
@@ -73,7 +73,7 @@ signals:
   void StreamsChanged();
 
 private slots:
-  void LoadPlaylistFinished();
+  void LoadPlaylistFinished(QNetworkReply* reply);
   void Homepage();
   void ForceRefreshStreams();
   void RefreshStreams();
