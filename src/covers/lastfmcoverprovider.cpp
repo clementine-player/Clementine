@@ -15,12 +15,14 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "albumcoverfetcher.h"
-#include "coverprovider.h"
 #include "lastfmcoverprovider.h"
-#include "internet/lastfmcompat.h"
 
 #include <QNetworkReply>
+
+#include "albumcoverfetcher.h"
+#include "coverprovider.h"
+#include "core/closure.h"
+#include "internet/lastfmcompat.h"
 
 LastFmCoverProvider::LastFmCoverProvider(QObject* parent)
   : CoverProvider("last.fm", parent)
@@ -33,18 +35,13 @@ bool LastFmCoverProvider::StartSearch(const QString& artist, const QString& albu
   params["album"] = album + " " + artist;
 
   QNetworkReply* reply = lastfm::ws::post(params);
-  connect(reply, SIGNAL(finished()), SLOT(QueryFinished()));
-  pending_queries_[reply] = id;
+  NewClosure(reply, SIGNAL(finished()), this,
+             SLOT(QueryFinished(QNetworkReply*, int)), reply, id);
 
   return true;
 }
 
-void LastFmCoverProvider::QueryFinished() {
-  QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
-  if (!reply || !pending_queries_.contains(reply))
-    return;
-
-  int id = pending_queries_.take(reply);
+void LastFmCoverProvider::QueryFinished(QNetworkReply* reply, int id) {
   reply->deleteLater();
 
   CoverSearchResults results;
