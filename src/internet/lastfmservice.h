@@ -140,10 +140,10 @@ class LastFMService : public InternetService {
   void SavedItemsChanged();
 
  private slots:
-  void AuthenticateReplyFinished();
-  void UpdateSubscriberStatusFinished();
-  void RefreshFriendsFinished();
-  void RefreshNeighboursFinished();
+  void AuthenticateReplyFinished(QNetworkReply* reply);
+  void UpdateSubscriberStatusFinished(QNetworkReply* reply);
+  void RefreshFriendsFinished(QNetworkReply* reply);
+  void RefreshNeighboursFinished(QNetworkReply* reply);
 
   void TunerTrackAvailable();
   void TunerError(lastfm::ws::Error error);
@@ -157,8 +157,8 @@ class LastFMService : public InternetService {
   void Remove();
 
   // Radio tuner.
-  void FetchMoreTracksFinished();
-  void TuneFinished();
+  void FetchMoreTracksFinished(QNetworkReply* reply);
+  void TuneFinished(QNetworkReply* reply);
 
   void StreamMetadataReady();
 
