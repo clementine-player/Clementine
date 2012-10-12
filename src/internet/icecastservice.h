@@ -18,10 +18,10 @@
 #ifndef ICECASTSERVICE_H
 #define ICECASTSERVICE_H
 
+#include <QXmlStreamReader>
+
 #include "icecastbackend.h"
 #include "internetservice.h"
-
-#include <QXmlStreamReader>
 
 class IcecastFilterWidget;
 class IcecastModel;
@@ -29,6 +29,7 @@ class NetworkAccessManager;
 
 class QAction;
 class QMenu;
+class QNetworkReply;
 
 class IcecastService : public InternetService {
   Q_OBJECT
@@ -55,8 +56,9 @@ public:
 private slots:
   void LoadDirectory();
   void Homepage();
-  void DownloadDirectoryFinished();
-  void ParseDirectoryFinished();
+  void DownloadDirectoryFinished(QNetworkReply* reply);
+  void ParseDirectoryFinished(
+      QFuture<IcecastBackend::StationList> future);
 
 private:
   void RequestDirectory(const QUrl& url);

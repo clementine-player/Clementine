@@ -15,12 +15,23 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include <algorithm>
+
+#include <QDesktopServices>
+#include <QFutureWatcher>
+#include <QMenu>
+#include <QMultiHash>
+#include <QNetworkReply>
+#include <QRegExp>
+#include <QtConcurrentRun>
+
 #include "icecastbackend.h"
 #include "icecastfilterwidget.h"
 #include "icecastmodel.h"
 #include "icecastservice.h"
 #include "internetmodel.h"
 #include "core/application.h"
+#include "core/closure.h"
 #include "core/database.h"
 #include "core/mergedproxymodel.h"
 #include "core/network.h"
@@ -30,17 +41,8 @@
 #include "playlist/songplaylistitem.h"
 #include "ui/iconloader.h"
 
-#include <algorithm>
 using std::sort;
 using std::unique;
-
-#include <QDesktopServices>
-#include <QFutureWatcher>
-#include <QMenu>
-#include <QMultiHash>
-#include <QNetworkReply>
-#include <QRegExp>
-#include <QtConcurrentRun>
 
 
 const char* IcecastService::kServiceName = "Icecast";
@@ -106,13 +108,11 @@ void IcecastService::RequestDirectory(const QUrl& url) {
                    QNetworkRequest::AlwaysNetwork);
 
   QNetworkReply* reply = network_->get(req);
-  connect(reply, SIGNAL(finished()), SLOT(DownloadDirectoryFinished()));
+  NewClosure(reply, SIGNAL(finished()), this,
+             SLOT(DownloadDirectoryFinished(QNetworkReply*)), reply);
 }
 
-void IcecastService::DownloadDirectoryFinished() {
-  QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
-  Q_ASSERT(reply);
-
+void IcecastService::DownloadDirectoryFinished(QNetworkReply* reply) {
   if (reply->attribute(QNetworkRequest::RedirectionTargetAttribute).isValid()) {
     // Discard the old reply and follow the redirect
     reply->deleteLater();
@@ -122,10 +122,12 @@ void IcecastService::DownloadDirectoryFinished() {
 
   QFuture<IcecastBackend::StationList> future =
       QtConcurrent::run(this, &IcecastService::ParseDirectory, reply);
-  QFutureWatcher<IcecastBackend::StationList>* watcher =
-      new QFutureWatcher<IcecastBackend::StationList>(this);
+  QFutureWatcher<void>* watcher = new QFutureWatcher<void>(this);
   watcher->setFuture(future);
-  connect(watcher, SIGNAL(finished()), SLOT(ParseDirectoryFinished()));
+  NewClosure(watcher, SIGNAL(finished()), this,
+      SLOT(ParseDirectoryFinished(QFuture<IcecastBackend::StationList>)),
+      future);
+  connect(watcher, SIGNAL(finished()), watcher, SLOT(deleteLater()));
 }
 
 namespace {
@@ -187,10 +189,9 @@ QStringList FilterGenres(const QStringList& genres) {
 
 }
 
-void IcecastService::ParseDirectoryFinished() {
-  QFutureWatcher<IcecastBackend::StationList >* watcher =
-      static_cast<QFutureWatcher<IcecastBackend::StationList>*>(sender());
-  IcecastBackend::StationList all_stations = watcher->result();
+void IcecastService::ParseDirectoryFinished(
+    QFuture<IcecastBackend::StationList> future) {
+  IcecastBackend::StationList all_stations = future.result();
   sort(all_stations.begin(), all_stations.end(), StationSorter<IcecastBackend::Station>());
   // Remove duplicates by name. These tend to be multiple URLs for the same station.
   IcecastBackend::StationList::iterator it =
@@ -219,7 +220,6 @@ void IcecastService::ParseDirectoryFinished() {
   }
 
   backend_->ClearAndAddStations(all_stations);
-  delete watcher;
 
   app_->task_manager()->SetTaskFinished(load_directory_task_id_);
   load_directory_task_id_ = 0;
