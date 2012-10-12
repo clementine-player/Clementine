@@ -97,8 +97,8 @@ signals:
                 const MusicBrainzClient::ResultList& result);
 
 private slots:
-  void RequestFinished();
-  void DiscIdRequestFinished();
+  void RequestFinished(QNetworkReply* reply, int id);
+  void DiscIdRequestFinished(QNetworkReply* reply);
 
 private:
   struct Release {
@@ -130,7 +130,7 @@ private:
 
   QNetworkAccessManager* network_;
   NetworkTimeouts* timeouts_;
-  QMap<QNetworkReply*, int> requests_;
+  QMap<int, QNetworkReply*> requests_;
 };
 
 inline uint qHash(const MusicBrainzClient::Result& result) {

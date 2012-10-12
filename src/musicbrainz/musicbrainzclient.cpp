@@ -16,15 +16,16 @@
 */
 
 #include "musicbrainzclient.h"
-#include "core/logging.h"
-#include "core/network.h"
-#include "core/utilities.h"
 
 #include <QCoreApplication>
 #include <QNetworkReply>
 #include <QSet>
 #include <QXmlStreamReader>
-#include <QtDebug>
+
+#include "core/closure.h"
+#include "core/logging.h"
+#include "core/network.h"
+#include "core/utilities.h"
 
 const char* MusicBrainzClient::kTrackUrl = "http://musicbrainz.org/ws/2/recording/";
 const char* MusicBrainzClient::kDiscUrl = "http://musicbrainz.org/ws/1/release/";
@@ -49,8 +50,9 @@ void MusicBrainzClient::Start(int id, const QString& mbid) {
   QNetworkRequest req(url);
 
   QNetworkReply* reply = network_->get(req);
-  connect(reply, SIGNAL(finished()), SLOT(RequestFinished()));
-  requests_[reply] = id;
+  NewClosure(reply, SIGNAL(finished()), this,
+             SLOT(RequestFinished(QNetworkReply*, int)), reply, id);
+  requests_[id] = reply;
 
   timeouts_->AddReply(reply);
 }
@@ -67,27 +69,22 @@ void MusicBrainzClient::StartDiscIdRequest(const QString& discid) {
   QNetworkRequest req(url);
 
   QNetworkReply* reply = network_->get(req);
-  connect(reply, SIGNAL(finished()), SLOT(DiscIdRequestFinished()));
-  //requests_[reply] = id;
+  NewClosure(reply, SIGNAL(finished()), this,
+             SLOT(DiscIdRequestFinished(QNetworkReply*)), reply);
 
   timeouts_->AddReply(reply);
 }
 
 void MusicBrainzClient::Cancel(int id) {
-  QNetworkReply* reply = requests_.key(id);
-  requests_.remove(reply);
-  delete reply;
+  delete requests_.take(id);
 }
 
 void MusicBrainzClient::CancelAll() {
-  qDeleteAll(requests_.keys());
+  qDeleteAll(requests_.values());
   requests_.clear();
 }
 
-void MusicBrainzClient::DiscIdRequestFinished() {
-  QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
-  if (!reply)
-    return;
+void MusicBrainzClient::DiscIdRequestFinished(QNetworkReply* reply) {
   reply->deleteLater();
 
   ResultList ret;
@@ -136,16 +133,9 @@ void MusicBrainzClient::DiscIdRequestFinished() {
 }
 
 
-void MusicBrainzClient::RequestFinished() {
-  QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
-  if (!reply)
-    return;
-
+void MusicBrainzClient::RequestFinished(QNetworkReply* reply, int id) {
   reply->deleteLater();
-  if (!requests_.contains(reply))
-    return;
-
-  int id = requests_.take(reply);
+  requests_.remove(id);
   ResultList ret;
 
   if (reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt() != 200) {
