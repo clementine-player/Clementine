@@ -22,6 +22,7 @@
 
 #include <qjson/parser.h>
 
+#include "core/closure.h"
 #include "core/logging.h"
 #include "core/network.h"
 #include "core/timeconstants.h"
@@ -57,32 +58,25 @@ void AcoustidClient::Start(int id, const QString& fingerprint, int duration_msec
 
   QNetworkReply* reply = network_->get(req);
   connect(reply, SIGNAL(finished()), SLOT(RequestFinished()));
-  requests_[reply] = id;
+  NewClosure(reply, SIGNAL(finished()), this,
+             SLOT(RequestFinished(QNetworkReply*, int)), reply, id);
+  requests_[id] = reply;
 
   timeouts_->AddReply(reply);
 }
 
 void AcoustidClient::Cancel(int id) {
-  QNetworkReply* reply = requests_.key(id);
-  requests_.remove(reply);
-  delete reply;
+  delete requests_.take(id);
 }
 
 void AcoustidClient::CancelAll() {
-  qDeleteAll(requests_.keys());
+  qDeleteAll(requests_.values());
   requests_.clear();
 }
 
-void AcoustidClient::RequestFinished() {
-  QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
-  if (!reply)
-    return;
-
+void AcoustidClient::RequestFinished(QNetworkReply* reply, int id) {
   reply->deleteLater();
-  if (!requests_.contains(reply))
-    return;
-
-  int id = requests_.take(reply);
+  requests_.remove(id);
 
   if (reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt() != 200) {
     emit Finished(id, QString());
