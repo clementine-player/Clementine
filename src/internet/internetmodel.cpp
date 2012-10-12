@@ -15,17 +15,22 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "internetmodel.h"
+
+#include <QMimeData>
+#include <QtDebug>
+
 #include "digitallyimportedservicebase.h"
 #include "groovesharkservice.h"
 #include "icecastservice.h"
 #include "jamendoservice.h"
 #include "magnatuneservice.h"
 #include "internetmimedata.h"
-#include "internetmodel.h"
 #include "internetservice.h"
 #include "savedradio.h"
 #include "somafmservice.h"
 #include "soundcloudservice.h"
+#include "core/closure.h"
 #include "core/logging.h"
 #include "core/mergedproxymodel.h"
 #include "podcasts/podcastservice.h"
@@ -40,9 +45,6 @@
 #ifdef HAVE_GOOGLE_DRIVE
   #include "googledriveservice.h"
 #endif
-
-#include <QMimeData>
-#include <QtDebug>
 
 using smart_playlists::Generator;
 using smart_playlists::GeneratorMimeData;
