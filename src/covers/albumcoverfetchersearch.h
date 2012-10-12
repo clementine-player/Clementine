@@ -57,7 +57,7 @@ signals:
 
 private slots:
   void ProviderSearchFinished(int id, const QList<CoverSearchResult>& results);
-  void ProviderCoverFetchFinished();
+  void ProviderCoverFetchFinished(RedirectFollower* reply);
   void TerminateSearch();
 
 private:
