@@ -275,13 +275,16 @@ void GroovesharkService::DoSearch() {
               << Param("country", "")
               << Param("limit", QString::number(kSongSearchLimit))
               << Param("offset", "");
-  QNetworkReply* reply = CreateRequest("getSongSearchResults", parameters);
-  NewClosure(reply, SIGNAL(finished()), this,
-             SLOT(SearchSongsFinished(QNetworkReply*)), reply);
+  last_search_reply_ = CreateRequest("getSongSearchResults", parameters);
+  NewClosure(last_search_reply_, SIGNAL(finished()), this,
+             SLOT(SearchSongsFinished(QNetworkReply*)), last_search_reply_);
 }
 
 void GroovesharkService::SearchSongsFinished(QNetworkReply* reply) {
   reply->deleteLater();
+
+  if (reply != last_search_reply_)
+    return;
 
   QVariantMap result = ExtractResult(reply);
   SongList songs = ExtractSongs(result);
