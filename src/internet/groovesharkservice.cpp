@@ -355,7 +355,6 @@ void GroovesharkService::Login(const QString& username, const QString& password)
   QList<Param> parameters;
   QNetworkReply *reply = CreateRequest("startSession", parameters, true);
 
-  connect(reply, SIGNAL(finished()), SLOT(SessionCreated()));
   NewClosure(reply, SIGNAL(finished()), this,
              SLOT(SessionCreated(QNetworkReply*)), reply);
 }
