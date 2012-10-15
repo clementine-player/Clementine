@@ -37,6 +37,14 @@ inline void AddMetadata(const QString& key, int metadata, QVariantMap* map) {
   if (metadata > 0)          (*map)[key] = metadata;
 }
 
+inline void AddMetadata(const QString& key, qint64 metadata, QVariantMap* map) {
+  if (metadata > 0)          (*map)[key] = metadata;
+}
+
+inline void AddMetadata(const QString& key, double metadata, QVariantMap* map) {
+  if (metadata != 0.0)       (*map)[key] = metadata;
+}
+
 inline void AddMetadata(const QString& key, const QDateTime& metadata, QVariantMap* map) {
   if (metadata.isValid())    (*map)[key] = metadata;
 }
