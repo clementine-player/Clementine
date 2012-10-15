@@ -453,11 +453,11 @@ msgstr "Thêm thẻ năm của bài hát"
 msgid "Add stream..."
 msgstr "Thêm luồng dữ liệu..."
 
-#: internet/groovesharkservice.cpp:1113
+#: internet/groovesharkservice.cpp:1086
 msgid "Add to Grooveshark favorites"
 msgstr "Thêm vào yêu thích của Grooveshark"
 
-#: internet/groovesharkservice.cpp:1125
+#: internet/groovesharkservice.cpp:1098
 msgid "Add to Grooveshark playlists"
 msgstr "Thêm vào danh sách Grooveshark"
 
@@ -502,11 +502,11 @@ msgstr "Đã thêm vào trong ngày"
 msgid "Added within three months"
 msgstr "Đã thêm vào trong ba tháng"
 
-#: internet/groovesharkservice.cpp:1421
+#: internet/groovesharkservice.cpp:1393
 msgid "Adding song to My Music"
 msgstr "Thêm bài hát vào Nhạc của tôi"
 
-#: internet/groovesharkservice.cpp:1398
+#: internet/groovesharkservice.cpp:1370
 msgid "Adding song to favorites"
 msgstr "Đang thêm bài hát vào yêu thích"
 
@@ -670,7 +670,7 @@ msgstr "Nén để chặn việc ngắt đoạn"
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "Bạn có chắc sẽ xóa thiết lập \"%1\"?"
 
-#: internet/groovesharkservice.cpp:1319
+#: internet/groovesharkservice.cpp:1291
 msgid "Are you sure you want to delete this playlist?"
 msgstr "Bạn có chắc muốn xóa danh sách này?"
 
@@ -692,7 +692,7 @@ msgstr "Nghệ sĩ"
 msgid "Artist info"
 msgstr "Nghệ sĩ"
 
-#: internet/lastfmservice.cpp:207
+#: internet/lastfmservice.cpp:208
 msgid "Artist radio"
 msgstr "Kênh phát thanh nghệ sĩ"
 
@@ -709,7 +709,7 @@ msgid "Audio format"
 msgstr "Định dạng"
 
 #: internet/digitallyimportedsettingspage.cpp:82
-#: internet/magnatunesettingspage.cpp:113 internet/lastfmservice.cpp:431
+#: internet/magnatunesettingspage.cpp:113 internet/lastfmservice.cpp:427
 #: internet/lastfmsettingspage.cpp:78
 msgid "Authentication failed"
 msgstr "Xác thực thất bại"
@@ -1092,11 +1092,11 @@ msgstr "Soạn nhạc"
 msgid "Configure %1..."
 msgstr "Cấu hình %1..."
 
-#: internet/groovesharkservice.cpp:561
+#: internet/groovesharkservice.cpp:551
 msgid "Configure Grooveshark..."
 msgstr "Cấu hình Grooveshark..."
 
-#: internet/lastfmservice.cpp:125
+#: internet/lastfmservice.cpp:126
 msgid "Configure Last.fm..."
 msgstr "Cấu hình Last.fm..."
 
@@ -1124,7 +1124,7 @@ msgstr "Cấu hình thư viện..."
 msgid "Configure podcasts..."
 msgstr "Cấu hình podcast..."
 
-#: internet/digitallyimportedservicebase.cpp:185
+#: internet/digitallyimportedservicebase.cpp:186
 #: ../bin/src/ui_globalsearchsettingspage.h:150
 #: internet/googledriveservice.cpp:257
 msgid "Configure..."
@@ -1158,7 +1158,7 @@ msgstr "Chuyển đổi toàn bộ nhạc"
 msgid "Convert any music that the device can't play"
 msgstr "Chuyển đổi bất kì bản nhạc nào mà thiết bị không thể chơi"
 
-#: internet/groovesharkservice.cpp:1198
+#: internet/groovesharkservice.cpp:1171
 msgid "Copy to clipboard"
 msgstr "Chép vào bộ đệm"
 
@@ -1201,7 +1201,7 @@ msgid ""
 "plugins installed"
 msgstr "Không tim thấy bộ mã hóa cho %1, hãy chắc chắn là bạn đã cài đặt đủ các phần bổ sung của GStreamer"
 
-#: internet/lastfmservice.cpp:890
+#: internet/lastfmservice.cpp:875
 msgid "Couldn't load the last.fm radio station"
 msgstr "Không thể nạp đài phát thanh last.fm"
 
@@ -1243,7 +1243,7 @@ msgstr "Ảnh bìa được thiết lập từ %1"
 msgid "Covers from %1"
 msgstr "Ảnh bìa từ %1"
 
-#: internet/groovesharkservice.cpp:529 internet/groovesharkservice.cpp:1271
+#: internet/groovesharkservice.cpp:519 internet/groovesharkservice.cpp:1243
 msgid "Create a new Grooveshark playlist"
 msgstr "Tạo danh sách Grooveshark mới"
 
@@ -1339,7 +1339,7 @@ msgstr "Chọn ảnh:"
 msgid "Custom message settings"
 msgstr "Thiết lập tùy chọn tin nhắn"
 
-#: internet/lastfmservice.cpp:215
+#: internet/lastfmservice.cpp:216
 msgid "Custom radio"
 msgstr "Tùy chọn phát thanh"
 
@@ -1398,7 +1398,7 @@ msgstr "Mặc định"
 msgid "Delay between visualizations"
 msgstr "Độ trễ giữa các hiệu ứng hình ảnh ảo"
 
-#: internet/groovesharkservice.cpp:532 internet/groovesharkservice.cpp:1318
+#: internet/groovesharkservice.cpp:522 internet/groovesharkservice.cpp:1290
 msgid "Delete Grooveshark playlist"
 msgstr "Xoá danh sách Grooveshark"
 
@@ -1606,7 +1606,7 @@ msgstr "Tải về..."
 msgid "Downloading (%1%)..."
 msgstr "Đang tải (%1%)..."
 
-#: internet/icecastservice.cpp:99
+#: internet/icecastservice.cpp:101
 msgid "Downloading Icecast directory"
 msgstr "Đang tải thư mục Icecast"
 
@@ -1765,7 +1765,7 @@ msgstr "Tương đương với --log-levels *:1"
 msgid "Equivalent to --log-levels *:3"
 msgstr "Tương đương với --log-levels *:3"
 
-#: internet/groovesharkservice.cpp:1043
+#: internet/groovesharkservice.cpp:1016
 #: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:602
 #: ui/mainwindow.cpp:1767 ui/mainwindow.cpp:1888
 msgid "Error"
@@ -1792,7 +1792,7 @@ msgstr "Lỗi khi tải phần hỗ trợ Spotify"
 msgid "Error loading %1"
 msgstr "Lỗi nạp %1"
 
-#: internet/digitallyimportedservicebase.cpp:206
+#: internet/digitallyimportedservicebase.cpp:203
 #: internet/digitallyimportedurlhandler.cpp:87
 msgid "Error loading di.fm playlist"
 msgstr "Lỗi khi nạp danh sách di.fm"
@@ -1916,7 +1916,7 @@ msgstr "Lỗi phân tích XML cho nguồn tin RSS"
 msgid "Fast"
 msgstr "Nhanh"
 
-#: internet/groovesharkservice.cpp:626
+#: internet/groovesharkservice.cpp:616
 msgid "Favorites"
 msgstr "Yêu thích"
 
@@ -2067,7 +2067,7 @@ msgstr "Tần số khung hình"
 msgid "Frames per buffer"
 msgstr "Số khung mỗi lần tạo bộ đệm"
 
-#: internet/lastfmservice.cpp:223
+#: internet/lastfmservice.cpp:224
 msgid "Friends"
 msgstr "Bạn bè"
 
@@ -2105,15 +2105,15 @@ msgstr "Thiết lập chung"
 msgid "Genre"
 msgstr "Thể loại"
 
-#: internet/groovesharkservice.cpp:551
+#: internet/groovesharkservice.cpp:541
 msgid "Get a URL to share this Grooveshark playlist"
 msgstr "Lấy URL để chia sẻ danh sách Grooveshark này"
 
-#: internet/groovesharkservice.cpp:548 internet/groovesharkservice.cpp:1136
+#: internet/groovesharkservice.cpp:538 internet/groovesharkservice.cpp:1109
 msgid "Get a URL to share this Grooveshark song"
 msgstr "Lấy URL để chia sẻ bài này "
 
-#: internet/groovesharkservice.cpp:810
+#: internet/groovesharkservice.cpp:789
 msgid "Getting Grooveshark popular songs"
 msgstr "Đang lấy danh sách các bài hát phổ biến trên Grooveshark"
 
@@ -2121,7 +2121,7 @@ msgstr "Đang lấy danh sách các bài hát phổ biến trên Grooveshark"
 msgid "Getting channels"
 msgstr "Đang tải các kênh"
 
-#: internet/digitallyimportedservicebase.cpp:107
+#: internet/digitallyimportedservicebase.cpp:108
 msgid "Getting streams"
 msgstr "Đang tải các luồng"
 
@@ -2160,19 +2160,19 @@ msgstr "Loại bỏ những bài hát không tồn tại khỏi các danh sách"
 msgid "Grooveshark"
 msgstr "Grooveshark"
 
-#: internet/groovesharkservice.cpp:417
+#: internet/groovesharkservice.cpp:407
 msgid "Grooveshark login error"
 msgstr "Lỗi đăng nhập Grooveshark"
 
-#: internet/groovesharkservice.cpp:1188
+#: internet/groovesharkservice.cpp:1161
 msgid "Grooveshark playlist's URL"
 msgstr "URL của danh sách Grooveshark"
 
-#: internet/groovesharkservice.cpp:612
+#: internet/groovesharkservice.cpp:602
 msgid "Grooveshark radio"
 msgstr "Phát thanh Grooveshark"
 
-#: internet/groovesharkservice.cpp:1166
+#: internet/groovesharkservice.cpp:1139
 msgid "Grooveshark song's URL"
 msgstr "URL của bài hát trên Grooveshark"
 
@@ -2353,35 +2353,35 @@ msgstr "Internet"
 msgid "Internet providers"
 msgstr "Dịch vụ"
 
-#: internet/lastfmservice.cpp:437
+#: internet/lastfmservice.cpp:433
 msgid "Invalid API key"
 msgstr "Khóa API không hợp lệ"
 
-#: internet/lastfmservice.cpp:432
+#: internet/lastfmservice.cpp:428
 msgid "Invalid format"
 msgstr "Định dạng không hợp lệ"
 
-#: internet/lastfmservice.cpp:430
+#: internet/lastfmservice.cpp:426
 msgid "Invalid method"
 msgstr "Phương thức không hợp lệ"
 
-#: internet/lastfmservice.cpp:433
+#: internet/lastfmservice.cpp:429
 msgid "Invalid parameters"
 msgstr "Tham số không hợp lệ"
 
-#: internet/lastfmservice.cpp:434
+#: internet/lastfmservice.cpp:430
 msgid "Invalid resource specified"
 msgstr "Nguồn được xác lập không hợp lệ"
 
-#: internet/lastfmservice.cpp:429
+#: internet/lastfmservice.cpp:425
 msgid "Invalid service"
 msgstr "Dịch vụ không hợp lệ"
 
-#: internet/lastfmservice.cpp:436
+#: internet/lastfmservice.cpp:432
 msgid "Invalid session key"
 msgstr "Khoá phiên chạy không hợp lệ"
 
-#: internet/groovesharkservice.cpp:410
+#: internet/groovesharkservice.cpp:400
 msgid "Invalid username and/or password"
 msgstr "Vui lòng kiểm tra lại tên người dùng và mật khẩu"
 
@@ -2466,45 +2466,45 @@ msgstr "Lần phát cuối"
 msgid "Last.fm"
 msgstr "Last.fm"
 
-#: internet/lastfmservice.cpp:84
+#: internet/lastfmservice.cpp:85
 #, qt-format
 msgid "Last.fm Custom Radio: %1"
 msgstr "Tùy chọn phát thanh Last.fm: %1"
 
-#: internet/lastfmservice.cpp:254 internet/lastfmservice.cpp:705
-#: internet/lastfmservice.cpp:732
+#: internet/lastfmservice.cpp:255 internet/lastfmservice.cpp:699
+#: internet/lastfmservice.cpp:722
 #, qt-format
 msgid "Last.fm Library - %1"
 msgstr "Thư viện Last.fm - %1"
 
-#: globalsearch/lastfmsearchprovider.cpp:77 internet/lastfmservice.cpp:256
-#: internet/lastfmservice.cpp:259
+#: globalsearch/lastfmsearchprovider.cpp:77 internet/lastfmservice.cpp:257
+#: internet/lastfmservice.cpp:260
 #, qt-format
 msgid "Last.fm Mix Radio - %1"
 msgstr "Phát thanh Last.fm mix - %1"
 
-#: globalsearch/lastfmsearchprovider.cpp:79 internet/lastfmservice.cpp:261
-#: internet/lastfmservice.cpp:264
+#: globalsearch/lastfmsearchprovider.cpp:79 internet/lastfmservice.cpp:262
+#: internet/lastfmservice.cpp:265
 #, qt-format
 msgid "Last.fm Neighbor Radio - %1"
 msgstr "Kênh phát thanh Last.fm lân cận - %1"
 
-#: globalsearch/lastfmsearchprovider.cpp:75 internet/lastfmservice.cpp:251
+#: globalsearch/lastfmsearchprovider.cpp:75 internet/lastfmservice.cpp:252
 #, qt-format
 msgid "Last.fm Radio Station - %1"
 msgstr "Đài phát thanh Last.fm - %1"
 
-#: internet/lastfmservice.cpp:82
+#: internet/lastfmservice.cpp:83
 #, qt-format
 msgid "Last.fm Similar Artists to %1"
 msgstr "Nghệ sĩ tương tự trên Last.fm %1"
 
-#: internet/lastfmservice.cpp:83
+#: internet/lastfmservice.cpp:84
 #, qt-format
 msgid "Last.fm Tag Radio: %1"
 msgstr "Thẻ phát thanh Last.fm: %1"
 
-#: internet/lastfmservice.cpp:441
+#: internet/lastfmservice.cpp:437
 msgid "Last.fm is currently busy, please try again in a few minutes"
 msgstr "Last.fm hiện đang bận, vui lòng thử lại sau vài phút"
 
@@ -2561,7 +2561,7 @@ msgstr "Tìm trong thư viện"
 msgid "Limits"
 msgstr "Giới hạn"
 
-#: internet/groovesharkservice.cpp:613
+#: internet/groovesharkservice.cpp:603
 msgid ""
 "Listen to Grooveshark songs based on what you've listened to previously"
 msgstr "Nghe nhạc từ Grooveshark dựa theo những gì bạn đã nghe trước đó"
@@ -2598,7 +2598,7 @@ msgstr "Mở danh sách"
 msgid "Load playlist..."
 msgstr "Mở danh sách..."
 
-#: internet/lastfmservice.cpp:899
+#: internet/lastfmservice.cpp:884
 msgid "Loading Last.fm radio"
 msgstr "Đang nạp kênh phát thanh Last.fm"
 
@@ -2733,7 +2733,7 @@ msgstr "Make it so!"
 msgid "Make playlist available offline"
 msgstr "Danh sách sẵn sàng ngoại tuyến"
 
-#: internet/lastfmservice.cpp:448
+#: internet/lastfmservice.cpp:444
 msgid "Malformed response"
 msgstr "Phản hồi có vẻ xấu"
 
@@ -2860,43 +2860,43 @@ msgstr "Thư viện nhạc"
 msgid "Mute"
 msgstr "Tắt âm"
 
-#: globalsearch/lastfmsearchprovider.cpp:53 internet/lastfmservice.cpp:194
+#: globalsearch/lastfmsearchprovider.cpp:53 internet/lastfmservice.cpp:195
 msgid "My Last.fm Library"
 msgstr "Thư viện Last.fm của tôi"
 
-#: globalsearch/lastfmsearchprovider.cpp:55 internet/lastfmservice.cpp:199
+#: globalsearch/lastfmsearchprovider.cpp:55 internet/lastfmservice.cpp:200
 msgid "My Last.fm Mix Radio"
 msgstr "Kênh phát thanh Last.fm mix của tôi"
 
-#: globalsearch/lastfmsearchprovider.cpp:57 internet/lastfmservice.cpp:204
+#: globalsearch/lastfmsearchprovider.cpp:57 internet/lastfmservice.cpp:205
 msgid "My Last.fm Neighborhood"
 msgstr "Kênh Last.fm địa phương của tôi"
 
-#: globalsearch/lastfmsearchprovider.cpp:51 internet/lastfmservice.cpp:189
+#: globalsearch/lastfmsearchprovider.cpp:51 internet/lastfmservice.cpp:190
 msgid "My Last.fm Recommended Radio"
 msgstr "Kênh phát thanh Last.fm khuyến nghị của tôi"
 
-#: internet/lastfmservice.cpp:196
+#: internet/lastfmservice.cpp:197
 msgid "My Mix Radio"
 msgstr "Kênh phát thanh mix của tôi"
 
-#: internet/groovesharkservice.cpp:617
+#: internet/groovesharkservice.cpp:607
 msgid "My Music"
 msgstr "Nhạc của tôi"
 
-#: internet/lastfmservice.cpp:201
+#: internet/lastfmservice.cpp:202
 msgid "My Neighborhood"
 msgstr "Địa phương của tôi"
 
-#: internet/lastfmservice.cpp:191
+#: internet/lastfmservice.cpp:192
 msgid "My Radio Station"
 msgstr "Đài phát thanh của tôi"
 
-#: internet/lastfmservice.cpp:186
+#: internet/lastfmservice.cpp:187
 msgid "My Recommendations"
 msgstr "Bài nên nghe"
 
-#: internet/groovesharkservice.cpp:1272 internet/groovesharkservice.cpp:1365
+#: internet/groovesharkservice.cpp:1244 internet/groovesharkservice.cpp:1337
 #: ui/equalizer.cpp:172 ../bin/src/ui_deviceproperties.h:369
 #: ../bin/src/ui_magnatunedownloaddialog.h:135
 #: ../bin/src/ui_wizardfinishpage.h:84
@@ -2912,7 +2912,7 @@ msgstr "Tùy chọn đặt tên"
 msgid "Narrow band (NB)"
 msgstr "Băng hẹp (NB)"
 
-#: internet/lastfmservice.cpp:228
+#: internet/lastfmservice.cpp:229
 msgid "Neighbors"
 msgstr "Lân cận"
 
@@ -3016,19 +3016,19 @@ msgstr "Không khả thi khi dùng danh sách năng động"
 msgid "Not connected"
 msgstr "Chưa kết nối"
 
-#: internet/lastfmservice.cpp:443
+#: internet/lastfmservice.cpp:439
 msgid "Not enough content"
 msgstr "Không đủ nội dung"
 
-#: internet/lastfmservice.cpp:445
+#: internet/lastfmservice.cpp:441
 msgid "Not enough fans"
 msgstr "Chưa đủ người hâm mộ"
 
-#: internet/lastfmservice.cpp:444
+#: internet/lastfmservice.cpp:440
 msgid "Not enough members"
 msgstr "Chưa đủ thành viên"
 
-#: internet/lastfmservice.cpp:446
+#: internet/lastfmservice.cpp:442
 msgid "Not enough neighbors"
 msgstr "Chưa đủ những người lân cận"
 
@@ -3078,8 +3078,8 @@ msgstr "Ogg Vorbis"
 msgid "Only show the first"
 msgstr "Hiện số bài hát đầu tiên"
 
-#: internet/digitallyimportedservicebase.cpp:178
-#: internet/groovesharkservice.cpp:555 internet/icecastservice.cpp:296
+#: internet/digitallyimportedservicebase.cpp:179
+#: internet/groovesharkservice.cpp:545 internet/icecastservice.cpp:296
 #: internet/jamendoservice.cpp:418 internet/magnatuneservice.cpp:276
 #: internet/somafmservice.cpp:91 internet/soundcloudservice.cpp:194
 #, qt-format
@@ -3121,7 +3121,7 @@ msgstr "Mở trong danh sách mới"
 msgid "Open..."
 msgstr "Mở..."
 
-#: internet/lastfmservice.cpp:435
+#: internet/lastfmservice.cpp:431
 msgid "Operation failed"
 msgstr "Thao tác thất bại"
 
@@ -3225,7 +3225,7 @@ msgstr "Phát"
 msgid "Play Artist or Tag"
 msgstr "Phát theo Nghệ sĩ hoặc theo Thẻ"
 
-#: internet/lastfmservice.cpp:117
+#: internet/lastfmservice.cpp:118
 msgid "Play artist radio..."
 msgstr "Phát kênh phát thanh nghệ sĩ..."
 
@@ -3233,7 +3233,7 @@ msgstr "Phát kênh phát thanh nghệ sĩ..."
 msgid "Play count"
 msgstr "Số lần phát"
 
-#: internet/lastfmservice.cpp:121
+#: internet/lastfmservice.cpp:122
 msgid "Play custom radio..."
 msgstr "Phát kênh phát thanh tùy chọn..."
 
@@ -3246,7 +3246,7 @@ msgstr "Phát nếu như đang dừng, tạm dừng nếu như đang phát"
 msgid "Play if there is nothing already playing"
 msgstr "Phát nhạc nếu không có bài khác đang phát"
 
-#: internet/lastfmservice.cpp:119
+#: internet/lastfmservice.cpp:120
 msgid "Play tag radio..."
 msgstr "Phát thẻ phát thanh..."
 
@@ -3287,7 +3287,7 @@ msgstr "Tìm trong danh sách"
 msgid "Playlist type"
 msgstr "Loại danh sách"
 
-#: internet/groovesharkservice.cpp:635
+#: internet/groovesharkservice.cpp:625
 msgid "Playlists"
 msgstr "Danh sách"
 
@@ -3307,15 +3307,15 @@ msgstr "Podcast"
 msgid "Pop"
 msgstr "Pop"
 
-#: internet/groovesharkservice.cpp:586
+#: internet/groovesharkservice.cpp:576
 msgid "Popular songs"
 msgstr "Những bài hát phổ biến"
 
-#: internet/groovesharkservice.cpp:589
+#: internet/groovesharkservice.cpp:579
 msgid "Popular songs of the Month"
 msgstr "Bài hát phổ biến trong tháng"
 
-#: internet/groovesharkservice.cpp:596
+#: internet/groovesharkservice.cpp:586
 msgid "Popular songs today"
 msgstr "Bài hát phổ biến hôm nay"
 
@@ -3449,7 +3449,7 @@ msgstr "Chờ phát sau"
 msgid "Radio (equal loudness for all tracks)"
 msgstr "Phát thanh (âm thanh bằng nhau cho mọi bài hát)"
 
-#: internet/groovesharkservice.cpp:604
+#: internet/groovesharkservice.cpp:594
 msgid "Radios"
 msgstr "Phát thanh"
 
@@ -3493,7 +3493,7 @@ msgstr "Đánh giá"
 msgid "Really cancel?"
 msgstr "Thực sự hủy bỏ?"
 
-#: internet/groovesharkservice.cpp:558
+#: internet/groovesharkservice.cpp:548
 msgid "Refresh"
 msgstr "Cập nhật"
 
@@ -3505,7 +3505,7 @@ msgstr "Cập nhật mục lục"
 msgid "Refresh channels"
 msgstr "Cập nhật kênh"
 
-#: internet/lastfmservice.cpp:123
+#: internet/lastfmservice.cpp:124
 msgid "Refresh friends list"
 msgstr "Cập nhật danh sách bạn"
 
@@ -3513,7 +3513,7 @@ msgstr "Cập nhật danh sách bạn"
 msgid "Refresh station list"
 msgstr "Cập nhật danh sách đài"
 
-#: internet/digitallyimportedservicebase.cpp:181
+#: internet/digitallyimportedservicebase.cpp:182
 msgid "Refresh streams"
 msgstr "Cập nhật các luồng"
 
@@ -3531,7 +3531,7 @@ msgstr "Nhớ từ lần trước"
 
 #: internet/savedradio.cpp:100 ../bin/src/ui_queuemanager.h:135
 #: ../bin/src/ui_searchtermwidget.h:282 ../bin/src/ui_transcodedialog.h:208
-#: internet/lastfmservice.cpp:114
+#: internet/lastfmservice.cpp:115
 msgid "Remove"
 msgstr "Loại bỏ"
 
@@ -3547,15 +3547,15 @@ msgstr "Loại bỏ mục trùng nhau khỏi d.sách"
 msgid "Remove folder"
 msgstr "Loại bỏ thư mục"
 
-#: internet/groovesharkservice.cpp:545
+#: internet/groovesharkservice.cpp:535
 msgid "Remove from My Music"
 msgstr "Loại bỏ khỏi Nhạc của tôi"
 
-#: internet/groovesharkservice.cpp:542
+#: internet/groovesharkservice.cpp:532
 msgid "Remove from favorites"
 msgstr "Loại bỏ khỏi yêu thích"
 
-#: internet/groovesharkservice.cpp:539 ../bin/src/ui_mainwindow.h:692
+#: internet/groovesharkservice.cpp:529 ../bin/src/ui_mainwindow.h:692
 msgid "Remove from playlist"
 msgstr "Loại bỏ khỏi danh sách"
 
@@ -3563,20 +3563,20 @@ msgstr "Loại bỏ khỏi danh sách"
 msgid "Remove playlist"
 msgstr "Loại bỏ danh sách"
 
-#: internet/groovesharkservice.cpp:1566
+#: internet/groovesharkservice.cpp:1538
 msgid "Removing songs from My Music"
 msgstr "Loại bài hát khỏi Nhạc của tôi"
 
-#: internet/groovesharkservice.cpp:1516
+#: internet/groovesharkservice.cpp:1488
 msgid "Removing songs from favorites"
 msgstr "Loại bài hát khỏi yêu thích"
 
-#: internet/groovesharkservice.cpp:1364
+#: internet/groovesharkservice.cpp:1336
 #, qt-format
 msgid "Rename \"%1\" playlist"
 msgstr "Đổi tên danh sách \"%1\""
 
-#: internet/groovesharkservice.cpp:535
+#: internet/groovesharkservice.cpp:525
 msgid "Rename Grooveshark playlist"
 msgstr "Đổi tên danh sách Grooveshark"
 
@@ -3646,15 +3646,15 @@ msgstr "Thiết lập lại bộ đếm số lần phát"
 msgid "Restrict to ASCII characters"
 msgstr "Phải dùng kí tự mã ASCII"
 
-#: internet/groovesharkservice.cpp:778
+#: internet/groovesharkservice.cpp:757
 msgid "Retrieving Grooveshark My Music songs"
 msgstr "Đang lấy các bài hát Grooveshark trong Nhạc của tôi"
 
-#: internet/groovesharkservice.cpp:746
+#: internet/groovesharkservice.cpp:725
 msgid "Retrieving Grooveshark favorites songs"
 msgstr "Đang tải các bài hát yêu thích trên Grooveshark"
 
-#: internet/groovesharkservice.cpp:672
+#: internet/groovesharkservice.cpp:662
 msgid "Retrieving Grooveshark playlists"
 msgstr "Đang tải danh sách Grooveshark"
 
@@ -3780,7 +3780,7 @@ msgstr "Chế độ tìm kiếm"
 msgid "Search options"
 msgstr "Tùy chỉnh tìm kiếm"
 
-#: internet/groovesharkservice.cpp:578 internet/soundcloudservice.cpp:104
+#: internet/groovesharkservice.cpp:568 internet/soundcloudservice.cpp:104
 #: internet/spotifyservice.cpp:348
 msgid "Search results"
 msgstr "Kết quả tìm kiếm"
@@ -3790,7 +3790,7 @@ msgstr "Kết quả tìm kiếm"
 msgid "Search terms"
 msgstr "Điều kiện tìm kiếm"
 
-#: internet/groovesharkservice.cpp:273
+#: internet/groovesharkservice.cpp:268
 msgid "Searching on Grooveshark"
 msgstr "Đang tìm trên Grooveshark"
 
@@ -3850,7 +3850,7 @@ msgstr "Chọn hiệu ứng hình ảnh ảo..."
 msgid "Serial number"
 msgstr "Số sê-ri"
 
-#: internet/lastfmservice.cpp:438
+#: internet/lastfmservice.cpp:434
 msgid "Service offline"
 msgstr "Dịch vụ ngoại tuyến"
 
@@ -4143,7 +4143,7 @@ msgstr "Bắt đầu danh sách đang phát"
 msgid "Start transcoding"
 msgstr "Bắt đầu chuyển mã"
 
-#: internet/groovesharkservice.cpp:579 internet/soundcloudservice.cpp:105
+#: internet/groovesharkservice.cpp:569 internet/soundcloudservice.cpp:105
 #: internet/spotifyservice.cpp:349
 msgid ""
 "Start typing something on the search box above to fill this search results "
@@ -4159,7 +4159,7 @@ msgstr "Bắt đầu %1"
 msgid "Starting..."
 msgstr "Đang bắt đầu..."
 
-#: internet/groovesharkservice.cpp:607
+#: internet/groovesharkservice.cpp:597
 msgid "Stations"
 msgstr "Đài"
 
@@ -4196,7 +4196,7 @@ msgstr "Truyền tải"
 msgid "Streaming membership"
 msgstr "Truyền tải thông tin thành viên"
 
-#: internet/groovesharkservice.cpp:638
+#: internet/groovesharkservice.cpp:628
 msgid "Subscribed playlists"
 msgstr "Danh sách đã đăng kí"
 
@@ -4264,7 +4264,7 @@ msgstr "Thẻ"
 msgid "Tag fetcher"
 msgstr "Trình tải thẻ"
 
-#: internet/lastfmservice.cpp:211
+#: internet/lastfmservice.cpp:212
 msgid "Tag radio"
 msgstr "Thẻ phát thanh"
 
@@ -4420,7 +4420,7 @@ msgid ""
 "want to continue?"
 msgstr "Danh sách này sẽ bị loại bỏ và không thể lấy lại được. Bạn có chắc muốn tiếp tục không?"
 
-#: internet/lastfmservice.cpp:439
+#: internet/lastfmservice.cpp:435
 msgid "This stream is for paid subscribers only"
 msgstr "Luồng này chỉ dành cho người trả phí"
 
@@ -4443,7 +4443,7 @@ msgstr "Múi giờ"
 msgid "Title"
 msgstr "Tựa đề"
 
-#: internet/groovesharkservice.cpp:1044
+#: internet/groovesharkservice.cpp:1017
 msgid ""
 "To start Grooveshark radio, you should first listen to a few other "
 "Grooveshark songs"
@@ -4560,7 +4560,7 @@ msgstr "Chưa xác định"
 msgid "Unknown content-type"
 msgstr "Không hiểu nội dung"
 
-#: internet/digitallyimportedclient.cpp:69 internet/lastfmservice.cpp:452
+#: internet/digitallyimportedclient.cpp:69 internet/lastfmservice.cpp:448
 msgid "Unknown error"
 msgstr "Lỗi không xác định"
 
@@ -4576,7 +4576,7 @@ msgstr "Hủy đăng kí"
 msgid "Upcoming Concerts"
 msgstr "Các buổi hòa nhạc sắp diễn ra"
 
-#: internet/groovesharkservice.cpp:1226
+#: internet/groovesharkservice.cpp:1199
 msgid "Update Grooveshark playlist"
 msgstr "Cập nhật danh sách Grooveshark"
 
@@ -4682,7 +4682,7 @@ msgstr "Sử dụng cân bằng âm lượng"
 msgid "Used"
 msgstr "Đã dùng"
 
-#: internet/groovesharkservice.cpp:413
+#: internet/groovesharkservice.cpp:403
 #, qt-format
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr "Người dùng %1 không có tài khoản Grooveshark Anywhere"

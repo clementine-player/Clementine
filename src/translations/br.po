@@ -451,11 +451,11 @@ msgstr "Ouzhpennañ klav bloavezh an ton"
 msgid "Add stream..."
 msgstr "Ouzhpennan ul lanv..."
 
-#: internet/groovesharkservice.cpp:1113
+#: internet/groovesharkservice.cpp:1086
 msgid "Add to Grooveshark favorites"
 msgstr "Ouzhpennañ da tonioù karetañ Grooveshark"
 
-#: internet/groovesharkservice.cpp:1125
+#: internet/groovesharkservice.cpp:1098
 msgid "Add to Grooveshark playlists"
 msgstr "Ouzhpennañ da rolloù seniñ Grooveshark"
 
@@ -500,11 +500,11 @@ msgstr "Ouzhpennet hiziv"
 msgid "Added within three months"
 msgstr "Ouzhpennet e-kerzh an tri miz diwezhañ"
 
-#: internet/groovesharkservice.cpp:1421
+#: internet/groovesharkservice.cpp:1393
 msgid "Adding song to My Music"
 msgstr "Oc'h ouzhpennañ an ton d'an doser sonerezh."
 
-#: internet/groovesharkservice.cpp:1398
+#: internet/groovesharkservice.cpp:1370
 msgid "Adding song to favorites"
 msgstr "Oc'h ouzhpennañ an ton d'ar re karetañ"
 
@@ -668,7 +668,7 @@ msgstr "Koazhañ a-benn mirout ouzh an troc'hadennoù"
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "Ha sur oc'h da gaout c'hoant diverkañ an talvoud raktermenet « %1 »"
 
-#: internet/groovesharkservice.cpp:1319
+#: internet/groovesharkservice.cpp:1291
 msgid "Are you sure you want to delete this playlist?"
 msgstr "Ha sur oc'h ho peus c'hoant diverkañ ar roll seniñ ?"
 
@@ -690,7 +690,7 @@ msgstr "Arzour"
 msgid "Artist info"
 msgstr "Titouroù war an arzour"
 
-#: internet/lastfmservice.cpp:207
+#: internet/lastfmservice.cpp:208
 msgid "Artist radio"
 msgstr "Skingomz dre arzour"
 
@@ -707,7 +707,7 @@ msgid "Audio format"
 msgstr "Mentrezh Aodio"
 
 #: internet/digitallyimportedsettingspage.cpp:82
-#: internet/magnatunesettingspage.cpp:113 internet/lastfmservice.cpp:431
+#: internet/magnatunesettingspage.cpp:113 internet/lastfmservice.cpp:427
 #: internet/lastfmsettingspage.cpp:78
 msgid "Authentication failed"
 msgstr "Dilesadur sac'het"
@@ -1090,11 +1090,11 @@ msgstr "Aozer"
 msgid "Configure %1..."
 msgstr "Kefluniañ %1..."
 
-#: internet/groovesharkservice.cpp:561
+#: internet/groovesharkservice.cpp:551
 msgid "Configure Grooveshark..."
 msgstr "Kefluniañ Grooveshark"
 
-#: internet/lastfmservice.cpp:125
+#: internet/lastfmservice.cpp:126
 msgid "Configure Last.fm..."
 msgstr "Kefluniañ Last.fm..."
 
@@ -1122,7 +1122,7 @@ msgstr "Kefluniañ ar sonaoueg..."
 msgid "Configure podcasts..."
 msgstr "Kefluniañ ar podkastoù"
 
-#: internet/digitallyimportedservicebase.cpp:185
+#: internet/digitallyimportedservicebase.cpp:186
 #: ../bin/src/ui_globalsearchsettingspage.h:150
 #: internet/googledriveservice.cpp:257
 msgid "Configure..."
@@ -1156,7 +1156,7 @@ msgstr "Treuzkemm an holl sonerezh"
 msgid "Convert any music that the device can't play"
 msgstr "Treuzkemm ar sonerezh ne c'hell ket an drobarzhell lenn"
 
-#: internet/groovesharkservice.cpp:1198
+#: internet/groovesharkservice.cpp:1171
 msgid "Copy to clipboard"
 msgstr "Kopiañ d'ar golver"
 
@@ -1199,7 +1199,7 @@ msgid ""
 "plugins installed"
 msgstr "Dibosupl eo kavout un enkoder evit %1, gwiriekait ez eo staliet ar enlugelladoù mat evit GStreamer"
 
-#: internet/lastfmservice.cpp:890
+#: internet/lastfmservice.cpp:875
 msgid "Couldn't load the last.fm radio station"
 msgstr "Dibosupl kargañ ar skingomz last.fm"
 
@@ -1241,7 +1241,7 @@ msgstr "Golo diuzet adalek %1"
 msgid "Covers from %1"
 msgstr "Goloioù adalek %1"
 
-#: internet/groovesharkservice.cpp:529 internet/groovesharkservice.cpp:1271
+#: internet/groovesharkservice.cpp:519 internet/groovesharkservice.cpp:1243
 msgid "Create a new Grooveshark playlist"
 msgstr "Krouiñ ur roll seniñ Grooveshak nevez"
 
@@ -1337,7 +1337,7 @@ msgstr "Skeudenn personelaet :"
 msgid "Custom message settings"
 msgstr "Kemennadenn gwellvezioù personelaet"
 
-#: internet/lastfmservice.cpp:215
+#: internet/lastfmservice.cpp:216
 msgid "Custom radio"
 msgstr "Skingomz personelaet"
 
@@ -1396,7 +1396,7 @@ msgstr "Dre ziouer"
 msgid "Delay between visualizations"
 msgstr "Amzer etre ar heweladurioù"
 
-#: internet/groovesharkservice.cpp:532 internet/groovesharkservice.cpp:1318
+#: internet/groovesharkservice.cpp:522 internet/groovesharkservice.cpp:1290
 msgid "Delete Grooveshark playlist"
 msgstr "Diverkañ ur roll seniñ Grooveshark"
 
@@ -1604,7 +1604,7 @@ msgstr "Pellgargañ"
 msgid "Downloading (%1%)..."
 msgstr "O pellgargañ (%1%)..."
 
-#: internet/icecastservice.cpp:99
+#: internet/icecastservice.cpp:101
 msgid "Downloading Icecast directory"
 msgstr "O pellgargañ katalog Icecast"
 
@@ -1763,7 +1763,7 @@ msgstr "Kenkoulz a --log-levels *:1"
 msgid "Equivalent to --log-levels *:3"
 msgstr "Kenkoulz a --log-levels *:3"
 
-#: internet/groovesharkservice.cpp:1043
+#: internet/groovesharkservice.cpp:1016
 #: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:602
 #: ui/mainwindow.cpp:1767 ui/mainwindow.cpp:1888
 msgid "Error"
@@ -1790,7 +1790,7 @@ msgstr "Ur gudenn a zo savet o pellgargañ enlugellad Spotify"
 msgid "Error loading %1"
 msgstr "Ur gudenn a zo savet e-pad kargadur %1"
 
-#: internet/digitallyimportedservicebase.cpp:206
+#: internet/digitallyimportedservicebase.cpp:203
 #: internet/digitallyimportedurlhandler.cpp:87
 msgid "Error loading di.fm playlist"
 msgstr "Kudenn o kargañ roll seniñ di.fm"
@@ -1914,7 +1914,7 @@ msgstr "C'hwitet eo bet o lenn al lanv RSS"
 msgid "Fast"
 msgstr "Trumm"
 
-#: internet/groovesharkservice.cpp:626
+#: internet/groovesharkservice.cpp:616
 msgid "Favorites"
 msgstr "Ma re garetañ"
 
@@ -2065,7 +2065,7 @@ msgstr "Skeudennoù dre eilenn"
 msgid "Frames per buffer"
 msgstr "Skeudennoù dre buffer"
 
-#: internet/lastfmservice.cpp:223
+#: internet/lastfmservice.cpp:224
 msgid "Friends"
 msgstr "Mignoned"
 
@@ -2103,15 +2103,15 @@ msgstr "Kefluniadur hollek"
 msgid "Genre"
 msgstr "Doare"
 
-#: internet/groovesharkservice.cpp:551
+#: internet/groovesharkservice.cpp:541
 msgid "Get a URL to share this Grooveshark playlist"
 msgstr "Kaout un URL evit rannañ ar roll seniñ Grooveshark"
 
-#: internet/groovesharkservice.cpp:548 internet/groovesharkservice.cpp:1136
+#: internet/groovesharkservice.cpp:538 internet/groovesharkservice.cpp:1109
 msgid "Get a URL to share this Grooveshark song"
 msgstr "Kaout un URL evit rannañ an ton Grooveshark"
 
-#: internet/groovesharkservice.cpp:810
+#: internet/groovesharkservice.cpp:789
 msgid "Getting Grooveshark popular songs"
 msgstr "O taspugnat tonioù brudet Grooveshark"
 
@@ -2119,7 +2119,7 @@ msgstr "O taspugnat tonioù brudet Grooveshark"
 msgid "Getting channels"
 msgstr "O taspugn ar c'hanolioù"
 
-#: internet/digitallyimportedservicebase.cpp:107
+#: internet/digitallyimportedservicebase.cpp:108
 msgid "Getting streams"
 msgstr "O tegemer al lanvioù"
 
@@ -2158,19 +2158,19 @@ msgstr "Grisaat an tonioù n'int ket mui em roll seniñ"
 msgid "Grooveshark"
 msgstr "Grooveshark"
 
-#: internet/groovesharkservice.cpp:417
+#: internet/groovesharkservice.cpp:407
 msgid "Grooveshark login error"
 msgstr "Kudenn kennaskañ gant Grooveshark"
 
-#: internet/groovesharkservice.cpp:1188
+#: internet/groovesharkservice.cpp:1161
 msgid "Grooveshark playlist's URL"
 msgstr "URL ar roll seniñ Grooveshark"
 
-#: internet/groovesharkservice.cpp:612
+#: internet/groovesharkservice.cpp:602
 msgid "Grooveshark radio"
 msgstr "Skingomz Grooveshark"
 
-#: internet/groovesharkservice.cpp:1166
+#: internet/groovesharkservice.cpp:1139
 msgid "Grooveshark song's URL"
 msgstr "URL ar ganaouenn Grooveshark"
 
@@ -2351,35 +2351,35 @@ msgstr "Internet"
 msgid "Internet providers"
 msgstr "Pourchaserien internet"
 
-#: internet/lastfmservice.cpp:437
+#: internet/lastfmservice.cpp:433
 msgid "Invalid API key"
 msgstr "Alc'hwez API didalvoudek"
 
-#: internet/lastfmservice.cpp:432
+#: internet/lastfmservice.cpp:428
 msgid "Invalid format"
 msgstr "Mentrezh didalvoudek"
 
-#: internet/lastfmservice.cpp:430
+#: internet/lastfmservice.cpp:426
 msgid "Invalid method"
 msgstr "Hentenn didalvoudek"
 
-#: internet/lastfmservice.cpp:433
+#: internet/lastfmservice.cpp:429
 msgid "Invalid parameters"
 msgstr "Arventennoù didalvoudek"
 
-#: internet/lastfmservice.cpp:434
+#: internet/lastfmservice.cpp:430
 msgid "Invalid resource specified"
 msgstr "Loazioù erspizet didalvoudek"
 
-#: internet/lastfmservice.cpp:429
+#: internet/lastfmservice.cpp:425
 msgid "Invalid service"
 msgstr "Servij didalvoudek"
 
-#: internet/lastfmservice.cpp:436
+#: internet/lastfmservice.cpp:432
 msgid "Invalid session key"
 msgstr "Kudenn gant alc'hwez an dalc'h"
 
-#: internet/groovesharkservice.cpp:410
+#: internet/groovesharkservice.cpp:400
 msgid "Invalid username and/or password"
 msgstr "Kudenn gant an anv implijer pe an tremenger"
 
@@ -2464,45 +2464,45 @@ msgstr "Selaouet e ziwezhañ"
 msgid "Last.fm"
 msgstr "Last.fm"
 
-#: internet/lastfmservice.cpp:84
+#: internet/lastfmservice.cpp:85
 #, qt-format
 msgid "Last.fm Custom Radio: %1"
 msgstr "Skingomz last.fm personelaet :%1"
 
-#: internet/lastfmservice.cpp:254 internet/lastfmservice.cpp:705
-#: internet/lastfmservice.cpp:732
+#: internet/lastfmservice.cpp:255 internet/lastfmservice.cpp:699
+#: internet/lastfmservice.cpp:722
 #, qt-format
 msgid "Last.fm Library - %1"
 msgstr "Sonaoueg Last.fm- %1"
 
-#: globalsearch/lastfmsearchprovider.cpp:77 internet/lastfmservice.cpp:256
-#: internet/lastfmservice.cpp:259
+#: globalsearch/lastfmsearchprovider.cpp:77 internet/lastfmservice.cpp:257
+#: internet/lastfmservice.cpp:260
 #, qt-format
 msgid "Last.fm Mix Radio - %1"
 msgstr "Skingomz Last.fm- %1"
 
-#: globalsearch/lastfmsearchprovider.cpp:79 internet/lastfmservice.cpp:261
-#: internet/lastfmservice.cpp:264
+#: globalsearch/lastfmsearchprovider.cpp:79 internet/lastfmservice.cpp:262
+#: internet/lastfmservice.cpp:265
 #, qt-format
 msgid "Last.fm Neighbor Radio - %1"
 msgstr "Skingomz amezeg Last.fm- %1"
 
-#: globalsearch/lastfmsearchprovider.cpp:75 internet/lastfmservice.cpp:251
+#: globalsearch/lastfmsearchprovider.cpp:75 internet/lastfmservice.cpp:252
 #, qt-format
 msgid "Last.fm Radio Station - %1"
 msgstr "Savlec'h skingomz Last.fm- %1"
 
-#: internet/lastfmservice.cpp:82
+#: internet/lastfmservice.cpp:83
 #, qt-format
 msgid "Last.fm Similar Artists to %1"
 msgstr "Arzourien Last.fm dammheñvel da %1"
 
-#: internet/lastfmservice.cpp:83
+#: internet/lastfmservice.cpp:84
 #, qt-format
 msgid "Last.fm Tag Radio: %1"
 msgstr "Klav evit ar skingomz Last.fm: %1"
 
-#: internet/lastfmservice.cpp:441
+#: internet/lastfmservice.cpp:437
 msgid "Last.fm is currently busy, please try again in a few minutes"
 msgstr "Last.fm a zo ac'hubet, klaskit en-dro en un nebeut munutennoù"
 
@@ -2559,7 +2559,7 @@ msgstr "Enklask ar sonaoueg"
 msgid "Limits"
 msgstr "Bevennoù"
 
-#: internet/groovesharkservice.cpp:613
+#: internet/groovesharkservice.cpp:603
 msgid ""
 "Listen to Grooveshark songs based on what you've listened to previously"
 msgstr "Selaou ouzh tonioù Grooveshark diazezet war ar pezh ho peus selaouet a-raok."
@@ -2596,7 +2596,7 @@ msgstr "Kargañ ar roll seniñ"
 msgid "Load playlist..."
 msgstr "Kargañ ar roll seniñ..."
 
-#: internet/lastfmservice.cpp:899
+#: internet/lastfmservice.cpp:884
 msgid "Loading Last.fm radio"
 msgstr "O kargañ skingomz Last.fm"
 
@@ -2731,7 +2731,7 @@ msgstr "Ober evel-se !"
 msgid "Make playlist available offline"
 msgstr "Lakaat ar roll seniñ da vezañ lennus ezlinenn"
 
-#: internet/lastfmservice.cpp:448
+#: internet/lastfmservice.cpp:444
 msgid "Malformed response"
 msgstr "Respont furmed fall"
 
@@ -2858,43 +2858,43 @@ msgstr "Sonaoueg"
 msgid "Mute"
 msgstr "Mut"
 
-#: globalsearch/lastfmsearchprovider.cpp:53 internet/lastfmservice.cpp:194
+#: globalsearch/lastfmsearchprovider.cpp:53 internet/lastfmservice.cpp:195
 msgid "My Last.fm Library"
 msgstr "Ma sonaoueg Last.fm"
 
-#: globalsearch/lastfmsearchprovider.cpp:55 internet/lastfmservice.cpp:199
+#: globalsearch/lastfmsearchprovider.cpp:55 internet/lastfmservice.cpp:200
 msgid "My Last.fm Mix Radio"
 msgstr "Ma skingomz miks Last.fm"
 
-#: globalsearch/lastfmsearchprovider.cpp:57 internet/lastfmservice.cpp:204
+#: globalsearch/lastfmsearchprovider.cpp:57 internet/lastfmservice.cpp:205
 msgid "My Last.fm Neighborhood"
 msgstr "Ma amezeien Last.fm"
 
-#: globalsearch/lastfmsearchprovider.cpp:51 internet/lastfmservice.cpp:189
+#: globalsearch/lastfmsearchprovider.cpp:51 internet/lastfmservice.cpp:190
 msgid "My Last.fm Recommended Radio"
 msgstr "Ma skingomz erbedadennoù Last.fm"
 
-#: internet/lastfmservice.cpp:196
+#: internet/lastfmservice.cpp:197
 msgid "My Mix Radio"
 msgstr "Ma skingomz miks"
 
-#: internet/groovesharkservice.cpp:617
+#: internet/groovesharkservice.cpp:607
 msgid "My Music"
 msgstr "Ma Sonerezh"
 
-#: internet/lastfmservice.cpp:201
+#: internet/lastfmservice.cpp:202
 msgid "My Neighborhood"
 msgstr "Ma amezeien"
 
-#: internet/lastfmservice.cpp:191
+#: internet/lastfmservice.cpp:192
 msgid "My Radio Station"
 msgstr "Ma savlec'h skingomz"
 
-#: internet/lastfmservice.cpp:186
+#: internet/lastfmservice.cpp:187
 msgid "My Recommendations"
 msgstr "Ma erbedadennoù"
 
-#: internet/groovesharkservice.cpp:1272 internet/groovesharkservice.cpp:1365
+#: internet/groovesharkservice.cpp:1244 internet/groovesharkservice.cpp:1337
 #: ui/equalizer.cpp:172 ../bin/src/ui_deviceproperties.h:369
 #: ../bin/src/ui_magnatunedownloaddialog.h:135
 #: ../bin/src/ui_wizardfinishpage.h:84
@@ -2910,7 +2910,7 @@ msgstr "Dibarzhioù anv"
 msgid "Narrow band (NB)"
 msgstr "Bandenn strizh (NB)"
 
-#: internet/lastfmservice.cpp:228
+#: internet/lastfmservice.cpp:229
 msgid "Neighbors"
 msgstr "Amezeien"
 
@@ -3014,19 +3014,19 @@ msgstr "N'eus ket tu implij pa vez implijet ur roll seniñ dinamek"
 msgid "Not connected"
 msgstr "Digennasket"
 
-#: internet/lastfmservice.cpp:443
+#: internet/lastfmservice.cpp:439
 msgid "Not enough content"
 msgstr "N'eus ket trawalc'h a endalc'h"
 
-#: internet/lastfmservice.cpp:445
+#: internet/lastfmservice.cpp:441
 msgid "Not enough fans"
 msgstr "N'eus ket trawalc'h a fans"
 
-#: internet/lastfmservice.cpp:444
+#: internet/lastfmservice.cpp:440
 msgid "Not enough members"
 msgstr "N'eus ket izili a-walc'h"
 
-#: internet/lastfmservice.cpp:446
+#: internet/lastfmservice.cpp:442
 msgid "Not enough neighbors"
 msgstr "N'eus ket trawalc'h a amezeizen"
 
@@ -3076,8 +3076,8 @@ msgstr "Ogg Vorbis"
 msgid "Only show the first"
 msgstr "Diskouez an hini kentañ nemetken"
 
-#: internet/digitallyimportedservicebase.cpp:178
-#: internet/groovesharkservice.cpp:555 internet/icecastservice.cpp:296
+#: internet/digitallyimportedservicebase.cpp:179
+#: internet/groovesharkservice.cpp:545 internet/icecastservice.cpp:296
 #: internet/jamendoservice.cpp:418 internet/magnatuneservice.cpp:276
 #: internet/somafmservice.cpp:91 internet/soundcloudservice.cpp:194
 #, qt-format
@@ -3119,7 +3119,7 @@ msgstr "Digerin en ur roll seniñ nevez"
 msgid "Open..."
 msgstr "Digeriñ..."
 
-#: internet/lastfmservice.cpp:435
+#: internet/lastfmservice.cpp:431
 msgid "Operation failed"
 msgstr "Oberiadenn c'hwitet"
 
@@ -3223,7 +3223,7 @@ msgstr "Lenn"
 msgid "Play Artist or Tag"
 msgstr "Seniñ an Arzour pe ar c'hlav"
 
-#: internet/lastfmservice.cpp:117
+#: internet/lastfmservice.cpp:118
 msgid "Play artist radio..."
 msgstr "Seniñ skingomz an arzour..."
 
@@ -3231,7 +3231,7 @@ msgstr "Seniñ skingomz an arzour..."
 msgid "Play count"
 msgstr "Konter selaouadennoù"
 
-#: internet/lastfmservice.cpp:121
+#: internet/lastfmservice.cpp:122
 msgid "Play custom radio..."
 msgstr "Lenn ur skingomz personelaet"
 
@@ -3244,7 +3244,7 @@ msgstr "Lenn pe ehan, hervez ar stad"
 msgid "Play if there is nothing already playing"
 msgstr "Lenn ma vez netra all o vezañ lennet"
 
-#: internet/lastfmservice.cpp:119
+#: internet/lastfmservice.cpp:120
 msgid "Play tag radio..."
 msgstr "Lenn ar skingomz gant ar c'hlav"
 
@@ -3285,7 +3285,7 @@ msgstr "Klask er roll seniñ"
 msgid "Playlist type"
 msgstr "Doare ar roll seniñ"
 
-#: internet/groovesharkservice.cpp:635
+#: internet/groovesharkservice.cpp:625
 msgid "Playlists"
 msgstr "Rolloù seniñ"
 
@@ -3305,15 +3305,15 @@ msgstr "Podkastoù"
 msgid "Pop"
 msgstr "Pop"
 
-#: internet/groovesharkservice.cpp:586
+#: internet/groovesharkservice.cpp:576
 msgid "Popular songs"
 msgstr "Tonioù brudet"
 
-#: internet/groovesharkservice.cpp:589
+#: internet/groovesharkservice.cpp:579
 msgid "Popular songs of the Month"
 msgstr "Tonioù brudet ar miz-mañ"
 
-#: internet/groovesharkservice.cpp:596
+#: internet/groovesharkservice.cpp:586
 msgid "Popular songs today"
 msgstr "Tonioù brudet hiziv"
 
@@ -3447,7 +3447,7 @@ msgstr "Lakaat ar roud da heul"
 msgid "Radio (equal loudness for all tracks)"
 msgstr "Skingomz (Ampled kevatal evit an holl roudoù)"
 
-#: internet/groovesharkservice.cpp:604
+#: internet/groovesharkservice.cpp:594
 msgid "Radios"
 msgstr "Skingomzoù"
 
@@ -3491,7 +3491,7 @@ msgstr "Notenn"
 msgid "Really cancel?"
 msgstr "Sur oc'h da gaout c'hoant da nullañ"
 
-#: internet/groovesharkservice.cpp:558
+#: internet/groovesharkservice.cpp:548
 msgid "Refresh"
 msgstr "Azbevaat"
 
@@ -3503,7 +3503,7 @@ msgstr "Hizivaat ar c'hatalog"
 msgid "Refresh channels"
 msgstr "Hizivaat ar c'hanolioù"
 
-#: internet/lastfmservice.cpp:123
+#: internet/lastfmservice.cpp:124
 msgid "Refresh friends list"
 msgstr "Hizivat listenn ar mignoned"
 
@@ -3511,7 +3511,7 @@ msgstr "Hizivat listenn ar mignoned"
 msgid "Refresh station list"
 msgstr "Hizivat listenn ar savlec'hioù"
 
-#: internet/digitallyimportedservicebase.cpp:181
+#: internet/digitallyimportedservicebase.cpp:182
 msgid "Refresh streams"
 msgstr "Hizivaat al lanvioù"
 
@@ -3529,7 +3529,7 @@ msgstr "Kaout soñj eus ar wech diwezhañ"
 
 #: internet/savedradio.cpp:100 ../bin/src/ui_queuemanager.h:135
 #: ../bin/src/ui_searchtermwidget.h:282 ../bin/src/ui_transcodedialog.h:208
-#: internet/lastfmservice.cpp:114
+#: internet/lastfmservice.cpp:115
 msgid "Remove"
 msgstr "Diverkañ"
 
@@ -3545,15 +3545,15 @@ msgstr "DIverkañ an tonioù doubl eus ar roll senniñ"
 msgid "Remove folder"
 msgstr "Diverkañ an teuliad"
 
-#: internet/groovesharkservice.cpp:545
+#: internet/groovesharkservice.cpp:535
 msgid "Remove from My Music"
 msgstr "Diverkañ eus va sonerezh"
 
-#: internet/groovesharkservice.cpp:542
+#: internet/groovesharkservice.cpp:532
 msgid "Remove from favorites"
 msgstr "Skarzhañ eus an tonioù karetañ"
 
-#: internet/groovesharkservice.cpp:539 ../bin/src/ui_mainwindow.h:692
+#: internet/groovesharkservice.cpp:529 ../bin/src/ui_mainwindow.h:692
 msgid "Remove from playlist"
 msgstr "Tennañ kuit eus ar roll seniñ"
 
@@ -3561,20 +3561,20 @@ msgstr "Tennañ kuit eus ar roll seniñ"
 msgid "Remove playlist"
 msgstr "Tennañ kuit ar roll seniñ"
 
-#: internet/groovesharkservice.cpp:1566
+#: internet/groovesharkservice.cpp:1538
 msgid "Removing songs from My Music"
 msgstr "Diverkañ tonioù eus va sonerezh"
 
-#: internet/groovesharkservice.cpp:1516
+#: internet/groovesharkservice.cpp:1488
 msgid "Removing songs from favorites"
 msgstr "Diverkañ tonioù eus va karetañ"
 
-#: internet/groovesharkservice.cpp:1364
+#: internet/groovesharkservice.cpp:1336
 #, qt-format
 msgid "Rename \"%1\" playlist"
 msgstr "Cheñch anv \"%1\" ar roll seniñ."
 
-#: internet/groovesharkservice.cpp:535
+#: internet/groovesharkservice.cpp:525
 msgid "Rename Grooveshark playlist"
 msgstr "Cheñch anv roll seniñ Grooveshark"
 
@@ -3644,15 +3644,15 @@ msgstr "Adderaouiñ ar konter lennadennoù"
 msgid "Restrict to ASCII characters"
 msgstr "Bevenniñ ouzh an arouezennoù ASCII"
 
-#: internet/groovesharkservice.cpp:778
+#: internet/groovesharkservice.cpp:757
 msgid "Retrieving Grooveshark My Music songs"
 msgstr "Oc'h adkavout tonioù \"My Music\" Grooveshark."
 
-#: internet/groovesharkservice.cpp:746
+#: internet/groovesharkservice.cpp:725
 msgid "Retrieving Grooveshark favorites songs"
 msgstr "O taspugnat ho tonioù Grooveshark karetañ"
 
-#: internet/groovesharkservice.cpp:672
+#: internet/groovesharkservice.cpp:662
 msgid "Retrieving Grooveshark playlists"
 msgstr "O taspugnat rolloù seniñ Grooveshark"
 
@@ -3778,7 +3778,7 @@ msgstr "Doare klask"
 msgid "Search options"
 msgstr "Dibarzhioù klask"
 
-#: internet/groovesharkservice.cpp:578 internet/soundcloudservice.cpp:104
+#: internet/groovesharkservice.cpp:568 internet/soundcloudservice.cpp:104
 #: internet/spotifyservice.cpp:348
 msgid "Search results"
 msgstr "Disoc'hoù an enklask"
@@ -3788,7 +3788,7 @@ msgstr "Disoc'hoù an enklask"
 msgid "Search terms"
 msgstr "Gerioù enklask"
 
-#: internet/groovesharkservice.cpp:273
+#: internet/groovesharkservice.cpp:268
 msgid "Searching on Grooveshark"
 msgstr "O klask war Grooveshark"
 
@@ -3848,7 +3848,7 @@ msgstr "Diuzañ heweladurioù..."
 msgid "Serial number"
 msgstr "Niver heuliad"
 
-#: internet/lastfmservice.cpp:438
+#: internet/lastfmservice.cpp:434
 msgid "Service offline"
 msgstr "Servij ezlinenn"
 
@@ -4141,7 +4141,7 @@ msgstr "Kregiñ ar roll seniñ"
 msgid "Start transcoding"
 msgstr "Kregin an transkodiñ"
 
-#: internet/groovesharkservice.cpp:579 internet/soundcloudservice.cpp:105
+#: internet/groovesharkservice.cpp:569 internet/soundcloudservice.cpp:105
 #: internet/spotifyservice.cpp:349
 msgid ""
 "Start typing something on the search box above to fill this search results "
@@ -4157,7 +4157,7 @@ msgstr "O kregiñ %1"
 msgid "Starting..."
 msgstr "O kregiñ..."
 
-#: internet/groovesharkservice.cpp:607
+#: internet/groovesharkservice.cpp:597
 msgid "Stations"
 msgstr "Savlec'hioù"
 
@@ -4194,7 +4194,7 @@ msgstr "Lanv"
 msgid "Streaming membership"
 msgstr "Izili streaming"
 
-#: internet/groovesharkservice.cpp:638
+#: internet/groovesharkservice.cpp:628
 msgid "Subscribed playlists"
 msgstr "Rollioù seniñ koumanantet"
 
@@ -4262,7 +4262,7 @@ msgstr "Klav"
 msgid "Tag fetcher"
 msgstr "Leunier klav"
 
-#: internet/lastfmservice.cpp:211
+#: internet/lastfmservice.cpp:212
 msgid "Tag radio"
 msgstr "Skingomz dre klav"
 
@@ -4418,7 +4418,7 @@ msgid ""
 "want to continue?"
 msgstr "Ar roll seniñ a vo skarzhet; ne c'hell ket bezañ adlakaet. Ha sur oc'h da gaout c'hoant kenderc'hel ?"
 
-#: internet/lastfmservice.cpp:439
+#: internet/lastfmservice.cpp:435
 msgid "This stream is for paid subscribers only"
 msgstr "Al lanv-mañ a zo evit an izili o deus paet."
 
@@ -4441,7 +4441,7 @@ msgstr "Gwerzhid-eur"
 msgid "Title"
 msgstr "Titl"
 
-#: internet/groovesharkservice.cpp:1044
+#: internet/groovesharkservice.cpp:1017
 msgid ""
 "To start Grooveshark radio, you should first listen to a few other "
 "Grooveshark songs"
@@ -4558,7 +4558,7 @@ msgstr "Dianav"
 msgid "Unknown content-type"
 msgstr "Doare endalc'h dianavezet"
 
-#: internet/digitallyimportedclient.cpp:69 internet/lastfmservice.cpp:452
+#: internet/digitallyimportedclient.cpp:69 internet/lastfmservice.cpp:448
 msgid "Unknown error"
 msgstr "Kudenn dianav"
 
@@ -4574,7 +4574,7 @@ msgstr "Digoumanantiñ"
 msgid "Upcoming Concerts"
 msgstr "Sonadegoù o-tont"
 
-#: internet/groovesharkservice.cpp:1226
+#: internet/groovesharkservice.cpp:1199
 msgid "Update Grooveshark playlist"
 msgstr "O hizivaat roll seniñ Grooveshark"
 
@@ -4680,7 +4680,7 @@ msgstr "Implij normalizadur an ampled"
 msgid "Used"
 msgstr "Implijet"
 
-#: internet/groovesharkservice.cpp:413
+#: internet/groovesharkservice.cpp:403
 #, qt-format
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr "An implijer %1 n'en deus ket a kont Grooveshark Anywhere."

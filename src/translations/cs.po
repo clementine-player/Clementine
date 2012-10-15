@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-10-01 09:36+0000\n"
-"Last-Translator: jui <appukonrad@gmail.com>\n"
+"PO-Revision-Date: 2012-10-13 21:16+0000\n"
+"Last-Translator: fri <pavelfric@seznam.cz>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: cs\n"
@@ -456,11 +456,11 @@ msgstr "Přidat štítek roku písně"
 msgid "Add stream..."
 msgstr "Přidat proud..."
 
-#: internet/groovesharkservice.cpp:1113
+#: internet/groovesharkservice.cpp:1086
 msgid "Add to Grooveshark favorites"
 msgstr "Přidat do oblíbených Grooveshark"
 
-#: internet/groovesharkservice.cpp:1125
+#: internet/groovesharkservice.cpp:1098
 msgid "Add to Grooveshark playlists"
 msgstr "Přidat do seznamu skladeb Grooveshark"
 
@@ -505,11 +505,11 @@ msgstr "Přidána dnes"
 msgid "Added within three months"
 msgstr "Přidána během tří měsíců"
 
-#: internet/groovesharkservice.cpp:1421
+#: internet/groovesharkservice.cpp:1393
 msgid "Adding song to My Music"
 msgstr "Přidává se píseň do Moje hudba"
 
-#: internet/groovesharkservice.cpp:1398
+#: internet/groovesharkservice.cpp:1370
 msgid "Adding song to favorites"
 msgstr "Přidává se píseň do oblíbených"
 
@@ -673,7 +673,7 @@ msgstr "Použít kompresi, aby se zabránilo ořezávání zvuku (clippingu)"
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "Opravdu chcete smazat nastavení \"%1\"?"
 
-#: internet/groovesharkservice.cpp:1319
+#: internet/groovesharkservice.cpp:1291
 msgid "Are you sure you want to delete this playlist?"
 msgstr "Opravdu chcete smazat tento seznam skladeb?"
 
@@ -695,7 +695,7 @@ msgstr "Umělec"
 msgid "Artist info"
 msgstr "Umělec"
 
-#: internet/lastfmservice.cpp:207
+#: internet/lastfmservice.cpp:208
 msgid "Artist radio"
 msgstr "Rádio umělce"
 
@@ -712,7 +712,7 @@ msgid "Audio format"
 msgstr "Zvukový formát"
 
 #: internet/digitallyimportedsettingspage.cpp:82
-#: internet/magnatunesettingspage.cpp:113 internet/lastfmservice.cpp:431
+#: internet/magnatunesettingspage.cpp:113 internet/lastfmservice.cpp:427
 #: internet/lastfmsettingspage.cpp:78
 msgid "Authentication failed"
 msgstr "Ověření selhalo"
@@ -1095,11 +1095,11 @@ msgstr "Skladatel"
 msgid "Configure %1..."
 msgstr "Nastavit %1..."
 
-#: internet/groovesharkservice.cpp:561
+#: internet/groovesharkservice.cpp:551
 msgid "Configure Grooveshark..."
 msgstr "Nastavit Grooveshark..."
 
-#: internet/lastfmservice.cpp:125
+#: internet/lastfmservice.cpp:126
 msgid "Configure Last.fm..."
 msgstr "Nastavit Last.fm..."
 
@@ -1127,7 +1127,7 @@ msgstr "Nastavit sbírku..."
 msgid "Configure podcasts..."
 msgstr "Nastavit podcasty..."
 
-#: internet/digitallyimportedservicebase.cpp:185
+#: internet/digitallyimportedservicebase.cpp:186
 #: ../bin/src/ui_globalsearchsettingspage.h:150
 #: internet/googledriveservice.cpp:257
 msgid "Configure..."
@@ -1161,7 +1161,7 @@ msgstr "Převést všechnu hudbu"
 msgid "Convert any music that the device can't play"
 msgstr "Převést veškerou hudbu, kterou zařízení nedokáže přehrát"
 
-#: internet/groovesharkservice.cpp:1198
+#: internet/groovesharkservice.cpp:1171
 msgid "Copy to clipboard"
 msgstr "Kopírovat do schránky"
 
@@ -1204,7 +1204,7 @@ msgid ""
 "plugins installed"
 msgstr "Nepodařilo se najít kodér \"%1\" - ujistěte se, že máte nainstalovány správné přídavné moduly GStreamer"
 
-#: internet/lastfmservice.cpp:890
+#: internet/lastfmservice.cpp:875
 msgid "Couldn't load the last.fm radio station"
 msgstr "Rádio last.fm se nepodařilo načíst"
 
@@ -1246,7 +1246,7 @@ msgstr "Obal nastaven z %1"
 msgid "Covers from %1"
 msgstr "Obaly od %1"
 
-#: internet/groovesharkservice.cpp:529 internet/groovesharkservice.cpp:1271
+#: internet/groovesharkservice.cpp:519 internet/groovesharkservice.cpp:1243
 msgid "Create a new Grooveshark playlist"
 msgstr "Vytvořit nový seznam skladeb Grooveshark"
 
@@ -1342,7 +1342,7 @@ msgstr "Vlastní obrázek:"
 msgid "Custom message settings"
 msgstr "Nastavení vlastní zprávy"
 
-#: internet/lastfmservice.cpp:215
+#: internet/lastfmservice.cpp:216
 msgid "Custom radio"
 msgstr "Vlastní rádio"
 
@@ -1401,7 +1401,7 @@ msgstr "Výchozí"
 msgid "Delay between visualizations"
 msgstr "Prodleva mezi vizualizacemi"
 
-#: internet/groovesharkservice.cpp:532 internet/groovesharkservice.cpp:1318
+#: internet/groovesharkservice.cpp:522 internet/groovesharkservice.cpp:1290
 msgid "Delete Grooveshark playlist"
 msgstr "Smazat seznam skladeb Grooveshark"
 
@@ -1609,7 +1609,7 @@ msgstr "Stáhnout..."
 msgid "Downloading (%1%)..."
 msgstr "Stahuje se (%1%)..."
 
-#: internet/icecastservice.cpp:99
+#: internet/icecastservice.cpp:101
 msgid "Downloading Icecast directory"
 msgstr "Stahuje se adresář Icecast"
 
@@ -1768,7 +1768,7 @@ msgstr "Rovnocenné s --log-levels *:1"
 msgid "Equivalent to --log-levels *:3"
 msgstr "Rovnocenné s --log-levels *:3"
 
-#: internet/groovesharkservice.cpp:1043
+#: internet/groovesharkservice.cpp:1016
 #: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:602
 #: ui/mainwindow.cpp:1767 ui/mainwindow.cpp:1888
 msgid "Error"
@@ -1795,7 +1795,7 @@ msgstr "Chyba při stahování přídavného modulu Spotify"
 msgid "Error loading %1"
 msgstr "Chyba při nahrávání %1"
 
-#: internet/digitallyimportedservicebase.cpp:206
+#: internet/digitallyimportedservicebase.cpp:203
 #: internet/digitallyimportedurlhandler.cpp:87
 msgid "Error loading di.fm playlist"
 msgstr "Chyba při nahrávání seznamu skladeb di.fm"
@@ -1919,7 +1919,7 @@ msgstr "Nepodařilo se zpracovat XML pro tento kanál RSS"
 msgid "Fast"
 msgstr "Rychlý"
 
-#: internet/groovesharkservice.cpp:626
+#: internet/groovesharkservice.cpp:616
 msgid "Favorites"
 msgstr "Oblíbené"
 
@@ -2070,7 +2070,7 @@ msgstr "Počet snímků"
 msgid "Frames per buffer"
 msgstr "Snímků na vyrovnávací paměť"
 
-#: internet/lastfmservice.cpp:223
+#: internet/lastfmservice.cpp:224
 msgid "Friends"
 msgstr "Přátelé"
 
@@ -2108,15 +2108,15 @@ msgstr "Obecná nastavení"
 msgid "Genre"
 msgstr "Žánr"
 
-#: internet/groovesharkservice.cpp:551
+#: internet/groovesharkservice.cpp:541
 msgid "Get a URL to share this Grooveshark playlist"
 msgstr "Získat adresu pro sdílení tohoto seznamu skladeb Grooveshark"
 
-#: internet/groovesharkservice.cpp:548 internet/groovesharkservice.cpp:1136
+#: internet/groovesharkservice.cpp:538 internet/groovesharkservice.cpp:1109
 msgid "Get a URL to share this Grooveshark song"
 msgstr "Získat adresu pro sdílení této písně Grooveshark"
 
-#: internet/groovesharkservice.cpp:810
+#: internet/groovesharkservice.cpp:789
 msgid "Getting Grooveshark popular songs"
 msgstr "Získávají se oblíbené písně Grooveshark"
 
@@ -2124,7 +2124,7 @@ msgstr "Získávají se oblíbené písně Grooveshark"
 msgid "Getting channels"
 msgstr "Získávají se kanály"
 
-#: internet/digitallyimportedservicebase.cpp:107
+#: internet/digitallyimportedservicebase.cpp:108
 msgid "Getting streams"
 msgstr "Získávají se proudy"
 
@@ -2163,19 +2163,19 @@ msgstr "Nechat zešedivět neexistující písně v mých seznamech skladeb"
 msgid "Grooveshark"
 msgstr "Grooveshark"
 
-#: internet/groovesharkservice.cpp:417
+#: internet/groovesharkservice.cpp:407
 msgid "Grooveshark login error"
 msgstr "Chyba přihlášení Grooveshark"
 
-#: internet/groovesharkservice.cpp:1188
+#: internet/groovesharkservice.cpp:1161
 msgid "Grooveshark playlist's URL"
 msgstr "Adresa Grooveshark"
 
-#: internet/groovesharkservice.cpp:612
+#: internet/groovesharkservice.cpp:602
 msgid "Grooveshark radio"
 msgstr "Rádio Grooveshark"
 
-#: internet/groovesharkservice.cpp:1166
+#: internet/groovesharkservice.cpp:1139
 msgid "Grooveshark song's URL"
 msgstr "Adresa písně Grooveshark"
 
@@ -2356,35 +2356,35 @@ msgstr "Internet"
 msgid "Internet providers"
 msgstr "Poskytovatelé internetu"
 
-#: internet/lastfmservice.cpp:437
+#: internet/lastfmservice.cpp:433
 msgid "Invalid API key"
 msgstr "Neplatný klíč API"
 
-#: internet/lastfmservice.cpp:432
+#: internet/lastfmservice.cpp:428
 msgid "Invalid format"
 msgstr "Neplatný formát"
 
-#: internet/lastfmservice.cpp:430
+#: internet/lastfmservice.cpp:426
 msgid "Invalid method"
 msgstr "Neplatná metoda"
 
-#: internet/lastfmservice.cpp:433
+#: internet/lastfmservice.cpp:429
 msgid "Invalid parameters"
 msgstr "Neplatné parametry"
 
-#: internet/lastfmservice.cpp:434
+#: internet/lastfmservice.cpp:430
 msgid "Invalid resource specified"
 msgstr "Zadán neplatný zdroj"
 
-#: internet/lastfmservice.cpp:429
+#: internet/lastfmservice.cpp:425
 msgid "Invalid service"
 msgstr "Neplatná služba"
 
-#: internet/lastfmservice.cpp:436
+#: internet/lastfmservice.cpp:432
 msgid "Invalid session key"
 msgstr "Neplatný klíč sezení"
 
-#: internet/groovesharkservice.cpp:410
+#: internet/groovesharkservice.cpp:400
 msgid "Invalid username and/or password"
 msgstr "Neplatné uživatelské jméno a/nebo heslo"
 
@@ -2469,45 +2469,45 @@ msgstr "Naposledy hrané"
 msgid "Last.fm"
 msgstr "Last.fm"
 
-#: internet/lastfmservice.cpp:84
+#: internet/lastfmservice.cpp:85
 #, qt-format
 msgid "Last.fm Custom Radio: %1"
 msgstr "Vlastní rádio Last.fm: %1"
 
-#: internet/lastfmservice.cpp:254 internet/lastfmservice.cpp:705
-#: internet/lastfmservice.cpp:732
+#: internet/lastfmservice.cpp:255 internet/lastfmservice.cpp:699
+#: internet/lastfmservice.cpp:722
 #, qt-format
 msgid "Last.fm Library - %1"
 msgstr "Hudební sbírka Last.fm - %1"
 
-#: globalsearch/lastfmsearchprovider.cpp:77 internet/lastfmservice.cpp:256
-#: internet/lastfmservice.cpp:259
+#: globalsearch/lastfmsearchprovider.cpp:77 internet/lastfmservice.cpp:257
+#: internet/lastfmservice.cpp:260
 #, qt-format
 msgid "Last.fm Mix Radio - %1"
 msgstr "Rádio Mix Last.fm - %1"
 
-#: globalsearch/lastfmsearchprovider.cpp:79 internet/lastfmservice.cpp:261
-#: internet/lastfmservice.cpp:264
+#: globalsearch/lastfmsearchprovider.cpp:79 internet/lastfmservice.cpp:262
+#: internet/lastfmservice.cpp:265
 #, qt-format
 msgid "Last.fm Neighbor Radio - %1"
 msgstr "Rádio sousedů na Last.fm - %1"
 
-#: globalsearch/lastfmsearchprovider.cpp:75 internet/lastfmservice.cpp:251
+#: globalsearch/lastfmsearchprovider.cpp:75 internet/lastfmservice.cpp:252
 #, qt-format
 msgid "Last.fm Radio Station - %1"
 msgstr "Rádio Last.fm - %1"
 
-#: internet/lastfmservice.cpp:82
+#: internet/lastfmservice.cpp:83
 #, qt-format
 msgid "Last.fm Similar Artists to %1"
 msgstr "Podobný umělec Last.fm jako %1"
 
-#: internet/lastfmservice.cpp:83
+#: internet/lastfmservice.cpp:84
 #, qt-format
 msgid "Last.fm Tag Radio: %1"
 msgstr "Rádio na Last.fm označené: %1"
 
-#: internet/lastfmservice.cpp:441
+#: internet/lastfmservice.cpp:437
 msgid "Last.fm is currently busy, please try again in a few minutes"
 msgstr "Last.fm je nyní zaneprázdněno, prosím, zkuste to za pár minut znovu"
 
@@ -2564,7 +2564,7 @@ msgstr "Hledání ve sbírce"
 msgid "Limits"
 msgstr "Omezení"
 
-#: internet/groovesharkservice.cpp:613
+#: internet/groovesharkservice.cpp:603
 msgid ""
 "Listen to Grooveshark songs based on what you've listened to previously"
 msgstr "Poslouchejte písně Grooveshark na základě toho, co jste poslouchali předtím"
@@ -2601,7 +2601,7 @@ msgstr "Nahrát seznam skladeb"
 msgid "Load playlist..."
 msgstr "Nahrát seznam skladeb..."
 
-#: internet/lastfmservice.cpp:899
+#: internet/lastfmservice.cpp:884
 msgid "Loading Last.fm radio"
 msgstr "Nahrává se rádio Last.fm"
 
@@ -2736,7 +2736,7 @@ msgstr "Udělej to tak!"
 msgid "Make playlist available offline"
 msgstr "Zajistit, že seznam skladeb bude dostupný, i když počítač nebude připojen k internetu"
 
-#: internet/lastfmservice.cpp:448
+#: internet/lastfmservice.cpp:444
 msgid "Malformed response"
 msgstr "Poškozená odpověď"
 
@@ -2863,43 +2863,43 @@ msgstr "Hudební sbírka"
 msgid "Mute"
 msgstr "Ztlumit"
 
-#: globalsearch/lastfmsearchprovider.cpp:53 internet/lastfmservice.cpp:194
+#: globalsearch/lastfmsearchprovider.cpp:53 internet/lastfmservice.cpp:195
 msgid "My Last.fm Library"
 msgstr "Moje sbírka Last.fm"
 
-#: globalsearch/lastfmsearchprovider.cpp:55 internet/lastfmservice.cpp:199
+#: globalsearch/lastfmsearchprovider.cpp:55 internet/lastfmservice.cpp:200
 msgid "My Last.fm Mix Radio"
 msgstr "Moje rádio Mix Last.fm"
 
-#: globalsearch/lastfmsearchprovider.cpp:57 internet/lastfmservice.cpp:204
+#: globalsearch/lastfmsearchprovider.cpp:57 internet/lastfmservice.cpp:205
 msgid "My Last.fm Neighborhood"
 msgstr "Moje okolí Last.fm"
 
-#: globalsearch/lastfmsearchprovider.cpp:51 internet/lastfmservice.cpp:189
+#: globalsearch/lastfmsearchprovider.cpp:51 internet/lastfmservice.cpp:190
 msgid "My Last.fm Recommended Radio"
 msgstr "Moje doporučované rádio Last.fm"
 
-#: internet/lastfmservice.cpp:196
+#: internet/lastfmservice.cpp:197
 msgid "My Mix Radio"
 msgstr "Moje rádio Mix"
 
-#: internet/groovesharkservice.cpp:617
+#: internet/groovesharkservice.cpp:607
 msgid "My Music"
 msgstr "Moje hudba"
 
-#: internet/lastfmservice.cpp:201
+#: internet/lastfmservice.cpp:202
 msgid "My Neighborhood"
 msgstr "Moje okolí"
 
-#: internet/lastfmservice.cpp:191
+#: internet/lastfmservice.cpp:192
 msgid "My Radio Station"
 msgstr "Mé rádio"
 
-#: internet/lastfmservice.cpp:186
+#: internet/lastfmservice.cpp:187
 msgid "My Recommendations"
 msgstr "Má doporučení"
 
-#: internet/groovesharkservice.cpp:1272 internet/groovesharkservice.cpp:1365
+#: internet/groovesharkservice.cpp:1244 internet/groovesharkservice.cpp:1337
 #: ui/equalizer.cpp:172 ../bin/src/ui_deviceproperties.h:369
 #: ../bin/src/ui_magnatunedownloaddialog.h:135
 #: ../bin/src/ui_wizardfinishpage.h:84
@@ -2915,7 +2915,7 @@ msgstr "Volby pro pojmenování"
 msgid "Narrow band (NB)"
 msgstr "Úzké pásmo"
 
-#: internet/lastfmservice.cpp:228
+#: internet/lastfmservice.cpp:229
 msgid "Neighbors"
 msgstr "Sousedé"
 
@@ -3019,19 +3019,19 @@ msgstr "Není dostupné během používání dynamického seznamu skladeb"
 msgid "Not connected"
 msgstr "Nepřipojeno"
 
-#: internet/lastfmservice.cpp:443
+#: internet/lastfmservice.cpp:439
 msgid "Not enough content"
 msgstr "Nedostatek obsahu"
 
-#: internet/lastfmservice.cpp:445
+#: internet/lastfmservice.cpp:441
 msgid "Not enough fans"
 msgstr "Nedostatek nadšených obdivovatelů"
 
-#: internet/lastfmservice.cpp:444
+#: internet/lastfmservice.cpp:440
 msgid "Not enough members"
 msgstr "Nedostatek členů"
 
-#: internet/lastfmservice.cpp:446
+#: internet/lastfmservice.cpp:442
 msgid "Not enough neighbors"
 msgstr "Nedostatek sousedů"
 
@@ -3081,8 +3081,8 @@ msgstr "Ogg Vorbis"
 msgid "Only show the first"
 msgstr "Ukázat pouze první"
 
-#: internet/digitallyimportedservicebase.cpp:178
-#: internet/groovesharkservice.cpp:555 internet/icecastservice.cpp:296
+#: internet/digitallyimportedservicebase.cpp:179
+#: internet/groovesharkservice.cpp:545 internet/icecastservice.cpp:296
 #: internet/jamendoservice.cpp:418 internet/magnatuneservice.cpp:276
 #: internet/somafmservice.cpp:91 internet/soundcloudservice.cpp:194
 #, qt-format
@@ -3124,7 +3124,7 @@ msgstr "Otevřít v novém seznamu skladeb"
 msgid "Open..."
 msgstr "Otevřít..."
 
-#: internet/lastfmservice.cpp:435
+#: internet/lastfmservice.cpp:431
 msgid "Operation failed"
 msgstr "Operace se nezdařila"
 
@@ -3228,7 +3228,7 @@ msgstr "Přehrát"
 msgid "Play Artist or Tag"
 msgstr "Přehrát umělce nebo štítek"
 
-#: internet/lastfmservice.cpp:117
+#: internet/lastfmservice.cpp:118
 msgid "Play artist radio..."
 msgstr "Přehrát rádio umělce..."
 
@@ -3236,7 +3236,7 @@ msgstr "Přehrát rádio umělce..."
 msgid "Play count"
 msgstr "Počet přehrání"
 
-#: internet/lastfmservice.cpp:121
+#: internet/lastfmservice.cpp:122
 msgid "Play custom radio..."
 msgstr "Přehrát vlastní rádio..."
 
@@ -3249,7 +3249,7 @@ msgstr "Přehrát, pokud je zastaveno, pozastavit, pokud je přehráváno"
 msgid "Play if there is nothing already playing"
 msgstr "Hrát, pokud se již něco nepřehrává"
 
-#: internet/lastfmservice.cpp:119
+#: internet/lastfmservice.cpp:120
 msgid "Play tag radio..."
 msgstr "Přehrávat rádio se štítkem..."
 
@@ -3290,7 +3290,7 @@ msgstr "Hledání v seznamu skladeb"
 msgid "Playlist type"
 msgstr "Typ seznamu skladeb"
 
-#: internet/groovesharkservice.cpp:635
+#: internet/groovesharkservice.cpp:625
 msgid "Playlists"
 msgstr "Seznamy skladeb"
 
@@ -3310,15 +3310,15 @@ msgstr "Podcasty"
 msgid "Pop"
 msgstr "Pop"
 
-#: internet/groovesharkservice.cpp:586
+#: internet/groovesharkservice.cpp:576
 msgid "Popular songs"
 msgstr "Oblíbené písně"
 
-#: internet/groovesharkservice.cpp:589
+#: internet/groovesharkservice.cpp:579
 msgid "Popular songs of the Month"
 msgstr "Oblíbené písně měsíce"
 
-#: internet/groovesharkservice.cpp:596
+#: internet/groovesharkservice.cpp:586
 msgid "Popular songs today"
 msgstr "Oblíbené písně dnes"
 
@@ -3452,7 +3452,7 @@ msgstr "Přidat skladbu do řady"
 msgid "Radio (equal loudness for all tracks)"
 msgstr "Rádio (shodná hlasitost pro všechny skladby)"
 
-#: internet/groovesharkservice.cpp:604
+#: internet/groovesharkservice.cpp:594
 msgid "Radios"
 msgstr "Rádia"
 
@@ -3496,7 +3496,7 @@ msgstr "Hodnocení"
 msgid "Really cancel?"
 msgstr "Opravdu zrušit?"
 
-#: internet/groovesharkservice.cpp:558
+#: internet/groovesharkservice.cpp:548
 msgid "Refresh"
 msgstr "Obnovit"
 
@@ -3508,7 +3508,7 @@ msgstr "Obnovit katalog"
 msgid "Refresh channels"
 msgstr "Obnovit kanály"
 
-#: internet/lastfmservice.cpp:123
+#: internet/lastfmservice.cpp:124
 msgid "Refresh friends list"
 msgstr "Obnovit seznam přátel"
 
@@ -3516,7 +3516,7 @@ msgstr "Obnovit seznam přátel"
 msgid "Refresh station list"
 msgstr "Obnovit seznam stanic"
 
-#: internet/digitallyimportedservicebase.cpp:181
+#: internet/digitallyimportedservicebase.cpp:182
 msgid "Refresh streams"
 msgstr "Obnovit proudy"
 
@@ -3534,7 +3534,7 @@ msgstr "Obnovit předchozí stav"
 
 #: internet/savedradio.cpp:100 ../bin/src/ui_queuemanager.h:135
 #: ../bin/src/ui_searchtermwidget.h:282 ../bin/src/ui_transcodedialog.h:208
-#: internet/lastfmservice.cpp:114
+#: internet/lastfmservice.cpp:115
 msgid "Remove"
 msgstr "Odstranit"
 
@@ -3550,15 +3550,15 @@ msgstr "Odstranit zdvojené ze seznamu skladeb"
 msgid "Remove folder"
 msgstr "Odstranit složku"
 
-#: internet/groovesharkservice.cpp:545
+#: internet/groovesharkservice.cpp:535
 msgid "Remove from My Music"
 msgstr "Odstranit z Moje hudba"
 
-#: internet/groovesharkservice.cpp:542
+#: internet/groovesharkservice.cpp:532
 msgid "Remove from favorites"
 msgstr "Odstranit z oblíbených"
 
-#: internet/groovesharkservice.cpp:539 ../bin/src/ui_mainwindow.h:692
+#: internet/groovesharkservice.cpp:529 ../bin/src/ui_mainwindow.h:692
 msgid "Remove from playlist"
 msgstr "Odstranit ze seznamu skladeb"
 
@@ -3566,20 +3566,20 @@ msgstr "Odstranit ze seznamu skladeb"
 msgid "Remove playlist"
 msgstr "Odstranit seznam skladeb"
 
-#: internet/groovesharkservice.cpp:1566
+#: internet/groovesharkservice.cpp:1538
 msgid "Removing songs from My Music"
 msgstr "Odstraňují se písně z Moje hudba"
 
-#: internet/groovesharkservice.cpp:1516
+#: internet/groovesharkservice.cpp:1488
 msgid "Removing songs from favorites"
 msgstr "Odstraňují se písně z oblíbených"
 
-#: internet/groovesharkservice.cpp:1364
+#: internet/groovesharkservice.cpp:1336
 #, qt-format
 msgid "Rename \"%1\" playlist"
 msgstr "Přejmenovat \"%1\" seznam skladeb"
 
-#: internet/groovesharkservice.cpp:535
+#: internet/groovesharkservice.cpp:525
 msgid "Rename Grooveshark playlist"
 msgstr "Přejmenovat seznam skladeb Grooveshark"
 
@@ -3649,15 +3649,15 @@ msgstr "Vynulovat počty přehrání"
 msgid "Restrict to ASCII characters"
 msgstr "Omezit na znaky &ASCII"
 
-#: internet/groovesharkservice.cpp:778
+#: internet/groovesharkservice.cpp:757
 msgid "Retrieving Grooveshark My Music songs"
 msgstr "Získávají se písně Moje hudba z Grooveshark"
 
-#: internet/groovesharkservice.cpp:746
+#: internet/groovesharkservice.cpp:725
 msgid "Retrieving Grooveshark favorites songs"
 msgstr "Získávají se oblíbené písně z Grooveshark"
 
-#: internet/groovesharkservice.cpp:672
+#: internet/groovesharkservice.cpp:662
 msgid "Retrieving Grooveshark playlists"
 msgstr "Získávají se seznamy skladeb z Grooveshark"
 
@@ -3783,7 +3783,7 @@ msgstr "Režim vyhledávání"
 msgid "Search options"
 msgstr "Možnosti vyhledávání"
 
-#: internet/groovesharkservice.cpp:578 internet/soundcloudservice.cpp:104
+#: internet/groovesharkservice.cpp:568 internet/soundcloudservice.cpp:104
 #: internet/spotifyservice.cpp:348
 msgid "Search results"
 msgstr "Hledat výsledky"
@@ -3793,7 +3793,7 @@ msgstr "Hledat výsledky"
 msgid "Search terms"
 msgstr "Hledané výrazy"
 
-#: internet/groovesharkservice.cpp:273
+#: internet/groovesharkservice.cpp:268
 msgid "Searching on Grooveshark"
 msgstr "Hledá se na Grooveshark"
 
@@ -3853,7 +3853,7 @@ msgstr "Vybrat vizualizace..."
 msgid "Serial number"
 msgstr "Sériové číslo"
 
-#: internet/lastfmservice.cpp:438
+#: internet/lastfmservice.cpp:434
 msgid "Service offline"
 msgstr "Služba není dostupná"
 
@@ -4146,7 +4146,7 @@ msgstr "Přehrát současnou skladbu v seznamu skladeb"
 msgid "Start transcoding"
 msgstr "Převést"
 
-#: internet/groovesharkservice.cpp:579 internet/soundcloudservice.cpp:105
+#: internet/groovesharkservice.cpp:569 internet/soundcloudservice.cpp:105
 #: internet/spotifyservice.cpp:349
 msgid ""
 "Start typing something on the search box above to fill this search results "
@@ -4162,7 +4162,7 @@ msgstr "Spouští se %1"
 msgid "Starting..."
 msgstr "Spouští se..."
 
-#: internet/groovesharkservice.cpp:607
+#: internet/groovesharkservice.cpp:597
 msgid "Stations"
 msgstr "Stanice"
 
@@ -4199,7 +4199,7 @@ msgstr "Proud"
 msgid "Streaming membership"
 msgstr "bez stahování (pouze přehrávání)"
 
-#: internet/groovesharkservice.cpp:638
+#: internet/groovesharkservice.cpp:628
 msgid "Subscribed playlists"
 msgstr "Odebírané seznamy skladeb"
 
@@ -4267,7 +4267,7 @@ msgstr "Štítek"
 msgid "Tag fetcher"
 msgstr "Stahování štítků"
 
-#: internet/lastfmservice.cpp:211
+#: internet/lastfmservice.cpp:212
 msgid "Tag radio"
 msgstr "Rádio se štítkem"
 
@@ -4423,7 +4423,7 @@ msgid ""
 "want to continue?"
 msgstr "Tento seznam skladeb bude nenávratně odstraněn. Opravdu chcete pokračovat?"
 
-#: internet/lastfmservice.cpp:439
+#: internet/lastfmservice.cpp:435
 msgid "This stream is for paid subscribers only"
 msgstr "Tento proud je pouze pro předplatitele"
 
@@ -4446,7 +4446,7 @@ msgstr "Časové pásmo"
 msgid "Title"
 msgstr "Název"
 
-#: internet/groovesharkservice.cpp:1044
+#: internet/groovesharkservice.cpp:1017
 msgid ""
 "To start Grooveshark radio, you should first listen to a few other "
 "Grooveshark songs"
@@ -4563,7 +4563,7 @@ msgstr "Neznámý"
 msgid "Unknown content-type"
 msgstr "Neznámý typ obsahu"
 
-#: internet/digitallyimportedclient.cpp:69 internet/lastfmservice.cpp:452
+#: internet/digitallyimportedclient.cpp:69 internet/lastfmservice.cpp:448
 msgid "Unknown error"
 msgstr "Neznámá chyba"
 
@@ -4579,7 +4579,7 @@ msgstr "Zrušit odběr"
 msgid "Upcoming Concerts"
 msgstr "Připravované koncerty"
 
-#: internet/groovesharkservice.cpp:1226
+#: internet/groovesharkservice.cpp:1199
 msgid "Update Grooveshark playlist"
 msgstr "Obnovit seznam skladeb Grooveshark"
 
@@ -4685,7 +4685,7 @@ msgstr "Použít normalizaci hlasitosti"
 msgid "Used"
 msgstr "Použito"
 
-#: internet/groovesharkservice.cpp:413
+#: internet/groovesharkservice.cpp:403
 #, qt-format
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr "Uživatel %1 nemá účet Grooveshark Anywhere"

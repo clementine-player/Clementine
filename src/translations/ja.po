@@ -451,11 +451,11 @@ msgstr ""
 msgid "Add stream..."
 msgstr "ストリームを追加..."
 
-#: internet/groovesharkservice.cpp:1113
+#: internet/groovesharkservice.cpp:1086
 msgid "Add to Grooveshark favorites"
 msgstr "Grooveshark のお気に入りに追加"
 
-#: internet/groovesharkservice.cpp:1125
+#: internet/groovesharkservice.cpp:1098
 msgid "Add to Grooveshark playlists"
 msgstr "Grooveshark のプレイリストに追加"
 
@@ -500,11 +500,11 @@ msgstr "今日追加されました"
 msgid "Added within three months"
 msgstr "3 ヶ月以内に追加されました"
 
-#: internet/groovesharkservice.cpp:1421
+#: internet/groovesharkservice.cpp:1393
 msgid "Adding song to My Music"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:1398
+#: internet/groovesharkservice.cpp:1370
 msgid "Adding song to favorites"
 msgstr "曲をお気に入りに追加中"
 
@@ -668,7 +668,7 @@ msgstr "クリップ防止のために音量を制限する"
 msgid "Are you sure you want to delete the \"%1\" preset?"
 msgstr "プリセット \"%1\" を削除してもよろしいですか?"
 
-#: internet/groovesharkservice.cpp:1319
+#: internet/groovesharkservice.cpp:1291
 msgid "Are you sure you want to delete this playlist?"
 msgstr "本当にこのプレイリストを削除しますか?"
 
@@ -690,7 +690,7 @@ msgstr "アーティスト"
 msgid "Artist info"
 msgstr "アーティストの情報"
 
-#: internet/lastfmservice.cpp:207
+#: internet/lastfmservice.cpp:208
 msgid "Artist radio"
 msgstr "アーティストラジオ"
 
@@ -707,7 +707,7 @@ msgid "Audio format"
 msgstr "オーディオ形式"
 
 #: internet/digitallyimportedsettingspage.cpp:82
-#: internet/magnatunesettingspage.cpp:113 internet/lastfmservice.cpp:431
+#: internet/magnatunesettingspage.cpp:113 internet/lastfmservice.cpp:427
 #: internet/lastfmsettingspage.cpp:78
 msgid "Authentication failed"
 msgstr "認証に失敗しました"
@@ -1090,11 +1090,11 @@ msgstr "作曲者"
 msgid "Configure %1..."
 msgstr ""
 
-#: internet/groovesharkservice.cpp:561
+#: internet/groovesharkservice.cpp:551
 msgid "Configure Grooveshark..."
 msgstr "Grooveshark の設定..."
 
-#: internet/lastfmservice.cpp:125
+#: internet/lastfmservice.cpp:126
 msgid "Configure Last.fm..."
 msgstr "Last.fm の設定..."
 
@@ -1122,7 +1122,7 @@ msgstr "ライブラリの設定..."
 msgid "Configure podcasts..."
 msgstr ""
 
-#: internet/digitallyimportedservicebase.cpp:185
+#: internet/digitallyimportedservicebase.cpp:186
 #: ../bin/src/ui_globalsearchsettingspage.h:150
 #: internet/googledriveservice.cpp:257
 msgid "Configure..."
@@ -1156,7 +1156,7 @@ msgstr "すべての曲を変換する"
 msgid "Convert any music that the device can't play"
 msgstr "デバイスが再生できないすべての曲を変換する"
 
-#: internet/groovesharkservice.cpp:1198
+#: internet/groovesharkservice.cpp:1171
 msgid "Copy to clipboard"
 msgstr "クリップボードにコピー"
 
@@ -1199,7 +1199,7 @@ msgid ""
 "plugins installed"
 msgstr "%1 のエンコーダーを見つけることができませんでした。正しい GStreamer プラグインがインストールされていることをチェックしてください"
 
-#: internet/lastfmservice.cpp:890
+#: internet/lastfmservice.cpp:875
 msgid "Couldn't load the last.fm radio station"
 msgstr "last.fm ラジオ局を読み込めませんでした"
 
@@ -1241,7 +1241,7 @@ msgstr "%1 からのカバーアートセット"
 msgid "Covers from %1"
 msgstr "%1 からのカバー"
 
-#: internet/groovesharkservice.cpp:529 internet/groovesharkservice.cpp:1271
+#: internet/groovesharkservice.cpp:519 internet/groovesharkservice.cpp:1243
 msgid "Create a new Grooveshark playlist"
 msgstr "新規 Grooveshark プレイリストの作成"
 
@@ -1337,7 +1337,7 @@ msgstr ""
 msgid "Custom message settings"
 msgstr ""
 
-#: internet/lastfmservice.cpp:215
+#: internet/lastfmservice.cpp:216
 msgid "Custom radio"
 msgstr "カスタムラジオ"
 
@@ -1396,7 +1396,7 @@ msgstr "既定"
 msgid "Delay between visualizations"
 msgstr "ビジュアライゼーションの間の遅延"
 
-#: internet/groovesharkservice.cpp:532 internet/groovesharkservice.cpp:1318
+#: internet/groovesharkservice.cpp:522 internet/groovesharkservice.cpp:1290
 msgid "Delete Grooveshark playlist"
 msgstr "Grooveshark プレイリストの削除"
 
@@ -1604,7 +1604,7 @@ msgstr "ダウンロード..."
 msgid "Downloading (%1%)..."
 msgstr "ダウンロード中 (%1%)..."
 
-#: internet/icecastservice.cpp:99
+#: internet/icecastservice.cpp:101
 msgid "Downloading Icecast directory"
 msgstr "Icecast ディレクトリをダウンロード中"
 
@@ -1763,7 +1763,7 @@ msgstr "--log-levels *:1 と同じ"
 msgid "Equivalent to --log-levels *:3"
 msgstr "--log-levels *:3 と同じ"
 
-#: internet/groovesharkservice.cpp:1043
+#: internet/groovesharkservice.cpp:1016
 #: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:602
 #: ui/mainwindow.cpp:1767 ui/mainwindow.cpp:1888
 msgid "Error"
@@ -1790,7 +1790,7 @@ msgstr "Spotify プラグインのダウンロードエラー"
 msgid "Error loading %1"
 msgstr "%1 の読み込みエラー"
 
-#: internet/digitallyimportedservicebase.cpp:206
+#: internet/digitallyimportedservicebase.cpp:203
 #: internet/digitallyimportedurlhandler.cpp:87
 msgid "Error loading di.fm playlist"
 msgstr "di.fm プレイリストの読み込みエラー"
@@ -1914,7 +1914,7 @@ msgstr ""
 msgid "Fast"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:626
+#: internet/groovesharkservice.cpp:616
 msgid "Favorites"
 msgstr "お気に入り"
 
@@ -2065,7 +2065,7 @@ msgstr "フレームレート"
 msgid "Frames per buffer"
 msgstr ""
 
-#: internet/lastfmservice.cpp:223
+#: internet/lastfmservice.cpp:224
 msgid "Friends"
 msgstr ""
 
@@ -2103,15 +2103,15 @@ msgstr "全般設定"
 msgid "Genre"
 msgstr "ジャンル"
 
-#: internet/groovesharkservice.cpp:551
+#: internet/groovesharkservice.cpp:541
 msgid "Get a URL to share this Grooveshark playlist"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:548 internet/groovesharkservice.cpp:1136
+#: internet/groovesharkservice.cpp:538 internet/groovesharkservice.cpp:1109
 msgid "Get a URL to share this Grooveshark song"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:810
+#: internet/groovesharkservice.cpp:789
 msgid "Getting Grooveshark popular songs"
 msgstr "Grooveshark で人気の曲を取得中"
 
@@ -2119,7 +2119,7 @@ msgstr "Grooveshark で人気の曲を取得中"
 msgid "Getting channels"
 msgstr "チャンネルの取得中"
 
-#: internet/digitallyimportedservicebase.cpp:107
+#: internet/digitallyimportedservicebase.cpp:108
 msgid "Getting streams"
 msgstr "ストリームの取得中"
 
@@ -2158,19 +2158,19 @@ msgstr "プレイリスト上の存在しない曲をグレーで表示する"
 msgid "Grooveshark"
 msgstr "Grooveshark"
 
-#: internet/groovesharkservice.cpp:417
+#: internet/groovesharkservice.cpp:407
 msgid "Grooveshark login error"
 msgstr "Grooveshark ログインエラー"
 
-#: internet/groovesharkservice.cpp:1188
+#: internet/groovesharkservice.cpp:1161
 msgid "Grooveshark playlist's URL"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:612
+#: internet/groovesharkservice.cpp:602
 msgid "Grooveshark radio"
 msgstr "Grooveshark ラジオ"
 
-#: internet/groovesharkservice.cpp:1166
+#: internet/groovesharkservice.cpp:1139
 msgid "Grooveshark song's URL"
 msgstr "Grooveshark の曲の URL"
 
@@ -2351,35 +2351,35 @@ msgstr "インターネット"
 msgid "Internet providers"
 msgstr "インターネットプロバイダ"
 
-#: internet/lastfmservice.cpp:437
+#: internet/lastfmservice.cpp:433
 msgid "Invalid API key"
 msgstr "不正な API キーです"
 
-#: internet/lastfmservice.cpp:432
+#: internet/lastfmservice.cpp:428
 msgid "Invalid format"
 msgstr "不正な形式です"
 
-#: internet/lastfmservice.cpp:430
+#: internet/lastfmservice.cpp:426
 msgid "Invalid method"
 msgstr "不正なメソッドです"
 
-#: internet/lastfmservice.cpp:433
+#: internet/lastfmservice.cpp:429
 msgid "Invalid parameters"
 msgstr "不正なパラメーターです"
 
-#: internet/lastfmservice.cpp:434
+#: internet/lastfmservice.cpp:430
 msgid "Invalid resource specified"
 msgstr "不正なリソースが指定されました"
 
-#: internet/lastfmservice.cpp:429
+#: internet/lastfmservice.cpp:425
 msgid "Invalid service"
 msgstr "不正なサービスです"
 
-#: internet/lastfmservice.cpp:436
+#: internet/lastfmservice.cpp:432
 msgid "Invalid session key"
 msgstr "不正なセッションキーです"
 
-#: internet/groovesharkservice.cpp:410
+#: internet/groovesharkservice.cpp:400
 msgid "Invalid username and/or password"
 msgstr "ユーザー名またはパスワードが違います"
 
@@ -2464,45 +2464,45 @@ msgstr "最後に再生された"
 msgid "Last.fm"
 msgstr "Last.fm"
 
-#: internet/lastfmservice.cpp:84
+#: internet/lastfmservice.cpp:85
 #, qt-format
 msgid "Last.fm Custom Radio: %1"
 msgstr "Last.fm カスタムラジオ: %1"
 
-#: internet/lastfmservice.cpp:254 internet/lastfmservice.cpp:705
-#: internet/lastfmservice.cpp:732
+#: internet/lastfmservice.cpp:255 internet/lastfmservice.cpp:699
+#: internet/lastfmservice.cpp:722
 #, qt-format
 msgid "Last.fm Library - %1"
 msgstr "Last.fm ライブラリ - %1"
 
-#: globalsearch/lastfmsearchprovider.cpp:77 internet/lastfmservice.cpp:256
-#: internet/lastfmservice.cpp:259
+#: globalsearch/lastfmsearchprovider.cpp:77 internet/lastfmservice.cpp:257
+#: internet/lastfmservice.cpp:260
 #, qt-format
 msgid "Last.fm Mix Radio - %1"
 msgstr "Last.fm ミックスラジオ - %1"
 
-#: globalsearch/lastfmsearchprovider.cpp:79 internet/lastfmservice.cpp:261
-#: internet/lastfmservice.cpp:264
+#: globalsearch/lastfmsearchprovider.cpp:79 internet/lastfmservice.cpp:262
+#: internet/lastfmservice.cpp:265
 #, qt-format
 msgid "Last.fm Neighbor Radio - %1"
 msgstr "Last.fm ご近所さんのラジオ - %1"
 
-#: globalsearch/lastfmsearchprovider.cpp:75 internet/lastfmservice.cpp:251
+#: globalsearch/lastfmsearchprovider.cpp:75 internet/lastfmservice.cpp:252
 #, qt-format
 msgid "Last.fm Radio Station - %1"
 msgstr "Last.fm ラジオ局 - %1"
 
-#: internet/lastfmservice.cpp:82
+#: internet/lastfmservice.cpp:83
 #, qt-format
 msgid "Last.fm Similar Artists to %1"
 msgstr "Last.fm %1 にテイストの似たアーティスト"
 
-#: internet/lastfmservice.cpp:83
+#: internet/lastfmservice.cpp:84
 #, qt-format
 msgid "Last.fm Tag Radio: %1"
 msgstr "Last.fm タグ ラジオ: %1"
 
-#: internet/lastfmservice.cpp:441
+#: internet/lastfmservice.cpp:437
 msgid "Last.fm is currently busy, please try again in a few minutes"
 msgstr "Last.fm は現在混雑しています。数分後にやり直してください"
 
@@ -2559,7 +2559,7 @@ msgstr "ライブラリ検索"
 msgid "Limits"
 msgstr "制限"
 
-#: internet/groovesharkservice.cpp:613
+#: internet/groovesharkservice.cpp:603
 msgid ""
 "Listen to Grooveshark songs based on what you've listened to previously"
 msgstr "以前聴いた曲をもとに Grooveshark の曲を聴きます"
@@ -2596,7 +2596,7 @@ msgstr "プレイリストの読み込み"
 msgid "Load playlist..."
 msgstr "プレイリストの読み込み..."
 
-#: internet/lastfmservice.cpp:899
+#: internet/lastfmservice.cpp:884
 msgid "Loading Last.fm radio"
 msgstr "Last.fm ラジオの読み込み中"
 
@@ -2731,7 +2731,7 @@ msgstr ""
 msgid "Make playlist available offline"
 msgstr ""
 
-#: internet/lastfmservice.cpp:448
+#: internet/lastfmservice.cpp:444
 msgid "Malformed response"
 msgstr "不正な応答です"
 
@@ -2858,43 +2858,43 @@ msgstr "ミュージックライブラリ"
 msgid "Mute"
 msgstr "ミュート"
 
-#: globalsearch/lastfmsearchprovider.cpp:53 internet/lastfmservice.cpp:194
+#: globalsearch/lastfmsearchprovider.cpp:53 internet/lastfmservice.cpp:195
 msgid "My Last.fm Library"
 msgstr "マイ Last.fm ライブラリ"
 
-#: globalsearch/lastfmsearchprovider.cpp:55 internet/lastfmservice.cpp:199
+#: globalsearch/lastfmsearchprovider.cpp:55 internet/lastfmservice.cpp:200
 msgid "My Last.fm Mix Radio"
 msgstr "マイ Last.fm ミックスラジオ"
 
-#: globalsearch/lastfmsearchprovider.cpp:57 internet/lastfmservice.cpp:204
+#: globalsearch/lastfmsearchprovider.cpp:57 internet/lastfmservice.cpp:205
 msgid "My Last.fm Neighborhood"
 msgstr "マイ Last.fm のご近所さん"
 
-#: globalsearch/lastfmsearchprovider.cpp:51 internet/lastfmservice.cpp:189
+#: globalsearch/lastfmsearchprovider.cpp:51 internet/lastfmservice.cpp:190
 msgid "My Last.fm Recommended Radio"
 msgstr "マイ Last.fm のおすすめラジオ"
 
-#: internet/lastfmservice.cpp:196
+#: internet/lastfmservice.cpp:197
 msgid "My Mix Radio"
 msgstr "マイミックスラジオ"
 
-#: internet/groovesharkservice.cpp:617
+#: internet/groovesharkservice.cpp:607
 msgid "My Music"
 msgstr ""
 
-#: internet/lastfmservice.cpp:201
+#: internet/lastfmservice.cpp:202
 msgid "My Neighborhood"
 msgstr "ご近所さん"
 
-#: internet/lastfmservice.cpp:191
+#: internet/lastfmservice.cpp:192
 msgid "My Radio Station"
 msgstr "ラジオ局"
 
-#: internet/lastfmservice.cpp:186
+#: internet/lastfmservice.cpp:187
 msgid "My Recommendations"
 msgstr "おすすめ"
 
-#: internet/groovesharkservice.cpp:1272 internet/groovesharkservice.cpp:1365
+#: internet/groovesharkservice.cpp:1244 internet/groovesharkservice.cpp:1337
 #: ui/equalizer.cpp:172 ../bin/src/ui_deviceproperties.h:369
 #: ../bin/src/ui_magnatunedownloaddialog.h:135
 #: ../bin/src/ui_wizardfinishpage.h:84
@@ -2910,7 +2910,7 @@ msgstr "名前のオプション"
 msgid "Narrow band (NB)"
 msgstr ""
 
-#: internet/lastfmservice.cpp:228
+#: internet/lastfmservice.cpp:229
 msgid "Neighbors"
 msgstr "ご近所さん"
 
@@ -3014,19 +3014,19 @@ msgstr "ダイナミック プレイリストの使用中は利用できませ�
 msgid "Not connected"
 msgstr "接続されていません"
 
-#: internet/lastfmservice.cpp:443
+#: internet/lastfmservice.cpp:439
 msgid "Not enough content"
 msgstr "内容が足りません"
 
-#: internet/lastfmservice.cpp:445
+#: internet/lastfmservice.cpp:441
 msgid "Not enough fans"
 msgstr "ファンが足りません"
 
-#: internet/lastfmservice.cpp:444
+#: internet/lastfmservice.cpp:440
 msgid "Not enough members"
 msgstr "メンバーが足りません"
 
-#: internet/lastfmservice.cpp:446
+#: internet/lastfmservice.cpp:442
 msgid "Not enough neighbors"
 msgstr "ご近所さんが足りません"
 
@@ -3076,8 +3076,8 @@ msgstr "Ogg Vorbis"
 msgid "Only show the first"
 msgstr "先頭のみ表示する"
 
-#: internet/digitallyimportedservicebase.cpp:178
-#: internet/groovesharkservice.cpp:555 internet/icecastservice.cpp:296
+#: internet/digitallyimportedservicebase.cpp:179
+#: internet/groovesharkservice.cpp:545 internet/icecastservice.cpp:296
 #: internet/jamendoservice.cpp:418 internet/magnatuneservice.cpp:276
 #: internet/somafmservice.cpp:91 internet/soundcloudservice.cpp:194
 #, qt-format
@@ -3119,7 +3119,7 @@ msgstr "新しいプレイリストで開く"
 msgid "Open..."
 msgstr "開く..."
 
-#: internet/lastfmservice.cpp:435
+#: internet/lastfmservice.cpp:431
 msgid "Operation failed"
 msgstr "操作が失敗しました"
 
@@ -3223,7 +3223,7 @@ msgstr "再生"
 msgid "Play Artist or Tag"
 msgstr "アーティストまたはタグの再生"
 
-#: internet/lastfmservice.cpp:117
+#: internet/lastfmservice.cpp:118
 msgid "Play artist radio..."
 msgstr "アーティストラジオの再生..."
 
@@ -3231,7 +3231,7 @@ msgstr "アーティストラジオの再生..."
 msgid "Play count"
 msgstr "再生回数"
 
-#: internet/lastfmservice.cpp:121
+#: internet/lastfmservice.cpp:122
 msgid "Play custom radio..."
 msgstr "カスタムラジオの再生..."
 
@@ -3244,7 +3244,7 @@ msgstr "停止中は再生し、再生中は一時停止します"
 msgid "Play if there is nothing already playing"
 msgstr "再生中の曲がない場合は再生する"
 
-#: internet/lastfmservice.cpp:119
+#: internet/lastfmservice.cpp:120
 msgid "Play tag radio..."
 msgstr "タグラジオの再生..."
 
@@ -3285,7 +3285,7 @@ msgstr "プレイリスト検索"
 msgid "Playlist type"
 msgstr "プレイリストの種類"
 
-#: internet/groovesharkservice.cpp:635
+#: internet/groovesharkservice.cpp:625
 msgid "Playlists"
 msgstr "プレイリスト"
 
@@ -3305,15 +3305,15 @@ msgstr ""
 msgid "Pop"
 msgstr "Pop"
 
-#: internet/groovesharkservice.cpp:586
+#: internet/groovesharkservice.cpp:576
 msgid "Popular songs"
 msgstr "人気の曲"
 
-#: internet/groovesharkservice.cpp:589
+#: internet/groovesharkservice.cpp:579
 msgid "Popular songs of the Month"
 msgstr "今月人気の曲"
 
-#: internet/groovesharkservice.cpp:596
+#: internet/groovesharkservice.cpp:586
 msgid "Popular songs today"
 msgstr "今日人気の曲"
 
@@ -3447,7 +3447,7 @@ msgstr "トラックをキューに追加"
 msgid "Radio (equal loudness for all tracks)"
 msgstr "ラジオ (すべてのトラックで均一の音量)"
 
-#: internet/groovesharkservice.cpp:604
+#: internet/groovesharkservice.cpp:594
 msgid "Radios"
 msgstr "ラジオ"
 
@@ -3491,7 +3491,7 @@ msgstr "評価"
 msgid "Really cancel?"
 msgstr "本当に取り消しますか?"
 
-#: internet/groovesharkservice.cpp:558
+#: internet/groovesharkservice.cpp:548
 msgid "Refresh"
 msgstr ""
 
@@ -3503,7 +3503,7 @@ msgstr "カタログの更新"
 msgid "Refresh channels"
 msgstr "チャンネルの更新"
 
-#: internet/lastfmservice.cpp:123
+#: internet/lastfmservice.cpp:124
 msgid "Refresh friends list"
 msgstr ""
 
@@ -3511,7 +3511,7 @@ msgstr ""
 msgid "Refresh station list"
 msgstr "局の一覧の更新"
 
-#: internet/digitallyimportedservicebase.cpp:181
+#: internet/digitallyimportedservicebase.cpp:182
 msgid "Refresh streams"
 msgstr "ストリームの更新"
 
@@ -3529,7 +3529,7 @@ msgstr "最後から記憶する"
 
 #: internet/savedradio.cpp:100 ../bin/src/ui_queuemanager.h:135
 #: ../bin/src/ui_searchtermwidget.h:282 ../bin/src/ui_transcodedialog.h:208
-#: internet/lastfmservice.cpp:114
+#: internet/lastfmservice.cpp:115
 msgid "Remove"
 msgstr "削除"
 
@@ -3545,15 +3545,15 @@ msgstr ""
 msgid "Remove folder"
 msgstr "フォルダーの削除"
 
-#: internet/groovesharkservice.cpp:545
+#: internet/groovesharkservice.cpp:535
 msgid "Remove from My Music"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:542
+#: internet/groovesharkservice.cpp:532
 msgid "Remove from favorites"
 msgstr "お気に入りから削除する"
 
-#: internet/groovesharkservice.cpp:539 ../bin/src/ui_mainwindow.h:692
+#: internet/groovesharkservice.cpp:529 ../bin/src/ui_mainwindow.h:692
 msgid "Remove from playlist"
 msgstr "プレイリストから削除"
 
@@ -3561,20 +3561,20 @@ msgstr "プレイリストから削除"
 msgid "Remove playlist"
 msgstr "プレイリストの削除"
 
-#: internet/groovesharkservice.cpp:1566
+#: internet/groovesharkservice.cpp:1538
 msgid "Removing songs from My Music"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:1516
+#: internet/groovesharkservice.cpp:1488
 msgid "Removing songs from favorites"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:1364
+#: internet/groovesharkservice.cpp:1336
 #, qt-format
 msgid "Rename \"%1\" playlist"
 msgstr "\"%1\" プレイリストの名前を変更"
 
-#: internet/groovesharkservice.cpp:535
+#: internet/groovesharkservice.cpp:525
 msgid "Rename Grooveshark playlist"
 msgstr "Grooveshark のプレイリストの名前を変更"
 
@@ -3644,15 +3644,15 @@ msgstr "再生回数のリセット"
 msgid "Restrict to ASCII characters"
 msgstr "ASCII 文字に限定する"
 
-#: internet/groovesharkservice.cpp:778
+#: internet/groovesharkservice.cpp:757
 msgid "Retrieving Grooveshark My Music songs"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:746
+#: internet/groovesharkservice.cpp:725
 msgid "Retrieving Grooveshark favorites songs"
 msgstr "Grooveshark のお気に入りの曲を取得中"
 
-#: internet/groovesharkservice.cpp:672
+#: internet/groovesharkservice.cpp:662
 msgid "Retrieving Grooveshark playlists"
 msgstr "Grooveshark のプレイリストを取得中"
 
@@ -3778,7 +3778,7 @@ msgstr "検索モード"
 msgid "Search options"
 msgstr "検索オプション"
 
-#: internet/groovesharkservice.cpp:578 internet/soundcloudservice.cpp:104
+#: internet/groovesharkservice.cpp:568 internet/soundcloudservice.cpp:104
 #: internet/spotifyservice.cpp:348
 msgid "Search results"
 msgstr ""
@@ -3788,7 +3788,7 @@ msgstr ""
 msgid "Search terms"
 msgstr "検索条件"
 
-#: internet/groovesharkservice.cpp:273
+#: internet/groovesharkservice.cpp:268
 msgid "Searching on Grooveshark"
 msgstr "Grooveshark を検索中"
 
@@ -3848,7 +3848,7 @@ msgstr "ビジュアライゼーションの選択..."
 msgid "Serial number"
 msgstr "シリアル番号"
 
-#: internet/lastfmservice.cpp:438
+#: internet/lastfmservice.cpp:434
 msgid "Service offline"
 msgstr "サービスがオフラインです"
 
@@ -4141,7 +4141,7 @@ msgstr "現在再生中のプレイリストを開始する"
 msgid "Start transcoding"
 msgstr "トランスコードの開始"
 
-#: internet/groovesharkservice.cpp:579 internet/soundcloudservice.cpp:105
+#: internet/groovesharkservice.cpp:569 internet/soundcloudservice.cpp:105
 #: internet/spotifyservice.cpp:349
 msgid ""
 "Start typing something on the search box above to fill this search results "
@@ -4157,7 +4157,7 @@ msgstr "%1 の開始中"
 msgid "Starting..."
 msgstr "開始しています..."
 
-#: internet/groovesharkservice.cpp:607
+#: internet/groovesharkservice.cpp:597
 msgid "Stations"
 msgstr "局"
 
@@ -4194,7 +4194,7 @@ msgstr "ストリーム"
 msgid "Streaming membership"
 msgstr "ストリーミングのメンバーシップ"
 
-#: internet/groovesharkservice.cpp:638
+#: internet/groovesharkservice.cpp:628
 msgid "Subscribed playlists"
 msgstr ""
 
@@ -4262,7 +4262,7 @@ msgstr "タグ"
 msgid "Tag fetcher"
 msgstr "タグ取得ツール"
 
-#: internet/lastfmservice.cpp:211
+#: internet/lastfmservice.cpp:212
 msgid "Tag radio"
 msgstr "タグラジオ"
 
@@ -4418,7 +4418,7 @@ msgid ""
 "want to continue?"
 msgstr "このプレイリストは削除されます。この操作は取り消せません。操作を続行しますか?"
 
-#: internet/lastfmservice.cpp:439
+#: internet/lastfmservice.cpp:435
 msgid "This stream is for paid subscribers only"
 msgstr "このストリームは有料会員専用です"
 
@@ -4441,7 +4441,7 @@ msgstr "タイムゾーン"
 msgid "Title"
 msgstr "タイトル"
 
-#: internet/groovesharkservice.cpp:1044
+#: internet/groovesharkservice.cpp:1017
 msgid ""
 "To start Grooveshark radio, you should first listen to a few other "
 "Grooveshark songs"
@@ -4558,7 +4558,7 @@ msgstr "不明"
 msgid "Unknown content-type"
 msgstr ""
 
-#: internet/digitallyimportedclient.cpp:69 internet/lastfmservice.cpp:452
+#: internet/digitallyimportedclient.cpp:69 internet/lastfmservice.cpp:448
 msgid "Unknown error"
 msgstr "不明なエラー"
 
@@ -4574,7 +4574,7 @@ msgstr ""
 msgid "Upcoming Concerts"
 msgstr ""
 
-#: internet/groovesharkservice.cpp:1226
+#: internet/groovesharkservice.cpp:1199
 msgid "Update Grooveshark playlist"
 msgstr "Grooveshark のプレイリストを更新"
 
@@ -4680,7 +4680,7 @@ msgstr "音量の正規化を使用する"
 msgid "Used"
 msgstr "使用中"
 
-#: internet/groovesharkservice.cpp:413
+#: internet/groovesharkservice.cpp:403
 #, qt-format
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr "ユーザー %1 には Grooveshark Anywhere のアカウントがありません。"
