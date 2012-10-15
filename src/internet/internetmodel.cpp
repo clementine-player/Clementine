@@ -104,7 +104,6 @@ void InternetModel::AddService(InternetService *service) {
   connect(service, SIGNAL(StreamMetadataFound(QUrl,Song)), SIGNAL(StreamMetadataFound(QUrl,Song)));
   connect(service, SIGNAL(AddToPlaylistSignal(QMimeData*)), SIGNAL(AddToPlaylist(QMimeData*)));
   connect(service, SIGNAL(ScrollToIndex(QModelIndex)), SIGNAL(ScrollToIndex(QModelIndex)));
-  connect(service, SIGNAL(destroyed()), SLOT(ServiceDeleted()));
   NewClosure(service, SIGNAL(destroyed()), this,
              SLOT(ServiceDeleted(InternetService*)), service);
 
