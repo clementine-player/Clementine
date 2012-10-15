@@ -1169,7 +1169,7 @@ void Song::ToXesam(QVariantMap* map) const {
   AddMetadataAsList("xesam:comment", comment(), map);
   AddMetadata("xesam:contentCreated", AsMPRISDateTimeType(ctime()), map);
   AddMetadata("xesam:lastUsed", AsMPRISDateTimeType(lastplayed()), map);
-  AddMetadata("xesam:audioBPM", bpm(), map);
+  AddMetadata("xesam:audioBPM", static_cast<int>(bpm()), map);
   AddMetadataAsList("xesam:composer", composer(), map);
   AddMetadata("xesam:useCount", playcount(), map);
   AddMetadata("xesam:autoRating", score(), map);
