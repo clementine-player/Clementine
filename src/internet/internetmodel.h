@@ -166,7 +166,7 @@ signals:
   void ScrollToIndex(const QModelIndex& index);
 
 private slots:
-  void ServiceDeleted(InternetService* service);
+  void ServiceDeleted();
 
 private:
   static QMap<QString, InternetService*>* sServices;
