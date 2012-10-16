@@ -49,6 +49,7 @@ Analyzer::Base::Base( QWidget *parent, uint scopeSize )
         , m_engine(NULL)
         , m_lastScope(512)
         , new_frame_(false)
+        , is_playing_(false)
 {
 }
 
@@ -81,16 +82,14 @@ void Analyzer::Base::transform( Scope &scope ) //virtual
 
 void Analyzer::Base::paintEvent(QPaintEvent * e)
 {
-    EngineBase *engine = m_engine;
-
     QPainter p(this);
     p.fillRect(e->rect(), palette().color(QPalette::Window));
 
-    switch( engine->state() )
+    switch( m_engine->state() )
     {
     case Engine::Playing:
     {
-        const Engine::Scope &thescope = engine->scope();
+        const Engine::Scope &thescope = m_engine->scope();
         int i = 0;
 
         // convert to mono here - our built in analyzers need mono, but we the engines provide interleaved pcm
@@ -100,6 +99,7 @@ void Analyzer::Base::paintEvent(QPaintEvent * e)
            i += 2;
         }
 
+        is_playing_ = true;
         transform( m_lastScope );
         analyze( p, m_lastScope, new_frame_ );
 
@@ -108,12 +108,15 @@ void Analyzer::Base::paintEvent(QPaintEvent * e)
         break;
     }
     case Engine::Paused:
+        is_playing_ = false;
         analyze(p, m_lastScope, new_frame_);
         break;
 
     default:
+        is_playing_ = false;
         demo(p);
     }
+
 
     new_frame_ = false;
 }
@@ -151,9 +154,6 @@ int Analyzer::Base::resizeForBands( int bands )
     resizeExponent( exp );
     return m_fht->size() / 2;
 }
-
-void Analyzer::Base::paused(QPainter&) //virtual
-{}
 
 void Analyzer::Base::demo(QPainter& p) //virtual
 {

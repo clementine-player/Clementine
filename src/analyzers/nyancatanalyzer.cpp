@@ -78,7 +78,8 @@ void NyanCatAnalyzer::analyze(QPainter& p, const Analyzer::Scope& s, bool new_fr
   // Discard the second half of the transform
   const int scope_size = s.size() / 2;
 
-  if (new_frame) {
+  if ((new_frame && is_playing_) ||
+      (buffer_[0].isNull() && buffer_[1].isNull())) {
     // Transform the music into rainbows!
     for (int band=0 ; band<kRainbowBands ; ++band) {
       float* band_start = history_ + band * kHistorySize;
@@ -161,7 +162,10 @@ void NyanCatAnalyzer::analyze(QPainter& p, const Analyzer::Scope& s, bool new_fr
 
   // Draw nyan cat (he's been waiting for this for 75 lines).
   // Nyan nyan nyan nyan.
-  QRect cat_dest(width() - kCatWidth, (height() - kCatHeight) / 2,
-                 kCatWidth, kCatHeight);
-  p.drawPixmap(cat_dest, cat_, CatSourceRect());
+  if (!is_playing_) {
+    // Ssshhh!
+    p.drawPixmap(SleepingCatDestRect(), cat_, SleepingCatSourceRect());
+  } else {
+    p.drawPixmap(CatDestRect(), cat_, CatSourceRect());
+  }
 }

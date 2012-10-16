@@ -40,8 +40,9 @@ protected:
 private:
   static const int kCatHeight = 21;
   static const int kCatWidth = 34;
-  static const int kCatFrameCount = 5;
+  static const int kCatFrameCount = 6;
   static const int kRainbowOverlap = 13;
+  static const int kSleepingCatHeight = 24;
 
   static const int kHistorySize = 128;
   static const int kRainbowBands = 6;
@@ -52,6 +53,20 @@ private:
 private:
   inline QRect CatSourceRect() const {
     return QRect(0, kCatHeight * frame_, kCatWidth, kCatHeight);
+  }
+
+  inline QRect SleepingCatSourceRect() const {
+    return QRect(0, kCatHeight * kCatFrameCount, kCatWidth, kSleepingCatHeight);
+  }
+
+  inline QRect CatDestRect() const {
+    return QRect(width() - kCatWidth, (height() - kCatHeight) / 2,
+                 kCatWidth, kCatHeight);
+  }
+
+  inline QRect SleepingCatDestRect() const {
+    return QRect(width() - kCatWidth, (height() - kSleepingCatHeight) / 2,
+                 kCatWidth, kSleepingCatHeight);
   }
 
 private:
