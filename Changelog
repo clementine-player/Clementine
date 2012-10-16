@@ -35,9 +35,12 @@ Version 1.1:
     * Add "Edit file information" and "Show in file browser" actions to the
       file view.
     * Add Discogs as an album cover provider.
+    * Nyanalyzer cat now goes to sleep between songs.
     * (Mac OS X) Support drag and dropping files and folders on the dock icon.
     * (Mac OS X) Support notification center instead of Growl on Mountain
       Lion.
+    * (Mac OS X) Support fullscreen mode in Mountain Lion.
+    * (Mac OS X) Draw high resolution text when using a retina display.
 
   Bugfixes:
     * Use new authentication API for di.fm/sky.fm to fix logging in to those
@@ -94,6 +97,7 @@ Version 1.1:
     * (Linux) Support devices with no partition table.
     * (Linux) Support "open with" in Ubuntu.
     * (Linux) Fix a crash in PlayTrack MPRIS method.
+    * (Linux) Fix the types of some MPRIS fields.
     * (Mac OS X) Fix HTTPS streams.
     * (Mac OS X) Support keyboard shortcuts in native Mac search fields.
     * (Mac OS X) Use Qocoa instead of custom hacks for native search widgets.
