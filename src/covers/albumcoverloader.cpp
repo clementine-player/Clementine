@@ -166,7 +166,6 @@ AlbumCoverLoader::TryLoadResult AlbumCoverLoader::TryLoadImage(
   if (filename.toLower().startsWith("http://")) {
     QUrl url(filename);
     QNetworkReply* reply = network_->get(QNetworkRequest(url));
-    connect(reply, SIGNAL(finished()), SLOT(RemoteFetchFinished()));
     NewClosure(reply, SIGNAL(finished()), this,
                SLOT(RemoteFetchFinished(QNetworkReply*)), reply);
 
