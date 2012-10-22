@@ -554,20 +554,25 @@ QVariant LibraryModel::data(const LibraryItem* item, int role) const {
   return QVariant();
 }
 
-SqlRowList LibraryModel::RunRootQuery(const QueryOptions& query_options,
-                                      const Grouping& group_by) {
-  // Warning: Some copy-paste with LazyPopulate here
-
+SqlRowList LibraryModel::RunQuery(LibraryItem* parent, bool signal) {
   // Information about what we want the children to be
-  GroupBy child_type = group_by[0];
+  int child_level = parent == root_ ? 0 : parent->container_level + 1;
+  GroupBy child_type = child_level >= 3 ? GroupBy_None : group_by_[child_level];
 
   // Initialise the query.  child_type says what type of thing we want (artists,
   // songs, etc.)
-  LibraryQuery q(query_options);
+  LibraryQuery q(query_options_);
   InitQuery(child_type, &q);
 
+  // Walk up through the item's parents adding filters as necessary
+  LibraryItem* p = parent;
+  while (p && p->type == LibraryItem::Type_Container) {
+    FilterQuery(group_by_[p->container_level], p, &q);
+    p = p->parent;
+  }
+
   // Top-level artists is special - we don't want compilation albums appearing
-  if (IsArtistGroupBy(child_type)) {
+  if (child_level == 0 && IsArtistGroupBy(child_type)) {
     q.AddCompilationRequirement(false);
   }
 
@@ -583,46 +588,17 @@ SqlRowList LibraryModel::RunRootQuery(const QueryOptions& query_options,
   return rows;
 }
 
-void LibraryModel::LazyPopulate(LibraryItem* parent, bool signal) {
-  if (parent->lazy_loaded)
-    return;
-  parent->lazy_loaded = true;
-
-  // Warning: Some copy-paste with RunRootQuery here
-
+void LibraryModel::PostQuery(LibraryItem* parent, SqlRowList rows,
+		             bool signal ) {
   // Information about what we want the children to be
-  int child_level = parent->container_level + 1;
+  int child_level = parent == root_ ? 0 : parent->container_level + 1;
   GroupBy child_type = child_level >= 3 ? GroupBy_None : group_by_[child_level];
 
-  // Initialise the query.  child_type says what type of thing we want (artists,
-  // songs, etc.)
-  LibraryQuery q(query_options_);
-  InitQuery(child_type, &q);
-
-  // Top-level artists is special - we don't want compilation albums appearing
-  if (child_level == 0 && IsArtistGroupBy(child_type)) {
-    q.AddCompilationRequirement(false);
-  }
-
-  // Walk up through the item's parents adding filters as necessary
-  LibraryItem* p = parent;
-  while (p && p->type == LibraryItem::Type_Container) {
-    FilterQuery(group_by_[p->container_level], p, &q);
-    p = p->parent;
-  }
-
-  // Execute the query
-  QMutexLocker l(backend_->db()->Mutex());
-  if (!backend_->ExecQuery(&q))
-    return;
-
   // Step through the results
-  while (q.Next()) {
-    // Warning: Some copy-paste with ResetAsyncQueryFinished here
-
+  foreach (const SqlRow& row, rows) {
     // Create the item - it will get inserted into the model here
     LibraryItem* item =
-        ItemFromQuery(child_type, signal, child_level == 0, parent, SqlRow(q),
+        ItemFromQuery(child_type, signal, child_level == 0, parent, row,
                       child_level);
 
     // Save a pointer to it for later
@@ -633,9 +609,19 @@ void LibraryModel::LazyPopulate(LibraryItem* parent, bool signal) {
   }
 }
 
+void LibraryModel::LazyPopulate(LibraryItem* parent, bool signal) {
+  if (parent->lazy_loaded)
+    return;
+  parent->lazy_loaded = true;
+
+  SqlRowList rows = RunQuery(parent, signal);
+
+  PostQuery(parent, rows, signal);
+}
+
 void LibraryModel::ResetAsync() {
   RootQueryFuture future = QtConcurrent::run(
-        this, &LibraryModel::RunRootQuery, query_options_, group_by_);
+        this, &LibraryModel::RunQuery, root_, false);
   RootQueryWatcher* watcher = new RootQueryWatcher(this);
   watcher->setFuture(future);
 
@@ -650,21 +636,7 @@ void LibraryModel::ResetAsyncQueryFinished() {
   BeginReset();
   root_->lazy_loaded = true;
 
-  foreach (const SqlRow& row, rows) {
-    // Warning: Some copy-paste with LazyPopulate here
-
-    const GroupBy child_type = group_by_[0];
-
-    // Create the item - it will get inserted into the model here
-    LibraryItem* item =
-        ItemFromQuery(child_type, false, true, root_, row, 0);
-
-    // Save a pointer to it for later
-    if (child_type == GroupBy_None)
-      song_nodes_[item->metadata.id()] = item;
-    else
-      container_nodes_[0][item->key] = item;
-  }
+  PostQuery(root_, rows , false);
 
   if (init_task_id_ != -1) {
     app_->task_manager()->SetTaskFinished(init_task_id_);

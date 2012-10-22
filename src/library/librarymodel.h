@@ -186,8 +186,8 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
   // Provides some optimisations for loading the list of items in the root.
   // This gets called a lot when filtering the playlist, so it's nice to be
   // able to do it in a background thread.
-  SqlRowList RunRootQuery(const QueryOptions& query_options,
-                          const Grouping& group_by);
+  SqlRowList RunQuery(LibraryItem* parent, bool signal);
+  void PostQuery(LibraryItem* parent, SqlRowList rows, bool signal);
 
   void BeginReset();
 
