@@ -60,6 +60,10 @@ static bool IsArtistGroupBy(const LibraryModel::GroupBy by) {
   return by == LibraryModel::GroupBy_Artist || by == LibraryModel::GroupBy_AlbumArtist;
 }
 
+static bool IsCompilationArtistNode(const LibraryItem* node) {
+  return node == node->parent->compilation_artist_node_;
+}
+
 LibraryModel::LibraryModel(LibraryBackend* backend, Application* app,
                            QObject* parent)
   : SimpleTreeModel<LibraryItem>(new LibraryItem(this), parent),
@@ -162,12 +166,12 @@ void LibraryModel::SongsDiscovered(const SongList& songs) {
       GroupBy type = group_by_[i];
       if (type == GroupBy_None) break;
 
-      // Special case: if we're at the top level and the song is a compilation
-      // and the top level is Artists, then we want the Various Artists node :(
-      if (i == 0 && IsArtistGroupBy(type) && song.is_compilation()) {
-        if (compilation_artist_node_ == NULL)
-          CreateCompilationArtistNode(true, root_);
-        container = compilation_artist_node_;
+      // Special case: if the song is a compilation and the current GroupBy
+      // level is Artists, then we want the Various Artists node :(
+      if (IsArtistGroupBy(type) && song.is_compilation()) {
+        if (container->compilation_artist_node_ == NULL)
+          CreateCompilationArtistNode(true, container);
+        container = container->compilation_artist_node_;
       } else {
         // Otherwise find the proper container at this level based on the
         // item's key
@@ -228,16 +232,17 @@ LibraryItem* LibraryModel::CreateCompilationArtistNode(bool signal, LibraryItem*
   if (signal)
     beginInsertRows(ItemToIndex(parent), parent->children.count(), parent->children.count());
 
-  compilation_artist_node_ =
+  parent->compilation_artist_node_ =
       new LibraryItem(LibraryItem::Type_Container, parent);
-  compilation_artist_node_->key = tr("Various artists");
-  compilation_artist_node_->sort_text = " various";
-  compilation_artist_node_->container_level = parent->container_level + 1;
+  parent->compilation_artist_node_->compilation_artist_node_ = NULL;
+  parent->compilation_artist_node_->key = tr("Various artists");
+  parent->compilation_artist_node_->sort_text = " various";
+  parent->compilation_artist_node_->container_level = parent->container_level + 1;
 
   if (signal)
     endInsertRows();
 
-  return compilation_artist_node_;
+  return parent->compilation_artist_node_;
 }
 
 QString LibraryModel::DividerKey(GroupBy type, LibraryItem* item) const {
@@ -352,8 +357,8 @@ void LibraryModel::SongsDeleted(const SongList& songs) {
         divider_keys << DividerKey(group_by_[0], node);
 
       // Special case the Various Artists node
-      if (node == compilation_artist_node_)
-        compilation_artist_node_ = NULL;
+      if (IsCompilationArtistNode(node))
+        node->parent->compilation_artist_node_ = NULL;
       else
         container_nodes_[node->container_level].remove(node->key);
 
@@ -585,12 +590,13 @@ struct LibraryModel::QueryResult LibraryModel::RunQuery(LibraryItem* parent,
     p = p->parent;
   }
 
-  // Top-level artists is special - we don't want compilation albums appearing
-  if (child_level == 0 && IsArtistGroupBy(child_type)) {
-    // Various artists?
+  // Artists GroupBy is special - we don't want compilation albums appearing
+  if (IsArtistGroupBy(child_type)) {
+    // Add the special Various artists node
     if (show_various_artists_ && HasCompilations(q))
       result.create_va = true;
 
+    // Don't show compilations again outside the Various artists node
     q.AddCompilationRequirement(false);
   }
 
@@ -676,10 +682,10 @@ void LibraryModel::BeginReset() {
   container_nodes_[2].clear();
   divider_nodes_.clear();
   pending_art_.clear();
-  compilation_artist_node_ = NULL;
   smart_playlist_node_ = NULL;
 
   root_ = new LibraryItem(this);
+  root_->compilation_artist_node_ = NULL;
   root_->lazy_loaded = false;
 
   // Smart playlists?
@@ -735,11 +741,11 @@ void LibraryModel::FilterQuery(GroupBy type, LibraryItem* item, LibraryQuery* q)
 
   switch (type) {
   case GroupBy_Artist:
-    if (item == compilation_artist_node_)
+    if (IsCompilationArtistNode(item))
       q->AddCompilationRequirement(true);
     else {
-      if (item->container_level == 0) // Stupid hack
-        q->AddCompilationRequirement(false);
+      // Don't duplicate compilations outside the Various artists node
+      q->AddCompilationRequirement(false);
       q->AddWhere("artist", item->key);
     }
     break;
@@ -760,11 +766,11 @@ void LibraryModel::FilterQuery(GroupBy type, LibraryItem* item, LibraryQuery* q)
     q->AddWhere("genre", item->key);
     break;
   case GroupBy_AlbumArtist:
-    if (item == compilation_artist_node_)
+    if (IsCompilationArtistNode(item))
       q->AddCompilationRequirement(true);
     else {
-      if (item->container_level == 0) // Same stupid hack as above
-        q->AddCompilationRequirement(false);
+      // Don't duplicate compilations outside the Various artists node
+      q->AddCompilationRequirement(false);
       q->AddWhere("effective_albumartist", item->key);
     }
     break;
@@ -789,6 +795,7 @@ LibraryItem* LibraryModel::InitItem(GroupBy type, bool signal, LibraryItem *pare
 
   // Initialise the item depending on what type it's meant to be
   LibraryItem* item = new LibraryItem(item_type, parent);
+  item->compilation_artist_node_ = NULL;
   item->container_level = container_level;
   return item;
 }

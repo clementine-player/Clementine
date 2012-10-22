@@ -260,9 +260,6 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
   // Keyed on a letter, a year, a century, etc.
   QMap<QString, LibraryItem*> divider_nodes_;
 
-  // Only applies if the first level is "artist"
-  LibraryItem* compilation_artist_node_;
-
   // Only applies if smart playlists are set to on
   LibraryItem* smart_playlist_node_;
 

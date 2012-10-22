@@ -44,6 +44,7 @@ class LibraryItem : public SimpleTreeItem<LibraryItem> {
   int container_level;
   Song metadata;
   QByteArray smart_playlist_data;
+  LibraryItem* compilation_artist_node_;
 };
 
 #endif // LIBRARYITEM_H
