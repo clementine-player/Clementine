@@ -164,6 +164,9 @@ GetFileResponse* Client::GetFile(const QString& file_id) {
 
   QNetworkRequest request = QNetworkRequest(url);
   AddAuthorizationHeader(&request);
+  // Never cache these requests as we will get out of date download URLs.
+  request.setAttribute(
+      QNetworkRequest::CacheLoadControlAttribute, QNetworkRequest::AlwaysNetwork);
 
   QNetworkReply* reply = network_->get(request);
   NewClosure(reply, SIGNAL(finished()),
