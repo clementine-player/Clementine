@@ -17,6 +17,8 @@
 
 #include <limits>
 
+#include <QCoreApplication>
+
 #include "bufferconsumer.h"
 #include "config.h"
 #include "gstelementdeleter.h"
@@ -713,8 +715,11 @@ void GstEnginePipeline::SourceSetupCallback(GstURIDecodeBin* bin, GParamSpec *ps
   GstEnginePipeline* instance = reinterpret_cast<GstEnginePipeline*>(self);
   GstElement* element;
   g_object_get(bin, "source", &element, NULL);
-  if (element &&
-      g_object_class_find_property(G_OBJECT_GET_CLASS(element), "device") &&
+  if (!element) {
+    return;
+  }
+
+  if (g_object_class_find_property(G_OBJECT_GET_CLASS(element), "device") &&
       !instance->source_device().isEmpty()) {
     // Gstreamer is not able to handle device in URL (refering to Gstreamer
     // documentation, this might be added in the future). Despite that, for now
@@ -722,8 +727,7 @@ void GstEnginePipeline::SourceSetupCallback(GstURIDecodeBin* bin, GParamSpec *ps
     // here, when this callback is called.
     g_object_set(element, "device", instance->source_device().toLocal8Bit().constData(), NULL);
   }
-  if (element &&
-      g_object_class_find_property(G_OBJECT_GET_CLASS(element), "extra-headers") &&
+  if (g_object_class_find_property(G_OBJECT_GET_CLASS(element), "extra-headers") &&
       instance->url().host().contains("grooveshark")) {
     // Grooveshark streaming servers will answer with a 400 error 'Bad request'
     // if we don't specify 'Range' field in HTTP header.
@@ -735,8 +739,7 @@ void GstEnginePipeline::SourceSetupCallback(GstURIDecodeBin* bin, GParamSpec *ps
     gst_structure_free(headers);
   }
 
-  if (element &&
-      g_object_class_find_property(G_OBJECT_GET_CLASS(element), "extra-headers") &&
+  if (g_object_class_find_property(G_OBJECT_GET_CLASS(element), "extra-headers") &&
       instance->url().host().contains("googleusercontent.com") &&
       instance->url().hasFragment()) {
     QByteArray authorization = QString("Bearer %1").arg(
@@ -748,6 +751,13 @@ void GstEnginePipeline::SourceSetupCallback(GstURIDecodeBin* bin, GParamSpec *ps
         NULL);
     g_object_set(element, "extra-headers", headers, NULL);
     gst_structure_free(headers);
+  }
+
+  if (g_object_class_find_property(G_OBJECT_GET_CLASS(element), "user-agent")) {
+    QString user_agent = QString("%1 %2").arg(
+        QCoreApplication::applicationName(),
+        QCoreApplication::applicationVersion());
+    g_object_set(element, "user-agent", user_agent.toUtf8().constData(), NULL);
   }
 }
 
