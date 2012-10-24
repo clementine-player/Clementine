@@ -825,7 +825,6 @@ optional_source(APPLE
     core/macfslistener.h
     core/macglobalshortcutbackend.h
     devices/macdevicelister.h
-    ui/macscreensaver.h
     ui/macsystemtrayicon.h
 )
 

@@ -17,24 +17,20 @@
 
 #include "macscreensaver.h"
 
-#include <CoreServices/CoreServices.h>
-
 #include <QtDebug>
 
-MacScreensaver::MacScreensaver() {
-  timer_.setInterval(30000);
-  connect(&timer_, SIGNAL(timeout()), SLOT(Timeout()));
-}
-
-void MacScreensaver::Timeout() {
-  UpdateSystemActivity(OverallAct);
+MacScreensaver::MacScreensaver()
+    : assertion_id_(0) {
 }
 
 void MacScreensaver::Inhibit() {
-  timer_.start(30000);
-  Timeout();
+  IOPMAssertionCreateWithName(
+      kIOPMAssertionTypePreventUserIdleDisplaySleep,
+      kIOPMAssertionLevelOn,
+      CFSTR("Showing full-screen Clementine visualisations"),
+      &assertion_id_);
 }
 
 void MacScreensaver::Uninhibit() {
-  timer_.stop();
+  IOPMAssertionRelease(assertion_id_);
 }

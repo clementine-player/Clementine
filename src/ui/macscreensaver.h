@@ -20,21 +20,17 @@
 
 #include "screensaver.h"
 
-#include <QTimer>
+#include <IOKit/pwr_mgt/IOPMLib.h>
 
-class MacScreensaver : public QObject, public Screensaver {
-  Q_OBJECT
+class MacScreensaver : public Screensaver {
  public:
   MacScreensaver();
 
   void Inhibit();
   void Uninhibit();
 
- private slots:
-  void Timeout();
-
  private:
-  QTimer timer_;
+  IOPMAssertionID assertion_id_;
 };
 
 #endif
