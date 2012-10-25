@@ -29,6 +29,7 @@ LABELS = {
   "natty":    ["Distro-Ubuntu"],
   "oneiric":  ["Distro-Ubuntu"],
   "precise":  ["Distro-Ubuntu"],
+  "quantal":  ["Distro-Ubuntu"],
   "squeeze":  ["Distro-Debian"],
 }
 
@@ -57,6 +58,7 @@ DESCRIPTIONS = {
   ("deb", "natty"):     "for Ubuntu Natty (11.04)",
   ("deb", "oneiric"):   "for Ubuntu Oneiric (11.10)",
   ("deb", "precise"):   "for Ubuntu Precise (12.04)",
+  ("deb", "quantal"):   "for Ubuntu Quantal (12.10)",
   ("deb", "squeeze"):   "for Debian Squeeze",
   ("rpm", "fc16"):      "for Fedora 16",
   ("rpm", "fc17"):      "for Fedora 17",
@@ -76,6 +78,8 @@ RELEASES = [
   ("deb", "oneiric", 64),
   ("deb", "precise", 32),
   ("deb", "precise", 64),
+  ("deb", "quantal", 32),
+  ("deb", "quantal", 64),
   ("deb", "squeeze", 32),
   ("deb", "squeeze", 64),
   ("rpm", "fc16", 32),
