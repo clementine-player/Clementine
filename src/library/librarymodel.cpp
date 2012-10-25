@@ -554,6 +554,17 @@ QVariant LibraryModel::data(const LibraryItem* item, int role) const {
   return QVariant();
 }
 
+bool LibraryModel::HasCompilations(const LibraryQuery query) {
+  LibraryQuery q = query;
+  q.AddCompilationRequirement(true);
+  q.SetLimit(1);
+
+  QMutexLocker l(backend_->db()->Mutex());
+  if (!backend_->ExecQuery(&q)) return false;
+
+  return q.Next();
+}
+
 SqlRowList LibraryModel::RunQuery(LibraryItem* parent, bool signal) {
   // Information about what we want the children to be
   int child_level = parent == root_ ? 0 : parent->container_level + 1;
@@ -573,6 +584,10 @@ SqlRowList LibraryModel::RunQuery(LibraryItem* parent, bool signal) {
 
   // Top-level artists is special - we don't want compilation albums appearing
   if (child_level == 0 && IsArtistGroupBy(child_type)) {
+    // Various artists?
+    if (show_various_artists_ && HasCompilations(q))
+      CreateCompilationArtistNode(signal, parent);
+
     q.AddCompilationRequirement(false);
   }
 
@@ -660,13 +675,6 @@ void LibraryModel::BeginReset() {
 
   root_ = new LibraryItem(this);
   root_->lazy_loaded = false;
-
-  if (show_various_artists_) {
-    // Various artists?
-    if (IsArtistGroupBy(group_by_[0]) &&
-        backend_->HasCompilations(query_options_))
-      CreateCompilationArtistNode(false, root_);
-  }
 
   // Smart playlists?
   if (show_smart_playlists_ && query_options_.filter().isEmpty())

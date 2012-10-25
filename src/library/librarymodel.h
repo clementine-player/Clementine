@@ -189,6 +189,8 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
   SqlRowList RunQuery(LibraryItem* parent, bool signal);
   void PostQuery(LibraryItem* parent, SqlRowList rows, bool signal);
 
+  bool HasCompilations(const LibraryQuery query);
+
   void BeginReset();
 
   // Functions for working with queries and creating items.
