@@ -18,13 +18,14 @@
 #include "musicbrainzcoverprovider.h"
 
 #include <algorithm>
-
-#include <boost/bind.hpp>
+#include <functional>
 
 #include <QXmlStreamReader>
 
 #include "core/closure.h"
 #include "core/network.h"
+
+using std::mem_fun;
 
 namespace {
 
@@ -99,7 +100,7 @@ void MusicbrainzCoverProvider::ImageCheckFinished(int id) {
   QList<QNetworkReply*> replies = image_checks_.values(id);
   int finished_count = std::count_if(
       replies.constBegin(), replies.constEnd(),
-      boost::bind(&QNetworkReply::isFinished, _1));
+      mem_fun(&QNetworkReply::isFinished));
   if (finished_count == replies.size()) {
     QString cover_name = cover_names_.take(id);
     QList<CoverSearchResult> results;
