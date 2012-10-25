@@ -104,6 +104,11 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
     }
   };
 
+  struct QueryResult {
+    SqlRowList rows;
+    bool create_va;
+  };
+
   LibraryBackend* backend() const { return backend_; }
   LibraryDirectoryModel* directory_model() const { return dir_model_; }
 
@@ -186,8 +191,8 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
   // Provides some optimisations for loading the list of items in the root.
   // This gets called a lot when filtering the playlist, so it's nice to be
   // able to do it in a background thread.
-  SqlRowList RunQuery(LibraryItem* parent, bool signal);
-  void PostQuery(LibraryItem* parent, SqlRowList rows, bool signal);
+  struct QueryResult RunQuery(LibraryItem* parent, bool signal);
+  void PostQuery(LibraryItem* parent, struct QueryResult result, bool signal);
 
   bool HasCompilations(const LibraryQuery query);
 

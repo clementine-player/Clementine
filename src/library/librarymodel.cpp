@@ -53,8 +53,8 @@ const char* LibraryModel::kSmartPlaylistsSettingsGroup = "SerialisedSmartPlaylis
 const int LibraryModel::kSmartPlaylistsVersion = 4;
 const int LibraryModel::kPrettyCoverSize = 32;
 
-typedef QFuture<SqlRowList> RootQueryFuture;
-typedef QFutureWatcher<SqlRowList> RootQueryWatcher;
+typedef QFuture<struct LibraryModel::QueryResult> RootQueryFuture;
+typedef QFutureWatcher<struct LibraryModel::QueryResult> RootQueryWatcher;
 
 static bool IsArtistGroupBy(const LibraryModel::GroupBy by) {
   return by == LibraryModel::GroupBy_Artist || by == LibraryModel::GroupBy_AlbumArtist;
@@ -565,7 +565,10 @@ bool LibraryModel::HasCompilations(const LibraryQuery query) {
   return q.Next();
 }
 
-SqlRowList LibraryModel::RunQuery(LibraryItem* parent, bool signal) {
+struct LibraryModel::QueryResult LibraryModel::RunQuery(LibraryItem* parent,
+                                                        bool signal) {
+  struct QueryResult result = { .rows = SqlRowList(), .create_va = false };
+
   // Information about what we want the children to be
   int child_level = parent == root_ ? 0 : parent->container_level + 1;
   GroupBy child_type = child_level >= 3 ? GroupBy_None : group_by_[child_level];
@@ -586,7 +589,7 @@ SqlRowList LibraryModel::RunQuery(LibraryItem* parent, bool signal) {
   if (child_level == 0 && IsArtistGroupBy(child_type)) {
     // Various artists?
     if (show_various_artists_ && HasCompilations(q))
-      CreateCompilationArtistNode(signal, parent);
+      result.create_va = true;
 
     q.AddCompilationRequirement(false);
   }
@@ -594,23 +597,26 @@ SqlRowList LibraryModel::RunQuery(LibraryItem* parent, bool signal) {
   // Execute the query
   QMutexLocker l(backend_->db()->Mutex());
   if (!backend_->ExecQuery(&q))
-    return SqlRowList();
+    return result;
 
-  SqlRowList rows;
   while (q.Next()) {
-    rows << SqlRow(q);
+    result.rows << SqlRow(q);
   }
-  return rows;
+  return result;
 }
 
-void LibraryModel::PostQuery(LibraryItem* parent, SqlRowList rows,
-		             bool signal ) {
+void LibraryModel::PostQuery(LibraryItem* parent,
+		             struct LibraryModel::QueryResult result,
+			     bool signal ) {
   // Information about what we want the children to be
   int child_level = parent == root_ ? 0 : parent->container_level + 1;
   GroupBy child_type = child_level >= 3 ? GroupBy_None : group_by_[child_level];
 
+  if (result.create_va)
+    CreateCompilationArtistNode(signal, parent);
+
   // Step through the results
-  foreach (const SqlRow& row, rows) {
+  foreach (const SqlRow& row, result.rows) {
     // Create the item - it will get inserted into the model here
     LibraryItem* item =
         ItemFromQuery(child_type, signal, child_level == 0, parent, row,
@@ -629,9 +635,9 @@ void LibraryModel::LazyPopulate(LibraryItem* parent, bool signal) {
     return;
   parent->lazy_loaded = true;
 
-  SqlRowList rows = RunQuery(parent, signal);
+  struct QueryResult result = RunQuery(parent, signal);
 
-  PostQuery(parent, rows, signal);
+  PostQuery(parent, result, signal);
 }
 
 void LibraryModel::ResetAsync() {
@@ -645,13 +651,13 @@ void LibraryModel::ResetAsync() {
 
 void LibraryModel::ResetAsyncQueryFinished() {
   RootQueryWatcher* watcher = static_cast<RootQueryWatcher*>(sender());
-  const SqlRowList rows = watcher->result();
+  const struct QueryResult result = watcher->result();
   watcher->deleteLater();
 
   BeginReset();
   root_->lazy_loaded = true;
 
-  PostQuery(root_, rows , false);
+  PostQuery(root_, result , false);
 
   if (init_task_id_ != -1) {
     app_->task_manager()->SetTaskFinished(init_task_id_);
