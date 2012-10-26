@@ -14,7 +14,8 @@ tar -czf $name-$version.tar.gz "$root" \
     --exclude-vcs \
     --exclude "$root/bin/*" \
     --exclude "$root/debian" \
-    --exclude "$root/dist/*.tar.gz"
+    --exclude "$root/dist/*.tar.gz" \
+    --exclude "$root/CMakeLists.txt.user"
 
 echo "Also creating ${name}_${version}~${deb_dist}.orig.tar.gz..."
 cp "$name-$version.tar.gz" "${name}_${version}~${deb_dist}.orig.tar.gz"
