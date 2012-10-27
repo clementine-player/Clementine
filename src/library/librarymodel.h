@@ -105,6 +105,8 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
   };
 
   struct QueryResult {
+    QueryResult() : create_va(false) {}
+
     SqlRowList rows;
     bool create_va;
   };
@@ -191,10 +193,10 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
   // Provides some optimisations for loading the list of items in the root.
   // This gets called a lot when filtering the playlist, so it's nice to be
   // able to do it in a background thread.
-  struct QueryResult RunQuery(LibraryItem* parent, bool signal);
-  void PostQuery(LibraryItem* parent, struct QueryResult result, bool signal);
+  QueryResult RunQuery(LibraryItem* parent);
+  void PostQuery(LibraryItem* parent, const QueryResult& result, bool signal);
 
-  bool HasCompilations(const LibraryQuery query);
+  bool HasCompilations(const LibraryQuery& query);
 
   void BeginReset();
 
