@@ -311,7 +311,6 @@ endif()
 set_target_properties(tag PROPERTIES
   VERSION ${TAGLIB_SOVERSION_MAJOR}.${TAGLIB_SOVERSION_MINOR}.${TAGLIB_SOVERSION_PATCH}
   SOVERSION ${TAGLIB_SOVERSION_MAJOR}
-  INSTALL_NAME_DIR ${LIB_INSTALL_DIR}
   DEFINE_SYMBOL MAKE_TAGLIB_LIB
   LINK_INTERFACE_LIBRARIES ""
 )
@@ -320,7 +319,7 @@ foreach(header ${tag_HDRS})
   get_filename_component(header_name ${header} NAME)
   configure_file(
     "${header}"
-    "${CMAKE_CURRENT_BINARY_DIR}/headers/${header_name}"
+    "${CMAKE_CURRENT_BINARY_DIR}/headers/taglib/${header_name}"
     COPY_ONLY
   )
 endforeach()
