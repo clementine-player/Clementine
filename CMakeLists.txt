@@ -73,12 +73,15 @@ find_path(LASTFM1_INCLUDE_DIRS lastfm/Track.h)
 
 find_path(SPARSEHASH_INCLUDE_DIRS google/sparsetable)
 
-# Compile our own taglib if requested.  This is so we can build with Google
-# Drive support on old versions of Ubuntu.
-option(USE_BUILTIN_TAGLIB "Compile a builtin Taglib instead of using the system's version" OFF)
-if(USE_BUILTIN_TAGLIB)
+# Google Drive support needs Taglib 1.8, but this version isn't in old Ubuntu
+# distros.  If the user seems to want Drive support (ie. they have sparsehash
+# installed and haven't disabled drive), and has an old taglib, compile our
+# internal one and use that instead.
+option(USE_BUILTIN_TAGLIB "If the system's version of Taglib is too old for Google Drive support, compile our builtin version instead" ON)
+if (USE_BUILTIN_TAGLIB AND ENABLE_GOOGLE_DRIVE AND SPARSEHASH_INCLUDE_DIRS AND
+    TAGLIB_VERSION VERSION_LESS 1.8)
   set(TAGLIB_VERSION 1.8)
-  set(TAGLIB_INCLUDE_DIRS "${CMAKE_BINARY_DIR}/3rdparty/taglib/headers/")
+  set(TAGLIB_INCLUDE_DIRS "${CMAKE_BINARY_DIR}/3rdparty/taglib/headers/taglib/;${CMAKE_BINARY_DIR}/3rdparty/taglib/headers/")
   set(TAGLIB_LIBRARY_DIRS "")
   set(TAGLIB_LIBRARIES tag)
   add_subdirectory(3rdparty/taglib)
@@ -178,7 +181,7 @@ optional_component(BREAKPAD OFF "Crash reporting")
 
 optional_component(GOOGLE_DRIVE ON "Google Drive support"
   DEPENDS "Google sparsehash" SPARSEHASH_INCLUDE_DIRS
-  DEPENDS "Taglib 1.8 beta" "TAGLIB_VERSION VERSION_GREATER 1.7.999"
+  DEPENDS "Taglib 1.8" "TAGLIB_VERSION VERSION_GREATER 1.7.999"
 )
 
 optional_component(AUDIOCD ON "Devices: Audio CD support"

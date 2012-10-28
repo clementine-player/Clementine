@@ -320,7 +320,7 @@ foreach(header ${tag_HDRS})
   get_filename_component(header_name ${header} NAME)
   configure_file(
     "${header}"
-    "${CMAKE_CURRENT_BINARY_DIR}/headers/${header_name}"
+    "${CMAKE_CURRENT_BINARY_DIR}/headers/taglib/${header_name}"
     COPY_ONLY
   )
 endforeach()
