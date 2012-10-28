@@ -73,6 +73,17 @@ find_path(LASTFM1_INCLUDE_DIRS lastfm/Track.h)
 
 find_path(SPARSEHASH_INCLUDE_DIRS google/sparsetable)
 
+# Compile our own taglib if requested.  This is so we can build with Google
+# Drive support on old versions of Ubuntu.
+option(USE_BUILTIN_TAGLIB "Compile a builtin Taglib instead of using the system's version" OFF)
+if(USE_BUILTIN_TAGLIB)
+  set(TAGLIB_VERSION 1.8)
+  set(TAGLIB_INCLUDE_DIRS "${CMAKE_BINARY_DIR}/3rdparty/taglib/headers/")
+  set(TAGLIB_LIBRARY_DIRS "")
+  set(TAGLIB_LIBRARIES tag)
+  add_subdirectory(3rdparty/taglib)
+endif()
+
 if(LASTFM_INCLUDE_DIRS AND LASTFM1_INCLUDE_DIRS)
   set(HAVE_LIBLASTFM1 ON)
 endif()
