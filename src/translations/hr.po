@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-10-18 09:26+0000\n"
+"PO-Revision-Date: 2012-10-25 11:33+0000\n"
 "Last-Translator: gogo <trebelnik2@gmail.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -704,7 +704,7 @@ msgstr "Prvi izvođač"
 
 #: ../bin/src/ui_transcodedialog.h:210
 msgid "Audio format"
-msgstr "Audio format"
+msgstr "Format zvuka"
 
 #: internet/digitallyimportedsettingspage.cpp:82
 #: internet/magnatunesettingspage.cpp:113 internet/lastfmservice.cpp:427
@@ -787,7 +787,7 @@ msgstr "Osnovno plava"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:167
 msgid "Basic audio type"
-msgstr "Osnovni audio format"
+msgstr "Osnovni zvučni format"
 
 #: ../bin/src/ui_behavioursettingspage.h:169
 msgid "Behavior"
@@ -1802,7 +1802,7 @@ msgstr "Greška pri obradi %1: %2"
 
 #: playlist/songloaderinserter.cpp:100
 msgid "Error while loading audio CD"
-msgstr "Greška pri učitavanju audio CD-a"
+msgstr "Greška pri učitavanju glazbenog CD-a"
 
 #: library/library.cpp:61
 msgid "Ever played"
@@ -2087,7 +2087,7 @@ msgstr "Pun Treble"
 
 #: ../bin/src/ui_playbacksettingspage.h:283
 msgid "GStreamer audio engine"
-msgstr "GStreamer audio pogon"
+msgstr "GStreamer zvučni pogon"
 
 #: ui/settingsdialog.cpp:117
 msgid "General"
@@ -2616,7 +2616,7 @@ msgstr "Učitaj iPod bazu podataka"
 msgid "Loading smart playlist"
 msgstr "Učitaj pametni popis izvođenja"
 
-#: library/librarymodel.cpp:134
+#: library/librarymodel.cpp:138
 msgid "Loading songs"
 msgstr "Učitavanje pjesama"
 
@@ -2633,7 +2633,7 @@ msgstr "Učitaj  pjesmu"
 msgid "Loading tracks info"
 msgstr "Učitavanje informacija o pjesmi"
 
-#: library/librarymodel.cpp:129 podcasts/podcastdiscoverymodel.cpp:97
+#: library/librarymodel.cpp:133 podcasts/podcastdiscoverymodel.cpp:97
 #: widgets/prettyimage.cpp:168 widgets/widgetfadehelper.cpp:99
 #: ../bin/src/ui_addpodcastdialog.h:180 ../bin/src/ui_searchpreview.h:106
 msgid "Loading..."
@@ -3086,7 +3086,7 @@ msgstr "Otvori %1 u pregledniku"
 
 #: ../bin/src/ui_mainwindow.h:683
 msgid "Open &audio CD..."
-msgstr "Otvorite &audio CD..."
+msgstr "Otvorite &glazbeni CD..."
 
 #: podcasts/addpodcastdialog.cpp:230
 msgid "Open OPML file"
@@ -3169,7 +3169,7 @@ msgstr "Izlazni dodatak"
 
 #: ../bin/src/ui_organisedialog.h:207
 msgid "Overwrite existing files"
-msgstr "Prekopirajte preko postojeće datoteke"
+msgstr "Prekopiraj preko postojeće datoteke"
 
 #: ../bin/src/ui_podcastinfowidget.h:195
 msgid "Owner"
@@ -3346,7 +3346,7 @@ msgstr "Prioritetni nazivi omota albuma (odvojeno zarezom)"
 
 #: ../bin/src/ui_magnatunesettingspage.h:167
 msgid "Preferred audio format"
-msgstr "Željeni audio format"
+msgstr "Željeni zvučni format"
 
 #: ../bin/src/ui_spotifysettingspage.h:218
 msgid "Preferred bitrate"
@@ -3358,7 +3358,7 @@ msgstr "Željeni format"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:174
 msgid "Premium audio type"
-msgstr "Premium audio format"
+msgstr "Premium zvučni format"
 
 #: ../bin/src/ui_equalizer.h:119
 msgid "Preset:"
@@ -4049,7 +4049,7 @@ msgstr "Mala bočna traka"
 msgid "Smart playlist"
 msgstr "Pametni popis izvođenja"
 
-#: library/librarymodel.cpp:1156
+#: library/librarymodel.cpp:1149
 msgid "Smart playlists"
 msgstr "Pametni popisi izvođenja"
 
@@ -4546,8 +4546,8 @@ msgstr "Ultra širokopojasni (UŠP)"
 msgid "Unable to download %1 (%2)"
 msgstr "Nije moguće preuzeti %1 (%2)"
 
-#: core/song.cpp:338 library/librarymodel.cpp:296 library/librarymodel.cpp:301
-#: library/librarymodel.cpp:954 playlist/playlistdelegates.cpp:309
+#: core/song.cpp:338 library/librarymodel.cpp:301 library/librarymodel.cpp:306
+#: library/librarymodel.cpp:947 playlist/playlistdelegates.cpp:309
 #: playlist/playlistmanager.cpp:391 playlist/playlistmanager.cpp:394
 #: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:416
 #: ui/edittagdialog.cpp:457
@@ -4710,7 +4710,7 @@ msgstr "VBR MP3"
 msgid "Variable bit rate"
 msgstr "Promjenjiva brzina prijenosa"
 
-#: globalsearch/globalsearchmodel.cpp:103 library/librarymodel.cpp:233
+#: globalsearch/globalsearchmodel.cpp:103 library/librarymodel.cpp:238
 #: playlist/playlistmanager.cpp:406 ui/albumcovermanager.cpp:247
 msgid "Various artists"
 msgstr "Razni izvođači"

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-10-21 14:17+0000\n"
+"PO-Revision-Date: 2012-10-26 13:03+0000\n"
 "Last-Translator: Sérgio Marques <smarquespt@gmail.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -779,7 +779,7 @@ msgstr "Banir"
 
 #: analyzers/baranalyzer.cpp:19
 msgid "Bar analyzer"
-msgstr "Analisador de barras"
+msgstr "Barras"
 
 #: ../bin/src/ui_notificationssettingspage.h:428
 msgid "Basic Blue"
@@ -815,7 +815,7 @@ msgstr "Taxa de dados"
 
 #: analyzers/blockanalyzer.cpp:22
 msgid "Block analyzer"
-msgstr "Analisador de blocos"
+msgstr "Blocos"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:141
 msgid "Block type"
@@ -831,7 +831,7 @@ msgstr "Conteúdo"
 
 #: analyzers/boomanalyzer.cpp:8
 msgid "Boom analyzer"
-msgstr "Analisador \"Boom\""
+msgstr "Boom"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:146
 #: ../bin/src/ui_podcastsettingspage.h:242
@@ -949,11 +949,11 @@ msgstr "Eliminação"
 #: transcoder/transcodedialog.cpp:60 widgets/lineedit.cpp:41
 #: ../bin/src/ui_queuemanager.h:139
 msgid "Clear"
-msgstr "Apagar"
+msgstr "Limpar"
 
 #: ../bin/src/ui_mainwindow.h:661 ../bin/src/ui_mainwindow.h:663
 msgid "Clear playlist"
-msgstr "Apagar lista de reprodução"
+msgstr "Limpar lista de reprodução"
 
 #: smartplaylists/searchtermwidget.cpp:321 ../bin/src/ui_mainwindow.h:644
 #: visualisations/visualisationcontainer.cpp:211
@@ -1506,7 +1506,7 @@ msgstr "Desativar"
 #: globalsearch/searchproviderstatuswidget.cpp:47
 #: ../bin/src/ui_notificationssettingspage.h:405
 msgid "Disabled"
-msgstr "Inativo"
+msgstr "Inativa"
 
 #: playlist/playlist.cpp:1189 ui/organisedialog.cpp:61
 #: ../bin/src/ui_edittagdialog.h:655
@@ -1690,7 +1690,7 @@ msgstr "Apenas ativar os atalhos se o Clementine estiver evidenciado"
 msgid ""
 "Enable sources below to include them in search results.  Results will be "
 "displayed in this order."
-msgstr "Ative as fontes para as incluir nos resultados da procura. Os resultados serão exibidos por esta ordem"
+msgstr "Ative as fontes que quer utilizar na procura. Os resultados serão exibidos por esta ordem"
 
 #: core/globalshortcuts.cpp:62
 msgid "Enable/disable Last.fm scrobbling"
@@ -2349,7 +2349,7 @@ msgstr "Internet"
 
 #: ui/settingsdialog.cpp:138
 msgid "Internet providers"
-msgstr "Fornecedores na Internet"
+msgstr "Serviços na Internet"
 
 #: internet/lastfmservice.cpp:433
 msgid "Invalid API key"
@@ -2616,7 +2616,7 @@ msgstr "A carregar base de dados iPod"
 msgid "Loading smart playlist"
 msgstr "A carregar lista de reprodução inteligente"
 
-#: library/librarymodel.cpp:134
+#: library/librarymodel.cpp:138
 msgid "Loading songs"
 msgstr "A carregar faixas"
 
@@ -2633,7 +2633,7 @@ msgstr "A carregar faixas"
 msgid "Loading tracks info"
 msgstr "A carregar informação das faixas"
 
-#: library/librarymodel.cpp:129 podcasts/podcastdiscoverymodel.cpp:97
+#: library/librarymodel.cpp:133 podcasts/podcastdiscoverymodel.cpp:97
 #: widgets/prettyimage.cpp:168 widgets/widgetfadehelper.cpp:99
 #: ../bin/src/ui_addpodcastdialog.h:180 ../bin/src/ui_searchpreview.h:106
 msgid "Loading..."
@@ -2772,7 +2772,7 @@ msgstr "Taxa de dados máxima"
 #: visualisations/visualisationcontainer.cpp:108
 #, qt-format
 msgid "Medium (%1 fps)"
-msgstr "Média (%1 fps)"
+msgstr "Média (%1 ips)"
 
 #: visualisations/visualisationcontainer.cpp:118
 msgid "Medium (512x512)"
@@ -3445,7 +3445,7 @@ msgstr "Colocar esta faixa na fila"
 
 #: ../bin/src/ui_playbacksettingspage.h:278
 msgid "Radio (equal loudness for all tracks)"
-msgstr "Rádio (volume igual para todas as faixas)"
+msgstr "Faixa (volume igual para todas as faixas)"
 
 #: internet/groovesharkservice.cpp:593
 msgid "Radios"
@@ -4049,7 +4049,7 @@ msgstr "Barra lateral pequena"
 msgid "Smart playlist"
 msgstr "Lista de reprodução inteligente"
 
-#: library/librarymodel.cpp:1156
+#: library/librarymodel.cpp:1149
 msgid "Smart playlists"
 msgstr "Listas de reprodução inteligentes"
 
@@ -4546,8 +4546,8 @@ msgstr "Bando ultra larga (UWB)"
 msgid "Unable to download %1 (%2)"
 msgstr "Incapaz de transferir %1 (%2)"
 
-#: core/song.cpp:338 library/librarymodel.cpp:296 library/librarymodel.cpp:301
-#: library/librarymodel.cpp:954 playlist/playlistdelegates.cpp:309
+#: core/song.cpp:338 library/librarymodel.cpp:301 library/librarymodel.cpp:306
+#: library/librarymodel.cpp:947 playlist/playlistdelegates.cpp:309
 #: playlist/playlistmanager.cpp:391 playlist/playlistmanager.cpp:394
 #: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:416
 #: ui/edittagdialog.cpp:457
@@ -4710,7 +4710,7 @@ msgstr "VBR MP3"
 msgid "Variable bit rate"
 msgstr "Taxa de dados variável"
 
-#: globalsearch/globalsearchmodel.cpp:103 library/librarymodel.cpp:233
+#: globalsearch/globalsearchmodel.cpp:103 library/librarymodel.cpp:238
 #: playlist/playlistmanager.cpp:406 ui/albumcovermanager.cpp:247
 msgid "Various artists"
 msgstr "Vários artistas"
@@ -5057,7 +5057,7 @@ msgstr "contém"
 #: ../bin/src/ui_transcoderoptionsvorbis.h:207
 #: ../bin/src/ui_transcoderoptionsvorbis.h:210
 msgid "disabled"
-msgstr "inativo"
+msgstr "inativa"
 
 #: widgets/osd.cpp:114
 #, qt-format
