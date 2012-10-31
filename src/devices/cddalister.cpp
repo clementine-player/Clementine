@@ -15,11 +15,13 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include <cdio/cdio.h>
 #include <QFileInfo>
 #include <QMutex>
 #include <QThread>
 #include <QWaitCondition>
+
+// This must come after Qt includes
+#include <cdio/cdio.h>
 
 #include "cddalister.h"
 #include "core/logging.h"

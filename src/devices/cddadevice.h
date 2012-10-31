@@ -18,9 +18,11 @@
 #ifndef CDDADEVICE_H
 #define CDDADEVICE_H
 
+#include <QMutex>
+
+// These must come after Qt includes (issue 3247)
 #include <cdio/cdio.h>
 #include <gst/cdda/gstcddabasesrc.h>
-#include <QMutex>
 
 #include "connecteddevice.h"
 #include "core/song.h"
