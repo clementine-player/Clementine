@@ -58,6 +58,7 @@
 #include "musicbrainz/tagfetcher.h"
 #include "playlist/playlistbackend.h"
 #include "playlist/playlist.h"
+#include "playlist/playlistlistcontainer.h"
 #include "playlist/playlistmanager.h"
 #include "playlist/playlistsequence.h"
 #include "playlist/playlistview.h"
@@ -166,6 +167,7 @@ MainWindow::MainWindow(Application* app,
     global_search_view_(new GlobalSearchView(app_, this)),
     library_view_(new LibraryViewContainer(this)),
     file_view_(new FileView(this)),
+    playlist_list_(new PlaylistListContainer(this)),
     internet_view_(new InternetViewContainer(this)),
     device_view_(new DeviceView(this)),
     song_info_view_(new SongInfoView(this)),
@@ -228,6 +230,7 @@ MainWindow::MainWindow(Application* app,
   ui_->tabs->AddTab(global_search_view_, IconLoader::Load("search"), tr("Search"));
   ui_->tabs->AddTab(library_view_, IconLoader::Load("folder-sound"), tr("Library"));
   ui_->tabs->AddTab(file_view_, IconLoader::Load("document-open"), tr("Files"));
+  ui_->tabs->AddTab(playlist_list_, IconLoader::Load("view-media-playlist"), tr("Playlists"));
   ui_->tabs->AddTab(internet_view_, IconLoader::Load("applications-internet"), tr("Internet"));
   ui_->tabs->AddTab(device_view_, IconLoader::Load("multimedia-player-ipod-mini-blue"), tr("Devices"));
   ui_->tabs->AddSpacer();
@@ -263,6 +266,7 @@ MainWindow::MainWindow(Application* app,
   library_view_->view()->SetApplication(app_);
   internet_view_->SetApplication(app_);
   device_view_->SetApplication(app_);
+  playlist_list_->SetApplication(app_);
 
   organise_dialog_->SetDestinationModel(app_->library()->model()->directory_model());
 
@@ -369,10 +373,14 @@ MainWindow::MainWindow(Application* app,
   ui_->ban_button->setDefaultAction(ui_->action_ban);
   ui_->scrobbling_button->setDefaultAction(ui_->action_toggle_scrobbling);
   ui_->clear_playlist_button->setDefaultAction(ui_->action_clear_playlist);
-  ui_->playlist->SetActions(ui_->action_new_playlist, ui_->action_save_playlist,
+  ui_->playlist->SetActions(ui_->action_new_playlist,
                             ui_->action_load_playlist,
+                            ui_->action_save_playlist,
                             ui_->action_next_playlist,    /* These two actions aren't associated */
                             ui_->action_previous_playlist /* to a button but to the main window */ );
+  playlist_list_->SetActions(ui_->action_new_playlist,
+                             ui_->action_load_playlist,
+                             ui_->action_save_playlist);
 
 
 #ifdef ENABLE_VISUALISATIONS
@@ -1364,7 +1372,7 @@ void MainWindow::PlaylistRightClick(const QPoint& global_pos, const QModelIndex&
   add_to_another_menu->setIcon(IconLoader::Load("list-add"));
 
   PlaylistBackend::Playlist playlist;
-  foreach (playlist, app_->playlist_backend()->GetAllPlaylists()) {
+  foreach (playlist, app_->playlist_backend()->GetAllOpenPlaylists()) {
     //don't add the current playlist
     if (playlist.id != app_->playlist_manager()->current()->id()) {
       QAction* existing_playlist = new QAction(this);

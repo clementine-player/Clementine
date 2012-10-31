@@ -37,8 +37,14 @@ class PlaylistBackend : public QObject {
   Q_INVOKABLE PlaylistBackend(Application* app, QObject* parent = 0);
 
   struct Playlist {
+    Playlist()
+      : id(-1),
+        last_played(0) {
+    }
+
     int id;
     QString name;
+    QString ui_path;
     int last_played;
     QString dynamic_type;
     QString dynamic_backend;
@@ -53,11 +59,13 @@ class PlaylistBackend : public QObject {
 
   static const int kSongTableJoins;
 
+  PlaylistList GetAllOpenPlaylists();
   PlaylistList GetAllPlaylists();
   PlaylistBackend::Playlist GetPlaylist(int id);
   PlaylistItemFuture GetPlaylistItems(int playlist);
 
   void SetPlaylistOrder(const QList<int>& ids);
+  void SetPlaylistUiPath(int id, const QString& path);
 
   int CreatePlaylist(const QString& name, const QString& special_type);
   void SavePlaylistAsync(int playlist, const PlaylistItemList& items,
@@ -77,6 +85,8 @@ class PlaylistBackend : public QObject {
 
   PlaylistItemPtr NewSongFromQuery(const SqlRow& row, boost::shared_ptr<NewSongFromQueryState> state);
   PlaylistItemPtr RestoreCueData(PlaylistItemPtr item, boost::shared_ptr<NewSongFromQueryState> state);
+
+  PlaylistList GetPlaylists(bool open_in_ui);
 
   Application* app_;
   Database* db_;

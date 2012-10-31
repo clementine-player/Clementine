@@ -103,13 +103,11 @@ PlaylistView* PlaylistContainer::view() const {
   return ui_->playlist;
 }
 
-void PlaylistContainer::SetActions(
-    QAction* new_playlist, QAction* save_playlist, QAction* load_playlist,
-    QAction* next_playlist, QAction* previous_playlist) {
-  ui_->create_new->setDefaultAction(new_playlist);
-  ui_->save->setDefaultAction(save_playlist);
-  ui_->load->setDefaultAction(load_playlist);
-
+void PlaylistContainer::SetActions(QAction* new_playlist,
+                                   QAction* load_playlist,
+                                   QAction* save_playlist,
+                                   QAction* next_playlist,
+                                   QAction* previous_playlist) {
   ui_->tab_bar->SetActions(new_playlist, load_playlist);
 
   connect(new_playlist, SIGNAL(triggered()), SLOT(NewPlaylist()));
@@ -127,8 +125,8 @@ void PlaylistContainer::SetManager(PlaylistManager *manager) {
           manager, SLOT(SetCurrentPlaylist(int)));
   connect(ui_->tab_bar, SIGNAL(Rename(int,QString)),
           manager, SLOT(Rename(int,QString)));
-  connect(ui_->tab_bar, SIGNAL(Remove(int)),
-          manager, SLOT(Remove(int)));
+  connect(ui_->tab_bar, SIGNAL(Close(int)),
+          manager, SLOT(Close(int)));
   connect(ui_->tab_bar, SIGNAL(PlaylistOrderChanged(QList<int>)),
           manager, SLOT(ChangePlaylistOrder(QList<int>)));
 
@@ -136,8 +134,8 @@ void PlaylistContainer::SetManager(PlaylistManager *manager) {
           SLOT(SetViewModel(Playlist*)));
   connect(manager, SIGNAL(PlaylistAdded(int,QString)),
           SLOT(PlaylistAdded(int,QString)));
-  connect(manager, SIGNAL(PlaylistRemoved(int)),
-          SLOT(PlaylistRemoved(int)));
+  connect(manager, SIGNAL(PlaylistClosed(int)),
+          SLOT(PlaylistClosed(int)));
   connect(manager, SIGNAL(PlaylistRenamed(int,QString)),
           SLOT(PlaylistRenamed(int,QString)));
 }
@@ -260,7 +258,7 @@ void PlaylistContainer::PlaylistAdded(int id, const QString &name) {
   }
 }
 
-void PlaylistContainer::PlaylistRemoved(int id) {
+void PlaylistContainer::PlaylistClosed(int id) {
   ui_->tab_bar->RemoveTab(id);
 
   if (ui_->tab_bar->count() <= 1)

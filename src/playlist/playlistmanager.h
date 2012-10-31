@@ -77,7 +77,9 @@ public slots:
   virtual void Load(const QString& filename) = 0;
   virtual void Save(int id, const QString& filename) = 0;
   virtual void Rename(int id, const QString& new_name) = 0;
-  virtual void Remove(int id) = 0;
+  virtual void Delete(int id) = 0;
+  virtual bool Close(int id) = 0;
+  virtual void Open(int id) = 0;
   virtual void ChangePlaylistOrder(const QList<int>& ids) = 0;
 
   virtual void SongChangeRequestProcessed(const QUrl& url, bool valid) = 0;
@@ -107,7 +109,8 @@ signals:
   void PlaylistManagerInitialized();
 
   void PlaylistAdded(int id, const QString& name);
-  void PlaylistRemoved(int id);
+  void PlaylistDeleted(int id);
+  void PlaylistClosed(int id);
   void PlaylistRenamed(int id, const QString& new_name);
   void CurrentChanged(Playlist* new_playlist);
   void ActiveChanged(Playlist* new_playlist);
@@ -171,7 +174,9 @@ public slots:
   void Load(const QString& filename);
   void Save(int id, const QString& filename);
   void Rename(int id, const QString& new_name);
-  void Remove(int id);
+  void Delete(int id);
+  bool Close(int id);
+  void Open(int id);
   void ChangePlaylistOrder(const QList<int>& ids);
 
   void SetCurrentPlaylist(int id);
@@ -179,6 +184,10 @@ public slots:
   void SetActiveToCurrent() { SetActivePlaylist(current_id()); }
 
   void SelectionChanged(const QItemSelection& selection);
+
+  // Makes a playlist current if it's open already, or opens it and makes it
+  // current if it is hidden.
+  void SetCurrentOrOpen(int id);
 
   // Convenience slots that defer to either current() or active()
   void ClearCurrent();
@@ -205,7 +214,8 @@ private slots:
   void LoadFinished(bool success);
 
 private:
-  Playlist* AddPlaylist(int id, const QString& name, const QString& special_type);
+  Playlist* AddPlaylist(int id, const QString& name, const QString& special_type,
+                        const QString& ui_path);
 
 private:
   struct Data {

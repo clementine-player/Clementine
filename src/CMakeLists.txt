@@ -219,6 +219,8 @@ set(SOURCES
   playlist/playlistfilter.cpp
   playlist/playlistheader.cpp
   playlist/playlistitem.cpp
+  playlist/playlistlistcontainer.cpp
+  playlist/playlistlistmodel.cpp
   playlist/playlistmanager.cpp
   playlist/playlistsequence.cpp
   playlist/playlisttabbar.cpp
@@ -486,6 +488,8 @@ set(HEADERS
   playlist/playlistfilter.h
   playlist/playlistheader.h
   playlist/playlistitemmimedata.h
+  playlist/playlistlistcontainer.h
+  playlist/playlistlistmodel.h
   playlist/playlistmanager.h
   playlist/playlistsequence.h
   playlist/playlisttabbar.h
@@ -643,6 +647,7 @@ set(UI
 
   playlist/dynamicplaylistcontrols.ui
   playlist/playlistcontainer.ui
+  playlist/playlistlistcontainer.ui
   playlist/playlistsequence.ui
   playlist/queuemanager.ui
 

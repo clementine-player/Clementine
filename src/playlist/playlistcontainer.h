@@ -41,9 +41,9 @@ public:
 
   static const char* kSettingsGroup;
 
-  void SetActions(QAction* new_playlist, QAction* save_playlist,
-                  QAction* load_playlist, QAction* next_playlist, QAction*
-                  previous_playlist);
+  void SetActions(QAction* new_playlist, QAction* load_playlist,
+                  QAction* save_playlist,
+                  QAction* next_playlist, QAction* previous_playlist);
   void SetManager(PlaylistManager* manager);
 
   PlaylistView* view() const;
@@ -53,7 +53,6 @@ public:
 signals:
   void TabChanged(int id);
   void Rename(int id, const QString& new_name);
-  void Remove(int id);
 
   void UndoRedoActionsChanged(QAction* undo, QAction* redo);
   void ViewSelectionModelChanged();
@@ -72,7 +71,7 @@ private slots:
 
   void SetViewModel(Playlist* playlist);
   void PlaylistAdded(int id, const QString& name);
-  void PlaylistRemoved(int id);
+  void PlaylistClosed(int id);
   void PlaylistRenamed(int id, const QString& new_name);
 
   void ActivePlaying();
