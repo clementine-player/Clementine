@@ -23,7 +23,6 @@
 
 class Ui_PlaylistContainer;
 
-class DidYouMean;
 class LineEditInterface;
 class Playlist;
 class PlaylistManager;
@@ -47,7 +46,6 @@ public:
                   previous_playlist);
   void SetManager(PlaylistManager* manager);
 
-  DidYouMean* did_you_mean() const { return did_you_mean_; }
   PlaylistView* view() const;
 
   bool eventFilter(QObject *objectWatched, QEvent *event);
@@ -91,7 +89,6 @@ private slots:
   void UpdateFilter();
   void FocusOnFilter(QKeyEvent *event);
 
-  void DidYouMeanAccepted(const QString& text);
   void UpdateNoMatchesLabel();
 
 private:
@@ -116,8 +113,6 @@ private:
   QTimeLine* tab_bar_animation_;
 
   QLabel* no_matches_label_;
-
-  DidYouMean* did_you_mean_;
 
   QTimer* filter_timer_;
 };

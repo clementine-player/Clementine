@@ -50,8 +50,7 @@ public:
   void set_text_by_id(int id, const QString& text);
 
   void RemoveTab(int id);
-  void InsertTab(int id, int index, const QString& text,
-                 const QIcon& icon = QIcon());
+  void InsertTab(int id, int index, const QString& text);
 
 signals:
   void CurrentIdChanged(int id);

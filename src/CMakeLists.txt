@@ -224,7 +224,6 @@ set(SOURCES
   playlist/playlisttabbar.cpp
   playlist/playlistundocommands.cpp
   playlist/playlistview.cpp
-  playlist/specialplaylisttype.cpp
   playlist/queue.cpp
   playlist/queuemanager.cpp
   playlist/songloaderinserter.cpp

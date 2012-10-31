@@ -1,6 +1,7 @@
 #include "blobversion.h"
 #include "config.h"
 #include "internetmodel.h"
+#include "searchboxwidget.h"
 #include "spotifyserver.h"
 #include "spotifyservice.h"
 #include "core/application.h"
@@ -16,8 +17,6 @@
 #include "playlist/playlist.h"
 #include "playlist/playlistcontainer.h"
 #include "playlist/playlistmanager.h"
-#include "searchboxwidget.h"
-#include "widgets/didyoumean.h"
 #include "ui/iconloader.h"
 #include "widgets/didyoumean.h"
 

@@ -33,7 +33,6 @@ class PlaylistBackend;
 class PlaylistContainer;
 class PlaylistParser;
 class PlaylistSequence;
-class SpecialPlaylistType;
 class TaskManager;
 
 class QModelIndex;
@@ -71,10 +70,6 @@ public:
   virtual PlaylistSequence* sequence() const = 0;
   virtual PlaylistParser* parser() const = 0;
   virtual PlaylistContainer* playlist_container() const = 0;
-
-  virtual void RegisterSpecialPlaylistType(SpecialPlaylistType* type) = 0;
-  virtual void UnregisterSpecialPlaylistType(SpecialPlaylistType* type) = 0;
-  virtual SpecialPlaylistType* GetPlaylistType(const QString& type) const = 0;
 
 public slots:
   virtual void New(const QString& name, const SongList& songs = SongList(),
@@ -170,10 +165,6 @@ public:
   PlaylistParser* parser() const { return parser_; }
   PlaylistContainer* playlist_container() const { return playlist_container_; }
 
-  void RegisterSpecialPlaylistType(SpecialPlaylistType* type);
-  void UnregisterSpecialPlaylistType(SpecialPlaylistType* type);
-  SpecialPlaylistType* GetPlaylistType(const QString& type) const;
-
 public slots:
   void New(const QString& name, const SongList& songs = SongList(),
            const QString& special_type = QString());
@@ -233,9 +224,6 @@ private:
 
   // key = id
   QMap<int, Data> playlists_;
-
-  QMap<QString, SpecialPlaylistType*> special_playlist_types_;
-  SpecialPlaylistType* default_playlist_type_;
 
   int current_;
   int active_;

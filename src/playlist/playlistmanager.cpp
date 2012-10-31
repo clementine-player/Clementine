@@ -20,7 +20,6 @@
 #include "playlistcontainer.h"
 #include "playlistmanager.h"
 #include "playlistview.h"
-#include "specialplaylisttype.h"
 #include "core/application.h"
 #include "core/logging.h"
 #include "core/player.h"
@@ -43,7 +42,6 @@ PlaylistManager::PlaylistManager(Application* app, QObject *parent)
     library_backend_(NULL),
     sequence_(NULL),
     parser_(NULL),
-    default_playlist_type_(new DefaultPlaylistType),
     current_(-1),
     active_(-1)
 {
@@ -56,9 +54,6 @@ PlaylistManager::~PlaylistManager() {
   foreach (const Data& data, playlists_.values()) {
     delete data.p;
   }
-
-  qDeleteAll(special_playlist_types_.values());
-  delete default_playlist_type_;
 }
 
 void PlaylistManager::Init(LibraryBackend* library_backend,
@@ -413,36 +408,4 @@ QString PlaylistManager::GetNameForNewPlaylist(const SongList& songs) {
   }
 
   return result;
-}
-
-void PlaylistManager::RegisterSpecialPlaylistType(SpecialPlaylistType* type) {
-  const QString name = type->name();
-
-  if (special_playlist_types_.contains(name)) {
-    qLog(Warning) << "Tried to register a special playlist type" << name
-                  << "but one was already registered";
-    return;
-  }
-
-  qLog(Info) << "Registered special playlist type" << name;
-  special_playlist_types_.insert(name, type);
-}
-
-void PlaylistManager::UnregisterSpecialPlaylistType(SpecialPlaylistType* type) {
-  const QString name = special_playlist_types_.key(type);
-  if (name.isEmpty()) {
-    qLog(Warning) << "Tried to unregister a special playlist type" << type->name()
-                  << "that wasn't registered";
-    return;
-  }
-
-  qLog(Info) << "Unregistered special playlist type" << name;
-  special_playlist_types_.remove(name);
-}
-
-SpecialPlaylistType* PlaylistManager::GetPlaylistType(const QString& type) const {
-  if (special_playlist_types_.contains(type)) {
-    return special_playlist_types_[type];
-  }
-  return default_playlist_type_;
 }

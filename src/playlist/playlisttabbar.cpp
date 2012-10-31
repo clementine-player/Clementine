@@ -226,13 +226,11 @@ void PlaylistTabBar::CurrentIndexChanged(int index) {
     emit CurrentIdChanged(tabData(index).toInt());
 }
 
-void PlaylistTabBar::InsertTab(int id, int index, const QString& text,
-                               const QIcon& icon) {
+void PlaylistTabBar::InsertTab(int id, int index, const QString& text) {
   suppress_current_changed_ = true;
   insertTab(index, text);
   setTabData(index, id);
   setTabToolTip(index, text);
-  setTabIcon(index, icon);
   suppress_current_changed_ = false;
 
   if (currentIndex() == index)

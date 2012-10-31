@@ -10,7 +10,6 @@
 
 #include <boost/shared_ptr.hpp>
 
-class DidYouMean;
 class Playlist;
 class SearchBoxWidget;
 class SpotifyServer;
