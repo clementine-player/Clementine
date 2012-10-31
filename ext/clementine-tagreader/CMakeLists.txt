@@ -38,6 +38,12 @@ target_link_libraries(clementine-tagreader
   libclementine-tagreader
 )
 
+if(${CMAKE_SYSTEM_NAME} MATCHES "FreeBSD")
+  target_link_libraries(clementine-tagreader
+    execinfo
+  )
+endif(${CMAKE_SYSTEM_NAME} MATCHES "FreeBSD")
+
 if(APPLE)
   target_link_libraries(clementine-tagreader
     /System/Library/Frameworks/Foundation.framework
