@@ -520,13 +520,9 @@ bool IsLaptop() {
   }
 
   return !(status.BatteryFlag & 128); // 128 = no system battery
-#endif
-
-#ifdef Q_OS_LINUX
+#elif defined(Q_OS_LINUX)
   return !QDir("/proc/acpi/battery").entryList(QDir::Dirs | QDir::NoDotAndDotDot).isEmpty();
-#endif
-
-#ifdef Q_OS_MAC
+#elif defined(Q_OS_MAC)
   ScopedCFTypeRef<CFTypeRef> power_sources(IOPSCopyPowerSourcesInfo());
   ScopedCFTypeRef<CFArrayRef> power_source_list(
       IOPSCopyPowerSourcesList(power_sources.get()));
@@ -539,6 +535,8 @@ bool IsLaptop() {
       return true;
     }
   }
+  return false;
+#else
   return false;
 #endif
 }
