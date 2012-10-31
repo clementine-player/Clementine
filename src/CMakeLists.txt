@@ -1206,15 +1206,19 @@ if (WIN32)
   endif (HAVE_SAC)
 endif (WIN32)
 
-if (LINUX)
+if (UNIX AND NOT APPLE)
   # Hack: the Gold linker pays attention to the order that libraries are
   # specified on the link line.  -lX11 and -ldl are provided earlier in the link
   # command but they're actually used by libraries that appear after them, so
   # they end up getting ignored.  This appends them to the very end of the link
   # line, ensuring they're always used.
   find_package(X11)
-  target_link_libraries(clementine_lib ${X11_X11_LIB} ${CMAKE_DL_LIBS})
-endif (LINUX)
+  if (${CMAKE_SYSTEM_NAME} MATCHES "FreeBSD")
+    target_link_libraries(clementine_lib ${X11_X11_LIB})
+  else ()
+    target_link_libraries(clementine_lib ${X11_X11_LIB} ${CMAKE_DL_LIBS})
+  endif ()
+endif ()
 
 add_dependencies(clementine_lib qtsingleapplication)
 
@@ -1241,6 +1245,11 @@ add_executable(clementine
   ${CLEMENTINE-WIN32-RESOURCES}
   main.cpp
 )
+
+if (${CMAKE_SYSTEM_NAME} MATCHES "FreeBSD")
+  target_link_libraries(clementine execinfo)
+endif (${CMAKE_SYSTEM_NAME} MATCHES "FreeBSD")
+
 target_link_libraries(clementine
   clementine_lib
 )
