@@ -236,7 +236,7 @@ QUrl GoogleDriveService::GetStreamingUrlFromSongId(const QString& id) {
   loop.exec();
 
   QUrl url(response->file().download_url());
-  url.setFragment(client_->access_token());
+  url.addQueryItem("access_token", client_->access_token());
   return url;
 }
 
