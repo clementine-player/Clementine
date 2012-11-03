@@ -20,6 +20,7 @@
 #include "searchtermwidget.h"
 #include "ui_querysearchpage.h"
 #include "ui_querysortpage.h"
+#include "core/logging.h"
 
 #include <QScrollBar>
 #include <QWizardPage>
@@ -239,7 +240,7 @@ void QueryWizardPlugin::RemoveSearchTerm() {
   if (index == -1)
     return;
 
-  delete search_page_->terms_.takeAt(index);
+  search_page_->terms_.takeAt(index)->deleteLater();
   UpdateTermPreview();
 }
 
