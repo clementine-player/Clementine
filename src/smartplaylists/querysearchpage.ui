@@ -19,6 +19,11 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">#terms_scroll_area, #terms_scroll_area_content {
+  background: transparent;
+}</string>
+  </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="margin">
     <number>0</number>
@@ -69,11 +74,8 @@
       <string>Search terms</string>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_5">
-      <property name="margin">
-       <number>9</number>
-      </property>
       <item>
-       <widget class="QScrollArea" name="terms_scrollArea">
+       <widget class="QScrollArea" name="terms_scroll_area">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
           <horstretch>0</horstretch>
@@ -86,13 +88,13 @@
         <property name="widgetResizable">
          <bool>true</bool>
         </property>
-        <widget class="QWidget" name="terms_scrollArea_content">
+        <widget class="QWidget" name="terms_scroll_area_content">
          <property name="geometry">
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>422</width>
-           <height>264</height>
+           <width>418</width>
+           <height>251</height>
           </rect>
          </property>
          <property name="sizePolicy">
