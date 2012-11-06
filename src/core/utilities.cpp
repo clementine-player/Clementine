@@ -15,27 +15,32 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "timeconstants.h"
 #include "utilities.h"
-#include "core/logging.h"
 
-#include "sha2.h"
+#include <stdlib.h>
+
+#include <boost/scoped_array.hpp>
 
 #include <QApplication>
 #include <QDateTime>
 #include <QDesktopServices>
 #include <QDir>
 #include <QIODevice>
+#include <QMetaEnum>
 #include <QMouseEvent>
 #include <QStringList>
 #include <QTcpServer>
+#include <QtDebug>
 #include <QTemporaryFile>
+#include <QtGlobal>
 #include <QUrl>
 #include <QWidget>
 #include <QXmlStreamReader>
-#include <QtDebug>
-#include <QtGlobal>
-#include <QMetaEnum>
+
+#include "core/logging.h"
+#include "timeconstants.h"
+
+#include "sha2.h"
 
 #if defined(Q_OS_UNIX)
 #  include <sys/statvfs.h>
@@ -58,8 +63,6 @@
 #  include "IOKit/ps/IOPowerSources.h"
 #  include "IOKit/ps/IOPSKeys.h"
 #endif
-
-#include <boost/scoped_array.hpp>
 
 namespace Utilities {
 
@@ -290,14 +293,28 @@ QString GetConfigPath(ConfigPath config) {
     }
     break;
 
+    case Path_CacheRoot: {
+      #if defined(Q_OS_UNIX) && !defined(Q_OS_DARWIN)
+        char* xdg = getenv("XDG_CACHE_HOME");
+        if (!xdg || !*xdg) {
+          return QString("%1/.cache/%2").arg(QDir::homePath(), QCoreApplication::organizationName());
+        } else {
+          return QString("%1/%2").arg(xdg, QCoreApplication::organizationName());
+        }
+      #else
+        return GetConfigPath(Path_Root);
+      #endif
+    }
+    break;
+
     case Path_AlbumCovers:
       return GetConfigPath(Path_Root) + "/albumcovers";
 
     case Path_NetworkCache:
-      return GetConfigPath(Path_Root) + "/networkcache";
-      
+      return GetConfigPath(Path_CacheRoot) + "/networkcache";
+
     case Path_MoodbarCache:
-      return GetConfigPath(Path_Root) + "/moodbarcache";
+      return GetConfigPath(Path_CacheRoot) + "/moodbarcache";
 
     case Path_GstreamerRegistry:
       return GetConfigPath(Path_Root) +

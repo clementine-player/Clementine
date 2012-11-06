@@ -110,6 +110,7 @@ namespace Utilities {
     Path_DefaultMusicLibrary,
     Path_LocalSpotifyBlob,
     Path_MoodbarCache,
+    Path_CacheRoot,
   };
   QString GetConfigPath(ConfigPath config);
 
