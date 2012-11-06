@@ -356,11 +356,7 @@ typename WorkerPool<HandlerType>::ReplyType*
 WorkerPool<HandlerType>::SendMessageWithReply(MessageType* message) {
   ReplyType* reply = NewReply(message);
 
-  // Copy the message
-  MessageType copy;
-  copy.MergeFrom(*message);
-
-  // Add the copy to the queue
+  // Add the pending reply to the queue
   {
     QMutexLocker l(&message_queue_mutex_);
     message_queue_.enqueue(reply);
