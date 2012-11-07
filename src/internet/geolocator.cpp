@@ -112,7 +112,6 @@ void Geolocator::RequestFinished(QNetworkReply* reply) {
   QString latlng = map["latlng"].toString();
 
   LatLng ll(latlng);
-  qLog(Debug) << "Gelocated to:" << ll;
   emit Finished(ll);
 }
 
