@@ -63,6 +63,16 @@ AppearanceSettingsPage::AppearanceSettingsPage(SettingsDialog* dialog)
       ui_->background_image_filename, SLOT(setEnabled(bool)));
   connect(ui_->use_custom_background_image, SIGNAL(toggled(bool)),
       ui_->select_background_image_filename_button, SLOT(setEnabled(bool)));
+
+  connect(ui_->use_custom_background_image, SIGNAL(toggled(bool)),
+      ui_->blur_slider, SLOT(setEnabled(bool)));
+  connect(ui_->use_album_cover_background, SIGNAL(toggled(bool)),
+      ui_->blur_slider, SLOT(setEnabled(bool)));
+
+  connect(ui_->use_default_background, SIGNAL(toggled(bool)),
+      SLOT(DisableBlurSlider(bool)));
+  connect(ui_->use_no_background, SIGNAL(toggled(bool)),
+      SLOT(DisableBlurSlider(bool)));
 }
 
 AppearanceSettingsPage::~AppearanceSettingsPage() {
@@ -273,4 +283,13 @@ void AppearanceSettingsPage::InitMoodbarPreviews() {
 #else
   ui_->moodbar_group->hide();
 #endif
+}
+
+void AppearanceSettingsPage::DisableBlurSlider(bool checked) {
+  ui_->blur_slider->setDisabled(checked);
+  ui_->background_blur_radius_label->setDisabled(checked);
+  ui_->select_background_blur_label->setDisabled(checked);
+  if (checked) {
+    ui_->blur_slider->setValue(0);
+  }
 }

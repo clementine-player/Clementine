@@ -43,6 +43,7 @@ private slots:
   void UseCustomColorSetOptionChanged(bool);
   void SelectBackgroundImage();
   void BlurLevelChanged(int);
+  void DisableBlurSlider(bool);
 
 private:
   static const int kMoodbarPreviewWidth;
