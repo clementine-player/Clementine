@@ -167,7 +167,7 @@ class PlaylistView : public QTreeView {
   // Save image as the background_image_ after applying some modifications (opacity, ...).
   // Should be used instead of modifying background_image_ directly
   void set_background_image(const QImage& image);
-  QImage blur_background_image(const QImage& image, int radius, bool alphaOnly);
+  QImage BlurImage(const QImage& image, int radius, bool alphaOnly);
 
  private:
   static const int kGlowIntensitySteps;

@@ -1023,8 +1023,8 @@ void PlaylistView::ReloadSettings() {
   // set_background_image when it is not needed, as this will cause the fading
   // animation to start again. This also avoid to do useless
   // "force_background_redraw".
-  if (background_image_filename != background_image_filename_
-      || background_type != background_image_type_ || 
+  if (background_image_filename != background_image_filename_ ||
+      background_type != background_image_type_ || 
       blur_radius_ != blur_radius) {
     // Store background properties
     background_image_type_ = background_type;
@@ -1202,7 +1202,7 @@ void PlaylistView::set_background_image(const QImage& image) {
   }
 
   if (blur_radius_ != 0) 
-    background_image_ = blur_background_image(background_image_, blur_radius_, false);
+    background_image_ = BlurImage(background_image_, blur_radius_, false);
 
   if (isVisible()) {
     previous_background_image_opacity_ = 1.0;
@@ -1211,7 +1211,7 @@ void PlaylistView::set_background_image(const QImage& image) {
 }
 
 
-QImage PlaylistView::blur_background_image(const QImage& image, int radius, bool alphaOnly = false)
+QImage PlaylistView::BlurImage(const QImage& image, int radius, bool alphaOnly = false)
 {
   int tab[] = { 14, 10, 8, 6, 5, 5, 4, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2 };
   int alpha = (radius < 1)  ? 16 : (radius > 17) ? 1 : tab[radius-1];
@@ -1241,7 +1241,7 @@ QImage PlaylistView::blur_background_image(const QImage& image, int radius, bool
     p += bpl;
     for (int j = r1; j < r2; j++, p += bpl)
       for (int i = i1; i <= i2; i++)
-	p[i] = (rgba[i] += ((p[i] << 4) - rgba[i]) * alpha / 16) >> 4;
+        p[i] = (rgba[i] += ((p[i] << 4) - rgba[i]) * alpha / 16) >> 4;
   }
 
   for (int row = r1; row <= r2; row++) {
@@ -1252,7 +1252,7 @@ QImage PlaylistView::blur_background_image(const QImage& image, int radius, bool
     p += 4;
     for (int j = c1; j < c2; j++, p += 4)
       for (int i = i1; i <= i2; i++)
-	p[i] = (rgba[i] += ((p[i] << 4) - rgba[i]) * alpha / 16) >> 4;
+        p[i] = (rgba[i] += ((p[i] << 4) - rgba[i]) * alpha / 16) >> 4;
   }
 
   for (int col = c1; col <= c2; col++) {
@@ -1263,7 +1263,7 @@ QImage PlaylistView::blur_background_image(const QImage& image, int radius, bool
     p -= bpl;
     for (int j = r1; j < r2; j++, p -= bpl)
       for (int i = i1; i <= i2; i++)
-	p[i] = (rgba[i] += ((p[i] << 4) - rgba[i]) * alpha / 16) >> 4;
+        p[i] = (rgba[i] += ((p[i] << 4) - rgba[i]) * alpha / 16) >> 4;
   }
 
   for (int row = r1; row <= r2; row++) {
@@ -1274,7 +1274,7 @@ QImage PlaylistView::blur_background_image(const QImage& image, int radius, bool
     p -= 4;
     for (int j = c1; j < c2; j++, p -= 4)
       for (int i = i1; i <= i2; i++)
-	p[i] = (rgba[i] += ((p[i] << 4) - rgba[i]) * alpha / 16) >> 4;
+        p[i] = (rgba[i] += ((p[i] << 4) - rgba[i]) * alpha / 16) >> 4;
   }
 
   return result;
