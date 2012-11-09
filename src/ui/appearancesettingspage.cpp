@@ -56,6 +56,7 @@ AppearanceSettingsPage::AppearanceSettingsPage(SettingsDialog* dialog)
   connect(ui_->select_foreground_color, SIGNAL(pressed()), SLOT(SelectForegroundColor()));
   connect(ui_->select_background_color, SIGNAL(pressed()), SLOT(SelectBackgroundColor()));
   connect(ui_->use_a_custom_color_set, SIGNAL(toggled(bool)), SLOT(UseCustomColorSetOptionChanged(bool)));
+  connect(ui_->blur_slider, SIGNAL(valueChanged(int)), SLOT(BlurLevelChanged(int)));
 
   connect(ui_->select_background_image_filename_button, SIGNAL(pressed()), SLOT(SelectBackgroundImage()));
   connect(ui_->use_custom_background_image, SIGNAL(toggled(bool)),
@@ -114,6 +115,7 @@ void AppearanceSettingsPage::Load() {
       ui_->use_default_background->setChecked(true);
   }
   ui_->background_image_filename->setText(playlist_view_background_image_filename_);
+  
   s.endGroup();
 
   // Moodbar settings
@@ -154,7 +156,8 @@ void AppearanceSettingsPage::Save() {
         playlist_view_background_image_filename_);
   }
   s.setValue(PlaylistView::kSettingBackgroundImageType,
-      playlist_view_background_image_type_);
+	     playlist_view_background_image_type_);
+  s.setValue("blur_radius", ui_->blur_slider->value());
   s.endGroup();
 
   // Moodbar settings
@@ -228,6 +231,12 @@ void AppearanceSettingsPage::SelectBackgroundImage() {
     return;
   playlist_view_background_image_filename_ = selected_filename;
   ui_->background_image_filename->setText(playlist_view_background_image_filename_);
+}
+
+void AppearanceSettingsPage::BlurLevelChanged(int value) {
+  background_blur_radius_ = value;
+  ui_->background_blur_radius_label->setText(QString("%1px").arg(value));
+  
 }
 
 void AppearanceSettingsPage::InitMoodbarPreviews() {

@@ -73,6 +73,7 @@ class PlaylistView : public QTreeView {
   // Constants for settings: are persistent, values should not be changed
   static const char* kSettingBackgroundImageType;
   static const char* kSettingBackgroundImageFilename;
+  static const int kSettingBackgroundBlurLevel;
 
   static ColumnAlignmentMap DefaultColumnAlignment();
 
@@ -166,6 +167,7 @@ class PlaylistView : public QTreeView {
   // Save image as the background_image_ after applying some modifications (opacity, ...).
   // Should be used instead of modifying background_image_ directly
   void set_background_image(const QImage& image);
+  QImage blur_background_image(const QImage& image, int radius, bool alphaOnly);
 
  private:
   static const int kGlowIntensitySteps;
@@ -173,7 +175,7 @@ class PlaylistView : public QTreeView {
   static const int kDropIndicatorWidth;
   static const int kDropIndicatorGradientWidth;
   static const qreal kBackgroundOpacity;
-
+  
   QList<int> GetEditableColumns();
   QModelIndex NextEditableIndex(const QModelIndex& current);
   QModelIndex PrevEditableIndex(const QModelIndex& current);
@@ -194,6 +196,7 @@ class PlaylistView : public QTreeView {
   // particular (in terms of format, opacity), you should probably use
   // set_background_image_type instead of modifying background_image_ directly
   QImage background_image_;
+  int blur_radius_;
   // Used if background image is a filemane
   QString background_image_filename_;
   QImage current_song_cover_art_;

@@ -1017,16 +1017,19 @@ void PlaylistView::ReloadSettings() {
     }
   }
   QString background_image_filename = s.value(kSettingBackgroundImageFilename).toString();
+  int blur_radius = s.value("blur_radius").toInt();
   // Check if background properties have changed.
   // We change properties only if they have actually changed, to avoid to call
   // set_background_image when it is not needed, as this will cause the fading
   // animation to start again. This also avoid to do useless
   // "force_background_redraw".
   if (background_image_filename != background_image_filename_
-      || background_type != background_image_type_) {
+      || background_type != background_image_type_ || 
+      blur_radius_ != blur_radius) {
     // Store background properties
     background_image_type_ = background_type;
     background_image_filename_ = background_image_filename;
+    blur_radius_ = blur_radius;
     if (background_image_type_ == Custom) {
       set_background_image(QImage(background_image_filename));
     } else if (background_image_type_ == AlbumCover) {
@@ -1190,16 +1193,91 @@ void PlaylistView::set_background_image(const QImage& image) {
   else
     background_image_ = image;
 
+
+
   // Apply opacity filter
   uchar* bits = background_image_.bits();
   for (int i = 0; i < background_image_.height() * background_image_.bytesPerLine(); i+=4) {
     bits[i+3] = kBackgroundOpacity * 255;
   }
 
+  if (blur_radius_ != 0) 
+    background_image_ = blur_background_image(background_image_, blur_radius_, false);
+
   if (isVisible()) {
     previous_background_image_opacity_ = 1.0;
     fade_animation_->start();
   }
+}
+
+
+QImage PlaylistView::blur_background_image(const QImage& image, int radius, bool alphaOnly = false)
+{
+  int tab[] = { 14, 10, 8, 6, 5, 5, 4, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2 };
+  int alpha = (radius < 1)  ? 16 : (radius > 17) ? 1 : tab[radius-1];
+
+  QImage result = image.convertToFormat(QImage::Format_ARGB32_Premultiplied);
+  QRect rect = image.rect();
+  int r1 = rect.top();
+  int r2 = rect.bottom();
+  int c1 = rect.left();
+  int c2 = rect.right();
+
+  int bpl = result.bytesPerLine();
+  int rgba[4];
+  unsigned char* p;
+
+  int i1 = 0;
+  int i2 = 3;
+
+  if (alphaOnly)
+    i1 = i2 = (QSysInfo::ByteOrder == QSysInfo::BigEndian ? 0 : 3);
+
+  for (int col = c1; col <= c2; col++) {
+    p = result.scanLine(r1) + col * 4;
+    for (int i = i1; i <= i2; i++)
+      rgba[i] = p[i] << 4;
+
+    p += bpl;
+    for (int j = r1; j < r2; j++, p += bpl)
+      for (int i = i1; i <= i2; i++)
+	p[i] = (rgba[i] += ((p[i] << 4) - rgba[i]) * alpha / 16) >> 4;
+  }
+
+  for (int row = r1; row <= r2; row++) {
+    p = result.scanLine(row) + c1 * 4;
+    for (int i = i1; i <= i2; i++)
+      rgba[i] = p[i] << 4;
+
+    p += 4;
+    for (int j = c1; j < c2; j++, p += 4)
+      for (int i = i1; i <= i2; i++)
+	p[i] = (rgba[i] += ((p[i] << 4) - rgba[i]) * alpha / 16) >> 4;
+  }
+
+  for (int col = c1; col <= c2; col++) {
+    p = result.scanLine(r2) + col * 4;
+    for (int i = i1; i <= i2; i++)
+      rgba[i] = p[i] << 4;
+
+    p -= bpl;
+    for (int j = r1; j < r2; j++, p -= bpl)
+      for (int i = i1; i <= i2; i++)
+	p[i] = (rgba[i] += ((p[i] << 4) - rgba[i]) * alpha / 16) >> 4;
+  }
+
+  for (int row = r1; row <= r2; row++) {
+    p = result.scanLine(row) + c2 * 4;
+    for (int i = i1; i <= i2; i++)
+      rgba[i] = p[i] << 4;
+
+    p -= 4;
+    for (int j = c1; j < c2; j++, p -= 4)
+      for (int i = i1; i <= i2; i++)
+	p[i] = (rgba[i] += ((p[i] << 4) - rgba[i]) * alpha / 16) >> 4;
+  }
+
+  return result;
 }
 
 void PlaylistView::FadePreviousBackgroundImage(qreal value) {
