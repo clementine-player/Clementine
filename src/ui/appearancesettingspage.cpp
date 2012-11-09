@@ -113,6 +113,7 @@ void AppearanceSettingsPage::Load() {
   switch (playlist_view_background_image_type_) {
     case PlaylistView::None:
       ui_->use_no_background->setChecked(true);
+      DisableBlurSlider(true);
       break;
     case PlaylistView::AlbumCover:
       ui_->use_album_cover_background->setChecked(true);
@@ -123,6 +124,7 @@ void AppearanceSettingsPage::Load() {
     case PlaylistView::Default:
     default:
       ui_->use_default_background->setChecked(true);
+      DisableBlurSlider(true);
   }
   ui_->background_image_filename->setText(playlist_view_background_image_filename_);
   
