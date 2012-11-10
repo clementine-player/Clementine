@@ -23,6 +23,7 @@
 #include "core/commandlineoptions.h"
 #include "core/database.h"
 #include "core/deletefiles.h"
+#include "core/filesystemmusicstorage.h"
 #include "core/globalshortcuts.h"
 #include "core/logging.h"
 #include "core/mac_startup.h"
@@ -1825,12 +1826,7 @@ void MainWindow::PlaylistDelete() {
         QMessageBox::Yes, QMessageBox::Cancel) != QMessageBox::Yes)
     return;
 
-  // We can cheat and always take the storage of the first directory, since
-  // they'll all be FilesystemMusicStorage in a library and deleting doesn't
-  // check the actual directory.
-  boost::shared_ptr<MusicStorage> storage =
-      app_->library_model()->directory_model()->index(0, 0).data(MusicStorage::Role_Storage)
-      .value<boost::shared_ptr<MusicStorage> >();
+  boost::shared_ptr<MusicStorage> storage(new FilesystemMusicStorage("/"));
 
   // Get selected songs
   SongList selected_songs;
