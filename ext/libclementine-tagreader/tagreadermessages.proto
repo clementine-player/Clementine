@@ -1,8 +1,5 @@
 package pb.tagreader;
 
-option optimize_for = LITE_RUNTIME;
-
-
 message SongMetadata {
   enum Type {
     UNKNOWN = 0;

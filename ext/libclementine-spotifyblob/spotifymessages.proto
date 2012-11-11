@@ -21,9 +21,6 @@
 
 package pb.spotify;
 
-option optimize_for = LITE_RUNTIME;
-
-
 message LoginRequest {
   required string username = 1;
   optional string password = 2;

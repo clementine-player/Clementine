@@ -116,18 +116,6 @@ if(${CMAKE_BUILD_TYPE} MATCHES "Release")
   add_definitions(-DQT_NO_DEBUG_OUTPUT)
 endif(${CMAKE_BUILD_TYPE} MATCHES "Release")
 
-# Use protobuf-lite if it's available
-set(USE_PROTOBUF_LITE ON CACHE BOOL "Use protobuf-lite instead of protobuf if available")
-find_library(PROTOBUF_LITE_LIBRARY protobuf-lite)
-
-if(NOT PROTOBUF_LITE_LIBRARY)
-  # Lucid doesn't have a .so symlink
-  find_file(PROTOBUF_LITE_LIBRARY
-    NAMES libprotobuf-lite.so.5
-    PATH_SUFFIXES lib
-  )
-endif(NOT PROTOBUF_LITE_LIBRARY)
-
 # Set up definitions and paths
 add_definitions(${QT_DEFINITIONS})
 link_directories(${TAGLIB_LIBRARY_DIRS})
