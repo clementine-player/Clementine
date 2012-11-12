@@ -100,6 +100,9 @@ Section "Delete old files" oldfiles
   ; 1.0
   Delete "$INSTDIR\libofa.dll"
   Delete "$INSTDIR\gstreamer-plugins\libgstofa.dll"
+
+  ; 1.1
+  Delete "$INSTDIR\libprotobuf-lite-7.dll"
 SectionEnd
 
 Section "Clementine" Clementine
@@ -161,7 +164,6 @@ Section "Clementine" Clementine
   File "libplist.dll"
   File "libpng14-14.dll"
   File "libprotobuf-7.dll"
-  File "libprotobuf-lite-7.dll"
   File "libqjson.dll"
   File "libsoup-2.4-1.dll"
   File "libspeex-1.dll"
@@ -1007,7 +1009,7 @@ Section "Uninstall"
   Delete "$INSTDIR\liborc-test-0.4-0.dll"
   Delete "$INSTDIR\libplist.dll"
   Delete "$INSTDIR\libpng14-14.dll"
-  Delete "$INSTDIR\libprotobuf-lite-7.dll"
+  Delete "$INSTDIR\libprotobuf-7.dll"
   Delete "$INSTDIR\libqjson.dll"
   Delete "$INSTDIR\libsoup-2.4-1.dll"
   Delete "$INSTDIR\libspeex-1.dll"
