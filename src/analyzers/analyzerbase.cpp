@@ -16,13 +16,15 @@
  ***************************************************************************/
 
 #include "analyzerbase.h"
-#include "engines/enginebase.h"
+
 #include <cmath>        //interpolate()
+
 #include <QEvent>     //event()
 #include <QPainter>
 #include <QPaintEvent>
 #include <QtDebug>
 
+#include "engines/enginebase.h"
 
 // INSTRUCTIONS Base2D
 // 1. do anything that depends on height() in init(), Base2D will call it before you are shown
