@@ -63,7 +63,6 @@ pkg_check_modules(CHROMAPRINT libchromaprint)
 if (WIN32)
   find_package(ZLIB REQUIRED)
   find_library(MSWMDM_LIBRARIES mswmdm)
-  find_library(SAC_SHIM_LIBRARIES sac_shim)
   find_library(QTSPARKLE_LIBRARIES qtsparkle)
 endif (WIN32)
 
@@ -162,9 +161,6 @@ endif(NOT GETTEXT_MSGFMT_EXECUTABLE)
 # Optional bits
 if(WIN32)
   option(ENABLE_WIN32_CONSOLE "Show the windows console even outside Debug mode" OFF)
-  if(SAC_SHIM_LIBRARIES)
-    set(HAVE_SAC ON)
-  endif(SAC_SHIM_LIBRARIES)
 endif(WIN32)
 
 optional_component(BREAKPAD OFF "Crash reporting")
