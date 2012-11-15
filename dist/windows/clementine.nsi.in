@@ -103,6 +103,13 @@ Section "Delete old files" oldfiles
 
   ; 1.1
   Delete "$INSTDIR\libprotobuf-lite-7.dll"
+
+  ; mingw-w64
+  Delete "$INSTDIR\avcodec-52.dll"
+  Delete "$INSTDIR\avformat-52.dll"
+  Delete "$INSTDIR\avutil-50.dll"
+  Delete "$INSTDIR\libcdio-12.dll"
+  Delete "$INSTDIR\libgcc_s_dw2-1.dll"
 SectionEnd
 
 Section "Clementine" Clementine
