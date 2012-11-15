@@ -31,8 +31,7 @@
 BYTE abPVK[] = {0x00};
 BYTE abCert[] = {0x00};
 
-QMutex WmdmThread::sLoadLock;
-bool WmdmThread::sIsLoaded;
+bool WmdmThread::sIsLoaded = false;
 
 decltype(&CSecureChannelClient_New) WmdmThread::_CSecureChannelClient_New;
 decltype(&CSecureChannelClient_Free) WmdmThread::_CSecureChannelClient_Free;
@@ -45,10 +44,9 @@ WmdmThread::WmdmThread()
   : device_manager_(NULL),
     sac_(NULL)
 {
-  if (!MaybeStaticInit()) {
-    qLog(Warning) << "Error loading SAC shim DLL";
+  if (!sIsLoaded) {
+    return;
   }
-
   // Initialise COM
   CoInitialize(0);
 
@@ -104,8 +102,7 @@ T Resolve(QLibrary* library, const char* name) {
 
 }  // namespace
 
-bool WmdmThread::MaybeStaticInit() {
-  QMutexLocker locker(&sLoadLock);
+bool WmdmThread::StaticInit() {
   if (!sIsLoaded) {
     QLibrary library(QCoreApplication::applicationDirPath() + "/sac_shim.dll");
     if (!library.load()) {

@@ -37,8 +37,8 @@ public:
   IWMDMDevice* GetDeviceByCanonicalName(const QString& device_name);
   IWMDMStorage* GetRootStorage(const QString& device_name);
 
+  static bool StaticInit();
 private:
-  static bool MaybeStaticInit();
 
   Q_DISABLE_COPY(WmdmThread);
 
@@ -51,7 +51,6 @@ private:
   static decltype(&CSecureChannelClient_SetInterface) _CSecureChannelClient_SetInterface;  
   static decltype(&CSecureChannelClient_Authenticate) _CSecureChannelClient_Authenticate;
 
-  static QMutex sLoadLock;
   static bool sIsLoaded;
 };
 
