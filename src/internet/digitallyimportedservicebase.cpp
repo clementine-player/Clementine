@@ -272,3 +272,14 @@ JazzRadioService::JazzRadioService(
                                  app, model, parent)
 {
 }
+
+RockRadioService::RockRadioService(
+      Application* app, InternetModel* model, QObject* parent)
+  : DigitallyImportedServiceBase("RockRadio",
+                                 "ROCKRADIO.com",
+                                 QUrl("http://www.rockradio.com"),
+                                 QIcon(":/providers/rockradio.png"),
+                                 "rockradio",
+                                 app, model, parent)
+{
+}

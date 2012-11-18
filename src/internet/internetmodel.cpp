@@ -77,6 +77,7 @@ InternetModel::InternetModel(Application* app, QObject* parent)
   AddService(new JazzRadioService(app, this));
   AddService(new MagnatuneService(app, this));
   AddService(new PodcastService(app, this));
+  AddService(new RockRadioService(app, this));
   AddService(new SavedRadio(app, this));
   AddService(new SkyFmService(app, this));
   AddService(new SomaFMService(app, this));

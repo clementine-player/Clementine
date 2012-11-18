@@ -127,4 +127,9 @@ public:
   JazzRadioService(Application* app, InternetModel* model, QObject* parent = NULL);
 };
 
+class RockRadioService : public DigitallyImportedServiceBase {
+public:
+  RockRadioService(Application* app, InternetModel* model, QObject* parent = NULL);
+};
+
 #endif // DIGITALLYIMPORTEDSERVICEBASE_H
