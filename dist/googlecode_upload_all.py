@@ -167,6 +167,30 @@ class VersionInfo(object):
     return labels
 
 
+def get_google_code_password(username):
+  # Try to read it from the .netrc first
+  NETRC_REGEX = re.compile(
+      r'^machine\s+code\.google\.com\s+'
+      r'login\s+([^@]+)@[^\s]+\s+'
+      r'password\s+([^\s+])')
+
+  try:
+    for line in open(os.path.expanduser("~/.netrc")):
+      match = NETRC_REGEX.match(line)
+      if match and match.group(1) == username:
+        print "Using password from ~/.netrc"
+        return match.group(2)
+  except IOError:
+    pass
+
+  # Prompt the user
+  password = getpass.getpass("Google Code password (different to your Google account): ")
+  if not password:
+    return None
+
+  return password
+
+
 def main():
   dist_dir = os.path.dirname(os.path.abspath(__file__))
   root_dir = os.path.normpath(os.path.join(dist_dir, ".."))
@@ -205,11 +229,12 @@ def main():
   if not username:
     return 1
 
-  password = getpass.getpass("Google Code password (different to your Google account): ")
-  if not password:
+  password = get_google_code_password(username)
+  if password is None:
     return 1
 
   print
+  return 0
 
   # Upload everything
   for release in RELEASES:
