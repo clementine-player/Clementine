@@ -28,7 +28,7 @@
 #include "core/utilities.h"
 
 const char* MusicBrainzClient::kTrackUrl = "http://musicbrainz.org/ws/2/recording/";
-const char* MusicBrainzClient::kDiscUrl = "http://musicbrainz.org/ws/1/release/";
+const char* MusicBrainzClient::kDiscUrl = "http://musicbrainz.org/ws/2/discid/";
 const char* MusicBrainzClient::kDateRegex = "^[12]\\d{3}";
 const int MusicBrainzClient::kDefaultTimeout = 5000; // msec
 
@@ -61,10 +61,9 @@ void MusicBrainzClient::StartDiscIdRequest(const QString& discid) {
   typedef QPair<QString, QString> Param;
 
   QList<Param> parameters;
-  parameters << Param("type", "xml")
-             << Param("discid", discid);
+  parameters << Param("inc", "artists+recordings");
 
-  QUrl url(kDiscUrl);
+  QUrl url(kDiscUrl + discid);
   url.setQueryItems(parameters);
   QNetworkRequest req(url);
 
@@ -117,7 +116,7 @@ void MusicBrainzClient::DiscIdRequestFinished(QNetworkReply* reply) {
 
   while (!reader.atEnd()) {
     QXmlStreamReader::TokenType token = reader.readNext();
-    if (token == QXmlStreamReader::StartElement && reader.name() == "track") {
+    if (token == QXmlStreamReader::StartElement && reader.name() == "recording") {
       ResultList tracks = ParseTrack(&reader);
       foreach (const Result& track, tracks) {
         if (!track.title_.isEmpty()) {
@@ -185,8 +184,12 @@ MusicBrainzClient::ResultList MusicBrainzClient::ParseTrack(QXmlStreamReader* re
   }
 
   ResultList ret;
-  foreach (const Release& release, releases) {
-    ret << release.CopyAndMergeInto(result);
+  if (releases.isEmpty()) {
+    ret << result;
+  } else {
+    foreach (const Release& release, releases) {
+      ret << release.CopyAndMergeInto(result);
+    }
   }
   return ret;
 }
