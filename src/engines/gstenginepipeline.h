@@ -128,12 +128,14 @@ class GstEnginePipeline : public QObject {
   static bool EventHandoffCallback(GstPad*, GstEvent*, gpointer);
   static void SourceDrainedCallback(GstURIDecodeBin*, gpointer);
   static void SourceSetupCallback(GstURIDecodeBin*, GParamSpec *pspec, gpointer);
+  static void TaskEnterCallback(GstTask*, GThread*, gpointer);
 
   void TagMessageReceived(GstMessage*);
   void ErrorMessageReceived(GstMessage*);
   void ElementMessageReceived(GstMessage*);
   void StateChangedMessageReceived(GstMessage*);
   void BufferingMessageReceived(GstMessage*);
+  void StreamStatusMessageReceived(GstMessage*);
 
   QString ParseTag(GstTagList* list, const char* tag) const;
 

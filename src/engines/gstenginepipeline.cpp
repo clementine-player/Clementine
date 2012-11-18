@@ -484,11 +484,46 @@ GstBusSyncReply GstEnginePipeline::BusCallbackSync(GstBus*, GstMessage* msg, gpo
       instance->BufferingMessageReceived(msg);
       break;
 
+    case GST_MESSAGE_STREAM_STATUS:
+      instance->StreamStatusMessageReceived(msg);
+      break;
+
     default:
       break;
   }
 
   return GST_BUS_PASS;
+}
+
+void GstEnginePipeline::StreamStatusMessageReceived(GstMessage* msg) {
+  GstStreamStatusType type;
+  GstElement* owner;
+  gst_message_parse_stream_status(msg, &type, &owner);
+
+  if (type == GST_STREAM_STATUS_TYPE_CREATE) {
+    const GValue* val = gst_message_get_stream_status_object(msg);
+    if (G_VALUE_TYPE(val) == GST_TYPE_TASK) {
+      GstTask* task = static_cast<GstTask*>(g_value_get_object(val));
+
+      GstTaskThreadCallbacks callbacks;
+      memset(&callbacks, 0, sizeof(callbacks));
+      callbacks.enter_thread = TaskEnterCallback;
+
+      gst_task_set_thread_callbacks(task, &callbacks, this, NULL);
+    }
+  }
+}
+
+void GstEnginePipeline::TaskEnterCallback(GstTask*, GThread*, gpointer) {
+  // Bump the priority of the thread only on OS X
+
+#ifdef Q_OS_DARWIN
+  sched_param param;
+  memset(&param, 0, sizeof(param));
+
+  param.sched_priority = 99;
+  pthread_setschedparam(pthread_self(), SCHED_RR, &param);
+#endif
 }
 
 void GstEnginePipeline::ElementMessageReceived(GstMessage* msg) {
