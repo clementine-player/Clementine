@@ -442,9 +442,11 @@ int main(int argc, char *argv[]) {
   mpris::Mpris mpris(&app);
 #endif
 
+#ifdef Q_OS_WIN32
   if (!WmdmThread::StaticInit()) {
     qLog(Warning) << "Failed to initialise SAC shim";
   }
+#endif
 
   // Window
   MainWindow w(&app, tray_icon.get(), &osd);
