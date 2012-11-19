@@ -37,7 +37,8 @@ MoodbarLoader::MoodbarLoader(Application* app, QObject* parent)
     cache_(new QNetworkDiskCache(this)),
     thread_(new QThread(this)),
     kMaxActiveRequests(qMax(1, QThread::idealThreadCount() / 2)),
-    save_alongside_originals_(false)
+    save_alongside_originals_(false),
+    disable_moodbar_calculation_(false)
 {
   cache_->setCacheDirectory(Utilities::GetConfigPath(Utilities::Path_MoodbarCache));
   cache_->setMaximumCacheSize(60 * 1024 * 1024); // 60MB - enough for 20,000 moodbars
@@ -55,6 +56,9 @@ void MoodbarLoader::ReloadSettings() {
   QSettings s;
   s.beginGroup("Moodbar");
   save_alongside_originals_ = s.value("save_alongside_originals", false).toBool();
+
+  disable_moodbar_calculation_ = !s.value("calculate", true).toBool();
+  MaybeTakeNextRequest();
 }
 
 QStringList MoodbarLoader::MoodFilenames(const QString& song_filename) {
@@ -75,7 +79,7 @@ MoodbarLoader::Result MoodbarLoader::Load(
   if (url.scheme() != "file") {
     return CannotLoad;
   }
-  
+
   // Are we in the middle of loading this moodbar already?
   if (requests_.contains(url)) {
     *async_pipeline = requests_[url];
@@ -111,8 +115,8 @@ MoodbarLoader::Result MoodbarLoader::Load(
   MoodbarPipeline* pipeline = new MoodbarPipeline(url);
   pipeline->moveToThread(thread_);
   NewClosure(pipeline, SIGNAL(Finished(bool)),
-             this, SLOT(RequestFinished(MoodbarPipeline*,QUrl)),
-             pipeline, url);
+     this, SLOT(RequestFinished(MoodbarPipeline*,QUrl)),
+     pipeline, url);
 
   requests_[url] = pipeline;
   queued_requests_ << url;
@@ -127,12 +131,13 @@ void MoodbarLoader::MaybeTakeNextRequest() {
   Q_ASSERT(QThread::currentThread() == qApp->thread());
 
   if (active_requests_.count() >= kMaxActiveRequests ||
-      queued_requests_.isEmpty()) {
+      queued_requests_.isEmpty() || disable_moodbar_calculation_) {
     return;
   }
 
   const QUrl url = queued_requests_.takeFirst();
   active_requests_ << url;
+
 
   qLog(Info) << "Creating moodbar data for" << url.toLocalFile();
   QMetaObject::invokeMethod(requests_[url], "Start", Qt::QueuedConnection);
@@ -143,11 +148,11 @@ void MoodbarLoader::RequestFinished(MoodbarPipeline* request, const QUrl& url) {
 
   if (request->success()) {
     qLog(Info) << "Moodbar data generated successfully for" << url.toLocalFile();
-    
+
     // Save the data in the cache
     QNetworkCacheMetaData metadata;
     metadata.setUrl(url);
-    
+
     QIODevice* cache_file = cache_->prepare(metadata);
     cache_file->write(request->data());
     cache_->insert(cache_file);

@@ -30,24 +30,24 @@ class MoodbarPipeline;
 
 class MoodbarLoader : public QObject {
   Q_OBJECT
-    
+
 public:
   MoodbarLoader(Application* app, QObject* parent = 0);
   ~MoodbarLoader();
-  
+
   enum Result {
     // The URL isn't a local file or the moodbar plugin was not available -
     // moodbar data can never be loaded.
     CannotLoad,
-      
+
     // Moodbar data was loaded and returned.
     Loaded,
-      
+
     // Moodbar data will be loaded in the background, a MoodbarPipeline* was
     // was returned that you can connect to the Finished() signal on.
     WillLoadAsync
   };
-  
+
   Result Load(const QUrl& url, QByteArray* data, MoodbarPipeline** async_pipeline);
 
 private slots:
@@ -58,18 +58,19 @@ private slots:
 
 private:
   static QStringList MoodFilenames(const QString& song_filename);
-  
+
 private:
   QNetworkDiskCache* cache_;
   QThread* thread_;
 
   const int kMaxActiveRequests;
-  
+
   QMap<QUrl, MoodbarPipeline*> requests_;
   QList<QUrl> queued_requests_;
   QSet<QUrl> active_requests_;
 
   bool save_alongside_originals_;
+  bool disable_moodbar_calculation_;
 };
 
 #endif // MOODBARLOADER_H
