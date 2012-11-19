@@ -67,7 +67,6 @@ private:
   int background_blur_radius_;
 
   bool initialised_moodbar_previews_;
-  bool dont_calculate_moodbar_;
 };
 
 #endif // APPEARANCESETTINGSPAGE_H
