@@ -46,9 +46,7 @@
 #include <id3v1genres.h>
 
 #ifdef Q_OS_WIN32
-# ifdef HAVE_SAC
-#  include <mswmdm.h>
-# endif
+# include <mswmdm.h>
 # include <QUuid>
 #endif // Q_OS_WIN32
 
@@ -703,7 +701,7 @@ void Song::InitFromLastFM(const lastfm::Track& track) {
   }
 #endif
 
-#if defined(Q_OS_WIN32) && defined(HAVE_SAC)
+#if defined(Q_OS_WIN32)
   static void AddWmdmItem(IWMDMMetaData* metadata, const wchar_t* name,
                           const QVariant& value) {
     switch (value.type()) {

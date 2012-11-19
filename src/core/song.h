@@ -39,7 +39,7 @@ class QUrl;
   struct LIBMTP_track_struct;
 #endif
 
-#if defined(Q_OS_WIN32) && defined(HAVE_SAC)
+#if defined(Q_OS_WIN32)
   struct IWMDMMetaData;
 #endif
 
@@ -120,7 +120,7 @@ class Song {
   void ToMTP(LIBMTP_track_struct* track) const;
 #endif
 
-#if defined(Q_OS_WIN32) && defined(HAVE_SAC)
+#if defined(Q_OS_WIN32)
   void InitFromWmdm(IWMDMMetaData* metadata);
   void ToWmdm(IWMDMMetaData* metadata) const;
 #endif

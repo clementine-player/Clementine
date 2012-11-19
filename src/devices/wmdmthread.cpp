@@ -21,18 +21,32 @@
 
 #include <mswmdm.h>
 
-#include <QtDebug>
-
 #include <boost/scoped_array.hpp>
+
+#include <QCoreApplication>
+#include <QLibrary>
+#include <QMutexLocker>
+#include <QtDebug>
 
 BYTE abPVK[] = {0x00};
 BYTE abCert[] = {0x00};
+
+bool WmdmThread::sIsLoaded = false;
+
+decltype(&CSecureChannelClient_New) WmdmThread::_CSecureChannelClient_New;
+decltype(&CSecureChannelClient_Free) WmdmThread::_CSecureChannelClient_Free;
+decltype(&CSecureChannelClient_SetCertificate) WmdmThread::_CSecureChannelClient_SetCertificate;
+decltype(&CSecureChannelClient_SetInterface) WmdmThread::_CSecureChannelClient_SetInterface;  
+decltype(&CSecureChannelClient_Authenticate) WmdmThread::_CSecureChannelClient_Authenticate;
 
 
 WmdmThread::WmdmThread()
   : device_manager_(NULL),
     sac_(NULL)
 {
+  if (!sIsLoaded) {
+    return;
+  }
   // Initialise COM
   CoInitialize(0);
 
@@ -44,15 +58,15 @@ WmdmThread::WmdmThread()
     return;
   }
 
-  sac_ = CSecureChannelClient_New();
-  if (CSecureChannelClient_SetCertificate(
+  sac_ = _CSecureChannelClient_New();
+  if (_CSecureChannelClient_SetCertificate(
       sac_, SAC_CERT_V1, abCert, sizeof(abCert), abPVK, sizeof(abPVK))) {
     qLog(Warning) << "Error setting SAC certificate";
     return;
   }
 
-  CSecureChannelClient_SetInterface(sac_, auth);
-  if (CSecureChannelClient_Authenticate(sac_, SAC_PROTOCOL_V1)) {
+  _CSecureChannelClient_SetInterface(sac_, auth);
+  if (_CSecureChannelClient_Authenticate(sac_, SAC_PROTOCOL_V1)) {
     qLog(Warning) << "Error authenticating with SAC";
     return;
   }
@@ -72,11 +86,46 @@ WmdmThread::~WmdmThread() {
 
   if (sac_) {
     // SAC
-    CSecureChannelClient_Free(sac_);
+    _CSecureChannelClient_Free(sac_);
   }
 
   // Uninitialise COM
   CoUninitialize();
+}
+
+namespace {
+
+template <typename T>
+T Resolve(QLibrary* library, const char* name) {
+  return reinterpret_cast<T>(library->resolve(name));
+}
+
+}  // namespace
+
+bool WmdmThread::StaticInit() {
+  if (!sIsLoaded) {
+    QLibrary library(QCoreApplication::applicationDirPath() + "/sac_shim.dll");
+    if (!library.load()) {
+      return false;
+    }
+
+    _CSecureChannelClient_New = Resolve<decltype(_CSecureChannelClient_New)>(
+        &library, "CSecureChannelClient_New");
+    _CSecureChannelClient_Free = Resolve<decltype(_CSecureChannelClient_Free)>(
+        &library, "CSecureChannelClient_Free");
+    _CSecureChannelClient_SetCertificate = Resolve<decltype(_CSecureChannelClient_SetCertificate)>(
+        &library, "CSecureChannelClient_SetCertificate");
+    _CSecureChannelClient_SetInterface = Resolve<decltype(_CSecureChannelClient_SetInterface)>(
+        &library, "CSecureChannelClient_SetInterface");
+    if (_CSecureChannelClient_New &&
+        _CSecureChannelClient_Free &&
+        _CSecureChannelClient_SetCertificate &&
+        _CSecureChannelClient_SetInterface) {
+      sIsLoaded = true;
+      return true;
+    }
+  }
+  return false;
 }
 
 IWMDMDevice* WmdmThread::GetDeviceByCanonicalName(const QString& device_name) {

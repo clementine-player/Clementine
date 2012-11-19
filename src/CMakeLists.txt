@@ -1,6 +1,6 @@
 
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Woverloaded-virtual -Wall -Wno-sign-compare")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Woverloaded-virtual -Wall -Wno-sign-compare --std=c++11 -U__STRICT_ANSI__")
 
 option(BUILD_WERROR "Build with -Werror" ON)
 
@@ -990,7 +990,7 @@ optional_source(HAVE_LIBMTP
 )
 
 # Windows media lister
-optional_source(HAVE_SAC
+optional_source(WIN32
   SOURCES
     devices/wmdmdevice.cpp
     devices/wmdmlister.cpp
@@ -1199,11 +1199,6 @@ if (WIN32)
     ${QTSPARKLE_LIBRARIES}
     qtwin
   )
-  if (HAVE_SAC)
-    target_link_libraries(clementine_lib
-      ${SAC_SHIM_LIBRARIES}
-    )
-  endif (HAVE_SAC)
 endif (WIN32)
 
 if (UNIX AND NOT APPLE)

@@ -102,6 +102,7 @@ using boost::scoped_ptr;
 
 #ifdef Q_OS_WIN32
 # include <qtsparkle/Updater>
+# include "devices/wmdmthread.h"
 #endif
 
 // Load sqlite plugin on windows and mac.
@@ -440,6 +441,10 @@ int main(int argc, char *argv[]) {
 #ifdef HAVE_DBUS
   mpris::Mpris mpris(&app);
 #endif
+
+  if (!WmdmThread::StaticInit()) {
+    qLog(Warning) << "Failed to initialise SAC shim";
+  }
 
   // Window
   MainWindow w(&app, tray_icon.get(), &osd);

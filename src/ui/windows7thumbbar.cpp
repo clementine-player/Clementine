@@ -96,6 +96,8 @@ void Windows7ThumbBar::HandleWinEvent(MSG* msg) {
       taskbar_list_ = NULL;
     }
 
+    // Copied from win7 SDK shobjidl.h
+    static const GUID CLSID_ITaskbarList ={ 0x56FDF344,0xFD6D,0x11d0,{0x95,0x8A,0x00,0x60,0x97,0xC9,0xA0,0x90}};
     // Create the taskbar list
     hr = CoCreateInstance(CLSID_ITaskbarList, NULL, CLSCTX_ALL,
                          IID_ITaskbarList3, (void**) &taskbar_list_);
