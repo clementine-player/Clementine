@@ -1,3 +1,5 @@
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-delete-non-virtual-dtor")
+
 set(TAGLIB_SOVERSION_CURRENT  13)
 set(TAGLIB_SOVERSION_REVISION 0)
 set(TAGLIB_SOVERSION_AGE      12)
@@ -305,7 +307,7 @@ set(tag_LIB_SRCS
 add_library(tag STATIC ${tag_LIB_SRCS} ${tag_HDRS})
 
 if(ZLIB_FOUND)
-	target_link_libraries(tag ${ZLIB_LIBRARIES})
+  target_link_libraries(tag ${ZLIB_LIBRARIES})
 endif()
 
 set_target_properties(tag PROPERTIES
