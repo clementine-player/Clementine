@@ -328,22 +328,21 @@ const siteDescriptors = {
 	},
 	"teksty.org": {
 		title: "{artist} - {title} - tekst",
-		charset: "UTF-8",
-		extract: "<span class=\"text\" id='text25534-dta'>",
-		exclude: [['<div style="float:left"','>']],
+		charset: "utf-8",
+		extract: [['<div class="songText" id="songContent">','</div>']],
 
-		url: "http://www.teksty.org/{Artist},{Title2}",
+		url: "http://teksty.org/{artist},{title},tekst-piosenki",
 		urlFormat : [
-			{rep: "_", punct: " _@,;&\\/\"." },	//	removed '
-			{rep: "", punct: "'" },
+			{rep: "-", punct: " _@,;&\\/\"'" },
+			{rep: "", punct: "."},
 		]
 	},
 	"tekstowo.pl (Polish translations)": {
-		title: "                                   {artist} - {title} - ",
-		charset: "iso-8859-2",
-		extract: '<div id="tran" style="display:none">',	//	original
-		extract2: '<div id="tex" style="display:block">',	//	translated
-		exclude: [['<div style="float:left"','>']],
+		title: "{artist} - {title} - tekst",
+		charset: "utf-8",
+		extract: [['<div class="song-text">','<a href="javascript:;"']],	//	original
+		extract2: '<div class="tlumaczenie">',	//	translated
+		exclude: [["<h2>","</h2><br />"]],
 
 		url: "http://www.tekstowo.pl/piosenka,{artist},{title}.html",
 		urlFormat : [

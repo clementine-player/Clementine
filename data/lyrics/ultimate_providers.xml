@@ -192,27 +192,24 @@
     <invalidIndicator value="Sorry, we have no"/>
     <invalidIndicator value="This is an upcoming album and we do not have the"/>
   </provider>
-  <provider name="tekstowo.pl (Polish translations)" title="                                   {artist} - {title} - " charset="iso-8859-2" url="http://www.tekstowo.pl/piosenka,{artist},{title}.html">
+  <provider name="tekstowo.pl (Polish translations)" title="{artist} - {title} - tekst" charset="utf-8" url="http://www.tekstowo.pl/piosenka,{artist},{title}.html">
     <urlFormat replace=" _@,;&amp;\/'&quot;." with="_"/>
     <extract>
-      <item tag="&lt;div id=&quot;tran&quot; style=&quot;display:none&quot;&gt;"/>
+      <item begin="&lt;div class=&quot;song-text&quot;&gt;" end="&lt;a href=&quot;javascript:;&quot;"/>
     </extract>
     <extract>
-      <item tag="&lt;div id=&quot;tex&quot; style=&quot;display:block&quot;&gt;"/>
+      <item tag="&lt;div class=&quot;tlumaczenie&quot;&gt;"/>
     </extract>
     <exclude>
-      <item begin="&lt;div style=&quot;float:left&quot;" end="&gt;"/>
+      <item begin="&lt;h2&gt;" end="&lt;/h2&gt;&lt;br /&gt;"/>
     </exclude>
   </provider>
-  <provider name="teksty.org" title="{Artist} - {Title2} - tekst" charset="UTF-8" url="http://www.teksty.org/{artist},{title},tekst-piosenki">
-    <urlFormat replace=" _@,;&amp;\/&quot;." with="_"/>
-    <urlFormat replace="'" with=""/>
+  <provider name="teksty.org" title="{artist} - {title} - tekst" charset="utf-8" url="http://teksty.org/{artist},{title},tekst-piosenki">
+    <urlFormat replace=" _@,;&amp;\/&quot;'" with="-"/>
+    <urlFormat replace="." with=""/>
     <extract>
-      <item tag="&lt;span class=&quot;text&quot; id='text25534-dta'&gt;"/>
+      <item begin="&lt;div class=&quot;songText&quot; id=&quot;songContent&quot;&gt;" end="&lt;/div&gt;"/>
     </extract>
-    <exclude>
-      <item begin="&lt;div style=&quot;float:left&quot;" end="&gt;"/>
-    </exclude>
   </provider>
   <provider name="vagalume.com.br" title="{title} de {artist} no VAGALUME" charset="iso-8859-1" url="http://vagalume.com.br/{artist}/{title}.html">
     <urlFormat replace=" _@,;&amp;\/'&quot;." with="-"/>
