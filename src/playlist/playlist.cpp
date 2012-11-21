@@ -1921,17 +1921,34 @@ void Playlist::RemoveDeletedSongs() {
 
 void Playlist::RemoveDuplicateSongs() {
   QList<int> rows_to_remove;
-  QSet<QUrl> filenames;
+  QHash<Song, int> unique_songs;
 
   for (int row = 0; row < items_.count(); ++row) {
     PlaylistItemPtr item = items_[row];
     Song song = item->Metadata();
 
-    if (filenames.contains(song.url())) {
-      rows_to_remove.append(row);
-    } else {
-      filenames.insert(song.url());
+    bool found_duplicate = false;
+    QHashIterator<Song, int> iterator(unique_songs);
+
+    while (iterator.hasNext() && !found_duplicate) {
+      iterator.next();
+      Song uniq_song = iterator.key();
+
+      if (song.IsDuplicate(uniq_song)) {
+        if (song.bitrate() > uniq_song.bitrate()) {
+          rows_to_remove.append(unique_songs[uniq_song]);
+          unique_songs.remove(uniq_song);
+          unique_songs.insert(song, row);
+        }
+        else {
+          rows_to_remove.append(row);
+        }
+        found_duplicate = true;
+      }
     }
+
+    if (!found_duplicate)
+      unique_songs.insert(song, row);
   }
 
   removeRows(rows_to_remove);

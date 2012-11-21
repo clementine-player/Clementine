@@ -1114,6 +1114,12 @@ bool Song::IsMetadataEqual(const Song& other) const {
          d->cue_path_ == other.d->cue_path_;
 }
 
+bool Song::IsDuplicate(const Song& other) const {
+  return url() == other.url() ||
+    (title().toLower() == other.title().toLower() &&
+     artist().toLower() == other.artist().toLower());
+}
+
 bool Song::IsEditable() const {
   return d->valid_ && !d->url_.isEmpty() && !is_stream() &&
          d->filetype_ != Type_Unknown && !has_cue();
