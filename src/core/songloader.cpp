@@ -17,7 +17,7 @@
 
 #include "songloader.h"
 
-#include <functional>
+#include <boost/bind.hpp>
 
 #include <QBuffer>
 #include <QDirIterator>
@@ -231,7 +231,7 @@ SongLoader::Result SongLoader::LoadLocal(const QString& filename, bool block,
   if (QFileInfo(filename).isDir()) {
     if (!block) {
       ConcurrentRun::Run<void>(&thread_pool_,
-          std::bind(&SongLoader::LoadLocalDirectoryAndEmit, this, filename));
+          boost::bind(&SongLoader::LoadLocalDirectoryAndEmit, this, filename));
       return WillLoadAsync;
     } else {
       LoadLocalDirectory(filename);
@@ -264,7 +264,7 @@ SongLoader::Result SongLoader::LoadLocal(const QString& filename, bool block,
     // It's a playlist!
     if (!block) {
       ConcurrentRun::Run<void>(&thread_pool_,
-          std::bind(&SongLoader::LoadPlaylistAndEmit, this, parser, filename));
+          boost::bind(&SongLoader::LoadPlaylistAndEmit, this, parser, filename));
       return WillLoadAsync;
     } else {
       LoadPlaylist(parser, filename);
