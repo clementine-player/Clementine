@@ -22,7 +22,7 @@
 #ifndef AMAROK_ENGINEBASE_H
 #define AMAROK_ENGINEBASE_H
 
-#include <cstdint>
+#include <stdint.h>
 #include <sys/types.h>
 
 #include <vector>
