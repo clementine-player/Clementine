@@ -15,10 +15,22 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "devicemanager.h"
+
+#include <boost/bind.hpp>
+
+#include <QApplication>
+#include <QDir>
+#include <QIcon>
+#include <QMessageBox>
+#include <QPainter>
+#include <QPushButton>
+#include <QSortFilterProxyModel>
+#include <QUrl>
+
 #include "config.h"
 #include "devicedatabasebackend.h"
 #include "devicekitlister.h"
-#include "devicemanager.h"
 #include "devicestatefiltermodel.h"
 #include "filesystemdevice.h"
 #include "core/application.h"
@@ -56,17 +68,7 @@
 #  include "mtpdevice.h"
 #endif
 
-#include <QApplication>
-#include <QDir>
-#include <QIcon>
-#include <QMessageBox>
-#include <QPainter>
-#include <QPushButton>
-#include <QSortFilterProxyModel>
-#include <QUrl>
-
-#include <tr1/functional>
-using std::tr1::bind;
+using boost::bind;
 
 const int DeviceManager::kDeviceIconSize = 32;
 const int DeviceManager::kDeviceIconOverlaySize = 16;
