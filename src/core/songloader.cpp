@@ -15,8 +15,22 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "config.h"
 #include "songloader.h"
+
+#include <functional>
+
+#include <QBuffer>
+#include <QDirIterator>
+#include <QFileInfo>
+#include <QTimer>
+#include <QUrl>
+#include <QtDebug>
+
+#ifdef HAVE_AUDIOCD
+# include <gst/cdda/gstcddabasesrc.h>
+#endif
+
+#include "config.h"
 #include "core/concurrentrun.h"
 #include "core/logging.h"
 #include "core/song.h"
@@ -33,19 +47,6 @@
 #include "podcasts/podcastparser.h"
 #include "podcasts/podcastservice.h"
 #include "podcasts/podcasturlloader.h"
-
-#include <QBuffer>
-#include <QDirIterator>
-#include <QFileInfo>
-#include <QTimer>
-#include <QUrl>
-#include <QtDebug>
-
-#include <boost/bind.hpp>
-
-#ifdef HAVE_AUDIOCD
-# include <gst/cdda/gstcddabasesrc.h>
-#endif
 
 
 QSet<QString> SongLoader::sRawUriSchemes;
@@ -230,7 +231,7 @@ SongLoader::Result SongLoader::LoadLocal(const QString& filename, bool block,
   if (QFileInfo(filename).isDir()) {
     if (!block) {
       ConcurrentRun::Run<void>(&thread_pool_,
-          boost::bind(&SongLoader::LoadLocalDirectoryAndEmit, this, filename));
+          std::bind(&SongLoader::LoadLocalDirectoryAndEmit, this, filename));
       return WillLoadAsync;
     } else {
       LoadLocalDirectory(filename);
@@ -263,7 +264,7 @@ SongLoader::Result SongLoader::LoadLocal(const QString& filename, bool block,
     // It's a playlist!
     if (!block) {
       ConcurrentRun::Run<void>(&thread_pool_,
-          boost::bind(&SongLoader::LoadPlaylistAndEmit, this, parser, filename));
+          std::bind(&SongLoader::LoadPlaylistAndEmit, this, parser, filename));
       return WillLoadAsync;
     } else {
       LoadPlaylist(parser, filename);
