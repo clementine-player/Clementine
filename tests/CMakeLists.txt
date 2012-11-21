@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 2.6)
 
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x -U__STRICT_ANSI__ -fpermissive")
+
 if(USE_SYSTEM_GMOCK)
   include_directories(${GMOCK_INCLUDE_DIRS} ${GTEST_INCLUDE_DIRS})
 else(USE_SYSTEM_GMOCK)
