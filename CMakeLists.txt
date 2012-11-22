@@ -16,6 +16,15 @@ if (CMAKE_CXX_COMPILER MATCHES ".*clang")
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-uninitialized")
 endif ()
 
+check_cxx_source_compiles(
+    "#include <unordered_map>
+     int main() {
+       std::unordered_map<int, int> m;
+       return 0;
+     }
+    "
+    USE_STD_UNORDERED_MAP)
+
 if (UNIX AND NOT APPLE)
   set(LINUX 1)
 endif (UNIX AND NOT APPLE)

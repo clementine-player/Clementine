@@ -64,15 +64,12 @@
 #include <algorithm>
 #include <boost/bind.hpp>
 
-#ifdef Q_OS_DARWIN
-  #include <tr1/unordered_map>
-
-  // I'm sorry...
-  namespace std {
-    using tr1::unordered_map;
-  }
-#else
+#ifdef USE_STD_UNORDERED_MAP
   #include <unordered_map>
+  using std::unordered_map;
+#else
+  #include <tr1/unordered_map>
+  using std::tr1::unordered_map;
 #endif
 
 using smart_playlists::Generator;
@@ -1944,7 +1941,7 @@ struct SongSimilarEqual {
 
 void Playlist::RemoveDuplicateSongs() {
   QList<int> rows_to_remove;
-  std::unordered_map<Song, int, SongSimilarHash, SongSimilarEqual> unique_songs;
+  unordered_map<Song, int, SongSimilarHash, SongSimilarEqual> unique_songs;
 
   for (int row = 0; row < items_.count(); ++row) {
     PlaylistItemPtr item = items_[row];
