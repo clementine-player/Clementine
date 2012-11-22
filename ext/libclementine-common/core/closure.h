@@ -26,7 +26,6 @@
 #include <boost/function.hpp>
 #include <boost/noncopyable.hpp>
 #include <boost/scoped_ptr.hpp>
-#include <boost/tuple/tuple.hpp>
 
 namespace _detail {
 
@@ -65,25 +64,21 @@ class ObjectHelper : public QObject {
   Q_DISABLE_COPY(ObjectHelper);
 };
 
-// Helper to unpack a tuple into a QList.
-template<typename T>
-void Arg(const T& tail, QList<QGenericArgument>* list) {
-  typedef decltype(tail.get_head()) HeadType;
-  list->append(Q_ARG(HeadType, tail.get_head()));
-  Arg(tail.get_tail(), list);
+// Helpers for unpacking a variadic template list.
+
+// Base case of no arguments.
+void Unpack(QList<QGenericArgument>*);
+
+template <typename Arg>
+void Unpack(QList<QGenericArgument>* list, const Arg& arg) {
+  list->append(Q_ARG(Arg, arg));
 }
 
-// Specialisation for starting with an empty tuple, ie. no arguments.
-template<>
-void Arg<boost::tuples::tuple<>>(
-    const boost::tuples::tuple<>&,
-    QList<QGenericArgument>* list);
-
-// Specialisation for the end of a tuple, where get_tail() returns null_type.
-template<>
-void Arg<boost::tuples::null_type>(
-    const boost::tuples::null_type&,
-    QList<QGenericArgument>* list);
+template <typename Head, typename... Tail>
+void Unpack(QList<QGenericArgument>* list, const Head& head, const Tail&... tail) {
+  Unpack(list, head);
+  Unpack(list, tail...);
+}
 
 template <typename... Args>
 class Closure : public ClosureBase {
@@ -111,9 +106,8 @@ class Closure : public ClosureBase {
 
  private:
   void Call(const Args&... args) {
-    auto t = boost::make_tuple(args...);
     QList<QGenericArgument> arg_list;
-    Arg(t, &arg_list);
+    Unpack(&arg_list, args...);
 
     slot_.invoke(
         receiver_,

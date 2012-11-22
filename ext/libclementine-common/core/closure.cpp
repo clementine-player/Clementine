@@ -48,15 +48,7 @@ void ObjectHelper::Invoked() {
   deleteLater();
 }
 
-template<>
-void Arg<boost::tuples::tuple<>>(
-    const boost::tuples::tuple<>&,
-    QList<QGenericArgument>* list) {}
-
-template<>
-void Arg<boost::tuples::null_type>(
-    const boost::tuples::null_type&,
-    QList<QGenericArgument>* list) {}
+void Unpack(QList<QGenericArgument>*) {}
 
 }  // namespace _detail
 
