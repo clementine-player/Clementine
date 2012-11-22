@@ -15,17 +15,19 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "songinfotextview.h"
 #include "songkickconcertwidget.h"
-#include "ui_songkickconcertwidget.h"
-#include "core/closure.h"
-#include "core/network.h"
-#include "core/utilities.h"
 
 #include <QDate>
 #include <QDesktopServices>
 #include <QMouseEvent>
 #include <QTextDocument>
+
+#include "songinfotextview.h"
+#include "ui_songkickconcertwidget.h"
+#include "core/closure.h"
+#include "core/logging.h"
+#include "core/network.h"
+#include "core/utilities.h"
 
 const int SongKickConcertWidget::kStaticMapWidth = 100;
 const int SongKickConcertWidget::kStaticMapHeight = 100;

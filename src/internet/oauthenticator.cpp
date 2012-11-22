@@ -12,6 +12,7 @@
 #include <qjson/parser.h>
 
 #include "core/closure.h"
+#include "core/logging.h"
 
 namespace {
 

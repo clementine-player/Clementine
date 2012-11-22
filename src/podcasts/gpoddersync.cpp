@@ -189,7 +189,7 @@ void GPodderSync::DeviceUpdatesFinished(mygpo::DeviceUpdatesPtr reply) {
     // have a list of the episodes.
     PodcastUrlLoaderReply* loader_reply = loader_->Load(url);
     NewClosure(loader_reply, SIGNAL(Finished(bool)),
-               this, SLOT(NewPodcastLoaded(PodcastUrlLoaderReply*,QUrl,QList<QSharedPointer<mygpo::Episode> >)),
+               this, SLOT(NewPodcastLoaded(PodcastUrlLoaderReply*,QUrl,QList<mygpo::EpisodePtr>)),
                loader_reply, url, episodes_by_podcast[url]);
   }
 

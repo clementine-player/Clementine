@@ -16,11 +16,8 @@
 */
 
 #include "moodbarloader.h"
-#include "moodbarpipeline.h"
-#include "core/application.h"
-#include "core/closure.h"
-#include "core/qhash_qurl.h"
-#include "core/utilities.h"
+
+#include <boost/scoped_ptr.hpp>
 
 #include <QCoreApplication>
 #include <QDir>
@@ -30,7 +27,12 @@
 #include <QThread>
 #include <QUrl>
 
-#include <boost/scoped_ptr.hpp>
+#include "moodbarpipeline.h"
+#include "core/application.h"
+#include "core/closure.h"
+#include "core/logging.h"
+#include "core/qhash_qurl.h"
+#include "core/utilities.h"
 
 MoodbarLoader::MoodbarLoader(Application* app, QObject* parent)
   : QObject(parent),

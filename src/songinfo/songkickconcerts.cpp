@@ -26,6 +26,7 @@
 #include <qjson/parser.h>
 
 #include "core/closure.h"
+#include "core/logging.h"
 #include "songkickconcertwidget.h"
 
 const char* SongkickConcerts::kSongkickArtistBucket = "id:songkick";

@@ -19,79 +19,46 @@
 
 #include <QTimer>
 
-#include "core/logging.h"
 #include "core/timeconstants.h"
 
 namespace _detail {
 
-Closure::Closure(QObject* sender,
-                 const char* signal,
-                 QObject* receiver,
-                 const char* slot,
-                 const ClosureArgumentWrapper* val0,
-                 const ClosureArgumentWrapper* val1,
-                 const ClosureArgumentWrapper* val2,
-                 const ClosureArgumentWrapper* val3)
-    : QObject(receiver),
-      callback_(NULL),
-      val0_(val0),
-      val1_(val1),
-      val2_(val2),
-      val3_(val3) {
-  const QMetaObject* meta_receiver = receiver->metaObject();
-
-  QByteArray normalised_slot = QMetaObject::normalizedSignature(slot + 1);
-  const int index = meta_receiver->indexOfSlot(normalised_slot.constData());
-  Q_ASSERT(index != -1);
-  slot_ = meta_receiver->method(index);
-
-  Connect(sender, signal);
+ClosureBase::ClosureBase(ObjectHelper* helper)
+    : helper_(helper) {
 }
 
-Closure::Closure(QObject* sender,
-                 const char* signal,
-                 std::tr1::function<void()> callback)
-    : callback_(callback) {
-  Connect(sender, signal);
+ClosureBase::~ClosureBase() {
 }
 
-Closure::~Closure() {
+ObjectHelper* ClosureBase::helper() const {
+  return helper_;
 }
 
-void Closure::Connect(QObject* sender, const char* signal) {
-  bool success = connect(sender, signal, SLOT(Invoked()));
-  Q_ASSERT(success);
-  success = connect(sender, SIGNAL(destroyed()), SLOT(Cleanup()));
-  Q_ASSERT(success);
-  Q_UNUSED(success);
+ObjectHelper::ObjectHelper(
+    QObject* sender,
+    const char* signal,
+    ClosureBase* closure)
+  : closure_(closure) {
+  connect(sender, signal, SLOT(Invoked()));
+  connect(sender, SIGNAL(destroyed()), SLOT(deleteLater()));
 }
 
-void Closure::Invoked() {
-  if (callback_) {
-    callback_();
-  } else {
-    slot_.invoke(
-        parent(),
-        val0_ ? val0_->arg() : QGenericArgument(),
-        val1_ ? val1_->arg() : QGenericArgument(),
-        val2_ ? val2_->arg() : QGenericArgument(),
-        val3_ ? val3_->arg() : QGenericArgument());
-  }
+void ObjectHelper::Invoked() {
+  closure_->Invoke();
   deleteLater();
 }
 
-void Closure::Cleanup() {
-  disconnect();
-  deleteLater();
-}
+template<>
+void Arg<boost::tuples::tuple<>>(
+    const boost::tuples::tuple<>&,
+    QList<QGenericArgument>* list) {}
+
+template<>
+void Arg<boost::tuples::null_type>(
+    const boost::tuples::null_type&,
+    QList<QGenericArgument>* list) {}
 
 }  // namespace _detail
-
-_detail::Closure* NewClosure(
-    QObject* sender, const char* signal,
-    QObject* receiver, const char* slot) {
-  return new _detail::Closure(sender, signal, receiver, slot);
-}
 
 void DoAfter(QObject* receiver, const char* slot, int msec) {
   QTimer::singleShot(msec, receiver, slot);

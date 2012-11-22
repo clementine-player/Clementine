@@ -18,211 +18,169 @@
 #ifndef CLOSURE_H
 #define CLOSURE_H
 
-#include <tr1/functional>
-
 #include <QMetaMethod>
 #include <QObject>
 #include <QSharedPointer>
 
+#include <boost/bind.hpp>
+#include <boost/function.hpp>
 #include <boost/noncopyable.hpp>
 #include <boost/scoped_ptr.hpp>
-
-#include "core/logging.h"
+#include <boost/tuple/tuple.hpp>
 
 namespace _detail {
 
-class ClosureArgumentWrapper {
- public:
-  virtual ~ClosureArgumentWrapper() {}
+class ObjectHelper;
 
-  virtual QGenericArgument arg() const = 0;
+// Interface for ObjectHelper to call on signal emission.
+class ClosureBase : boost::noncopyable {
+ public:
+  virtual ~ClosureBase();
+  virtual void Invoke() = 0;
+
+  // Tests only.
+  ObjectHelper* helper() const;
+
+ protected:
+  explicit ClosureBase(ObjectHelper*);
+  ObjectHelper* helper_;
 };
 
-template<typename T>
-class ClosureArgument : public ClosureArgumentWrapper {
- public:
-  explicit ClosureArgument(const T& data) : data_(data) {}
-
-  virtual QGenericArgument arg() const {
-    return Q_ARG(T, data_);
-  }
-
- private:
-  T data_;
-};
-
-class Closure : public QObject, boost::noncopyable {
+// QObject helper as templated QObjects do not work.
+// Connects to the given signal and invokes the closure when called.
+// Deletes itself and the Closure after being invoked.
+class ObjectHelper : public QObject {
   Q_OBJECT
-
  public:
-  Closure(QObject* sender, const char* signal,
-          QObject* receiver, const char* slot,
-          const ClosureArgumentWrapper* val0 = 0,
-          const ClosureArgumentWrapper* val1 = 0,
-          const ClosureArgumentWrapper* val2 = 0,
-          const ClosureArgumentWrapper* val3 = 0);
-
-  Closure(QObject* sender, const char* signal,
-          std::tr1::function<void()> callback);
-
-  virtual ~Closure();
+  ObjectHelper(
+      QObject* parent,
+      const char* signal,
+      ClosureBase* closure);
 
  private slots:
   void Invoked();
-  void Cleanup();
 
  private:
-  void Connect(QObject* sender, const char* signal);
-
-  QMetaMethod slot_;
-  std::tr1::function<void()> callback_;
-
-  boost::scoped_ptr<const ClosureArgumentWrapper> val0_;
-  boost::scoped_ptr<const ClosureArgumentWrapper> val1_;
-  boost::scoped_ptr<const ClosureArgumentWrapper> val2_;
-  boost::scoped_ptr<const ClosureArgumentWrapper> val3_;
+  boost::scoped_ptr<ClosureBase> closure_;
+  Q_DISABLE_COPY(ObjectHelper);
 };
 
-class SharedPointerWrapper {
- public:
-  virtual ~SharedPointerWrapper() {}
-  virtual QObject* data() const = 0;
-};
-
+// Helper to unpack a tuple into a QList.
 template<typename T>
-class SharedPointer : public SharedPointerWrapper {
+void Arg(const T& tail, QList<QGenericArgument>* list) {
+  typedef decltype(tail.get_head()) HeadType;
+  list->append(Q_ARG(HeadType, tail.get_head()));
+  Arg(tail.get_tail(), list);
+}
+
+// Specialisation for starting with an empty tuple, ie. no arguments.
+template<>
+void Arg<boost::tuples::tuple<>>(
+    const boost::tuples::tuple<>&,
+    QList<QGenericArgument>* list);
+
+// Specialisation for the end of a tuple, where get_tail() returns null_type.
+template<>
+void Arg<boost::tuples::null_type>(
+    const boost::tuples::null_type&,
+    QList<QGenericArgument>* list);
+
+template <typename... Args>
+class Closure : public ClosureBase {
  public:
-  explicit SharedPointer(QSharedPointer<T> ptr)
-      : ptr_(ptr) {
+  Closure(
+      QObject* sender,
+      const char* signal,
+      QObject* receiver,
+      const char* slot,
+      const Args&... args)
+   :  ClosureBase(new ObjectHelper(sender, signal, this)),
+      // boost::bind is the easiest way to store an argument list.
+      function_(boost::bind(&Closure<Args...>::Call, this, args...)),
+      receiver_(receiver) {
+    const QMetaObject* meta_receiver = receiver->metaObject();
+    QByteArray normalised_slot = QMetaObject::normalizedSignature(slot + 1);
+    const int index = meta_receiver->indexOfSlot(normalised_slot.constData());
+    Q_ASSERT(index != -1);
+    slot_ = meta_receiver->method(index);
   }
 
-  QObject* data() const {
-    return ptr_.data();
+  virtual void Invoke() {
+    function_();
   }
 
  private:
-  QSharedPointer<T> ptr_;
+  void Call(const Args&... args) {
+    auto t = boost::make_tuple(args...);
+    QList<QGenericArgument> arg_list;
+    Arg(t, &arg_list);
+
+    slot_.invoke(
+        receiver_,
+        arg_list.size() > 0 ? arg_list[0] : QGenericArgument(),
+        arg_list.size() > 1 ? arg_list[1] : QGenericArgument(),
+        arg_list.size() > 2 ? arg_list[2] : QGenericArgument(),
+        arg_list.size() > 3 ? arg_list[3] : QGenericArgument(),
+        arg_list.size() > 4 ? arg_list[4] : QGenericArgument(),
+        arg_list.size() > 5 ? arg_list[5] : QGenericArgument(),
+        arg_list.size() > 6 ? arg_list[6] : QGenericArgument(),
+        arg_list.size() > 7 ? arg_list[7] : QGenericArgument(),
+        arg_list.size() > 8 ? arg_list[8] : QGenericArgument(),
+        arg_list.size() > 9 ? arg_list[9] : QGenericArgument());
+  }
+
+  boost::function<void()> function_;
+  QObject* receiver_;
+  QMetaMethod slot_;
 };
 
-// For use with a QSharedPointer as a sender.
-class SharedClosure : public Closure {
-  Q_OBJECT
-
+template <typename T, typename... Args>
+class SharedClosure : public Closure<Args...> {
  public:
-  SharedClosure(SharedPointerWrapper* sender, const char* signal,
-                QObject* receiver, const char* slot,
-                const ClosureArgumentWrapper* val0 = 0,
-                const ClosureArgumentWrapper* val1 = 0,
-                const ClosureArgumentWrapper* val2 = 0,
-                const ClosureArgumentWrapper* val3 = 0)
-      : Closure(sender->data(), signal,
-                receiver, slot,
-                val0, val1, val2, val3),
-        shared_sender_(sender) {
+  SharedClosure(
+      QSharedPointer<T> sender,
+      const char* signal,
+      QObject* receiver,
+      const char* slot,
+      const Args&... args)
+    : Closure<Args...>(
+        sender.data(),
+        signal,
+        receiver,
+        slot,
+        args...),
+      data_(sender) {
   }
 
  private:
-  boost::scoped_ptr<SharedPointerWrapper> shared_sender_;
+  QSharedPointer<T> data_;
 };
 
 }  // namespace _detail
 
-#define C_ARG(type, data) new _detail::ClosureArgument<type>(data)
-
-_detail::Closure* NewClosure(
-    QObject* sender,
-    const char* signal,
-    QObject* receiver,
-    const char* slot);
-
-template <typename T>
-_detail::Closure* NewClosure(
+template <typename... Args>
+_detail::ClosureBase* NewClosure(
     QObject* sender,
     const char* signal,
     QObject* receiver,
     const char* slot,
-    const T& val0) {
-  return new _detail::Closure(
-      sender, signal, receiver, slot,
-      C_ARG(T, val0));
+    const Args&... args) {
+  return new _detail::Closure<Args...>(
+      sender, signal, receiver, slot, args...);
 }
 
-template <typename T0, typename T1>
-_detail::Closure* NewClosure(
-    QObject* sender,
+// QSharedPointer variant
+template <typename T, typename... Args>
+_detail::ClosureBase* NewClosure(
+    QSharedPointer<T> sender,
     const char* signal,
     QObject* receiver,
     const char* slot,
-    const T0& val0,
-    const T1& val1) {
-  return new _detail::Closure(
-      sender, signal, receiver, slot,
-      C_ARG(T0, val0), C_ARG(T1, val1));
+    const Args&... args) {
+  return new _detail::SharedClosure<T, Args...>(
+      sender, signal, receiver, slot, args...);
 }
 
-template <typename T0, typename T1, typename T2>
-_detail::Closure* NewClosure(
-    QObject* sender,
-    const char* signal,
-    QObject* receiver,
-    const char* slot,
-    const T0& val0,
-    const T1& val1,
-    const T2& val2) {
-  return new _detail::Closure(
-      sender, signal, receiver, slot,
-      C_ARG(T0, val0), C_ARG(T1, val1), C_ARG(T2, val2));
-}
-
-template <typename T0, typename T1, typename T2, typename T3>
-_detail::Closure* NewClosure(
-    QObject* sender,
-    const char* signal,
-    QObject* receiver,
-    const char* slot,
-    const T0& val0,
-    const T1& val1,
-    const T2& val2,
-    const T3& val3) {
-  return new _detail::Closure(
-      sender, signal, receiver, slot,
-      C_ARG(T0, val0), C_ARG(T1, val1), C_ARG(T2, val2), C_ARG(T3, val3));
-}
-
-template <typename TP>
-_detail::Closure* NewClosure(
-    QSharedPointer<TP> sender,
-    const char* signal,
-    QObject* receiver,
-    const char* slot) {
-  return new _detail::SharedClosure(
-      new _detail::SharedPointer<TP>(sender), signal, receiver, slot);
-}
-
-template <typename TP, typename T0>
-_detail::Closure* NewClosure(
-    QSharedPointer<TP> sender,
-    const char* signal,
-    QObject* receiver,
-    const char* slot,
-    const T0& val0) {
-  return new _detail::SharedClosure(
-        new _detail::SharedPointer<TP>(sender), signal, receiver, slot,
-        C_ARG(T0, val0));
-}
-
-template <typename TP, typename T0, typename T1>
-_detail::Closure* NewClosure(
-    QSharedPointer<TP> sender,
-    const char* signal,
-    QObject* receiver,
-    const char* slot,
-    const T0& val0,
-    const T1& val1) {
-  return new _detail::SharedClosure(
-        new _detail::SharedPointer<TP>(sender), signal, receiver, slot,
-        C_ARG(T0, val0), C_ARG(T1, val1));
-}
 
 void DoAfter(QObject* receiver, const char* slot, int msec);
 void DoInAMinuteOrSo(QObject* receiver, const char* slot);
