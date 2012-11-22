@@ -262,7 +262,7 @@ class Song {
   // Comparison functions
   bool IsMetadataEqual(const Song& other) const;
   bool IsOnSameAlbum(const Song& other) const;
-  bool IsDuplicate(const Song& other) const;
+  bool IsSimilar(const Song& other) const;
 
   bool operator==(const Song& other) const;
 
@@ -283,5 +283,7 @@ typedef QList<Song> SongList;
 Q_DECLARE_METATYPE(QList<Song>);
 
 uint qHash(const Song& song);
+// Hash function using field checked in IsSimilar function
+uint HashSimilar(const Song& song);
 
 #endif // SONG_H

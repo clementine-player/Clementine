@@ -1114,12 +1114,6 @@ bool Song::IsMetadataEqual(const Song& other) const {
          d->cue_path_ == other.d->cue_path_;
 }
 
-bool Song::IsDuplicate(const Song& other) const {
-  return url() == other.url() ||
-    (title().toLower() == other.title().toLower() &&
-     artist().toLower() == other.artist().toLower());
-}
-
 bool Song::IsEditable() const {
   return d->valid_ && !d->url_.isEmpty() && !is_stream() &&
          d->filetype_ != Type_Unknown && !has_cue();
@@ -1134,6 +1128,16 @@ bool Song::operator==(const Song& other) const {
 uint qHash(const Song& song) {
   // Should compare the same fields as operator==
   return qHash(song.url().toString()) ^ qHash(song.beginning_nanosec());
+}
+
+bool Song::IsSimilar(const Song& other) const {
+  return title().compare(other.title(), Qt::CaseInsensitive) == 0 &&
+         artist().compare(other.artist(), Qt::CaseInsensitive) == 0;
+}
+
+uint HashSimilar(const Song& song) {
+  // Should compare the same fields as function IsSimilar
+  return qHash(song.title().toLower()) ^ qHash(song.artist().toLower());
 }
 
 bool Song::IsOnSameAlbum(const Song& other) const {
