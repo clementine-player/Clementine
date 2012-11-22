@@ -62,8 +62,18 @@
 #include <QtDebug>
 
 #include <algorithm>
-#include <unordered_map>
 #include <boost/bind.hpp>
+
+#ifdef Q_OS_DARWIN
+  #include <tr1/unordered_map>
+
+  // I'm sorry...
+  namespace std {
+    using tr1::unordered_map;
+  }
+#else
+  #include <unordered_map>
+#endif
 
 using smart_playlists::Generator;
 using smart_playlists::GeneratorInserter;
