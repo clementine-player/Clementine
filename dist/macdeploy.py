@@ -15,11 +15,14 @@
 #  You should have received a copy of the GNU General Public License
 #  along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 
+import logging
 import os
 import re
 import subprocess
 import sys
 import traceback
+
+LOGGER = logging.getLogger("macdeploy")
 
 FRAMEWORK_SEARCH_PATH=[
     '/target',
@@ -197,6 +200,7 @@ def FindFramework(path):
   for search_path in FRAMEWORK_SEARCH_PATH:
     abs_path = os.path.join(search_path, path)
     if os.path.exists(abs_path):
+      LOGGER.debug("Found framework '%s' in '%s'", path, search_path)
       return abs_path
 
   raise CouldNotFindFrameworkError(path)
@@ -207,6 +211,7 @@ def FindLibrary(path):
   for search_path in LIBRARY_SEARCH_PATH:
     abs_path = os.path.join(search_path, path)
     if os.path.exists(abs_path):
+      LOGGER.debug("Found library '%s' in '%s'", path, search_path)
       return abs_path
 
   raise CouldNotFindFrameworkError(path)
@@ -272,6 +277,7 @@ def CopyLibrary(path):
   new_path = os.path.join(frameworks_dir, os.path.basename(path))
   args = ['ditto', '--arch=x86_64', path, new_path]
   commands.append(args)
+  LOGGER.info("Copying library '%s'", path)
   return new_path
 
 def CopyPlugin(path, subdir):
@@ -280,6 +286,7 @@ def CopyPlugin(path, subdir):
   commands.append(args)
   args = ['ditto', '--arch=x86_64', path, new_path]
   commands.append(args)
+  LOGGER.info("Copying plugin '%s'", path)
   return new_path
 
 def CopyFramework(path):
@@ -298,6 +305,7 @@ def CopyFramework(path):
     args = ['cp', '-r', menu_nib, resources_dir]
     commands.append(args)
 
+  LOGGER.info("Copying framework '%s'", path)
   return os.path.join(full_path, parts[-1])
 
 def FixId(path, library_name):
@@ -377,32 +385,40 @@ def FindGioModule(name):
   raise CouldNotFindGioModuleError(name)
 
 
-FixBinary(binary)
+def main():
+  logging.basicConfig(filename="macdeploy.log", level=logging.DEBUG,
+                      format='%(asctime)s %(levelname)-8s %(message)s')
 
-for plugin in GSTREAMER_PLUGINS:
-  FixPlugin(FindGstreamerPlugin(plugin), 'gstreamer')
+  FixBinary(binary)
 
-FixPlugin(FindGstreamerPlugin('gst-plugin-scanner'), '.')
-FixPlugin(FindGioModule('libgiognutls.so'), 'gio-modules')
-FixPlugin(FindGioModule('libgiolibproxy.so'), 'gio-modules')
+  for plugin in GSTREAMER_PLUGINS:
+    FixPlugin(FindGstreamerPlugin(plugin), 'gstreamer')
 
-try:
-  FixPlugin('clementine-spotifyblob', '.')
-  FixPlugin('clementine-tagreader', '.')
-except:
-  print 'Failed to find blob: %s' % traceback.format_exc()
+  FixPlugin(FindGstreamerPlugin('gst-plugin-scanner'), '.')
+  FixPlugin(FindGioModule('libgiognutls.so'), 'gio-modules')
+  FixPlugin(FindGioModule('libgiolibproxy.so'), 'gio-modules')
 
-for plugin in QT_PLUGINS:
-  FixPlugin(FindQtPlugin(plugin), os.path.dirname(plugin))
+  try:
+    FixPlugin('clementine-spotifyblob', '.')
+    FixPlugin('clementine-tagreader', '.')
+  except:
+    print 'Failed to find blob: %s' % traceback.format_exc()
 
-if len(sys.argv) <= 2:
-  print 'Would run %d commands:' % len(commands)
+  for plugin in QT_PLUGINS:
+    FixPlugin(FindQtPlugin(plugin), os.path.dirname(plugin))
+
+  if len(sys.argv) <= 2:
+    print 'Would run %d commands:' % len(commands)
+    for command in commands:
+      print ' '.join(command)
+
+    print 'OK?'
+    raw_input()
+
   for command in commands:
-    print ' '.join(command)
+    p = subprocess.Popen(command)
+    os.waitpid(p.pid, 0)
 
-  print 'OK?'
-  raw_input()
 
-for command in commands:
-  p = subprocess.Popen(command)
-  os.waitpid(p.pid, 0)
+if __name__ == "__main__":
+  main()
