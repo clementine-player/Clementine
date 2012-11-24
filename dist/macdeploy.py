@@ -26,6 +26,7 @@ LOGGER = logging.getLogger("macdeploy")
 
 FRAMEWORK_SEARCH_PATH=[
     '/target',
+    '/target/lib',
     '/Library/Frameworks',
     os.path.join(os.environ['HOME'], 'Library/Frameworks')
 ]
