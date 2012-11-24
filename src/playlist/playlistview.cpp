@@ -317,9 +317,7 @@ void PlaylistView::LoadGeometry() {
     header_->HideSection(Playlist::Column_Comment);
   }
   if (state_version < 5) {
-#ifndef HAVE_MOODBAR
     header_->HideSection(Playlist::Column_Mood);
-#endif
   }
 
   // Make sure at least one column is visible
