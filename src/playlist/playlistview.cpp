@@ -575,7 +575,7 @@ void PlaylistView::RemoveSelected() {
     model()->removeRows(range.top(), range.height(), range.parent());
   }
 
-  int new_row = last_row-rows_removed+1;
+  int new_row = last_row - rows_removed;
   // Index of the first column for the row to select
   QModelIndex new_index = model()->index(new_row, 0);
 
