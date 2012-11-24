@@ -779,6 +779,9 @@ void PlaylistView::MaybeAutoscroll() {
 void PlaylistView::JumpToCurrentlyPlayingTrack() {
   Q_ASSERT(playlist_);
 
+  // Usage of the "Jump to the currently playing track" action shall enable autoscroll
+  inhibit_autoscroll_ = false;
+
   if (playlist_->current_row() == -1)
     return;
 
