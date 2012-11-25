@@ -406,6 +406,8 @@ int main(int argc, char *argv[]) {
   qtsparkle::LoadTranslations(language);
 #endif
 
+  *reinterpret_cast<int*>(0) = 0;
+
   // Icons
   IconLoader::Init();
 

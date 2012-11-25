@@ -20,7 +20,6 @@
 #include "core/logging.h"
 
 #include <QApplication>
-#include <QDir>
 #include <QFile>
 #include <QMessageBox>
 #include <QNetworkAccessManager>
@@ -30,9 +29,8 @@
 #include <QUrl>
 #include <QtDebug>
 
-#if defined(HAVE_BREAKPAD) and defined(Q_OS_LINUX)
-#  include "client/linux/handler/exception_handler.h"
-#  include "third_party/lss/linux_syscall_support.h"
+#if QT_VERSION >= 0x040800
+  #include <QHttpMultiPart>
 #endif
 
 
@@ -40,16 +38,6 @@ const char* CrashSender::kUploadURL = "http://crashes.clementine-player.org/getu
 const char* CrashReporting::kSendCrashReportOption = "--send-crash-report";
 char* CrashReporting::sPath = NULL;
 
-#if defined(HAVE_BREAKPAD) and defined(Q_OS_LINUX)
-
-CrashReporting::CrashReporting()
-  : handler_(new google_breakpad::ExceptionHandler(
-        QDir::tempPath().toLocal8Bit().constData(), NULL,
-        CrashReporting::Handler, this, true)) {
-}
-
-CrashReporting::~CrashReporting() {
-}
 
 bool CrashReporting::SendCrashReport(int argc, char** argv) {
   if (argc != 4 || strcmp(argv[1], kSendCrashReportOption) != 0) {
@@ -70,33 +58,6 @@ void CrashReporting::SetApplicationPath(const QString& path) {
   sPath = strdup(path.toLocal8Bit().constData());
 }
 
-void CrashReporting::Print(const char* message) {
-  if (message) {
-    sys_write(1, message, strlen(message));
-  }
-}
-
-bool CrashReporting::Handler(const char* dump_path,
-                             const char* minidump_id,
-                             void* context,
-                             bool succeeded) {
-  Print("Clementine has crashed!  A crash report has been saved to:\n  ");
-  Print(dump_path);
-  Print("/");
-  Print(minidump_id);
-  Print("\n\nPlease send this to the developers so they can fix the problem:\n"
-        "  http://code.google.com/p/clementine-player/issues/entry\n\n");
-
-  if (sPath) {
-    // We know the path to clementine, so exec it again to prompt the user to
-    // upload the report.
-    const char* argv[] = {sPath, kSendCrashReportOption, dump_path, minidump_id, NULL};
-
-    sys_execv(sPath, argv);
-  }
-
-  return true;
-}
 
 CrashSender::CrashSender(const QString& path)
   : network_(new QNetworkAccessManager(this)),
@@ -112,10 +73,10 @@ bool CrashSender::Start() {
   }
 
   // No tr() here.
-  QMessageBox prompt(QMessageBox::Critical, "Clementine has crashed!", QString(
-      "A crash report has been created and saved to '%1'.  With your permission "
-      "it can be automatically sent to our server so the developers can find "
-      "out what happened.").arg(path_));
+  QMessageBox prompt(QMessageBox::Warning, "Clementine has crashed!",
+      "Clementine has crashed!  A crash report has been created and saved to "
+      "disk.  With your permission it can be automatically sent to our server "
+      "so the developers can find out what happened.");
   prompt.addButton("Don't send", QMessageBox::RejectRole);
   prompt.addButton("Send crash report", QMessageBox::AcceptRole);
   if (prompt.exec() == QDialog::Rejected) {
@@ -143,10 +104,27 @@ void CrashSender::RedirectFinished() {
 
   QUrl url = reply->attribute(QNetworkRequest::RedirectionTargetAttribute).toUrl();
   if (!url.isValid()) {
+    printf("Response didn't have a redirection target - HTTP %d\n",
+           reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt());
     progress_->close();
     return;
   }
 
+  printf("Uploading crash report to %s\n", url.toEncoded().constData());
+
+  QNetworkRequest req(url);
+
+#if QT_VERSION >= 0x040800
+  QHttpPart part;
+  part.setHeader(QNetworkRequest::ContentDispositionHeader,
+                 "form-data; name=\"data\", filename=\"data.dmp\"");
+  part.setBodyDevice(file_);
+
+  QHttpMultiPart* multi_part = new QHttpMultiPart(QHttpMultiPart::FormDataType);
+  multi_part->append(part);
+
+  reply = network_->post(req, multi_part);
+#else
   // Read the file's data
   QByteArray file_data = file_->readAll();
 
@@ -159,8 +137,8 @@ void CrashSender::RedirectFinished() {
     }
   }
 
-  QNetworkRequest req(url);
-  req.setHeader(QNetworkRequest::ContentTypeHeader, "multipart/form-data; boundary=" + boundary);
+  req.setHeader(QNetworkRequest::ContentTypeHeader,
+                QString("multipart/form-data; boundary=" + boundary));
 
   // Construct the multipart/form-data
   QByteArray form_data;
@@ -178,31 +156,13 @@ void CrashSender::RedirectFinished() {
 
   // Upload the data
   reply = network_->post(req, form_data);
-  connect(reply, SIGNAL(uploadProgress(qint64,qint64)), SLOT(UploadProgress(qint64)));
+#endif
+
+  connect(reply, SIGNAL(uploadProgress(qint64,qint64)), SLOT(UploadProgress(qint64,qint64)));
   connect(reply, SIGNAL(finished()), progress_, SLOT(close()));
 }
 
-void CrashSender::UploadProgress(qint64 bytes) {
+void CrashSender::UploadProgress(qint64 bytes, qint64 total) {
+  printf("Uploaded %lld of %lld bytes\n", bytes, total);
   progress_->setValue(bytes);
 }
-
-#else // HAVE_BREAKPAD
-
-namespace google_breakpad {
-  class ExceptionHandler {};
-}
-
-CrashReporting::CrashReporting() {
-}
-
-CrashReporting::~CrashReporting() {
-}
-
-bool CrashReporting::SendCrashReport(int, char**) {
-  return false;
-}
-
-void CrashReporting::SetApplicationPath(const QString&) {
-}
-
-#endif // HAVE_BREAKPAD

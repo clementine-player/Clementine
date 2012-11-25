@@ -818,7 +818,10 @@ optional_source(HAVE_SPOTIFY_DOWNLOADER
 optional_source(APPLE
   INCLUDE_DIRECTORIES
     ${GROWL}/Headers
-    ${CMAKE_CURRENT_SOURCE_DIR}/../3rdparty/google-breakpad/client/mac/build/Release/Breakpad.framework
+    ${CMAKE_CURRENT_SOURCE_DIR}/../3rdparty/google-breakpad/client/mac
+    ${CMAKE_CURRENT_SOURCE_DIR}/../3rdparty/google-breakpad/client/mac/Framework
+    ${CMAKE_CURRENT_SOURCE_DIR}/../3rdparty/google-breakpad/client/apple
+    ${CMAKE_CURRENT_SOURCE_DIR}/../3rdparty/google-breakpad/client/apple/Framework
   SOURCES
     core/macfslistener.mm
     core/macglobalshortcutbackend.mm
@@ -1088,6 +1091,19 @@ optional_source(LINUX
   HEADERS core/ubuntuunityhack.h
 )
 
+# Breakpad source files
+if(HAVE_BREAKPAD)
+  if(LINUX)
+    list(APPEND SOURCES core/crashreporting_linux.cpp)
+  elseif(APPLE)
+    list(APPEND SOURCES core/crashreporting_mac.cpp)
+  else()
+    list(APPEND SOURCES core/crashreporting_win.cpp)
+  endif()
+else()
+  list(APPEND SOURCES core/crashreporting_empty.cpp)
+endif()
+
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/config.h.in
                ${CMAKE_CURRENT_BINARY_DIR}/config.h)
 
@@ -1191,14 +1207,7 @@ if(HAVE_LIBINDICATE)
 endif(HAVE_LIBINDICATE)
 
 if(HAVE_BREAKPAD)
-  if (LINUX)
-    target_link_libraries(clementine_lib breakpad)
-  elseif (APPLE)
-    add_dependencies(clementine_lib breakpad)
-    target_link_libraries(clementine_lib
-        "-F${CMAKE_CURRENT_SOURCE_DIR}/../3rdparty/google-breakpad/client/mac/build/Release"
-        "-framework Breakpad")
-  endif (LINUX)
+  target_link_libraries(clementine_lib breakpad)
 endif(HAVE_BREAKPAD)
 
 if(HAVE_SPOTIFY)

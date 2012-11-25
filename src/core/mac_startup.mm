@@ -100,7 +100,6 @@ static BreakpadRef InitBreakpad() {
     breakpad = BreakpadCreate(plist);
     BreakpadSetFilterCallback(breakpad, &BreakpadCallback, NULL);
   }
-  [pool release];
   return breakpad;
 }
 #endif // HAVE_BREAKPAD

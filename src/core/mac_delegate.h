@@ -4,7 +4,7 @@
 #include "macglobalshortcutbackend.h"
 
 #ifdef HAVE_BREAKPAD
-#import <Breakpad/Breakpad.h>
+#import <Framework/Breakpad.h>
 #endif
 
 

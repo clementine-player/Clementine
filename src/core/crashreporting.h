@@ -82,7 +82,7 @@ public:
 
 private slots:
   void RedirectFinished();
-  void UploadProgress(qint64 bytes);
+  void UploadProgress(qint64 bytes, qint64 total);
 
 private:
   static const char* kUploadURL;
