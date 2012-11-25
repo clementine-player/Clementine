@@ -49,8 +49,7 @@
 #include "common/dwarf/bytereader.h"
 #include "common/dwarf/dwarf2enums.h"
 #include "common/dwarf/types.h"
-
-using namespace std;
+#include "common/using_std_string.h"
 
 namespace dwarf2reader {
 struct LineStateMachine;
@@ -59,8 +58,9 @@ class LineInfoHandler;
 
 // This maps from a string naming a section to a pair containing a
 // the data for the section, and the size of the section.
-typedef map<string, pair<const char*, uint64> > SectionMap;
-typedef list<pair<enum DwarfAttribute, enum DwarfForm> > AttributeList;
+typedef std::map<string, std::pair<const char*, uint64> > SectionMap;
+typedef std::list<std::pair<enum DwarfAttribute, enum DwarfForm> >
+    AttributeList;
 typedef AttributeList::iterator AttributeIterator;
 typedef AttributeList::const_iterator ConstAttributeIterator;
 
@@ -75,7 +75,7 @@ struct LineInfoHeader {
   uint8 opcode_base;
   // Use a pointer so that signalsafe_addr2line is able to use this structure
   // without heap allocation problem.
-  vector<unsigned char> *std_opcode_lengths;
+  std::vector<unsigned char> *std_opcode_lengths;
 };
 
 class LineInfo {
@@ -313,7 +313,7 @@ class CompilationUnit {
   // Set of DWARF2/3 abbreviations for this compilation unit.  Indexed
   // by abbreviation number, which means that abbrevs_[0] is not
   // valid.
-  vector<Abbrev>* abbrevs_;
+  std::vector<Abbrev>* abbrevs_;
 
   // String section buffer and length, if we have a string section.
   // This is here to avoid doing a section lookup for strings in
@@ -393,6 +393,15 @@ class Dwarf2Handler {
                                       enum DwarfAttribute attr,
                                       enum DwarfForm form,
                                       const string& data) { }
+
+  // Called when we have an attribute whose value is the 64-bit signature
+  // of a type unit in the .debug_types section. OFFSET is the offset of
+  // the DIE whose attribute we're reporting. ATTR and FORM are the
+  // attribute's name and form. SIGNATURE is the type unit's signature.
+  virtual void ProcessAttributeSignature(uint64 offset,
+                                         enum DwarfAttribute attr,
+                                         enum DwarfForm form,
+                                         uint64 signature) { }
 
   // Called when finished processing the DIE at OFFSET.
   // Because DWARF2/3 specifies a tree of DIEs, you may get starts

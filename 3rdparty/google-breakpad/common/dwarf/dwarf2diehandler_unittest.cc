@@ -32,9 +32,15 @@
 
 // dwarf2diehander_unittest.cc: Unit tests for google_breakpad::DIEDispatcher.
 
+#include <string>
+#include <utility>
+
 #include "breakpad_googletest_includes.h"
 
 #include "common/dwarf/dwarf2diehandler.h"
+#include "common/using_std_string.h"
+
+using std::make_pair;
 
 using ::testing::_;
 using ::testing::ContainerEq;
@@ -65,6 +71,8 @@ class MockDIEHandler: public DIEHandler {
                void(DwarfAttribute, DwarfForm, const char *, uint64));
   MOCK_METHOD3(ProcessAttributeString,
                void(DwarfAttribute, DwarfForm, const string &));
+  MOCK_METHOD3(ProcessAttributeSignature,
+               void(DwarfAttribute, DwarfForm, uint64));
   MOCK_METHOD0(EndAttributes, bool());
   MOCK_METHOD3(FindChildHandler, DIEHandler *(uint64, DwarfTag,
                                               const AttributeList &));
@@ -83,6 +91,8 @@ class MockRootDIEHandler: public RootDIEHandler {
                void(DwarfAttribute, DwarfForm, const char *, uint64));
   MOCK_METHOD3(ProcessAttributeString,
                void(DwarfAttribute, DwarfForm, const string &));
+  MOCK_METHOD3(ProcessAttributeSignature,
+               void(DwarfAttribute, DwarfForm, uint64));
   MOCK_METHOD0(EndAttributes, bool());
   MOCK_METHOD3(FindChildHandler, DIEHandler *(uint64, DwarfTag,
                                               const AttributeList &));
@@ -238,6 +248,11 @@ TEST(Dwarf2DIEHandler, PassAttributeValues) {
                                        (DwarfForm) 0x15762fec,
                                        StrEq(str)))
       .WillOnce(Return());
+    EXPECT_CALL(mock_root_handler,
+                ProcessAttributeSignature((DwarfAttribute) 0x58790d72,
+                                          (DwarfForm) 0x4159f138,
+                                          0x94682463613e6a5fULL))
+      .WillOnce(Return());
     EXPECT_CALL(mock_root_handler, EndAttributes())
       .WillOnce(Return(true));
     EXPECT_CALL(mock_root_handler, FindChildHandler(_, _, _))
@@ -279,6 +294,10 @@ TEST(Dwarf2DIEHandler, PassAttributeValues) {
                                         (DwarfAttribute) 0x310ed065,
                                         (DwarfForm) 0x15762fec,
                                         str);
+  die_dispatcher.ProcessAttributeSignature(0xe2222da01e29f2a9LL,
+                                           (DwarfAttribute) 0x58790d72,
+                                           (DwarfForm) 0x4159f138,
+                                           0x94682463613e6a5fULL);
 
   // Finish the root DIE (and thus the CU).
   die_dispatcher.EndDIE(0xe2222da01e29f2a9LL);

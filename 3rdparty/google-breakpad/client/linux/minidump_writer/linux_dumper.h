@@ -27,6 +27,14 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+// linux_dumper.h: Define the google_breakpad::LinuxDumper class, which
+// is a base class for extracting information of a crashed process. It
+// was originally a complete implementation using the ptrace API, but
+// has been refactored to allow derived implementations supporting both
+// ptrace and core dump. A portion of the original implementation is now
+// in google_breakpad::LinuxPtraceDumper (see linux_ptrace_dumper.h for
+// details).
+
 #ifndef CLIENT_LINUX_MINIDUMP_WRITER_LINUX_DUMPER_H_
 #define CLIENT_LINUX_MINIDUMP_WRITER_LINUX_DUMPER_H_
 
@@ -34,9 +42,7 @@
 #include <linux/limits.h>
 #include <stdint.h>
 #include <sys/types.h>
-#if !defined(__ANDROID__)
 #include <sys/user.h>
-#endif
 
 #include "common/memory.h"
 #include "google_breakpad/common/minidump_format.h"
@@ -49,26 +55,13 @@ typedef typeof(((struct user*) 0)->u_debugreg[0]) debugreg_t;
 
 // Typedef for our parsing of the auxv variables in /proc/pid/auxv.
 #if defined(__i386) || defined(__ARM_EABI__)
-#if !defined(__ANDROID__)
 typedef Elf32_auxv_t elf_aux_entry;
-#else
-// Android is missing this structure definition
-typedef struct
-{
-  uint32_t a_type;              /* Entry type */
-  union
-    {
-      uint32_t a_val;           /* Integer value */
-    } a_un;
-} elf_aux_entry;
-
-#if !defined(AT_SYSINFO_EHDR)
-#define AT_SYSINFO_EHDR 33
-#endif
-#endif  // __ANDROID__
-#elif defined(__x86_64__)
+#elif defined(__x86_64)
 typedef Elf64_auxv_t elf_aux_entry;
 #endif
+
+typedef typeof(((elf_aux_entry*) 0)->a_un.a_val) elf_aux_val_t;
+
 // When we find the VDSO mapping in the process's address space, this
 // is the name we use for it when writing it to the minidump.
 // This should always be less than NAME_MAX!
@@ -79,10 +72,7 @@ struct ThreadInfo {
   pid_t tgid;   // thread group id
   pid_t ppid;   // parent process
 
-  // Even on platforms where the stack grows down, the following will point to
-  // the smallest address in the stack.
-  const void* stack;  // pointer to the stack area
-  size_t stack_len;  // length of the stack to copy
+  uintptr_t stack_pointer;  // thread stack pointer
 
 
 #if defined(__i386) || defined(__x86_64)
@@ -96,12 +86,8 @@ struct ThreadInfo {
 
 #elif defined(__ARM_EABI__)
   // Mimicking how strace does this(see syscall.c, search for GETREGS)
-#if defined(__ANDROID__)
-  struct pt_regs regs;
-#else
   struct user_regs regs;
   struct user_fpregs fpregs;
-#endif  // __ANDROID__
 #endif
 };
 
@@ -118,21 +104,27 @@ class LinuxDumper {
  public:
   explicit LinuxDumper(pid_t pid);
 
+  virtual ~LinuxDumper();
+
   // Parse the data for |threads| and |mappings|.
-  bool Init();
+  virtual bool Init();
+
+  // Return true if the dumper performs a post-mortem dump.
+  virtual bool IsPostMortem() const = 0;
 
   // Suspend/resume all threads in the given process.
-  bool ThreadsSuspend();
-  bool ThreadsResume();
+  virtual bool ThreadsSuspend() = 0;
+  virtual bool ThreadsResume() = 0;
 
-  // Read information about the given thread. Returns true on success. One must
-  // have called |ThreadsSuspend| first.
-  bool ThreadInfoGet(pid_t tid, ThreadInfo* info);
+  // Read information about the |index|-th thread of |threads_|.
+  // Returns true on success. One must have called |ThreadsSuspend| first.
+  virtual bool GetThreadInfoByIndex(size_t index, ThreadInfo* info) = 0;
 
   // These are only valid after a call to |Init|.
   const wasteful_vector<pid_t> &threads() { return threads_; }
   const wasteful_vector<MappingInfo*> &mappings() { return mappings_; }
   const MappingInfo* FindMapping(const void* address) const;
+  const wasteful_vector<elf_aux_val_t>& auxv() { return auxv_; }
 
   // Find a block of memory to take as the stack given the top of stack pointer.
   //   stack: (output) the lowest address in the memory area
@@ -142,30 +134,41 @@ class LinuxDumper {
 
   PageAllocator* allocator() { return &allocator_; }
 
-  // memcpy from a remote process.
-  static void CopyFromProcess(void* dest, pid_t child, const void* src,
-                              size_t length);
+  // Copy content of |length| bytes from a given process |child|,
+  // starting from |src|, into |dest|.
+  virtual void CopyFromProcess(void* dest, pid_t child, const void* src,
+                               size_t length) = 0;
 
-  // Builds a proc path for a certain pid for a node.  path is a
-  // character array that is overwritten, and node is the final node
-  // without any slashes.
-  void BuildProcPath(char* path, pid_t pid, const char* node) const;
+  // Builds a proc path for a certain pid for a node (/proc/<pid>/<node>).
+  // |path| is a character array of at least NAME_MAX bytes to return the
+  // result.|node| is the final node without any slashes. Returns true on
+  // success.
+  virtual bool BuildProcPath(char* path, pid_t pid, const char* node) const = 0;
 
   // Generate a File ID from the .text section of a mapped entry.
-  // mapping_id may be -1 if this is not a member of mappings_.
+  // If not a member, mapping_id is ignored.
   bool ElfFileIdentifierForMapping(const MappingInfo& mapping,
-                                   int mapping_id,
+                                   bool member,
+                                   unsigned int mapping_id,
                                    uint8_t identifier[sizeof(MDGUID)]);
 
-  // Utility method to find the location of where the kernel has
-  // mapped linux-gate.so in memory(shows up in /proc/pid/maps as
-  // [vdso], but we can't guarantee that it's the only virtual dynamic
-  // shared object.  Parsing the auxilary vector for AT_SYSINFO_EHDR
-  // is the safest way to go.)
-  void* FindBeginningOfLinuxGateSharedLibrary(const pid_t pid) const;
- private:
-  bool EnumerateMappings(wasteful_vector<MappingInfo*>* result) const;
-  bool EnumerateThreads(wasteful_vector<pid_t>* result) const;
+  uintptr_t crash_address() const { return crash_address_; }
+  void set_crash_address(uintptr_t crash_address) {
+    crash_address_ = crash_address;
+  }
+
+  int crash_signal() const { return crash_signal_; }
+  void set_crash_signal(int crash_signal) { crash_signal_ = crash_signal; }
+
+  pid_t crash_thread() const { return crash_thread_; }
+  void set_crash_thread(pid_t crash_thread) { crash_thread_ = crash_thread; }
+
+ protected:
+  bool ReadAuxv();
+
+  virtual bool EnumerateMappings();
+
+  virtual bool EnumerateThreads() = 0;
 
   // For the case where a running program has been deleted, it'll show up in
   // /proc/pid/maps as "/path/to/program (deleted)". If this is the case, then
@@ -178,13 +181,28 @@ class LinuxDumper {
   // Returns true if |path| is modified.
   bool HandleDeletedFileInMapping(char* path) const;
 
+   // ID of the crashed process.
   const pid_t pid_;
+
+  // Virtual address at which the process crashed.
+  uintptr_t crash_address_;
+
+  // Signal that terminated the crashed process.
+  int crash_signal_;
+
+  // ID of the crashed thread.
+  pid_t crash_thread_;
 
   mutable PageAllocator allocator_;
 
-  bool threads_suspended_;
-  wasteful_vector<pid_t> threads_;  // the ids of all the threads
-  wasteful_vector<MappingInfo*> mappings_;  // info from /proc/<pid>/maps
+  // IDs of all the threads.
+  wasteful_vector<pid_t> threads_;
+
+  // Info from /proc/<pid>/maps.
+  wasteful_vector<MappingInfo*> mappings_;
+
+  // Info from /proc/<pid>/auxv
+  wasteful_vector<elf_aux_val_t> auxv_;
 };
 
 }  // namespace google_breakpad

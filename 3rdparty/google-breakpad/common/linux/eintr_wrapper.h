@@ -44,4 +44,4 @@
   __eintr_result__;\
 })
 
-#endif // ifndef COMMON_LINUX_EINTR_WRAPPER_H_
+#endif  // COMMON_LINUX_EINTR_WRAPPER_H_

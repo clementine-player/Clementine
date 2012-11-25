@@ -37,11 +37,15 @@
 #define CLIENT_MAC_HANDLER_EXCEPTION_HANDLER_H__
 
 #include <mach/mach.h>
+#include <TargetConditionals.h>
 
 #include <string>
 
-#include "client/mac/crash_generation/crash_generation_client.h"
 #include "processor/scoped_ptr.h"
+
+#if !TARGET_OS_IPHONE
+#include "client/mac/crash_generation/crash_generation_client.h"
+#endif
 
 namespace google_breakpad {
 
@@ -152,7 +156,11 @@ class ExceptionHandler {
 
   // Returns whether out-of-process dump generation is used or not.
   bool IsOutOfProcess() const {
+#if TARGET_OS_IPHONE
+    return false;
+#else
     return crash_generation_client_.get() != NULL;
+#endif
   }
 
  private:
@@ -174,16 +182,23 @@ class ExceptionHandler {
   // success, false otherwise.
   bool SendMessageToHandlerThread(HandlerThreadMessage message_id);
 
-  // All minidump writing goes through this one routine
+  // All minidump writing goes through this one routine.
+  // |task_context| can be NULL. If not, it will be used to retrieve the
+  // context of the current thread, instead of using |thread_get_state|.
   bool WriteMinidumpWithException(int exception_type,
                                   int exception_code,
                                   int exception_subcode,
+                                  ucontext_t *task_context,
                                   mach_port_t thread_name,
-                                  bool exit_after_write);
+                                  bool exit_after_write,
+                                  bool report_current_thread);
 
   // When installed, this static function will be call from a newly created
   // pthread with |this| as the argument
   static void *WaitForMessage(void *exception_handler_class);
+
+  // Signal handler for SIGABRT.
+  static void SignalHandler(int sig, siginfo_t* info, void* uc);
 
   // disallow copy ctor and operator=
   explicit ExceptionHandler(const ExceptionHandler &);
@@ -250,8 +265,14 @@ class ExceptionHandler {
   // True, if we're using the mutext to indicate when mindump writing occurs
   bool use_minidump_write_mutex_;
 
+  // Old signal handler for SIGABRT. Used to be able to restore it when
+  // uninstalling.
+  scoped_ptr<struct sigaction> old_handler_;
+
+#if !TARGET_OS_IPHONE
   // Client for out-of-process dump generation.
   scoped_ptr<CrashGenerationClient> crash_generation_client_;
+#endif
 };
 
 }  // namespace google_breakpad

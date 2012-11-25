@@ -90,19 +90,20 @@ typedef struct {
  * WinNT.h
  */
 
-/* Non-x86 CPU identifiers found in the high 26 bits of
+/* Non-x86 CPU identifiers found in the high 24 bits of
  * (MDRawContext*).context_flags.  These aren't used by Breakpad, but are
  * defined here for reference, to avoid assigning values that conflict
  * (although some values already conflict). */
 #define MD_CONTEXT_IA64  0x00080000  /* CONTEXT_IA64 */
-#define MD_CONTEXT_AMD64 0x00100000  /* CONTEXT_AMD64 */
 /* Additional values from winnt.h in the Windows CE 5.0 SDK: */
 #define MD_CONTEXT_SHX   0x000000c0  /* CONTEXT_SH4 (Super-H, includes SH3) */
-#define MD_CONTEXT_ARM   0x00000040  /* CONTEXT_ARM (0x40 bit set in SHx?) */
 #define MD_CONTEXT_MIPS  0x00010000  /* CONTEXT_R4000 (same value as x86?) */
 #define MD_CONTEXT_ALPHA 0x00020000  /* CONTEXT_ALPHA */
 
-#define MD_CONTEXT_CPU_MASK 0xffffffc0
+/* As of Windows 7 SP1, the number of flag bits has increased to
+ * include 0x40 (CONTEXT_XSTATE):
+ * http://msdn.microsoft.com/en-us/library/hh134238%28v=vs.85%29.aspx */
+#define MD_CONTEXT_CPU_MASK 0xffffff00
 
 
 /* This is a base type for MDRawContextX86 and MDRawContextPPC.  This
@@ -329,8 +330,18 @@ typedef enum {
   MD_LAST_RESERVED_STREAM        = 0x0000ffff,
 
   /* Breakpad extension types.  0x4767 = "Gg" */
-  MD_BREAKPAD_INFO_STREAM        = 0x47670001,  /* MDRawBreakpadInfo */
-  MD_ASSERTION_INFO_STREAM       = 0x47670002   /* MDRawAssertionInfo */
+  MD_BREAKPAD_INFO_STREAM        = 0x47670001,  /* MDRawBreakpadInfo  */
+  MD_ASSERTION_INFO_STREAM       = 0x47670002,  /* MDRawAssertionInfo */
+  /* These are additional minidump stream values which are specific to
+   * the linux breakpad implementation. */
+  MD_LINUX_CPU_INFO              = 0x47670003,  /* /proc/cpuinfo      */
+  MD_LINUX_PROC_STATUS           = 0x47670004,  /* /proc/$x/status    */
+  MD_LINUX_LSB_RELEASE           = 0x47670005,  /* /etc/lsb-release   */
+  MD_LINUX_CMD_LINE              = 0x47670006,  /* /proc/$x/cmdline   */
+  MD_LINUX_ENVIRON               = 0x47670007,  /* /proc/$x/environ   */
+  MD_LINUX_AUXV                  = 0x47670008,  /* /proc/$x/auxv      */
+  MD_LINUX_MAPS                  = 0x47670009,  /* /proc/$x/maps      */
+  MD_LINUX_DSO_DEBUG             = 0x4767000A   /* MDRawDebug         */
 } MDStreamType;  /* MINIDUMP_STREAM_TYPE */
 
 
@@ -608,8 +619,10 @@ typedef enum {
   /* The following values are Breakpad-defined. */
   MD_OS_UNIX          = 0x8000,  /* Generic Unix-ish */
   MD_OS_MAC_OS_X      = 0x8101,  /* Mac OS X/Darwin */
+  MD_OS_IOS           = 0x8102,  /* iOS */
   MD_OS_LINUX         = 0x8201,  /* Linux */
-  MD_OS_SOLARIS       = 0x8202   /* Solaris */
+  MD_OS_SOLARIS       = 0x8202,  /* Solaris */
+  MD_OS_ANDROID       = 0x8203   /* Android */
 } MDOSPlatform;
 
 
@@ -783,6 +796,23 @@ typedef enum {
    * directed to a pure virtual call handler instead. */
   MD_ASSERTION_INFO_TYPE_PURE_VIRTUAL_CALL
 } MDAssertionInfoData;
+
+/* These structs are used to store the DSO debug data in Linux minidumps,
+ * which is necessary for converting minidumps to usable coredumps. */
+typedef struct {
+  void*     addr;
+  MDRVA     name;
+  void*     ld;
+} MDRawLinkMap;
+
+typedef struct {
+  u_int32_t version;
+  MDRVA     map;
+  u_int32_t dso_count;
+  void*     brk;
+  void*     ldbase;
+  void*     dynamic;
+} MDRawDebug;
 
 #if defined(_MSC_VER)
 #pragma warning(pop)

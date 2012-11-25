@@ -157,10 +157,12 @@
 #define COMMON_DWARF_DWARF2DIEHANDLER_H__
 
 #include <stack>
+#include <string>
 
 #include "common/dwarf/types.h"
 #include "common/dwarf/dwarf2enums.h"
 #include "common/dwarf/dwarf2reader.h"
+#include "common/using_std_string.h"
 
 namespace dwarf2reader {
 
@@ -209,6 +211,9 @@ class DIEHandler {
   virtual void ProcessAttributeString(enum DwarfAttribute attr,
                                       enum DwarfForm form,
                                       const string& data) { }
+  virtual void ProcessAttributeSignature(enum DwarfAttribute attr,
+                                         enum DwarfForm form,
+                                         uint64 signture) { }
 
   // Once we have reported all the DIE's attributes' values, we call
   // this member function.  If it returns false, we skip all the DIE's
@@ -314,6 +319,10 @@ class DIEDispatcher: public Dwarf2Handler {
                               enum DwarfAttribute attr,
                               enum DwarfForm form,
                               const string &data);
+  void ProcessAttributeSignature(uint64 offset,
+                                 enum DwarfAttribute attr,
+                                 enum DwarfForm form,
+                                 uint64 signature);
   void EndDIE(uint64 offset);
 
  private:
@@ -347,7 +356,7 @@ class DIEDispatcher: public Dwarf2Handler {
   // - When we decide to ignore a subtree, we only push an entry on
   //   the stack for the root of the tree being ignored, rather than
   //   pushing lots of stack entries with handler_ set to NULL.
-  stack<HandlerStack> die_handlers_;
+  std::stack<HandlerStack> die_handlers_;
 
   // The root handler.  We don't push it on die_handlers_ until we
   // actually get the StartDIE call for the root.

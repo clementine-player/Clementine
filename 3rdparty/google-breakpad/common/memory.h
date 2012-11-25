@@ -145,6 +145,18 @@ class wasteful_vector {
         used_(0) {
   }
 
+  T& back() {
+    return a_[used_ - 1];
+  }
+
+  const T& back() const {
+    return a_[used_ - 1];
+  }
+
+  bool empty() const {
+    return used_ == 0;
+  }
+
   void push_back(const T& new_element) {
     if (used_ == allocated_)
       Realloc(allocated_ * 2);

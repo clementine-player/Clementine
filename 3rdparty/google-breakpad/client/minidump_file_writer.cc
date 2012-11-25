@@ -48,11 +48,16 @@ namespace google_breakpad {
 
 const MDRVA MinidumpFileWriter::kInvalidMDRVA = static_cast<MDRVA>(-1);
 
-MinidumpFileWriter::MinidumpFileWriter() : file_(-1), position_(0), size_(0) {
+MinidumpFileWriter::MinidumpFileWriter()
+    : file_(-1),
+      close_file_when_destroyed_(true),
+      position_(0),
+      size_(0) {
 }
 
 MinidumpFileWriter::~MinidumpFileWriter() {
-  Close();
+  if (close_file_when_destroyed_)
+    Close();
 }
 
 bool MinidumpFileWriter::Open(const char *path) {
@@ -64,6 +69,12 @@ bool MinidumpFileWriter::Open(const char *path) {
 #endif
 
   return file_ != -1;
+}
+
+void MinidumpFileWriter::SetFile(const int file) {
+  assert(file_ == -1);
+  file_ = file;
+  close_file_when_destroyed_ = false;
 }
 
 bool MinidumpFileWriter::Close() {
