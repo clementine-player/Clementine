@@ -19,6 +19,7 @@
 #define CRASHREPORTING_H
 
 #include <QObject>
+#include <QVariantMap>
 
 #include <boost/scoped_ptr.hpp>
 
@@ -83,6 +84,8 @@ public:
 private slots:
   void RedirectFinished();
   void UploadProgress(qint64 bytes, qint64 total);
+
+  QList<QPair<QString, QString> > ClientInfo() const;
 
 private:
   static const char* kUploadURL;

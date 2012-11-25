@@ -17,15 +17,19 @@
 
 #include "config.h"
 #include "crashreporting.h"
+#include "version.h"
 #include "core/logging.h"
 
 #include <QApplication>
+#include <QCoreApplication>
+#include <QCryptographicHash>
 #include <QFile>
 #include <QMessageBox>
 #include <QNetworkAccessManager>
 #include <QNetworkRequest>
 #include <QNetworkReply>
 #include <QProgressDialog>
+#include <QSysInfo>
 #include <QUrl>
 #include <QtDebug>
 
@@ -110,8 +114,10 @@ void CrashSender::RedirectFinished() {
     return;
   }
 
-  printf("Uploading crash report to %s\n", url.toEncoded().constData());
+  // Get some information about the thing that crashed.
+  url.setQueryItems(ClientInfo());
 
+  printf("Uploading crash report to %s\n", url.toEncoded().constData());
   QNetworkRequest req(url);
 
 #if QT_VERSION >= 0x040800
@@ -165,4 +171,41 @@ void CrashSender::RedirectFinished() {
 void CrashSender::UploadProgress(qint64 bytes, qint64 total) {
   printf("Uploaded %lld of %lld bytes\n", bytes, total);
   progress_->setValue(bytes);
+}
+
+QList<QPair<QString, QString> > CrashSender::ClientInfo() const {
+  typedef QPair<QString, QString> Pair;
+  QList<Pair> ret;
+
+  ret.append(Pair("version", CLEMENTINE_VERSION_DISPLAY));
+  ret.append(Pair("qt_version", qVersion()));
+
+  // Hash the binary
+  QFile executable(QCoreApplication::applicationFilePath());
+  if (executable.open(QIODevice::ReadOnly)) {
+    QCryptographicHash hash(QCryptographicHash::Md5);
+    while (!executable.atEnd()) {
+      hash.addData(executable.read(4096));
+    }
+    ret.append(Pair("exe_md5", hash.result().toHex()));
+  }
+
+  // Get the OS version
+#if defined(Q_OS_MAC)
+  ret.append(Pair("os", "mac"));
+  ret.append(Pair("os_version", QString::number(QSysInfo::MacintoshVersion)));
+#elif defined(Q_OS_WIN)
+  ret.append(Pair("os", "win"));
+  ret.append(Pair("os_version", QString::number(QSysInfo::WindowsVersion)));
+#else
+  ret.append(Pair("os", "linux"));
+
+  QFile lsb_release("/etc/lsb-release");
+  if (lsb_release.open(QIODevice::ReadOnly)) {
+    ret.append(Pair("os_version",
+                    QString::fromUtf8(lsb_release.readAll()).simplified()));
+  }
+#endif
+
+  return ret;
 }
