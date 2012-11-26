@@ -18,6 +18,8 @@
 #ifndef CLOSURE_H
 #define CLOSURE_H
 
+#include <tr1/functional>
+
 #include <QMetaMethod>
 #include <QObject>
 #include <QSharedPointer>
@@ -155,12 +157,12 @@ class CallbackClosure : public ClosureBase {
   CallbackClosure(
       QObject* sender,
       const char* signal,
-      std::function<void()> callback);
+      std::tr1::function<void()> callback);
 
   virtual void Invoke();
 
  private:
-  std::function<void()> callback_;
+  std::tr1::function<void()> callback_;
 };
 
 }  // namespace _detail
@@ -191,7 +193,7 @@ _detail::ClosureBase* NewClosure(
 _detail::ClosureBase* NewClosure(
     QObject* sender,
     const char* signal,
-    std::function<void()> callback);
+    std::tr1::function<void()> callback);
 
 
 void DoAfter(QObject* receiver, const char* slot, int msec);
