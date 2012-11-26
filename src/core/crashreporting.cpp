@@ -17,195 +17,34 @@
 
 #include "config.h"
 #include "crashreporting.h"
-#include "version.h"
-#include "core/logging.h"
+#include "crashsender.h"
 
 #include <QApplication>
-#include <QCoreApplication>
-#include <QCryptographicHash>
-#include <QFile>
-#include <QMessageBox>
-#include <QNetworkAccessManager>
-#include <QNetworkRequest>
-#include <QNetworkReply>
-#include <QProgressDialog>
-#include <QSysInfo>
-#include <QUrl>
-#include <QtDebug>
-
-#if QT_VERSION >= 0x040800
-  #include <QHttpMultiPart>
-#endif
 
 
-const char* CrashSender::kUploadURL = "http://crashes.clementine-player.org/getuploadurl";
 const char* CrashReporting::kSendCrashReportOption = "--send-crash-report";
 char* CrashReporting::sPath = NULL;
 
 
 bool CrashReporting::SendCrashReport(int argc, char** argv) {
-  if (argc != 4 || strcmp(argv[1], kSendCrashReportOption) != 0) {
+#ifdef HAVE_BREAKPAD
+  if (argc != 3 || strcmp(argv[1], kSendCrashReportOption) != 0) {
     return false;
   }
 
   QApplication a(argc, argv);
 
-  CrashSender sender(QString("%1/%2.dmp").arg(argv[2], argv[3]));
+  CrashSender sender(argv[2]);
   if (sender.Start()) {
     a.exec();
   }
 
   return true;
+#else // HAVE_BREAKPAD
+  return false;
+#endif
 }
 
 void CrashReporting::SetApplicationPath(const QString& path) {
   sPath = strdup(path.toLocal8Bit().constData());
-}
-
-
-CrashSender::CrashSender(const QString& path)
-  : network_(new QNetworkAccessManager(this)),
-    path_(path),
-    file_(new QFile(path_, this)),
-    progress_(NULL) {
-}
-
-bool CrashSender::Start() {
-  if (!file_->open(QIODevice::ReadOnly)) {
-    qLog(Warning) << "Failed to open crash report" << path_;
-    return false;
-  }
-
-  // No tr() here.
-  QMessageBox prompt(QMessageBox::Warning, "Clementine has crashed!",
-      "Clementine has crashed!  A crash report has been created and saved to "
-      "disk.  With your permission it can be automatically sent to our server "
-      "so the developers can find out what happened.");
-  prompt.addButton("Don't send", QMessageBox::RejectRole);
-  prompt.addButton("Send crash report", QMessageBox::AcceptRole);
-  if (prompt.exec() == QDialog::Rejected) {
-    return false;
-  }
-
-  progress_ = new QProgressDialog("Uploading crash report", "Cancel", 0, 0);
-  progress_->show();
-
-  // We'll get a redirect first, so don't start POSTing data yet.
-  QNetworkReply* reply = network_->get(QNetworkRequest(QUrl(kUploadURL)));
-  connect(reply, SIGNAL(finished()), SLOT(RedirectFinished()));
-
-  return true;
-}
-
-void CrashSender::RedirectFinished() {
-  QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
-  if (!reply) {
-    progress_->close();
-    return;
-  }
-
-  reply->deleteLater();
-
-  QUrl url = reply->attribute(QNetworkRequest::RedirectionTargetAttribute).toUrl();
-  if (!url.isValid()) {
-    printf("Response didn't have a redirection target - HTTP %d\n",
-           reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt());
-    progress_->close();
-    return;
-  }
-
-  // Get some information about the thing that crashed.
-  url.setQueryItems(ClientInfo());
-
-  printf("Uploading crash report to %s\n", url.toEncoded().constData());
-  QNetworkRequest req(url);
-
-#if QT_VERSION >= 0x040800
-  QHttpPart part;
-  part.setHeader(QNetworkRequest::ContentDispositionHeader,
-                 "form-data; name=\"data\", filename=\"data.dmp\"");
-  part.setBodyDevice(file_);
-
-  QHttpMultiPart* multi_part = new QHttpMultiPart(QHttpMultiPart::FormDataType);
-  multi_part->append(part);
-
-  reply = network_->post(req, multi_part);
-#else
-  // Read the file's data
-  QByteArray file_data = file_->readAll();
-
-  // Find a boundary that doesn't exist in the file
-  QByteArray boundary;
-  forever {
-    boundary = "--------------" + QString::number(qrand(), 16).toAscii();
-    if (!file_data.contains(boundary)) {
-      break;
-    }
-  }
-
-  req.setHeader(QNetworkRequest::ContentTypeHeader,
-                QString("multipart/form-data; boundary=" + boundary));
-
-  // Construct the multipart/form-data
-  QByteArray form_data;
-  form_data.reserve(file_data.size() + 1024);
-  form_data.append("--");
-  form_data.append(boundary);
-  form_data.append("\nContent-Disposition: form-data; name=\"data\"; filename=\"data.dmp\"\n");
-  form_data.append("Content-Type: application/octet-stream\n\n");
-  form_data.append(file_data);
-  form_data.append("\n--");
-  form_data.append(boundary);
-  form_data.append("--");
-
-  progress_->setMaximum(form_data.size());
-
-  // Upload the data
-  reply = network_->post(req, form_data);
-#endif
-
-  connect(reply, SIGNAL(uploadProgress(qint64,qint64)), SLOT(UploadProgress(qint64,qint64)));
-  connect(reply, SIGNAL(finished()), progress_, SLOT(close()));
-}
-
-void CrashSender::UploadProgress(qint64 bytes, qint64 total) {
-  printf("Uploaded %lld of %lld bytes\n", bytes, total);
-  progress_->setValue(bytes);
-}
-
-QList<QPair<QString, QString> > CrashSender::ClientInfo() const {
-  typedef QPair<QString, QString> Pair;
-  QList<Pair> ret;
-
-  ret.append(Pair("version", CLEMENTINE_VERSION_DISPLAY));
-  ret.append(Pair("qt_version", qVersion()));
-
-  // Hash the binary
-  QFile executable(QCoreApplication::applicationFilePath());
-  if (executable.open(QIODevice::ReadOnly)) {
-    QCryptographicHash hash(QCryptographicHash::Md5);
-    while (!executable.atEnd()) {
-      hash.addData(executable.read(4096));
-    }
-    ret.append(Pair("exe_md5", hash.result().toHex()));
-  }
-
-  // Get the OS version
-#if defined(Q_OS_MAC)
-  ret.append(Pair("os", "mac"));
-  ret.append(Pair("os_version", QString::number(QSysInfo::MacintoshVersion)));
-#elif defined(Q_OS_WIN)
-  ret.append(Pair("os", "win"));
-  ret.append(Pair("os_version", QString::number(QSysInfo::WindowsVersion)));
-#else
-  ret.append(Pair("os", "linux"));
-
-  QFile lsb_release("/etc/lsb-release");
-  if (lsb_release.open(QIODevice::ReadOnly)) {
-    ret.append(Pair("os_version",
-                    QString::fromUtf8(lsb_release.readAll()).simplified()));
-  }
-#endif
-
-  return ret;
 }

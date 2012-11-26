@@ -384,7 +384,6 @@ set(HEADERS
 
   core/application.h
   core/backgroundstreams.h
-  core/crashreporting.h
   core/database.h
   core/deletefiles.h
   core/filesystemwatcherinterface.h
@@ -1093,6 +1092,8 @@ optional_source(LINUX
 
 # Breakpad source files
 if(HAVE_BREAKPAD)
+  list(APPEND SOURCES core/crashsender.cpp)
+  list(APPEND HEADERS core/crashsender.h)
   if(LINUX)
     list(APPEND SOURCES core/crashreporting_linux.cpp)
   elseif(APPLE)

@@ -185,7 +185,10 @@ if(WIN32)
   option(ENABLE_WIN32_CONSOLE "Show the windows console even outside Debug mode" OFF)
 endif(WIN32)
 
-optional_component(BREAKPAD OFF "Crash reporting")
+# Crash reporting requires Qt 4.8 because of the use of QHttpMultiPart
+optional_component(BREAKPAD OFF "Crash reporting"
+  DEPENDS "Qt 4.8 or newer" "QTVERSION VERSION_GREATER 4.7.999"
+)
 
 optional_component(GOOGLE_DRIVE ON "Google Drive support"
   DEPENDS "Google sparsehash" SPARSEHASH_INCLUDE_DIRS
@@ -434,6 +437,8 @@ if(IMOBILEDEVICE_FOUND AND PLIST_FOUND)
 endif(IMOBILEDEVICE_FOUND AND PLIST_FOUND)
 
 if(HAVE_BREAKPAD)
+  set(CRASHREPORTING_HOSTNAME crashes.clementine-player.org
+      CACHE STRING "Server to send crash reports to")
   add_subdirectory(3rdparty/google-breakpad)
 endif(HAVE_BREAKPAD)
 

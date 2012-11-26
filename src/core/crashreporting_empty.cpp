@@ -28,11 +28,3 @@ CrashReporting::CrashReporting() {
 
 CrashReporting::~CrashReporting() {
 }
-
-bool CrashReporting::Handler(const char* dump_path,
-                             const char* minidump_id,
-                             void* context,
-                             bool succeeded) {
-}
-
-#endif // HAVE_BREAKPAD

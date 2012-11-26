@@ -18,14 +18,9 @@
 #ifndef CRASHREPORTING_H
 #define CRASHREPORTING_H
 
-#include <QObject>
-#include <QVariantMap>
+#include <QString>
 
 #include <boost/scoped_ptr.hpp>
-
-class QFile;
-class QNetworkAccessManager;
-class QProgressDialog;
 
 namespace google_breakpad {
   class ExceptionHandler;
@@ -39,6 +34,8 @@ public:
   CrashReporting();
   ~CrashReporting();
 
+  static const char* kSendCrashReportOption;
+
   // If the commandline contains the --send-crash-report option, the user will
   // be prompted to send the crash report and the function will return true
   // (in which case the caller should exit the program).  Otherwise the function
@@ -49,52 +46,18 @@ public:
   // --send-crash-report when a crash happens.
   static void SetApplicationPath(const QString& path);
 
-private:
   // Prints the message to stdout without using libc.
   static void Print(const char* message);
 
-  // Breakpad callback.
-  static bool Handler(const char* dump_path,
-                      const char* minidump_id,
-                      void* context,
-                      bool succeeded);
+  static const char* application_path() { return sPath; }
 
 private:
   Q_DISABLE_COPY(CrashReporting);
 
-  static const char* kSendCrashReportOption;
   static char* sPath;
 
   boost::scoped_ptr<google_breakpad::ExceptionHandler> handler_;
 };
 
-
-// Asks the user if he wants to send a crash report, and displays a progress
-// dialog while uploading it if he does.
-class CrashSender : public QObject {
-  Q_OBJECT
-
-public:
-  CrashSender(const QString& path);
-
-  // Returns false if the user doesn't want to send the crash report (caller
-  // should exit), or true if he does (caller should start the Qt event loop).
-  bool Start();
-
-private slots:
-  void RedirectFinished();
-  void UploadProgress(qint64 bytes, qint64 total);
-
-  QList<QPair<QString, QString> > ClientInfo() const;
-
-private:
-  static const char* kUploadURL;
-
-  QNetworkAccessManager* network_;
-
-  QString path_;
-  QFile* file_;
-  QProgressDialog* progress_;
-};
 
 #endif // CRASHREPORTING_H
