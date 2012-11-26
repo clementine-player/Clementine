@@ -25,7 +25,14 @@ check_cxx_source_compiles(
      }
     "
     USE_STD_UNORDERED_MAP)
+check_cxx_source_compiles(
+    "int main() {
+       [](){}();
+     }
+    "
+    HAVE_LAMBDAS)
 unset(CMAKE_REQUIRED_FLAGS)
+
 
 if (UNIX AND NOT APPLE)
   set(LINUX 1)

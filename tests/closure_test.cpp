@@ -5,6 +5,7 @@
 #include <QSharedPointer>
 #include <QSignalSpy>
 
+#include "config.h"
 #include "core/closure.h"
 #include "test_utils.h"
 
@@ -63,6 +64,7 @@ TEST(ClosureTest, ClosureDoesNotCrashWithSharedPointerSender) {
   EXPECT_TRUE(closure.isNull());
 }
 
+#ifdef HAVE_LAMBDAS
 TEST(ClosureTest, ClosureCallsLambda) {
   TestQObject sender;
   bool called = false;
@@ -73,3 +75,4 @@ TEST(ClosureTest, ClosureCallsLambda) {
   sender.Emit();
   EXPECT_TRUE(called);
 }
+#endif  // HAVE_LAMBDAS
