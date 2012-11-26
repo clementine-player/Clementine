@@ -30,6 +30,18 @@ ClosureBase::ClosureBase(ObjectHelper* helper)
 ClosureBase::~ClosureBase() {
 }
 
+CallbackClosure::CallbackClosure(
+    QObject* sender,
+    const char* signal,
+    std::function<void()> callback)
+  : ClosureBase(new ObjectHelper(sender, signal, this)),
+    callback_(callback) {
+}
+
+void CallbackClosure::Invoke() {
+  callback_();
+}
+
 ObjectHelper* ClosureBase::helper() const {
   return helper_;
 }
@@ -51,6 +63,14 @@ void ObjectHelper::Invoked() {
 void Unpack(QList<QGenericArgument>*) {}
 
 }  // namespace _detail
+
+_detail::ClosureBase* NewClosure(
+    QObject* sender,
+    const char* signal,
+    std::function<void()> callback) {
+  return new _detail::CallbackClosure(
+      sender, signal, callback);
+}
 
 void DoAfter(QObject* receiver, const char* slot, int msec) {
   QTimer::singleShot(msec, receiver, slot);

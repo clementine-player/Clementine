@@ -62,3 +62,14 @@ TEST(ClosureTest, ClosureDoesNotCrashWithSharedPointerSender) {
   ASSERT_EQ(1, spy->count());
   EXPECT_TRUE(closure.isNull());
 }
+
+TEST(ClosureTest, ClosureCallsLambda) {
+  TestQObject sender;
+  bool called = false;
+  _detail::ClosureBase* closure = NewClosure(
+      &sender, SIGNAL(Emitted()),
+      [&called] () { called = true; });
+  EXPECT_FALSE(called);
+  sender.Emit();
+  EXPECT_TRUE(called);
+}

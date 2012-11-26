@@ -150,6 +150,19 @@ class SharedClosure : public Closure<Args...> {
   QSharedPointer<T> data_;
 };
 
+class CallbackClosure : public ClosureBase {
+ public:
+  CallbackClosure(
+      QObject* sender,
+      const char* signal,
+      std::function<void()> callback);
+
+  virtual void Invoke();
+
+ private:
+  std::function<void()> callback_;
+};
+
 }  // namespace _detail
 
 template <typename... Args>
@@ -174,6 +187,11 @@ _detail::ClosureBase* NewClosure(
   return new _detail::SharedClosure<T, Args...>(
       sender, signal, receiver, slot, args...);
 }
+
+_detail::ClosureBase* NewClosure(
+    QObject* sender,
+    const char* signal,
+    std::function<void()> callback);
 
 
 void DoAfter(QObject* receiver, const char* slot, int msec);
