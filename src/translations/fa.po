@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-11-09 20:19+0000\n"
+"PO-Revision-Date: 2012-11-19 14:41+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -227,7 +227,7 @@ msgstr "...و دیگر توسعه‌دهنده‌های آماروک"
 msgid "0:00:00"
 msgstr "0:00:00"
 
-#: ../bin/src/ui_appearancesettingspage.h:278
+#: ../bin/src/ui_appearancesettingspage.h:284
 msgid "0px"
 msgstr ""
 
@@ -299,7 +299,7 @@ msgstr ""
 msgid "AAC 64k"
 msgstr ""
 
-#: core/song.cpp:329
+#: core/song.cpp:327
 msgid "AIFF"
 msgstr "AIFF"
 
@@ -524,7 +524,7 @@ msgstr ""
 msgid "After copying..."
 msgstr "پس از کپی‌کردن"
 
-#: playlist/playlist.cpp:1186 ui/organisedialog.cpp:55
+#: playlist/playlist.cpp:1194 ui/organisedialog.cpp:55
 #: ui/qtsystemtrayicon.cpp:252 ../bin/src/ui_groupbydialog.h:129
 #: ../bin/src/ui_groupbydialog.h:142 ../bin/src/ui_groupbydialog.h:155
 #: ../bin/src/ui_albumcoversearcher.h:111
@@ -537,13 +537,13 @@ msgstr "آلبوم"
 msgid "Album (ideal loudness for all tracks)"
 msgstr "آلبوم (بلندی صدای ایده‌آل برای تمام قطعه‌ها)"
 
-#: playlist/playlist.cpp:1192 ui/organisedialog.cpp:58
+#: playlist/playlist.cpp:1200 ui/organisedialog.cpp:58
 #: ../bin/src/ui_groupbydialog.h:131 ../bin/src/ui_groupbydialog.h:144
 #: ../bin/src/ui_groupbydialog.h:157 ../bin/src/ui_edittagdialog.h:658
 msgid "Album artist"
 msgstr "هنرمند آلبوم"
 
-#: ../bin/src/ui_appearancesettingspage.h:273
+#: ../bin/src/ui_appearancesettingspage.h:279
 msgid "Album cover"
 msgstr ""
 
@@ -645,7 +645,7 @@ msgid "Angry"
 msgstr ""
 
 #: ../bin/src/ui_songinfosettingspage.h:180
-#: ../bin/src/ui_appearancesettingspage.h:260
+#: ../bin/src/ui_appearancesettingspage.h:266
 msgid "Appearance"
 msgstr "شمایل"
 
@@ -680,7 +680,7 @@ msgstr "آیا مطمئن هستید که می‌خواهید این لیست پ
 msgid "Are you sure you want to reset this song's statistics?"
 msgstr "آیا مطمئنید که می‌خواهید آمارهٔ این آهنگ را  پاک کنید؟"
 
-#: playlist/playlist.cpp:1185 ui/organisedialog.cpp:56
+#: playlist/playlist.cpp:1193 ui/organisedialog.cpp:56
 #: ui/qtsystemtrayicon.cpp:250 ../bin/src/ui_groupbydialog.h:130
 #: ../bin/src/ui_groupbydialog.h:143 ../bin/src/ui_groupbydialog.h:156
 #: ../bin/src/ui_albumcoversearcher.h:107
@@ -752,7 +752,7 @@ msgstr "میانگین اندازهٔ تصویر"
 msgid "BBC Podcasts"
 msgstr ""
 
-#: playlist/playlist.cpp:1201 ui/organisedialog.cpp:62
+#: playlist/playlist.cpp:1209 ui/organisedialog.cpp:62
 #: ../bin/src/ui_edittagdialog.h:638
 msgid "BPM"
 msgstr "ض.د.د"
@@ -765,7 +765,7 @@ msgstr "جریان پس‌زمینه"
 msgid "Background color"
 msgstr "رنگ پس‌زمینه"
 
-#: ../bin/src/ui_appearancesettingspage.h:268
+#: ../bin/src/ui_appearancesettingspage.h:274
 msgid "Background image"
 msgstr ""
 
@@ -806,7 +806,7 @@ msgstr "بهترین"
 msgid "Biography from %1"
 msgstr "بیوگرافی از %1"
 
-#: playlist/playlist.cpp:1202 ../bin/src/ui_edittagdialog.h:640
+#: playlist/playlist.cpp:1210 ../bin/src/ui_edittagdialog.h:640
 msgid "Bit rate"
 msgstr "ضرب آهنگ"
 
@@ -839,7 +839,7 @@ msgstr "آنالیزور نرده‌ای"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:146
 #: ../bin/src/ui_podcastsettingspage.h:242
-#: ../bin/src/ui_appearancesettingspage.h:276
+#: ../bin/src/ui_appearancesettingspage.h:282
 msgid "Browse..."
 msgstr "مرور..."
 
@@ -859,7 +859,7 @@ msgstr ""
 msgid "Buttons"
 msgstr "دکمه‌ها"
 
-#: core/song.cpp:332
+#: core/song.cpp:330
 msgid "CDDA"
 msgstr "CDDA"
 
@@ -1066,7 +1066,7 @@ msgstr "باشگاه"
 msgid "Color"
 msgstr "رنگ"
 
-#: ../bin/src/ui_appearancesettingspage.h:261
+#: ../bin/src/ui_appearancesettingspage.h:267
 msgid "Colors"
 msgstr "رنگ:"
 
@@ -1074,7 +1074,7 @@ msgstr "رنگ:"
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "لیست مجزا بوسیلهٔ ویرگول از class:level، طبقه ۰-۳ است."
 
-#: playlist/playlist.cpp:1211 smartplaylists/searchterm.cpp:279
+#: playlist/playlist.cpp:1219 smartplaylists/searchterm.cpp:279
 #: ui/organisedialog.cpp:65 ../bin/src/ui_edittagdialog.h:661
 msgid "Comment"
 msgstr "توضیح"
@@ -1087,7 +1087,7 @@ msgstr "تکمیل اتوماتیک برچسب‌ها"
 msgid "Complete tags automatically..."
 msgstr "تکمیل اتوماتیک برچسب‌ها..."
 
-#: playlist/playlist.cpp:1193 ui/organisedialog.cpp:59
+#: playlist/playlist.cpp:1201 ui/organisedialog.cpp:59
 #: ../bin/src/ui_groupbydialog.h:132 ../bin/src/ui_groupbydialog.h:145
 #: ../bin/src/ui_groupbydialog.h:158 ../bin/src/ui_edittagdialog.h:659
 msgid "Composer"
@@ -1336,7 +1336,7 @@ msgstr "Ctrl+Up"
 msgid "Custom"
 msgstr "سفارشی"
 
-#: ../bin/src/ui_appearancesettingspage.h:275
+#: ../bin/src/ui_appearancesettingspage.h:281
 msgid "Custom image:"
 msgstr ""
 
@@ -1367,11 +1367,11 @@ msgid ""
 "recover your database"
 msgstr ""
 
-#: playlist/playlist.cpp:1209 ../bin/src/ui_edittagdialog.h:649
+#: playlist/playlist.cpp:1217 ../bin/src/ui_edittagdialog.h:649
 msgid "Date created"
 msgstr "تاریخ ایجاد شد"
 
-#: playlist/playlist.cpp:1208 ../bin/src/ui_edittagdialog.h:648
+#: playlist/playlist.cpp:1216 ../bin/src/ui_edittagdialog.h:648
 msgid "Date modified"
 msgstr "تاریخ اصلاح شد"
 
@@ -1391,7 +1391,7 @@ msgstr "کاهش صدا ۴٪"
 msgid "Decrease volume"
 msgstr "کاهش صدا"
 
-#: ../bin/src/ui_appearancesettingspage.h:269
+#: ../bin/src/ui_appearancesettingspage.h:275
 msgid "Default background image"
 msgstr "تصویر پس زمینه ی پیشفرض"
 
@@ -1478,7 +1478,7 @@ msgstr "دستگاه"
 msgid "Device Properties"
 msgstr "ویژگیهای دستگاه"
 
-#: ../bin/src/ui_podcastsettingspage.h:254 devices/wmdmlister.cpp:368
+#: ../bin/src/ui_podcastsettingspage.h:254 devices/wmdmlister.cpp:360
 msgid "Device name"
 msgstr "نام دستگاه"
 
@@ -1519,12 +1519,16 @@ msgstr "فهرست راهنما"
 msgid "Disable duration"
 msgstr "مدت غیرفعال‌سازی"
 
+#: ../bin/src/ui_appearancesettingspage.h:289
+msgid "Disable moodbar generation"
+msgstr ""
+
 #: globalsearch/searchproviderstatuswidget.cpp:47
 #: ../bin/src/ui_notificationssettingspage.h:405
 msgid "Disabled"
 msgstr "غیر فعال شد"
 
-#: playlist/playlist.cpp:1189 ui/organisedialog.cpp:61
+#: playlist/playlist.cpp:1197 ui/organisedialog.cpp:61
 #: ../bin/src/ui_edittagdialog.h:655
 msgid "Disc"
 msgstr "دیسک"
@@ -1644,7 +1648,7 @@ msgstr "بارگیری ابرداده"
 msgid "Drag to reposition"
 msgstr "برای مکان‌گذاری دوباره بکشید"
 
-#: devices/wmdmlister.cpp:365
+#: devices/wmdmlister.cpp:357
 msgid "Drive letter"
 msgstr "حرف درایو"
 
@@ -1925,7 +1929,7 @@ msgstr ""
 msgid "Failed to load podcast"
 msgstr ""
 
-#: podcasts/podcasturlloader.cpp:165
+#: podcasts/podcasturlloader.cpp:167
 msgid "Failed to parse the XML for this RSS feed"
 msgstr ""
 
@@ -1966,19 +1970,19 @@ msgstr "پسوند پرونده"
 msgid "File formats"
 msgstr "نوع پرونده"
 
-#: playlist/playlist.cpp:1204 ../bin/src/ui_edittagdialog.h:650
+#: playlist/playlist.cpp:1212 ../bin/src/ui_edittagdialog.h:650
 msgid "File name"
 msgstr "نام پرونده"
 
-#: playlist/playlist.cpp:1205
+#: playlist/playlist.cpp:1213
 msgid "File name (without path)"
 msgstr "نام پرونده (بدون مسیر)"
 
-#: playlist/playlist.cpp:1206 ../bin/src/ui_edittagdialog.h:644
+#: playlist/playlist.cpp:1214 ../bin/src/ui_edittagdialog.h:644
 msgid "File size"
 msgstr "اندازه پرونده"
 
-#: playlist/playlist.cpp:1207 ../bin/src/ui_groupbydialog.h:133
+#: playlist/playlist.cpp:1215 ../bin/src/ui_groupbydialog.h:133
 #: ../bin/src/ui_groupbydialog.h:146 ../bin/src/ui_groupbydialog.h:159
 #: ../bin/src/ui_edittagdialog.h:646
 msgid "File type"
@@ -1996,15 +2000,15 @@ msgstr "پرونده‌ها"
 msgid "Files to transcode"
 msgstr "پرونده‌های برای تراکد"
 
-#: devices/wmdmlister.cpp:367
+#: devices/wmdmlister.cpp:359
 msgid "Filesystem name"
 msgstr "نام سیستم‌فایل"
 
-#: devices/wmdmlister.cpp:372
+#: devices/wmdmlister.cpp:364
 msgid "Filesystem serial number"
 msgstr "شمارهٔ سریال سیستم‌فایل"
 
-#: devices/wmdmlister.cpp:366
+#: devices/wmdmlister.cpp:358
 msgid "Filesystem type"
 msgstr "نوع سیستم‌فایل"
 
@@ -2024,7 +2028,7 @@ msgstr "پایان"
 msgid "First level"
 msgstr "طبقهٔ اول"
 
-#: core/song.cpp:322
+#: core/song.cpp:320
 msgid "Flac"
 msgstr "Flac"
 
@@ -2118,7 +2122,7 @@ msgstr "عمومی"
 msgid "General settings"
 msgstr "تنظیمات عمومی"
 
-#: playlist/playlist.cpp:1191 ui/organisedialog.cpp:64
+#: playlist/playlist.cpp:1199 ui/organisedialog.cpp:64
 #: ../bin/src/ui_groupbydialog.h:134 ../bin/src/ui_groupbydialog.h:147
 #: ../bin/src/ui_groupbydialog.h:160 ../bin/src/ui_edittagdialog.h:660
 msgid "Genre"
@@ -2227,7 +2231,7 @@ msgstr "گروه‌بندی طبق ژانر/آلبوم"
 msgid "Group by Genre/Artist/Album"
 msgstr "گروه‌بندی طبق ژانر/هنرمند/آلبوم"
 
-#: podcasts/podcasturlloader.cpp:194
+#: podcasts/podcasturlloader.cpp:196
 msgid "HTML page did not contain any RSS feeds"
 msgstr ""
 
@@ -2476,7 +2480,7 @@ msgstr "جلد آلبوم بزرگ"
 msgid "Large sidebar"
 msgstr "میلهٔ کناری بزرگ"
 
-#: library/library.cpp:69 playlist/playlist.cpp:1198
+#: library/library.cpp:69 playlist/playlist.cpp:1206
 #: ../bin/src/ui_edittagdialog.h:641
 msgid "Last played"
 msgstr "آخرین پخش"
@@ -2555,7 +2559,7 @@ msgstr "آخرین قطعه‌های برگزیده"
 msgid "Leave blank for the default.  Examples: \"/dev/dsp\", \"front\", etc."
 msgstr "برای پیش‌فرض، خالی رها کنید. مثال:   \"/dev/dsp\"، \"front\"، و ..."
 
-#: playlist/playlist.cpp:1187 ui/organisedialog.cpp:66
+#: playlist/playlist.cpp:1195 ui/organisedialog.cpp:66
 #: ui/qtsystemtrayicon.cpp:255 ../bin/src/ui_edittagdialog.h:636
 msgid "Length"
 msgstr "طول"
@@ -2708,7 +2712,7 @@ msgstr "متن آهنگ"
 msgid "Lyrics from %1"
 msgstr "متن آهنگ از %1"
 
-#: core/song.cpp:325 ../bin/src/ui_transcodersettingspage.h:159
+#: core/song.cpp:323 ../bin/src/ui_transcodersettingspage.h:159
 msgid "MP3"
 msgstr "MP3"
 
@@ -2720,11 +2724,11 @@ msgstr ""
 msgid "MP3 96k"
 msgstr ""
 
-#: core/song.cpp:323
+#: core/song.cpp:321
 msgid "MP4 AAC"
 msgstr "MP4 AAC"
 
-#: core/song.cpp:324
+#: core/song.cpp:322
 msgid "MPC"
 msgstr "MPC"
 
@@ -2827,16 +2831,16 @@ msgstr ""
 msgid "Months"
 msgstr "ماه"
 
-#: playlist/playlist.cpp:1213
+#: playlist/playlist.cpp:1221
 msgid "Mood"
 msgstr ""
 
-#: ../bin/src/ui_appearancesettingspage.h:281
+#: ../bin/src/ui_appearancesettingspage.h:287
 #: moodbar/moodbarproxystyle.cpp:342
 msgid "Moodbar style"
 msgstr ""
 
-#: ../bin/src/ui_appearancesettingspage.h:279
+#: ../bin/src/ui_appearancesettingspage.h:285
 msgid "Moodbars"
 msgstr ""
 
@@ -2999,7 +3003,7 @@ msgstr ""
 msgid "No analyzer"
 msgstr "بدون آنالیزور"
 
-#: ../bin/src/ui_appearancesettingspage.h:274
+#: ../bin/src/ui_appearancesettingspage.h:280
 msgid "No background image"
 msgstr ""
 
@@ -3086,15 +3090,15 @@ msgstr "در حال پخش"
 msgid "OSD Preview"
 msgstr "پیش‌مشاهدهٔ OSD"
 
-#: core/song.cpp:326
+#: core/song.cpp:324
 msgid "Ogg Flac"
 msgstr "Ogg Flac"
 
-#: core/song.cpp:327
+#: core/song.cpp:325
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
 
-#: core/song.cpp:328 ../bin/src/ui_magnatunedownloaddialog.h:139
+#: core/song.cpp:326 ../bin/src/ui_magnatunedownloaddialog.h:139
 #: ../bin/src/ui_magnatunesettingspage.h:170
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
@@ -3254,7 +3258,7 @@ msgstr "پخش هنرمند یا برچسب"
 msgid "Play artist radio..."
 msgstr "پخش رادیوی هنرمند..."
 
-#: playlist/playlist.cpp:1196 ../bin/src/ui_edittagdialog.h:637
+#: playlist/playlist.cpp:1204 ../bin/src/ui_edittagdialog.h:637
 msgid "Play count"
 msgstr "شمار پخش"
 
@@ -3506,7 +3510,7 @@ msgstr "رتبهٔ آهنگ جاری را چهار ستاره کن"
 msgid "Rate the current song 5 stars"
 msgstr "رتبهٔ آهنگ جاری را پنج ستاره کن"
 
-#: playlist/playlist.cpp:1195 ../bin/src/ui_edittagdialog.h:645
+#: playlist/playlist.cpp:1203 ../bin/src/ui_edittagdialog.h:645
 msgid "Rating"
 msgstr "رتبه‌بندی"
 
@@ -3698,7 +3702,7 @@ msgstr "دستگاه را با امنیت حذف کن"
 msgid "Safely remove the device after copying"
 msgstr "دستگاه را بعد از کپی، با امنیت حذف کن"
 
-#: playlist/playlist.cpp:1203 ../bin/src/ui_edittagdialog.h:642
+#: playlist/playlist.cpp:1211 ../bin/src/ui_edittagdialog.h:642
 msgid "Sample rate"
 msgstr "الگوی ضرباهنگ"
 
@@ -3706,7 +3710,7 @@ msgstr "الگوی ضرباهنگ"
 msgid "Samplerate"
 msgstr "ضرباهنگ‌الگو"
 
-#: ../bin/src/ui_appearancesettingspage.h:282
+#: ../bin/src/ui_appearancesettingspage.h:288
 msgid "Save .mood files in your music library"
 msgstr ""
 
@@ -3746,7 +3750,7 @@ msgstr "ذخیرهٔ قطعه‌ها"
 msgid "Scalable sampling rate profile (SSR)"
 msgstr "نمایهٔ الگوی ضرباهنگ مقیاس‌پذیر (SSR)"
 
-#: playlist/playlist.cpp:1199 ../bin/src/ui_edittagdialog.h:643
+#: playlist/playlist.cpp:1207 ../bin/src/ui_edittagdialog.h:643
 msgid "Score"
 msgstr "امتیاز"
 
@@ -3838,11 +3842,11 @@ msgstr "برگزیدن همه"
 msgid "Select None"
 msgstr "برگزیدن هیچ‌کدام"
 
-#: ../bin/src/ui_appearancesettingspage.h:266
+#: ../bin/src/ui_appearancesettingspage.h:272
 msgid "Select background color:"
 msgstr "رنگ پس زمینه را انتخاب کنید:"
 
-#: ui/appearancesettingspage.cpp:238
+#: ui/appearancesettingspage.cpp:240
 msgid "Select background image"
 msgstr "تصویر پس زمینه را انتخاب کنید"
 
@@ -3850,11 +3854,11 @@ msgstr "تصویر پس زمینه را انتخاب کنید"
 msgid "Select best possible match"
 msgstr "انتخاب بهترین تطبیق ممکن"
 
-#: ../bin/src/ui_appearancesettingspage.h:277
+#: ../bin/src/ui_appearancesettingspage.h:283
 msgid "Select blur radius:"
 msgstr ""
 
-#: ../bin/src/ui_appearancesettingspage.h:264
+#: ../bin/src/ui_appearancesettingspage.h:270
 msgid "Select foreground color:"
 msgstr ""
 
@@ -3914,7 +3918,7 @@ msgstr "نمایش OSD"
 msgid "Show a glowing animation on the current track"
 msgstr "انیمیشنی درخشان در قطعه‌ جاری نمایش بده"
 
-#: ../bin/src/ui_appearancesettingspage.h:280
+#: ../bin/src/ui_appearancesettingspage.h:286
 msgid "Show a moodbar in the track progress bar"
 msgstr ""
 
@@ -4051,7 +4055,7 @@ msgstr "Ska"
 msgid "Skip backwards in playlist"
 msgstr "پرش عقب در لیست‌پخش"
 
-#: playlist/playlist.cpp:1197 ../bin/src/ui_edittagdialog.h:639
+#: playlist/playlist.cpp:1205 ../bin/src/ui_edittagdialog.h:639
 msgid "Skip count"
 msgstr "پرش شمار"
 
@@ -4119,7 +4123,7 @@ msgstr "مرتب‌سازی آهنگ‌ها طبق"
 msgid "Sorting"
 msgstr "مرتب‌سازی"
 
-#: playlist/playlist.cpp:1212
+#: playlist/playlist.cpp:1220
 msgid "Source"
 msgstr "منبع:"
 
@@ -4208,7 +4212,7 @@ msgstr "توقف پخش بعد از قطعهٔ جاری"
 msgid "Stopped"
 msgstr "متوقف"
 
-#: core/song.cpp:334
+#: core/song.cpp:332
 msgid "Stream"
 msgstr "جریان"
 
@@ -4309,7 +4313,7 @@ msgstr "تشکر از"
 msgid "The \"%1\" command could not be started."
 msgstr "فرمان \"%1\" نمی‌تواند شروع شود."
 
-#: ../bin/src/ui_appearancesettingspage.h:271
+#: ../bin/src/ui_appearancesettingspage.h:277
 msgid "The album cover of the currently playing song"
 msgstr ""
 
@@ -4451,7 +4455,7 @@ msgstr "میانگاه"
 msgid "Timezone"
 msgstr "منطقهٔ زمانی"
 
-#: playlist/playlist.cpp:1184 ui/organisedialog.cpp:54
+#: playlist/playlist.cpp:1192 ui/organisedialog.cpp:54
 #: ui/qtsystemtrayicon.cpp:248 ../bin/src/ui_about.h:142
 #: ../bin/src/ui_edittagdialog.h:652 ../bin/src/ui_trackselectiondialog.h:211
 msgid "Title"
@@ -4491,7 +4495,7 @@ msgstr "تبدیل به پدیداری برای نمایش‌برصفحهٔ زی
 msgid "Tomorrow"
 msgstr ""
 
-#: podcasts/podcasturlloader.cpp:114
+#: podcasts/podcasturlloader.cpp:116
 msgid "Too many redirects"
 msgstr ""
 
@@ -4507,7 +4511,7 @@ msgstr "همهٔ بایت‌های ارسال شده"
 msgid "Total network requests made"
 msgstr "همهٔ درخواست‌های شبکه انجام شد"
 
-#: playlist/playlist.cpp:1188 ui/organisedialog.cpp:60
+#: playlist/playlist.cpp:1196 ui/organisedialog.cpp:60
 #: ../bin/src/ui_edittagdialog.h:653 ../bin/src/ui_trackselectiondialog.h:213
 msgid "Track"
 msgstr "قطعه"
@@ -4533,7 +4537,7 @@ msgstr "تراکدکردن فایلهای %1 با استفاده از سرنخ�
 msgid "Transcoding options"
 msgstr "گزینه‌های تراکد"
 
-#: core/song.cpp:331
+#: core/song.cpp:329
 msgid "TrueAudio"
 msgstr "صدای واقعی"
 
@@ -4562,7 +4566,7 @@ msgstr "نوار ابرپهن (UWB)"
 msgid "Unable to download %1 (%2)"
 msgstr "ناکام در باگیری %1 (%2)"
 
-#: core/song.cpp:338 library/librarymodel.cpp:301 library/librarymodel.cpp:306
+#: core/song.cpp:336 library/librarymodel.cpp:301 library/librarymodel.cpp:306
 #: library/librarymodel.cpp:947 playlist/playlistdelegates.cpp:309
 #: playlist/playlistmanager.cpp:394 playlist/playlistmanager.cpp:397
 #: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:416
@@ -4570,7 +4574,7 @@ msgstr "ناکام در باگیری %1 (%2)"
 msgid "Unknown"
 msgstr "ناشناخته"
 
-#: podcasts/podcasturlloader.cpp:196
+#: podcasts/podcasturlloader.cpp:198
 msgid "Unknown content-type"
 msgstr ""
 
@@ -4586,7 +4590,7 @@ msgstr "قرار ندادن جلد"
 msgid "Unsubscribe"
 msgstr ""
 
-#: songinfo/songkickconcerts.cpp:167
+#: songinfo/songkickconcerts.cpp:168
 msgid "Upcoming Concerts"
 msgstr ""
 
@@ -4648,7 +4652,7 @@ msgstr "در صورت وجود، از ابردادهٔ  Replay Gain استفاد
 msgid "Use Wii Remote"
 msgstr "بکار بردن دورکنترل Wii"
 
-#: ../bin/src/ui_appearancesettingspage.h:263
+#: ../bin/src/ui_appearancesettingspage.h:269
 msgid "Use a custom color set"
 msgstr ""
 
@@ -4680,7 +4684,7 @@ msgstr "بکاربردن شکل زمانی پارازیت"
 msgid "Use the system default"
 msgstr "بکاربردن پیش‌فرض‌های سیستم"
 
-#: ../bin/src/ui_appearancesettingspage.h:262
+#: ../bin/src/ui_appearancesettingspage.h:268
 msgid "Use the system default color set"
 msgstr ""
 
@@ -4761,7 +4765,7 @@ msgstr "تشخیص فعالیت صدا"
 msgid "Volume %1%"
 msgstr "حجم %1%"
 
-#: devices/wmdmlister.cpp:369
+#: devices/wmdmlister.cpp:361
 msgid "Volume name"
 msgstr "نام حجم"
 
@@ -4778,7 +4782,7 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
-#: core/song.cpp:330
+#: core/song.cpp:328
 msgid "Wav"
 msgstr "Wav"
 
@@ -4862,7 +4866,7 @@ msgstr ""
 msgid "Windows Media 64k"
 msgstr ""
 
-#: core/song.cpp:321
+#: core/song.cpp:319
 msgid "Windows Media audio"
 msgstr "فرمت صوتی مدیای ویندوز"
 
@@ -4876,7 +4880,7 @@ msgstr ""
 msgid "Would you like to run a full rescan right now?"
 msgstr "آیا مایل هستید که الان بازبینی کامل انجام دهید؟"
 
-#: playlist/playlist.cpp:1190 ui/organisedialog.cpp:63
+#: playlist/playlist.cpp:1198 ui/organisedialog.cpp:63
 #: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:148
 #: ../bin/src/ui_groupbydialog.h:161 ../bin/src/ui_edittagdialog.h:657
 #: ../bin/src/ui_trackselectiondialog.h:212

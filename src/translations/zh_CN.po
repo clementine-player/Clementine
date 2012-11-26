@@ -4,6 +4,7 @@
 # 
 # Translators:
 # Aron Xu <aronxu@gnome.org>, 2011.
+#   <bingmou2004@gmail.com>, 2012.
 #   <cxiaojian@gmail.com>, 2012.
 # Xinkai Chen <yeled.nova@gmail.com>, 2012.
 #   <yeled.nova@gmail.com>, 2012.
@@ -11,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-11-09 20:19+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2012-11-24 21:48+0000\n"
+"Last-Translator: bingmou <bingmou2004@gmail.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: zh_CN\n"
@@ -228,7 +229,7 @@ msgstr "...和所有 Amarok 的贡献者"
 msgid "0:00:00"
 msgstr "0:00:00"
 
-#: ../bin/src/ui_appearancesettingspage.h:278
+#: ../bin/src/ui_appearancesettingspage.h:284
 msgid "0px"
 msgstr ""
 
@@ -300,7 +301,7 @@ msgstr "AAC 32k"
 msgid "AAC 64k"
 msgstr "AAC 64k"
 
-#: core/song.cpp:329
+#: core/song.cpp:327
 msgid "AIFF"
 msgstr "AIFF"
 
@@ -507,7 +508,7 @@ msgstr "于三个月内加入"
 
 #: internet/groovesharkservice.cpp:1392
 msgid "Adding song to My Music"
-msgstr ""
+msgstr "添加到我的音乐"
 
 #: internet/groovesharkservice.cpp:1369
 msgid "Adding song to favorites"
@@ -525,7 +526,7 @@ msgstr "之后 "
 msgid "After copying..."
 msgstr "复制后..."
 
-#: playlist/playlist.cpp:1186 ui/organisedialog.cpp:55
+#: playlist/playlist.cpp:1194 ui/organisedialog.cpp:55
 #: ui/qtsystemtrayicon.cpp:252 ../bin/src/ui_groupbydialog.h:129
 #: ../bin/src/ui_groupbydialog.h:142 ../bin/src/ui_groupbydialog.h:155
 #: ../bin/src/ui_albumcoversearcher.h:111
@@ -538,13 +539,13 @@ msgstr "专辑"
 msgid "Album (ideal loudness for all tracks)"
 msgstr "专辑(所有音轨采用一个合适的音量)"
 
-#: playlist/playlist.cpp:1192 ui/organisedialog.cpp:58
+#: playlist/playlist.cpp:1200 ui/organisedialog.cpp:58
 #: ../bin/src/ui_groupbydialog.h:131 ../bin/src/ui_groupbydialog.h:144
 #: ../bin/src/ui_groupbydialog.h:157 ../bin/src/ui_edittagdialog.h:658
 msgid "Album artist"
 msgstr "专辑艺人"
 
-#: ../bin/src/ui_appearancesettingspage.h:273
+#: ../bin/src/ui_appearancesettingspage.h:279
 msgid "Album cover"
 msgstr "专辑封面"
 
@@ -643,10 +644,10 @@ msgstr "和："
 
 #: moodbar/moodbarrenderer.cpp:156
 msgid "Angry"
-msgstr ""
+msgstr "愤怒"
 
 #: ../bin/src/ui_songinfosettingspage.h:180
-#: ../bin/src/ui_appearancesettingspage.h:260
+#: ../bin/src/ui_appearancesettingspage.h:266
 msgid "Appearance"
 msgstr "外观"
 
@@ -681,7 +682,7 @@ msgstr "您确定要删除这个播放列表吗？"
 msgid "Are you sure you want to reset this song's statistics?"
 msgstr "您确定要重置此曲目的统计信息吗？"
 
-#: playlist/playlist.cpp:1185 ui/organisedialog.cpp:56
+#: playlist/playlist.cpp:1193 ui/organisedialog.cpp:56
 #: ui/qtsystemtrayicon.cpp:250 ../bin/src/ui_groupbydialog.h:130
 #: ../bin/src/ui_groupbydialog.h:143 ../bin/src/ui_groupbydialog.h:156
 #: ../bin/src/ui_albumcoversearcher.h:107
@@ -753,7 +754,7 @@ msgstr "图片平均大小"
 msgid "BBC Podcasts"
 msgstr "BBC 播客"
 
-#: playlist/playlist.cpp:1201 ui/organisedialog.cpp:62
+#: playlist/playlist.cpp:1209 ui/organisedialog.cpp:62
 #: ../bin/src/ui_edittagdialog.h:638
 msgid "BPM"
 msgstr "BPM"
@@ -766,7 +767,7 @@ msgstr "背景流媒体"
 msgid "Background color"
 msgstr "背景颜色"
 
-#: ../bin/src/ui_appearancesettingspage.h:268
+#: ../bin/src/ui_appearancesettingspage.h:274
 msgid "Background image"
 msgstr "背景图片"
 
@@ -807,7 +808,7 @@ msgstr "最佳"
 msgid "Biography from %1"
 msgstr "%1 上的个人档案"
 
-#: playlist/playlist.cpp:1202 ../bin/src/ui_edittagdialog.h:640
+#: playlist/playlist.cpp:1210 ../bin/src/ui_edittagdialog.h:640
 msgid "Bit rate"
 msgstr "位速率"
 
@@ -840,7 +841,7 @@ msgstr ""
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:146
 #: ../bin/src/ui_podcastsettingspage.h:242
-#: ../bin/src/ui_appearancesettingspage.h:276
+#: ../bin/src/ui_appearancesettingspage.h:282
 msgid "Browse..."
 msgstr "浏览..."
 
@@ -854,13 +855,13 @@ msgstr "缓冲中"
 
 #: ../bin/src/ui_globalsearchview.h:211
 msgid "But these sources are disabled:"
-msgstr ""
+msgstr "但这些资源已经被禁止"
 
 #: ../bin/src/ui_wiimotesettingspage.h:192
 msgid "Buttons"
 msgstr "按钮"
 
-#: core/song.cpp:332
+#: core/song.cpp:330
 msgid "CDDA"
 msgstr "CDDA"
 
@@ -987,7 +988,7 @@ msgstr "Clementine 可自动将要复制到设备的文件转换为它可以播�
 
 #: ../bin/src/ui_googledrivesettingspage.h:104
 msgid "Clementine can play music that you have uploaded to Google Drive"
-msgstr ""
+msgstr "Clementine 可以播放你上传到Google云存储的音乐"
 
 #: ../bin/src/ui_notificationssettingspage.h:403
 msgid "Clementine can show a message when the track changes."
@@ -1023,7 +1024,7 @@ msgstr "Clementine 无法为此文件查找结果"
 
 #: ../bin/src/ui_globalsearchview.h:210
 msgid "Clementine will find music in:"
-msgstr ""
+msgstr "Clementine 将在这些地方搜索音乐："
 
 #: library/libraryview.cpp:349
 msgid "Click here to add some music"
@@ -1037,7 +1038,7 @@ msgstr "单击切换剩余时间和总计时间模式"
 msgid ""
 "Clicking the Login button will open a web browser.  You should return to "
 "Clementine after you have logged in."
-msgstr ""
+msgstr "点击登录按钮将会打开网络浏览器。 登录之后将回到 Clementine"
 
 #: widgets/didyoumean.cpp:37
 msgid "Close"
@@ -1045,7 +1046,7 @@ msgstr "关闭"
 
 #: playlist/playlisttabbar.cpp:47
 msgid "Close playlist"
-msgstr ""
+msgstr "关闭播放列表"
 
 #: visualisations/visualisationcontainer.cpp:127
 msgid "Close visualization"
@@ -1067,7 +1068,7 @@ msgstr "俱乐部"
 msgid "Color"
 msgstr "颜色"
 
-#: ../bin/src/ui_appearancesettingspage.h:261
+#: ../bin/src/ui_appearancesettingspage.h:267
 msgid "Colors"
 msgstr "颜色"
 
@@ -1075,7 +1076,7 @@ msgstr "颜色"
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr ""
 
-#: playlist/playlist.cpp:1211 smartplaylists/searchterm.cpp:279
+#: playlist/playlist.cpp:1219 smartplaylists/searchterm.cpp:279
 #: ui/organisedialog.cpp:65 ../bin/src/ui_edittagdialog.h:661
 msgid "Comment"
 msgstr "备注"
@@ -1086,9 +1087,9 @@ msgstr "自动补全标签"
 
 #: ../bin/src/ui_mainwindow.h:713
 msgid "Complete tags automatically..."
-msgstr "自动关闭标签"
+msgstr "自动补全标签..."
 
-#: playlist/playlist.cpp:1193 ui/organisedialog.cpp:59
+#: playlist/playlist.cpp:1201 ui/organisedialog.cpp:59
 #: ../bin/src/ui_groupbydialog.h:132 ../bin/src/ui_groupbydialog.h:145
 #: ../bin/src/ui_groupbydialog.h:158 ../bin/src/ui_edittagdialog.h:659
 msgid "Composer"
@@ -1121,7 +1122,7 @@ msgstr "配置Spotify..."
 
 #: globalsearch/globalsearchview.cpp:138 globalsearch/globalsearchview.cpp:430
 msgid "Configure global search..."
-msgstr ""
+msgstr "配置全局搜索…"
 
 #: ui/mainwindow.cpp:470
 msgid "Configure library..."
@@ -1151,7 +1152,7 @@ msgstr "连接Spotify"
 
 #: ../bin/src/ui_console.h:80 ../bin/src/ui_mainwindow.h:689
 msgid "Console"
-msgstr ""
+msgstr "终端"
 
 #: ../bin/src/ui_transcoderoptionsmp3.h:196
 msgid "Constant bitrate"
@@ -1199,7 +1200,7 @@ msgstr "无法创建GStreamer元素 \"%1\" - 请确认您已安装了所需GStre
 msgid ""
 "Couldn't find a muxer for %1, check you have the correct GStreamer plugins "
 "installed"
-msgstr ""
+msgstr "无法为%1找到混音器，请检查是否安装了正确的Gstreamer插件"
 
 #: transcoder/transcoder.cpp:421
 #, qt-format
@@ -1337,7 +1338,7 @@ msgstr "Ctrl+Up"
 msgid "Custom"
 msgstr "自定义"
 
-#: ../bin/src/ui_appearancesettingspage.h:275
+#: ../bin/src/ui_appearancesettingspage.h:281
 msgid "Custom image:"
 msgstr "自定义图片:"
 
@@ -1368,11 +1369,11 @@ msgid ""
 "recover your database"
 msgstr "检测到数据库损坏，请查阅 https://code.google.com/p/clementine-player/wiki/DatabaseCorruption 获取恢复数据库的方法"
 
-#: playlist/playlist.cpp:1209 ../bin/src/ui_edittagdialog.h:649
+#: playlist/playlist.cpp:1217 ../bin/src/ui_edittagdialog.h:649
 msgid "Date created"
 msgstr "创建日期"
 
-#: playlist/playlist.cpp:1208 ../bin/src/ui_edittagdialog.h:648
+#: playlist/playlist.cpp:1216 ../bin/src/ui_edittagdialog.h:648
 msgid "Date modified"
 msgstr "修改日期"
 
@@ -1392,7 +1393,7 @@ msgstr "音量减少百分之四"
 msgid "Decrease volume"
 msgstr "降低音量"
 
-#: ../bin/src/ui_appearancesettingspage.h:269
+#: ../bin/src/ui_appearancesettingspage.h:275
 msgid "Default background image"
 msgstr "默认背景图片"
 
@@ -1407,7 +1408,7 @@ msgstr "在两个视觉化效果间延迟切换"
 #: playlist/playlistlistcontainer.cpp:75
 #: ../bin/src/ui_playlistlistcontainer.h:122
 msgid "Delete"
-msgstr ""
+msgstr "删除"
 
 #: internet/groovesharkservice.cpp:521 internet/groovesharkservice.cpp:1289
 msgid "Delete Grooveshark playlist"
@@ -1437,7 +1438,7 @@ msgstr "删除收听过的节目"
 
 #: playlist/playlistlistcontainer.cpp:295
 msgid "Delete playlists"
-msgstr ""
+msgstr "删除播放列表"
 
 #: ui/equalizer.cpp:190 ../bin/src/ui_equalizer.h:124
 msgid "Delete preset"
@@ -1479,7 +1480,7 @@ msgstr "设备"
 msgid "Device Properties"
 msgstr "设备属性"
 
-#: ../bin/src/ui_podcastsettingspage.h:254 devices/wmdmlister.cpp:368
+#: ../bin/src/ui_podcastsettingspage.h:254 devices/wmdmlister.cpp:360
 msgid "Device name"
 msgstr "设备名称"
 
@@ -1520,12 +1521,16 @@ msgstr "目录"
 msgid "Disable duration"
 msgstr "关闭时长"
 
+#: ../bin/src/ui_appearancesettingspage.h:289
+msgid "Disable moodbar generation"
+msgstr ""
+
 #: globalsearch/searchproviderstatuswidget.cpp:47
 #: ../bin/src/ui_notificationssettingspage.h:405
 msgid "Disabled"
 msgstr "禁用"
 
-#: playlist/playlist.cpp:1189 ui/organisedialog.cpp:61
+#: playlist/playlist.cpp:1197 ui/organisedialog.cpp:61
 #: ../bin/src/ui_edittagdialog.h:655
 msgid "Disc"
 msgstr "盘片"
@@ -1645,7 +1650,7 @@ msgstr "下载元数据"
 msgid "Drag to reposition"
 msgstr "拖拽以重新定位"
 
-#: devices/wmdmlister.cpp:365
+#: devices/wmdmlister.cpp:357
 msgid "Drive letter"
 msgstr "盘符"
 
@@ -1745,7 +1750,7 @@ msgstr "输入一个 <b>艺人</b> 或 <b>标签</b> 来开始收听 Last.fm 电
 #: ../bin/src/ui_globalsearchview.h:209
 msgid ""
 "Enter search terms above to find music on your computer and on the internet"
-msgstr ""
+msgstr "输入搜索项，在本地电脑和网络搜索"
 
 #: ../bin/src/ui_itunessearchpage.h:77
 msgid "Enter search terms below to find podcasts in the iTunes Store"
@@ -1766,7 +1771,7 @@ msgstr "请输入互联网广播流媒体地址："
 
 #: playlist/playlistlistcontainer.cpp:183
 msgid "Enter the name of the folder"
-msgstr ""
+msgstr "输入文件夹名字"
 
 #: ../bin/src/ui_libraryfilterwidget.h:87
 msgid "Entire collection"
@@ -1926,7 +1931,7 @@ msgstr "无法获取播客"
 msgid "Failed to load podcast"
 msgstr "无法读取播客"
 
-#: podcasts/podcasturlloader.cpp:165
+#: podcasts/podcasturlloader.cpp:167
 msgid "Failed to parse the XML for this RSS feed"
 msgstr "无法解析此 RSS 种子的XML"
 
@@ -1967,19 +1972,19 @@ msgstr "文件扩展名"
 msgid "File formats"
 msgstr "文件格式"
 
-#: playlist/playlist.cpp:1204 ../bin/src/ui_edittagdialog.h:650
+#: playlist/playlist.cpp:1212 ../bin/src/ui_edittagdialog.h:650
 msgid "File name"
 msgstr "文件名"
 
-#: playlist/playlist.cpp:1205
+#: playlist/playlist.cpp:1213
 msgid "File name (without path)"
 msgstr "文件名(无路径)"
 
-#: playlist/playlist.cpp:1206 ../bin/src/ui_edittagdialog.h:644
+#: playlist/playlist.cpp:1214 ../bin/src/ui_edittagdialog.h:644
 msgid "File size"
 msgstr "文件大小"
 
-#: playlist/playlist.cpp:1207 ../bin/src/ui_groupbydialog.h:133
+#: playlist/playlist.cpp:1215 ../bin/src/ui_groupbydialog.h:133
 #: ../bin/src/ui_groupbydialog.h:146 ../bin/src/ui_groupbydialog.h:159
 #: ../bin/src/ui_edittagdialog.h:646
 msgid "File type"
@@ -1997,15 +2002,15 @@ msgstr "文件"
 msgid "Files to transcode"
 msgstr "要转换的文件"
 
-#: devices/wmdmlister.cpp:367
+#: devices/wmdmlister.cpp:359
 msgid "Filesystem name"
 msgstr "文件系统名称"
 
-#: devices/wmdmlister.cpp:372
+#: devices/wmdmlister.cpp:364
 msgid "Filesystem serial number"
 msgstr "文件系统序列号"
 
-#: devices/wmdmlister.cpp:366
+#: devices/wmdmlister.cpp:358
 msgid "Filesystem type"
 msgstr "文件系统类型"
 
@@ -2025,7 +2030,7 @@ msgstr "完成"
 msgid "First level"
 msgstr "第一阶段"
 
-#: core/song.cpp:322
+#: core/song.cpp:320
 msgid "Flac"
 msgstr "Flac"
 
@@ -2119,7 +2124,7 @@ msgstr "一般"
 msgid "General settings"
 msgstr "常规设置"
 
-#: playlist/playlist.cpp:1191 ui/organisedialog.cpp:64
+#: playlist/playlist.cpp:1199 ui/organisedialog.cpp:64
 #: ../bin/src/ui_groupbydialog.h:134 ../bin/src/ui_groupbydialog.h:147
 #: ../bin/src/ui_groupbydialog.h:160 ../bin/src/ui_edittagdialog.h:660
 msgid "Genre"
@@ -2164,7 +2169,7 @@ msgstr "转到上一播放列表标签"
 #: internet/googledriveservice.cpp:60
 #: ../bin/src/ui_googledrivesettingspage.h:103
 msgid "Google Drive"
-msgstr ""
+msgstr "Google云存储"
 
 #: covers/coversearchstatisticsdialog.cpp:54 ui/albumcovermanager.cpp:413
 #: ../bin/src/ui_coversearchstatisticsdialog.h:76
@@ -2228,7 +2233,7 @@ msgstr "按流派/专辑分组"
 msgid "Group by Genre/Artist/Album"
 msgstr "按流派/艺人/专辑分组"
 
-#: podcasts/podcasturlloader.cpp:194
+#: podcasts/podcasturlloader.cpp:196
 msgid "HTML page did not contain any RSS feeds"
 msgstr "HTML页面没有包含任何 RSS 种子"
 
@@ -2238,7 +2243,7 @@ msgstr "HTTP 代理"
 
 #: moodbar/moodbarrenderer.cpp:158
 msgid "Happy"
-msgstr ""
+msgstr "高兴"
 
 #: ../bin/src/ui_deviceproperties.h:371
 msgid "Hardware information"
@@ -2311,7 +2316,7 @@ msgstr "图像 (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 #: core/utilities.cpp:143
 #, qt-format
 msgid "In %1 days"
-msgstr ""
+msgstr "在 %1 天内"
 
 #: core/utilities.cpp:147
 #, qt-format
@@ -2477,7 +2482,7 @@ msgstr "大专辑封面"
 msgid "Large sidebar"
 msgstr "大侧边栏"
 
-#: library/library.cpp:69 playlist/playlist.cpp:1198
+#: library/library.cpp:69 playlist/playlist.cpp:1206
 #: ../bin/src/ui_edittagdialog.h:641
 msgid "Last played"
 msgstr "最近播放"
@@ -2556,7 +2561,7 @@ msgstr "最不喜欢的歌曲"
 msgid "Leave blank for the default.  Examples: \"/dev/dsp\", \"front\", etc."
 msgstr "空白为默认,例如: \"/dev/dsp\", \"front\"等."
 
-#: playlist/playlist.cpp:1187 ui/organisedialog.cpp:66
+#: playlist/playlist.cpp:1195 ui/organisedialog.cpp:66
 #: ui/qtsystemtrayicon.cpp:255 ../bin/src/ui_edittagdialog.h:636
 msgid "Length"
 msgstr "长度"
@@ -2709,7 +2714,7 @@ msgstr "歌词"
 msgid "Lyrics from %1"
 msgstr "歌词来自 %1"
 
-#: core/song.cpp:325 ../bin/src/ui_transcodersettingspage.h:159
+#: core/song.cpp:323 ../bin/src/ui_transcodersettingspage.h:159
 msgid "MP3"
 msgstr "MP3"
 
@@ -2721,11 +2726,11 @@ msgstr "MP3 256k"
 msgid "MP3 96k"
 msgstr "MP3 96k"
 
-#: core/song.cpp:323
+#: core/song.cpp:321
 msgid "MP4 AAC"
 msgstr "MP4 AAC"
 
-#: core/song.cpp:324
+#: core/song.cpp:322
 msgid "MPC"
 msgstr "MPC"
 
@@ -2822,22 +2827,22 @@ msgstr "监控媒体库的更改"
 
 #: ../bin/src/ui_playbacksettingspage.h:296
 msgid "Mono playback"
-msgstr ""
+msgstr "单曲循环"
 
 #: smartplaylists/searchterm.cpp:303
 msgid "Months"
 msgstr "月"
 
-#: playlist/playlist.cpp:1213
+#: playlist/playlist.cpp:1221
 msgid "Mood"
-msgstr ""
+msgstr "心情"
 
-#: ../bin/src/ui_appearancesettingspage.h:281
+#: ../bin/src/ui_appearancesettingspage.h:287
 #: moodbar/moodbarproxystyle.cpp:342
 msgid "Moodbar style"
-msgstr ""
+msgstr "心情条风格"
 
-#: ../bin/src/ui_appearancesettingspage.h:279
+#: ../bin/src/ui_appearancesettingspage.h:285
 msgid "Moodbars"
 msgstr ""
 
@@ -2902,7 +2907,7 @@ msgstr "我的混音电台"
 
 #: internet/groovesharkservice.cpp:606
 msgid "My Music"
-msgstr ""
+msgstr "我的音乐"
 
 #: internet/lastfmservice.cpp:202
 msgid "My Neighborhood"
@@ -2961,7 +2966,7 @@ msgstr "从未播放"
 #: playlist/playlistlistcontainer.cpp:182
 #: ../bin/src/ui_playlistlistcontainer.h:119
 msgid "New folder"
-msgstr ""
+msgstr "创建新文件夹"
 
 #: ui/mainwindow.cpp:1389 ../bin/src/ui_mainwindow.h:698
 msgid "New playlist"
@@ -2994,13 +2999,13 @@ msgstr "下一音轨"
 
 #: core/utilities.cpp:145
 msgid "Next week"
-msgstr ""
+msgstr "下一周"
 
 #: analyzers/analyzercontainer.cpp:80
 msgid "No analyzer"
 msgstr "无均衡器"
 
-#: ../bin/src/ui_appearancesettingspage.h:274
+#: ../bin/src/ui_appearancesettingspage.h:280
 msgid "No background image"
 msgstr "无背景图片"
 
@@ -3028,7 +3033,7 @@ msgstr "已选择的曲目均不适合复制到设备"
 
 #: moodbar/moodbarrenderer.cpp:155
 msgid "Normal"
-msgstr ""
+msgstr "正常"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:144
 msgid "Normal block type"
@@ -3087,15 +3092,15 @@ msgstr "现在播放"
 msgid "OSD Preview"
 msgstr "OSD 预览"
 
-#: core/song.cpp:326
+#: core/song.cpp:324
 msgid "Ogg Flac"
 msgstr "Ogg Flac"
 
-#: core/song.cpp:327
+#: core/song.cpp:325
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
 
-#: core/song.cpp:328 ../bin/src/ui_magnatunedownloaddialog.h:139
+#: core/song.cpp:326 ../bin/src/ui_magnatunedownloaddialog.h:139
 #: ../bin/src/ui_magnatunesettingspage.h:170
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
@@ -3118,11 +3123,11 @@ msgstr "打开音频CD"
 
 #: podcasts/addpodcastdialog.cpp:230
 msgid "Open OPML file"
-msgstr ""
+msgstr "打开 OPML 文件"
 
 #: podcasts/addpodcastdialog.cpp:73
 msgid "Open OPML file..."
-msgstr ""
+msgstr "打开 OPML 文件…"
 
 #: ../bin/src/ui_deviceproperties.h:382
 msgid "Open device"
@@ -3134,7 +3139,7 @@ msgstr "打开文件..."
 
 #: internet/googledriveservice.cpp:248
 msgid "Open in Google Drive"
-msgstr ""
+msgstr "打开 Google 云存储"
 
 #: devices/deviceview.cpp:215 globalsearch/globalsearchview.cpp:421
 #: internet/internetservice.cpp:76 library/libraryview.cpp:371
@@ -3255,7 +3260,7 @@ msgstr "按艺术家或标签播放"
 msgid "Play artist radio..."
 msgstr "播放艺人电台..."
 
-#: playlist/playlist.cpp:1196 ../bin/src/ui_edittagdialog.h:637
+#: playlist/playlist.cpp:1204 ../bin/src/ui_edittagdialog.h:637
 msgid "Play count"
 msgstr "播放计数"
 
@@ -3315,7 +3320,7 @@ msgstr "播放列表"
 
 #: ../data/oauthsuccess.html:36
 msgid "Please close your browser and return to Clementine."
-msgstr ""
+msgstr "请关闭你的浏览器，回到 Clementine"
 
 #: ../bin/src/ui_spotifysettingspage.h:215
 msgid "Plugin status:"
@@ -3507,7 +3512,7 @@ msgstr "给当前曲目评级为四星"
 msgid "Rate the current song 5 stars"
 msgstr "给当前曲目评级为五星"
 
-#: playlist/playlist.cpp:1195 ../bin/src/ui_edittagdialog.h:645
+#: playlist/playlist.cpp:1203 ../bin/src/ui_edittagdialog.h:645
 msgid "Rating"
 msgstr "评级"
 
@@ -3562,7 +3567,7 @@ msgstr "删除操作"
 
 #: ../bin/src/ui_mainwindow.h:717
 msgid "Remove duplicates from playlist"
-msgstr ""
+msgstr "从播放列表中移除重复项"
 
 #: ../bin/src/ui_librarysettingspage.h:160
 msgid "Remove folder"
@@ -3570,7 +3575,7 @@ msgstr "删除文件夹"
 
 #: internet/groovesharkservice.cpp:534
 msgid "Remove from My Music"
-msgstr ""
+msgstr "从我的音乐中移出"
 
 #: internet/groovesharkservice.cpp:531
 msgid "Remove from favorites"
@@ -3582,11 +3587,11 @@ msgstr "从播放列表中移除"
 
 #: internet/groovesharkservice.cpp:1537
 msgid "Removing songs from My Music"
-msgstr ""
+msgstr "正在从我的音乐中移出"
 
 #: internet/groovesharkservice.cpp:1487
 msgid "Removing songs from favorites"
-msgstr ""
+msgstr "正在从我的最爱中移出"
 
 #: internet/groovesharkservice.cpp:1335
 #, qt-format
@@ -3677,7 +3682,7 @@ msgstr "正在检索 Grooveshark 播放列表"
 
 #: ../data/oauthsuccess.html:3
 msgid "Return to Clementine"
-msgstr ""
+msgstr "回到Clementine"
 
 #: ui/equalizer.cpp:121
 msgid "Rock"
@@ -3685,7 +3690,7 @@ msgstr "摇滚"
 
 #: ../bin/src/ui_console.h:81
 msgid "Run"
-msgstr ""
+msgstr "运行"
 
 #: ../bin/src/ui_networkproxysettingspage.h:164
 msgid "SOCKS proxy"
@@ -3699,7 +3704,7 @@ msgstr "安全移除设备"
 msgid "Safely remove the device after copying"
 msgstr "复制后安全移除设备"
 
-#: playlist/playlist.cpp:1203 ../bin/src/ui_edittagdialog.h:642
+#: playlist/playlist.cpp:1211 ../bin/src/ui_edittagdialog.h:642
 msgid "Sample rate"
 msgstr "采样率"
 
@@ -3707,7 +3712,7 @@ msgstr "采样率"
 msgid "Samplerate"
 msgstr "采样率"
 
-#: ../bin/src/ui_appearancesettingspage.h:282
+#: ../bin/src/ui_appearancesettingspage.h:288
 msgid "Save .mood files in your music library"
 msgstr ""
 
@@ -3747,7 +3752,7 @@ msgstr "正在保存音轨"
 msgid "Scalable sampling rate profile (SSR)"
 msgstr ""
 
-#: playlist/playlist.cpp:1199 ../bin/src/ui_edittagdialog.h:643
+#: playlist/playlist.cpp:1207 ../bin/src/ui_edittagdialog.h:643
 msgid "Score"
 msgstr "得分"
 
@@ -3800,7 +3805,7 @@ msgstr "搜索选项"
 #: internet/groovesharkservice.cpp:567 internet/soundcloudservice.cpp:104
 #: internet/spotifyservice.cpp:347
 msgid "Search results"
-msgstr ""
+msgstr "搜索结果"
 
 #: smartplaylists/querywizardplugin.cpp:152
 #: ../bin/src/ui_querysearchpage.h:120
@@ -3839,11 +3844,11 @@ msgstr "选择全部"
 msgid "Select None"
 msgstr "不选择"
 
-#: ../bin/src/ui_appearancesettingspage.h:266
+#: ../bin/src/ui_appearancesettingspage.h:272
 msgid "Select background color:"
 msgstr "选择背景色:"
 
-#: ui/appearancesettingspage.cpp:238
+#: ui/appearancesettingspage.cpp:240
 msgid "Select background image"
 msgstr "选择背景图片"
 
@@ -3851,11 +3856,11 @@ msgstr "选择背景图片"
 msgid "Select best possible match"
 msgstr "选择最可能的匹配项"
 
-#: ../bin/src/ui_appearancesettingspage.h:277
+#: ../bin/src/ui_appearancesettingspage.h:283
 msgid "Select blur radius:"
 msgstr ""
 
-#: ../bin/src/ui_appearancesettingspage.h:264
+#: ../bin/src/ui_appearancesettingspage.h:270
 msgid "Select foreground color:"
 msgstr "选择前景色:"
 
@@ -3915,9 +3920,9 @@ msgstr "显示 OSD"
 msgid "Show a glowing animation on the current track"
 msgstr ""
 
-#: ../bin/src/ui_appearancesettingspage.h:280
+#: ../bin/src/ui_appearancesettingspage.h:286
 msgid "Show a moodbar in the track progress bar"
-msgstr ""
+msgstr "在音轨进度条上显示心情条"
 
 #: ../bin/src/ui_notificationssettingspage.h:406
 msgid "Show a native desktop notification"
@@ -3974,7 +3979,7 @@ msgstr "在群星中显示"
 
 #: moodbar/moodbarproxystyle.cpp:337
 msgid "Show moodbar"
-msgstr ""
+msgstr "显示心情条"
 
 #: ui/mainwindow.cpp:459
 msgid "Show only duplicates"
@@ -3986,7 +3991,7 @@ msgstr "只显示未加标签的"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:153
 msgid "Show search suggestions"
-msgstr ""
+msgstr "显示搜索建议"
 
 #: ../bin/src/ui_lastfmsettingspage.h:157
 msgid "Show the \"love\" and \"ban\" buttons"
@@ -4052,7 +4057,7 @@ msgstr "Ska"
 msgid "Skip backwards in playlist"
 msgstr "在播放列表中后退"
 
-#: playlist/playlist.cpp:1197 ../bin/src/ui_edittagdialog.h:639
+#: playlist/playlist.cpp:1205 ../bin/src/ui_edittagdialog.h:639
 msgid "Skip count"
 msgstr "跳过计数"
 
@@ -4120,7 +4125,7 @@ msgstr "排序曲目"
 msgid "Sorting"
 msgstr "正在排序"
 
-#: playlist/playlist.cpp:1212
+#: playlist/playlist.cpp:1220
 msgid "Source"
 msgstr "来源"
 
@@ -4209,7 +4214,7 @@ msgstr "播放完此音轨后停止"
 msgid "Stopped"
 msgstr "已停止"
 
-#: core/song.cpp:334
+#: core/song.cpp:332
 msgid "Stream"
 msgstr "流媒体"
 
@@ -4227,7 +4232,7 @@ msgstr "订阅"
 
 #: ../data/oauthsuccess.html:34
 msgid "Success!"
-msgstr ""
+msgstr "成功！"
 
 #: transcoder/transcoder.cpp:200
 #, qt-format
@@ -4271,7 +4276,7 @@ msgstr "同步 Spotify 星号标记的音轨"
 
 #: moodbar/moodbarrenderer.cpp:159
 msgid "System colors"
-msgstr ""
+msgstr "系统颜色"
 
 #: widgets/fancytabwidget.cpp:654
 msgid "Tabs on top"
@@ -4310,7 +4315,7 @@ msgstr "感谢"
 msgid "The \"%1\" command could not be started."
 msgstr "命令\"%1\"无法执行."
 
-#: ../bin/src/ui_appearancesettingspage.h:271
+#: ../bin/src/ui_appearancesettingspage.h:277
 msgid "The album cover of the currently playing song"
 msgstr "目前正在播放的音乐的专辑封面"
 
@@ -4452,7 +4457,7 @@ msgstr "超时"
 msgid "Timezone"
 msgstr "时区"
 
-#: playlist/playlist.cpp:1184 ui/organisedialog.cpp:54
+#: playlist/playlist.cpp:1192 ui/organisedialog.cpp:54
 #: ui/qtsystemtrayicon.cpp:248 ../bin/src/ui_about.h:142
 #: ../bin/src/ui_edittagdialog.h:652 ../bin/src/ui_trackselectiondialog.h:211
 msgid "Title"
@@ -4490,9 +4495,9 @@ msgstr ""
 
 #: core/utilities.cpp:141
 msgid "Tomorrow"
-msgstr ""
+msgstr "明天"
 
-#: podcasts/podcasturlloader.cpp:114
+#: podcasts/podcasturlloader.cpp:116
 msgid "Too many redirects"
 msgstr "太多的重定向"
 
@@ -4508,7 +4513,7 @@ msgstr ""
 msgid "Total network requests made"
 msgstr ""
 
-#: playlist/playlist.cpp:1188 ui/organisedialog.cpp:60
+#: playlist/playlist.cpp:1196 ui/organisedialog.cpp:60
 #: ../bin/src/ui_edittagdialog.h:653 ../bin/src/ui_trackselectiondialog.h:213
 msgid "Track"
 msgstr "音轨"
@@ -4534,7 +4539,7 @@ msgstr "正在使用 %2 线程来转码 %1 个文件"
 msgid "Transcoding options"
 msgstr "转码设置"
 
-#: core/song.cpp:331
+#: core/song.cpp:329
 msgid "TrueAudio"
 msgstr "TrueAudio"
 
@@ -4563,7 +4568,7 @@ msgstr "超宽带 (UWB)"
 msgid "Unable to download %1 (%2)"
 msgstr "无法下载 %1 (%2)"
 
-#: core/song.cpp:338 library/librarymodel.cpp:301 library/librarymodel.cpp:306
+#: core/song.cpp:336 library/librarymodel.cpp:301 library/librarymodel.cpp:306
 #: library/librarymodel.cpp:947 playlist/playlistdelegates.cpp:309
 #: playlist/playlistmanager.cpp:394 playlist/playlistmanager.cpp:397
 #: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:416
@@ -4571,7 +4576,7 @@ msgstr "无法下载 %1 (%2)"
 msgid "Unknown"
 msgstr "未知"
 
-#: podcasts/podcasturlloader.cpp:196
+#: podcasts/podcasturlloader.cpp:198
 msgid "Unknown content-type"
 msgstr "未知的content-type"
 
@@ -4587,7 +4592,7 @@ msgstr "撤销封面"
 msgid "Unsubscribe"
 msgstr "取消订阅"
 
-#: songinfo/songkickconcerts.cpp:167
+#: songinfo/songkickconcerts.cpp:168
 msgid "Upcoming Concerts"
 msgstr ""
 
@@ -4649,7 +4654,7 @@ msgstr "使用播放增益元数据(如果可用)"
 msgid "Use Wii Remote"
 msgstr "使用Wii控制器"
 
-#: ../bin/src/ui_appearancesettingspage.h:263
+#: ../bin/src/ui_appearancesettingspage.h:269
 msgid "Use a custom color set"
 msgstr "使用自定义颜色集"
 
@@ -4681,7 +4686,7 @@ msgstr "使用瞬时降噪"
 msgid "Use the system default"
 msgstr "使用系统默认"
 
-#: ../bin/src/ui_appearancesettingspage.h:262
+#: ../bin/src/ui_appearancesettingspage.h:268
 msgid "Use the system default color set"
 msgstr "使用系统默认颜色集"
 
@@ -4762,7 +4767,7 @@ msgstr "语音活动检测"
 msgid "Volume %1%"
 msgstr "音量 %1%"
 
-#: devices/wmdmlister.cpp:369
+#: devices/wmdmlister.cpp:361
 msgid "Volume name"
 msgstr "卷名称"
 
@@ -4779,7 +4784,7 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
-#: core/song.cpp:330
+#: core/song.cpp:328
 msgid "Wav"
 msgstr "Wav"
 
@@ -4803,11 +4808,11 @@ msgstr "当查找专辑封面时,Clementine将首先查找包含这些关键词�
 
 #: ../bin/src/ui_globalsearchsettingspage.h:151
 msgid "When the list is empty..."
-msgstr ""
+msgstr "列表为空的时候"
 
 #: ../bin/src/ui_globalsearchview.h:212
 msgid "Why not try..."
-msgstr ""
+msgstr "为什么不试试…"
 
 #: devices/ilister.cpp:121
 msgid "WiFi MAC Address"
@@ -4863,7 +4868,7 @@ msgstr "Windows Media 40k"
 msgid "Windows Media 64k"
 msgstr "Windows Media 64k"
 
-#: core/song.cpp:321
+#: core/song.cpp:319
 msgid "Windows Media audio"
 msgstr "Windows Media 音频"
 
@@ -4877,7 +4882,7 @@ msgstr "您想要把此专辑的其它歌曲移动到 群星 ？"
 msgid "Would you like to run a full rescan right now?"
 msgstr "您要立即做个全部重新扫描？"
 
-#: playlist/playlist.cpp:1190 ui/organisedialog.cpp:63
+#: playlist/playlist.cpp:1198 ui/organisedialog.cpp:63
 #: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:148
 #: ../bin/src/ui_groupbydialog.h:161 ../bin/src/ui_edittagdialog.h:657
 #: ../bin/src/ui_trackselectiondialog.h:212
@@ -4900,7 +4905,7 @@ msgstr "昨天"
 #: playlist/playlistlistcontainer.cpp:296
 #, qt-format
 msgid "You are about to delete %1 playlists, are you sure?"
-msgstr ""
+msgstr "你将删除 %1 播放， 确定吗？"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:132
 msgid "You are about to download the following albums"
@@ -5176,7 +5181,7 @@ msgstr "最短优先"
 
 #: playlist/playlistundocommands.cpp:138
 msgid "shuffle songs"
-msgstr ""
+msgstr "乱序歌曲"
 
 #: smartplaylists/searchterm.cpp:292
 msgid "smallest first"
@@ -5184,7 +5189,7 @@ msgstr "最小优先"
 
 #: playlist/playlistundocommands.cpp:131
 msgid "sort songs"
-msgstr ""
+msgstr "排序歌曲"
 
 #: smartplaylists/searchterm.cpp:214
 msgid "starts with"
