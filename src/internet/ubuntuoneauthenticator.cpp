@@ -61,14 +61,10 @@ void UbuntuOneAuthenticator::AuthorisationFinished(QNetworkReply* reply) {
   }
 
   QVariantMap auth_info = json.toMap();
-  QString consumer_key = auth_info["consumer_key"].toString();
-  QString consumer_secret = auth_info["consumer_secret"].toString();
-  QString token = auth_info["token"].toString();
-  QString token_secret = auth_info["token_secret"].toString();
+  consumer_key_ = auth_info["consumer_key"].toString();
+  consumer_secret_ = auth_info["consumer_secret"].toString();
+  token_ = auth_info["token"].toString();
+  token_secret_ = auth_info["token_secret"].toString();
 
-  qLog(Debug)
-      << consumer_key
-      << consumer_secret
-      << token
-      << token_secret;
+  emit Finished();
 }

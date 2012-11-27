@@ -190,6 +190,9 @@ set(SOURCES
   internet/somafmservice.cpp
   internet/somafmurlhandler.cpp
   internet/soundcloudservice.cpp
+  internet/ubuntuoneauthenticator.cpp
+  internet/ubuntuoneservice.cpp
+  internet/ubuntuoneurlhandler.cpp
 
   library/groupbydialog.cpp
   library/library.cpp
@@ -464,6 +467,9 @@ set(HEADERS
   internet/somafmservice.h
   internet/somafmurlhandler.h
   internet/soundcloudservice.h
+  internet/ubuntuoneauthenticator.h
+  internet/ubuntuoneservice.h
+  internet/ubuntuoneurlhandler.h
 
   library/groupbydialog.h
   library/library.h

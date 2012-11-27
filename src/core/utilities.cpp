@@ -382,6 +382,11 @@ QByteArray Hmac(const QByteArray& key, const QByteArray& data, HashFunction meth
                                     QCryptographicHash::hash(inner_padding + data,
                                                              QCryptographicHash::Md5),
                                     QCryptographicHash::Md5);
+  } else if (Sha1_Algo == method) {
+    return QCryptographicHash::hash(outer_padding +
+                                    QCryptographicHash::hash(inner_padding + data,
+                                                             QCryptographicHash::Sha1),
+                                    QCryptographicHash::Sha1);
   } else { // Sha256_Algo, currently default
     return Sha256(outer_padding + Sha256(inner_padding + data));
   }
@@ -393,6 +398,10 @@ QByteArray HmacSha256(const QByteArray& key, const QByteArray& data) {
 
 QByteArray HmacMd5(const QByteArray& key, const QByteArray& data) {
   return Hmac(key, data, Md5_Algo);
+}
+
+QByteArray HmacSha1(const QByteArray& key, const QByteArray& data) {
+  return Hmac(key, data, Sha1_Algo);
 }
 
 QByteArray Sha256(const QByteArray& data) {

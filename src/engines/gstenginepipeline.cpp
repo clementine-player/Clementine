@@ -774,6 +774,19 @@ void GstEnginePipeline::SourceSetupCallback(GstURIDecodeBin* bin, GParamSpec *ps
     gst_structure_free(headers);
   }
 
+  if (g_object_class_find_property(G_OBJECT_GET_CLASS(element), "extra-headers") &&
+      instance->url().host().contains("files.one.ubuntu.com")) {
+    GstStructure* headers;
+    headers = gst_structure_new(
+        "extra-headers",
+        "Authorization",
+        G_TYPE_STRING,
+        instance->url().fragment().toAscii().data(),
+        NULL);
+    g_object_set(element, "extra-headers", headers, NULL);
+    gst_structure_free(headers);
+  }
+
   if (g_object_class_find_property(G_OBJECT_GET_CLASS(element), "user-agent")) {
     QString user_agent = QString("%1 %2").arg(
         QCoreApplication::applicationName(),

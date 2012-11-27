@@ -46,6 +46,8 @@
   #include "googledriveservice.h"
 #endif
 
+#include "ubuntuoneservice.h"
+
 using smart_playlists::Generator;
 using smart_playlists::GeneratorMimeData;
 using smart_playlists::GeneratorPtr;
@@ -85,6 +87,7 @@ InternetModel::InternetModel(Application* app, QObject* parent)
 #ifdef HAVE_SPOTIFY
   AddService(new SpotifyService(app, this));
 #endif
+  AddService(new UbuntuOneService(app, this));
 }
 
 void InternetModel::AddService(InternetService *service) {

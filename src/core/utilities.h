@@ -58,10 +58,12 @@ namespace Utilities {
   enum HashFunction {
     Md5_Algo,
     Sha256_Algo,
+    Sha1_Algo,
   };
   QByteArray Hmac(const QByteArray& key, const QByteArray& data, HashFunction algo);
   QByteArray HmacMd5(const QByteArray& key, const QByteArray& data);
   QByteArray HmacSha256(const QByteArray& key, const QByteArray& data);
+  QByteArray HmacSha1(const QByteArray& key, const QByteArray& data);
   QByteArray Sha256(const QByteArray& data);
 
 
