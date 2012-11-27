@@ -23,11 +23,11 @@ class UbuntuOneService : public InternetService {
 
  private slots:
   void AuthenticationFinished(UbuntuOneAuthenticator* authenticator);
-  void SSORequestFinished(QNetworkReply* reply);
   void FileListRequestFinished(QNetworkReply* reply);
 
  private:
   void Connect();
+  void RequestFileList();
 
  private:
   QByteArray GenerateAuthorisationHeader();

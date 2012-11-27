@@ -17,11 +17,22 @@ class UbuntuOneAuthenticator : public QObject {
   QString token() const { return token_; }
   QString token_secret() const { return token_secret_; }
 
+  static QByteArray GenerateAuthorisationHeader(
+      const QString& consumer_key,
+      const QString& consumer_secret,
+      const QString& token,
+      const QString& token_secret);
+
  signals:
   void Finished();
 
  private slots:
   void AuthorisationFinished(QNetworkReply* reply);
+  void CopySSOTokensFinished(QNetworkReply* reply);
+
+ private:
+  void CopySSOTokens();
+  QByteArray GenerateAuthorisationHeader();
 
  private:
   NetworkAccessManager* network_;

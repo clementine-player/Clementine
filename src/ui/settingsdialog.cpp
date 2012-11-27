@@ -37,6 +37,7 @@
 #include "internet/digitallyimportedsettingspage.h"
 #include "internet/groovesharksettingspage.h"
 #include "internet/magnatunesettingspage.h"
+#include "internet/ubuntuonesettingspage.h"
 #include "library/librarysettingspage.h"
 #include "playlist/playlistview.h"
 #include "podcasts/podcastsettingspage.h"
@@ -146,6 +147,8 @@ SettingsDialog::SettingsDialog(Application* app, BackgroundStreams* streams, QWi
 #ifdef HAVE_GOOGLE_DRIVE
   AddPage(Page_GoogleDrive, new GoogleDriveSettingsPage(this), providers);
 #endif
+
+  AddPage(Page_UbuntuOne, new UbuntuOneSettingsPage(this), providers);
 
 #ifdef HAVE_SPOTIFY
   AddPage(Page_Spotify, new SpotifySettingsPage(this), providers);

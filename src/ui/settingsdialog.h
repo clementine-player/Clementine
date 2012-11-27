@@ -77,6 +77,7 @@ public:
     Page_Wiimotedev,
     Page_Podcasts,
     Page_GoogleDrive,
+    Page_UbuntuOne,
   };
 
   enum Role {

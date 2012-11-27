@@ -192,6 +192,7 @@ set(SOURCES
   internet/soundcloudservice.cpp
   internet/ubuntuoneauthenticator.cpp
   internet/ubuntuoneservice.cpp
+  internet/ubuntuonesettingspage.cpp
   internet/ubuntuoneurlhandler.cpp
 
   library/groupbydialog.cpp
@@ -469,6 +470,7 @@ set(HEADERS
   internet/soundcloudservice.h
   internet/ubuntuoneauthenticator.h
   internet/ubuntuoneservice.h
+  internet/ubuntuonesettingspage.h
   internet/ubuntuoneurlhandler.h
 
   library/groupbydialog.h
@@ -645,6 +647,7 @@ set(UI
   internet/magnatunesettingspage.ui
   internet/searchboxwidget.ui
   internet/spotifysettingspage.ui
+  internet/ubuntuonesettingspage.ui
 
   library/groupbydialog.ui
   library/libraryfilterwidget.ui

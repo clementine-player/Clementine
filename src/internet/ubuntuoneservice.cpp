@@ -1,6 +1,7 @@
 #include "ubuntuoneservice.h"
 
 #include <QDateTime>
+#include <QSettings>
 
 #include <qjson/parser.h>
 
@@ -21,10 +22,7 @@ const char* UbuntuOneService::kSettingsGroup = "Ubuntu One";
 namespace {
 static const char* kFileStorageEndpoint =
     "https://one.ubuntu.com/api/file_storage/v1/~/Ubuntu One/";
-static const char* kOAuthSSOFinishedEndpoint =
-    "https://one.ubuntu.com/oauth/sso-finished-so-get-tokens/";
 static const char* kContentRoot = "https://files.one.ubuntu.com";
-static const char* kOAuthHeaderPrefix = "OAuth realm=\"\", ";
 }
 
 UbuntuOneService::UbuntuOneService(Application* app, InternetModel* parent)
@@ -52,6 +50,18 @@ void UbuntuOneService::LazyPopulate(QStandardItem* item) {
 }
 
 void UbuntuOneService::Connect() {
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+  if (s.contains("consumer_key")) {
+    consumer_key_ = s.value("consumer_key").toString();
+    consumer_secret_ = s.value("consumer_secret").toString();
+    token_ = s.value("token").toString();
+    token_secret_ = s.value("token_secret").toString();
+
+    RequestFileList();
+    return;
+  }
+
   UbuntuOneAuthenticator* authenticator = new UbuntuOneAuthenticator;
   authenticator->StartAuthorisation(
       "Username",
@@ -62,36 +72,11 @@ void UbuntuOneService::Connect() {
 }
 
 QByteArray UbuntuOneService::GenerateAuthorisationHeader() {
-  typedef QPair<QString, QString> Param;
-  QString timestamp = QString::number(
-      QDateTime::currentMSecsSinceEpoch() / kMsecPerSec);
-  QList<Param> parameters;
-  parameters << Param("oauth_nonce", QString::number(qrand()))
-             << Param("oauth_timestamp", timestamp)
-             << Param("oauth_version", "1.0")
-             << Param("oauth_consumer_key", consumer_key_)
-             << Param("oauth_token", token_)
-             << Param("oauth_signature_method", "PLAINTEXT");
-  qSort(parameters.begin(), parameters.end());
-  QStringList encoded_params;
-  for (const Param& p : parameters) {
-    encoded_params << QString("%1=%2").arg(p.first, p.second);
-  }
-
-  QString signing_key =
-      consumer_secret_ + "&" + token_secret_;
-  QByteArray signature = QUrl::toPercentEncoding(signing_key);
-
-  // Construct authorisation header
-  parameters << Param("oauth_signature", signature);
-  QStringList header_params;
-  for (const Param& p : parameters) {
-    header_params << QString("%1=\"%2\"").arg(p.first, p.second);
-  }
-  QString authorisation_header = header_params.join(", ");
-  authorisation_header.prepend(kOAuthHeaderPrefix);
-
-  return authorisation_header.toAscii();
+  return UbuntuOneAuthenticator::GenerateAuthorisationHeader(
+      consumer_key_,
+      consumer_secret_,
+      token_,
+      token_secret_);
 }
 
 void UbuntuOneService::AuthenticationFinished(
@@ -103,19 +88,17 @@ void UbuntuOneService::AuthenticationFinished(
   token_ = authenticator->token();
   token_secret_ = authenticator->token_secret();
 
-  QUrl sso_url(kOAuthSSOFinishedEndpoint);
-  QNetworkRequest request(sso_url);
-  request.setRawHeader("Authorization", GenerateAuthorisationHeader());
-  request.setRawHeader("Accept", "application/json");
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+  s.setValue("consumer_key", consumer_key_);
+  s.setValue("consumer_secret", consumer_secret_);
+  s.setValue("token", token_);
+  s.setValue("token_secret", token_secret_);
 
-  qLog(Debug) << "Sending SSO copy request";
-  QNetworkReply* reply = network_->get(request);
-  NewClosure(reply, SIGNAL(finished()),
-             this, SLOT(SSORequestFinished(QNetworkReply*)), reply);
+  RequestFileList();
 }
 
-void UbuntuOneService::SSORequestFinished(QNetworkReply* reply) {
-  qLog(Debug) << Q_FUNC_INFO;
+void UbuntuOneService::RequestFileList() {
   QUrl files_url(kFileStorageEndpoint);
   files_url.addQueryItem("include_children", "true");
   QNetworkRequest request(files_url);
