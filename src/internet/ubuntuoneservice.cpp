@@ -132,8 +132,7 @@ void UbuntuOneService::FileListRequestFinished(QNetworkReply* reply) {
     content_url.setPath(content_path);
 
     Song song;
-    song.set_title("One More Chance");
-    song.set_artist("Bloc Party");
+    song.set_title(child["path"].toString().mid(1));
     song.set_url(content_url);
 
     root_->appendRow(CreateSongItem(song));
