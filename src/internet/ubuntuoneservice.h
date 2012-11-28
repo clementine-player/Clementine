@@ -34,7 +34,7 @@ class UbuntuOneService : public InternetService {
 
  private:
   void Connect();
-  void RequestFileList();
+  void RequestFileList(const QString& path);
   void MaybeAddFileToDatabase(const QVariantMap& file);
 
  private:

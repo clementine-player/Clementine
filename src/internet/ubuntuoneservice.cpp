@@ -27,7 +27,7 @@ const char* UbuntuOneService::kSettingsGroup = "Ubuntu One";
 
 namespace {
 static const char* kFileStorageEndpoint =
-    "https://one.ubuntu.com/api/file_storage/v1/~/Ubuntu One/";
+    "https://one.ubuntu.com/api/file_storage/v1";
 static const char* kContentRoot = "https://files.one.ubuntu.com";
 static const char* kSongsTable = "ubuntu_one_songs";
 static const char* kFtsTable = "ubuntu_one_songs_fts";
@@ -86,7 +86,7 @@ void UbuntuOneService::Connect() {
     token_ = s.value("token").toString();
     token_secret_ = s.value("token_secret").toString();
 
-    RequestFileList();
+    RequestFileList("/~/Ubuntu One");
     return;
   }
 
@@ -123,17 +123,17 @@ void UbuntuOneService::AuthenticationFinished(
   s.setValue("token", token_);
   s.setValue("token_secret", token_secret_);
 
-  RequestFileList();
+  RequestFileList("/~/Ubuntu One");
 }
 
-void UbuntuOneService::RequestFileList() {
-  QUrl files_url(kFileStorageEndpoint);
+void UbuntuOneService::RequestFileList(const QString& path) {
+  QUrl files_url(QString(kFileStorageEndpoint) + path);
   files_url.addQueryItem("include_children", "true");
   QNetworkRequest request(files_url);
   request.setRawHeader("Authorization", GenerateAuthorisationHeader());
   request.setRawHeader("Accept", "application/json");
 
-  qLog(Debug) << "Sending files request";
+  qLog(Debug) << "Sending files request" << files_url;
   QNetworkReply* files_reply = network_->get(request);
   NewClosure(files_reply, SIGNAL(finished()),
              this, SLOT(FileListRequestFinished(QNetworkReply*)), files_reply);
@@ -141,19 +141,20 @@ void UbuntuOneService::RequestFileList() {
 
 void UbuntuOneService::FileListRequestFinished(QNetworkReply* reply) {
   QByteArray data = reply->readAll();
-  qLog(Debug) << reply->url();
-  qLog(Debug) << data;
-  qLog(Debug) << reply->rawHeaderList();
-  qLog(Debug) << reply->attribute(QNetworkRequest::HttpStatusCodeAttribute);
-  qLog(Debug) << reply->attribute(QNetworkRequest::HttpReasonPhraseAttribute);
 
   QJson::Parser parser;
   QVariantMap result = parser.parse(data).toMap();
 
+  qLog(Debug) << result;
+
   QVariantList children = result["children"].toList();
   for (const QVariant& c : children) {
     QVariantMap child = c.toMap();
-    MaybeAddFileToDatabase(child);
+    if (child["kind"].toString() == "file") {
+      MaybeAddFileToDatabase(child);
+    } else {
+      RequestFileList(child["resource_path"].toString());
+    }
   }
 }
 
