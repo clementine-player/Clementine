@@ -121,8 +121,33 @@ void UbuntuOneService::FileListRequestFinished(QNetworkReply* reply) {
   }
 }
 
+namespace {
+
+QString GuessMimeTypeForFile(const QString& filename) {
+  if (filename.endsWith(".mp3")) {
+    return "audio/mpeg";
+  } else if (filename.endsWith(".m4a")) {
+    return "audio/mpeg";
+  } else if (filename.endsWith(".ogg")) {
+    return "application/ogg";
+  } else if (filename.endsWith(".flac")) {
+    return "application/x-flac";
+  }
+  return QString::null;
+}
+
+}  // namespace
+
 void UbuntuOneService::MaybeAddFileToDatabase(const QVariantMap& file) {
-  QString content_path = file["content_path"].toString();
+  const QString content_path = file["content_path"].toString();
+  const QString filename = file["path"].toString().mid(1);
+  const QString mime_type = GuessMimeTypeForFile(filename);
+  if (mime_type.isNull()) {
+    // Unknown file type.
+    // Potentially, we could do a HEAD request to see what Ubuntu One thinks
+    // the Content-Type is, probably not worth it though.
+    return;
+  }
 
   QUrl service_url;
   service_url.setScheme("ubuntuonefile");
@@ -137,9 +162,9 @@ void UbuntuOneService::MaybeAddFileToDatabase(const QVariantMap& file) {
 
   TagReaderClient::ReplyType* reply = app_->tag_reader_client()->ReadCloudFile(
       content_url,
-      file["path"].toString().mid(1),
+      filename,
       file["size"].toInt(),
-      "audio/mpeg",
+      mime_type,
       GenerateAuthorisationHeader());
   NewClosure(
       reply, SIGNAL(Finished(bool)),
