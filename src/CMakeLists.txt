@@ -191,10 +191,6 @@ set(SOURCES
   internet/somafmservice.cpp
   internet/somafmurlhandler.cpp
   internet/soundcloudservice.cpp
-  internet/ubuntuoneauthenticator.cpp
-  internet/ubuntuoneservice.cpp
-  internet/ubuntuonesettingspage.cpp
-  internet/ubuntuoneurlhandler.cpp
 
   library/groupbydialog.cpp
   library/library.cpp
@@ -470,10 +466,6 @@ set(HEADERS
   internet/somafmservice.h
   internet/somafmurlhandler.h
   internet/soundcloudservice.h
-  internet/ubuntuoneauthenticator.h
-  internet/ubuntuoneservice.h
-  internet/ubuntuonesettingspage.h
-  internet/ubuntuoneurlhandler.h
 
   library/groupbydialog.h
   library/library.h
@@ -649,7 +641,6 @@ set(UI
   internet/magnatunesettingspage.ui
   internet/searchboxwidget.ui
   internet/spotifysettingspage.ui
-  internet/ubuntuonesettingspage.ui
 
   library/groupbydialog.ui
   library/libraryfilterwidget.ui
@@ -1045,6 +1036,22 @@ optional_source(HAVE_GOOGLE_DRIVE
     internet/googledriveurlhandler.h
   UI
     internet/googledrivesettingspage.ui
+)
+
+# Ubuntu One file support
+optional_source(HAVE_UBUNTU_ONE
+  SOURCES
+    internet/ubuntuoneauthenticator.cpp
+    internet/ubuntuoneservice.cpp
+    internet/ubuntuonesettingspage.cpp
+    internet/ubuntuoneurlhandler.cpp
+  HEADERS
+    internet/ubuntuoneauthenticator.h
+    internet/ubuntuoneservice.h
+    internet/ubuntuonesettingspage.h
+    internet/ubuntuoneurlhandler.h
+  UI
+    internet/ubuntuonesettingspage.ui
 )
 
 # Hack to add Clementine to the Unity system tray whitelist
