@@ -59,7 +59,7 @@ UbuntuOneService::UbuntuOneService(Application* app, InternetModel* parent)
 }
 
 QStandardItem* UbuntuOneService::CreateRootItem() {
-  root_ = new QStandardItem(QIcon(), "Ubuntu One");
+  root_ = new QStandardItem(QIcon(":providers/ubuntuone.png"), "Ubuntu One");
   root_->setData(true, InternetModel::Role_CanLazyLoad);
   return root_;
 }
