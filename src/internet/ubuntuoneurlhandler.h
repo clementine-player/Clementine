@@ -11,7 +11,7 @@ class UbuntuOneUrlHandler : public UrlHandler {
   UbuntuOneUrlHandler(UbuntuOneService* service, QObject* parent = 0);
 
   QString scheme() const { return "ubuntuonefile"; }
-  QIcon icon() const { return QIcon(); }
+  QIcon icon() const { return QIcon(":providers/ubuntuone.png"); }
   LoadResult StartLoading(const QUrl& url);
 
  private:
