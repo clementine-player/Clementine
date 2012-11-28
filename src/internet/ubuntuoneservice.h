@@ -36,6 +36,7 @@ class UbuntuOneService : public InternetService {
   void Connect();
   void RequestFileList(const QString& path);
   void MaybeAddFileToDatabase(const QVariantMap& file);
+  void ShowSettingsDialog();
 
  private:
   QByteArray GenerateAuthorisationHeader();

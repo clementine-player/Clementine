@@ -87,16 +87,9 @@ void UbuntuOneService::Connect() {
     token_secret_ = s.value("token_secret").toString();
 
     RequestFileList("/~/Ubuntu One");
-    return;
+  } else {
+    ShowSettingsDialog();
   }
-
-  UbuntuOneAuthenticator* authenticator = new UbuntuOneAuthenticator;
-  authenticator->StartAuthorisation(
-      "Username",
-      "Password");
-  NewClosure(authenticator, SIGNAL(Finished()),
-             this, SLOT(AuthenticationFinished(UbuntuOneAuthenticator*)),
-             authenticator);
 }
 
 QByteArray UbuntuOneService::GenerateAuthorisationHeader() {
@@ -211,4 +204,8 @@ QUrl UbuntuOneService::GetStreamingUrlFromSongId(const QString& song_id) {
   url.setPath(song_id);
   url.setFragment(GenerateAuthorisationHeader());
   return url;
+}
+
+void UbuntuOneService::ShowSettingsDialog() {
+  app_->OpenSettingsDialogAtPage(SettingsDialog::Page_UbuntuOne);
 }
