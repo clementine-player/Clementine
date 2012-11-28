@@ -21,6 +21,7 @@
 
 #include <QCoreApplication>
 #include <QLocalSocket>
+#include <QSslSocket>
 #include <QStringList>
 
 #include <iostream>
@@ -56,6 +57,9 @@ int main(int argc, char** argv) {
     std::cerr << "Failed to connect to the parent process.\n";
     return 1;
   }
+
+  QSslSocket::addDefaultCaCertificates(
+      QSslCertificate::fromPath(":/certs/godaddy-root.pem", QSsl::Pem));
 
   TagReaderWorker worker(&socket);
 

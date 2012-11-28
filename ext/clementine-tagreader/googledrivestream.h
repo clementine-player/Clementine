@@ -1,16 +1,16 @@
 /* This file is part of Clementine.
    Copyright 2012, David Sansome <me@davidsansome.com>
-   
+
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
    the Free Software Foundation, either version 3 of the License, or
    (at your option) any later version.
-   
+
    Clementine is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
    GNU General Public License for more details.
-   
+
    You should have received a copy of the GNU General Public License
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
@@ -18,6 +18,9 @@
 #ifndef GOOGLEDRIVESTREAM_H
 #define GOOGLEDRIVESTREAM_H
 
+#include <QObject>
+#include <QList>
+#include <QSslError>
 #include <QUrl>
 
 #include <google/sparsetable>
@@ -25,7 +28,8 @@
 
 class QNetworkAccessManager;
 
-class GoogleDriveStream : public TagLib::IOStream {
+class GoogleDriveStream : public QObject, public TagLib::IOStream {
+  Q_OBJECT
  public:
   GoogleDriveStream(const QUrl& url,
                     const QString& filename,
@@ -62,6 +66,9 @@ class GoogleDriveStream : public TagLib::IOStream {
   bool CheckCache(int start, int end);
   void FillCache(int start, TagLib::ByteVector data);
   TagLib::ByteVector GetCached(int start, int end);
+
+ private slots:
+  void SSLErrors(const QList<QSslError>& errors);
 
  private:
   const QUrl url_;

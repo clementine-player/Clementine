@@ -49,7 +49,7 @@ public:
                              const QString& title,
                              int size,
                              const QString& mime_type,
-                             const QString& access_token);
+                             const QString& authorisation_header);
 
   // Convenience functions that call the above functions and wait for a
   // response.  These block the calling thread with a semaphore, and must NOT

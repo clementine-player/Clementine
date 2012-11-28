@@ -6,6 +6,8 @@ include_directories(${CMAKE_BINARY_DIR}/ext/libclementine-tagreader)
 include_directories(${CMAKE_SOURCE_DIR}/src)
 include_directories(${CMAKE_BINARY_DIR}/src)
 
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --std=c++0x -U__STRICT_ANSI__")
+
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR})
 
 set(SOURCES
@@ -15,6 +17,7 @@ set(SOURCES
 )
 
 set(HEADERS
+  googledrivestream.h
 )
 
 optional_source(HAVE_GOOGLE_DRIVE
@@ -24,10 +27,12 @@ optional_source(HAVE_GOOGLE_DRIVE
 )
 
 qt4_wrap_cpp(MOC ${HEADERS})
+qt4_add_resources(QRC data/data.qrc)
 
 add_executable(clementine-tagreader
   ${SOURCES}
   ${MOC}
+  ${QRC}
 )
 
 target_link_libraries(clementine-tagreader

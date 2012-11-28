@@ -3,8 +3,13 @@
 
 #include "internet/internetservice.h"
 
+#include "core/tagreaderclient.h"
+
+class LibraryBackend;
+class LibraryModel;
 class NetworkAccessManager;
 class QNetworkReply;
+class QSortFilterProxyModel;
 class UbuntuOneAuthenticator;
 
 class UbuntuOneService : public InternetService {
@@ -24,10 +29,13 @@ class UbuntuOneService : public InternetService {
  private slots:
   void AuthenticationFinished(UbuntuOneAuthenticator* authenticator);
   void FileListRequestFinished(QNetworkReply* reply);
+  void ReadTagsFinished(
+      TagReaderClient::ReplyType* reply, const QVariantMap& file, const QUrl& url);
 
  private:
   void Connect();
   void RequestFileList();
+  void MaybeAddFileToDatabase(const QVariantMap& file);
 
  private:
   QByteArray GenerateAuthorisationHeader();
@@ -39,6 +47,10 @@ class UbuntuOneService : public InternetService {
   QString consumer_secret_;
   QString token_;
   QString token_secret_;
+
+  LibraryBackend* library_backend_;
+  LibraryModel* library_model_;
+  QSortFilterProxyModel* library_sort_model_;
 };
 
 #endif  // UBUNTUONESERVICE_H

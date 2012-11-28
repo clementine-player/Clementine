@@ -88,7 +88,7 @@ TagReaderReply* TagReaderClient::ReadGoogleDrive(const QUrl& download_url,
                                                  const QString& title,
                                                  int size,
                                                  const QString& mime_type,
-                                                 const QString& access_token) {
+                                                 const QString& authorisation_header) {
   pb::tagreader::Message message;
   pb::tagreader::ReadGoogleDriveRequest* req =
       message.mutable_read_google_drive_request();
@@ -98,7 +98,7 @@ TagReaderReply* TagReaderClient::ReadGoogleDrive(const QUrl& download_url,
   req->set_title(DataCommaSizeFromQString(title));
   req->set_size(size);
   req->set_mime_type(DataCommaSizeFromQString(mime_type));
-  req->set_access_token(DataCommaSizeFromQString(access_token));
+  req->set_authorisation_header(DataCommaSizeFromQString(authorisation_header));
 
   return worker_pool_->SendMessageWithReply(&message);
 }

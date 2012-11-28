@@ -109,12 +109,19 @@ TagLib::ByteVector GoogleDriveStream::readBlock(ulong length) {
   }
 
   QNetworkRequest request = QNetworkRequest(url_);
-  request.setRawHeader(
-      "Authorization", QString("Bearer %1").arg(auth_).toUtf8());
+  request.setRawHeader("Authorization", auth_.toUtf8());
   request.setRawHeader(
       "Range", QString("bytes=%1-%2").arg(start).arg(end).toUtf8());
+  request.setAttribute(QNetworkRequest::CacheLoadControlAttribute,
+                       QNetworkRequest::AlwaysNetwork);
+  // The Ubuntu One server applies the byte range to the gzipped data, rather
+  // than the raw data so we must disable compression.
+  if (url_.host() == "files.one.ubuntu.com") {
+    request.setRawHeader("Accept-Encoding", "identity");
+  }
 
   QNetworkReply* reply = network_->get(request);
+  connect(reply, SIGNAL(sslErrors(QList<QSslError>)), SLOT(SSLErrors(QList<QSslError>)));
   ++num_requests_;
 
   QEventLoop loop;
@@ -182,4 +189,11 @@ long GoogleDriveStream::length() {
 
 void GoogleDriveStream::truncate(long) {
   qLog(Debug) << Q_FUNC_INFO << "not implemented";
+}
+
+void GoogleDriveStream::SSLErrors(const QList<QSslError>& errors) {
+  for (const QSslError& error : errors) {
+    qLog(Debug) << error.error() << error.errorString();
+    qLog(Debug) << error.certificate();
+  }
 }

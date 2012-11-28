@@ -178,12 +178,13 @@ void GoogleDriveService::MaybeAddFileToDatabase(const google_drive::File& file) 
       tr("Indexing %1").arg(file.title()));
 
   // Song not in index; tag and add.
+  QString authorisation_header = QString("Bearer %1").arg(client_->access_token());
   TagReaderClient::ReplyType* reply = app_->tag_reader_client()->ReadGoogleDrive(
       file.download_url(),
       file.title(),
       file.size(),
       file.mime_type(),
-      client_->access_token());
+      authorisation_header);
 
   NewClosure(reply, SIGNAL(Finished(bool)),
              this, SLOT(ReadTagsFinished(TagReaderClient::ReplyType*,google_drive::File,QString,int)),

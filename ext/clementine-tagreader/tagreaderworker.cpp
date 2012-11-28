@@ -139,7 +139,7 @@ void TagReaderWorker::MessageArrived(const pb::tagreader::Message& message) {
         QStringFromStdString(req.title()),
         req.size(),
         QStringFromStdString(req.mime_type()),
-        QStringFromStdString(req.access_token()),
+        QStringFromStdString(req.authorisation_header()),
         reply.mutable_read_google_drive_response()->mutable_metadata())) {
       reply.mutable_read_google_drive_response()->clear_metadata();
     }
@@ -615,12 +615,12 @@ bool TagReaderWorker::ReadGoogleDrive(const QUrl& download_url,
                                       const QString& title,
                                       int size,
                                       const QString& mime_type,
-                                      const QString& access_token,
+                                      const QString& authorisation_header,
                                       pb::tagreader::SongMetadata* song) const {
   qLog(Debug) << "Loading tags from" << title;
 
   GoogleDriveStream* stream = new GoogleDriveStream(
-      download_url, title, size, access_token, network_);
+      download_url, title, size, authorisation_header, network_);
   stream->Precache();
   scoped_ptr<TagLib::File> tag;
   if (mime_type == "audio/mpeg" && title.endsWith(".mp3")) {
