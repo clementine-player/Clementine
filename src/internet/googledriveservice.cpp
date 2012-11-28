@@ -29,64 +29,24 @@ const char* GoogleDriveService::kSettingsGroup = "GoogleDrive";
 
 namespace {
 
-static const char* kSongsTable = "google_drive_songs";
-static const char* kFtsTable = "google_drive_songs_fts";
 static const char* kDriveEditFileUrl = "https://docs.google.com/file/d/%1/edit";
+static const char* kServiceId = "google_drive";
 
 }
 
 
 GoogleDriveService::GoogleDriveService(Application* app, InternetModel* parent)
-    : InternetService(kServiceName, app, parent, parent),
-      root_(NULL),
-      client_(new google_drive::Client(this)),
-      task_manager_(app->task_manager()),
-      library_sort_model_(new QSortFilterProxyModel(this)),
-      playlist_manager_(app->playlist_manager()) {
-  library_backend_ = new LibraryBackend;
-  library_backend_->moveToThread(app_->database()->thread());
-  library_backend_->Init(app_->database(), kSongsTable,
-                         QString::null, QString::null, kFtsTable);
-  library_model_ = new LibraryModel(library_backend_, app_, this);
-
-  library_sort_model_->setSourceModel(library_model_);
-  library_sort_model_->setSortRole(LibraryModel::Role_SortText);
-  library_sort_model_->setDynamicSortFilter(true);
-  library_sort_model_->sort(0);
-
+    : CloudFileService(
+        app, parent,
+        kServiceName, kServiceId,
+        QIcon(":/providers/googledrive.png"),
+        SettingsDialog::Page_GoogleDrive),
+      client_(new google_drive::Client(this)) {
   app->player()->RegisterUrlHandler(new GoogleDriveUrlHandler(this, this));
-  app->global_search()->AddProvider(new LibrarySearchProvider(
-      library_backend_,
-      tr("Google Drive"),
-      "google_drive",
-      QIcon(":/providers/googledrive.png"),
-      true, app_, this));
 }
 
-GoogleDriveService::~GoogleDriveService() {
-}
-
-QStandardItem* GoogleDriveService::CreateRootItem() {
-  root_ = new QStandardItem(QIcon(":providers/googledrive.png"), "Google Drive");
-  root_->setData(true, InternetModel::Role_CanLazyLoad);
-  return root_;
-}
-
-void GoogleDriveService::LazyPopulate(QStandardItem* item) {
-  switch (item->data(InternetModel::Role_Type).toInt()) {
-    case InternetModel::Type_Service:
-      if (refresh_token().isEmpty()) {
-        ShowSettingsDialog();
-      } else if (!client_->is_authenticated()) {
-        Connect();
-      }
-      library_model_->Init();
-      model()->merged_model()->AddSubModel(item->index(), library_sort_model_);
-      break;
-
-    default:
-      break;
-  }
+bool GoogleDriveService::has_credentials() const {
+  return !refresh_token().isEmpty();
 }
 
 QString GoogleDriveService::refresh_token() const {
@@ -289,23 +249,4 @@ void GoogleDriveService::OpenWithDrive() {
     QDesktopServices::openUrl(
           QUrl(QString(kDriveEditFileUrl).arg(song.url().path())));
   }
-}
-
-void GoogleDriveService::ShowSettingsDialog() {
-  app_->OpenSettingsDialogAtPage(SettingsDialog::Page_GoogleDrive);
-}
-
-void GoogleDriveService::ShowCoverManager() {
-  if (!cover_manager_) {
-    cover_manager_.reset(new AlbumCoverManager(app_, library_backend_));
-    cover_manager_->Init();
-    connect(cover_manager_.get(), SIGNAL(AddToPlaylist(QMimeData*)), SLOT(AddToPlaylist(QMimeData*)));
-  }
-
-  cover_manager_->show();
-}
-
-void GoogleDriveService::AddToPlaylist(QMimeData* mime) {
-  playlist_manager_->current()->dropMimeData(
-      mime, Qt::CopyAction, -1, 0, QModelIndex());
 }

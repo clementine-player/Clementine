@@ -3,17 +3,9 @@
 
 #include "internet/cloudfileservice.h"
 
-#include <QMenu>
-
 #include "core/tagreaderclient.h"
-#include "ui/albumcovermanager.h"
 
-class LibraryBackend;
-class LibraryModel;
-class NetworkAccessManager;
-class PlaylistManager;
 class QNetworkReply;
-class QSortFilterProxyModel;
 class UbuntuOneAuthenticator;
 
 class UbuntuOneService : public CloudFileService {
