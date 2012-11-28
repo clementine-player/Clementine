@@ -129,19 +129,19 @@ void TagReaderWorker::MessageArrived(const pb::tagreader::Message& message) {
           QStringFromStdString(message.load_embedded_art_request().filename()));
     reply.mutable_load_embedded_art_response()->set_data(
           data.constData(), data.size());
-  } else if (message.has_read_google_drive_request()) {
+  } else if (message.has_read_cloud_file_request()) {
 #ifdef HAVE_GOOGLE_DRIVE
-    const pb::tagreader::ReadGoogleDriveRequest& req =
-        message.read_google_drive_request();
-    if (!ReadGoogleDrive(
+    const pb::tagreader::ReadCloudFileRequest& req =
+        message.read_cloud_file_request();
+    if (!ReadCloudFile(
         QUrl::fromEncoded(QByteArray(req.download_url().data(),
                                      req.download_url().size())),
         QStringFromStdString(req.title()),
         req.size(),
         QStringFromStdString(req.mime_type()),
         QStringFromStdString(req.authorisation_header()),
-        reply.mutable_read_google_drive_response()->mutable_metadata())) {
-      reply.mutable_read_google_drive_response()->clear_metadata();
+        reply.mutable_read_cloud_file_response()->mutable_metadata())) {
+      reply.mutable_read_cloud_file_response()->clear_metadata();
     }
 #endif
   }
@@ -611,12 +611,12 @@ void TagReaderWorker::DeviceClosed() {
 }
 
 #ifdef HAVE_GOOGLE_DRIVE
-bool TagReaderWorker::ReadGoogleDrive(const QUrl& download_url,
-                                      const QString& title,
-                                      int size,
-                                      const QString& mime_type,
-                                      const QString& authorisation_header,
-                                      pb::tagreader::SongMetadata* song) const {
+bool TagReaderWorker::ReadCloudFile(const QUrl& download_url,
+                                    const QString& title,
+                                    int size,
+                                    const QString& mime_type,
+                                    const QString& authorisation_header,
+                                    pb::tagreader::SongMetadata* song) const {
   qLog(Debug) << "Loading tags from" << title;
 
   CloudStream* stream = new CloudStream(

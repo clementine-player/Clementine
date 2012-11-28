@@ -82,7 +82,7 @@ message LoadEmbeddedArtResponse {
   optional bytes data = 1;
 }
 
-message ReadGoogleDriveRequest {
+message ReadCloudFileRequest {
   optional string download_url = 1;
   optional string title = 2;
   optional int32 size = 3;
@@ -90,7 +90,7 @@ message ReadGoogleDriveRequest {
   optional string mime_type = 5;
 }
 
-message ReadGoogleDriveResponse {
+message ReadCloudFileResponse {
   optional SongMetadata metadata = 1;
 }
 
@@ -109,6 +109,6 @@ message Message {
   optional LoadEmbeddedArtRequest load_embedded_art_request = 8;
   optional LoadEmbeddedArtResponse load_embedded_art_response = 9;
 
-  optional ReadGoogleDriveRequest read_google_drive_request = 10;
-  optional ReadGoogleDriveResponse read_google_drive_response = 11;
+  optional ReadCloudFileRequest read_cloud_file_request = 10;
+  optional ReadCloudFileResponse read_cloud_file_response = 11;
 }

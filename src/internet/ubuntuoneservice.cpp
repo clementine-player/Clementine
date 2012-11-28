@@ -135,7 +135,7 @@ void UbuntuOneService::MaybeAddFileToDatabase(const QVariantMap& file) {
   QUrl content_url(kContentRoot);
   content_url.setPath(content_path);
 
-  TagReaderClient::ReplyType* reply = app_->tag_reader_client()->ReadGoogleDrive(
+  TagReaderClient::ReplyType* reply = app_->tag_reader_client()->ReadCloudFile(
       content_url,
       file["path"].toString().mid(1),
       file["size"].toInt(),
@@ -151,7 +151,7 @@ void UbuntuOneService::ReadTagsFinished(
     TagReaderClient::ReplyType* reply, const QVariantMap& file, const QUrl& url) {
   qLog(Debug) << reply->message().DebugString().c_str();
   Song song;
-  song.InitFromProtobuf(reply->message().read_google_drive_response().metadata());
+  song.InitFromProtobuf(reply->message().read_cloud_file_response().metadata());
   song.set_directory_id(0);
   song.set_etag(file["hash"].toString());
   song.set_mtime(

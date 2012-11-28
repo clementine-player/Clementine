@@ -139,7 +139,7 @@ void GoogleDriveService::MaybeAddFileToDatabase(const google_drive::File& file) 
 
   // Song not in index; tag and add.
   QString authorisation_header = QString("Bearer %1").arg(client_->access_token());
-  TagReaderClient::ReplyType* reply = app_->tag_reader_client()->ReadGoogleDrive(
+  TagReaderClient::ReplyType* reply = app_->tag_reader_client()->ReadCloudFile(
       file.download_url(),
       file.title(),
       file.size(),
@@ -159,8 +159,8 @@ void GoogleDriveService::ReadTagsFinished(TagReaderClient::ReplyType* reply,
 
   TaskManager::ScopedTask(task_id, task_manager_);
 
-  const pb::tagreader::ReadGoogleDriveResponse& msg =
-      reply->message().read_google_drive_response();
+  const pb::tagreader::ReadCloudFileResponse& msg =
+      reply->message().read_cloud_file_response();
   if (!msg.has_metadata() || !msg.metadata().filesize()) {
     qLog(Debug) << "Failed to tag:" << metadata.title();
     return;

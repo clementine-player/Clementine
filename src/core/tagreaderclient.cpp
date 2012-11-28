@@ -84,14 +84,14 @@ TagReaderReply* TagReaderClient::LoadEmbeddedArt(const QString& filename) {
   return worker_pool_->SendMessageWithReply(&message);
 }
 
-TagReaderReply* TagReaderClient::ReadGoogleDrive(const QUrl& download_url,
-                                                 const QString& title,
-                                                 int size,
-                                                 const QString& mime_type,
-                                                 const QString& authorisation_header) {
+TagReaderReply* TagReaderClient::ReadCloudFile(const QUrl& download_url,
+                                               const QString& title,
+                                               int size,
+                                               const QString& mime_type,
+                                               const QString& authorisation_header) {
   pb::tagreader::Message message;
-  pb::tagreader::ReadGoogleDriveRequest* req =
-      message.mutable_read_google_drive_request();
+  pb::tagreader::ReadCloudFileRequest* req =
+      message.mutable_read_cloud_file_request();
 
   const QString url_string = download_url.toEncoded();
   req->set_download_url(DataCommaSizeFromQString(url_string));
