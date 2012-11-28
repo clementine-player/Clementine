@@ -138,8 +138,6 @@ void UbuntuOneService::FileListRequestFinished(QNetworkReply* reply) {
   QJson::Parser parser;
   QVariantMap result = parser.parse(data).toMap();
 
-  qLog(Debug) << result;
-
   QVariantList children = result["children"].toList();
   for (const QVariant& c : children) {
     QVariantMap child = c.toMap();
