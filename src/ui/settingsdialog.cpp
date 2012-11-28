@@ -64,6 +64,10 @@
 # include "internet/googledrivesettingspage.h"
 #endif
 
+#ifdef HAVE_UBUNTU_ONE
+#  include "internet/ubuntuonesettingspage.h"
+#endif
+
 #include <QDesktopWidget>
 #include <QPainter>
 #include <QPushButton>
@@ -148,7 +152,9 @@ SettingsDialog::SettingsDialog(Application* app, BackgroundStreams* streams, QWi
   AddPage(Page_GoogleDrive, new GoogleDriveSettingsPage(this), providers);
 #endif
 
+#ifdef HAVE_UBUNTU_ONE
   AddPage(Page_UbuntuOne, new UbuntuOneSettingsPage(this), providers);
+#endif
 
 #ifdef HAVE_SPOTIFY
   AddPage(Page_Spotify, new SpotifySettingsPage(this), providers);
