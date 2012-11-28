@@ -1,5 +1,7 @@
 #include "ubuntuoneauthenticator.h"
 
+#include <time.h>
+
 #include <QCoreApplication>
 #include <QDateTime>
 #include <QHostInfo>
@@ -81,8 +83,7 @@ QByteArray UbuntuOneAuthenticator::GenerateAuthorisationHeader(
     const QString& token,
     const QString& token_secret) {
   typedef QPair<QString, QString> Param;
-  QString timestamp = QString::number(
-      QDateTime::currentMSecsSinceEpoch() / kMsecPerSec);
+  QString timestamp = QString::number(time(NULL));
   QList<Param> parameters;
   parameters << Param("oauth_nonce", QString::number(qrand()))
              << Param("oauth_timestamp", timestamp)
