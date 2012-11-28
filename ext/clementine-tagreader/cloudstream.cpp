@@ -193,7 +193,7 @@ void CloudStream::truncate(long) {
 }
 
 void CloudStream::SSLErrors(const QList<QSslError>& errors) {
-  for (const QSslError& error : errors) {
+  foreach (const QSslError& error, errors) {
     qLog(Debug) << error.error() << error.errorString();
     qLog(Debug) << error.certificate();
   }

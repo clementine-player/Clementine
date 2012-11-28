@@ -111,7 +111,7 @@ void UbuntuOneService::FileListRequestFinished(QNetworkReply* reply) {
   QVariantMap result = parser.parse(data).toMap();
 
   QVariantList children = result["children"].toList();
-  for (const QVariant& c : children) {
+  foreach (const QVariant& c, children) {
     QVariantMap child = c.toMap();
     if (child["kind"].toString() == "file") {
       MaybeAddFileToDatabase(child);
