@@ -28,10 +28,10 @@
 
 class QNetworkAccessManager;
 
-class GoogleDriveStream : public QObject, public TagLib::IOStream {
+class CloudStream : public QObject, public TagLib::IOStream {
   Q_OBJECT
  public:
-  GoogleDriveStream(const QUrl& url,
+  CloudStream(const QUrl& url,
                     const QString& filename,
                     const long length,
                     const QString& auth,

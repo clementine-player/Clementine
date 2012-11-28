@@ -58,7 +58,7 @@
 #endif
 
 #ifdef HAVE_GOOGLE_DRIVE
-# include "googledrivestream.h"
+# include "cloudstream.h"
 #endif
 
 
@@ -619,7 +619,7 @@ bool TagReaderWorker::ReadGoogleDrive(const QUrl& download_url,
                                       pb::tagreader::SongMetadata* song) const {
   qLog(Debug) << "Loading tags from" << title;
 
-  GoogleDriveStream* stream = new GoogleDriveStream(
+  CloudStream* stream = new CloudStream(
       download_url, title, size, authorisation_header, network_);
   stream->Precache();
   scoped_ptr<TagLib::File> tag;

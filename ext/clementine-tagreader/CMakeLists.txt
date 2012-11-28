@@ -17,13 +17,13 @@ set(SOURCES
 )
 
 set(HEADERS
-  googledrivestream.h
+  cloudstream.h
 )
 
 optional_source(HAVE_GOOGLE_DRIVE
   INCLUDE_DIRECTORIES ${SPARSEHASH_INCLUDE_DIRS}
   SOURCES
-    googledrivestream.cpp
+    cloudstream.cpp
 )
 
 qt4_wrap_cpp(MOC ${HEADERS})

@@ -15,8 +15,7 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "googledrivestream.h"
-#include "core/logging.h"
+#include "cloudstream.h"
 
 #include <QEventLoop>
 #include <QNetworkAccessManager>
@@ -26,12 +25,14 @@
 #include <taglib/id3v2framefactory.h>
 #include <taglib/mpegfile.h>
 
+#include "core/logging.h"
+
 namespace {
   static const int kTaglibPrefixCacheBytes = 64 * 1024;  // Should be enough.
   static const int kTaglibSuffixCacheBytes = 8 * 1024;
 }
 
-GoogleDriveStream::GoogleDriveStream(
+CloudStream::CloudStream(
     const QUrl& url, const QString& filename, const long length,
     const QString& auth, QNetworkAccessManager* network)
     : url_(url),
@@ -45,11 +46,11 @@ GoogleDriveStream::GoogleDriveStream(
       num_requests_(0) {
 }
 
-TagLib::FileName GoogleDriveStream::name() const {
+TagLib::FileName CloudStream::name() const {
   return encoded_filename_.data();
 }
 
-bool GoogleDriveStream::CheckCache(int start, int end) {
+bool CloudStream::CheckCache(int start, int end) {
   for (int i = start; i <= end; ++i) {
     if (!cache_.test(i)) {
       return false;
@@ -58,13 +59,13 @@ bool GoogleDriveStream::CheckCache(int start, int end) {
   return true;
 }
 
-void GoogleDriveStream::FillCache(int start, TagLib::ByteVector data) {
+void CloudStream::FillCache(int start, TagLib::ByteVector data) {
   for (int i = 0; i < data.size(); ++i) {
     cache_.set(start + i, data[i]);
   }
 }
 
-TagLib::ByteVector GoogleDriveStream::GetCached(int start, int end) {
+TagLib::ByteVector CloudStream::GetCached(int start, int end) {
   const uint size = end - start + 1;
   TagLib::ByteVector ret(size);
   for (int i = 0; i < size; ++i) {
@@ -73,7 +74,7 @@ TagLib::ByteVector GoogleDriveStream::GetCached(int start, int end) {
   return ret;
 }
 
-void GoogleDriveStream::Precache() {
+void CloudStream::Precache() {
   // For reading the tags of an MP3, TagLib tends to request:
   // 1. The first 1024 bytes
   // 2. Somewhere between the first 2KB and first 60KB
@@ -94,7 +95,7 @@ void GoogleDriveStream::Precache() {
   clear();
 }
 
-TagLib::ByteVector GoogleDriveStream::readBlock(ulong length) {
+TagLib::ByteVector CloudStream::readBlock(ulong length) {
   const uint start = cursor_;
   const uint end = qMin(cursor_ + length - 1, length_ - 1);
 
@@ -137,28 +138,28 @@ TagLib::ByteVector GoogleDriveStream::readBlock(ulong length) {
   return bytes;
 }
 
-void GoogleDriveStream::writeBlock(const TagLib::ByteVector&) {
+void CloudStream::writeBlock(const TagLib::ByteVector&) {
   qLog(Debug) << Q_FUNC_INFO << "not implemented";
 }
 
-void GoogleDriveStream::insert(const TagLib::ByteVector&, ulong, ulong) {
+void CloudStream::insert(const TagLib::ByteVector&, ulong, ulong) {
   qLog(Debug) << Q_FUNC_INFO << "not implemented";
 }
 
-void GoogleDriveStream::removeBlock(ulong, ulong) {
+void CloudStream::removeBlock(ulong, ulong) {
   qLog(Debug) << Q_FUNC_INFO << "not implemented";
 }
 
-bool GoogleDriveStream::readOnly() const {
+bool CloudStream::readOnly() const {
   qLog(Debug) << Q_FUNC_INFO;
   return true;
 }
 
-bool GoogleDriveStream::isOpen() const {
+bool CloudStream::isOpen() const {
   return true;
 }
 
-void GoogleDriveStream::seek(long offset, TagLib::IOStream::Position p) {
+void CloudStream::seek(long offset, TagLib::IOStream::Position p) {
   switch (p) {
     case TagLib::IOStream::Beginning:
       cursor_ = offset;
@@ -175,23 +176,23 @@ void GoogleDriveStream::seek(long offset, TagLib::IOStream::Position p) {
   }
 }
 
-void GoogleDriveStream::clear() {
+void CloudStream::clear() {
   cursor_ = 0;
 }
 
-long GoogleDriveStream::tell() const {
+long CloudStream::tell() const {
   return cursor_;
 }
 
-long GoogleDriveStream::length() {
+long CloudStream::length() {
   return length_;
 }
 
-void GoogleDriveStream::truncate(long) {
+void CloudStream::truncate(long) {
   qLog(Debug) << Q_FUNC_INFO << "not implemented";
 }
 
-void GoogleDriveStream::SSLErrors(const QList<QSslError>& errors) {
+void CloudStream::SSLErrors(const QList<QSslError>& errors) {
   for (const QSslError& error : errors) {
     qLog(Debug) << error.error() << error.errorString();
     qLog(Debug) << error.certificate();
