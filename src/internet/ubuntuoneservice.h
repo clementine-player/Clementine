@@ -3,11 +3,15 @@
 
 #include "internet/internetservice.h"
 
+#include <QMenu>
+
 #include "core/tagreaderclient.h"
+#include "ui/albumcovermanager.h"
 
 class LibraryBackend;
 class LibraryModel;
 class NetworkAccessManager;
+class PlaylistManager;
 class QNetworkReply;
 class QSortFilterProxyModel;
 class UbuntuOneAuthenticator;
@@ -23,6 +27,7 @@ class UbuntuOneService : public InternetService {
   // InternetService
   virtual QStandardItem* CreateRootItem();
   virtual void LazyPopulate(QStandardItem* parent);
+  virtual void ShowContextMenu(const QPoint& global_pos);
 
   QUrl GetStreamingUrlFromSongId(const QString& song_id);
 
@@ -31,12 +36,14 @@ class UbuntuOneService : public InternetService {
   void FileListRequestFinished(QNetworkReply* reply);
   void ReadTagsFinished(
       TagReaderClient::ReplyType* reply, const QVariantMap& file, const QUrl& url);
+  void ShowSettingsDialog();
+  void ShowCoverManager();
+  void AddToPlaylist(QMimeData* mime);
 
  private:
   void Connect();
   void RequestFileList(const QString& path);
   void MaybeAddFileToDatabase(const QVariantMap& file);
-  void ShowSettingsDialog();
 
  private:
   QByteArray GenerateAuthorisationHeader();
@@ -52,6 +59,10 @@ class UbuntuOneService : public InternetService {
   LibraryBackend* library_backend_;
   LibraryModel* library_model_;
   QSortFilterProxyModel* library_sort_model_;
+
+  boost::scoped_ptr<QMenu> context_menu_;
+  boost::scoped_ptr<AlbumCoverManager> cover_manager_;
+  PlaylistManager* playlist_manager_;
 };
 
 #endif  // UBUNTUONESERVICE_H

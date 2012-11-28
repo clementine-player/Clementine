@@ -21,6 +21,8 @@
 #include "internet/ubuntuoneauthenticator.h"
 #include "internet/ubuntuoneurlhandler.h"
 #include "library/librarybackend.h"
+#include "playlist/playlist.h"
+#include "ui/iconloader.h"
 
 const char* UbuntuOneService::kServiceName = "Ubuntu One";
 const char* UbuntuOneService::kSettingsGroup = "Ubuntu One";
@@ -37,7 +39,8 @@ UbuntuOneService::UbuntuOneService(Application* app, InternetModel* parent)
     : InternetService(kServiceName, app, parent, parent),
       root_(nullptr),
       network_(new NetworkAccessManager(this)),
-      library_sort_model_(new QSortFilterProxyModel(this)) {
+      library_sort_model_(new QSortFilterProxyModel(this)),
+      playlist_manager_(app->playlist_manager()) {
   library_backend_ = new LibraryBackend;
   library_backend_->moveToThread(app_->database()->thread());
   library_backend_->Init(
@@ -206,4 +209,35 @@ QUrl UbuntuOneService::GetStreamingUrlFromSongId(const QString& song_id) {
 
 void UbuntuOneService::ShowSettingsDialog() {
   app_->OpenSettingsDialogAtPage(SettingsDialog::Page_UbuntuOne);
+}
+
+void UbuntuOneService::ShowContextMenu(const QPoint& global_pos) {
+  if (!context_menu_) {
+    context_menu_.reset(new QMenu);
+    context_menu_->addActions(GetPlaylistActions());
+    context_menu_->addAction(
+        IconLoader::Load("download"),
+        tr("Cover Manager"),
+        this,
+        SLOT(ShowCoverManager()));
+    context_menu_->addAction(IconLoader::Load("configure"),
+                             tr("Configure..."),
+                             this, SLOT(ShowSettingsDialog()));
+  }
+  context_menu_->popup(global_pos);
+}
+
+void UbuntuOneService::ShowCoverManager() {
+  if (!cover_manager_) {
+    cover_manager_.reset(new AlbumCoverManager(app_, library_backend_));
+    cover_manager_->Init();
+    connect(cover_manager_.get(), SIGNAL(AddToPlaylist(QMimeData*)),
+            SLOT(AddToPlaylist(QMimeData*)));
+  }
+  cover_manager_->show();
+}
+
+void UbuntuOneService::AddToPlaylist(QMimeData* mime) {
+  playlist_manager_->current()->dropMimeData(
+      mime, Qt::CopyAction, -1, 0, QModelIndex());
 }
