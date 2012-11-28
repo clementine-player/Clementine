@@ -158,6 +158,7 @@ set(SOURCES
   globalsearch/suggestionwidget.cpp
   globalsearch/urlsearchprovider.cpp
 
+  internet/cloudfileservice.cpp
   internet/digitallyimportedclient.cpp
   internet/digitallyimportedservicebase.cpp
   internet/digitallyimportedsettingspage.cpp
@@ -440,6 +441,7 @@ set(HEADERS
   globalsearch/soundcloudsearchprovider.h
   globalsearch/suggestionwidget.h
 
+  internet/cloudfileservice.h
   internet/digitallyimportedclient.h
   internet/digitallyimportedservicebase.h
   internet/digitallyimportedsettingspage.h
@@ -450,7 +452,7 @@ set(HEADERS
   internet/icecastbackend.h
   internet/icecastfilterwidget.h
   internet/icecastmodel.h
-  internet/icecastservice.h 
+  internet/icecastservice.h
   internet/internetmimedata.h
   internet/internetmodel.h
   internet/internetservice.h

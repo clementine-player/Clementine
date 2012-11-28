@@ -31,56 +31,17 @@ namespace {
 static const char* kFileStorageEndpoint =
     "https://one.ubuntu.com/api/file_storage/v1";
 static const char* kContentRoot = "https://files.one.ubuntu.com";
-static const char* kSongsTable = "ubuntu_one_songs";
-static const char* kFtsTable = "ubuntu_one_songs_fts";
+static const char* kServiceId = "ubuntu_one";
 }
 
 UbuntuOneService::UbuntuOneService(Application* app, InternetModel* parent)
-    : InternetService(kServiceName, app, parent, parent),
-      root_(nullptr),
-      network_(new NetworkAccessManager(this)),
-      library_sort_model_(new QSortFilterProxyModel(this)),
-      playlist_manager_(app->playlist_manager()) {
-  library_backend_ = new LibraryBackend;
-  library_backend_->moveToThread(app_->database()->thread());
-  library_backend_->Init(
-      app->database(), kSongsTable, QString::null, QString::null, kFtsTable);
-  library_model_ = new LibraryModel(library_backend_, app_, this);
+    : CloudFileService(
+        app, parent,
+        kServiceName, kServiceId,
+        QIcon(":/providers/ubuntuone.png"),
+        SettingsDialog::Page_UbuntuOne) {
+  app_->player()->RegisterUrlHandler(new UbuntuOneUrlHandler(this, this));
 
-  library_sort_model_->setSourceModel(library_model_);
-  library_sort_model_->setSortRole(LibraryModel::Role_SortText);
-  library_sort_model_->setDynamicSortFilter(true);
-  library_sort_model_->sort(0);
-
-  app->player()->RegisterUrlHandler(new UbuntuOneUrlHandler(this, this));
-  app->global_search()->AddProvider(new LibrarySearchProvider(
-      library_backend_,
-      kServiceName,
-      "ubuntu_one",
-      QIcon(":/providers/ubuntuone.png"),
-      true, app_, this));
-}
-
-QStandardItem* UbuntuOneService::CreateRootItem() {
-  root_ = new QStandardItem(QIcon(":providers/ubuntuone.png"), "Ubuntu One");
-  root_->setData(true, InternetModel::Role_CanLazyLoad);
-  return root_;
-}
-
-void UbuntuOneService::LazyPopulate(QStandardItem* item) {
-  switch (item->data(InternetModel::Role_Type).toInt()) {
-    case InternetModel::Type_Service:
-      Connect();
-      library_model_->Init();
-      model()->merged_model()->AddSubModel(item->index(), library_sort_model_);
-      break;
-
-    default:
-      break;
-  }
-}
-
-void UbuntuOneService::Connect() {
   QSettings s;
   s.beginGroup(kSettingsGroup);
   if (s.contains("consumer_key")) {
@@ -88,7 +49,15 @@ void UbuntuOneService::Connect() {
     consumer_secret_ = s.value("consumer_secret").toString();
     token_ = s.value("token").toString();
     token_secret_ = s.value("token_secret").toString();
+  }
+}
 
+bool UbuntuOneService::has_credentials() const {
+  return !consumer_key_.isEmpty();
+}
+
+void UbuntuOneService::Connect() {
+  if (has_credentials()) {
     RequestFileList("/~/Ubuntu One");
   } else {
     ShowSettingsDialog();
@@ -209,22 +178,6 @@ QUrl UbuntuOneService::GetStreamingUrlFromSongId(const QString& song_id) {
 
 void UbuntuOneService::ShowSettingsDialog() {
   app_->OpenSettingsDialogAtPage(SettingsDialog::Page_UbuntuOne);
-}
-
-void UbuntuOneService::ShowContextMenu(const QPoint& global_pos) {
-  if (!context_menu_) {
-    context_menu_.reset(new QMenu);
-    context_menu_->addActions(GetPlaylistActions());
-    context_menu_->addAction(
-        IconLoader::Load("download"),
-        tr("Cover Manager"),
-        this,
-        SLOT(ShowCoverManager()));
-    context_menu_->addAction(IconLoader::Load("configure"),
-                             tr("Configure..."),
-                             this, SLOT(ShowSettingsDialog()));
-  }
-  context_menu_->popup(global_pos);
 }
 
 void UbuntuOneService::ShowCoverManager() {
