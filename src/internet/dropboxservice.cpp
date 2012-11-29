@@ -1,5 +1,7 @@
 #include "dropboxservice.h"
 
+#include <qjson/parser.h>
+
 #include "core/logging.h"
 #include "core/network.h"
 #include "internet/dropboxauthenticator.h"
@@ -77,7 +79,29 @@ void DropboxService::RequestFileList(const QString& path) {
              this, SLOT(RequestFileListFinished(QNetworkReply*)), reply);
 }
 
+namespace {
+
+bool IsSupportedMimeType(const QString& mime_type) {
+  return mime_type == "audio/ogg" ||
+         mime_type == "audio/mpeg";
+}
+
+}  // namespace
+
 void DropboxService::RequestFileListFinished(QNetworkReply* reply) {
   reply->deleteLater();
-  qLog(Debug) << reply->readAll();
+
+  QJson::Parser parser;
+  QVariantMap response = parser.parse(reply).toMap();
+  QVariantList contents = response["contents"].toList();
+  foreach (const QVariant& c, contents) {
+    QVariantMap item = c.toMap();
+    const bool directory = item["is_dir"].toBool();
+    if (directory) {
+      RequestFileList(item["path"].toString());
+    } else {
+      qLog(Debug) << "Found:" << item["path"].toString()
+                  << IsSupportedMimeType(item["mime_type"].toString());
+    }
+  }
 }
