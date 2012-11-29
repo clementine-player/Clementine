@@ -93,7 +93,7 @@ QByteArray UbuntuOneAuthenticator::GenerateAuthorisationHeader(
              << Param("oauth_signature_method", "PLAINTEXT");
   qSort(parameters.begin(), parameters.end());
   QStringList encoded_params;
-  for (const Param& p : parameters) {
+  foreach (const Param& p, parameters) {
     encoded_params << QString("%1=%2").arg(p.first, p.second);
   }
 
@@ -104,7 +104,7 @@ QByteArray UbuntuOneAuthenticator::GenerateAuthorisationHeader(
   // Construct authorisation header
   parameters << Param("oauth_signature", signature);
   QStringList header_params;
-  for (const Param& p : parameters) {
+  foreach (const Param& p, parameters) {
     header_params << QString("%1=\"%2\"").arg(p.first, p.second);
   }
   QString authorisation_header = header_params.join(", ");
