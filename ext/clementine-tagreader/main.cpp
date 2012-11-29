@@ -16,7 +16,6 @@
 */
 
 #include "tagreaderworker.h"
-#include "core/encoding.h"
 #include "core/logging.h"
 
 #include <QCoreApplication>
@@ -45,10 +44,6 @@ int main(int argc, char** argv) {
 
   logging::Init();
   qLog(Info) << "TagReader worker connecting to" << args[1];
-
-  // Detect technically invalid usage of non-ASCII in ID3v1 tags.
-  UniversalEncodingHandler handler;
-  TagLib::ID3v1::Tag::setStringHandler(&handler);
 
   // Connect to the parent process.
   QLocalSocket socket;

@@ -18,7 +18,6 @@
 #include "mpris_common.h"
 #include "song.h"
 #include "timeconstants.h"
-#include "core/encoding.h"
 #include "core/logging.h"
 #include "core/messagehandler.h"
 
@@ -935,15 +934,11 @@ void Song::MergeFromSimpleMetaBundle(const Engine::SimpleMetaBundle &bundle) {
   }
 
   d->valid_ = true;
-
-  UniversalEncodingHandler detector(NS_FILTER_NON_CJK);
-  QTextCodec* codec = detector.Guess(bundle);
-
-  if (!bundle.title.isEmpty()) d->title_ = Decode(bundle.title, codec);
-  if (!bundle.artist.isEmpty()) d->artist_ = Decode(bundle.artist, codec);
-  if (!bundle.album.isEmpty()) d->album_ = Decode(bundle.album, codec);
-  if (!bundle.comment.isEmpty()) d->comment_ = Decode(bundle.comment, codec);
-  if (!bundle.genre.isEmpty()) d->genre_ = Decode(bundle.genre, codec);
+  if (!bundle.title.isEmpty()) d->title_ = bundle.title;
+  if (!bundle.artist.isEmpty()) d->artist_ = bundle.artist;
+  if (!bundle.album.isEmpty()) d->album_ = bundle.album;
+  if (!bundle.comment.isEmpty()) d->comment_ = bundle.comment;
+  if (!bundle.genre.isEmpty()) d->genre_ = bundle.genre;
   if (!bundle.bitrate.isEmpty()) d->bitrate_ = bundle.bitrate.toInt();
   if (!bundle.samplerate.isEmpty()) d->samplerate_ = bundle.samplerate.toInt();
   if (!bundle.length.isEmpty()) set_length_nanosec(bundle.length.toLongLong());

@@ -17,7 +17,6 @@
 
 #include "fmpsparser.h"
 #include "tagreaderworker.h"
-#include "core/encoding.h"
 #include "core/logging.h"
 #include "core/timeconstants.h"
 
@@ -168,24 +167,10 @@ void TagReaderWorker::ReadFile(const QString& filename,
     return;
   }
 
-  // This is single byte encoding, therefore can't be CJK.
-  UniversalEncodingHandler detector(NS_FILTER_NON_CJK);
-
   TagLib::Tag* tag = fileref->tag();
   QTextCodec* codec = NULL;
   if (tag) {
     TagLib::MPEG::File* file = dynamic_cast<TagLib::MPEG::File*>(fileref->file());
-    if (file && (file->ID3v2Tag() || file->ID3v1Tag())) {
-      codec = detector.Guess(*fileref);
-    }
-    if (codec &&
-        codec->name() != "UTF-8" &&
-        codec->name() != "ISO-8859-1") {
-      // Mark tags where we detect an unusual codec as suspicious.
-      song->set_suspicious_tags(true);
-    }
-
-
     Decode(tag->title(), NULL, song->mutable_title());
     Decode(tag->artist(), NULL, song->mutable_artist());
     Decode(tag->album(), NULL, song->mutable_album());
