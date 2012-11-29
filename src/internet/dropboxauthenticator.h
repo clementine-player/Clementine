@@ -34,12 +34,14 @@ class DropboxAuthenticator : public QObject {
   QString token_;
   QString secret_;
 
-  // User's Dropbox uid.
-  QString uid_;
 
   // Permanent OAuth access tokens.
   QString access_token_;
   QString access_token_secret_;
+
+  // User's Dropbox uid & name.
+  QString uid_;
+  QString name_;
 };
 
 #endif  // DROPBOXAUTHENTICATOR_H

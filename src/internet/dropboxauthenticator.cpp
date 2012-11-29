@@ -2,6 +2,8 @@
 
 #include <time.h>
 
+#include <qjson/parser.h>
+
 #include <QDesktopServices>
 #include <QStringList>
 #include <QTcpSocket>
@@ -189,5 +191,7 @@ void DropboxAuthenticator::RequestAccountInformation() {
 
 void DropboxAuthenticator::RequestAccountInformationFinished(QNetworkReply* reply) {
   reply->deleteLater();
-  qLog(Debug) << reply->readAll();
+  QJson::Parser parser;
+  QVariantMap response = parser.parse(reply).toMap();
+  name_ = response["display_name"].toString();
 }
