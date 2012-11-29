@@ -34,7 +34,6 @@ DropboxSettingsPage::DropboxSettingsPage(SettingsDialog* parent)
 
   connect(ui_->login_button, SIGNAL(clicked()), SLOT(LoginClicked()));
   connect(ui_->login_state, SIGNAL(LogoutClicked()), SLOT(LogoutClicked()));
-  connect(service_, SIGNAL(Connected()), SLOT(Connected()));
 
   dialog()->installEventFilter(this);
 }
@@ -67,6 +66,7 @@ void DropboxSettingsPage::LoginClicked() {
   NewClosure(authenticator, SIGNAL(Finished()),
              service_, SLOT(AuthenticationFinished(DropboxAuthenticator*)),
              authenticator);
+  authenticator->StartAuthorisation();
 
   ui_->login_button->setEnabled(false);
 }
