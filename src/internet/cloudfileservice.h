@@ -34,7 +34,7 @@ class CloudFileService : public InternetService {
   virtual bool has_credentials() const = 0;
   virtual void Connect() = 0;
 
- private slots:
+ protected slots:
   void ShowCoverManager();
   void AddToPlaylist(QMimeData* mime);
   void ShowSettingsDialog();

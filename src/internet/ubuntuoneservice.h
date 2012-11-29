@@ -23,7 +23,6 @@ class UbuntuOneService : public CloudFileService {
   void FileListRequestFinished(QNetworkReply* reply);
   void ReadTagsFinished(
       TagReaderClient::ReplyType* reply, const QVariantMap& file, const QUrl& url);
-  void ShowSettingsDialog();
   void ShowCoverManager();
   void AddToPlaylist(QMimeData* mime);
   void VolumeListRequestFinished(QNetworkReply* reply);

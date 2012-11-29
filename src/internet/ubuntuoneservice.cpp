@@ -233,10 +233,6 @@ QUrl UbuntuOneService::GetStreamingUrlFromSongId(const QString& song_id) {
   return url;
 }
 
-void UbuntuOneService::ShowSettingsDialog() {
-  app_->OpenSettingsDialogAtPage(SettingsDialog::Page_UbuntuOne);
-}
-
 void UbuntuOneService::ShowCoverManager() {
   if (!cover_manager_) {
     cover_manager_.reset(new AlbumCoverManager(app_, library_backend_));

@@ -78,6 +78,7 @@ public:
     Page_Podcasts,
     Page_GoogleDrive,
     Page_UbuntuOne,
+    Page_Dropbox,
   };
 
   enum Role {

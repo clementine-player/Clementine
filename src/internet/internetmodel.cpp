@@ -48,6 +48,9 @@
 #ifdef HAVE_UBUNTU_ONE
   #include "ubuntuoneservice.h"
 #endif
+#ifdef HAVE_DROPBOX
+  #include "dropboxservice.h"
+#endif
 
 using smart_playlists::Generator;
 using smart_playlists::GeneratorMimeData;
@@ -90,6 +93,9 @@ InternetModel::InternetModel(Application* app, QObject* parent)
 #endif
 #ifdef HAVE_UBUNTU_ONE
   AddService(new UbuntuOneService(app, this));
+#endif
+#ifdef HAVE_DROPBOX
+  AddService(new DropboxService(app, this));
 #endif
 }
 

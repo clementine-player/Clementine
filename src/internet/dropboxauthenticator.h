@@ -11,7 +11,15 @@ class DropboxAuthenticator : public QObject {
   Q_OBJECT
  public:
   explicit DropboxAuthenticator(QObject* parent = 0);
-  void StartAuthorisation(const QString& email);
+  void StartAuthorisation();
+
+  const QString& access_token() const { return access_token_; }
+  const QString& access_token_secret() const { return access_token_secret_; }
+  const QString& uid() const { return uid_; }
+  const QString& name() const { return name_; }
+
+ signals:
+  void Finished();
 
  private slots:
   void RequestTokenFinished(QNetworkReply* reply);

@@ -35,7 +35,7 @@ DropboxAuthenticator::DropboxAuthenticator(QObject* parent)
       network_(new NetworkAccessManager(this)) {
 }
 
-void DropboxAuthenticator::StartAuthorisation(const QString& email) {
+void DropboxAuthenticator::StartAuthorisation() {
   QUrl url(kRequestTokenEndpoint);
   typedef QPair<QString, QString> Param;
 
@@ -194,4 +194,5 @@ void DropboxAuthenticator::RequestAccountInformationFinished(QNetworkReply* repl
   QJson::Parser parser;
   QVariantMap response = parser.parse(reply).toMap();
   name_ = response["display_name"].toString();
+  emit Finished();
 }

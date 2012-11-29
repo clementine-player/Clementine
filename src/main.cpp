@@ -110,8 +110,6 @@ using boost::scoped_ptr;
   Q_IMPORT_PLUGIN(qsqlite)
 #endif
 
-#include "internet/dropboxauthenticator.h"
-
 void LoadTranslation(const QString& prefix, const QString& path,
                      const QString& override_language = QString()) {
 #if QT_VERSION < 0x040700
@@ -448,9 +446,6 @@ int main(int argc, char *argv[]) {
     qLog(Warning) << "Failed to initialise SAC shim";
   }
 #endif
-
-  DropboxAuthenticator authenticator;
-  authenticator.StartAuthorisation("foo");
 
   // Window
   MainWindow w(&app, tray_icon.get(), &osd);

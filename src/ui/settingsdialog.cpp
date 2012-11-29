@@ -68,6 +68,10 @@
 #  include "internet/ubuntuonesettingspage.h"
 #endif
 
+#ifdef HAVE_DROPBOX
+#  include "internet/dropboxsettingspage.h"
+#endif
+
 #include <QDesktopWidget>
 #include <QPainter>
 #include <QPushButton>
@@ -154,6 +158,10 @@ SettingsDialog::SettingsDialog(Application* app, BackgroundStreams* streams, QWi
 
 #ifdef HAVE_UBUNTU_ONE
   AddPage(Page_UbuntuOne, new UbuntuOneSettingsPage(this), providers);
+#endif
+
+#ifdef HAVE_DROPBOX
+  AddPage(Page_Dropbox, new DropboxSettingsPage(this), providers);
 #endif
 
 #ifdef HAVE_SPOTIFY
