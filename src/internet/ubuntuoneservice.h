@@ -26,9 +26,12 @@ class UbuntuOneService : public CloudFileService {
   void ShowSettingsDialog();
   void ShowCoverManager();
   void AddToPlaylist(QMimeData* mime);
+  void VolumeListRequestFinished(QNetworkReply* reply);
 
  private:
   void Connect();
+  QNetworkReply* SendRequest(const QUrl& url);
+  void RequestVolumeList();
   void RequestFileList(const QString& path);
   void MaybeAddFileToDatabase(const QVariantMap& file);
   bool has_credentials() const;

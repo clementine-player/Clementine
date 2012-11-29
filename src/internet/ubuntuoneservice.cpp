@@ -30,6 +30,8 @@ const char* UbuntuOneService::kSettingsGroup = "Ubuntu One";
 namespace {
 static const char* kFileStorageEndpoint =
     "https://one.ubuntu.com/api/file_storage/v1";
+static const char* kVolumesEndpoint =
+    "https://one.ubuntu.com/api/file_storage/v1/volumes";
 static const char* kContentRoot = "https://files.one.ubuntu.com";
 static const char* kServiceId = "ubuntu_one";
 }
@@ -58,7 +60,7 @@ bool UbuntuOneService::has_credentials() const {
 
 void UbuntuOneService::Connect() {
   if (has_credentials()) {
-    RequestFileList("/~/Ubuntu One");
+    RequestVolumeList();
   } else {
     ShowSettingsDialog();
   }
@@ -88,27 +90,48 @@ void UbuntuOneService::AuthenticationFinished(
   s.setValue("token", token_);
   s.setValue("token_secret", token_secret_);
 
-  RequestFileList("/~/Ubuntu One");
+  RequestVolumeList();
+}
+
+QNetworkReply* UbuntuOneService::SendRequest(const QUrl& url) {
+  QNetworkRequest request(url);
+  request.setRawHeader("Authorization", GenerateAuthorisationHeader());
+  request.setRawHeader("Accept", "application/json");
+
+  return network_->get(request);
+}
+
+void UbuntuOneService::RequestVolumeList() {
+  QUrl volumes_url(kVolumesEndpoint);
+  QNetworkReply* reply = SendRequest(volumes_url);
+  NewClosure(reply, SIGNAL(finished()),
+             this, SLOT(VolumeListRequestFinished(QNetworkReply*)), reply);
+}
+
+void UbuntuOneService::VolumeListRequestFinished(QNetworkReply* reply) {
+  reply->deleteLater();
+
+  QJson::Parser parser;
+  QVariantList result = parser.parse(reply).toList();
+  foreach (const QVariant& v, result) {
+    RequestFileList(v.toMap()["node_path"].toString());
+  }
 }
 
 void UbuntuOneService::RequestFileList(const QString& path) {
   QUrl files_url(QString(kFileStorageEndpoint) + path);
   files_url.addQueryItem("include_children", "true");
-  QNetworkRequest request(files_url);
-  request.setRawHeader("Authorization", GenerateAuthorisationHeader());
-  request.setRawHeader("Accept", "application/json");
 
   qLog(Debug) << "Sending files request" << files_url;
-  QNetworkReply* files_reply = network_->get(request);
+  QNetworkReply* files_reply = SendRequest(files_url);
   NewClosure(files_reply, SIGNAL(finished()),
              this, SLOT(FileListRequestFinished(QNetworkReply*)), files_reply);
 }
 
 void UbuntuOneService::FileListRequestFinished(QNetworkReply* reply) {
-  QByteArray data = reply->readAll();
-
+  reply->deleteLater();
   QJson::Parser parser;
-  QVariantMap result = parser.parse(data).toMap();
+  QVariantMap result = parser.parse(reply).toMap();
 
   QVariantList children = result["children"].toList();
   foreach (const QVariant& c, children) {
