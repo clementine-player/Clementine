@@ -18,18 +18,28 @@ class DropboxAuthenticator : public QObject {
   void RedirectArrived(QTcpSocket* socket, QByteArray buffer);
   void NewConnection();
   void RequestAccessTokenFinished(QNetworkReply* reply);
+  void RequestAccountInformationFinished(QNetworkReply* reply);
 
  private:
   void Authorise();
   void RequestAccessToken();
+  QByteArray GenerateAuthorisationHeader();
+  void RequestAccountInformation();
 
  private:
   NetworkAccessManager* network_;
   QTcpServer server_;
 
+  // Temporary access token used for first authentication flow.
   QString token_;
   QString secret_;
+
+  // User's Dropbox uid.
   QString uid_;
+
+  // Permanent OAuth access tokens.
+  QString access_token_;
+  QString access_token_secret_;
 };
 
 #endif  // DROPBOXAUTHENTICATOR_H
