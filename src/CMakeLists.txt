@@ -1054,6 +1054,14 @@ optional_source(HAVE_UBUNTU_ONE
     internet/ubuntuonesettingspage.ui
 )
 
+# Dropbox support
+optional_source(HAVE_DROPBOX
+  SOURCES
+    internet/dropboxauthenticator.cpp
+  HEADERS
+    internet/dropboxauthenticator.h
+)
+
 # Hack to add Clementine to the Unity system tray whitelist
 optional_source(LINUX
   SOURCES core/ubuntuunityhack.cpp

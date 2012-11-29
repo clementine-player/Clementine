@@ -197,6 +197,11 @@ optional_component(UBUNTU_ONE ON "Ubuntu One file support"
   DEPENDS "Taglib 1.8" "TAGLIB_VERSION VERSION_GREATER 1.7.999"
 )
 
+optional_component(DROPBOX ON "Dropbox support"
+  DEPENDS "Google sparsehash" SPARSEHASH_INCLUDE_DIRS
+  DEPENDS "Taglib 1.8" "TAGLIB_VERSION VERSION_GREATER 1.7.999"
+)
+
 optional_component(AUDIOCD ON "Devices: Audio CD support"
   DEPENDS "libcdio" CDIO_FOUND
 )
