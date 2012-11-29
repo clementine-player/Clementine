@@ -16,14 +16,12 @@ set(SOURCES
   tagreaderworker.cpp
 )
 
-set(HEADERS
-  cloudstream.h
-)
-
 optional_source(HAVE_GOOGLE_DRIVE
   INCLUDE_DIRECTORIES ${SPARSEHASH_INCLUDE_DIRS}
   SOURCES
     cloudstream.cpp
+  HEADERS
+    cloudstream.h
 )
 
 qt4_wrap_cpp(MOC ${HEADERS})
