@@ -23,6 +23,7 @@
 #include <QModelIndex>
 #include <QWidget>
 
+class DropboxAuthenticator;
 class DropboxService;
 class Ui_DropboxSettingsPage;
 
@@ -42,7 +43,7 @@ public:
 private slots:
   void LoginClicked();
   void LogoutClicked();
-  void Connected();
+  void Connected(DropboxAuthenticator* authenticator);
 
 private:
   Ui_DropboxSettingsPage* ui_;

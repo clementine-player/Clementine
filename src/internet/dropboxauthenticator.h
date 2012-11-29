@@ -18,6 +18,9 @@ class DropboxAuthenticator : public QObject {
   const QString& uid() const { return uid_; }
   const QString& name() const { return name_; }
 
+  static QByteArray GenerateAuthorisationHeader(
+      const QString& token, const QString& secret);
+
  signals:
   void Finished();
 

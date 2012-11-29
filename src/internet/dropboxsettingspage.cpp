@@ -19,6 +19,7 @@
 #include "ui_dropboxsettingspage.h"
 
 #include "core/application.h"
+#include "internet/dropboxauthenticator.h"
 #include "internet/dropboxservice.h"
 #include "internet/internetmodel.h"
 #include "ui/settingsdialog.h"
@@ -46,10 +47,10 @@ void DropboxSettingsPage::Load() {
   QSettings s;
   s.beginGroup(DropboxService::kSettingsGroup);
 
-  const QString user_email = s.value("user_email").toString();
+  const QString name = s.value("name").toString();
 
-  if (!user_email.isEmpty()) {
-    ui_->login_state->SetLoggedIn(LoginStateWidget::LoggedIn, user_email);
+  if (!name.isEmpty()) {
+    ui_->login_state->SetLoggedIn(LoginStateWidget::LoggedIn, name);
   }
 }
 
@@ -59,7 +60,14 @@ void DropboxSettingsPage::Save() {
 }
 
 void DropboxSettingsPage::LoginClicked() {
-  service_->Connect();
+  DropboxAuthenticator* authenticator = new DropboxAuthenticator;
+  NewClosure(authenticator, SIGNAL(Finished()),
+             this, SLOT(Connected(DropboxAuthenticator*)),
+             authenticator);
+  NewClosure(authenticator, SIGNAL(Finished()),
+             service_, SLOT(AuthenticationFinished(DropboxAuthenticator*)),
+             authenticator);
+
   ui_->login_button->setEnabled(false);
 }
 
@@ -76,11 +84,7 @@ void DropboxSettingsPage::LogoutClicked() {
   ui_->login_state->SetLoggedIn(LoginStateWidget::LoggedOut);
 }
 
-void DropboxSettingsPage::Connected() {
-  QSettings s;
-  s.beginGroup(DropboxService::kSettingsGroup);
-
-  const QString user_email = s.value("user_email").toString();
-
-  ui_->login_state->SetLoggedIn(LoginStateWidget::LoggedIn, user_email);
+void DropboxSettingsPage::Connected(DropboxAuthenticator* authenticator) {
+  ui_->login_state->SetLoggedIn(
+      LoginStateWidget::LoggedIn, authenticator->name());
 }

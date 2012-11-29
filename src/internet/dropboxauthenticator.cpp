@@ -37,24 +37,10 @@ DropboxAuthenticator::DropboxAuthenticator(QObject* parent)
 
 void DropboxAuthenticator::StartAuthorisation() {
   QUrl url(kRequestTokenEndpoint);
-  typedef QPair<QString, QString> Param;
-
-  QByteArray signature = QUrl::toPercentEncoding(QString(kAppSecret) + "&");
-  QList<Param> params;
-  params << Param("oauth_consumer_key", kAppKey)
-         << Param("oauth_signature_method", "PLAINTEXT")
-         << Param("oauth_timestamp", QString::number(time(NULL)))
-         << Param("oauth_nonce", QString::number(qrand()))
-         << Param("oauth_signature", signature);
-  QStringList encoded_params;
-  foreach (const Param& p, params) {
-    encoded_params << QString("%1=\"%2\"").arg(p.first, p.second);
-  }
-  QString authorisation_header = QString("OAuth ") + encoded_params.join(", ");
-  qLog(Debug) << authorisation_header;
-
+  QByteArray authorisation_header = GenerateAuthorisationHeader(
+      QString::null, QString::null);
   QNetworkRequest request(url);
-  request.setRawHeader("Authorization", authorisation_header.toUtf8());
+  request.setRawHeader("Authorization", authorisation_header);
 
   QNetworkReply* reply = network_->post(request, QByteArray());
   NewClosure(reply, SIGNAL(finished()),
@@ -124,25 +110,10 @@ void DropboxAuthenticator::RedirectArrived(QTcpSocket* socket, QByteArray buffer
 
 void DropboxAuthenticator::RequestAccessToken() {
   QUrl url(kAccessTokenEndpoint);
-  typedef QPair<QString, QString> Param;
-
-  QByteArray signature = QUrl::toPercentEncoding(
-      QString("%1&%2").arg(kAppSecret, secret_));
-  QList<Param> params;
-  params << Param("oauth_consumer_key", kAppKey)
-         << Param("oauth_signature_method", "PLAINTEXT")
-         << Param("oauth_timestamp", QString::number(time(NULL)))
-         << Param("oauth_nonce", QString::number(qrand()))
-         << Param("oauth_signature", signature)
-         << Param("oauth_token", token_);
-  QStringList encoded_params;
-  foreach (const Param& p, params) {
-    encoded_params << QString("%1=\"%2\"").arg(p.first, p.second);
-  }
-  QString authorisation_header = QString("OAuth ") + encoded_params.join(", ");
-  qLog(Debug) << authorisation_header;
   QNetworkRequest request(url);
-  request.setRawHeader("Authorization", authorisation_header.toUtf8());
+  QByteArray authorisation_header = GenerateAuthorisationHeader(
+      token_, secret_);
+  request.setRawHeader("Authorization", authorisation_header);
 
   QNetworkReply* reply = network_->post(request, QByteArray());
   NewClosure(reply, SIGNAL(finished()),
@@ -161,16 +132,24 @@ void DropboxAuthenticator::RequestAccessTokenFinished(QNetworkReply* reply) {
 }
 
 QByteArray DropboxAuthenticator::GenerateAuthorisationHeader() {
+  return GenerateAuthorisationHeader(access_token_, access_token_secret_);
+}
+
+QByteArray DropboxAuthenticator::GenerateAuthorisationHeader(
+    const QString& token,
+    const QString& token_secret) {
   typedef QPair<QString, QString> Param;
   QByteArray signature = QUrl::toPercentEncoding(
-      QString("%1&%2").arg(kAppSecret, access_token_secret_));
+      QString("%1&%2").arg(kAppSecret, token_secret));
   QList<Param> params;
   params << Param("oauth_consumer_key", kAppKey)
          << Param("oauth_signature_method", "PLAINTEXT")
          << Param("oauth_timestamp", QString::number(time(NULL)))
          << Param("oauth_nonce", QString::number(qrand()))
-         << Param("oauth_signature", signature)
-         << Param("oauth_token", access_token_);
+         << Param("oauth_signature", signature);
+  if (!token.isNull()) {
+    params << Param("oauth_token", token);
+  }
   QStringList encoded_params;
   foreach (const Param& p, params) {
     encoded_params << QString("%1=\"%2\"").arg(p.first, p.second);

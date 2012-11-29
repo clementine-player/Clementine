@@ -6,6 +6,8 @@
 #include "core/tagreaderclient.h"
 
 class DropboxAuthenticator;
+class NetworkAccessManager;
+class QNetworkReply;
 
 class DropboxService : public CloudFileService {
   Q_OBJECT
@@ -22,13 +24,20 @@ class DropboxService : public CloudFileService {
 
  public slots:
   void Connect();
+  void AuthenticationFinished(DropboxAuthenticator* authenticator);
 
  private slots:
-  void AuthenticationFinished(DropboxAuthenticator* authenticator);
+  void RequestFileListFinished(QNetworkReply* reply);
+
+ private:
+  void RequestFileList(const QString& path);
+  QByteArray GenerateAuthorisationHeader();
 
  private:
   QString access_token_;
   QString access_token_secret_;
+
+  NetworkAccessManager* network_;
 };
 
 #endif  // DROPBOXSERVICE_H
