@@ -618,7 +618,8 @@ bool TagReaderWorker::ReadCloudFile(const QUrl& download_url,
         stream,
         true,
         TagLib::AudioProperties::Accurate));
-  } else if (mime_type == "application/ogg") {
+  } else if (mime_type == "application/ogg" ||
+             mime_type == "audio/ogg") {
     tag.reset(new TagLib::Ogg::Vorbis::File(
         stream,
         true,

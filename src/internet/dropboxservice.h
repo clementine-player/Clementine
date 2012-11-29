@@ -39,6 +39,7 @@ class DropboxService : public CloudFileService {
   void RequestFileList(const QString& path);
   QByteArray GenerateAuthorisationHeader();
   QNetworkReply* FetchContentUrl(const QUrl& url);
+  void MaybeAddFileToDatabase(const QUrl& url, const QVariantMap& file);
 
  private:
   QString access_token_;

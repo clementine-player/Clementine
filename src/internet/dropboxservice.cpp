@@ -8,9 +8,13 @@
 #include "core/logging.h"
 #include "core/network.h"
 #include "core/player.h"
+#include "core/utilities.h"
 #include "core/waitforsignal.h"
 #include "internet/dropboxauthenticator.h"
 #include "internet/dropboxurlhandler.h"
+#include "library/librarybackend.h"
+
+using Utilities::ParseRFC822DateTime;
 
 const char* DropboxService::kServiceName = "Dropbox";
 const char* DropboxService::kSettingsGroup = "Dropbox";
@@ -106,17 +110,29 @@ void DropboxService::RequestFileListFinished(QNetworkReply* reply) {
     const bool directory = item["is_dir"].toBool();
     if (directory) {
       RequestFileList(item["path"].toString());
-    } else if (IsSupportedMimeType(item["mime_type"].toString())) {
-      qLog(Debug) << "Found:" << item["path"].toString();
+    } else {
       QUrl url;
       url.setScheme("dropbox");
       url.setPath(item["path"].toString());
-      QNetworkReply* reply = FetchContentUrl(url);
-      NewClosure(reply, SIGNAL(finished()),
-                 this, SLOT(FetchContentUrlFinished(QNetworkReply*, QVariantMap)),
-                 reply, item);
+      MaybeAddFileToDatabase(url, item);
     }
   }
+}
+
+void DropboxService::MaybeAddFileToDatabase(
+    const QUrl& url, const QVariantMap& file) {
+  if (!IsSupportedMimeType(file["mime_type"].toString())) {
+    return;
+  }
+  Song song = library_backend_->GetSongByUrl(url);
+  if (song.is_valid()) {
+    return;
+  }
+
+  QNetworkReply* reply = FetchContentUrl(url);
+  NewClosure(reply, SIGNAL(finished()),
+             this, SLOT(FetchContentUrlFinished(QNetworkReply*, QVariantMap)),
+             reply, file);
 }
 
 QNetworkReply* DropboxService::FetchContentUrl(const QUrl& url) {
@@ -132,10 +148,6 @@ void DropboxService::FetchContentUrlFinished(
   QJson::Parser parser;
   QVariantMap response = parser.parse(reply).toMap();
   QFileInfo info(data["path"].toString());
-  qLog(Debug) << response["url"].toUrl()
-              << info.fileName()
-              << data["bytes"].toInt()
-              << data["mime_type"].toString();
   TagReaderClient::ReplyType* tag_reply = app_->tag_reader_client()->ReadCloudFile(
       response["url"].toUrl(),
       info.fileName(),
@@ -144,12 +156,36 @@ void DropboxService::FetchContentUrlFinished(
       QString::null);
   NewClosure(tag_reply, SIGNAL(Finished(bool)),
       this, SLOT(ReadTagsFinished(TagReaderClient::ReplyType*,QVariantMap)),
-      tag_reply, response);
+      tag_reply, data);
 }
 
 void DropboxService::ReadTagsFinished(
     TagReaderClient::ReplyType* reply, const QVariantMap& file) {
   qLog(Debug) << reply->message().DebugString().c_str();
+
+  const auto& message = reply->message().read_cloud_file_response();
+  if (!message.has_metadata() ||
+      !message.metadata().filesize()) {
+    qLog(Debug) << "Failed to tag:" << file["path"].toString();
+    return;
+  }
+
+  Song song;
+  song.InitFromProtobuf(message.metadata());
+  song.set_directory_id(0);
+  song.set_etag(file["rev"].toString());
+  song.set_mtime(ParseRFC822DateTime(file["modified"].toString()).toTime_t());
+  QUrl url;
+  url.setScheme("dropbox");
+  url.setPath(file["path"].toString());
+  song.set_url(url);
+  if (song.title().isEmpty()) {
+    QFileInfo info(file["path"].toString());
+    song.set_title(info.fileName());
+  }
+
+  qLog(Debug) << "Adding song to db:" << song.title();
+  library_backend_->AddOrUpdateSongs(SongList() << song);
 }
 
 QUrl DropboxService::GetStreamingUrlFromSongId(const QUrl& url) {
