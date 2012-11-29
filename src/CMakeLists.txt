@@ -1060,10 +1060,12 @@ optional_source(HAVE_DROPBOX
     internet/dropboxauthenticator.cpp
     internet/dropboxservice.cpp
     internet/dropboxsettingspage.cpp
+    internet/dropboxurlhandler.cpp
   HEADERS
     internet/dropboxauthenticator.h
     internet/dropboxservice.h
     internet/dropboxsettingspage.h
+    internet/dropboxurlhandler.h
   UI
     internet/dropboxsettingspage.ui
 )
