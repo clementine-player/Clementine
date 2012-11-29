@@ -175,6 +175,15 @@ void UbuntuOneService::MaybeAddFileToDatabase(const QVariantMap& file) {
 void UbuntuOneService::ReadTagsFinished(
     TagReaderClient::ReplyType* reply, const QVariantMap& file, const QUrl& url) {
   qLog(Debug) << reply->message().DebugString().c_str();
+
+  const auto& message = reply->message().read_cloud_file_response();
+
+  if (!message.has_metadata() ||
+      !message.metadata().filesize()) {
+    qLog(Debug) << "Failed to tag:" << url;
+    return;
+  }
+
   Song song;
   song.InitFromProtobuf(reply->message().read_cloud_file_response().metadata());
   song.set_directory_id(0);
