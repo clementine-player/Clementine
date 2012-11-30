@@ -21,6 +21,7 @@
 #include <QFile>
 #include <QProcess>
 #include <QTcpServer>
+#include <QThread>
 #include <QUrl>
 
 
@@ -34,6 +35,7 @@ TagReaderClient::TagReaderClient(QObject* parent)
   sInstance = this;
 
   worker_pool_->SetExecutableName(kWorkerExecutableName);
+  worker_pool_->SetWorkerCount(QThread::idealThreadCount());
   connect(worker_pool_, SIGNAL(WorkerFailedToStart()), SLOT(WorkerFailedToStart()));
 }
 
