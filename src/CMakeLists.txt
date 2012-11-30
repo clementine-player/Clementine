@@ -180,6 +180,7 @@ set(SOURCES
   internet/jamendodynamicplaylist.cpp
   internet/jamendoplaylistitem.cpp
   internet/jamendoservice.cpp
+  internet/localredirectserver.cpp
   internet/magnatunedownloaddialog.cpp
   internet/magnatuneplaylistitem.cpp
   internet/magnatunesettingspage.cpp
@@ -457,6 +458,7 @@ set(HEADERS
   internet/internetviewcontainer.h
   internet/jamendodynamicplaylist.h
   internet/jamendoservice.h
+  internet/localredirectserver.h
   internet/magnatunedownloaddialog.h
   internet/magnatunesettingspage.h
   internet/magnatuneservice.h

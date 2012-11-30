@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QTcpServer>
 
+class LocalRedirectServer;
 class NetworkAccessManager;
 class QNetworkReply;
 
@@ -26,8 +27,7 @@ class DropboxAuthenticator : public QObject {
 
  private slots:
   void RequestTokenFinished(QNetworkReply* reply);
-  void RedirectArrived(QTcpSocket* socket, QByteArray buffer);
-  void NewConnection();
+  void RedirectArrived(LocalRedirectServer* server);
   void RequestAccessTokenFinished(QNetworkReply* reply);
   void RequestAccountInformationFinished(QNetworkReply* reply);
 

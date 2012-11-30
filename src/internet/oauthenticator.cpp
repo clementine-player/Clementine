@@ -1,18 +1,14 @@
 #include "oauthenticator.h"
 
-#include <QApplication>
-#include <QBuffer>
 #include <QDesktopServices>
-#include <QFile>
 #include <QStringList>
-#include <QStyle>
-#include <QTcpSocket>
 #include <QUrl>
 
 #include <qjson/parser.h>
 
 #include "core/closure.h"
 #include "core/logging.h"
+#include "internet/localredirectserver.h"
 
 namespace {
 
@@ -35,75 +31,28 @@ OAuthenticator::OAuthenticator(QObject* parent)
 }
 
 void OAuthenticator::StartAuthorisation() {
-  server_.listen(QHostAddress::LocalHost);
-  const quint16 port = server_.serverPort();
+  LocalRedirectServer* server = new LocalRedirectServer(this);
+  server->Listen();
 
-  NewClosure(&server_, SIGNAL(newConnection()), this, SLOT(NewConnection()));
+  NewClosure(server, SIGNAL(Finished()),
+             this, SLOT(RedirectArrived(LocalRedirectServer*)), server);
 
   QUrl url = QUrl(kGoogleOAuthEndpoint);
   url.addQueryItem("response_type", "code");
   url.addQueryItem("client_id", kClientId);
-  url.addQueryItem("redirect_uri", QString("http://localhost:%1").arg(port));
+  url.addQueryItem("redirect_uri", server->url().toString());
   url.addQueryItem("scope", kGoogleOAuthScope);
 
   QDesktopServices::openUrl(url);
 }
 
-void OAuthenticator::NewConnection() {
-  QTcpSocket* socket = server_.nextPendingConnection();
-  server_.close();
-
-  QByteArray buffer;
-
-  NewClosure(socket, SIGNAL(readyRead()),
-             this, SLOT(RedirectArrived(QTcpSocket*, QByteArray)), socket, buffer);
-
-  // Everything is bon.  Prepare and display the success page.
-  QFile page_file(":oauthsuccess.html");
-  page_file.open(QIODevice::ReadOnly);
-  QString page_data = QString::fromLatin1(page_file.readAll());
-
-  // Translate the strings inside
-  QRegExp tr_regexp("tr\\(\"([^\"]+)\"\\)");
-  int offset = 0;
-  forever {
-    offset = tr_regexp.indexIn(page_data, offset);
-    if (offset == -1) {
-      break;
-    }
-
-    page_data.replace(offset, tr_regexp.matchedLength(),
-                      tr(tr_regexp.cap(1).toAscii()));
-    offset += tr_regexp.matchedLength();
-  }
-
-  // Add the tick image.
-  QBuffer image_buffer;
-  image_buffer.open(QIODevice::ReadWrite);
-  QApplication::style()->standardIcon(QStyle::SP_DialogOkButton)
-      .pixmap(16).toImage().save(&image_buffer, "PNG");
-
-  page_data.replace("@IMAGE_DATA@", image_buffer.data().toBase64());
-
-  socket->write("HTTP/1.0 200 OK\r\n");
-  socket->write("Content-type: text/html;charset=UTF-8\r\n");
-  socket->write("\r\n\r\n");
-  socket->write(page_data.toUtf8());
-  socket->flush();
-}
-
-void OAuthenticator::RedirectArrived(QTcpSocket* socket, QByteArray buffer) {
-  buffer.append(socket->readAll());
-
-  if (socket->atEnd() || buffer.endsWith("\r\n\r\n")) {
-    socket->deleteLater();
-    const QByteArray& code = ParseHttpRequest(buffer);
-    qLog(Debug) << "Code:" << code;
-    RequestAccessToken(code, socket->localPort());
-  } else {
-    NewClosure(socket, SIGNAL(readyReady()),
-               this, SLOT(RedirectArrived(QTcpSocket*, QByteArray)), socket, buffer);
-  }
+void OAuthenticator::RedirectArrived(LocalRedirectServer* server) {
+  server->deleteLater();
+  QUrl request_url = server->request_url();
+  qLog(Debug) << Q_FUNC_INFO << request_url;
+  RequestAccessToken(
+      request_url.queryItemValue("code").toUtf8(),
+      server->url());
 }
 
 QByteArray OAuthenticator::ParseHttpRequest(const QByteArray& request) const {
@@ -115,7 +64,7 @@ QByteArray OAuthenticator::ParseHttpRequest(const QByteArray& request) const {
   return code;
 }
 
-void OAuthenticator::RequestAccessToken(const QByteArray& code, quint16 port) {
+void OAuthenticator::RequestAccessToken(const QByteArray& code, const QUrl& url) {
   typedef QPair<QString, QString> Param;
   QList<Param> parameters;
   parameters << Param("code", code)
@@ -124,7 +73,7 @@ void OAuthenticator::RequestAccessToken(const QByteArray& code, quint16 port) {
              << Param("grant_type", "authorization_code")
              // Even though we don't use this URI anymore, it must match the
              // original one.
-             << Param("redirect_uri", QString("http://localhost:%1").arg(port));
+             << Param("redirect_uri", url.toString());
 
   QStringList params;
   foreach (const Param& p, parameters) {

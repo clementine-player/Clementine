@@ -3,10 +3,10 @@
 
 #include <QDateTime>
 #include <QObject>
-#include <QTcpServer>
 
 #include "core/network.h"
 
+class LocalRedirectServer;
 class QTcpSocket;
 
 class OAuthenticator : public QObject {
@@ -29,18 +29,16 @@ class OAuthenticator : public QObject {
   void Finished();
 
  private slots:
-  void NewConnection();
-  void RedirectArrived(QTcpSocket* socket, QByteArray buffer);
+  void RedirectArrived(LocalRedirectServer* server);
   void FetchAccessTokenFinished(QNetworkReply* reply);
   void RefreshAccessTokenFinished(QNetworkReply* reply);
   void FetchUserInfoFinished(QNetworkReply* reply);
 
  private:
   QByteArray ParseHttpRequest(const QByteArray& request) const;
-  void RequestAccessToken(const QByteArray& code, quint16 port);
+  void RequestAccessToken(const QByteArray& code, const QUrl& url);
   void SetExpiryTime(int expires_in_seconds);
 
-  QTcpServer server_;
   NetworkAccessManager network_;
 
   QString access_token_;

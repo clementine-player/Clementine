@@ -11,6 +11,7 @@
 #include "core/closure.h"
 #include "core/logging.h"
 #include "core/network.h"
+#include "internet/localredirectserver.h"
 
 namespace {
 static const char* kAppKey = "qh6ca27eclt9p2k";
@@ -75,37 +76,25 @@ void DropboxAuthenticator::RequestTokenFinished(QNetworkReply* reply) {
 }
 
 void DropboxAuthenticator::Authorise() {
-  server_.listen(QHostAddress::LocalHost);
-  const quint16 port = server_.serverPort();
+  LocalRedirectServer* server = new LocalRedirectServer(this);
+  server->Listen();
 
-  NewClosure(&server_, SIGNAL(newConnection()), this, SLOT(NewConnection()));
+  NewClosure(server, SIGNAL(Finished()),
+             this, SLOT(RedirectArrived(LocalRedirectServer*)), server);
 
   QUrl url(kAuthoriseEndpoint);
   url.addQueryItem("oauth_token", token_);
-  url.addQueryItem("oauth_callback", QString("http://localhost:%1").arg(port));
+  url.addQueryItem("oauth_callback", server->url().toString());
 
   QDesktopServices::openUrl(url);
 }
 
-void DropboxAuthenticator::NewConnection() {
-  QTcpSocket* socket = server_.nextPendingConnection();
-  server_.close();
-
-  QByteArray buffer;
-  NewClosure(socket, SIGNAL(readyRead()),
-             this, SLOT(RedirectArrived(QTcpSocket*, QByteArray)), socket, buffer);
-}
-
-void DropboxAuthenticator::RedirectArrived(QTcpSocket* socket, QByteArray buffer) {
-  buffer.append(socket->readAll());
-  if (socket->atEnd() || buffer.endsWith("\r\n\r\n")) {
-    socket->deleteLater();
-    QList<QByteArray> split = buffer.split('\r');
-    const QByteArray& request_line = split[0];
-    QUrl url(QString::fromAscii(request_line.split(' ')[1]));
-    uid_ = url.queryItemValue("uid");
-    RequestAccessToken();
-  }
+void DropboxAuthenticator::RedirectArrived(LocalRedirectServer* server) {
+  server->deleteLater();
+  QUrl request_url = server->request_url();
+  qLog(Debug) << Q_FUNC_INFO << request_url;
+  uid_ = request_url.queryItemValue("uid");
+  RequestAccessToken();
 }
 
 void DropboxAuthenticator::RequestAccessToken() {
