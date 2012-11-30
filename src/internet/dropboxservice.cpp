@@ -23,10 +23,10 @@ namespace {
 
 static const char* kServiceId = "dropbox";
 
-static const char* kMetadataEndpoint =
-    "https://api.dropbox.com/1/metadata/dropbox/";
 static const char* kMediaEndpoint =
     "https://api.dropbox.com/1/media/dropbox/";
+static const char* kDeltaEndpoint =
+    "https://api.dropbox.com/1/delta";
 
 }  // namespace
 
@@ -50,7 +50,7 @@ bool DropboxService::has_credentials() const {
 
 void DropboxService::Connect() {
   if (has_credentials()) {
-    RequestFileList("");
+    RequestFileList();
   } else {
     ShowSettingsDialog();
   }
@@ -71,7 +71,7 @@ void DropboxService::AuthenticationFinished(DropboxAuthenticator* authenticator)
 
   emit Connected();
 
-  RequestFileList("");
+  RequestFileList();
 }
 
 QByteArray DropboxService::GenerateAuthorisationHeader() {
@@ -80,12 +80,18 @@ QByteArray DropboxService::GenerateAuthorisationHeader() {
       access_token_secret_);
 }
 
-void DropboxService::RequestFileList(const QString& path) {
-  QUrl url(QString(kMetadataEndpoint) + path);
+void DropboxService::RequestFileList() {
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+
+  QUrl url = QUrl(QString(kDeltaEndpoint));
+  if (s.contains("cursor")) {
+    url.addQueryItem("cursor", s.value("cursor").toString());
+  }
   QNetworkRequest request(url);
   request.setRawHeader("Authorization", GenerateAuthorisationHeader());
 
-  QNetworkReply* reply = network_->get(request);
+  QNetworkReply* reply = network_->post(request, QByteArray());
   NewClosure(reply, SIGNAL(finished()),
              this, SLOT(RequestFileListFinished(QNetworkReply*)), reply);
 }
@@ -104,18 +110,32 @@ void DropboxService::RequestFileListFinished(QNetworkReply* reply) {
 
   QJson::Parser parser;
   QVariantMap response = parser.parse(reply).toMap();
-  QVariantList contents = response["contents"].toList();
+  if (response.contains("reset") &&
+      response["reset"].toBool()) {
+    // TODO: Clear dropbox DB.
+  }
+
+  QSettings settings;
+  settings.beginGroup(kSettingsGroup);
+  settings.setValue("cursor", response["cursor"].toString());
+
+  QVariantList contents = response["entries"].toList();
+  qLog(Debug) << "Delta found:" << contents.size();
   foreach (const QVariant& c, contents) {
-    QVariantMap item = c.toMap();
-    const bool directory = item["is_dir"].toBool();
-    if (directory) {
-      RequestFileList(item["path"].toString());
-    } else {
-      QUrl url;
-      url.setScheme("dropbox");
-      url.setPath(item["path"].toString());
-      MaybeAddFileToDatabase(url, item);
+    QVariantList item = c.toList();
+    QString path = item[0].toString();
+    QVariantMap metadata = item[1].toMap();
+    if (metadata["is_dir"].toBool()) {
+      continue;
     }
+    QUrl url;
+    url.setScheme("dropbox");
+    url.setPath(path);
+    MaybeAddFileToDatabase(url, metadata);
+  }
+
+  if (response.contains("has_more") && response["has_more"].toBool()) {
+    RequestFileList();
   }
 }
 
