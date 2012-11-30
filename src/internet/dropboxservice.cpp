@@ -112,7 +112,8 @@ void DropboxService::RequestFileListFinished(QNetworkReply* reply) {
   QVariantMap response = parser.parse(reply).toMap();
   if (response.contains("reset") &&
       response["reset"].toBool()) {
-    // TODO: Clear dropbox DB.
+    qLog(Debug) << "Resetting Dropbox DB";
+    library_backend_->DeleteAll();
   }
 
   QSettings settings;
@@ -124,13 +125,25 @@ void DropboxService::RequestFileListFinished(QNetworkReply* reply) {
   foreach (const QVariant& c, contents) {
     QVariantList item = c.toList();
     QString path = item[0].toString();
+
+    QUrl url;
+    url.setScheme("dropbox");
+    url.setPath(path);
+
+    if (item[1].isNull()) {
+      // Null metadata indicates path deleted.
+      qLog(Debug) << "Deleting:" << url;
+      Song song = library_backend_->GetSongByUrl(url);
+      if (song.is_valid()) {
+        library_backend_->DeleteSongs(SongList() << song);
+      }
+      continue;
+    }
+
     QVariantMap metadata = item[1].toMap();
     if (metadata["is_dir"].toBool()) {
       continue;
     }
-    QUrl url;
-    url.setScheme("dropbox");
-    url.setPath(path);
     MaybeAddFileToDatabase(url, metadata);
   }
 
