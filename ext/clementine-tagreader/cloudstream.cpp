@@ -132,6 +132,12 @@ TagLib::ByteVector CloudStream::readBlock(ulong length) {
   loop.exec();
   reply->deleteLater();
 
+  int code = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
+  if (code >= 400) {
+    qLog(Debug) << "Error retrieving url to tag:" << url_;
+    return TagLib::ByteVector();
+  }
+
   QByteArray data = reply->readAll();
   TagLib::ByteVector bytes(data.data(), data.size());
   cursor_ += data.size();
