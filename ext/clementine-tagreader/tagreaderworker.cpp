@@ -613,7 +613,8 @@ bool TagReaderWorker::ReadCloudFile(const QUrl& download_url,
         stream,  // Takes ownership.
         TagLib::ID3v2::FrameFactory::instance(),
         TagLib::AudioProperties::Accurate));
-  } else if (mime_type == "audio/mpeg" && title.endsWith(".m4a")) {
+  } else if (mime_type == "audio/mp4" ||
+             (mime_type == "audio/mpeg" && title.endsWith(".m4a"))) {
     tag.reset(new TagLib::MP4::File(
         stream,
         true,
@@ -624,7 +625,8 @@ bool TagReaderWorker::ReadCloudFile(const QUrl& download_url,
         stream,
         true,
         TagLib::AudioProperties::Accurate));
-  } else if (mime_type == "application/x-flac") {
+  } else if (mime_type == "application/x-flac" ||
+             mime_type == "audio/flac") {
     tag.reset(new TagLib::FLAC::File(
         stream,
         TagLib::ID3v2::FrameFactory::instance(),

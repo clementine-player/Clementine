@@ -100,7 +100,9 @@ namespace {
 
 bool IsSupportedMimeType(const QString& mime_type) {
   return mime_type == "audio/ogg" ||
-         mime_type == "audio/mpeg";
+         mime_type == "audio/mpeg" ||
+         mime_type == "audio/mp4" ||
+         mime_type == "audio/flac";
 }
 
 }  // namespace
