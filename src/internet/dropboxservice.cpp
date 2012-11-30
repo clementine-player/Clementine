@@ -182,7 +182,7 @@ void DropboxService::FetchContentUrlFinished(
   QVariantMap response = parser.parse(reply).toMap();
   QFileInfo info(data["path"].toString());
   TagReaderClient::ReplyType* tag_reply = app_->tag_reader_client()->ReadCloudFile(
-      response["url"].toUrl(),
+      QUrl::fromEncoded(response["url"].toByteArray()),
       info.fileName(),
       data["bytes"].toInt(),
       data["mime_type"].toString(),
