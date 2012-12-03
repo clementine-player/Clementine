@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-11-19 14:41+0000\n"
+"PO-Revision-Date: 2012-11-30 11:09+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -300,7 +300,7 @@ msgstr "AAC 32k"
 msgid "AAC 64k"
 msgstr "AAC 64k"
 
-#: core/song.cpp:327
+#: core/song.cpp:326
 msgid "AIFF"
 msgstr "AIFF"
 
@@ -860,7 +860,7 @@ msgstr "Гэтыя крыніцы адключаныя:"
 msgid "Buttons"
 msgstr "Клявішы"
 
-#: core/song.cpp:330
+#: core/song.cpp:329
 msgid "CDDA"
 msgstr "CDDA"
 
@@ -985,9 +985,17 @@ msgid ""
 "a format that it can play."
 msgstr "Clementine можа аўтаматычна канвэртаваць музыку, якую капіруеце на гэтую прыладу ў фармат, які яна падтрымлівае."
 
+#: ../bin/src/ui_dropboxsettingspage.h:104
+msgid "Clementine can play music that you have uploaded to Dropbox"
+msgstr ""
+
 #: ../bin/src/ui_googledrivesettingspage.h:104
 msgid "Clementine can play music that you have uploaded to Google Drive"
 msgstr "Clementine можа граць музыку на вашым Google Drive"
+
+#: ../bin/src/ui_ubuntuonesettingspage.h:111
+msgid "Clementine can play music that you have uploaded to Ubuntu One"
+msgstr ""
 
 #: ../bin/src/ui_notificationssettingspage.h:403
 msgid "Clementine can show a message when the track changes."
@@ -1034,6 +1042,7 @@ msgid "Click to toggle between remaining time and total time"
 msgstr "Націсьніце для пераключэньня паміж часам, які застаецца і поўнай працягласьцю"
 
 #: ../bin/src/ui_googledrivesettingspage.h:106
+#: ../bin/src/ui_dropboxsettingspage.h:106
 msgid ""
 "Clicking the Login button will open a web browser.  You should return to "
 "Clementine after you have logged in."
@@ -1132,8 +1141,8 @@ msgid "Configure podcasts..."
 msgstr "Наладзіць подкасты..."
 
 #: internet/digitallyimportedservicebase.cpp:186
-#: internet/googledriveservice.cpp:257
 #: ../bin/src/ui_globalsearchsettingspage.h:150
+#: internet/googledriveservice.cpp:219
 msgid "Configure..."
 msgstr "Наладзіць..."
 
@@ -1217,8 +1226,9 @@ msgstr "Немагчыма загрузіць радыёстанцыю last.fm"
 msgid "Couldn't open output file %1"
 msgstr "Немагчыма адкрыць выходны файл %1"
 
-#: internet/googledriveservice.cpp:253 ../bin/src/ui_albumcovermanager.h:149
+#: internet/cloudfileservice.cpp:85 ../bin/src/ui_albumcovermanager.h:149
 #: ../bin/src/ui_albumcoversearcher.h:105 ../bin/src/ui_mainwindow.h:684
+#: internet/googledriveservice.cpp:215
 msgid "Cover Manager"
 msgstr "Мэнэджэр вокладак"
 
@@ -1653,6 +1663,10 @@ msgstr "Цягнеце для перамяшчэння"
 msgid "Drive letter"
 msgstr "Літара дыска"
 
+#: ../bin/src/ui_dropboxsettingspage.h:103
+msgid "Dropbox"
+msgstr ""
+
 #: ../bin/src/ui_dynamicplaylistcontrols.h:109
 msgid "Dynamic mode is on"
 msgstr "Дынамічны рэжым уключаны"
@@ -2029,7 +2043,7 @@ msgstr "Гатова"
 msgid "First level"
 msgstr "Першы ўзровень"
 
-#: core/song.cpp:320
+#: core/song.cpp:319
 msgid "Flac"
 msgstr "Flac"
 
@@ -2115,7 +2129,7 @@ msgstr "Full Treble"
 msgid "GStreamer audio engine"
 msgstr "Рухавічок аўдыё GStreamer"
 
-#: ui/settingsdialog.cpp:117
+#: ui/settingsdialog.cpp:126
 msgid "General"
 msgstr "Агульныя"
 
@@ -2165,7 +2179,6 @@ msgstr "Перайсьці да наступнага сьпісу прайгра
 msgid "Go to previous playlist tab"
 msgstr "Перайсьці да папярэдняга сьпісу прайграваньня"
 
-#: internet/googledriveservice.cpp:60
 #: ../bin/src/ui_googledrivesettingspage.h:103
 msgid "Google Drive"
 msgstr "Google Drive"
@@ -2348,7 +2361,7 @@ msgstr "Павялічыць гучнасьць на 4%"
 msgid "Increase volume"
 msgstr "Павялічыць гучнасьць"
 
-#: internet/googledriveservice.cpp:178
+#: internet/googledriveservice.cpp:139
 #, qt-format
 msgid "Indexing %1"
 msgstr "Індэксуем %1"
@@ -2373,7 +2386,7 @@ msgstr "Праверка цельнасьці"
 msgid "Internet"
 msgstr "Інтэрнэт"
 
-#: ui/settingsdialog.cpp:138
+#: ui/settingsdialog.cpp:147
 msgid "Internet providers"
 msgstr "Інтрэрнэт правайдэры"
 
@@ -2673,8 +2686,10 @@ msgstr "Загрузіць файлы/URLs, замяняючы бягучы пл
 #: ../bin/src/ui_groovesharksettingspage.h:116
 #: ../bin/src/ui_magnatunesettingspage.h:164
 #: ../bin/src/ui_spotifysettingspage.h:212
-#: ../bin/src/ui_googledrivesettingspage.h:105
 #: ../bin/src/ui_lastfmsettingspage.h:153
+#: ../bin/src/ui_googledrivesettingspage.h:105
+#: ../bin/src/ui_ubuntuonesettingspage.h:112
+#: ../bin/src/ui_dropboxsettingspage.h:105
 msgid "Login"
 msgstr "Уваход"
 
@@ -2713,7 +2728,7 @@ msgstr "Тэксты песень"
 msgid "Lyrics from %1"
 msgstr "Тэкст песьні з %1"
 
-#: core/song.cpp:323 ../bin/src/ui_transcodersettingspage.h:159
+#: core/song.cpp:322 ../bin/src/ui_transcodersettingspage.h:159
 msgid "MP3"
 msgstr "MP3"
 
@@ -2725,11 +2740,11 @@ msgstr "MP3 256k"
 msgid "MP3 96k"
 msgstr "MP3 96k"
 
-#: core/song.cpp:321
+#: core/song.cpp:320
 msgid "MP4 AAC"
 msgstr "MP4 AAC"
 
-#: core/song.cpp:322
+#: core/song.cpp:321
 msgid "MPC"
 msgstr "MPC"
 
@@ -3091,15 +3106,15 @@ msgstr "Зараз грае"
 msgid "OSD Preview"
 msgstr "Перадагляд OSD"
 
-#: core/song.cpp:324
+#: core/song.cpp:323
 msgid "Ogg Flac"
 msgstr "Ogg Flac"
 
-#: core/song.cpp:325
+#: core/song.cpp:324
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
 
-#: core/song.cpp:326 ../bin/src/ui_magnatunedownloaddialog.h:139
+#: core/song.cpp:325 ../bin/src/ui_magnatunedownloaddialog.h:139
 #: ../bin/src/ui_magnatunesettingspage.h:170
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
@@ -3136,7 +3151,7 @@ msgstr "Адкрыць прыладу"
 msgid "Open file..."
 msgstr "Адкрыць файл..."
 
-#: internet/googledriveservice.cpp:248
+#: internet/googledriveservice.cpp:210
 msgid "Open in Google Drive"
 msgstr "Адчыніць у Google Drive"
 
@@ -4213,7 +4228,7 @@ msgstr "Спыніць прайграваньне пасьля бягучага 
 msgid "Stopped"
 msgstr "Спынена"
 
-#: core/song.cpp:332
+#: core/song.cpp:331
 msgid "Stream"
 msgstr "Струмень"
 
@@ -4538,7 +4553,7 @@ msgstr "Перакадавана %1 файлаў, выкарыстоўваючы
 msgid "Transcoding options"
 msgstr "Парамэтры перакадоўкі"
 
-#: core/song.cpp:329
+#: core/song.cpp:328
 msgid "TrueAudio"
 msgstr "TrueAudio"
 
@@ -4558,6 +4573,10 @@ msgstr "URI"
 msgid "URL(s)"
 msgstr "URI(s)"
 
+#: ../bin/src/ui_ubuntuonesettingspage.h:110
+msgid "Ubuntu One"
+msgstr ""
+
 #: ../bin/src/ui_transcoderoptionsspeex.h:228
 msgid "Ultra wide band (UWB)"
 msgstr "Ультрашырокая паласа прапусканьня (UWB)"
@@ -4567,7 +4586,7 @@ msgstr "Ультрашырокая паласа прапусканьня (UWB)"
 msgid "Unable to download %1 (%2)"
 msgstr "Немагчыма спампаваць %1 (%2)"
 
-#: core/song.cpp:336 library/librarymodel.cpp:301 library/librarymodel.cpp:306
+#: core/song.cpp:335 library/librarymodel.cpp:301 library/librarymodel.cpp:306
 #: library/librarymodel.cpp:947 playlist/playlistdelegates.cpp:309
 #: playlist/playlistmanager.cpp:394 playlist/playlistmanager.cpp:397
 #: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:416
@@ -4706,7 +4725,7 @@ msgstr "Скарыстана"
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr "Карыстальнік %1 ня мае акаўнту Grooveshark Anywhere"
 
-#: ui/settingsdialog.cpp:130
+#: ui/settingsdialog.cpp:139
 msgid "User interface"
 msgstr "Інтэрфэйс"
 
@@ -4783,7 +4802,7 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
-#: core/song.cpp:328
+#: core/song.cpp:327
 msgid "Wav"
 msgstr "Wav"
 
@@ -4867,7 +4886,7 @@ msgstr "Windows Media 40k"
 msgid "Windows Media 64k"
 msgstr "Windows Media 64k"
 
-#: core/song.cpp:319
+#: core/song.cpp:318
 msgid "Windows Media audio"
 msgstr "Windows Media audio"
 

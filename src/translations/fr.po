@@ -15,12 +15,13 @@
 #   <mmarcottulio@gmail.com>, 2012.
 # Poutre Maicosuel <>, 2012.
 #   <webdingue@gmail.com>, 2012.
+#   <werdeil@hotmail.com>, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-11-19 14:41+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2012-12-02 18:03+0000\n"
+"Last-Translator: werdeil <werdeil@hotmail.com>\n"
 "Language-Team: French (http://www.transifex.com/projects/p/clementine/language/fr/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -309,7 +310,7 @@ msgstr "AAC 32k"
 msgid "AAC 64k"
 msgstr "AAC 64k"
 
-#: core/song.cpp:327
+#: core/song.cpp:326
 msgid "AIFF"
 msgstr "AIFF"
 
@@ -869,7 +870,7 @@ msgstr "Mais ces sources sont désactivées :"
 msgid "Buttons"
 msgstr "Boutons"
 
-#: core/song.cpp:330
+#: core/song.cpp:329
 msgid "CDDA"
 msgstr "CDDA"
 
@@ -994,9 +995,17 @@ msgid ""
 "a format that it can play."
 msgstr "Clementine peut automatiquement convertir la musique que vous copiez sur ce périphérique dans un format qu'il peut lire."
 
+#: ../bin/src/ui_dropboxsettingspage.h:104
+msgid "Clementine can play music that you have uploaded to Dropbox"
+msgstr "Clementine peut jouer les morceaux que vous avez envoyé sur Dropbox"
+
 #: ../bin/src/ui_googledrivesettingspage.h:104
 msgid "Clementine can play music that you have uploaded to Google Drive"
 msgstr "Clementine peut jouer les morceaux que vous avez envoyé sur Google Drive"
+
+#: ../bin/src/ui_ubuntuonesettingspage.h:111
+msgid "Clementine can play music that you have uploaded to Ubuntu One"
+msgstr "Clementine peut jouer les morceaux que vous avez envoyé sur Ubuntu One"
 
 #: ../bin/src/ui_notificationssettingspage.h:403
 msgid "Clementine can show a message when the track changes."
@@ -1043,6 +1052,7 @@ msgid "Click to toggle between remaining time and total time"
 msgstr "Cliquez pour basculer entre le temps restant et le temps total"
 
 #: ../bin/src/ui_googledrivesettingspage.h:106
+#: ../bin/src/ui_dropboxsettingspage.h:106
 msgid ""
 "Clicking the Login button will open a web browser.  You should return to "
 "Clementine after you have logged in."
@@ -1141,8 +1151,8 @@ msgid "Configure podcasts..."
 msgstr "Configurer les podcasts..."
 
 #: internet/digitallyimportedservicebase.cpp:186
-#: internet/googledriveservice.cpp:257
 #: ../bin/src/ui_globalsearchsettingspage.h:150
+#: internet/googledriveservice.cpp:219
 msgid "Configure..."
 msgstr "Configurer..."
 
@@ -1226,8 +1236,9 @@ msgstr "Impossible de charger la station radio last.fm"
 msgid "Couldn't open output file %1"
 msgstr "Impossible d'ouvrir le fichier de sortie %1"
 
-#: internet/googledriveservice.cpp:253 ../bin/src/ui_albumcovermanager.h:149
+#: internet/cloudfileservice.cpp:85 ../bin/src/ui_albumcovermanager.h:149
 #: ../bin/src/ui_albumcoversearcher.h:105 ../bin/src/ui_mainwindow.h:684
+#: internet/googledriveservice.cpp:215
 msgid "Cover Manager"
 msgstr "Gestionnaire de pochettes"
 
@@ -1531,7 +1542,7 @@ msgstr "Désactiver la durée"
 
 #: ../bin/src/ui_appearancesettingspage.h:289
 msgid "Disable moodbar generation"
-msgstr ""
+msgstr "Désactiver la génération des barres d'humeur"
 
 #: globalsearch/searchproviderstatuswidget.cpp:47
 #: ../bin/src/ui_notificationssettingspage.h:405
@@ -1661,6 +1672,10 @@ msgstr "Déplacer pour repositionner"
 #: devices/wmdmlister.cpp:357
 msgid "Drive letter"
 msgstr "Lettre du lecteur"
+
+#: ../bin/src/ui_dropboxsettingspage.h:103
+msgid "Dropbox"
+msgstr "Dropbox"
 
 #: ../bin/src/ui_dynamicplaylistcontrols.h:109
 msgid "Dynamic mode is on"
@@ -2038,7 +2053,7 @@ msgstr "Terminé"
 msgid "First level"
 msgstr "Premier niveau"
 
-#: core/song.cpp:320
+#: core/song.cpp:319
 msgid "Flac"
 msgstr "Flac"
 
@@ -2124,7 +2139,7 @@ msgstr "Aigus Max."
 msgid "GStreamer audio engine"
 msgstr "Moteur audio GStreamer"
 
-#: ui/settingsdialog.cpp:117
+#: ui/settingsdialog.cpp:126
 msgid "General"
 msgstr "Général"
 
@@ -2174,7 +2189,6 @@ msgstr "Aller à la liste de lecture suivante"
 msgid "Go to previous playlist tab"
 msgstr "Aller à la liste de lecture précédente"
 
-#: internet/googledriveservice.cpp:60
 #: ../bin/src/ui_googledrivesettingspage.h:103
 msgid "Google Drive"
 msgstr "Google Drive"
@@ -2343,7 +2357,7 @@ msgstr "Boîte de réception"
 
 #: ../bin/src/ui_notificationssettingspage.h:415
 msgid "Include album art in the notification"
-msgstr "Inclure la pochette de l'abum dans la fenêtre de notification"
+msgstr "Inclure la pochette de l'album dans la fenêtre de notification"
 
 #: ../bin/src/ui_querysearchpage.h:118
 msgid "Include all songs"
@@ -2357,7 +2371,7 @@ msgstr "Augmenter le volume de 4%"
 msgid "Increase volume"
 msgstr "Augmenter le volume"
 
-#: internet/googledriveservice.cpp:178
+#: internet/googledriveservice.cpp:139
 #, qt-format
 msgid "Indexing %1"
 msgstr "Indexation de %1"
@@ -2382,7 +2396,7 @@ msgstr "Vérification de l'intégrité"
 msgid "Internet"
 msgstr "Internet"
 
-#: ui/settingsdialog.cpp:138
+#: ui/settingsdialog.cpp:147
 msgid "Internet providers"
 msgstr "Services de musique"
 
@@ -2682,8 +2696,10 @@ msgstr "Charger des fichiers/URLs, et remplacer la liste de lecture actuelle"
 #: ../bin/src/ui_groovesharksettingspage.h:116
 #: ../bin/src/ui_magnatunesettingspage.h:164
 #: ../bin/src/ui_spotifysettingspage.h:212
-#: ../bin/src/ui_googledrivesettingspage.h:105
 #: ../bin/src/ui_lastfmsettingspage.h:153
+#: ../bin/src/ui_googledrivesettingspage.h:105
+#: ../bin/src/ui_ubuntuonesettingspage.h:112
+#: ../bin/src/ui_dropboxsettingspage.h:105
 msgid "Login"
 msgstr "Se connecter"
 
@@ -2722,7 +2738,7 @@ msgstr "Paroles"
 msgid "Lyrics from %1"
 msgstr "Paroles récupérées depuis %1"
 
-#: core/song.cpp:323 ../bin/src/ui_transcodersettingspage.h:159
+#: core/song.cpp:322 ../bin/src/ui_transcodersettingspage.h:159
 msgid "MP3"
 msgstr "MP3"
 
@@ -2734,11 +2750,11 @@ msgstr "MP3 256k"
 msgid "MP3 96k"
 msgstr "MP3 96k"
 
-#: core/song.cpp:321
+#: core/song.cpp:320
 msgid "MP4 AAC"
 msgstr "MP4 AAC"
 
-#: core/song.cpp:322
+#: core/song.cpp:321
 msgid "MPC"
 msgstr "MPC"
 
@@ -3100,15 +3116,15 @@ msgstr "Lecture en cours"
 msgid "OSD Preview"
 msgstr "Prévisualisation de l'affichage à l'écran (OSD)"
 
-#: core/song.cpp:324
+#: core/song.cpp:323
 msgid "Ogg Flac"
 msgstr "Ogg Flac"
 
-#: core/song.cpp:325
+#: core/song.cpp:324
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
 
-#: core/song.cpp:326 ../bin/src/ui_magnatunedownloaddialog.h:139
+#: core/song.cpp:325 ../bin/src/ui_magnatunedownloaddialog.h:139
 #: ../bin/src/ui_magnatunesettingspage.h:170
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
@@ -3145,7 +3161,7 @@ msgstr "Ouvrir le périphérique"
 msgid "Open file..."
 msgstr "Ouvrir un fichier..."
 
-#: internet/googledriveservice.cpp:248
+#: internet/googledriveservice.cpp:210
 msgid "Open in Google Drive"
 msgstr "Ouvrir dans Google Drive"
 
@@ -4222,7 +4238,7 @@ msgstr "Arrêter la lecture après ce morceau"
 msgid "Stopped"
 msgstr "Interrompu"
 
-#: core/song.cpp:332
+#: core/song.cpp:331
 msgid "Stream"
 msgstr "Flux"
 
@@ -4547,7 +4563,7 @@ msgstr "Transcodage de %1 fichiers en utilisant %2 threads"
 msgid "Transcoding options"
 msgstr "Option de transcodage"
 
-#: core/song.cpp:329
+#: core/song.cpp:328
 msgid "TrueAudio"
 msgstr "TrueAudio"
 
@@ -4567,6 +4583,10 @@ msgstr "URI"
 msgid "URL(s)"
 msgstr "URL(s)"
 
+#: ../bin/src/ui_ubuntuonesettingspage.h:110
+msgid "Ubuntu One"
+msgstr "Ubuntu One"
+
 #: ../bin/src/ui_transcoderoptionsspeex.h:228
 msgid "Ultra wide band (UWB)"
 msgstr "Très large bande (UWB)"
@@ -4576,7 +4596,7 @@ msgstr "Très large bande (UWB)"
 msgid "Unable to download %1 (%2)"
 msgstr "Impossible de télécharger %1 (%2)"
 
-#: core/song.cpp:336 library/librarymodel.cpp:301 library/librarymodel.cpp:306
+#: core/song.cpp:335 library/librarymodel.cpp:301 library/librarymodel.cpp:306
 #: library/librarymodel.cpp:947 playlist/playlistdelegates.cpp:309
 #: playlist/playlistmanager.cpp:394 playlist/playlistmanager.cpp:397
 #: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:416
@@ -4715,7 +4735,7 @@ msgstr "Utilisé"
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr "L'utilisateur %1 n'a pas de compte Grooveshark Anywhere"
 
-#: ui/settingsdialog.cpp:130
+#: ui/settingsdialog.cpp:139
 msgid "User interface"
 msgstr "Interface utilisateur"
 
@@ -4792,7 +4812,7 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
-#: core/song.cpp:328
+#: core/song.cpp:327
 msgid "Wav"
 msgstr "Wav"
 
@@ -4876,7 +4896,7 @@ msgstr "Windows Media 40k"
 msgid "Windows Media 64k"
 msgstr "Windows Media 64k"
 
-#: core/song.cpp:319
+#: core/song.cpp:318
 msgid "Windows Media audio"
 msgstr "audio Windows Media"
 
