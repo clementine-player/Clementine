@@ -35,7 +35,7 @@ DropboxService::DropboxService(Application* app, InternetModel* parent)
         app, parent,
         kServiceName, kServiceId,
         QIcon(":/providers/dropbox.png"),
-        SettingsDialog::Page_Dropbox),
+        SettingsDialog::Page::Dropbox),
       network_(new NetworkAccessManager(this)) {
   QSettings settings;
   settings.beginGroup(kSettingsGroup);

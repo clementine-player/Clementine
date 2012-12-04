@@ -222,7 +222,7 @@ void AddPodcastDialog::RemovePodcast() {
 }
 
 void AddPodcastDialog::OpenSettingsPage() {
-  app_->OpenSettingsDialogAtPage(SettingsDialog::Page_Podcasts);
+  app_->OpenSettingsDialogAtPage(SettingsDialog::Page::Podcasts);
 }
 
 void AddPodcastDialog::OpenOPMLFile() {

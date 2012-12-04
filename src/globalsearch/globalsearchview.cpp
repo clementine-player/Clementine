@@ -500,7 +500,7 @@ void GlobalSearchView::FocusOnFilter(QKeyEvent* event) {
 }
 
 void GlobalSearchView::OpenSettingsDialog() {
-  app_->OpenSettingsDialogAtPage(SettingsDialog::Page_GlobalSearch);
+  app_->OpenSettingsDialogAtPage(SettingsDialog::Page::GlobalSearch);
 }
 
 void GlobalSearchView::GroupByClicked(QAction* action) {

@@ -713,7 +713,7 @@ void SpotifyService::SyncPlaylistProgress(
 }
 
 void SpotifyService::ShowConfig() {
-  app_->OpenSettingsDialogAtPage(SettingsDialog::Page_Spotify);
+  app_->OpenSettingsDialogAtPage(SettingsDialog::Page::Spotify);
 }
 
 void SpotifyService::Logout() {

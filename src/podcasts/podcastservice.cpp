@@ -499,7 +499,7 @@ void PodcastService::DownloadProgressChanged(const PodcastEpisode& episode,
 }
 
 void PodcastService::ShowConfig() {
-  app_->OpenSettingsDialogAtPage(SettingsDialog::Page_Podcasts);
+  app_->OpenSettingsDialogAtPage(SettingsDialog::Page::Podcasts);
 }
 
 void PodcastService::CurrentSongChanged(const Song& metadata) {
