@@ -644,7 +644,7 @@ bool TagReaderWorker::ReadCloudFile(const QUrl& download_url,
                   << stream->cached_bytes();
   }
 
-  if (tag->tag()) {
+  if (tag->tag() && !tag->tag()->isEmpty()) {
     song->set_title(tag->tag()->title().toCString(true));
     song->set_artist(tag->tag()->artist().toCString(true));
     song->set_album(tag->tag()->album().toCString(true));

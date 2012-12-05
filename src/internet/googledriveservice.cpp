@@ -74,14 +74,22 @@ void GoogleDriveService::ForgetCredentials() {
   s.remove("user_email");
 }
 
-void GoogleDriveService::ListFilesForMimeType(const QString& mime_type) {
-  google_drive::ListFilesResponse* list_response = client_->ListFiles(
-      QString("mimeType = '%1' and trashed = false").arg(mime_type));
-  connect(list_response, SIGNAL(FilesFound(QList<google_drive::File>)),
-          this, SLOT(FilesFound(QList<google_drive::File>)));
-  NewClosure(list_response, SIGNAL(Finished()),
-             this, SLOT(ListFilesFinished(google_drive::ListFilesResponse*)),
-             list_response);
+void GoogleDriveService::ListChanges(const QString& cursor) {
+  google_drive::ListChangesResponse* changes_response = client_->ListChanges(cursor);
+  connect(changes_response, SIGNAL(FilesFound(QList<google_drive::File>)),
+          SLOT(FilesFound(QList<google_drive::File>)));
+  connect(changes_response, SIGNAL(FilesDeleted(QList<QUrl>)),
+          SLOT(FilesDeleted(QList<QUrl>)));
+  NewClosure(changes_response, SIGNAL(Finished()),
+             this, SLOT(ListChangesFinished(google_drive::ListChangesResponse*)),
+             changes_response);
+}
+
+void GoogleDriveService::ListChangesFinished(google_drive::ListChangesResponse* changes_response) {
+  changes_response->deleteLater();
+  QSettings s;
+  s.beginGroup(kSettingsGroup);
+  s.setValue("cursor", changes_response->next_cursor());
 }
 
 void GoogleDriveService::ConnectFinished(google_drive::ConnectResponse* response) {
@@ -99,10 +107,8 @@ void GoogleDriveService::ConnectFinished(google_drive::ConnectResponse* response
 
   emit Connected();
 
-  // Find any music files
-  ListFilesForMimeType("audio/mpeg");          // MP3/AAC
-  ListFilesForMimeType("application/ogg");     // OGG
-  ListFilesForMimeType("application/x-flac");  // FLAC
+  // Find all the changes since the last check.
+  ListChanges(s.value("cursor").toString());
 }
 
 void GoogleDriveService::EnsureConnected() {
@@ -122,9 +128,25 @@ void GoogleDriveService::FilesFound(const QList<google_drive::File>& files) {
   }
 }
 
-void GoogleDriveService::ListFilesFinished(google_drive::ListFilesResponse* response) {
-  response->deleteLater();
+void GoogleDriveService::FilesDeleted(const QList<QUrl>& files) {
+  foreach (const QUrl& url, files) {
+    Song song = library_backend_->GetSongByUrl(url);
+    qLog(Debug) << "Deleting:" << url << song.title();
+    if (song.is_valid()) {
+      library_backend_->DeleteSongs(SongList() << song);
+    }
+  }
 }
+
+namespace {
+
+bool IsSupportedMimeType(const QString& mime_type) {
+  return mime_type == "audio/mpeg" ||
+         mime_type == "application/ogg" ||
+         mime_type == "application/x-flac";
+}
+
+}  // namespace
 
 void GoogleDriveService::MaybeAddFileToDatabase(const google_drive::File& file) {
   QString url = QString("googledrive:%1").arg(file.id());
@@ -132,6 +154,11 @@ void GoogleDriveService::MaybeAddFileToDatabase(const google_drive::File& file) 
   // Song already in index.
   // TODO: Check etag and maybe update.
   if (song.is_valid()) {
+    qLog(Debug) << "Already have:" << url;
+    return;
+  }
+
+  if (!IsSupportedMimeType(file.mime_type())) {
     return;
   }
 

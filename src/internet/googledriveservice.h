@@ -10,6 +10,7 @@ namespace google_drive {
   class ConnectResponse;
   class File;
   class ListFilesResponse;
+  class ListChangesResponse;
 }
 
 class GoogleDriveService : public CloudFileService {
@@ -38,7 +39,8 @@ class GoogleDriveService : public CloudFileService {
  private slots:
   void ConnectFinished(google_drive::ConnectResponse* response);
   void FilesFound(const QList<google_drive::File>& files);
-  void ListFilesFinished(google_drive::ListFilesResponse* response);
+  void FilesDeleted(const QList<QUrl>& files);
+  void ListChangesFinished(google_drive::ListChangesResponse* response);
   void ReadTagsFinished(TagReaderClient::ReplyType* reply,
                         const google_drive::File& metadata,
                         const QString& url,
@@ -50,7 +52,7 @@ class GoogleDriveService : public CloudFileService {
   void EnsureConnected();
   void RefreshAuthorisation(const QString& refresh_token);
   void MaybeAddFileToDatabase(const google_drive::File& file);
-  void ListFilesForMimeType(const QString& mime_type);
+  void ListChanges(const QString& cursor);
 
   google_drive::Client* client_;
 

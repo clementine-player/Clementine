@@ -29,8 +29,8 @@ using namespace google_drive;
 const char* File::kFolderMimeType = "application/vnd.google-apps.folder";
 
 namespace {
-  static const char* kGoogleDriveFiles = "https://www.googleapis.com/drive/v2/files";
   static const char* kGoogleDriveFile = "https://www.googleapis.com/drive/v2/files/%1";
+  static const char* kGoogleDriveChanges = "https://www.googleapis.com/drive/v2/changes";
 }
 
 QStringList File::parent_ids() const {
@@ -54,15 +54,15 @@ ConnectResponse::ConnectResponse(QObject* parent)
 {
 }
 
-ListFilesResponse::ListFilesResponse(const QString& query, QObject* parent)
-  : QObject(parent),
-    query_(query)
-{
-}
-
 GetFileResponse::GetFileResponse(const QString& file_id, QObject* parent)
   : QObject(parent),
     file_id_(file_id)
+{
+}
+
+ListChangesResponse::ListChangesResponse(const QString& cursor, QObject* parent)
+  : QObject(parent),
+    cursor_(cursor)
 {
 }
 
@@ -104,61 +104,6 @@ void Client::AddAuthorizationHeader(QNetworkRequest* request) const {
       "Authorization", QString("Bearer %1").arg(access_token_).toUtf8());
 }
 
-ListFilesResponse* Client::ListFiles(const QString& query) {
-  ListFilesResponse* ret = new ListFilesResponse(query, this);
-  MakeListFilesRequest(ret);
-  return ret;
-}
-
-void Client::MakeListFilesRequest(ListFilesResponse* response, const QString& page_token) {
-  QUrl url = QUrl(kGoogleDriveFiles);
-
-  if (!response->query_.isEmpty()) {
-    url.addQueryItem("q", response->query_);
-  }
-
-  if (!page_token.isEmpty()) {
-    url.addQueryItem("pageToken", page_token);
-  }
-
-  QNetworkRequest request = QNetworkRequest(url);
-  AddAuthorizationHeader(&request);
-
-  QNetworkReply* reply = network_->get(request);
-  NewClosure(reply, SIGNAL(finished()),
-             this, SLOT(ListFilesFinished(ListFilesResponse*, QNetworkReply*)),
-             response, reply);
-}
-
-void Client::ListFilesFinished(ListFilesResponse* response, QNetworkReply* reply) {
-  reply->deleteLater();
-
-  // Parse the response
-  QJson::Parser parser;
-  bool ok = false;
-  QVariantMap result = parser.parse(reply, &ok).toMap();
-  if (!ok) {
-    qLog(Error) << "Failed to request files from Google Drive";
-    emit response->Finished();
-    return;
-  }
-
-  // Emit the FilesFound signal for the files in the response.
-  FileList files;
-  foreach (const QVariant& v, result["items"].toList()) {
-    files << File(v.toMap());
-  }
-
-  emit response->FilesFound(files);
-
-  // Get the next page of results if there is one.
-  if (result.contains("nextPageToken")) {
-    MakeListFilesRequest(response, result["nextPageToken"].toString());
-  } else {
-    emit response->Finished();
-  }
-}
-
 GetFileResponse* Client::GetFile(const QString& file_id) {
   GetFileResponse* ret = new GetFileResponse(file_id, this);
 
@@ -192,6 +137,75 @@ void Client::GetFileFinished(GetFileResponse* response, QNetworkReply* reply) {
 
   response->file_ = File(result);
   emit response->Finished();
+}
+
+ListChangesResponse* Client::ListChanges(const QString& cursor) {
+  ListChangesResponse* ret = new ListChangesResponse(cursor, this);
+  MakeListChangesRequest(ret);
+  return ret;
+}
+
+void Client::MakeListChangesRequest(ListChangesResponse* response, const QString& page_token) {
+  QUrl url(kGoogleDriveChanges);
+  if (!response->cursor().isEmpty()) {
+    url.addQueryItem("startChangeId", response->cursor());
+  }
+  if (!page_token.isEmpty()) {
+    url.addQueryItem("pageToken", page_token);
+  }
+
+  qLog(Debug) << "Requesting changes at:" << response->cursor() << page_token;
+
+  QNetworkRequest request(url);
+  AddAuthorizationHeader(&request);
+
+  QNetworkReply* reply = network_->get(request);
+  NewClosure(reply, SIGNAL(finished()),
+             this, SLOT(ListChangesFinished(ListChangesResponse*,QNetworkReply*)),
+             response, reply);
+}
+
+void Client::ListChangesFinished(ListChangesResponse* response, QNetworkReply* reply) {
+  reply->deleteLater();
+
+  QJson::Parser parser;
+  bool ok = false;
+  // TODO: Put this on a separate thread as the response could be large.
+  QVariantMap result = parser.parse(reply, &ok).toMap();
+  if (!ok) {
+    qLog(Error) << "Failed to fetch changes" << response->cursor();
+    emit response->Finished();
+    return;
+  }
+
+  if (result.contains("largestChangeId")) {
+    response->next_cursor_ = result["largestChangeId"].toString();
+  }
+
+  // Emit the FilesFound signal for the files in the response.
+  FileList files;
+  QList<QUrl> files_deleted;
+  foreach (const QVariant& v, result["items"].toList()) {
+    QVariantMap change = v.toMap();
+    if (!change["deleted"].toBool()) {
+      files << File(change["file"].toMap());
+    } else {
+      QUrl url;
+      url.setScheme("googledrive");
+      url.setPath(change["fileId"].toString());
+      files_deleted << url;
+    }
+  }
+
+  emit response->FilesFound(files);
+  emit response->FilesDeleted(files_deleted);
+
+  // Get the next page of results if there is one.
+  if (result.contains("nextPageToken")) {
+    MakeListChangesRequest(response, result["nextPageToken"].toString());
+  } else {
+    emit response->Finished();
+  }
 }
 
 bool Client::is_authenticated() const {

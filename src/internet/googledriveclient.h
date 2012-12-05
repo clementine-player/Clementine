@@ -1,16 +1,16 @@
 /* This file is part of Clementine.
    Copyright 2012, David Sansome <me@davidsansome.com>
-   
+
    Clementine is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
    the Free Software Foundation, either version 3 of the License, or
    (at your option) any later version.
-   
+
    Clementine is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
    GNU General Public License for more details.
-   
+
    You should have received a copy of the GNU General Public License
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
@@ -97,23 +97,6 @@ private:
 };
 
 
-class ListFilesResponse : public QObject {
-  Q_OBJECT
-  friend class Client;
-
-public:
-  const QString& query() const { return query_; }
-
-signals:
-  void FilesFound(const QList<google_drive::File>& files);
-  void Finished();
-
-private:
-  ListFilesResponse(const QString& query, QObject* parent);
-  QString query_;
-};
-
-
 class GetFileResponse : public QObject {
   Q_OBJECT
   friend class Client;
@@ -132,6 +115,25 @@ private:
 };
 
 
+class ListChangesResponse : public QObject {
+  Q_OBJECT
+  friend class Client;
+ public:
+  const QString& cursor() const { return cursor_; }
+  const QString& next_cursor() const { return next_cursor_; }
+
+ signals:
+  void FilesFound(const QList<google_drive::File>& files);
+  void FilesDeleted(const QList<QUrl>& files);
+  void Finished();
+
+ private:
+  ListChangesResponse(const QString& cursor, QObject* parent);
+  QString cursor_;
+  QString next_cursor_;
+};
+
+
 class Client : public QObject {
   Q_OBJECT
 
@@ -144,21 +146,22 @@ public:
   void ForgetCredentials();
 
   ConnectResponse* Connect(const QString& refresh_token = QString());
-  ListFilesResponse* ListFiles(const QString& query);
   GetFileResponse* GetFile(const QString& file_id);
+  ListChangesResponse* ListChanges(const QString& cursor);
+
 
 signals:
   void Authenticated();
 
 private slots:
   void ConnectFinished(ConnectResponse* response, OAuthenticator* oauth);
-  void ListFilesFinished(ListFilesResponse* response, QNetworkReply* reply);
   void GetFileFinished(GetFileResponse* response, QNetworkReply* reply);
+  void ListChangesFinished(ListChangesResponse* response, QNetworkReply* reply);
 
 private:
   void AddAuthorizationHeader(QNetworkRequest* request) const;
-  void MakeListFilesRequest(ListFilesResponse* response,
-                            const QString& page_token = QString());
+  void MakeListChangesRequest(ListChangesResponse* response,
+                              const QString& page_token = QString());
 
 private:
   QNetworkAccessManager* network_;
