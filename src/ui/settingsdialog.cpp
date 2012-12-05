@@ -125,58 +125,58 @@ SettingsDialog::SettingsDialog(Application* app, BackgroundStreams* streams, QWi
 
   QTreeWidgetItem* general = AddCategory(tr("General"));
 
-  AddPage(Page::Playback, new PlaybackSettingsPage(this), general);
-  AddPage(Page::Behaviour, new BehaviourSettingsPage(this), general);
-  AddPage(Page::Library, new LibrarySettingsPage(this), general);
-  AddPage(Page::Proxy, new NetworkProxySettingsPage(this), general);
-  AddPage(Page::Transcoding, new TranscoderSettingsPage(this), general);
+  AddPage(Page_Playback, new PlaybackSettingsPage(this), general);
+  AddPage(Page_Behaviour, new BehaviourSettingsPage(this), general);
+  AddPage(Page_Library, new LibrarySettingsPage(this), general);
+  AddPage(Page_Proxy, new NetworkProxySettingsPage(this), general);
+  AddPage(Page_Transcoding, new TranscoderSettingsPage(this), general);
 
 #ifdef HAVE_WIIMOTEDEV
-  AddPage(Page::Wiimotedev, new WiimoteSettingsPage(this), general);
+  AddPage(Page_Wiimotedev, new WiimoteSettingsPage(this), general);
 #endif
 
   // User interface
   QTreeWidgetItem* iface = AddCategory(tr("User interface"));
-  AddPage(Page::GlobalShortcuts, new GlobalShortcutsSettingsPage(this), iface);
-  AddPage(Page::GlobalSearch, new GlobalSearchSettingsPage(this), iface);
-  AddPage(Page::Appearance, new AppearanceSettingsPage(this), iface);
-  AddPage(Page::SongInformation, new SongInfoSettingsPage(this), iface);
-  AddPage(Page::Notifications, new NotificationsSettingsPage(this), iface);
+  AddPage(Page_GlobalShortcuts, new GlobalShortcutsSettingsPage(this), iface);
+  AddPage(Page_GlobalSearch, new GlobalSearchSettingsPage(this), iface);
+  AddPage(Page_Appearance, new AppearanceSettingsPage(this), iface);
+  AddPage(Page_SongInformation, new SongInfoSettingsPage(this), iface);
+  AddPage(Page_Notifications, new NotificationsSettingsPage(this), iface);
 
   // Internet providers
   QTreeWidgetItem* providers = AddCategory(tr("Internet providers"));
 
 #ifdef HAVE_LIBLASTFM
-  AddPage(Page::Lastfm, new LastFMSettingsPage(this), providers);
+  AddPage(Page_Lastfm, new LastFMSettingsPage(this), providers);
 #endif
 
-  AddPage(Page::Grooveshark, new GroovesharkSettingsPage(this), providers);
+  AddPage(Page_Grooveshark, new GroovesharkSettingsPage(this), providers);
 
 #ifdef HAVE_GOOGLE_DRIVE
-  AddPage(Page::GoogleDrive, new GoogleDriveSettingsPage(this), providers);
+  AddPage(Page_GoogleDrive, new GoogleDriveSettingsPage(this), providers);
 #endif
 
 #ifdef HAVE_UBUNTU_ONE
-  AddPage(Page::UbuntuOne, new UbuntuOneSettingsPage(this), providers);
+  AddPage(Page_UbuntuOne, new UbuntuOneSettingsPage(this), providers);
 #endif
 
 #ifdef HAVE_DROPBOX
-  AddPage(Page::Dropbox, new DropboxSettingsPage(this), providers);
+  AddPage(Page_Dropbox, new DropboxSettingsPage(this), providers);
 #endif
 
 #ifdef HAVE_SPOTIFY
-  AddPage(Page::Spotify, new SpotifySettingsPage(this), providers);
+  AddPage(Page_Spotify, new SpotifySettingsPage(this), providers);
 #endif
 
-  AddPage(Page::Magnatune, new MagnatuneSettingsPage(this), providers);
-  AddPage(Page::DigitallyImported, new DigitallyImportedSettingsPage(this), providers);
-  AddPage(Page::BackgroundStreams, new BackgroundStreamsSettingsPage(this), providers);
-  AddPage(Page::Podcasts, new PodcastSettingsPage(this), providers);
+  AddPage(Page_Magnatune, new MagnatuneSettingsPage(this), providers);
+  AddPage(Page_DigitallyImported, new DigitallyImportedSettingsPage(this), providers);
+  AddPage(Page_BackgroundStreams, new BackgroundStreamsSettingsPage(this), providers);
+  AddPage(Page_Podcasts, new PodcastSettingsPage(this), providers);
 
   // List box
   connect(ui_->list, SIGNAL(currentItemChanged(QTreeWidgetItem*,QTreeWidgetItem*)),
           SLOT(CurrentItemChanged(QTreeWidgetItem*)));
-  ui_->list->setCurrentItem(pages_[Page::Playback].item_);
+  ui_->list->setCurrentItem(pages_[Page_Playback].item_);
 
   // Make sure the list is big enough to show all the items
   ui_->list->setMinimumWidth(static_cast<QAbstractItemView*>(ui_->list)->sizeHintForColumn(0));

@@ -162,7 +162,7 @@ void GroovesharkService::LazyPopulate(QStandardItem* item) {
 }
 
 void GroovesharkService::ShowConfig() {
-  app_->OpenSettingsDialogAtPage(SettingsDialog::Page::Grooveshark);
+  app_->OpenSettingsDialogAtPage(SettingsDialog::Page_Grooveshark);
 }
 
 QWidget* GroovesharkService::HeaderWidget() const {

@@ -1731,7 +1731,7 @@ void MainWindow::PlaylistUndoRedoChanged(QAction *undo, QAction *redo) {
 
 void MainWindow::ShowLibraryConfig() {
   EnsureSettingsDialogCreated();
-  settings_dialog_->OpenAtPage(SettingsDialog::Page::Library);
+  settings_dialog_->OpenAtPage(SettingsDialog::Page_Library);
 }
 
 void MainWindow::TaskCountChanged(int count) {
@@ -2058,7 +2058,7 @@ void MainWindow::AddSongInfoGenerator(smart_playlists::GeneratorPtr gen) {
 }
 
 void MainWindow::ShowSongInfoConfig() {
-  OpenSettingsDialogAtPage(SettingsDialog::Page::SongInformation);
+  OpenSettingsDialogAtPage(SettingsDialog::Page_SongInformation);
 }
 
 void MainWindow::PlaylistViewSelectionModelChanged() {

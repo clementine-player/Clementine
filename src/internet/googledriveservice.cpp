@@ -40,7 +40,7 @@ GoogleDriveService::GoogleDriveService(Application* app, InternetModel* parent)
         app, parent,
         kServiceName, kServiceId,
         QIcon(":/providers/googledrive.png"),
-        SettingsDialog::Page::GoogleDrive),
+        SettingsDialog::Page_GoogleDrive),
       client_(new google_drive::Client(this)),
       task_manager_(app->task_manager()) {
   app->player()->RegisterUrlHandler(new GoogleDriveUrlHandler(this, this));

@@ -41,7 +41,7 @@ UbuntuOneService::UbuntuOneService(Application* app, InternetModel* parent)
         app, parent,
         kServiceName, kServiceId,
         QIcon(":/providers/ubuntuone.png"),
-        SettingsDialog::Page::UbuntuOne) {
+        SettingsDialog::Page_UbuntuOne) {
   app_->player()->RegisterUrlHandler(new UbuntuOneUrlHandler(this, this));
 
   QSettings s;

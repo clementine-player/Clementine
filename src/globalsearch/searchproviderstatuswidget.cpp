@@ -86,7 +86,7 @@ bool SearchProviderStatusWidget::eventFilter(QObject* object, QEvent* event) {
       if (!provider_->IsLoggedIn()) {
         provider_->ShowConfig();
       } else {
-        engine_->application()->OpenSettingsDialogAtPage(SettingsDialog::Page::GlobalSearch);
+        engine_->application()->OpenSettingsDialogAtPage(SettingsDialog::Page_GlobalSearch);
       }
     }
     break;

@@ -207,7 +207,7 @@ void DigitallyImportedServiceBase::LoadPlaylistFinished(QNetworkReply* reply) {
 }
 
 void DigitallyImportedServiceBase::ShowSettingsDialog() {
-  app_->OpenSettingsDialogAtPage(SettingsDialog::Page::DigitallyImported);
+  app_->OpenSettingsDialogAtPage(SettingsDialog::Page_DigitallyImported);
 }
 
 DigitallyImportedClient::ChannelList DigitallyImportedServiceBase::Channels() {
