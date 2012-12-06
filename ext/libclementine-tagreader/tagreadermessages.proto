@@ -47,6 +47,7 @@ message SongMetadata {
   optional bool suspicious_tags = 27;
   optional string art_automatic = 28;
   optional Type type = 29;
+  optional string etag = 30;
 }
 
 message ReadFileRequest {

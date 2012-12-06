@@ -25,8 +25,13 @@
 #include <QVariantMap>
 
 #include "config.h"
-#include "tagreadermessages.pb.h"
 #include "engines/engine_fwd.h"
+
+namespace pb {
+namespace tagreader {
+class SongMetadata;
+}  // namespace tagreader
+}  // namespace pb
 
 class QSqlQuery;
 class QUrl;

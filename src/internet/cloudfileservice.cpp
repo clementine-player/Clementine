@@ -8,6 +8,7 @@
 #include "core/mergedproxymodel.h"
 #include "core/network.h"
 #include "core/player.h"
+#include "core/taskmanager.h"
 #include "globalsearch/globalsearch.h"
 #include "globalsearch/librarysearchprovider.h"
 #include "internet/internetmodel.h"
@@ -28,6 +29,7 @@ CloudFileService::CloudFileService(
     network_(new NetworkAccessManager(this)),
     library_sort_model_(new QSortFilterProxyModel(this)),
     playlist_manager_(app->playlist_manager()),
+    task_manager_(app->task_manager()),
     icon_(icon),
     settings_page_(settings_page) {
   library_backend_ = new LibraryBackend;
@@ -106,4 +108,74 @@ void CloudFileService::AddToPlaylist(QMimeData* mime) {
 
 void CloudFileService::ShowSettingsDialog() {
   app_->OpenSettingsDialogAtPage(settings_page_);
+}
+
+bool CloudFileService::ShouldIndexFile(const QUrl& url, const QString& mime_type) const {
+  if (!IsSupportedMimeType(mime_type)) {
+    return false;
+  }
+  Song library_song = library_backend_->GetSongByUrl(url);
+  if (library_song.is_valid()) {
+    qLog(Debug) << "Already have:" << url;
+    return false;
+  }
+  return true;
+}
+
+void CloudFileService::MaybeAddFileToDatabase(
+    const Song& metadata,
+    const QString& mime_type,
+    const QUrl& download_url,
+    const QString& authorisation) {
+  if (!ShouldIndexFile(metadata.url(), mime_type)) {
+    return;
+  }
+
+  const int task_id = task_manager_->StartTask(
+      tr("Indexing %1").arg(metadata.title()));
+
+  TagReaderClient::ReplyType* reply = app_->tag_reader_client()->ReadCloudFile(
+      download_url,
+      metadata.title(),
+      metadata.filesize(),
+      mime_type,
+      authorisation);
+  NewClosure(reply, SIGNAL(Finished(bool)),
+             this, SLOT(ReadTagsFinished(TagReaderClient::ReplyType*,Song,int)),
+             reply, metadata, task_id);
+}
+
+void CloudFileService::ReadTagsFinished(
+    TagReaderClient::ReplyType* reply,
+    const Song& metadata,
+    const int task_id) {
+  reply->deleteLater();
+  TaskManager::ScopedTask(task_id, task_manager_);
+
+  const pb::tagreader::ReadCloudFileResponse& message =
+      reply->message().read_cloud_file_response();
+  if (!message.has_metadata() || !message.metadata().filesize()) {
+    qLog(Debug) << "Failed to tag:" << metadata.url();
+    return;
+  }
+
+  pb::tagreader::SongMetadata metadata_pb;
+  metadata.ToProtobuf(&metadata_pb);
+  metadata_pb.MergeFrom(message.metadata());
+
+  Song song;
+  song.InitFromProtobuf(metadata_pb);
+  song.set_directory_id(0);
+
+  qLog(Debug) << "Adding song to db:" << song.title();
+  library_backend_->AddOrUpdateSongs(SongList() << song);
+}
+
+bool CloudFileService::IsSupportedMimeType(const QString& mime_type) const {
+  return mime_type == "audio/ogg" ||
+         mime_type == "audio/mpeg" ||
+         mime_type == "audio/mp4" ||
+         mime_type == "audio/flac" ||
+         mime_type == "application/ogg" ||
+         mime_type == "application/x-flac";
 }

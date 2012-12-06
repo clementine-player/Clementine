@@ -5,6 +5,7 @@
 
 #include <QMenu>
 
+#include "core/tagreaderclient.h"
 #include "ui/albumcovermanager.h"
 
 class UrlHandler;
@@ -33,11 +34,23 @@ class CloudFileService : public InternetService {
  protected:
   virtual bool has_credentials() const = 0;
   virtual void Connect() = 0;
+  virtual bool ShouldIndexFile(const QUrl& url, const QString& mime_type) const;
+  virtual void MaybeAddFileToDatabase(
+      const Song& metadata,
+      const QString& mime_type,
+      const QUrl& download_url,
+      const QString& authorisation);
+  virtual bool IsSupportedMimeType(const QString& mime_type) const;
+
 
  protected slots:
   void ShowCoverManager();
   void AddToPlaylist(QMimeData* mime);
   void ShowSettingsDialog();
+  void ReadTagsFinished(
+      TagReaderClient::ReplyType* reply,
+      const Song& metadata,
+      const int task_id);
 
  protected:
   QStandardItem* root_;
@@ -50,6 +63,7 @@ class CloudFileService : public InternetService {
   boost::scoped_ptr<QMenu> context_menu_;
   boost::scoped_ptr<AlbumCoverManager> cover_manager_;
   PlaylistManager* playlist_manager_;
+  TaskManager* task_manager_;
 
  private:
   QIcon icon_;

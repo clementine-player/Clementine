@@ -11,7 +11,6 @@
 #include "core/database.h"
 #include "core/mergedproxymodel.h"
 #include "core/player.h"
-#include "core/taskmanager.h"
 #include "core/timeconstants.h"
 #include "ui/albumcovermanager.h"
 #include "globalsearch/globalsearch.h"
@@ -41,8 +40,7 @@ GoogleDriveService::GoogleDriveService(Application* app, InternetModel* parent)
         kServiceName, kServiceId,
         QIcon(":/providers/googledrive.png"),
         SettingsDialog::Page_GoogleDrive),
-      client_(new google_drive::Client(this)),
-      task_manager_(app->task_manager()) {
+      client_(new google_drive::Client(this)) {
   app->player()->RegisterUrlHandler(new GoogleDriveUrlHandler(this, this));
 }
 
@@ -124,7 +122,34 @@ void GoogleDriveService::EnsureConnected() {
 
 void GoogleDriveService::FilesFound(const QList<google_drive::File>& files) {
   foreach (const google_drive::File& file, files) {
-    MaybeAddFileToDatabase(file);
+    if (!IsSupportedMimeType(file.mime_type())) {
+      continue;
+    }
+
+    QUrl url;
+    url.setScheme("googledrive");
+    url.setPath(file.id());
+
+    Song song;
+    // Add some extra tags from the Google Drive metadata.
+    song.set_etag(file.etag().remove('"'));
+    song.set_mtime(file.modified_date().toTime_t());
+    song.set_ctime(file.created_date().toTime_t());
+    song.set_comment(file.description());
+    song.set_directory_id(0);
+    song.set_url(QUrl(url));
+    song.set_filesize(file.size());
+
+    // Use the Google Drive title if we couldn't read tags from the file.
+    if (song.title().isEmpty()) {
+      song.set_title(file.title());
+    }
+
+    MaybeAddFileToDatabase(
+        song,
+        file.mime_type(),
+        file.download_url(), 
+        QString("Bearer %1").arg(client_->access_token()));
   }
 }
 
@@ -136,84 +161,6 @@ void GoogleDriveService::FilesDeleted(const QList<QUrl>& files) {
       library_backend_->DeleteSongs(SongList() << song);
     }
   }
-}
-
-namespace {
-
-bool IsSupportedMimeType(const QString& mime_type) {
-  return mime_type == "audio/mpeg" ||
-         mime_type == "application/ogg" ||
-         mime_type == "application/x-flac";
-}
-
-}  // namespace
-
-void GoogleDriveService::MaybeAddFileToDatabase(const google_drive::File& file) {
-  QString url = QString("googledrive:%1").arg(file.id());
-  Song song = library_backend_->GetSongByUrl(QUrl(url));
-  // Song already in index.
-  // TODO: Check etag and maybe update.
-  if (song.is_valid()) {
-    qLog(Debug) << "Already have:" << url;
-    return;
-  }
-
-  if (!IsSupportedMimeType(file.mime_type())) {
-    return;
-  }
-
-  const int task_id = task_manager_->StartTask(
-      tr("Indexing %1").arg(file.title()));
-
-  // Song not in index; tag and add.
-  QString authorisation_header = QString("Bearer %1").arg(client_->access_token());
-  TagReaderClient::ReplyType* reply = app_->tag_reader_client()->ReadCloudFile(
-      file.download_url(),
-      file.title(),
-      file.size(),
-      file.mime_type(),
-      authorisation_header);
-
-  NewClosure(reply, SIGNAL(Finished(bool)),
-             this, SLOT(ReadTagsFinished(TagReaderClient::ReplyType*,google_drive::File,QString,int)),
-             reply, file, url, task_id);
-}
-
-void GoogleDriveService::ReadTagsFinished(TagReaderClient::ReplyType* reply,
-                                          const google_drive::File& metadata,
-                                          const QString& url,
-                                          const int task_id) {
-  reply->deleteLater();
-
-  TaskManager::ScopedTask(task_id, task_manager_);
-
-  const pb::tagreader::ReadCloudFileResponse& msg =
-      reply->message().read_cloud_file_response();
-  if (!msg.has_metadata() || !msg.metadata().filesize()) {
-    qLog(Debug) << "Failed to tag:" << metadata.title();
-    return;
-  }
-
-  // Read the Song metadata from the message.
-  Song song;
-  song.InitFromProtobuf(msg.metadata());
-
-  // Add some extra tags from the Google Drive metadata.
-  song.set_etag(metadata.etag().remove('"'));
-  song.set_mtime(metadata.modified_date().toTime_t());
-  song.set_ctime(metadata.created_date().toTime_t());
-  song.set_comment(metadata.description());
-  song.set_directory_id(0);
-  song.set_url(QUrl(url));
-
-  // Use the Google Drive title if we couldn't read tags from the file.
-  if (song.title().isEmpty()) {
-    song.set_title(metadata.title());
-  }
-
-  // Add the song to the database
-  qLog(Debug) << "Adding song to db:" << song.title();
-  library_backend_->AddOrUpdateSongs(SongList() << song);
 }
 
 QUrl GoogleDriveService::GetStreamingUrlFromSongId(const QString& id) {

@@ -41,24 +41,15 @@ class GoogleDriveService : public CloudFileService {
   void FilesFound(const QList<google_drive::File>& files);
   void FilesDeleted(const QList<QUrl>& files);
   void ListChangesFinished(google_drive::ListChangesResponse* response);
-  void ReadTagsFinished(TagReaderClient::ReplyType* reply,
-                        const google_drive::File& metadata,
-                        const QString& url,
-                        const int task_id);
 
   void OpenWithDrive();
 
  private:
   void EnsureConnected();
   void RefreshAuthorisation(const QString& refresh_token);
-  void MaybeAddFileToDatabase(const google_drive::File& file);
   void ListChanges(const QString& cursor);
 
   google_drive::Client* client_;
-
-  TaskManager* task_manager_;
-
-  int indexing_task_id_;
 
   QAction* open_in_drive_action_;
 };

@@ -21,8 +21,6 @@ class UbuntuOneService : public CloudFileService {
  private slots:
   void AuthenticationFinished(UbuntuOneAuthenticator* authenticator);
   void FileListRequestFinished(QNetworkReply* reply);
-  void ReadTagsFinished(
-      TagReaderClient::ReplyType* reply, const QVariantMap& file, const QUrl& url);
   void ShowCoverManager();
   void AddToPlaylist(QMimeData* mime);
   void VolumeListRequestFinished(QNetworkReply* reply);
@@ -32,7 +30,6 @@ class UbuntuOneService : public CloudFileService {
   QNetworkReply* SendRequest(const QUrl& url);
   void RequestVolumeList();
   void RequestFileList(const QString& path);
-  void MaybeAddFileToDatabase(const QVariantMap& file);
   bool has_credentials() const;
 
  private:

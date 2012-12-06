@@ -128,22 +128,6 @@ void UbuntuOneService::RequestFileList(const QString& path) {
              this, SLOT(FileListRequestFinished(QNetworkReply*)), files_reply);
 }
 
-void UbuntuOneService::FileListRequestFinished(QNetworkReply* reply) {
-  reply->deleteLater();
-  QJson::Parser parser;
-  QVariantMap result = parser.parse(reply).toMap();
-
-  QVariantList children = result["children"].toList();
-  foreach (const QVariant& c, children) {
-    QVariantMap child = c.toMap();
-    if (child["kind"].toString() == "file") {
-      MaybeAddFileToDatabase(child);
-    } else {
-      RequestFileList(child["resource_path"].toString());
-    }
-  }
-}
-
 namespace {
 
 QString GuessMimeTypeForFile(const QString& filename) {
@@ -161,69 +145,40 @@ QString GuessMimeTypeForFile(const QString& filename) {
 
 }  // namespace
 
-void UbuntuOneService::MaybeAddFileToDatabase(const QVariantMap& file) {
-  const QString content_path = file["content_path"].toString();
-  const QString filename = file["path"].toString().mid(1);
-  const QString mime_type = GuessMimeTypeForFile(filename);
-  if (mime_type.isNull()) {
-    // Unknown file type.
-    // Potentially, we could do a HEAD request to see what Ubuntu One thinks
-    // the Content-Type is, probably not worth it though.
-    return;
+void UbuntuOneService::FileListRequestFinished(QNetworkReply* reply) {
+  reply->deleteLater();
+  QJson::Parser parser;
+  QVariantMap result = parser.parse(reply).toMap();
+
+  QVariantList children = result["children"].toList();
+  foreach (const QVariant& c, children) {
+    QVariantMap child = c.toMap();
+    if (child["kind"].toString() == "file") {
+      QString content_path = child["content_path"].toString();
+      QUrl content_url(kContentRoot);
+      content_url.setPath(content_path);
+      QUrl service_url;
+      service_url.setScheme("ubuntuonefile");
+      service_url.setPath(content_path);
+
+      Song metadata;
+      metadata.set_url(service_url);
+      metadata.set_etag(child["hash"].toString());
+      metadata.set_mtime(QDateTime::fromString(
+          child["when_changed"].toString(), Qt::ISODate).toTime_t());
+      metadata.set_ctime(QDateTime::fromString(
+          child["when_created"].toString(), Qt::ISODate).toTime_t());
+      metadata.set_filesize(child["size"].toInt());
+      metadata.set_title(child["path"].toString().mid(1));
+      MaybeAddFileToDatabase(
+          metadata,
+          GuessMimeTypeForFile(child["path"].toString().mid(1)),
+          content_url,
+          GenerateAuthorisationHeader());
+    } else {
+      RequestFileList(child["resource_path"].toString());
+    }
   }
-
-  QUrl service_url;
-  service_url.setScheme("ubuntuonefile");
-  service_url.setPath(content_path);
-  Song song = library_backend_->GetSongByUrl(service_url);
-  if (song.is_valid()) {
-    return;
-  }
-
-  QUrl content_url(kContentRoot);
-  content_url.setPath(content_path);
-
-  TagReaderClient::ReplyType* reply = app_->tag_reader_client()->ReadCloudFile(
-      content_url,
-      filename,
-      file["size"].toInt(),
-      mime_type,
-      GenerateAuthorisationHeader());
-  NewClosure(
-      reply, SIGNAL(Finished(bool)),
-      this, SLOT(ReadTagsFinished(TagReaderClient::ReplyType*,QVariantMap, QUrl)),
-      reply, file, service_url);
-}
-
-void UbuntuOneService::ReadTagsFinished(
-    TagReaderClient::ReplyType* reply, const QVariantMap& file, const QUrl& url) {
-  qLog(Debug) << reply->message().DebugString().c_str();
-
-  const auto& message = reply->message().read_cloud_file_response();
-
-  if (!message.has_metadata() ||
-      !message.metadata().filesize()) {
-    qLog(Debug) << "Failed to tag:" << url;
-    return;
-  }
-
-  Song song;
-  song.InitFromProtobuf(reply->message().read_cloud_file_response().metadata());
-  song.set_directory_id(0);
-  song.set_etag(file["hash"].toString());
-  song.set_mtime(
-      QDateTime::fromString(file["when_changed"].toString(), Qt::ISODate).toTime_t());
-  song.set_ctime(
-      QDateTime::fromString(file["when_created"].toString(), Qt::ISODate).toTime_t());
-
-  song.set_url(url);
-
-  if (song.title().isEmpty()) {
-    song.set_title(file["path"].toString().mid(1));
-  }
-
-  qLog(Debug) << "Adding song to db:" << song.title();
-  library_backend_->AddOrUpdateSongs(SongList() << song);
 }
 
 QUrl UbuntuOneService::GetStreamingUrlFromSongId(const QString& song_id) {

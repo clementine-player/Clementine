@@ -31,15 +31,11 @@ class DropboxService : public CloudFileService {
  private slots:
   void RequestFileListFinished(QNetworkReply* reply);
   void FetchContentUrlFinished(QNetworkReply* reply, const QVariantMap& file);
-  void ReadTagsFinished(
-      TagReaderClient::ReplyType* reply,
-      const QVariantMap& file);
 
  private:
   void RequestFileList();
   QByteArray GenerateAuthorisationHeader();
   QNetworkReply* FetchContentUrl(const QUrl& url);
-  void MaybeAddFileToDatabase(const QUrl& url, const QVariantMap& file);
 
  private:
   QString access_token_;

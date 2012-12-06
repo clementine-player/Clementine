@@ -15,22 +15,9 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "mpris_common.h"
 #include "song.h"
-#include "timeconstants.h"
-#include "core/logging.h"
-#include "core/messagehandler.h"
 
 #include <algorithm>
-
-#ifdef HAVE_LIBLASTFM
-  #include "internet/fixlastfm.h"
-  #ifdef HAVE_LIBLASTFM1
-    #include <lastfm/Track.h>
-  #else
-    #include <lastfm/Track>
-  #endif
-#endif
 
 #include <QFile>
 #include <QFileInfo>
@@ -41,6 +28,15 @@
 #include <QTime>
 #include <QVariant>
 #include <QtConcurrentRun>
+
+#ifdef HAVE_LIBLASTFM
+  #include "internet/fixlastfm.h"
+  #ifdef HAVE_LIBLASTFM1
+    #include <lastfm/Track.h>
+  #else
+    #include <lastfm/Track>
+  #endif
+#endif
 
 #include <id3v1genres.h>
 
@@ -57,14 +53,15 @@
 # include <libmtp.h>
 #endif
 
-#include <boost/scoped_array.hpp>
-#include <boost/scoped_ptr.hpp>
-using boost::scoped_ptr;
-
-#include "utilities.h"
+#include "core/logging.h"
+#include "core/messagehandler.h"
+#include "core/mpris_common.h"
+#include "core/timeconstants.h"
+#include "core/utilities.h"
 #include "covers/albumcoverloader.h"
 #include "engines/enginebase.h"
 #include "library/sqlrow.h"
+#include "tagreadermessages.pb.h"
 #include "widgets/trackslider.h"
 
 
@@ -409,6 +406,7 @@ void Song::InitFromProtobuf(const pb::tagreader::SongMetadata& pb) {
   d->filesize_ = pb.filesize();
   d->suspicious_tags_ = pb.suspicious_tags();
   d->filetype_ = static_cast<FileType>(pb.type());
+  d->etag_ = QStringFromStdString(pb.etag());
 
   if (pb.has_art_automatic()) {
     d->art_automatic_ = QStringFromStdString(pb.art_automatic());
