@@ -632,6 +632,11 @@ bool TagReaderWorker::ReadCloudFile(const QUrl& download_url,
         TagLib::ID3v2::FrameFactory::instance(),
         true,
         TagLib::AudioProperties::Accurate));
+  } else if (mime_type == "audio/x-ms-wma") {
+    tag.reset(new TagLib::ASF::File(
+        stream,
+        true,
+        TagLib::AudioProperties::Accurate));
   } else {
     qLog(Debug) << "Unknown mime type for tagging:" << mime_type;
     return false;
