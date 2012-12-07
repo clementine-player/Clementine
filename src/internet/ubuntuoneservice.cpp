@@ -139,6 +139,8 @@ QString GuessMimeTypeForFile(const QString& filename) {
     return "application/ogg";
   } else if (filename.endsWith(".flac")) {
     return "application/x-flac";
+  } else if (filename.endsWith(".wma")) {
+    return "audio/x-ms-wma";
   }
   return QString::null;
 }
