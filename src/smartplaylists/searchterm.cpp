@@ -138,11 +138,12 @@ bool SearchTerm::is_valid() const {
   }
 
   switch (TypeOf(field_)) {
-    case Type_Text:   return !value_.toString().isEmpty();
-    case Type_Date:   return value_.toInt() != 0;
-    case Type_Number: return value_.toInt() >= 0;
-    case Type_Rating: return value_.toFloat() >= 0.0;
-    case Type_Time:   return true;
+    case Type_Text:    return !value_.toString().isEmpty();
+    case Type_Date:    return value_.toInt() != 0;
+    case Type_Number:  return value_.toInt() >= 0;
+    case Type_Rating:  return value_.toFloat() >= 0.0;
+    case Type_Time:    return true;
+    case Type_Invalid: return false;
   }
   return false;
 }
@@ -289,11 +290,12 @@ QString SearchTerm::FieldName(Field field) {
 
 QString SearchTerm::FieldSortOrderText(Type type, bool ascending) {
   switch (type) {
-    case Type_Text:   return ascending ? QObject::tr("A-Z")            : QObject::tr("Z-A");
-    case Type_Date:   return ascending ? QObject::tr("oldest first")   : QObject::tr("newest first");
-    case Type_Time:   return ascending ? QObject::tr("shortest first") : QObject::tr("longest first");
+    case Type_Text:    return ascending ? QObject::tr("A-Z")            : QObject::tr("Z-A");
+    case Type_Date:    return ascending ? QObject::tr("oldest first")   : QObject::tr("newest first");
+    case Type_Time:    return ascending ? QObject::tr("shortest first") : QObject::tr("longest first");
     case Type_Number:
-    case Type_Rating: return ascending ? QObject::tr("smallest first") : QObject::tr("biggest first");
+    case Type_Rating:  return ascending ? QObject::tr("smallest first") : QObject::tr("biggest first");
+    case Type_Invalid: return QString();
   }
   return QString();
 }

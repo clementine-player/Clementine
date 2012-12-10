@@ -77,6 +77,8 @@ private:
   QPropertyAnimation* animation_;
   bool active_;
   bool initialized_;
+
+  SearchTerm::Type current_field_type_;
 };
 
 } // namespace

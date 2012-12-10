@@ -69,7 +69,8 @@ SearchTermWidget::SearchTermWidget(LibraryBackend* library, QWidget* parent)
     overlay_(NULL),
     animation_(new QPropertyAnimation(this, "overlay_opacity", this)),
     active_(true),
-    initialized_(false)
+    initialized_(false),
+    current_field_type_(SearchTerm::Type_Invalid)
 {
   ui_->setupUi(this);
   connect(ui_->field, SIGNAL(currentIndexChanged(int)), SLOT(FieldChanged(int)));
@@ -130,21 +131,25 @@ void SearchTermWidget::FieldChanged(int index) {
   SearchTerm::Type type = SearchTerm::TypeOf(field);
 
   // Populate the operator combo box
-  ui_->op->clear();
-  foreach (SearchTerm::Operator op, SearchTerm::OperatorsForType(type)) {
-    const int i = ui_->op->count();
-    ui_->op->addItem(SearchTerm::OperatorText(type, op));
-    ui_->op->setItemData(i, op);
+  if (type != current_field_type_) {
+    ui_->op->clear();
+    foreach (SearchTerm::Operator op, SearchTerm::OperatorsForType(type)) {
+      const int i = ui_->op->count();
+      ui_->op->addItem(SearchTerm::OperatorText(type, op));
+      ui_->op->setItemData(i, op);
+    }
+    current_field_type_ = type;
   }
 
   // Show the correct value editor
   QWidget* page = NULL;
   switch (type) {
-    case SearchTerm::Type_Time:   page = ui_->page_time;   break;
-    case SearchTerm::Type_Number: page = ui_->page_number; break;
-    case SearchTerm::Type_Date:   page = ui_->page_date;   break;
-    case SearchTerm::Type_Rating: page = ui_->page_rating; break;
-    case SearchTerm::Type_Text:   page = ui_->page_text;   break;
+    case SearchTerm::Type_Time:    page = ui_->page_time;   break;
+    case SearchTerm::Type_Number:  page = ui_->page_number; break;
+    case SearchTerm::Type_Date:    page = ui_->page_date;   break;
+    case SearchTerm::Type_Rating:  page = ui_->page_rating; break;
+    case SearchTerm::Type_Text:    page = ui_->page_text;   break;
+    case SearchTerm::Type_Invalid: page = NULL;             break;
   }
   ui_->value_stack->setCurrentWidget(page);
 
@@ -274,6 +279,9 @@ void SearchTermWidget::SetTerm(const SearchTerm& term) {
 
   case SearchTerm::Type_Rating:
     ui_->value_rating->set_rating(term.value_.toFloat());
+    break;
+
+  case SearchTerm::Type_Invalid:
     break;
   }
 }

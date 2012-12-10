@@ -85,6 +85,8 @@ public:
     Type_Time,
     Type_Number,
     Type_Rating,
+
+    Type_Invalid
   };
 
   // These values are persisted, so add to the end of the enum only
