@@ -93,21 +93,21 @@ QString SearchTerm::ToSql() const {
       else if (TypeOf(field_) == Type_Rating ||
                TypeOf(field_) == Type_Date ||
                TypeOf(field_) == Type_Time)
-        return col + " = " + value + "";
+        return col + " = " + value;
       else
         return col + " = '" + value + "'";
     case Op_GreaterThan:
       if (TypeOf(field_) == Type_Rating ||
           TypeOf(field_) == Type_Date ||
           TypeOf(field_) == Type_Time)
-        return col + " > " + value + "";
+        return col + " > " + value;
       else
         return col + " > '" + value + "'";
     case Op_LessThan:
       if (TypeOf(field_) == Type_Rating ||
           TypeOf(field_) == Type_Date ||
           TypeOf(field_) == Type_Time)
-        return col + " < " + value + "";
+        return col + " < " + value;
       else
         return col + " < '" + value + "'";
     case Op_NumericDate:
@@ -119,7 +119,11 @@ QString SearchTerm::ToSql() const {
       return "(" + col + " < " + "DATETIME('now', '-" + value + " " + date +"', 'localtime') AND " +
              col + " > " + "DATETIME('now', '-" + second_value + " " + date +"', 'localtime'))";
     case Op_NotEquals:
-      return col + " <> " + value + "";
+      if (TypeOf(field_) == Type_Text) {
+        return col + " <> '" + value + "'";
+      } else {
+        return col + " <> " + value;
+      }
   }
 
   return QString();
@@ -185,7 +189,7 @@ OperatorList SearchTerm::OperatorsForType(Type type) {
   switch (type) {
     case Type_Text:
       return OperatorList() << Op_Contains << Op_NotContains << Op_Equals
-                            << Op_StartsWith << Op_EndsWith;
+                            << Op_NotEquals << Op_StartsWith << Op_EndsWith;
     case Type_Date:
       return OperatorList() << Op_Equals << Op_NotEquals << Op_GreaterThan << Op_LessThan
                             << Op_NumericDate << Op_NumericDateNot << Op_RelativeDate;
