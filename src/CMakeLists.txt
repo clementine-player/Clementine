@@ -1072,6 +1072,14 @@ optional_source(HAVE_DROPBOX
     internet/dropboxsettingspage.ui
 )
 
+# Skydrive support
+optional_source(HAVE_SKYDRIVE
+  SOURCES
+    internet/skydriveservice.cpp
+  HEADERS
+    internet/skydriveservice.h
+)
+
 # Hack to add Clementine to the Unity system tray whitelist
 optional_source(LINUX
   SOURCES core/ubuntuunityhack.cpp

@@ -13,10 +13,12 @@
 OAuthenticator::OAuthenticator(
     const QString& client_id,
     const QString& client_secret,
+    RedirectStyle redirect,
     QObject* parent)
   : QObject(parent),
     client_id_(client_id),
-    client_secret_(client_secret) {
+    client_secret_(client_secret),
+    redirect_style_(redirect) {
 }
 
 void OAuthenticator::StartAuthorisation(
@@ -27,25 +29,35 @@ void OAuthenticator::StartAuthorisation(
   LocalRedirectServer* server = new LocalRedirectServer(this);
   server->Listen();
 
-  NewClosure(server, SIGNAL(Finished()),
-             this, SLOT(RedirectArrived(LocalRedirectServer*)), server);
-
   QUrl url = QUrl(oauth_endpoint);
   url.addQueryItem("response_type", "code");
   url.addQueryItem("client_id", client_id_);
-  url.addQueryItem("redirect_uri", server->url().toString());
+  QUrl redirect_url;
+  if (redirect_style_ == RedirectStyle::REMOTE) {
+    const int port = server->url().port();
+    redirect_url = QUrl(
+        QString("http://data.clementine-player.org/skydrive?port=%1").arg(port));
+  } else {
+    redirect_url = server->url();
+  }
+  url.addQueryItem("redirect_uri", redirect_url.toString());
   url.addQueryItem("scope", scope);
+
+  NewClosure(server, SIGNAL(Finished()),
+             this, SLOT(RedirectArrived(LocalRedirectServer*,QUrl)),
+             server, redirect_url);
 
   QDesktopServices::openUrl(url);
 }
 
-void OAuthenticator::RedirectArrived(LocalRedirectServer* server) {
+void OAuthenticator::RedirectArrived(
+    LocalRedirectServer* server, QUrl url) {
   server->deleteLater();
   QUrl request_url = server->request_url();
   qLog(Debug) << Q_FUNC_INFO << request_url;
   RequestAccessToken(
       request_url.queryItemValue("code").toUtf8(),
-      server->url());
+      url);
 }
 
 QByteArray OAuthenticator::ParseHttpRequest(const QByteArray& request) const {

@@ -12,9 +12,18 @@ class QTcpSocket;
 class OAuthenticator : public QObject {
   Q_OBJECT
  public:
+  enum class RedirectStyle {
+    // Redirect to localhost immediately.
+    LOCALHOST = 0,
+    // Redirect via data.clementine-player.org for when localhost is
+    // unsupported (eg. Skydrive).
+    REMOTE = 1,
+  };
+
   OAuthenticator(
       const QString& client_id,
       const QString& client_secret,
+      RedirectStyle redirect,
       QObject* parent = 0);
   void StartAuthorisation(
       const QString& oauth_endpoint,
@@ -31,13 +40,12 @@ class OAuthenticator : public QObject {
   const QString& refresh_token() const { return refresh_token_; }
 
   const QDateTime& expiry_time() const { return expiry_time_; }
-  const QString& user_email() const { return user_email_; }
 
  signals:
   void Finished();
 
  private slots:
-  void RedirectArrived(LocalRedirectServer* server);
+  void RedirectArrived(LocalRedirectServer* server, QUrl url);
   void FetchAccessTokenFinished(QNetworkReply* reply);
   void RefreshAccessTokenFinished(QNetworkReply* reply);
 
@@ -51,11 +59,11 @@ class OAuthenticator : public QObject {
   QString access_token_;
   QString refresh_token_;
   QDateTime expiry_time_;
-  QString user_email_;
 
   const QString client_id_;
   const QString client_secret_;
   QUrl token_endpoint_;
+  RedirectStyle redirect_style_;
 };
 
 #endif

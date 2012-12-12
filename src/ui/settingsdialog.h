@@ -79,6 +79,7 @@ public:
     Page_GoogleDrive,
     Page_UbuntuOne,
     Page_Dropbox,
+    Page_Skydrive,
   };
 
   enum Role {

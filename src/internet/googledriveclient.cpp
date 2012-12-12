@@ -89,7 +89,8 @@ Client::Client(QObject* parent)
 
 ConnectResponse* Client::Connect(const QString& refresh_token) {
   ConnectResponse* ret = new ConnectResponse(this);
-  OAuthenticator* oauth = new OAuthenticator(kClientId, kClientSecret, this);
+  OAuthenticator* oauth = new OAuthenticator(
+      kClientId, kClientSecret, OAuthenticator::RedirectStyle::LOCALHOST, this);
 
   if (refresh_token.isEmpty()) {
     oauth->StartAuthorisation(
