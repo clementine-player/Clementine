@@ -155,6 +155,7 @@ signals:
 
 private slots:
   void ConnectFinished(ConnectResponse* response, OAuthenticator* oauth);
+  void FetchUserInfoFinished(ConnectResponse* response, QNetworkReply* reply);
   void GetFileFinished(GetFileResponse* response, QNetworkReply* reply);
   void ListChangesFinished(ListChangesResponse* response, QNetworkReply* reply);
 

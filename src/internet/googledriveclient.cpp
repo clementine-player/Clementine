@@ -29,8 +29,23 @@ using namespace google_drive;
 const char* File::kFolderMimeType = "application/vnd.google-apps.folder";
 
 namespace {
-  static const char* kGoogleDriveFile = "https://www.googleapis.com/drive/v2/files/%1";
-  static const char* kGoogleDriveChanges = "https://www.googleapis.com/drive/v2/changes";
+static const char* kGoogleDriveFile =
+    "https://www.googleapis.com/drive/v2/files/%1";
+static const char* kGoogleDriveChanges =
+    "https://www.googleapis.com/drive/v2/changes";
+static const char* kGoogleOAuthUserInfoEndpoint =
+    "https://www.googleapis.com/oauth2/v1/userinfo";
+
+static const char* kOAuthEndpoint = "https://accounts.google.com/o/oauth2/auth";
+static const char* kOAuthTokenEndpoint =
+    "https://accounts.google.com/o/oauth2/token";
+static const char* kOAuthScope =
+    "https://www.googleapis.com/auth/drive.readonly "
+    "https://www.googleapis.com/auth/userinfo.email";
+static const char* kClientId =
+    "679260893280.apps.googleusercontent.com";
+static const char* kClientSecret =
+    "l3cWb8efUZsrBI4wmY3uKl6i";
 }
 
 QStringList File::parent_ids() const {
@@ -74,12 +89,15 @@ Client::Client(QObject* parent)
 
 ConnectResponse* Client::Connect(const QString& refresh_token) {
   ConnectResponse* ret = new ConnectResponse(this);
-  OAuthenticator* oauth = new OAuthenticator(this);
+  OAuthenticator* oauth = new OAuthenticator(kClientId, kClientSecret, this);
 
   if (refresh_token.isEmpty()) {
-    oauth->StartAuthorisation();
+    oauth->StartAuthorisation(
+        kOAuthEndpoint,
+        kOAuthTokenEndpoint,
+        kOAuthScope);
   } else {
-    oauth->RefreshAuthorisation(refresh_token);
+    oauth->RefreshAuthorisation(kOAuthTokenEndpoint, refresh_token);
   }
 
   NewClosure(oauth, SIGNAL(Finished()),
@@ -93,9 +111,36 @@ void Client::ConnectFinished(ConnectResponse* response, OAuthenticator* oauth) {
   access_token_ = oauth->access_token();
   expiry_time_ = oauth->expiry_time();
   response->refresh_token_ = oauth->refresh_token();
-  response->user_email_ = oauth->user_email();
-  emit response->Finished();
 
+  // Fetch user email.
+  QUrl url(kGoogleOAuthUserInfoEndpoint);
+  QNetworkRequest request(url);
+  AddAuthorizationHeader(&request);
+  QNetworkReply* reply = network_->get(request);
+  NewClosure(reply, SIGNAL(finished()),
+      this, SLOT(FetchUserInfoFinished(ConnectResponse*, QNetworkReply*)),
+      response, reply);
+}
+
+void Client::FetchUserInfoFinished(
+    ConnectResponse* response, QNetworkReply* reply) {
+  reply->deleteLater();
+  if (reply->attribute(QNetworkRequest::HttpStatusCodeAttribute) != 200) {
+    qLog(Warning) << "Failed to get user info" << reply->readAll();
+  } else {
+    QJson::Parser parser;
+    bool ok = false;
+    QVariantMap result = parser.parse(reply, &ok).toMap();
+    if (!ok) {
+      qLog(Error) << "Failed to parse user info reply";
+      return;
+    }
+
+    qLog(Debug) << result;
+    response->user_email_ = result["email"].toString();
+    qLog(Debug) << response->user_email_;
+  }
+  emit response->Finished();
   emit Authenticated();
 }
 

@@ -12,9 +12,17 @@ class QTcpSocket;
 class OAuthenticator : public QObject {
   Q_OBJECT
  public:
-  explicit OAuthenticator(QObject* parent = 0);
-  void StartAuthorisation();
-  void RefreshAuthorisation(const QString& refresh_token);
+  OAuthenticator(
+      const QString& client_id,
+      const QString& client_secret,
+      QObject* parent = 0);
+  void StartAuthorisation(
+      const QString& oauth_endpoint,
+      const QString& token_endpoint,
+      const QString& scope);
+  void RefreshAuthorisation(
+      const QString& token_endpoint,
+      const QString& refresh_token);
 
   // Token to use now.
   const QString& access_token() const { return access_token_; }
@@ -32,7 +40,6 @@ class OAuthenticator : public QObject {
   void RedirectArrived(LocalRedirectServer* server);
   void FetchAccessTokenFinished(QNetworkReply* reply);
   void RefreshAccessTokenFinished(QNetworkReply* reply);
-  void FetchUserInfoFinished(QNetworkReply* reply);
 
  private:
   QByteArray ParseHttpRequest(const QByteArray& request) const;
@@ -45,6 +52,10 @@ class OAuthenticator : public QObject {
   QString refresh_token_;
   QDateTime expiry_time_;
   QString user_email_;
+
+  const QString client_id_;
+  const QString client_secret_;
+  QUrl token_endpoint_;
 };
 
 #endif

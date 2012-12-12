@@ -10,38 +10,31 @@
 #include "core/logging.h"
 #include "internet/localredirectserver.h"
 
-namespace {
-
-const char* kGoogleOAuthEndpoint = "https://accounts.google.com/o/oauth2/auth";
-const char* kGoogleOAuthTokenEndpoint =
-    "https://accounts.google.com/o/oauth2/token";
-const char* kGoogleOAuthScope =
-    "https://www.googleapis.com/auth/drive.readonly "
-    "https://www.googleapis.com/auth/userinfo.email";
-const char* kGoogleOAuthUserInfoEndpoint =
-    "https://www.googleapis.com/oauth2/v1/userinfo";
-
-const char* kClientId = "679260893280.apps.googleusercontent.com";
-const char* kClientSecret = "l3cWb8efUZsrBI4wmY3uKl6i";
-
-}  // namespace
-
-OAuthenticator::OAuthenticator(QObject* parent)
-  : QObject(parent) {
+OAuthenticator::OAuthenticator(
+    const QString& client_id,
+    const QString& client_secret,
+    QObject* parent)
+  : QObject(parent),
+    client_id_(client_id),
+    client_secret_(client_secret) {
 }
 
-void OAuthenticator::StartAuthorisation() {
+void OAuthenticator::StartAuthorisation(
+    const QString& oauth_endpoint,
+    const QString& token_endpoint,
+    const QString& scope) {
+  token_endpoint_ = QUrl(token_endpoint);
   LocalRedirectServer* server = new LocalRedirectServer(this);
   server->Listen();
 
   NewClosure(server, SIGNAL(Finished()),
              this, SLOT(RedirectArrived(LocalRedirectServer*)), server);
 
-  QUrl url = QUrl(kGoogleOAuthEndpoint);
+  QUrl url = QUrl(oauth_endpoint);
   url.addQueryItem("response_type", "code");
-  url.addQueryItem("client_id", kClientId);
+  url.addQueryItem("client_id", client_id_);
   url.addQueryItem("redirect_uri", server->url().toString());
-  url.addQueryItem("scope", kGoogleOAuthScope);
+  url.addQueryItem("scope", scope);
 
   QDesktopServices::openUrl(url);
 }
@@ -68,8 +61,8 @@ void OAuthenticator::RequestAccessToken(const QByteArray& code, const QUrl& url)
   typedef QPair<QString, QString> Param;
   QList<Param> parameters;
   parameters << Param("code", code)
-             << Param("client_id", kClientId)
-             << Param("client_secret", kClientSecret)
+             << Param("client_id", client_id_)
+             << Param("client_secret", client_secret_)
              << Param("grant_type", "authorization_code")
              // Even though we don't use this URI anymore, it must match the
              // original one.
@@ -82,7 +75,7 @@ void OAuthenticator::RequestAccessToken(const QByteArray& code, const QUrl& url)
   QString post_data = params.join("&");
   qLog(Debug) << post_data;
 
-  QNetworkRequest request = QNetworkRequest(QUrl(kGoogleOAuthTokenEndpoint));
+  QNetworkRequest request = QNetworkRequest(QUrl(token_endpoint_));
   request.setHeader(QNetworkRequest::ContentTypeHeader,
                     "application/x-www-form-urlencoded");
 
@@ -114,49 +107,20 @@ void OAuthenticator::FetchAccessTokenFinished(QNetworkReply* reply) {
   refresh_token_ = result["refresh_token"].toString();
   SetExpiryTime(result["expires_in"].toInt());
 
-  // Fetch some basic user information
-  QUrl url = QUrl(kGoogleOAuthUserInfoEndpoint);
-  QNetworkRequest request(url);
-  request.setRawHeader(
-      "Authorization", QString("Bearer %1").arg(access_token_).toUtf8());
-
-  QNetworkReply* user_info_reply = network_.get(request);
-  NewClosure(user_info_reply, SIGNAL(finished()), this,
-             SLOT(FetchUserInfoFinished(QNetworkReply*)), user_info_reply);
-}
-
-void OAuthenticator::FetchUserInfoFinished(QNetworkReply* reply) {
-  reply->deleteLater();
-
-  if (reply->attribute(QNetworkRequest::HttpStatusCodeAttribute) != 200) {
-    qLog(Warning) << "Failed to get user info" << reply->readAll();
-  } else {
-    QJson::Parser parser;
-    bool ok = false;
-    QVariantMap result = parser.parse(reply, &ok).toMap();
-    if (!ok) {
-      qLog(Error) << "Failed to parse user info reply";
-      return;
-    }
-
-    qLog(Debug) << result;
-
-    user_email_ = result["email"].toString();
-    qLog(Debug) << user_email_;
-  }
-
   emit Finished();
 }
 
-void OAuthenticator::RefreshAuthorisation(const QString& refresh_token) {
+void OAuthenticator::RefreshAuthorisation(
+    const QString& token_endpoint,
+    const QString& refresh_token) {
   refresh_token_ = refresh_token;
 
-  QUrl url = QUrl(kGoogleOAuthTokenEndpoint);
+  QUrl url(token_endpoint);
 
   typedef QPair<QString, QString> Param;
   QList<Param> parameters;
-  parameters << Param("client_id", kClientId)
-             << Param("client_secret", kClientSecret)
+  parameters << Param("client_id", client_id_)
+             << Param("client_secret", client_secret_)
              << Param("grant_type", "refresh_token")
              << Param("refresh_token", refresh_token);
   QStringList params;
