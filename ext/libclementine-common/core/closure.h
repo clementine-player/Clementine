@@ -213,11 +213,11 @@ _detail::ClosureBase* NewClosure(
   return NewClosure(sender, signal, boost::bind(callback, args...));
 }
 
-template <typename T, typename... Args>
+template <typename T, typename Unused, typename... Args>
 _detail::ClosureBase* NewClosure(
     QObject* sender,
     const char* signal,
-    T* receiver, void (T::*callback)(Args...),
+    T* receiver, Unused (T::*callback)(Args...),
     const Args&... args) {
   return NewClosure(sender, signal, boost::bind(callback, receiver, args...));
 }

@@ -107,8 +107,9 @@ namespace {
 class Bar {
  public:
   explicit Bar(int a) : foo_(a) {}
-  void Foo(int* answer) {
+  bool Foo(int* answer) {
     *answer = foo_;
+    return true;
   }
 
  private:
