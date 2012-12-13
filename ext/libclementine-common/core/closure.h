@@ -195,6 +195,24 @@ _detail::ClosureBase* NewClosure(
     const char* signal,
     std::tr1::function<void()> callback);
 
+template <typename... Args>
+_detail::ClosureBase* NewClosure(
+    QObject* sender,
+    const char* signal,
+    std::tr1::function<void(Args...)> callback,
+    const Args&... args) {
+  return NewClosure(sender, signal, boost::bind(callback, args...));
+}
+
+template <typename... Args>
+_detail::ClosureBase* NewClosure(
+    QObject* sender,
+    const char* signal,
+    void (*callback)(Args...),
+    const Args&... args) {
+  return NewClosure(sender, signal, boost::bind(callback, args...));
+}
+
 
 void DoAfter(QObject* receiver, const char* slot, int msec);
 void DoInAMinuteOrSo(QObject* receiver, const char* slot);

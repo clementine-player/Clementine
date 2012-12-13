@@ -64,6 +64,44 @@ TEST(ClosureTest, ClosureDoesNotCrashWithSharedPointerSender) {
   EXPECT_TRUE(closure.isNull());
 }
 
+namespace {
+
+void Foo(bool* called, int question, int* answer) {
+  *called = true;
+  *answer = question;
+}
+
+}  // namespace
+
+TEST(ClosureTest, ClosureWorksWithFunctionPointers) {
+  TestQObject sender;
+  bool called = false;
+  int question = 42;
+  int answer = 0;
+  _detail::ClosureBase* closure = NewClosure(
+      &sender, SIGNAL(Emitted()),
+      &Foo, &called, question, &answer);
+  EXPECT_FALSE(called);
+  sender.Emit();
+  EXPECT_TRUE(called);
+  EXPECT_EQ(question, answer);
+}
+
+TEST(ClosureTest, ClosureWorksWithStandardFunctions) {
+  TestQObject sender;
+  bool called = false;
+  int question = 42;
+  int answer = 0;
+  std::tr1::function<void(bool*,int,int*)> callback(&Foo);
+  _detail::ClosureBase* closure = NewClosure(
+      &sender, SIGNAL(Emitted()),
+      callback, &called, question, &answer);
+  EXPECT_FALSE(called);
+  sender.Emit();
+  EXPECT_TRUE(called);
+  EXPECT_EQ(question, answer);
+}
+
 #ifdef HAVE_LAMBDAS
 TEST(ClosureTest, ClosureCallsLambda) {
   TestQObject sender;
