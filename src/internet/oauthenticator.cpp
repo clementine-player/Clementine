@@ -44,8 +44,7 @@ void OAuthenticator::StartAuthorisation(
   url.addQueryItem("scope", scope);
 
   NewClosure(server, SIGNAL(Finished()),
-             this, SLOT(RedirectArrived(LocalRedirectServer*,QUrl)),
-             server, redirect_url);
+             this, &OAuthenticator::RedirectArrived, server, redirect_url);
 
   QDesktopServices::openUrl(url);
 }

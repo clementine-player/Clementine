@@ -78,7 +78,7 @@ TEST(ClosureTest, ClosureWorksWithFunctionPointers) {
   bool called = false;
   int question = 42;
   int answer = 0;
-  _detail::ClosureBase* closure = NewClosure(
+  NewClosure(
       &sender, SIGNAL(Emitted()),
       &Foo, &called, question, &answer);
   EXPECT_FALSE(called);
@@ -93,7 +93,7 @@ TEST(ClosureTest, ClosureWorksWithStandardFunctions) {
   int question = 42;
   int answer = 0;
   std::tr1::function<void(bool*,int,int*)> callback(&Foo);
-  _detail::ClosureBase* closure = NewClosure(
+  NewClosure(
       &sender, SIGNAL(Emitted()),
       callback, &called, question, &answer);
   EXPECT_FALSE(called);
@@ -102,11 +102,38 @@ TEST(ClosureTest, ClosureWorksWithStandardFunctions) {
   EXPECT_EQ(question, answer);
 }
 
+namespace {
+
+class Bar {
+ public:
+  explicit Bar(int a) : foo_(a) {}
+  void Foo(int* answer) {
+    *answer = foo_;
+  }
+
+ private:
+  int foo_;
+};
+
+}
+
+TEST(ClosureTest, ClosureWorksWithMemberFunctionPointers) {
+  TestQObject sender;
+  Bar receiver(42);
+  int q = 1;
+  NewClosure(
+      &sender, SIGNAL(Emitted()),
+      &receiver, &Bar::Foo, &q);
+  EXPECT_EQ(1, q);
+  sender.Emit();
+  EXPECT_EQ(42, q);
+}
+
 #ifdef HAVE_LAMBDAS
 TEST(ClosureTest, ClosureCallsLambda) {
   TestQObject sender;
   bool called = false;
-  _detail::ClosureBase* closure = NewClosure(
+  NewClosure(
       &sender, SIGNAL(Emitted()),
       [&called] () { called = true; });
   EXPECT_FALSE(called);
