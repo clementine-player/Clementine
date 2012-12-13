@@ -3,7 +3,11 @@
 
 #include "cloudfileservice.h"
 
+#include <QDateTime>
+
 class OAuthenticator;
+class QNetworkRequest;
+class QNetworkReply;
 
 class SkydriveService : public CloudFileService {
   Q_OBJECT
@@ -20,7 +24,15 @@ class SkydriveService : public CloudFileService {
 
  private slots:
   void ConnectFinished(OAuthenticator* oauth);
+  void FetchUserInfoFinished(QNetworkReply* reply);
+  void ListFilesFinished(QNetworkReply* reply);
 
+ private:
+  void AddAuthorizationHeader(QNetworkRequest* request);
+  void ListFiles(const QString& folder);
+
+  QString access_token_;
+  QDateTime expiry_time_;
 };
 
 #endif  // SKYDRIVESERVICE_H

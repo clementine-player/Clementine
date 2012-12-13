@@ -180,3 +180,18 @@ bool CloudFileService::IsSupportedMimeType(const QString& mime_type) const {
          mime_type == "application/x-flac" ||
          mime_type == "audio/x-ms-wma";
 }
+
+QString CloudFileService::GuessMimeTypeForFile(const QString& filename) const {
+  if (filename.endsWith(".mp3")) {
+    return "audio/mpeg";
+  } else if (filename.endsWith(".m4a")) {
+    return "audio/mpeg";
+  } else if (filename.endsWith(".ogg")) {
+    return "application/ogg";
+  } else if (filename.endsWith(".flac")) {
+    return "application/x-flac";
+  } else if (filename.endsWith(".wma")) {
+    return "audio/x-ms-wma";
+  }
+  return QString::null;
+}

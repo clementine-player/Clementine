@@ -128,25 +128,6 @@ void UbuntuOneService::RequestFileList(const QString& path) {
              this, SLOT(FileListRequestFinished(QNetworkReply*)), files_reply);
 }
 
-namespace {
-
-QString GuessMimeTypeForFile(const QString& filename) {
-  if (filename.endsWith(".mp3")) {
-    return "audio/mpeg";
-  } else if (filename.endsWith(".m4a")) {
-    return "audio/mpeg";
-  } else if (filename.endsWith(".ogg")) {
-    return "application/ogg";
-  } else if (filename.endsWith(".flac")) {
-    return "application/x-flac";
-  } else if (filename.endsWith(".wma")) {
-    return "audio/x-ms-wma";
-  }
-  return QString::null;
-}
-
-}  // namespace
-
 void UbuntuOneService::FileListRequestFinished(QNetworkReply* reply) {
   reply->deleteLater();
   QJson::Parser parser;

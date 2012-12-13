@@ -41,6 +41,7 @@ class CloudFileService : public InternetService {
       const QUrl& download_url,
       const QString& authorisation);
   virtual bool IsSupportedMimeType(const QString& mime_type) const;
+  QString GuessMimeTypeForFile(const QString& filename) const;
 
 
  protected slots:

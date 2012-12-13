@@ -110,7 +110,7 @@ TagLib::ByteVector CloudStream::readBlock(ulong length) {
   }
 
   QNetworkRequest request = QNetworkRequest(url_);
-  if (!auth_.isNull()) {
+  if (!auth_.isEmpty()) {
     request.setRawHeader("Authorization", auth_.toUtf8());
   }
   request.setRawHeader(
