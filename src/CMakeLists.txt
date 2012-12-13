@@ -1076,8 +1076,10 @@ optional_source(HAVE_DROPBOX
 optional_source(HAVE_SKYDRIVE
   SOURCES
     internet/skydriveservice.cpp
+    internet/skydriveurlhandler.cpp
   HEADERS
     internet/skydriveservice.h
+    internet/skydriveurlhandler.h
 )
 
 # Hack to add Clementine to the Unity system tray whitelist

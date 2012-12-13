@@ -1,8 +1,15 @@
 #include "skydriveservice.h"
 
+#include <boost/scoped_ptr.hpp>
+using boost::scoped_ptr;
+
 #include <qjson/parser.h>
 
-#include "oauthenticator.h"
+#include "core/application.h"
+#include "core/player.h"
+#include "core/waitforsignal.h"
+#include "internet/oauthenticator.h"
+#include "internet/skydriveurlhandler.h"
 
 namespace {
 
@@ -30,6 +37,7 @@ SkydriveService::SkydriveService(
   : CloudFileService(
       app, parent, kServiceName, kServiceId,
       QIcon(":providers/skydrive.png"), SettingsDialog::Page_Skydrive) {
+  app->player()->RegisterUrlHandler(new SkydriveUrlHandler(this, this));
 }
 
 bool SkydriveService::has_credentials() const {
@@ -92,6 +100,8 @@ void SkydriveService::FetchUserInfoFinished(QNetworkReply* reply) {
     s.setValue("name", name);
   }
 
+  emit Connected();
+
   ListFiles("me/skydrive");
 }
 
@@ -138,7 +148,29 @@ void SkydriveService::ListFilesFinished(QNetworkReply* reply) {
           mime_type,
           download_url,
           QString::null);
-
     }
   }
+}
+
+QUrl SkydriveService::GetStreamingUrlFromSongId(const QString& file_id) {
+  EnsureConnected();
+
+  QUrl url(QString(kSkydriveBase) + file_id);
+  QNetworkRequest request(url);
+  AddAuthorizationHeader(&request);
+  scoped_ptr<QNetworkReply> reply(network_->get(request));
+  WaitForSignal(reply.get(), SIGNAL(finished()));
+
+  QJson::Parser parser;
+  QVariantMap response = parser.parse(reply.get()).toMap();
+  return response["source"].toUrl();
+}
+
+void SkydriveService::EnsureConnected() {
+  if (!access_token_.isEmpty()) {
+    return;
+  }
+
+  Connect();
+  WaitForSignal(this, SIGNAL(Connected()));
 }
