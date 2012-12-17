@@ -279,7 +279,7 @@ msgid ""
 "A song will be included in the playlist if it matches these conditions."
 msgstr "一首歌曲將被包括在播放清單中，如果這些條件是符合的。"
 
-#: smartplaylists/searchterm.cpp:288
+#: smartplaylists/searchterm.cpp:293
 msgid "A-Z"
 msgstr "A-Z"
 
@@ -299,7 +299,7 @@ msgstr "AAC 32k"
 msgid "AAC 64k"
 msgstr "AAC 64k"
 
-#: core/song.cpp:326
+#: core/song.cpp:323
 msgid "AIFF"
 msgstr "AIFF"
 
@@ -395,7 +395,7 @@ msgstr "加入 Podcast"
 msgid "Add podcast..."
 msgstr "加入 Podcast..."
 
-#: smartplaylists/searchtermwidget.cpp:333
+#: smartplaylists/searchtermwidget.cpp:341
 msgid "Add search term"
 msgstr "加入搜尋字詞"
 
@@ -859,7 +859,7 @@ msgstr ""
 msgid "Buttons"
 msgstr "按鈕"
 
-#: core/song.cpp:329
+#: core/song.cpp:326
 msgid "CDDA"
 msgstr "CDDA"
 
@@ -959,7 +959,7 @@ msgstr "清除"
 msgid "Clear playlist"
 msgstr "清除播放清單"
 
-#: smartplaylists/searchtermwidget.cpp:321 ../bin/src/ui_mainwindow.h:644
+#: smartplaylists/searchtermwidget.cpp:329 ../bin/src/ui_mainwindow.h:644
 #: visualisations/visualisationcontainer.cpp:211
 #: ../bin/src/ui_visualisationoverlay.h:183
 msgid "Clementine"
@@ -1083,7 +1083,7 @@ msgstr "顏色"
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "用逗號化分類別清單:等級為0-3"
 
-#: playlist/playlist.cpp:1219 smartplaylists/searchterm.cpp:279
+#: playlist/playlist.cpp:1219 smartplaylists/searchterm.cpp:284
 #: ui/organisedialog.cpp:65 ../bin/src/ui_edittagdialog.h:661
 msgid "Comment"
 msgstr "評論"
@@ -1141,7 +1141,7 @@ msgstr "設定 podcasts..."
 
 #: internet/digitallyimportedservicebase.cpp:186
 #: ../bin/src/ui_globalsearchsettingspage.h:150
-#: internet/googledriveservice.cpp:219
+#: internet/googledriveservice.cpp:193
 msgid "Configure..."
 msgstr "設定..."
 
@@ -1225,9 +1225,9 @@ msgstr "無法載入 last.fm 廣播電台"
 msgid "Couldn't open output file %1"
 msgstr "無法開啟輸出檔 %1"
 
-#: internet/cloudfileservice.cpp:85 ../bin/src/ui_albumcovermanager.h:149
+#: internet/cloudfileservice.cpp:87 ../bin/src/ui_albumcovermanager.h:149
 #: ../bin/src/ui_albumcoversearcher.h:105 ../bin/src/ui_mainwindow.h:684
-#: internet/googledriveservice.cpp:215
+#: internet/googledriveservice.cpp:189
 msgid "Cover Manager"
 msgstr "封面管理員"
 
@@ -1385,7 +1385,7 @@ msgstr "創建的日期"
 msgid "Date modified"
 msgstr "修改的日期"
 
-#: smartplaylists/searchterm.cpp:301
+#: smartplaylists/searchterm.cpp:307
 msgid "Days"
 msgstr "天"
 
@@ -2042,7 +2042,7 @@ msgstr "完成"
 msgid "First level"
 msgstr "第一層次"
 
-#: core/song.cpp:319
+#: core/song.cpp:316
 msgid "Flac"
 msgstr "Flac"
 
@@ -2278,7 +2278,7 @@ msgstr "高 (%1 fps)"
 msgid "High (1024x1024)"
 msgstr "高 (1024x1024)"
 
-#: smartplaylists/searchterm.cpp:300
+#: smartplaylists/searchterm.cpp:306
 msgid "Hours"
 msgstr "小時"
 
@@ -2360,7 +2360,7 @@ msgstr "增加音量4％"
 msgid "Increase volume"
 msgstr "提高音量"
 
-#: internet/googledriveservice.cpp:139
+#: internet/cloudfileservice.cpp:135
 #, qt-format
 msgid "Indexing %1"
 msgstr ""
@@ -2727,7 +2727,7 @@ msgstr "歌詞"
 msgid "Lyrics from %1"
 msgstr "歌詞來自 %1"
 
-#: core/song.cpp:322 ../bin/src/ui_transcodersettingspage.h:159
+#: core/song.cpp:319 ../bin/src/ui_transcodersettingspage.h:159
 msgid "MP3"
 msgstr "MP3"
 
@@ -2739,11 +2739,11 @@ msgstr "MP3 256k"
 msgid "MP3 96k"
 msgstr "MP3 96k"
 
-#: core/song.cpp:320
+#: core/song.cpp:317
 msgid "MP4 AAC"
 msgstr "MP4 AAC"
 
-#: core/song.cpp:321
+#: core/song.cpp:318
 msgid "MPC"
 msgstr "MPC"
 
@@ -2842,7 +2842,7 @@ msgstr "監視音樂庫的變化"
 msgid "Mono playback"
 msgstr "單聲道播放"
 
-#: smartplaylists/searchterm.cpp:303
+#: smartplaylists/searchterm.cpp:309
 msgid "Months"
 msgstr "月"
 
@@ -3105,15 +3105,15 @@ msgstr "現在正播放"
 msgid "OSD Preview"
 msgstr "OSD 的預覽"
 
-#: core/song.cpp:323
+#: core/song.cpp:320
 msgid "Ogg Flac"
 msgstr "Ogg Flac"
 
-#: core/song.cpp:324
+#: core/song.cpp:321
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
 
-#: core/song.cpp:325 ../bin/src/ui_magnatunedownloaddialog.h:139
+#: core/song.cpp:322 ../bin/src/ui_magnatunedownloaddialog.h:139
 #: ../bin/src/ui_magnatunesettingspage.h:170
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
@@ -3150,7 +3150,7 @@ msgstr "開啟裝置"
 msgid "Open file..."
 msgstr "開啟檔案..."
 
-#: internet/googledriveservice.cpp:210
+#: internet/googledriveservice.cpp:184
 msgid "Open in Google Drive"
 msgstr ""
 
@@ -4227,7 +4227,7 @@ msgstr "在目前這首歌之後停止"
 msgid "Stopped"
 msgstr "已停止"
 
-#: core/song.cpp:331
+#: core/song.cpp:328
 msgid "Stream"
 msgstr "串流"
 
@@ -4342,7 +4342,7 @@ msgstr "目錄%1是無效的"
 msgid "The playlist '%1' was empty or could not be loaded."
 msgstr ""
 
-#: smartplaylists/searchtermwidget.cpp:322
+#: smartplaylists/searchtermwidget.cpp:330
 msgid "The second value must be greater than the first one!"
 msgstr ""
 
@@ -4552,7 +4552,7 @@ msgstr ""
 msgid "Transcoding options"
 msgstr "轉碼選項"
 
-#: core/song.cpp:328
+#: core/song.cpp:325
 msgid "TrueAudio"
 msgstr ""
 
@@ -4585,7 +4585,7 @@ msgstr "超寬頻 (UWB)"
 msgid "Unable to download %1 (%2)"
 msgstr ""
 
-#: core/song.cpp:335 library/librarymodel.cpp:301 library/librarymodel.cpp:306
+#: core/song.cpp:332 library/librarymodel.cpp:301 library/librarymodel.cpp:306
 #: library/librarymodel.cpp:947 playlist/playlistdelegates.cpp:309
 #: playlist/playlistmanager.cpp:394 playlist/playlistmanager.cpp:397
 #: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:416
@@ -4801,7 +4801,7 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
-#: core/song.cpp:327
+#: core/song.cpp:324
 msgid "Wav"
 msgstr "Wav"
 
@@ -4809,7 +4809,7 @@ msgstr "Wav"
 msgid "Website"
 msgstr "網站"
 
-#: smartplaylists/searchterm.cpp:302
+#: smartplaylists/searchterm.cpp:308
 msgid "Weeks"
 msgstr "星期"
 
@@ -4885,7 +4885,7 @@ msgstr ""
 msgid "Windows Media 64k"
 msgstr ""
 
-#: core/song.cpp:318
+#: core/song.cpp:315
 msgid "Windows Media audio"
 msgstr ""
 
@@ -4911,7 +4911,7 @@ msgstr "年份"
 msgid "Year - Album"
 msgstr "年份 - 專輯"
 
-#: smartplaylists/searchterm.cpp:304
+#: smartplaylists/searchterm.cpp:310
 msgid "Years"
 msgstr "年"
 
@@ -5048,7 +5048,7 @@ msgstr ""
 msgid "Your username or password was incorrect."
 msgstr ""
 
-#: smartplaylists/searchterm.cpp:288
+#: smartplaylists/searchterm.cpp:293
 msgid "Z-A"
 msgstr ""
 
@@ -5061,7 +5061,7 @@ msgstr ""
 msgid "add %n songs"
 msgstr "加入 %n 歌"
 
-#: smartplaylists/searchterm.cpp:200
+#: smartplaylists/searchterm.cpp:205
 msgid "after"
 msgstr ""
 
@@ -5077,15 +5077,15 @@ msgstr ""
 msgid "automatic"
 msgstr "自動"
 
-#: smartplaylists/searchterm.cpp:201
+#: smartplaylists/searchterm.cpp:206
 msgid "before"
 msgstr ""
 
-#: smartplaylists/searchterm.cpp:206
+#: smartplaylists/searchterm.cpp:211
 msgid "between"
 msgstr ""
 
-#: smartplaylists/searchterm.cpp:292
+#: smartplaylists/searchterm.cpp:297
 msgid "biggest first"
 msgstr ""
 
@@ -5093,7 +5093,7 @@ msgstr ""
 msgid "bpm"
 msgstr "bpm"
 
-#: smartplaylists/searchterm.cpp:212
+#: smartplaylists/searchterm.cpp:217
 msgid "contains"
 msgstr ""
 
@@ -5108,15 +5108,15 @@ msgstr "禁用"
 msgid "disc %1"
 msgstr "光碟%1"
 
-#: smartplaylists/searchterm.cpp:213
+#: smartplaylists/searchterm.cpp:218
 msgid "does not contain"
 msgstr "不包含"
 
-#: smartplaylists/searchterm.cpp:215
+#: smartplaylists/searchterm.cpp:220
 msgid "ends with"
 msgstr ""
 
-#: smartplaylists/searchterm.cpp:218
+#: smartplaylists/searchterm.cpp:223
 msgid "equals"
 msgstr "相等"
 
@@ -5128,11 +5128,11 @@ msgstr "gpodder.net"
 msgid "gpodder.net directory"
 msgstr "gpodder.net 目錄"
 
-#: smartplaylists/searchterm.cpp:216
+#: smartplaylists/searchterm.cpp:221
 msgid "greater than"
 msgstr ""
 
-#: smartplaylists/searchterm.cpp:204
+#: smartplaylists/searchterm.cpp:209
 msgid "in the last"
 msgstr ""
 
@@ -5142,11 +5142,11 @@ msgstr ""
 msgid "kbps"
 msgstr "kbps"
 
-#: smartplaylists/searchterm.cpp:217
+#: smartplaylists/searchterm.cpp:222
 msgid "less than"
 msgstr "少於"
 
-#: smartplaylists/searchterm.cpp:290
+#: smartplaylists/searchterm.cpp:295
 msgid "longest first"
 msgstr "最長優先"
 
@@ -5155,27 +5155,27 @@ msgstr "最長優先"
 msgid "move %n songs"
 msgstr ""
 
-#: smartplaylists/searchterm.cpp:289
+#: smartplaylists/searchterm.cpp:294
 msgid "newest first"
 msgstr "最新優先"
 
-#: smartplaylists/searchterm.cpp:219
+#: smartplaylists/searchterm.cpp:224
 msgid "not equals"
 msgstr "不相等"
 
-#: smartplaylists/searchterm.cpp:205
+#: smartplaylists/searchterm.cpp:210
 msgid "not in the last"
 msgstr ""
 
-#: smartplaylists/searchterm.cpp:203
+#: smartplaylists/searchterm.cpp:208
 msgid "not on"
 msgstr ""
 
-#: smartplaylists/searchterm.cpp:289
+#: smartplaylists/searchterm.cpp:294
 msgid "oldest first"
 msgstr "最舊優先"
 
-#: smartplaylists/searchterm.cpp:202
+#: smartplaylists/searchterm.cpp:207
 msgid "on"
 msgstr ""
 
@@ -5192,7 +5192,7 @@ msgstr "按下Enter"
 msgid "remove %n songs"
 msgstr "移除 %n 歌"
 
-#: smartplaylists/searchterm.cpp:290
+#: smartplaylists/searchterm.cpp:295
 msgid "shortest first"
 msgstr "最短優先"
 
@@ -5200,7 +5200,7 @@ msgstr "最短優先"
 msgid "shuffle songs"
 msgstr ""
 
-#: smartplaylists/searchterm.cpp:292
+#: smartplaylists/searchterm.cpp:297
 msgid "smallest first"
 msgstr "最小優先"
 
@@ -5208,7 +5208,7 @@ msgstr "最小優先"
 msgid "sort songs"
 msgstr ""
 
-#: smartplaylists/searchterm.cpp:214
+#: smartplaylists/searchterm.cpp:219
 msgid "starts with"
 msgstr ""
 

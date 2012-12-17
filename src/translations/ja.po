@@ -279,7 +279,7 @@ msgid ""
 "A song will be included in the playlist if it matches these conditions."
 msgstr "曲がこれらの条件に一致する場合はこのプレイリストに含まれます。"
 
-#: smartplaylists/searchterm.cpp:288
+#: smartplaylists/searchterm.cpp:293
 msgid "A-Z"
 msgstr "A-Z"
 
@@ -299,7 +299,7 @@ msgstr "AAC 32k"
 msgid "AAC 64k"
 msgstr "AAC 64k"
 
-#: core/song.cpp:326
+#: core/song.cpp:323
 msgid "AIFF"
 msgstr "AIFF"
 
@@ -395,7 +395,7 @@ msgstr "ポッドキャストを追加"
 msgid "Add podcast..."
 msgstr "ポッドキャストを追加..."
 
-#: smartplaylists/searchtermwidget.cpp:333
+#: smartplaylists/searchtermwidget.cpp:341
 msgid "Add search term"
 msgstr "検索条件を追加"
 
@@ -859,7 +859,7 @@ msgstr "ただし次のソースは無効になっています:"
 msgid "Buttons"
 msgstr "ボタン"
 
-#: core/song.cpp:329
+#: core/song.cpp:326
 msgid "CDDA"
 msgstr "オーディオ CD"
 
@@ -959,7 +959,7 @@ msgstr "クリア"
 msgid "Clear playlist"
 msgstr "プレイリストをクリア"
 
-#: smartplaylists/searchtermwidget.cpp:321 ../bin/src/ui_mainwindow.h:644
+#: smartplaylists/searchtermwidget.cpp:329 ../bin/src/ui_mainwindow.h:644
 #: visualisations/visualisationcontainer.cpp:211
 #: ../bin/src/ui_visualisationoverlay.h:183
 msgid "Clementine"
@@ -1083,7 +1083,7 @@ msgstr "色"
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "コンマ区切りの クラス:レベル のリスト、レベルは 0-3"
 
-#: playlist/playlist.cpp:1219 smartplaylists/searchterm.cpp:279
+#: playlist/playlist.cpp:1219 smartplaylists/searchterm.cpp:284
 #: ui/organisedialog.cpp:65 ../bin/src/ui_edittagdialog.h:661
 msgid "Comment"
 msgstr "コメント"
@@ -1141,7 +1141,7 @@ msgstr "ポッドキャストの設定..."
 
 #: internet/digitallyimportedservicebase.cpp:186
 #: ../bin/src/ui_globalsearchsettingspage.h:150
-#: internet/googledriveservice.cpp:219
+#: internet/googledriveservice.cpp:193
 msgid "Configure..."
 msgstr "設定..."
 
@@ -1225,9 +1225,9 @@ msgstr "last.fm ラジオ局を読み込めませんでした"
 msgid "Couldn't open output file %1"
 msgstr "出力ファイル %1 を開けませんでした"
 
-#: internet/cloudfileservice.cpp:85 ../bin/src/ui_albumcovermanager.h:149
+#: internet/cloudfileservice.cpp:87 ../bin/src/ui_albumcovermanager.h:149
 #: ../bin/src/ui_albumcoversearcher.h:105 ../bin/src/ui_mainwindow.h:684
-#: internet/googledriveservice.cpp:215
+#: internet/googledriveservice.cpp:189
 msgid "Cover Manager"
 msgstr "カバーマネージャー"
 
@@ -1385,7 +1385,7 @@ msgstr "作成日時"
 msgid "Date modified"
 msgstr "更新日時"
 
-#: smartplaylists/searchterm.cpp:301
+#: smartplaylists/searchterm.cpp:307
 msgid "Days"
 msgstr "日"
 
@@ -2042,7 +2042,7 @@ msgstr "完了"
 msgid "First level"
 msgstr "第 1 階層"
 
-#: core/song.cpp:319
+#: core/song.cpp:316
 msgid "Flac"
 msgstr "Flac"
 
@@ -2278,7 +2278,7 @@ msgstr "高 (%1 fps)"
 msgid "High (1024x1024)"
 msgstr "高 (1024x1024)"
 
-#: smartplaylists/searchterm.cpp:300
+#: smartplaylists/searchterm.cpp:306
 msgid "Hours"
 msgstr "時間"
 
@@ -2360,7 +2360,7 @@ msgstr "音量を 4% 上げます"
 msgid "Increase volume"
 msgstr "音量を上げる"
 
-#: internet/googledriveservice.cpp:139
+#: internet/cloudfileservice.cpp:135
 #, qt-format
 msgid "Indexing %1"
 msgstr ""
@@ -2727,7 +2727,7 @@ msgstr "歌詞"
 msgid "Lyrics from %1"
 msgstr "%1 からの歌詞"
 
-#: core/song.cpp:322 ../bin/src/ui_transcodersettingspage.h:159
+#: core/song.cpp:319 ../bin/src/ui_transcodersettingspage.h:159
 msgid "MP3"
 msgstr "MP3"
 
@@ -2739,11 +2739,11 @@ msgstr "MP3 256k"
 msgid "MP3 96k"
 msgstr "MP3 96k"
 
-#: core/song.cpp:320
+#: core/song.cpp:317
 msgid "MP4 AAC"
 msgstr "MP4 AAC"
 
-#: core/song.cpp:321
+#: core/song.cpp:318
 msgid "MPC"
 msgstr "MPC"
 
@@ -2842,7 +2842,7 @@ msgstr "ライブラリの変更を監視する"
 msgid "Mono playback"
 msgstr "モノラル再生"
 
-#: smartplaylists/searchterm.cpp:303
+#: smartplaylists/searchterm.cpp:309
 msgid "Months"
 msgstr "ヶ月"
 
@@ -3105,15 +3105,15 @@ msgstr "再生中"
 msgid "OSD Preview"
 msgstr "OSD のプレビュー"
 
-#: core/song.cpp:323
+#: core/song.cpp:320
 msgid "Ogg Flac"
 msgstr "Ogg Flac"
 
-#: core/song.cpp:324
+#: core/song.cpp:321
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
 
-#: core/song.cpp:325 ../bin/src/ui_magnatunedownloaddialog.h:139
+#: core/song.cpp:322 ../bin/src/ui_magnatunedownloaddialog.h:139
 #: ../bin/src/ui_magnatunesettingspage.h:170
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
@@ -3150,7 +3150,7 @@ msgstr "デバイスを開く"
 msgid "Open file..."
 msgstr "ファイルを開く..."
 
-#: internet/googledriveservice.cpp:210
+#: internet/googledriveservice.cpp:184
 msgid "Open in Google Drive"
 msgstr "Google Drive で開く"
 
@@ -4227,7 +4227,7 @@ msgstr "現在のトラックで停止"
 msgid "Stopped"
 msgstr "停止しました"
 
-#: core/song.cpp:331
+#: core/song.cpp:328
 msgid "Stream"
 msgstr "ストリーム"
 
@@ -4342,7 +4342,7 @@ msgstr "ディレクトリ %1 は不正です"
 msgid "The playlist '%1' was empty or could not be loaded."
 msgstr "プレイリスト '%1' は空であるか読み込めませんでした。"
 
-#: smartplaylists/searchtermwidget.cpp:322
+#: smartplaylists/searchtermwidget.cpp:330
 msgid "The second value must be greater than the first one!"
 msgstr "2 つ目の値は 1 つ目より大きくする必要があります!"
 
@@ -4552,7 +4552,7 @@ msgstr "%2 個のスレッドを使用して %1 個のファイルをトラン�
 msgid "Transcoding options"
 msgstr "トランスコードのオプション"
 
-#: core/song.cpp:328
+#: core/song.cpp:325
 msgid "TrueAudio"
 msgstr "TrueAudio"
 
@@ -4585,7 +4585,7 @@ msgstr ""
 msgid "Unable to download %1 (%2)"
 msgstr "%1 をダウンロードできません (%2)"
 
-#: core/song.cpp:335 library/librarymodel.cpp:301 library/librarymodel.cpp:306
+#: core/song.cpp:332 library/librarymodel.cpp:301 library/librarymodel.cpp:306
 #: library/librarymodel.cpp:947 playlist/playlistdelegates.cpp:309
 #: playlist/playlistmanager.cpp:394 playlist/playlistmanager.cpp:397
 #: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:416
@@ -4801,7 +4801,7 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
-#: core/song.cpp:327
+#: core/song.cpp:324
 msgid "Wav"
 msgstr "Wav"
 
@@ -4809,7 +4809,7 @@ msgstr "Wav"
 msgid "Website"
 msgstr "ウェブサイト"
 
-#: smartplaylists/searchterm.cpp:302
+#: smartplaylists/searchterm.cpp:308
 msgid "Weeks"
 msgstr "週"
 
@@ -4885,7 +4885,7 @@ msgstr "Windows Media 40k"
 msgid "Windows Media 64k"
 msgstr "Windows Media 64k"
 
-#: core/song.cpp:318
+#: core/song.cpp:315
 msgid "Windows Media audio"
 msgstr "Windows Media オーディオ"
 
@@ -4911,7 +4911,7 @@ msgstr "年"
 msgid "Year - Album"
 msgstr "年 - アルバム"
 
-#: smartplaylists/searchterm.cpp:304
+#: smartplaylists/searchterm.cpp:310
 msgid "Years"
 msgstr "年"
 
@@ -5048,7 +5048,7 @@ msgstr "システムが OpenGL をサポートしていないため、ビジュ�
 msgid "Your username or password was incorrect."
 msgstr "ユーザー名またはパスワードが間違っています。"
 
-#: smartplaylists/searchterm.cpp:288
+#: smartplaylists/searchterm.cpp:293
 msgid "Z-A"
 msgstr "Z-A"
 
@@ -5061,7 +5061,7 @@ msgstr "Zero"
 msgid "add %n songs"
 msgstr "%n 曲の追加"
 
-#: smartplaylists/searchterm.cpp:200
+#: smartplaylists/searchterm.cpp:205
 msgid "after"
 msgstr "が次の値より後"
 
@@ -5077,15 +5077,15 @@ msgstr "と"
 msgid "automatic"
 msgstr "自動"
 
-#: smartplaylists/searchterm.cpp:201
+#: smartplaylists/searchterm.cpp:206
 msgid "before"
 msgstr "が次の値より前"
 
-#: smartplaylists/searchterm.cpp:206
+#: smartplaylists/searchterm.cpp:211
 msgid "between"
 msgstr "が次の値の間"
 
-#: smartplaylists/searchterm.cpp:292
+#: smartplaylists/searchterm.cpp:297
 msgid "biggest first"
 msgstr "大きい順"
 
@@ -5093,7 +5093,7 @@ msgstr "大きい順"
 msgid "bpm"
 msgstr "bpm"
 
-#: smartplaylists/searchterm.cpp:212
+#: smartplaylists/searchterm.cpp:217
 msgid "contains"
 msgstr "が次を含む"
 
@@ -5108,15 +5108,15 @@ msgstr "無効"
 msgid "disc %1"
 msgstr "ディスク %1"
 
-#: smartplaylists/searchterm.cpp:213
+#: smartplaylists/searchterm.cpp:218
 msgid "does not contain"
 msgstr "が次を含まない"
 
-#: smartplaylists/searchterm.cpp:215
+#: smartplaylists/searchterm.cpp:220
 msgid "ends with"
 msgstr "が次で終わる"
 
-#: smartplaylists/searchterm.cpp:218
+#: smartplaylists/searchterm.cpp:223
 msgid "equals"
 msgstr "が次に一致する"
 
@@ -5128,11 +5128,11 @@ msgstr "gpodder.net"
 msgid "gpodder.net directory"
 msgstr "gpodder.net ディレクトリ"
 
-#: smartplaylists/searchterm.cpp:216
+#: smartplaylists/searchterm.cpp:221
 msgid "greater than"
 msgstr "が次より大きい"
 
-#: smartplaylists/searchterm.cpp:204
+#: smartplaylists/searchterm.cpp:209
 msgid "in the last"
 msgstr ""
 
@@ -5142,11 +5142,11 @@ msgstr ""
 msgid "kbps"
 msgstr "kbps"
 
-#: smartplaylists/searchterm.cpp:217
+#: smartplaylists/searchterm.cpp:222
 msgid "less than"
 msgstr "が次より小さい"
 
-#: smartplaylists/searchterm.cpp:290
+#: smartplaylists/searchterm.cpp:295
 msgid "longest first"
 msgstr "長い順"
 
@@ -5155,27 +5155,27 @@ msgstr "長い順"
 msgid "move %n songs"
 msgstr "%n 曲の移動"
 
-#: smartplaylists/searchterm.cpp:289
+#: smartplaylists/searchterm.cpp:294
 msgid "newest first"
 msgstr "新しい順"
 
-#: smartplaylists/searchterm.cpp:219
+#: smartplaylists/searchterm.cpp:224
 msgid "not equals"
 msgstr "が次と異なる"
 
-#: smartplaylists/searchterm.cpp:205
+#: smartplaylists/searchterm.cpp:210
 msgid "not in the last"
 msgstr ""
 
-#: smartplaylists/searchterm.cpp:203
+#: smartplaylists/searchterm.cpp:208
 msgid "not on"
 msgstr "が次の値でない"
 
-#: smartplaylists/searchterm.cpp:289
+#: smartplaylists/searchterm.cpp:294
 msgid "oldest first"
 msgstr "古い順"
 
-#: smartplaylists/searchterm.cpp:202
+#: smartplaylists/searchterm.cpp:207
 msgid "on"
 msgstr "が次の値"
 
@@ -5192,7 +5192,7 @@ msgstr "enter を押してください"
 msgid "remove %n songs"
 msgstr "%n 曲の削除"
 
-#: smartplaylists/searchterm.cpp:290
+#: smartplaylists/searchterm.cpp:295
 msgid "shortest first"
 msgstr "短い順"
 
@@ -5200,7 +5200,7 @@ msgstr "短い順"
 msgid "shuffle songs"
 msgstr "曲のシャッフル"
 
-#: smartplaylists/searchterm.cpp:292
+#: smartplaylists/searchterm.cpp:297
 msgid "smallest first"
 msgstr "小さい順"
 
@@ -5208,7 +5208,7 @@ msgstr "小さい順"
 msgid "sort songs"
 msgstr "曲の並び替え"
 
-#: smartplaylists/searchterm.cpp:214
+#: smartplaylists/searchterm.cpp:219
 msgid "starts with"
 msgstr "が次で始まる"
 

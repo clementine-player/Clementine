@@ -279,7 +279,7 @@ msgid ""
 "A song will be included in the playlist if it matches these conditions."
 msgstr "שיר יכלל ברשימת ההשמעה אם הוא עומד בתנאים אלו."
 
-#: smartplaylists/searchterm.cpp:288
+#: smartplaylists/searchterm.cpp:293
 msgid "A-Z"
 msgstr "A-Z"
 
@@ -299,7 +299,7 @@ msgstr "AAC 32k"
 msgid "AAC 64k"
 msgstr "AAC 64k"
 
-#: core/song.cpp:326
+#: core/song.cpp:323
 msgid "AIFF"
 msgstr "AIFF"
 
@@ -395,7 +395,7 @@ msgstr "הוספת פודקאסט"
 msgid "Add podcast..."
 msgstr "הוספת פודקאסט..."
 
-#: smartplaylists/searchtermwidget.cpp:333
+#: smartplaylists/searchtermwidget.cpp:341
 msgid "Add search term"
 msgstr "הוספת מונח לחיפוש"
 
@@ -859,7 +859,7 @@ msgstr ""
 msgid "Buttons"
 msgstr "לחצנים"
 
-#: core/song.cpp:329
+#: core/song.cpp:326
 msgid "CDDA"
 msgstr "CDDA"
 
@@ -959,7 +959,7 @@ msgstr "ניקוי"
 msgid "Clear playlist"
 msgstr "ניקוי רשימת ההשמעה"
 
-#: smartplaylists/searchtermwidget.cpp:321 ../bin/src/ui_mainwindow.h:644
+#: smartplaylists/searchtermwidget.cpp:329 ../bin/src/ui_mainwindow.h:644
 #: visualisations/visualisationcontainer.cpp:211
 #: ../bin/src/ui_visualisationoverlay.h:183
 msgid "Clementine"
@@ -1083,7 +1083,7 @@ msgstr "צבעים"
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "רשימה מופרדת בפסיקים של class:level,level יכול להיות 0-3 "
 
-#: playlist/playlist.cpp:1219 smartplaylists/searchterm.cpp:279
+#: playlist/playlist.cpp:1219 smartplaylists/searchterm.cpp:284
 #: ui/organisedialog.cpp:65 ../bin/src/ui_edittagdialog.h:661
 msgid "Comment"
 msgstr "הערה"
@@ -1141,7 +1141,7 @@ msgstr "הגדרת פודקאסטים..."
 
 #: internet/digitallyimportedservicebase.cpp:186
 #: ../bin/src/ui_globalsearchsettingspage.h:150
-#: internet/googledriveservice.cpp:219
+#: internet/googledriveservice.cpp:193
 msgid "Configure..."
 msgstr "הגדרה..."
 
@@ -1225,9 +1225,9 @@ msgstr "לא ניתן לטעון את תחנת הרדיו מ־last.fm"
 msgid "Couldn't open output file %1"
 msgstr "לא ניתן לפתוח את קובץ הפלט %1"
 
-#: internet/cloudfileservice.cpp:85 ../bin/src/ui_albumcovermanager.h:149
+#: internet/cloudfileservice.cpp:87 ../bin/src/ui_albumcovermanager.h:149
 #: ../bin/src/ui_albumcoversearcher.h:105 ../bin/src/ui_mainwindow.h:684
-#: internet/googledriveservice.cpp:215
+#: internet/googledriveservice.cpp:189
 msgid "Cover Manager"
 msgstr "מנהל העטיפות"
 
@@ -1385,7 +1385,7 @@ msgstr "תאריך יצירה"
 msgid "Date modified"
 msgstr "תאריך שינוי"
 
-#: smartplaylists/searchterm.cpp:301
+#: smartplaylists/searchterm.cpp:307
 msgid "Days"
 msgstr "ימים"
 
@@ -2042,7 +2042,7 @@ msgstr "סיום"
 msgid "First level"
 msgstr "רמה ראשונה"
 
-#: core/song.cpp:319
+#: core/song.cpp:316
 msgid "Flac"
 msgstr "Flac"
 
@@ -2278,7 +2278,7 @@ msgstr "גבוה (%1 fps)"
 msgid "High (1024x1024)"
 msgstr "גבוה (1024x1024)"
 
-#: smartplaylists/searchterm.cpp:300
+#: smartplaylists/searchterm.cpp:306
 msgid "Hours"
 msgstr "שעות"
 
@@ -2360,7 +2360,7 @@ msgstr "הגברת עצמת השמע ב־4%"
 msgid "Increase volume"
 msgstr "הגברת עוצמת השמע"
 
-#: internet/googledriveservice.cpp:139
+#: internet/cloudfileservice.cpp:135
 #, qt-format
 msgid "Indexing %1"
 msgstr ""
@@ -2727,7 +2727,7 @@ msgstr "מילות השיר"
 msgid "Lyrics from %1"
 msgstr "מילות השיר מתוך %1"
 
-#: core/song.cpp:322 ../bin/src/ui_transcodersettingspage.h:159
+#: core/song.cpp:319 ../bin/src/ui_transcodersettingspage.h:159
 msgid "MP3"
 msgstr "MP3"
 
@@ -2739,11 +2739,11 @@ msgstr "MP3 256k"
 msgid "MP3 96k"
 msgstr "MP3 96k"
 
-#: core/song.cpp:320
+#: core/song.cpp:317
 msgid "MP4 AAC"
 msgstr "MP4 AAC"
 
-#: core/song.cpp:321
+#: core/song.cpp:318
 msgid "MPC"
 msgstr "MPC"
 
@@ -2842,7 +2842,7 @@ msgstr "מעקב אחר שינויים בספרייה"
 msgid "Mono playback"
 msgstr ""
 
-#: smartplaylists/searchterm.cpp:303
+#: smartplaylists/searchterm.cpp:309
 msgid "Months"
 msgstr "חודשים"
 
@@ -3105,15 +3105,15 @@ msgstr "מתנגן עכשיו"
 msgid "OSD Preview"
 msgstr "תצוגה מקדימה של חיווי המסך"
 
-#: core/song.cpp:323
+#: core/song.cpp:320
 msgid "Ogg Flac"
 msgstr "Ogg Flac"
 
-#: core/song.cpp:324
+#: core/song.cpp:321
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
 
-#: core/song.cpp:325 ../bin/src/ui_magnatunedownloaddialog.h:139
+#: core/song.cpp:322 ../bin/src/ui_magnatunedownloaddialog.h:139
 #: ../bin/src/ui_magnatunesettingspage.h:170
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
@@ -3150,7 +3150,7 @@ msgstr "פתיחת התקן"
 msgid "Open file..."
 msgstr "פתיחת קובץ..."
 
-#: internet/googledriveservice.cpp:210
+#: internet/googledriveservice.cpp:184
 msgid "Open in Google Drive"
 msgstr ""
 
@@ -4227,7 +4227,7 @@ msgstr "הפסקת הנגינה אחרי הרצועה הנוכחית"
 msgid "Stopped"
 msgstr "בעצירה"
 
-#: core/song.cpp:331
+#: core/song.cpp:328
 msgid "Stream"
 msgstr "מדיה זורמת"
 
@@ -4342,7 +4342,7 @@ msgstr "התיקייה %1 לא חוקית"
 msgid "The playlist '%1' was empty or could not be loaded."
 msgstr "רשימת ההשמעה %1 ריקה או שלא ניתן היה לטעון אותה."
 
-#: smartplaylists/searchtermwidget.cpp:322
+#: smartplaylists/searchtermwidget.cpp:330
 msgid "The second value must be greater than the first one!"
 msgstr "הערך השני חייב להיות גדול יותר מהערך הראשון!"
 
@@ -4552,7 +4552,7 @@ msgstr "התחלת המרת %1 קבצים בעזרת %2 תהליכים"
 msgid "Transcoding options"
 msgstr "אפשרויות המרה"
 
-#: core/song.cpp:328
+#: core/song.cpp:325
 msgid "TrueAudio"
 msgstr "TrueAudio"
 
@@ -4585,7 +4585,7 @@ msgstr "Ultra wide band (UWB)"
 msgid "Unable to download %1 (%2)"
 msgstr "לא ניתן להוריד %1 (%2)"
 
-#: core/song.cpp:335 library/librarymodel.cpp:301 library/librarymodel.cpp:306
+#: core/song.cpp:332 library/librarymodel.cpp:301 library/librarymodel.cpp:306
 #: library/librarymodel.cpp:947 playlist/playlistdelegates.cpp:309
 #: playlist/playlistmanager.cpp:394 playlist/playlistmanager.cpp:397
 #: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:416
@@ -4801,7 +4801,7 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
-#: core/song.cpp:327
+#: core/song.cpp:324
 msgid "Wav"
 msgstr "Wav"
 
@@ -4809,7 +4809,7 @@ msgstr "Wav"
 msgid "Website"
 msgstr "אתר"
 
-#: smartplaylists/searchterm.cpp:302
+#: smartplaylists/searchterm.cpp:308
 msgid "Weeks"
 msgstr "שבועות"
 
@@ -4885,7 +4885,7 @@ msgstr "Windows Media 40k"
 msgid "Windows Media 64k"
 msgstr "Windows Media 64k"
 
-#: core/song.cpp:318
+#: core/song.cpp:315
 msgid "Windows Media audio"
 msgstr "שמע של Windows Media"
 
@@ -4911,7 +4911,7 @@ msgstr "שינוי"
 msgid "Year - Album"
 msgstr "שינוי - אלבום"
 
-#: smartplaylists/searchterm.cpp:304
+#: smartplaylists/searchterm.cpp:310
 msgid "Years"
 msgstr "שנים"
 
@@ -5048,7 +5048,7 @@ msgstr "למערכת שלך חסרה תמיכה ב־OpenGL, אפקטים חזו�
 msgid "Your username or password was incorrect."
 msgstr "שם המשתמש או הססמה שגויים"
 
-#: smartplaylists/searchterm.cpp:288
+#: smartplaylists/searchterm.cpp:293
 msgid "Z-A"
 msgstr "Z-A"
 
@@ -5061,7 +5061,7 @@ msgstr "אפס"
 msgid "add %n songs"
 msgstr "הוספת %n שירים"
 
-#: smartplaylists/searchterm.cpp:200
+#: smartplaylists/searchterm.cpp:205
 msgid "after"
 msgstr "אחרי"
 
@@ -5077,15 +5077,15 @@ msgstr "וגם"
 msgid "automatic"
 msgstr "אוטומטי"
 
-#: smartplaylists/searchterm.cpp:201
+#: smartplaylists/searchterm.cpp:206
 msgid "before"
 msgstr "לפני"
 
-#: smartplaylists/searchterm.cpp:206
+#: smartplaylists/searchterm.cpp:211
 msgid "between"
 msgstr "בין"
 
-#: smartplaylists/searchterm.cpp:292
+#: smartplaylists/searchterm.cpp:297
 msgid "biggest first"
 msgstr "הכי גדול קודם"
 
@@ -5093,7 +5093,7 @@ msgstr "הכי גדול קודם"
 msgid "bpm"
 msgstr "פעימות לדקה"
 
-#: smartplaylists/searchterm.cpp:212
+#: smartplaylists/searchterm.cpp:217
 msgid "contains"
 msgstr "מכיל"
 
@@ -5108,15 +5108,15 @@ msgstr "מנוטרל"
 msgid "disc %1"
 msgstr "דיסק %1"
 
-#: smartplaylists/searchterm.cpp:213
+#: smartplaylists/searchterm.cpp:218
 msgid "does not contain"
 msgstr "אינו מכיל"
 
-#: smartplaylists/searchterm.cpp:215
+#: smartplaylists/searchterm.cpp:220
 msgid "ends with"
 msgstr "מסתיים ב־"
 
-#: smartplaylists/searchterm.cpp:218
+#: smartplaylists/searchterm.cpp:223
 msgid "equals"
 msgstr "שווה ל־"
 
@@ -5128,11 +5128,11 @@ msgstr "gpodder.net"
 msgid "gpodder.net directory"
 msgstr "ספריית gpodder.net "
 
-#: smartplaylists/searchterm.cpp:216
+#: smartplaylists/searchterm.cpp:221
 msgid "greater than"
 msgstr "גדול מ־"
 
-#: smartplaylists/searchterm.cpp:204
+#: smartplaylists/searchterm.cpp:209
 msgid "in the last"
 msgstr "באחרון"
 
@@ -5142,11 +5142,11 @@ msgstr "באחרון"
 msgid "kbps"
 msgstr "קילוסיביות לשניה"
 
-#: smartplaylists/searchterm.cpp:217
+#: smartplaylists/searchterm.cpp:222
 msgid "less than"
 msgstr "קטן מ־"
 
-#: smartplaylists/searchterm.cpp:290
+#: smartplaylists/searchterm.cpp:295
 msgid "longest first"
 msgstr "הארוך ביותר ראשון"
 
@@ -5155,27 +5155,27 @@ msgstr "הארוך ביותר ראשון"
 msgid "move %n songs"
 msgstr ""
 
-#: smartplaylists/searchterm.cpp:289
+#: smartplaylists/searchterm.cpp:294
 msgid "newest first"
 msgstr "החדש ביותר ראשון"
 
-#: smartplaylists/searchterm.cpp:219
+#: smartplaylists/searchterm.cpp:224
 msgid "not equals"
 msgstr "לא שווה"
 
-#: smartplaylists/searchterm.cpp:205
+#: smartplaylists/searchterm.cpp:210
 msgid "not in the last"
 msgstr "לא באחרון"
 
-#: smartplaylists/searchterm.cpp:203
+#: smartplaylists/searchterm.cpp:208
 msgid "not on"
 msgstr "לא ב־"
 
-#: smartplaylists/searchterm.cpp:289
+#: smartplaylists/searchterm.cpp:294
 msgid "oldest first"
 msgstr "הישן ביותר ראשון"
 
-#: smartplaylists/searchterm.cpp:202
+#: smartplaylists/searchterm.cpp:207
 msgid "on"
 msgstr "ב־"
 
@@ -5192,7 +5192,7 @@ msgstr "נא להיכנס"
 msgid "remove %n songs"
 msgstr "הסרת %n שירים"
 
-#: smartplaylists/searchterm.cpp:290
+#: smartplaylists/searchterm.cpp:295
 msgid "shortest first"
 msgstr "הקצר ביותר ראשון"
 
@@ -5200,7 +5200,7 @@ msgstr "הקצר ביותר ראשון"
 msgid "shuffle songs"
 msgstr ""
 
-#: smartplaylists/searchterm.cpp:292
+#: smartplaylists/searchterm.cpp:297
 msgid "smallest first"
 msgstr "הקטן ביותר ראשון"
 
@@ -5208,7 +5208,7 @@ msgstr "הקטן ביותר ראשון"
 msgid "sort songs"
 msgstr ""
 
-#: smartplaylists/searchterm.cpp:214
+#: smartplaylists/searchterm.cpp:219
 msgid "starts with"
 msgstr "מתחיל ב־"
 

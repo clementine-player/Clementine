@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-11-30 11:09+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2012-12-05 10:39+0000\n"
+"Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: fi\n"
@@ -279,7 +279,7 @@ msgid ""
 "A song will be included in the playlist if it matches these conditions."
 msgstr "Kappale sisällytetään soittolistaan, jos se vastaa näitä ehtoja."
 
-#: smartplaylists/searchterm.cpp:288
+#: smartplaylists/searchterm.cpp:293
 msgid "A-Z"
 msgstr "A-Ö"
 
@@ -299,7 +299,7 @@ msgstr "AAC 32k"
 msgid "AAC 64k"
 msgstr "AAC 64k"
 
-#: core/song.cpp:326
+#: core/song.cpp:323
 msgid "AIFF"
 msgstr "AIFF"
 
@@ -395,7 +395,7 @@ msgstr "Lisää podcast"
 msgid "Add podcast..."
 msgstr "Lisää podcast..."
 
-#: smartplaylists/searchtermwidget.cpp:333
+#: smartplaylists/searchtermwidget.cpp:341
 msgid "Add search term"
 msgstr "Lisää hakutermi"
 
@@ -859,7 +859,7 @@ msgstr "Mutta nämä lähteet ovat pois käytöstä:"
 msgid "Buttons"
 msgstr "Painikkeet"
 
-#: core/song.cpp:329
+#: core/song.cpp:326
 msgid "CDDA"
 msgstr "CDDA"
 
@@ -959,7 +959,7 @@ msgstr "Tyhjennä"
 msgid "Clear playlist"
 msgstr "Tyhjennä soittolista"
 
-#: smartplaylists/searchtermwidget.cpp:321 ../bin/src/ui_mainwindow.h:644
+#: smartplaylists/searchtermwidget.cpp:329 ../bin/src/ui_mainwindow.h:644
 #: visualisations/visualisationcontainer.cpp:211
 #: ../bin/src/ui_visualisationoverlay.h:183
 msgid "Clementine"
@@ -986,7 +986,7 @@ msgstr "Clementine voi automaattisesti muuntaa tähän laitteeseen kopioitavan m
 
 #: ../bin/src/ui_dropboxsettingspage.h:104
 msgid "Clementine can play music that you have uploaded to Dropbox"
-msgstr ""
+msgstr "Clementine voi toistaa Dropboxiin lähettämääsi musiikkia"
 
 #: ../bin/src/ui_googledrivesettingspage.h:104
 msgid "Clementine can play music that you have uploaded to Google Drive"
@@ -994,7 +994,7 @@ msgstr "Clementine voi toistaa Google Driveen lataamaasi musiikkia"
 
 #: ../bin/src/ui_ubuntuonesettingspage.h:111
 msgid "Clementine can play music that you have uploaded to Ubuntu One"
-msgstr ""
+msgstr "Clementine voi toistaa Ubuntu Oneen lähettämääsi musiikkia"
 
 #: ../bin/src/ui_notificationssettingspage.h:403
 msgid "Clementine can show a message when the track changes."
@@ -1045,7 +1045,7 @@ msgstr "Napsauta vaihtaaksesi näkymää: aikaa jäljellä / kokonaisaika"
 msgid ""
 "Clicking the Login button will open a web browser.  You should return to "
 "Clementine after you have logged in."
-msgstr ""
+msgstr "Kirjaudu-painikkeen napsauttaminen avaa selaimen.  Palaa Clementineen, kun olet kirjautunut sisään."
 
 #: widgets/didyoumean.cpp:37
 msgid "Close"
@@ -1083,7 +1083,7 @@ msgstr "Värit"
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr ""
 
-#: playlist/playlist.cpp:1219 smartplaylists/searchterm.cpp:279
+#: playlist/playlist.cpp:1219 smartplaylists/searchterm.cpp:284
 #: ui/organisedialog.cpp:65 ../bin/src/ui_edittagdialog.h:661
 msgid "Comment"
 msgstr "Kommentti"
@@ -1141,7 +1141,7 @@ msgstr "Muokkaa podcasteja..."
 
 #: internet/digitallyimportedservicebase.cpp:186
 #: ../bin/src/ui_globalsearchsettingspage.h:150
-#: internet/googledriveservice.cpp:219
+#: internet/googledriveservice.cpp:193
 msgid "Configure..."
 msgstr "Asetukset..."
 
@@ -1225,9 +1225,9 @@ msgstr "Last.fm-radioaseman lataus epäonnistui"
 msgid "Couldn't open output file %1"
 msgstr "Ei voitu avata kohdetiedostoa %1"
 
-#: internet/cloudfileservice.cpp:85 ../bin/src/ui_albumcovermanager.h:149
+#: internet/cloudfileservice.cpp:87 ../bin/src/ui_albumcovermanager.h:149
 #: ../bin/src/ui_albumcoversearcher.h:105 ../bin/src/ui_mainwindow.h:684
-#: internet/googledriveservice.cpp:215
+#: internet/googledriveservice.cpp:189
 msgid "Cover Manager"
 msgstr "Kansikuvaselain"
 
@@ -1385,7 +1385,7 @@ msgstr "Luotu"
 msgid "Date modified"
 msgstr "Muokattu"
 
-#: smartplaylists/searchterm.cpp:301
+#: smartplaylists/searchterm.cpp:307
 msgid "Days"
 msgstr "Päivää"
 
@@ -1664,7 +1664,7 @@ msgstr "Aseman kirjain"
 
 #: ../bin/src/ui_dropboxsettingspage.h:103
 msgid "Dropbox"
-msgstr ""
+msgstr "Dropbox"
 
 #: ../bin/src/ui_dynamicplaylistcontrols.h:109
 msgid "Dynamic mode is on"
@@ -2042,7 +2042,7 @@ msgstr "Valmis"
 msgid "First level"
 msgstr "Ensimmäinen taso"
 
-#: core/song.cpp:319
+#: core/song.cpp:316
 msgid "Flac"
 msgstr "Flac"
 
@@ -2278,7 +2278,7 @@ msgstr "Nopea (%1 fps)"
 msgid "High (1024x1024)"
 msgstr "Korkea (1024x1024)"
 
-#: smartplaylists/searchterm.cpp:300
+#: smartplaylists/searchterm.cpp:306
 msgid "Hours"
 msgstr "Tuntia"
 
@@ -2360,7 +2360,7 @@ msgstr "Lisää ääntä - 4 %"
 msgid "Increase volume"
 msgstr "Lisää äänenvoimakkuutta"
 
-#: internet/googledriveservice.cpp:139
+#: internet/cloudfileservice.cpp:135
 #, qt-format
 msgid "Indexing %1"
 msgstr "Indeksoidaan %1"
@@ -2727,7 +2727,7 @@ msgstr "Sanoitukset"
 msgid "Lyrics from %1"
 msgstr "Sanoitukset tarjoaa %1"
 
-#: core/song.cpp:322 ../bin/src/ui_transcodersettingspage.h:159
+#: core/song.cpp:319 ../bin/src/ui_transcodersettingspage.h:159
 msgid "MP3"
 msgstr "MP3"
 
@@ -2739,11 +2739,11 @@ msgstr "MP3 256K"
 msgid "MP3 96k"
 msgstr "MP3 96k"
 
-#: core/song.cpp:320
+#: core/song.cpp:317
 msgid "MP4 AAC"
 msgstr "MP4 AAC"
 
-#: core/song.cpp:321
+#: core/song.cpp:318
 msgid "MPC"
 msgstr "MPC"
 
@@ -2842,7 +2842,7 @@ msgstr "Tarkkaile kirjastoa muutosten varalta"
 msgid "Mono playback"
 msgstr "Mono-toisto"
 
-#: smartplaylists/searchterm.cpp:303
+#: smartplaylists/searchterm.cpp:309
 msgid "Months"
 msgstr "Kuukautta"
 
@@ -3105,15 +3105,15 @@ msgstr "Nyt soi"
 msgid "OSD Preview"
 msgstr "Kuvaruutunäytön esikatselu"
 
-#: core/song.cpp:323
+#: core/song.cpp:320
 msgid "Ogg Flac"
 msgstr "Ogg Flac"
 
-#: core/song.cpp:324
+#: core/song.cpp:321
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
 
-#: core/song.cpp:325 ../bin/src/ui_magnatunedownloaddialog.h:139
+#: core/song.cpp:322 ../bin/src/ui_magnatunedownloaddialog.h:139
 #: ../bin/src/ui_magnatunesettingspage.h:170
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
@@ -3150,7 +3150,7 @@ msgstr "Avaa laite"
 msgid "Open file..."
 msgstr "Avaa tiedosto ..."
 
-#: internet/googledriveservice.cpp:210
+#: internet/googledriveservice.cpp:184
 msgid "Open in Google Drive"
 msgstr ""
 
@@ -3992,7 +3992,7 @@ msgstr "Näytä kohdassa \"Useita esittäjiä\""
 
 #: moodbar/moodbarproxystyle.cpp:337
 msgid "Show moodbar"
-msgstr ""
+msgstr "Näytä mielialapalkki"
 
 #: ui/mainwindow.cpp:459
 msgid "Show only duplicates"
@@ -4227,7 +4227,7 @@ msgstr "Lopeta soitto nykyisen kappaleen jälkeen"
 msgid "Stopped"
 msgstr "Pysäytetty"
 
-#: core/song.cpp:331
+#: core/song.cpp:328
 msgid "Stream"
 msgstr "Suoratoisto"
 
@@ -4342,7 +4342,7 @@ msgstr "Kansio %1 ei ole kelvollinen"
 msgid "The playlist '%1' was empty or could not be loaded."
 msgstr "Soittolista \"%1\" oli tyhjä tai sitä ei pystytty ladata."
 
-#: smartplaylists/searchtermwidget.cpp:322
+#: smartplaylists/searchtermwidget.cpp:330
 msgid "The second value must be greater than the first one!"
 msgstr "Toisen arvo pitää olla suurempi kuin ensimmäinen!"
 
@@ -4552,7 +4552,7 @@ msgstr "Muunnetaan %1 tiedostoa käyttäen %2 säiettä"
 msgid "Transcoding options"
 msgstr "Muunnosvalinnat"
 
-#: core/song.cpp:328
+#: core/song.cpp:325
 msgid "TrueAudio"
 msgstr "TrueAudio"
 
@@ -4574,7 +4574,7 @@ msgstr "Osoite/osoitteet"
 
 #: ../bin/src/ui_ubuntuonesettingspage.h:110
 msgid "Ubuntu One"
-msgstr ""
+msgstr "Ubuntu One"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:228
 msgid "Ultra wide band (UWB)"
@@ -4585,7 +4585,7 @@ msgstr ""
 msgid "Unable to download %1 (%2)"
 msgstr "Kohteen %1 lataus epäonnistui (%2)"
 
-#: core/song.cpp:335 library/librarymodel.cpp:301 library/librarymodel.cpp:306
+#: core/song.cpp:332 library/librarymodel.cpp:301 library/librarymodel.cpp:306
 #: library/librarymodel.cpp:947 playlist/playlistdelegates.cpp:309
 #: playlist/playlistmanager.cpp:394 playlist/playlistmanager.cpp:397
 #: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:416
@@ -4801,7 +4801,7 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
-#: core/song.cpp:327
+#: core/song.cpp:324
 msgid "Wav"
 msgstr "Wav"
 
@@ -4809,7 +4809,7 @@ msgstr "Wav"
 msgid "Website"
 msgstr "Verkkosivu"
 
-#: smartplaylists/searchterm.cpp:302
+#: smartplaylists/searchterm.cpp:308
 msgid "Weeks"
 msgstr "Viikkoa"
 
@@ -4885,7 +4885,7 @@ msgstr "Windows Media 40k"
 msgid "Windows Media 64k"
 msgstr "Windows Media 64k"
 
-#: core/song.cpp:318
+#: core/song.cpp:315
 msgid "Windows Media audio"
 msgstr "Windows Media -ääni"
 
@@ -4911,7 +4911,7 @@ msgstr "Vuosi"
 msgid "Year - Album"
 msgstr "Vuosi - Levy"
 
-#: smartplaylists/searchterm.cpp:304
+#: smartplaylists/searchterm.cpp:310
 msgid "Years"
 msgstr "Vuotta"
 
@@ -5048,7 +5048,7 @@ msgstr "Järjestelmästäsi puuttuu OpenGL-tuki, joten visualisoinnit eivät ole
 msgid "Your username or password was incorrect."
 msgstr "Käyttäjätunnus tai salasana oli virheellinen."
 
-#: smartplaylists/searchterm.cpp:288
+#: smartplaylists/searchterm.cpp:293
 msgid "Z-A"
 msgstr "Ö-A"
 
@@ -5061,7 +5061,7 @@ msgstr "Zero"
 msgid "add %n songs"
 msgstr "lisää %n kappaletta"
 
-#: smartplaylists/searchterm.cpp:200
+#: smartplaylists/searchterm.cpp:205
 msgid "after"
 msgstr "jälkeen"
 
@@ -5077,15 +5077,15 @@ msgstr "ja"
 msgid "automatic"
 msgstr "automaattinen"
 
-#: smartplaylists/searchterm.cpp:201
+#: smartplaylists/searchterm.cpp:206
 msgid "before"
 msgstr "ennen"
 
-#: smartplaylists/searchterm.cpp:206
+#: smartplaylists/searchterm.cpp:211
 msgid "between"
 msgstr "välillä"
 
-#: smartplaylists/searchterm.cpp:292
+#: smartplaylists/searchterm.cpp:297
 msgid "biggest first"
 msgstr "suurin ensin"
 
@@ -5093,7 +5093,7 @@ msgstr "suurin ensin"
 msgid "bpm"
 msgstr "bpm"
 
-#: smartplaylists/searchterm.cpp:212
+#: smartplaylists/searchterm.cpp:217
 msgid "contains"
 msgstr "sisältää"
 
@@ -5108,15 +5108,15 @@ msgstr "pois käytöstä"
 msgid "disc %1"
 msgstr "levy %1"
 
-#: smartplaylists/searchterm.cpp:213
+#: smartplaylists/searchterm.cpp:218
 msgid "does not contain"
 msgstr "ei sisällä"
 
-#: smartplaylists/searchterm.cpp:215
+#: smartplaylists/searchterm.cpp:220
 msgid "ends with"
 msgstr "päättyy"
 
-#: smartplaylists/searchterm.cpp:218
+#: smartplaylists/searchterm.cpp:223
 msgid "equals"
 msgstr "yhtä kuin"
 
@@ -5126,13 +5126,13 @@ msgstr "gpodder.net"
 
 #: podcasts/gpoddertoptagspage.cpp:34
 msgid "gpodder.net directory"
-msgstr ""
+msgstr "gpodder.net-kansio"
 
-#: smartplaylists/searchterm.cpp:216
+#: smartplaylists/searchterm.cpp:221
 msgid "greater than"
 msgstr "enemmän kuin"
 
-#: smartplaylists/searchterm.cpp:204
+#: smartplaylists/searchterm.cpp:209
 msgid "in the last"
 msgstr "viimeisenä"
 
@@ -5142,11 +5142,11 @@ msgstr "viimeisenä"
 msgid "kbps"
 msgstr "kb/s"
 
-#: smartplaylists/searchterm.cpp:217
+#: smartplaylists/searchterm.cpp:222
 msgid "less than"
 msgstr "vähemmän kuin"
 
-#: smartplaylists/searchterm.cpp:290
+#: smartplaylists/searchterm.cpp:295
 msgid "longest first"
 msgstr "pisin ensin"
 
@@ -5155,27 +5155,27 @@ msgstr "pisin ensin"
 msgid "move %n songs"
 msgstr "siirrä %n kappaletta"
 
-#: smartplaylists/searchterm.cpp:289
+#: smartplaylists/searchterm.cpp:294
 msgid "newest first"
 msgstr "uusin ensin"
 
-#: smartplaylists/searchterm.cpp:219
+#: smartplaylists/searchterm.cpp:224
 msgid "not equals"
 msgstr "ei yhtä kuin"
 
-#: smartplaylists/searchterm.cpp:205
+#: smartplaylists/searchterm.cpp:210
 msgid "not in the last"
 msgstr "ei viimeisenä"
 
-#: smartplaylists/searchterm.cpp:203
+#: smartplaylists/searchterm.cpp:208
 msgid "not on"
 msgstr ""
 
-#: smartplaylists/searchterm.cpp:289
+#: smartplaylists/searchterm.cpp:294
 msgid "oldest first"
 msgstr "vanhin ensin"
 
-#: smartplaylists/searchterm.cpp:202
+#: smartplaylists/searchterm.cpp:207
 msgid "on"
 msgstr ""
 
@@ -5192,7 +5192,7 @@ msgstr "paina enter näppäintä"
 msgid "remove %n songs"
 msgstr "poista %n kappaletta"
 
-#: smartplaylists/searchterm.cpp:290
+#: smartplaylists/searchterm.cpp:295
 msgid "shortest first"
 msgstr "lyhin ensin"
 
@@ -5200,7 +5200,7 @@ msgstr "lyhin ensin"
 msgid "shuffle songs"
 msgstr "sekoita kappaleet"
 
-#: smartplaylists/searchterm.cpp:292
+#: smartplaylists/searchterm.cpp:297
 msgid "smallest first"
 msgstr "pienin ensin"
 
@@ -5208,7 +5208,7 @@ msgstr "pienin ensin"
 msgid "sort songs"
 msgstr "järjestä kappaleet"
 
-#: smartplaylists/searchterm.cpp:214
+#: smartplaylists/searchterm.cpp:219
 msgid "starts with"
 msgstr "alkaa"
 

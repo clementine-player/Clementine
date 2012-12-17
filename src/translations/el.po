@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-11-30 11:09+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2012-12-16 11:20+0000\n"
+"Last-Translator: firewalker <firew4lker@gmail.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: el\n"
@@ -280,7 +280,7 @@ msgid ""
 "A song will be included in the playlist if it matches these conditions."
 msgstr "Το τραγούδι θα συμπεριληφθεί στην λίστα αναπαραγωγής αν πληρεί αυτές τις συνθήκες."
 
-#: smartplaylists/searchterm.cpp:288
+#: smartplaylists/searchterm.cpp:293
 msgid "A-Z"
 msgstr "Α-Ω"
 
@@ -300,7 +300,7 @@ msgstr "AAC 32k"
 msgid "AAC 64k"
 msgstr "AAC 64k"
 
-#: core/song.cpp:326
+#: core/song.cpp:323
 msgid "AIFF"
 msgstr "AIFF"
 
@@ -396,7 +396,7 @@ msgstr "Προσθήκη podcast"
 msgid "Add podcast..."
 msgstr "Προσθήκη podcast..."
 
-#: smartplaylists/searchtermwidget.cpp:333
+#: smartplaylists/searchtermwidget.cpp:341
 msgid "Add search term"
 msgstr "Προσθήκη όρου αναζήτησης"
 
@@ -860,7 +860,7 @@ msgstr "Αλλά αυτές οι πηγές είναι απενεργοποιη�
 msgid "Buttons"
 msgstr "Κουμπιά"
 
-#: core/song.cpp:329
+#: core/song.cpp:326
 msgid "CDDA"
 msgstr "CDDA"
 
@@ -960,7 +960,7 @@ msgstr "Καθαρισμός"
 msgid "Clear playlist"
 msgstr "Καθαρισμός λίστας"
 
-#: smartplaylists/searchtermwidget.cpp:321 ../bin/src/ui_mainwindow.h:644
+#: smartplaylists/searchtermwidget.cpp:329 ../bin/src/ui_mainwindow.h:644
 #: visualisations/visualisationcontainer.cpp:211
 #: ../bin/src/ui_visualisationoverlay.h:183
 msgid "Clementine"
@@ -987,7 +987,7 @@ msgstr "Ο Clementine μπορεί να μετατρέψει αυτόματα τ
 
 #: ../bin/src/ui_dropboxsettingspage.h:104
 msgid "Clementine can play music that you have uploaded to Dropbox"
-msgstr ""
+msgstr "Ο Clementine μπορεί να αναπαράγει μουσική που έχετε ανεβάσει στο Dropbox. "
 
 #: ../bin/src/ui_googledrivesettingspage.h:104
 msgid "Clementine can play music that you have uploaded to Google Drive"
@@ -995,7 +995,7 @@ msgstr "Ο Clementine μπορεί να αναπαράγει μουσική πο
 
 #: ../bin/src/ui_ubuntuonesettingspage.h:111
 msgid "Clementine can play music that you have uploaded to Ubuntu One"
-msgstr ""
+msgstr "Ο Clementine μπορεί να αναπαράγει μουσική που έχετε ανεβάσει στο Ubuntu One. "
 
 #: ../bin/src/ui_notificationssettingspage.h:403
 msgid "Clementine can show a message when the track changes."
@@ -1084,7 +1084,7 @@ msgstr "Χρώματα"
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Λίστα χωρισμένη με κόμμα από class:level, το level είναι 0-3"
 
-#: playlist/playlist.cpp:1219 smartplaylists/searchterm.cpp:279
+#: playlist/playlist.cpp:1219 smartplaylists/searchterm.cpp:284
 #: ui/organisedialog.cpp:65 ../bin/src/ui_edittagdialog.h:661
 msgid "Comment"
 msgstr "Σχόλια"
@@ -1142,7 +1142,7 @@ msgstr "Ρύθμιση των podcasts..."
 
 #: internet/digitallyimportedservicebase.cpp:186
 #: ../bin/src/ui_globalsearchsettingspage.h:150
-#: internet/googledriveservice.cpp:219
+#: internet/googledriveservice.cpp:193
 msgid "Configure..."
 msgstr "Παραμετροποίηση..."
 
@@ -1226,9 +1226,9 @@ msgstr "Δεν μπόρεσε να γίνει φόρτωση του ραδιοσ
 msgid "Couldn't open output file %1"
 msgstr "Δεν μπορεί να ανοίξει το αρχείο εξόδου %1"
 
-#: internet/cloudfileservice.cpp:85 ../bin/src/ui_albumcovermanager.h:149
+#: internet/cloudfileservice.cpp:87 ../bin/src/ui_albumcovermanager.h:149
 #: ../bin/src/ui_albumcoversearcher.h:105 ../bin/src/ui_mainwindow.h:684
-#: internet/googledriveservice.cpp:215
+#: internet/googledriveservice.cpp:189
 msgid "Cover Manager"
 msgstr "Διαχείριση εξώφυλλων"
 
@@ -1386,7 +1386,7 @@ msgstr "Ημερομηνία δημιουργίας"
 msgid "Date modified"
 msgstr "Ημερομηνία τροποποίησης"
 
-#: smartplaylists/searchterm.cpp:301
+#: smartplaylists/searchterm.cpp:307
 msgid "Days"
 msgstr "Ημέρες"
 
@@ -1665,7 +1665,7 @@ msgstr "Γράμμα δίσκου"
 
 #: ../bin/src/ui_dropboxsettingspage.h:103
 msgid "Dropbox"
-msgstr ""
+msgstr "Dropbox"
 
 #: ../bin/src/ui_dynamicplaylistcontrols.h:109
 msgid "Dynamic mode is on"
@@ -2043,7 +2043,7 @@ msgstr "Τέλος"
 msgid "First level"
 msgstr "Πρώτο επίπεδο"
 
-#: core/song.cpp:319
+#: core/song.cpp:316
 msgid "Flac"
 msgstr "Flac"
 
@@ -2279,7 +2279,7 @@ msgstr "Υψηλή (%1 fps)"
 msgid "High (1024x1024)"
 msgstr "Υψηλή (1024x1024)"
 
-#: smartplaylists/searchterm.cpp:300
+#: smartplaylists/searchterm.cpp:306
 msgid "Hours"
 msgstr "Ώρες"
 
@@ -2361,7 +2361,7 @@ msgstr "Αύξηση της έντασης ήχου κατά 4%"
 msgid "Increase volume"
 msgstr "Αύξηση έντασης"
 
-#: internet/googledriveservice.cpp:139
+#: internet/cloudfileservice.cpp:135
 #, qt-format
 msgid "Indexing %1"
 msgstr "Δημιουργία ευρετηρίου %1"
@@ -2728,7 +2728,7 @@ msgstr "Στίχοι"
 msgid "Lyrics from %1"
 msgstr "Στίχοι από %1"
 
-#: core/song.cpp:322 ../bin/src/ui_transcodersettingspage.h:159
+#: core/song.cpp:319 ../bin/src/ui_transcodersettingspage.h:159
 msgid "MP3"
 msgstr "MP3"
 
@@ -2740,11 +2740,11 @@ msgstr "MP3 256k"
 msgid "MP3 96k"
 msgstr "MP3 96k"
 
-#: core/song.cpp:320
+#: core/song.cpp:317
 msgid "MP4 AAC"
 msgstr "MP4 AAC"
 
-#: core/song.cpp:321
+#: core/song.cpp:318
 msgid "MPC"
 msgstr "MPC"
 
@@ -2843,7 +2843,7 @@ msgstr "Έλεγχος της βιβλιοθήκης για αλλαγές"
 msgid "Mono playback"
 msgstr "Αναπαραγωγή Mono"
 
-#: smartplaylists/searchterm.cpp:303
+#: smartplaylists/searchterm.cpp:309
 msgid "Months"
 msgstr "Μήνες"
 
@@ -3106,15 +3106,15 @@ msgstr "Τρέχουσα αναπαραγωγή"
 msgid "OSD Preview"
 msgstr "Προ-επισκόπηση OSD"
 
-#: core/song.cpp:323
+#: core/song.cpp:320
 msgid "Ogg Flac"
 msgstr "Ogg Flac"
 
-#: core/song.cpp:324
+#: core/song.cpp:321
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
 
-#: core/song.cpp:325 ../bin/src/ui_magnatunedownloaddialog.h:139
+#: core/song.cpp:322 ../bin/src/ui_magnatunedownloaddialog.h:139
 #: ../bin/src/ui_magnatunesettingspage.h:170
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
@@ -3151,7 +3151,7 @@ msgstr "Άνοιγμα συσκευής"
 msgid "Open file..."
 msgstr "Άνοιγμα αρχείου..."
 
-#: internet/googledriveservice.cpp:210
+#: internet/googledriveservice.cpp:184
 msgid "Open in Google Drive"
 msgstr "Άνοιγμα στο Google Drive"
 
@@ -4228,7 +4228,7 @@ msgstr "Παύση αναπαραγωγής μετά το τρέχον κομμ�
 msgid "Stopped"
 msgstr "Σταματημένο"
 
-#: core/song.cpp:331
+#: core/song.cpp:328
 msgid "Stream"
 msgstr "Stream"
 
@@ -4343,7 +4343,7 @@ msgstr "Ο κατάλογος %1 δεν είναι έγκυρος"
 msgid "The playlist '%1' was empty or could not be loaded."
 msgstr "Η λίστα αναπαραγωγής '%1' ήταν άδεια ή δεν μπόρεσε να φορτωθεί."
 
-#: smartplaylists/searchtermwidget.cpp:322
+#: smartplaylists/searchtermwidget.cpp:330
 msgid "The second value must be greater than the first one!"
 msgstr "Η δεύτερη τιμή πρέπει να είναι μεγαλύτερη από την πρώτη!"
 
@@ -4553,7 +4553,7 @@ msgstr "Επανακωδικοποίηση %1 αρχείων χρησιμοπο�
 msgid "Transcoding options"
 msgstr "Επιλογές επανακωδικοποίησης"
 
-#: core/song.cpp:328
+#: core/song.cpp:325
 msgid "TrueAudio"
 msgstr "TrueAudio"
 
@@ -4575,7 +4575,7 @@ msgstr "URL(s)"
 
 #: ../bin/src/ui_ubuntuonesettingspage.h:110
 msgid "Ubuntu One"
-msgstr ""
+msgstr "Ubuntu One"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:228
 msgid "Ultra wide band (UWB)"
@@ -4586,7 +4586,7 @@ msgstr "Άκρα ευρεία ζώνη (UWB)"
 msgid "Unable to download %1 (%2)"
 msgstr "Αδυναμία \"κατεβάσματος\" του %1 (%2)"
 
-#: core/song.cpp:335 library/librarymodel.cpp:301 library/librarymodel.cpp:306
+#: core/song.cpp:332 library/librarymodel.cpp:301 library/librarymodel.cpp:306
 #: library/librarymodel.cpp:947 playlist/playlistdelegates.cpp:309
 #: playlist/playlistmanager.cpp:394 playlist/playlistmanager.cpp:397
 #: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:416
@@ -4802,7 +4802,7 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
-#: core/song.cpp:327
+#: core/song.cpp:324
 msgid "Wav"
 msgstr "Wav"
 
@@ -4810,7 +4810,7 @@ msgstr "Wav"
 msgid "Website"
 msgstr "Website"
 
-#: smartplaylists/searchterm.cpp:302
+#: smartplaylists/searchterm.cpp:308
 msgid "Weeks"
 msgstr "Εβδομάδες"
 
@@ -4886,7 +4886,7 @@ msgstr "Windows Media 40k"
 msgid "Windows Media 64k"
 msgstr "Windows Media 64k"
 
-#: core/song.cpp:318
+#: core/song.cpp:315
 msgid "Windows Media audio"
 msgstr "Windows Media audio"
 
@@ -4912,7 +4912,7 @@ msgstr "Έτος"
 msgid "Year - Album"
 msgstr "Έτος - Άλμπουμ"
 
-#: smartplaylists/searchterm.cpp:304
+#: smartplaylists/searchterm.cpp:310
 msgid "Years"
 msgstr "Έτη"
 
@@ -5049,7 +5049,7 @@ msgstr "Το σύστημα σας δεν έχει υποστήριξη OpenGL, 
 msgid "Your username or password was incorrect."
 msgstr "Το όνομα χρήστη ή το συνθηματικό ήταν λανθασμένο."
 
-#: smartplaylists/searchterm.cpp:288
+#: smartplaylists/searchterm.cpp:293
 msgid "Z-A"
 msgstr "Ω-Α"
 
@@ -5062,7 +5062,7 @@ msgstr "Zero"
 msgid "add %n songs"
 msgstr "προσθήκη %n τραγουδιών"
 
-#: smartplaylists/searchterm.cpp:200
+#: smartplaylists/searchterm.cpp:205
 msgid "after"
 msgstr "μετά"
 
@@ -5078,15 +5078,15 @@ msgstr "και"
 msgid "automatic"
 msgstr "αυτόματα"
 
-#: smartplaylists/searchterm.cpp:201
+#: smartplaylists/searchterm.cpp:206
 msgid "before"
 msgstr "πριν"
 
-#: smartplaylists/searchterm.cpp:206
+#: smartplaylists/searchterm.cpp:211
 msgid "between"
 msgstr "μεταξύ"
 
-#: smartplaylists/searchterm.cpp:292
+#: smartplaylists/searchterm.cpp:297
 msgid "biggest first"
 msgstr "το μεγαλύτερο πρώτα"
 
@@ -5094,7 +5094,7 @@ msgstr "το μεγαλύτερο πρώτα"
 msgid "bpm"
 msgstr "bpm"
 
-#: smartplaylists/searchterm.cpp:212
+#: smartplaylists/searchterm.cpp:217
 msgid "contains"
 msgstr "περιέχει"
 
@@ -5109,15 +5109,15 @@ msgstr "ανενεργο"
 msgid "disc %1"
 msgstr "δίσκος %1"
 
-#: smartplaylists/searchterm.cpp:213
+#: smartplaylists/searchterm.cpp:218
 msgid "does not contain"
 msgstr "δεν περιέχει"
 
-#: smartplaylists/searchterm.cpp:215
+#: smartplaylists/searchterm.cpp:220
 msgid "ends with"
 msgstr "τελειώνει με"
 
-#: smartplaylists/searchterm.cpp:218
+#: smartplaylists/searchterm.cpp:223
 msgid "equals"
 msgstr "ισούται"
 
@@ -5129,11 +5129,11 @@ msgstr "gpodder.net"
 msgid "gpodder.net directory"
 msgstr "κατάλογος gpodder.net"
 
-#: smartplaylists/searchterm.cpp:216
+#: smartplaylists/searchterm.cpp:221
 msgid "greater than"
 msgstr "μεγαλύτερο από"
 
-#: smartplaylists/searchterm.cpp:204
+#: smartplaylists/searchterm.cpp:209
 msgid "in the last"
 msgstr "εντός των τελευταίων"
 
@@ -5143,11 +5143,11 @@ msgstr "εντός των τελευταίων"
 msgid "kbps"
 msgstr "kbps"
 
-#: smartplaylists/searchterm.cpp:217
+#: smartplaylists/searchterm.cpp:222
 msgid "less than"
 msgstr "λιγότερο από"
 
-#: smartplaylists/searchterm.cpp:290
+#: smartplaylists/searchterm.cpp:295
 msgid "longest first"
 msgstr "το μακρύτερο πρώτα"
 
@@ -5156,27 +5156,27 @@ msgstr "το μακρύτερο πρώτα"
 msgid "move %n songs"
 msgstr "μετακίνηση %n τραγουδιών"
 
-#: smartplaylists/searchterm.cpp:289
+#: smartplaylists/searchterm.cpp:294
 msgid "newest first"
 msgstr "το νεότερο πρώτα"
 
-#: smartplaylists/searchterm.cpp:219
+#: smartplaylists/searchterm.cpp:224
 msgid "not equals"
 msgstr "άνισα"
 
-#: smartplaylists/searchterm.cpp:205
+#: smartplaylists/searchterm.cpp:210
 msgid "not in the last"
 msgstr "όχι εντός των τελευταίων"
 
-#: smartplaylists/searchterm.cpp:203
+#: smartplaylists/searchterm.cpp:208
 msgid "not on"
 msgstr "όχι στο"
 
-#: smartplaylists/searchterm.cpp:289
+#: smartplaylists/searchterm.cpp:294
 msgid "oldest first"
 msgstr "το παλαιότερο πρώτα"
 
-#: smartplaylists/searchterm.cpp:202
+#: smartplaylists/searchterm.cpp:207
 msgid "on"
 msgstr "σε"
 
@@ -5193,7 +5193,7 @@ msgstr "πιέστε enter"
 msgid "remove %n songs"
 msgstr "αφαίρεση %n τραγουδιών"
 
-#: smartplaylists/searchterm.cpp:290
+#: smartplaylists/searchterm.cpp:295
 msgid "shortest first"
 msgstr "το ποιο σύντομο πρώτα"
 
@@ -5201,7 +5201,7 @@ msgstr "το ποιο σύντομο πρώτα"
 msgid "shuffle songs"
 msgstr "ανακάτεμα τραγουδιών"
 
-#: smartplaylists/searchterm.cpp:292
+#: smartplaylists/searchterm.cpp:297
 msgid "smallest first"
 msgstr "το μικρότερο πρώτα"
 
@@ -5209,7 +5209,7 @@ msgstr "το μικρότερο πρώτα"
 msgid "sort songs"
 msgstr "ταξινόμηση τραγουδιών"
 
-#: smartplaylists/searchterm.cpp:214
+#: smartplaylists/searchterm.cpp:219
 msgid "starts with"
 msgstr "αρχίζει με"
 

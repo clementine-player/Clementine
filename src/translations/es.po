@@ -23,7 +23,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-12-02 02:54+0000\n"
+"PO-Revision-Date: 2012-12-06 12:00+0000\n"
 "Last-Translator: Adolfo Jayme Barrientos <fitoschido@gmail.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -292,7 +292,7 @@ msgid ""
 "A song will be included in the playlist if it matches these conditions."
 msgstr "Se incluirá una canción en la lista de reproducción si coincide con estas condiciones."
 
-#: smartplaylists/searchterm.cpp:288
+#: smartplaylists/searchterm.cpp:293
 msgid "A-Z"
 msgstr "A-Z"
 
@@ -312,7 +312,7 @@ msgstr "AAC 32k"
 msgid "AAC 64k"
 msgstr "AAC 64k"
 
-#: core/song.cpp:326
+#: core/song.cpp:323
 msgid "AIFF"
 msgstr "AIFF"
 
@@ -408,7 +408,7 @@ msgstr "Añadir podcast"
 msgid "Add podcast..."
 msgstr "Añadir podcast…"
 
-#: smartplaylists/searchtermwidget.cpp:333
+#: smartplaylists/searchtermwidget.cpp:341
 msgid "Add search term"
 msgstr "Añadir término de búsqueda"
 
@@ -691,7 +691,7 @@ msgstr "¿Está seguro de que quiere eliminar esta lista de reproducción?"
 
 #: ui/edittagdialog.cpp:761
 msgid "Are you sure you want to reset this song's statistics?"
-msgstr "¿Está seguro de que desea reinicializar las estadísticas de esta canción?"
+msgstr "¿Está seguro de que quiere restablecer las estadísticas de esta canción?"
 
 #: playlist/playlist.cpp:1193 ui/organisedialog.cpp:56
 #: ui/qtsystemtrayicon.cpp:250 ../bin/src/ui_groupbydialog.h:130
@@ -705,7 +705,7 @@ msgstr "Artista"
 
 #: ui/mainwindow.cpp:239
 msgid "Artist info"
-msgstr "Info del artista"
+msgstr "Info. artista"
 
 #: internet/lastfmservice.cpp:208
 msgid "Artist radio"
@@ -792,11 +792,11 @@ msgstr "Respaldando la base de datos"
 
 #: ../bin/src/ui_mainwindow.h:659
 msgid "Ban"
-msgstr "Excluir"
+msgstr "Vetar"
 
 #: analyzers/baranalyzer.cpp:19
 msgid "Bar analyzer"
-msgstr "Analizador de Barras"
+msgstr "Analizador de barras"
 
 #: ../bin/src/ui_notificationssettingspage.h:428
 msgid "Basic Blue"
@@ -832,7 +832,7 @@ msgstr "Tasa de bits"
 
 #: analyzers/blockanalyzer.cpp:22
 msgid "Block analyzer"
-msgstr "Analizador de Bloques"
+msgstr "Analizador de bloques"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:141
 msgid "Block type"
@@ -848,7 +848,7 @@ msgstr "Cuerpo"
 
 #: analyzers/boomanalyzer.cpp:8
 msgid "Boom analyzer"
-msgstr "Analizador de Boom"
+msgstr "Analizador de resonancia"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:146
 #: ../bin/src/ui_podcastsettingspage.h:242
@@ -872,7 +872,7 @@ msgstr "Pero estas fuentes están desactivadas:"
 msgid "Buttons"
 msgstr "Botones"
 
-#: core/song.cpp:329
+#: core/song.cpp:326
 msgid "CDDA"
 msgstr "CDDA"
 
@@ -972,7 +972,7 @@ msgstr "Limpiar"
 msgid "Clear playlist"
 msgstr "Limpiar lista de reproducción"
 
-#: smartplaylists/searchtermwidget.cpp:321 ../bin/src/ui_mainwindow.h:644
+#: smartplaylists/searchtermwidget.cpp:329 ../bin/src/ui_mainwindow.h:644
 #: visualisations/visualisationcontainer.cpp:211
 #: ../bin/src/ui_visualisationoverlay.h:183
 msgid "Clementine"
@@ -1003,7 +1003,7 @@ msgstr "Clementine puede reproducir música que haya cargado a Dropbox"
 
 #: ../bin/src/ui_googledrivesettingspage.h:104
 msgid "Clementine can play music that you have uploaded to Google Drive"
-msgstr "Clementine puede reproducir musica que el usuario tenga alojada en Google Drive"
+msgstr "Clementine puede reproducir musica que haya cargado a Google Drive"
 
 #: ../bin/src/ui_ubuntuonesettingspage.h:111
 msgid "Clementine can play music that you have uploaded to Ubuntu One"
@@ -1058,7 +1058,7 @@ msgstr "Pulse para cambiar entre tiempo restante y tiempo total"
 msgid ""
 "Clicking the Login button will open a web browser.  You should return to "
 "Clementine after you have logged in."
-msgstr "Presionando el boton de inicio de sesión se abrirá un navegador web.  Deberia regresar a Clementine luego de iniciar sesión"
+msgstr "Al pulsar Iniciar sesión se abrirá un navegador web.  Una vez que inicie sesión, regrese a Clementine."
 
 #: widgets/didyoumean.cpp:37
 msgid "Close"
@@ -1096,7 +1096,7 @@ msgstr "Colores"
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Lista separada por comas de la clase:nivel, el nivel es 0-3"
 
-#: playlist/playlist.cpp:1219 smartplaylists/searchterm.cpp:279
+#: playlist/playlist.cpp:1219 smartplaylists/searchterm.cpp:284
 #: ui/organisedialog.cpp:65 ../bin/src/ui_edittagdialog.h:661
 msgid "Comment"
 msgstr "Comentario"
@@ -1154,7 +1154,7 @@ msgstr "Configurar podcasts…"
 
 #: internet/digitallyimportedservicebase.cpp:186
 #: ../bin/src/ui_globalsearchsettingspage.h:150
-#: internet/googledriveservice.cpp:219
+#: internet/googledriveservice.cpp:193
 msgid "Configure..."
 msgstr "Configurar…"
 
@@ -1238,9 +1238,9 @@ msgstr "No se pudo cargar la estación de radio de Last.fm"
 msgid "Couldn't open output file %1"
 msgstr "No se pudo abrir el archivo de salida %1"
 
-#: internet/cloudfileservice.cpp:85 ../bin/src/ui_albumcovermanager.h:149
+#: internet/cloudfileservice.cpp:87 ../bin/src/ui_albumcovermanager.h:149
 #: ../bin/src/ui_albumcoversearcher.h:105 ../bin/src/ui_mainwindow.h:684
-#: internet/googledriveservice.cpp:215
+#: internet/googledriveservice.cpp:189
 msgid "Cover Manager"
 msgstr "Gestor de portadas"
 
@@ -1398,7 +1398,7 @@ msgstr "Fecha de creación"
 msgid "Date modified"
 msgstr "Fecha de modificación"
 
-#: smartplaylists/searchterm.cpp:301
+#: smartplaylists/searchterm.cpp:307
 msgid "Days"
 msgstr "Días"
 
@@ -1715,7 +1715,7 @@ msgstr "Editar información de la pista…"
 
 #: library/libraryview.cpp:397
 msgid "Edit tracks information..."
-msgstr "Editar información de pistas…"
+msgstr "Editar información de las pistas…"
 
 #: internet/savedradio.cpp:101
 msgid "Edit..."
@@ -1741,7 +1741,7 @@ msgstr "Activar las fuentes de abajo para incluir en los resultados de búsqueda
 
 #: core/globalshortcuts.cpp:62
 msgid "Enable/disable Last.fm scrobbling"
-msgstr "Activar/desactivar scrobbing de Last.fm"
+msgstr "Activar/desactivar scrobbling de Last.fm"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:235
 msgid "Encoding complexity"
@@ -1775,7 +1775,7 @@ msgstr "Ingrese un <b>artista</b> o  <b>etiqueta</b> para escuchar la radio de L
 #: ../bin/src/ui_globalsearchview.h:209
 msgid ""
 "Enter search terms above to find music on your computer and on the internet"
-msgstr "Introduzca los términos de búsqueda arriba para encontrar música en el ordenador y en Internet"
+msgstr "Escriba términos de búsqueda arriba para encontrar música en su equipo y en la Internet"
 
 #: ../bin/src/ui_itunessearchpage.h:77
 msgid "Enter search terms below to find podcasts in the iTunes Store"
@@ -2013,7 +2013,7 @@ msgstr "Tamaño del archivo"
 #: ../bin/src/ui_groupbydialog.h:146 ../bin/src/ui_groupbydialog.h:159
 #: ../bin/src/ui_edittagdialog.h:646
 msgid "File type"
-msgstr "Tipo de Archivo"
+msgstr "Tipo de archivo"
 
 #: ../bin/src/ui_transcodedialog.h:206
 msgid "Filename"
@@ -2055,7 +2055,7 @@ msgstr "Finalizar"
 msgid "First level"
 msgstr "Primer nivel"
 
-#: core/song.cpp:319
+#: core/song.cpp:316
 msgid "Flac"
 msgstr "Flac"
 
@@ -2127,11 +2127,11 @@ msgstr "Congelado"
 
 #: ui/equalizer.cpp:112
 msgid "Full Bass"
-msgstr "Bajos completos"
+msgstr "Graves completos"
 
 #: ui/equalizer.cpp:114
 msgid "Full Bass + Treble"
-msgstr "Bajos y Agudos completos"
+msgstr "Graves y agudos completos"
 
 #: ui/equalizer.cpp:113
 msgid "Full Treble"
@@ -2271,7 +2271,7 @@ msgstr "Alegre"
 
 #: ../bin/src/ui_deviceproperties.h:371
 msgid "Hardware information"
-msgstr "Información del Hardware"
+msgstr "Información del hardware"
 
 #: ../bin/src/ui_deviceproperties.h:372
 msgid "Hardware information is only available while the device is connected."
@@ -2291,7 +2291,7 @@ msgstr "Alto (%1 fps)"
 msgid "High (1024x1024)"
 msgstr "Alta (1024x1024)"
 
-#: smartplaylists/searchterm.cpp:300
+#: smartplaylists/searchterm.cpp:306
 msgid "Hours"
 msgstr "Horas"
 
@@ -2373,7 +2373,7 @@ msgstr "Incrementar el volumen en 4%"
 msgid "Increase volume"
 msgstr "Aumentar volumen"
 
-#: internet/googledriveservice.cpp:139
+#: internet/cloudfileservice.cpp:135
 #, qt-format
 msgid "Indexing %1"
 msgstr "Indexando %1"
@@ -2492,7 +2492,7 @@ msgstr "Idioma"
 
 #: ui/equalizer.cpp:115
 msgid "Laptop/Headphones"
-msgstr "Laptop/Auriculares"
+msgstr "Laptop/auriculares"
 
 #: ui/equalizer.cpp:116
 msgid "Large Hall"
@@ -2509,7 +2509,7 @@ msgstr "Barra lateral grande"
 #: library/library.cpp:69 playlist/playlist.cpp:1206
 #: ../bin/src/ui_edittagdialog.h:641
 msgid "Last played"
-msgstr "Último reproducido"
+msgstr "Últimas reproducidas"
 
 #: ../bin/src/ui_lastfmsettingspage.h:150
 msgid "Last.fm"
@@ -2740,7 +2740,7 @@ msgstr "Letras"
 msgid "Lyrics from %1"
 msgstr "Letra de %1"
 
-#: core/song.cpp:322 ../bin/src/ui_transcodersettingspage.h:159
+#: core/song.cpp:319 ../bin/src/ui_transcodersettingspage.h:159
 msgid "MP3"
 msgstr "MP3"
 
@@ -2752,11 +2752,11 @@ msgstr "MP3 256k"
 msgid "MP3 96k"
 msgstr "MP3 96k"
 
-#: core/song.cpp:320
+#: core/song.cpp:317
 msgid "MP4 AAC"
 msgstr "MP4 AAC"
 
-#: core/song.cpp:321
+#: core/song.cpp:318
 msgid "MPC"
 msgstr "MPC"
 
@@ -2855,7 +2855,7 @@ msgstr "Monitorizar cambios en la colección"
 msgid "Mono playback"
 msgstr "Reproducción monoaural"
 
-#: smartplaylists/searchterm.cpp:303
+#: smartplaylists/searchterm.cpp:309
 msgid "Months"
 msgstr "Meses"
 
@@ -2981,7 +2981,7 @@ msgstr "Nunca"
 
 #: library/library.cpp:65
 msgid "Never played"
-msgstr "Nunca reproducidos"
+msgstr "Nunca reproducidas"
 
 #: ../bin/src/ui_behavioursettingspage.h:186
 #: ../bin/src/ui_behavioursettingspage.h:200
@@ -3004,7 +3004,7 @@ msgstr "Lista de reproducción inteligente nueva…"
 
 #: widgets/freespacebar.cpp:46
 msgid "New songs"
-msgstr "Nuevas canciones"
+msgstr "Canciones nuevas"
 
 #: ../bin/src/ui_dynamicplaylistcontrols.h:110
 msgid "New tracks will be added automatically."
@@ -3012,7 +3012,7 @@ msgstr "Nuevas pistas serán añadidas automáticamente"
 
 #: library/library.cpp:78
 msgid "Newest tracks"
-msgstr "Nuevas canciones"
+msgstr "Canciones más nuevas"
 
 #: ui/edittagdialog.cpp:161 ui/trackselectiondialog.cpp:49
 msgid "Next"
@@ -3118,15 +3118,15 @@ msgstr "En reproducción"
 msgid "OSD Preview"
 msgstr "Previsualización del OSD"
 
-#: core/song.cpp:323
+#: core/song.cpp:320
 msgid "Ogg Flac"
 msgstr "Ogg Flac"
 
-#: core/song.cpp:324
+#: core/song.cpp:321
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
 
-#: core/song.cpp:325 ../bin/src/ui_magnatunedownloaddialog.h:139
+#: core/song.cpp:322 ../bin/src/ui_magnatunedownloaddialog.h:139
 #: ../bin/src/ui_magnatunesettingspage.h:170
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
@@ -3163,7 +3163,7 @@ msgstr "Abrir dispositivo"
 msgid "Open file..."
 msgstr "Abrir archivo…"
 
-#: internet/googledriveservice.cpp:210
+#: internet/googledriveservice.cpp:184
 msgid "Open in Google Drive"
 msgstr "Abrir en Google Drive"
 
@@ -3672,11 +3672,11 @@ msgstr "Reemplazar espacios con guiones bajos"
 
 #: ../bin/src/ui_playbacksettingspage.h:273
 msgid "Replay Gain"
-msgstr "Ganancia de Repetición"
+msgstr "Replay Gain"
 
 #: ../bin/src/ui_playbacksettingspage.h:275
 msgid "Replay Gain mode"
-msgstr "Modo Ganancia de Repetición"
+msgstr "Modo de Replay Gain"
 
 #: ../bin/src/ui_dynamicplaylistcontrols.h:112
 msgid "Repopulate"
@@ -3968,7 +3968,7 @@ msgstr "Mostrar la notificación en la bandeja de sistema"
 
 #: ../bin/src/ui_notificationssettingspage.h:407
 msgid "Show a pretty OSD"
-msgstr "Mostrar OSD Estético"
+msgstr "Mostrar OSD estético"
 
 #: widgets/nowplayingwidget.cpp:113
 msgid "Show above status bar"
@@ -4021,7 +4021,7 @@ msgstr "Mostrar sugerencias de búsquedas"
 
 #: ../bin/src/ui_lastfmsettingspage.h:157
 msgid "Show the \"love\" and \"ban\" buttons"
-msgstr "Mostrar los botones «Me encanta» y «Bloquear»"
+msgstr "Mostrar los botones «Me encanta» y «Vetar»"
 
 #: ../bin/src/ui_lastfmsettingspage.h:158
 msgid "Show the scrobble button in the main window"
@@ -4121,7 +4121,7 @@ msgstr "Información de la canción"
 
 #: ui/mainwindow.cpp:238
 msgid "Song info"
-msgstr "Info de la canción"
+msgstr "Info. canción"
 
 #: analyzers/sonogram.cpp:18
 msgid "Sonogram"
@@ -4240,7 +4240,7 @@ msgstr "Detener la reproducción después de la pista actual"
 msgid "Stopped"
 msgstr "Detenido"
 
-#: core/song.cpp:331
+#: core/song.cpp:328
 msgid "Stream"
 msgstr "Transmisión"
 
@@ -4355,7 +4355,7 @@ msgstr "El directorio %1 no es valido"
 msgid "The playlist '%1' was empty or could not be loaded."
 msgstr "La lista de reproducción «%1» estaba vacía o no se pudo cargar."
 
-#: smartplaylists/searchtermwidget.cpp:322
+#: smartplaylists/searchtermwidget.cpp:330
 msgid "The second value must be greater than the first one!"
 msgstr "El segundo valor debe ser mayor al primero."
 
@@ -4415,7 +4415,7 @@ msgstr "Se eliminarán estos archivos del dispositivo, ¿está seguro de que qui
 
 #: ../bin/src/ui_librarysettingspage.h:158
 msgid "These folders will be scanned for music to make up your library"
-msgstr "Estas carpetas serán analizadas en busca de música para crear su colección"
+msgstr "Estas carpetas se analizarán en busca de música para crear su colección"
 
 #: ../bin/src/ui_transcodersettingspage.h:158
 msgid ""
@@ -4464,7 +4464,7 @@ msgstr "Esto es un iPod, pero ha compilado Clementine sin soporte para libgpod."
 msgid ""
 "This is the first time you have connected this device.  Clementine will now "
 "scan the device to find music files - this may take some time."
-msgstr "Esta es la primera vez que conectas este dispositivo. Clementine buscara archivos de música en el dispositivo - Esto puede tomar algún tiempo."
+msgstr "Esta es la primera vez que conecta este dispositivo.  Clementine analizará el dispositivo ahora para encontrar archivos de música; esto podría tomar algo de tiempo."
 
 #: internet/lastfmservice.cpp:435
 msgid "This stream is for paid subscribers only"
@@ -4501,7 +4501,7 @@ msgstr "Hoy"
 
 #: core/globalshortcuts.cpp:59
 msgid "Toggle Pretty OSD"
-msgstr "Cambiar a OSD Estético"
+msgstr "Conmutar OSD estético"
 
 #: visualisations/visualisationcontainer.cpp:101
 msgid "Toggle fullscreen"
@@ -4565,7 +4565,7 @@ msgstr "Codificando %1 archivo(s) usando %2 proceso(s)"
 msgid "Transcoding options"
 msgstr "Opciones de transcodificación"
 
-#: core/song.cpp:328
+#: core/song.cpp:325
 msgid "TrueAudio"
 msgstr "TrueAudio"
 
@@ -4598,7 +4598,7 @@ msgstr "Banda ultra ancha (UWB)"
 msgid "Unable to download %1 (%2)"
 msgstr "Imposible descargar %1 (%2)"
 
-#: core/song.cpp:335 library/librarymodel.cpp:301 library/librarymodel.cpp:306
+#: core/song.cpp:332 library/librarymodel.cpp:301 library/librarymodel.cpp:306
 #: library/librarymodel.cpp:947 playlist/playlistdelegates.cpp:309
 #: playlist/playlistmanager.cpp:394 playlist/playlistmanager.cpp:397
 #: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:416
@@ -4678,7 +4678,7 @@ msgstr "Usar las combinaciones de teclas de Gnome"
 
 #: ../bin/src/ui_playbacksettingspage.h:274
 msgid "Use Replay Gain metadata if it is available"
-msgstr "Usar metadatos de ganancia de repetición si están disponibles"
+msgstr "Usar metadatos de Replay Gain si están disponibles"
 
 #: ../bin/src/ui_wiimotesettingspage.h:189
 msgid "Use Wii Remote"
@@ -4747,7 +4747,7 @@ msgstr "Interfaz de usuario"
 #: ../bin/src/ui_podcastsettingspage.h:251
 #: ../bin/src/ui_networkproxysettingspage.h:168
 msgid "Username"
-msgstr "Nombre de Usuario"
+msgstr "Nombre de usuario"
 
 #: ../bin/src/ui_behavioursettingspage.h:183
 msgid "Using the menu to add a song will..."
@@ -4814,7 +4814,7 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
-#: core/song.cpp:327
+#: core/song.cpp:324
 msgid "Wav"
 msgstr "Wav"
 
@@ -4822,7 +4822,7 @@ msgstr "Wav"
 msgid "Website"
 msgstr "Sitio web"
 
-#: smartplaylists/searchterm.cpp:302
+#: smartplaylists/searchterm.cpp:308
 msgid "Weeks"
 msgstr "Semanas"
 
@@ -4842,7 +4842,7 @@ msgstr "Cuando la lista está vacía…"
 
 #: ../bin/src/ui_globalsearchview.h:212
 msgid "Why not try..."
-msgstr "Por qué no intentarlo…"
+msgstr "Por qué no intenta…"
 
 #: devices/ilister.cpp:121
 msgid "WiFi MAC Address"
@@ -4898,7 +4898,7 @@ msgstr "Windows Media 40k"
 msgid "Windows Media 64k"
 msgstr "Windows Media 64k"
 
-#: core/song.cpp:318
+#: core/song.cpp:315
 msgid "Windows Media audio"
 msgstr "Audio de Windows Media"
 
@@ -4924,7 +4924,7 @@ msgstr "Año"
 msgid "Year - Album"
 msgstr "Año - Álbum"
 
-#: smartplaylists/searchterm.cpp:304
+#: smartplaylists/searchterm.cpp:310
 msgid "Years"
 msgstr "Años"
 
@@ -5019,11 +5019,11 @@ msgid ""
 "You need to launch System Preferences and turn on \"<span style=\" font-"
 "style:italic;\">Enable access for assistive devices</span>\" to use global "
 "shortcuts in Clementine."
-msgstr "Necesita ejecutar Sistema - Preferencias y activar \"<span style=\"font-style: italic;\">Activar acceso para dispositivos de asistencia</span>\" para utilizar los atajos de teclado globales en Clementine."
+msgstr "Necesita ejecutar Preferencias del sistema y activar \"<span style=\"font-style: italic;\">Activar acceso para dispositivos de asistencia</span>\" para utilizar los atajos de teclado globales en Clementine."
 
 #: ../bin/src/ui_behavioursettingspage.h:177
 msgid "You will need to restart Clementine if you change the language."
-msgstr "Necesitaras reiniciar Clementine si cambias el idioma."
+msgstr "Necesitará reiniciar Clementine si cambia el idioma."
 
 #: internet/lastfmsettingspage.cpp:108
 msgid ""
@@ -5061,7 +5061,7 @@ msgstr "Su sistema no es compatible con OpenGL, y las visualizaciones no están 
 msgid "Your username or password was incorrect."
 msgstr "Su nombre de usuario o contraseña es incorrecta."
 
-#: smartplaylists/searchterm.cpp:288
+#: smartplaylists/searchterm.cpp:293
 msgid "Z-A"
 msgstr "Z-A"
 
@@ -5074,7 +5074,7 @@ msgstr "Cero"
 msgid "add %n songs"
 msgstr "añadir %n pistas"
 
-#: smartplaylists/searchterm.cpp:200
+#: smartplaylists/searchterm.cpp:205
 msgid "after"
 msgstr "después"
 
@@ -5090,15 +5090,15 @@ msgstr "y"
 msgid "automatic"
 msgstr "automático"
 
-#: smartplaylists/searchterm.cpp:201
+#: smartplaylists/searchterm.cpp:206
 msgid "before"
 msgstr "antes"
 
-#: smartplaylists/searchterm.cpp:206
+#: smartplaylists/searchterm.cpp:211
 msgid "between"
 msgstr "entre"
 
-#: smartplaylists/searchterm.cpp:292
+#: smartplaylists/searchterm.cpp:297
 msgid "biggest first"
 msgstr "más grande primero"
 
@@ -5106,7 +5106,7 @@ msgstr "más grande primero"
 msgid "bpm"
 msgstr "bpm"
 
-#: smartplaylists/searchterm.cpp:212
+#: smartplaylists/searchterm.cpp:217
 msgid "contains"
 msgstr "contiene"
 
@@ -5121,15 +5121,15 @@ msgstr "desactivado"
 msgid "disc %1"
 msgstr "Disco %1"
 
-#: smartplaylists/searchterm.cpp:213
+#: smartplaylists/searchterm.cpp:218
 msgid "does not contain"
 msgstr "no contiene"
 
-#: smartplaylists/searchterm.cpp:215
+#: smartplaylists/searchterm.cpp:220
 msgid "ends with"
 msgstr "termina con"
 
-#: smartplaylists/searchterm.cpp:218
+#: smartplaylists/searchterm.cpp:223
 msgid "equals"
 msgstr "sea igual a"
 
@@ -5141,11 +5141,11 @@ msgstr "gpodder.net"
 msgid "gpodder.net directory"
 msgstr "Directorio de gpodder.net"
 
-#: smartplaylists/searchterm.cpp:216
+#: smartplaylists/searchterm.cpp:221
 msgid "greater than"
 msgstr "mayor que"
 
-#: smartplaylists/searchterm.cpp:204
+#: smartplaylists/searchterm.cpp:209
 msgid "in the last"
 msgstr "en los últimos"
 
@@ -5155,11 +5155,11 @@ msgstr "en los últimos"
 msgid "kbps"
 msgstr "kbps"
 
-#: smartplaylists/searchterm.cpp:217
+#: smartplaylists/searchterm.cpp:222
 msgid "less than"
 msgstr "menor que"
 
-#: smartplaylists/searchterm.cpp:290
+#: smartplaylists/searchterm.cpp:295
 msgid "longest first"
 msgstr "más largo primero"
 
@@ -5168,27 +5168,27 @@ msgstr "más largo primero"
 msgid "move %n songs"
 msgstr "mover %n canciones"
 
-#: smartplaylists/searchterm.cpp:289
+#: smartplaylists/searchterm.cpp:294
 msgid "newest first"
 msgstr "más nuevo primero"
 
-#: smartplaylists/searchterm.cpp:219
+#: smartplaylists/searchterm.cpp:224
 msgid "not equals"
 msgstr "no sea igual a"
 
-#: smartplaylists/searchterm.cpp:205
+#: smartplaylists/searchterm.cpp:210
 msgid "not in the last"
 msgstr "no en los últimos"
 
-#: smartplaylists/searchterm.cpp:203
+#: smartplaylists/searchterm.cpp:208
 msgid "not on"
 msgstr "no en"
 
-#: smartplaylists/searchterm.cpp:289
+#: smartplaylists/searchterm.cpp:294
 msgid "oldest first"
 msgstr "más antiguo primero"
 
-#: smartplaylists/searchterm.cpp:202
+#: smartplaylists/searchterm.cpp:207
 msgid "on"
 msgstr "en"
 
@@ -5205,7 +5205,7 @@ msgstr "presione intro"
 msgid "remove %n songs"
 msgstr "quitar %n canciones"
 
-#: smartplaylists/searchterm.cpp:290
+#: smartplaylists/searchterm.cpp:295
 msgid "shortest first"
 msgstr "más corto primero"
 
@@ -5213,7 +5213,7 @@ msgstr "más corto primero"
 msgid "shuffle songs"
 msgstr "canciones aleatorias"
 
-#: smartplaylists/searchterm.cpp:292
+#: smartplaylists/searchterm.cpp:297
 msgid "smallest first"
 msgstr "más pequeño primero"
 
@@ -5221,7 +5221,7 @@ msgstr "más pequeño primero"
 msgid "sort songs"
 msgstr "ordenar canciones"
 
-#: smartplaylists/searchterm.cpp:214
+#: smartplaylists/searchterm.cpp:219
 msgid "starts with"
 msgstr "comienza con"
 

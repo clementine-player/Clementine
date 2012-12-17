@@ -282,7 +282,7 @@ msgid ""
 "A song will be included in the playlist if it matches these conditions."
 msgstr "Една песен ще бъде включена в списъка с песни, ако отговаря на тези критерии."
 
-#: smartplaylists/searchterm.cpp:288
+#: smartplaylists/searchterm.cpp:293
 msgid "A-Z"
 msgstr "А-Я"
 
@@ -302,7 +302,7 @@ msgstr "AAC 32k"
 msgid "AAC 64k"
 msgstr "AAC 64k"
 
-#: core/song.cpp:326
+#: core/song.cpp:323
 msgid "AIFF"
 msgstr "AIFF"
 
@@ -398,7 +398,7 @@ msgstr "Добавя движещ се текст"
 msgid "Add podcast..."
 msgstr "Добавяне на подкаст..."
 
-#: smartplaylists/searchtermwidget.cpp:333
+#: smartplaylists/searchtermwidget.cpp:341
 msgid "Add search term"
 msgstr "Добавяне на аргумент за търсене"
 
@@ -862,7 +862,7 @@ msgstr ""
 msgid "Buttons"
 msgstr "Бутони"
 
-#: core/song.cpp:329
+#: core/song.cpp:326
 msgid "CDDA"
 msgstr "CDDA"
 
@@ -962,7 +962,7 @@ msgstr "Изчистване"
 msgid "Clear playlist"
 msgstr "Изчистване на списъка с песни"
 
-#: smartplaylists/searchtermwidget.cpp:321 ../bin/src/ui_mainwindow.h:644
+#: smartplaylists/searchtermwidget.cpp:329 ../bin/src/ui_mainwindow.h:644
 #: visualisations/visualisationcontainer.cpp:211
 #: ../bin/src/ui_visualisationoverlay.h:183
 msgid "Clementine"
@@ -1086,7 +1086,7 @@ msgstr "Цветове"
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Разделен със запетаи списък с class:level, level (ниво) е 0-3"
 
-#: playlist/playlist.cpp:1219 smartplaylists/searchterm.cpp:279
+#: playlist/playlist.cpp:1219 smartplaylists/searchterm.cpp:284
 #: ui/organisedialog.cpp:65 ../bin/src/ui_edittagdialog.h:661
 msgid "Comment"
 msgstr "Коментар"
@@ -1144,7 +1144,7 @@ msgstr "Конфигуриране на подкасти..."
 
 #: internet/digitallyimportedservicebase.cpp:186
 #: ../bin/src/ui_globalsearchsettingspage.h:150
-#: internet/googledriveservice.cpp:219
+#: internet/googledriveservice.cpp:193
 msgid "Configure..."
 msgstr "Настройване..."
 
@@ -1228,9 +1228,9 @@ msgstr "Не мога да заредя last.fm радио станция"
 msgid "Couldn't open output file %1"
 msgstr "Не мога да отворя изходен файл %1"
 
-#: internet/cloudfileservice.cpp:85 ../bin/src/ui_albumcovermanager.h:149
+#: internet/cloudfileservice.cpp:87 ../bin/src/ui_albumcovermanager.h:149
 #: ../bin/src/ui_albumcoversearcher.h:105 ../bin/src/ui_mainwindow.h:684
-#: internet/googledriveservice.cpp:215
+#: internet/googledriveservice.cpp:189
 msgid "Cover Manager"
 msgstr "Мениджър за обложки"
 
@@ -1388,7 +1388,7 @@ msgstr "Дата на създаване"
 msgid "Date modified"
 msgstr "Дата на променяне"
 
-#: smartplaylists/searchterm.cpp:301
+#: smartplaylists/searchterm.cpp:307
 msgid "Days"
 msgstr "Дни"
 
@@ -2045,7 +2045,7 @@ msgstr "Край"
 msgid "First level"
 msgstr "Първо ниво"
 
-#: core/song.cpp:319
+#: core/song.cpp:316
 msgid "Flac"
 msgstr "Flac"
 
@@ -2281,7 +2281,7 @@ msgstr "Високо (%1 fps)"
 msgid "High (1024x1024)"
 msgstr "Високо (1024x1024)"
 
-#: smartplaylists/searchterm.cpp:300
+#: smartplaylists/searchterm.cpp:306
 msgid "Hours"
 msgstr "Часа"
 
@@ -2363,7 +2363,7 @@ msgstr "Увеличаване на звука с 4%"
 msgid "Increase volume"
 msgstr "Увеличаване на звука"
 
-#: internet/googledriveservice.cpp:139
+#: internet/cloudfileservice.cpp:135
 #, qt-format
 msgid "Indexing %1"
 msgstr ""
@@ -2730,7 +2730,7 @@ msgstr "Текстове на песни"
 msgid "Lyrics from %1"
 msgstr "Текстове на песни от %1"
 
-#: core/song.cpp:322 ../bin/src/ui_transcodersettingspage.h:159
+#: core/song.cpp:319 ../bin/src/ui_transcodersettingspage.h:159
 msgid "MP3"
 msgstr "MP3"
 
@@ -2742,11 +2742,11 @@ msgstr "MP3 256k"
 msgid "MP3 96k"
 msgstr "MP3 96k"
 
-#: core/song.cpp:320
+#: core/song.cpp:317
 msgid "MP4 AAC"
 msgstr "MP4 AAC"
 
-#: core/song.cpp:321
+#: core/song.cpp:318
 msgid "MPC"
 msgstr "MPC"
 
@@ -2845,7 +2845,7 @@ msgstr "Следи за промени в библиотеката"
 msgid "Mono playback"
 msgstr ""
 
-#: smartplaylists/searchterm.cpp:303
+#: smartplaylists/searchterm.cpp:309
 msgid "Months"
 msgstr "Месеца"
 
@@ -3108,15 +3108,15 @@ msgstr "В момента се изпълнява"
 msgid "OSD Preview"
 msgstr "OSD Изглед"
 
-#: core/song.cpp:323
+#: core/song.cpp:320
 msgid "Ogg Flac"
 msgstr "Ogg Flac"
 
-#: core/song.cpp:324
+#: core/song.cpp:321
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
 
-#: core/song.cpp:325 ../bin/src/ui_magnatunedownloaddialog.h:139
+#: core/song.cpp:322 ../bin/src/ui_magnatunedownloaddialog.h:139
 #: ../bin/src/ui_magnatunesettingspage.h:170
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
@@ -3153,7 +3153,7 @@ msgstr "Отворено устройство"
 msgid "Open file..."
 msgstr "Отваряне на файл..."
 
-#: internet/googledriveservice.cpp:210
+#: internet/googledriveservice.cpp:184
 msgid "Open in Google Drive"
 msgstr "Отвори в Google Drive"
 
@@ -4230,7 +4230,7 @@ msgstr "Спиране на възпроизвеждането след теку
 msgid "Stopped"
 msgstr "Спрян"
 
-#: core/song.cpp:331
+#: core/song.cpp:328
 msgid "Stream"
 msgstr "Поток"
 
@@ -4345,7 +4345,7 @@ msgstr "Директорията \"%1\" не е валидна"
 msgid "The playlist '%1' was empty or could not be loaded."
 msgstr "Списъкът с песни '%1' беше празен или не можа да бъде зареден"
 
-#: smartplaylists/searchtermwidget.cpp:322
+#: smartplaylists/searchtermwidget.cpp:330
 msgid "The second value must be greater than the first one!"
 msgstr "Втората стойност трябва да е по-голяма от първата!"
 
@@ -4555,7 +4555,7 @@ msgstr "Прекодиране на %1 файлове чрез %2 начина"
 msgid "Transcoding options"
 msgstr "Настройки на прекодиране"
 
-#: core/song.cpp:328
+#: core/song.cpp:325
 msgid "TrueAudio"
 msgstr "Инстинско Аудио"
 
@@ -4588,7 +4588,7 @@ msgstr ""
 msgid "Unable to download %1 (%2)"
 msgstr "Неуспешно сваляне %1 (%2)"
 
-#: core/song.cpp:335 library/librarymodel.cpp:301 library/librarymodel.cpp:306
+#: core/song.cpp:332 library/librarymodel.cpp:301 library/librarymodel.cpp:306
 #: library/librarymodel.cpp:947 playlist/playlistdelegates.cpp:309
 #: playlist/playlistmanager.cpp:394 playlist/playlistmanager.cpp:397
 #: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:416
@@ -4804,7 +4804,7 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
-#: core/song.cpp:327
+#: core/song.cpp:324
 msgid "Wav"
 msgstr "Wav"
 
@@ -4812,7 +4812,7 @@ msgstr "Wav"
 msgid "Website"
 msgstr "Уебсайт"
 
-#: smartplaylists/searchterm.cpp:302
+#: smartplaylists/searchterm.cpp:308
 msgid "Weeks"
 msgstr "Седмици"
 
@@ -4888,7 +4888,7 @@ msgstr "Windows Media 40k"
 msgid "Windows Media 64k"
 msgstr "Windows Media 64k"
 
-#: core/song.cpp:318
+#: core/song.cpp:315
 msgid "Windows Media audio"
 msgstr "Аудио — Windows Media"
 
@@ -4914,7 +4914,7 @@ msgstr "Година"
 msgid "Year - Album"
 msgstr "Година - Албум"
 
-#: smartplaylists/searchterm.cpp:304
+#: smartplaylists/searchterm.cpp:310
 msgid "Years"
 msgstr "Години"
 
@@ -5051,7 +5051,7 @@ msgstr "В системата Ви липсва OpenGL поддръжка, ви�
 msgid "Your username or password was incorrect."
 msgstr "Вашето потребителско име или парола не съвпада."
 
-#: smartplaylists/searchterm.cpp:288
+#: smartplaylists/searchterm.cpp:293
 msgid "Z-A"
 msgstr "Я-А"
 
@@ -5064,7 +5064,7 @@ msgstr "Нула"
 msgid "add %n songs"
 msgstr "добавете %n песни"
 
-#: smartplaylists/searchterm.cpp:200
+#: smartplaylists/searchterm.cpp:205
 msgid "after"
 msgstr "след"
 
@@ -5080,15 +5080,15 @@ msgstr "и"
 msgid "automatic"
 msgstr "автоматично"
 
-#: smartplaylists/searchterm.cpp:201
+#: smartplaylists/searchterm.cpp:206
 msgid "before"
 msgstr "преди"
 
-#: smartplaylists/searchterm.cpp:206
+#: smartplaylists/searchterm.cpp:211
 msgid "between"
 msgstr "между"
 
-#: smartplaylists/searchterm.cpp:292
+#: smartplaylists/searchterm.cpp:297
 msgid "biggest first"
 msgstr "Пъво най-големите"
 
@@ -5096,7 +5096,7 @@ msgstr "Пъво най-големите"
 msgid "bpm"
 msgstr "удари в минута"
 
-#: smartplaylists/searchterm.cpp:212
+#: smartplaylists/searchterm.cpp:217
 msgid "contains"
 msgstr "съдържа"
 
@@ -5111,15 +5111,15 @@ msgstr "изключено"
 msgid "disc %1"
 msgstr "диск %1"
 
-#: smartplaylists/searchterm.cpp:213
+#: smartplaylists/searchterm.cpp:218
 msgid "does not contain"
 msgstr "не съдържа"
 
-#: smartplaylists/searchterm.cpp:215
+#: smartplaylists/searchterm.cpp:220
 msgid "ends with"
 msgstr "свършва с"
 
-#: smartplaylists/searchterm.cpp:218
+#: smartplaylists/searchterm.cpp:223
 msgid "equals"
 msgstr "равно"
 
@@ -5131,11 +5131,11 @@ msgstr ""
 msgid "gpodder.net directory"
 msgstr "gpodder.net директория"
 
-#: smartplaylists/searchterm.cpp:216
+#: smartplaylists/searchterm.cpp:221
 msgid "greater than"
 msgstr "по-голям от"
 
-#: smartplaylists/searchterm.cpp:204
+#: smartplaylists/searchterm.cpp:209
 msgid "in the last"
 msgstr "в последните"
 
@@ -5145,11 +5145,11 @@ msgstr "в последните"
 msgid "kbps"
 msgstr "килобита/сек"
 
-#: smartplaylists/searchterm.cpp:217
+#: smartplaylists/searchterm.cpp:222
 msgid "less than"
 msgstr "по-малко от"
 
-#: smartplaylists/searchterm.cpp:290
+#: smartplaylists/searchterm.cpp:295
 msgid "longest first"
 msgstr "първо най-дългите"
 
@@ -5158,27 +5158,27 @@ msgstr "първо най-дългите"
 msgid "move %n songs"
 msgstr ""
 
-#: smartplaylists/searchterm.cpp:289
+#: smartplaylists/searchterm.cpp:294
 msgid "newest first"
 msgstr "първо най-новите"
 
-#: smartplaylists/searchterm.cpp:219
+#: smartplaylists/searchterm.cpp:224
 msgid "not equals"
 msgstr "различно"
 
-#: smartplaylists/searchterm.cpp:205
+#: smartplaylists/searchterm.cpp:210
 msgid "not in the last"
 msgstr "не e в последните"
 
-#: smartplaylists/searchterm.cpp:203
+#: smartplaylists/searchterm.cpp:208
 msgid "not on"
 msgstr "не е на"
 
-#: smartplaylists/searchterm.cpp:289
+#: smartplaylists/searchterm.cpp:294
 msgid "oldest first"
 msgstr "първо най-старите"
 
-#: smartplaylists/searchterm.cpp:202
+#: smartplaylists/searchterm.cpp:207
 msgid "on"
 msgstr "вкл."
 
@@ -5195,7 +5195,7 @@ msgstr "натиснете enter"
 msgid "remove %n songs"
 msgstr "премахване на %n песни"
 
-#: smartplaylists/searchterm.cpp:290
+#: smartplaylists/searchterm.cpp:295
 msgid "shortest first"
 msgstr "първо най-късите"
 
@@ -5203,7 +5203,7 @@ msgstr "първо най-късите"
 msgid "shuffle songs"
 msgstr ""
 
-#: smartplaylists/searchterm.cpp:292
+#: smartplaylists/searchterm.cpp:297
 msgid "smallest first"
 msgstr "първо най-малките"
 
@@ -5211,7 +5211,7 @@ msgstr "първо най-малките"
 msgid "sort songs"
 msgstr "сортирай песните"
 
-#: smartplaylists/searchterm.cpp:214
+#: smartplaylists/searchterm.cpp:219
 msgid "starts with"
 msgstr "започва с"
 

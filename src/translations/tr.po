@@ -288,7 +288,7 @@ msgid ""
 "A song will be included in the playlist if it matches these conditions."
 msgstr "Bir şarkı, eğer bu koşullara uyarsa çalma listesine eklenecektir."
 
-#: smartplaylists/searchterm.cpp:288
+#: smartplaylists/searchterm.cpp:293
 msgid "A-Z"
 msgstr "A-Z"
 
@@ -308,7 +308,7 @@ msgstr "AAC 32k"
 msgid "AAC 64k"
 msgstr "AAC 64k"
 
-#: core/song.cpp:326
+#: core/song.cpp:323
 msgid "AIFF"
 msgstr "AIFF"
 
@@ -404,7 +404,7 @@ msgstr "Podcast ekle"
 msgid "Add podcast..."
 msgstr "Podcast ekle..."
 
-#: smartplaylists/searchtermwidget.cpp:333
+#: smartplaylists/searchtermwidget.cpp:341
 msgid "Add search term"
 msgstr "Arama terimi ekle"
 
@@ -868,7 +868,7 @@ msgstr ""
 msgid "Buttons"
 msgstr "Düğmeler"
 
-#: core/song.cpp:329
+#: core/song.cpp:326
 msgid "CDDA"
 msgstr "CDDA"
 
@@ -968,7 +968,7 @@ msgstr "Temizle"
 msgid "Clear playlist"
 msgstr "Çalma listesini temizle"
 
-#: smartplaylists/searchtermwidget.cpp:321 ../bin/src/ui_mainwindow.h:644
+#: smartplaylists/searchtermwidget.cpp:329 ../bin/src/ui_mainwindow.h:644
 #: visualisations/visualisationcontainer.cpp:211
 #: ../bin/src/ui_visualisationoverlay.h:183
 msgid "Clementine"
@@ -1092,7 +1092,7 @@ msgstr "Renk"
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Virgülle ayrılmış sınıf:seviye listesi, sınıf 0-3 arasında olabilir "
 
-#: playlist/playlist.cpp:1219 smartplaylists/searchterm.cpp:279
+#: playlist/playlist.cpp:1219 smartplaylists/searchterm.cpp:284
 #: ui/organisedialog.cpp:65 ../bin/src/ui_edittagdialog.h:661
 msgid "Comment"
 msgstr "Yorum"
@@ -1150,7 +1150,7 @@ msgstr "Podcastları ayarla..."
 
 #: internet/digitallyimportedservicebase.cpp:186
 #: ../bin/src/ui_globalsearchsettingspage.h:150
-#: internet/googledriveservice.cpp:219
+#: internet/googledriveservice.cpp:193
 msgid "Configure..."
 msgstr "Yapılandır..."
 
@@ -1234,9 +1234,9 @@ msgstr "Last.fm radyo istasyonu yüklenemedi"
 msgid "Couldn't open output file %1"
 msgstr "%1 çıktı dosyası açılamadı"
 
-#: internet/cloudfileservice.cpp:85 ../bin/src/ui_albumcovermanager.h:149
+#: internet/cloudfileservice.cpp:87 ../bin/src/ui_albumcovermanager.h:149
 #: ../bin/src/ui_albumcoversearcher.h:105 ../bin/src/ui_mainwindow.h:684
-#: internet/googledriveservice.cpp:215
+#: internet/googledriveservice.cpp:189
 msgid "Cover Manager"
 msgstr "Kapak Yöneticisi"
 
@@ -1394,7 +1394,7 @@ msgstr "Oluşturulduğu tarih"
 msgid "Date modified"
 msgstr "Değiştirildiği tarih"
 
-#: smartplaylists/searchterm.cpp:301
+#: smartplaylists/searchterm.cpp:307
 msgid "Days"
 msgstr "Gün"
 
@@ -2051,7 +2051,7 @@ msgstr "Bitir"
 msgid "First level"
 msgstr "İlk Seviye"
 
-#: core/song.cpp:319
+#: core/song.cpp:316
 msgid "Flac"
 msgstr "Flac"
 
@@ -2287,7 +2287,7 @@ msgstr "Yüksek (%1 fps)"
 msgid "High (1024x1024)"
 msgstr "Yüksek (1024x1024)"
 
-#: smartplaylists/searchterm.cpp:300
+#: smartplaylists/searchterm.cpp:306
 msgid "Hours"
 msgstr "Saat"
 
@@ -2369,7 +2369,7 @@ msgstr "Ses seviyesini 4% arttır"
 msgid "Increase volume"
 msgstr "Sesi arttır"
 
-#: internet/googledriveservice.cpp:139
+#: internet/cloudfileservice.cpp:135
 #, qt-format
 msgid "Indexing %1"
 msgstr ""
@@ -2736,7 +2736,7 @@ msgstr "Şarkı sözleri"
 msgid "Lyrics from %1"
 msgstr "%1'den şarkı sözleri"
 
-#: core/song.cpp:322 ../bin/src/ui_transcodersettingspage.h:159
+#: core/song.cpp:319 ../bin/src/ui_transcodersettingspage.h:159
 msgid "MP3"
 msgstr "MP3"
 
@@ -2748,11 +2748,11 @@ msgstr "MP3 256k"
 msgid "MP3 96k"
 msgstr "MP3 96k"
 
-#: core/song.cpp:320
+#: core/song.cpp:317
 msgid "MP4 AAC"
 msgstr "MP4 AAC"
 
-#: core/song.cpp:321
+#: core/song.cpp:318
 msgid "MPC"
 msgstr "MPC"
 
@@ -2851,7 +2851,7 @@ msgstr "Kütüphanede olacak değişiklikleri izle"
 msgid "Mono playback"
 msgstr "Tekli oynat"
 
-#: smartplaylists/searchterm.cpp:303
+#: smartplaylists/searchterm.cpp:309
 msgid "Months"
 msgstr "Ay"
 
@@ -3114,15 +3114,15 @@ msgstr "Şimdi Çalıyor"
 msgid "OSD Preview"
 msgstr "OSD Önizleme"
 
-#: core/song.cpp:323
+#: core/song.cpp:320
 msgid "Ogg Flac"
 msgstr "Ogg Flac"
 
-#: core/song.cpp:324
+#: core/song.cpp:321
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
 
-#: core/song.cpp:325 ../bin/src/ui_magnatunedownloaddialog.h:139
+#: core/song.cpp:322 ../bin/src/ui_magnatunedownloaddialog.h:139
 #: ../bin/src/ui_magnatunesettingspage.h:170
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
@@ -3159,7 +3159,7 @@ msgstr "Aygıtı aç"
 msgid "Open file..."
 msgstr "Dosya aç..."
 
-#: internet/googledriveservice.cpp:210
+#: internet/googledriveservice.cpp:184
 msgid "Open in Google Drive"
 msgstr ""
 
@@ -4236,7 +4236,7 @@ msgstr "Bu parçadan sonra durdur"
 msgid "Stopped"
 msgstr "Durduruldu"
 
-#: core/song.cpp:331
+#: core/song.cpp:328
 msgid "Stream"
 msgstr "Akış"
 
@@ -4351,7 +4351,7 @@ msgstr "%1 dizini geçersiz"
 msgid "The playlist '%1' was empty or could not be loaded."
 msgstr "Çalma listesi '%1' boş veya yüklenemiyor."
 
-#: smartplaylists/searchtermwidget.cpp:322
+#: smartplaylists/searchtermwidget.cpp:330
 msgid "The second value must be greater than the first one!"
 msgstr "İkinci değer ilk değerden büyük olmak zorunda!"
 
@@ -4561,7 +4561,7 @@ msgstr "%1 adet dosya %2 adet thread ile dönüştürülüyor"
 msgid "Transcoding options"
 msgstr "Kod çevrimi seçenekleri"
 
-#: core/song.cpp:328
+#: core/song.cpp:325
 msgid "TrueAudio"
 msgstr "TrueAudio"
 
@@ -4594,7 +4594,7 @@ msgstr "Engin frekans bandı (UWB)"
 msgid "Unable to download %1 (%2)"
 msgstr "%1 indirilemedi (%2)"
 
-#: core/song.cpp:335 library/librarymodel.cpp:301 library/librarymodel.cpp:306
+#: core/song.cpp:332 library/librarymodel.cpp:301 library/librarymodel.cpp:306
 #: library/librarymodel.cpp:947 playlist/playlistdelegates.cpp:309
 #: playlist/playlistmanager.cpp:394 playlist/playlistmanager.cpp:397
 #: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:416
@@ -4810,7 +4810,7 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
-#: core/song.cpp:327
+#: core/song.cpp:324
 msgid "Wav"
 msgstr "Wav"
 
@@ -4818,7 +4818,7 @@ msgstr "Wav"
 msgid "Website"
 msgstr "İnternet sitesi"
 
-#: smartplaylists/searchterm.cpp:302
+#: smartplaylists/searchterm.cpp:308
 msgid "Weeks"
 msgstr "Haftalar"
 
@@ -4894,7 +4894,7 @@ msgstr "Windows Media 40k"
 msgid "Windows Media 64k"
 msgstr "Windows Medya 64k"
 
-#: core/song.cpp:318
+#: core/song.cpp:315
 msgid "Windows Media audio"
 msgstr "Windows Media audio"
 
@@ -4920,7 +4920,7 @@ msgstr "Yıl"
 msgid "Year - Album"
 msgstr "Yıl - Albüm"
 
-#: smartplaylists/searchterm.cpp:304
+#: smartplaylists/searchterm.cpp:310
 msgid "Years"
 msgstr "Yıl"
 
@@ -5057,7 +5057,7 @@ msgstr "Sisteminizde OpenGL desteği yok, görselleştirmeler çalışmayacak."
 msgid "Your username or password was incorrect."
 msgstr "Kullanıcı adı veya parolanız yanlış."
 
-#: smartplaylists/searchterm.cpp:288
+#: smartplaylists/searchterm.cpp:293
 msgid "Z-A"
 msgstr "Z-A"
 
@@ -5070,7 +5070,7 @@ msgstr "Sıfır"
 msgid "add %n songs"
 msgstr "%n şarkıyı ekle"
 
-#: smartplaylists/searchterm.cpp:200
+#: smartplaylists/searchterm.cpp:205
 msgid "after"
 msgstr "sonra"
 
@@ -5086,15 +5086,15 @@ msgstr "ve"
 msgid "automatic"
 msgstr "otomatik"
 
-#: smartplaylists/searchterm.cpp:201
+#: smartplaylists/searchterm.cpp:206
 msgid "before"
 msgstr "önce"
 
-#: smartplaylists/searchterm.cpp:206
+#: smartplaylists/searchterm.cpp:211
 msgid "between"
 msgstr "arasında"
 
-#: smartplaylists/searchterm.cpp:292
+#: smartplaylists/searchterm.cpp:297
 msgid "biggest first"
 msgstr "ilk önce en büyüğü"
 
@@ -5102,7 +5102,7 @@ msgstr "ilk önce en büyüğü"
 msgid "bpm"
 msgstr "bpm"
 
-#: smartplaylists/searchterm.cpp:212
+#: smartplaylists/searchterm.cpp:217
 msgid "contains"
 msgstr "şunu içeriyor"
 
@@ -5117,15 +5117,15 @@ msgstr "devre dışı"
 msgid "disc %1"
 msgstr "disk %1"
 
-#: smartplaylists/searchterm.cpp:213
+#: smartplaylists/searchterm.cpp:218
 msgid "does not contain"
 msgstr "şunu içermiyor"
 
-#: smartplaylists/searchterm.cpp:215
+#: smartplaylists/searchterm.cpp:220
 msgid "ends with"
 msgstr "şununla bitiyor"
 
-#: smartplaylists/searchterm.cpp:218
+#: smartplaylists/searchterm.cpp:223
 msgid "equals"
 msgstr "eşittir"
 
@@ -5137,11 +5137,11 @@ msgstr "gpodder.net"
 msgid "gpodder.net directory"
 msgstr "gpodder.net dizini"
 
-#: smartplaylists/searchterm.cpp:216
+#: smartplaylists/searchterm.cpp:221
 msgid "greater than"
 msgstr "büyüktür"
 
-#: smartplaylists/searchterm.cpp:204
+#: smartplaylists/searchterm.cpp:209
 msgid "in the last"
 msgstr "Sonuncu"
 
@@ -5151,11 +5151,11 @@ msgstr "Sonuncu"
 msgid "kbps"
 msgstr "kbps"
 
-#: smartplaylists/searchterm.cpp:217
+#: smartplaylists/searchterm.cpp:222
 msgid "less than"
 msgstr "küçüktür"
 
-#: smartplaylists/searchterm.cpp:290
+#: smartplaylists/searchterm.cpp:295
 msgid "longest first"
 msgstr "ilk önce en uzunu"
 
@@ -5164,27 +5164,27 @@ msgstr "ilk önce en uzunu"
 msgid "move %n songs"
 msgstr "%n şarkıyı taşı"
 
-#: smartplaylists/searchterm.cpp:289
+#: smartplaylists/searchterm.cpp:294
 msgid "newest first"
 msgstr "ilk önce en yenisi"
 
-#: smartplaylists/searchterm.cpp:219
+#: smartplaylists/searchterm.cpp:224
 msgid "not equals"
 msgstr "eşit değiller"
 
-#: smartplaylists/searchterm.cpp:205
+#: smartplaylists/searchterm.cpp:210
 msgid "not in the last"
 msgstr "şu süreden beri değil:"
 
-#: smartplaylists/searchterm.cpp:203
+#: smartplaylists/searchterm.cpp:208
 msgid "not on"
 msgstr "değil"
 
-#: smartplaylists/searchterm.cpp:289
+#: smartplaylists/searchterm.cpp:294
 msgid "oldest first"
 msgstr "ilk önce en eskisi"
 
-#: smartplaylists/searchterm.cpp:202
+#: smartplaylists/searchterm.cpp:207
 msgid "on"
 msgstr "açık"
 
@@ -5201,7 +5201,7 @@ msgstr "enter'a basın"
 msgid "remove %n songs"
 msgstr "%n şarkıyı kaldır"
 
-#: smartplaylists/searchterm.cpp:290
+#: smartplaylists/searchterm.cpp:295
 msgid "shortest first"
 msgstr "ilk önce en kısası"
 
@@ -5209,7 +5209,7 @@ msgstr "ilk önce en kısası"
 msgid "shuffle songs"
 msgstr "Parçaları karıştır"
 
-#: smartplaylists/searchterm.cpp:292
+#: smartplaylists/searchterm.cpp:297
 msgid "smallest first"
 msgstr "ilk önce en küçüğü"
 
@@ -5217,7 +5217,7 @@ msgstr "ilk önce en küçüğü"
 msgid "sort songs"
 msgstr "şarkıları sırala"
 
-#: smartplaylists/searchterm.cpp:214
+#: smartplaylists/searchterm.cpp:219
 msgid "starts with"
 msgstr "şununla başlıyor"
 

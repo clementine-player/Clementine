@@ -282,7 +282,7 @@ msgid ""
 "A song will be included in the playlist if it matches these conditions."
 msgstr "Een nummer wordt in de afspeellijst opgenomen als het aan deze voorwaarden voldoet."
 
-#: smartplaylists/searchterm.cpp:288
+#: smartplaylists/searchterm.cpp:293
 msgid "A-Z"
 msgstr "A-Z"
 
@@ -302,7 +302,7 @@ msgstr "AAC 32k"
 msgid "AAC 64k"
 msgstr "AAC 64K"
 
-#: core/song.cpp:326
+#: core/song.cpp:323
 msgid "AIFF"
 msgstr "AIFF"
 
@@ -398,7 +398,7 @@ msgstr "Voeg podcast toe"
 msgid "Add podcast..."
 msgstr "Voeg podcast toe..."
 
-#: smartplaylists/searchtermwidget.cpp:333
+#: smartplaylists/searchtermwidget.cpp:341
 msgid "Add search term"
 msgstr "Zoekterm toevoegen"
 
@@ -862,7 +862,7 @@ msgstr ""
 msgid "Buttons"
 msgstr "Knoppen"
 
-#: core/song.cpp:329
+#: core/song.cpp:326
 msgid "CDDA"
 msgstr "CDDA"
 
@@ -962,7 +962,7 @@ msgstr "Wissen"
 msgid "Clear playlist"
 msgstr "Afspeellijst wissen"
 
-#: smartplaylists/searchtermwidget.cpp:321 ../bin/src/ui_mainwindow.h:644
+#: smartplaylists/searchtermwidget.cpp:329 ../bin/src/ui_mainwindow.h:644
 #: visualisations/visualisationcontainer.cpp:211
 #: ../bin/src/ui_visualisationoverlay.h:183
 msgid "Clementine"
@@ -1086,7 +1086,7 @@ msgstr "Kleuren"
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Door komma's gescheiden lijst van van klasse:niveau, het niveau is 0-3"
 
-#: playlist/playlist.cpp:1219 smartplaylists/searchterm.cpp:279
+#: playlist/playlist.cpp:1219 smartplaylists/searchterm.cpp:284
 #: ui/organisedialog.cpp:65 ../bin/src/ui_edittagdialog.h:661
 msgid "Comment"
 msgstr "Opmerking"
@@ -1144,7 +1144,7 @@ msgstr "Podcasts configureren"
 
 #: internet/digitallyimportedservicebase.cpp:186
 #: ../bin/src/ui_globalsearchsettingspage.h:150
-#: internet/googledriveservice.cpp:219
+#: internet/googledriveservice.cpp:193
 msgid "Configure..."
 msgstr "Configureer..."
 
@@ -1228,9 +1228,9 @@ msgstr "Kan het last.fm-radiostation niet laden"
 msgid "Couldn't open output file %1"
 msgstr "Kan uitvoerbestand %1 niet openen"
 
-#: internet/cloudfileservice.cpp:85 ../bin/src/ui_albumcovermanager.h:149
+#: internet/cloudfileservice.cpp:87 ../bin/src/ui_albumcovermanager.h:149
 #: ../bin/src/ui_albumcoversearcher.h:105 ../bin/src/ui_mainwindow.h:684
-#: internet/googledriveservice.cpp:215
+#: internet/googledriveservice.cpp:189
 msgid "Cover Manager"
 msgstr "Albumhoesbeheer"
 
@@ -1388,7 +1388,7 @@ msgstr "Aanmaakdatum"
 msgid "Date modified"
 msgstr "Wijzigingsdatum"
 
-#: smartplaylists/searchterm.cpp:301
+#: smartplaylists/searchterm.cpp:307
 msgid "Days"
 msgstr "Dagen"
 
@@ -2045,7 +2045,7 @@ msgstr "Voltooien"
 msgid "First level"
 msgstr "Eerste niveau"
 
-#: core/song.cpp:319
+#: core/song.cpp:316
 msgid "Flac"
 msgstr "Flac"
 
@@ -2281,7 +2281,7 @@ msgstr "Hoog (%1 fps)"
 msgid "High (1024x1024)"
 msgstr "Hoog (1024x1024)"
 
-#: smartplaylists/searchterm.cpp:300
+#: smartplaylists/searchterm.cpp:306
 msgid "Hours"
 msgstr "Uur"
 
@@ -2363,7 +2363,7 @@ msgstr "Volume met 4% verhogen"
 msgid "Increase volume"
 msgstr "Volume verhogen"
 
-#: internet/googledriveservice.cpp:139
+#: internet/cloudfileservice.cpp:135
 #, qt-format
 msgid "Indexing %1"
 msgstr "Indexeren %1"
@@ -2730,7 +2730,7 @@ msgstr "Songteksten"
 msgid "Lyrics from %1"
 msgstr "Songtekst van %1"
 
-#: core/song.cpp:322 ../bin/src/ui_transcodersettingspage.h:159
+#: core/song.cpp:319 ../bin/src/ui_transcodersettingspage.h:159
 msgid "MP3"
 msgstr "MP3"
 
@@ -2742,11 +2742,11 @@ msgstr "MP3 256K"
 msgid "MP3 96k"
 msgstr "MP3 96k"
 
-#: core/song.cpp:320
+#: core/song.cpp:317
 msgid "MP4 AAC"
 msgstr "MP4 AAC"
 
-#: core/song.cpp:321
+#: core/song.cpp:318
 msgid "MPC"
 msgstr "MPC"
 
@@ -2845,7 +2845,7 @@ msgstr "De bibliotheek op wijzigingen blijven controleren"
 msgid "Mono playback"
 msgstr ""
 
-#: smartplaylists/searchterm.cpp:303
+#: smartplaylists/searchterm.cpp:309
 msgid "Months"
 msgstr "Maanden"
 
@@ -3108,15 +3108,15 @@ msgstr "Nu aan het afspelen"
 msgid "OSD Preview"
 msgstr "Voorbeeld infoschermvenster"
 
-#: core/song.cpp:323
+#: core/song.cpp:320
 msgid "Ogg Flac"
 msgstr "Ogg Flac"
 
-#: core/song.cpp:324
+#: core/song.cpp:321
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
 
-#: core/song.cpp:325 ../bin/src/ui_magnatunedownloaddialog.h:139
+#: core/song.cpp:322 ../bin/src/ui_magnatunedownloaddialog.h:139
 #: ../bin/src/ui_magnatunesettingspage.h:170
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
@@ -3153,7 +3153,7 @@ msgstr "Apparaat openen"
 msgid "Open file..."
 msgstr "Bestand openen..."
 
-#: internet/googledriveservice.cpp:210
+#: internet/googledriveservice.cpp:184
 msgid "Open in Google Drive"
 msgstr ""
 
@@ -4230,7 +4230,7 @@ msgstr "Na dit nummer stoppen met afspelen"
 msgid "Stopped"
 msgstr "Gestopt"
 
-#: core/song.cpp:331
+#: core/song.cpp:328
 msgid "Stream"
 msgstr "Radiostream"
 
@@ -4345,7 +4345,7 @@ msgstr "De map %1 is niet geldig"
 msgid "The playlist '%1' was empty or could not be loaded."
 msgstr "De afspeellijst '%1' was leeg, of kon niet worden geladen."
 
-#: smartplaylists/searchtermwidget.cpp:322
+#: smartplaylists/searchtermwidget.cpp:330
 msgid "The second value must be greater than the first one!"
 msgstr "De tweede waarde moet groter zijn dan de eerste!"
 
@@ -4555,7 +4555,7 @@ msgstr "Converteren van %1 bestanden m.b.v. %2 threads"
 msgid "Transcoding options"
 msgstr "Conversieopties"
 
-#: core/song.cpp:328
+#: core/song.cpp:325
 msgid "TrueAudio"
 msgstr "TrueAudio"
 
@@ -4588,7 +4588,7 @@ msgstr "Zeer snel internet"
 msgid "Unable to download %1 (%2)"
 msgstr "Kan %1 niet downloaden (%2)"
 
-#: core/song.cpp:335 library/librarymodel.cpp:301 library/librarymodel.cpp:306
+#: core/song.cpp:332 library/librarymodel.cpp:301 library/librarymodel.cpp:306
 #: library/librarymodel.cpp:947 playlist/playlistdelegates.cpp:309
 #: playlist/playlistmanager.cpp:394 playlist/playlistmanager.cpp:397
 #: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:416
@@ -4804,7 +4804,7 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
-#: core/song.cpp:327
+#: core/song.cpp:324
 msgid "Wav"
 msgstr "Wav"
 
@@ -4812,7 +4812,7 @@ msgstr "Wav"
 msgid "Website"
 msgstr "Website"
 
-#: smartplaylists/searchterm.cpp:302
+#: smartplaylists/searchterm.cpp:308
 msgid "Weeks"
 msgstr "Weken"
 
@@ -4888,7 +4888,7 @@ msgstr "Windows Media 40k"
 msgid "Windows Media 64k"
 msgstr "Windows Media 64K"
 
-#: core/song.cpp:318
+#: core/song.cpp:315
 msgid "Windows Media audio"
 msgstr "Windows Media-audio"
 
@@ -4914,7 +4914,7 @@ msgstr "Jaar"
 msgid "Year - Album"
 msgstr "Jaar - Album"
 
-#: smartplaylists/searchterm.cpp:304
+#: smartplaylists/searchterm.cpp:310
 msgid "Years"
 msgstr "Jaar"
 
@@ -5051,7 +5051,7 @@ msgstr "Uw systeem heeft geen ondersteuning voor OpenGL, visualisaties kunnen ni
 msgid "Your username or password was incorrect."
 msgstr "Uw gebruikersnaam of wachtwoord is niet correct."
 
-#: smartplaylists/searchterm.cpp:288
+#: smartplaylists/searchterm.cpp:293
 msgid "Z-A"
 msgstr "Z-A"
 
@@ -5064,7 +5064,7 @@ msgstr "Nul"
 msgid "add %n songs"
 msgstr "%n nummers toevoegen"
 
-#: smartplaylists/searchterm.cpp:200
+#: smartplaylists/searchterm.cpp:205
 msgid "after"
 msgstr "na"
 
@@ -5080,15 +5080,15 @@ msgstr "en"
 msgid "automatic"
 msgstr "automatisch"
 
-#: smartplaylists/searchterm.cpp:201
+#: smartplaylists/searchterm.cpp:206
 msgid "before"
 msgstr "ervoor"
 
-#: smartplaylists/searchterm.cpp:206
+#: smartplaylists/searchterm.cpp:211
 msgid "between"
 msgstr "tussen"
 
-#: smartplaylists/searchterm.cpp:292
+#: smartplaylists/searchterm.cpp:297
 msgid "biggest first"
 msgstr "grootste eerst"
 
@@ -5096,7 +5096,7 @@ msgstr "grootste eerst"
 msgid "bpm"
 msgstr "bpm"
 
-#: smartplaylists/searchterm.cpp:212
+#: smartplaylists/searchterm.cpp:217
 msgid "contains"
 msgstr "bevat"
 
@@ -5111,15 +5111,15 @@ msgstr "uitgeschakeld"
 msgid "disc %1"
 msgstr "schijf %1"
 
-#: smartplaylists/searchterm.cpp:213
+#: smartplaylists/searchterm.cpp:218
 msgid "does not contain"
 msgstr "bevat niet"
 
-#: smartplaylists/searchterm.cpp:215
+#: smartplaylists/searchterm.cpp:220
 msgid "ends with"
 msgstr "eindigt op"
 
-#: smartplaylists/searchterm.cpp:218
+#: smartplaylists/searchterm.cpp:223
 msgid "equals"
 msgstr "is gelijk aan"
 
@@ -5131,11 +5131,11 @@ msgstr "gpodder.net"
 msgid "gpodder.net directory"
 msgstr ""
 
-#: smartplaylists/searchterm.cpp:216
+#: smartplaylists/searchterm.cpp:221
 msgid "greater than"
 msgstr "is groter dan"
 
-#: smartplaylists/searchterm.cpp:204
+#: smartplaylists/searchterm.cpp:209
 msgid "in the last"
 msgstr "in de laatste"
 
@@ -5145,11 +5145,11 @@ msgstr "in de laatste"
 msgid "kbps"
 msgstr "kbps"
 
-#: smartplaylists/searchterm.cpp:217
+#: smartplaylists/searchterm.cpp:222
 msgid "less than"
 msgstr "minder dan"
 
-#: smartplaylists/searchterm.cpp:290
+#: smartplaylists/searchterm.cpp:295
 msgid "longest first"
 msgstr "langste eerst"
 
@@ -5158,27 +5158,27 @@ msgstr "langste eerst"
 msgid "move %n songs"
 msgstr "Verplaats %n nummers"
 
-#: smartplaylists/searchterm.cpp:289
+#: smartplaylists/searchterm.cpp:294
 msgid "newest first"
 msgstr "nieuwste eerst"
 
-#: smartplaylists/searchterm.cpp:219
+#: smartplaylists/searchterm.cpp:224
 msgid "not equals"
 msgstr "niet gelijk"
 
-#: smartplaylists/searchterm.cpp:205
+#: smartplaylists/searchterm.cpp:210
 msgid "not in the last"
 msgstr "niet in de laatste"
 
-#: smartplaylists/searchterm.cpp:203
+#: smartplaylists/searchterm.cpp:208
 msgid "not on"
 msgstr "niet op"
 
-#: smartplaylists/searchterm.cpp:289
+#: smartplaylists/searchterm.cpp:294
 msgid "oldest first"
 msgstr "oudste eerst"
 
-#: smartplaylists/searchterm.cpp:202
+#: smartplaylists/searchterm.cpp:207
 msgid "on"
 msgstr "aan"
 
@@ -5195,7 +5195,7 @@ msgstr "druk op enter"
 msgid "remove %n songs"
 msgstr "%n nummers verwijderen"
 
-#: smartplaylists/searchterm.cpp:290
+#: smartplaylists/searchterm.cpp:295
 msgid "shortest first"
 msgstr "kortste eerst"
 
@@ -5203,7 +5203,7 @@ msgstr "kortste eerst"
 msgid "shuffle songs"
 msgstr ""
 
-#: smartplaylists/searchterm.cpp:292
+#: smartplaylists/searchterm.cpp:297
 msgid "smallest first"
 msgstr "kleinste eerst"
 
@@ -5211,7 +5211,7 @@ msgstr "kleinste eerst"
 msgid "sort songs"
 msgstr ""
 
-#: smartplaylists/searchterm.cpp:214
+#: smartplaylists/searchterm.cpp:219
 msgid "starts with"
 msgstr "begint met"
 
