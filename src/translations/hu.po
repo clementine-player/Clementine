@@ -5,6 +5,7 @@
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
 #   <gyonkibendeguz@gmail.com>, 2012.
+# Márk Lutring <marcus@elitemail.hu>, 2012.
 # Péter Polonkai <polesz@nedudu.hu>, 2012.
 #   <ricsipontaz@googlemail.com>, 2012.
 # Sándor Balikó <vo101sanyo@gmail.com>, 2011.
@@ -13,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-11-30 11:09+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2012-12-21 15:59+0000\n"
+"Last-Translator: Márk Lutring <marcus@elitemail.hu>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: hu\n"
@@ -72,7 +73,7 @@ msgstr "%1 nappal ezelőtt"
 #: podcasts/gpoddersync.cpp:79
 #, qt-format
 msgid "%1 on %2"
-msgstr ""
+msgstr "%1, %2"
 
 #: playlistparsers/playlistparser.cpp:74
 #, qt-format
@@ -132,7 +133,7 @@ msgstr "%L1 összes lejátszás"
 
 #: ../bin/src/ui_notificationssettingspage.h:399
 msgid "%filename%"
-msgstr ""
+msgstr "%fájlnév%"
 
 #: transcoder/transcodedialog.cpp:202
 #, c-format
@@ -232,7 +233,7 @@ msgstr "0:00:00"
 
 #: ../bin/src/ui_appearancesettingspage.h:284
 msgid "0px"
-msgstr ""
+msgstr "0px"
 
 #: core/utilities.cpp:106
 msgid "1 day"
@@ -292,7 +293,7 @@ msgstr "AAC"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:179
 msgid "AAC 128k"
-msgstr ""
+msgstr "AAC 128k"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:171
 msgid "AAC 32k"
@@ -300,7 +301,7 @@ msgstr "AAC 32k"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:178
 msgid "AAC 64k"
-msgstr ""
+msgstr "AAC 64k"
 
 #: core/song.cpp:323
 msgid "AIFF"
@@ -424,7 +425,7 @@ msgstr "Lemezsorszám címke hozzáadása"
 
 #: ../bin/src/ui_notificationssettingspage.h:401
 msgid "Add song filename"
-msgstr ""
+msgstr "A szám fájlnevének hozzáadása"
 
 #: ../bin/src/ui_notificationssettingspage.h:385
 msgid "Add song genre tag"
@@ -460,11 +461,11 @@ msgstr "Adatfolyam hozzáadása…"
 
 #: internet/groovesharkservice.cpp:1085
 msgid "Add to Grooveshark favorites"
-msgstr ""
+msgstr "Hozzáadás a Grooveshark kedvencekhez"
 
 #: internet/groovesharkservice.cpp:1097
 msgid "Add to Grooveshark playlists"
-msgstr ""
+msgstr "Hozzáadás a Grooveshark lejátszólistákhoz"
 
 #: ui/mainwindow.cpp:1372
 msgid "Add to another playlist"
@@ -509,11 +510,11 @@ msgstr "Hozzáadva három hónapon belül"
 
 #: internet/groovesharkservice.cpp:1392
 msgid "Adding song to My Music"
-msgstr ""
+msgstr "Számok hozzáadása a Zenéimhez"
 
 #: internet/groovesharkservice.cpp:1369
 msgid "Adding song to favorites"
-msgstr ""
+msgstr "Számok hozzáadása a kedvencekhez"
 
 #: library/libraryfilterwidget.cpp:116
 msgid "Advanced grouping..."
@@ -645,7 +646,7 @@ msgstr "És:"
 
 #: moodbar/moodbarrenderer.cpp:156
 msgid "Angry"
-msgstr ""
+msgstr "Mérges"
 
 #: ../bin/src/ui_songinfosettingspage.h:180
 #: ../bin/src/ui_appearancesettingspage.h:266
@@ -711,7 +712,7 @@ msgstr "Előadó kezdése"
 
 #: ../bin/src/ui_transcodedialog.h:210
 msgid "Audio format"
-msgstr "Audio formátum"
+msgstr "Hang formátum"
 
 #: internet/digitallyimportedsettingspage.cpp:82
 #: internet/magnatunesettingspage.cpp:113 internet/lastfmservice.cpp:427
@@ -721,7 +722,7 @@ msgstr "A hitelesítés meghiúsult"
 
 #: ../bin/src/ui_podcastinfowidget.h:192
 msgid "Author"
-msgstr ""
+msgstr "Szerző"
 
 #: ui/about.cpp:64
 msgid "Authors"
@@ -989,15 +990,15 @@ msgstr "Clementine automatikusan az eszköz által is támogatott formátumba tu
 
 #: ../bin/src/ui_dropboxsettingspage.h:104
 msgid "Clementine can play music that you have uploaded to Dropbox"
-msgstr ""
+msgstr "A Clementine képes lejátszani a számait amit ön feltöltött a Dropboxba"
 
 #: ../bin/src/ui_googledrivesettingspage.h:104
 msgid "Clementine can play music that you have uploaded to Google Drive"
-msgstr ""
+msgstr "A Clementine képes lejátszani a számait amit ön feltöltött a Google Drive-ba"
 
 #: ../bin/src/ui_ubuntuonesettingspage.h:111
 msgid "Clementine can play music that you have uploaded to Ubuntu One"
-msgstr ""
+msgstr "A Clementine képes lejátszani a számait amit ön feltöltött az Ubuntu One-ba"
 
 #: ../bin/src/ui_notificationssettingspage.h:403
 msgid "Clementine can show a message when the track changes."
@@ -1033,7 +1034,7 @@ msgstr "Nincsenek találatok ehhez a fájlhoz"
 
 #: ../bin/src/ui_globalsearchview.h:210
 msgid "Clementine will find music in:"
-msgstr ""
+msgstr "A Clementine itt fog találni zenét:"
 
 #: library/libraryview.cpp:349
 msgid "Click here to add some music"
@@ -1056,7 +1057,7 @@ msgstr "Bezár"
 
 #: playlist/playlisttabbar.cpp:47
 msgid "Close playlist"
-msgstr ""
+msgstr "Lejátszólista bezárása"
 
 #: visualisations/visualisationcontainer.cpp:127
 msgid "Close visualization"
@@ -1108,7 +1109,7 @@ msgstr "Zeneszerző"
 #: internet/searchboxwidget.cpp:42
 #, qt-format
 msgid "Configure %1..."
-msgstr ""
+msgstr "%1 beállítása..."
 
 #: internet/groovesharkservice.cpp:550
 msgid "Configure Grooveshark..."
@@ -1162,7 +1163,7 @@ msgstr "Csatlakozás a Spotifyhoz"
 
 #: ../bin/src/ui_console.h:80 ../bin/src/ui_mainwindow.h:689
 msgid "Console"
-msgstr ""
+msgstr "Konzol"
 
 #: ../bin/src/ui_transcoderoptionsmp3.h:196
 msgid "Constant bitrate"
@@ -1178,7 +1179,7 @@ msgstr "Az eszköz által nem támogatott számok konvertálása"
 
 #: internet/groovesharkservice.cpp:1170
 msgid "Copy to clipboard"
-msgstr ""
+msgstr "Másolás vágólapra"
 
 #: library/libraryview.cpp:389 ui/mainwindow.cpp:503
 #: widgets/fileviewlist.cpp:44
@@ -1263,7 +1264,7 @@ msgstr "Borítók %1 helyről"
 
 #: internet/groovesharkservice.cpp:518 internet/groovesharkservice.cpp:1242
 msgid "Create a new Grooveshark playlist"
-msgstr ""
+msgstr "Új Grooveshark lejátszólista létrehozása"
 
 #: ../bin/src/ui_playbacksettingspage.h:269
 msgid "Cross-fade when changing tracks automatically"
@@ -1406,7 +1407,7 @@ msgstr "Hangerő csökkentése"
 
 #: ../bin/src/ui_appearancesettingspage.h:275
 msgid "Default background image"
-msgstr ""
+msgstr "Alapértelmezett háttérkép"
 
 #: ../bin/src/ui_wiimotesettingspage.h:195
 msgid "Defaults"
@@ -1419,11 +1420,11 @@ msgstr "Megjelenítések között váltás ideje"
 #: playlist/playlistlistcontainer.cpp:75
 #: ../bin/src/ui_playlistlistcontainer.h:122
 msgid "Delete"
-msgstr ""
+msgstr "Törlés"
 
 #: internet/groovesharkservice.cpp:521 internet/groovesharkservice.cpp:1289
 msgid "Delete Grooveshark playlist"
-msgstr ""
+msgstr "Grooveshark lejátszólista törlése"
 
 #: podcasts/podcastservice.cpp:274
 msgid "Delete downloaded data"
@@ -1449,7 +1450,7 @@ msgstr ""
 
 #: playlist/playlistlistcontainer.cpp:295
 msgid "Delete playlists"
-msgstr ""
+msgstr "Lejátszólisták törlése"
 
 #: ui/equalizer.cpp:190 ../bin/src/ui_equalizer.h:124
 msgid "Delete preset"
@@ -1534,7 +1535,7 @@ msgstr ""
 
 #: ../bin/src/ui_appearancesettingspage.h:289
 msgid "Disable moodbar generation"
-msgstr ""
+msgstr "Hangulatsáv generáció letiltása"
 
 #: globalsearch/searchproviderstatuswidget.cpp:47
 #: ../bin/src/ui_notificationssettingspage.h:405
@@ -1667,7 +1668,7 @@ msgstr "Meghajtó azonosító"
 
 #: ../bin/src/ui_dropboxsettingspage.h:103
 msgid "Dropbox"
-msgstr ""
+msgstr "Dropbox"
 
 #: ../bin/src/ui_dynamicplaylistcontrols.h:109
 msgid "Dynamic mode is on"
@@ -1786,7 +1787,7 @@ msgstr "Adja meg egy rádió adatfolyam URL címét:"
 
 #: playlist/playlistlistcontainer.cpp:183
 msgid "Enter the name of the folder"
-msgstr ""
+msgstr "Adja meg a mappa nevét"
 
 #: ../bin/src/ui_libraryfilterwidget.h:87
 msgid "Entire collection"
@@ -1843,7 +1844,7 @@ msgstr "Hiba %1: %2 feldolgozásakor"
 
 #: playlist/songloaderinserter.cpp:100
 msgid "Error while loading audio CD"
-msgstr "Hiba az audio CD betöltése közben"
+msgstr "Hiba az hang CD betöltése közben"
 
 #: library/library.cpp:61
 msgid "Ever played"
@@ -1851,31 +1852,31 @@ msgstr "Valaha játszott"
 
 #: ../bin/src/ui_podcastsettingspage.h:232
 msgid "Every 10 minutes"
-msgstr ""
+msgstr "Minden 10. percben"
 
 #: ../bin/src/ui_podcastsettingspage.h:238
 msgid "Every 12 hours"
-msgstr ""
+msgstr "Minden 12. órában"
 
 #: ../bin/src/ui_podcastsettingspage.h:236
 msgid "Every 2 hours"
-msgstr ""
+msgstr "Minden 2."
 
 #: ../bin/src/ui_podcastsettingspage.h:233
 msgid "Every 20 minutes"
-msgstr ""
+msgstr "Minden 20. percben"
 
 #: ../bin/src/ui_podcastsettingspage.h:234
 msgid "Every 30 minutes"
-msgstr ""
+msgstr "Minden 30. percben"
 
 #: ../bin/src/ui_podcastsettingspage.h:237
 msgid "Every 6 hours"
-msgstr ""
+msgstr "Minden 6. órában"
 
 #: ../bin/src/ui_podcastsettingspage.h:235
 msgid "Every hour"
-msgstr ""
+msgstr "Minden órában"
 
 #: ../bin/src/ui_playbacksettingspage.h:270
 msgid "Except between tracks on the same album or in the same CUE sheet"
@@ -1888,7 +1889,7 @@ msgstr ""
 #: widgets/loginstatewidget.cpp:142
 #, qt-format
 msgid "Expires on %1"
-msgstr ""
+msgstr "Lejár ekkor: %1"
 
 #: ../bin/src/ui_mainwindow.h:675
 msgid "F1"
@@ -2113,7 +2114,7 @@ msgstr "Barátok"
 
 #: moodbar/moodbarrenderer.cpp:157
 msgid "Frozen"
-msgstr ""
+msgstr "Fagyos"
 
 #: ui/equalizer.cpp:112
 msgid "Full Bass"
@@ -2129,7 +2130,7 @@ msgstr "Teljes magas"
 
 #: ../bin/src/ui_playbacksettingspage.h:283
 msgid "GStreamer audio engine"
-msgstr "GStreamer audio meghajtó"
+msgstr "GStreamer hang meghajtó"
 
 #: ui/settingsdialog.cpp:126
 msgid "General"
@@ -2155,7 +2156,7 @@ msgstr ""
 
 #: internet/groovesharkservice.cpp:788
 msgid "Getting Grooveshark popular songs"
-msgstr ""
+msgstr "Grooveshark népszerű számok beszerezése"
 
 #: internet/somafmservice.cpp:100
 msgid "Getting channels"
@@ -2171,7 +2172,7 @@ msgstr "Adjon meg egy nevet:"
 
 #: ../bin/src/ui_addpodcastbyurl.h:78
 msgid "Go"
-msgstr ""
+msgstr "Irány"
 
 #: ../bin/src/ui_mainwindow.h:704
 msgid "Go to next playlist tab"
@@ -2183,7 +2184,7 @@ msgstr "Váltás az előző lejátszási lista lapra"
 
 #: ../bin/src/ui_googledrivesettingspage.h:103
 msgid "Google Drive"
-msgstr ""
+msgstr "Google Drive"
 
 #: covers/coversearchstatisticsdialog.cpp:54 ui/albumcovermanager.cpp:413
 #: ../bin/src/ui_coversearchstatisticsdialog.h:76
@@ -2213,7 +2214,7 @@ msgstr "Grooveshark rádió"
 
 #: internet/groovesharkservice.cpp:1138
 msgid "Grooveshark song's URL"
-msgstr ""
+msgstr "Grooveshark szám URL-je"
 
 #: ../bin/src/ui_groupbydialog.h:124
 msgid "Group Library by..."
@@ -2249,7 +2250,7 @@ msgstr "Műfaj/Előadó/Album szerint"
 
 #: podcasts/podcasturlloader.cpp:196
 msgid "HTML page did not contain any RSS feeds"
-msgstr ""
+msgstr "A HTML oldal nem tartalmaz RSS forrást"
 
 #: ../bin/src/ui_networkproxysettingspage.h:163
 msgid "HTTP proxy"
@@ -2257,7 +2258,7 @@ msgstr "HTTP proxy"
 
 #: moodbar/moodbarrenderer.cpp:158
 msgid "Happy"
-msgstr ""
+msgstr "Boldog"
 
 #: ../bin/src/ui_deviceproperties.h:371
 msgid "Hardware information"
@@ -2366,7 +2367,7 @@ msgstr "Hangerő növelése"
 #: internet/cloudfileservice.cpp:135
 #, qt-format
 msgid "Indexing %1"
-msgstr ""
+msgstr "%1 indexelése"
 
 #: ../bin/src/ui_deviceproperties.h:373 wiimotedev/wiimotesettingspage.cpp:124
 msgid "Information"
@@ -2390,7 +2391,7 @@ msgstr "Internet"
 
 #: ui/settingsdialog.cpp:147
 msgid "Internet providers"
-msgstr ""
+msgstr "Internet szolgáltatók"
 
 #: internet/lastfmservice.cpp:433
 msgid "Invalid API key"
@@ -2843,7 +2844,7 @@ msgstr "Zenetár figyelése változások után"
 
 #: ../bin/src/ui_playbacksettingspage.h:296
 msgid "Mono playback"
-msgstr ""
+msgstr "Mono lejátszás"
 
 #: smartplaylists/searchterm.cpp:309
 msgid "Months"
@@ -2851,16 +2852,16 @@ msgstr "Hónap"
 
 #: playlist/playlist.cpp:1221
 msgid "Mood"
-msgstr ""
+msgstr "Hangulat"
 
 #: ../bin/src/ui_appearancesettingspage.h:287
 #: moodbar/moodbarproxystyle.cpp:342
 msgid "Moodbar style"
-msgstr ""
+msgstr "Hangulatsáv stílus"
 
 #: ../bin/src/ui_appearancesettingspage.h:285
 msgid "Moodbars"
-msgstr ""
+msgstr "Hangulatsávok"
 
 #: library/library.cpp:72
 msgid "Most played"
@@ -2923,7 +2924,7 @@ msgstr "Az én mixem rádió"
 
 #: internet/groovesharkservice.cpp:606
 msgid "My Music"
-msgstr ""
+msgstr "Zenéim"
 
 #: internet/lastfmservice.cpp:202
 msgid "My Neighborhood"
@@ -2982,7 +2983,7 @@ msgstr "Soha ne indítsa el a lejátszást"
 #: playlist/playlistlistcontainer.cpp:182
 #: ../bin/src/ui_playlistlistcontainer.h:119
 msgid "New folder"
-msgstr ""
+msgstr "Új mappa"
 
 #: ui/mainwindow.cpp:1389 ../bin/src/ui_mainwindow.h:698
 msgid "New playlist"
@@ -3015,7 +3016,7 @@ msgstr "Következő szám"
 
 #: core/utilities.cpp:145
 msgid "Next week"
-msgstr ""
+msgstr "Következő héten"
 
 #: analyzers/analyzercontainer.cpp:80
 msgid "No analyzer"
@@ -3023,7 +3024,7 @@ msgstr "Kikapcsolva"
 
 #: ../bin/src/ui_appearancesettingspage.h:280
 msgid "No background image"
-msgstr ""
+msgstr "Nincs háttérkép"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:146
 msgid "No long blocks"
@@ -3049,7 +3050,7 @@ msgstr "Egy kiválasztott szám sem alkalmas az eszközre való másoláshoz"
 
 #: moodbar/moodbarrenderer.cpp:155
 msgid "Normal"
-msgstr ""
+msgstr "Normális"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:144
 msgid "Normal block type"
@@ -3135,15 +3136,15 @@ msgstr "%1 megnyitása a böngészőben"
 
 #: ../bin/src/ui_mainwindow.h:683
 msgid "Open &audio CD..."
-msgstr "&audio CD megnyitása..."
+msgstr "&Hang CD megnyitása..."
 
 #: podcasts/addpodcastdialog.cpp:230
 msgid "Open OPML file"
-msgstr ""
+msgstr "OPML-fájl megnyitása"
 
 #: podcasts/addpodcastdialog.cpp:73
 msgid "Open OPML file..."
-msgstr ""
+msgstr "OPML-fájl megnyitása..."
 
 #: ../bin/src/ui_deviceproperties.h:382
 msgid "Open device"
@@ -3155,7 +3156,7 @@ msgstr "Fájl megnyitása..."
 
 #: internet/googledriveservice.cpp:184
 msgid "Open in Google Drive"
-msgstr ""
+msgstr "Google Drive megnyitása"
 
 #: devices/deviceview.cpp:215 globalsearch/globalsearchview.cpp:421
 #: internet/internetservice.cpp:76 library/libraryview.cpp:371
@@ -3336,7 +3337,7 @@ msgstr "Lejátszási lista"
 
 #: ../data/oauthsuccess.html:36
 msgid "Please close your browser and return to Clementine."
-msgstr ""
+msgstr "Zárja be a böngészőjét, és térjen vissza a Clementine-be"
 
 #: ../bin/src/ui_spotifysettingspage.h:215
 msgid "Plugin status:"
@@ -3356,11 +3357,11 @@ msgstr "Népszerű dalok"
 
 #: internet/groovesharkservice.cpp:578
 msgid "Popular songs of the Month"
-msgstr ""
+msgstr "A hónap népszerű számai"
 
 #: internet/groovesharkservice.cpp:585
 msgid "Popular songs today"
-msgstr ""
+msgstr "A nap népszerű számai"
 
 #: ../bin/src/ui_notificationssettingspage.h:410
 msgid "Popup duration"
@@ -3391,7 +3392,7 @@ msgstr "Előnyben részesített albumborító fájlnevek (vesszővel tagolt)"
 
 #: ../bin/src/ui_magnatunesettingspage.h:167
 msgid "Preferred audio format"
-msgstr "Előnyben részesített audio formátum"
+msgstr "Előnyben részesített hangformátum"
 
 #: ../bin/src/ui_spotifysettingspage.h:218
 msgid "Preferred bitrate"
@@ -3591,7 +3592,7 @@ msgstr "Mappa eltávolítása"
 
 #: internet/groovesharkservice.cpp:534
 msgid "Remove from My Music"
-msgstr ""
+msgstr "Eltávolítás a Zenéimből"
 
 #: internet/groovesharkservice.cpp:531
 msgid "Remove from favorites"
@@ -3603,20 +3604,20 @@ msgstr "Eltávolítás a lejátszási listáról"
 
 #: internet/groovesharkservice.cpp:1537
 msgid "Removing songs from My Music"
-msgstr ""
+msgstr "Számok eltávolítása a Zenéimből"
 
 #: internet/groovesharkservice.cpp:1487
 msgid "Removing songs from favorites"
-msgstr ""
+msgstr "Számok eltávolítása a kedvencekből"
 
 #: internet/groovesharkservice.cpp:1335
 #, qt-format
 msgid "Rename \"%1\" playlist"
-msgstr ""
+msgstr "„%1” lejátszólista átnevezése"
 
 #: internet/groovesharkservice.cpp:524
 msgid "Rename Grooveshark playlist"
-msgstr ""
+msgstr "Grooveshark lejátszólista átnevezése"
 
 #: playlist/playlisttabbar.cpp:128
 msgid "Rename playlist"
@@ -3698,7 +3699,7 @@ msgstr ""
 
 #: ../data/oauthsuccess.html:3
 msgid "Return to Clementine"
-msgstr ""
+msgstr "Visszatérés a Clementine-be"
 
 #: ui/equalizer.cpp:121
 msgid "Rock"
@@ -3706,7 +3707,7 @@ msgstr "Rock"
 
 #: ../bin/src/ui_console.h:81
 msgid "Run"
-msgstr ""
+msgstr "Futtatás"
 
 #: ../bin/src/ui_networkproxysettingspage.h:164
 msgid "SOCKS proxy"
@@ -3730,7 +3731,7 @@ msgstr "Mintavétel"
 
 #: ../bin/src/ui_appearancesettingspage.h:288
 msgid "Save .mood files in your music library"
-msgstr ""
+msgstr "A .mood fájlok mentés a zenekönyvtárba"
 
 #: ui/albumcoverchoicecontroller.cpp:114
 msgid "Save album cover"
@@ -3800,7 +3801,7 @@ msgstr "Album borítók keresése..."
 
 #: ../bin/src/ui_globalsearchview.h:208
 msgid "Search for anything"
-msgstr ""
+msgstr "Keresés akármire"
 
 #: ../bin/src/ui_gpoddersearchpage.h:76
 msgid "Search gpodder.net"
@@ -3830,7 +3831,7 @@ msgstr "Keresési feltételek"
 
 #: internet/groovesharkservice.cpp:268
 msgid "Searching on Grooveshark"
-msgstr ""
+msgstr "Keresés a Groovesharkon"
 
 #: ../bin/src/ui_groupbydialog.h:138
 msgid "Second level"
@@ -3866,7 +3867,7 @@ msgstr "Válassz háttérszínt:"
 
 #: ui/appearancesettingspage.cpp:240
 msgid "Select background image"
-msgstr ""
+msgstr "Háttérkép kiválasztása"
 
 #: ../bin/src/ui_trackselectiondialog.h:207
 msgid "Select best possible match"
@@ -3995,7 +3996,7 @@ msgstr "Jelenítse meg a különböző előadók között"
 
 #: moodbar/moodbarproxystyle.cpp:337
 msgid "Show moodbar"
-msgstr ""
+msgstr "Hangulatsáv megjelenítése"
 
 #: ui/mainwindow.cpp:459
 msgid "Show only duplicates"
@@ -4007,7 +4008,7 @@ msgstr "Csak a címke nélküliek mutatása"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:153
 msgid "Show search suggestions"
-msgstr ""
+msgstr "Keresési javaslatok megjelenítése"
 
 #: ../bin/src/ui_lastfmsettingspage.h:157
 msgid "Show the \"love\" and \"ban\" buttons"
@@ -4240,7 +4241,7 @@ msgstr "Adatfolyam tagság"
 
 #: internet/groovesharkservice.cpp:627
 msgid "Subscribed playlists"
-msgstr ""
+msgstr "Feliratkozott lejátszólisták"
 
 #: ../bin/src/ui_podcastinfowidget.h:196
 msgid "Subscribers"
@@ -4248,7 +4249,7 @@ msgstr "Feliratkozók"
 
 #: ../data/oauthsuccess.html:34
 msgid "Success!"
-msgstr ""
+msgstr "Siker!"
 
 #: transcoder/transcoder.cpp:200
 #, qt-format
@@ -4292,7 +4293,7 @@ msgstr "Spotify csillagozott számok szinronizálása"
 
 #: moodbar/moodbarrenderer.cpp:159
 msgid "System colors"
-msgstr ""
+msgstr "Rendszer színek"
 
 #: widgets/fancytabwidget.cpp:654
 msgid "Tabs on top"
@@ -4333,7 +4334,7 @@ msgstr "A \"%1\" parancs nem végrehajtható."
 
 #: ../bin/src/ui_appearancesettingspage.h:277
 msgid "The album cover of the currently playing song"
-msgstr ""
+msgstr "A jelenleg játszott szám albumborítója"
 
 #: internet/magnatunedownloaddialog.cpp:90
 #, qt-format
@@ -4511,7 +4512,7 @@ msgstr ""
 
 #: core/utilities.cpp:141
 msgid "Tomorrow"
-msgstr ""
+msgstr "Holnap"
 
 #: podcasts/podcasturlloader.cpp:116
 msgid "Too many redirects"
@@ -4519,7 +4520,7 @@ msgstr "Túl sok átirányítás"
 
 #: internet/spotifyservice.cpp:366
 msgid "Top tracks"
-msgstr ""
+msgstr "Népszerű számok"
 
 #: covers/coversearchstatisticsdialog.cpp:71
 msgid "Total bytes transferred"
@@ -4577,7 +4578,7 @@ msgstr "URL(-ek)"
 
 #: ../bin/src/ui_ubuntuonesettingspage.h:110
 msgid "Ubuntu One"
-msgstr ""
+msgstr "Ubuntu One"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:228
 msgid "Ultra wide band (UWB)"
@@ -4614,11 +4615,11 @@ msgstr "Leiratkozás"
 
 #: songinfo/songkickconcerts.cpp:168
 msgid "Upcoming Concerts"
-msgstr ""
+msgstr "Következő koncertek"
 
 #: internet/groovesharkservice.cpp:1198
 msgid "Update Grooveshark playlist"
-msgstr ""
+msgstr "Grooveshark lejátszólisták frissítése"
 
 #: podcasts/podcastservice.cpp:260
 msgid "Update all podcasts"
@@ -4676,11 +4677,11 @@ msgstr "Wii távvezérlő használata"
 
 #: ../bin/src/ui_appearancesettingspage.h:269
 msgid "Use a custom color set"
-msgstr ""
+msgstr "Saját színkészlet használata"
 
 #: ../bin/src/ui_notificationssettingspage.h:417
 msgid "Use a custom message for notifications"
-msgstr ""
+msgstr "Egyéni üzenet használata értesítésnél"
 
 #: ../bin/src/ui_networkproxysettingspage.h:167
 msgid "Use authentication"
@@ -4708,7 +4709,7 @@ msgstr "Rendszer alapértelmezés használata"
 
 #: ../bin/src/ui_appearancesettingspage.h:268
 msgid "Use the system default color set"
-msgstr ""
+msgstr "Rendszer alapértelmezett színkészletének használata"
 
 #: ../bin/src/ui_networkproxysettingspage.h:158
 msgid "Use the system proxy settings"
@@ -4828,11 +4829,11 @@ msgstr "Amikor a Clementine albumborítót keres, először azokat a fájlokat e
 
 #: ../bin/src/ui_globalsearchsettingspage.h:151
 msgid "When the list is empty..."
-msgstr ""
+msgstr "Amikor a lista üres..."
 
 #: ../bin/src/ui_globalsearchview.h:212
 msgid "Why not try..."
-msgstr ""
+msgstr "Miért nem próbálja..."
 
 #: devices/ilister.cpp:121
 msgid "WiFi MAC Address"
@@ -4925,7 +4926,7 @@ msgstr "Tegnap"
 #: playlist/playlistlistcontainer.cpp:296
 #, qt-format
 msgid "You are about to delete %1 playlists, are you sure?"
-msgstr ""
+msgstr "Ön arra készül, hogy törölje a(z) %1 lejátszólistát, biztos benne?"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:132
 msgid "You are about to download the following albums"
@@ -5044,7 +5045,7 @@ msgstr "Scrobblejaid: %1"
 
 #: visualisations/visualisationcontainer.cpp:152
 msgid "Your system is missing OpenGL support, visualizations are unavailable."
-msgstr ""
+msgstr "Az ön rendszeréről hiányzik az OpenGL támogatás. A vizualizációk nem lesznek elérhetőek"
 
 #: internet/groovesharksettingspage.cpp:107
 #: internet/spotifysettingspage.cpp:154
@@ -5156,7 +5157,7 @@ msgstr "hosszabb először"
 #: playlist/playlistundocommands.cpp:99
 #, c-format
 msgid "move %n songs"
-msgstr ""
+msgstr "%n szám mozgatása"
 
 #: smartplaylists/searchterm.cpp:294
 msgid "newest first"
@@ -5209,7 +5210,7 @@ msgstr "kisebb először"
 
 #: playlist/playlistundocommands.cpp:131
 msgid "sort songs"
-msgstr ""
+msgstr "rövid számok"
 
 #: smartplaylists/searchterm.cpp:219
 msgid "starts with"
