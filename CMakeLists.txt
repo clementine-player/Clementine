@@ -295,6 +295,8 @@ include(${QT_USE_FILE})
 # and don't exist on my mingw toolchain
 list(REMOVE_ITEM QT_LIBRARIES "-lGLU -lGL")
 
+option(BUNDLE_PROJECTM_PRESETS "Install Clementine's own copies of libprojectm presets - disable this if you want to use a system package instead" ON)
+
 if(ENABLE_VISUALISATIONS)
   # When/if upstream accepts our patches then these options can be used to link
   # to system installed projectM instead.
@@ -307,8 +309,6 @@ if(ENABLE_VISUALISATIONS)
     set(LIBPROJECTM_LIBRARIES projectM)
   endif(USE_SYSTEM_PROJECTM)
 endif(ENABLE_VISUALISATIONS)
-
-option(BUNDLE_PROJECTM_PRESETS "Install Clementine's own copies of libprojectm presets - disable this if you want to use a system package instead" ON)
 
 # We compile our own qsqlite3 by default now, because in Qt 4.7 the symbols we
 # need from it are private.
