@@ -154,6 +154,11 @@ void PlaylistTabBar::Close() {
   // Just hide the tab from the UI - don't delete it completely (it can still
   // be resurrected from the Playlists tab).
   emit Close(tabData(menu_index_).toInt());
+
+  // Select the nearest tab.
+  if (menu_index_ > 1) {
+    setCurrentIndex(menu_index_ - 1);
+  }
 }
 
 void PlaylistTabBar::CloseFromTabIndex(int index) {
