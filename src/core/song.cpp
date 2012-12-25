@@ -926,8 +926,10 @@ void Song::InitFromLastFM(const lastfm::Track& track) {
 #endif // Q_OS_WIN32
 
 void Song::MergeFromSimpleMetaBundle(const Engine::SimpleMetaBundle &bundle) {
-  if (d->init_from_file_) {
-    // This Song was already loaded using taglib. Our tags are probably better than the engine's.
+  if (d->init_from_file_ || d->url_.scheme() == "file") {
+    // This Song was already loaded using taglib. Our tags are probably better
+    // than the engine's.  Note: init_from_file_ is used for non-file:// URLs
+    // when the metadata is known to be good, like from Jamendo.
     return;
   }
 
