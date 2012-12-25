@@ -514,12 +514,7 @@ void LibraryWatcher::PreserveUserSetData(const QString& file, const QString& ima
   if (!out->has_embedded_cover())
     out->set_art_automatic(image);
 
-  out->set_playcount(matching_song.playcount());
-  out->set_skipcount(matching_song.skipcount());
-  out->set_lastplayed(matching_song.lastplayed());
-  out->set_rating(matching_song.rating());
-  out->set_score(matching_song.score());
-  out->set_art_manual(matching_song.art_manual());
+  out->MergeUserSetData(matching_song);
 
   // The song was deleted from the database (e.g. due to an unmounted 
   // filesystem), but has been restored.

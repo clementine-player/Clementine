@@ -130,6 +130,11 @@ class Song {
   void ToWmdm(IWMDMMetaData* metadata) const;
 #endif
 
+  // Copies important statistics from the other song to this one, overwriting
+  // any data that already exists.  Useful when you want updated tags from disk
+  // but you want to keep user stats.
+  void MergeUserSetData(const Song& other);
+
   static QString Decode(const QString& tag, const QTextCodec* codec = NULL);
 
   // Save
