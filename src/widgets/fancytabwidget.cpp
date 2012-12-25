@@ -410,7 +410,7 @@ void FancyTabBar::paintTab(QPainter *painter, int tabIndex) const
         painter->drawLine(rect.bottomLeft() + QPoint(0,-1), rect.bottomRight()-QPoint(0,1));
     }
 
-    QString tabText(painter->fontMetrics().elidedText(this->tabText(tabIndex), Qt::ElideMiddle, width()));
+    QString tabText(painter->fontMetrics().elidedText(this->tabText(tabIndex), Qt::ElideRight, width()));
     QRect tabTextRect(tabRect(tabIndex));
     QRect tabIconRect(tabTextRect);
     tabIconRect.adjust(+4, +4, -4, -4);
