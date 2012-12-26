@@ -305,6 +305,10 @@ int main(int argc, char *argv[]) {
   logging::SetLevels(options.log_levels());
   g_log_set_default_handler(reinterpret_cast<GLogFunc>(&logging::GLog), NULL);
 
+  // Output the version, so when people attach log output to bug reports they
+  // don't have to tell us which version they're using.
+  qLog(Info) << "Clementine" << CLEMENTINE_VERSION_DISPLAY;
+
   // Seed the random number generators.
   time_t t = time(NULL);
   srand(t);
