@@ -77,7 +77,7 @@ class Dumper(object):
   def GetLinkedLibraries(self, filename):
     stdout = subprocess.check_output(["ldd", filename])
     for match in LDD_RE.finditer(stdout):
-      yield match.group(2)
+      yield os.path.realpath(match.group(2))
 
 
 class Uploader(object):
@@ -123,7 +123,8 @@ class Uploader(object):
 
       # Upload the symbols
       requests.post(blobstore_url,
-          files={"data": ("data.gz", self.Compress(symbol_filename))},
+          files={"data": (symbol_filename + ".gz",
+                          self.Compress(symbol_filename))},
           data={
             "name": info["name"],
             "hash": info["hash"],
