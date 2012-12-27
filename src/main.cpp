@@ -406,8 +406,6 @@ int main(int argc, char *argv[]) {
   qtsparkle::LoadTranslations(language);
 #endif
 
-  *reinterpret_cast<int*>(0) = 0;
-
   // Icons
   IconLoader::Init();
 
@@ -466,6 +464,11 @@ int main(int argc, char *argv[]) {
 #endif
   QObject::connect(&a, SIGNAL(messageReceived(QByteArray)), &w, SLOT(CommandlineOptionsReceived(QByteArray)));
   w.CommandlineOptionsReceived(options);
+
+  // Test the crash reporting system
+  if (options.crash()) {
+    *(reinterpret_cast<int*>(0)) = 0;
+  }
 
   int ret = a.exec();
 

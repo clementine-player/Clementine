@@ -34,7 +34,7 @@
 
 
 const char* CrashSender::kUploadURL =
-    "http://" CRASHREPORTING_HOSTNAME "/getuploadurl";
+    "http://" CRASHREPORTING_HOSTNAME "/upload/crash";
 
 CrashSender::CrashSender(const QString& path)
   : network_(new QNetworkAccessManager(this)),

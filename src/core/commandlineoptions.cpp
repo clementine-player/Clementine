@@ -74,7 +74,8 @@ CommandlineOptions::CommandlineOptions(int argc, char** argv)
     play_track_at_(-1),
     show_osd_(false),
     toggle_pretty_osd_(false),
-    log_levels_(logging::kDefaultLogLevels)
+    log_levels_(logging::kDefaultLogLevels),
+    crash_(false)
 {
 #ifdef Q_OS_DARWIN
   // Remove -psn_xxx option that Mac passes when opened from Finder.
@@ -125,6 +126,9 @@ bool CommandlineOptions::Parse() {
     {"verbose",           no_argument,       0, Verbose},
     {"log-levels",        required_argument, 0, LogLevels},
     {"version",           no_argument,       0, Version},
+
+    // Undocumented
+    {"crash",             no_argument,       0, Crash},
 
     {0, 0, 0, 0}
   };
@@ -186,6 +190,7 @@ bool CommandlineOptions::Parse() {
       case Quiet:      log_levels_ = "1";               break;
       case Verbose:    log_levels_ = "3";               break;
       case LogLevels:  log_levels_ = QString(optarg);   break;
+      case Crash:      crash_ = true;                   break;
       case Version: {
         QString version_text = QString(kVersionText).arg(CLEMENTINE_VERSION_DISPLAY);
         std::cout << version_text.toLocal8Bit().constData() << std::endl;

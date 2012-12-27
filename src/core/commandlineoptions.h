@@ -64,6 +64,7 @@ class CommandlineOptions {
   QList<QUrl> urls() const { return urls_; }
   QString language() const { return language_; }
   QString log_levels() const { return log_levels_; }
+  bool crash() const { return crash_; }
 
   QByteArray Serialize() const;
   void Load(const QByteArray& serialized);
@@ -80,6 +81,7 @@ class CommandlineOptions {
     Verbose,
     LogLevels,
     Version,
+    Crash,
   };
 
   QString tr(const char* source_text);
@@ -103,6 +105,7 @@ class CommandlineOptions {
   bool toggle_pretty_osd_;
   QString language_;
   QString log_levels_;
+  bool crash_;
 
   QList<QUrl> urls_;
 };
