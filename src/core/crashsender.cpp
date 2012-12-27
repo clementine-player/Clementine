@@ -119,6 +119,7 @@ void CrashSender::RedirectFinished() {
 
 void CrashSender::UploadProgress(qint64 bytes, qint64 total) {
   printf("Uploaded %lld of %lld bytes\n", bytes, total);
+  progress_->setMaximum(total);
   progress_->setValue(bytes);
 }
 
