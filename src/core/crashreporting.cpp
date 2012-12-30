@@ -24,17 +24,18 @@
 
 const char* CrashReporting::kSendCrashReportOption = "--send-crash-report";
 char* CrashReporting::sPath = NULL;
+char* CrashReporting::sLogFilename = NULL;
 
 
 bool CrashReporting::SendCrashReport(int argc, char** argv) {
 #ifdef HAVE_BREAKPAD
-  if (argc != 3 || strcmp(argv[1], kSendCrashReportOption) != 0) {
+  if (argc != 4 || strcmp(argv[1], kSendCrashReportOption) != 0) {
     return false;
   }
 
   QApplication a(argc, argv);
 
-  CrashSender sender(argv[2]);
+  CrashSender sender(argv[2], argv[3]);
   if (sender.Start()) {
     a.exec();
   }
@@ -47,4 +48,8 @@ bool CrashReporting::SendCrashReport(int argc, char** argv) {
 
 void CrashReporting::SetApplicationPath(const QString& path) {
   sPath = strdup(path.toLocal8Bit().constData());
+}
+
+void CrashReporting::SetLogFilename(const QString& path) {
+  sLogFilename = strdup(path.toLocal8Bit().constData());
 }

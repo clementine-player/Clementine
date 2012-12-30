@@ -42,6 +42,7 @@ bool Handler(const google_breakpad::MinidumpDescriptor& dump,
       CrashReporting::application_path(),
       CrashReporting::kSendCrashReportOption,
       dump.path(),
+      CrashReporting::log_filename(),
       NULL
     };
 

@@ -46,15 +46,21 @@ public:
   // --send-crash-report when a crash happens.
   static void SetApplicationPath(const QString& path);
 
+  // If this is set then the contents of this file is sent along with any
+  // crash report.
+  static void SetLogFilename(const QString& path);
+
   // Prints the message to stdout without using libc.
   static void Print(const char* message);
 
   static const char* application_path() { return sPath; }
+  static const char* log_filename() { return sLogFilename; }
 
 private:
   Q_DISABLE_COPY(CrashReporting);
 
   static char* sPath;
+  static char* sLogFilename;
 
   boost::scoped_ptr<google_breakpad::ExceptionHandler> handler_;
 };

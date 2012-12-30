@@ -33,7 +33,7 @@ class CrashSender : public QObject {
   Q_OBJECT
 
 public:
-  CrashSender(const QString& path);
+  CrashSender(const QString& minidump_filename, const QString& log_filename);
 
   // Returns false if the user doesn't want to send the crash report (caller
   // should exit), or true if he does (caller should start the Qt event loop).
@@ -54,8 +54,10 @@ private:
 
   QNetworkAccessManager* network_;
 
-  QString path_;
-  QFile* file_;
+  QString minidump_filename_;
+  QString log_filename_;
+  QFile* minidump_;
+  QFile* log_;
   QProgressDialog* progress_;
 };
 

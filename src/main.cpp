@@ -60,6 +60,7 @@
 #include <QSslSocket>
 #include <QSqlDatabase>
 #include <QSqlQuery>
+#include <QTemporaryFile>
 #include <QTextCodec>
 #include <QTranslator>
 #include <QtConcurrentRun>
@@ -304,6 +305,15 @@ int main(int argc, char *argv[]) {
   logging::Init();
   logging::SetLevels(options.log_levels());
   g_log_set_default_handler(reinterpret_cast<GLogFunc>(&logging::GLog), NULL);
+
+  // Log to a temporary file that gets included with crash reports.
+  QTemporaryFile temp_log(QDir::tempPath() + "/clementine-log-XXXXXX.txt");
+  if (temp_log.open()) {
+    logging::AddOutputDevice(&temp_log);
+    CrashReporting::SetLogFilename(temp_log.fileName());
+
+    qLog(Info) << "Logging to" << temp_log.fileName();
+  }
 
   // Output the version, so when people attach log output to bug reports they
   // don't have to tell us which version they're using.

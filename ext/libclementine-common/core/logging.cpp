@@ -25,8 +25,11 @@
 #include <execinfo.h>
 #endif
 
+#include <QAbstractSocket>
 #include <QCoreApplication>
 #include <QDateTime>
+#include <QFile>
+#include <QLocalSocket>
 #include <QStringList>
 
 #include <glib.h>
@@ -36,15 +39,32 @@
 
 namespace logging {
 
-static Level sDefaultLevel = Level_Debug;
-static QMap<QString, Level>* sClassLevels = NULL;
-static QIODevice* sNullDevice = NULL;
-
 const char* kDefaultLogLevels = "GstEnginePipeline:2,*:3";
 
-static const char* kMessageHandlerMagic = "__logging_message__";
-static const int kMessageHandlerMagicLength = strlen(kMessageHandlerMagic);
-static QtMsgHandler sOriginalMessageHandler = NULL;
+namespace {
+Level sDefaultLevel = Level_Debug;
+QMap<QString, Level>* sClassLevels = NULL;
+QIODevice* sNullDevice = NULL;
+
+const char* kMessageHandlerMagic = "__logging_message__";
+const int kMessageHandlerMagicLength = strlen(kMessageHandlerMagic);
+QtMsgHandler sOriginalMessageHandler = NULL;
+
+QList<QIODevice*> sOutputDevices;
+
+// QIODevice doesn't have a flush() method, but its subclasses do.  This picks
+// the right method to call depending on the runtime type of the device.
+void FlushDevice(QIODevice* device) {
+  if (QFile* file = qobject_cast<QFile*>(device)) {
+    file->flush();
+  } else if (QAbstractSocket* socket = qobject_cast<QAbstractSocket*>(device)) {
+    socket->flush();
+  } else if (QLocalSocket* socket = qobject_cast<QLocalSocket*>(device)) {
+    socket->flush();
+  }
+}
+
+} // namespace
 
 
 void GLog(const char* domain, int level, const char* message, void* user_data) {
@@ -63,7 +83,16 @@ void GLog(const char* domain, int level, const char* message, void* user_data) {
 
 static void MessageHandler(QtMsgType type, const char* message) {
   if (strncmp(kMessageHandlerMagic, message, kMessageHandlerMagicLength) == 0) {
+    // Output to stderr.
     fprintf(stderr, "%s\n", message + kMessageHandlerMagicLength);
+
+    // Output to all the configured output devices.
+    foreach (QIODevice* device, sOutputDevices) {
+      device->write(message + kMessageHandlerMagicLength);
+      device->write("\n", 1);
+      FlushDevice(device);
+    }
+
     return;
   }
 
@@ -97,6 +126,10 @@ void Init() {
   if (!sOriginalMessageHandler) {
     sOriginalMessageHandler = qInstallMsgHandler(MessageHandler);
   }
+}
+
+void AddOutputDevice(QIODevice* device) {
+  sOutputDevices << device;
 }
 
 void SetLevels(const QString& levels) {

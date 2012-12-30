@@ -48,6 +48,7 @@ namespace logging {
 
   void Init();
   void SetLevels(const QString& levels);
+  void AddOutputDevice(QIODevice* device);
 
   void DumpStackTrace();
 

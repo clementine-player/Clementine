@@ -26,7 +26,6 @@
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QSettings>
-#include <QTemporaryFile>
 
 SomaFMUrlHandler::SomaFMUrlHandler(Application* app, SomaFMService* service,
                                    QObject* parent)

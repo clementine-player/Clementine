@@ -21,7 +21,6 @@
 #include "core/logging.h"
 
 #include <QCoreApplication>
-#include <QCryptographicHash>
 #include <QFile>
 #include <QHttpMultiPart>
 #include <QMessageBox>
@@ -36,17 +35,26 @@
 const char* CrashSender::kUploadURL =
     "http://" CRASHREPORTING_HOSTNAME "/upload/crash";
 
-CrashSender::CrashSender(const QString& path)
+CrashSender::CrashSender(const QString& minidump_filename,
+                         const QString& log_filename)
   : network_(new QNetworkAccessManager(this)),
-    path_(path),
-    file_(new QFile(path_, this)),
+    minidump_filename_(minidump_filename),
+    log_filename_(log_filename),
+    minidump_(new QFile(minidump_filename_, this)),
+    log_(new QFile(log_filename_, this)),
     progress_(NULL) {
 }
 
 bool CrashSender::Start() {
-  if (!file_->open(QIODevice::ReadOnly)) {
-    qLog(Warning) << "Failed to open crash report" << path_;
+  if (!minidump_->open(QIODevice::ReadOnly)) {
+    qLog(Warning) << "Failed to open crash report" << minidump_filename_;
     return false;
+  }
+
+  if (!log_filename_.isEmpty()) {
+    if (!log_->open(QIODevice::ReadOnly)) {
+      qLog(Warning) << "Failed to open log file" << log_filename_;
+    }
   }
 
   // No tr() here.
@@ -90,14 +98,23 @@ void CrashSender::RedirectFinished() {
   printf("Uploading crash report to %s\n", url.toEncoded().constData());
   QNetworkRequest req(url);
 
-  // Create the HTTP part for the crash report file
-  QHttpPart part;
-  part.setHeader(QNetworkRequest::ContentDispositionHeader,
-                 "form-data; name=\"data\"; filename=\"data.dmp\"");
-  part.setBodyDevice(file_);
-
   QHttpMultiPart* multi_part = new QHttpMultiPart(QHttpMultiPart::FormDataType);
-  multi_part->append(part);
+
+  // Create the HTTP part for the crash report file
+  QHttpPart minidump_part;
+  minidump_part.setHeader(QNetworkRequest::ContentDispositionHeader,
+                          "form-data; name=\"data\"; filename=\"data.dmp\"");
+  minidump_part.setBodyDevice(minidump_);
+  multi_part->append(minidump_part);
+
+  // Create the HTTP part for the log file.
+  if (log_->isOpen()) {
+    QHttpPart log_part;
+    log_part.setHeader(QNetworkRequest::ContentDispositionHeader,
+                       "form-data; name=\"log\"; filename=\"log.txt\"");
+    log_part.setBodyDevice(log_);
+    multi_part->append(log_part);
+  }
 
   // Get some information about the thing that crashed and add that to the
   // request as well.
@@ -142,16 +159,6 @@ QList<CrashSender::ClientInfoPair> CrashSender::ClientInfo() const {
 
   ret.append(ClientInfoPair("version", CLEMENTINE_VERSION_DISPLAY));
   ret.append(ClientInfoPair("qt_version", qVersion()));
-
-  // Hash the binary
-  QFile executable(QCoreApplication::applicationFilePath());
-  if (executable.open(QIODevice::ReadOnly)) {
-    QCryptographicHash hash(QCryptographicHash::Md5);
-    while (!executable.atEnd()) {
-      hash.addData(executable.read(4096));
-    }
-    ret.append(ClientInfoPair("exe_md5", hash.result().toHex()));
-  }
 
   // Get the OS version
 #if defined(Q_OS_MAC)
