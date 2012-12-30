@@ -15,7 +15,7 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "config.h"
+#include "crashreporting_config.h"
 #include "crashsender.h"
 #include "version.h"
 #include "core/logging.h"
