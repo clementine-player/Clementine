@@ -63,6 +63,7 @@ public:
     Page_GlobalShortcuts,
     Page_GlobalSearch,
     Page_Appearance,
+    Page_NetworkRemote,
     Page_Notifications,
     Page_Library,
     Page_Lastfm,

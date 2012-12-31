@@ -211,6 +211,12 @@ set(SOURCES
   musicbrainz/chromaprinter.cpp
   musicbrainz/musicbrainzclient.cpp
   musicbrainz/tagfetcher.cpp
+  
+  networkremote/networkremotehelper.cpp
+  networkremote/networkremote.cpp
+  networkremote/incomingxmlparser.cpp
+  networkremote/outgoingxmlcreator.cpp
+  networkremote/remotexmltags.cpp
 
   playlist/dynamicplaylistcontrols.cpp
   playlist/playlist.cpp
@@ -323,6 +329,7 @@ set(SOURCES
   ui/iconloader.cpp
   ui/mainwindow.cpp
   ui/networkproxysettingspage.cpp
+  ui/networkremotesettingspage.cpp
   ui/notificationssettingspage.cpp
   ui/organisedialog.cpp
   ui/organiseerrordialog.cpp
@@ -483,6 +490,12 @@ set(HEADERS
   musicbrainz/acoustidclient.h
   musicbrainz/musicbrainzclient.h
   musicbrainz/tagfetcher.h
+  
+  networkremote/networkremotehelper.h
+  networkremote/networkremote.h
+  networkremote/incomingxmlparser.h
+  networkremote/outgoingxmlcreator.h
+  networkremote/remotexmltags.h
 
   playlist/dynamicplaylistcontrols.h
   playlist/playlist.h
@@ -580,6 +593,7 @@ set(HEADERS
   ui/globalshortcutssettingspage.h
   ui/mainwindow.h
   ui/networkproxysettingspage.h
+  ui/networkremotesettingspage.h
   ui/notificationssettingspage.h
   ui/organisedialog.h
   ui/organiseerrordialog.h
@@ -697,6 +711,7 @@ set(UI
   ui/globalshortcutssettingspage.ui
   ui/mainwindow.ui
   ui/networkproxysettingspage.ui
+  ui/networkremotesettingspage.ui
   ui/notificationssettingspage.ui
   ui/organisedialog.ui
   ui/organiseerrordialog.ui

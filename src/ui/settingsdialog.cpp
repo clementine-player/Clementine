@@ -23,6 +23,7 @@
 #include "iconloader.h"
 #include "playbacksettingspage.h"
 #include "networkproxysettingspage.h"
+#include "networkremotesettingspage.h"
 #include "notificationssettingspage.h"
 #include "mainwindow.h"
 #include "settingsdialog.h"
@@ -130,6 +131,7 @@ SettingsDialog::SettingsDialog(Application* app, BackgroundStreams* streams, QWi
   AddPage(Page_Library, new LibrarySettingsPage(this), general);
   AddPage(Page_Proxy, new NetworkProxySettingsPage(this), general);
   AddPage(Page_Transcoding, new TranscoderSettingsPage(this), general);
+  AddPage(Page_NetworkRemote, new NetworkRemoteSettingsPage(this), general);
 
 #ifdef HAVE_WIIMOTEDEV
   AddPage(Page_Wiimotedev, new WiimoteSettingsPage(this), general);
