@@ -49,7 +49,7 @@ IncomingXmlParser::IncomingXmlParser(Application* app)
 IncomingXmlParser::~IncomingXmlParser() {
 }
 
-bool IncomingXmlParser::CloseConnection() {
+bool IncomingXmlParser::close_connection() {
   return close_connection_;
 }
 
