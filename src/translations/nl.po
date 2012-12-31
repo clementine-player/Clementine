@@ -634,7 +634,7 @@ msgstr "Er is een fout opgetreden tijdens het kopiëren van de iTunes-database n
 msgid "An error occurred loading the iTunes database"
 msgstr "Er is een fout opgetreden tijdens het laden van de iTunes-database"
 
-#: ui/edittagdialog.cpp:655
+#: ui/edittagdialog.cpp:657
 #, qt-format
 msgid "An error occurred writing metadata to '%1'"
 msgstr "Er is een fout opgetreden bij het wegschrijven van metadata naar ‘%1’"
@@ -679,7 +679,7 @@ msgstr "Weet u zeker dat u voorinstelling ‘%1’ wilt wissen?"
 msgid "Are you sure you want to delete this playlist?"
 msgstr "Weet u zeker dat u deze afspeellijst wilt wissen?"
 
-#: ui/edittagdialog.cpp:761
+#: ui/edittagdialog.cpp:763
 msgid "Are you sure you want to reset this song's statistics?"
 msgstr "Weet u zeker dat u de statistieken van dit nummer wilt wissen?"
 
@@ -776,7 +776,7 @@ msgstr "Achtergrondafbeelding"
 msgid "Background opacity"
 msgstr "Achtergrond-doorzichtigheid"
 
-#: core/database.cpp:669
+#: core/database.cpp:672
 msgid "Backing up database"
 msgstr "Bezig met het maken van een backup van de database"
 
@@ -1234,24 +1234,24 @@ msgstr "Kan uitvoerbestand %1 niet openen"
 msgid "Cover Manager"
 msgstr "Albumhoesbeheer"
 
-#: ui/edittagdialog.cpp:435
+#: ui/edittagdialog.cpp:437
 msgid "Cover art from embedded image"
 msgstr "Albumhoes van toegevoegde afbeelding"
 
-#: ui/edittagdialog.cpp:437
+#: ui/edittagdialog.cpp:439
 #, qt-format
 msgid "Cover art loaded automatically from %1"
 msgstr "Albumhoes automatisch van %1 geladen"
 
-#: ui/edittagdialog.cpp:430
+#: ui/edittagdialog.cpp:432
 msgid "Cover art manually unset"
 msgstr "Albumhoes handmatig teruggezet"
 
-#: ui/edittagdialog.cpp:439
+#: ui/edittagdialog.cpp:441
 msgid "Cover art not set"
 msgstr "Albumhoes niet ingesteld"
 
-#: ui/edittagdialog.cpp:433
+#: ui/edittagdialog.cpp:435
 #, qt-format
 msgid "Cover art set from %1"
 msgstr "Albumhoes ingesteld van %1"
@@ -1373,7 +1373,7 @@ msgstr "DBus-pad"
 msgid "Dance"
 msgstr "Dance"
 
-#: core/database.cpp:623
+#: core/database.cpp:626
 msgid ""
 "Database corruption detected. Please read https://code.google.com/p"
 "/clementine-player/wiki/DatabaseCorruption for instructions on how to "
@@ -2380,7 +2380,7 @@ msgstr "Invoegen…"
 msgid "Installed"
 msgstr "Geïnstalleerd"
 
-#: core/database.cpp:608
+#: core/database.cpp:611
 msgid "Integrity check"
 msgstr "Integriteits check"
 
@@ -2666,7 +2666,7 @@ msgstr "Nummers laden"
 msgid "Loading stream"
 msgstr "Radiostream laden"
 
-#: playlist/songloaderinserter.cpp:79 ui/edittagdialog.cpp:229
+#: playlist/songloaderinserter.cpp:79 ui/edittagdialog.cpp:231
 msgid "Loading tracks"
 msgstr "Nummers laden"
 
@@ -2965,7 +2965,7 @@ msgstr "Netwerk"
 msgid "Network Proxy"
 msgstr "Netwerk Proxy"
 
-#: playlist/playlistdelegates.cpp:299 ui/edittagdialog.cpp:479
+#: playlist/playlistdelegates.cpp:299 ui/edittagdialog.cpp:481
 msgid "Never"
 msgstr "Nooit"
 
@@ -3314,7 +3314,7 @@ msgid "Player options"
 msgstr "Speler-opties"
 
 #: playlist/playlistcontainer.cpp:273 playlist/playlistmanager.cpp:78
-#: playlist/playlistmanager.cpp:386 playlist/playlisttabbar.cpp:279
+#: playlist/playlistmanager.cpp:386 playlist/playlisttabbar.cpp:284
 msgid "Playlist"
 msgstr "Afspeellijst"
 
@@ -3676,7 +3676,7 @@ msgstr "Opnieuw vullen"
 msgid "Reset"
 msgstr "Herstel"
 
-#: ui/edittagdialog.cpp:760 ../bin/src/ui_edittagdialog.h:635
+#: ui/edittagdialog.cpp:762 ../bin/src/ui_edittagdialog.h:635
 msgid "Reset play counts"
 msgstr "Reset afspeelstatistieken"
 
@@ -3760,7 +3760,7 @@ msgstr "Voorinstelling opslaan"
 msgid "Save this stream in the Internet tab"
 msgstr "Deze radiostream in het ‘Internet’-tabblad opslaan"
 
-#: ui/edittagdialog.cpp:662 ui/trackselectiondialog.cpp:256
+#: ui/edittagdialog.cpp:664 ui/trackselectiondialog.cpp:256
 msgid "Saving tracks"
 msgstr "Nummers opslaan"
 
@@ -4591,8 +4591,8 @@ msgstr "Kan %1 niet downloaden (%2)"
 #: core/song.cpp:332 library/librarymodel.cpp:301 library/librarymodel.cpp:306
 #: library/librarymodel.cpp:947 playlist/playlistdelegates.cpp:309
 #: playlist/playlistmanager.cpp:394 playlist/playlistmanager.cpp:397
-#: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:416
-#: ui/edittagdialog.cpp:457
+#: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:418
+#: ui/edittagdialog.cpp:459
 msgid "Unknown"
 msgstr "Onbekend"
 
@@ -5092,7 +5092,7 @@ msgstr "tussen"
 msgid "biggest first"
 msgstr "grootste eerst"
 
-#: playlist/playlistview.cpp:201 ui/edittagdialog.cpp:450
+#: playlist/playlistview.cpp:201 ui/edittagdialog.cpp:452
 msgid "bpm"
 msgstr "bpm"
 
@@ -5139,7 +5139,7 @@ msgstr "is groter dan"
 msgid "in the last"
 msgstr "in de laatste"
 
-#: playlist/playlistview.cpp:203 ui/edittagdialog.cpp:452
+#: playlist/playlistview.cpp:203 ui/edittagdialog.cpp:454
 #: internet/spotifysettingspage.cpp:60 internet/spotifysettingspage.cpp:61
 #: internet/spotifysettingspage.cpp:62
 msgid "kbps"

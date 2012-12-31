@@ -5,6 +5,7 @@
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
 #   <gyonkibendeguz@gmail.com>, 2012.
+# Lukács Bence <lukacs.bence1@gmail.com>, 2012.
 # Márk Lutring <marcus@elitemail.hu>, 2012.
 # Péter Polonkai <polesz@nedudu.hu>, 2012.
 #   <ricsipontaz@googlemail.com>, 2012.
@@ -14,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-12-21 15:59+0000\n"
-"Last-Translator: Márk Lutring <marcus@elitemail.hu>\n"
+"PO-Revision-Date: 2012-12-29 23:00+0000\n"
+"Last-Translator: lukibeni <lukacs.bence1@gmail.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: hu\n"
@@ -113,7 +114,7 @@ msgstr "%1 szám"
 #: ui/albumcovermanager.cpp:419
 #, qt-format
 msgid "%1 transferred"
-msgstr ""
+msgstr "%1 átküldve"
 
 #: widgets/osd.cpp:238 widgets/osd.cpp:243 widgets/osd.cpp:248
 #: widgets/osd.cpp:253 widgets/osd.cpp:258 widgets/osd.cpp:263
@@ -522,7 +523,7 @@ msgstr "Egyedi csoportosítás…"
 
 #: ../bin/src/ui_podcastsettingspage.h:247
 msgid "After "
-msgstr ""
+msgstr "Utána"
 
 #: ../bin/src/ui_organisedialog.h:190
 msgid "After copying..."
@@ -635,7 +636,7 @@ msgstr "Hiba történt az iTunes adatbázis másolása közben az eszközre"
 msgid "An error occurred loading the iTunes database"
 msgstr "Hiba történt az iTunes adatbázis betöltése közben"
 
-#: ui/edittagdialog.cpp:655
+#: ui/edittagdialog.cpp:657
 #, qt-format
 msgid "An error occurred writing metadata to '%1'"
 msgstr "Hiba történt '%1' metaadatainak írása közben"
@@ -680,7 +681,7 @@ msgstr "Biztos benne, hogy törli a \"%1\" beállítást?"
 msgid "Are you sure you want to delete this playlist?"
 msgstr "Biztosan törölni szeretnéd ezt a lejátszási listát?"
 
-#: ui/edittagdialog.cpp:761
+#: ui/edittagdialog.cpp:763
 msgid "Are you sure you want to reset this song's statistics?"
 msgstr "Biztos vagy benne, hogy visszaállítod ennek a számnak a statisztikáit?"
 
@@ -754,7 +755,7 @@ msgstr "Átlagos képméret"
 
 #: podcasts/addpodcastdialog.cpp:80
 msgid "BBC Podcasts"
-msgstr "BBC podcast-ok"
+msgstr "BBC podcastok"
 
 #: playlist/playlist.cpp:1209 ui/organisedialog.cpp:62
 #: ../bin/src/ui_edittagdialog.h:638
@@ -777,9 +778,9 @@ msgstr "Háttérkép"
 msgid "Background opacity"
 msgstr "Háttér áttetszősége"
 
-#: core/database.cpp:669
+#: core/database.cpp:672
 msgid "Backing up database"
-msgstr ""
+msgstr "Adatbázis biztonsági mentése"
 
 #: ../bin/src/ui_mainwindow.h:659
 msgid "Ban"
@@ -808,7 +809,7 @@ msgstr "Legjobb"
 #: songinfo/echonestbiographies.cpp:83
 #, qt-format
 msgid "Biography from %1"
-msgstr "Életrajz a(z) %1-ról/ről"
+msgstr "Életrajz innen: %1"
 
 #: playlist/playlist.cpp:1210 ../bin/src/ui_edittagdialog.h:640
 msgid "Bit rate"
@@ -857,7 +858,7 @@ msgstr "Pufferelés"
 
 #: ../bin/src/ui_globalsearchview.h:211
 msgid "But these sources are disabled:"
-msgstr ""
+msgstr "De ezek a források le vannak tiltva:"
 
 #: ../bin/src/ui_wiimotesettingspage.h:192
 msgid "Buttons"
@@ -903,11 +904,11 @@ msgstr "Nyelv váltása"
 msgid ""
 "Changing mono playback preference will be effective for the next playing "
 "songs"
-msgstr ""
+msgstr "A mono lejátszás bekapcsolása csak a következő zeneszámnál lesz érvényes"
 
 #: ../bin/src/ui_podcastsettingspage.h:228
 msgid "Check for new episodes"
-msgstr ""
+msgstr "Új epizódok keresése"
 
 #: ui/mainwindow.cpp:587
 msgid "Check for updates..."
@@ -939,7 +940,7 @@ msgstr "Válaszd ki, hogy a lejátszási lista hogyan legyen rendezve és hány 
 
 #: podcasts/podcastsettingspage.cpp:132
 msgid "Choose podcast download directory"
-msgstr ""
+msgstr "Válassza ki podcastok letöltési helyét"
 
 #: ../bin/src/ui_songinfosettingspage.h:188
 msgid ""
@@ -952,7 +953,7 @@ msgstr "Klasszikus"
 
 #: ../bin/src/ui_podcastsettingspage.h:243
 msgid "Cleaning up"
-msgstr "Takarítás"
+msgstr "Tisztítás"
 
 #: transcoder/transcodedialog.cpp:60 widgets/lineedit.cpp:41
 #: ../bin/src/ui_queuemanager.h:139
@@ -1009,7 +1010,7 @@ msgid ""
 "Clementine can synchronize your subscription list with your other computers "
 "and podcast applications.  <a href=\"https://gpodder.net/register/\">Create "
 "an account</a>."
-msgstr ""
+msgstr "A Clementine képes szinkronizálni feliratkozásait más számítógépekkel és podcast alkalmazásokkal.  <a href=\"https://gpodder.net/register/\">Készítsen egy felhasználót</a>."
 
 #: visualisations/projectmvisualisation.cpp:128
 msgid ""
@@ -1034,7 +1035,7 @@ msgstr "Nincsenek találatok ehhez a fájlhoz"
 
 #: ../bin/src/ui_globalsearchview.h:210
 msgid "Clementine will find music in:"
-msgstr "A Clementine itt fog találni zenét:"
+msgstr "A Clementine ezen források között fog zenéket keresni:"
 
 #: library/libraryview.cpp:349
 msgid "Click here to add some music"
@@ -1049,7 +1050,7 @@ msgstr "Kattintásra vált a hátralévő és a teljes idő kijelzése között"
 msgid ""
 "Clicking the Login button will open a web browser.  You should return to "
 "Clementine after you have logged in."
-msgstr ""
+msgstr "A Bejelentkezés gombra kattintva egy oldal nyílik meg a böngészőjében. Bejelentkezés után visszatérhet a Clementine-ba."
 
 #: widgets/didyoumean.cpp:37
 msgid "Close"
@@ -1133,7 +1134,7 @@ msgstr "Spotify beállítása..."
 
 #: globalsearch/globalsearchview.cpp:138 globalsearch/globalsearchview.cpp:430
 msgid "Configure global search..."
-msgstr ""
+msgstr "Globális keresés beállítása..."
 
 #: ui/mainwindow.cpp:470
 msgid "Configure library..."
@@ -1141,7 +1142,7 @@ msgstr "Zenetár beállítása..."
 
 #: podcasts/addpodcastdialog.cpp:67 podcasts/podcastservice.cpp:288
 msgid "Configure podcasts..."
-msgstr ""
+msgstr "Podcastok beállítása…"
 
 #: internet/digitallyimportedservicebase.cpp:186
 #: ../bin/src/ui_globalsearchsettingspage.h:150
@@ -1235,24 +1236,24 @@ msgstr "A %1 célfájl megnyitása sikertelen"
 msgid "Cover Manager"
 msgstr "Borítókezelő"
 
-#: ui/edittagdialog.cpp:435
+#: ui/edittagdialog.cpp:437
 msgid "Cover art from embedded image"
 msgstr "Albumborító a beágyazott képből"
 
-#: ui/edittagdialog.cpp:437
+#: ui/edittagdialog.cpp:439
 #, qt-format
 msgid "Cover art loaded automatically from %1"
 msgstr "Az albumborítót %1 helyről automatikusan betölti"
 
-#: ui/edittagdialog.cpp:430
+#: ui/edittagdialog.cpp:432
 msgid "Cover art manually unset"
 msgstr "Az albumborító manuálisan eltávolítva"
 
-#: ui/edittagdialog.cpp:439
+#: ui/edittagdialog.cpp:441
 msgid "Cover art not set"
 msgstr "Albumborító nincs beállítva"
 
-#: ui/edittagdialog.cpp:433
+#: ui/edittagdialog.cpp:435
 #, qt-format
 msgid "Cover art set from %1"
 msgstr "Albumborító beállítva %1 helyről"
@@ -1374,12 +1375,12 @@ msgstr "DBus elérési útvonal"
 msgid "Dance"
 msgstr "Dance"
 
-#: core/database.cpp:623
+#: core/database.cpp:626
 msgid ""
 "Database corruption detected. Please read https://code.google.com/p"
 "/clementine-player/wiki/DatabaseCorruption for instructions on how to "
 "recover your database"
-msgstr ""
+msgstr "Adatbázis sérülés található. Kérjük olvassa el a https://code.google.com/p/clementine-player/wiki/DatabaseCorruption honlapot további információkért, hogy hogyan állítsa vissza adatbázisát."
 
 #: playlist/playlist.cpp:1217 ../bin/src/ui_edittagdialog.h:649
 msgid "Date created"
@@ -1428,7 +1429,7 @@ msgstr "Grooveshark lejátszólista törlése"
 
 #: podcasts/podcastservice.cpp:274
 msgid "Delete downloaded data"
-msgstr ""
+msgstr "Letöltött adatok törlése"
 
 #: devices/deviceview.cpp:388 library/libraryview.cpp:608
 #: ui/mainwindow.cpp:1824 widgets/fileview.cpp:186
@@ -1446,7 +1447,7 @@ msgstr "Törlés a lemezről..."
 
 #: ../bin/src/ui_podcastsettingspage.h:244
 msgid "Delete played episodes"
-msgstr ""
+msgstr "Lejátszott epizódok törlése"
 
 #: playlist/playlistlistcontainer.cpp:295
 msgid "Delete playlists"
@@ -1531,7 +1532,7 @@ msgstr "Mappa"
 
 #: ../bin/src/ui_notificationssettingspage.h:412
 msgid "Disable duration"
-msgstr ""
+msgstr "Időtartam letiltása"
 
 #: ../bin/src/ui_appearancesettingspage.h:289
 msgid "Disable moodbar generation"
@@ -1595,7 +1596,7 @@ msgstr "Dupla kattintásra egy számon..."
 #: podcasts/podcastservice.cpp:345
 #, c-format
 msgid "Download %n episodes"
-msgstr ""
+msgstr "%n epizód letöltése"
 
 #: internet/magnatunedownloaddialog.cpp:252
 msgid "Download directory"
@@ -1603,7 +1604,7 @@ msgstr "Letöltési mappa"
 
 #: ../bin/src/ui_podcastsettingspage.h:240
 msgid "Download episodes to"
-msgstr ""
+msgstr "Epizódok letöltése ide"
 
 #: ../bin/src/ui_magnatunesettingspage.h:161
 msgid "Download membership"
@@ -1611,11 +1612,11 @@ msgstr "Tagsági információk betöltése"
 
 #: ../bin/src/ui_podcastsettingspage.h:241
 msgid "Download new episodes automatically"
-msgstr ""
+msgstr "Új epizódok automatikus letöltése"
 
 #: podcasts/podcastservice.cpp:187
 msgid "Download queued"
-msgstr ""
+msgstr "Letöltés sorba állítva"
 
 #: internet/magnatuneservice.cpp:274
 msgid "Download this album"
@@ -1627,7 +1628,7 @@ msgstr "Album letöltése..."
 
 #: podcasts/podcastservice.cpp:347
 msgid "Download this episode"
-msgstr ""
+msgstr "Epizód letöltése"
 
 #: ../bin/src/ui_spotifysettingspage.h:216
 msgid "Download..."
@@ -1636,7 +1637,7 @@ msgstr "Letöltés…"
 #: podcasts/podcastservice.cpp:195
 #, qt-format
 msgid "Downloading (%1%)..."
-msgstr ""
+msgstr "Letöltés (%1%)..."
 
 #: internet/icecastservice.cpp:101
 msgid "Downloading Icecast directory"
@@ -1728,7 +1729,7 @@ msgstr "Gyorsbillentyűk engedélyezése csak akkor, ha a Clementine fókuszba k
 msgid ""
 "Enable sources below to include them in search results.  Results will be "
 "displayed in this order."
-msgstr ""
+msgstr "Engedélyezze a forrásokat, hogy bevegye őket a keresési eredmények közé. Az eredmények ebben a sorrendben fognak megjelenni."
 
 #: core/globalshortcuts.cpp:62
 msgid "Enable/disable Last.fm scrobbling"
@@ -1748,7 +1749,7 @@ msgstr "Kódolási mód"
 
 #: ../bin/src/ui_addpodcastbyurl.h:76
 msgid "Enter a URL"
-msgstr ""
+msgstr "Adjon meg egy URL-t"
 
 #: ../bin/src/ui_coverfromurldialog.h:103
 msgid "Enter a URL to download a cover from the Internet:"
@@ -1766,15 +1767,15 @@ msgstr "Adjon meg egy <b>előadót</b> vagy <b>címkét</b>, hogy Last.fm rádi�
 #: ../bin/src/ui_globalsearchview.h:209
 msgid ""
 "Enter search terms above to find music on your computer and on the internet"
-msgstr ""
+msgstr "Adjon meg egy keresési kifejezést zeneszámok kereséséhez a számítógépén és az interneten"
 
 #: ../bin/src/ui_itunessearchpage.h:77
 msgid "Enter search terms below to find podcasts in the iTunes Store"
-msgstr ""
+msgstr "Adjon meg egy keresési kifejezést podcastok kereséséhez az iTunes Store-ban"
 
 #: ../bin/src/ui_gpoddersearchpage.h:77
 msgid "Enter search terms below to find podcasts on gpodder.net"
-msgstr ""
+msgstr "Adjon meg egy keresési kifejezést podcastok kereséséhez a gpodder.neten"
 
 #: ../bin/src/ui_libraryfilterwidget.h:96
 #: ../bin/src/ui_albumcovermanager.h:153
@@ -1884,7 +1885,7 @@ msgstr "Kivéve az azonos albumon vagy azonos CUE fájlban lévő számok közö
 
 #: ../bin/src/ui_dynamicplaylistcontrols.h:111
 msgid "Expand"
-msgstr ""
+msgstr "Kibontás"
 
 #: widgets/loginstatewidget.cpp:142
 #, qt-format
@@ -1935,21 +1936,21 @@ msgstr "Elhalkulás hossza"
 
 #: podcasts/gpoddertoptagspage.cpp:76
 msgid "Failed to fetch directory"
-msgstr ""
+msgstr "A mappa lekérése meghiúsult"
 
 #: podcasts/gpoddersearchpage.cpp:76 podcasts/gpoddertoptagsmodel.cpp:109
 #: podcasts/itunessearchpage.cpp:66 podcasts/itunessearchpage.cpp:75
 #: podcasts/itunessearchpage.cpp:82
 msgid "Failed to fetch podcasts"
-msgstr ""
+msgstr "Nem sikerült letölteni a podcastot"
 
 #: podcasts/addpodcastbyurl.cpp:70 podcasts/fixedopmlpage.cpp:54
 msgid "Failed to load podcast"
-msgstr ""
+msgstr "Nem sikerült betölteni a podcastot"
 
 #: podcasts/podcasturlloader.cpp:167
 msgid "Failed to parse the XML for this RSS feed"
-msgstr ""
+msgstr "Nem sikerült feldolgozni az XML fájlt ehhez az RSS hírforráshoz"
 
 #: ../bin/src/ui_transcoderoptionsflac.h:82
 #: ../bin/src/ui_transcoderoptionsmp3.h:200
@@ -2106,7 +2107,7 @@ msgstr "Frissítési gyakoriság"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:236
 msgid "Frames per buffer"
-msgstr ""
+msgstr "Képkockák pufferenként"
 
 #: internet/lastfmservice.cpp:224
 msgid "Friends"
@@ -2148,11 +2149,11 @@ msgstr "Műfaj"
 
 #: internet/groovesharkservice.cpp:540
 msgid "Get a URL to share this Grooveshark playlist"
-msgstr ""
+msgstr "URL lekérése ezen Grooveshark lejátszási lista megosztásához"
 
 #: internet/groovesharkservice.cpp:537 internet/groovesharkservice.cpp:1108
 msgid "Get a URL to share this Grooveshark song"
-msgstr ""
+msgstr "URL lekérése ezen Grooveshark lejátszási lista megosztásához"
 
 #: internet/groovesharkservice.cpp:788
 msgid "Getting Grooveshark popular songs"
@@ -2164,7 +2165,7 @@ msgstr "Csatornák betöltése"
 
 #: internet/digitallyimportedservicebase.cpp:108
 msgid "Getting streams"
-msgstr ""
+msgstr "Adatfolyamok lekérése"
 
 #: ../bin/src/ui_addstreamdialog.h:116
 msgid "Give it a name:"
@@ -2172,7 +2173,7 @@ msgstr "Adjon meg egy nevet:"
 
 #: ../bin/src/ui_addpodcastbyurl.h:78
 msgid "Go"
-msgstr "Irány"
+msgstr "Ugrás"
 
 #: ../bin/src/ui_mainwindow.h:704
 msgid "Go to next playlist tab"
@@ -2206,7 +2207,7 @@ msgstr "Grooveshark belépési hiba"
 
 #: internet/groovesharkservice.cpp:1160
 msgid "Grooveshark playlist's URL"
-msgstr ""
+msgstr "Grooveshark lejátszási lista URL-je"
 
 #: internet/groovesharkservice.cpp:601
 msgid "Grooveshark radio"
@@ -2314,7 +2315,7 @@ msgstr "Ha folytatja, az eszköz lassan fog működni és a rá másolt számok 
 
 #: ../bin/src/ui_addpodcastbyurl.h:77
 msgid "If you know the URL of a podcast, enter it below and press Go."
-msgstr ""
+msgstr "Ha tudja a podcast URL-jét, akkor írja be és nyomja meg az Ugrás gombot."
 
 #: ../bin/src/ui_organisedialog.h:204
 msgid "Ignore \"The\" in artist names"
@@ -2331,18 +2332,18 @@ msgstr "Képek (*.png *.jpg *.jpeg *.bmp *.xpm *.pbm *.ppm *.xbm)"
 #: core/utilities.cpp:143
 #, qt-format
 msgid "In %1 days"
-msgstr ""
+msgstr "%1 napon belül"
 
 #: core/utilities.cpp:147
 #, qt-format
 msgid "In %1 weeks"
-msgstr ""
+msgstr "%1 héten belül"
 
 #: ../bin/src/ui_wizardfinishpage.h:86
 msgid ""
 "In dynamic mode new tracks will be chosen and added to the playlist every "
 "time a song finishes."
-msgstr ""
+msgstr "Dinamikus módban új számok lesznek kiválasztva és hozzáadva a lejátszási listához, amikor egy zeneszám véget ér."
 
 #: internet/spotifyservice.cpp:360
 msgid "Inbox"
@@ -2381,9 +2382,9 @@ msgstr "Beszúrás..."
 msgid "Installed"
 msgstr "Telepítve"
 
-#: core/database.cpp:608
+#: core/database.cpp:611
 msgid "Integrity check"
-msgstr ""
+msgstr "Integritás ellenőrzése"
 
 #: ui/mainwindow.cpp:235
 msgid "Internet"
@@ -2604,7 +2605,7 @@ msgstr "Szűrések"
 #: internet/groovesharkservice.cpp:602
 msgid ""
 "Listen to Grooveshark songs based on what you've listened to previously"
-msgstr ""
+msgstr "Grooveshark zenék hallgatása, az előzőleg hallgatott zeneszámok alapján"
 
 #: ui/equalizer.cpp:117
 msgid "Live"
@@ -2667,7 +2668,7 @@ msgstr "Számok betöltése"
 msgid "Loading stream"
 msgstr "Adatfolyam betöltése"
 
-#: playlist/songloaderinserter.cpp:79 ui/edittagdialog.cpp:229
+#: playlist/songloaderinserter.cpp:79 ui/edittagdialog.cpp:231
 msgid "Loading tracks"
 msgstr "Számok betöltése"
 
@@ -2724,7 +2725,7 @@ msgstr "Alacsony komplexitású profil (LC)"
 
 #: ../bin/src/ui_songinfosettingspage.h:187
 msgid "Lyrics"
-msgstr "Dalszöveg"
+msgstr "Dalszövegek"
 
 #: songinfo/ultimatelyricsprovider.cpp:136
 #, qt-format
@@ -2773,7 +2774,7 @@ msgstr ""
 
 #: internet/spotifyservice.cpp:533
 msgid "Make playlist available offline"
-msgstr ""
+msgstr "Lejátszólista elérhetővé tétele offline módban is"
 
 #: internet/lastfmservice.cpp:444
 msgid "Malformed response"
@@ -2966,7 +2967,7 @@ msgstr "Hálózat"
 msgid "Network Proxy"
 msgstr "Hálózati Proxy"
 
-#: playlist/playlistdelegates.cpp:299 ui/edittagdialog.cpp:479
+#: playlist/playlistdelegates.cpp:299 ui/edittagdialog.cpp:481
 msgid "Never"
 msgstr "Soha"
 
@@ -3315,7 +3316,7 @@ msgid "Player options"
 msgstr "Lejátszó beállítások"
 
 #: playlist/playlistcontainer.cpp:273 playlist/playlistmanager.cpp:78
-#: playlist/playlistmanager.cpp:386 playlist/playlisttabbar.cpp:279
+#: playlist/playlistmanager.cpp:386 playlist/playlisttabbar.cpp:284
 msgid "Playlist"
 msgstr "Lejátszási lista"
 
@@ -3345,7 +3346,7 @@ msgstr "Beépülő állapot:"
 
 #: podcasts/podcastservice.cpp:110 ../bin/src/ui_podcastsettingspage.h:226
 msgid "Podcasts"
-msgstr "Podcast-ok"
+msgstr "Podcastok"
 
 #: ui/equalizer.cpp:119
 msgid "Pop"
@@ -3559,7 +3560,7 @@ msgstr "Állomáslista frissítése"
 
 #: internet/digitallyimportedservicebase.cpp:182
 msgid "Refresh streams"
-msgstr ""
+msgstr "Adatfolyamok frissítése"
 
 #: ui/equalizer.cpp:120
 msgid "Reggae"
@@ -3584,7 +3585,7 @@ msgstr "Esemény eltávolítása"
 
 #: ../bin/src/ui_mainwindow.h:717
 msgid "Remove duplicates from playlist"
-msgstr ""
+msgstr "Duplikációk eltávolítása a lejátszási listáról"
 
 #: ../bin/src/ui_librarysettingspage.h:160
 msgid "Remove folder"
@@ -3677,7 +3678,7 @@ msgstr "Újbóli feltöltés"
 msgid "Reset"
 msgstr "Visszaállítás"
 
-#: ui/edittagdialog.cpp:760 ../bin/src/ui_edittagdialog.h:635
+#: ui/edittagdialog.cpp:762 ../bin/src/ui_edittagdialog.h:635
 msgid "Reset play counts"
 msgstr "Lejátszás számlálók visszaállítása"
 
@@ -3687,15 +3688,15 @@ msgstr "Korlátozás ASCII karakterekre"
 
 #: internet/groovesharkservice.cpp:756
 msgid "Retrieving Grooveshark My Music songs"
-msgstr ""
+msgstr "„Grooveshark - Zenéim” zeneszámok lekérése"
 
 #: internet/groovesharkservice.cpp:724
 msgid "Retrieving Grooveshark favorites songs"
-msgstr ""
+msgstr "„Grooveshark - kedvencek” zeneszámok lekérése"
 
 #: internet/groovesharkservice.cpp:661
 msgid "Retrieving Grooveshark playlists"
-msgstr ""
+msgstr "Grooveshark lejátszási listák lekérése"
 
 #: ../data/oauthsuccess.html:3
 msgid "Return to Clementine"
@@ -3761,7 +3762,7 @@ msgstr "Beállítás mentése"
 msgid "Save this stream in the Internet tab"
 msgstr "Adatfolyam mentése az Internet fül alá"
 
-#: ui/edittagdialog.cpp:662 ui/trackselectiondialog.cpp:256
+#: ui/edittagdialog.cpp:664 ui/trackselectiondialog.cpp:256
 msgid "Saving tracks"
 msgstr "Számok mentése"
 
@@ -3789,27 +3790,27 @@ msgstr "Icecast állomások keresése"
 
 #: internet/jamendoservice.cpp:425
 msgid "Search Jamendo"
-msgstr "Keresés Jamendon"
+msgstr "Keresés Jamendo-n"
 
 #: internet/magnatuneservice.cpp:283
 msgid "Search Magnatune"
-msgstr "Keresés a Magnatuneon"
+msgstr "Keresés a Magnatune-on"
 
 #: ui/albumcoverchoicecontroller.cpp:62
 msgid "Search for album covers..."
-msgstr "Album borítók keresése..."
+msgstr "Albumborítók keresése..."
 
 #: ../bin/src/ui_globalsearchview.h:208
 msgid "Search for anything"
-msgstr "Keresés akármire"
+msgstr "Keresés bármire"
 
 #: ../bin/src/ui_gpoddersearchpage.h:76
 msgid "Search gpodder.net"
-msgstr ""
+msgstr "Keresés gpodder.neten"
 
 #: ../bin/src/ui_itunessearchpage.h:76
 msgid "Search iTunes"
-msgstr ""
+msgstr "Keresés iTunes-on"
 
 #: ../bin/src/ui_querysearchpage.h:113
 msgid "Search mode"
@@ -3822,7 +3823,7 @@ msgstr "Keresési beállítások"
 #: internet/groovesharkservice.cpp:567 internet/soundcloudservice.cpp:104
 #: internet/spotifyservice.cpp:347
 msgid "Search results"
-msgstr ""
+msgstr "Találatok"
 
 #: smartplaylists/querywizardplugin.cpp:152
 #: ../bin/src/ui_querysearchpage.h:120
@@ -3831,7 +3832,7 @@ msgstr "Keresési feltételek"
 
 #: internet/groovesharkservice.cpp:268
 msgid "Searching on Grooveshark"
-msgstr "Keresés a Groovesharkon"
+msgstr "Keresés Groovesharkon"
 
 #: ../bin/src/ui_groupbydialog.h:138
 msgid "Second level"
@@ -3875,7 +3876,7 @@ msgstr "A legjobban illeszkedő találatot választja"
 
 #: ../bin/src/ui_appearancesettingspage.h:283
 msgid "Select blur radius:"
-msgstr ""
+msgstr "Elmosási sugár kiválasztása:"
 
 #: ../bin/src/ui_appearancesettingspage.h:270
 msgid "Select foreground color:"
@@ -3939,7 +3940,7 @@ msgstr "Ragyogás animáció megjelenítése a játszott számon a lejátszási 
 
 #: ../bin/src/ui_appearancesettingspage.h:286
 msgid "Show a moodbar in the track progress bar"
-msgstr ""
+msgstr "Hangulatsáv megjelenítése a pozíciójelző csúszkában"
 
 #: ../bin/src/ui_notificationssettingspage.h:406
 msgid "Show a native desktop notification"
@@ -4024,7 +4025,7 @@ msgstr "Tálcaikon megjelenítése"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:152
 msgid "Show which sources are enabled and disabled"
-msgstr ""
+msgstr "Mutassa melyik forrás van engedélyezve vagy letiltva"
 
 #: core/globalshortcuts.cpp:57
 msgid "Show/Hide"
@@ -4036,7 +4037,7 @@ msgstr "Keverés"
 
 #: widgets/osd.cpp:276 ../bin/src/ui_playlistsequence.h:110
 msgid "Shuffle albums"
-msgstr ""
+msgstr "Albumok összekeverése"
 
 #: widgets/osd.cpp:274 ../bin/src/ui_playlistsequence.h:109
 msgid "Shuffle all"
@@ -4048,7 +4049,7 @@ msgstr "Lejátszási lista véletlenszerűen"
 
 #: widgets/osd.cpp:275 ../bin/src/ui_playlistsequence.h:108
 msgid "Shuffle tracks in this album"
-msgstr ""
+msgstr "Zeneszámok összekeverése az albumokban"
 
 #: ../bin/src/ui_podcastsettingspage.h:252
 msgid "Sign in"
@@ -4191,7 +4192,7 @@ msgstr "Átkódolás indítása"
 msgid ""
 "Start typing something on the search box above to fill this search results "
 "list"
-msgstr ""
+msgstr "Kezdjen el írni valamit a keresési mezőbe, hogy kitöltse ezt a keresési eredmény listát"
 
 #: transcoder/transcoder.cpp:401
 #, qt-format
@@ -4366,12 +4367,12 @@ msgstr "A Clementine most frissült verziójának szüksége van a teljes zenet�
 
 #: library/libraryview.cpp:529
 msgid "There are other songs in this album"
-msgstr ""
+msgstr "Vannak más zeneszámok is ebben az albumban"
 
 #: podcasts/gpoddersearchpage.cpp:77 podcasts/gpoddertoptagsmodel.cpp:110
 #: podcasts/gpoddertoptagspage.cpp:77
 msgid "There was a problem communicating with gpodder.net"
-msgstr ""
+msgstr "Probléma lépett fel a gpodder.nettel való kommunikálás közben"
 
 #: internet/magnatunedownloaddialog.cpp:158
 msgid "There was a problem fetching the metadata from Magnatune"
@@ -4412,7 +4413,7 @@ msgstr "Ezek a mappák lesznek figyelve a zenetár feltöltéséhez"
 msgid ""
 "These settings are used in the \"Transcode Music\" dialog, and when "
 "converting music before copying it to a device."
-msgstr ""
+msgstr "Ezek a beállítások a „Zene átkódolása” ablakban lesznek használva, és amikor zenéket konvertál mielőtt egy eszközre másolná azokat."
 
 #: ../bin/src/ui_groupbydialog.h:151
 msgid "Third level"
@@ -4484,7 +4485,7 @@ msgstr "Cím"
 msgid ""
 "To start Grooveshark radio, you should first listen to a few other "
 "Grooveshark songs"
-msgstr ""
+msgstr "A Grooveshark rádió elindításához előbb meg kell hallgatnia néhány más Grooveshark zeneszámot."
 
 #: core/utilities.cpp:123 core/utilities.cpp:139
 msgid "Today"
@@ -4524,11 +4525,11 @@ msgstr "Népszerű számok"
 
 #: covers/coversearchstatisticsdialog.cpp:71
 msgid "Total bytes transferred"
-msgstr ""
+msgstr "Összes átküldött bájt"
 
 #: covers/coversearchstatisticsdialog.cpp:68
 msgid "Total network requests made"
-msgstr ""
+msgstr "Összes hálózati kérés"
 
 #: playlist/playlist.cpp:1196 ui/organisedialog.cpp:60
 #: ../bin/src/ui_edittagdialog.h:653 ../bin/src/ui_trackselectiondialog.h:213
@@ -4592,8 +4593,8 @@ msgstr "%1 (%2) nem letölthető"
 #: core/song.cpp:332 library/librarymodel.cpp:301 library/librarymodel.cpp:306
 #: library/librarymodel.cpp:947 playlist/playlistdelegates.cpp:309
 #: playlist/playlistmanager.cpp:394 playlist/playlistmanager.cpp:397
-#: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:416
-#: ui/edittagdialog.cpp:457
+#: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:418
+#: ui/edittagdialog.cpp:459
 msgid "Unknown"
 msgstr "Ismeretlen"
 
@@ -4623,7 +4624,7 @@ msgstr "Grooveshark lejátszólisták frissítése"
 
 #: podcasts/podcastservice.cpp:260
 msgid "Update all podcasts"
-msgstr ""
+msgstr "Összes podcast frissítése"
 
 #: ../bin/src/ui_mainwindow.h:706
 msgid "Update changed library folders"
@@ -4635,7 +4636,7 @@ msgstr "Zenetár frissítése a Clementine indításakor"
 
 #: podcasts/podcastservice.cpp:268
 msgid "Update this podcast"
-msgstr ""
+msgstr "Podcast frissítése"
 
 #: ../bin/src/ui_podcastsettingspage.h:227
 msgid "Updating"
@@ -4661,7 +4662,7 @@ msgstr "Kihasználtság"
 
 #: ../bin/src/ui_lastfmsettingspage.h:159
 msgid "Use Album Artist tag when available"
-msgstr ""
+msgstr "Album előadója címke használata (ha elérhető)"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:168
 msgid "Use Gnome's shortcut keys"
@@ -4726,7 +4727,7 @@ msgstr "Használt"
 #: internet/groovesharkservice.cpp:402
 #, qt-format
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
-msgstr ""
+msgstr "%1 felhasználónak nincs Grooveshark Anywhere fiókja"
 
 #: ui/settingsdialog.cpp:139
 msgid "User interface"
@@ -4897,7 +4898,7 @@ msgstr "Windows Media audio"
 msgid ""
 "Would you like to move the other songs in this album to Various Artists as "
 "well?"
-msgstr ""
+msgstr "Szeretné a többi számot ebből az albumból áthelyezni a Vegyes előadók közé is?"
 
 #: ui/mainwindow.cpp:2007
 msgid "Would you like to run a full rescan right now?"
@@ -4953,7 +4954,7 @@ msgstr "Megváltoztathatja a számok zenetárban való rendezésének módját."
 msgid ""
 "You can listen for free without an account, but Premium members can listen "
 "to higher quality streams without advertisements."
-msgstr ""
+msgstr "Felhasználói fiók nélkül is hallgathat zenéket, de a prémium tagok ezt jobb minőségben és reklámok nélkül tehetik."
 
 #: internet/magnatunesettingspage.cpp:53
 msgid ""
@@ -4989,17 +4990,17 @@ msgstr "Nincs Spotify prémium fiókod."
 
 #: internet/digitallyimportedclient.cpp:89
 msgid "You do not have an active subscription"
-msgstr ""
+msgstr "Nincs aktív feliratkozása"
 
 #: internet/spotifyservice.cpp:170
 msgid ""
 "You have been logged out of Spotify, please re-enter your password in the "
 "Settings dialog."
-msgstr ""
+msgstr "Kijelentkezett a Spotify-ből, kérem írja be még egyszer a jelszavát a Beállítások ablakban."
 
 #: internet/spotifysettingspage.cpp:158
 msgid "You have been logged out of Spotify, please re-enter your password."
-msgstr ""
+msgstr "Kijelentkezett a Spotify-ből, kérem írja be még egyszer a jelszavát."
 
 #: songinfo/lastfmtrackinfoprovider.cpp:87
 msgid "You love this track"
@@ -5093,7 +5094,7 @@ msgstr "között"
 msgid "biggest first"
 msgstr "nagyobb először"
 
-#: playlist/playlistview.cpp:201 ui/edittagdialog.cpp:450
+#: playlist/playlistview.cpp:201 ui/edittagdialog.cpp:452
 msgid "bpm"
 msgstr "bpm"
 
@@ -5126,11 +5127,11 @@ msgstr "egyenlő"
 
 #: ../bin/src/ui_podcastsettingspage.h:249
 msgid "gpodder.net"
-msgstr ""
+msgstr "gpodder.net"
 
 #: podcasts/gpoddertoptagspage.cpp:34
 msgid "gpodder.net directory"
-msgstr ""
+msgstr "gpodder.net mappa"
 
 #: smartplaylists/searchterm.cpp:221
 msgid "greater than"
@@ -5140,7 +5141,7 @@ msgstr "nagyobb mint"
 msgid "in the last"
 msgstr "az utóbbi"
 
-#: playlist/playlistview.cpp:203 ui/edittagdialog.cpp:452
+#: playlist/playlistview.cpp:203 ui/edittagdialog.cpp:454
 #: internet/spotifysettingspage.cpp:60 internet/spotifysettingspage.cpp:61
 #: internet/spotifysettingspage.cpp:62
 msgid "kbps"
@@ -5189,7 +5190,7 @@ msgstr "beállítások"
 
 #: widgets/didyoumean.cpp:56
 msgid "press enter"
-msgstr ""
+msgstr "nyomja meg az entert"
 
 #: playlist/playlistundocommands.cpp:65 playlist/playlistundocommands.cpp:88
 #, c-format
@@ -5202,7 +5203,7 @@ msgstr "rövidebb először"
 
 #: playlist/playlistundocommands.cpp:138
 msgid "shuffle songs"
-msgstr ""
+msgstr "zeneszámok keverése"
 
 #: smartplaylists/searchterm.cpp:297
 msgid "smallest first"

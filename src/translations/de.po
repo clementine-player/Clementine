@@ -8,6 +8,7 @@
 #   <daschuer@gmx.de>, 2012.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
 #   <gerold.mittelstaedt@googlemail.com>, 2012.
+#   <gregi94@hotmail.de>, 2012.
 #   <janlaymann@googlemail.com>, 2012.
 #   <lenz.furrer@gmail.com>, 2012.
 # Martin Herkt <lachs0r@hong-mailing.de>, 2011.
@@ -22,8 +23,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-12-01 11:37+0000\n"
-"Last-Translator: Lenzitsch <lenz.furrer@gmail.com>\n"
+"PO-Revision-Date: 2012-12-28 23:38+0000\n"
+"Last-Translator: santy <gregi94@hotmail.de>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: de\n"
@@ -643,7 +644,7 @@ msgstr "Beim Kopieren der iTunes-Datenbank auf das Gerät ist ein Fehler aufgetr
 msgid "An error occurred loading the iTunes database"
 msgstr "Beim Laden der iTunes-Datenbank ist ein Fehler aufgetreten"
 
-#: ui/edittagdialog.cpp:655
+#: ui/edittagdialog.cpp:657
 #, qt-format
 msgid "An error occurred writing metadata to '%1'"
 msgstr "Beim Schreiben der Metadaten für '%1' trat ein Fehler auf"
@@ -688,7 +689,7 @@ msgstr "Profil \"%1\" wirklich löschen?"
 msgid "Are you sure you want to delete this playlist?"
 msgstr "Möchten Sie diese Wiedergabeliste wirklich löschen?"
 
-#: ui/edittagdialog.cpp:761
+#: ui/edittagdialog.cpp:763
 msgid "Are you sure you want to reset this song's statistics?"
 msgstr "Wollen Sie die Statistiken dieses Titels wirklich zurücksetzen?"
 
@@ -785,7 +786,7 @@ msgstr "Hintergrundbild"
 msgid "Background opacity"
 msgstr "Deckkraft:"
 
-#: core/database.cpp:669
+#: core/database.cpp:672
 msgid "Backing up database"
 msgstr "Sichere die Datenbank"
 
@@ -1171,7 +1172,7 @@ msgstr "Verbindung mit Spotify wird aufgebaut"
 
 #: ../bin/src/ui_console.h:80 ../bin/src/ui_mainwindow.h:689
 msgid "Console"
-msgstr ""
+msgstr "Konsole"
 
 #: ../bin/src/ui_transcoderoptionsmp3.h:196
 msgid "Constant bitrate"
@@ -1243,24 +1244,24 @@ msgstr "Ausgabedatei %1 konnte nicht geöffnet werden"
 msgid "Cover Manager"
 msgstr "Coververwaltung"
 
-#: ui/edittagdialog.cpp:435
+#: ui/edittagdialog.cpp:437
 msgid "Cover art from embedded image"
 msgstr "Cover aus eingebettetem Bild"
 
-#: ui/edittagdialog.cpp:437
+#: ui/edittagdialog.cpp:439
 #, qt-format
 msgid "Cover art loaded automatically from %1"
 msgstr "Automatsch geladenes Albencover von %1"
 
-#: ui/edittagdialog.cpp:430
+#: ui/edittagdialog.cpp:432
 msgid "Cover art manually unset"
 msgstr "Cover manuell entfernt"
 
-#: ui/edittagdialog.cpp:439
+#: ui/edittagdialog.cpp:441
 msgid "Cover art not set"
 msgstr "Cover nicht ausgewählt"
 
-#: ui/edittagdialog.cpp:433
+#: ui/edittagdialog.cpp:435
 #, qt-format
 msgid "Cover art set from %1"
 msgstr "Das Cover wird von %1 gesetzt"
@@ -1382,7 +1383,7 @@ msgstr "DBus Pfad"
 msgid "Dance"
 msgstr "Dance"
 
-#: core/database.cpp:623
+#: core/database.cpp:626
 msgid ""
 "Database corruption detected. Please read https://code.google.com/p"
 "/clementine-player/wiki/DatabaseCorruption for instructions on how to "
@@ -2389,7 +2390,7 @@ msgstr "Einfügen..."
 msgid "Installed"
 msgstr "Installiert"
 
-#: core/database.cpp:608
+#: core/database.cpp:611
 msgid "Integrity check"
 msgstr "Integritätsprüfung"
 
@@ -2675,7 +2676,7 @@ msgstr "Lade Titel"
 msgid "Loading stream"
 msgstr "Lade Stream"
 
-#: playlist/songloaderinserter.cpp:79 ui/edittagdialog.cpp:229
+#: playlist/songloaderinserter.cpp:79 ui/edittagdialog.cpp:231
 msgid "Loading tracks"
 msgstr "Lade Stücke"
 
@@ -2974,7 +2975,7 @@ msgstr "Netzwerk"
 msgid "Network Proxy"
 msgstr "Netzwerk-Proxy"
 
-#: playlist/playlistdelegates.cpp:299 ui/edittagdialog.cpp:479
+#: playlist/playlistdelegates.cpp:299 ui/edittagdialog.cpp:481
 msgid "Never"
 msgstr "Niemals"
 
@@ -3323,7 +3324,7 @@ msgid "Player options"
 msgstr "Player Einstellungen"
 
 #: playlist/playlistcontainer.cpp:273 playlist/playlistmanager.cpp:78
-#: playlist/playlistmanager.cpp:386 playlist/playlisttabbar.cpp:279
+#: playlist/playlistmanager.cpp:386 playlist/playlisttabbar.cpp:284
 msgid "Playlist"
 msgstr "Wiedergabeliste"
 
@@ -3685,7 +3686,7 @@ msgstr "Neu bestücken"
 msgid "Reset"
 msgstr "Zurücksetzen"
 
-#: ui/edittagdialog.cpp:760 ../bin/src/ui_edittagdialog.h:635
+#: ui/edittagdialog.cpp:762 ../bin/src/ui_edittagdialog.h:635
 msgid "Reset play counts"
 msgstr "Abspielzähler zurücksetzen"
 
@@ -3769,7 +3770,7 @@ msgstr "Voreinstellung speichern"
 msgid "Save this stream in the Internet tab"
 msgstr "Diesen Stream im Internet-Tab sichern"
 
-#: ui/edittagdialog.cpp:662 ui/trackselectiondialog.cpp:256
+#: ui/edittagdialog.cpp:664 ui/trackselectiondialog.cpp:256
 msgid "Saving tracks"
 msgstr "Titel werden gespeichert"
 
@@ -4600,8 +4601,8 @@ msgstr "Konnte %1 nicht herunterladen (%2)"
 #: core/song.cpp:332 library/librarymodel.cpp:301 library/librarymodel.cpp:306
 #: library/librarymodel.cpp:947 playlist/playlistdelegates.cpp:309
 #: playlist/playlistmanager.cpp:394 playlist/playlistmanager.cpp:397
-#: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:416
-#: ui/edittagdialog.cpp:457
+#: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:418
+#: ui/edittagdialog.cpp:459
 msgid "Unknown"
 msgstr "Unbekannt"
 
@@ -5101,7 +5102,7 @@ msgstr "zwischen"
 msgid "biggest first"
 msgstr "größte zuerst"
 
-#: playlist/playlistview.cpp:201 ui/edittagdialog.cpp:450
+#: playlist/playlistview.cpp:201 ui/edittagdialog.cpp:452
 msgid "bpm"
 msgstr "BPM"
 
@@ -5148,7 +5149,7 @@ msgstr "größer als"
 msgid "in the last"
 msgstr "in den letzten"
 
-#: playlist/playlistview.cpp:203 ui/edittagdialog.cpp:452
+#: playlist/playlistview.cpp:203 ui/edittagdialog.cpp:454
 #: internet/spotifysettingspage.cpp:60 internet/spotifysettingspage.cpp:61
 #: internet/spotifysettingspage.cpp:62
 msgid "kbps"

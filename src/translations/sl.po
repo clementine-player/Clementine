@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-11-30 11:09+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2012-12-28 11:38+0000\n"
+"Last-Translator: R33D3M33R <yellllow_m@yahoo.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: sl\n"
@@ -230,7 +230,7 @@ msgstr "0:00:00"
 
 #: ../bin/src/ui_appearancesettingspage.h:284
 msgid "0px"
-msgstr ""
+msgstr "0 točk"
 
 #: core/utilities.cpp:106
 msgid "1 day"
@@ -632,7 +632,7 @@ msgstr "Pri kopiranju podatkovne zbirke iTunes na napravo, je prišlo do napake"
 msgid "An error occurred loading the iTunes database"
 msgstr "Pri nalaganju podatkovne zbirke iTunes, je prišlo do napake"
 
-#: ui/edittagdialog.cpp:655
+#: ui/edittagdialog.cpp:657
 #, qt-format
 msgid "An error occurred writing metadata to '%1'"
 msgstr "Med zapisovanjem metapodatkov v '%1' je prišlo do napake"
@@ -677,7 +677,7 @@ msgstr "Ali resnično želite izbrisati prednastavitev \"%1\"?"
 msgid "Are you sure you want to delete this playlist?"
 msgstr "Ali ste prepričani, da želite izbrisati ta seznam predvajanja?"
 
-#: ui/edittagdialog.cpp:761
+#: ui/edittagdialog.cpp:763
 msgid "Are you sure you want to reset this song's statistics?"
 msgstr "Ste prepričani, da želite ponastaviti statistike te skladbe"
 
@@ -774,7 +774,7 @@ msgstr "Slika ozadja"
 msgid "Background opacity"
 msgstr "Prosojnost ozadja"
 
-#: core/database.cpp:669
+#: core/database.cpp:672
 msgid "Backing up database"
 msgstr "Varnostno kopiranje podatkovne zbirke"
 
@@ -987,7 +987,7 @@ msgstr "Clementine lahko samodejno pretvori glasbo, ki jo kopirate na to napravo
 
 #: ../bin/src/ui_dropboxsettingspage.h:104
 msgid "Clementine can play music that you have uploaded to Dropbox"
-msgstr ""
+msgstr "Clementine lahko predvaja glasbo, ki ste jo naložili na Dropbox"
 
 #: ../bin/src/ui_googledrivesettingspage.h:104
 msgid "Clementine can play music that you have uploaded to Google Drive"
@@ -995,7 +995,7 @@ msgstr "Clementine lahko predvaja glasbo, ki ste jo naložili na Google Drive"
 
 #: ../bin/src/ui_ubuntuonesettingspage.h:111
 msgid "Clementine can play music that you have uploaded to Ubuntu One"
-msgstr ""
+msgstr "Clementine lahko predvaja glasbo, ki ste jo naložili na Ubuntu One"
 
 #: ../bin/src/ui_notificationssettingspage.h:403
 msgid "Clementine can show a message when the track changes."
@@ -1054,7 +1054,7 @@ msgstr "Zapri"
 
 #: playlist/playlisttabbar.cpp:47
 msgid "Close playlist"
-msgstr ""
+msgstr "Zapri seznam predvajanja"
 
 #: visualisations/visualisationcontainer.cpp:127
 msgid "Close visualization"
@@ -1232,24 +1232,24 @@ msgstr "Izhodne datoteke %1 ni bilo mogoče odpreti"
 msgid "Cover Manager"
 msgstr "Upravljalnik ovitkov"
 
-#: ui/edittagdialog.cpp:435
+#: ui/edittagdialog.cpp:437
 msgid "Cover art from embedded image"
 msgstr "Ovitek albuma iz vstavljene slike"
 
-#: ui/edittagdialog.cpp:437
+#: ui/edittagdialog.cpp:439
 #, qt-format
 msgid "Cover art loaded automatically from %1"
 msgstr "Ovitek albuma je bil samodejno naložen iz %1"
 
-#: ui/edittagdialog.cpp:430
+#: ui/edittagdialog.cpp:432
 msgid "Cover art manually unset"
 msgstr "Ovitek albuma je bil ročno odstranjen iz uporabe"
 
-#: ui/edittagdialog.cpp:439
+#: ui/edittagdialog.cpp:441
 msgid "Cover art not set"
 msgstr "Ovitek albuma ni nastavljen"
 
-#: ui/edittagdialog.cpp:433
+#: ui/edittagdialog.cpp:435
 #, qt-format
 msgid "Cover art set from %1"
 msgstr "Ovitek albuma je nastavljen iz %1"
@@ -1371,7 +1371,7 @@ msgstr "Pot DBus"
 msgid "Dance"
 msgstr "Plesna"
 
-#: core/database.cpp:623
+#: core/database.cpp:626
 msgid ""
 "Database corruption detected. Please read https://code.google.com/p"
 "/clementine-player/wiki/DatabaseCorruption for instructions on how to "
@@ -1417,7 +1417,7 @@ msgstr "Zamik med predočenji"
 #: playlist/playlistlistcontainer.cpp:75
 #: ../bin/src/ui_playlistlistcontainer.h:122
 msgid "Delete"
-msgstr ""
+msgstr "Izbriši"
 
 #: internet/groovesharkservice.cpp:521 internet/groovesharkservice.cpp:1289
 msgid "Delete Grooveshark playlist"
@@ -1447,7 +1447,7 @@ msgstr "Izbriši predvajane epizode"
 
 #: playlist/playlistlistcontainer.cpp:295
 msgid "Delete playlists"
-msgstr ""
+msgstr "Izbriši sezname predvajanja"
 
 #: ui/equalizer.cpp:190 ../bin/src/ui_equalizer.h:124
 msgid "Delete preset"
@@ -1532,7 +1532,7 @@ msgstr "Trajanje onemogočenja"
 
 #: ../bin/src/ui_appearancesettingspage.h:289
 msgid "Disable moodbar generation"
-msgstr ""
+msgstr "Onemogoči ustvarjanje moodbara"
 
 #: globalsearch/searchproviderstatuswidget.cpp:47
 #: ../bin/src/ui_notificationssettingspage.h:405
@@ -1665,7 +1665,7 @@ msgstr "Črka pogona"
 
 #: ../bin/src/ui_dropboxsettingspage.h:103
 msgid "Dropbox"
-msgstr ""
+msgstr "Dropbox"
 
 #: ../bin/src/ui_dynamicplaylistcontrols.h:109
 msgid "Dynamic mode is on"
@@ -1715,7 +1715,7 @@ msgstr "Omogoči podporo Wii Remote"
 
 #: ../bin/src/ui_equalizer.h:126
 msgid "Enable equalizer"
-msgstr "Omogoči izenačevalnik"
+msgstr "Omogoči uravnalnik"
 
 #: ../bin/src/ui_wiimotesettingspage.h:187
 msgid "Enable shortcuts only when Clementine is focused"
@@ -1784,7 +1784,7 @@ msgstr "Vnesite povezavo do pretoka medmrežnega radia:"
 
 #: playlist/playlistlistcontainer.cpp:183
 msgid "Enter the name of the folder"
-msgstr ""
+msgstr "Vnesite ime mape"
 
 #: ../bin/src/ui_libraryfilterwidget.h:87
 msgid "Entire collection"
@@ -1792,7 +1792,7 @@ msgstr "Celotna zbirka"
 
 #: ../bin/src/ui_equalizer.h:118 ../bin/src/ui_mainwindow.h:693
 msgid "Equalizer"
-msgstr "Izenačevalnik"
+msgstr "Uravnalnik"
 
 #: core/commandlineoptions.cpp:164
 msgid "Equivalent to --log-levels *:1"
@@ -2378,7 +2378,7 @@ msgstr "Vstavi ..."
 msgid "Installed"
 msgstr "Nameščeno"
 
-#: core/database.cpp:608
+#: core/database.cpp:611
 msgid "Integrity check"
 msgstr "Preverjanje celovitosti"
 
@@ -2664,7 +2664,7 @@ msgstr "Nalaganje skladb"
 msgid "Loading stream"
 msgstr "Nalaganje pretoka"
 
-#: playlist/songloaderinserter.cpp:79 ui/edittagdialog.cpp:229
+#: playlist/songloaderinserter.cpp:79 ui/edittagdialog.cpp:231
 msgid "Loading tracks"
 msgstr "Nalaganje skladb"
 
@@ -2963,7 +2963,7 @@ msgstr "Omrežje"
 msgid "Network Proxy"
 msgstr "Omrežni posrednik"
 
-#: playlist/playlistdelegates.cpp:299 ui/edittagdialog.cpp:479
+#: playlist/playlistdelegates.cpp:299 ui/edittagdialog.cpp:481
 msgid "Never"
 msgstr "Nikoli"
 
@@ -2980,7 +2980,7 @@ msgstr "Nikoli ne začni s predvajanjem"
 #: playlist/playlistlistcontainer.cpp:182
 #: ../bin/src/ui_playlistlistcontainer.h:119
 msgid "New folder"
-msgstr ""
+msgstr "Nova mapa"
 
 #: ui/mainwindow.cpp:1389 ../bin/src/ui_mainwindow.h:698
 msgid "New playlist"
@@ -3312,7 +3312,7 @@ msgid "Player options"
 msgstr "Možnosti predvajalnika"
 
 #: playlist/playlistcontainer.cpp:273 playlist/playlistmanager.cpp:78
-#: playlist/playlistmanager.cpp:386 playlist/playlisttabbar.cpp:279
+#: playlist/playlistmanager.cpp:386 playlist/playlisttabbar.cpp:284
 msgid "Playlist"
 msgstr "Seznam predvajanja"
 
@@ -3674,7 +3674,7 @@ msgstr "Znova napolni"
 msgid "Reset"
 msgstr "Ponastavi"
 
-#: ui/edittagdialog.cpp:760 ../bin/src/ui_edittagdialog.h:635
+#: ui/edittagdialog.cpp:762 ../bin/src/ui_edittagdialog.h:635
 msgid "Reset play counts"
 msgstr "Ponastavi število predvajanj"
 
@@ -3758,7 +3758,7 @@ msgstr "Shrani prednastavitev"
 msgid "Save this stream in the Internet tab"
 msgstr "Shrani ta pretok v zavihek Medmrežje"
 
-#: ui/edittagdialog.cpp:662 ui/trackselectiondialog.cpp:256
+#: ui/edittagdialog.cpp:664 ui/trackselectiondialog.cpp:256
 msgid "Saving tracks"
 msgstr "Shranjevanje skladb"
 
@@ -3872,7 +3872,7 @@ msgstr "Izberi najboljše možno ujemanje"
 
 #: ../bin/src/ui_appearancesettingspage.h:283
 msgid "Select blur radius:"
-msgstr ""
+msgstr "Izberite polmer zabrisanja"
 
 #: ../bin/src/ui_appearancesettingspage.h:270
 msgid "Select foreground color:"
@@ -4575,7 +4575,7 @@ msgstr "Povezave"
 
 #: ../bin/src/ui_ubuntuonesettingspage.h:110
 msgid "Ubuntu One"
-msgstr ""
+msgstr "Ubuntu One"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:228
 msgid "Ultra wide band (UWB)"
@@ -4589,8 +4589,8 @@ msgstr "Ni bilo mogoče prenesti %1 (%2)"
 #: core/song.cpp:332 library/librarymodel.cpp:301 library/librarymodel.cpp:306
 #: library/librarymodel.cpp:947 playlist/playlistdelegates.cpp:309
 #: playlist/playlistmanager.cpp:394 playlist/playlistmanager.cpp:397
-#: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:416
-#: ui/edittagdialog.cpp:457
+#: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:418
+#: ui/edittagdialog.cpp:459
 msgid "Unknown"
 msgstr "Neznano"
 
@@ -4923,7 +4923,7 @@ msgstr "Včeraj"
 #: playlist/playlistlistcontainer.cpp:296
 #, qt-format
 msgid "You are about to delete %1 playlists, are you sure?"
-msgstr ""
+msgstr "Pravkar boste izbrisali %1 seznamov predvajanja, ali ste prepričani?"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:132
 msgid "You are about to download the following albums"
@@ -5090,7 +5090,7 @@ msgstr "med"
 msgid "biggest first"
 msgstr "najprej največji"
 
-#: playlist/playlistview.cpp:201 ui/edittagdialog.cpp:450
+#: playlist/playlistview.cpp:201 ui/edittagdialog.cpp:452
 msgid "bpm"
 msgstr "udarcev/min"
 
@@ -5137,7 +5137,7 @@ msgstr "večje kot"
 msgid "in the last"
 msgstr "v zadnjih"
 
-#: playlist/playlistview.cpp:203 ui/edittagdialog.cpp:452
+#: playlist/playlistview.cpp:203 ui/edittagdialog.cpp:454
 #: internet/spotifysettingspage.cpp:60 internet/spotifysettingspage.cpp:61
 #: internet/spotifysettingspage.cpp:62
 msgid "kbps"

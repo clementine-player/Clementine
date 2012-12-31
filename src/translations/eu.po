@@ -631,7 +631,7 @@ msgstr "Errorea gertatu da gailura iTunes datu-basea kopiatzerakoan"
 msgid "An error occurred loading the iTunes database"
 msgstr "Errorea gertatu da iTunes datu-basea kargatzerakoan"
 
-#: ui/edittagdialog.cpp:655
+#: ui/edittagdialog.cpp:657
 #, qt-format
 msgid "An error occurred writing metadata to '%1'"
 msgstr "Errorea gertatu da '%1'-(e)ra metadatuak idazterakoan"
@@ -676,7 +676,7 @@ msgstr "\"%1\" aurrezarpena ezabatu?"
 msgid "Are you sure you want to delete this playlist?"
 msgstr "Erreprodukzio-zerrenda hau ezabatu?"
 
-#: ui/edittagdialog.cpp:761
+#: ui/edittagdialog.cpp:763
 msgid "Are you sure you want to reset this song's statistics?"
 msgstr "Abesti honen estatistikak berrezarri?"
 
@@ -773,7 +773,7 @@ msgstr "Atzeko planoko irudia"
 msgid "Background opacity"
 msgstr "Atzeko planoko opakotasuna"
 
-#: core/database.cpp:669
+#: core/database.cpp:672
 msgid "Backing up database"
 msgstr ""
 
@@ -1231,24 +1231,24 @@ msgstr "Ezin izan da %1 irteera-fitxategia ireki"
 msgid "Cover Manager"
 msgstr "Azal-kudeatzailea"
 
-#: ui/edittagdialog.cpp:435
+#: ui/edittagdialog.cpp:437
 msgid "Cover art from embedded image"
 msgstr "Irudi txertatu bateko azalak"
 
-#: ui/edittagdialog.cpp:437
+#: ui/edittagdialog.cpp:439
 #, qt-format
 msgid "Cover art loaded automatically from %1"
 msgstr "%1-(e)tik automatikoki kargaturiko azalak"
 
-#: ui/edittagdialog.cpp:430
+#: ui/edittagdialog.cpp:432
 msgid "Cover art manually unset"
 msgstr "Eskuz berrezarritako azalak"
 
-#: ui/edittagdialog.cpp:439
+#: ui/edittagdialog.cpp:441
 msgid "Cover art not set"
 msgstr "Ezarri gabeko azalak"
 
-#: ui/edittagdialog.cpp:433
+#: ui/edittagdialog.cpp:435
 #, qt-format
 msgid "Cover art set from %1"
 msgstr "%1-(e)tik ezarritako azalak"
@@ -1370,7 +1370,7 @@ msgstr "DBus bide-izena"
 msgid "Dance"
 msgstr "Dance"
 
-#: core/database.cpp:623
+#: core/database.cpp:626
 msgid ""
 "Database corruption detected. Please read https://code.google.com/p"
 "/clementine-player/wiki/DatabaseCorruption for instructions on how to "
@@ -2377,7 +2377,7 @@ msgstr "Txertatu"
 msgid "Installed"
 msgstr "Instalatuta"
 
-#: core/database.cpp:608
+#: core/database.cpp:611
 msgid "Integrity check"
 msgstr ""
 
@@ -2663,7 +2663,7 @@ msgstr "Abestiak kargatzen"
 msgid "Loading stream"
 msgstr "Jarioa kargatzen"
 
-#: playlist/songloaderinserter.cpp:79 ui/edittagdialog.cpp:229
+#: playlist/songloaderinserter.cpp:79 ui/edittagdialog.cpp:231
 msgid "Loading tracks"
 msgstr "Pistak kargatzen"
 
@@ -2962,7 +2962,7 @@ msgstr "Sarea"
 msgid "Network Proxy"
 msgstr "Sareko proxy-a"
 
-#: playlist/playlistdelegates.cpp:299 ui/edittagdialog.cpp:479
+#: playlist/playlistdelegates.cpp:299 ui/edittagdialog.cpp:481
 msgid "Never"
 msgstr "Inoiz ez"
 
@@ -3311,7 +3311,7 @@ msgid "Player options"
 msgstr "Erreproduzitzailearen aukerak"
 
 #: playlist/playlistcontainer.cpp:273 playlist/playlistmanager.cpp:78
-#: playlist/playlistmanager.cpp:386 playlist/playlisttabbar.cpp:279
+#: playlist/playlistmanager.cpp:386 playlist/playlisttabbar.cpp:284
 msgid "Playlist"
 msgstr "Erreprodukzio-zerrenda"
 
@@ -3673,7 +3673,7 @@ msgstr "Birpopulatu"
 msgid "Reset"
 msgstr "Berrezarri"
 
-#: ui/edittagdialog.cpp:760 ../bin/src/ui_edittagdialog.h:635
+#: ui/edittagdialog.cpp:762 ../bin/src/ui_edittagdialog.h:635
 msgid "Reset play counts"
 msgstr "Berrezarri erreprodukzio kopurua"
 
@@ -3757,7 +3757,7 @@ msgstr "Gorde aurre-ezarpena"
 msgid "Save this stream in the Internet tab"
 msgstr "Gorde jario hau Internet fitxan"
 
-#: ui/edittagdialog.cpp:662 ui/trackselectiondialog.cpp:256
+#: ui/edittagdialog.cpp:664 ui/trackselectiondialog.cpp:256
 msgid "Saving tracks"
 msgstr "Pistak gordetzen"
 
@@ -4588,8 +4588,8 @@ msgstr "Ezin izan da %1 deskargatu (%2)"
 #: core/song.cpp:332 library/librarymodel.cpp:301 library/librarymodel.cpp:306
 #: library/librarymodel.cpp:947 playlist/playlistdelegates.cpp:309
 #: playlist/playlistmanager.cpp:394 playlist/playlistmanager.cpp:397
-#: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:416
-#: ui/edittagdialog.cpp:457
+#: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:418
+#: ui/edittagdialog.cpp:459
 msgid "Unknown"
 msgstr "Ezezaguna"
 
@@ -5089,7 +5089,7 @@ msgstr "tartean"
 msgid "biggest first"
 msgstr "handienak aurretik"
 
-#: playlist/playlistview.cpp:201 ui/edittagdialog.cpp:450
+#: playlist/playlistview.cpp:201 ui/edittagdialog.cpp:452
 msgid "bpm"
 msgstr "bpm"
 
@@ -5136,7 +5136,7 @@ msgstr "handiagoa baino"
 msgid "in the last"
 msgstr "azkenean"
 
-#: playlist/playlistview.cpp:203 ui/edittagdialog.cpp:452
+#: playlist/playlistview.cpp:203 ui/edittagdialog.cpp:454
 #: internet/spotifysettingspage.cpp:60 internet/spotifysettingspage.cpp:61
 #: internet/spotifysettingspage.cpp:62
 msgid "kbps"
