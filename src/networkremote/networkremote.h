@@ -7,8 +7,8 @@
 
 #include "core/player.h"
 #include "core/application.h"
-#include "incomingxmlparser.h"
-#include "outgoingxmlcreator.h"
+#include "incomingdataparser.h"
+#include "outgoingdatacreator.h"
 
 class NetworkRemote : public QThread {
     Q_OBJECT
@@ -29,8 +29,8 @@ public slots:
 private:
   QTcpServer* server_;
   QList<QTcpSocket*>* clients_;
-  IncomingXmlParser* incoming_xml_parser_;
-  OutgoingXmlCreator* outgoing_xml_creator_;
+  IncomingDataParser* incoming_data_parser_;
+  OutgoingDataCreator* outgoing_data_creator_;
   int port_;
   bool use_remote_;
   Application* app_;

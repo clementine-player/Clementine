@@ -62,6 +62,8 @@ endif(HAVE_BREAKPAD)
 include_directories(${CMAKE_SOURCE_DIR}/ext/libclementine-common)
 include_directories(${CMAKE_SOURCE_DIR}/ext/libclementine-tagreader)
 include_directories(${CMAKE_BINARY_DIR}/ext/libclementine-tagreader)
+include_directories(${CMAKE_SOURCE_DIR}/ext/libclementine-remote)
+include_directories(${CMAKE_BINARY_DIR}/ext/libclementine-remote)
 
 cmake_policy(SET CMP0011 NEW)
 include(../cmake/ParseArguments.cmake)
@@ -214,9 +216,8 @@ set(SOURCES
   
   networkremote/networkremotehelper.cpp
   networkremote/networkremote.cpp
-  networkremote/incomingxmlparser.cpp
-  networkremote/outgoingxmlcreator.cpp
-  networkremote/remotexmltags.cpp
+  networkremote/incomingdataparser.cpp
+  networkremote/outgoingdatacreator.cpp
 
   playlist/dynamicplaylistcontrols.cpp
   playlist/playlist.cpp
@@ -493,9 +494,8 @@ set(HEADERS
   
   networkremote/networkremotehelper.h
   networkremote/networkremote.h
-  networkremote/incomingxmlparser.h
-  networkremote/outgoingxmlcreator.h
-  networkremote/remotexmltags.h
+  networkremote/incomingdataparser.h
+  networkremote/outgoingdatacreator.h
 
   playlist/dynamicplaylistcontrols.h
   playlist/playlist.h
@@ -1140,6 +1140,7 @@ add_dependencies(clementine_lib pot)
 target_link_libraries(clementine_lib
   libclementine-common
   libclementine-tagreader
+  libclementine-remote
   ${SHA2_LIBRARIES}
   ${TAGLIB_LIBRARIES}
   ${MYGPOQT_LIBRARIES}

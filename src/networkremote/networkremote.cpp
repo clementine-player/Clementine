@@ -21,6 +21,7 @@
 
 #include "networkremote.h"
 
+#include <QDataStream>
 #include <QSettings>
 
 const char* NetworkRemote::kSettingsGroup = "NetworkRemote";
@@ -34,8 +35,8 @@ NetworkRemote::NetworkRemote(Application* app)
 
 NetworkRemote::~NetworkRemote() {
   server_->close();
-  delete incoming_xml_parser_;
-  delete outgoing_xml_creator_;
+  delete incoming_data_parser_;
+  delete outgoing_data_creator_;
 }
 
 void NetworkRemote::ReadSettings() {
@@ -52,18 +53,18 @@ void NetworkRemote::ReadSettings() {
 
 void NetworkRemote::SetupServer() {
   server_ = new QTcpServer();
-  incoming_xml_parser_  = new IncomingXmlParser(app_);
-  outgoing_xml_creator_ = new OutgoingXmlCreator(app_);
+  incoming_data_parser_  = new IncomingDataParser(app_);
+  outgoing_data_creator_ = new OutgoingDataCreator(app_);
 
   connect(app_->current_art_loader(),
           SIGNAL(ArtLoaded(const Song&, const QString&, const QImage&)),
-          outgoing_xml_creator_,
+          outgoing_data_creator_,
           SLOT(CurrentSongChanged(const Song&, const QString&, const QImage&)));
 }
 
 void NetworkRemote::StartServer() {
   if (!app_) {
-    qLog(Error) << "Start Server called before having an application!";
+    qLog(Error) << "Start Server called without having an application!";
     return;
   }
   // Check if user desires to start a network remote server
@@ -91,9 +92,7 @@ void NetworkRemote::StopServer() {
 }
 
 void NetworkRemote::ReloadSettings() {
-  if (server_->isListening()) {
-    server_->close();
-  }
+  StopServer();
   StartServer();
 }
 
@@ -101,29 +100,27 @@ void NetworkRemote::AcceptConnection() {
   if (!clients_) {
     // Create a new QList with clients
     clients_ = new QList<QTcpSocket*>();
-    outgoing_xml_creator_->SetClients(clients_);
+    outgoing_data_creator_->SetClients(clients_);
 
     // Setting up the signals, but only once
-    connect(incoming_xml_parser_, SIGNAL(SendClementineInfos()),
-            outgoing_xml_creator_, SLOT(SendClementineInfos()));
-    connect(incoming_xml_parser_, SIGNAL(SendFirstData()),
-            outgoing_xml_creator_, SLOT(SendFirstData()));
-    connect(incoming_xml_parser_, SIGNAL(SendAllPlaylists()),
-            outgoing_xml_creator_, SLOT(SendAllPlaylists()));
-    connect(incoming_xml_parser_, SIGNAL(SendPlaylistSongs(int)),
-            outgoing_xml_creator_, SLOT(SendPlaylistSongs(int)));
+    connect(incoming_data_parser_, SIGNAL(SendClementineInfos()),
+            outgoing_data_creator_, SLOT(SendClementineInfos()));
+    connect(incoming_data_parser_, SIGNAL(SendFirstData()),
+            outgoing_data_creator_, SLOT(SendFirstData()));
+    connect(incoming_data_parser_, SIGNAL(SendAllPlaylists()),
+            outgoing_data_creator_, SLOT(SendAllPlaylists()));
+    connect(incoming_data_parser_, SIGNAL(SendPlaylistSongs(int)),
+            outgoing_data_creator_, SLOT(SendPlaylistSongs(int)));
 
     connect(app_->playlist_manager(), SIGNAL(ActiveChanged(Playlist*)),
-            outgoing_xml_creator_, SLOT(ActiveChanged(Playlist*)));
+            outgoing_data_creator_, SLOT(ActiveChanged(Playlist*)));
     connect(app_->playlist_manager(), SIGNAL(PlaylistChanged(Playlist*)),
-            outgoing_xml_creator_, SLOT(ActiveChanged(Playlist*)));
+            outgoing_data_creator_, SLOT(PlaylistChanged(Playlist*)));
 
-    connect(app_->player(), SIGNAL(VolumeChanged(int)), outgoing_xml_creator_,
+    connect(app_->player(), SIGNAL(VolumeChanged(int)), outgoing_data_creator_,
             SLOT(VolumeChanged(int)));
     connect(app_->player()->engine(), SIGNAL(StateChanged(Engine::State)),
-            outgoing_xml_creator_, SLOT(StateChanged(Engine::State)));
-
-    qLog(Info) << "Signals connected!";
+            outgoing_data_creator_, SLOT(StateChanged(Engine::State)));
   }
   QTcpSocket* client = server_->nextPendingConnection();
 
@@ -134,16 +131,14 @@ void NetworkRemote::AcceptConnection() {
 }
 
 void NetworkRemote::IncomingData() {
-  QByteArray buf;
   QTcpSocket* client =  static_cast<QTcpSocket*>(QObject::sender());
 
-  buf = client->read(client->bytesAvailable());
+  // Now read all the data from the socket
+  QByteArray data;
+  data = client->readAll();
+  incoming_data_parser_->Parse(data);
 
-  QString strbuf(buf);
-  incoming_xml_parser_->Parse(&strbuf);
-
-  qLog(Debug) << "Data = " << buf << "Size = " << buf.size();
-  if (incoming_xml_parser_->close_connection()) {
+  if (incoming_data_parser_->close_connection()) {
     client->close();
   }
 }

@@ -1,18 +1,17 @@
-#ifndef INCOMINGXMLPARSER_H
-#define PARSEINCOMINGXML_H
-
-#include <QDomDocument>
+#ifndef INCOMINGDATAPARSER_H
+#define INCOMINGDATAPARSER_H
 
 #include "core/player.h"
 #include "core/application.h"
+#include "remotecontrolmessages.pb.h"
 
-class IncomingXmlParser : public QObject {
+class IncomingDataParser : public QObject {
   Q_OBJECT
 public:
-  IncomingXmlParser(Application* app);
-  ~IncomingXmlParser();
+  IncomingDataParser(Application* app);
+  ~IncomingDataParser();
 
-  void Parse(QString* xml_data);
+  void Parse(const QByteArray& pb_data);
   bool close_connection();
 
 signals:
@@ -35,9 +34,8 @@ private:
   Application* app_;
   bool close_connection_;
 
-  void ChangeVolume(QDomNode& child);
-  void GetPlaylistSongs(QDomNode& child);
-  void ChangeSong(QDomNode& child);
+  void GetPlaylistSongs(pb::remote::Message* msg);
+  void ChangeSong(pb::remote::Message* msg);
 };
 
-#endif // PARSEINCOMINGXML_H
+#endif // INCOMINGDATAPARSER_H
