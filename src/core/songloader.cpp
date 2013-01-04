@@ -583,7 +583,8 @@ void SongLoader::ErrorMessageReceived(GstMessage* msg) {
   free(debugs);
 
   if (state_ == WaitingForType &&
-      message_str == "Could not determine type of stream.") {
+      message_str == gst_error_get_message(
+          GST_STREAM_ERROR, GST_STREAM_ERROR_TYPE_NOT_FOUND)) {
     // Don't give up - assume it's a playlist and see if one of our parsers can
     // read it.
     state_ = WaitingForMagic;
