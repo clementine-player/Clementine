@@ -31,6 +31,10 @@
 #include <QSysInfo>
 #include <QUrl>
 
+#ifdef Q_OS_DARWIN
+  #include "core/mac_startup.h"
+#endif
+
 
 const char* CrashSender::kUploadURL =
     "http://" CRASHREPORTING_HOSTNAME "/upload/crash";
@@ -163,7 +167,7 @@ QList<CrashSender::ClientInfoPair> CrashSender::ClientInfo() const {
   // Get the OS version
 #if defined(Q_OS_MAC)
   ret.append(ClientInfoPair("os", "mac"));
-  ret.append(ClientInfoPair("os_version", QString::number(QSysInfo::MacintoshVersion)));
+  ret.append(ClientInfoPair("os_version", mac::GetOSXVersion()));
 #elif defined(Q_OS_WIN)
   ret.append(ClientInfoPair("os", "win"));
   ret.append(ClientInfoPair("os_version", QString::number(QSysInfo::WindowsVersion)));

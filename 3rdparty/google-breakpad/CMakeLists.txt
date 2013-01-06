@@ -77,6 +77,7 @@ elseif(APPLE)
     client/mac/crash_generation/crash_generation_client.cc
     client/mac/Framework/Breakpad.mm
     client/mac/Framework/OnDemandServer.mm
+    client/mac/handler/breakpad_nlist_64.cc
     client/mac/handler/dynamic_images.cc
     client/mac/handler/exception_handler.cc
     client/mac/handler/minidump_generator.cc

@@ -477,7 +477,7 @@ int main(int argc, char *argv[]) {
 
   // Test the crash reporting system
   if (options.crash()) {
-    *(reinterpret_cast<int*>(0)) = 0;
+    *(reinterpret_cast<volatile int*>(0)) = 0;
   }
 
   int ret = a.exec();

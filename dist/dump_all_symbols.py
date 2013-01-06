@@ -9,8 +9,11 @@ import re
 import requests
 import shutil
 import subprocess
+import sys
+import tempfile
 
 LDD_RE = re.compile(r'^\t([^ ]+) => ([^ ]+) ', re.MULTILINE)
+OTOOL_RE = re.compile(r'^\t([^ ]+) \(', re.MULTILINE)
 
 DEFAULT_CRASHREPORTING_HOSTNAME = "crashes.clementine-player.org"
 DEFAULT_SYMBOLS_DIRECTORY = "symbols"
@@ -20,6 +23,57 @@ UPLOAD_URL = "http://%s/upload/symbols"
 SYMBOLCHECK_URL = "http://%s/symbolcheck"
 
 
+class BaseDumperImpl(object):
+  def GetLinkedLibraries(self, filename):
+    raise NotImplementedError
+
+  def DebugSymbolsFilename(self, filename):
+    return filename
+
+
+class LinuxDumperImpl(BaseDumperImpl):
+  def GetLinkedLibraries(self, filename):
+    stdout = subprocess.check_output(["ldd", filename])
+    for match in LDD_RE.finditer(stdout):
+      yield os.path.realpath(match.group(2))
+
+
+class MacDumperImpl(BaseDumperImpl):
+  def GetLinkedLibraries(self, filename):
+    stdout = subprocess.check_output(["otool", "-L", filename])
+    executable_path = os.path.dirname(filename)
+    for match in OTOOL_RE.finditer(stdout):
+      path = match.group(1)
+      path = path.replace("@executable_path", executable_path)
+      path = path.replace("@loader_path", executable_path)
+      yield path
+
+  def DebugSymbolsFilename(self, filename):
+    class Context(object):
+      def __init__(self):
+        self.temp_dir = tempfile.mkdtemp()
+        self.temp_file = os.path.join(self.temp_dir, os.path.basename(filename))
+
+      def __enter__(self):
+        logging.info("Reading dwarf symbols from '%s'", filename)
+
+        # Extract the dwarf symbols into the temporary file
+        dsymutil = subprocess.Popen(
+            ["dsymutil", filename, "-f", "-o", self.temp_file],
+            stdout=subprocess.PIPE)
+        stdout, _ = dsymutil.communicate()
+
+        if "no debug symbols" in stdout:
+          return filename
+        else:
+          return self.temp_file
+
+      def __exit__(self, exc_type, exc_value, traceback):
+        shutil.rmtree(self.temp_dir)
+
+    return Context()
+
+
 class Dumper(object):
   def __init__(self, symbols_directory, dump_syms_binary):
     self.symbols_directory = symbols_directory
@@ -27,6 +81,11 @@ class Dumper(object):
 
     self.visited_executables = set()
     self.binary_namehashes = []
+
+    if sys.platform == "darwin":
+      self.impl = MacDumperImpl()
+    else:
+      self.impl = LinuxDumperImpl()
 
   def NormaliseFilename(self, filename):
     return os.path.abspath(filename)
@@ -43,10 +102,15 @@ class Dumper(object):
       return
     self.visited_executables.add(binary_filename)
 
+    if not os.path.exists(binary_filename):
+      logging.warning("Skipping nonexistent file '%s'", binary_filename)
+      return
+
     # Run dump_syms
-    stdout = subprocess.check_output(
-        [self.dump_syms_binary, binary_filename],
-        stderr=subprocess.PIPE)
+    with self.impl.DebugSymbolsFilename(binary_filename) as symbol_filename:
+      stdout = subprocess.check_output(
+          [self.dump_syms_binary, symbol_filename],
+          stderr=subprocess.PIPE)
 
     # The first line of the output contains the hash.
     first_line = stdout[0:stdout.find("\n")]
@@ -71,13 +135,8 @@ class Dumper(object):
       handle.write(stdout)
 
     # Now do the same for any linked libraries.
-    for path in self.GetLinkedLibraries(binary_filename):
+    for path in self.impl.GetLinkedLibraries(binary_filename):
       self.Dump(path)
-
-  def GetLinkedLibraries(self, filename):
-    stdout = subprocess.check_output(["ldd", filename])
-    for match in LDD_RE.finditer(stdout):
-      yield os.path.realpath(match.group(2))
 
 
 class Uploader(object):
@@ -141,7 +200,8 @@ def main():
   args = parser.parse_args()
 
   logging.basicConfig(level=logging.DEBUG,
-                      format="%(asctime)s  %(levelname)s  %(message)s")
+                      format="%(asctime)s %(levelname)-7s %(message)s")
+  logging.getLogger("requests").setLevel(logging.WARNING)
 
   dumper = Dumper(args.symbols_directory, args.dump_syms_binary)
   uploader = Uploader(args.crashreporting_hostname, dumper)

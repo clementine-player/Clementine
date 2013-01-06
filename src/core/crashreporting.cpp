@@ -29,13 +29,16 @@ char* CrashReporting::sLogFilename = NULL;
 
 bool CrashReporting::SendCrashReport(int argc, char** argv) {
 #ifdef HAVE_BREAKPAD
-  if (argc != 4 || strcmp(argv[1], kSendCrashReportOption) != 0) {
+  if (argc != kSendCrashReportArgumentCount ||
+      strcmp(argv[1], kSendCrashReportOption) != 0) {
     return false;
   }
 
   QApplication a(argc, argv);
+  const QStringList& args = a.arguments();
 
-  CrashSender sender(argv[2], argv[3]);
+  CrashSender sender(CrashReporting::minidump_filename_from_args(args),
+                     CrashReporting::log_filename_from_args(args));
   if (sender.Start()) {
     a.exec();
   }

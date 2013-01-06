@@ -25,10 +25,47 @@
 
 #include "client/mac/handler/exception_handler.h"
 
+const int CrashReporting::kSendCrashReportArgumentCount = 5;
+
+namespace {
+
+bool Handler(const char* dump_path, const char* minidump_id,
+             void* context, bool succeeded) {
+  CrashReporting::Print(
+      "Clementine has crashed!  A crash report has been saved to:\n  ");
+  CrashReporting::Print(dump_path);
+  CrashReporting::Print("/");
+  CrashReporting::Print(minidump_id);
+  CrashReporting::Print(
+      ".dmp\n\n"
+      "Please send this to the developers so they can fix the problem:\n"
+      "  http://code.google.com/p/clementine-player/issues/entry\n\n");
+
+  if (CrashReporting::application_path()) {
+    // We know the path to clementine, so exec it again to prompt the user to
+    // upload the report.
+    const char* argv[] = {
+      CrashReporting::application_path(),
+      CrashReporting::kSendCrashReportOption,
+      dump_path,
+      minidump_id,
+      CrashReporting::log_filename(),
+      NULL
+    };
+
+    syscall(SYS_execve, CrashReporting::application_path(), argv, NULL);
+  }
+
+  return true;
+}
+
+} // namespace
+
+
 CrashReporting::CrashReporting()
   : handler_(new google_breakpad::ExceptionHandler(
         QDir::tempPath().toLocal8Bit().constData(), NULL,
-        CrashReporting::Handler, this, true, NULL)) {
+        Handler, this, true, NULL)) {
 }
 
 CrashReporting::~CrashReporting() {
@@ -40,25 +77,10 @@ void CrashReporting::Print(const char* message) {
   }
 }
 
-bool CrashReporting::Handler(const char* dump_path,
-                             const char* minidump_id,
-                             void* context,
-                             bool succeeded) {
-  Print("Clementine has crashed!  A crash report has been saved to:\n  ");
-  Print(dump_path);
-  Print("/");
-  Print(minidump_id);
-  Print("\n\nPlease send this to the developers so they can fix the problem:\n"
-        "  http://code.google.com/p/clementine-player/issues/entry\n\n");
-
-  if (sPath) {
-    // We know the path to clementine, so exec it again to prompt the user to
-    // upload the report.
-    const char* argv[] = {sPath, kSendCrashReportOption, dump_path, minidump_id, NULL};
-
-    syscall(SYS_execve, sPath, argv, NULL);
-  }
-
-  return true;
+QString CrashReporting::minidump_filename_from_args(const QStringList& args) {
+  return args[2] + "/" + args[3] + ".dmp";
 }
 
+QString CrashReporting::log_filename_from_args(const QStringList& args) {
+  return args[4];
+}

@@ -63,7 +63,8 @@
 #include <QtDebug>
 
 QDebug operator <<(QDebug dbg, NSObject* object) {
-  QString ns_format = [[NSString stringWithFormat: @"%@", object] UTF8String];
+  QString ns_format = QString::fromUtf8(
+      [[NSString stringWithFormat: @"%@", object] UTF8String]);
   dbg.nospace() << ns_format;
   return dbg.space();
 }
@@ -448,6 +449,15 @@ void EnableFullScreen(const QWidget& main_window) {
   NSView* view = reinterpret_cast<NSView*>(main_window.winId());
   NSWindow* window = [view window];
   [window setCollectionBehavior: kFullScreenPrimary];
+}
+
+QString GetOSXVersion() {
+  NSString* version_string = [
+      [NSDictionary dictionaryWithContentsOfFile:
+          @"/System/Library/CoreServices/SystemVersion.plist"]
+      objectForKey:@"ProductVersion"];
+
+  return QString::fromUtf8([version_string UTF8String]);
 }
 
 }  // namespace mac

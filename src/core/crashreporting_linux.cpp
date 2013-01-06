@@ -24,6 +24,8 @@
 #include "client/linux/handler/exception_handler.h"
 #include "third_party/lss/linux_syscall_support.h"
 
+const int CrashReporting::kSendCrashReportArgumentCount = 4;
+
 namespace {
 
 bool Handler(const google_breakpad::MinidumpDescriptor& dump,
@@ -69,4 +71,12 @@ void CrashReporting::Print(const char* message) {
   if (message) {
     sys_write(1, message, strlen(message));
   }
+}
+
+QString CrashReporting::minidump_filename_from_args(const QStringList& args) {
+  return args[2];
+}
+
+QString CrashReporting::log_filename_from_args(const QStringList& args) {
+  return args[3];
 }

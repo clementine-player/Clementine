@@ -27,6 +27,7 @@ QString GetBundlePath();
 QString GetResourcesPath();
 QString GetApplicationSupportPath();
 QString GetMusicDirectory();
+QString GetOSXVersion();
 
 void EnableFullScreen(const QWidget& main_window);
 

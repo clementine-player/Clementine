@@ -19,6 +19,7 @@
 #define CRASHREPORTING_H
 
 #include <QString>
+#include <QStringList>
 
 #include <boost/scoped_ptr.hpp>
 
@@ -35,6 +36,7 @@ public:
   ~CrashReporting();
 
   static const char* kSendCrashReportOption;
+  static const int kSendCrashReportArgumentCount;
 
   // If the commandline contains the --send-crash-report option, the user will
   // be prompted to send the crash report and the function will return true
@@ -55,6 +57,10 @@ public:
 
   static const char* application_path() { return sPath; }
   static const char* log_filename() { return sLogFilename; }
+
+private:
+  static QString minidump_filename_from_args(const QStringList& args);
+  static QString log_filename_from_args(const QStringList& args);
 
 private:
   Q_DISABLE_COPY(CrashReporting);
