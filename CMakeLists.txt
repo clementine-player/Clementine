@@ -423,6 +423,7 @@ add_subdirectory(tools/ultimate_lyrics_parser)
 add_subdirectory(ext/libclementine-common)
 add_subdirectory(ext/libclementine-tagreader)
 add_subdirectory(ext/clementine-tagreader)
+add_subdirectory(ext/libclementine-remote)
 
 option(WITH_DEBIAN OFF)
 if(WITH_DEBIAN)

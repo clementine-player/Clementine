@@ -36,6 +36,8 @@ class LibraryBackend;
 class LibraryModel;
 class MoodbarController;
 class MoodbarLoader;
+class NetworkRemote;
+class NetworkRemoteHelper;
 class Player;
 class PlaylistBackend;
 class PodcastDownloader;
@@ -73,6 +75,8 @@ public:
   GPodderSync* gpodder_sync() const { return gpodder_sync_; }
   MoodbarLoader* moodbar_loader() const { return moodbar_loader_; }
   MoodbarController* moodbar_controller() const { return moodbar_controller_; }
+  NetworkRemote* network_remote() const { return network_remote_; }
+  NetworkRemoteHelper* network_remote_helper() const { return network_remote_helper_; }
 
   LibraryBackend* library_backend() const;
   LibraryModel* library_model() const;
@@ -111,6 +115,8 @@ private:
   GPodderSync* gpodder_sync_;
   MoodbarLoader* moodbar_loader_;
   MoodbarController* moodbar_controller_;
+  NetworkRemote* network_remote_;
+  NetworkRemoteHelper* network_remote_helper_;
 
   QList<QObject*> objects_in_threads_;
   QList<QThread*> threads_;

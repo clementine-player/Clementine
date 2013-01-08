@@ -62,6 +62,8 @@ endif(HAVE_BREAKPAD)
 include_directories(${CMAKE_SOURCE_DIR}/ext/libclementine-common)
 include_directories(${CMAKE_SOURCE_DIR}/ext/libclementine-tagreader)
 include_directories(${CMAKE_BINARY_DIR}/ext/libclementine-tagreader)
+include_directories(${CMAKE_SOURCE_DIR}/ext/libclementine-remote)
+include_directories(${CMAKE_BINARY_DIR}/ext/libclementine-remote)
 
 cmake_policy(SET CMP0011 NEW)
 include(../cmake/ParseArguments.cmake)
@@ -211,6 +213,11 @@ set(SOURCES
   musicbrainz/chromaprinter.cpp
   musicbrainz/musicbrainzclient.cpp
   musicbrainz/tagfetcher.cpp
+  
+  networkremote/networkremotehelper.cpp
+  networkremote/networkremote.cpp
+  networkremote/incomingdataparser.cpp
+  networkremote/outgoingdatacreator.cpp
 
   playlist/dynamicplaylistcontrols.cpp
   playlist/playlist.cpp
@@ -323,6 +330,7 @@ set(SOURCES
   ui/iconloader.cpp
   ui/mainwindow.cpp
   ui/networkproxysettingspage.cpp
+  ui/networkremotesettingspage.cpp
   ui/notificationssettingspage.cpp
   ui/organisedialog.cpp
   ui/organiseerrordialog.cpp
@@ -483,6 +491,11 @@ set(HEADERS
   musicbrainz/acoustidclient.h
   musicbrainz/musicbrainzclient.h
   musicbrainz/tagfetcher.h
+  
+  networkremote/networkremotehelper.h
+  networkremote/networkremote.h
+  networkremote/incomingdataparser.h
+  networkremote/outgoingdatacreator.h
 
   playlist/dynamicplaylistcontrols.h
   playlist/playlist.h
@@ -580,6 +593,7 @@ set(HEADERS
   ui/globalshortcutssettingspage.h
   ui/mainwindow.h
   ui/networkproxysettingspage.h
+  ui/networkremotesettingspage.h
   ui/notificationssettingspage.h
   ui/organisedialog.h
   ui/organiseerrordialog.h
@@ -697,6 +711,7 @@ set(UI
   ui/globalshortcutssettingspage.ui
   ui/mainwindow.ui
   ui/networkproxysettingspage.ui
+  ui/networkremotesettingspage.ui
   ui/notificationssettingspage.ui
   ui/organisedialog.ui
   ui/organiseerrordialog.ui
@@ -1125,6 +1140,7 @@ add_dependencies(clementine_lib pot)
 target_link_libraries(clementine_lib
   libclementine-common
   libclementine-tagreader
+  libclementine-remote
   ${SHA2_LIBRARIES}
   ${TAGLIB_LIBRARIES}
   ${MYGPOQT_LIBRARIES}

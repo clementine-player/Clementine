@@ -1,0 +1,73 @@
+package pb.remote;
+
+enum MsgType {
+  // Messages generally send from client to server
+  CONNECT = 0;
+  DISCONNECT = 1;
+  REQUEST_PLAYLISTS = 2;
+  REQUEST_PLAYLIST_SONGS = 3;
+  CHANGE_SONG = 4;
+  SET_VOLUME = 5;
+  
+  // Messages send by both
+  PLAY = 20;
+  PLAYPAUSE = 21;
+  PAUSE = 22;
+  STOP = 23;
+  NEXT = 24;
+  PREV = 25;
+  
+  // Messages send from server to client
+  INFOS = 40;
+  CURRENT_METAINFOS = 41;
+  PLAYLISTS = 42;
+  PLAYLIST_SONGS = 43;
+  KEEP_ALIVE = 44;
+}
+
+enum EngineState {
+  Empty = 0;
+  Idle = 1;
+  Playing = 2;
+  Paused = 3;
+}
+
+message Message {
+  required MsgType msgType = 1;
+  
+  optional EngineState state = 2;
+  optional ClementineInfos infos = 3;
+  optional SongMetadata currentSong = 4;
+  optional int32 volume = 5;
+  repeated Playlist playlists = 6;
+}
+
+message ClementineInfos {
+  optional string version = 1;
+}
+
+message SongMetadata {
+  optional int32 id = 1;
+  optional int32 index = 2;
+  optional string title = 3;
+  optional string album = 4;
+  optional string artist = 5;
+  optional string albumartist = 6;
+  optional int32 track = 7;
+  optional int32 disc = 8;
+  optional string pretty_year = 9;
+  optional string genre = 10;
+  optional int32 playcount = 11;
+  optional string pretty_length = 12;
+  optional string art = 13;
+}
+
+message Playlist {
+  optional int32 id = 1;
+  optional string name = 2;
+  optional int32 item_count = 3;
+  optional bool active = 4;
+  
+  repeated SongMetadata songs = 10;
+}
+

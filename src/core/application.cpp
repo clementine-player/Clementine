@@ -30,6 +30,8 @@
 #include "globalsearch/globalsearch.h"
 #include "library/library.h"
 #include "library/librarybackend.h"
+#include "networkremote/networkremote.h"
+#include "networkremote/networkremotehelper.h"
 #include "playlist/playlistbackend.h"
 #include "playlist/playlistmanager.h"
 #include "podcasts/gpoddersync.h"
@@ -63,7 +65,9 @@ Application::Application(QObject* parent)
     podcast_downloader_(NULL),
     gpodder_sync_(NULL),
     moodbar_loader_(NULL),
-    moodbar_controller_(NULL)
+    moodbar_controller_(NULL),
+    network_remote_(NULL),
+    network_remote_helper_(NULL)
 {
   tag_reader_client_ = new TagReaderClient(this);
   MoveToNewThread(tag_reader_client_);
@@ -99,6 +103,13 @@ Application::Application(QObject* parent)
   moodbar_loader_ = new MoodbarLoader(this, this);
   moodbar_controller_ = new MoodbarController(this, this);
 #endif
+
+  // Network Remote
+  network_remote_ = new NetworkRemote(this);
+  MoveToNewThread(network_remote_);
+
+  network_remote_helper_ = new NetworkRemoteHelper(this);
+  network_remote_helper_->StartServer();
 
   library_->Init();
 
