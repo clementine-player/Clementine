@@ -10,7 +10,7 @@ UrlHandler::LoadResult SubsonicUrlHandler::StartLoading(const QUrl& url) {
   if (service_->login_state() != SubsonicService::LoginState_Loggedin)
     return LoadResult();
 
-  QUrl newurl(url);
-  newurl.setScheme(realscheme());
+  QUrl newurl = service_->BuildRequestUrl("stream");
+  newurl.addQueryItem("id", url.host());
   return LoadResult(url, LoadResult::TrackAvailable, newurl);
 }

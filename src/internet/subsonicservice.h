@@ -67,6 +67,8 @@ class SubsonicService : public InternetService
   void GetIndexes();
   void GetMusicDirectory(const QString &id);
 
+  QUrl BuildRequestUrl(const QString &view);
+
   static const char* kServiceName;
   static const char* kSettingsGroup;
   static const char* kApiVersion;
@@ -79,7 +81,6 @@ class SubsonicService : public InternetService
   QModelIndex GetCurrentIndex();
 
  private:
-  QUrl BuildRequestUrl(const QString &view);
   // Convenience function to reduce QNetworkRequest/QNetworkReply/connect boilerplate
   void Send(const QUrl &url, const char *slot);
 
@@ -91,8 +92,7 @@ class SubsonicService : public InternetService
   QModelIndex context_item_;
   QStandardItem* root_;
   QNetworkAccessManager* network_;
-  SubsonicUrlHandler* http_url_handler_;
-  SubsonicHttpsUrlHandler* https_url_handler_;
+  SubsonicUrlHandler* url_handler_;
 
   // Configuration
   QString server_;

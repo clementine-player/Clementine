@@ -21,13 +21,11 @@ const char* SubsonicService::kApiClientName = "Clementine";
 SubsonicService::SubsonicService(Application* app, InternetModel *parent)
   : InternetService(kServiceName, app, parent, parent),
     network_(new QNetworkAccessManager(this)),
-    http_url_handler_(new SubsonicUrlHandler(this, this)),
-    https_url_handler_(new SubsonicHttpsUrlHandler(this, this)),
+    url_handler_(new SubsonicUrlHandler(this, this)),
     login_state_(LoginState_OtherError),
     item_lookup_()
 {
-  app_->player()->RegisterUrlHandler(http_url_handler_);
-  app_->player()->RegisterUrlHandler(https_url_handler_);
+  app_->player()->RegisterUrlHandler(url_handler_);
   connect(this, SIGNAL(LoginStateChanged(SubsonicService::LoginState)),
           SLOT(onLoginStateChanged(SubsonicService::LoginState)));
 }
@@ -112,11 +110,6 @@ void SubsonicService::GetMusicDirectory(const QString &id)
   Send(url, SLOT(onGetMusicDirectoryFinished()));
 }
 
-QModelIndex SubsonicService::GetCurrentIndex()
-{
-  return context_item_;
-}
-
 QUrl SubsonicService::BuildRequestUrl(const QString &view)
 {
   QUrl url(server_ + "rest/" + view + ".view");
@@ -125,6 +118,11 @@ QUrl SubsonicService::BuildRequestUrl(const QString &view)
   url.addQueryItem("u", username_);
   url.addQueryItem("p", password_);
   return url;
+}
+
+QModelIndex SubsonicService::GetCurrentIndex()
+{
+  return context_item_;
 }
 
 void SubsonicService::Send(const QUrl &url, const char *slot)
@@ -193,9 +191,7 @@ void SubsonicService::ReadTrack(QXmlStreamReader *reader, QStandardItem *parent)
   qint64 length = reader->attributes().value("duration").toString().toInt();
   length *= 1000000000;
   song.set_length_nanosec(length);
-  QUrl url = BuildRequestUrl("stream");
-  url.setScheme(url.scheme() == "https" ? "subsonics" : "subsonic");
-  url.addQueryItem("id", id);
+  QUrl url = QUrl(QString("subsonic://%1").arg(id));
   song.set_url(url);
   song.set_filesize(reader->attributes().value("size").toString().toInt());
 
