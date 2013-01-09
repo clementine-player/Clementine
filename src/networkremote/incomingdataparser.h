@@ -29,6 +29,7 @@ signals:
   void SetVolume(int volume);
   void PlayAt(int i, Engine::TrackChangeFlags change, bool reshuffle);
   void SetActivePlaylist(int id);
+  void ShuffleCurrent();
 
 private:
   Application* app_;

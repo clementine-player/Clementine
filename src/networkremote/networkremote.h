@@ -10,6 +10,8 @@
 #include "incomingdataparser.h"
 #include "outgoingdatacreator.h"
 
+class Application;
+
 class NetworkRemote : public QThread {
     Q_OBJECT
 public:
@@ -18,6 +20,8 @@ public:
 
   NetworkRemote(Application* app);
   ~NetworkRemote();
+
+  void RemoveClient(int index);
 
 public slots:
   void SetupServer();
@@ -28,15 +32,17 @@ public slots:
 
 private:
   QTcpServer* server_;
-  QList<QTcpSocket*>* clients_;
   IncomingDataParser* incoming_data_parser_;
   OutgoingDataCreator* outgoing_data_creator_;
   int port_;
   bool use_remote_;
+  bool signals_connected_;
   Application* app_;
-  bool reading_protobuf_;
-  quint32 expected_length_;
-  QBuffer buffer_;
+
+  QList<QTcpSocket*> clients_;
+  QList<bool> reading_protobuf_;
+  QList<quint32> expected_length_;
+  QList<QBuffer*> buffer_;
 
   void StopServer();
   void ReadSettings();

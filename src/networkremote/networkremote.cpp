@@ -30,12 +30,12 @@ const int NetworkRemote::kDefaultServerPort = 5500;
 NetworkRemote::NetworkRemote(Application* app)
   : app_(app)
 {
-  buffer_.open(QIODevice::ReadWrite);
+  signals_connected_ = false;
 }
 
 
 NetworkRemote::~NetworkRemote() {
-  server_->close();
+  StopServer();
   delete incoming_data_parser_;
   delete outgoing_data_creator_;
 }
@@ -57,6 +57,8 @@ void NetworkRemote::SetupServer() {
   incoming_data_parser_  = new IncomingDataParser(app_);
   outgoing_data_creator_ = new OutgoingDataCreator(app_);
 
+  outgoing_data_creator_->SetClients(&clients_);
+
   connect(app_->current_art_loader(),
           SIGNAL(ArtLoaded(const Song&, const QString&, const QImage&)),
           outgoing_data_creator_,
@@ -77,8 +79,6 @@ void NetworkRemote::StartServer() {
 
   qLog(Info) << "Starting network remote";
 
-  clients_ = NULL;
-
   connect(server_, SIGNAL(newConnection()), this, SLOT(AcceptConnection()));
 
   server_->listen(QHostAddress::Any, port_);
@@ -89,6 +89,15 @@ void NetworkRemote::StartServer() {
 void NetworkRemote::StopServer() {
   if (server_->isListening()) {
     server_->close();
+    clients_.clear();
+    expected_length_.clear();
+    reading_protobuf_.clear();
+
+    // Delete all QBuffers
+    foreach (QBuffer* b, buffer_) {
+      delete b;
+    }
+    buffer_.clear();
   }
 }
 
@@ -98,10 +107,8 @@ void NetworkRemote::ReloadSettings() {
 }
 
 void NetworkRemote::AcceptConnection() {
-  if (!clients_) {
-    // Create a new QList with clients
-    clients_ = new QList<QTcpSocket*>();
-    outgoing_data_creator_->SetClients(clients_);
+  if (!signals_connected_) {
+    signals_connected_ = true;
 
     // Setting up the signals, but only once
     connect(incoming_data_parser_, SIGNAL(SendClementineInfos()),
@@ -125,7 +132,12 @@ void NetworkRemote::AcceptConnection() {
   }
   QTcpSocket* client = server_->nextPendingConnection();
 
-  clients_->push_back(client);
+  clients_.push_back(client);
+  reading_protobuf_.append(false);
+  expected_length_.append(0);
+  QBuffer* buf = new QBuffer();
+  buf->open(QIODevice::ReadWrite);
+  buffer_.push_back(buf);
 
   // Connect to the slot IncomingData when receiving data
   connect(client, SIGNAL(readyRead()), this, SLOT(IncomingData()));
@@ -134,55 +146,48 @@ void NetworkRemote::AcceptConnection() {
 void NetworkRemote::IncomingData() {
   QTcpSocket* client =  static_cast<QTcpSocket*>(QObject::sender());
 
+  int which = clients_.indexOf(client);
+  qDebug() << "Which:" << which;
+
   while (client->bytesAvailable()) {
-    if (!reading_protobuf_) {
+    if (!reading_protobuf_[which]) {
       // Read the length of the next message
       QDataStream s(client);
-      s >> expected_length_;
+      s >> expected_length_[which];
 
-      reading_protobuf_ = true;
+      reading_protobuf_[which] = true;
     }
 
     // Read some of the message
-    buffer_.write(client->read(expected_length_ - buffer_.size()));
+    buffer_[which]->write(
+      client->read(expected_length_[which] - buffer_[which]->size()));
 
     // Did we get everything?
-    if (buffer_.size() == expected_length_) {
+    if (buffer_[which]->size() == expected_length_[which]) {
       // Parse the message
-      qLog(Debug) << "Parsing message";
-      incoming_data_parser_->Parse(buffer_.data());
+      incoming_data_parser_->Parse(buffer_[which]->data());
 
       // Clear the buffer
-      buffer_.close();
-      buffer_.setData(QByteArray());
-      buffer_.open(QIODevice::ReadWrite);
-      reading_protobuf_ = false;
+      buffer_[which]->close();
+      buffer_[which]->setData(QByteArray());
+      buffer_[which]->open(QIODevice::ReadWrite);
+      reading_protobuf_[which] = false;
     }
   }
-/*
-  // Now read all the data from the socket
-  QDataStream s(client);
-  qint32 expected_length;
+}
 
-  while (client->bytesAvailable()) {
-    QBuffer buf;
-    buf.setData();
-    buf.open(QIODevice::ReadWrite);
-    s >> expected_length;
+void NetworkRemote::RemoveClient(int index) {
+  // Remove client
+  QTcpSocket* client = clients_[index];
+  delete client;
+  clients_.removeAt(index);
 
-    buf.write(client->read(expected_length - buf.size()));
-    qLog(Debug) << "Length:" << buf.size() << "/" << expected_length;
+  // Remove QBuffer
+  QBuffer* buf = buffer_[index];
+  delete buf;
+  buffer_.removeAt(index);
 
-
-    if (buf.size() == expected_length) {
-      qLog(Debug) << "Buf:" << buf.data();
-      incoming_data_parser_->Parse(buf.data());
-    }
-
-    if (incoming_data_parser_->close_connection()) {
-      client->close();
-    }
-
-    buf.close();
-  }*/
+  // Remove other QList entries
+  reading_protobuf_.removeAt(index);
+  expected_length_.removeAt(index);
 }

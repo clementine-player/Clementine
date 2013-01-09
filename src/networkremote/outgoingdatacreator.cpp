@@ -16,6 +16,7 @@
 */
 
 #include "outgoingdatacreator.h"
+#include "networkremote.h"
 #include "core/logging.h"
 
 OutgoingDataCreator::OutgoingDataCreator(Application* app)
@@ -40,7 +41,7 @@ void OutgoingDataCreator::SetClients(QList<QTcpSocket*>* clients) {
 
 void OutgoingDataCreator::SendDataToClients(pb::remote::Message* msg) {
   // Check if we have clients to send data to
-  if (!clients_ || clients_->size() == 0) {
+  if (!clients_ || clients_->empty()) {
     return;
   }
 
@@ -49,9 +50,6 @@ void OutgoingDataCreator::SendDataToClients(pb::remote::Message* msg) {
     // Check if the client is still active
     if (sock->state() == QTcpSocket::ConnectedState) {
       std::string data = msg->SerializeAsString();
-      /*QByteArray b64_data = QByteArray::fromRawData(data.data(), data.length());
-      sock->write(b64_data.toBase64());
-      sock->write("\n");*/
 
       QDataStream s(sock);
       s << qint32(data.length());
@@ -60,7 +58,7 @@ void OutgoingDataCreator::SendDataToClients(pb::remote::Message* msg) {
       sock->flush();
 
     } else {
-      clients_->removeAt(clients_->indexOf(sock));
+      app_->network_remote()->RemoveClient(clients_->indexOf(sock));
     }
   }
 }

@@ -43,6 +43,8 @@ IncomingDataParser::IncomingDataParser(Application* app)
           app_->player(), SLOT(PlayAt(int,Engine::TrackChangeFlags,bool)));
   connect(this, SIGNAL(SetActivePlaylist(int)),
           app_->playlist_manager(), SLOT(SetActivePlaylist(int)));
+  connect(this, SIGNAL(ShuffleCurrent()),
+          app_->playlist_manager(), SLOT(ShuffleCurrent()));
 }
 
 IncomingDataParser::~IncomingDataParser() {
@@ -89,6 +91,8 @@ void IncomingDataParser::Parse(const QByteArray& data) {
                                   break;
     case pb::remote::CHANGE_SONG: ChangeSong(&msg);
                                   break;
+    case pb::remote::TOOGLE_SHUFFLE:  emit ShuffleCurrent();
+                                      break;
     default: break;
   }
 }
