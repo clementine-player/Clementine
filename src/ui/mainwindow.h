@@ -60,6 +60,7 @@ class OrganiseDialog;
 class OSD;
 class Player;
 class PlaylistBackend;
+class PlaylistListContainer;
 class PlaylistManager;
 class QueueManager;
 class InternetItem;
@@ -252,6 +253,8 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   void FocusGlobalSearchField();
   void DoGlobalSearch(const QString& query);
 
+  void ShowConsole();
+
  private:
   void ConnectInfoView(SongInfoBase* view);
 
@@ -279,6 +282,7 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   GlobalSearchView* global_search_view_;
   LibraryViewContainer* library_view_;
   FileView* file_view_;
+  PlaylistListContainer* playlist_list_;
   InternetViewContainer* internet_view_;
   DeviceView* device_view_;
   SongInfoView* song_info_view_;
@@ -322,6 +326,7 @@ class MainWindow : public QMainWindow, public PlatformInterface {
   QAction* playlist_queue_;
   QAction* playlist_add_to_another_;
   QList<QAction*> playlistitem_actions_;
+  QAction* playlistitem_actions_separator_;
   QModelIndex playlist_menu_index_;
 
   QSortFilterProxyModel* library_sort_model_;

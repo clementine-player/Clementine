@@ -73,5 +73,8 @@ void RegisterMetaTypes() {
   qDBusRegisterMetaType<TrackMetadata>();
   qDBusRegisterMetaType<TrackIds>();
   qDBusRegisterMetaType<QList<QByteArray> >();
+  qDBusRegisterMetaType<MprisPlaylist>();
+  qDBusRegisterMetaType<MaybePlaylist>();
+  qDBusRegisterMetaType<MprisPlaylistList>();
 #endif
 }

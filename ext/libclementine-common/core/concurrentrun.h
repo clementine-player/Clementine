@@ -18,10 +18,8 @@
 #ifndef CONCURRENTRUN_H
 #define CONCURRENTRUN_H
 
-#include <tr1/functional>
-
-#include <boost/type_traits.hpp>
-#include <boost/utility.hpp>
+#include <boost/bind.hpp>
+#include <boost/function.hpp>
 
 #include <QFuture>
 #include <QRunnable>
@@ -42,12 +40,6 @@
   ThreadFunctor classes are used to store a functor and its arguments, and
   Run() functions are used for convenience: to directly create a new
   ThreadFunctor object and start it.
-
-  Currently, only functions with zero, one, two or three arguments are
-  supported, but other might be added easily for X arguments by defining a new
-  ThreadFunctorX class (and eventually a second class for handling functions
-  which return void: see existing classes for examples), and add new Run()
-  function.
 */
 
 
@@ -74,217 +66,39 @@ class ThreadFunctorBase : public QFutureInterface<ReturnType>, public QRunnable 
   virtual void run() = 0;
 };
 
-// Base implemenation for functions having a result to be returned
-template<typename ReturnType, class Enabled = void>
+template <typename ReturnType, typename... Args>
 class ThreadFunctor : public ThreadFunctorBase<ReturnType> {
  public:
-  ThreadFunctor() {}
+  ThreadFunctor(boost::function<ReturnType (Args...)> function,
+                Args... args)
+      : function_(boost::bind(function, args...)) {
+  }
 
-  virtual void run() = 0;
-
-  void End() {
-    this->reportResult(result_);
+  virtual void run() {
+    this->reportResult(function_());
     this->reportFinished();
   }
 
- protected:
-  ReturnType result_;
+ private:
+  boost::function<ReturnType()> function_;
 };
 
-// Base implementation for functions with void result
-template<typename ReturnType>
-class ThreadFunctor<ReturnType, typename boost::enable_if<boost::is_void<ReturnType> >::type>
-  : public ThreadFunctorBase<ReturnType> {
+// Partial specialisation for void return type.
+template <typename... Args>
+class ThreadFunctor <void, Args...> : public ThreadFunctorBase<void> {
  public:
-  ThreadFunctor() {}
+  ThreadFunctor(boost::function<void (Args...)> function,
+                Args... args)
+      : function_(boost::bind(function, args...)) {
+  }
 
-  virtual void run() = 0;
-
-  void End() {
+  virtual void run() {
+    function_();
     this->reportFinished();
   }
-};
 
-/*
-  ThreadFunctor with no arguments:
-*/
-// Non-void result
-template<typename ReturnType, class Enabled = void>
-class ThreadFunctor0 : public ThreadFunctor<ReturnType> {
-public:
-  ThreadFunctor0(std::tr1::function<ReturnType ()> function)
-    : function_(function)
-  { }
-
-  void run() {
-    this->result_ = function_();
-    ThreadFunctor<ReturnType>::End();
-  }
-
-private:
-  std::tr1::function<ReturnType ()> function_;
-};
-
-// Void result
-template<typename ReturnType>
-class ThreadFunctor0<ReturnType, typename boost::enable_if<boost::is_void<ReturnType> >::type>
-  : public ThreadFunctor<ReturnType> {
-public:
-  ThreadFunctor0(std::tr1::function<ReturnType ()> function)
-    : function_(function)
-  { }
-
-  void run() {
-    function_();
-    ThreadFunctor<ReturnType>::End();
-  }
-
-private:
-  std::tr1::function<ReturnType ()> function_;
-};
-
-/*
-  ThreadFunctor with one argument:
-*/
-// Non-void result
-template<typename ReturnType, typename Arg, class Enabled = void>
-class ThreadFunctor1 : public ThreadFunctor<ReturnType> {
-public:
-  ThreadFunctor1(std::tr1::function<ReturnType (Arg)> function,
-                const Arg& arg)
-    : function_(function),
-      arg_(arg)
-  { }
-
-  void run() {
-    this->result_ = function_(arg_);
-    ThreadFunctor<ReturnType>::End();
-  }
-
-private:
-  std::tr1::function<ReturnType (Arg)> function_;
-  Arg arg_;
-};
-
-// Void result
-template<typename ReturnType, typename Arg>
-class ThreadFunctor1<ReturnType, Arg, typename boost::enable_if<boost::is_void<ReturnType> >::type>
-  : public ThreadFunctor<ReturnType> {
-public:
-  ThreadFunctor1(std::tr1::function<ReturnType (Arg)> function,
-                 const Arg& arg)
-    : function_(function),
-      arg_(arg)
-  { }
-
-  void run() {
-    function_(arg_);
-    ThreadFunctor<ReturnType>::End();
-  }
-
-private:
-  std::tr1::function<ReturnType (Arg)> function_;
-  Arg arg_;
-};
-
-/*
-  ThreadFunctor with two arguments:
-*/
-// Non-void result
-template<typename ReturnType, typename Arg1, typename Arg2, class Enabled = void>
-class ThreadFunctor2 : public ThreadFunctor<ReturnType> {
-public:
-  ThreadFunctor2(std::tr1::function<ReturnType (Arg1, Arg2)> function,
-                const Arg1& arg1, const Arg2& arg2)
-    : function_(function),
-      arg1_(arg1),
-      arg2_(arg2)
-  { }
-
-  void run() {
-    this->result_ = function_(arg1_, arg2_);
-    ThreadFunctor<ReturnType>::End();
-  }
-
-private:
-  std::tr1::function<ReturnType (Arg1, Arg2)> function_;
-  Arg1 arg1_;
-  Arg2 arg2_;
-};
-
-// Void result
-template<typename ReturnType, typename Arg1, typename Arg2>
-class ThreadFunctor2<ReturnType, Arg1, Arg2, typename boost::enable_if<boost::is_void<ReturnType> >::type>
-  : public ThreadFunctor<ReturnType> {
-public:
-  ThreadFunctor2(std::tr1::function<ReturnType (Arg1, Arg2)> function,
-                const Arg1& arg1, const Arg2& arg2)
-    : function_(function),
-      arg1_(arg1),
-      arg2_(arg2)
-  { }
-
-  void run() {
-    function_(arg1_, arg2_);
-    ThreadFunctor<ReturnType>::End();
-  }
-
-private:
-  std::tr1::function<ReturnType (Arg1, Arg2)> function_;
-  Arg1 arg1_;
-  Arg2 arg2_;
-};
-
-/*
-  ThreadFunctor with three arguments:
-*/
-// Non-void result
-template<typename ReturnType, typename Arg1, typename Arg2, typename Arg3, class Enabled = void>
-class ThreadFunctor3 : public ThreadFunctor<ReturnType> {
-public:
-  ThreadFunctor3(std::tr1::function<ReturnType (Arg1, Arg2, Arg3)> function,
-                const Arg1& arg1, const Arg2& arg2, const Arg3& arg3)
-    : function_(function),
-      arg1_(arg1),
-      arg2_(arg2),
-      arg3_(arg3)
-  { }
-
-  void run() {
-    this->result_ = function_(arg1_, arg2_, arg3_);
-    ThreadFunctor<ReturnType>::End();
-  }
-
-private:
-  std::tr1::function<ReturnType (Arg1, Arg2, Arg3)> function_;
-  Arg1 arg1_;
-  Arg2 arg2_;
-  Arg3 arg3_;
-};
-
-// Void result
-template<typename ReturnType, typename Arg1, typename Arg2, typename Arg3>
-class ThreadFunctor3<ReturnType, Arg1, Arg2, Arg3, typename boost::enable_if<boost::is_void<ReturnType> >::type>
-  : public ThreadFunctor<ReturnType> {
-public:
-  ThreadFunctor3(std::tr1::function<ReturnType (Arg1, Arg2, Arg3)> function,
-                const Arg1& arg1, const Arg2& arg2, const Arg3& arg3)
-    : function_(function),
-      arg1_(arg1),
-      arg2_(arg2),
-      arg3_(arg3)
-  { }
-
-  void run() {
-    function_(arg1_, arg2_, arg3_);
-    ThreadFunctor<ReturnType>::End();
-  }
-
-private:
-  std::tr1::function<ReturnType (Arg1, Arg2, Arg3)> function_;
-  Arg1 arg1_;
-  Arg2 arg2_;
-  Arg3 arg3_;
+ private:
+  boost::function<void()> function_;
 };
 
 
@@ -293,39 +107,32 @@ private:
 */
 namespace ConcurrentRun {
 
-  template<typename ReturnType>
+  // Empty argument form.
+  template <typename ReturnType>
   QFuture<ReturnType> Run(
       QThreadPool* threadpool,
-      std::tr1::function<ReturnType ()> function) {
-
-    return (new ThreadFunctor0<ReturnType>(function))->Start(threadpool);
+      boost::function<ReturnType ()> function) {
+    return (new ThreadFunctor<ReturnType>(function))->Start(threadpool);
   }
 
-  template<typename ReturnType, typename Arg>
+  // Function object with arguments form.
+  template <typename ReturnType, typename... Args>
   QFuture<ReturnType> Run(
       QThreadPool* threadpool,
-      std::tr1::function<ReturnType (Arg)> function,
-      const Arg& arg) {
-
-    return (new ThreadFunctor1<ReturnType, Arg>(function, arg))->Start(threadpool);
+      boost::function<ReturnType (Args...)> function,
+      const Args&... args) {
+    return (new ThreadFunctor<ReturnType, Args...>(
+        function, args...))->Start(threadpool);
   }
 
-  template<typename ReturnType, typename Arg1, typename Arg2>
+  // Support passing C function pointers instead of function objects.
+  template <typename ReturnType, typename... Args>
   QFuture<ReturnType> Run(
       QThreadPool* threadpool,
-      std::tr1::function<ReturnType (Arg1, Arg2)> function,
-      const Arg1& arg1, const Arg2& arg2) {
-
-    return (new ThreadFunctor2<ReturnType, Arg1, Arg2>(function, arg1, arg2))->Start(threadpool);
-  }
-
-  template<typename ReturnType, typename Arg1, typename Arg2, typename Arg3>
-  QFuture<ReturnType> Run(
-      QThreadPool* threadpool,
-      std::tr1::function<ReturnType (Arg1, Arg2, Arg3)> function,
-      const Arg1& arg1, const Arg2& arg2, const Arg3& arg3) {
-
-    return (new ThreadFunctor3<ReturnType, Arg1, Arg2, Arg3>(function, arg1, arg2, arg3))->Start(threadpool);
+      ReturnType (*function) (Args...),
+      const Args&... args) {
+    return Run(
+        threadpool, boost::function<ReturnType (Args...)>(function), args...);
   }
 }
 

@@ -26,10 +26,13 @@
 #include <QStringList>
 #include <QXmlStreamReader>
 
-const char* AmazonCoverProvider::kAccessKey = "AKIAJ4QO3GQTSM3A43BQ";
-const char* AmazonCoverProvider::kSecretAccessKey = "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";
+// Amazon has a web crawler that looks for access keys in public source code,
+// so we apply some sophisticated encryption to these keys.
+const char* AmazonCoverProvider::kAccessKeyB64 = "QUtJQUlRSDI2UlZNNlVaNFdBNlE=";
+const char* AmazonCoverProvider::kSecretAccessKeyB64 =
+    "ZTQ2UGczM0JRNytDajd4MWR6eFNvODVFd2tpdi9FbGVCcUZjMkVmMQ==";
 const char* AmazonCoverProvider::kUrl = "http://ecs.amazonaws.com/onca/xml";
-const char* AmazonCoverProvider::kAssociateTag = "clementine-20";
+const char* AmazonCoverProvider::kAssociateTag = "clemmusiplay-20";
 
 AmazonCoverProvider::AmazonCoverProvider(QObject* parent)
   : CoverProvider("Amazon", parent),
@@ -46,7 +49,7 @@ bool AmazonCoverProvider::StartSearch(const QString& artist, const QString& albu
 
   // Must be sorted by parameter name
   ArgList args = ArgList()
-      << Arg("AWSAccessKeyId", kAccessKey)
+      << Arg("AWSAccessKeyId", QByteArray::fromBase64(kAccessKeyB64))
       << Arg("AssociateTag", kAssociateTag)
       << Arg("Keywords", artist + " " + album)
       << Arg("Operation", "ItemSearch")
@@ -72,7 +75,8 @@ bool AmazonCoverProvider::StartSearch(const QString& artist, const QString& albu
 
   const QByteArray data_to_sign = QString("GET\n%1\n%2\n%3").arg(
         url.host(), url.path(), query_items.join("&")).toAscii();
-  const QByteArray signature(Utilities::HmacSha256(kSecretAccessKey, data_to_sign));
+  const QByteArray signature(Utilities::HmacSha256(
+        QByteArray::fromBase64(kSecretAccessKeyB64), data_to_sign));
 
   // Add the signature to the request
   encoded_args << EncodedArg("Signature", QUrl::toPercentEncoding(signature.toBase64()));
@@ -129,7 +133,7 @@ void AmazonCoverProvider::ReadLargeImage(QXmlStreamReader* reader, CoverSearchRe
     case QXmlStreamReader::StartElement:
       if (reader->name() == "URL") {
         CoverSearchResult result;
-        result.image_url = reader->readElementText();
+        result.image_url = QUrl(reader->readElementText());
         results->append(result);
       } else {
         reader->skipCurrentElement();

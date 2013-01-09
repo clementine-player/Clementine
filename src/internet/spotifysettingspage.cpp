@@ -17,6 +17,7 @@
 
 #include "spotifysettingspage.h"
 
+#include "config.h"
 #include "spotifymessages.pb.h"
 #include "spotifyservice.h"
 #include "internetmodel.h"
@@ -73,10 +74,10 @@ void SpotifySettingsPage::BlobStateChanged() {
   ui_->account_group->setEnabled(installed);
   ui_->blob_status->setText(installed ? tr("Installed") : tr("Not installed"));
 
-#ifdef Q_OS_LINUX
+#ifdef HAVE_SPOTIFY_DOWNLOADER
   ui_->download_blob->setEnabled(!installed);
 #else
-  ui_->download_blob->setEnabled(false);
+  ui_->download_blob->hide();
 #endif
 }
 

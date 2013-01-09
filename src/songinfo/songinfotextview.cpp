@@ -40,14 +40,20 @@ SongInfoTextView::SongInfoTextView(QWidget* parent)
   ReloadSettings();
 }
 
-void SongInfoTextView::ReloadSettings() {
+qreal SongInfoTextView::FontSize() {
   QSettings s;
   s.beginGroup(kSettingsGroup);
+  return s.value("font_size", kDefaultFontSize).toReal();
+}
 
-  qreal size = s.value("font_size", kDefaultFontSize).toReal();
+QFont SongInfoTextView::Font() {
   QFont font;
-  font.setPointSizeF(size);
-  document()->setDefaultFont(font);
+  font.setPointSizeF(FontSize());
+  return font;
+}
+
+void SongInfoTextView::ReloadSettings() {
+  document()->setDefaultFont(Font());
 }
 
 void SongInfoTextView::resizeEvent(QResizeEvent* e) {

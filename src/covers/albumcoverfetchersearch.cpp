@@ -15,19 +15,21 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "albumcoverfetcher.h"
 #include "albumcoverfetchersearch.h"
-#include "coverprovider.h"
-#include "coverproviders.h"
-#include "core/logging.h"
-#include "core/network.h"
+
+#include <cmath>
 
 #include <QMutexLocker>
 #include <QNetworkReply>
 #include <QTimer>
 #include <QtDebug>
 
-#include <cmath>
+#include "albumcoverfetcher.h"
+#include "coverprovider.h"
+#include "coverproviders.h"
+#include "core/closure.h"
+#include "core/logging.h"
+#include "core/network.h"
 
 const int AlbumCoverFetcherSearch::kSearchTimeoutMs = 10000;
 const int AlbumCoverFetcherSearch::kImageLoadTimeoutMs = 2500;
@@ -146,8 +148,10 @@ void AlbumCoverFetcherSearch::FetchMoreImages() {
 
     qLog(Debug) << "Loading" << result.image_url << "from" << result.provider;
 
-    QNetworkReply* image_reply = network_->get(QNetworkRequest(result.image_url));
-    connect(image_reply, SIGNAL(finished()), SLOT(ProviderCoverFetchFinished()));
+    RedirectFollower* image_reply = new RedirectFollower(
+        network_->get(QNetworkRequest(result.image_url)));
+    NewClosure(image_reply, SIGNAL(finished()), this,
+               SLOT(ProviderCoverFetchFinished(RedirectFollower*)), image_reply);
     pending_image_loads_[image_reply] = result.provider;
     image_load_timeout_->AddReply(image_reply);
 
@@ -160,8 +164,7 @@ void AlbumCoverFetcherSearch::FetchMoreImages() {
   }
 }
 
-void AlbumCoverFetcherSearch::ProviderCoverFetchFinished() {
-  QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
+void AlbumCoverFetcherSearch::ProviderCoverFetchFinished(RedirectFollower* reply) {
   reply->deleteLater();
   const QString provider = pending_image_loads_.take(reply);
 
@@ -243,7 +246,7 @@ void AlbumCoverFetcherSearch::Cancel() {
   if (!pending_requests_.isEmpty()) {
     TerminateSearch();
   } else if (!pending_image_loads_.isEmpty()) {
-    foreach (QNetworkReply* reply, pending_image_loads_.keys()) {
+    foreach (RedirectFollower* reply, pending_image_loads_.keys()) {
       reply->abort();
     }
     pending_image_loads_.clear();

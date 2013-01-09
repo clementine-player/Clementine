@@ -73,6 +73,9 @@ class LibraryView : public AutoExpandingTreeView {
 
   void FilterReturnPressed();
 
+  void SaveFocus();
+  void RestoreFocus();
+
  signals:
   void ShowConfigDialog();
 
@@ -107,6 +110,8 @@ class LibraryView : public AutoExpandingTreeView {
  private:
   void RecheckIsEmpty();
   void ShowInVarious(bool on);
+  bool RestoreLevelFocus(const QModelIndex& parent = QModelIndex());
+  void SaveContainerPath(const QModelIndex& child);
 
  private:
   Application* app_;
@@ -139,6 +144,11 @@ class LibraryView : public AutoExpandingTreeView {
   boost::scoped_ptr<EditTagDialog> edit_tag_dialog_;
 
   bool is_in_keyboard_search_;
+
+  // Save focus
+  Song last_selected_song_;
+  QString last_selected_container_;
+  QSet<QString> last_selected_path_;
 };
 
 #endif // LIBRARYVIEW_H

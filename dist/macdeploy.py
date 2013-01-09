@@ -15,14 +15,18 @@
 #  You should have received a copy of the GNU General Public License
 #  along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 
+import logging
 import os
 import re
 import subprocess
 import sys
 import traceback
 
+LOGGER = logging.getLogger("macdeploy")
+
 FRAMEWORK_SEARCH_PATH=[
     '/target',
+    '/target/lib',
     '/Library/Frameworks',
     os.path.join(os.environ['HOME'], 'Library/Frameworks')
 ]
@@ -78,6 +82,10 @@ GSTREAMER_PLUGINS=[
 
     # CD support
     'libgstcdio.so',
+
+    # RTSP streaming
+    'libgstrtp.so',
+    'libgstrtsp.so',
 ]
 
 GSTREAMER_SEARCH_PATH=[
@@ -106,6 +114,10 @@ QT_PLUGINS_SEARCH_PATH=[
     '/Developer/Applications/Qt/plugins',
 ]
 
+GIO_MODULES_SEARCH_PATH=[
+    '/target/lib/gio/modules',
+]
+
 
 class Error(Exception):
   pass
@@ -131,7 +143,7 @@ class CouldNotFindGstreamerPluginError(Error):
   pass
 
 
-class CouldNotFindScriptPluginError(Error):
+class CouldNotFindGioModuleError(Error):
   pass
 
 
@@ -189,6 +201,7 @@ def FindFramework(path):
   for search_path in FRAMEWORK_SEARCH_PATH:
     abs_path = os.path.join(search_path, path)
     if os.path.exists(abs_path):
+      LOGGER.debug("Found framework '%s' in '%s'", path, search_path)
       return abs_path
 
   raise CouldNotFindFrameworkError(path)
@@ -199,6 +212,7 @@ def FindLibrary(path):
   for search_path in LIBRARY_SEARCH_PATH:
     abs_path = os.path.join(search_path, path)
     if os.path.exists(abs_path):
+      LOGGER.debug("Found library '%s' in '%s'", path, search_path)
       return abs_path
 
   raise CouldNotFindFrameworkError(path)
@@ -264,6 +278,7 @@ def CopyLibrary(path):
   new_path = os.path.join(frameworks_dir, os.path.basename(path))
   args = ['ditto', '--arch=x86_64', path, new_path]
   commands.append(args)
+  LOGGER.info("Copying library '%s'", path)
   return new_path
 
 def CopyPlugin(path, subdir):
@@ -272,6 +287,7 @@ def CopyPlugin(path, subdir):
   commands.append(args)
   args = ['ditto', '--arch=x86_64', path, new_path]
   commands.append(args)
+  LOGGER.info("Copying plugin '%s'", path)
   return new_path
 
 def CopyFramework(path):
@@ -290,6 +306,7 @@ def CopyFramework(path):
     args = ['cp', '-r', menu_nib, resources_dir]
     commands.append(args)
 
+  LOGGER.info("Copying framework '%s'", path)
   return os.path.join(full_path, parts[-1])
 
 def FixId(path, library_name):
@@ -360,30 +377,49 @@ def FindGstreamerPlugin(name):
   raise CouldNotFindGstreamerPluginError(name)
 
 
-FixBinary(binary)
+def FindGioModule(name):
+  for path in GIO_MODULES_SEARCH_PATH:
+    if os.path.exists(path):
+      for dir, dirs, files in os.walk(path):
+        if name in files:
+          return os.path.join(dir, name)
+  raise CouldNotFindGioModuleError(name)
 
-for plugin in GSTREAMER_PLUGINS:
-  FixPlugin(FindGstreamerPlugin(plugin), 'gstreamer')
 
-FixPlugin(FindGstreamerPlugin('gst-plugin-scanner'), '.')
+def main():
+  logging.basicConfig(filename="macdeploy.log", level=logging.DEBUG,
+                      format='%(asctime)s %(levelname)-8s %(message)s')
 
-try:
-  FixPlugin('clementine-spotifyblob', '.')
-  FixPlugin('clementine-tagreader', '.')
-except:
-  print 'Failed to find blob: %s' % traceback.format_exc()
+  FixBinary(binary)
 
-for plugin in QT_PLUGINS:
-  FixPlugin(FindQtPlugin(plugin), os.path.dirname(plugin))
+  for plugin in GSTREAMER_PLUGINS:
+    FixPlugin(FindGstreamerPlugin(plugin), 'gstreamer')
 
-if len(sys.argv) <= 2:
-  print 'Would run %d commands:' % len(commands)
+  FixPlugin(FindGstreamerPlugin('gst-plugin-scanner'), '.')
+  FixPlugin(FindGioModule('libgiognutls.so'), 'gio-modules')
+  FixPlugin(FindGioModule('libgiolibproxy.so'), 'gio-modules')
+
+  try:
+    FixPlugin('clementine-spotifyblob', '.')
+    FixPlugin('clementine-tagreader', '.')
+  except:
+    print 'Failed to find blob: %s' % traceback.format_exc()
+
+  for plugin in QT_PLUGINS:
+    FixPlugin(FindQtPlugin(plugin), os.path.dirname(plugin))
+
+  if len(sys.argv) <= 2:
+    print 'Would run %d commands:' % len(commands)
+    for command in commands:
+      print ' '.join(command)
+
+    print 'OK?'
+    raw_input()
+
   for command in commands:
-    print ' '.join(command)
+    p = subprocess.Popen(command)
+    os.waitpid(p.pid, 0)
 
-  print 'OK?'
-  raw_input()
 
-for command in commands:
-  p = subprocess.Popen(command)
-  os.waitpid(p.pid, 0)
+if __name__ == "__main__":
+  main()

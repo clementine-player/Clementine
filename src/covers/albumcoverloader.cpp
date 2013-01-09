@@ -16,18 +16,20 @@
 */
 
 #include "albumcoverloader.h"
-#include "config.h"
-#include "core/logging.h"
-#include "core/network.h"
-#include "core/tagreaderclient.h"
-#include "core/utilities.h"
-#include "internet/internetmodel.h"
 
 #include <QPainter>
 #include <QDir>
 #include <QCoreApplication>
 #include <QUrl>
 #include <QNetworkReply>
+
+#include "config.h"
+#include "core/closure.h"
+#include "core/logging.h"
+#include "core/network.h"
+#include "core/tagreaderclient.h"
+#include "core/utilities.h"
+#include "internet/internetmodel.h"
 
 #ifdef HAVE_SPOTIFY
 # include "internet/spotifyservice.h"
@@ -162,8 +164,10 @@ AlbumCoverLoader::TryLoadResult AlbumCoverLoader::TryLoadImage(
   }
 
   if (filename.toLower().startsWith("http://")) {
-    QNetworkReply* reply = network_->get(QNetworkRequest(filename));
-    connect(reply, SIGNAL(finished()), SLOT(RemoteFetchFinished()));
+    QUrl url(filename);
+    QNetworkReply* reply = network_->get(QNetworkRequest(url));
+    NewClosure(reply, SIGNAL(finished()), this,
+               SLOT(RemoteFetchFinished(QNetworkReply*)), reply);
 
     remote_tasks_.insert(reply, task);
     return TryLoadResult(true, false, QImage());
@@ -208,10 +212,7 @@ void AlbumCoverLoader::SpotifyImageLoaded(const QString& id, const QImage& image
   emit ImageLoaded(task.id, scaled, image);
 }
 
-void AlbumCoverLoader::RemoteFetchFinished() {
-  QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
-  if (!reply)
-    return;
+void AlbumCoverLoader::RemoteFetchFinished(QNetworkReply* reply) {
   reply->deleteLater();
 
   Task task = remote_tasks_.take(reply);
@@ -225,7 +226,8 @@ void AlbumCoverLoader::RemoteFetchFinished() {
     QNetworkRequest request = reply->request();
     request.setUrl(redirect.toUrl());
     QNetworkReply* redirected_reply = network_->get(request);
-    connect(redirected_reply, SIGNAL(finished()), SLOT(RemoteFetchFinished()));
+    NewClosure(redirected_reply, SIGNAL(finished()), this,
+               SLOT(RemoteFetchFinished(QNetworkReply*)), redirected_reply);
 
     remote_tasks_.insert(redirected_reply, task);
     return;

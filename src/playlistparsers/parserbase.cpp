@@ -42,7 +42,7 @@ void ParserBase::LoadSong(const QString& filename_or_url, qint64 beginning,
     if (url.scheme() == "file") {
       filename = url.toLocalFile();
     } else {
-      song->set_url(QUrl(filename_or_url));
+      song->set_url(QUrl::fromUserInput(filename_or_url));
       song->set_filetype(Song::Type_Stream);
       song->set_valid(true);
       return;

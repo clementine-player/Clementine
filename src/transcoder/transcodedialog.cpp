@@ -56,6 +56,9 @@ TranscodeDialog::TranscodeDialog(QWidget *parent)
   ui_->files->header()->setResizeMode(QHeaderView::ResizeToContents);
 
   log_ui_->setupUi(log_dialog_);
+  QPushButton* clear_button =
+      log_ui_->buttonBox->addButton(tr("Clear"), QDialogButtonBox::ResetRole);
+  connect(clear_button, SIGNAL(clicked()),log_ui_->log, SLOT(clear()));
 
   // Get presets
   QList<TranscoderPreset> presets = Transcoder::GetAllPresets();

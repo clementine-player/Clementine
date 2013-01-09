@@ -74,7 +74,6 @@ public:
   virtual SongList GetSongs(
       const QString& artist, const QString& album, const QueryOptions& opt = QueryOptions()) = 0;
 
-  virtual bool HasCompilations(const QueryOptions& opt = QueryOptions()) = 0;
   virtual SongList GetCompilationSongs(const QString& album, const QueryOptions& opt = QueryOptions()) = 0;
 
   virtual AlbumList GetAllAlbums(const QueryOptions& opt = QueryOptions()) = 0;
@@ -132,7 +131,6 @@ class LibraryBackend : public LibraryBackendInterface {
   SongList GetSongsByAlbum(const QString& album, const QueryOptions& opt = QueryOptions());
   SongList GetSongs(const QString& artist, const QString& album, const QueryOptions& opt = QueryOptions());
 
-  bool HasCompilations(const QueryOptions& opt = QueryOptions());
   SongList GetCompilationSongs(const QString& album, const QueryOptions& opt = QueryOptions());
 
   AlbumList GetAllAlbums(const QueryOptions& opt = QueryOptions());

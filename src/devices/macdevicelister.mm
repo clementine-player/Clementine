@@ -709,7 +709,7 @@ QList<QUrl> MacDeviceLister::MakeDeviceUrls(const QString& serial) {
   }
 
   if (IsCDDevice(serial)) {
-    return QList<QUrl>() << QString("cdda:///dev/r" + serial);
+    return QList<QUrl>() << QUrl(QString("cdda:///dev/r" + serial));
   }
 
   QString bsd_name = current_devices_[serial];
@@ -812,22 +812,12 @@ quint64 MacDeviceLister::DeviceFreeSpace(const QString& serial){
   scoped_nsobject<NSURL> volume_path(
       [[properties objectForKey:(NSString*)kDADiskDescriptionVolumePathKey] copy]);
 
-  FSRef ref;
-  OSStatus err = FSPathMakeRef(
-      (const UInt8*)[[volume_path path] fileSystemRepresentation], &ref, NULL);
-  if (err == noErr) {
-    FSCatalogInfo catalog;
-    err = FSGetCatalogInfo(&ref, kFSCatInfoVolume, &catalog, NULL, NULL, NULL);
-    if (err == noErr) {
-      FSVolumeRefNum volume_ref = catalog.volume;
-      FSVolumeInfo info;
-      err = FSGetVolumeInfo(
-          volume_ref, 0, NULL, kFSVolInfoSizes, &info, NULL, NULL);
-      UInt64 free_bytes = info.freeBytes;
-      return free_bytes;
-    }
+  NSNumber* value = nil;
+  NSError* error = nil;
+  if ([volume_path getResourceValue: &value
+      forKey: NSURLVolumeAvailableCapacityKey error: &error] && value) {
+    return [value unsignedLongLongValue];
   }
-
   return 0;
 }
 

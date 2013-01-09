@@ -36,7 +36,7 @@ public:
   bool StartSearch(const QString& artist, const QString& album, int id);
 
 private slots:
-  void QueryFinished();
+  void QueryFinished(QNetworkReply* reply, int id);
 
 private:
   QMap<QNetworkReply*, int> pending_queries_;

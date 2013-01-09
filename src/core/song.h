@@ -25,8 +25,13 @@
 #include <QVariantMap>
 
 #include "config.h"
-#include "tagreadermessages.pb.h"
 #include "engines/engine_fwd.h"
+
+namespace pb {
+namespace tagreader {
+class SongMetadata;
+}  // namespace tagreader
+}  // namespace pb
 
 class QSqlQuery;
 class QUrl;
@@ -39,7 +44,7 @@ class QUrl;
   struct LIBMTP_track_struct;
 #endif
 
-#if defined(Q_OS_WIN32) && defined(HAVE_SAC)
+#if defined(Q_OS_WIN32)
   struct IWMDMMetaData;
 #endif
 
@@ -120,10 +125,15 @@ class Song {
   void ToMTP(LIBMTP_track_struct* track) const;
 #endif
 
-#if defined(Q_OS_WIN32) && defined(HAVE_SAC)
+#if defined(Q_OS_WIN32)
   void InitFromWmdm(IWMDMMetaData* metadata);
   void ToWmdm(IWMDMMetaData* metadata) const;
 #endif
+
+  // Copies important statistics from the other song to this one, overwriting
+  // any data that already exists.  Useful when you want updated tags from disk
+  // but you want to keep user stats.
+  void MergeUserSetData(const Song& other);
 
   static QString Decode(const QString& tag, const QTextCodec* codec = NULL);
 
@@ -186,6 +196,8 @@ class Song {
 
   const QString& art_automatic() const;
   const QString& art_manual() const;
+
+  const QString& etag() const;
 
   // Returns true if this Song had it's cover manually unset by user.
   bool has_manually_unset_cover() const;
@@ -250,6 +262,7 @@ class Song {
   void set_score(int v);
   void set_cue_path(const QString& v);
   void set_unavailable(bool v);
+  void set_etag(const QString& etag);
 
   // Setters that should only be used by tests
   void set_url(const QUrl& v);
@@ -259,6 +272,7 @@ class Song {
   // Comparison functions
   bool IsMetadataEqual(const Song& other) const;
   bool IsOnSameAlbum(const Song& other) const;
+  bool IsSimilar(const Song& other) const;
 
   bool operator==(const Song& other) const;
 
@@ -279,5 +293,7 @@ typedef QList<Song> SongList;
 Q_DECLARE_METATYPE(QList<Song>);
 
 uint qHash(const Song& song);
+// Hash function using field checked in IsSimilar function
+uint HashSimilar(const Song& song);
 
 #endif // SONG_H

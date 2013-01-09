@@ -17,13 +17,13 @@
 
 #include "fmpsparser.h"
 #include "tagreaderworker.h"
-#include "core/encoding.h"
 #include "core/logging.h"
 #include "core/timeconstants.h"
 
 #include <QCoreApplication>
 #include <QDateTime>
 #include <QFileInfo>
+#include <QNetworkAccessManager>
 #include <QTextCodec>
 #include <QUrl>
 
@@ -54,6 +54,10 @@
 // Taglib added support for FLAC pictures in 1.7.0
 #if (TAGLIB_MAJOR_VERSION > 1) || (TAGLIB_MAJOR_VERSION == 1 && TAGLIB_MINOR_VERSION >= 7)
 # define TAGLIB_HAS_FLAC_PICTURELIST
+#endif
+
+#ifdef HAVE_GOOGLE_DRIVE
+# include "cloudstream.h"
 #endif
 
 
@@ -93,6 +97,7 @@ TagLib::String QStringToTaglibString(const QString& s) {
 TagReaderWorker::TagReaderWorker(QIODevice* socket, QObject* parent)
   : AbstractMessageHandler<pb::tagreader::Message>(socket, parent),
     factory_(new TagLibFileRefFactory),
+    network_(new QNetworkAccessManager),
     kEmbeddedCover("(embedded)")
 {
 }
@@ -123,6 +128,21 @@ void TagReaderWorker::MessageArrived(const pb::tagreader::Message& message) {
           QStringFromStdString(message.load_embedded_art_request().filename()));
     reply.mutable_load_embedded_art_response()->set_data(
           data.constData(), data.size());
+  } else if (message.has_read_cloud_file_request()) {
+#ifdef HAVE_GOOGLE_DRIVE
+    const pb::tagreader::ReadCloudFileRequest& req =
+        message.read_cloud_file_request();
+    if (!ReadCloudFile(
+        QUrl::fromEncoded(QByteArray(req.download_url().data(),
+                                     req.download_url().size())),
+        QStringFromStdString(req.title()),
+        req.size(),
+        QStringFromStdString(req.mime_type()),
+        QStringFromStdString(req.authorisation_header()),
+        reply.mutable_read_cloud_file_response()->mutable_metadata())) {
+      reply.mutable_read_cloud_file_response()->clear_metadata();
+    }
+#endif
   }
 
   SendReply(message, &reply);
@@ -147,24 +167,10 @@ void TagReaderWorker::ReadFile(const QString& filename,
     return;
   }
 
-  // This is single byte encoding, therefore can't be CJK.
-  UniversalEncodingHandler detector(NS_FILTER_NON_CJK);
-
   TagLib::Tag* tag = fileref->tag();
   QTextCodec* codec = NULL;
   if (tag) {
     TagLib::MPEG::File* file = dynamic_cast<TagLib::MPEG::File*>(fileref->file());
-    if (file && (file->ID3v2Tag() || file->ID3v1Tag())) {
-      codec = detector.Guess(*fileref);
-    }
-    if (codec &&
-        codec->name() != "UTF-8" &&
-        codec->name() != "ISO-8859-1") {
-      // Mark tags where we detect an unusual codec as suspicious.
-      song->set_suspicious_tags(true);
-    }
-
-
     Decode(tag->title(), NULL, song->mutable_title());
     Decode(tag->artist(), NULL, song->mutable_artist());
     Decode(tag->album(), NULL, song->mutable_album());
@@ -588,3 +594,82 @@ void TagReaderWorker::DeviceClosed() {
 
   qApp->exit();
 }
+
+#ifdef HAVE_GOOGLE_DRIVE
+bool TagReaderWorker::ReadCloudFile(const QUrl& download_url,
+                                    const QString& title,
+                                    int size,
+                                    const QString& mime_type,
+                                    const QString& authorisation_header,
+                                    pb::tagreader::SongMetadata* song) const {
+  qLog(Debug) << "Loading tags from" << title;
+
+  CloudStream* stream = new CloudStream(
+      download_url, title, size, authorisation_header, network_);
+  stream->Precache();
+  scoped_ptr<TagLib::File> tag;
+  if (mime_type == "audio/mpeg" && title.endsWith(".mp3")) {
+    tag.reset(new TagLib::MPEG::File(
+        stream,  // Takes ownership.
+        TagLib::ID3v2::FrameFactory::instance(),
+        TagLib::AudioProperties::Accurate));
+  } else if (mime_type == "audio/mp4" ||
+             (mime_type == "audio/mpeg" && title.endsWith(".m4a"))) {
+    tag.reset(new TagLib::MP4::File(
+        stream,
+        true,
+        TagLib::AudioProperties::Accurate));
+  } else if (mime_type == "application/ogg" ||
+             mime_type == "audio/ogg") {
+    tag.reset(new TagLib::Ogg::Vorbis::File(
+        stream,
+        true,
+        TagLib::AudioProperties::Accurate));
+  } else if (mime_type == "application/x-flac" ||
+             mime_type == "audio/flac") {
+    tag.reset(new TagLib::FLAC::File(
+        stream,
+        TagLib::ID3v2::FrameFactory::instance(),
+        true,
+        TagLib::AudioProperties::Accurate));
+  } else if (mime_type == "audio/x-ms-wma") {
+    tag.reset(new TagLib::ASF::File(
+        stream,
+        true,
+        TagLib::AudioProperties::Accurate));
+  } else {
+    qLog(Debug) << "Unknown mime type for tagging:" << mime_type;
+    return false;
+  }
+
+  if (stream->num_requests() > 2) {
+    // Warn if pre-caching failed.
+    qLog(Warning) << "Total requests for file:" << title
+                  << stream->num_requests()
+                  << stream->cached_bytes();
+  }
+
+  if (tag->tag() && !tag->tag()->isEmpty()) {
+    song->set_title(tag->tag()->title().toCString(true));
+    song->set_artist(tag->tag()->artist().toCString(true));
+    song->set_album(tag->tag()->album().toCString(true));
+    song->set_filesize(size);
+
+    if (tag->tag()->track() != 0) {
+      song->set_track(tag->tag()->track());
+    }
+    if (tag->tag()->year() != 0) {
+      song->set_year(tag->tag()->year());
+    }
+
+    song->set_type(pb::tagreader::SongMetadata_Type_STREAM);
+
+    if (tag->audioProperties()) {
+      song->set_length_nanosec(tag->audioProperties()->length() * kNsecPerSec);
+    }
+    return true;
+  }
+
+  return false;
+}
+#endif // HAVE_GOOGLE_DRIVE

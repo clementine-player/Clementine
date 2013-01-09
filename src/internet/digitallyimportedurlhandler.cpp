@@ -41,6 +41,10 @@ QIcon DigitallyImportedUrlHandler::icon() const {
     return QIcon(":providers/digitallyimported.png");
   } else if (scheme() == "sky") {
     return QIcon(":providers/skyfm.png");
+  } else if (scheme() == "jazzradio") {
+    return QIcon(":providers/jazzradio.png");
+  } else if (scheme() == "rockradio") {
+    return QIcon(":providers/rockradio.png");
   }
   return QIcon();
 }

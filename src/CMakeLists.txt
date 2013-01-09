@@ -1,6 +1,6 @@
 
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Woverloaded-virtual -Wall -Wno-sign-compare")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Woverloaded-virtual -Wall -Wno-sign-compare -Wno-deprecated-declarations --std=c++0x -U__STRICT_ANSI__")
 
 option(BUILD_WERROR "Build with -Werror" ON)
 
@@ -24,6 +24,7 @@ if (QT_VERSION_MINOR GREATER 5)
     add_definitions(-DQT_USE_FAST_CONCATENATION -DQT_USE_FAST_OPERATOR_PLUS)
   endif(QT_VERSION_MINOR GREATER 7)
 endif(QT_VERSION_MINOR GREATER 5)
+add_definitions(-DQT_NO_URL_CAST_FROM_STRING)
 
 if(ENABLE_IMOBILEDEVICE AND IMOBILEDEVICE_VERSION VERSION_GREATER 1.1.1)
   set(IMOBILEDEVICE_USES_UDIDS ON)
@@ -122,6 +123,7 @@ set(SOURCES
   covers/currentartloader.cpp
   covers/discogscoverprovider.cpp
   covers/kittenloader.cpp
+  covers/musicbrainzcoverprovider.cpp
 
   devices/connecteddevice.cpp
   devices/devicedatabasebackend.cpp
@@ -152,9 +154,11 @@ set(SOURCES
   globalsearch/searchproviderstatuswidget.cpp
   globalsearch/simplesearchprovider.cpp
   globalsearch/somafmsearchprovider.cpp
+  globalsearch/soundcloudsearchprovider.cpp
   globalsearch/suggestionwidget.cpp
   globalsearch/urlsearchprovider.cpp
 
+  internet/cloudfileservice.cpp
   internet/digitallyimportedclient.cpp
   internet/digitallyimportedservicebase.cpp
   internet/digitallyimportedsettingspage.cpp
@@ -176,15 +180,18 @@ set(SOURCES
   internet/jamendodynamicplaylist.cpp
   internet/jamendoplaylistitem.cpp
   internet/jamendoservice.cpp
+  internet/localredirectserver.cpp
   internet/magnatunedownloaddialog.cpp
   internet/magnatuneplaylistitem.cpp
   internet/magnatunesettingspage.cpp
   internet/magnatuneservice.cpp
   internet/magnatuneurlhandler.cpp
+  internet/oauthenticator.cpp
   internet/savedradio.cpp
   internet/searchboxwidget.cpp
   internet/somafmservice.cpp
   internet/somafmurlhandler.cpp
+  internet/soundcloudservice.cpp
   internet/subsonicservice.cpp
   internet/subsonicsettingspage.cpp
   internet/subsonicurlhandler.cpp
@@ -213,15 +220,17 @@ set(SOURCES
   playlist/playlistbackend.cpp
   playlist/playlistcontainer.cpp
   playlist/playlistdelegates.cpp
+  playlist/playlistfilterparser.cpp
   playlist/playlistfilter.cpp
   playlist/playlistheader.cpp
   playlist/playlistitem.cpp
+  playlist/playlistlistcontainer.cpp
+  playlist/playlistlistmodel.cpp
   playlist/playlistmanager.cpp
   playlist/playlistsequence.cpp
   playlist/playlisttabbar.cpp
   playlist/playlistundocommands.cpp
   playlist/playlistview.cpp
-  playlist/specialplaylisttype.cpp
   playlist/queue.cpp
   playlist/queuemanager.cpp
   playlist/songloaderinserter.cpp
@@ -282,8 +291,8 @@ set(SOURCES
   songinfo/songinfotextview.cpp
   songinfo/songinfoview.cpp
   songinfo/songkickconcerts.cpp
+  songinfo/songkickconcertwidget.cpp
   songinfo/songplaystats.cpp
-  songinfo/twitterartistinfo.cpp
   songinfo/ultimatelyricsprovider.cpp
   songinfo/ultimatelyricsreader.cpp
 
@@ -307,6 +316,7 @@ set(SOURCES
   ui/appearancesettingspage.cpp
   ui/backgroundstreamssettingspage.cpp
   ui/behavioursettingspage.cpp
+  ui/console.cpp
   ui/coverfromurldialog.cpp
   ui/edittagdialog.cpp
   ui/equalizer.cpp
@@ -405,6 +415,7 @@ set(HEADERS
   covers/currentartloader.h
   covers/discogscoverprovider.h
   covers/kittenloader.h
+  covers/musicbrainzcoverprovider.h
 
   devices/connecteddevice.h
   devices/devicedatabasebackend.h
@@ -427,8 +438,10 @@ set(HEADERS
   globalsearch/groovesharksearchprovider.h
   globalsearch/searchprovider.h
   globalsearch/simplesearchprovider.h
+  globalsearch/soundcloudsearchprovider.h
   globalsearch/suggestionwidget.h
 
+  internet/cloudfileservice.h
   internet/digitallyimportedclient.h
   internet/digitallyimportedservicebase.h
   internet/digitallyimportedsettingspage.h
@@ -439,7 +452,7 @@ set(HEADERS
   internet/icecastbackend.h
   internet/icecastfilterwidget.h
   internet/icecastmodel.h
-  internet/icecastservice.h 
+  internet/icecastservice.h
   internet/internetmimedata.h
   internet/internetmodel.h
   internet/internetservice.h
@@ -448,13 +461,16 @@ set(HEADERS
   internet/internetviewcontainer.h
   internet/jamendodynamicplaylist.h
   internet/jamendoservice.h
+  internet/localredirectserver.h
   internet/magnatunedownloaddialog.h
   internet/magnatunesettingspage.h
   internet/magnatuneservice.h
+  internet/oauthenticator.h
   internet/savedradio.h
   internet/searchboxwidget.h
   internet/somafmservice.h
   internet/somafmurlhandler.h
+  internet/soundcloudservice.h
   internet/subsonicservice.h
   internet/subsonicsettingspage.h
   internet/subsonicurlhandler.h
@@ -482,6 +498,8 @@ set(HEADERS
   playlist/playlistfilter.h
   playlist/playlistheader.h
   playlist/playlistitemmimedata.h
+  playlist/playlistlistcontainer.h
+  playlist/playlistlistmodel.h
   playlist/playlistmanager.h
   playlist/playlistsequence.h
   playlist/playlisttabbar.h
@@ -540,8 +558,8 @@ set(HEADERS
   songinfo/songinfotextview.h
   songinfo/songinfoview.h
   songinfo/songkickconcerts.h
+  songinfo/songkickconcertwidget.h
   songinfo/songplaystats.h
-  songinfo/twitterartistinfo.h
   songinfo/ultimatelyricsprovider.h
   songinfo/ultimatelyricsreader.h
 
@@ -560,6 +578,7 @@ set(HEADERS
   ui/appearancesettingspage.h
   ui/backgroundstreamssettingspage.h
   ui/behavioursettingspage.h
+  ui/console.h
   ui/coverfromurldialog.h
   ui/edittagdialog.h
   ui/equalizer.h
@@ -639,6 +658,7 @@ set(UI
 
   playlist/dynamicplaylistcontrols.ui
   playlist/playlistcontainer.ui
+  playlist/playlistlistcontainer.ui
   playlist/playlistsequence.ui
   playlist/queuemanager.ui
 
@@ -655,6 +675,7 @@ set(UI
   smartplaylists/searchtermwidget.ui
   smartplaylists/wizardfinishpage.ui
 
+  songinfo/songkickconcertwidget.ui
   songinfo/songinfosettingspage.ui
 
   transcoder/transcodedialog.ui
@@ -675,6 +696,7 @@ set(UI
   ui/appearancesettingspage.ui
   ui/backgroundstreamssettingspage.ui
   ui/behavioursettingspage.ui
+  ui/console.ui
   ui/coverfromurldialog.ui
   ui/edittagdialog.ui
   ui/equalizer.ui
@@ -777,13 +799,11 @@ optional_source(HAVE_LIBLASTFM
 optional_source(HAVE_SPOTIFY
   SOURCES
     globalsearch/spotifysearchprovider.cpp
-    internet/spotifyblobdownloader.cpp
     internet/spotifyserver.cpp
     internet/spotifyservice.cpp
     internet/spotifysettingspage.cpp
   HEADERS
     globalsearch/spotifysearchprovider.h
-    internet/spotifyblobdownloader.h
     internet/spotifyserver.h
     internet/spotifyservice.h
     internet/spotifysettingspage.h
@@ -792,7 +812,14 @@ optional_source(HAVE_SPOTIFY
     ${CMAKE_BINARY_DIR}/ext/libclementine-spotifyblob
 )
 
-optional_source(HAVE_QCA INCLUDE_DIRECTORIES ${QCA_INCLUDE_DIRS})
+optional_source(HAVE_SPOTIFY_DOWNLOADER
+  SOURCES
+    internet/spotifyblobdownloader.cpp
+  HEADERS
+    internet/spotifyblobdownloader.h
+  INCLUDE_DIRECTORIES
+    ${QCA_INCLUDE_DIRS}
+)
 
 # Platform specific - OS X
 optional_source(APPLE
@@ -813,7 +840,6 @@ optional_source(APPLE
     core/macfslistener.h
     core/macglobalshortcutbackend.h
     devices/macdevicelister.h
-    ui/macscreensaver.h
     ui/macsystemtrayicon.h
 )
 
@@ -853,6 +879,11 @@ if(HAVE_DBUS)
   qt4_add_dbus_adaptor(SOURCES
       dbus/org.mpris.MediaPlayer2.TrackList.xml
       core/mpris2.h mpris::Mpris2 core/mpris2_tracklist Mpris2TrackList)
+
+  # MPRIS 2.1 DBUS interfaces
+  qt4_add_dbus_adaptor(SOURCES
+      dbus/org.mpris.MediaPlayer2.Playlists.xml
+      core/mpris2.h mpris::Mpris2 core/mpris2_playlists Mpris2Playlists)
 
   # org.freedesktop.Notifications DBUS interface
   qt4_add_dbus_interface(SOURCES
@@ -970,7 +1001,7 @@ optional_source(HAVE_LIBMTP
 )
 
 # Windows media lister
-optional_source(HAVE_SAC
+optional_source(WIN32
   SOURCES
     devices/wmdmdevice.cpp
     devices/wmdmlister.cpp
@@ -1000,6 +1031,64 @@ optional_source(HAVE_MOODBAR
     moodbar/moodbarproxystyle.h
 )
 
+# Google Drive support
+optional_source(HAVE_GOOGLE_DRIVE
+  SOURCES
+    internet/googledriveclient.cpp
+    internet/googledriveservice.cpp
+    internet/googledrivesettingspage.cpp
+    internet/googledriveurlhandler.cpp
+  HEADERS
+    internet/googledriveclient.h
+    internet/googledriveservice.h
+    internet/googledrivesettingspage.h
+    internet/googledriveurlhandler.h
+  UI
+    internet/googledrivesettingspage.ui
+)
+
+# Ubuntu One file support
+optional_source(HAVE_UBUNTU_ONE
+  SOURCES
+    internet/ubuntuoneauthenticator.cpp
+    internet/ubuntuoneservice.cpp
+    internet/ubuntuonesettingspage.cpp
+    internet/ubuntuoneurlhandler.cpp
+  HEADERS
+    internet/ubuntuoneauthenticator.h
+    internet/ubuntuoneservice.h
+    internet/ubuntuonesettingspage.h
+    internet/ubuntuoneurlhandler.h
+  UI
+    internet/ubuntuonesettingspage.ui
+)
+
+# Dropbox support
+optional_source(HAVE_DROPBOX
+  SOURCES
+    internet/dropboxauthenticator.cpp
+    internet/dropboxservice.cpp
+    internet/dropboxsettingspage.cpp
+    internet/dropboxurlhandler.cpp
+  HEADERS
+    internet/dropboxauthenticator.h
+    internet/dropboxservice.h
+    internet/dropboxsettingspage.h
+    internet/dropboxurlhandler.h
+  UI
+    internet/dropboxsettingspage.ui
+)
+
+# Skydrive support
+optional_source(HAVE_SKYDRIVE
+  SOURCES
+    internet/skydriveservice.cpp
+    internet/skydriveurlhandler.cpp
+  HEADERS
+    internet/skydriveservice.h
+    internet/skydriveurlhandler.h
+)
+
 # Hack to add Clementine to the Unity system tray whitelist
 optional_source(LINUX
   SOURCES core/ubuntuunityhack.cpp
@@ -1020,6 +1109,7 @@ add_pot(POT
   ${CMAKE_CURRENT_SOURCE_DIR}/translations/header
   ${CMAKE_CURRENT_SOURCE_DIR}/translations/translations.pot
   ${SOURCES} ${MOC} ${UIC} ${OTHER_SOURCES}
+  ../data/oauthsuccess.html
 )
 add_po(PO clementine_
   LANGUAGES ${LANGUAGES}
@@ -1121,10 +1211,15 @@ endif(HAVE_BREAKPAD)
 if(HAVE_SPOTIFY)
   target_link_libraries(clementine_lib
     clementine-spotifyblob-messages
+  )
+endif(HAVE_SPOTIFY)
+
+if(HAVE_SPOTIFY_DOWNLOADER)
+  target_link_libraries(clementine_lib
     ${QCA_LIBRARIES}
   )
   link_directories(${QCA_LIBRARY_DIRS})
-endif(HAVE_SPOTIFY)
+endif(HAVE_SPOTIFY_DOWNLOADER)
 
 if (APPLE)
   target_link_libraries(clementine_lib
@@ -1157,22 +1252,21 @@ if (WIN32)
     ${QTSPARKLE_LIBRARIES}
     qtwin
   )
-  if (HAVE_SAC)
-    target_link_libraries(clementine_lib
-      ${SAC_SHIM_LIBRARIES}
-    )
-  endif (HAVE_SAC)
 endif (WIN32)
 
-if (LINUX)
+if (UNIX AND NOT APPLE)
   # Hack: the Gold linker pays attention to the order that libraries are
   # specified on the link line.  -lX11 and -ldl are provided earlier in the link
   # command but they're actually used by libraries that appear after them, so
   # they end up getting ignored.  This appends them to the very end of the link
   # line, ensuring they're always used.
   find_package(X11)
-  target_link_libraries(clementine_lib ${X11_X11_LIB} ${CMAKE_DL_LIBS})
-endif (LINUX)
+  if (${CMAKE_SYSTEM_NAME} MATCHES "FreeBSD")
+    target_link_libraries(clementine_lib ${X11_X11_LIB})
+  else ()
+    target_link_libraries(clementine_lib ${X11_X11_LIB} ${CMAKE_DL_LIBS})
+  endif ()
+endif ()
 
 add_dependencies(clementine_lib qtsingleapplication)
 
@@ -1199,6 +1293,11 @@ add_executable(clementine
   ${CLEMENTINE-WIN32-RESOURCES}
   main.cpp
 )
+
+if (${CMAKE_SYSTEM_NAME} MATCHES "FreeBSD")
+  target_link_libraries(clementine execinfo)
+endif (${CMAKE_SYSTEM_NAME} MATCHES "FreeBSD")
+
 target_link_libraries(clementine
   clementine_lib
 )
@@ -1260,6 +1359,14 @@ if (APPLE)
     DEPENDS clementine)
   add_custom_target(clementine-breakpad
     DEPENDS ${PROJECT_BINARY_DIR}/clementine.breakpad)
+
+  if (APPLE_DEVELOPER_ID)
+    add_custom_command(TARGET clementine
+      POST_BUILD
+      COMMAND
+      codesign -s "${APPLE_DEVELOPER_ID}" -fv ${PROJECT_BINARY_DIR}/clementine.app
+    )
+  endif()
 
 
   add_custom_command(

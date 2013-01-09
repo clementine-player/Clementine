@@ -93,21 +93,21 @@ QString SearchTerm::ToSql() const {
       else if (TypeOf(field_) == Type_Rating ||
                TypeOf(field_) == Type_Date ||
                TypeOf(field_) == Type_Time)
-        return col + " = " + value + "";
+        return col + " = " + value;
       else
         return col + " = '" + value + "'";
     case Op_GreaterThan:
       if (TypeOf(field_) == Type_Rating ||
           TypeOf(field_) == Type_Date ||
           TypeOf(field_) == Type_Time)
-        return col + " > " + value + "";
+        return col + " > " + value;
       else
         return col + " > '" + value + "'";
     case Op_LessThan:
       if (TypeOf(field_) == Type_Rating ||
           TypeOf(field_) == Type_Date ||
           TypeOf(field_) == Type_Time)
-        return col + " < " + value + "";
+        return col + " < " + value;
       else
         return col + " < '" + value + "'";
     case Op_NumericDate:
@@ -119,7 +119,11 @@ QString SearchTerm::ToSql() const {
       return "(" + col + " < " + "DATETIME('now', '-" + value + " " + date +"', 'localtime') AND " +
              col + " > " + "DATETIME('now', '-" + second_value + " " + date +"', 'localtime'))";
     case Op_NotEquals:
-      return col + " <> " + value + "";
+      if (TypeOf(field_) == Type_Text) {
+        return col + " <> '" + value + "'";
+      } else {
+        return col + " <> " + value;
+      }
   }
 
   return QString();
@@ -134,11 +138,12 @@ bool SearchTerm::is_valid() const {
   }
 
   switch (TypeOf(field_)) {
-    case Type_Text:   return !value_.toString().isEmpty();
-    case Type_Date:   return value_.toInt() != 0;
-    case Type_Number: return value_.toInt() >= 0;
-    case Type_Rating: return value_.toFloat() >= 0.0;
-    case Type_Time:   return true;
+    case Type_Text:    return !value_.toString().isEmpty();
+    case Type_Date:    return value_.toInt() != 0;
+    case Type_Number:  return value_.toInt() >= 0;
+    case Type_Rating:  return value_.toFloat() >= 0.0;
+    case Type_Time:    return true;
+    case Type_Invalid: return false;
   }
   return false;
 }
@@ -185,7 +190,7 @@ OperatorList SearchTerm::OperatorsForType(Type type) {
   switch (type) {
     case Type_Text:
       return OperatorList() << Op_Contains << Op_NotContains << Op_Equals
-                            << Op_StartsWith << Op_EndsWith;
+                            << Op_NotEquals << Op_StartsWith << Op_EndsWith;
     case Type_Date:
       return OperatorList() << Op_Equals << Op_NotEquals << Op_GreaterThan << Op_LessThan
                             << Op_NumericDate << Op_NumericDateNot << Op_RelativeDate;
@@ -285,11 +290,12 @@ QString SearchTerm::FieldName(Field field) {
 
 QString SearchTerm::FieldSortOrderText(Type type, bool ascending) {
   switch (type) {
-    case Type_Text:   return ascending ? QObject::tr("A-Z")            : QObject::tr("Z-A");
-    case Type_Date:   return ascending ? QObject::tr("oldest first")   : QObject::tr("newest first");
-    case Type_Time:   return ascending ? QObject::tr("shortest first") : QObject::tr("longest first");
+    case Type_Text:    return ascending ? QObject::tr("A-Z")            : QObject::tr("Z-A");
+    case Type_Date:    return ascending ? QObject::tr("oldest first")   : QObject::tr("newest first");
+    case Type_Time:    return ascending ? QObject::tr("shortest first") : QObject::tr("longest first");
     case Type_Number:
-    case Type_Rating: return ascending ? QObject::tr("smallest first") : QObject::tr("biggest first");
+    case Type_Rating:  return ascending ? QObject::tr("smallest first") : QObject::tr("biggest first");
+    case Type_Invalid: return QString();
   }
   return QString();
 }

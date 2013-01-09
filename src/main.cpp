@@ -27,7 +27,6 @@
 #include "core/application.h"
 #include "core/commandlineoptions.h"
 #include "core/crashreporting.h"
-#include "core/encoding.h"
 #include "core/database.h"
 #include "core/logging.h"
 #include "core/mac_startup.h"
@@ -39,8 +38,9 @@
 #include "core/ubuntuunityhack.h"
 #include "core/utilities.h"
 #include "covers/amazoncoverprovider.h"
-#include "covers/discogscoverprovider.h"
 #include "covers/coverproviders.h"
+#include "covers/discogscoverprovider.h"
+#include "covers/musicbrainzcoverprovider.h"
 #include "engines/enginebase.h"
 #include "smartplaylists/generator.h"
 #include "ui/iconloader.h"
@@ -48,6 +48,8 @@
 #include "ui/systemtrayicon.h"
 #include "version.h"
 #include "widgets/osd.h"
+
+#include "tagreadermessages.pb.h"
 
 #include "qtsingleapplication.h"
 #include "qtsinglecoreapplication.h"
@@ -60,6 +62,7 @@
 #include <QSqlQuery>
 #include <QTextCodec>
 #include <QTranslator>
+#include <QtConcurrentRun>
 #include <QtDebug>
 
 #include <glib-object.h>
@@ -71,7 +74,7 @@ using boost::scoped_ptr;
 
 #include <echonest/Config.h>
 
-#ifdef HAVE_QCA
+#ifdef HAVE_SPOTIFY_DOWNLOADER
   #include <QtCrypto>
 #endif
 
@@ -96,6 +99,11 @@ using boost::scoped_ptr;
   const QDBusArgument& operator>> (const QDBusArgument& arg, QImage& image);
 #endif
 
+#ifdef Q_OS_WIN32
+# include <qtsparkle/Updater>
+# include "devices/wmdmthread.h"
+#endif
+
 // Load sqlite plugin on windows and mac.
 #ifdef HAVE_STATIC_SQLITE
 # include <QtPlugin>
@@ -113,8 +121,18 @@ void LoadTranslation(const QString& prefix, const QString& path,
     return;
 #endif
 
+#if QT_VERSION >= 0x040800
+  QString system_language = QLocale::system().uiLanguages().empty() ?
+      QLocale::system().name() : QLocale::system().uiLanguages().first();
+  // uiLanguages returns strings with "-" as separators for language/region;
+  // however QTranslator needs "_" separators
+  system_language.replace("-", "_");
+#else
+  QString system_language = QLocale::system().name();
+#endif
+
   QString language = override_language.isEmpty() ?
-                     QLocale::system().name() : override_language;
+                     system_language : override_language;
 
   QTranslator* t = new PoTranslator;
   if (t->load(prefix + "_" + language, path))
@@ -184,6 +202,11 @@ void SetGstreamerEnvironment() {
   if (!registry_filename.isEmpty()) {
     SetEnv("GST_REGISTRY", registry_filename);
   }
+
+#ifdef Q_OS_DARWIN
+  SetEnv("GIO_EXTRA_MODULES",
+      QCoreApplication::applicationDirPath() + "/../PlugIns/gio-modules");
+#endif
 }
 
 #ifdef HAVE_GIO
@@ -204,6 +227,17 @@ void ScanGIOModulePath() {
   }
 }
 #endif
+
+void ParseAProto() {
+  const QByteArray data = QByteArray::fromHex(
+        "08001a8b010a8801b2014566696c653a2f2f2f453a2f4d7573696b2f28414c42554d2"
+        "9253230476f74616e25323050726f6a6563742532302d253230416d6269656e742532"
+        "304c6f756e67652e6d786dba012a28414c42554d2920476f74616e2050726f6a65637"
+        "4202d20416d6269656e74204c6f756e67652e6d786dc001c7a7efd104c801bad685e4"
+        "04d001eeca32");
+  pb::tagreader::Message message;
+  message.ParseFromArray(data.constData(), data.size());
+}
 
 int main(int argc, char *argv[]) {
   if (CrashReporting::SendCrashReport(argc, argv)) {
@@ -226,19 +260,6 @@ int main(int argc, char *argv[]) {
 #ifdef Q_OS_DARWIN
   // Must happen after QCoreApplication::setOrganizationName().
   setenv("XDG_CONFIG_HOME", Utilities::GetConfigPath(Utilities::Path_Root).toLocal8Bit().constData(), 1);
-  if (mac::MigrateLegacyConfigFiles()) {
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName(Utilities::GetConfigPath(
-        Utilities::Path_Root) + "/" + Database::kDatabaseFilename);
-    db.open();
-    QSqlQuery query(
-        "UPDATE songs SET art_manual = replace("
-        "art_manual, '.config', 'Library/Application Support') "
-        "WHERE art_manual LIKE '%.config%'", db);
-    query.exec();
-    db.close();
-    QSqlDatabase::removeDatabase(db.connectionName());
-  }
 #endif
 
   // This makes us show up nicely in gnome-volume-control
@@ -283,6 +304,10 @@ int main(int argc, char *argv[]) {
   logging::Init();
   logging::SetLevels(options.log_levels());
   g_log_set_default_handler(reinterpret_cast<GLogFunc>(&logging::GLog), NULL);
+
+  // Output the version, so when people attach log output to bug reports they
+  // don't have to tell us which version they're using.
+  qLog(Info) << "Clementine" << CLEMENTINE_VERSION_DISPLAY;
 
   // Seed the random number generators.
   time_t t = time(NULL);
@@ -345,7 +370,7 @@ int main(int argc, char *argv[]) {
   }
 #endif
 
-#ifdef HAVE_QCA
+#ifdef HAVE_SPOTIFY_DOWNLOADER
   QCA::Initializer qca_initializer;
 #endif
 
@@ -376,8 +401,19 @@ int main(int argc, char *argv[]) {
   LoadTranslation("clementine", a.applicationDirPath(), language);
   LoadTranslation("clementine", QDir::currentPath(), language);
 
+#ifdef Q_OS_WIN32
+  // Set the language for qtsparkle
+  qtsparkle::LoadTranslations(language);
+#endif
+
   // Icons
   IconLoader::Init();
+
+  // This is a nasty hack to ensure that everything in libprotobuf is
+  // initialised in the main thread.  It fixes issue 3265 but nobody knows why.
+  // Don't remove this unless you can reproduce the error that it fixes.
+  ParseAProto();
+  QtConcurrent::run(&ParseAProto);
 
   Application app;
 
@@ -392,6 +428,7 @@ int main(int argc, char *argv[]) {
   // when its service is created.
   app.cover_providers()->AddProvider(new AmazonCoverProvider);
   app.cover_providers()->AddProvider(new DiscogsCoverProvider);
+  app.cover_providers()->AddProvider(new MusicbrainzCoverProvider);
 
 #ifdef Q_OS_LINUX
   // In 11.04 Ubuntu decided that the system tray should be reserved for certain
@@ -408,8 +445,17 @@ int main(int argc, char *argv[]) {
   mpris::Mpris mpris(&app);
 #endif
 
+#ifdef Q_OS_WIN32
+  if (!WmdmThread::StaticInit()) {
+    qLog(Warning) << "Failed to initialise SAC shim";
+  }
+#endif
+
   // Window
   MainWindow w(&app, tray_icon.get(), &osd);
+#ifdef Q_OS_DARWIN
+  mac::EnableFullScreen(w);
+#endif  // Q_OS_DARWIN
 #ifdef HAVE_GIO
   ScanGIOModulePath();
 #endif
@@ -433,10 +479,7 @@ int main(int argc, char *argv[]) {
   QFile self_maps("/proc/self/maps");
   if (self_maps.open(QIODevice::ReadOnly)) {
     QByteArray data = self_maps.readAll();
-    if (data.contains("libnvidia-tls.so.285.03") ||
-        data.contains("libnvidia-tls.so.280.13") ||
-        data.contains("libnvidia-tls.so.275.28") ||
-        data.contains("libnvidia-tls.so.275.19")) {
+    if (data.contains("libnvidia-tls.so.")) {
       qLog(Warning) << "Exiting immediately to work around NVIDIA driver bug";
       _exit(ret);
     }

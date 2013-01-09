@@ -415,7 +415,7 @@
      <x>0</x>
      <y>0</y>
      <width>1131</width>
-     <height>24</height>
+     <height>23</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_music">
@@ -456,7 +456,6 @@
     <addaction name="action_jump"/>
     <addaction name="action_clear_playlist"/>
     <addaction name="action_shuffle"/>
-    <addaction name="separator"/>
     <addaction name="action_remove_duplicates"/>
    </widget>
    <widget class="QMenu" name="menu_help">
@@ -475,6 +474,7 @@
     <addaction name="action_hypnotoad"/>
     <addaction name="action_enterprise"/>
     <addaction name="action_kittens"/>
+    <addaction name="action_console"/>
     <addaction name="separator"/>
    </widget>
    <widget class="QMenu" name="menu_tools">
@@ -712,6 +712,11 @@
     <string comment="Label for buton to enable/disable kittens in the now playing widget">Kittens</string>
    </property>
   </action>
+  <action name="action_console">
+   <property name="text">
+    <string>Console</string>
+   </property>
+  </action>
   <action name="action_shuffle_mode">
    <property name="text">
     <string>&amp;Shuffle mode</string>
@@ -851,7 +856,7 @@
   </action>
   <action name="action_remove_duplicates">
    <property name="text">
-    <string>Remove duplicates</string>
+    <string>Remove duplicates from playlist</string>
    </property>
   </action>
  </widget>

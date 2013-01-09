@@ -37,15 +37,14 @@ PlaylistTabBar::PlaylistTabBar(QWidget *parent)
     menu_(new QMenu(this)),
     menu_index_(-1),
     suppress_current_changed_(false),
-    rename_editor_(new RenameTabLineEdit(this)),
-    removing_with_confirm_(true)
+    rename_editor_(new RenameTabLineEdit(this))
 {
   setAcceptDrops(true);
   setElideMode(Qt::ElideRight);
   setUsesScrollButtons(true);
   setTabsClosable(true);
 
-  remove_ = menu_->addAction(IconLoader::Load("list-remove"), tr("Remove playlist"), this, SLOT(Remove()));
+  close_ = menu_->addAction(IconLoader::Load("list-remove"), tr("Close playlist"), this, SLOT(Close()));
   rename_ = menu_->addAction(IconLoader::Load("edit-rename"), tr("Rename playlist..."), this, SLOT(Rename()));
   save_ = menu_->addAction(IconLoader::Load("document-save"), tr("Save playlist..."), this, SLOT(Save()));
   menu_->addSeparator();
@@ -56,8 +55,8 @@ PlaylistTabBar::PlaylistTabBar(QWidget *parent)
 
   connect(this, SIGNAL(currentChanged(int)), SLOT(CurrentIndexChanged(int)));
   connect(this, SIGNAL(tabMoved(int,int)), SLOT(TabMoved()));
-  // We can't just emit Remove signal, we need to extract the playlist id first
-  connect(this, SIGNAL(tabCloseRequested(int)), SLOT(RemoveFromTabIndex(int)));
+  // We can't just emit Close signal, we need to extract the playlist id first
+  connect(this, SIGNAL(tabCloseRequested(int)), SLOT(CloseFromTabIndex(int)));
 }
 
 void PlaylistTabBar::SetActions(
@@ -81,7 +80,7 @@ void PlaylistTabBar::contextMenuEvent(QContextMenuEvent* e) {
 
   menu_index_ = tabAt(e->pos());
   rename_->setEnabled(menu_index_ != -1);
-  remove_->setEnabled(menu_index_ != -1 && count() > 1);
+  close_->setEnabled(menu_index_ != -1 && count() > 1);
   save_->setEnabled(menu_index_ != -1);
 
   menu_->popup(e->globalPos());
@@ -91,9 +90,7 @@ void PlaylistTabBar::mouseReleaseEvent(QMouseEvent* e) {
   if (e->button() == Qt::MidButton) {
     // Update menu index
     menu_index_ = tabAt(e->pos());
-    // So we don't ask for confirmation
-    removing_with_confirm_ = false;
-    Remove();
+    Close();
   }
 
   QTabBar::mouseReleaseEvent(e);
@@ -150,27 +147,24 @@ void PlaylistTabBar::HideEditor() {
   manager_->SetCurrentPlaylist(manager_->current()->id());
 }
 
-void PlaylistTabBar::Remove() {
+void PlaylistTabBar::Close() {
   if (menu_index_ == -1)
     return;
 
-  // Ask for confirmation if not middle clicking the tab
-  if (removing_with_confirm_ && QMessageBox::question(this, tr("Remove playlist"),
-                            tr("This playlist will be removed; the action can't be undone. "
-                               "Are you sure you want to continue?"),
-                            QMessageBox::Yes, QMessageBox::Cancel) != QMessageBox::Yes)
-    return;
+  // Just hide the tab from the UI - don't delete it completely (it can still
+  // be resurrected from the Playlists tab).
+  emit Close(tabData(menu_index_).toInt());
 
-  removing_with_confirm_ = true;
-  emit Remove(tabData(menu_index_).toInt());
+  // Select the nearest tab.
+  if (menu_index_ > 1) {
+    setCurrentIndex(menu_index_ - 1);
+  }
 }
 
-void PlaylistTabBar::RemoveFromTabIndex(int index) {
+void PlaylistTabBar::CloseFromTabIndex(int index) {
   // Update the global index
   menu_index_ = index;
-  // Ask for confirmation
-  removing_with_confirm_ = true;
-  Remove();
+  Close();
 }
 
 void PlaylistTabBar::Save() {
@@ -226,13 +220,11 @@ void PlaylistTabBar::CurrentIndexChanged(int index) {
     emit CurrentIdChanged(tabData(index).toInt());
 }
 
-void PlaylistTabBar::InsertTab(int id, int index, const QString& text,
-                               const QIcon& icon) {
+void PlaylistTabBar::InsertTab(int id, int index, const QString& text) {
   suppress_current_changed_ = true;
   insertTab(index, text);
   setTabData(index, id);
   setTabToolTip(index, text);
-  setTabIcon(index, icon);
   suppress_current_changed_ = false;
 
   if (currentIndex() == index)

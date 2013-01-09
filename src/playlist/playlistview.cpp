@@ -25,6 +25,7 @@
 #include "core/logging.h"
 #include "core/player.h"
 #include "covers/currentartloader.h"
+#include "ui/qt_blurimage.h"
 
 #include <QCleanlooksStyle>
 #include <QClipboard>
@@ -316,9 +317,7 @@ void PlaylistView::LoadGeometry() {
     header_->HideSection(Playlist::Column_Comment);
   }
   if (state_version < 5) {
-#ifndef HAVE_MOODBAR
     header_->HideSection(Playlist::Column_Mood);
-#endif
   }
 
   // Make sure at least one column is visible
@@ -576,7 +575,7 @@ void PlaylistView::RemoveSelected() {
     model()->removeRows(range.top(), range.height(), range.parent());
   }
 
-  int new_row = last_row-rows_removed+1;
+  int new_row = last_row - rows_removed;
   // Index of the first column for the row to select
   QModelIndex new_index = model()->index(new_row, 0);
 
@@ -779,6 +778,9 @@ void PlaylistView::MaybeAutoscroll() {
 
 void PlaylistView::JumpToCurrentlyPlayingTrack() {
   Q_ASSERT(playlist_);
+
+  // Usage of the "Jump to the currently playing track" action shall enable autoscroll
+  inhibit_autoscroll_ = false;
 
   if (playlist_->current_row() == -1)
     return;
@@ -1017,16 +1019,19 @@ void PlaylistView::ReloadSettings() {
     }
   }
   QString background_image_filename = s.value(kSettingBackgroundImageFilename).toString();
+  int blur_radius = s.value("blur_radius").toInt();
   // Check if background properties have changed.
   // We change properties only if they have actually changed, to avoid to call
   // set_background_image when it is not needed, as this will cause the fading
   // animation to start again. This also avoid to do useless
   // "force_background_redraw".
-  if (background_image_filename != background_image_filename_
-      || background_type != background_image_type_) {
+  if (background_image_filename != background_image_filename_ ||
+      background_type != background_image_type_ || 
+      blur_radius_ != blur_radius) {
     // Store background properties
     background_image_type_ = background_type;
     background_image_filename_ = background_image_filename;
+    blur_radius_ = blur_radius;
     if (background_image_type_ == Custom) {
       set_background_image(QImage(background_image_filename));
     } else if (background_image_type_ == AlbumCover) {
@@ -1194,6 +1199,16 @@ void PlaylistView::set_background_image(const QImage& image) {
   uchar* bits = background_image_.bits();
   for (int i = 0; i < background_image_.height() * background_image_.bytesPerLine(); i+=4) {
     bits[i+3] = kBackgroundOpacity * 255;
+  }
+
+  if (blur_radius_ != 0) {
+    QImage blurred(background_image_.size(), QImage::Format_ARGB32_Premultiplied);
+    blurred.fill(Qt::transparent);
+    QPainter blur_painter(&blurred);
+    qt_blurImage(&blur_painter, background_image_, blur_radius_, false, true);
+    blur_painter.end();
+
+    background_image_ = blurred;
   }
 
   if (isVisible()) {

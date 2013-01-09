@@ -17,6 +17,8 @@
 
 #include <limits>
 
+#include <QCoreApplication>
+
 #include "bufferconsumer.h"
 #include "config.h"
 #include "gstelementdeleter.h"
@@ -482,11 +484,46 @@ GstBusSyncReply GstEnginePipeline::BusCallbackSync(GstBus*, GstMessage* msg, gpo
       instance->BufferingMessageReceived(msg);
       break;
 
+    case GST_MESSAGE_STREAM_STATUS:
+      instance->StreamStatusMessageReceived(msg);
+      break;
+
     default:
       break;
   }
 
   return GST_BUS_PASS;
+}
+
+void GstEnginePipeline::StreamStatusMessageReceived(GstMessage* msg) {
+  GstStreamStatusType type;
+  GstElement* owner;
+  gst_message_parse_stream_status(msg, &type, &owner);
+
+  if (type == GST_STREAM_STATUS_TYPE_CREATE) {
+    const GValue* val = gst_message_get_stream_status_object(msg);
+    if (G_VALUE_TYPE(val) == GST_TYPE_TASK) {
+      GstTask* task = static_cast<GstTask*>(g_value_get_object(val));
+
+      GstTaskThreadCallbacks callbacks;
+      memset(&callbacks, 0, sizeof(callbacks));
+      callbacks.enter_thread = TaskEnterCallback;
+
+      gst_task_set_thread_callbacks(task, &callbacks, this, NULL);
+    }
+  }
+}
+
+void GstEnginePipeline::TaskEnterCallback(GstTask*, GThread*, gpointer) {
+  // Bump the priority of the thread only on OS X
+
+#ifdef Q_OS_DARWIN
+  sched_param param;
+  memset(&param, 0, sizeof(param));
+
+  param.sched_priority = 99;
+  pthread_setschedparam(pthread_self(), SCHED_RR, &param);
+#endif
 }
 
 void GstEnginePipeline::ElementMessageReceived(GstMessage* msg) {
@@ -713,8 +750,11 @@ void GstEnginePipeline::SourceSetupCallback(GstURIDecodeBin* bin, GParamSpec *ps
   GstEnginePipeline* instance = reinterpret_cast<GstEnginePipeline*>(self);
   GstElement* element;
   g_object_get(bin, "source", &element, NULL);
-  if (element &&
-      g_object_class_find_property(G_OBJECT_GET_CLASS(element), "device") &&
+  if (!element) {
+    return;
+  }
+
+  if (g_object_class_find_property(G_OBJECT_GET_CLASS(element), "device") &&
       !instance->source_device().isEmpty()) {
     // Gstreamer is not able to handle device in URL (refering to Gstreamer
     // documentation, this might be added in the future). Despite that, for now
@@ -722,8 +762,7 @@ void GstEnginePipeline::SourceSetupCallback(GstURIDecodeBin* bin, GParamSpec *ps
     // here, when this callback is called.
     g_object_set(element, "device", instance->source_device().toLocal8Bit().constData(), NULL);
   }
-  if (element &&
-      g_object_class_find_property(G_OBJECT_GET_CLASS(element), "extra-headers") &&
+  if (g_object_class_find_property(G_OBJECT_GET_CLASS(element), "extra-headers") &&
       instance->url().host().contains("grooveshark")) {
     // Grooveshark streaming servers will answer with a 400 error 'Bad request'
     // if we don't specify 'Range' field in HTTP header.
@@ -733,6 +772,26 @@ void GstEnginePipeline::SourceSetupCallback(GstURIDecodeBin* bin, GParamSpec *ps
     headers = gst_structure_new("extra-headers", "Range", G_TYPE_STRING, "bytes=0-", NULL);
     g_object_set(element, "extra-headers", headers, NULL);
     gst_structure_free(headers);
+  }
+
+  if (g_object_class_find_property(G_OBJECT_GET_CLASS(element), "extra-headers") &&
+      instance->url().host().contains("files.one.ubuntu.com")) {
+    GstStructure* headers;
+    headers = gst_structure_new(
+        "extra-headers",
+        "Authorization",
+        G_TYPE_STRING,
+        instance->url().fragment().toAscii().data(),
+        NULL);
+    g_object_set(element, "extra-headers", headers, NULL);
+    gst_structure_free(headers);
+  }
+
+  if (g_object_class_find_property(G_OBJECT_GET_CLASS(element), "user-agent")) {
+    QString user_agent = QString("%1 %2").arg(
+        QCoreApplication::applicationName(),
+        QCoreApplication::applicationVersion());
+    g_object_set(element, "user-agent", user_agent.toUtf8().constData(), NULL);
   }
 }
 

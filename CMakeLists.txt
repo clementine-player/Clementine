@@ -1,4 +1,5 @@
 cmake_minimum_required(VERSION 2.6)
+cmake_policy(SET CMP0011 OLD)
 
 include(CheckCXXCompilerFlag)
 include(FindPkgConfig)
@@ -10,25 +11,34 @@ include(cmake/SpotifyVersion.cmake)
 include(cmake/OptionalSource.cmake)
 set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
 
+if (CMAKE_CXX_COMPILER MATCHES ".*clang")
+  set(CMAKE_COMPILER_IS_CLANGXX 1)
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-uninitialized")
+endif ()
+
+set(CMAKE_REQUIRED_FLAGS "-std=c++0x")
+check_cxx_source_compiles(
+    "#include <unordered_map>
+     int main() {
+       std::unordered_map<int, int> m;
+       return 0;
+     }
+    "
+    USE_STD_UNORDERED_MAP)
+check_cxx_source_compiles(
+    "int main() {
+       [](){}();
+     }
+    "
+    HAVE_LAMBDAS)
+unset(CMAKE_REQUIRED_FLAGS)
+
+
 if (UNIX AND NOT APPLE)
   set(LINUX 1)
 endif (UNIX AND NOT APPLE)
 
 find_package(Qt4 4.5.0 REQUIRED QtCore QtGui QtOpenGL QtSql QtNetwork QtXml)
-if (LINUX)
-  option(ENABLE_DBUS "Enable D-Bus, MPRIS and native notifications. Required for DeviceKit and Wii remote support" ON)
-  if(ENABLE_DBUS)
-    find_package(Qt4 REQUIRED QtDbus)
-    set(HAVE_DBUS ON)
-
-    option(ENABLE_DEVICEKIT "DeviceKit backend" ON)
-    if(ENABLE_DEVICEKIT)
-      set(HAVE_DEVICEKIT ON)
-    endif(ENABLE_DEVICEKIT)
-
-    option(ENABLE_WIIMOTEDEV "Enable Wii remote support in Clementine" ON)
-  endif(ENABLE_DBUS)
-endif (LINUX)
 
 if(NOT APPLE)
   find_package(Qt4 COMPONENTS QtWebKit)
@@ -76,7 +86,6 @@ pkg_check_modules(CHROMAPRINT libchromaprint)
 if (WIN32)
   find_package(ZLIB REQUIRED)
   find_library(MSWMDM_LIBRARIES mswmdm)
-  find_library(SAC_SHIM_LIBRARIES sac_shim)
   find_library(QTSPARKLE_LIBRARIES qtsparkle)
 endif (WIN32)
 
@@ -84,18 +93,31 @@ find_library(LASTFM_LIBRARIES lastfm)
 find_path(LASTFM_INCLUDE_DIRS lastfm/ws.h)
 find_path(LASTFM1_INCLUDE_DIRS lastfm/Track.h)
 
+find_path(SPARSEHASH_INCLUDE_DIRS google/sparsetable)
+
+# Google Drive support needs Taglib 1.8, but this version isn't in old Ubuntu
+# distros.  If the user seems to want Drive support (ie. they have sparsehash
+# installed and haven't disabled drive), and has an old taglib, compile our
+# internal one and use that instead.
+option(USE_BUILTIN_TAGLIB "If the system's version of Taglib is too old for Google Drive support, compile our builtin version instead" ON)
+if (USE_BUILTIN_TAGLIB AND
+    (NOT "${ENABLE_GOOGLE_DRIVE}" STREQUAL "OFF") AND
+    SPARSEHASH_INCLUDE_DIRS AND
+    TAGLIB_VERSION VERSION_LESS 1.8)
+  set(TAGLIB_VERSION 1.8)
+  set(TAGLIB_INCLUDE_DIRS "${CMAKE_BINARY_DIR}/3rdparty/taglib/headers/taglib/;${CMAKE_BINARY_DIR}/3rdparty/taglib/headers/")
+  set(TAGLIB_LIBRARY_DIRS "")
+  set(TAGLIB_LIBRARIES tag)
+  add_subdirectory(3rdparty/taglib)
+endif()
+
 if(LASTFM_INCLUDE_DIRS AND LASTFM1_INCLUDE_DIRS)
   set(HAVE_LIBLASTFM1 ON)
 endif()
 
 if (APPLE)
   find_library(GROWL Growl)
-
-  option(ENABLE_SPARKLE "Sparkle updating" ON)
   find_library(SPARKLE Sparkle)
-  if (ENABLE_SPARKLE AND SPARKLE)
-    set(HAVE_SPARKLE ON)
-  endif (ENABLE_SPARKLE AND SPARKLE)
 
   find_library(SPOTIFY libspotify)
   if (SPOTIFY)
@@ -106,17 +128,7 @@ if (APPLE)
 
   add_subdirectory(3rdparty/SPMediaKeyTap)
   set(SPMEDIAKEYTAP_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/SPMediaKeyTap)
-  set(SPMEDIAKEYTAP_LIBRARIES SPMediaKeyTap)  
-
-  # Uses Darwin kernel version.
-  # 9.8.0  -> 10.5/Leopard
-  # 10.4.0 -> 10.6/Snow Leopard
-  string(REGEX MATCH "[0-9]+" DARWIN_VERSION ${CMAKE_HOST_SYSTEM_VERSION})
-  if (DARWIN_VERSION GREATER 9)
-    SET(SNOW_LEOPARD 1)
-  elseif (DARWIN_VERSION GREATER 8)
-    SET(LEOPARD 1)
-  endif (DARWIN_VERSION GREATER 9)
+  set(SPMEDIAKEYTAP_LIBRARIES SPMediaKeyTap)
 endif (APPLE)
 
 find_package(Threads)
@@ -125,18 +137,6 @@ if(${CMAKE_BUILD_TYPE} MATCHES "Release")
   add_definitions(-DNDEBUG)
   add_definitions(-DQT_NO_DEBUG_OUTPUT)
 endif(${CMAKE_BUILD_TYPE} MATCHES "Release")
-
-# Use protobuf-lite if it's available
-set(USE_PROTOBUF_LITE ON CACHE BOOL "Use protobuf-lite instead of protobuf if available")
-find_library(PROTOBUF_LITE_LIBRARY protobuf-lite)
-
-if(NOT PROTOBUF_LITE_LIBRARY)
-  # Lucid doesn't have a .so symlink
-  find_file(PROTOBUF_LITE_LIBRARY
-    NAMES libprotobuf-lite.so.5
-    PATH_SUFFIXES lib
-  )
-endif(NOT PROTOBUF_LITE_LIBRARY)
 
 # Set up definitions and paths
 add_definitions(${QT_DEFINITIONS})
@@ -149,7 +149,6 @@ if (NOT QT_QTWEBKIT_INCLUDE_DIR)
   set (QT_USE_QTWEBKIT 0)
 endif (NOT QT_QTWEBKIT_INCLUDE_DIR)
 
-include(${QT_USE_FILE})
 include_directories(${Boost_INCLUDE_DIRS})
 include_directories(${TAGLIB_INCLUDE_DIRS})
 include_directories(${QJSON_INCLUDE_DIRS})
@@ -157,11 +156,6 @@ include_directories(${GSTREAMER_INCLUDE_DIRS})
 include_directories(${GLIB_INCLUDE_DIRS})
 include_directories(${GLIBCONFIG_INCLUDE_DIRS})
 include_directories(${LIBXML_INCLUDE_DIRS})
-include_directories("3rdparty/universalchardet")
-
-# Remove GLU and GL from the link line - they're not really required
-# and don't exist on my mingw toolchain
-list(REMOVE_ITEM QT_LIBRARIES "-lGLU -lGL")
 
 if (WIN32)
   # RC compiler
@@ -187,85 +181,121 @@ if(NOT GETTEXT_MSGFMT_EXECUTABLE)
 endif(NOT GETTEXT_MSGFMT_EXECUTABLE)
 
 # Optional bits
-option(ENABLE_LIBGPOD "iPod classic support" ON)
-option(ENABLE_IMOBILEDEVICE "iPod Touch, iPhone, iPad support" ON)
-option(ENABLE_LIBMTP "MTP support" ON)
-option(ENABLE_GIO "GIO backend" ON)
-option(ENABLE_AUDIOCD "Audio CD support" ON)
-option(ENABLE_VISUALISATIONS "Use libprojectm visualisations" ON)
-option(BUNDLE_PROJECTM_PRESETS "Install Clementine's own copies of libprojectm presets - disable this if you want to use a system package instead" ON)
-option(ENABLE_SOUNDMENU "Add Clementine to the Gnome sound menu" ON)
-option(ENABLE_LIBLASTFM "Use liblastfm for fetching song info, scrobbling and radio streams" ON)
-option(ENABLE_BREAKPAD "Enable crash reporting" OFF)
-option(ENABLE_SPOTIFY_BLOB "Build the spotify non-GPL binary" ON)
-option(ENABLE_SPOTIFY "Enable spotify support" ON)
-option(ENABLE_MOODBAR "Enable moodbar" ON)
-
 if(WIN32)
   option(ENABLE_WIN32_CONSOLE "Show the windows console even outside Debug mode" OFF)
-  if(SAC_SHIM_LIBRARIES)
-    set(HAVE_SAC ON)
-  endif(SAC_SHIM_LIBRARIES)
 endif(WIN32)
 
-if(ENABLE_LIBGPOD AND LIBGPOD_FOUND)
-  set(HAVE_LIBGPOD ON)
-endif(ENABLE_LIBGPOD AND LIBGPOD_FOUND)
+optional_component(BREAKPAD OFF "Crash reporting")
 
-if(ENABLE_GIO AND GIO_FOUND AND NOT APPLE)
-  set(HAVE_GIO ON)
-endif(ENABLE_GIO AND GIO_FOUND AND NOT APPLE)
+optional_component(GOOGLE_DRIVE ON "Google Drive support"
+  DEPENDS "Google sparsehash" SPARSEHASH_INCLUDE_DIRS
+  DEPENDS "Taglib 1.8" "TAGLIB_VERSION VERSION_GREATER 1.7.999"
+)
 
-if(ENABLE_AUDIOCD AND CDIO_FOUND)
-  set(HAVE_AUDIOCD ON)
-endif(ENABLE_AUDIOCD AND CDIO_FOUND)
+optional_component(UBUNTU_ONE ON "Ubuntu One file support"
+  DEPENDS "Google sparsehash" SPARSEHASH_INCLUDE_DIRS
+  DEPENDS "Taglib 1.8" "TAGLIB_VERSION VERSION_GREATER 1.7.999"
+)
 
-if(ENABLE_IMOBILEDEVICE AND IMOBILEDEVICE_FOUND AND PLIST_FOUND AND HAVE_LIBGPOD AND USBMUXD_FOUND)
-  set(HAVE_IMOBILEDEVICE ON)
-endif(ENABLE_IMOBILEDEVICE AND IMOBILEDEVICE_FOUND AND PLIST_FOUND AND HAVE_LIBGPOD AND USBMUXD_FOUND)
+optional_component(DROPBOX ON "Dropbox support"
+  DEPENDS "Google sparsehash" SPARSEHASH_INCLUDE_DIRS
+  DEPENDS "Taglib 1.8" "TAGLIB_VERSION VERSION_GREATER 1.7.999"
+)
 
-if(ENABLE_LIBMTP AND LIBMTP_FOUND)
-  set(HAVE_LIBMTP ON)
-endif(ENABLE_LIBMTP AND LIBMTP_FOUND)
+optional_component(SKYDRIVE ON "Skydrive support"
+  DEPENDS "Google sparsehash" SPARSEHASH_INCLUDE_DIRS
+  DEPENDS "Taglib 1.8" "TAGLIB_VERSION VERSION_GREATER 1.7.999"
+)
 
-if(ENABLE_SOUNDMENU AND INDICATEQT_FOUND)
-  set(HAVE_LIBINDICATE ON)
-endif(ENABLE_SOUNDMENU AND INDICATEQT_FOUND)
+optional_component(AUDIOCD ON "Devices: Audio CD support"
+  DEPENDS "libcdio" CDIO_FOUND
+)
 
-if(ENABLE_LIBLASTFM AND LASTFM_LIBRARIES AND LASTFM_INCLUDE_DIRS)
-  set(HAVE_LIBLASTFM ON)
-endif(ENABLE_LIBLASTFM AND LASTFM_LIBRARIES AND LASTFM_INCLUDE_DIRS)
+optional_component(LIBGPOD ON "Devices: iPod classic support"
+  DEPENDS "libgpod" LIBGPOD_FOUND
+)
 
-if(ENABLE_WIIMOTEDEV AND HAVE_DBUS)
-  set(HAVE_WIIMOTEDEV ON)
-endif(ENABLE_WIIMOTEDEV AND HAVE_DBUS)
+optional_component(GIO ON "Devices: GIO device backend"
+  DEPENDS "libgio" GIO_FOUND
+  DEPENDS "Linux or Windows" "NOT APPLE"
+)
 
-if(ENABLE_BREAKPAD)
-  set(HAVE_BREAKPAD ON)
-endif(ENABLE_BREAKPAD)
+optional_component(IMOBILEDEVICE ON "Devices: iPod Touch, iPhone, iPad support"
+  DEPENDS "libimobiledevice" IMOBILEDEVICE_FOUND
+  DEPENDS "libplist" PLIST_FOUND
+  DEPENDS "libusbmuxd" USBMUXD_FOUND
+  DEPENDS "iPod classic support" HAVE_LIBGPOD
+)
 
-if(ENABLE_SPOTIFY AND PROTOBUF_FOUND AND PROTOBUF_PROTOC_EXECUTABLE)
-  set(HAVE_SPOTIFY ON)
-endif(ENABLE_SPOTIFY AND PROTOBUF_FOUND AND PROTOBUF_PROTOC_EXECUTABLE)
+optional_component(LIBMTP ON "Devices: MTP support"
+  DEPENDS "libmtp" LIBMTP_FOUND
+)
 
-if(ENABLE_SPOTIFY_BLOB AND PROTOBUF_FOUND AND PROTOBUF_PROTOC_EXECUTABLE AND SPOTIFY_FOUND)
-  set(HAVE_SPOTIFY_BLOB ON)
-endif(ENABLE_SPOTIFY_BLOB AND PROTOBUF_FOUND AND PROTOBUF_PROTOC_EXECUTABLE AND SPOTIFY_FOUND)
+optional_component(SOUNDMENU ON "Gnome sound menu integration"
+  DEPENDS "indicate-qt" INDICATEQT_FOUND
+)
 
-if((NOT HAVE_SPOTIFY_BLOB) AND (NOT QCA_FOUND))
-  # If we're not bundling the spotify blob then we must ensure QCA is available
-  # so we can verify the blob we download at runtime.
-  unset(HAVE_SPOTIFY)
-endif((NOT HAVE_SPOTIFY_BLOB) AND (NOT QCA_FOUND))
+optional_component(LIBLASTFM ON "Last.fm support"
+  DEPENDS "liblastfm" LASTFM_LIBRARIES LASTFM_INCLUDE_DIRS
+)
 
-if(QCA_FOUND AND HAVE_SPOTIFY)
-  set(HAVE_QCA ON)
-endif(QCA_FOUND AND HAVE_SPOTIFY)
+optional_component(DBUS ON "D-Bus support"
+  DEPENDS "Linux" LINUX
+)
 
-if(ENABLE_MOODBAR AND FFTW3_FOUND)
-  set(HAVE_MOODBAR ON)
+optional_component(WIIMOTEDEV ON "Wiimote support"
+  DEPENDS "D-Bus support" HAVE_DBUS
+)
+
+optional_component(DEVICEKIT ON "Devices: DeviceKit backend"
+  DEPENDS "D-Bus support" HAVE_DBUS
+)
+
+optional_component(SPOTIFY ON "Spotify support: core code"
+  DEPENDS "protobuf" PROTOBUF_FOUND PROTOBUF_PROTOC_EXECUTABLE
+)
+
+optional_component(SPOTIFY_BLOB ON "Spotify support: non-GPL binary helper"
+  DEPENDS "protobuf" PROTOBUF_FOUND PROTOBUF_PROTOC_EXECUTABLE
+  DEPENDS "libspotify" SPOTIFY_FOUND
+  DEPENDS "Spotify support: core code" HAVE_SPOTIFY
+)
+
+set(NEED_SPOTIFY_DOWNLOADER OFF)
+if(HAVE_SPOTIFY AND NOT HAVE_SPOTIFY_BLOB)
+  set(NEED_SPOTIFY_DOWNLOADER ON)
 endif()
 
+optional_component(SPOTIFY_DOWNLOADER
+  ${NEED_SPOTIFY_DOWNLOADER} "Spotify support: blob downloader"
+  DEPENDS "qca2" QCA_FOUND
+)
+
+optional_component(MOODBAR ON "Moodbar support"
+  DEPENDS "fftw3" FFTW3_FOUND
+)
+
+optional_component(SPARKLE ON "Sparkle integration"
+  DEPENDS "Mac OS X" APPLE
+  DEPENDS "Sparkle" SPARKLE
+)
+
+optional_component(VISUALISATIONS ON "Visualisations")
+
+
+# Find DBus if it's enabled
+if (HAVE_DBUS)
+  find_package(Qt4 REQUIRED QtDbus)
+endif ()
+
+# We can include the Qt definitions now
+include(${QT_USE_FILE})
+
+# Remove GLU and GL from the link line - they're not really required
+# and don't exist on my mingw toolchain
+list(REMOVE_ITEM QT_LIBRARIES "-lGLU -lGL")
+
+option(BUNDLE_PROJECTM_PRESETS "Install Clementine's own copies of libprojectm presets - disable this if you want to use a system package instead" ON)
 
 if(ENABLE_VISUALISATIONS)
   # When/if upstream accepts our patches then these options can be used to link
@@ -387,7 +417,6 @@ add_subdirectory(src)
 if (WIN32)
   add_subdirectory(3rdparty/qtwin)
 endif (WIN32)
-add_subdirectory(3rdparty/universalchardet)
 add_subdirectory(tests)
 add_subdirectory(dist)
 add_subdirectory(tools/ultimate_lyrics_parser)
@@ -430,20 +459,4 @@ add_custom_target(uninstall
   "${CMAKE_COMMAND}" -P "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake")
 
 # Show a summary of what we have enabled
-summary_add("Crash reporting" HAVE_BREAKPAD)
-summary_add("D-Bus support" HAVE_DBUS)
-summary_add("Devices: Audio CD support" HAVE_AUDIOCD)
-summary_add("Devices: DeviceKit backend" HAVE_DEVICEKIT)
-summary_add("Devices: iPod classic support" HAVE_LIBGPOD)
-summary_add("Devices: iPod Touch, iPhone, iPad support" HAVE_IMOBILEDEVICE)
-summary_add("Devices: MTP support" HAVE_LIBMTP)
-summary_add("Devices: GIO backend" HAVE_GIO)
-summary_add("Gnome sound menu integration" HAVE_LIBINDICATE)
-summary_add("Last.fm support" HAVE_LIBLASTFM)
-summary_add("Moodbar support" HAVE_MOODBAR)
-summary_add("Spotify support: core code" HAVE_SPOTIFY)
-summary_add("Spotify support: non-GPL binary helper" HAVE_SPOTIFY_BLOB)
-summary_add("Visualisations" ENABLE_VISUALISATIONS)
-summary_add("Wiimote support" HAVE_WIIMOTEDEV)
-summary_add("(Mac OS X) Sparkle integration" HAVE_SPARKLE)
 summary_show()

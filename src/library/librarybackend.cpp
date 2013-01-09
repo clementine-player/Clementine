@@ -628,18 +628,6 @@ SongList LibraryBackend::GetSongsByUrl(const QUrl& url) {
   return songlist;
 }
 
-bool LibraryBackend::HasCompilations(const QueryOptions& opt) {
-  LibraryQuery query(opt);
-  query.SetColumnSpec("%songs_table.ROWID");
-  query.AddCompilationRequirement(true);
-  query.SetLimit(1);
-
-  QMutexLocker l(db_->Mutex());
-  if (!ExecQuery(&query)) return false;
-
-  return query.Next();
-}
-
 LibraryBackend::AlbumList LibraryBackend::GetCompilationAlbums(const QueryOptions& opt) {
   return GetAlbums(QString(), true, opt);
 }

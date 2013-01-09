@@ -104,6 +104,13 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
     }
   };
 
+  struct QueryResult {
+    QueryResult() : create_va(false) {}
+
+    SqlRowList rows;
+    bool create_va;
+  };
+
   LibraryBackend* backend() const { return backend_; }
   LibraryDirectoryModel* directory_model() const { return dir_model_; }
 
@@ -186,8 +193,10 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
   // Provides some optimisations for loading the list of items in the root.
   // This gets called a lot when filtering the playlist, so it's nice to be
   // able to do it in a background thread.
-  SqlRowList RunRootQuery(const QueryOptions& query_options,
-                          const Grouping& group_by);
+  QueryResult RunQuery(LibraryItem* parent);
+  void PostQuery(LibraryItem* parent, const QueryResult& result, bool signal);
+
+  bool HasCompilations(const LibraryQuery& query);
 
   void BeginReset();
 
@@ -252,9 +261,6 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
 
   // Keyed on a letter, a year, a century, etc.
   QMap<QString, LibraryItem*> divider_nodes_;
-
-  // Only applies if the first level is "artist"
-  LibraryItem* compilation_artist_node_;
 
   // Only applies if smart playlists are set to on
   LibraryItem* smart_playlist_node_;

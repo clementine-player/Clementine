@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>640</width>
-    <height>33</height>
+    <height>38</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -67,14 +67,7 @@
               <number>0</number>
              </property>
              <item>
-              <widget class="QLineEdit" name="value_text">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-              </widget>
+              <widget class="QLineEdit" name="value_text"/>
              </item>
             </layout>
            </widget>
@@ -101,12 +94,6 @@
              </property>
              <item>
               <widget class="QTimeEdit" name="value_time">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
                <property name="displayFormat">
                 <string notr="true">mm:ss</string>
                </property>
@@ -124,12 +111,6 @@
              </property>
              <item>
               <widget class="QSpinBox" name="value_number">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
                <property name="maximum">
                 <number>1000000</number>
                </property>
@@ -147,12 +128,6 @@
              </property>
              <item>
               <widget class="QDateEdit" name="value_date">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
                <property name="calendarPopup">
                 <bool>true</bool>
                </property>
@@ -257,15 +232,12 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="remove">
+       <widget class="QToolButton" name="remove">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
-        </property>
-        <property name="text">
-         <string>Remove</string>
         </property>
        </widget>
       </item>

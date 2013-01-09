@@ -25,6 +25,7 @@
 #import <GrowlApplicationBridge.h>
 
 #include "core/scoped_nsautorelease_pool.h"
+#include "core/scoped_nsobject.h"
 
 @interface GrowlInterface :NSObject <GrowlApplicationBridgeDelegate> {
 }
@@ -137,8 +138,37 @@ bool OSD::SupportsTrayPopups() {
   return false;
 }
 
+namespace {
+
+bool NotificationCenterSupported() {
+  return NSClassFromString(@"NSUserNotificationCenter");
+}
+
+void SendNotificationCenterMessage(NSString* title, NSString* subtitle) {
+  Class clazz = NSClassFromString(@"NSUserNotificationCenter");
+  id notification_center = [clazz defaultUserNotificationCenter];
+
+  Class user_notification_class = NSClassFromString(@"NSUserNotification");
+  id notification = [[user_notification_class alloc] init];
+  [notification setTitle: title];
+  [notification setSubtitle: subtitle];
+
+  [notification_center deliverNotification: notification];
+}
+
+}
+
 void OSD::ShowMessageNative(const QString& summary, const QString& message,
                             const QString& icon, const QImage& image) {
   Q_UNUSED(icon);
-  wrapper_->ShowMessage(summary, message, image);
+
+  if (NotificationCenterSupported()) {
+    scoped_nsobject<NSString> mac_message(
+        [[NSString alloc] initWithUTF8String:message.toUtf8().constData()]);
+    scoped_nsobject<NSString> mac_summary(
+        [[NSString alloc] initWithUTF8String:summary.toUtf8().constData()]);
+    SendNotificationCenterMessage(mac_summary.get(), mac_message.get());
+  } else {
+    wrapper_->ShowMessage(summary, message, image);
+  }
 }

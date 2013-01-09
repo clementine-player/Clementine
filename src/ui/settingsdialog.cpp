@@ -38,6 +38,7 @@
 #include "internet/groovesharksettingspage.h"
 #include "internet/magnatunesettingspage.h"
 #include "internet/subsonicsettingspage.h"
+#include "internet/ubuntuonesettingspage.h"
 #include "library/librarysettingspage.h"
 #include "playlist/playlistview.h"
 #include "podcasts/podcastsettingspage.h"
@@ -58,6 +59,18 @@
 
 #ifdef HAVE_SPOTIFY
 # include "internet/spotifysettingspage.h"
+#endif
+
+#ifdef HAVE_GOOGLE_DRIVE
+# include "internet/googledrivesettingspage.h"
+#endif
+
+#ifdef HAVE_UBUNTU_ONE
+#  include "internet/ubuntuonesettingspage.h"
+#endif
+
+#ifdef HAVE_DROPBOX
+#  include "internet/dropboxsettingspage.h"
 #endif
 
 #include <QDesktopWidget>
@@ -139,6 +152,18 @@ SettingsDialog::SettingsDialog(Application* app, BackgroundStreams* streams, QWi
 #endif
 
   AddPage(Page_Grooveshark, new GroovesharkSettingsPage(this), providers);
+
+#ifdef HAVE_GOOGLE_DRIVE
+  AddPage(Page_GoogleDrive, new GoogleDriveSettingsPage(this), providers);
+#endif
+
+#ifdef HAVE_UBUNTU_ONE
+  AddPage(Page_UbuntuOne, new UbuntuOneSettingsPage(this), providers);
+#endif
+
+#ifdef HAVE_DROPBOX
+  AddPage(Page_Dropbox, new DropboxSettingsPage(this), providers);
+#endif
 
 #ifdef HAVE_SPOTIFY
   AddPage(Page_Spotify, new SpotifySettingsPage(this), providers);

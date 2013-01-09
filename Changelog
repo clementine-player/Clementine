@@ -1,3 +1,130 @@
+Version 1.1.1:
+  Bugfixes:
+    * (Windows) Fix a crash that would always occur for some users.
+    * (Linux) Bundle Taglib 1.8 on older distros to enable Google Drive support
+      in Clementine.
+
+
+
+Version 1.1:
+  Major features:
+    * Podcast support with integration with gpodder.net.
+    * Add support for indexing and playing music from Google Drive.
+    * Add Soundcloud support.
+    * Add jazzradio.com support.
+    * Moodbar support.
+
+  Other features:
+    * Show nearby concerts for an artist using the Songkick API.
+    * Support "My Music" in Grooveshark.
+    * Support logical operators in the playlist filter.
+    * Remove Spotify and Grooveshark search playlists in favour of the
+      internet tab.
+    * Support liblastfm1.
+    * Make the grouping of global search results configurable.
+    * Support top lists in Spotify (eg. top 100).
+    * Support drag and drop from the global search to the playlist.
+    * Support undo for playlist sorting and shuffling.
+    * Updated global search UI.
+    * Verify and backup database on startup.
+    * Support mono playback.
+    * Add an option to prefer the AlbumArtist tag over the Artist tag when
+      scrobbling to Last.fm.
+    * Add the ability to get a Grooveshark URL to share a songs and playlists.
+    * Support loading spotify URLs from the command line.
+    * Add "Very high" quality setting for visualisations.
+    * Support setting the current album cover or a custom image as the
+      playlist background.
+    * Add support for darklyrics as a lyrics source.
+    * Add %filename% as a custom OSD variable.
+    * Show .mka, .ape and .wv in file view.
+    * Load cover art from mp4 files.
+    * Copy text from all visible columns when copying a playlist row.
+    * Add "Edit file information" and "Show in file browser" actions to the
+      file view.
+    * Add Discogs as an album cover provider.
+    * Nyanalyzer cat now goes to sleep between songs.
+    * (Mac OS X) Support drag and dropping files and folders on the dock icon.
+    * (Mac OS X) Support notification center instead of Growl on Mountain
+      Lion.
+    * (Mac OS X) Support fullscreen mode in Mountain Lion.
+    * (Mac OS X) Draw high resolution text when using a retina display.
+
+  Bugfixes:
+    * Use new authentication API for di.fm/sky.fm to fix logging in to those
+      services.
+    * Move tag reading to a separate process to isolate taglib crashes.
+    * Fix hang on exit while library is being changed.
+    * Fix parsing of cue sheets longer than 99 minutes.
+    * Preserve the current song in the library view when filtering.
+    * Previous button actually goes to the previous track when repeat track
+      mode is enabled.
+    * Fix crashes when requesting MPRIS data during startup.
+    * Enable horizontal scrolling in the Transcode dialog so the user can see
+      the whole path.
+    * Stop showing the search box for Grooveshark and Spotify if the user is
+      not logged in.
+    * Fix neverending task in Grooveshark if the user is logged out.
+    * Fix 1px size change in the tool buttons in the main window.
+    * Dragging songs to the bottom of the playlist now adds them to the
+      bottom.
+    * Improve startup time by moving DeviceManager initialisation off the main
+      thread.
+    * Fix crash when trying to seek with no song playing.
+    * Scale the missing cover image in the edit tag dialog correctly.
+    * Use the first visible column when dragging and dropping within the
+      playlist.
+    * Fix a crash at startup when initialising the library before the grouping
+      settings have been loaded.
+    * Handle various artists correctly in global search.
+    * Add suggestions in global search.
+    * Follow HTTP redirects correctly.
+    * Find hidden album art.
+    * Support genre and date in cue sheets.
+    * Cache album art in the library model to prevent flicking when filtering.
+    * Locale-aware sorting of Grooveshark songs.
+    * Sort Grooveshark playlists by name.
+    * Work around a bug in Qt so the number of mouse wheel scroll lines is
+      respected.
+    * Fix transparency of visualisation overlay.
+    * Fix transparency of pretty OSD.
+    * Show thumbnails of album art in the tray icon tooltip instead of full
+      size images.
+    * Allow upper case headers in PLS files.
+    * Support libimobiledevice 1.1.2.
+    * Fix crash when drag and dropping from a separate Clementine instance.
+    * Sort SomaFM streams alphabetically.
+    * Fix crash when OpenGL is unavailable.
+    * Fix some resource leaks in the Grooveshark support.
+    * Update the year when completing tags automatically.
+    * Fix a crash when changing a song's rating.
+    * Fix a crash when searching for album covers.
+    * Load spotify URLs correctly from playlists.
+    * (Linux) Fix a crash on exit when Gnome accessibility is enabled.
+    * (Linux) Work around a hang on exit caused by certain NVidia drivers.
+    * (Linux) Support devices with no partition table.
+    * (Linux) Support "open with" in Ubuntu.
+    * (Linux) Fix a crash in PlayTrack MPRIS method.
+    * (Linux) Fix the types of some MPRIS fields.
+    * (Mac OS X) Fix HTTPS streams.
+    * (Mac OS X) Support keyboard shortcuts in native Mac search fields.
+    * (Mac OS X) Use Qocoa instead of custom hacks for native search widgets.
+    * (Mac OS X) Fix crash on exit.
+    * (Mac OS X) Avoid churn from frequent FSEvent stream updates.
+    * (Mac OS X) Hide empty help menu on Mac.
+    * (Mac OS X) Fix leaks in device handling code.
+    * (Windows) Remove the drop shadow in the OSD.
+    * (Windows) Do not show the OSD in the taskbar.
+    * (Windows) Fix a crash when clicking on the empty button in the thumbbar.
+
+  Build system changes:
+    * Add continous builds for Fedora Core 17 and Ubuntu 12.04.
+    * Show which dependencies are missing when trying to enable optional
+      features.
+    * (Mac OS X and Windows) Upgrade to Qt 4.8.2.
+
+
+
 Version 1.0.1:
   Bugfixes:
     * Use Chromaprinter and Acoustid instead of Echoprint and MusicDNS.
@@ -6,6 +133,7 @@ Version 1.0.1:
       username or password" error when logging in to Grooveshark.
     * (Mac OS X) Use FSEvent-based filesystem watcher to fix a number of crashes
       due to running out of file handles when monitoring a large library.
+
 
 
 Version 1.0:

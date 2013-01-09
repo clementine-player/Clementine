@@ -149,23 +149,21 @@ class GroovesharkService : public InternetService {
   };
 
  private slots:
-  void UpdateTotalSongCount(int count);
-
-  void SessionCreated();
+  void SessionCreated(QNetworkReply* reply);
   void DoSearch();
-  void SearchSongsFinished();
-  void SimpleSearchFinished();
+  void SearchSongsFinished(QNetworkReply* reply);
+  void SimpleSearchFinished(QNetworkReply* reply, int id);
   void SearchAlbumsFinished(QNetworkReply* reply, int id);
   void GetAlbumSongsFinished(QNetworkReply* reply, quint64 album_id);
-  void Authenticated();
-  void UserPlaylistsRetrieved();
+  void Authenticated(QNetworkReply* reply);
+  void UserPlaylistsRetrieved(QNetworkReply* reply);
   void UserFavoritesRetrieved(QNetworkReply* reply, int task_id);
   void UserLibrarySongsRetrieved(QNetworkReply* reply, int task_id);
   void PopularSongsMonthRetrieved(QNetworkReply* reply);
   void PopularSongsTodayRetrieved(QNetworkReply* reply);
   void SubscribedPlaylistsRetrieved(QNetworkReply* reply);
   void AutoplayTagsRetrieved(QNetworkReply* reply);
-  void PlaylistSongsRetrieved();
+  void PlaylistSongsRetrieved(QNetworkReply* reply, int playlist_id);
   void PlaylistSongsSet(QNetworkReply* reply, int playlist_id, int task_id);
   void CreateNewPlaylist();
   void NewPlaylistCreated(QNetworkReply* reply, const QString& name);
@@ -187,8 +185,8 @@ class GroovesharkService : public InternetService {
   void RemoveCurrentFromLibrary();
   void SongsRemovedFromFavorites(QNetworkReply* reply, int task_id);
   void SongsRemovedFromLibrary(QNetworkReply* reply, int task_id);
-  void StreamMarked();
-  void SongMarkedAsComplete();
+  void StreamMarked(QNetworkReply* reply);
+  void SongMarkedAsComplete(QNetworkReply* reply);
 
   void RequestSslErrors(const QList<QSslError>& errors);
 
@@ -246,9 +244,8 @@ class GroovesharkService : public InternetService {
   QString pending_search_;
 
   int next_pending_search_id_;
-  QMap<QNetworkReply*, int> pending_searches_;
 
-  QMap<QNetworkReply*, int> pending_retrieve_playlists_;
+  QSet<int> pending_retrieve_playlists_;
 
   QMap<int, PlaylistInfo> playlists_;
   QMap<int, PlaylistInfo> subscribed_playlists_;

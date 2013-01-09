@@ -15,8 +15,14 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "digitallyimportedclient.h"
 #include "digitallyimportedservicebase.h"
+
+#include <QDesktopServices>
+#include <QMenu>
+#include <QNetworkReply>
+#include <QSettings>
+
+#include "digitallyimportedclient.h"
 #include "digitallyimportedurlhandler.h"
 #include "internetmodel.h"
 #include "core/application.h"
@@ -28,11 +34,6 @@
 #include "globalsearch/digitallyimportedsearchprovider.h"
 #include "globalsearch/globalsearch.h"
 #include "ui/iconloader.h"
-
-#include <QDesktopServices>
-#include <QMenu>
-#include <QNetworkReply>
-#include <QSettings>
 
 const char* DigitallyImportedServiceBase::kSettingsGroup = "digitally_imported";
 const int DigitallyImportedServiceBase::kStreamsCacheDurationSecs =
@@ -193,11 +194,7 @@ bool DigitallyImportedServiceBase::is_premium_account() const {
   return !listen_hash_.isEmpty();
 }
 
-void DigitallyImportedServiceBase::LoadPlaylistFinished() {
-  QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
-  if (!reply) {
-    return;
-  }
+void DigitallyImportedServiceBase::LoadPlaylistFinished(QNetworkReply* reply) {
   reply->deleteLater();
 
   if (reply->header(QNetworkRequest::ContentTypeHeader).toString() == "text/html") {
@@ -238,7 +235,8 @@ void DigitallyImportedServiceBase::LoadStation(const QString& key) {
   qLog(Debug) << "Getting playlist URL" << playlist_url;
 
   QNetworkReply* reply = network_->get(QNetworkRequest(playlist_url));
-  connect(reply, SIGNAL(finished()), SLOT(LoadPlaylistFinished()));
+  NewClosure(reply, SIGNAL(finished()), this,
+             SLOT(LoadPlaylistFinished(QNetworkReply*)), reply);
 }
 
 
@@ -260,6 +258,28 @@ SkyFmService::SkyFmService(
                                  QUrl("http://www.sky.fm"),
                                  QIcon(":/providers/skyfm.png"),
                                  "sky",
+                                 app, model, parent)
+{
+}
+
+JazzRadioService::JazzRadioService(
+      Application* app, InternetModel* model, QObject* parent)
+  : DigitallyImportedServiceBase("JazzRadio",
+                                 "JAZZRADIO.com",
+                                 QUrl("http://www.jazzradio.com"),
+                                 QIcon(":/providers/jazzradio.png"),
+                                 "jazzradio",
+                                 app, model, parent)
+{
+}
+
+RockRadioService::RockRadioService(
+      Application* app, InternetModel* model, QObject* parent)
+  : DigitallyImportedServiceBase("RockRadio",
+                                 "ROCKRADIO.com",
+                                 QUrl("http://www.rockradio.com"),
+                                 QIcon(":/providers/rockradio.png"),
+                                 "rockradio",
                                  app, model, parent)
 {
 }

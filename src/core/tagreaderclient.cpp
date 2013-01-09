@@ -21,6 +21,8 @@
 #include <QFile>
 #include <QProcess>
 #include <QTcpServer>
+#include <QThread>
+#include <QUrl>
 
 
 const char* TagReaderClient::kWorkerExecutableName = "clementine-tagreader";
@@ -33,6 +35,7 @@ TagReaderClient::TagReaderClient(QObject* parent)
   sInstance = this;
 
   worker_pool_->SetExecutableName(kWorkerExecutableName);
+  worker_pool_->SetWorkerCount(QThread::idealThreadCount());
   connect(worker_pool_, SIGNAL(WorkerFailedToStart()), SLOT(WorkerFailedToStart()));
 }
 
@@ -79,6 +82,25 @@ TagReaderReply* TagReaderClient::LoadEmbeddedArt(const QString& filename) {
   pb::tagreader::LoadEmbeddedArtRequest* req = message.mutable_load_embedded_art_request();
 
   req->set_filename(DataCommaSizeFromQString(filename));
+
+  return worker_pool_->SendMessageWithReply(&message);
+}
+
+TagReaderReply* TagReaderClient::ReadCloudFile(const QUrl& download_url,
+                                               const QString& title,
+                                               int size,
+                                               const QString& mime_type,
+                                               const QString& authorisation_header) {
+  pb::tagreader::Message message;
+  pb::tagreader::ReadCloudFileRequest* req =
+      message.mutable_read_cloud_file_request();
+
+  const QString url_string = download_url.toEncoded();
+  req->set_download_url(DataCommaSizeFromQString(url_string));
+  req->set_title(DataCommaSizeFromQString(title));
+  req->set_size(size);
+  req->set_mime_type(DataCommaSizeFromQString(mime_type));
+  req->set_authorisation_header(DataCommaSizeFromQString(authorisation_header));
 
   return worker_pool_->SendMessageWithReply(&message);
 }

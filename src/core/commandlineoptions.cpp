@@ -220,10 +220,11 @@ bool CommandlineOptions::Parse() {
   // Get any filenames or URLs following the arguments
   for (int i=optind ; i<argc_ ; ++i) {
     QString value = QFile::decodeName(argv_[i]);
-    if (value.contains(":"))
-      urls_ << value;
+    QFileInfo file_info(value);
+    if (file_info.exists())
+      urls_ << QUrl::fromLocalFile(file_info.canonicalFilePath());
     else
-      urls_ << QUrl::fromLocalFile(QFileInfo(value).canonicalFilePath());
+      urls_ << QUrl::fromUserInput(value);
   }
 
   return true;

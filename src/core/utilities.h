@@ -41,6 +41,7 @@ namespace Utilities {
   QString WordyTime(quint64 seconds);
   QString WordyTimeNanosec(qint64 nanoseconds);
   QString Ago(int seconds_since_epoch, const QLocale& locale);
+  QString PrettyFutureDate(const QDate& date);
 
   QString ColorToRgba(const QColor& color);
 
@@ -57,10 +58,12 @@ namespace Utilities {
   enum HashFunction {
     Md5_Algo,
     Sha256_Algo,
+    Sha1_Algo,
   };
   QByteArray Hmac(const QByteArray& key, const QByteArray& data, HashFunction algo);
   QByteArray HmacMd5(const QByteArray& key, const QByteArray& data);
   QByteArray HmacSha256(const QByteArray& key, const QByteArray& data);
+  QByteArray HmacSha1(const QByteArray& key, const QByteArray& data);
   QByteArray Sha256(const QByteArray& data);
 
 
@@ -109,6 +112,7 @@ namespace Utilities {
     Path_DefaultMusicLibrary,
     Path_LocalSpotifyBlob,
     Path_MoodbarCache,
+    Path_CacheRoot,
   };
   QString GetConfigPath(ConfigPath config);
 

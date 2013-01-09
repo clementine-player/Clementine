@@ -23,6 +23,7 @@
 #include "core/commandlineoptions.h"
 #include "core/database.h"
 #include "core/deletefiles.h"
+#include "core/filesystemmusicstorage.h"
 #include "core/globalshortcuts.h"
 #include "core/logging.h"
 #include "core/mac_startup.h"
@@ -58,6 +59,7 @@
 #include "musicbrainz/tagfetcher.h"
 #include "playlist/playlistbackend.h"
 #include "playlist/playlist.h"
+#include "playlist/playlistlistcontainer.h"
 #include "playlist/playlistmanager.h"
 #include "playlist/playlistsequence.h"
 #include "playlist/playlistview.h"
@@ -74,6 +76,7 @@
 #include "ui/about.h"
 #include "ui/addstreamdialog.h"
 #include "ui/albumcovermanager.h"
+#include "ui/console.h"
 #include "ui/edittagdialog.h"
 #include "ui/equalizer.h"
 #include "ui/iconloader.h"
@@ -165,6 +168,7 @@ MainWindow::MainWindow(Application* app,
     global_search_view_(new GlobalSearchView(app_, this)),
     library_view_(new LibraryViewContainer(this)),
     file_view_(new FileView(this)),
+    playlist_list_(new PlaylistListContainer(this)),
     internet_view_(new InternetViewContainer(this)),
     device_view_(new DeviceView(this)),
     song_info_view_(new SongInfoView(this)),
@@ -183,6 +187,7 @@ MainWindow::MainWindow(Application* app,
 #endif
     playlist_menu_(new QMenu(this)),
     playlist_add_to_another_(NULL),
+    playlistitem_actions_separator_(NULL),
     library_sort_model_(new QSortFilterProxyModel(this)),
     track_position_timer_(new QTimer(this)),
     was_maximized_(false),
@@ -226,6 +231,7 @@ MainWindow::MainWindow(Application* app,
   ui_->tabs->AddTab(global_search_view_, IconLoader::Load("search"), tr("Search"));
   ui_->tabs->AddTab(library_view_, IconLoader::Load("folder-sound"), tr("Library"));
   ui_->tabs->AddTab(file_view_, IconLoader::Load("document-open"), tr("Files"));
+  ui_->tabs->AddTab(playlist_list_, IconLoader::Load("view-media-playlist"), tr("Playlists"));
   ui_->tabs->AddTab(internet_view_, IconLoader::Load("applications-internet"), tr("Internet"));
   ui_->tabs->AddTab(device_view_, IconLoader::Load("multimedia-player-ipod-mini-blue"), tr("Devices"));
   ui_->tabs->AddSpacer();
@@ -261,6 +267,7 @@ MainWindow::MainWindow(Application* app,
   library_view_->view()->SetApplication(app_);
   internet_view_->SetApplication(app_);
   device_view_->SetApplication(app_);
+  playlist_list_->SetApplication(app_);
 
   organise_dialog_->SetDestinationModel(app_->library()->model()->directory_model());
 
@@ -367,10 +374,14 @@ MainWindow::MainWindow(Application* app,
   ui_->ban_button->setDefaultAction(ui_->action_ban);
   ui_->scrobbling_button->setDefaultAction(ui_->action_toggle_scrobbling);
   ui_->clear_playlist_button->setDefaultAction(ui_->action_clear_playlist);
-  ui_->playlist->SetActions(ui_->action_new_playlist, ui_->action_save_playlist,
+  ui_->playlist->SetActions(ui_->action_new_playlist,
                             ui_->action_load_playlist,
+                            ui_->action_save_playlist,
                             ui_->action_next_playlist,    /* These two actions aren't associated */
                             ui_->action_previous_playlist /* to a button but to the main window */ );
+  playlist_list_->SetActions(ui_->action_new_playlist,
+                             ui_->action_load_playlist,
+                             ui_->action_save_playlist);
 
 
 #ifdef ENABLE_VISUALISATIONS
@@ -432,6 +443,8 @@ MainWindow::MainWindow(Application* app,
   connect(library_view_->view(), SIGNAL(AddToPlaylistSignal(QMimeData*)), SLOT(AddToPlaylist(QMimeData*)));
   connect(library_view_->view(), SIGNAL(ShowConfigDialog()), SLOT(ShowLibraryConfig()));
   connect(app_->library_model(), SIGNAL(TotalSongCountUpdated(int)), library_view_->view(), SLOT(TotalSongCountUpdated(int)));
+  connect(app_->library_model(), SIGNAL(modelAboutToBeReset()), library_view_->view(), SLOT(SaveFocus()));
+  connect(app_->library_model(), SIGNAL(modelReset()), library_view_->view(), SLOT(RestoreFocus()));
 
   connect(app_->task_manager(), SIGNAL(PauseLibraryWatchers()), app_->library(), SLOT(PauseWatcher()));
   connect(app_->task_manager(), SIGNAL(ResumeLibraryWatchers()), app_->library(), SLOT(ResumeWatcher()));
@@ -491,9 +504,10 @@ MainWindow::MainWindow(Application* app,
   playlist_delete_ = playlist_menu_->addAction(IconLoader::Load("edit-delete"), tr("Delete from disk..."), this, SLOT(PlaylistDelete()));
   playlist_open_in_browser_ = playlist_menu_->addAction(IconLoader::Load("document-open-folder"), tr("Show in file browser..."), this, SLOT(PlaylistOpenInBrowser()));
   playlist_menu_->addSeparator();
+  playlistitem_actions_separator_ = playlist_menu_->addSeparator();
   playlist_menu_->addAction(ui_->action_clear_playlist);
-  playlist_menu_->addAction(ui_->action_remove_duplicates);
   playlist_menu_->addAction(ui_->action_shuffle);
+  playlist_menu_->addAction(ui_->action_remove_duplicates);
 
 #ifdef Q_OS_DARWIN
   ui_->action_shuffle->setShortcut(QKeySequence());
@@ -649,6 +663,7 @@ MainWindow::MainWindow(Application* app,
           SLOT(NowPlayingWidgetPositionChanged(bool)));
   connect(ui_->action_hypnotoad, SIGNAL(toggled(bool)), ui_->now_playing, SLOT(AllHail(bool)));
   connect(ui_->action_kittens, SIGNAL(toggled(bool)), ui_->now_playing, SLOT(EnableKittens(bool)));
+  connect(ui_->action_console, SIGNAL(triggered()), SLOT(ShowConsole()));
   NowPlayingWidgetPositionChanged(ui_->now_playing->show_above_status_bar());
 
   // Load theme
@@ -689,7 +704,7 @@ MainWindow::MainWindow(Application* app,
   if (!ui_->splitter->restoreState(settings_.value("splitter_state").toByteArray())) {
     ui_->splitter->setSizes(QList<int>() << 300 << width() - 300);
   }
-  ui_->tabs->SetCurrentIndex(settings_.value("current_tab", 0).toInt());
+  ui_->tabs->SetCurrentIndex(settings_.value("current_tab", 1 /* Library tab */ ).toInt());
   FancyTabWidget::Mode default_mode = FancyTabWidget::Mode_LargeSidebar;
   ui_->tabs->SetMode(FancyTabWidget::Mode(settings_.value(
       "tab_mode", default_mode).toInt()));
@@ -1343,7 +1358,8 @@ void MainWindow::PlaylistRightClick(const QPoint& global_pos, const QModelIndex&
 
     // Get the new item actions, and add them
     playlistitem_actions_ = item->actions();
-    playlist_menu_->insertActions(ui_->action_clear_playlist, playlistitem_actions_);
+    playlistitem_actions_separator_->setVisible(!playlistitem_actions_.isEmpty());
+    playlist_menu_->insertActions(playlistitem_actions_separator_, playlistitem_actions_);
   }
 
   //if it isn't the first time we right click, we need to remove the menu previously created
@@ -1357,7 +1373,7 @@ void MainWindow::PlaylistRightClick(const QPoint& global_pos, const QModelIndex&
   add_to_another_menu->setIcon(IconLoader::Load("list-add"));
 
   PlaylistBackend::Playlist playlist;
-  foreach (playlist, app_->playlist_backend()->GetAllPlaylists()) {
+  foreach (playlist, app_->playlist_backend()->GetAllOpenPlaylists()) {
     //don't add the current playlist
     if (playlist.id != app_->playlist_manager()->current()->id()) {
       QAction* existing_playlist = new QAction(this);
@@ -1810,12 +1826,7 @@ void MainWindow::PlaylistDelete() {
         QMessageBox::Yes, QMessageBox::Cancel) != QMessageBox::Yes)
     return;
 
-  // We can cheat and always take the storage of the first directory, since
-  // they'll all be FilesystemMusicStorage in a library and deleting doesn't
-  // check the actual directory.
-  boost::shared_ptr<MusicStorage> storage =
-      app_->library_model()->directory_model()->index(0, 0).data(MusicStorage::Role_Storage)
-      .value<boost::shared_ptr<MusicStorage> >();
+  boost::shared_ptr<MusicStorage> storage(new FilesystemMusicStorage("/"));
 
   // Get selected songs
   SongList selected_songs;
@@ -1838,7 +1849,7 @@ void MainWindow::PlaylistOpenInBrowser() {
 
   foreach (const QModelIndex& proxy_index, proxy_indexes) {
     const QModelIndex index = app_->playlist_manager()->current()->proxy()->mapToSource(proxy_index);
-    urls << index.sibling(index.row(), Playlist::Column_Filename).data().toString();
+    urls << QUrl(index.sibling(index.row(), Playlist::Column_Filename).data().toString());
   }
 
   Utilities::OpenInFileBrowser(urls);
@@ -1895,7 +1906,7 @@ void MainWindow::ChangeLibraryQueryMode(QAction* action) {
 
 void MainWindow::ShowCoverManager() {
   if (!cover_manager_) {
-    cover_manager_.reset(new AlbumCoverManager(app_));
+    cover_manager_.reset(new AlbumCoverManager(app_, app_->library_backend()));
     cover_manager_->Init();
 
     // Cover manager connections
@@ -2251,4 +2262,9 @@ void MainWindow::FocusGlobalSearchField() {
 void MainWindow::DoGlobalSearch(const QString& query) {
   FocusGlobalSearchField();
   global_search_view_->StartSearch(query);
+}
+
+void MainWindow::ShowConsole() {
+  Console* console = new Console(app_, this);
+  console->show();
 }

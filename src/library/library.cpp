@@ -101,7 +101,7 @@ Library::Library(Application* app, QObject *parent)
 Library::~Library() {
   watcher_->deleteLater();
   watcher_thread_->exit();
-  watcher_thread_->wait();
+  watcher_thread_->wait(5000 /* five seconds */);
 }
 
 void Library::Init() {

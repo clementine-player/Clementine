@@ -143,6 +143,8 @@ QString OrganiseFormat::TagValue(const QString &tag, const Song &song) const {
   else if (tag == "extension")   value = song.url().toLocalFile().section('.', -1, -1);
   else if (tag == "artistinitial") {
     value = song.effective_albumartist().trimmed();
+    if (replace_the_ && !value.isEmpty())
+      value.replace(QRegExp("^the\\s+", Qt::CaseInsensitive), "");
     if (!value.isEmpty()) value = value[0].toUpper();
   }
   else if (tag == "albumartist") {

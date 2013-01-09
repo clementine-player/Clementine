@@ -27,6 +27,7 @@
 #include <QNetworkAccessManager>
 #include <QObject>
 #include <QQueue>
+#include <QUrl>
 
 #include <boost/scoped_ptr.hpp>
 
@@ -52,7 +53,7 @@ struct CoverSearchRequest {
 };
 
 // This structure represents a single result of some album's cover search request.
-// It contains an URL that leads to a found cover plus it's description (usually
+// It contains an URL that leads to a found cover plus its description (usually
 // the "artist - album" string).
 struct CoverSearchResult {
   // used for grouping in the user interface.  This is set automatically - don't
@@ -63,7 +64,7 @@ struct CoverSearchResult {
   QString description;
 
   // an URL of a cover image described by this CoverSearchResult
-  QString image_url;
+  QUrl image_url;
 };
 Q_DECLARE_METATYPE(CoverSearchResult);
 

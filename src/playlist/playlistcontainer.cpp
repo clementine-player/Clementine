@@ -17,12 +17,10 @@
 
 #include "playlistcontainer.h"
 #include "playlistmanager.h"
-#include "specialplaylisttype.h"
 #include "ui_playlistcontainer.h"
 #include "core/logging.h"
 #include "playlistparsers/playlistparser.h"
 #include "ui/iconloader.h"
-#include "widgets/didyoumean.h"
 
 #include <QFileDialog>
 #include <QInputDialog>
@@ -32,9 +30,12 @@
 #include <QSettings>
 #include <QSortFilterProxyModel>
 #include <QTimeLine>
+#include <QTimer>
 #include <QUndoStack>
 
 const char* PlaylistContainer::kSettingsGroup = "Playlist";
+const int PlaylistContainer::kFilterDelayMs = 100;
+const int PlaylistContainer::kFilterDelayPlaylistSizeThreshold = 5000;
 
 PlaylistContainer::PlaylistContainer(QWidget *parent)
   : QWidget(parent),
@@ -47,7 +48,7 @@ PlaylistContainer::PlaylistContainer(QWidget *parent)
     tab_bar_visible_(false),
     tab_bar_animation_(new QTimeLine(500, this)),
     no_matches_label_(NULL),
-    did_you_mean_(NULL)
+    filter_timer_(new QTimer(this))
 {
   ui_->setupUi(this);
 
@@ -83,13 +84,15 @@ PlaylistContainer::PlaylistContainer(QWidget *parent)
   connect(ui_->tab_bar, SIGNAL(currentChanged(int)), SLOT(Save()));
   connect(ui_->tab_bar, SIGNAL(Save(int)), SLOT(SavePlaylist(int)));
 
+  // set up timer for delayed filter updates
+  filter_timer_->setSingleShot(true);
+  filter_timer_->setInterval(kFilterDelayMs);
+  connect(filter_timer_,SIGNAL(timeout()),this,SLOT(UpdateFilter()));
+
   // Replace playlist search filter with native search box.
-  connect(ui_->filter, SIGNAL(textChanged(QString)), SLOT(UpdateFilter()));
+  connect(ui_->filter, SIGNAL(textChanged(QString)), SLOT(MaybeUpdateFilter()));
   connect(ui_->playlist, SIGNAL(FocusOnFilterSignal(QKeyEvent*)), SLOT(FocusOnFilter(QKeyEvent*)));
   ui_->filter->installEventFilter(this);
-
-  did_you_mean_ = new DidYouMean(ui_->filter, this);
-  connect(did_you_mean_, SIGNAL(Accepted(QString)), SLOT(DidYouMeanAccepted(QString)));
 }
 
 PlaylistContainer::~PlaylistContainer() {
@@ -100,13 +103,11 @@ PlaylistView* PlaylistContainer::view() const {
   return ui_->playlist;
 }
 
-void PlaylistContainer::SetActions(
-    QAction* new_playlist, QAction* save_playlist, QAction* load_playlist,
-    QAction* next_playlist, QAction* previous_playlist) {
-  ui_->create_new->setDefaultAction(new_playlist);
-  ui_->save->setDefaultAction(save_playlist);
-  ui_->load->setDefaultAction(load_playlist);
-
+void PlaylistContainer::SetActions(QAction* new_playlist,
+                                   QAction* load_playlist,
+                                   QAction* save_playlist,
+                                   QAction* next_playlist,
+                                   QAction* previous_playlist) {
   ui_->tab_bar->SetActions(new_playlist, load_playlist);
 
   connect(new_playlist, SIGNAL(triggered()), SLOT(NewPlaylist()));
@@ -124,8 +125,8 @@ void PlaylistContainer::SetManager(PlaylistManager *manager) {
           manager, SLOT(SetCurrentPlaylist(int)));
   connect(ui_->tab_bar, SIGNAL(Rename(int,QString)),
           manager, SLOT(Rename(int,QString)));
-  connect(ui_->tab_bar, SIGNAL(Remove(int)),
-          manager, SLOT(Remove(int)));
+  connect(ui_->tab_bar, SIGNAL(Close(int)),
+          manager, SLOT(Close(int)));
   connect(ui_->tab_bar, SIGNAL(PlaylistOrderChanged(QList<int>)),
           manager, SLOT(ChangePlaylistOrder(QList<int>)));
 
@@ -133,8 +134,8 @@ void PlaylistContainer::SetManager(PlaylistManager *manager) {
           SLOT(SetViewModel(Playlist*)));
   connect(manager, SIGNAL(PlaylistAdded(int,QString)),
           SLOT(PlaylistAdded(int,QString)));
-  connect(manager, SIGNAL(PlaylistRemoved(int)),
-          SLOT(PlaylistRemoved(int)));
+  connect(manager, SIGNAL(PlaylistClosed(int)),
+          SLOT(PlaylistClosed(int)));
   connect(manager, SIGNAL(PlaylistRenamed(int,QString)),
           SLOT(PlaylistRenamed(int,QString)));
 }
@@ -206,11 +207,6 @@ void PlaylistContainer::SetViewModel(Playlist* playlist) {
 
   emit UndoRedoActionsChanged(undo_, redo_);
 
-  did_you_mean()->hide();
-
-  // Implement special playlist behaviour
-  const SpecialPlaylistType* type = manager_->GetPlaylistType(playlist->special_type());
-  ui_->filter->setPlaceholderText(type->search_hint_text(playlist));
 }
 
 void PlaylistContainer::ActivePlaying() {
@@ -228,12 +224,7 @@ void PlaylistContainer::ActiveStopped() {
 void PlaylistContainer::UpdateActiveIcon(const QIcon& icon) {
   // Unset all existing icons
   for (int i=0 ; i<ui_->tab_bar->count() ; ++i) {
-    // Get the default icon for this tab
-    const int id = ui_->tab_bar->tabData(i).toInt();
-    Playlist* playlist = manager_->playlist(id);
-    const SpecialPlaylistType* type = manager_->GetPlaylistType(playlist->special_type());
-
-    ui_->tab_bar->setTabIcon(i, type->icon(playlist));
+    ui_->tab_bar->setTabIcon(i, QIcon());
   }
 
   // Set our icon
@@ -242,12 +233,8 @@ void PlaylistContainer::UpdateActiveIcon(const QIcon& icon) {
 }
 
 void PlaylistContainer::PlaylistAdded(int id, const QString &name) {
-  Playlist* playlist = manager_->playlist(id);
-  const SpecialPlaylistType* type = manager_->GetPlaylistType(playlist->special_type());
-
   const int index = ui_->tab_bar->count();
-  const QIcon icon = type->icon(playlist);
-  ui_->tab_bar->InsertTab(id, index, name, icon);
+  ui_->tab_bar->InsertTab(id, index, name);
 
   // Are we startup up, should we select this tab?
   if (starting_up_ && settings_.value("current_playlist", 1).toInt() == id) {
@@ -271,7 +258,7 @@ void PlaylistContainer::PlaylistAdded(int id, const QString &name) {
   }
 }
 
-void PlaylistContainer::PlaylistRemoved(int id) {
+void PlaylistContainer::PlaylistClosed(int id) {
   ui_->tab_bar->RemoveTab(id);
 
   if (ui_->tab_bar->count() <= 1)
@@ -374,34 +361,31 @@ void PlaylistContainer::SetTabBarHeight(int height) {
   ui_->tab_bar->setMaximumHeight(height);
 }
 
-void PlaylistContainer::UpdateFilter() {
-  Playlist* playlist = manager_->current();
-  SpecialPlaylistType* type = manager_->GetPlaylistType(playlist->special_type());
-
-  did_you_mean()->hide();
-
-  if (type->has_special_search_behaviour(playlist)) {
-    type->Search(ui_->filter->text(), playlist);
+void PlaylistContainer::MaybeUpdateFilter() {
+  // delaying the filter update on small playlists is undesirable
+  // and an empty filter applies very quickly, too
+  if (manager_->current()->rowCount() < kFilterDelayPlaylistSizeThreshold ||
+      ui_->filter->text().isEmpty()) {
+    UpdateFilter();
   } else {
-    manager_->current()->proxy()->setFilterFixedString(ui_->filter->text());
-    ui_->playlist->JumpToCurrentlyPlayingTrack();
+    filter_timer_->start();
   }
+}
+
+void PlaylistContainer::UpdateFilter() {
+  manager_->current()->proxy()->setFilterFixedString(ui_->filter->text());
+  ui_->playlist->JumpToCurrentlyPlayingTrack();
 
   UpdateNoMatchesLabel();
 }
 
 void PlaylistContainer::UpdateNoMatchesLabel() {
   Playlist* playlist = manager_->current();
-  SpecialPlaylistType* type = manager_->GetPlaylistType(playlist->special_type());
-  const QString empty_text = type->empty_playlist_text(playlist);
-
   const bool has_rows = playlist->rowCount() != 0;
   const bool has_results = playlist->proxy()->rowCount() != 0;
 
   QString text;
-  if (!empty_text.isEmpty() && !has_results) {
-    text = empty_text;
-  } else if (has_rows && !has_results) {
+  if (has_rows && !has_results) {
     text = tr("No matches found.  Clear the search box to show the whole playlist again.");
   }
 
@@ -470,12 +454,4 @@ bool PlaylistContainer::eventFilter(QObject *objectWatched, QEvent *event) {
     }
   }
   return QWidget::eventFilter(objectWatched, event);
-}
-
-void PlaylistContainer::DidYouMeanAccepted(const QString& text) {
-  ui_->filter->setText(text);
-
-  Playlist* playlist = manager_->current();
-  SpecialPlaylistType* type = manager_->GetPlaylistType(playlist->special_type());
-  type->DidYouMeanClicked(text, playlist);
 }

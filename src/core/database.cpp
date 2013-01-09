@@ -37,7 +37,7 @@
 #include <QVariant>
 
 const char* Database::kDatabaseFilename = "clementine.db";
-const int Database::kSchemaVersion = 37;
+const int Database::kSchemaVersion = 42;
 const char* Database::kMagicAllSongsTables = "%allsongstables";
 
 int Database::sNextConnectionId = 1;
@@ -379,6 +379,7 @@ QSqlDatabase Database::Connect() {
 
   if (db.tables().count() == 0) {
     // Set up initial schema
+    qLog(Info) << "Creating initial database schema";
     UpdateDatabaseSchema(0, db);
   }
 
@@ -494,6 +495,8 @@ void Database::UpdateDatabaseSchema(int version, QSqlDatabase &db) {
     }
   }
   
+  qLog(Debug) << "Applying database schema update" << version
+              << "from" << filename;
   ExecFromFile(filename, db, version - 1);
   t.Commit();
 }

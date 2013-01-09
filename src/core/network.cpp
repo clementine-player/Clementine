@@ -23,6 +23,7 @@
 #include <QNetworkDiskCache>
 #include <QNetworkReply>
 
+#include "core/closure.h"
 #include "utilities.h"
 
 QMutex ThreadSafeNetworkDiskCache::sMutex;
@@ -121,6 +122,18 @@ void NetworkTimeouts::AddReply(QNetworkReply* reply) {
   timers_[reply] = startTimer(timeout_msec_);
 }
 
+void NetworkTimeouts::AddReply(RedirectFollower* reply) {
+  if (redirect_timers_.contains(reply)) {
+    return;
+  }
+
+  NewClosure(reply, SIGNAL(destroyed()), this,
+             SLOT(RedirectFinished(RedirectFollower*)), reply);
+  NewClosure(reply, SIGNAL(finished()), this,
+             SLOT(RedirectFinished(RedirectFollower*)), reply);
+  redirect_timers_[reply] = startTimer(timeout_msec_);
+}
+
 void NetworkTimeouts::ReplyFinished() {
   QNetworkReply* reply = reinterpret_cast<QNetworkReply*>(sender());
   if (timers_.contains(reply)) {
@@ -128,10 +141,21 @@ void NetworkTimeouts::ReplyFinished() {
   }
 }
 
+void NetworkTimeouts::RedirectFinished(RedirectFollower* reply) {
+  if (redirect_timers_.contains(reply)) {
+    killTimer(redirect_timers_.take(reply));
+  }
+}
+
 void NetworkTimeouts::timerEvent(QTimerEvent* e) {
   QNetworkReply* reply = timers_.key(e->timerId());
   if (reply) {
     reply->abort();
+  }
+
+  RedirectFollower* redirect = redirect_timers_.key(e->timerId());
+  if (redirect) {
+    redirect->abort();
   }
 }
 
@@ -156,7 +180,7 @@ void RedirectFollower::ReadyRead() {
   if (current_reply_->attribute(QNetworkRequest::RedirectionTargetAttribute).isValid()) {
     return;
   }
-  
+
   emit readyRead();
 }
 

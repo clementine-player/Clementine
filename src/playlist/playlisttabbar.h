@@ -50,13 +50,12 @@ public:
   void set_text_by_id(int id, const QString& text);
 
   void RemoveTab(int id);
-  void InsertTab(int id, int index, const QString& text,
-                 const QIcon& icon = QIcon());
+  void InsertTab(int id, int index, const QString& text);
 
 signals:
   void CurrentIdChanged(int id);
   void Rename(int id, const QString& name);
-  void Remove(int id);
+  void Close(int id);
   void Save(int id);
   void PlaylistOrderChanged(const QList<int>& ids);
 
@@ -76,8 +75,8 @@ private slots:
   void Rename();
   void RenameInline();
   void HideEditor();
-  void Remove();
-  void RemoveFromTabIndex(int index);
+  void Close();
+  void CloseFromTabIndex(int index);
   void TabMoved();
   void Save();
 
@@ -88,7 +87,7 @@ private:
   int menu_index_;
   QAction* new_;
   QAction* rename_;
-  QAction* remove_;
+  QAction* close_;
   QAction* save_;
 
   QBasicTimer drag_hover_timer_;
@@ -98,9 +97,6 @@ private:
 
   // Editor for inline renaming
   RenameTabLineEdit* rename_editor_;
-
-  // We want to ask for confirmation only in certain cases
-  bool removing_with_confirm_;
 };
 
 #endif // PLAYLISTTABBAR_H

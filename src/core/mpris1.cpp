@@ -197,14 +197,16 @@ DBusStatus Mpris1Player::GetStatus(Engine::State state) const {
       break;
   }
 
-  PlaylistManagerInterface* playlists_ = app_->playlist_manager();
-  PlaylistSequence::RepeatMode repeat_mode = playlists_->sequence()->repeat_mode();
-
-  status.random = playlists_->sequence()->shuffle_mode() == PlaylistSequence::Shuffle_Off ? 0 : 1;
-  status.repeat = repeat_mode == PlaylistSequence::Repeat_Track ? 1 : 0;
-  status.repeat_playlist = (repeat_mode == PlaylistSequence::Repeat_Album ||
-                            repeat_mode == PlaylistSequence::Repeat_Playlist ||
-                            repeat_mode == PlaylistSequence::Repeat_Track) ? 1 : 0;
+  if (app_->playlist_manager()->sequence()) {
+    PlaylistManagerInterface* playlists_ = app_->playlist_manager();
+    PlaylistSequence::RepeatMode repeat_mode = playlists_->sequence()->repeat_mode();
+  
+    status.random = playlists_->sequence()->shuffle_mode() == PlaylistSequence::Shuffle_Off ? 0 : 1;
+    status.repeat = repeat_mode == PlaylistSequence::Repeat_Track ? 1 : 0;
+    status.repeat_playlist = (repeat_mode == PlaylistSequence::Repeat_Album ||
+                              repeat_mode == PlaylistSequence::Repeat_Playlist ||
+                              repeat_mode == PlaylistSequence::Repeat_Track) ? 1 : 0;
+  }
   return status;
 
 }
@@ -238,10 +240,19 @@ int Mpris1Player::GetCaps(Engine::State state) const {
   PlaylistItemPtr current_item = app_->player()->GetCurrentItem();
   PlaylistManagerInterface* playlists = app_->playlist_manager();
 
-  // play is disabled when playlist is empty or when last.fm stream is already playing
-  if (playlists->active()->rowCount() != 0
-      && !(state == Engine::Playing && (app_->player()->GetCurrentItem()->options() & PlaylistItem::LastFMControls))) {
-    caps |= CAN_PLAY;
+  if (playlists->active()) {
+    // play is disabled when playlist is empty or when last.fm stream is already playing
+    if (playlists->active() && playlists->active()->rowCount() != 0
+        && !(state == Engine::Playing && (app_->player()->GetCurrentItem()->options() & PlaylistItem::LastFMControls))) {
+      caps |= CAN_PLAY;
+    }
+    
+    if (playlists->active()->next_row() != -1) {
+      caps |= CAN_GO_NEXT;
+    }
+    if (playlists->active()->previous_row() != -1) {
+      caps |= CAN_GO_PREV;
+    }
   }
 
   if (current_item) {
@@ -252,13 +263,6 @@ int Mpris1Player::GetCaps(Engine::State state) const {
     if (state != Engine::Empty && !current_item->Metadata().is_stream()) {
       caps |= CAN_SEEK;
     }
-  }
-
-  if (playlists->active()->next_row() != -1) {
-    caps |= CAN_GO_NEXT;
-  }
-  if (playlists->active()->previous_row() != -1) {
-    caps |= CAN_GO_PREV;
   }
 
   return caps;

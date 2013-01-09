@@ -59,7 +59,7 @@ signals:
   void Finished(int id, const QString& mbid);
 
 private slots:
-  void RequestFinished();
+  void RequestFinished(QNetworkReply* reply, int id);
 
 private:
   static const char* kClientId;
@@ -68,7 +68,7 @@ private:
 
   QNetworkAccessManager* network_;
   NetworkTimeouts* timeouts_;
-  QMap<QNetworkReply*, int> requests_;
+  QMap<int, QNetworkReply*> requests_;
 };
 
 #endif // ACOUSTIDCLIENT_H

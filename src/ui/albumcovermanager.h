@@ -45,6 +45,7 @@ class AlbumCoverManager : public QMainWindow {
   Q_OBJECT
  public:
   AlbumCoverManager(Application* app,
+                    LibraryBackend* library_backend,
                     QWidget* parent = 0,
                     QNetworkAccessManager* network = 0);
   ~AlbumCoverManager();
@@ -167,6 +168,8 @@ class AlbumCoverManager : public QMainWindow {
 
   QProgressBar* progress_bar_;
   int jobs_;
+
+  LibraryBackend* library_backend_;
 
   FRIEND_TEST(AlbumCoverManagerTest, HidesItemsWithCover);
   FRIEND_TEST(AlbumCoverManagerTest, HidesItemsWithoutCover);

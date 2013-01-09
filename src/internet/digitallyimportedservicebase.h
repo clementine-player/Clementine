@@ -18,11 +18,11 @@
 #ifndef DIGITALLYIMPORTEDSERVICEBASE_H
 #define DIGITALLYIMPORTEDSERVICEBASE_H
 
+#include <boost/scoped_ptr.hpp>
+
 #include "digitallyimportedclient.h"
 #include "internetservice.h"
 #include "core/cachedlist.h"
-
-#include <boost/scoped_ptr.hpp>
 
 class DigitallyImportedClient;
 class DigitallyImportedUrlHandler;
@@ -73,7 +73,7 @@ signals:
   void StreamsChanged();
 
 private slots:
-  void LoadPlaylistFinished();
+  void LoadPlaylistFinished(QNetworkReply* reply);
   void Homepage();
   void ForceRefreshStreams();
   void RefreshStreams();
@@ -120,6 +120,16 @@ public:
 class SkyFmService : public DigitallyImportedServiceBase {
 public:
   SkyFmService(Application* app, InternetModel* model, QObject* parent = NULL);
+};
+
+class JazzRadioService : public DigitallyImportedServiceBase {
+public:
+  JazzRadioService(Application* app, InternetModel* model, QObject* parent = NULL);
+};
+
+class RockRadioService : public DigitallyImportedServiceBase {
+public:
+  RockRadioService(Application* app, InternetModel* model, QObject* parent = NULL);
 };
 
 #endif // DIGITALLYIMPORTEDSERVICEBASE_H

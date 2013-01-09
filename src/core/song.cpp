@@ -15,23 +15,9 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "mpris_common.h"
 #include "song.h"
-#include "timeconstants.h"
-#include "core/encoding.h"
-#include "core/logging.h"
-#include "core/messagehandler.h"
 
 #include <algorithm>
-
-#ifdef HAVE_LIBLASTFM
-  #include "internet/fixlastfm.h"
-  #ifdef HAVE_LIBLASTFM1
-    #include <lastfm/Track.h>
-  #else
-    #include <lastfm/Track>
-  #endif
-#endif
 
 #include <QFile>
 #include <QFileInfo>
@@ -43,12 +29,19 @@
 #include <QVariant>
 #include <QtConcurrentRun>
 
+#ifdef HAVE_LIBLASTFM
+  #include "internet/fixlastfm.h"
+  #ifdef HAVE_LIBLASTFM1
+    #include <lastfm/Track.h>
+  #else
+    #include <lastfm/Track>
+  #endif
+#endif
+
 #include <id3v1genres.h>
 
 #ifdef Q_OS_WIN32
-# ifdef HAVE_SAC
-#  include <mswmdm.h>
-# endif
+# include <mswmdm.h>
 # include <QUuid>
 #endif // Q_OS_WIN32
 
@@ -60,14 +53,15 @@
 # include <libmtp.h>
 #endif
 
-#include <boost/scoped_array.hpp>
-#include <boost/scoped_ptr.hpp>
-using boost::scoped_ptr;
-
-#include "utilities.h"
+#include "core/logging.h"
+#include "core/messagehandler.h"
+#include "core/mpris_common.h"
+#include "core/timeconstants.h"
+#include "core/utilities.h"
 #include "covers/albumcoverloader.h"
 #include "engines/enginebase.h"
 #include "library/sqlrow.h"
+#include "tagreadermessages.pb.h"
 #include "widgets/trackslider.h"
 
 
@@ -79,7 +73,7 @@ const QStringList Song::kColumns = QStringList()
     << "art_manual" << "filetype" << "playcount" << "lastplayed" << "rating"
     << "forced_compilation_on" << "forced_compilation_off"
     << "effective_compilation" << "skipcount" << "score" << "beginning" << "length"
-    << "cue_path" << "unavailable" << "effective_albumartist";
+    << "cue_path" << "unavailable" << "effective_albumartist" << "etag";
 
 const QString Song::kColumnSpec = Song::kColumns.join(", ");
 const QString Song::kBindSpec = Utilities::Prepend(":", Song::kColumns).join(", ");
@@ -167,6 +161,8 @@ struct Song::Private : public QSharedData {
   // Whether the song does not exist on the file system anymore, but is still
   // stored in the database so as to remember the user's metadata.
   bool unavailable_;
+
+  QString etag_;
 };
 
 
@@ -263,6 +259,7 @@ bool Song::is_stream() const { return d->filetype_ == Type_Stream; }
 bool Song::is_cdda() const { return d->filetype_ == Type_Cdda; }
 const QString& Song::art_automatic() const { return d->art_automatic_; }
 const QString& Song::art_manual() const { return d->art_manual_; }
+const QString& Song::etag() const { return d->etag_; }
 bool Song::has_manually_unset_cover() const { return d->art_manual_ == kManuallyUnsetCover; }
 void Song::manually_unset_cover() { d->art_manual_ = kManuallyUnsetCover; }
 bool Song::has_embedded_cover() const { return d->art_automatic_ == kEmbeddedCover; }
@@ -304,6 +301,7 @@ void Song::set_lastplayed(int v) { d->lastplayed_ = v; }
 void Song::set_score(int v) { d->score_ = qBound(0, v, 100); }
 void Song::set_cue_path(const QString& v) { d->cue_path_ = v; }
 void Song::set_unavailable(bool v) { d->unavailable_ = v; }
+void Song::set_etag(const QString& etag) { d->etag_ = etag; }
 void Song::set_url(const QUrl& v) { d->url_ = v; }
 void Song::set_basefilename(const QString& v) { d->basefilename_ = v; }
 void Song::set_directory_id(int v) { d->directory_id_ = v; }
@@ -408,6 +406,7 @@ void Song::InitFromProtobuf(const pb::tagreader::SongMetadata& pb) {
   d->filesize_ = pb.filesize();
   d->suspicious_tags_ = pb.suspicious_tags();
   d->filetype_ = static_cast<FileType>(pb.type());
+  d->etag_ = QStringFromStdString(pb.etag());
 
   if (pb.has_art_automatic()) {
     d->art_automatic_ = QStringFromStdString(pb.art_automatic());
@@ -584,7 +583,7 @@ void Song::InitFromLastFM(const lastfm::Track& track) {
     filename.replace(':', '/');
 
     if (prefix.contains("://")) {
-      d->url_ = prefix + filename;
+      d->url_ = QUrl(prefix + filename);
     } else {
       d->url_ = QUrl::fromLocalFile(prefix + filename);
     }
@@ -699,7 +698,7 @@ void Song::InitFromLastFM(const lastfm::Track& track) {
   }
 #endif
 
-#if defined(Q_OS_WIN32) && defined(HAVE_SAC)
+#if defined(Q_OS_WIN32)
   static void AddWmdmItem(IWMDMMetaData* metadata, const wchar_t* name,
                           const QVariant& value) {
     switch (value.type()) {
@@ -927,21 +926,19 @@ void Song::InitFromLastFM(const lastfm::Track& track) {
 #endif // Q_OS_WIN32
 
 void Song::MergeFromSimpleMetaBundle(const Engine::SimpleMetaBundle &bundle) {
-  if (d->init_from_file_) {
-    // This Song was already loaded using taglib. Our tags are probably better than the engine's.
+  if (d->init_from_file_ || d->url_.scheme() == "file") {
+    // This Song was already loaded using taglib. Our tags are probably better
+    // than the engine's.  Note: init_from_file_ is used for non-file:// URLs
+    // when the metadata is known to be good, like from Jamendo.
     return;
   }
 
   d->valid_ = true;
-
-  UniversalEncodingHandler detector(NS_FILTER_NON_CJK);
-  QTextCodec* codec = detector.Guess(bundle);
-
-  if (!bundle.title.isEmpty()) d->title_ = Decode(bundle.title, codec);
-  if (!bundle.artist.isEmpty()) d->artist_ = Decode(bundle.artist, codec);
-  if (!bundle.album.isEmpty()) d->album_ = Decode(bundle.album, codec);
-  if (!bundle.comment.isEmpty()) d->comment_ = Decode(bundle.comment, codec);
-  if (!bundle.genre.isEmpty()) d->genre_ = Decode(bundle.genre, codec);
+  if (!bundle.title.isEmpty()) d->title_ = bundle.title;
+  if (!bundle.artist.isEmpty()) d->artist_ = bundle.artist;
+  if (!bundle.album.isEmpty()) d->album_ = bundle.album;
+  if (!bundle.comment.isEmpty()) d->comment_ = bundle.comment;
+  if (!bundle.genre.isEmpty()) d->genre_ = bundle.genre;
   if (!bundle.bitrate.isEmpty()) d->bitrate_ = bundle.bitrate.toInt();
   if (!bundle.samplerate.isEmpty()) d->samplerate_ = bundle.samplerate.toInt();
   if (!bundle.length.isEmpty()) set_length_nanosec(bundle.length.toLongLong());
@@ -1002,8 +999,11 @@ void Song::BindToQuery(QSqlQuery *query) const {
   query->bindValue(":unavailable", d->unavailable_ ? 1 : 0);
   query->bindValue(":effective_albumartist", this->effective_albumartist());
 
+  query->bindValue(":etag", strval(d->etag_));
+
   #undef intval
   #undef notnullintval
+  #undef strval
 }
 
 void Song::BindToFtsQuery(QSqlQuery *query) const {
@@ -1125,6 +1125,16 @@ uint qHash(const Song& song) {
   return qHash(song.url().toString()) ^ qHash(song.beginning_nanosec());
 }
 
+bool Song::IsSimilar(const Song& other) const {
+  return title().compare(other.title(), Qt::CaseInsensitive) == 0 &&
+         artist().compare(other.artist(), Qt::CaseInsensitive) == 0;
+}
+
+uint HashSimilar(const Song& song) {
+  // Should compare the same fields as function IsSimilar
+  return qHash(song.title().toLower()) ^ qHash(song.artist().toLower());
+}
+
 bool Song::IsOnSameAlbum(const Song& other) const {
   if (is_compilation() != other.is_compilation())
     return false;
@@ -1162,11 +1172,20 @@ void Song::ToXesam(QVariantMap* map) const {
   AddMetadataAsList("xesam:comment", comment(), map);
   AddMetadata("xesam:contentCreated", AsMPRISDateTimeType(ctime()), map);
   AddMetadata("xesam:lastUsed", AsMPRISDateTimeType(lastplayed()), map);
-  AddMetadata("xesam:audioBPM", bpm(), map);
+  AddMetadata("xesam:audioBPM", static_cast<int>(bpm()), map);
   AddMetadataAsList("xesam:composer", composer(), map);
   AddMetadata("xesam:useCount", playcount(), map);
   AddMetadata("xesam:autoRating", score(), map);
   if (rating() != -1.0) {
     AddMetadata("xesam:userRating", rating(), map);
   }
+}
+
+void Song::MergeUserSetData(const Song& other) {
+  set_playcount(other.playcount());
+  set_skipcount(other.skipcount());
+  set_lastplayed(other.lastplayed());
+  set_rating(other.rating());
+  set_score(other.score());
+  set_art_manual(other.art_manual());
 }

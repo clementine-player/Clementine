@@ -41,7 +41,6 @@ class MockLibraryBackend : public LibraryBackendInterface {
   MOCK_METHOD1(GetAllArtistsWithAlbums, QStringList(const QueryOptions&));
   MOCK_METHOD3(GetSongs, SongList(const QString&, const QString&, const QueryOptions&));
 
-  MOCK_METHOD1(HasCompilations, bool(const QueryOptions&));
   MOCK_METHOD2(GetCompilationSongs, SongList(const QString&, const QueryOptions&));
 
   MOCK_METHOD1(GetAllAlbums, AlbumList(const QueryOptions&));

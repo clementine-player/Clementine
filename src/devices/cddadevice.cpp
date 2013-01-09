@@ -127,7 +127,6 @@ void CddaDevice::Init() {
   gst_object_unref(GST_OBJECT(pipe));
   gst_object_unref(GST_OBJECT(msg));
   gst_tag_list_free(tags);
-
 }
 
 void CddaDevice::AudioCDTagsLoaded(const QString& artist, const QString& album,
@@ -154,6 +153,7 @@ void CddaDevice::AudioCDTagsLoaded(const QString& artist, const QString& album,
   }
   connect(this, SIGNAL(SongsDiscovered(const SongList&)), model_, SLOT(SongsDiscovered(const SongList&)));
   emit SongsDiscovered(songs);
+  song_count_ = songs.size();
 }
 
 void CddaDevice::Refresh() {

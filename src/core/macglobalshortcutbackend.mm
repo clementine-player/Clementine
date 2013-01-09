@@ -44,7 +44,6 @@ class MacGlobalShortcutBackendPrivate : boost::noncopyable {
   }
 
   bool Register() {
-  #ifdef SNOW_LEOPARD
     global_monitor_ = [NSEvent addGlobalMonitorForEventsMatchingMask:NSKeyDownMask
         handler:^(NSEvent* event) {
       HandleKeyEvent(event);
@@ -55,16 +54,11 @@ class MacGlobalShortcutBackendPrivate : boost::noncopyable {
       return HandleKeyEvent(event) ? nil : event;
     }];
     return true;
-  #else
-    return false;
-  #endif
   }
 
   void Unregister() {
-  #ifdef SNOW_LEOPARD
     [NSEvent removeMonitor:global_monitor_];
     [NSEvent removeMonitor:local_monitor_];
-  #endif
   }
 
  private:
@@ -133,15 +127,10 @@ bool MacGlobalShortcutBackend::KeyPressed(const QKeySequence& sequence) {
 }
 
 bool MacGlobalShortcutBackend::IsAccessibilityEnabled() const {
-#ifdef SNOW_LEOPARD
   return AXAPIEnabled();
-#else
-  return true;  // It's not really enabled but it doesn't matter.
-#endif
 }
 
 void MacGlobalShortcutBackend::ShowAccessibilityDialog() {
-#ifdef SNOW_LEOPARD
   NSArray* paths = NSSearchPathForDirectoriesInDomains(
       NSPreferencePanesDirectory, NSSystemDomainMask, YES);
   if ([paths count] == 1) {
@@ -149,5 +138,4 @@ void MacGlobalShortcutBackend::ShowAccessibilityDialog() {
         [[paths objectAtIndex:0] stringByAppendingPathComponent:@"UniversalAccessPref.prefPane"]];
     [[NSWorkspace sharedWorkspace] openURL:prefpane_url];
   }
-#endif
 }

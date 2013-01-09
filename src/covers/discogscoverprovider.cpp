@@ -134,7 +134,7 @@ void DiscogsCoverProvider::HandleSearchReply(QNetworkReply* reply, int id) {
     // constructing the primary image's url from the thmub's url.
     if (result_map.contains("thumb")) {
       CoverSearchResult cover_result;
-      cover_result.image_url = result_map["thumb"].toString().replace("R-90-", "R-");
+      cover_result.image_url = QUrl(result_map["thumb"].toString().replace("R-90-", "R-"));
       if (result_map.contains("title")) {
         cover_result.description = result_map["title"].toString();
       }

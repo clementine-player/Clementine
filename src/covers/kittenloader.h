@@ -6,6 +6,8 @@
 #include <QQueue>
 #include <QUrl>
 
+class QNetworkReply;
+
 class KittenLoader : public AlbumCoverLoader {
   Q_OBJECT
  public:
@@ -14,7 +16,7 @@ class KittenLoader : public AlbumCoverLoader {
   virtual quint64 LoadKitten(const AlbumCoverLoaderOptions& options);
 
  private slots:
-  void KittensRetrieved();
+  void KittensRetrieved(QNetworkReply* reply);
   void FetchMoreKittens();
 
  private:

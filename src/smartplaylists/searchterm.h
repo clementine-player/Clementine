@@ -58,26 +58,25 @@ public:
   enum Operator {
     // For text
     Op_Contains = 0,
-    Op_NotContains,
-    Op_StartsWith,
-    Op_EndsWith,
+    Op_NotContains = 1,
+    Op_StartsWith = 2,
+    Op_EndsWith = 3,
 
     // For numbers
-    Op_GreaterThan,
-    Op_LessThan,
+    Op_GreaterThan = 4,
+    Op_LessThan = 5,
 
     // For everything
-    Op_Equals,
+    Op_Equals = 6,
+    Op_NotEquals = 9,
 
     // For numeric dates (e.g. in the last X days)
-    Op_NumericDate,
+    Op_NumericDate = 7,
     // For relative dates
-    Op_RelativeDate,
+    Op_RelativeDate = 8,
 
-    // For everything except for text
-    Op_NotEquals,
     // For numeric dates (e.g. not in the last X days)
-    Op_NumericDateNot,
+    Op_NumericDateNot = 10,
   };
 
   enum Type {
@@ -86,6 +85,8 @@ public:
     Type_Time,
     Type_Number,
     Type_Rating,
+
+    Type_Invalid
   };
 
   // These values are persisted, so add to the end of the enum only

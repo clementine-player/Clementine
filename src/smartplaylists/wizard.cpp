@@ -68,6 +68,11 @@ Wizard::Wizard(Application* app, LibraryBackend* library, QWidget* parent)
   setWindowTitle(tr("Smart playlist"));
   resize(788, 628);
 
+#ifdef Q_OS_MAC
+  // MacStyle leaves an ugly empty space on the left side of the dialog.
+  setWizardStyle(QWizard::ClassicStyle);
+#endif // Q_OS_MAC
+
   // Type page
   type_page_->setTitle(tr("Playlist type"));
   type_page_->setSubTitle(tr("A smart playlist is a dynamic list of songs that come from your library.  There are different types of smart playlist that offer different ways of selecting songs."));

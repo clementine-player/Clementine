@@ -28,7 +28,7 @@ class Ui_AppearanceSettingsPage;
 
 class AppearanceSettingsPage : public SettingsPage {
   Q_OBJECT
-  
+
 public:
   AppearanceSettingsPage(SettingsDialog* dialog);
   ~AppearanceSettingsPage();
@@ -42,6 +42,8 @@ private slots:
   void SelectBackgroundColor();
   void UseCustomColorSetOptionChanged(bool);
   void SelectBackgroundImage();
+  void BlurLevelChanged(int);
+  void DisableBlurSlider(bool);
 
 private:
   static const int kMoodbarPreviewWidth;
@@ -62,6 +64,7 @@ private:
   QColor current_background_color_;
   PlaylistView::BackgroundImageType playlist_view_background_image_type_;
   QString playlist_view_background_image_filename_;
+  int background_blur_radius_;
 
   bool initialised_moodbar_previews_;
 };

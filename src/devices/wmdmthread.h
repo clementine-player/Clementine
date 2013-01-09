@@ -18,6 +18,7 @@
 #ifndef WMDMTHREAD_H
 #define WMDMTHREAD_H
 
+#include <QMutex>
 #include <QtGlobal>
 
 #include <sac_shim.h>
@@ -36,11 +37,21 @@ public:
   IWMDMDevice* GetDeviceByCanonicalName(const QString& device_name);
   IWMDMStorage* GetRootStorage(const QString& device_name);
 
+  static bool StaticInit();
 private:
+
   Q_DISABLE_COPY(WmdmThread);
 
   IWMDeviceManager2* device_manager_;
   SacHandle sac_;
+
+  static decltype(&CSecureChannelClient_New) _CSecureChannelClient_New;
+  static decltype(&CSecureChannelClient_Free) _CSecureChannelClient_Free;
+  static decltype(&CSecureChannelClient_SetCertificate) _CSecureChannelClient_SetCertificate;
+  static decltype(&CSecureChannelClient_SetInterface) _CSecureChannelClient_SetInterface;  
+  static decltype(&CSecureChannelClient_Authenticate) _CSecureChannelClient_Authenticate;
+
+  static bool sIsLoaded;
 };
 
 #endif // WMDMTHREAD_H

@@ -170,11 +170,13 @@ class Playlist : public QAbstractListModel {
   Queue* queue() const { return queue_; }
 
   int id() const { return id_; }
+  const QString& ui_path() const { return ui_path_; }
+  void set_ui_path(const QString& path) { ui_path_ = path; }
 
   int current_row() const;
   int last_played_row() const;
   int next_row(bool ignore_repeat_track = false) const;
-  int previous_row() const;
+  int previous_row(bool ignore_repeat_track = false) const;
 
   const QModelIndex current_index() const;
 
@@ -308,7 +310,7 @@ class Playlist : public QAbstractListModel {
   void SetCurrentIsPaused(bool paused);
   void UpdateScrobblePoint();
   int NextVirtualIndex(int i, bool ignore_repeat_track) const;
-  int PreviousVirtualIndex(int i) const;
+  int PreviousVirtualIndex(int i, bool ignore_repeat_track) const;
   bool FilterContainsVirtualIndex(int i) const;
   void TurnOnDynamicPlaylist(smart_playlists::GeneratorPtr gen);
 
@@ -357,6 +359,7 @@ class Playlist : public QAbstractListModel {
   TaskManager* task_manager_;
   LibraryBackend* library_;
   int id_;
+  QString ui_path_;
 
   PlaylistItemList items_;
   QList<int> virtual_items_; // Contains the indices into items_ in the order

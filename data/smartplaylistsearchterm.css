@@ -12,7 +12,7 @@
   border-top-right-radius: 5px;
   border-bottom-left-radius: 0px;
   border-bottom-right-radius: 5px;
-  border-left: 1px solid palette(mid);
+  border: 0px solid transparent;
   background: qlineargradient(x1:0, y1:0, x2:0, y2:1,
     stop:0   %light,
     stop:0.4 %light,
@@ -20,7 +20,7 @@
     stop:1   %dark);
 
   margin-left: 5px;
-  padding: 5px;
+  padding: 0px 5px;
 }
 
 #remove:hover {
@@ -29,6 +29,7 @@
     stop:0.4 %light2,
     stop:0.6 %base,
     stop:1   %base);
+  border: 0px solid transparent;
 }
 
 #remove:pressed {
@@ -37,5 +38,6 @@
     stop:0.4 %base,
     stop:0.6 %light2,
     stop:1   %light2);
+  border: 0px solid transparent;
 }
 

@@ -16,11 +16,13 @@
 */
 
 #include "playlistfilter.h"
+#include "playlistfilterparser.h"
 
 #include <QtDebug>
 
 PlaylistFilter::PlaylistFilter(QObject *parent)
   : QSortFilterProxyModel(parent),
+    filter_tree_(new NopFilter),
     query_hash_(0)
 {
   setDynamicSortFilter(true);
@@ -38,11 +40,22 @@ PlaylistFilter::PlaylistFilter(QObject *parent)
   column_names_["genre"] = Playlist::Column_Genre;
   column_names_["score"] = Playlist::Column_Score;
   column_names_["comment"] = Playlist::Column_Comment;
+  column_names_["bpm"] = Playlist::Column_BPM;
+  column_names_["bitrate"] = Playlist::Column_Bitrate;
+  column_names_["filename"] = Playlist::Column_Filename;
+  column_names_["rating"] = Playlist::Column_Rating;
 
-  exact_columns_ << Playlist::Column_Length
-                 << Playlist::Column_Track
-                 << Playlist::Column_Disc
-                 << Playlist::Column_Year;
+  numerical_columns_ << Playlist::Column_Length
+                     << Playlist::Column_Track
+                     << Playlist::Column_Disc
+                     << Playlist::Column_Year
+                     << Playlist::Column_Score
+                     << Playlist::Column_BPM
+                     << Playlist::Column_Bitrate
+                     << Playlist::Column_Rating;
+}
+
+PlaylistFilter::~PlaylistFilter() {
 }
 
 void PlaylistFilter::sort(int column, Qt::SortOrder order) {
@@ -51,56 +64,17 @@ void PlaylistFilter::sort(int column, Qt::SortOrder order) {
 }
 
 bool PlaylistFilter::filterAcceptsRow(int row, const QModelIndex &parent) const {
-  QString filter = filterRegExp().pattern().toLower();
+  QString filter = filterRegExp().pattern();
 
   uint hash = qHash(filter);
   if (hash != query_hash_) {
     // Parse the query
-    query_cache_.clear();
-
-    QStringList sections = filter.simplified().split(' ');
-    foreach (const QString& section, sections) {
-      QString key = section.section(':', 0, 0).toLower();
-      if (section.contains(':') && column_names_.contains(key)) {
-        // Specific column
-        query_cache_ << SearchTerm(
-            section.section(':', 1, -1).toLower(),
-            column_names_[key],
-            exact_columns_.contains(column_names_[key]));
-      } else {
-        query_cache_ << SearchTerm(section);
-      }
-    }
+    FilterParser p(filter, column_names_, numerical_columns_);
+    filter_tree_.reset(p.parse());
 
     query_hash_ = hash;
   }
 
   // Test the row
-  QString all_columns;
-
-  foreach (const SearchTerm& term, query_cache_) {
-    if (term.column_ != -1) {
-      // Specific column
-      QModelIndex index(sourceModel()->index(row, term.column_, parent));
-      QString value(index.data().toString().toLower());
-
-      if (term.exact_ && value != term.value_)
-        return false;
-      else if (!term.exact_ && !value.contains(term.value_))
-        return false;
-    } else {
-      // All columns
-      if (all_columns.isNull()) {
-        // Cache the concatenated value of all columns
-        foreach (int column, column_names_.values()) {
-          QModelIndex index(sourceModel()->index(row, column, parent));
-          all_columns += index.data().toString().toLower() + ' ';
-        }
-      }
-
-      if (!all_columns.contains(term.value_))
-        return false;
-    }
-  }
-  return true;
+  return filter_tree_->accept(row,parent,sourceModel());
 }

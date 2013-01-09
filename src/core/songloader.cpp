@@ -15,8 +15,22 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "config.h"
 #include "songloader.h"
+
+#include <boost/bind.hpp>
+
+#include <QBuffer>
+#include <QDirIterator>
+#include <QFileInfo>
+#include <QTimer>
+#include <QUrl>
+#include <QtDebug>
+
+#ifdef HAVE_AUDIOCD
+# include <gst/cdda/gstcddabasesrc.h>
+#endif
+
+#include "config.h"
 #include "core/concurrentrun.h"
 #include "core/logging.h"
 #include "core/song.h"
@@ -33,19 +47,6 @@
 #include "podcasts/podcastparser.h"
 #include "podcasts/podcastservice.h"
 #include "podcasts/podcasturlloader.h"
-
-#include <QBuffer>
-#include <QDirIterator>
-#include <QFileInfo>
-#include <QTimer>
-#include <QUrl>
-#include <QtDebug>
-
-#include <boost/bind.hpp>
-
-#ifdef HAVE_AUDIOCD
-# include <gst/cdda/gstcddabasesrc.h>
-#endif
 
 
 QSet<QString> SongLoader::sRawUriSchemes;
@@ -582,7 +583,8 @@ void SongLoader::ErrorMessageReceived(GstMessage* msg) {
   free(debugs);
 
   if (state_ == WaitingForType &&
-      message_str == "Could not determine type of stream.") {
+      message_str == gst_error_get_message(
+          GST_STREAM_ERROR, GST_STREAM_ERROR_TYPE_NOT_FOUND)) {
     // Don't give up - assume it's a playlist and see if one of our parsers can
     // read it.
     state_ = WaitingForMagic;

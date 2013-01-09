@@ -1,10 +1,11 @@
 #include "gtest/gtest.h"
 
+#include <functional>
+#include <tr1/functional>
+
 #include <QEventLoop>
 #include <QFutureWatcher>
 #include <QThreadPool>
-
-#include <boost/bind.hpp>
 
 #include "core/concurrentrun.h"
 #include "test_utils.h"

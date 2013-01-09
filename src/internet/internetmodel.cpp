@@ -15,17 +15,24 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "internetmodel.h"
+
+#include <QMimeData>
+#include <QtDebug>
+
 #include "digitallyimportedservicebase.h"
+#include "groovesharkservice.h"
 #include "icecastservice.h"
 #include "jamendoservice.h"
 #include "magnatuneservice.h"
 #include "internetmimedata.h"
-#include "internetmodel.h"
 #include "internetservice.h"
 #include "savedradio.h"
 #include "somafmservice.h"
 #include "groovesharkservice.h"
+#include "soundcloudservice.h"
 #include "subsonicservice.h"
+#include "core/closure.h"
 #include "core/logging.h"
 #include "core/mergedproxymodel.h"
 #include "podcasts/podcastservice.h"
@@ -37,9 +44,18 @@
 #ifdef HAVE_SPOTIFY
   #include "spotifyservice.h"
 #endif
-
-#include <QMimeData>
-#include <QtDebug>
+#ifdef HAVE_GOOGLE_DRIVE
+  #include "googledriveservice.h"
+#endif
+#ifdef HAVE_UBUNTU_ONE
+  #include "ubuntuoneservice.h"
+#endif
+#ifdef HAVE_DROPBOX
+  #include "dropboxservice.h"
+#endif
+#ifdef HAVE_SKYDRIVE
+  #include "skydriveservice.h"
+#endif
 
 using smart_playlists::Generator;
 using smart_playlists::GeneratorMimeData;
@@ -65,16 +81,31 @@ InternetModel::InternetModel(Application* app, QObject* parent)
 #ifdef HAVE_LIBLASTFM
   AddService(new LastFMService(app, this));
 #endif
+#ifdef HAVE_GOOGLE_DRIVE
+  AddService(new GoogleDriveService(app, this));
+#endif
   AddService(new GroovesharkService(app, this));
+  AddService(new JazzRadioService(app, this));
   AddService(new MagnatuneService(app, this));
   AddService(new PodcastService(app, this));
+  AddService(new RockRadioService(app, this));
   AddService(new SavedRadio(app, this));
   AddService(new SkyFmService(app, this));
   AddService(new SomaFMService(app, this));
+  AddService(new SoundCloudService(app, this));
 #ifdef HAVE_SPOTIFY
   AddService(new SpotifyService(app, this));
 #endif
   AddService(new SubsonicService(app, this));
+#ifdef HAVE_UBUNTU_ONE
+  AddService(new UbuntuOneService(app, this));
+#endif
+#ifdef HAVE_DROPBOX
+  AddService(new DropboxService(app, this));
+#endif
+#ifdef HAVE_SKYDRIVE
+  AddService(new SkydriveService(app, this));
+#endif
 }
 
 void InternetModel::AddService(InternetService *service) {
@@ -183,7 +214,8 @@ bool InternetModel::IsPlayable(const QModelIndex& index) const {
     return false;
 
   PlayBehaviour pb = PlayBehaviour(behaviour.toInt());
-  return (pb == PlayBehaviour_SingleItem || PlayBehaviour_UseSongLoader);
+  return (pb == PlayBehaviour_MultipleItems || pb == PlayBehaviour_SingleItem ||
+          pb == PlayBehaviour_UseSongLoader);
 }
 
 QStringList InternetModel::mimeTypes() const {
@@ -220,7 +252,7 @@ QMimeData* InternetModel::mimeData(const QModelIndexList& indexes) const {
       continue;
 
     last_valid_index = index;
-    if (index.data(Role_Type).toInt() == Type_UserPlaylist) {
+    if (index.data(Role_PlayBehaviour).toInt() == PlayBehaviour_MultipleItems) {
       // Get children
       int row = 0;
       int column = 0;

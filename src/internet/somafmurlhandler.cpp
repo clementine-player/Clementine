@@ -21,6 +21,7 @@
 #include "core/application.h"
 #include "core/logging.h"
 #include "core/taskmanager.h"
+#include "playlistparsers/playlistparser.h"
 
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
@@ -65,15 +66,19 @@ void SomaFMUrlHandler::LoadPlaylistFinished() {
     return;
   }
 
-  // TODO: Replace with some more robust .pls parsing :(
-  QTemporaryFile temp_file;
-  temp_file.open();
-  temp_file.write(reply->readAll());
-  temp_file.flush();
+  // Parse the playlist
+  PlaylistParser parser(NULL);
+  QList<Song> songs = parser.LoadFromDevice(reply);
 
-  QSettings s(temp_file.fileName(), QSettings::IniFormat);
-  s.beginGroup("playlist");
+  qLog(Info) << "Loading station finished, got" << songs.count() << "songs";
+
+  // Failed to get playlist?
+  if (songs.count() == 0) {
+    qLog(Error) << "Error loading soma.fm playlist";
+    emit AsyncLoadComplete(LoadResult(original_url, LoadResult::NoMoreTracks));
+    return;
+  }
 
   emit AsyncLoadComplete(LoadResult(original_url, LoadResult::TrackAvailable,
-                                    s.value("File1").toString()));
+                                    songs[0].url()));
 }

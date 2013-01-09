@@ -15,27 +15,32 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "timeconstants.h"
 #include "utilities.h"
-#include "core/logging.h"
 
-#include "sha2.h"
+#include <stdlib.h>
+
+#include <boost/scoped_array.hpp>
 
 #include <QApplication>
 #include <QDateTime>
 #include <QDesktopServices>
 #include <QDir>
 #include <QIODevice>
+#include <QMetaEnum>
 #include <QMouseEvent>
 #include <QStringList>
 #include <QTcpServer>
+#include <QtDebug>
 #include <QTemporaryFile>
+#include <QtGlobal>
 #include <QUrl>
 #include <QWidget>
 #include <QXmlStreamReader>
-#include <QtDebug>
-#include <QtGlobal>
-#include <QMetaEnum>
+
+#include "core/logging.h"
+#include "timeconstants.h"
+
+#include "sha2.h"
 
 #if defined(Q_OS_UNIX)
 #  include <sys/statvfs.h>
@@ -58,8 +63,6 @@
 #  include "IOKit/ps/IOPowerSources.h"
 #  include "IOKit/ps/IOPSKeys.h"
 #endif
-
-#include <boost/scoped_array.hpp>
 
 namespace Utilities {
 
@@ -124,6 +127,24 @@ QString Ago(int seconds_since_epoch, const QLocale& locale) {
     return tr("%1 days ago").arg(days_ago);
 
   return then.date().toString(locale.dateFormat());
+}
+
+QString PrettyFutureDate(const QDate& date) {
+  const QDate now = QDate::currentDate();
+  const int delta_days = now.daysTo(date);
+
+  if (delta_days < 0)
+    return QString();
+  if (delta_days == 0)
+    return tr("Today");
+  if (delta_days == 1)
+    return tr("Tomorrow");
+  if (delta_days <= 7)
+    return tr("In %1 days").arg(delta_days);
+  if (delta_days <= 14)
+    return tr("Next week");
+
+  return tr("In %1 weeks").arg(delta_days / 7);
 }
 
 QString PrettySize(quint64 bytes) {
@@ -272,14 +293,28 @@ QString GetConfigPath(ConfigPath config) {
     }
     break;
 
+    case Path_CacheRoot: {
+      #if defined(Q_OS_UNIX) && !defined(Q_OS_DARWIN)
+        char* xdg = getenv("XDG_CACHE_HOME");
+        if (!xdg || !*xdg) {
+          return QString("%1/.cache/%2").arg(QDir::homePath(), QCoreApplication::organizationName());
+        } else {
+          return QString("%1/%2").arg(xdg, QCoreApplication::organizationName());
+        }
+      #else
+        return GetConfigPath(Path_Root);
+      #endif
+    }
+    break;
+
     case Path_AlbumCovers:
       return GetConfigPath(Path_Root) + "/albumcovers";
 
     case Path_NetworkCache:
-      return GetConfigPath(Path_Root) + "/networkcache";
-      
+      return GetConfigPath(Path_CacheRoot) + "/networkcache";
+
     case Path_MoodbarCache:
-      return GetConfigPath(Path_Root) + "/moodbarcache";
+      return GetConfigPath(Path_CacheRoot) + "/moodbarcache";
 
     case Path_GstreamerRegistry:
       return GetConfigPath(Path_Root) +
@@ -347,6 +382,11 @@ QByteArray Hmac(const QByteArray& key, const QByteArray& data, HashFunction meth
                                     QCryptographicHash::hash(inner_padding + data,
                                                              QCryptographicHash::Md5),
                                     QCryptographicHash::Md5);
+  } else if (Sha1_Algo == method) {
+    return QCryptographicHash::hash(outer_padding +
+                                    QCryptographicHash::hash(inner_padding + data,
+                                                             QCryptographicHash::Sha1),
+                                    QCryptographicHash::Sha1);
   } else { // Sha256_Algo, currently default
     return Sha256(outer_padding + Sha256(inner_padding + data));
   }
@@ -358,6 +398,10 @@ QByteArray HmacSha256(const QByteArray& key, const QByteArray& data) {
 
 QByteArray HmacMd5(const QByteArray& key, const QByteArray& data) {
   return Hmac(key, data, Md5_Algo);
+}
+
+QByteArray HmacSha1(const QByteArray& key, const QByteArray& data) {
+  return Hmac(key, data, Sha1_Algo);
 }
 
 QByteArray Sha256(const QByteArray& data) {
@@ -502,13 +546,9 @@ bool IsLaptop() {
   }
 
   return !(status.BatteryFlag & 128); // 128 = no system battery
-#endif
-
-#ifdef Q_OS_LINUX
+#elif defined(Q_OS_LINUX)
   return !QDir("/proc/acpi/battery").entryList(QDir::Dirs | QDir::NoDotAndDotDot).isEmpty();
-#endif
-
-#ifdef Q_OS_MAC
+#elif defined(Q_OS_MAC)
   ScopedCFTypeRef<CFTypeRef> power_sources(IOPSCopyPowerSourcesInfo());
   ScopedCFTypeRef<CFArrayRef> power_source_list(
       IOPSCopyPowerSourcesList(power_sources.get()));
@@ -521,6 +561,8 @@ bool IsLaptop() {
       return true;
     }
   }
+  return false;
+#else
   return false;
 #endif
 }

@@ -18,6 +18,7 @@
 #include "songkickconcerts.h"
 
 #include <QImage>
+#include <QVBoxLayout>
 #include <QXmlStreamWriter>
 
 #include <echonest/Artist.h>
@@ -25,7 +26,8 @@
 #include <qjson/parser.h>
 
 #include "core/closure.h"
-#include "songinfotextview.h"
+#include "core/logging.h"
+#include "songkickconcertwidget.h"
 
 const char* SongkickConcerts::kSongkickArtistBucket = "id:songkick";
 const char* SongkickConcerts::kSongkickArtistCalendarUrl =
@@ -56,6 +58,7 @@ void SongkickConcerts::ArtistSearchFinished(QNetworkReply* reply, int id) {
     Echonest::Artists artists = Echonest::Artist::parseSearch(reply);
     if (artists.isEmpty()) {
       qLog(Debug) << "Failed to find artist in echonest";
+      emit Finished(id);
       return;
     }
 
@@ -71,18 +74,21 @@ void SongkickConcerts::ArtistSearchFinished(QNetworkReply* reply, int id) {
 
     if (songkick_id.isEmpty()) {
       qLog(Debug) << "Failed to fetch songkick foreign id for artist";
+      emit Finished(id);
       return;
     }
 
     QStringList split = songkick_id.split(':');
     if (split.count() != 3) {
       qLog(Error) << "Weird songkick id";
+      emit Finished(id);
       return;
     }
 
     FetchSongkickCalendar(split[2], id);
   } catch (Echonest::ParseError& e) {
     qLog(Error) << "Error parsing echonest reply:" << e.errorType() << e.what();
+    emit Finished(id);
   }
 }
 
@@ -94,81 +100,66 @@ void SongkickConcerts::FetchSongkickCalendar(const QString& artist_id, int id) {
 }
 
 void SongkickConcerts::CalendarRequestFinished(QNetworkReply* reply, int id) {
-  static const char* kStaticMapUrl =
-      "http://maps.googleapis.com/maps/api/staticmap"
-      "?key=AIzaSyDDJqmLOeE1mY_EBONhnQmdXbKtasgCtqg"
-      "&sensor=false"
-      "&size=100x100"
-      "&zoom=12"
-      "&center=%1,%2"
-      "&markers=%1,%2";
-
   QJson::Parser parser;
   bool ok = false;
   QVariant result = parser.parse(reply, &ok);
 
   if (!ok) {
     qLog(Error) << "Error parsing Songkick reply";
+    emit Finished(id);
     return;
   }
-
-  QString html;
-  QXmlStreamWriter writer(&html);
-  SongInfoTextView* text_view = new SongInfoTextView;
 
   QVariantMap root = result.toMap();
   QVariantMap results_page = root["resultsPage"].toMap();
   QVariantMap results = results_page["results"].toMap();
   QVariantList events = results["event"].toList();
+
+  if (events.isEmpty()) {
+    emit Finished(id);
+    return;
+  }
+
+  QWidget* container = new QWidget;
+  QVBoxLayout* layout = new QVBoxLayout(container);
+
   foreach (const QVariant& v, events) {
     QVariantMap event = v.toMap();
-    {
-      QString display_name = event["displayName"].toString();
-      QVariantMap venue = event["venue"].toMap();
-      const bool valid_latlng =
-          venue["lng"].isValid() && venue["lat"].isValid();
+    QString display_name = event["displayName"].toString();
+    QString start_date = event["start"].toMap()["date"].toString();
+    QString city = event["location"].toMap()["city"].toString();
+    QString uri = event["uri"].toString();
 
-      if (valid_latlng && latlng_.IsValid()) {
-        static const int kFilterDistanceMetres = 250 * 1e3;  // 250km
-        Geolocator::LatLng latlng(
-            venue["lat"].toString(), venue["lng"].toString());
-        if (latlng_.IsValid() && latlng.IsValid()) {
-          int distance_metres = latlng_.Distance(latlng);
-          if (distance_metres > kFilterDistanceMetres) {
-            qLog(Debug) << "Filtered concert:"
-                        << display_name
-                        << "as too far away:"
-                        << distance_metres;
-            continue;
-          }
+    // Try to get the lat/lng coordinates of the venue.
+    QVariantMap venue = event["venue"].toMap();
+    const bool valid_latlng =
+        venue["lng"].isValid() && venue["lat"].isValid();
+
+    if (valid_latlng && latlng_.IsValid()) {
+      static const int kFilterDistanceMetres = 250 * 1e3;  // 250km
+      Geolocator::LatLng latlng(
+          venue["lat"].toString(), venue["lng"].toString());
+      if (latlng_.IsValid() && latlng.IsValid()) {
+        int distance_metres = latlng_.Distance(latlng);
+        if (distance_metres > kFilterDistanceMetres) {
+          qLog(Debug) << "Filtered concert:"
+                      << display_name
+                      << "as too far away:"
+                      << distance_metres;
+          continue;
         }
       }
-
-      writer.writeStartElement("div");
-      {
-        writer.writeStartElement("a");
-        writer.writeAttribute("href", event["uri"].toString());
-        writer.writeCharacters(display_name);
-        writer.writeEndElement();
-      }
-      if (valid_latlng) {
-        writer.writeStartElement("img");
-        QString maps_url = QString(kStaticMapUrl).arg(
-            venue["lat"].toString(),
-            venue["lng"].toString());
-        writer.writeAttribute("src", maps_url);
-        writer.writeEndElement();
-
-        // QTextDocument does not support loading remote images, so we load
-        // them here and then inject them into the document later.
-        QNetworkRequest request(maps_url);
-        QNetworkReply* reply = network_.get(request);
-        NewClosure(reply, SIGNAL(finished()), this,
-                   SLOT(InjectImage(QNetworkReply*, SongInfoTextView*)),
-                   reply, text_view);
-      }
-      writer.writeEndElement();
     }
+
+    SongKickConcertWidget* widget = new SongKickConcertWidget(container);
+    widget->Init(display_name, uri, start_date, city);
+
+    if (valid_latlng) {
+      widget->SetMap(venue["lat"].toString(), venue["lng"].toString(),
+                     venue["displayName"].toString());
+    }
+
+    layout->addWidget(widget);
   }
 
   CollapsibleInfoPane::Data data;
@@ -176,23 +167,10 @@ void SongkickConcerts::CalendarRequestFinished(QNetworkReply* reply, int id) {
   data.id_ = QString("songkick/%1").arg(id);
   data.title_ = tr("Upcoming Concerts");
   data.icon_ = QIcon(":providers/songkick.png");
-
-  text_view->SetHtml(html);
-  data.contents_ = text_view;
+  data.contents_ = container;
 
   emit InfoReady(id, data);
   emit Finished(id);
-}
-
-void SongkickConcerts::InjectImage(
-    QNetworkReply* reply, SongInfoTextView* text_view) {
-  reply->deleteLater();
-  QImage image;
-  image.load(reply, "png");
-  text_view->document()->addResource(
-      QTextDocument::ImageResource,
-      reply->request().url(),
-      QVariant(image));
 }
 
 void SongkickConcerts::GeolocateFinished(Geolocator::LatLng latlng) {

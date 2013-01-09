@@ -29,6 +29,7 @@ LABELS = {
   "natty":    ["Distro-Ubuntu"],
   "oneiric":  ["Distro-Ubuntu"],
   "precise":  ["Distro-Ubuntu"],
+  "quantal":  ["Distro-Ubuntu"],
   "squeeze":  ["Distro-Debian"],
 }
 
@@ -57,9 +58,10 @@ DESCRIPTIONS = {
   ("deb", "natty"):     "for Ubuntu Natty (11.04)",
   ("deb", "oneiric"):   "for Ubuntu Oneiric (11.10)",
   ("deb", "precise"):   "for Ubuntu Precise (12.04)",
+  ("deb", "quantal"):   "for Ubuntu Quantal (12.10)",
   ("deb", "squeeze"):   "for Debian Squeeze",
-  ("rpm", "fc15"):      "for Fedora 15",
   ("rpm", "fc16"):      "for Fedora 16",
+  ("rpm", "fc17"):      "for Fedora 17",
   ("exe", None):        "for Windows",
   ("dmg", None):        "for Mac OS X",
   ("tar.gz", None):     "source",
@@ -76,12 +78,14 @@ RELEASES = [
   ("deb", "oneiric", 64),
   ("deb", "precise", 32),
   ("deb", "precise", 64),
+  ("deb", "quantal", 32),
+  ("deb", "quantal", 64),
   ("deb", "squeeze", 32),
   ("deb", "squeeze", 64),
-  ("rpm", "fc15", 32),
-  ("rpm", "fc15", 64),
   ("rpm", "fc16", 32),
   ("rpm", "fc16", 64),
+  ("rpm", "fc17", 32),
+  ("rpm", "fc17", 64),
   ("exe", None, None),
   ("dmg", None, None),
   ("tar.gz", None, None),
@@ -163,6 +167,30 @@ class VersionInfo(object):
     return labels
 
 
+def get_google_code_password(username):
+  # Try to read it from the .netrc first
+  NETRC_REGEX = re.compile(
+      r'^machine\s+code\.google\.com\s+'
+      r'login\s+([^@]+)@[^\s]+\s+'
+      r'password\s+([^\s+])')
+
+  try:
+    for line in open(os.path.expanduser("~/.netrc")):
+      match = NETRC_REGEX.match(line)
+      if match and match.group(1) == username:
+        print "Using password from ~/.netrc"
+        return match.group(2)
+  except IOError:
+    pass
+
+  # Prompt the user
+  password = getpass.getpass("Google Code password (different to your Google account): ")
+  if not password:
+    return None
+
+  return password
+
+
 def main():
   dist_dir = os.path.dirname(os.path.abspath(__file__))
   root_dir = os.path.normpath(os.path.join(dist_dir, ".."))
@@ -201,11 +229,12 @@ def main():
   if not username:
     return 1
 
-  password = getpass.getpass("Google Code password (different to your Google account): ")
-  if not password:
+  password = get_google_code_password(username)
+  if password is None:
     return 1
 
   print
+  return 0
 
   # Upload everything
   for release in RELEASES:

@@ -33,7 +33,6 @@ class PlaylistBackend;
 class PlaylistContainer;
 class PlaylistParser;
 class PlaylistSequence;
-class SpecialPlaylistType;
 class TaskManager;
 
 class QModelIndex;
@@ -72,17 +71,15 @@ public:
   virtual PlaylistParser* parser() const = 0;
   virtual PlaylistContainer* playlist_container() const = 0;
 
-  virtual void RegisterSpecialPlaylistType(SpecialPlaylistType* type) = 0;
-  virtual void UnregisterSpecialPlaylistType(SpecialPlaylistType* type) = 0;
-  virtual SpecialPlaylistType* GetPlaylistType(const QString& type) const = 0;
-
 public slots:
   virtual void New(const QString& name, const SongList& songs = SongList(),
                    const QString& special_type = QString()) = 0;
   virtual void Load(const QString& filename) = 0;
   virtual void Save(int id, const QString& filename) = 0;
   virtual void Rename(int id, const QString& new_name) = 0;
-  virtual void Remove(int id) = 0;
+  virtual void Delete(int id) = 0;
+  virtual bool Close(int id) = 0;
+  virtual void Open(int id) = 0;
   virtual void ChangePlaylistOrder(const QList<int>& ids) = 0;
 
   virtual void SongChangeRequestProcessed(const QUrl& url, bool valid) = 0;
@@ -112,7 +109,8 @@ signals:
   void PlaylistManagerInitialized();
 
   void PlaylistAdded(int id, const QString& name);
-  void PlaylistRemoved(int id);
+  void PlaylistDeleted(int id);
+  void PlaylistClosed(int id);
   void PlaylistRenamed(int id, const QString& new_name);
   void CurrentChanged(Playlist* new_playlist);
   void ActiveChanged(Playlist* new_playlist);
@@ -170,17 +168,15 @@ public:
   PlaylistParser* parser() const { return parser_; }
   PlaylistContainer* playlist_container() const { return playlist_container_; }
 
-  void RegisterSpecialPlaylistType(SpecialPlaylistType* type);
-  void UnregisterSpecialPlaylistType(SpecialPlaylistType* type);
-  SpecialPlaylistType* GetPlaylistType(const QString& type) const;
-
 public slots:
   void New(const QString& name, const SongList& songs = SongList(),
            const QString& special_type = QString());
   void Load(const QString& filename);
   void Save(int id, const QString& filename);
   void Rename(int id, const QString& new_name);
-  void Remove(int id);
+  void Delete(int id);
+  bool Close(int id);
+  void Open(int id);
   void ChangePlaylistOrder(const QList<int>& ids);
 
   void SetCurrentPlaylist(int id);
@@ -188,6 +184,10 @@ public slots:
   void SetActiveToCurrent() { SetActivePlaylist(current_id()); }
 
   void SelectionChanged(const QItemSelection& selection);
+
+  // Makes a playlist current if it's open already, or opens it and makes it
+  // current if it is hidden.
+  void SetCurrentOrOpen(int id);
 
   // Convenience slots that defer to either current() or active()
   void ClearCurrent();
@@ -214,7 +214,8 @@ private slots:
   void LoadFinished(bool success);
 
 private:
-  Playlist* AddPlaylist(int id, const QString& name, const QString& special_type);
+  Playlist* AddPlaylist(int id, const QString& name, const QString& special_type,
+                        const QString& ui_path);
 
 private:
   struct Data {
@@ -233,9 +234,6 @@ private:
 
   // key = id
   QMap<int, Data> playlists_;
-
-  QMap<QString, SpecialPlaylistType*> special_playlist_types_;
-  SpecialPlaylistType* default_playlist_type_;
 
   int current_;
   int active_;

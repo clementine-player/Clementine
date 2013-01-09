@@ -18,17 +18,21 @@
 #ifndef PLAYLISTFILTER_H
 #define PLAYLISTFILTER_H
 
+#include <QScopedPointer>
 #include <QSortFilterProxyModel>
 
 #include "playlist.h"
 
 #include <QSet>
 
+class FilterTree;
+
 class PlaylistFilter : public QSortFilterProxyModel {
   Q_OBJECT
 
 public:
   PlaylistFilter(QObject* parent = 0);
+  ~PlaylistFilter();
 
   // QAbstractItemModel
   void sort(int column, Qt::SortOrder order = Qt::AscendingOrder);
@@ -38,21 +42,12 @@ public:
   bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const;
 
 private:
-  struct SearchTerm {
-    SearchTerm(const QString& value = QString(), int column = -1, bool exact = false)
-      : value_(value), column_(column), exact_(exact) {}
-
-    QString value_;
-    int column_;
-    bool exact_;
-  };
-
   // Mutable because they're modified from filterAcceptsRow() const
-  mutable QList<SearchTerm> query_cache_;
+  mutable QScopedPointer<FilterTree> filter_tree_;
   mutable uint query_hash_;
 
   QMap<QString, int> column_names_;
-  QSet<int> exact_columns_;
+  QSet<int> numerical_columns_;
 };
 
 #endif // PLAYLISTFILTER_H

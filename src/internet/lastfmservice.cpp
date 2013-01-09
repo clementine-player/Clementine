@@ -32,23 +32,6 @@
 
 #include "lastfmservice.h"
 
-#include "lastfmcompat.h"
-#include "lastfmstationdialog.h"
-#include "lastfmurlhandler.h"
-#include "internetmodel.h"
-#include "internetplaylistitem.h"
-#include "globalsearch/globalsearch.h"
-#include "globalsearch/lastfmsearchprovider.h"
-#include "core/application.h"
-#include "core/logging.h"
-#include "core/player.h"
-#include "core/song.h"
-#include "core/taskmanager.h"
-#include "covers/coverproviders.h"
-#include "covers/lastfmcoverprovider.h"
-#include "ui/iconloader.h"
-#include "ui/settingsdialog.h"
-
 #include <boost/scoped_ptr.hpp>
 
 #include <QMenu>
@@ -59,6 +42,24 @@
 #else
   #include <lastfm/RadioStation>
 #endif
+
+#include "lastfmcompat.h"
+#include "lastfmstationdialog.h"
+#include "lastfmurlhandler.h"
+#include "internetmodel.h"
+#include "internetplaylistitem.h"
+#include "core/application.h"
+#include "core/closure.h"
+#include "core/logging.h"
+#include "core/player.h"
+#include "core/song.h"
+#include "core/taskmanager.h"
+#include "covers/coverproviders.h"
+#include "covers/lastfmcoverprovider.h"
+#include "globalsearch/globalsearch.h"
+#include "globalsearch/lastfmsearchprovider.h"
+#include "ui/iconloader.h"
+#include "ui/settingsdialog.h"
 
 using boost::scoped_ptr;
 using lastfm::XmlQuery;
@@ -290,7 +291,8 @@ void LastFMService::Authenticate(const QString& username, const QString& passwor
   params["authToken"] = lastfm::md5((username + lastfm::md5(password.toUtf8())).toUtf8());
 
   QNetworkReply* reply = lastfm::ws::post(params);
-  connect(reply, SIGNAL(finished()), SLOT(AuthenticateReplyFinished()));
+  NewClosure(reply, SIGNAL(finished()), this,
+             SLOT(AuthenticateReplyFinished(QNetworkReply*)), reply);
   // If we need more detailed error reporting, handle error(NetworkError) signal
 }
 
@@ -307,12 +309,7 @@ void LastFMService::SignOut() {
   settings.setValue("Session", QString());
 }
 
-void LastFMService::AuthenticateReplyFinished() {
-  QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
-  if (!reply) {
-    emit AuthenticationComplete(false);
-    return;
-  }
+void LastFMService::AuthenticateReplyFinished(QNetworkReply* reply) {
   reply->deleteLater();
 
   // Parse the reply
@@ -347,12 +344,11 @@ void LastFMService::UpdateSubscriberStatus() {
   params["user"] = lastfm::ws::Username;
 
   QNetworkReply* reply = lastfm::ws::post(params);
-  connect(reply, SIGNAL(finished()), SLOT(UpdateSubscriberStatusFinished()));
+  NewClosure(reply, SIGNAL(finished()), this,
+             SLOT(UpdateSubscriberStatusFinished(QNetworkReply*)), reply);
 }
 
-void LastFMService::UpdateSubscriberStatusFinished() {
-  QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
-  Q_ASSERT(reply);
+void LastFMService::UpdateSubscriberStatusFinished(QNetworkReply* reply) {
   reply->deleteLater();
 
   bool is_subscriber = false;
@@ -662,7 +658,8 @@ void LastFMService::RefreshFriends(bool force) {
 
   lastfm::compat::AuthenticatedUser user;
   QNetworkReply* reply = user.getFriends();
-  connect(reply, SIGNAL(finished()), SLOT(RefreshFriendsFinished()));
+  NewClosure(reply, SIGNAL(finished()), this,
+             SLOT(RefreshFriendsFinished(QNetworkReply*)), reply);
 }
 
 void LastFMService::RefreshNeighbours() {
@@ -671,14 +668,11 @@ void LastFMService::RefreshNeighbours() {
 
   lastfm::compat::AuthenticatedUser user;
   QNetworkReply* reply = user.getNeighbours();
-  connect(reply, SIGNAL(finished()), SLOT(RefreshNeighboursFinished()));
+  NewClosure(reply, SIGNAL(finished()), this,
+             SLOT(RefreshNeighboursFinished(QNetworkReply*)), reply);
 }
 
-void LastFMService::RefreshFriendsFinished() {
-  QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
-  if (!reply)
-    return;
-
+void LastFMService::RefreshFriendsFinished(QNetworkReply* reply) {
   QList<lastfm::User> friends;
   if (!lastfm::compat::ParseUserList(reply, &friends)) {
     return;
@@ -713,11 +707,7 @@ void LastFMService::PopulateFriendsList() {
   }
 }
 
-void LastFMService::RefreshNeighboursFinished() {
-  QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
-  if (!reply)
-    return;
-
+void LastFMService::RefreshNeighboursFinished(QNetworkReply* reply) {
   QList<lastfm::User> neighbours;
   if (!lastfm::compat::ParseUserList(reply, &neighbours)) {
     return;
@@ -856,16 +846,11 @@ void LastFMService::FetchMoreTracks() {
   params["method"] = "radio.getPlaylist";
   params["rtp"] = "1";
   QNetworkReply* reply = lastfm::ws::post(params);
-  connect(reply, SIGNAL(finished()), SLOT(FetchMoreTracksFinished()));
+  NewClosure(reply, SIGNAL(finished()), this,
+             SLOT(FetchMoreTracksFinished(QNetworkReply*)), reply);
 }
 
-void LastFMService::FetchMoreTracksFinished() {
-  QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
-  if (!reply) {
-    qLog(Warning) << "Invalid reply on radio.getPlaylist";
-    url_handler_->TunerError();
-    return;
-  }
+void LastFMService::FetchMoreTracksFinished(QNetworkReply* reply) {
   reply->deleteLater();
   app_->task_manager()->SetTaskFinished(tune_task_id_);
   tune_task_id_ = 0;
@@ -875,7 +860,7 @@ void LastFMService::FetchMoreTracksFinished() {
     const XmlQuery& playlist = query["playlist"];
     foreach (const XmlQuery& q, playlist["trackList"].children("track")) {
       lastfm::MutableTrack t;
-      t.setUrl(q["location"].text());
+      t.setUrl(QUrl(q["location"].text()));
       t.setExtra("trackauth", q["extension"]["trackauth"].text());
       t.setTitle(q["title"].text());
       t.setArtist(q["creator"].text());
@@ -911,19 +896,13 @@ void LastFMService::Tune(const QUrl& url) {
   params["method"] = "radio.tune";
   params["station"] = station.url();
   QNetworkReply* reply = lastfm::ws::post(params);
-  connect(reply, SIGNAL(finished()), SLOT(TuneFinished()));
+  NewClosure(reply, SIGNAL(finished()), this,
+             SLOT(TuneFinished(QNetworkReply*)), reply);
 }
 
-void LastFMService::TuneFinished() {
-  QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
-  if (!reply) {
-    qLog(Warning) << "Invalid reply on radio.tune";
-    url_handler_->TunerError();
-    return;
-  }
-
-  FetchMoreTracks();
+void LastFMService::TuneFinished(QNetworkReply* reply) {
   reply->deleteLater();
+  FetchMoreTracks();
 }
 
 PlaylistItem::Options LastFMService::playlistitem_options() const {

@@ -41,7 +41,8 @@ CREATE TABLE jamendo.songs (
   cue_path TEXT,
   unavailable INTEGER DEFAULT 0,
 
-  effective_albumartist TEXT
+  effective_albumartist TEXT,
+  etag TEXT
 );
 
 CREATE VIRTUAL TABLE jamendo.songs_fts USING fts3(

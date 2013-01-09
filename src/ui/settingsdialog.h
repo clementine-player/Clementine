@@ -77,6 +77,10 @@ public:
     Page_Wiimotedev,
     Page_Subsonic,
     Page_Podcasts,
+    Page_GoogleDrive,
+    Page_UbuntuOne,
+    Page_Dropbox,
+    Page_Skydrive,
   };
 
   enum Role {

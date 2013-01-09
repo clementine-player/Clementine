@@ -23,13 +23,13 @@
 
 class Ui_PlaylistContainer;
 
-class DidYouMean;
 class LineEditInterface;
 class Playlist;
 class PlaylistManager;
 class PlaylistView;
 
 class QTimeLine;
+class QTimer;
 class QLabel;
 
 class PlaylistContainer : public QWidget {
@@ -41,12 +41,11 @@ public:
 
   static const char* kSettingsGroup;
 
-  void SetActions(QAction* new_playlist, QAction* save_playlist,
-                  QAction* load_playlist, QAction* next_playlist, QAction*
-                  previous_playlist);
+  void SetActions(QAction* new_playlist, QAction* load_playlist,
+                  QAction* save_playlist,
+                  QAction* next_playlist, QAction* previous_playlist);
   void SetManager(PlaylistManager* manager);
 
-  DidYouMean* did_you_mean() const { return did_you_mean_; }
   PlaylistView* view() const;
 
   bool eventFilter(QObject *objectWatched, QEvent *event);
@@ -54,7 +53,6 @@ public:
 signals:
   void TabChanged(int id);
   void Rename(int id, const QString& new_name);
-  void Remove(int id);
 
   void UndoRedoActionsChanged(QAction* undo, QAction* redo);
   void ViewSelectionModelChanged();
@@ -73,7 +71,7 @@ private slots:
 
   void SetViewModel(Playlist* playlist);
   void PlaylistAdded(int id, const QString& name);
-  void PlaylistRemoved(int id);
+  void PlaylistClosed(int id);
   void PlaylistRenamed(int id, const QString& new_name);
 
   void ActivePlaying();
@@ -86,10 +84,10 @@ private slots:
   void SetTabBarHeight(int height);
 
   void SelectionChanged();
+  void MaybeUpdateFilter();
   void UpdateFilter();
   void FocusOnFilter(QKeyEvent *event);
 
-  void DidYouMeanAccepted(const QString& text);
   void UpdateNoMatchesLabel();
 
 private:
@@ -97,6 +95,9 @@ private:
   void RepositionNoMatchesLabel(bool force = false);
 
 private:
+  static const int kFilterDelayMs;
+  static const int kFilterDelayPlaylistSizeThreshold;
+
   Ui_PlaylistContainer* ui_;
 
   PlaylistManager* manager_;
@@ -112,7 +113,7 @@ private:
 
   QLabel* no_matches_label_;
 
-  DidYouMean* did_you_mean_;
+  QTimer* filter_timer_;
 };
 
 #endif // PLAYLISTCONTAINER_H

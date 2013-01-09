@@ -22,13 +22,16 @@
 #ifndef AMAROK_ENGINEBASE_H
 #define AMAROK_ENGINEBASE_H
 
-#include <QUrl>
-#include <QObject>
-#include <QList>
-
+#include <stdint.h>
 #include <sys/types.h>
+
 #include <vector>
+
 #include <boost/noncopyable.hpp>
+
+#include <QList>
+#include <QObject>
+#include <QUrl>
 
 #include "engine_fwd.h"
 

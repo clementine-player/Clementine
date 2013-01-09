@@ -1,9 +1,11 @@
 #include "kittenloader.h"
-#include "core/network.h"
 
 #include <QNetworkReply>
 #include <QNetworkRequest>
 #include <QXmlStreamReader>
+
+#include "core/closure.h"
+#include "core/network.h"
 
 const char* KittenLoader::kFlickrKittenUrl =
     "http://api.flickr.com/services/rest/"
@@ -49,11 +51,11 @@ void KittenLoader::FetchMoreKittens() {
   QNetworkRequest req = QNetworkRequest(QUrl(kFlickrKittenUrl));
   QNetworkReply* reply = network_->get(req);
   connect(reply, SIGNAL(finished()), SLOT(KittensRetrieved()));
+  NewClosure(reply, SIGNAL(finished()), this,
+             SLOT(KittensRetrieved(QNetworkReply*)), reply);
 }
 
-void KittenLoader::KittensRetrieved() {
-  QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
-  Q_ASSERT(reply);
+void KittenLoader::KittensRetrieved(QNetworkReply* reply) {
   reply->deleteLater();
 
   QXmlStreamReader reader(reply);

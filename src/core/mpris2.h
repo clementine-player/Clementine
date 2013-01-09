@@ -28,10 +28,35 @@
 
 class Application;
 class MainWindow;
+class Playlist;
 
 typedef QList<QVariantMap> TrackMetadata;
 typedef QList<QDBusObjectPath> TrackIds;
 Q_DECLARE_METATYPE(TrackMetadata)
+
+struct MprisPlaylist {
+  QDBusObjectPath id;
+  QString name;
+  QString icon;  // Uri
+};
+typedef QList<MprisPlaylist> MprisPlaylistList;
+Q_DECLARE_METATYPE(MprisPlaylist);
+Q_DECLARE_METATYPE(MprisPlaylistList);
+
+struct MaybePlaylist {
+  bool valid;
+  MprisPlaylist playlist;
+};
+Q_DECLARE_METATYPE(MaybePlaylist);
+
+QDBusArgument& operator<< (QDBusArgument& arg, const MprisPlaylist& playlist);
+const QDBusArgument& operator>> (
+    const QDBusArgument& arg, MprisPlaylist& playlist);
+
+QDBusArgument& operator<< (QDBusArgument& arg, const MaybePlaylist& playlist);
+const QDBusArgument& operator>> (
+    const QDBusArgument& arg, MaybePlaylist& playlist);
+
 
 namespace mpris {
 
@@ -40,6 +65,7 @@ class Mpris1;
 class Mpris2 : public QObject {
   Q_OBJECT
 
+ public:
   //org.mpris.MediaPlayer2 MPRIS 2.0 Root interface
   Q_PROPERTY( bool CanQuit READ CanQuit )
   Q_PROPERTY( bool CanRaise READ CanRaise )
@@ -48,6 +74,10 @@ class Mpris2 : public QObject {
   Q_PROPERTY( QString DesktopEntry READ DesktopEntry )
   Q_PROPERTY( QStringList SupportedUriSchemes READ SupportedUriSchemes )
   Q_PROPERTY( QStringList SupportedMimeTypes READ SupportedMimeTypes )
+
+  //org.mpris.MediaPlayer2 MPRIS 2.2 Root interface
+  Q_PROPERTY( bool CanSetFullscreen READ CanSetFullscreen )
+  Q_PROPERTY( bool Fullscreen READ Fullscreen WRITE SetFullscreen )
 
   //org.mpris.MediaPlayer2.Player MPRIS 2.0 Player interface
   Q_PROPERTY( QString PlaybackStatus READ PlaybackStatus )
@@ -70,10 +100,12 @@ class Mpris2 : public QObject {
   Q_PROPERTY( TrackIds Tracks READ Tracks )
   Q_PROPERTY( bool CanEditTracks READ CanEditTracks )
 
-public:
-  Mpris2(Application* app, Mpris1* mpris1, QObject* parent = 0);
+  //org.mpris.MediaPlayer2.Playlists MPRIS 2.1 Playlists interface
+  Q_PROPERTY( quint32 PlaylistCount READ PlaylistCount )
+  Q_PROPERTY( QStringList Orderings READ Orderings )
+  Q_PROPERTY( MaybePlaylist ActivePlaylist READ ActivePlaylist )
 
-  void InitLibIndicate();
+  Mpris2(Application* app, Mpris1* mpris1, QObject* parent = 0);
 
   // Root Properties
   bool CanQuit() const;
@@ -83,6 +115,11 @@ public:
   QString DesktopEntry() const;
   QStringList SupportedUriSchemes() const;
   QStringList SupportedMimeTypes() const;
+
+  // Root Properties added in MPRIS 2.2
+  bool CanSetFullscreen() const { return false; }
+  bool Fullscreen() const { return false; }
+  void SetFullscreen(bool) {}
 
   // Methods
   void Raise();
@@ -130,6 +167,16 @@ public:
   void RemoveTrack(const QDBusObjectPath& trackId);
   void GoTo(const QDBusObjectPath& trackId);
 
+  // Playlist Properties
+  quint32 PlaylistCount() const;
+  QStringList Orderings() const;
+  MaybePlaylist ActivePlaylist() const;
+
+  // Methods
+  void ActivatePlaylist(const QDBusObjectPath& playlist_id);
+  QList<MprisPlaylist> GetPlaylists(
+      quint32 index, quint32 max_count, const QString& order, bool reverse_order);
+
 signals:
   // Player
   void Seeked(qlonglong position);
@@ -142,6 +189,9 @@ signals:
 
   void RaiseMainWindow();
 
+  // Playlist
+  void PlaylistChanged(const MprisPlaylist& playlist);
+
 private slots:
   void ArtLoaded(const Song& song, const QString& art_uri);
   void EngineStateChanged(Engine::State newState);
@@ -151,6 +201,7 @@ private slots:
   void CurrentSongChanged(const Song& song);
   void ShuffleModeChanged();
   void RepeatModeChanged();
+  void PlaylistChanged(Playlist* playlist);
 
 private:
   void EmitNotification(const QString& name);

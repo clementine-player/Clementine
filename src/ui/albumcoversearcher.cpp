@@ -185,7 +185,7 @@ void AlbumCoverSearcher::SearchFinished(quint64 id, const CoverSearchResults& re
       continue;
 
     quint64 id = app_->album_cover_loader()->LoadImageAsync(
-          options_, result.image_url, QString());
+          options_, result.image_url.toString(), QString());
 
     QStandardItem* item = new QStandardItem;
     item->setIcon(no_cover_icon_);

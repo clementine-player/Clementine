@@ -64,6 +64,14 @@
 #include <algorithm>
 #include <boost/bind.hpp>
 
+#ifdef USE_STD_UNORDERED_MAP
+  #include <unordered_map>
+  using std::unordered_map;
+#else
+  #include <tr1/unordered_map>
+  using std::tr1::unordered_map;
+#endif
+
 using smart_playlists::Generator;
 using smart_playlists::GeneratorInserter;
 using smart_playlists::GeneratorPtr;
@@ -443,14 +451,14 @@ int Playlist::NextVirtualIndex(int i, bool ignore_repeat_track) const {
   return virtual_items_.count();
 }
 
-int Playlist::PreviousVirtualIndex(int i) const {
+int Playlist::PreviousVirtualIndex(int i, bool ignore_repeat_track) const {
   PlaylistSequence::RepeatMode repeat_mode = playlist_sequence_->repeat_mode();
   PlaylistSequence::ShuffleMode shuffle_mode = playlist_sequence_->shuffle_mode();
   bool album_only = repeat_mode == PlaylistSequence::Repeat_Album ||
                     shuffle_mode == PlaylistSequence::Shuffle_InsideAlbum;
 
   // This one's easy - if we have to repeat the current track then just return i
-  if (repeat_mode == PlaylistSequence::Repeat_Track) {
+  if (repeat_mode == PlaylistSequence::Repeat_Track && !ignore_repeat_track) {
     if (!FilterContainsVirtualIndex(i))
       return -1;
     return i;
@@ -517,8 +525,8 @@ int Playlist::next_row(bool ignore_repeat_track) const {
   return virtual_items_[next_virtual_index];
 }
 
-int Playlist::previous_row() const {
-  int prev_virtual_index = PreviousVirtualIndex(current_virtual_index_);
+int Playlist::previous_row(bool ignore_repeat_track) const {
+  int prev_virtual_index = PreviousVirtualIndex(current_virtual_index_,ignore_repeat_track);
   if (prev_virtual_index < 0) {
     // We've gone off the beginning of the playlist.
 
@@ -530,7 +538,7 @@ int Playlist::previous_row() const {
         break;
 
       default:
-        prev_virtual_index = PreviousVirtualIndex(virtual_items_.count());
+        prev_virtual_index = PreviousVirtualIndex(virtual_items_.count(),ignore_repeat_track);
         break;
     }
   }
@@ -1919,18 +1927,44 @@ void Playlist::RemoveDeletedSongs() {
   removeRows(rows_to_remove);
 }
 
+struct SongSimilarHash {
+  long operator() (const Song& song) const {
+    return HashSimilar(song);
+  }
+};
+
+struct SongSimilarEqual {
+  long operator() (const Song& song1, const Song& song2) const {
+    return song1.IsSimilar(song2);
+  }
+};
+
 void Playlist::RemoveDuplicateSongs() {
   QList<int> rows_to_remove;
-  QSet<QUrl> filenames;
+  unordered_map<Song, int, SongSimilarHash, SongSimilarEqual> unique_songs;
 
   for (int row = 0; row < items_.count(); ++row) {
     PlaylistItemPtr item = items_[row];
-    Song song = item->Metadata();
+    const Song& song = item->Metadata();
 
-    if (filenames.contains(song.url())) {
-      rows_to_remove.append(row);
-    } else {
-      filenames.insert(song.url());
+    bool found_duplicate = false;
+
+    auto uniq_song_it = unique_songs.find(song);
+    if (uniq_song_it != unique_songs.end()) {
+      const Song& uniq_song = uniq_song_it->first;
+
+      if (song.bitrate() > uniq_song.bitrate()) {
+        rows_to_remove.append(unique_songs[uniq_song]);
+        unique_songs.erase(uniq_song);
+        unique_songs.insert(std::make_pair(song, row));
+      } else {
+        rows_to_remove.append(row);
+      }
+      found_duplicate = true;
+    }
+
+    if (!found_duplicate) {
+      unique_songs.insert(std::make_pair(song, row));
     }
   }
 

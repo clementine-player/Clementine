@@ -52,11 +52,13 @@
 #import <Sparkle/SUUpdater.h>
 #endif
 
+#include <QApplication>
 #include <QCoreApplication>
 #include <QDir>
 #include <QEvent>
 #include <QFile>
 #include <QSettings>
+#include <QWidget>
 
 #include <QtDebug>
 
@@ -200,6 +202,12 @@ static BreakpadRef InitBreakpad() {
 #endif
   return NSTerminateNow;
 }
+
+- (BOOL) userNotificationCenter: (id)center shouldPresentNotification: (id)notification {
+  // Always show notifications, even if Clementine is in the foreground.
+  return YES;
+}
+
 @end
 
 @implementation MacApplication
@@ -232,12 +240,18 @@ static BreakpadRef InitBreakpad() {
   // this makes sure the delegate's shortcut_handler is set
   [delegate_ setShortcutHandler:shortcut_handler_];
   [self setDelegate:delegate_];
+
+  Class notification_center_class = NSClassFromString(@"NSUserNotificationCenter");
+  if (notification_center_class) {
+    id notification_center = [notification_center_class defaultUserNotificationCenter];
+    [notification_center setDelegate: delegate_];
+  }
 }
 
 -(void) sendEvent: (NSEvent*)event {
   // If event tap is not installed, handle events that reach the app instead
   BOOL shouldHandleMediaKeyEventLocally = ![SPMediaKeyTap usesGlobalMediaKeyTap];
-  
+
   if(shouldHandleMediaKeyEventLocally && [event type] == NSSystemDefined && [event subtype] == SPSystemDefinedEventMediaKeys) {
     [(id)[self delegate] mediaKeyTap: nil receivedMediaKeyEvent: event];
   }
@@ -316,42 +330,6 @@ QString GetMusicDirectory() {
     ret = "~/Music";
   }
   return ret;
-}
-
-bool MigrateLegacyConfigFiles() {
-  bool moved_dir = false;
-  QString old_config_dir = QString("%1/.config/%2").arg(
-      QDir::homePath(), QCoreApplication::organizationName());
-  if (QFile::exists(old_config_dir)) {
-    QString new_config_dir = Utilities::GetConfigPath(Utilities::Path_Root);
-    // Create ~/Library/Application Support which should already exist anyway.
-    QDir::root().mkpath(GetApplicationSupportPath());
-
-    qLog(Debug) << "Move from:" << old_config_dir
-                << "to:" << new_config_dir;
-
-    NSFileManager* file_manager = [[NSFileManager alloc] init];
-    NSError* error;
-    bool ret = [file_manager moveItemAtPath:
-        [NSString stringWithUTF8String: old_config_dir.toUtf8().constData()]
-        toPath:[NSString stringWithUTF8String: new_config_dir.toUtf8().constData()]
-        error: &error];
-    if (!ret) {
-      qLog(Warning) << [[error localizedDescription] UTF8String];
-    }
-    moved_dir = true;
-  }
-
-  QString old_config_path = QDir::homePath() + "/Library/Preferences/com.davidsansome.Clementine.plist";
-  if (QFile::exists(old_config_path)) {
-    QSettings settings;
-    bool ret = QFile::rename(old_config_path, settings.fileName());
-    if (ret) {
-      qLog(Warning) << "Migrated old config file: " << old_config_path << "to: " << settings.fileName();
-    }
-  }
-
-  return moved_dir;
 }
 
 static int MapFunctionKey(int keycode) {
@@ -458,6 +436,19 @@ QKeySequence KeySequenceFromNSEvent(NSEvent* event) {
 void DumpDictionary(CFDictionaryRef dict) {
   NSDictionary* d = (NSDictionary*)dict;
   NSLog(@"%@", d);
+}
+
+// NSWindowCollectionBehaviorFullScreenPrimary
+static const NSUInteger kFullScreenPrimary = 1 << 7;
+
+void EnableFullScreen(const QWidget& main_window) {
+  if (QSysInfo::MacintoshVersion == QSysInfo::MV_SNOWLEOPARD) {
+    return;  // Unsupported on 10.6
+  }
+
+  NSView* view = reinterpret_cast<NSView*>(main_window.winId());
+  NSWindow* window = [view window];
+  [window setCollectionBehavior: kFullScreenPrimary];
 }
 
 }  // namespace mac

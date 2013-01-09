@@ -15,11 +15,13 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include <cdio/cdio.h>
 #include <QFileInfo>
 #include <QMutex>
 #include <QThread>
 #include <QWaitCondition>
+
+// This must come after Qt includes
+#include <cdio/cdio.h>
 
 #include "cddalister.h"
 #include "core/logging.h"
@@ -106,8 +108,9 @@ void CddaLister::Init() {
   for (; *devices != NULL; ++devices) {
     QString device(*devices);
     QFileInfo device_info(device);
-    if (device_info.isSymLink())
-      continue;
+    if (device_info.isSymLink()) {
+      device = device_info.symLinkTarget();
+    }
 #ifdef Q_OS_DARWIN
     // Every track is detected as a separate device on Darwin. The raw disk looks
     // like /dev/rdisk1
@@ -115,8 +118,10 @@ void CddaLister::Init() {
       continue;
     }
 #endif
-    devices_list_ << device;
-    emit DeviceAdded(device);
+    if (!devices_list_.contains(device)) {
+      devices_list_ << device;
+      emit DeviceAdded(device);
+    }
   }
 }
 
