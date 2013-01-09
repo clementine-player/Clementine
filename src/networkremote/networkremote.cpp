@@ -30,6 +30,7 @@ const int NetworkRemote::kDefaultServerPort = 5500;
 NetworkRemote::NetworkRemote(Application* app)
   : app_(app)
 {
+  buffer_.open(QIODevice::ReadWrite);
 }
 
 
@@ -133,12 +134,55 @@ void NetworkRemote::AcceptConnection() {
 void NetworkRemote::IncomingData() {
   QTcpSocket* client =  static_cast<QTcpSocket*>(QObject::sender());
 
-  // Now read all the data from the socket
-  QByteArray data;
-  data = client->readAll();
-  incoming_data_parser_->Parse(data);
+  while (client->bytesAvailable()) {
+    if (!reading_protobuf_) {
+      // Read the length of the next message
+      QDataStream s(client);
+      s >> expected_length_;
 
-  if (incoming_data_parser_->close_connection()) {
-    client->close();
+      reading_protobuf_ = true;
+    }
+
+    // Read some of the message
+    buffer_.write(client->read(expected_length_ - buffer_.size()));
+
+    // Did we get everything?
+    if (buffer_.size() == expected_length_) {
+      // Parse the message
+      qLog(Debug) << "Parsing message";
+      incoming_data_parser_->Parse(buffer_.data());
+
+      // Clear the buffer
+      buffer_.close();
+      buffer_.setData(QByteArray());
+      buffer_.open(QIODevice::ReadWrite);
+      reading_protobuf_ = false;
+    }
   }
+/*
+  // Now read all the data from the socket
+  QDataStream s(client);
+  qint32 expected_length;
+
+  while (client->bytesAvailable()) {
+    QBuffer buf;
+    buf.setData();
+    buf.open(QIODevice::ReadWrite);
+    s >> expected_length;
+
+    buf.write(client->read(expected_length - buf.size()));
+    qLog(Debug) << "Length:" << buf.size() << "/" << expected_length;
+
+
+    if (buf.size() == expected_length) {
+      qLog(Debug) << "Buf:" << buf.data();
+      incoming_data_parser_->Parse(buf.data());
+    }
+
+    if (incoming_data_parser_->close_connection()) {
+      client->close();
+    }
+
+    buf.close();
+  }*/
 }

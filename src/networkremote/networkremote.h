@@ -34,6 +34,9 @@ private:
   int port_;
   bool use_remote_;
   Application* app_;
+  bool reading_protobuf_;
+  quint32 expected_length_;
+  QBuffer buffer_;
 
   void StopServer();
   void ReadSettings();

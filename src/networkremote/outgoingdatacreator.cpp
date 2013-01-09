@@ -49,10 +49,16 @@ void OutgoingDataCreator::SendDataToClients(pb::remote::Message* msg) {
     // Check if the client is still active
     if (sock->state() == QTcpSocket::ConnectedState) {
       std::string data = msg->SerializeAsString();
-      QByteArray b64_data = QByteArray::fromRawData(data.data(), data.length());
+      /*QByteArray b64_data = QByteArray::fromRawData(data.data(), data.length());
       sock->write(b64_data.toBase64());
-      sock->write("\n");
+      sock->write("\n");*/
+
+      QDataStream s(sock);
+      s << qint32(data.length());
+      s.writeRawData(data.data(), data.length());
+
       sock->flush();
+
     } else {
       clients_->removeAt(clients_->indexOf(sock));
     }

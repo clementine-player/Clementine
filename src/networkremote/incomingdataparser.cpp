@@ -52,13 +52,12 @@ bool IncomingDataParser::close_connection() {
   return close_connection_;
 }
 
-void IncomingDataParser::Parse(const QByteArray& b64_data) {
+void IncomingDataParser::Parse(const QByteArray& data) {
   close_connection_  = false;
-  QByteArray pb_data = QByteArray::fromBase64(b64_data);
 
   // Parse the incoming data
   pb::remote::Message msg;
-  if (!msg.ParseFromArray(pb_data.constData(), pb_data.size())) {
+  if (!msg.ParseFromArray(data.constData(), data.size())) {
     qLog(Info) << "Couldn't parse data";
     return;
   }
