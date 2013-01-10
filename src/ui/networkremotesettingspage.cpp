@@ -51,6 +51,13 @@ void NetworkRemoteSettingsPage::Load() {
   }
 
   ui_->use_remote->setChecked(s.value("use_remote").toBool());
+  if (s.contains("only_non_public_ip")) {
+    ui_->only_non_public_ip->setChecked(s.value("only_non_public_ip").toBool());
+  } else {
+    // Default yes
+    ui_->only_non_public_ip->setChecked(true);
+    s.setValue("only_non_public_ip", true);
+  }
 
   s.endGroup();
 }
@@ -61,6 +68,7 @@ void NetworkRemoteSettingsPage::Save() {
   s.beginGroup(NetworkRemote::kSettingsGroup);
   s.setValue("port", ui_->remote_port->value());
   s.setValue("use_remote", ui_->use_remote->isChecked());
+  s.setValue("only_non_public_ip", ui_->only_non_public_ip->isChecked());
 
   s.endGroup();
 

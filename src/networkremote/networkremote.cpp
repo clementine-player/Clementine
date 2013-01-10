@@ -26,6 +26,7 @@
 
 const char* NetworkRemote::kSettingsGroup = "NetworkRemote";
 const int NetworkRemote::kDefaultServerPort = 5500;
+const int NetworkRemote::kProtocolBufferVersion = 1;
 
 NetworkRemote::NetworkRemote(Application* app)
   : app_(app)
@@ -46,6 +47,14 @@ void NetworkRemote::ReadSettings() {
   s.beginGroup(NetworkRemote::kSettingsGroup);
   use_remote_ = s.value("use_remote").toBool();
   port_       = s.value("port").toInt();
+
+  // Use only non public ips must be true be default
+  if (s.contains("only_non_public_ip")) {
+    only_non_public_ip_ = s.value("only_non_public_ip").toBool();
+  } else {
+    only_non_public_ip_ = true;
+  }
+
   if (port_ == 0) {
     port_ = kDefaultServerPort;
   }
@@ -54,6 +63,7 @@ void NetworkRemote::ReadSettings() {
 
 void NetworkRemote::SetupServer() {
   server_ = new QTcpServer();
+  server_ipv6_ = new QTcpServer();
   incoming_data_parser_  = new IncomingDataParser(app_);
   outgoing_data_creator_ = new OutgoingDataCreator(app_);
 
@@ -80,8 +90,10 @@ void NetworkRemote::StartServer() {
   qLog(Info) << "Starting network remote";
 
   connect(server_, SIGNAL(newConnection()), this, SLOT(AcceptConnection()));
+  connect(server_ipv6_, SIGNAL(newConnection()), this, SLOT(AcceptConnection()));
 
   server_->listen(QHostAddress::Any, port_);
+  server_ipv6_->listen(QHostAddress::AnyIPv6, port_);
 
   qLog(Info) << "Listening on port " << port_;
 }
@@ -89,15 +101,8 @@ void NetworkRemote::StartServer() {
 void NetworkRemote::StopServer() {
   if (server_->isListening()) {
     server_->close();
+    server_ipv6_->close();
     clients_.clear();
-    expected_length_.clear();
-    reading_protobuf_.clear();
-
-    // Delete all QBuffers
-    foreach (QBuffer* b, buffer_) {
-      delete b;
-    }
-    buffer_.clear();
   }
 }
 
@@ -130,64 +135,50 @@ void NetworkRemote::AcceptConnection() {
     connect(app_->player()->engine(), SIGNAL(StateChanged(Engine::State)),
             outgoing_data_creator_, SLOT(StateChanged(Engine::State)));
   }
-  QTcpSocket* client = server_->nextPendingConnection();
 
-  clients_.push_back(client);
-  reading_protobuf_.append(false);
-  expected_length_.append(0);
-  QBuffer* buf = new QBuffer();
-  buf->open(QIODevice::ReadWrite);
-  buffer_.push_back(buf);
-
-  // Connect to the slot IncomingData when receiving data
-  connect(client, SIGNAL(readyRead()), this, SLOT(IncomingData()));
-}
-
-void NetworkRemote::IncomingData() {
-  QTcpSocket* client =  static_cast<QTcpSocket*>(QObject::sender());
-
-  int which = clients_.indexOf(client);
-  qDebug() << "Which:" << which;
-
-  while (client->bytesAvailable()) {
-    if (!reading_protobuf_[which]) {
-      // Read the length of the next message
-      QDataStream s(client);
-      s >> expected_length_[which];
-
-      reading_protobuf_[which] = true;
+  if (server_->hasPendingConnections()) {
+    QTcpSocket* client_socket = server_->nextPendingConnection();
+    // Check if our ip is in private scope
+    if (only_non_public_ip_
+     && !IpIsPrivate(client_socket->peerAddress().toIPv4Address())) {
+      qLog(Info) << "Got a connection from public ip" <<
+                  client_socket->peerAddress().toString();
+    } else {
+      CreateRemoteClient(client_socket);
+      // TODO: Check private ips for ipv6
     }
 
-    // Read some of the message
-    buffer_[which]->write(
-      client->read(expected_length_[which] - buffer_[which]->size()));
-
-    // Did we get everything?
-    if (buffer_[which]->size() == expected_length_[which]) {
-      // Parse the message
-      incoming_data_parser_->Parse(buffer_[which]->data());
-
-      // Clear the buffer
-      buffer_[which]->close();
-      buffer_[which]->setData(QByteArray());
-      buffer_[which]->open(QIODevice::ReadWrite);
-      reading_protobuf_[which] = false;
-    }
+  } else {
+    // No checks on ipv6
+    CreateRemoteClient(server_ipv6_->nextPendingConnection());
   }
 }
 
-void NetworkRemote::RemoveClient(int index) {
-  // Remove client
-  QTcpSocket* client = clients_[index];
-  delete client;
-  clients_.removeAt(index);
+bool NetworkRemote::IpIsPrivate(int ip) {
+  int private_local = QHostAddress("127.0.0.1").toIPv4Address();
+  int private_a = QHostAddress("10.0.0.0").toIPv4Address();
+  int private_b = QHostAddress("172.16.0.0").toIPv4Address();
+  int private_c = QHostAddress("192.168.0.0").toIPv4Address();
 
-  // Remove QBuffer
-  QBuffer* buf = buffer_[index];
-  delete buf;
-  buffer_.removeAt(index);
+  // Check if we have a private ip address
+  if (ip == private_local
+   || (ip >= private_a && ip < private_a + 16777216)
+   || (ip >= private_b && ip < private_b + 1048576)
+   || (ip >= private_c && ip < private_c + 65536)) {
+    return true;
+  } else {
+    return false;
+  }
+}
 
-  // Remove other QList entries
-  reading_protobuf_.removeAt(index);
-  expected_length_.removeAt(index);
+void NetworkRemote::CreateRemoteClient(QTcpSocket *client_socket) {
+  if (client_socket) {
+    // Add the client to the list
+    RemoteClient* client = new RemoteClient(app_, client_socket);
+    clients_.push_back(client);
+
+    // Connect the signal to parse data
+    connect(client, SIGNAL(Parse(QByteArray)),
+            incoming_data_parser_, SLOT(Parse(QByteArray)));
+  }
 }

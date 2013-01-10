@@ -11,8 +11,10 @@ public:
   IncomingDataParser(Application* app);
   ~IncomingDataParser();
 
-  void Parse(const QByteArray& pb_data);
   bool close_connection();
+
+public slots:
+  void Parse(const QByteArray& pb_data);
 
 signals:
   void SendClementineInfos();

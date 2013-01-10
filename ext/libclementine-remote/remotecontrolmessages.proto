@@ -34,13 +34,14 @@ enum EngineState {
 }
 
 message Message {
-  required MsgType msgType = 1;
+  required int32 version = 1;
+  required MsgType msgType = 2;
   
-  optional EngineState state = 2;
-  optional ClementineInfos infos = 3;
-  optional SongMetadata currentSong = 4;
-  optional int32 volume = 5;
-  repeated Playlist playlists = 6;
+  optional EngineState state = 3;
+  optional ClementineInfos infos = 4;
+  optional SongMetadata currentSong = 5;
+  optional int32 volume = 6;
+  repeated Playlist playlists = 7;
 }
 
 message ClementineInfos {

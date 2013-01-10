@@ -20,8 +20,7 @@
 #include "core/logging.h"
 
 OutgoingDataCreator::OutgoingDataCreator(Application* app)
-  : app_(app),
-    clients_(NULL)
+  : app_(app)
 {
   // Create Keep Alive Timer
   keep_alive_timer_ = new QTimer(this);
@@ -32,7 +31,7 @@ OutgoingDataCreator::OutgoingDataCreator(Application* app)
 OutgoingDataCreator::~OutgoingDataCreator() {
 }
 
-void OutgoingDataCreator::SetClients(QList<QTcpSocket*>* clients) {
+void OutgoingDataCreator::SetClients(QList<RemoteClient*>* clients) {
   clients_ = clients;
   // After we got some clients, start the keep alive timer
   // Default: every 10 seconds
@@ -41,24 +40,21 @@ void OutgoingDataCreator::SetClients(QList<QTcpSocket*>* clients) {
 
 void OutgoingDataCreator::SendDataToClients(pb::remote::Message* msg) {
   // Check if we have clients to send data to
-  if (!clients_ || clients_->empty()) {
+  if (clients_->empty()) {
     return;
   }
 
-  QTcpSocket* sock;
-  foreach(sock, *clients_) {
+  // Add the Version number
+  msg->set_version(NetworkRemote::kProtocolBufferVersion);
+
+  RemoteClient* client;
+  foreach(client, *clients_) {
     // Check if the client is still active
-    if (sock->state() == QTcpSocket::ConnectedState) {
-      std::string data = msg->SerializeAsString();
-
-      QDataStream s(sock);
-      s << qint32(data.length());
-      s.writeRawData(data.data(), data.length());
-
-      sock->flush();
-
+    if (client->State() == QTcpSocket::ConnectedState) {
+      client->SendData(msg);
     } else {
-      app_->network_remote()->RemoveClient(clients_->indexOf(sock));
+      clients_->removeAt(clients_->indexOf(client));
+      delete client;
     }
   }
 }
@@ -141,7 +137,7 @@ void OutgoingDataCreator::CurrentSongChanged(const Song& song, const QString& ur
   current_uri_   = uri;
   current_image_ = img;
 
-  if (clients_) {
+  if (!clients_->empty()) {
     // Create the message
     pb::remote::Message msg;
     msg.set_msgtype(pb::remote::CURRENT_METAINFOS);
