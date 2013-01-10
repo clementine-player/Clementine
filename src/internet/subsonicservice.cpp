@@ -6,26 +6,53 @@
 #include "core/player.h"
 #include "core/utilities.h"
 #include "ui/iconloader.h"
+#include "library/librarybackend.h"
+#include "core/mergedproxymodel.h"
+#include "core/database.h"
 
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QNetworkCookieJar>
 #include <QSslConfiguration>
 #include <QXmlStreamReader>
+#include <QSortFilterProxyModel>
 
 const char* SubsonicService::kServiceName = "Subsonic";
 const char* SubsonicService::kSettingsGroup = "Subsonic";
 const char* SubsonicService::kApiVersion = "1.7.0";
 const char* SubsonicService::kApiClientName = "Clementine";
 
+const char* SubsonicService::kSongsTable = "subsonic_songs";
+const char* SubsonicService::kFtsTable = "subsonic_songs_fts";
+
 SubsonicService::SubsonicService(Application* app, InternetModel *parent)
   : InternetService(kServiceName, app, parent, parent),
     network_(new QNetworkAccessManager(this)),
     url_handler_(new SubsonicUrlHandler(this, this)),
-    login_state_(LoginState_OtherError),
-    item_lookup_()
+    library_backend_(NULL),
+    library_model_(NULL),
+    library_sort_model_(new QSortFilterProxyModel(this)),
+    login_state_(LoginState_OtherError)
 {
   app_->player()->RegisterUrlHandler(url_handler_);
+
+  library_backend_ = new LibraryBackend;
+  library_backend_->moveToThread(app_->database()->thread());
+  library_backend_->Init(app_->database(),
+                         kSongsTable,
+                         QString::null,
+                         QString::null,
+                         kFtsTable);
+
+  library_model_ = new LibraryModel(library_backend_, app_, this);
+  library_model_->set_show_various_artists(false);
+  library_model_->set_show_smart_playlists(false);
+
+  library_sort_model_->setSourceModel(library_model_);
+  library_sort_model_->setSortRole(LibraryModel::Role_SortText);
+  library_sort_model_->setDynamicSortFilter(true);
+  library_sort_model_->sort(0);
+
   connect(this, SIGNAL(LoginStateChanged(SubsonicService::LoginState)),
           SLOT(onLoginStateChanged(SubsonicService::LoginState)));
 }
@@ -36,9 +63,9 @@ SubsonicService::~SubsonicService()
 
 QStandardItem* SubsonicService::CreateRootItem()
 {
-  root_ = new QStandardItem(QIcon(":providers/subsonic.png"), kServiceName);
-  root_->setData(true, InternetModel::Role_CanLazyLoad);
-  return root_;
+  QStandardItem* item = new QStandardItem(QIcon(":providers/subsonic.png"), kServiceName);
+  item->setData(true, InternetModel::Role_CanLazyLoad);
+  return item;
 }
 
 void SubsonicService::LazyPopulate(QStandardItem *item)
@@ -46,21 +73,15 @@ void SubsonicService::LazyPopulate(QStandardItem *item)
   switch (item->data(InternetModel::Role_Type).toInt())
   {
   case InternetModel::Type_Service:
+    // TODO: initiate library loading
+    library_backend_->DeleteAll();
     GetIndexes();
-    break;
-
-  case Type_Artist:
-  case Type_Album:
-    GetMusicDirectory(item->data(Role_Id).toString());
+    model()->merged_model()->AddSubModel(item->index(), library_sort_model_);
     break;
 
   default:
     break;
   }
-
-  item->setRowCount(0);
-  QStandardItem* loading = new QStandardItem(tr("Loading..."));
-  item->appendRow(loading);
 }
 
 void SubsonicService::ReloadSettings()
@@ -137,45 +158,31 @@ void SubsonicService::Send(const QUrl &url, const char *slot)
   connect(reply, SIGNAL(finished()), slot);
 }
 
-void SubsonicService::ReadIndex(QXmlStreamReader *reader, QStandardItem *parent)
+void SubsonicService::ReadIndex(QXmlStreamReader *reader)
 {
   Q_ASSERT(reader->name() == "index");
 
   while (reader->readNextStartElement())
   {
-    ReadArtist(reader, parent);
+    ReadArtist(reader);
   }
 }
 
-void SubsonicService::ReadArtist(QXmlStreamReader *reader, QStandardItem *parent)
+void SubsonicService::ReadArtist(QXmlStreamReader *reader)
 {
   Q_ASSERT(reader->name() == "artist");
-  QString id = reader->attributes().value("id").toString();
-  QStandardItem *item = new QStandardItem(IconLoader::Load("document-open-folder"),
-                                          reader->attributes().value("name").toString());
-  item->setData(Type_Artist, InternetModel::Role_Type);
-  item->setData(true, InternetModel::Role_CanLazyLoad);
-  item->setData(id, Role_Id);
-  parent->appendRow(item);
-  item_lookup_.insert(id, item);
+  // TODO: recurse into directory
   reader->skipCurrentElement();
 }
 
-void SubsonicService::ReadAlbum(QXmlStreamReader *reader, QStandardItem *parent)
+void SubsonicService::ReadAlbum(QXmlStreamReader *reader)
 {
   Q_ASSERT(reader->name() == "child");
-  QString id = reader->attributes().value("id").toString();
-  QStandardItem *item = new QStandardItem(IconLoader::Load("document-open-folder"),
-                                          reader->attributes().value("title").toString());
-  item->setData(Type_Album, InternetModel::Role_Type);
-  item->setData(true, InternetModel::Role_CanLazyLoad);
-  item->setData(id, Role_Id);
-  parent->appendRow(item);
-  item_lookup_.insert(id, item);
+  // TODO: recurse into directory
   reader->skipCurrentElement();
 }
 
-void SubsonicService::ReadTrack(QXmlStreamReader *reader, QStandardItem *parent)
+Song SubsonicService::ReadTrack(QXmlStreamReader *reader)
 {
   Q_ASSERT(reader->name() == "child");
 
@@ -195,21 +202,18 @@ void SubsonicService::ReadTrack(QXmlStreamReader *reader, QStandardItem *parent)
   song.set_url(url);
   song.set_filesize(reader->attributes().value("size").toString().toInt());
 
-  QStandardItem *item = new QStandardItem(reader->attributes().value("title").toString());
-  item->setData(Type_Track, InternetModel::Role_Type);
-  item->setData(id, Role_Id);
-  item->setData(QVariant::fromValue(song), InternetModel::Role_SongMetadata);
-  item->setData(InternetModel::PlayBehaviour_SingleItem, InternetModel::Role_PlayBehaviour);
-  item->setData(song.url(), InternetModel::Role_Url);
-  parent->appendRow(item);
-  item_lookup_.insert(id, item);
+  // We need to set these to satisfy the database constraints
+  song.set_directory_id(0);
+  song.set_mtime(0);
+  song.set_ctime(0);
+
   reader->skipCurrentElement();
+  return song;
 }
 
 void SubsonicService::onLoginStateChanged(SubsonicService::LoginState newstate)
 {
-  root_->setRowCount(0);
-  root_->setData(true, InternetModel::Role_CanLazyLoad);
+  // TODO: library refresh logic?
 }
 
 void SubsonicService::onPingFinished()
@@ -284,22 +288,25 @@ void SubsonicService::onGetIndexesFinished()
 
   reader.readNextStartElement();
   Q_ASSERT(reader.name() == "indexes");
-  root_->setRowCount(0);
+  // TODO: start loading library data
+  SongList songs;
   while (reader.readNextStartElement())
   {
     if (reader.name() == "index")
     {
-      ReadIndex(&reader, root_);
+      ReadIndex(&reader);
     }
     else if (reader.name() == "child" && reader.attributes().value("isVideo") == "false")
     {
-      ReadTrack(&reader, root_);
+      songs << ReadTrack(&reader);
     }
     else
     {
       reader.skipCurrentElement();
     }
   }
+
+  library_backend_->AddOrUpdateSongs(songs);
 }
 
 void SubsonicService::onGetMusicDirectoryFinished()
@@ -319,17 +326,16 @@ void SubsonicService::onGetMusicDirectoryFinished()
 
   reader.readNextStartElement();
   Q_ASSERT(reader.name() == "directory");
-  QStandardItem *parent = item_lookup_.value(reader.attributes().value("id").toString());
-  parent->setRowCount(0);
+  // TODO: add tracks, etc.
   while (reader.readNextStartElement())
   {
     if (reader.attributes().value("isDir") == "true")
     {
-      ReadAlbum(&reader, parent);
+      ReadAlbum(&reader);
     }
     else if (reader.attributes().value("isVideo") == "false")
     {
-      ReadTrack(&reader, parent);
+      ReadTrack(&reader);
     }
     else
     {

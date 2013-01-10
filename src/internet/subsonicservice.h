@@ -6,9 +6,9 @@
 
 class QNetworkAccessManager;
 class QXmlStreamReader;
+class QSortFilterProxyModel;
 
 class SubsonicUrlHandler;
-class SubsonicHttpsUrlHandler;
 
 class SubsonicService : public InternetService
 {
@@ -74,6 +74,9 @@ class SubsonicService : public InternetService
   static const char* kApiVersion;
   static const char* kApiClientName;
 
+  static const char* kSongsTable;
+  static const char* kFtsTable;
+
  signals:
   void LoginStateChanged(SubsonicService::LoginState newstate);
 
@@ -84,15 +87,18 @@ class SubsonicService : public InternetService
   // Convenience function to reduce QNetworkRequest/QNetworkReply/connect boilerplate
   void Send(const QUrl &url, const char *slot);
 
-  void ReadIndex(QXmlStreamReader *reader, QStandardItem *parent);
-  void ReadArtist(QXmlStreamReader *reader, QStandardItem *parent);
-  void ReadAlbum(QXmlStreamReader *reader, QStandardItem *parent);
-  void ReadTrack(QXmlStreamReader *reader, QStandardItem *parent);
+  void ReadIndex(QXmlStreamReader *reader);
+  void ReadArtist(QXmlStreamReader *reader);
+  void ReadAlbum(QXmlStreamReader *reader);
+  Song ReadTrack(QXmlStreamReader *reader);
 
   QModelIndex context_item_;
-  QStandardItem* root_;
   QNetworkAccessManager* network_;
   SubsonicUrlHandler* url_handler_;
+
+  LibraryBackend* library_backend_;
+  LibraryModel* library_model_;
+  QSortFilterProxyModel* library_sort_model_;
 
   // Configuration
   QString server_;
@@ -100,8 +106,6 @@ class SubsonicService : public InternetService
   QString password_;
 
   LoginState login_state_;
-
-  QMap<QString, QStandardItem*> item_lookup_;
 
  private slots:
   void onLoginStateChanged(SubsonicService::LoginState newstate);
