@@ -43,6 +43,8 @@ IncomingDataParser::IncomingDataParser(Application* app)
           app_->player(), SLOT(PlayAt(int,Engine::TrackChangeFlags,bool)));
   connect(this, SIGNAL(SetActivePlaylist(int)),
           app_->playlist_manager(), SLOT(SetActivePlaylist(int)));
+  connect(this, SIGNAL(ShuffleCurrent()),
+          app_->playlist_manager(), SLOT(ShuffleCurrent()));
 }
 
 IncomingDataParser::~IncomingDataParser() {
@@ -52,13 +54,12 @@ bool IncomingDataParser::close_connection() {
   return close_connection_;
 }
 
-void IncomingDataParser::Parse(const QByteArray& b64_data) {
+void IncomingDataParser::Parse(const QByteArray& data) {
   close_connection_  = false;
-  QByteArray pb_data = QByteArray::fromBase64(b64_data);
 
   // Parse the incoming data
   pb::remote::Message msg;
-  if (!msg.ParseFromArray(pb_data.constData(), pb_data.size())) {
+  if (!msg.ParseFromArray(data.constData(), data.size())) {
     qLog(Info) << "Couldn't parse data";
     return;
   }
@@ -90,6 +91,8 @@ void IncomingDataParser::Parse(const QByteArray& b64_data) {
                                   break;
     case pb::remote::CHANGE_SONG: ChangeSong(&msg);
                                   break;
+    case pb::remote::TOOGLE_SHUFFLE:  emit ShuffleCurrent();
+                                      break;
     default: break;
   }
 }

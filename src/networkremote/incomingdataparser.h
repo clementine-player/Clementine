@@ -11,8 +11,10 @@ public:
   IncomingDataParser(Application* app);
   ~IncomingDataParser();
 
-  void Parse(const QByteArray& pb_data);
   bool close_connection();
+
+public slots:
+  void Parse(const QByteArray& pb_data);
 
 signals:
   void SendClementineInfos();
@@ -29,6 +31,7 @@ signals:
   void SetVolume(int volume);
   void PlayAt(int i, Engine::TrackChangeFlags change, bool reshuffle);
   void SetActivePlaylist(int id);
+  void ShuffleCurrent();
 
 private:
   Application* app_;

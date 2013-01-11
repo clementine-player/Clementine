@@ -13,6 +13,7 @@
 #include "playlist/playlist.h"
 #include "playlist/playlistmanager.h"
 #include "remotecontrolmessages.pb.h"
+#include "remoteclient.h"
 
 class OutgoingDataCreator : public QObject {
     Q_OBJECT
@@ -20,7 +21,7 @@ public:
   OutgoingDataCreator(Application* app);
   ~OutgoingDataCreator();
 
-  void SetClients(QList<QTcpSocket*>* clients);
+  void SetClients(QList<RemoteClient*>* clients);
 
 public slots:
   void SendClementineInfos();
@@ -36,7 +37,7 @@ public slots:
 
 private:
   Application* app_;
-  QList<QTcpSocket*>* clients_;
+  QList<RemoteClient*>* clients_;
   Song current_song_;
   QString current_uri_;
   QImage current_image_;
