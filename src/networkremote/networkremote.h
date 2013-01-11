@@ -42,7 +42,7 @@ private:
   void StopServer();
   void ReadSettings();
   void CreateRemoteClient(QTcpSocket* client_socket);
-  bool IpIsPrivate(int ip);
+  bool IpIsPrivate(const QHostAddress& address);
 };
 
 #endif // NETWORKREMOTE_H
