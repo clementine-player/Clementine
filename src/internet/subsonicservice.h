@@ -77,6 +77,8 @@ class SubsonicService : public InternetService
   static const char* kSongsTable;
   static const char* kFtsTable;
 
+  static const int kChunkSize;
+
  signals:
   void LoginStateChanged(SubsonicService::LoginState newstate);
 
@@ -106,6 +108,10 @@ class SubsonicService : public InternetService
   QString password_;
 
   LoginState login_state_;
+
+  int directory_count_;
+  int processed_directory_count_;
+  SongList new_songs_;
 
  private slots:
   void onLoginStateChanged(SubsonicService::LoginState newstate);

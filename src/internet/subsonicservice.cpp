@@ -25,6 +25,8 @@ const char* SubsonicService::kApiClientName = "Clementine";
 const char* SubsonicService::kSongsTable = "subsonic_songs";
 const char* SubsonicService::kFtsTable = "subsonic_songs_fts";
 
+const int SubsonicService::kChunkSize = 1000;
+
 SubsonicService::SubsonicService(Application* app, InternetModel *parent)
   : InternetService(kServiceName, app, parent, parent),
     network_(new QNetworkAccessManager(this)),
@@ -126,6 +128,7 @@ void SubsonicService::GetIndexes()
 
 void SubsonicService::GetMusicDirectory(const QString &id)
 {
+  ++directory_count_;
   QUrl url = BuildRequestUrl("getMusicDirectory");
   url.addQueryItem("id", id);
   Send(url, SLOT(onGetMusicDirectoryFinished()));
@@ -171,14 +174,16 @@ void SubsonicService::ReadIndex(QXmlStreamReader *reader)
 void SubsonicService::ReadArtist(QXmlStreamReader *reader)
 {
   Q_ASSERT(reader->name() == "artist");
-  // TODO: recurse into directory
+  QString id = reader->attributes().value("id").toString();
+  GetMusicDirectory(id);
   reader->skipCurrentElement();
 }
 
 void SubsonicService::ReadAlbum(QXmlStreamReader *reader)
 {
   Q_ASSERT(reader->name() == "child");
-  // TODO: recurse into directory
+  QString id = reader->attributes().value("id").toString();
+  GetMusicDirectory(id);
   reader->skipCurrentElement();
 }
 
@@ -286,10 +291,13 @@ void SubsonicService::onGetIndexesFinished()
     return;
   }
 
+  directory_count_ = 0;
+  processed_directory_count_ = 0;
+  new_songs_ = SongList();
+
   reader.readNextStartElement();
   Q_ASSERT(reader.name() == "indexes");
   // TODO: start loading library data
-  SongList songs;
   while (reader.readNextStartElement())
   {
     if (reader.name() == "index")
@@ -298,7 +306,7 @@ void SubsonicService::onGetIndexesFinished()
     }
     else if (reader.name() == "child" && reader.attributes().value("isVideo") == "false")
     {
-      songs << ReadTrack(&reader);
+      new_songs_ << ReadTrack(&reader);
     }
     else
     {
@@ -306,7 +314,10 @@ void SubsonicService::onGetIndexesFinished()
     }
   }
 
-  library_backend_->AddOrUpdateSongs(songs);
+  if (new_songs_.size() >= kChunkSize || directory_count_ == processed_directory_count_) {
+    library_backend_->AddOrUpdateSongs(new_songs_);
+    new_songs_ = SongList();
+  }
 }
 
 void SubsonicService::onGetMusicDirectoryFinished()
@@ -315,6 +326,8 @@ void SubsonicService::onGetMusicDirectoryFinished()
   Q_ASSERT(reply);
   reply->deleteLater();
   QXmlStreamReader reader(reply);
+
+  ++processed_directory_count_;
 
   reader.readNextStartElement();
   Q_ASSERT(reader.name() == "subsonic-response");
@@ -335,11 +348,16 @@ void SubsonicService::onGetMusicDirectoryFinished()
     }
     else if (reader.attributes().value("isVideo") == "false")
     {
-      ReadTrack(&reader);
+      new_songs_ << ReadTrack(&reader);
     }
     else
     {
       reader.skipCurrentElement();
     }
+  }
+
+  if (new_songs_.size() >= kChunkSize || directory_count_ == processed_directory_count_) {
+    library_backend_->AddOrUpdateSongs(new_songs_);
+    new_songs_ = SongList();
   }
 }
