@@ -61,7 +61,7 @@ message SongMetadata {
   optional string genre = 10;
   optional int32 playcount = 11;
   optional string pretty_length = 12;
-  optional string art = 13;
+  optional bytes art = 13;
 }
 
 message Playlist {

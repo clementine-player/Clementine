@@ -184,7 +184,7 @@ void OutgoingDataCreator::CreateSong(pb::remote::SongMetadata* song_metadata,
       small.save(&buf, "JPG");
 
       // Append the Data in the protocol buffer
-      song_metadata->set_art(data.toBase64());
+      song_metadata->set_art(data.data(), data.size());
 
       buf.close();
     }
