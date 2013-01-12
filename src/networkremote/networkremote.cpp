@@ -140,7 +140,7 @@ void NetworkRemote::AcceptConnection() {
     QTcpSocket* client_socket = server_->nextPendingConnection();
     // Check if our ip is in private scope
     if (only_non_public_ip_
-     && !IpIsPrivate(client_socket->peerAddress().toIPv4Address())) {
+     && !IpIsPrivate(client_socket->peerAddress())) {
       qLog(Info) << "Got a connection from public ip" <<
                   client_socket->peerAddress().toString();
     } else {
@@ -154,21 +154,16 @@ void NetworkRemote::AcceptConnection() {
   }
 }
 
-bool NetworkRemote::IpIsPrivate(int ip) {
-  int private_local = QHostAddress("127.0.0.1").toIPv4Address();
-  int private_a = QHostAddress("10.0.0.0").toIPv4Address();
-  int private_b = QHostAddress("172.16.0.0").toIPv4Address();
-  int private_c = QHostAddress("192.168.0.0").toIPv4Address();
-
-  // Check if we have a private ip address
-  if (ip == private_local
-   || (ip >= private_a && ip < private_a + 16777216)
-   || (ip >= private_b && ip < private_b + 1048576)
-   || (ip >= private_c && ip < private_c + 65536)) {
-    return true;
-  } else {
-    return false;
-  }
+bool NetworkRemote::IpIsPrivate(const QHostAddress& address) {
+  return
+      address.isInSubnet(QHostAddress::parseSubnet("127.0.0.1/8")) ||
+      // Link Local v6
+      address.isInSubnet(QHostAddress::parseSubnet("::1/128")) ||
+      address.isInSubnet(QHostAddress::parseSubnet("192.168.0.0/16")) ||
+      address.isInSubnet(QHostAddress::parseSubnet("172.16.0.0/12")) ||
+      address.isInSubnet(QHostAddress::parseSubnet("10.0.0.0/8")) ||
+      // Private v6 range
+      address.isInSubnet(QHostAddress::parseSubnet("fc00::/7"));
 }
 
 void NetworkRemote::CreateRemoteClient(QTcpSocket *client_socket) {
