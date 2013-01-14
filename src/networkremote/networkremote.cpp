@@ -127,27 +127,12 @@ void NetworkRemote::AcceptConnection() {
             outgoing_data_creator_.get(), SLOT(StateChanged(Engine::State)));
   }
 
-<<<<<<< HEAD
-  if (server_->hasPendingConnections()) {
-    QTcpSocket* client_socket = server_->nextPendingConnection();
-    // Check if our ip is in private scope
-    if (only_non_public_ip_
-     && !IpIsPrivate(client_socket->peerAddress())) {
-      qLog(Info) << "Got a connection from public ip" <<
-                  client_socket->peerAddress().toString();
-    } else {
-      CreateRemoteClient(client_socket);
-      // TODO: Check private ips for ipv6
-    }
-
-=======
   QTcpServer* server = qobject_cast<QTcpServer*>(sender());
   QTcpSocket* client_socket = server->nextPendingConnection();
   // Check if our ip is in private scope
   if (only_non_public_ip_ && !IpIsPrivate(client_socket->peerAddress())) {
     qLog(Info) << "Got a connection from public ip" <<
                 client_socket->peerAddress().toString();
->>>>>>> remote/remotecontrol
   } else {
     CreateRemoteClient(client_socket);
   }
@@ -155,18 +140,12 @@ void NetworkRemote::AcceptConnection() {
 
 bool NetworkRemote::IpIsPrivate(const QHostAddress& address) {
   return
-<<<<<<< HEAD
-      address.isInSubnet(QHostAddress::parseSubnet("127.0.0.1/8")) ||
-      // Link Local v6
-      address.isInSubnet(QHostAddress::parseSubnet("::1/128")) ||
-=======
       // Link Local v4
       address.isInSubnet(QHostAddress::parseSubnet("127.0.0.1/8")) ||
       // Link Local v6
       address.isInSubnet(QHostAddress::parseSubnet("::1/128")) ||
       address.isInSubnet(QHostAddress::parseSubnet("fe80::/10"));
       // Private v4 range
->>>>>>> remote/remotecontrol
       address.isInSubnet(QHostAddress::parseSubnet("192.168.0.0/16")) ||
       address.isInSubnet(QHostAddress::parseSubnet("172.16.0.0/12")) ||
       address.isInSubnet(QHostAddress::parseSubnet("10.0.0.0/8")) ||
