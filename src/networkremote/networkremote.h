@@ -12,7 +12,7 @@
 #include "outgoingdatacreator.h"
 #include "remoteclient.h"
 
-class NetworkRemote : public QThread {
+class NetworkRemote : public QObject {
     Q_OBJECT
 public:
   static const char* kSettingsGroup;

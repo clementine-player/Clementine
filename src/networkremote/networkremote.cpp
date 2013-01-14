@@ -29,7 +29,7 @@ const quint16 NetworkRemote::kDefaultServerPort = 5500;
 const int NetworkRemote::kProtocolBufferVersion = 1;
 
 NetworkRemote::NetworkRemote(Application* app, QObject* parent)
-  : QThread(parent),
+  : QObject(parent),
     signals_connected_(false),
     app_(app) {
 }
