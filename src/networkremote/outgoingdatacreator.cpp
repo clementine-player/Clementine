@@ -69,8 +69,8 @@ void OutgoingDataCreator::SendClementineInfos() {
 
   QString version = QString("%1 %2").arg(QCoreApplication::applicationName(),
                                          QCoreApplication::applicationVersion());
-  pb::remote::ClementineInfos *infos = msg.mutable_infos();
-  infos->set_version(version.toAscii());
+  pb::remote::ClementineInfo *info = msg.mutable_info();
+  info->set_version(version.toAscii());
 
   SendDataToClients(&msg);
 }
@@ -107,8 +107,8 @@ void OutgoingDataCreator::SendAllPlaylists() {
     pb::remote::Playlist* playlist = msg.add_playlists();
     playlist->set_name(playlist_name.toStdString());
     playlist->set_id(p->id());
-    playlist->set_item_count(p->GetAllSongs().size());
     playlist->set_active((p->id() == active_playlist));
+    // TODO: Fill in the song metadata here.
   }
 
   SendDataToClients(&msg);
@@ -217,7 +217,6 @@ void OutgoingDataCreator::SendPlaylistSongs(int id) {
   // Create a new playlist
   pb::remote::Playlist* pb_playlist = msg.add_playlists();
   pb_playlist->set_id(id);
-  pb_playlist->set_item_count(playlist->GetAllSongs().size());
 
   // Send all songs
   int index = 0;

@@ -91,7 +91,7 @@ void IncomingDataParser::Parse(const QByteArray& data) {
                                   break;
     case pb::remote::CHANGE_SONG: ChangeSong(&msg);
                                   break;
-    case pb::remote::TOOGLE_SHUFFLE:  emit ShuffleCurrent();
+    case pb::remote::TOGGLE_SHUFFLE:  emit ShuffleCurrent();
                                       break;
     default: break;
   }

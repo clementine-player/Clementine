@@ -8,7 +8,7 @@ enum MsgType {
   REQUEST_PLAYLIST_SONGS = 3;
   CHANGE_SONG = 4;
   SET_VOLUME = 5;
-  
+
   // Messages send by both
   PLAY = 20;
   PLAYPAUSE = 21;
@@ -16,8 +16,8 @@ enum MsgType {
   STOP = 23;
   NEXT = 24;
   PREV = 25;
-  TOOGLE_SHUFFLE = 26;
-  
+  TOGGLE_SHUFFLE = 26;
+
   // Messages send from server to client
   INFOS = 40;
   CURRENT_METAINFOS = 41;
@@ -34,17 +34,17 @@ enum EngineState {
 }
 
 message Message {
-  required int32 version = 1;
+  required int32 version = 1 [default=1];
   required MsgType msgType = 2;
-  
+
   optional EngineState state = 3;
-  optional ClementineInfos infos = 4;
+  optional ClementineInfo info = 4;
   optional SongMetadata currentSong = 5;
   optional int32 volume = 6;
   repeated Playlist playlists = 7;
 }
 
-message ClementineInfos {
+message ClementineInfo {
   optional string version = 1;
 }
 
@@ -67,9 +67,8 @@ message SongMetadata {
 message Playlist {
   optional int32 id = 1;
   optional string name = 2;
-  optional int32 item_count = 3;
-  optional bool active = 4;
-  
+  optional bool active = 3;
+
   repeated SongMetadata songs = 10;
 }
 
