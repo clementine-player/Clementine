@@ -1,6 +1,8 @@
 #ifndef NETWORKREMOTE_H
 #define NETWORKREMOTE_H
 
+#include <boost/scoped_ptr.hpp>
+
 #include <QTcpServer>
 #include <QTcpSocket>
 
@@ -10,14 +12,14 @@
 #include "outgoingdatacreator.h"
 #include "remoteclient.h"
 
-class NetworkRemote : public QThread {
+class NetworkRemote : public QObject {
     Q_OBJECT
 public:
   static const char* kSettingsGroup;
-  static const int kDefaultServerPort;
+  static const quint16 kDefaultServerPort;
   static const int kProtocolBufferVersion;
 
-  NetworkRemote(Application* app);
+  explicit NetworkRemote(Application* app, QObject* parent = 0);
   ~NetworkRemote();
 
 public slots:
@@ -27,11 +29,12 @@ public slots:
   void AcceptConnection();
 
 private:
-  QTcpServer* server_;
-  QTcpServer* server_ipv6_;
-  IncomingDataParser* incoming_data_parser_;
-  OutgoingDataCreator* outgoing_data_creator_;
-  int port_;
+  boost::scoped_ptr<QTcpServer> server_;
+  boost::scoped_ptr<QTcpServer> server_ipv6_;
+  boost::scoped_ptr<IncomingDataParser> incoming_data_parser_;
+  boost::scoped_ptr<OutgoingDataCreator> outgoing_data_creator_;
+
+  quint16 port_;
   bool use_remote_;
   bool only_non_public_ip_;
   bool signals_connected_;

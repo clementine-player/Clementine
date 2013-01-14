@@ -8,6 +8,7 @@
 # Alexander Vysotskiy <loki13gm@gmail.com>, 2012.
 # Andy Dufrane <>, 2012.
 #   <arnaud.bienner@gmail.com>, 2011.
+#   <dronmax@gmail.com>, 2013.
 # Just a baka  <justabaka@gmail.com>, 2012.
 #   <karlsson169@gmail.com>, 2012.
 #   <kolyadas89@gmail.com>, 2011.
@@ -24,8 +25,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-12-26 10:56+0000\n"
-"Last-Translator: Владимир Пахомчик <v.pahomchik@gmail.com>\n"
+"PO-Revision-Date: 2013-01-01 20:30+0000\n"
+"Last-Translator: drmx <dronmax@gmail.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: ru\n"
@@ -162,7 +163,7 @@ msgstr "%n осталось"
 
 #: playlist/playlistheader.cpp:37
 msgid "&Align text"
-msgstr "Выровнять текст"
+msgstr "Выровнять &текст"
 
 #: playlist/playlistheader.cpp:40
 msgid "&Center"
@@ -256,7 +257,7 @@ msgstr "1 композиция"
 #: ../bin/src/ui_magnatunedownloaddialog.h:143
 #: ../bin/src/ui_magnatunesettingspage.h:174
 msgid "128k MP3"
-msgstr "128к MP3"
+msgstr "128k MP3"
 
 #: library/library.cpp:58
 msgid "50 random tracks"
@@ -307,7 +308,7 @@ msgstr "AAC 128к"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:171
 msgid "AAC 32k"
-msgstr "AAC 32к"
+msgstr "AAC 32k"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:178
 msgid "AAC 64k"
@@ -563,7 +564,7 @@ msgstr "Обложка альбома"
 
 #: internet/jamendoservice.cpp:414
 msgid "Album info on jamendo.com..."
-msgstr "Информация об альбоме на Jamendo.com…"
+msgstr "Информация об альбоме на jamendo.com…"
 
 #: ui/albumcovermanager.cpp:122
 msgid "Albums with covers"
@@ -706,7 +707,7 @@ msgstr "Исполнитель"
 
 #: ui/mainwindow.cpp:239
 msgid "Artist info"
-msgstr "Об исполнителе"
+msgstr "Артист"
 
 #: internet/lastfmservice.cpp:208
 msgid "Artist radio"
@@ -714,7 +715,7 @@ msgstr "Радио исполнителя"
 
 #: songinfo/echonesttags.cpp:59
 msgid "Artist tags"
-msgstr "Тэги испольнителя"
+msgstr "Теги испольнителя"
 
 #: ui/organisedialog.cpp:57
 msgid "Artist's initial"
@@ -822,7 +823,7 @@ msgstr "Биография из %1"
 
 #: playlist/playlist.cpp:1210 ../bin/src/ui_edittagdialog.h:640
 msgid "Bit rate"
-msgstr "Битрейт"
+msgstr "Скорость передачи данных"
 
 #: ui/organisedialog.cpp:67 ../bin/src/ui_transcoderoptionsaac.h:129
 #: ../bin/src/ui_transcoderoptionsmp3.h:194
@@ -1430,7 +1431,7 @@ msgstr "Задержка между визуализациями"
 #: playlist/playlistlistcontainer.cpp:75
 #: ../bin/src/ui_playlistlistcontainer.h:122
 msgid "Delete"
-msgstr ""
+msgstr "Удалить"
 
 #: internet/groovesharkservice.cpp:521 internet/groovesharkservice.cpp:1289
 msgid "Delete Grooveshark playlist"
@@ -1460,7 +1461,7 @@ msgstr "Удаллить прослушанные выпуски"
 
 #: playlist/playlistlistcontainer.cpp:295
 msgid "Delete playlists"
-msgstr ""
+msgstr "Удалить списки"
 
 #: ui/equalizer.cpp:190 ../bin/src/ui_equalizer.h:124
 msgid "Delete preset"
@@ -1545,7 +1546,7 @@ msgstr "Отключить продолжительность"
 
 #: ../bin/src/ui_appearancesettingspage.h:289
 msgid "Disable moodbar generation"
-msgstr ""
+msgstr "Отключить создание индикатора настроения"
 
 #: globalsearch/searchproviderstatuswidget.cpp:47
 #: ../bin/src/ui_notificationssettingspage.h:405
@@ -2593,7 +2594,7 @@ msgstr "Длительность"
 
 #: ui/mainwindow.cpp:222 ui/mainwindow.cpp:232
 msgid "Library"
-msgstr "Коллекция"
+msgstr "Фонотека"
 
 #: ../bin/src/ui_groupbydialog.h:122
 msgid "Library advanced grouping"
@@ -2867,11 +2868,11 @@ msgstr "Настроение"
 #: ../bin/src/ui_appearancesettingspage.h:287
 #: moodbar/moodbarproxystyle.cpp:342
 msgid "Moodbar style"
-msgstr "Стиль полосок настроения"
+msgstr "Стиль индикаторов настроения"
 
 #: ../bin/src/ui_appearancesettingspage.h:285
 msgid "Moodbars"
-msgstr "Полоски настроения"
+msgstr "Индикаторы настроения"
 
 #: library/library.cpp:72
 msgid "Most played"
@@ -3741,7 +3742,7 @@ msgstr "Частота дискретизации"
 
 #: ../bin/src/ui_appearancesettingspage.h:288
 msgid "Save .mood files in your music library"
-msgstr "Сохранить файлы .mood в библиотеку музыки"
+msgstr "Сохранить файлы настроения .mood в библиотеку музыки"
 
 #: ui/albumcoverchoicecontroller.cpp:114
 msgid "Save album cover"
@@ -3949,7 +3950,7 @@ msgstr "Подсвечивать проигрывающийся трек"
 
 #: ../bin/src/ui_appearancesettingspage.h:286
 msgid "Show a moodbar in the track progress bar"
-msgstr "Показывать полоски настроения в статусе воспроизведения композиции"
+msgstr "Показывать индикаторы настроения в статусе воспроизведения композиции"
 
 #: ../bin/src/ui_notificationssettingspage.h:406
 msgid "Show a native desktop notification"
@@ -4006,7 +4007,7 @@ msgstr "Показать в \"Разных исполнителях\""
 
 #: moodbar/moodbarproxystyle.cpp:337
 msgid "Show moodbar"
-msgstr "Показывать полоски настроения"
+msgstr "Показывать индикаторы настроения"
 
 #: ui/mainwindow.cpp:459
 msgid "Show only duplicates"
@@ -4014,7 +4015,7 @@ msgstr "Показывать только повторяющиеся"
 
 #: ui/mainwindow.cpp:460
 msgid "Show only untagged"
-msgstr "Показывать только без тэгов"
+msgstr "Показывать только без тегов"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:153
 msgid "Show search suggestions"
@@ -4122,7 +4123,7 @@ msgstr "Сведения о композиции"
 
 #: ui/mainwindow.cpp:238
 msgid "Song info"
-msgstr "О композиции"
+msgstr "О песне"
 
 #: analyzers/sonogram.cpp:18
 msgid "Sonogram"

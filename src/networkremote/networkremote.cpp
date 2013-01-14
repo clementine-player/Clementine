@@ -25,53 +25,44 @@
 #include <QSettings>
 
 const char* NetworkRemote::kSettingsGroup = "NetworkRemote";
-const int NetworkRemote::kDefaultServerPort = 5500;
+const quint16 NetworkRemote::kDefaultServerPort = 5500;
 const int NetworkRemote::kProtocolBufferVersion = 1;
 
-NetworkRemote::NetworkRemote(Application* app)
-  : app_(app)
-{
-  signals_connected_ = false;
+NetworkRemote::NetworkRemote(Application* app, QObject* parent)
+  : QObject(parent),
+    signals_connected_(false),
+    app_(app) {
 }
 
 
 NetworkRemote::~NetworkRemote() {
   StopServer();
-  delete incoming_data_parser_;
-  delete outgoing_data_creator_;
 }
 
 void NetworkRemote::ReadSettings() {
   QSettings s;
 
   s.beginGroup(NetworkRemote::kSettingsGroup);
-  use_remote_ = s.value("use_remote").toBool();
-  port_       = s.value("port").toInt();
+  use_remote_ = s.value("use_remote", false).toBool();
+  port_       = s.value("port", kDefaultServerPort).toInt();
 
   // Use only non public ips must be true be default
-  if (s.contains("only_non_public_ip")) {
-    only_non_public_ip_ = s.value("only_non_public_ip").toBool();
-  } else {
-    only_non_public_ip_ = true;
-  }
+  only_non_public_ip_ = s.value("only_non_public_ip", true).toBool();
 
-  if (port_ == 0) {
-    port_ = kDefaultServerPort;
-  }
   s.endGroup();
 }
 
 void NetworkRemote::SetupServer() {
-  server_ = new QTcpServer();
-  server_ipv6_ = new QTcpServer();
-  incoming_data_parser_  = new IncomingDataParser(app_);
-  outgoing_data_creator_ = new OutgoingDataCreator(app_);
+  server_.reset(new QTcpServer());
+  server_ipv6_.reset(new QTcpServer());
+  incoming_data_parser_.reset(new IncomingDataParser(app_));
+  outgoing_data_creator_.reset(new OutgoingDataCreator(app_));
 
   outgoing_data_creator_->SetClients(&clients_);
 
   connect(app_->current_art_loader(),
           SIGNAL(ArtLoaded(const Song&, const QString&, const QImage&)),
-          outgoing_data_creator_,
+          outgoing_data_creator_.get(),
           SLOT(CurrentSongChanged(const Song&, const QString&, const QImage&)));
 }
 
@@ -89,8 +80,8 @@ void NetworkRemote::StartServer() {
 
   qLog(Info) << "Starting network remote";
 
-  connect(server_, SIGNAL(newConnection()), this, SLOT(AcceptConnection()));
-  connect(server_ipv6_, SIGNAL(newConnection()), this, SLOT(AcceptConnection()));
+  connect(server_.get(), SIGNAL(newConnection()), this, SLOT(AcceptConnection()));
+  connect(server_ipv6_.get(), SIGNAL(newConnection()), this, SLOT(AcceptConnection()));
 
   server_->listen(QHostAddress::Any, port_);
   server_ipv6_->listen(QHostAddress::AnyIPv6, port_);
@@ -116,26 +107,27 @@ void NetworkRemote::AcceptConnection() {
     signals_connected_ = true;
 
     // Setting up the signals, but only once
-    connect(incoming_data_parser_, SIGNAL(SendClementineInfos()),
-            outgoing_data_creator_, SLOT(SendClementineInfos()));
-    connect(incoming_data_parser_, SIGNAL(SendFirstData()),
-            outgoing_data_creator_, SLOT(SendFirstData()));
-    connect(incoming_data_parser_, SIGNAL(SendAllPlaylists()),
-            outgoing_data_creator_, SLOT(SendAllPlaylists()));
-    connect(incoming_data_parser_, SIGNAL(SendPlaylistSongs(int)),
-            outgoing_data_creator_, SLOT(SendPlaylistSongs(int)));
+    connect(incoming_data_parser_.get(), SIGNAL(SendClementineInfos()),
+            outgoing_data_creator_.get(), SLOT(SendClementineInfos()));
+    connect(incoming_data_parser_.get(), SIGNAL(SendFirstData()),
+            outgoing_data_creator_.get(), SLOT(SendFirstData()));
+    connect(incoming_data_parser_.get(), SIGNAL(SendAllPlaylists()),
+            outgoing_data_creator_.get(), SLOT(SendAllPlaylists()));
+    connect(incoming_data_parser_.get(), SIGNAL(SendPlaylistSongs(int)),
+            outgoing_data_creator_.get(), SLOT(SendPlaylistSongs(int)));
 
     connect(app_->playlist_manager(), SIGNAL(ActiveChanged(Playlist*)),
-            outgoing_data_creator_, SLOT(ActiveChanged(Playlist*)));
+            outgoing_data_creator_.get(), SLOT(ActiveChanged(Playlist*)));
     connect(app_->playlist_manager(), SIGNAL(PlaylistChanged(Playlist*)),
-            outgoing_data_creator_, SLOT(PlaylistChanged(Playlist*)));
+            outgoing_data_creator_.get(), SLOT(PlaylistChanged(Playlist*)));
 
-    connect(app_->player(), SIGNAL(VolumeChanged(int)), outgoing_data_creator_,
+    connect(app_->player(), SIGNAL(VolumeChanged(int)), outgoing_data_creator_.get(),
             SLOT(VolumeChanged(int)));
     connect(app_->player()->engine(), SIGNAL(StateChanged(Engine::State)),
-            outgoing_data_creator_, SLOT(StateChanged(Engine::State)));
+            outgoing_data_creator_.get(), SLOT(StateChanged(Engine::State)));
   }
 
+<<<<<<< HEAD
   if (server_->hasPendingConnections()) {
     QTcpSocket* client_socket = server_->nextPendingConnection();
     // Check if our ip is in private scope
@@ -148,17 +140,33 @@ void NetworkRemote::AcceptConnection() {
       // TODO: Check private ips for ipv6
     }
 
+=======
+  QTcpServer* server = qobject_cast<QTcpServer*>(sender());
+  QTcpSocket* client_socket = server->nextPendingConnection();
+  // Check if our ip is in private scope
+  if (only_non_public_ip_ && !IpIsPrivate(client_socket->peerAddress())) {
+    qLog(Info) << "Got a connection from public ip" <<
+                client_socket->peerAddress().toString();
+>>>>>>> remote/remotecontrol
   } else {
-    // No checks on ipv6
-    CreateRemoteClient(server_ipv6_->nextPendingConnection());
+    CreateRemoteClient(client_socket);
   }
 }
 
 bool NetworkRemote::IpIsPrivate(const QHostAddress& address) {
   return
+<<<<<<< HEAD
       address.isInSubnet(QHostAddress::parseSubnet("127.0.0.1/8")) ||
       // Link Local v6
       address.isInSubnet(QHostAddress::parseSubnet("::1/128")) ||
+=======
+      // Link Local v4
+      address.isInSubnet(QHostAddress::parseSubnet("127.0.0.1/8")) ||
+      // Link Local v6
+      address.isInSubnet(QHostAddress::parseSubnet("::1/128")) ||
+      address.isInSubnet(QHostAddress::parseSubnet("fe80::/10"));
+      // Private v4 range
+>>>>>>> remote/remotecontrol
       address.isInSubnet(QHostAddress::parseSubnet("192.168.0.0/16")) ||
       address.isInSubnet(QHostAddress::parseSubnet("172.16.0.0/12")) ||
       address.isInSubnet(QHostAddress::parseSubnet("10.0.0.0/8")) ||
@@ -174,6 +182,6 @@ void NetworkRemote::CreateRemoteClient(QTcpSocket *client_socket) {
 
     // Connect the signal to parse data
     connect(client, SIGNAL(Parse(QByteArray)),
-            incoming_data_parser_, SLOT(Parse(QByteArray)));
+            incoming_data_parser_.get(), SLOT(Parse(QByteArray)));
   }
 }

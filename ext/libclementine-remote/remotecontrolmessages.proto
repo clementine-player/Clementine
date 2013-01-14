@@ -10,13 +10,18 @@ enum MsgType {
   REQUEST_PLAYLIST_SONGS = 4;
   CHANGE_SONG = 5;
   SET_VOLUME = 6;
+<<<<<<< HEAD
   
+=======
+
+>>>>>>> remote/remotecontrol
   // Messages send by both
   PLAY = 20;
   PLAYPAUSE = 21;
   PAUSE = 22;
   STOP = 23;
   NEXT = 24;
+<<<<<<< HEAD
   PREVIOUS = 25;
   SHUFFLE_PLAYLIST = 26;
   // Messages that contain the repeat or random mode
@@ -24,6 +29,11 @@ enum MsgType {
   REPEAT = 27;
   RANDOM = 28;
   
+=======
+  PREV = 25;
+  TOGGLE_SHUFFLE = 26;
+
+>>>>>>> remote/remotecontrol
   // Messages send from server to client
   INFOS = 40;
   CURRENT_METAINFOS = 41;
@@ -41,7 +51,25 @@ enum EngineState {
   Paused = 3;
 }
 
+<<<<<<< HEAD
 // Song Metadata
+=======
+message Message {
+  optional int32 version = 1 [default=1];
+  optional MsgType msgType = 2 [default=UNKNOWN];
+
+  optional EngineState state = 3;
+  optional ClementineInfo info = 4;
+  optional SongMetadata currentSong = 5;
+  optional int32 volume = 6;
+  repeated Playlist playlists = 7;
+}
+
+message ClementineInfo {
+  optional string version = 1;
+}
+
+>>>>>>> remote/remotecontrol
 message SongMetadata {
   optional int32 id = 1; // unique id of the song
   optional int32 index = 2; // Index of the current row of the active playlist
@@ -62,11 +90,16 @@ message SongMetadata {
 message Playlist {
   optional int32 id = 1;
   optional string name = 2;
+<<<<<<< HEAD
   optional int32 item_count = 3;
   optional bool active = 4;
   
   // The songs are only sent when the client requests them.
   // See src/remotecontrol/outgoingdatacreator.cpp for more info
+=======
+  optional bool active = 3;
+
+>>>>>>> remote/remotecontrol
   repeated SongMetadata songs = 10;
 }
 
