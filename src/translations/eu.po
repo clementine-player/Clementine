@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-01-04 17:52+0000\n"
+"PO-Revision-Date: 2013-01-13 12:06+0000\n"
 "Last-Translator: isolus <isolus@yopmail.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -70,7 +70,7 @@ msgstr "duela %1 egun"
 #: podcasts/gpoddersync.cpp:79
 #, qt-format
 msgid "%1 on %2"
-msgstr ""
+msgstr "%1 %2-tik"
 
 #: playlistparsers/playlistparser.cpp:74
 #, qt-format
@@ -406,7 +406,7 @@ msgstr "Gehitu album etiketa abestiari"
 
 #: ../bin/src/ui_notificationssettingspage.h:370
 msgid "Add song albumartist tag"
-msgstr "Gehitu albumaren artista etiketa abestiari"
+msgstr "Gehitu bildumaren artista etiketa abestiari"
 
 #: ../bin/src/ui_notificationssettingspage.h:361
 msgid "Add song artist tag"
@@ -507,7 +507,7 @@ msgstr "Azken hiru hilabeteetan gehitua"
 
 #: internet/groovesharkservice.cpp:1392
 msgid "Adding song to My Music"
-msgstr ""
+msgstr "Abestia Nire Musikara gehitzen"
 
 #: internet/groovesharkservice.cpp:1369
 msgid "Adding song to favorites"
@@ -854,7 +854,7 @@ msgstr "Bufferra betetzen"
 
 #: ../bin/src/ui_globalsearchview.h:211
 msgid "But these sources are disabled:"
-msgstr ""
+msgstr "Baina iturri hauek desgaiturik daude:"
 
 #: ../bin/src/ui_wiimotesettingspage.h:192
 msgid "Buttons"
@@ -900,11 +900,11 @@ msgstr "Aldatu hizkuntza"
 msgid ""
 "Changing mono playback preference will be effective for the next playing "
 "songs"
-msgstr ""
+msgstr "Mono erreprodukzioa hurrengo erreprodukzioetan izango da erabilgarri"
 
 #: ../bin/src/ui_podcastsettingspage.h:228
 msgid "Check for new episodes"
-msgstr ""
+msgstr "Atal berriak bilatu"
 
 #: ui/mainwindow.cpp:587
 msgid "Check for updates..."
@@ -936,7 +936,7 @@ msgstr "Hautatu zerrendaren ordena eta izango duen abesti kopurua."
 
 #: podcasts/podcastsettingspage.cpp:132
 msgid "Choose podcast download directory"
-msgstr ""
+msgstr "Podcast-a deskargatzeko direktorioa aukeratu"
 
 #: ../bin/src/ui_songinfosettingspage.h:188
 msgid ""
@@ -1006,7 +1006,7 @@ msgid ""
 "Clementine can synchronize your subscription list with your other computers "
 "and podcast applications.  <a href=\"https://gpodder.net/register/\">Create "
 "an account</a>."
-msgstr ""
+msgstr "Clementine-k zure beste ordenagailu edo podcast aplikazioetako harpidetza listak sinkronizatu ditzake. <a href=\"https://gpodder.net/register/\">Kontu bat sortu</a>."
 
 #: visualisations/projectmvisualisation.cpp:128
 msgid ""
@@ -1046,7 +1046,7 @@ msgstr "Egin klik geratzen den denbora eta denbora osoaren artean txandakatzeko"
 msgid ""
 "Clicking the Login button will open a web browser.  You should return to "
 "Clementine after you have logged in."
-msgstr ""
+msgstr "Saio-hasiera botoiak nabigatzailea irekiko du. Behin saioa hasita itzuli Clementine-ra."
 
 #: widgets/didyoumean.cpp:37
 msgid "Close"
@@ -1443,7 +1443,7 @@ msgstr "Ezabatu diskotik..."
 
 #: ../bin/src/ui_podcastsettingspage.h:244
 msgid "Delete played episodes"
-msgstr ""
+msgstr "Erreproduzitutako atalak ezabatu"
 
 #: playlist/playlistlistcontainer.cpp:295
 msgid "Delete playlists"
@@ -1592,7 +1592,7 @@ msgstr "Abesti batean klik bikoitza eginez gero..."
 #: podcasts/podcastservice.cpp:345
 #, c-format
 msgid "Download %n episodes"
-msgstr ""
+msgstr "%n atal deskargatu"
 
 #: internet/magnatunedownloaddialog.cpp:252
 msgid "Download directory"
@@ -1600,7 +1600,7 @@ msgstr "Direktorioa deskargatu"
 
 #: ../bin/src/ui_podcastsettingspage.h:240
 msgid "Download episodes to"
-msgstr ""
+msgstr "Atalak hemen deskargatu"
 
 #: ../bin/src/ui_magnatunesettingspage.h:161
 msgid "Download membership"
@@ -1608,11 +1608,11 @@ msgstr "Deskargarako bazkidetza"
 
 #: ../bin/src/ui_podcastsettingspage.h:241
 msgid "Download new episodes automatically"
-msgstr ""
+msgstr "Atal berriak automatikoki deskargatu"
 
 #: podcasts/podcastservice.cpp:187
 msgid "Download queued"
-msgstr ""
+msgstr "Deskarga zerrendaren zain"
 
 #: internet/magnatuneservice.cpp:274
 msgid "Download this album"
@@ -1624,7 +1624,7 @@ msgstr "Deskargatu album hau..."
 
 #: podcasts/podcastservice.cpp:347
 msgid "Download this episode"
-msgstr ""
+msgstr "Atal hau deskargatu"
 
 #: ../bin/src/ui_spotifysettingspage.h:216
 msgid "Download..."
@@ -1725,7 +1725,7 @@ msgstr "Gaitu lasterbideak Clementine fokaturik dagoenean bakarrik"
 msgid ""
 "Enable sources below to include them in search results.  Results will be "
 "displayed in this order."
-msgstr ""
+msgstr "Gaitu beheko iturriak bilaketa emaitzetan aurkezteko. Erantzunak orden berdinean erakutsiko dira."
 
 #: core/globalshortcuts.cpp:62
 msgid "Enable/disable Last.fm scrobbling"
@@ -1763,15 +1763,15 @@ msgstr "Sartu <b>artista</b> edo <b>etiketa</b> bat Last.fm irratia entzuten has
 #: ../bin/src/ui_globalsearchview.h:209
 msgid ""
 "Enter search terms above to find music on your computer and on the internet"
-msgstr ""
+msgstr "Sartu bilaketa terminoak musika zure ordenagailuan eta interneten bilatzeko"
 
 #: ../bin/src/ui_itunessearchpage.h:77
 msgid "Enter search terms below to find podcasts in the iTunes Store"
-msgstr ""
+msgstr "Sartu bilaketa terminoak iTunes dendan podcast-ak bilatzeko"
 
 #: ../bin/src/ui_gpoddersearchpage.h:77
 msgid "Enter search terms below to find podcasts on gpodder.net"
-msgstr ""
+msgstr "Sartu bilaketa terminoak gpodder.net-en podcast-ak bilatzeko"
 
 #: ../bin/src/ui_libraryfilterwidget.h:96
 #: ../bin/src/ui_albumcovermanager.h:153
@@ -2145,11 +2145,11 @@ msgstr "Generoa"
 
 #: internet/groovesharkservice.cpp:540
 msgid "Get a URL to share this Grooveshark playlist"
-msgstr ""
+msgstr "URL bat lortu erreprodukzio-zerrenda hau Grooveshark-en partekatzeko"
 
 #: internet/groovesharkservice.cpp:537 internet/groovesharkservice.cpp:1108
 msgid "Get a URL to share this Grooveshark song"
-msgstr ""
+msgstr "URL bat lortu abesti hau Grooveshark-en partekatzeko"
 
 #: internet/groovesharkservice.cpp:788
 msgid "Getting Grooveshark popular songs"
@@ -2203,7 +2203,7 @@ msgstr "Grooveshark-eko saio-hasierak huts egin du"
 
 #: internet/groovesharkservice.cpp:1160
 msgid "Grooveshark playlist's URL"
-msgstr ""
+msgstr "Grooveshark-eko erreprodukzio-zerrendaren URLa"
 
 #: internet/groovesharkservice.cpp:601
 msgid "Grooveshark radio"
@@ -2841,7 +2841,7 @@ msgstr "Bildumako aldaketen segimendua egin"
 
 #: ../bin/src/ui_playbacksettingspage.h:296
 msgid "Mono playback"
-msgstr ""
+msgstr "Mono erreprodukzioa"
 
 #: smartplaylists/searchterm.cpp:309
 msgid "Months"
@@ -3589,7 +3589,7 @@ msgstr "Kendu karpeta"
 
 #: internet/groovesharkservice.cpp:534
 msgid "Remove from My Music"
-msgstr ""
+msgstr "Nire Musikatik kendu"
 
 #: internet/groovesharkservice.cpp:531
 msgid "Remove from favorites"
@@ -3601,11 +3601,11 @@ msgstr "Kendu erreprodukzio-zerrendatik"
 
 #: internet/groovesharkservice.cpp:1537
 msgid "Removing songs from My Music"
-msgstr ""
+msgstr "Abestiak Nire Musikatik kentzen"
 
 #: internet/groovesharkservice.cpp:1487
 msgid "Removing songs from favorites"
-msgstr ""
+msgstr "Abestiak gogokoenetatik kentzen"
 
 #: internet/groovesharkservice.cpp:1335
 #, qt-format
@@ -3684,7 +3684,7 @@ msgstr "Mugatu ASCII karaktereetara"
 
 #: internet/groovesharkservice.cpp:756
 msgid "Retrieving Grooveshark My Music songs"
-msgstr ""
+msgstr "Grooveshark-eko Nire Musikako abestiak berreskuratzen"
 
 #: internet/groovesharkservice.cpp:724
 msgid "Retrieving Grooveshark favorites songs"
@@ -3872,7 +3872,7 @@ msgstr "Hautatu bat-etortze posiblerik onena"
 
 #: ../bin/src/ui_appearancesettingspage.h:283
 msgid "Select blur radius:"
-msgstr ""
+msgstr "Aukeratu lausotutako aukerak:"
 
 #: ../bin/src/ui_appearancesettingspage.h:270
 msgid "Select foreground color:"
@@ -4021,7 +4021,7 @@ msgstr "Erakutsi erretilu-ikonoa"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:152
 msgid "Show which sources are enabled and disabled"
-msgstr ""
+msgstr "Erakutsi zein iturri dauden gaiturik/desgaiturik"
 
 #: core/globalshortcuts.cpp:57
 msgid "Show/Hide"
@@ -4188,7 +4188,7 @@ msgstr "Hasi transkodetzen"
 msgid ""
 "Start typing something on the search box above to fill this search results "
 "list"
-msgstr ""
+msgstr "Hasi idazten aurreko bilaketa eremuan emaitzak jaso ahal izateko"
 
 #: transcoder/transcoder.cpp:401
 #, qt-format
@@ -4368,7 +4368,7 @@ msgstr "Album honetan beste abesti batzuk daude"
 #: podcasts/gpoddersearchpage.cpp:77 podcasts/gpoddertoptagsmodel.cpp:110
 #: podcasts/gpoddertoptagspage.cpp:77
 msgid "There was a problem communicating with gpodder.net"
-msgstr ""
+msgstr "Arazo bat gertatu da gpodder.net-ekin komunikatzerakoan"
 
 #: internet/magnatunedownloaddialog.cpp:158
 msgid "There was a problem fetching the metadata from Magnatune"
@@ -4376,7 +4376,7 @@ msgstr "Arazo bat egon da Magnatune-ko metadatuak eskuratzean"
 
 #: podcasts/itunessearchpage.cpp:76
 msgid "There was a problem parsing the response from the iTunes Store"
-msgstr ""
+msgstr "Arazo bat gertatu da iTunes dendako erantzuna aztertzerakoan"
 
 #: ui/organiseerrordialog.cpp:56
 msgid ""
@@ -4513,7 +4513,7 @@ msgstr "Bihar"
 
 #: podcasts/podcasturlloader.cpp:116
 msgid "Too many redirects"
-msgstr ""
+msgstr "Redirekzio gehiegi"
 
 #: internet/spotifyservice.cpp:366
 msgid "Top tracks"
@@ -4658,7 +4658,7 @@ msgstr "Erabilera"
 
 #: ../bin/src/ui_lastfmsettingspage.h:159
 msgid "Use Album Artist tag when available"
-msgstr ""
+msgstr "Bildumaren artista etiketa erabili erabilgarri bada"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:168
 msgid "Use Gnome's shortcut keys"
@@ -4986,7 +4986,7 @@ msgstr "Ez daukazu Spotify Premium konturik."
 
 #: internet/digitallyimportedclient.cpp:89
 msgid "You do not have an active subscription"
-msgstr ""
+msgstr "Ez duzu harpidetza aktiborik"
 
 #: internet/spotifyservice.cpp:170
 msgid ""
@@ -5042,7 +5042,7 @@ msgstr "Partekatzeak: %1"
 
 #: visualisations/visualisationcontainer.cpp:152
 msgid "Your system is missing OpenGL support, visualizations are unavailable."
-msgstr ""
+msgstr "Zure sistema ez da bateragarria OpenGL-rekin, bistaratzeak erabilezinak daude."
 
 #: internet/groovesharksettingspage.cpp:107
 #: internet/spotifysettingspage.cpp:154
