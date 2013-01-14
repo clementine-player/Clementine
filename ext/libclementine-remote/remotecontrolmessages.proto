@@ -1,13 +1,15 @@
 package pb.remote;
 
+// The supported message types
 enum MsgType {
+  UNKNOWN = 0;
   // Messages generally send from client to server
-  CONNECT = 0;
-  DISCONNECT = 1;
-  REQUEST_PLAYLISTS = 2;
-  REQUEST_PLAYLIST_SONGS = 3;
-  CHANGE_SONG = 4;
-  SET_VOLUME = 5;
+  CONNECT = 1;
+  DISCONNECT = 2;
+  REQUEST_PLAYLISTS = 3;
+  REQUEST_PLAYLIST_SONGS = 4;
+  CHANGE_SONG = 5;
+  SET_VOLUME = 6;
   
   // Messages send by both
   PLAY = 20;
@@ -15,17 +17,23 @@ enum MsgType {
   PAUSE = 22;
   STOP = 23;
   NEXT = 24;
-  PREV = 25;
-  TOOGLE_SHUFFLE = 26;
+  PREVIOUS = 25;
+  SHUFFLE_PLAYLIST = 26;
+  // Messages that contain the repeat or random mode
+  // Either set by client or clementine
+  REPEAT = 27;
+  RANDOM = 28;
   
   // Messages send from server to client
   INFOS = 40;
   CURRENT_METAINFOS = 41;
   PLAYLISTS = 42;
   PLAYLIST_SONGS = 43;
-  KEEP_ALIVE = 44;
+  ENGINE_STATE_CHANGED = 44;
+  KEEP_ALIVE = 45;
 }
 
+// Valid Engine states
 enum EngineState {
   Empty = 0;
   Idle = 1;
@@ -33,24 +41,10 @@ enum EngineState {
   Paused = 3;
 }
 
-message Message {
-  required int32 version = 1;
-  required MsgType msgType = 2;
-  
-  optional EngineState state = 3;
-  optional ClementineInfos infos = 4;
-  optional SongMetadata currentSong = 5;
-  optional int32 volume = 6;
-  repeated Playlist playlists = 7;
-}
-
-message ClementineInfos {
-  optional string version = 1;
-}
-
+// Song Metadata
 message SongMetadata {
-  optional int32 id = 1;
-  optional int32 index = 2;
+  optional int32 id = 1; // unique id of the song
+  optional int32 index = 2; // Index of the current row of the active playlist
   optional string title = 3;
   optional string album = 4;
   optional string artist = 5;
@@ -64,12 +58,141 @@ message SongMetadata {
   optional bytes art = 13;
 }
 
+// Playlist informations
 message Playlist {
   optional int32 id = 1;
   optional string name = 2;
   optional int32 item_count = 3;
   optional bool active = 4;
   
+  // The songs are only sent when the client requests them.
+  // See src/remotecontrol/outgoingdatacreator.cpp for more info
   repeated SongMetadata songs = 10;
 }
 
+// Valid Repeatmodes
+enum RepeatMode {
+  Repeat_Off = 0;
+  Repeat_Track = 1;
+  Repeat_Album = 2;
+  Repeat_Playlist = 3;
+}
+
+// Valid Shuffle modes
+enum ShuffleMode {
+  Shuffle_Off = 0;
+  Shuffle_All = 1;
+  Shuffle_InsideAlbum = 2;
+  Shuffle_Albums = 3;
+}
+
+// Message with unknown content
+// Shouldn't be used anywhere
+message Unknown {
+}
+
+// This message is sent when a client connects to clementine
+message Connect {
+}
+
+// This message is sent when a client disconnects from clementine
+message Disconnect {
+}
+
+// Client requests all playlists
+message RequestPlaylists {
+}
+
+// A Client requests songs from a specific playlist
+message RequestPlaylistSongs {
+  optional int32 id = 1;
+}
+
+// Client want to change track
+message RequestChangeSong {
+  // In which playlist is the song?
+  optional int32 playlist_id = 1;
+  // And on which position?
+  optional int32 song_index = 2;
+}
+
+// Set the volume
+message RequestSetVolume {
+  optional int32 volume = 1;
+}
+
+// Controlmessages
+message Play {}
+message PlayPause {}
+message Pause {}
+message Stop {}
+message Next {}
+message Previous {}
+message ShufflePlaylist {}
+
+// Repeat and Random messages
+message Repeat {
+  optional RepeatMode repeat_mode = 1;
+}
+
+message Shuffle {
+  optional ShuffleMode shuffle_mode = 1;
+}
+  
+// Response from server
+// General infos
+message ResponseClementineInfo {
+  optional string version = 1;
+}
+
+// The current song played
+message ResponseCurrentMetadata {
+  optional SongMetadata song_metadata = 1;
+}
+
+// The playlists in clementine
+message ResponsePlaylists {
+  repeated Playlist playlist = 1;
+}
+
+// A list of songs in a playlist
+message ResponsePlaylistSongs {
+  optional Playlist requested_playlist = 1;
+  repeated SongMetadata song = 2;
+}
+
+// The current state of the play engine
+message ResponseEngineStateChanged {
+  optional EngineState state = 1;
+}
+
+// Empty Keep Alive telegram
+message KeepAlive {}
+
+// The message itself
+message Message {
+  required int32 version = 1 [default=1];
+  required MsgType msgType = 2 [default=UNKNOWN]; // What data is in the message?
+  
+  optional Unknown unknown = 10;
+  optional Connect connect = 11;
+  optional Disconnect disconnect = 12;
+  optional RequestPlaylists request_playlist = 13;
+  optional RequestPlaylistSongs request_playlist_songs = 14;
+  optional RequestChangeSong request_change_song = 15;
+  optional RequestSetVolume request_set_volume = 16;
+  optional Play play = 17;
+  optional PlayPause play_pause = 18;
+  optional Pause pause = 19;
+  optional Stop stop = 20;
+  optional Next next = 21;
+  optional Previous previous = 22;
+  optional ShufflePlaylist shuffle_playlist = 23;
+  optional Repeat repeat = 24;
+  optional Shuffle shuffle = 25;
+  optional ResponseClementineInfo response_clementine_info = 26;
+  optional ResponseCurrentMetadata response_current_metadata = 27;
+  optional ResponsePlaylists response_playlists = 28;
+  optional ResponsePlaylistSongs response_playlist_songs = 29;
+  optional ResponseEngineStateChanged response_engine_state_changed = 30;
+}
