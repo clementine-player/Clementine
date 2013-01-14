@@ -4,11 +4,15 @@
 #include "internetmodel.h"
 #include "internetservice.h"
 
+#include <QQueue>
+
 class QNetworkAccessManager;
 class QXmlStreamReader;
 class QSortFilterProxyModel;
+class QNetworkReply;
 
 class SubsonicUrlHandler;
+class SubsonicLibraryScanner;
 
 class SubsonicService : public InternetService
 {
@@ -68,6 +72,8 @@ class SubsonicService : public InternetService
   void GetMusicDirectory(const QString &id);
 
   QUrl BuildRequestUrl(const QString &view);
+  // Convenience function to reduce QNetworkRequest/QSslConfiguration boilerplate
+  QNetworkReply* Send(const QUrl &url);
 
   static const char* kServiceName;
   static const char* kSettingsGroup;
@@ -77,8 +83,6 @@ class SubsonicService : public InternetService
   static const char* kSongsTable;
   static const char* kFtsTable;
 
-  static const int kChunkSize;
-
  signals:
   void LoginStateChanged(SubsonicService::LoginState newstate);
 
@@ -86,17 +90,10 @@ class SubsonicService : public InternetService
   QModelIndex GetCurrentIndex();
 
  private:
-  // Convenience function to reduce QNetworkRequest/QNetworkReply/connect boilerplate
-  void Send(const QUrl &url, const char *slot);
-
-  void ReadIndex(QXmlStreamReader *reader);
-  void ReadArtist(QXmlStreamReader *reader);
-  void ReadAlbum(QXmlStreamReader *reader);
-  Song ReadTrack(QXmlStreamReader *reader);
-
   QModelIndex context_item_;
   QNetworkAccessManager* network_;
   SubsonicUrlHandler* url_handler_;
+  SubsonicLibraryScanner* scanner_;
 
   LibraryBackend* library_backend_;
   LibraryModel* library_model_;
@@ -109,15 +106,41 @@ class SubsonicService : public InternetService
 
   LoginState login_state_;
 
-  int directory_count_;
-  int processed_directory_count_;
-  SongList new_songs_;
-
  private slots:
   void onLoginStateChanged(SubsonicService::LoginState newstate);
-  void onPingFinished();
-  void onGetIndexesFinished();
-  void onGetMusicDirectoryFinished();
+  void onPingFinished(QNetworkReply* reply);
+  void onSongsDiscovered(SongList songs);
+};
+
+class SubsonicLibraryScanner : public QObject {
+  Q_OBJECT
+
+ public:
+  SubsonicLibraryScanner(SubsonicService* service, QObject* parent=0);
+  ~SubsonicLibraryScanner();
+
+  void Scan();
+
+  static const int kAlbumChunkSize;
+  static const int kSongListMinChunkSize;
+  static const int kConcurrentRequests;
+
+ signals:
+  void SongsDiscovered(SongList);
+
+ private slots:
+  // Step 1: use getAlbumList2 type=alphabeticalByName to list all albums
+  void onGetAlbumListFinished(QNetworkReply* reply, int offset);
+  // Step 2: use getAlbum id=? to list all songs for each album
+  void onGetAlbumFinished(QNetworkReply* reply);
+
+ private:
+  void GetAlbumList(int offset);
+  void GetAlbum(QString id);
+
+  SubsonicService* service_;
+  QQueue<QString> album_queue_;
+  SongList songlist_buffer_;
 };
 
 #endif // SUBSONICSERVICE_H

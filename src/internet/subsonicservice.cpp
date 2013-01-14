@@ -9,6 +9,7 @@
 #include "library/librarybackend.h"
 #include "core/mergedproxymodel.h"
 #include "core/database.h"
+#include "core/closure.h"
 
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
@@ -25,18 +26,20 @@ const char* SubsonicService::kApiClientName = "Clementine";
 const char* SubsonicService::kSongsTable = "subsonic_songs";
 const char* SubsonicService::kFtsTable = "subsonic_songs_fts";
 
-const int SubsonicService::kChunkSize = 1000;
-
 SubsonicService::SubsonicService(Application* app, InternetModel *parent)
   : InternetService(kServiceName, app, parent, parent),
     network_(new QNetworkAccessManager(this)),
     url_handler_(new SubsonicUrlHandler(this, this)),
+    scanner_(new SubsonicLibraryScanner(this, this)),
     library_backend_(NULL),
     library_model_(NULL),
     library_sort_model_(new QSortFilterProxyModel(this)),
     login_state_(LoginState_OtherError)
 {
   app_->player()->RegisterUrlHandler(url_handler_);
+
+  connect(scanner_, SIGNAL(SongsDiscovered(SongList)),
+          SLOT(onSongsDiscovered(SongList)));
 
   library_backend_ = new LibraryBackend;
   library_backend_->moveToThread(app_->database()->thread());
@@ -77,7 +80,7 @@ void SubsonicService::LazyPopulate(QStandardItem *item)
   case InternetModel::Type_Service:
     // TODO: initiate library loading
     library_backend_->DeleteAll();
-    GetIndexes();
+    scanner_->Scan();
     model()->merged_model()->AddSubModel(item->index(), library_sort_model_);
     break;
 
@@ -118,20 +121,10 @@ void SubsonicService::Login(const QString &server, const QString &username, cons
 
 void SubsonicService::Ping()
 {
-  Send(BuildRequestUrl("ping"), SLOT(onPingFinished()));
-}
-
-void SubsonicService::GetIndexes()
-{
-  Send(BuildRequestUrl("getIndexes"), SLOT(onGetIndexesFinished()));
-}
-
-void SubsonicService::GetMusicDirectory(const QString &id)
-{
-  ++directory_count_;
-  QUrl url = BuildRequestUrl("getMusicDirectory");
-  url.addQueryItem("id", id);
-  Send(url, SLOT(onGetMusicDirectoryFinished()));
+  QNetworkReply* reply = Send(BuildRequestUrl("ping"));
+  NewClosure(reply, SIGNAL(finished()),
+             this, SLOT(onPingFinished(QNetworkReply*)),
+             reply);
 }
 
 QUrl SubsonicService::BuildRequestUrl(const QString &view)
@@ -144,12 +137,7 @@ QUrl SubsonicService::BuildRequestUrl(const QString &view)
   return url;
 }
 
-QModelIndex SubsonicService::GetCurrentIndex()
-{
-  return context_item_;
-}
-
-void SubsonicService::Send(const QUrl &url, const char *slot)
+QNetworkReply* SubsonicService::Send(const QUrl &url)
 {
   QNetworkRequest request(url);
   // Don't try and check the authenticity of the SSL certificate - it'll almost
@@ -158,62 +146,12 @@ void SubsonicService::Send(const QUrl &url, const char *slot)
   sslconfig.setPeerVerifyMode(QSslSocket::VerifyNone);
   request.setSslConfiguration(sslconfig);
   QNetworkReply *reply = network_->get(request);
-  connect(reply, SIGNAL(finished()), slot);
+  return reply;
 }
 
-void SubsonicService::ReadIndex(QXmlStreamReader *reader)
+QModelIndex SubsonicService::GetCurrentIndex()
 {
-  Q_ASSERT(reader->name() == "index");
-
-  while (reader->readNextStartElement())
-  {
-    ReadArtist(reader);
-  }
-}
-
-void SubsonicService::ReadArtist(QXmlStreamReader *reader)
-{
-  Q_ASSERT(reader->name() == "artist");
-  QString id = reader->attributes().value("id").toString();
-  GetMusicDirectory(id);
-  reader->skipCurrentElement();
-}
-
-void SubsonicService::ReadAlbum(QXmlStreamReader *reader)
-{
-  Q_ASSERT(reader->name() == "child");
-  QString id = reader->attributes().value("id").toString();
-  GetMusicDirectory(id);
-  reader->skipCurrentElement();
-}
-
-Song SubsonicService::ReadTrack(QXmlStreamReader *reader)
-{
-  Q_ASSERT(reader->name() == "child");
-
-  Song song;
-  QString id = reader->attributes().value("id").toString();
-  song.set_title(reader->attributes().value("title").toString());
-  song.set_album(reader->attributes().value("album").toString());
-  song.set_track(reader->attributes().value("track").toString().toInt());
-  song.set_artist(reader->attributes().value("artist").toString());
-  song.set_bitrate(reader->attributes().value("bitRate").toString().toInt());
-  song.set_year(reader->attributes().value("year").toString().toInt());
-  song.set_genre(reader->attributes().value("genre").toString());
-  qint64 length = reader->attributes().value("duration").toString().toInt();
-  length *= 1000000000;
-  song.set_length_nanosec(length);
-  QUrl url = QUrl(QString("subsonic://%1").arg(id));
-  song.set_url(url);
-  song.set_filesize(reader->attributes().value("size").toString().toInt());
-
-  // We need to set these to satisfy the database constraints
-  song.set_directory_id(0);
-  song.set_mtime(0);
-  song.set_ctime(0);
-
-  reader->skipCurrentElement();
-  return song;
+  return context_item_;
 }
 
 void SubsonicService::onLoginStateChanged(SubsonicService::LoginState newstate)
@@ -221,9 +159,8 @@ void SubsonicService::onLoginStateChanged(SubsonicService::LoginState newstate)
   // TODO: library refresh logic?
 }
 
-void SubsonicService::onPingFinished()
+void SubsonicService::onPingFinished(QNetworkReply *reply)
 {
-  QNetworkReply *reply = qobject_cast<QNetworkReply*>(sender());
   reply->deleteLater();
 
   if (reply->error() != QNetworkReply::NoError)
@@ -276,88 +213,137 @@ void SubsonicService::onPingFinished()
   emit LoginStateChanged(login_state_);
 }
 
-void SubsonicService::onGetIndexesFinished()
+void SubsonicService::onSongsDiscovered(SongList songs)
 {
-  QNetworkReply *reply = qobject_cast<QNetworkReply*>(sender());
-  Q_ASSERT(reply);
-  reply->deleteLater();
-  QXmlStreamReader reader(reply);
+  library_backend_->AddOrUpdateSongs(songs);
+}
 
+
+const int SubsonicLibraryScanner::kAlbumChunkSize = 500;
+const int SubsonicLibraryScanner::kSongListMinChunkSize = 500;
+const int SubsonicLibraryScanner::kConcurrentRequests = 8;
+
+SubsonicLibraryScanner::SubsonicLibraryScanner(SubsonicService* service, QObject* parent)
+  : QObject(parent),
+    service_(service)
+{
+}
+
+SubsonicLibraryScanner::~SubsonicLibraryScanner()
+{
+}
+
+void SubsonicLibraryScanner::Scan()
+{
+  album_queue_.clear();
+  songlist_buffer_.clear();
+  GetAlbumList(0);
+}
+
+void SubsonicLibraryScanner::onGetAlbumListFinished(QNetworkReply *reply, int offset)
+{
+  reply->deleteLater();
+
+  QXmlStreamReader reader(reply);
   reader.readNextStartElement();
   Q_ASSERT(reader.name() == "subsonic-response");
-  if (reader.attributes().value("status") != "ok")
-  {
+  if (reader.attributes().value("status") != "ok") {
     // TODO: error handling
     return;
   }
 
-  directory_count_ = 0;
-  processed_directory_count_ = 0;
-  new_songs_ = SongList();
-
+  int albums_added = 0;
   reader.readNextStartElement();
-  Q_ASSERT(reader.name() == "indexes");
-  // TODO: start loading library data
-  while (reader.readNextStartElement())
-  {
-    if (reader.name() == "index")
-    {
-      ReadIndex(&reader);
-    }
-    else if (reader.name() == "child" && reader.attributes().value("isVideo") == "false")
-    {
-      new_songs_ << ReadTrack(&reader);
-    }
-    else
-    {
-      reader.skipCurrentElement();
-    }
+  Q_ASSERT(reader.name() == "albumList2");
+  while (reader.readNextStartElement()) {
+    Q_ASSERT(reader.name() == "album");
+    album_queue_ << reader.attributes().value("id").toString();
+    albums_added++;
+    reader.skipCurrentElement();
   }
 
-  if (new_songs_.size() >= kChunkSize || directory_count_ == processed_directory_count_) {
-    library_backend_->AddOrUpdateSongs(new_songs_);
-    new_songs_ = SongList();
+  // If this reply was non-empty, get the next chunk, otherwise start fetching songs
+  if (albums_added > 0) {
+    GetAlbumList(offset + kAlbumChunkSize);
+  } else {
+    // Start up the maximum number of concurrent requests
+    for (int i = 0; i < kConcurrentRequests && !album_queue_.empty(); ++i) {
+      GetAlbum(album_queue_.dequeue());
+    }
   }
 }
 
-void SubsonicService::onGetMusicDirectoryFinished()
+void SubsonicLibraryScanner::onGetAlbumFinished(QNetworkReply *reply)
 {
-  QNetworkReply *reply = qobject_cast<QNetworkReply*>(sender());
-  Q_ASSERT(reply);
   reply->deleteLater();
+
   QXmlStreamReader reader(reply);
-
-  ++processed_directory_count_;
-
   reader.readNextStartElement();
   Q_ASSERT(reader.name() == "subsonic-response");
-  if (reader.attributes().value("status") != "ok")
-  {
+  if (reader.attributes().value("status") != "ok") {
     // TODO: error handling
     return;
   }
 
   reader.readNextStartElement();
-  Q_ASSERT(reader.name() == "directory");
-  // TODO: add tracks, etc.
-  while (reader.readNextStartElement())
-  {
-    if (reader.attributes().value("isDir") == "true")
-    {
-      ReadAlbum(&reader);
-    }
-    else if (reader.attributes().value("isVideo") == "false")
-    {
-      new_songs_ << ReadTrack(&reader);
-    }
-    else
-    {
-      reader.skipCurrentElement();
-    }
+  Q_ASSERT(reader.name() == "album");
+  while (reader.readNextStartElement()) {
+    Q_ASSERT(reader.name() == "song");
+    Song song;
+    QString id = reader.attributes().value("id").toString();
+    song.set_title(reader.attributes().value("title").toString());
+    song.set_album(reader.attributes().value("album").toString());
+    song.set_track(reader.attributes().value("track").toString().toInt());
+    song.set_artist(reader.attributes().value("artist").toString());
+    song.set_bitrate(reader.attributes().value("bitRate").toString().toInt());
+    song.set_year(reader.attributes().value("year").toString().toInt());
+    song.set_genre(reader.attributes().value("genre").toString());
+    qint64 length = reader.attributes().value("duration").toString().toInt();
+    length *= 1000000000;
+    song.set_length_nanosec(length);
+    QUrl url = QUrl(QString("subsonic://%1").arg(id));
+    song.set_url(url);
+    song.set_filesize(reader.attributes().value("size").toString().toInt());
+    // We need to set these to satisfy the database constraints
+    song.set_directory_id(0);
+    song.set_mtime(0);
+    song.set_ctime(0);
+    songlist_buffer_ << song;
+    reader.skipCurrentElement();
   }
 
-  if (new_songs_.size() >= kChunkSize || directory_count_ == processed_directory_count_) {
-    library_backend_->AddOrUpdateSongs(new_songs_);
-    new_songs_ = SongList();
+  // If the songlist buffer is big enough, or we're (nearly) done, emit the songlist (see below)
+  bool should_emit = album_queue_.empty() || songlist_buffer_.size() >= kSongListMinChunkSize;
+
+  // Start the next request
+  if (!album_queue_.empty()) {
+    GetAlbum(album_queue_.dequeue());
   }
+
+  if (should_emit) {
+    emit SongsDiscovered(songlist_buffer_);
+    songlist_buffer_.clear();
+  }
+}
+
+void SubsonicLibraryScanner::GetAlbumList(int offset)
+{
+  QUrl url = service_->BuildRequestUrl("getAlbumList2");
+  url.addQueryItem("type", "alphabeticalByName");
+  url.addQueryItem("size", QString::number(kAlbumChunkSize));
+  url.addQueryItem("offset", QString::number(offset));
+  QNetworkReply* reply = service_->Send(url);
+  NewClosure(reply, SIGNAL(finished()),
+             this, SLOT(onGetAlbumListFinished(QNetworkReply*,int)),
+             reply, offset);
+}
+
+void SubsonicLibraryScanner::GetAlbum(QString id)
+{
+  QUrl url = service_->BuildRequestUrl("getAlbum");
+  url.addQueryItem("id", id);
+  QNetworkReply* reply = service_->Send(url);
+  NewClosure(reply, SIGNAL(finished()),
+             this, SLOT(onGetAlbumFinished(QNetworkReply*)),
+             reply);
 }
