@@ -35,8 +35,8 @@ enum EngineState {
 }
 
 message Message {
-  required int32 version = 1 [default=1];
-  required MsgType msgType = 2 [default=UNKNOWN];
+  optional int32 version = 1 [default=1];
+  optional MsgType msgType = 2 [default=UNKNOWN];
 
   optional EngineState state = 3;
   optional ClementineInfo info = 4;
