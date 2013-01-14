@@ -1,13 +1,14 @@
 package pb.remote;
 
 enum MsgType {
+  UNKNOWN = 0;
   // Messages generally send from client to server
-  CONNECT = 0;
-  DISCONNECT = 1;
-  REQUEST_PLAYLISTS = 2;
-  REQUEST_PLAYLIST_SONGS = 3;
-  CHANGE_SONG = 4;
-  SET_VOLUME = 5;
+  CONNECT = 1;
+  DISCONNECT = 2;
+  REQUEST_PLAYLISTS = 3;
+  REQUEST_PLAYLIST_SONGS = 4;
+  CHANGE_SONG = 5;
+  SET_VOLUME = 6;
 
   // Messages send by both
   PLAY = 20;
@@ -35,7 +36,7 @@ enum EngineState {
 
 message Message {
   required int32 version = 1 [default=1];
-  required MsgType msgType = 2;
+  required MsgType msgType = 2 [default=UNKNOWN];
 
   optional EngineState state = 3;
   optional ClementineInfo info = 4;
