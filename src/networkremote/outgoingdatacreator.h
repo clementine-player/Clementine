@@ -24,7 +24,7 @@ public:
   void SetClients(QList<RemoteClient*>* clients);
 
 public slots:
-  void SendClementineInfos();
+  void SendClementineInfo();
   void SendAllPlaylists();
   void SendFirstData();
   void SendPlaylistSongs(int id);
@@ -46,8 +46,12 @@ private:
   int keep_alive_timeout_;
 
   void SendDataToClients(pb::remote::Message* msg);
-  void SetEngineState(pb::remote::Message* msg);
-  void CreateSong(pb::remote::SongMetadata* song_metadata, Song* song, const QString* art_uri, int index);
+  void SetEngineState(pb::remote::ResponseClementineInfo* msg);
+  void CreateSong(
+      const Song& song,
+      const QString& art_uri,
+      const int index,
+      pb::remote::SongMetadata* song_metadata);
 };
 
 #endif // OUTGOINGDATACREATOR_H

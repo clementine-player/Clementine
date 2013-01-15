@@ -17,7 +17,7 @@ public slots:
   void Parse(const QByteArray& pb_data);
 
 signals:
-  void SendClementineInfos();
+  void SendClementineInfo();
   void SendFirstData();
   void SendAllPlaylists();
   void SendPlaylistSongs(int id);
@@ -37,8 +37,8 @@ private:
   Application* app_;
   bool close_connection_;
 
-  void GetPlaylistSongs(pb::remote::Message* msg);
-  void ChangeSong(pb::remote::Message* msg);
+  void GetPlaylistSongs(const pb::remote::Message& msg);
+  void ChangeSong(const pb::remote::Message& msg);
 };
 
 #endif // INCOMINGDATAPARSER_H

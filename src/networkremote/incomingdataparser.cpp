@@ -65,17 +65,17 @@ void IncomingDataParser::Parse(const QByteArray& data) {
   }
 
   // Now check what's to do
-  switch (msg.msgtype()) {
-    case pb::remote::CONNECT:     emit SendClementineInfos();
+  switch (msg.type()) {
+    case pb::remote::CONNECT:     emit SendClementineInfo();
                                   emit SendFirstData();
                                   break;
     case pb::remote::DISCONNECT:  close_connection_ = true;
                                   break;
     case pb::remote::REQUEST_PLAYLISTS:       emit SendAllPlaylists();
                                               break;
-    case pb::remote::REQUEST_PLAYLIST_SONGS:  GetPlaylistSongs(&msg);
+    case pb::remote::REQUEST_PLAYLIST_SONGS:  GetPlaylistSongs(msg);
                                               break;
-    case pb::remote::SET_VOLUME:  emit SetVolume(msg.volume());
+    case pb::remote::SET_VOLUME:  emit SetVolume(msg.request_set_volume().volume());
                                   break;
     case pb::remote::PLAY:        emit Play();
                                   break;
@@ -87,47 +87,29 @@ void IncomingDataParser::Parse(const QByteArray& data) {
                                   break;
     case pb::remote::NEXT:        emit Next();
                                   break;
-    case pb::remote::PREV:        emit Previous();
+    case pb::remote::PREVIOUS:    emit Previous();
                                   break;
-    case pb::remote::CHANGE_SONG: ChangeSong(&msg);
+    case pb::remote::CHANGE_SONG: ChangeSong(msg);
                                   break;
-    case pb::remote::TOGGLE_SHUFFLE:  emit ShuffleCurrent();
-                                      break;
+    case pb::remote::SHUFFLE_PLAYLIST:        emit ShuffleCurrent();
+                                              break;
     default: break;
   }
 }
 
-void IncomingDataParser::GetPlaylistSongs(pb::remote::Message* msg) {
-  // Check if we got a playlist
-  if (msg->playlists_size() == 0)
-  {
-    return;
-  }
-
-  // Get the first entry and send the songs
-  pb::remote::Playlist playlist = msg->playlists(0);
-  emit SendPlaylistSongs(playlist.id());
+void IncomingDataParser::GetPlaylistSongs(const pb::remote::Message& msg) {
+  emit SendPlaylistSongs(msg.request_playlist_songs().id());
 }
 
-void IncomingDataParser::ChangeSong(pb::remote::Message* msg) {
-  // Check if we got a song
-  if (msg->playlists_size() == 0) {
-    return;
-  }
-
+void IncomingDataParser::ChangeSong(const pb::remote::Message& msg) {
   // Get the first entry and check if there is a song
-  pb::remote::Playlist playlist = msg->playlists(0);
-  if (playlist.songs_size() == 0) {
-    return;
-  }
-
-  pb::remote::SongMetadata song = playlist.songs(0);
+  const pb::remote::RequestChangeSong& request = msg.request_change_song();
 
   // Check if we need to change the playlist
-  if (playlist.id() != app_->playlist_manager()->active_id()) {
-    emit SetActivePlaylist(playlist.id());
+  if (request.playlist_id() != app_->playlist_manager()->active_id()) {
+    emit SetActivePlaylist(request.playlist_id());
   }
 
   // Play the selected song
-  emit PlayAt(song.index(), Engine::Manual, false);
+  emit PlayAt(request.song_index(), Engine::Manual, false);
 }

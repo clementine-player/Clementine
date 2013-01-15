@@ -59,23 +59,23 @@ void OutgoingDataCreator::SendDataToClients(pb::remote::Message* msg) {
   }
 }
 
-void OutgoingDataCreator::SendClementineInfos() {
+void OutgoingDataCreator::SendClementineInfo() {
   // Create the general message and set the message type
   pb::remote::Message msg;
-  msg.set_msgtype(pb::remote::INFOS);
+  msg.set_type(pb::remote::INFO);
 
   // Now add the message specific data
-  SetEngineState(&msg);
+  pb::remote::ResponseClementineInfo* info =
+      msg.mutable_response_clementine_info();
+  SetEngineState(info);
 
   QString version = QString("%1 %2").arg(QCoreApplication::applicationName(),
                                          QCoreApplication::applicationVersion());
-  pb::remote::ClementineInfo *info = msg.mutable_info();
   info->set_version(version.toAscii());
-
   SendDataToClients(&msg);
 }
 
-void OutgoingDataCreator::SetEngineState(pb::remote::Message *msg) {
+void OutgoingDataCreator::SetEngineState(pb::remote::ResponseClementineInfo* msg) {
   switch(app_->player()->GetState()) {
     case Engine::Idle:    msg->set_state(pb::remote::Idle);
                           break;
@@ -90,31 +90,33 @@ void OutgoingDataCreator::SetEngineState(pb::remote::Message *msg) {
 
 void OutgoingDataCreator::SendAllPlaylists() {
   // Get all Playlists
-  QList<Playlist*> playlists = app_->playlist_manager()->GetAllPlaylists();
-  QListIterator<Playlist*> i(playlists);
+  QList<Playlist*> app_playlists = app_->playlist_manager()->GetAllPlaylists();
   int active_playlist = app_->playlist_manager()->active_id();
 
   // Create message
   pb::remote::Message msg;
-  msg.set_msgtype(pb::remote::PLAYLISTS);
+  msg.set_type(pb::remote::PLAYLISTS);
 
-  while(i.hasNext()) {
+  pb::remote::ResponsePlaylists* playlists = msg.mutable_response_playlists();
+
+  QListIterator<Playlist*> it(app_playlists);
+  while(it.hasNext()) {
     // Get the next Playlist
-    Playlist* p = i.next();
+    Playlist* p = it.next();
     QString playlist_name = app_->playlist_manager()->GetPlaylistName(p->id());
 
     // Create a new playlist
-    pb::remote::Playlist* playlist = msg.add_playlists();
+    pb::remote::Playlist* playlist = playlists->add_playlist();
     playlist->set_name(playlist_name.toStdString());
     playlist->set_id(p->id());
     playlist->set_active((p->id() == active_playlist));
-    // TODO: Fill in the song metadata here.
+    playlist->set_item_count(p->rowCount());
   }
 
   SendDataToClients(&msg);
 }
 
-void OutgoingDataCreator::ActiveChanged(Playlist *) {
+void OutgoingDataCreator::ActiveChanged(Playlist*) {
   // When a playlist was changed, send the new list
   SendAllPlaylists();
 }
@@ -140,35 +142,40 @@ void OutgoingDataCreator::CurrentSongChanged(const Song& song, const QString& ur
   if (!clients_->empty()) {
     // Create the message
     pb::remote::Message msg;
-    msg.set_msgtype(pb::remote::CURRENT_METAINFOS);
+    msg.set_type(pb::remote::CURRENT_METAINFO);
 
     // If there is no song, create an empty node, otherwise fill it with data
     int i = app_->playlist_manager()->active()->current_row();
-    CreateSong(msg.mutable_currentsong(), &current_song_, &uri, i);
+    CreateSong(
+        current_song_, uri, i,
+        msg.mutable_response_current_metadata()->mutable_song_metadata());
 
     SendDataToClients(&msg);
   }
 }
 
-void OutgoingDataCreator::CreateSong(pb::remote::SongMetadata* song_metadata,
-                                     Song* song, const QString* artUri, int index) {
-  if (song->is_valid()) {
-    song_metadata->set_id(song->id());
+void OutgoingDataCreator::CreateSong(
+    const Song& song,
+    const QString& art_uri,
+    const int index,
+    pb::remote::SongMetadata* song_metadata) {
+  if (song.is_valid()) {
+    song_metadata->set_id(song.id());
     song_metadata->set_index(index);
-    song_metadata->set_title( DataCommaSizeFromQString(song->PrettyTitle()));
-    song_metadata->set_artist(DataCommaSizeFromQString(song->artist()));
-    song_metadata->set_album( DataCommaSizeFromQString(song->album()));
-    song_metadata->set_albumartist(DataCommaSizeFromQString(song->albumartist()));
-    song_metadata->set_pretty_length(DataCommaSizeFromQString(song->PrettyLength()));
-    song_metadata->set_genre(DataCommaSizeFromQString(song->genre()));
-    song_metadata->set_pretty_year(DataCommaSizeFromQString(song->PrettyYear()));
-    song_metadata->set_track(song->track());
-    song_metadata->set_disc(song->disc());
-    song_metadata->set_playcount(song->playcount());
+    song_metadata->set_title(DataCommaSizeFromQString(song.PrettyTitle()));
+    song_metadata->set_artist(DataCommaSizeFromQString(song.artist()));
+    song_metadata->set_album(DataCommaSizeFromQString(song.album()));
+    song_metadata->set_albumartist(DataCommaSizeFromQString(song.albumartist()));
+    song_metadata->set_pretty_length(DataCommaSizeFromQString(song.PrettyLength()));
+    song_metadata->set_genre(DataCommaSizeFromQString(song.genre()));
+    song_metadata->set_pretty_year(DataCommaSizeFromQString(song.PrettyYear()));
+    song_metadata->set_track(song.track());
+    song_metadata->set_disc(song.disc());
+    song_metadata->set_playcount(song.playcount());
 
     // Append coverart
-    if (!artUri->isEmpty()) {
-      QImage orig(QUrl(*artUri).toLocalFile());
+    if (!art_uri.isEmpty()) {
+      QImage orig(QUrl(art_uri).toLocalFile());
       QImage small;
       // Check if we resize the image
       if (orig.width() > 1000) {
@@ -184,9 +191,7 @@ void OutgoingDataCreator::CreateSong(pb::remote::SongMetadata* song_metadata,
       small.save(&buf, "JPG");
 
       // Append the Data in the protocol buffer
-      song_metadata->set_art(data.data(), data.size());
-
-      buf.close();
+      song_metadata->set_art(data.constData(), data.size());
     }
   }
 }
@@ -195,8 +200,8 @@ void OutgoingDataCreator::CreateSong(pb::remote::SongMetadata* song_metadata,
 void OutgoingDataCreator::VolumeChanged(int volume) {
   // Create the message
   pb::remote::Message msg;
-  msg.set_msgtype(pb::remote::SET_VOLUME);
-  msg.set_volume(volume);
+  msg.set_type(pb::remote::SET_VOLUME);
+  msg.mutable_request_set_volume()->set_volume(volume);
   SendDataToClients(&msg);
 }
 
@@ -208,23 +213,23 @@ void OutgoingDataCreator::SendPlaylistSongs(int id) {
     return;
   }
 
-  SongList song_list = playlist->GetAllSongs();
-  QListIterator<Song> i(song_list);
-
   // Create the message and the playlist
   pb::remote::Message msg;
-  msg.set_msgtype(pb::remote::PLAYLIST_SONGS);
+  msg.set_type(pb::remote::PLAYLIST_SONGS);
   // Create a new playlist
-  pb::remote::Playlist* pb_playlist = msg.add_playlists();
+  pb::remote::Playlist* pb_playlist =
+      msg.mutable_response_playlist_songs()->mutable_requested_playlist();
   pb_playlist->set_id(id);
 
   // Send all songs
   int index = 0;
-  while(i.hasNext()) {
-    Song song   = i.next();
+  SongList song_list = playlist->GetAllSongs();
+  QListIterator<Song> it(song_list);
+  while(it.hasNext()) {
+    Song song   = it.next();
     QString art = song.art_automatic();
     pb::remote::SongMetadata* pb_song = pb_playlist->add_songs();
-    CreateSong(pb_song, &song, &art, index);
+    CreateSong(song, art, index, pb_song);
     ++index;
   }
   SendDataToClients(&msg);
@@ -247,13 +252,13 @@ void OutgoingDataCreator::StateChanged(Engine::State state) {
   pb::remote::Message msg;
 
   switch (state) {
-  case Engine::Playing: msg.set_msgtype(pb::remote::PLAY);
+  case Engine::Playing: msg.set_type(pb::remote::PLAY);
                         break;
-  case Engine::Paused:  msg.set_msgtype(pb::remote::PAUSE);
+  case Engine::Paused:  msg.set_type(pb::remote::PAUSE);
                         break;
-  case Engine::Empty:   msg.set_msgtype(pb::remote::STOP); // Empty is called when player stopped
+  case Engine::Empty:   msg.set_type(pb::remote::STOP); // Empty is called when player stopped
                         break;
-  default:              msg.set_msgtype(pb::remote::STOP);
+  default:              msg.set_type(pb::remote::STOP);
                         break;
   };
 
@@ -262,6 +267,6 @@ void OutgoingDataCreator::StateChanged(Engine::State state) {
 
 void OutgoingDataCreator::SendKeepAlive() {
   pb::remote::Message msg;
-  msg.set_msgtype(pb::remote::KEEP_ALIVE);
+  msg.set_type(pb::remote::KEEP_ALIVE);
   SendDataToClients(&msg);
 }
