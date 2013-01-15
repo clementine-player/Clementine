@@ -216,9 +216,14 @@ void OutgoingDataCreator::SendPlaylistSongs(int id) {
   // Create the message and the playlist
   pb::remote::Message msg;
   msg.set_type(pb::remote::PLAYLIST_SONGS);
+
+  // Create the Response message
+  pb::remote::ResponsePlaylistSongs* pb_response_playlist_songs =
+                                     msg.mutable_response_playlist_songs();
+
   // Create a new playlist
   pb::remote::Playlist* pb_playlist =
-      msg.mutable_response_playlist_songs()->mutable_requested_playlist();
+      pb_response_playlist_songs->mutable_requested_playlist();
   pb_playlist->set_id(id);
 
   // Send all songs
@@ -228,7 +233,7 @@ void OutgoingDataCreator::SendPlaylistSongs(int id) {
   while(it.hasNext()) {
     Song song   = it.next();
     QString art = song.art_automatic();
-    pb::remote::SongMetadata* pb_song = pb_playlist->add_songs();
+    pb::remote::SongMetadata* pb_song = pb_response_playlist_songs->add_songs();
     CreateSong(song, art, index, pb_song);
     ++index;
   }

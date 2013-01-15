@@ -64,10 +64,6 @@ message Playlist {
   optional string name = 2;
   optional int32 item_count = 3;
   optional bool active = 4;
-
-  // The songs are only sent when the client requests them.
-  // See src/remotecontrol/outgoingdatacreator.cpp for more info
-  repeated SongMetadata songs = 10;
 }
 
 // Valid Repeatmodes
@@ -133,6 +129,9 @@ message ResponsePlaylists {
 // A list of songs in a playlist
 message ResponsePlaylistSongs {
   optional Playlist requested_playlist = 1;
+  
+  // The songs that are in the playlist
+  repeated SongMetadata songs = 2;
 }
 
 // The current state of the play engine
