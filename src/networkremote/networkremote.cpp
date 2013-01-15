@@ -125,6 +125,15 @@ void NetworkRemote::AcceptConnection() {
             SLOT(VolumeChanged(int)));
     connect(app_->player()->engine(), SIGNAL(StateChanged(Engine::State)),
             outgoing_data_creator_.get(), SLOT(StateChanged(Engine::State)));
+
+    connect(app_->playlist_manager()->sequence(),
+            SIGNAL(RepeatModeChanged(PlaylistSequence::RepeatMode)),
+            outgoing_data_creator_.get(),
+            SLOT(SendRepeatMode(PlaylistSequence::RepeatMode)));
+    connect(app_->playlist_manager()->sequence(),
+            SIGNAL(ShuffleModeChanged(PlaylistSequence::ShuffleMode)),
+            outgoing_data_creator_.get(),
+            SLOT(SendShuffleMode(PlaylistSequence::ShuffleMode)));
   }
 
   QTcpServer* server = qobject_cast<QTcpServer*>(sender());

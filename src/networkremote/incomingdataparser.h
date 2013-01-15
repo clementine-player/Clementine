@@ -32,6 +32,8 @@ signals:
   void PlayAt(int i, Engine::TrackChangeFlags change, bool reshuffle);
   void SetActivePlaylist(int id);
   void ShuffleCurrent();
+  void SetRepeatMode(PlaylistSequence::RepeatMode mode);
+  void SetShuffleMode(PlaylistSequence::ShuffleMode mode);
 
 private:
   Application* app_;
@@ -39,6 +41,8 @@ private:
 
   void GetPlaylistSongs(const pb::remote::Message& msg);
   void ChangeSong(const pb::remote::Message& msg);
+  void SetRepeatMode(const pb::remote::Repeat& repeat);
+  void SetShuffleMode(const pb::remote::Shuffle& shuffle);
 };
 
 #endif // INCOMINGDATAPARSER_H
