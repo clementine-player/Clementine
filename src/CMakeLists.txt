@@ -843,6 +843,7 @@ optional_source(APPLE
     core/mac_startup.mm
     core/scoped_nsautorelease_pool.mm
     devices/macdevicelister.mm
+    networkremote/bonjour.mm
     ui/globalshortcutgrabber.mm
     ui/macscreensaver.cpp
     ui/macsystemtrayicon.mm
