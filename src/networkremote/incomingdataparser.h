@@ -35,6 +35,9 @@ signals:
   void SetRepeatMode(PlaylistSequence::RepeatMode mode);
   void SetShuffleMode(PlaylistSequence::ShuffleMode mode);
 
+private slots:
+  void PlaylistManagerInitialized();
+
 private:
   Application* app_;
   bool close_connection_;

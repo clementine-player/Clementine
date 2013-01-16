@@ -42,6 +42,14 @@ IncomingDataParser::IncomingDataParser(Application* app)
           app_->player(), SLOT(SetVolume(int)));
   connect(this, SIGNAL(PlayAt(int,Engine::TrackChangeFlags,bool)),
           app_->player(), SLOT(PlayAt(int,Engine::TrackChangeFlags,bool)));
+
+  // For some connects we have to wait for the playlistmanager
+  // to be initialized
+  connect(app_->playlist_manager(), SIGNAL(PlaylistManagerInitialized()),
+          this, SLOT(PlaylistManagerInitialized()));
+}
+
+void IncomingDataParser::PlaylistManagerInitialized() {
   connect(this, SIGNAL(SetActivePlaylist(int)),
           app_->playlist_manager(), SLOT(SetActivePlaylist(int)));
   connect(this, SIGNAL(ShuffleCurrent()),
