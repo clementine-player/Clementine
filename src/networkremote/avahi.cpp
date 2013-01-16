@@ -9,25 +9,39 @@
 
 namespace {
 
-void LogCommit(QDBusPendingReply<> reply) {
-  qLog(Debug) << "Remote interface published on Avahi:" << reply.error();
-}
+void AddService(
+    const QString domain,
+    const QString type,
+    const QString name,
+    quint16 port,
+    QDBusPendingReply<QDBusObjectPath> path_reply);
+void Commit(OrgFreedesktopAvahiEntryGroupInterface* interface);
+void LogCommit(QDBusPendingReply<> reply);
 
-void Commit(OrgFreedesktopAvahiEntryGroupInterface* interface) {
-  QDBusPendingReply<> reply = interface->Commit();
+}  // namespace
+
+void Avahi::Publish(
+    const QString& domain,
+    const QString& type,
+    const QString& name,
+    quint16 port) {
+  OrgFreedesktopAvahiServerInterface server_interface(
+      "org.freedesktop.Avahi",
+      "/",
+      QDBusConnection::systemBus());
+  QDBusPendingReply<QDBusObjectPath> reply = server_interface.EntryGroupNew();
   QDBusPendingCallWatcher* watcher = new QDBusPendingCallWatcher(reply);
-  QObject::connect(
-      watcher, SIGNAL(finished(QDBusPendingCallWatcher*)),
-      watcher, SLOT(deleteLater()));
-  QObject::connect(
-      watcher, SIGNAL(finished(QDBusPendingCallWatcher*)),
-      interface, SLOT(deleteLater()));
   NewClosure(
       watcher,
       SIGNAL(finished(QDBusPendingCallWatcher*)),
-      &LogCommit,
-      reply);
+      &AddService,
+      domain, type, name, port, reply);
+  QObject::connect(
+      watcher, SIGNAL(finished(QDBusPendingCallWatcher*)),
+      watcher, SLOT(deleteLater()));
 }
+
+namespace {
 
 void AddService(
     const QString domain,
@@ -72,25 +86,25 @@ void AddService(
       watcher, SLOT(deleteLater()));
 }
 
-}  // namespace
-
-void Avahi::Publish(
-    const QString& domain,
-    const QString& type,
-    const QString& name,
-    quint16 port) {
-  OrgFreedesktopAvahiServerInterface server_interface(
-      "org.freedesktop.Avahi",
-      "/",
-      QDBusConnection::systemBus());
-  QDBusPendingReply<QDBusObjectPath> reply = server_interface.EntryGroupNew();
+void Commit(OrgFreedesktopAvahiEntryGroupInterface* interface) {
+  QDBusPendingReply<> reply = interface->Commit();
   QDBusPendingCallWatcher* watcher = new QDBusPendingCallWatcher(reply);
-  NewClosure(
-      watcher,
-      SIGNAL(finished(QDBusPendingCallWatcher*)),
-      &AddService,
-      domain, type, name, port, reply);
   QObject::connect(
       watcher, SIGNAL(finished(QDBusPendingCallWatcher*)),
       watcher, SLOT(deleteLater()));
+  QObject::connect(
+      watcher, SIGNAL(finished(QDBusPendingCallWatcher*)),
+      interface, SLOT(deleteLater()));
+  NewClosure(
+      watcher,
+      SIGNAL(finished(QDBusPendingCallWatcher*)),
+      &LogCommit,
+      reply);
 }
+
+void LogCommit(QDBusPendingReply<> reply) {
+  qLog(Debug) << "Remote interface published on Avahi:" << reply.error();
+}
+
+}  // namespace
+
