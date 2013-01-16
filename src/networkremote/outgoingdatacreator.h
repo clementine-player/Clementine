@@ -34,6 +34,8 @@ public slots:
   void CurrentSongChanged(const Song& song, const QString& uri, const QImage& img);
   void StateChanged(Engine::State);
   void SendKeepAlive();
+  void SendRepeatMode(PlaylistSequence::RepeatMode mode);
+  void SendShuffleMode(PlaylistSequence::ShuffleMode mode);
 
 private:
   Application* app_;

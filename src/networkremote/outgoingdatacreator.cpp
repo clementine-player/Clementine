@@ -270,6 +270,50 @@ void OutgoingDataCreator::StateChanged(Engine::State state) {
   SendDataToClients(&msg);
 }
 
+void OutgoingDataCreator::SendRepeatMode(PlaylistSequence::RepeatMode mode) {
+  pb::remote::Message msg;
+  msg.set_type(pb::remote::REPEAT);
+
+  switch (mode) {
+  case PlaylistSequence::Repeat_Off:
+       msg.mutable_repeat()->set_repeat_mode(pb::remote::Repeat_Off);
+       break;
+  case PlaylistSequence::Repeat_Track:
+       msg.mutable_repeat()->set_repeat_mode(pb::remote::Repeat_Track);
+       break;
+  case PlaylistSequence::Repeat_Album:
+       msg.mutable_repeat()->set_repeat_mode(pb::remote::Repeat_Album);
+       break;
+  case PlaylistSequence::Repeat_Playlist:
+       msg.mutable_repeat()->set_repeat_mode(pb::remote::Repeat_Playlist);
+       break;
+  }
+
+  SendDataToClients(&msg);
+}
+
+void OutgoingDataCreator::SendShuffleMode(PlaylistSequence::ShuffleMode mode) {
+  pb::remote::Message msg;
+  msg.set_type(pb::remote::SHUFFLE);
+
+  switch (mode) {
+  case PlaylistSequence::Shuffle_Off:
+       msg.mutable_shuffle()->set_shuffle_mode(pb::remote::Shuffle_Off);
+       break;
+  case PlaylistSequence::Shuffle_All:
+       msg.mutable_shuffle()->set_shuffle_mode(pb::remote::Shuffle_All);
+       break;
+  case PlaylistSequence::Shuffle_InsideAlbum:
+       msg.mutable_shuffle()->set_shuffle_mode(pb::remote::Shuffle_InsideAlbum);
+       break;
+  case PlaylistSequence::Shuffle_Albums:
+       msg.mutable_shuffle()->set_shuffle_mode(pb::remote::Shuffle_Albums);
+       break;
+  }
+
+  SendDataToClients(&msg);
+}
+
 void OutgoingDataCreator::SendKeepAlive() {
   pb::remote::Message msg;
   msg.set_type(pb::remote::KEEP_ALIVE);

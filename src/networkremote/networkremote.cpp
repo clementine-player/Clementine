@@ -125,6 +125,15 @@ void NetworkRemote::AcceptConnection() {
             SLOT(VolumeChanged(int)));
     connect(app_->player()->engine(), SIGNAL(StateChanged(Engine::State)),
             outgoing_data_creator_.get(), SLOT(StateChanged(Engine::State)));
+
+    connect(app_->playlist_manager()->sequence(),
+            SIGNAL(RepeatModeChanged(PlaylistSequence::RepeatMode)),
+            outgoing_data_creator_.get(),
+            SLOT(SendRepeatMode(PlaylistSequence::RepeatMode)));
+    connect(app_->playlist_manager()->sequence(),
+            SIGNAL(ShuffleModeChanged(PlaylistSequence::ShuffleMode)),
+            outgoing_data_creator_.get(),
+            SLOT(SendShuffleMode(PlaylistSequence::ShuffleMode)));
   }
 
   QTcpServer* server = qobject_cast<QTcpServer*>(sender());
@@ -133,6 +142,7 @@ void NetworkRemote::AcceptConnection() {
   if (only_non_public_ip_ && !IpIsPrivate(client_socket->peerAddress())) {
     qLog(Info) << "Got a connection from public ip" <<
                 client_socket->peerAddress().toString();
+    client_socket->close();
   } else {
     CreateRemoteClient(client_socket);
   }
@@ -144,7 +154,7 @@ bool NetworkRemote::IpIsPrivate(const QHostAddress& address) {
       address.isInSubnet(QHostAddress::parseSubnet("127.0.0.1/8")) ||
       // Link Local v6
       address.isInSubnet(QHostAddress::parseSubnet("::1/128")) ||
-      address.isInSubnet(QHostAddress::parseSubnet("fe80::/10"));
+      address.isInSubnet(QHostAddress::parseSubnet("fe80::/10")) ||
       // Private v4 range
       address.isInSubnet(QHostAddress::parseSubnet("192.168.0.0/16")) ||
       address.isInSubnet(QHostAddress::parseSubnet("172.16.0.0/12")) ||

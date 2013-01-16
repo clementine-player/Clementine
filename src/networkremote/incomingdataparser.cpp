@@ -19,6 +19,7 @@
 #include "core/logging.h"
 #include "engines/enginebase.h"
 #include "playlist/playlistmanager.h"
+#include "playlist/playlistsequence.h"
 
 IncomingDataParser::IncomingDataParser(Application* app)
   :app_(app)
@@ -45,6 +46,12 @@ IncomingDataParser::IncomingDataParser(Application* app)
           app_->playlist_manager(), SLOT(SetActivePlaylist(int)));
   connect(this, SIGNAL(ShuffleCurrent()),
           app_->playlist_manager(), SLOT(ShuffleCurrent()));
+  connect(this, SIGNAL(SetRepeatMode(PlaylistSequence::RepeatMode)),
+          app_->playlist_manager()->sequence(),
+          SLOT(SetRepeatMode(PlaylistSequence::RepeatMode)));
+  connect(this, SIGNAL(SetShuffleMode(PlaylistSequence::ShuffleMode)),
+          app_->playlist_manager()->sequence(),
+          SLOT(SetShuffleMode(PlaylistSequence::ShuffleMode)));
 }
 
 IncomingDataParser::~IncomingDataParser() {
@@ -93,6 +100,10 @@ void IncomingDataParser::Parse(const QByteArray& data) {
                                   break;
     case pb::remote::SHUFFLE_PLAYLIST:        emit ShuffleCurrent();
                                               break;
+    case pb::remote::REPEAT:      SetRepeatMode(msg.repeat());
+                                  break;
+    case pb::remote::SHUFFLE:     SetShuffleMode(msg.shuffle());
+                                  break;
     default: break;
   }
 }
@@ -112,4 +123,40 @@ void IncomingDataParser::ChangeSong(const pb::remote::Message& msg) {
 
   // Play the selected song
   emit PlayAt(request.song_index(), Engine::Manual, false);
+}
+
+void IncomingDataParser::SetRepeatMode(const pb::remote::Repeat& repeat) {
+  switch (repeat.repeat_mode()) {
+  case pb::remote::Repeat_Off:
+       emit SetRepeatMode(PlaylistSequence::Repeat_Off);
+       break;
+  case pb::remote::Repeat_Track:
+       emit SetRepeatMode(PlaylistSequence::Repeat_Track);
+       break;
+  case pb::remote::Repeat_Album:
+       emit SetRepeatMode(PlaylistSequence::Repeat_Album);
+       break;
+  case pb::remote::Repeat_Playlist:
+       emit SetRepeatMode(PlaylistSequence::Repeat_Playlist);
+       break;
+  default: break;
+  }
+}
+
+void IncomingDataParser::SetShuffleMode(const pb::remote::Shuffle& shuffle) {
+  switch (shuffle.shuffle_mode()) {
+  case pb::remote::Shuffle_Off:
+       emit SetShuffleMode(PlaylistSequence::Shuffle_Off);
+       break;
+  case pb::remote::Shuffle_All:
+       emit SetShuffleMode(PlaylistSequence::Shuffle_All);
+       break;
+  case pb::remote::Shuffle_InsideAlbum:
+       emit SetShuffleMode(PlaylistSequence::Shuffle_InsideAlbum);
+       break;
+  case pb::remote::Shuffle_Albums:
+       emit SetShuffleMode(PlaylistSequence::Shuffle_Albums);
+       break;
+  default: break;
+  }
 }
