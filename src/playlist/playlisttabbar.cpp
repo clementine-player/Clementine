@@ -159,6 +159,9 @@ void PlaylistTabBar::Close() {
   if (menu_index_ > 1) {
     setCurrentIndex(menu_index_ - 1);
   }
+
+  // Update playlist tab order/visibility
+  TabMoved();
 }
 
 void PlaylistTabBar::CloseFromTabIndex(int index) {
@@ -229,6 +232,9 @@ void PlaylistTabBar::InsertTab(int id, int index, const QString& text) {
 
   if (currentIndex() == index)
     emit CurrentIdChanged(id);
+
+  // Update playlist tab order/visibility
+  TabMoved();
 }
 
 void PlaylistTabBar::TabMoved() {
