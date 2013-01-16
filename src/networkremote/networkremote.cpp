@@ -15,11 +15,13 @@
    along with Clementine.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "networkremote.h"
+
 #include "core/logging.h"
 #include "covers/currentartloader.h"
+#include "networkremote/zeroconf.h"
 #include "playlist/playlistmanager.h"
 
-#include "networkremote.h"
 
 #include <QDataStream>
 #include <QSettings>
@@ -87,6 +89,11 @@ void NetworkRemote::StartServer() {
   server_ipv6_->listen(QHostAddress::AnyIPv6, port_);
 
   qLog(Info) << "Listening on port " << port_;
+
+  if (Zeroconf::GetZeroconf()) {
+    Zeroconf::GetZeroconf()->Publish(
+        "local", "_clementine._tcp", "Clementine", port_);
+  }
 }
 
 void NetworkRemote::StopServer() {

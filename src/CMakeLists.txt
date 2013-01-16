@@ -213,12 +213,13 @@ set(SOURCES
   musicbrainz/chromaprinter.cpp
   musicbrainz/musicbrainzclient.cpp
   musicbrainz/tagfetcher.cpp
-  
-  networkremote/networkremotehelper.cpp
-  networkremote/networkremote.cpp
+
   networkremote/incomingdataparser.cpp
+  networkremote/networkremote.cpp
+  networkremote/networkremotehelper.cpp
   networkremote/outgoingdatacreator.cpp
   networkremote/remoteclient.cpp
+  networkremote/zeroconf.cpp
 
   playlist/dynamicplaylistcontrols.cpp
   playlist/playlist.cpp
@@ -905,6 +906,34 @@ if(HAVE_DBUS)
       dbus/org.gnome.SettingsDaemon.MediaKeys.xml
       dbus/gnomesettingsdaemon)
 
+  # org.freedesktop.Avahi.Server interface
+  add_custom_command(
+      OUTPUT
+      ${CMAKE_CURRENT_BINARY_DIR}/dbus/avahiserver.cpp
+      ${CMAKE_CURRENT_BINARY_DIR}/dbus/avahiserver.h
+      COMMAND ${QT_DBUSXML2CPP_EXECUTABLE}
+      dbus/org.freedesktop.Avahi.Server.xml
+      -p ${CMAKE_CURRENT_BINARY_DIR}/dbus/avahiserver
+      -i dbus/metatypes.h
+      DEPENDS dbus/org.freedesktop.Avahi.Server.xml
+      WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+  list(APPEND HEADERS ${CMAKE_CURRENT_BINARY_DIR}/dbus/avahiserver.h)
+  list(APPEND SOURCES ${CMAKE_CURRENT_BINARY_DIR}/dbus/avahiserver.cpp)
+
+  # org.freedesktop.Avahi.EntryGroup interface
+  add_custom_command(
+      OUTPUT
+      ${CMAKE_CURRENT_BINARY_DIR}/dbus/avahientrygroup.cpp
+      ${CMAKE_CURRENT_BINARY_DIR}/dbus/avahientrygroup.h
+      COMMAND ${QT_DBUSXML2CPP_EXECUTABLE}
+      dbus/org.freedesktop.Avahi.EntryGroup.xml
+      -p ${CMAKE_CURRENT_BINARY_DIR}/dbus/avahientrygroup
+      -i dbus/metatypes.h
+      DEPENDS dbus/org.freedesktop.Avahi.EntryGroup.xml
+      WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+  list(APPEND HEADERS ${CMAKE_CURRENT_BINARY_DIR}/dbus/avahientrygroup.h)
+  list(APPEND SOURCES ${CMAKE_CURRENT_BINARY_DIR}/dbus/avahientrygroup.cpp)
+
   # DeviceKit DBUS interfaces
   if(HAVE_DEVICEKIT)
     qt4_add_dbus_interface(SOURCES
@@ -928,6 +957,7 @@ optional_source(HAVE_DBUS
     core/mpris.cpp
     core/mpris1.cpp
     core/mpris2.cpp
+    networkremote/avahi.cpp
     ui/dbusscreensaver.cpp
   HEADERS
     core/mpris.h
