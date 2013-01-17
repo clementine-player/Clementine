@@ -416,6 +416,7 @@ add_subdirectory(3rdparty/qocoa)
 add_subdirectory(src)
 if (WIN32)
   add_subdirectory(3rdparty/qtwin)
+  add_subdirectory(3rdparty/tinysvcmdns)
 endif (WIN32)
 add_subdirectory(tests)
 add_subdirectory(dist)
@@ -458,8 +459,6 @@ configure_file(
 
 add_custom_target(uninstall
   "${CMAKE_COMMAND}" -P "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake")
-
-add_subdirectory(3rdparty/tinysvcmdns)
 
 # Show a summary of what we have enabled
 summary_show()

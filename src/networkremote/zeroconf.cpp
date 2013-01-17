@@ -10,6 +10,10 @@
 #include "bonjour.h"
 #endif
 
+#ifdef Q_OS_WIN32
+#include "tinysvcmdns.h"
+#endif
+
 Zeroconf* Zeroconf::sInstance = NULL;
 
 Zeroconf::~Zeroconf() {
@@ -23,6 +27,9 @@ Zeroconf* Zeroconf::GetZeroconf() {
     #endif  // HAVE_DBUS
     #ifdef Q_OS_DARWIN
       sInstance = new Bonjour;
+    #endif
+    #ifdef Q_OS_WIN32
+      sInstance = new TinySVCMDNS;
     #endif
   }
 

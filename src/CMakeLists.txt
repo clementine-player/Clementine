@@ -856,7 +856,13 @@ optional_source(APPLE
 )
 
 # Platform specific - Windows
-optional_source(WIN32 SOURCES widgets/osd_win.cpp)
+optional_source(WIN32
+  SOURCES
+    networkremote/tinysvcmdns.cpp
+    widgets/osd_win.cpp
+  INCLUDE_DIRECTORIES
+    ${CMAKE_SOURCE_DIR}/3rdparty/tinysvcmdns
+)
 
 # Platform specific - X11
 optional_source(LINUX SOURCES widgets/osd_x11.cpp)
@@ -1193,7 +1199,6 @@ target_link_libraries(clementine_lib
   ${CMAKE_THREAD_LIBS_INIT}
   z
   Qocoa
-  tinysvcmdns
 )
 
 if(ENABLE_VISUALISATIONS)
@@ -1293,6 +1298,7 @@ if (WIN32)
     ${ZLIB_LIBRARIES}
     ${MSWMDM_LIBRARIES}
     ${QTSPARKLE_LIBRARIES}
+    tinysvcmdns
     qtwin
   )
 endif (WIN32)
