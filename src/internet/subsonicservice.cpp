@@ -11,6 +11,7 @@
 #include "core/mergedproxymodel.h"
 #include "core/database.h"
 #include "core/closure.h"
+#include "core/taskmanager.h"
 
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
@@ -33,6 +34,7 @@ SubsonicService::SubsonicService(Application* app, InternetModel *parent)
     network_(new QNetworkAccessManager(this)),
     url_handler_(new SubsonicUrlHandler(this, this)),
     scanner_(new SubsonicLibraryScanner(this, this)),
+    load_database_task_id_(0),
     context_menu_(NULL),
     root_(NULL),
     library_backend_(NULL),
@@ -43,8 +45,8 @@ SubsonicService::SubsonicService(Application* app, InternetModel *parent)
 {
   app_->player()->RegisterUrlHandler(url_handler_);
 
-  connect(scanner_, SIGNAL(SongsDiscovered(SongList)),
-          SLOT(onSongsDiscovered(SongList)));
+  connect(scanner_, SIGNAL(ScanFinished()),
+          SLOT(ReloadDatabaseFinished()));
 
   library_backend_ = new LibraryBackend;
   library_backend_->moveToThread(app_->database()->thread());
@@ -69,11 +71,16 @@ SubsonicService::SubsonicService(Application* app, InternetModel *parent)
   library_sort_model_->setDynamicSortFilter(true);
   library_sort_model_->sort(0);
 
+  connect(library_backend_, SIGNAL(TotalSongCountUpdated(int)),
+          SLOT(UpdateTotalSongCount(int)));
+
   connect(this, SIGNAL(LoginStateChanged(SubsonicService::LoginState)),
           SLOT(onLoginStateChanged(SubsonicService::LoginState)));
 
   context_menu_ = new QMenu;
   context_menu_->addActions(GetPlaylistActions());
+  context_menu_->addSeparator();
+  context_menu_->addAction(IconLoader::Load("view-refresh"), tr("Refresh catalogue"), this, SLOT(ReloadDatabase()));
   context_menu_->addSeparator();
   context_menu_->addMenu(library_filter_->menu());
 }
@@ -94,9 +101,7 @@ void SubsonicService::LazyPopulate(QStandardItem *item)
   switch (item->data(InternetModel::Role_Type).toInt())
   {
   case InternetModel::Type_Service:
-    // TODO: initiate library loading
-    library_backend_->DeleteAll();
-    scanner_->Scan();
+    library_model_->Init();
     model()->merged_model()->AddSubModel(item->index(), library_sort_model_);
     break;
 
@@ -180,6 +185,28 @@ QNetworkReply* SubsonicService::Send(const QUrl &url)
   return reply;
 }
 
+void SubsonicService::UpdateTotalSongCount(int count)
+{
+  if (count == 0 && !load_database_task_id_)
+    ReloadDatabase();
+}
+
+void SubsonicService::ReloadDatabase()
+{
+  if (!load_database_task_id_)
+    load_database_task_id_ = app_->task_manager()->StartTask(tr("Fetching Subsonic library"));
+  scanner_->Scan();
+}
+
+void SubsonicService::ReloadDatabaseFinished()
+{
+  app_->task_manager()->SetTaskFinished(load_database_task_id_);
+  load_database_task_id_ = 0;
+
+  library_backend_->DeleteAll();
+  library_backend_->AddOrUpdateSongs(scanner_->GetSongs());
+}
+
 void SubsonicService::onLoginStateChanged(SubsonicService::LoginState newstate)
 {
   // TODO: library refresh logic?
@@ -239,19 +266,14 @@ void SubsonicService::onPingFinished(QNetworkReply *reply)
   emit LoginStateChanged(login_state_);
 }
 
-void SubsonicService::onSongsDiscovered(SongList songs)
-{
-  library_backend_->AddOrUpdateSongs(songs);
-}
-
 
 const int SubsonicLibraryScanner::kAlbumChunkSize = 500;
-const int SubsonicLibraryScanner::kSongListMinChunkSize = 500;
 const int SubsonicLibraryScanner::kConcurrentRequests = 8;
 
 SubsonicLibraryScanner::SubsonicLibraryScanner(SubsonicService* service, QObject* parent)
   : QObject(parent),
-    service_(service)
+    service_(service),
+    scanning_(false)
 {
 }
 
@@ -261,8 +283,13 @@ SubsonicLibraryScanner::~SubsonicLibraryScanner()
 
 void SubsonicLibraryScanner::Scan()
 {
+  if (scanning_)
+    return;
+
   album_queue_.clear();
-  songlist_buffer_.clear();
+  pending_requests_.clear();
+  songs_.clear();
+  scanning_ = true;
   GetAlbumList(0);
 }
 
@@ -288,11 +315,15 @@ void SubsonicLibraryScanner::onGetAlbumListFinished(QNetworkReply *reply, int of
     reader.skipCurrentElement();
   }
 
-  // If this reply was non-empty, get the next chunk, otherwise start fetching songs
   if (albums_added > 0) {
+    // Non-empty reply means potentially more albums to fetch
     GetAlbumList(offset + kAlbumChunkSize);
+  } else if (album_queue_.size() == 0) {
+    // Empty reply and no albums means an empty Subsonic server
+    scanning_ = false;
   } else {
-    // Start up the maximum number of concurrent requests
+    // Empty reply but we have some albums, time to start fetching songs
+    // Start up the maximum number of concurrent requests, finished requests get replaced with new ones
     for (int i = 0; i < kConcurrentRequests && !album_queue_.empty(); ++i) {
       GetAlbum(album_queue_.dequeue());
     }
@@ -302,6 +333,7 @@ void SubsonicLibraryScanner::onGetAlbumListFinished(QNetworkReply *reply, int of
 void SubsonicLibraryScanner::onGetAlbumFinished(QNetworkReply *reply)
 {
   reply->deleteLater();
+  pending_requests_.remove(reply);
 
   QXmlStreamReader reader(reply);
   reader.readNextStartElement();
@@ -339,21 +371,18 @@ void SubsonicLibraryScanner::onGetAlbumFinished(QNetworkReply *reply)
     song.set_directory_id(0);
     song.set_mtime(0);
     song.set_ctime(0);
-    songlist_buffer_ << song;
+    songs_ << song;
     reader.skipCurrentElement();
   }
 
-  // If the songlist buffer is big enough, or we're (nearly) done, emit the songlist (see below)
-  bool should_emit = album_queue_.empty() || songlist_buffer_.size() >= kSongListMinChunkSize;
-
-  // Start the next request
-  if (!album_queue_.empty()) {
+  // Start the next request if albums remain
+  if (!album_queue_.empty())
     GetAlbum(album_queue_.dequeue());
-  }
 
-  if (should_emit) {
-    emit SongsDiscovered(songlist_buffer_);
-    songlist_buffer_.clear();
+  // If this was the last response, we're done!
+  if (album_queue_.empty() && pending_requests_.empty()) {
+    scanning_ = false;
+    emit ScanFinished();
   }
 }
 
@@ -377,4 +406,5 @@ void SubsonicLibraryScanner::GetAlbum(QString id)
   NewClosure(reply, SIGNAL(finished()),
              this, SLOT(onGetAlbumFinished(QNetworkReply*)),
              reply);
+  pending_requests_.insert(reply);
 }

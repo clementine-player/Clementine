@@ -70,8 +70,6 @@ class SubsonicService : public InternetService
 
   // Subsonic API methods
   void Ping();
-  void GetIndexes();
-  void GetMusicDirectory(const QString &id);
 
   QUrl BuildRequestUrl(const QString &view);
   // Convenience function to reduce QNetworkRequest/QSslConfiguration boilerplate
@@ -93,7 +91,9 @@ class SubsonicService : public InternetService
 
   QNetworkAccessManager* network_;
   SubsonicUrlHandler* url_handler_;
+
   SubsonicLibraryScanner* scanner_;
+  int load_database_task_id_;
 
   QMenu* context_menu_;
   QStandardItem* root_;
@@ -111,9 +111,11 @@ class SubsonicService : public InternetService
   LoginState login_state_;
 
  private slots:
+  void UpdateTotalSongCount(int count);
+  void ReloadDatabase();
+  void ReloadDatabaseFinished();
   void onLoginStateChanged(SubsonicService::LoginState newstate);
   void onPingFinished(QNetworkReply* reply);
-  void onSongsDiscovered(SongList songs);
 };
 
 class SubsonicLibraryScanner : public QObject {
@@ -124,13 +126,13 @@ class SubsonicLibraryScanner : public QObject {
   ~SubsonicLibraryScanner();
 
   void Scan();
+  const SongList& GetSongs() const { return songs_; }
 
   static const int kAlbumChunkSize;
-  static const int kSongListMinChunkSize;
   static const int kConcurrentRequests;
 
  signals:
-  void SongsDiscovered(SongList);
+  void ScanFinished();
 
  private slots:
   // Step 1: use getAlbumList2 type=alphabeticalByName to list all albums
@@ -143,8 +145,10 @@ class SubsonicLibraryScanner : public QObject {
   void GetAlbum(QString id);
 
   SubsonicService* service_;
+  bool scanning_;
   QQueue<QString> album_queue_;
-  SongList songlist_buffer_;
+  QSet<QNetworkReply*> pending_requests_;
+  SongList songs_;
 };
 
 #endif // SUBSONICSERVICE_H
