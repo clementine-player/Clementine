@@ -32,7 +32,13 @@
 #include <stdio.h>
 #include <string.h>
 #include <assert.h>
+
+#ifdef _WIN32
+#include <winsock.h>
+#include <in6addr.h>
+#else
 #include <netinet/in.h>
+#endif
 
 
 #define DEFAULT_TTL		120

@@ -26,15 +26,23 @@
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#ifdef _WIN32
+#include <winsock2.h>
+#include <ws2tcpip.h>
+#define LOG_ERR 3
+#define pipe(fds) _pipe(fds, 4096, _O_BINARY)
+#else
+#include <sys/select.h>
 #include <sys/socket.h>
 #include <sys/ioctl.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <net/if.h>
+#include <syslog.h>
+#endif
 
 #include <sys/types.h>
 #include <sys/stat.h>
-#include <sys/select.h>
 #include <fcntl.h>
 #include <signal.h>
 #include <string.h>
@@ -44,7 +52,6 @@
 #include <unistd.h>
 #include <assert.h>
 #include <pthread.h>
-#include <syslog.h>
 
 /*
  * Define a proper IP socket level if not already done.
@@ -426,7 +433,11 @@ static void main_loop(struct mdnsd *svr) {
 
 	free(pkt_buffer);
 
+#ifdef _WIN32
+	closesocket(svr->sockfd);
+#else
 	close(svr->sockfd);
+#endif
 
 	svr->stop_flag = 2;
 }
@@ -582,8 +593,13 @@ void mdnsd_stop(struct mdnsd *s) {
 	while (s->stop_flag != 2)
 		select(0, NULL, NULL, NULL, &tv);
 
+#ifdef _WIN32
+	closesocket(s->notify_pipe[0]);
+	closesocket(s->notify_pipe[1]);
+#else
 	close(s->notify_pipe[0]);
 	close(s->notify_pipe[1]);
+#endif
 
 	pthread_mutex_destroy(&s->data_lock);
 	rr_group_destroy(s->group);

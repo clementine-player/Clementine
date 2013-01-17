@@ -26,8 +26,16 @@
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#ifdef _WIN32
+#include <winsock2.h>
+#include <in6addr.h>
+#include <ws2tcpip.h>
+#else
 #include <sys/socket.h>
+#include <netdb.h>
 #include <arpa/inet.h>
+#endif
+
 #include <stdio.h>
 #include "mdns.h"
 #include "mdnsd.h"
@@ -52,8 +60,21 @@ int main(int argc, char *argv[]) {
 	mdnsd_add_rr(svr, a2_e);
 
 	struct rr_entry *aaaa_e = NULL;
-	struct in6_addr v6addr;
-	inet_pton(AF_INET6, "fe80::e2f8:47ff:fe20:28e0", &v6addr);
+
+	struct addrinfo hints;
+	memset(&hints, 0, sizeof(hints));
+	hints.ai_family = AF_INET6;
+	hints.ai_flags = AI_NUMERICHOST;
+	struct addrinfo* results;
+	getaddrinfo(
+		"fe80::e2f8:47ff:fe20:28e0",
+		NULL,
+		&hints,
+		&results);
+	struct sockaddr_in6* addr = (struct sockaddr_in6*)results->ai_addr;
+	struct in6_addr v6addr = addr->sin6_addr;
+	freeaddrinfo(results);
+
 	aaaa_e = rr_create_aaaa(create_nlabel(hostname), &v6addr);
 
 	mdnsd_add_rr(svr, aaaa_e);
