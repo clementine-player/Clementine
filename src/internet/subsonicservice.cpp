@@ -285,8 +285,12 @@ void SubsonicLibraryScanner::onGetAlbumFinished(QNetworkReply *reply)
     return;
   }
 
+  // Read album information
   reader.readNextStartElement();
   Q_ASSERT(reader.name() == "album");
+  QString album_artist = reader.attributes().value("artist").toString();
+
+  // Read song information
   while (reader.readNextStartElement()) {
     Q_ASSERT(reader.name() == "song");
     Song song;
@@ -295,6 +299,7 @@ void SubsonicLibraryScanner::onGetAlbumFinished(QNetworkReply *reply)
     song.set_album(reader.attributes().value("album").toString());
     song.set_track(reader.attributes().value("track").toString().toInt());
     song.set_artist(reader.attributes().value("artist").toString());
+    song.set_albumartist(album_artist);
     song.set_bitrate(reader.attributes().value("bitRate").toString().toInt());
     song.set_year(reader.attributes().value("year").toString().toInt());
     song.set_genre(reader.attributes().value("genre").toString());
