@@ -60,6 +60,8 @@ class SubsonicService : public InternetService
 
   QStandardItem* CreateRootItem();
   void LazyPopulate(QStandardItem *item);
+  void ShowContextMenu(const QPoint &global_pos);
+  QWidget* HeaderWidget() const;
   void ReloadSettings();
 
   void Login();
@@ -86,17 +88,19 @@ class SubsonicService : public InternetService
  signals:
   void LoginStateChanged(SubsonicService::LoginState newstate);
 
- protected:
-  QModelIndex GetCurrentIndex();
-
  private:
-  QModelIndex context_item_;
+  void EnsureMenuCreated();
+
   QNetworkAccessManager* network_;
   SubsonicUrlHandler* url_handler_;
   SubsonicLibraryScanner* scanner_;
 
+  QMenu* context_menu_;
+  QStandardItem* root_;
+
   LibraryBackend* library_backend_;
   LibraryModel* library_model_;
+  LibraryFilterWidget* library_filter_;
   QSortFilterProxyModel* library_sort_model_;
 
   // Configuration

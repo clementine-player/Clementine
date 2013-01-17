@@ -7,6 +7,7 @@
 #include "core/utilities.h"
 #include "ui/iconloader.h"
 #include "library/librarybackend.h"
+#include "library/libraryfilterwidget.h"
 #include "core/mergedproxymodel.h"
 #include "core/database.h"
 #include "core/closure.h"
@@ -17,6 +18,7 @@
 #include <QSslConfiguration>
 #include <QXmlStreamReader>
 #include <QSortFilterProxyModel>
+#include <QMenu>
 
 const char* SubsonicService::kServiceName = "Subsonic";
 const char* SubsonicService::kSettingsGroup = "Subsonic";
@@ -31,8 +33,11 @@ SubsonicService::SubsonicService(Application* app, InternetModel *parent)
     network_(new QNetworkAccessManager(this)),
     url_handler_(new SubsonicUrlHandler(this, this)),
     scanner_(new SubsonicLibraryScanner(this, this)),
+    context_menu_(NULL),
+    root_(NULL),
     library_backend_(NULL),
     library_model_(NULL),
+    library_filter_(NULL),
     library_sort_model_(new QSortFilterProxyModel(this)),
     login_state_(LoginState_OtherError)
 {
@@ -53,6 +58,12 @@ SubsonicService::SubsonicService(Application* app, InternetModel *parent)
   library_model_->set_show_various_artists(false);
   library_model_->set_show_smart_playlists(false);
 
+  library_filter_ = new LibraryFilterWidget(0);
+  library_filter_->SetSettingsGroup(kSettingsGroup);
+  library_filter_->SetLibraryModel(library_model_);
+  library_filter_->SetFilterHint(tr("Search Subsonic"));
+  library_filter_->SetAgeFilterEnabled(false);
+
   library_sort_model_->setSourceModel(library_model_);
   library_sort_model_->setSortRole(LibraryModel::Role_SortText);
   library_sort_model_->setDynamicSortFilter(true);
@@ -60,6 +71,11 @@ SubsonicService::SubsonicService(Application* app, InternetModel *parent)
 
   connect(this, SIGNAL(LoginStateChanged(SubsonicService::LoginState)),
           SLOT(onLoginStateChanged(SubsonicService::LoginState)));
+
+  context_menu_ = new QMenu;
+  context_menu_->addActions(GetPlaylistActions());
+  context_menu_->addSeparator();
+  context_menu_->addMenu(library_filter_->menu());
 }
 
 SubsonicService::~SubsonicService()
@@ -68,9 +84,9 @@ SubsonicService::~SubsonicService()
 
 QStandardItem* SubsonicService::CreateRootItem()
 {
-  QStandardItem* item = new QStandardItem(QIcon(":providers/subsonic.png"), kServiceName);
-  item->setData(true, InternetModel::Role_CanLazyLoad);
-  return item;
+  root_ = new QStandardItem(QIcon(":providers/subsonic.png"), kServiceName);
+  root_->setData(true, InternetModel::Role_CanLazyLoad);
+  return root_;
 }
 
 void SubsonicService::LazyPopulate(QStandardItem *item)
@@ -87,6 +103,21 @@ void SubsonicService::LazyPopulate(QStandardItem *item)
   default:
     break;
   }
+}
+
+void SubsonicService::ShowContextMenu(const QPoint &global_pos)
+{
+  const bool is_valid = model()->current_index().model() == library_sort_model_;
+
+  GetAppendToPlaylistAction()->setEnabled(is_valid);
+  GetReplacePlaylistAction()->setEnabled(is_valid);
+  GetOpenInNewPlaylistAction()->setEnabled(is_valid);
+  context_menu_->popup(global_pos);
+}
+
+QWidget* SubsonicService::HeaderWidget() const
+{
+  return library_filter_;
 }
 
 void SubsonicService::ReloadSettings()
@@ -147,11 +178,6 @@ QNetworkReply* SubsonicService::Send(const QUrl &url)
   request.setSslConfiguration(sslconfig);
   QNetworkReply *reply = network_->get(request);
   return reply;
-}
-
-QModelIndex SubsonicService::GetCurrentIndex()
-{
-  return context_item_;
 }
 
 void SubsonicService::onLoginStateChanged(SubsonicService::LoginState newstate)
