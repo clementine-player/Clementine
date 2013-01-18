@@ -6,11 +6,15 @@ set(TINYSVCMDNS-SOURCES
   mdnsd.c
 )
 
+find_library(PTHREAD
+  pthreadGC2
+)
+
 add_library(tinysvcmdns STATIC
   ${TINYSVCMDNS-SOURCES}
 )
 
 target_link_libraries(tinysvcmdns
-  pthreadGC2
+  ${PTHREAD}
   ws2_32
 )
