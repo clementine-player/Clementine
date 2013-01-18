@@ -12,5 +12,5 @@ add_library(tinysvcmdns STATIC
 
 target_link_libraries(tinysvcmdns
   pthreadGC2
-  ws_32
+  ws2_32
 )
