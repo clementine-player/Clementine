@@ -62,6 +62,8 @@ endif(HAVE_BREAKPAD)
 include_directories(${CMAKE_SOURCE_DIR}/ext/libclementine-common)
 include_directories(${CMAKE_SOURCE_DIR}/ext/libclementine-tagreader)
 include_directories(${CMAKE_BINARY_DIR}/ext/libclementine-tagreader)
+include_directories(${CMAKE_SOURCE_DIR}/ext/libclementine-remote)
+include_directories(${CMAKE_BINARY_DIR}/ext/libclementine-remote)
 
 cmake_policy(SET CMP0011 NEW)
 include(../cmake/ParseArguments.cmake)
@@ -212,6 +214,13 @@ set(SOURCES
   musicbrainz/musicbrainzclient.cpp
   musicbrainz/tagfetcher.cpp
 
+  networkremote/incomingdataparser.cpp
+  networkremote/networkremote.cpp
+  networkremote/networkremotehelper.cpp
+  networkremote/outgoingdatacreator.cpp
+  networkremote/remoteclient.cpp
+  networkremote/zeroconf.cpp
+
   playlist/dynamicplaylistcontrols.cpp
   playlist/playlist.cpp
   playlist/playlistbackend.cpp
@@ -323,6 +332,7 @@ set(SOURCES
   ui/iconloader.cpp
   ui/mainwindow.cpp
   ui/networkproxysettingspage.cpp
+  ui/networkremotesettingspage.cpp
   ui/notificationssettingspage.cpp
   ui/organisedialog.cpp
   ui/organiseerrordialog.cpp
@@ -483,6 +493,12 @@ set(HEADERS
   musicbrainz/acoustidclient.h
   musicbrainz/musicbrainzclient.h
   musicbrainz/tagfetcher.h
+  
+  networkremote/networkremotehelper.h
+  networkremote/networkremote.h
+  networkremote/incomingdataparser.h
+  networkremote/outgoingdatacreator.h
+  networkremote/remoteclient.h
 
   playlist/dynamicplaylistcontrols.h
   playlist/playlist.h
@@ -580,6 +596,7 @@ set(HEADERS
   ui/globalshortcutssettingspage.h
   ui/mainwindow.h
   ui/networkproxysettingspage.h
+  ui/networkremotesettingspage.h
   ui/notificationssettingspage.h
   ui/organisedialog.h
   ui/organiseerrordialog.h
@@ -697,6 +714,7 @@ set(UI
   ui/globalshortcutssettingspage.ui
   ui/mainwindow.ui
   ui/networkproxysettingspage.ui
+  ui/networkremotesettingspage.ui
   ui/notificationssettingspage.ui
   ui/organisedialog.ui
   ui/organiseerrordialog.ui
@@ -825,6 +843,7 @@ optional_source(APPLE
     core/mac_startup.mm
     core/scoped_nsautorelease_pool.mm
     devices/macdevicelister.mm
+    networkremote/bonjour.mm
     ui/globalshortcutgrabber.mm
     ui/macscreensaver.cpp
     ui/macsystemtrayicon.mm
@@ -837,7 +856,13 @@ optional_source(APPLE
 )
 
 # Platform specific - Windows
-optional_source(WIN32 SOURCES widgets/osd_win.cpp)
+optional_source(WIN32
+  SOURCES
+    networkremote/tinysvcmdns.cpp
+    widgets/osd_win.cpp
+  INCLUDE_DIRECTORIES
+    ${CMAKE_SOURCE_DIR}/3rdparty/tinysvcmdns
+)
 
 # Platform specific - X11
 optional_source(LINUX SOURCES widgets/osd_x11.cpp)
@@ -888,6 +913,34 @@ if(HAVE_DBUS)
       dbus/org.gnome.SettingsDaemon.MediaKeys.xml
       dbus/gnomesettingsdaemon)
 
+  # org.freedesktop.Avahi.Server interface
+  add_custom_command(
+      OUTPUT
+      ${CMAKE_CURRENT_BINARY_DIR}/dbus/avahiserver.cpp
+      ${CMAKE_CURRENT_BINARY_DIR}/dbus/avahiserver.h
+      COMMAND ${QT_DBUSXML2CPP_EXECUTABLE}
+      dbus/org.freedesktop.Avahi.Server.xml
+      -p ${CMAKE_CURRENT_BINARY_DIR}/dbus/avahiserver
+      -i dbus/metatypes.h
+      DEPENDS dbus/org.freedesktop.Avahi.Server.xml
+      WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+  list(APPEND HEADERS ${CMAKE_CURRENT_BINARY_DIR}/dbus/avahiserver.h)
+  list(APPEND SOURCES ${CMAKE_CURRENT_BINARY_DIR}/dbus/avahiserver.cpp)
+
+  # org.freedesktop.Avahi.EntryGroup interface
+  add_custom_command(
+      OUTPUT
+      ${CMAKE_CURRENT_BINARY_DIR}/dbus/avahientrygroup.cpp
+      ${CMAKE_CURRENT_BINARY_DIR}/dbus/avahientrygroup.h
+      COMMAND ${QT_DBUSXML2CPP_EXECUTABLE}
+      dbus/org.freedesktop.Avahi.EntryGroup.xml
+      -p ${CMAKE_CURRENT_BINARY_DIR}/dbus/avahientrygroup
+      -i dbus/metatypes.h
+      DEPENDS dbus/org.freedesktop.Avahi.EntryGroup.xml
+      WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+  list(APPEND HEADERS ${CMAKE_CURRENT_BINARY_DIR}/dbus/avahientrygroup.h)
+  list(APPEND SOURCES ${CMAKE_CURRENT_BINARY_DIR}/dbus/avahientrygroup.cpp)
+
   # DeviceKit DBUS interfaces
   if(HAVE_DEVICEKIT)
     qt4_add_dbus_interface(SOURCES
@@ -911,6 +964,7 @@ optional_source(HAVE_DBUS
     core/mpris.cpp
     core/mpris1.cpp
     core/mpris2.cpp
+    networkremote/avahi.cpp
     ui/dbusscreensaver.cpp
   HEADERS
     core/mpris.h
@@ -1125,6 +1179,7 @@ add_dependencies(clementine_lib pot)
 target_link_libraries(clementine_lib
   libclementine-common
   libclementine-tagreader
+  libclementine-remote
   ${SHA2_LIBRARIES}
   ${TAGLIB_LIBRARIES}
   ${MYGPOQT_LIBRARIES}
@@ -1243,6 +1298,7 @@ if (WIN32)
     ${ZLIB_LIBRARIES}
     ${MSWMDM_LIBRARIES}
     ${QTSPARKLE_LIBRARIES}
+    tinysvcmdns
     qtwin
   )
 endif (WIN32)

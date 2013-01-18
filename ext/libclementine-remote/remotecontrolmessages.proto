@@ -1,0 +1,157 @@
+package pb.remote;
+
+// The supported message types
+enum MsgType {
+  UNKNOWN = 0;
+  // Messages generally send from client to server
+  CONNECT = 1;
+  DISCONNECT = 2;
+  REQUEST_PLAYLISTS = 3;
+  REQUEST_PLAYLIST_SONGS = 4;
+  CHANGE_SONG = 5;
+  SET_VOLUME = 6;
+
+  // Messages send by both
+  PLAY = 20;
+  PLAYPAUSE = 21;
+  PAUSE = 22;
+  STOP = 23;
+  NEXT = 24;
+  PREVIOUS = 25;
+  SHUFFLE_PLAYLIST = 26;
+  // Messages that contain the repeat or random mode
+  // Either set by client or clementine
+  REPEAT = 27;
+  SHUFFLE = 28;
+
+  // Messages send from server to client
+  INFO = 40;
+  CURRENT_METAINFO = 41;
+  PLAYLISTS = 42;
+  PLAYLIST_SONGS = 43;
+  ENGINE_STATE_CHANGED = 44;
+  KEEP_ALIVE = 45;
+}
+
+// Valid Engine states
+enum EngineState {
+  Empty = 0;
+  Idle = 1;
+  Playing = 2;
+  Paused = 3;
+}
+
+// Song Metadata
+message SongMetadata {
+  optional int32 id = 1; // unique id of the song
+  optional int32 index = 2; // Index of the current row of the active playlist
+  optional string title = 3;
+  optional string album = 4;
+  optional string artist = 5;
+  optional string albumartist = 6;
+  optional int32 track = 7;
+  optional int32 disc = 8;
+  optional string pretty_year = 9;
+  optional string genre = 10;
+  optional int32 playcount = 11;
+  optional string pretty_length = 12;
+  optional bytes art = 13;
+}
+
+// Playlist informations
+message Playlist {
+  optional int32 id = 1;
+  optional string name = 2;
+  optional int32 item_count = 3;
+  optional bool active = 4;
+}
+
+// Valid Repeatmodes
+enum RepeatMode {
+  Repeat_Off = 0;
+  Repeat_Track = 1;
+  Repeat_Album = 2;
+  Repeat_Playlist = 3;
+}
+
+// Valid Shuffle modes
+enum ShuffleMode {
+  Shuffle_Off = 0;
+  Shuffle_All = 1;
+  Shuffle_InsideAlbum = 2;
+  Shuffle_Albums = 3;
+}
+
+// A Client requests songs from a specific playlist
+message RequestPlaylistSongs {
+  optional int32 id = 1;
+}
+
+// Client want to change track
+message RequestChangeSong {
+  // In which playlist is the song?
+  optional int32 playlist_id = 1;
+  // And on which position?
+  optional int32 song_index = 2;
+}
+
+// Set the volume
+message RequestSetVolume {
+  optional int32 volume = 1;
+}
+
+// Repeat and Random messages
+message Repeat {
+  optional RepeatMode repeat_mode = 1;
+}
+
+message Shuffle {
+  optional ShuffleMode shuffle_mode = 1;
+}
+
+// Response from server
+// General info
+message ResponseClementineInfo {
+  optional string version = 1;
+  optional EngineState state = 2;
+}
+
+// The current song played
+message ResponseCurrentMetadata {
+  optional SongMetadata song_metadata = 1;
+}
+
+// The playlists in clementine
+message ResponsePlaylists {
+  repeated Playlist playlist = 1;
+}
+
+// A list of songs in a playlist
+message ResponsePlaylistSongs {
+  optional Playlist requested_playlist = 1;
+  
+  // The songs that are in the playlist
+  repeated SongMetadata songs = 2;
+}
+
+// The current state of the play engine
+message ResponseEngineStateChanged {
+  optional EngineState state = 1;
+}
+
+// The message itself
+message Message {
+  optional int32 version = 1 [default=1];
+  optional MsgType type = 2 [default=UNKNOWN]; // What data is in the message?
+
+  optional RequestPlaylistSongs request_playlist_songs = 10;
+  optional RequestChangeSong request_change_song = 11;
+  optional RequestSetVolume request_set_volume = 12;
+  optional Repeat repeat = 13;
+  optional Shuffle shuffle = 14;
+  optional ResponseClementineInfo response_clementine_info = 15;
+  optional ResponseCurrentMetadata response_current_metadata = 16;
+  optional ResponsePlaylists response_playlists = 17;
+  optional ResponsePlaylistSongs response_playlist_songs = 18;
+  optional ResponseEngineStateChanged response_engine_state_changed = 19;
+}
