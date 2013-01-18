@@ -197,6 +197,7 @@ void MagnatuneService::ReloadDatabaseFinished() {
 
   // Add the songs to the database
   library_backend_->AddOrUpdateSongs(songs);
+  library_model_->Reset();
 }
 
 Song MagnatuneService::ReadTrack(QXmlStreamReader& reader) {
