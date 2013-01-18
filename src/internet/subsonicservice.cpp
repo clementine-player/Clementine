@@ -205,6 +205,7 @@ void SubsonicService::ReloadDatabaseFinished()
 
   library_backend_->DeleteAll();
   library_backend_->AddOrUpdateSongs(scanner_->GetSongs());
+  library_model_->Reset();
 }
 
 void SubsonicService::onLoginStateChanged(SubsonicService::LoginState newstate)
