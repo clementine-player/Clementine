@@ -32,6 +32,8 @@
 #include "library/librarymodel.h"
 #include "library/groupbydialog.h"
 
+#include <boost/bind.hpp>
+
 #include <QMenu>
 #include <QSortFilterProxyModel>
 #include <QStandardItem>
@@ -154,8 +156,21 @@ GlobalSearchView::~GlobalSearchView() {
 }
 
 namespace {
-  bool CompareProviderName(SearchProvider* left, SearchProvider* right) {
-    return left->name() < right->name();
+  bool CompareProvider(const QStringList& provider_order,
+                       SearchProvider* left, SearchProvider* right) {
+    const int left_index = provider_order.indexOf(left->id());
+    const int right_index = provider_order.indexOf(right->id());
+    if (left_index == -1 && right_index == -1) {
+      // None are in our provider list: compare name instead
+      return left->name() < right->name();
+    } else if (left_index == -1) {
+      // Left provider not in provider list
+      return false;
+    } else if (right_index == -1) {
+      // Right provider not in provider list
+      return true;
+    }
+    return left_index < right_index;
   }
 }
 
@@ -191,9 +206,10 @@ void GlobalSearchView::ReloadSettings() {
   ui_->providers_group->setVisible(show_providers_);
 
   if (show_providers_) {
-    // Sort the list of providers alphabetically
+    // Sort the list of providers
     QList<SearchProvider*> providers = engine_->providers();
-    qSort(providers.begin(), providers.end(), CompareProviderName);
+    qSort(providers.begin(), providers.end(),
+          boost::bind(&CompareProvider, provider_order, _1, _2));
   
     bool any_disabled = false;
   
