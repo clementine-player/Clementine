@@ -55,6 +55,8 @@ SubsonicService::SubsonicService(Application* app, InternetModel *parent)
                          QString::null,
                          QString::null,
                          kFtsTable);
+  connect(library_backend_, SIGNAL(TotalSongCountUpdated(int)),
+          SLOT(UpdateTotalSongCount(int)));
 
   library_model_ = new LibraryModel(library_backend_, app_, this);
   library_model_->set_show_various_artists(false);
@@ -70,9 +72,6 @@ SubsonicService::SubsonicService(Application* app, InternetModel *parent)
   library_sort_model_->setSortRole(LibraryModel::Role_SortText);
   library_sort_model_->setDynamicSortFilter(true);
   library_sort_model_->sort(0);
-
-  connect(library_backend_, SIGNAL(TotalSongCountUpdated(int)),
-          SLOT(UpdateTotalSongCount(int)));
 
   connect(this, SIGNAL(LoginStateChanged(SubsonicService::LoginState)),
           SLOT(onLoginStateChanged(SubsonicService::LoginState)));
