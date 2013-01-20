@@ -102,6 +102,7 @@ class SubsonicService : public InternetService
   LibraryModel* library_model_;
   LibraryFilterWidget* library_filter_;
   QSortFilterProxyModel* library_sort_model_;
+  int total_song_count_;
 
   // Configuration
   QString server_;

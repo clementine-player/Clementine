@@ -41,6 +41,7 @@ SubsonicService::SubsonicService(Application* app, InternetModel *parent)
     library_model_(NULL),
     library_filter_(NULL),
     library_sort_model_(new QSortFilterProxyModel(this)),
+    total_song_count_(0),
     login_state_(LoginState_OtherError)
 {
   app_->player()->RegisterUrlHandler(url_handler_);
@@ -101,6 +102,9 @@ void SubsonicService::LazyPopulate(QStandardItem *item)
   {
   case InternetModel::Type_Service:
     library_model_->Init();
+    if (total_song_count_ == 0 && !load_database_task_id_) {
+      ReloadDatabase();
+    }
     model()->merged_model()->AddSubModel(item->index(), library_sort_model_);
     break;
 
@@ -186,8 +190,7 @@ QNetworkReply* SubsonicService::Send(const QUrl &url)
 
 void SubsonicService::UpdateTotalSongCount(int count)
 {
-  if (count == 0 && !load_database_task_id_)
-    ReloadDatabase();
+  total_song_count_ = count;
 }
 
 void SubsonicService::ReloadDatabase()
