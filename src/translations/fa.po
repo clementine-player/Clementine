@@ -6,12 +6,13 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011.
 #   <mehdioa@gmail.com>, 2012.
 #   <nevercom@gmail.com>, 2012.
+# saeed zeyghami <saeed.zeyghami@gmail.com>, 2013.
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-12-05 15:46+0000\n"
-"Last-Translator: mehdioa <mehdioa@gmail.com>\n"
+"PO-Revision-Date: 2013-01-19 00:08+0000\n"
+"Last-Translator: saeedzeyghami <saeed.zeyghami@gmail.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: fa\n"
@@ -319,6 +320,10 @@ msgstr "درباره‌ی کلمنتاین..."
 #: ../bin/src/ui_mainwindow.h:709
 msgid "About Qt..."
 msgstr "درباره‌ی کیو‌تی..."
+
+#: ../bin/src/ui_networkremotesettingspage.h:116
+msgid "Accept non public clients only"
+msgstr "فقط پذیرش مهمان های غیر عمومی "
 
 #: ../bin/src/ui_groovesharksettingspage.h:113
 #: ../bin/src/ui_magnatunesettingspage.h:155
@@ -653,7 +658,7 @@ msgstr "شمایل"
 msgid "Append files/URLs to the playlist"
 msgstr "پیوست پرونده/نشانی اینترنتی به لیست‌پخش"
 
-#: devices/deviceview.cpp:211 globalsearch/globalsearchview.cpp:417
+#: devices/deviceview.cpp:211 globalsearch/globalsearchview.cpp:433
 #: internet/internetservice.cpp:56 library/libraryview.cpp:367
 #: widgets/fileviewlist.cpp:32
 msgid "Append to current playlist"
@@ -1115,7 +1120,7 @@ msgstr "پیکربندی گرووشارک..."
 msgid "Configure Last.fm..."
 msgstr "پیکربندی Last.fm..."
 
-#: internet/magnatuneservice.cpp:278
+#: internet/magnatuneservice.cpp:279
 msgid "Configure Magnatune..."
 msgstr "پیکربندی مگناتیون..."
 
@@ -1127,7 +1132,7 @@ msgstr "پیکربندی میان‌برها"
 msgid "Configure Spotify..."
 msgstr "پیکربندی اسپاتیفای..."
 
-#: globalsearch/globalsearchview.cpp:138 globalsearch/globalsearchview.cpp:430
+#: globalsearch/globalsearchview.cpp:140 globalsearch/globalsearchview.cpp:446
 msgid "Configure global search..."
 msgstr "پیکربندی جستجوی سراسری..."
 
@@ -1613,7 +1618,7 @@ msgstr "بارگیری خودکار داستانهای تازه"
 msgid "Download queued"
 msgstr "صف بارگیری"
 
-#: internet/magnatuneservice.cpp:274
+#: internet/magnatuneservice.cpp:275
 msgid "Download this album"
 msgstr "بارگیری آلبوم"
 
@@ -2128,7 +2133,7 @@ msgstr "لرزش کامل"
 msgid "GStreamer audio engine"
 msgstr "موتور صوتی GStreamer"
 
-#: ui/settingsdialog.cpp:126
+#: ui/settingsdialog.cpp:127
 msgid "General"
 msgstr "عمومی"
 
@@ -2216,7 +2221,7 @@ msgstr "نشانی اینترنتی آهنگ‌های گرووشارک"
 msgid "Group Library by..."
 msgstr "کتابخانه را گروه‌بندی کن طبق..."
 
-#: globalsearch/globalsearchview.cpp:428 library/libraryfilterwidget.cpp:82
+#: globalsearch/globalsearchview.cpp:444 library/libraryfilterwidget.cpp:82
 msgid "Group by"
 msgstr "گروه‌بندی طبق"
 
@@ -2385,7 +2390,7 @@ msgstr "بررسی درستی"
 msgid "Internet"
 msgstr "اینترنت"
 
-#: ui/settingsdialog.cpp:147
+#: ui/settingsdialog.cpp:149
 msgid "Internet providers"
 msgstr "فراهم‌کنندگان اینترنت"
 
@@ -2962,6 +2967,10 @@ msgstr "شبکه"
 msgid "Network Proxy"
 msgstr "پیشکار پراکسی"
 
+#: ../bin/src/ui_networkremotesettingspage.h:107
+msgid "Network Remote"
+msgstr "کنترل از راه دور شبکه "
+
 #: playlist/playlistdelegates.cpp:299 ui/edittagdialog.cpp:481
 msgid "Never"
 msgstr "هرگز"
@@ -3118,13 +3127,21 @@ msgstr "Ogg Speex"
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
 
+#: ../bin/src/ui_networkremotesettingspage.h:111
+msgid ""
+"Only accept connections from clients within the ip ranges:\n"
+"10.x.x.x\n"
+"172.16.0.0 - 172.31.255.255\n"
+"192.168.x.x"
+msgstr "اجازه دسترسی به آی پی هایی ار بازه: \n 10.x.x.x \n172.16.0.0 - 172.31.255.255\n192.168.x.x"
+
 #: ../bin/src/ui_querysortpage.h:142
 msgid "Only show the first"
 msgstr "تنها ابتدا را نمایش بده"
 
 #: internet/digitallyimportedservicebase.cpp:179
 #: internet/groovesharkservice.cpp:544 internet/icecastservice.cpp:296
-#: internet/jamendoservice.cpp:418 internet/magnatuneservice.cpp:276
+#: internet/jamendoservice.cpp:418 internet/magnatuneservice.cpp:277
 #: internet/somafmservice.cpp:91 internet/soundcloudservice.cpp:194
 #, qt-format
 msgid "Open %1 in browser"
@@ -3154,7 +3171,7 @@ msgstr "گشودن پرونده"
 msgid "Open in Google Drive"
 msgstr "گشوده در درایو گوگل"
 
-#: devices/deviceview.cpp:215 globalsearch/globalsearchview.cpp:421
+#: devices/deviceview.cpp:215 globalsearch/globalsearchview.cpp:437
 #: internet/internetservice.cpp:76 library/libraryview.cpp:371
 #: widgets/fileviewlist.cpp:36 ../bin/src/ui_behavioursettingspage.h:195
 msgid "Open in new playlist"
@@ -3311,7 +3328,7 @@ msgid "Player options"
 msgstr "گزینه‌های پخش‌کننده"
 
 #: playlist/playlistcontainer.cpp:273 playlist/playlistmanager.cpp:78
-#: playlist/playlistmanager.cpp:386 playlist/playlisttabbar.cpp:284
+#: playlist/playlistmanager.cpp:386 playlist/playlisttabbar.cpp:290
 msgid "Playlist"
 msgstr "لیست‌پخش"
 
@@ -3364,6 +3381,7 @@ msgid "Popup duration"
 msgstr "پنجرک"
 
 #: ../bin/src/ui_networkproxysettingspage.h:166
+#: ../bin/src/ui_networkremotesettingspage.h:109
 msgid "Port"
 msgstr "درگاه"
 
@@ -3480,7 +3498,7 @@ msgstr "مدیر به‌خط کردن"
 msgid "Queue selected tracks"
 msgstr "به‌خط کردن ترک‌های گزیده"
 
-#: globalsearch/globalsearchview.cpp:425 library/libraryview.cpp:375
+#: globalsearch/globalsearchview.cpp:441 library/libraryview.cpp:375
 #: ui/mainwindow.cpp:1309
 msgid "Queue track"
 msgstr "به‌خط کردن ترک"
@@ -3537,7 +3555,7 @@ msgstr "واقعا کنسل شود؟"
 msgid "Refresh"
 msgstr "نوسازی"
 
-#: internet/jamendoservice.cpp:419 internet/magnatuneservice.cpp:277
+#: internet/jamendoservice.cpp:419 internet/magnatuneservice.cpp:278
 msgid "Refresh catalogue"
 msgstr "بازخوانی کاتالوگ"
 
@@ -3643,7 +3661,7 @@ msgstr "تکرار لیست‌پخش"
 msgid "Repeat track"
 msgstr "تکرار ترک"
 
-#: devices/deviceview.cpp:213 globalsearch/globalsearchview.cpp:419
+#: devices/deviceview.cpp:213 globalsearch/globalsearchview.cpp:435
 #: internet/internetservice.cpp:66 library/libraryview.cpp:369
 #: widgets/fileviewlist.cpp:34
 msgid "Replace current playlist"
@@ -3787,7 +3805,7 @@ msgstr "جستجوی ایستگاه‌های Icecast"
 msgid "Search Jamendo"
 msgstr "جستجوی Jamendo"
 
-#: internet/magnatuneservice.cpp:283
+#: internet/magnatuneservice.cpp:284
 msgid "Search Magnatune"
 msgstr "جستجوی Magnatune"
 
@@ -4663,6 +4681,10 @@ msgstr "بکاربردن برچسب «هنرمند آلبوم» وقتی که و
 msgid "Use Gnome's shortcut keys"
 msgstr "بکار بردن کلیدهای میان‌بر گنوم"
 
+#: ../bin/src/ui_networkremotesettingspage.h:108
+msgid "Use Remotecontrol"
+msgstr "استفاده از کنترل از راه دور"
+
 #: ../bin/src/ui_playbacksettingspage.h:274
 msgid "Use Replay Gain metadata if it is available"
 msgstr "در صورت وجود، از ابرداده‌ی  Replay Gain استفاده کن"
@@ -4724,7 +4746,7 @@ msgstr "استفاده‌شده"
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr "کاربر %1 اکانت گرووشارک در هیچ‌جا ندارد"
 
-#: ui/settingsdialog.cpp:139
+#: ui/settingsdialog.cpp:141
 msgid "User interface"
 msgstr "رابط کاربری"
 

@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-12-28 11:38+0000\n"
-"Last-Translator: R33D3M33R <yellllow_m@yahoo.com>\n"
+"PO-Revision-Date: 2013-01-18 18:01+0000\n"
+"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: sl\n"
@@ -320,6 +320,10 @@ msgstr "O Clementine ..."
 #: ../bin/src/ui_mainwindow.h:709
 msgid "About Qt..."
 msgstr "O Qt ..."
+
+#: ../bin/src/ui_networkremotesettingspage.h:116
+msgid "Accept non public clients only"
+msgstr ""
 
 #: ../bin/src/ui_groovesharksettingspage.h:113
 #: ../bin/src/ui_magnatunesettingspage.h:155
@@ -654,7 +658,7 @@ msgstr "Videz"
 msgid "Append files/URLs to the playlist"
 msgstr "Pripni datoteke/povezave seznamu predvajanja"
 
-#: devices/deviceview.cpp:211 globalsearch/globalsearchview.cpp:417
+#: devices/deviceview.cpp:211 globalsearch/globalsearchview.cpp:433
 #: internet/internetservice.cpp:56 library/libraryview.cpp:367
 #: widgets/fileviewlist.cpp:32
 msgid "Append to current playlist"
@@ -1116,7 +1120,7 @@ msgstr "Nastavi Grooveshark ..."
 msgid "Configure Last.fm..."
 msgstr "Nastavi Last.fm ..."
 
-#: internet/magnatuneservice.cpp:278
+#: internet/magnatuneservice.cpp:279
 msgid "Configure Magnatune..."
 msgstr "Nastavi Magnatune ..."
 
@@ -1128,7 +1132,7 @@ msgstr "Nastavi bližnjice"
 msgid "Configure Spotify..."
 msgstr "Nastavi Spotify ..."
 
-#: globalsearch/globalsearchview.cpp:138 globalsearch/globalsearchview.cpp:430
+#: globalsearch/globalsearchview.cpp:140 globalsearch/globalsearchview.cpp:446
 msgid "Configure global search..."
 msgstr "Nastavi splošno iskanje"
 
@@ -1614,7 +1618,7 @@ msgstr "Samodejno prejmi nove epizode"
 msgid "Download queued"
 msgstr "Prejem je v čakalni vrsti"
 
-#: internet/magnatuneservice.cpp:274
+#: internet/magnatuneservice.cpp:275
 msgid "Download this album"
 msgstr "Prejmi ta album"
 
@@ -2129,7 +2133,7 @@ msgstr "Polni visoki toni"
 msgid "GStreamer audio engine"
 msgstr "GStreamerjev zvočni pogon"
 
-#: ui/settingsdialog.cpp:126
+#: ui/settingsdialog.cpp:127
 msgid "General"
 msgstr "Splošno"
 
@@ -2217,7 +2221,7 @@ msgstr "Spletni naslov skladbe Grooveshark"
 msgid "Group Library by..."
 msgstr "Združi knjižnico po ..."
 
-#: globalsearch/globalsearchview.cpp:428 library/libraryfilterwidget.cpp:82
+#: globalsearch/globalsearchview.cpp:444 library/libraryfilterwidget.cpp:82
 msgid "Group by"
 msgstr "Združi po"
 
@@ -2386,7 +2390,7 @@ msgstr "Preverjanje celovitosti"
 msgid "Internet"
 msgstr "Medmrežje"
 
-#: ui/settingsdialog.cpp:147
+#: ui/settingsdialog.cpp:149
 msgid "Internet providers"
 msgstr "Ponudniki interneta"
 
@@ -2963,6 +2967,10 @@ msgstr "Omrežje"
 msgid "Network Proxy"
 msgstr "Omrežni posrednik"
 
+#: ../bin/src/ui_networkremotesettingspage.h:107
+msgid "Network Remote"
+msgstr ""
+
 #: playlist/playlistdelegates.cpp:299 ui/edittagdialog.cpp:481
 msgid "Never"
 msgstr "Nikoli"
@@ -3119,13 +3127,21 @@ msgstr "Ogg Speex"
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
 
+#: ../bin/src/ui_networkremotesettingspage.h:111
+msgid ""
+"Only accept connections from clients within the ip ranges:\n"
+"10.x.x.x\n"
+"172.16.0.0 - 172.31.255.255\n"
+"192.168.x.x"
+msgstr ""
+
 #: ../bin/src/ui_querysortpage.h:142
 msgid "Only show the first"
 msgstr "Pokaži le prve"
 
 #: internet/digitallyimportedservicebase.cpp:179
 #: internet/groovesharkservice.cpp:544 internet/icecastservice.cpp:296
-#: internet/jamendoservice.cpp:418 internet/magnatuneservice.cpp:276
+#: internet/jamendoservice.cpp:418 internet/magnatuneservice.cpp:277
 #: internet/somafmservice.cpp:91 internet/soundcloudservice.cpp:194
 #, qt-format
 msgid "Open %1 in browser"
@@ -3155,7 +3171,7 @@ msgstr "Odpri datoteko ..."
 msgid "Open in Google Drive"
 msgstr "Odpri v Google Drive"
 
-#: devices/deviceview.cpp:215 globalsearch/globalsearchview.cpp:421
+#: devices/deviceview.cpp:215 globalsearch/globalsearchview.cpp:437
 #: internet/internetservice.cpp:76 library/libraryview.cpp:371
 #: widgets/fileviewlist.cpp:36 ../bin/src/ui_behavioursettingspage.h:195
 msgid "Open in new playlist"
@@ -3312,7 +3328,7 @@ msgid "Player options"
 msgstr "Možnosti predvajalnika"
 
 #: playlist/playlistcontainer.cpp:273 playlist/playlistmanager.cpp:78
-#: playlist/playlistmanager.cpp:386 playlist/playlisttabbar.cpp:284
+#: playlist/playlistmanager.cpp:386 playlist/playlisttabbar.cpp:290
 msgid "Playlist"
 msgstr "Seznam predvajanja"
 
@@ -3365,6 +3381,7 @@ msgid "Popup duration"
 msgstr "Trajanje pojavnega obvestila"
 
 #: ../bin/src/ui_networkproxysettingspage.h:166
+#: ../bin/src/ui_networkremotesettingspage.h:109
 msgid "Port"
 msgstr "Vrata"
 
@@ -3481,7 +3498,7 @@ msgstr "Upravljalnik vrste"
 msgid "Queue selected tracks"
 msgstr "Postavi izbrane skladbe v vrsto"
 
-#: globalsearch/globalsearchview.cpp:425 library/libraryview.cpp:375
+#: globalsearch/globalsearchview.cpp:441 library/libraryview.cpp:375
 #: ui/mainwindow.cpp:1309
 msgid "Queue track"
 msgstr "Postavi skladbo v vrsto"
@@ -3538,7 +3555,7 @@ msgstr "Ali naj bo dejanje resnično preklicano?"
 msgid "Refresh"
 msgstr "Osveži"
 
-#: internet/jamendoservice.cpp:419 internet/magnatuneservice.cpp:277
+#: internet/jamendoservice.cpp:419 internet/magnatuneservice.cpp:278
 msgid "Refresh catalogue"
 msgstr "Osveži katalog"
 
@@ -3644,7 +3661,7 @@ msgstr "Ponovi seznam predvajanja"
 msgid "Repeat track"
 msgstr "Ponovi skladbo"
 
-#: devices/deviceview.cpp:213 globalsearch/globalsearchview.cpp:419
+#: devices/deviceview.cpp:213 globalsearch/globalsearchview.cpp:435
 #: internet/internetservice.cpp:66 library/libraryview.cpp:369
 #: widgets/fileviewlist.cpp:34
 msgid "Replace current playlist"
@@ -3788,7 +3805,7 @@ msgstr "Iskanje postaj Icecast"
 msgid "Search Jamendo"
 msgstr "Iskanje Jamendo"
 
-#: internet/magnatuneservice.cpp:283
+#: internet/magnatuneservice.cpp:284
 msgid "Search Magnatune"
 msgstr "Išči na Magnatune"
 
@@ -4664,6 +4681,10 @@ msgstr "Uporabi oznako Izvajalca albuma, če je ta na voljo"
 msgid "Use Gnome's shortcut keys"
 msgstr "Uporabi bližnjice Gnome"
 
+#: ../bin/src/ui_networkremotesettingspage.h:108
+msgid "Use Remotecontrol"
+msgstr ""
+
 #: ../bin/src/ui_playbacksettingspage.h:274
 msgid "Use Replay Gain metadata if it is available"
 msgstr "Uporabi metapodatke Replay Gain, če je mogoče"
@@ -4725,7 +4746,7 @@ msgstr "Uporabljeno"
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr "Uporabnik %1 nima računa Grooveshark Anywhere"
 
-#: ui/settingsdialog.cpp:139
+#: ui/settingsdialog.cpp:141
 msgid "User interface"
 msgstr "Uporabniški vmesnik"
 

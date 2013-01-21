@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-11-30 11:09+0000\n"
+"PO-Revision-Date: 2013-01-18 18:00+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -322,6 +322,10 @@ msgstr "Over Clementine…"
 #: ../bin/src/ui_mainwindow.h:709
 msgid "About Qt..."
 msgstr "Over Qt…"
+
+#: ../bin/src/ui_networkremotesettingspage.h:116
+msgid "Accept non public clients only"
+msgstr ""
 
 #: ../bin/src/ui_groovesharksettingspage.h:113
 #: ../bin/src/ui_magnatunesettingspage.h:155
@@ -656,7 +660,7 @@ msgstr "Uiterlijk"
 msgid "Append files/URLs to the playlist"
 msgstr "Bestanden/URLs aan afspeellijst toevoegen"
 
-#: devices/deviceview.cpp:211 globalsearch/globalsearchview.cpp:417
+#: devices/deviceview.cpp:211 globalsearch/globalsearchview.cpp:433
 #: internet/internetservice.cpp:56 library/libraryview.cpp:367
 #: widgets/fileviewlist.cpp:32
 msgid "Append to current playlist"
@@ -1118,7 +1122,7 @@ msgstr "Grooveshark configureren…"
 msgid "Configure Last.fm..."
 msgstr "Last.fm configureren…"
 
-#: internet/magnatuneservice.cpp:278
+#: internet/magnatuneservice.cpp:279
 msgid "Configure Magnatune..."
 msgstr "Magnatune configureren…"
 
@@ -1130,7 +1134,7 @@ msgstr "Sneltoetsen instellen"
 msgid "Configure Spotify..."
 msgstr "Configureer Spotify..."
 
-#: globalsearch/globalsearchview.cpp:138 globalsearch/globalsearchview.cpp:430
+#: globalsearch/globalsearchview.cpp:140 globalsearch/globalsearchview.cpp:446
 msgid "Configure global search..."
 msgstr ""
 
@@ -1616,7 +1620,7 @@ msgstr "Download nieuwe afleveringen automatisch"
 msgid "Download queued"
 msgstr "Download in wachtrij gezet"
 
-#: internet/magnatuneservice.cpp:274
+#: internet/magnatuneservice.cpp:275
 msgid "Download this album"
 msgstr "Dit album downloaden"
 
@@ -2131,7 +2135,7 @@ msgstr "Maximale hoge tonen"
 msgid "GStreamer audio engine"
 msgstr "GStreamer audio-engine"
 
-#: ui/settingsdialog.cpp:126
+#: ui/settingsdialog.cpp:127
 msgid "General"
 msgstr "Algemeen"
 
@@ -2219,7 +2223,7 @@ msgstr "Grooveshark nummer URL"
 msgid "Group Library by..."
 msgstr "Bibliotheek groeperen op…"
 
-#: globalsearch/globalsearchview.cpp:428 library/libraryfilterwidget.cpp:82
+#: globalsearch/globalsearchview.cpp:444 library/libraryfilterwidget.cpp:82
 msgid "Group by"
 msgstr "Groeperen op"
 
@@ -2388,7 +2392,7 @@ msgstr "Integriteits check"
 msgid "Internet"
 msgstr "Internet"
 
-#: ui/settingsdialog.cpp:147
+#: ui/settingsdialog.cpp:149
 msgid "Internet providers"
 msgstr "Internet bronnen"
 
@@ -2965,6 +2969,10 @@ msgstr "Netwerk"
 msgid "Network Proxy"
 msgstr "Netwerk Proxy"
 
+#: ../bin/src/ui_networkremotesettingspage.h:107
+msgid "Network Remote"
+msgstr ""
+
 #: playlist/playlistdelegates.cpp:299 ui/edittagdialog.cpp:481
 msgid "Never"
 msgstr "Nooit"
@@ -3121,13 +3129,21 @@ msgstr "Ogg Speex"
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
 
+#: ../bin/src/ui_networkremotesettingspage.h:111
+msgid ""
+"Only accept connections from clients within the ip ranges:\n"
+"10.x.x.x\n"
+"172.16.0.0 - 172.31.255.255\n"
+"192.168.x.x"
+msgstr ""
+
 #: ../bin/src/ui_querysortpage.h:142
 msgid "Only show the first"
 msgstr "Alleen de eerste tonen"
 
 #: internet/digitallyimportedservicebase.cpp:179
 #: internet/groovesharkservice.cpp:544 internet/icecastservice.cpp:296
-#: internet/jamendoservice.cpp:418 internet/magnatuneservice.cpp:276
+#: internet/jamendoservice.cpp:418 internet/magnatuneservice.cpp:277
 #: internet/somafmservice.cpp:91 internet/soundcloudservice.cpp:194
 #, qt-format
 msgid "Open %1 in browser"
@@ -3157,7 +3173,7 @@ msgstr "Bestand openen..."
 msgid "Open in Google Drive"
 msgstr ""
 
-#: devices/deviceview.cpp:215 globalsearch/globalsearchview.cpp:421
+#: devices/deviceview.cpp:215 globalsearch/globalsearchview.cpp:437
 #: internet/internetservice.cpp:76 library/libraryview.cpp:371
 #: widgets/fileviewlist.cpp:36 ../bin/src/ui_behavioursettingspage.h:195
 msgid "Open in new playlist"
@@ -3314,7 +3330,7 @@ msgid "Player options"
 msgstr "Speler-opties"
 
 #: playlist/playlistcontainer.cpp:273 playlist/playlistmanager.cpp:78
-#: playlist/playlistmanager.cpp:386 playlist/playlisttabbar.cpp:284
+#: playlist/playlistmanager.cpp:386 playlist/playlisttabbar.cpp:290
 msgid "Playlist"
 msgstr "Afspeellijst"
 
@@ -3367,6 +3383,7 @@ msgid "Popup duration"
 msgstr "Pop-up duur"
 
 #: ../bin/src/ui_networkproxysettingspage.h:166
+#: ../bin/src/ui_networkremotesettingspage.h:109
 msgid "Port"
 msgstr "Poort"
 
@@ -3483,7 +3500,7 @@ msgstr "Wachtrijbeheer"
 msgid "Queue selected tracks"
 msgstr "Geselecteerde nummers in de wachtrij plaatsen"
 
-#: globalsearch/globalsearchview.cpp:425 library/libraryview.cpp:375
+#: globalsearch/globalsearchview.cpp:441 library/libraryview.cpp:375
 #: ui/mainwindow.cpp:1309
 msgid "Queue track"
 msgstr "Nummer in de wachtrij plaatsen"
@@ -3540,7 +3557,7 @@ msgstr "Werkelijk annuleren?"
 msgid "Refresh"
 msgstr "Ververs"
 
-#: internet/jamendoservice.cpp:419 internet/magnatuneservice.cpp:277
+#: internet/jamendoservice.cpp:419 internet/magnatuneservice.cpp:278
 msgid "Refresh catalogue"
 msgstr "Catalogus verversen"
 
@@ -3646,7 +3663,7 @@ msgstr "Afspeellijst herhalen"
 msgid "Repeat track"
 msgstr "Nummer herhalen"
 
-#: devices/deviceview.cpp:213 globalsearch/globalsearchview.cpp:419
+#: devices/deviceview.cpp:213 globalsearch/globalsearchview.cpp:435
 #: internet/internetservice.cpp:66 library/libraryview.cpp:369
 #: widgets/fileviewlist.cpp:34
 msgid "Replace current playlist"
@@ -3790,7 +3807,7 @@ msgstr "Icecast stations doorzoeken"
 msgid "Search Jamendo"
 msgstr "Jamendo doorzoeken"
 
-#: internet/magnatuneservice.cpp:283
+#: internet/magnatuneservice.cpp:284
 msgid "Search Magnatune"
 msgstr "Zoeken op Magnatune"
 
@@ -4666,6 +4683,10 @@ msgstr ""
 msgid "Use Gnome's shortcut keys"
 msgstr "Gnome-sneltoetsen gebruiken"
 
+#: ../bin/src/ui_networkremotesettingspage.h:108
+msgid "Use Remotecontrol"
+msgstr ""
+
 #: ../bin/src/ui_playbacksettingspage.h:274
 msgid "Use Replay Gain metadata if it is available"
 msgstr "Replay Gain-metadata gebruiken, als deze beschikbaar is"
@@ -4727,7 +4748,7 @@ msgstr "Gebruikt"
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr "Gebruiker %1 heeft geen Grooveshark Anywhere lidmaadschap"
 
-#: ui/settingsdialog.cpp:139
+#: ui/settingsdialog.cpp:141
 msgid "User interface"
 msgstr "Gebruikersinterface"
 

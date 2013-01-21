@@ -21,8 +21,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-01-13 14:25+0000\n"
-"Last-Translator: Kardanadam <ege.oz@yandex.com.tr>\n"
+"PO-Revision-Date: 2013-01-18 18:00+0000\n"
+"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: tr\n"
@@ -330,6 +330,10 @@ msgstr "Clementine Hakkında..."
 #: ../bin/src/ui_mainwindow.h:709
 msgid "About Qt..."
 msgstr "Qt Hakkında..."
+
+#: ../bin/src/ui_networkremotesettingspage.h:116
+msgid "Accept non public clients only"
+msgstr ""
 
 #: ../bin/src/ui_groovesharksettingspage.h:113
 #: ../bin/src/ui_magnatunesettingspage.h:155
@@ -664,7 +668,7 @@ msgstr "Görünüm"
 msgid "Append files/URLs to the playlist"
 msgstr "Çalma listesine dosya/URL ekle"
 
-#: devices/deviceview.cpp:211 globalsearch/globalsearchview.cpp:417
+#: devices/deviceview.cpp:211 globalsearch/globalsearchview.cpp:433
 #: internet/internetservice.cpp:56 library/libraryview.cpp:367
 #: widgets/fileviewlist.cpp:32
 msgid "Append to current playlist"
@@ -1126,7 +1130,7 @@ msgstr "Grooveshark'i ayarla"
 msgid "Configure Last.fm..."
 msgstr "Last.fm'i Yapılandır..."
 
-#: internet/magnatuneservice.cpp:278
+#: internet/magnatuneservice.cpp:279
 msgid "Configure Magnatune..."
 msgstr "Magnatune'u Yapılandır..."
 
@@ -1138,7 +1142,7 @@ msgstr "Kısayolları Yapılandır"
 msgid "Configure Spotify..."
 msgstr "Spotify'ı Yapılandır..."
 
-#: globalsearch/globalsearchview.cpp:138 globalsearch/globalsearchview.cpp:430
+#: globalsearch/globalsearchview.cpp:140 globalsearch/globalsearchview.cpp:446
 msgid "Configure global search..."
 msgstr "Genel aramayı düzenle..."
 
@@ -1624,7 +1628,7 @@ msgstr "Yeni bölümleri otomatik olarak indir"
 msgid "Download queued"
 msgstr "Sıradakileri indir"
 
-#: internet/magnatuneservice.cpp:274
+#: internet/magnatuneservice.cpp:275
 msgid "Download this album"
 msgstr "Bu albümü indir"
 
@@ -2139,7 +2143,7 @@ msgstr "Yüksek tiz"
 msgid "GStreamer audio engine"
 msgstr "GStreamer ses motoru"
 
-#: ui/settingsdialog.cpp:126
+#: ui/settingsdialog.cpp:127
 msgid "General"
 msgstr "Genel"
 
@@ -2227,7 +2231,7 @@ msgstr "Grooveshark şarkısının adresi"
 msgid "Group Library by..."
 msgstr "Kütüpheneyi şuna göre grupla..."
 
-#: globalsearch/globalsearchview.cpp:428 library/libraryfilterwidget.cpp:82
+#: globalsearch/globalsearchview.cpp:444 library/libraryfilterwidget.cpp:82
 msgid "Group by"
 msgstr "Grupla"
 
@@ -2396,7 +2400,7 @@ msgstr "Bütünlük doğrulaması"
 msgid "Internet"
 msgstr "Internet"
 
-#: ui/settingsdialog.cpp:147
+#: ui/settingsdialog.cpp:149
 msgid "Internet providers"
 msgstr "İnternet sağlayıcılar"
 
@@ -2973,6 +2977,10 @@ msgstr "Ağ"
 msgid "Network Proxy"
 msgstr "Vekil Sunucu"
 
+#: ../bin/src/ui_networkremotesettingspage.h:107
+msgid "Network Remote"
+msgstr ""
+
 #: playlist/playlistdelegates.cpp:299 ui/edittagdialog.cpp:481
 msgid "Never"
 msgstr "Hiçbir zaman"
@@ -3129,13 +3137,21 @@ msgstr "Ogg Speex"
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
 
+#: ../bin/src/ui_networkremotesettingspage.h:111
+msgid ""
+"Only accept connections from clients within the ip ranges:\n"
+"10.x.x.x\n"
+"172.16.0.0 - 172.31.255.255\n"
+"192.168.x.x"
+msgstr ""
+
 #: ../bin/src/ui_querysortpage.h:142
 msgid "Only show the first"
 msgstr "Sadece ilki göster"
 
 #: internet/digitallyimportedservicebase.cpp:179
 #: internet/groovesharkservice.cpp:544 internet/icecastservice.cpp:296
-#: internet/jamendoservice.cpp:418 internet/magnatuneservice.cpp:276
+#: internet/jamendoservice.cpp:418 internet/magnatuneservice.cpp:277
 #: internet/somafmservice.cpp:91 internet/soundcloudservice.cpp:194
 #, qt-format
 msgid "Open %1 in browser"
@@ -3165,7 +3181,7 @@ msgstr "Dosya aç..."
 msgid "Open in Google Drive"
 msgstr "Google Drive'da aç"
 
-#: devices/deviceview.cpp:215 globalsearch/globalsearchview.cpp:421
+#: devices/deviceview.cpp:215 globalsearch/globalsearchview.cpp:437
 #: internet/internetservice.cpp:76 library/libraryview.cpp:371
 #: widgets/fileviewlist.cpp:36 ../bin/src/ui_behavioursettingspage.h:195
 msgid "Open in new playlist"
@@ -3322,7 +3338,7 @@ msgid "Player options"
 msgstr "Oynatıcı seçenekleri"
 
 #: playlist/playlistcontainer.cpp:273 playlist/playlistmanager.cpp:78
-#: playlist/playlistmanager.cpp:386 playlist/playlisttabbar.cpp:284
+#: playlist/playlistmanager.cpp:386 playlist/playlisttabbar.cpp:290
 msgid "Playlist"
 msgstr "Çalma Listesi"
 
@@ -3375,6 +3391,7 @@ msgid "Popup duration"
 msgstr "Açılır pencere süresi"
 
 #: ../bin/src/ui_networkproxysettingspage.h:166
+#: ../bin/src/ui_networkremotesettingspage.h:109
 msgid "Port"
 msgstr "Port"
 
@@ -3491,7 +3508,7 @@ msgstr "Kuyruk Yöneticisi"
 msgid "Queue selected tracks"
 msgstr "Seçili parçaları kuyruğa ekle"
 
-#: globalsearch/globalsearchview.cpp:425 library/libraryview.cpp:375
+#: globalsearch/globalsearchview.cpp:441 library/libraryview.cpp:375
 #: ui/mainwindow.cpp:1309
 msgid "Queue track"
 msgstr "Parçayı kuyruğa ekle"
@@ -3548,7 +3565,7 @@ msgstr "Gerçekten iptal edeyim mi?"
 msgid "Refresh"
 msgstr "Yenile"
 
-#: internet/jamendoservice.cpp:419 internet/magnatuneservice.cpp:277
+#: internet/jamendoservice.cpp:419 internet/magnatuneservice.cpp:278
 msgid "Refresh catalogue"
 msgstr "Kataloğu yenile"
 
@@ -3654,7 +3671,7 @@ msgstr "Çalma listesini tekrarla"
 msgid "Repeat track"
 msgstr "Parçayı tekrarla"
 
-#: devices/deviceview.cpp:213 globalsearch/globalsearchview.cpp:419
+#: devices/deviceview.cpp:213 globalsearch/globalsearchview.cpp:435
 #: internet/internetservice.cpp:66 library/libraryview.cpp:369
 #: widgets/fileviewlist.cpp:34
 msgid "Replace current playlist"
@@ -3798,7 +3815,7 @@ msgstr "Icecast istasyonları ara"
 msgid "Search Jamendo"
 msgstr "Jamendo'da ara"
 
-#: internet/magnatuneservice.cpp:283
+#: internet/magnatuneservice.cpp:284
 msgid "Search Magnatune"
 msgstr "Magnatune'da Ara"
 
@@ -4674,6 +4691,10 @@ msgstr "Varsa Albüm sanatçısı etiketini kullan"
 msgid "Use Gnome's shortcut keys"
 msgstr "Gnome kısayol tuşlarını kullan"
 
+#: ../bin/src/ui_networkremotesettingspage.h:108
+msgid "Use Remotecontrol"
+msgstr ""
+
 #: ../bin/src/ui_playbacksettingspage.h:274
 msgid "Use Replay Gain metadata if it is available"
 msgstr "Varsa Replay Gain verisini kullan"
@@ -4735,7 +4756,7 @@ msgstr "Kullanılan"
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr "%1 Kullanicinin Grooveshark Anywhere hasabi yok"
 
-#: ui/settingsdialog.cpp:139
+#: ui/settingsdialog.cpp:141
 msgid "User interface"
 msgstr "Kullanıcı arayüzü"
 

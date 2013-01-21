@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-11-30 11:09+0000\n"
+"PO-Revision-Date: 2013-01-18 18:01+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -319,6 +319,10 @@ msgstr "על אודות Clementine..."
 #: ../bin/src/ui_mainwindow.h:709
 msgid "About Qt..."
 msgstr "על אודות Qt..."
+
+#: ../bin/src/ui_networkremotesettingspage.h:116
+msgid "Accept non public clients only"
+msgstr ""
 
 #: ../bin/src/ui_groovesharksettingspage.h:113
 #: ../bin/src/ui_magnatunesettingspage.h:155
@@ -653,7 +657,7 @@ msgstr "מראה"
 msgid "Append files/URLs to the playlist"
 msgstr "הוסף קבצים/כתובות לסוף רשימת ההשמעה"
 
-#: devices/deviceview.cpp:211 globalsearch/globalsearchview.cpp:417
+#: devices/deviceview.cpp:211 globalsearch/globalsearchview.cpp:433
 #: internet/internetservice.cpp:56 library/libraryview.cpp:367
 #: widgets/fileviewlist.cpp:32
 msgid "Append to current playlist"
@@ -1115,7 +1119,7 @@ msgstr "הגדרת Grooveshark..."
 msgid "Configure Last.fm..."
 msgstr "הגדרת Last.fm..."
 
-#: internet/magnatuneservice.cpp:278
+#: internet/magnatuneservice.cpp:279
 msgid "Configure Magnatune..."
 msgstr "הגדרת Magnatune..."
 
@@ -1127,7 +1131,7 @@ msgstr "הגדרת קיצורי מקשים"
 msgid "Configure Spotify..."
 msgstr "הגדרת Spotify..."
 
-#: globalsearch/globalsearchview.cpp:138 globalsearch/globalsearchview.cpp:430
+#: globalsearch/globalsearchview.cpp:140 globalsearch/globalsearchview.cpp:446
 msgid "Configure global search..."
 msgstr ""
 
@@ -1613,7 +1617,7 @@ msgstr "הורדת פרקים חדשים אוטומטית"
 msgid "Download queued"
 msgstr "ההורדה נכנסה לתור"
 
-#: internet/magnatuneservice.cpp:274
+#: internet/magnatuneservice.cpp:275
 msgid "Download this album"
 msgstr "הורדת האלבום הזה"
 
@@ -2128,7 +2132,7 @@ msgstr "טרבל מלא"
 msgid "GStreamer audio engine"
 msgstr "מנוע השמע של GStreamer"
 
-#: ui/settingsdialog.cpp:126
+#: ui/settingsdialog.cpp:127
 msgid "General"
 msgstr "כללי"
 
@@ -2216,7 +2220,7 @@ msgstr "הכתובת השיר ב־Grooveshark"
 msgid "Group Library by..."
 msgstr "קיבוץ ספרייה על פי..."
 
-#: globalsearch/globalsearchview.cpp:428 library/libraryfilterwidget.cpp:82
+#: globalsearch/globalsearchview.cpp:444 library/libraryfilterwidget.cpp:82
 msgid "Group by"
 msgstr "קיבוץ על פי"
 
@@ -2385,7 +2389,7 @@ msgstr "בדיקת שלמות"
 msgid "Internet"
 msgstr "אינטרנט"
 
-#: ui/settingsdialog.cpp:147
+#: ui/settingsdialog.cpp:149
 msgid "Internet providers"
 msgstr "ספקי אינטרנט"
 
@@ -2962,6 +2966,10 @@ msgstr "רשת"
 msgid "Network Proxy"
 msgstr "מתווך רשת"
 
+#: ../bin/src/ui_networkremotesettingspage.h:107
+msgid "Network Remote"
+msgstr ""
+
 #: playlist/playlistdelegates.cpp:299 ui/edittagdialog.cpp:481
 msgid "Never"
 msgstr "לעולם לא"
@@ -3118,13 +3126,21 @@ msgstr "Ogg Speex"
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
 
+#: ../bin/src/ui_networkremotesettingspage.h:111
+msgid ""
+"Only accept connections from clients within the ip ranges:\n"
+"10.x.x.x\n"
+"172.16.0.0 - 172.31.255.255\n"
+"192.168.x.x"
+msgstr ""
+
 #: ../bin/src/ui_querysortpage.h:142
 msgid "Only show the first"
 msgstr "הצגת הראשון בלבד"
 
 #: internet/digitallyimportedservicebase.cpp:179
 #: internet/groovesharkservice.cpp:544 internet/icecastservice.cpp:296
-#: internet/jamendoservice.cpp:418 internet/magnatuneservice.cpp:276
+#: internet/jamendoservice.cpp:418 internet/magnatuneservice.cpp:277
 #: internet/somafmservice.cpp:91 internet/soundcloudservice.cpp:194
 #, qt-format
 msgid "Open %1 in browser"
@@ -3154,7 +3170,7 @@ msgstr "פתיחת קובץ..."
 msgid "Open in Google Drive"
 msgstr ""
 
-#: devices/deviceview.cpp:215 globalsearch/globalsearchview.cpp:421
+#: devices/deviceview.cpp:215 globalsearch/globalsearchview.cpp:437
 #: internet/internetservice.cpp:76 library/libraryview.cpp:371
 #: widgets/fileviewlist.cpp:36 ../bin/src/ui_behavioursettingspage.h:195
 msgid "Open in new playlist"
@@ -3311,7 +3327,7 @@ msgid "Player options"
 msgstr "אפשרויות נגן"
 
 #: playlist/playlistcontainer.cpp:273 playlist/playlistmanager.cpp:78
-#: playlist/playlistmanager.cpp:386 playlist/playlisttabbar.cpp:284
+#: playlist/playlistmanager.cpp:386 playlist/playlisttabbar.cpp:290
 msgid "Playlist"
 msgstr "רשימת השמעה"
 
@@ -3364,6 +3380,7 @@ msgid "Popup duration"
 msgstr "משך זמן חלונית קופצת"
 
 #: ../bin/src/ui_networkproxysettingspage.h:166
+#: ../bin/src/ui_networkremotesettingspage.h:109
 msgid "Port"
 msgstr "פתחה"
 
@@ -3480,7 +3497,7 @@ msgstr "מנהל התור"
 msgid "Queue selected tracks"
 msgstr "הוספת הרצועות הנבחרות"
 
-#: globalsearch/globalsearchview.cpp:425 library/libraryview.cpp:375
+#: globalsearch/globalsearchview.cpp:441 library/libraryview.cpp:375
 #: ui/mainwindow.cpp:1309
 msgid "Queue track"
 msgstr "הוספת הרצועה לתור"
@@ -3537,7 +3554,7 @@ msgstr "האם לבטל?"
 msgid "Refresh"
 msgstr "רענון"
 
-#: internet/jamendoservice.cpp:419 internet/magnatuneservice.cpp:277
+#: internet/jamendoservice.cpp:419 internet/magnatuneservice.cpp:278
 msgid "Refresh catalogue"
 msgstr "רענון הקטלוג"
 
@@ -3643,7 +3660,7 @@ msgstr "חזרה על רשימת ההשמעה"
 msgid "Repeat track"
 msgstr "חזרה על הרצועה"
 
-#: devices/deviceview.cpp:213 globalsearch/globalsearchview.cpp:419
+#: devices/deviceview.cpp:213 globalsearch/globalsearchview.cpp:435
 #: internet/internetservice.cpp:66 library/libraryview.cpp:369
 #: widgets/fileviewlist.cpp:34
 msgid "Replace current playlist"
@@ -3787,7 +3804,7 @@ msgstr "חיפוש תחנות Icecast"
 msgid "Search Jamendo"
 msgstr "חיפוש ב־Jamendo"
 
-#: internet/magnatuneservice.cpp:283
+#: internet/magnatuneservice.cpp:284
 msgid "Search Magnatune"
 msgstr "חיפוש ב־Magnatune"
 
@@ -4663,6 +4680,10 @@ msgstr ""
 msgid "Use Gnome's shortcut keys"
 msgstr "השתמש בקיצורי המקלדת של גנום"
 
+#: ../bin/src/ui_networkremotesettingspage.h:108
+msgid "Use Remotecontrol"
+msgstr ""
+
 #: ../bin/src/ui_playbacksettingspage.h:274
 msgid "Use Replay Gain metadata if it is available"
 msgstr "שימוש במידע נוסף על הגברת ניגון חוזר אם זמין"
@@ -4724,7 +4745,7 @@ msgstr "בשימוש"
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr "למשתמש %1 אין חשבון Grooveshark Anywhere"
 
-#: ui/settingsdialog.cpp:139
+#: ui/settingsdialog.cpp:141
 msgid "User interface"
 msgstr "מנשק משתמש"
 

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-11-30 11:09+0000\n"
+"PO-Revision-Date: 2013-01-18 18:01+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -319,6 +319,10 @@ msgstr "關於 Clementine..."
 #: ../bin/src/ui_mainwindow.h:709
 msgid "About Qt..."
 msgstr "關於 Qt..."
+
+#: ../bin/src/ui_networkremotesettingspage.h:116
+msgid "Accept non public clients only"
+msgstr ""
 
 #: ../bin/src/ui_groovesharksettingspage.h:113
 #: ../bin/src/ui_magnatunesettingspage.h:155
@@ -653,7 +657,7 @@ msgstr "外觀"
 msgid "Append files/URLs to the playlist"
 msgstr "附加檔案或網址到播放清單"
 
-#: devices/deviceview.cpp:211 globalsearch/globalsearchview.cpp:417
+#: devices/deviceview.cpp:211 globalsearch/globalsearchview.cpp:433
 #: internet/internetservice.cpp:56 library/libraryview.cpp:367
 #: widgets/fileviewlist.cpp:32
 msgid "Append to current playlist"
@@ -1115,7 +1119,7 @@ msgstr "設定 Grooveshark..."
 msgid "Configure Last.fm..."
 msgstr "設定 Last.fm..."
 
-#: internet/magnatuneservice.cpp:278
+#: internet/magnatuneservice.cpp:279
 msgid "Configure Magnatune..."
 msgstr "設定 Magnatune ..."
 
@@ -1127,7 +1131,7 @@ msgstr "設定快速鍵"
 msgid "Configure Spotify..."
 msgstr "設定 Spotify..."
 
-#: globalsearch/globalsearchview.cpp:138 globalsearch/globalsearchview.cpp:430
+#: globalsearch/globalsearchview.cpp:140 globalsearch/globalsearchview.cpp:446
 msgid "Configure global search..."
 msgstr ""
 
@@ -1613,7 +1617,7 @@ msgstr "自動下載新的片斷內容"
 msgid "Download queued"
 msgstr ""
 
-#: internet/magnatuneservice.cpp:274
+#: internet/magnatuneservice.cpp:275
 msgid "Download this album"
 msgstr "下載此專輯"
 
@@ -2128,7 +2132,7 @@ msgstr "全部高音"
 msgid "GStreamer audio engine"
 msgstr "GStreamer 的音訊引擎"
 
-#: ui/settingsdialog.cpp:126
+#: ui/settingsdialog.cpp:127
 msgid "General"
 msgstr "一般"
 
@@ -2216,7 +2220,7 @@ msgstr "Grooveshark 歌曲的網址"
 msgid "Group Library by..."
 msgstr "歸類音樂庫依..."
 
-#: globalsearch/globalsearchview.cpp:428 library/libraryfilterwidget.cpp:82
+#: globalsearch/globalsearchview.cpp:444 library/libraryfilterwidget.cpp:82
 msgid "Group by"
 msgstr "歸類方式"
 
@@ -2385,7 +2389,7 @@ msgstr ""
 msgid "Internet"
 msgstr "網路"
 
-#: ui/settingsdialog.cpp:147
+#: ui/settingsdialog.cpp:149
 msgid "Internet providers"
 msgstr "網際網路服務供應商"
 
@@ -2962,6 +2966,10 @@ msgstr "網路"
 msgid "Network Proxy"
 msgstr "網路代理伺服器"
 
+#: ../bin/src/ui_networkremotesettingspage.h:107
+msgid "Network Remote"
+msgstr ""
+
 #: playlist/playlistdelegates.cpp:299 ui/edittagdialog.cpp:481
 msgid "Never"
 msgstr "從未"
@@ -3118,13 +3126,21 @@ msgstr "Ogg Speex"
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
 
+#: ../bin/src/ui_networkremotesettingspage.h:111
+msgid ""
+"Only accept connections from clients within the ip ranges:\n"
+"10.x.x.x\n"
+"172.16.0.0 - 172.31.255.255\n"
+"192.168.x.x"
+msgstr ""
+
 #: ../bin/src/ui_querysortpage.h:142
 msgid "Only show the first"
 msgstr "只顯示第一"
 
 #: internet/digitallyimportedservicebase.cpp:179
 #: internet/groovesharkservice.cpp:544 internet/icecastservice.cpp:296
-#: internet/jamendoservice.cpp:418 internet/magnatuneservice.cpp:276
+#: internet/jamendoservice.cpp:418 internet/magnatuneservice.cpp:277
 #: internet/somafmservice.cpp:91 internet/soundcloudservice.cpp:194
 #, qt-format
 msgid "Open %1 in browser"
@@ -3154,7 +3170,7 @@ msgstr "開啟檔案..."
 msgid "Open in Google Drive"
 msgstr ""
 
-#: devices/deviceview.cpp:215 globalsearch/globalsearchview.cpp:421
+#: devices/deviceview.cpp:215 globalsearch/globalsearchview.cpp:437
 #: internet/internetservice.cpp:76 library/libraryview.cpp:371
 #: widgets/fileviewlist.cpp:36 ../bin/src/ui_behavioursettingspage.h:195
 msgid "Open in new playlist"
@@ -3311,7 +3327,7 @@ msgid "Player options"
 msgstr "播放器選項"
 
 #: playlist/playlistcontainer.cpp:273 playlist/playlistmanager.cpp:78
-#: playlist/playlistmanager.cpp:386 playlist/playlisttabbar.cpp:284
+#: playlist/playlistmanager.cpp:386 playlist/playlisttabbar.cpp:290
 msgid "Playlist"
 msgstr "播放清單"
 
@@ -3364,6 +3380,7 @@ msgid "Popup duration"
 msgstr "彈出持續時間"
 
 #: ../bin/src/ui_networkproxysettingspage.h:166
+#: ../bin/src/ui_networkremotesettingspage.h:109
 msgid "Port"
 msgstr "連接埠"
 
@@ -3480,7 +3497,7 @@ msgstr "佇列管理員"
 msgid "Queue selected tracks"
 msgstr "將選取的歌曲加入佇列中"
 
-#: globalsearch/globalsearchview.cpp:425 library/libraryview.cpp:375
+#: globalsearch/globalsearchview.cpp:441 library/libraryview.cpp:375
 #: ui/mainwindow.cpp:1309
 msgid "Queue track"
 msgstr "將歌曲加入佇列中"
@@ -3537,7 +3554,7 @@ msgstr "真的要取消？"
 msgid "Refresh"
 msgstr "重新整理"
 
-#: internet/jamendoservice.cpp:419 internet/magnatuneservice.cpp:277
+#: internet/jamendoservice.cpp:419 internet/magnatuneservice.cpp:278
 msgid "Refresh catalogue"
 msgstr "刷新目錄"
 
@@ -3643,7 +3660,7 @@ msgstr "循環播放所有歌曲"
 msgid "Repeat track"
 msgstr "循環播放單曲"
 
-#: devices/deviceview.cpp:213 globalsearch/globalsearchview.cpp:419
+#: devices/deviceview.cpp:213 globalsearch/globalsearchview.cpp:435
 #: internet/internetservice.cpp:66 library/libraryview.cpp:369
 #: widgets/fileviewlist.cpp:34
 msgid "Replace current playlist"
@@ -3787,7 +3804,7 @@ msgstr "搜尋 Icecast stations"
 msgid "Search Jamendo"
 msgstr "搜尋 Jamendo"
 
-#: internet/magnatuneservice.cpp:283
+#: internet/magnatuneservice.cpp:284
 msgid "Search Magnatune"
 msgstr "搜尋 Magnatune"
 
@@ -4663,6 +4680,10 @@ msgstr "當有可以用時，使用專輯演出者標籤"
 msgid "Use Gnome's shortcut keys"
 msgstr "使用 Gnome 的快速鍵"
 
+#: ../bin/src/ui_networkremotesettingspage.h:108
+msgid "Use Remotecontrol"
+msgstr ""
+
 #: ../bin/src/ui_playbacksettingspage.h:274
 msgid "Use Replay Gain metadata if it is available"
 msgstr "使用回放增益元數據，如果它是可獲得的"
@@ -4724,7 +4745,7 @@ msgstr "已用"
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr ""
 
-#: ui/settingsdialog.cpp:139
+#: ui/settingsdialog.cpp:141
 msgid "User interface"
 msgstr "使用者介面"
 

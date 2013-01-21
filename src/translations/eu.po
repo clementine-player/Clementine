@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-01-13 12:06+0000\n"
-"Last-Translator: isolus <isolus@yopmail.com>\n"
+"PO-Revision-Date: 2013-01-18 18:00+0000\n"
+"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: eu\n"
@@ -320,6 +320,10 @@ msgstr "Clementine-ri buruz..."
 #: ../bin/src/ui_mainwindow.h:709
 msgid "About Qt..."
 msgstr "Qt-ri buruz..."
+
+#: ../bin/src/ui_networkremotesettingspage.h:116
+msgid "Accept non public clients only"
+msgstr ""
 
 #: ../bin/src/ui_groovesharksettingspage.h:113
 #: ../bin/src/ui_magnatunesettingspage.h:155
@@ -654,7 +658,7 @@ msgstr "Itxura"
 msgid "Append files/URLs to the playlist"
 msgstr "Erantsi Fitxategiak/URL-ak erreprodukzio-zerrendari"
 
-#: devices/deviceview.cpp:211 globalsearch/globalsearchview.cpp:417
+#: devices/deviceview.cpp:211 globalsearch/globalsearchview.cpp:433
 #: internet/internetservice.cpp:56 library/libraryview.cpp:367
 #: widgets/fileviewlist.cpp:32
 msgid "Append to current playlist"
@@ -1116,7 +1120,7 @@ msgstr "Konfiguratu Grooveshark..."
 msgid "Configure Last.fm..."
 msgstr "Konfiguratu Last.fm"
 
-#: internet/magnatuneservice.cpp:278
+#: internet/magnatuneservice.cpp:279
 msgid "Configure Magnatune..."
 msgstr "Konfiguratu Magnatune..."
 
@@ -1128,7 +1132,7 @@ msgstr "Konfiguratu laster-teklak"
 msgid "Configure Spotify..."
 msgstr "Konfiguratu Spotify..."
 
-#: globalsearch/globalsearchview.cpp:138 globalsearch/globalsearchview.cpp:430
+#: globalsearch/globalsearchview.cpp:140 globalsearch/globalsearchview.cpp:446
 msgid "Configure global search..."
 msgstr "Bilaketa globala konfiguratu..."
 
@@ -1614,7 +1618,7 @@ msgstr "Atal berriak automatikoki deskargatu"
 msgid "Download queued"
 msgstr "Deskarga zerrendaren zain"
 
-#: internet/magnatuneservice.cpp:274
+#: internet/magnatuneservice.cpp:275
 msgid "Download this album"
 msgstr "Deskargatu album hau"
 
@@ -2129,7 +2133,7 @@ msgstr "Altu osoak"
 msgid "GStreamer audio engine"
 msgstr "GStreamer audio motorea"
 
-#: ui/settingsdialog.cpp:126
+#: ui/settingsdialog.cpp:127
 msgid "General"
 msgstr "Orokorra"
 
@@ -2217,7 +2221,7 @@ msgstr "Grooveshark-eko kantaren URLa"
 msgid "Group Library by..."
 msgstr "Bilduma taldekatu honela..."
 
-#: globalsearch/globalsearchview.cpp:428 library/libraryfilterwidget.cpp:82
+#: globalsearch/globalsearchview.cpp:444 library/libraryfilterwidget.cpp:82
 msgid "Group by"
 msgstr "Taldekatu"
 
@@ -2386,7 +2390,7 @@ msgstr "Osotasunaren egiaztapena"
 msgid "Internet"
 msgstr "Internet"
 
-#: ui/settingsdialog.cpp:147
+#: ui/settingsdialog.cpp:149
 msgid "Internet providers"
 msgstr "Internet hornitzaileak"
 
@@ -2963,6 +2967,10 @@ msgstr "Sarea"
 msgid "Network Proxy"
 msgstr "Sareko proxy-a"
 
+#: ../bin/src/ui_networkremotesettingspage.h:107
+msgid "Network Remote"
+msgstr ""
+
 #: playlist/playlistdelegates.cpp:299 ui/edittagdialog.cpp:481
 msgid "Never"
 msgstr "Inoiz ez"
@@ -3119,13 +3127,21 @@ msgstr "Ogg Speex"
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
 
+#: ../bin/src/ui_networkremotesettingspage.h:111
+msgid ""
+"Only accept connections from clients within the ip ranges:\n"
+"10.x.x.x\n"
+"172.16.0.0 - 172.31.255.255\n"
+"192.168.x.x"
+msgstr ""
+
 #: ../bin/src/ui_querysortpage.h:142
 msgid "Only show the first"
 msgstr "Lehena bakarrik erakutsi"
 
 #: internet/digitallyimportedservicebase.cpp:179
 #: internet/groovesharkservice.cpp:544 internet/icecastservice.cpp:296
-#: internet/jamendoservice.cpp:418 internet/magnatuneservice.cpp:276
+#: internet/jamendoservice.cpp:418 internet/magnatuneservice.cpp:277
 #: internet/somafmservice.cpp:91 internet/soundcloudservice.cpp:194
 #, qt-format
 msgid "Open %1 in browser"
@@ -3155,7 +3171,7 @@ msgstr "Ireki fitxategia..."
 msgid "Open in Google Drive"
 msgstr "Google Drive-n iriki"
 
-#: devices/deviceview.cpp:215 globalsearch/globalsearchview.cpp:421
+#: devices/deviceview.cpp:215 globalsearch/globalsearchview.cpp:437
 #: internet/internetservice.cpp:76 library/libraryview.cpp:371
 #: widgets/fileviewlist.cpp:36 ../bin/src/ui_behavioursettingspage.h:195
 msgid "Open in new playlist"
@@ -3312,7 +3328,7 @@ msgid "Player options"
 msgstr "Erreproduzitzailearen aukerak"
 
 #: playlist/playlistcontainer.cpp:273 playlist/playlistmanager.cpp:78
-#: playlist/playlistmanager.cpp:386 playlist/playlisttabbar.cpp:284
+#: playlist/playlistmanager.cpp:386 playlist/playlisttabbar.cpp:290
 msgid "Playlist"
 msgstr "Erreprodukzio-zerrenda"
 
@@ -3365,6 +3381,7 @@ msgid "Popup duration"
 msgstr "Laster-leihoaren iraupena"
 
 #: ../bin/src/ui_networkproxysettingspage.h:166
+#: ../bin/src/ui_networkremotesettingspage.h:109
 msgid "Port"
 msgstr "Ataka"
 
@@ -3481,7 +3498,7 @@ msgstr "Ilara-kudeatzailea"
 msgid "Queue selected tracks"
 msgstr "Aukeraturiko pistak ilaran jarri"
 
-#: globalsearch/globalsearchview.cpp:425 library/libraryview.cpp:375
+#: globalsearch/globalsearchview.cpp:441 library/libraryview.cpp:375
 #: ui/mainwindow.cpp:1309
 msgid "Queue track"
 msgstr "Pista ilaran jarri"
@@ -3538,7 +3555,7 @@ msgstr "Benetan utzi?"
 msgid "Refresh"
 msgstr "Freskatu"
 
-#: internet/jamendoservice.cpp:419 internet/magnatuneservice.cpp:277
+#: internet/jamendoservice.cpp:419 internet/magnatuneservice.cpp:278
 msgid "Refresh catalogue"
 msgstr "Katalogoa freskatu"
 
@@ -3644,7 +3661,7 @@ msgstr "Errepikatu erreprodukzio-zerrenda"
 msgid "Repeat track"
 msgstr "Errepikatu pista"
 
-#: devices/deviceview.cpp:213 globalsearch/globalsearchview.cpp:419
+#: devices/deviceview.cpp:213 globalsearch/globalsearchview.cpp:435
 #: internet/internetservice.cpp:66 library/libraryview.cpp:369
 #: widgets/fileviewlist.cpp:34
 msgid "Replace current playlist"
@@ -3788,7 +3805,7 @@ msgstr "Bilatu Icecast irratiak"
 msgid "Search Jamendo"
 msgstr "Bilatu Jamendo-n"
 
-#: internet/magnatuneservice.cpp:283
+#: internet/magnatuneservice.cpp:284
 msgid "Search Magnatune"
 msgstr "Bilatu Magnatune-n"
 
@@ -4664,6 +4681,10 @@ msgstr "Bildumaren artista etiketa erabili erabilgarri bada"
 msgid "Use Gnome's shortcut keys"
 msgstr "Erabili Gnome-ren laster-teklak"
 
+#: ../bin/src/ui_networkremotesettingspage.h:108
+msgid "Use Remotecontrol"
+msgstr ""
+
 #: ../bin/src/ui_playbacksettingspage.h:274
 msgid "Use Replay Gain metadata if it is available"
 msgstr "Erabili errepikatze-irabaziaren metadatuak eskuragarri daudenean"
@@ -4725,7 +4746,7 @@ msgstr "Erabilia"
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr "%1 erabiltzaileak ez du Grooveshark Anywhere konturik"
 
-#: ui/settingsdialog.cpp:139
+#: ui/settingsdialog.cpp:141
 msgid "User interface"
 msgstr "Erabiltzaile-interfazea"
 

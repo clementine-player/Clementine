@@ -3,6 +3,7 @@
 # This file is distributed under the same license as the Clementine package.
 # 
 # Translators:
+# Alexandro Casanova <shorterfire@gmail.com>, 2013.
 #   <bedi.com@gmail.com>, 2012.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
 # Israel IsraeLins <israelins85@yahoo.com.br>, 2012.
@@ -13,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2012-12-09 17:48+0000\n"
+"PO-Revision-Date: 2013-01-19 08:20+0000\n"
 "Last-Translator: salmora8 <shorterfire@gmail.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -322,6 +323,10 @@ msgstr "Sobre o Clementine..."
 #: ../bin/src/ui_mainwindow.h:709
 msgid "About Qt..."
 msgstr "Sobre o Qt..."
+
+#: ../bin/src/ui_networkremotesettingspage.h:116
+msgid "Accept non public clients only"
+msgstr "Aceitar somente clientes não públicos"
 
 #: ../bin/src/ui_groovesharksettingspage.h:113
 #: ../bin/src/ui_magnatunesettingspage.h:155
@@ -656,7 +661,7 @@ msgstr "Aparência"
 msgid "Append files/URLs to the playlist"
 msgstr "Acrescentar arquivos/sites para a lista de reprodução"
 
-#: devices/deviceview.cpp:211 globalsearch/globalsearchview.cpp:417
+#: devices/deviceview.cpp:211 globalsearch/globalsearchview.cpp:433
 #: internet/internetservice.cpp:56 library/libraryview.cpp:367
 #: widgets/fileviewlist.cpp:32
 msgid "Append to current playlist"
@@ -1118,7 +1123,7 @@ msgstr "Configurar Grooveshark..."
 msgid "Configure Last.fm..."
 msgstr "Configurar Last.fm..."
 
-#: internet/magnatuneservice.cpp:278
+#: internet/magnatuneservice.cpp:279
 msgid "Configure Magnatune..."
 msgstr "Configurar Magnatune..."
 
@@ -1130,7 +1135,7 @@ msgstr "Configurar atalhos"
 msgid "Configure Spotify..."
 msgstr "Configurar Spotify..."
 
-#: globalsearch/globalsearchview.cpp:138 globalsearch/globalsearchview.cpp:430
+#: globalsearch/globalsearchview.cpp:140 globalsearch/globalsearchview.cpp:446
 msgid "Configure global search..."
 msgstr "Configurar busca global..."
 
@@ -1616,7 +1621,7 @@ msgstr "Baixar automaticamente novos episódios"
 msgid "Download queued"
 msgstr "Download na fila"
 
-#: internet/magnatuneservice.cpp:274
+#: internet/magnatuneservice.cpp:275
 msgid "Download this album"
 msgstr "Baixar este álbum"
 
@@ -2131,7 +2136,7 @@ msgstr "Muito Agudo"
 msgid "GStreamer audio engine"
 msgstr "Mecanismo de áudio GStreamer"
 
-#: ui/settingsdialog.cpp:126
+#: ui/settingsdialog.cpp:127
 msgid "General"
 msgstr "Geral"
 
@@ -2219,7 +2224,7 @@ msgstr "URL da música Grooveshark"
 msgid "Group Library by..."
 msgstr "Organizar Biblioteca por..."
 
-#: globalsearch/globalsearchview.cpp:428 library/libraryfilterwidget.cpp:82
+#: globalsearch/globalsearchview.cpp:444 library/libraryfilterwidget.cpp:82
 msgid "Group by"
 msgstr "Organizar por"
 
@@ -2388,7 +2393,7 @@ msgstr "Verificar integridade"
 msgid "Internet"
 msgstr "Internet"
 
-#: ui/settingsdialog.cpp:147
+#: ui/settingsdialog.cpp:149
 msgid "Internet providers"
 msgstr "Dados da Internet"
 
@@ -2965,6 +2970,10 @@ msgstr "Conexão de rede"
 msgid "Network Proxy"
 msgstr "Proxy da Rede"
 
+#: ../bin/src/ui_networkremotesettingspage.h:107
+msgid "Network Remote"
+msgstr "Rede Remota"
+
 #: playlist/playlistdelegates.cpp:299 ui/edittagdialog.cpp:481
 msgid "Never"
 msgstr "Nunca"
@@ -3121,13 +3130,21 @@ msgstr "Ogg Speex"
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
 
+#: ../bin/src/ui_networkremotesettingspage.h:111
+msgid ""
+"Only accept connections from clients within the ip ranges:\n"
+"10.x.x.x\n"
+"172.16.0.0 - 172.31.255.255\n"
+"192.168.x.x"
+msgstr "Aceitar apenas conexões de clientes dentro das faixas de ip:\n10.x.x.x\n172.16.0.0 - 172.31.255.255\n192.168.x.x"
+
 #: ../bin/src/ui_querysortpage.h:142
 msgid "Only show the first"
 msgstr "Só mostrar o primeiro"
 
 #: internet/digitallyimportedservicebase.cpp:179
 #: internet/groovesharkservice.cpp:544 internet/icecastservice.cpp:296
-#: internet/jamendoservice.cpp:418 internet/magnatuneservice.cpp:276
+#: internet/jamendoservice.cpp:418 internet/magnatuneservice.cpp:277
 #: internet/somafmservice.cpp:91 internet/soundcloudservice.cpp:194
 #, qt-format
 msgid "Open %1 in browser"
@@ -3157,7 +3174,7 @@ msgstr "Abrir arquivo..."
 msgid "Open in Google Drive"
 msgstr "Abrir no Google Drive"
 
-#: devices/deviceview.cpp:215 globalsearch/globalsearchview.cpp:421
+#: devices/deviceview.cpp:215 globalsearch/globalsearchview.cpp:437
 #: internet/internetservice.cpp:76 library/libraryview.cpp:371
 #: widgets/fileviewlist.cpp:36 ../bin/src/ui_behavioursettingspage.h:195
 msgid "Open in new playlist"
@@ -3314,7 +3331,7 @@ msgid "Player options"
 msgstr "Opções do player"
 
 #: playlist/playlistcontainer.cpp:273 playlist/playlistmanager.cpp:78
-#: playlist/playlistmanager.cpp:386 playlist/playlisttabbar.cpp:284
+#: playlist/playlistmanager.cpp:386 playlist/playlisttabbar.cpp:290
 msgid "Playlist"
 msgstr "Lista de Reprodução"
 
@@ -3367,6 +3384,7 @@ msgid "Popup duration"
 msgstr "Duração do aviso"
 
 #: ../bin/src/ui_networkproxysettingspage.h:166
+#: ../bin/src/ui_networkremotesettingspage.h:109
 msgid "Port"
 msgstr "Porta"
 
@@ -3483,7 +3501,7 @@ msgstr "Gerenciador de Fila"
 msgid "Queue selected tracks"
 msgstr "Colocar as faixas selecionadas na fila"
 
-#: globalsearch/globalsearchview.cpp:425 library/libraryview.cpp:375
+#: globalsearch/globalsearchview.cpp:441 library/libraryview.cpp:375
 #: ui/mainwindow.cpp:1309
 msgid "Queue track"
 msgstr "Colocar a faixa na fila"
@@ -3540,7 +3558,7 @@ msgstr "Deseja realmente cancelar?"
 msgid "Refresh"
 msgstr "Atualizar"
 
-#: internet/jamendoservice.cpp:419 internet/magnatuneservice.cpp:277
+#: internet/jamendoservice.cpp:419 internet/magnatuneservice.cpp:278
 msgid "Refresh catalogue"
 msgstr "Atualizar catálogo"
 
@@ -3646,7 +3664,7 @@ msgstr "Repetir lista de reprodução"
 msgid "Repeat track"
 msgstr "Repetir uma faixa"
 
-#: devices/deviceview.cpp:213 globalsearch/globalsearchview.cpp:419
+#: devices/deviceview.cpp:213 globalsearch/globalsearchview.cpp:435
 #: internet/internetservice.cpp:66 library/libraryview.cpp:369
 #: widgets/fileviewlist.cpp:34
 msgid "Replace current playlist"
@@ -3790,7 +3808,7 @@ msgstr "Pesquisar estações do Icecast"
 msgid "Search Jamendo"
 msgstr "Pesquisar Jamendo"
 
-#: internet/magnatuneservice.cpp:283
+#: internet/magnatuneservice.cpp:284
 msgid "Search Magnatune"
 msgstr "Pesquisar Magnatune"
 
@@ -4666,6 +4684,10 @@ msgstr "Usar tag artista-álbum quando disponível"
 msgid "Use Gnome's shortcut keys"
 msgstr "Usar teclas de atalho do Gnome"
 
+#: ../bin/src/ui_networkremotesettingspage.h:108
+msgid "Use Remotecontrol"
+msgstr "Use o Controle Remoto"
+
 #: ../bin/src/ui_playbacksettingspage.h:274
 msgid "Use Replay Gain metadata if it is available"
 msgstr "Usar fator de ganho se estiver disponível nos metadados da faixa"
@@ -4727,7 +4749,7 @@ msgstr "Usado"
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr "Usuário %1 não tem uma conta Grooveshark Anywhere"
 
-#: ui/settingsdialog.cpp:139
+#: ui/settingsdialog.cpp:141
 msgid "User interface"
 msgstr "Interface"
 
