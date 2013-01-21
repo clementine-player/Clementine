@@ -12,6 +12,8 @@
 #include "core/database.h"
 #include "core/closure.h"
 #include "core/taskmanager.h"
+#include "globalsearch/globalsearch.h"
+#include "globalsearch/librarysearchprovider.h"
 
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
@@ -23,7 +25,7 @@
 
 const char* SubsonicService::kServiceName = "Subsonic";
 const char* SubsonicService::kSettingsGroup = "Subsonic";
-const char* SubsonicService::kApiVersion = "1.7.0";
+const char* SubsonicService::kApiVersion = "1.8.0";
 const char* SubsonicService::kApiClientName = "Clementine";
 
 const char* SubsonicService::kSongsTable = "subsonic_songs";
@@ -81,8 +83,19 @@ SubsonicService::SubsonicService(Application* app, InternetModel *parent)
   context_menu_->addActions(GetPlaylistActions());
   context_menu_->addSeparator();
   context_menu_->addAction(IconLoader::Load("view-refresh"), tr("Refresh catalogue"), this, SLOT(ReloadDatabase()));
+  QAction* config_action = context_menu_->addAction(IconLoader::Load("configure"),
+                                                    tr("Configure Subsonic..."), this, SLOT(ShowConfig()));
   context_menu_->addSeparator();
   context_menu_->addMenu(library_filter_->menu());
+
+  library_filter_->AddMenuAction(config_action);
+
+  app_->global_search()->AddProvider(new LibrarySearchProvider(
+      library_backend_,
+      tr("Subsonic"),
+      "subsonic",
+      QIcon(":/providers/subsonic.png"),
+      true, app_, this));
 }
 
 SubsonicService::~SubsonicService()
@@ -102,7 +115,9 @@ void SubsonicService::LazyPopulate(QStandardItem *item)
   {
   case InternetModel::Type_Service:
     library_model_->Init();
-    if (total_song_count_ == 0 && !load_database_task_id_) {
+    if (login_state() != LoginState_Loggedin) {
+      ShowConfig();
+    } else if (total_song_count_ == 0 && !load_database_task_id_) {
       ReloadDatabase();
     }
     model()->merged_model()->AddSubModel(item->index(), library_sort_model_);
@@ -267,6 +282,11 @@ void SubsonicService::onPingFinished(QNetworkReply *reply)
   qLog(Debug) << "Login state changed:"
               << Utilities::EnumToString(SubsonicService::staticMetaObject, "LoginState", login_state_);
   emit LoginStateChanged(login_state_);
+}
+
+void SubsonicService::ShowConfig()
+{
+  app_->OpenSettingsDialogAtPage(SettingsDialog::Page_Subsonic);
 }
 
 

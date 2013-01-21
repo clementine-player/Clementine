@@ -117,6 +117,8 @@ class SubsonicService : public InternetService
   void ReloadDatabaseFinished();
   void onLoginStateChanged(SubsonicService::LoginState newstate);
   void onPingFinished(QNetworkReply* reply);
+
+  void ShowConfig();
 };
 
 class SubsonicLibraryScanner : public QObject {
