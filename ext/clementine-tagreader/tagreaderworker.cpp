@@ -260,6 +260,14 @@ void TagReaderWorker::ReadFile(const QString& filename,
       if (items.find("covr") != items.end()) {
         song->set_art_automatic(kEmbeddedCover);
       }
+
+      if(items.contains("disk")) {
+        disc = TStringToQString(TagLib::String::number(items["disk"].toIntPair().first));
+      }
+
+      if(items.contains("\251wrt")) {
+        Decode(items["\251wrt"].toStringList().toString(", "), NULL, song->mutable_composer());
+      }
     }
   } else if (tag) {
     Decode(tag->comment(), NULL, song->mutable_comment());
@@ -464,6 +472,13 @@ bool TagReaderWorker::SaveFile(const QString& filename,
     tag->addField("BPM", QStringToTaglibString(song.bpm() <= 0 -1 ? QString() : QString::number(song.bpm())), true);
     tag->addField("DISCNUMBER", QStringToTaglibString(song.disc() <= 0 -1 ? QString() : QString::number(song.disc())), true);
     tag->addField("COMPILATION", StdStringToTaglibString(song.compilation() ? "1" : "0"), true);
+  } else if (TagLib::MP4::File* file = dynamic_cast<TagLib::MP4::File*>(fileref->file())) {
+    TagLib::MP4::Tag* tag = file->tag();
+    tag->itemListMap()["disk"]    = TagLib::MP4::Item(song.disc() <= 0 -1 ? 0 : song.disc(), 0);
+    tag->itemListMap()["tmpo"]    = TagLib::StringList(song.bpm() <= 0 -1 ? "0" : TagLib::String::number(song.bpm()));
+    tag->itemListMap()["\251wrt"] = TagLib::StringList(song.composer());
+    tag->itemListMap()["aART"]    = TagLib::StringList(song.albumartist());
+    tag->itemListMap()["cpil"]    = TagLib::StringList(song.compilation() ? "1" : "0");
   }
 
   bool ret = fileref->save();
