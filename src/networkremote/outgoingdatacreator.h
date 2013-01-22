@@ -51,7 +51,7 @@ private:
   void SetEngineState(pb::remote::ResponseClementineInfo* msg);
   void CreateSong(
       const Song& song,
-      const QString& art_uri,
+      const QImage& art,
       const int index,
       pb::remote::SongMetadata* song_metadata);
 };

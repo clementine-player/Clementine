@@ -147,7 +147,7 @@ void OutgoingDataCreator::CurrentSongChanged(const Song& song, const QString& ur
     // If there is no song, create an empty node, otherwise fill it with data
     int i = app_->playlist_manager()->active()->current_row();
     CreateSong(
-        current_song_, uri, i,
+        current_song_, img, i,
         msg.mutable_response_current_metadata()->mutable_song_metadata());
 
     SendDataToClients(&msg);
@@ -156,7 +156,7 @@ void OutgoingDataCreator::CurrentSongChanged(const Song& song, const QString& ur
 
 void OutgoingDataCreator::CreateSong(
     const Song& song,
-    const QString& art_uri,
+    const QImage& art,
     const int index,
     pb::remote::SongMetadata* song_metadata) {
   if (song.is_valid()) {
@@ -174,14 +174,13 @@ void OutgoingDataCreator::CreateSong(
     song_metadata->set_playcount(song.playcount());
 
     // Append coverart
-    if (!art_uri.isEmpty()) {
-      QImage orig(QUrl(art_uri).toLocalFile());
+    if (!art.isNull()) {
       QImage small;
       // Check if we resize the image
-      if (orig.width() > 1000) {
-        small = orig.scaled(1000, 1000, Qt::KeepAspectRatio);
+      if (art.width() > 1000) {
+        small = art.scaled(1000, 1000, Qt::KeepAspectRatio);
       } else {
-        small = orig;
+        small = art;
       }
 
       // Read the image in a buffer and compress it
@@ -230,11 +229,11 @@ void OutgoingDataCreator::SendPlaylistSongs(int id) {
   int index = 0;
   SongList song_list = playlist->GetAllSongs();
   QListIterator<Song> it(song_list);
+  QImage null_img;
   while(it.hasNext()) {
     Song song   = it.next();
-    QString art = song.art_automatic();
     pb::remote::SongMetadata* pb_song = pb_response_playlist_songs->add_songs();
-    CreateSong(song, art, index, pb_song);
+    CreateSong(song, null_img, index, pb_song);
     ++index;
   }
   SendDataToClients(&msg);
