@@ -13,8 +13,10 @@ public:
   NetworkRemoteHelper(Application* app);
   ~NetworkRemoteHelper();
 
-  void StartServer();
   void ReloadSettings();
+
+private slots:
+  void StartServer();
 
 signals:
   void SetupServerSig();

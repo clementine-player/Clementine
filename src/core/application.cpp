@@ -108,8 +108,11 @@ Application::Application(QObject* parent)
   network_remote_ = new NetworkRemote(this);
   MoveToNewThread(network_remote_);
 
+  // This must be before libraray_->Init();
+  // In the constructor the helper waits for the signal PlaylistManagerInitialized
+  // to start the remote. Without the playlist manager clementine can
+  // crash when a client connects before the manager is initialized!
   network_remote_helper_ = new NetworkRemoteHelper(this);
-  network_remote_helper_->StartServer();
 
   library_->Init();
 
