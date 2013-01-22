@@ -22,8 +22,11 @@
 #include <QObject>
 #include <QPair>
 
+#include "core/utilities.h"
+
 class QFile;
 class QNetworkAccessManager;
+class QNetworkReply;
 class QProgressDialog;
 
 
@@ -39,15 +42,16 @@ public:
   // should exit), or true if he does (caller should start the Qt event loop).
   bool Start();
 
-private:
-  typedef QPair<QString, QString> ClientInfoPair;
-
 private slots:
   void RedirectFinished();
   void UploadProgress(qint64 bytes, qint64 total);
   void UploadFinished();
 
-  QList<ClientInfoPair> ClientInfo() const;
+  void ClientInfo(Utilities::ArgList* args) const;
+
+private:
+  void StartUpload(const QUrl& url, const QString& content_type, QIODevice* file);
+  void CheckUploadsFinished();
 
 private:
   static const char* kUploadURL;
@@ -59,6 +63,14 @@ private:
   QFile* minidump_;
   QFile* log_;
   QProgressDialog* progress_;
+
+  struct UploadState {
+    qint64 total_size_;
+    qint64 progress_;
+    bool done_;
+  };
+
+  QMap<QNetworkReply*, UploadState> upload_state_;
 };
 
 #endif // CRASHSENDER_H

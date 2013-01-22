@@ -38,44 +38,33 @@ AmazonCoverProvider::AmazonCoverProvider(QObject* parent)
 }
 
 bool AmazonCoverProvider::StartSearch(const QString& artist, const QString& album, int id) {
-  typedef QPair<QString, QString> Arg;
-  typedef QList<Arg> ArgList;
-
-  typedef QPair<QByteArray, QByteArray> EncodedArg;
-  typedef QList<EncodedArg> EncodedArgList;
-
   // Must be sorted by parameter name
-  ArgList args = ArgList()
-      << Arg("AWSAccessKeyId", kAccessKey)
-      << Arg("AssociateTag", kAssociateTag)
-      << Arg("Keywords", artist + " " + album)
-      << Arg("Operation", "ItemSearch")
-      << Arg("ResponseGroup", "Images")
-      << Arg("SearchIndex", "All")
-      << Arg("Service", "AWSECommerceService")
-      << Arg("Timestamp", QDateTime::currentDateTime().toString("yyyy-MM-ddThh:mm:ss.zzzZ"))
-      << Arg("Version", "2009-11-01");
+  Utilities::ArgList args = Utilities::ArgList()
+      << Utilities::Arg("AWSAccessKeyId", kAccessKey)
+      << Utilities::Arg("AssociateTag", kAssociateTag)
+      << Utilities::Arg("Keywords", artist + " " + album)
+      << Utilities::Arg("Operation", "ItemSearch")
+      << Utilities::Arg("ResponseGroup", "Images")
+      << Utilities::Arg("SearchIndex", "All")
+      << Utilities::Arg("Service", "AWSECommerceService")
+      << Utilities::Arg("Timestamp", QDateTime::currentDateTime().toString("yyyy-MM-ddThh:mm:ss.zzzZ"))
+      << Utilities::Arg("Version", "2009-11-01");
 
-  EncodedArgList encoded_args;
-  QStringList query_items;
+  Utilities::EncodedArgList encoded_args;
 
   // Encode the arguments
-  foreach (const Arg& arg, args) {
-    EncodedArg encoded_arg(QUrl::toPercentEncoding(arg.first),
-                           QUrl::toPercentEncoding(arg.second));
-    encoded_args << encoded_arg;
-    query_items << QString(encoded_arg.first + "=" + encoded_arg.second);
-  }
+  QString query_items = Utilities::UrlEncode(args, &encoded_args);
 
   // Sign the request
   QUrl url(kUrl);
 
   const QByteArray data_to_sign = QString("GET\n%1\n%2\n%3").arg(
-        url.host(), url.path(), query_items.join("&")).toAscii();
+        url.host(), url.path(), query_items).toAscii();
   const QByteArray signature(Utilities::HmacSha256(kSecretAccessKey, data_to_sign));
 
   // Add the signature to the request
-  encoded_args << EncodedArg("Signature", QUrl::toPercentEncoding(signature.toBase64()));
+  encoded_args << Utilities::EncodedArg
+      ("Signature", QUrl::toPercentEncoding(signature.toBase64()));
   url.setEncodedQueryItems(encoded_args);
 
   QNetworkReply* reply = network_->get(QNetworkRequest(url));

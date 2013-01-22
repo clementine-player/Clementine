@@ -567,6 +567,25 @@ bool IsLaptop() {
 #endif
 }
 
+QString UrlEncode(const ArgList& args, EncodedArgList* encoded_args) {
+  EncodedArgList temp_encoded_args;
+  QStringList query_items;
+
+  if (!encoded_args) {
+    encoded_args = &temp_encoded_args;
+  }
+
+  // Encode the arguments
+  foreach (const Arg& arg, args) {
+    EncodedArg encoded_arg(QUrl::toPercentEncoding(arg.first),
+                           QUrl::toPercentEncoding(arg.second));
+    *encoded_args << encoded_arg;
+    query_items << QString(encoded_arg.first + "=" + encoded_arg.second);
+  }
+
+  return query_items.join("&");
+}
+
 }  // namespace Utilities
 
 

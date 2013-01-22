@@ -37,7 +37,7 @@
 
 
 const char* CrashSender::kUploadURL =
-    "http://" CRASHREPORTING_HOSTNAME "/upload/crash";
+    "http://" CRASHREPORTING_HOSTNAME "/api/upload/minidump";
 
 CrashSender::CrashSender(const QString& minidump_filename,
                          const QString& log_filename)
@@ -75,8 +75,12 @@ bool CrashSender::Start() {
   progress_ = new QProgressDialog("Uploading crash report", "Cancel", 0, 0);
   progress_->show();
 
-  // We'll get a redirect first, so don't start POSTing data yet.
-  QNetworkReply* reply = network_->get(QNetworkRequest(QUrl(kUploadURL)));
+  Utilities::ArgList args;
+  ClientInfo(&args);
+  QByteArray data = Utilities::UrlEncode(args).toAscii();
+
+  // POST the metadata.
+  QNetworkReply* reply = network_->post(QNetworkRequest(QUrl(kUploadURL)), data);
   connect(reply, SIGNAL(finished()), SLOT(RedirectFinished()));
 
   return true;
@@ -91,57 +95,54 @@ void CrashSender::RedirectFinished() {
 
   reply->deleteLater();
 
-  QUrl url = reply->attribute(QNetworkRequest::RedirectionTargetAttribute).toUrl();
-  if (!url.isValid()) {
-    printf("Response didn't have a redirection target - HTTP %d\n",
-           reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt());
+  int code = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
+  if (code > 400) {
+    printf("Metadata upload caused HTTP %d: %s\n", code, reply->readAll().constData());
     progress_->close();
     return;
   }
 
-  printf("Uploading crash report to %s\n", url.toEncoded().constData());
-  QNetworkRequest req(url);
+  // "Parse" the response.
+  QUrl minidump_upload_url = QUrl::fromEncoded(reply->readLine());
+  QUrl log_upload_url = QUrl::fromEncoded(reply->readLine());
 
-  QHttpMultiPart* multi_part = new QHttpMultiPart(QHttpMultiPart::FormDataType);
-
-  // Create the HTTP part for the crash report file
-  QHttpPart minidump_part;
-  minidump_part.setHeader(QNetworkRequest::ContentDispositionHeader,
-                          "form-data; name=\"data\"; filename=\"data.dmp\"");
-  minidump_part.setBodyDevice(minidump_);
-  multi_part->append(minidump_part);
-
-  // Create the HTTP part for the log file.
-  if (log_->isOpen()) {
-    QHttpPart log_part;
-    log_part.setHeader(QNetworkRequest::ContentDispositionHeader,
-                       "form-data; name=\"log\"; filename=\"log.txt\"");
-    log_part.setBodyDevice(log_);
-    multi_part->append(log_part);
+  // Start the uploads.
+  if (!minidump_upload_url.isEmpty()) {
+    StartUpload(minidump_upload_url, "application/octet-stream", minidump_);
+    printf("Uploading crash report to %s\n",
+           minidump_upload_url.toEncoded().constData());
   }
 
-  // Get some information about the thing that crashed and add that to the
-  // request as well.
-  QList<ClientInfoPair> info(ClientInfo());
-  foreach (const ClientInfoPair& pair, info) {
-    QHttpPart part;
-    part.setHeader(QNetworkRequest::ContentDispositionHeader,
-                   QString("form-data; name=\"" + pair.first + "\""));
-    part.setBody(pair.second.toUtf8());
-    multi_part->append(part);
+  if (!log_upload_url.isEmpty()) {
+    StartUpload(log_upload_url, "text/plain", log_);
+    printf("Uploading log to %s\n", log_upload_url.toEncoded().constData());
   }
 
-  // Start uploading the crash report
-  reply = network_->post(req, multi_part);
+  CheckUploadsFinished();
+}
 
-  connect(reply, SIGNAL(uploadProgress(qint64,qint64)), SLOT(UploadProgress(qint64,qint64)));
+void CrashSender::StartUpload(const QUrl& url, const QString& content_type,
+                              QIODevice* file) {
+  QNetworkRequest request(url);
+  request.setHeader(QNetworkRequest::ContentTypeHeader, content_type);
+
+  QNetworkReply* reply = network_->put(request, file);
+  connect(reply, SIGNAL(uploadProgress(qint64,qint64)),
+          SLOT(UploadProgress(qint64,qint64)));
   connect(reply, SIGNAL(finished()), SLOT(UploadFinished()));
+
+  UploadState state;
+  state.total_size_ = file->size();
+  state.progress_ = 0;
+  state.done_ = false;
+  upload_state_[reply] = state;
 }
 
 void CrashSender::UploadProgress(qint64 bytes, qint64 total) {
-  printf("Uploaded %lld of %lld bytes\n", bytes, total);
-  progress_->setMaximum(total);
-  progress_->setValue(bytes);
+  UploadState* state = &upload_state_[qobject_cast<QNetworkReply*>(sender())];
+  state->progress_ = bytes;
+  state->total_size_ = total;
+  CheckUploadsFinished();
 }
 
 void CrashSender::UploadFinished() {
@@ -151,35 +152,55 @@ void CrashSender::UploadFinished() {
   reply->deleteLater();
 
   int code = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
-  if (code > 400) {
+  if (code != 200) {
     printf("Upload caused HTTP %d: %s\n", code, reply->readAll().constData());
   }
 
-  progress_->close();
+  UploadState* state = &upload_state_[reply];
+  state->done_ = true;
+
+  CheckUploadsFinished();
 }
 
-QList<CrashSender::ClientInfoPair> CrashSender::ClientInfo() const {
-  QList<ClientInfoPair> ret;
+void CrashSender::CheckUploadsFinished() {
+  qint64 total_sum = 0;
+  qint64 progress_sum = 0;
+  bool downloads_pending = false;
 
-  ret.append(ClientInfoPair("version", CLEMENTINE_VERSION_DISPLAY));
-  ret.append(ClientInfoPair("qt_version", qVersion()));
+  foreach (const UploadState& state, upload_state_) {
+    total_sum += state.total_size_;
+    progress_sum += state.progress_;
+    if (!state.done_) {
+      downloads_pending = true;
+    }
+  }
+
+  if (!downloads_pending) {
+    progress_->close();
+  } else {
+    progress_->setMaximum(int(total_sum / 1024));
+    progress_->setValue(int(progress_sum / 1024));
+  }
+}
+
+void CrashSender::ClientInfo(Utilities::ArgList* args) const {
+  args->append(Utilities::Arg("version", CLEMENTINE_VERSION_DISPLAY));
+  args->append(Utilities::Arg("qt_version", qVersion()));
 
   // Get the OS version
 #if defined(Q_OS_MAC)
-  ret.append(ClientInfoPair("os", "mac"));
-  ret.append(ClientInfoPair("os_version", mac::GetOSXVersion()));
+  args->append(Utilities::Arg("os", "mac"));
+  args->append(Utilities::Arg("os_version", mac::GetOSXVersion()));
 #elif defined(Q_OS_WIN)
-  ret.append(ClientInfoPair("os", "win"));
-  ret.append(ClientInfoPair("os_version", QString::number(QSysInfo::WindowsVersion)));
+  args->append(Utilities::Arg("os", "win"));
+  args->append(Utilities::Arg("os_version", QString::number(QSysInfo::WindowsVersion)));
 #else
-  ret.append(ClientInfoPair("os", "linux"));
+  args->append(Utilities::Arg("os", "linux"));
 
   QFile lsb_release("/etc/lsb-release");
   if (lsb_release.open(QIODevice::ReadOnly)) {
-    ret.append(ClientInfoPair("os_version",
-                              QString::fromUtf8(lsb_release.readAll()).simplified()));
+    args->append(Utilities::Arg("os_version",
+                                QString::fromUtf8(lsb_release.readAll()).simplified()));
   }
 #endif
-
-  return ret;
 }

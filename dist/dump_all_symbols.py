@@ -11,6 +11,7 @@ import shutil
 import subprocess
 import sys
 import tempfile
+import traceback
 
 LDD_RE = re.compile(r'^\t([^ ]+) => ([^ ]+) ', re.MULTILINE)
 OTOOL_RE = re.compile(r'^\t([^ ]+) \(', re.MULTILINE)
@@ -19,8 +20,7 @@ DEFAULT_CRASHREPORTING_HOSTNAME = "crashes.clementine-player.org"
 DEFAULT_SYMBOLS_DIRECTORY = "symbols"
 DEFAULT_DUMP_SYMS_BINARY = "3rdparty/google-breakpad/dump_syms"
 
-UPLOAD_URL = "http://%s/upload/symbols"
-SYMBOLCHECK_URL = "http://%s/symbolcheck"
+SYMBOLUPLOAD_URL = "http://%s/api/upload/symbols"
 
 
 class BaseDumperImpl(object):
@@ -160,35 +160,26 @@ class Uploader(object):
     return stringio
 
   def UploadMissing(self):
+    name_hashes = {"%s/%s" % x: x for x in self.dumper.binary_namehashes}
+
     # Which symbols aren't on the server yet?
-    url = SYMBOLCHECK_URL % self.crashreporting_hostname
-    missing_symbols = requests.post(url, data=json.dumps({
-      "binary_info": [
-        {
-          "name": x[0],
-          "hash": x[1],
-        } for x in self.dumper.binary_namehashes
-      ],
-    })).json()
+    url = SYMBOLUPLOAD_URL % self.crashreporting_hostname
+    response = requests.post(url, data={
+      "symbol": name_hashes.keys(),
+    }).json()
 
-    for info in missing_symbols["missing_symbols"]:
-      symbol_filename = self.dumper.SymbolFilename((info["name"], info["hash"]))
-      logging.info("Uploading '%s'", symbol_filename)
+    for path, url in response["urls"].items():
+      try:
+        symbol_filename = self.dumper.SymbolFilename(name_hashes[path])
+        logging.info("Uploading '%s'", symbol_filename)
 
-      # Get the upload URL
-      url = UPLOAD_URL % self.crashreporting_hostname
-      redirect_response = requests.get(url, allow_redirects=False)
-      blobstore_url = redirect_response.headers["Location"]
-
-      # Upload the symbols
-      requests.post(blobstore_url,
-          files={"data": (symbol_filename + ".gz",
-                          self.Compress(symbol_filename))},
-          data={
-            "name": info["name"],
-            "hash": info["hash"],
-          }
-      )
+        upload_response = requests.put(url,
+            data=self.Compress(symbol_filename).read(),
+            headers={'content-type': 'application/gzip'})
+        upload_response.raise_for_status()
+      except Exception:
+        logging.warning("Failed to upload file '%s': %s" % (
+            symbol_filename, traceback.format_exc()))
 
 
 def main():

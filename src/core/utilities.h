@@ -95,6 +95,17 @@ namespace Utilities {
   // Replaces some HTML entities with their normal characters.
   QString DecodeHtmlEntities(const QString& text);
 
+  // URL encodes the key/value pairs and returns a string with them joined by
+  // & characters.  Identical to Python's urllib.urlencode.
+  // If encoded_args is not NULL, appends the encoded arguments to that list as
+  // well so you can use them for generating signatures for web services.
+  typedef QPair<QString, QString> Arg;
+  typedef QList<Arg> ArgList;
+  typedef QPair<QByteArray, QByteArray> EncodedArg;
+  typedef QList<EncodedArg> EncodedArgList;
+  QString UrlEncode(const ArgList& args,
+                    EncodedArgList* encoded_args = NULL);
+
   // Shortcut for getting a Qt-aware enum value as a string.
   // Pass in the QMetaObject of the class that owns the enum, the string name of
   // the enum and a valid value from that enum.
