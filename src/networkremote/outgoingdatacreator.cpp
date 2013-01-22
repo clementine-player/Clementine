@@ -18,6 +18,7 @@
 #include "outgoingdatacreator.h"
 #include "networkremote.h"
 #include "core/logging.h"
+#include "core/timeconstants.h"
 
 OutgoingDataCreator::OutgoingDataCreator(Application* app)
   : app_(app)
@@ -26,6 +27,10 @@ OutgoingDataCreator::OutgoingDataCreator(Application* app)
   keep_alive_timer_ = new QTimer(this);
   connect(keep_alive_timer_, SIGNAL(timeout()), this, SLOT(SendKeepAlive()));
   keep_alive_timeout_ = 10000;
+
+  // Create the song position timer
+  track_position_timer_ = new QTimer(this);
+  connect(track_position_timer_, SIGNAL(timeout()), this, SLOT(UpdateTrackPosition()));
 }
 
 OutgoingDataCreator::~OutgoingDataCreator() {
@@ -43,9 +48,6 @@ void OutgoingDataCreator::SendDataToClients(pb::remote::Message* msg) {
   if (clients_->empty()) {
     return;
   }
-
-  // Add the Version number
-  msg->set_version(NetworkRemote::kProtocolBufferVersion);
 
   RemoteClient* client;
   foreach(client, *clients_) {
@@ -166,6 +168,7 @@ void OutgoingDataCreator::CreateSong(
     song_metadata->set_artist(DataCommaSizeFromQString(song.artist()));
     song_metadata->set_album(DataCommaSizeFromQString(song.album()));
     song_metadata->set_albumartist(DataCommaSizeFromQString(song.albumartist()));
+    song_metadata->set_length(song.length_nanosec() / kNsecPerSec);
     song_metadata->set_pretty_length(DataCommaSizeFromQString(song.PrettyLength()));
     song_metadata->set_genre(DataCommaSizeFromQString(song.genre()));
     song_metadata->set_pretty_year(DataCommaSizeFromQString(song.PrettyYear()));
@@ -257,12 +260,16 @@ void OutgoingDataCreator::StateChanged(Engine::State state) {
 
   switch (state) {
   case Engine::Playing: msg.set_type(pb::remote::PLAY);
+                        track_position_timer_->start(1000);
                         break;
   case Engine::Paused:  msg.set_type(pb::remote::PAUSE);
+                        track_position_timer_->stop();
                         break;
   case Engine::Empty:   msg.set_type(pb::remote::STOP); // Empty is called when player stopped
+                        track_position_timer_->stop();
                         break;
   default:              msg.set_type(pb::remote::STOP);
+                        track_position_timer_->stop();
                         break;
   };
 
@@ -316,5 +323,17 @@ void OutgoingDataCreator::SendShuffleMode(PlaylistSequence::ShuffleMode mode) {
 void OutgoingDataCreator::SendKeepAlive() {
   pb::remote::Message msg;
   msg.set_type(pb::remote::KEEP_ALIVE);
+  SendDataToClients(&msg);
+}
+
+void OutgoingDataCreator::UpdateTrackPosition() {
+  pb::remote::Message msg;
+  msg.set_type(pb::remote::UPDATE_TRACK_POSITION);
+
+  const int position = std::floor(
+    float(app_->player()->engine()->position_nanosec()) / kNsecPerSec + 0.5);
+
+  msg.mutable_response_update_track_position()->set_position(position);
+
   SendDataToClients(&msg);
 }

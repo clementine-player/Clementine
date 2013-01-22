@@ -28,7 +28,6 @@
 
 const char* NetworkRemote::kSettingsGroup = "NetworkRemote";
 const quint16 NetworkRemote::kDefaultServerPort = 5500;
-const int NetworkRemote::kProtocolBufferVersion = 1;
 
 NetworkRemote::NetworkRemote(Application* app, QObject* parent)
   : QObject(parent),

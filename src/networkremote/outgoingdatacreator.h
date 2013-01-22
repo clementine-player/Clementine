@@ -36,6 +36,7 @@ public slots:
   void SendKeepAlive();
   void SendRepeatMode(PlaylistSequence::RepeatMode mode);
   void SendShuffleMode(PlaylistSequence::ShuffleMode mode);
+  void UpdateTrackPosition();
 
 private:
   Application* app_;
@@ -45,6 +46,7 @@ private:
   QImage current_image_;
   Engine::State last_state_;
   QTimer* keep_alive_timer_;
+  QTimer* track_position_timer_;
   int keep_alive_timeout_;
 
   void SendDataToClients(pb::remote::Message* msg);
