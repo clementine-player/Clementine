@@ -268,6 +268,7 @@ void TagReaderWorker::ReadFile(const QString& filename,
       if(items.contains("\251wrt")) {
         Decode(items["\251wrt"].toStringList().toString(", "), NULL, song->mutable_composer());
       }
+      Decode(mp4_tag->comment(), NULL, song->mutable_comment());
     }
   } else if (tag) {
     Decode(tag->comment(), NULL, song->mutable_comment());
