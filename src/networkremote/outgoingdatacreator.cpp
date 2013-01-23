@@ -16,6 +16,9 @@
 */
 
 #include "outgoingdatacreator.h"
+
+#include <cmath>
+
 #include "networkremote.h"
 #include "core/logging.h"
 #include "core/timeconstants.h"
