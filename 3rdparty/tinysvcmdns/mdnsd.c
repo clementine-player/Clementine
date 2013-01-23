@@ -30,7 +30,6 @@
 #include <winsock2.h>
 #include <ws2tcpip.h>
 #define LOG_ERR 3
-#define pipe(fds) _pipe(fds, 4096, _O_BINARY)
 #else
 #include <sys/select.h>
 #include <sys/socket.h>
@@ -335,6 +334,71 @@ static int process_mdns_pkt(struct mdnsd *svr, struct mdns_pkt *pkt, struct mdns
 	return 0;
 }
 
+int create_pipe(int handles[2]) {
+#ifdef _WIN32
+	SOCKET sock = socket(AF_INET, SOCK_STREAM, 0);
+	if (sock == INVALID_SOCKET) {
+		return -1;
+	}
+	struct sockaddr_in serv_addr;
+	memset(&serv_addr, 0, sizeof(serv_addr));
+	serv_addr.sin_family = AF_INET;
+	serv_addr.sin_port = htons(0);
+	serv_addr.sin_addr.s_addr = htonl(INADDR_LOOPBACK);
+	if (bind(sock, (struct sockaddr*)&serv_addr, sizeof(serv_addr)) == SOCKET_ERROR) {
+		closesocket(sock);
+		return -1;
+	}
+	if (listen(sock, 1) == SOCKET_ERROR) {
+		closesocket(sock);
+		return -1;
+	}
+	int len = sizeof(serv_addr);
+	if (getsockname(sock, (SOCKADDR*)&serv_addr, &len) == SOCKET_ERROR) {
+		closesocket(sock);
+		return -1;
+	}
+	if ((handles[1] = socket(PF_INET, SOCK_STREAM, 0)) == INVALID_SOCKET) {
+		closesocket(sock);
+		return -1;
+	}
+	if (connect(handles[1], (struct sockaddr*)&serv_addr, len) == SOCKET_ERROR) {
+		closesocket(sock);
+		return -1;
+	}
+	if ((handles[0] = accept(sock, (struct sockaddr*)&serv_addr, &len)) == INVALID_SOCKET) {
+		closesocket((SOCKET)handles[1]);
+		handles[1] = INVALID_SOCKET;
+		closesocket(sock);
+		return -1;
+	}
+	closesocket(sock);
+	return 0;
+#else
+	return pipe(handles);
+#endif
+}
+
+int read_pipe(int s, char* buf, int len) {
+#ifdef _WIN32
+	int ret = recv(s, buf, len, 0);
+	if (ret < 0 && WSAGetLastError() == WSAECONNRESET) {
+		ret = 0;
+	}
+	return ret;
+#else
+	return read(s, buf, len);
+#endif
+}
+
+int write_pipe(int s, char* buf, int len) {
+#ifdef _WIN32
+	return send(s, buf, len, 0);
+#else
+	return write(s, buf, len);
+#endif
+}
+
 // main loop to receive, process and send out MDNS replies
 // also handles MDNS service announces
 static void main_loop(struct mdnsd *svr) {
@@ -358,7 +422,7 @@ static void main_loop(struct mdnsd *svr) {
 
 		if (FD_ISSET(svr->notify_pipe[0], &sockfd_set)) {
 			// flush the notify_pipe
-			read(svr->notify_pipe[0], &notify_buf, 1);
+			read_pipe(svr->notify_pipe[0], (char*)&notify_buf, 1);
 		} else if (FD_ISSET(svr->sockfd, &sockfd_set)) {
 			struct sockaddr_in fromaddr;
 			socklen_t sockaddr_size = sizeof(struct sockaddr_in);
@@ -533,7 +597,7 @@ struct mdns_service *mdnsd_register_svc(struct mdnsd *svr, const char *instance_
 	free(inst_nlabel);
 
 	// notify server
-	write(svr->notify_pipe[1], ".", 1);
+	write_pipe(svr->notify_pipe[1], ".", 1);
 
 	return service;
 }
@@ -551,7 +615,7 @@ struct mdnsd *mdnsd_start() {
 	struct mdnsd *server = malloc(sizeof(struct mdnsd));
 	memset(server, 0, sizeof(struct mdnsd));
 
-	if (pipe(server->notify_pipe) != 0) {
+	if (create_pipe(server->notify_pipe) != 0) {
 		log_message(LOG_ERR, "pipe(): %m\n");
 		free(server);
 		return NULL;
@@ -588,7 +652,7 @@ void mdnsd_stop(struct mdnsd *s) {
 	};
 
 	s->stop_flag = 1;
-	write(s->notify_pipe[1], ".", 1);
+	write_pipe(s->notify_pipe[1], ".", 1);
 
 	while (s->stop_flag != 2)
 		select(0, NULL, NULL, NULL, &tv);
