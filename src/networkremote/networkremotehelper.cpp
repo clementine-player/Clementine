@@ -33,6 +33,10 @@ NetworkRemoteHelper::NetworkRemoteHelper(Application* app)
   connect(this, SIGNAL(SetupServerSig()),
           app_->network_remote(), SLOT(SetupServer()));
 
+  // Start the server once the playlistmanager is initialized
+  connect(app_->playlist_manager(), SIGNAL(PlaylistManagerInitialized()),
+          this, SLOT(StartServer()));
+
   sInstance = this;
 }
 

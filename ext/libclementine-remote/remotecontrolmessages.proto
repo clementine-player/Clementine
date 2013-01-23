@@ -31,6 +31,7 @@ enum MsgType {
   PLAYLIST_SONGS = 43;
   ENGINE_STATE_CHANGED = 44;
   KEEP_ALIVE = 45;
+  UPDATE_TRACK_POSITION = 46;
 }
 
 // Valid Engine states
@@ -56,6 +57,7 @@ message SongMetadata {
   optional int32 playcount = 11;
   optional string pretty_length = 12;
   optional bytes art = 13;
+  optional int32 length = 14;
 }
 
 // Playlist informations
@@ -139,9 +141,14 @@ message ResponseEngineStateChanged {
   optional EngineState state = 1;
 }
 
+// Sends the current position of the track
+message ResponseUpdateTrackPosition {  
+  optional int32 position = 1;
+}
+
 // The message itself
 message Message {
-  optional int32 version = 1 [default=1];
+  optional int32 version = 1 [default=2];
   optional MsgType type = 2 [default=UNKNOWN]; // What data is in the message?
 
   optional RequestPlaylistSongs request_playlist_songs = 10;
@@ -154,4 +161,5 @@ message Message {
   optional ResponsePlaylists response_playlists = 17;
   optional ResponsePlaylistSongs response_playlist_songs = 18;
   optional ResponseEngineStateChanged response_engine_state_changed = 19;
+  optional ResponseUpdateTrackPosition response_update_track_position = 20;
 }

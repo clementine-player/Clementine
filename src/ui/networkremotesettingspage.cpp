@@ -60,6 +60,9 @@ void NetworkRemoteSettingsPage::Load() {
   }
 
   s.endGroup();
+
+  QPixmap android_qr_code(":clementine_remote_qr.png");
+  ui_->android_app_qr->setPixmap(android_qr_code);
 }
 
 void NetworkRemoteSettingsPage::Save() {
