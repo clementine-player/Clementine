@@ -65,6 +65,10 @@ void NetworkRemote::SetupServer() {
           SIGNAL(ArtLoaded(const Song&, const QString&, const QImage&)),
           outgoing_data_creator_.get(),
           SLOT(CurrentSongChanged(const Song&, const QString&, const QImage&)));
+
+  // Only connect the signals once
+  connect(server_.get(), SIGNAL(newConnection()), this, SLOT(AcceptConnection()));
+  connect(server_ipv6_.get(), SIGNAL(newConnection()), this, SLOT(AcceptConnection()));
 }
 
 void NetworkRemote::StartServer() {
@@ -81,9 +85,6 @@ void NetworkRemote::StartServer() {
 
   qLog(Info) << "Starting network remote";
 
-  connect(server_.get(), SIGNAL(newConnection()), this, SLOT(AcceptConnection()));
-  connect(server_ipv6_.get(), SIGNAL(newConnection()), this, SLOT(AcceptConnection()));
-
   server_->listen(QHostAddress::Any, port_);
   server_ipv6_->listen(QHostAddress::AnyIPv6, port_);
 
@@ -97,6 +98,7 @@ void NetworkRemote::StartServer() {
 
 void NetworkRemote::StopServer() {
   if (server_->isListening()) {
+    outgoing_data_creator_.get()->DisconnectAllClients();
     server_->close();
     server_ipv6_->close();
     clients_.clear();
@@ -176,7 +178,7 @@ void NetworkRemote::CreateRemoteClient(QTcpSocket *client_socket) {
     clients_.push_back(client);
 
     // Connect the signal to parse data
-    connect(client, SIGNAL(Parse(QByteArray)),
-            incoming_data_parser_.get(), SLOT(Parse(QByteArray)));
+    connect(client, SIGNAL(Parse(pb::remote::Message)),
+            incoming_data_parser_.get(), SLOT(Parse(pb::remote::Message)));
   }
 }

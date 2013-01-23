@@ -83,6 +83,33 @@
         </item>
        </layout>
       </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <item>
+         <widget class="QCheckBox" name="use_auth_code">
+          <property name="toolTip">
+           <string>A client can connect only, if the correct code was entered.</string>
+          </property>
+          <property name="text">
+           <string>Use authentication code</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QSpinBox" name="auth_code">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="suffix">
+           <string/>
+          </property>
+          <property name="maximum">
+           <number>99999</number>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
      </layout>
     </widget>
    </item>
@@ -143,6 +170,22 @@
     <hint type="destinationlabel">
      <x>199</x>
      <y>60</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>use_auth_code</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>auth_code</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>137</x>
+     <y>124</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>351</x>
+     <y>125</y>
     </hint>
    </hints>
   </connection>

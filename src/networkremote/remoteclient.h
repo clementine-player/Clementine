@@ -21,10 +21,16 @@ private slots:
   void IncomingData();
 
 signals:
-  void Parse(const QByteArray& pb_data);
+  void Parse(const pb::remote::Message& msg);
 
 private:
+  void ParseMessage(const QByteArray& data);
+  void DisconnectClient();
+
   Application* app_;
+
+  bool use_auth_code_;
+  int auth_code_;
 
   QTcpSocket* client_;
   bool reading_protobuf_;

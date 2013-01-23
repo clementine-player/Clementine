@@ -340,3 +340,10 @@ void OutgoingDataCreator::UpdateTrackPosition() {
 
   SendDataToClients(&msg);
 }
+
+void OutgoingDataCreator::DisconnectAllClients() {
+  pb::remote::Message msg;
+  msg.set_type(pb::remote::DISCONNECT);
+  msg.mutable_response_disconnect()->set_reason_disconnect(pb::remote::Server_Shutdown);
+  SendDataToClients(&msg);
+}

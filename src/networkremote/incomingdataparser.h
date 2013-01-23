@@ -14,7 +14,7 @@ public:
   bool close_connection();
 
 public slots:
-  void Parse(const QByteArray& pb_data);
+  void Parse(const pb::remote::Message& msg);
 
 signals:
   void SendClementineInfo();
@@ -34,6 +34,7 @@ signals:
   void ShuffleCurrent();
   void SetRepeatMode(PlaylistSequence::RepeatMode mode);
   void SetShuffleMode(PlaylistSequence::ShuffleMode mode);
+  void SeekTo(int seconds);
 
 private slots:
   void PlaylistManagerInitialized();
