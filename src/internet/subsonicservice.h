@@ -1,15 +1,15 @@
 #ifndef SUBSONICSERVICE_H
 #define SUBSONICSERVICE_H
 
-#include "internetmodel.h"
-#include "internetservice.h"
-
 #include <QQueue>
 
+#include "internet/internetmodel.h"
+#include "internet/internetservice.h"
+
 class QNetworkAccessManager;
-class QXmlStreamReader;
-class QSortFilterProxyModel;
 class QNetworkReply;
+class QSortFilterProxyModel;
+class QXmlStreamReader;
 
 class SubsonicUrlHandler;
 class SubsonicLibraryScanner;
@@ -65,15 +65,16 @@ class SubsonicService : public InternetService
   void ReloadSettings();
 
   void Login();
-  void Login(const QString &server, const QString &username, const QString &password);
+  void Login(
+      const QString &server, const QString &username, const QString &password);
   LoginState login_state() const { return login_state_; }
 
   // Subsonic API methods
   void Ping();
 
-  QUrl BuildRequestUrl(const QString &view);
+  QUrl BuildRequestUrl(const QString& view) const;
   // Convenience function to reduce QNetworkRequest/QSslConfiguration boilerplate
-  QNetworkReply* Send(const QUrl &url);
+  QNetworkReply* Send(const QUrl& url);
 
   static const char* kServiceName;
   static const char* kSettingsGroup;
@@ -115,8 +116,8 @@ class SubsonicService : public InternetService
   void UpdateTotalSongCount(int count);
   void ReloadDatabase();
   void ReloadDatabaseFinished();
-  void onLoginStateChanged(SubsonicService::LoginState newstate);
-  void onPingFinished(QNetworkReply* reply);
+  void OnLoginStateChanged(SubsonicService::LoginState newstate);
+  void OnPingFinished(QNetworkReply* reply);
 
   void ShowConfig();
 };
@@ -125,7 +126,7 @@ class SubsonicLibraryScanner : public QObject {
   Q_OBJECT
 
  public:
-  SubsonicLibraryScanner(SubsonicService* service, QObject* parent=0);
+  SubsonicLibraryScanner(SubsonicService* service, QObject* parent = 0);
   ~SubsonicLibraryScanner();
 
   void Scan();
@@ -139,13 +140,13 @@ class SubsonicLibraryScanner : public QObject {
 
  private slots:
   // Step 1: use getAlbumList2 type=alphabeticalByName to list all albums
-  void onGetAlbumListFinished(QNetworkReply* reply, int offset);
+  void OnGetAlbumListFinished(QNetworkReply* reply, int offset);
   // Step 2: use getAlbum id=? to list all songs for each album
-  void onGetAlbumFinished(QNetworkReply* reply);
+  void OnGetAlbumFinished(QNetworkReply* reply);
 
  private:
   void GetAlbumList(int offset);
-  void GetAlbum(QString id);
+  void GetAlbum(const QString& id);
 
   SubsonicService* service_;
   bool scanning_;
