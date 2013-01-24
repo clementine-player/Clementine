@@ -76,6 +76,7 @@ public:
     Page_Transcoding,
     Page_Remote,
     Page_Wiimotedev,
+    Page_Subsonic,
     Page_Podcasts,
     Page_GoogleDrive,
     Page_UbuntuOne,

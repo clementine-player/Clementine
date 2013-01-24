@@ -38,6 +38,7 @@
 #include "internet/digitallyimportedsettingspage.h"
 #include "internet/groovesharksettingspage.h"
 #include "internet/magnatunesettingspage.h"
+#include "internet/subsonicsettingspage.h"
 #include "internet/ubuntuonesettingspage.h"
 #include "library/librarysettingspage.h"
 #include "playlist/playlistview.h"
@@ -173,6 +174,7 @@ SettingsDialog::SettingsDialog(Application* app, BackgroundStreams* streams, QWi
   AddPage(Page_Magnatune, new MagnatuneSettingsPage(this), providers);
   AddPage(Page_DigitallyImported, new DigitallyImportedSettingsPage(this), providers);
   AddPage(Page_BackgroundStreams, new BackgroundStreamsSettingsPage(this), providers);
+  AddPage(Page_Subsonic, new SubsonicSettingsPage(this), providers);
   AddPage(Page_Podcasts, new PodcastSettingsPage(this), providers);
 
   // List box

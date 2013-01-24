@@ -29,7 +29,9 @@
 #include "internetservice.h"
 #include "savedradio.h"
 #include "somafmservice.h"
+#include "groovesharkservice.h"
 #include "soundcloudservice.h"
+#include "subsonicservice.h"
 #include "core/closure.h"
 #include "core/logging.h"
 #include "core/mergedproxymodel.h"
@@ -94,6 +96,7 @@ InternetModel::InternetModel(Application* app, QObject* parent)
 #ifdef HAVE_SPOTIFY
   AddService(new SpotifyService(app, this));
 #endif
+  AddService(new SubsonicService(app, this));
 #ifdef HAVE_UBUNTU_ONE
   AddService(new UbuntuOneService(app, this));
 #endif

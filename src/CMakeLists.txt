@@ -194,6 +194,9 @@ set(SOURCES
   internet/somafmservice.cpp
   internet/somafmurlhandler.cpp
   internet/soundcloudservice.cpp
+  internet/subsonicservice.cpp
+  internet/subsonicsettingspage.cpp
+  internet/subsonicurlhandler.cpp
 
   library/groupbydialog.cpp
   library/library.cpp
@@ -478,6 +481,9 @@ set(HEADERS
   internet/somafmservice.h
   internet/somafmurlhandler.h
   internet/soundcloudservice.h
+  internet/subsonicservice.h
+  internet/subsonicsettingspage.h
+  internet/subsonicurlhandler.h
 
   library/groupbydialog.h
   library/library.h
@@ -660,6 +666,7 @@ set(UI
   internet/magnatunesettingspage.ui
   internet/searchboxwidget.ui
   internet/spotifysettingspage.ui
+  internet/subsonicsettingspage.ui
 
   library/groupbydialog.ui
   library/libraryfilterwidget.ui
