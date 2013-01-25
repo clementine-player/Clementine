@@ -209,7 +209,7 @@ void GlobalSearchView::ReloadSettings() {
     // Sort the list of providers
     QList<SearchProvider*> providers = engine_->providers();
     qSort(providers.begin(), providers.end(),
-          boost::bind(&CompareProvider, provider_order, _1, _2));
+          boost::bind(&CompareProvider, boost::cref(provider_order), _1, _2));
   
     bool any_disabled = false;
   
