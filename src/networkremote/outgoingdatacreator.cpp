@@ -137,6 +137,9 @@ void OutgoingDataCreator::SendFirstData() {
 
   // then the current volume
   VolumeChanged(app_->player()->GetVolume());
+
+  // And the current track position
+  UpdateTrackPosition();
 }
 
 void OutgoingDataCreator::CurrentSongChanged(const Song& song, const QString& uri, const QImage& img) {
