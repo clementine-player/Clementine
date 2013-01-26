@@ -94,6 +94,7 @@ class Song {
     Type_Wav = 10,
     Type_TrueAudio = 11,
     Type_Cdda = 12,
+    Type_OggOpus = 13,
 
     Type_Stream = 99,
   };

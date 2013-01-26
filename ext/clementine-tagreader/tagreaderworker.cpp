@@ -39,6 +39,9 @@
 #include <mpcfile.h>
 #include <mpegfile.h>
 #include <oggfile.h>
+#ifdef TAGLIB_HAS_OPUS
+#include <opusfile.h>
+#endif
 #include <oggflacfile.h>
 #include <speexfile.h>
 #include <tag.h>
@@ -232,7 +235,16 @@ void TagReaderWorker::ReadFile(const QString& filename,
       ParseOggTag(file->tag()->fieldListMap(), NULL, &disc, &compilation, song);
     }
     Decode(tag->comment(), NULL, song->mutable_comment());
-  } else if (TagLib::FLAC::File* file = dynamic_cast<TagLib::FLAC::File*>(fileref->file())) {
+  } 
+#ifdef TAGLIB_HAS_OPUS
+  else if (TagLib::Ogg::Opus::File* file = dynamic_cast<TagLib::Ogg::Opus::File*>(fileref->file())) {
+    if (file->tag()) {
+      ParseOggTag(file->tag()->fieldListMap(), NULL, &disc, &compilation, song);
+    }
+    Decode(tag->comment(), NULL, song->mutable_comment());
+  }
+#endif
+  else if (TagLib::FLAC::File* file = dynamic_cast<TagLib::FLAC::File*>(fileref->file())) {
     if ( file->xiphComment() ) {
       ParseOggTag(file->xiphComment()->fieldListMap(), NULL, &disc, &compilation, song);
 #ifdef TAGLIB_HAS_FLAC_PICTURELIST
@@ -422,6 +434,10 @@ pb::tagreader::SongMetadata_Type TagReaderWorker::GuessFileType(
     return pb::tagreader::SongMetadata_Type_OGGSPEEX;
   if (dynamic_cast<TagLib::Ogg::Vorbis::File*>(fileref->file()))
     return pb::tagreader::SongMetadata_Type_OGGVORBIS;
+#ifdef TAGLIB_HAS_OPUS
+  if (dynamic_cast<TagLib::Ogg::Opus::File*>(fileref->file()))
+    return pb::tagreader::SongMetadata_Type_OGGOPUS;
+#endif
   if (dynamic_cast<TagLib::RIFF::AIFF::File*>(fileref->file()))
     return pb::tagreader::SongMetadata_Type_AIFF;
   if (dynamic_cast<TagLib::RIFF::WAV::File*>(fileref->file()))
@@ -467,6 +483,15 @@ bool TagReaderWorker::SaveFile(const QString& filename,
     tag->addField("DISCNUMBER", QStringToTaglibString(song.disc() <= 0 -1 ? QString() : QString::number(song.disc())), true);
     tag->addField("COMPILATION", StdStringToTaglibString(song.compilation() ? "1" : "0"), true);
   }
+#ifdef TAGLIB_HAS_OPUS
+  else if (TagLib::Ogg::Opus::File* file = dynamic_cast<TagLib::Ogg::Opus::File*>(fileref->file())) {
+    TagLib::Ogg::XiphComment* tag = file->tag();
+    tag->addField("COMPOSER", StdStringToTaglibString(song.composer()), true);
+    tag->addField("BPM", QStringToTaglibString(song.bpm() <= 0 -1 ? QString() : QString::number(song.bpm())), true);
+    tag->addField("DISCNUMBER", QStringToTaglibString(song.disc() <= 0 -1 ? QString() : QString::number(song.disc())), true);
+    tag->addField("COMPILATION", StdStringToTaglibString(song.compilation() ? "1" : "0"), true);
+  }
+#endif
   else if (TagLib::FLAC::File* file = dynamic_cast<TagLib::FLAC::File*>(fileref->file())) {
     TagLib::Ogg::XiphComment* tag = file->xiphComment();
     tag->addField("COMPOSER", StdStringToTaglibString(song.composer()), true);
@@ -641,7 +666,17 @@ bool TagReaderWorker::ReadCloudFile(const QUrl& download_url,
         stream,
         true,
         TagLib::AudioProperties::Accurate));
-  } else if (mime_type == "application/x-flac" ||
+  } 
+#ifdef TAGLIB_HAS_OPUS
+  else if (mime_type == "application/opus" ||
+             mime_type == "audio/opus") {
+    tag.reset(new TagLib::Ogg::Opus::File(
+        stream,
+        true,
+        TagLib::AudioProperties::Accurate));
+  }
+#endif
+  else if (mime_type == "application/x-flac" ||
              mime_type == "audio/flac") {
     tag.reset(new TagLib::FLAC::File(
         stream,
