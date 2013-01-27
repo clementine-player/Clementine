@@ -1,5 +1,6 @@
 #include "subsonicsettingspage.h"
 #include "ui_subsonicsettingspage.h"
+#include "core/logging.h"
 #include "internetmodel.h"
 
 #include <QSettings>
@@ -12,6 +13,8 @@ SubsonicSettingsPage::SubsonicSettingsPage(SettingsDialog *dialog)
   ui_->setupUi(this);
   setWindowIcon(QIcon(":/providers/subsonic-32.png"));
 
+  connect(ui_->server, SIGNAL(editingFinished()),
+          SLOT(ServerEditingFinished()));
   connect(ui_->login, SIGNAL(clicked()), SLOT(Login()));
   connect(ui_->login_state, SIGNAL(LogoutClicked()), SLOT(Logout()));
   connect(service_, SIGNAL(LoginStateChanged(SubsonicService::LoginState)),
@@ -21,6 +24,10 @@ SubsonicSettingsPage::SubsonicSettingsPage(SettingsDialog *dialog)
   ui_->login_state->AddCredentialField(ui_->username);
   ui_->login_state->AddCredentialField(ui_->password);
   ui_->login_state->AddCredentialGroup(ui_->server_group);
+
+  ui_->login_state->SetAccountTypeText(tr(
+      "Streaming from a Subsonic server requires a valid server license after the 30-day trial period."));
+  ui_->login_state->SetAccountTypeVisible(true);
 }
 
 SubsonicSettingsPage::~SubsonicSettingsPage()
@@ -37,9 +44,11 @@ void SubsonicSettingsPage::Load()
   ui_->username->setText(s.value("username").toString());
   ui_->password->setText(s.value("password").toString());
 
-  // These are the same settings SubsonicService will have used already, so see if
-  // they were successful...
-  LoginStateChanged(service_->login_state());
+  // If the settings are complete, SubsonicService will have used them already and
+  // we can tell the user if they worked
+  if (ui_->server->text() != "" && ui_->username->text() != "") {
+    LoginStateChanged(service_->login_state());
+  }
 }
 
 void SubsonicSettingsPage::Save()
@@ -94,6 +103,26 @@ void SubsonicSettingsPage::LoginStateChanged(SubsonicService::LoginState newstat
   default:
     break;
   }
+}
+
+void SubsonicSettingsPage::ServerEditingFinished() {
+  QString input = ui_->server->text();
+  QUrl url = QUrl::fromUserInput(input);
+
+  // Veto things that don't get guessed as an HTTP URL, the result will be unhelpful
+  if (!url.scheme().startsWith("http")) {
+    return;
+  }
+
+  // A direct paste of the server URL will probably include the trailing index.view, so remove it
+  if (url.path().endsWith("index.view")) {
+    QString newpath = url.path();
+    newpath.chop(10);
+    url.setPath(newpath);
+  }
+
+  ui_->server->setText(url.toString());
+  qLog(Debug) << "URL fixed:" << input << "to" << url;
 }
 
 void SubsonicSettingsPage::Login()

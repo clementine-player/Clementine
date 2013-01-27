@@ -179,7 +179,7 @@ void SubsonicService::Ping() {
 }
 
 QUrl SubsonicService::BuildRequestUrl(const QString& view) const {
-  QUrl url(server_ + "rest/" + view + ".view");
+  QUrl url(server_ + "/rest/" + view + ".view");
   url.addQueryItem("v", kApiVersion);
   url.addQueryItem("c", kApiClientName);
   url.addQueryItem("u", username_);
