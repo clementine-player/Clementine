@@ -37,7 +37,7 @@ void ParserBase::LoadSong(const QString& filename_or_url, qint64 beginning,
 
   QString filename = filename_or_url;
 
-  if (filename_or_url.contains(QRegExp("^[a-z]{3,}:"))) {
+  if (filename_or_url.contains(QRegExp("^[a-z]{2,}:"))) {
     QUrl url(filename_or_url);
     if (url.scheme() == "file") {
       filename = url.toLocalFile();
