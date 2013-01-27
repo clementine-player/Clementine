@@ -21,6 +21,7 @@ class SubsonicSettingsPage : public SettingsPage
   void LoginStateChanged(SubsonicService::LoginState newstate);
 
  private slots:
+  void ServerEditingFinished();
   void Login();
   void Logout();
 
