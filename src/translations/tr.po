@@ -3,6 +3,7 @@
 # This file is distributed under the same license as the Clementine package.
 # 
 # Translators:
+# Ahmet Sezgin Duran <marjinalist1@gmail.com>, 2013.
 #   <arnaud.bienner@gmail.com>, 2011.
 #   <devingregory@yandex.com>, 2012.
 #   <ege.oz@yandex.com.tr>, 2013.
@@ -21,8 +22,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-01-18 18:00+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2013-01-27 19:23+0000\n"
+"Last-Translator: Ahmet Sezgin Duran <marjinalist1@gmail.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: tr\n"
@@ -310,7 +311,7 @@ msgstr "AAC 32k"
 msgid "AAC 64k"
 msgstr "AAC 64k"
 
-#: core/song.cpp:323
+#: core/song.cpp:324
 msgid "AIFF"
 msgstr "AIFF"
 
@@ -331,7 +332,7 @@ msgstr "Clementine Hakkında..."
 msgid "About Qt..."
 msgstr "Qt Hakkında..."
 
-#: ../bin/src/ui_networkremotesettingspage.h:116
+#: ../bin/src/ui_networkremotesettingspage.h:135
 msgid "Accept non public clients only"
 msgstr ""
 
@@ -651,6 +652,10 @@ msgstr "iTunes veritabanı yüklenirken hata oluştu"
 msgid "An error occurred writing metadata to '%1'"
 msgstr "'%1' dosyasına metadata yazarken hata oluştu"
 
+#: internet/subsonicsettingspage.cpp:91
+msgid "An unspecified error occurred."
+msgstr ""
+
 #: ui/about.cpp:77
 msgid "And:"
 msgstr "Ve:"
@@ -874,7 +879,7 @@ msgstr "Ancak şu kaynaklar pasif:"
 msgid "Buttons"
 msgstr "Düğmeler"
 
-#: core/song.cpp:326
+#: core/song.cpp:327
 msgid "CDDA"
 msgstr "CDDA"
 
@@ -1142,6 +1147,10 @@ msgstr "Kısayolları Yapılandır"
 msgid "Configure Spotify..."
 msgstr "Spotify'ı Yapılandır..."
 
+#: internet/subsonicservice.cpp:92
+msgid "Configure Subsonic..."
+msgstr "Subsonic'i yapılandır..."
+
 #: globalsearch/globalsearchview.cpp:140 globalsearch/globalsearchview.cpp:446
 msgid "Configure global search..."
 msgstr "Genel aramayı düzenle..."
@@ -1209,6 +1218,12 @@ msgstr "iPod veritabanı kopyalanıyor"
 #: ../bin/src/ui_podcastinfowidget.h:194
 msgid "Copyright"
 msgstr "Copyright"
+
+#: internet/subsonicsettingspage.cpp:69
+msgid ""
+"Could not connect to Subsonic, check server URL. Example: "
+"http://localhost:4040/"
+msgstr "Subsonic'e bağlanılamadı, sunucu adresini kontrol edin. Örnek: http://localhost:4040/"
 
 #: transcoder/transcoder.cpp:64
 #, qt-format
@@ -1987,6 +2002,10 @@ msgstr "Otomatik indir"
 msgid "Fetch completed"
 msgstr "Alım tamamlandı"
 
+#: internet/subsonicservice.cpp:208
+msgid "Fetching Subsonic library"
+msgstr "Subsonic kütüphanesi eşleştiriliyor"
+
 #: ui/coverfromurldialog.cpp:71 ui/coverfromurldialog.cpp:82
 msgid "Fetching cover error"
 msgstr "Kapak alınırken bir hata oluştu"
@@ -2143,7 +2162,7 @@ msgstr "Yüksek tiz"
 msgid "GStreamer audio engine"
 msgstr "GStreamer ses motoru"
 
-#: ui/settingsdialog.cpp:127
+#: ui/settingsdialog.cpp:128
 msgid "General"
 msgstr "Genel"
 
@@ -2164,6 +2183,10 @@ msgstr "Bu Grooveshark çalma listesini paylaşmak için bir URL al"
 #: internet/groovesharkservice.cpp:537 internet/groovesharkservice.cpp:1108
 msgid "Get a URL to share this Grooveshark song"
 msgstr "Bu Grooveshark şarkısını paylaşmak için bir URL al"
+
+#: ../bin/src/ui_networkremotesettingspage.h:136
+msgid "Get the Android App now!"
+msgstr "Android Uygulamasını edin!"
 
 #: internet/groovesharkservice.cpp:788
 msgid "Getting Grooveshark popular songs"
@@ -2367,6 +2390,14 @@ msgstr "Bildirimde albüm resimlendirmesini göster"
 msgid "Include all songs"
 msgstr "Tüm şarkıları içer"
 
+#: internet/subsonicsettingspage.cpp:78
+msgid "Incompatible Subsonic REST protocol version. Client must upgrade."
+msgstr "Uyumsuz Subsonic REST protokol sürümü. İstemci yükseltilmeli."
+
+#: internet/subsonicsettingspage.cpp:82
+msgid "Incompatible Subsonic REST protocol version. Server must upgrade."
+msgstr "Uyumsuz Subsonic REST protokol sürümü. Sunucu yükseltilmeli."
+
 #: core/commandlineoptions.cpp:152
 msgid "Increase the volume by 4%"
 msgstr "Ses seviyesini 4% arttır"
@@ -2400,7 +2431,7 @@ msgstr "Bütünlük doğrulaması"
 msgid "Internet"
 msgstr "Internet"
 
-#: ui/settingsdialog.cpp:149
+#: ui/settingsdialog.cpp:150
 msgid "Internet providers"
 msgstr "İnternet sağlayıcılar"
 
@@ -2700,6 +2731,7 @@ msgstr "Dosyaları/URLleri yükler, mevcut çalma listesinin yerine koyar"
 #: ../bin/src/ui_groovesharksettingspage.h:116
 #: ../bin/src/ui_magnatunesettingspage.h:164
 #: ../bin/src/ui_spotifysettingspage.h:212
+#: ../bin/src/ui_subsonicsettingspage.h:121
 #: ../bin/src/ui_lastfmsettingspage.h:153
 #: ../bin/src/ui_googledrivesettingspage.h:105
 #: ../bin/src/ui_ubuntuonesettingspage.h:112
@@ -2977,7 +3009,7 @@ msgstr "Ağ"
 msgid "Network Proxy"
 msgstr "Vekil Sunucu"
 
-#: ../bin/src/ui_networkremotesettingspage.h:107
+#: ../bin/src/ui_networkremotesettingspage.h:126
 msgid "Network Remote"
 msgstr ""
 
@@ -3128,6 +3160,10 @@ msgstr "OSD Önizleme"
 msgid "Ogg Flac"
 msgstr "Ogg Flac"
 
+#: core/song.cpp:323
+msgid "Ogg Opus"
+msgstr "Ogg Opus"
+
 #: core/song.cpp:321
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
@@ -3137,13 +3173,13 @@ msgstr "Ogg Speex"
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
 
-#: ../bin/src/ui_networkremotesettingspage.h:111
+#: ../bin/src/ui_networkremotesettingspage.h:130
 msgid ""
 "Only accept connections from clients within the ip ranges:\n"
 "10.x.x.x\n"
 "172.16.0.0 - 172.31.255.255\n"
 "192.168.x.x"
-msgstr ""
+msgstr "Sadece bu IP aralıklarındaki istemcilerden bağlantı kabul et:\\n 10.x.x.x\\n 172.16.0.0 - 172.31.255.255\\n 192.168.x.x"
 
 #: ../bin/src/ui_querysortpage.h:142
 msgid "Only show the first"
@@ -3259,6 +3295,7 @@ msgstr "Parti"
 #: ../bin/src/ui_groovesharksettingspage.h:115
 #: ../bin/src/ui_magnatunesettingspage.h:165
 #: ../bin/src/ui_spotifysettingspage.h:211
+#: ../bin/src/ui_subsonicsettingspage.h:120
 #: ../bin/src/ui_podcastsettingspage.h:253
 #: ../bin/src/ui_networkproxysettingspage.h:169
 msgid "Password"
@@ -3391,7 +3428,7 @@ msgid "Popup duration"
 msgstr "Açılır pencere süresi"
 
 #: ../bin/src/ui_networkproxysettingspage.h:166
-#: ../bin/src/ui_networkremotesettingspage.h:109
+#: ../bin/src/ui_networkremotesettingspage.h:128
 msgid "Port"
 msgstr "Port"
 
@@ -3566,6 +3603,7 @@ msgid "Refresh"
 msgstr "Yenile"
 
 #: internet/jamendoservice.cpp:419 internet/magnatuneservice.cpp:278
+#: internet/subsonicservice.cpp:88
 msgid "Refresh catalogue"
 msgstr "Kataloğu yenile"
 
@@ -3819,6 +3857,10 @@ msgstr "Jamendo'da ara"
 msgid "Search Magnatune"
 msgstr "Magnatune'da Ara"
 
+#: internet/subsonicservice.cpp:72
+msgid "Search Subsonic"
+msgstr "Subsonic'de Ara"
+
 #: ui/albumcoverchoicecontroller.cpp:62
 msgid "Search for album covers..."
 msgstr "Albüm kapaklarını ara..."
@@ -3916,6 +3958,14 @@ msgstr "Görselleştirmeleri seç..."
 #: devices/devicekitlister.cpp:124
 msgid "Serial number"
 msgstr "Seri numarası"
+
+#: ../bin/src/ui_subsonicsettingspage.h:118
+msgid "Server"
+msgstr "Sunucu"
+
+#: ../bin/src/ui_subsonicsettingspage.h:117
+msgid "Server details"
+msgstr "Sunucu ayrıntıları"
 
 #: internet/lastfmservice.cpp:434
 msgid "Service offline"
@@ -4255,7 +4305,7 @@ msgstr "Bu parçadan sonra durdur"
 msgid "Stopped"
 msgstr "Durduruldu"
 
-#: core/song.cpp:328
+#: core/song.cpp:329
 msgid "Stream"
 msgstr "Akış"
 
@@ -4270,6 +4320,10 @@ msgstr "Abone olunan çalma listeleri"
 #: ../bin/src/ui_podcastinfowidget.h:196
 msgid "Subscribers"
 msgstr "Aboneler"
+
+#: internet/subsonicservice.cpp:101 ../bin/src/ui_subsonicsettingspage.h:116
+msgid "Subsonic"
+msgstr "Subsonic"
 
 #: ../data/oauthsuccess.html:34
 msgid "Success!"
@@ -4381,6 +4435,12 @@ msgstr "İstediğiniz site mevcut değil!"
 #: ui/coverfromurldialog.cpp:82
 msgid "The site you requested is not an image!"
 msgstr "İstediğiniz site bir resim değil!"
+
+#: internet/subsonicsettingspage.cpp:86
+msgid ""
+"The trial period for the Subsonic server is over. Please donate to get a "
+"license key. Visit subsonic.org for details."
+msgstr "Subsonic sunucusunun deneme süresi bitti. Lisans anahtarı almak için lütfen bağış yapın. Ayrıntılar için subsonic.org'u ziyaret edin."
 
 #: ui/mainwindow.cpp:2002
 msgid ""
@@ -4580,7 +4640,7 @@ msgstr "%1 adet dosya %2 adet thread ile dönüştürülüyor"
 msgid "Transcoding options"
 msgstr "Kod çevrimi seçenekleri"
 
-#: core/song.cpp:325
+#: core/song.cpp:326
 msgid "TrueAudio"
 msgstr "TrueAudio"
 
@@ -4613,7 +4673,7 @@ msgstr "Engin frekans bandı (UWB)"
 msgid "Unable to download %1 (%2)"
 msgstr "%1 indirilemedi (%2)"
 
-#: core/song.cpp:332 library/librarymodel.cpp:301 library/librarymodel.cpp:306
+#: core/song.cpp:333 library/librarymodel.cpp:301 library/librarymodel.cpp:306
 #: library/librarymodel.cpp:947 playlist/playlistdelegates.cpp:309
 #: playlist/playlistmanager.cpp:394 playlist/playlistmanager.cpp:397
 #: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:418
@@ -4691,9 +4751,9 @@ msgstr "Varsa Albüm sanatçısı etiketini kullan"
 msgid "Use Gnome's shortcut keys"
 msgstr "Gnome kısayol tuşlarını kullan"
 
-#: ../bin/src/ui_networkremotesettingspage.h:108
+#: ../bin/src/ui_networkremotesettingspage.h:127
 msgid "Use Remotecontrol"
-msgstr ""
+msgstr "Uzaktan Kontrolü Kullan"
 
 #: ../bin/src/ui_playbacksettingspage.h:274
 msgid "Use Replay Gain metadata if it is available"
@@ -4756,13 +4816,14 @@ msgstr "Kullanılan"
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr "%1 Kullanicinin Grooveshark Anywhere hasabi yok"
 
-#: ui/settingsdialog.cpp:141
+#: ui/settingsdialog.cpp:142
 msgid "User interface"
 msgstr "Kullanıcı arayüzü"
 
 #: ../bin/src/ui_groovesharksettingspage.h:114
 #: ../bin/src/ui_magnatunesettingspage.h:163
 #: ../bin/src/ui_spotifysettingspage.h:210
+#: ../bin/src/ui_subsonicsettingspage.h:119
 #: ../bin/src/ui_podcastsettingspage.h:251
 #: ../bin/src/ui_networkproxysettingspage.h:168
 msgid "Username"
@@ -4833,7 +4894,7 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
-#: core/song.cpp:324
+#: core/song.cpp:325
 msgid "Wav"
 msgstr "Wav"
 
@@ -4930,6 +4991,10 @@ msgstr "Bu albümdeki diğer şarkıları da Çeşitli Sanatçılar'a taşımak 
 #: ui/mainwindow.cpp:2007
 msgid "Would you like to run a full rescan right now?"
 msgstr "Şu anda tam bir yeniden tarama çalıştırmak ister misiniz?"
+
+#: internet/subsonicsettingspage.cpp:74
+msgid "Wrong username or password."
+msgstr "Yanlış kullanıcı adı veya parola."
 
 #: playlist/playlist.cpp:1198 ui/organisedialog.cpp:63
 #: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:148

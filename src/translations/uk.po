@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-01-18 18:15+0000\n"
+"PO-Revision-Date: 2013-01-26 13:03+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -299,7 +299,7 @@ msgstr "AAC, 32 кб"
 msgid "AAC 64k"
 msgstr "AAC, 64 кб"
 
-#: core/song.cpp:323
+#: core/song.cpp:324
 msgid "AIFF"
 msgstr "AIFF"
 
@@ -320,7 +320,7 @@ msgstr "Про Clementine…"
 msgid "About Qt..."
 msgstr "Про Qt…"
 
-#: ../bin/src/ui_networkremotesettingspage.h:116
+#: ../bin/src/ui_networkremotesettingspage.h:135
 msgid "Accept non public clients only"
 msgstr "Не підтримувати зв’язок з відкритими клієнтами"
 
@@ -640,6 +640,10 @@ msgstr "Виникла помилка завантаження бази дани
 msgid "An error occurred writing metadata to '%1'"
 msgstr "Трапилася помилка під час запису метаданих до '%1'"
 
+#: internet/subsonicsettingspage.cpp:91
+msgid "An unspecified error occurred."
+msgstr "Сталася неочікувана помилка."
+
 #: ui/about.cpp:77
 msgid "And:"
 msgstr "Та:"
@@ -863,7 +867,7 @@ msgstr "Ці джерела вимкнено:"
 msgid "Buttons"
 msgstr "Кнопки"
 
-#: core/song.cpp:326
+#: core/song.cpp:327
 msgid "CDDA"
 msgstr "CDDA"
 
@@ -1131,6 +1135,10 @@ msgstr "Налаштування комбінацій клавіш"
 msgid "Configure Spotify..."
 msgstr "Налаштування Spotify…"
 
+#: internet/subsonicservice.cpp:92
+msgid "Configure Subsonic..."
+msgstr "Налаштувати Subsonic…"
+
 #: globalsearch/globalsearchview.cpp:140 globalsearch/globalsearchview.cpp:446
 msgid "Configure global search..."
 msgstr "Налаштувати загальні правила пошуку…"
@@ -1198,6 +1206,12 @@ msgstr "Копіювання бази даних iPod"
 #: ../bin/src/ui_podcastinfowidget.h:194
 msgid "Copyright"
 msgstr "Копірайт"
+
+#: internet/subsonicsettingspage.cpp:69
+msgid ""
+"Could not connect to Subsonic, check server URL. Example: "
+"http://localhost:4040/"
+msgstr "Не вдалося встановити з’єднання з Subsonic, перевірте адресу сервера. Приклад: http://localhost:4040/"
 
 #: transcoder/transcoder.cpp:64
 #, qt-format
@@ -1976,6 +1990,10 @@ msgstr "Отримувати автоматично"
 msgid "Fetch completed"
 msgstr "Отримання завершено"
 
+#: internet/subsonicservice.cpp:208
+msgid "Fetching Subsonic library"
+msgstr "Отримуємо бібліотеку Subsonic"
+
 #: ui/coverfromurldialog.cpp:71 ui/coverfromurldialog.cpp:82
 msgid "Fetching cover error"
 msgstr "Не вдалося отримати обкладинку"
@@ -2132,7 +2150,7 @@ msgstr "Повні верхи"
 msgid "GStreamer audio engine"
 msgstr "Аудіо-рушій GStreamer"
 
-#: ui/settingsdialog.cpp:127
+#: ui/settingsdialog.cpp:128
 msgid "General"
 msgstr "Загальне"
 
@@ -2153,6 +2171,10 @@ msgstr "Отримати адресу цього списку Grooveshark для
 #: internet/groovesharkservice.cpp:537 internet/groovesharkservice.cpp:1108
 msgid "Get a URL to share this Grooveshark song"
 msgstr "Отримати адресу цієї композиції Grooveshark для оприлюднення"
+
+#: ../bin/src/ui_networkremotesettingspage.h:136
+msgid "Get the Android App now!"
+msgstr "Отримати програму для Android!"
 
 #: internet/groovesharkservice.cpp:788
 msgid "Getting Grooveshark popular songs"
@@ -2356,6 +2378,14 @@ msgstr "Показувати обкладинку в повідомлені"
 msgid "Include all songs"
 msgstr "Включити всі композиції"
 
+#: internet/subsonicsettingspage.cpp:78
+msgid "Incompatible Subsonic REST protocol version. Client must upgrade."
+msgstr "Несумісна версія протоколу REST Subsonic. Слід оновити клієнтську частину."
+
+#: internet/subsonicsettingspage.cpp:82
+msgid "Incompatible Subsonic REST protocol version. Server must upgrade."
+msgstr "Несумісна версія протоколу REST Subsonic. Слід оновити серверну частину."
+
 #: core/commandlineoptions.cpp:152
 msgid "Increase the volume by 4%"
 msgstr "Збільшити гучність на 4%"
@@ -2389,7 +2419,7 @@ msgstr "Перевірка цілісності даних"
 msgid "Internet"
 msgstr "Інтернет"
 
-#: ui/settingsdialog.cpp:149
+#: ui/settingsdialog.cpp:150
 msgid "Internet providers"
 msgstr "Інтернет-джерела"
 
@@ -2689,6 +2719,7 @@ msgstr "Завантажити файли/адреси, замінюючи по�
 #: ../bin/src/ui_groovesharksettingspage.h:116
 #: ../bin/src/ui_magnatunesettingspage.h:164
 #: ../bin/src/ui_spotifysettingspage.h:212
+#: ../bin/src/ui_subsonicsettingspage.h:121
 #: ../bin/src/ui_lastfmsettingspage.h:153
 #: ../bin/src/ui_googledrivesettingspage.h:105
 #: ../bin/src/ui_ubuntuonesettingspage.h:112
@@ -2966,7 +2997,7 @@ msgstr "Мережа"
 msgid "Network Proxy"
 msgstr "Проксі мережі"
 
-#: ../bin/src/ui_networkremotesettingspage.h:107
+#: ../bin/src/ui_networkremotesettingspage.h:126
 msgid "Network Remote"
 msgstr "Дистанційне керування з мережі"
 
@@ -3117,6 +3148,10 @@ msgstr "Повідомлення OSD"
 msgid "Ogg Flac"
 msgstr "Ogg Flac"
 
+#: core/song.cpp:323
+msgid "Ogg Opus"
+msgstr "Opus Ogg"
+
 #: core/song.cpp:321
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
@@ -3126,7 +3161,7 @@ msgstr "Ogg Speex"
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
 
-#: ../bin/src/ui_networkremotesettingspage.h:111
+#: ../bin/src/ui_networkremotesettingspage.h:130
 msgid ""
 "Only accept connections from clients within the ip ranges:\n"
 "10.x.x.x\n"
@@ -3248,6 +3283,7 @@ msgstr "Вечірка"
 #: ../bin/src/ui_groovesharksettingspage.h:115
 #: ../bin/src/ui_magnatunesettingspage.h:165
 #: ../bin/src/ui_spotifysettingspage.h:211
+#: ../bin/src/ui_subsonicsettingspage.h:120
 #: ../bin/src/ui_podcastsettingspage.h:253
 #: ../bin/src/ui_networkproxysettingspage.h:169
 msgid "Password"
@@ -3380,7 +3416,7 @@ msgid "Popup duration"
 msgstr "Тривалість виринаючого повідомлення"
 
 #: ../bin/src/ui_networkproxysettingspage.h:166
-#: ../bin/src/ui_networkremotesettingspage.h:109
+#: ../bin/src/ui_networkremotesettingspage.h:128
 msgid "Port"
 msgstr "Порт"
 
@@ -3555,6 +3591,7 @@ msgid "Refresh"
 msgstr "Оновити"
 
 #: internet/jamendoservice.cpp:419 internet/magnatuneservice.cpp:278
+#: internet/subsonicservice.cpp:88
 msgid "Refresh catalogue"
 msgstr "Оновити каталог"
 
@@ -3808,6 +3845,10 @@ msgstr "Шукати на Jamendo"
 msgid "Search Magnatune"
 msgstr "Пошук на Magnatune"
 
+#: internet/subsonicservice.cpp:72
+msgid "Search Subsonic"
+msgstr "Шукати на Subsonic"
+
 #: ui/albumcoverchoicecontroller.cpp:62
 msgid "Search for album covers..."
 msgstr "Пошук обкладинок альбомів…"
@@ -3905,6 +3946,14 @@ msgstr "Вибрати візуалізації…"
 #: devices/devicekitlister.cpp:124
 msgid "Serial number"
 msgstr "Серійний номер"
+
+#: ../bin/src/ui_subsonicsettingspage.h:118
+msgid "Server"
+msgstr "Сервер"
+
+#: ../bin/src/ui_subsonicsettingspage.h:117
+msgid "Server details"
+msgstr "Параметри сервера"
 
 #: internet/lastfmservice.cpp:434
 msgid "Service offline"
@@ -4244,7 +4293,7 @@ msgstr "Зупинити відтворення після цієї доріжк
 msgid "Stopped"
 msgstr "Зупинено"
 
-#: core/song.cpp:328
+#: core/song.cpp:329
 msgid "Stream"
 msgstr "Потік"
 
@@ -4259,6 +4308,10 @@ msgstr "Підписки на списки відтворення"
 #: ../bin/src/ui_podcastinfowidget.h:196
 msgid "Subscribers"
 msgstr "Передплатники"
+
+#: internet/subsonicservice.cpp:101 ../bin/src/ui_subsonicsettingspage.h:116
+msgid "Subsonic"
+msgstr "Subsonic"
 
 #: ../data/oauthsuccess.html:34
 msgid "Success!"
@@ -4370,6 +4423,12 @@ msgstr "Вказана вами адреса не існує!"
 #: ui/coverfromurldialog.cpp:82
 msgid "The site you requested is not an image!"
 msgstr "Вказана вами адреса не є малюнком!"
+
+#: internet/subsonicsettingspage.cpp:86
+msgid ""
+"The trial period for the Subsonic server is over. Please donate to get a "
+"license key. Visit subsonic.org for details."
+msgstr "Час тестування сервера Subsonic завершено. Будь ласка, придбайте ліцензійний ключ. Відвідайте subsonic.org, щоб дізнатися більше."
 
 #: ui/mainwindow.cpp:2002
 msgid ""
@@ -4569,7 +4628,7 @@ msgstr "Перекодовано %1 файлів, використовуючи %
 msgid "Transcoding options"
 msgstr "Налаштування перекодування"
 
-#: core/song.cpp:325
+#: core/song.cpp:326
 msgid "TrueAudio"
 msgstr "TrueAudio"
 
@@ -4602,7 +4661,7 @@ msgstr "Надзвичайно широка смуга (UWB)"
 msgid "Unable to download %1 (%2)"
 msgstr "Не вдалось завантажити %1 (%2)"
 
-#: core/song.cpp:332 library/librarymodel.cpp:301 library/librarymodel.cpp:306
+#: core/song.cpp:333 library/librarymodel.cpp:301 library/librarymodel.cpp:306
 #: library/librarymodel.cpp:947 playlist/playlistdelegates.cpp:309
 #: playlist/playlistmanager.cpp:394 playlist/playlistmanager.cpp:397
 #: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:418
@@ -4680,7 +4739,7 @@ msgstr "Використовувати мітку виконавця альбо�
 msgid "Use Gnome's shortcut keys"
 msgstr "Використовувати комбінації клавіш Gnome"
 
-#: ../bin/src/ui_networkremotesettingspage.h:108
+#: ../bin/src/ui_networkremotesettingspage.h:127
 msgid "Use Remotecontrol"
 msgstr "Використовувати дистанційне керування"
 
@@ -4745,13 +4804,14 @@ msgstr "Використано"
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr "У користувача %1 немає облікового запису Grooveshark Anywhere"
 
-#: ui/settingsdialog.cpp:141
+#: ui/settingsdialog.cpp:142
 msgid "User interface"
 msgstr "Інтерфейс користувача"
 
 #: ../bin/src/ui_groovesharksettingspage.h:114
 #: ../bin/src/ui_magnatunesettingspage.h:163
 #: ../bin/src/ui_spotifysettingspage.h:210
+#: ../bin/src/ui_subsonicsettingspage.h:119
 #: ../bin/src/ui_podcastsettingspage.h:251
 #: ../bin/src/ui_networkproxysettingspage.h:168
 msgid "Username"
@@ -4822,7 +4882,7 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
-#: core/song.cpp:324
+#: core/song.cpp:325
 msgid "Wav"
 msgstr "Wav"
 
@@ -4919,6 +4979,10 @@ msgstr "Хочете пересунути всі ініші композиції
 #: ui/mainwindow.cpp:2007
 msgid "Would you like to run a full rescan right now?"
 msgstr "Бажаєте зараз виконати повторне сканування фонотеки?"
+
+#: internet/subsonicsettingspage.cpp:74
+msgid "Wrong username or password."
+msgstr "Помилкове ім’я користувача або пароль."
 
 #: playlist/playlist.cpp:1198 ui/organisedialog.cpp:63
 #: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:148

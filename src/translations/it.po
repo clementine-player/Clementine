@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-01-20 22:49+0000\n"
+"PO-Revision-Date: 2013-01-27 19:57+0000\n"
 "Last-Translator: Vincenzo Reale <vinx.reale@gmail.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -301,7 +301,7 @@ msgstr "AAC 32k"
 msgid "AAC 64k"
 msgstr "AAC 64k"
 
-#: core/song.cpp:323
+#: core/song.cpp:324
 msgid "AIFF"
 msgstr "AIFF"
 
@@ -322,7 +322,7 @@ msgstr "Informazioni su Clementine..."
 msgid "About Qt..."
 msgstr "Informazioni su Qt..."
 
-#: ../bin/src/ui_networkremotesettingspage.h:116
+#: ../bin/src/ui_networkremotesettingspage.h:135
 msgid "Accept non public clients only"
 msgstr "Accetta solo client privati"
 
@@ -642,6 +642,10 @@ msgstr "Si è verificato un errore durante la il caricamento del database di iTu
 msgid "An error occurred writing metadata to '%1'"
 msgstr "Si è verificato un errore durante la scrittura dei metadati su '%1'"
 
+#: internet/subsonicsettingspage.cpp:91
+msgid "An unspecified error occurred."
+msgstr "Si è verificato un errore non specificato."
+
 #: ui/about.cpp:77
 msgid "And:"
 msgstr "E:"
@@ -865,7 +869,7 @@ msgstr "Queste fonti sono disabilitate:"
 msgid "Buttons"
 msgstr "Pulsanti"
 
-#: core/song.cpp:326
+#: core/song.cpp:327
 msgid "CDDA"
 msgstr "CDDA"
 
@@ -1133,6 +1137,10 @@ msgstr "Configura scorciatoie"
 msgid "Configure Spotify..."
 msgstr "Configura Spotify..."
 
+#: internet/subsonicservice.cpp:92
+msgid "Configure Subsonic..."
+msgstr "Configura Subsonic..."
+
 #: globalsearch/globalsearchview.cpp:140 globalsearch/globalsearchview.cpp:446
 msgid "Configure global search..."
 msgstr "Configura la ricerca globale..."
@@ -1200,6 +1208,12 @@ msgstr "Copia del database dell'iPod"
 #: ../bin/src/ui_podcastinfowidget.h:194
 msgid "Copyright"
 msgstr "Copyright"
+
+#: internet/subsonicsettingspage.cpp:69
+msgid ""
+"Could not connect to Subsonic, check server URL. Example: "
+"http://localhost:4040/"
+msgstr "Impossibile connettersi a Subsonic, controlla l'URL del server. Esempio: http://localhost:4040/"
 
 #: transcoder/transcoder.cpp:64
 #, qt-format
@@ -1978,6 +1992,10 @@ msgstr "Scarica automaticamente"
 msgid "Fetch completed"
 msgstr "Scaricamento completato"
 
+#: internet/subsonicservice.cpp:208
+msgid "Fetching Subsonic library"
+msgstr "Scaricamento della libreria di Subsonic"
+
 #: ui/coverfromurldialog.cpp:71 ui/coverfromurldialog.cpp:82
 msgid "Fetching cover error"
 msgstr "Errore di scaricamento della copertina"
@@ -2134,7 +2152,7 @@ msgstr "Alti al massimo"
 msgid "GStreamer audio engine"
 msgstr "Motore audio GStreamer"
 
-#: ui/settingsdialog.cpp:127
+#: ui/settingsdialog.cpp:128
 msgid "General"
 msgstr "Generale"
 
@@ -2155,6 +2173,10 @@ msgstr "Ottieni un URL per condividere questa scaletta di Grooveshark"
 #: internet/groovesharkservice.cpp:537 internet/groovesharkservice.cpp:1108
 msgid "Get a URL to share this Grooveshark song"
 msgstr "Ottieni un URL per condividere questo brano di Grooveshark"
+
+#: ../bin/src/ui_networkremotesettingspage.h:136
+msgid "Get the Android App now!"
+msgstr "Scarica subito l'applicazione per Android!"
 
 #: internet/groovesharkservice.cpp:788
 msgid "Getting Grooveshark popular songs"
@@ -2358,6 +2380,14 @@ msgstr "Includi copertina nella notifica"
 msgid "Include all songs"
 msgstr "Includi tutti i brani"
 
+#: internet/subsonicsettingspage.cpp:78
+msgid "Incompatible Subsonic REST protocol version. Client must upgrade."
+msgstr "Versione del protocollo REST di Subsonic incompatibile. Aggiornare il client."
+
+#: internet/subsonicsettingspage.cpp:82
+msgid "Incompatible Subsonic REST protocol version. Server must upgrade."
+msgstr "Versione del protocollo REST di Subsonic incompatibile. Aggiornare il server."
+
 #: core/commandlineoptions.cpp:152
 msgid "Increase the volume by 4%"
 msgstr "Aumenta il volume del 4%"
@@ -2391,7 +2421,7 @@ msgstr "Controllo d'integrità"
 msgid "Internet"
 msgstr "Internet"
 
-#: ui/settingsdialog.cpp:149
+#: ui/settingsdialog.cpp:150
 msgid "Internet providers"
 msgstr "Fornitori Internet"
 
@@ -2691,6 +2721,7 @@ msgstr "Carica file/URL, sostituendo la scaletta attuale"
 #: ../bin/src/ui_groovesharksettingspage.h:116
 #: ../bin/src/ui_magnatunesettingspage.h:164
 #: ../bin/src/ui_spotifysettingspage.h:212
+#: ../bin/src/ui_subsonicsettingspage.h:121
 #: ../bin/src/ui_lastfmsettingspage.h:153
 #: ../bin/src/ui_googledrivesettingspage.h:105
 #: ../bin/src/ui_ubuntuonesettingspage.h:112
@@ -2968,7 +2999,7 @@ msgstr "Rete"
 msgid "Network Proxy"
 msgstr "Proxy di rete"
 
-#: ../bin/src/ui_networkremotesettingspage.h:107
+#: ../bin/src/ui_networkremotesettingspage.h:126
 msgid "Network Remote"
 msgstr "Telecomando di rete"
 
@@ -3119,6 +3150,10 @@ msgstr "Anteprima OSD"
 msgid "Ogg Flac"
 msgstr "Ogg Flac"
 
+#: core/song.cpp:323
+msgid "Ogg Opus"
+msgstr "Ogg Opus"
+
 #: core/song.cpp:321
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
@@ -3128,7 +3163,7 @@ msgstr "Ogg Speex"
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
 
-#: ../bin/src/ui_networkremotesettingspage.h:111
+#: ../bin/src/ui_networkremotesettingspage.h:130
 msgid ""
 "Only accept connections from clients within the ip ranges:\n"
 "10.x.x.x\n"
@@ -3250,6 +3285,7 @@ msgstr "Festa"
 #: ../bin/src/ui_groovesharksettingspage.h:115
 #: ../bin/src/ui_magnatunesettingspage.h:165
 #: ../bin/src/ui_spotifysettingspage.h:211
+#: ../bin/src/ui_subsonicsettingspage.h:120
 #: ../bin/src/ui_podcastsettingspage.h:253
 #: ../bin/src/ui_networkproxysettingspage.h:169
 msgid "Password"
@@ -3382,7 +3418,7 @@ msgid "Popup duration"
 msgstr "Durata del fumetto"
 
 #: ../bin/src/ui_networkproxysettingspage.h:166
-#: ../bin/src/ui_networkremotesettingspage.h:109
+#: ../bin/src/ui_networkremotesettingspage.h:128
 msgid "Port"
 msgstr "Porta"
 
@@ -3557,6 +3593,7 @@ msgid "Refresh"
 msgstr "Aggiorna"
 
 #: internet/jamendoservice.cpp:419 internet/magnatuneservice.cpp:278
+#: internet/subsonicservice.cpp:88
 msgid "Refresh catalogue"
 msgstr "Aggiorna catalogo"
 
@@ -3810,6 +3847,10 @@ msgstr "Cerca in Jamendo"
 msgid "Search Magnatune"
 msgstr "Cerca in Magnatune"
 
+#: internet/subsonicservice.cpp:72
+msgid "Search Subsonic"
+msgstr "Cerca su Subsonic"
+
 #: ui/albumcoverchoicecontroller.cpp:62
 msgid "Search for album covers..."
 msgstr "Cerca copertine degli album..."
@@ -3907,6 +3948,14 @@ msgstr "Seleziona visualizzazioni..."
 #: devices/devicekitlister.cpp:124
 msgid "Serial number"
 msgstr "Numero seriale"
+
+#: ../bin/src/ui_subsonicsettingspage.h:118
+msgid "Server"
+msgstr "Server"
+
+#: ../bin/src/ui_subsonicsettingspage.h:117
+msgid "Server details"
+msgstr "Dettagli del server"
 
 #: internet/lastfmservice.cpp:434
 msgid "Service offline"
@@ -4246,7 +4295,7 @@ msgstr "Ferma la riproduzione dopo la traccia corrente"
 msgid "Stopped"
 msgstr "Fermato"
 
-#: core/song.cpp:328
+#: core/song.cpp:329
 msgid "Stream"
 msgstr "Flusso"
 
@@ -4261,6 +4310,10 @@ msgstr "Scalette sottoscritte"
 #: ../bin/src/ui_podcastinfowidget.h:196
 msgid "Subscribers"
 msgstr "Sottoscrittori"
+
+#: internet/subsonicservice.cpp:101 ../bin/src/ui_subsonicsettingspage.h:116
+msgid "Subsonic"
+msgstr "Subsonic"
 
 #: ../data/oauthsuccess.html:34
 msgid "Success!"
@@ -4372,6 +4425,12 @@ msgstr "Il sito richiesto non esiste!"
 #: ui/coverfromurldialog.cpp:82
 msgid "The site you requested is not an image!"
 msgstr "Il sito richiesto non è un'immagine!"
+
+#: internet/subsonicsettingspage.cpp:86
+msgid ""
+"The trial period for the Subsonic server is over. Please donate to get a "
+"license key. Visit subsonic.org for details."
+msgstr "Il periodo di prova per il server Subsonic è scaduto. Effettua una donazione per ottenere una chiave di licenza. Visita subsonic.org per i dettagli."
 
 #: ui/mainwindow.cpp:2002
 msgid ""
@@ -4571,7 +4630,7 @@ msgstr "Transcodifica di %1 file utilizzando %2 thread"
 msgid "Transcoding options"
 msgstr "Opzioni di transcodifica"
 
-#: core/song.cpp:325
+#: core/song.cpp:326
 msgid "TrueAudio"
 msgstr "TrueAudio"
 
@@ -4604,7 +4663,7 @@ msgstr "Banda ultra larga (UWB)"
 msgid "Unable to download %1 (%2)"
 msgstr "Impossibile scaricare %1 (%2)"
 
-#: core/song.cpp:332 library/librarymodel.cpp:301 library/librarymodel.cpp:306
+#: core/song.cpp:333 library/librarymodel.cpp:301 library/librarymodel.cpp:306
 #: library/librarymodel.cpp:947 playlist/playlistdelegates.cpp:309
 #: playlist/playlistmanager.cpp:394 playlist/playlistmanager.cpp:397
 #: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:418
@@ -4682,7 +4741,7 @@ msgstr "Usa il tag Artista dell'album se disponibile"
 msgid "Use Gnome's shortcut keys"
 msgstr "Utilizza le scorciatoie di Gnome"
 
-#: ../bin/src/ui_networkremotesettingspage.h:108
+#: ../bin/src/ui_networkremotesettingspage.h:127
 msgid "Use Remotecontrol"
 msgstr "Usa telecomando"
 
@@ -4747,13 +4806,14 @@ msgstr "Utilizzato"
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr "L'utente %1 non ha un account di Grooveshark Anywhere"
 
-#: ui/settingsdialog.cpp:141
+#: ui/settingsdialog.cpp:142
 msgid "User interface"
 msgstr "Interfaccia utente"
 
 #: ../bin/src/ui_groovesharksettingspage.h:114
 #: ../bin/src/ui_magnatunesettingspage.h:163
 #: ../bin/src/ui_spotifysettingspage.h:210
+#: ../bin/src/ui_subsonicsettingspage.h:119
 #: ../bin/src/ui_podcastsettingspage.h:251
 #: ../bin/src/ui_networkproxysettingspage.h:168
 msgid "Username"
@@ -4824,7 +4884,7 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
-#: core/song.cpp:324
+#: core/song.cpp:325
 msgid "Wav"
 msgstr "Wav"
 
@@ -4921,6 +4981,10 @@ msgstr "Vuoi spostare anche gli altri brani di questo album in Artisti vari?"
 #: ui/mainwindow.cpp:2007
 msgid "Would you like to run a full rescan right now?"
 msgstr "Vuoi eseguire subito una nuova scansione completa?"
+
+#: internet/subsonicsettingspage.cpp:74
+msgid "Wrong username or password."
+msgstr "Nome utente o password non validi."
 
 #: playlist/playlist.cpp:1198 ui/organisedialog.cpp:63
 #: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:148

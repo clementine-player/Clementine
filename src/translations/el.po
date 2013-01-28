@@ -5,13 +5,14 @@
 # Translators:
 #   <antony256@gmail.com>, 2011, 2012.
 # Axilleas P <markeleas@gmail.com>, 2012.
+#  <firew4lker@gmail.com>, 2013.
 #   <firew4lker@gmail.com>, 2011-2012.
 # Nisok Kosin <nikos.efthimiou@gmail.com>, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-01-18 18:00+0000\n"
+"PO-Revision-Date: 2013-01-26 12:02+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -300,7 +301,7 @@ msgstr "AAC 32k"
 msgid "AAC 64k"
 msgstr "AAC 64k"
 
-#: core/song.cpp:323
+#: core/song.cpp:324
 msgid "AIFF"
 msgstr "AIFF"
 
@@ -321,9 +322,9 @@ msgstr "Περί του Clementine..."
 msgid "About Qt..."
 msgstr "Περί του Qt..."
 
-#: ../bin/src/ui_networkremotesettingspage.h:116
+#: ../bin/src/ui_networkremotesettingspage.h:135
 msgid "Accept non public clients only"
-msgstr ""
+msgstr "Αποδοχή μη δημόσιων πελατών μόνο"
 
 #: ../bin/src/ui_groovesharksettingspage.h:113
 #: ../bin/src/ui_magnatunesettingspage.h:155
@@ -641,6 +642,10 @@ msgstr "Προέκυψε σφάλμα στην φόρτωση της βάσης 
 msgid "An error occurred writing metadata to '%1'"
 msgstr "Προέκυψε σφάλμα κατά την εγγραφή μεταδεδομένων στο '%1'"
 
+#: internet/subsonicsettingspage.cpp:91
+msgid "An unspecified error occurred."
+msgstr "Προκλήθηκε ένα μη διευκρινισμένο σφάλμα."
+
 #: ui/about.cpp:77
 msgid "And:"
 msgstr "Και:"
@@ -864,7 +869,7 @@ msgstr "Αλλά αυτές οι πηγές είναι απενεργοποιη�
 msgid "Buttons"
 msgstr "Κουμπιά"
 
-#: core/song.cpp:326
+#: core/song.cpp:327
 msgid "CDDA"
 msgstr "CDDA"
 
@@ -1132,6 +1137,10 @@ msgstr "Ρύθμιση συντομεύσεων"
 msgid "Configure Spotify..."
 msgstr "Ρύθμιση του Spotify..."
 
+#: internet/subsonicservice.cpp:92
+msgid "Configure Subsonic..."
+msgstr "Ρύθμιση του Subsonic..."
+
 #: globalsearch/globalsearchview.cpp:140 globalsearch/globalsearchview.cpp:446
 msgid "Configure global search..."
 msgstr "Ρύθμιση καθολικής αναζήτησης..."
@@ -1199,6 +1208,12 @@ msgstr "Αντιγραφή της βάσης δεδομένων iPod"
 #: ../bin/src/ui_podcastinfowidget.h:194
 msgid "Copyright"
 msgstr "Πνευματικά δικαιώματα"
+
+#: internet/subsonicsettingspage.cpp:69
+msgid ""
+"Could not connect to Subsonic, check server URL. Example: "
+"http://localhost:4040/"
+msgstr "Δεν μπορεί να γίνει σύνδεση με το Subsonic, ελέγξτε το URL του διακομιστή. Παράδειγμα: http://localhost:4040/"
 
 #: transcoder/transcoder.cpp:64
 #, qt-format
@@ -1977,6 +1992,10 @@ msgstr "Αυτόματο κατέβασμα"
 msgid "Fetch completed"
 msgstr "Η ανάκτηση ολοκληρώθηκε"
 
+#: internet/subsonicservice.cpp:208
+msgid "Fetching Subsonic library"
+msgstr "Μεταφόρτωση καταλόγου Subsonic"
+
 #: ui/coverfromurldialog.cpp:71 ui/coverfromurldialog.cpp:82
 msgid "Fetching cover error"
 msgstr "Σφάλμα στο κατέβασμα του εξώφυλλου"
@@ -2133,7 +2152,7 @@ msgstr "Πλήρως πρίμα"
 msgid "GStreamer audio engine"
 msgstr "GStreamer, μηχανή ήχου"
 
-#: ui/settingsdialog.cpp:127
+#: ui/settingsdialog.cpp:128
 msgid "General"
 msgstr "Γενικά"
 
@@ -2154,6 +2173,10 @@ msgstr "Λήψη URL για να μοιραστείτε αυτή την Groovesh
 #: internet/groovesharkservice.cpp:537 internet/groovesharkservice.cpp:1108
 msgid "Get a URL to share this Grooveshark song"
 msgstr "Λήψη URL για να μοιραστείτε αυτή το Grooveshark τραγούδι"
+
+#: ../bin/src/ui_networkremotesettingspage.h:136
+msgid "Get the Android App now!"
+msgstr "Αποκτήστε την το Android App τώρα"
 
 #: internet/groovesharkservice.cpp:788
 msgid "Getting Grooveshark popular songs"
@@ -2357,6 +2380,14 @@ msgstr "Εμφάνιση του άλμπουμ (εικόνα) στην ειδο�
 msgid "Include all songs"
 msgstr "Συμπερίληψη όλων των τραγουδιών"
 
+#: internet/subsonicsettingspage.cpp:78
+msgid "Incompatible Subsonic REST protocol version. Client must upgrade."
+msgstr "Ασύμβατη έκδοση πρωτοκόλλου REST. Η εφαρμογή πελάτη πρέπει να ενημερωθεί."
+
+#: internet/subsonicsettingspage.cpp:82
+msgid "Incompatible Subsonic REST protocol version. Server must upgrade."
+msgstr "Ασύμβατη έκδοση πρωτοκόλλου REST. Ο διακομιστής πρέπει να ενημερωθεί."
+
 #: core/commandlineoptions.cpp:152
 msgid "Increase the volume by 4%"
 msgstr "Αύξηση της έντασης ήχου κατά 4%"
@@ -2390,7 +2421,7 @@ msgstr "έλεγχος ακεραιότητας"
 msgid "Internet"
 msgstr "Διαδίκτυο"
 
-#: ui/settingsdialog.cpp:149
+#: ui/settingsdialog.cpp:150
 msgid "Internet providers"
 msgstr "Παροχείς Internet"
 
@@ -2690,6 +2721,7 @@ msgstr "Φορτώνει αρχεία/URLs, αντικαθιστώντας τη�
 #: ../bin/src/ui_groovesharksettingspage.h:116
 #: ../bin/src/ui_magnatunesettingspage.h:164
 #: ../bin/src/ui_spotifysettingspage.h:212
+#: ../bin/src/ui_subsonicsettingspage.h:121
 #: ../bin/src/ui_lastfmsettingspage.h:153
 #: ../bin/src/ui_googledrivesettingspage.h:105
 #: ../bin/src/ui_ubuntuonesettingspage.h:112
@@ -2967,9 +2999,9 @@ msgstr "Δίκτυο"
 msgid "Network Proxy"
 msgstr "Διαμεσολαβητής Δικτύου"
 
-#: ../bin/src/ui_networkremotesettingspage.h:107
+#: ../bin/src/ui_networkremotesettingspage.h:126
 msgid "Network Remote"
-msgstr ""
+msgstr "Τηλεχειριστήριο Δικτύου"
 
 #: playlist/playlistdelegates.cpp:299 ui/edittagdialog.cpp:481
 msgid "Never"
@@ -3118,6 +3150,10 @@ msgstr "Προ-επισκόπηση OSD"
 msgid "Ogg Flac"
 msgstr "Ogg Flac"
 
+#: core/song.cpp:323
+msgid "Ogg Opus"
+msgstr ""
+
 #: core/song.cpp:321
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
@@ -3127,13 +3163,13 @@ msgstr "Ogg Speex"
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
 
-#: ../bin/src/ui_networkremotesettingspage.h:111
+#: ../bin/src/ui_networkremotesettingspage.h:130
 msgid ""
 "Only accept connections from clients within the ip ranges:\n"
 "10.x.x.x\n"
 "172.16.0.0 - 172.31.255.255\n"
 "192.168.x.x"
-msgstr ""
+msgstr "Αποδοχή συνδέσεων από πελάτες με διακύμανση ip:\n10.x.x.x\n172.16.0.0 - 172.31.255.255\n192.168.x.x"
 
 #: ../bin/src/ui_querysortpage.h:142
 msgid "Only show the first"
@@ -3249,6 +3285,7 @@ msgstr "Πάρτι"
 #: ../bin/src/ui_groovesharksettingspage.h:115
 #: ../bin/src/ui_magnatunesettingspage.h:165
 #: ../bin/src/ui_spotifysettingspage.h:211
+#: ../bin/src/ui_subsonicsettingspage.h:120
 #: ../bin/src/ui_podcastsettingspage.h:253
 #: ../bin/src/ui_networkproxysettingspage.h:169
 msgid "Password"
@@ -3381,7 +3418,7 @@ msgid "Popup duration"
 msgstr "Διάρκεια αναδυόμενου μηνύματος"
 
 #: ../bin/src/ui_networkproxysettingspage.h:166
-#: ../bin/src/ui_networkremotesettingspage.h:109
+#: ../bin/src/ui_networkremotesettingspage.h:128
 msgid "Port"
 msgstr "Πόρτα"
 
@@ -3556,6 +3593,7 @@ msgid "Refresh"
 msgstr "Ανανέωση"
 
 #: internet/jamendoservice.cpp:419 internet/magnatuneservice.cpp:278
+#: internet/subsonicservice.cpp:88
 msgid "Refresh catalogue"
 msgstr "Ανανέωση καταλόγου"
 
@@ -3809,6 +3847,10 @@ msgstr "Αναζήτηση Jamendo"
 msgid "Search Magnatune"
 msgstr "Εύρεση στο Magnatune"
 
+#: internet/subsonicservice.cpp:72
+msgid "Search Subsonic"
+msgstr "Αναζήτηση στο Subsonic"
+
 #: ui/albumcoverchoicecontroller.cpp:62
 msgid "Search for album covers..."
 msgstr "Αναζήτηση για εξώφυλλο άλμπουμ..."
@@ -3906,6 +3948,14 @@ msgstr "Επιλογή οπτικών εφέ..."
 #: devices/devicekitlister.cpp:124
 msgid "Serial number"
 msgstr "Σειριακός αριθμός"
+
+#: ../bin/src/ui_subsonicsettingspage.h:118
+msgid "Server"
+msgstr "Διακομιστής"
+
+#: ../bin/src/ui_subsonicsettingspage.h:117
+msgid "Server details"
+msgstr "Λεπτομέρειες διακομιστή"
 
 #: internet/lastfmservice.cpp:434
 msgid "Service offline"
@@ -4245,7 +4295,7 @@ msgstr "Παύση αναπαραγωγής μετά το τρέχον κομμ�
 msgid "Stopped"
 msgstr "Σταματημένο"
 
-#: core/song.cpp:328
+#: core/song.cpp:329
 msgid "Stream"
 msgstr "Stream"
 
@@ -4260,6 +4310,10 @@ msgstr "Λίστες συνδρομής"
 #: ../bin/src/ui_podcastinfowidget.h:196
 msgid "Subscribers"
 msgstr "Συνδομητές"
+
+#: internet/subsonicservice.cpp:101 ../bin/src/ui_subsonicsettingspage.h:116
+msgid "Subsonic"
+msgstr "Subsonic"
 
 #: ../data/oauthsuccess.html:34
 msgid "Success!"
@@ -4371,6 +4425,12 @@ msgstr "Η διεύθυνση που ζητήσατε δεν υπάρχει!"
 #: ui/coverfromurldialog.cpp:82
 msgid "The site you requested is not an image!"
 msgstr "Η διεύθυνση που ζητήσατε δεν είναι εικόνα!"
+
+#: internet/subsonicsettingspage.cpp:86
+msgid ""
+"The trial period for the Subsonic server is over. Please donate to get a "
+"license key. Visit subsonic.org for details."
+msgstr "Η δοκιμαστική περίοδος του Subsonic τελείωσε. Παρακαλώ κάντε μια δωρεά για να λάβετε ένα κλειδί άδειας. Δείτε στο subsonic.org για λεπτομέρειες."
 
 #: ui/mainwindow.cpp:2002
 msgid ""
@@ -4570,7 +4630,7 @@ msgstr "Επανακωδικοποίηση %1 αρχείων χρησιμοπο�
 msgid "Transcoding options"
 msgstr "Επιλογές επανακωδικοποίησης"
 
-#: core/song.cpp:325
+#: core/song.cpp:326
 msgid "TrueAudio"
 msgstr "TrueAudio"
 
@@ -4603,7 +4663,7 @@ msgstr "Άκρα ευρεία ζώνη (UWB)"
 msgid "Unable to download %1 (%2)"
 msgstr "Αδυναμία \"κατεβάσματος\" του %1 (%2)"
 
-#: core/song.cpp:332 library/librarymodel.cpp:301 library/librarymodel.cpp:306
+#: core/song.cpp:333 library/librarymodel.cpp:301 library/librarymodel.cpp:306
 #: library/librarymodel.cpp:947 playlist/playlistdelegates.cpp:309
 #: playlist/playlistmanager.cpp:394 playlist/playlistmanager.cpp:397
 #: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:418
@@ -4681,9 +4741,9 @@ msgstr "Χρήση ετικέτας Άλμπουμ Καλλιτέχνη όταν
 msgid "Use Gnome's shortcut keys"
 msgstr "Χρήση πλήκτρων συντόμευσης του Gnome"
 
-#: ../bin/src/ui_networkremotesettingspage.h:108
+#: ../bin/src/ui_networkremotesettingspage.h:127
 msgid "Use Remotecontrol"
-msgstr ""
+msgstr "Χρήση Τηλεχειριστηρίου"
 
 #: ../bin/src/ui_playbacksettingspage.h:274
 msgid "Use Replay Gain metadata if it is available"
@@ -4746,13 +4806,14 @@ msgstr "Σε χρήση"
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr "Ο χρήστης %1 δεν διαθέτει έναν λογαριασμό στο GrooveShark Anywhere"
 
-#: ui/settingsdialog.cpp:141
+#: ui/settingsdialog.cpp:142
 msgid "User interface"
 msgstr "Διασύνδεση χρήστη"
 
 #: ../bin/src/ui_groovesharksettingspage.h:114
 #: ../bin/src/ui_magnatunesettingspage.h:163
 #: ../bin/src/ui_spotifysettingspage.h:210
+#: ../bin/src/ui_subsonicsettingspage.h:119
 #: ../bin/src/ui_podcastsettingspage.h:251
 #: ../bin/src/ui_networkproxysettingspage.h:168
 msgid "Username"
@@ -4823,7 +4884,7 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
-#: core/song.cpp:324
+#: core/song.cpp:325
 msgid "Wav"
 msgstr "Wav"
 
@@ -4920,6 +4981,10 @@ msgstr "Θα θέλατε να μετακινήσετε και τα άλλα τ�
 #: ui/mainwindow.cpp:2007
 msgid "Would you like to run a full rescan right now?"
 msgstr "Θέλετε να εκτελέσετε μία πλήρη επανασάρωση αμέσως τώρα;"
+
+#: internet/subsonicsettingspage.cpp:74
+msgid "Wrong username or password."
+msgstr "Λάθος όνομα χρήστη ή συνθηματικό"
 
 #: playlist/playlist.cpp:1198 ui/organisedialog.cpp:63
 #: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:148

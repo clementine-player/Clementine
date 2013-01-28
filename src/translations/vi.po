@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-01-18 18:00+0000\n"
+"PO-Revision-Date: 2013-01-26 12:02+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -301,7 +301,7 @@ msgstr "AAC 32k"
 msgid "AAC 64k"
 msgstr "AAC 64k"
 
-#: core/song.cpp:323
+#: core/song.cpp:324
 msgid "AIFF"
 msgstr "AIFF"
 
@@ -322,7 +322,7 @@ msgstr "Giới thiệu Clementine..."
 msgid "About Qt..."
 msgstr "Giới thiệu Qt..."
 
-#: ../bin/src/ui_networkremotesettingspage.h:116
+#: ../bin/src/ui_networkremotesettingspage.h:135
 msgid "Accept non public clients only"
 msgstr ""
 
@@ -642,6 +642,10 @@ msgstr "Có lỗi khi nạp cơ sở dữ liệu iTunes"
 msgid "An error occurred writing metadata to '%1'"
 msgstr "Có lỗi khi ghi thông tin vào '%1'"
 
+#: internet/subsonicsettingspage.cpp:91
+msgid "An unspecified error occurred."
+msgstr ""
+
 #: ui/about.cpp:77
 msgid "And:"
 msgstr "Và:"
@@ -865,7 +869,7 @@ msgstr "Những nguồn này đã bị vô hiệu:"
 msgid "Buttons"
 msgstr "Nút"
 
-#: core/song.cpp:326
+#: core/song.cpp:327
 msgid "CDDA"
 msgstr "CDDA"
 
@@ -1133,6 +1137,10 @@ msgstr "Phím tắt"
 msgid "Configure Spotify..."
 msgstr "Cấu hình Spotify..."
 
+#: internet/subsonicservice.cpp:92
+msgid "Configure Subsonic..."
+msgstr ""
+
 #: globalsearch/globalsearchview.cpp:140 globalsearch/globalsearchview.cpp:446
 msgid "Configure global search..."
 msgstr "Cấu hình tìm kiếm chung..."
@@ -1200,6 +1208,12 @@ msgstr "Đang chép cơ sở dữ liệu của iPod"
 #: ../bin/src/ui_podcastinfowidget.h:194
 msgid "Copyright"
 msgstr "Bản quyền"
+
+#: internet/subsonicsettingspage.cpp:69
+msgid ""
+"Could not connect to Subsonic, check server URL. Example: "
+"http://localhost:4040/"
+msgstr ""
 
 #: transcoder/transcoder.cpp:64
 #, qt-format
@@ -1978,6 +1992,10 @@ msgstr "Tự động tải"
 msgid "Fetch completed"
 msgstr "Đã tải xong"
 
+#: internet/subsonicservice.cpp:208
+msgid "Fetching Subsonic library"
+msgstr ""
+
 #: ui/coverfromurldialog.cpp:71 ui/coverfromurldialog.cpp:82
 msgid "Fetching cover error"
 msgstr "Lỗi khi tải ảnh bìa"
@@ -2134,7 +2152,7 @@ msgstr "Full Treble"
 msgid "GStreamer audio engine"
 msgstr "Engine âm thanh GStreamer"
 
-#: ui/settingsdialog.cpp:127
+#: ui/settingsdialog.cpp:128
 msgid "General"
 msgstr "Tổng quát"
 
@@ -2155,6 +2173,10 @@ msgstr "Lấy URL để chia sẻ danh sách Grooveshark này"
 #: internet/groovesharkservice.cpp:537 internet/groovesharkservice.cpp:1108
 msgid "Get a URL to share this Grooveshark song"
 msgstr "Lấy URL để chia sẻ bài này "
+
+#: ../bin/src/ui_networkremotesettingspage.h:136
+msgid "Get the Android App now!"
+msgstr ""
 
 #: internet/groovesharkservice.cpp:788
 msgid "Getting Grooveshark popular songs"
@@ -2358,6 +2380,14 @@ msgstr "Kèm theo ảnh bìa trong thông báo"
 msgid "Include all songs"
 msgstr "Bao gồm tất cả bài hát"
 
+#: internet/subsonicsettingspage.cpp:78
+msgid "Incompatible Subsonic REST protocol version. Client must upgrade."
+msgstr ""
+
+#: internet/subsonicsettingspage.cpp:82
+msgid "Incompatible Subsonic REST protocol version. Server must upgrade."
+msgstr ""
+
 #: core/commandlineoptions.cpp:152
 msgid "Increase the volume by 4%"
 msgstr "Tăng 4% âm lượng"
@@ -2391,7 +2421,7 @@ msgstr "Kiểm tra tính toàn vẹn"
 msgid "Internet"
 msgstr "Internet"
 
-#: ui/settingsdialog.cpp:149
+#: ui/settingsdialog.cpp:150
 msgid "Internet providers"
 msgstr "Dịch vụ"
 
@@ -2691,6 +2721,7 @@ msgstr "Mở tập tin/URL, thay thế danh sách hiện tại"
 #: ../bin/src/ui_groovesharksettingspage.h:116
 #: ../bin/src/ui_magnatunesettingspage.h:164
 #: ../bin/src/ui_spotifysettingspage.h:212
+#: ../bin/src/ui_subsonicsettingspage.h:121
 #: ../bin/src/ui_lastfmsettingspage.h:153
 #: ../bin/src/ui_googledrivesettingspage.h:105
 #: ../bin/src/ui_ubuntuonesettingspage.h:112
@@ -2968,7 +2999,7 @@ msgstr "Mạng"
 msgid "Network Proxy"
 msgstr "Proxy"
 
-#: ../bin/src/ui_networkremotesettingspage.h:107
+#: ../bin/src/ui_networkremotesettingspage.h:126
 msgid "Network Remote"
 msgstr ""
 
@@ -3119,6 +3150,10 @@ msgstr "Xem trước hộp thông báo"
 msgid "Ogg Flac"
 msgstr "Ogg Flac"
 
+#: core/song.cpp:323
+msgid "Ogg Opus"
+msgstr ""
+
 #: core/song.cpp:321
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
@@ -3128,7 +3163,7 @@ msgstr "Ogg Speex"
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
 
-#: ../bin/src/ui_networkremotesettingspage.h:111
+#: ../bin/src/ui_networkremotesettingspage.h:130
 msgid ""
 "Only accept connections from clients within the ip ranges:\n"
 "10.x.x.x\n"
@@ -3250,6 +3285,7 @@ msgstr "Party"
 #: ../bin/src/ui_groovesharksettingspage.h:115
 #: ../bin/src/ui_magnatunesettingspage.h:165
 #: ../bin/src/ui_spotifysettingspage.h:211
+#: ../bin/src/ui_subsonicsettingspage.h:120
 #: ../bin/src/ui_podcastsettingspage.h:253
 #: ../bin/src/ui_networkproxysettingspage.h:169
 msgid "Password"
@@ -3382,7 +3418,7 @@ msgid "Popup duration"
 msgstr "Thời gian xuất hiện"
 
 #: ../bin/src/ui_networkproxysettingspage.h:166
-#: ../bin/src/ui_networkremotesettingspage.h:109
+#: ../bin/src/ui_networkremotesettingspage.h:128
 msgid "Port"
 msgstr "Cổng"
 
@@ -3557,6 +3593,7 @@ msgid "Refresh"
 msgstr "Cập nhật"
 
 #: internet/jamendoservice.cpp:419 internet/magnatuneservice.cpp:278
+#: internet/subsonicservice.cpp:88
 msgid "Refresh catalogue"
 msgstr "Cập nhật mục lục"
 
@@ -3810,6 +3847,10 @@ msgstr "Tìm trên Jamendo"
 msgid "Search Magnatune"
 msgstr "Tìm trên Magnatune"
 
+#: internet/subsonicservice.cpp:72
+msgid "Search Subsonic"
+msgstr ""
+
 #: ui/albumcoverchoicecontroller.cpp:62
 msgid "Search for album covers..."
 msgstr "Tìm ảnh bìa..."
@@ -3907,6 +3948,14 @@ msgstr "Chọn hiệu ứng hình ảnh ảo..."
 #: devices/devicekitlister.cpp:124
 msgid "Serial number"
 msgstr "Số sê-ri"
+
+#: ../bin/src/ui_subsonicsettingspage.h:118
+msgid "Server"
+msgstr ""
+
+#: ../bin/src/ui_subsonicsettingspage.h:117
+msgid "Server details"
+msgstr ""
 
 #: internet/lastfmservice.cpp:434
 msgid "Service offline"
@@ -4246,7 +4295,7 @@ msgstr "Dừng khi phát xong bài hiện tại"
 msgid "Stopped"
 msgstr "Đã dừng"
 
-#: core/song.cpp:328
+#: core/song.cpp:329
 msgid "Stream"
 msgstr "Truyền tải"
 
@@ -4261,6 +4310,10 @@ msgstr "Danh sách đã đăng kí"
 #: ../bin/src/ui_podcastinfowidget.h:196
 msgid "Subscribers"
 msgstr "Người đăng kí"
+
+#: internet/subsonicservice.cpp:101 ../bin/src/ui_subsonicsettingspage.h:116
+msgid "Subsonic"
+msgstr ""
 
 #: ../data/oauthsuccess.html:34
 msgid "Success!"
@@ -4372,6 +4425,12 @@ msgstr "Trang bạn đã yêu cầu không tồn tại!"
 #: ui/coverfromurldialog.cpp:82
 msgid "The site you requested is not an image!"
 msgstr "Trang bạn đã yêu cầu không phải là một tấm ảnh!"
+
+#: internet/subsonicsettingspage.cpp:86
+msgid ""
+"The trial period for the Subsonic server is over. Please donate to get a "
+"license key. Visit subsonic.org for details."
+msgstr ""
 
 #: ui/mainwindow.cpp:2002
 msgid ""
@@ -4571,7 +4630,7 @@ msgstr "Đang chuyển mã %1 tập tin sử dụng %2 luồng"
 msgid "Transcoding options"
 msgstr "Tùy chỉnh chuyển mã"
 
-#: core/song.cpp:325
+#: core/song.cpp:326
 msgid "TrueAudio"
 msgstr "TrueAudio"
 
@@ -4604,7 +4663,7 @@ msgstr "Băng siêu rộng (UWB)"
 msgid "Unable to download %1 (%2)"
 msgstr "Không thể tải về %1 (%2)"
 
-#: core/song.cpp:332 library/librarymodel.cpp:301 library/librarymodel.cpp:306
+#: core/song.cpp:333 library/librarymodel.cpp:301 library/librarymodel.cpp:306
 #: library/librarymodel.cpp:947 playlist/playlistdelegates.cpp:309
 #: playlist/playlistmanager.cpp:394 playlist/playlistmanager.cpp:397
 #: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:418
@@ -4682,7 +4741,7 @@ msgstr "Dùng thẻ Nghệ sĩ của album khi có thể"
 msgid "Use Gnome's shortcut keys"
 msgstr "Sử dụng phím tắt của Gnome"
 
-#: ../bin/src/ui_networkremotesettingspage.h:108
+#: ../bin/src/ui_networkremotesettingspage.h:127
 msgid "Use Remotecontrol"
 msgstr ""
 
@@ -4747,13 +4806,14 @@ msgstr "Đã dùng"
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr "Người dùng %1 không có tài khoản Grooveshark Anywhere"
 
-#: ui/settingsdialog.cpp:141
+#: ui/settingsdialog.cpp:142
 msgid "User interface"
 msgstr "Giao diện người dùng"
 
 #: ../bin/src/ui_groovesharksettingspage.h:114
 #: ../bin/src/ui_magnatunesettingspage.h:163
 #: ../bin/src/ui_spotifysettingspage.h:210
+#: ../bin/src/ui_subsonicsettingspage.h:119
 #: ../bin/src/ui_podcastsettingspage.h:251
 #: ../bin/src/ui_networkproxysettingspage.h:168
 msgid "Username"
@@ -4824,7 +4884,7 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
-#: core/song.cpp:324
+#: core/song.cpp:325
 msgid "Wav"
 msgstr "Wav"
 
@@ -4921,6 +4981,10 @@ msgstr "Bạn có muốn chuyển những bài khác trong album này vào mục
 #: ui/mainwindow.cpp:2007
 msgid "Would you like to run a full rescan right now?"
 msgstr "Bạn muốn quét lại toàn bộ ngay bây giờ?"
+
+#: internet/subsonicsettingspage.cpp:74
+msgid "Wrong username or password."
+msgstr ""
 
 #: playlist/playlist.cpp:1198 ui/organisedialog.cpp:63
 #: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:148

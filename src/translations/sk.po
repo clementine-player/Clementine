@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-01-19 11:08+0000\n"
+"PO-Revision-Date: 2013-01-27 13:46+0000\n"
 "Last-Translator: Ján Ďanovský <dagsoftware@yahoo.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -298,7 +298,7 @@ msgstr "AAC 32k"
 msgid "AAC 64k"
 msgstr "AAC 64k"
 
-#: core/song.cpp:323
+#: core/song.cpp:324
 msgid "AIFF"
 msgstr "AIFF"
 
@@ -319,7 +319,7 @@ msgstr "O Clemetine..."
 msgid "About Qt..."
 msgstr "O Qt.."
 
-#: ../bin/src/ui_networkremotesettingspage.h:116
+#: ../bin/src/ui_networkremotesettingspage.h:135
 msgid "Accept non public clients only"
 msgstr "Akceptovať iba neverejných klientov"
 
@@ -639,6 +639,10 @@ msgstr "Nastala chyba pri načítavaní iTunes databázy"
 msgid "An error occurred writing metadata to '%1'"
 msgstr "Vyskytla sa chyba počas zapisovania metadát do '%1'"
 
+#: internet/subsonicsettingspage.cpp:91
+msgid "An unspecified error occurred."
+msgstr "Vyskytla nešpecifikovaná chyba."
+
 #: ui/about.cpp:77
 msgid "And:"
 msgstr "A:"
@@ -862,7 +866,7 @@ msgstr "Ale tieto zdroje sú zakázané:"
 msgid "Buttons"
 msgstr "Tlačidlá"
 
-#: core/song.cpp:326
+#: core/song.cpp:327
 msgid "CDDA"
 msgstr "CDDA"
 
@@ -1130,6 +1134,10 @@ msgstr "Klávesové skratky"
 msgid "Configure Spotify..."
 msgstr "Nastaviť Spotify..."
 
+#: internet/subsonicservice.cpp:92
+msgid "Configure Subsonic..."
+msgstr "Nastaviť Subsonic..."
+
 #: globalsearch/globalsearchview.cpp:140 globalsearch/globalsearchview.cpp:446
 msgid "Configure global search..."
 msgstr "Nastaviť globálne vyhľadávanie..."
@@ -1197,6 +1205,12 @@ msgstr "Kopíruje sa iPod databáza"
 #: ../bin/src/ui_podcastinfowidget.h:194
 msgid "Copyright"
 msgstr "Autorské práva"
+
+#: internet/subsonicsettingspage.cpp:69
+msgid ""
+"Could not connect to Subsonic, check server URL. Example: "
+"http://localhost:4040/"
+msgstr "Nedalo sa pripojiť na Subsonic, skontrolujte URL servera. Napríklad: http://localhost:4040/"
 
 #: transcoder/transcoder.cpp:64
 #, qt-format
@@ -1975,6 +1989,10 @@ msgstr "Získavať automaticky"
 msgid "Fetch completed"
 msgstr "Sťahovanie dokončené"
 
+#: internet/subsonicservice.cpp:208
+msgid "Fetching Subsonic library"
+msgstr "Získava sa zbierka zo Subsonicu"
+
 #: ui/coverfromurldialog.cpp:71 ui/coverfromurldialog.cpp:82
 msgid "Fetching cover error"
 msgstr "Chyba pri získavaní obalu"
@@ -2131,7 +2149,7 @@ msgstr "Plné výšky"
 msgid "GStreamer audio engine"
 msgstr "GStreamer audio engine"
 
-#: ui/settingsdialog.cpp:127
+#: ui/settingsdialog.cpp:128
 msgid "General"
 msgstr "Všeobecné"
 
@@ -2152,6 +2170,10 @@ msgstr "Získať URL na zdieľanie tohto Grooveshark playlistu"
 #: internet/groovesharkservice.cpp:537 internet/groovesharkservice.cpp:1108
 msgid "Get a URL to share this Grooveshark song"
 msgstr "Získať URL na zdieľanie tejto Grooveshark piesne"
+
+#: ../bin/src/ui_networkremotesettingspage.h:136
+msgid "Get the Android App now!"
+msgstr "Získať aplikáciu pre Android!"
 
 #: internet/groovesharkservice.cpp:788
 msgid "Getting Grooveshark popular songs"
@@ -2355,6 +2377,14 @@ msgstr "Zahrnúť obal do upozornenia"
 msgid "Include all songs"
 msgstr "Zahrnúť všetky piesne."
 
+#: internet/subsonicsettingspage.cpp:78
+msgid "Incompatible Subsonic REST protocol version. Client must upgrade."
+msgstr "Nekompatibilná verzia Subsonic REST protokolu. Klienta musíte aktualizovať."
+
+#: internet/subsonicsettingspage.cpp:82
+msgid "Incompatible Subsonic REST protocol version. Server must upgrade."
+msgstr "Nekompatibilná verzia Subsonic REST protokolu. Server musíte aktualizovať."
+
 #: core/commandlineoptions.cpp:152
 msgid "Increase the volume by 4%"
 msgstr "Zvýšiť hlasitosť o 4%"
@@ -2388,7 +2418,7 @@ msgstr "Kontrola integrity"
 msgid "Internet"
 msgstr "Internet"
 
-#: ui/settingsdialog.cpp:149
+#: ui/settingsdialog.cpp:150
 msgid "Internet providers"
 msgstr "Internetoví poskytovatelia"
 
@@ -2688,6 +2718,7 @@ msgstr "Načítať súbory/URL adresy, nahradiť nimi aktuálny playlist"
 #: ../bin/src/ui_groovesharksettingspage.h:116
 #: ../bin/src/ui_magnatunesettingspage.h:164
 #: ../bin/src/ui_spotifysettingspage.h:212
+#: ../bin/src/ui_subsonicsettingspage.h:121
 #: ../bin/src/ui_lastfmsettingspage.h:153
 #: ../bin/src/ui_googledrivesettingspage.h:105
 #: ../bin/src/ui_ubuntuonesettingspage.h:112
@@ -2965,7 +2996,7 @@ msgstr "Sieť"
 msgid "Network Proxy"
 msgstr "Sieťové proxy"
 
-#: ../bin/src/ui_networkremotesettingspage.h:107
+#: ../bin/src/ui_networkremotesettingspage.h:126
 msgid "Network Remote"
 msgstr "Diaľkové ovládanie cez sieť"
 
@@ -3116,6 +3147,10 @@ msgstr "OSD ukážka"
 msgid "Ogg Flac"
 msgstr "Ogg Flac"
 
+#: core/song.cpp:323
+msgid "Ogg Opus"
+msgstr "Ogg Opus"
+
 #: core/song.cpp:321
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
@@ -3125,7 +3160,7 @@ msgstr "Ogg Speex"
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
 
-#: ../bin/src/ui_networkremotesettingspage.h:111
+#: ../bin/src/ui_networkremotesettingspage.h:130
 msgid ""
 "Only accept connections from clients within the ip ranges:\n"
 "10.x.x.x\n"
@@ -3247,6 +3282,7 @@ msgstr "Party"
 #: ../bin/src/ui_groovesharksettingspage.h:115
 #: ../bin/src/ui_magnatunesettingspage.h:165
 #: ../bin/src/ui_spotifysettingspage.h:211
+#: ../bin/src/ui_subsonicsettingspage.h:120
 #: ../bin/src/ui_podcastsettingspage.h:253
 #: ../bin/src/ui_networkproxysettingspage.h:169
 msgid "Password"
@@ -3379,7 +3415,7 @@ msgid "Popup duration"
 msgstr "Trvanie upozornenia"
 
 #: ../bin/src/ui_networkproxysettingspage.h:166
-#: ../bin/src/ui_networkremotesettingspage.h:109
+#: ../bin/src/ui_networkremotesettingspage.h:128
 msgid "Port"
 msgstr "Port"
 
@@ -3554,6 +3590,7 @@ msgid "Refresh"
 msgstr "Obnoviť"
 
 #: internet/jamendoservice.cpp:419 internet/magnatuneservice.cpp:278
+#: internet/subsonicservice.cpp:88
 msgid "Refresh catalogue"
 msgstr "Obnoviť katalóg"
 
@@ -3807,6 +3844,10 @@ msgstr "Hľadať na Jamendo"
 msgid "Search Magnatune"
 msgstr "Hľadať na Magnatune"
 
+#: internet/subsonicservice.cpp:72
+msgid "Search Subsonic"
+msgstr "Vyhľadať na Subsonicu"
+
 #: ui/albumcoverchoicecontroller.cpp:62
 msgid "Search for album covers..."
 msgstr "Hľadať obaly albumov..."
@@ -3904,6 +3945,14 @@ msgstr "Vybrať vizualizácie..."
 #: devices/devicekitlister.cpp:124
 msgid "Serial number"
 msgstr "Sériové číslo"
+
+#: ../bin/src/ui_subsonicsettingspage.h:118
+msgid "Server"
+msgstr "Server"
+
+#: ../bin/src/ui_subsonicsettingspage.h:117
+msgid "Server details"
+msgstr "Podrobnosti servera"
 
 #: internet/lastfmservice.cpp:434
 msgid "Service offline"
@@ -4243,7 +4292,7 @@ msgstr "Zastaviť prehrávanie po aktuálnej skladbe"
 msgid "Stopped"
 msgstr "Zastavené"
 
-#: core/song.cpp:328
+#: core/song.cpp:329
 msgid "Stream"
 msgstr "Stream"
 
@@ -4258,6 +4307,10 @@ msgstr "Podpísané playlisty"
 #: ../bin/src/ui_podcastinfowidget.h:196
 msgid "Subscribers"
 msgstr "Predplatitelia"
+
+#: internet/subsonicservice.cpp:101 ../bin/src/ui_subsonicsettingspage.h:116
+msgid "Subsonic"
+msgstr "Subsonic"
 
 #: ../data/oauthsuccess.html:34
 msgid "Success!"
@@ -4369,6 +4422,12 @@ msgstr "Stránka, ktorú požadujete, neexistuje!"
 #: ui/coverfromurldialog.cpp:82
 msgid "The site you requested is not an image!"
 msgstr "Stránka, ktorú požadujete, nie je obrázok!"
+
+#: internet/subsonicsettingspage.cpp:86
+msgid ""
+"The trial period for the Subsonic server is over. Please donate to get a "
+"license key. Visit subsonic.org for details."
+msgstr "Skúšobná verzia Subsonic servera uplynula. Prosím prispejte, aby ste získali licenčný kľúč. Navštívte subsonic.org pre detaily."
 
 #: ui/mainwindow.cpp:2002
 msgid ""
@@ -4568,7 +4627,7 @@ msgstr "Transkódovanie %1 súborov použitím %2 vlákien."
 msgid "Transcoding options"
 msgstr "Možnosti transkódovania"
 
-#: core/song.cpp:325
+#: core/song.cpp:326
 msgid "TrueAudio"
 msgstr "TrueAudio"
 
@@ -4601,7 +4660,7 @@ msgstr "Ultra široké pásmo (UWB)"
 msgid "Unable to download %1 (%2)"
 msgstr "Nedá sa stiahnuť %1 (%2)"
 
-#: core/song.cpp:332 library/librarymodel.cpp:301 library/librarymodel.cpp:306
+#: core/song.cpp:333 library/librarymodel.cpp:301 library/librarymodel.cpp:306
 #: library/librarymodel.cpp:947 playlist/playlistdelegates.cpp:309
 #: playlist/playlistmanager.cpp:394 playlist/playlistmanager.cpp:397
 #: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:418
@@ -4679,7 +4738,7 @@ msgstr "Použiť tag Interprét albumu, ak je dostupný"
 msgid "Use Gnome's shortcut keys"
 msgstr "Použiť klávesové skratky GNOME"
 
-#: ../bin/src/ui_networkremotesettingspage.h:108
+#: ../bin/src/ui_networkremotesettingspage.h:127
 msgid "Use Remotecontrol"
 msgstr "Použiť diaľkové ovládanie"
 
@@ -4744,13 +4803,14 @@ msgstr "Použitých"
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr "Používateľ %1 nemá Grooveshark Anywhere účet"
 
-#: ui/settingsdialog.cpp:141
+#: ui/settingsdialog.cpp:142
 msgid "User interface"
 msgstr "Používateľské rozhranie"
 
 #: ../bin/src/ui_groovesharksettingspage.h:114
 #: ../bin/src/ui_magnatunesettingspage.h:163
 #: ../bin/src/ui_spotifysettingspage.h:210
+#: ../bin/src/ui_subsonicsettingspage.h:119
 #: ../bin/src/ui_podcastsettingspage.h:251
 #: ../bin/src/ui_networkproxysettingspage.h:168
 msgid "Username"
@@ -4821,7 +4881,7 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
-#: core/song.cpp:324
+#: core/song.cpp:325
 msgid "Wav"
 msgstr "Wav"
 
@@ -4918,6 +4978,10 @@ msgstr "Chceli by ste presunúť tiež ostatné piesne v tomto albume do rôznyc
 #: ui/mainwindow.cpp:2007
 msgid "Would you like to run a full rescan right now?"
 msgstr "Chcete teraz spustiť úplné preskenovanie?"
+
+#: internet/subsonicsettingspage.cpp:74
+msgid "Wrong username or password."
+msgstr "Nesprávne meno používateľa alebo heslo."
 
 #: playlist/playlist.cpp:1198 ui/organisedialog.cpp:63
 #: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:148

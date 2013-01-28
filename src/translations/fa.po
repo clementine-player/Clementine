@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-01-19 00:08+0000\n"
-"Last-Translator: saeedzeyghami <saeed.zeyghami@gmail.com>\n"
+"PO-Revision-Date: 2013-01-26 12:03+0000\n"
+"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: fa\n"
@@ -300,7 +300,7 @@ msgstr "AAC 32k"
 msgid "AAC 64k"
 msgstr "AAC 64k"
 
-#: core/song.cpp:323
+#: core/song.cpp:324
 msgid "AIFF"
 msgstr "AIFF"
 
@@ -321,7 +321,7 @@ msgstr "درباره‌ی کلمنتاین..."
 msgid "About Qt..."
 msgstr "درباره‌ی کیو‌تی..."
 
-#: ../bin/src/ui_networkremotesettingspage.h:116
+#: ../bin/src/ui_networkremotesettingspage.h:135
 msgid "Accept non public clients only"
 msgstr "فقط پذیرش مهمان های غیر عمومی "
 
@@ -641,6 +641,10 @@ msgstr "مشکلی هنگام  فراخوانی پایگاه داده‌ی آی�
 msgid "An error occurred writing metadata to '%1'"
 msgstr "مشکلی در نوشتن ابرداده در '%1' پیش آمد"
 
+#: internet/subsonicsettingspage.cpp:91
+msgid "An unspecified error occurred."
+msgstr ""
+
 #: ui/about.cpp:77
 msgid "And:"
 msgstr "و:"
@@ -864,7 +868,7 @@ msgstr "اما این سرچشمه‌ها ناپویا هستند:"
 msgid "Buttons"
 msgstr "دکمه‌ها"
 
-#: core/song.cpp:326
+#: core/song.cpp:327
 msgid "CDDA"
 msgstr "CDDA"
 
@@ -1132,6 +1136,10 @@ msgstr "پیکربندی میان‌برها"
 msgid "Configure Spotify..."
 msgstr "پیکربندی اسپاتیفای..."
 
+#: internet/subsonicservice.cpp:92
+msgid "Configure Subsonic..."
+msgstr ""
+
 #: globalsearch/globalsearchview.cpp:140 globalsearch/globalsearchview.cpp:446
 msgid "Configure global search..."
 msgstr "پیکربندی جستجوی سراسری..."
@@ -1199,6 +1207,12 @@ msgstr "کپی‌کردن پایگاه داده‌های آی‌پاد"
 #: ../bin/src/ui_podcastinfowidget.h:194
 msgid "Copyright"
 msgstr "کپی‌رایت"
+
+#: internet/subsonicsettingspage.cpp:69
+msgid ""
+"Could not connect to Subsonic, check server URL. Example: "
+"http://localhost:4040/"
+msgstr ""
 
 #: transcoder/transcoder.cpp:64
 #, qt-format
@@ -1977,6 +1991,10 @@ msgstr "واکشی خودکار"
 msgid "Fetch completed"
 msgstr "واکشی کامل شد"
 
+#: internet/subsonicservice.cpp:208
+msgid "Fetching Subsonic library"
+msgstr ""
+
 #: ui/coverfromurldialog.cpp:71 ui/coverfromurldialog.cpp:82
 msgid "Fetching cover error"
 msgstr "خطای واکشی جلد"
@@ -2133,7 +2151,7 @@ msgstr "لرزش کامل"
 msgid "GStreamer audio engine"
 msgstr "موتور صوتی GStreamer"
 
-#: ui/settingsdialog.cpp:127
+#: ui/settingsdialog.cpp:128
 msgid "General"
 msgstr "عمومی"
 
@@ -2154,6 +2172,10 @@ msgstr "دریافت یک نشانی اینترنتی برای اشتراک ای
 #: internet/groovesharkservice.cpp:537 internet/groovesharkservice.cpp:1108
 msgid "Get a URL to share this Grooveshark song"
 msgstr "دریافت یک نشانی اینترنتی برای اشتراک این آهنگ گرووشارک"
+
+#: ../bin/src/ui_networkremotesettingspage.h:136
+msgid "Get the Android App now!"
+msgstr ""
 
 #: internet/groovesharkservice.cpp:788
 msgid "Getting Grooveshark popular songs"
@@ -2357,6 +2379,14 @@ msgstr "آلبوم هنری را در آگاهساز قرار بده"
 msgid "Include all songs"
 msgstr "دربر داشتن همه‌ی آهنگها"
 
+#: internet/subsonicsettingspage.cpp:78
+msgid "Incompatible Subsonic REST protocol version. Client must upgrade."
+msgstr ""
+
+#: internet/subsonicsettingspage.cpp:82
+msgid "Incompatible Subsonic REST protocol version. Server must upgrade."
+msgstr ""
+
 #: core/commandlineoptions.cpp:152
 msgid "Increase the volume by 4%"
 msgstr "بلندی صدا را ٪۴ بیفزا"
@@ -2390,7 +2420,7 @@ msgstr "بررسی درستی"
 msgid "Internet"
 msgstr "اینترنت"
 
-#: ui/settingsdialog.cpp:149
+#: ui/settingsdialog.cpp:150
 msgid "Internet providers"
 msgstr "فراهم‌کنندگان اینترنت"
 
@@ -2690,6 +2720,7 @@ msgstr "بارگیری پرونده‌ها/نشانی‌ها، جانشانی د
 #: ../bin/src/ui_groovesharksettingspage.h:116
 #: ../bin/src/ui_magnatunesettingspage.h:164
 #: ../bin/src/ui_spotifysettingspage.h:212
+#: ../bin/src/ui_subsonicsettingspage.h:121
 #: ../bin/src/ui_lastfmsettingspage.h:153
 #: ../bin/src/ui_googledrivesettingspage.h:105
 #: ../bin/src/ui_ubuntuonesettingspage.h:112
@@ -2967,7 +2998,7 @@ msgstr "شبکه"
 msgid "Network Proxy"
 msgstr "پیشکار پراکسی"
 
-#: ../bin/src/ui_networkremotesettingspage.h:107
+#: ../bin/src/ui_networkremotesettingspage.h:126
 msgid "Network Remote"
 msgstr "کنترل از راه دور شبکه "
 
@@ -3118,6 +3149,10 @@ msgstr "پیش‌مشاهده‌ی OSD"
 msgid "Ogg Flac"
 msgstr "Ogg Flac"
 
+#: core/song.cpp:323
+msgid "Ogg Opus"
+msgstr ""
+
 #: core/song.cpp:321
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
@@ -3127,7 +3162,7 @@ msgstr "Ogg Speex"
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
 
-#: ../bin/src/ui_networkremotesettingspage.h:111
+#: ../bin/src/ui_networkremotesettingspage.h:130
 msgid ""
 "Only accept connections from clients within the ip ranges:\n"
 "10.x.x.x\n"
@@ -3249,6 +3284,7 @@ msgstr "مهمانی"
 #: ../bin/src/ui_groovesharksettingspage.h:115
 #: ../bin/src/ui_magnatunesettingspage.h:165
 #: ../bin/src/ui_spotifysettingspage.h:211
+#: ../bin/src/ui_subsonicsettingspage.h:120
 #: ../bin/src/ui_podcastsettingspage.h:253
 #: ../bin/src/ui_networkproxysettingspage.h:169
 msgid "Password"
@@ -3381,7 +3417,7 @@ msgid "Popup duration"
 msgstr "پنجرک"
 
 #: ../bin/src/ui_networkproxysettingspage.h:166
-#: ../bin/src/ui_networkremotesettingspage.h:109
+#: ../bin/src/ui_networkremotesettingspage.h:128
 msgid "Port"
 msgstr "درگاه"
 
@@ -3556,6 +3592,7 @@ msgid "Refresh"
 msgstr "نوسازی"
 
 #: internet/jamendoservice.cpp:419 internet/magnatuneservice.cpp:278
+#: internet/subsonicservice.cpp:88
 msgid "Refresh catalogue"
 msgstr "بازخوانی کاتالوگ"
 
@@ -3809,6 +3846,10 @@ msgstr "جستجوی Jamendo"
 msgid "Search Magnatune"
 msgstr "جستجوی Magnatune"
 
+#: internet/subsonicservice.cpp:72
+msgid "Search Subsonic"
+msgstr ""
+
 #: ui/albumcoverchoicecontroller.cpp:62
 msgid "Search for album covers..."
 msgstr "جستجوی جلد آلبوم..."
@@ -3906,6 +3947,14 @@ msgstr "انتخاب فرتورسازها..."
 #: devices/devicekitlister.cpp:124
 msgid "Serial number"
 msgstr "شماره سریال"
+
+#: ../bin/src/ui_subsonicsettingspage.h:118
+msgid "Server"
+msgstr ""
+
+#: ../bin/src/ui_subsonicsettingspage.h:117
+msgid "Server details"
+msgstr ""
 
 #: internet/lastfmservice.cpp:434
 msgid "Service offline"
@@ -4245,7 +4294,7 @@ msgstr "ایست پخش پس از ترک جاری"
 msgid "Stopped"
 msgstr "ایست‌شده"
 
-#: core/song.cpp:328
+#: core/song.cpp:329
 msgid "Stream"
 msgstr "جریان"
 
@@ -4260,6 +4309,10 @@ msgstr "لیست‌پخش‌های عضو شده"
 #: ../bin/src/ui_podcastinfowidget.h:196
 msgid "Subscribers"
 msgstr "عضویت‌ها"
+
+#: internet/subsonicservice.cpp:101 ../bin/src/ui_subsonicsettingspage.h:116
+msgid "Subsonic"
+msgstr ""
 
 #: ../data/oauthsuccess.html:34
 msgid "Success!"
@@ -4371,6 +4424,12 @@ msgstr "پایگاه درخواستی وجود ندارد!"
 #: ui/coverfromurldialog.cpp:82
 msgid "The site you requested is not an image!"
 msgstr "پایگاه درخواستی فرتور نیست!"
+
+#: internet/subsonicsettingspage.cpp:86
+msgid ""
+"The trial period for the Subsonic server is over. Please donate to get a "
+"license key. Visit subsonic.org for details."
+msgstr ""
 
 #: ui/mainwindow.cpp:2002
 msgid ""
@@ -4570,7 +4629,7 @@ msgstr "تراکدکردن فایلهای %1 با استفاده از سرنخ�
 msgid "Transcoding options"
 msgstr "گزینه‌های تراکد"
 
-#: core/song.cpp:325
+#: core/song.cpp:326
 msgid "TrueAudio"
 msgstr "صدای واقعی"
 
@@ -4603,7 +4662,7 @@ msgstr "نوار ابرپهن (UWB)"
 msgid "Unable to download %1 (%2)"
 msgstr "ناکام در باگیری %1 (%2)"
 
-#: core/song.cpp:332 library/librarymodel.cpp:301 library/librarymodel.cpp:306
+#: core/song.cpp:333 library/librarymodel.cpp:301 library/librarymodel.cpp:306
 #: library/librarymodel.cpp:947 playlist/playlistdelegates.cpp:309
 #: playlist/playlistmanager.cpp:394 playlist/playlistmanager.cpp:397
 #: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:418
@@ -4681,7 +4740,7 @@ msgstr "بکاربردن برچسب «هنرمند آلبوم» وقتی که و
 msgid "Use Gnome's shortcut keys"
 msgstr "بکار بردن کلیدهای میان‌بر گنوم"
 
-#: ../bin/src/ui_networkremotesettingspage.h:108
+#: ../bin/src/ui_networkremotesettingspage.h:127
 msgid "Use Remotecontrol"
 msgstr "استفاده از کنترل از راه دور"
 
@@ -4746,13 +4805,14 @@ msgstr "استفاده‌شده"
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr "کاربر %1 اکانت گرووشارک در هیچ‌جا ندارد"
 
-#: ui/settingsdialog.cpp:141
+#: ui/settingsdialog.cpp:142
 msgid "User interface"
 msgstr "رابط کاربری"
 
 #: ../bin/src/ui_groovesharksettingspage.h:114
 #: ../bin/src/ui_magnatunesettingspage.h:163
 #: ../bin/src/ui_spotifysettingspage.h:210
+#: ../bin/src/ui_subsonicsettingspage.h:119
 #: ../bin/src/ui_podcastsettingspage.h:251
 #: ../bin/src/ui_networkproxysettingspage.h:168
 msgid "Username"
@@ -4823,7 +4883,7 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
-#: core/song.cpp:324
+#: core/song.cpp:325
 msgid "Wav"
 msgstr "Wav"
 
@@ -4920,6 +4980,10 @@ msgstr "آیا می‌خواهید آهنگ‌های دیگر در این آلب
 #: ui/mainwindow.cpp:2007
 msgid "Would you like to run a full rescan right now?"
 msgstr "آیا مایل هستید که الان بازبینی کامل انجام دهید؟"
+
+#: internet/subsonicsettingspage.cpp:74
+msgid "Wrong username or password."
+msgstr ""
 
 #: playlist/playlist.cpp:1198 ui/organisedialog.cpp:63
 #: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:148

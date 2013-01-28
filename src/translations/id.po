@@ -8,11 +8,12 @@
 #   <nix.lilium@gmail.com>, 2012.
 #   <tjung2steven@gmail.com>, 2012-2013.
 #   <tjung.steven@gmail.com>, 2013.
+# Tjung Steven <tjung.steven@gmail.com>, 2013.
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-01-18 18:01+0000\n"
+"PO-Revision-Date: 2013-01-26 12:03+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -301,7 +302,7 @@ msgstr "AAC 32k"
 msgid "AAC 64k"
 msgstr "AAC 64k"
 
-#: core/song.cpp:323
+#: core/song.cpp:324
 msgid "AIFF"
 msgstr "AIFF"
 
@@ -322,9 +323,9 @@ msgstr "Tentang Clementine..."
 msgid "About Qt..."
 msgstr "Tentang Qt..."
 
-#: ../bin/src/ui_networkremotesettingspage.h:116
+#: ../bin/src/ui_networkremotesettingspage.h:135
 msgid "Accept non public clients only"
-msgstr ""
+msgstr "Hanya terima klien non-publik"
 
 #: ../bin/src/ui_groovesharksettingspage.h:113
 #: ../bin/src/ui_magnatunesettingspage.h:155
@@ -642,6 +643,10 @@ msgstr "Kesalahan terjadi saat memuat database iTunes"
 msgid "An error occurred writing metadata to '%1'"
 msgstr "Kesalahan terjadi saat menulis metadata ke '%1'"
 
+#: internet/subsonicsettingspage.cpp:91
+msgid "An unspecified error occurred."
+msgstr ""
+
 #: ui/about.cpp:77
 msgid "And:"
 msgstr "Dan:"
@@ -865,7 +870,7 @@ msgstr "Tapi sumber -sumber ini telah mati:"
 msgid "Buttons"
 msgstr "Tombol"
 
-#: core/song.cpp:326
+#: core/song.cpp:327
 msgid "CDDA"
 msgstr "CDDA"
 
@@ -1133,6 +1138,10 @@ msgstr "Konfigurasi Jalan Pintas"
 msgid "Configure Spotify..."
 msgstr "Konfigurasi Spotify"
 
+#: internet/subsonicservice.cpp:92
+msgid "Configure Subsonic..."
+msgstr "Konfigurasi Subsonic..."
+
 #: globalsearch/globalsearchview.cpp:140 globalsearch/globalsearchview.cpp:446
 msgid "Configure global search..."
 msgstr "Konfigurasi pencarian global..."
@@ -1200,6 +1209,12 @@ msgstr "Menyalin database iPod"
 #: ../bin/src/ui_podcastinfowidget.h:194
 msgid "Copyright"
 msgstr "Hak cipta"
+
+#: internet/subsonicsettingspage.cpp:69
+msgid ""
+"Could not connect to Subsonic, check server URL. Example: "
+"http://localhost:4040/"
+msgstr ""
 
 #: transcoder/transcoder.cpp:64
 #, qt-format
@@ -1978,6 +1993,10 @@ msgstr "Pengambilkan secara otomatis"
 msgid "Fetch completed"
 msgstr "Pengambilan telah selesai"
 
+#: internet/subsonicservice.cpp:208
+msgid "Fetching Subsonic library"
+msgstr ""
+
 #: ui/coverfromurldialog.cpp:71 ui/coverfromurldialog.cpp:82
 msgid "Fetching cover error"
 msgstr "Kesalahan pengambilan sampul "
@@ -2134,7 +2153,7 @@ msgstr "Treble Penuh"
 msgid "GStreamer audio engine"
 msgstr "GStreamer audio engine"
 
-#: ui/settingsdialog.cpp:127
+#: ui/settingsdialog.cpp:128
 msgid "General"
 msgstr "Umum"
 
@@ -2155,6 +2174,10 @@ msgstr "Dapatkan URL untuk bagikan daftar lagu Grooveshark ini"
 #: internet/groovesharkservice.cpp:537 internet/groovesharkservice.cpp:1108
 msgid "Get a URL to share this Grooveshark song"
 msgstr "Dapatkan URL untuk bagikan lagu Grooveshark ini"
+
+#: ../bin/src/ui_networkremotesettingspage.h:136
+msgid "Get the Android App now!"
+msgstr "Ambil Android App sekarang"
 
 #: internet/groovesharkservice.cpp:788
 msgid "Getting Grooveshark popular songs"
@@ -2358,6 +2381,14 @@ msgstr "Sertakan sampul album dalam pemberitahuan"
 msgid "Include all songs"
 msgstr "Libatkan semua lagu"
 
+#: internet/subsonicsettingspage.cpp:78
+msgid "Incompatible Subsonic REST protocol version. Client must upgrade."
+msgstr ""
+
+#: internet/subsonicsettingspage.cpp:82
+msgid "Incompatible Subsonic REST protocol version. Server must upgrade."
+msgstr ""
+
 #: core/commandlineoptions.cpp:152
 msgid "Increase the volume by 4%"
 msgstr "Naikkan volume menjadi 4%"
@@ -2391,7 +2422,7 @@ msgstr "Cek kesatuan"
 msgid "Internet"
 msgstr "Internet"
 
-#: ui/settingsdialog.cpp:149
+#: ui/settingsdialog.cpp:150
 msgid "Internet providers"
 msgstr "penyedia layanan internet"
 
@@ -2691,6 +2722,7 @@ msgstr "Memuat berkas-berkas/URLs, menggantikan daftar lagu yang sekarang"
 #: ../bin/src/ui_groovesharksettingspage.h:116
 #: ../bin/src/ui_magnatunesettingspage.h:164
 #: ../bin/src/ui_spotifysettingspage.h:212
+#: ../bin/src/ui_subsonicsettingspage.h:121
 #: ../bin/src/ui_lastfmsettingspage.h:153
 #: ../bin/src/ui_googledrivesettingspage.h:105
 #: ../bin/src/ui_ubuntuonesettingspage.h:112
@@ -2968,9 +3000,9 @@ msgstr "Jaringan"
 msgid "Network Proxy"
 msgstr "Proxy Jaringan"
 
-#: ../bin/src/ui_networkremotesettingspage.h:107
+#: ../bin/src/ui_networkremotesettingspage.h:126
 msgid "Network Remote"
-msgstr ""
+msgstr "Remote Jaringan"
 
 #: playlist/playlistdelegates.cpp:299 ui/edittagdialog.cpp:481
 msgid "Never"
@@ -3119,6 +3151,10 @@ msgstr "Pratinjau OSD"
 msgid "Ogg Flac"
 msgstr "Ogg Flac"
 
+#: core/song.cpp:323
+msgid "Ogg Opus"
+msgstr ""
+
 #: core/song.cpp:321
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
@@ -3128,13 +3164,13 @@ msgstr "Ogg Speex"
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
 
-#: ../bin/src/ui_networkremotesettingspage.h:111
+#: ../bin/src/ui_networkremotesettingspage.h:130
 msgid ""
 "Only accept connections from clients within the ip ranges:\n"
 "10.x.x.x\n"
 "172.16.0.0 - 172.31.255.255\n"
 "192.168.x.x"
-msgstr ""
+msgstr "Hanya menerima koneksi dari klien dalam jankauan ip:\n10.x.x.x\n172.16.0.0 - 172.31.255.255\n192.168.x.x"
 
 #: ../bin/src/ui_querysortpage.h:142
 msgid "Only show the first"
@@ -3250,6 +3286,7 @@ msgstr "Pesta"
 #: ../bin/src/ui_groovesharksettingspage.h:115
 #: ../bin/src/ui_magnatunesettingspage.h:165
 #: ../bin/src/ui_spotifysettingspage.h:211
+#: ../bin/src/ui_subsonicsettingspage.h:120
 #: ../bin/src/ui_podcastsettingspage.h:253
 #: ../bin/src/ui_networkproxysettingspage.h:169
 msgid "Password"
@@ -3382,7 +3419,7 @@ msgid "Popup duration"
 msgstr "Durasi popup"
 
 #: ../bin/src/ui_networkproxysettingspage.h:166
-#: ../bin/src/ui_networkremotesettingspage.h:109
+#: ../bin/src/ui_networkremotesettingspage.h:128
 msgid "Port"
 msgstr "Gerbang"
 
@@ -3557,6 +3594,7 @@ msgid "Refresh"
 msgstr "Segarkan"
 
 #: internet/jamendoservice.cpp:419 internet/magnatuneservice.cpp:278
+#: internet/subsonicservice.cpp:88
 msgid "Refresh catalogue"
 msgstr "Segarkan katalog"
 
@@ -3810,6 +3848,10 @@ msgstr "Cari Jamendo"
 msgid "Search Magnatune"
 msgstr "Cari Magnatune"
 
+#: internet/subsonicservice.cpp:72
+msgid "Search Subsonic"
+msgstr ""
+
 #: ui/albumcoverchoicecontroller.cpp:62
 msgid "Search for album covers..."
 msgstr "Cari sampul album untuk..."
@@ -3907,6 +3949,14 @@ msgstr "Pilih visualisasi..."
 #: devices/devicekitlister.cpp:124
 msgid "Serial number"
 msgstr "Nomor seri"
+
+#: ../bin/src/ui_subsonicsettingspage.h:118
+msgid "Server"
+msgstr "Server"
+
+#: ../bin/src/ui_subsonicsettingspage.h:117
+msgid "Server details"
+msgstr ""
 
 #: internet/lastfmservice.cpp:434
 msgid "Service offline"
@@ -4246,7 +4296,7 @@ msgstr "Hentikan putaran setelah trek yang ini"
 msgid "Stopped"
 msgstr "Berhenti"
 
-#: core/song.cpp:328
+#: core/song.cpp:329
 msgid "Stream"
 msgstr "Stream"
 
@@ -4261,6 +4311,10 @@ msgstr "Daftar lagu langganan"
 #: ../bin/src/ui_podcastinfowidget.h:196
 msgid "Subscribers"
 msgstr "Pelanggan"
+
+#: internet/subsonicservice.cpp:101 ../bin/src/ui_subsonicsettingspage.h:116
+msgid "Subsonic"
+msgstr "Subsonic"
 
 #: ../data/oauthsuccess.html:34
 msgid "Success!"
@@ -4372,6 +4426,12 @@ msgstr "Situs yang Anda minta tidak ada!"
 #: ui/coverfromurldialog.cpp:82
 msgid "The site you requested is not an image!"
 msgstr "Situs yang Anda minta bukan gambar!"
+
+#: internet/subsonicsettingspage.cpp:86
+msgid ""
+"The trial period for the Subsonic server is over. Please donate to get a "
+"license key. Visit subsonic.org for details."
+msgstr ""
 
 #: ui/mainwindow.cpp:2002
 msgid ""
@@ -4571,7 +4631,7 @@ msgstr "Transcoding berkas %1 menggunakan thread %2"
 msgid "Transcoding options"
 msgstr "Pilihan transcoding"
 
-#: core/song.cpp:325
+#: core/song.cpp:326
 msgid "TrueAudio"
 msgstr "TrueAudio"
 
@@ -4604,7 +4664,7 @@ msgstr "Lebar pita ultra (UWB)"
 msgid "Unable to download %1 (%2)"
 msgstr "Tidak dapat mengunduh %1 (%2)"
 
-#: core/song.cpp:332 library/librarymodel.cpp:301 library/librarymodel.cpp:306
+#: core/song.cpp:333 library/librarymodel.cpp:301 library/librarymodel.cpp:306
 #: library/librarymodel.cpp:947 playlist/playlistdelegates.cpp:309
 #: playlist/playlistmanager.cpp:394 playlist/playlistmanager.cpp:397
 #: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:418
@@ -4682,9 +4742,9 @@ msgstr "Gunakan label Album Artis ketika tersedia"
 msgid "Use Gnome's shortcut keys"
 msgstr "Gunakan tombol pintas  Gnome"
 
-#: ../bin/src/ui_networkremotesettingspage.h:108
+#: ../bin/src/ui_networkremotesettingspage.h:127
 msgid "Use Remotecontrol"
-msgstr ""
+msgstr "Gunakan Remotekontrol"
 
 #: ../bin/src/ui_playbacksettingspage.h:274
 msgid "Use Replay Gain metadata if it is available"
@@ -4747,13 +4807,14 @@ msgstr "Bekas"
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr "Pengguna %1 tidak memiliki akun Grooveshark dimana pun"
 
-#: ui/settingsdialog.cpp:141
+#: ui/settingsdialog.cpp:142
 msgid "User interface"
 msgstr "Antarmuka"
 
 #: ../bin/src/ui_groovesharksettingspage.h:114
 #: ../bin/src/ui_magnatunesettingspage.h:163
 #: ../bin/src/ui_spotifysettingspage.h:210
+#: ../bin/src/ui_subsonicsettingspage.h:119
 #: ../bin/src/ui_podcastsettingspage.h:251
 #: ../bin/src/ui_networkproxysettingspage.h:168
 msgid "Username"
@@ -4824,7 +4885,7 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
-#: core/song.cpp:324
+#: core/song.cpp:325
 msgid "Wav"
 msgstr "Wav"
 
@@ -4921,6 +4982,10 @@ msgstr "Apakah Anda ingin memindahkan lagu lainnya dalam album ini seperti Berag
 #: ui/mainwindow.cpp:2007
 msgid "Would you like to run a full rescan right now?"
 msgstr "Apakah Anda ingin menjalankan pemindaian ulang penuh sekarang?"
+
+#: internet/subsonicsettingspage.cpp:74
+msgid "Wrong username or password."
+msgstr ""
 
 #: playlist/playlist.cpp:1198 ui/organisedialog.cpp:63
 #: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:148

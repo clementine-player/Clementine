@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-01-18 18:01+0000\n"
+"PO-Revision-Date: 2013-01-26 12:03+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -304,7 +304,7 @@ msgstr "AAC 32k"
 msgid "AAC 64k"
 msgstr "AAC 64k"
 
-#: core/song.cpp:323
+#: core/song.cpp:324
 msgid "AIFF"
 msgstr "AIFF"
 
@@ -325,7 +325,7 @@ msgstr "A Clementine névjegye"
 msgid "About Qt..."
 msgstr "Qt névjegye…"
 
-#: ../bin/src/ui_networkremotesettingspage.h:116
+#: ../bin/src/ui_networkremotesettingspage.h:135
 msgid "Accept non public clients only"
 msgstr ""
 
@@ -645,6 +645,10 @@ msgstr "Hiba történt az iTunes adatbázis betöltése közben"
 msgid "An error occurred writing metadata to '%1'"
 msgstr "Hiba történt '%1' metaadatainak írása közben"
 
+#: internet/subsonicsettingspage.cpp:91
+msgid "An unspecified error occurred."
+msgstr ""
+
 #: ui/about.cpp:77
 msgid "And:"
 msgstr "És:"
@@ -868,7 +872,7 @@ msgstr "De ezek a források le vannak tiltva:"
 msgid "Buttons"
 msgstr "Gombok"
 
-#: core/song.cpp:326
+#: core/song.cpp:327
 msgid "CDDA"
 msgstr "CDDA"
 
@@ -1136,6 +1140,10 @@ msgstr "Billentyűkombinációk beállítása"
 msgid "Configure Spotify..."
 msgstr "Spotify beállítása..."
 
+#: internet/subsonicservice.cpp:92
+msgid "Configure Subsonic..."
+msgstr ""
+
 #: globalsearch/globalsearchview.cpp:140 globalsearch/globalsearchview.cpp:446
 msgid "Configure global search..."
 msgstr "Globális keresés beállítása..."
@@ -1203,6 +1211,12 @@ msgstr "iPod adatbázis másolása"
 #: ../bin/src/ui_podcastinfowidget.h:194
 msgid "Copyright"
 msgstr "Szerzői jog"
+
+#: internet/subsonicsettingspage.cpp:69
+msgid ""
+"Could not connect to Subsonic, check server URL. Example: "
+"http://localhost:4040/"
+msgstr ""
 
 #: transcoder/transcoder.cpp:64
 #, qt-format
@@ -1981,6 +1995,10 @@ msgstr "Letöltés automatikusan"
 msgid "Fetch completed"
 msgstr "Letöltés sikeres"
 
+#: internet/subsonicservice.cpp:208
+msgid "Fetching Subsonic library"
+msgstr ""
+
 #: ui/coverfromurldialog.cpp:71 ui/coverfromurldialog.cpp:82
 msgid "Fetching cover error"
 msgstr "Hiba a borító betöltése közben"
@@ -2137,7 +2155,7 @@ msgstr "Teljes magas"
 msgid "GStreamer audio engine"
 msgstr "GStreamer hang meghajtó"
 
-#: ui/settingsdialog.cpp:127
+#: ui/settingsdialog.cpp:128
 msgid "General"
 msgstr "Általános"
 
@@ -2158,6 +2176,10 @@ msgstr "URL lekérése ezen Grooveshark lejátszási lista megosztásához"
 #: internet/groovesharkservice.cpp:537 internet/groovesharkservice.cpp:1108
 msgid "Get a URL to share this Grooveshark song"
 msgstr "URL lekérése ezen Grooveshark lejátszási lista megosztásához"
+
+#: ../bin/src/ui_networkremotesettingspage.h:136
+msgid "Get the Android App now!"
+msgstr ""
 
 #: internet/groovesharkservice.cpp:788
 msgid "Getting Grooveshark popular songs"
@@ -2361,6 +2383,14 @@ msgstr "Albumborító megjelenítése az értesítésben"
 msgid "Include all songs"
 msgstr "Vegyen bele minden számot"
 
+#: internet/subsonicsettingspage.cpp:78
+msgid "Incompatible Subsonic REST protocol version. Client must upgrade."
+msgstr ""
+
+#: internet/subsonicsettingspage.cpp:82
+msgid "Incompatible Subsonic REST protocol version. Server must upgrade."
+msgstr ""
+
 #: core/commandlineoptions.cpp:152
 msgid "Increase the volume by 4%"
 msgstr "Hangerő növelése 4%-kal"
@@ -2394,7 +2424,7 @@ msgstr "Integritás ellenőrzése"
 msgid "Internet"
 msgstr "Internet"
 
-#: ui/settingsdialog.cpp:149
+#: ui/settingsdialog.cpp:150
 msgid "Internet providers"
 msgstr "Internet szolgáltatók"
 
@@ -2694,6 +2724,7 @@ msgstr "Fájlok/URL-ek betöltése, lejátszási lista cseréje"
 #: ../bin/src/ui_groovesharksettingspage.h:116
 #: ../bin/src/ui_magnatunesettingspage.h:164
 #: ../bin/src/ui_spotifysettingspage.h:212
+#: ../bin/src/ui_subsonicsettingspage.h:121
 #: ../bin/src/ui_lastfmsettingspage.h:153
 #: ../bin/src/ui_googledrivesettingspage.h:105
 #: ../bin/src/ui_ubuntuonesettingspage.h:112
@@ -2971,7 +3002,7 @@ msgstr "Hálózat"
 msgid "Network Proxy"
 msgstr "Hálózati Proxy"
 
-#: ../bin/src/ui_networkremotesettingspage.h:107
+#: ../bin/src/ui_networkremotesettingspage.h:126
 msgid "Network Remote"
 msgstr ""
 
@@ -3122,6 +3153,10 @@ msgstr "OSD Előnézet"
 msgid "Ogg Flac"
 msgstr "OGG FLAC"
 
+#: core/song.cpp:323
+msgid "Ogg Opus"
+msgstr ""
+
 #: core/song.cpp:321
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
@@ -3131,7 +3166,7 @@ msgstr "Ogg Speex"
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
 
-#: ../bin/src/ui_networkremotesettingspage.h:111
+#: ../bin/src/ui_networkremotesettingspage.h:130
 msgid ""
 "Only accept connections from clients within the ip ranges:\n"
 "10.x.x.x\n"
@@ -3253,6 +3288,7 @@ msgstr "Party"
 #: ../bin/src/ui_groovesharksettingspage.h:115
 #: ../bin/src/ui_magnatunesettingspage.h:165
 #: ../bin/src/ui_spotifysettingspage.h:211
+#: ../bin/src/ui_subsonicsettingspage.h:120
 #: ../bin/src/ui_podcastsettingspage.h:253
 #: ../bin/src/ui_networkproxysettingspage.h:169
 msgid "Password"
@@ -3385,7 +3421,7 @@ msgid "Popup duration"
 msgstr "Értesítés időtartama"
 
 #: ../bin/src/ui_networkproxysettingspage.h:166
-#: ../bin/src/ui_networkremotesettingspage.h:109
+#: ../bin/src/ui_networkremotesettingspage.h:128
 msgid "Port"
 msgstr "Port"
 
@@ -3560,6 +3596,7 @@ msgid "Refresh"
 msgstr "Frissítés"
 
 #: internet/jamendoservice.cpp:419 internet/magnatuneservice.cpp:278
+#: internet/subsonicservice.cpp:88
 msgid "Refresh catalogue"
 msgstr "Katalógus frissítése"
 
@@ -3813,6 +3850,10 @@ msgstr "Keresés Jamendo-n"
 msgid "Search Magnatune"
 msgstr "Keresés a Magnatune-on"
 
+#: internet/subsonicservice.cpp:72
+msgid "Search Subsonic"
+msgstr ""
+
 #: ui/albumcoverchoicecontroller.cpp:62
 msgid "Search for album covers..."
 msgstr "Albumborítók keresése..."
@@ -3910,6 +3951,14 @@ msgstr "Megjelenítések kiválasztása..."
 #: devices/devicekitlister.cpp:124
 msgid "Serial number"
 msgstr "Sorozatszám"
+
+#: ../bin/src/ui_subsonicsettingspage.h:118
+msgid "Server"
+msgstr ""
+
+#: ../bin/src/ui_subsonicsettingspage.h:117
+msgid "Server details"
+msgstr ""
 
 #: internet/lastfmservice.cpp:434
 msgid "Service offline"
@@ -4249,7 +4298,7 @@ msgstr "Leállítás az aktuális szám után"
 msgid "Stopped"
 msgstr "Leállítva"
 
-#: core/song.cpp:328
+#: core/song.cpp:329
 msgid "Stream"
 msgstr "Adatfolyam"
 
@@ -4264,6 +4313,10 @@ msgstr "Feliratkozott lejátszólisták"
 #: ../bin/src/ui_podcastinfowidget.h:196
 msgid "Subscribers"
 msgstr "Feliratkozók"
+
+#: internet/subsonicservice.cpp:101 ../bin/src/ui_subsonicsettingspage.h:116
+msgid "Subsonic"
+msgstr ""
 
 #: ../data/oauthsuccess.html:34
 msgid "Success!"
@@ -4375,6 +4428,12 @@ msgstr "A kért oldal nem létezik!"
 #: ui/coverfromurldialog.cpp:82
 msgid "The site you requested is not an image!"
 msgstr "A kért oldal nem egy kép!"
+
+#: internet/subsonicsettingspage.cpp:86
+msgid ""
+"The trial period for the Subsonic server is over. Please donate to get a "
+"license key. Visit subsonic.org for details."
+msgstr ""
 
 #: ui/mainwindow.cpp:2002
 msgid ""
@@ -4574,7 +4633,7 @@ msgstr "Átkódolás %1 fájlt %2 folyamatban"
 msgid "Transcoding options"
 msgstr "Kódolási opciók"
 
-#: core/song.cpp:325
+#: core/song.cpp:326
 msgid "TrueAudio"
 msgstr "TrueAudio"
 
@@ -4607,7 +4666,7 @@ msgstr "Ultra szélessávú (UWB)"
 msgid "Unable to download %1 (%2)"
 msgstr "%1 (%2) nem letölthető"
 
-#: core/song.cpp:332 library/librarymodel.cpp:301 library/librarymodel.cpp:306
+#: core/song.cpp:333 library/librarymodel.cpp:301 library/librarymodel.cpp:306
 #: library/librarymodel.cpp:947 playlist/playlistdelegates.cpp:309
 #: playlist/playlistmanager.cpp:394 playlist/playlistmanager.cpp:397
 #: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:418
@@ -4685,7 +4744,7 @@ msgstr "Album előadója címke használata (ha elérhető)"
 msgid "Use Gnome's shortcut keys"
 msgstr "Gnome gyorsbillentyűk használata"
 
-#: ../bin/src/ui_networkremotesettingspage.h:108
+#: ../bin/src/ui_networkremotesettingspage.h:127
 msgid "Use Remotecontrol"
 msgstr ""
 
@@ -4750,13 +4809,14 @@ msgstr "Használt"
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr "%1 felhasználónak nincs Grooveshark Anywhere fiókja"
 
-#: ui/settingsdialog.cpp:141
+#: ui/settingsdialog.cpp:142
 msgid "User interface"
 msgstr "Kezelőfelület"
 
 #: ../bin/src/ui_groovesharksettingspage.h:114
 #: ../bin/src/ui_magnatunesettingspage.h:163
 #: ../bin/src/ui_spotifysettingspage.h:210
+#: ../bin/src/ui_subsonicsettingspage.h:119
 #: ../bin/src/ui_podcastsettingspage.h:251
 #: ../bin/src/ui_networkproxysettingspage.h:168
 msgid "Username"
@@ -4827,7 +4887,7 @@ msgstr "WAV"
 msgid "WMA"
 msgstr "WMA"
 
-#: core/song.cpp:324
+#: core/song.cpp:325
 msgid "Wav"
 msgstr "WAV"
 
@@ -4924,6 +4984,10 @@ msgstr "Szeretné a többi számot ebből az albumból áthelyezni a Vegyes elő
 #: ui/mainwindow.cpp:2007
 msgid "Would you like to run a full rescan right now?"
 msgstr "Akarsz futtatni egy teljes újraolvasást most?"
+
+#: internet/subsonicsettingspage.cpp:74
+msgid "Wrong username or password."
+msgstr ""
 
 #: playlist/playlist.cpp:1198 ui/organisedialog.cpp:63
 #: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:148
