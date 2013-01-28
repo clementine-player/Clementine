@@ -36,11 +36,12 @@ RemoteClient::RemoteClient(Application* app, QTcpSocket* client)
 
   // Connect to the slot IncomingData when receiving data
   connect(client, SIGNAL(readyRead()), this, SLOT(IncomingData()));
+
+  // Connect the signals to see if an error occured or the client
+  // was disconnected.
   connect(client, SIGNAL(disconnected()), this, SLOT(Disconnected()));
   connect(client, SIGNAL(error(QAbstractSocket::SocketError)),
           this, SLOT(Error(QAbstractSocket::SocketError)));
-
-  signal(SIGPIPE, SIG_IGN);
 
   // Check if we use auth code
   QSettings s;

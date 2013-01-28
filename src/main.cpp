@@ -406,6 +406,12 @@ int main(int argc, char *argv[]) {
   qtsparkle::LoadTranslations(language);
 #endif
 
+  #ifndef Q_OS_WIN32
+    // This is needed to prevent SIGPIPE Errors, which occur under some
+    // circumstances in RemoteClient. They cause a program termination.
+    signal(SIGPIPE, SIG_IGN);
+  #endif
+
   // Icons
   IconLoader::Init();
 
