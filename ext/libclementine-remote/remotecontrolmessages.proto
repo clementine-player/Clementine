@@ -5,13 +5,14 @@ enum MsgType {
   UNKNOWN = 0;
   // Messages generally send from client to server
   CONNECT = 1;
-  DISCONNECT = 2;
   REQUEST_PLAYLISTS = 3;
   REQUEST_PLAYLIST_SONGS = 4;
   CHANGE_SONG = 5;
   SET_VOLUME = 6;
+  SET_TRACK_POSITION = 7;
 
   // Messages send by both
+  DISCONNECT = 2;
   PLAY = 20;
   PLAYPAUSE = 21;
   PAUSE = 22;
@@ -146,20 +147,45 @@ message ResponseUpdateTrackPosition {
   optional int32 position = 1;
 }
 
+// The connect message containing the authentication code
+message RequestConnect {
+  optional int32 auth_code = 1;
+}
+
+// Respone, why the connection was closed
+enum ReasonDisconnect {
+  Server_Shutdown = 1;
+  Wrong_Auth_Code = 2;
+}
+message ResponseDisconnect {
+  optional ReasonDisconnect reason_disconnect = 1;
+}
+
+// A client requests a new track position
+// position in seconds!
+message RequestSetTrackPosition {
+  optional int32 position = 1;
+}
+
 // The message itself
 message Message {
   optional int32 version = 1 [default=2];
   optional MsgType type = 2 [default=UNKNOWN]; // What data is in the message?
 
+  optional RequestConnect request_connect = 21;
   optional RequestPlaylistSongs request_playlist_songs = 10;
   optional RequestChangeSong request_change_song = 11;
   optional RequestSetVolume request_set_volume = 12;
+  optional RequestSetTrackPosition request_set_track_position = 23;
+  
   optional Repeat repeat = 13;
   optional Shuffle shuffle = 14;
+  
   optional ResponseClementineInfo response_clementine_info = 15;
   optional ResponseCurrentMetadata response_current_metadata = 16;
   optional ResponsePlaylists response_playlists = 17;
   optional ResponsePlaylistSongs response_playlist_songs = 18;
   optional ResponseEngineStateChanged response_engine_state_changed = 19;
   optional ResponseUpdateTrackPosition response_update_track_position = 20;
+  optional ResponseDisconnect response_disconnect = 22;
 }

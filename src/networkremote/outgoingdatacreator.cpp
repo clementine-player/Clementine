@@ -137,6 +137,9 @@ void OutgoingDataCreator::SendFirstData() {
 
   // then the current volume
   VolumeChanged(app_->player()->GetVolume());
+
+  // And the current track position
+  UpdateTrackPosition();
 }
 
 void OutgoingDataCreator::CurrentSongChanged(const Song& song, const QString& uri, const QImage& img) {
@@ -338,5 +341,12 @@ void OutgoingDataCreator::UpdateTrackPosition() {
 
   msg.mutable_response_update_track_position()->set_position(position);
 
+  SendDataToClients(&msg);
+}
+
+void OutgoingDataCreator::DisconnectAllClients() {
+  pb::remote::Message msg;
+  msg.set_type(pb::remote::DISCONNECT);
+  msg.mutable_response_disconnect()->set_reason_disconnect(pb::remote::Server_Shutdown);
   SendDataToClients(&msg);
 }

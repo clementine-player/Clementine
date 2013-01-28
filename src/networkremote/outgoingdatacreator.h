@@ -37,6 +37,7 @@ public slots:
   void SendRepeatMode(PlaylistSequence::RepeatMode mode);
   void SendShuffleMode(PlaylistSequence::ShuffleMode mode);
   void UpdateTrackPosition();
+  void DisconnectAllClients();
 
 private:
   Application* app_;

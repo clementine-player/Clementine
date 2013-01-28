@@ -42,6 +42,8 @@ IncomingDataParser::IncomingDataParser(Application* app)
           app_->player(), SLOT(SetVolume(int)));
   connect(this, SIGNAL(PlayAt(int,Engine::TrackChangeFlags,bool)),
           app_->player(), SLOT(PlayAt(int,Engine::TrackChangeFlags,bool)));
+  connect(this, SIGNAL(SeekTo(int)),
+          app_->player(), SLOT(SeekTo(int)));
 
   // For some connects we have to wait for the playlistmanager
   // to be initialized
@@ -69,15 +71,8 @@ bool IncomingDataParser::close_connection() {
   return close_connection_;
 }
 
-void IncomingDataParser::Parse(const QByteArray& data) {
+void IncomingDataParser::Parse(const pb::remote::Message& msg) {
   close_connection_  = false;
-
-  // Parse the incoming data
-  pb::remote::Message msg;
-  if (!msg.ParseFromArray(data.constData(), data.size())) {
-    qLog(Info) << "Couldn't parse data";
-    return;
-  }
 
   // Now check what's to do
   switch (msg.type()) {
@@ -111,6 +106,9 @@ void IncomingDataParser::Parse(const QByteArray& data) {
     case pb::remote::REPEAT:      SetRepeatMode(msg.repeat());
                                   break;
     case pb::remote::SHUFFLE:     SetShuffleMode(msg.shuffle());
+                                  break;
+    case pb::remote::SET_TRACK_POSITION:
+                                  emit SeekTo(msg.request_set_track_position().position());
                                   break;
     default: break;
   }

@@ -59,6 +59,10 @@ void NetworkRemoteSettingsPage::Load() {
     s.setValue("only_non_public_ip", true);
   }
 
+  // Auth Code, 5 digits
+  ui_->use_auth_code->setChecked(s.value("use_auth_code", false).toBool());
+  ui_->auth_code->setValue(s.value("auth_code", qrand() % 100000).toInt());
+
   s.endGroup();
 
   QPixmap android_qr_code(":clementine_remote_qr.png");
@@ -72,6 +76,8 @@ void NetworkRemoteSettingsPage::Save() {
   s.setValue("port", ui_->remote_port->value());
   s.setValue("use_remote", ui_->use_remote->isChecked());
   s.setValue("only_non_public_ip", ui_->only_non_public_ip->isChecked());
+  s.setValue("use_auth_code", ui_->use_auth_code->isChecked());
+  s.setValue("auth_code", ui_->auth_code->value());
 
   s.endGroup();
 
