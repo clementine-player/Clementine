@@ -233,6 +233,7 @@ QList<TranscoderPreset> Transcoder::GetAllPresets() {
   ret << PresetForFileType(Song::Type_OggSpeex);
   ret << PresetForFileType(Song::Type_Asf);
   ret << PresetForFileType(Song::Type_Wav);
+  ret << PresetForFileType(Song::Type_OggOpus);
   return ret;
 }
 
@@ -250,6 +251,8 @@ TranscoderPreset Transcoder::PresetForFileType(Song::FileType type) {
       return TranscoderPreset(type, "Ogg Flac",   "ogg",  "audio/x-flac",   "application/ogg");
     case Song::Type_OggSpeex:
       return TranscoderPreset(type, "Ogg Speex",  "spx",  "audio/x-speex",  "application/ogg");
+    case Song::Type_OggOpus:
+      return TranscoderPreset(type, "Ogg Opus",  "opus",  "audio/x-opus",  "application/ogg");
     case Song::Type_Asf:
       return TranscoderPreset(type, "Windows Media audio", "wma", "audio/x-wma", "video/x-ms-asf");
     case Song::Type_Wav:
@@ -407,12 +410,13 @@ bool Transcoder::StartJob(const Job &job) {
   if (!state->pipeline_) return false;
 
   // Create all the elements
-  GstElement* src     = CreateElement("filesrc", state->pipeline_);
-  GstElement* decode  = CreateElement("decodebin2", state->pipeline_);
-  GstElement* convert = CreateElement("audioconvert", state->pipeline_);
-  GstElement* codec   = CreateElementForMimeType("Codec/Encoder/Audio", job.preset.codec_mimetype_, state->pipeline_);
-  GstElement* muxer   = CreateElementForMimeType("Codec/Muxer", job.preset.muxer_mimetype_, state->pipeline_);
-  GstElement* sink    = CreateElement("filesink", state->pipeline_);
+  GstElement* src      = CreateElement("filesrc", state->pipeline_);
+  GstElement* decode   = CreateElement("decodebin2", state->pipeline_);
+  GstElement* convert  = CreateElement("audioconvert", state->pipeline_);
+  GstElement* resample = CreateElement("audioresample", state->pipeline_);
+  GstElement* codec    = CreateElementForMimeType("Codec/Encoder/Audio", job.preset.codec_mimetype_, state->pipeline_);
+  GstElement* muxer    = CreateElementForMimeType("Codec/Muxer", job.preset.muxer_mimetype_, state->pipeline_);
+  GstElement* sink     = CreateElement("filesink", state->pipeline_);
 
   if (!src || !decode || !convert || !sink)
     return false;
@@ -432,11 +436,11 @@ bool Transcoder::StartJob(const Job &job) {
   // Join them together
   gst_element_link(src, decode);
   if (codec && muxer)
-    gst_element_link_many(convert, codec, muxer, sink, NULL);
+    gst_element_link_many(convert, resample, codec, muxer, sink, NULL);
   else if (codec)
-    gst_element_link_many(convert, codec, sink, NULL);
+    gst_element_link_many(convert, resample, codec, sink, NULL);
   else if (muxer)
-    gst_element_link_many(convert, muxer, sink, NULL);
+    gst_element_link_many(convert, resample, muxer, sink, NULL);
 
   // Set properties
   g_object_set(src, "location", job.input.toUtf8().constData(), NULL);
