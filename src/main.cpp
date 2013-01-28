@@ -104,6 +104,10 @@ using boost::scoped_ptr;
 # include "devices/wmdmthread.h"
 #endif
 
+#ifndef Q_OS_WIN32
+#include <signal.h>
+#endif
+
 // Load sqlite plugin on windows and mac.
 #ifdef HAVE_STATIC_SQLITE
 # include <QtPlugin>

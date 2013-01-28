@@ -23,8 +23,6 @@
 #include <QDataStream>
 #include <QSettings>
 
-#include <signal.h>
-
 RemoteClient::RemoteClient(Application* app, QTcpSocket* client)
   : app_(app),
     client_(client)
