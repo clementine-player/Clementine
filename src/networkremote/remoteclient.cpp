@@ -23,6 +23,8 @@
 #include <QDataStream>
 #include <QSettings>
 
+#include <signal.h>
+
 RemoteClient::RemoteClient(Application* app, QTcpSocket* client)
   : app_(app),
     client_(client)
@@ -34,6 +36,11 @@ RemoteClient::RemoteClient(Application* app, QTcpSocket* client)
 
   // Connect to the slot IncomingData when receiving data
   connect(client, SIGNAL(readyRead()), this, SLOT(IncomingData()));
+  connect(client, SIGNAL(disconnected()), this, SLOT(Disconnected()));
+  connect(client, SIGNAL(error(QAbstractSocket::SocketError)),
+          this, SLOT(Error(QAbstractSocket::SocketError)));
+
+  signal(SIGPIPE, SIG_IGN);
 
   // Check if we use auth code
   QSettings s;
@@ -110,14 +117,27 @@ void RemoteClient::SendData(pb::remote::Message *msg) {
   std::string data = msg->SerializeAsString();
 
   // write the length of the data first
-  QDataStream s(client_);
-  s << qint32(data.length());
-  s.writeRawData(data.data(), data.length());
+  if (client_->isWritable()) {
+    QDataStream s(client_);
+    s << qint32(data.length());
+    s.writeRawData(data.data(), data.length());
 
-  // Flush data
-  client_->flush();
+    // Flush data
+    client_->flush();
+  } else {
+    client_->close();
+  }
 }
 
 QAbstractSocket::SocketState RemoteClient::State() {
   return client_->state();
+}
+
+void RemoteClient::Disconnected() {
+  qLog(Info) << "Client Disconnected";
+}
+
+void RemoteClient::Error(QAbstractSocket::SocketError socket_error) {
+  qLog(Info) << "Client Error:" << socket_error;
+  client_->close();
 }
