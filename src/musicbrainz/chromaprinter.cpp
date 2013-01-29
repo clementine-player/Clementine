@@ -163,7 +163,8 @@ QString Chromaprinter::CreateFingerprint() {
 
 void Chromaprinter::NewPadCallback(GstElement*, GstPad* pad, gboolean, gpointer data) {
   Chromaprinter* instance = reinterpret_cast<Chromaprinter*>(data);
-  GstPad* const audiopad = gst_element_get_pad(instance->convert_element_, "sink");
+  GstPad* const audiopad = gst_element_get_static_pad(
+      instance->convert_element_, "sink");
 
   if (GST_PAD_IS_LINKED(audiopad)) {
     qLog(Warning) << "audiopad is already linked, unlinking old pad";

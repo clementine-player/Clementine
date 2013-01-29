@@ -481,7 +481,7 @@ SongLoader::Result SongLoader::LoadRemote() {
   gst_bus_add_watch(bus, BusCallback, this);
 
   // Add a probe to the sink so we can capture the data if it's a playlist
-  GstPad* pad = gst_element_get_pad(fakesink, "sink");
+  GstPad* pad = gst_element_get_static_pad(fakesink, "sink");
   gst_pad_add_buffer_probe(pad, G_CALLBACK(DataReady), this);
   gst_object_unref(pad);
 

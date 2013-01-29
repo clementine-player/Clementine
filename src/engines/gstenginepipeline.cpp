@@ -279,20 +279,20 @@ bool GstEnginePipeline::Init() {
 
   // Create a pad on the outside of the audiobin and connect it to the pad of
   // the first element.
-  GstPad* pad = gst_element_get_pad(queue_, "sink");
+  GstPad* pad = gst_element_get_static_pad(queue_, "sink");
   gst_element_add_pad(audiobin_, gst_ghost_pad_new("sink", pad));
   gst_object_unref(pad);
 
   // Add a data probe on the src pad of the audioconvert element for our scope.
   // We do it here because we want pre-equalized and pre-volume samples
   // so that our visualization are not be affected by them.
-  pad = gst_element_get_pad(event_probe, "src");
+  pad = gst_element_get_static_pad(event_probe, "src");
   gst_pad_add_event_probe(pad, G_CALLBACK(EventHandoffCallback), this);
   gst_object_unref(pad);
 
   // Configure the fakesink properly
   g_object_set(G_OBJECT(probe_sink), "sync", TRUE, NULL);
-  
+
   // Set the equalizer bands
   g_object_set(G_OBJECT(equalizer_), "num-bands", 10, NULL);
 
@@ -325,7 +325,7 @@ bool GstEnginePipeline::Init() {
   }
 
   gst_element_link(queue_, audioconvert_);
-  
+
   // Create the caps to put in each path in the tee.  The scope path gets 16-bit
   // ints and the audiosink path gets float32.
   GstCaps* caps16 = gst_caps_new_simple ("audio/x-raw-int",
@@ -346,8 +346,8 @@ bool GstEnginePipeline::Init() {
   gst_caps_unref(caps32);
 
   // Link the outputs of tee to the queues on each path.
-  gst_pad_link(gst_element_get_request_pad(tee, "src%d"), gst_element_get_pad(probe_queue, "sink"));
-  gst_pad_link(gst_element_get_request_pad(tee, "src%d"), gst_element_get_pad(audio_queue, "sink"));
+  gst_pad_link(gst_element_get_request_pad(tee, "src%d"), gst_element_get_static_pad(probe_queue, "sink"));
+  gst_pad_link(gst_element_get_request_pad(tee, "src%d"), gst_element_get_static_pad(audio_queue, "sink"));
 
   // Link replaygain elements if enabled.
   if (rg_enabled_) {
@@ -360,7 +360,7 @@ bool GstEnginePipeline::Init() {
                         audioscale_, convert, audiosink_, NULL);
 
   // Add probes and handlers.
-  gst_pad_add_buffer_probe(gst_element_get_pad(probe_converter, "src"), G_CALLBACK(HandoffCallback), this);
+  gst_pad_add_buffer_probe(gst_element_get_static_pad(probe_converter, "src"), G_CALLBACK(HandoffCallback), this);
   gst_bus_set_sync_handler(gst_pipeline_get_bus(GST_PIPELINE(pipeline_)), BusCallbackSync, this);
   bus_cb_id_ = gst_bus_add_watch(gst_pipeline_get_bus(GST_PIPELINE(pipeline_)), BusCallback, this);
 
@@ -647,7 +647,7 @@ void GstEnginePipeline::BufferingMessageReceived(GstMessage* msg) {
 
 void GstEnginePipeline::NewPadCallback(GstElement*, GstPad* pad, gpointer self) {
   GstEnginePipeline* instance = reinterpret_cast<GstEnginePipeline*>(self);
-  GstPad* const audiopad = gst_element_get_pad(instance->audiobin_, "sink");
+  GstPad* const audiopad = gst_element_get_static_pad(instance->audiobin_, "sink");
 
   if (GST_PAD_IS_LINKED(audiopad)) {
     qLog(Warning) << instance->id() << "audiopad is already linked, unlinking old pad";

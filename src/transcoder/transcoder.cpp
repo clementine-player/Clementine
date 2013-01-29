@@ -340,7 +340,8 @@ Transcoder::StartJobStatus Transcoder::MaybeStartNextJob() {
 
 void Transcoder::NewPadCallback(GstElement*, GstPad* pad, gboolean, gpointer data) {
   JobState* state = reinterpret_cast<JobState*>(data);
-  GstPad* const audiopad = gst_element_get_pad(state->convert_element_, "sink");
+  GstPad* const audiopad = gst_element_get_static_pad(
+      state->convert_element_, "sink");
 
   if (GST_PAD_IS_LINKED(audiopad)) {
     qLog(Debug) << "audiopad is already linked, unlinking old pad";
