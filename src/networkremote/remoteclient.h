@@ -25,9 +25,7 @@ signals:
 
 private:
   void ParseMessage(const QByteArray& data);
-  void DisconnectClient();
-  void Disconnected();
-  void Error(QAbstractSocket::SocketError);
+  void DisconnectClientWrongAuthCode();
 
   Application* app_;
 

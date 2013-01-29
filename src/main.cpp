@@ -104,10 +104,6 @@ using boost::scoped_ptr;
 # include "devices/wmdmthread.h"
 #endif
 
-#ifndef Q_OS_WIN32
-#include <signal.h>
-#endif
-
 // Load sqlite plugin on windows and mac.
 #ifdef HAVE_STATIC_SQLITE
 # include <QtPlugin>
@@ -408,12 +404,6 @@ int main(int argc, char *argv[]) {
 #ifdef Q_OS_WIN32
   // Set the language for qtsparkle
   qtsparkle::LoadTranslations(language);
-#endif
-
-#ifndef Q_OS_WIN32
-  // This is needed to prevent SIGPIPE Errors, which occur under some
-  // circumstances in RemoteClient. They cause a program termination.
-  signal(SIGPIPE, SIG_IGN);
 #endif
 
   // Icons
