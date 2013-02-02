@@ -140,6 +140,9 @@ void OutgoingDataCreator::SendFirstData() {
 
   // And the current track position
   UpdateTrackPosition();
+
+  // And the current playlists
+  SendAllPlaylists();
 }
 
 void OutgoingDataCreator::CurrentSongChanged(const Song& song, const QString& uri, const QImage& img) {
