@@ -107,6 +107,10 @@ void SpotifySearchProvider::SearchFinishedSlot(const pb::spotify::SearchResponse
     for (int j=0; j < album.track_size() ; ++j) {
       Result result(this);
       SpotifyService::SongFromProtobuf(album.track(j), &result.metadata_);
+
+      // Just use the album index as an id.
+      result.metadata_.set_album_id(i);
+
       ret << result;
     }
   }

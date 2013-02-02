@@ -173,6 +173,7 @@ class Song {
   int skipcount() const;
   int lastplayed() const;
   int score() const;
+  int album_id() const;
 
   const QString& cue_path() const;
   bool has_cue() const;
@@ -242,6 +243,7 @@ class Song {
   void set_comment(const QString& v);
   void set_compilation(bool v);
   void set_sampler(bool v);
+  void set_album_id(int v);
   void set_beginning_nanosec(qint64 v);
   void set_end_nanosec(qint64 v);
   void set_length_nanosec(qint64 v);
