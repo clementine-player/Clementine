@@ -95,6 +95,7 @@ QStandardItem* GlobalSearchModel::BuildContainers(
   bool has_album_icon = false;
   QString display_text;
   QString sort_text;
+  int unique_tag = -1;
   int year = 0;
 
   switch (group_by_[level]) {
@@ -113,6 +114,7 @@ QStandardItem* GlobalSearchModel::BuildContainers(
     year = qMax(0, s.year());
     display_text = LibraryModel::PrettyYearAlbum(year, s.album());
     sort_text = LibraryModel::SortTextForYear(year) + s.album();
+    unique_tag = s.album_id();
     has_album_icon = true;
     break;
 
@@ -124,7 +126,12 @@ QStandardItem* GlobalSearchModel::BuildContainers(
 
   case LibraryModel::GroupBy_Composer:                         display_text = s.composer();
   case LibraryModel::GroupBy_Genre: if (display_text.isNull()) display_text = s.genre();
-  case LibraryModel::GroupBy_Album: if (display_text.isNull()) display_text = s.album();
+  case LibraryModel::GroupBy_Album:
+    unique_tag = s.album_id();
+    if (display_text.isNull()) {
+      display_text = s.album();
+    }
+    // fallthrough
   case LibraryModel::GroupBy_AlbumArtist: if (display_text.isNull()) display_text = s.effective_albumartist();
     display_text = LibraryModel::TextOrUnknown(display_text);
     sort_text = LibraryModel::SortTextForArtist(display_text);
@@ -141,7 +148,7 @@ QStandardItem* GlobalSearchModel::BuildContainers(
   }
 
   // Find a container for this level
-  key->group_[level] = display_text;
+  key->group_[level] = display_text + QString::number(unique_tag);
   QStandardItem* container = containers_[*key];
   if (!container) {
     container = new QStandardItem(display_text);
