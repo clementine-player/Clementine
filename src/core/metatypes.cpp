@@ -48,6 +48,8 @@ void RegisterMetaTypes() {
   qRegisterMetaType<PodcastList>("PodcastList");
   qRegisterMetaType<QList<CoverSearchResult> >("QList<CoverSearchResult>");
   qRegisterMetaType<QList<PlaylistItemPtr> >("QList<PlaylistItemPtr>");
+  qRegisterMetaType<PlaylistSequence::RepeatMode>("PlaylistSequence::RepeatMode");
+  qRegisterMetaType<PlaylistSequence::ShuffleMode>("PlaylistSequence::ShuffleMode");
   qRegisterMetaType<QList<PodcastEpisode> >("QList<PodcastEpisode>");
   qRegisterMetaType<QList<Podcast> >("QList<Podcast>");
   qRegisterMetaType<QList<QNetworkCookie> >("QList<QNetworkCookie>");

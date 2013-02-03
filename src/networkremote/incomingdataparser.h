@@ -36,8 +36,6 @@ signals:
   void SetShuffleMode(PlaylistSequence::ShuffleMode mode);
   void SeekTo(int seconds);
 
-private slots:
-  void PlaylistManagerInitialized();
 
 private:
   Application* app_;
