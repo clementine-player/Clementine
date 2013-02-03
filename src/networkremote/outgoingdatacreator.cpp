@@ -143,6 +143,10 @@ void OutgoingDataCreator::SendFirstData() {
 
   // And the current playlists
   SendAllPlaylists();
+
+  // Send the current random and repeat mode
+  SendShuffleMode(app_->playlist_manager()->sequence()->shuffle_mode());
+  SendRepeatMode(app_->playlist_manager()->sequence()->repeat_mode());
 }
 
 void OutgoingDataCreator::CurrentSongChanged(const Song& song, const QString& uri, const QImage& img) {
