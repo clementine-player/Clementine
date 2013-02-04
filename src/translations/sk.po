@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-01-27 13:46+0000\n"
+"PO-Revision-Date: 2013-02-01 15:52+0000\n"
 "Last-Translator: Ján Ďanovský <dagsoftware@yahoo.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -22,6 +22,7 @@ msgstr "dní"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:130
 #: ../bin/src/ui_transcoderoptionsmp3.h:195
+#: ../bin/src/ui_transcoderoptionsopus.h:81
 #: ../bin/src/ui_transcoderoptionsspeex.h:220
 #: ../bin/src/ui_transcoderoptionsspeex.h:223
 #: ../bin/src/ui_transcoderoptionsvorbis.h:205
@@ -266,6 +267,10 @@ msgstr "Je vyžadovaný Grooveshark Anywhere účet."
 msgid "A Spotify Premium account is required."
 msgstr "Je vyžadovaný prémium účet na Spotify."
 
+#: ../bin/src/ui_networkremotesettingspage.h:158
+msgid "A client can connect only, if the correct code was entered."
+msgstr "Klient sa môže pripojiť len vtedy, ak bol zadaný správny kód."
+
 #: smartplaylists/wizard.cpp:78
 msgid ""
 "A smart playlist is a dynamic list of songs that come from your library.  "
@@ -282,7 +287,7 @@ msgstr "Pieseň bude zahrnutá do playlistu ak spĺňa tieto podmienky."
 msgid "A-Z"
 msgstr "A-Z"
 
-#: ../bin/src/ui_transcodersettingspage.h:163
+#: ../bin/src/ui_transcodersettingspage.h:179
 msgid "AAC"
 msgstr "AAC"
 
@@ -298,7 +303,7 @@ msgstr "AAC 32k"
 msgid "AAC 64k"
 msgstr "AAC 64k"
 
-#: core/song.cpp:324
+#: core/song.cpp:334
 msgid "AIFF"
 msgstr "AIFF"
 
@@ -319,7 +324,7 @@ msgstr "O Clemetine..."
 msgid "About Qt..."
 msgstr "O Qt.."
 
-#: ../bin/src/ui_networkremotesettingspage.h:135
+#: ../bin/src/ui_networkremotesettingspage.h:156
 msgid "Accept non public clients only"
 msgstr "Akceptovať iba neverejných klientov"
 
@@ -639,7 +644,7 @@ msgstr "Nastala chyba pri načítavaní iTunes databázy"
 msgid "An error occurred writing metadata to '%1'"
 msgstr "Vyskytla sa chyba počas zapisovania metadát do '%1'"
 
-#: internet/subsonicsettingspage.cpp:91
+#: internet/subsonicsettingspage.cpp:100
 msgid "An unspecified error occurred."
 msgstr "Vyskytla nešpecifikovaná chyba."
 
@@ -819,6 +824,7 @@ msgstr "Bit rate"
 
 #: ui/organisedialog.cpp:67 ../bin/src/ui_transcoderoptionsaac.h:129
 #: ../bin/src/ui_transcoderoptionsmp3.h:194
+#: ../bin/src/ui_transcoderoptionsopus.h:80
 #: ../bin/src/ui_transcoderoptionsspeex.h:218
 #: ../bin/src/ui_transcoderoptionswma.h:79
 msgid "Bitrate"
@@ -866,7 +872,7 @@ msgstr "Ale tieto zdroje sú zakázané:"
 msgid "Buttons"
 msgstr "Tlačidlá"
 
-#: core/song.cpp:327
+#: core/song.cpp:337
 msgid "CDDA"
 msgstr "CDDA"
 
@@ -1206,7 +1212,7 @@ msgstr "Kopíruje sa iPod databáza"
 msgid "Copyright"
 msgstr "Autorské práva"
 
-#: internet/subsonicsettingspage.cpp:69
+#: internet/subsonicsettingspage.cpp:78
 msgid ""
 "Could not connect to Subsonic, check server URL. Example: "
 "http://localhost:4040/"
@@ -1219,14 +1225,14 @@ msgid ""
 "required GStreamer plugins installed"
 msgstr "Nedal sa vytvoriť GStreamer element \"%1\" - uistite sa, že máte nainštalované všetky potrebné pluginy GStreamera."
 
-#: transcoder/transcoder.cpp:427
+#: transcoder/transcoder.cpp:432
 #, qt-format
 msgid ""
 "Couldn't find a muxer for %1, check you have the correct GStreamer plugins "
 "installed"
 msgstr "Nedal sa nájsť muxer pre %1, skontrolujte či máte korektne nainštalované GStreamer pluginy"
 
-#: transcoder/transcoder.cpp:421
+#: transcoder/transcoder.cpp:426
 #, qt-format
 msgid ""
 "Couldn't find an encoder for %1, check you have the correct GStreamer "
@@ -1850,7 +1856,7 @@ msgstr "Chyba pri načítavaní %1"
 msgid "Error loading di.fm playlist"
 msgstr "Chyba pri načítavaní di.fm playlistu"
 
-#: transcoder/transcoder.cpp:395
+#: transcoder/transcoder.cpp:399
 #, qt-format
 msgid "Error processing %1: %2"
 msgstr "Chyba spracovania %1: %2"
@@ -1930,7 +1936,7 @@ msgstr "F8"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:140
 #: ../bin/src/ui_magnatunesettingspage.h:171
-#: ../bin/src/ui_transcodersettingspage.h:161
+#: ../bin/src/ui_transcodersettingspage.h:177
 msgid "FLAC"
 msgstr "FLAC"
 
@@ -2063,7 +2069,7 @@ msgstr "Dokončiť"
 msgid "First level"
 msgstr "Prvá úroveň"
 
-#: core/song.cpp:316
+#: core/song.cpp:326
 msgid "Flac"
 msgstr "Flac"
 
@@ -2104,6 +2110,7 @@ msgstr "Zabudnutie zariadenia ho odstráni z tohto zoznamu a Clementine bude mus
 #: ../bin/src/ui_transcoderoptionsaac.h:128
 #: ../bin/src/ui_transcoderoptionsflac.h:80
 #: ../bin/src/ui_transcoderoptionsmp3.h:190
+#: ../bin/src/ui_transcoderoptionsopus.h:79
 #: ../bin/src/ui_transcoderoptionsspeex.h:216
 #: ../bin/src/ui_transcoderoptionsvorbis.h:201
 #: ../bin/src/ui_transcoderoptionswma.h:78 ../bin/src/ui_equalizerslider.h:82
@@ -2171,7 +2178,7 @@ msgstr "Získať URL na zdieľanie tohto Grooveshark playlistu"
 msgid "Get a URL to share this Grooveshark song"
 msgstr "Získať URL na zdieľanie tejto Grooveshark piesne"
 
-#: ../bin/src/ui_networkremotesettingspage.h:136
+#: ../bin/src/ui_networkremotesettingspage.h:162
 msgid "Get the Android App now!"
 msgstr "Získať aplikáciu pre Android!"
 
@@ -2377,11 +2384,11 @@ msgstr "Zahrnúť obal do upozornenia"
 msgid "Include all songs"
 msgstr "Zahrnúť všetky piesne."
 
-#: internet/subsonicsettingspage.cpp:78
+#: internet/subsonicsettingspage.cpp:87
 msgid "Incompatible Subsonic REST protocol version. Client must upgrade."
 msgstr "Nekompatibilná verzia Subsonic REST protokolu. Klienta musíte aktualizovať."
 
-#: internet/subsonicsettingspage.cpp:82
+#: internet/subsonicsettingspage.cpp:91
 msgid "Incompatible Subsonic REST protocol version. Server must upgrade."
 msgstr "Nekompatibilná verzia Subsonic REST protokolu. Server musíte aktualizovať."
 
@@ -2761,7 +2768,7 @@ msgstr "Texty piesní"
 msgid "Lyrics from %1"
 msgstr "Texty z %1"
 
-#: core/song.cpp:319 ../bin/src/ui_transcodersettingspage.h:159
+#: core/song.cpp:329 ../bin/src/ui_transcodersettingspage.h:175
 msgid "MP3"
 msgstr "MP3"
 
@@ -2773,11 +2780,11 @@ msgstr "MP3 256k"
 msgid "MP3 96k"
 msgstr "MP3 96k"
 
-#: core/song.cpp:317
+#: core/song.cpp:327
 msgid "MP4 AAC"
 msgstr "MP4 AAC"
 
-#: core/song.cpp:318
+#: core/song.cpp:328
 msgid "MPC"
 msgstr "MPC"
 
@@ -2996,7 +3003,7 @@ msgstr "Sieť"
 msgid "Network Proxy"
 msgstr "Sieťové proxy"
 
-#: ../bin/src/ui_networkremotesettingspage.h:126
+#: ../bin/src/ui_networkremotesettingspage.h:147
 msgid "Network Remote"
 msgstr "Diaľkové ovládanie cez sieť"
 
@@ -3143,24 +3150,24 @@ msgstr "Prehráva sa"
 msgid "OSD Preview"
 msgstr "OSD ukážka"
 
-#: core/song.cpp:320
+#: core/song.cpp:330
 msgid "Ogg Flac"
 msgstr "Ogg Flac"
 
-#: core/song.cpp:323
+#: core/song.cpp:333
 msgid "Ogg Opus"
 msgstr "Ogg Opus"
 
-#: core/song.cpp:321
+#: core/song.cpp:331
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
 
-#: core/song.cpp:322 ../bin/src/ui_magnatunedownloaddialog.h:139
+#: core/song.cpp:332 ../bin/src/ui_magnatunedownloaddialog.h:139
 #: ../bin/src/ui_magnatunesettingspage.h:170
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
 
-#: ../bin/src/ui_networkremotesettingspage.h:130
+#: ../bin/src/ui_networkremotesettingspage.h:151
 msgid ""
 "Only accept connections from clients within the ip ranges:\n"
 "10.x.x.x\n"
@@ -3230,6 +3237,10 @@ msgstr "Optimalizovať na kvalitu"
 #: ../bin/src/ui_transcodedialog.h:211
 msgid "Options..."
 msgstr "Možnosti..."
+
+#: ../bin/src/ui_transcodersettingspage.h:181
+msgid "Opus"
+msgstr "Opus"
 
 #: ../bin/src/ui_organisedialog.h:188
 msgid "Organise Files"
@@ -3415,7 +3426,7 @@ msgid "Popup duration"
 msgstr "Trvanie upozornenia"
 
 #: ../bin/src/ui_networkproxysettingspage.h:166
-#: ../bin/src/ui_networkremotesettingspage.h:128
+#: ../bin/src/ui_networkremotesettingspage.h:149
 msgid "Port"
 msgstr "Port"
 
@@ -3947,8 +3958,8 @@ msgid "Serial number"
 msgstr "Sériové číslo"
 
 #: ../bin/src/ui_subsonicsettingspage.h:118
-msgid "Server"
-msgstr "Server"
+msgid "Server URL"
+msgstr "URL servru"
 
 #: ../bin/src/ui_subsonicsettingspage.h:117
 msgid "Server details"
@@ -4211,7 +4222,7 @@ msgstr "Zdroj"
 msgid "Sources"
 msgstr "Zdroje"
 
-#: ../bin/src/ui_transcodersettingspage.h:162
+#: ../bin/src/ui_transcodersettingspage.h:178
 msgid "Speex"
 msgstr "Speex"
 
@@ -4254,7 +4265,7 @@ msgid ""
 "list"
 msgstr "Začnite písať niečo do vyhľadávacieho políčka vyššie, aby ste naplnili tento zoznam výsledkov hľadania"
 
-#: transcoder/transcoder.cpp:401
+#: transcoder/transcoder.cpp:405
 #, qt-format
 msgid "Starting %1"
 msgstr "Začína sa %1"
@@ -4292,9 +4303,15 @@ msgstr "Zastaviť prehrávanie po aktuálnej skladbe"
 msgid "Stopped"
 msgstr "Zastavené"
 
-#: core/song.cpp:329
+#: core/song.cpp:339
 msgid "Stream"
 msgstr "Stream"
+
+#: internet/subsonicsettingspage.cpp:29
+msgid ""
+"Streaming from a Subsonic server requires a valid server license after the "
+"30-day trial period."
+msgstr "Streamovanie zo servru Subsonic vyžaduje po 30 dňovej skúšobnej dobe platnú servrovú licenciu."
 
 #: ../bin/src/ui_magnatunesettingspage.h:160
 msgid "Streaming membership"
@@ -4423,7 +4440,7 @@ msgstr "Stránka, ktorú požadujete, neexistuje!"
 msgid "The site you requested is not an image!"
 msgstr "Stránka, ktorú požadujete, nie je obrázok!"
 
-#: internet/subsonicsettingspage.cpp:86
+#: internet/subsonicsettingspage.cpp:95
 msgid ""
 "The trial period for the Subsonic server is over. Please donate to get a "
 "license key. Visit subsonic.org for details."
@@ -4479,7 +4496,7 @@ msgstr "Tieto súbory budú odstránené zo zariadenia, ste si istý, že chcete
 msgid "These folders will be scanned for music to make up your library"
 msgstr "Tieto priečinky budú prehľadané pre vytvorenie vašej zbierky"
 
-#: ../bin/src/ui_transcodersettingspage.h:158
+#: ../bin/src/ui_transcodersettingspage.h:174
 msgid ""
 "These settings are used in the \"Transcode Music\" dialog, and when "
 "converting music before copying it to a device."
@@ -4614,11 +4631,11 @@ msgstr "Transkódovať hudbu"
 msgid "Transcoder Log"
 msgstr "Výpis transkódera"
 
-#: ../bin/src/ui_transcodersettingspage.h:157
+#: ../bin/src/ui_transcodersettingspage.h:173
 msgid "Transcoding"
 msgstr "Transkódovanie"
 
-#: transcoder/transcoder.cpp:309
+#: transcoder/transcoder.cpp:312
 #, qt-format
 msgid "Transcoding %1 files using %2 threads"
 msgstr "Transkódovanie %1 súborov použitím %2 vlákien."
@@ -4627,7 +4644,7 @@ msgstr "Transkódovanie %1 súborov použitím %2 vlákien."
 msgid "Transcoding options"
 msgstr "Možnosti transkódovania"
 
-#: core/song.cpp:326
+#: core/song.cpp:336
 msgid "TrueAudio"
 msgstr "TrueAudio"
 
@@ -4660,7 +4677,7 @@ msgstr "Ultra široké pásmo (UWB)"
 msgid "Unable to download %1 (%2)"
 msgstr "Nedá sa stiahnuť %1 (%2)"
 
-#: core/song.cpp:333 library/librarymodel.cpp:301 library/librarymodel.cpp:306
+#: core/song.cpp:343 library/librarymodel.cpp:301 library/librarymodel.cpp:306
 #: library/librarymodel.cpp:947 playlist/playlistdelegates.cpp:309
 #: playlist/playlistmanager.cpp:394 playlist/playlistmanager.cpp:397
 #: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:418
@@ -4738,7 +4755,7 @@ msgstr "Použiť tag Interprét albumu, ak je dostupný"
 msgid "Use Gnome's shortcut keys"
 msgstr "Použiť klávesové skratky GNOME"
 
-#: ../bin/src/ui_networkremotesettingspage.h:127
+#: ../bin/src/ui_networkremotesettingspage.h:148
 msgid "Use Remotecontrol"
 msgstr "Použiť diaľkové ovládanie"
 
@@ -4761,6 +4778,10 @@ msgstr "Používať vlastnú správu pre upozornenia"
 #: ../bin/src/ui_networkproxysettingspage.h:167
 msgid "Use authentication"
 msgstr "Používať autentifikáciu"
+
+#: ../bin/src/ui_networkremotesettingspage.h:160
+msgid "Use authentication code"
+msgstr "Použiť autentifikačný kód"
 
 #: ../bin/src/ui_transcoderoptionsvorbis.h:203
 msgid "Use bitrate management engine"
@@ -4829,7 +4850,7 @@ msgstr "VBR MP3"
 msgid "Variable bit rate"
 msgstr "Premenlivý dátový tok"
 
-#: globalsearch/globalsearchmodel.cpp:103 library/librarymodel.cpp:238
+#: globalsearch/globalsearchmodel.cpp:104 library/librarymodel.cpp:238
 #: playlist/playlistmanager.cpp:409 ui/albumcovermanager.cpp:247
 msgid "Various artists"
 msgstr "Rôzni interpréti"
@@ -4868,7 +4889,7 @@ msgstr "Hlasitosť %1%"
 msgid "Volume name"
 msgstr "Názov diskového oddielu"
 
-#: ../bin/src/ui_transcodersettingspage.h:160
+#: ../bin/src/ui_transcodersettingspage.h:176
 msgid "Vorbis"
 msgstr "Vorbis"
 
@@ -4877,11 +4898,11 @@ msgstr "Vorbis"
 msgid "WAV"
 msgstr "WAV"
 
-#: ../bin/src/ui_transcodersettingspage.h:164
+#: ../bin/src/ui_transcodersettingspage.h:180
 msgid "WMA"
 msgstr "WMA"
 
-#: core/song.cpp:325
+#: core/song.cpp:335
 msgid "Wav"
 msgstr "Wav"
 
@@ -4965,7 +4986,7 @@ msgstr "Windows Media 40k"
 msgid "Windows Media 64k"
 msgstr "Windows Media 64k"
 
-#: core/song.cpp:315
+#: core/song.cpp:325
 msgid "Windows Media audio"
 msgstr "WMa"
 
@@ -4979,7 +5000,7 @@ msgstr "Chceli by ste presunúť tiež ostatné piesne v tomto albume do rôznyc
 msgid "Would you like to run a full rescan right now?"
 msgstr "Chcete teraz spustiť úplné preskenovanie?"
 
-#: internet/subsonicsettingspage.cpp:74
+#: internet/subsonicsettingspage.cpp:83
 msgid "Wrong username or password."
 msgstr "Nesprávne meno používateľa alebo heslo."
 

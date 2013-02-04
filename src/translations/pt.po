@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-01-27 14:20+0000\n"
-"Last-Translator: salmora8 <shorterfire@gmail.com>\n"
+"PO-Revision-Date: 2013-02-01 23:44+0000\n"
+"Last-Translator: Sérgio Marques <smarquespt@gmail.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: pt\n"
@@ -24,6 +24,7 @@ msgstr " dias"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:130
 #: ../bin/src/ui_transcoderoptionsmp3.h:195
+#: ../bin/src/ui_transcoderoptionsopus.h:81
 #: ../bin/src/ui_transcoderoptionsspeex.h:220
 #: ../bin/src/ui_transcoderoptionsspeex.h:223
 #: ../bin/src/ui_transcoderoptionsvorbis.h:205
@@ -268,6 +269,10 @@ msgstr "Requer uma conta Grooveshark Anywhere"
 msgid "A Spotify Premium account is required."
 msgstr "Requer uma conta Spotify Premium"
 
+#: ../bin/src/ui_networkremotesettingspage.h:158
+msgid "A client can connect only, if the correct code was entered."
+msgstr "A aplicação só pode estabelecer a ligação se introduzir o código correto"
+
 #: smartplaylists/wizard.cpp:78
 msgid ""
 "A smart playlist is a dynamic list of songs that come from your library.  "
@@ -284,7 +289,7 @@ msgstr "A faixa será incluída na lista de reprodução se satisfizer estas con
 msgid "A-Z"
 msgstr "A-Z"
 
-#: ../bin/src/ui_transcodersettingspage.h:163
+#: ../bin/src/ui_transcodersettingspage.h:179
 msgid "AAC"
 msgstr "AAC"
 
@@ -300,7 +305,7 @@ msgstr "AAC 32k"
 msgid "AAC 64k"
 msgstr "AAC 64k"
 
-#: core/song.cpp:324
+#: core/song.cpp:334
 msgid "AIFF"
 msgstr "AIFF"
 
@@ -321,7 +326,7 @@ msgstr "Sobre o Clementine..."
 msgid "About Qt..."
 msgstr "Sobre o Qt..."
 
-#: ../bin/src/ui_networkremotesettingspage.h:135
+#: ../bin/src/ui_networkremotesettingspage.h:156
 msgid "Accept non public clients only"
 msgstr "Apenas aceitar clientes públicos"
 
@@ -641,7 +646,7 @@ msgstr "Ocorreu um erro ao carregar a base de dados iTunes"
 msgid "An error occurred writing metadata to '%1'"
 msgstr "Ocorreu um erro ao gravar os detalhes em \"%1\""
 
-#: internet/subsonicsettingspage.cpp:91
+#: internet/subsonicsettingspage.cpp:100
 msgid "An unspecified error occurred."
 msgstr "Ocorreu um erro desconhecido."
 
@@ -821,6 +826,7 @@ msgstr "Taxa de dados"
 
 #: ui/organisedialog.cpp:67 ../bin/src/ui_transcoderoptionsaac.h:129
 #: ../bin/src/ui_transcoderoptionsmp3.h:194
+#: ../bin/src/ui_transcoderoptionsopus.h:80
 #: ../bin/src/ui_transcoderoptionsspeex.h:218
 #: ../bin/src/ui_transcoderoptionswma.h:79
 msgid "Bitrate"
@@ -868,7 +874,7 @@ msgstr "Mas estas fontes estão inativas:"
 msgid "Buttons"
 msgstr "Botões"
 
-#: core/song.cpp:327
+#: core/song.cpp:337
 msgid "CDDA"
 msgstr "CDDA"
 
@@ -1208,7 +1214,7 @@ msgstr "A copiar base de dados do iPod"
 msgid "Copyright"
 msgstr "Direitos de autor"
 
-#: internet/subsonicsettingspage.cpp:69
+#: internet/subsonicsettingspage.cpp:78
 msgid ""
 "Could not connect to Subsonic, check server URL. Example: "
 "http://localhost:4040/"
@@ -1221,14 +1227,14 @@ msgid ""
 "required GStreamer plugins installed"
 msgstr "Incapaz de criar o elemento Gstreamer \"%1\" - certifique-se que tem instalados todos os suplementos necessários"
 
-#: transcoder/transcoder.cpp:427
+#: transcoder/transcoder.cpp:432
 #, qt-format
 msgid ""
 "Couldn't find a muxer for %1, check you have the correct GStreamer plugins "
 "installed"
 msgstr "Incapaz de encontrar o recurso para %1 - certifique-se que tem instalados todos os suplementos necessários"
 
-#: transcoder/transcoder.cpp:421
+#: transcoder/transcoder.cpp:426
 #, qt-format
 msgid ""
 "Couldn't find an encoder for %1, check you have the correct GStreamer "
@@ -1852,7 +1858,7 @@ msgstr "Erro ao carregar %1"
 msgid "Error loading di.fm playlist"
 msgstr "Erro ao carregar a lista de reprodução di.fm"
 
-#: transcoder/transcoder.cpp:395
+#: transcoder/transcoder.cpp:399
 #, qt-format
 msgid "Error processing %1: %2"
 msgstr "Erro ao processar %1: %2"
@@ -1932,7 +1938,7 @@ msgstr "F8"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:140
 #: ../bin/src/ui_magnatunesettingspage.h:171
-#: ../bin/src/ui_transcodersettingspage.h:161
+#: ../bin/src/ui_transcodersettingspage.h:177
 msgid "FLAC"
 msgstr "FLAC"
 
@@ -2065,7 +2071,7 @@ msgstr "Terminar"
 msgid "First level"
 msgstr "Primeiro nível"
 
-#: core/song.cpp:316
+#: core/song.cpp:326
 msgid "Flac"
 msgstr "Flac"
 
@@ -2106,6 +2112,7 @@ msgstr "Se optar por ignorar um dispositivo, este será removido da lista e na p
 #: ../bin/src/ui_transcoderoptionsaac.h:128
 #: ../bin/src/ui_transcoderoptionsflac.h:80
 #: ../bin/src/ui_transcoderoptionsmp3.h:190
+#: ../bin/src/ui_transcoderoptionsopus.h:79
 #: ../bin/src/ui_transcoderoptionsspeex.h:216
 #: ../bin/src/ui_transcoderoptionsvorbis.h:201
 #: ../bin/src/ui_transcoderoptionswma.h:78 ../bin/src/ui_equalizerslider.h:82
@@ -2173,7 +2180,7 @@ msgstr "Obter URL para partilhar esta lista de reprodução Grooveshark"
 msgid "Get a URL to share this Grooveshark song"
 msgstr "Obter URL para partilhar esta faixa Grooveshark"
 
-#: ../bin/src/ui_networkremotesettingspage.h:136
+#: ../bin/src/ui_networkremotesettingspage.h:162
 msgid "Get the Android App now!"
 msgstr "Transferir a aplicação para Android agora!"
 
@@ -2379,11 +2386,11 @@ msgstr "Incluir capa do álbum na notificação"
 msgid "Include all songs"
 msgstr "Incluir todas as faixas"
 
-#: internet/subsonicsettingspage.cpp:78
+#: internet/subsonicsettingspage.cpp:87
 msgid "Incompatible Subsonic REST protocol version. Client must upgrade."
 msgstr "Versão incompatível do protocolo Subsonic REST. Tem que atualizar a aplicação."
 
-#: internet/subsonicsettingspage.cpp:82
+#: internet/subsonicsettingspage.cpp:91
 msgid "Incompatible Subsonic REST protocol version. Server must upgrade."
 msgstr "Versão incompatível do protocolo Subsonic REST. Tem que atualizar o servidor."
 
@@ -2763,7 +2770,7 @@ msgstr "Letras musicais"
 msgid "Lyrics from %1"
 msgstr "Letras musicais de %1"
 
-#: core/song.cpp:319 ../bin/src/ui_transcodersettingspage.h:159
+#: core/song.cpp:329 ../bin/src/ui_transcodersettingspage.h:175
 msgid "MP3"
 msgstr "MP3"
 
@@ -2775,11 +2782,11 @@ msgstr "MP3 256k"
 msgid "MP3 96k"
 msgstr "MP3 96k"
 
-#: core/song.cpp:317
+#: core/song.cpp:327
 msgid "MP4 AAC"
 msgstr "MP4 AAC"
 
-#: core/song.cpp:318
+#: core/song.cpp:328
 msgid "MPC"
 msgstr "MPC"
 
@@ -2998,7 +3005,7 @@ msgstr "Rede"
 msgid "Network Proxy"
 msgstr "Proxy de rede"
 
-#: ../bin/src/ui_networkremotesettingspage.h:126
+#: ../bin/src/ui_networkremotesettingspage.h:147
 msgid "Network Remote"
 msgstr "Rede remota"
 
@@ -3145,24 +3152,24 @@ msgstr "A reproduzir"
 msgid "OSD Preview"
 msgstr "Antevisão da notificação"
 
-#: core/song.cpp:320
+#: core/song.cpp:330
 msgid "Ogg Flac"
 msgstr "Ogg Flac"
 
-#: core/song.cpp:323
+#: core/song.cpp:333
 msgid "Ogg Opus"
 msgstr "Ogg Opus"
 
-#: core/song.cpp:321
+#: core/song.cpp:331
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
 
-#: core/song.cpp:322 ../bin/src/ui_magnatunedownloaddialog.h:139
+#: core/song.cpp:332 ../bin/src/ui_magnatunedownloaddialog.h:139
 #: ../bin/src/ui_magnatunesettingspage.h:170
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
 
-#: ../bin/src/ui_networkremotesettingspage.h:130
+#: ../bin/src/ui_networkremotesettingspage.h:151
 msgid ""
 "Only accept connections from clients within the ip ranges:\n"
 "10.x.x.x\n"
@@ -3232,6 +3239,10 @@ msgstr "Otimizar para qualidade"
 #: ../bin/src/ui_transcodedialog.h:211
 msgid "Options..."
 msgstr "Opções..."
+
+#: ../bin/src/ui_transcodersettingspage.h:181
+msgid "Opus"
+msgstr "Opus"
 
 #: ../bin/src/ui_organisedialog.h:188
 msgid "Organise Files"
@@ -3417,7 +3428,7 @@ msgid "Popup duration"
 msgstr "Duração do alerta"
 
 #: ../bin/src/ui_networkproxysettingspage.h:166
-#: ../bin/src/ui_networkremotesettingspage.h:128
+#: ../bin/src/ui_networkremotesettingspage.h:149
 msgid "Port"
 msgstr "Porta"
 
@@ -3949,8 +3960,8 @@ msgid "Serial number"
 msgstr "Número de série"
 
 #: ../bin/src/ui_subsonicsettingspage.h:118
-msgid "Server"
-msgstr "Servidor"
+msgid "Server URL"
+msgstr "URL do servidor"
 
 #: ../bin/src/ui_subsonicsettingspage.h:117
 msgid "Server details"
@@ -4213,7 +4224,7 @@ msgstr "Fonte"
 msgid "Sources"
 msgstr "Fontes"
 
-#: ../bin/src/ui_transcodersettingspage.h:162
+#: ../bin/src/ui_transcodersettingspage.h:178
 msgid "Speex"
 msgstr "Speex"
 
@@ -4256,7 +4267,7 @@ msgid ""
 "list"
 msgstr "Escreva algo na caixa de procura para preencher a lista de resultados"
 
-#: transcoder/transcoder.cpp:401
+#: transcoder/transcoder.cpp:405
 #, qt-format
 msgid "Starting %1"
 msgstr "A iniciar %1"
@@ -4294,9 +4305,15 @@ msgstr "Parar reprodução após a faixa atual"
 msgid "Stopped"
 msgstr "Parado"
 
-#: core/song.cpp:329
+#: core/song.cpp:339
 msgid "Stream"
 msgstr "Emissão"
+
+#: internet/subsonicsettingspage.cpp:29
+msgid ""
+"Streaming from a Subsonic server requires a valid server license after the "
+"30-day trial period."
+msgstr "Para receber as emissões do servidor Subsonic, tem que adquirir uma licença após o período experimental de 30 dias."
 
 #: ../bin/src/ui_magnatunesettingspage.h:160
 msgid "Streaming membership"
@@ -4425,7 +4442,7 @@ msgstr "O sítio que indicou não existe!"
 msgid "The site you requested is not an image!"
 msgstr "O sítio que indicou não é uma imagem!"
 
-#: internet/subsonicsettingspage.cpp:86
+#: internet/subsonicsettingspage.cpp:95
 msgid ""
 "The trial period for the Subsonic server is over. Please donate to get a "
 "license key. Visit subsonic.org for details."
@@ -4481,7 +4498,7 @@ msgstr "Estes ficheiros vão ser eliminados do dispositivo. Tem a certeza de que
 msgid "These folders will be scanned for music to make up your library"
 msgstr "Estas pastas vão ser analisadas para criar a sua coleção"
 
-#: ../bin/src/ui_transcodersettingspage.h:158
+#: ../bin/src/ui_transcodersettingspage.h:174
 msgid ""
 "These settings are used in the \"Transcode Music\" dialog, and when "
 "converting music before copying it to a device."
@@ -4616,11 +4633,11 @@ msgstr "Conversão de ficheiros"
 msgid "Transcoder Log"
 msgstr "Registo do conversor"
 
-#: ../bin/src/ui_transcodersettingspage.h:157
+#: ../bin/src/ui_transcodersettingspage.h:173
 msgid "Transcoding"
 msgstr "Conversão"
 
-#: transcoder/transcoder.cpp:309
+#: transcoder/transcoder.cpp:312
 #, qt-format
 msgid "Transcoding %1 files using %2 threads"
 msgstr "A converter %1 ficheiros com %2 processos"
@@ -4629,7 +4646,7 @@ msgstr "A converter %1 ficheiros com %2 processos"
 msgid "Transcoding options"
 msgstr "Opções"
 
-#: core/song.cpp:326
+#: core/song.cpp:336
 msgid "TrueAudio"
 msgstr "TrueAudio"
 
@@ -4662,7 +4679,7 @@ msgstr "Bando ultra larga (UWB)"
 msgid "Unable to download %1 (%2)"
 msgstr "Incapaz de transferir %1 (%2)"
 
-#: core/song.cpp:333 library/librarymodel.cpp:301 library/librarymodel.cpp:306
+#: core/song.cpp:343 library/librarymodel.cpp:301 library/librarymodel.cpp:306
 #: library/librarymodel.cpp:947 playlist/playlistdelegates.cpp:309
 #: playlist/playlistmanager.cpp:394 playlist/playlistmanager.cpp:397
 #: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:418
@@ -4740,7 +4757,7 @@ msgstr "Se disponível, utilizar os detalhes Artista do álbum"
 msgid "Use Gnome's shortcut keys"
 msgstr "Utilizar teclas de atalho Gnome"
 
-#: ../bin/src/ui_networkremotesettingspage.h:127
+#: ../bin/src/ui_networkremotesettingspage.h:148
 msgid "Use Remotecontrol"
 msgstr "Utilizar controlo remoto"
 
@@ -4763,6 +4780,10 @@ msgstr "Utilizar notificações personalizadas"
 #: ../bin/src/ui_networkproxysettingspage.h:167
 msgid "Use authentication"
 msgstr "Utilizar autenticação"
+
+#: ../bin/src/ui_networkremotesettingspage.h:160
+msgid "Use authentication code"
+msgstr "Utilizar código de autenticação"
 
 #: ../bin/src/ui_transcoderoptionsvorbis.h:203
 msgid "Use bitrate management engine"
@@ -4831,7 +4852,7 @@ msgstr "VBR MP3"
 msgid "Variable bit rate"
 msgstr "Taxa de dados variável"
 
-#: globalsearch/globalsearchmodel.cpp:103 library/librarymodel.cpp:238
+#: globalsearch/globalsearchmodel.cpp:104 library/librarymodel.cpp:238
 #: playlist/playlistmanager.cpp:409 ui/albumcovermanager.cpp:247
 msgid "Various artists"
 msgstr "Vários artistas"
@@ -4870,7 +4891,7 @@ msgstr "Disco %1%"
 msgid "Volume name"
 msgstr "Nome do disco"
 
-#: ../bin/src/ui_transcodersettingspage.h:160
+#: ../bin/src/ui_transcodersettingspage.h:176
 msgid "Vorbis"
 msgstr "Vorbis"
 
@@ -4879,11 +4900,11 @@ msgstr "Vorbis"
 msgid "WAV"
 msgstr "WAV"
 
-#: ../bin/src/ui_transcodersettingspage.h:164
+#: ../bin/src/ui_transcodersettingspage.h:180
 msgid "WMA"
 msgstr "WMA"
 
-#: core/song.cpp:325
+#: core/song.cpp:335
 msgid "Wav"
 msgstr "Wav"
 
@@ -4967,7 +4988,7 @@ msgstr "Windows Media 40k"
 msgid "Windows Media 64k"
 msgstr "Windows Media 64k"
 
-#: core/song.cpp:315
+#: core/song.cpp:325
 msgid "Windows Media audio"
 msgstr "Windows Media Áudio"
 
@@ -4981,7 +5002,7 @@ msgstr "Pretende mover as outras faixas deste álbum para Vários artistas?"
 msgid "Would you like to run a full rescan right now?"
 msgstr "Pretende executar a nova análise?"
 
-#: internet/subsonicsettingspage.cpp:74
+#: internet/subsonicsettingspage.cpp:83
 msgid "Wrong username or password."
 msgstr "Nome de utilizador ou senha inválido(a)."
 

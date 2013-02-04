@@ -6,15 +6,16 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
 #   <generallangsohm@gmail.com>, 2012.
 # Jens E. Jensen <jens.e.jensen@gmail.com>, 2012.
+# Johan Olesen <johan.olesen97@gmail.com>, 2013.
 # Morten Anton Bach Sjøgren <m_abs@mabs.dk>, 2010.
-# Peter Jespersen <flywheeldk@gmail.com>, 2012.
+# Peter Jespersen <flywheeldk@gmail.com>, 2012-2013.
 #   <tommy.carstensen@gmail.com>, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-01-26 12:03+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2013-02-02 01:48+0000\n"
+"Last-Translator: Peter Jespersen <flywheeldk@gmail.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: da\n"
@@ -26,6 +27,7 @@ msgstr "dage"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:130
 #: ../bin/src/ui_transcoderoptionsmp3.h:195
+#: ../bin/src/ui_transcoderoptionsopus.h:81
 #: ../bin/src/ui_transcoderoptionsspeex.h:220
 #: ../bin/src/ui_transcoderoptionsspeex.h:223
 #: ../bin/src/ui_transcoderoptionsvorbis.h:205
@@ -270,6 +272,10 @@ msgstr "En Grooveshark Anywhere konto er påkrævet"
 msgid "A Spotify Premium account is required."
 msgstr "En Spotify Premium konto er påkrævet."
 
+#: ../bin/src/ui_networkremotesettingspage.h:158
+msgid "A client can connect only, if the correct code was entered."
+msgstr "En klient kan kun oprette forbindelse, hvis en korrekt kode var indsat."
+
 #: smartplaylists/wizard.cpp:78
 msgid ""
 "A smart playlist is a dynamic list of songs that come from your library.  "
@@ -286,7 +292,7 @@ msgstr "En sang bliver inkluderet i playlisten hvis den matcher disse krav."
 msgid "A-Z"
 msgstr "A-Å"
 
-#: ../bin/src/ui_transcodersettingspage.h:163
+#: ../bin/src/ui_transcodersettingspage.h:179
 msgid "AAC"
 msgstr "AAC"
 
@@ -302,7 +308,7 @@ msgstr "AAC 32k"
 msgid "AAC 64k"
 msgstr "AAC 64k"
 
-#: core/song.cpp:324
+#: core/song.cpp:334
 msgid "AIFF"
 msgstr "AIFF"
 
@@ -323,9 +329,9 @@ msgstr "Om Clementine..."
 msgid "About Qt..."
 msgstr "Om Qt..."
 
-#: ../bin/src/ui_networkremotesettingspage.h:135
+#: ../bin/src/ui_networkremotesettingspage.h:156
 msgid "Accept non public clients only"
-msgstr ""
+msgstr "Accepter kun ikke-offentlige klineter"
 
 #: ../bin/src/ui_groovesharksettingspage.h:113
 #: ../bin/src/ui_magnatunesettingspage.h:155
@@ -643,9 +649,9 @@ msgstr "En fejl opstod under hentning af iTunes-databasen"
 msgid "An error occurred writing metadata to '%1'"
 msgstr "En fejl opstod under skrivning af metadata til '%1'"
 
-#: internet/subsonicsettingspage.cpp:91
+#: internet/subsonicsettingspage.cpp:100
 msgid "An unspecified error occurred."
-msgstr ""
+msgstr "En uspecifik fejl er opstået."
 
 #: ui/about.cpp:77
 msgid "And:"
@@ -823,6 +829,7 @@ msgstr "Bitrate"
 
 #: ui/organisedialog.cpp:67 ../bin/src/ui_transcoderoptionsaac.h:129
 #: ../bin/src/ui_transcoderoptionsmp3.h:194
+#: ../bin/src/ui_transcoderoptionsopus.h:80
 #: ../bin/src/ui_transcoderoptionsspeex.h:218
 #: ../bin/src/ui_transcoderoptionswma.h:79
 msgid "Bitrate"
@@ -870,7 +877,7 @@ msgstr "Men disse kilder er slået fra:"
 msgid "Buttons"
 msgstr "Knapper"
 
-#: core/song.cpp:327
+#: core/song.cpp:337
 msgid "CDDA"
 msgstr "CDDA"
 
@@ -1140,7 +1147,7 @@ msgstr "Indstil Spotify..."
 
 #: internet/subsonicservice.cpp:92
 msgid "Configure Subsonic..."
-msgstr ""
+msgstr "Konfigurér Subsonic..."
 
 #: globalsearch/globalsearchview.cpp:140 globalsearch/globalsearchview.cpp:446
 msgid "Configure global search..."
@@ -1210,11 +1217,11 @@ msgstr "Kopierer iPod database"
 msgid "Copyright"
 msgstr "Copyright"
 
-#: internet/subsonicsettingspage.cpp:69
+#: internet/subsonicsettingspage.cpp:78
 msgid ""
 "Could not connect to Subsonic, check server URL. Example: "
 "http://localhost:4040/"
-msgstr ""
+msgstr "Kunne ikke oprette forbindelse til Subsonic, check server URL'en. Eksempel: http://localhost:4040/"
 
 #: transcoder/transcoder.cpp:64
 #, qt-format
@@ -1223,14 +1230,14 @@ msgid ""
 "required GStreamer plugins installed"
 msgstr "Kunne ikke oprette GStreamer elementet \\\"%1\\\" - sørg for at du har alle de nødvendige GStreamer udvidelsesmoduler installeret"
 
-#: transcoder/transcoder.cpp:427
+#: transcoder/transcoder.cpp:432
 #, qt-format
 msgid ""
 "Couldn't find a muxer for %1, check you have the correct GStreamer plugins "
 "installed"
 msgstr "Kunne ikke finde muxer for %1, tjek at du har de rigtige GStreamer udvidelsesmoduler installeret"
 
-#: transcoder/transcoder.cpp:421
+#: transcoder/transcoder.cpp:426
 #, qt-format
 msgid ""
 "Couldn't find an encoder for %1, check you have the correct GStreamer "
@@ -1854,7 +1861,7 @@ msgstr "Kunne ikke indlæse %1"
 msgid "Error loading di.fm playlist"
 msgstr "Kunne ikke indlæse spilleliste fra di.fm"
 
-#: transcoder/transcoder.cpp:395
+#: transcoder/transcoder.cpp:399
 #, qt-format
 msgid "Error processing %1: %2"
 msgstr "Kunne ikke behandle %1: %2"
@@ -1934,7 +1941,7 @@ msgstr "F8"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:140
 #: ../bin/src/ui_magnatunesettingspage.h:171
-#: ../bin/src/ui_transcodersettingspage.h:161
+#: ../bin/src/ui_transcodersettingspage.h:177
 msgid "FLAC"
 msgstr "FLAC"
 
@@ -1995,7 +2002,7 @@ msgstr "Hentning fuldført"
 
 #: internet/subsonicservice.cpp:208
 msgid "Fetching Subsonic library"
-msgstr ""
+msgstr "Henter Subsonic bibliotek"
 
 #: ui/coverfromurldialog.cpp:71 ui/coverfromurldialog.cpp:82
 msgid "Fetching cover error"
@@ -2067,7 +2074,7 @@ msgstr "Afslut"
 msgid "First level"
 msgstr "Første niveau"
 
-#: core/song.cpp:316
+#: core/song.cpp:326
 msgid "Flac"
 msgstr "Flac"
 
@@ -2108,6 +2115,7 @@ msgstr "Hvis du glemmer enheden, forsvinder den fra denne liste, og Clementine m
 #: ../bin/src/ui_transcoderoptionsaac.h:128
 #: ../bin/src/ui_transcoderoptionsflac.h:80
 #: ../bin/src/ui_transcoderoptionsmp3.h:190
+#: ../bin/src/ui_transcoderoptionsopus.h:79
 #: ../bin/src/ui_transcoderoptionsspeex.h:216
 #: ../bin/src/ui_transcoderoptionsvorbis.h:201
 #: ../bin/src/ui_transcoderoptionswma.h:78 ../bin/src/ui_equalizerslider.h:82
@@ -2175,9 +2183,9 @@ msgstr "Få en webadresse til at dele denne Grooveshark afspilningsliste"
 msgid "Get a URL to share this Grooveshark song"
 msgstr "Få en webadresse til at dele denne Grooveshark sang"
 
-#: ../bin/src/ui_networkremotesettingspage.h:136
+#: ../bin/src/ui_networkremotesettingspage.h:162
 msgid "Get the Android App now!"
-msgstr ""
+msgstr "Få Android Appen nu!"
 
 #: internet/groovesharkservice.cpp:788
 msgid "Getting Grooveshark popular songs"
@@ -2381,13 +2389,13 @@ msgstr "Inkludér albumkunst i bekendtgørelsen"
 msgid "Include all songs"
 msgstr "Inkluder alle sange"
 
-#: internet/subsonicsettingspage.cpp:78
+#: internet/subsonicsettingspage.cpp:87
 msgid "Incompatible Subsonic REST protocol version. Client must upgrade."
-msgstr ""
+msgstr "Inkompatibel Subsonic REST protokol version. Klienten skal opgraderes."
 
-#: internet/subsonicsettingspage.cpp:82
+#: internet/subsonicsettingspage.cpp:91
 msgid "Incompatible Subsonic REST protocol version. Server must upgrade."
-msgstr ""
+msgstr "Inkompatibel Subsonic REST protokol version. Serveren skal opgraderes."
 
 #: core/commandlineoptions.cpp:152
 msgid "Increase the volume by 4%"
@@ -2765,7 +2773,7 @@ msgstr "Sangtekster"
 msgid "Lyrics from %1"
 msgstr "Sangtekster fra %1"
 
-#: core/song.cpp:319 ../bin/src/ui_transcodersettingspage.h:159
+#: core/song.cpp:329 ../bin/src/ui_transcodersettingspage.h:175
 msgid "MP3"
 msgstr "MP3"
 
@@ -2777,11 +2785,11 @@ msgstr "MP3 256k"
 msgid "MP3 96k"
 msgstr "MP3 96k"
 
-#: core/song.cpp:317
+#: core/song.cpp:327
 msgid "MP4 AAC"
 msgstr "MP4 AAC"
 
-#: core/song.cpp:318
+#: core/song.cpp:328
 msgid "MPC"
 msgstr "MPC"
 
@@ -3000,9 +3008,9 @@ msgstr "Netværk"
 msgid "Network Proxy"
 msgstr "Netværksproxy"
 
-#: ../bin/src/ui_networkremotesettingspage.h:126
+#: ../bin/src/ui_networkremotesettingspage.h:147
 msgid "Network Remote"
-msgstr ""
+msgstr "Netværks Remote"
 
 #: playlist/playlistdelegates.cpp:299 ui/edittagdialog.cpp:481
 msgid "Never"
@@ -3147,30 +3155,30 @@ msgstr "Nu afspilles"
 msgid "OSD Preview"
 msgstr "Forhåndsvisning af OSD"
 
-#: core/song.cpp:320
+#: core/song.cpp:330
 msgid "Ogg Flac"
 msgstr "Ogg FLAC"
 
-#: core/song.cpp:323
+#: core/song.cpp:333
 msgid "Ogg Opus"
-msgstr ""
+msgstr "Ogg Opus"
 
-#: core/song.cpp:321
+#: core/song.cpp:331
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
 
-#: core/song.cpp:322 ../bin/src/ui_magnatunedownloaddialog.h:139
+#: core/song.cpp:332 ../bin/src/ui_magnatunedownloaddialog.h:139
 #: ../bin/src/ui_magnatunesettingspage.h:170
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
 
-#: ../bin/src/ui_networkremotesettingspage.h:130
+#: ../bin/src/ui_networkremotesettingspage.h:151
 msgid ""
 "Only accept connections from clients within the ip ranges:\n"
 "10.x.x.x\n"
 "172.16.0.0 - 172.31.255.255\n"
 "192.168.x.x"
-msgstr ""
+msgstr "Accepter kun forbindelser fra klienter med IP'erne:⏎ 10.x.x.x⏎ 172.16.0.0 - 172.31.255.255⏎ 192.168.x.x"
 
 #: ../bin/src/ui_querysortpage.h:142
 msgid "Only show the first"
@@ -3234,6 +3242,10 @@ msgstr "Optimer for kvalitet"
 #: ../bin/src/ui_transcodedialog.h:211
 msgid "Options..."
 msgstr "Indstillinger..."
+
+#: ../bin/src/ui_transcodersettingspage.h:181
+msgid "Opus"
+msgstr "Opus"
 
 #: ../bin/src/ui_organisedialog.h:188
 msgid "Organise Files"
@@ -3419,7 +3431,7 @@ msgid "Popup duration"
 msgstr "Popup varighed"
 
 #: ../bin/src/ui_networkproxysettingspage.h:166
-#: ../bin/src/ui_networkremotesettingspage.h:128
+#: ../bin/src/ui_networkremotesettingspage.h:149
 msgid "Port"
 msgstr "Port"
 
@@ -3850,7 +3862,7 @@ msgstr "Søg i Magnatune"
 
 #: internet/subsonicservice.cpp:72
 msgid "Search Subsonic"
-msgstr ""
+msgstr "Søg Subsonic"
 
 #: ui/albumcoverchoicecontroller.cpp:62
 msgid "Search for album covers..."
@@ -3932,7 +3944,7 @@ msgstr "Vælg det bedste match"
 
 #: ../bin/src/ui_appearancesettingspage.h:283
 msgid "Select blur radius:"
-msgstr ""
+msgstr "Vælg sløringsradius:"
 
 #: ../bin/src/ui_appearancesettingspage.h:270
 msgid "Select foreground color:"
@@ -3951,12 +3963,12 @@ msgid "Serial number"
 msgstr "Serienummer"
 
 #: ../bin/src/ui_subsonicsettingspage.h:118
-msgid "Server"
-msgstr ""
+msgid "Server URL"
+msgstr "Server-URL"
 
 #: ../bin/src/ui_subsonicsettingspage.h:117
 msgid "Server details"
-msgstr ""
+msgstr "Server detaljer"
 
 #: internet/lastfmservice.cpp:434
 msgid "Service offline"
@@ -4004,7 +4016,7 @@ msgstr "Vis en lysende animation på det nuværende spor"
 
 #: ../bin/src/ui_appearancesettingspage.h:286
 msgid "Show a moodbar in the track progress bar"
-msgstr ""
+msgstr "Vis en moodbar i nummeret's fremskridts-bar."
 
 #: ../bin/src/ui_notificationssettingspage.h:406
 msgid "Show a native desktop notification"
@@ -4215,7 +4227,7 @@ msgstr "Kilde"
 msgid "Sources"
 msgstr "Kilder"
 
-#: ../bin/src/ui_transcodersettingspage.h:162
+#: ../bin/src/ui_transcodersettingspage.h:178
 msgid "Speex"
 msgstr "Speex"
 
@@ -4258,7 +4270,7 @@ msgid ""
 "list"
 msgstr "Begynd med at skrive noget i søgeboksen ovenfor, for at fylde denne listen med søgeresultater"
 
-#: transcoder/transcoder.cpp:401
+#: transcoder/transcoder.cpp:405
 #, qt-format
 msgid "Starting %1"
 msgstr "Starter %1"
@@ -4296,9 +4308,15 @@ msgstr "Stop afspilning efter nuværende spor"
 msgid "Stopped"
 msgstr "Stoppet"
 
-#: core/song.cpp:329
+#: core/song.cpp:339
 msgid "Stream"
 msgstr "Stream"
+
+#: internet/subsonicsettingspage.cpp:29
+msgid ""
+"Streaming from a Subsonic server requires a valid server license after the "
+"30-day trial period."
+msgstr "Streaming fra en Subsonic server kræver en gyldig server licens, efter den første 30-dages prøveperiode."
 
 #: ../bin/src/ui_magnatunesettingspage.h:160
 msgid "Streaming membership"
@@ -4314,7 +4332,7 @@ msgstr "Abonnenter"
 
 #: internet/subsonicservice.cpp:101 ../bin/src/ui_subsonicsettingspage.h:116
 msgid "Subsonic"
-msgstr ""
+msgstr "Subsonic"
 
 #: ../data/oauthsuccess.html:34
 msgid "Success!"
@@ -4427,11 +4445,11 @@ msgstr "Siden du søgte efter findes ikke!"
 msgid "The site you requested is not an image!"
 msgstr "Siden du søgte efter er ikke et billede!"
 
-#: internet/subsonicsettingspage.cpp:86
+#: internet/subsonicsettingspage.cpp:95
 msgid ""
 "The trial period for the Subsonic server is over. Please donate to get a "
 "license key. Visit subsonic.org for details."
-msgstr ""
+msgstr "Prøveperioden for Subsonic-serveren er ovre. Doner venligst for at få en licens-nøgle. Besøg subsonic.org for flere detaljer."
 
 #: ui/mainwindow.cpp:2002
 msgid ""
@@ -4483,7 +4501,7 @@ msgstr "Disse filer vil blive slettet fra disken, er du sikker på at du vil for
 msgid "These folders will be scanned for music to make up your library"
 msgstr "Disse mapper vil blive scannet for musik til at opbygge dit bibliotek"
 
-#: ../bin/src/ui_transcodersettingspage.h:158
+#: ../bin/src/ui_transcodersettingspage.h:174
 msgid ""
 "These settings are used in the \"Transcode Music\" dialog, and when "
 "converting music before copying it to a device."
@@ -4618,11 +4636,11 @@ msgstr "Omkod musik"
 msgid "Transcoder Log"
 msgstr "Omkoder-log"
 
-#: ../bin/src/ui_transcodersettingspage.h:157
+#: ../bin/src/ui_transcodersettingspage.h:173
 msgid "Transcoding"
 msgstr "Omkodning"
 
-#: transcoder/transcoder.cpp:309
+#: transcoder/transcoder.cpp:312
 #, qt-format
 msgid "Transcoding %1 files using %2 threads"
 msgstr "Omkoder %1 filer i %2 tråde"
@@ -4631,7 +4649,7 @@ msgstr "Omkoder %1 filer i %2 tråde"
 msgid "Transcoding options"
 msgstr "Indstillinger for omkodning"
 
-#: core/song.cpp:326
+#: core/song.cpp:336
 msgid "TrueAudio"
 msgstr "TrueAudio"
 
@@ -4664,7 +4682,7 @@ msgstr "Ultra wide band (UWB)"
 msgid "Unable to download %1 (%2)"
 msgstr "Kunne ikke downloade %1 (%2)"
 
-#: core/song.cpp:333 library/librarymodel.cpp:301 library/librarymodel.cpp:306
+#: core/song.cpp:343 library/librarymodel.cpp:301 library/librarymodel.cpp:306
 #: library/librarymodel.cpp:947 playlist/playlistdelegates.cpp:309
 #: playlist/playlistmanager.cpp:394 playlist/playlistmanager.cpp:397
 #: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:418
@@ -4742,9 +4760,9 @@ msgstr "Brug Album Artist mærke, når det er muligt"
 msgid "Use Gnome's shortcut keys"
 msgstr "Brug Gnome genvejstaster"
 
-#: ../bin/src/ui_networkremotesettingspage.h:127
+#: ../bin/src/ui_networkremotesettingspage.h:148
 msgid "Use Remotecontrol"
-msgstr ""
+msgstr "Brug Remotecontrol"
 
 #: ../bin/src/ui_playbacksettingspage.h:274
 msgid "Use Replay Gain metadata if it is available"
@@ -4766,6 +4784,10 @@ msgstr "Brug en selvvalgt meddelelse til beskeder"
 msgid "Use authentication"
 msgstr "Brug godkendelse"
 
+#: ../bin/src/ui_networkremotesettingspage.h:160
+msgid "Use authentication code"
+msgstr "Brug autentificeringskode"
+
 #: ../bin/src/ui_transcoderoptionsvorbis.h:203
 msgid "Use bitrate management engine"
 msgstr "Brug kontrolleret bitrate"
@@ -4780,7 +4802,7 @@ msgstr "Vis meddelelser om Wii Remote-status"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:139
 msgid "Use temporal noise shaping"
-msgstr ""
+msgstr "Brug midlertidig larm formning"
 
 #: ../bin/src/ui_behavioursettingspage.h:175
 msgid "Use the system default"
@@ -4833,7 +4855,7 @@ msgstr "VBR MP3"
 msgid "Variable bit rate"
 msgstr "Variabel bitrate"
 
-#: globalsearch/globalsearchmodel.cpp:103 library/librarymodel.cpp:238
+#: globalsearch/globalsearchmodel.cpp:104 library/librarymodel.cpp:238
 #: playlist/playlistmanager.cpp:409 ui/albumcovermanager.cpp:247
 msgid "Various artists"
 msgstr "Diverse kunstnere"
@@ -4872,7 +4894,7 @@ msgstr "Lydstyrke %1%"
 msgid "Volume name"
 msgstr "Volume name"
 
-#: ../bin/src/ui_transcodersettingspage.h:160
+#: ../bin/src/ui_transcodersettingspage.h:176
 msgid "Vorbis"
 msgstr "Vorbis"
 
@@ -4881,11 +4903,11 @@ msgstr "Vorbis"
 msgid "WAV"
 msgstr "WAV"
 
-#: ../bin/src/ui_transcodersettingspage.h:164
+#: ../bin/src/ui_transcodersettingspage.h:180
 msgid "WMA"
 msgstr "WMA"
 
-#: core/song.cpp:325
+#: core/song.cpp:335
 msgid "Wav"
 msgstr "Wav"
 
@@ -4969,7 +4991,7 @@ msgstr "Windows Media 40k"
 msgid "Windows Media 64k"
 msgstr "Windows Media 64k"
 
-#: core/song.cpp:315
+#: core/song.cpp:325
 msgid "Windows Media audio"
 msgstr "Windows Media audio"
 
@@ -4983,9 +5005,9 @@ msgstr "Vil du også flytte de andre sange i dette album til Diverse kunstnere?"
 msgid "Would you like to run a full rescan right now?"
 msgstr "Vil du genindlæse hele biblioteket nu?"
 
-#: internet/subsonicsettingspage.cpp:74
+#: internet/subsonicsettingspage.cpp:83
 msgid "Wrong username or password."
-msgstr ""
+msgstr "Forkert brugernavn og/eller password."
 
 #: playlist/playlist.cpp:1198 ui/organisedialog.cpp:63
 #: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:148
@@ -5054,7 +5076,7 @@ msgid ""
 "You can scrobble tracks for free, but only <span style=\" font-"
 "weight:600;\">paid subscribers</span> can stream Last.fm radio from "
 "Clementine."
-msgstr ""
+msgstr "Du kan scrobble numre gratis, men det er kun <span style=\" font-weight:600;\">betalende abonnenter</span> der kan streame fra Last.fm radioen til Clementine."
 
 #: ../bin/src/ui_wiimotesettingspage.h:184
 msgid ""
@@ -5125,7 +5147,7 @@ msgstr "Dine radiostreams"
 #: songinfo/lastfmtrackinfoprovider.cpp:88
 #, qt-format
 msgid "Your scrobbles: %1"
-msgstr ""
+msgstr "Dine scrobbles: %1"
 
 #: visualisations/visualisationcontainer.cpp:152
 msgid "Your system is missing OpenGL support, visualizations are unavailable."

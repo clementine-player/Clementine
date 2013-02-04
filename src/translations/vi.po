@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-01-26 12:02+0000\n"
+"PO-Revision-Date: 2013-01-30 13:17+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -25,6 +25,7 @@ msgstr " ngày"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:130
 #: ../bin/src/ui_transcoderoptionsmp3.h:195
+#: ../bin/src/ui_transcoderoptionsopus.h:81
 #: ../bin/src/ui_transcoderoptionsspeex.h:220
 #: ../bin/src/ui_transcoderoptionsspeex.h:223
 #: ../bin/src/ui_transcoderoptionsvorbis.h:205
@@ -269,6 +270,10 @@ msgstr "Cần có tài khoản Grooveshark Anywhere."
 msgid "A Spotify Premium account is required."
 msgstr "Cần có tài khoản cao cấp của Spotify."
 
+#: ../bin/src/ui_networkremotesettingspage.h:158
+msgid "A client can connect only, if the correct code was entered."
+msgstr "Máy khách được kết nối chỉ khi nhập đúng mã."
+
 #: smartplaylists/wizard.cpp:78
 msgid ""
 "A smart playlist is a dynamic list of songs that come from your library.  "
@@ -285,7 +290,7 @@ msgstr "Một bài hát sẽ được đưa vào danh sách nếu như nó đáp
 msgid "A-Z"
 msgstr "A-Z"
 
-#: ../bin/src/ui_transcodersettingspage.h:163
+#: ../bin/src/ui_transcodersettingspage.h:179
 msgid "AAC"
 msgstr "AAC"
 
@@ -301,7 +306,7 @@ msgstr "AAC 32k"
 msgid "AAC 64k"
 msgstr "AAC 64k"
 
-#: core/song.cpp:324
+#: core/song.cpp:334
 msgid "AIFF"
 msgstr "AIFF"
 
@@ -322,9 +327,9 @@ msgstr "Giới thiệu Clementine..."
 msgid "About Qt..."
 msgstr "Giới thiệu Qt..."
 
-#: ../bin/src/ui_networkremotesettingspage.h:135
+#: ../bin/src/ui_networkremotesettingspage.h:156
 msgid "Accept non public clients only"
-msgstr ""
+msgstr "Chỉ chấp nhận máy khách không công khai"
 
 #: ../bin/src/ui_groovesharksettingspage.h:113
 #: ../bin/src/ui_magnatunesettingspage.h:155
@@ -642,9 +647,9 @@ msgstr "Có lỗi khi nạp cơ sở dữ liệu iTunes"
 msgid "An error occurred writing metadata to '%1'"
 msgstr "Có lỗi khi ghi thông tin vào '%1'"
 
-#: internet/subsonicsettingspage.cpp:91
+#: internet/subsonicsettingspage.cpp:100
 msgid "An unspecified error occurred."
-msgstr ""
+msgstr "Lỗi không xác định."
 
 #: ui/about.cpp:77
 msgid "And:"
@@ -822,6 +827,7 @@ msgstr "Bit rate"
 
 #: ui/organisedialog.cpp:67 ../bin/src/ui_transcoderoptionsaac.h:129
 #: ../bin/src/ui_transcoderoptionsmp3.h:194
+#: ../bin/src/ui_transcoderoptionsopus.h:80
 #: ../bin/src/ui_transcoderoptionsspeex.h:218
 #: ../bin/src/ui_transcoderoptionswma.h:79
 msgid "Bitrate"
@@ -869,7 +875,7 @@ msgstr "Những nguồn này đã bị vô hiệu:"
 msgid "Buttons"
 msgstr "Nút"
 
-#: core/song.cpp:327
+#: core/song.cpp:337
 msgid "CDDA"
 msgstr "CDDA"
 
@@ -1139,7 +1145,7 @@ msgstr "Cấu hình Spotify..."
 
 #: internet/subsonicservice.cpp:92
 msgid "Configure Subsonic..."
-msgstr ""
+msgstr "Cấu hình Subsonic..."
 
 #: globalsearch/globalsearchview.cpp:140 globalsearch/globalsearchview.cpp:446
 msgid "Configure global search..."
@@ -1209,11 +1215,11 @@ msgstr "Đang chép cơ sở dữ liệu của iPod"
 msgid "Copyright"
 msgstr "Bản quyền"
 
-#: internet/subsonicsettingspage.cpp:69
+#: internet/subsonicsettingspage.cpp:78
 msgid ""
 "Could not connect to Subsonic, check server URL. Example: "
 "http://localhost:4040/"
-msgstr ""
+msgstr "Không thể kết nối đến Subsonic, kiểm tra URL của máy chủ. Ví dụ: http://localhost:4040/"
 
 #: transcoder/transcoder.cpp:64
 #, qt-format
@@ -1222,14 +1228,14 @@ msgid ""
 "required GStreamer plugins installed"
 msgstr "Không thể tạo phần tử GStreamer \"%1\" - hãy chắc chắn là bạn đã có đủ các phần bổ trợ mà GStreamer cần"
 
-#: transcoder/transcoder.cpp:427
+#: transcoder/transcoder.cpp:432
 #, qt-format
 msgid ""
 "Couldn't find a muxer for %1, check you have the correct GStreamer plugins "
 "installed"
 msgstr "Không tìm thấy thiết bị ghép kênh cho %1, hãy chắn chắn là bạn đã cài đặt đủ các phần bổ sung của GStreamer"
 
-#: transcoder/transcoder.cpp:421
+#: transcoder/transcoder.cpp:426
 #, qt-format
 msgid ""
 "Couldn't find an encoder for %1, check you have the correct GStreamer "
@@ -1853,7 +1859,7 @@ msgstr "Lỗi nạp %1"
 msgid "Error loading di.fm playlist"
 msgstr "Lỗi khi nạp danh sách di.fm"
 
-#: transcoder/transcoder.cpp:395
+#: transcoder/transcoder.cpp:399
 #, qt-format
 msgid "Error processing %1: %2"
 msgstr "Lỗi xử lý %1: %2"
@@ -1933,7 +1939,7 @@ msgstr "F8"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:140
 #: ../bin/src/ui_magnatunesettingspage.h:171
-#: ../bin/src/ui_transcodersettingspage.h:161
+#: ../bin/src/ui_transcodersettingspage.h:177
 msgid "FLAC"
 msgstr "FLAC"
 
@@ -1994,7 +2000,7 @@ msgstr "Đã tải xong"
 
 #: internet/subsonicservice.cpp:208
 msgid "Fetching Subsonic library"
-msgstr ""
+msgstr "Đang tải thư viện Subsonic"
 
 #: ui/coverfromurldialog.cpp:71 ui/coverfromurldialog.cpp:82
 msgid "Fetching cover error"
@@ -2066,7 +2072,7 @@ msgstr "Hoàn tất"
 msgid "First level"
 msgstr "Mức độ đầu"
 
-#: core/song.cpp:316
+#: core/song.cpp:326
 msgid "Flac"
 msgstr "Flac"
 
@@ -2107,6 +2113,7 @@ msgstr "Chọn Quên thiết bị sẽ xóa tên nó khỏi danh sách này và 
 #: ../bin/src/ui_transcoderoptionsaac.h:128
 #: ../bin/src/ui_transcoderoptionsflac.h:80
 #: ../bin/src/ui_transcoderoptionsmp3.h:190
+#: ../bin/src/ui_transcoderoptionsopus.h:79
 #: ../bin/src/ui_transcoderoptionsspeex.h:216
 #: ../bin/src/ui_transcoderoptionsvorbis.h:201
 #: ../bin/src/ui_transcoderoptionswma.h:78 ../bin/src/ui_equalizerslider.h:82
@@ -2174,9 +2181,9 @@ msgstr "Lấy URL để chia sẻ danh sách Grooveshark này"
 msgid "Get a URL to share this Grooveshark song"
 msgstr "Lấy URL để chia sẻ bài này "
 
-#: ../bin/src/ui_networkremotesettingspage.h:136
+#: ../bin/src/ui_networkremotesettingspage.h:162
 msgid "Get the Android App now!"
-msgstr ""
+msgstr "Tải ngay ứng dụng cho Android!"
 
 #: internet/groovesharkservice.cpp:788
 msgid "Getting Grooveshark popular songs"
@@ -2380,11 +2387,11 @@ msgstr "Kèm theo ảnh bìa trong thông báo"
 msgid "Include all songs"
 msgstr "Bao gồm tất cả bài hát"
 
-#: internet/subsonicsettingspage.cpp:78
+#: internet/subsonicsettingspage.cpp:87
 msgid "Incompatible Subsonic REST protocol version. Client must upgrade."
 msgstr ""
 
-#: internet/subsonicsettingspage.cpp:82
+#: internet/subsonicsettingspage.cpp:91
 msgid "Incompatible Subsonic REST protocol version. Server must upgrade."
 msgstr ""
 
@@ -2764,7 +2771,7 @@ msgstr "Lời bài hát"
 msgid "Lyrics from %1"
 msgstr "Lời bài hát từ %1"
 
-#: core/song.cpp:319 ../bin/src/ui_transcodersettingspage.h:159
+#: core/song.cpp:329 ../bin/src/ui_transcodersettingspage.h:175
 msgid "MP3"
 msgstr "MP3"
 
@@ -2776,11 +2783,11 @@ msgstr "MP3 256k"
 msgid "MP3 96k"
 msgstr "MP3 96k"
 
-#: core/song.cpp:317
+#: core/song.cpp:327
 msgid "MP4 AAC"
 msgstr "MP4 AAC"
 
-#: core/song.cpp:318
+#: core/song.cpp:328
 msgid "MPC"
 msgstr "MPC"
 
@@ -2999,9 +3006,9 @@ msgstr "Mạng"
 msgid "Network Proxy"
 msgstr "Proxy"
 
-#: ../bin/src/ui_networkremotesettingspage.h:126
+#: ../bin/src/ui_networkremotesettingspage.h:147
 msgid "Network Remote"
-msgstr ""
+msgstr "Điều khiển qua mạng"
 
 #: playlist/playlistdelegates.cpp:299 ui/edittagdialog.cpp:481
 msgid "Never"
@@ -3146,30 +3153,30 @@ msgstr "Đang phát"
 msgid "OSD Preview"
 msgstr "Xem trước hộp thông báo"
 
-#: core/song.cpp:320
+#: core/song.cpp:330
 msgid "Ogg Flac"
 msgstr "Ogg Flac"
 
-#: core/song.cpp:323
+#: core/song.cpp:333
 msgid "Ogg Opus"
-msgstr ""
+msgstr "Ogg Opus"
 
-#: core/song.cpp:321
+#: core/song.cpp:331
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
 
-#: core/song.cpp:322 ../bin/src/ui_magnatunedownloaddialog.h:139
+#: core/song.cpp:332 ../bin/src/ui_magnatunedownloaddialog.h:139
 #: ../bin/src/ui_magnatunesettingspage.h:170
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
 
-#: ../bin/src/ui_networkremotesettingspage.h:130
+#: ../bin/src/ui_networkremotesettingspage.h:151
 msgid ""
 "Only accept connections from clients within the ip ranges:\n"
 "10.x.x.x\n"
 "172.16.0.0 - 172.31.255.255\n"
 "192.168.x.x"
-msgstr ""
+msgstr "Chỉ chấp nhận kết nối từ máy khách có ip trong các khoảng:\n10.x.x.x\n172.16.0.0 - 172.31.255.255\n192.168.x.x"
 
 #: ../bin/src/ui_querysortpage.h:142
 msgid "Only show the first"
@@ -3233,6 +3240,10 @@ msgstr "Tối ưu cho chất lượng"
 #: ../bin/src/ui_transcodedialog.h:211
 msgid "Options..."
 msgstr "Tuỳ chọn..."
+
+#: ../bin/src/ui_transcodersettingspage.h:181
+msgid "Opus"
+msgstr "Opus"
 
 #: ../bin/src/ui_organisedialog.h:188
 msgid "Organise Files"
@@ -3418,7 +3429,7 @@ msgid "Popup duration"
 msgstr "Thời gian xuất hiện"
 
 #: ../bin/src/ui_networkproxysettingspage.h:166
-#: ../bin/src/ui_networkremotesettingspage.h:128
+#: ../bin/src/ui_networkremotesettingspage.h:149
 msgid "Port"
 msgstr "Cổng"
 
@@ -3849,7 +3860,7 @@ msgstr "Tìm trên Magnatune"
 
 #: internet/subsonicservice.cpp:72
 msgid "Search Subsonic"
-msgstr ""
+msgstr "Tìm trên Subsonic"
 
 #: ui/albumcoverchoicecontroller.cpp:62
 msgid "Search for album covers..."
@@ -3911,7 +3922,7 @@ msgstr "Tua đến vị trí chính xác trong bài đang phát"
 
 #: visualisations/visualisationselector.cpp:40
 msgid "Select All"
-msgstr "Chọn Tất cả"
+msgstr "Chọn hết"
 
 #: visualisations/visualisationselector.cpp:42
 msgid "Select None"
@@ -3931,7 +3942,7 @@ msgstr "Chọn mục khớp nhiều nhất"
 
 #: ../bin/src/ui_appearancesettingspage.h:283
 msgid "Select blur radius:"
-msgstr ""
+msgstr "Chọn độ mờ:"
 
 #: ../bin/src/ui_appearancesettingspage.h:270
 msgid "Select foreground color:"
@@ -3950,12 +3961,12 @@ msgid "Serial number"
 msgstr "Số sê-ri"
 
 #: ../bin/src/ui_subsonicsettingspage.h:118
-msgid "Server"
+msgid "Server URL"
 msgstr ""
 
 #: ../bin/src/ui_subsonicsettingspage.h:117
 msgid "Server details"
-msgstr ""
+msgstr "Chi tiết máy chủ"
 
 #: internet/lastfmservice.cpp:434
 msgid "Service offline"
@@ -4214,7 +4225,7 @@ msgstr "Nguồn"
 msgid "Sources"
 msgstr "Nguồn"
 
-#: ../bin/src/ui_transcodersettingspage.h:162
+#: ../bin/src/ui_transcodersettingspage.h:178
 msgid "Speex"
 msgstr "Speex"
 
@@ -4257,7 +4268,7 @@ msgid ""
 "list"
 msgstr "Gõ gì đó vào ô tìm kiếm"
 
-#: transcoder/transcoder.cpp:401
+#: transcoder/transcoder.cpp:405
 #, qt-format
 msgid "Starting %1"
 msgstr "Bắt đầu %1"
@@ -4295,9 +4306,15 @@ msgstr "Dừng khi phát xong bài hiện tại"
 msgid "Stopped"
 msgstr "Đã dừng"
 
-#: core/song.cpp:329
+#: core/song.cpp:339
 msgid "Stream"
 msgstr "Truyền tải"
+
+#: internet/subsonicsettingspage.cpp:29
+msgid ""
+"Streaming from a Subsonic server requires a valid server license after the "
+"30-day trial period."
+msgstr ""
 
 #: ../bin/src/ui_magnatunesettingspage.h:160
 msgid "Streaming membership"
@@ -4313,7 +4330,7 @@ msgstr "Người đăng kí"
 
 #: internet/subsonicservice.cpp:101 ../bin/src/ui_subsonicsettingspage.h:116
 msgid "Subsonic"
-msgstr ""
+msgstr "Subsonic"
 
 #: ../data/oauthsuccess.html:34
 msgid "Success!"
@@ -4426,7 +4443,7 @@ msgstr "Trang bạn đã yêu cầu không tồn tại!"
 msgid "The site you requested is not an image!"
 msgstr "Trang bạn đã yêu cầu không phải là một tấm ảnh!"
 
-#: internet/subsonicsettingspage.cpp:86
+#: internet/subsonicsettingspage.cpp:95
 msgid ""
 "The trial period for the Subsonic server is over. Please donate to get a "
 "license key. Visit subsonic.org for details."
@@ -4482,7 +4499,7 @@ msgstr "Các tập tin này sẽ bị xóa khỏi thiết bị, bạn có muốn
 msgid "These folders will be scanned for music to make up your library"
 msgstr "Các thư mục này sẽ được quét để thêm nhạc vào thư viện"
 
-#: ../bin/src/ui_transcodersettingspage.h:158
+#: ../bin/src/ui_transcodersettingspage.h:174
 msgid ""
 "These settings are used in the \"Transcode Music\" dialog, and when "
 "converting music before copying it to a device."
@@ -4617,11 +4634,11 @@ msgstr "Chuyển mã nhạc"
 msgid "Transcoder Log"
 msgstr "Nhật kí chuyển mã"
 
-#: ../bin/src/ui_transcodersettingspage.h:157
+#: ../bin/src/ui_transcodersettingspage.h:173
 msgid "Transcoding"
 msgstr "Chuyển mã"
 
-#: transcoder/transcoder.cpp:309
+#: transcoder/transcoder.cpp:312
 #, qt-format
 msgid "Transcoding %1 files using %2 threads"
 msgstr "Đang chuyển mã %1 tập tin sử dụng %2 luồng"
@@ -4630,7 +4647,7 @@ msgstr "Đang chuyển mã %1 tập tin sử dụng %2 luồng"
 msgid "Transcoding options"
 msgstr "Tùy chỉnh chuyển mã"
 
-#: core/song.cpp:326
+#: core/song.cpp:336
 msgid "TrueAudio"
 msgstr "TrueAudio"
 
@@ -4663,7 +4680,7 @@ msgstr "Băng siêu rộng (UWB)"
 msgid "Unable to download %1 (%2)"
 msgstr "Không thể tải về %1 (%2)"
 
-#: core/song.cpp:333 library/librarymodel.cpp:301 library/librarymodel.cpp:306
+#: core/song.cpp:343 library/librarymodel.cpp:301 library/librarymodel.cpp:306
 #: library/librarymodel.cpp:947 playlist/playlistdelegates.cpp:309
 #: playlist/playlistmanager.cpp:394 playlist/playlistmanager.cpp:397
 #: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:418
@@ -4741,9 +4758,9 @@ msgstr "Dùng thẻ Nghệ sĩ của album khi có thể"
 msgid "Use Gnome's shortcut keys"
 msgstr "Sử dụng phím tắt của Gnome"
 
-#: ../bin/src/ui_networkremotesettingspage.h:127
+#: ../bin/src/ui_networkremotesettingspage.h:148
 msgid "Use Remotecontrol"
-msgstr ""
+msgstr "Sử dụng điều khiển từ xa"
 
 #: ../bin/src/ui_playbacksettingspage.h:274
 msgid "Use Replay Gain metadata if it is available"
@@ -4764,6 +4781,10 @@ msgstr "Tùy chọn tin nhắn thông báo"
 #: ../bin/src/ui_networkproxysettingspage.h:167
 msgid "Use authentication"
 msgstr "Sử dụng xác thực"
+
+#: ../bin/src/ui_networkremotesettingspage.h:160
+msgid "Use authentication code"
+msgstr "Mã xác thực người dùng"
 
 #: ../bin/src/ui_transcoderoptionsvorbis.h:203
 msgid "Use bitrate management engine"
@@ -4832,7 +4853,7 @@ msgstr "VBR MP3"
 msgid "Variable bit rate"
 msgstr "Bit rate thay đổi"
 
-#: globalsearch/globalsearchmodel.cpp:103 library/librarymodel.cpp:238
+#: globalsearch/globalsearchmodel.cpp:104 library/librarymodel.cpp:238
 #: playlist/playlistmanager.cpp:409 ui/albumcovermanager.cpp:247
 msgid "Various artists"
 msgstr "Nhiều nghệ sỹ"
@@ -4871,7 +4892,7 @@ msgstr "Âm lượng %1%"
 msgid "Volume name"
 msgstr "Volume name"
 
-#: ../bin/src/ui_transcodersettingspage.h:160
+#: ../bin/src/ui_transcodersettingspage.h:176
 msgid "Vorbis"
 msgstr "Vorbis"
 
@@ -4880,11 +4901,11 @@ msgstr "Vorbis"
 msgid "WAV"
 msgstr "WAV"
 
-#: ../bin/src/ui_transcodersettingspage.h:164
+#: ../bin/src/ui_transcodersettingspage.h:180
 msgid "WMA"
 msgstr "WMA"
 
-#: core/song.cpp:325
+#: core/song.cpp:335
 msgid "Wav"
 msgstr "Wav"
 
@@ -4968,7 +4989,7 @@ msgstr "Windows Media 40k"
 msgid "Windows Media 64k"
 msgstr "Windows Media 64k"
 
-#: core/song.cpp:315
+#: core/song.cpp:325
 msgid "Windows Media audio"
 msgstr "Âm thanh Windows Media"
 
@@ -4982,9 +5003,9 @@ msgstr "Bạn có muốn chuyển những bài khác trong album này vào mục
 msgid "Would you like to run a full rescan right now?"
 msgstr "Bạn muốn quét lại toàn bộ ngay bây giờ?"
 
-#: internet/subsonicsettingspage.cpp:74
+#: internet/subsonicsettingspage.cpp:83
 msgid "Wrong username or password."
-msgstr ""
+msgstr "Sai tên người dùng hoặc mật khẩu."
 
 #: playlist/playlist.cpp:1198 ui/organisedialog.cpp:63
 #: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:148
