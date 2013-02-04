@@ -3,15 +3,15 @@
 # This file is distributed under the same license as the Clementine package.
 # 
 # Translators:
-# Adolfo Jayme Barrientos <fitoschido@gmail.com>, 2012.
+# Adolfo Jayme Barrientos <fitoschido@gmail.com>, 2012-2013.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
 # Roger Pueyo Centelles <transifex@rogerpueyo.com>, 2011-2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-01-26 12:03+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2013-01-30 21:24+0000\n"
+"Last-Translator: Adolfo Jayme Barrientos <fitoschido@gmail.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: ca\n"
@@ -23,6 +23,7 @@ msgstr " days"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:130
 #: ../bin/src/ui_transcoderoptionsmp3.h:195
+#: ../bin/src/ui_transcoderoptionsopus.h:81
 #: ../bin/src/ui_transcoderoptionsspeex.h:220
 #: ../bin/src/ui_transcoderoptionsspeex.h:223
 #: ../bin/src/ui_transcoderoptionsvorbis.h:205
@@ -229,7 +230,7 @@ msgstr "0:00:00"
 
 #: ../bin/src/ui_appearancesettingspage.h:284
 msgid "0px"
-msgstr ""
+msgstr "0px"
 
 #: core/utilities.cpp:106
 msgid "1 day"
@@ -267,6 +268,10 @@ msgstr "Us cal un compte Grooveshark Anywhere."
 msgid "A Spotify Premium account is required."
 msgstr "Cal un compte Premium de Spotify"
 
+#: ../bin/src/ui_networkremotesettingspage.h:158
+msgid "A client can connect only, if the correct code was entered."
+msgstr "Només es pot connectar un client si s’introdueix el codi correcte."
+
 #: smartplaylists/wizard.cpp:78
 msgid ""
 "A smart playlist is a dynamic list of songs that come from your library.  "
@@ -283,7 +288,7 @@ msgstr "S'inclourà una cançó a la llista de reproducció si coincideix amb aq
 msgid "A-Z"
 msgstr "A-Z"
 
-#: ../bin/src/ui_transcodersettingspage.h:163
+#: ../bin/src/ui_transcodersettingspage.h:179
 msgid "AAC"
 msgstr "AAC"
 
@@ -299,7 +304,7 @@ msgstr "AAC 32k"
 msgid "AAC 64k"
 msgstr "AAC 64k"
 
-#: core/song.cpp:324
+#: core/song.cpp:334
 msgid "AIFF"
 msgstr "AIFF"
 
@@ -320,9 +325,9 @@ msgstr "Sobre Clementine..."
 msgid "About Qt..."
 msgstr "Sobre Qt..."
 
-#: ../bin/src/ui_networkremotesettingspage.h:135
+#: ../bin/src/ui_networkremotesettingspage.h:156
 msgid "Accept non public clients only"
-msgstr ""
+msgstr "Només accepta clients no públics"
 
 #: ../bin/src/ui_groovesharksettingspage.h:113
 #: ../bin/src/ui_magnatunesettingspage.h:155
@@ -640,9 +645,9 @@ msgstr "S'ha produït un error carregant la base de dades d'iTunes"
 msgid "An error occurred writing metadata to '%1'"
 msgstr "Hi ha hagut un error en escriure les metadades a '%1'"
 
-#: internet/subsonicsettingspage.cpp:91
+#: internet/subsonicsettingspage.cpp:100
 msgid "An unspecified error occurred."
-msgstr ""
+msgstr "S’ha produït un error no especificat."
 
 #: ui/about.cpp:77
 msgid "And:"
@@ -820,6 +825,7 @@ msgstr "Taxa de bits"
 
 #: ui/organisedialog.cpp:67 ../bin/src/ui_transcoderoptionsaac.h:129
 #: ../bin/src/ui_transcoderoptionsmp3.h:194
+#: ../bin/src/ui_transcoderoptionsopus.h:80
 #: ../bin/src/ui_transcoderoptionsspeex.h:218
 #: ../bin/src/ui_transcoderoptionswma.h:79
 msgid "Bitrate"
@@ -861,13 +867,13 @@ msgstr "Emplenant la memòria intermèdia"
 
 #: ../bin/src/ui_globalsearchview.h:211
 msgid "But these sources are disabled:"
-msgstr ""
+msgstr "Però aquests orígens estan desactivats:"
 
 #: ../bin/src/ui_wiimotesettingspage.h:192
 msgid "Buttons"
 msgstr "Botons"
 
-#: core/song.cpp:327
+#: core/song.cpp:337
 msgid "CDDA"
 msgstr "CDDA"
 
@@ -994,7 +1000,7 @@ msgstr "El Clementine pot convertir automàticament la música que copieu en aqu
 
 #: ../bin/src/ui_dropboxsettingspage.h:104
 msgid "Clementine can play music that you have uploaded to Dropbox"
-msgstr ""
+msgstr "Clementine pot reproduir música que hagi carregat a Dropbox"
 
 #: ../bin/src/ui_googledrivesettingspage.h:104
 msgid "Clementine can play music that you have uploaded to Google Drive"
@@ -1002,7 +1008,7 @@ msgstr ""
 
 #: ../bin/src/ui_ubuntuonesettingspage.h:111
 msgid "Clementine can play music that you have uploaded to Ubuntu One"
-msgstr ""
+msgstr "Clementine pot reproduir música que hagi carregat a Ubuntu One"
 
 #: ../bin/src/ui_notificationssettingspage.h:403
 msgid "Clementine can show a message when the track changes."
@@ -1061,7 +1067,7 @@ msgstr "Tanca"
 
 #: playlist/playlisttabbar.cpp:47
 msgid "Close playlist"
-msgstr ""
+msgstr "Tanca la llista de reproducció"
 
 #: visualisations/visualisationcontainer.cpp:127
 msgid "Close visualization"
@@ -1137,7 +1143,7 @@ msgstr "Configura l'Spotify..."
 
 #: internet/subsonicservice.cpp:92
 msgid "Configure Subsonic..."
-msgstr ""
+msgstr "Configura Subsonic…"
 
 #: globalsearch/globalsearchview.cpp:140 globalsearch/globalsearchview.cpp:446
 msgid "Configure global search..."
@@ -1149,7 +1155,7 @@ msgstr "Configura la llibreria..."
 
 #: podcasts/addpodcastdialog.cpp:67 podcasts/podcastservice.cpp:288
 msgid "Configure podcasts..."
-msgstr ""
+msgstr "Configura podcasts…"
 
 #: internet/digitallyimportedservicebase.cpp:186
 #: ../bin/src/ui_globalsearchsettingspage.h:150
@@ -1207,7 +1213,7 @@ msgstr "Copiant a la base de dades de l'iPod"
 msgid "Copyright"
 msgstr "Copyright"
 
-#: internet/subsonicsettingspage.cpp:69
+#: internet/subsonicsettingspage.cpp:78
 msgid ""
 "Could not connect to Subsonic, check server URL. Example: "
 "http://localhost:4040/"
@@ -1220,14 +1226,14 @@ msgid ""
 "required GStreamer plugins installed"
 msgstr "No es va poder crear l'element \"%1\" de GStreamer. Assegura't de tenir tots els plugins requerits de GStramer instal·lats"
 
-#: transcoder/transcoder.cpp:427
+#: transcoder/transcoder.cpp:432
 #, qt-format
 msgid ""
 "Couldn't find a muxer for %1, check you have the correct GStreamer plugins "
 "installed"
 msgstr "No s'ha pogut trobar un muxer per %1, comprovi que té instal·lats els complements correctes de GStreamer"
 
-#: transcoder/transcoder.cpp:421
+#: transcoder/transcoder.cpp:426
 #, qt-format
 msgid ""
 "Couldn't find an encoder for %1, check you have the correct GStreamer "
@@ -1434,7 +1440,7 @@ msgstr "Retard entre visualitzacions"
 #: playlist/playlistlistcontainer.cpp:75
 #: ../bin/src/ui_playlistlistcontainer.h:122
 msgid "Delete"
-msgstr ""
+msgstr "Eliminar"
 
 #: internet/groovesharkservice.cpp:521 internet/groovesharkservice.cpp:1289
 msgid "Delete Grooveshark playlist"
@@ -1464,7 +1470,7 @@ msgstr "Esborra els episodis escoltats"
 
 #: playlist/playlistlistcontainer.cpp:295
 msgid "Delete playlists"
-msgstr ""
+msgstr "Eliminar les llistes de reproducció"
 
 #: ui/equalizer.cpp:190 ../bin/src/ui_equalizer.h:124
 msgid "Delete preset"
@@ -1549,7 +1555,7 @@ msgstr "Deshabilita la durada"
 
 #: ../bin/src/ui_appearancesettingspage.h:289
 msgid "Disable moodbar generation"
-msgstr ""
+msgstr "Desactiva la generació de barres d’ànim"
 
 #: globalsearch/searchproviderstatuswidget.cpp:47
 #: ../bin/src/ui_notificationssettingspage.h:405
@@ -1629,7 +1635,7 @@ msgstr "Descarrega els nous episodis automàticament"
 
 #: podcasts/podcastservice.cpp:187
 msgid "Download queued"
-msgstr ""
+msgstr "Descàrrega en la cua"
 
 #: internet/magnatuneservice.cpp:275
 msgid "Download this album"
@@ -1801,7 +1807,7 @@ msgstr "Introduïu la URL d'un fluxe de radio d'Internet:"
 
 #: playlist/playlistlistcontainer.cpp:183
 msgid "Enter the name of the folder"
-msgstr ""
+msgstr "Escriviu el nom de la carpeta"
 
 #: ../bin/src/ui_libraryfilterwidget.h:87
 msgid "Entire collection"
@@ -1851,7 +1857,7 @@ msgstr "Error carregant %1"
 msgid "Error loading di.fm playlist"
 msgstr "S'ha produït un error en descarregar la llista de reproducció de di.fm"
 
-#: transcoder/transcoder.cpp:395
+#: transcoder/transcoder.cpp:399
 #, qt-format
 msgid "Error processing %1: %2"
 msgstr "Error processant %1: %2"
@@ -1931,7 +1937,7 @@ msgstr "F8"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:140
 #: ../bin/src/ui_magnatunesettingspage.h:171
-#: ../bin/src/ui_transcodersettingspage.h:161
+#: ../bin/src/ui_transcodersettingspage.h:177
 msgid "FLAC"
 msgstr "FLAC"
 
@@ -2064,7 +2070,7 @@ msgstr "Finalitzat"
 msgid "First level"
 msgstr "Primer nivell"
 
-#: core/song.cpp:316
+#: core/song.cpp:326
 msgid "Flac"
 msgstr "FLAC"
 
@@ -2105,6 +2111,7 @@ msgstr "Oblidar un dispositiu l'eliminarà de la llista i Clementine haurà de t
 #: ../bin/src/ui_transcoderoptionsaac.h:128
 #: ../bin/src/ui_transcoderoptionsflac.h:80
 #: ../bin/src/ui_transcoderoptionsmp3.h:190
+#: ../bin/src/ui_transcoderoptionsopus.h:79
 #: ../bin/src/ui_transcoderoptionsspeex.h:216
 #: ../bin/src/ui_transcoderoptionsvorbis.h:201
 #: ../bin/src/ui_transcoderoptionswma.h:78 ../bin/src/ui_equalizerslider.h:82
@@ -2172,9 +2179,9 @@ msgstr "Obtingueu una URL per compartir aquesta llista de reproducció de Groove
 msgid "Get a URL to share this Grooveshark song"
 msgstr "Obtingueu una URL per compartir aquesta cançó de Grooveshark"
 
-#: ../bin/src/ui_networkremotesettingspage.h:136
+#: ../bin/src/ui_networkremotesettingspage.h:162
 msgid "Get the Android App now!"
-msgstr ""
+msgstr "Aconsegueixi l’aplicació per Android!"
 
 #: internet/groovesharkservice.cpp:788
 msgid "Getting Grooveshark popular songs"
@@ -2378,11 +2385,11 @@ msgstr "Incloure la caràtula a la notificació"
 msgid "Include all songs"
 msgstr "Inclou totes les cançons"
 
-#: internet/subsonicsettingspage.cpp:78
+#: internet/subsonicsettingspage.cpp:87
 msgid "Incompatible Subsonic REST protocol version. Client must upgrade."
 msgstr ""
 
-#: internet/subsonicsettingspage.cpp:82
+#: internet/subsonicsettingspage.cpp:91
 msgid "Incompatible Subsonic REST protocol version. Server must upgrade."
 msgstr ""
 
@@ -2762,7 +2769,7 @@ msgstr "Llletres"
 msgid "Lyrics from %1"
 msgstr "Lletres des de %1"
 
-#: core/song.cpp:319 ../bin/src/ui_transcodersettingspage.h:159
+#: core/song.cpp:329 ../bin/src/ui_transcodersettingspage.h:175
 msgid "MP3"
 msgstr "MP3"
 
@@ -2774,11 +2781,11 @@ msgstr "MP3 256k"
 msgid "MP3 96k"
 msgstr "MP3 96k"
 
-#: core/song.cpp:317
+#: core/song.cpp:327
 msgid "MP4 AAC"
 msgstr "MP4 AAC"
 
-#: core/song.cpp:318
+#: core/song.cpp:328
 msgid "MPC"
 msgstr "MPC"
 
@@ -2888,11 +2895,11 @@ msgstr "Estat d'ànim"
 #: ../bin/src/ui_appearancesettingspage.h:287
 #: moodbar/moodbarproxystyle.cpp:342
 msgid "Moodbar style"
-msgstr ""
+msgstr "Estil de barres d’ànim"
 
 #: ../bin/src/ui_appearancesettingspage.h:285
 msgid "Moodbars"
-msgstr ""
+msgstr "Barres d’ànim"
 
 #: library/library.cpp:72
 msgid "Most played"
@@ -2997,7 +3004,7 @@ msgstr "Xarxa"
 msgid "Network Proxy"
 msgstr "Servidor intermediari de xarxa"
 
-#: ../bin/src/ui_networkremotesettingspage.h:126
+#: ../bin/src/ui_networkremotesettingspage.h:147
 msgid "Network Remote"
 msgstr ""
 
@@ -3018,7 +3025,7 @@ msgstr "Mai comencis a reproduir"
 #: playlist/playlistlistcontainer.cpp:182
 #: ../bin/src/ui_playlistlistcontainer.h:119
 msgid "New folder"
-msgstr ""
+msgstr "Carpeta nova"
 
 #: ui/mainwindow.cpp:1389 ../bin/src/ui_mainwindow.h:698
 msgid "New playlist"
@@ -3144,24 +3151,24 @@ msgstr "Ara s'està reproduint"
 msgid "OSD Preview"
 msgstr "Vista prèvia OSD"
 
-#: core/song.cpp:320
+#: core/song.cpp:330
 msgid "Ogg Flac"
 msgstr "Ogg Flac"
 
-#: core/song.cpp:323
+#: core/song.cpp:333
 msgid "Ogg Opus"
-msgstr ""
+msgstr "Ogg Opus"
 
-#: core/song.cpp:321
+#: core/song.cpp:331
 msgid "Ogg Speex"
 msgstr "Ogg Speex"
 
-#: core/song.cpp:322 ../bin/src/ui_magnatunedownloaddialog.h:139
+#: core/song.cpp:332 ../bin/src/ui_magnatunedownloaddialog.h:139
 #: ../bin/src/ui_magnatunesettingspage.h:170
 msgid "Ogg Vorbis"
 msgstr "Ogg Vorbis"
 
-#: ../bin/src/ui_networkremotesettingspage.h:130
+#: ../bin/src/ui_networkremotesettingspage.h:151
 msgid ""
 "Only accept connections from clients within the ip ranges:\n"
 "10.x.x.x\n"
@@ -3231,6 +3238,10 @@ msgstr "Optimitza la qualitat"
 #: ../bin/src/ui_transcodedialog.h:211
 msgid "Options..."
 msgstr "Opcions..."
+
+#: ../bin/src/ui_transcodersettingspage.h:181
+msgid "Opus"
+msgstr "Opus"
 
 #: ../bin/src/ui_organisedialog.h:188
 msgid "Organise Files"
@@ -3416,7 +3427,7 @@ msgid "Popup duration"
 msgstr "Duració de la finestra emergent"
 
 #: ../bin/src/ui_networkproxysettingspage.h:166
-#: ../bin/src/ui_networkremotesettingspage.h:128
+#: ../bin/src/ui_networkremotesettingspage.h:149
 msgid "Port"
 msgstr "Port"
 
@@ -3781,7 +3792,7 @@ msgstr "Freqüència de mostreig"
 
 #: ../bin/src/ui_appearancesettingspage.h:288
 msgid "Save .mood files in your music library"
-msgstr ""
+msgstr "Guarda fitxers .mood en la seva coŀlecció musical"
 
 #: ui/albumcoverchoicecontroller.cpp:114
 msgid "Save album cover"
@@ -3847,7 +3858,7 @@ msgstr "Cercar a Magnatune"
 
 #: internet/subsonicservice.cpp:72
 msgid "Search Subsonic"
-msgstr ""
+msgstr "Cerca en Subsonic"
 
 #: ui/albumcoverchoicecontroller.cpp:62
 msgid "Search for album covers..."
@@ -3929,7 +3940,7 @@ msgstr "Selecciona la millor coincidència possible"
 
 #: ../bin/src/ui_appearancesettingspage.h:283
 msgid "Select blur radius:"
-msgstr ""
+msgstr "Trieu el radi de desenfocament:"
 
 #: ../bin/src/ui_appearancesettingspage.h:270
 msgid "Select foreground color:"
@@ -3948,12 +3959,12 @@ msgid "Serial number"
 msgstr "Número de sèrie"
 
 #: ../bin/src/ui_subsonicsettingspage.h:118
-msgid "Server"
-msgstr ""
+msgid "Server URL"
+msgstr "URL del servidor"
 
 #: ../bin/src/ui_subsonicsettingspage.h:117
 msgid "Server details"
-msgstr ""
+msgstr "Detalls del servidor"
 
 #: internet/lastfmservice.cpp:434
 msgid "Service offline"
@@ -4001,7 +4012,7 @@ msgstr "Mostra una animació destacant la pista actual"
 
 #: ../bin/src/ui_appearancesettingspage.h:286
 msgid "Show a moodbar in the track progress bar"
-msgstr ""
+msgstr "Mostra una barra d’ànim en el progrés de la pista"
 
 #: ../bin/src/ui_notificationssettingspage.h:406
 msgid "Show a native desktop notification"
@@ -4058,7 +4069,7 @@ msgstr "Mostra a Artiste"
 
 #: moodbar/moodbarproxystyle.cpp:337
 msgid "Show moodbar"
-msgstr ""
+msgstr "Mostra les barres d’ànim"
 
 #: ui/mainwindow.cpp:459
 msgid "Show only duplicates"
@@ -4138,7 +4149,7 @@ msgstr "Salta enrere en la llista de reproducció"
 
 #: playlist/playlist.cpp:1205 ../bin/src/ui_edittagdialog.h:639
 msgid "Skip count"
-msgstr ""
+msgstr "Comptador d’omissions"
 
 #: core/commandlineoptions.cpp:150
 msgid "Skip forwards in playlist"
@@ -4212,7 +4223,7 @@ msgstr "Font"
 msgid "Sources"
 msgstr "Fonts"
 
-#: ../bin/src/ui_transcodersettingspage.h:162
+#: ../bin/src/ui_transcodersettingspage.h:178
 msgid "Speex"
 msgstr "Speex"
 
@@ -4255,7 +4266,7 @@ msgid ""
 "list"
 msgstr "Comenceu a escriure quelcom al quadre de cerca de dalt per omplir-ne la llista de resultats"
 
-#: transcoder/transcoder.cpp:401
+#: transcoder/transcoder.cpp:405
 #, qt-format
 msgid "Starting %1"
 msgstr "Començarà %1"
@@ -4293,9 +4304,15 @@ msgstr "Para la reproducció després de la pista actual"
 msgid "Stopped"
 msgstr "Aturat"
 
-#: core/song.cpp:329
+#: core/song.cpp:339
 msgid "Stream"
 msgstr "Flux de dades"
+
+#: internet/subsonicsettingspage.cpp:29
+msgid ""
+"Streaming from a Subsonic server requires a valid server license after the "
+"30-day trial period."
+msgstr ""
 
 #: ../bin/src/ui_magnatunesettingspage.h:160
 msgid "Streaming membership"
@@ -4311,7 +4328,7 @@ msgstr "Subscriptors"
 
 #: internet/subsonicservice.cpp:101 ../bin/src/ui_subsonicsettingspage.h:116
 msgid "Subsonic"
-msgstr ""
+msgstr "Subsonic"
 
 #: ../data/oauthsuccess.html:34
 msgid "Success!"
@@ -4424,7 +4441,7 @@ msgstr "L'adreça que heu soŀlicitat no existeix!"
 msgid "The site you requested is not an image!"
 msgstr "L'adreça que heu soŀlicitat no conté una imatge!"
 
-#: internet/subsonicsettingspage.cpp:86
+#: internet/subsonicsettingspage.cpp:95
 msgid ""
 "The trial period for the Subsonic server is over. Please donate to get a "
 "license key. Visit subsonic.org for details."
@@ -4480,7 +4497,7 @@ msgstr "Aquests arxius seran esborrats del dispositiu, estàs segur de que vols 
 msgid "These folders will be scanned for music to make up your library"
 msgstr "S'escanejaran aquestes carpetes cercant-hi música per confeccionar la vostra biblioteca"
 
-#: ../bin/src/ui_transcodersettingspage.h:158
+#: ../bin/src/ui_transcodersettingspage.h:174
 msgid ""
 "These settings are used in the \"Transcode Music\" dialog, and when "
 "converting music before copying it to a device."
@@ -4592,7 +4609,7 @@ msgstr "Massa redireccions"
 
 #: internet/spotifyservice.cpp:366
 msgid "Top tracks"
-msgstr ""
+msgstr "Millors cançons"
 
 #: covers/coversearchstatisticsdialog.cpp:71
 msgid "Total bytes transferred"
@@ -4615,11 +4632,11 @@ msgstr "Transcodificar Música"
 msgid "Transcoder Log"
 msgstr "Registre del transcodificador"
 
-#: ../bin/src/ui_transcodersettingspage.h:157
+#: ../bin/src/ui_transcodersettingspage.h:173
 msgid "Transcoding"
 msgstr "Transcodificació"
 
-#: transcoder/transcoder.cpp:309
+#: transcoder/transcoder.cpp:312
 #, qt-format
 msgid "Transcoding %1 files using %2 threads"
 msgstr "S'estan transcodificant %1 arxius emprant %2 fils"
@@ -4628,7 +4645,7 @@ msgstr "S'estan transcodificant %1 arxius emprant %2 fils"
 msgid "Transcoding options"
 msgstr "Opcions de transcodificació"
 
-#: core/song.cpp:326
+#: core/song.cpp:336
 msgid "TrueAudio"
 msgstr "TrueAudio"
 
@@ -4661,7 +4678,7 @@ msgstr "Banda ultra ampla (UWB)"
 msgid "Unable to download %1 (%2)"
 msgstr "No es pot descarregar %1 (%2)"
 
-#: core/song.cpp:333 library/librarymodel.cpp:301 library/librarymodel.cpp:306
+#: core/song.cpp:343 library/librarymodel.cpp:301 library/librarymodel.cpp:306
 #: library/librarymodel.cpp:947 playlist/playlistdelegates.cpp:309
 #: playlist/playlistmanager.cpp:394 playlist/playlistmanager.cpp:397
 #: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:418
@@ -4733,15 +4750,15 @@ msgstr "Forma d'ús"
 
 #: ../bin/src/ui_lastfmsettingspage.h:159
 msgid "Use Album Artist tag when available"
-msgstr ""
+msgstr "Utilitza l’etiqueta Artista de l’àlbum quan estigui disponible"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:168
 msgid "Use Gnome's shortcut keys"
 msgstr "Utilitza les tecles de mètode abreujat de Gnome"
 
-#: ../bin/src/ui_networkremotesettingspage.h:127
+#: ../bin/src/ui_networkremotesettingspage.h:148
 msgid "Use Remotecontrol"
-msgstr ""
+msgstr "Utilitza un control remot"
 
 #: ../bin/src/ui_playbacksettingspage.h:274
 msgid "Use Replay Gain metadata if it is available"
@@ -4762,6 +4779,10 @@ msgstr "Utilitza un missatge personalitzat per les notificacions"
 #: ../bin/src/ui_networkproxysettingspage.h:167
 msgid "Use authentication"
 msgstr "Empra autentificació"
+
+#: ../bin/src/ui_networkremotesettingspage.h:160
+msgid "Use authentication code"
+msgstr "Usa un codi d’autenticació"
 
 #: ../bin/src/ui_transcoderoptionsvorbis.h:203
 msgid "Use bitrate management engine"
@@ -4785,7 +4806,7 @@ msgstr "Utilitza el sistema per defecte"
 
 #: ../bin/src/ui_appearancesettingspage.h:268
 msgid "Use the system default color set"
-msgstr ""
+msgstr "Utilitza el conjunt de colors del sistema"
 
 #: ../bin/src/ui_networkproxysettingspage.h:158
 msgid "Use the system proxy settings"
@@ -4830,7 +4851,7 @@ msgstr "VBR MP3"
 msgid "Variable bit rate"
 msgstr "Taxa de bits variable"
 
-#: globalsearch/globalsearchmodel.cpp:103 library/librarymodel.cpp:238
+#: globalsearch/globalsearchmodel.cpp:104 library/librarymodel.cpp:238
 #: playlist/playlistmanager.cpp:409 ui/albumcovermanager.cpp:247
 msgid "Various artists"
 msgstr "Artistes varis"
@@ -4869,7 +4890,7 @@ msgstr "Volumen %1%"
 msgid "Volume name"
 msgstr "Nom del volum"
 
-#: ../bin/src/ui_transcodersettingspage.h:160
+#: ../bin/src/ui_transcodersettingspage.h:176
 msgid "Vorbis"
 msgstr "Vorbis"
 
@@ -4878,11 +4899,11 @@ msgstr "Vorbis"
 msgid "WAV"
 msgstr "WAV"
 
-#: ../bin/src/ui_transcodersettingspage.h:164
+#: ../bin/src/ui_transcodersettingspage.h:180
 msgid "WMA"
 msgstr "WMA"
 
-#: core/song.cpp:325
+#: core/song.cpp:335
 msgid "Wav"
 msgstr "Wav"
 
@@ -4966,7 +4987,7 @@ msgstr "Windows Media 40k"
 msgid "Windows Media 64k"
 msgstr "Windows Media 64k"
 
-#: core/song.cpp:315
+#: core/song.cpp:325
 msgid "Windows Media audio"
 msgstr "Audio Windows Media"
 
@@ -4974,15 +4995,15 @@ msgstr "Audio Windows Media"
 msgid ""
 "Would you like to move the other songs in this album to Various Artists as "
 "well?"
-msgstr ""
+msgstr "Vol moure també les altres cançons d’aquest àlbum a Diversos artistes?"
 
 #: ui/mainwindow.cpp:2007
 msgid "Would you like to run a full rescan right now?"
 msgstr "Voleu fer de nou un escaneig complet ara?"
 
-#: internet/subsonicsettingspage.cpp:74
+#: internet/subsonicsettingspage.cpp:83
 msgid "Wrong username or password."
-msgstr ""
+msgstr "Nom d’usuari o contrasenya incorrectes."
 
 #: playlist/playlist.cpp:1198 ui/organisedialog.cpp:63
 #: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:148
@@ -5238,7 +5259,7 @@ msgstr "el més llarg primer"
 #: playlist/playlistundocommands.cpp:99
 #, c-format
 msgid "move %n songs"
-msgstr ""
+msgstr "mou %n cançons"
 
 #: smartplaylists/searchterm.cpp:294
 msgid "newest first"
