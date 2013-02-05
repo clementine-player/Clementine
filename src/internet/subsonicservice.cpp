@@ -75,6 +75,7 @@ SubsonicService::SubsonicService(Application* app, InternetModel* parent)
   library_sort_model_->setSourceModel(library_model_);
   library_sort_model_->setSortRole(LibraryModel::Role_SortText);
   library_sort_model_->setDynamicSortFilter(true);
+  library_sort_model_->setSortLocaleAware(true);
   library_sort_model_->sort(0);
 
   connect(this, SIGNAL(LoginStateChanged(SubsonicService::LoginState)),

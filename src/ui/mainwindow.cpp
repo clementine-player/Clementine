@@ -257,6 +257,7 @@ MainWindow::MainWindow(Application* app,
   library_sort_model_->setSourceModel(app_->library()->model());
   library_sort_model_->setSortRole(LibraryModel::Role_SortText);
   library_sort_model_->setDynamicSortFilter(true);
+  library_sort_model_->setSortLocaleAware(true);
   library_sort_model_->sort(0);
 
   connect(ui_->playlist, SIGNAL(ViewSelectionModelChanged()), SLOT(PlaylistViewSelectionModelChanged()));
