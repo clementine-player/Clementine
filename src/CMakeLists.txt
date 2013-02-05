@@ -252,6 +252,7 @@ set(SOURCES
   playlistparsers/parserbase.cpp
   playlistparsers/playlistparser.cpp
   playlistparsers/plsparser.cpp
+  playlistparsers/wplparser.cpp
   playlistparsers/xmlparser.cpp
   playlistparsers/xspfparser.cpp
 

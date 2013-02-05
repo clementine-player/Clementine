@@ -21,6 +21,7 @@
 #include "m3uparser.h"
 #include "playlistparser.h"
 #include "plsparser.h"
+#include "wplparser.h"
 #include "xspfparser.h"
 #include "core/logging.h"
 
@@ -38,6 +39,7 @@ PlaylistParser::PlaylistParser(LibraryBackendInterface* library, QObject *parent
   parsers_ << new ASXParser(library, this);
   parsers_ << new AsxIniParser(library, this);
   parsers_ << new CueParser(library, this);
+  parsers_ << new WplParser(library, this);
 }
 
 QStringList PlaylistParser::file_extensions() const {
