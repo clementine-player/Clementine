@@ -35,7 +35,7 @@ public:
 
 private slots:
   void Login();
-  void AuthenticationComplete(bool success);
+  void AuthenticationComplete(bool success, const QString& error_message);
   void Logout();
   void UpdatedSubscriberStatus(bool is_subscriber);
 

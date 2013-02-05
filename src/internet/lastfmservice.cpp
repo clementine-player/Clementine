@@ -327,7 +327,7 @@ void LastFMService::AuthenticateReplyFinished(QNetworkReply* reply) {
     settings.setValue("Session", lastfm::ws::SessionKey);
     settings.setValue("Subscriber", is_subscriber);
   } else {
-    emit AuthenticationComplete(false);
+    emit AuthenticationComplete(false, lfm["error"].text().trimmed());
     return;
   }
 
@@ -335,7 +335,7 @@ void LastFMService::AuthenticateReplyFinished(QNetworkReply* reply) {
   delete scrobbler_;
   scrobbler_ = NULL;
 
-  emit AuthenticationComplete(true);
+  emit AuthenticationComplete(true, QString());
 }
 
 void LastFMService::UpdateSubscriberStatus() {

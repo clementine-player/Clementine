@@ -38,7 +38,8 @@ LastFMSettingsPage::LastFMSettingsPage(SettingsDialog* dialog)
   // Icons
   setWindowIcon(QIcon(":/last.fm/as.png"));
 
-  connect(service_, SIGNAL(AuthenticationComplete(bool)), SLOT(AuthenticationComplete(bool)));
+  connect(service_, SIGNAL(AuthenticationComplete(bool,QString)),
+          SLOT(AuthenticationComplete(bool,QString)));
   connect(service_, SIGNAL(UpdatedSubscriberStatus(bool)), SLOT(UpdatedSubscriberStatus(bool)));
   connect(ui_->login_state, SIGNAL(LogoutClicked()), SLOT(Logout()));
   connect(ui_->login_state, SIGNAL(LoginClicked()), SLOT(Login()));
@@ -63,7 +64,8 @@ void LastFMSettingsPage::Login() {
   service_->Authenticate(ui_->username->text(), ui_->password->text());
 }
 
-void LastFMSettingsPage::AuthenticationComplete(bool success) {
+void LastFMSettingsPage::AuthenticationComplete(bool success,
+                                                const QString& message) {
   if (!waiting_for_auth_)
     return; // Wasn't us that was waiting for auth
 
@@ -75,7 +77,11 @@ void LastFMSettingsPage::AuthenticationComplete(bool success) {
     // Save settings
     Save();
   } else {
-    QMessageBox::warning(this, tr("Authentication failed"), tr("Your Last.fm credentials were incorrect"));
+    QString dialog_text = tr("Your Last.fm credentials were incorrect");
+    if (!message.isEmpty()) {
+      dialog_text = message;
+    }
+    QMessageBox::warning(this, tr("Authentication failed"), dialog_text);
   }
 
   RefreshControls(success);
