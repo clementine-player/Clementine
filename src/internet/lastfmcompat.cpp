@@ -82,6 +82,11 @@ bool ParseQuery(const QByteArray& data, XmlQuery* query, bool* connection_proble
     *connection_problems = false;
   }
 
+  // Check for app errors.
+  if (QDomElement(*query).attribute("status") == "failed") {
+    return false;
+  }
+
   return true;
 }
 

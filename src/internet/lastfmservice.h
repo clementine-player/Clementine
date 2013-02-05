@@ -127,7 +127,7 @@ class LastFMService : public InternetService {
   void ToggleScrobbling();
 
  signals:
-  void AuthenticationComplete(bool success);
+  void AuthenticationComplete(bool success, const QString& error_message);
   void ScrobblingEnabledChanged(bool value);
   void ButtonVisibilityChanged(bool value);
   void ScrobbleButtonVisibilityChanged(bool value);
