@@ -45,13 +45,6 @@ IncomingDataParser::IncomingDataParser(Application* app)
   connect(this, SIGNAL(SeekTo(int)),
           app_->player(), SLOT(SeekTo(int)));
 
-  // For some connects we have to wait for the playlistmanager
-  // to be initialized
-  connect(app_->playlist_manager(), SIGNAL(PlaylistManagerInitialized()),
-          this, SLOT(PlaylistManagerInitialized()));
-}
-
-void IncomingDataParser::PlaylistManagerInitialized() {
   connect(this, SIGNAL(SetActivePlaylist(int)),
           app_->playlist_manager(), SLOT(SetActivePlaylist(int)));
   connect(this, SIGNAL(ShuffleCurrent()),
