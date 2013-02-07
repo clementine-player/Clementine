@@ -126,6 +126,22 @@ void OutgoingDataCreator::ActiveChanged(Playlist*) {
   SendAllPlaylists();
 }
 
+void OutgoingDataCreator::PlaylistAdded(int id, const QString& name) {
+  SendAllPlaylists();
+}
+
+void OutgoingDataCreator::PlaylistDeleted(int id) {
+  SendAllPlaylists();
+}
+
+void OutgoingDataCreator::PlaylistClosed(int id) {
+  SendAllPlaylists();
+}
+
+void OutgoingDataCreator::PlaylistRenamed(int id, const QString& new_name) {
+  SendAllPlaylists();
+}
+
 void OutgoingDataCreator::SendFirstData() {
   // First Send the current song
   PlaylistItemPtr item = app_->player()->GetCurrentItem();

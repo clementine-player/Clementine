@@ -169,7 +169,7 @@ message RequestSetTrackPosition {
 
 // The message itself
 message Message {
-  optional int32 version = 1 [default=2];
+  optional int32 version = 1 [default=3];
   optional MsgType type = 2 [default=UNKNOWN]; // What data is in the message?
 
   optional RequestConnect request_connect = 21;
