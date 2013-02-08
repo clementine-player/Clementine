@@ -97,6 +97,10 @@ void RemoteClient::ParseMessage(const QByteArray &data) {
 void RemoteClient::DisconnectClientWrongAuthCode() {
   pb::remote::Message msg;
   msg.set_type(pb::remote::DISCONNECT);
+
+  // Send the default version
+  msg->set_version(msg->default_instance().version());
+
   msg.mutable_response_disconnect()->set_reason_disconnect(pb::remote::Wrong_Auth_Code);
   SendData(&msg);
 
