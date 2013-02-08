@@ -52,6 +52,9 @@ void OutgoingDataCreator::SendDataToClients(pb::remote::Message* msg) {
     return;
   }
 
+  // Send the default version
+  msg->set_version(msg->default_instance().version());
+
   RemoteClient* client;
   foreach(client, *clients_) {
     // Check if the client is still active
