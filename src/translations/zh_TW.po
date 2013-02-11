@@ -72,7 +72,7 @@ msgstr "%1 天前"
 msgid "%1 on %2"
 msgstr ""
 
-#: playlistparsers/playlistparser.cpp:74
+#: playlistparsers/playlistparser.cpp:76
 #, qt-format
 msgid "%1 playlists (%2)"
 msgstr "%1 播放清單 (%2)"
@@ -372,7 +372,7 @@ msgstr "加入其它的網路串流"
 msgid "Add directory..."
 msgstr "加入目錄..."
 
-#: ui/mainwindow.cpp:1547
+#: ui/mainwindow.cpp:1548
 msgid "Add file"
 msgstr "加入檔案"
 
@@ -384,7 +384,7 @@ msgstr "加入檔案..."
 msgid "Add files to transcode"
 msgstr "加入檔案以轉碼"
 
-#: ui/mainwindow.cpp:1575
+#: ui/mainwindow.cpp:1576
 msgid "Add folder"
 msgstr "加入資料夾"
 
@@ -472,7 +472,7 @@ msgstr "加入到 Grooveshark 最愛"
 msgid "Add to Grooveshark playlists"
 msgstr "加入到 Grooveshark 播放清單"
 
-#: ui/mainwindow.cpp:1372
+#: ui/mainwindow.cpp:1373
 msgid "Add to another playlist"
 msgstr "加入到其他播放清單"
 
@@ -556,7 +556,7 @@ msgstr "專輯演出者"
 msgid "Album cover"
 msgstr "專輯封面"
 
-#: internet/jamendoservice.cpp:414
+#: internet/jamendoservice.cpp:415
 msgid "Album info on jamendo.com..."
 msgstr " jamendo.com上的專輯資訊..."
 
@@ -588,7 +588,7 @@ msgstr "所有演出者"
 msgid "All files (*)"
 msgstr "所有檔案 (*)"
 
-#: playlistparsers/playlistparser.cpp:61
+#: playlistparsers/playlistparser.cpp:63
 #, qt-format
 msgid "All playlists (%1)"
 msgstr "所有播放清單 (%1)"
@@ -725,7 +725,7 @@ msgstr "音頻格式"
 
 #: internet/digitallyimportedsettingspage.cpp:82
 #: internet/magnatunesettingspage.cpp:113 internet/lastfmservice.cpp:427
-#: internet/lastfmsettingspage.cpp:78
+#: internet/lastfmsettingspage.cpp:84
 msgid "Authentication failed"
 msgstr "認證失敗"
 
@@ -919,7 +919,7 @@ msgstr ""
 msgid "Check for new episodes"
 msgstr "檢查是否有新的片斷內容"
 
-#: ui/mainwindow.cpp:587
+#: ui/mainwindow.cpp:588
 msgid "Check for updates..."
 msgstr "檢查更新..."
 
@@ -1027,7 +1027,7 @@ msgid ""
 "installed Clementine properly."
 msgstr "Clementine 無法載入任何 ProjectM 視覺化工具。\n請檢查是否正確安裝 Clementine。"
 
-#: internet/lastfmsettingspage.cpp:104
+#: internet/lastfmsettingspage.cpp:110
 msgid ""
 "Clementine couldn't fetch your subscription status since there are problems "
 "with your connection. Played tracks will be cached and sent later to "
@@ -1129,7 +1129,7 @@ msgstr "設定 Grooveshark..."
 msgid "Configure Last.fm..."
 msgstr "設定 Last.fm..."
 
-#: internet/magnatuneservice.cpp:279
+#: internet/magnatuneservice.cpp:280
 msgid "Configure Magnatune..."
 msgstr "設定 Magnatune ..."
 
@@ -1141,7 +1141,7 @@ msgstr "設定快速鍵"
 msgid "Configure Spotify..."
 msgstr "設定 Spotify..."
 
-#: internet/subsonicservice.cpp:92
+#: internet/subsonicservice.cpp:93
 msgid "Configure Subsonic..."
 msgstr ""
 
@@ -1149,7 +1149,7 @@ msgstr ""
 msgid "Configure global search..."
 msgstr ""
 
-#: ui/mainwindow.cpp:470
+#: ui/mainwindow.cpp:471
 msgid "Configure library..."
 msgstr "設定音樂庫"
 
@@ -1195,12 +1195,12 @@ msgstr "轉換任何裝置無法播放的音樂"
 msgid "Copy to clipboard"
 msgstr "複製到剪貼簿"
 
-#: library/libraryview.cpp:389 ui/mainwindow.cpp:503
+#: library/libraryview.cpp:389 ui/mainwindow.cpp:504
 #: widgets/fileviewlist.cpp:44
 msgid "Copy to device..."
 msgstr "複製到裝置..."
 
-#: devices/deviceview.cpp:218 ui/mainwindow.cpp:500
+#: devices/deviceview.cpp:218 ui/mainwindow.cpp:501
 #: widgets/fileviewlist.cpp:39
 msgid "Copy to library..."
 msgstr "複製到音樂庫"
@@ -1249,7 +1249,7 @@ msgstr "無法載入 last.fm 廣播電台"
 msgid "Couldn't open output file %1"
 msgstr "無法開啟輸出檔 %1"
 
-#: internet/cloudfileservice.cpp:87 ../bin/src/ui_albumcovermanager.h:149
+#: internet/cloudfileservice.cpp:88 ../bin/src/ui_albumcovermanager.h:149
 #: ../bin/src/ui_albumcoversearcher.h:105 ../bin/src/ui_mainwindow.h:684
 #: internet/googledriveservice.cpp:189
 msgid "Cover Manager"
@@ -1451,7 +1451,7 @@ msgid "Delete downloaded data"
 msgstr "刪除下載的資料"
 
 #: devices/deviceview.cpp:388 library/libraryview.cpp:608
-#: ui/mainwindow.cpp:1824 widgets/fileview.cpp:186
+#: ui/mainwindow.cpp:1825 widgets/fileview.cpp:187
 msgid "Delete files"
 msgstr "刪除檔案"
 
@@ -1459,7 +1459,7 @@ msgstr "刪除檔案"
 msgid "Delete from device..."
 msgstr "從裝置中刪除..."
 
-#: library/libraryview.cpp:391 ui/mainwindow.cpp:504
+#: library/libraryview.cpp:391 ui/mainwindow.cpp:505
 #: widgets/fileviewlist.cpp:45
 msgid "Delete from disk..."
 msgstr "從硬碟中刪除 ..."
@@ -1488,11 +1488,11 @@ msgstr "刪除原本的檔案"
 msgid "Deleting files"
 msgstr "檔案刪除中"
 
-#: ui/mainwindow.cpp:1307
+#: ui/mainwindow.cpp:1308
 msgid "Dequeue selected tracks"
 msgstr "將選取的歌曲移出佇列中"
 
-#: ui/mainwindow.cpp:1305
+#: ui/mainwindow.cpp:1306
 msgid "Dequeue track"
 msgstr "將歌曲移出佇列中"
 
@@ -1637,11 +1637,11 @@ msgstr "自動下載新的片斷內容"
 msgid "Download queued"
 msgstr ""
 
-#: internet/magnatuneservice.cpp:275
+#: internet/magnatuneservice.cpp:276
 msgid "Download this album"
 msgstr "下載此專輯"
 
-#: internet/jamendoservice.cpp:416
+#: internet/jamendoservice.cpp:417
 msgid "Download this album..."
 msgstr "下載此專輯..."
 
@@ -1662,11 +1662,11 @@ msgstr ""
 msgid "Downloading Icecast directory"
 msgstr "下載 Icecast 目錄中"
 
-#: internet/jamendoservice.cpp:186
+#: internet/jamendoservice.cpp:187
 msgid "Downloading Jamendo catalogue"
 msgstr "下載 Jamendo 目錄中"
 
-#: internet/magnatuneservice.cpp:157
+#: internet/magnatuneservice.cpp:158
 msgid "Downloading Magnatune catalogue"
 msgstr "下載 Magnatune 目錄中"
 
@@ -1702,7 +1702,7 @@ msgstr "動態隨機混合"
 msgid "Edit smart playlist..."
 msgstr "編輯智慧型播放清單..."
 
-#: ui/mainwindow.cpp:1340
+#: ui/mainwindow.cpp:1341
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "編輯標籤「%1」..."
@@ -1827,7 +1827,7 @@ msgstr ""
 
 #: internet/groovesharkservice.cpp:1015
 #: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:602
-#: ui/mainwindow.cpp:1776 ui/mainwindow.cpp:1892
+#: ui/mainwindow.cpp:1777 ui/mainwindow.cpp:1893
 msgid "Error"
 msgstr "錯誤"
 
@@ -1996,7 +1996,7 @@ msgstr "自動取得"
 msgid "Fetch completed"
 msgstr "取得完成"
 
-#: internet/subsonicservice.cpp:208
+#: internet/subsonicservice.cpp:209
 msgid "Fetching Subsonic library"
 msgstr ""
 
@@ -2401,7 +2401,7 @@ msgstr "增加音量4％"
 msgid "Increase volume"
 msgstr "提高音量"
 
-#: internet/cloudfileservice.cpp:135
+#: internet/cloudfileservice.cpp:136
 #, qt-format
 msgid "Indexing %1"
 msgstr ""
@@ -2462,7 +2462,7 @@ msgstr "無效對稱金鑰"
 msgid "Invalid username and/or password"
 msgstr "無效使用者名稱 及/或 密碼"
 
-#: internet/jamendoservice.cpp:126
+#: internet/jamendoservice.cpp:127
 msgid "Jamendo"
 msgstr ""
 
@@ -2482,7 +2482,7 @@ msgstr "Jamendo 每月熱門曲目"
 msgid "Jamendo Top Tracks of the Week"
 msgstr "Jamendo 每週熱門曲目"
 
-#: internet/jamendoservice.cpp:170
+#: internet/jamendoservice.cpp:171
 msgid "Jamendo database"
 msgstr "Jamendo 資料庫"
 
@@ -2626,7 +2626,7 @@ msgstr "音樂庫"
 msgid "Library advanced grouping"
 msgstr "音樂庫進階的歸類"
 
-#: ui/mainwindow.cpp:2009
+#: ui/mainwindow.cpp:2010
 msgid "Library rescan notice"
 msgstr "音樂庫重新掃描提示"
 
@@ -2789,7 +2789,7 @@ msgstr "MP4 AAC"
 msgid "MPC"
 msgstr "MPC"
 
-#: internet/magnatuneservice.cpp:102 ../bin/src/ui_magnatunesettingspage.h:154
+#: internet/magnatuneservice.cpp:103 ../bin/src/ui_magnatunesettingspage.h:154
 msgid "Magnatune"
 msgstr "Magnatune"
 
@@ -2918,7 +2918,7 @@ msgstr "掛載點"
 msgid "Move down"
 msgstr "下移"
 
-#: ui/mainwindow.cpp:501 widgets/fileviewlist.cpp:41
+#: ui/mainwindow.cpp:502 widgets/fileviewlist.cpp:41
 msgid "Move to library..."
 msgstr "移到音樂庫..."
 
@@ -2927,7 +2927,7 @@ msgstr "移到音樂庫..."
 msgid "Move up"
 msgstr "上移"
 
-#: transcoder/transcodedialog.cpp:216 ui/mainwindow.cpp:1549
+#: transcoder/transcodedialog.cpp:216 ui/mainwindow.cpp:1550
 msgid "Music"
 msgstr "音樂"
 
@@ -3027,7 +3027,7 @@ msgstr "永不開始播放"
 msgid "New folder"
 msgstr ""
 
-#: ui/mainwindow.cpp:1389 ../bin/src/ui_mainwindow.h:698
+#: ui/mainwindow.cpp:1390 ../bin/src/ui_mainwindow.h:698
 msgid "New playlist"
 msgstr "新增播放清單"
 
@@ -3086,7 +3086,7 @@ msgstr "無短區塊"
 msgid "None"
 msgstr "沒有"
 
-#: library/libraryview.cpp:603 ui/mainwindow.cpp:1777 ui/mainwindow.cpp:1893
+#: library/libraryview.cpp:603 ui/mainwindow.cpp:1778 ui/mainwindow.cpp:1894
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "所選歌曲沒有適合複製到裝置的"
 
@@ -3182,7 +3182,7 @@ msgstr "只顯示第一"
 
 #: internet/digitallyimportedservicebase.cpp:179
 #: internet/groovesharkservice.cpp:544 internet/icecastservice.cpp:296
-#: internet/jamendoservice.cpp:418 internet/magnatuneservice.cpp:277
+#: internet/jamendoservice.cpp:419 internet/magnatuneservice.cpp:278
 #: internet/somafmservice.cpp:91 internet/soundcloudservice.cpp:194
 #, qt-format
 msgid "Open %1 in browser"
@@ -3247,7 +3247,7 @@ msgstr ""
 msgid "Organise Files"
 msgstr "組織檔案"
 
-#: library/libraryview.cpp:387 ui/mainwindow.cpp:502
+#: library/libraryview.cpp:387 ui/mainwindow.cpp:503
 msgid "Organise files..."
 msgstr "組織檔案..."
 
@@ -3283,7 +3283,7 @@ msgstr "覆寫現有的檔案"
 msgid "Owner"
 msgstr "擁有者"
 
-#: internet/jamendoservice.cpp:213
+#: internet/jamendoservice.cpp:214
 msgid "Parsing Jamendo catalogue"
 msgstr ""
 
@@ -3304,7 +3304,7 @@ msgstr "密碼"
 msgid "Password Protected"
 msgstr "密碼保護"
 
-#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:844 ui/mainwindow.cpp:1230
+#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:845 ui/mainwindow.cpp:1231
 #: ui/qtsystemtrayicon.cpp:178 wiimotedev/wiimotesettingspage.cpp:106
 msgid "Pause"
 msgstr "暫停"
@@ -3321,8 +3321,8 @@ msgstr "已暫停"
 msgid "Plain sidebar"
 msgstr "樸素的側邊欄"
 
-#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:485 ui/mainwindow.cpp:812
-#: ui/mainwindow.cpp:831 ui/mainwindow.cpp:1233 ui/qtsystemtrayicon.cpp:166
+#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:486 ui/mainwindow.cpp:813
+#: ui/mainwindow.cpp:832 ui/mainwindow.cpp:1234 ui/qtsystemtrayicon.cpp:166
 #: ui/qtsystemtrayicon.cpp:192 ../bin/src/ui_mainwindow.h:647
 #: wiimotedev/wiimotesettingspage.cpp:101
 msgid "Play"
@@ -3540,12 +3540,12 @@ msgstr "查詢裝置..."
 msgid "Queue Manager"
 msgstr "佇列管理員"
 
-#: ui/mainwindow.cpp:1311
+#: ui/mainwindow.cpp:1312
 msgid "Queue selected tracks"
 msgstr "將選取的歌曲加入佇列中"
 
 #: globalsearch/globalsearchview.cpp:441 library/libraryview.cpp:375
-#: ui/mainwindow.cpp:1309
+#: ui/mainwindow.cpp:1310
 msgid "Queue track"
 msgstr "將歌曲加入佇列中"
 
@@ -3601,8 +3601,8 @@ msgstr "真的要取消？"
 msgid "Refresh"
 msgstr "重新整理"
 
-#: internet/jamendoservice.cpp:419 internet/magnatuneservice.cpp:278
-#: internet/subsonicservice.cpp:88
+#: internet/jamendoservice.cpp:420 internet/magnatuneservice.cpp:279
+#: internet/subsonicservice.cpp:89
 msgid "Refresh catalogue"
 msgstr "刷新目錄"
 
@@ -3848,11 +3848,11 @@ msgstr "搜尋"
 msgid "Search Icecast stations"
 msgstr "搜尋 Icecast stations"
 
-#: internet/jamendoservice.cpp:425
+#: internet/jamendoservice.cpp:426
 msgid "Search Jamendo"
 msgstr "搜尋 Jamendo"
 
-#: internet/magnatuneservice.cpp:284
+#: internet/magnatuneservice.cpp:285
 msgid "Search Magnatune"
 msgstr "搜尋 Magnatune"
 
@@ -3970,7 +3970,7 @@ msgstr ""
 msgid "Service offline"
 msgstr "服務離線"
 
-#: ui/mainwindow.cpp:1338
+#: ui/mainwindow.cpp:1339
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "設定 %1 到「%2」..."
@@ -4038,7 +4038,7 @@ msgstr "顯示一個漂亮的螢幕顯示"
 msgid "Show above status bar"
 msgstr "顯示在狀態欄上方"
 
-#: ui/mainwindow.cpp:458
+#: ui/mainwindow.cpp:459
 msgid "Show all songs"
 msgstr "顯示所有歌曲"
 
@@ -4058,7 +4058,7 @@ msgstr "顯示分隔線"
 msgid "Show fullsize..."
 msgstr "全螢幕..."
 
-#: library/libraryview.cpp:399 ui/mainwindow.cpp:505
+#: library/libraryview.cpp:399 ui/mainwindow.cpp:506
 #: widgets/fileviewlist.cpp:52
 msgid "Show in file browser..."
 msgstr "在檔案瀏覽器顯示..."
@@ -4071,11 +4071,11 @@ msgstr "顯示各演出者"
 msgid "Show moodbar"
 msgstr ""
 
-#: ui/mainwindow.cpp:459
+#: ui/mainwindow.cpp:460
 msgid "Show only duplicates"
 msgstr "只顯示重複的"
 
-#: ui/mainwindow.cpp:460
+#: ui/mainwindow.cpp:461
 msgid "Show only untagged"
 msgstr "只顯示未標記的"
 
@@ -4288,7 +4288,7 @@ msgstr "停止"
 msgid "Stop after"
 msgstr ""
 
-#: ui/mainwindow.cpp:487 ../bin/src/ui_mainwindow.h:655
+#: ui/mainwindow.cpp:488 ../bin/src/ui_mainwindow.h:655
 msgid "Stop after this track"
 msgstr "在這首歌之後停止"
 
@@ -4326,7 +4326,7 @@ msgstr ""
 msgid "Subscribers"
 msgstr ""
 
-#: internet/subsonicservice.cpp:101 ../bin/src/ui_subsonicsettingspage.h:116
+#: internet/subsonicservice.cpp:102 ../bin/src/ui_subsonicsettingspage.h:116
 msgid "Subsonic"
 msgstr ""
 
@@ -4447,7 +4447,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr ""
 
-#: ui/mainwindow.cpp:2002
+#: ui/mainwindow.cpp:2003
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -4482,7 +4482,7 @@ msgid ""
 "deleted:"
 msgstr ""
 
-#: library/libraryview.cpp:609 ui/mainwindow.cpp:1825 widgets/fileview.cpp:187
+#: library/libraryview.cpp:609 ui/mainwindow.cpp:1826 widgets/fileview.cpp:188
 msgid ""
 "These files will be deleted from disk, are you sure you want to continue?"
 msgstr ""
@@ -4507,7 +4507,7 @@ msgstr "這些設定是使用在「音樂轉碼」對話框中。"
 msgid "Third level"
 msgstr "第三個層次"
 
-#: internet/jamendoservice.cpp:170
+#: internet/jamendoservice.cpp:171
 msgid ""
 "This action will create a database which could be as big as 150 MB.\n"
 "Do you want to continue anyway?"
@@ -4587,7 +4587,7 @@ msgstr ""
 msgid "Toggle fullscreen"
 msgstr "切換全螢幕模式"
 
-#: ui/mainwindow.cpp:1313
+#: ui/mainwindow.cpp:1314
 msgid "Toggle queue status"
 msgstr "切換佇列狀態"
 
@@ -4997,7 +4997,7 @@ msgid ""
 "well?"
 msgstr ""
 
-#: ui/mainwindow.cpp:2007
+#: ui/mainwindow.cpp:2008
 msgid "Would you like to run a full rescan right now?"
 msgstr ""
 
@@ -5067,7 +5067,7 @@ msgstr "您可以免費聽 Magnatune 的歌曲，而不需要一個帳戶。而�
 msgid "You can listen to background streams at the same time as other music."
 msgstr "您可以在同一時間聽「背景串流」和其他音樂。"
 
-#: internet/lastfmsettingspage.cpp:142
+#: internet/lastfmsettingspage.cpp:148
 msgid ""
 "You can scrobble tracks for free, but only <span style=\" font-"
 "weight:600;\">paid subscribers</span> can stream Last.fm radio from "
@@ -5118,13 +5118,13 @@ msgstr ""
 msgid "You will need to restart Clementine if you change the language."
 msgstr "您將需要重新啟動 Clementine ，如果您變更了本程式使用者介面所用的語言。"
 
-#: internet/lastfmsettingspage.cpp:108
+#: internet/lastfmsettingspage.cpp:114
 msgid ""
 "You will not be able to play Last.fm radio stations as you are not a Last.fm"
 " subscriber."
 msgstr ""
 
-#: internet/lastfmsettingspage.cpp:78
+#: internet/lastfmsettingspage.cpp:80
 msgid "Your Last.fm credentials were incorrect"
 msgstr ""
 
