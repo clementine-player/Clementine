@@ -37,6 +37,7 @@ void RegisterMetaTypes() {
   qRegisterMetaType<DirectoryList>("DirectoryList");
   qRegisterMetaType<Engine::SimpleMetaBundle>("Engine::SimpleMetaBundle");
   qRegisterMetaType<Engine::State>("Engine::State");
+  qRegisterMetaType<Engine::TrackChangeFlags>("Engine::TrackChangeFlags");
   qRegisterMetaType<Equalizer::Params>("Equalizer::Params");
   qRegisterMetaType<Geolocator::LatLng>("Geolocator::LatLng");
   qRegisterMetaType<GstBuffer*>("GstBuffer*");

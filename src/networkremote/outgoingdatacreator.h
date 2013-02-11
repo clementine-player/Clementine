@@ -30,6 +30,10 @@ public slots:
   void SendPlaylistSongs(int id);
   void PlaylistChanged(Playlist*);
   void VolumeChanged(int volume);
+  void PlaylistAdded(int id, const QString& name);
+  void PlaylistDeleted(int id);
+  void PlaylistClosed(int id);
+  void PlaylistRenamed(int id, const QString& new_name);
   void ActiveChanged(Playlist*);
   void CurrentSongChanged(const Song& song, const QString& uri, const QImage& img);
   void StateChanged(Engine::State);

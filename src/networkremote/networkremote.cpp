@@ -128,6 +128,14 @@ void NetworkRemote::AcceptConnection() {
             outgoing_data_creator_.get(), SLOT(ActiveChanged(Playlist*)));
     connect(app_->playlist_manager(), SIGNAL(PlaylistChanged(Playlist*)),
             outgoing_data_creator_.get(), SLOT(PlaylistChanged(Playlist*)));
+    connect(app_->playlist_manager(), SIGNAL(PlaylistAdded(int,QString)),
+            outgoing_data_creator_.get(), SLOT(PlaylistAdded(int,QString)));
+    connect(app_->playlist_manager(), SIGNAL(PlaylistRenamed(int,QString)),
+            outgoing_data_creator_.get(), SLOT(PlaylistRenamed(int,QString)));
+    connect(app_->playlist_manager(), SIGNAL(PlaylistClosed(int)),
+            outgoing_data_creator_.get(), SLOT(PlaylistClosed(int)));
+    connect(app_->playlist_manager(), SIGNAL(PlaylistDeleted(int)),
+            outgoing_data_creator_.get(), SLOT(PlaylistDeleted(int)));
 
     connect(app_->player(), SIGNAL(VolumeChanged(int)), outgoing_data_creator_.get(),
             SLOT(VolumeChanged(int)));

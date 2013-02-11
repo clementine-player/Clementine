@@ -52,6 +52,9 @@ void OutgoingDataCreator::SendDataToClients(pb::remote::Message* msg) {
     return;
   }
 
+  // Send the default version
+  msg->set_version(msg->default_instance().version());
+
   RemoteClient* client;
   foreach(client, *clients_) {
     // Check if the client is still active
@@ -123,6 +126,22 @@ void OutgoingDataCreator::SendAllPlaylists() {
 
 void OutgoingDataCreator::ActiveChanged(Playlist*) {
   // When a playlist was changed, send the new list
+  SendAllPlaylists();
+}
+
+void OutgoingDataCreator::PlaylistAdded(int id, const QString& name) {
+  SendAllPlaylists();
+}
+
+void OutgoingDataCreator::PlaylistDeleted(int id) {
+  SendAllPlaylists();
+}
+
+void OutgoingDataCreator::PlaylistClosed(int id) {
+  SendAllPlaylists();
+}
+
+void OutgoingDataCreator::PlaylistRenamed(int id, const QString& new_name) {
   SendAllPlaylists();
 }
 
