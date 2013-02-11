@@ -74,7 +74,7 @@ msgstr "Πριν %1 ημέρες"
 msgid "%1 on %2"
 msgstr "%1 στο %2"
 
-#: playlistparsers/playlistparser.cpp:74
+#: playlistparsers/playlistparser.cpp:76
 #, qt-format
 msgid "%1 playlists (%2)"
 msgstr "%1 λίστες αναπαραγωγής (%2)"
@@ -374,7 +374,7 @@ msgstr "Προσθήκη άλλης ροής..."
 msgid "Add directory..."
 msgstr "Προσθήκη καταλόγου..."
 
-#: ui/mainwindow.cpp:1547
+#: ui/mainwindow.cpp:1548
 msgid "Add file"
 msgstr "Προσθήκη αρχείου"
 
@@ -386,7 +386,7 @@ msgstr "Προσθήκη αρχείου..."
 msgid "Add files to transcode"
 msgstr "Προσθήκη αρχείων για επανακωδικοποίηση"
 
-#: ui/mainwindow.cpp:1575
+#: ui/mainwindow.cpp:1576
 msgid "Add folder"
 msgstr "Προσθήκη φακέλου"
 
@@ -474,7 +474,7 @@ msgstr "Προσθήκη στα αγαπημένα του "
 msgid "Add to Grooveshark playlists"
 msgstr "Προσθήκη στη λίστα του "
 
-#: ui/mainwindow.cpp:1372
+#: ui/mainwindow.cpp:1373
 msgid "Add to another playlist"
 msgstr "Προσθήκη σε άλλη λίστα"
 
@@ -558,7 +558,7 @@ msgstr "Καλλιτέχνης άλμπουμ"
 msgid "Album cover"
 msgstr "Εξώφυλλο άλμπουμ"
 
-#: internet/jamendoservice.cpp:414
+#: internet/jamendoservice.cpp:415
 msgid "Album info on jamendo.com..."
 msgstr "Πληρ. άλμπουμ στο jamendo.com..."
 
@@ -590,7 +590,7 @@ msgstr "Όλοι οι καλλιτέχνες"
 msgid "All files (*)"
 msgstr "Όλα τα αρχεία (*)"
 
-#: playlistparsers/playlistparser.cpp:61
+#: playlistparsers/playlistparser.cpp:63
 #, qt-format
 msgid "All playlists (%1)"
 msgstr "Όλες οι λίστες αναπαραγωγής (%1)"
@@ -727,7 +727,7 @@ msgstr "Διαμόρφωση ήχου (format)"
 
 #: internet/digitallyimportedsettingspage.cpp:82
 #: internet/magnatunesettingspage.cpp:113 internet/lastfmservice.cpp:427
-#: internet/lastfmsettingspage.cpp:78
+#: internet/lastfmsettingspage.cpp:84
 msgid "Authentication failed"
 msgstr "Η πιστοποίηση απέτυχε"
 
@@ -921,7 +921,7 @@ msgstr "Η αλλαγή αναπαραγωγής mono θα ενεργοποιη�
 msgid "Check for new episodes"
 msgstr "Έλεγχος για νέα επεισόδια"
 
-#: ui/mainwindow.cpp:587
+#: ui/mainwindow.cpp:588
 msgid "Check for updates..."
 msgstr "Έλεγχος για ενημερώσεις"
 
@@ -1029,7 +1029,7 @@ msgid ""
 "installed Clementine properly."
 msgstr "Ο Clementine δεν μπορεί να φορτώσει κάποιο projectM οπτικό εφέ. Βεβαιωθείτε πως έχετε εγκαταστήσει τον Clementine σωστά."
 
-#: internet/lastfmsettingspage.cpp:104
+#: internet/lastfmsettingspage.cpp:110
 msgid ""
 "Clementine couldn't fetch your subscription status since there are problems "
 "with your connection. Played tracks will be cached and sent later to "
@@ -1131,7 +1131,7 @@ msgstr "Παραμετροποίηση του GrooveShark..."
 msgid "Configure Last.fm..."
 msgstr "Παραμετροποίηση Last.fm..."
 
-#: internet/magnatuneservice.cpp:279
+#: internet/magnatuneservice.cpp:280
 msgid "Configure Magnatune..."
 msgstr "Ρύθμιση του Magnatune..."
 
@@ -1143,7 +1143,7 @@ msgstr "Ρύθμιση συντομεύσεων"
 msgid "Configure Spotify..."
 msgstr "Ρύθμιση του Spotify..."
 
-#: internet/subsonicservice.cpp:92
+#: internet/subsonicservice.cpp:93
 msgid "Configure Subsonic..."
 msgstr "Ρύθμιση του Subsonic..."
 
@@ -1151,7 +1151,7 @@ msgstr "Ρύθμιση του Subsonic..."
 msgid "Configure global search..."
 msgstr "Ρύθμιση καθολικής αναζήτησης..."
 
-#: ui/mainwindow.cpp:470
+#: ui/mainwindow.cpp:471
 msgid "Configure library..."
 msgstr "Παραμετροποίηση της βιβλιοθήκης"
 
@@ -1197,12 +1197,12 @@ msgstr "Μετατροπή κάθε μουσικής που η συσκευή δ
 msgid "Copy to clipboard"
 msgstr "Αντιγραφή στο πρόχειρο"
 
-#: library/libraryview.cpp:389 ui/mainwindow.cpp:503
+#: library/libraryview.cpp:389 ui/mainwindow.cpp:504
 #: widgets/fileviewlist.cpp:44
 msgid "Copy to device..."
 msgstr "Αντιγραφή στην συσκευή..."
 
-#: devices/deviceview.cpp:218 ui/mainwindow.cpp:500
+#: devices/deviceview.cpp:218 ui/mainwindow.cpp:501
 #: widgets/fileviewlist.cpp:39
 msgid "Copy to library..."
 msgstr "Αντιγραφή στην βιβλιοθήκη..."
@@ -1251,7 +1251,7 @@ msgstr "Δεν μπόρεσε να γίνει φόρτωση του ραδιοσ
 msgid "Couldn't open output file %1"
 msgstr "Δεν μπορεί να ανοίξει το αρχείο εξόδου %1"
 
-#: internet/cloudfileservice.cpp:87 ../bin/src/ui_albumcovermanager.h:149
+#: internet/cloudfileservice.cpp:88 ../bin/src/ui_albumcovermanager.h:149
 #: ../bin/src/ui_albumcoversearcher.h:105 ../bin/src/ui_mainwindow.h:684
 #: internet/googledriveservice.cpp:189
 msgid "Cover Manager"
@@ -1453,7 +1453,7 @@ msgid "Delete downloaded data"
 msgstr "Διαγραφή δεδομένων που έχουν \"κατέβει\""
 
 #: devices/deviceview.cpp:388 library/libraryview.cpp:608
-#: ui/mainwindow.cpp:1824 widgets/fileview.cpp:186
+#: ui/mainwindow.cpp:1825 widgets/fileview.cpp:187
 msgid "Delete files"
 msgstr "Διαγραφή αρχείων"
 
@@ -1461,7 +1461,7 @@ msgstr "Διαγραφή αρχείων"
 msgid "Delete from device..."
 msgstr "Διαγραφή από την συσκευή..."
 
-#: library/libraryview.cpp:391 ui/mainwindow.cpp:504
+#: library/libraryview.cpp:391 ui/mainwindow.cpp:505
 #: widgets/fileviewlist.cpp:45
 msgid "Delete from disk..."
 msgstr "Διαγραφή από τον δίσκο..."
@@ -1490,11 +1490,11 @@ msgstr "Διαγραφή των αρχικών αρχείων"
 msgid "Deleting files"
 msgstr "Γίνεται διαγραφή αρχείων"
 
-#: ui/mainwindow.cpp:1307
+#: ui/mainwindow.cpp:1308
 msgid "Dequeue selected tracks"
 msgstr "Αφαίρεση των επιλεγμένων κομματιών από την λίστα αναμονής"
 
-#: ui/mainwindow.cpp:1305
+#: ui/mainwindow.cpp:1306
 msgid "Dequeue track"
 msgstr "Αφαίρεση του κομματιού από την λίστα αναμονής"
 
@@ -1639,11 +1639,11 @@ msgstr "Αυτόματη λήψη νέων επεισοδίων"
 msgid "Download queued"
 msgstr "Η λήψη μπήκε στην αναμονή"
 
-#: internet/magnatuneservice.cpp:275
+#: internet/magnatuneservice.cpp:276
 msgid "Download this album"
 msgstr "Λήψη αυτού του άλμπουμ"
 
-#: internet/jamendoservice.cpp:416
+#: internet/jamendoservice.cpp:417
 msgid "Download this album..."
 msgstr "Μεταφόρτωση αυτού του άλμπουμ..."
 
@@ -1664,11 +1664,11 @@ msgstr "Λήψη του (%1%)..."
 msgid "Downloading Icecast directory"
 msgstr "Μεταφόρτωση καταλόγου Icecast"
 
-#: internet/jamendoservice.cpp:186
+#: internet/jamendoservice.cpp:187
 msgid "Downloading Jamendo catalogue"
 msgstr "Μεταφόρτωση καταλόγου Jamendo"
 
-#: internet/magnatuneservice.cpp:157
+#: internet/magnatuneservice.cpp:158
 msgid "Downloading Magnatune catalogue"
 msgstr "Μεταφόρτωση καταλόγου του Magnatune"
 
@@ -1704,7 +1704,7 @@ msgstr "Δυναμική τυχαία ανάμιξη"
 msgid "Edit smart playlist..."
 msgstr "Τροποποίηση έξυπνης λίστας αναπαραγωγής"
 
-#: ui/mainwindow.cpp:1340
+#: ui/mainwindow.cpp:1341
 #, qt-format
 msgid "Edit tag \"%1\"..."
 msgstr "Τροποποίηση ετικέτας \"%1\"..."
@@ -1829,7 +1829,7 @@ msgstr "Ισοδύναμο με --log-levels *:3"
 
 #: internet/groovesharkservice.cpp:1015
 #: internet/magnatunedownloaddialog.cpp:225 library/libraryview.cpp:602
-#: ui/mainwindow.cpp:1776 ui/mainwindow.cpp:1892
+#: ui/mainwindow.cpp:1777 ui/mainwindow.cpp:1893
 msgid "Error"
 msgstr "Σφάλμα"
 
@@ -1998,7 +1998,7 @@ msgstr "Αυτόματο κατέβασμα"
 msgid "Fetch completed"
 msgstr "Η ανάκτηση ολοκληρώθηκε"
 
-#: internet/subsonicservice.cpp:208
+#: internet/subsonicservice.cpp:209
 msgid "Fetching Subsonic library"
 msgstr "Μεταφόρτωση καταλόγου Subsonic"
 
@@ -2403,7 +2403,7 @@ msgstr "Αύξηση της έντασης ήχου κατά 4%"
 msgid "Increase volume"
 msgstr "Αύξηση έντασης"
 
-#: internet/cloudfileservice.cpp:135
+#: internet/cloudfileservice.cpp:136
 #, qt-format
 msgid "Indexing %1"
 msgstr "Δημιουργία ευρετηρίου %1"
@@ -2464,7 +2464,7 @@ msgstr "Εσφαλμένο κλειδί συνεδρίας"
 msgid "Invalid username and/or password"
 msgstr "Εσφαλμένο όνομα χρήστη και/ή συνθηματικό"
 
-#: internet/jamendoservice.cpp:126
+#: internet/jamendoservice.cpp:127
 msgid "Jamendo"
 msgstr "Jamendo"
 
@@ -2484,7 +2484,7 @@ msgstr "Τα κορυφαία κομμάτια Jamendo του μήνα"
 msgid "Jamendo Top Tracks of the Week"
 msgstr "Τα κορυφαία κομμάτια Jamendo της εβδομάδας"
 
-#: internet/jamendoservice.cpp:170
+#: internet/jamendoservice.cpp:171
 msgid "Jamendo database"
 msgstr "Βάση δεδομένων Jamendo"
 
@@ -2628,7 +2628,7 @@ msgstr "Βιβλιοθήκη"
 msgid "Library advanced grouping"
 msgstr "Προχωρημένη ομαδοποίηση βιβλιοθήκης"
 
-#: ui/mainwindow.cpp:2009
+#: ui/mainwindow.cpp:2010
 msgid "Library rescan notice"
 msgstr "Ειδοποίηση σάρωσης βιβλιοθήκης"
 
@@ -2791,7 +2791,7 @@ msgstr "MP4 AAC"
 msgid "MPC"
 msgstr "MPC"
 
-#: internet/magnatuneservice.cpp:102 ../bin/src/ui_magnatunesettingspage.h:154
+#: internet/magnatuneservice.cpp:103 ../bin/src/ui_magnatunesettingspage.h:154
 msgid "Magnatune"
 msgstr "Magnatune"
 
@@ -2920,7 +2920,7 @@ msgstr "Σημεία φόρτωσης (mount points)"
 msgid "Move down"
 msgstr "Μετακίνηση κάτω"
 
-#: ui/mainwindow.cpp:501 widgets/fileviewlist.cpp:41
+#: ui/mainwindow.cpp:502 widgets/fileviewlist.cpp:41
 msgid "Move to library..."
 msgstr "Μετακίνηση στην βιβλιοθήκη..."
 
@@ -2929,7 +2929,7 @@ msgstr "Μετακίνηση στην βιβλιοθήκη..."
 msgid "Move up"
 msgstr "Μετακίνηση πάνω"
 
-#: transcoder/transcodedialog.cpp:216 ui/mainwindow.cpp:1549
+#: transcoder/transcodedialog.cpp:216 ui/mainwindow.cpp:1550
 msgid "Music"
 msgstr "Μουσική"
 
@@ -3029,7 +3029,7 @@ msgstr "Ποτέ μην ξεκινά η αναπαραγωγή"
 msgid "New folder"
 msgstr "Νέος φάκελος"
 
-#: ui/mainwindow.cpp:1389 ../bin/src/ui_mainwindow.h:698
+#: ui/mainwindow.cpp:1390 ../bin/src/ui_mainwindow.h:698
 msgid "New playlist"
 msgstr "Νέα λίστα"
 
@@ -3088,7 +3088,7 @@ msgstr "Όχι βραχαία μπλοκς"
 msgid "None"
 msgstr "Κανένα"
 
-#: library/libraryview.cpp:603 ui/mainwindow.cpp:1777 ui/mainwindow.cpp:1893
+#: library/libraryview.cpp:603 ui/mainwindow.cpp:1778 ui/mainwindow.cpp:1894
 msgid "None of the selected songs were suitable for copying to a device"
 msgstr "Κανένα από τα επιλεγμένα τραγούδια δεν ήταν κατάλληλο για αντιγραφή σε μία συσκευή"
 
@@ -3184,7 +3184,7 @@ msgstr "Εμφάνιση μόνο του πρώτου"
 
 #: internet/digitallyimportedservicebase.cpp:179
 #: internet/groovesharkservice.cpp:544 internet/icecastservice.cpp:296
-#: internet/jamendoservice.cpp:418 internet/magnatuneservice.cpp:277
+#: internet/jamendoservice.cpp:419 internet/magnatuneservice.cpp:278
 #: internet/somafmservice.cpp:91 internet/soundcloudservice.cpp:194
 #, qt-format
 msgid "Open %1 in browser"
@@ -3249,7 +3249,7 @@ msgstr ""
 msgid "Organise Files"
 msgstr "Οργάνωση Αρχείων"
 
-#: library/libraryview.cpp:387 ui/mainwindow.cpp:502
+#: library/libraryview.cpp:387 ui/mainwindow.cpp:503
 msgid "Organise files..."
 msgstr "Οργάνωση αρχείων..."
 
@@ -3285,7 +3285,7 @@ msgstr "Εγγραφή και αντικατάσταση υπαρχόντων α
 msgid "Owner"
 msgstr "Ιδιοκτήτης"
 
-#: internet/jamendoservice.cpp:213
+#: internet/jamendoservice.cpp:214
 msgid "Parsing Jamendo catalogue"
 msgstr "Ανάλυση του καταλόγου Jamendo"
 
@@ -3306,7 +3306,7 @@ msgstr "Συνθηματικό"
 msgid "Password Protected"
 msgstr "Προστασία Κωδικού"
 
-#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:844 ui/mainwindow.cpp:1230
+#: core/globalshortcuts.cpp:46 ui/mainwindow.cpp:845 ui/mainwindow.cpp:1231
 #: ui/qtsystemtrayicon.cpp:178 wiimotedev/wiimotesettingspage.cpp:106
 msgid "Pause"
 msgstr "Παύση"
@@ -3323,8 +3323,8 @@ msgstr "Σταματημένο"
 msgid "Plain sidebar"
 msgstr "Απλή πλευρική μπάρα"
 
-#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:485 ui/mainwindow.cpp:812
-#: ui/mainwindow.cpp:831 ui/mainwindow.cpp:1233 ui/qtsystemtrayicon.cpp:166
+#: core/globalshortcuts.cpp:45 ui/mainwindow.cpp:486 ui/mainwindow.cpp:813
+#: ui/mainwindow.cpp:832 ui/mainwindow.cpp:1234 ui/qtsystemtrayicon.cpp:166
 #: ui/qtsystemtrayicon.cpp:192 ../bin/src/ui_mainwindow.h:647
 #: wiimotedev/wiimotesettingspage.cpp:101
 msgid "Play"
@@ -3542,12 +3542,12 @@ msgstr "Ερώτηση συσκευής..."
 msgid "Queue Manager"
 msgstr "Διαχειριστής λίστας αναμονής"
 
-#: ui/mainwindow.cpp:1311
+#: ui/mainwindow.cpp:1312
 msgid "Queue selected tracks"
 msgstr "Τοποθέτηση στη λίστας αναμονής τα επιλεγμένα κομμάτια"
 
 #: globalsearch/globalsearchview.cpp:441 library/libraryview.cpp:375
-#: ui/mainwindow.cpp:1309
+#: ui/mainwindow.cpp:1310
 msgid "Queue track"
 msgstr "Τοποθέτηση στη λίστας αναμονής του κομματιού"
 
@@ -3603,8 +3603,8 @@ msgstr "Ακύρωση στ' αλήθεια;"
 msgid "Refresh"
 msgstr "Ανανέωση"
 
-#: internet/jamendoservice.cpp:419 internet/magnatuneservice.cpp:278
-#: internet/subsonicservice.cpp:88
+#: internet/jamendoservice.cpp:420 internet/magnatuneservice.cpp:279
+#: internet/subsonicservice.cpp:89
 msgid "Refresh catalogue"
 msgstr "Ανανέωση καταλόγου"
 
@@ -3850,11 +3850,11 @@ msgstr "Αναζήτηση"
 msgid "Search Icecast stations"
 msgstr "Αναζήτηση σταθμών Icecast"
 
-#: internet/jamendoservice.cpp:425
+#: internet/jamendoservice.cpp:426
 msgid "Search Jamendo"
 msgstr "Αναζήτηση Jamendo"
 
-#: internet/magnatuneservice.cpp:284
+#: internet/magnatuneservice.cpp:285
 msgid "Search Magnatune"
 msgstr "Εύρεση στο Magnatune"
 
@@ -3972,7 +3972,7 @@ msgstr "Λεπτομέρειες διακομιστή"
 msgid "Service offline"
 msgstr "Υπηρεσία εκτός σύνδεσης"
 
-#: ui/mainwindow.cpp:1338
+#: ui/mainwindow.cpp:1339
 #, qt-format
 msgid "Set %1 to \"%2\"..."
 msgstr "Δώσε %1 στο \"%2\"..."
@@ -4040,7 +4040,7 @@ msgstr "Εμφάνισε ένα όμορφο OSD"
 msgid "Show above status bar"
 msgstr "Εμφάνιση πάνω από την μπάρα κατάστασης"
 
-#: ui/mainwindow.cpp:458
+#: ui/mainwindow.cpp:459
 msgid "Show all songs"
 msgstr "Εμφάνιση όλων των τραγουδιών"
 
@@ -4060,7 +4060,7 @@ msgstr "Εμφάνιση διαχωριστών"
 msgid "Show fullsize..."
 msgstr "Εμφάνισε σε πλήρες μέγεθος..."
 
-#: library/libraryview.cpp:399 ui/mainwindow.cpp:505
+#: library/libraryview.cpp:399 ui/mainwindow.cpp:506
 #: widgets/fileviewlist.cpp:52
 msgid "Show in file browser..."
 msgstr "Εμφάνιση στον περιηγητή αρχείων..."
@@ -4073,11 +4073,11 @@ msgstr "Εμφάνιση στους διάφορους καλλιτέχνες"
 msgid "Show moodbar"
 msgstr "Εμφάνιση moodbar"
 
-#: ui/mainwindow.cpp:459
+#: ui/mainwindow.cpp:460
 msgid "Show only duplicates"
 msgstr "Εμφάνιση μόνο διπλότυπων"
 
-#: ui/mainwindow.cpp:460
+#: ui/mainwindow.cpp:461
 msgid "Show only untagged"
 msgstr "Εμφάνιση μόνο μη επισημασμένων"
 
@@ -4290,7 +4290,7 @@ msgstr "Σταμάτημα"
 msgid "Stop after"
 msgstr "Στοπ μετά"
 
-#: ui/mainwindow.cpp:487 ../bin/src/ui_mainwindow.h:655
+#: ui/mainwindow.cpp:488 ../bin/src/ui_mainwindow.h:655
 msgid "Stop after this track"
 msgstr "Σταμάτημα μετά από αυτό το κομμάτι"
 
@@ -4328,7 +4328,7 @@ msgstr "Λίστες συνδρομής"
 msgid "Subscribers"
 msgstr "Συνδομητές"
 
-#: internet/subsonicservice.cpp:101 ../bin/src/ui_subsonicsettingspage.h:116
+#: internet/subsonicservice.cpp:102 ../bin/src/ui_subsonicsettingspage.h:116
 msgid "Subsonic"
 msgstr "Subsonic"
 
@@ -4449,7 +4449,7 @@ msgid ""
 "license key. Visit subsonic.org for details."
 msgstr "Η δοκιμαστική περίοδος του Subsonic τελείωσε. Παρακαλώ κάντε μια δωρεά για να λάβετε ένα κλειδί άδειας. Δείτε στο subsonic.org για λεπτομέρειες."
 
-#: ui/mainwindow.cpp:2002
+#: ui/mainwindow.cpp:2003
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
@@ -4484,7 +4484,7 @@ msgid ""
 "deleted:"
 msgstr "Υπήρξαν προβλήματα κατά την διαγραφή κάποιων τραγουδιών. Τα ακόλουθα αρχεία δεν μπόρεσαν να διαγραφούν:"
 
-#: library/libraryview.cpp:609 ui/mainwindow.cpp:1825 widgets/fileview.cpp:187
+#: library/libraryview.cpp:609 ui/mainwindow.cpp:1826 widgets/fileview.cpp:188
 msgid ""
 "These files will be deleted from disk, are you sure you want to continue?"
 msgstr "Αυτά τα αρχεία θα διαγραφούν από τον δίσκο, θέλετε σίγουρα να συνεχίσετε;"
@@ -4509,7 +4509,7 @@ msgstr "Αυτές οι ρυθμίσεις χρησιμοποιούνται στ
 msgid "Third level"
 msgstr "Τρίτο επίπεδο"
 
-#: internet/jamendoservice.cpp:170
+#: internet/jamendoservice.cpp:171
 msgid ""
 "This action will create a database which could be as big as 150 MB.\n"
 "Do you want to continue anyway?"
@@ -4589,7 +4589,7 @@ msgstr "Εναλλαγή Όμορφου OSD"
 msgid "Toggle fullscreen"
 msgstr "Εναλλαγή πλήρης οθόνης"
 
-#: ui/mainwindow.cpp:1313
+#: ui/mainwindow.cpp:1314
 msgid "Toggle queue status"
 msgstr "Εναλλαγή της κατάστασης της λίστας αναμονής"
 
@@ -4999,7 +4999,7 @@ msgid ""
 "well?"
 msgstr "Θα θέλατε να μετακινήσετε και τα άλλα τραγούδια σε αυτό το άλμπουμ στο Διάφοροι Καλλιτέχνες;"
 
-#: ui/mainwindow.cpp:2007
+#: ui/mainwindow.cpp:2008
 msgid "Would you like to run a full rescan right now?"
 msgstr "Θέλετε να εκτελέσετε μία πλήρη επανασάρωση αμέσως τώρα;"
 
@@ -5069,7 +5069,7 @@ msgstr "Μπορείτε να ακούσετε τραγούδια δωρεάν �
 msgid "You can listen to background streams at the same time as other music."
 msgstr "Μπορείτε να ακούτε τις ροές παρασκηνίου ταυτόχρονα με άλλη μουσική."
 
-#: internet/lastfmsettingspage.cpp:142
+#: internet/lastfmsettingspage.cpp:148
 msgid ""
 "You can scrobble tracks for free, but only <span style=\" font-"
 "weight:600;\">paid subscribers</span> can stream Last.fm radio from "
@@ -5120,13 +5120,13 @@ msgstr "Πρέπει να πάτε στις ρυθμίσεις συστήματ�
 msgid "You will need to restart Clementine if you change the language."
 msgstr "Πρέπει να ξεκινήσετε πάλι τον Clementine αν αλλάξετε την γλώσσα."
 
-#: internet/lastfmsettingspage.cpp:108
+#: internet/lastfmsettingspage.cpp:114
 msgid ""
 "You will not be able to play Last.fm radio stations as you are not a Last.fm"
 " subscriber."
 msgstr "Δεν θα μπορείτε να αναπαράγεται σταθμούς Last.fm καθώς δεν είστε συνδρομητής του Last.fm."
 
-#: internet/lastfmsettingspage.cpp:78
+#: internet/lastfmsettingspage.cpp:80
 msgid "Your Last.fm credentials were incorrect"
 msgstr "Τα στοιχεία σας στο Last.fm ήταν εσφαλμένα"
 
