@@ -171,9 +171,7 @@ void TagReaderWorker::ReadFile(const QString& filename,
   }
 
   TagLib::Tag* tag = fileref->tag();
-  QTextCodec* codec = NULL;
   if (tag) {
-    TagLib::MPEG::File* file = dynamic_cast<TagLib::MPEG::File*>(fileref->file());
     Decode(tag->title(), NULL, song->mutable_title());
     Decode(tag->artist(), NULL, song->mutable_artist());
     Decode(tag->album(), NULL, song->mutable_album());
