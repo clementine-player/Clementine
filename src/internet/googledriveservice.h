@@ -3,8 +3,6 @@
 
 #include "cloudfileservice.h"
 
-#include "core/tagreaderclient.h"
-
 namespace google_drive {
   class Client;
   class ConnectResponse;

@@ -74,6 +74,10 @@
 #  include "internet/dropboxsettingspage.h"
 #endif
 
+#ifdef HAVE_BOX
+#  include "internet/boxsettingspage.h"
+#endif
+
 #include <QDesktopWidget>
 #include <QPainter>
 #include <QPushButton>
@@ -165,6 +169,10 @@ SettingsDialog::SettingsDialog(Application* app, BackgroundStreams* streams, QWi
 
 #ifdef HAVE_DROPBOX
   AddPage(Page_Dropbox, new DropboxSettingsPage(this), providers);
+#endif
+
+#ifdef HAVE_BOX
+  AddPage(Page_Box, new BoxSettingsPage(this), providers);
 #endif
 
 #ifdef HAVE_SPOTIFY

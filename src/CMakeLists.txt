@@ -1146,6 +1146,20 @@ optional_source(HAVE_SKYDRIVE
     internet/skydriveurlhandler.h
 )
 
+# Box support
+optional_source(HAVE_BOX
+  SOURCES
+    internet/boxservice.cpp
+    internet/boxsettingspage.cpp
+    internet/boxurlhandler.cpp
+  HEADERS
+    internet/boxservice.h
+    internet/boxsettingspage.h
+    internet/boxurlhandler.h
+  UI
+    internet/boxsettingspage.ui
+)
+
 # Hack to add Clementine to the Unity system tray whitelist
 optional_source(LINUX
   SOURCES core/ubuntuunityhack.cpp

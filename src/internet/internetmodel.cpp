@@ -56,6 +56,9 @@
 #ifdef HAVE_SKYDRIVE
   #include "skydriveservice.h"
 #endif
+#ifdef HAVE_BOX
+  #include "boxservice.h"
+#endif
 
 using smart_playlists::Generator;
 using smart_playlists::GeneratorMimeData;
@@ -105,6 +108,9 @@ InternetModel::InternetModel(Application* app, QObject* parent)
 #endif
 #ifdef HAVE_SKYDRIVE
   AddService(new SkydriveService(app, this));
+#endif
+#ifdef HAVE_BOX
+  AddService(new BoxService(app, this));
 #endif
 }
 
