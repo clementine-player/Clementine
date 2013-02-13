@@ -176,8 +176,7 @@ void BoxService::InitialiseEventsFinished(QNetworkReply* reply) {
   }
 }
 
-void BoxService::FetchRecursiveFolderItems(const int folder_id) {
-  // TODO: Page through large folders.
+void BoxService::FetchRecursiveFolderItems(const int folder_id, const int offset) {
   QUrl url(QString(kFolderItems).arg(folder_id));
   QStringList fields;
   fields << "etag"
@@ -187,14 +186,18 @@ void BoxService::FetchRecursiveFolderItems(const int folder_id) {
          << "name";
   QString fields_list = fields.join(",");
   url.addQueryItem("fields", fields_list);
+  url.addQueryItem("limit", "1000");  // Maximum according to API docs.
+  url.addQueryItem("offset", QString::number(offset));
   QNetworkRequest request(url);
   AddAuthorizationHeader(&request);
   QNetworkReply* reply = network_->get(request);
   NewClosure(reply, SIGNAL(finished()),
-             this, SLOT(FetchFolderItemsFinished(QNetworkReply*)), reply);
+             this, SLOT(FetchFolderItemsFinished(QNetworkReply*, int)),
+             reply, folder_id);
 }
 
-void BoxService::FetchFolderItemsFinished(QNetworkReply* reply) {
+void BoxService::FetchFolderItemsFinished(
+    QNetworkReply* reply, const int folder_id) {
   reply->deleteLater();
 
   QByteArray data = reply->readAll();
@@ -203,6 +206,13 @@ void BoxService::FetchFolderItemsFinished(QNetworkReply* reply) {
   QVariantMap response = parser.parse(data).toMap();
 
   QVariantList entries = response["entries"].toList();
+  const int total_entries = response["total_count"].toInt();
+  const int offset = response["offset"].toInt();
+  if (entries.size() + offset < total_entries) {
+    // Fetch the next page if necessary.
+    FetchRecursiveFolderItems(folder_id, offset + entries.size());
+  }
+
   foreach (const QVariant& e, entries) {
     QVariantMap entry = e.toMap();
     if (entry["type"].toString() == "folder") {

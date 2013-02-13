@@ -30,7 +30,7 @@ class BoxService : public CloudFileService {
  private slots:
   void ConnectFinished(OAuthenticator* oauth);
   void FetchUserInfoFinished(QNetworkReply* reply);
-  void FetchFolderItemsFinished(QNetworkReply* reply);
+  void FetchFolderItemsFinished(QNetworkReply* reply, const int folder_id);
   void RedirectFollowed(
       QNetworkReply* reply, const Song& song, const QString& mime_type);
   void InitialiseEventsFinished(QNetworkReply* reply);
@@ -41,7 +41,7 @@ class BoxService : public CloudFileService {
   bool is_authenticated() const;
   void AddAuthorizationHeader(QNetworkRequest* request) const;
   void UpdateFiles();
-  void FetchRecursiveFolderItems(const int folder_id);
+  void FetchRecursiveFolderItems(const int folder_id, const int offset = 0);
   void UpdateFilesFromCursor(const QString& cursor);
   QNetworkReply* FetchContentUrlForFile(const QString& file_id);
   void InitialiseEventsCursor();
