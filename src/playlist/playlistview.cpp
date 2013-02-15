@@ -51,10 +51,6 @@ const int PlaylistView::kGlowIntensitySteps = 24;
 const int PlaylistView::kAutoscrollGraceTimeout = 60; // seconds
 const int PlaylistView::kDropIndicatorWidth = 2;
 const int PlaylistView::kDropIndicatorGradientWidth = 5;
-// Opacity value used by all background images but the default clementine one
-// (because it is already opaque and load through the mainwindow.css file)
-const qreal PlaylistView::kBackgroundOpacity = 0.4;
-
 const char* PlaylistView::kSettingBackgroundImageType = "playlistview_background_type";
 const char* PlaylistView::kSettingBackgroundImageFilename = "playlistview_background_image_file";
 
@@ -208,7 +204,7 @@ void PlaylistView::SetItemDelegates(LibraryBackend* backend) {
 #ifdef HAVE_MOODBAR
   setItemDelegateForColumn(Playlist::Column_Mood, new MoodbarItemDelegate(app_, this, this));
 #endif
-  
+
   if (app_ && app_->player()) {
     setItemDelegateForColumn(Playlist::Column_Source, new SongSourceDelegate(this, app_->player()));
   } else {
@@ -303,7 +299,7 @@ void PlaylistView::LoadGeometry() {
   // Clementine.  Hide them again here
   const int state_version = settings.value("state_version", 0).toInt();
   upgrading_from_version_ = state_version;
-  
+
   if (state_version < 1) {
     header_->HideSection(Playlist::Column_Rating);
     header_->HideSection(Playlist::Column_PlayCount);
@@ -885,7 +881,7 @@ void PlaylistView::paintEvent(QPaintEvent* event) {
     drawTree(&p, event->region());
     return;
   }
-  
+
   const int first_column = header_->logicalIndex(0);
 
   // Find the y position of the drop indicator
@@ -1020,18 +1016,21 @@ void PlaylistView::ReloadSettings() {
   }
   QString background_image_filename = s.value(kSettingBackgroundImageFilename).toString();
   int blur_radius = s.value("blur_radius").toInt();
+  int opacity_level = s.value("opacity_level").toInt();
   // Check if background properties have changed.
   // We change properties only if they have actually changed, to avoid to call
   // set_background_image when it is not needed, as this will cause the fading
   // animation to start again. This also avoid to do useless
   // "force_background_redraw".
   if (background_image_filename != background_image_filename_ ||
-      background_type != background_image_type_ || 
-      blur_radius_ != blur_radius) {
+      background_type != background_image_type_ ||
+      blur_radius_ != blur_radius ||
+      opacity_level_ != opacity_level) {
     // Store background properties
     background_image_type_ = background_type;
     background_image_filename_ = background_image_filename;
     blur_radius_ = blur_radius;
+    opacity_level_ = opacity_level;
     if (background_image_type_ == Custom) {
       set_background_image(QImage(background_image_filename));
     } else if (background_image_type_ == AlbumCover) {
@@ -1198,7 +1197,7 @@ void PlaylistView::set_background_image(const QImage& image) {
   // Apply opacity filter
   uchar* bits = background_image_.bits();
   for (int i = 0; i < background_image_.height() * background_image_.bytesPerLine(); i+=4) {
-    bits[i+3] = kBackgroundOpacity * 255;
+    bits[i+3] = (opacity_level_ / 100.0) * 255;
   }
 
   if (blur_radius_ != 0) {

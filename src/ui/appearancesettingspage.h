@@ -43,6 +43,7 @@ private slots:
   void UseCustomColorSetOptionChanged(bool);
   void SelectBackgroundImage();
   void BlurLevelChanged(int);
+  void OpacityLevelChanged(int);
   void DisableBlurSlider(bool);
 
 private:
@@ -65,6 +66,7 @@ private:
   PlaylistView::BackgroundImageType playlist_view_background_image_type_;
   QString playlist_view_background_image_filename_;
   int background_blur_radius_;
+  int background_opacity_level_;
 
   bool initialised_moodbar_previews_;
 };

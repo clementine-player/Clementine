@@ -173,8 +173,7 @@ class PlaylistView : public QTreeView {
   static const int kAutoscrollGraceTimeout;
   static const int kDropIndicatorWidth;
   static const int kDropIndicatorGradientWidth;
-  static const qreal kBackgroundOpacity;
-  
+
   QList<int> GetEditableColumns();
   QModelIndex NextEditableIndex(const QModelIndex& current);
   QModelIndex PrevEditableIndex(const QModelIndex& current);
@@ -196,16 +195,17 @@ class PlaylistView : public QTreeView {
   // set_background_image_type instead of modifying background_image_ directly
   QImage background_image_;
   int blur_radius_;
+  int opacity_level_;
   // Used if background image is a filemane
   QString background_image_filename_;
   QImage current_song_cover_art_;
   QPixmap cached_scaled_background_image_;
-  
+
   // For fading when image change
   QPixmap previous_background_image_;
   qreal previous_background_image_opacity_;
   QTimeLine* fade_animation_;
-  
+
   // To know if we should redraw the background or not
   int last_height_;
   int last_width_;

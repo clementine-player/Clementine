@@ -201,6 +201,37 @@
         </item>
        </layout>
       </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_9">
+        <item>
+         <widget class="QLabel" name="select_opacity_level_label">
+          <property name="text">
+           <string>Opacity level:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="background_opacity_label">
+          <property name="text">
+           <string>40%</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QSlider" name="opacity_slider">
+          <property name="maximum">
+           <number>100</number>
+          </property>
+          <property name="value">
+           <number>40</number>
+          </property>
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
      </layout>
     </widget>
    </item>
