@@ -115,7 +115,7 @@ void OutgoingDataCreator::SendAllPlaylists() {
 
     // Create a new playlist
     pb::remote::Playlist* playlist = playlists->add_playlist();
-    playlist->set_name(playlist_name.toStdString());
+    playlist->set_name(DataCommaSizeFromQString(playlist_name));
     playlist->set_id(p->id());
     playlist->set_active((p->id() == active_playlist));
     playlist->set_item_count(p->rowCount());
