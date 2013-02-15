@@ -42,22 +42,24 @@ const char* CommandlineOptions::kHelpText =
     "  -v, --volume <value>      %11\n"
     "  --volume-up               %12\n"
     "  --volume-down             %13\n"
-    "  --seek-to <seconds>       %14\n"
-    "  --seek-by <seconds>       %15\n"
+    "  --volume-increase-by      %14\n"
+    "  --volume-decrease-by      %15\n"
+    "  --seek-to <seconds>       %16\n"
+    "  --seek-by <seconds>       %17\n"
     "\n"
-    "%16:\n"
-    "  -a, --append              %17\n"
-    "  -l, --load                %18\n"
-    "  -k, --play-track <n>      %19\n"
+    "%18:\n"
+    "  -a, --append              %20\n"
+    "  -l, --load                %21\n"
+    "  -k, --play-track <n>      %22\n"
     "\n"
-    "%20:\n"
-    "  -o, --show-osd            %21\n"
-    "  -y, --toggle-pretty-osd   %22\n"
-    "  -g, --language <lang>     %24\n"
-    "      --quiet               %25\n"
-    "      --verbose             %26\n"
-    "      --log-levels <levels> %27\n"
-    "      --version             %28\n";
+    "%23:\n"
+    "  -o, --show-osd            %24\n"
+    "  -y, --toggle-pretty-osd   %25\n"
+    "  -g, --language <lang>     %26\n"
+    "      --quiet               %27\n"
+    "      --verbose             %28\n"
+    "      --log-levels <levels> %29\n"
+    "      --version             %30\n";
 
 const char* CommandlineOptions::kVersionText =
     "Clementine %1";
@@ -112,6 +114,8 @@ bool CommandlineOptions::Parse() {
     {"volume-up",   no_argument,       0, VolumeUp},
 
     {"volume-down", no_argument,       0, VolumeDown},
+    {"volume-increase-by", required_argument, 0, VolumeIncreaseBy},
+    {"volume-decrease-by", required_argument, 0, VolumeDecreaseBy},
     {"seek-to",     required_argument, 0, SeekTo},
     {"seek-by",     required_argument, 0, SeekBy},
 
@@ -151,12 +155,14 @@ bool CommandlineOptions::Parse() {
             tr("Set the volume to <value> percent"),
             tr("Increase the volume by 4%"),
             tr("Decrease the volume by 4%"),
+            tr("Increase the volume by <value> percent"),
+            tr("Decrease the volume by <value> percent")).arg(
             tr("Seek the currently playing track to an absolute position"),
             tr("Seek the currently playing track by a relative amount"),
             tr("Playlist options"),
             tr("Append files/URLs to the playlist"),
-            tr("Loads files/URLs, replacing current playlist")).arg(
-            tr("Play the <n>th track in the playlist"),
+            tr("Loads files/URLs, replacing current playlist"),
+            tr("Play the <n>th track in the playlist")).arg(
             tr("Other options"),
             tr("Display the on-screen-display"),
             tr("Toggle visibility for the pretty on-screen-display"),
@@ -194,6 +200,16 @@ bool CommandlineOptions::Parse() {
       case 'v':
         set_volume_ = QString(optarg).toInt(&ok);
         if (!ok) set_volume_ = -1;
+        break;
+
+      case VolumeIncreaseBy:
+        volume_modifier_ = QString(optarg).toInt(&ok);
+        if (!ok) volume_modifier_ = 0;
+        break;
+
+      case VolumeDecreaseBy:
+        volume_modifier_ = -QString(optarg).toInt(&ok);
+        if (!ok) volume_modifier_ = 0;
         break;
 
       case SeekTo:

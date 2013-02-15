@@ -80,6 +80,8 @@ class CommandlineOptions {
     Verbose,
     LogLevels,
     Version,
+    VolumeIncreaseBy,
+    VolumeDecreaseBy
   };
 
   QString tr(const char* source_text);
