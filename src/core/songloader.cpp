@@ -222,21 +222,15 @@ void SongLoader::AudioCDTagsLoaded(const QString& artist, const QString& album,
   emit LoadFinished(true);
 }
 
-SongLoader::Result SongLoader::LoadLocal(const QString& filename, bool block,
-                                         bool ignore_playlists) {
+SongLoader::Result SongLoader::LoadLocal(const QString& filename) {
   qLog(Debug) << "Loading local file" << filename;
 
   // First check to see if it's a directory - if so we can load all the songs
   // inside right away.
   if (QFileInfo(filename).isDir()) {
-    if (!block) {
-      ConcurrentRun::Run<void>(&thread_pool_,
-          boost::bind(&SongLoader::LoadLocalDirectoryAndEmit, this, filename));
-      return WillLoadAsync;
-    } else {
-      LoadLocalDirectory(filename);
-      return Success;
-    }
+    ConcurrentRun::Run<void>(&thread_pool_,
+        boost::bind(&SongLoader::LoadLocalDirectoryAndEmit, this, filename));
+    return WillLoadAsync;
   }
 
   // It's a local file, so check if it looks like a playlist.
@@ -254,22 +248,12 @@ SongLoader::Result SongLoader::LoadLocal(const QString& filename, bool block,
   }
 
   if (parser) {
-    if (ignore_playlists) {
-      qLog(Debug) << "Skipping" << parser->name() << "playlist while loading directory";
-      return Success;
-    }
-
     qLog(Debug) << "Parsing using" << parser->name();
 
     // It's a playlist!
-    if (!block) {
-      ConcurrentRun::Run<void>(&thread_pool_,
-          boost::bind(&SongLoader::LoadPlaylistAndEmit, this, parser, filename));
-      return WillLoadAsync;
-    } else {
-      LoadPlaylist(parser, filename);
-      return Success;
-    }
+    ConcurrentRun::Run<void>(&thread_pool_,
+        boost::bind(&SongLoader::LoadPlaylistAndEmit, this, parser, filename));
+    return WillLoadAsync;
   }
 
   // Not a playlist, so just assume it's a song
