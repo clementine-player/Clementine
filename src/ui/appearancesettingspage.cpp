@@ -303,14 +303,9 @@ void AppearanceSettingsPage::DisableBlurAndOpacitySliders(bool checked) {
   ui_->blur_slider->setDisabled(checked);
   ui_->background_blur_radius_label->setDisabled(checked);
   ui_->select_background_blur_label->setDisabled(checked);
-  if (checked) {
-    ui_->blur_slider->setValue(PlaylistView::kDefaultBlurRadius);
-  }
 
   // Opacity slider
   ui_->opacity_slider->setDisabled(checked);
   ui_->background_opacity_label->setDisabled(checked);
-  if (checked) {
-    ui_->opacity_slider->setValue(PlaylistView::kDefaultOpacityLevel);
-  }
+  ui_->select_opacity_level_label->setDisabled(checked);
 }
