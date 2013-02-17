@@ -155,13 +155,22 @@ void SubsonicService::ReloadSettings() {
   Login();
 }
 
+bool SubsonicService::IsConfigured() const {
+  return !server_.isEmpty() &&
+         !username_.isEmpty() &&
+         !password_.isEmpty();
+}
+
 void SubsonicService::Login() {
   // Forget session ID
   network_->setCookieJar(new QNetworkCookieJar(network_));
   // Forget login state whilst waiting
   login_state_ = LoginState_Unknown;
-  // Ping is enough to check credentials
-  Ping();
+
+  if (IsConfigured()) {
+    // Ping is enough to check credentials
+    Ping();
+  }
 }
 
 void SubsonicService::Login(

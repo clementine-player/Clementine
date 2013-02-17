@@ -58,6 +58,8 @@ class SubsonicService : public InternetService
 
   typedef QMap<QString, QString> RequestOptions;
 
+  bool IsConfigured() const;
+
   QStandardItem* CreateRootItem();
   void LazyPopulate(QStandardItem *item);
   void ShowContextMenu(const QPoint &global_pos);
