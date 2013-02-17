@@ -44,7 +44,7 @@ private slots:
   void SelectBackgroundImage();
   void BlurLevelChanged(int);
   void OpacityLevelChanged(int);
-  void DisableBlurSlider(bool);
+  void DisableBlurAndOpacitySliders(bool);
 
 private:
   static const int kMoodbarPreviewWidth;

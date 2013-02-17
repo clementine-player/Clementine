@@ -72,9 +72,9 @@ AppearanceSettingsPage::AppearanceSettingsPage(SettingsDialog* dialog)
       ui_->blur_slider, SLOT(setEnabled(bool)));
 
   connect(ui_->use_default_background, SIGNAL(toggled(bool)),
-      SLOT(DisableBlurSlider(bool)));
+      SLOT(DisableBlurAndOpacitySliders(bool)));
   connect(ui_->use_no_background, SIGNAL(toggled(bool)),
-      SLOT(DisableBlurSlider(bool)));
+      SLOT(DisableBlurAndOpacitySliders(bool)));
 }
 
 AppearanceSettingsPage::~AppearanceSettingsPage() {
@@ -115,7 +115,7 @@ void AppearanceSettingsPage::Load() {
   switch (playlist_view_background_image_type_) {
     case PlaylistView::None:
       ui_->use_no_background->setChecked(true);
-      DisableBlurSlider(true);
+      DisableBlurAndOpacitySliders(true);
       break;
     case PlaylistView::AlbumCover:
       ui_->use_album_cover_background->setChecked(true);
@@ -126,7 +126,7 @@ void AppearanceSettingsPage::Load() {
     case PlaylistView::Default:
     default:
       ui_->use_default_background->setChecked(true);
-      DisableBlurSlider(true);
+      DisableBlurAndOpacitySliders(true);
   }
   ui_->background_image_filename->setText(playlist_view_background_image_filename_);
   ui_->blur_slider->setValue(
@@ -298,11 +298,19 @@ void AppearanceSettingsPage::InitMoodbarPreviews() {
 #endif
 }
 
-void AppearanceSettingsPage::DisableBlurSlider(bool checked) {
+void AppearanceSettingsPage::DisableBlurAndOpacitySliders(bool checked) {
+  // Blur slider
   ui_->blur_slider->setDisabled(checked);
   ui_->background_blur_radius_label->setDisabled(checked);
   ui_->select_background_blur_label->setDisabled(checked);
   if (checked) {
-    ui_->blur_slider->setValue(0);
+    ui_->blur_slider->setValue(PlaylistView::kDefaultBlurRadius);
+  }
+
+  // Opacity slider
+  ui_->opacity_slider->setDisabled(checked);
+  ui_->background_opacity_label->setDisabled(checked);
+  if (checked) {
+    ui_->opacity_slider->setValue(PlaylistView::kDefaultOpacityLevel);
   }
 }
