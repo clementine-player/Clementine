@@ -73,7 +73,6 @@ class PlaylistView : public QTreeView {
   // Constants for settings: are persistent, values should not be changed
   static const char* kSettingBackgroundImageType;
   static const char* kSettingBackgroundImageFilename;
-  static const int kSettingBackgroundBlurLevel;
 
   static ColumnAlignmentMap DefaultColumnAlignment();
 

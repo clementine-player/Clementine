@@ -51,13 +51,14 @@ AppearanceSettingsPage::AppearanceSettingsPage(SettingsDialog* dialog)
   ui_->setupUi(this);
   setWindowIcon(IconLoader::Load("view-media-visualization"));
 
+  connect(ui_->blur_slider, SIGNAL(valueChanged(int)), SLOT(BlurLevelChanged(int)));
+  connect(ui_->opacity_slider, SIGNAL(valueChanged(int)), SLOT(OpacityLevelChanged(int)));
+
   Load();
 
   connect(ui_->select_foreground_color, SIGNAL(pressed()), SLOT(SelectForegroundColor()));
   connect(ui_->select_background_color, SIGNAL(pressed()), SLOT(SelectBackgroundColor()));
   connect(ui_->use_a_custom_color_set, SIGNAL(toggled(bool)), SLOT(UseCustomColorSetOptionChanged(bool)));
-  connect(ui_->blur_slider, SIGNAL(valueChanged(int)), SLOT(BlurLevelChanged(int)));
-  connect(ui_->opacity_slider, SIGNAL(valueChanged(int)), SLOT(OpacityLevelChanged(int)));
 
   connect(ui_->select_background_image_filename_button, SIGNAL(pressed()), SLOT(SelectBackgroundImage()));
   connect(ui_->use_custom_background_image, SIGNAL(toggled(bool)),
@@ -128,10 +129,8 @@ void AppearanceSettingsPage::Load() {
       DisableBlurSlider(true);
   }
   ui_->background_image_filename->setText(playlist_view_background_image_filename_);
-  /* There has to be a way to just simulate the change... */
+  ui_->blur_slider->setValue(s.value("blur_radius").toInt());
   ui_->opacity_slider->setValue(s.value("opacity_level").toInt());
-  OpacityLevelChanged(s.value("opacity_level").toInt());
-
 
   s.endGroup();
 
@@ -254,12 +253,10 @@ void AppearanceSettingsPage::SelectBackgroundImage() {
 }
 
 void AppearanceSettingsPage::BlurLevelChanged(int value) {
-  background_blur_radius_ = value;
   ui_->background_blur_radius_label->setText(QString("%1px").arg(value));
 }
 
 void AppearanceSettingsPage::OpacityLevelChanged(int percent) {
-  background_opacity_level_ = percent;
   ui_->background_opacity_label->setText(QString("%1\%").arg(percent));
 }
 
