@@ -838,10 +838,15 @@ void PlaylistView::paintEvent(QPaintEvent* event) {
       if (height() != last_height_ || width() != last_width_
           || force_background_redraw_) {
 
-        cached_scaled_background_image_ = QPixmap::fromImage(background_image_.scaled(
-            width(), height(),
-            Qt::KeepAspectRatioByExpanding,
-            Qt::SmoothTransformation));
+        if (background_image_.isNull()) {
+          cached_scaled_background_image_ = QPixmap();
+        } else {
+          cached_scaled_background_image_ = QPixmap::fromImage(
+              background_image_.scaled(
+                  width(), height(),
+                  Qt::KeepAspectRatioByExpanding,
+                  Qt::SmoothTransformation));
+        }
 
         last_height_ = height();
         last_width_  = width();
@@ -1192,25 +1197,28 @@ void PlaylistView::set_background_image(const QImage& image) {
   // Save previous image, for fading
   previous_background_image_ = cached_scaled_background_image_;
 
-  if (image.format() != QImage::Format_ARGB32)
-    background_image_ = image.convertToFormat(QImage::Format_ARGB32);
-  else
+  if (image.isNull() || image.format() == QImage::Format_ARGB32) {
     background_image_ = image;
-
-  // Apply opacity filter
-  uchar* bits = background_image_.bits();
-  for (int i = 0; i < background_image_.height() * background_image_.bytesPerLine(); i+=4) {
-    bits[i+3] = (opacity_level_ / 100.0) * 255;
+  } else {
+    background_image_ = image.convertToFormat(QImage::Format_ARGB32);
   }
 
-  if (blur_radius_ != 0) {
-    QImage blurred(background_image_.size(), QImage::Format_ARGB32_Premultiplied);
-    blurred.fill(Qt::transparent);
-    QPainter blur_painter(&blurred);
-    qt_blurImage(&blur_painter, background_image_, blur_radius_, false, true);
-    blur_painter.end();
+  if (!background_image_.isNull()) {
+    // Apply opacity filter
+    uchar* bits = background_image_.bits();
+    for (int i = 0; i < background_image_.height() * background_image_.bytesPerLine(); i+=4) {
+      bits[i+3] = (opacity_level_ / 100.0) * 255;
+    }
 
-    background_image_ = blurred;
+    if (blur_radius_ != 0) {
+      QImage blurred(background_image_.size(), QImage::Format_ARGB32_Premultiplied);
+      blurred.fill(Qt::transparent);
+      QPainter blur_painter(&blurred);
+      qt_blurImage(&blur_painter, background_image_, blur_radius_, false, true);
+      blur_painter.end();
+
+      background_image_ = blurred;
+    }
   }
 
   if (isVisible()) {
