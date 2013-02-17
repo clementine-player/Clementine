@@ -36,6 +36,7 @@
 #include "core/songloader.h"
 #include "core/stylesheetloader.h"
 #include "core/taskmanager.h"
+#include "core/timeconstants.h"
 #include "core/utilities.h"
 #include "devices/devicemanager.h"
 #include "devices/devicestatefiltermodel.h"
@@ -895,7 +896,13 @@ void MainWindow::TrackSkipped(PlaylistItemPtr item) {
     const qint64 length = app_->player()->engine()->length_nanosec();
     const float percentage = (length == 0 ? 1 : float(position) / length);
 
-    app_->library_backend()->IncrementSkipCountAsync(song.id(), percentage);
+    const qint64 seconds_left = (length - position) / kNsecPerSec;
+    const qint64 seconds_total = length / kNsecPerSec;
+
+    if (((0.05 * seconds_total > 60 && percentage < 0.98) || percentage < 0.95) &&
+        seconds_left > 5) { // Never count the skip if under 5 seconds left
+      app_->library_backend()->IncrementSkipCountAsync(song.id(), percentage);
+    }
   }
 }
 
