@@ -59,7 +59,6 @@ private:
 class PlaylistView : public QTreeView {
   Q_OBJECT
  public:
-
   enum BackgroundImageType {
     Default,
     None,
@@ -73,6 +72,9 @@ class PlaylistView : public QTreeView {
   // Constants for settings: are persistent, values should not be changed
   static const char* kSettingBackgroundImageType;
   static const char* kSettingBackgroundImageFilename;
+
+  static const int kDefaultBlurRadius;
+  static const int kDefaultOpacityLevel;
 
   static ColumnAlignmentMap DefaultColumnAlignment();
 

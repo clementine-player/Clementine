@@ -54,6 +54,9 @@ const int PlaylistView::kDropIndicatorGradientWidth = 5;
 const char* PlaylistView::kSettingBackgroundImageType = "playlistview_background_type";
 const char* PlaylistView::kSettingBackgroundImageFilename = "playlistview_background_image_file";
 
+const int PlaylistView::kDefaultBlurRadius = 0;
+const int PlaylistView::kDefaultOpacityLevel = 40;
+
 
 PlaylistProxyStyle::PlaylistProxyStyle(QStyle* base)
   : QProxyStyle(base),
@@ -1015,8 +1018,8 @@ void PlaylistView::ReloadSettings() {
     }
   }
   QString background_image_filename = s.value(kSettingBackgroundImageFilename).toString();
-  int blur_radius = s.value("blur_radius").toInt();
-  int opacity_level = s.value("opacity_level").toInt();
+  int blur_radius = s.value("blur_radius", kDefaultBlurRadius).toInt();
+  int opacity_level = s.value("opacity_level", kDefaultOpacityLevel).toInt();
   // Check if background properties have changed.
   // We change properties only if they have actually changed, to avoid to call
   // set_background_image when it is not needed, as this will cause the fading

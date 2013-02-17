@@ -129,8 +129,10 @@ void AppearanceSettingsPage::Load() {
       DisableBlurSlider(true);
   }
   ui_->background_image_filename->setText(playlist_view_background_image_filename_);
-  ui_->blur_slider->setValue(s.value("blur_radius").toInt());
-  ui_->opacity_slider->setValue(s.value("opacity_level").toInt());
+  ui_->blur_slider->setValue(
+      s.value("blur_radius", PlaylistView::kDefaultBlurRadius).toInt());
+  ui_->opacity_slider->setValue(
+      s.value("opacity_level", PlaylistView::kDefaultOpacityLevel).toInt());
 
   s.endGroup();
 
