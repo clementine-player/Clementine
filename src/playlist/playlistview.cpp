@@ -1224,7 +1224,7 @@ void PlaylistView::set_background_image(const QImage& image) {
       QImage blurred(background_image_.size(), QImage::Format_ARGB32_Premultiplied);
       blurred.fill(Qt::transparent);
       QPainter blur_painter(&blurred);
-      qt_blurImage(&blur_painter, background_image_, blur_radius_, false, true);
+      qt_blurImage(&blur_painter, background_image_, blur_radius_, true, false);
       blur_painter.end();
 
       background_image_ = blurred;
