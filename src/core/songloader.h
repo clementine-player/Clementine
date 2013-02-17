@@ -23,6 +23,7 @@
 #include <QUrl>
 
 #include "song.h"
+#include "core/tagreaderclient.h"
 #include "musicbrainz/musicbrainzclient.h"
 
 #include <boost/shared_ptr.hpp>
@@ -76,6 +77,7 @@ private slots:
   void StopTypefind();
   void AudioCDTagsLoaded(const QString& artist, const QString& album,
                          const MusicBrainzClient::ResultList& results);
+  void LocalFileLoaded(TagReaderReply* reply);
 
 private:
   enum State {

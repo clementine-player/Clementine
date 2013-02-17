@@ -276,28 +276,43 @@ SongLoader::Result SongLoader::LoadLocal(const QString& filename) {
   } else {
     QString matching_cue = filename.section('.', 0, -2) + ".cue";
 
-    // it's a cue - create virtual tracks
-    if(QFile::exists(matching_cue)) {
+    if (QFile::exists(matching_cue)) {
+      // it's a cue - create virtual tracks
       QFile cue(matching_cue);
       cue.open(QIODevice::ReadOnly);
 
       song_list = cue_parser_->Load(&cue, matching_cue, QDir(filename.section('/', 0, -2)));
-
-    // it's a normal media file
     } else {
-      Song song;
-      TagReaderClient::Instance()->ReadFileBlocking(filename, &song);
+      // it's a normal media file, load it asynchronously.
+      TagReaderReply* reply = TagReaderClient::Instance()->ReadFile(filename);
+      NewClosure(reply, SIGNAL(Finished(bool)),
+                 this, SLOT(LocalFileLoaded(TagReaderReply*)),
+                 reply);
 
-      song_list << song;
-
+      return WillLoadAsync;
     }
   }
+
   foreach (const Song& song, song_list) {
-    if (song.is_valid())
+    if (song.is_valid()) {
       songs_ << song;
+    }
   }
 
   return Success;
+}
+
+void SongLoader::LocalFileLoaded(TagReaderReply* reply) {
+  reply->deleteLater();
+
+  Song song;
+  song.InitFromProtobuf(reply->message().read_file_response().metadata());
+
+  if (song.is_valid()) {
+    songs_ << song;
+  }
+
+  emit LoadFinished(true);
 }
 
 void SongLoader::EffectiveSongsLoad() {
