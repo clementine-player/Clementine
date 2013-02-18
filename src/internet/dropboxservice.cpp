@@ -188,5 +188,5 @@ QUrl DropboxService::GetStreamingUrlFromSongId(const QUrl& url) {
 
   QJson::Parser parser;
   QVariantMap response = parser.parse(reply).toMap();
-  return response["url"].toUrl();
+  return QUrl::fromEncoded(response["url"].toByteArray());
 }
