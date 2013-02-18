@@ -25,6 +25,7 @@
 
 #include <QDataStream>
 #include <QSettings>
+#include <QHostInfo>
 
 const char* NetworkRemote::kSettingsGroup = "NetworkRemote";
 const quint16 NetworkRemote::kDefaultServerPort = 5500;
@@ -91,8 +92,10 @@ void NetworkRemote::StartServer() {
   qLog(Info) << "Listening on port " << port_;
 
   if (Zeroconf::GetZeroconf()) {
+    QString name = QString("Clementine on %1 (%2)").arg(QHostInfo::localHostName())
+                                                 .arg(QHostInfo::localDomainName());
     Zeroconf::GetZeroconf()->Publish(
-        "local", "_clementine._tcp", "Clementine", port_);
+        "local", "_clementine._tcp", name, port_);
   }
 }
 

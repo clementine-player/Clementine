@@ -123,10 +123,19 @@
       </font>
      </property>
      <property name="text">
-      <string>Get the Android App now!</string>
+      <string>&lt;a href=&quot;https://play.google.com/store/apps/details?id=de.qspool.clementineremote&quot;&gt;Get the Android App now!&lt;/a&gt;</string>
+     </property>
+     <property name="textFormat">
+      <enum>Qt::RichText</enum>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
+     </property>
+     <property name="openExternalLinks">
+      <bool>true</bool>
+     </property>
+     <property name="textInteractionFlags">
+      <set>Qt::LinksAccessibleByMouse</set>
      </property>
     </widget>
    </item>

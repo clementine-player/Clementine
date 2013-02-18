@@ -17,10 +17,8 @@ uint32_t GetLocalIPAddress() {
     // TODO: Add ipv6 support to tinysvcmdns.
     if (address.protocol() == QAbstractSocket::IPv4Protocol &&
         !address.isInSubnet(QHostAddress::parseSubnet("127.0.0.1/8"))) {
-      qLog(Debug) << "Selected IP:" << address.toString();
       return address.toIPv4Address();
     }
-    qLog(Debug) << "IP Ignored:" << address.toString();
   }
   return 0;
 }
@@ -56,6 +54,14 @@ void TinySVCMDNS::Publish(
   if (!mdnsd_) {
     return;
   }
+  
+  // Some pointless text, so tinymDNS publishs the service
+  // corretly
+  const char *txt[] = {
+		"cat=nyan", 
+		NULL
+	};
+  
   mdnsd_register_svc(
       mdnsd_,
       name.toUtf8().constData(),
