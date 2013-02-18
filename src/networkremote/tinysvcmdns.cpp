@@ -54,19 +54,18 @@ void TinySVCMDNS::Publish(
   if (!mdnsd_) {
     return;
   }
-  
-  // Some pointless text, so tinymDNS publishs the service
-  // corretly
-  const char *txt[] = {
-		"cat=nyan", 
-		NULL
-	};
-  
+
+  // Some pointless text, so tinymDNS publishes the service correctly.
+  const char* txt[] = {
+    "cat=nyan",
+    NULL
+  };
+
   mdnsd_register_svc(
       mdnsd_,
       name.toUtf8().constData(),
       QString(type + ".local").toUtf8().constData(),
       port,
       NULL,
-      NULL);
+      txt);
 }
