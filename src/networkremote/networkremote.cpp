@@ -101,6 +101,7 @@ void NetworkRemote::StopServer() {
     outgoing_data_creator_.get()->DisconnectAllClients();
     server_->close();
     server_ipv6_->close();
+    qDeleteAll(clients_);
     clients_.clear();
   }
 }
