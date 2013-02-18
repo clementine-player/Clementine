@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-02-01 15:52+0000\n"
-"Last-Translator: Ján Ďanovský <dagsoftware@yahoo.com>\n"
+"PO-Revision-Date: 2013-02-17 06:24+0000\n"
+"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: sk\n"
@@ -227,7 +227,7 @@ msgstr "...a všetkým prispievateľom Amaroku"
 msgid "0:00:00"
 msgstr "0:00:00"
 
-#: ../bin/src/ui_appearancesettingspage.h:284
+#: ../bin/src/ui_appearancesettingspage.h:289
 msgid "0px"
 msgstr "0px"
 
@@ -243,6 +243,10 @@ msgstr "1 skladba"
 #: ../bin/src/ui_magnatunesettingspage.h:174
 msgid "128k MP3"
 msgstr "128k MP3"
+
+#: ../bin/src/ui_appearancesettingspage.h:291
+msgid "40%"
+msgstr ""
 
 #: library/library.cpp:58
 msgid "50 random tracks"
@@ -551,7 +555,7 @@ msgstr "Album (ideálna hlasitosť pre všetky skladby)"
 msgid "Album artist"
 msgstr "Interprét albumu"
 
-#: ../bin/src/ui_appearancesettingspage.h:279
+#: ../bin/src/ui_appearancesettingspage.h:284
 msgid "Album cover"
 msgstr "Obal albumu"
 
@@ -657,11 +661,11 @@ msgid "Angry"
 msgstr "Zlostný"
 
 #: ../bin/src/ui_songinfosettingspage.h:180
-#: ../bin/src/ui_appearancesettingspage.h:266
+#: ../bin/src/ui_appearancesettingspage.h:271
 msgid "Appearance"
 msgstr "Vzhľad"
 
-#: core/commandlineoptions.cpp:157
+#: core/commandlineoptions.cpp:163
 msgid "Append files/URLs to the playlist"
 msgstr "Pridať súbory/URL adresy do playlistu"
 
@@ -777,7 +781,7 @@ msgstr "Streamy na pozadí"
 msgid "Background color"
 msgstr "Farba pozadia"
 
-#: ../bin/src/ui_appearancesettingspage.h:274
+#: ../bin/src/ui_appearancesettingspage.h:279
 msgid "Background image"
 msgstr "Obrázok na pozadí"
 
@@ -842,6 +846,10 @@ msgstr "Typ bloku"
 msgid "Bluetooth MAC Address"
 msgstr "Bluetooth MAC adresa"
 
+#: ../bin/src/ui_appearancesettingspage.h:288
+msgid "Blur amount"
+msgstr ""
+
 #: ../bin/src/ui_notificationssettingspage.h:421
 msgid "Body"
 msgstr "Obsah"
@@ -850,9 +858,13 @@ msgstr "Obsah"
 msgid "Boom analyzer"
 msgstr "Boom analyzér"
 
+#: ../bin/src/ui_boxsettingspage.h:103
+msgid "Box"
+msgstr ""
+
 #: ../bin/src/ui_magnatunedownloaddialog.h:146
 #: ../bin/src/ui_podcastsettingspage.h:242
-#: ../bin/src/ui_appearancesettingspage.h:282
+#: ../bin/src/ui_appearancesettingspage.h:287
 msgid "Browse..."
 msgstr "Prehľadávať..."
 
@@ -904,7 +916,7 @@ msgstr "Zmeniť skratku..."
 msgid "Change shuffle mode"
 msgstr "Zmeniť režim zamiešavania"
 
-#: core/commandlineoptions.cpp:163
+#: core/commandlineoptions.cpp:169
 msgid "Change the language"
 msgstr "Zmeniť jazyk"
 
@@ -997,6 +1009,10 @@ msgid ""
 "a format that it can play."
 msgstr "Clementine môže automaticky konvertovať hudbu, ktorú ste skopírovali na toto zariadenie do formátu, ktorý môže prehrať."
 
+#: ../bin/src/ui_boxsettingspage.h:104
+msgid "Clementine can play music that you have uploaded to Box"
+msgstr ""
+
 #: ../bin/src/ui_dropboxsettingspage.h:104
 msgid "Clementine can play music that you have uploaded to Dropbox"
 msgstr "Clementine môže prehrať hudbu, ktorú ste nahrali na Dropbox"
@@ -1054,7 +1070,7 @@ msgid "Click to toggle between remaining time and total time"
 msgstr "Kliknite na prepínanie medzi zostávajúcim a celkovým časom"
 
 #: ../bin/src/ui_googledrivesettingspage.h:106
-#: ../bin/src/ui_dropboxsettingspage.h:106
+#: ../bin/src/ui_dropboxsettingspage.h:106 ../bin/src/ui_boxsettingspage.h:106
 msgid ""
 "Clicking the Login button will open a web browser.  You should return to "
 "Clementine after you have logged in."
@@ -1088,11 +1104,11 @@ msgstr "Club"
 msgid "Color"
 msgstr "Farba"
 
-#: ../bin/src/ui_appearancesettingspage.h:267
+#: ../bin/src/ui_appearancesettingspage.h:272
 msgid "Colors"
 msgstr "Farby"
 
-#: core/commandlineoptions.cpp:166
+#: core/commandlineoptions.cpp:172
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Čiarkou oddelený zoznam class:level, level je 0-3"
 
@@ -1369,7 +1385,7 @@ msgstr "Ctrl+Up"
 msgid "Custom"
 msgstr "Vlastné"
 
-#: ../bin/src/ui_appearancesettingspage.h:281
+#: ../bin/src/ui_appearancesettingspage.h:286
 msgid "Custom image:"
 msgstr "Vlastný obrázok"
 
@@ -1416,15 +1432,19 @@ msgstr "Dni"
 msgid "De&fault"
 msgstr "Pôvo&dná"
 
-#: core/commandlineoptions.cpp:153
+#: core/commandlineoptions.cpp:157
 msgid "Decrease the volume by 4%"
 msgstr "Znížiť hlasitosť o 4%"
+
+#: core/commandlineoptions.cpp:159
+msgid "Decrease the volume by <value> percent"
+msgstr ""
 
 #: core/globalshortcuts.cpp:53 wiimotedev/wiimotesettingspage.cpp:104
 msgid "Decrease volume"
 msgstr "Znížiť hlasitosť"
 
-#: ../bin/src/ui_appearancesettingspage.h:275
+#: ../bin/src/ui_appearancesettingspage.h:280
 msgid "Default background image"
 msgstr "Štandardný obrázok na pozadí"
 
@@ -1552,7 +1572,7 @@ msgstr "Priečinok"
 msgid "Disable duration"
 msgstr "Zakázať trvanie"
 
-#: ../bin/src/ui_appearancesettingspage.h:289
+#: ../bin/src/ui_appearancesettingspage.h:296
 msgid "Disable moodbar generation"
 msgstr "Zakázať vytváranie panelu nálady"
 
@@ -1575,7 +1595,7 @@ msgstr "Nesúvislý prenos"
 msgid "Display options"
 msgstr "Možnosti zobrazovania"
 
-#: core/commandlineoptions.cpp:161
+#: core/commandlineoptions.cpp:167
 msgid "Display the on-screen-display"
 msgstr "Zobrazovať OSD"
 
@@ -1816,11 +1836,11 @@ msgstr "Celá zbierka"
 msgid "Equalizer"
 msgstr "Ekvalizér"
 
-#: core/commandlineoptions.cpp:164
+#: core/commandlineoptions.cpp:170
 msgid "Equivalent to --log-levels *:1"
 msgstr "Ekvivalent k --log-levels *:1"
 
-#: core/commandlineoptions.cpp:165
+#: core/commandlineoptions.cpp:171
 msgid "Equivalent to --log-levels *:3"
 msgstr "Ekvivalent k --log-levels *:3"
 
@@ -1995,7 +2015,7 @@ msgstr "Získavať automaticky"
 msgid "Fetch completed"
 msgstr "Sťahovanie dokončené"
 
-#: internet/subsonicservice.cpp:209
+#: internet/subsonicservice.cpp:218
 msgid "Fetching Subsonic library"
 msgstr "Získava sa zbierka zo Subsonicu"
 
@@ -2156,7 +2176,7 @@ msgstr "Plné výšky"
 msgid "GStreamer audio engine"
 msgstr "GStreamer audio engine"
 
-#: ui/settingsdialog.cpp:128
+#: ui/settingsdialog.cpp:132
 msgid "General"
 msgstr "Všeobecné"
 
@@ -2392,9 +2412,13 @@ msgstr "Nekompatibilná verzia Subsonic REST protokolu. Klienta musíte aktualiz
 msgid "Incompatible Subsonic REST protocol version. Server must upgrade."
 msgstr "Nekompatibilná verzia Subsonic REST protokolu. Server musíte aktualizovať."
 
-#: core/commandlineoptions.cpp:152
+#: core/commandlineoptions.cpp:156
 msgid "Increase the volume by 4%"
 msgstr "Zvýšiť hlasitosť o 4%"
+
+#: core/commandlineoptions.cpp:158
+msgid "Increase the volume by <value> percent"
+msgstr ""
 
 #: core/globalshortcuts.cpp:52 wiimotedev/wiimotesettingspage.cpp:103
 msgid "Increase volume"
@@ -2425,7 +2449,7 @@ msgstr "Kontrola integrity"
 msgid "Internet"
 msgstr "Internet"
 
-#: ui/settingsdialog.cpp:150
+#: ui/settingsdialog.cpp:154
 msgid "Internet providers"
 msgstr "Internetoví poskytovatelia"
 
@@ -2717,7 +2741,7 @@ msgstr "Načítavajú sa informácie o skladbe"
 msgid "Loading..."
 msgstr "Načítava sa..."
 
-#: core/commandlineoptions.cpp:158
+#: core/commandlineoptions.cpp:164
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "Načítať súbory/URL adresy, nahradiť nimi aktuálny playlist"
 
@@ -2729,7 +2753,7 @@ msgstr "Načítať súbory/URL adresy, nahradiť nimi aktuálny playlist"
 #: ../bin/src/ui_lastfmsettingspage.h:153
 #: ../bin/src/ui_googledrivesettingspage.h:105
 #: ../bin/src/ui_ubuntuonesettingspage.h:112
-#: ../bin/src/ui_dropboxsettingspage.h:105
+#: ../bin/src/ui_dropboxsettingspage.h:105 ../bin/src/ui_boxsettingspage.h:105
 msgid "Login"
 msgstr "Prihlásiť sa"
 
@@ -2891,12 +2915,12 @@ msgstr "Mesiace"
 msgid "Mood"
 msgstr "Nálada"
 
-#: ../bin/src/ui_appearancesettingspage.h:287
+#: ../bin/src/ui_appearancesettingspage.h:294
 #: moodbar/moodbarproxystyle.cpp:342
 msgid "Moodbar style"
 msgstr "Štýl panelu nálady"
 
-#: ../bin/src/ui_appearancesettingspage.h:285
+#: ../bin/src/ui_appearancesettingspage.h:292
 msgid "Moodbars"
 msgstr "Panel nálady"
 
@@ -3063,7 +3087,7 @@ msgstr "Budúci týždeň"
 msgid "No analyzer"
 msgstr "Bez analyzéru"
 
-#: ../bin/src/ui_appearancesettingspage.h:280
+#: ../bin/src/ui_appearancesettingspage.h:285
 msgid "No background image"
 msgstr "Žiaden obrázok na pozadí"
 
@@ -3179,6 +3203,10 @@ msgstr "Akceptovať iba spojenia z klientov s rozsahom ip adries:\n10.x.x.x\n172
 msgid "Only show the first"
 msgstr "Iba prvé zobraziť"
 
+#: ../bin/src/ui_appearancesettingspage.h:290
+msgid "Opacity"
+msgstr ""
+
 #: internet/digitallyimportedservicebase.cpp:179
 #: internet/groovesharkservice.cpp:544 internet/icecastservice.cpp:296
 #: internet/jamendoservice.cpp:419 internet/magnatuneservice.cpp:278
@@ -3258,7 +3286,7 @@ msgstr "Spravovanie súborov"
 msgid "Original tags"
 msgstr "Pôvodné tagy"
 
-#: core/commandlineoptions.cpp:160
+#: core/commandlineoptions.cpp:166
 msgid "Other options"
 msgstr "Ostatné možnosti"
 
@@ -3308,7 +3336,7 @@ msgstr "Chránené heslom"
 msgid "Pause"
 msgstr "Pozastaviť"
 
-#: core/commandlineoptions.cpp:147
+#: core/commandlineoptions.cpp:151
 msgid "Pause playback"
 msgstr "Pozastaviť prehrávanie"
 
@@ -3343,7 +3371,7 @@ msgstr "Počet prehraní"
 msgid "Play custom radio..."
 msgstr "Hrať vlastné rádio..."
 
-#: core/commandlineoptions.cpp:146
+#: core/commandlineoptions.cpp:150
 msgid "Play if stopped, pause if playing"
 msgstr "Hrať ak je zastavené, pozastaviť ak hrá"
 
@@ -3356,7 +3384,7 @@ msgstr "Začne hrať, ak sa nič neprehráva"
 msgid "Play tag radio..."
 msgstr "Hrať rádio tagu..."
 
-#: core/commandlineoptions.cpp:159
+#: core/commandlineoptions.cpp:165
 msgid "Play the <n>th track in the playlist"
 msgstr "Hrať <n>. skladbu v playliste"
 
@@ -3368,7 +3396,7 @@ msgstr "Hrať/Pozastaviť"
 msgid "Playback"
 msgstr "Prehrávanie"
 
-#: core/commandlineoptions.cpp:144
+#: core/commandlineoptions.cpp:148
 msgid "Player options"
 msgstr "Možnosti prehrávača"
 
@@ -3381,7 +3409,7 @@ msgstr "Playlist"
 msgid "Playlist finished"
 msgstr "Playlist dokončený"
 
-#: core/commandlineoptions.cpp:156
+#: core/commandlineoptions.cpp:162
 msgid "Playlist options"
 msgstr "Možnosti playlistu"
 
@@ -3501,7 +3529,7 @@ msgstr "Predchádzajúca"
 msgid "Previous track"
 msgstr "Predchádzajúca skladba"
 
-#: core/commandlineoptions.cpp:167
+#: core/commandlineoptions.cpp:173
 msgid "Print out version information"
 msgstr "Vypísať informáciu o verzii"
 
@@ -3789,7 +3817,7 @@ msgstr "Rýchlosť vzorkovania"
 msgid "Samplerate"
 msgstr "Rýchlosť vzorkovania"
 
-#: ../bin/src/ui_appearancesettingspage.h:288
+#: ../bin/src/ui_appearancesettingspage.h:295
 msgid "Save .mood files in your music library"
 msgstr "Ukladať súbory .mood vo vašej hudobnej zbierke"
 
@@ -3909,11 +3937,11 @@ msgstr "Posunúť vzad"
 msgid "Seek forward"
 msgstr "Posunúť vpred"
 
-#: core/commandlineoptions.cpp:155
+#: core/commandlineoptions.cpp:161
 msgid "Seek the currently playing track by a relative amount"
 msgstr "Pretočiť súčasnú skladbu o určitý čas"
 
-#: core/commandlineoptions.cpp:154
+#: core/commandlineoptions.cpp:160
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Pretočiť súčasnú skladbu na presné miesto"
 
@@ -3925,11 +3953,11 @@ msgstr "Označiť všetko"
 msgid "Select None"
 msgstr "Nevybrať nič"
 
-#: ../bin/src/ui_appearancesettingspage.h:272
+#: ../bin/src/ui_appearancesettingspage.h:277
 msgid "Select background color:"
 msgstr "Vybrať farbu pozadia:"
 
-#: ui/appearancesettingspage.cpp:240
+#: ui/appearancesettingspage.cpp:247
 msgid "Select background image"
 msgstr "Vybrať obrázok pozadia"
 
@@ -3937,11 +3965,7 @@ msgstr "Vybrať obrázok pozadia"
 msgid "Select best possible match"
 msgstr "Vyberte najlepšiu možnosť"
 
-#: ../bin/src/ui_appearancesettingspage.h:283
-msgid "Select blur radius:"
-msgstr "Vyberte polomer rozmazania:"
-
-#: ../bin/src/ui_appearancesettingspage.h:270
+#: ../bin/src/ui_appearancesettingspage.h:275
 msgid "Select foreground color:"
 msgstr "Vybrať farbu popredia:"
 
@@ -3974,7 +3998,7 @@ msgstr "Služba je offline"
 msgid "Set %1 to \"%2\"..."
 msgstr "Nastaviť %1 do \"%2\"..."
 
-#: core/commandlineoptions.cpp:151
+#: core/commandlineoptions.cpp:155
 msgid "Set the volume to <value> percent"
 msgstr "Nastaviť hlasitosť na <value> percent"
 
@@ -4009,7 +4033,7 @@ msgstr "Zobraziť OSD"
 msgid "Show a glowing animation on the current track"
 msgstr "Zobraziť blikajúcu animáciu na súčasnej skladbe"
 
-#: ../bin/src/ui_appearancesettingspage.h:286
+#: ../bin/src/ui_appearancesettingspage.h:293
 msgid "Show a moodbar in the track progress bar"
 msgstr "Zobraziť panel nálady v paneli priebehu skladby"
 
@@ -4142,7 +4166,7 @@ msgstr "Podobní interpréti"
 msgid "Ska"
 msgstr "Ska"
 
-#: core/commandlineoptions.cpp:149
+#: core/commandlineoptions.cpp:153
 msgid "Skip backwards in playlist"
 msgstr "Preskočiť dozadu v playliste"
 
@@ -4150,7 +4174,7 @@ msgstr "Preskočiť dozadu v playliste"
 msgid "Skip count"
 msgstr "Počet preskočení"
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:154
 msgid "Skip forwards in playlist"
 msgstr "Preskočiť dopredu v playliste"
 
@@ -4250,7 +4274,7 @@ msgstr "Štandardný"
 msgid "Starred"
 msgstr "S hviezdičkou"
 
-#: core/commandlineoptions.cpp:145
+#: core/commandlineoptions.cpp:149
 msgid "Start the playlist currently playing"
 msgstr "Začať playlist práve prehrávanou"
 
@@ -4291,7 +4315,7 @@ msgstr "Zastaviť po"
 msgid "Stop after this track"
 msgstr "Zastaviť po tejto skladbe"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:152
 msgid "Stop playback"
 msgstr "Zastaviť prehrávanie"
 
@@ -4414,7 +4438,7 @@ msgstr "Poďakovanie"
 msgid "The \"%1\" command could not be started."
 msgstr "Príkaz \"%1\" nemohol začať."
 
-#: ../bin/src/ui_appearancesettingspage.h:277
+#: ../bin/src/ui_appearancesettingspage.h:282
 msgid "The album cover of the currently playing song"
 msgstr "Obal albumu práve prehrávanej piesne"
 
@@ -4594,7 +4618,7 @@ msgstr "Prepínať stav radu"
 msgid "Toggle scrobbling"
 msgstr "Prepnúť skroblovanie"
 
-#: core/commandlineoptions.cpp:162
+#: core/commandlineoptions.cpp:168
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Prepnúť viditeľnosť Krásneho OSD"
 
@@ -4660,7 +4684,7 @@ msgstr "Vypnúť"
 msgid "URI"
 msgstr "URI"
 
-#: core/commandlineoptions.cpp:144
+#: core/commandlineoptions.cpp:148
 msgid "URL(s)"
 msgstr "URL(y)"
 
@@ -4743,7 +4767,7 @@ msgstr "Aktualizovanie %1%..."
 msgid "Updating library"
 msgstr "Aktualizovanie zbierky"
 
-#: core/commandlineoptions.cpp:144
+#: core/commandlineoptions.cpp:148
 msgid "Usage"
 msgstr "Využitie"
 
@@ -4767,7 +4791,7 @@ msgstr "Použiť metadáta na vyrovnanie hlasitosti ak sú dostupné"
 msgid "Use Wii Remote"
 msgstr "Použiť Wii diaľkové"
 
-#: ../bin/src/ui_appearancesettingspage.h:269
+#: ../bin/src/ui_appearancesettingspage.h:274
 msgid "Use a custom color set"
 msgstr "Použiť vlastný set farieb"
 
@@ -4803,7 +4827,7 @@ msgstr "Použiť časové tvarovanie šumu"
 msgid "Use the system default"
 msgstr "Použiť základný systémový"
 
-#: ../bin/src/ui_appearancesettingspage.h:268
+#: ../bin/src/ui_appearancesettingspage.h:273
 msgid "Use the system default color set"
 msgstr "Použiť pôvoný systémový set farieb"
 
@@ -4824,7 +4848,7 @@ msgstr "Použitých"
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr "Používateľ %1 nemá Grooveshark Anywhere účet"
 
-#: ui/settingsdialog.cpp:142
+#: ui/settingsdialog.cpp:146
 msgid "User interface"
 msgstr "Používateľské rozhranie"
 
@@ -5194,7 +5218,7 @@ msgstr "medzi"
 msgid "biggest first"
 msgstr "najprv najväčšie"
 
-#: playlist/playlistview.cpp:201 ui/edittagdialog.cpp:452
+#: playlist/playlistview.cpp:200 ui/edittagdialog.cpp:452
 msgid "bpm"
 msgstr "bpm"
 
@@ -5241,7 +5265,7 @@ msgstr "väčšie ako"
 msgid "in the last"
 msgstr "za posledných"
 
-#: playlist/playlistview.cpp:203 ui/edittagdialog.cpp:454
+#: playlist/playlistview.cpp:202 ui/edittagdialog.cpp:454
 #: internet/spotifysettingspage.cpp:60 internet/spotifysettingspage.cpp:61
 #: internet/spotifysettingspage.cpp:62
 msgid "kbps"
@@ -5284,7 +5308,7 @@ msgstr "najprv najstaršie"
 msgid "on"
 msgstr "na"
 
-#: core/commandlineoptions.cpp:144
+#: core/commandlineoptions.cpp:148
 msgid "options"
 msgstr "možnosti"
 

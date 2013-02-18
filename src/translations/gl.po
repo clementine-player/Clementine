@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-01-30 18:12+0000\n"
-"Last-Translator: Adrián Chaves Fernández <adriyetichaves@gmail.com>\n"
+"PO-Revision-Date: 2013-02-17 06:23+0000\n"
+"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: gl\n"
@@ -228,7 +228,7 @@ msgstr "...e a todos os que contribuíron con Amarok"
 msgid "0:00:00"
 msgstr "0:00:00"
 
-#: ../bin/src/ui_appearancesettingspage.h:284
+#: ../bin/src/ui_appearancesettingspage.h:289
 msgid "0px"
 msgstr "0px"
 
@@ -244,6 +244,10 @@ msgstr "1 pista"
 #: ../bin/src/ui_magnatunesettingspage.h:174
 msgid "128k MP3"
 msgstr "128k MP3"
+
+#: ../bin/src/ui_appearancesettingspage.h:291
+msgid "40%"
+msgstr "40%"
 
 #: library/library.cpp:58
 msgid "50 random tracks"
@@ -552,7 +556,7 @@ msgstr "Álbum (sonoridade ideal para todas as pistas)"
 msgid "Album artist"
 msgstr "Autor do álbum"
 
-#: ../bin/src/ui_appearancesettingspage.h:279
+#: ../bin/src/ui_appearancesettingspage.h:284
 msgid "Album cover"
 msgstr "Portada"
 
@@ -658,11 +662,11 @@ msgid "Angry"
 msgstr "Anoxado"
 
 #: ../bin/src/ui_songinfosettingspage.h:180
-#: ../bin/src/ui_appearancesettingspage.h:266
+#: ../bin/src/ui_appearancesettingspage.h:271
 msgid "Appearance"
 msgstr "Aparencia"
 
-#: core/commandlineoptions.cpp:157
+#: core/commandlineoptions.cpp:163
 msgid "Append files/URLs to the playlist"
 msgstr "Engadir ficheiros/URL á lista de reprodución"
 
@@ -778,7 +782,7 @@ msgstr "Fluxos ambientais"
 msgid "Background color"
 msgstr "Cor de fondo"
 
-#: ../bin/src/ui_appearancesettingspage.h:274
+#: ../bin/src/ui_appearancesettingspage.h:279
 msgid "Background image"
 msgstr "Imaxe de fondo"
 
@@ -843,6 +847,10 @@ msgstr "Tipo de bloque"
 msgid "Bluetooth MAC Address"
 msgstr "Enderezo MAC Bluetooth"
 
+#: ../bin/src/ui_appearancesettingspage.h:288
+msgid "Blur amount"
+msgstr ""
+
 #: ../bin/src/ui_notificationssettingspage.h:421
 msgid "Body"
 msgstr "Corpo"
@@ -851,9 +859,13 @@ msgstr "Corpo"
 msgid "Boom analyzer"
 msgstr "Analisador de Boom"
 
+#: ../bin/src/ui_boxsettingspage.h:103
+msgid "Box"
+msgstr "Box"
+
 #: ../bin/src/ui_magnatunedownloaddialog.h:146
 #: ../bin/src/ui_podcastsettingspage.h:242
-#: ../bin/src/ui_appearancesettingspage.h:282
+#: ../bin/src/ui_appearancesettingspage.h:287
 msgid "Browse..."
 msgstr "Examinar..."
 
@@ -905,7 +917,7 @@ msgstr "Cambiar combinación de teclas"
 msgid "Change shuffle mode"
 msgstr "Cambiar o modo aleatorio"
 
-#: core/commandlineoptions.cpp:163
+#: core/commandlineoptions.cpp:169
 msgid "Change the language"
 msgstr "Cambiar o idioma"
 
@@ -998,6 +1010,10 @@ msgid ""
 "a format that it can play."
 msgstr "Clementine pode converter automaticamente a música que copie a este dispositivo nun formato que poida reproducir."
 
+#: ../bin/src/ui_boxsettingspage.h:104
+msgid "Clementine can play music that you have uploaded to Box"
+msgstr "Clementine pode reproducir música subida por vostede ao servizo Box."
+
 #: ../bin/src/ui_dropboxsettingspage.h:104
 msgid "Clementine can play music that you have uploaded to Dropbox"
 msgstr "Clementine pode reproducir a súa música subida a Dropbox."
@@ -1055,7 +1071,7 @@ msgid "Click to toggle between remaining time and total time"
 msgstr "Prema aquí para cambiar entre o tempo restante e o tempo total."
 
 #: ../bin/src/ui_googledrivesettingspage.h:106
-#: ../bin/src/ui_dropboxsettingspage.h:106
+#: ../bin/src/ui_dropboxsettingspage.h:106 ../bin/src/ui_boxsettingspage.h:106
 msgid ""
 "Clicking the Login button will open a web browser.  You should return to "
 "Clementine after you have logged in."
@@ -1089,11 +1105,11 @@ msgstr "Clube"
 msgid "Color"
 msgstr "Cor"
 
-#: ../bin/src/ui_appearancesettingspage.h:267
+#: ../bin/src/ui_appearancesettingspage.h:272
 msgid "Colors"
 msgstr "Cores"
 
-#: core/commandlineoptions.cpp:166
+#: core/commandlineoptions.cpp:172
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Lista separada por comas de <clase>:<nivel>, onde o nivel será un valor do 0 ao 3."
 
@@ -1370,7 +1386,7 @@ msgstr "Ctrl+Up"
 msgid "Custom"
 msgstr "Personalizado"
 
-#: ../bin/src/ui_appearancesettingspage.h:281
+#: ../bin/src/ui_appearancesettingspage.h:286
 msgid "Custom image:"
 msgstr "Imaxe personalizada:"
 
@@ -1417,15 +1433,19 @@ msgstr "Dias"
 msgid "De&fault"
 msgstr "&Predeterminado"
 
-#: core/commandlineoptions.cpp:153
+#: core/commandlineoptions.cpp:157
 msgid "Decrease the volume by 4%"
 msgstr "Diminuír o volume nun 4%"
+
+#: core/commandlineoptions.cpp:159
+msgid "Decrease the volume by <value> percent"
+msgstr ""
 
 #: core/globalshortcuts.cpp:53 wiimotedev/wiimotesettingspage.cpp:104
 msgid "Decrease volume"
 msgstr "Diminuír o volume"
 
-#: ../bin/src/ui_appearancesettingspage.h:275
+#: ../bin/src/ui_appearancesettingspage.h:280
 msgid "Default background image"
 msgstr "Imaxe de fondo predeterminada"
 
@@ -1553,7 +1573,7 @@ msgstr "Cartafol"
 msgid "Disable duration"
 msgstr "Desactivar a duración"
 
-#: ../bin/src/ui_appearancesettingspage.h:289
+#: ../bin/src/ui_appearancesettingspage.h:296
 msgid "Disable moodbar generation"
 msgstr "Desactivar a xeración da barra do ánimo."
 
@@ -1576,7 +1596,7 @@ msgstr "Transmisión entrecortada"
 msgid "Display options"
 msgstr "Opcións de visualización"
 
-#: core/commandlineoptions.cpp:161
+#: core/commandlineoptions.cpp:167
 msgid "Display the on-screen-display"
 msgstr "Amosar a mensaxe en pantalla"
 
@@ -1817,11 +1837,11 @@ msgstr "Colección completa"
 msgid "Equalizer"
 msgstr "Ecualizador"
 
-#: core/commandlineoptions.cpp:164
+#: core/commandlineoptions.cpp:170
 msgid "Equivalent to --log-levels *:1"
 msgstr "Equivalente a «--log-levels *:1»."
 
-#: core/commandlineoptions.cpp:165
+#: core/commandlineoptions.cpp:171
 msgid "Equivalent to --log-levels *:3"
 msgstr "Equivalente a «--log-levels *:3»."
 
@@ -1996,7 +2016,7 @@ msgstr "Descargar automaticamente"
 msgid "Fetch completed"
 msgstr "Completouse a descarga"
 
-#: internet/subsonicservice.cpp:209
+#: internet/subsonicservice.cpp:218
 msgid "Fetching Subsonic library"
 msgstr "Descargando a biblioteca de Subsonic"
 
@@ -2157,7 +2177,7 @@ msgstr "Full Treble"
 msgid "GStreamer audio engine"
 msgstr "Motor de son GStreamer"
 
-#: ui/settingsdialog.cpp:128
+#: ui/settingsdialog.cpp:132
 msgid "General"
 msgstr "Xeral"
 
@@ -2393,9 +2413,13 @@ msgstr "A versión do protocolo REST de Subsonic é incompatíbel. Debe anovar o
 msgid "Incompatible Subsonic REST protocol version. Server must upgrade."
 msgstr "A versión do protocolo REST de Subsonic é incompatíbel. Debe anovar o servidor."
 
-#: core/commandlineoptions.cpp:152
+#: core/commandlineoptions.cpp:156
 msgid "Increase the volume by 4%"
 msgstr "Incrementar o volume ao 4%"
+
+#: core/commandlineoptions.cpp:158
+msgid "Increase the volume by <value> percent"
+msgstr ""
 
 #: core/globalshortcuts.cpp:52 wiimotedev/wiimotesettingspage.cpp:103
 msgid "Increase volume"
@@ -2426,7 +2450,7 @@ msgstr "Comprobación da integridade"
 msgid "Internet"
 msgstr "Internet"
 
-#: ui/settingsdialog.cpp:150
+#: ui/settingsdialog.cpp:154
 msgid "Internet providers"
 msgstr "Fornecedores de internet"
 
@@ -2718,7 +2742,7 @@ msgstr "Cargando a información das pistas…"
 msgid "Loading..."
 msgstr "Cargando…"
 
-#: core/commandlineoptions.cpp:158
+#: core/commandlineoptions.cpp:164
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "Carga ficheiros ou enderezos URL, substituíndo a lista actual."
 
@@ -2730,7 +2754,7 @@ msgstr "Carga ficheiros ou enderezos URL, substituíndo a lista actual."
 #: ../bin/src/ui_lastfmsettingspage.h:153
 #: ../bin/src/ui_googledrivesettingspage.h:105
 #: ../bin/src/ui_ubuntuonesettingspage.h:112
-#: ../bin/src/ui_dropboxsettingspage.h:105
+#: ../bin/src/ui_dropboxsettingspage.h:105 ../bin/src/ui_boxsettingspage.h:105
 msgid "Login"
 msgstr "Acceder"
 
@@ -2892,12 +2916,12 @@ msgstr "Meses"
 msgid "Mood"
 msgstr "Ánimo"
 
-#: ../bin/src/ui_appearancesettingspage.h:287
+#: ../bin/src/ui_appearancesettingspage.h:294
 #: moodbar/moodbarproxystyle.cpp:342
 msgid "Moodbar style"
 msgstr "Estilo da barra do ánimo"
 
-#: ../bin/src/ui_appearancesettingspage.h:285
+#: ../bin/src/ui_appearancesettingspage.h:292
 msgid "Moodbars"
 msgstr "Barras do ánimo"
 
@@ -3064,7 +3088,7 @@ msgstr "A vindeira semana"
 msgid "No analyzer"
 msgstr "Sen analisador"
 
-#: ../bin/src/ui_appearancesettingspage.h:280
+#: ../bin/src/ui_appearancesettingspage.h:285
 msgid "No background image"
 msgstr "Non hai imaxe de fondo."
 
@@ -3180,6 +3204,10 @@ msgstr "Só aceptar conexións de clientes dentro dos intervalos de enderezos IP
 msgid "Only show the first"
 msgstr "Amosar só o primeiro"
 
+#: ../bin/src/ui_appearancesettingspage.h:290
+msgid "Opacity"
+msgstr ""
+
 #: internet/digitallyimportedservicebase.cpp:179
 #: internet/groovesharkservice.cpp:544 internet/icecastservice.cpp:296
 #: internet/jamendoservice.cpp:419 internet/magnatuneservice.cpp:278
@@ -3259,7 +3287,7 @@ msgstr "Organizando os ficheiros…"
 msgid "Original tags"
 msgstr "Etiquetas orixinais"
 
-#: core/commandlineoptions.cpp:160
+#: core/commandlineoptions.cpp:166
 msgid "Other options"
 msgstr "Outras opcións"
 
@@ -3309,7 +3337,7 @@ msgstr "Protexido por contrasinal"
 msgid "Pause"
 msgstr "Pausa"
 
-#: core/commandlineoptions.cpp:147
+#: core/commandlineoptions.cpp:151
 msgid "Pause playback"
 msgstr "Pausa"
 
@@ -3344,7 +3372,7 @@ msgstr "Escoitas"
 msgid "Play custom radio..."
 msgstr "Reproducir unha radio personalizada…"
 
-#: core/commandlineoptions.cpp:146
+#: core/commandlineoptions.cpp:150
 msgid "Play if stopped, pause if playing"
 msgstr "Reproducir se está detido, pausar se está a reproducir"
 
@@ -3357,7 +3385,7 @@ msgstr "Reproducir se non hai nada reproducíndose aínda."
 msgid "Play tag radio..."
 msgstr "Reproducir a radio dunha etiqueta…"
 
-#: core/commandlineoptions.cpp:159
+#: core/commandlineoptions.cpp:165
 msgid "Play the <n>th track in the playlist"
 msgstr "Reproducir a <n>ª pista da lista"
 
@@ -3369,7 +3397,7 @@ msgstr "Reproducir/Pausa"
 msgid "Playback"
 msgstr "Reprodución"
 
-#: core/commandlineoptions.cpp:144
+#: core/commandlineoptions.cpp:148
 msgid "Player options"
 msgstr "Opczóns do player"
 
@@ -3382,7 +3410,7 @@ msgstr "Lista de reprodución"
 msgid "Playlist finished"
 msgstr "Lista de músicas terminada"
 
-#: core/commandlineoptions.cpp:156
+#: core/commandlineoptions.cpp:162
 msgid "Playlist options"
 msgstr "Opcións da lista de reprodución"
 
@@ -3502,7 +3530,7 @@ msgstr "Anterior"
 msgid "Previous track"
 msgstr "Pista anterior"
 
-#: core/commandlineoptions.cpp:167
+#: core/commandlineoptions.cpp:173
 msgid "Print out version information"
 msgstr "Imprime a información da versión"
 
@@ -3790,7 +3818,7 @@ msgstr "Frecuencia de mostraxe"
 msgid "Samplerate"
 msgstr "Frecuencia de mostraxe"
 
-#: ../bin/src/ui_appearancesettingspage.h:288
+#: ../bin/src/ui_appearancesettingspage.h:295
 msgid "Save .mood files in your music library"
 msgstr "Gardar os ficheiros .mood na súa biblioteca de música."
 
@@ -3910,11 +3938,11 @@ msgstr "Atrasar"
 msgid "Seek forward"
 msgstr "Avanzar"
 
-#: core/commandlineoptions.cpp:155
+#: core/commandlineoptions.cpp:161
 msgid "Seek the currently playing track by a relative amount"
 msgstr "Avanzar ou atrasar unha cantidade de tempo a pista actual."
 
-#: core/commandlineoptions.cpp:154
+#: core/commandlineoptions.cpp:160
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Situar o punto de reprodución da pista actual nunha posición determinada."
 
@@ -3926,11 +3954,11 @@ msgstr "Seleccionalo todo"
 msgid "Select None"
 msgstr "Non seleccionar nengún"
 
-#: ../bin/src/ui_appearancesettingspage.h:272
+#: ../bin/src/ui_appearancesettingspage.h:277
 msgid "Select background color:"
 msgstr "Escoller a cor de fondo:"
 
-#: ui/appearancesettingspage.cpp:240
+#: ui/appearancesettingspage.cpp:247
 msgid "Select background image"
 msgstr "Escoller a imaxe de fondo"
 
@@ -3938,11 +3966,7 @@ msgstr "Escoller a imaxe de fondo"
 msgid "Select best possible match"
 msgstr "Escoller a posíbel mellor correspondencia"
 
-#: ../bin/src/ui_appearancesettingspage.h:283
-msgid "Select blur radius:"
-msgstr "Escoller o raio de suavizado:"
-
-#: ../bin/src/ui_appearancesettingspage.h:270
+#: ../bin/src/ui_appearancesettingspage.h:275
 msgid "Select foreground color:"
 msgstr "Escoller a cor principal:"
 
@@ -3975,7 +3999,7 @@ msgstr "Servizo Inválido"
 msgid "Set %1 to \"%2\"..."
 msgstr "Colocar %1 para \"%2\"..."
 
-#: core/commandlineoptions.cpp:151
+#: core/commandlineoptions.cpp:155
 msgid "Set the volume to <value> percent"
 msgstr "Axusta o volume a <value> por cento"
 
@@ -4010,7 +4034,7 @@ msgstr "Mostrar OSD"
 msgid "Show a glowing animation on the current track"
 msgstr "Mostrar unha animación escintilante no actual corte"
 
-#: ../bin/src/ui_appearancesettingspage.h:286
+#: ../bin/src/ui_appearancesettingspage.h:293
 msgid "Show a moodbar in the track progress bar"
 msgstr "Amosar unha barra do ánimo na barra de progreso da pista."
 
@@ -4143,7 +4167,7 @@ msgstr "Intérpretes semellantes"
 msgid "Ska"
 msgstr "Ska"
 
-#: core/commandlineoptions.cpp:149
+#: core/commandlineoptions.cpp:153
 msgid "Skip backwards in playlist"
 msgstr "Saltar para trás na lista de músicas"
 
@@ -4151,7 +4175,7 @@ msgstr "Saltar para trás na lista de músicas"
 msgid "Skip count"
 msgstr "Saltar a conta"
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:154
 msgid "Skip forwards in playlist"
 msgstr "Saltar cara adiante na lista de reprodución"
 
@@ -4251,7 +4275,7 @@ msgstr "Estándar"
 msgid "Starred"
 msgstr "Vixiado"
 
-#: core/commandlineoptions.cpp:145
+#: core/commandlineoptions.cpp:149
 msgid "Start the playlist currently playing"
 msgstr "Reproducir a playlist actualmente reproducindo"
 
@@ -4292,7 +4316,7 @@ msgstr "Deter tras"
 msgid "Stop after this track"
 msgstr "Deter a reprodución despois da pista actual"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:152
 msgid "Stop playback"
 msgstr "Deter"
 
@@ -4415,7 +4439,7 @@ msgstr "Agradecimentos a"
 msgid "The \"%1\" command could not be started."
 msgstr "O \"%1\" comando non pode ser iniciado"
 
-#: ../bin/src/ui_appearancesettingspage.h:277
+#: ../bin/src/ui_appearancesettingspage.h:282
 msgid "The album cover of the currently playing song"
 msgstr "Portada do álbum da canción actual"
 
@@ -4595,7 +4619,7 @@ msgstr "Alternar o estado da cola"
 msgid "Toggle scrobbling"
 msgstr "Alternar o envío de escoitas"
 
-#: core/commandlineoptions.cpp:162
+#: core/commandlineoptions.cpp:168
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Alternar a visibilidade da pantalla xeitosa."
 
@@ -4661,7 +4685,7 @@ msgstr "Apagar"
 msgid "URI"
 msgstr "URI"
 
-#: core/commandlineoptions.cpp:144
+#: core/commandlineoptions.cpp:148
 msgid "URL(s)"
 msgstr "URL(s)"
 
@@ -4744,7 +4768,7 @@ msgstr "Actualizando (%1%)…"
 msgid "Updating library"
 msgstr "A actualizar a biblioteca"
 
-#: core/commandlineoptions.cpp:144
+#: core/commandlineoptions.cpp:148
 msgid "Usage"
 msgstr "Utilizazón"
 
@@ -4768,7 +4792,7 @@ msgstr "Empregar os datos de reprodución da ganancia cando estean dispoñíbeis
 msgid "Use Wii Remote"
 msgstr "Empregar un mando de Wii."
 
-#: ../bin/src/ui_appearancesettingspage.h:269
+#: ../bin/src/ui_appearancesettingspage.h:274
 msgid "Use a custom color set"
 msgstr "Empregar unha combinación de cores personalizada."
 
@@ -4804,7 +4828,7 @@ msgstr "Empregar unha redución temporal do ruído."
 msgid "Use the system default"
 msgstr "Empregar a configuración do sistema."
 
-#: ../bin/src/ui_appearancesettingspage.h:268
+#: ../bin/src/ui_appearancesettingspage.h:273
 msgid "Use the system default color set"
 msgstr "Empregar a combinación de cores do sistema."
 
@@ -4825,7 +4849,7 @@ msgstr "Empregado"
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr "O usuario «%1» non ten conta de Grooveshark Anywhere («Grooveshark en calquera parte»)."
 
-#: ui/settingsdialog.cpp:142
+#: ui/settingsdialog.cpp:146
 msgid "User interface"
 msgstr "Interface de usuario"
 
@@ -5195,7 +5219,7 @@ msgstr "entre"
 msgid "biggest first"
 msgstr "primeiro o meirande"
 
-#: playlist/playlistview.cpp:201 ui/edittagdialog.cpp:452
+#: playlist/playlistview.cpp:200 ui/edittagdialog.cpp:452
 msgid "bpm"
 msgstr "bpm"
 
@@ -5242,7 +5266,7 @@ msgstr "maior que"
 msgid "in the last"
 msgstr "na última"
 
-#: playlist/playlistview.cpp:203 ui/edittagdialog.cpp:454
+#: playlist/playlistview.cpp:202 ui/edittagdialog.cpp:454
 #: internet/spotifysettingspage.cpp:60 internet/spotifysettingspage.cpp:61
 #: internet/spotifysettingspage.cpp:62
 msgid "kbps"
@@ -5285,7 +5309,7 @@ msgstr "primeiro o máis vello"
 msgid "on"
 msgstr "en"
 
-#: core/commandlineoptions.cpp:144
+#: core/commandlineoptions.cpp:148
 msgid "options"
 msgstr "opcións"
 

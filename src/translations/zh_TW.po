@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-01-30 13:17+0000\n"
+"PO-Revision-Date: 2013-02-17 06:24+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -228,7 +228,7 @@ msgstr "...和所有的 Amarok 的貢獻者"
 msgid "0:00:00"
 msgstr "0:00:00"
 
-#: ../bin/src/ui_appearancesettingspage.h:284
+#: ../bin/src/ui_appearancesettingspage.h:289
 msgid "0px"
 msgstr ""
 
@@ -244,6 +244,10 @@ msgstr "1 歌曲"
 #: ../bin/src/ui_magnatunesettingspage.h:174
 msgid "128k MP3"
 msgstr "128k MP3"
+
+#: ../bin/src/ui_appearancesettingspage.h:291
+msgid "40%"
+msgstr ""
 
 #: library/library.cpp:58
 msgid "50 random tracks"
@@ -552,7 +556,7 @@ msgstr "專輯 (為所有歌曲取得理想音量)"
 msgid "Album artist"
 msgstr "專輯演出者"
 
-#: ../bin/src/ui_appearancesettingspage.h:279
+#: ../bin/src/ui_appearancesettingspage.h:284
 msgid "Album cover"
 msgstr "專輯封面"
 
@@ -658,11 +662,11 @@ msgid "Angry"
 msgstr "生氣"
 
 #: ../bin/src/ui_songinfosettingspage.h:180
-#: ../bin/src/ui_appearancesettingspage.h:266
+#: ../bin/src/ui_appearancesettingspage.h:271
 msgid "Appearance"
 msgstr "外觀"
 
-#: core/commandlineoptions.cpp:157
+#: core/commandlineoptions.cpp:163
 msgid "Append files/URLs to the playlist"
 msgstr "附加檔案或網址到播放清單"
 
@@ -778,7 +782,7 @@ msgstr "背景串流"
 msgid "Background color"
 msgstr "背景顏色"
 
-#: ../bin/src/ui_appearancesettingspage.h:274
+#: ../bin/src/ui_appearancesettingspage.h:279
 msgid "Background image"
 msgstr "背景圖片"
 
@@ -843,6 +847,10 @@ msgstr "區塊型態"
 msgid "Bluetooth MAC Address"
 msgstr "藍牙 MAC 位址"
 
+#: ../bin/src/ui_appearancesettingspage.h:288
+msgid "Blur amount"
+msgstr ""
+
 #: ../bin/src/ui_notificationssettingspage.h:421
 msgid "Body"
 msgstr "主體"
@@ -851,9 +859,13 @@ msgstr "主體"
 msgid "Boom analyzer"
 msgstr "聲響分析儀"
 
+#: ../bin/src/ui_boxsettingspage.h:103
+msgid "Box"
+msgstr ""
+
 #: ../bin/src/ui_magnatunedownloaddialog.h:146
 #: ../bin/src/ui_podcastsettingspage.h:242
-#: ../bin/src/ui_appearancesettingspage.h:282
+#: ../bin/src/ui_appearancesettingspage.h:287
 msgid "Browse..."
 msgstr "瀏覽..."
 
@@ -905,7 +917,7 @@ msgstr "變更快速鍵..."
 msgid "Change shuffle mode"
 msgstr "切換隨機模式"
 
-#: core/commandlineoptions.cpp:163
+#: core/commandlineoptions.cpp:169
 msgid "Change the language"
 msgstr "變更語言"
 
@@ -998,6 +1010,10 @@ msgid ""
 "a format that it can play."
 msgstr "Clementine 可以自動轉換您複製到這個裝置的音樂為它可以播放的格式。"
 
+#: ../bin/src/ui_boxsettingspage.h:104
+msgid "Clementine can play music that you have uploaded to Box"
+msgstr ""
+
 #: ../bin/src/ui_dropboxsettingspage.h:104
 msgid "Clementine can play music that you have uploaded to Dropbox"
 msgstr ""
@@ -1055,7 +1071,7 @@ msgid "Click to toggle between remaining time and total time"
 msgstr "點擊以切換剩餘時間/全部時間"
 
 #: ../bin/src/ui_googledrivesettingspage.h:106
-#: ../bin/src/ui_dropboxsettingspage.h:106
+#: ../bin/src/ui_dropboxsettingspage.h:106 ../bin/src/ui_boxsettingspage.h:106
 msgid ""
 "Clicking the Login button will open a web browser.  You should return to "
 "Clementine after you have logged in."
@@ -1089,11 +1105,11 @@ msgstr "俱樂部"
 msgid "Color"
 msgstr "顏色"
 
-#: ../bin/src/ui_appearancesettingspage.h:267
+#: ../bin/src/ui_appearancesettingspage.h:272
 msgid "Colors"
 msgstr "顏色"
 
-#: core/commandlineoptions.cpp:166
+#: core/commandlineoptions.cpp:172
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "用逗號化分類別清單:等級為0-3"
 
@@ -1370,7 +1386,7 @@ msgstr "Ctrl+Up"
 msgid "Custom"
 msgstr "自訂"
 
-#: ../bin/src/ui_appearancesettingspage.h:281
+#: ../bin/src/ui_appearancesettingspage.h:286
 msgid "Custom image:"
 msgstr "自訂圖片："
 
@@ -1417,15 +1433,19 @@ msgstr "天"
 msgid "De&fault"
 msgstr "預設(&F)"
 
-#: core/commandlineoptions.cpp:153
+#: core/commandlineoptions.cpp:157
 msgid "Decrease the volume by 4%"
 msgstr "減低音量4％"
+
+#: core/commandlineoptions.cpp:159
+msgid "Decrease the volume by <value> percent"
+msgstr ""
 
 #: core/globalshortcuts.cpp:53 wiimotedev/wiimotesettingspage.cpp:104
 msgid "Decrease volume"
 msgstr "減低音量"
 
-#: ../bin/src/ui_appearancesettingspage.h:275
+#: ../bin/src/ui_appearancesettingspage.h:280
 msgid "Default background image"
 msgstr "預設的背景圖片"
 
@@ -1553,7 +1573,7 @@ msgstr "目錄"
 msgid "Disable duration"
 msgstr "禁用期限"
 
-#: ../bin/src/ui_appearancesettingspage.h:289
+#: ../bin/src/ui_appearancesettingspage.h:296
 msgid "Disable moodbar generation"
 msgstr ""
 
@@ -1576,7 +1596,7 @@ msgstr "不連續傳送"
 msgid "Display options"
 msgstr "顯示選項"
 
-#: core/commandlineoptions.cpp:161
+#: core/commandlineoptions.cpp:167
 msgid "Display the on-screen-display"
 msgstr "顯示螢幕上的顯示"
 
@@ -1817,11 +1837,11 @@ msgstr "整個收藏"
 msgid "Equalizer"
 msgstr "等化器"
 
-#: core/commandlineoptions.cpp:164
+#: core/commandlineoptions.cpp:170
 msgid "Equivalent to --log-levels *:1"
 msgstr ""
 
-#: core/commandlineoptions.cpp:165
+#: core/commandlineoptions.cpp:171
 msgid "Equivalent to --log-levels *:3"
 msgstr ""
 
@@ -1996,7 +2016,7 @@ msgstr "自動取得"
 msgid "Fetch completed"
 msgstr "取得完成"
 
-#: internet/subsonicservice.cpp:209
+#: internet/subsonicservice.cpp:218
 msgid "Fetching Subsonic library"
 msgstr ""
 
@@ -2157,7 +2177,7 @@ msgstr "全部高音"
 msgid "GStreamer audio engine"
 msgstr "GStreamer 的音訊引擎"
 
-#: ui/settingsdialog.cpp:128
+#: ui/settingsdialog.cpp:132
 msgid "General"
 msgstr "一般"
 
@@ -2393,9 +2413,13 @@ msgstr ""
 msgid "Incompatible Subsonic REST protocol version. Server must upgrade."
 msgstr ""
 
-#: core/commandlineoptions.cpp:152
+#: core/commandlineoptions.cpp:156
 msgid "Increase the volume by 4%"
 msgstr "增加音量4％"
+
+#: core/commandlineoptions.cpp:158
+msgid "Increase the volume by <value> percent"
+msgstr ""
 
 #: core/globalshortcuts.cpp:52 wiimotedev/wiimotesettingspage.cpp:103
 msgid "Increase volume"
@@ -2426,7 +2450,7 @@ msgstr ""
 msgid "Internet"
 msgstr "網路"
 
-#: ui/settingsdialog.cpp:150
+#: ui/settingsdialog.cpp:154
 msgid "Internet providers"
 msgstr "網際網路服務供應商"
 
@@ -2718,7 +2742,7 @@ msgstr "載入曲目資訊"
 msgid "Loading..."
 msgstr "載入中..."
 
-#: core/commandlineoptions.cpp:158
+#: core/commandlineoptions.cpp:164
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "載入檔案/網址，取代目前的播放清單"
 
@@ -2730,7 +2754,7 @@ msgstr "載入檔案/網址，取代目前的播放清單"
 #: ../bin/src/ui_lastfmsettingspage.h:153
 #: ../bin/src/ui_googledrivesettingspage.h:105
 #: ../bin/src/ui_ubuntuonesettingspage.h:112
-#: ../bin/src/ui_dropboxsettingspage.h:105
+#: ../bin/src/ui_dropboxsettingspage.h:105 ../bin/src/ui_boxsettingspage.h:105
 msgid "Login"
 msgstr "登錄"
 
@@ -2892,12 +2916,12 @@ msgstr "月"
 msgid "Mood"
 msgstr ""
 
-#: ../bin/src/ui_appearancesettingspage.h:287
+#: ../bin/src/ui_appearancesettingspage.h:294
 #: moodbar/moodbarproxystyle.cpp:342
 msgid "Moodbar style"
 msgstr ""
 
-#: ../bin/src/ui_appearancesettingspage.h:285
+#: ../bin/src/ui_appearancesettingspage.h:292
 msgid "Moodbars"
 msgstr ""
 
@@ -3064,7 +3088,7 @@ msgstr ""
 msgid "No analyzer"
 msgstr "沒有分析儀"
 
-#: ../bin/src/ui_appearancesettingspage.h:280
+#: ../bin/src/ui_appearancesettingspage.h:285
 msgid "No background image"
 msgstr "沒有背景圖片"
 
@@ -3180,6 +3204,10 @@ msgstr ""
 msgid "Only show the first"
 msgstr "只顯示第一"
 
+#: ../bin/src/ui_appearancesettingspage.h:290
+msgid "Opacity"
+msgstr ""
+
 #: internet/digitallyimportedservicebase.cpp:179
 #: internet/groovesharkservice.cpp:544 internet/icecastservice.cpp:296
 #: internet/jamendoservice.cpp:419 internet/magnatuneservice.cpp:278
@@ -3259,7 +3287,7 @@ msgstr "組織檔案中"
 msgid "Original tags"
 msgstr "原來的標籤"
 
-#: core/commandlineoptions.cpp:160
+#: core/commandlineoptions.cpp:166
 msgid "Other options"
 msgstr "其它選項"
 
@@ -3309,7 +3337,7 @@ msgstr "密碼保護"
 msgid "Pause"
 msgstr "暫停"
 
-#: core/commandlineoptions.cpp:147
+#: core/commandlineoptions.cpp:151
 msgid "Pause playback"
 msgstr "暫停播放"
 
@@ -3344,7 +3372,7 @@ msgstr "播放計數"
 msgid "Play custom radio..."
 msgstr "播放自定義電台"
 
-#: core/commandlineoptions.cpp:146
+#: core/commandlineoptions.cpp:150
 msgid "Play if stopped, pause if playing"
 msgstr "停止的話就開始播放，播放中的就暫停"
 
@@ -3357,7 +3385,7 @@ msgstr "播放如果沒有歌曲是正在播放中"
 msgid "Play tag radio..."
 msgstr "播放標籤的頻道..."
 
-#: core/commandlineoptions.cpp:159
+#: core/commandlineoptions.cpp:165
 msgid "Play the <n>th track in the playlist"
 msgstr "播放清單中的第<n>首歌曲"
 
@@ -3369,7 +3397,7 @@ msgstr "播放/暫停"
 msgid "Playback"
 msgstr "播放"
 
-#: core/commandlineoptions.cpp:144
+#: core/commandlineoptions.cpp:148
 msgid "Player options"
 msgstr "播放器選項"
 
@@ -3382,7 +3410,7 @@ msgstr "播放清單"
 msgid "Playlist finished"
 msgstr "完成的播放清單"
 
-#: core/commandlineoptions.cpp:156
+#: core/commandlineoptions.cpp:162
 msgid "Playlist options"
 msgstr "播放清單選擇"
 
@@ -3502,7 +3530,7 @@ msgstr "往前"
 msgid "Previous track"
 msgstr "上一首歌曲"
 
-#: core/commandlineoptions.cpp:167
+#: core/commandlineoptions.cpp:173
 msgid "Print out version information"
 msgstr "印出版本資訊"
 
@@ -3790,7 +3818,7 @@ msgstr "取樣頻率"
 msgid "Samplerate"
 msgstr "取樣頻率"
 
-#: ../bin/src/ui_appearancesettingspage.h:288
+#: ../bin/src/ui_appearancesettingspage.h:295
 msgid "Save .mood files in your music library"
 msgstr ""
 
@@ -3910,11 +3938,11 @@ msgstr "倒帶"
 msgid "Seek forward"
 msgstr "快轉"
 
-#: core/commandlineoptions.cpp:155
+#: core/commandlineoptions.cpp:161
 msgid "Seek the currently playing track by a relative amount"
 msgstr "藉由相對數字尋找現在播放的曲目"
 
-#: core/commandlineoptions.cpp:154
+#: core/commandlineoptions.cpp:160
 msgid "Seek the currently playing track to an absolute position"
 msgstr "藉由絕對位置尋找現在播放的曲目"
 
@@ -3926,11 +3954,11 @@ msgstr "選擇全部"
 msgid "Select None"
 msgstr "不選取"
 
-#: ../bin/src/ui_appearancesettingspage.h:272
+#: ../bin/src/ui_appearancesettingspage.h:277
 msgid "Select background color:"
 msgstr "選擇背景色："
 
-#: ui/appearancesettingspage.cpp:240
+#: ui/appearancesettingspage.cpp:247
 msgid "Select background image"
 msgstr "選擇背景圖片"
 
@@ -3938,11 +3966,7 @@ msgstr "選擇背景圖片"
 msgid "Select best possible match"
 msgstr "選擇最佳匹配"
 
-#: ../bin/src/ui_appearancesettingspage.h:283
-msgid "Select blur radius:"
-msgstr ""
-
-#: ../bin/src/ui_appearancesettingspage.h:270
+#: ../bin/src/ui_appearancesettingspage.h:275
 msgid "Select foreground color:"
 msgstr "選擇前景色："
 
@@ -3975,7 +3999,7 @@ msgstr "服務離線"
 msgid "Set %1 to \"%2\"..."
 msgstr "設定 %1 到「%2」..."
 
-#: core/commandlineoptions.cpp:151
+#: core/commandlineoptions.cpp:155
 msgid "Set the volume to <value> percent"
 msgstr "設定音量到百分之<value>"
 
@@ -4010,7 +4034,7 @@ msgstr "顯示 OSD"
 msgid "Show a glowing animation on the current track"
 msgstr "顯示一發光動畫在目前播放歌曲上"
 
-#: ../bin/src/ui_appearancesettingspage.h:286
+#: ../bin/src/ui_appearancesettingspage.h:293
 msgid "Show a moodbar in the track progress bar"
 msgstr ""
 
@@ -4143,7 +4167,7 @@ msgstr "相似的演出者"
 msgid "Ska"
 msgstr "強節奏流行音樂"
 
-#: core/commandlineoptions.cpp:149
+#: core/commandlineoptions.cpp:153
 msgid "Skip backwards in playlist"
 msgstr "跳至播放清單開頭"
 
@@ -4151,7 +4175,7 @@ msgstr "跳至播放清單開頭"
 msgid "Skip count"
 msgstr "略過計數"
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:154
 msgid "Skip forwards in playlist"
 msgstr "跳至播放清單最後頭"
 
@@ -4251,7 +4275,7 @@ msgstr "標準"
 msgid "Starred"
 msgstr "已標記星號"
 
-#: core/commandlineoptions.cpp:145
+#: core/commandlineoptions.cpp:149
 msgid "Start the playlist currently playing"
 msgstr "開始播放目前播放清單"
 
@@ -4292,7 +4316,7 @@ msgstr ""
 msgid "Stop after this track"
 msgstr "在這首歌之後停止"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:152
 msgid "Stop playback"
 msgstr "停止播放"
 
@@ -4415,7 +4439,7 @@ msgstr "感謝"
 msgid "The \"%1\" command could not be started."
 msgstr "無法開始指令\"%1\""
 
-#: ../bin/src/ui_appearancesettingspage.h:277
+#: ../bin/src/ui_appearancesettingspage.h:282
 msgid "The album cover of the currently playing song"
 msgstr "目前播放歌曲的專輯封面"
 
@@ -4595,7 +4619,7 @@ msgstr "切換佇列狀態"
 msgid "Toggle scrobbling"
 msgstr "切換 scrobbling"
 
-#: core/commandlineoptions.cpp:162
+#: core/commandlineoptions.cpp:168
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr ""
 
@@ -4661,7 +4685,7 @@ msgstr "關閉"
 msgid "URI"
 msgstr ""
 
-#: core/commandlineoptions.cpp:144
+#: core/commandlineoptions.cpp:148
 msgid "URL(s)"
 msgstr ""
 
@@ -4744,7 +4768,7 @@ msgstr "更新 %1%..."
 msgid "Updating library"
 msgstr "正在更新音樂庫"
 
-#: core/commandlineoptions.cpp:144
+#: core/commandlineoptions.cpp:148
 msgid "Usage"
 msgstr "使用"
 
@@ -4768,7 +4792,7 @@ msgstr "使用回放增益元數據，如果它是可獲得的"
 msgid "Use Wii Remote"
 msgstr "使用 Wii 遙控器"
 
-#: ../bin/src/ui_appearancesettingspage.h:269
+#: ../bin/src/ui_appearancesettingspage.h:274
 msgid "Use a custom color set"
 msgstr "使用自訂顏色組合"
 
@@ -4804,7 +4828,7 @@ msgstr "使用時域雜訊重整"
 msgid "Use the system default"
 msgstr "使用系統預設"
 
-#: ../bin/src/ui_appearancesettingspage.h:268
+#: ../bin/src/ui_appearancesettingspage.h:273
 msgid "Use the system default color set"
 msgstr "使用系統預設的顏色組合"
 
@@ -4825,7 +4849,7 @@ msgstr "已用"
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr ""
 
-#: ui/settingsdialog.cpp:142
+#: ui/settingsdialog.cpp:146
 msgid "User interface"
 msgstr "使用者介面"
 
@@ -5195,7 +5219,7 @@ msgstr ""
 msgid "biggest first"
 msgstr ""
 
-#: playlist/playlistview.cpp:201 ui/edittagdialog.cpp:452
+#: playlist/playlistview.cpp:200 ui/edittagdialog.cpp:452
 msgid "bpm"
 msgstr "bpm"
 
@@ -5242,7 +5266,7 @@ msgstr ""
 msgid "in the last"
 msgstr ""
 
-#: playlist/playlistview.cpp:203 ui/edittagdialog.cpp:454
+#: playlist/playlistview.cpp:202 ui/edittagdialog.cpp:454
 #: internet/spotifysettingspage.cpp:60 internet/spotifysettingspage.cpp:61
 #: internet/spotifysettingspage.cpp:62
 msgid "kbps"
@@ -5285,7 +5309,7 @@ msgstr "最舊優先"
 msgid "on"
 msgstr ""
 
-#: core/commandlineoptions.cpp:144
+#: core/commandlineoptions.cpp:148
 msgid "options"
 msgstr "選項"
 

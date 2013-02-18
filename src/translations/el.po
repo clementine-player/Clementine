@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-01-30 13:17+0000\n"
+"PO-Revision-Date: 2013-02-17 06:23+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -230,7 +230,7 @@ msgstr "...και σε όλους τους συνεισφέροντες του A
 msgid "0:00:00"
 msgstr "0:00:00"
 
-#: ../bin/src/ui_appearancesettingspage.h:284
+#: ../bin/src/ui_appearancesettingspage.h:289
 msgid "0px"
 msgstr "0px"
 
@@ -246,6 +246,10 @@ msgstr "1 κομμάτι"
 #: ../bin/src/ui_magnatunesettingspage.h:174
 msgid "128k MP3"
 msgstr "128k MP3"
+
+#: ../bin/src/ui_appearancesettingspage.h:291
+msgid "40%"
+msgstr ""
 
 #: library/library.cpp:58
 msgid "50 random tracks"
@@ -554,7 +558,7 @@ msgstr "Άλμπουμ (ιδανική ένταση για όλα τα κομμ�
 msgid "Album artist"
 msgstr "Καλλιτέχνης άλμπουμ"
 
-#: ../bin/src/ui_appearancesettingspage.h:279
+#: ../bin/src/ui_appearancesettingspage.h:284
 msgid "Album cover"
 msgstr "Εξώφυλλο άλμπουμ"
 
@@ -660,11 +664,11 @@ msgid "Angry"
 msgstr "Angry"
 
 #: ../bin/src/ui_songinfosettingspage.h:180
-#: ../bin/src/ui_appearancesettingspage.h:266
+#: ../bin/src/ui_appearancesettingspage.h:271
 msgid "Appearance"
 msgstr "Εμφάνιση"
 
-#: core/commandlineoptions.cpp:157
+#: core/commandlineoptions.cpp:163
 msgid "Append files/URLs to the playlist"
 msgstr "Προσάρτηση αρχείων/URLs στην λίστα αναπαραγωγής"
 
@@ -780,7 +784,7 @@ msgstr "Ροές Παρασκηνίου"
 msgid "Background color"
 msgstr "Χρώμα φόντου"
 
-#: ../bin/src/ui_appearancesettingspage.h:274
+#: ../bin/src/ui_appearancesettingspage.h:279
 msgid "Background image"
 msgstr "Εικόνα φόντου"
 
@@ -845,6 +849,10 @@ msgstr "Τύπος μπλοκ"
 msgid "Bluetooth MAC Address"
 msgstr "Διεύθυνση MAC του Bluetooth"
 
+#: ../bin/src/ui_appearancesettingspage.h:288
+msgid "Blur amount"
+msgstr ""
+
 #: ../bin/src/ui_notificationssettingspage.h:421
 msgid "Body"
 msgstr "Σώμα"
@@ -853,9 +861,13 @@ msgstr "Σώμα"
 msgid "Boom analyzer"
 msgstr "Boom"
 
+#: ../bin/src/ui_boxsettingspage.h:103
+msgid "Box"
+msgstr ""
+
 #: ../bin/src/ui_magnatunedownloaddialog.h:146
 #: ../bin/src/ui_podcastsettingspage.h:242
-#: ../bin/src/ui_appearancesettingspage.h:282
+#: ../bin/src/ui_appearancesettingspage.h:287
 msgid "Browse..."
 msgstr "Αναζήτηση..."
 
@@ -907,7 +919,7 @@ msgstr "Αλλαγή συντόμευσης..."
 msgid "Change shuffle mode"
 msgstr "Αλλάξτε μέθοδο ανάμιξης"
 
-#: core/commandlineoptions.cpp:163
+#: core/commandlineoptions.cpp:169
 msgid "Change the language"
 msgstr "Αλλαγή γλώσσας"
 
@@ -1000,6 +1012,10 @@ msgid ""
 "a format that it can play."
 msgstr "Ο Clementine μπορεί να μετατρέψει αυτόματα την μουσική που αντιγράφετε σε αυτή την συσκευή σε μία μορφή που μπορεί να αναπαράγει."
 
+#: ../bin/src/ui_boxsettingspage.h:104
+msgid "Clementine can play music that you have uploaded to Box"
+msgstr ""
+
 #: ../bin/src/ui_dropboxsettingspage.h:104
 msgid "Clementine can play music that you have uploaded to Dropbox"
 msgstr "Ο Clementine μπορεί να αναπαράγει μουσική που έχετε ανεβάσει στο Dropbox. "
@@ -1057,7 +1073,7 @@ msgid "Click to toggle between remaining time and total time"
 msgstr "\"Κλικ\" για εναλλαγή μεταξύ συνολικού και εναπομείναντα χρόνου"
 
 #: ../bin/src/ui_googledrivesettingspage.h:106
-#: ../bin/src/ui_dropboxsettingspage.h:106
+#: ../bin/src/ui_dropboxsettingspage.h:106 ../bin/src/ui_boxsettingspage.h:106
 msgid ""
 "Clicking the Login button will open a web browser.  You should return to "
 "Clementine after you have logged in."
@@ -1091,11 +1107,11 @@ msgstr "Club"
 msgid "Color"
 msgstr "Χρώμα"
 
-#: ../bin/src/ui_appearancesettingspage.h:267
+#: ../bin/src/ui_appearancesettingspage.h:272
 msgid "Colors"
 msgstr "Χρώματα"
 
-#: core/commandlineoptions.cpp:166
+#: core/commandlineoptions.cpp:172
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Λίστα χωρισμένη με κόμμα από class:level, το level είναι 0-3"
 
@@ -1372,7 +1388,7 @@ msgstr "Ctrl+Up"
 msgid "Custom"
 msgstr "Προσαρμοσμένο"
 
-#: ../bin/src/ui_appearancesettingspage.h:281
+#: ../bin/src/ui_appearancesettingspage.h:286
 msgid "Custom image:"
 msgstr "Προσωπική εικόνα:"
 
@@ -1419,15 +1435,19 @@ msgstr "Ημέρες"
 msgid "De&fault"
 msgstr "Προ&επιλογή"
 
-#: core/commandlineoptions.cpp:153
+#: core/commandlineoptions.cpp:157
 msgid "Decrease the volume by 4%"
 msgstr "Μείωση της έντασης ήχου κατά 4%"
+
+#: core/commandlineoptions.cpp:159
+msgid "Decrease the volume by <value> percent"
+msgstr ""
 
 #: core/globalshortcuts.cpp:53 wiimotedev/wiimotesettingspage.cpp:104
 msgid "Decrease volume"
 msgstr "Μείωση έντασης"
 
-#: ../bin/src/ui_appearancesettingspage.h:275
+#: ../bin/src/ui_appearancesettingspage.h:280
 msgid "Default background image"
 msgstr "Προεπιλεγμένη εικόνα φόντου"
 
@@ -1555,7 +1575,7 @@ msgstr "Κατάλογος"
 msgid "Disable duration"
 msgstr "Απενεργοποίηση διάρκειας"
 
-#: ../bin/src/ui_appearancesettingspage.h:289
+#: ../bin/src/ui_appearancesettingspage.h:296
 msgid "Disable moodbar generation"
 msgstr "Απενεργοποίηση δημιουργίας moodbar "
 
@@ -1578,7 +1598,7 @@ msgstr "Διακεκομμένη μετάδοση"
 msgid "Display options"
 msgstr "Επιλογές απεικόνισης"
 
-#: core/commandlineoptions.cpp:161
+#: core/commandlineoptions.cpp:167
 msgid "Display the on-screen-display"
 msgstr "Απεικόνιση της «απεικόνισης στην οθόνη»"
 
@@ -1819,11 +1839,11 @@ msgstr "Ολόκληρη η συλλογή"
 msgid "Equalizer"
 msgstr "Ισοσταθμιστής"
 
-#: core/commandlineoptions.cpp:164
+#: core/commandlineoptions.cpp:170
 msgid "Equivalent to --log-levels *:1"
 msgstr "Ισοδύναμο με --log-levels *:1"
 
-#: core/commandlineoptions.cpp:165
+#: core/commandlineoptions.cpp:171
 msgid "Equivalent to --log-levels *:3"
 msgstr "Ισοδύναμο με --log-levels *:3"
 
@@ -1998,7 +2018,7 @@ msgstr "Αυτόματο κατέβασμα"
 msgid "Fetch completed"
 msgstr "Η ανάκτηση ολοκληρώθηκε"
 
-#: internet/subsonicservice.cpp:209
+#: internet/subsonicservice.cpp:218
 msgid "Fetching Subsonic library"
 msgstr "Μεταφόρτωση καταλόγου Subsonic"
 
@@ -2159,7 +2179,7 @@ msgstr "Πλήρως πρίμα"
 msgid "GStreamer audio engine"
 msgstr "GStreamer, μηχανή ήχου"
 
-#: ui/settingsdialog.cpp:128
+#: ui/settingsdialog.cpp:132
 msgid "General"
 msgstr "Γενικά"
 
@@ -2395,9 +2415,13 @@ msgstr "Ασύμβατη έκδοση πρωτοκόλλου REST. Η εφαρμ
 msgid "Incompatible Subsonic REST protocol version. Server must upgrade."
 msgstr "Ασύμβατη έκδοση πρωτοκόλλου REST. Ο διακομιστής πρέπει να ενημερωθεί."
 
-#: core/commandlineoptions.cpp:152
+#: core/commandlineoptions.cpp:156
 msgid "Increase the volume by 4%"
 msgstr "Αύξηση της έντασης ήχου κατά 4%"
+
+#: core/commandlineoptions.cpp:158
+msgid "Increase the volume by <value> percent"
+msgstr ""
 
 #: core/globalshortcuts.cpp:52 wiimotedev/wiimotesettingspage.cpp:103
 msgid "Increase volume"
@@ -2428,7 +2452,7 @@ msgstr "έλεγχος ακεραιότητας"
 msgid "Internet"
 msgstr "Διαδίκτυο"
 
-#: ui/settingsdialog.cpp:150
+#: ui/settingsdialog.cpp:154
 msgid "Internet providers"
 msgstr "Παροχείς Internet"
 
@@ -2720,7 +2744,7 @@ msgstr "Φόρτωση πληροφοριών κομματιού"
 msgid "Loading..."
 msgstr "Φόρτωση..."
 
-#: core/commandlineoptions.cpp:158
+#: core/commandlineoptions.cpp:164
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "Φορτώνει αρχεία/URLs, αντικαθιστώντας την τρέχουσα λίστα αναπαραγωγής"
 
@@ -2732,7 +2756,7 @@ msgstr "Φορτώνει αρχεία/URLs, αντικαθιστώντας τη�
 #: ../bin/src/ui_lastfmsettingspage.h:153
 #: ../bin/src/ui_googledrivesettingspage.h:105
 #: ../bin/src/ui_ubuntuonesettingspage.h:112
-#: ../bin/src/ui_dropboxsettingspage.h:105
+#: ../bin/src/ui_dropboxsettingspage.h:105 ../bin/src/ui_boxsettingspage.h:105
 msgid "Login"
 msgstr "Είσοδος"
 
@@ -2894,12 +2918,12 @@ msgstr "Μήνες"
 msgid "Mood"
 msgstr "Mood"
 
-#: ../bin/src/ui_appearancesettingspage.h:287
+#: ../bin/src/ui_appearancesettingspage.h:294
 #: moodbar/moodbarproxystyle.cpp:342
 msgid "Moodbar style"
 msgstr "Στυλ moodbar"
 
-#: ../bin/src/ui_appearancesettingspage.h:285
+#: ../bin/src/ui_appearancesettingspage.h:292
 msgid "Moodbars"
 msgstr "Moodbars"
 
@@ -3066,7 +3090,7 @@ msgstr "Την επόμενη εβδομάδα"
 msgid "No analyzer"
 msgstr "Χωρίς αναλυτή"
 
-#: ../bin/src/ui_appearancesettingspage.h:280
+#: ../bin/src/ui_appearancesettingspage.h:285
 msgid "No background image"
 msgstr "Χωρίς εικόνα φόντου"
 
@@ -3182,6 +3206,10 @@ msgstr "Αποδοχή συνδέσεων από πελάτες με διακύ�
 msgid "Only show the first"
 msgstr "Εμφάνιση μόνο του πρώτου"
 
+#: ../bin/src/ui_appearancesettingspage.h:290
+msgid "Opacity"
+msgstr ""
+
 #: internet/digitallyimportedservicebase.cpp:179
 #: internet/groovesharkservice.cpp:544 internet/icecastservice.cpp:296
 #: internet/jamendoservice.cpp:419 internet/magnatuneservice.cpp:278
@@ -3261,7 +3289,7 @@ msgstr "Γίνετε οργάνωση αρχείων"
 msgid "Original tags"
 msgstr "Αρχικές ετικέτες"
 
-#: core/commandlineoptions.cpp:160
+#: core/commandlineoptions.cpp:166
 msgid "Other options"
 msgstr "Άλλες επιλογές"
 
@@ -3311,7 +3339,7 @@ msgstr "Προστασία Κωδικού"
 msgid "Pause"
 msgstr "Παύση"
 
-#: core/commandlineoptions.cpp:147
+#: core/commandlineoptions.cpp:151
 msgid "Pause playback"
 msgstr "Παύση αναπαραγωγής"
 
@@ -3346,7 +3374,7 @@ msgstr "Μετρητής εκτελέσεων"
 msgid "Play custom radio..."
 msgstr "Αναπαραγωγή προσαρμοσμένου ραδιοφώνου..."
 
-#: core/commandlineoptions.cpp:146
+#: core/commandlineoptions.cpp:150
 msgid "Play if stopped, pause if playing"
 msgstr "Αναπαραγωγή αν είναι σταματημένο, αλλιώς παύση"
 
@@ -3359,7 +3387,7 @@ msgstr "Αναπαραγωγή εάν δεν παίζει κάτι άλλο"
 msgid "Play tag radio..."
 msgstr "Αναπαραγωγή ραδιοφώνου ετικετών..."
 
-#: core/commandlineoptions.cpp:159
+#: core/commandlineoptions.cpp:165
 msgid "Play the <n>th track in the playlist"
 msgstr "Αναπαραγωγή του <n>ου κομματιού της λίστας αναπαραγωγής"
 
@@ -3371,7 +3399,7 @@ msgstr "Αναπαραγωγή/Παύση"
 msgid "Playback"
 msgstr "Αναπαραγωγή"
 
-#: core/commandlineoptions.cpp:144
+#: core/commandlineoptions.cpp:148
 msgid "Player options"
 msgstr "Επιλογές αναπαραγωγής"
 
@@ -3384,7 +3412,7 @@ msgstr "Λίστα"
 msgid "Playlist finished"
 msgstr "Η λίστα τελείωσε"
 
-#: core/commandlineoptions.cpp:156
+#: core/commandlineoptions.cpp:162
 msgid "Playlist options"
 msgstr "Επιλογές λίστας αναπαραγωγής"
 
@@ -3504,7 +3532,7 @@ msgstr "Προηγούμενο"
 msgid "Previous track"
 msgstr "Προηγούμενο κομμάτι"
 
-#: core/commandlineoptions.cpp:167
+#: core/commandlineoptions.cpp:173
 msgid "Print out version information"
 msgstr "Εκτύπωση πληροφοριών έκδοσης"
 
@@ -3792,7 +3820,7 @@ msgstr "Ρυθμός δειγματοληψίας"
 msgid "Samplerate"
 msgstr "Δειγματοληψία"
 
-#: ../bin/src/ui_appearancesettingspage.h:288
+#: ../bin/src/ui_appearancesettingspage.h:295
 msgid "Save .mood files in your music library"
 msgstr "Αποθήκευση .mood αρχείων στην βιβλιοθήκη σας"
 
@@ -3912,11 +3940,11 @@ msgstr "Αναζήτηση πίσω"
 msgid "Seek forward"
 msgstr "Αναζήτηση εμπρός"
 
-#: core/commandlineoptions.cpp:155
+#: core/commandlineoptions.cpp:161
 msgid "Seek the currently playing track by a relative amount"
 msgstr "Άλμα στο τρέχον κομμάτι κατά ένα σχετικό ποσό."
 
-#: core/commandlineoptions.cpp:154
+#: core/commandlineoptions.cpp:160
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Άλμα σε σε μια καθορισμένη θέση στο τρέχον κομμάτι."
 
@@ -3928,11 +3956,11 @@ msgstr "Επιλογή όλων"
 msgid "Select None"
 msgstr "Επιλογή κανενός"
 
-#: ../bin/src/ui_appearancesettingspage.h:272
+#: ../bin/src/ui_appearancesettingspage.h:277
 msgid "Select background color:"
 msgstr "Επιλογή χρώματος φόντου:"
 
-#: ui/appearancesettingspage.cpp:240
+#: ui/appearancesettingspage.cpp:247
 msgid "Select background image"
 msgstr "Επιλογή εικόνας φόντου"
 
@@ -3940,11 +3968,7 @@ msgstr "Επιλογή εικόνας φόντου"
 msgid "Select best possible match"
 msgstr "Επιλέξτε το ποιο ταιριαστό"
 
-#: ../bin/src/ui_appearancesettingspage.h:283
-msgid "Select blur radius:"
-msgstr "Επιλέξτε ακτίνα θόλωσης:"
-
-#: ../bin/src/ui_appearancesettingspage.h:270
+#: ../bin/src/ui_appearancesettingspage.h:275
 msgid "Select foreground color:"
 msgstr "Επιλογή χρώματος προσκήνιου:"
 
@@ -3977,7 +4001,7 @@ msgstr "Υπηρεσία εκτός σύνδεσης"
 msgid "Set %1 to \"%2\"..."
 msgstr "Δώσε %1 στο \"%2\"..."
 
-#: core/commandlineoptions.cpp:151
+#: core/commandlineoptions.cpp:155
 msgid "Set the volume to <value> percent"
 msgstr "Ρύθμιση της έντασης ήχου στο <value> της εκατό"
 
@@ -4012,7 +4036,7 @@ msgstr "Εμφάνιση OSD"
 msgid "Show a glowing animation on the current track"
 msgstr "Εμφάνιση ενός φωτεινού σχεδίου στο τρέχον κομμάτι"
 
-#: ../bin/src/ui_appearancesettingspage.h:286
+#: ../bin/src/ui_appearancesettingspage.h:293
 msgid "Show a moodbar in the track progress bar"
 msgstr "Εμφάνιση μίας moodbar στην μπάρα προόδου του κομματιού"
 
@@ -4145,7 +4169,7 @@ msgstr "Παρόμοιοι καλλιτέχνες"
 msgid "Ska"
 msgstr "Ska"
 
-#: core/commandlineoptions.cpp:149
+#: core/commandlineoptions.cpp:153
 msgid "Skip backwards in playlist"
 msgstr "Παράλειψη προς τα πίσω στη λίστα"
 
@@ -4153,7 +4177,7 @@ msgstr "Παράλειψη προς τα πίσω στη λίστα"
 msgid "Skip count"
 msgstr "Μετρητής παραλήψεων"
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:154
 msgid "Skip forwards in playlist"
 msgstr "Παράλειψη προς τα μπροστά στη λίστα"
 
@@ -4253,7 +4277,7 @@ msgstr "Κανονικό"
 msgid "Starred"
 msgstr "Με αστέρι"
 
-#: core/commandlineoptions.cpp:145
+#: core/commandlineoptions.cpp:149
 msgid "Start the playlist currently playing"
 msgstr "Εκκίνηση της λίστας αναπαραγωγής που παίζει τώρα"
 
@@ -4294,7 +4318,7 @@ msgstr "Στοπ μετά"
 msgid "Stop after this track"
 msgstr "Σταμάτημα μετά από αυτό το κομμάτι"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:152
 msgid "Stop playback"
 msgstr "Διακοπή αναπαραγωγής"
 
@@ -4417,7 +4441,7 @@ msgstr "Ευχαριστίες σε"
 msgid "The \"%1\" command could not be started."
 msgstr "Η εντολή \"%1\" δεν μπόρεσε να ξεκινήσει"
 
-#: ../bin/src/ui_appearancesettingspage.h:277
+#: ../bin/src/ui_appearancesettingspage.h:282
 msgid "The album cover of the currently playing song"
 msgstr "Το εξώφυλλο του άλμπουμ του τραγουδιού που παίζει"
 
@@ -4597,7 +4621,7 @@ msgstr "Εναλλαγή της κατάστασης της λίστας ανα�
 msgid "Toggle scrobbling"
 msgstr "Εναλλαγή του scrobbling"
 
-#: core/commandlineoptions.cpp:162
+#: core/commandlineoptions.cpp:168
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Εναλλαγή ορατότητας της όμορφης «απεικόνισης στην οθόνη»"
 
@@ -4663,7 +4687,7 @@ msgstr "Απενεργοποίηση"
 msgid "URI"
 msgstr "URI"
 
-#: core/commandlineoptions.cpp:144
+#: core/commandlineoptions.cpp:148
 msgid "URL(s)"
 msgstr "URL(s)"
 
@@ -4746,7 +4770,7 @@ msgstr "Ενημέρωση %1%..."
 msgid "Updating library"
 msgstr "Ενημέρωση λίστας"
 
-#: core/commandlineoptions.cpp:144
+#: core/commandlineoptions.cpp:148
 msgid "Usage"
 msgstr "Χρήση"
 
@@ -4770,7 +4794,7 @@ msgstr "Χρήση των μετα δεδομένων Replay Gain αν είνα�
 msgid "Use Wii Remote"
 msgstr "Χρήση χειριστηρίου Wii"
 
-#: ../bin/src/ui_appearancesettingspage.h:269
+#: ../bin/src/ui_appearancesettingspage.h:274
 msgid "Use a custom color set"
 msgstr "Χρήση τροποποιημένου χρώματος"
 
@@ -4806,7 +4830,7 @@ msgstr "Χρήση προσωρινής διαμόρφωση θορύβου"
 msgid "Use the system default"
 msgstr "Χρήση προκαθορισμένου του συστήματος"
 
-#: ../bin/src/ui_appearancesettingspage.h:268
+#: ../bin/src/ui_appearancesettingspage.h:273
 msgid "Use the system default color set"
 msgstr "Χρήση χρώματος του συστήματος"
 
@@ -4827,7 +4851,7 @@ msgstr "Σε χρήση"
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr "Ο χρήστης %1 δεν διαθέτει έναν λογαριασμό στο GrooveShark Anywhere"
 
-#: ui/settingsdialog.cpp:142
+#: ui/settingsdialog.cpp:146
 msgid "User interface"
 msgstr "Διασύνδεση χρήστη"
 
@@ -5197,7 +5221,7 @@ msgstr "μεταξύ"
 msgid "biggest first"
 msgstr "το μεγαλύτερο πρώτα"
 
-#: playlist/playlistview.cpp:201 ui/edittagdialog.cpp:452
+#: playlist/playlistview.cpp:200 ui/edittagdialog.cpp:452
 msgid "bpm"
 msgstr "bpm"
 
@@ -5244,7 +5268,7 @@ msgstr "μεγαλύτερο από"
 msgid "in the last"
 msgstr "εντός των τελευταίων"
 
-#: playlist/playlistview.cpp:203 ui/edittagdialog.cpp:454
+#: playlist/playlistview.cpp:202 ui/edittagdialog.cpp:454
 #: internet/spotifysettingspage.cpp:60 internet/spotifysettingspage.cpp:61
 #: internet/spotifysettingspage.cpp:62
 msgid "kbps"
@@ -5287,7 +5311,7 @@ msgstr "το παλαιότερο πρώτα"
 msgid "on"
 msgstr "σε"
 
-#: core/commandlineoptions.cpp:144
+#: core/commandlineoptions.cpp:148
 msgid "options"
 msgstr "επιλογές"
 

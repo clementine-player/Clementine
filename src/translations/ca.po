@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-02-04 21:19+0000\n"
-"Last-Translator: Adolfo Jayme Barrientos <fitoschido@gmail.com>\n"
+"PO-Revision-Date: 2013-02-17 06:24+0000\n"
+"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: ca\n"
@@ -228,7 +228,7 @@ msgstr "…i tots els que han contribuït amb l’Amarok"
 msgid "0:00:00"
 msgstr "0:00:00"
 
-#: ../bin/src/ui_appearancesettingspage.h:284
+#: ../bin/src/ui_appearancesettingspage.h:289
 msgid "0px"
 msgstr "0px"
 
@@ -244,6 +244,10 @@ msgstr "1 pista"
 #: ../bin/src/ui_magnatunesettingspage.h:174
 msgid "128k MP3"
 msgstr "128k MP3"
+
+#: ../bin/src/ui_appearancesettingspage.h:291
+msgid "40%"
+msgstr ""
 
 #: library/library.cpp:58
 msgid "50 random tracks"
@@ -552,7 +556,7 @@ msgstr "Àlbum (volum ideal per a totes les pistes)"
 msgid "Album artist"
 msgstr "Artista de l’àlbum"
 
-#: ../bin/src/ui_appearancesettingspage.h:279
+#: ../bin/src/ui_appearancesettingspage.h:284
 msgid "Album cover"
 msgstr "Portada de l'àlbum"
 
@@ -658,11 +662,11 @@ msgid "Angry"
 msgstr "Enfadat"
 
 #: ../bin/src/ui_songinfosettingspage.h:180
-#: ../bin/src/ui_appearancesettingspage.h:266
+#: ../bin/src/ui_appearancesettingspage.h:271
 msgid "Appearance"
 msgstr "Aparença"
 
-#: core/commandlineoptions.cpp:157
+#: core/commandlineoptions.cpp:163
 msgid "Append files/URLs to the playlist"
 msgstr "Afegir fitxers/URLs a la llista de reproducció"
 
@@ -778,7 +782,7 @@ msgstr "Fluxes en segon pla"
 msgid "Background color"
 msgstr "Color de fons"
 
-#: ../bin/src/ui_appearancesettingspage.h:274
+#: ../bin/src/ui_appearancesettingspage.h:279
 msgid "Background image"
 msgstr "Imatge de fons"
 
@@ -843,6 +847,10 @@ msgstr "Tipus de bloc"
 msgid "Bluetooth MAC Address"
 msgstr "Bluetooth Adreça MAC"
 
+#: ../bin/src/ui_appearancesettingspage.h:288
+msgid "Blur amount"
+msgstr ""
+
 #: ../bin/src/ui_notificationssettingspage.h:421
 msgid "Body"
 msgstr "Cos"
@@ -851,9 +859,13 @@ msgstr "Cos"
 msgid "Boom analyzer"
 msgstr "Analitzador de ressonància"
 
+#: ../bin/src/ui_boxsettingspage.h:103
+msgid "Box"
+msgstr ""
+
 #: ../bin/src/ui_magnatunedownloaddialog.h:146
 #: ../bin/src/ui_podcastsettingspage.h:242
-#: ../bin/src/ui_appearancesettingspage.h:282
+#: ../bin/src/ui_appearancesettingspage.h:287
 msgid "Browse..."
 msgstr "Explora..."
 
@@ -905,7 +917,7 @@ msgstr "Canvia el drecera…"
 msgid "Change shuffle mode"
 msgstr "Canvia el mode aleatori"
 
-#: core/commandlineoptions.cpp:163
+#: core/commandlineoptions.cpp:169
 msgid "Change the language"
 msgstr "Canvia l’idioma"
 
@@ -998,13 +1010,17 @@ msgid ""
 "a format that it can play."
 msgstr "El Clementine pot convertir automàticament la música que copieu en aquest dispositiu a un formant que pugui reproduir."
 
+#: ../bin/src/ui_boxsettingspage.h:104
+msgid "Clementine can play music that you have uploaded to Box"
+msgstr "Clementine pot reproduir música que hagi carregat a Box"
+
 #: ../bin/src/ui_dropboxsettingspage.h:104
 msgid "Clementine can play music that you have uploaded to Dropbox"
 msgstr "Clementine pot reproduir música que hagi carregat a Dropbox"
 
 #: ../bin/src/ui_googledrivesettingspage.h:104
 msgid "Clementine can play music that you have uploaded to Google Drive"
-msgstr ""
+msgstr "Clementine pot reproduir música que hagi carregat a Google Drive"
 
 #: ../bin/src/ui_ubuntuonesettingspage.h:111
 msgid "Clementine can play music that you have uploaded to Ubuntu One"
@@ -1055,7 +1071,7 @@ msgid "Click to toggle between remaining time and total time"
 msgstr "Feu clic aquí per alternar entre el temps de reproducció restant i total"
 
 #: ../bin/src/ui_googledrivesettingspage.h:106
-#: ../bin/src/ui_dropboxsettingspage.h:106
+#: ../bin/src/ui_dropboxsettingspage.h:106 ../bin/src/ui_boxsettingspage.h:106
 msgid ""
 "Clicking the Login button will open a web browser.  You should return to "
 "Clementine after you have logged in."
@@ -1089,11 +1105,11 @@ msgstr "Club"
 msgid "Color"
 msgstr "Color"
 
-#: ../bin/src/ui_appearancesettingspage.h:267
+#: ../bin/src/ui_appearancesettingspage.h:272
 msgid "Colors"
 msgstr "Colors"
 
-#: core/commandlineoptions.cpp:166
+#: core/commandlineoptions.cpp:172
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Llista separada per comes de classe:nivell, el nivell és 0-3"
 
@@ -1147,7 +1163,7 @@ msgstr "Configura Subsonic…"
 
 #: globalsearch/globalsearchview.cpp:140 globalsearch/globalsearchview.cpp:446
 msgid "Configure global search..."
-msgstr "Configura la cerca global:"
+msgstr "Configura la cerca global…"
 
 #: ui/mainwindow.cpp:471
 msgid "Configure library..."
@@ -1370,7 +1386,7 @@ msgstr "Ctrl+Amunt"
 msgid "Custom"
 msgstr "Personalitzat"
 
-#: ../bin/src/ui_appearancesettingspage.h:281
+#: ../bin/src/ui_appearancesettingspage.h:286
 msgid "Custom image:"
 msgstr "Imatge personalitzada:"
 
@@ -1417,15 +1433,19 @@ msgstr "Dies"
 msgid "De&fault"
 msgstr "O&missió"
 
-#: core/commandlineoptions.cpp:153
+#: core/commandlineoptions.cpp:157
 msgid "Decrease the volume by 4%"
 msgstr "Redueix el volum un 4%"
+
+#: core/commandlineoptions.cpp:159
+msgid "Decrease the volume by <value> percent"
+msgstr ""
 
 #: core/globalshortcuts.cpp:53 wiimotedev/wiimotesettingspage.cpp:104
 msgid "Decrease volume"
 msgstr "Redueix el volum"
 
-#: ../bin/src/ui_appearancesettingspage.h:275
+#: ../bin/src/ui_appearancesettingspage.h:280
 msgid "Default background image"
 msgstr "Imatge de fons per defecte"
 
@@ -1486,7 +1506,7 @@ msgstr "Esborra els fitxers originals"
 
 #: core/deletefiles.cpp:50
 msgid "Deleting files"
-msgstr "Esborrant fitxers"
+msgstr "S’estan esborrant els fitxers"
 
 #: ui/mainwindow.cpp:1308
 msgid "Dequeue selected tracks"
@@ -1553,7 +1573,7 @@ msgstr "Directori"
 msgid "Disable duration"
 msgstr "Deshabilita la durada"
 
-#: ../bin/src/ui_appearancesettingspage.h:289
+#: ../bin/src/ui_appearancesettingspage.h:296
 msgid "Disable moodbar generation"
 msgstr "Desactiva la generació de barres d’ànim"
 
@@ -1576,13 +1596,13 @@ msgstr "Transmissió discontínua"
 msgid "Display options"
 msgstr "Opcions de visualització"
 
-#: core/commandlineoptions.cpp:161
+#: core/commandlineoptions.cpp:167
 msgid "Display the on-screen-display"
 msgstr "Mostrar la indicació-a-pantalla"
 
 #: ../bin/src/ui_mainwindow.h:712
 msgid "Do a full library rescan"
-msgstr "Escaneja de nou tota la biblioteca"
+msgstr "Escaneja de nou tota la col·lecció"
 
 #: ../bin/src/ui_deviceproperties.h:377
 msgid "Do not convert any music"
@@ -1594,7 +1614,7 @@ msgstr "No repetir"
 
 #: library/libraryview.cpp:405
 msgid "Don't show in various artists"
-msgstr "No mostrar a Artistes diversos"
+msgstr "No ho mostreu en Artistes diversos"
 
 #: widgets/osd.cpp:273 ../bin/src/ui_playlistsequence.h:107
 msgid "Don't shuffle"
@@ -1817,11 +1837,11 @@ msgstr "Tota la col.lecció"
 msgid "Equalizer"
 msgstr "Equalitzador"
 
-#: core/commandlineoptions.cpp:164
+#: core/commandlineoptions.cpp:170
 msgid "Equivalent to --log-levels *:1"
 msgstr "Equivalent a --log-levels *:1"
 
-#: core/commandlineoptions.cpp:165
+#: core/commandlineoptions.cpp:171
 msgid "Equivalent to --log-levels *:3"
 msgstr "Equivalent a --log-levels *:3"
 
@@ -1996,7 +2016,7 @@ msgstr "Cercar automaticament"
 msgid "Fetch completed"
 msgstr "S'han acabat d'obtenir les dades"
 
-#: internet/subsonicservice.cpp:209
+#: internet/subsonicservice.cpp:218
 msgid "Fetching Subsonic library"
 msgstr "S’està obtenint la biblioteca de Subsonic"
 
@@ -2056,7 +2076,7 @@ msgstr "Tipus de sistema de fitxers"
 
 #: smartplaylists/querywizardplugin.cpp:90
 msgid "Find songs in your library that match the criteria you specify."
-msgstr "Troba cançons a la biblioteca que es corresponguin amb els criteris de cerca especificats."
+msgstr "Troba cançons en la vostra col·lecció que coincideixen amb el criteri especificat."
 
 #: musicbrainz/tagfetcher.cpp:55
 msgid "Fingerprinting song"
@@ -2157,7 +2177,7 @@ msgstr "Aguts complets"
 msgid "GStreamer audio engine"
 msgstr "Motor d'audio GStreamer"
 
-#: ui/settingsdialog.cpp:128
+#: ui/settingsdialog.cpp:132
 msgid "General"
 msgstr "General"
 
@@ -2247,7 +2267,7 @@ msgstr "URL de la cançó a Grooveshark"
 
 #: ../bin/src/ui_groupbydialog.h:124
 msgid "Group Library by..."
-msgstr "Agrupar Colecció per..."
+msgstr "Agrupa la col·lecció per…"
 
 #: globalsearch/globalsearchview.cpp:444 library/libraryfilterwidget.cpp:82
 msgid "Group by"
@@ -2347,7 +2367,7 @@ msgstr "Si sabeu l'URL d'un podcast, introduiu-la a continuació i premeu \"Vés
 
 #: ../bin/src/ui_organisedialog.h:204
 msgid "Ignore \"The\" in artist names"
-msgstr "Ignora \"The\" als noms d'artistes"
+msgstr "Ignora «The» en els noms dels artistes"
 
 #: ui/albumcoverchoicecontroller.cpp:43
 msgid "Images (*.png *.jpg *.jpeg *.bmp *.gif *.xpm *.pbm *.pgm *.ppm *.xbm)"
@@ -2393,9 +2413,13 @@ msgstr "La versió del protocol REST de Subsonic és incompatible. El client ha 
 msgid "Incompatible Subsonic REST protocol version. Server must upgrade."
 msgstr "La versió del protocol REST de Subsonic és incompatible. El servidor ha d’actualitzar-se."
 
-#: core/commandlineoptions.cpp:152
+#: core/commandlineoptions.cpp:156
 msgid "Increase the volume by 4%"
 msgstr "Incrementa el volum un 4%"
+
+#: core/commandlineoptions.cpp:158
+msgid "Increase the volume by <value> percent"
+msgstr ""
 
 #: core/globalshortcuts.cpp:52 wiimotedev/wiimotesettingspage.cpp:103
 msgid "Increase volume"
@@ -2426,7 +2450,7 @@ msgstr "Comprovació d'integritat"
 msgid "Internet"
 msgstr "Internet"
 
-#: ui/settingsdialog.cpp:150
+#: ui/settingsdialog.cpp:154
 msgid "Internet providers"
 msgstr "Proveïdors d'internet"
 
@@ -2552,7 +2576,7 @@ msgstr "Ràdio personalitzada de Last.fm: %1"
 #: internet/lastfmservice.cpp:722
 #, qt-format
 msgid "Last.fm Library - %1"
-msgstr "Llibreria de Last.fm - %1"
+msgstr "Col·lecció de Last.fm – %1"
 
 #: globalsearch/lastfmsearchprovider.cpp:77 internet/lastfmservice.cpp:257
 #: internet/lastfmservice.cpp:260
@@ -2620,7 +2644,7 @@ msgstr "Durada"
 
 #: ui/mainwindow.cpp:222 ui/mainwindow.cpp:232
 msgid "Library"
-msgstr "Biblioteca"
+msgstr "Col·lecció"
 
 #: ../bin/src/ui_groupbydialog.h:122
 msgid "Library advanced grouping"
@@ -2718,7 +2742,7 @@ msgstr "Carregant la informació de les pistes"
 msgid "Loading..."
 msgstr "Carregant..."
 
-#: core/commandlineoptions.cpp:158
+#: core/commandlineoptions.cpp:164
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "Carregar fitxers/URLs, substituïnt l'actual llista de reproducció"
 
@@ -2730,7 +2754,7 @@ msgstr "Carregar fitxers/URLs, substituïnt l'actual llista de reproducció"
 #: ../bin/src/ui_lastfmsettingspage.h:153
 #: ../bin/src/ui_googledrivesettingspage.h:105
 #: ../bin/src/ui_ubuntuonesettingspage.h:112
-#: ../bin/src/ui_dropboxsettingspage.h:105
+#: ../bin/src/ui_dropboxsettingspage.h:105 ../bin/src/ui_boxsettingspage.h:105
 msgid "Login"
 msgstr "Inicieu sessió"
 
@@ -2892,12 +2916,12 @@ msgstr "Mesos"
 msgid "Mood"
 msgstr "Estat d'ànim"
 
-#: ../bin/src/ui_appearancesettingspage.h:287
+#: ../bin/src/ui_appearancesettingspage.h:294
 #: moodbar/moodbarproxystyle.cpp:342
 msgid "Moodbar style"
 msgstr "Estil de barres d’ànim"
 
-#: ../bin/src/ui_appearancesettingspage.h:285
+#: ../bin/src/ui_appearancesettingspage.h:292
 msgid "Moodbars"
 msgstr "Barres d’ànim"
 
@@ -2933,7 +2957,7 @@ msgstr "Música"
 
 #: ../bin/src/ui_librarysettingspage.h:157
 msgid "Music Library"
-msgstr "Biblioteca de Música"
+msgstr "Col·lecció de música"
 
 #: core/globalshortcuts.cpp:54 ../bin/src/ui_mainwindow.h:710
 #: wiimotedev/wiimotesettingspage.cpp:105
@@ -2942,7 +2966,7 @@ msgstr "Silenci"
 
 #: globalsearch/lastfmsearchprovider.cpp:53 internet/lastfmservice.cpp:195
 msgid "My Last.fm Library"
-msgstr "La meva biblioteca de Last.fm"
+msgstr "La meva col·lecció de Last.fm"
 
 #: globalsearch/lastfmsearchprovider.cpp:55 internet/lastfmservice.cpp:200
 msgid "My Last.fm Mix Radio"
@@ -3064,7 +3088,7 @@ msgstr "La setmana vinent"
 msgid "No analyzer"
 msgstr "Sense analitzador"
 
-#: ../bin/src/ui_appearancesettingspage.h:280
+#: ../bin/src/ui_appearancesettingspage.h:285
 msgid "No background image"
 msgstr "Sense imatge de fons"
 
@@ -3180,6 +3204,10 @@ msgstr ""
 msgid "Only show the first"
 msgstr "Mostra només els primers"
 
+#: ../bin/src/ui_appearancesettingspage.h:290
+msgid "Opacity"
+msgstr ""
+
 #: internet/digitallyimportedservicebase.cpp:179
 #: internet/groovesharkservice.cpp:544 internet/icecastservice.cpp:296
 #: internet/jamendoservice.cpp:419 internet/magnatuneservice.cpp:278
@@ -3259,7 +3287,7 @@ msgstr "Organitzant fitxers"
 msgid "Original tags"
 msgstr "Etiquetes originals"
 
-#: core/commandlineoptions.cpp:160
+#: core/commandlineoptions.cpp:166
 msgid "Other options"
 msgstr "Altres opcions"
 
@@ -3309,7 +3337,7 @@ msgstr "Contrasenya protegida"
 msgid "Pause"
 msgstr "Pausa"
 
-#: core/commandlineoptions.cpp:147
+#: core/commandlineoptions.cpp:151
 msgid "Pause playback"
 msgstr "Pausa la reproducció"
 
@@ -3334,7 +3362,7 @@ msgstr "Reprodueix Artista o Etiqueta"
 
 #: internet/lastfmservice.cpp:118
 msgid "Play artist radio..."
-msgstr "Reprodueix la radio de l'artista"
+msgstr "Reprodueix la ràdio de l’artista"
 
 #: playlist/playlist.cpp:1204 ../bin/src/ui_edittagdialog.h:637
 msgid "Play count"
@@ -3344,7 +3372,7 @@ msgstr "Comptador de reproduccions"
 msgid "Play custom radio..."
 msgstr "Reproducció de ràdio personalitzada..."
 
-#: core/commandlineoptions.cpp:146
+#: core/commandlineoptions.cpp:150
 msgid "Play if stopped, pause if playing"
 msgstr "Reprodueix si esta parat, pausa si esta reproduïnt"
 
@@ -3357,7 +3385,7 @@ msgstr "Reprodueix si encara no hi ha res reproduint-se"
 msgid "Play tag radio..."
 msgstr "Reproduix la radio de l'etiqueta..."
 
-#: core/commandlineoptions.cpp:159
+#: core/commandlineoptions.cpp:165
 msgid "Play the <n>th track in the playlist"
 msgstr "Escoltar la canço <n> de la llista de reproducció"
 
@@ -3369,7 +3397,7 @@ msgstr "Reprodueix/Pausa"
 msgid "Playback"
 msgstr "Reproducció"
 
-#: core/commandlineoptions.cpp:144
+#: core/commandlineoptions.cpp:148
 msgid "Player options"
 msgstr "Opcions del reproductor"
 
@@ -3382,7 +3410,7 @@ msgstr "Llista de reproducció"
 msgid "Playlist finished"
 msgstr "Llista de reproducció finalitzada"
 
-#: core/commandlineoptions.cpp:156
+#: core/commandlineoptions.cpp:162
 msgid "Playlist options"
 msgstr "Opcions de la llista de reproducció"
 
@@ -3502,7 +3530,7 @@ msgstr "Anterior"
 msgid "Previous track"
 msgstr "Pista anterior"
 
-#: core/commandlineoptions.cpp:167
+#: core/commandlineoptions.cpp:173
 msgid "Print out version information"
 msgstr "Mostra la informació de la versió"
 
@@ -3790,9 +3818,9 @@ msgstr "Freqüència de mostreig"
 msgid "Samplerate"
 msgstr "Freqüència de mostreig"
 
-#: ../bin/src/ui_appearancesettingspage.h:288
+#: ../bin/src/ui_appearancesettingspage.h:295
 msgid "Save .mood files in your music library"
-msgstr "Guarda fitxers .mood en la seva coŀlecció musical"
+msgstr "Guarda fitxers .mood en la vostra coŀlecció musical"
 
 #: ui/albumcoverchoicecontroller.cpp:114
 msgid "Save album cover"
@@ -3842,7 +3870,7 @@ msgstr "Envia les pistes que escolto"
 #: ../bin/src/ui_gpoddersearchpage.h:78 ../bin/src/ui_itunessearchpage.h:78
 #: ../bin/src/ui_albumcoversearcher.h:114
 msgid "Search"
-msgstr "Cercar"
+msgstr "Cerca"
 
 #: ../bin/src/ui_icecastfilterwidget.h:78
 msgid "Search Icecast stations"
@@ -3870,11 +3898,11 @@ msgstr "Cerca a tot arreu"
 
 #: ../bin/src/ui_gpoddersearchpage.h:76
 msgid "Search gpodder.net"
-msgstr "Cerca a gpodder.net"
+msgstr "Cerca en gpodder.net"
 
 #: ../bin/src/ui_itunessearchpage.h:76
 msgid "Search iTunes"
-msgstr "Cerca a iTunes"
+msgstr "Cerca en iTunes"
 
 #: ../bin/src/ui_querysearchpage.h:113
 msgid "Search mode"
@@ -3910,11 +3938,11 @@ msgstr "Cerca enrere"
 msgid "Seek forward"
 msgstr "Cercar cap endavant"
 
-#: core/commandlineoptions.cpp:155
+#: core/commandlineoptions.cpp:161
 msgid "Seek the currently playing track by a relative amount"
 msgstr "Mou-te per la pista en reproducció a una posició relativa"
 
-#: core/commandlineoptions.cpp:154
+#: core/commandlineoptions.cpp:160
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Mou-te per la pista en reproducció a una posició absoluta"
 
@@ -3926,11 +3954,11 @@ msgstr "Seleccionar-ho tot"
 msgid "Select None"
 msgstr "No selecciones res"
 
-#: ../bin/src/ui_appearancesettingspage.h:272
+#: ../bin/src/ui_appearancesettingspage.h:277
 msgid "Select background color:"
 msgstr "Seleccioneu el color de fons:"
 
-#: ui/appearancesettingspage.cpp:240
+#: ui/appearancesettingspage.cpp:247
 msgid "Select background image"
 msgstr "Seleccioneu la imatge de fons"
 
@@ -3938,11 +3966,7 @@ msgstr "Seleccioneu la imatge de fons"
 msgid "Select best possible match"
 msgstr "Selecciona la millor coincidència possible"
 
-#: ../bin/src/ui_appearancesettingspage.h:283
-msgid "Select blur radius:"
-msgstr "Tria el radi de desenfocament:"
-
-#: ../bin/src/ui_appearancesettingspage.h:270
+#: ../bin/src/ui_appearancesettingspage.h:275
 msgid "Select foreground color:"
 msgstr "Seleccioneu el color de primer pla:"
 
@@ -3975,7 +3999,7 @@ msgstr "Servei fora de línia"
 msgid "Set %1 to \"%2\"..."
 msgstr "Estableix %1 a \"%2\"..."
 
-#: core/commandlineoptions.cpp:151
+#: core/commandlineoptions.cpp:155
 msgid "Set the volume to <value> percent"
 msgstr "Estableix el volum al <value> percent"
 
@@ -4010,7 +4034,7 @@ msgstr "Mostra l'OSD"
 msgid "Show a glowing animation on the current track"
 msgstr "Mostra una animació destacant la pista actual"
 
-#: ../bin/src/ui_appearancesettingspage.h:286
+#: ../bin/src/ui_appearancesettingspage.h:293
 msgid "Show a moodbar in the track progress bar"
 msgstr "Mostra una barra d’ànim en el progrés de la pista"
 
@@ -4065,7 +4089,7 @@ msgstr "Mostra al gestor de fitxers"
 
 #: library/libraryview.cpp:403
 msgid "Show in various artists"
-msgstr "Mostra a Artiste"
+msgstr "Mostra en Artistes diversos"
 
 #: moodbar/moodbarproxystyle.cpp:337
 msgid "Show moodbar"
@@ -4143,7 +4167,7 @@ msgstr "Artistes similars"
 msgid "Ska"
 msgstr "Ska"
 
-#: core/commandlineoptions.cpp:149
+#: core/commandlineoptions.cpp:153
 msgid "Skip backwards in playlist"
 msgstr "Salta enrere en la llista de reproducció"
 
@@ -4151,7 +4175,7 @@ msgstr "Salta enrere en la llista de reproducció"
 msgid "Skip count"
 msgstr "Comptador d’omissions"
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:154
 msgid "Skip forwards in playlist"
 msgstr "Salta endavant en la llista de reproducció"
 
@@ -4251,7 +4275,7 @@ msgstr "Estàndard"
 msgid "Starred"
 msgstr "Destacat"
 
-#: core/commandlineoptions.cpp:145
+#: core/commandlineoptions.cpp:149
 msgid "Start the playlist currently playing"
 msgstr "Inicia la llista de reproducció que s'està reproduint"
 
@@ -4292,7 +4316,7 @@ msgstr "Aturar desprès"
 msgid "Stop after this track"
 msgstr "Parar després d'aquesta pista"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:152
 msgid "Stop playback"
 msgstr "Atura la reproducció"
 
@@ -4415,7 +4439,7 @@ msgstr "Gràcies a"
 msgid "The \"%1\" command could not be started."
 msgstr "No s'ha pogut iniciar l'ordre \"%1\"."
 
-#: ../bin/src/ui_appearancesettingspage.h:277
+#: ../bin/src/ui_appearancesettingspage.h:282
 msgid "The album cover of the currently playing song"
 msgstr "La portada de l'àlbum de la cançó en reproducció"
 
@@ -4485,13 +4509,13 @@ msgstr "Hi ha hagut problemes borrant algunes cançons. Els següents fitxers no
 #: library/libraryview.cpp:609 ui/mainwindow.cpp:1826 widgets/fileview.cpp:188
 msgid ""
 "These files will be deleted from disk, are you sure you want to continue?"
-msgstr "Aquests arxius seran esborrats del disc, estàs segur de que vols continuar?"
+msgstr "S’eliminaran aquests fitxers del disc, esteu segur que voleu continuar?"
 
 #: devices/deviceview.cpp:389
 msgid ""
 "These files will be deleted from the device, are you sure you want to "
 "continue?"
-msgstr "Aquests arxius seran esborrats del dispositiu, estàs segur de que vols continuar?"
+msgstr "S’eliminaran aquests fitxers del dispositiu, esteu segur que voleu continuar?"
 
 #: ../bin/src/ui_librarysettingspage.h:158
 msgid "These folders will be scanned for music to make up your library"
@@ -4595,7 +4619,7 @@ msgstr "Intercanviar estat de la cua"
 msgid "Toggle scrobbling"
 msgstr "Commuta el scrobbling"
 
-#: core/commandlineoptions.cpp:162
+#: core/commandlineoptions.cpp:168
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr ""
 
@@ -4639,7 +4663,7 @@ msgstr "Transcodificació"
 #: transcoder/transcoder.cpp:312
 #, qt-format
 msgid "Transcoding %1 files using %2 threads"
-msgstr "S'estan transcodificant %1 arxius emprant %2 fils"
+msgstr "S’estan transcodificant %1 fitxers emprant %2 fils"
 
 #: ../bin/src/ui_transcoderoptionsdialog.h:54
 msgid "Transcoding options"
@@ -4661,7 +4685,7 @@ msgstr "Atura"
 msgid "URI"
 msgstr "URI"
 
-#: core/commandlineoptions.cpp:144
+#: core/commandlineoptions.cpp:148
 msgid "URL(s)"
 msgstr "URL(s)"
 
@@ -4742,9 +4766,9 @@ msgstr "Actualitzant %1%..."
 
 #: library/librarywatcher.cpp:90
 msgid "Updating library"
-msgstr "S'està actualitzant la biblioteca"
+msgstr "S’està actualitzant la col·lecció"
 
-#: core/commandlineoptions.cpp:144
+#: core/commandlineoptions.cpp:148
 msgid "Usage"
 msgstr "Forma d'ús"
 
@@ -4768,7 +4792,7 @@ msgstr "Utilitza les metadades Replay Gain si estan disponibles"
 msgid "Use Wii Remote"
 msgstr "Utilitza el comandament remot Wii"
 
-#: ../bin/src/ui_appearancesettingspage.h:269
+#: ../bin/src/ui_appearancesettingspage.h:274
 msgid "Use a custom color set"
 msgstr "Empra un conjunt de colors personalitzat"
 
@@ -4804,7 +4828,7 @@ msgstr "Usa el modelatge de soroll temporal"
 msgid "Use the system default"
 msgstr "Utilitza el sistema per defecte"
 
-#: ../bin/src/ui_appearancesettingspage.h:268
+#: ../bin/src/ui_appearancesettingspage.h:273
 msgid "Use the system default color set"
 msgstr "Utilitza el conjunt de colors del sistema"
 
@@ -4825,7 +4849,7 @@ msgstr "Usat"
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr "L'usuari %1 no té un compte Grooveshark Anywhere"
 
-#: ui/settingsdialog.cpp:142
+#: ui/settingsdialog.cpp:146
 msgid "User interface"
 msgstr "Intefície d'usuari"
 
@@ -4854,7 +4878,7 @@ msgstr "Taxa de bits variable"
 #: globalsearch/globalsearchmodel.cpp:104 library/librarymodel.cpp:238
 #: playlist/playlistmanager.cpp:409 ui/albumcovermanager.cpp:247
 msgid "Various artists"
-msgstr "Artistes varis"
+msgstr "Artistes diversos"
 
 #: ui/about.cpp:34
 #, qt-format
@@ -5134,7 +5158,7 @@ msgstr ""
 
 #: library/libraryview.cpp:343
 msgid "Your library is empty!"
-msgstr "La teva llibreria esta buida!"
+msgstr "La vostra col·lecció està buida."
 
 #: globalsearch/savedradiosearchprovider.cpp:28 internet/savedradio.cpp:49
 msgid "Your radio streams"
@@ -5195,7 +5219,7 @@ msgstr "entre"
 msgid "biggest first"
 msgstr ""
 
-#: playlist/playlistview.cpp:201 ui/edittagdialog.cpp:452
+#: playlist/playlistview.cpp:200 ui/edittagdialog.cpp:452
 msgid "bpm"
 msgstr "Tempo"
 
@@ -5242,7 +5266,7 @@ msgstr "més gran que"
 msgid "in the last"
 msgstr ""
 
-#: playlist/playlistview.cpp:203 ui/edittagdialog.cpp:454
+#: playlist/playlistview.cpp:202 ui/edittagdialog.cpp:454
 #: internet/spotifysettingspage.cpp:60 internet/spotifysettingspage.cpp:61
 #: internet/spotifysettingspage.cpp:62
 msgid "kbps"
@@ -5285,7 +5309,7 @@ msgstr "els més antics primer"
 msgid "on"
 msgstr "a"
 
-#: core/commandlineoptions.cpp:144
+#: core/commandlineoptions.cpp:148
 msgid "options"
 msgstr "opcions"
 

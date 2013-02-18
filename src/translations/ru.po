@@ -15,6 +15,7 @@
 #   <kontaktmoj@yandex.ru>, 2012.
 #   <loki13gm@gmail.com>, 2012.
 # Nikita Putko <admi136@mail.ru>, 2011.
+# Nikolay Parukhin <parukhin@gmail.com>, 2013.
 # Oleg Sevostyanov <oleg.sev@gmail.com>, 2011.
 #   <spontaliku@gmail.com>, 2012.
 # Stanislav Hanzhin <hanzhin.stas@gmail.com>, 2012.
@@ -25,7 +26,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-01-30 13:17+0000\n"
+"PO-Revision-Date: 2013-02-17 06:24+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -243,7 +244,7 @@ msgstr "...и всем создателям Amarok"
 msgid "0:00:00"
 msgstr "0:00:00"
 
-#: ../bin/src/ui_appearancesettingspage.h:284
+#: ../bin/src/ui_appearancesettingspage.h:289
 msgid "0px"
 msgstr "0px"
 
@@ -259,6 +260,10 @@ msgstr "1 композиция"
 #: ../bin/src/ui_magnatunesettingspage.h:174
 msgid "128k MP3"
 msgstr "128k MP3"
+
+#: ../bin/src/ui_appearancesettingspage.h:291
+msgid "40%"
+msgstr "40%"
 
 #: library/library.cpp:58
 msgid "50 random tracks"
@@ -285,7 +290,7 @@ msgstr "Требуется Premium аккаунт Spotify"
 
 #: ../bin/src/ui_networkremotesettingspage.h:158
 msgid "A client can connect only, if the correct code was entered."
-msgstr ""
+msgstr "Клиент может подключиться, только если был введен правильный код."
 
 #: smartplaylists/wizard.cpp:78
 msgid ""
@@ -567,7 +572,7 @@ msgstr "Альбом (идеальная громкость всех компо�
 msgid "Album artist"
 msgstr "Исполнитель альбома"
 
-#: ../bin/src/ui_appearancesettingspage.h:279
+#: ../bin/src/ui_appearancesettingspage.h:284
 msgid "Album cover"
 msgstr "Обложка альбома"
 
@@ -662,7 +667,7 @@ msgstr "Ошибка при записи мета-данных в '%1'"
 
 #: internet/subsonicsettingspage.cpp:100
 msgid "An unspecified error occurred."
-msgstr ""
+msgstr "Произошла неизвестная ошибка."
 
 #: ui/about.cpp:77
 msgid "And:"
@@ -673,11 +678,11 @@ msgid "Angry"
 msgstr "Злое"
 
 #: ../bin/src/ui_songinfosettingspage.h:180
-#: ../bin/src/ui_appearancesettingspage.h:266
+#: ../bin/src/ui_appearancesettingspage.h:271
 msgid "Appearance"
 msgstr "Внешний вид"
 
-#: core/commandlineoptions.cpp:157
+#: core/commandlineoptions.cpp:163
 msgid "Append files/URLs to the playlist"
 msgstr "Добавить файлы/URLs в список воспроизведения"
 
@@ -793,7 +798,7 @@ msgstr "Фоновые звуки"
 msgid "Background color"
 msgstr "Цвет фона"
 
-#: ../bin/src/ui_appearancesettingspage.h:274
+#: ../bin/src/ui_appearancesettingspage.h:279
 msgid "Background image"
 msgstr "Фоновое изображение"
 
@@ -858,6 +863,10 @@ msgstr "Тип блока"
 msgid "Bluetooth MAC Address"
 msgstr "MAC адрес Bluetooth"
 
+#: ../bin/src/ui_appearancesettingspage.h:288
+msgid "Blur amount"
+msgstr ""
+
 #: ../bin/src/ui_notificationssettingspage.h:421
 msgid "Body"
 msgstr "Содержимое"
@@ -866,9 +875,13 @@ msgstr "Содержимое"
 msgid "Boom analyzer"
 msgstr "Бум-анализатор"
 
+#: ../bin/src/ui_boxsettingspage.h:103
+msgid "Box"
+msgstr "Box"
+
 #: ../bin/src/ui_magnatunedownloaddialog.h:146
 #: ../bin/src/ui_podcastsettingspage.h:242
-#: ../bin/src/ui_appearancesettingspage.h:282
+#: ../bin/src/ui_appearancesettingspage.h:287
 msgid "Browse..."
 msgstr "Обзор..."
 
@@ -920,7 +933,7 @@ msgstr "Изменить комбинацию клавиш..."
 msgid "Change shuffle mode"
 msgstr "Изменить режим перемешивания"
 
-#: core/commandlineoptions.cpp:163
+#: core/commandlineoptions.cpp:169
 msgid "Change the language"
 msgstr "Сменить язык"
 
@@ -1013,6 +1026,10 @@ msgid ""
 "a format that it can play."
 msgstr "При копировании на устройство, Clementine может автоматически конвертировать музыку в формат, который оно поддерживает."
 
+#: ../bin/src/ui_boxsettingspage.h:104
+msgid "Clementine can play music that you have uploaded to Box"
+msgstr "Clementine может проигрывать музыку, загруженную вами на Box"
+
 #: ../bin/src/ui_dropboxsettingspage.h:104
 msgid "Clementine can play music that you have uploaded to Dropbox"
 msgstr "Clementine может воспроизводить музыку, которую вы загрузили в Dropbox"
@@ -1070,7 +1087,7 @@ msgid "Click to toggle between remaining time and total time"
 msgstr "Нажмите для переключения между остающимся временем и полной длительностью"
 
 #: ../bin/src/ui_googledrivesettingspage.h:106
-#: ../bin/src/ui_dropboxsettingspage.h:106
+#: ../bin/src/ui_dropboxsettingspage.h:106 ../bin/src/ui_boxsettingspage.h:106
 msgid ""
 "Clicking the Login button will open a web browser.  You should return to "
 "Clementine after you have logged in."
@@ -1104,11 +1121,11 @@ msgstr "Клубный"
 msgid "Color"
 msgstr "Цвет"
 
-#: ../bin/src/ui_appearancesettingspage.h:267
+#: ../bin/src/ui_appearancesettingspage.h:272
 msgid "Colors"
 msgstr "Цвета"
 
-#: core/commandlineoptions.cpp:166
+#: core/commandlineoptions.cpp:172
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Разделенный запятыми список \"класс:уровень\", где уровень от 0 до 3"
 
@@ -1158,7 +1175,7 @@ msgstr "Настройка Spotify..."
 
 #: internet/subsonicservice.cpp:93
 msgid "Configure Subsonic..."
-msgstr ""
+msgstr "Настроить Subsonic..."
 
 #: globalsearch/globalsearchview.cpp:140 globalsearch/globalsearchview.cpp:446
 msgid "Configure global search..."
@@ -1232,7 +1249,7 @@ msgstr "Copyright"
 msgid ""
 "Could not connect to Subsonic, check server URL. Example: "
 "http://localhost:4040/"
-msgstr ""
+msgstr "Не удается подключиться к Subsonic, проверьте адрес сервера. Например, http://localhost:4040/"
 
 #: transcoder/transcoder.cpp:64
 #, qt-format
@@ -1385,7 +1402,7 @@ msgstr "Ctrl+Up"
 msgid "Custom"
 msgstr "Пользовательский"
 
-#: ../bin/src/ui_appearancesettingspage.h:281
+#: ../bin/src/ui_appearancesettingspage.h:286
 msgid "Custom image:"
 msgstr "Собственное изображение:"
 
@@ -1432,15 +1449,19 @@ msgstr "день (дня, дней)"
 msgid "De&fault"
 msgstr "По &умолчанию"
 
-#: core/commandlineoptions.cpp:153
+#: core/commandlineoptions.cpp:157
 msgid "Decrease the volume by 4%"
 msgstr "Уменьшить громкость на 4%"
+
+#: core/commandlineoptions.cpp:159
+msgid "Decrease the volume by <value> percent"
+msgstr ""
 
 #: core/globalshortcuts.cpp:53 wiimotedev/wiimotesettingspage.cpp:104
 msgid "Decrease volume"
 msgstr "Уменьшить громкость"
 
-#: ../bin/src/ui_appearancesettingspage.h:275
+#: ../bin/src/ui_appearancesettingspage.h:280
 msgid "Default background image"
 msgstr "Фоновое изображение по-умолчанию:"
 
@@ -1568,7 +1589,7 @@ msgstr "Каталог"
 msgid "Disable duration"
 msgstr "Отключить продолжительность"
 
-#: ../bin/src/ui_appearancesettingspage.h:289
+#: ../bin/src/ui_appearancesettingspage.h:296
 msgid "Disable moodbar generation"
 msgstr "Отключить создание индикатора настроения"
 
@@ -1591,7 +1612,7 @@ msgstr "Непрерывная передача"
 msgid "Display options"
 msgstr "Настройки отображения"
 
-#: core/commandlineoptions.cpp:161
+#: core/commandlineoptions.cpp:167
 msgid "Display the on-screen-display"
 msgstr "Показывать экранное уведомление"
 
@@ -1832,11 +1853,11 @@ msgstr "Вся коллекция"
 msgid "Equalizer"
 msgstr "Эквалайзер"
 
-#: core/commandlineoptions.cpp:164
+#: core/commandlineoptions.cpp:170
 msgid "Equivalent to --log-levels *:1"
 msgstr "Аналогично --log-levels *:1"
 
-#: core/commandlineoptions.cpp:165
+#: core/commandlineoptions.cpp:171
 msgid "Equivalent to --log-levels *:3"
 msgstr "Аналогично --log-levels *:3"
 
@@ -2011,9 +2032,9 @@ msgstr "Скачивать автоматически"
 msgid "Fetch completed"
 msgstr "Загрузка завершена"
 
-#: internet/subsonicservice.cpp:209
+#: internet/subsonicservice.cpp:218
 msgid "Fetching Subsonic library"
-msgstr ""
+msgstr "Получение библиотеки Subsonic"
 
 #: ui/coverfromurldialog.cpp:71 ui/coverfromurldialog.cpp:82
 msgid "Fetching cover error"
@@ -2172,7 +2193,7 @@ msgstr "Full Treble"
 msgid "GStreamer audio engine"
 msgstr "Движок аудио GStreamer"
 
-#: ui/settingsdialog.cpp:128
+#: ui/settingsdialog.cpp:132
 msgid "General"
 msgstr "Общие"
 
@@ -2196,7 +2217,7 @@ msgstr "Получить адрес композиции в Grooveshark для �
 
 #: ../bin/src/ui_networkremotesettingspage.h:162
 msgid "Get the Android App now!"
-msgstr ""
+msgstr "Загрузите приложение для Android'а!"
 
 #: internet/groovesharkservice.cpp:788
 msgid "Getting Grooveshark popular songs"
@@ -2402,15 +2423,19 @@ msgstr "Включить все песни"
 
 #: internet/subsonicsettingspage.cpp:87
 msgid "Incompatible Subsonic REST protocol version. Client must upgrade."
-msgstr ""
+msgstr "Несовместимая версия протокола Subsonic REST. Требуется обновление клиента."
 
 #: internet/subsonicsettingspage.cpp:91
 msgid "Incompatible Subsonic REST protocol version. Server must upgrade."
-msgstr ""
+msgstr "Несовместимая версия протокола Subsonic REST. Требуется обновление сервера."
 
-#: core/commandlineoptions.cpp:152
+#: core/commandlineoptions.cpp:156
 msgid "Increase the volume by 4%"
 msgstr "Увеличить громкость на 4%"
+
+#: core/commandlineoptions.cpp:158
+msgid "Increase the volume by <value> percent"
+msgstr ""
 
 #: core/globalshortcuts.cpp:52 wiimotedev/wiimotesettingspage.cpp:103
 msgid "Increase volume"
@@ -2441,7 +2466,7 @@ msgstr "Проверка целостности"
 msgid "Internet"
 msgstr "Интернет"
 
-#: ui/settingsdialog.cpp:150
+#: ui/settingsdialog.cpp:154
 msgid "Internet providers"
 msgstr "Интернет провайдеры"
 
@@ -2733,7 +2758,7 @@ msgstr "Загрузка информации о композициях"
 msgid "Loading..."
 msgstr "Загрузка..."
 
-#: core/commandlineoptions.cpp:158
+#: core/commandlineoptions.cpp:164
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "Загрузка файлов или ссылок с заменой текущего списка воспроизведения"
 
@@ -2745,7 +2770,7 @@ msgstr "Загрузка файлов или ссылок с заменой те
 #: ../bin/src/ui_lastfmsettingspage.h:153
 #: ../bin/src/ui_googledrivesettingspage.h:105
 #: ../bin/src/ui_ubuntuonesettingspage.h:112
-#: ../bin/src/ui_dropboxsettingspage.h:105
+#: ../bin/src/ui_dropboxsettingspage.h:105 ../bin/src/ui_boxsettingspage.h:105
 msgid "Login"
 msgstr "Вход"
 
@@ -2907,12 +2932,12 @@ msgstr "Месяцев"
 msgid "Mood"
 msgstr "Настроение"
 
-#: ../bin/src/ui_appearancesettingspage.h:287
+#: ../bin/src/ui_appearancesettingspage.h:294
 #: moodbar/moodbarproxystyle.cpp:342
 msgid "Moodbar style"
 msgstr "Стиль индикаторов настроения"
 
-#: ../bin/src/ui_appearancesettingspage.h:285
+#: ../bin/src/ui_appearancesettingspage.h:292
 msgid "Moodbars"
 msgstr "Индикаторы настроения"
 
@@ -3021,7 +3046,7 @@ msgstr "Сетевая прокси-служба"
 
 #: ../bin/src/ui_networkremotesettingspage.h:147
 msgid "Network Remote"
-msgstr ""
+msgstr "Сетевое дистанционное управление"
 
 #: playlist/playlistdelegates.cpp:299 ui/edittagdialog.cpp:481
 msgid "Never"
@@ -3079,7 +3104,7 @@ msgstr "На следующей неделе"
 msgid "No analyzer"
 msgstr "Без анализатора"
 
-#: ../bin/src/ui_appearancesettingspage.h:280
+#: ../bin/src/ui_appearancesettingspage.h:285
 msgid "No background image"
 msgstr "Нет фонового изображения"
 
@@ -3172,7 +3197,7 @@ msgstr "Ogg Flac"
 
 #: core/song.cpp:333
 msgid "Ogg Opus"
-msgstr ""
+msgstr "Ogg Opus"
 
 #: core/song.cpp:331
 msgid "Ogg Speex"
@@ -3189,11 +3214,15 @@ msgid ""
 "10.x.x.x\n"
 "172.16.0.0 - 172.31.255.255\n"
 "192.168.x.x"
-msgstr ""
+msgstr "Разрешать подключение с IP адресов из диапазонов:\n10.x.x.x\n172.16.0.0 - 172.31.255.255\n192.168.x.x"
 
 #: ../bin/src/ui_querysortpage.h:142
 msgid "Only show the first"
 msgstr "Показывать только первый"
+
+#: ../bin/src/ui_appearancesettingspage.h:290
+msgid "Opacity"
+msgstr ""
 
 #: internet/digitallyimportedservicebase.cpp:179
 #: internet/groovesharkservice.cpp:544 internet/icecastservice.cpp:296
@@ -3256,7 +3285,7 @@ msgstr "Настройки..."
 
 #: ../bin/src/ui_transcodersettingspage.h:181
 msgid "Opus"
-msgstr ""
+msgstr "Opus"
 
 #: ../bin/src/ui_organisedialog.h:188
 msgid "Organise Files"
@@ -3274,7 +3303,7 @@ msgstr "Организация файлов"
 msgid "Original tags"
 msgstr "Исходные теги"
 
-#: core/commandlineoptions.cpp:160
+#: core/commandlineoptions.cpp:166
 msgid "Other options"
 msgstr "Другие настройки"
 
@@ -3324,7 +3353,7 @@ msgstr "Защищено паролем"
 msgid "Pause"
 msgstr "Приостановить"
 
-#: core/commandlineoptions.cpp:147
+#: core/commandlineoptions.cpp:151
 msgid "Pause playback"
 msgstr "Приостановить воспроизведение"
 
@@ -3359,7 +3388,7 @@ msgstr "Количество проигрываний"
 msgid "Play custom radio..."
 msgstr "Слушать пользовательское радио..."
 
-#: core/commandlineoptions.cpp:146
+#: core/commandlineoptions.cpp:150
 msgid "Play if stopped, pause if playing"
 msgstr "Воспроизвести если остановлено, приостановить если воспроизводится"
 
@@ -3372,7 +3401,7 @@ msgstr "Проиграть, если еще ничего не проигрыва
 msgid "Play tag radio..."
 msgstr "Проиграть радио тега..."
 
-#: core/commandlineoptions.cpp:159
+#: core/commandlineoptions.cpp:165
 msgid "Play the <n>th track in the playlist"
 msgstr "Воспроизвести n-ную композицию в списке воспроизведения"
 
@@ -3384,7 +3413,7 @@ msgstr "Воспроизведение/Пауза"
 msgid "Playback"
 msgstr "Проигрывание"
 
-#: core/commandlineoptions.cpp:144
+#: core/commandlineoptions.cpp:148
 msgid "Player options"
 msgstr "Настройки проигрывателя"
 
@@ -3397,7 +3426,7 @@ msgstr "Список воспроизведения"
 msgid "Playlist finished"
 msgstr "Список воспроизведения закончился"
 
-#: core/commandlineoptions.cpp:156
+#: core/commandlineoptions.cpp:162
 msgid "Playlist options"
 msgstr "Настройки списка воспроизведения"
 
@@ -3517,7 +3546,7 @@ msgstr "Предыдущий"
 msgid "Previous track"
 msgstr "Предыдущая композиция"
 
-#: core/commandlineoptions.cpp:167
+#: core/commandlineoptions.cpp:173
 msgid "Print out version information"
 msgstr "Вывести информацию о версии"
 
@@ -3805,7 +3834,7 @@ msgstr "Частота"
 msgid "Samplerate"
 msgstr "Частота дискретизации"
 
-#: ../bin/src/ui_appearancesettingspage.h:288
+#: ../bin/src/ui_appearancesettingspage.h:295
 msgid "Save .mood files in your music library"
 msgstr "Сохранить файлы настроения .mood в библиотеку музыки"
 
@@ -3873,7 +3902,7 @@ msgstr "Поиск на Magnatune"
 
 #: internet/subsonicservice.cpp:72
 msgid "Search Subsonic"
-msgstr ""
+msgstr "Поиск Subsonic"
 
 #: ui/albumcoverchoicecontroller.cpp:62
 msgid "Search for album covers..."
@@ -3925,11 +3954,11 @@ msgstr "Перемотка назад"
 msgid "Seek forward"
 msgstr "Перемотка вперед"
 
-#: core/commandlineoptions.cpp:155
+#: core/commandlineoptions.cpp:161
 msgid "Seek the currently playing track by a relative amount"
 msgstr "Перемотать текущую композицию на относительную позицию"
 
-#: core/commandlineoptions.cpp:154
+#: core/commandlineoptions.cpp:160
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Перемотать текущую композицию на абсолютную позицию"
 
@@ -3941,11 +3970,11 @@ msgstr "Выбрать все"
 msgid "Select None"
 msgstr "Отменить выбор"
 
-#: ../bin/src/ui_appearancesettingspage.h:272
+#: ../bin/src/ui_appearancesettingspage.h:277
 msgid "Select background color:"
 msgstr "Выберите цвет фона:"
 
-#: ui/appearancesettingspage.cpp:240
+#: ui/appearancesettingspage.cpp:247
 msgid "Select background image"
 msgstr "Выбрать фоновое изображение"
 
@@ -3953,11 +3982,7 @@ msgstr "Выбрать фоновое изображение"
 msgid "Select best possible match"
 msgstr "Выбрать самые подходящие результаты"
 
-#: ../bin/src/ui_appearancesettingspage.h:283
-msgid "Select blur radius:"
-msgstr "Укажите радиус размытия:"
-
-#: ../bin/src/ui_appearancesettingspage.h:270
+#: ../bin/src/ui_appearancesettingspage.h:275
 msgid "Select foreground color:"
 msgstr "Выберите цвет:"
 
@@ -3975,11 +4000,11 @@ msgstr "Серийный номер"
 
 #: ../bin/src/ui_subsonicsettingspage.h:118
 msgid "Server URL"
-msgstr ""
+msgstr "Адрес сервера"
 
 #: ../bin/src/ui_subsonicsettingspage.h:117
 msgid "Server details"
-msgstr ""
+msgstr "Параметры сервера"
 
 #: internet/lastfmservice.cpp:434
 msgid "Service offline"
@@ -3990,7 +4015,7 @@ msgstr "Служба недоступна"
 msgid "Set %1 to \"%2\"..."
 msgstr "Установить %1 в \"%2\"..."
 
-#: core/commandlineoptions.cpp:151
+#: core/commandlineoptions.cpp:155
 msgid "Set the volume to <value> percent"
 msgstr "Установить громкость в <value> процентов"
 
@@ -4025,7 +4050,7 @@ msgstr "Показывать OSD"
 msgid "Show a glowing animation on the current track"
 msgstr "Подсвечивать проигрывающийся трек"
 
-#: ../bin/src/ui_appearancesettingspage.h:286
+#: ../bin/src/ui_appearancesettingspage.h:293
 msgid "Show a moodbar in the track progress bar"
 msgstr "Показывать индикаторы настроения в статусе воспроизведения композиции"
 
@@ -4158,7 +4183,7 @@ msgstr "Похожие исполнители"
 msgid "Ska"
 msgstr "Ska"
 
-#: core/commandlineoptions.cpp:149
+#: core/commandlineoptions.cpp:153
 msgid "Skip backwards in playlist"
 msgstr "Переместить назад в списке воспроизведения"
 
@@ -4166,7 +4191,7 @@ msgstr "Переместить назад в списке воспроизвед
 msgid "Skip count"
 msgstr "Пропустить подсчет"
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:154
 msgid "Skip forwards in playlist"
 msgstr "Переместить вперед в списке воспроизведения"
 
@@ -4266,7 +4291,7 @@ msgstr "Стандартный"
 msgid "Starred"
 msgstr "Оцененные"
 
-#: core/commandlineoptions.cpp:145
+#: core/commandlineoptions.cpp:149
 msgid "Start the playlist currently playing"
 msgstr "Запустить проигрываемый сейчас список воспроизведения"
 
@@ -4307,7 +4332,7 @@ msgstr "Остановить после"
 msgid "Stop after this track"
 msgstr "Остановить после этой композиции"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:152
 msgid "Stop playback"
 msgstr "Остановить воспроизведение"
 
@@ -4327,7 +4352,7 @@ msgstr "Поток"
 msgid ""
 "Streaming from a Subsonic server requires a valid server license after the "
 "30-day trial period."
-msgstr ""
+msgstr "Для потокового вещания с сервера Subsonic после 30-дневного пробного периода требуется действительная лицензия."
 
 #: ../bin/src/ui_magnatunesettingspage.h:160
 msgid "Streaming membership"
@@ -4343,7 +4368,7 @@ msgstr "Подписчики"
 
 #: internet/subsonicservice.cpp:102 ../bin/src/ui_subsonicsettingspage.h:116
 msgid "Subsonic"
-msgstr ""
+msgstr "Subsonic"
 
 #: ../data/oauthsuccess.html:34
 msgid "Success!"
@@ -4430,7 +4455,7 @@ msgstr "Спасибо"
 msgid "The \"%1\" command could not be started."
 msgstr "Команда \"%1\" не может быть выполнена"
 
-#: ../bin/src/ui_appearancesettingspage.h:277
+#: ../bin/src/ui_appearancesettingspage.h:282
 msgid "The album cover of the currently playing song"
 msgstr "Обложка альбома текущей композиции"
 
@@ -4460,7 +4485,7 @@ msgstr "Запрошенная ссылка не является изображ
 msgid ""
 "The trial period for the Subsonic server is over. Please donate to get a "
 "license key. Visit subsonic.org for details."
-msgstr ""
+msgstr "Пробный период для сервера Subsonic закончен. Пожалуйста, поддержите разработчика, чтобы получить лицензионный ключ. Посетите subsonic.org для подробной информации."
 
 #: ui/mainwindow.cpp:2003
 msgid ""
@@ -4610,7 +4635,7 @@ msgstr "Переключить состояние очереди"
 msgid "Toggle scrobbling"
 msgstr "Вкл/выкл скробблинг"
 
-#: core/commandlineoptions.cpp:162
+#: core/commandlineoptions.cpp:168
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Переключить видимость OSD"
 
@@ -4676,7 +4701,7 @@ msgstr "Выключить"
 msgid "URI"
 msgstr "URI"
 
-#: core/commandlineoptions.cpp:144
+#: core/commandlineoptions.cpp:148
 msgid "URL(s)"
 msgstr "Ссылки"
 
@@ -4759,7 +4784,7 @@ msgstr "Обновление %1%..."
 msgid "Updating library"
 msgstr "Обновление коллекции"
 
-#: core/commandlineoptions.cpp:144
+#: core/commandlineoptions.cpp:148
 msgid "Usage"
 msgstr "Использование"
 
@@ -4773,7 +4798,7 @@ msgstr "Использовать комбинации клавиш Gnome"
 
 #: ../bin/src/ui_networkremotesettingspage.h:148
 msgid "Use Remotecontrol"
-msgstr ""
+msgstr "Использовать дистанционное управление"
 
 #: ../bin/src/ui_playbacksettingspage.h:274
 msgid "Use Replay Gain metadata if it is available"
@@ -4783,7 +4808,7 @@ msgstr "По возможности использовать метаданны�
 msgid "Use Wii Remote"
 msgstr "Использовать пульт Wii"
 
-#: ../bin/src/ui_appearancesettingspage.h:269
+#: ../bin/src/ui_appearancesettingspage.h:274
 msgid "Use a custom color set"
 msgstr "Использовать собственный набор цветов"
 
@@ -4797,7 +4822,7 @@ msgstr "Использовать аутентификацию"
 
 #: ../bin/src/ui_networkremotesettingspage.h:160
 msgid "Use authentication code"
-msgstr ""
+msgstr "Использовать код аутентификации."
 
 #: ../bin/src/ui_transcoderoptionsvorbis.h:203
 msgid "Use bitrate management engine"
@@ -4819,7 +4844,7 @@ msgstr "Использовать временнóе сглаживание шу�
 msgid "Use the system default"
 msgstr "Использовать значения по умолчанию"
 
-#: ../bin/src/ui_appearancesettingspage.h:268
+#: ../bin/src/ui_appearancesettingspage.h:273
 msgid "Use the system default color set"
 msgstr "Использовать системные цвета"
 
@@ -4840,7 +4865,7 @@ msgstr "Использовано"
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr "У пользователь %1 нет учетной записи Grooveshark Anywhere"
 
-#: ui/settingsdialog.cpp:142
+#: ui/settingsdialog.cpp:146
 msgid "User interface"
 msgstr "Пользовательский интерфейс"
 
@@ -5018,7 +5043,7 @@ msgstr "Желаете запустить повторное сканирова�
 
 #: internet/subsonicsettingspage.cpp:83
 msgid "Wrong username or password."
-msgstr ""
+msgstr "Неверное имя или пароль"
 
 #: playlist/playlist.cpp:1198 ui/organisedialog.cpp:63
 #: ../bin/src/ui_groupbydialog.h:135 ../bin/src/ui_groupbydialog.h:148
@@ -5210,7 +5235,7 @@ msgstr "между"
 msgid "biggest first"
 msgstr "наибольшие сначала"
 
-#: playlist/playlistview.cpp:201 ui/edittagdialog.cpp:452
+#: playlist/playlistview.cpp:200 ui/edittagdialog.cpp:452
 msgid "bpm"
 msgstr "bpm"
 
@@ -5257,7 +5282,7 @@ msgstr "больше чем"
 msgid "in the last"
 msgstr "в последние"
 
-#: playlist/playlistview.cpp:203 ui/edittagdialog.cpp:454
+#: playlist/playlistview.cpp:202 ui/edittagdialog.cpp:454
 #: internet/spotifysettingspage.cpp:60 internet/spotifysettingspage.cpp:61
 #: internet/spotifysettingspage.cpp:62
 msgid "kbps"
@@ -5300,7 +5325,7 @@ msgstr "сначала самые старые"
 msgid "on"
 msgstr "на"
 
-#: core/commandlineoptions.cpp:144
+#: core/commandlineoptions.cpp:148
 msgid "options"
 msgstr "настройки"
 

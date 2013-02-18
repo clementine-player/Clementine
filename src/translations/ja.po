@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-01-30 13:18+0000\n"
+"PO-Revision-Date: 2013-02-17 06:24+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -228,7 +228,7 @@ msgstr "... および Amarok に貢献されたすべての方々"
 msgid "0:00:00"
 msgstr "0:00:00"
 
-#: ../bin/src/ui_appearancesettingspage.h:284
+#: ../bin/src/ui_appearancesettingspage.h:289
 msgid "0px"
 msgstr "0px"
 
@@ -244,6 +244,10 @@ msgstr "1 トラック"
 #: ../bin/src/ui_magnatunesettingspage.h:174
 msgid "128k MP3"
 msgstr "128k MP3"
+
+#: ../bin/src/ui_appearancesettingspage.h:291
+msgid "40%"
+msgstr ""
 
 #: library/library.cpp:58
 msgid "50 random tracks"
@@ -552,7 +556,7 @@ msgstr "アルバム (すべてのトラックで最適な音量)"
 msgid "Album artist"
 msgstr "アルバムアーティスト"
 
-#: ../bin/src/ui_appearancesettingspage.h:279
+#: ../bin/src/ui_appearancesettingspage.h:284
 msgid "Album cover"
 msgstr "アルバムカバー"
 
@@ -658,11 +662,11 @@ msgid "Angry"
 msgstr ""
 
 #: ../bin/src/ui_songinfosettingspage.h:180
-#: ../bin/src/ui_appearancesettingspage.h:266
+#: ../bin/src/ui_appearancesettingspage.h:271
 msgid "Appearance"
 msgstr "外観"
 
-#: core/commandlineoptions.cpp:157
+#: core/commandlineoptions.cpp:163
 msgid "Append files/URLs to the playlist"
 msgstr "ファイル・URL をプレイリストに追加する"
 
@@ -778,7 +782,7 @@ msgstr "バックグラウンドストリーム"
 msgid "Background color"
 msgstr "背景色"
 
-#: ../bin/src/ui_appearancesettingspage.h:274
+#: ../bin/src/ui_appearancesettingspage.h:279
 msgid "Background image"
 msgstr "背景画像"
 
@@ -843,6 +847,10 @@ msgstr "ブロックタイプ"
 msgid "Bluetooth MAC Address"
 msgstr "Bluetooth の MAC アドレス"
 
+#: ../bin/src/ui_appearancesettingspage.h:288
+msgid "Blur amount"
+msgstr ""
+
 #: ../bin/src/ui_notificationssettingspage.h:421
 msgid "Body"
 msgstr "本文"
@@ -851,9 +859,13 @@ msgstr "本文"
 msgid "Boom analyzer"
 msgstr "ブームアナライザー"
 
+#: ../bin/src/ui_boxsettingspage.h:103
+msgid "Box"
+msgstr ""
+
 #: ../bin/src/ui_magnatunedownloaddialog.h:146
 #: ../bin/src/ui_podcastsettingspage.h:242
-#: ../bin/src/ui_appearancesettingspage.h:282
+#: ../bin/src/ui_appearancesettingspage.h:287
 msgid "Browse..."
 msgstr "参照..."
 
@@ -905,7 +917,7 @@ msgstr "ショートカットの変更..."
 msgid "Change shuffle mode"
 msgstr "シャッフルモードの変更"
 
-#: core/commandlineoptions.cpp:163
+#: core/commandlineoptions.cpp:169
 msgid "Change the language"
 msgstr "言語の変更"
 
@@ -998,6 +1010,10 @@ msgid ""
 "a format that it can play."
 msgstr "Clementine はこのデバイスへコピーする際、このデバイスで再生可能な形式に自動で変換できます。"
 
+#: ../bin/src/ui_boxsettingspage.h:104
+msgid "Clementine can play music that you have uploaded to Box"
+msgstr ""
+
 #: ../bin/src/ui_dropboxsettingspage.h:104
 msgid "Clementine can play music that you have uploaded to Dropbox"
 msgstr "Clementine は Dropbox にアップロードしたミュージックを再生できます"
@@ -1055,7 +1071,7 @@ msgid "Click to toggle between remaining time and total time"
 msgstr "ここをクリックすると、残り時間と合計時間の表示を切り替えます"
 
 #: ../bin/src/ui_googledrivesettingspage.h:106
-#: ../bin/src/ui_dropboxsettingspage.h:106
+#: ../bin/src/ui_dropboxsettingspage.h:106 ../bin/src/ui_boxsettingspage.h:106
 msgid ""
 "Clicking the Login button will open a web browser.  You should return to "
 "Clementine after you have logged in."
@@ -1089,11 +1105,11 @@ msgstr "クラブ"
 msgid "Color"
 msgstr "色"
 
-#: ../bin/src/ui_appearancesettingspage.h:267
+#: ../bin/src/ui_appearancesettingspage.h:272
 msgid "Colors"
 msgstr "色"
 
-#: core/commandlineoptions.cpp:166
+#: core/commandlineoptions.cpp:172
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "コンマ区切りの クラス:レベル のリスト、レベルは 0-3"
 
@@ -1370,7 +1386,7 @@ msgstr "Ctrl+Up"
 msgid "Custom"
 msgstr "カスタム"
 
-#: ../bin/src/ui_appearancesettingspage.h:281
+#: ../bin/src/ui_appearancesettingspage.h:286
 msgid "Custom image:"
 msgstr "カスタム画像:"
 
@@ -1417,15 +1433,19 @@ msgstr "日"
 msgid "De&fault"
 msgstr "既定(&F)"
 
-#: core/commandlineoptions.cpp:153
+#: core/commandlineoptions.cpp:157
 msgid "Decrease the volume by 4%"
 msgstr "音量を 4% 下げます"
+
+#: core/commandlineoptions.cpp:159
+msgid "Decrease the volume by <value> percent"
+msgstr ""
 
 #: core/globalshortcuts.cpp:53 wiimotedev/wiimotesettingspage.cpp:104
 msgid "Decrease volume"
 msgstr "音量を下げる"
 
-#: ../bin/src/ui_appearancesettingspage.h:275
+#: ../bin/src/ui_appearancesettingspage.h:280
 msgid "Default background image"
 msgstr "既定の背景画像"
 
@@ -1553,7 +1573,7 @@ msgstr "ディレクトリ"
 msgid "Disable duration"
 msgstr "長さを無効にする"
 
-#: ../bin/src/ui_appearancesettingspage.h:289
+#: ../bin/src/ui_appearancesettingspage.h:296
 msgid "Disable moodbar generation"
 msgstr ""
 
@@ -1576,7 +1596,7 @@ msgstr ""
 msgid "Display options"
 msgstr "画面のオプション"
 
-#: core/commandlineoptions.cpp:161
+#: core/commandlineoptions.cpp:167
 msgid "Display the on-screen-display"
 msgstr "OSD を表示する"
 
@@ -1817,11 +1837,11 @@ msgstr "コレクション全体"
 msgid "Equalizer"
 msgstr "イコライザー"
 
-#: core/commandlineoptions.cpp:164
+#: core/commandlineoptions.cpp:170
 msgid "Equivalent to --log-levels *:1"
 msgstr "--log-levels *:1 と同じ"
 
-#: core/commandlineoptions.cpp:165
+#: core/commandlineoptions.cpp:171
 msgid "Equivalent to --log-levels *:3"
 msgstr "--log-levels *:3 と同じ"
 
@@ -1996,7 +2016,7 @@ msgstr "自動的に取得する"
 msgid "Fetch completed"
 msgstr "取得完了"
 
-#: internet/subsonicservice.cpp:209
+#: internet/subsonicservice.cpp:218
 msgid "Fetching Subsonic library"
 msgstr ""
 
@@ -2157,7 +2177,7 @@ msgstr "Full Treble"
 msgid "GStreamer audio engine"
 msgstr "GStreamer オーディオエンジン"
 
-#: ui/settingsdialog.cpp:128
+#: ui/settingsdialog.cpp:132
 msgid "General"
 msgstr "全般"
 
@@ -2393,9 +2413,13 @@ msgstr ""
 msgid "Incompatible Subsonic REST protocol version. Server must upgrade."
 msgstr ""
 
-#: core/commandlineoptions.cpp:152
+#: core/commandlineoptions.cpp:156
 msgid "Increase the volume by 4%"
 msgstr "音量を 4% 上げます"
+
+#: core/commandlineoptions.cpp:158
+msgid "Increase the volume by <value> percent"
+msgstr ""
 
 #: core/globalshortcuts.cpp:52 wiimotedev/wiimotesettingspage.cpp:103
 msgid "Increase volume"
@@ -2426,7 +2450,7 @@ msgstr ""
 msgid "Internet"
 msgstr "インターネット"
 
-#: ui/settingsdialog.cpp:150
+#: ui/settingsdialog.cpp:154
 msgid "Internet providers"
 msgstr "インターネットプロバイダ"
 
@@ -2718,7 +2742,7 @@ msgstr "トラック情報の読み込み中"
 msgid "Loading..."
 msgstr "読み込んでいます..."
 
-#: core/commandlineoptions.cpp:158
+#: core/commandlineoptions.cpp:164
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "ファイル・URL を読み込んで、現在のプレイリストを置き換えます"
 
@@ -2730,7 +2754,7 @@ msgstr "ファイル・URL を読み込んで、現在のプレイリストを�
 #: ../bin/src/ui_lastfmsettingspage.h:153
 #: ../bin/src/ui_googledrivesettingspage.h:105
 #: ../bin/src/ui_ubuntuonesettingspage.h:112
-#: ../bin/src/ui_dropboxsettingspage.h:105
+#: ../bin/src/ui_dropboxsettingspage.h:105 ../bin/src/ui_boxsettingspage.h:105
 msgid "Login"
 msgstr "ログイン"
 
@@ -2892,12 +2916,12 @@ msgstr "ヶ月"
 msgid "Mood"
 msgstr "ムード"
 
-#: ../bin/src/ui_appearancesettingspage.h:287
+#: ../bin/src/ui_appearancesettingspage.h:294
 #: moodbar/moodbarproxystyle.cpp:342
 msgid "Moodbar style"
 msgstr "ムードバーの形式"
 
-#: ../bin/src/ui_appearancesettingspage.h:285
+#: ../bin/src/ui_appearancesettingspage.h:292
 msgid "Moodbars"
 msgstr "ムードバー"
 
@@ -3064,7 +3088,7 @@ msgstr ""
 msgid "No analyzer"
 msgstr "アナライザーがありません"
 
-#: ../bin/src/ui_appearancesettingspage.h:280
+#: ../bin/src/ui_appearancesettingspage.h:285
 msgid "No background image"
 msgstr "背景画像なし"
 
@@ -3180,6 +3204,10 @@ msgstr ""
 msgid "Only show the first"
 msgstr "先頭のみ表示する"
 
+#: ../bin/src/ui_appearancesettingspage.h:290
+msgid "Opacity"
+msgstr ""
+
 #: internet/digitallyimportedservicebase.cpp:179
 #: internet/groovesharkservice.cpp:544 internet/icecastservice.cpp:296
 #: internet/jamendoservice.cpp:419 internet/magnatuneservice.cpp:278
@@ -3259,7 +3287,7 @@ msgstr "ファイルの整理中"
 msgid "Original tags"
 msgstr "元のタグ"
 
-#: core/commandlineoptions.cpp:160
+#: core/commandlineoptions.cpp:166
 msgid "Other options"
 msgstr "その他のオプション"
 
@@ -3309,7 +3337,7 @@ msgstr "パスワード保護されています"
 msgid "Pause"
 msgstr "一時停止"
 
-#: core/commandlineoptions.cpp:147
+#: core/commandlineoptions.cpp:151
 msgid "Pause playback"
 msgstr "再生を一時停止します"
 
@@ -3344,7 +3372,7 @@ msgstr "再生回数"
 msgid "Play custom radio..."
 msgstr "カスタムラジオの再生..."
 
-#: core/commandlineoptions.cpp:146
+#: core/commandlineoptions.cpp:150
 msgid "Play if stopped, pause if playing"
 msgstr "停止中は再生し、再生中は一時停止します"
 
@@ -3357,7 +3385,7 @@ msgstr "再生中の曲がない場合は再生する"
 msgid "Play tag radio..."
 msgstr "タグラジオの再生..."
 
-#: core/commandlineoptions.cpp:159
+#: core/commandlineoptions.cpp:165
 msgid "Play the <n>th track in the playlist"
 msgstr "プレイリストの <n> 番目のトラックを再生する"
 
@@ -3369,7 +3397,7 @@ msgstr "再生・一時停止"
 msgid "Playback"
 msgstr "再生"
 
-#: core/commandlineoptions.cpp:144
+#: core/commandlineoptions.cpp:148
 msgid "Player options"
 msgstr "プレーヤーのオプション"
 
@@ -3382,7 +3410,7 @@ msgstr "プレイリスト"
 msgid "Playlist finished"
 msgstr "プレイリストが完了しました"
 
-#: core/commandlineoptions.cpp:156
+#: core/commandlineoptions.cpp:162
 msgid "Playlist options"
 msgstr "プレイリストのオプション"
 
@@ -3502,7 +3530,7 @@ msgstr "前へ"
 msgid "Previous track"
 msgstr "前のトラック"
 
-#: core/commandlineoptions.cpp:167
+#: core/commandlineoptions.cpp:173
 msgid "Print out version information"
 msgstr "バージョン情報を出力"
 
@@ -3790,7 +3818,7 @@ msgstr "サンプルレート"
 msgid "Samplerate"
 msgstr "サンプルレート"
 
-#: ../bin/src/ui_appearancesettingspage.h:288
+#: ../bin/src/ui_appearancesettingspage.h:295
 msgid "Save .mood files in your music library"
 msgstr ""
 
@@ -3910,11 +3938,11 @@ msgstr "後方へシーク"
 msgid "Seek forward"
 msgstr "前方へシーク"
 
-#: core/commandlineoptions.cpp:155
+#: core/commandlineoptions.cpp:161
 msgid "Seek the currently playing track by a relative amount"
 msgstr "現在再生中のトラックを相対値でシークする"
 
-#: core/commandlineoptions.cpp:154
+#: core/commandlineoptions.cpp:160
 msgid "Seek the currently playing track to an absolute position"
 msgstr "現在再生中のトラックの絶対的な位置へシークする"
 
@@ -3926,11 +3954,11 @@ msgstr "すべて選択"
 msgid "Select None"
 msgstr "選択しない"
 
-#: ../bin/src/ui_appearancesettingspage.h:272
+#: ../bin/src/ui_appearancesettingspage.h:277
 msgid "Select background color:"
 msgstr "背景色の選択:"
 
-#: ui/appearancesettingspage.cpp:240
+#: ui/appearancesettingspage.cpp:247
 msgid "Select background image"
 msgstr "背景画像の選択"
 
@@ -3938,11 +3966,7 @@ msgstr "背景画像の選択"
 msgid "Select best possible match"
 msgstr ""
 
-#: ../bin/src/ui_appearancesettingspage.h:283
-msgid "Select blur radius:"
-msgstr ""
-
-#: ../bin/src/ui_appearancesettingspage.h:270
+#: ../bin/src/ui_appearancesettingspage.h:275
 msgid "Select foreground color:"
 msgstr "前景色の選択:"
 
@@ -3975,7 +3999,7 @@ msgstr "サービスがオフラインです"
 msgid "Set %1 to \"%2\"..."
 msgstr "%1 を \"%2\" に設定します..."
 
-#: core/commandlineoptions.cpp:151
+#: core/commandlineoptions.cpp:155
 msgid "Set the volume to <value> percent"
 msgstr "音量を <value> パーセントへ設定しました"
 
@@ -4010,7 +4034,7 @@ msgstr "OSD の表示"
 msgid "Show a glowing animation on the current track"
 msgstr "現在のトラックを光らせるアニメーションを表示する"
 
-#: ../bin/src/ui_appearancesettingspage.h:286
+#: ../bin/src/ui_appearancesettingspage.h:293
 msgid "Show a moodbar in the track progress bar"
 msgstr ""
 
@@ -4143,7 +4167,7 @@ msgstr "テイストの似たアーティスト"
 msgid "Ska"
 msgstr "Ska"
 
-#: core/commandlineoptions.cpp:149
+#: core/commandlineoptions.cpp:153
 msgid "Skip backwards in playlist"
 msgstr "プレイリストで後ろにスキップ"
 
@@ -4151,7 +4175,7 @@ msgstr "プレイリストで後ろにスキップ"
 msgid "Skip count"
 msgstr "スキップ回数"
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:154
 msgid "Skip forwards in playlist"
 msgstr "プレイリストで前にスキップ"
 
@@ -4251,7 +4275,7 @@ msgstr "標準"
 msgid "Starred"
 msgstr ""
 
-#: core/commandlineoptions.cpp:145
+#: core/commandlineoptions.cpp:149
 msgid "Start the playlist currently playing"
 msgstr "現在再生中のプレイリストを開始する"
 
@@ -4292,7 +4316,7 @@ msgstr "次で停止"
 msgid "Stop after this track"
 msgstr "このトラックで停止"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:152
 msgid "Stop playback"
 msgstr "再生の停止"
 
@@ -4415,7 +4439,7 @@ msgstr "謝辞"
 msgid "The \"%1\" command could not be started."
 msgstr "コマンド \"%1\" は開始できませんでした。"
 
-#: ../bin/src/ui_appearancesettingspage.h:277
+#: ../bin/src/ui_appearancesettingspage.h:282
 msgid "The album cover of the currently playing song"
 msgstr "再生中の曲のアルバムカバー"
 
@@ -4595,7 +4619,7 @@ msgstr "キュー状態の切り替え"
 msgid "Toggle scrobbling"
 msgstr "scrobbling の切り替え"
 
-#: core/commandlineoptions.cpp:162
+#: core/commandlineoptions.cpp:168
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "pretty OSD 表示の切り替え"
 
@@ -4661,7 +4685,7 @@ msgstr "オフにする"
 msgid "URI"
 msgstr "URI"
 
-#: core/commandlineoptions.cpp:144
+#: core/commandlineoptions.cpp:148
 msgid "URL(s)"
 msgstr "URL"
 
@@ -4744,7 +4768,7 @@ msgstr "更新しています %1%..."
 msgid "Updating library"
 msgstr "ライブラリの更新中"
 
-#: core/commandlineoptions.cpp:144
+#: core/commandlineoptions.cpp:148
 msgid "Usage"
 msgstr "使用量"
 
@@ -4768,7 +4792,7 @@ msgstr "利用可能ならリプレイゲインのメタデータを使用する
 msgid "Use Wii Remote"
 msgstr "Wii リモコンの使用"
 
-#: ../bin/src/ui_appearancesettingspage.h:269
+#: ../bin/src/ui_appearancesettingspage.h:274
 msgid "Use a custom color set"
 msgstr "カスタム色設定を使用する"
 
@@ -4804,7 +4828,7 @@ msgstr ""
 msgid "Use the system default"
 msgstr "システム既定を使用する"
 
-#: ../bin/src/ui_appearancesettingspage.h:268
+#: ../bin/src/ui_appearancesettingspage.h:273
 msgid "Use the system default color set"
 msgstr "システム既定の色設定を使用する"
 
@@ -4825,7 +4849,7 @@ msgstr "使用中"
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr "ユーザー %1 には Grooveshark Anywhere のアカウントがありません。"
 
-#: ui/settingsdialog.cpp:142
+#: ui/settingsdialog.cpp:146
 msgid "User interface"
 msgstr "ユーザーインターフェース"
 
@@ -5195,7 +5219,7 @@ msgstr "が次の値の間"
 msgid "biggest first"
 msgstr "大きい順"
 
-#: playlist/playlistview.cpp:201 ui/edittagdialog.cpp:452
+#: playlist/playlistview.cpp:200 ui/edittagdialog.cpp:452
 msgid "bpm"
 msgstr "bpm"
 
@@ -5242,7 +5266,7 @@ msgstr "が次より大きい"
 msgid "in the last"
 msgstr ""
 
-#: playlist/playlistview.cpp:203 ui/edittagdialog.cpp:454
+#: playlist/playlistview.cpp:202 ui/edittagdialog.cpp:454
 #: internet/spotifysettingspage.cpp:60 internet/spotifysettingspage.cpp:61
 #: internet/spotifysettingspage.cpp:62
 msgid "kbps"
@@ -5285,7 +5309,7 @@ msgstr "古い順"
 msgid "on"
 msgstr "が次の値"
 
-#: core/commandlineoptions.cpp:144
+#: core/commandlineoptions.cpp:148
 msgid "options"
 msgstr "オプション"
 

@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-01-31 06:37+0000\n"
-"Last-Translator: tjung <tjung.steven@gmail.com>\n"
+"PO-Revision-Date: 2013-02-17 06:24+0000\n"
+"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: id\n"
@@ -231,7 +231,7 @@ msgstr "...dan semua kontributor Amarok"
 msgid "0:00:00"
 msgstr "0:00:00"
 
-#: ../bin/src/ui_appearancesettingspage.h:284
+#: ../bin/src/ui_appearancesettingspage.h:289
 msgid "0px"
 msgstr "0px"
 
@@ -247,6 +247,10 @@ msgstr "1 lagu"
 #: ../bin/src/ui_magnatunesettingspage.h:174
 msgid "128k MP3"
 msgstr "128k MP3"
+
+#: ../bin/src/ui_appearancesettingspage.h:291
+msgid "40%"
+msgstr ""
 
 #: library/library.cpp:58
 msgid "50 random tracks"
@@ -555,7 +559,7 @@ msgstr "Album (kenyaringan ideal untuk semua trek)"
 msgid "Album artist"
 msgstr "Album penyanyi"
 
-#: ../bin/src/ui_appearancesettingspage.h:279
+#: ../bin/src/ui_appearancesettingspage.h:284
 msgid "Album cover"
 msgstr "Sampul album"
 
@@ -661,11 +665,11 @@ msgid "Angry"
 msgstr "Marah"
 
 #: ../bin/src/ui_songinfosettingspage.h:180
-#: ../bin/src/ui_appearancesettingspage.h:266
+#: ../bin/src/ui_appearancesettingspage.h:271
 msgid "Appearance"
 msgstr "Tampilan"
 
-#: core/commandlineoptions.cpp:157
+#: core/commandlineoptions.cpp:163
 msgid "Append files/URLs to the playlist"
 msgstr "Tempel file/URL ke playlist"
 
@@ -781,7 +785,7 @@ msgstr "Stream latar belakang"
 msgid "Background color"
 msgstr "Warna latar belakang"
 
-#: ../bin/src/ui_appearancesettingspage.h:274
+#: ../bin/src/ui_appearancesettingspage.h:279
 msgid "Background image"
 msgstr "Gambar latar belakang"
 
@@ -846,6 +850,10 @@ msgstr "Tipe Blok"
 msgid "Bluetooth MAC Address"
 msgstr "Alamat MAC Bluetooth"
 
+#: ../bin/src/ui_appearancesettingspage.h:288
+msgid "Blur amount"
+msgstr ""
+
 #: ../bin/src/ui_notificationssettingspage.h:421
 msgid "Body"
 msgstr "Badan"
@@ -854,9 +862,13 @@ msgstr "Badan"
 msgid "Boom analyzer"
 msgstr "Penganalisa dentuman"
 
+#: ../bin/src/ui_boxsettingspage.h:103
+msgid "Box"
+msgstr ""
+
 #: ../bin/src/ui_magnatunedownloaddialog.h:146
 #: ../bin/src/ui_podcastsettingspage.h:242
-#: ../bin/src/ui_appearancesettingspage.h:282
+#: ../bin/src/ui_appearancesettingspage.h:287
 msgid "Browse..."
 msgstr "Menelusuri..."
 
@@ -908,7 +920,7 @@ msgstr "Ubah shortcut..."
 msgid "Change shuffle mode"
 msgstr "Ubah mode pengacakan"
 
-#: core/commandlineoptions.cpp:163
+#: core/commandlineoptions.cpp:169
 msgid "Change the language"
 msgstr "Ganti bahasa"
 
@@ -1001,6 +1013,10 @@ msgid ""
 "a format that it can play."
 msgstr "Clementine dapat secara otomatis mengubah format yang anda copy ke perangkat supaya dapat diputar."
 
+#: ../bin/src/ui_boxsettingspage.h:104
+msgid "Clementine can play music that you have uploaded to Box"
+msgstr ""
+
 #: ../bin/src/ui_dropboxsettingspage.h:104
 msgid "Clementine can play music that you have uploaded to Dropbox"
 msgstr "Clementine dapat memutar musik yang Anda unggah ke Dropbox"
@@ -1058,7 +1074,7 @@ msgid "Click to toggle between remaining time and total time"
 msgstr "Klik untuk beralih antara waktu tersisa dan total waktu"
 
 #: ../bin/src/ui_googledrivesettingspage.h:106
-#: ../bin/src/ui_dropboxsettingspage.h:106
+#: ../bin/src/ui_dropboxsettingspage.h:106 ../bin/src/ui_boxsettingspage.h:106
 msgid ""
 "Clicking the Login button will open a web browser.  You should return to "
 "Clementine after you have logged in."
@@ -1092,11 +1108,11 @@ msgstr "Klub"
 msgid "Color"
 msgstr "Warna"
 
-#: ../bin/src/ui_appearancesettingspage.h:267
+#: ../bin/src/ui_appearancesettingspage.h:272
 msgid "Colors"
 msgstr "Warna-warna"
 
-#: core/commandlineoptions.cpp:166
+#: core/commandlineoptions.cpp:172
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Daftar koma terpisah dari kelas: tingkat, tingkat ini adalah 0-3"
 
@@ -1373,7 +1389,7 @@ msgstr "Ctrl+Up"
 msgid "Custom"
 msgstr "Ubahsuaian"
 
-#: ../bin/src/ui_appearancesettingspage.h:281
+#: ../bin/src/ui_appearancesettingspage.h:286
 msgid "Custom image:"
 msgstr "Ubahsuaian"
 
@@ -1420,15 +1436,19 @@ msgstr "Hari"
 msgid "De&fault"
 msgstr "De&fault"
 
-#: core/commandlineoptions.cpp:153
+#: core/commandlineoptions.cpp:157
 msgid "Decrease the volume by 4%"
 msgstr "Kurangi volume 4%"
+
+#: core/commandlineoptions.cpp:159
+msgid "Decrease the volume by <value> percent"
+msgstr ""
 
 #: core/globalshortcuts.cpp:53 wiimotedev/wiimotesettingspage.cpp:104
 msgid "Decrease volume"
 msgstr "Kurangi volume"
 
-#: ../bin/src/ui_appearancesettingspage.h:275
+#: ../bin/src/ui_appearancesettingspage.h:280
 msgid "Default background image"
 msgstr "Gambar latar belakang standar"
 
@@ -1556,7 +1576,7 @@ msgstr "Direktori"
 msgid "Disable duration"
 msgstr "Nonaktifkan durasi"
 
-#: ../bin/src/ui_appearancesettingspage.h:289
+#: ../bin/src/ui_appearancesettingspage.h:296
 msgid "Disable moodbar generation"
 msgstr "Nonaktifkan generasi moodbar"
 
@@ -1579,7 +1599,7 @@ msgstr "Transmisi diskontinu"
 msgid "Display options"
 msgstr "Opsi tampilan"
 
-#: core/commandlineoptions.cpp:161
+#: core/commandlineoptions.cpp:167
 msgid "Display the on-screen-display"
 msgstr "Tampilkan pada layar-tampilan"
 
@@ -1820,11 +1840,11 @@ msgstr "Semua koleksi"
 msgid "Equalizer"
 msgstr "Ekualiser"
 
-#: core/commandlineoptions.cpp:164
+#: core/commandlineoptions.cpp:170
 msgid "Equivalent to --log-levels *:1"
 msgstr "Setara dengan --log-level *: 1"
 
-#: core/commandlineoptions.cpp:165
+#: core/commandlineoptions.cpp:171
 msgid "Equivalent to --log-levels *:3"
 msgstr "Setara dengan --log-level *: 3"
 
@@ -1999,7 +2019,7 @@ msgstr "Pengambilkan secara otomatis"
 msgid "Fetch completed"
 msgstr "Pengambilan telah selesai"
 
-#: internet/subsonicservice.cpp:209
+#: internet/subsonicservice.cpp:218
 msgid "Fetching Subsonic library"
 msgstr "Ambil pustaka Subsonic"
 
@@ -2160,7 +2180,7 @@ msgstr "Treble Penuh"
 msgid "GStreamer audio engine"
 msgstr "GStreamer audio engine"
 
-#: ui/settingsdialog.cpp:128
+#: ui/settingsdialog.cpp:132
 msgid "General"
 msgstr "Umum"
 
@@ -2396,9 +2416,13 @@ msgstr "Versi protokol Subsonic REST tak kompatibel. Klien harus diperbarui."
 msgid "Incompatible Subsonic REST protocol version. Server must upgrade."
 msgstr "Versi protokol Subsonic REST tak kompatibel. Server harus diperbarui."
 
-#: core/commandlineoptions.cpp:152
+#: core/commandlineoptions.cpp:156
 msgid "Increase the volume by 4%"
 msgstr "Naikkan volume menjadi 4%"
+
+#: core/commandlineoptions.cpp:158
+msgid "Increase the volume by <value> percent"
+msgstr ""
 
 #: core/globalshortcuts.cpp:52 wiimotedev/wiimotesettingspage.cpp:103
 msgid "Increase volume"
@@ -2429,7 +2453,7 @@ msgstr "Cek kesatuan"
 msgid "Internet"
 msgstr "Internet"
 
-#: ui/settingsdialog.cpp:150
+#: ui/settingsdialog.cpp:154
 msgid "Internet providers"
 msgstr "penyedia layanan internet"
 
@@ -2721,7 +2745,7 @@ msgstr "Pemuatan info trek"
 msgid "Loading..."
 msgstr "Pemuatan..."
 
-#: core/commandlineoptions.cpp:158
+#: core/commandlineoptions.cpp:164
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "Memuat berkas-berkas/URLs, menggantikan daftar lagu yang sekarang"
 
@@ -2733,7 +2757,7 @@ msgstr "Memuat berkas-berkas/URLs, menggantikan daftar lagu yang sekarang"
 #: ../bin/src/ui_lastfmsettingspage.h:153
 #: ../bin/src/ui_googledrivesettingspage.h:105
 #: ../bin/src/ui_ubuntuonesettingspage.h:112
-#: ../bin/src/ui_dropboxsettingspage.h:105
+#: ../bin/src/ui_dropboxsettingspage.h:105 ../bin/src/ui_boxsettingspage.h:105
 msgid "Login"
 msgstr "Masuk"
 
@@ -2895,12 +2919,12 @@ msgstr "Bulan"
 msgid "Mood"
 msgstr "Mood"
 
-#: ../bin/src/ui_appearancesettingspage.h:287
+#: ../bin/src/ui_appearancesettingspage.h:294
 #: moodbar/moodbarproxystyle.cpp:342
 msgid "Moodbar style"
 msgstr "Gaya moodbar"
 
-#: ../bin/src/ui_appearancesettingspage.h:285
+#: ../bin/src/ui_appearancesettingspage.h:292
 msgid "Moodbars"
 msgstr "Moodbars"
 
@@ -3067,7 +3091,7 @@ msgstr "Minggu depan"
 msgid "No analyzer"
 msgstr "Tidak ada penganalisa"
 
-#: ../bin/src/ui_appearancesettingspage.h:280
+#: ../bin/src/ui_appearancesettingspage.h:285
 msgid "No background image"
 msgstr "Tidak ada gambar latar belakang"
 
@@ -3183,6 +3207,10 @@ msgstr "Hanya menerima koneksi dari klien dalam jankauan ip:\n10.x.x.x\n172.16.0
 msgid "Only show the first"
 msgstr "Hanya tunjukkan yang pertama"
 
+#: ../bin/src/ui_appearancesettingspage.h:290
+msgid "Opacity"
+msgstr ""
+
 #: internet/digitallyimportedservicebase.cpp:179
 #: internet/groovesharkservice.cpp:544 internet/icecastservice.cpp:296
 #: internet/jamendoservice.cpp:419 internet/magnatuneservice.cpp:278
@@ -3262,7 +3290,7 @@ msgstr "Mengorganisir berkas"
 msgid "Original tags"
 msgstr "Label asli"
 
-#: core/commandlineoptions.cpp:160
+#: core/commandlineoptions.cpp:166
 msgid "Other options"
 msgstr "Pilihan lainnya"
 
@@ -3312,7 +3340,7 @@ msgstr "Kata sandi terproteksi"
 msgid "Pause"
 msgstr "Jeda"
 
-#: core/commandlineoptions.cpp:147
+#: core/commandlineoptions.cpp:151
 msgid "Pause playback"
 msgstr "Menjeda pemutaran"
 
@@ -3347,7 +3375,7 @@ msgstr "Jumlah putar"
 msgid "Play custom radio..."
 msgstr "Putar ubahsuaian radio..."
 
-#: core/commandlineoptions.cpp:146
+#: core/commandlineoptions.cpp:150
 msgid "Play if stopped, pause if playing"
 msgstr "Putar jika berhenti, jeda jika sedang putar"
 
@@ -3360,7 +3388,7 @@ msgstr "Putar jika sudah tidak ada yang harus diputar"
 msgid "Play tag radio..."
 msgstr "Putar label radio..."
 
-#: core/commandlineoptions.cpp:159
+#: core/commandlineoptions.cpp:165
 msgid "Play the <n>th track in the playlist"
 msgstr "Putar trek ke <n> dalam daftar lagu"
 
@@ -3372,7 +3400,7 @@ msgstr "Putar/Jeda"
 msgid "Playback"
 msgstr "Pemutaran"
 
-#: core/commandlineoptions.cpp:144
+#: core/commandlineoptions.cpp:148
 msgid "Player options"
 msgstr "Pilihan pemutar"
 
@@ -3385,7 +3413,7 @@ msgstr "Daftar lagu"
 msgid "Playlist finished"
 msgstr "Daftar lagu selesai"
 
-#: core/commandlineoptions.cpp:156
+#: core/commandlineoptions.cpp:162
 msgid "Playlist options"
 msgstr "Pilihan daftar lagu"
 
@@ -3505,7 +3533,7 @@ msgstr "Sebelumnya"
 msgid "Previous track"
 msgstr "Trek sebelumnya"
 
-#: core/commandlineoptions.cpp:167
+#: core/commandlineoptions.cpp:173
 msgid "Print out version information"
 msgstr "Cetak versi informasi"
 
@@ -3793,7 +3821,7 @@ msgstr "Laju sampel"
 msgid "Samplerate"
 msgstr "Laju sampel"
 
-#: ../bin/src/ui_appearancesettingspage.h:288
+#: ../bin/src/ui_appearancesettingspage.h:295
 msgid "Save .mood files in your music library"
 msgstr "Simpan berkas .mood ke dalam pustaka musik Anda"
 
@@ -3913,11 +3941,11 @@ msgstr "Mencari mundur"
 msgid "Seek forward"
 msgstr "Mencari maju"
 
-#: core/commandlineoptions.cpp:155
+#: core/commandlineoptions.cpp:161
 msgid "Seek the currently playing track by a relative amount"
 msgstr "Carilah trek yang sedang diputar dengan jumlah relatif"
 
-#: core/commandlineoptions.cpp:154
+#: core/commandlineoptions.cpp:160
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Carilah lagu yang sedang diputar ke posisi absolut"
 
@@ -3929,11 +3957,11 @@ msgstr "Pilih Semua"
 msgid "Select None"
 msgstr "Pilih Tidak Ada"
 
-#: ../bin/src/ui_appearancesettingspage.h:272
+#: ../bin/src/ui_appearancesettingspage.h:277
 msgid "Select background color:"
 msgstr "Pilih warna latar belakang:"
 
-#: ui/appearancesettingspage.cpp:240
+#: ui/appearancesettingspage.cpp:247
 msgid "Select background image"
 msgstr "Pilih gambar latar belakang"
 
@@ -3941,11 +3969,7 @@ msgstr "Pilih gambar latar belakang"
 msgid "Select best possible match"
 msgstr "Pilih pencocokan yang terbaik"
 
-#: ../bin/src/ui_appearancesettingspage.h:283
-msgid "Select blur radius:"
-msgstr "Pilih jari-jari buram:"
-
-#: ../bin/src/ui_appearancesettingspage.h:270
+#: ../bin/src/ui_appearancesettingspage.h:275
 msgid "Select foreground color:"
 msgstr "Pilih warna latar depan:"
 
@@ -3978,7 +4002,7 @@ msgstr "Layanan offline"
 msgid "Set %1 to \"%2\"..."
 msgstr "Atur %1 to \"%2\"..."
 
-#: core/commandlineoptions.cpp:151
+#: core/commandlineoptions.cpp:155
 msgid "Set the volume to <value> percent"
 msgstr "Atur volume ke <value> persen"
 
@@ -4013,7 +4037,7 @@ msgstr "Tunjukkan OSD"
 msgid "Show a glowing animation on the current track"
 msgstr "Tampilkan animasi bersinar di trek saat ini"
 
-#: ../bin/src/ui_appearancesettingspage.h:286
+#: ../bin/src/ui_appearancesettingspage.h:293
 msgid "Show a moodbar in the track progress bar"
 msgstr "Tampilkan moodbar dalam  trek bar kemajuan"
 
@@ -4146,7 +4170,7 @@ msgstr "Artis serupa"
 msgid "Ska"
 msgstr "Ska"
 
-#: core/commandlineoptions.cpp:149
+#: core/commandlineoptions.cpp:153
 msgid "Skip backwards in playlist"
 msgstr "Lewati daftar lagu mundur"
 
@@ -4154,7 +4178,7 @@ msgstr "Lewati daftar lagu mundur"
 msgid "Skip count"
 msgstr "Lewati hitungan"
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:154
 msgid "Skip forwards in playlist"
 msgstr "Lewati daftar laju maju"
 
@@ -4254,7 +4278,7 @@ msgstr "Standar"
 msgid "Starred"
 msgstr "Berbintang"
 
-#: core/commandlineoptions.cpp:145
+#: core/commandlineoptions.cpp:149
 msgid "Start the playlist currently playing"
 msgstr "Mulai putar daftar lagu terkini"
 
@@ -4295,7 +4319,7 @@ msgstr "Berhenti setelah"
 msgid "Stop after this track"
 msgstr "Berhenti setelah trek ini"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:152
 msgid "Stop playback"
 msgstr "Hentikan pemutaran"
 
@@ -4418,7 +4442,7 @@ msgstr "Terima kasih kepada"
 msgid "The \"%1\" command could not be started."
 msgstr "Perintah \"%1\" tidak dapat dimulai"
 
-#: ../bin/src/ui_appearancesettingspage.h:277
+#: ../bin/src/ui_appearancesettingspage.h:282
 msgid "The album cover of the currently playing song"
 msgstr "Sampul album dari lagu yang sedang dimainkan"
 
@@ -4598,7 +4622,7 @@ msgstr "Alihkan status antrian"
 msgid "Toggle scrobbling"
 msgstr "Alihkan scrobbling"
 
-#: core/commandlineoptions.cpp:162
+#: core/commandlineoptions.cpp:168
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Alihkan visibilitas tampilan layar cantik"
 
@@ -4664,7 +4688,7 @@ msgstr "Matikan"
 msgid "URI"
 msgstr "URI"
 
-#: core/commandlineoptions.cpp:144
+#: core/commandlineoptions.cpp:148
 msgid "URL(s)"
 msgstr "URL(s)"
 
@@ -4747,7 +4771,7 @@ msgstr "Perbarui %1%..."
 msgid "Updating library"
 msgstr "Perbarui pustaka"
 
-#: core/commandlineoptions.cpp:144
+#: core/commandlineoptions.cpp:148
 msgid "Usage"
 msgstr "Penggunaan"
 
@@ -4771,7 +4795,7 @@ msgstr "Gunakan metadata penguatan putar ulang jika tersedia"
 msgid "Use Wii Remote"
 msgstr "Gunakan Remote Wii"
 
-#: ../bin/src/ui_appearancesettingspage.h:269
+#: ../bin/src/ui_appearancesettingspage.h:274
 msgid "Use a custom color set"
 msgstr "Gunakan kumpulan warna rekaan"
 
@@ -4807,7 +4831,7 @@ msgstr "Gunakan pembentuk bising temporal"
 msgid "Use the system default"
 msgstr "Gunakan standar sistem"
 
-#: ../bin/src/ui_appearancesettingspage.h:268
+#: ../bin/src/ui_appearancesettingspage.h:273
 msgid "Use the system default color set"
 msgstr "Gunakan kumpulan warna standar sistem"
 
@@ -4828,7 +4852,7 @@ msgstr "Bekas"
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr "Pengguna %1 tidak memiliki akun Grooveshark dimana pun"
 
-#: ui/settingsdialog.cpp:142
+#: ui/settingsdialog.cpp:146
 msgid "User interface"
 msgstr "Antarmuka"
 
@@ -5198,7 +5222,7 @@ msgstr "di antara"
 msgid "biggest first"
 msgstr "pertama terbesar"
 
-#: playlist/playlistview.cpp:201 ui/edittagdialog.cpp:452
+#: playlist/playlistview.cpp:200 ui/edittagdialog.cpp:452
 msgid "bpm"
 msgstr "bpm"
 
@@ -5245,7 +5269,7 @@ msgstr "lebih besar dari"
 msgid "in the last"
 msgstr "yang terakhir"
 
-#: playlist/playlistview.cpp:203 ui/edittagdialog.cpp:454
+#: playlist/playlistview.cpp:202 ui/edittagdialog.cpp:454
 #: internet/spotifysettingspage.cpp:60 internet/spotifysettingspage.cpp:61
 #: internet/spotifysettingspage.cpp:62
 msgid "kbps"
@@ -5288,7 +5312,7 @@ msgstr "pertama tertua"
 msgid "on"
 msgstr "pada"
 
-#: core/commandlineoptions.cpp:144
+#: core/commandlineoptions.cpp:148
 msgid "options"
 msgstr "Pilihan"
 

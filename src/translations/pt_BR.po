@@ -9,12 +9,12 @@
 # Israel IsraeLins <israelins85@yahoo.com.br>, 2012.
 #   <mmarcottulio@gmail.com>, 2012.
 #   <shorterfire@gmail.com>, 2012.
-# Weiller Cardoso <>, 2012.
+# Weiller Cardoso <>, 2012-2013.
 msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-02-07 00:32+0000\n"
+"PO-Revision-Date: 2013-02-17 23:01+0000\n"
 "Last-Translator: salmora8 <shorterfire@gmail.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -99,12 +99,12 @@ msgstr "%1 músicas"
 #: smartplaylists/searchpreview.cpp:133
 #, qt-format
 msgid "%1 songs found"
-msgstr "%1 música encontrada"
+msgstr "%1 músicas encontradas"
 
 #: smartplaylists/searchpreview.cpp:130
 #, qt-format
 msgid "%1 songs found (showing %2)"
-msgstr "%1 músicas encontradas (mostrando %2)"
+msgstr "%1 músicas encontradas (Exibindo %2)"
 
 #: playlist/playlistmanager.cpp:321
 #, qt-format
@@ -202,7 +202,7 @@ msgstr "&Sair"
 
 #: ../bin/src/ui_mainwindow.h:691
 msgid "&Repeat mode"
-msgstr "Repetir"
+msgstr "&Mode de Repetição"
 
 #: playlist/playlistheader.cpp:41
 msgid "&Right"
@@ -232,7 +232,7 @@ msgstr "...todos que contribuíram com o Amarok"
 msgid "0:00:00"
 msgstr "0:00:00"
 
-#: ../bin/src/ui_appearancesettingspage.h:284
+#: ../bin/src/ui_appearancesettingspage.h:289
 msgid "0px"
 msgstr "0px"
 
@@ -249,6 +249,10 @@ msgstr "1 faixa"
 msgid "128k MP3"
 msgstr "128k MP3"
 
+#: ../bin/src/ui_appearancesettingspage.h:291
+msgid "40%"
+msgstr "40%"
+
 #: library/library.cpp:58
 msgid "50 random tracks"
 msgstr "50 faixas aleatórias"
@@ -262,7 +266,7 @@ msgid ""
 "<p>Tokens start with %, for example: %artist %album %title </p>\n"
 "\n"
 "<p>If you surround sections of text that contain a token with curly-braces, that section will be hidden if the token is empty.</p>"
-msgstr "<p>Separadores começam com %, por exemplo: %artista %álbum %título</p>\n<p>Se você cercar seções de texto que contenham separadores com chaves, aquela seção será escondida se o separador estiver vazio.</p>"
+msgstr "<p>Símbolos iniciam com %, por exemplo: %artist %album %title </p>\n\n<p>Se você inserir trechos do texto que contem os símbolos que contém um símbolo com chaves, esta seção será oculta se o símbolo estiver vazio.</p>"
 
 #: internet/groovesharksettingspage.cpp:111
 msgid "A Grooveshark Anywhere account is required."
@@ -418,7 +422,7 @@ msgstr "Adicionar etiqueta álbum da música"
 
 #: ../bin/src/ui_notificationssettingspage.h:370
 msgid "Add song albumartist tag"
-msgstr "Adicionar a tag artista do álbum"
+msgstr "Adicionar à música a etiqueta artista do álbum"
 
 #: ../bin/src/ui_notificationssettingspage.h:361
 msgid "Add song artist tag"
@@ -548,7 +552,7 @@ msgstr "Álbum"
 
 #: ../bin/src/ui_playbacksettingspage.h:279
 msgid "Album (ideal loudness for all tracks)"
-msgstr "Álbum (sonoridade ideal para todas as faixas)"
+msgstr "Álbum (volume ideal para todas as faixas)"
 
 #: playlist/playlist.cpp:1200 ui/organisedialog.cpp:58
 #: ../bin/src/ui_groupbydialog.h:131 ../bin/src/ui_groupbydialog.h:144
@@ -556,7 +560,7 @@ msgstr "Álbum (sonoridade ideal para todas as faixas)"
 msgid "Album artist"
 msgstr "Artista do álbum"
 
-#: ../bin/src/ui_appearancesettingspage.h:279
+#: ../bin/src/ui_appearancesettingspage.h:284
 msgid "Album cover"
 msgstr "Capa do Álbum"
 
@@ -662,11 +666,11 @@ msgid "Angry"
 msgstr "Bravo"
 
 #: ../bin/src/ui_songinfosettingspage.h:180
-#: ../bin/src/ui_appearancesettingspage.h:266
+#: ../bin/src/ui_appearancesettingspage.h:271
 msgid "Appearance"
 msgstr "Aparência"
 
-#: core/commandlineoptions.cpp:157
+#: core/commandlineoptions.cpp:163
 msgid "Append files/URLs to the playlist"
 msgstr "Acrescentar arquivos/sites para a lista de reprodução"
 
@@ -782,7 +786,7 @@ msgstr "Sons de fundo"
 msgid "Background color"
 msgstr "Cor de fundo"
 
-#: ../bin/src/ui_appearancesettingspage.h:274
+#: ../bin/src/ui_appearancesettingspage.h:279
 msgid "Background image"
 msgstr "Imagem de fundo"
 
@@ -847,6 +851,10 @@ msgstr "Tipo de bloco"
 msgid "Bluetooth MAC Address"
 msgstr "Endereço MAC do Bluetooth"
 
+#: ../bin/src/ui_appearancesettingspage.h:288
+msgid "Blur amount"
+msgstr "Quantidade borrão"
+
 #: ../bin/src/ui_notificationssettingspage.h:421
 msgid "Body"
 msgstr "Conteúdo"
@@ -855,9 +863,13 @@ msgstr "Conteúdo"
 msgid "Boom analyzer"
 msgstr "Explosão"
 
+#: ../bin/src/ui_boxsettingspage.h:103
+msgid "Box"
+msgstr "Caixa"
+
 #: ../bin/src/ui_magnatunedownloaddialog.h:146
 #: ../bin/src/ui_podcastsettingspage.h:242
-#: ../bin/src/ui_appearancesettingspage.h:282
+#: ../bin/src/ui_appearancesettingspage.h:287
 msgid "Browse..."
 msgstr "Procurar..."
 
@@ -909,7 +921,7 @@ msgstr "Mudar atalho..."
 msgid "Change shuffle mode"
 msgstr "Alterar modo aleatório"
 
-#: core/commandlineoptions.cpp:163
+#: core/commandlineoptions.cpp:169
 msgid "Change the language"
 msgstr "Alterar idioma"
 
@@ -989,7 +1001,7 @@ msgstr "Erro no Clementine"
 
 #: ../bin/src/ui_notificationssettingspage.h:429
 msgid "Clementine Orange"
-msgstr "Laranja do Clementine"
+msgstr "Clementine Laranja"
 
 #: visualisations/visualisationcontainer.cpp:77
 #: visualisations/visualisationcontainer.cpp:151
@@ -1001,6 +1013,10 @@ msgid ""
 "Clementine can automatically convert the music you copy to this device into "
 "a format that it can play."
 msgstr "O Clementine pode converter automaticamente a música que você copiar para o dispositivo no formato que pode ser executado."
+
+#: ../bin/src/ui_boxsettingspage.h:104
+msgid "Clementine can play music that you have uploaded to Box"
+msgstr "Clementine pode tocar música que você enviou para Caixa"
 
 #: ../bin/src/ui_dropboxsettingspage.h:104
 msgid "Clementine can play music that you have uploaded to Dropbox"
@@ -1059,7 +1075,7 @@ msgid "Click to toggle between remaining time and total time"
 msgstr "Clique para alternar entre tempo restante e tempo total"
 
 #: ../bin/src/ui_googledrivesettingspage.h:106
-#: ../bin/src/ui_dropboxsettingspage.h:106
+#: ../bin/src/ui_dropboxsettingspage.h:106 ../bin/src/ui_boxsettingspage.h:106
 msgid ""
 "Clicking the Login button will open a web browser.  You should return to "
 "Clementine after you have logged in."
@@ -1093,11 +1109,11 @@ msgstr "Clube"
 msgid "Color"
 msgstr "Cor"
 
-#: ../bin/src/ui_appearancesettingspage.h:267
+#: ../bin/src/ui_appearancesettingspage.h:272
 msgid "Colors"
 msgstr "Cores"
 
-#: core/commandlineoptions.cpp:166
+#: core/commandlineoptions.cpp:172
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Lista separada por vírgulas de classe: o nível, o nível é 0-3"
 
@@ -1123,7 +1139,7 @@ msgstr "Compositor"
 #: internet/searchboxwidget.cpp:42
 #, qt-format
 msgid "Configure %1..."
-msgstr "Configurar %1"
+msgstr "Configurar %1..."
 
 #: internet/groovesharkservice.cpp:550
 msgid "Configure Grooveshark..."
@@ -1374,7 +1390,7 @@ msgstr "Ctrl+Up"
 msgid "Custom"
 msgstr "Personalizado"
 
-#: ../bin/src/ui_appearancesettingspage.h:281
+#: ../bin/src/ui_appearancesettingspage.h:286
 msgid "Custom image:"
 msgstr "Imagem personalizada:"
 
@@ -1421,15 +1437,19 @@ msgstr "Dias"
 msgid "De&fault"
 msgstr "&Padrão"
 
-#: core/commandlineoptions.cpp:153
+#: core/commandlineoptions.cpp:157
 msgid "Decrease the volume by 4%"
 msgstr "Diminuir volume em 4%"
+
+#: core/commandlineoptions.cpp:159
+msgid "Decrease the volume by <value> percent"
+msgstr "Diminuir o volume por porcentagem <valor>"
 
 #: core/globalshortcuts.cpp:53 wiimotedev/wiimotesettingspage.cpp:104
 msgid "Decrease volume"
 msgstr "Diminuir volume"
 
-#: ../bin/src/ui_appearancesettingspage.h:275
+#: ../bin/src/ui_appearancesettingspage.h:280
 msgid "Default background image"
 msgstr "Imagem de fundo padrão"
 
@@ -1474,7 +1494,7 @@ msgstr "Apagar episódios reproduzidos"
 
 #: playlist/playlistlistcontainer.cpp:295
 msgid "Delete playlists"
-msgstr "Apagar lista de reprodução"
+msgstr "Apagar listas de reprodução"
 
 #: ui/equalizer.cpp:190 ../bin/src/ui_equalizer.h:124
 msgid "Delete preset"
@@ -1557,7 +1577,7 @@ msgstr "Diretório"
 msgid "Disable duration"
 msgstr "Desativar duração"
 
-#: ../bin/src/ui_appearancesettingspage.h:289
+#: ../bin/src/ui_appearancesettingspage.h:296
 msgid "Disable moodbar generation"
 msgstr "Desabilitar criação da moodbar."
 
@@ -1580,7 +1600,7 @@ msgstr "Transmissão descontínua"
 msgid "Display options"
 msgstr "Opções de exibição"
 
-#: core/commandlineoptions.cpp:161
+#: core/commandlineoptions.cpp:167
 msgid "Display the on-screen-display"
 msgstr "Mostrar na tela"
 
@@ -1821,11 +1841,11 @@ msgstr "Toda a coletânia"
 msgid "Equalizer"
 msgstr "Equalizador"
 
-#: core/commandlineoptions.cpp:164
+#: core/commandlineoptions.cpp:170
 msgid "Equivalent to --log-levels *:1"
 msgstr "Equivalente ao --log-levels *:1"
 
-#: core/commandlineoptions.cpp:165
+#: core/commandlineoptions.cpp:171
 msgid "Equivalent to --log-levels *:3"
 msgstr "Equivalente ao --log-levels *:3"
 
@@ -2000,7 +2020,7 @@ msgstr "Buscar automaticamente"
 msgid "Fetch completed"
 msgstr "Atualização concluída"
 
-#: internet/subsonicservice.cpp:209
+#: internet/subsonicservice.cpp:218
 msgid "Fetching Subsonic library"
 msgstr "Buscando biblioteca Subsonic"
 
@@ -2161,7 +2181,7 @@ msgstr "Muito Agudo"
 msgid "GStreamer audio engine"
 msgstr "Mecanismo de áudio GStreamer"
 
-#: ui/settingsdialog.cpp:128
+#: ui/settingsdialog.cpp:132
 msgid "General"
 msgstr "Geral"
 
@@ -2397,9 +2417,13 @@ msgstr "Versão do protocolo Subsonic REST incompatível.  Cliente deve atualiza
 msgid "Incompatible Subsonic REST protocol version. Server must upgrade."
 msgstr "Versão do protocolo Subsonic REST incompatível. Servidor deve atualizar."
 
-#: core/commandlineoptions.cpp:152
+#: core/commandlineoptions.cpp:156
 msgid "Increase the volume by 4%"
 msgstr "Aumentar volume em 4%"
+
+#: core/commandlineoptions.cpp:158
+msgid "Increase the volume by <value> percent"
+msgstr "Aumentar o volume por porcentagem <valor>"
 
 #: core/globalshortcuts.cpp:52 wiimotedev/wiimotesettingspage.cpp:103
 msgid "Increase volume"
@@ -2430,7 +2454,7 @@ msgstr "Verificar integridade"
 msgid "Internet"
 msgstr "Internet"
 
-#: ui/settingsdialog.cpp:150
+#: ui/settingsdialog.cpp:154
 msgid "Internet providers"
 msgstr "Dados da Internet"
 
@@ -2722,7 +2746,7 @@ msgstr "Carregando informações da faixa"
 msgid "Loading..."
 msgstr "Carregando..."
 
-#: core/commandlineoptions.cpp:158
+#: core/commandlineoptions.cpp:164
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "Carregar arquivos/sites, substiuindo a lista de reprodução atual"
 
@@ -2734,7 +2758,7 @@ msgstr "Carregar arquivos/sites, substiuindo a lista de reprodução atual"
 #: ../bin/src/ui_lastfmsettingspage.h:153
 #: ../bin/src/ui_googledrivesettingspage.h:105
 #: ../bin/src/ui_ubuntuonesettingspage.h:112
-#: ../bin/src/ui_dropboxsettingspage.h:105
+#: ../bin/src/ui_dropboxsettingspage.h:105 ../bin/src/ui_boxsettingspage.h:105
 msgid "Login"
 msgstr "Login"
 
@@ -2748,7 +2772,7 @@ msgstr "Perfil de previsão a longo prazo (LTP)"
 
 #: ../bin/src/ui_mainwindow.h:657
 msgid "Love"
-msgstr "Favorita"
+msgstr "Curtir"
 
 #: analyzers/analyzercontainer.cpp:62
 #: visualisations/visualisationcontainer.cpp:107
@@ -2896,12 +2920,12 @@ msgstr "Meses"
 msgid "Mood"
 msgstr "Modo"
 
-#: ../bin/src/ui_appearancesettingspage.h:287
+#: ../bin/src/ui_appearancesettingspage.h:294
 #: moodbar/moodbarproxystyle.cpp:342
 msgid "Moodbar style"
 msgstr "Estilo da moodbar"
 
-#: ../bin/src/ui_appearancesettingspage.h:285
+#: ../bin/src/ui_appearancesettingspage.h:292
 msgid "Moodbars"
 msgstr "Moodbars"
 
@@ -3068,7 +3092,7 @@ msgstr "Próxima semana"
 msgid "No analyzer"
 msgstr "Sem visualização"
 
-#: ../bin/src/ui_appearancesettingspage.h:280
+#: ../bin/src/ui_appearancesettingspage.h:285
 msgid "No background image"
 msgstr "Sem imagem de fundo"
 
@@ -3184,6 +3208,10 @@ msgstr "Aceitar apenas conexões de clientes dentro das faixas de ip:\n10.x.x.x\
 msgid "Only show the first"
 msgstr "Só mostrar o primeiro"
 
+#: ../bin/src/ui_appearancesettingspage.h:290
+msgid "Opacity"
+msgstr "Opacidade"
+
 #: internet/digitallyimportedservicebase.cpp:179
 #: internet/groovesharkservice.cpp:544 internet/icecastservice.cpp:296
 #: internet/jamendoservice.cpp:419 internet/magnatuneservice.cpp:278
@@ -3263,7 +3291,7 @@ msgstr "Organizando arquivos"
 msgid "Original tags"
 msgstr "Informações originais"
 
-#: core/commandlineoptions.cpp:160
+#: core/commandlineoptions.cpp:166
 msgid "Other options"
 msgstr "Outras opções"
 
@@ -3313,7 +3341,7 @@ msgstr "Protegido por senha"
 msgid "Pause"
 msgstr "Pausar"
 
-#: core/commandlineoptions.cpp:147
+#: core/commandlineoptions.cpp:151
 msgid "Pause playback"
 msgstr "Pausar reprodução"
 
@@ -3348,7 +3376,7 @@ msgstr "Número de reproduções"
 msgid "Play custom radio..."
 msgstr "Tocar rádio personalizada..."
 
-#: core/commandlineoptions.cpp:146
+#: core/commandlineoptions.cpp:150
 msgid "Play if stopped, pause if playing"
 msgstr "Reproduzir se estiver parado, pausar se estiver tocando"
 
@@ -3361,7 +3389,7 @@ msgstr "Tocar se não houver nada tocando"
 msgid "Play tag radio..."
 msgstr "Reproduzir rádio de marcação..."
 
-#: core/commandlineoptions.cpp:159
+#: core/commandlineoptions.cpp:165
 msgid "Play the <n>th track in the playlist"
 msgstr "Tocar a <n>ª faixa da lista"
 
@@ -3373,7 +3401,7 @@ msgstr "Reproduzir/pausar"
 msgid "Playback"
 msgstr "Reproduzir"
 
-#: core/commandlineoptions.cpp:144
+#: core/commandlineoptions.cpp:148
 msgid "Player options"
 msgstr "Opções do player"
 
@@ -3386,7 +3414,7 @@ msgstr "Lista de Reprodução"
 msgid "Playlist finished"
 msgstr "A lista de reprodução terminou"
 
-#: core/commandlineoptions.cpp:156
+#: core/commandlineoptions.cpp:162
 msgid "Playlist options"
 msgstr "Opções da lista de reprodução"
 
@@ -3506,7 +3534,7 @@ msgstr "Anterior"
 msgid "Previous track"
 msgstr "Faixa anterior"
 
-#: core/commandlineoptions.cpp:167
+#: core/commandlineoptions.cpp:173
 msgid "Print out version information"
 msgstr "Imprimir informação da versão"
 
@@ -3728,11 +3756,11 @@ msgstr "Substituir espaços com sublinhados"
 
 #: ../bin/src/ui_playbacksettingspage.h:273
 msgid "Replay Gain"
-msgstr "Aumento de ganho"
+msgstr "Replay Gain"
 
 #: ../bin/src/ui_playbacksettingspage.h:275
 msgid "Replay Gain mode"
-msgstr "Modo aumento de ganho"
+msgstr "Modo Replay Gain"
 
 #: ../bin/src/ui_dynamicplaylistcontrols.h:112
 msgid "Repopulate"
@@ -3794,7 +3822,7 @@ msgstr "Taxa de amostragem"
 msgid "Samplerate"
 msgstr "Taxa de amostragem"
 
-#: ../bin/src/ui_appearancesettingspage.h:288
+#: ../bin/src/ui_appearancesettingspage.h:295
 msgid "Save .mood files in your music library"
 msgstr "Salvar arquivos .mood na sua biblioteca musical."
 
@@ -3914,11 +3942,11 @@ msgstr "Voltar"
 msgid "Seek forward"
 msgstr "Avançar"
 
-#: core/commandlineoptions.cpp:155
+#: core/commandlineoptions.cpp:161
 msgid "Seek the currently playing track by a relative amount"
 msgstr "Avançar na faixa atual por um tempo relativo"
 
-#: core/commandlineoptions.cpp:154
+#: core/commandlineoptions.cpp:160
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Avançar na faixa atual para uma posição absoluta"
 
@@ -3930,11 +3958,11 @@ msgstr "Selecionar Tudo"
 msgid "Select None"
 msgstr "Desmarcar Tudo"
 
-#: ../bin/src/ui_appearancesettingspage.h:272
+#: ../bin/src/ui_appearancesettingspage.h:277
 msgid "Select background color:"
 msgstr "Selecione uma cor de fundo:"
 
-#: ui/appearancesettingspage.cpp:240
+#: ui/appearancesettingspage.cpp:247
 msgid "Select background image"
 msgstr "Escolha uma imagem de fundo"
 
@@ -3942,11 +3970,7 @@ msgstr "Escolha uma imagem de fundo"
 msgid "Select best possible match"
 msgstr "Selecionar o melhor resultado possível"
 
-#: ../bin/src/ui_appearancesettingspage.h:283
-msgid "Select blur radius:"
-msgstr "Selecionar desfoque."
-
-#: ../bin/src/ui_appearancesettingspage.h:270
+#: ../bin/src/ui_appearancesettingspage.h:275
 msgid "Select foreground color:"
 msgstr "Selecione uma cor de frente:"
 
@@ -3979,7 +4003,7 @@ msgstr "Serviço indisponível"
 msgid "Set %1 to \"%2\"..."
 msgstr "Mudar %1 para \"%2\"..."
 
-#: core/commandlineoptions.cpp:151
+#: core/commandlineoptions.cpp:155
 msgid "Set the volume to <value> percent"
 msgstr "Mudar volume para <value> por cento"
 
@@ -4014,7 +4038,7 @@ msgstr "Mostrar aviso na tela"
 msgid "Show a glowing animation on the current track"
 msgstr "Mostrar animação na faixa atual"
 
-#: ../bin/src/ui_appearancesettingspage.h:286
+#: ../bin/src/ui_appearancesettingspage.h:293
 msgid "Show a moodbar in the track progress bar"
 msgstr "Exibir a moodbar na barra de progresso."
 
@@ -4089,7 +4113,7 @@ msgstr "Exibir sugestões de busca"
 
 #: ../bin/src/ui_lastfmsettingspage.h:157
 msgid "Show the \"love\" and \"ban\" buttons"
-msgstr "Exibir os botões \"Curti\" e \"Não curti\""
+msgstr "Exibir os botões \"Curtir\" e \"Não curti\""
 
 #: ../bin/src/ui_lastfmsettingspage.h:158
 msgid "Show the scrobble button in the main window"
@@ -4147,7 +4171,7 @@ msgstr "Artistas similares"
 msgid "Ska"
 msgstr "Ska"
 
-#: core/commandlineoptions.cpp:149
+#: core/commandlineoptions.cpp:153
 msgid "Skip backwards in playlist"
 msgstr "Pular para a música anterior da lista"
 
@@ -4155,7 +4179,7 @@ msgstr "Pular para a música anterior da lista"
 msgid "Skip count"
 msgstr "Número de pulos"
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:154
 msgid "Skip forwards in playlist"
 msgstr "Pular para a próxima música da lista"
 
@@ -4255,13 +4279,13 @@ msgstr "Padrão"
 msgid "Starred"
 msgstr "Favoritos"
 
-#: core/commandlineoptions.cpp:145
+#: core/commandlineoptions.cpp:149
 msgid "Start the playlist currently playing"
 msgstr "Iniciar a lista que está em execução"
 
 #: transcoder/transcodedialog.cpp:88
 msgid "Start transcoding"
-msgstr "Começar transcodificação"
+msgstr "Começar conversão"
 
 #: internet/groovesharkservice.cpp:568 internet/soundcloudservice.cpp:105
 #: internet/spotifyservice.cpp:348
@@ -4296,7 +4320,7 @@ msgstr "Parar depois"
 msgid "Stop after this track"
 msgstr "Parar depois desta música"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:152
 msgid "Stop playback"
 msgstr "Parar reprodução"
 
@@ -4419,7 +4443,7 @@ msgstr "Agradecimentos a"
 msgid "The \"%1\" command could not be started."
 msgstr "O comando \"%1\" não pôde ser iniciado."
 
-#: ../bin/src/ui_appearancesettingspage.h:277
+#: ../bin/src/ui_appearancesettingspage.h:282
 msgid "The album cover of the currently playing song"
 msgstr "A capa do álbum da música atual"
 
@@ -4505,7 +4529,7 @@ msgstr "As pastas serão escaneadas em busca de músicas para montar sua bibliot
 msgid ""
 "These settings are used in the \"Transcode Music\" dialog, and when "
 "converting music before copying it to a device."
-msgstr "Essas configurações são usadas na \"Transcodificação de Músicas\" e, ao converter a música antes de copiar para um dispositivo."
+msgstr "Essas configurações são usadas na \"Conversão de Músicas\" e, ao converter a música antes de copiar para um dispositivo."
 
 #: ../bin/src/ui_groupbydialog.h:151
 msgid "Third level"
@@ -4599,7 +4623,7 @@ msgstr "Mudar status da fila"
 msgid "Toggle scrobbling"
 msgstr "Ativar/desativar scrobbling"
 
-#: core/commandlineoptions.cpp:162
+#: core/commandlineoptions.cpp:168
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Ativar/desativar visibilidade das notificações em modo bonito"
 
@@ -4665,7 +4689,7 @@ msgstr "Desligar"
 msgid "URI"
 msgstr "URI"
 
-#: core/commandlineoptions.cpp:144
+#: core/commandlineoptions.cpp:148
 msgid "URL(s)"
 msgstr "Site(s)"
 
@@ -4748,7 +4772,7 @@ msgstr "Atualizando %1%..."
 msgid "Updating library"
 msgstr "Atualizando biblioteca"
 
-#: core/commandlineoptions.cpp:144
+#: core/commandlineoptions.cpp:148
 msgid "Usage"
 msgstr "Utilização"
 
@@ -4766,13 +4790,13 @@ msgstr "Use o Controle Remoto"
 
 #: ../bin/src/ui_playbacksettingspage.h:274
 msgid "Use Replay Gain metadata if it is available"
-msgstr "Usar fator de ganho se estiver disponível nos metadados da faixa"
+msgstr "Usar metadados Replay Gain, se estiver disponível"
 
 #: ../bin/src/ui_wiimotesettingspage.h:189
 msgid "Use Wii Remote"
 msgstr "Usar Wiimote"
 
-#: ../bin/src/ui_appearancesettingspage.h:269
+#: ../bin/src/ui_appearancesettingspage.h:274
 msgid "Use a custom color set"
 msgstr "Usar cores personalizadas"
 
@@ -4808,7 +4832,7 @@ msgstr "Usar padronização de ruídos temporais"
 msgid "Use the system default"
 msgstr "Usar padrão do sistema"
 
-#: ../bin/src/ui_appearancesettingspage.h:268
+#: ../bin/src/ui_appearancesettingspage.h:273
 msgid "Use the system default color set"
 msgstr "Usar cores do sistema"
 
@@ -4829,7 +4853,7 @@ msgstr "Usado"
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr "Usuário %1 não tem uma conta Grooveshark Anywhere"
 
-#: ui/settingsdialog.cpp:142
+#: ui/settingsdialog.cpp:146
 msgid "User interface"
 msgstr "Interface"
 
@@ -5199,7 +5223,7 @@ msgstr "entre"
 msgid "biggest first"
 msgstr "maiores primeiro"
 
-#: playlist/playlistview.cpp:201 ui/edittagdialog.cpp:452
+#: playlist/playlistview.cpp:200 ui/edittagdialog.cpp:452
 msgid "bpm"
 msgstr "bpm"
 
@@ -5246,7 +5270,7 @@ msgstr "maior que"
 msgid "in the last"
 msgstr "nos últimos"
 
-#: playlist/playlistview.cpp:203 ui/edittagdialog.cpp:454
+#: playlist/playlistview.cpp:202 ui/edittagdialog.cpp:454
 #: internet/spotifysettingspage.cpp:60 internet/spotifysettingspage.cpp:61
 #: internet/spotifysettingspage.cpp:62
 msgid "kbps"
@@ -5289,7 +5313,7 @@ msgstr "mais antigas primeiro"
 msgid "on"
 msgstr "ligado"
 
-#: core/commandlineoptions.cpp:144
+#: core/commandlineoptions.cpp:148
 msgid "options"
 msgstr "opções"
 

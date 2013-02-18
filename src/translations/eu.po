@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-01-30 13:17+0000\n"
+"PO-Revision-Date: 2013-02-17 06:23+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -230,7 +230,7 @@ msgstr "...eta Amarok-eko laguntzaile guztiei"
 msgid "0:00:00"
 msgstr "0:00:00"
 
-#: ../bin/src/ui_appearancesettingspage.h:284
+#: ../bin/src/ui_appearancesettingspage.h:289
 msgid "0px"
 msgstr "0px"
 
@@ -246,6 +246,10 @@ msgstr "Pista 1"
 #: ../bin/src/ui_magnatunesettingspage.h:174
 msgid "128k MP3"
 msgstr "128k MP3"
+
+#: ../bin/src/ui_appearancesettingspage.h:291
+msgid "40%"
+msgstr ""
 
 #: library/library.cpp:58
 msgid "50 random tracks"
@@ -554,7 +558,7 @@ msgstr "Albuma (pista guztientzako bolumen ideala)"
 msgid "Album artist"
 msgstr "Albumeko artista"
 
-#: ../bin/src/ui_appearancesettingspage.h:279
+#: ../bin/src/ui_appearancesettingspage.h:284
 msgid "Album cover"
 msgstr "Albumeko azala"
 
@@ -660,11 +664,11 @@ msgid "Angry"
 msgstr "Haserre"
 
 #: ../bin/src/ui_songinfosettingspage.h:180
-#: ../bin/src/ui_appearancesettingspage.h:266
+#: ../bin/src/ui_appearancesettingspage.h:271
 msgid "Appearance"
 msgstr "Itxura"
 
-#: core/commandlineoptions.cpp:157
+#: core/commandlineoptions.cpp:163
 msgid "Append files/URLs to the playlist"
 msgstr "Erantsi Fitxategiak/URL-ak erreprodukzio-zerrendari"
 
@@ -780,7 +784,7 @@ msgstr "Hondo-jarioak"
 msgid "Background color"
 msgstr "Atzeko planoko kolorea"
 
-#: ../bin/src/ui_appearancesettingspage.h:274
+#: ../bin/src/ui_appearancesettingspage.h:279
 msgid "Background image"
 msgstr "Atzeko planoko irudia"
 
@@ -845,6 +849,10 @@ msgstr "Bloke-mota"
 msgid "Bluetooth MAC Address"
 msgstr "Bluetooth MAC helbidea"
 
+#: ../bin/src/ui_appearancesettingspage.h:288
+msgid "Blur amount"
+msgstr ""
+
 #: ../bin/src/ui_notificationssettingspage.h:421
 msgid "Body"
 msgstr "Gorputza"
@@ -853,9 +861,13 @@ msgstr "Gorputza"
 msgid "Boom analyzer"
 msgstr "Boom analizatzailea"
 
+#: ../bin/src/ui_boxsettingspage.h:103
+msgid "Box"
+msgstr ""
+
 #: ../bin/src/ui_magnatunedownloaddialog.h:146
 #: ../bin/src/ui_podcastsettingspage.h:242
-#: ../bin/src/ui_appearancesettingspage.h:282
+#: ../bin/src/ui_appearancesettingspage.h:287
 msgid "Browse..."
 msgstr "Arakatu..."
 
@@ -907,7 +919,7 @@ msgstr "Aldatu laster-tekla..."
 msgid "Change shuffle mode"
 msgstr "Aldatu ausazko modua"
 
-#: core/commandlineoptions.cpp:163
+#: core/commandlineoptions.cpp:169
 msgid "Change the language"
 msgstr "Aldatu hizkuntza"
 
@@ -1000,6 +1012,10 @@ msgid ""
 "a format that it can play."
 msgstr "Clementine-k automatikoki bihurtu dezake gailura kopiatzen den musika honek erreproduzitu ahal izango duen formatu batera"
 
+#: ../bin/src/ui_boxsettingspage.h:104
+msgid "Clementine can play music that you have uploaded to Box"
+msgstr ""
+
 #: ../bin/src/ui_dropboxsettingspage.h:104
 msgid "Clementine can play music that you have uploaded to Dropbox"
 msgstr "Clementine-k Dropbox-era igo duzun musika erreproduzitu dezake"
@@ -1057,7 +1073,7 @@ msgid "Click to toggle between remaining time and total time"
 msgstr "Egin klik geratzen den denbora eta denbora osoaren artean txandakatzeko"
 
 #: ../bin/src/ui_googledrivesettingspage.h:106
-#: ../bin/src/ui_dropboxsettingspage.h:106
+#: ../bin/src/ui_dropboxsettingspage.h:106 ../bin/src/ui_boxsettingspage.h:106
 msgid ""
 "Clicking the Login button will open a web browser.  You should return to "
 "Clementine after you have logged in."
@@ -1091,11 +1107,11 @@ msgstr "Club-a"
 msgid "Color"
 msgstr "Kolorea"
 
-#: ../bin/src/ui_appearancesettingspage.h:267
+#: ../bin/src/ui_appearancesettingspage.h:272
 msgid "Colors"
 msgstr "Koloreak"
 
-#: core/commandlineoptions.cpp:166
+#: core/commandlineoptions.cpp:172
 msgid "Comma separated list of class:level, level is 0-3"
 msgstr "Komaz banaturiko klase-zerrenda:maila, maila 0-3 da"
 
@@ -1372,7 +1388,7 @@ msgstr "Ctrl+Gora"
 msgid "Custom"
 msgstr "Pertsonalizatua"
 
-#: ../bin/src/ui_appearancesettingspage.h:281
+#: ../bin/src/ui_appearancesettingspage.h:286
 msgid "Custom image:"
 msgstr "Irudi pertsonalizatua:"
 
@@ -1419,15 +1435,19 @@ msgstr "Egun"
 msgid "De&fault"
 msgstr "&Lehenetsia"
 
-#: core/commandlineoptions.cpp:153
+#: core/commandlineoptions.cpp:157
 msgid "Decrease the volume by 4%"
 msgstr "Bolumena % 4 jaitsi"
+
+#: core/commandlineoptions.cpp:159
+msgid "Decrease the volume by <value> percent"
+msgstr ""
 
 #: core/globalshortcuts.cpp:53 wiimotedev/wiimotesettingspage.cpp:104
 msgid "Decrease volume"
 msgstr "Bolumena jaitsi"
 
-#: ../bin/src/ui_appearancesettingspage.h:275
+#: ../bin/src/ui_appearancesettingspage.h:280
 msgid "Default background image"
 msgstr "Atzeko planoko irudi lehenetsia"
 
@@ -1555,7 +1575,7 @@ msgstr "Direktorioa"
 msgid "Disable duration"
 msgstr "Iraupena desgaitu"
 
-#: ../bin/src/ui_appearancesettingspage.h:289
+#: ../bin/src/ui_appearancesettingspage.h:296
 msgid "Disable moodbar generation"
 msgstr "Aldarte-barren sortzea desgaitu"
 
@@ -1578,7 +1598,7 @@ msgstr "Transmisio ez-jarraitua"
 msgid "Display options"
 msgstr "Erakutsi aukerak"
 
-#: core/commandlineoptions.cpp:161
+#: core/commandlineoptions.cpp:167
 msgid "Display the on-screen-display"
 msgstr "Erakutsi pantailako bistaratzailea"
 
@@ -1819,11 +1839,11 @@ msgstr "Bilduma osoa"
 msgid "Equalizer"
 msgstr "Ekualizadorea"
 
-#: core/commandlineoptions.cpp:164
+#: core/commandlineoptions.cpp:170
 msgid "Equivalent to --log-levels *:1"
 msgstr "--log-levels *:1-en baliokidea"
 
-#: core/commandlineoptions.cpp:165
+#: core/commandlineoptions.cpp:171
 msgid "Equivalent to --log-levels *:3"
 msgstr "--log-levels *:3-en baliokidea"
 
@@ -1998,7 +2018,7 @@ msgstr "Automatikoki eskuratu"
 msgid "Fetch completed"
 msgstr "Eskuraketa eginda"
 
-#: internet/subsonicservice.cpp:209
+#: internet/subsonicservice.cpp:218
 msgid "Fetching Subsonic library"
 msgstr ""
 
@@ -2159,7 +2179,7 @@ msgstr "Altu osoak"
 msgid "GStreamer audio engine"
 msgstr "GStreamer audio motorea"
 
-#: ui/settingsdialog.cpp:128
+#: ui/settingsdialog.cpp:132
 msgid "General"
 msgstr "Orokorra"
 
@@ -2395,9 +2415,13 @@ msgstr ""
 msgid "Incompatible Subsonic REST protocol version. Server must upgrade."
 msgstr ""
 
-#: core/commandlineoptions.cpp:152
+#: core/commandlineoptions.cpp:156
 msgid "Increase the volume by 4%"
 msgstr "Bolumena % 4 igo"
+
+#: core/commandlineoptions.cpp:158
+msgid "Increase the volume by <value> percent"
+msgstr ""
 
 #: core/globalshortcuts.cpp:52 wiimotedev/wiimotesettingspage.cpp:103
 msgid "Increase volume"
@@ -2428,7 +2452,7 @@ msgstr "Osotasunaren egiaztapena"
 msgid "Internet"
 msgstr "Internet"
 
-#: ui/settingsdialog.cpp:150
+#: ui/settingsdialog.cpp:154
 msgid "Internet providers"
 msgstr "Internet hornitzaileak"
 
@@ -2720,7 +2744,7 @@ msgstr "Pisten informazioa kargatzen"
 msgid "Loading..."
 msgstr "Kargatzen..."
 
-#: core/commandlineoptions.cpp:158
+#: core/commandlineoptions.cpp:164
 msgid "Loads files/URLs, replacing current playlist"
 msgstr "Fitxategiak/URLak kargatzen ditu, momentuko erreprodukzio-zerrenda ordezkatuz"
 
@@ -2732,7 +2756,7 @@ msgstr "Fitxategiak/URLak kargatzen ditu, momentuko erreprodukzio-zerrenda ordez
 #: ../bin/src/ui_lastfmsettingspage.h:153
 #: ../bin/src/ui_googledrivesettingspage.h:105
 #: ../bin/src/ui_ubuntuonesettingspage.h:112
-#: ../bin/src/ui_dropboxsettingspage.h:105
+#: ../bin/src/ui_dropboxsettingspage.h:105 ../bin/src/ui_boxsettingspage.h:105
 msgid "Login"
 msgstr "Saio-hasiera"
 
@@ -2894,12 +2918,12 @@ msgstr "Hilabete"
 msgid "Mood"
 msgstr "Aldarte"
 
-#: ../bin/src/ui_appearancesettingspage.h:287
+#: ../bin/src/ui_appearancesettingspage.h:294
 #: moodbar/moodbarproxystyle.cpp:342
 msgid "Moodbar style"
 msgstr "Aldarte-barraren itxura"
 
-#: ../bin/src/ui_appearancesettingspage.h:285
+#: ../bin/src/ui_appearancesettingspage.h:292
 msgid "Moodbars"
 msgstr "Aldarte-barra"
 
@@ -3066,7 +3090,7 @@ msgstr "Hurrengo astea"
 msgid "No analyzer"
 msgstr "Analizatzailerik ez"
 
-#: ../bin/src/ui_appearancesettingspage.h:280
+#: ../bin/src/ui_appearancesettingspage.h:285
 msgid "No background image"
 msgstr "Atzeko planoko irudirik ez"
 
@@ -3182,6 +3206,10 @@ msgstr ""
 msgid "Only show the first"
 msgstr "Lehena bakarrik erakutsi"
 
+#: ../bin/src/ui_appearancesettingspage.h:290
+msgid "Opacity"
+msgstr ""
+
 #: internet/digitallyimportedservicebase.cpp:179
 #: internet/groovesharkservice.cpp:544 internet/icecastservice.cpp:296
 #: internet/jamendoservice.cpp:419 internet/magnatuneservice.cpp:278
@@ -3261,7 +3289,7 @@ msgstr "Fitxategiak antolatzen"
 msgid "Original tags"
 msgstr "Jatorrizko etiketak"
 
-#: core/commandlineoptions.cpp:160
+#: core/commandlineoptions.cpp:166
 msgid "Other options"
 msgstr "Bestelako aukerak"
 
@@ -3311,7 +3339,7 @@ msgstr "Pasahitza babestua"
 msgid "Pause"
 msgstr "Pausarazi"
 
-#: core/commandlineoptions.cpp:147
+#: core/commandlineoptions.cpp:151
 msgid "Pause playback"
 msgstr "Erreprodukzioa pausatu"
 
@@ -3346,7 +3374,7 @@ msgstr "Erreprodukzio kopurua"
 msgid "Play custom radio..."
 msgstr "Erreproduzitu irrati pertsonalizatua..."
 
-#: core/commandlineoptions.cpp:146
+#: core/commandlineoptions.cpp:150
 msgid "Play if stopped, pause if playing"
 msgstr "Erreproduzitu pausatua badago, pausarazi erreproduzitzen ari bada"
 
@@ -3359,7 +3387,7 @@ msgstr "Erreproduzitu ez badago ezer aurretik erreproduzitzen"
 msgid "Play tag radio..."
 msgstr "Erreproduzitu etiketaren irratia..."
 
-#: core/commandlineoptions.cpp:159
+#: core/commandlineoptions.cpp:165
 msgid "Play the <n>th track in the playlist"
 msgstr "Erreproduzitu erreprodukzio-zerrendako <n>. pista"
 
@@ -3371,7 +3399,7 @@ msgstr "Erreproduzitu/Pausarazi"
 msgid "Playback"
 msgstr "Erreprodukzioa"
 
-#: core/commandlineoptions.cpp:144
+#: core/commandlineoptions.cpp:148
 msgid "Player options"
 msgstr "Erreproduzitzailearen aukerak"
 
@@ -3384,7 +3412,7 @@ msgstr "Erreprodukzio-zerrenda"
 msgid "Playlist finished"
 msgstr "Erreprodukzio-zerrenda amaituta"
 
-#: core/commandlineoptions.cpp:156
+#: core/commandlineoptions.cpp:162
 msgid "Playlist options"
 msgstr "Erreprodukzio-zerrendaren aukerak"
 
@@ -3504,7 +3532,7 @@ msgstr "Aurrekoa"
 msgid "Previous track"
 msgstr "Aurreko pista"
 
-#: core/commandlineoptions.cpp:167
+#: core/commandlineoptions.cpp:173
 msgid "Print out version information"
 msgstr "Bertsio-informazioa erakutsi"
 
@@ -3792,7 +3820,7 @@ msgstr "Lagintze-tasa"
 msgid "Samplerate"
 msgstr "Lagintze-tasa"
 
-#: ../bin/src/ui_appearancesettingspage.h:288
+#: ../bin/src/ui_appearancesettingspage.h:295
 msgid "Save .mood files in your music library"
 msgstr ".mood fitxategiak musika-bilduman gorde"
 
@@ -3912,11 +3940,11 @@ msgstr "Atzera egin"
 msgid "Seek forward"
 msgstr "Aurrera egin"
 
-#: core/commandlineoptions.cpp:155
+#: core/commandlineoptions.cpp:161
 msgid "Seek the currently playing track by a relative amount"
 msgstr "Oraingo pistan mugitu posizio erlatibo baten arabera"
 
-#: core/commandlineoptions.cpp:154
+#: core/commandlineoptions.cpp:160
 msgid "Seek the currently playing track to an absolute position"
 msgstr "Oraingo pistan mugitu posizio absolutu baten arabera"
 
@@ -3928,11 +3956,11 @@ msgstr "Hautatu dena"
 msgid "Select None"
 msgstr "Ez hautatu ezer"
 
-#: ../bin/src/ui_appearancesettingspage.h:272
+#: ../bin/src/ui_appearancesettingspage.h:277
 msgid "Select background color:"
 msgstr "Hautatu atzeko planoaren kolorea:"
 
-#: ui/appearancesettingspage.cpp:240
+#: ui/appearancesettingspage.cpp:247
 msgid "Select background image"
 msgstr "Hautatu atzeko planoko irudia"
 
@@ -3940,11 +3968,7 @@ msgstr "Hautatu atzeko planoko irudia"
 msgid "Select best possible match"
 msgstr "Hautatu bat-etortze posiblerik onena"
 
-#: ../bin/src/ui_appearancesettingspage.h:283
-msgid "Select blur radius:"
-msgstr "Aukeratu lausotutako aukerak:"
-
-#: ../bin/src/ui_appearancesettingspage.h:270
+#: ../bin/src/ui_appearancesettingspage.h:275
 msgid "Select foreground color:"
 msgstr "Aukeratu aurreko planoaren kolorea:"
 
@@ -3977,7 +4001,7 @@ msgstr "Zerbitzua lineaz kanpo"
 msgid "Set %1 to \"%2\"..."
 msgstr "Ezarri %1 \"%2\"-(e)ra..."
 
-#: core/commandlineoptions.cpp:151
+#: core/commandlineoptions.cpp:155
 msgid "Set the volume to <value> percent"
 msgstr "Ezarri bolumena ehuneko <value>-ra"
 
@@ -4012,7 +4036,7 @@ msgstr "Erakutsi OSD"
 msgid "Show a glowing animation on the current track"
 msgstr "Erakutsi oraingo pistaren animazio distiratsua"
 
-#: ../bin/src/ui_appearancesettingspage.h:286
+#: ../bin/src/ui_appearancesettingspage.h:293
 msgid "Show a moodbar in the track progress bar"
 msgstr "Aldarte-barra erakutsi aurrerapen barran"
 
@@ -4145,7 +4169,7 @@ msgstr "Antzeko artistak"
 msgid "Ska"
 msgstr "Ska"
 
-#: core/commandlineoptions.cpp:149
+#: core/commandlineoptions.cpp:153
 msgid "Skip backwards in playlist"
 msgstr "Saltatu atzerantz erreprodukzio-zerrendan"
 
@@ -4153,7 +4177,7 @@ msgstr "Saltatu atzerantz erreprodukzio-zerrendan"
 msgid "Skip count"
 msgstr "Saltatu kontagailua"
 
-#: core/commandlineoptions.cpp:150
+#: core/commandlineoptions.cpp:154
 msgid "Skip forwards in playlist"
 msgstr "Saltatu aurrerantz erreprodukzio-zerrendan"
 
@@ -4253,7 +4277,7 @@ msgstr "Estandarra"
 msgid "Starred"
 msgstr "Izarduna(k)"
 
-#: core/commandlineoptions.cpp:145
+#: core/commandlineoptions.cpp:149
 msgid "Start the playlist currently playing"
 msgstr "Hasi oraingo erreprodukzio-zerrenda"
 
@@ -4294,7 +4318,7 @@ msgstr "Ondoren gelditu"
 msgid "Stop after this track"
 msgstr "Gelditu pista honen ondoren"
 
-#: core/commandlineoptions.cpp:148
+#: core/commandlineoptions.cpp:152
 msgid "Stop playback"
 msgstr "Gelditu erreprodukzioa"
 
@@ -4417,7 +4441,7 @@ msgstr "Eskerrak hauei"
 msgid "The \"%1\" command could not be started."
 msgstr "\"%1\" komandoa ezin izan da hasi."
 
-#: ../bin/src/ui_appearancesettingspage.h:277
+#: ../bin/src/ui_appearancesettingspage.h:282
 msgid "The album cover of the currently playing song"
 msgstr "Orain erreproduzitzen ari den kantaren albumaren azala"
 
@@ -4597,7 +4621,7 @@ msgstr "Txandakatu ilara-egoera"
 msgid "Toggle scrobbling"
 msgstr "Txandakatu partekatzea"
 
-#: core/commandlineoptions.cpp:162
+#: core/commandlineoptions.cpp:168
 msgid "Toggle visibility for the pretty on-screen-display"
 msgstr "Txandakatu pantailako bistaratze itxurosoaren ikuspena"
 
@@ -4663,7 +4687,7 @@ msgstr "Itzali"
 msgid "URI"
 msgstr "URI"
 
-#: core/commandlineoptions.cpp:144
+#: core/commandlineoptions.cpp:148
 msgid "URL(s)"
 msgstr "URLa(k)"
 
@@ -4746,7 +4770,7 @@ msgstr "%1 eguneratzen..."
 msgid "Updating library"
 msgstr "Bilduma eguneratzen"
 
-#: core/commandlineoptions.cpp:144
+#: core/commandlineoptions.cpp:148
 msgid "Usage"
 msgstr "Erabilera"
 
@@ -4770,7 +4794,7 @@ msgstr "Erabili errepikatze-irabaziaren metadatuak eskuragarri daudenean"
 msgid "Use Wii Remote"
 msgstr "Erabili Wii-aren urruneko kontrola"
 
-#: ../bin/src/ui_appearancesettingspage.h:269
+#: ../bin/src/ui_appearancesettingspage.h:274
 msgid "Use a custom color set"
 msgstr "Erabili kolore-multzo pertsonalizatua"
 
@@ -4806,7 +4830,7 @@ msgstr "Erabili zarata karrakaketa behin-behinekoa"
 msgid "Use the system default"
 msgstr "Erabili sistemako lehenetsia"
 
-#: ../bin/src/ui_appearancesettingspage.h:268
+#: ../bin/src/ui_appearancesettingspage.h:273
 msgid "Use the system default color set"
 msgstr "Erabili sistemako kolore-multzo lehenetsia"
 
@@ -4827,7 +4851,7 @@ msgstr "Erabilia"
 msgid "User %1 doesn't have a Grooveshark Anywhere account"
 msgstr "%1 erabiltzaileak ez du Grooveshark Anywhere konturik"
 
-#: ui/settingsdialog.cpp:142
+#: ui/settingsdialog.cpp:146
 msgid "User interface"
 msgstr "Erabiltzaile-interfazea"
 
@@ -5197,7 +5221,7 @@ msgstr "tartean"
 msgid "biggest first"
 msgstr "handienak aurretik"
 
-#: playlist/playlistview.cpp:201 ui/edittagdialog.cpp:452
+#: playlist/playlistview.cpp:200 ui/edittagdialog.cpp:452
 msgid "bpm"
 msgstr "bpm"
 
@@ -5244,7 +5268,7 @@ msgstr "handiagoa baino"
 msgid "in the last"
 msgstr "azkenean"
 
-#: playlist/playlistview.cpp:203 ui/edittagdialog.cpp:454
+#: playlist/playlistview.cpp:202 ui/edittagdialog.cpp:454
 #: internet/spotifysettingspage.cpp:60 internet/spotifysettingspage.cpp:61
 #: internet/spotifysettingspage.cpp:62
 msgid "kbps"
@@ -5287,7 +5311,7 @@ msgstr "zaharrenak arinago"
 msgid "on"
 msgstr "honen barruan"
 
-#: core/commandlineoptions.cpp:144
+#: core/commandlineoptions.cpp:148
 msgid "options"
 msgstr "aukerak"
 
