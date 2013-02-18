@@ -1,3 +1,51 @@
+Version 1.2:
+  Major features:
+    * Add support for indexing and playing music from Box, Dropbox, Skydrive,
+      and Ubuntu One.
+    * Add support for Subsonic.
+    * Remote control support.
+
+  Other features:
+    * Add configurable blur & opacity to album art when used as a playlist
+      background.
+    * Support Opus where available.
+    * Support .mka and .oga file extensions.
+    * Parsing support for WPL playlists.
+    * Sort providers by user preference.
+    * Add Grooveshark MyMusic support.
+    * Add year and bitrate to MPRIS2 messages.
+    * Add "not equals" operator to fields in the smart playlist wizard.
+
+  Bugfixes:
+    * Detect corrupt FLAC files when parsing tags.
+    * Load tags from local files asynchronously.
+    * Show more than 5 album results at a time from Spotify.
+    * Detect last.fm login failures correctly.
+    * Support x-audio/* mime types for podcasts.
+    * Locale-aware library sorting.
+    * Remove duplicate tracks from Spotify search results.
+    * Do not fetch Magnatune library until the service is expanded.
+    * Sort Magnatune library after refresh.
+    * Make the playlist parser recognise 2 character URL schemes.
+    * Read and write more metadata for MP4 tags.
+    * Translate Unity quicklist actions.
+    * Fix a memory leak when fingerprinting songs.
+    * Preserve user stats when opening the edit tag dialog.
+    * Fix neverending task when a Grooveshark session is invalid.
+    * Elide the fancy sidebar text on the right instead of the middle.
+    * Increase the maximum size of the moodbar cache.
+    * Use a new Amazon access key.
+    * Select the next tab when a playlist tab is closed.
+    * Fix radio playlists in non-English locales.
+    * Fix cursor following playback.
+    * Hide moodbar playlist column by default.
+
+  Build system changes:
+    * Add continous builds for Fedora Core 18, Ubuntu 12.10 and Ubuntu 13.04.
+    * (Mac OS X and Windows) Upgrade to Qt 4.8.3.
+
+
+
 Version 1.1.1:
   Bugfixes:
     * (Windows) Fix a crash that would always occur for some users.
