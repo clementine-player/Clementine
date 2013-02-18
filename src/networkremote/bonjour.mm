@@ -4,6 +4,7 @@
 #import <Foundation/NSString.h>
 
 #include "core/logging.h"
+#include "core/scoped_nsautorelease_pool.h"
 
 @interface NetServicePublicationDelegate : NSObject<NSNetServiceDelegate> {
 }
@@ -53,6 +54,7 @@ void Bonjour::Publish(
     const QString& type,
     const QString& name,
     quint16 port) {
+  ScopedNSAutoreleasePool pool;
   NSNetService* service = [[NSNetService alloc]
       initWithDomain: NSStringFromQString(domain)
       type: NSStringFromQString(type)
