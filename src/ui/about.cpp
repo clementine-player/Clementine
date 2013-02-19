@@ -49,7 +49,8 @@ About::About(QWidget *parent)
              << Person("Paul Cifarelli", "paul@cifarelli.net")
              << Person("Felipe Rivera", "liebremx@users.sourceforge.net")
              << Person("Alexander Peitz")
-             << Person("Artur Rona", "artur.rona@gmail.com");
+             << Person("Artur Rona", "artur.rona@gmail.com")
+             << Person("Andreas Muttscheller", "asfa194@gmail.com");
 
   qSort(authors_);
   qSort(thanks_to_);

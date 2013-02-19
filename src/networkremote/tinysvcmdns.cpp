@@ -6,6 +6,7 @@ extern "C" {
 
 #include <QHostInfo>
 #include <QNetworkInterface>
+#include <QtEndian>
 
 #include "core/logging.h"
 
@@ -17,7 +18,7 @@ uint32_t GetLocalIPAddress() {
     // TODO: Add ipv6 support to tinysvcmdns.
     if (address.protocol() == QAbstractSocket::IPv4Protocol &&
         !address.isInSubnet(QHostAddress::parseSubnet("127.0.0.1/8"))) {
-      return address.toIPv4Address();
+      return qToBigEndian(address.toIPv4Address());
     }
   }
   return 0;
@@ -34,9 +35,10 @@ TinySVCMDNS::TinySVCMDNS()
     return;
   }
   mdnsd_ = mdnsd_start();
+  QString host = QHostInfo::localHostName();
   mdnsd_set_hostname(
       mdnsd_,
-      QHostInfo::localHostName().toUtf8().constData(),
+      QString(host + ".local").toUtf8().constData(),
       ip_address);
 }
 
