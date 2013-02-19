@@ -92,8 +92,7 @@ void NetworkRemote::StartServer() {
   qLog(Info) << "Listening on port " << port_;
 
   if (Zeroconf::GetZeroconf()) {
-    QString name = QString("Clementine on %1 (%2)").arg(QHostInfo::localHostName())
-                                                 .arg(QHostInfo::localDomainName());
+    QString name = QString("Clementine on %1").arg(QHostInfo::localHostName());
     Zeroconf::GetZeroconf()->Publish(
         "local", "_clementine._tcp", name, port_);
   }
