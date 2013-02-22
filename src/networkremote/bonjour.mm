@@ -58,7 +58,7 @@ void Bonjour::PublishInternal(
   NSNetService* service = [[NSNetService alloc]
       initWithDomain: NSStringFromQString(domain)
       type: NSStringFromQString(type)
-      name: [NSString stringWithUTF8String(name.constData())]
+      name: [NSString stringWithUTF8String: name.constData()]
       port: port];
   if (service) {
     [service setDelegate: delegate_];
