@@ -52,3 +52,16 @@ QByteArray Zeroconf::TruncateName(const QString& name) {
   truncated_utf8.append('\0');
   return truncated_utf8;
 }
+
+void Zeroconf::Publish(
+    const QString& domain,
+    const QString& type,
+    const QString& name,
+    quint16 port) {
+  QByteArray truncated_name = TruncateName(name);
+  PublishInternal(
+      domain,
+      type,
+      truncated_name,
+      port);
+}

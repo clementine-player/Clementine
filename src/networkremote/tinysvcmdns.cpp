@@ -48,10 +48,10 @@ TinySVCMDNS::~TinySVCMDNS() {
   }
 }
 
-void TinySVCMDNS::Publish(
+void TinySVCMDNS::PublishInternal(
     const QString& domain,
     const QString& type,
-    const QString& name,
+    const QByteArray& name,
     quint16 port) {
   if (!mdnsd_) {
     return;
@@ -65,7 +65,7 @@ void TinySVCMDNS::Publish(
 
   mdnsd_register_svc(
       mdnsd_,
-      name.toUtf8().constData(),
+      name.constData(),
       QString(type + ".local").toUtf8().constData(),
       port,
       NULL,

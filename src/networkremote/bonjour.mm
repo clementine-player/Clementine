@@ -49,16 +49,16 @@ Bonjour::~Bonjour() {
   [delegate_ release];
 }
 
-void Bonjour::Publish(
+void Bonjour::PublishInternal(
     const QString& domain,
     const QString& type,
-    const QString& name,
+    const QByteArray& name,
     quint16 port) {
   ScopedNSAutoreleasePool pool;
   NSNetService* service = [[NSNetService alloc]
       initWithDomain: NSStringFromQString(domain)
       type: NSStringFromQString(type)
-      name: NSStringFromQString(name)
+      name: [NSString stringWithUTF8String(name.constData())]
       port: port];
   if (service) {
     [service setDelegate: delegate_];

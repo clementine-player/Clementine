@@ -13,10 +13,12 @@ class Bonjour : public Zeroconf {
  public:
   Bonjour();
   virtual ~Bonjour();
-  virtual void Publish(
+
+ protected:
+  virtual void PublishInternal(
       const QString& domain,
       const QString& type,
-      const QString& name,
+      const QByteArray& name,
       quint16 port);
 
  private:

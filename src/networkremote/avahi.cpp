@@ -12,7 +12,7 @@ namespace {
 void AddService(
     const QString domain,
     const QString type,
-    const QString name,
+    const QByteArray name,
     quint16 port,
     QDBusPendingReply<QDBusObjectPath> path_reply);
 void Commit(OrgFreedesktopAvahiEntryGroupInterface* interface);
@@ -20,10 +20,10 @@ void LogCommit(QDBusPendingReply<> reply);
 
 }  // namespace
 
-void Avahi::Publish(
+void Avahi::PublishInternal(
     const QString& domain,
     const QString& type,
-    const QString& name,
+    const QByteArray& name,
     quint16 port) {
   OrgFreedesktopAvahiServerInterface server_interface(
       "org.freedesktop.Avahi",
@@ -46,7 +46,7 @@ namespace {
 void AddService(
     const QString domain,
     const QString type,
-    const QString name,
+    const QByteArray name,
     quint16 port,
     QDBusPendingReply<QDBusObjectPath> path_reply) {
   if (path_reply.isError()) {
@@ -68,7 +68,8 @@ void AddService(
       -1,                    // Interface (all)
       -1,                    // Protocol (v4 & v6)
       0,                     // Flags
-      name,                  // Service name, eg. Clementine
+      // Service name, eg. Clementine
+      QString::fromUtf8(name.constData(), name.size()),
       type,                  // Service type, eg. _clementine._tcp
       domain,                // Domain, eg. local
       QString::null,         // Hostname (filled in by Avahi)
