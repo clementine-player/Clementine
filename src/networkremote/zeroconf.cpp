@@ -14,6 +14,8 @@
 #include "tinysvcmdns.h"
 #endif
 
+#include <QTextCodec>
+
 Zeroconf* Zeroconf::sInstance = NULL;
 
 Zeroconf::~Zeroconf() {
@@ -34,4 +36,19 @@ Zeroconf* Zeroconf::GetZeroconf() {
   }
 
   return sInstance;
+}
+
+QByteArray Zeroconf::TruncateName(const QString& name) {
+  QTextCodec* codec = QTextCodec::codecForName("UTF-8");
+  QByteArray truncated_utf8;
+  foreach (QChar c, name) {
+    QByteArray rendered = codec->fromUnicode(&c, 1, NULL);
+    if (truncated_utf8.size() + rendered.size() >= 63) {
+      break;
+    }
+    truncated_utf8 += rendered;
+  }
+  // NULL-terminate the string.
+  truncated_utf8.append('\0');
+  return truncated_utf8;
 }

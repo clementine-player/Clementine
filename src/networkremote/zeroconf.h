@@ -15,6 +15,9 @@ class Zeroconf {
 
   static Zeroconf* GetZeroconf();
 
+  // Truncate a QString to 63 bytes of UTF-8.
+  static QByteArray TruncateName(const QString& name);
+
  private:
   static Zeroconf* sInstance;
 };
