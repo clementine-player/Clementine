@@ -60,7 +60,7 @@ set(TESTUTILS-SOURCES
   test_utils.cpp
   testobjectdecorators.cpp
 
-  ${CMAKE_SOURCE_DIR}/ext/clementine-tagreader/fmpsparser.cpp
+  ${CMAKE_SOURCE_DIR}/ext/libclementine-tagreader/fmpsparser.cpp
 )
 
 set(TESTUTILS-MOC-HEADERS

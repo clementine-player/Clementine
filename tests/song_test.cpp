@@ -16,6 +16,7 @@
 */
 
 #include "config.h"
+#include "tagreader.h"
 #include "core/song.h"
 #ifdef HAVE_LIBLASTFM
   #include "internet/lastfmcompat.h"
@@ -38,6 +39,21 @@ class SongTest : public ::testing::Test {
   static void SetUpTestCase() {
     // Return something from uninteresting mock functions.
     testing::DefaultValue<TagLib::String>::Set("foobarbaz");
+  }
+
+  static Song ReadSongFromFile(const QString& filename) {
+    TagReader tag_reader;
+    Song song;
+    ::pb::tagreader::SongMetadata pb_song;
+
+    // We need to init protobuf object from a Song object, to have default
+    // values initialized correctly. For example, Song's rating is -1 by
+    // default: using protobuf directly would lead to 0 by default, which is not
+    // what we want.
+    song.ToProtobuf(&pb_song);
+    tag_reader.ReadFile(filename, &pb_song);
+    song.InitFromProtobuf(pb_song);
+    return song;
   }
 };
 
@@ -70,46 +86,40 @@ TEST_F(SongTest, InitsFromLastFM) {
   EXPECT_EQ("Baz", song.album());
 }*/
 
-/*TEST_F(SongTest, FMPSRating) {
+TEST_F(SongTest, FMPSRating) {
   TemporaryResource r(":/testdata/fmpsrating.mp3");
-  Song song;
-  song.InitFromFile(r.fileName(), -1);
+  Song song = ReadSongFromFile(r.fileName());
   EXPECT_FLOAT_EQ(0.42, song.rating());
 }
 
 TEST_F(SongTest, FMPSRatingUser) {
   TemporaryResource r(":/testdata/fmpsratinguser.mp3");
-  Song song;
-  song.InitFromFile(r.fileName(), -1);
+  Song song = ReadSongFromFile(r.fileName());
   EXPECT_FLOAT_EQ(0.10, song.rating());
 }
 
 TEST_F(SongTest, FMPSRatingBoth) {
   TemporaryResource r(":/testdata/fmpsratingboth.mp3");
-  Song song;
-  song.InitFromFile(r.fileName(), -1);
+  Song song = ReadSongFromFile(r.fileName());
   EXPECT_FLOAT_EQ(0.42, song.rating());
 }
 
 TEST_F(SongTest, FMPSPlayCount) {
   TemporaryResource r(":/testdata/fmpsplaycount.mp3");
-  Song song;
-  song.InitFromFile(r.fileName(), -1);
+  Song song = ReadSongFromFile(r.fileName());
   EXPECT_EQ(123, song.playcount());
 }
 
 TEST_F(SongTest, FMPSPlayCountUser) {
   TemporaryResource r(":/testdata/fmpsplaycountuser.mp3");
-  Song song;
-  song.InitFromFile(r.fileName(), -1);
+  Song song = ReadSongFromFile(r.fileName());
   EXPECT_EQ(42, song.playcount());
 }
 
 TEST_F(SongTest, FMPSPlayCountBoth) {
   TemporaryResource r(":/testdata/fmpsplaycountboth.mp3");
-  Song song;
-  song.InitFromFile(r.fileName(), -1);
+  Song song = ReadSongFromFile(r.fileName());
   EXPECT_EQ(123, song.playcount());
-}*/
+}
 
 }  // namespace

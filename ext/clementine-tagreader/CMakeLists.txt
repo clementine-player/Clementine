@@ -11,17 +11,8 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --std=c++0x -U__STRICT_ANSI__")
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR})
 
 set(SOURCES
-  fmpsparser.cpp
   main.cpp
   tagreaderworker.cpp
-)
-
-optional_source(HAVE_GOOGLE_DRIVE
-  INCLUDE_DIRECTORIES ${SPARSEHASH_INCLUDE_DIRS}
-  SOURCES
-    cloudstream.cpp
-  HEADERS
-    cloudstream.h
 )
 
 qt4_wrap_cpp(MOC ${HEADERS})
