@@ -1876,8 +1876,8 @@ void MainWindow::PlaylistOrganiseSelected(bool copy) {
 void MainWindow::PlaylistDelete() {
   // Note: copied from LibraryView::Delete
 
-  if (QMessageBox::question(this, tr("Delete files"),
-        tr("These files will be deleted from disk, are you sure you want to continue?"),
+  if (QMessageBox::warning(this, tr("Delete files"),
+        tr("These files will be permanently deleted from disk, are you sure you want to continue?"),
         QMessageBox::Yes, QMessageBox::Cancel) != QMessageBox::Yes)
     return;
 
