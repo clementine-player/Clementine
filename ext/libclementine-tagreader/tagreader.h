@@ -78,6 +78,11 @@ class TagReader {
                    pb::tagreader::SongMetadata* song) const;
   pb::tagreader::SongMetadata_Type GuessFileType(TagLib::FileRef* fileref) const;
 
+  void SetUserTextFrame(const QString& description, const QString& value,
+                        TagLib::ID3v2::Tag* tag) const;
+  void SetUserTextFrame(const std::string& description, const std::string& value,
+                        TagLib::ID3v2::Tag* tag) const;
+
   void SetTextFrame(const char* id, const QString& value,
                     TagLib::ID3v2::Tag* tag) const;
   void SetTextFrame(const char* id, const std::string& value,

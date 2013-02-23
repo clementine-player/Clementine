@@ -428,7 +428,8 @@ bool TagReader::SaveFile(const QString& filename,
     SetTextFrame("TCOM", song.composer(), tag);
     SetTextFrame("TPE2", song.albumartist(), tag);
     SetTextFrame("TCMP", std::string(song.compilation() ? "1" : "0"), tag);
-    SetTextFrame("TXXX", QString::number(song.rating()), tag);
+    SetUserTextFrame("FMPS_Rating", QString::number(song.rating()), tag);
+    SetUserTextFrame("FMPS_PlayCount", QString::number(song.playcount()), tag);
   }
   else if (TagLib::Ogg::Vorbis::File* file = dynamic_cast<TagLib::Ogg::Vorbis::File*>(fileref->file())) {
     TagLib::Ogg::XiphComment* tag = file->tag();
@@ -471,6 +472,34 @@ bool TagReader::SaveFile(const QString& filename,
   #endif  // Q_OS_LINUX
 
   return ret;
+}
+
+void TagReader::SetUserTextFrame(const QString& description, const QString& value,
+                                 TagLib::ID3v2::Tag* tag) const {
+  const QByteArray descr_utf8(description.toUtf8());
+  const QByteArray value_utf8(value.toUtf8());
+  SetUserTextFrame(std::string(descr_utf8.constData(), descr_utf8.length()),
+                   std::string(value_utf8.constData(), value_utf8.length()),
+                   tag);
+}
+
+void TagReader::SetUserTextFrame(const std::string& description,
+                                 const std::string& value,
+                                 TagLib::ID3v2::Tag* tag) const {
+  const TagLib::String t_description = StdStringToTaglibString(description);
+  // Remove the frame if it already exists
+  TagLib::ID3v2::UserTextIdentificationFrame* frame =
+      TagLib::ID3v2::UserTextIdentificationFrame::find(tag, t_description);
+  if (frame) {
+    tag->removeFrame(frame);
+  }
+
+  // Create and add a new frame
+  frame = new TagLib::ID3v2::UserTextIdentificationFrame(TagLib::String::UTF8);
+
+  frame->setDescription(t_description);
+  frame->setText(StdStringToTaglibString(value));
+  tag->addFrame(frame);
 }
 
 void TagReader::SetTextFrame(const char* id, const QString& value,
