@@ -43,6 +43,7 @@ public:
 
   ReplyType* ReadFile(const QString& filename);
   ReplyType* SaveFile(const QString& filename, const Song& metadata);
+  ReplyType* UpdateSongStatistics(const Song& metadata);
   ReplyType* IsMediaFile(const QString& filename);
   ReplyType* LoadEmbeddedArt(const QString& filename);
   ReplyType* ReadCloudFile(const QUrl& download_url,
@@ -61,6 +62,9 @@ public:
 
   // TODO: Make this not a singleton
   static TagReaderClient* Instance() { return sInstance; }
+
+public slots:
+  void UpdateSongsStatistics(const SongList& songs);
 
 private slots:
   void WorkerFailedToStart();

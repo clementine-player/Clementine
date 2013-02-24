@@ -53,6 +53,10 @@ class TagReader {
 
   void ReadFile(const QString& filename, pb::tagreader::SongMetadata* song) const;
   bool SaveFile(const QString& filename, const pb::tagreader::SongMetadata& song) const;
+  // Returns false if something went wrong; returns true otherwise (might
+  // returns true if the file exists but nothing has been written inside because
+  // statistics tag format is not supported for this kind of file)
+  bool SaveSongStatisticsToFile(const QString& filename, const pb::tagreader::SongMetadata& song) const;
   bool IsMediaFile(const QString& filename) const;
   QByteArray LoadEmbeddedArt(const QString& filename) const;
 

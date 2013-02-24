@@ -428,8 +428,6 @@ bool TagReader::SaveFile(const QString& filename,
     SetTextFrame("TCOM", song.composer(), tag);
     SetTextFrame("TPE2", song.albumartist(), tag);
     SetTextFrame("TCMP", std::string(song.compilation() ? "1" : "0"), tag);
-    SetUserTextFrame("FMPS_Rating", QString::number(song.rating()), tag);
-    SetUserTextFrame("FMPS_PlayCount", QString::number(song.playcount()), tag);
   }
   else if (TagLib::Ogg::Vorbis::File* file = dynamic_cast<TagLib::Ogg::Vorbis::File*>(fileref->file())) {
     TagLib::Ogg::XiphComment* tag = file->tag();
@@ -474,10 +472,43 @@ bool TagReader::SaveFile(const QString& filename,
   return ret;
 }
 
+bool TagReader::SaveSongStatisticsToFile(const QString& filename,
+                                         const pb::tagreader::SongMetadata& song) const {
+  if (filename.isNull())
+    return false;
+
+  qLog(Debug) << "Saving song statistics tags to" << filename;
+
+  scoped_ptr<TagLib::FileRef> fileref(factory_->GetFileRef(filename));
+
+  if (!fileref || fileref->isNull()) // The file probably doesn't exist
+    return false;
+
+  if (TagLib::MPEG::File* file = dynamic_cast<TagLib::MPEG::File*>(fileref->file())) {
+    TagLib::ID3v2::Tag* tag = file->ID3v2Tag(true);
+    SetUserTextFrame("FMPS_Rating", QString::number(song.rating()), tag);
+    SetUserTextFrame("FMPS_PlayCount", QString::number(song.playcount()), tag);
+  } else {
+    // Nothing to save: stop now
+    return true;
+  }
+
+  bool ret = fileref->save();
+  #ifdef Q_OS_LINUX
+  if (ret) {
+    // Linux: inotify doesn't seem to notice the change to the file unless we
+    // change the timestamps as well. (this is what touch does)
+    utimensat(0, QFile::encodeName(filename).constData(), NULL, 0);
+  }
+  #endif  // Q_OS_LINUX
+  return ret;
+}
+
 void TagReader::SetUserTextFrame(const QString& description, const QString& value,
                                  TagLib::ID3v2::Tag* tag) const {
   const QByteArray descr_utf8(description.toUtf8());
   const QByteArray value_utf8(value.toUtf8());
+  qLog(Debug) << "Setting FMPSFrame:" << description << ", " << value;
   SetUserTextFrame(std::string(descr_utf8.constData(), descr_utf8.length()),
                    std::string(value_utf8.constData(), value_utf8.length()),
                    tag);

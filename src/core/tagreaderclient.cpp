@@ -68,6 +68,24 @@ TagReaderReply* TagReaderClient::SaveFile(const QString& filename, const Song& m
   return worker_pool_->SendMessageWithReply(&message);
 }
 
+TagReaderReply* TagReaderClient::UpdateSongStatistics(const Song& metadata) {
+  pb::tagreader::Message message;
+  pb::tagreader::SaveSongStatisticsToFileRequest* req =
+      message.mutable_save_song_statistics_to_file_request();
+
+  req->set_filename(DataCommaSizeFromQString(metadata.url().toLocalFile()));
+  metadata.ToProtobuf(req->mutable_metadata());
+
+  return worker_pool_->SendMessageWithReply(&message);
+}
+
+void TagReaderClient::UpdateSongsStatistics(const SongList& songs) {
+  for (const Song& song : songs) {
+    TagReaderReply* reply = UpdateSongStatistics(song);
+    connect(reply, SIGNAL(Finished(bool)), reply, SLOT(deleteLater()));
+  }
+}
+
 TagReaderReply* TagReaderClient::IsMediaFile(const QString& filename) {
   pb::tagreader::Message message;
   pb::tagreader::IsMediaFileRequest* req = message.mutable_is_media_file_request();

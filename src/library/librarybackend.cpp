@@ -20,6 +20,7 @@
 #include "sqlrow.h"
 #include "core/database.h"
 #include "core/scopedtransaction.h"
+#include "core/tagreaderclient.h"
 #include "smartplaylists/search.h"
 
 #include <QCoreApplication>
@@ -48,6 +49,8 @@ void LibraryBackend::Init(Database* db, const QString& songs_table,
   dirs_table_ = dirs_table;
   subdirs_table_ = subdirs_table;
   fts_table_ = fts_table;
+  connect(this, SIGNAL(SongsStatisticsChanged(SongList)),
+      TagReaderClient::Instance(), SLOT(UpdateSongsStatistics(SongList)));
 }
 
 void LibraryBackend::LoadDirectoriesAsync() {
