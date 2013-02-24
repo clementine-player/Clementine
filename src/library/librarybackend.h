@@ -103,6 +103,8 @@ class LibraryBackend : public LibraryBackendInterface {
   Q_OBJECT
 
  public:
+  static const char* kSettingsGroup;
+
   Q_INVOKABLE LibraryBackend(QObject* parent = 0);
   void Init(Database* db, const QString& songs_table,
             const QString& dirs_table, const QString& subdirs_table,
@@ -163,6 +165,8 @@ class LibraryBackend : public LibraryBackendInterface {
 
   void DeleteAll();
 
+  void ReloadSettingsAsync();
+
  public slots:
   void LoadDirectories();
   void UpdateTotalSongCount();
@@ -178,6 +182,7 @@ class LibraryBackend : public LibraryBackendInterface {
   void IncrementSkipCount(int id, float progress);
   void ResetStatistics(int id);
   void UpdateSongRating(int id, float rating);
+  void ReloadSettings();
 
  signals:
   void DirectoryDiscovered(const Directory& dir, const SubdirectoryList& subdirs);
@@ -220,6 +225,7 @@ class LibraryBackend : public LibraryBackendInterface {
   QString dirs_table_;
   QString subdirs_table_;
   QString fts_table_;
+  bool save_statistics_in_file_;
 };
 
 #endif // LIBRARYBACKEND_H

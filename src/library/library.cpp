@@ -152,5 +152,6 @@ void Library::ResumeWatcher() {
 }
 
 void Library::ReloadSettings() {
+  backend_->ReloadSettingsAsync();
   watcher_->ReloadSettingsAsync();
 }

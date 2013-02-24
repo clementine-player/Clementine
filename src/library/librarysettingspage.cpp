@@ -16,6 +16,8 @@
 */
 
 #include "librarysettingspage.h"
+
+#include "librarybackend.h"
 #include "librarydirectorymodel.h"
 #include "librarymodel.h"
 #include "libraryview.h"
@@ -93,6 +95,10 @@ void LibrarySettingsPage::Save() {
   s.setValue("cover_art_patterns", filters);
   
   s.endGroup();
+
+  s.beginGroup(LibraryBackend::kSettingsGroup);
+  s.setValue("save_statistics_in_file", ui_->save_statistics_in_file->isChecked());
+  s.endGroup();
 }
 
 void LibrarySettingsPage::Load() {
@@ -126,5 +132,9 @@ void LibrarySettingsPage::Load() {
       QStringList() << "front" << "cover").toStringList();
   ui_->cover_art_patterns->setText(filters.join(","));
   
+  s.endGroup();
+
+  s.beginGroup(LibraryBackend::kSettingsGroup);
+  ui_->save_statistics_in_file->setChecked(s.value("save_statistics_in_file", false).toBool());
   s.endGroup();
 }
