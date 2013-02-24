@@ -62,6 +62,13 @@ class SongTest : public ::testing::Test {
     song.ToProtobuf(&pb_song);
     tag_reader.SaveFile(filename, pb_song);
   }
+
+  static void WriteSongStatisticsToFile(const Song& song, const QString& filename) {
+    TagReader tag_reader;
+    ::pb::tagreader::SongMetadata pb_song;
+    song.ToProtobuf(&pb_song);
+    tag_reader.SaveSongStatisticsToFile(filename, pb_song);
+  }
 };
 
 
@@ -105,7 +112,7 @@ TEST_F(SongTest, FMPSRatingUser) {
   EXPECT_FLOAT_EQ(0.10, song.rating());
 
   song.set_rating(0.20);
-  WriteSongToFile(song, r.fileName());
+  WriteSongStatisticsToFile(song, r.fileName());
   Song new_song = ReadSongFromFile(r.fileName());
   EXPECT_FLOAT_EQ(0.20, new_song.rating());
 }
@@ -122,7 +129,7 @@ TEST_F(SongTest, FMPSPlayCount) {
   EXPECT_EQ(123, song.playcount());
 
   song.set_playcount(69);
-  WriteSongToFile(song, r.fileName());
+  WriteSongStatisticsToFile(song, r.fileName());
   Song new_song = ReadSongFromFile(r.fileName());
   EXPECT_EQ(69, new_song.playcount());
 }
