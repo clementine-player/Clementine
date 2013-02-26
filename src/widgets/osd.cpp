@@ -320,6 +320,10 @@ QString OSD::ReplaceVariable(const QString& variable, const Song& song) {
     return return_value.setNum(song.skipcount());
   } else if (variable == "%filename%") {
     return song.basefilename();
+  } else if (variable == "%rating%") {
+    return song.PrettyRating();
+  } else if (variable == "%score%") {
+    return QString::number(song.score());
   } else if (variable == "%newline%") {
     // We need different strings depending on notification type
     switch (behaviour_) {

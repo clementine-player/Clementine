@@ -1049,6 +1049,16 @@ void Song::ToLastFM(lastfm::Track* track, bool prefer_album_artist) const {
 }
 #endif // HAVE_LIBLASTFM
 
+QString Song::PrettyRating() const {
+  float rating = d->rating_;
+
+  if (rating == -1.0f)
+    return "0";
+
+  return QString::number(static_cast<int>(rating * 100));
+}
+
+
 QString Song::PrettyTitle() const {
   QString title(d->title_);
 

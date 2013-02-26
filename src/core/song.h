@@ -216,6 +216,7 @@ class Song {
   const QImage& image() const;
 
   // Pretty accessors
+  QString PrettyRating() const;
   QString PrettyTitle() const;
   QString PrettyTitleWithArtist() const;
   QString PrettyLength() const;
