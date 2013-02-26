@@ -161,7 +161,9 @@ void OAuthenticator::RefreshAccessTokenFinished(QNetworkReply* reply) {
 
   QVariantMap result = parser.parse(reply, &ok).toMap();
   access_token_ = result["access_token"].toString();
-  refresh_token_ = result["refresh_token"].toString();
+  if (result.contains("refresh_token")) {
+    refresh_token_ = result["refresh_token"].toString();
+  }
   SetExpiryTime(result["expires_in"].toInt());
   emit Finished();
 }
