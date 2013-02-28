@@ -146,4 +146,18 @@ TEST_F(SongTest, FMPSPlayCountBoth) {
   EXPECT_EQ(123, song.playcount());
 }
 
+TEST_F(SongTest, POPMRating) {
+  TemporaryResource r(":/testdata/popmrating.mp3");
+  Song song = ReadSongFromFile(r.fileName());
+  EXPECT_FLOAT_EQ(0.60, song.rating());
+}
+
+TEST_F(SongTest, BothFMPSPOPMRating) {
+  // fmpspopmrating.mp3 contains FMPS with rating 0.42 and POPM with 0x80
+  // (corresponds to 0.60 rating for us): check that FMPS tag has precedence
+  TemporaryResource r(":/testdata/fmpspopmrating.mp3");
+  Song song = ReadSongFromFile(r.fileName());
+  EXPECT_FLOAT_EQ(0.42, song.rating());
+}
+
 }  // namespace

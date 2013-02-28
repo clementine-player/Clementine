@@ -93,6 +93,11 @@ class TagReader {
                     TagLib::ID3v2::Tag* tag) const;
 
 private:
+  // Returns a float in [0.0..1.0] corresponding to the rating range we use in Clementine
+  static float ConvertPOPMRating(const int POPM_rating);
+  // Reciprocal
+  static int ConvertToPOPMRating(const float rating);
+
   FileRefFactory* factory_;
   QNetworkAccessManager* network_;
 

@@ -40,6 +40,7 @@
 #include <opusfile.h>
 #endif
 #include <oggflacfile.h>
+#include <popularimeterframe.h>
 #include <speexfile.h>
 #include <tag.h>
 #include <textidentificationframe.h>
@@ -180,6 +181,25 @@ void TagReader::ReadFile(const QString& filename,
                          song);
         }
       }
+
+      // Check POPM tags
+      // We do this after checking FMPS frames, so FMPS have precedence, as we
+      // will consider POPM tags iff song has no rating/playcount already set.
+      qLog(Debug) << "POPM";
+      if (!map["POPM"].isEmpty()) {
+        const TagLib::ID3v2::PopularimeterFrame* frame =
+            dynamic_cast<const TagLib::ID3v2::PopularimeterFrame*>(map["POPM"].front());
+        if (frame) {
+          // Take a user rating only if there's no rating already set
+          if (song->rating() <= 0 && frame->rating() > 0) {
+            song->set_rating(ConvertPOPMRating(frame->rating()));
+          }
+          if (song->playcount() <= 0 && frame->counter() > 0) {
+            song->set_playcount(frame->counter());
+          }
+        }
+      }
+
     }
   } else if (TagLib::Ogg::Vorbis::File* file = dynamic_cast<TagLib::Ogg::Vorbis::File*>(fileref->file())) {
     if (file->tag()) {
@@ -486,8 +506,26 @@ bool TagReader::SaveSongStatisticsToFile(const QString& filename,
 
   if (TagLib::MPEG::File* file = dynamic_cast<TagLib::MPEG::File*>(fileref->file())) {
     TagLib::ID3v2::Tag* tag = file->ID3v2Tag(true);
+
+    // Save as FMPS
     SetUserTextFrame("FMPS_Rating", QString::number(song.rating()), tag);
     SetUserTextFrame("FMPS_PlayCount", QString::number(song.playcount()), tag);
+
+    // Also save as POPM
+    TagLib::ID3v2::PopularimeterFrame* frame = NULL;
+
+    const TagLib::ID3v2::FrameListMap& map = file->ID3v2Tag()->frameListMap();
+    if (!map["POPM"].isEmpty()) {
+      frame = dynamic_cast<TagLib::ID3v2::PopularimeterFrame*>(map["POPM"].front());
+    }
+
+    if (!frame) {
+      frame = new TagLib::ID3v2::PopularimeterFrame();
+      tag->addFrame(frame);
+    }
+
+    frame->setRating(ConvertToPOPMRating(song.rating()));
+    frame->setCounter(song.playcount());
   } else {
     // Nothing to save: stop now
     return true;
@@ -734,3 +772,30 @@ bool TagReader::ReadCloudFile(const QUrl& download_url,
 }
 #endif // HAVE_GOOGLE_DRIVE
 
+float TagReader::ConvertPOPMRating(const int POPM_rating) {
+  if (POPM_rating < 0x01) {
+    return 0.0;
+  } else if (POPM_rating < 0x40) {
+    return 0.20; // 1 star
+  } else if (POPM_rating < 0x80) {
+    return 0.40; // 2 stars
+  } else if (POPM_rating < 0xC0) {
+    return 0.60; // 3 stars
+  } else if (POPM_rating < 0xFF) {
+    return 0.80; // 4 stars
+  }
+  return 1.0; // 5 stars
+}
+
+int TagReader::ConvertToPOPMRating(const float rating) {
+  if (rating < 0.20) {
+    return 0x00;
+  } else if (rating < 0.40) {
+    return 0x01;
+  } else if (rating < 0.60) {
+    return 0x80;
+  } else if (rating < 0.80) {
+    return 0xC0;
+  }
+  return 0xFF;
+}
