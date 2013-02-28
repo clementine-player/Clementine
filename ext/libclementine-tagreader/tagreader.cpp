@@ -185,7 +185,6 @@ void TagReader::ReadFile(const QString& filename,
       // Check POPM tags
       // We do this after checking FMPS frames, so FMPS have precedence, as we
       // will consider POPM tags iff song has no rating/playcount already set.
-      qLog(Debug) << "POPM";
       if (!map["POPM"].isEmpty()) {
         const TagLib::ID3v2::PopularimeterFrame* frame =
             dynamic_cast<const TagLib::ID3v2::PopularimeterFrame*>(map["POPM"].front());
@@ -383,6 +382,12 @@ void TagReader::ParseOggTag(const TagLib::Ogg::FieldListMap& map,
 
   if (!map["COVERART"].isEmpty())
     song->set_art_automatic(kEmbeddedCover);
+
+  if (!map["FMPS_RATING"].isEmpty() && song->rating() <= 0)
+    song->set_rating(TStringToQString( map["FMPS_RATING"].front() ).trimmed().toFloat());
+
+  if (!map["FMPS_PLAYCOUNT"].isEmpty() && song->playcount() <= 0)
+    song->set_playcount(TStringToQString( map["FMPS_PLAYCOUNT"].front() ).trimmed().toFloat());
 }
 
 pb::tagreader::SongMetadata_Type TagReader::GuessFileType(
@@ -526,6 +531,14 @@ bool TagReader::SaveSongStatisticsToFile(const QString& filename,
 
     frame->setRating(ConvertToPOPMRating(song.rating()));
     frame->setCounter(song.playcount());
+
+  } else if (TagLib::Ogg::Vorbis::File* file = dynamic_cast<TagLib::Ogg::Vorbis::File*>(fileref->file())) {
+      if (file->tag()) {
+        file->tag()->addField("FMPS_RATING",
+            QStringToTaglibString(QString::number(song.rating())));
+        file->tag()->addField("FMPS_PLAYCOUNT",
+            QStringToTaglibString(QString::number(song.playcount())));
+      }
   } else {
     // Nothing to save: stop now
     return true;
