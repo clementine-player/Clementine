@@ -160,8 +160,23 @@ TEST_F(SongTest, BothFMPSPOPMRating) {
   EXPECT_FLOAT_EQ(0.42, song.rating());
 }
 
-TEST_F(SongTest, FMPSOgg) {
+TEST_F(SongTest, RatingAndStatisticsOgg) {
   TemporaryResource r(":/testdata/beep.ogg");
+  {
+    Song song = ReadSongFromFile(r.fileName());
+    song.set_rating(0.20);
+    song.set_playcount(1337);
+
+    WriteSongStatisticsToFile(song, r.fileName());
+  }
+
+  Song new_song = ReadSongFromFile(r.fileName());
+  EXPECT_FLOAT_EQ(0.20, new_song.rating());
+  EXPECT_EQ(1337, new_song.playcount());
+}
+
+TEST_F(SongTest, RatingAndStatisticsFLAC) {
+  TemporaryResource r(":/testdata/beep.flac");
   {
     Song song = ReadSongFromFile(r.fileName());
     song.set_rating(0.20);

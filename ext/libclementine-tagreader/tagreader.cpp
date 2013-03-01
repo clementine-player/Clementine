@@ -137,6 +137,14 @@ void TagReader::ReadFile(const QString& filename,
 
   QString disc;
   QString compilation;
+
+  // Handle all the files which have VorbisComments (Ogg, OPUS, ...) in the same way;
+  // apart, so we keep specific behavior for some formats by adding another
+  // "else if" block below.
+  if (TagLib::Ogg::XiphComment* tag = dynamic_cast<TagLib::Ogg::XiphComment*>(fileref->file()->tag())) {
+    ParseOggTag(tag->fieldListMap(), NULL, &disc, &compilation, song);
+  }
+
   if (TagLib::MPEG::File* file = dynamic_cast<TagLib::MPEG::File*>(fileref->file())) {
     if (file->ID3v2Tag()) {
       const TagLib::ID3v2::FrameListMap& map = file->ID3v2Tag()->frameListMap();
@@ -200,21 +208,7 @@ void TagReader::ReadFile(const QString& filename,
       }
 
     }
-  } else if (TagLib::Ogg::Vorbis::File* file = dynamic_cast<TagLib::Ogg::Vorbis::File*>(fileref->file())) {
-    if (file->tag()) {
-      ParseOggTag(file->tag()->fieldListMap(), NULL, &disc, &compilation, song);
-    }
-    Decode(tag->comment(), NULL, song->mutable_comment());
-  }
-#ifdef TAGLIB_HAS_OPUS
-  else if (TagLib::Ogg::Opus::File* file = dynamic_cast<TagLib::Ogg::Opus::File*>(fileref->file())) {
-    if (file->tag()) {
-      ParseOggTag(file->tag()->fieldListMap(), NULL, &disc, &compilation, song);
-    }
-    Decode(tag->comment(), NULL, song->mutable_comment());
-  }
-#endif
-  else if (TagLib::FLAC::File* file = dynamic_cast<TagLib::FLAC::File*>(fileref->file())) {
+  } else if (TagLib::FLAC::File* file = dynamic_cast<TagLib::FLAC::File*>(fileref->file())) {
     if ( file->xiphComment() ) {
       ParseOggTag(file->xiphComment()->fieldListMap(), NULL, &disc, &compilation, song);
 #ifdef TAGLIB_HAS_FLAC_PICTURELIST
@@ -390,6 +384,23 @@ void TagReader::ParseOggTag(const TagLib::Ogg::FieldListMap& map,
     song->set_playcount(TStringToQString( map["FMPS_PLAYCOUNT"].front() ).trimmed().toFloat());
 }
 
+
+void TagReader::SetVorbisComments(TagLib::Ogg::XiphComment* vorbis_comments,
+                                  const pb::tagreader::SongMetadata& song) const {
+
+  vorbis_comments->addField("COMPOSER", StdStringToTaglibString(song.composer()), true);
+  vorbis_comments->addField("BPM", QStringToTaglibString(song.bpm() <= 0 -1 ? QString() : QString::number(song.bpm())), true);
+  vorbis_comments->addField("DISCNUMBER", QStringToTaglibString(song.disc() <= 0 -1 ? QString() : QString::number(song.disc())), true);
+  vorbis_comments->addField("COMPILATION", StdStringToTaglibString(song.compilation() ? "1" : "0"), true);
+}
+
+void TagReader::SetFMPSVorbisComments(TagLib::Ogg::XiphComment* vorbis_comments,
+                                  const pb::tagreader::SongMetadata& song) const {
+
+  vorbis_comments->addField("FMPS_RATING", QStringToTaglibString(QString::number(song.rating())));
+  vorbis_comments->addField("FMPS_PLAYCOUNT", QStringToTaglibString(QString::number(song.playcount())));
+}
+
 pb::tagreader::SongMetadata_Type TagReader::GuessFileType(
     TagLib::FileRef* fileref) const {
 #ifdef TAGLIB_WITH_ASF
@@ -453,29 +464,9 @@ bool TagReader::SaveFile(const QString& filename,
     SetTextFrame("TCOM", song.composer(), tag);
     SetTextFrame("TPE2", song.albumartist(), tag);
     SetTextFrame("TCMP", std::string(song.compilation() ? "1" : "0"), tag);
-  }
-  else if (TagLib::Ogg::Vorbis::File* file = dynamic_cast<TagLib::Ogg::Vorbis::File*>(fileref->file())) {
-    TagLib::Ogg::XiphComment* tag = file->tag();
-    tag->addField("COMPOSER", StdStringToTaglibString(song.composer()), true);
-    tag->addField("BPM", QStringToTaglibString(song.bpm() <= 0 -1 ? QString() : QString::number(song.bpm())), true);
-    tag->addField("DISCNUMBER", QStringToTaglibString(song.disc() <= 0 -1 ? QString() : QString::number(song.disc())), true);
-    tag->addField("COMPILATION", StdStringToTaglibString(song.compilation() ? "1" : "0"), true);
-  }
-#ifdef TAGLIB_HAS_OPUS
-  else if (TagLib::Ogg::Opus::File* file = dynamic_cast<TagLib::Ogg::Opus::File*>(fileref->file())) {
-    TagLib::Ogg::XiphComment* tag = file->tag();
-    tag->addField("COMPOSER", StdStringToTaglibString(song.composer()), true);
-    tag->addField("BPM", QStringToTaglibString(song.bpm() <= 0 -1 ? QString() : QString::number(song.bpm())), true);
-    tag->addField("DISCNUMBER", QStringToTaglibString(song.disc() <= 0 -1 ? QString() : QString::number(song.disc())), true);
-    tag->addField("COMPILATION", StdStringToTaglibString(song.compilation() ? "1" : "0"), true);
-  }
-#endif
-  else if (TagLib::FLAC::File* file = dynamic_cast<TagLib::FLAC::File*>(fileref->file())) {
+  } else if (TagLib::FLAC::File* file = dynamic_cast<TagLib::FLAC::File*>(fileref->file())) {
     TagLib::Ogg::XiphComment* tag = file->xiphComment();
-    tag->addField("COMPOSER", StdStringToTaglibString(song.composer()), true);
-    tag->addField("BPM", QStringToTaglibString(song.bpm() <= 0 -1 ? QString() : QString::number(song.bpm())), true);
-    tag->addField("DISCNUMBER", QStringToTaglibString(song.disc() <= 0 -1 ? QString() : QString::number(song.disc())), true);
-    tag->addField("COMPILATION", StdStringToTaglibString(song.compilation() ? "1" : "0"), true);
+    SetVorbisComments(tag, song);
   } else if (TagLib::MP4::File* file = dynamic_cast<TagLib::MP4::File*>(fileref->file())) {
     TagLib::MP4::Tag* tag = file->tag();
     tag->itemListMap()["disk"]    = TagLib::MP4::Item(song.disc() <= 0 -1 ? 0 : song.disc(), 0);
@@ -483,6 +474,13 @@ bool TagReader::SaveFile(const QString& filename,
     tag->itemListMap()["\251wrt"] = TagLib::StringList(song.composer());
     tag->itemListMap()["aART"]    = TagLib::StringList(song.albumartist());
     tag->itemListMap()["cpil"]    = TagLib::StringList(song.compilation() ? "1" : "0");
+  }
+
+  // Handle all the files which have VorbisComments (Ogg, OPUS, ...) in the same way;
+  // apart, so we keep specific behavior for some formats by adding another
+  // "else if" block above.
+  if (TagLib::Ogg::XiphComment* tag = dynamic_cast<TagLib::Ogg::XiphComment*>(fileref->file()->tag())) {
+      SetVorbisComments(tag, song);
   }
 
   bool ret = fileref->save();
@@ -532,13 +530,11 @@ bool TagReader::SaveSongStatisticsToFile(const QString& filename,
     frame->setRating(ConvertToPOPMRating(song.rating()));
     frame->setCounter(song.playcount());
 
-  } else if (TagLib::Ogg::Vorbis::File* file = dynamic_cast<TagLib::Ogg::Vorbis::File*>(fileref->file())) {
-      if (file->tag()) {
-        file->tag()->addField("FMPS_RATING",
-            QStringToTaglibString(QString::number(song.rating())));
-        file->tag()->addField("FMPS_PLAYCOUNT",
-            QStringToTaglibString(QString::number(song.playcount())));
-      }
+  } else if (TagLib::FLAC::File* file = dynamic_cast<TagLib::FLAC::File*>(fileref->file())) {
+    TagLib::Ogg::XiphComment* vorbis_comments = file->xiphComment(true);
+    SetFMPSVorbisComments(vorbis_comments, song);
+  } else if (TagLib::Ogg::XiphComment* tag = dynamic_cast<TagLib::Ogg::XiphComment*>(fileref->file()->tag())) {
+    SetFMPSVorbisComments(tag, song);
   } else {
     // Nothing to save: stop now
     return true;

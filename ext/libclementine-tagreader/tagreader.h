@@ -80,6 +80,11 @@ class TagReader {
                    const QTextCodec* codec,
                    QString* disc, QString* compilation,
                    pb::tagreader::SongMetadata* song) const;
+  void SetVorbisComments(TagLib::Ogg::XiphComment* vorbis_comments,
+                         const pb::tagreader::SongMetadata& song) const;
+  void SetFMPSVorbisComments(TagLib::Ogg::XiphComment* vorbis_comments,
+                             const pb::tagreader::SongMetadata& song) const;
+
   pb::tagreader::SongMetadata_Type GuessFileType(TagLib::FileRef* fileref) const;
 
   void SetUserTextFrame(const QString& description, const QString& value,
