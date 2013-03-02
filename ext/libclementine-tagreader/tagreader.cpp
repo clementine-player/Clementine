@@ -245,13 +245,13 @@ void TagReader::ReadFile(const QString& filename,
       }
 
       if (items.contains(kMP4_FMPS_Rating_ID)) {
-        float rating = TStringToQString(items["----:com.apple.iTunes:FMPS_Rating"].toStringList().toString('\n')).toFloat();
+        float rating = TStringToQString(items[kMP4_FMPS_Rating_ID].toStringList().toString('\n')).toFloat();
         if (song->rating() <= 0 && rating > 0) {
           song->set_rating(rating);
         }
       }
       if (items.contains(kMP4_FMPS_Playcount_ID)) {
-        int playcount = TStringToQString(items["----:com.apple.iTunes:FMPS_Playcount"].toStringList().toString('\n')).toFloat();
+        int playcount = TStringToQString(items[kMP4_FMPS_Playcount_ID].toStringList().toString('\n')).toFloat();
         if (song->playcount() <= 0 && playcount > 0) {
           song->set_playcount(playcount);
         }
