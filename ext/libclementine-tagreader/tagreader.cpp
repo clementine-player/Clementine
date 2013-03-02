@@ -99,6 +99,9 @@ TagLib::String QStringToTaglibString(const QString& s) {
 
 }
 
+const char* TagReader::kMP4_FMPS_Rating_ID = "----:com.apple.iTunes:FMPS_Rating";
+const char* TagReader::kMP4_FMPS_Playcount_ID = "----:com.apple.iTunes:FMPS_Playcount";
+
 TagReader::TagReader()
   : factory_(new TagLibFileRefFactory),
     network_(new QNetworkAccessManager),
@@ -237,8 +240,21 @@ void TagReader::ReadFile(const QString& filename,
         song->set_art_automatic(kEmbeddedCover);
       }
 
-      if(items.contains("disk")) {
+      if (items.contains("disk")) {
         disc = TStringToQString(TagLib::String::number(items["disk"].toIntPair().first));
+      }
+
+      if (items.contains(kMP4_FMPS_Rating_ID)) {
+        float rating = TStringToQString(items["----:com.apple.iTunes:FMPS_Rating"].toStringList().toString('\n')).toFloat();
+        if (song->rating() <= 0 && rating > 0) {
+          song->set_rating(rating);
+        }
+      }
+      if (items.contains(kMP4_FMPS_Playcount_ID)) {
+        int playcount = TStringToQString(items["----:com.apple.iTunes:FMPS_Playcount"].toStringList().toString('\n')).toFloat();
+        if (song->playcount() <= 0 && playcount > 0) {
+          song->set_playcount(playcount);
+        }
       }
 
       if(items.contains("\251wrt")) {
@@ -568,7 +584,11 @@ bool TagReader::SaveSongStatisticsToFile(const QString& filename,
     #undef ConvertASF
   }
 #endif
-  else {
+  else if (TagLib::MP4::File* file = dynamic_cast<TagLib::MP4::File*>(fileref->file())) {
+    TagLib::MP4::Tag* tag = file->tag();
+    tag->itemListMap()[kMP4_FMPS_Rating_ID] =     TagLib::StringList(QStringToTaglibString(QString::number(song.rating())));
+    tag->itemListMap()[kMP4_FMPS_Playcount_ID] =  TagLib::StringList(TagLib::String::number(song.playcount()));
+  } else {
     // Nothing to save: stop now
     return true;
   }

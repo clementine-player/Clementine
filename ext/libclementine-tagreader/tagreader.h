@@ -98,6 +98,8 @@ class TagReader {
                     TagLib::ID3v2::Tag* tag) const;
 
 private:
+  static const char* kMP4_FMPS_Rating_ID;
+  static const char* kMP4_FMPS_Playcount_ID;
   // Returns a float in [0.0..1.0] corresponding to the rating range we use in Clementine
   static float ConvertPOPMRating(const int POPM_rating);
   // Reciprocal

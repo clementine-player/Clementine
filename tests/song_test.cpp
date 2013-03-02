@@ -207,4 +207,19 @@ TEST_F(SongTest, RatingAndStatisticsASF) {
 }
 #endif // TAGLIB_WITH_ASF
 
+TEST_F(SongTest, RatingAndStatisticsMP4) {
+  TemporaryResource r(":/testdata/beep.m4a");
+  {
+    Song song = ReadSongFromFile(r.fileName());
+    song.set_rating(0.20);
+    song.set_playcount(1337);
+
+    WriteSongStatisticsToFile(song, r.fileName());
+  }
+
+  Song new_song = ReadSongFromFile(r.fileName());
+  EXPECT_FLOAT_EQ(0.20, new_song.rating());
+  EXPECT_EQ(1337, new_song.playcount());
+}
+
 }  // namespace
