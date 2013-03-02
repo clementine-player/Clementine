@@ -246,7 +246,31 @@ void TagReader::ReadFile(const QString& filename,
       }
       Decode(mp4_tag->comment(), NULL, song->mutable_comment());
     }
-  } else if (tag) {
+  }
+#ifdef TAGLIB_WITH_ASF
+  else if (TagLib::ASF::File* file = dynamic_cast<TagLib::ASF::File*>(fileref->file())) {
+    const TagLib::ASF::AttributeListMap& attributes_map = file->tag()->attributeListMap();
+    if (attributes_map.contains("FMPS/Rating")) {
+      const TagLib::ASF::AttributeList& attributes = attributes_map["FMPS/Rating"];
+      if (!attributes.isEmpty()) {
+        float rating = TStringToQString(attributes.front().toString()).toFloat();
+        if (song->rating() <= 0 && rating > 0) {
+          song->set_rating(rating);
+        }
+      }
+    }
+    if (attributes_map.contains("FMPS/Playcount")) {
+      const TagLib::ASF::AttributeList& attributes = attributes_map["FMPS/Playcount"];
+      if (!attributes.isEmpty()) {
+        int playcount = TStringToQString(attributes.front().toString()).toInt();
+        if (song->playcount() <= 0 && playcount > 0) {
+          song->set_playcount(playcount);
+        }
+      }
+    }
+  }
+#endif
+  else if (tag) {
     Decode(tag->comment(), NULL, song->mutable_comment());
   }
 
@@ -383,7 +407,6 @@ void TagReader::ParseOggTag(const TagLib::Ogg::FieldListMap& map,
   if (!map["FMPS_PLAYCOUNT"].isEmpty() && song->playcount() <= 0)
     song->set_playcount(TStringToQString( map["FMPS_PLAYCOUNT"].front() ).trimmed().toFloat());
 }
-
 
 void TagReader::SetVorbisComments(TagLib::Ogg::XiphComment* vorbis_comments,
                                   const pb::tagreader::SongMetadata& song) const {
@@ -535,7 +558,17 @@ bool TagReader::SaveSongStatisticsToFile(const QString& filename,
     SetFMPSVorbisComments(vorbis_comments, song);
   } else if (TagLib::Ogg::XiphComment* tag = dynamic_cast<TagLib::Ogg::XiphComment*>(fileref->file()->tag())) {
     SetFMPSVorbisComments(tag, song);
-  } else {
+  }
+#ifdef TAGLIB_WITH_ASF
+  else if (TagLib::ASF::File* file = dynamic_cast<TagLib::ASF::File*>(fileref->file())) {
+    TagLib::ASF::Tag* tag = file->tag();
+    #define ConvertASF(x) TagLib::ASF::Attribute(QStringToTaglibString(QString::number(x)))
+    tag->addAttribute("FMPS/Rating",    ConvertASF(song.rating()));
+    tag->addAttribute("FMPS/Playcount", ConvertASF(song.playcount()));
+    #undef ConvertASF
+  }
+#endif
+  else {
     // Nothing to save: stop now
     return true;
   }
