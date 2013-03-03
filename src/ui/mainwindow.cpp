@@ -192,6 +192,8 @@ MainWindow::MainWindow(Application* app,
     library_sort_model_(new QSortFilterProxyModel(this)),
     track_position_timer_(new QTimer(this)),
     was_maximized_(false),
+    saved_playback_position_(0),
+    saved_playback_state_(Engine::Empty),
     doubleclick_addmode_(AddBehaviour_Append),
     doubleclick_playmode_(PlayBehaviour_IfStopped),
     menu_playmode_(PlayBehaviour_IfStopped)
@@ -754,6 +756,8 @@ MainWindow::MainWindow(Application* app,
 
   CheckFullRescanRevisions();
 
+  LoadPlaybackStatus();
+
   qLog(Debug) << "Started";
 }
 
@@ -961,6 +965,45 @@ void MainWindow::SaveGeometry() {
   settings_.setValue("splitter_state", ui_->splitter->saveState());
   settings_.setValue("current_tab", ui_->tabs->current_index());
   settings_.setValue("tab_mode", ui_->tabs->mode());
+}
+
+void MainWindow::SavePlaybackStatus() {
+  QSettings settings;
+  settings.beginGroup(MainWindow::kSettingsGroup);
+  settings.setValue("playback_state", app_->player()->GetState());
+  if (app_->player()->GetState() == Engine::Playing ||
+          app_->player()->GetState() == Engine::Paused) {
+    settings.setValue("playback_position", app_->player()->engine()->position_nanosec() / kNsecPerSec);
+  } else {
+    settings.setValue("playback_position", 0);
+  }
+}
+
+void MainWindow::LoadPlaybackStatus() {
+  QSettings settings;
+  settings.beginGroup(MainWindow::kSettingsGroup);
+  bool resume_playback = settings.value("resume_playback_after_start", false).toBool();
+  saved_playback_state_ = static_cast<Engine::State>
+          (settings.value("playback_state", Engine::Empty).toInt());
+  saved_playback_position_ = settings.value("playback_position", 0).toDouble();
+  if (!resume_playback ||
+        saved_playback_state_ == Engine::Empty ||
+        saved_playback_state_ == Engine::Idle) {
+    return;
+  }
+
+  QTimer::singleShot(100, this, SLOT(ResumePlayback()));
+}
+
+void MainWindow::ResumePlayback() {
+  qLog(Debug) << "Resuming playback";
+  app_->player()->Play();
+
+  app_->player()->SeekTo(saved_playback_position_);
+
+  if (saved_playback_state_ == Engine::Paused) {
+    app_->player()->Pause();
+  }
 }
 
 void MainWindow::PlayIndex(const QModelIndex& index) {
@@ -2098,6 +2141,7 @@ bool MainWindow::winEvent(MSG* msg, long*) {
 #endif // Q_OS_WIN32
 
 void MainWindow::Exit() {
+  SavePlaybackStatus();
   if(app_->player()->engine()->is_fadeout_enabled()) {
     // To shut down the application when fadeout will be finished
     connect(app_->player()->engine(), SIGNAL(FadeoutFinishedSignal()), qApp, SLOT(quit()));

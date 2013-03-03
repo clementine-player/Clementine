@@ -99,6 +99,7 @@ void BehaviourSettingsPage::Load() {
     case MainWindow::Startup_AlwaysShow: ui_->b_always_show_->setChecked(true); break;
     case MainWindow::Startup_Remember:   ui_->b_remember_->setChecked(true);    break;
   }
+  ui_->resume_after_start_->setChecked(s.value("resume_playback_after_start", false).toBool());
   s.endGroup();
 
   s.beginGroup("General");
@@ -136,6 +137,7 @@ void BehaviourSettingsPage::Save() {
   s.setValue("doubleclick_addmode", doubleclick_addmode);
   s.setValue("doubleclick_playmode", doubleclick_playmode);
   s.setValue("menu_playmode", menu_playmode);
+  s.setValue("resume_playback_after_start", ui_->resume_after_start_->isChecked());
   s.endGroup();
 
   s.beginGroup("General");

@@ -103,6 +103,16 @@
        </spacer>
       </item>
       <item>
+       <widget class="QCheckBox" name="resume_after_start_">
+        <property name="text">
+         <string>Resume playback on start</string>
+        </property>
+        <property name="checked">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QCheckBox" name="b_grey_out_deleted_">
         <property name="text">
          <string>Grey out non existent songs in my playlists</string>
