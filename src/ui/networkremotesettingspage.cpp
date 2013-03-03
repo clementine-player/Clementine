@@ -22,7 +22,8 @@
 #include "networkremote/networkremotehelper.h"
 
 #include <QSettings>
-
+#include <QHostInfo>
+#include <QNetworkInterface>
 
 NetworkRemoteSettingsPage::NetworkRemoteSettingsPage(SettingsDialog* dialog)
   : SettingsPage(dialog),
@@ -67,6 +68,22 @@ void NetworkRemoteSettingsPage::Load() {
 
   QPixmap android_qr_code(":clementine_remote_qr.png");
   ui_->android_app_qr->setPixmap(android_qr_code);
+
+  // Get local ip addresses
+  QString ip_addresses;
+  QList<QHostAddress> addresses = QNetworkInterface::allAddresses();
+  foreach (const QHostAddress& address, addresses) {
+    // TODO: Add ipv6 support to tinysvcmdns.
+    if (address.protocol() == QAbstractSocket::IPv4Protocol &&
+        !address.isInSubnet(QHostAddress::parseSubnet("127.0.0.1/8"))) {
+      qLog(Debug) << "IP:" << address.toString();
+      if (!ip_addresses.isEmpty()) {
+        ip_addresses.append("; ");
+      }
+      ip_addresses.append(address.toString());
+    }
+  }
+  ui_->ip_address->setText(ip_addresses);
 }
 
 void NetworkRemoteSettingsPage::Save() {
