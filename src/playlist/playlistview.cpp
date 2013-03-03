@@ -192,6 +192,10 @@ void PlaylistView::SetItemDelegates(LibraryBackend* backend) {
       new TagCompletionItemDelegate(this, backend, Playlist::Column_Genre));
   setItemDelegateForColumn(Playlist::Column_Composer,
       new TagCompletionItemDelegate(this, backend, Playlist::Column_Composer));
+  setItemDelegateForColumn(Playlist::Column_Performer,
+      new TagCompletionItemDelegate(this, backend, Playlist::Column_Performer));
+  setItemDelegateForColumn(Playlist::Column_Grouping,
+      new TagCompletionItemDelegate(this, backend, Playlist::Column_Grouping));
   setItemDelegateForColumn(Playlist::Column_Length, new LengthItemDelegate(this));
   setItemDelegateForColumn(Playlist::Column_Filesize, new SizeItemDelegate(this));
   setItemDelegateForColumn(Playlist::Column_Filetype, new FileTypeItemDelegate(this));
@@ -286,6 +290,8 @@ void PlaylistView::LoadGeometry() {
       header_->HideSection(Playlist::Column_DateModified);
       header_->HideSection(Playlist::Column_AlbumArtist);
       header_->HideSection(Playlist::Column_Composer);
+      header_->HideSection(Playlist::Column_Performer);
+      header_->HideSection(Playlist::Column_Grouping);
       header_->HideSection(Playlist::Column_Rating);
       header_->HideSection(Playlist::Column_PlayCount);
       header_->HideSection(Playlist::Column_SkipCount);

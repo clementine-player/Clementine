@@ -2289,6 +2289,7 @@ void MainWindow::HandleNotificationPreview(OSD::Behaviour type, QString line1, Q
     fake.Init("Title", "Artist", "Album", 123);
     fake.set_genre("Classical");
     fake.set_composer("Anonymous");
+    fake.set_performer("Anonymous");
     fake.set_track(1);
     fake.set_disc(1);
     fake.set_year(2011);

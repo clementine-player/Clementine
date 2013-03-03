@@ -27,7 +27,8 @@ const char* OrganiseFormat::kBlockPattern = "\\{([^{}]+)\\}";
 const QStringList OrganiseFormat::kKnownTags = QStringList()
     << "title" << "album" << "artist" << "artistinitial" << "albumartist"
     << "composer" << "track" << "disc" << "bpm" << "year" << "genre"
-    << "comment" << "length" << "bitrate" << "samplerate" << "extension";
+    << "comment" << "length" << "bitrate" << "samplerate" << "extension"
+    << "performer" << "grouping";
 
 // From http://en.wikipedia.org/wiki/8.3_filename#Directory_table
 const char* OrganiseFormat::kInvalidFatCharacters = "\"*/\\:<>?|";
@@ -131,6 +132,8 @@ QString OrganiseFormat::TagValue(const QString &tag, const Song &song) const {
   else if (tag == "album")       value = song.album();
   else if (tag == "artist")      value = song.artist();
   else if (tag == "composer")    value = song.composer();
+  else if (tag == "performer")   value = song.performer();
+  else if (tag == "grouping")    value = song.grouping();
   else if (tag == "genre")       value = song.genre();
   else if (tag == "comment")     value = song.comment();
   else if (tag == "year")        value = QString::number(song.year());

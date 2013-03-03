@@ -49,6 +49,8 @@ message SongMetadata {
   optional string art_automatic = 28;
   optional Type type = 29;
   optional string etag = 30;
+  optional string performer = 31;
+  optional string grouping = 32;
 }
 
 message ReadFileRequest {

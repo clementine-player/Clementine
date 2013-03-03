@@ -250,6 +250,8 @@ QString SearchTerm::FieldColumnName(Field field) {
     case Field_Album:       return "album";
     case Field_AlbumArtist: return "albumartist";
     case Field_Composer:    return "composer";
+    case Field_Performer:   return "performer";
+    case Field_Grouping:    return "grouping";
     case Field_Genre:       return "genre";
     case Field_Comment:     return "comment";
     case Field_Filepath:    return "filename";
@@ -280,6 +282,8 @@ QString SearchTerm::FieldName(Field field) {
     case Field_Album:       return Playlist::column_name(Playlist::Column_Album);
     case Field_AlbumArtist: return Playlist::column_name(Playlist::Column_AlbumArtist);
     case Field_Composer:    return Playlist::column_name(Playlist::Column_Composer);
+    case Field_Performer:   return Playlist::column_name(Playlist::Column_Performer);
+    case Field_Grouping:    return Playlist::column_name(Playlist::Column_Grouping);
     case Field_Genre:       return Playlist::column_name(Playlist::Column_Genre);
     case Field_Comment:     return QObject::tr("Comment");
     case Field_Filepath:    return Playlist::column_name(Playlist::Column_Filename);

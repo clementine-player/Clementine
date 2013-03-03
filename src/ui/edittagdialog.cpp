@@ -186,6 +186,8 @@ EditTagDialog::EditTagDialog(Application* app, QWidget* parent)
   new TagCompleter(app_->library_backend(), Playlist::Column_AlbumArtist, ui_->albumartist);
   new TagCompleter(app_->library_backend(), Playlist::Column_Genre, ui_->genre);
   new TagCompleter(app_->library_backend(), Playlist::Column_Composer, ui_->composer);
+  new TagCompleter(app_->library_backend(), Playlist::Column_Performer, ui_->performer);
+  new TagCompleter(app_->library_backend(), Playlist::Column_Grouping, ui_->grouping);
 }
 
 EditTagDialog::~EditTagDialog() {
@@ -290,6 +292,8 @@ QVariant EditTagDialog::Data::value(const Song& song, const QString& id) {
   if (id == "album")       return song.album();
   if (id == "albumartist") return song.albumartist();
   if (id == "composer")    return song.composer();
+  if (id == "performer")   return song.performer();
+  if (id == "grouping")    return song.grouping();
   if (id == "genre")       return song.genre();
   if (id == "comment")     return song.comment();
   if (id == "track")       return song.track();
@@ -305,6 +309,8 @@ void EditTagDialog::Data::set_value(const QString& id, const QVariant& value) {
   if (id == "album")       current_.set_album(value.toString());
   if (id == "albumartist") current_.set_albumartist(value.toString());
   if (id == "composer")    current_.set_composer(value.toString());
+  if (id == "performer")   current_.set_performer(value.toString());
+  if (id == "grouping")    current_.set_grouping(value.toString());
   if (id == "genre")       current_.set_genre(value.toString());
   if (id == "comment")     current_.set_comment(value.toString());
   if (id == "track")       current_.set_track(value.toInt());

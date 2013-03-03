@@ -125,6 +125,8 @@ QStandardItem* GlobalSearchModel::BuildContainers(
     break;
 
   case LibraryModel::GroupBy_Composer:                         display_text = s.composer();
+  case LibraryModel::GroupBy_Performer:                        display_text = s.performer();
+  case LibraryModel::GroupBy_Grouping:                         display_text = s.grouping();
   case LibraryModel::GroupBy_Genre: if (display_text.isNull()) display_text = s.genre();
   case LibraryModel::GroupBy_Album:
     unique_tag = s.album_id();

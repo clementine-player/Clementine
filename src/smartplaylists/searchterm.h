@@ -32,6 +32,8 @@ public:
     Field_Album,
     Field_AlbumArtist,
     Field_Composer,
+    Field_Performer,
+    Field_Grouping,
     Field_Length,
     Field_Track,
     Field_Disc,

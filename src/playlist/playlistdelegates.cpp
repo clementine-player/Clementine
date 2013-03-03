@@ -378,6 +378,8 @@ QString TagCompletionModel::database_column(Playlist::Column column) {
     case Playlist::Column_Album:        return "album";
     case Playlist::Column_AlbumArtist:  return "albumartist";
     case Playlist::Column_Composer:     return "composer";
+    case Playlist::Column_Performer:    return "performer";
+    case Playlist::Column_Grouping:     return "grouping";
     case Playlist::Column_Genre:        return "genre";
     default:
       qLog(Warning) << "Unknown column" << column;

@@ -73,7 +73,8 @@ const QStringList Song::kColumns = QStringList()
     << "art_manual" << "filetype" << "playcount" << "lastplayed" << "rating"
     << "forced_compilation_on" << "forced_compilation_off"
     << "effective_compilation" << "skipcount" << "score" << "beginning" << "length"
-    << "cue_path" << "unavailable" << "effective_albumartist" << "etag";
+    << "cue_path" << "unavailable" << "effective_albumartist" << "etag"
+    << "performer" << "grouping";
 
 const QString Song::kColumnSpec = Song::kColumns.join(", ");
 const QString Song::kBindSpec = Utilities::Prepend(":", Song::kColumns).join(", ");
@@ -82,7 +83,7 @@ const QString Song::kUpdateSpec = Utilities::Updateify(Song::kColumns).join(", "
 
 const QStringList Song::kFtsColumns = QStringList()
     << "ftstitle" << "ftsalbum" << "ftsartist" << "ftsalbumartist"
-    << "ftscomposer" << "ftsgenre" << "ftscomment";
+    << "ftscomposer" << "ftsperformer" << "ftsgrouping" << "ftsgenre" << "ftscomment";
 
 const QString Song::kFtsColumnSpec = Song::kFtsColumns.join(", ");
 const QString Song::kFtsBindSpec = Utilities::Prepend(":", Song::kFtsColumns).join(", ");
@@ -103,6 +104,8 @@ struct Song::Private : public QSharedData {
   QString artist_;
   QString albumartist_;
   QString composer_;
+  QString performer_;
+  QString grouping_;
   int track_;
   int disc_;
   float bpm_;
@@ -234,6 +237,8 @@ const QString& Song::albumartist() const { return d->albumartist_; }
 const QString& Song::effective_albumartist() const { return d->albumartist_.isEmpty() ? d->artist_ : d->albumartist_; }
 const QString& Song::playlist_albumartist() const { return is_compilation() ? d->albumartist_ : effective_albumartist(); }
 const QString& Song::composer() const { return d->composer_; }
+const QString& Song::performer() const { return d->performer_; }
+const QString& Song::grouping() const { return d->grouping_; }
 int Song::track() const { return d->track_; }
 int Song::disc() const { return d->disc_; }
 float Song::bpm() const { return d->bpm_; }
@@ -281,6 +286,8 @@ void Song::set_album(const QString& v) { d->album_ = v; }
 void Song::set_artist(const QString& v) { d->artist_ = v; }
 void Song::set_albumartist(const QString& v) { d->albumartist_ = v; }
 void Song::set_composer(const QString& v) { d->composer_ = v; }
+void Song::set_performer(const QString& v) { d->performer_ = v; }
+void Song::set_grouping(const QString& v) { d->grouping_ = v; }
 void Song::set_track(int v) { d->track_ = v; }
 void Song::set_disc(int v) { d->disc_ = v; }
 void Song::set_bpm(float v) { d->bpm_ = v; }
@@ -396,6 +403,8 @@ void Song::InitFromProtobuf(const pb::tagreader::SongMetadata& pb) {
   d->artist_ = QStringFromStdString(pb.artist());
   d->albumartist_ = QStringFromStdString(pb.albumartist());
   d->composer_ = QStringFromStdString(pb.composer());
+  d->performer_ = QStringFromStdString(pb.performer());
+  d->grouping_ = QStringFromStdString(pb.grouping());
   d->track_ = pb.track();
   d->disc_ = pb.disc();
   d->bpm_ = pb.bpm();
@@ -437,6 +446,8 @@ void Song::ToProtobuf(pb::tagreader::SongMetadata* pb) const {
   pb->set_artist(DataCommaSizeFromQString(d->artist_));
   pb->set_albumartist(DataCommaSizeFromQString(d->albumartist_));
   pb->set_composer(DataCommaSizeFromQString(d->composer_));
+  pb->set_performer(DataCommaSizeFromQString(d->performer_));
+  pb->set_grouping(DataCommaSizeFromQString(d->grouping_));
   pb->set_track(d->track_);
   pb->set_disc(d->disc_);
   pb->set_bpm(d->bpm_);
@@ -523,6 +534,10 @@ void Song::InitFromQuery(const SqlRow& q, bool reliable_metadata, int col) {
   d->unavailable_ = q.value(col + 35).toBool();
 
   // effective_albumartist = 36
+  // etag = 37
+
+  d->performer_ = tostr(col + 38);
+  d->grouping_ = tostr(col + 39);
 
   #undef tostr
   #undef toint
@@ -571,6 +586,7 @@ void Song::InitFromLastFM(const lastfm::Track& track) {
     d->artist_ = QString::fromUtf8(track->artist);
     d->albumartist_ = QString::fromUtf8(track->albumartist);
     d->composer_ = QString::fromUtf8(track->composer);
+    d->grouping_ = QString::fromUtf8(track->grouping);
     d->track_ = track->track_nr;
     d->disc_ = track->cd_nr;
     d->bpm_ = track->BPM;
@@ -608,6 +624,7 @@ void Song::InitFromLastFM(const lastfm::Track& track) {
     track->artist = strdup(d->artist_.toUtf8().constData());
     track->albumartist = strdup(d->albumartist_.toUtf8().constData());
     track->composer = strdup(d->composer_.toUtf8().constData());
+    track->grouping = strdup(d->grouping_.toUtf8().constData());
     track->track_nr = d->track_;
     track->cd_nr = d->disc_;
     track->BPM = d->bpm_;
@@ -1012,6 +1029,9 @@ void Song::BindToQuery(QSqlQuery *query) const {
 
   query->bindValue(":etag", strval(d->etag_));
 
+  query->bindValue(":performer", strval(d->performer_));
+  query->bindValue(":grouping", strval(d->grouping_));
+
   #undef intval
   #undef notnullintval
   #undef strval
@@ -1023,6 +1043,8 @@ void Song::BindToFtsQuery(QSqlQuery *query) const {
   query->bindValue(":ftsartist", d->artist_);
   query->bindValue(":ftsalbumartist", d->albumartist_);
   query->bindValue(":ftscomposer", d->composer_);
+  query->bindValue(":ftsperformer", d->performer_);
+  query->bindValue(":ftsgrouping", d->grouping_);
   query->bindValue(":ftsgenre", d->genre_);
   query->bindValue(":ftscomment", d->comment_);
 }
@@ -1114,6 +1136,8 @@ bool Song::IsMetadataEqual(const Song& other) const {
          d->artist_ == other.d->artist_ &&
          d->albumartist_ == other.d->albumartist_ &&
          d->composer_ == other.d->composer_ &&
+         d->performer_ == other.d->performer_ &&
+         d->grouping_ == other.d->grouping_ &&
          d->track_ == other.d->track_ &&
          d->disc_ == other.d->disc_ &&
          qFuzzyCompare(d->bpm_, other.d->bpm_) &&

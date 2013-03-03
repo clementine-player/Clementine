@@ -57,6 +57,8 @@ OrganiseDialog::OrganiseDialog(TaskManager* task_manager, QWidget *parent)
   tags[tr("Artist's initial")] = "artistinitial";
   tags[tr("Album artist")] = "albumartist";
   tags[tr("Composer")] = "composer";
+  tags[tr("Performer")] = "performer";
+  tags[tr("Grouping")] = "grouping";
   tags[tr("Track")] = "track";
   tags[tr("Disc")] = "disc";
   tags[tr("BPM")] = "bpm";

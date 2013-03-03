@@ -48,6 +48,8 @@ NotificationsSettingsPage::NotificationsSettingsPage(SettingsDialog* dialog)
   menu->addAction(ui_->action_albumartist);
   menu->addAction(ui_->action_year);
   menu->addAction(ui_->action_composer);
+  menu->addAction(ui_->action_performer);
+  menu->addAction(ui_->action_grouping);
   menu->addAction(ui_->action_length);
   menu->addAction(ui_->action_disc);
   menu->addAction(ui_->action_track);

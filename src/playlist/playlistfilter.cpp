@@ -33,6 +33,8 @@ PlaylistFilter::PlaylistFilter(QObject *parent)
   column_names_["album"] = Playlist::Column_Album;
   column_names_["albumartist"] = Playlist::Column_AlbumArtist;
   column_names_["composer"] = Playlist::Column_Composer;
+  column_names_["performer"] = Playlist::Column_Performer;
+  column_names_["grouping"] = Playlist::Column_Grouping;
   column_names_["length"] = Playlist::Column_Length;
   column_names_["track"] = Playlist::Column_Track;
   column_names_["disc"] = Playlist::Column_Disc;

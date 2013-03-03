@@ -161,6 +161,12 @@ void TagReader::ReadFile(const QString& filename,
       if (!map["TCOM"].isEmpty())
         Decode(map["TCOM"].front()->toString(), NULL, song->mutable_composer());
 
+      if (!map["TIT1"].isEmpty()) // content group
+        Decode(map["TIT1"].front()->toString(), NULL, song->mutable_grouping());
+
+      if (!map["TPE1"].isEmpty()) // ID3v2: lead performer/soloist
+        Decode(map["TPE1"].front()->toString(), NULL, song->mutable_performer());
+
       if (!map["TPE2"].isEmpty()) // non-standard: Apple, Microsoft
         Decode(map["TPE2"].front()->toString(), NULL, song->mutable_albumartist());
 
@@ -259,6 +265,9 @@ void TagReader::ReadFile(const QString& filename,
 
       if(items.contains("\251wrt")) {
         Decode(items["\251wrt"].toStringList().toString(", "), NULL, song->mutable_composer());
+      }
+      if(items.contains("\251grp")) {
+        Decode(items["\251grp"].toStringList().toString(" "), NULL, song->mutable_grouping());
       }
       Decode(mp4_tag->comment(), NULL, song->mutable_comment());
     }
@@ -398,6 +407,10 @@ void TagReader::ParseOggTag(const TagLib::Ogg::FieldListMap& map,
                                   pb::tagreader::SongMetadata* song) const {
   if (!map["COMPOSER"].isEmpty())
     Decode(map["COMPOSER"].front(), codec, song->mutable_composer());
+  if (!map["PERFORMER"].isEmpty())
+    Decode(map["PERFORMER"].front(), codec, song->mutable_performer());
+  if (!map["CONTENT GROUP"].isEmpty())
+    Decode(map["CONTENT GROUP"].front(), codec, song->mutable_grouping());
 
   if (!map["ALBUMARTIST"].isEmpty()) {
     Decode(map["ALBUMARTIST"].front(), codec, song->mutable_albumartist());
@@ -428,6 +441,8 @@ void TagReader::SetVorbisComments(TagLib::Ogg::XiphComment* vorbis_comments,
                                   const pb::tagreader::SongMetadata& song) const {
 
   vorbis_comments->addField("COMPOSER", StdStringToTaglibString(song.composer()), true);
+  vorbis_comments->addField("PERFORMER", StdStringToTaglibString(song.performer()), true);
+  vorbis_comments->addField("CONTENT GROUP", StdStringToTaglibString(song.grouping()), true);
   vorbis_comments->addField("BPM", QStringToTaglibString(song.bpm() <= 0 -1 ? QString() : QString::number(song.bpm())), true);
   vorbis_comments->addField("DISCNUMBER", QStringToTaglibString(song.disc() <= 0 -1 ? QString() : QString::number(song.disc())), true);
   vorbis_comments->addField("COMPILATION", StdStringToTaglibString(song.compilation() ? "1" : "0"), true);
@@ -501,6 +516,8 @@ bool TagReader::SaveFile(const QString& filename,
     SetTextFrame("TPOS", song.disc() <= 0 -1 ? QString() : QString::number(song.disc()), tag);
     SetTextFrame("TBPM", song.bpm() <= 0 -1 ? QString() : QString::number(song.bpm()), tag);
     SetTextFrame("TCOM", song.composer(), tag);
+    SetTextFrame("TIT1", song.grouping(), tag);
+    SetTextFrame("TPE1", song.performer(), tag);
     SetTextFrame("TPE2", song.albumartist(), tag);
     SetTextFrame("TCMP", std::string(song.compilation() ? "1" : "0"), tag);
   } else if (TagLib::FLAC::File* file = dynamic_cast<TagLib::FLAC::File*>(fileref->file())) {
@@ -511,6 +528,7 @@ bool TagReader::SaveFile(const QString& filename,
     tag->itemListMap()["disk"]    = TagLib::MP4::Item(song.disc() <= 0 -1 ? 0 : song.disc(), 0);
     tag->itemListMap()["tmpo"]    = TagLib::StringList(song.bpm() <= 0 -1 ? "0" : TagLib::String::number(song.bpm()));
     tag->itemListMap()["\251wrt"] = TagLib::StringList(song.composer());
+    tag->itemListMap()["\251grp"] = TagLib::StringList(song.grouping());
     tag->itemListMap()["aART"]    = TagLib::StringList(song.albumartist());
     tag->itemListMap()["cpil"]    = TagLib::StringList(song.compilation() ? "1" : "0");
   }

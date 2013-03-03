@@ -306,6 +306,10 @@ QString OSD::ReplaceVariable(const QString& variable, const Song& song) {
     return song.PrettyYear();
   } else if (variable == "%composer%") {
     return song.composer();
+  } else if (variable == "%performer%") {
+    return song.performer();
+  } else if (variable == "%grouping%") {
+    return song.grouping();
   } else if (variable == "%length%") {
     return song.PrettyLength();
   } else if (variable == "%disc%") {

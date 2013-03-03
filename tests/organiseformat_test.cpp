@@ -38,6 +38,8 @@ TEST_F(OrganiseFormatTest, BasicReplace) {
   song_.set_bpm(4.56);
   song_.set_comment("comment");
   song_.set_composer("composer");
+  song_.set_performer("performer");
+  song_.set_grouping("grouping");
   song_.set_disc(789);
   song_.set_genre("genre");
   song_.set_length_nanosec(987 * kNsecPerSec);
@@ -47,10 +49,11 @@ TEST_F(OrganiseFormatTest, BasicReplace) {
   song_.set_year(2010);
 
   format_.set_format("%album %albumartist %bitrate %bpm %comment %composer "
+                     "%performer %grouping "
                      "%disc %genre %length %samplerate %title %track %year");
 
   ASSERT_TRUE(format_.IsValid());
-  EXPECT_EQ("album albumartist 123 4.56 comment composer 789 genre 987 654 title 321 2010",
+  EXPECT_EQ("album albumartist 123 4.56 comment composer performer grouping 789 genre 987 654 title 321 2010",
             format_.GetFilenameForSong(song_));
 }
 

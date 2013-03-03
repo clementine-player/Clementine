@@ -161,6 +161,8 @@ class Song {
   // compilations, but you do for normal albums:
   const QString& playlist_albumartist() const;
   const QString& composer() const;
+  const QString& performer() const;
+  const QString& grouping() const;
   int track() const;
   int disc() const;
   float bpm() const;
@@ -235,6 +237,8 @@ class Song {
   void set_artist(const QString& v);
   void set_albumartist(const QString& v);
   void set_composer(const QString& v);
+  void set_performer(const QString& v);
+  void set_grouping(const QString& v);
   void set_track(int v);
   void set_disc(int v);
   void set_bpm(float v);

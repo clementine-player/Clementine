@@ -174,6 +174,8 @@ bool Playlist::column_is_editable(Playlist::Column column) {
     case Column_Album:
     case Column_AlbumArtist:
     case Column_Composer:
+    case Column_Performer:
+    case Column_Grouping:
     case Column_Track:
     case Column_Disc:
     case Column_Year:
@@ -208,6 +210,12 @@ bool Playlist::set_column_value(Song& song, Playlist::Column column,
       break;
     case Column_Composer:
       song.set_composer(value.toString());
+      break;
+    case Column_Performer:
+      song.set_performer(value.toString());
+      break;
+    case Column_Grouping:
+      song.set_grouping(value.toString());
       break;
     case Column_Track:
       song.set_track(value.toInt());
@@ -271,6 +279,8 @@ QVariant Playlist::data(const QModelIndex& index, int role) const {
         case Column_Genre:        return song.genre();
         case Column_AlbumArtist:  return song.playlist_albumartist();
         case Column_Composer:     return song.composer();
+        case Column_Performer:    return song.performer();
+        case Column_Grouping:     return song.grouping();
 
         case Column_Rating:       return song.rating();
         case Column_PlayCount:    return song.playcount();
@@ -1160,6 +1170,8 @@ bool Playlist::CompareItems(int column, Qt::SortOrder order,
     case Column_Genre:        strcmp(genre);
     case Column_AlbumArtist:  strcmp(playlist_albumartist);
     case Column_Composer:     strcmp(composer);
+    case Column_Performer:    strcmp(performer);
+    case Column_Grouping:     strcmp(grouping);
 
     case Column_Rating:       cmp(rating);
     case Column_PlayCount:    cmp(playcount);
@@ -1199,6 +1211,8 @@ QString Playlist::column_name(Column column) {
     case Column_Genre:        return tr("Genre");
     case Column_AlbumArtist:  return tr("Album artist");
     case Column_Composer:     return tr("Composer");
+    case Column_Performer:    return tr("Performer");
+    case Column_Grouping:     return tr("Grouping");
 
     case Column_Rating:       return tr("Rating");
     case Column_PlayCount:    return tr("Play count");
