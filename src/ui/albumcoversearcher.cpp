@@ -158,16 +158,25 @@ QImage AlbumCoverSearcher::Exec(const QString& artist, const QString& album) {
 }
 
 void AlbumCoverSearcher::Search() {
-  ui_->busy->show();
-  ui_->search->setEnabled(false);
-  ui_->artist->setEnabled(false);
-  ui_->album->setEnabled(false);
-  ui_->covers->setEnabled(false);
-
   model_->clear();
   cover_loading_tasks_.clear();
 
-  id_ = fetcher_->SearchForCovers(ui_->artist->text(), ui_->album->text());
+  if (ui_->album->isEnabled()) {
+    id_ = fetcher_->SearchForCovers(ui_->artist->text(), ui_->album->text());
+    ui_->search->setText(tr("Abort"));
+    ui_->busy->show();
+    ui_->artist->setEnabled(false);
+    ui_->album->setEnabled(false);
+    ui_->covers->setEnabled(false);
+  } else {
+    fetcher_->Clear();
+    ui_->search->setText(tr("Search"));
+    ui_->busy->hide();
+    ui_->search->setEnabled(true);
+    ui_->artist->setEnabled(true);
+    ui_->album->setEnabled(true);
+    ui_->covers->setEnabled(true);
+  }
 }
 
 void AlbumCoverSearcher::SearchFinished(quint64 id, const CoverSearchResults& results) {
@@ -178,6 +187,7 @@ void AlbumCoverSearcher::SearchFinished(quint64 id, const CoverSearchResults& re
   ui_->artist->setEnabled(true);
   ui_->album->setEnabled(true);
   ui_->covers->setEnabled(true);
+  ui_->search->setText(tr("Search"));
   id_ = 0;
 
   foreach (const CoverSearchResult& result, results) {
