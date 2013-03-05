@@ -48,7 +48,7 @@
 
 const int PlaylistView::kStateVersion = 5;
 const int PlaylistView::kGlowIntensitySteps = 24;
-const int PlaylistView::kAutoscrollGraceTimeout = 60; // seconds
+const int PlaylistView::kAutoscrollGraceTimeout = 30; // seconds
 const int PlaylistView::kDropIndicatorWidth = 2;
 const int PlaylistView::kDropIndicatorGradientWidth = 5;
 const char* PlaylistView::kSettingBackgroundImageType = "playlistview_background_type";
@@ -765,7 +765,7 @@ void PlaylistView::scrollContentsBy(int dx, int dy) {
 }
 
 void PlaylistView::InhibitAutoscrollTimeout() {
-  // For 1 minute after the user clicks on or scrolls the playlist we promise
+  // For 30 seconds after the user clicks on or scrolls the playlist we promise
   // not to automatically scroll the view to keep up with a track change.
   inhibit_autoscroll_ = false;
 }
