@@ -18,7 +18,7 @@ class TinySVCMDNS : public Zeroconf {
       quint16 port);
 
  private:
-  mdnsd* mdnsd_;
+  QList<mdnsd*> mdnsd_;
 };
 
 #endif  // TINYSVCMDNS_H

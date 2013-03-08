@@ -102,7 +102,7 @@ static void log_message(int loglevel, char *fmt_str, ...) {
 	fprintf(stderr, "%s\n", buf);
 }
 
-static int create_recv_sock() {
+static int create_recv_sock(uint32_t bind_ip) {
 	int sd = socket(AF_INET, SOCK_DGRAM, 0);
 	if (sd < 0) {
 		log_message(LOG_ERR, "recv socket(): %m");
@@ -122,7 +122,7 @@ static int create_recv_sock() {
 	memset(&serveraddr, 0, sizeof(serveraddr));
 	serveraddr.sin_family = AF_INET;
 	serveraddr.sin_port = htons(MDNS_PORT);
-	serveraddr.sin_addr.s_addr = htonl(INADDR_ANY);	/* receive multicast */
+	serveraddr.sin_addr.s_addr = bind_ip;	/* receive multicast */
 	if ((r = bind(sd, (struct sockaddr *)&serveraddr, sizeof(serveraddr))) < 0) {
 		log_message(LOG_ERR, "recv bind(): %m");
 	}
@@ -609,6 +609,10 @@ void mdns_service_destroy(struct mdns_service *srv) {
 }
 
 struct mdnsd *mdnsd_start() {
+  return mdnsd_start_bind(htonl(INADDR_ANY));
+}
+
+struct mdnsd *mdnsd_start_bind(uint32_t bind_ip) {
 	pthread_t tid;
 	pthread_attr_t attr;
 
@@ -621,7 +625,7 @@ struct mdnsd *mdnsd_start() {
 		return NULL;
 	}
 
-	server->sockfd = create_recv_sock();
+	server->sockfd = create_recv_sock(bind_ip);
 	if (server->sockfd < 0) {
 		log_message(LOG_ERR, "unable to create recv socket");
 		free(server);

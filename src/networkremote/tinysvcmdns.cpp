@@ -10,36 +10,41 @@ extern "C" {
 
 #include "core/logging.h"
 
-namespace {
-
-uint32_t GetLocalIPAddress() {
-  QList<QHostAddress> addresses = QNetworkInterface::allAddresses();
-  foreach (const QHostAddress& address, addresses) {
-    // TODO: Add ipv6 support to tinysvcmdns.
-    if (address.protocol() == QAbstractSocket::IPv4Protocol &&
-        !address.isInSubnet(QHostAddress::parseSubnet("127.0.0.1/8"))) {
-      return qToBigEndian(address.toIPv4Address());
-    }
-  }
-  return 0;
-}
-
-}  // namespace
-
 TinySVCMDNS::TinySVCMDNS()
     : mdnsd_(NULL) {
-  uint32_t ip_address = GetLocalIPAddress();
-  if (ip_address == 0) {
-    qLog(Warning) << "Could not publish service over mDNS as there is no"
-                  << "non-local IPv4 interface";
-    return;
-  }
-  mdnsd_ = mdnsd_start();
+  // Get our hostname
   QString host = QHostInfo::localHostName();
-  mdnsd_set_hostname(
-      mdnsd_,
-      QString(host + ".local").toUtf8().constData(),
-      ip_address);
+  
+  // Get all network interfaces
+  QList<QNetworkInterface> network_interfaces = QNetworkInterface::allInterfaces();
+  foreach (QNetworkInterface network_interface, network_interfaces) {
+    // Only use up and non loopback interfaces
+    if (network_interface..flags().testFlag(a.IsUp) 
+     && !network_interface..flags().testFlag(a.IsLoopBack))
+    {
+      uint32_t ipv4 = 0;
+      
+      // Now check all network addresses for this device
+      QList<QNetworkAddressEntry> network_address_entries = a.addressEntries();
+      foreach (QNetworkAddressEntry network_address_entry, network_address_entries) {
+        QHostAddress host_address = network_address_entry.ip();
+        if (host_address.protocol() == QAbstractSocket::IPv4Protocol) {
+          ipv4 = qToBigEndian(host_address.toIPv4Address());
+        }
+      }
+      
+      // Now start the service
+      mdnsd* mdnsd = mdnsd_start_bind(ipv4);
+  
+      mdnsd_set_hostname(
+        mdnsd,
+        QString(host + ".local").toUtf8().constData(),
+        ip_address);
+        
+      // Add to the list
+      mdnsd_.append(mdnsd);
+    }
+  }
 }
 
 TinySVCMDNS::~TinySVCMDNS() {
@@ -62,12 +67,14 @@ void TinySVCMDNS::PublishInternal(
     "cat=nyan",
     NULL
   };
-
-  mdnsd_register_svc(
-      mdnsd_,
-      name.constData(),
-      QString(type + ".local").toUtf8().constData(),
-      port,
-      NULL,
-      txt);
+  
+  foreach(mdnsd* mdnsd, mdnsd_) {
+    mdnsd_register_svc(
+        mdnsd,
+        name.constData(),
+        QString(type + ".local").toUtf8().constData(),
+        port,
+        NULL,
+        txt);
+  }
 }
