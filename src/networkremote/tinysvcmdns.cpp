@@ -24,7 +24,8 @@ TinySVCMDNS::TinySVCMDNS() {
       uint32_t ipv4 = 0;
       
       // Now check all network addresses for this device
-      QList<QNetworkAddressEntry> network_address_entries = network_interfaces.addressEntries();
+      QList<QNetworkAddressEntry> network_address_entries = network_interface.addressEntries();
+
       foreach (QNetworkAddressEntry network_address_entry, network_address_entries) {
         QHostAddress host_address = network_address_entry.ip();
         if (host_address.protocol() == QAbstractSocket::IPv4Protocol) {
