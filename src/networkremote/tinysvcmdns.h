@@ -2,6 +2,7 @@
 #define TINYSVCMDNS_H
 
 #include "zeroconf.h"
+#include <QList>
 
 struct mdnsd;
 
