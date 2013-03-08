@@ -10,8 +10,7 @@ extern "C" {
 
 #include "core/logging.h"
 
-TinySVCMDNS::TinySVCMDNS()
-    : mdnsd_(NULL) {
+TinySVCMDNS::TinySVCMDNS() {
   // Get our hostname
   QString host = QHostInfo::localHostName();
   
@@ -25,7 +24,7 @@ TinySVCMDNS::TinySVCMDNS()
       uint32_t ipv4 = 0;
       
       // Now check all network addresses for this device
-      QList<QNetworkAddressEntry> network_address_entries = a.addressEntries();
+      QList<QNetworkAddressEntry> network_address_entries = network_interfaces.addressEntries();
       foreach (QNetworkAddressEntry network_address_entry, network_address_entries) {
         QHostAddress host_address = network_address_entry.ip();
         if (host_address.protocol() == QAbstractSocket::IPv4Protocol) {
