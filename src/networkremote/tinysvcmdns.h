@@ -19,6 +19,7 @@ class TinySVCMDNS : public Zeroconf {
       quint16 port);
 
  private:
+  void CreateMdnsd(uint32_t ipv4, QString ipv6);
   QList<mdnsd*> mdnsd_;
 };
 
