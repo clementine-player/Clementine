@@ -1,7 +1,6 @@
 #include "tinysvcmdns.h"
 
 extern "C" {
-#include "mdns.h"
 #include "mdnsd.h"
 }
 
@@ -23,32 +22,6 @@ void TinySVCMDNS::CreateMdnsd(uint32_t ipv4, QString ipv6) {
     mdnsd,
     QString(host + ".local").toUtf8().constData(),
     ipv4);
-
-  // Add entry for ipv4
-  struct rr_entry *a2_e = NULL;
-  a2_e = rr_create_a(create_nlabel(hostname), ipv4);
-  mdnsd_add_rr(mdnsd, a2_e);
-
-  // Add entry for ipv6
-  struct rr_entry *aaaa_e = NULL;
-
-  struct addrinfo hints;
-  memset(&hints, 0, sizeof(hints));
-  hints.ai_family = AF_INET6;
-  hints.ai_flags = AI_NUMERICHOST;
-  struct addrinfo* results;
-  getaddrinfo(
-    ipv6.toStdString().c_str(),
-    NULL,
-    &hints,
-    &results);
-  struct sockaddr_in6* addr = (struct sockaddr_in6*)results->ai_addr;
-  struct in6_addr v6addr = addr->sin6_addr;
-  freeaddrinfo(results);
-
-  aaaa_e = rr_create_aaaa(create_nlabel(hostname), &v6addr);
-
-  mdnsd_add_rr(mdnsd, aaaa_e);
 
   // Add to the list
   mdnsd_.append(mdnsd);
