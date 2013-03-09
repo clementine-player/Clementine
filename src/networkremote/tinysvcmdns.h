@@ -5,6 +5,7 @@
 #include <QList>
 
 struct mdnsd;
+struct rr_entry;
 
 class TinySVCMDNS : public Zeroconf {
  public:

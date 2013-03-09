@@ -11,7 +11,7 @@ extern "C" {
 
 #include "core/logging.h"
 
-TinySVCMDNS::CreateMdnsd(uint32_t ipv4, QString ipv6) {
+void TinySVCMDNS::CreateMdnsd(uint32_t ipv4, QString ipv6) {
   // Get our hostname
   QString host = QHostInfo::localHostName();
 
