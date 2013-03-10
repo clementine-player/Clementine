@@ -28,7 +28,14 @@ class BaseDumperImpl(object):
     raise NotImplementedError
 
   def DebugSymbolsFilename(self, filename):
-    return filename
+    class Context(object):
+      def __enter__(self):
+        return filename
+
+      def __exit__(self, exc_type, exc_value, traceback):
+        pass
+
+    return Context()
 
 
 class LinuxDumperImpl(BaseDumperImpl):

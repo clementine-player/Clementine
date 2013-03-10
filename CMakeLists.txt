@@ -454,6 +454,10 @@ if(HAVE_MOODBAR)
   add_subdirectory(gst/moodbar)
 endif()
 
+# Breakpad symbol target.  Included after everything else since it uses some
+# variables defined above.
+include(cmake/DumpSymbols.cmake)
+
 # Uninstall support
 configure_file(
   "${CMAKE_CURRENT_SOURCE_DIR}/cmake_uninstall.cmake.in"

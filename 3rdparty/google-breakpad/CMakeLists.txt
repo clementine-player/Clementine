@@ -91,6 +91,8 @@ endif()
 
 add_library(libbreakpad_common STATIC ${COMMON_SOURCES})
 add_library(breakpad STATIC ${LIBRARY_SOURCES})
+
+# This is used by cmake/DumpSymbols.cmake
 add_executable(dump_syms ${DUMP_SYMS_SOURCES})
 
 target_link_libraries(breakpad libbreakpad_common)
