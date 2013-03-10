@@ -55,7 +55,10 @@ CREATE TABLE device_%deviceid_songs (
   unavailable INTEGER DEFAULT 0,
 
   effective_albumartist TEXT,
-  etag TEXT
+  etag TEXT,
+
+  performer TEXT,
+  grouping TEXT
 );
 
 CREATE INDEX idx_device_%deviceid_songs_album ON device_%deviceid_songs (album);
@@ -63,7 +66,7 @@ CREATE INDEX idx_device_%deviceid_songs_album ON device_%deviceid_songs (album);
 CREATE INDEX idx_device_%deviceid_songs_comp_artist ON device_%deviceid_songs (effective_compilation, artist);
 
 CREATE VIRTUAL TABLE device_%deviceid_fts USING fts3(
-  ftstitle, ftsalbum, ftsartist, ftsalbumartist, ftscomposer, ftsgenre, ftscomment,
+  ftstitle, ftsalbum, ftsartist, ftsalbumartist, ftscomposer, ftsperformer, ftsgrouping, ftsgenre, ftscomment,
   tokenize=unicode
 );
 

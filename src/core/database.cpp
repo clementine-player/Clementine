@@ -500,8 +500,8 @@ void Database::UpdateDatabaseSchema(int version, QSqlDatabase &db) {
       }
     }
     qLog(Debug) << "Applying database schema update" << version
-      << "from" << filename;
-    ExecSchemaCommandsFromFile(db, filename, version - 1, &t);
+                << "from" << filename;
+    ExecSchemaCommandsFromFile(db, filename, version - 1, true);
     t.Commit();
   } else {
     qLog(Debug) << "Applying database schema update" << version
@@ -533,22 +533,25 @@ void Database::UrlEncodeFilenameColumn(const QString& table, QSqlDatabase& db) {
 }
 
 void Database::ExecSchemaCommandsFromFile(QSqlDatabase& db,
-                                          QString const& filename,
+                                          const QString& filename,
                                           int schema_version,
-                                          ScopedTransaction const* outerTransaction) {
+                                          bool in_transaction) {
   // Open and read the database schema
   QFile schema_file(filename);
   if (!schema_file.open(QIODevice::ReadOnly))
     qFatal("Couldn't open schema file %s", filename.toUtf8().constData());
-  ExecSchemaCommands(db, QString::fromUtf8(schema_file.readAll()), schema_version, outerTransaction);
+  ExecSchemaCommands(db,
+                     QString::fromUtf8(schema_file.readAll()),
+                     schema_version,
+                     in_transaction);
 }
 
 void Database::ExecSchemaCommands(QSqlDatabase& db,
-                                  QString const& schema,
+                                  const QString& schema,
                                   int schema_version,
-                                  ScopedTransaction const* outerTransaction) {
+                                  bool in_transaction) {
   // Run each command
-  QStringList const schemaCommands(schema.split(";\n\n"));
+  const QStringList commands(schema.split(";\n\n"));
 
   // We don't want this list to reflect possible DB schema changes
   // so we initialize it before executing any statements.
@@ -556,26 +559,26 @@ void Database::ExecSchemaCommands(QSqlDatabase& db,
   // be queried before beginning an inner transaction! Otherwise
   // DROP TABLE commands on song tables may fail due to database
   // locks.
-  QStringList const songTables(SongsTables(db, schema_version));
+  const QStringList song_tables(SongsTables(db, schema_version));
 
-  if (0 == outerTransaction) {
-    ScopedTransaction innerTransaction(&db);
-    ExecSongTablesCommands(db, songTables, schemaCommands);
-    innerTransaction.Commit();
+  if (!in_transaction) {
+    ScopedTransaction inner_transaction(&db);
+    ExecSongTablesCommands(db, song_tables, commands);
+    inner_transaction.Commit();
   } else {
-    ExecSongTablesCommands(db, songTables, schemaCommands);
+    ExecSongTablesCommands(db, song_tables, commands);
   }
 }
 
 void Database::ExecSongTablesCommands(QSqlDatabase& db,
-                                      QStringList const& songTables,
-                                      QStringList const& commands) {
-  foreach (QString const& command, commands) {
+                                      const QStringList& song_tables,
+                                      const QStringList& commands) {
+  foreach (const QString& command, commands) {
     // There are now lots of "songs" tables that need to have the same schema:
     // songs, magnatune_songs, and device_*_songs.  We allow a magic value
     // in the schema files to update all songs tables at once.
     if (command.contains(kMagicAllSongsTables)) {
-      foreach (QString const& table, songTables) {
+      foreach (const QString& table, song_tables) {
         qLog(Info) << "Updating" << table << "for" << kMagicAllSongsTables;
         QString new_command(command);
         new_command.replace(kMagicAllSongsTables, table);

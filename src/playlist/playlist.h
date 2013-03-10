@@ -90,8 +90,6 @@ class Playlist : public QAbstractListModel {
     Column_Album,
     Column_AlbumArtist,
     Column_Composer,
-    Column_Performer,
-    Column_Grouping,
     Column_Length,
     Column_Track,
     Column_Disc,
@@ -118,6 +116,9 @@ class Playlist : public QAbstractListModel {
 
     Column_Source,
     Column_Mood,
+
+    Column_Performer,
+    Column_Grouping,
 
     ColumnCount
   };

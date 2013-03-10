@@ -38,7 +38,6 @@ struct sqlite3_tokenizer_module;
 }
 
 class Application;
-class ScopedTransaction;
 
 class Database : public QObject {
   Q_OBJECT
@@ -56,7 +55,10 @@ class Database : public QObject {
   QMutex* Mutex() { return &mutex_; }
 
   void RecreateAttachedDb(const QString& database_name);
-  void ExecSchemaCommands(QSqlDatabase &db, QString const& schema, int schema_version, ScopedTransaction const* outerTransaction = 0);
+  void ExecSchemaCommands(QSqlDatabase& db,
+                          const QString& schema,
+                          int schema_version,
+                          bool in_transaction = false);
 
   int startup_schema_version() const { return startup_schema_version_; }
   int current_schema_version() const { return kSchemaVersion; }
@@ -70,8 +72,13 @@ class Database : public QObject {
  private:
   void UpdateMainSchema(QSqlDatabase* db);
 
-  void ExecSchemaCommandsFromFile(QSqlDatabase &db, QString const& filename, int schema_version, ScopedTransaction const* outerTransaction = 0);
-  void ExecSongTablesCommands(QSqlDatabase &db, QStringList const& songTables, QStringList const& commands);
+  void ExecSchemaCommandsFromFile(QSqlDatabase& db,
+                                  const QString& filename,
+                                  int schema_version,
+                                  bool in_transaction = false);
+  void ExecSongTablesCommands(QSqlDatabase& db,
+                              const QStringList& song_tables,
+                              const QStringList& commands);
 
   void UpdateDatabaseSchema(int version, QSqlDatabase& db);
   void UrlEncodeFilenameColumn(const QString& table, QSqlDatabase& db);

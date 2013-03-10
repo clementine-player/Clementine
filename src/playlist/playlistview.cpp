@@ -46,7 +46,7 @@
 # include "moodbar/moodbaritemdelegate.h"
 #endif
 
-const int PlaylistView::kStateVersion = 5;
+const int PlaylistView::kStateVersion = 6;
 const int PlaylistView::kGlowIntensitySteps = 24;
 const int PlaylistView::kAutoscrollGraceTimeout = 30; // seconds
 const int PlaylistView::kDropIndicatorWidth = 2;
@@ -323,6 +323,10 @@ void PlaylistView::LoadGeometry() {
   }
   if (state_version < 5) {
     header_->HideSection(Playlist::Column_Mood);
+  }
+  if (state_version < 6) {
+    header_->HideSection(Playlist::Column_Performer);
+    header_->HideSection(Playlist::Column_Grouping);
   }
 
   // Make sure at least one column is visible
