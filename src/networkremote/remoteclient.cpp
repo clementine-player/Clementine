@@ -77,11 +77,14 @@ void RemoteClient::IncomingData() {
 }
 
 void RemoteClient::ParseMessage(const QByteArray &data) {
+  qLog(Debug) << "ParseMessage()";
+  qLog(Debug) << "Data" << data;
   pb::remote::Message msg;
   if (!msg.ParseFromArray(data.constData(), data.size())) {
     qLog(Info) << "Couldn't parse data";
     return;
   }
+  qLog(Debug) << "ParseFromArray()";
 
   if (msg.type() == pb::remote::CONNECT && use_auth_code_) {
     if (msg.request_connect().auth_code() != auth_code_) {
@@ -91,6 +94,7 @@ void RemoteClient::ParseMessage(const QByteArray &data) {
   }
 
   // Now parse the other data
+  qLog(Debug) << "emit Parse(msg)";
   emit Parse(msg);
 }
 
