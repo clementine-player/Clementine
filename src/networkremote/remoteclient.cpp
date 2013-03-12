@@ -55,6 +55,16 @@ void RemoteClient::IncomingData() {
       // Read the length of the next message
       QDataStream s(client_);
       s >> expected_length_;
+
+      // Receiving more than 128mb is very unlikely
+      // Flush the data and disconnect the client
+      if (expected_length_ > 134217728) {
+        qLog(Debug) << "Received invalid data, disconnect client";
+        qLog(Debug) << "expected_length_ =" << expected_length_;
+        client_->close();
+        return;
+      }
+
       reading_protobuf_ = true;
     }
 
@@ -77,14 +87,11 @@ void RemoteClient::IncomingData() {
 }
 
 void RemoteClient::ParseMessage(const QByteArray &data) {
-  qLog(Debug) << "ParseMessage()";
-  qLog(Debug) << "Data" << data;
   pb::remote::Message msg;
   if (!msg.ParseFromArray(data.constData(), data.size())) {
     qLog(Info) << "Couldn't parse data";
     return;
   }
-  qLog(Debug) << "ParseFromArray()";
 
   if (msg.type() == pb::remote::CONNECT && use_auth_code_) {
     if (msg.request_connect().auth_code() != auth_code_) {
@@ -94,7 +101,6 @@ void RemoteClient::ParseMessage(const QByteArray &data) {
   }
 
   // Now parse the other data
-  qLog(Debug) << "emit Parse(msg)";
   emit Parse(msg);
 }
 
