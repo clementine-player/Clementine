@@ -579,6 +579,13 @@ void Database::ExecSongTablesCommands(QSqlDatabase& db,
     // in the schema files to update all songs tables at once.
     if (command.contains(kMagicAllSongsTables)) {
       foreach (const QString& table, song_tables) {
+        // Another horrible hack: device songs tables don't have matching _fts
+        // tables, so if this command tries to touch one, ignore it.
+        if (table.startsWith("device_") &&
+            command.contains(QString(kMagicAllSongsTables) + "_fts")) {
+          continue;
+        }
+
         qLog(Info) << "Updating" << table << "for" << kMagicAllSongsTables;
         QString new_command(command);
         new_command.replace(kMagicAllSongsTables, table);
