@@ -101,6 +101,7 @@ TagLib::String QStringToTaglibString(const QString& s) {
 
 const char* TagReader::kMP4_FMPS_Rating_ID = "----:com.apple.iTunes:FMPS_Rating";
 const char* TagReader::kMP4_FMPS_Playcount_ID = "----:com.apple.iTunes:FMPS_Playcount";
+const char* TagReader::kMP4_FMPS_Score_ID = "----:com.apple.iTunes:FMPS_Rating_Amarok_Score";
 
 TagReader::TagReader()
   : factory_(new TagLibFileRefFactory),
@@ -262,6 +263,12 @@ void TagReader::ReadFile(const QString& filename,
           song->set_playcount(playcount);
         }
       }
+      if (items.contains(kMP4_FMPS_Playcount_ID)) {
+        int score = TStringToQString(items[kMP4_FMPS_Score_ID].toStringList().toString('\n')).toFloat() * 100;
+        if (song->score() <= 0 && score > 0) {
+          song->set_score(score);
+        }
+      }
 
       if(items.contains("\251wrt")) {
         Decode(items["\251wrt"].toStringList().toString(", "), NULL, song->mutable_composer());
@@ -290,6 +297,15 @@ void TagReader::ReadFile(const QString& filename,
         int playcount = TStringToQString(attributes.front().toString()).toInt();
         if (song->playcount() <= 0 && playcount > 0) {
           song->set_playcount(playcount);
+        }
+      }
+    }
+    if (attributes_map.contains("FMPS/Rating_Amarok_Score")) {
+      const TagLib::ASF::AttributeList& attributes = attributes_map["FMPS/Rating_Amarok_Score"];
+      if (!attributes.isEmpty()) {
+        int score = TStringToQString(attributes.front().toString()).toFloat() * 100;
+        if (song->score() <= 0 && score > 0) {
+          song->set_score(score);
         }
       }
     }
@@ -398,6 +414,11 @@ void TagReader::ParseFMPSFrame(const QString& name, const QString& value,
         song->set_playcount(var.toDouble());
       }
     }
+  } else if (name == "FMPS_Rating_Amarok_Score") {
+    var = parser.result()[0][0];
+    if (var.type() == QVariant::Double) {
+      song->set_score(var.toDouble() * 100);
+    }
   }
 }
 
@@ -435,6 +456,9 @@ void TagReader::ParseOggTag(const TagLib::Ogg::FieldListMap& map,
 
   if (!map["FMPS_PLAYCOUNT"].isEmpty() && song->playcount() <= 0)
     song->set_playcount(TStringToQString( map["FMPS_PLAYCOUNT"].front() ).trimmed().toFloat());
+
+  if (!map["FMPS_RATING_AMAROK_SCORE"].isEmpty() && song->score() <= 0)
+      song->set_score(TStringToQString( map["FMPS_RATING_AMAROK_SCORE"].front() ).trimmed().toFloat() * 100);
 }
 
 void TagReader::SetVorbisComments(TagLib::Ogg::XiphComment* vorbis_comments,
@@ -453,6 +477,7 @@ void TagReader::SetFMPSVorbisComments(TagLib::Ogg::XiphComment* vorbis_comments,
 
   vorbis_comments->addField("FMPS_RATING", QStringToTaglibString(QString::number(song.rating())));
   vorbis_comments->addField("FMPS_PLAYCOUNT", QStringToTaglibString(QString::number(song.playcount())));
+  vorbis_comments->addField("FMPS_RATING_AMAROK_SCORE", QStringToTaglibString(QString::number(song.score() / 100.0)));
 }
 
 pb::tagreader::SongMetadata_Type TagReader::GuessFileType(
@@ -570,6 +595,7 @@ bool TagReader::SaveSongStatisticsToFile(const QString& filename,
     // Save as FMPS
     SetUserTextFrame("FMPS_Rating", QString::number(song.rating()), tag);
     SetUserTextFrame("FMPS_PlayCount", QString::number(song.playcount()), tag);
+    SetUserTextFrame("FMPS_Rating_Amarok_Score", QString::number(song.score() / 100.0), tag);
 
     // Also save as POPM
     TagLib::ID3v2::PopularimeterFrame* frame = NULL;
@@ -599,12 +625,14 @@ bool TagReader::SaveSongStatisticsToFile(const QString& filename,
     #define ConvertASF(x) TagLib::ASF::Attribute(QStringToTaglibString(QString::number(x)))
     tag->addAttribute("FMPS/Rating",    ConvertASF(song.rating()));
     tag->addAttribute("FMPS/Playcount", ConvertASF(song.playcount()));
+    tag->addAttribute("FMPS/Rating_Amarok_Score", ConvertASF(song.score() / 100.0));
     #undef ConvertASF
   }
 #endif
   else if (TagLib::MP4::File* file = dynamic_cast<TagLib::MP4::File*>(fileref->file())) {
     TagLib::MP4::Tag* tag = file->tag();
     tag->itemListMap()[kMP4_FMPS_Rating_ID] =     TagLib::StringList(QStringToTaglibString(QString::number(song.rating())));
+    tag->itemListMap()[kMP4_FMPS_Score_ID] =      TagLib::StringList(QStringToTaglibString(QString::number(song.score() / 100.0)));
     tag->itemListMap()[kMP4_FMPS_Playcount_ID] =  TagLib::StringList(TagLib::String::number(song.playcount()));
   } else {
     // Nothing to save: stop now

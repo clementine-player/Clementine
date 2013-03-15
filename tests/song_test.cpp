@@ -146,6 +146,19 @@ TEST_F(SongTest, FMPSPlayCountBoth) {
   EXPECT_EQ(123, song.playcount());
 }
 
+TEST_F(SongTest, FMPSScore) {
+  TemporaryResource r(":/testdata/beep.mp3");
+  {
+    Song song = ReadSongFromFile(r.fileName());
+    song.set_score(43);
+
+    WriteSongStatisticsToFile(song, r.fileName());
+  }
+
+  Song new_song = ReadSongFromFile(r.fileName());
+  EXPECT_FLOAT_EQ(43, new_song.score());
+}
+
 TEST_F(SongTest, POPMRating) {
   TemporaryResource r(":/testdata/popmrating.mp3");
   Song song = ReadSongFromFile(r.fileName());
@@ -166,6 +179,7 @@ TEST_F(SongTest, RatingAndStatisticsOgg) {
     Song song = ReadSongFromFile(r.fileName());
     song.set_rating(0.20);
     song.set_playcount(1337);
+    song.set_score(87);
 
     WriteSongStatisticsToFile(song, r.fileName());
   }
@@ -173,6 +187,7 @@ TEST_F(SongTest, RatingAndStatisticsOgg) {
   Song new_song = ReadSongFromFile(r.fileName());
   EXPECT_FLOAT_EQ(0.20, new_song.rating());
   EXPECT_EQ(1337, new_song.playcount());
+  EXPECT_EQ(87, new_song.score());
 }
 
 TEST_F(SongTest, RatingAndStatisticsFLAC) {
@@ -181,6 +196,7 @@ TEST_F(SongTest, RatingAndStatisticsFLAC) {
     Song song = ReadSongFromFile(r.fileName());
     song.set_rating(0.20);
     song.set_playcount(1337);
+    song.set_score(87);
 
     WriteSongStatisticsToFile(song, r.fileName());
   }
@@ -188,6 +204,7 @@ TEST_F(SongTest, RatingAndStatisticsFLAC) {
   Song new_song = ReadSongFromFile(r.fileName());
   EXPECT_FLOAT_EQ(0.20, new_song.rating());
   EXPECT_EQ(1337, new_song.playcount());
+  EXPECT_EQ(87, new_song.score());
 }
 
 #ifdef TAGLIB_WITH_ASF
@@ -197,6 +214,7 @@ TEST_F(SongTest, RatingAndStatisticsASF) {
     Song song = ReadSongFromFile(r.fileName());
     song.set_rating(0.20);
     song.set_playcount(1337);
+    song.set_score(87);
 
     WriteSongStatisticsToFile(song, r.fileName());
   }
@@ -204,6 +222,7 @@ TEST_F(SongTest, RatingAndStatisticsASF) {
   Song new_song = ReadSongFromFile(r.fileName());
   EXPECT_FLOAT_EQ(0.20, new_song.rating());
   EXPECT_EQ(1337, new_song.playcount());
+  EXPECT_EQ(87, new_song.score());
 }
 #endif // TAGLIB_WITH_ASF
 
@@ -213,6 +232,7 @@ TEST_F(SongTest, RatingAndStatisticsMP4) {
     Song song = ReadSongFromFile(r.fileName());
     song.set_rating(0.20);
     song.set_playcount(1337);
+    song.set_score(87);
 
     WriteSongStatisticsToFile(song, r.fileName());
   }
@@ -220,6 +240,7 @@ TEST_F(SongTest, RatingAndStatisticsMP4) {
   Song new_song = ReadSongFromFile(r.fileName());
   EXPECT_FLOAT_EQ(0.20, new_song.rating());
   EXPECT_EQ(1337, new_song.playcount());
+  EXPECT_EQ(87, new_song.score());
 }
 
 }  // namespace
