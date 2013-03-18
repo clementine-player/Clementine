@@ -156,7 +156,7 @@ TEST_F(SongTest, FMPSScore) {
   }
 
   Song new_song = ReadSongFromFile(r.fileName());
-  EXPECT_FLOAT_EQ(43, new_song.score());
+  EXPECT_EQ(43, new_song.score());
 }
 
 TEST_F(SongTest, POPMRating) {
