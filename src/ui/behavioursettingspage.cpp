@@ -22,6 +22,11 @@
 
 #include <QDir>
 
+namespace {
+bool LocaleAwareCompare(const QString& a, const QString& b) {
+  return a.localeAwareCompare(b) < 0;
+}
+}  // namespace
 
 BehaviourSettingsPage::BehaviourSettingsPage(SettingsDialog* dialog)
   : SettingsPage(dialog),
@@ -55,8 +60,15 @@ BehaviourSettingsPage::BehaviourSettingsPage(SettingsDialog* dialog)
       continue;
 
     QString code = lang_re.cap(1);
-    QString name = QString("%1 (%2)").arg(
-        QLocale::languageToString(QLocale(code).language()), code);
+    QString language_name;
+    language_name = QLocale::languageToString(QLocale(code).language());
+#if QT_VERSION >= 0x040800
+    QString native_name = QLocale(code).nativeLanguageName();
+    if (!native_name.isEmpty()) {
+      language_name = native_name;
+    }
+#endif
+    QString name = QString("%1 (%2)").arg(language_name, code);
 
     language_map_[name] = code;
   }
@@ -65,7 +77,7 @@ BehaviourSettingsPage::BehaviourSettingsPage(SettingsDialog* dialog)
 
   // Sort the names and show them in the UI
   QStringList names = language_map_.keys();
-  qStableSort(names);
+  qStableSort(names.begin(), names.end(), LocaleAwareCompare);
   ui_->language->addItems(names);
 
 #ifdef Q_OS_DARWIN
