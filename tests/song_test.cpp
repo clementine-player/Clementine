@@ -150,13 +150,13 @@ TEST_F(SongTest, FMPSScore) {
   TemporaryResource r(":/testdata/beep.mp3");
   {
     Song song = ReadSongFromFile(r.fileName());
-    song.set_score(43);
+    song.set_score(87);
 
     WriteSongStatisticsToFile(song, r.fileName());
   }
 
   Song new_song = ReadSongFromFile(r.fileName());
-  EXPECT_EQ(43, new_song.score());
+  EXPECT_EQ(87, new_song.score());
 }
 
 TEST_F(SongTest, POPMRating) {
