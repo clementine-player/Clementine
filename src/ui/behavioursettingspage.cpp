@@ -60,8 +60,7 @@ BehaviourSettingsPage::BehaviourSettingsPage(SettingsDialog* dialog)
       continue;
 
     QString code = lang_re.cap(1);
-    QString language_name;
-    language_name = QLocale::languageToString(QLocale(code).language());
+    QString language_name = QLocale::languageToString(QLocale(code).language());
 #if QT_VERSION >= 0x040800
     QString native_name = QLocale(code).nativeLanguageName();
     if (!native_name.isEmpty()) {
