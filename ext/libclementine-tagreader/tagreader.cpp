@@ -417,7 +417,7 @@ void TagReader::ParseFMPSFrame(const QString& name, const QString& value,
   } else if (name == "FMPS_Rating_Amarok_Score") {
     var = parser.result()[0][0];
     if (var.type() == QVariant::Double) {
-      song->set_score(var.toDouble() * 100);
+      song->set_score(var.toFloat() * 100);
     }
   }
 }
