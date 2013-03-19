@@ -37,6 +37,8 @@ TinySVCMDNS::TinySVCMDNS() {
     {
       uint32_t ipv4 = 0;
       QString ipv6;
+
+      qLog(Debug) << "Interface" << network_interface.humanReadableName();
       
       // Now check all network addresses for this device
       QList<QNetworkAddressEntry> network_address_entries = network_interface.addressEntries();
@@ -45,8 +47,10 @@ TinySVCMDNS::TinySVCMDNS() {
         QHostAddress host_address = network_address_entry.ip();
         if (host_address.protocol() == QAbstractSocket::IPv4Protocol) {
           ipv4 = qToBigEndian(host_address.toIPv4Address());
+          qLog(Debug) << "  ipv4:" << host_address.toString();
         } else if (host_address.protocol() == QAbstractSocket::IPv6Protocol) {
           ipv6 = host_address.toString();
+          qLog(Debug) << "  ipv6:" << host_address.toString();
         }
       }
       
