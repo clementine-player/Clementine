@@ -124,9 +124,11 @@ void OutgoingDataCreator::SendAllPlaylists() {
   SendDataToClients(&msg);
 }
 
-void OutgoingDataCreator::ActiveChanged(Playlist*) {
-  // When a playlist was changed, send the new list
-  SendAllPlaylists();
+void OutgoingDataCreator::ActiveChanged(Playlist* playlist) {
+  pb::remote::Message msg;
+  msg.set_type(pb::remote::ACTIVE_PLAYLIST_CHANGED);
+  msg.mutable_response_active_changed()->set_id(playlist->id());
+  SendDataToClients(&msg);
 }
 
 void OutgoingDataCreator::PlaylistAdded(int id, const QString& name) {
