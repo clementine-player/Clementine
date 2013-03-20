@@ -252,6 +252,16 @@ void PlaylistManager::SetActivePlaylist(int id) {
   sequence_->SetUsingDynamicPlaylist(active()->is_dynamic());
 }
 
+void PlaylistManager::SetActiveToCurrent() {
+  // Check if we need to update the active playlist.
+  // By calling SetActiveToCurrent, the playlist manager emits the signal
+  // "ActiveChanged". This signal causes the network remote module to
+  // send all playlists to the clients, even no change happend.
+  if (current_id() != active_id()) {
+    SetActivePlaylist(current_id());
+  }
+}
+
 void PlaylistManager::ClearCurrent() {
   current()->Clear();
 }

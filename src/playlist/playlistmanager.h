@@ -181,7 +181,7 @@ public slots:
 
   void SetCurrentPlaylist(int id);
   void SetActivePlaylist(int id);
-  void SetActiveToCurrent() { SetActivePlaylist(current_id()); }
+  void SetActiveToCurrent();
 
   void SelectionChanged(const QItemSelection& selection);
 
