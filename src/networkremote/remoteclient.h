@@ -25,12 +25,13 @@ signals:
 
 private:
   void ParseMessage(const QByteArray& data);
-  void DisconnectClientWrongAuthCode();
+  void DisconnectClient(pb::remote::ReasonDisconnect reason);
 
   Application* app_;
 
   bool use_auth_code_;
   int auth_code_;
+  bool authenticated_;
 
   QTcpSocket* client_;
   bool reading_protobuf_;

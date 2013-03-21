@@ -157,6 +157,7 @@ message RequestConnect {
 enum ReasonDisconnect {
   Server_Shutdown = 1;
   Wrong_Auth_Code = 2;
+  Not_Authenticated = 3;
 }
 message ResponseDisconnect {
   optional ReasonDisconnect reason_disconnect = 1;

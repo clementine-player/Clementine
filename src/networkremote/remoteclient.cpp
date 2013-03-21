@@ -43,6 +43,9 @@ RemoteClient::RemoteClient(Application* app, QTcpSocket* client)
   auth_code_     = s.value("auth_code", 0).toInt();
 
   s.endGroup();
+
+  // If we don't use an auth code, we don't need to authenticate the client.
+  authenticated_ = !use_auth_code_;
 }
 
 
@@ -95,23 +98,31 @@ void RemoteClient::ParseMessage(const QByteArray &data) {
 
   if (msg.type() == pb::remote::CONNECT && use_auth_code_) {
     if (msg.request_connect().auth_code() != auth_code_) {
-      DisconnectClientWrongAuthCode();
+      DisconnectClient(pb::remote::Wrong_Auth_Code);
       return;
+    } else {
+      authenticated_ = true;
     }
+  }
+
+  // Check if the client has sent the correct auth code
+  if (!authenticated_) {
+    DisconnectClient(pb::remote::Not_Authenticated);
+    return;
   }
 
   // Now parse the other data
   emit Parse(msg);
 }
 
-void RemoteClient::DisconnectClientWrongAuthCode() {
+void RemoteClient::DisconnectClient(pb::remote::ReasonDisconnect reason) {
   pb::remote::Message msg;
   msg.set_type(pb::remote::DISCONNECT);
 
   // Send the default version
   msg.set_version(msg.default_instance().version());
 
-  msg.mutable_response_disconnect()->set_reason_disconnect(pb::remote::Wrong_Auth_Code);
+  msg.mutable_response_disconnect()->set_reason_disconnect(reason);
   SendData(&msg);
 
   // Just close the connection. The next time the outgoing data creator
