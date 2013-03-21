@@ -165,9 +165,17 @@ void OutgoingDataCreator::SendFirstData() {
   // And the current playlists
   SendAllPlaylists();
 
+  // Send the tracks of the active playlist
+  SendPlaylistSongs(app_->playlist_manager()->active_id());
+
   // Send the current random and repeat mode
   SendShuffleMode(app_->playlist_manager()->sequence()->shuffle_mode());
   SendRepeatMode(app_->playlist_manager()->sequence()->repeat_mode());
+
+  // We send all first data
+  pb::remote::Message msg;
+  msg.set_type(pb::remote::FIRST_DATA_SENT_COMPLETE);
+  SendDataToClients(&msg);
 }
 
 void OutgoingDataCreator::CurrentSongChanged(const Song& song, const QString& uri, const QImage& img) {
