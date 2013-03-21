@@ -824,7 +824,7 @@ bool TagReader::ReadCloudFile(const QUrl& download_url,
   }
 #ifdef TAGLIB_HAS_OPUS
   else if (mime_type == "application/opus" ||
-             mime_type == "audio/opus") {
+           mime_type == "audio/opus") {
     tag.reset(new TagLib::Ogg::Opus::File(
         stream,
         true,
@@ -832,7 +832,8 @@ bool TagReader::ReadCloudFile(const QUrl& download_url,
   }
 #endif
   else if (mime_type == "application/x-flac" ||
-             mime_type == "audio/flac") {
+           mime_type == "audio/flac" ||
+           mime_type == "audio/x-flac") {
     tag.reset(new TagLib::FLAC::File(
         stream,
         TagLib::ID3v2::FrameFactory::instance(),
