@@ -177,6 +177,7 @@ bool CloudFileService::IsSupportedMimeType(const QString& mime_type) const {
          mime_type == "audio/mpeg" ||
          mime_type == "audio/mp4" ||
          mime_type == "audio/flac" ||
+         mime_type == "audio/x-flac" ||
          mime_type == "application/ogg" ||
          mime_type == "application/x-flac" ||
          mime_type == "audio/x-ms-wma";
