@@ -131,20 +131,22 @@ void RemoteClient::DisconnectClient(pb::remote::ReasonDisconnect reason) {
 }
 
 void RemoteClient::SendData(pb::remote::Message *msg) {
-  // Serialize the message
-  std::string data = msg->SerializeAsString();
+  if (authenticated_) {
+    // Serialize the message
+    std::string data = msg->SerializeAsString();
 
-  // Check if we are still connected
-  if (client_->state() == QTcpSocket::ConnectedState) {
-    // write the length of the data first
-    QDataStream s(client_);
-    s << qint32(data.length());
-    s.writeRawData(data.data(), data.length());
+    // Check if we are still connected
+    if (client_->state() == QTcpSocket::ConnectedState) {
+      // write the length of the data first
+      QDataStream s(client_);
+      s << qint32(data.length());
+      s.writeRawData(data.data(), data.length());
 
-    // Do NOT flush data here! If the client is already disconnected, it
-    // causes a SIGPIPE termination!!!
-  } else {
-    client_->close();
+      // Do NOT flush data here! If the client is already disconnected, it
+      // causes a SIGPIPE termination!!!
+    } else {
+      client_->close();
+    }
   }
 }
 

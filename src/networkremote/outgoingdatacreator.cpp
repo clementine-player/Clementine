@@ -125,6 +125,10 @@ void OutgoingDataCreator::SendAllPlaylists() {
 }
 
 void OutgoingDataCreator::ActiveChanged(Playlist* playlist) {
+  // Send the tracks of the active playlist
+  SendPlaylistSongs(playlist->id());
+
+  // Send the changed message after sending the playlist songs
   pb::remote::Message msg;
   msg.set_type(pb::remote::ACTIVE_PLAYLIST_CHANGED);
   msg.mutable_response_active_changed()->set_id(playlist->id());
