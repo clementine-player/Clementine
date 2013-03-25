@@ -24,6 +24,7 @@
 #include "config.h"
 #include "widgets/osd.h"
 
+class QAbstractButton;
 class QScrollArea;
 class QTreeWidgetItem;
 
@@ -118,6 +119,7 @@ signals:
 
 private slots:
   void CurrentItemChanged(QTreeWidgetItem* item);
+  void DialogButtonClicked(QAbstractButton* button);
 
 private:
   struct PageData {
@@ -128,6 +130,8 @@ private:
 
   QTreeWidgetItem* AddCategory(const QString& name);
   void AddPage(Page id, SettingsPage* page, QTreeWidgetItem* parent = NULL);
+
+  void Save();
 
 private:
   Application* app_;
