@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-03-10 08:25+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2013-03-11 13:48+0000\n"
+"Last-Translator: Sérgio Marques <smarquespt@gmail.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: pt\n"
@@ -78,7 +78,7 @@ msgstr "%1 em %2"
 msgid "%1 playlists (%2)"
 msgstr "%1 listas de reprodução (%2)"
 
-#: playlist/playlistmanager.cpp:315
+#: playlist/playlistmanager.cpp:325
 #, qt-format
 msgid "%1 selected of"
 msgstr "selecionada(s) %1 de"
@@ -103,7 +103,7 @@ msgstr "%1 faixas encontradas"
 msgid "%1 songs found (showing %2)"
 msgstr "%1 faixas encontradas (a exibir %2)"
 
-#: playlist/playlistmanager.cpp:321
+#: playlist/playlistmanager.cpp:331
 #, qt-format
 msgid "%1 tracks"
 msgstr "%1 faixas"
@@ -237,7 +237,7 @@ msgstr "0 px."
 msgid "1 day"
 msgstr "1 dia"
 
-#: playlist/playlistmanager.cpp:321
+#: playlist/playlistmanager.cpp:331
 msgid "1 track"
 msgstr "1 faixa"
 
@@ -472,7 +472,7 @@ msgstr "Adicionar género"
 
 #: ../bin/src/ui_notificationssettingspage.h:398
 msgid "Add song grouping tag"
-msgstr ""
+msgstr "Adicionar grupo"
 
 #: ../bin/src/ui_notificationssettingspage.h:410
 msgid "Add song length tag"
@@ -480,7 +480,7 @@ msgstr "Adicionar duração"
 
 #: ../bin/src/ui_notificationssettingspage.h:395
 msgid "Add song performer tag"
-msgstr ""
+msgstr "Adicionar intérprete"
 
 #: ../bin/src/ui_notificationssettingspage.h:413
 msgid "Add song play count"
@@ -832,7 +832,7 @@ msgstr "Imagem de fundo"
 msgid "Background opacity"
 msgstr "Opacidade do fundo"
 
-#: core/database.cpp:703
+#: core/database.cpp:710
 msgid "Backing up database"
 msgstr "A copiar base de dados"
 
@@ -1452,7 +1452,7 @@ msgstr "Caminho DBus"
 msgid "Dance"
 msgstr "Dança"
 
-#: core/database.cpp:657
+#: core/database.cpp:664
 msgid ""
 "Database corruption detected. Please read https://code.google.com/p"
 "/clementine-player/wiki/DatabaseCorruption for instructions on how to "
@@ -2342,7 +2342,7 @@ msgstr "Agrupar por género/artista/álbum"
 #: playlist/playlist.cpp:1215 ui/organisedialog.cpp:61
 #: ../bin/src/ui_edittagdialog.h:691
 msgid "Grouping"
-msgstr ""
+msgstr "Grupo"
 
 #: podcasts/podcasturlloader.cpp:196
 msgid "HTML page did not contain any RSS feeds"
@@ -2489,7 +2489,7 @@ msgstr "Inserir..."
 msgid "Installed"
 msgstr "Instalado"
 
-#: core/database.cpp:642
+#: core/database.cpp:649
 msgid "Integrity check"
 msgstr "Verificação de integridade"
 
@@ -3395,7 +3395,7 @@ msgstr "Em pausa"
 #: playlist/playlist.cpp:1214 ui/organisedialog.cpp:60
 #: ../bin/src/ui_edittagdialog.h:690
 msgid "Performer"
-msgstr ""
+msgstr "Intérprete"
 
 #: widgets/fancytabwidget.cpp:653
 msgid "Plain sidebar"
@@ -3454,7 +3454,7 @@ msgid "Player options"
 msgstr "Opções do reprodutor"
 
 #: playlist/playlistcontainer.cpp:273 playlist/playlistmanager.cpp:78
-#: playlist/playlistmanager.cpp:386 playlist/playlisttabbar.cpp:290
+#: playlist/playlistmanager.cpp:396 playlist/playlisttabbar.cpp:290
 msgid "Playlist"
 msgstr "Lista de reprodução"
 
@@ -4765,7 +4765,7 @@ msgstr "Incapaz de transferir %1 (%2)"
 
 #: core/song.cpp:350 library/librarymodel.cpp:307 library/librarymodel.cpp:312
 #: library/librarymodel.cpp:969 playlist/playlistdelegates.cpp:309
-#: playlist/playlistmanager.cpp:394 playlist/playlistmanager.cpp:397
+#: playlist/playlistmanager.cpp:404 playlist/playlistmanager.cpp:407
 #: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:424
 #: ui/edittagdialog.cpp:465
 msgid "Unknown"
@@ -4937,7 +4937,7 @@ msgid "Variable bit rate"
 msgstr "Taxa de dados variável"
 
 #: globalsearch/globalsearchmodel.cpp:104 library/librarymodel.cpp:240
-#: playlist/playlistmanager.cpp:409 ui/albumcovermanager.cpp:247
+#: playlist/playlistmanager.cpp:419 ui/albumcovermanager.cpp:247
 msgid "Various artists"
 msgstr "Vários artistas"
 

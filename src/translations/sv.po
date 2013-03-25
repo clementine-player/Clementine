@@ -3,6 +3,7 @@
 # This file is distributed under the same license as the Clementine package.
 # 
 # Translators:
+# Christian Svensson <chris.sv88@gmail.com>, 2013.
 # Daniel Sandman <revoltism@gmail.com>, 2012.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
 #   <kristianm24@gmail.com>, 2012.
@@ -14,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-03-10 08:26+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2013-03-24 23:57+0000\n"
+"Last-Translator: TraN <chris.sv88@gmail.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: sv\n"
@@ -81,7 +82,7 @@ msgstr "%1 av %2"
 msgid "%1 playlists (%2)"
 msgstr "%1 spellistor (%2)"
 
-#: playlist/playlistmanager.cpp:315
+#: playlist/playlistmanager.cpp:325
 #, qt-format
 msgid "%1 selected of"
 msgstr "%1 vald(a) av"
@@ -106,7 +107,7 @@ msgstr "%1 låtar hittades"
 msgid "%1 songs found (showing %2)"
 msgstr "%1 låtar hittades (visar %2)"
 
-#: playlist/playlistmanager.cpp:321
+#: playlist/playlistmanager.cpp:331
 #, qt-format
 msgid "%1 tracks"
 msgstr "%1 spår"
@@ -240,13 +241,13 @@ msgstr "0px"
 msgid "1 day"
 msgstr "1 dag"
 
-#: playlist/playlistmanager.cpp:321
+#: playlist/playlistmanager.cpp:331
 msgid "1 track"
 msgstr "1 spår"
 
 #: ../bin/src/ui_networkremotesettingspage.h:187
 msgid "127.0.0.1"
-msgstr ""
+msgstr "127.0.0.1"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:143
 #: ../bin/src/ui_magnatunesettingspage.h:174
@@ -255,7 +256,7 @@ msgstr "128k MP3"
 
 #: ../bin/src/ui_appearancesettingspage.h:291
 msgid "40%"
-msgstr ""
+msgstr "40%"
 
 #: library/library.cpp:58
 msgid "50 random tracks"
@@ -299,7 +300,7 @@ msgstr "Kräver ett Spotify Premium-konto."
 
 #: ../bin/src/ui_networkremotesettingspage.h:179
 msgid "A client can connect only, if the correct code was entered."
-msgstr ""
+msgstr "Fjärrkontrollen kan endast ansluta om rätt kod anges."
 
 #: smartplaylists/wizard.cpp:78
 msgid ""
@@ -343,7 +344,7 @@ msgstr "ÄRAD VARE HYPNOTOAD"
 
 #: ui/albumcoversearcher.cpp:166
 msgid "Abort"
-msgstr ""
+msgstr "Avbryt"
 
 #: ui/about.cpp:32
 #, qt-format
@@ -835,7 +836,7 @@ msgstr "Bakgrundsbild"
 msgid "Background opacity"
 msgstr "Bakgrundsopacitet"
 
-#: core/database.cpp:703
+#: core/database.cpp:710
 msgid "Backing up database"
 msgstr "Säkerhetskopiera databasen"
 
@@ -1069,7 +1070,7 @@ msgstr "Clementine kan spela musik som du laddat upp till Google Drive"
 
 #: ../bin/src/ui_ubuntuonesettingspage.h:111
 msgid "Clementine can play music that you have uploaded to Ubuntu One"
-msgstr ""
+msgstr "Clementine kan spela upp musik som du har laddat upp till Ubuntu One"
 
 #: ../bin/src/ui_notificationssettingspage.h:431
 msgid "Clementine can show a message when the track changes."
@@ -1455,7 +1456,7 @@ msgstr "Dbus-sökväg"
 msgid "Dance"
 msgstr "Dans"
 
-#: core/database.cpp:657
+#: core/database.cpp:664
 msgid ""
 "Database corruption detected. Please read https://code.google.com/p"
 "/clementine-player/wiki/DatabaseCorruption for instructions on how to "
@@ -1484,7 +1485,7 @@ msgstr "Sänk volymen med 4%"
 
 #: core/commandlineoptions.cpp:159
 msgid "Decrease the volume by <value> percent"
-msgstr ""
+msgstr "Minska volymen med <value> procent"
 
 #: core/globalshortcuts.cpp:53 wiimotedev/wiimotesettingspage.cpp:104
 msgid "Decrease volume"
@@ -1620,7 +1621,7 @@ msgstr "Avaktivera tidsvisning"
 
 #: ../bin/src/ui_appearancesettingspage.h:296
 msgid "Disable moodbar generation"
-msgstr ""
+msgstr "Inaktivera moodbar-generering"
 
 #: globalsearch/searchproviderstatuswidget.cpp:47
 #: ../bin/src/ui_notificationssettingspage.h:433
@@ -1876,7 +1877,7 @@ msgstr ""
 
 #: ../bin/src/ui_networkremotesettingspage.h:184
 msgid "Enter this IP in the App to connect to Clementine."
-msgstr ""
+msgstr "Ange detta IP-nummer i Appen för att ansluta till Clementine."
 
 #: ../bin/src/ui_libraryfilterwidget.h:87
 msgid "Entire collection"
@@ -2469,7 +2470,7 @@ msgstr "Öka volymen med 4%"
 
 #: core/commandlineoptions.cpp:158
 msgid "Increase the volume by <value> percent"
-msgstr ""
+msgstr "Öka volymen med <value> procent"
 
 #: core/globalshortcuts.cpp:52 wiimotedev/wiimotesettingspage.cpp:103
 msgid "Increase volume"
@@ -2492,7 +2493,7 @@ msgstr "Infoga..."
 msgid "Installed"
 msgstr "Installerad"
 
-#: core/database.cpp:642
+#: core/database.cpp:649
 msgid "Integrity check"
 msgstr "Integritetskontroll"
 
@@ -3248,7 +3249,7 @@ msgid ""
 "10.x.x.x\n"
 "172.16.0.0 - 172.31.255.255\n"
 "192.168.x.x"
-msgstr ""
+msgstr "Acceptera endast anslutningar från klienter inom dessa ip ranges:⏎ 10.x.x.x⏎ 172.16.0.0 - 172.31.255.255⏎ 192.168.x.x"
 
 #: ../bin/src/ui_querysortpage.h:142
 msgid "Only show the first"
@@ -3256,7 +3257,7 @@ msgstr "Visa endast de första"
 
 #: ../bin/src/ui_appearancesettingspage.h:290
 msgid "Opacity"
-msgstr ""
+msgstr "Opacitet"
 
 #: internet/digitallyimportedservicebase.cpp:179
 #: internet/groovesharkservice.cpp:544 internet/icecastservice.cpp:296
@@ -3457,7 +3458,7 @@ msgid "Player options"
 msgstr "Spelaralternativ"
 
 #: playlist/playlistcontainer.cpp:273 playlist/playlistmanager.cpp:78
-#: playlist/playlistmanager.cpp:386 playlist/playlisttabbar.cpp:290
+#: playlist/playlistmanager.cpp:396 playlist/playlisttabbar.cpp:290
 msgid "Playlist"
 msgstr "Spellista"
 
@@ -3831,7 +3832,7 @@ msgstr "Begränsa till ASCII-tecken"
 
 #: ../bin/src/ui_behavioursettingspage.h:189
 msgid "Resume playback on start"
-msgstr ""
+msgstr "Fortsätt uppspelning vid start"
 
 #: internet/groovesharkservice.cpp:756
 msgid "Retrieving Grooveshark My Music songs"
@@ -4768,7 +4769,7 @@ msgstr "Det går inte att hämta %1 (%2)"
 
 #: core/song.cpp:350 library/librarymodel.cpp:307 library/librarymodel.cpp:312
 #: library/librarymodel.cpp:969 playlist/playlistdelegates.cpp:309
-#: playlist/playlistmanager.cpp:394 playlist/playlistmanager.cpp:397
+#: playlist/playlistmanager.cpp:404 playlist/playlistmanager.cpp:407
 #: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:424
 #: ui/edittagdialog.cpp:465
 msgid "Unknown"
@@ -4846,7 +4847,7 @@ msgstr "Använd GNOMEs snabbtangenter"
 
 #: ../bin/src/ui_networkremotesettingspage.h:169
 msgid "Use Remotecontrol"
-msgstr ""
+msgstr "Använd fjärrstyrning"
 
 #: ../bin/src/ui_playbacksettingspage.h:274
 msgid "Use Replay Gain metadata if it is available"
@@ -4870,7 +4871,7 @@ msgstr "Använd autentisering"
 
 #: ../bin/src/ui_networkremotesettingspage.h:181
 msgid "Use authentication code"
-msgstr ""
+msgstr "Använd behörighetskod"
 
 #: ../bin/src/ui_transcoderoptionsvorbis.h:203
 msgid "Use bitrate management engine"
@@ -4940,7 +4941,7 @@ msgid "Variable bit rate"
 msgstr "Variabel bithastighet"
 
 #: globalsearch/globalsearchmodel.cpp:104 library/librarymodel.cpp:240
-#: playlist/playlistmanager.cpp:409 ui/albumcovermanager.cpp:247
+#: playlist/playlistmanager.cpp:419 ui/albumcovermanager.cpp:247
 msgid "Various artists"
 msgstr "Diverse artister"
 
@@ -5116,7 +5117,7 @@ msgstr "Igår"
 #: playlist/playlistlistcontainer.cpp:296
 #, qt-format
 msgid "You are about to delete %1 playlists, are you sure?"
-msgstr ""
+msgstr "Du kommer att radera %1 spellistor, är du säker?"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:132
 msgid "You are about to download the following albums"
@@ -5214,7 +5215,7 @@ msgstr "Du kommer inte kunna lyssna på radiostationer på Last.fm eftersom du i
 
 #: ../bin/src/ui_networkremotesettingspage.h:186
 msgid "Your IP address:"
-msgstr ""
+msgstr "Din IP-adress:"
 
 #: internet/lastfmsettingspage.cpp:80
 msgid "Your Last.fm credentials were incorrect"
