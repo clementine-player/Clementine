@@ -23,6 +23,7 @@
 #include "libraryview.h"
 #include "librarywatcher.h"
 #include "ui_librarysettingspage.h"
+#include "core/application.h"
 #include "core/utilities.h"
 #include "playlist/playlistdelegates.h"
 #include "ui/iconloader.h"
