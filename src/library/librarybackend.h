@@ -157,6 +157,7 @@ class LibraryBackend : public LibraryBackendInterface {
   bool ExecQuery(LibraryQuery* q);
   SongList ExecLibraryQuery(LibraryQuery* query);
   SongList FindSongs(const smart_playlists::Search& search);
+  SongList GetAllSongs();
 
   void IncrementPlayCountAsync(int id);
   void IncrementSkipCountAsync(int id, float progress);

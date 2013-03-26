@@ -28,9 +28,11 @@
 #include "ui/iconloader.h"
 #include "ui/settingsdialog.h"
 
-#include <QFileDialog>
-#include <QSettings>
 #include <QDir>
+#include <QFileDialog>
+#include <QMessageBox>
+#include <QSettings>
+#include <QtConcurrentRun>
 
 const char* LibrarySettingsPage::kSettingsGroup = "LibraryConfig";
 
@@ -49,6 +51,7 @@ LibrarySettingsPage::LibrarySettingsPage(SettingsDialog* dialog)
 
   connect(ui_->add, SIGNAL(clicked()), SLOT(Add()));
   connect(ui_->remove, SIGNAL(clicked()), SLOT(Remove()));
+  connect(ui_->sync_stats_button, SIGNAL(clicked()), SLOT(WriteAllSongsStatisticsToFiles()));
 }
 
 LibrarySettingsPage::~LibrarySettingsPage() {
@@ -137,4 +140,16 @@ void LibrarySettingsPage::Load() {
   s.beginGroup(LibraryBackend::kSettingsGroup);
   ui_->save_statistics_in_file->setChecked(s.value("save_statistics_in_file", false).toBool());
   s.endGroup();
+}
+
+void LibrarySettingsPage::WriteAllSongsStatisticsToFiles() {
+  QMessageBox confirmation_dialog(
+      QMessageBox::Question,
+      tr("Write all songs statistics into songs' files"),
+      tr("Are you sure you want to write song's statistics into song's file for all the songs of your library?"),
+      QMessageBox::Yes | QMessageBox::Cancel);
+  if (confirmation_dialog.exec() != QMessageBox::Yes) {
+    return;
+  }
+  QtConcurrent::run(dialog()->app()->library(), &Library::WriteAllSongsStatisticsToFiles);
 }
