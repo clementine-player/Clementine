@@ -19,6 +19,7 @@
 # Martin Herkt <lachs0r@hong-mailing.de>, 2011.
 # Martin Herkt <luck3r@phicode.de>, 2010.
 # Paul E. <>, 2012.
+# Phillip Schichtel <quick_wango@code-infection.de>, 2013.
 #   <robertbeckmann@fastmail.fm>, 2012.
 # Robin Cornelio Thomas <rc.thomas90@gmail.com>, 2012.
 #   <stefan@stefantiemann.de>, 2011.
@@ -28,8 +29,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-03-10 08:26+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2013-03-19 13:13+0000\n"
+"Last-Translator: quick_wango <quick_wango@code-infection.de>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: de\n"
@@ -95,7 +96,7 @@ msgstr "%1 an %2"
 msgid "%1 playlists (%2)"
 msgstr "%1 Wiedergabelisten (%2)"
 
-#: playlist/playlistmanager.cpp:315
+#: playlist/playlistmanager.cpp:325
 #, qt-format
 msgid "%1 selected of"
 msgstr "%1 ausgewählt von"
@@ -120,7 +121,7 @@ msgstr "%1 Titel gefunden"
 msgid "%1 songs found (showing %2)"
 msgstr "%1 Titel gefunden (zeige %2)"
 
-#: playlist/playlistmanager.cpp:321
+#: playlist/playlistmanager.cpp:331
 #, qt-format
 msgid "%1 tracks"
 msgstr "%1 Stücke"
@@ -254,7 +255,7 @@ msgstr "0px"
 msgid "1 day"
 msgstr "1 Tag"
 
-#: playlist/playlistmanager.cpp:321
+#: playlist/playlistmanager.cpp:331
 msgid "1 track"
 msgstr "1 Stück"
 
@@ -489,7 +490,7 @@ msgstr "Genre des aktuellen Titels"
 
 #: ../bin/src/ui_notificationssettingspage.h:398
 msgid "Add song grouping tag"
-msgstr ""
+msgstr "Titelgruppierung hinzufügen"
 
 #: ../bin/src/ui_notificationssettingspage.h:410
 msgid "Add song length tag"
@@ -849,7 +850,7 @@ msgstr "Hintergrundbild"
 msgid "Background opacity"
 msgstr "Deckkraft:"
 
-#: core/database.cpp:703
+#: core/database.cpp:710
 msgid "Backing up database"
 msgstr "Sichere die Datenbank"
 
@@ -1469,7 +1470,7 @@ msgstr "DBus Pfad"
 msgid "Dance"
 msgstr "Dance"
 
-#: core/database.cpp:657
+#: core/database.cpp:664
 msgid ""
 "Database corruption detected. Please read https://code.google.com/p"
 "/clementine-player/wiki/DatabaseCorruption for instructions on how to "
@@ -1890,7 +1891,7 @@ msgstr "Geben Sie den Namen des Ordners ein"
 
 #: ../bin/src/ui_networkremotesettingspage.h:184
 msgid "Enter this IP in the App to connect to Clementine."
-msgstr ""
+msgstr "Gib diese IP in der App ein um dich mit Clementine zu verbinden."
 
 #: ../bin/src/ui_libraryfilterwidget.h:87
 msgid "Entire collection"
@@ -2359,7 +2360,7 @@ msgstr "Genre/Interpret/Album"
 #: playlist/playlist.cpp:1215 ui/organisedialog.cpp:61
 #: ../bin/src/ui_edittagdialog.h:691
 msgid "Grouping"
-msgstr ""
+msgstr "Gruppierung"
 
 #: podcasts/podcasturlloader.cpp:196
 msgid "HTML page did not contain any RSS feeds"
@@ -2506,7 +2507,7 @@ msgstr "Einfügen..."
 msgid "Installed"
 msgstr "Installiert"
 
-#: core/database.cpp:642
+#: core/database.cpp:649
 msgid "Integrity check"
 msgstr "Integritätsprüfung"
 
@@ -3471,7 +3472,7 @@ msgid "Player options"
 msgstr "Player Einstellungen"
 
 #: playlist/playlistcontainer.cpp:273 playlist/playlistmanager.cpp:78
-#: playlist/playlistmanager.cpp:386 playlist/playlisttabbar.cpp:290
+#: playlist/playlistmanager.cpp:396 playlist/playlisttabbar.cpp:290
 msgid "Playlist"
 msgstr "Wiedergabeliste"
 
@@ -4782,7 +4783,7 @@ msgstr "Konnte %1 nicht herunterladen (%2)"
 
 #: core/song.cpp:350 library/librarymodel.cpp:307 library/librarymodel.cpp:312
 #: library/librarymodel.cpp:969 playlist/playlistdelegates.cpp:309
-#: playlist/playlistmanager.cpp:394 playlist/playlistmanager.cpp:397
+#: playlist/playlistmanager.cpp:404 playlist/playlistmanager.cpp:407
 #: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:424
 #: ui/edittagdialog.cpp:465
 msgid "Unknown"
@@ -4954,7 +4955,7 @@ msgid "Variable bit rate"
 msgstr "Variable Bitrate"
 
 #: globalsearch/globalsearchmodel.cpp:104 library/librarymodel.cpp:240
-#: playlist/playlistmanager.cpp:409 ui/albumcovermanager.cpp:247
+#: playlist/playlistmanager.cpp:419 ui/albumcovermanager.cpp:247
 msgid "Various artists"
 msgstr "Verschiedene Interpreten"
 

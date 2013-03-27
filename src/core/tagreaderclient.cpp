@@ -147,6 +147,20 @@ bool TagReaderClient::SaveFileBlocking(const QString& filename, const Song& meta
   return ret;
 }
 
+bool TagReaderClient::UpdateSongStatisticsBlocking(const Song& metadata) {
+  Q_ASSERT(QThread::currentThread() != thread());
+
+  bool ret = false;
+
+  TagReaderReply* reply = UpdateSongStatistics(metadata);
+  if (reply->WaitForFinished()) {
+    ret = reply->message().save_song_statistics_to_file_response().success();
+  }
+  reply->deleteLater();
+
+  return ret;
+}
+
 bool TagReaderClient::IsMediaFileBlocking(const QString& filename) {
   Q_ASSERT(QThread::currentThread() != thread());
 

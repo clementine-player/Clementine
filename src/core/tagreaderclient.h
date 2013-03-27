@@ -57,6 +57,7 @@ public:
   // be called from the TagReaderClient's thread.
   void ReadFileBlocking(const QString& filename, Song* song);
   bool SaveFileBlocking(const QString& filename, const Song& metadata);
+  bool UpdateSongStatisticsBlocking(const Song& metadata);
   bool IsMediaFileBlocking(const QString& filename);
   QImage LoadEmbeddedArtBlocking(const QString& filename);
 

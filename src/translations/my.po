@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-03-10 23:24+0000\n"
+"PO-Revision-Date: 2013-03-11 13:09+0000\n"
 "Last-Translator: Yhal Htet Aung <jumoun@gmail.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -75,7 +75,7 @@ msgstr "%1 မှအပေါ် %2"
 msgid "%1 playlists (%2)"
 msgstr "%1 သီချင်းစာရင်းများ (%2)"
 
-#: playlist/playlistmanager.cpp:315
+#: playlist/playlistmanager.cpp:325
 #, qt-format
 msgid "%1 selected of"
 msgstr "%1 ကိုရွေးချယ်ခဲ့"
@@ -100,7 +100,7 @@ msgstr "%1 သီချင်းများရှာတွေ့"
 msgid "%1 songs found (showing %2)"
 msgstr "%1 သီချင်းများရှာတွေ့ (%2 ပြသနေ)"
 
-#: playlist/playlistmanager.cpp:321
+#: playlist/playlistmanager.cpp:331
 #, qt-format
 msgid "%1 tracks"
 msgstr "%1 တေးသံလမ်းကြောများ"
@@ -168,11 +168,11 @@ msgstr "အကူအညီ(&H)"
 #: playlist/playlistheader.cpp:70
 #, qt-format
 msgid "&Hide %1"
-msgstr "ဖုံးကွယ် %1(&H)"
+msgstr "ဖုံးကွယ်(&H) %1"
 
 #: playlist/playlistheader.cpp:33
 msgid "&Hide..."
-msgstr "ဖုံးကွယ်... (&H)"
+msgstr "ဖုံးကွယ်(&H)... "
 
 #: playlist/playlistheader.cpp:39
 msgid "&Left"
@@ -234,7 +234,7 @@ msgstr "၀ပီအိတ်စ်"
 msgid "1 day"
 msgstr "တစ်နေ့"
 
-#: playlist/playlistmanager.cpp:321
+#: playlist/playlistmanager.cpp:331
 msgid "1 track"
 msgstr "တေးသံလမ်းကြောတစ်ခု"
 
@@ -829,7 +829,7 @@ msgstr "နောက်ခံပုံ"
 msgid "Background opacity"
 msgstr "နောက်ခံအလင်းပိတ်"
 
-#: core/database.cpp:703
+#: core/database.cpp:710
 msgid "Backing up database"
 msgstr "အချက်အလက်အစုအရန်မှတ်သိမ်း"
 
@@ -1449,7 +1449,7 @@ msgstr "ဒီဘတ်စ်လမ်းကြောင်း"
 msgid "Dance"
 msgstr "အက"
 
-#: core/database.cpp:657
+#: core/database.cpp:664
 msgid ""
 "Database corruption detected. Please read https://code.google.com/p"
 "/clementine-player/wiki/DatabaseCorruption for instructions on how to "
@@ -2486,7 +2486,7 @@ msgstr "ထည့်သွင်း..."
 msgid "Installed"
 msgstr "သွင်းပြီး"
 
-#: core/database.cpp:642
+#: core/database.cpp:649
 msgid "Integrity check"
 msgstr "ခိုင်မြဲမှုစစ်ဆေး"
 
@@ -3451,7 +3451,7 @@ msgid "Player options"
 msgstr "ဖွင့်စက်ရွေးပိုင်ခွင့်များ"
 
 #: playlist/playlistcontainer.cpp:273 playlist/playlistmanager.cpp:78
-#: playlist/playlistmanager.cpp:386 playlist/playlisttabbar.cpp:290
+#: playlist/playlistmanager.cpp:396 playlist/playlisttabbar.cpp:290
 msgid "Playlist"
 msgstr "သီချင်းစာရင်း"
 
@@ -4762,7 +4762,7 @@ msgstr "မကူးဆွဲနိုင် %1 (%2)"
 
 #: core/song.cpp:350 library/librarymodel.cpp:307 library/librarymodel.cpp:312
 #: library/librarymodel.cpp:969 playlist/playlistdelegates.cpp:309
-#: playlist/playlistmanager.cpp:394 playlist/playlistmanager.cpp:397
+#: playlist/playlistmanager.cpp:404 playlist/playlistmanager.cpp:407
 #: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:424
 #: ui/edittagdialog.cpp:465
 msgid "Unknown"
@@ -4934,7 +4934,7 @@ msgid "Variable bit rate"
 msgstr "ဘစ်နှုန်းကိန်းရှင်"
 
 #: globalsearch/globalsearchmodel.cpp:104 library/librarymodel.cpp:240
-#: playlist/playlistmanager.cpp:409 ui/albumcovermanager.cpp:247
+#: playlist/playlistmanager.cpp:419 ui/albumcovermanager.cpp:247
 msgid "Various artists"
 msgstr "အနုပညာရှင်များအမျိုးမျိုး"
 

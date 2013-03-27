@@ -21,6 +21,8 @@
 #include "librarybackend.h"
 #include "core/application.h"
 #include "core/database.h"
+#include "core/tagreaderclient.h"
+#include "core/taskmanager.h"
 #include "smartplaylists/generator.h"
 #include "smartplaylists/querygenerator.h"
 #include "smartplaylists/search.h"
@@ -154,4 +156,19 @@ void Library::ResumeWatcher() {
 void Library::ReloadSettings() {
   backend_->ReloadSettingsAsync();
   watcher_->ReloadSettingsAsync();
+}
+
+void Library::WriteAllSongsStatisticsToFiles() {
+  const SongList all_songs = backend_->GetAllSongs();
+
+  const int task_id = app_->task_manager()->StartTask(tr("Saving songs statistics into songs files"));
+  app_->task_manager()->SetTaskBlocksLibraryScans(task_id);
+
+  const int nb_songs = all_songs.size();
+  int i = 0;
+  foreach (const Song& song, all_songs) {
+    TagReaderClient::Instance()->UpdateSongStatisticsBlocking(song);
+    app_->task_manager()->SetTaskProgress(task_id, ++i, nb_songs);
+  }
+  app_->task_manager()->SetTaskFinished(task_id);
 }

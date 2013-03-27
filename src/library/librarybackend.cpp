@@ -964,6 +964,13 @@ SongList LibraryBackend::FindSongs(const smart_playlists::Search& search) {
   return ret;
 }
 
+SongList LibraryBackend::GetAllSongs() {
+  // Get all the songs!
+  return FindSongs(smart_playlists::Search(
+      smart_playlists::Search::Type_All, smart_playlists::Search::TermList(),
+      smart_playlists::Search::Sort_FieldAsc, smart_playlists::SearchTerm::Field_Artist, -1));
+}
+
 void LibraryBackend::IncrementPlayCount(int id) {
   if (id == -1)
     return;
