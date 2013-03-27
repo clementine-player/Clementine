@@ -120,8 +120,8 @@ void NetworkRemote::AcceptConnection() {
     // Setting up the signals, but only once
     connect(incoming_data_parser_.get(), SIGNAL(SendClementineInfo()),
             outgoing_data_creator_.get(), SLOT(SendClementineInfo()));
-    connect(incoming_data_parser_.get(), SIGNAL(SendFirstData()),
-            outgoing_data_creator_.get(), SLOT(SendFirstData()));
+    connect(incoming_data_parser_.get(), SIGNAL(SendFirstData(bool)),
+            outgoing_data_creator_.get(), SLOT(SendFirstData(bool)));
     connect(incoming_data_parser_.get(), SIGNAL(SendAllPlaylists()),
             outgoing_data_creator_.get(), SLOT(SendAllPlaylists()));
     connect(incoming_data_parser_.get(), SIGNAL(SendPlaylistSongs(int)),

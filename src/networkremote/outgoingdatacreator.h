@@ -26,7 +26,7 @@ public:
 public slots:
   void SendClementineInfo();
   void SendAllPlaylists();
-  void SendFirstData();
+  void SendFirstData(bool send_playlist_songs);
   void SendPlaylistSongs(int id);
   void PlaylistChanged(Playlist*);
   void VolumeChanged(int volume);

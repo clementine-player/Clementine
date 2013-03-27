@@ -151,7 +151,7 @@ void OutgoingDataCreator::PlaylistRenamed(int id, const QString& new_name) {
   SendAllPlaylists();
 }
 
-void OutgoingDataCreator::SendFirstData() {
+void OutgoingDataCreator::SendFirstData(bool send_playlist_songs) {
   // First Send the current song
   PlaylistItemPtr item = app_->player()->GetCurrentItem();
   if (!item) {
@@ -170,7 +170,9 @@ void OutgoingDataCreator::SendFirstData() {
   SendAllPlaylists();
 
   // Send the tracks of the active playlist
-  SendPlaylistSongs(app_->playlist_manager()->active_id());
+  if (send_playlist_songs) {
+    SendPlaylistSongs(app_->playlist_manager()->active_id());
+  }
 
   // Send the current random and repeat mode
   SendShuffleMode(app_->playlist_manager()->sequence()->shuffle_mode());

@@ -69,8 +69,7 @@ void IncomingDataParser::Parse(const pb::remote::Message& msg) {
 
   // Now check what's to do
   switch (msg.type()) {
-    case pb::remote::CONNECT:     emit SendClementineInfo();
-                                  emit SendFirstData();
+    case pb::remote::CONNECT:     ClientConnect(msg);
                                   break;
     case pb::remote::DISCONNECT:  close_connection_ = true;
                                   break;
@@ -157,5 +156,18 @@ void IncomingDataParser::SetShuffleMode(const pb::remote::Shuffle& shuffle) {
        emit SetShuffleMode(PlaylistSequence::Shuffle_Albums);
        break;
   default: break;
+  }
+}
+
+void IncomingDataParser::ClientConnect(const pb::remote::Message& msg) {
+  // Always sned the Clementine infos
+  emit SendClementineInfo();
+
+  // Check if we should send the first data
+  if (!msg.request_connect().has_send_playlist_songs() // legacy
+   || msg.request_connect().send_playlist_songs()) {
+    emit SendFirstData(true);
+  } else {
+    emit SendFirstData(false);
   }
 }

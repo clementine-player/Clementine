@@ -18,7 +18,7 @@ public slots:
 
 signals:
   void SendClementineInfo();
-  void SendFirstData();
+  void SendFirstData(bool send_playlist_songs);
   void SendAllPlaylists();
   void SendPlaylistSongs(int id);
 
@@ -36,7 +36,6 @@ signals:
   void SetShuffleMode(PlaylistSequence::ShuffleMode mode);
   void SeekTo(int seconds);
 
-
 private:
   Application* app_;
   bool close_connection_;
@@ -45,6 +44,7 @@ private:
   void ChangeSong(const pb::remote::Message& msg);
   void SetRepeatMode(const pb::remote::Repeat& repeat);
   void SetShuffleMode(const pb::remote::Shuffle& shuffle);
+  void ClientConnect(const pb::remote::Message& msg);
 };
 
 #endif // INCOMINGDATAPARSER_H

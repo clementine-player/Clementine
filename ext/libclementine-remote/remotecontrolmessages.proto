@@ -152,6 +152,7 @@ message ResponseUpdateTrackPosition {
 // The connect message containing the authentication code
 message RequestConnect {
   optional int32 auth_code = 1;
+  optional bool send_playlist_songs = 2;
 }
 
 // Respone, why the connection was closed
@@ -176,7 +177,7 @@ message RequestSetTrackPosition {
 
 // The message itself
 message Message {
-  optional int32 version = 1 [default=4];
+  optional int32 version = 1 [default=5];
   optional MsgType type = 2 [default=UNKNOWN]; // What data is in the message?
 
   optional RequestConnect request_connect = 21;
