@@ -69,6 +69,13 @@ class SongTest : public ::testing::Test {
     song.ToProtobuf(&pb_song);
     tag_reader.SaveSongStatisticsToFile(filename, pb_song);
   }
+
+  static void WriteSongRatingToFile(const Song& song, const QString& filename) {
+    TagReader tag_reader;
+    ::pb::tagreader::SongMetadata pb_song;
+    song.ToProtobuf(&pb_song);
+    tag_reader.SaveSongRatingToFile(filename, pb_song);
+  }
 };
 
 
@@ -112,7 +119,7 @@ TEST_F(SongTest, FMPSRatingUser) {
   EXPECT_FLOAT_EQ(0.10, song.rating());
 
   song.set_rating(0.20);
-  WriteSongStatisticsToFile(song, r.fileName());
+  WriteSongRatingToFile(song, r.fileName());
   Song new_song = ReadSongFromFile(r.fileName());
   EXPECT_FLOAT_EQ(0.20, new_song.rating());
 }
@@ -173,11 +180,22 @@ TEST_F(SongTest, BothFMPSPOPMRating) {
   EXPECT_FLOAT_EQ(0.42, song.rating());
 }
 
-TEST_F(SongTest, RatingAndStatisticsOgg) {
+TEST_F(SongTest, RatingOgg) {
   TemporaryResource r(":/testdata/beep.ogg");
   {
     Song song = ReadSongFromFile(r.fileName());
     song.set_rating(0.20);
+    WriteSongRatingToFile(song, r.fileName());
+  }
+
+  Song new_song = ReadSongFromFile(r.fileName());
+  EXPECT_FLOAT_EQ(0.20, new_song.rating());
+}
+
+TEST_F(SongTest, StatisticsOgg) {
+  TemporaryResource r(":/testdata/beep.ogg");
+  {
+    Song song = ReadSongFromFile(r.fileName());
     song.set_playcount(1337);
     song.set_score(87);
 
@@ -185,16 +203,26 @@ TEST_F(SongTest, RatingAndStatisticsOgg) {
   }
 
   Song new_song = ReadSongFromFile(r.fileName());
-  EXPECT_FLOAT_EQ(0.20, new_song.rating());
   EXPECT_EQ(1337, new_song.playcount());
   EXPECT_EQ(87, new_song.score());
 }
 
-TEST_F(SongTest, RatingAndStatisticsFLAC) {
+TEST_F(SongTest, RatingFLAC) {
   TemporaryResource r(":/testdata/beep.flac");
   {
     Song song = ReadSongFromFile(r.fileName());
     song.set_rating(0.20);
+    WriteSongRatingToFile(song, r.fileName());
+  }
+
+  Song new_song = ReadSongFromFile(r.fileName());
+  EXPECT_FLOAT_EQ(0.20, new_song.rating());
+}
+
+TEST_F(SongTest, StatisticsFLAC) {
+  TemporaryResource r(":/testdata/beep.flac");
+  {
+    Song song = ReadSongFromFile(r.fileName());
     song.set_playcount(1337);
     song.set_score(87);
 
@@ -202,17 +230,28 @@ TEST_F(SongTest, RatingAndStatisticsFLAC) {
   }
 
   Song new_song = ReadSongFromFile(r.fileName());
-  EXPECT_FLOAT_EQ(0.20, new_song.rating());
   EXPECT_EQ(1337, new_song.playcount());
   EXPECT_EQ(87, new_song.score());
 }
 
 #ifdef TAGLIB_WITH_ASF
-TEST_F(SongTest, RatingAndStatisticsASF) {
+TEST_F(SongTest, RatingASF) {
   TemporaryResource r(":/testdata/beep.wma");
   {
     Song song = ReadSongFromFile(r.fileName());
     song.set_rating(0.20);
+
+    WriteSongRatingToFile(song, r.fileName());
+  }
+
+  Song new_song = ReadSongFromFile(r.fileName());
+  EXPECT_FLOAT_EQ(0.20, new_song.rating());
+}
+
+TEST_F(SongTest, StatisticsASF) {
+  TemporaryResource r(":/testdata/beep.wma");
+  {
+    Song song = ReadSongFromFile(r.fileName());
     song.set_playcount(1337);
     song.set_score(87);
 
@@ -220,17 +259,28 @@ TEST_F(SongTest, RatingAndStatisticsASF) {
   }
 
   Song new_song = ReadSongFromFile(r.fileName());
-  EXPECT_FLOAT_EQ(0.20, new_song.rating());
   EXPECT_EQ(1337, new_song.playcount());
   EXPECT_EQ(87, new_song.score());
 }
 #endif // TAGLIB_WITH_ASF
 
-TEST_F(SongTest, RatingAndStatisticsMP4) {
+TEST_F(SongTest, RatingMP4) {
   TemporaryResource r(":/testdata/beep.m4a");
   {
     Song song = ReadSongFromFile(r.fileName());
     song.set_rating(0.20);
+
+    WriteSongRatingToFile(song, r.fileName());
+  }
+
+  Song new_song = ReadSongFromFile(r.fileName());
+  EXPECT_FLOAT_EQ(0.20, new_song.rating());
+}
+
+TEST_F(SongTest, StatisticsMP4) {
+  TemporaryResource r(":/testdata/beep.m4a");
+  {
+    Song song = ReadSongFromFile(r.fileName());
     song.set_playcount(1337);
     song.set_score(87);
 
@@ -238,7 +288,6 @@ TEST_F(SongTest, RatingAndStatisticsMP4) {
   }
 
   Song new_song = ReadSongFromFile(r.fileName());
-  EXPECT_FLOAT_EQ(0.20, new_song.rating());
   EXPECT_EQ(1337, new_song.playcount());
   EXPECT_EQ(87, new_song.score());
 }

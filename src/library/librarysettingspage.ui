@@ -93,12 +93,19 @@
        </widget>
       </item>
       <item>
+       <widget class="QCheckBox" name="save_ratings_in_file">
+        <property name="text">
+         <string>Save ratings in file tags when possible</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QCheckBox" name="save_statistics_in_file">
         <property name="toolTip">
          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If not checked, Clementine will  try to save your ratings and other statistics only in a separate database and don't modify your files.&lt;/p&gt;&lt;p&gt;If checked, it will save statistics both in database and directly into the file each time they changed.&lt;/p&gt;&lt;p&gt;Please note it might not work for every format and, as there is no standard for doing so, other music players might not be able to read them.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
         <property name="text">
-         <string>Save ratings and statistics in file tags when possible</string>
+         <string>Save statistics in file tags when possible</string>
         </property>
        </widget>
       </item>

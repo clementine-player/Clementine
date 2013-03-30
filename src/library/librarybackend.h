@@ -192,6 +192,7 @@ class LibraryBackend : public LibraryBackendInterface {
   void SongsDiscovered(const SongList& songs);
   void SongsDeleted(const SongList& songs);
   void SongsStatisticsChanged(const SongList& songs);
+  void SongsRatingChanged(const SongList& songs);
   void DatabaseReset();
 
   void TotalSongCountUpdated(int total);
@@ -227,6 +228,7 @@ class LibraryBackend : public LibraryBackendInterface {
   QString subdirs_table_;
   QString fts_table_;
   bool save_statistics_in_file_;
+  bool save_ratings_in_file_;
 };
 
 #endif // LIBRARYBACKEND_H

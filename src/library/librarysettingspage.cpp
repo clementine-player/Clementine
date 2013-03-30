@@ -101,6 +101,7 @@ void LibrarySettingsPage::Save() {
   s.endGroup();
 
   s.beginGroup(LibraryBackend::kSettingsGroup);
+  s.setValue("save_ratings_in_file", ui_->save_ratings_in_file->isChecked());
   s.setValue("save_statistics_in_file", ui_->save_statistics_in_file->isChecked());
   s.endGroup();
 }
@@ -139,6 +140,7 @@ void LibrarySettingsPage::Load() {
   s.endGroup();
 
   s.beginGroup(LibraryBackend::kSettingsGroup);
+  ui_->save_ratings_in_file->setChecked(s.value("save_ratings_in_file", false).toBool());
   ui_->save_statistics_in_file->setChecked(s.value("save_statistics_in_file", false).toBool());
   s.endGroup();
 }

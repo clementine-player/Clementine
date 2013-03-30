@@ -53,6 +53,11 @@ void TagReaderWorker::MessageArrived(const pb::tagreader::Message& message) {
         tag_reader_.SaveSongStatisticsToFile(
             QStringFromStdString(message.save_song_statistics_to_file_request().filename()),
             message.save_song_statistics_to_file_request().metadata()));
+  } else if (message.has_save_song_rating_to_file_request()) {
+    reply.mutable_save_song_rating_to_file_response()->set_success(
+        tag_reader_.SaveSongRatingToFile(
+            QStringFromStdString(message.save_song_rating_to_file_request().filename()),
+            message.save_song_rating_to_file_request().metadata()));
   } else if (message.has_is_media_file_request()) {
     reply.mutable_is_media_file_response()->set_success(
         tag_reader_.IsMediaFile(QStringFromStdString(message.is_media_file_request().filename())));

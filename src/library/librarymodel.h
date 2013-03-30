@@ -183,7 +183,7 @@ class LibraryModel : public SimpleTreeModel<LibraryItem> {
   // From LibraryBackend
   void SongsDiscovered(const SongList& songs);
   void SongsDeleted(const SongList& songs);
-  void SongsStatisticsChanged(const SongList& songs);
+  void SongsSlightlyChanged(const SongList& songs);
   void TotalSongCountUpdatedSlot(int count);
 
   // Called after ResetAsync

@@ -37,6 +37,7 @@ namespace TagLib {
 
   namespace ID3v2 {
     class Tag;
+    class PopularimeterFrame;
   }
 }
 
@@ -57,6 +58,8 @@ class TagReader {
   // returns true if the file exists but nothing has been written inside because
   // statistics tag format is not supported for this kind of file)
   bool SaveSongStatisticsToFile(const QString& filename, const pb::tagreader::SongMetadata& song) const;
+  bool SaveSongRatingToFile(const QString& filename, const pb::tagreader::SongMetadata& song) const;
+
   bool IsMediaFile(const QString& filename) const;
   QByteArray LoadEmbeddedArt(const QString& filename) const;
 
@@ -82,8 +85,10 @@ class TagReader {
                    pb::tagreader::SongMetadata* song) const;
   void SetVorbisComments(TagLib::Ogg::XiphComment* vorbis_comments,
                          const pb::tagreader::SongMetadata& song) const;
-  void SetFMPSVorbisComments(TagLib::Ogg::XiphComment* vorbis_comments,
-                             const pb::tagreader::SongMetadata& song) const;
+  void SetFMPSStatisticsVorbisComments(TagLib::Ogg::XiphComment* vorbis_comments,
+                                       const pb::tagreader::SongMetadata& song) const;
+  void SetFMPSRatingVorbisComments(TagLib::Ogg::XiphComment* vorbis_comments,
+                                   const pb::tagreader::SongMetadata& song) const;
 
   pb::tagreader::SongMetadata_Type GuessFileType(TagLib::FileRef* fileref) const;
 
@@ -105,6 +110,7 @@ private:
   static float ConvertPOPMRating(const int POPM_rating);
   // Reciprocal
   static int ConvertToPOPMRating(const float rating);
+  static TagLib::ID3v2::PopularimeterFrame* GetPOPMFrameFromTag(TagLib::ID3v2::Tag* tag);
 
   FileRefFactory* factory_;
   QNetworkAccessManager* network_;

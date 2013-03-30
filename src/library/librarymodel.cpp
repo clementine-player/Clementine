@@ -101,7 +101,8 @@ LibraryModel::LibraryModel(LibraryBackend* backend, Application* app,
 
   connect(backend_, SIGNAL(SongsDiscovered(SongList)), SLOT(SongsDiscovered(SongList)));
   connect(backend_, SIGNAL(SongsDeleted(SongList)), SLOT(SongsDeleted(SongList)));
-  connect(backend_, SIGNAL(SongsStatisticsChanged(SongList)), SLOT(SongsStatisticsChanged(SongList)));
+  connect(backend_, SIGNAL(SongsStatisticsChanged(SongList)), SLOT(SongsSlightlyChanged(SongList)));
+  connect(backend_, SIGNAL(SongsRatingChanged(SongList)), SLOT(SongsSlightlyChanged(SongList)));
   connect(backend_, SIGNAL(DatabaseReset()), SLOT(Reset()));
   connect(backend_, SIGNAL(TotalSongCountUpdated(int)), SLOT(TotalSongCountUpdatedSlot(int)));
 
@@ -219,7 +220,7 @@ void LibraryModel::SongsDiscovered(const SongList& songs) {
   }
 }
 
-void LibraryModel::SongsStatisticsChanged(const SongList& songs) {
+void LibraryModel::SongsSlightlyChanged(const SongList& songs) {
   // This is called if there was a minor change to the songs that will not
   // normally require the library to be restructured.  We can just update our
   // internal cache of Song objects without worrying about resetting the model.

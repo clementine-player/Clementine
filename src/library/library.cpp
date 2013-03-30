@@ -168,6 +168,7 @@ void Library::WriteAllSongsStatisticsToFiles() {
   int i = 0;
   foreach (const Song& song, all_songs) {
     TagReaderClient::Instance()->UpdateSongStatisticsBlocking(song);
+    TagReaderClient::Instance()->UpdateSongRatingBlocking(song);
     app_->task_manager()->SetTaskProgress(task_id, ++i, nb_songs);
   }
   app_->task_manager()->SetTaskFinished(task_id);

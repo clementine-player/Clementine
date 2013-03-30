@@ -40,7 +40,8 @@ const char* LibraryBackend::kNewScoreSql =
 
 LibraryBackend::LibraryBackend(QObject *parent)
   : LibraryBackendInterface(parent),
-    save_statistics_in_file_(false)
+    save_statistics_in_file_(false),
+    save_ratings_in_file_(false)
 {
 }
 
@@ -1048,7 +1049,7 @@ void LibraryBackend::UpdateSongRating(int id, float rating) {
     return;
 
   Song new_song = GetSongById(id, db);
-  emit SongsStatisticsChanged(SongList() << new_song);
+  emit SongsRatingChanged(SongList() << new_song);
 }
 
 void LibraryBackend::DeleteAll() {
@@ -1080,15 +1081,34 @@ void LibraryBackend::ReloadSettingsAsync() {
 void LibraryBackend::ReloadSettings() {
   QSettings s;
   s.beginGroup(kSettingsGroup);
-  bool save_statistics_in_file = s.value("save_statistics_in_file", false).toBool();
-  // Compare with previous value to know if we should connect, disconnect or nothing
-  if (save_statistics_in_file_ && !save_statistics_in_file) {
-    disconnect(this, SIGNAL(SongsStatisticsChanged(SongList)),
-        TagReaderClient::Instance(), SLOT(UpdateSongsStatistics(SongList)));
-  } else if (!save_statistics_in_file_ && save_statistics_in_file) {
-    connect(this, SIGNAL(SongsStatisticsChanged(SongList)),
-        TagReaderClient::Instance(), SLOT(UpdateSongsStatistics(SongList)));
+
+  // Statistics
+  {
+    bool save_statistics_in_file = s.value("save_statistics_in_file", false).toBool();
+    // Compare with previous value to know if we should connect, disconnect or nothing
+    if (save_statistics_in_file_ && !save_statistics_in_file) {
+      disconnect(this, SIGNAL(SongsStatisticsChanged(SongList)),
+          TagReaderClient::Instance(), SLOT(UpdateSongsStatistics(SongList)));
+    } else if (!save_statistics_in_file_ && save_statistics_in_file) {
+      connect(this, SIGNAL(SongsStatisticsChanged(SongList)),
+          TagReaderClient::Instance(), SLOT(UpdateSongsStatistics(SongList)));
+    }
+    // Save old value
+    save_statistics_in_file_ = save_statistics_in_file;
   }
-  // Save old value
-  save_statistics_in_file_ = save_statistics_in_file;
+
+  // Rating
+  {
+    bool save_ratings_in_file = s.value("save_ratings_in_file", false).toBool();
+    // Compare with previous value to know if we should connect, disconnect or nothing
+    if (save_ratings_in_file_ && !save_ratings_in_file) {
+      disconnect(this, SIGNAL(SongsRatingChanged(SongList)),
+          TagReaderClient::Instance(), SLOT(UpdateSongsRating(SongList)));
+    } else if (!save_ratings_in_file_ && save_ratings_in_file) {
+      connect(this, SIGNAL(SongsRatingChanged(SongList)),
+          TagReaderClient::Instance(), SLOT(UpdateSongsRating(SongList)));
+    }
+    // Save old value
+    save_ratings_in_file_ = save_ratings_in_file;
+  }
 }

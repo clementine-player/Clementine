@@ -86,6 +86,24 @@ void TagReaderClient::UpdateSongsStatistics(const SongList& songs) {
   }
 }
 
+TagReaderReply* TagReaderClient::UpdateSongRating(const Song& metadata) {
+  pb::tagreader::Message message;
+  pb::tagreader::SaveSongRatingToFileRequest* req =
+      message.mutable_save_song_rating_to_file_request();
+
+  req->set_filename(DataCommaSizeFromQString(metadata.url().toLocalFile()));
+  metadata.ToProtobuf(req->mutable_metadata());
+
+  return worker_pool_->SendMessageWithReply(&message);
+}
+
+void TagReaderClient::UpdateSongsRating(const SongList& songs) {
+  foreach (const Song& song, songs) {
+    TagReaderReply* reply = UpdateSongRating(song);
+    connect(reply, SIGNAL(Finished(bool)), reply, SLOT(deleteLater()));
+  }
+}
+
 TagReaderReply* TagReaderClient::IsMediaFile(const QString& filename) {
   pb::tagreader::Message message;
   pb::tagreader::IsMediaFileRequest* req = message.mutable_is_media_file_request();
@@ -155,6 +173,20 @@ bool TagReaderClient::UpdateSongStatisticsBlocking(const Song& metadata) {
   TagReaderReply* reply = UpdateSongStatistics(metadata);
   if (reply->WaitForFinished()) {
     ret = reply->message().save_song_statistics_to_file_response().success();
+  }
+  reply->deleteLater();
+
+  return ret;
+}
+
+bool TagReaderClient::UpdateSongRatingBlocking(const Song& metadata) {
+  Q_ASSERT(QThread::currentThread() != thread());
+
+  bool ret = false;
+
+  TagReaderReply* reply = UpdateSongRating(metadata);
+  if (reply->WaitForFinished()) {
+    ret = reply->message().save_song_rating_to_file_response().success();
   }
   reply->deleteLater();
 

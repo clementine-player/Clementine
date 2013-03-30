@@ -69,6 +69,7 @@ using boost::scoped_ptr;
 # include "cloudstream.h"
 #endif
 
+#define NumberToASFAttribute(x) TagLib::ASF::Attribute(QStringToTaglibString(QString::number(x)))
 
 class FileRefFactory {
  public:
@@ -472,12 +473,16 @@ void TagReader::SetVorbisComments(TagLib::Ogg::XiphComment* vorbis_comments,
   vorbis_comments->addField("COMPILATION", StdStringToTaglibString(song.compilation() ? "1" : "0"), true);
 }
 
-void TagReader::SetFMPSVorbisComments(TagLib::Ogg::XiphComment* vorbis_comments,
+void TagReader::SetFMPSStatisticsVorbisComments(TagLib::Ogg::XiphComment* vorbis_comments,
+                                  const pb::tagreader::SongMetadata& song) const {
+  vorbis_comments->addField("FMPS_PLAYCOUNT", QStringToTaglibString(QString::number(song.playcount())));
+  vorbis_comments->addField("FMPS_RATING_AMAROK_SCORE", QStringToTaglibString(QString::number(song.score() / 100.0)));
+}
+
+void TagReader::SetFMPSRatingVorbisComments(TagLib::Ogg::XiphComment* vorbis_comments,
                                   const pb::tagreader::SongMetadata& song) const {
 
   vorbis_comments->addField("FMPS_RATING", QStringToTaglibString(QString::number(song.rating())));
-  vorbis_comments->addField("FMPS_PLAYCOUNT", QStringToTaglibString(QString::number(song.playcount())));
-  vorbis_comments->addField("FMPS_RATING_AMAROK_SCORE", QStringToTaglibString(QString::number(song.score() / 100.0)));
 }
 
 pb::tagreader::SongMetadata_Type TagReader::GuessFileType(
@@ -593,47 +598,83 @@ bool TagReader::SaveSongStatisticsToFile(const QString& filename,
     TagLib::ID3v2::Tag* tag = file->ID3v2Tag(true);
 
     // Save as FMPS
-    SetUserTextFrame("FMPS_Rating", QString::number(song.rating()), tag);
     SetUserTextFrame("FMPS_PlayCount", QString::number(song.playcount()), tag);
     SetUserTextFrame("FMPS_Rating_Amarok_Score", QString::number(song.score() / 100.0), tag);
 
     // Also save as POPM
-    TagLib::ID3v2::PopularimeterFrame* frame = NULL;
-
-    const TagLib::ID3v2::FrameListMap& map = file->ID3v2Tag()->frameListMap();
-    if (!map["POPM"].isEmpty()) {
-      frame = dynamic_cast<TagLib::ID3v2::PopularimeterFrame*>(map["POPM"].front());
-    }
-
-    if (!frame) {
-      frame = new TagLib::ID3v2::PopularimeterFrame();
-      tag->addFrame(frame);
-    }
-
-    frame->setRating(ConvertToPOPMRating(song.rating()));
+    TagLib::ID3v2::PopularimeterFrame* frame = GetPOPMFrameFromTag(tag);
     frame->setCounter(song.playcount());
 
   } else if (TagLib::FLAC::File* file = dynamic_cast<TagLib::FLAC::File*>(fileref->file())) {
     TagLib::Ogg::XiphComment* vorbis_comments = file->xiphComment(true);
-    SetFMPSVorbisComments(vorbis_comments, song);
+    SetFMPSStatisticsVorbisComments(vorbis_comments, song);
   } else if (TagLib::Ogg::XiphComment* tag = dynamic_cast<TagLib::Ogg::XiphComment*>(fileref->file()->tag())) {
-    SetFMPSVorbisComments(tag, song);
+    SetFMPSStatisticsVorbisComments(tag, song);
   }
 #ifdef TAGLIB_WITH_ASF
   else if (TagLib::ASF::File* file = dynamic_cast<TagLib::ASF::File*>(fileref->file())) {
     TagLib::ASF::Tag* tag = file->tag();
-    #define ConvertASF(x) TagLib::ASF::Attribute(QStringToTaglibString(QString::number(x)))
-    tag->addAttribute("FMPS/Rating",    ConvertASF(song.rating()));
-    tag->addAttribute("FMPS/Playcount", ConvertASF(song.playcount()));
-    tag->addAttribute("FMPS/Rating_Amarok_Score", ConvertASF(song.score() / 100.0));
-    #undef ConvertASF
+    tag->addAttribute("FMPS/Playcount", NumberToASFAttribute(song.playcount()));
+    tag->addAttribute("FMPS/Rating_Amarok_Score", NumberToASFAttribute(song.score() / 100.0));
+  }
+#endif
+  else if (TagLib::MP4::File* file = dynamic_cast<TagLib::MP4::File*>(fileref->file())) {
+    TagLib::MP4::Tag* tag = file->tag();
+    tag->itemListMap()[kMP4_FMPS_Score_ID] =      TagLib::StringList(QStringToTaglibString(QString::number(song.score() / 100.0)));
+    tag->itemListMap()[kMP4_FMPS_Playcount_ID] =  TagLib::StringList(TagLib::String::number(song.playcount()));
+  } else {
+    // Nothing to save: stop now
+    return true;
+  }
+
+  bool ret = fileref->save();
+  #ifdef Q_OS_LINUX
+  if (ret) {
+    // Linux: inotify doesn't seem to notice the change to the file unless we
+    // change the timestamps as well. (this is what touch does)
+    utimensat(0, QFile::encodeName(filename).constData(), NULL, 0);
+  }
+  #endif  // Q_OS_LINUX
+  return ret;
+}
+
+bool TagReader::SaveSongRatingToFile(const QString& filename,
+                                     const pb::tagreader::SongMetadata& song) const {
+  if (filename.isNull())
+    return false;
+
+  qLog(Debug) << "Saving song rating tags to" << filename;
+
+  scoped_ptr<TagLib::FileRef> fileref(factory_->GetFileRef(filename));
+
+  if (!fileref || fileref->isNull()) // The file probably doesn't exist
+    return false;
+
+  if (TagLib::MPEG::File* file = dynamic_cast<TagLib::MPEG::File*>(fileref->file())) {
+    TagLib::ID3v2::Tag* tag = file->ID3v2Tag(true);
+
+    // Save as FMPS
+    SetUserTextFrame("FMPS_Rating", QString::number(song.rating()), tag);
+
+    // Also save as POPM
+    TagLib::ID3v2::PopularimeterFrame* frame = GetPOPMFrameFromTag(tag);
+    frame->setRating(ConvertToPOPMRating(song.rating()));
+
+  } else if (TagLib::FLAC::File* file = dynamic_cast<TagLib::FLAC::File*>(fileref->file())) {
+    TagLib::Ogg::XiphComment* vorbis_comments = file->xiphComment(true);
+    SetFMPSRatingVorbisComments(vorbis_comments, song);
+  } else if (TagLib::Ogg::XiphComment* tag = dynamic_cast<TagLib::Ogg::XiphComment*>(fileref->file()->tag())) {
+    SetFMPSRatingVorbisComments(tag, song);
+  }
+#ifdef TAGLIB_WITH_ASF
+  else if (TagLib::ASF::File* file = dynamic_cast<TagLib::ASF::File*>(fileref->file())) {
+    TagLib::ASF::Tag* tag = file->tag();
+    tag->addAttribute("FMPS/Rating",    NumberToASFAttribute(song.rating()));
   }
 #endif
   else if (TagLib::MP4::File* file = dynamic_cast<TagLib::MP4::File*>(fileref->file())) {
     TagLib::MP4::Tag* tag = file->tag();
     tag->itemListMap()[kMP4_FMPS_Rating_ID] =     TagLib::StringList(QStringToTaglibString(QString::number(song.rating())));
-    tag->itemListMap()[kMP4_FMPS_Score_ID] =      TagLib::StringList(QStringToTaglibString(QString::number(song.score() / 100.0)));
-    tag->itemListMap()[kMP4_FMPS_Playcount_ID] =  TagLib::StringList(TagLib::String::number(song.playcount()));
   } else {
     // Nothing to save: stop now
     return true;
@@ -880,6 +921,21 @@ bool TagReader::ReadCloudFile(const QUrl& download_url,
   return false;
 }
 #endif // HAVE_GOOGLE_DRIVE
+
+TagLib::ID3v2::PopularimeterFrame* TagReader::GetPOPMFrameFromTag(TagLib::ID3v2::Tag* tag) {
+  TagLib::ID3v2::PopularimeterFrame* frame = NULL;
+
+  const TagLib::ID3v2::FrameListMap& map = tag->frameListMap();
+  if (!map["POPM"].isEmpty()) {
+    frame = dynamic_cast<TagLib::ID3v2::PopularimeterFrame*>(map["POPM"].front());
+  }
+
+  if (!frame) {
+    frame = new TagLib::ID3v2::PopularimeterFrame();
+    tag->addFrame(frame);
+  }
+  return frame;
+}
 
 float TagReader::ConvertPOPMRating(const int POPM_rating) {
   if (POPM_rating < 0x01) {

@@ -98,13 +98,21 @@ message ReadCloudFileResponse {
   optional SongMetadata metadata = 1;
 }
 
-
 message SaveSongStatisticsToFileRequest {
   optional string filename = 1;
   optional SongMetadata metadata = 2;
 }
 
 message SaveSongStatisticsToFileResponse {
+  optional bool success = 1;
+}
+
+message SaveSongRatingToFileRequest {
+  optional string filename = 1;
+  optional SongMetadata metadata = 2;
+}
+
+message SaveSongRatingToFileResponse {
   optional bool success = 1;
 }
 
@@ -129,4 +137,6 @@ message Message {
   optional SaveSongStatisticsToFileRequest save_song_statistics_to_file_request = 12;
   optional SaveSongStatisticsToFileResponse save_song_statistics_to_file_response = 13;
   
+  optional SaveSongRatingToFileRequest save_song_rating_to_file_request = 14;
+  optional SaveSongRatingToFileResponse save_song_rating_to_file_response = 15;
 }
