@@ -14,6 +14,7 @@ public:
   RemoteClient(Application* app, QTcpSocket* client);
   ~RemoteClient();
 
+  // This method checks if client is authenticated before sending the data
   void SendData(pb::remote::Message* msg);
   QAbstractSocket::SocketState State();
 
@@ -26,6 +27,9 @@ signals:
 private:
   void ParseMessage(const QByteArray& data);
   void DisconnectClient(pb::remote::ReasonDisconnect reason);
+
+  // Sends data to client without check if authenticated
+  void SendDataToClient(pb::remote::Message* msg);
 
   Application* app_;
 

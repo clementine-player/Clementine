@@ -123,30 +123,36 @@ void RemoteClient::DisconnectClient(pb::remote::ReasonDisconnect reason) {
   msg.set_version(msg.default_instance().version());
 
   msg.mutable_response_disconnect()->set_reason_disconnect(reason);
-  SendData(&msg);
+  SendDataToClient(&msg);
 
   // Just close the connection. The next time the outgoing data creator
   // sends a keep alive, the client will be deleted
   client_->close();
 }
 
+// Sends data to client without check if authenticated
+void RemoteClient::SendDataToClient(pb::remote::Message *msg) {
+  // Serialize the message
+  std::string data = msg->SerializeAsString();
+
+  // Check if we are still connected
+  if (client_->state() == QTcpSocket::ConnectedState) {
+    // write the length of the data first
+    QDataStream s(client_);
+    s << qint32(data.length());
+    s.writeRawData(data.data(), data.length());
+
+    // Do NOT flush data here! If the client is already disconnected, it
+    // causes a SIGPIPE termination!!!
+  } else {
+    client_->close();
+  }
+}
+
 void RemoteClient::SendData(pb::remote::Message *msg) {
+  // Check if client is authenticated before sending the data
   if (authenticated_) {
-    // Serialize the message
-    std::string data = msg->SerializeAsString();
-
-    // Check if we are still connected
-    if (client_->state() == QTcpSocket::ConnectedState) {
-      // write the length of the data first
-      QDataStream s(client_);
-      s << qint32(data.length());
-      s.writeRawData(data.data(), data.length());
-
-      // Do NOT flush data here! If the client is already disconnected, it
-      // causes a SIGPIPE termination!!!
-    } else {
-      client_->close();
-    }
+    SendDataToClient(msg);
   }
 }
 
