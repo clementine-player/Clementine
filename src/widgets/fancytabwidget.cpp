@@ -304,6 +304,24 @@ void FancyTabBar::paintEvent(QPaintEvent *event)
         paintTab(&p, currentIndex());
 }
 
+bool FancyTab::event(QEvent* event)
+{
+  if (event->type() == QEvent::ToolTip) {
+    QFontMetrics metrics (font());
+    int text_width = metrics.width(text);
+
+    if (text_width > sizeHint().width()) {
+      // The text is elided: show the tooltip
+      QHelpEvent* he = static_cast<QHelpEvent*>(event);
+      QToolTip::showText(he->globalPos(), text);
+    } else {
+      QToolTip::hideText();
+    }
+    return true;
+  }
+  return QWidget::event(event);
+}
+
 void FancyTab::enterEvent(QEvent*)
 {
     fadeIn();
@@ -364,6 +382,7 @@ void FancyTabBar::addTab(const QIcon& icon, const QString& label) {
   FancyTab *tab = new FancyTab(this);
   tab->icon = icon;
   tab->text = label;
+  tab->setToolTip(label);
   m_tabs.append(tab);
   qobject_cast<QVBoxLayout*>(layout())->insertWidget(layout()->count()-1, tab);
 }
