@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-03-10 08:25+0000\n"
+"PO-Revision-Date: 2013-03-30 23:26+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -77,7 +77,7 @@ msgstr ""
 msgid "%1 playlists (%2)"
 msgstr "%1 dziesmu listes (%2)"
 
-#: playlist/playlistmanager.cpp:325
+#: playlist/playlistmanager.cpp:326
 #, qt-format
 msgid "%1 selected of"
 msgstr "%1 izvēlēti no"
@@ -102,7 +102,7 @@ msgstr "atrastas %1 dziesmas"
 msgid "%1 songs found (showing %2)"
 msgstr "atrastas %1 dziesmas (redzamas %2)"
 
-#: playlist/playlistmanager.cpp:331
+#: playlist/playlistmanager.cpp:332
 #, qt-format
 msgid "%1 tracks"
 msgstr "%1 dziesmas"
@@ -236,7 +236,7 @@ msgstr ""
 msgid "1 day"
 msgstr "1 diena"
 
-#: playlist/playlistmanager.cpp:331
+#: playlist/playlistmanager.cpp:332
 msgid "1 track"
 msgstr "1 dziesma"
 
@@ -253,7 +253,7 @@ msgstr "128k MP3"
 msgid "40%"
 msgstr ""
 
-#: library/library.cpp:58
+#: library/library.cpp:60
 msgid "50 random tracks"
 msgstr "50 nejaušas dziesmas"
 
@@ -268,7 +268,7 @@ msgid ""
 " the Android App now!</a>"
 msgstr ""
 
-#: ../bin/src/ui_librarysettingspage.h:171
+#: ../bin/src/ui_librarysettingspage.h:195
 msgid ""
 "<html><head/><body><p>If not checked, Clementine will  try to save your "
 "ratings and other statistics only in a separate database and don't modify "
@@ -276,6 +276,14 @@ msgid ""
 "directly into the file each time they changed.</p><p>Please note it might "
 "not work for every format and, as there is no standard for doing so, other "
 "music players might not be able to read them.</p></body></html>"
+msgstr ""
+
+#: ../bin/src/ui_librarysettingspage.h:199
+msgid ""
+"<html><head/><body><p>This will write songs' ratings and statistics into "
+"files tags for all your library's songs.</p><p>This is not needed if the "
+"&quot;Save ratings and statistics in file tags&quot; option has always been "
+"activated.</p></body></html>"
 msgstr ""
 
 #: ../bin/src/ui_organisedialog.h:199
@@ -397,7 +405,7 @@ msgstr "Pievienot darbību"
 msgid "Add another stream..."
 msgstr "Pievienot citu straumi..."
 
-#: library/librarysettingspage.cpp:64
+#: library/librarysettingspage.cpp:68
 msgid "Add directory..."
 msgstr "Pievienot mapi..."
 
@@ -421,7 +429,7 @@ msgstr "Pievienot mapi"
 msgid "Add folder..."
 msgstr "Pievienot mapi..."
 
-#: ../bin/src/ui_librarysettingspage.h:165
+#: ../bin/src/ui_librarysettingspage.h:188
 msgid "Add new folder..."
 msgstr "Pievienot jaunu mapi..."
 
@@ -642,7 +650,7 @@ msgstr "Visas dziesmu listes (%1)"
 msgid "All the translators"
 msgstr "Visi tulkotāji"
 
-#: library/library.cpp:82
+#: library/library.cpp:84
 msgid "All tracks"
 msgstr "Visas dziesmas"
 
@@ -738,6 +746,12 @@ msgstr "Vai esat drošs, ka vēlaties dzēst šo atskaņošanas sarakstu?"
 msgid "Are you sure you want to reset this song's statistics?"
 msgstr "Vai esat pārliecināt, ka vēlaties no jauna uzsākt dziesmas statistiku?"
 
+#: library/librarysettingspage.cpp:152
+msgid ""
+"Are you sure you want to write song's statistics into song's file for all "
+"the songs of your library?"
+msgstr ""
+
 #: playlist/playlist.cpp:1205 ui/organisedialog.cpp:56
 #: ui/qtsystemtrayicon.cpp:250 ../bin/src/ui_groupbydialog.h:130
 #: ../bin/src/ui_groupbydialog.h:143 ../bin/src/ui_groupbydialog.h:156
@@ -786,11 +800,11 @@ msgstr "Autori"
 msgid "Auto"
 msgstr "Automātiski"
 
-#: ../bin/src/ui_librarysettingspage.h:167
+#: ../bin/src/ui_librarysettingspage.h:190
 msgid "Automatic updating"
 msgstr "Automātiskā atjaunināšana"
 
-#: ../bin/src/ui_librarysettingspage.h:180
+#: ../bin/src/ui_librarysettingspage.h:208
 msgid "Automatically open single categories in the library tree"
 msgstr "Meklējot automātiski atvērt kategorijas biblotēkas sarakstā"
 
@@ -930,7 +944,7 @@ msgstr "Pogas"
 msgid "CDDA"
 msgstr ""
 
-#: library/library.cpp:98
+#: library/library.cpp:100
 msgid "CUE sheet support"
 msgstr ""
 
@@ -1633,7 +1647,7 @@ msgid "Discontinuous transmission"
 msgstr ""
 
 #: internet/icecastfilterwidget.cpp:33 internet/searchboxwidget.cpp:30
-#: library/libraryfilterwidget.cpp:88 ../bin/src/ui_librarysettingspage.h:179
+#: library/libraryfilterwidget.cpp:88 ../bin/src/ui_librarysettingspage.h:207
 msgid "Display options"
 msgstr "Displeja opcijas"
 
@@ -1755,7 +1769,7 @@ msgstr ""
 msgid "Dynamic mode is on"
 msgstr "Dinamiskais režīms ieslēgts"
 
-#: internet/jamendoservice.cpp:113 library/library.cpp:91
+#: internet/jamendoservice.cpp:113 library/library.cpp:93
 msgid "Dynamic random mix"
 msgstr "Dinamisks nejaušs mikss"
 
@@ -1931,7 +1945,7 @@ msgstr "Kļūda apstrādājot %1: %2"
 msgid "Error while loading audio CD"
 msgstr ""
 
-#: library/library.cpp:61
+#: library/library.cpp:63
 msgid "Ever played"
 msgstr "Vispār atskaņots"
 
@@ -2045,7 +2059,7 @@ msgstr "Ātri"
 msgid "Favorites"
 msgstr "Izlase"
 
-#: library/library.cpp:75
+#: library/library.cpp:77
 msgid "Favourite tracks"
 msgstr "Mīļākās dziesmas"
 
@@ -2604,7 +2618,7 @@ msgstr "Liels vāka attēls"
 msgid "Large sidebar"
 msgstr "Liela sānjosla"
 
-#: library/library.cpp:69 playlist/playlist.cpp:1220
+#: library/library.cpp:71 playlist/playlist.cpp:1220
 #: ../bin/src/ui_edittagdialog.h:671
 msgid "Last played"
 msgstr "Pēdējo reizi atskaņots"
@@ -2675,7 +2689,7 @@ msgstr "Last.fm lietotājvārds"
 msgid "Last.fm wiki"
 msgstr "Last.fm wiki"
 
-#: library/library.cpp:85
+#: library/library.cpp:87
 msgid "Least favourite tracks"
 msgstr "Visnemīļākās dziesmas"
 
@@ -2765,7 +2779,7 @@ msgstr "Ielādē iPod datubāzi"
 msgid "Loading smart playlist"
 msgstr "Ielādē gudro dziesmu listi"
 
-#: library/librarymodel.cpp:138
+#: library/librarymodel.cpp:139
 msgid "Loading songs"
 msgstr "Ielādē dziesmas"
 
@@ -2782,7 +2796,7 @@ msgstr "Ielādē dziesmas"
 msgid "Loading tracks info"
 msgstr "Ielādē dziesmas info"
 
-#: library/librarymodel.cpp:133 podcasts/podcastdiscoverymodel.cpp:97
+#: library/librarymodel.cpp:134 podcasts/podcastdiscoverymodel.cpp:97
 #: widgets/prettyimage.cpp:168 widgets/widgetfadehelper.cpp:99
 #: ../bin/src/ui_addpodcastdialog.h:180 ../bin/src/ui_searchpreview.h:106
 msgid "Loading..."
@@ -2946,7 +2960,7 @@ msgstr "Pazuduši projectM preseti"
 msgid "Model"
 msgstr "Modelis"
 
-#: ../bin/src/ui_librarysettingspage.h:169
+#: ../bin/src/ui_librarysettingspage.h:192
 msgid "Monitor the library for changes"
 msgstr "Pārlūkot izmaiņas bibliotēkā"
 
@@ -2971,7 +2985,7 @@ msgstr ""
 msgid "Moodbars"
 msgstr ""
 
-#: library/library.cpp:72
+#: library/library.cpp:74
 msgid "Most played"
 msgstr "Visvairāk atskaņotie"
 
@@ -3001,7 +3015,7 @@ msgstr "Pārvietot uz augšu"
 msgid "Music"
 msgstr ""
 
-#: ../bin/src/ui_librarysettingspage.h:163
+#: ../bin/src/ui_librarysettingspage.h:186
 msgid "Music Library"
 msgstr "Mūzikas bibliotēka"
 
@@ -3082,7 +3096,7 @@ msgstr ""
 msgid "Never"
 msgstr "Nekad"
 
-#: library/library.cpp:65
+#: library/library.cpp:67
 msgid "Never played"
 msgstr "Nekad nav atskaņotas"
 
@@ -3113,7 +3127,7 @@ msgstr "Jaunas dziesmas"
 msgid "New tracks will be added automatically."
 msgstr "Jaunas dziesmas tiks pievienotas automātiski"
 
-#: library/library.cpp:78
+#: library/library.cpp:80
 msgid "Newest tracks"
 msgstr "Jaunākās dziesmas"
 
@@ -3452,8 +3466,8 @@ msgstr "Atskaņošana"
 msgid "Player options"
 msgstr "Atskaņotāja opcijas"
 
-#: playlist/playlistcontainer.cpp:273 playlist/playlistmanager.cpp:78
-#: playlist/playlistmanager.cpp:396 playlist/playlisttabbar.cpp:290
+#: playlist/playlistcontainer.cpp:273 playlist/playlistmanager.cpp:79
+#: playlist/playlistmanager.cpp:397 playlist/playlisttabbar.cpp:290
 msgid "Playlist"
 msgstr "Dziesmu liste"
 
@@ -3525,7 +3539,7 @@ msgstr "Uzstādījumi"
 msgid "Preferences..."
 msgstr "Iestatījumi..."
 
-#: ../bin/src/ui_librarysettingspage.h:174
+#: ../bin/src/ui_librarysettingspage.h:202
 msgid "Preferred album art filenames (comma separated)"
 msgstr "Izvēlētie vāka attēlu failu nosaukumi (atdala ar komatu)"
 
@@ -3726,7 +3740,7 @@ msgstr "Noņemt darbību"
 msgid "Remove duplicates from playlist"
 msgstr ""
 
-#: ../bin/src/ui_librarysettingspage.h:166
+#: ../bin/src/ui_librarysettingspage.h:189
 msgid "Remove folder"
 msgstr "Aizvākt mapi"
 
@@ -3901,13 +3915,21 @@ msgstr "Saglabāt dziesmu listi..."
 msgid "Save preset"
 msgstr "Saglabāt presetu"
 
-#: ../bin/src/ui_librarysettingspage.h:173
-msgid "Save ratings and statistics in file tags when possible"
+#: ../bin/src/ui_librarysettingspage.h:193
+msgid "Save ratings in file tags when possible"
+msgstr ""
+
+#: ../bin/src/ui_librarysettingspage.h:197
+msgid "Save statistics in file tags when possible"
 msgstr ""
 
 #: ../bin/src/ui_addstreamdialog.h:115
 msgid "Save this stream in the Internet tab"
 msgstr "Saglabāt šo straumi Interneta cilenē"
+
+#: library/library.cpp:164
+msgid "Saving songs statistics into songs files"
+msgstr ""
 
 #: ui/edittagdialog.cpp:670 ui/trackselectiondialog.cpp:256
 msgid "Saving tracks"
@@ -4130,11 +4152,11 @@ msgstr "Rādīt visas dziesmas"
 msgid "Show all the songs"
 msgstr "Rādīt visas dziesmas"
 
-#: ../bin/src/ui_librarysettingspage.h:181
+#: ../bin/src/ui_librarysettingspage.h:209
 msgid "Show cover art in library"
 msgstr "Rādīt vāka attēlus bibliotēkā"
 
-#: ../bin/src/ui_librarysettingspage.h:182
+#: ../bin/src/ui_librarysettingspage.h:210
 msgid "Show dividers"
 msgstr "Rādīt atdalītājus"
 
@@ -4251,7 +4273,7 @@ msgstr "Maza sānjosla"
 msgid "Smart playlist"
 msgstr "Gudrā dziesmu liste"
 
-#: library/librarymodel.cpp:1171
+#: library/librarymodel.cpp:1172
 msgid "Smart playlists"
 msgstr "Gudrās dziesmu listes"
 
@@ -4446,6 +4468,10 @@ msgstr "Ārkārtīgi augsta (2048x2048)"
 msgid "Supported formats"
 msgstr "Atbalstītie formāti"
 
+#: ../bin/src/ui_librarysettingspage.h:201
+msgid "Synchronize statistics to files now"
+msgstr ""
+
 #: internet/spotifyservice.cpp:561
 msgid "Syncing Spotify inbox"
 msgstr ""
@@ -4508,7 +4534,7 @@ msgstr "Pašlaik atskaņotās dziesmas albuma vāks"
 msgid "The directory %1 is not valid"
 msgstr "Nederīga mape %1"
 
-#: playlist/playlistmanager.cpp:154 playlist/playlistmanager.cpp:172
+#: playlist/playlistmanager.cpp:155 playlist/playlistmanager.cpp:173
 #, qt-format
 msgid "The playlist '%1' was empty or could not be loaded."
 msgstr "Kļūda ielādējot dziesmu listi '%1'. Iespējams, tā ir tukša"
@@ -4577,7 +4603,7 @@ msgid ""
 "continue?"
 msgstr "Šie faili tiks dzēsti no ierīces. Vai jūs tiešām vēlaties turpināt?"
 
-#: ../bin/src/ui_librarysettingspage.h:164
+#: ../bin/src/ui_librarysettingspage.h:187
 msgid "These folders will be scanned for music to make up your library"
 msgstr "Šajās mapēs tiks meklēta mūzika tavai bibliotēkai"
 
@@ -4762,9 +4788,9 @@ msgstr "Ultra plata josla (UWB)"
 msgid "Unable to download %1 (%2)"
 msgstr "Nevar lejupielādēt %1 (%2)"
 
-#: core/song.cpp:350 library/librarymodel.cpp:307 library/librarymodel.cpp:312
-#: library/librarymodel.cpp:969 playlist/playlistdelegates.cpp:309
-#: playlist/playlistmanager.cpp:404 playlist/playlistmanager.cpp:407
+#: core/song.cpp:350 library/librarymodel.cpp:308 library/librarymodel.cpp:313
+#: library/librarymodel.cpp:970 playlist/playlistdelegates.cpp:309
+#: playlist/playlistmanager.cpp:405 playlist/playlistmanager.cpp:408
 #: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:424
 #: ui/edittagdialog.cpp:465
 msgid "Unknown"
@@ -4802,7 +4828,7 @@ msgstr ""
 msgid "Update changed library folders"
 msgstr "Atjaunot mainītās bibliotēkas mapes"
 
-#: ../bin/src/ui_librarysettingspage.h:168
+#: ../bin/src/ui_librarysettingspage.h:191
 msgid "Update the library when Clementine starts"
 msgstr "Atjaunot bibliotēku ieslēdzot Clementine"
 
@@ -4935,8 +4961,8 @@ msgstr "VBR MP3"
 msgid "Variable bit rate"
 msgstr "Mainīgs bitreits"
 
-#: globalsearch/globalsearchmodel.cpp:104 library/librarymodel.cpp:240
-#: playlist/playlistmanager.cpp:419 ui/albumcovermanager.cpp:247
+#: globalsearch/globalsearchmodel.cpp:104 library/librarymodel.cpp:241
+#: playlist/playlistmanager.cpp:420 ui/albumcovermanager.cpp:247
 msgid "Various artists"
 msgstr "Dažādi izpildītāji"
 
@@ -5003,7 +5029,7 @@ msgstr "Nedēļas"
 msgid "When Clementine starts"
 msgstr "Kad startējas Clementine"
 
-#: ../bin/src/ui_librarysettingspage.h:176
+#: ../bin/src/ui_librarysettingspage.h:204
 msgid ""
 "When looking for album art Clementine will first look for picture files that contain one of these words.\n"
 "If there are no matches then it will use the largest image in the directory."
@@ -5084,6 +5110,10 @@ msgstr ""
 #: ui/mainwindow.cpp:2058
 msgid "Would you like to run a full rescan right now?"
 msgstr "Vai jūs vēlaties palaist pilnu skenēšanu?"
+
+#: library/librarysettingspage.cpp:151
+msgid "Write all songs statistics into songs' files"
+msgstr ""
 
 #: internet/subsonicsettingspage.cpp:83
 msgid "Wrong username or password."

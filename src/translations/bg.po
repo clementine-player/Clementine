@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-03-10 08:25+0000\n"
+"PO-Revision-Date: 2013-03-30 23:26+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -80,7 +80,7 @@ msgstr "%1 на %2"
 msgid "%1 playlists (%2)"
 msgstr "%1 списъци с песни (%2)"
 
-#: playlist/playlistmanager.cpp:325
+#: playlist/playlistmanager.cpp:326
 #, qt-format
 msgid "%1 selected of"
 msgstr "%1 избрани от"
@@ -105,7 +105,7 @@ msgstr "%1 намерени песни"
 msgid "%1 songs found (showing %2)"
 msgstr "%1 намерени песни (%2 показани)"
 
-#: playlist/playlistmanager.cpp:331
+#: playlist/playlistmanager.cpp:332
 #, qt-format
 msgid "%1 tracks"
 msgstr "%1 песни"
@@ -239,7 +239,7 @@ msgstr ""
 msgid "1 day"
 msgstr "1 ден"
 
-#: playlist/playlistmanager.cpp:331
+#: playlist/playlistmanager.cpp:332
 msgid "1 track"
 msgstr "1 песен"
 
@@ -256,7 +256,7 @@ msgstr "128k MP3"
 msgid "40%"
 msgstr ""
 
-#: library/library.cpp:58
+#: library/library.cpp:60
 msgid "50 random tracks"
 msgstr "50 случайни песни"
 
@@ -271,7 +271,7 @@ msgid ""
 " the Android App now!</a>"
 msgstr ""
 
-#: ../bin/src/ui_librarysettingspage.h:171
+#: ../bin/src/ui_librarysettingspage.h:195
 msgid ""
 "<html><head/><body><p>If not checked, Clementine will  try to save your "
 "ratings and other statistics only in a separate database and don't modify "
@@ -279,6 +279,14 @@ msgid ""
 "directly into the file each time they changed.</p><p>Please note it might "
 "not work for every format and, as there is no standard for doing so, other "
 "music players might not be able to read them.</p></body></html>"
+msgstr ""
+
+#: ../bin/src/ui_librarysettingspage.h:199
+msgid ""
+"<html><head/><body><p>This will write songs' ratings and statistics into "
+"files tags for all your library's songs.</p><p>This is not needed if the "
+"&quot;Save ratings and statistics in file tags&quot; option has always been "
+"activated.</p></body></html>"
 msgstr ""
 
 #: ../bin/src/ui_organisedialog.h:199
@@ -400,7 +408,7 @@ msgstr "Добавяне на действие"
 msgid "Add another stream..."
 msgstr "Добавяне на друг поток..."
 
-#: library/librarysettingspage.cpp:64
+#: library/librarysettingspage.cpp:68
 msgid "Add directory..."
 msgstr "Добавяне на папка..."
 
@@ -424,7 +432,7 @@ msgstr "Добавяне на папка"
 msgid "Add folder..."
 msgstr "Добавяне на папка..."
 
-#: ../bin/src/ui_librarysettingspage.h:165
+#: ../bin/src/ui_librarysettingspage.h:188
 msgid "Add new folder..."
 msgstr "Добавяне на нова папка..."
 
@@ -645,7 +653,7 @@ msgstr "Всички списъци с песни (%1)"
 msgid "All the translators"
 msgstr "Всички преводачи"
 
-#: library/library.cpp:82
+#: library/library.cpp:84
 msgid "All tracks"
 msgstr "Всички песни"
 
@@ -741,6 +749,12 @@ msgstr "Сигурни ли сте, че искате да изтриете то
 msgid "Are you sure you want to reset this song's statistics?"
 msgstr "Сигурни ли сте, че искате да нулирате статистиката за тази песен?"
 
+#: library/librarysettingspage.cpp:152
+msgid ""
+"Are you sure you want to write song's statistics into song's file for all "
+"the songs of your library?"
+msgstr ""
+
 #: playlist/playlist.cpp:1205 ui/organisedialog.cpp:56
 #: ui/qtsystemtrayicon.cpp:250 ../bin/src/ui_groupbydialog.h:130
 #: ../bin/src/ui_groupbydialog.h:143 ../bin/src/ui_groupbydialog.h:156
@@ -789,11 +803,11 @@ msgstr "Автори"
 msgid "Auto"
 msgstr "Автоматично"
 
-#: ../bin/src/ui_librarysettingspage.h:167
+#: ../bin/src/ui_librarysettingspage.h:190
 msgid "Automatic updating"
 msgstr "Автоматично обновяване"
 
-#: ../bin/src/ui_librarysettingspage.h:180
+#: ../bin/src/ui_librarysettingspage.h:208
 msgid "Automatically open single categories in the library tree"
 msgstr "Отвори автоматично единични категории от библиотечното дърво"
 
@@ -933,7 +947,7 @@ msgstr "Бутони"
 msgid "CDDA"
 msgstr "CDDA"
 
-#: library/library.cpp:98
+#: library/library.cpp:100
 msgid "CUE sheet support"
 msgstr "Поддръжка на CUE листове"
 
@@ -1636,7 +1650,7 @@ msgid "Discontinuous transmission"
 msgstr "Непрекъснато излъчване"
 
 #: internet/icecastfilterwidget.cpp:33 internet/searchboxwidget.cpp:30
-#: library/libraryfilterwidget.cpp:88 ../bin/src/ui_librarysettingspage.h:179
+#: library/libraryfilterwidget.cpp:88 ../bin/src/ui_librarysettingspage.h:207
 msgid "Display options"
 msgstr "Настройки на показването"
 
@@ -1758,7 +1772,7 @@ msgstr "Dropbox"
 msgid "Dynamic mode is on"
 msgstr "Динамичния режим е включен"
 
-#: internet/jamendoservice.cpp:113 library/library.cpp:91
+#: internet/jamendoservice.cpp:113 library/library.cpp:93
 msgid "Dynamic random mix"
 msgstr "Динамичен случаен микс"
 
@@ -1934,7 +1948,7 @@ msgstr "Грешка при обработване на %1: %2"
 msgid "Error while loading audio CD"
 msgstr "Грешка при зареждането на аудио CD"
 
-#: library/library.cpp:61
+#: library/library.cpp:63
 msgid "Ever played"
 msgstr "Някога пускана"
 
@@ -2048,7 +2062,7 @@ msgstr "Бързо"
 msgid "Favorites"
 msgstr "Любими"
 
-#: library/library.cpp:75
+#: library/library.cpp:77
 msgid "Favourite tracks"
 msgstr "Любими парчета"
 
@@ -2607,7 +2621,7 @@ msgstr "Голяма обложка"
 msgid "Large sidebar"
 msgstr "Голяма странична лента"
 
-#: library/library.cpp:69 playlist/playlist.cpp:1220
+#: library/library.cpp:71 playlist/playlist.cpp:1220
 #: ../bin/src/ui_edittagdialog.h:671
 msgid "Last played"
 msgstr "Последно изпълнение"
@@ -2678,7 +2692,7 @@ msgstr "Last.fm потребителско име"
 msgid "Last.fm wiki"
 msgstr "Last.fm уики"
 
-#: library/library.cpp:85
+#: library/library.cpp:87
 msgid "Least favourite tracks"
 msgstr "Най-малко любими песни"
 
@@ -2768,7 +2782,7 @@ msgstr "Зареждане на iPod база данни"
 msgid "Loading smart playlist"
 msgstr "Зареждане на умен списък с песни"
 
-#: library/librarymodel.cpp:138
+#: library/librarymodel.cpp:139
 msgid "Loading songs"
 msgstr "Зареждане на песни"
 
@@ -2785,7 +2799,7 @@ msgstr "Зареждане на песни"
 msgid "Loading tracks info"
 msgstr "Зареждане на информация за песните"
 
-#: library/librarymodel.cpp:133 podcasts/podcastdiscoverymodel.cpp:97
+#: library/librarymodel.cpp:134 podcasts/podcastdiscoverymodel.cpp:97
 #: widgets/prettyimage.cpp:168 widgets/widgetfadehelper.cpp:99
 #: ../bin/src/ui_addpodcastdialog.h:180 ../bin/src/ui_searchpreview.h:106
 msgid "Loading..."
@@ -2949,7 +2963,7 @@ msgstr "Липсват готови настройки за проектМ"
 msgid "Model"
 msgstr "Модел"
 
-#: ../bin/src/ui_librarysettingspage.h:169
+#: ../bin/src/ui_librarysettingspage.h:192
 msgid "Monitor the library for changes"
 msgstr "Следи за промени в библиотеката"
 
@@ -2974,7 +2988,7 @@ msgstr ""
 msgid "Moodbars"
 msgstr ""
 
-#: library/library.cpp:72
+#: library/library.cpp:74
 msgid "Most played"
 msgstr "Най-пускани"
 
@@ -3004,7 +3018,7 @@ msgstr "Преместване нагоре"
 msgid "Music"
 msgstr "Музика"
 
-#: ../bin/src/ui_librarysettingspage.h:163
+#: ../bin/src/ui_librarysettingspage.h:186
 msgid "Music Library"
 msgstr "Музикална Библиотека"
 
@@ -3085,7 +3099,7 @@ msgstr ""
 msgid "Never"
 msgstr "Никога"
 
-#: library/library.cpp:65
+#: library/library.cpp:67
 msgid "Never played"
 msgstr "Никога пускани"
 
@@ -3116,7 +3130,7 @@ msgstr "Нови песни"
 msgid "New tracks will be added automatically."
 msgstr "Нови парчета ще бъдат добавяни автоматично."
 
-#: library/library.cpp:78
+#: library/library.cpp:80
 msgid "Newest tracks"
 msgstr "Най-нови парчета"
 
@@ -3455,8 +3469,8 @@ msgstr "Възпроизвеждане"
 msgid "Player options"
 msgstr "Настройки на плеър"
 
-#: playlist/playlistcontainer.cpp:273 playlist/playlistmanager.cpp:78
-#: playlist/playlistmanager.cpp:396 playlist/playlisttabbar.cpp:290
+#: playlist/playlistcontainer.cpp:273 playlist/playlistmanager.cpp:79
+#: playlist/playlistmanager.cpp:397 playlist/playlisttabbar.cpp:290
 msgid "Playlist"
 msgstr "Списък с песни"
 
@@ -3528,7 +3542,7 @@ msgstr "Настройки"
 msgid "Preferences..."
 msgstr "Настройки..."
 
-#: ../bin/src/ui_librarysettingspage.h:174
+#: ../bin/src/ui_librarysettingspage.h:202
 msgid "Preferred album art filenames (comma separated)"
 msgstr "Предпочитани файлови разширения за обложките, разделени със запетайки."
 
@@ -3729,7 +3743,7 @@ msgstr "Премахване на действието"
 msgid "Remove duplicates from playlist"
 msgstr "Премахни дублиранията от плейлиста"
 
-#: ../bin/src/ui_librarysettingspage.h:166
+#: ../bin/src/ui_librarysettingspage.h:189
 msgid "Remove folder"
 msgstr "Премахване на папката"
 
@@ -3904,13 +3918,21 @@ msgstr "Запазване на списъка с песни..."
 msgid "Save preset"
 msgstr "Запис на фиксирани настройки"
 
-#: ../bin/src/ui_librarysettingspage.h:173
-msgid "Save ratings and statistics in file tags when possible"
+#: ../bin/src/ui_librarysettingspage.h:193
+msgid "Save ratings in file tags when possible"
+msgstr ""
+
+#: ../bin/src/ui_librarysettingspage.h:197
+msgid "Save statistics in file tags when possible"
 msgstr ""
 
 #: ../bin/src/ui_addstreamdialog.h:115
 msgid "Save this stream in the Internet tab"
 msgstr "Запази този поток в интернет таб"
+
+#: library/library.cpp:164
+msgid "Saving songs statistics into songs files"
+msgstr ""
 
 #: ui/edittagdialog.cpp:670 ui/trackselectiondialog.cpp:256
 msgid "Saving tracks"
@@ -4133,11 +4155,11 @@ msgstr "Показвай всички песни"
 msgid "Show all the songs"
 msgstr "Покажи всичките песни"
 
-#: ../bin/src/ui_librarysettingspage.h:181
+#: ../bin/src/ui_librarysettingspage.h:209
 msgid "Show cover art in library"
 msgstr "Показвай обложки в библиотеката"
 
-#: ../bin/src/ui_librarysettingspage.h:182
+#: ../bin/src/ui_librarysettingspage.h:210
 msgid "Show dividers"
 msgstr "Покажи разделители"
 
@@ -4254,7 +4276,7 @@ msgstr "Малка странична лента"
 msgid "Smart playlist"
 msgstr "Умен списък с песни"
 
-#: library/librarymodel.cpp:1171
+#: library/librarymodel.cpp:1172
 msgid "Smart playlists"
 msgstr "Умни списъци с песни"
 
@@ -4449,6 +4471,10 @@ msgstr "Супер високо (2048x2048)"
 msgid "Supported formats"
 msgstr "Поддържани формати"
 
+#: ../bin/src/ui_librarysettingspage.h:201
+msgid "Synchronize statistics to files now"
+msgstr ""
+
 #: internet/spotifyservice.cpp:561
 msgid "Syncing Spotify inbox"
 msgstr "Синхронизиране на входящата кутия на Spotify"
@@ -4511,7 +4537,7 @@ msgstr "Обложката на албума на текущо звучащат�
 msgid "The directory %1 is not valid"
 msgstr "Директорията \"%1\" не е валидна"
 
-#: playlist/playlistmanager.cpp:154 playlist/playlistmanager.cpp:172
+#: playlist/playlistmanager.cpp:155 playlist/playlistmanager.cpp:173
 #, qt-format
 msgid "The playlist '%1' was empty or could not be loaded."
 msgstr "Списъкът с песни '%1' беше празен или не можа да бъде зареден"
@@ -4580,7 +4606,7 @@ msgid ""
 "continue?"
 msgstr "Тези файлове ще бъдат изтрити от устройството,сигурни ли сте че искате да продължите?"
 
-#: ../bin/src/ui_librarysettingspage.h:164
+#: ../bin/src/ui_librarysettingspage.h:187
 msgid "These folders will be scanned for music to make up your library"
 msgstr "Тези папки ще бъдат сканирани за музика за да направят вашата библиотека"
 
@@ -4765,9 +4791,9 @@ msgstr ""
 msgid "Unable to download %1 (%2)"
 msgstr "Неуспешно сваляне %1 (%2)"
 
-#: core/song.cpp:350 library/librarymodel.cpp:307 library/librarymodel.cpp:312
-#: library/librarymodel.cpp:969 playlist/playlistdelegates.cpp:309
-#: playlist/playlistmanager.cpp:404 playlist/playlistmanager.cpp:407
+#: core/song.cpp:350 library/librarymodel.cpp:308 library/librarymodel.cpp:313
+#: library/librarymodel.cpp:970 playlist/playlistdelegates.cpp:309
+#: playlist/playlistmanager.cpp:405 playlist/playlistmanager.cpp:408
 #: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:424
 #: ui/edittagdialog.cpp:465
 msgid "Unknown"
@@ -4805,7 +4831,7 @@ msgstr "Обнови всички подкасти"
 msgid "Update changed library folders"
 msgstr "Обнови папките с промени в библиотеката"
 
-#: ../bin/src/ui_librarysettingspage.h:168
+#: ../bin/src/ui_librarysettingspage.h:191
 msgid "Update the library when Clementine starts"
 msgstr "Обновяване на библиотеката при стартиране на Clementine"
 
@@ -4938,8 +4964,8 @@ msgstr "VBR MP3"
 msgid "Variable bit rate"
 msgstr "Променлив битов поток"
 
-#: globalsearch/globalsearchmodel.cpp:104 library/librarymodel.cpp:240
-#: playlist/playlistmanager.cpp:419 ui/albumcovermanager.cpp:247
+#: globalsearch/globalsearchmodel.cpp:104 library/librarymodel.cpp:241
+#: playlist/playlistmanager.cpp:420 ui/albumcovermanager.cpp:247
 msgid "Various artists"
 msgstr "Сборни формации"
 
@@ -5006,7 +5032,7 @@ msgstr "Седмици"
 msgid "When Clementine starts"
 msgstr "При стартиране на Clementine"
 
-#: ../bin/src/ui_librarysettingspage.h:176
+#: ../bin/src/ui_librarysettingspage.h:204
 msgid ""
 "When looking for album art Clementine will first look for picture files that contain one of these words.\n"
 "If there are no matches then it will use the largest image in the directory."
@@ -5087,6 +5113,10 @@ msgstr "Искате ли да преместим другите песни от
 #: ui/mainwindow.cpp:2058
 msgid "Would you like to run a full rescan right now?"
 msgstr "Искате ли да изпълните пълно повторно сканиране сега?"
+
+#: library/librarysettingspage.cpp:151
+msgid "Write all songs statistics into songs' files"
+msgstr ""
 
 #: internet/subsonicsettingspage.cpp:83
 msgid "Wrong username or password."

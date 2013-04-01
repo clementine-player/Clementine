@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-03-10 08:25+0000\n"
+"PO-Revision-Date: 2013-03-30 23:26+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -79,7 +79,7 @@ msgstr "%1 %2-tik"
 msgid "%1 playlists (%2)"
 msgstr "%1 erreprodukzio-zerrenda (%2)"
 
-#: playlist/playlistmanager.cpp:325
+#: playlist/playlistmanager.cpp:326
 #, qt-format
 msgid "%1 selected of"
 msgstr "%1 aukeraturik"
@@ -104,7 +104,7 @@ msgstr "%1 abesti aurkiturik"
 msgid "%1 songs found (showing %2)"
 msgstr "%1 abesti aurkiturik (%2 erakusten)"
 
-#: playlist/playlistmanager.cpp:331
+#: playlist/playlistmanager.cpp:332
 #, qt-format
 msgid "%1 tracks"
 msgstr "%1 pista"
@@ -238,7 +238,7 @@ msgstr "0px"
 msgid "1 day"
 msgstr "Egun 1"
 
-#: playlist/playlistmanager.cpp:331
+#: playlist/playlistmanager.cpp:332
 msgid "1 track"
 msgstr "Pista 1"
 
@@ -255,7 +255,7 @@ msgstr "128k MP3"
 msgid "40%"
 msgstr ""
 
-#: library/library.cpp:58
+#: library/library.cpp:60
 msgid "50 random tracks"
 msgstr "50 ausazko pista"
 
@@ -270,7 +270,7 @@ msgid ""
 " the Android App now!</a>"
 msgstr ""
 
-#: ../bin/src/ui_librarysettingspage.h:171
+#: ../bin/src/ui_librarysettingspage.h:195
 msgid ""
 "<html><head/><body><p>If not checked, Clementine will  try to save your "
 "ratings and other statistics only in a separate database and don't modify "
@@ -278,6 +278,14 @@ msgid ""
 "directly into the file each time they changed.</p><p>Please note it might "
 "not work for every format and, as there is no standard for doing so, other "
 "music players might not be able to read them.</p></body></html>"
+msgstr ""
+
+#: ../bin/src/ui_librarysettingspage.h:199
+msgid ""
+"<html><head/><body><p>This will write songs' ratings and statistics into "
+"files tags for all your library's songs.</p><p>This is not needed if the "
+"&quot;Save ratings and statistics in file tags&quot; option has always been "
+"activated.</p></body></html>"
 msgstr ""
 
 #: ../bin/src/ui_organisedialog.h:199
@@ -399,7 +407,7 @@ msgstr "Gehitu ekintza"
 msgid "Add another stream..."
 msgstr "Gehitu beste jario bat..."
 
-#: library/librarysettingspage.cpp:64
+#: library/librarysettingspage.cpp:68
 msgid "Add directory..."
 msgstr "Gehitu direktorioa..."
 
@@ -423,7 +431,7 @@ msgstr "Gehitu karpeta"
 msgid "Add folder..."
 msgstr "Gehitu karpeta..."
 
-#: ../bin/src/ui_librarysettingspage.h:165
+#: ../bin/src/ui_librarysettingspage.h:188
 msgid "Add new folder..."
 msgstr "Gehitu karpeta berria..."
 
@@ -644,7 +652,7 @@ msgstr "Erreprodukzio-zerrenda guztiak (%1)"
 msgid "All the translators"
 msgstr "Itzultzaile guztiak"
 
-#: library/library.cpp:82
+#: library/library.cpp:84
 msgid "All tracks"
 msgstr "Pista guztiak"
 
@@ -740,6 +748,12 @@ msgstr "Erreprodukzio-zerrenda hau ezabatu?"
 msgid "Are you sure you want to reset this song's statistics?"
 msgstr "Abesti honen estatistikak berrezarri?"
 
+#: library/librarysettingspage.cpp:152
+msgid ""
+"Are you sure you want to write song's statistics into song's file for all "
+"the songs of your library?"
+msgstr ""
+
 #: playlist/playlist.cpp:1205 ui/organisedialog.cpp:56
 #: ui/qtsystemtrayicon.cpp:250 ../bin/src/ui_groupbydialog.h:130
 #: ../bin/src/ui_groupbydialog.h:143 ../bin/src/ui_groupbydialog.h:156
@@ -788,11 +802,11 @@ msgstr "Egileak"
 msgid "Auto"
 msgstr "Automatikoa"
 
-#: ../bin/src/ui_librarysettingspage.h:167
+#: ../bin/src/ui_librarysettingspage.h:190
 msgid "Automatic updating"
 msgstr "Eguneratze automatikoa"
 
-#: ../bin/src/ui_librarysettingspage.h:180
+#: ../bin/src/ui_librarysettingspage.h:208
 msgid "Automatically open single categories in the library tree"
 msgstr "Bilduma-zuhaitzean automatikoki ireki banako kategoriak"
 
@@ -932,7 +946,7 @@ msgstr "Botoiak"
 msgid "CDDA"
 msgstr "CDDA"
 
-#: library/library.cpp:98
+#: library/library.cpp:100
 msgid "CUE sheet support"
 msgstr "CUE orriaren euskarria"
 
@@ -1635,7 +1649,7 @@ msgid "Discontinuous transmission"
 msgstr "Transmisio ez-jarraitua"
 
 #: internet/icecastfilterwidget.cpp:33 internet/searchboxwidget.cpp:30
-#: library/libraryfilterwidget.cpp:88 ../bin/src/ui_librarysettingspage.h:179
+#: library/libraryfilterwidget.cpp:88 ../bin/src/ui_librarysettingspage.h:207
 msgid "Display options"
 msgstr "Erakutsi aukerak"
 
@@ -1757,7 +1771,7 @@ msgstr "Dropbox"
 msgid "Dynamic mode is on"
 msgstr "Modu dinamikoa aktibaturik"
 
-#: internet/jamendoservice.cpp:113 library/library.cpp:91
+#: internet/jamendoservice.cpp:113 library/library.cpp:93
 msgid "Dynamic random mix"
 msgstr "Ausazko nahasketa dinamikoa"
 
@@ -1933,7 +1947,7 @@ msgstr "Errorea %1 prozesatzean: %2"
 msgid "Error while loading audio CD"
 msgstr "Errorea audio CDa kargatzean"
 
-#: library/library.cpp:61
+#: library/library.cpp:63
 msgid "Ever played"
 msgstr "Inoiz erreproduzitutakoak"
 
@@ -2047,7 +2061,7 @@ msgstr "Azkarra"
 msgid "Favorites"
 msgstr "Gogokoenak"
 
-#: library/library.cpp:75
+#: library/library.cpp:77
 msgid "Favourite tracks"
 msgstr "Pista gogokoenak"
 
@@ -2606,7 +2620,7 @@ msgstr "Albumeko azal handia"
 msgid "Large sidebar"
 msgstr "Albo-barra handia"
 
-#: library/library.cpp:69 playlist/playlist.cpp:1220
+#: library/library.cpp:71 playlist/playlist.cpp:1220
 #: ../bin/src/ui_edittagdialog.h:671
 msgid "Last played"
 msgstr "Erreproduzitutako azkena"
@@ -2677,7 +2691,7 @@ msgstr "Last.fm-ko erabiltzaile-izena"
 msgid "Last.fm wiki"
 msgstr "Last.fm-ko wikia"
 
-#: library/library.cpp:85
+#: library/library.cpp:87
 msgid "Least favourite tracks"
 msgstr "Gutxien gogoko diren pistak"
 
@@ -2767,7 +2781,7 @@ msgstr "iPod-eko datu-basea kargatzen"
 msgid "Loading smart playlist"
 msgstr "Erreprodukzio-zerrenda adimenduna kargatzen"
 
-#: library/librarymodel.cpp:138
+#: library/librarymodel.cpp:139
 msgid "Loading songs"
 msgstr "Abestiak kargatzen"
 
@@ -2784,7 +2798,7 @@ msgstr "Pistak kargatzen"
 msgid "Loading tracks info"
 msgstr "Pisten informazioa kargatzen"
 
-#: library/librarymodel.cpp:133 podcasts/podcastdiscoverymodel.cpp:97
+#: library/librarymodel.cpp:134 podcasts/podcastdiscoverymodel.cpp:97
 #: widgets/prettyimage.cpp:168 widgets/widgetfadehelper.cpp:99
 #: ../bin/src/ui_addpodcastdialog.h:180 ../bin/src/ui_searchpreview.h:106
 msgid "Loading..."
@@ -2948,7 +2962,7 @@ msgstr "projectM-ko aurre-ezarpenak falta dira"
 msgid "Model"
 msgstr "Modeloa"
 
-#: ../bin/src/ui_librarysettingspage.h:169
+#: ../bin/src/ui_librarysettingspage.h:192
 msgid "Monitor the library for changes"
 msgstr "Bildumako aldaketen segimendua egin"
 
@@ -2973,7 +2987,7 @@ msgstr "Aldarte-barraren itxura"
 msgid "Moodbars"
 msgstr "Aldarte-barra"
 
-#: library/library.cpp:72
+#: library/library.cpp:74
 msgid "Most played"
 msgstr "Gehien erreproduzitutakoak"
 
@@ -3003,7 +3017,7 @@ msgstr "Eraman gora"
 msgid "Music"
 msgstr "Musika"
 
-#: ../bin/src/ui_librarysettingspage.h:163
+#: ../bin/src/ui_librarysettingspage.h:186
 msgid "Music Library"
 msgstr "Musika-bilduma"
 
@@ -3084,7 +3098,7 @@ msgstr "Sareko urruneko kontrola"
 msgid "Never"
 msgstr "Inoiz ez"
 
-#: library/library.cpp:65
+#: library/library.cpp:67
 msgid "Never played"
 msgstr "Inoiz ez erreproduzituak"
 
@@ -3115,7 +3129,7 @@ msgstr "Abesti berriak"
 msgid "New tracks will be added automatically."
 msgstr "Abesti berriak automatikoki gehituko dira."
 
-#: library/library.cpp:78
+#: library/library.cpp:80
 msgid "Newest tracks"
 msgstr "Pista berrienak"
 
@@ -3454,8 +3468,8 @@ msgstr "Erreprodukzioa"
 msgid "Player options"
 msgstr "Erreproduzitzailearen aukerak"
 
-#: playlist/playlistcontainer.cpp:273 playlist/playlistmanager.cpp:78
-#: playlist/playlistmanager.cpp:396 playlist/playlisttabbar.cpp:290
+#: playlist/playlistcontainer.cpp:273 playlist/playlistmanager.cpp:79
+#: playlist/playlistmanager.cpp:397 playlist/playlisttabbar.cpp:290
 msgid "Playlist"
 msgstr "Erreprodukzio-zerrenda"
 
@@ -3527,7 +3541,7 @@ msgstr "Hobespenak"
 msgid "Preferences..."
 msgstr "Hobespenak..."
 
-#: ../bin/src/ui_librarysettingspage.h:174
+#: ../bin/src/ui_librarysettingspage.h:202
 msgid "Preferred album art filenames (comma separated)"
 msgstr "Hobetsitako album-azalen fitxategi-izenak (komaz bereizita)"
 
@@ -3728,7 +3742,7 @@ msgstr "Kendu ekintza"
 msgid "Remove duplicates from playlist"
 msgstr "Abesti bikoiztuak kendu erreprodukzio-zerrendatik "
 
-#: ../bin/src/ui_librarysettingspage.h:166
+#: ../bin/src/ui_librarysettingspage.h:189
 msgid "Remove folder"
 msgstr "Kendu karpeta"
 
@@ -3903,13 +3917,21 @@ msgstr "Gorde erreprodukzio-zerrenda..."
 msgid "Save preset"
 msgstr "Gorde aurre-ezarpena"
 
-#: ../bin/src/ui_librarysettingspage.h:173
-msgid "Save ratings and statistics in file tags when possible"
+#: ../bin/src/ui_librarysettingspage.h:193
+msgid "Save ratings in file tags when possible"
+msgstr ""
+
+#: ../bin/src/ui_librarysettingspage.h:197
+msgid "Save statistics in file tags when possible"
 msgstr ""
 
 #: ../bin/src/ui_addstreamdialog.h:115
 msgid "Save this stream in the Internet tab"
 msgstr "Gorde jario hau Internet fitxan"
+
+#: library/library.cpp:164
+msgid "Saving songs statistics into songs files"
+msgstr ""
 
 #: ui/edittagdialog.cpp:670 ui/trackselectiondialog.cpp:256
 msgid "Saving tracks"
@@ -4132,11 +4154,11 @@ msgstr "Erakutsi abesti guztiak"
 msgid "Show all the songs"
 msgstr "Erakutsi abesti guztia"
 
-#: ../bin/src/ui_librarysettingspage.h:181
+#: ../bin/src/ui_librarysettingspage.h:209
 msgid "Show cover art in library"
 msgstr "Erakutsi azalak bilduman"
 
-#: ../bin/src/ui_librarysettingspage.h:182
+#: ../bin/src/ui_librarysettingspage.h:210
 msgid "Show dividers"
 msgstr "Erakutsi zatitzaileak"
 
@@ -4253,7 +4275,7 @@ msgstr "Albo-barra txikia"
 msgid "Smart playlist"
 msgstr "Erreprodukzio-zerrenda adimenduna"
 
-#: library/librarymodel.cpp:1171
+#: library/librarymodel.cpp:1172
 msgid "Smart playlists"
 msgstr "Erreprodukzio-zerrenda adimendunak"
 
@@ -4448,6 +4470,10 @@ msgstr "Oso altua (2048x2048)"
 msgid "Supported formats"
 msgstr "Onartutako formatuak"
 
+#: ../bin/src/ui_librarysettingspage.h:201
+msgid "Synchronize statistics to files now"
+msgstr ""
+
 #: internet/spotifyservice.cpp:561
 msgid "Syncing Spotify inbox"
 msgstr "Spotify-ko sarrera-ontzia sinkronizatzen"
@@ -4510,7 +4536,7 @@ msgstr "Orain erreproduzitzen ari den kantaren albumaren azala"
 msgid "The directory %1 is not valid"
 msgstr "%1 direktorioa ez da baliagarria"
 
-#: playlist/playlistmanager.cpp:154 playlist/playlistmanager.cpp:172
+#: playlist/playlistmanager.cpp:155 playlist/playlistmanager.cpp:173
 #, qt-format
 msgid "The playlist '%1' was empty or could not be loaded."
 msgstr "'%1' erreprodukzio-zerrenda hutsik zegoen edo ezin izan da kargatu."
@@ -4579,7 +4605,7 @@ msgid ""
 "continue?"
 msgstr "Fitxategi hauek gailutik ezabatuko dira, jarraitu nahi duzu?"
 
-#: ../bin/src/ui_librarysettingspage.h:164
+#: ../bin/src/ui_librarysettingspage.h:187
 msgid "These folders will be scanned for music to make up your library"
 msgstr "Karpeta hauetan bilatuko da musika zure bilduma osatzeko"
 
@@ -4764,9 +4790,9 @@ msgstr "Banda ultra zabala (UWB)"
 msgid "Unable to download %1 (%2)"
 msgstr "Ezin izan da %1 deskargatu (%2)"
 
-#: core/song.cpp:350 library/librarymodel.cpp:307 library/librarymodel.cpp:312
-#: library/librarymodel.cpp:969 playlist/playlistdelegates.cpp:309
-#: playlist/playlistmanager.cpp:404 playlist/playlistmanager.cpp:407
+#: core/song.cpp:350 library/librarymodel.cpp:308 library/librarymodel.cpp:313
+#: library/librarymodel.cpp:970 playlist/playlistdelegates.cpp:309
+#: playlist/playlistmanager.cpp:405 playlist/playlistmanager.cpp:408
 #: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:424
 #: ui/edittagdialog.cpp:465
 msgid "Unknown"
@@ -4804,7 +4830,7 @@ msgstr "Eguneratu podcast guztiak"
 msgid "Update changed library folders"
 msgstr "Eguneratu bildumako aldatutako karpetak"
 
-#: ../bin/src/ui_librarysettingspage.h:168
+#: ../bin/src/ui_librarysettingspage.h:191
 msgid "Update the library when Clementine starts"
 msgstr "Eguneratu bilduma Clementine abiaraztean"
 
@@ -4937,8 +4963,8 @@ msgstr "VBR MP3"
 msgid "Variable bit rate"
 msgstr "Bit-tasa aldakorra"
 
-#: globalsearch/globalsearchmodel.cpp:104 library/librarymodel.cpp:240
-#: playlist/playlistmanager.cpp:419 ui/albumcovermanager.cpp:247
+#: globalsearch/globalsearchmodel.cpp:104 library/librarymodel.cpp:241
+#: playlist/playlistmanager.cpp:420 ui/albumcovermanager.cpp:247
 msgid "Various artists"
 msgstr "Hainbat artista"
 
@@ -5005,7 +5031,7 @@ msgstr "Aste"
 msgid "When Clementine starts"
 msgstr "Clementine abiaraztean"
 
-#: ../bin/src/ui_librarysettingspage.h:176
+#: ../bin/src/ui_librarysettingspage.h:204
 msgid ""
 "When looking for album art Clementine will first look for picture files that contain one of these words.\n"
 "If there are no matches then it will use the largest image in the directory."
@@ -5086,6 +5112,10 @@ msgstr "Beste abestiak ere Hainbat artistara mugitzea nahi duzu?"
 #: ui/mainwindow.cpp:2058
 msgid "Would you like to run a full rescan right now?"
 msgstr "Berreskaneo osoa orain egitea nahi duzu?"
+
+#: library/librarysettingspage.cpp:151
+msgid "Write all songs statistics into songs' files"
+msgstr ""
 
 #: internet/subsonicsettingspage.cpp:83
 msgid "Wrong username or password."

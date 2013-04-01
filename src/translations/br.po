@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-03-10 08:25+0000\n"
+"PO-Revision-Date: 2013-03-30 23:26+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -78,7 +78,7 @@ msgstr "%1 war %2"
 msgid "%1 playlists (%2)"
 msgstr "%1 roll seniñ (%2)"
 
-#: playlist/playlistmanager.cpp:325
+#: playlist/playlistmanager.cpp:326
 #, qt-format
 msgid "%1 selected of"
 msgstr "%1 diuzet eus"
@@ -103,7 +103,7 @@ msgstr "%1 ton kavet"
 msgid "%1 songs found (showing %2)"
 msgstr "%1 ton kavet (%2 diskouezet)"
 
-#: playlist/playlistmanager.cpp:331
+#: playlist/playlistmanager.cpp:332
 #, qt-format
 msgid "%1 tracks"
 msgstr "%1 ton"
@@ -237,7 +237,7 @@ msgstr "0px"
 msgid "1 day"
 msgstr "1 devezh"
 
-#: playlist/playlistmanager.cpp:331
+#: playlist/playlistmanager.cpp:332
 msgid "1 track"
 msgstr "1 ton"
 
@@ -254,7 +254,7 @@ msgstr "MP3 128k"
 msgid "40%"
 msgstr "40%"
 
-#: library/library.cpp:58
+#: library/library.cpp:60
 msgid "50 random tracks"
 msgstr "50 ton dre zegouezh"
 
@@ -269,7 +269,7 @@ msgid ""
 " the Android App now!</a>"
 msgstr "<a href=\"https://play.google.com/store/apps/details?id=de.qspool.clementineremote\">Pellgargit ar poellad Android bremañ!</a>"
 
-#: ../bin/src/ui_librarysettingspage.h:171
+#: ../bin/src/ui_librarysettingspage.h:195
 msgid ""
 "<html><head/><body><p>If not checked, Clementine will  try to save your "
 "ratings and other statistics only in a separate database and don't modify "
@@ -278,6 +278,14 @@ msgid ""
 "not work for every format and, as there is no standard for doing so, other "
 "music players might not be able to read them.</p></body></html>"
 msgstr "<html><head/><body><p>Ma n'eo ket diuzet, Clementine a glasko enrollañ ho notennoù hag ho stadegoù all en un diaz roadennoù disheñvel hep cheñch ho restroù.</p><p>Ma 'z eo diuzet, enrollañ a raio ho stadegoù en diaz roadennoù hag er restroù bep tro ma vo cheñchet.</p><p>N'ez a ket en-dro evit pep mentrezh ha dre ma n'eus reolenn ebet evit en ober, posupl eo ne vefe ket gouest d'al lennerien sonerezh all lenn ar restroù ken.</p></body></html>"
+
+#: ../bin/src/ui_librarysettingspage.h:199
+msgid ""
+"<html><head/><body><p>This will write songs' ratings and statistics into "
+"files tags for all your library's songs.</p><p>This is not needed if the "
+"&quot;Save ratings and statistics in file tags&quot; option has always been "
+"activated.</p></body></html>"
+msgstr ""
 
 #: ../bin/src/ui_organisedialog.h:199
 msgid ""
@@ -398,7 +406,7 @@ msgstr "Ouzhpennañ un oberiadenn"
 msgid "Add another stream..."
 msgstr "Ouzhpennañ ul lanv all..."
 
-#: library/librarysettingspage.cpp:64
+#: library/librarysettingspage.cpp:68
 msgid "Add directory..."
 msgstr "Ouzhpennañ un teuliad..."
 
@@ -422,7 +430,7 @@ msgstr "Ouzhpennañ un teuliad"
 msgid "Add folder..."
 msgstr "Ouzhpennañ un teuliad..."
 
-#: ../bin/src/ui_librarysettingspage.h:165
+#: ../bin/src/ui_librarysettingspage.h:188
 msgid "Add new folder..."
 msgstr "Ouzhpennañ un teuliad nevez..."
 
@@ -643,7 +651,7 @@ msgstr "Holl rolloù seniñ (%1)"
 msgid "All the translators"
 msgstr "An holl troerien"
 
-#: library/library.cpp:82
+#: library/library.cpp:84
 msgid "All tracks"
 msgstr "An holl roudoù"
 
@@ -739,6 +747,12 @@ msgstr "Ha sur oc'h ho peus c'hoant diverkañ ar roll seniñ ?"
 msgid "Are you sure you want to reset this song's statistics?"
 msgstr "Ha sur oc'h da gaout c'hoant da adderaouekaat statistikoù an ton-mañ ?"
 
+#: library/librarysettingspage.cpp:152
+msgid ""
+"Are you sure you want to write song's statistics into song's file for all "
+"the songs of your library?"
+msgstr ""
+
 #: playlist/playlist.cpp:1205 ui/organisedialog.cpp:56
 #: ui/qtsystemtrayicon.cpp:250 ../bin/src/ui_groupbydialog.h:130
 #: ../bin/src/ui_groupbydialog.h:143 ../bin/src/ui_groupbydialog.h:156
@@ -787,11 +801,11 @@ msgstr "Aozerien"
 msgid "Auto"
 msgstr "Emgefreek"
 
-#: ../bin/src/ui_librarysettingspage.h:167
+#: ../bin/src/ui_librarysettingspage.h:190
 msgid "Automatic updating"
 msgstr "Hzivadurioù ent emgefreek"
 
-#: ../bin/src/ui_librarysettingspage.h:180
+#: ../bin/src/ui_librarysettingspage.h:208
 msgid "Automatically open single categories in the library tree"
 msgstr "Digeriñ ent emgefreek ar rummadoù o-unan e gwez ar sonaoueg"
 
@@ -931,7 +945,7 @@ msgstr "Boutonoù"
 msgid "CDDA"
 msgstr "CDDA"
 
-#: library/library.cpp:98
+#: library/library.cpp:100
 msgid "CUE sheet support"
 msgstr "Kemer e kont ar CUE sheet"
 
@@ -1634,7 +1648,7 @@ msgid "Discontinuous transmission"
 msgstr "Treuzkas digendalc'hus"
 
 #: internet/icecastfilterwidget.cpp:33 internet/searchboxwidget.cpp:30
-#: library/libraryfilterwidget.cpp:88 ../bin/src/ui_librarysettingspage.h:179
+#: library/libraryfilterwidget.cpp:88 ../bin/src/ui_librarysettingspage.h:207
 msgid "Display options"
 msgstr "Dibarzhioù ar skrammañ"
 
@@ -1756,7 +1770,7 @@ msgstr "Dropbox"
 msgid "Dynamic mode is on"
 msgstr "Ar stumm dinamikel a zo aktivet"
 
-#: internet/jamendoservice.cpp:113 library/library.cpp:91
+#: internet/jamendoservice.cpp:113 library/library.cpp:93
 msgid "Dynamic random mix"
 msgstr "Meskaj dargouezhek dialuskel"
 
@@ -1932,7 +1946,7 @@ msgstr "Ur gudenn a zo savet e-pad treterezh %1 : %2"
 msgid "Error while loading audio CD"
 msgstr "Kudenn e-pad kargadenn ar CD audio"
 
-#: library/library.cpp:61
+#: library/library.cpp:63
 msgid "Ever played"
 msgstr "Bet lennet dija"
 
@@ -2046,7 +2060,7 @@ msgstr "Trumm"
 msgid "Favorites"
 msgstr "Ma re garetañ"
 
-#: library/library.cpp:75
+#: library/library.cpp:77
 msgid "Favourite tracks"
 msgstr "Roudoù karetañ"
 
@@ -2605,7 +2619,7 @@ msgstr "Golo albom tev"
 msgid "Large sidebar"
 msgstr "Barenn gostez ledan"
 
-#: library/library.cpp:69 playlist/playlist.cpp:1220
+#: library/library.cpp:71 playlist/playlist.cpp:1220
 #: ../bin/src/ui_edittagdialog.h:671
 msgid "Last played"
 msgstr "Selaouet e ziwezhañ"
@@ -2676,7 +2690,7 @@ msgstr "Anv implijer Last.fm"
 msgid "Last.fm wiki"
 msgstr "Wiki last.fm"
 
-#: library/library.cpp:85
+#: library/library.cpp:87
 msgid "Least favourite tracks"
 msgstr "Roudoù an nebeutañ plijet"
 
@@ -2766,7 +2780,7 @@ msgstr "O kargañ stlennvon iPod"
 msgid "Loading smart playlist"
 msgstr "Kargañ ar roll seniñ speredek"
 
-#: library/librarymodel.cpp:138
+#: library/librarymodel.cpp:139
 msgid "Loading songs"
 msgstr "O kargañ tonioù"
 
@@ -2783,7 +2797,7 @@ msgstr "O kargan roudoù"
 msgid "Loading tracks info"
 msgstr "O kargañ titouroù ar roud"
 
-#: library/librarymodel.cpp:133 podcasts/podcastdiscoverymodel.cpp:97
+#: library/librarymodel.cpp:134 podcasts/podcastdiscoverymodel.cpp:97
 #: widgets/prettyimage.cpp:168 widgets/widgetfadehelper.cpp:99
 #: ../bin/src/ui_addpodcastdialog.h:180 ../bin/src/ui_searchpreview.h:106
 msgid "Loading..."
@@ -2947,7 +2961,7 @@ msgstr "Ragarventennoù projectM a vank"
 msgid "Model"
 msgstr "Patrom"
 
-#: ../bin/src/ui_librarysettingspage.h:169
+#: ../bin/src/ui_librarysettingspage.h:192
 msgid "Monitor the library for changes"
 msgstr "Evezhiañ cheñchamantoù ar sonaoueg"
 
@@ -2972,7 +2986,7 @@ msgstr "Doare ar varenn imor"
 msgid "Moodbars"
 msgstr "Barenn imor"
 
-#: library/library.cpp:72
+#: library/library.cpp:74
 msgid "Most played"
 msgstr "Lennet an aliesañ"
 
@@ -3002,7 +3016,7 @@ msgstr "A-us"
 msgid "Music"
 msgstr "Sonerezh"
 
-#: ../bin/src/ui_librarysettingspage.h:163
+#: ../bin/src/ui_librarysettingspage.h:186
 msgid "Music Library"
 msgstr "Sonaoueg"
 
@@ -3083,7 +3097,7 @@ msgstr "Rouedad pell"
 msgid "Never"
 msgstr "Morse"
 
-#: library/library.cpp:65
+#: library/library.cpp:67
 msgid "Never played"
 msgstr "Morse sonet"
 
@@ -3114,7 +3128,7 @@ msgstr "Tonioù nevez"
 msgid "New tracks will be added automatically."
 msgstr "Ar roudoù nevez a vo ouzhpennet ent emgefreek."
 
-#: library/library.cpp:78
+#: library/library.cpp:80
 msgid "Newest tracks"
 msgstr "Roudoù nevesañ"
 
@@ -3453,8 +3467,8 @@ msgstr "Lenn sonerezh"
 msgid "Player options"
 msgstr "Dibarzhioù al lenner"
 
-#: playlist/playlistcontainer.cpp:273 playlist/playlistmanager.cpp:78
-#: playlist/playlistmanager.cpp:396 playlist/playlisttabbar.cpp:290
+#: playlist/playlistcontainer.cpp:273 playlist/playlistmanager.cpp:79
+#: playlist/playlistmanager.cpp:397 playlist/playlisttabbar.cpp:290
 msgid "Playlist"
 msgstr "Roll seniñ"
 
@@ -3526,7 +3540,7 @@ msgstr "Gwellvezioù"
 msgid "Preferences..."
 msgstr "Gwellvezioù..."
 
-#: ../bin/src/ui_librarysettingspage.h:174
+#: ../bin/src/ui_librarysettingspage.h:202
 msgid "Preferred album art filenames (comma separated)"
 msgstr "Anv ar goloioù karetañ (dispartiet gant virgulennoù)"
 
@@ -3727,7 +3741,7 @@ msgstr "Tennañ an oberiadenn"
 msgid "Remove duplicates from playlist"
 msgstr "Tennañ an tonioù doubl eus ar roll seniñ"
 
-#: ../bin/src/ui_librarysettingspage.h:166
+#: ../bin/src/ui_librarysettingspage.h:189
 msgid "Remove folder"
 msgstr "Tennañ an teuliad"
 
@@ -3902,13 +3916,21 @@ msgstr "Enrollañ ar roll seniñ..."
 msgid "Save preset"
 msgstr "Enrollañ ar ragarventennoù"
 
-#: ../bin/src/ui_librarysettingspage.h:173
-msgid "Save ratings and statistics in file tags when possible"
-msgstr "Enrollañ an notennoù hag ar stadegoù e klav ar restr pa 'z eo posupl"
+#: ../bin/src/ui_librarysettingspage.h:193
+msgid "Save ratings in file tags when possible"
+msgstr ""
+
+#: ../bin/src/ui_librarysettingspage.h:197
+msgid "Save statistics in file tags when possible"
+msgstr ""
 
 #: ../bin/src/ui_addstreamdialog.h:115
 msgid "Save this stream in the Internet tab"
 msgstr "Enrollañ al lanv-mañ en ivinell internet"
+
+#: library/library.cpp:164
+msgid "Saving songs statistics into songs files"
+msgstr ""
 
 #: ui/edittagdialog.cpp:670 ui/trackselectiondialog.cpp:256
 msgid "Saving tracks"
@@ -4131,11 +4153,11 @@ msgstr "Diskouez an holl tonioù"
 msgid "Show all the songs"
 msgstr "Diskouez an holl tonioù"
 
-#: ../bin/src/ui_librarysettingspage.h:181
+#: ../bin/src/ui_librarysettingspage.h:209
 msgid "Show cover art in library"
 msgstr "Diskouez ar golo er sonaoueg"
 
-#: ../bin/src/ui_librarysettingspage.h:182
+#: ../bin/src/ui_librarysettingspage.h:210
 msgid "Show dividers"
 msgstr "Diskouez an dispartierien"
 
@@ -4252,7 +4274,7 @@ msgstr "Barenn gostez bihan"
 msgid "Smart playlist"
 msgstr "Roll seniñ speredek"
 
-#: library/librarymodel.cpp:1171
+#: library/librarymodel.cpp:1172
 msgid "Smart playlists"
 msgstr "Rolloù seniñ speredek"
 
@@ -4447,6 +4469,10 @@ msgstr "Bras-tre (2048x2048)"
 msgid "Supported formats"
 msgstr "Mentrezhoù restr kemeret e kont"
 
+#: ../bin/src/ui_librarysettingspage.h:201
+msgid "Synchronize statistics to files now"
+msgstr ""
+
 #: internet/spotifyservice.cpp:561
 msgid "Syncing Spotify inbox"
 msgstr "Sinkronizadur ar boest degemer Spotify"
@@ -4509,7 +4535,7 @@ msgstr "Golo an albom o vezañ lennet"
 msgid "The directory %1 is not valid"
 msgstr "An teuliad %1 a zo direizh"
 
-#: playlist/playlistmanager.cpp:154 playlist/playlistmanager.cpp:172
+#: playlist/playlistmanager.cpp:155 playlist/playlistmanager.cpp:173
 #, qt-format
 msgid "The playlist '%1' was empty or could not be loaded."
 msgstr "Ar roll seniñ '%1' a oa goulo pe n'eus ket bet tu he kargañ"
@@ -4578,7 +4604,7 @@ msgid ""
 "continue?"
 msgstr "Ar restroù-mañ a vo diverket eus an drobarzhell, sur oc'h da gaout c'hoant kenderc'hel ?"
 
-#: ../bin/src/ui_librarysettingspage.h:164
+#: ../bin/src/ui_librarysettingspage.h:187
 msgid "These folders will be scanned for music to make up your library"
 msgstr "An teuliadoù-mañ a vo furchet enno evit klask sonerezh da lakaat e-barzh ho sonaoueg"
 
@@ -4763,9 +4789,9 @@ msgstr "Bandenn ledan tre (UWB)"
 msgid "Unable to download %1 (%2)"
 msgstr "N'eus ket tu pellgargañ %1 (%2)"
 
-#: core/song.cpp:350 library/librarymodel.cpp:307 library/librarymodel.cpp:312
-#: library/librarymodel.cpp:969 playlist/playlistdelegates.cpp:309
-#: playlist/playlistmanager.cpp:404 playlist/playlistmanager.cpp:407
+#: core/song.cpp:350 library/librarymodel.cpp:308 library/librarymodel.cpp:313
+#: library/librarymodel.cpp:970 playlist/playlistdelegates.cpp:309
+#: playlist/playlistmanager.cpp:405 playlist/playlistmanager.cpp:408
 #: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:424
 #: ui/edittagdialog.cpp:465
 msgid "Unknown"
@@ -4803,7 +4829,7 @@ msgstr "Hizivaat ar podkastoù"
 msgid "Update changed library folders"
 msgstr "Hizivaat teuliadoù kemmet ar sonaoueg"
 
-#: ../bin/src/ui_librarysettingspage.h:168
+#: ../bin/src/ui_librarysettingspage.h:191
 msgid "Update the library when Clementine starts"
 msgstr "Hizivaat ar sonaoueg pa grog Clementine"
 
@@ -4936,8 +4962,8 @@ msgstr "VBR MP3"
 msgid "Variable bit rate"
 msgstr "Fonnder kemmus"
 
-#: globalsearch/globalsearchmodel.cpp:104 library/librarymodel.cpp:240
-#: playlist/playlistmanager.cpp:419 ui/albumcovermanager.cpp:247
+#: globalsearch/globalsearchmodel.cpp:104 library/librarymodel.cpp:241
+#: playlist/playlistmanager.cpp:420 ui/albumcovermanager.cpp:247
 msgid "Various artists"
 msgstr "Arzourien Liesseurt"
 
@@ -5004,7 +5030,7 @@ msgstr "Sizhunvezhioù"
 msgid "When Clementine starts"
 msgstr "Pa grog Clementine"
 
-#: ../bin/src/ui_librarysettingspage.h:176
+#: ../bin/src/ui_librarysettingspage.h:204
 msgid ""
 "When looking for album art Clementine will first look for picture files that contain one of these words.\n"
 "If there are no matches then it will use the largest image in the directory."
@@ -5085,6 +5111,10 @@ msgstr "Ha c'hoant ho peus lakaat tonioù all an albom-mañ e Arzourien Liesseur
 #: ui/mainwindow.cpp:2058
 msgid "Would you like to run a full rescan right now?"
 msgstr "C'hoant ho peus d'ober ur c'hwilervadenn eus al levraoueg bremañ ?"
+
+#: library/librarysettingspage.cpp:151
+msgid "Write all songs statistics into songs' files"
+msgstr ""
 
 #: internet/subsonicsettingspage.cpp:83
 msgid "Wrong username or password."

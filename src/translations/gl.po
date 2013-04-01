@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-03-10 08:25+0000\n"
+"PO-Revision-Date: 2013-03-30 23:26+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -77,7 +77,7 @@ msgstr "%1 en %2"
 msgid "%1 playlists (%2)"
 msgstr "%1 listas de reprodución (%2)"
 
-#: playlist/playlistmanager.cpp:325
+#: playlist/playlistmanager.cpp:326
 #, qt-format
 msgid "%1 selected of"
 msgstr "%1 escollidas de"
@@ -102,7 +102,7 @@ msgstr "%1 canción encontrada"
 msgid "%1 songs found (showing %2)"
 msgstr "%1 canción atopada (amosando %2)"
 
-#: playlist/playlistmanager.cpp:331
+#: playlist/playlistmanager.cpp:332
 #, qt-format
 msgid "%1 tracks"
 msgstr "%1 canción"
@@ -236,7 +236,7 @@ msgstr "0px"
 msgid "1 day"
 msgstr "1 día"
 
-#: playlist/playlistmanager.cpp:331
+#: playlist/playlistmanager.cpp:332
 msgid "1 track"
 msgstr "1 pista"
 
@@ -253,7 +253,7 @@ msgstr "128k MP3"
 msgid "40%"
 msgstr "40%"
 
-#: library/library.cpp:58
+#: library/library.cpp:60
 msgid "50 random tracks"
 msgstr "50 pistas aleatorias"
 
@@ -268,7 +268,7 @@ msgid ""
 " the Android App now!</a>"
 msgstr ""
 
-#: ../bin/src/ui_librarysettingspage.h:171
+#: ../bin/src/ui_librarysettingspage.h:195
 msgid ""
 "<html><head/><body><p>If not checked, Clementine will  try to save your "
 "ratings and other statistics only in a separate database and don't modify "
@@ -276,6 +276,14 @@ msgid ""
 "directly into the file each time they changed.</p><p>Please note it might "
 "not work for every format and, as there is no standard for doing so, other "
 "music players might not be able to read them.</p></body></html>"
+msgstr ""
+
+#: ../bin/src/ui_librarysettingspage.h:199
+msgid ""
+"<html><head/><body><p>This will write songs' ratings and statistics into "
+"files tags for all your library's songs.</p><p>This is not needed if the "
+"&quot;Save ratings and statistics in file tags&quot; option has always been "
+"activated.</p></body></html>"
 msgstr ""
 
 #: ../bin/src/ui_organisedialog.h:199
@@ -397,7 +405,7 @@ msgstr "Engadir acción"
 msgid "Add another stream..."
 msgstr "Engadir outro fluxo…"
 
-#: library/librarysettingspage.cpp:64
+#: library/librarysettingspage.cpp:68
 msgid "Add directory..."
 msgstr "Engadir un cartafol…"
 
@@ -421,7 +429,7 @@ msgstr "Engadir cartafol"
 msgid "Add folder..."
 msgstr "Engadir cartafol..."
 
-#: ../bin/src/ui_librarysettingspage.h:165
+#: ../bin/src/ui_librarysettingspage.h:188
 msgid "Add new folder..."
 msgstr "Engadir novo cartafol"
 
@@ -642,7 +650,7 @@ msgstr "Todas as listas (%1)"
 msgid "All the translators"
 msgstr "Todos os tradutores"
 
-#: library/library.cpp:82
+#: library/library.cpp:84
 msgid "All tracks"
 msgstr "Todas as cancións"
 
@@ -738,6 +746,12 @@ msgstr "Está seguro de que quere eliminar a lista?"
 msgid "Are you sure you want to reset this song's statistics?"
 msgstr "Está seguro de que quere restablecer as estatísticas da canción?"
 
+#: library/librarysettingspage.cpp:152
+msgid ""
+"Are you sure you want to write song's statistics into song's file for all "
+"the songs of your library?"
+msgstr ""
+
 #: playlist/playlist.cpp:1205 ui/organisedialog.cpp:56
 #: ui/qtsystemtrayicon.cpp:250 ../bin/src/ui_groupbydialog.h:130
 #: ../bin/src/ui_groupbydialog.h:143 ../bin/src/ui_groupbydialog.h:156
@@ -786,11 +800,11 @@ msgstr "Autores/as"
 msgid "Auto"
 msgstr "Automático"
 
-#: ../bin/src/ui_librarysettingspage.h:167
+#: ../bin/src/ui_librarysettingspage.h:190
 msgid "Automatic updating"
 msgstr "Actualización automática"
 
-#: ../bin/src/ui_librarysettingspage.h:180
+#: ../bin/src/ui_librarysettingspage.h:208
 msgid "Automatically open single categories in the library tree"
 msgstr "Expandir automaticamente as categorías únicas na árbore da colección."
 
@@ -930,7 +944,7 @@ msgstr "Botóns"
 msgid "CDDA"
 msgstr "CDDA"
 
-#: library/library.cpp:98
+#: library/library.cpp:100
 msgid "CUE sheet support"
 msgstr "Compatibilidade con follas CUE"
 
@@ -1633,7 +1647,7 @@ msgid "Discontinuous transmission"
 msgstr "Transmisión entrecortada"
 
 #: internet/icecastfilterwidget.cpp:33 internet/searchboxwidget.cpp:30
-#: library/libraryfilterwidget.cpp:88 ../bin/src/ui_librarysettingspage.h:179
+#: library/libraryfilterwidget.cpp:88 ../bin/src/ui_librarysettingspage.h:207
 msgid "Display options"
 msgstr "Opcións de visualización"
 
@@ -1755,7 +1769,7 @@ msgstr "Dropbox"
 msgid "Dynamic mode is on"
 msgstr "O modo dinámico está activado"
 
-#: internet/jamendoservice.cpp:113 library/library.cpp:91
+#: internet/jamendoservice.cpp:113 library/library.cpp:93
 msgid "Dynamic random mix"
 msgstr "Mestura aleatoria dinámica"
 
@@ -1931,7 +1945,7 @@ msgstr "Erro ao procesarr %1: %2"
 msgid "Error while loading audio CD"
 msgstr "Non foi posíbel cargar o CD de son."
 
-#: library/library.cpp:61
+#: library/library.cpp:63
 msgid "Ever played"
 msgstr "Reproducidas algunha vez"
 
@@ -2045,7 +2059,7 @@ msgstr "Rápido"
 msgid "Favorites"
 msgstr "Favoritos"
 
-#: library/library.cpp:75
+#: library/library.cpp:77
 msgid "Favourite tracks"
 msgstr "Pistas favoritas"
 
@@ -2604,7 +2618,7 @@ msgstr "Portada grande do álbum"
 msgid "Large sidebar"
 msgstr "Barra lateral larga"
 
-#: library/library.cpp:69 playlist/playlist.cpp:1220
+#: library/library.cpp:71 playlist/playlist.cpp:1220
 #: ../bin/src/ui_edittagdialog.h:671
 msgid "Last played"
 msgstr "Últimos en soar"
@@ -2675,7 +2689,7 @@ msgstr "Nome de usuario de Last.fm"
 msgid "Last.fm wiki"
 msgstr "Wiki de Last.fm"
 
-#: library/library.cpp:85
+#: library/library.cpp:87
 msgid "Least favourite tracks"
 msgstr "Pistas en peor estima"
 
@@ -2765,7 +2779,7 @@ msgstr "Cargando a base de datos do iPod…"
 msgid "Loading smart playlist"
 msgstr "Cargando a lista intelixente…"
 
-#: library/librarymodel.cpp:138
+#: library/librarymodel.cpp:139
 msgid "Loading songs"
 msgstr "Cargando as cancións…"
 
@@ -2782,7 +2796,7 @@ msgstr "Cargando as pistas…"
 msgid "Loading tracks info"
 msgstr "Cargando a información das pistas…"
 
-#: library/librarymodel.cpp:133 podcasts/podcastdiscoverymodel.cpp:97
+#: library/librarymodel.cpp:134 podcasts/podcastdiscoverymodel.cpp:97
 #: widgets/prettyimage.cpp:168 widgets/widgetfadehelper.cpp:99
 #: ../bin/src/ui_addpodcastdialog.h:180 ../bin/src/ui_searchpreview.h:106
 msgid "Loading..."
@@ -2946,7 +2960,7 @@ msgstr "Predefinicións de Missing projectM"
 msgid "Model"
 msgstr "Modelo"
 
-#: ../bin/src/ui_librarysettingspage.h:169
+#: ../bin/src/ui_librarysettingspage.h:192
 msgid "Monitor the library for changes"
 msgstr "Vixiar is cambios na colección."
 
@@ -2971,7 +2985,7 @@ msgstr "Estilo da barra do ánimo"
 msgid "Moodbars"
 msgstr "Barras do ánimo"
 
-#: library/library.cpp:72
+#: library/library.cpp:74
 msgid "Most played"
 msgstr "Máis tocados"
 
@@ -3001,7 +3015,7 @@ msgstr "Mover para acima"
 msgid "Music"
 msgstr "Música"
 
-#: ../bin/src/ui_librarysettingspage.h:163
+#: ../bin/src/ui_librarysettingspage.h:186
 msgid "Music Library"
 msgstr "Colección de música"
 
@@ -3082,7 +3096,7 @@ msgstr "Mando por rede"
 msgid "Never"
 msgstr "Nunca"
 
-#: library/library.cpp:65
+#: library/library.cpp:67
 msgid "Never played"
 msgstr "Nunca Reproducido"
 
@@ -3113,7 +3127,7 @@ msgstr "Novas cancións"
 msgid "New tracks will be added automatically."
 msgstr "Engadir as novas pistas automaticamente."
 
-#: library/library.cpp:78
+#: library/library.cpp:80
 msgid "Newest tracks"
 msgstr "Últimas pistas"
 
@@ -3452,8 +3466,8 @@ msgstr "Reprodución"
 msgid "Player options"
 msgstr "Opczóns do player"
 
-#: playlist/playlistcontainer.cpp:273 playlist/playlistmanager.cpp:78
-#: playlist/playlistmanager.cpp:396 playlist/playlisttabbar.cpp:290
+#: playlist/playlistcontainer.cpp:273 playlist/playlistmanager.cpp:79
+#: playlist/playlistmanager.cpp:397 playlist/playlisttabbar.cpp:290
 msgid "Playlist"
 msgstr "Lista de reprodución"
 
@@ -3525,7 +3539,7 @@ msgstr "Configuración"
 msgid "Preferences..."
 msgstr "Configuración…"
 
-#: ../bin/src/ui_librarysettingspage.h:174
+#: ../bin/src/ui_librarysettingspage.h:202
 msgid "Preferred album art filenames (comma separated)"
 msgstr "Rutas as ficheiros da portada, separados por comas e en orde de preferencia."
 
@@ -3726,7 +3740,7 @@ msgstr "Eliminar acción"
 msgid "Remove duplicates from playlist"
 msgstr "Eliminar as entradas duplicadas da lista"
 
-#: ../bin/src/ui_librarysettingspage.h:166
+#: ../bin/src/ui_librarysettingspage.h:189
 msgid "Remove folder"
 msgstr "Eliminar cartafol"
 
@@ -3901,13 +3915,21 @@ msgstr "Gardar lista de reprodución..."
 msgid "Save preset"
 msgstr "Salvar os axustes"
 
-#: ../bin/src/ui_librarysettingspage.h:173
-msgid "Save ratings and statistics in file tags when possible"
+#: ../bin/src/ui_librarysettingspage.h:193
+msgid "Save ratings in file tags when possible"
+msgstr ""
+
+#: ../bin/src/ui_librarysettingspage.h:197
+msgid "Save statistics in file tags when possible"
 msgstr ""
 
 #: ../bin/src/ui_addstreamdialog.h:115
 msgid "Save this stream in the Internet tab"
 msgstr "Gardar esta emisión na lapela Internet"
+
+#: library/library.cpp:164
+msgid "Saving songs statistics into songs files"
+msgstr ""
 
 #: ui/edittagdialog.cpp:670 ui/trackselectiondialog.cpp:256
 msgid "Saving tracks"
@@ -4130,11 +4152,11 @@ msgstr "Amosar todas as cancións"
 msgid "Show all the songs"
 msgstr "Mostrar todas as cancións"
 
-#: ../bin/src/ui_librarysettingspage.h:181
+#: ../bin/src/ui_librarysettingspage.h:209
 msgid "Show cover art in library"
 msgstr "Amosar as portadas da biblioteca"
 
-#: ../bin/src/ui_librarysettingspage.h:182
+#: ../bin/src/ui_librarysettingspage.h:210
 msgid "Show dividers"
 msgstr "Amosar as divisións"
 
@@ -4251,7 +4273,7 @@ msgstr "Barra lateral pequena"
 msgid "Smart playlist"
 msgstr "Lista de reprodución intelixente"
 
-#: library/librarymodel.cpp:1171
+#: library/librarymodel.cpp:1172
 msgid "Smart playlists"
 msgstr "Listas de reprodución intelixentes"
 
@@ -4446,6 +4468,10 @@ msgstr "Moi alta (2048x2048)"
 msgid "Supported formats"
 msgstr "Formatos dispoñíbeis"
 
+#: ../bin/src/ui_librarysettingspage.h:201
+msgid "Synchronize statistics to files now"
+msgstr ""
+
 #: internet/spotifyservice.cpp:561
 msgid "Syncing Spotify inbox"
 msgstr "Sincronizando coa caixa de entrada de Spotify"
@@ -4508,7 +4534,7 @@ msgstr "Portada do álbum da canción actual"
 msgid "The directory %1 is not valid"
 msgstr "O directorio %1 non é valido"
 
-#: playlist/playlistmanager.cpp:154 playlist/playlistmanager.cpp:172
+#: playlist/playlistmanager.cpp:155 playlist/playlistmanager.cpp:173
 #, qt-format
 msgid "The playlist '%1' was empty or could not be loaded."
 msgstr "A lista de reprodución «%1» está baleira ou non pode cargarse."
@@ -4577,7 +4603,7 @@ msgid ""
 "continue?"
 msgstr "Estes arquivos serán eliminados do dispositivo, estás seguro de querer continuar?"
 
-#: ../bin/src/ui_librarysettingspage.h:164
+#: ../bin/src/ui_librarysettingspage.h:187
 msgid "These folders will be scanned for music to make up your library"
 msgstr "Estes cartafoles serán escaneados para compor a túa libraría"
 
@@ -4762,9 +4788,9 @@ msgstr "Banda ultralarga (UWB)"
 msgid "Unable to download %1 (%2)"
 msgstr "Non é posíbel descargar %1 (%2)."
 
-#: core/song.cpp:350 library/librarymodel.cpp:307 library/librarymodel.cpp:312
-#: library/librarymodel.cpp:969 playlist/playlistdelegates.cpp:309
-#: playlist/playlistmanager.cpp:404 playlist/playlistmanager.cpp:407
+#: core/song.cpp:350 library/librarymodel.cpp:308 library/librarymodel.cpp:313
+#: library/librarymodel.cpp:970 playlist/playlistdelegates.cpp:309
+#: playlist/playlistmanager.cpp:405 playlist/playlistmanager.cpp:408
 #: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:424
 #: ui/edittagdialog.cpp:465
 msgid "Unknown"
@@ -4802,7 +4828,7 @@ msgstr "Actualizar todos os podcasts"
 msgid "Update changed library folders"
 msgstr "Actualizar os cartafoles da biblioteca con cambios"
 
-#: ../bin/src/ui_librarysettingspage.h:168
+#: ../bin/src/ui_librarysettingspage.h:191
 msgid "Update the library when Clementine starts"
 msgstr "Actualizar a biblioteca ao iniciar Clementine."
 
@@ -4935,8 +4961,8 @@ msgstr "MP3 VBR"
 msgid "Variable bit rate"
 msgstr "Taxa de bits variábel"
 
-#: globalsearch/globalsearchmodel.cpp:104 library/librarymodel.cpp:240
-#: playlist/playlistmanager.cpp:419 ui/albumcovermanager.cpp:247
+#: globalsearch/globalsearchmodel.cpp:104 library/librarymodel.cpp:241
+#: playlist/playlistmanager.cpp:420 ui/albumcovermanager.cpp:247
 msgid "Various artists"
 msgstr "Varios intérpretes"
 
@@ -5003,7 +5029,7 @@ msgstr "Semanas"
 msgid "When Clementine starts"
 msgstr "Ao iniciar Clementine"
 
-#: ../bin/src/ui_librarysettingspage.h:176
+#: ../bin/src/ui_librarysettingspage.h:204
 msgid ""
 "When looking for album art Clementine will first look for picture files that contain one of these words.\n"
 "If there are no matches then it will use the largest image in the directory."
@@ -5084,6 +5110,10 @@ msgstr "Quere mover tamén o resto das cancións do álbum a «Varios Intérpret
 #: ui/mainwindow.cpp:2058
 msgid "Would you like to run a full rescan right now?"
 msgstr "Quere realizar unha análise completa agora?"
+
+#: library/librarysettingspage.cpp:151
+msgid "Write all songs statistics into songs' files"
+msgstr ""
 
 #: internet/subsonicsettingspage.cpp:83
 msgid "Wrong username or password."

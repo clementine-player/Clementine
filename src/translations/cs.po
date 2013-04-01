@@ -16,8 +16,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-03-10 12:46+0000\n"
-"Last-Translator: fri <pavelfric@seznam.cz>\n"
+"PO-Revision-Date: 2013-03-30 23:26+0000\n"
+"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: cs\n"
@@ -83,7 +83,7 @@ msgstr "%1 na %2"
 msgid "%1 playlists (%2)"
 msgstr "%1 seznamů skladeb (%2)"
 
-#: playlist/playlistmanager.cpp:325
+#: playlist/playlistmanager.cpp:326
 #, qt-format
 msgid "%1 selected of"
 msgstr "%1 vybráno z"
@@ -108,7 +108,7 @@ msgstr "Bylo nalezeno %1 písní"
 msgid "%1 songs found (showing %2)"
 msgstr "Bylo nalezeno %1 písní (zobrazeno %2)"
 
-#: playlist/playlistmanager.cpp:331
+#: playlist/playlistmanager.cpp:332
 #, qt-format
 msgid "%1 tracks"
 msgstr "%1 skladeb"
@@ -242,7 +242,7 @@ msgstr "0 px"
 msgid "1 day"
 msgstr "1 den"
 
-#: playlist/playlistmanager.cpp:331
+#: playlist/playlistmanager.cpp:332
 msgid "1 track"
 msgstr "1 stopa"
 
@@ -259,7 +259,7 @@ msgstr "128k MP3"
 msgid "40%"
 msgstr "40%"
 
-#: library/library.cpp:58
+#: library/library.cpp:60
 msgid "50 random tracks"
 msgstr "50 náhodných skladeb"
 
@@ -274,7 +274,7 @@ msgid ""
 " the Android App now!</a>"
 msgstr "<a href=\"https://play.google.com/store/apps/details?id=de.qspool.clementineremote\">Získejte program pro Android nyní!</a>"
 
-#: ../bin/src/ui_librarysettingspage.h:171
+#: ../bin/src/ui_librarysettingspage.h:195
 msgid ""
 "<html><head/><body><p>If not checked, Clementine will  try to save your "
 "ratings and other statistics only in a separate database and don't modify "
@@ -283,6 +283,14 @@ msgid ""
 "not work for every format and, as there is no standard for doing so, other "
 "music players might not be able to read them.</p></body></html>"
 msgstr "<html><head/><body><p>Není-li zaškrtnuto, Clementine se pokusí o uložení vašeho hodnocení a dalších statistik pouze v samostatné databázi a nebude měnit vaše soubory.</p><p>Je-li zaškrtnuto, Clementine uloží statistiku jak do databáze tak přímo do souboru pokaždé, když došlo ke změně.</p><p>Všimněte si, prosím, že to nemusí jít u každého formátu, jelikož pro to, jak to dělat, není žádný standard. Jiné hudební přehrávače tyto soubory nemusí být schopny přečíst.</p></body></html>"
+
+#: ../bin/src/ui_librarysettingspage.h:199
+msgid ""
+"<html><head/><body><p>This will write songs' ratings and statistics into "
+"files tags for all your library's songs.</p><p>This is not needed if the "
+"&quot;Save ratings and statistics in file tags&quot; option has always been "
+"activated.</p></body></html>"
+msgstr "<html><head/><body><p>Toto bude zapisovat hodnocení písní a statistiky do značek písní u všech písní ve vaší sbírce.</p><p>Není to potřeba, pokud byla volba &quot;Ukládat  hodnocení písní a statistiky do značek písní&quot;vždy zapnuta.</p></body></html>"
 
 #: ../bin/src/ui_organisedialog.h:199
 msgid ""
@@ -403,7 +411,7 @@ msgstr "Přidat činnost"
 msgid "Add another stream..."
 msgstr "Přidat další proud..."
 
-#: library/librarysettingspage.cpp:64
+#: library/librarysettingspage.cpp:68
 msgid "Add directory..."
 msgstr "Přidat složku..."
 
@@ -427,7 +435,7 @@ msgstr "Přidat složku"
 msgid "Add folder..."
 msgstr "Přidat složku..."
 
-#: ../bin/src/ui_librarysettingspage.h:165
+#: ../bin/src/ui_librarysettingspage.h:188
 msgid "Add new folder..."
 msgstr "Přidat novou složku..."
 
@@ -648,7 +656,7 @@ msgstr "Všechny seznamy skladeb (%1)"
 msgid "All the translators"
 msgstr "Všichni překladatelé"
 
-#: library/library.cpp:82
+#: library/library.cpp:84
 msgid "All tracks"
 msgstr "Všechny skladby"
 
@@ -744,6 +752,12 @@ msgstr "Opravdu chcete smazat tento seznam skladeb?"
 msgid "Are you sure you want to reset this song's statistics?"
 msgstr "Opravdu chcete nastavit statistiku této písně znovu?"
 
+#: library/librarysettingspage.cpp:152
+msgid ""
+"Are you sure you want to write song's statistics into song's file for all "
+"the songs of your library?"
+msgstr "Opravdu chcete ukládat statistiky písní do souboru písně u všech písní ve vaší sbírce?"
+
 #: playlist/playlist.cpp:1205 ui/organisedialog.cpp:56
 #: ui/qtsystemtrayicon.cpp:250 ../bin/src/ui_groupbydialog.h:130
 #: ../bin/src/ui_groupbydialog.h:143 ../bin/src/ui_groupbydialog.h:156
@@ -792,11 +806,11 @@ msgstr "Autoři"
 msgid "Auto"
 msgstr "Automaticky"
 
-#: ../bin/src/ui_librarysettingspage.h:167
+#: ../bin/src/ui_librarysettingspage.h:190
 msgid "Automatic updating"
 msgstr "Automatická aktualizace"
 
-#: ../bin/src/ui_librarysettingspage.h:180
+#: ../bin/src/ui_librarysettingspage.h:208
 msgid "Automatically open single categories in the library tree"
 msgstr "Automaticky otevřít jednotlivé skupiny ve stromu sbírky"
 
@@ -936,7 +950,7 @@ msgstr "Tlačítka"
 msgid "CDDA"
 msgstr "CDDA"
 
-#: library/library.cpp:98
+#: library/library.cpp:100
 msgid "CUE sheet support"
 msgstr "Podpora pro list CUE"
 
@@ -1639,7 +1653,7 @@ msgid "Discontinuous transmission"
 msgstr "Nesouvislý přenos"
 
 #: internet/icecastfilterwidget.cpp:33 internet/searchboxwidget.cpp:30
-#: library/libraryfilterwidget.cpp:88 ../bin/src/ui_librarysettingspage.h:179
+#: library/libraryfilterwidget.cpp:88 ../bin/src/ui_librarysettingspage.h:207
 msgid "Display options"
 msgstr "Volby zobrazení"
 
@@ -1761,7 +1775,7 @@ msgstr "Dropbox"
 msgid "Dynamic mode is on"
 msgstr "Je zapnut dynamický režim"
 
-#: internet/jamendoservice.cpp:113 library/library.cpp:91
+#: internet/jamendoservice.cpp:113 library/library.cpp:93
 msgid "Dynamic random mix"
 msgstr "Dynamický náhodný výběr"
 
@@ -1937,7 +1951,7 @@ msgstr "Chyba při zpracovávání %1: %2"
 msgid "Error while loading audio CD"
 msgstr "Chyba  při nahrávání zvukového CD"
 
-#: library/library.cpp:61
+#: library/library.cpp:63
 msgid "Ever played"
 msgstr "Přehrané skladby"
 
@@ -2051,7 +2065,7 @@ msgstr "Rychlý"
 msgid "Favorites"
 msgstr "Oblíbené"
 
-#: library/library.cpp:75
+#: library/library.cpp:77
 msgid "Favourite tracks"
 msgstr "Oblíbené skladby"
 
@@ -2610,7 +2624,7 @@ msgstr "Velký obal alba"
 msgid "Large sidebar"
 msgstr "Velký postranní panel"
 
-#: library/library.cpp:69 playlist/playlist.cpp:1220
+#: library/library.cpp:71 playlist/playlist.cpp:1220
 #: ../bin/src/ui_edittagdialog.h:671
 msgid "Last played"
 msgstr "Naposledy hrané"
@@ -2681,7 +2695,7 @@ msgstr "Uživatelské jméno k Last.fm"
 msgid "Last.fm wiki"
 msgstr "Wiki pro Last.fm"
 
-#: library/library.cpp:85
+#: library/library.cpp:87
 msgid "Least favourite tracks"
 msgstr "Nejméně oblíbené skladby"
 
@@ -2771,7 +2785,7 @@ msgstr "Nahrává se databáze iPod"
 msgid "Loading smart playlist"
 msgstr "Nahrává se chytrý seznam skladeb"
 
-#: library/librarymodel.cpp:138
+#: library/librarymodel.cpp:139
 msgid "Loading songs"
 msgstr "Nahrávají se písně"
 
@@ -2788,7 +2802,7 @@ msgstr "Nahrávají se skladby"
 msgid "Loading tracks info"
 msgstr "Nahrávají se informace o skladbě"
 
-#: library/librarymodel.cpp:133 podcasts/podcastdiscoverymodel.cpp:97
+#: library/librarymodel.cpp:134 podcasts/podcastdiscoverymodel.cpp:97
 #: widgets/prettyimage.cpp:168 widgets/widgetfadehelper.cpp:99
 #: ../bin/src/ui_addpodcastdialog.h:180 ../bin/src/ui_searchpreview.h:106
 msgid "Loading..."
@@ -2952,7 +2966,7 @@ msgstr "Chybí přednastavení projectM"
 msgid "Model"
 msgstr "Model"
 
-#: ../bin/src/ui_librarysettingspage.h:169
+#: ../bin/src/ui_librarysettingspage.h:192
 msgid "Monitor the library for changes"
 msgstr "Sledovat změny ve sbírce"
 
@@ -2977,7 +2991,7 @@ msgstr "Styl náladového proužku"
 msgid "Moodbars"
 msgstr "Náladové proužky"
 
-#: library/library.cpp:72
+#: library/library.cpp:74
 msgid "Most played"
 msgstr "Nejvíce hráno"
 
@@ -3007,7 +3021,7 @@ msgstr "Posunout nahoru"
 msgid "Music"
 msgstr "Hudba"
 
-#: ../bin/src/ui_librarysettingspage.h:163
+#: ../bin/src/ui_librarysettingspage.h:186
 msgid "Music Library"
 msgstr "Hudební sbírka"
 
@@ -3088,7 +3102,7 @@ msgstr "Síťové vzdálené ovládání"
 msgid "Never"
 msgstr "Nikdy"
 
-#: library/library.cpp:65
+#: library/library.cpp:67
 msgid "Never played"
 msgstr "Nikdy nehráno"
 
@@ -3119,7 +3133,7 @@ msgstr "Nové písně"
 msgid "New tracks will be added automatically."
 msgstr "Nové písně budou přidány automaticky."
 
-#: library/library.cpp:78
+#: library/library.cpp:80
 msgid "Newest tracks"
 msgstr "Nejnovější skladby"
 
@@ -3458,8 +3472,8 @@ msgstr "Přehrávání"
 msgid "Player options"
 msgstr "Nastavení přehrávače"
 
-#: playlist/playlistcontainer.cpp:273 playlist/playlistmanager.cpp:78
-#: playlist/playlistmanager.cpp:396 playlist/playlisttabbar.cpp:290
+#: playlist/playlistcontainer.cpp:273 playlist/playlistmanager.cpp:79
+#: playlist/playlistmanager.cpp:397 playlist/playlisttabbar.cpp:290
 msgid "Playlist"
 msgstr "Seznam skladeb"
 
@@ -3531,7 +3545,7 @@ msgstr "Nastavení"
 msgid "Preferences..."
 msgstr "Nastavení..."
 
-#: ../bin/src/ui_librarysettingspage.h:174
+#: ../bin/src/ui_librarysettingspage.h:202
 msgid "Preferred album art filenames (comma separated)"
 msgstr "Upřednostňované názvy souborů s obaly alb (oddělené čárkou)"
 
@@ -3732,7 +3746,7 @@ msgstr "Odstranit činnost"
 msgid "Remove duplicates from playlist"
 msgstr "Odstranit zdvojené ze seznamu skladeb"
 
-#: ../bin/src/ui_librarysettingspage.h:166
+#: ../bin/src/ui_librarysettingspage.h:189
 msgid "Remove folder"
 msgstr "Odstranit složku"
 
@@ -3907,13 +3921,21 @@ msgstr "Uložit seznam skladeb..."
 msgid "Save preset"
 msgstr "Uložit předvolbu"
 
-#: ../bin/src/ui_librarysettingspage.h:173
-msgid "Save ratings and statistics in file tags when possible"
-msgstr "Uložit hodnocení a statistiku do souborových značek vždy, když je to možné"
+#: ../bin/src/ui_librarysettingspage.h:193
+msgid "Save ratings in file tags when possible"
+msgstr ""
+
+#: ../bin/src/ui_librarysettingspage.h:197
+msgid "Save statistics in file tags when possible"
+msgstr ""
 
 #: ../bin/src/ui_addstreamdialog.h:115
 msgid "Save this stream in the Internet tab"
 msgstr "Uložit tento proud na kartě Internet"
+
+#: library/library.cpp:164
+msgid "Saving songs statistics into songs files"
+msgstr "Ukládání statistiky písní do souborů písní"
 
 #: ui/edittagdialog.cpp:670 ui/trackselectiondialog.cpp:256
 msgid "Saving tracks"
@@ -4136,11 +4158,11 @@ msgstr "Ukázat všechny písně"
 msgid "Show all the songs"
 msgstr "Ukázat všechny písně"
 
-#: ../bin/src/ui_librarysettingspage.h:181
+#: ../bin/src/ui_librarysettingspage.h:209
 msgid "Show cover art in library"
 msgstr "Ukazovat obal ve sbírce"
 
-#: ../bin/src/ui_librarysettingspage.h:182
+#: ../bin/src/ui_librarysettingspage.h:210
 msgid "Show dividers"
 msgstr "Ukazovat oddělovače"
 
@@ -4257,7 +4279,7 @@ msgstr "Malý postranní panel"
 msgid "Smart playlist"
 msgstr "Chytrý seznam skladeb"
 
-#: library/librarymodel.cpp:1171
+#: library/librarymodel.cpp:1172
 msgid "Smart playlists"
 msgstr "Chytré seznamy skladeb"
 
@@ -4452,6 +4474,10 @@ msgstr "Hodně velké (2048x2048)"
 msgid "Supported formats"
 msgstr "Podporované formáty"
 
+#: ../bin/src/ui_librarysettingspage.h:201
+msgid "Synchronize statistics to files now"
+msgstr "Seřídit statistiky se soubory nyní"
+
 #: internet/spotifyservice.cpp:561
 msgid "Syncing Spotify inbox"
 msgstr "Synchronizuje se schránka Spotify"
@@ -4514,7 +4540,7 @@ msgstr "Obal alba nyní přehrávané písně"
 msgid "The directory %1 is not valid"
 msgstr "Adresář \"%1\" je neplatný"
 
-#: playlist/playlistmanager.cpp:154 playlist/playlistmanager.cpp:172
+#: playlist/playlistmanager.cpp:155 playlist/playlistmanager.cpp:173
 #, qt-format
 msgid "The playlist '%1' was empty or could not be loaded."
 msgstr "Seznam skladeb \"%1\" je prázdný, nebo se jej nepodařilo nahrát."
@@ -4583,7 +4609,7 @@ msgid ""
 "continue?"
 msgstr "Tyto soubory budou smazány ze zařízení. Opravdu chcete pokračovat?"
 
-#: ../bin/src/ui_librarysettingspage.h:164
+#: ../bin/src/ui_librarysettingspage.h:187
 msgid "These folders will be scanned for music to make up your library"
 msgstr "Clementine bude novou hudbu pro vaši sbírku hledat v těchto složkách"
 
@@ -4768,9 +4794,9 @@ msgstr "Ultra široké pásmo"
 msgid "Unable to download %1 (%2)"
 msgstr "Nepodařilo se stáhnout %1 (%2)"
 
-#: core/song.cpp:350 library/librarymodel.cpp:307 library/librarymodel.cpp:312
-#: library/librarymodel.cpp:969 playlist/playlistdelegates.cpp:309
-#: playlist/playlistmanager.cpp:404 playlist/playlistmanager.cpp:407
+#: core/song.cpp:350 library/librarymodel.cpp:308 library/librarymodel.cpp:313
+#: library/librarymodel.cpp:970 playlist/playlistdelegates.cpp:309
+#: playlist/playlistmanager.cpp:405 playlist/playlistmanager.cpp:408
 #: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:424
 #: ui/edittagdialog.cpp:465
 msgid "Unknown"
@@ -4808,7 +4834,7 @@ msgstr "Obnovit všechny podcasty"
 msgid "Update changed library folders"
 msgstr "Obnovit změněné složky sbírky"
 
-#: ../bin/src/ui_librarysettingspage.h:168
+#: ../bin/src/ui_librarysettingspage.h:191
 msgid "Update the library when Clementine starts"
 msgstr "Při spuštění Clementine obnovit hudební sbírku"
 
@@ -4941,8 +4967,8 @@ msgstr "Proměnlivý datový tok MP3"
 msgid "Variable bit rate"
 msgstr "Proměnlivý datový tok"
 
-#: globalsearch/globalsearchmodel.cpp:104 library/librarymodel.cpp:240
-#: playlist/playlistmanager.cpp:419 ui/albumcovermanager.cpp:247
+#: globalsearch/globalsearchmodel.cpp:104 library/librarymodel.cpp:241
+#: playlist/playlistmanager.cpp:420 ui/albumcovermanager.cpp:247
 msgid "Various artists"
 msgstr "Různí umělci"
 
@@ -5009,7 +5035,7 @@ msgstr "Týdny"
 msgid "When Clementine starts"
 msgstr "Při spuštění Clementine"
 
-#: ../bin/src/ui_librarysettingspage.h:176
+#: ../bin/src/ui_librarysettingspage.h:204
 msgid ""
 "When looking for album art Clementine will first look for picture files that contain one of these words.\n"
 "If there are no matches then it will use the largest image in the directory."
@@ -5090,6 +5116,10 @@ msgstr "Chcete další písně na tomto albu přesunout do Různí umělci?"
 #: ui/mainwindow.cpp:2058
 msgid "Would you like to run a full rescan right now?"
 msgstr "Chcete spustit toto úplné nové prohledání hned teď?"
+
+#: library/librarysettingspage.cpp:151
+msgid "Write all songs statistics into songs' files"
+msgstr "Zapsat všechny statistiky písní do souborů písní"
 
 #: internet/subsonicsettingspage.cpp:83
 msgid "Wrong username or password."

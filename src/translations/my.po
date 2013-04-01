@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-03-11 13:09+0000\n"
+"PO-Revision-Date: 2013-03-31 00:17+0000\n"
 "Last-Translator: Yhal Htet Aung <jumoun@gmail.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -75,7 +75,7 @@ msgstr "%1 မှအပေါ် %2"
 msgid "%1 playlists (%2)"
 msgstr "%1 သီချင်းစာရင်းများ (%2)"
 
-#: playlist/playlistmanager.cpp:325
+#: playlist/playlistmanager.cpp:326
 #, qt-format
 msgid "%1 selected of"
 msgstr "%1 ကိုရွေးချယ်ခဲ့"
@@ -100,7 +100,7 @@ msgstr "%1 သီချင်းများရှာတွေ့"
 msgid "%1 songs found (showing %2)"
 msgstr "%1 သီချင်းများရှာတွေ့ (%2 ပြသနေ)"
 
-#: playlist/playlistmanager.cpp:331
+#: playlist/playlistmanager.cpp:332
 #, qt-format
 msgid "%1 tracks"
 msgstr "%1 တေးသံလမ်းကြောများ"
@@ -234,7 +234,7 @@ msgstr "၀ပီအိတ်စ်"
 msgid "1 day"
 msgstr "တစ်နေ့"
 
-#: playlist/playlistmanager.cpp:331
+#: playlist/playlistmanager.cpp:332
 msgid "1 track"
 msgstr "တေးသံလမ်းကြောတစ်ခု"
 
@@ -251,7 +251,7 @@ msgstr "၁၂၈ကီလိုအမ်ပီသရီး"
 msgid "40%"
 msgstr "၄၀%"
 
-#: library/library.cpp:58
+#: library/library.cpp:60
 msgid "50 random tracks"
 msgstr "ကျပန်းတေးသံလမ်းကြောများ၅၀"
 
@@ -266,7 +266,7 @@ msgid ""
 " the Android App now!</a>"
 msgstr "<a href=\"https://play.google.com/store/apps/details?id=de.qspool.clementineremote\">စက်ရုပ်အပ်ယခုရယူ!</a>"
 
-#: ../bin/src/ui_librarysettingspage.h:171
+#: ../bin/src/ui_librarysettingspage.h:195
 msgid ""
 "<html><head/><body><p>If not checked, Clementine will  try to save your "
 "ratings and other statistics only in a separate database and don't modify "
@@ -275,6 +275,14 @@ msgid ""
 "not work for every format and, as there is no standard for doing so, other "
 "music players might not be able to read them.</p></body></html>"
 msgstr "<html><head/><body><p>မစစ်ဆေးပါကကလီမန်တိုင်းသည်အဆင့်သတ်မှတ်ချက်များနှင့်အခြားစာရင်းဇယားများကိုသီးခြားအချက်အလက်အစုတွင်မှတ်သားပြီးဖိုင်များကိုပြုပြင်မွမ်းမံမှုမလုပ်။</p><p>စစ်ဆေးပါကစာရင်းဇယားများကိုအချက်အလက်အစုသာမကဖိုင်များတွင်တိုက်ရိုက်မှတ်သား</p><p>ပံုစံတိုင်းတွင်အလုပ်လုပ်မည်မဟုတ်သကဲ့သို့သတ်မှတ်ချက်မရိုကာတစ်ခြားဂီတဖွင့်စက်များဖတ်ရှုနိုင်လိမ့်မည်မဟုတ်။</p></body></html>"
+
+#: ../bin/src/ui_librarysettingspage.h:199
+msgid ""
+"<html><head/><body><p>This will write songs' ratings and statistics into "
+"files tags for all your library's songs.</p><p>This is not needed if the "
+"&quot;Save ratings and statistics in file tags&quot; option has always been "
+"activated.</p></body></html>"
+msgstr "<html><head/><body><p>သီချင်းတိုက်သီချင်းများအားလံုးအတွက်သီချင်းများအဆင့်သတ်မှတ်ချက်များနှင့်ကိန်းဂဏန်းများကိုဖိုင်များအမည်များသို့ရေးလိမ့်မည်။</p><p>&quot;အဆင့်သတ်မှတ်ချက်များနှင့်ကိန်းဂဏန်းများကိုဖိုင်အမည်များ&quot;ရွေးပိုင်ခွင့်ကိုအမြဲတမ်းအသက်သွင်းထားပါကမလိုအပ်ပါ။</p></body></html>"
 
 #: ../bin/src/ui_organisedialog.h:199
 msgid ""
@@ -395,7 +403,7 @@ msgstr "လုပ်ဆောင်ချက်ထည့်ပါ"
 msgid "Add another stream..."
 msgstr "သီချင်းစီးကြောင်းနောက်တစ်ခုထည့်..."
 
-#: library/librarysettingspage.cpp:64
+#: library/librarysettingspage.cpp:68
 msgid "Add directory..."
 msgstr "ဖိုင်လမ်းညွှန်ထည့်..."
 
@@ -419,7 +427,7 @@ msgstr "ဖိုင်တွဲထည့်"
 msgid "Add folder..."
 msgstr "ဖိုင်တွဲထည့်..."
 
-#: ../bin/src/ui_librarysettingspage.h:165
+#: ../bin/src/ui_librarysettingspage.h:188
 msgid "Add new folder..."
 msgstr "ဖိုင်တွဲအသစ်ထည့်..."
 
@@ -640,7 +648,7 @@ msgstr "သီချင်းစာရင်းများအားလံုး
 msgid "All the translators"
 msgstr "ဘာသာပြန်များအားလံုး"
 
-#: library/library.cpp:82
+#: library/library.cpp:84
 msgid "All tracks"
 msgstr "တေးသံလမ်းကြောများအားလံုး"
 
@@ -736,6 +744,12 @@ msgstr "ဒီသီချင်းစာရင်းပယ်ဖျက်မှ
 msgid "Are you sure you want to reset this song's statistics?"
 msgstr "ယခုသီချင်းစာရင်းဇယားပြန်လည်ထိန်းညှိမှာသေချာသလား?"
 
+#: library/librarysettingspage.cpp:152
+msgid ""
+"Are you sure you want to write song's statistics into song's file for all "
+"the songs of your library?"
+msgstr "သီချင်းတိုက်သီချင်းများအားလံုးအတွက်သီချင်းကိန်းဂဏန်းအချက်အလက်များကိုသီချင်းဖိုင်အဖြစ်ရေးလိုပါသလား?"
+
 #: playlist/playlist.cpp:1205 ui/organisedialog.cpp:56
 #: ui/qtsystemtrayicon.cpp:250 ../bin/src/ui_groupbydialog.h:130
 #: ../bin/src/ui_groupbydialog.h:143 ../bin/src/ui_groupbydialog.h:156
@@ -784,11 +798,11 @@ msgstr "စာဆိုများ"
 msgid "Auto"
 msgstr "အလိုအလျောက်"
 
-#: ../bin/src/ui_librarysettingspage.h:167
+#: ../bin/src/ui_librarysettingspage.h:190
 msgid "Automatic updating"
 msgstr "အလိုအလျောက်မွမ်းမံခြင်း"
 
-#: ../bin/src/ui_librarysettingspage.h:180
+#: ../bin/src/ui_librarysettingspage.h:208
 msgid "Automatically open single categories in the library tree"
 msgstr "သီချင်းတိုက်ဖွဲ့စည်းပံုမှာတစ်ခုတည်းအတန်းအစားများအလိုအလျောက်ဖွင့်"
 
@@ -928,7 +942,7 @@ msgstr "ခလုတ်များ"
 msgid "CDDA"
 msgstr "စီဒီဒီအေ"
 
-#: library/library.cpp:98
+#: library/library.cpp:100
 msgid "CUE sheet support"
 msgstr "ကယူးအပြားအထောက်အကူ"
 
@@ -1631,7 +1645,7 @@ msgid "Discontinuous transmission"
 msgstr "ဆက်လက်မထုတ်လွှင့်ခြင်း"
 
 #: internet/icecastfilterwidget.cpp:33 internet/searchboxwidget.cpp:30
-#: library/libraryfilterwidget.cpp:88 ../bin/src/ui_librarysettingspage.h:179
+#: library/libraryfilterwidget.cpp:88 ../bin/src/ui_librarysettingspage.h:207
 msgid "Display options"
 msgstr "ပြသခြင်းရွေးပိုင်ခွင့်များ"
 
@@ -1753,7 +1767,7 @@ msgstr "တရော့ဘောက်စ့်"
 msgid "Dynamic mode is on"
 msgstr "စနစ်အရှင်ဖွင့်ထား"
 
-#: internet/jamendoservice.cpp:113 library/library.cpp:91
+#: internet/jamendoservice.cpp:113 library/library.cpp:93
 msgid "Dynamic random mix"
 msgstr "ကျပန်းရောသမမွှေအရှင်"
 
@@ -1929,7 +1943,7 @@ msgstr "ဆောင်ရွက်ခြင်းအမှားပြ %1: %2"
 msgid "Error while loading audio CD"
 msgstr "အသံဓာတ်ပြားထည့်သွင်းနေခြင်းအမှားပြ"
 
-#: library/library.cpp:61
+#: library/library.cpp:63
 msgid "Ever played"
 msgstr "သီချင်းဖွင့်ခဲ့သမျှ"
 
@@ -2043,7 +2057,7 @@ msgstr "မြန်သော"
 msgid "Favorites"
 msgstr "အနှစ်သက်ဆုံးများ"
 
-#: library/library.cpp:75
+#: library/library.cpp:77
 msgid "Favourite tracks"
 msgstr "အနှစ်သက်ဆုံးတေးသံလမ်းကြောများ"
 
@@ -2602,7 +2616,7 @@ msgstr "အယ်လဘမ်အဖုံးကြီး"
 msgid "Large sidebar"
 msgstr "ဘေးတိုင်ကြီး"
 
-#: library/library.cpp:69 playlist/playlist.cpp:1220
+#: library/library.cpp:71 playlist/playlist.cpp:1220
 #: ../bin/src/ui_edittagdialog.h:671
 msgid "Last played"
 msgstr "နောက်ဆံုးသီချင်းဖွင့်ခဲ့သမျှ"
@@ -2673,7 +2687,7 @@ msgstr "လက်စ်.အက်ဖ်အမ်အသင်းဝင်အမ�
 msgid "Last.fm wiki"
 msgstr "လက်စ်.အက်ဖ်အမ်ဝီကီ"
 
-#: library/library.cpp:85
+#: library/library.cpp:87
 msgid "Least favourite tracks"
 msgstr "အနှစ်သက်ဆုံးတေးသံလမ်းကြောများအနည်းဆုံး"
 
@@ -2763,7 +2777,7 @@ msgstr "အိုင်ပေါ့အချက်အလက်အစုထည့
 msgid "Loading smart playlist"
 msgstr "ချက်ချာသီချင်းစာရင်းထည့်သွင်းနေ"
 
-#: library/librarymodel.cpp:138
+#: library/librarymodel.cpp:139
 msgid "Loading songs"
 msgstr "သီချင်းများထည့်သွင်းနေ"
 
@@ -2780,7 +2794,7 @@ msgstr "တေးသံလမ်းကြောများထည့်သွင
 msgid "Loading tracks info"
 msgstr "တေးသံလမ်းကြောအချက်အလက်များထည့်သွင်းနေ"
 
-#: library/librarymodel.cpp:133 podcasts/podcastdiscoverymodel.cpp:97
+#: library/librarymodel.cpp:134 podcasts/podcastdiscoverymodel.cpp:97
 #: widgets/prettyimage.cpp:168 widgets/widgetfadehelper.cpp:99
 #: ../bin/src/ui_addpodcastdialog.h:180 ../bin/src/ui_searchpreview.h:106
 msgid "Loading..."
@@ -2944,7 +2958,7 @@ msgstr "ပရောဂျက်အမ်ကြိုတင်ထိန်းည
 msgid "Model"
 msgstr "ပုံစံ"
 
-#: ../bin/src/ui_librarysettingspage.h:169
+#: ../bin/src/ui_librarysettingspage.h:192
 msgid "Monitor the library for changes"
 msgstr "သီချင်းတိုက်ပြောင်းလဲမှုများစောင့်ကြည့်"
 
@@ -2969,7 +2983,7 @@ msgstr "စိတ်နေစိတ်ထားဘားမျဉ်းပုံ
 msgid "Moodbars"
 msgstr "စိတ်နေစိတ်ထားဘားမျဉ်းများ"
 
-#: library/library.cpp:72
+#: library/library.cpp:74
 msgid "Most played"
 msgstr "အများဆံုးဖွင့်ခဲ့သမျှ"
 
@@ -2999,7 +3013,7 @@ msgstr "အပေါ်သို့ရွှေ့"
 msgid "Music"
 msgstr "ဂီတ"
 
-#: ../bin/src/ui_librarysettingspage.h:163
+#: ../bin/src/ui_librarysettingspage.h:186
 msgid "Music Library"
 msgstr "ဂီတတိုက်"
 
@@ -3080,7 +3094,7 @@ msgstr "ကွန်ရက်အဝေးထိန်း"
 msgid "Never"
 msgstr "ဘယ်သောအခါမှ"
 
-#: library/library.cpp:65
+#: library/library.cpp:67
 msgid "Never played"
 msgstr "သီချင်းမဖွင့်ခဲ့သမျှ"
 
@@ -3111,7 +3125,7 @@ msgstr "သီချင်းအသစ်များ"
 msgid "New tracks will be added automatically."
 msgstr "တေးသံလမ်းကြောများအလိုအလျောက်ထည့်။"
 
-#: library/library.cpp:78
+#: library/library.cpp:80
 msgid "Newest tracks"
 msgstr "တေးသံလမ်းကြောအသစ်ဆုံးများ"
 
@@ -3450,8 +3464,8 @@ msgstr "ပြန်ဖွင့်"
 msgid "Player options"
 msgstr "ဖွင့်စက်ရွေးပိုင်ခွင့်များ"
 
-#: playlist/playlistcontainer.cpp:273 playlist/playlistmanager.cpp:78
-#: playlist/playlistmanager.cpp:396 playlist/playlisttabbar.cpp:290
+#: playlist/playlistcontainer.cpp:273 playlist/playlistmanager.cpp:79
+#: playlist/playlistmanager.cpp:397 playlist/playlisttabbar.cpp:290
 msgid "Playlist"
 msgstr "သီချင်းစာရင်း"
 
@@ -3523,7 +3537,7 @@ msgstr "လိုလားချက်များ"
 msgid "Preferences..."
 msgstr "လိုလားချက်များ..."
 
-#: ../bin/src/ui_librarysettingspage.h:174
+#: ../bin/src/ui_librarysettingspage.h:202
 msgid "Preferred album art filenames (comma separated)"
 msgstr "နှစ်သက်သောအယ်လဘမ်အနုပညာဖိုင်နာမည်များ (ပုဒ်ရပ်ခွဲခြား)"
 
@@ -3724,7 +3738,7 @@ msgstr "လုပ်ဆောင်ချက်ဖယ်ရှား"
 msgid "Remove duplicates from playlist"
 msgstr "သီချင်းစာရင်းမှပုံတူများဖယ်ရှား"
 
-#: ../bin/src/ui_librarysettingspage.h:166
+#: ../bin/src/ui_librarysettingspage.h:189
 msgid "Remove folder"
 msgstr "ဖိုင်တွဲဖယ်ရှား"
 
@@ -3899,13 +3913,21 @@ msgstr "သီချင်းစာရင်းမှတ်သား..."
 msgid "Save preset"
 msgstr "ကြိုတင်ထိန်းညှိမှတ်သား"
 
-#: ../bin/src/ui_librarysettingspage.h:173
-msgid "Save ratings and statistics in file tags when possible"
-msgstr "ဖြစ်နိုင်ပါကဖိုင်အမည်များထဲတွင်အဆင့်သတ်မှတ်ချက်များနှင့်စာရင်းဇယားများမှတ်သား"
+#: ../bin/src/ui_librarysettingspage.h:193
+msgid "Save ratings in file tags when possible"
+msgstr "ဖြစ်နိုင်ပါကဖိုင်အမည်များထဲတွင်အဆင့်သတ်မှတ်ချက်များမှတ်သား"
+
+#: ../bin/src/ui_librarysettingspage.h:197
+msgid "Save statistics in file tags when possible"
+msgstr "ဖြစ်နိုင်ပါကဖိုင်အမည်များထဲတွင်စာရင်းဇယားများမှတ်သား"
 
 #: ../bin/src/ui_addstreamdialog.h:115
 msgid "Save this stream in the Internet tab"
 msgstr "အင်တာနက်မျက်နှာစာထဲတွင်ယခုသီချင်းစီးကြောင်းမှတ်သား"
+
+#: library/library.cpp:164
+msgid "Saving songs statistics into songs files"
+msgstr "သီချင်းဖိုင်များထဲသို့သီချင်းကိန်းဂဏန်းအချက်အလက်များမှတ်သား"
 
 #: ui/edittagdialog.cpp:670 ui/trackselectiondialog.cpp:256
 msgid "Saving tracks"
@@ -4128,11 +4150,11 @@ msgstr "သီချင်းများအားလံုးပြသ"
 msgid "Show all the songs"
 msgstr "သီချင်းများအားလံုးကိုပြသ"
 
-#: ../bin/src/ui_librarysettingspage.h:181
+#: ../bin/src/ui_librarysettingspage.h:209
 msgid "Show cover art in library"
 msgstr "သီချင်းတိုက်ထဲအနုပညာအဖုံးပြသ"
 
-#: ../bin/src/ui_librarysettingspage.h:182
+#: ../bin/src/ui_librarysettingspage.h:210
 msgid "Show dividers"
 msgstr "ခွဲခြားမှုများပြသ"
 
@@ -4249,7 +4271,7 @@ msgstr "ဘေးတိုင်ငယ်"
 msgid "Smart playlist"
 msgstr "ချက်ချာသီချင်းစာရင်း"
 
-#: library/librarymodel.cpp:1171
+#: library/librarymodel.cpp:1172
 msgid "Smart playlists"
 msgstr "ချက်ချာသီချင်းစာရင်းများ"
 
@@ -4444,6 +4466,10 @@ msgstr "ထိပ်တန်းမြင့် (၂၀၄၈x၂၀၄၈)"
 msgid "Supported formats"
 msgstr "လက်ခံပုံစံများ"
 
+#: ../bin/src/ui_librarysettingspage.h:201
+msgid "Synchronize statistics to files now"
+msgstr "ယခုကိန်းဂဏန်းအချက်အလက်များကိုဖိုင်များသို့လိုက်လျောညီထွေဖြစ်ရန်လုပ်"
+
 #: internet/spotifyservice.cpp:561
 msgid "Syncing Spotify inbox"
 msgstr "စပေါ့တီဖိုင်စာတိုက်ပံုးညီတူညှိ"
@@ -4506,7 +4532,7 @@ msgstr "လက်ရှိဖွင့်ဆဲသီချင်းအယ်လ
 msgid "The directory %1 is not valid"
 msgstr "%1 ယခုဖိုင်လမ်းညွှန်မမှန်"
 
-#: playlist/playlistmanager.cpp:154 playlist/playlistmanager.cpp:172
+#: playlist/playlistmanager.cpp:155 playlist/playlistmanager.cpp:173
 #, qt-format
 msgid "The playlist '%1' was empty or could not be loaded."
 msgstr " '%1' သီချင်းစာရင်းသည်အလွတ်သို့မထည့်သွင်းနိုင်။"
@@ -4575,7 +4601,7 @@ msgid ""
 "continue?"
 msgstr "ပစ္စည်းမှယခုဖို်င်များအားလံုးပယ်ဖျက်မည်၊ လုပ်ဆောင်မည်လား?"
 
-#: ../bin/src/ui_librarysettingspage.h:164
+#: ../bin/src/ui_librarysettingspage.h:187
 msgid "These folders will be scanned for music to make up your library"
 msgstr "သီချင်းတိုက်တွင်ဂီတအတွက်မွမ်းမံရန်ယခုဖိုင်တွဲများဖတ်ရှုမည်"
 
@@ -4760,9 +4786,9 @@ msgstr "အက်တရာလှိုင်းကျယ် (ယူဒဗလူ�
 msgid "Unable to download %1 (%2)"
 msgstr "မကူးဆွဲနိုင် %1 (%2)"
 
-#: core/song.cpp:350 library/librarymodel.cpp:307 library/librarymodel.cpp:312
-#: library/librarymodel.cpp:969 playlist/playlistdelegates.cpp:309
-#: playlist/playlistmanager.cpp:404 playlist/playlistmanager.cpp:407
+#: core/song.cpp:350 library/librarymodel.cpp:308 library/librarymodel.cpp:313
+#: library/librarymodel.cpp:970 playlist/playlistdelegates.cpp:309
+#: playlist/playlistmanager.cpp:405 playlist/playlistmanager.cpp:408
 #: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:424
 #: ui/edittagdialog.cpp:465
 msgid "Unknown"
@@ -4800,7 +4826,7 @@ msgstr "ပို့စ်ကဒ်များစစ်ဆေးခြင်း
 msgid "Update changed library folders"
 msgstr "ပြောင်းလဲပြီးသီချင်းတိုက်ဖိုင်တွဲများမွမ်းမံ"
 
-#: ../bin/src/ui_librarysettingspage.h:168
+#: ../bin/src/ui_librarysettingspage.h:191
 msgid "Update the library when Clementine starts"
 msgstr "ကလီမန်တိုင်းစတင်သောအခါသီချင်းတိုက်မွမ်းမံ"
 
@@ -4933,8 +4959,8 @@ msgstr "ဗီဘီအာအမ်ပီသရီး"
 msgid "Variable bit rate"
 msgstr "ဘစ်နှုန်းကိန်းရှင်"
 
-#: globalsearch/globalsearchmodel.cpp:104 library/librarymodel.cpp:240
-#: playlist/playlistmanager.cpp:419 ui/albumcovermanager.cpp:247
+#: globalsearch/globalsearchmodel.cpp:104 library/librarymodel.cpp:241
+#: playlist/playlistmanager.cpp:420 ui/albumcovermanager.cpp:247
 msgid "Various artists"
 msgstr "အနုပညာရှင်များအမျိုးမျိုး"
 
@@ -5001,7 +5027,7 @@ msgstr "အပတ်များ"
 msgid "When Clementine starts"
 msgstr "ကလီမန်တိုင်းစတင်သောအခါ"
 
-#: ../bin/src/ui_librarysettingspage.h:176
+#: ../bin/src/ui_librarysettingspage.h:204
 msgid ""
 "When looking for album art Clementine will first look for picture files that contain one of these words.\n"
 "If there are no matches then it will use the largest image in the directory."
@@ -5082,6 +5108,10 @@ msgstr "အနုပညာရှင်များအမျိုးမျို
 #: ui/mainwindow.cpp:2058
 msgid "Would you like to run a full rescan right now?"
 msgstr "ယခုနောက်တစ်ချိန်အပြည့်ပြန်လည်ဖတ်ရှု?"
+
+#: library/librarysettingspage.cpp:151
+msgid "Write all songs statistics into songs' files"
+msgstr "သီချင်းဖိုင်များထဲသို့သီချင်းများကိန်းဂဏန်းအချက်အလက်များရေးသား"
 
 #: internet/subsonicsettingspage.cpp:83
 msgid "Wrong username or password."

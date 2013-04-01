@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-03-10 08:25+0000\n"
+"PO-Revision-Date: 2013-03-30 23:26+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Language-Team: Estonian (http://www.transifex.com/projects/p/clementine/language/et/)\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -78,7 +78,7 @@ msgstr ""
 msgid "%1 playlists (%2)"
 msgstr "%1 плейлист (%2)"
 
-#: playlist/playlistmanager.cpp:325
+#: playlist/playlistmanager.cpp:326
 #, qt-format
 msgid "%1 selected of"
 msgstr "выбрано %1 из"
@@ -103,7 +103,7 @@ msgstr "Leiti %1 lugu"
 msgid "%1 songs found (showing %2)"
 msgstr "Найдено %1 записей (показано %2)"
 
-#: playlist/playlistmanager.cpp:331
+#: playlist/playlistmanager.cpp:332
 #, qt-format
 msgid "%1 tracks"
 msgstr "%1 pala"
@@ -237,7 +237,7 @@ msgstr ""
 msgid "1 day"
 msgstr "1 päev"
 
-#: playlist/playlistmanager.cpp:331
+#: playlist/playlistmanager.cpp:332
 msgid "1 track"
 msgstr "1 lugu"
 
@@ -254,7 +254,7 @@ msgstr "128k MP3"
 msgid "40%"
 msgstr ""
 
-#: library/library.cpp:58
+#: library/library.cpp:60
 msgid "50 random tracks"
 msgstr "50 случайных треков"
 
@@ -269,7 +269,7 @@ msgid ""
 " the Android App now!</a>"
 msgstr ""
 
-#: ../bin/src/ui_librarysettingspage.h:171
+#: ../bin/src/ui_librarysettingspage.h:195
 msgid ""
 "<html><head/><body><p>If not checked, Clementine will  try to save your "
 "ratings and other statistics only in a separate database and don't modify "
@@ -277,6 +277,14 @@ msgid ""
 "directly into the file each time they changed.</p><p>Please note it might "
 "not work for every format and, as there is no standard for doing so, other "
 "music players might not be able to read them.</p></body></html>"
+msgstr ""
+
+#: ../bin/src/ui_librarysettingspage.h:199
+msgid ""
+"<html><head/><body><p>This will write songs' ratings and statistics into "
+"files tags for all your library's songs.</p><p>This is not needed if the "
+"&quot;Save ratings and statistics in file tags&quot; option has always been "
+"activated.</p></body></html>"
 msgstr ""
 
 #: ../bin/src/ui_organisedialog.h:199
@@ -398,7 +406,7 @@ msgstr "Lisa tegevus"
 msgid "Add another stream..."
 msgstr ""
 
-#: library/librarysettingspage.cpp:64
+#: library/librarysettingspage.cpp:68
 msgid "Add directory..."
 msgstr "Lisa kaust..."
 
@@ -422,7 +430,7 @@ msgstr "Lisa kaust"
 msgid "Add folder..."
 msgstr "Lisa kaust..."
 
-#: ../bin/src/ui_librarysettingspage.h:165
+#: ../bin/src/ui_librarysettingspage.h:188
 msgid "Add new folder..."
 msgstr "Lisa uus kaust..."
 
@@ -643,7 +651,7 @@ msgstr ""
 msgid "All the translators"
 msgstr "Kõik tõlkiad"
 
-#: library/library.cpp:82
+#: library/library.cpp:84
 msgid "All tracks"
 msgstr ""
 
@@ -739,6 +747,12 @@ msgstr ""
 msgid "Are you sure you want to reset this song's statistics?"
 msgstr ""
 
+#: library/librarysettingspage.cpp:152
+msgid ""
+"Are you sure you want to write song's statistics into song's file for all "
+"the songs of your library?"
+msgstr ""
+
 #: playlist/playlist.cpp:1205 ui/organisedialog.cpp:56
 #: ui/qtsystemtrayicon.cpp:250 ../bin/src/ui_groupbydialog.h:130
 #: ../bin/src/ui_groupbydialog.h:143 ../bin/src/ui_groupbydialog.h:156
@@ -787,11 +801,11 @@ msgstr "Autorid"
 msgid "Auto"
 msgstr ""
 
-#: ../bin/src/ui_librarysettingspage.h:167
+#: ../bin/src/ui_librarysettingspage.h:190
 msgid "Automatic updating"
 msgstr "Automaatne uuendamine"
 
-#: ../bin/src/ui_librarysettingspage.h:180
+#: ../bin/src/ui_librarysettingspage.h:208
 msgid "Automatically open single categories in the library tree"
 msgstr ""
 
@@ -931,7 +945,7 @@ msgstr "Nupud"
 msgid "CDDA"
 msgstr "CDDA"
 
-#: library/library.cpp:98
+#: library/library.cpp:100
 msgid "CUE sheet support"
 msgstr ""
 
@@ -1634,7 +1648,7 @@ msgid "Discontinuous transmission"
 msgstr ""
 
 #: internet/icecastfilterwidget.cpp:33 internet/searchboxwidget.cpp:30
-#: library/libraryfilterwidget.cpp:88 ../bin/src/ui_librarysettingspage.h:179
+#: library/libraryfilterwidget.cpp:88 ../bin/src/ui_librarysettingspage.h:207
 msgid "Display options"
 msgstr "Ekraani seaded"
 
@@ -1756,7 +1770,7 @@ msgstr ""
 msgid "Dynamic mode is on"
 msgstr ""
 
-#: internet/jamendoservice.cpp:113 library/library.cpp:91
+#: internet/jamendoservice.cpp:113 library/library.cpp:93
 msgid "Dynamic random mix"
 msgstr ""
 
@@ -1932,7 +1946,7 @@ msgstr ""
 msgid "Error while loading audio CD"
 msgstr ""
 
-#: library/library.cpp:61
+#: library/library.cpp:63
 msgid "Ever played"
 msgstr ""
 
@@ -2046,7 +2060,7 @@ msgstr ""
 msgid "Favorites"
 msgstr ""
 
-#: library/library.cpp:75
+#: library/library.cpp:77
 msgid "Favourite tracks"
 msgstr ""
 
@@ -2605,7 +2619,7 @@ msgstr "Suur albumi kaanepilt"
 msgid "Large sidebar"
 msgstr "Suur külgriba"
 
-#: library/library.cpp:69 playlist/playlist.cpp:1220
+#: library/library.cpp:71 playlist/playlist.cpp:1220
 #: ../bin/src/ui_edittagdialog.h:671
 msgid "Last played"
 msgstr "Viimati esitatud"
@@ -2676,7 +2690,7 @@ msgstr ""
 msgid "Last.fm wiki"
 msgstr "Last.fm wiki"
 
-#: library/library.cpp:85
+#: library/library.cpp:87
 msgid "Least favourite tracks"
 msgstr ""
 
@@ -2766,7 +2780,7 @@ msgstr ""
 msgid "Loading smart playlist"
 msgstr ""
 
-#: library/librarymodel.cpp:138
+#: library/librarymodel.cpp:139
 msgid "Loading songs"
 msgstr ""
 
@@ -2783,7 +2797,7 @@ msgstr ""
 msgid "Loading tracks info"
 msgstr ""
 
-#: library/librarymodel.cpp:133 podcasts/podcastdiscoverymodel.cpp:97
+#: library/librarymodel.cpp:134 podcasts/podcastdiscoverymodel.cpp:97
 #: widgets/prettyimage.cpp:168 widgets/widgetfadehelper.cpp:99
 #: ../bin/src/ui_addpodcastdialog.h:180 ../bin/src/ui_searchpreview.h:106
 msgid "Loading..."
@@ -2947,7 +2961,7 @@ msgstr ""
 msgid "Model"
 msgstr "Mudel"
 
-#: ../bin/src/ui_librarysettingspage.h:169
+#: ../bin/src/ui_librarysettingspage.h:192
 msgid "Monitor the library for changes"
 msgstr ""
 
@@ -2972,7 +2986,7 @@ msgstr ""
 msgid "Moodbars"
 msgstr ""
 
-#: library/library.cpp:72
+#: library/library.cpp:74
 msgid "Most played"
 msgstr ""
 
@@ -3002,7 +3016,7 @@ msgstr "Liiguta üles"
 msgid "Music"
 msgstr ""
 
-#: ../bin/src/ui_librarysettingspage.h:163
+#: ../bin/src/ui_librarysettingspage.h:186
 msgid "Music Library"
 msgstr "Muusika kogu"
 
@@ -3083,7 +3097,7 @@ msgstr ""
 msgid "Never"
 msgstr "Mitte kunagi"
 
-#: library/library.cpp:65
+#: library/library.cpp:67
 msgid "Never played"
 msgstr ""
 
@@ -3114,7 +3128,7 @@ msgstr "Uued laulud"
 msgid "New tracks will be added automatically."
 msgstr ""
 
-#: library/library.cpp:78
+#: library/library.cpp:80
 msgid "Newest tracks"
 msgstr ""
 
@@ -3453,8 +3467,8 @@ msgstr "Taasesitus"
 msgid "Player options"
 msgstr "Esitaja valikud"
 
-#: playlist/playlistcontainer.cpp:273 playlist/playlistmanager.cpp:78
-#: playlist/playlistmanager.cpp:396 playlist/playlisttabbar.cpp:290
+#: playlist/playlistcontainer.cpp:273 playlist/playlistmanager.cpp:79
+#: playlist/playlistmanager.cpp:397 playlist/playlisttabbar.cpp:290
 msgid "Playlist"
 msgstr "Lugude nimekiri"
 
@@ -3526,7 +3540,7 @@ msgstr "Seadistused"
 msgid "Preferences..."
 msgstr "Seadistused..."
 
-#: ../bin/src/ui_librarysettingspage.h:174
+#: ../bin/src/ui_librarysettingspage.h:202
 msgid "Preferred album art filenames (comma separated)"
 msgstr ""
 
@@ -3727,7 +3741,7 @@ msgstr "Eemalda toiming"
 msgid "Remove duplicates from playlist"
 msgstr ""
 
-#: ../bin/src/ui_librarysettingspage.h:166
+#: ../bin/src/ui_librarysettingspage.h:189
 msgid "Remove folder"
 msgstr "Eemalda kaust"
 
@@ -3902,12 +3916,20 @@ msgstr "Salvesta esitusnimekiri..."
 msgid "Save preset"
 msgstr "Eelmääratluse salvestamine"
 
-#: ../bin/src/ui_librarysettingspage.h:173
-msgid "Save ratings and statistics in file tags when possible"
+#: ../bin/src/ui_librarysettingspage.h:193
+msgid "Save ratings in file tags when possible"
+msgstr ""
+
+#: ../bin/src/ui_librarysettingspage.h:197
+msgid "Save statistics in file tags when possible"
 msgstr ""
 
 #: ../bin/src/ui_addstreamdialog.h:115
 msgid "Save this stream in the Internet tab"
+msgstr ""
+
+#: library/library.cpp:164
+msgid "Saving songs statistics into songs files"
 msgstr ""
 
 #: ui/edittagdialog.cpp:670 ui/trackselectiondialog.cpp:256
@@ -4131,11 +4153,11 @@ msgstr ""
 msgid "Show all the songs"
 msgstr "Näita kõiki laule"
 
-#: ../bin/src/ui_librarysettingspage.h:181
+#: ../bin/src/ui_librarysettingspage.h:209
 msgid "Show cover art in library"
 msgstr ""
 
-#: ../bin/src/ui_librarysettingspage.h:182
+#: ../bin/src/ui_librarysettingspage.h:210
 msgid "Show dividers"
 msgstr ""
 
@@ -4252,7 +4274,7 @@ msgstr "Väike külgriba"
 msgid "Smart playlist"
 msgstr ""
 
-#: library/librarymodel.cpp:1171
+#: library/librarymodel.cpp:1172
 msgid "Smart playlists"
 msgstr ""
 
@@ -4447,6 +4469,10 @@ msgstr ""
 msgid "Supported formats"
 msgstr "Toetatud vormingud"
 
+#: ../bin/src/ui_librarysettingspage.h:201
+msgid "Synchronize statistics to files now"
+msgstr ""
+
 #: internet/spotifyservice.cpp:561
 msgid "Syncing Spotify inbox"
 msgstr ""
@@ -4509,7 +4535,7 @@ msgstr ""
 msgid "The directory %1 is not valid"
 msgstr ""
 
-#: playlist/playlistmanager.cpp:154 playlist/playlistmanager.cpp:172
+#: playlist/playlistmanager.cpp:155 playlist/playlistmanager.cpp:173
 #, qt-format
 msgid "The playlist '%1' was empty or could not be loaded."
 msgstr ""
@@ -4578,7 +4604,7 @@ msgid ""
 "continue?"
 msgstr ""
 
-#: ../bin/src/ui_librarysettingspage.h:164
+#: ../bin/src/ui_librarysettingspage.h:187
 msgid "These folders will be scanned for music to make up your library"
 msgstr ""
 
@@ -4763,9 +4789,9 @@ msgstr ""
 msgid "Unable to download %1 (%2)"
 msgstr ""
 
-#: core/song.cpp:350 library/librarymodel.cpp:307 library/librarymodel.cpp:312
-#: library/librarymodel.cpp:969 playlist/playlistdelegates.cpp:309
-#: playlist/playlistmanager.cpp:404 playlist/playlistmanager.cpp:407
+#: core/song.cpp:350 library/librarymodel.cpp:308 library/librarymodel.cpp:313
+#: library/librarymodel.cpp:970 playlist/playlistdelegates.cpp:309
+#: playlist/playlistmanager.cpp:405 playlist/playlistmanager.cpp:408
 #: ui/albumcoverchoicecontroller.cpp:110 ui/edittagdialog.cpp:424
 #: ui/edittagdialog.cpp:465
 msgid "Unknown"
@@ -4803,7 +4829,7 @@ msgstr ""
 msgid "Update changed library folders"
 msgstr ""
 
-#: ../bin/src/ui_librarysettingspage.h:168
+#: ../bin/src/ui_librarysettingspage.h:191
 msgid "Update the library when Clementine starts"
 msgstr ""
 
@@ -4936,8 +4962,8 @@ msgstr "VBR MP3"
 msgid "Variable bit rate"
 msgstr ""
 
-#: globalsearch/globalsearchmodel.cpp:104 library/librarymodel.cpp:240
-#: playlist/playlistmanager.cpp:419 ui/albumcovermanager.cpp:247
+#: globalsearch/globalsearchmodel.cpp:104 library/librarymodel.cpp:241
+#: playlist/playlistmanager.cpp:420 ui/albumcovermanager.cpp:247
 msgid "Various artists"
 msgstr "Erinevad esitajad"
 
@@ -5004,7 +5030,7 @@ msgstr ""
 msgid "When Clementine starts"
 msgstr ""
 
-#: ../bin/src/ui_librarysettingspage.h:176
+#: ../bin/src/ui_librarysettingspage.h:204
 msgid ""
 "When looking for album art Clementine will first look for picture files that contain one of these words.\n"
 "If there are no matches then it will use the largest image in the directory."
@@ -5084,6 +5110,10 @@ msgstr ""
 
 #: ui/mainwindow.cpp:2058
 msgid "Would you like to run a full rescan right now?"
+msgstr ""
+
+#: library/librarysettingspage.cpp:151
+msgid "Write all songs statistics into songs' files"
 msgstr ""
 
 #: internet/subsonicsettingspage.cpp:83
