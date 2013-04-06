@@ -263,7 +263,9 @@ int main(int argc, char *argv[]) {
 #endif
 
   // This makes us show up nicely in gnome-volume-control
-  g_type_init();
+#if !GLIB_CHECK_VERSION(2, 36, 0)
+  g_type_init();  // Deprecated in glib 2.36.0
+#endif
   g_set_application_name(QCoreApplication::applicationName().toLocal8Bit());
 
   RegisterMetaTypes();
