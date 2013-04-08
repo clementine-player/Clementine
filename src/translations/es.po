@@ -23,8 +23,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-03-30 23:26+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2013-04-03 19:25+0000\n"
+"Last-Translator: Adolfo Jayme <fitoschido@gmail.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: es\n"
@@ -134,7 +134,7 @@ msgstr "%1: Módulo Wiimotedev"
 #: songinfo/lastfmtrackinfoprovider.cpp:94
 #, qt-format
 msgid "%L1 other listeners"
-msgstr "%L1 otros oyentes"
+msgstr "%L1 oyentes más"
 
 #: songinfo/lastfmtrackinfoprovider.cpp:92
 #, qt-format
@@ -183,7 +183,7 @@ msgstr "Ay&uda"
 #: playlist/playlistheader.cpp:70
 #, qt-format
 msgid "&Hide %1"
-msgstr "&Ocultar %1"
+msgstr "&Ocultar «%1»"
 
 #: playlist/playlistheader.cpp:33
 msgid "&Hide..."
@@ -268,7 +268,7 @@ msgstr "40%"
 
 #: library/library.cpp:60
 msgid "50 random tracks"
-msgstr "50 canciones al azar"
+msgstr "50 pistas al azar"
 
 #: ../bin/src/ui_digitallyimportedsettingspage.h:165
 msgid "<a href=\"http://www.di.fm/premium/\">Upgrade to Premium now</a>"
@@ -1128,7 +1128,7 @@ msgstr "Clementine no encontró resultados para este archivo"
 
 #: ../bin/src/ui_globalsearchview.h:210
 msgid "Clementine will find music in:"
-msgstr "Clementine localizará música en:"
+msgstr "Clementine buscará música en:"
 
 #: library/libraryview.cpp:349
 msgid "Click here to add some music"
@@ -1322,7 +1322,7 @@ msgstr "No se pudo encontrar un muxer para %1, compruebe que tiene instalados lo
 msgid ""
 "Couldn't find an encoder for %1, check you have the correct GStreamer "
 "plugins installed"
-msgstr "No se ha podido encontrar un codificador (encoder) para %1, compruebe que tiene instalados los complementos (plugins) correctos de GStreamer."
+msgstr "No se pudo encontrar un codificador para %1, compruebe que tiene instalados los complementos de GStreamer correctos"
 
 #: internet/lastfmservice.cpp:875
 msgid "Couldn't load the last.fm radio station"
@@ -1341,7 +1341,7 @@ msgstr "Gestor de portadas"
 
 #: ui/edittagdialog.cpp:443
 msgid "Cover art from embedded image"
-msgstr "Portadas desde imagen embebida"
+msgstr "Portadas desde imagen incrustada"
 
 #: ui/edittagdialog.cpp:445
 #, qt-format
@@ -1666,7 +1666,7 @@ msgstr "Opciones de visualización"
 
 #: core/commandlineoptions.cpp:167
 msgid "Display the on-screen-display"
-msgstr "Mostrar la indicación-en-pantalla"
+msgstr "Mostrar el mensaje en pantalla (OSD)"
 
 #: ../bin/src/ui_mainwindow.h:712
 msgid "Do a full library rescan"
@@ -1860,7 +1860,7 @@ msgstr "Introduzca una URL"
 
 #: ../bin/src/ui_coverfromurldialog.h:103
 msgid "Enter a URL to download a cover from the Internet:"
-msgstr "Introduzca una dirección URL para descargar una portada de Internet:"
+msgstr "Escriba una dirección URL para descargar una portada de Internet:"
 
 #: playlist/playlisttabbar.cpp:128
 msgid "Enter a new name for this playlist"
@@ -1869,7 +1869,7 @@ msgstr "Escriba un nombre nuevo para esta lista de reproducción"
 #: ../bin/src/ui_lastfmstationdialog.h:93
 msgid ""
 "Enter an <b>artist</b> or <b>tag</b> to start listening to Last.fm radio."
-msgstr "Ingrese un <b>artista</b> o  <b>etiqueta</b> para escuchar la radio de Last.fm."
+msgstr "Escriba un <b>artista</b> o <b>etiqueta</b> para escuchar la radio de Last.fm."
 
 #: ../bin/src/ui_globalsearchview.h:209
 msgid ""
@@ -2074,7 +2074,7 @@ msgstr "Favoritos"
 
 #: library/library.cpp:77
 msgid "Favourite tracks"
-msgstr "Canciones favoritas"
+msgstr "Pistas favoritas"
 
 #: ../bin/src/ui_albumcovermanager.h:155
 msgid "Fetch Missing Covers"
@@ -2094,7 +2094,7 @@ msgstr "Obteniendo biblioteca de Subsonic"
 
 #: ui/coverfromurldialog.cpp:71 ui/coverfromurldialog.cpp:82
 msgid "Fetching cover error"
-msgstr "Error obteniendo portada"
+msgstr "Error al obtener la portada"
 
 #: ui/organisedialog.cpp:71
 msgid "File extension"
@@ -2420,7 +2420,7 @@ msgstr "No tengo una cuenta en Magnatune"
 msgid "Icon"
 msgstr "Icono"
 
-#: widgets/fancytabwidget.cpp:655
+#: widgets/fancytabwidget.cpp:674
 msgid "Icons on top"
 msgstr "Iconos en la parte superior"
 
@@ -2569,15 +2569,15 @@ msgstr "Pistas más escuchadas de Jamendo"
 
 #: internet/jamendoservice.cpp:107
 msgid "Jamendo Top Tracks"
-msgstr "Mejores canciones de Jamendo"
+msgstr "Mejores pistas de Jamendo"
 
 #: internet/jamendoservice.cpp:103
 msgid "Jamendo Top Tracks of the Month"
-msgstr "Mejores canciones del mes de Jamendo"
+msgstr "Mejores pistas del mes en Jamendo"
 
 #: internet/jamendoservice.cpp:105
 msgid "Jamendo Top Tracks of the Week"
-msgstr "Mejores canciones de la semana en Jamendo"
+msgstr "Mejores pistas de la semana en Jamendo"
 
 #: internet/jamendoservice.cpp:171
 msgid "Jamendo database"
@@ -2627,7 +2627,7 @@ msgstr "Salón grande"
 msgid "Large album cover"
 msgstr "Portada de álbum grande"
 
-#: widgets/fancytabwidget.cpp:651
+#: widgets/fancytabwidget.cpp:670
 msgid "Large sidebar"
 msgstr "Barra lateral grande"
 
@@ -2704,7 +2704,7 @@ msgstr "Wiki de Last.fm"
 
 #: library/library.cpp:87
 msgid "Least favourite tracks"
-msgstr "Canciones menos favoritas"
+msgstr "Pistas menos favoritas"
 
 #: ../bin/src/ui_playbacksettingspage.h:290
 msgid "Leave blank for the default.  Examples: \"/dev/dsp\", \"front\", etc."
@@ -2803,7 +2803,7 @@ msgstr "Cargando flujo"
 
 #: playlist/songloaderinserter.cpp:79 ui/edittagdialog.cpp:233
 msgid "Loading tracks"
-msgstr "Cargando pistas"
+msgstr "Cargando las pistas"
 
 #: playlist/songloaderinserter.cpp:139
 msgid "Loading tracks info"
@@ -2967,7 +2967,7 @@ msgstr "Tasa de bits mínima"
 
 #: visualisations/projectmvisualisation.cpp:127
 msgid "Missing projectM presets"
-msgstr "Faltan los ajustes por defecto de projectM"
+msgstr "Faltan las predefiniciones de projectM"
 
 #: devices/deviceproperties.cpp:152
 msgid "Model"
@@ -3138,11 +3138,11 @@ msgstr "Canciones nuevas"
 
 #: ../bin/src/ui_dynamicplaylistcontrols.h:110
 msgid "New tracks will be added automatically."
-msgstr "Nuevas pistas serán añadidas automáticamente"
+msgstr "Las pistas nuevas se añadirán automáticamente."
 
 #: library/library.cpp:80
 msgid "Newest tracks"
-msgstr "Canciones más nuevas"
+msgstr "Pistas más recientes"
 
 #: ui/edittagdialog.cpp:161 ui/trackselectiondialog.cpp:49
 msgid "Next"
@@ -3423,7 +3423,7 @@ msgstr "Pausado"
 msgid "Performer"
 msgstr "Intérprete"
 
-#: widgets/fancytabwidget.cpp:653
+#: widgets/fancytabwidget.cpp:672
 msgid "Plain sidebar"
 msgstr "Barra lateral simple"
 
@@ -3574,7 +3574,7 @@ msgstr "Tipo de audio premium"
 
 #: ../bin/src/ui_equalizer.h:119
 msgid "Preset:"
-msgstr "Preconfiguración:"
+msgstr "Predefinición:"
 
 #: ../bin/src/ui_wiimoteshortcutgrabber.h:124
 msgid "Press a button combination to use for"
@@ -3930,11 +3930,11 @@ msgstr "Guardar predefinición"
 
 #: ../bin/src/ui_librarysettingspage.h:193
 msgid "Save ratings in file tags when possible"
-msgstr ""
+msgstr "Guardar valoraciones en las etiquetas de los archivos si es posible"
 
 #: ../bin/src/ui_librarysettingspage.h:197
 msgid "Save statistics in file tags when possible"
-msgstr ""
+msgstr "Guardar estadísticas en las etiquetas de los archivos si es posible"
 
 #: ../bin/src/ui_addstreamdialog.h:115
 msgid "Save this stream in the Internet tab"
@@ -4278,7 +4278,7 @@ msgstr "Saltar hacia adelante en la lista de reproducción"
 msgid "Small album cover"
 msgstr "Portada de álbum pequeña"
 
-#: widgets/fancytabwidget.cpp:652
+#: widgets/fancytabwidget.cpp:671
 msgid "Small sidebar"
 msgstr "Barra lateral pequeña"
 
@@ -4501,7 +4501,7 @@ msgstr "Sincronizando canciones destacadas de Spotify"
 msgid "System colors"
 msgstr "Colores del sistema"
 
-#: widgets/fancytabwidget.cpp:654
+#: widgets/fancytabwidget.cpp:673
 msgid "Tabs on top"
 msgstr "Pestañas en la parte superior"
 
@@ -4519,7 +4519,7 @@ msgstr "Radio de la etiqueta"
 
 #: ../bin/src/ui_transcoderoptionsvorbis.h:204
 msgid "Target bitrate"
-msgstr "Tasa de bits destino"
+msgstr "Tasa de bits de destino"
 
 #: ui/equalizer.cpp:125
 msgid "Techno"
@@ -4753,7 +4753,7 @@ msgstr "Convertir música"
 
 #: ../bin/src/ui_transcodelogdialog.h:63
 msgid "Transcoder Log"
-msgstr "Registro del codificador"
+msgstr "Registro del convertidor"
 
 #: ../bin/src/ui_transcodersettingspage.h:173
 msgid "Transcoding"
@@ -4762,7 +4762,7 @@ msgstr "Conversión"
 #: transcoder/transcoder.cpp:312
 #, qt-format
 msgid "Transcoding %1 files using %2 threads"
-msgstr "Codificando %1 archivo(s) usando %2 proceso(s)"
+msgstr "Convirtiendo %1 archivos usando %2 procesos"
 
 #: ../bin/src/ui_transcoderoptionsdialog.h:54
 msgid "Transcoding options"
@@ -4794,7 +4794,7 @@ msgstr "Ubuntu One"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:228
 msgid "Ultra wide band (UWB)"
-msgstr "Banda ultra ancha (UWB)"
+msgstr "Banda ultraancha (UWB)"
 
 #: internet/magnatunedownloaddialog.cpp:144
 #, qt-format
@@ -5232,7 +5232,7 @@ msgstr "Su sesión en Spotify ha caducado, vuelva a introducir su contraseña."
 
 #: songinfo/lastfmtrackinfoprovider.cpp:87
 msgid "You love this track"
-msgstr "Amas esta canción"
+msgstr "Esta canción es una de sus favoritas"
 
 #: ../bin/src/ui_globalshortcutssettingspage.h:170
 msgid ""
@@ -5456,4 +5456,4 @@ msgstr "detener"
 #: widgets/osd.cpp:116
 #, qt-format
 msgid "track %1"
-msgstr "Pista %1"
+msgstr "pista %1"

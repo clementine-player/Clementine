@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-03-30 23:26+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2013-04-03 21:30+0000\n"
+"Last-Translator: Adolfo Jayme <fitoschido@gmail.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: ca\n"
@@ -170,11 +170,11 @@ msgstr "Aj&uda"
 #: playlist/playlistheader.cpp:70
 #, qt-format
 msgid "&Hide %1"
-msgstr "Amaga %1"
+msgstr "&Amaga %1"
 
 #: playlist/playlistheader.cpp:33
 msgid "&Hide..."
-msgstr "Amaga..."
+msgstr "&Amaga…"
 
 #: playlist/playlistheader.cpp:39
 msgid "&Left"
@@ -194,7 +194,7 @@ msgstr "Llista de reproducció"
 
 #: ../bin/src/ui_mainwindow.h:653
 msgid "&Quit"
-msgstr "&Abandona"
+msgstr "&Surt"
 
 #: ../bin/src/ui_mainwindow.h:691
 msgid "&Repeat mode"
@@ -479,7 +479,7 @@ msgstr "Afegeix l'etiqueta de gènere musical a la cançó"
 
 #: ../bin/src/ui_notificationssettingspage.h:398
 msgid "Add song grouping tag"
-msgstr ""
+msgstr "Afegeix etiqueta d’agrupació de la cançó"
 
 #: ../bin/src/ui_notificationssettingspage.h:410
 msgid "Add song length tag"
@@ -487,11 +487,11 @@ msgstr "Afegeix l'etiqueta de durada a la cançó"
 
 #: ../bin/src/ui_notificationssettingspage.h:395
 msgid "Add song performer tag"
-msgstr ""
+msgstr "Afegeix etiqueta d’intèrpret de la cançó"
 
 #: ../bin/src/ui_notificationssettingspage.h:413
 msgid "Add song play count"
-msgstr "Afegir el nombre de reproduccions"
+msgstr "Afegeix el nombre de reproduccions"
 
 #: ../bin/src/ui_notificationssettingspage.h:419
 msgid "Add song rating"
@@ -499,7 +499,7 @@ msgstr "Afegeix una valoració a la cançó"
 
 #: ../bin/src/ui_notificationssettingspage.h:416
 msgid "Add song skip count"
-msgstr "Afegir comptador de passades de cançó"
+msgstr "Afegeix comptador de passades de cançó"
 
 #: ../bin/src/ui_notificationssettingspage.h:383
 msgid "Add song title tag"
@@ -750,7 +750,7 @@ msgstr "Esteu segur que voleu restablir les estadístiques d’aquesta cançó?"
 msgid ""
 "Are you sure you want to write song's statistics into song's file for all "
 "the songs of your library?"
-msgstr ""
+msgstr "Esteu segur que voleu escriure les estadístiques de les cançons en tots els fitxers de la vostra col·lecció?"
 
 #: playlist/playlist.cpp:1205 ui/organisedialog.cpp:56
 #: ui/qtsystemtrayicon.cpp:250 ../bin/src/ui_groupbydialog.h:130
@@ -950,7 +950,7 @@ msgstr "Suport per a CUE sheet"
 
 #: internet/spotifyblobdownloader.cpp:44
 msgid "Cancel"
-msgstr "Canceŀla"
+msgstr "Cancel·la"
 
 #: ../bin/src/ui_edittagdialog.h:664
 msgid "Change cover art"
@@ -980,7 +980,7 @@ msgstr "Canvia l’idioma"
 msgid ""
 "Changing mono playback preference will be effective for the next playing "
 "songs"
-msgstr ""
+msgstr "El canvi en el paràmetre de reproducció monofònic serà efectiu per a les següents cançons en reproducció"
 
 #: ../bin/src/ui_podcastsettingspage.h:228
 msgid "Check for new episodes"
@@ -1090,7 +1090,7 @@ msgid ""
 "Clementine can synchronize your subscription list with your other computers "
 "and podcast applications.  <a href=\"https://gpodder.net/register/\">Create "
 "an account</a>."
-msgstr ""
+msgstr "Clementine pot sincronitzar la vostra llista de subscripcions amb vostres altres ordinadors i aplicacions de podcasts. <a href=\"https://gpodder.net/register/\">Crea un compte</a>."
 
 #: visualisations/projectmvisualisation.cpp:128
 msgid ""
@@ -2355,7 +2355,7 @@ msgstr "Agrupar per Gènere/Artista/Àlbum"
 #: playlist/playlist.cpp:1215 ui/organisedialog.cpp:61
 #: ../bin/src/ui_edittagdialog.h:691
 msgid "Grouping"
-msgstr ""
+msgstr "Agrupació"
 
 #: podcasts/podcasturlloader.cpp:196
 msgid "HTML page did not contain any RSS feeds"
@@ -2407,7 +2407,7 @@ msgstr "No tinc cap compte a Magnatune"
 msgid "Icon"
 msgstr "Icona"
 
-#: widgets/fancytabwidget.cpp:655
+#: widgets/fancytabwidget.cpp:674
 msgid "Icons on top"
 msgstr "icones a la part superior"
 
@@ -2614,7 +2614,7 @@ msgstr "Gran Saló"
 msgid "Large album cover"
 msgstr "Caràtula gran de l'àlbum"
 
-#: widgets/fancytabwidget.cpp:651
+#: widgets/fancytabwidget.cpp:670
 msgid "Large sidebar"
 msgstr "Barra lateral gran"
 
@@ -3410,7 +3410,7 @@ msgstr "En pausa"
 msgid "Performer"
 msgstr "Intèrpret"
 
-#: widgets/fancytabwidget.cpp:653
+#: widgets/fancytabwidget.cpp:672
 msgid "Plain sidebar"
 msgstr "Barra lateral plana"
 
@@ -3917,11 +3917,11 @@ msgstr "Desa els valors"
 
 #: ../bin/src/ui_librarysettingspage.h:193
 msgid "Save ratings in file tags when possible"
-msgstr ""
+msgstr "Desa les valoracions en etiquetes de fitxers quan sigui possible"
 
 #: ../bin/src/ui_librarysettingspage.h:197
 msgid "Save statistics in file tags when possible"
-msgstr ""
+msgstr "Desa les estadístiques en etiquetes de fitxers quan sigui possible"
 
 #: ../bin/src/ui_addstreamdialog.h:115
 msgid "Save this stream in the Internet tab"
@@ -4265,7 +4265,7 @@ msgstr "Salta endavant en la llista de reproducció"
 msgid "Small album cover"
 msgstr "Caràtula petita"
 
-#: widgets/fancytabwidget.cpp:652
+#: widgets/fancytabwidget.cpp:671
 msgid "Small sidebar"
 msgstr "Barra lateral petita"
 
@@ -4488,7 +4488,7 @@ msgstr "S'estan sincronitzant les pistes destacades de Spotify"
 msgid "System colors"
 msgstr "Colors del sistema"
 
-#: widgets/fancytabwidget.cpp:654
+#: widgets/fancytabwidget.cpp:673
 msgid "Tabs on top"
 msgstr "Pestanyes a dalt de tot"
 

@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-03-30 23:26+0000\n"
-"Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
+"PO-Revision-Date: 2013-04-01 11:07+0000\n"
+"Last-Translator: gogo <trebelnik2@gmail.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: hr\n"
@@ -286,7 +286,7 @@ msgid ""
 "files tags for all your library's songs.</p><p>This is not needed if the "
 "&quot;Save ratings and statistics in file tags&quot; option has always been "
 "activated.</p></body></html>"
-msgstr ""
+msgstr "<html><head/><body><p>Ovo će zapisati ocjene i statistike pjesama u oznaku datoteke za sve pjesme u vašoj fonoteci.</p><p>Ovo nije potrebno ako je &quot;Spremi ocjene i statistiku u datoteku oznaka&quot; mogućnost uvijek aktivirana.</p></body></html>"
 
 #: ../bin/src/ui_organisedialog.h:199
 msgid ""
@@ -752,7 +752,7 @@ msgstr "Sigurno želite resetirati statistiku pjesama?"
 msgid ""
 "Are you sure you want to write song's statistics into song's file for all "
 "the songs of your library?"
-msgstr ""
+msgstr "Sigurno želite zapisati statistiku pjesama u datoteke pjesama za sve pjesme u vašoj fonoteci?"
 
 #: playlist/playlist.cpp:1205 ui/organisedialog.cpp:56
 #: ui/qtsystemtrayicon.cpp:250 ../bin/src/ui_groupbydialog.h:130
@@ -2409,7 +2409,7 @@ msgstr "Nemam Magnatune račun"
 msgid "Icon"
 msgstr "Ikona"
 
-#: widgets/fancytabwidget.cpp:655
+#: widgets/fancytabwidget.cpp:674
 msgid "Icons on top"
 msgstr "Ikona na vrh"
 
@@ -2616,7 +2616,7 @@ msgstr "Velika dvorana"
 msgid "Large album cover"
 msgstr "Veliki omot albuma"
 
-#: widgets/fancytabwidget.cpp:651
+#: widgets/fancytabwidget.cpp:670
 msgid "Large sidebar"
 msgstr "Velika bočna traka"
 
@@ -3412,7 +3412,7 @@ msgstr "Reprodukcija pauzirana"
 msgid "Performer"
 msgstr "Izvođač"
 
-#: widgets/fancytabwidget.cpp:653
+#: widgets/fancytabwidget.cpp:672
 msgid "Plain sidebar"
 msgstr "Jednostavna bočna traka"
 
@@ -3919,11 +3919,11 @@ msgstr "Spremite predložak"
 
 #: ../bin/src/ui_librarysettingspage.h:193
 msgid "Save ratings in file tags when possible"
-msgstr ""
+msgstr "Spremi ocjene u datoteku oznaka kada je moguće"
 
 #: ../bin/src/ui_librarysettingspage.h:197
 msgid "Save statistics in file tags when possible"
-msgstr ""
+msgstr "Spremi statistiku u datoteku oznaka kada je moguće"
 
 #: ../bin/src/ui_addstreamdialog.h:115
 msgid "Save this stream in the Internet tab"
@@ -3931,7 +3931,7 @@ msgstr "Spremite ovaj stream u internet kartici"
 
 #: library/library.cpp:164
 msgid "Saving songs statistics into songs files"
-msgstr ""
+msgstr "Spremanje statistike pjesama u datoteke pjesama"
 
 #: ui/edittagdialog.cpp:670 ui/trackselectiondialog.cpp:256
 msgid "Saving tracks"
@@ -4267,7 +4267,7 @@ msgstr "Preskoči unaprijed u popisu izvođenja"
 msgid "Small album cover"
 msgstr "Mali omot albuma"
 
-#: widgets/fancytabwidget.cpp:652
+#: widgets/fancytabwidget.cpp:671
 msgid "Small sidebar"
 msgstr "Mala bočna traka"
 
@@ -4472,7 +4472,7 @@ msgstr "Podržani formati"
 
 #: ../bin/src/ui_librarysettingspage.h:201
 msgid "Synchronize statistics to files now"
-msgstr ""
+msgstr "Uskaldi statistiku sa datotekama odmah"
 
 #: internet/spotifyservice.cpp:561
 msgid "Syncing Spotify inbox"
@@ -4490,7 +4490,7 @@ msgstr "Sinkronizacija Spotify pjesama označenim zvjezdicama"
 msgid "System colors"
 msgstr "Boje sustava"
 
-#: widgets/fancytabwidget.cpp:654
+#: widgets/fancytabwidget.cpp:673
 msgid "Tabs on top"
 msgstr "Kartice pri vrhu"
 
@@ -5115,7 +5115,7 @@ msgstr "Želite li pokrenuti ponovnu potpunu prtetragu odmah?"
 
 #: library/librarysettingspage.cpp:151
 msgid "Write all songs statistics into songs' files"
-msgstr ""
+msgstr "Zapiši svu statistiku pjesama u datoteke pjesama"
 
 #: internet/subsonicsettingspage.cpp:83
 msgid "Wrong username or password."
