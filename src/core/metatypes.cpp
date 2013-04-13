@@ -70,6 +70,7 @@ void RegisterMetaTypes() {
   qRegisterMetaTypeStreamOperators<SomaFMService::Stream>("SomaFMService::Stream");
   qRegisterMetaType<SubdirectoryList>("SubdirectoryList");
   qRegisterMetaType<Subdirectory>("Subdirectory");
+  qRegisterMetaType<QList<QUrl> >("QList<QUrl>");
 
 #ifdef HAVE_DBUS
   qDBusRegisterMetaType<QImage>();

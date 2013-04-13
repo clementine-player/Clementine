@@ -10,6 +10,8 @@ enum MsgType {
   CHANGE_SONG = 5;
   SET_VOLUME = 6;
   SET_TRACK_POSITION = 7;
+  INSERT_URLS = 8;
+  REMOVE_SONGS = 9;
 
   // Messages send by both
   DISCONNECT = 2;
@@ -175,6 +177,23 @@ message RequestSetTrackPosition {
   optional int32 position = 1;
 }
 
+message RequestInsertUrls {
+  // In which playlist should the urls be inserted?
+  optional int32 playlist_id = 1;
+  repeated string urls = 2;
+  optional int32 position = 3 [default=-1];
+  optional bool play_now = 4 [default=false];
+  optional bool enqueue = 5 [default=false];
+}
+
+// Client want to change track
+message RequestRemoveSongs {
+  // In which playlist is the songs?
+  optional int32 playlist_id = 1;
+  // And on which position?
+  repeated int32 songs = 2;
+}
+
 // The message itself
 message Message {
   optional int32 version = 1 [default=5];
@@ -185,6 +204,8 @@ message Message {
   optional RequestChangeSong request_change_song = 11;
   optional RequestSetVolume request_set_volume = 12;
   optional RequestSetTrackPosition request_set_track_position = 23;
+  optional RequestInsertUrls request_insert_urls = 25;
+  optional RequestRemoveSongs request_remove_songs = 26;
   
   optional Repeat repeat = 13;
   optional Shuffle shuffle = 14;
