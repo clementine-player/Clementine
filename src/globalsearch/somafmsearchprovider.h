@@ -20,11 +20,11 @@
 
 #include "simplesearchprovider.h"
 
-class SomaFMService;
+class SomaFMServiceBase;
 
 class SomaFMSearchProvider : public SimpleSearchProvider {
 public:
-  SomaFMSearchProvider(SomaFMService* service, Application* app, QObject* parent);
+  SomaFMSearchProvider(SomaFMServiceBase* service, Application* app, QObject* parent);
 
   void LoadArtAsync(int id, const Result& result);
 
@@ -32,7 +32,7 @@ protected:
   void RecreateItems();
 
 private:
-  SomaFMService* service_;
+  SomaFMServiceBase* service_;
   QImage icon_;
 };
 

@@ -29,12 +29,19 @@ class QNetworkAccessManager;
 class QNetworkReply;
 class QMenu;
 
-class SomaFMService : public InternetService {
+class SomaFMServiceBase : public InternetService {
   Q_OBJECT
 
 public:
-  SomaFMService(Application* app, InternetModel* parent);
-  ~SomaFMService();
+  SomaFMServiceBase(
+      Application* app,
+      InternetModel* parent,
+      const QString& name,
+      const QUrl& channel_list_url,
+      const QUrl& homepage_url,
+      const QUrl& donate_page_url,
+      const QIcon& icon);
+  ~SomaFMServiceBase();
 
   enum ItemType {
     Type_Stream = 2000,
@@ -45,15 +52,14 @@ public:
     QString dj_;
     QUrl url_;
 
-    Song ToSong() const;
+    Song ToSong(const QString& prefix) const;
   };
   typedef QList<Stream> StreamList;
 
-  static const char* kServiceName;
-  static const char* kSettingsGroup;
-  static const char* kChannelListUrl;
-  static const char* kHomepage;
   static const int kStreamsCacheDurationSecs;
+
+  const QString& url_scheme() const { return url_scheme_; }
+  const QIcon& icon() const { return icon_; }
 
   QStandardItem* CreateRootItem();
   void LazyPopulate(QStandardItem* item);
@@ -76,12 +82,14 @@ private slots:
   void RefreshStreamsFinished(QNetworkReply* reply, int task_id);
 
   void Homepage();
+  void Donate();
 
 private:
   void ReadChannel(QXmlStreamReader& reader, StreamList* ret);
   void PopulateStreams();
 
 private:
+  const QString url_scheme_;
   SomaFMUrlHandler* url_handler_;
 
   QStandardItem* root_;
@@ -90,6 +98,22 @@ private:
   QNetworkAccessManager* network_;
 
   CachedList<Stream> streams_;
+
+  const QString name_;
+  const QUrl channel_list_url_;
+  const QUrl homepage_url_;
+  const QUrl donate_page_url_;
+  const QIcon icon_;
+};
+
+class SomaFMService : public SomaFMServiceBase {
+ public:
+  SomaFMService(Application* app, InternetModel* parent);
+};
+
+class RadioGFMService : public SomaFMServiceBase {
+ public:
+  RadioGFMService(Application* app, InternetModel* parent);
 };
 
 QDataStream& operator<<(QDataStream& out, const SomaFMService::Stream& stream);

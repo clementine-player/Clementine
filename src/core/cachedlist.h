@@ -32,7 +32,7 @@ public:
 
   typedef QList<T> ListType;
 
-  CachedList(const char* settings_group, const QString& name,
+  CachedList(const QString& settings_group, const QString& name,
              int cache_duration_secs)
     : settings_group_(settings_group),
       name_(name),
@@ -92,7 +92,7 @@ public:
   const_iterator end() const { return data_.end(); }
 
 private:
-  const char* settings_group_;
+  const QString settings_group_;
   const QString name_;
   const int cache_duration_secs_;
 

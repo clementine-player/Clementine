@@ -28,13 +28,22 @@
 #include <QSettings>
 #include <QTemporaryFile>
 
-SomaFMUrlHandler::SomaFMUrlHandler(Application* app, SomaFMService* service,
+SomaFMUrlHandler::SomaFMUrlHandler(Application* app,
+                                   SomaFMServiceBase* service,
                                    QObject* parent)
   : UrlHandler(parent),
     app_(app),
     service_(service),
     task_id_(0)
 {
+}
+
+QString SomaFMUrlHandler::scheme() const {
+  return service_->url_scheme();
+}
+
+QIcon SomaFMUrlHandler::icon() const {
+  return service_->icon();
 }
 
 UrlHandler::LoadResult SomaFMUrlHandler::StartLoading(const QUrl& url) {
@@ -57,7 +66,7 @@ void SomaFMUrlHandler::LoadPlaylistFinished() {
   task_id_ = 0;
 
   QUrl original_url(reply->url());
-  original_url.setScheme("somafm");
+  original_url.setScheme(scheme());
 
   if (reply->error() != QNetworkReply::NoError) {
     // TODO: Error handling
@@ -74,7 +83,7 @@ void SomaFMUrlHandler::LoadPlaylistFinished() {
 
   // Failed to get playlist?
   if (songs.count() == 0) {
-    qLog(Error) << "Error loading soma.fm playlist";
+    qLog(Error) << "Error loading" << scheme() << "playlist";
     emit AsyncLoadComplete(LoadResult(original_url, LoadResult::NoMoreTracks));
     return;
   }
