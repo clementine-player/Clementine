@@ -16,6 +16,9 @@
 */
 
 #include "incomingdataparser.h"
+
+#include <algorithm>
+
 #include "core/logging.h"
 #include "engines/enginebase.h"
 #include "playlist/playlistmanager.h"
@@ -180,8 +183,8 @@ void IncomingDataParser::InsertUrls(const pb::remote::Message& msg) {
 
   // Extract urls
   QList<QUrl> urls;
-  foreach (std::string url, request.urls()) {
-    urls << QUrl(QString::fromStdString(url));
+  for (auto it = request.urls().begin(); it != request.urls().end(); ++it) {
+    urls << QUrl(QString::fromStdString(*it));
   }
 
   // Insert the urls
@@ -198,9 +201,7 @@ void IncomingDataParser::RemoveSongs(const pb::remote::Message& msg) {
 
   // Extract urls
   QList<int> songs;
-  foreach (int song, request.songs()) {
-    songs << song;
-  }
+  std::copy(request.songs().begin(), request.songs().end(), songs.begin());
 
   // Insert the urls
   emit RemoveSongs(songs);
