@@ -184,7 +184,7 @@ class Playlist : public QAbstractListModel {
   const QModelIndex current_index() const;
 
   bool stop_after_current() const;
-  bool is_dynamic() const { return dynamic_playlist_; }
+  bool is_dynamic() const { return static_cast<bool>(dynamic_playlist_); }
   int dynamic_history_length() const;
 
   QString special_type() const { return special_type_; }

@@ -2008,7 +2008,7 @@ bool Playlist::ApplyValidityOnCurrentSong(const QUrl& url, bool valid) {
     }
   }
 
-  return current;
+  return static_cast<bool>(current);
 }
 
 void Playlist::SetColumnAlignment(const ColumnAlignmentMap& alignment) {
