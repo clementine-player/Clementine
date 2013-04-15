@@ -87,10 +87,18 @@ NetworkAccessManager::NetworkAccessManager(QObject* parent)
 
 QNetworkReply* NetworkAccessManager::createRequest(
     Operation op, const QNetworkRequest& request, QIODevice* outgoingData) {
-  QNetworkRequest new_request(request);
-  new_request.setRawHeader("User-Agent", QString("%1 %2").arg(
+  QByteArray user_agent = QString("%1 %2").arg(
       QCoreApplication::applicationName(),
-      QCoreApplication::applicationVersion()).toUtf8());
+      QCoreApplication::applicationVersion()).toUtf8();
+
+  if (request.hasRawHeader("User-Agent")) {
+    // Append the existing user-agent set by a client library (such as
+    // libmygpo-qt).
+    user_agent += " " + request.rawHeader("User-Agent");
+  }
+
+  QNetworkRequest new_request(request);
+  new_request.setRawHeader("User-Agent", user_agent);
 
   if (op == QNetworkAccessManager::PostOperation &&
       !new_request.header(QNetworkRequest::ContentTypeHeader).isValid()) {
