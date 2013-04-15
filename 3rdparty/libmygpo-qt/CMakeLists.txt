@@ -4,6 +4,7 @@ set( MYGPO_QT_VERSION_MINOR "0" )
 set( MYGPO_QT_VERSION_PATCH "7" )
 configure_file( Version.h.in ${CMAKE_CURRENT_BINARY_DIR}/Version.h )
 include_directories("${QJSON_INCLUDEDIR}/qjson")
+add_definitions(-DMYGPO_EXPORT)
 
 include_directories( ${QT_INCLUDES} ${QJSON_INCLUDE_DIR} ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR} )
 
