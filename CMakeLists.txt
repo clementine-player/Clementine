@@ -75,6 +75,7 @@ pkg_check_modules(IMOBILEDEVICE libimobiledevice-1.0)
 pkg_check_modules(INDICATEQT indicate-qt)
 pkg_check_modules(LIBGPOD libgpod-1.0>=0.7.92)
 pkg_check_modules(LIBMTP libmtp>=1.0)
+pkg_check_modules(LIBMYGPO_QT libmygpo-qt>=1.0.7)
 pkg_check_modules(LIBXML libxml-2.0)
 pkg_check_modules(PLIST libplist)
 pkg_check_modules(QCA qca2)
@@ -416,10 +417,15 @@ if(NOT CHROMAPRINT_FOUND)
   endif(WIN32)
 endif(NOT CHROMAPRINT_FOUND)
 
-# We have to use our own libmygpo-qt for now
-add_subdirectory(3rdparty/libmygpo-qt)
-set(MYGPOQT_LIBRARIES mygpo-qt)
-set(MYGPOQT_INCLUDE_DIRS ${CMAKE_SOURCE_DIR}/3rdparty/libmygpo-qt/)
+# Use the system libmygpo-qt if a recent enough version was found
+if(LIBMYGPO_QT_FOUND)
+  set(MYGPOQT_LIBRARIES ${LIBMYGPO_QT_LIBRARIES})
+  set(MYGPOQT_INCLUDE_DIRS ${LIBMYGPO_QT_INCLUDE_DIRS})
+else()
+  add_subdirectory(3rdparty/libmygpo-qt)
+  set(MYGPOQT_LIBRARIES mygpo-qt)
+  set(MYGPOQT_INCLUDE_DIRS ${CMAKE_SOURCE_DIR}/3rdparty/libmygpo-qt/)
+endif()
 
 # Qocoa
 add_subdirectory(3rdparty/qocoa)
