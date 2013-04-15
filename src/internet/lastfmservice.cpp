@@ -468,7 +468,7 @@ bool LastFMService::InitScrobbler() {
   connect(scrobbler_, SIGNAL(scrobblesSubmitted(QList<lastfm::Track>)), SIGNAL(ScrobbleSubmitted()));
   connect(scrobbler_, SIGNAL(nowPlayingError(int,QString)), SIGNAL(ScrobbleError(int)));
 #else
-  connect(scrobbler_, SIGNAL(status(int)), SIGNAL(ScrobblerStatus(int)));
+  connect(scrobbler_, SIGNAL(status(int)), SLOT(ScrobblerStatus(int)));
 #endif
   return true;
 }
