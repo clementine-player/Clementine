@@ -1,6 +1,6 @@
 /***************************************************************************
 * This file is part of libmygpo-qt                                         *
-* Copyright (c) 2010 - 2011 Stefan Derkits <stefan@derkits.at>             *
+* Copyright (c) 2010 - 2013 Stefan Derkits <stefan@derkits.at>             *
 * Copyright (c) 2010 - 2011 Christian Wagner <christian.wagner86@gmx.at>   *
 * Copyright (c) 2010 - 2011 Felix Winter <ixos01@gmail.com>                *
 *                                                                          *
@@ -22,7 +22,7 @@
 
 #include "EpisodeActionList_p.h"
 
-#include <qjson/parser.h>
+#include <parser.h>
 
 using namespace mygpo;
 
@@ -72,8 +72,14 @@ bool EpisodeActionListPrivate::parse( const QVariant& data )
     foreach( QVariant var, varList )
     {
         QVariant v;
-        v.setValue<mygpo::EpisodeActionPtr> ( mygpo::EpisodeActionPtr( new EpisodeAction( var ) ) );
-        episodeActionList.append( v );
+        EpisodeAction* episodeActionTmpPtr = new EpisodeAction( var );
+        if ( episodeActionTmpPtr->property("valid").toBool() )
+        {
+            v.setValue<mygpo::EpisodeActionPtr> ( mygpo::EpisodeActionPtr( episodeActionTmpPtr ) );
+            episodeActionList.append( v );
+        }
+        else
+            delete episodeActionTmpPtr;
     }
     m_episodeActions = QVariant( episodeActionList );
     return true;

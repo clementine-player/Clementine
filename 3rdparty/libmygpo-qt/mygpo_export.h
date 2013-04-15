@@ -1,6 +1,6 @@
 /***************************************************************************
 * This file is part of libmygpo-qt                                         *
-* Copyright (c) 2010 - 2011 Stefan Derkits <stefan@derkits.at>             *
+* Copyright (c) 2010 - 2013 Stefan Derkits <stefan@derkits.at>             *
 * Copyright (c) 2010 - 2011 Christian Wagner <christian.wagner86@gmx.at>   *
 * Copyright (c) 2010 - 2011 Felix Winter <ixos01@gmail.com>                *
 *                                                                          *
@@ -25,6 +25,14 @@
 
 #include <QtCore/qglobal.h>
 
-#define MYGPO_EXPORT
+#ifndef MYGPO_EXPORT
+# if defined(MYGPO_MAKEDLL)
+/* We are building this library */
+#  define MYGPO_EXPORT Q_DECL_EXPORT
+# else
+/* We are using this library */
+#  define MYGPO_EXPORT Q_DECL_IMPORT
+# endif
+#endif
 
 #endif // MYGPO_EXPORT_H

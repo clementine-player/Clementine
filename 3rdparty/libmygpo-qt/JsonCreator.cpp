@@ -1,6 +1,6 @@
 /***************************************************************************
 * This file is part of libmygpo-qt                                         *
-* Copyright (c) 2010 - 2011 Stefan Derkits <stefan@derkits.at>             *
+* Copyright (c) 2010 - 2013 Stefan Derkits <stefan@derkits.at>             *
 * Copyright (c) 2010 - 2011 Christian Wagner <christian.wagner86@gmx.at>   *
 * Copyright (c) 2010 - 2011 Felix Winter <ixos01@gmail.com>                *
 *                                                                          *
@@ -26,11 +26,13 @@
 #include <QString>
 #include <QDateTime>
 
-#include <qjson/serializer.h>
+#include <serializer.h>
 
 #include "JsonCreator.h"
 
 using namespace mygpo;
+
+static qulonglong c_maxlonglong = (2^64)-1;
 
 QByteArray JsonCreator::addRemoveSubsToJSON( const QList< QUrl >& add, const QList< QUrl >& remove )
 {
@@ -70,7 +72,7 @@ QByteArray JsonCreator::episodeActionListToJSON( const QList<EpisodeActionPtr>& 
     return jsonByteArray;
 }
 
-QByteArray mygpo::JsonCreator::renameDeviceStringToJSON( const QString& caption, const QString& type )
+QByteArray JsonCreator::renameDeviceStringToJSON( const QString& caption, const QString& type )
 {
     QJson::Serializer serializer;
     QVariantMap jsonData;
@@ -81,6 +83,55 @@ QByteArray mygpo::JsonCreator::renameDeviceStringToJSON( const QString& caption,
     QByteArray jsonByteArray = serializer.serialize( QVariant( jsonData ) );
     return jsonByteArray;
 
+}
+
+QByteArray JsonCreator::deviceSynchronizationListsToJSON(const QList< QStringList >& synchronize, const QList< QString >& stopSynchronize)
+{
+    QString syncVar;
+    if (synchronize.size() != 0)
+    {
+        syncVar.append(QLatin1String("["));
+        foreach( const QStringList& syncEntry, synchronize )
+        {
+            QString syncEntryStr;
+            if (syncEntry.size() != 0) {
+                syncEntryStr.append(QLatin1String("["));
+                foreach( const QString& str, syncEntry) {
+                    syncEntryStr.append(QString(QLatin1String("\"") + str + QLatin1String("\",")));
+                }
+                syncEntryStr.replace(syncEntryStr.size()-1,1,QLatin1String("]"));
+            }
+            else {
+                syncEntryStr.append(QLatin1String("[ ]"));
+            }
+            syncVar.append(syncEntryStr);
+            syncVar.append(QLatin1String(","));
+        }
+        syncVar.replace(syncVar.size()-1,1,QLatin1String("]"));
+    }
+    else
+    {
+        syncVar.append(QLatin1String("[ ]"));
+    }
+    QString stopVar;
+    if (stopSynchronize.size() != 0)
+    {
+        stopVar.append(QLatin1String("["));
+        foreach( const QString& str, stopSynchronize) {
+            stopVar.append(QString(QLatin1String("\"") + str + QLatin1String("\",")));
+        }
+        stopVar.replace(stopVar.size()-1,1,QLatin1String("]"));
+    }
+    else
+    {
+        stopVar.append(QLatin1String("[ ]"));
+    }
+    QString jsonStr(QLatin1String("{\"synchronize\" : "));
+    jsonStr.append(syncVar);
+    jsonStr.append(QLatin1String(" ,\"stop-synchronize\" : "));
+    jsonStr.append(stopVar);
+    jsonStr.append(QLatin1String(" }\n"));
+    return jsonStr.toLocal8Bit();
 }
 
 QVariantList JsonCreator::urlListToQVariantList( const QList< QUrl >& urls )
@@ -133,6 +184,8 @@ QVariantMap JsonCreator::episodeActionToQVariantMap( const EpisodeActionPtr epis
         map.insert( QLatin1String( "action" ), QLatin1String( "play" ) );
     else if( actionType == EpisodeAction::Download )
         map.insert( QLatin1String( "action" ), QLatin1String( "download" ) );
+    else if( actionType == EpisodeAction::Flattr )
+        map.insert( QLatin1String( "action" ), QLatin1String( "flattr" ) );
 
     if( episodeAction->timestamp() != 0 ) {
 #if QT_VERSION >= 0x040700
@@ -145,12 +198,17 @@ QVariantMap JsonCreator::episodeActionToQVariantMap( const EpisodeActionPtr epis
 #endif
         map.insert( QLatin1String( "timestamp" ), dateTime.toString(Qt::ISODate) );
     }
-    if( episodeAction->started() != 0 )
-        map.insert( QLatin1String( "started" ), episodeAction->started() );
-    if( episodeAction->position() != 0 )
-        map.insert( QLatin1String( "position" ), episodeAction->position() );
-    if( episodeAction->total() != 0 )
-        map.insert( QLatin1String( "total" ), episodeAction->total() );
-
+    if( actionType == EpisodeAction::Play )
+    {
+        if ( episodeAction->position() != c_maxlonglong )
+        {
+            map.insert( QLatin1String( "position" ), episodeAction->position() );
+            if ( episodeAction->started() != c_maxlonglong && episodeAction->total() != c_maxlonglong )
+            {
+                map.insert( QLatin1String( "started" ), episodeAction->started() );
+                map.insert( QLatin1String( "total" ), episodeAction->total() );
+            }
+        }
+    }
     return map;
 }

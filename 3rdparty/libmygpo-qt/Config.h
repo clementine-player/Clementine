@@ -1,8 +1,6 @@
 /***************************************************************************
 * This file is part of libmygpo-qt                                         *
-* Copyright (c) 2010 - 2013 Stefan Derkits <stefan@derkits.at>             *
-* Copyright (c) 2010 - 2011 Christian Wagner <christian.wagner86@gmx.at>   *
-* Copyright (c) 2010 - 2011 Felix Winter <ixos01@gmail.com>                *
+* Copyright (c) 2012 - 2013 Stefan Derkits <stefan@derkits.at>             *
 *                                                                          *
 * This library is free software; you can redistribute it and/or            *
 * modify it under the terms of the GNU Lesser General Public               *
@@ -20,57 +18,47 @@
 * USA                                                                      *
 ***************************************************************************/
 
-#include "Tag_p.h"
+#ifndef LIBMYGPO_QT_CONFIG_H
+#define LIBMYGPO_QT_CONFIG_H
 
-using namespace mygpo;
+#include "mygpo_export.h"
 
-TagPrivate::TagPrivate( Tag* qq, const QVariant& variant ) : q( qq ), m_tag( QLatin1String( "" ) ), m_usage( 0 )
-{
-    parse( variant );
-}
+#include <QObject>
+#include <QUrl>
 
-QString TagPrivate::tag() const
-{
-    return m_tag;
-}
-
-uint TagPrivate::usage() const
-{
-    return m_usage;
-}
-
-bool TagPrivate::parse( const QVariant& data )
-{
-    if( !data.canConvert( QVariant::Map ) )
-        return false;
-    QVariantMap tagMap = data.toMap();
-    QVariant v = tagMap.value( QLatin1String( "tag" ) );
-    if( !v.canConvert( QVariant::String ) )
-        return false;
-    m_tag = v.toString();
-    v = tagMap.value( QLatin1String( "usage" ) );
-    if( !v.canConvert( QVariant::UInt ) )
-        return false;
-    m_usage = v.toUInt();
-    return true;
-}
-
-Tag::Tag( const QVariant& variant, QObject* parent ) : QObject( parent ), d( new TagPrivate( this, variant ) )
+namespace mygpo
 {
 
+class ConfigPrivate;
+//TODO: More config entries (mygpo-feedservice baseurl), let class inherit from QObject, set everything as a Property
+class MYGPO_EXPORT Config
+{
+
+public:
+    static Config* instance();
+
+    int majorVersion() const;
+    int minorVersion() const;
+    int patchVersion() const;
+
+    QString version() const;
+
+    QUrl mygpoBaseUrl() const;
+    void setMygpoBaseUrl( const QUrl& mygpoBaseUrl );
+
+    QString userAgent() const;
+
+    QString userAgentPrefix() const;
+    void setUserAgentPrefix( const QString& prefix );
+private:
+    Config();
+    ~Config();
+
+    static Config* s_instance;
+  
+    ConfigPrivate* const d;
+};
+
 }
 
-Tag::~Tag()
-{
-    delete d;
-}
-
-QString Tag::tag() const
-{
-    return d->tag();
-}
-
-uint Tag::usage() const
-{
-    return d->usage();
-}
+#endif // LIBMYGPO_QT_CONFIG_H

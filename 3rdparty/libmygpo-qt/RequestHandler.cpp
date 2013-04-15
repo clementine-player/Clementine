@@ -1,6 +1,6 @@
 /***************************************************************************
 * This file is part of libmygpo-qt                                         *
-* Copyright (c) 2010 - 2011 Stefan Derkits <stefan@derkits.at>             *
+* Copyright (c) 2010 - 2013 Stefan Derkits <stefan@derkits.at>             *
 * Copyright (c) 2010 - 2011 Christian Wagner <christian.wagner86@gmx.at>   *
 * Copyright (c) 2010 - 2011 Felix Winter <ixos01@gmail.com>                *
 *                                                                          *
@@ -24,6 +24,7 @@
 #include <QCoreApplication>
 
 #include "RequestHandler.h"
+#include "Config.h"
 
 using namespace mygpo;
 
@@ -43,6 +44,7 @@ QNetworkReply* RequestHandler::getRequest( const QString& url )
 {
     QUrl reqUrl( url );
     QNetworkRequest request( reqUrl );
+    addUserAgent( request );
     QNetworkReply* reply = m_nam->get( request );
     return reply;
 }
@@ -50,6 +52,7 @@ QNetworkReply* RequestHandler::getRequest( const QString& url )
 QNetworkReply* RequestHandler::authGetRequest( const QString& url )
 {
     QNetworkRequest request( url );
+    addUserAgent( request );
     addAuthData( request );
     QNetworkReply* reply = m_nam->get( request );
     return reply;
@@ -59,7 +62,9 @@ QNetworkReply* RequestHandler::authGetRequest( const QString& url )
 QNetworkReply* RequestHandler::postRequest( const QByteArray data, const QString& url )
 {
     QNetworkRequest request( url );
+    addUserAgent( request );
     addAuthData( request );
+    request.setHeader(QNetworkRequest::ContentTypeHeader, QLatin1String("application/json"));
     QNetworkReply* reply = m_nam->post( request, data );
     return reply;
 }
@@ -68,4 +73,9 @@ void RequestHandler::addAuthData( QNetworkRequest& request )
 {
     QByteArray headerData = "Basic " + QString(m_username + QLatin1String(":") + m_password).toLocal8Bit().toBase64();
     request.setRawHeader("Authorization", headerData );
+}
+
+void RequestHandler::addUserAgent( QNetworkRequest &request )
+{
+    request.setRawHeader("User-Agent", Config::instance()->userAgent().toAscii() );
 }
