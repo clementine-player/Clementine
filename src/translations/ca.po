@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-04-03 21:30+0000\n"
+"PO-Revision-Date: 2013-04-13 07:02+0000\n"
 "Last-Translator: Adolfo Jayme <fitoschido@gmail.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -170,7 +170,7 @@ msgstr "Aj&uda"
 #: playlist/playlistheader.cpp:70
 #, qt-format
 msgid "&Hide %1"
-msgstr "&Amaga %1"
+msgstr "&Amaga «%1»"
 
 #: playlist/playlistheader.cpp:33
 msgid "&Hide..."
@@ -679,7 +679,7 @@ msgstr "Començar sempre reproduint"
 msgid ""
 "An additional plugin is required to use Spotify in Clementine.  Would you "
 "like to download and install it now?"
-msgstr "Cal un connector addicional per utilitzar Spotify a Clementine. Voleu descarregar-lo i instaŀlar-lo ara?"
+msgstr "Necessitareu un connector addicional per usar Spotify en el Clementine. Voleu baixar-ho i instal·lar-ho ara?"
 
 #: devices/afcdevice.cpp:63
 msgid "An error occurred copying the iTunes database from the device"
@@ -736,7 +736,7 @@ msgstr "Afegir compressió per evitar el clipping"
 #: ui/equalizer.cpp:191
 #, qt-format
 msgid "Are you sure you want to delete the \"%1\" preset?"
-msgstr "Esteu segur que voleu eliminar el prearranjament «%1»?"
+msgstr "Esteu segur que voleu eliminar la predefinició «%1»?"
 
 #: internet/groovesharkservice.cpp:1290
 msgid "Are you sure you want to delete this playlist?"
@@ -764,7 +764,7 @@ msgstr "Artista"
 
 #: ui/mainwindow.cpp:242
 msgid "Artist info"
-msgstr "Informació de l’artista"
+msgstr "Inf. de l’artista"
 
 #: internet/lastfmservice.cpp:208
 msgid "Artist radio"
@@ -806,7 +806,7 @@ msgstr "Actualització automàtica"
 
 #: ../bin/src/ui_librarysettingspage.h:208
 msgid "Automatically open single categories in the library tree"
-msgstr "Expandir automàticament les categories úniques en l'arbre de la col·lecció"
+msgstr "Expandeix automàticament les categories úniques en l’arbre de la col·lecció"
 
 #: widgets/freespacebar.cpp:45
 msgid "Available"
@@ -851,7 +851,7 @@ msgstr "S'està fent una còpia de seguretat de la base de dades"
 
 #: ../bin/src/ui_mainwindow.h:659
 msgid "Ban"
-msgstr "Prohibició"
+msgstr "Veta"
 
 #: analyzers/baranalyzer.cpp:19
 msgid "Bar analyzer"
@@ -992,7 +992,7 @@ msgstr "Comprova si hi ha actualitzacions..."
 
 #: smartplaylists/wizard.cpp:86
 msgid "Choose a name for your smart playlist"
-msgstr "Escolliu un nom per a la llista de reproducció inteŀligent"
+msgstr "Trieu un nom per a la llista de reproducció intel·ligent"
 
 #: ../bin/src/ui_playbacksettingspage.h:287
 msgid "Choose automatically"
@@ -1021,7 +1021,7 @@ msgstr "Escolliu el directori de baixada dels podcasts"
 #: ../bin/src/ui_songinfosettingspage.h:188
 msgid ""
 "Choose the websites you want Clementine to use when searching for lyrics."
-msgstr "Elegeixi els llocs web que vol que Clementine utilitzi per a cercar lletres de cançons."
+msgstr "Trieu els llocs web que voleu que el Clementine usi per buscar lletres de cançons."
 
 #: ui/equalizer.cpp:109
 msgid "Classical"
@@ -1119,7 +1119,7 @@ msgstr "El Clementine trobarà música a:"
 
 #: library/libraryview.cpp:349
 msgid "Click here to add some music"
-msgstr "Fes click aquí per afegir música"
+msgstr "Feu clic aquí per afegir música"
 
 #: ../bin/src/ui_trackslider.h:72
 msgid "Click to toggle between remaining time and total time"
@@ -1549,11 +1549,11 @@ msgstr "Eliminar les llistes de reproducció"
 
 #: ui/equalizer.cpp:190 ../bin/src/ui_equalizer.h:124
 msgid "Delete preset"
-msgstr "Esborrar predefinició"
+msgstr "Elimina la predefinició"
 
 #: library/libraryview.cpp:383
 msgid "Delete smart playlist"
-msgstr "Esborra les llistes de reproducció inteŀligents"
+msgstr "Elimina la llista de reproducció intel·ligent"
 
 #: ../bin/src/ui_organisedialog.h:194
 msgid "Delete the original files"
@@ -1679,9 +1679,13 @@ msgstr "No remenar"
 msgid "Don't stop!"
 msgstr "No aturar!"
 
+#: internet/somafmservice.cpp:103
+msgid "Donate"
+msgstr "Feu una donació"
+
 #: devices/deviceview.cpp:115
 msgid "Double click to open"
-msgstr "Doble click per obrir"
+msgstr "Feu doble clic per obrir"
 
 #: ../bin/src/ui_behavioursettingspage.h:198
 msgid "Double clicking a song will..."
@@ -1731,27 +1735,27 @@ msgstr "Descarrega..."
 #: podcasts/podcastservice.cpp:195
 #, qt-format
 msgid "Downloading (%1%)..."
-msgstr "S'està descarregant (%1%)..."
+msgstr "S’està baixant (%1%)…"
 
 #: internet/icecastservice.cpp:101
 msgid "Downloading Icecast directory"
-msgstr "Descarregant el directori d'Icecast"
+msgstr "S’està baixant el directori d’Icecast"
 
 #: internet/jamendoservice.cpp:187
 msgid "Downloading Jamendo catalogue"
-msgstr "Descarregant el catàleg de Jamendo"
+msgstr "S’està baixant el catàleg de Jamendo"
 
 #: internet/magnatuneservice.cpp:158
 msgid "Downloading Magnatune catalogue"
-msgstr "Descarregant el catàleg de Magnatune"
+msgstr "S’està baixant el catàleg de Magnatune"
 
 #: internet/spotifyblobdownloader.cpp:44
 msgid "Downloading Spotify plugin"
-msgstr "Descarregant el connector d'Spotify"
+msgstr "S’està baixant el connector d’Spotify"
 
 #: musicbrainz/tagfetcher.cpp:102
 msgid "Downloading metadata"
-msgstr "Descarregant metadades"
+msgstr "S’estan baixant les metadades"
 
 #: ui/notificationssettingspage.cpp:37
 msgid "Drag to reposition"
@@ -1775,7 +1779,7 @@ msgstr "Mescla dinàmica aleatòria"
 
 #: library/libraryview.cpp:381
 msgid "Edit smart playlist..."
-msgstr "Edita la llista de reproducció inteŀligent"
+msgstr "Edita la llista de reproducció intel·ligent"
 
 #: ui/mainwindow.cpp:1391
 #, qt-format
@@ -1792,12 +1796,12 @@ msgstr "Edita les etiquetes"
 
 #: ../bin/src/ui_edittagdialog.h:662
 msgid "Edit track information"
-msgstr "Editar informació de la pista"
+msgstr "Edita la informació de la pista"
 
 #: library/libraryview.cpp:395 widgets/fileviewlist.cpp:50
 #: ../bin/src/ui_mainwindow.h:666
 msgid "Edit track information..."
-msgstr "Editar la informació de la pista..."
+msgstr "Edita la informació de la pista…"
 
 #: library/libraryview.cpp:397
 msgid "Edit tracks information..."
@@ -1809,15 +1813,15 @@ msgstr "Edita..."
 
 #: ../bin/src/ui_wiimotesettingspage.h:183
 msgid "Enable Wii Remote support"
-msgstr "Habilitat suport remot Wii"
+msgstr "Activa l’admissió del remot del Wii"
 
 #: ../bin/src/ui_equalizer.h:126
 msgid "Enable equalizer"
-msgstr "Habilitar l'equalitzador"
+msgstr "Activa l’equalitzador"
 
 #: ../bin/src/ui_wiimotesettingspage.h:187
 msgid "Enable shortcuts only when Clementine is focused"
-msgstr "Habilitar les dreceres només quan Clementine tengui el focus"
+msgstr "Activa les dreceres només quan el Clementine tingui el focus"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:147
 msgid ""
@@ -1827,7 +1831,7 @@ msgstr "Activeu les fonts següents per incloure-les en els resultats de les cer
 
 #: core/globalshortcuts.cpp:62
 msgid "Enable/disable Last.fm scrobbling"
-msgstr "Habilita/deshabilita l'scrobble de Last.fm"
+msgstr "Activa/desactiva el «scrobbling» del Last.fm"
 
 #: ../bin/src/ui_transcoderoptionsspeex.h:235
 msgid "Encoding complexity"
@@ -1929,7 +1933,7 @@ msgstr "S'ha produït un error en descarregar el connector d'Spotify"
 #: playlist/songloaderinserter.cpp:71 playlist/songloaderinserter.cpp:133
 #, qt-format
 msgid "Error loading %1"
-msgstr "Error carregant %1"
+msgstr "S’ha produït un error en carregar %1"
 
 #: internet/digitallyimportedservicebase.cpp:203
 #: internet/digitallyimportedurlhandler.cpp:89
@@ -2065,11 +2069,11 @@ msgstr "Cançons favorites"
 
 #: ../bin/src/ui_albumcovermanager.h:155
 msgid "Fetch Missing Covers"
-msgstr "Cercar caràtules perdudes"
+msgstr "Recull les caràtules que falten"
 
 #: ../bin/src/ui_albumcovermanager.h:150
 msgid "Fetch automatically"
-msgstr "Cercar automaticament"
+msgstr "Recull automàticament"
 
 #: ../bin/src/ui_coversearchstatisticsdialog.h:75
 msgid "Fetch completed"
@@ -2226,7 +2230,7 @@ msgstr "Baixos complets"
 
 #: ui/equalizer.cpp:114
 msgid "Full Bass + Treble"
-msgstr "Baixos + Aguts complets"
+msgstr "Baixos i aguts complets"
 
 #: ui/equalizer.cpp:113
 msgid "Full Treble"
@@ -2262,7 +2266,7 @@ msgstr "Obtingueu una URL per compartir aquesta cançó de Grooveshark"
 msgid "Getting Grooveshark popular songs"
 msgstr "S’estan obtenint les cançons populars de Grooveshark"
 
-#: internet/somafmservice.cpp:100
+#: internet/somafmservice.cpp:114
 msgid "Getting channels"
 msgstr "Obtenint canals"
 
@@ -2375,7 +2379,7 @@ msgstr "Informació del maquinari"
 
 #: ../bin/src/ui_deviceproperties.h:372
 msgid "Hardware information is only available while the device is connected."
-msgstr "La informació del maquinari sols esta disponible mentres el dispositiu esta endollat."
+msgstr "La informació del maquinari només està disponible mentre el dispositiu està endollat."
 
 #: ../bin/src/ui_transcoderoptionsmp3.h:202
 msgid "High"
@@ -2385,11 +2389,11 @@ msgstr "Alt"
 #: visualisations/visualisationcontainer.cpp:109
 #, qt-format
 msgid "High (%1 fps)"
-msgstr "Alt (%1 fps)"
+msgstr "Alta (%1 fps)"
 
 #: visualisations/visualisationcontainer.cpp:119
 msgid "High (1024x1024)"
-msgstr "Alta (1024x1024)"
+msgstr "Alta (1024 × 1024)"
 
 #: smartplaylists/searchterm.cpp:310
 msgid "Hours"
@@ -2500,7 +2504,7 @@ msgstr "Insereix..."
 
 #: internet/spotifysettingspage.cpp:75
 msgid "Installed"
-msgstr "Instaŀlat"
+msgstr "Instal·lat"
 
 #: core/database.cpp:649
 msgid "Integrity check"
@@ -2604,11 +2608,11 @@ msgstr "Idioma"
 
 #: ui/equalizer.cpp:115
 msgid "Laptop/Headphones"
-msgstr "Portàtil/Auriculars"
+msgstr "Portàtil/auriculars"
 
 #: ui/equalizer.cpp:116
 msgid "Large Hall"
-msgstr "Gran Saló"
+msgstr "Saló gran"
 
 #: widgets/nowplayingwidget.cpp:91
 msgid "Large album cover"
@@ -2761,46 +2765,46 @@ msgstr "Carrega la llista de reproducció..."
 
 #: internet/lastfmservice.cpp:884
 msgid "Loading Last.fm radio"
-msgstr "Carregant la radio de Last.fm"
+msgstr "S’està carregant la ràdio de Last.fm"
 
 #: devices/mtploader.cpp:42
 msgid "Loading MTP device"
-msgstr "Carregant el dispositiu MTP"
+msgstr "S’està carregant el dispositiu MTP"
 
 #: devices/wmdmloader.cpp:47
 msgid "Loading Windows Media device"
-msgstr "Carregant el dispositiu Windows Media"
+msgstr "S’està carregant el dispositiu de Windows Media"
 
 #: devices/gpodloader.cpp:46
 msgid "Loading iPod database"
-msgstr "Carregant la base de dades de l'iPod"
+msgstr "S’està carregant la base de dades de l’iPod"
 
 #: smartplaylists/generatorinserter.cpp:52
 msgid "Loading smart playlist"
-msgstr "S'està carregant la llista de reproducció inteŀligent"
+msgstr "S’està carregant la llista de reproducció intel·ligent"
 
 #: library/librarymodel.cpp:139
 msgid "Loading songs"
-msgstr "Carregant les cançons"
+msgstr "S’estan carregant les cançons"
 
 #: internet/digitallyimportedurlhandler.cpp:67
-#: internet/somafmurlhandler.cpp:49
+#: internet/somafmurlhandler.cpp:58
 msgid "Loading stream"
-msgstr "Carregant fluxe"
+msgstr "S’està carregant el flux"
 
 #: playlist/songloaderinserter.cpp:79 ui/edittagdialog.cpp:233
 msgid "Loading tracks"
-msgstr "Carregant pistes"
+msgstr "S’estan carregant les pistes"
 
 #: playlist/songloaderinserter.cpp:139
 msgid "Loading tracks info"
-msgstr "Carregant la informació de les pistes"
+msgstr "S’està carregant la informació de les pistes"
 
 #: library/librarymodel.cpp:134 podcasts/podcastdiscoverymodel.cpp:97
 #: widgets/prettyimage.cpp:168 widgets/widgetfadehelper.cpp:99
 #: ../bin/src/ui_addpodcastdialog.h:180 ../bin/src/ui_searchpreview.h:106
 msgid "Loading..."
-msgstr "Carregant..."
+msgstr "S’està carregant…"
 
 #: core/commandlineoptions.cpp:164
 msgid "Loads files/URLs, replacing current playlist"
@@ -2834,11 +2838,11 @@ msgstr "Preferida"
 #: visualisations/visualisationcontainer.cpp:107
 #, qt-format
 msgid "Low (%1 fps)"
-msgstr "Baix (%1 fps)"
+msgstr "Baixa (%1 fps)"
 
 #: visualisations/visualisationcontainer.cpp:117
 msgid "Low (256x256)"
-msgstr "Baixa (256x256)"
+msgstr "Baixa (256 × 256)"
 
 #: ../bin/src/ui_transcoderoptionsaac.h:135
 msgid "Low complexity profile (LC)"
@@ -2942,7 +2946,7 @@ msgstr "Mitja (%1 fps)"
 
 #: visualisations/visualisationcontainer.cpp:118
 msgid "Medium (512x512)"
-msgstr "Mitjana (512x512)"
+msgstr "Mitja (512 × 512)"
 
 #: ../bin/src/ui_magnatunesettingspage.h:156
 msgid "Membership type"
@@ -2954,7 +2958,7 @@ msgstr "Taxa de bits mínima"
 
 #: visualisations/projectmvisualisation.cpp:127
 msgid "Missing projectM presets"
-msgstr "Manquen les opcions per defecte de projectM"
+msgstr "Falten les predefinicions del projectM"
 
 #: devices/deviceproperties.cpp:152
 msgid "Model"
@@ -3004,7 +3008,7 @@ msgstr "Mou cap avall"
 
 #: ui/mainwindow.cpp:505 widgets/fileviewlist.cpp:41
 msgid "Move to library..."
-msgstr "Mou a la llibreria"
+msgstr "Mou a la col·lecció…"
 
 #: ../bin/src/ui_globalsearchsettingspage.h:148
 #: ../bin/src/ui_queuemanager.h:127 ../bin/src/ui_songinfosettingspage.h:189
@@ -3117,7 +3121,7 @@ msgstr "Llista de reproducció nova"
 
 #: library/libraryview.cpp:379
 msgid "New smart playlist..."
-msgstr "Nova llista de reproducció inteŀligent"
+msgstr "Llista de reproducció intel·ligent nova…"
 
 #: widgets/freespacebar.cpp:46
 msgid "New songs"
@@ -3208,7 +3212,7 @@ msgstr "No hi ha prous veïns"
 
 #: internet/spotifysettingspage.cpp:75
 msgid "Not installed"
-msgstr "No instaŀlat"
+msgstr "No instal·lat"
 
 #: globalsearch/globalsearchsettingspage.cpp:120
 #: globalsearch/searchproviderstatuswidget.cpp:48
@@ -3217,7 +3221,7 @@ msgstr "No heu iniciat la sessió"
 
 #: devices/deviceview.cpp:111
 msgid "Not mounted - double click to mount"
-msgstr "No muntatm - fes doble click per muntar-lo"
+msgstr "No s’ha muntat – feu doble clic per muntar-ho"
 
 #: ../bin/src/ui_notificationssettingspage.h:432
 msgid "Notification type"
@@ -3271,14 +3275,14 @@ msgstr "Opacitat"
 #: internet/digitallyimportedservicebase.cpp:179
 #: internet/groovesharkservice.cpp:544 internet/icecastservice.cpp:296
 #: internet/jamendoservice.cpp:419 internet/magnatuneservice.cpp:278
-#: internet/somafmservice.cpp:91 internet/soundcloudservice.cpp:194
+#: internet/somafmservice.cpp:100 internet/soundcloudservice.cpp:194
 #, qt-format
 msgid "Open %1 in browser"
 msgstr "Obre %1 en un navegador"
 
 #: ../bin/src/ui_mainwindow.h:683
 msgid "Open &audio CD..."
-msgstr "Obre un CD d'$àudio"
+msgstr "Obre un CD d’àudio…"
 
 #: podcasts/addpodcastdialog.cpp:230
 msgid "Open OPML file"
@@ -3561,7 +3565,7 @@ msgstr "Tipus d’àudio premium"
 
 #: ../bin/src/ui_equalizer.h:119
 msgid "Preset:"
-msgstr "Preestablert:"
+msgstr "Predefinició:"
 
 #: ../bin/src/ui_wiimoteshortcutgrabber.h:124
 msgid "Press a button combination to use for"
@@ -3656,7 +3660,7 @@ msgstr "Pluja"
 
 #: ../bin/src/ui_visualisationselector.h:112
 msgid "Random visualization"
-msgstr "Visualització al.leatòria"
+msgstr "Visualització al·leatòria"
 
 #: core/globalshortcuts.cpp:64
 msgid "Rate the current song 0 stars"
@@ -3699,7 +3703,7 @@ msgstr "Actualitza"
 msgid "Refresh catalogue"
 msgstr "Actualitzar catàleg"
 
-#: internet/somafmservice.cpp:92
+#: internet/somafmservice.cpp:106
 msgid "Refresh channels"
 msgstr "Actualitzar canals"
 
@@ -3813,7 +3817,7 @@ msgstr "Substitueix la llista de reproducció"
 
 #: ../bin/src/ui_organisedialog.h:205
 msgid "Replaces spaces with underscores"
-msgstr "Reemplaça espais amb guions baixos"
+msgstr "Reemplaça els espais amb guions baixos"
 
 #: ../bin/src/ui_playbacksettingspage.h:273
 msgid "Replay Gain"
@@ -3889,7 +3893,7 @@ msgstr "Freqüència de mostreig"
 
 #: ../bin/src/ui_appearancesettingspage.h:295
 msgid "Save .mood files in your music library"
-msgstr "Guarda fitxers .mood en la vostra coŀlecció musical"
+msgstr "Desa fitxers .mood en la vostra col·lecció musical"
 
 #: ui/albumcoverchoicecontroller.cpp:114
 msgid "Save album cover"
@@ -3964,7 +3968,7 @@ msgstr "Cerca a Jamendo"
 
 #: internet/magnatuneservice.cpp:285
 msgid "Search Magnatune"
-msgstr "Cercar a Magnatune"
+msgstr "Cerca en Magnatune"
 
 #: internet/subsonicservice.cpp:72
 msgid "Search Subsonic"
@@ -3972,7 +3976,7 @@ msgstr "Cerca en Subsonic"
 
 #: ui/albumcoverchoicecontroller.cpp:62
 msgid "Search for album covers..."
-msgstr "Cercar caratules dels àlbums"
+msgstr "Cerca caràtules dels àlbums…"
 
 #: ../bin/src/ui_globalsearchview.h:208
 msgid "Search for anything"
@@ -4018,7 +4022,7 @@ msgstr "Cerca enrere"
 
 #: core/globalshortcuts.cpp:55 wiimotedev/wiimotesettingspage.cpp:109
 msgid "Seek forward"
-msgstr "Cercar cap endavant"
+msgstr "Cerca cap endavant"
 
 #: core/commandlineoptions.cpp:161
 msgid "Seek the currently playing track by a relative amount"
@@ -4097,12 +4101,12 @@ msgstr "Drecera"
 #: ../bin/src/ui_globalshortcutssettingspage.h:175
 #, qt-format
 msgid "Shortcut for %1"
-msgstr "Drecera per %1"
+msgstr "Drecera per «%1»"
 
 #: wiimotedev/wiimotesettingspage.cpp:124
 #, qt-format
 msgid "Shortcut for %1 already exists"
-msgstr "Ja existeix la drecera per a %1"
+msgstr "Ja existeix la drecera per a «%1»"
 
 #: library/libraryfilterwidget.cpp:61
 msgid "Show"
@@ -4207,7 +4211,7 @@ msgstr "Mostra quina orígens estan activats i desactivats"
 
 #: core/globalshortcuts.cpp:57
 msgid "Show/Hide"
-msgstr "Mostra/Amaga"
+msgstr "Mostra/amaga"
 
 #: playlist/playlistsequence.cpp:173 ../bin/src/ui_playlistsequence.h:115
 msgid "Shuffle"
@@ -4271,11 +4275,11 @@ msgstr "Barra lateral petita"
 
 #: smartplaylists/wizard.cpp:68
 msgid "Smart playlist"
-msgstr "Llista de reproducció inteŀligent"
+msgstr "Llista de reproducció intel·ligent"
 
 #: library/librarymodel.cpp:1172
 msgid "Smart playlists"
-msgstr "Llistes de reproducció inteŀligents"
+msgstr "Llistes de reproducció intel·ligents"
 
 #: ui/equalizer.cpp:122
 msgid "Soft"
@@ -4291,7 +4295,7 @@ msgstr "Informació de la cançó"
 
 #: ui/mainwindow.cpp:241
 msgid "Song info"
-msgstr "Informació de la cançó"
+msgstr "Inf. de la cançó"
 
 #: analyzers/sonogram.cpp:18
 msgid "Sonogram"
@@ -4347,7 +4351,7 @@ msgstr "Connector d'Spotify"
 
 #: internet/spotifyblobdownloader.cpp:59
 msgid "Spotify plugin not installed"
-msgstr "Connector d'Spotify no instaŀlat"
+msgstr "No s’ha instal·lat el connector de Spotify"
 
 #: ../bin/src/ui_transcoderoptionsmp3.h:201
 msgid "Standard"
@@ -4363,7 +4367,7 @@ msgstr "Inicia la llista de reproducció que s'està reproduint"
 
 #: transcoder/transcodedialog.cpp:88
 msgid "Start transcoding"
-msgstr "Inicia transcodificació"
+msgstr "Inicia la conversió"
 
 #: internet/groovesharkservice.cpp:568 internet/soundcloudservice.cpp:105
 #: internet/spotifyservice.cpp:348
@@ -4392,11 +4396,11 @@ msgstr "Atura"
 
 #: wiimotedev/wiimotesettingspage.cpp:110
 msgid "Stop after"
-msgstr "Aturar desprès"
+msgstr "Atura desprès"
 
 #: ui/mainwindow.cpp:491 ../bin/src/ui_mainwindow.h:655
 msgid "Stop after this track"
-msgstr "Parar després d'aquesta pista"
+msgstr "Atura després d’aquesta pista"
 
 #: core/commandlineoptions.cpp:152
 msgid "Stop playback"
@@ -4404,7 +4408,7 @@ msgstr "Atura la reproducció"
 
 #: core/globalshortcuts.cpp:49
 msgid "Stop playing after current track"
-msgstr "Para la reproducció després de la pista actual"
+msgstr "Atura la reproducció després de la pista actual"
 
 #: widgets/osd.cpp:166
 msgid "Stopped"
@@ -4458,11 +4462,11 @@ msgstr "Resum"
 #: visualisations/visualisationcontainer.cpp:110
 #, qt-format
 msgid "Super high (%1 fps)"
-msgstr "Molt alt (%1 fps)"
+msgstr "Molt alta (%1 fps)"
 
 #: visualisations/visualisationcontainer.cpp:120
 msgid "Super high (2048x2048)"
-msgstr "Molt alta (2048x2048)"
+msgstr "Molt alta (2048 × 2048)"
 
 #: ../bin/src/ui_deviceproperties.h:374
 msgid "Supported formats"
@@ -4545,11 +4549,11 @@ msgstr "El segon valor ha de ser major que el primer!"
 
 #: ui/coverfromurldialog.cpp:71
 msgid "The site you requested does not exist!"
-msgstr "L'adreça que heu soŀlicitat no existeix!"
+msgstr "L’adreça que heu sol·licitat no existeix."
 
 #: ui/coverfromurldialog.cpp:82
 msgid "The site you requested is not an image!"
-msgstr "L'adreça que heu soŀlicitat no conté una imatge!"
+msgstr "L’adreça que heu sol·licitat no conté cap imatge."
 
 #: internet/subsonicsettingspage.cpp:95
 msgid ""
@@ -4561,7 +4565,7 @@ msgstr "Ha acabat el període de prova del servidor de Subsonic. Fareu una donac
 msgid ""
 "The version of Clementine you've just updated to requires a full library "
 "rescan because of the new features listed below:"
-msgstr "La versió de Clementine a la que us acabeu d'actualitzar requereix escanejar de nou tota la llibreria degut a que incorpora les següents les noves característiques:"
+msgstr "La versió de Clementine a la que us acabeu d’actualitzar necessita tornar a analitzar tota la col·lecció degut a que incorpora les següents característiques noves:"
 
 #: library/libraryview.cpp:529
 msgid "There are other songs in this album"
@@ -4727,7 +4731,7 @@ msgstr "Bytes totals transferits"
 
 #: covers/coversearchstatisticsdialog.cpp:68
 msgid "Total network requests made"
-msgstr "Nombre total de soŀlicituds de xarxa fetes"
+msgstr "Total de sol·licituds de xarxa fetes"
 
 #: playlist/playlist.cpp:1208 ui/organisedialog.cpp:62
 #: ../bin/src/ui_edittagdialog.h:683 ../bin/src/ui_trackselectiondialog.h:213
@@ -4740,20 +4744,20 @@ msgstr "Converteix música"
 
 #: ../bin/src/ui_transcodelogdialog.h:63
 msgid "Transcoder Log"
-msgstr "Registre del transcodificador"
+msgstr "Registre del convertidor"
 
 #: ../bin/src/ui_transcodersettingspage.h:173
 msgid "Transcoding"
-msgstr "Transcodificació"
+msgstr "Conversió"
 
 #: transcoder/transcoder.cpp:312
 #, qt-format
 msgid "Transcoding %1 files using %2 threads"
-msgstr "S’estan transcodificant %1 fitxers emprant %2 fils"
+msgstr "S’estan convertint %1 fitxers emprant %2 fils"
 
 #: ../bin/src/ui_transcoderoptionsdialog.h:54
 msgid "Transcoding options"
-msgstr "Opcions de transcodificació"
+msgstr "Opcions de conversió"
 
 #: core/song.cpp:343
 msgid "TrueAudio"
@@ -4830,7 +4834,7 @@ msgstr "Actualitza les carpetes de la biblioteca amb canvis"
 
 #: ../bin/src/ui_librarysettingspage.h:191
 msgid "Update the library when Clementine starts"
-msgstr "Actualitza la llibreria quan Clementine arranqui"
+msgstr "Actualitza la col·lecció quan Clementine arranqui"
 
 #: podcasts/podcastservice.cpp:268
 msgid "Update this podcast"
@@ -5105,7 +5109,7 @@ msgstr "Audio Windows Media"
 msgid ""
 "Would you like to move the other songs in this album to Various Artists as "
 "well?"
-msgstr "Vol moure també les altres cançons d’aquest àlbum a Diversos artistes?"
+msgstr "Voleu moure també les altres cançons d’aquest àlbum a Diversos artistes?"
 
 #: ui/mainwindow.cpp:2058
 msgid "Would you like to run a full rescan right now?"
@@ -5163,7 +5167,7 @@ msgstr "Heu iniciat la sessió."
 
 #: ../bin/src/ui_groupbydialog.h:123
 msgid "You can change the way the songs in the library are organised."
-msgstr "Pots canviar la manera en que les cançons de la llibreria estan organitzades"
+msgstr "Podeu canviar la forma en la qual les cançons de la col·lecció estan organitzades"
 
 #: internet/digitallyimportedsettingspage.cpp:46
 msgid ""
@@ -5256,7 +5260,7 @@ msgstr "La vostra col·lecció està buida."
 
 #: globalsearch/savedradiosearchprovider.cpp:28 internet/savedradio.cpp:49
 msgid "Your radio streams"
-msgstr "Els teus fluxes de radio"
+msgstr "Els vostres fluxos de ràdio"
 
 #: songinfo/lastfmtrackinfoprovider.cpp:88
 #, qt-format

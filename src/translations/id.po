@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Clementine Music Player\n"
 "Report-Msgid-Bugs-To: http://code.google.com/p/clementine-player/issues/list\n"
-"PO-Revision-Date: 2013-03-30 23:26+0000\n"
+"PO-Revision-Date: 2013-04-13 06:46+0000\n"
 "Last-Translator: Clementine Buildbot <clementinebuildbot@davidsansome.com>\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -254,7 +254,7 @@ msgstr "128k MP3"
 
 #: ../bin/src/ui_appearancesettingspage.h:291
 msgid "40%"
-msgstr ""
+msgstr "40%"
 
 #: library/library.cpp:60
 msgid "50 random tracks"
@@ -269,7 +269,7 @@ msgid ""
 "<a "
 "href=\"https://play.google.com/store/apps/details?id=de.qspool.clementineremote\">Get"
 " the Android App now!</a>"
-msgstr ""
+msgstr "<a href=\"https://play.google.com/store/apps/details?id=de.qspool.clementineremote\">Dapatkan Android App sekarang!</a>"
 
 #: ../bin/src/ui_librarysettingspage.h:195
 msgid ""
@@ -350,7 +350,7 @@ msgstr "KEMENANGAN UNTUK SANG HYPNOTOAD"
 
 #: ui/albumcoversearcher.cpp:166
 msgid "Abort"
-msgstr ""
+msgstr "Batal"
 
 #: ui/about.cpp:32
 #, qt-format
@@ -919,7 +919,7 @@ msgstr "Penganalisa dentuman"
 
 #: ../bin/src/ui_boxsettingspage.h:103
 msgid "Box"
-msgstr ""
+msgstr "Box"
 
 #: ../bin/src/ui_magnatunedownloaddialog.h:146
 #: ../bin/src/ui_podcastsettingspage.h:242
@@ -1070,7 +1070,7 @@ msgstr "Clementine dapat secara otomatis mengubah format yang anda copy ke peran
 
 #: ../bin/src/ui_boxsettingspage.h:104
 msgid "Clementine can play music that you have uploaded to Box"
-msgstr ""
+msgstr "Clementine dapat memutar musik yang Anda unggah ke Box"
 
 #: ../bin/src/ui_dropboxsettingspage.h:104
 msgid "Clementine can play music that you have uploaded to Dropbox"
@@ -1497,7 +1497,7 @@ msgstr "Kurangi volume 4%"
 
 #: core/commandlineoptions.cpp:159
 msgid "Decrease the volume by <value> percent"
-msgstr ""
+msgstr "Kurangi volume <value> persen"
 
 #: core/globalshortcuts.cpp:53 wiimotedev/wiimotesettingspage.cpp:104
 msgid "Decrease volume"
@@ -1681,6 +1681,10 @@ msgstr "Jangan acak"
 #: internet/magnatunedownloaddialog.cpp:282 ui/albumcovermanager.cpp:202
 msgid "Don't stop!"
 msgstr "Jangan berhenti"
+
+#: internet/somafmservice.cpp:103
+msgid "Donate"
+msgstr ""
 
 #: devices/deviceview.cpp:115
 msgid "Double click to open"
@@ -2265,7 +2269,7 @@ msgstr "Dapatkan URL untuk bagikan lagu Grooveshark ini"
 msgid "Getting Grooveshark popular songs"
 msgstr "Mendapatkan lagu populer Grooveshark"
 
-#: internet/somafmservice.cpp:100
+#: internet/somafmservice.cpp:114
 msgid "Getting channels"
 msgstr "Mendapatkan saluran"
 
@@ -2482,7 +2486,7 @@ msgstr "Naikkan volume menjadi 4%"
 
 #: core/commandlineoptions.cpp:158
 msgid "Increase the volume by <value> percent"
-msgstr ""
+msgstr "Naikkan volume <value> persen"
 
 #: core/globalshortcuts.cpp:52 wiimotedev/wiimotesettingspage.cpp:103
 msgid "Increase volume"
@@ -2787,7 +2791,7 @@ msgid "Loading songs"
 msgstr "Pemuatan lagu-lagu"
 
 #: internet/digitallyimportedurlhandler.cpp:67
-#: internet/somafmurlhandler.cpp:49
+#: internet/somafmurlhandler.cpp:58
 msgid "Loading stream"
 msgstr "Pemuatan aliran"
 
@@ -3274,7 +3278,7 @@ msgstr ""
 #: internet/digitallyimportedservicebase.cpp:179
 #: internet/groovesharkservice.cpp:544 internet/icecastservice.cpp:296
 #: internet/jamendoservice.cpp:419 internet/magnatuneservice.cpp:278
-#: internet/somafmservice.cpp:91 internet/soundcloudservice.cpp:194
+#: internet/somafmservice.cpp:100 internet/soundcloudservice.cpp:194
 #, qt-format
 msgid "Open %1 in browser"
 msgstr "Buka %1 di browser"
@@ -3702,7 +3706,7 @@ msgstr "Segarkan"
 msgid "Refresh catalogue"
 msgstr "Segarkan katalog"
 
-#: internet/somafmservice.cpp:92
+#: internet/somafmservice.cpp:106
 msgid "Refresh channels"
 msgstr "Segarkan saluran"
 
