@@ -20,6 +20,7 @@ signals:
   void SendClementineInfo();
   void SendFirstData(bool send_playlist_songs);
   void SendAllPlaylists();
+  void SendAllActivePlaylists();
   void SendPlaylistSongs(int id);
 
   void Play();
@@ -49,6 +50,7 @@ private:
   void InsertUrls(const pb::remote::Message& msg);
   void RemoveSongs(const pb::remote::Message& msg);
   void ClientConnect(const pb::remote::Message& msg);
+  void SendPlaylists(const pb::remote::Message& msg);
 };
 
 #endif // INCOMINGDATAPARSER_H

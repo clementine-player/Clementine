@@ -107,6 +107,36 @@ void OutgoingDataCreator::SendAllPlaylists() {
 
   pb::remote::ResponsePlaylists* playlists = msg.mutable_response_playlists();
 
+  // Get all playlists, even ones that are hidden in the UI.
+  foreach (const PlaylistBackend::Playlist& p,
+           app_->playlist_backend()->GetAllPlaylists()) {
+    bool playlist_open = app_->playlist_manager()->IsPlaylistOpen(p.id);
+    int item_count = playlist_open ?
+                        app_playlists.at(p.id)->rowCount() : 0;
+
+    // Create a new playlist
+    pb::remote::Playlist* playlist = playlists->add_playlist();
+    playlist->set_name(DataCommaSizeFromQString(p.name));
+    playlist->set_id(p.id);
+    playlist->set_active((p.id == active_playlist));
+    playlist->set_item_count(item_count);
+    playlist->set_closed(!playlist_open);
+  }
+
+  SendDataToClients(&msg);
+}
+
+void OutgoingDataCreator::SendAllActivePlaylists() {
+  // Get all Playlists
+  QList<Playlist*> app_playlists = app_->playlist_manager()->GetAllPlaylists();
+  int active_playlist = app_->playlist_manager()->active_id();
+
+  // Create message
+  pb::remote::Message msg;
+  msg.set_type(pb::remote::PLAYLISTS);
+
+  pb::remote::ResponsePlaylists* playlists = msg.mutable_response_playlists();
+
   QListIterator<Playlist*> it(app_playlists);
   while(it.hasNext()) {
     // Get the next Playlist
@@ -119,6 +149,7 @@ void OutgoingDataCreator::SendAllPlaylists() {
     playlist->set_id(p->id());
     playlist->set_active((p->id() == active_playlist));
     playlist->set_item_count(p->rowCount());
+    playlist->set_closed(false);
   }
 
   SendDataToClients(&msg);
@@ -136,19 +167,19 @@ void OutgoingDataCreator::ActiveChanged(Playlist* playlist) {
 }
 
 void OutgoingDataCreator::PlaylistAdded(int id, const QString& name) {
-  SendAllPlaylists();
+  SendAllActivePlaylists();
 }
 
 void OutgoingDataCreator::PlaylistDeleted(int id) {
-  SendAllPlaylists();
+  SendAllActivePlaylists();
 }
 
 void OutgoingDataCreator::PlaylistClosed(int id) {
-  SendAllPlaylists();
+  SendAllActivePlaylists();
 }
 
 void OutgoingDataCreator::PlaylistRenamed(int id, const QString& new_name) {
-  SendAllPlaylists();
+  SendAllActivePlaylists();
 }
 
 void OutgoingDataCreator::SendFirstData(bool send_playlist_songs) {
@@ -167,7 +198,7 @@ void OutgoingDataCreator::SendFirstData(bool send_playlist_songs) {
   UpdateTrackPosition();
 
   // And the current playlists
-  SendAllPlaylists();
+  SendAllActivePlaylists();
 
   // Send the tracks of the active playlist
   if (send_playlist_songs) {

@@ -71,6 +71,7 @@ message Playlist {
   optional string name = 2;
   optional int32 item_count = 3;
   optional bool active = 4;
+  optional bool closed = 5;
 }
 
 // Valid Repeatmodes
@@ -87,6 +88,10 @@ enum ShuffleMode {
   Shuffle_All = 1;
   Shuffle_InsideAlbum = 2;
   Shuffle_Albums = 3;
+}
+
+message RequestPlaylists {
+  optional bool include_closed = 1;
 }
 
 // A Client requests songs from a specific playlist
@@ -196,10 +201,11 @@ message RequestRemoveSongs {
 
 // The message itself
 message Message {
-  optional int32 version = 1 [default=5];
+  optional int32 version = 1 [default=6];
   optional MsgType type = 2 [default=UNKNOWN]; // What data is in the message?
 
   optional RequestConnect request_connect = 21;
+  optional RequestPlaylists request_playlists = 27;
   optional RequestPlaylistSongs request_playlist_songs = 10;
   optional RequestChangeSong request_change_song = 11;
   optional RequestSetVolume request_set_volume = 12;

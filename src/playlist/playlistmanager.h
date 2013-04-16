@@ -148,6 +148,8 @@ public:
   void InvalidateDeletedSongs();
   // Removes all deleted songs from all playlists.
   void RemoveDeletedSongs();
+  // Returns true if the playlist is open
+  bool IsPlaylistOpen(int id);
 
   // Returns a pretty automatic name for playlist created from the given list of
   // songs.

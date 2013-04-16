@@ -12,6 +12,7 @@
 #include "engines/engine_fwd.h"
 #include "playlist/playlist.h"
 #include "playlist/playlistmanager.h"
+#include "playlist/playlistbackend.h"
 #include "remotecontrolmessages.pb.h"
 #include "remoteclient.h"
 
@@ -26,6 +27,7 @@ public:
 public slots:
   void SendClementineInfo();
   void SendAllPlaylists();
+  void SendAllActivePlaylists();
   void SendFirstData(bool send_playlist_songs);
   void SendPlaylistSongs(int id);
   void PlaylistChanged(Playlist*);

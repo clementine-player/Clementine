@@ -124,6 +124,8 @@ void NetworkRemote::AcceptConnection() {
             outgoing_data_creator_.get(), SLOT(SendFirstData(bool)));
     connect(incoming_data_parser_.get(), SIGNAL(SendAllPlaylists()),
             outgoing_data_creator_.get(), SLOT(SendAllPlaylists()));
+    connect(incoming_data_parser_.get(), SIGNAL(SendAllActivePlaylists()),
+            outgoing_data_creator_.get(), SLOT(SendAllActivePlaylists()));
     connect(incoming_data_parser_.get(), SIGNAL(SendPlaylistSongs(int)),
             outgoing_data_creator_.get(), SLOT(SendPlaylistSongs(int)));
 

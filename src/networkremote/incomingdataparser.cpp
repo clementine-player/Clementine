@@ -83,7 +83,7 @@ void IncomingDataParser::Parse(const pb::remote::Message& msg) {
                                   break;
     case pb::remote::DISCONNECT:  close_connection_ = true;
                                   break;
-    case pb::remote::REQUEST_PLAYLISTS:       emit SendAllPlaylists();
+    case pb::remote::REQUEST_PLAYLISTS:       SendPlaylists(msg);
                                               break;
     case pb::remote::REQUEST_PLAYLIST_SONGS:  GetPlaylistSongs(msg);
                                               break;
@@ -217,5 +217,14 @@ void IncomingDataParser::ClientConnect(const pb::remote::Message& msg) {
     emit SendFirstData(true);
   } else {
     emit SendFirstData(false);
+  }
+}
+
+void IncomingDataParser::SendPlaylists(const pb::remote::Message &msg) {
+  if (!msg.has_request_playlists()
+   || !msg.request_playlists().include_closed()) {
+    emit SendAllActivePlaylists();
+  } else {
+    emit SendAllPlaylists();
   }
 }
