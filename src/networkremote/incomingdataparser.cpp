@@ -65,6 +65,10 @@ IncomingDataParser::IncomingDataParser(Application* app)
   connect(this, SIGNAL(RemoveSongs(const QList<int>&)),
           app_->playlist_manager()->active(),
           SLOT(RemoveItemsWithoutUndo(const QList<int>&)));
+  connect(this, SIGNAL(Open(int)),
+          app_->playlist_manager(), SLOT(Open(int)));
+  connect(this, SIGNAL(Close(int)),
+          app_->playlist_manager(), SLOT(Close(int)));
 }
 
 IncomingDataParser::~IncomingDataParser() {
@@ -115,6 +119,12 @@ void IncomingDataParser::Parse(const pb::remote::Message& msg) {
     case pb::remote::INSERT_URLS: InsertUrls(msg);
                                   break;
     case pb::remote::REMOVE_SONGS:RemoveSongs(msg);
+                                  break;
+    case pb::remote::OPEN_PLAYLIST:
+                                  OpenPlaylist(msg);
+                                  break;
+    case pb::remote::CLOSE_PLAYLIST:
+                                  ClosePlaylist(msg);
                                   break;
     default: break;
   }
@@ -227,4 +237,12 @@ void IncomingDataParser::SendPlaylists(const pb::remote::Message &msg) {
   } else {
     emit SendAllPlaylists();
   }
+}
+
+void IncomingDataParser::OpenPlaylist(const pb::remote::Message &msg) {
+  emit Open(msg.request_open_playlist().playlist_id());
+}
+
+void IncomingDataParser::ClosePlaylist(const pb::remote::Message &msg) {
+  emit Close(msg.request_close_playlist().playlist_id());
 }

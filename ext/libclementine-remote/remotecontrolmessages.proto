@@ -12,6 +12,8 @@ enum MsgType {
   SET_TRACK_POSITION = 7;
   INSERT_URLS = 8;
   REMOVE_SONGS = 9;
+  OPEN_PLAYLIST = 10;
+  CLOSE_PLAYLIST = 11;
 
   // Messages send by both
   DISCONNECT = 2;
@@ -199,6 +201,14 @@ message RequestRemoveSongs {
   repeated int32 songs = 2;
 }
 
+// Messages for opening / closing playlists
+message RequestOpenPlaylist {
+  optional int32 playlist_id = 1;
+}
+message RequestClosePlaylist {
+  optional int32 playlist_id = 1;
+}
+
 // The message itself
 message Message {
   optional int32 version = 1 [default=6];
@@ -212,6 +222,8 @@ message Message {
   optional RequestSetTrackPosition request_set_track_position = 23;
   optional RequestInsertUrls request_insert_urls = 25;
   optional RequestRemoveSongs request_remove_songs = 26;
+  optional RequestOpenPlaylist request_open_playlist = 28;
+  optional RequestClosePlaylist request_close_playlist = 29;
   
   optional Repeat repeat = 13;
   optional Shuffle shuffle = 14;

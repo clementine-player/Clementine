@@ -22,6 +22,8 @@ signals:
   void SendAllPlaylists();
   void SendAllActivePlaylists();
   void SendPlaylistSongs(int id);
+  void Open(int id);
+  void Close(int id);
 
   void Play();
   void PlayPause();
@@ -51,6 +53,8 @@ private:
   void RemoveSongs(const pb::remote::Message& msg);
   void ClientConnect(const pb::remote::Message& msg);
   void SendPlaylists(const pb::remote::Message& msg);
+  void OpenPlaylist(const pb::remote::Message& msg);
+  void ClosePlaylist(const pb::remote::Message& msg);
 };
 
 #endif // INCOMINGDATAPARSER_H
