@@ -62,6 +62,7 @@
 #  include "CoreServices/CoreServices.h"
 #  include "IOKit/ps/IOPowerSources.h"
 #  include "IOKit/ps/IOPSKeys.h"
+#  include <QProcess>
 #endif
 
 namespace Utilities {
@@ -342,6 +343,11 @@ qint32 GetMacVersion() {
   Gestalt(gestaltSystemVersionMinor, &minor_version);
   return minor_version;
 }
+
+// Better than openUrl(dirname(path)) - also highlights file at path
+void RevealFileInFinder(QString const& path) {
+  QProcess::execute("/usr/bin/open", QStringList() << "-R" << path);
+}
 #endif  // Q_OS_DARWIN
 
 void OpenInFileBrowser(const QList<QUrl>& urls) {
@@ -357,12 +363,16 @@ void OpenInFileBrowser(const QList<QUrl>& urls) {
       continue;
 
     const QString directory = QFileInfo(path).dir().path();
-
     if (dirs.contains(directory))
       continue;
     dirs.insert(directory);
-
+#ifdef Q_OS_DARWIN
+    // revealing multiple files in the finder only opens one window,
+    // so it also makes sense to reveal at most one per directory
+    RevealFileInFinder(path);
+#else
     QDesktopServices::openUrl(QUrl::fromLocalFile(directory));
+#endif
   }
 }
 
