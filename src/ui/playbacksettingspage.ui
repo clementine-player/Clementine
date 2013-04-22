@@ -196,7 +196,7 @@
          <item row="0" column="0">
           <widget class="QLabel" name="label_8">
            <property name="text">
-            <string>Fading duration</string>
+            <string>Replay Gain mode</string>
            </property>
           </widget>
          </item>
@@ -217,18 +217,14 @@
          <item row="1" column="0">
           <widget class="QLabel" name="label_9">
            <property name="text">
-            <string>Fading duration</string>
+            <string>Pre-amp</string>
            </property>
           </widget>
          </item>
          <item row="1" column="1">
           <layout class="QHBoxLayout" name="horizontalLayout_4">
            <item>
-            <widget class="QLabel" name="replaygain_preamp_label">
-             <property name="text">
-              <string>Fading duration</string>
-             </property>
-            </widget>
+            <widget class="QLabel" name="replaygain_preamp_label"/>
            </item>
            <item>
             <widget class="StickySlider" name="replaygain_preamp">
@@ -276,7 +272,7 @@
       <item row="0" column="0">
        <widget class="QLabel" name="label_7">
         <property name="text">
-         <string>Fading duration</string>
+         <string>Output plugin</string>
         </property>
        </widget>
       </item>
@@ -295,7 +291,7 @@
          <bool>false</bool>
         </property>
         <property name="text">
-         <string>Fading duration</string>
+         <string>Output device</string>
         </property>
        </widget>
       </item>
@@ -312,7 +308,7 @@
       <item row="2" column="0">
        <widget class="QLabel" name="buffer_duration_label">
         <property name="text">
-         <string>Fading duration</string>
+         <string>Buffer duration</string>
         </property>
        </widget>
       </item>

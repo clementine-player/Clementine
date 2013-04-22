@@ -381,7 +381,6 @@ void GstEngine::StartFadeoutPause() {
                                       QTimeLine::EaseInOutCurve,
                                       false);
   if (fadeout_pipeline_ && fadeout_pipeline_->state() == GST_STATE_PLAYING) {
-    qLog(Debug) << "start fadeout pipeline";
     fadeout_pipeline_->StartFader(fadeout_pause_duration_nanosec_,
                                   QTimeLine::Backward,
                                   QTimeLine::LinearCurve,
