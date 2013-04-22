@@ -71,7 +71,8 @@ class GstEnginePipeline : public QObject {
   void SetVolume(int percent);
   void StartFader(qint64 duration_nanosec,
                   QTimeLine::Direction direction = QTimeLine::Forward,
-                  QTimeLine::CurveShape shape = QTimeLine::LinearCurve);
+                  QTimeLine::CurveShape shape = QTimeLine::LinearCurve,
+                  bool use_fudge_timer = true);
 
   // If this is set then it will be loaded automatically when playback finishes
   // for gapless playback
@@ -245,6 +246,7 @@ class GstEnginePipeline : public QObject {
 
   boost::scoped_ptr<QTimeLine> fader_;
   QBasicTimer fader_fudge_timer_;
+  bool use_fudge_timer_;
 
   GstElement* pipeline_;
 

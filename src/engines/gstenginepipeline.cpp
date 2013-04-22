@@ -700,7 +700,6 @@ bool GstEnginePipeline::HandoffCallback(GstPad*, GstBuffer* buf, gpointer self) 
           // GstEngine will try to seek to the start of the new section, but
           // we're already there so ignore it.
           instance->ignore_next_seek_ = true;
-
           emit instance->EndOfStreamReached(instance->id(), true);
         } else {
           // We have a next song but we can't cheat, so move to it normally.
@@ -918,14 +917,23 @@ void GstEnginePipeline::UpdateVolume() {
 
 void GstEnginePipeline::StartFader(qint64 duration_nanosec,
                                    QTimeLine::Direction direction,
-                                   QTimeLine::CurveShape shape) {
+                                   QTimeLine::CurveShape shape,
+                                   bool use_fudge_timer) {
   const int duration_msec = duration_nanosec / kNsecPerMsec;
 
   // If there's already another fader running then start from the same time
   // that one was already at.
   int start_time = direction == QTimeLine::Forward ? 0 : duration_msec;
-  if (fader_ && fader_->state() == QTimeLine::Running)
-    start_time = fader_->currentTime();
+  if (fader_ && fader_->state() == QTimeLine::Running) {
+    if (duration_msec == fader_->duration()) {
+      start_time = fader_->currentTime();
+    } else {
+      // Calculate the position in the new fader with the same value from
+      // the old fader, so no volume jumps appear
+      qreal time = qreal(duration_msec) * (qreal(fader_->currentTime()) / qreal(fader_->duration()));
+      start_time = qRound(time);
+    }
+  }
 
   fader_.reset(new QTimeLine(duration_msec, this));
   connect(fader_.get(), SIGNAL(valueChanged(qreal)), SLOT(SetVolumeModifier(qreal)));
@@ -936,6 +944,7 @@ void GstEnginePipeline::StartFader(qint64 duration_nanosec,
   fader_->resume();
 
   fader_fudge_timer_.stop();
+  use_fudge_timer_ = use_fudge_timer;
 
   SetVolumeModifier(fader_->currentValue());
 }
@@ -946,7 +955,15 @@ void GstEnginePipeline::FaderTimelineFinished() {
   // Wait a little while longer before emitting the finished signal (and
   // probably distroying the pipeline) to account for delays in the audio
   // server/driver.
-  fader_fudge_timer_.start(kFaderFudgeMsec, this);
+  if (use_fudge_timer_) {
+    fader_fudge_timer_.start(kFaderFudgeMsec, this);
+  } else {
+    // Even here we cannot emit the signal directly, as it result in a
+    // stutter when resuming playback. So use a quest small time, so you
+    // won't notice the difference when resuming playback
+    // (You get here when the pause fading is active)
+    fader_fudge_timer_.start(250, this);
+  }
 }
 
 void GstEnginePipeline::timerEvent(QTimerEvent* e) {

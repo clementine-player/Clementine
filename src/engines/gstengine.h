@@ -121,6 +121,7 @@ class GstEngine : public Engine::Base, public BufferConsumer {
   void ClearScopeBuffers();
   void AddBufferToScope(GstBuffer* buf, int pipeline_id);
   void FadeoutFinished();
+  void FadeoutPauseFinished();
   void SeekNow();
   void BackgroundStreamFinished();
   void BackgroundStreamPlayDone();
@@ -138,6 +139,7 @@ class GstEngine : public Engine::Base, public BufferConsumer {
   PluginDetailsList GetPluginList(const QString& classname) const;
 
   void StartFadeout();
+  void StartFadeoutPause();
 
   void StartTimers();
   void StopTimers();
@@ -170,6 +172,7 @@ class GstEngine : public Engine::Base, public BufferConsumer {
 
   boost::shared_ptr<GstEnginePipeline> current_pipeline_;
   boost::shared_ptr<GstEnginePipeline> fadeout_pipeline_;
+  boost::shared_ptr<GstEnginePipeline> fadeout_pause_pipeline_;
   QUrl preloaded_url_;
 
   QList<BufferConsumer*> buffer_consumers_;
@@ -203,6 +206,9 @@ class GstEngine : public Engine::Base, public BufferConsumer {
   int next_element_id_;
 
   QHash<int, boost::shared_ptr<GstEnginePipeline> > background_streams_;
+
+  bool is_fading_out_to_pause_;
+  bool has_faded_out_;
 };
 
 

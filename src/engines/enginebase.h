@@ -147,6 +147,8 @@ class Base : public QObject, boost::noncopyable {
   bool autocrossfade_enabled_;
   bool crossfade_same_album_;
   int next_background_stream_id_;
+  bool fadeout_pause_enabled_;
+  qint64 fadeout_pause_duration_nanosec_;
 
  private:
   bool about_to_end_emitted_;

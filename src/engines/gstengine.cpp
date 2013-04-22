@@ -85,7 +85,9 @@ GstEngine::GstEngine(TaskManager* task_manager)
     mono_playback_(false),
     seek_timer_(new QTimer(this)),
     timer_id_(-1),
-    next_element_id_(0)
+    next_element_id_(0),
+    is_fading_out_to_pause_(false),
+    has_faded_out_(false)
 {
   seek_timer_->setSingleShot(true);
   seek_timer_->setInterval(kSeekDelayNanosec / kNsecPerMsec);
@@ -358,6 +360,9 @@ bool GstEngine::Load(const QUrl& url, Engine::TrackChangeFlags change,
 }
 
 void GstEngine::StartFadeout() {
+  if (is_fading_out_to_pause_)
+    return;
+
   fadeout_pipeline_ = current_pipeline_;
   disconnect(fadeout_pipeline_.get(), 0, 0, 0);
   fadeout_pipeline_->RemoveAllBufferConsumers();
@@ -367,6 +372,24 @@ void GstEngine::StartFadeout() {
   connect(fadeout_pipeline_.get(), SIGNAL(FaderFinished()), SLOT(FadeoutFinished()));
 }
 
+void GstEngine::StartFadeoutPause() {
+  fadeout_pause_pipeline_ = current_pipeline_;
+  disconnect(fadeout_pause_pipeline_.get(), SIGNAL(FaderFinished()), 0, 0);
+
+  fadeout_pause_pipeline_->StartFader(fadeout_pause_duration_nanosec_,
+                                      QTimeLine::Backward,
+                                      QTimeLine::EaseInOutCurve,
+                                      false);
+  if (fadeout_pipeline_ && fadeout_pipeline_->state() == GST_STATE_PLAYING) {
+    qLog(Debug) << "start fadeout pipeline";
+    fadeout_pipeline_->StartFader(fadeout_pause_duration_nanosec_,
+                                  QTimeLine::Backward,
+                                  QTimeLine::LinearCurve,
+                                  false);
+  }
+  connect(fadeout_pause_pipeline_.get(), SIGNAL(FaderFinished()), SLOT(FadeoutPauseFinished()));
+  is_fading_out_to_pause_ = true;
+}
 
 bool GstEngine::Play(quint64 offset_nanosec) {
   EnsureInitialised();
@@ -379,6 +402,10 @@ bool GstEngine::Play(quint64 offset_nanosec) {
         PlayFutureWatcherArg(offset_nanosec, current_pipeline_->id()), this);
   watcher->setFuture(future);
   connect(watcher, SIGNAL(finished()), SLOT(PlayDone()));
+
+  if (is_fading_out_to_pause_) {
+    current_pipeline_->SetState(GST_STATE_PAUSED);
+  }
 
   return true;
 }
@@ -445,15 +472,46 @@ void GstEngine::FadeoutFinished() {
   emit FadeoutFinishedSignal();
 }
 
+void GstEngine::FadeoutPauseFinished() {
+  fadeout_pause_pipeline_->SetState(GST_STATE_PAUSED);
+  current_pipeline_->SetState(GST_STATE_PAUSED);
+  emit StateChanged(Engine::Paused);
+  StopTimers();
+
+  is_fading_out_to_pause_ = false;
+  has_faded_out_ = true;
+  fadeout_pause_pipeline_.reset();
+  fadeout_pipeline_.reset();
+
+  emit FadeoutFinishedSignal();
+}
+
 void GstEngine::Pause() {
   if (!current_pipeline_ || current_pipeline_->is_buffering())
     return;
 
-  if ( current_pipeline_->state() == GST_STATE_PLAYING ) {
-    current_pipeline_->SetState(GST_STATE_PAUSED);
-    emit StateChanged(Engine::Paused);
+  // Check if we started a fade out. If it isn't finished yet and the user
+  // pressed play, we inverse the fader and resume the playback.
+  if (is_fading_out_to_pause_) {
+    disconnect(current_pipeline_.get(), SIGNAL(FaderFinished()), 0, 0);
+    current_pipeline_->StartFader(fadeout_pause_duration_nanosec_,
+                                  QTimeLine::Forward,
+                                  QTimeLine::EaseInOutCurve,
+                                  false);
+    is_fading_out_to_pause_ = false;
+    has_faded_out_ = false;
+    emit StateChanged(Engine::Playing);
+    return;
+  }
 
-    StopTimers();
+  if ( current_pipeline_->state() == GST_STATE_PLAYING ) {
+    if (fadeout_pause_enabled_) {
+      StartFadeoutPause();
+    } else {
+      current_pipeline_->SetState(GST_STATE_PAUSED);
+      emit StateChanged(Engine::Paused);
+      StopTimers();
+    }
   }
 }
 
@@ -463,6 +521,19 @@ void GstEngine::Unpause() {
 
   if ( current_pipeline_->state() == GST_STATE_PAUSED ) {
     current_pipeline_->SetState(GST_STATE_PLAYING);
+
+    // Check if we faded out last time. If yes, fade in no matter what the
+    // settings say. If we pause with fadeout, deactivate fadeout and resume
+    // playback, the player would be muted if not faded in.
+    if (has_faded_out_) {
+      disconnect(current_pipeline_.get(), SIGNAL(FaderFinished()), 0, 0);
+      current_pipeline_->StartFader(fadeout_pause_duration_nanosec_,
+                                          QTimeLine::Forward,
+                                          QTimeLine::EaseInOutCurve,
+                                          false);
+      has_faded_out_ = false;
+    }
+
     emit StateChanged(Engine::Playing);
 
     StartTimers();

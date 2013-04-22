@@ -115,6 +115,56 @@
         </layout>
        </widget>
       </item>
+      <item>
+       <widget class="QCheckBox" name="fadeout_pause">
+        <property name="text">
+         <string>Fade out on pause / fade in on resume</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <item>
+         <widget class="QLabel" name="label_2">
+          <property name="text">
+           <string>Fading duration</string>
+          </property>
+          <property name="indent">
+           <number>22</number>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QSpinBox" name="fading_pause_duration">
+          <property name="suffix">
+           <string> ms</string>
+          </property>
+          <property name="maximum">
+           <number>10000</number>
+          </property>
+          <property name="singleStep">
+           <number>50</number>
+          </property>
+          <property name="value">
+           <number>250</number>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer_2">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </item>
      </layout>
     </widget>
    </item>
@@ -146,7 +196,7 @@
          <item row="0" column="0">
           <widget class="QLabel" name="label_8">
            <property name="text">
-            <string>Replay Gain mode</string>
+            <string>Fading duration</string>
            </property>
           </widget>
          </item>
@@ -167,14 +217,18 @@
          <item row="1" column="0">
           <widget class="QLabel" name="label_9">
            <property name="text">
-            <string>Pre-amp</string>
+            <string>Fading duration</string>
            </property>
           </widget>
          </item>
          <item row="1" column="1">
           <layout class="QHBoxLayout" name="horizontalLayout_4">
            <item>
-            <widget class="QLabel" name="replaygain_preamp_label"/>
+            <widget class="QLabel" name="replaygain_preamp_label">
+             <property name="text">
+              <string>Fading duration</string>
+             </property>
+            </widget>
            </item>
            <item>
             <widget class="StickySlider" name="replaygain_preamp">
@@ -222,7 +276,7 @@
       <item row="0" column="0">
        <widget class="QLabel" name="label_7">
         <property name="text">
-         <string>Output plugin</string>
+         <string>Fading duration</string>
         </property>
        </widget>
       </item>
@@ -241,7 +295,7 @@
          <bool>false</bool>
         </property>
         <property name="text">
-         <string>Output device</string>
+         <string>Fading duration</string>
         </property>
        </widget>
       </item>
@@ -258,7 +312,7 @@
       <item row="2" column="0">
        <widget class="QLabel" name="buffer_duration_label">
         <property name="text">
-         <string>Buffer duration</string>
+         <string>Fading duration</string>
         </property>
        </widget>
       </item>

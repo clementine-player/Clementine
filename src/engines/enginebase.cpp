@@ -79,6 +79,8 @@ void Engine::Base::ReloadSettings() {
   crossfade_enabled_ = s.value("CrossfadeEnabled", true).toBool();
   autocrossfade_enabled_ = s.value("AutoCrossfadeEnabled", false).toBool();
   crossfade_same_album_ = !s.value("NoCrossfadeSameAlbum", true).toBool();
+  fadeout_pause_enabled_ = s.value("FadeoutPauseEnabled", false).toBool();
+  fadeout_pause_duration_nanosec_ = s.value("FadeoutPauseDuration", 250).toLongLong() * kNsecPerMsec;
 }
 
 void Engine::Base::EmitAboutToEnd() {
