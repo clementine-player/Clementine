@@ -101,6 +101,7 @@ class Base : public QObject, boost::noncopyable {
 
   virtual void SetEqualizerEnabled(bool) {}
   virtual void SetEqualizerParameters(int preamp, const QList<int>& bandGains) {}
+  virtual void SetStereoBalance(float value) {}
 
  signals:
   // Emitted when crossfading is enabled and the track is crossfade_duration_

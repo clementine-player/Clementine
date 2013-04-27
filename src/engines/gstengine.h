@@ -105,6 +105,9 @@ class GstEngine : public Engine::Base, public BufferConsumer {
   /** Set equalizer preamp and gains, range -100..100. Gains are 10 values. */
   void SetEqualizerParameters(int preamp, const QList<int>& bandGains);
 
+  /** Set Stereo balance, range -1.0f..1.0f */
+  void SetStereoBalance(float value);
+
   void ReloadSettings();
 
   void AddBufferConsumer(BufferConsumer* consumer);
@@ -184,6 +187,7 @@ class GstEngine : public Engine::Base, public BufferConsumer {
   bool equalizer_enabled_;
   int equalizer_preamp_;
   QList<int> equalizer_gains_;
+  float stereo_balance_;
 
   bool rg_enabled_;
   int rg_mode_;

@@ -77,6 +77,7 @@ GstEngine::GstEngine(TaskManager* task_manager)
     delayq_(g_queue_new()),
     current_sample_(0),
     equalizer_enabled_(false),
+    stereo_balance_(0.0f),
     rg_enabled_(false),
     rg_mode_(0),
     rg_preamp_(0.0),
@@ -351,6 +352,7 @@ bool GstEngine::Load(const QUrl& url, Engine::TrackChangeFlags change,
   SetVolume(volume_);
   SetEqualizerEnabled(equalizer_enabled_);
   SetEqualizerParameters(equalizer_preamp_, equalizer_gains_);
+  SetStereoBalance(stereo_balance_);
 
   // Maybe fade in this track
   if (crossfade)
@@ -579,6 +581,13 @@ void GstEngine::SetEqualizerParameters(int preamp, const QList<int>& band_gains)
 
   if (current_pipeline_)
     current_pipeline_->SetEqualizerParams(preamp, band_gains);
+}
+
+void GstEngine::SetStereoBalance(float value) {
+  stereo_balance_ = value;
+
+  if (current_pipeline_)
+    current_pipeline_->SetStereoBalance(value);
 }
 
 void GstEngine::SetVolumeSW( uint percent ) {

@@ -57,6 +57,7 @@ GstEnginePipeline::GstEnginePipeline(GstEngine* engine)
     emit_track_ended_on_segment_start_(false),
     eq_enabled_(false),
     eq_preamp_(0),
+    stereo_balance_(0.0f),
     rg_enabled_(false),
     rg_mode_(0),
     rg_preamp_(0.0),
@@ -84,6 +85,7 @@ GstEnginePipeline::GstEnginePipeline(GstEngine* engine)
     rglimiter_(NULL),
     audioconvert2_(NULL),
     equalizer_(NULL),
+    stereo_panorama_(NULL),
     volume_(NULL),
     audioscale_(NULL),
     audiosink_(NULL)
@@ -243,13 +245,14 @@ bool GstEnginePipeline::Init() {
   audio_queue       = engine_->CreateElement("queue",            audiobin_);
   equalizer_preamp_ = engine_->CreateElement("volume",           audiobin_);
   equalizer_        = engine_->CreateElement("equalizer-nbands", audiobin_);
+  stereo_panorama_  = engine_->CreateElement("audiopanorama",    audiobin_);
   volume_           = engine_->CreateElement("volume",           audiobin_);
   audioscale_       = engine_->CreateElement("audioresample",    audiobin_);
   convert           = engine_->CreateElement("audioconvert",     audiobin_);
 
   if (!queue_ || !audioconvert_ || !tee || !probe_queue || !probe_converter ||
       !probe_sink || !audio_queue || !equalizer_preamp_ || !equalizer_ ||
-      !volume_ || !audioscale_ || !convert) {
+      !stereo_panorama_ || !volume_ || !audioscale_ || !convert) {
     return false;
   }
 
@@ -310,6 +313,9 @@ bool GstEnginePipeline::Init() {
     g_object_unref(G_OBJECT(band));
   }
 
+  // Set the stereo balance.
+  g_object_set(G_OBJECT(stereo_panorama_), "panorama", stereo_balance_, NULL);
+
   // Set the buffer duration.  We set this on this queue instead of the
   // decode bin (in ReplaceDecodeBin()) because setting it on the decode bin
   // only affects network sources.
@@ -356,8 +362,8 @@ bool GstEnginePipeline::Init() {
 
   // Link everything else.
   gst_element_link(probe_queue, probe_converter);
-  gst_element_link_many(audio_queue, equalizer_preamp_, equalizer_, volume_,
-                        audioscale_, convert, audiosink_, NULL);
+  gst_element_link_many(audio_queue, equalizer_preamp_, equalizer_, stereo_panorama_,
+                        volume_, audioscale_, convert, audiosink_, NULL);
 
   // Add probes and handlers.
   gst_pad_add_buffer_probe(gst_element_get_static_pad(probe_converter, "src"), G_CALLBACK(HandoffCallback), this);
@@ -878,6 +884,11 @@ void GstEnginePipeline::SetEqualizerParams(int preamp, const QList<int>& band_ga
   UpdateEqualizer();
 }
 
+void GstEnginePipeline::SetStereoBalance(float value) {
+  stereo_balance_ = value;
+  UpdateStereoBalance();
+}
+
 void GstEnginePipeline::UpdateEqualizer() {
   // Update band gains
   for (int i=0 ; i<kEqBandCount ; ++i) {
@@ -898,6 +909,12 @@ void GstEnginePipeline::UpdateEqualizer() {
     preamp = float(eq_preamp_ + 100) * 0.01;  // To scale from 0.0 to 2.0
 
   g_object_set(G_OBJECT(equalizer_preamp_), "volume", preamp, NULL);
+}
+
+void GstEnginePipeline::UpdateStereoBalance() {
+  if (stereo_panorama_) {
+    g_object_set(G_OBJECT(stereo_panorama_), "panorama", stereo_balance_, NULL);
+  }
 }
 
 void GstEnginePipeline::SetVolume(int percent) {

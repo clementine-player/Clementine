@@ -81,6 +81,22 @@
      <layout class="QHBoxLayout" name="horizontalLayout_2"/>
     </widget>
    </item>
+   <item>
+    <widget class="QSlider" name="balance_slider">
+     <property name="maximum">
+      <number>100</number>
+     </property>
+     <property name="minimum">
+      <number>-100</number>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="tickPosition">
+      <enum>QSlider::TicksBelow</enum>
+     </property>
+    </widget>
+   </item>
   </layout>
  </widget>
  <tabstops>

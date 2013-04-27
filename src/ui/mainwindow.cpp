@@ -642,9 +642,12 @@ MainWindow::MainWindow(Application* app,
           app_->player()->engine(), SLOT(SetEqualizerParameters(int,QList<int>)));
   connect(equalizer_.get(), SIGNAL(EnabledChanged(bool)),
           app_->player()->engine(), SLOT(SetEqualizerEnabled(bool)));
+  connect(equalizer_.get(), SIGNAL(StereoBalanceChanged(float)),
+          app_->player()->engine(), SLOT(SetStereoBalance(float)));
   app_->player()->engine()->SetEqualizerEnabled(equalizer_->is_enabled());
   app_->player()->engine()->SetEqualizerParameters(
       equalizer_->preamp_value(), equalizer_->gain_values());
+  app_->player()->engine()->SetStereoBalance(equalizer_->stereo_balance());
 
   // Statusbar widgets
   ui_->playlist_summary->setMinimumWidth(QFontMetrics(font()).width("WW selected of WW tracks - [ WW:WW ]"));

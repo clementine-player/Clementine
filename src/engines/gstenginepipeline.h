@@ -69,6 +69,7 @@ class GstEnginePipeline : public QObject {
   void SetEqualizerEnabled(bool enabled);
   void SetEqualizerParams(int preamp, const QList<int>& band_gains);
   void SetVolume(int percent);
+  void SetStereoBalance(float value);
   void StartFader(qint64 duration_nanosec,
                   QTimeLine::Direction direction = QTimeLine::Forward,
                   QTimeLine::CurveShape shape = QTimeLine::LinearCurve,
@@ -145,6 +146,7 @@ class GstEnginePipeline : public QObject {
 
   void UpdateVolume();
   void UpdateEqualizer();
+  void UpdateStereoBalance();
   bool ReplaceDecodeBin(GstElement* new_bin);
   bool ReplaceDecodeBin(const QUrl& url);
 
@@ -191,6 +193,11 @@ class GstEnginePipeline : public QObject {
   bool eq_enabled_;
   int eq_preamp_;
   QList<int> eq_band_gains_;
+
+  // Stereo balance.
+  // From -1.0 - 1.0
+  // -1.0 is left, 1.0 is right.
+  float stereo_balance_;
 
   // ReplayGain
   bool rg_enabled_;
@@ -263,6 +270,7 @@ class GstEnginePipeline : public QObject {
   GstElement* audioconvert2_;
   GstElement* equalizer_preamp_;
   GstElement* equalizer_;
+  GstElement* stereo_panorama_;
   GstElement* volume_;
   GstElement* audioscale_;
   GstElement* audiosink_;
