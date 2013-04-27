@@ -238,16 +238,9 @@ Equalizer::Params Equalizer::current_params() const {
   return ret;
 }
 
-namespace {
-
-float Clamp(float min, float value, float max) {
-  return qMin(1.0f, qMax(-1.0f, value));
-}
-
-}
-
 float Equalizer::stereo_balance() const {
-  return Clamp(-1.0f, ui_->balance_slider->value(), 1.0f);
+  return qBound(
+      -1.0f, ui_->balance_slider->value() / 100.0f, 1.0f);
 }
 
 void Equalizer::ParametersChanged() {
